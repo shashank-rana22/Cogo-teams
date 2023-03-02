@@ -1,7 +1,7 @@
 import { Input, Select } from '@cogoport/components';
 
-
-function GetLabelInputPair({ labelName, style, multiInput, multiSelectParams = {}, singleSelectParams = {}, setValue }) {
+function GetLabelInputPair({ data }) {
+	const { labelName, style, multiInput, multiSelectParams = {}, singleSelectParams = {}, setValue, value } = data;
 	const { eventValue, placeholder, options, isClearable, inputStyle } = multiSelectParams;
 	const { size, placeholder_singleSelect } = singleSelectParams;
 
@@ -11,14 +11,22 @@ function GetLabelInputPair({ labelName, style, multiInput, multiSelectParams = {
 			{multiInput ? (
 				<Select
 					value={eventValue}
-					onChange={setValue}
+					onChange={(val) => {
+						setValue((pv) => ({ ...pv, [value]: val }));
+					}}
 					placeholder={placeholder}
 					options={options}
 					isClearable={isClearable}
 					style={inputStyle}
 				/>
 			) : (
-				<Input size={size} placeholder={placeholder_singleSelect} onChange={(val) => setValue(val)} />
+				<Input
+					size={size}
+					placeholder={placeholder_singleSelect}
+					onChange={(val) => {
+						setValue((pv) => ({ ...pv, [value]: val }));
+					}}
+				/>
 			)}
 		</div>
 	);

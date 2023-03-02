@@ -10,26 +10,22 @@ import styles from './styles.module.css';
 
 function CreateBadge({ setWindow }) {
 	const [badgeInput, setBadgeInput] = useState(false);
-	const [nameValue, setNameValue] = useState('');
-	const [descriptionValue, setDescriptionValue] = useState('');
-	const [eventValue, setEventValue] = useState('');
-	const [bronzeScore, setBronzeScore] = useState('');
-	const [silverScore, setSilverScore] = useState('');
-	const [goldScore, setGoldScore] = useState('');
-	const [bronzeUrl, setBronzeUrl] = useState('');
-	const [silverUrl, setSilverUrl] = useState('');
-	const [goldUrl, setGoldUrl] = useState('');
 
-	// const [badgeParams, setBadgeParams] = useState({
-	// 	badge_name        : '',
-	// 	badge_description : '',
-	// 	bronzeScore       : 0,
-	// 	bronze_url        : '',
-	// 	silverScore       : 0,
-	// 	silver_url        : '',
-	// 	goldScore         : 0,
-	// 	gold_url          : '',
-	// });
+	const [badgeParams, setBadgeParams] = useState({
+		version_id   : '1',
+		badge_name   : '',
+		description  : '',
+		badge_events : '',
+		bronzeScore  : 0,
+		bronze_url   : '',
+		silverScore  : 0,
+		silver_url   : '',
+		goldScore    : 0,
+		gold_url     : '',
+	});
+	// const [bronzeUrl, setBronzeUrl] = useState('');
+	// const [silverUrl, setSilverUrl] = useState('');
+	// const [goldUrl, setGoldUrl] = useState('');
 
 	const {
 		onCheckPublish, loading,
@@ -44,17 +40,17 @@ function CreateBadge({ setWindow }) {
 			placeholder : 'Select Events',
 			options     : [
 				{
-					label : 'B',
-					value : 'n',
+					label : 'A',
+					value : '100',
 				},
 				{
-					label : 'uy',
-					value : 'dfs',
+					label : 'B',
+					value : '500',
 				},
 			],
 			isClearable : true,
 			style       : { width: '250px' },
-			eventValue,
+			eventValue  : badgeParams.badge_events,
 		},
 		description: {
 			size                     : 'md',
@@ -69,8 +65,8 @@ function CreateBadge({ setWindow }) {
 			singleSelectParams : params.name,
 			multiSelectParams  : {},
 			style              : { flexBasis: '20%' },
-			setValue           : setNameValue,
-			// setValue           : setBadgeParams,
+			setValue           : setBadgeParams,
+			value              : 'badge_name',
 		},
 		{
 			labelName          : 'Condition',
@@ -78,8 +74,8 @@ function CreateBadge({ setWindow }) {
 			singleSelectParams : {},
 			multiSelectParams  : params.events,
 			style              : { flexBasis: '20%' },
-			setValue           : setEventValue,
-			// setValue           : setBadgeParams,
+			setValue           : setBadgeParams,
+			value              : 'badge_events',
 		},
 		{
 			labelName          : 'Description',
@@ -87,8 +83,8 @@ function CreateBadge({ setWindow }) {
 			singleSelectParams : params.description,
 			multiSelectParams  : {},
 			style              : { flexBasis: '50%' },
-			setValue           : setDescriptionValue,
-			// setValue           : setBadgeParams,
+			setValue           : setBadgeParams,
+			value              : 'description',
 		},
 	];
 
@@ -96,22 +92,34 @@ function CreateBadge({ setWindow }) {
 		{
 			medalType        : 'Bronze',
 			inputPlaceHolder : '2000',
-			setScore         : setBronzeScore,
-			setUrl           : setBronzeUrl,
+			setValue         : setBadgeParams,
+			scoreValue       : 'bronzeScore',
+			imageValue       : 'bronze_url',
+			imageSelected    : badgeParams.bronze_url,
+
+			// setUrl           : setBronzeUrl,
 			// setValue         : setBadgeParams,
 		},
 		{
 			medalType        : 'Silver',
 			inputPlaceHolder : '5000',
-			setScore         : setSilverScore,
-			setUrl           : setSilverUrl,
+			setValue         : setBadgeParams,
+			scoreValue       : 'silverScore',
+			imageValue       : 'silver_url',
+			imageSelected    : badgeParams.silver_url,
+
+			// setUrl           : setSilverUrl,
 			// setValue         : setBadgeParams,
 		},
 		{
 			medalType        : 'Gold',
 			inputPlaceHolder : '9000',
-			setScore         : setGoldScore,
-			setUrl           : setGoldUrl,
+			setValue         : setBadgeParams,
+			scoreValue       : 'goldScore',
+			imageValue       : 'gold_url',
+			imageSelected    : badgeParams.gold_url,
+
+			// setUrl           : setGoldUrl,
 			// setValue         : setBadgeParams,
 		},
 	];
@@ -121,24 +129,25 @@ function CreateBadge({ setWindow }) {
 	};
 
 	const payload_data = {
-		version_id             : '1',
-		badge_name             : nameValue,
-		description            : descriptionValue,
-		event_configuration_id : '000a3d48-8850-4765-ba14-66773af1e020',
-		badge_details          : [
+		version_id    : '1',
+		badge_name    : badgeParams.badge_name,
+		description   : badgeParams.description,
+		// event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9mkkwwvw930t45670',
+		status        : 'active',
+		badge_details : [
 			{
-				score     : bronzeScore,
-				image_url : bronzeUrl,
+				score     : badgeParams.bronzeScore,
+				image_url : badgeParams.bronze_url,
 				medal     : 'bronze',
 			},
 			{
-				score     : silverScore,
-				image_url : silverUrl,
+				score     : badgeParams.silverScore,
+				image_url : badgeParams.silver_url,
 				medal     : 'silver',
 			},
 			{
-				score     : goldScore,
-				image_url : goldUrl,
+				score     : badgeParams.goldScore,
+				image_url : badgeParams.gold_url,
 				medal     : 'gold',
 			},
 		],
@@ -153,6 +162,10 @@ function CreateBadge({ setWindow }) {
 		// setCreateBadge((pv) => !pv);
 		onClose();
 	};
+
+	if (loading) {
+		return null;
+	}
 	return (
 		<div>
 			<section className={styles.container}>
@@ -161,12 +174,7 @@ function CreateBadge({ setWindow }) {
 					{
 					labelInputPairs.map((data) => (
 						<GetLabelInputPair
-							labelName={data.labelName}
-							multiInput={data.multiInput}
-							singleSelectParams={data.singleSelectParams}
-							multiSelectParams={data.multiSelectParams}
-							style={data.style}
-							setValue={data.setValue}
+							data={data}
 						/>
 					))
 					}
@@ -177,10 +185,8 @@ function CreateBadge({ setWindow }) {
 					<div className={styles.display_flex}>
 						{medalType.map((data, index) => (
 							<GetCard
-								medalType={data.medalType}
-								inputPlaceHolder={data.inputPlaceHolder}
-								setScore={data.setScore}
-								setUrl={data.setUrl}
+								data={data}
+								// setUrl={data.setUrl}
 								isLastItem={index === medalType.length - 1}
 							/>
 						))}

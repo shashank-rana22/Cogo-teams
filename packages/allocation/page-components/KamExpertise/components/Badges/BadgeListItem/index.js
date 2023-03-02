@@ -4,11 +4,8 @@ import { format, startCase } from '@cogoport/utils';
 import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
 
-function BadgeListItem({ data, index }) {
-	//
-	// !(loading) true/false
-	//
-	if (false) {
+function BadgeListItem({ data, index, loading }) {
+	if (loading) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.number_tag}>
