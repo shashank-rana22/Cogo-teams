@@ -54,7 +54,7 @@ export interface ControlItem {
 
 export interface FilterItem extends ControlItem {
 	placeholder?: string;
-	size?: string;
+	size?: 'xs' | 'sm' | 'md' | 'lg';
 	caret?: boolean;
 	isClearable?: boolean;
 	options: Option[];

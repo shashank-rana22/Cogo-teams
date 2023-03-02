@@ -1,0 +1,21 @@
+.style_svg {
+	display: flex;
+	justify-content: center;
+	margin: 20px;
+}
+
+.txt {
+	display: flex;
+	justify-content: center;
+	font-weight: 600;
+}
+
+.btn_wrap {
+	display: flex;
+	justify-content: center;
+	margin: 20px;
+}
+
+.primary {
+	margin-left: 10px;
+}

@@ -1,0 +1,18 @@
+.container {
+	padding: 4px;
+}
+
+.header {
+	padding-bottom: 6px;
+	font-weight: 600;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 13px;
+}
+
+.text_wrapper {
+	font-size: 13px;
+}

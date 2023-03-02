@@ -6426,6 +6426,10 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api         : 'get_common_job_shipment_id_view',
+			access_type : 'private',
+		},
+		{
 			api         : 'get_purchase_treasury_live_status',
 			access_type : 'private',
 		},
@@ -10308,6 +10312,19 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+	],
+	inventory_management: [
+		{
+			api          : 'list_rail_domestic_freight_inventories',
+			access_type  : 'private',
+			service_name : 'inventory_management',
+		},
+		{
+			api          : 'get_rail_domestic_freight_inventories',
+			access_type  : 'private',
+			service_name : 'inventory_management',
+		},
+
 	],
 	cogo_one: [
 		{

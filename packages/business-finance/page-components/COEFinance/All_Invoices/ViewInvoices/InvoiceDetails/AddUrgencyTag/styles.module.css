@@ -1,0 +1,27 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 12px;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin: 20px;
+}
+
+.sub_container {
+	margin: 20px;
+}
+
+.heading {
+	margin-bottom: 8px;
+	font-size: 24px;
+	font-weight: 500;
+	color: #333;
+}
+
+.cancelbtn {
+	margin-right: 8px;
+}
