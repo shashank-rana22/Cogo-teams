@@ -12,7 +12,7 @@ const IconMapping = [
 	},
 	{
 		name    : 'organization',
-		content : 'Organisation Details',
+		content : 'Organization Details',
 		icon    : <img
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/organ-svg.svg"
 			alt="organization"
