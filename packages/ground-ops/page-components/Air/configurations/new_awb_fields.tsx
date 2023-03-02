@@ -29,7 +29,7 @@ export const NewAWBFields = {
 		{
 			key   : 'awbNumber',
 			label : 'AWB',
-			span  : 1,
+			span  : 1.5,
 		},
 		{
 			key    : 'blCategory',
@@ -44,14 +44,14 @@ export const NewAWBFields = {
 		{
 			key   : 'origin',
 			label : 'Origin',
-			span  : 2,
+			span  : 2.5,
 			func  : 'startCase',
 
 		},
 		{
 			key   : 'destination',
 			label : 'Destination',
-			span  : 2,
+			span  : 2.5,
 			func  : 'startCase',
 		},
 		{
@@ -76,11 +76,5 @@ export const NewAWBFields = {
 			span  : 1.5,
 			func  : 'handleGenerate',
 		},
-		{
-			key  : 'uploadDoc',
-			span : 1.5,
-			func : 'handleUpload',
-		},
-
 	],
 };

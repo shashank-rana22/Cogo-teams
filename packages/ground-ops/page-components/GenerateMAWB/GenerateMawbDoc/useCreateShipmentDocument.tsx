@@ -10,7 +10,7 @@ interface Props {
 const useCreateShipmentDocument = ({
 	edit = false,
 	setGenerate = () => {},
-	setEdit,
+	setEdit = () => {},
 }:Props) => {
 	let api = 'create_shipment_document';
 	if (edit) api = 'update_shipment_document';

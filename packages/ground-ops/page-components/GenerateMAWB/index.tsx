@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Modal, Stepper, Breadcrumb } from '@cogoport/components';
+import { Button, Modal, Stepper, Breadcrumb, RadioGroup } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
 
@@ -8,12 +8,18 @@ import Layout from '../Air/commons/Layout';
 import GenerateMawbDoc from './GenerateMawbDoc';
 import mawbControls from './mawbControls';
 import styles from './styles.module.css';
+import UploadMAWB from './UploadMAWB';
 import useListChargeCodes from './useListChargeCodes';
 
 const items = [
 	{ title: 'Basic Details', key: 'basic' },
 	{ title: 'Package & Charges Detail', key: 'package' },
 	{ title: 'Handling Details', key: 'handling' },
+];
+
+const options = [
+	{ name: 'Add Manually', value: 'manual', label: 'Add Manually' },
+	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
 ];
 
 interface Props {
@@ -37,6 +43,8 @@ function GenerateMAWB({
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
 	const [activeKey, setActiveKey] = useState('basic');
+
+	const [value, onChange] = useState('manual');
 
 	const fields = mawbControls();
 
@@ -145,84 +153,91 @@ function GenerateMAWB({
 			{!viewDoc
 			&& (
 				<div className={styles.form_container}>
+					<div className={styles.header_flex}>
+						<Stepper
+							active={activeKey}
+							setActive={setActiveKey}
+							items={items}
+						/>
+						<RadioGroup options={options} onChange={onChange} value={value} />
+					</div>
 
-					<Stepper
-						active={activeKey}
-						setActive={setActiveKey}
-						items={items}
-					/>
+					{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} />
+						: (
+							<>
+								{activeKey === 'basic'
+								&& (
+									<>
+										<Layout fields={fields?.basic} control={control} errors={errors} />
+										<div className={styles.button_container}>
 
-					{activeKey === 'basic'
-				&& (
-					<>
-						<Layout fields={fields?.basic} control={control} errors={errors} />
-						<div className={styles.button_container}>
+											{!back ? (
+												<div className={styles.button_div}>
+													<Button
+														onClick={handleSubmit(() => setActiveKey('package'))}
+														themeType="accent"
+													>
+														NEXT
+													</Button>
+												</div>
+											) : null}
+										</div>
+									</>
+								)}
 
-							{!back ? (
-								<div className={styles.button_div}>
-									<Button
-										onClick={handleSubmit(() => setActiveKey('package'))}
-										themeType="accent"
-									>
-										NEXT
-									</Button>
-								</div>
-							) : null}
-						</div>
-					</>
-				)}
+								{activeKey === 'package'
+								&& (
+									<>
+										<Layout fields={fields?.package} control={control} errors={errors} />
+										<div className={styles.button_container}>
+											{!back ? (
+												<div className={styles.button_div}>
+													<Button
+														onClick={() => setActiveKey('basic')}
+														themeType="secondary"
+														style={{ border: '1px solid #333' }}
+													>
+														BACK
+													</Button>
+													<Button
+														onClick={handleSubmit(() => setActiveKey('handling'))}
+														themeType="accent"
+													>
+														Next
+													</Button>
+												</div>
+											) : null}
+										</div>
+									</>
+								)}
 
-					{activeKey === 'package'
-				&& (
-					<>
-						<Layout fields={fields?.package} control={control} errors={errors} />
-						<div className={styles.button_container}>
-							{!back ? (
-								<div className={styles.button_div}>
-									<Button
-										onClick={() => setActiveKey('basic')}
-										themeType="secondary"
-										style={{ border: '1px solid #333' }}
-									>
-										BACK
-									</Button>
-									<Button
-										onClick={handleSubmit(() => setActiveKey('handling'))}
-										themeType="accent"
-									>
-										Next
-									</Button>
-								</div>
-							) : null}
-						</div>
-					</>
-				)}
-
-					{activeKey === 'handling'
-				&& (
-					<>
-						<Layout fields={fields?.handling} control={control} errors={errors} />
-						<div className={styles.button_container}>
-							{!back ? (
-								<div className={styles.button_div}>
-									<Button
-										onClick={() => setActiveKey('package')}
-										themeType="secondary"
-										style={{ border: '1px solid #333' }}
-									>
-										BACK
-									</Button>
-									<Button
-										onClick={handleSubmit(onSubmit)}
-										themeType="accent"
-									>
-										Generate Master Airway Bill
-									</Button>
-								</div>
-							) : null}
-						</div>
-					</>
-				)}
+								{activeKey === 'handling'
+								&& (
+									<>
+										<Layout fields={fields?.handling} control={control} errors={errors} />
+										<div className={styles.button_container}>
+											{!back ? (
+												<div className={styles.button_div}>
+													<Button
+														onClick={() => setActiveKey('package')}
+														themeType="secondary"
+														style={{ border: '1px solid #333' }}
+													>
+														BACK
+													</Button>
+													<Button
+														onClick={handleSubmit(onSubmit)}
+														themeType="accent"
+													>
+														Generate Master Airway Bill
+													</Button>
+												</div>
+											) : null}
+										</div>
+									</>
+								)}
+							</>
+						)}
 				</div>
 			)}
 
