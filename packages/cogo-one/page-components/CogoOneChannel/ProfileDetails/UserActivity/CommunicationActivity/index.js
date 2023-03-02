@@ -38,7 +38,7 @@ function CommunicationActivity({ communication = {} }) {
 	return (
 		<div className={styles.container}>
 			{(list || []).map((item) => {
-				const { type = '', created_at = '', sender = '', content = {} } = item || {};
+				const { type = '', created_at = '', sender = '', content = {}, service = '' } = item || {};
 				const { body = '', subject = '' } = content || {};
 				if (!subject && subject !== '') {
 					textData = JSON.parse(`${body}`);
@@ -65,7 +65,7 @@ function CommunicationActivity({ communication = {} }) {
 								</div>
 								<div className={styles.message_details}>
 									<div className={styles.user_details}>
-										{(subject) ? (
+										{subject && (
 											<div className={styles.user_message}>
 												You have a message On
 												{' '}
@@ -75,11 +75,18 @@ function CommunicationActivity({ communication = {} }) {
 												{' '}
 												<div>{sender}</div>
 											</div>
-										) : (
+										)}
+										{subject === '' && (
+											<div className={styles.user_message}>
+												<div>{service}</div>
+											</div>
+										)}
+										{!subject && (
 											<div className={styles.user_message}>
 												{textData?.text}
 											</div>
 										)}
+
 									</div>
 								</div>
 								<div className={styles.user_avatar}>
@@ -96,7 +103,7 @@ function CommunicationActivity({ communication = {} }) {
 				);
 			})}
 
-			{showModal && (
+			{(showModal && (title || title === '')) && (
 				<Modal
 					show={showModal}
 					placement="top"
