@@ -1,5 +1,5 @@
 import { Toast, Button } from '@cogoport/components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
 
@@ -16,6 +16,20 @@ function CreateBadge({ setWindow }) {
 	const [bronzeScore, setBronzeScore] = useState('');
 	const [silverScore, setSilverScore] = useState('');
 	const [goldScore, setGoldScore] = useState('');
+	const [bronzeUrl, setBronzeUrl] = useState('');
+	const [silverUrl, setSilverUrl] = useState('');
+	const [goldUrl, setGoldUrl] = useState('');
+
+	// const [badgeParams, setBadgeParams] = useState({
+	// 	badge_name        : '',
+	// 	badge_description : '',
+	// 	bronzeScore       : 0,
+	// 	bronze_url        : '',
+	// 	silverScore       : 0,
+	// 	silver_url        : '',
+	// 	goldScore         : 0,
+	// 	gold_url          : '',
+	// });
 
 	const {
 		onCheckPublish, loading,
@@ -56,6 +70,7 @@ function CreateBadge({ setWindow }) {
 			multiSelectParams  : {},
 			style              : { flexBasis: '20%' },
 			setValue           : setNameValue,
+			// setValue           : setBadgeParams,
 		},
 		{
 			labelName          : 'Condition',
@@ -64,6 +79,7 @@ function CreateBadge({ setWindow }) {
 			multiSelectParams  : params.events,
 			style              : { flexBasis: '20%' },
 			setValue           : setEventValue,
+			// setValue           : setBadgeParams,
 		},
 		{
 			labelName          : 'Description',
@@ -72,6 +88,7 @@ function CreateBadge({ setWindow }) {
 			multiSelectParams  : {},
 			style              : { flexBasis: '50%' },
 			setValue           : setDescriptionValue,
+			// setValue           : setBadgeParams,
 		},
 	];
 
@@ -80,16 +97,22 @@ function CreateBadge({ setWindow }) {
 			medalType        : 'Bronze',
 			inputPlaceHolder : '2000',
 			setScore         : setBronzeScore,
+			setUrl           : setBronzeUrl,
+			// setValue         : setBadgeParams,
 		},
 		{
 			medalType        : 'Silver',
 			inputPlaceHolder : '5000',
 			setScore         : setSilverScore,
+			setUrl           : setSilverUrl,
+			// setValue         : setBadgeParams,
 		},
 		{
 			medalType        : 'Gold',
 			inputPlaceHolder : '9000',
 			setScore         : setGoldScore,
+			setUrl           : setGoldUrl,
+			// setValue         : setBadgeParams,
 		},
 	];
 
@@ -98,25 +121,24 @@ function CreateBadge({ setWindow }) {
 	};
 
 	const payload_data = {
-		version_id    : '1',
-		badge_name    : nameValue,
-		description   : descriptionValue,
-		// kam_expertise_event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9mkkwwvw930t45670',
-		status        : 'active',
-		badge_details : [
+		version_id             : '1',
+		badge_name             : nameValue,
+		description            : descriptionValue,
+		event_configuration_id : '000a3d48-8850-4765-ba14-66773af1e020',
+		badge_details          : [
 			{
 				score     : bronzeScore,
-				image_url : 'bjb',
+				image_url : bronzeUrl,
 				medal     : 'bronze',
 			},
 			{
 				score     : silverScore,
-				image_url : 'bmbb',
+				image_url : silverUrl,
 				medal     : 'silver',
 			},
 			{
 				score     : goldScore,
-				image_url : 'hghjg',
+				image_url : goldUrl,
 				medal     : 'gold',
 			},
 		],
@@ -126,12 +148,10 @@ function CreateBadge({ setWindow }) {
 		onCheckPublish(payload_data);
 		setBadgeInput(true);
 		// onClose();
-		// Toast.success('Badge Successfully Created');
 	};
 	const handelSave = () => {
 		// setCreateBadge((pv) => !pv);
 		onClose();
-		Toast.success('Badge Successfully Created');
 	};
 	return (
 		<div>
@@ -160,6 +180,7 @@ function CreateBadge({ setWindow }) {
 								medalType={data.medalType}
 								inputPlaceHolder={data.inputPlaceHolder}
 								setScore={data.setScore}
+								setUrl={data.setUrl}
 								isLastItem={index === medalType.length - 1}
 							/>
 						))}
@@ -198,14 +219,6 @@ function CreateBadge({ setWindow }) {
 								</Button>
 							)
 					}
-					{/* <Button
-						size="md"
-						themeType="primary"
-						disabled={loading}
-						onClick={handelNext}
-					>
-						Save
-					</Button> */}
 				</div>
 			</section>
 		</div>

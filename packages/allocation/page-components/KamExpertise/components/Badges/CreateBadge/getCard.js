@@ -1,4 +1,5 @@
 import { Input, FileSelect, Button } from '@cogoport/components';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
@@ -7,12 +8,13 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 
 function GetCard(props) {
-	const { medalType, inputPlaceHolder, setScore, isLastItem, isBadgeEdit } = props;
+	const { medalType, inputPlaceHolder, setScore, setUrl, isLastItem, isBadgeEdit } = props;
 
-	
+	// const [value, setValue] = useState();
 
-	const [value, setValue] = useState();
-
+	function handleUrl(item = {}) {
+		setUrl(item.finalUrl);
+	}
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
 
@@ -37,20 +39,28 @@ function GetCard(props) {
 
 			{/* <div className={styles.display_flex} style={{ alignItems: 'flex-end' }}> */}
 			{/* <FileSelect {... upload_props} /> */}
-			<FileSelect
+
+			<FileUploader
+				uploadDesc="Upload files here"
+				className={styles.file_select_style}
+				onChange={(item) => handleUrl(item)}
+				style={{ width: isBadgeEdit ? '93%' : '80%' }}
+			/>
+
+			{/* <FileSelect
 				uploadDesc="Upload files here"
 				className={styles.file_select_style}
 				value={value}
 				onChange={(val) => setValue(val)}
 				// accept=".png,.pkg"
 				style={{ width: isBadgeEdit ? '93%' : '80%' }}
-			/>
+			/> */}
+
 			{ isBadgeEdit && (
 				<div className={styles.save_update}>
 					<Button
 						size="sm"
 						themeType="primary"
-
 					>
 						Save
 					</Button>
