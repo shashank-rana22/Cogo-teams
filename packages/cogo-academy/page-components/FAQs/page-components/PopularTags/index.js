@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function PopularTags({ tabTitle = '', searchState = '' }) {
 	const { profile } = useSelector((state) => state);
 
-	const { ids = {} } = profile?.faq || {};
+	const { ids = [] } = profile?.faq || {};
 
 	const [tags, setTags] = useState(ids || []);
 
