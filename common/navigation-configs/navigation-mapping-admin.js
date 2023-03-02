@@ -431,6 +431,12 @@ const navigationMappingAdmin = {
 				as    : '/rate-management/air-customs',
 				type  : 'link',
 			},
+			{
+				title : 'Rails Domestic',
+				href  : '/rate-management/rails-domestic',
+				as    : '/rate-management/rails-domestic',
+				type  : 'link',
+			},
 		],
 		module_type: 'crm',
 	},
@@ -1944,6 +1950,24 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		main_apis     : [],
 		possible_apis : apis.contracts,
+	},
+	inventory_management: {
+		key       : 'inventory_management',
+		title     : 'Inventory Management',
+		icon      : IcMRateManagement,
+		isSubNavs : true,
+		options   : [
+			{
+				key           : 'inventory_management-rail',
+				title         : 'Rail',
+				href          : '/inventory-management/rail',
+				as            : '/inventory-management/rail',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.inventory_management,
+			},
+		],
+		module_type: 'dashboards',
 	},
 };
 
