@@ -25,7 +25,7 @@ function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call 
 
 	const conditionCheck = !isEmpty(dtmf_inputs) && type === 'user';
 
-	const dtmfOptions = Object.entries(dtmf_inputs || {}).map(([key, value]) => ({ key, value }));
+	const dtmfOptions = Object.entries(dtmf_inputs || {})?.map(([key, value]) => ({ key, value }));
 
 	return (
 		<div>
