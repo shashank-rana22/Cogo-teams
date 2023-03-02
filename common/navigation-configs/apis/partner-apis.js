@@ -13,21 +13,6 @@ const partner = {
 	],
 	prm: [
 		{
-			api          : 'get_question',
-			access_type  : 'private',
-			service_name : 'faq',
-		},
-		{
-			api          : 'list_faq_topics',
-			access_type  : 'private',
-			service_name : 'faq',
-		},
-		{
-			api          : 'list_faq_questions',
-			access_type  : 'private',
-			service_name : 'faq',
-		},
-		{
 			api          : 'get_tax_numbers_data',
 			access_type  : 'private',
 			service_name : 'credit',
@@ -357,11 +342,6 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_servetel_communication_log',
-			access_type  : 'private',
-			service_name : 'voice_call',
-		},
-		{
 			api          : 'list_organization_billing_addresses',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -603,11 +583,6 @@ const partner = {
 			api          : 'verify_otp',
 			access_type  : 'private',
 			service_name : 'user',
-		},
-		{
-			api          : 'saas_get_user_active_plan',
-			access_type  : 'private',
-			service_name : 'saas_subscriptions_v2',
 		},
 	],
 	terms_and_conditons: [
@@ -905,11 +880,6 @@ const partner = {
 		},
 	],
 	demand_crm: [
-		{
-			api          : 'create_event',
-			access_type  : 'private',
-			service_name : 'event',
-		},
 		{
 			api          : 'get_tax_numbers_data',
 			access_type  : 'private',
@@ -1681,21 +1651,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'user',
 		},
-		{
-			api          : 'create_servetel_communication_log',
-			access_type  : 'private',
-			service_name : 'voice_call',
-		},
-		{
-			api          : 'create_event',
-			access_type  : 'private',
-			service_name : 'event',
-		},
-		{
-			api          : 'saas_get_user_active_plan',
-			access_type  : 'private',
-			service_name : 'saas_subscriptions_v2',
-		},
 	],
 	supply_crm: [
 		{
@@ -2411,11 +2366,6 @@ const partner = {
 			api          : 'create_organization_communication_log',
 			access_type  : 'private',
 			service_name : 'organization',
-		},
-		{
-			api          : 'create_servetel_communication_log',
-			access_type  : 'private',
-			service_name : 'voice_call',
 		},
 		{
 			api          : 'list_channel_partner_stakeholders',
@@ -6035,19 +5985,9 @@ const partner = {
 			service_name : 'unified_dashboard',
 		},
 		{
-			api          : 'outstanding_amount_bifurcation',
+			api          : 'get_outstanding_invoices',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
-		},
-		{
-			api          : 'list_outstanding_invoices',
-			access_type  : 'private',
-			service_name : 'unified_dashboard',
-		},
-		{
-			api          : 'create_servetel_communication_log',
-			access_type  : 'private',
-			service_name : 'voice_call',
 		},
 	],
 	unified_dashboard: [
@@ -6440,14 +6380,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
-		{
-			api         : 'get_common_job_shipment_id_view',
-			access_type : 'private',
-		},
-		{
-			api         : 'get_purchase_treasury_live_status',
-			access_type : 'private',
-		},
 	],
 	business_finance_income: [
 		{
@@ -6641,117 +6573,6 @@ const partner = {
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
-		},
-	],
-	cogo_book: [
-		{
-			api         : 'get_incident_management_incident_list',
-			access_type : 'private',
-		},
-		{
-			api         : 'patch_incident_management_incident_by_id',
-			access_type : 'private',
-		},
-		{
-			api          : 'list_cogo_entities',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-		{
-			api         : 'post_payments_journal_voucher_approve',
-			access_type : 'private',
-		},
-		{
-			api         : 'post_payments_journal_voucher_reject',
-			access_type : 'private',
-		},
-		{
-			api          : 'list_organization_trade_parties',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'list_organization_trade_party_details',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api         : 'post_payments_settlement_settle',
-			access_type : 'private',
-			module      : 'match',
-			feature     : 'match',
-		},
-		{
-			api         : 'post_payments_settlement_check',
-			access_type : 'private',
-			module      : 'match',
-			feature     : 'match',
-		},
-		{
-			api         : 'post_payments_settlement_edit',
-			access_type : 'private',
-			module      : 'match',
-			feature     : 'match',
-		},
-		{
-			api         : 'post_payments_settlemet_reject',
-			access_type : 'private',
-			module      : 'match',
-			feature     : 'match',
-		},
-		{
-			api         : 'get_pnl_accrual_archive_declared_list',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'get_pnl_accrual_archive_actual_list',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'get_pnl_accrual_archive_shipment_list',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'get_pnl_accrual_shipments',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'post_pnl_accrual_add_to_selected',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'get_pnl_accrual_view_selected',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'patch_pnl_accrual_archive',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'put_pnl_accrual_freeze_period',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'delete_pnl_accrual_archive',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
 		},
 	],
 	account_payables: [
@@ -7128,86 +6949,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
-		{
-			api          : 'create_servetel_communication_log',
-			access_type  : 'private',
-			service_name : 'voice_call',
-		},
-		{
-			api         : 'get_purchase_payable_bill_overseas_details',
-			access_type : 'private',
-			module      : 'Overseas',
-			feature     : 'Overseas',
-		},
-		{
-			api         : 'get_purchase_payable_bill_shipment_documents',
-			access_type : 'private',
-			module      : 'Overseas',
-			feature     : 'Overseas',
-		},
-		{
-			api         : 'get_purchase_payrun_download_overseas_utr',
-			access_type : 'private',
-			module      : 'Overseas',
-			feature     : 'Overseas',
-		},
-		{
-			api         : 'get_purchase_bills_list_overseas_trade_parties',
-			access_type : 'private',
-			module      : 'Overseas',
-			feature     : 'Overseas',
-		},
-		{
-			api         : 'post_purchase_payrun_download_zip',
-			access_type : 'private',
-			module      : 'Overseas',
-			feature     : 'Overseas',
-		},
-		{
-			api         : 'post_purchase_payrun_upload_documents',
-			access_type : 'private',
-			module      : 'Overseas',
-			feature     : 'Overseas',
-		},
-		{
-			api         : 'delete_purchase_payrun_documents',
-			access_type : 'private',
-			module      : 'Overseas',
-			feature     : 'Overseas',
-		},
-		{
-			api         : 'post_purchase_payrun_merged_pdf_by_id',
-			access_type : 'private',
-			module      : 'Overseas',
-			feature     : 'Overseas',
-		},
-	],
-	my_incident: [
-		{
-			api         : 'get_incident_management_incident_list',
-			access_type : 'private',
-			module      : 'myIncident',
-			feature     : 'myIncident',
-		},
-		{
-			api         : 'patch_incident_management_incident_user_incident_status',
-			access_type : 'private',
-			module      : 'myIncident',
-			feature     : 'myIncident',
-		},
-		{
-			api         : 'post_incident_management_incident_raise_again',
-			access_type : 'private',
-			module      : 'myIncident',
-			feature     : 'myIncident',
-		},
-		{
-			api         : 'patch_incident_management_incident_edit_notes',
-			access_type : 'private',
-			module      : 'myIncident',
-			feature     : 'myIncident',
-
-		},
 	],
 	vendor_payment: [
 		{
@@ -7300,69 +7041,69 @@ const partner = {
 		{
 			api         : 'get_sales_outstanding',
 			access_type : 'private',
-			module      : 'invoices',
-			feature     : 'invoices',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api         : 'get_sales_outstanding_invoice_list',
 			access_type : 'private',
-			module      : 'invoices',
-			feature     : 'invoices',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api         : 'post_sales_invoice_by_id_irn_generate',
 			access_type : 'private',
-			module      : 'invoices',
-			feature     : 'invoices',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api         : 'post_sales_invoice_post_to_sage',
 			access_type : 'private',
-			module      : 'invoices',
-			feature     : 'invoices',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api         : 'post_sales_invoice_by_id_irn_cancel',
 			access_type : 'private',
-			module      : 'invoices',
-			feature     : 'invoices',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api         : 'get_sales_invoice_generate_pdf',
 			access_type : 'private',
-			module      : 'invoices',
-			feature     : 'invoices',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api         : 'post_sales_outstanding_ledger_summary',
 			access_type : 'private',
-			module      : 'invoices',
-			feature     : 'invoices',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api         : 'post_sales_outstanding_create_communication',
 			access_type : 'private',
-			module      : 'invoices',
-			feature     : 'invoices',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api         : 'get_sales_outstanding_overall',
 			access_type : 'private',
-			module      : 'invoices',
-			feature     : 'invoices',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 
 		{
 			api         : 'get_sales_report_download_outstanding_list',
 			access_type : 'private',
-			module      : 'invoices',
-			feature     : 'invoices',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api         : 'get_sales_invoice_timeline_by_id',
 			access_type : 'private',
-			module      : 'invoices',
-			feature     : 'invoices',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api         : 'list_organization_trade_party_details',
@@ -7389,24 +7130,6 @@ const partner = {
 			feature     : 'Bpr',
 		},
 	],
-	incident_controller: [
-		{
-			api         : 'get_incident_management_incident_list',
-			access_type : 'private',
-		},
-		{
-			api         : 'patch_incident_management_incident_by_id',
-			access_type : 'private',
-		},
-		{
-			api         : 'post_payments_journal_voucher_approve',
-			access_type : 'private',
-		},
-		{
-			api         : 'post_payments_journal_voucher_reject',
-			access_type : 'private',
-		},
-	],
 	vietnam_account_receivables: [
 		{
 			api         : 'get_sales_invoice_list',
@@ -7414,20 +7137,6 @@ const partner = {
 		},
 		{
 			api         : 'post_sales_upload_translated_invoice',
-			access_type : 'private',
-		},
-	],
-	translate: [
-		{
-			api         : 'get_translation_translate_list',
-			access_type : 'private',
-		},
-		{
-			api         : 'put_translation_translate',
-			access_type : 'private',
-		},
-		{
-			api         : 'post_translation_translate',
 			access_type : 'private',
 		},
 	],
@@ -7735,7 +7444,117 @@ const partner = {
 			service_name : 'shipment',
 		},
 	],
-
+	controller_dashboard: [
+		{
+			api         : 'get_incident_management_incident_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'patch_incident_management_incident_by_id',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api         : 'post_payments_journal_voucher_approve',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_payments_journal_voucher_reject',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_trade_party_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api         : 'post_payments_settlement_settle',
+			access_type : 'private',
+			module      : 'match',
+			feature     : 'match',
+		},
+		{
+			api         : 'post_payments_settlement_check',
+			access_type : 'private',
+			module      : 'match',
+			feature     : 'match',
+		},
+		{
+			api         : 'post_payments_settlement_edit',
+			access_type : 'private',
+			module      : 'match',
+			feature     : 'match',
+		},
+		{
+			api         : 'post_payments_settlemet_reject',
+			access_type : 'private',
+			module      : 'match',
+			feature     : 'match',
+		},
+		{
+			api         : 'get_pnl_accrual_archive_declared_list',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'get_pnl_accrual_archive_actual_list',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'get_pnl_accrual_archive_shipment_list',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'get_pnl_accrual_shipments',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'post_pnl_accrual_add_to_selected',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'get_pnl_accrual_view_selected',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'patch_pnl_accrual_archive',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'put_pnl_accrual_freeze_period',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'delete_pnl_accrual_archive',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+	],
 	campaigns: [
 		{
 			api          : 'get_campaign_nodes_result',
@@ -8372,11 +8191,6 @@ const partner = {
 		},
 		{
 			api          : 'get_segment_tags',
-			access_type  : 'private',
-			service_name : 'segmentation',
-		},
-		{
-			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'segmentation',
 		},
@@ -9748,11 +9562,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
-		{
-			api          : 'create_servetel_communication_log',
-			access_type  : 'private',
-			service_name : 'voice_call',
-		},
 	],
 	supply_tools: [
 		{
@@ -9919,6 +9728,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'operator',
 		},
+		{
+			api          : 'create_air_india_awb_number',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_air_india_awb_status',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_awb_plugin_booking_information',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	airline_booking_plugin: [
 		{
@@ -9948,16 +9772,6 @@ const partner = {
 		},
 		{
 			api          : 'get_awb_plugin_booking_information',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'update_air_india_lms_password',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'get_air_india_lms_password',
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
@@ -9998,7 +9812,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
-
 	],
 	omni_channel: [
 		{
@@ -10046,24 +9859,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
-	],
-	cogo_verse_analytics: [
-		{
-			api          : 'get_cogoverse_dashboard',
-			access_type  : 'private',
-			service_name : 'unified_dashboard',
-		},
-		{
-			api          : 'get_cogoverse_globe_data',
-			access_type  : 'private',
-			service_name : 'unified_dashboard',
-		},
-		{
-			api          : 'get_cogoverse_platform_chat_data',
-			access_type  : 'private',
-			service_name : 'unified_dashboard',
-		},
-
 	],
 	constants: [
 		{
@@ -10328,179 +10123,5 @@ const partner = {
 			service_name : 'shipment',
 		},
 	],
-	inventory_management: [
-		{
-			api          : 'list_rail_domestic_freight_inventories',
-			access_type  : 'private',
-			service_name : 'inventory_management',
-		},
-		{
-			api          : 'get_rail_domestic_freight_inventories',
-			access_type  : 'private',
-			service_name : 'inventory_management',
-		},
-
-	],
-	cogo_one: [
-		{
-			api          : 'get_user',
-			access_type  : 'private',
-			service_name : 'user',
-		},
-		{
-			api          : 'create_organization_communication_log',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'list_organization_communication_logs',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'get_organization',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'get_organization_cogopoint_profile',
-			access_type  : 'private',
-			service_name : 'cogopoint',
-		},
-		{
-			api          : 'list_promotions',
-			access_type  : 'private',
-			service_name : 'promotion',
-		},
-		{
-			api          : 'list_user_call_details',
-			access_type  : 'private',
-			service_name : 'voice_call',
-		},
-		{
-			api          : 'update_agent_work_preference',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'create_omnichannel_note',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'list_omnichannel_notes',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'update_omnichannel_note',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'create_outgoing_call',
-			access_type  : 'private',
-			service_name : 'voice_call',
-		},
-		{
-			api          : 'list_chat_suggestions',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-
-			api          : 'check_outgoing_call_status',
-			access_type  : 'private',
-			service_name : 'voice_call',
-		},
-		{
-			api          : 'hang_up_outgoing_call',
-			access_type  : 'private',
-			service_name : 'voice_call',
-		},
-		{
-			api          : 'get_omnichannel_activity_logs',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'get_agent_work_preference',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'create_suggestion',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'assign_chat',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api: 'create_communication',
-
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'get_omnichannel_customer_insights',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'update_assigned_chat',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'list_chat_agents',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'list_communication_templates',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'create_communication_template',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'get_communication_template',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'create_communication_platform_chat',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'get_lead_user',
-			access_type  : 'private',
-			service_name : 'lead',
-		},
-		{
-			api          : 'list_assigned_chat_tags',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'list_organizations',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'create_platform_chat_user_onboarding',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-
-	],
 };
-
 export default partner;
