@@ -1,4 +1,4 @@
-import { Button, Toggle, cl } from '@cogoport/components';
+import { Button, Checkbox, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -96,15 +96,15 @@ function FilterComponents({
 				</div>
 			</div>
 			<div className={styles.styled_flex}>
-				<div>
-					Closed
-				</div>
-				<Toggle
+				<Checkbox
 					name="closed"
 					size="sm"
 					onChange={() => setBotToggle((p) => !p)}
 					checked={botToggle}
 				/>
+				<div>
+					Closed
+				</div>
 			</div>
 
 			{filterControls.map((field) => (

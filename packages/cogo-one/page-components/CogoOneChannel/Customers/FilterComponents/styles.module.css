@@ -39,10 +39,20 @@
 .styled_flex {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	padding-bottom: 5px;
 	font-size: 14px;
 	color: #26323d;
 	border-bottom: 1px solid #e0e0e0;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 3px 0 !important;
+		}
+
+		.ui_checkbox_style {
+			margin: 0 5px 0 0 !important;
+		}
+	}
 }
 
 .disabled {
