@@ -58,7 +58,7 @@ function FormatedDate({ item, field }: Props) {
 			{field?.key === 'dueDate' && <div>{getDueDate}</div>}
 			{field?.key === 'grandTotal' && (
 				<div className={styled.invoice_amount}>
-					<text>{showOverflowingNumber(formatAmount, 8)}</text>
+					<div className={styled.show_amount}>{showOverflowingNumber(formatAmount, 16)}</div>
 
 					<Tooltip placement="top" content={content}>
 						<div className={styled.ic_min_icon}>
