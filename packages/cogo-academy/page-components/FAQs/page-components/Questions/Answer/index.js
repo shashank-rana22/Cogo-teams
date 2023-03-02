@@ -1,151 +1,151 @@
 /* eslint-disable react/no-danger */
-import { Modal, Button, Badge } from '@cogoport/components';
-import { InputController, CheckboxController, useForm } from '@cogoport/forms';
-import { IcCLike, IcCDislike } from '@cogoport/icons-react';
-import { useRequest } from '@cogoport/request';
-import { format } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+// import { Modal, Button, Badge } from '@cogoport/components';
+// import { InputController, CheckboxController, useForm } from '@cogoport/forms';
+// import { IcCLike, IcCDislike } from '@cogoport/icons-react';
+// import { useRequest } from '@cogoport/request';
+// import { format } from '@cogoport/utils';
+// import React, { useState, useEffect } from 'react';
 
-import Spinner from '../../../../../commons/Spinner';
-import useGetQuestions from '../../../hooks/useGetQuestions';
-import RelatedQuestion from '../../RelatedQuestion';
+// import Spinner from '../../../../../commons/Spinner';
+// import useGetQuestions from '../../../hooks/useGetQuestions';
+// import RelatedQuestion from '../../RelatedQuestion';
 
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
-const FEEDBACK_MAPPING_ISLIKED = {
-	true  : 'liked',
-	false : 'disliked',
-};
+// const FEEDBACK_MAPPING_ISLIKED = {
+// 	true  : 'liked',
+// 	false : 'disliked',
+// };
 
-function Answer({ questions = {} }) {
-	const [show, setShow] = useState(false);
-	const [load, setload] = useState(true);
-	const { refetchQuestions, data: answerData, loading } = useGetQuestions({ id: questions.id });
+function Answer() {
+// 	const [show, setShow] = useState(false);
+// 	const [load, setload] = useState(true);
+// 	const { refetchQuestions, data: answerData, loading } = useGetQuestions({ id: questions.id });
 
-	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
-	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
+	// 	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
+	// 	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 
-	useEffect(() => {
-		setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
+	// 	useEffect(() => {
+	// 		setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// 	}, [loading]);
 
-	const { handleSubmit, formState: { errors }, control } = useForm();
+	// 	const { handleSubmit, formState: { errors }, control } = useForm();
 
-	let apiName = '/create_faq_feedback';
+	// 	let apiName = '/create_faq_feedback';
 
-	if (isLiked) {
-		apiName = '/update_faq_feedback';
-	}
+	// 	if (isLiked) {
+	// 		apiName = '/update_faq_feedback';
+	// 	}
 
-	const [{ loading: feedbackLoading }, trigger] = useRequest({
-		url    : apiName,
-		method : 'POST',
-	});
+	// 	const [{ loading: feedbackLoading }, trigger] = useRequest({
+	// 		url    : apiName,
+	// 		method : 'POST',
+	// 	});
 
-	const onClose = () => {
-		setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
-		setShow(false);
-	};
+	// 	const onClose = () => {
+	// 		setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
+	// 		setShow(false);
+	// 	};
 
-	const onClickLikeButton = async ({ id }) => {
-		setload(false);
-		let payload = {
-			faq_answer_id : id,
-			is_positive   : true,
-			status        : 'active',
-		};
-		if (isLiked === 'liked') {
-			payload = {
-				id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				status : 'inactive',
-			};
-		} else if (isLiked === 'disliked') {
-			payload = {
-				id          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				is_positive : true,
-				status      : 'active',
-			};
-		}
-		try {
-			await trigger({
-				data: payload,
-			});
-			setIsLiked(isLiked === 'liked' ? '' : 'liked');
-			refetchQuestions();
-		} catch (error) {
-			console.log('error :: ', error);
-		}
-	};
+	// 	const onClickLikeButton = async ({ id }) => {
+	// 		setload(false);
+	// 		let payload = {
+	// 			faq_answer_id : id,
+	// 			is_positive   : true,
+	// 			status        : 'active',
+	// 		};
+	// 		if (isLiked === 'liked') {
+	// 			payload = {
+	// 				id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+	// 				status : 'inactive',
+	// 			};
+	// 		} else if (isLiked === 'disliked') {
+	// 			payload = {
+	// 				id          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+	// 				is_positive : true,
+	// 				status      : 'active',
+	// 			};
+	// 		}
+	// 		try {
+	// 			await trigger({
+	// 				data: payload,
+	// 			});
+	// 			setIsLiked(isLiked === 'liked' ? '' : 'liked');
+	// 			refetchQuestions();
+	// 		} catch (error) {
+	// 			console.log('error :: ', error);
+	// 		}
+	// 	};
 
-	const onClickRemoveDisLike = async () => {
-		setload(false);
-		try {
-			await trigger({
-				data: {
-					id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-					status : 'inactive',
-				},
-			});
-			setIsLiked('');
-			refetchQuestions();
-		} catch (error) {
-			console.log('error :: ', error);
-		}
-	};
+	// 	const onClickRemoveDisLike = async () => {
+	// 		setload(false);
+	// 		try {
+	// 			await trigger({
+	// 				data: {
+	// 					id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+	// 					status : 'inactive',
+	// 				},
+	// 			});
+	// 			setIsLiked('');
+	// 			refetchQuestions();
+	// 		} catch (error) {
+	// 			console.log('error :: ', error);
+	// 		}
+	// 	};
 
-	const onSubmit = async (values) => {
-		setload(false);
-		let remark = values?.remark;
-		if (values?.answer_checkbox) {
-			remark = `Answer not satisfactory. ${remark}`;
-		}
-		if (values?.question_checkbox) {
-			remark = `Question not satisfactory. ${remark}`;
-		}
+	// 	const onSubmit = async (values) => {
+	// 		setload(false);
+	// 		let remark = values?.remark;
+	// 		if (values?.answer_checkbox) {
+	// 			remark = `Answer not satisfactory. ${remark}`;
+	// 		}
+	// 		if (values?.question_checkbox) {
+	// 			remark = `Question not satisfactory. ${remark}`;
+	// 		}
 
-		let payload = {
-			faq_answer_id : answerData?.answers[0]?.id,
-			is_positive   : false,
-			remark,
-			status        : 'active',
+	// 		let payload = {
+	// 			faq_answer_id : answerData?.answers[0]?.id,
+	// 			is_positive   : false,
+	// 			remark,
+	// 			status        : 'active',
 
-		};
-		if (answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
-			payload = {
-				id            : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				faq_answer_id : answerData?.answers[0]?.id,
-				is_positive   : false,
-				remark,
-				status        : 'active',
-			};
-		}
+	// 		};
+	// 		if (answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
+	// 			payload = {
+	// 				id            : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+	// 				faq_answer_id : answerData?.answers[0]?.id,
+	// 				is_positive   : false,
+	// 				remark,
+	// 				status        : 'active',
+	// 			};
+	// 		}
 
-		try {
-			await trigger({
-				data: payload,
-			});
-			setIsLiked('disliked');
-			setShow(false);
-			refetchQuestions();
-		} catch (error) {
-			console.log('error :: ', error);
-		}
-	};
+	// 		try {
+	// 			await trigger({
+	// 				data: payload,
+	// 			});
+	// 			setIsLiked('disliked');
+	// 			setShow(false);
+	// 			refetchQuestions();
+	// 		} catch (error) {
+	// 			console.log('error :: ', error);
+	// 		}
+	// 	};
 
-	if (loading && load) {
-		return (
-			<div className={styles.spinner}>
-				<Spinner
-					borderWidth="4px"
-					outerBorderColor="#FBD69F"
-					spinBorderColor="red"
-					width="36px"
-					height="36px"
-				/>
-			</div>
-		);
-	}
+	// 	if (loading && load) {
+	// 		return (
+	// 			<div className={styles.spinner}>
+	// 				<Spinner
+	// 					borderWidth="4px"
+	// 					outerBorderColor="#FBD69F"
+	// 					spinBorderColor="red"
+	// 					width="36px"
+	// 					height="36px"
+	// 				/>
+	// 			</div>
+	// 		);
+	// 	}
 
 	return (
 		<div>

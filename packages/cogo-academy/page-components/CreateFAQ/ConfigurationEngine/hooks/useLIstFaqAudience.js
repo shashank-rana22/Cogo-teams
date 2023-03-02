@@ -12,6 +12,7 @@ function useLIstFaqAudience({ searchAudienceInput = '' }) {
 	}, { manual: true });
 	useEffect(() => {
 		debounceQuery(searchAudienceInput);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchAudienceInput]);
 	const fetchFaqAudience = async () => {
 		try {
