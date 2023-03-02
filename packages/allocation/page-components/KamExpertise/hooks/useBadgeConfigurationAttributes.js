@@ -31,7 +31,7 @@ function useBadgeConfigurationAttributes() {
 
 			// setShow(false);
 
-			Toast.success('Checking for Publishability. Please check after some time.');
+			Toast.success('Badge Updated!');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

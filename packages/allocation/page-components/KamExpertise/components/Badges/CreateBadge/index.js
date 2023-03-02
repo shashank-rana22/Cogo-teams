@@ -1,5 +1,5 @@
 import { Toast, Button } from '@cogoport/components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
 
@@ -23,9 +23,6 @@ function CreateBadge({ setWindow }) {
 		goldScore    : 0,
 		gold_url     : '',
 	});
-	// const [bronzeUrl, setBronzeUrl] = useState('');
-	// const [silverUrl, setSilverUrl] = useState('');
-	// const [goldUrl, setGoldUrl] = useState('');
 
 	const {
 		onCheckPublish, loading,

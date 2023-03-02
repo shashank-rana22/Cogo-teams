@@ -8,7 +8,21 @@ import styles from './styles.module.css';
 
 function BadgeCard({ medalType = '', score = '', img_url = '', isLast = {} }) {
 	const [openModal, setOpenModal] = useState(false);
+	const [badgeUpdateParams, setBadgeUpdateparams] = useState({
+		medal_type  : medalType,
+		medal_score : score,
+		medal_url   : img_url,
+	});
+	const badgeData = {
+		medalType,
+		inputPlaceHolder : score,
+		setValue         : setBadgeUpdateparams,
+		scoreValue       : 'medal_score',
+		imageValue       : 'medal_url',
+		imageSelected    : badgeUpdateParams.medal_url,
+	};
 
+	console.log(badgeUpdateParams);
 	return (
 		<>
 			{' '}
@@ -45,8 +59,7 @@ function BadgeCard({ medalType = '', score = '', img_url = '', isLast = {} }) {
 								<Modal.Body>
 									<div style={{ padding: '10px' }}>
 										<GetCard
-											medalType={medalType}
-											inputPlaceHolder="score"
+											data={badgeData}
 											isLastItem
 											isBadgeEdit
 										/>

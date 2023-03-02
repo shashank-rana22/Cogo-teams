@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function LeaderboardList() {
-	const router = useRouter();
+	// const router = useRouter();
 	const list_data = [
 		{
 			id            : 1,
@@ -196,7 +196,7 @@ function LeaderboardList() {
 											? (
 												<span
 													role="presentation"
-													onClick={() => router.push('/allocation/kam-expertise/view-badges')}
+													// onClick={() => router.push('/allocation/kam-expertise/view-badges')}
 												>
 													View More
 												</span>
