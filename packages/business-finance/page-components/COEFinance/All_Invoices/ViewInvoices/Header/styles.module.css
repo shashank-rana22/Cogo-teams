@@ -1,0 +1,27 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.sub_container {
+	display: flex;
+}
+
+.hr {
+	width: 100%;
+	margin: 32px 0;
+	border: 1px solid #333;
+}
+
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.heading {
+	display: flex;
+	justify-content: center;
+	margin: 20px;
+	font-weight: 600;
+}
