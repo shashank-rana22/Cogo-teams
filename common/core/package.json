@@ -4,7 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@cogoport/authentication": "workspace:0.1.0",
-		"@cogoport/components": "^1.0.330",
+		"@cogoport/components": "^1.0.353",
 		"@cogoport/icons-react": "^1.0.58",
 		"@cogoport/navigation-configs": "workspace:0.1.0",
 		"@cogoport/next": "workspace:0.1.0",

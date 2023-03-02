@@ -80,9 +80,8 @@ const apis = [
 		service_name : 'sage',
 	},
 	{
-		api          : 'get_sales_invoice_list',
-		access_type  : 'private',
-		service_name : 'shipment',
+		api         : 'get_sales_invoice_list',
+		access_type : 'private',
 	},
 	{
 		api          : 'list_organization_users',
@@ -150,9 +149,8 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_purchase_bills_list',
-		access_type  : 'private',
-		service_name : 'shipment',
+		api         : 'get_purchase_bills_list',
+		access_type : 'private',
 	},
 	{
 		api          : 'get_sales_invoice_shipment_list',
@@ -1008,12 +1006,12 @@ const apis = [
 	{
 		api          : 'list_saas_container_subscriptions',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'saas_traceability',
 	},
 	{
 		api          : 'get_saas_container_subscription',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'saas_traceability',
 	},
 	{
 		api          : 'send_invoice_email',
@@ -1240,16 +1238,6 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
-		api          : 'create_shipment_consolidated_credit_note',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'list_shipment_consolidated_credit_notes',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'list_document_desk_shipments',
 		access_type  : 'private',
 		service_name : 'bookings',
@@ -1258,6 +1246,36 @@ const apis = [
 		api          : 'list_lastmile_desk_shipments',
 		access_type  : 'private',
 		service_name : 'bookings',
+	},
+	{
+		api          : 'raise_query',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_air_subscription',
+		access_type  : 'private',
+		service_name : 'air_tracking',
+	},
+	{
+		api          : 'bulk_update_shipment_container_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_container_sea_route',
+		access_type  : 'public',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_rail_shipment_container_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_rail_shipment_container_details',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 ];
 

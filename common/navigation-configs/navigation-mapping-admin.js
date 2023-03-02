@@ -51,9 +51,11 @@ import {
 	IcMDashboard,
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
+	IcMFaq,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
+import business_finance from './apis/business-finance-apis';
 
 const navigationMappingAdmin = {
 	things_to_do: {
@@ -430,6 +432,12 @@ const navigationMappingAdmin = {
 				as    : '/rate-management/air-customs',
 				type  : 'link',
 			},
+			{
+				title : 'Rails Domestic',
+				href  : '/rate-management/rails-domestic',
+				as    : '/rate-management/rails-domestic',
+				type  : 'link',
+			},
 		],
 		module_type: 'crm',
 	},
@@ -762,7 +770,17 @@ const navigationMappingAdmin = {
 		title     : 'Business Finance',
 		icon      : IcMBusinessFinance,
 		isSubNavs : true,
+		main_apis : ['get_purchase_payment_upload_list'],
 		options   : [
+			{
+				key           : 'business_finance-coe_finance',
+				title         : ' COE Finance',
+				href          : '/v2/business-finance/coe-finance/[active_tab]',
+				as            : '/v2/business-finance/coe-finance/dashboard',
+				icon          : IcMProductCodeMapping,
+				main_apis     : [],
+				possible_apis : [...business_finance.coeFinance],
+			},
 			{
 				key           : 'business_finance-account_payables',
 				title         : 'AP',
@@ -838,6 +856,16 @@ const navigationMappingAdmin = {
 			},
 		],
 		module_type: 'dashboards',
+	},
+	translate: {
+		key           : 'translate',
+		title         : 'Translation',
+		href          : '/v2/translate/[activeTab]',
+		as            : '/v2/translate/Requested',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.translate,
+		module_type   : 'dashboards',
 	},
 	finance: {
 		key           : 'finance',
@@ -1313,7 +1341,7 @@ const navigationMappingAdmin = {
 				as            : '/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk, ...apis.search],
+				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
 			},
 			{
 				key           : 'coe-document_desk',
@@ -1322,7 +1350,7 @@ const navigationMappingAdmin = {
 				as            : '/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk],
+				possible_apis : [...apis.document_desk, ...apis.cogolens],
 			},
 			{
 				key           : 'coe-last_mile',
@@ -1331,7 +1359,7 @@ const navigationMappingAdmin = {
 				as            : '/last-mile',
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
-				possible_apis : [...apis.document_desk],
+				possible_apis : [...apis.document_desk, ...apis.cogolens],
 			},
 		],
 	},
@@ -1737,6 +1765,14 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
+	kam_monitoring: {
+		key         : 'kam_monitoring',
+		title       : 'KAM Monitoring',
+		module_type : 'dashboards',
+		href        : '/kam-monitoring',
+		as          : '/kam-monitoring',
+		main_apis   : [],
+	},
 	awb_inventory: {
 		key           : 'awb_inventory',
 		title         : 'AWB Inventory',
@@ -1808,6 +1844,24 @@ const navigationMappingAdmin = {
 		],
 		module_type: 'dashboards',
 	},
+	cogo_verse_analytics: {
+		key   : 'cogo_verse_analytics',
+		title : 'CogoVerse',
+		icon  : () => (
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg"
+				alt="cogo-verse"
+				width="22px"
+				height="22px"
+			/>
+		),
+		href          : '/v2/cogo-verse-analytics',
+		as            : '/v2/cogo-verse-analytics',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.cogo_verse_analytics,
+		module_type   : 'dashboards',
+	},
 	roles_permissions: {
 		key           : 'roles_permissions',
 		title         : 'Roles and Permissions',
@@ -1818,6 +1872,33 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_auth_roles'],
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
+	},
+	cogo_one: {
+		key   : 'cogo_one',
+		title : 'Cogo One',
+		icon  : () => (
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
+				alt="cogo-one"
+				width="22px"
+				height="22px"
+			/>
+		),
+		isSubNavs     : true,
+		main_apis     : [],
+		possible_apis : apis.cogo_one,
+		options       : [
+			{
+				key           : 'cogo_one-omni_channel',
+				title         : 'Omni Channel',
+				href          : '/v2/cogo-one/omni-channel',
+				as            : '/v2/cogo-one/omni-channel',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_one,
+			},
+		],
+		module_type: 'dashboards',
 	},
 	home: {
 		key   : 'home',
@@ -1832,7 +1913,7 @@ const navigationMappingAdmin = {
 		href          : '/manage-rfq',
 		as            : '/manage-rfq',
 		type          : 'link',
-		main_apis     : [],
+		main_apis     : ['list_rfqs'],
 		possible_apis : apis.manage_rfq,
 		module_type   : 'dashboards',
 	},
@@ -1870,6 +1951,51 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		main_apis     : [],
 		possible_apis : apis.contracts,
+	},
+	cogo_academy: {
+		key       : 'cogo_academy',
+		title     : 'Cogo Academy',
+		isSubNavs : true,
+		icon      : IcMFaq,
+		options   : [
+			{
+				key           : 'cogo_academy-create_faq',
+				title         : 'Creator Management System',
+				href          : '/v2/learning/faq/create',
+				as            : '/v2/learning/faq/create',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.create_faq,
+			},
+			{
+				key           : 'cogo_academy-faq',
+				title         : 'FAQs',
+				href          : '/v2/learning/faq',
+				as            : '/v2/learning/faq',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.faq,
+			},
+		],
+		module_type: 'crm',
+	},
+	inventory_management: {
+		key       : 'inventory_management',
+		title     : 'Inventory Management',
+		icon      : IcMRateManagement,
+		isSubNavs : true,
+		options   : [
+			{
+				key           : 'inventory_management-rail',
+				title         : 'Rail',
+				href          : '/inventory-management/rail',
+				as            : '/inventory-management/rail',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.inventory_management,
+			},
+		],
+		module_type: 'dashboards',
 	},
 };
 
