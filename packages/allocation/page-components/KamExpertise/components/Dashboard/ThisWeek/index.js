@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import EmptyState from '../../../../../common/EmptyState';
 import BadgeFilter from '../BadgeFilter';
 
-import CardContent from './Card';
+import CardContent from './CardContent';
 import LeaderboardList from './LeaderboardList';
 import styles from './styles.module.css';
 
@@ -157,7 +157,7 @@ function ThisWeek() {
 											key={data.title}
 											themetype="primary"
 											disabled={false}
-											className={styles.card_item}
+											className={styles.inner_card_item}
 										>
 											<Card.Title title={(
 												<div className={styles.overview_card_title}>
@@ -198,7 +198,7 @@ function ThisWeek() {
 											key={data.title}
 											themetype="primary"
 											disabled={false}
-											className={styles.card_item}
+											className={styles.inner_card_item}
 										>
 											<Card.Title title={(
 												<div className={styles.overview_card_title}>
@@ -264,7 +264,7 @@ function ThisWeek() {
 						{
 
 							// Todo: add isEmpty and !loading condition for emptyState
-									true ? (
+									false ? (
 										<div style={{
 											padding         : '60px 0',
 											height          : '400px',
