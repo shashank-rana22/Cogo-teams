@@ -1,16 +1,16 @@
-.headerContainer {
+.header_container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 }
 
-.leftContainer {
+.left_container {
 	display: flex;
 	gap: 8px;
 }
 
-.rightContainer {
+.right_container {
 	display: flex;
 	gap: 8px;
 }
@@ -52,9 +52,10 @@
 .dropdown {
 	border: 2px solid green;
 }
-.icmInfo{
+
+.icm_info {
+	padding-bottom: 4px;
+	margin-right: 4px;
+	font-size: 12px;
 	rotate: 180deg;
-	 font-size: 12px;
-	 margin-right: 4px;
-	 padding-bottom: 4px;
 }

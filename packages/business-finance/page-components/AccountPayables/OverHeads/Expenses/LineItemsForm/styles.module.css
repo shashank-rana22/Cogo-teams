@@ -31,7 +31,8 @@
 		.ui_table_body_cell:last-child {
 			width: 20px;
 		}
-		.ui_input_control{
+
+		.ui_input_control {
 			font-size: 12px !important;
 		}
 	}

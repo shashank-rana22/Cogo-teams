@@ -46,8 +46,8 @@ function VenderComponent() {
 	};
 
 	const renderHeaders = () => (
-		<div className={styles.headerContainer}>
-			<div className={styles.leftContainer}>
+		<div className={styles.header_container}>
+			<div className={styles.left_container}>
 				{
                 Object.keys(Controls).map((key) => {
                         	const { options = [], placeholder = '', value = '' } = Controls[key];
@@ -65,7 +65,7 @@ function VenderComponent() {
                     }
 
 			</div>
-			<div className={styles.rightContainer}>
+			<div className={styles.right_container}>
 				<Input
 					size="md"
 					placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID"
@@ -104,7 +104,7 @@ function VenderComponent() {
                 kycStatus === 'rejected'
 				&& (
 					<div className={styles.pending}>
-						<div className={styles.icmInfo}>
+						<div className={styles.icm_info}>
 							<IcMInfo
 								color="#e10d1f"
 							/>
@@ -118,7 +118,7 @@ function VenderComponent() {
 				}
 				{ kycStatus !== 'verified' && kycStatus !== 'rejected' && (
 					<div className={styles.pending}>
-						<div className={styles.icmInfo}>
+						<div className={styles.icm_info}>
 							<IcMInfo
 								color="#e10d1f"
 							/>

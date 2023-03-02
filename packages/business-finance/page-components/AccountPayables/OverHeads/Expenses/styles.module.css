@@ -1,16 +1,16 @@
-.headerContainer {
+.header_container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 }
 
-.leftContainer {
+.left_container {
 	display: flex;
 	gap: 8px;
 }
 
-.rightContainer {
+.right_container {
 	display: flex;
 	gap: 8px;
 }
@@ -55,22 +55,22 @@
 	color: #e10d1f;
 }
 
-.segmentedControl {
+.segmented_control {
 	div {
 		font-family: Poppins;
 		font-weight: 600;
 	}
 }
 
-.dataContainer {
+.data_container {
 	display: flex;
 }
 
-.expensePeriodData {
+.expense_period_data {
 	width: 64%;
 }
 
-.recurringAmountData {
+.recurring_amount_data {
 	width: 90%;
 }
 
@@ -78,7 +78,7 @@
 	border-top: 1px solid #edd7a9;
 }
 
-.recurringButtons {
+.recurring_buttons {
 	width: 100%;
 	padding: 6px 11px;
 	font-size: 15px;

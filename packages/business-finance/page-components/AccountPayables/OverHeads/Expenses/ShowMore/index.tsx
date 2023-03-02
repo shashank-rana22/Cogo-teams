@@ -8,9 +8,9 @@ function ShowMore() {
 	return (
 		<div className={styles.container}>
 			{!moreData && (
-				<div className={styles.buttonContainer}>
+				<div className={styles.button_container}>
 					<button
-						className={styles.buttonStyle}
+						className={styles.button_style}
 						onClick={() => setMoreData(true)}
 					>
 						<div>Show more</div>
@@ -21,9 +21,9 @@ function ShowMore() {
 			)}
 
 			<div className={moreData
-				? styles.moreDataContainer : `${styles.moreDataContainer} ${styles.moreDataContainerClose}`}
+				? styles.more_data_container : `${styles.more_data_container} ${styles.more_data_container_close}`}
 			>
-				<div className={styles.dataDiv}>
+				<div className={styles.data_div}>
 					<div className={styles.section}>
 						<div>TDS</div>
 						<div className={styles.element}>INR XXX</div>
@@ -49,9 +49,9 @@ function ShowMore() {
 						<div className={styles.element}>XXXXX</div>
 					</div>
 				</div>
-				<div className={styles.buttonContainer}>
+				<div className={styles.button_container}>
 					<button
-						className={styles.buttonStyle}
+						className={styles.button_style}
 						onClick={() => setMoreData(false)}
 					>
 						<div>Show less</div>

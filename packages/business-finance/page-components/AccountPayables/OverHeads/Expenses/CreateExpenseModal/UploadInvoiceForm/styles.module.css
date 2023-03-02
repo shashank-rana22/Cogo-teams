@@ -3,7 +3,7 @@
 	justify-content: space-around;
 }
 
-.uploadInvoice {
+.upload_invoice {
 	width: 40%;
 	height: 400px;
 	overflow: scroll;
@@ -11,13 +11,13 @@
 	border-radius: 8px;
 }
 
-.lineItem {
+.line_item {
 	width: 58%;
-	border:none;
+	border: none;
 }
 
-.confirm{
+.confirm {
 	display: flex;
-    justify-content: end;
-    margin: 64px 20px 0px 0px;
+	justify-content: end;
+	margin: 64px 20px 0 0;
 }

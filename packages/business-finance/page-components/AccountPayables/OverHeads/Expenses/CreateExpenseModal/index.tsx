@@ -35,7 +35,7 @@ function CreateExpenseModal({
 	return (
 		<Modal size="fullscreen" show={showModal} onClose={() => setShowModal(false)} placement="center">
 			<Modal.Header title={`CREATE EXPENSE - ${headerTitle}`} />
-			<Modal.Body className={styles.modalData}>
+			<Modal.Body className={styles.modal_data}>
 				<div>
 					<Timeline active={active} timeline={timeline} />
 				</div>

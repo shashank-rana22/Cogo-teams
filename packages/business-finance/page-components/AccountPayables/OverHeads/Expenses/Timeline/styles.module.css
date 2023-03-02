@@ -3,14 +3,14 @@
 	margin-left: 280px;
 }
 
-.fadedCircle {
+.faded_circle {
 	width: 24px;
 	height: 24px;
 	border: 2px solid #c6c6c6;
 	border-radius: 16px;
 }
 
-.borderedCircle {
+.bordered_circle {
 	width: 24px;
 	height: 24px;
 	border: 2px solid red;
@@ -23,18 +23,18 @@
 	border-top: 2px solid #c6c6c6;
 }
 
-.coloredLine {
+.colored_line {
 	width: 354px;
 	margin: 10px;
 	border-top: 2px solid #ed3726;
 }
 
-.timelineItem {
+.timeline_item {
 	margin-left: -40px;
 	color: #ed3726;
 }
 
-.fadedText {
+.faded_text {
 	margin-left: -40px;
 	color: #828282;
 }
@@ -45,7 +45,7 @@
 	padding-left: 10px;
 }
 
-.innerDiv {
+.inner_div {
 	display: flex;
 	width: 100%;
 }

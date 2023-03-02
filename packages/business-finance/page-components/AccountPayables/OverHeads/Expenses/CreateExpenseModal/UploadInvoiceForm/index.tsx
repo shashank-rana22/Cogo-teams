@@ -66,7 +66,7 @@ function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 					)}
 
 			</div>
-			<div className={`${styles.uploadInvoice} ${styles.lineItem}`}>
+			<div className={`${styles.upload_invoice} ${styles.line_item}`}>
 				<LineItemsForm />
 			</div>
 		</div>

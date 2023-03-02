@@ -71,7 +71,7 @@ function List({
 			)}
 			<div style={bodyStyles}>
 				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-					<div className={styles.cardContainer}>
+					<div className={styles.card_container}>
 						<CardColumn
 							fields={fields}
 							itemStyles={itemStyles}

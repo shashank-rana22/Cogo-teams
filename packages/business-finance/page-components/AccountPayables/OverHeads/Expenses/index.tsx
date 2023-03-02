@@ -42,9 +42,9 @@ function ExpenseComponent() {
 	};
 
 	const renderHeaders = () => (
-		<div className={styles.headerContainer}>
-			<div className={styles.leftContainer}>
-				<div className={styles.segmentedControl}>
+		<div className={styles.header_container}>
+			<div className={styles.left_container}>
+				<div className={styles.segmented_control}>
 					<SegmentedControl
 						options={OPTIONS}
 						activeTab={recurringState}
@@ -55,7 +55,7 @@ function ExpenseComponent() {
 				</div>
 
 			</div>
-			<div className={styles.rightContainer}>
+			<div className={styles.right_container}>
 				<Input
 					size="md"
 					placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID"
@@ -90,8 +90,8 @@ function ExpenseComponent() {
 			</Button>
 		),
 		renderExpensePeriod: (itemData) => (
-			<div className={styles.dataContainer}>
-				<div className={styles.expensePeriodData}>
+			<div className={styles.data_container}>
+				<div className={styles.expense_period_data}>
 					{' '}
 					{itemData?.expensePeriod}
 				</div>
@@ -101,8 +101,8 @@ function ExpenseComponent() {
 			</div>
 		),
 		renderRecurringAmount: (itemData) => (
-			<div className={styles.dataContainer}>
-				<div className={styles.recurringAmountData}>
+			<div className={styles.data_container}>
+				<div className={styles.recurring_amount_data}>
 					{' '}
 					{itemData?.recurringAmount}
 				</div>
