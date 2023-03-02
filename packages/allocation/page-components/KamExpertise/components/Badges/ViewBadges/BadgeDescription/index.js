@@ -24,11 +24,11 @@ function BadgeDescription() {
 		return (
 			<div className={styles.card}>
 				<p className={styles.heading}>
-					<Placeholder width="160px" height="20px" />
+					<Placeholder width="160px" height="20px" style={{ marginTop: '8px' }} />
 				</p>
 				<div className={styles.main_container}>
 					<div className={styles.badge_container}>
-						<Placeholder width="140px" height="180px" />
+						<Placeholder width="140px" height="180px" style={{ marginTop: '8px' }} />
 					</div>
 
 					<div className={styles.matter_container}>
@@ -64,7 +64,7 @@ function BadgeDescription() {
 
 				{Badge.type !== 'Mastery' && (
 					<div>
-						<Placeholder width="240px" height="20px" />
+						<Placeholder width="240px" height="20px" style={{ marginTop: '16px', marginBottom: '16px' }} />
 
 					</div>
 				)}

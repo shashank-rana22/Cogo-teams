@@ -12,7 +12,6 @@ import CreateMastery from './CreateMastery';
 import Header from './Header';
 import MasteryListItem from './MasteryListItem';
 import styles from './styles.module.css';
-import BadgeDescription from './ViewBadges/BadgeDescription';
 
 function Badges() {
 	const emptyList = [];
@@ -91,8 +90,6 @@ function Badges() {
 					)
 
 			}
-
-			<div><BadgeDescription /></div>
 
 		</section>
 	);
