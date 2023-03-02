@@ -6,14 +6,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	font-family: Poppins;
-font-size: 20px;
-font-weight: 600;
-line-height: 30px;
-letter-spacing: 0em;
-text-align: left;
-margin: 0.5% 0 0.5% 0;
-
+	margin: 0.5% 0;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 30px;
+	text-align: left;
+	letter-spacing: 0;
 
 	@media (min-width: 768px) {
 		font-size: 1rem;
@@ -42,9 +40,10 @@ margin: 0.5% 0 0.5% 0;
 		}
 	}
 }
-.questions_tag{ 
-background: white;
-   border: 1px solid #FFE4AF;
-    border-radius: 16px; 
-    font-weight: 600;
+
+.questions_tag {
+	font-weight: 600;
+	background: white;
+	border: 1px solid #ffe4af;
+	border-radius: 16px;
 }

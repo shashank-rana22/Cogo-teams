@@ -166,3 +166,8 @@ export const FEEDBACK_MAPPING = {
 	true  : 'liked',
 	false : 'disliked',
 };
+
+export const ACCOUNT_TYPE = {
+	importer_exporter : 'Importer/Exporter',
+	service_provider  : 'Service Provider',
+};
