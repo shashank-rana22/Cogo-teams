@@ -111,22 +111,25 @@ function FeedbackForms({
 	const loadArr = [1, 2, 3, 4, 5];
 
 	useEffect(() => {
-		if (action === 'show' || !!feedback_id) {
-			const pastRating = {};
+		if (!isEmpty(formData)) {
+			if (action === 'show' || !!feedback_id) {
+				const pastRating = {};
 
-			(form_responses || []).forEach((res) => {
-				pastRating[res.id] = {
-					rating   : res.rating?.toString(),
-					feedback : res.feedback,
-				};
-			});
+				(form_responses || []).forEach((res) => {
+					pastRating[res.id] = {
+						rating   : res.rating?.toString(),
+						feedback : res.feedback,
+					};
+				});
 
-			setQuestionsToShow(form_responses);
-			setComment(feedback_data.feedback);
-			setRating(pastRating);
-			return;
+				setQuestionsToShow(form_responses);
+				setComment(feedback_data.feedback);
+				setRating(pastRating);
+				return;
+			}
+			setQuestionsToShow(form_questions);
 		}
-		setQuestionsToShow(form_questions);
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formData]);
 

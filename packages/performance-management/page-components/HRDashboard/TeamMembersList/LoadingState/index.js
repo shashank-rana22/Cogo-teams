@@ -1,10 +1,11 @@
 import { Placeholder } from '@cogoport/components';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
 function LoadingState({ columns, source = 'hr_dashboard' }) {
 	const loadArr = [1, 2, 3, 4];
-	const paddingSize = { hr_dashboard: '16px', manager_dashboard: '12px' };
+	const paddingSize = { hr_dashboard: '16px 24px', manager_dashboard: '10px 24px' };
 
 	return (
 		<div className={styles.loading_item}>
@@ -32,9 +33,19 @@ function LoadingState({ columns, source = 'hr_dashboard' }) {
 								</div>
 							);
 						})}
-					</div>
 
+						{source === 'hr_dashboard' && (
+							<Placeholder
+								width="100px"
+								height="24px"
+								style={{ borderRadius: '4px' }}
+							/>
+						)}
+
+					</div>
+					<div style={{ visibility: 'hidden' }}><IcMArrowRotateDown /></div>
 				</div>
+
 			))}
 		</div>
 	);
