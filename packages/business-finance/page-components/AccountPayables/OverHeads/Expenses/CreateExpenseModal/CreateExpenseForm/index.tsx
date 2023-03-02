@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import ExpenseDetailsForm from '../ExpenseDetailsForm';
+import NonRecurringSummary from '../NonRecurringSummary';
+import RecurringSummary from '../RecurringSummary';
 import UploadInvoiceForm from '../UploadInvoiceForm';
 
 interface Props {
@@ -9,11 +11,11 @@ interface Props {
 }
 
 function CreateExpenseForm({ active, createExpenseType }:Props) {
-	const [recurringFilters, setRecurringFilters] = useState({
+	const [recurringData, setRecurringData] = useState({
 		repeatEvery: 'week',
 	});
 
-	const [nonRecurringFilters, setNonRecurringFilters] = useState({
+	const [nonRecurringData, setNonRecurringData] = useState({
 	});
 
 	return (
@@ -21,17 +23,26 @@ function CreateExpenseForm({ active, createExpenseType }:Props) {
 			{active === 'Expense Details'
 			&& (
 				<ExpenseDetailsForm
-					filters={createExpenseType === 'recurring' ? recurringFilters : nonRecurringFilters}
-					setFilters={createExpenseType === 'recurring' ? setRecurringFilters : setNonRecurringFilters}
+					formData={createExpenseType === 'recurring' ? recurringData : nonRecurringData}
+					setFormData={createExpenseType === 'recurring' ? setRecurringData : setNonRecurringData}
 					createExpenseType={createExpenseType}
 				/>
 			)}
 			{active === 'Upload Invoice' && (
 				<UploadInvoiceForm
-					filters={createExpenseType === 'recurring' ? recurringFilters : nonRecurringFilters}
-					setFilters={createExpenseType === 'recurring' ? setRecurringFilters : setNonRecurringFilters}
+					formData={createExpenseType === 'recurring' ? recurringData : nonRecurringData}
+					setFormData={createExpenseType === 'recurring' ? setRecurringData : setNonRecurringData}
 					createExpenseType={createExpenseType}
 				/>
+			)}
+			{ active === 'Final Confirmation' && (
+				<div>
+					{createExpenseType === 'recurring' ? <RecurringSummary /> : (
+						<NonRecurringSummary
+							nonRecurringData={nonRecurringData}
+						/>
+					)}
+				</div>
 			)}
 		</div>
 	);

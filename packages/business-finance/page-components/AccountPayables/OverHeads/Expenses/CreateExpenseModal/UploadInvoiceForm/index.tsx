@@ -13,14 +13,14 @@ interface FilterInterface {
 	repeatEvery?:string
 }
 interface Props {
-	filters:FilterInterface,
-	setFilters:(p:object) => void,
+	formData:FilterInterface,
+	setFormData:(p:object) => void,
 	createExpenseType:string
 }
 
-function UploadInvoiceForm({ filters, setFilters, createExpenseType }:Props) {
+function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
-	const uploadUrl = filters?.uploadedInvoice;
+	const uploadUrl = formData?.uploadedInvoice;
 
 	let uploadControls;
 	if (createExpenseType === 'recurring') {
@@ -36,8 +36,8 @@ function UploadInvoiceForm({ filters, setFilters, createExpenseType }:Props) {
 					<>
 						<Filter
 							controls={uploadControls()}
-							filters={filters}
-							setFilters={setFilters}
+							filters={formData}
+							setFilters={setFormData}
 						/>
 						{uploadUrl &&	(
 							<div className={styles.confirm}>
@@ -55,7 +55,7 @@ function UploadInvoiceForm({ filters, setFilters, createExpenseType }:Props) {
 						<div>
 							<div style={{ margin: '64px 20px 0px 20px' }}>
 								<object
-									data={filters?.uploadedInvoice}
+									data={formData?.uploadedInvoice}
 									type="application/pdf"
 									height="850px"
 									width="100%"

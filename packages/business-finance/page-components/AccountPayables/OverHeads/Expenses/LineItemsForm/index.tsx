@@ -2,6 +2,7 @@ import { useFieldArray, useForm } from '@cogoport/forms';
 import React from 'react';
 
 import StyledTable from '../../../../commons/StyledTable';
+import usePostListItemTaxes from '../hooks/usePostItemTaxes';
 
 import lineItemColumns from './coulmns';
 import styles from './styles.module.css';
@@ -15,11 +16,18 @@ function LineItemsForm() {
 		name: 'line_items',
 	});
 
+	const { lineItemsData, loading } = usePostListItemTaxes();
+
 	const watchFieldArray = watch('line_items');
 	const controlledFields = fields.map((field, index) => ({
 		...field,
 		...watchFieldArray[index],
 	}));
+
+	const totalAmountBeforeTax = watchFieldArray?.reduce((acc, curr) => {
+		const amount = curr?.amount_before_tax;
+		return +acc + +amount;
+	}, 0);
 
 	return (
 		<form className={styles.container}>
@@ -28,7 +36,7 @@ function LineItemsForm() {
 				data={controlledFields}
 				style={{ margin: '0px' }}
 			/>
-			<TotalColumn append={append} />
+			<TotalColumn append={append} totalAmountBeforeTax={totalAmountBeforeTax} />
 			<TotalAfterTax />
 		</form>
 	);

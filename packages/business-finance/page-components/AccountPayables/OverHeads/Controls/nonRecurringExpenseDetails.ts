@@ -1,23 +1,40 @@
 import { startCase } from '@cogoport/utils';
 
-interface FiltersInterface {
+import { officeLocations } from '../utils/officeLocations';
+
+interface FormDataInterface {
 	registrationNumber?: string,
 }
 
 interface Props {
-	filters: FiltersInterface,
-	setFilters: (obj)=>void,
+	formData: FormDataInterface,
+	setFormData: (obj:any)=>void,
 	categoryOptions: object[],
 	subCategoryOptions:object[],
-	setCategoryOptions: (obj)=>void,
-	setSubCategoryOptions:(obj)=>void,
+	setCategoryOptions: (obj:any)=>void,
+	setSubCategoryOptions:(obj:any)=>void,
+	branchOptions: object,
+	setBranchOptions: (obj:any)=>void
+}
+
+interface ObjInt {
+	category?:string,
+	sub_category?:string,
+	cogoport_office_id?:string | number,
+}
+
+interface VendorObject {
+	services?: ObjInt[],
+	business_name?:string,
+	registration_number?:string | number,
 }
 
 export const nonRecurringExpenseDetails = ({
-	filters, setFilters,
-	categoryOptions, setCategoryOptions, subCategoryOptions, setSubCategoryOptions,
+	formData, setFormData,
+	categoryOptions, setCategoryOptions, subCategoryOptions, setSubCategoryOptions, branchOptions,
+	setBranchOptions,
 }:Props) => {
-	const handleVendorChange = (obj) => {
+	const handleVendorChange = (obj:VendorObject) => {
 		setCategoryOptions(obj?.services?.map((service) => (
 			{
 				label : startCase(service?.category)?.replaceAll('_', ' '),
@@ -29,8 +46,22 @@ export const nonRecurringExpenseDetails = ({
 			value : service?.sub_category,
 		})));
 
-		setFilters({
-			...filters,
+		const branchIds = obj?.services?.map((service) => service?.cogoport_office_id);
+
+		if (branchIds?.length > 0) {
+			const branches = [];
+			branchIds.forEach((id) => {
+				(officeLocations || []).forEach((location) => {
+					if (id === location.value) {
+						branches.push(location);
+					}
+				});
+			});
+			setBranchOptions([...branches]);
+		}
+
+		setFormData({
+			...formData,
 			vendorName         : obj?.business_name,
 			registrationNumber : obj?.registration_number,
 		});
@@ -41,19 +72,15 @@ export const nonRecurringExpenseDetails = ({
 			span    : 12,
 			groupBy : [
 				{
-					name           : 'cogoEntity',
-					label          : 'Cogo Entity*',
-					type           : 'select',
+					name           : 'vendorName',
+					label          : 'Vendor Name*',
+					type           : 'asyncSelect',
+					asyncKey       : 'list_vendors',
+					onChange       : (item, obj) => handleVendorChange(obj),
 					multiple       : false,
 					defaultOptions : false,
-					placeholder    : 'Entity',
+					placeholder    : 'Vendor name',
 					span           : 2,
-					options        : [
-						{ value: '101', label: '101 - Cogo pvt ltd' },
-						{ value: '201', label: '201 - Cogo pvt ltd' },
-						{ value: '301', label: '301 - Cogo pvt ltd' },
-						{ value: '401', label: '401 - Cogo pvt ltd' },
-					],
 				},
 				{
 					name  : 'invoiceDate',
@@ -91,15 +118,19 @@ export const nonRecurringExpenseDetails = ({
 					],
 				},
 				{
-					name           : 'vendorName',
-					label          : 'Vendor Name*',
-					type           : 'asyncSelect',
-					asyncKey       : 'list_vendors',
-					onChange       : (item, obj) => handleVendorChange(obj),
+					name           : 'cogoEntity',
+					label          : 'Cogo Entity*',
+					type           : 'select',
 					multiple       : false,
 					defaultOptions : false,
-					placeholder    : 'Vendor name',
+					placeholder    : 'Entity',
 					span           : 2,
+					options        : [
+						{ value: '101', label: '101 - Cogo pvt ltd' },
+						{ value: '201', label: '201 - Cogo pvt ltd' },
+						{ value: '301', label: '301 - Cogo pvt ltd' },
+						{ value: '401', label: '401 - Cogo pvt ltd' },
+					],
 				},
 			],
 		},
@@ -110,7 +141,7 @@ export const nonRecurringExpenseDetails = ({
 					name        : 'registrationNumber',
 					label       : 'PAN',
 					type        : 'textarea',
-					value       : filters.registrationNumber || null,
+					value       : formData.registrationNumber || null,
 					style       : { borderRadius: '4px' },
 					placeholder : 'Autofilled PAN',
 					span        : 2,
@@ -143,12 +174,7 @@ export const nonRecurringExpenseDetails = ({
 					multiple       : false,
 					defaultOptions : false,
 					span           : 2,
-					options        : [
-						{ label: 'Mumbai', value: 'mumbai' },
-						{ label: 'Gurgaon - PDC', value: 'gurgaon-pdc' },
-						{ label: 'Gurgaon - Augusta Point', value: 'gurgaon-augusta-point' },
-						{ label: 'Others', value: 'others' },
-					],
+					options        : branchOptions,
 				},
 				{
 					name           : 'paymentMode',

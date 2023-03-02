@@ -5,14 +5,15 @@ import { nonRecurringExpenseDetails } from '../../../Controls/nonRecurringExpens
 import { recurringExpenseDetails } from '../../../Controls/recurringExpenseDetails';
 
 interface Props {
-	filters:object,
-	setFilters:(p: object) => void,
+	formData:object,
+	setFormData:(p: object) => void,
 	createExpenseType:string,
 }
 
-function ExpenseDetailsForm({ filters, setFilters, createExpenseType }:Props) {
+function ExpenseDetailsForm({ formData, setFormData, createExpenseType }:Props) {
 	const [categoryOptions, setCategoryOptions] = useState();
 	const [subCategoryOptions, setSubCategoryOptions] = useState();
+	const [branchOptions, setBranchOptions] = useState();
 
 	let expenseControls;
 	if (createExpenseType === 'recurring') {
@@ -25,15 +26,17 @@ function ExpenseDetailsForm({ filters, setFilters, createExpenseType }:Props) {
 		<div>
 			<Filter
 				controls={expenseControls({
-					filters,
-					setFilters,
+					formData,
+					setFormData,
 					categoryOptions,
 					setCategoryOptions,
 					subCategoryOptions,
 					setSubCategoryOptions,
+					branchOptions,
+					setBranchOptions,
 				})}
-				filters={filters}
-				setFilters={setFilters}
+				filters={formData}
+				setFilters={setFormData}
 			/>
 		</div>
 	);

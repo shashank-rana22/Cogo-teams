@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-function TotalColumn({ append }) {
+function TotalColumn({ append, totalAmountBeforeTax }) {
 	return (
 		<>
 			<div className={styles.flexend}>
@@ -20,7 +20,7 @@ function TotalColumn({ append }) {
 						TOTAL
 						AMOUNT
 					</span>
-					<span>200000</span>
+					<span>{totalAmountBeforeTax}</span>
 				</div>
 				<div className={`${styles.col}`} style={{ width: '16%' }}>
 					Tax

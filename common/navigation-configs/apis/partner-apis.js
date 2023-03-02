@@ -7169,6 +7169,12 @@ const partner = {
 			feature      : 'vendor',
 			service_name : 'vendor',
 		},
+		{
+			api         : 'post_common_tax_list_item_taxes',
+			access_type : 'private',
+			module      : 'overheads',
+			feature     : 'overheads',
+		},
 	],
 	my_incident: [
 		{

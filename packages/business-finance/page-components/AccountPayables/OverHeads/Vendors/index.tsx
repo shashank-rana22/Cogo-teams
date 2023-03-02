@@ -30,6 +30,7 @@ function VenderComponent() {
 		page        : 1,
 		pageLimit   : 10,
 	});
+
 	const [sort, setSort] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [dropdownId, setDropdownId] = useState(null);
