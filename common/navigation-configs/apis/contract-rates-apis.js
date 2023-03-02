@@ -708,6 +708,24 @@ const apis = [
 		feature      : 'contract_rates',
 		service_name : 'contract',
 	},
+	{
+		api          : 'list_contract_rail_domestic_additional_charges',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'create_contract_rail_domestic_additional_charge',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'delete_contract_rail_domestic_additional_charge',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
 ];
 
 export default apis;
