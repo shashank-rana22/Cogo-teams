@@ -431,6 +431,12 @@ const navigationMappingAdmin = {
 				as    : '/rate-management/air-customs',
 				type  : 'link',
 			},
+			{
+				title : 'Rails Domestic',
+				href  : '/rate-management/rails-domestic',
+				as    : '/rate-management/rails-domestic',
+				type  : 'link',
+			},
 		],
 		module_type: 'crm',
 	},
