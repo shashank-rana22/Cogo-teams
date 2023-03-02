@@ -22,7 +22,7 @@ function Filters({
 					{ children: 'Not Assigned', key: 'not_assigned' },
 					{ children: 'All', key: 'all' },
 				]}
-				selectedItems={[navStatus]}
+				selectedItems={navStatus}
 				onItemChange={(val) => setNavStatus(val)}
 			/>
 		</section>
