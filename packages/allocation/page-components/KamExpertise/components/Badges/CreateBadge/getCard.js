@@ -9,8 +9,6 @@ import styles from './styles.module.css';
 function GetCard(props) {
 	const { medalType, inputPlaceHolder, setScore, isLastItem, isBadgeEdit } = props;
 
-	
-
 	const [value, setValue] = useState();
 
 	return (
