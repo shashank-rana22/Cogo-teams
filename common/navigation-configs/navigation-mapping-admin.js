@@ -768,7 +768,7 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-coe_finance',
 				title         : ' COE Finance',
-				href          : '/v2/business-finance/coe-finance/dashboard',
+				href          : '/v2/business-finance/coe-finance/[active_tab]',
 				as            : '/v2/business-finance/coe-finance/dashboard',
 				icon          : IcMProductCodeMapping,
 				main_apis     : [],
