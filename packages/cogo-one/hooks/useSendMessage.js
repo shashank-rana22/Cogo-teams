@@ -3,6 +3,8 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import { COGOVERSE_USER_ID } from '../constants/IDS_CONSTANTS';
+
 const useSendMessage = ({ channel_type = '' }) => {
 	const API_MAPPING = {
 		whatsapp      : 'create_communication',
@@ -28,6 +30,14 @@ const useSendMessage = ({ channel_type = '' }) => {
 		organization_id = null,
 		lead_user_id = null,
 	}) => {
+		let service = 'user';
+		let service_id = COGOVERSE_USER_ID;
+		if (user_id) {
+			service_id = user_id;
+		} else if (!user_id && lead_user_id) {
+			service = 'lead_user';
+			service_id = lead_user_id;
+		}
 		try {
 			await trigger({
 				data: {
@@ -36,8 +46,8 @@ const useSendMessage = ({ channel_type = '' }) => {
 					message_metadata,
 					user_id,
 					organization_id,
-					service        : 'user',
-					service_id     : (user_id || lead_user_id),
+					service,
+					service_id,
 					source         : 'CogoOne:AdminPlatform',
 					lead_user_id,
 					sender         : id,
