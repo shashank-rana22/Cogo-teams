@@ -1,10 +1,12 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMUpload } from '@cogoport/icons-react';
 import React from 'react';
 
-import Layout from '../../../commons/Layout';
-import useCreateShipmentDocument from '../../../hooks/useCreateShipmentDocument';
+import Layout from '../../commons/Layout';
+import useCreateShipmentDocument from '../../hooks/useCreateShipmentDocument';
+
+import styles from './styles.module.css';
 
 const controls = [
 	{
@@ -16,9 +18,7 @@ const controls = [
 		placeholder : 'Remarks',
 		rows        : 3,
 		style       : { height: '120px', border: '1px solid #BDBDBD', borderRadius: 4 },
-		rules       : {
-			required: 'Remarks is Required',
-		},
+
 	},
 	{
 		name       : 'document',
@@ -35,14 +35,11 @@ const controls = [
 		rules      : { required: true },
 	},
 ];
-function Upload({ showUpload, setShowUpload, listAPi }) {
+function UploadModal({ showUpload, setShowUpload, listAPi }) {
 	const { control, handleSubmit, formState: { errors } } = useForm();
 	const { loading, createDocument } = useCreateShipmentDocument();
 	const onSubmit = (formValues) => {
-		console.log('showUpload', showUpload);
-
 		const fileArr = formValues.document.split('/');
-
 		const payload = {
 			shipment_id         : showUpload?.shipmentId,
 			uploaded_by_org_id  : showUpload?.serviceProviderId,
@@ -60,6 +57,7 @@ function Upload({ showUpload, setShowUpload, listAPi }) {
 				document_number : showUpload?.awbNumber,
 				service_id      : showUpload?.serviceId,
 				service_type    : 'air_freight_service',
+				document_url    : formValues.document || undefined,
 			},
 			documents: [
 				{
@@ -69,6 +67,7 @@ function Upload({ showUpload, setShowUpload, listAPi }) {
 						document_number : showUpload?.awbNumber,
 						service_id      : showUpload?.serviceId,
 						service_type    : 'air_freight_service',
+						document_url    : formValues.document || undefined,
 					},
 					document_type : 'draft_airway_bill',
 					document_url  : formValues.document || undefined,
@@ -81,17 +80,28 @@ function Upload({ showUpload, setShowUpload, listAPi }) {
 	};
 	return (
 		<div>
-			<Layout fields={controls} errors={errors} control={control} />
-			<Button
-				style={{ marginLeft: 'auto' }}
-				onClick={handleSubmit(onSubmit)}
-				disabled={loading}
+			<Modal
+				show={showUpload}
+				onClose={() => { setShowUpload(null); }}
+				scroll={false}
+				size="md"
+				className={styles.modal_container}
 			>
-				Upload
-
-			</Button>
+				<Modal.Header title={(<h5>Upload Airway Bill</h5>)} style={{ paddingBottom: 0 }} />
+				<Modal.Body>
+					<Layout fields={controls} errors={errors} control={control} />
+					<Button
+						style={{ margin: '20px 0 0 auto' }}
+						onClick={handleSubmit(onSubmit)}
+						disabled={loading}
+						themeType="accent"
+					>
+						Upload
+					</Button>
+				</Modal.Body>
+			</Modal>
 		</div>
 	);
 }
 
-export default Upload;
+export default UploadModal;

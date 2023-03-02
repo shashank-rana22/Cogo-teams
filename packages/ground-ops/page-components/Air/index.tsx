@@ -41,7 +41,10 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 		setActiveTab(view);
 	};
 
-	const { data, loading, setPage, listAPi, searchValue, setSearchValue } = useListShipmentPendingTasks({ activeTab });
+	const {
+		data, loading, page,
+		setPage, listAPi, searchValue, setSearchValue,
+	} = useListShipmentPendingTasks({ activeTab });
 
 	useEffect(() => {
 		listAPi({ filter: filters });
@@ -101,6 +104,7 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 					setItem={setItem}
 					setViewDoc={setViewDoc}
 					setEdit={setEdit}
+					page={page}
 					setPage={setPage}
 					listAPi={listAPi}
 				/>

@@ -52,8 +52,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 					},
 					...filter,
 					...payload[activeTab],
-					page,
-					sort_type: 'desc',
+					pageIndex: page,
 				},
 			});
 		} catch (err) {
@@ -65,6 +64,10 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 		debounceQuery(searchValue);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
+
+	useEffect(() => {
+		setPage(1);
+	}, [activeTab]);
 
 	useEffect(() => {
 		listAPi({});

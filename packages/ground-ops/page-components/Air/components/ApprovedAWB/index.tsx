@@ -1,11 +1,15 @@
 import { Button } from '@cogoport/components';
 import { IcMDownload, IcMEdit } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { ApprovedAWBFields } from '../../configurations/approved_awb';
+import UploadModal from '../UploadModal';
 
-function ApprovedAWB({ data, loading, setPage, setGenerate, setItem, setViewDoc, setEdit }) {
+function ApprovedAWB({
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi,
+}) {
+	const [showUpload, setShowUpload] = useState(null);
 	const { fields } = ApprovedAWBFields;
 
 	const handleDownloadMAWB = (singleItem) => {
@@ -19,12 +23,20 @@ function ApprovedAWB({ data, loading, setPage, setGenerate, setItem, setViewDoc,
 		setItem(singleItem);
 	};
 
+	const handleClickOnDownload = (documentUrl) => {
+		if (typeof window !== 'undefined') {
+			window.open(documentUrl, '_blank');
+		}
+	};
+
 	const functions = {
 		handleDownload: (singleItem:any) => (
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={() => { handleDownloadMAWB(singleItem); }}
+				onClick={singleItem?.documentData?.status === 'uploaded'
+					? () => { handleClickOnDownload(singleItem.documentUrl); }
+					: () => { handleDownloadMAWB(singleItem); }}
 			>
 				<IcMDownload fill="#8B8B8B" />
 
@@ -34,7 +46,9 @@ function ApprovedAWB({ data, loading, setPage, setGenerate, setItem, setViewDoc,
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={() => { handleEditMAWB(singleItem, 'edit'); }}
+				onClick={singleItem?.documentData?.status === 'uploaded'
+					? () => { setShowUpload(singleItem); }
+					: () => { handleEditMAWB(singleItem, 'edit'); }}
 			>
 				<IcMEdit fill="#8B8B8B" />
 			</Button>
@@ -43,13 +57,17 @@ function ApprovedAWB({ data, loading, setPage, setGenerate, setItem, setViewDoc,
 	};
 
 	return (
-		<List
-			fields={fields}
-			data={data}
-			setPage={setPage}
-			loading={loading}
-			functions={functions}
-		/>
+		<>
+			<List
+				fields={fields}
+				data={data}
+				page={page}
+				setPage={setPage}
+				loading={loading}
+				functions={functions}
+			/>
+			<UploadModal showUpload={showUpload} setShowUpload={setShowUpload} listAPi={listAPi} />
+		</>
 	);
 }
 

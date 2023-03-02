@@ -12,7 +12,7 @@
 	border-radius: 8px;
 }
 
-.paginations {
+.pagination {
 	display: flex;
 	justify-content: end;
 	padding: 16px;

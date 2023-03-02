@@ -5,16 +5,18 @@ import React, { useState } from 'react';
 import List from '../../commons/List';
 import { ApprovalPendingFields } from '../../configurations/approval_pending_fields';
 import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
+import UploadModal from '../UploadModal';
 
 import DownloadModal from './DownloadModal';
 import styles from './styles.module.css';
 
 function ApprovalPending({
-	data, loading, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi,
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi,
 }) {
 	const { fields } = ApprovalPendingFields;
 	const [showApprove, setShowApprove] = useState(null);
 	const [show, setShow] = useState(false);
+	const [showUpload, setShowUpload] = useState(null);
 
 	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();
 
@@ -27,6 +29,12 @@ function ApprovalPending({
 		setEdit(action || true);
 		setGenerate(true);
 		setItem(singleItem);
+	};
+
+	const handleClickOnDownload = (documentUrl) => {
+		if (typeof window !== 'undefined') {
+			window.open(documentUrl, '_blank');
+		}
 	};
 
 	const handleUpdate = async (values) => {
@@ -54,7 +62,9 @@ function ApprovalPending({
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={() => { handleDownloadMAWB(singleItem); }}
+				onClick={singleItem?.documentData?.status === 'uploaded'
+					? () => { handleClickOnDownload(singleItem.documentUrl); }
+					: () => { handleDownloadMAWB(singleItem); }}
 			>
 				<IcMDownload fill="#8B8B8B" />
 
@@ -64,7 +74,9 @@ function ApprovalPending({
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={() => { handleEditMAWB(singleItem, 'edit'); }}
+				onClick={singleItem?.documentData?.status === 'uploaded'
+					? () => { setShowUpload(singleItem); }
+					: () => { handleEditMAWB(singleItem, 'edit'); }}
 			>
 				<IcMEdit fill="#8B8B8B" />
 			</Button>
@@ -98,6 +110,7 @@ function ApprovalPending({
 				fields={fields}
 				data={data}
 				loading={loading}
+				page={page}
 				setPage={setPage}
 				functions={functions}
 			/>
@@ -135,6 +148,8 @@ function ApprovalPending({
 					</Modal.Footer>
 				</Modal>
 			)}
+			<UploadModal showUpload={showUpload} setShowUpload={setShowUpload} listAPi={listAPi} />
+			;
 		</>
 	);
 }

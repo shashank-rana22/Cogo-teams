@@ -32,9 +32,11 @@ function Item(props) {
 
 	return (
 		<div className={styles.element} style={{ width: `${flex}%`, padding: '4px' }}>
-			<div style={{
-				height: '16px', marginBottom: '6px', fontWeight: '600', fontSize: '13px',
-			}}
+			<div
+				className="heading"
+				style={{
+					height: '16px', marginBottom: '6px', fontWeight: '600', fontSize: '13px',
+				}}
 			>
 				{heading}
 			</div>
