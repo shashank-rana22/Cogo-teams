@@ -3,7 +3,7 @@
   transition: 0.35s;
   &:hover {
     box-shadow: 0 0 11px rgba(24, 23, 23, 0.5); 
-   
+    background-color: #ffffff;
   }
 }
 
