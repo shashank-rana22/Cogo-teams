@@ -24,7 +24,7 @@ function Badges() {
 
 	const [window, setWindow] = useState(1);
 
-	const { list:badgeList } = useBadgeConfigurationList();
+	const { loading, list:badgeList } = useBadgeConfigurationList();
 
 	return (
 		<section className={styles.main_container}>
@@ -49,10 +49,9 @@ function Badges() {
 					/>
 				</div>
 			</section>
-
 			{
-				// Todo: add isEmpty and !loading condition for emptyState
-				!isEmpty(emptyList) ? (
+
+				(isEmpty(badgeList) && !loading) ? (
 					<div style={{
 						padding         : '60px 0',
 						height          : '400px',
@@ -69,9 +68,13 @@ function Badges() {
 							{
 								(window === 1)
 			&&	badgeList?.map(((data, index) => (
-				<BadgeListItem data={data} index={index} />
+				<BadgeListItem data={data} index={index} loading={loading} />
 			)))
+
 							}
+
+							{/* <MasteryListItem /> */}
+
 							{
 			(window === 2) && (
 				<div>

@@ -4,6 +4,7 @@
     border-radius: 6px;
     margin-top: 100px; /* just for the time being all badge list are together  in one page */
     padding: 18px 20px;
+    /* height: 440px; */
 }
 
 .heading {
@@ -24,6 +25,7 @@
 
 .badge_container {
     margin: 20px 40px 20px 0;
+    width: 30%;
 }
 
 .stars_container {
@@ -36,6 +38,7 @@
     flex-direction: column;
     margin: 20px 40px 20px 0;
     justify-content: space-between;
+    width: 60%;
 }
 
 .lable_value {
@@ -50,6 +53,7 @@
 .lable_value_container {
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 .next_badge {
     display: flex;

@@ -1,16 +1,11 @@
 import { Button, Placeholder } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
-// import { useState } from 'react';
-
 import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
 
-function BadgeListItem({ data, index }) {
-	//
-	// !(loading) true/false
-	//
-	if (false) {
+function BadgeListItem({ data, index, loading }) {
+	if (loading) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.number_tag}>
@@ -78,7 +73,9 @@ function BadgeListItem({ data, index }) {
 			</div>
 		);
 	}
+
 	const { badge_details = [] } = data;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.number_tag}>
@@ -132,7 +129,7 @@ function BadgeListItem({ data, index }) {
 								<BadgeCard
 									medalType={startCase(badge.medal)}
 									score={badge.score}
-									image_url={badge.image_url}
+									img_url={badge.image_url}
 									isLast={i === badge_details.length - 1}
 								/>
 							))
