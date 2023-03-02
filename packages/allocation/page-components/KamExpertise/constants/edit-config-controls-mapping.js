@@ -235,6 +235,42 @@ const EDIT_CONFIG_CONTROLS_MAPPING = {
 
 		},
 
+	score_added_first_export:
+		{
+			name        : 'score_added_first_export',
+			type        : 'number',
+			label       : 'Score credited on first export',
+			placeholder : 'Enter Score',
+
+		},
+
+	score_added_subsequent_export:
+		{
+			name        : 'score_added_subsequent_export',
+			type        : 'number',
+			label       : 'Score credited on subsequent export',
+			placeholder : 'Enter Score',
+
+		},
+
+	score_added_first_domestic:
+		{
+			name        : 'score_added_first_domestic',
+			type        : 'number',
+			label       : 'Score credited on first export',
+			placeholder : 'Enter Score',
+
+		},
+
+	score_added_subsequent_domestic:
+		{
+			name        : 'score_added_subsequent_domestic',
+			type        : 'number',
+			label       : 'Score credited on subsequent export',
+			placeholder : 'Enter Score',
+
+		},
+
 	shipment_mode_drop:
 		{
 			name    : 'shipment_type_drop',
