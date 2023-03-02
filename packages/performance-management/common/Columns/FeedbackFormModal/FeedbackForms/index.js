@@ -20,7 +20,7 @@ import styles from './styles.module.css';
 function FeedbackForms({
 	action = '',
 	item = {},
-	showForm = false,
+	showForm = '',
 	feedback_id = '',
 	setShowForm = () => {},
 	userId = '',
@@ -114,9 +114,9 @@ function FeedbackForms({
 		if (action === 'show' || !!feedback_id) {
 			const pastRating = {};
 
-			form_responses.forEach((res) => {
+			(form_responses || []).forEach((res) => {
 				pastRating[res.id] = {
-					rating   : res.rating.toString(),
+					rating   : res.rating?.toString(),
 					feedback : res.feedback,
 				};
 			});

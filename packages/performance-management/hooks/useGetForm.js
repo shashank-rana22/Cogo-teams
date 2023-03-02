@@ -10,8 +10,11 @@ const useGetForm = ({
 	const { month = '', year = '', department = '', designation = '', user_id = '' } = item;
 
 	const url = action === 'show' || !!feedback_id ? 'get_form_responses' : 'get_form';
-	const newDepartment = showForm === 'employed' ? department : startCase(showForm);
-	const newDesignation = showForm === 'employed' ? designation : startCase(showForm);
+
+	const formType = showForm === true ? undefined : startCase(showForm);
+
+	const newDepartment = showForm === 'employed' ? department : formType;
+	const newDesignation = showForm === 'employed' ? designation : formType;
 
 	const params = action === 'show' || !!feedback_id ? {
 		Month       : month || monthOptions[feedbackMonth].value,
