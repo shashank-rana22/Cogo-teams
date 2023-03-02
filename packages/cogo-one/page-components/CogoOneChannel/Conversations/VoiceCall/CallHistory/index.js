@@ -1,6 +1,10 @@
+import { Tooltip } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
+
 import styles from './styles.module.css';
 
-function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call = '' }) {
+function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call = '', dtmf_inputs = [] }) {
 	const ICON_MAPPING = {
 		user: {
 
@@ -19,8 +23,11 @@ function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call 
 	const endTime = end_time_of_call?.split(' ')?.[1];
 	const { start = '', end = '', compStyles = {} } = ICON_MAPPING[type] || {};
 
+	const conditionCheck = !isEmpty(dtmf_inputs) && type === 'user';
+
 	return (
 		<div>
+
 			<div className={styles.started} style={compStyles}>
 				<img src={start} alt="logo" />
 				<div className={styles.padding}>
@@ -32,17 +39,56 @@ function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call 
 					</div>
 				</div>
 			</div>
-			<div className={styles.started} style={compStyles}>
-				<img src={end} alt="logo" />
-				<div className={styles.padding}>
-					<div>
-						Audio call ended
-					</div>
-					<div>
-						{endTime}
+
+			<div className={styles.ended_call_div}>
+				<div className={styles.ended_call} style={compStyles}>
+					<img src={end} alt="logo" />
+					<div className={styles.padding}>
+						<div>
+							Audio call ended
+						</div>
+						<div>
+							{endTime}
+						</div>
 					</div>
 				</div>
+				{conditionCheck && (
+					<div className={styles.connected_ivr}>
+						<div className={styles.purpose}>
+							Connected to IVR
+						</div>
+						<div className={styles.info_icon}>
+							<Tooltip
+								content={(
+									<div className={styles.ivr_details}>
+
+										{(dtmf_inputs || []).map((item) => {
+											const [label = '', value = ''] = item.split(':');
+
+											return (
+												<div className={styles.details}>
+													{startCase(label)}
+													{' '}
+													:
+													{' '}
+													{startCase(value)}
+
+												</div>
+											);
+										})}
+									</div>
+								)}
+								placement="bottom"
+							>
+								<IcMInfo fill="#615f5f" />
+							</Tooltip>
+
+						</div>
+					</div>
+				)}
+
 			</div>
+
 		</div>
 	);
 }
