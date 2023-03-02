@@ -53,6 +53,8 @@
 
 	&:hover {
 		border: 1px solid #73be73;
+		transition: 0.3 ease-in-out;
+		transform: scale(1.05);
 	}
 }
 

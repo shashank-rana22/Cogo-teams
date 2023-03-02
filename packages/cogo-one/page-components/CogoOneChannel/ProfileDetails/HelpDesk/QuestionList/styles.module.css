@@ -35,14 +35,17 @@
 
 .question {
 	padding: 10px;
-	margin: 5px 15px 0 10px;
+	margin: 10px 15px 0 10px;
 	font-size: 13px;
 	cursor: pointer;
-	border: 1px solid #e0e0e0;
+	background: #fff;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+	transition: 0.3s ease-in-out;
 
 	&:hover {
 		background: #f8f2e7;
 		transition: 0.3s;
+		transform: scale(1.05);
 
 		.right_icon {
 			transition: 0.3s ease-in-out;
