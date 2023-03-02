@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -8,7 +9,11 @@ const useListDepartments = () => {
 	}, { manual: true });
 
 	const getListDepartments = () => {
-		trigger();
+		try {
+			trigger();
+		} catch (e) {
+			Toast.error(e.response.data.error?.toString());
+		}
 	};
 
 	useEffect(() => {

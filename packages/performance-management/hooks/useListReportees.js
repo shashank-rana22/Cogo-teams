@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
@@ -18,7 +19,11 @@ const useListReportees = ({
 	}, { manual: false });
 
 	const fetchReportees = async () => {
-		await trigger({ params });
+		try {
+			await trigger({ params });
+		} catch (e) {
+			Toast.error(e.response.data.error?.toString());
+		}
 	};
 	const setPage = (p) => { setParams({ ...params, Page: p }); };
 

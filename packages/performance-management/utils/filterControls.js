@@ -4,22 +4,20 @@ const useGetControls = ({ name = 'manager' }) => {
 
 	const control = [
 		{
-			label          : 'Manager Name',
-			name           : 'manager_name',
-			placeholder    : 'Search Manager...',
-			type           : 'input',
-			defaultOptions : true,
-			isClearable    : true,
-			span           : 5.5,
+			label       : 'Manager Name',
+			name        : 'manager_name',
+			placeholder : 'Search Manager...',
+			type        : 'input',
+			isClearable : true,
+			span        : 5.5,
 		},
 		{
-			name           : 'rating',
-			label          : 'Rating',
-			type           : 'select',
-			defaultOptions : true,
-			isClearable    : true,
-			placeholder    : 'Select..',
-			options        : [
+			name        : 'rating',
+			label       : 'Rating',
+			type        : 'select',
+			isClearable : true,
+			placeholder : 'Select..',
+			options     : [
 				{ label: '1', value: 1 },
 				{ label: '2', value: 2 },
 				{ label: '3', value: 3 },
@@ -29,13 +27,12 @@ const useGetControls = ({ name = 'manager' }) => {
 			span: 4.5,
 		},
 		{
-			name           : 'created_at_month',
-			label          : 'Select Month',
-			type           : 'select',
-			defaultOptions : true,
-			isClearable    : true,
-			placeholder    : 'Month',
-			options        : [
+			name        : 'created_at_month',
+			label       : 'Select Month',
+			type        : 'select',
+			isClearable : true,
+			placeholder : 'Month',
+			options     : [
 				{ label: 'January', value: 1 },
 				{ label: 'February', value: 2 },
 				{ label: 'March', value: 3 },
@@ -52,13 +49,12 @@ const useGetControls = ({ name = 'manager' }) => {
 			span: 5,
 		},
 		{
-			name           : 'created_at_year',
-			label          : 'Select Year',
-			type           : 'select',
-			defaultOptions : true,
-			isClearable    : true,
-			placeholder    : 'Year',
-			options        : [
+			name        : 'created_at_year',
+			label       : 'Select Year',
+			type        : 'select',
+			isClearable : true,
+			placeholder : 'Year',
+			options     : [
 				{ label: `${year}`, value: year },
 				{ label: `${year - 1}`, value: year - 1 },
 				{ label: `${year - 2}`, value: year - 2 },

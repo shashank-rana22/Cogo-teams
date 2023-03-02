@@ -7,13 +7,12 @@ const getMonthControls = (selectedYear, selectedMonth) => {
 
 	const controls = [
 		{
-			name           : 'year',
-			label          : 'Select Year',
-			type           : 'select',
-			defaultOptions : true,
-			isClearable    : !selectedMonth,
-			placeholder    : 'Year',
-			options        : [
+			name        : 'year',
+			label       : 'Select Year',
+			type        : 'select',
+			isClearable : !selectedMonth,
+			placeholder : 'Year',
+			options     : [
 				{ label: `${year}`, value: year },
 				{ label: `${year - 1}`, value: year - 1 },
 				{ label: `${year - 2}`, value: year - 2 },
@@ -21,24 +20,22 @@ const getMonthControls = (selectedYear, selectedMonth) => {
 			span: 6,
 		},
 		{
-			name           : 'month',
-			label          : 'Select Month',
-			type           : 'select',
-			defaultOptions : true,
-			isClearable    : true,
-			disabled       : !selectedYear,
-			placeholder    : 'Month',
-			options        : monthOptions,
-			span           : 6,
+			name        : 'month',
+			label       : 'Select Month',
+			type        : 'select',
+			isClearable : true,
+			disabled    : !selectedYear,
+			placeholder : 'Month',
+			options     : monthOptions,
+			span        : 6,
 		},
 		{
-			name           : 'rating',
-			label          : 'Rating',
-			placeholder    : 'Rating',
-			type           : 'select',
-			defaultOptions : true,
-			isClearable    : true,
-			options        : [
+			name        : 'rating',
+			label       : 'Rating',
+			placeholder : 'Rating',
+			type        : 'select',
+			isClearable : true,
+			options     : [
 				{ label: '1', value: 1 },
 				{ label: '2', value: 2 },
 				{ label: '3', value: 3 },

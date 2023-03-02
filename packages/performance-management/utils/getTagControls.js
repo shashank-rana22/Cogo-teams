@@ -11,14 +11,13 @@ const useGetTagControls = () => {
 
 	return {
 		...tagOptions,
-		label          : 'Tag Name',
-		name           : 'tags',
-		placeholder    : 'Select Tags...',
-		type           : 'select',
-		defaultOptions : true,
-		isClearable    : true,
-		span           : 5.5,
-		rules          : [{ required: false }],
+		label       : 'Tag Name',
+		name        : 'tags',
+		placeholder : 'Select Tags...',
+		type        : 'select',
+		isClearable : true,
+		span        : 5.5,
+		rules       : [{ required: false }],
 	};
 };
 

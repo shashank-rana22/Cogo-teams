@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -11,14 +12,18 @@ const useListForms = ({ formsParams = {} }) => {
 	}, { manual: true });
 
 	const getFormList = async () => {
-		await trigger({
-			params: {
-				Department  : formsParams.department,
-				Designation : formsParams.designation,
-				Page        : pagination || 1,
-				PageLimit   : 10,
-			},
-		});
+		try {
+			await trigger({
+				params: {
+					Department  : formsParams.department,
+					Designation : formsParams.designation,
+					Page        : pagination || 1,
+					PageLimit   : 10,
+				},
+			});
+		} catch (e) {
+			Toast.error(e.response.data.error?.toString());
+		}
 	};
 
 	useEffect(() => {

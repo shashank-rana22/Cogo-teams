@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -8,7 +9,11 @@ const useGetUserDetails = ({ userId = '' }) => {
 	}, { manual: true });
 
 	const getUserDetails = () => {
-		trigger({ params: { UserID: userId } });
+		try {
+			trigger({ params: { UserID: userId } });
+		} catch (e) {
+			Toast.error(e.response.data.error?.toString());
+		}
 	};
 
 	useEffect(() => {

@@ -30,14 +30,13 @@ export const useGetCreateQuestionsControls = () => {
 		},
 		{
 			...tagOptions,
-			label          : 'Tag Name',
-			name           : 'tags',
-			placeholder    : 'Select Tags...',
-			type           : 'creatable_multiselect',
-			defaultOptions : true,
-			isClearable    : true,
-			span           : 5,
-			validations    : [{ type: 'required', message: 'Required' }],
+			label       : 'Tag Name',
+			name        : 'tags',
+			placeholder : 'Select Tags...',
+			type        : 'creatable_multiselect',
+			isClearable : true,
+			span        : 5,
+			rules       : { required: false },
 		},
 	];
 };
