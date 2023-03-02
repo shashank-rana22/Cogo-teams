@@ -85,17 +85,21 @@ const lineItemColumns = (remove, control, register) => {
 			Header   : '',
 			id       : 'delete',
 			accessor : (row, index) => (
-				<IcMDelete
-					color="#ED3726"
-					onClick={() => {
-						remove(index, 1);
-					}}
-					style={{ cursor: 'pointer' }}
-					height={15}
-					width={15}
-				>
-					x
-				</IcMDelete>
+				<div>
+					{index !== 0 && (
+						<IcMDelete
+							color="#ED3726"
+							onClick={() => {
+								remove(index, 1);
+							}}
+							style={{ cursor: 'pointer' }}
+							height={15}
+							width={15}
+						>
+							x
+						</IcMDelete>
+					)}
+				</div>
 			),
 		},
 	];

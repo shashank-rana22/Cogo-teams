@@ -4,6 +4,13 @@ import { officeLocations } from '../utils/officeLocations';
 
 interface FormDataInterface {
 	registrationNumber?: string,
+	entityObject?:{ id?:string },
+}
+
+interface EntityInt {
+	id?:string | number,
+	entity_code?:string,
+	business_name?:string
 }
 
 interface Props {
@@ -14,13 +21,17 @@ interface Props {
 	setCategoryOptions: (obj:any)=>void,
 	setSubCategoryOptions:(obj:any)=>void,
 	branchOptions: object,
-	setBranchOptions: (obj:any)=>void
+	setBranchOptions: (obj:any)=>void,
+	entityList: EntityInt[],
+	entityOptions: object[],
+	setEntityOptions: (obj:any)=>void,
 }
 
 interface ObjInt {
 	category?:string,
 	sub_category?:string,
 	cogoport_office_id?:string | number,
+	cogo_entity_id?:string,
 }
 
 interface VendorObject {
@@ -30,9 +41,17 @@ interface VendorObject {
 }
 
 export const nonRecurringExpenseDetails = ({
-	formData, setFormData,
-	categoryOptions, setCategoryOptions, subCategoryOptions, setSubCategoryOptions, branchOptions,
+	formData,
+	setFormData,
+	categoryOptions,
+	setCategoryOptions,
+	subCategoryOptions,
+	setSubCategoryOptions,
+	branchOptions,
 	setBranchOptions,
+	entityList,
+	entityOptions,
+	setEntityOptions,
 }:Props) => {
 	const handleVendorChange = (obj:VendorObject) => {
 		setCategoryOptions(obj?.services?.map((service) => (
@@ -60,10 +79,36 @@ export const nonRecurringExpenseDetails = ({
 			setBranchOptions([...branches]);
 		}
 
+		const fetchedEntities = obj?.services?.map((service) => service?.cogo_entity_id);
+
+		if (entityList?.length > 0) {
+			const entities = [];
+			fetchedEntities.forEach((singleEntity) => {
+				(entityList || []).forEach((entity) => {
+					const { id, entity_code:entityCode, business_name:name } = entity || {};
+					if (singleEntity === id) {
+						entities.push({
+							label : `${entityCode}-${name}`,
+							value : id,
+						});
+					}
+				});
+			});
+			setEntityOptions([...entities]);
+		}
+
 		setFormData({
 			...formData,
 			vendorName         : obj?.business_name,
 			registrationNumber : obj?.registration_number,
+		});
+	};
+
+	const handleEntityChange = (e) => {
+		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[0];
+		setFormData({
+			...formData,
+			entityObject: entityData,
 		});
 	};
 
@@ -125,12 +170,9 @@ export const nonRecurringExpenseDetails = ({
 					defaultOptions : false,
 					placeholder    : 'Entity',
 					span           : 2,
-					options        : [
-						{ value: '101', label: '101 - Cogo pvt ltd' },
-						{ value: '201', label: '201 - Cogo pvt ltd' },
-						{ value: '301', label: '301 - Cogo pvt ltd' },
-						{ value: '401', label: '401 - Cogo pvt ltd' },
-					],
+					options        : entityOptions,
+					value          : formData?.entityObject?.id,
+					onChange       : (e:any) => handleEntityChange(e),
 				},
 			],
 		},

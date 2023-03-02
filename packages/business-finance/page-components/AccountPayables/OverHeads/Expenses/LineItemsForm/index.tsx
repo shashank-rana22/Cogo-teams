@@ -10,7 +10,15 @@ import TotalAfterTax from './TotalAfterTax';
 import TotalColumn from './TotalColumn';
 
 function LineItemsForm() {
-	const { control, handleSubmit, watch, register, setValue } = useForm();
+	const { control, handleSubmit, watch, register, setValue, getValues } = useForm(
+		{
+			defaultValues: {
+				line_items: [
+					{ new: true, price: 0, quantity: 0 },
+				],
+			},
+		},
+	);
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'line_items',

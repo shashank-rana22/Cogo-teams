@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Filter from '../../../../../commons/Filters';
 import { nonRecurringExpenseDetails } from '../../../Controls/nonRecurringExpenseDetails';
 import { recurringExpenseDetails } from '../../../Controls/recurringExpenseDetails';
+import useListCogoEntities from '../../hooks/useListCogoEntities';
 
 interface Props {
 	formData:object,
@@ -14,6 +15,9 @@ function ExpenseDetailsForm({ formData, setFormData, createExpenseType }:Props) 
 	const [categoryOptions, setCategoryOptions] = useState();
 	const [subCategoryOptions, setSubCategoryOptions] = useState();
 	const [branchOptions, setBranchOptions] = useState();
+	const [entityOptions, setEntityOptions] = useState();
+
+	const { entityList } = useListCogoEntities();
 
 	let expenseControls;
 	if (createExpenseType === 'recurring') {
@@ -34,6 +38,9 @@ function ExpenseDetailsForm({ formData, setFormData, createExpenseType }:Props) 
 					setSubCategoryOptions,
 					branchOptions,
 					setBranchOptions,
+					entityList,
+					entityOptions,
+					setEntityOptions,
 				})}
 				filters={formData}
 				setFilters={setFormData}
