@@ -1,17 +1,16 @@
 import { Toast } from '@cogoport/components';
 import useRequest from '@cogoport/request';
 import React, { useEffect } from 'react';
+
 import Quotation from './quotation/index';
 import styles from './styles.module.css';
 
-
-interface CostViewProps{
-	onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-	shipment_id?:string
+interface CostViewProps {
+	shipment_id?: string;
 }
 
-function CostView({ shipment_id = ''}:CostViewProps) {
-	const [{ data, loading, error }, trigger] = useRequest(
+function CostView({ shipment_id = '' }: CostViewProps) {
+	const [{ data, loading }, trigger] = useRequest(
 		{
 			url    : '/get_shipment_cost_sheet',
 			method : 'get',
@@ -33,7 +32,7 @@ function CostView({ shipment_id = ''}:CostViewProps) {
 			};
 			getDataFromApi();
 		}
-	}, [shipment_id]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [shipment_id, trigger]);
 
 	return (
 		<div>

@@ -26,6 +26,9 @@ export interface Props {
 	handlePageChange?: (currentPage: number) => void;
 	pageSize?: number;
 	showPagination?: boolean;
+	subActiveTab?: string;
+	scrollable?: boolean;
+	width?: string;
 }
 
 function List({
@@ -40,6 +43,9 @@ function List({
 	handlePageChange = () => {},
 	pageSize = 10,
 	showPagination = true,
+	subActiveTab,
+	scrollable = false,
+	width,
 }: Props) {
 	const {
 		showHeader = true,
@@ -53,34 +59,53 @@ function List({
 
 	const {
 		general: { isMobile = false },
-	}:any = useSelector((state: object) => state);
+	}: any = useSelector((state: object) => state);
 
 	return (
-		<section>
-			{showHeader && !isMobile && (
-				<Header
-					fields={fields}
-					sort={sort}
-					setSort={setSort}
-					headerStyles={headerStyles}
-					showHeaderCheckbox={showHeaderCheckbox}
-					renderHeaderCheckbox={renderHeaderCheckbox}
-				/>
-			)}
-			<div style={bodyStyles}>
-				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-					<CardColumn
+		<>
+			<section style={{ overflow: 'scroll' }}>
+				{showHeader && !isMobile && (
+					<Header
 						fields={fields}
-						itemStyles={itemStyles}
-						singleitem={singleitem}
-						config={config}
-						loading={loading}
-						functions={commonFunctions(functions)}
-						isMobile={isMobile}
+						sort={sort}
+						setSort={setSort}
+						headerStyles={headerStyles}
+						showHeaderCheckbox={showHeaderCheckbox}
+						renderHeaderCheckbox={renderHeaderCheckbox}
 					/>
-				))}
-			</div>
-			{showPagination && (
+				)}
+				<div style={bodyStyles}>
+					{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+						<CardColumn
+							fields={fields}
+							itemStyles={itemStyles}
+							singleitem={singleitem}
+							config={config}
+							loading={loading}
+							functions={commonFunctions(functions)}
+							isMobile={isMobile}
+							subActiveTab={subActiveTab}
+							width={width}
+						/>
+					))}
+				</div>
+				{showPagination && (
+					<div>
+						{itemData?.totalRecords && (
+							<div className={styles.pagination_container}>
+								<Pagination
+									type="table"
+									currentPage={page}
+									totalItems={itemData?.totalRecords}
+									pageSize={pageSize}
+									onPageChange={handlePageChange}
+								/>
+							</div>
+						)}
+					</div>
+				)}
+			</section>
+			{scrollable && (
 				<div>
 					{itemData?.totalRecords && (
 						<div className={styles.pagination_container}>
@@ -95,7 +120,7 @@ function List({
 					)}
 				</div>
 			)}
-		</section>
+		</>
 	);
 }
 

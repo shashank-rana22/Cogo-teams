@@ -18,8 +18,9 @@ function TabSelect({ options, value, setValue } :TabInterface) {
 		<div className={styles.container}>
 			{(options || []).map((item) => (
 				<div
-					className={value === item.value ? styles.focusedTab : styles.tab}
+					className={value === item.value ? styles.focused_tab : styles.tab}
 					onClick={() => setValue(item.value)}
+					role="presentation"
 				>
 					{item.name}
 				</div>

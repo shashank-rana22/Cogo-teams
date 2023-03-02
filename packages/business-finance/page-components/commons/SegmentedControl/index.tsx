@@ -37,6 +37,7 @@ function SegmentedControl(props:Props) {
 							className={`${styles.segmented_option} ${isActive ? styles.activeoption : ''}`}
 							style={{ '--background': background } as React.CSSProperties}
 							onClick={() => setActiveTab(value)}
+							role="presentation"
 						>
 							{icon && (
 								<div
@@ -54,7 +55,7 @@ function SegmentedControl(props:Props) {
 							</div>
 							{badge && (
 								<div
-									className={`${styles.segmented_badge} 
+									className={`${styles.segmented_badge}
 									${isActive ? styles.activebadge : styles.atvbadge}`}
 									style={{ '--color': color } as React.CSSProperties}
 								>

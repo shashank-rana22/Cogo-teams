@@ -7,7 +7,7 @@ import {
 } from '@cogoport/icons-react';
 import React from 'react';
 
-function GetServiceInfo(service:string = '') {
+function GetServiceInfo(service:any = '') {
 	if (service === 'fcl_freight') {
 		return <IcMFship color="#5936F0" height={20} width={20} />;
 	}

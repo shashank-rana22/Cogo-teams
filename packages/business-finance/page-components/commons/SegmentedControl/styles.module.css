@@ -1,7 +1,6 @@
 .segmented_control {
 	width: max-content;
 	overflow-x: hidden;
-	font-family: Roboto;
 	font-style: normal;
 	background: #fff;
 	border-radius: 4px;
@@ -11,8 +10,7 @@
 .segmented_container {
 	position: relative;
 	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
+	flex-flow: row wrap;
 	padding: 6px 4px;
 	background-color: #fff;
 	border-radius: 4px;

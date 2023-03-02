@@ -118,6 +118,8 @@ interface PortDetailsInt {
 
 export interface DetailInterface {
 	service_type?:string,
+	origin_main_port?:string,
+	destination_main_port?:string
 	services?:Array<string>,
 	chargable_weight?: number | string,
 	weight: number,
@@ -177,9 +179,9 @@ export interface DetailInterface {
 	pickup:PickupDropInt,
 	drop:PickupDropInt,
 	origin_port?: PortDetailsInt,
-	origin_main_port?: PortDetailsInt,
+	originmainport?: PortDetailsInt,
 	destination_port?: PortDetailsInt,
-	destination_main_port?: PortDetailsInt
+	destinationmainport?: PortDetailsInt
 }
 export interface RemarksValInterface {
 	collectionPartyRemark:string,
