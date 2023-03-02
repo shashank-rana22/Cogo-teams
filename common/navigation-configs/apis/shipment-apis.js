@@ -1238,16 +1238,6 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
-		api          : 'create_shipment_consolidated_credit_note',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'list_shipment_consolidated_credit_notes',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'list_document_desk_shipments',
 		access_type  : 'private',
 		service_name : 'bookings',
@@ -1267,7 +1257,26 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'air_tracking',
 	},
-
+	{
+		api          : 'bulk_update_shipment_container_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_container_sea_route',
+		access_type  : 'public',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_rail_shipment_container_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_rail_shipment_container_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
