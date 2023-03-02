@@ -6,6 +6,16 @@
 	left: -3px;
 }
 
+.btn_na{
+	cursor: not-allowed;
+	color: #e0e0e0;
+}
+
+.btn_pointer{
+	cursor: pointer;
+}
+
+
 .down_arrow_icon {
 	transform: rotate(270deg);
 	cursor: pointer;

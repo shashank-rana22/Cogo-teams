@@ -3,11 +3,12 @@
 	"description": "Unified Dashboard",
 	"version": "0.1.0",
 	"dependencies": {
-		"@cogoport/components": "^1.0.309",
+		"@cogoport/components": "^1.0.354",
 		"@cogoport/icons-react": "^1.0.57",
 		"@cogoport/request": "workspace:^0.1.0",
 		"@cogoport/globalization" : "workspace:^0.0.1",
 		"@cogoport/store": "workspace:^0.1.0",
+		"@cogoport/forms": "workspace:^0.1.0",
 		"@cogoport/utils": "^1.2.4",
 		"react": "18.2.0"
 	}

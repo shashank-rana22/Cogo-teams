@@ -9,15 +9,13 @@ import styles from './styles.module.css';
 function ProfitabilityTable({ loading, data, setFilters }) {
 	const { list = [], page, total_count } = data || {};
 
-	const column = columns({ loading });
+	const column = columns();
 
 	// console.log('column ::', column, list);
 
-	if (!loading && list.length === 0) {
+	if (list.length === 0) {
 		return <Empty />;
 	}
-
-	// console.log('listzz', list);
 
 	return (
 		<>

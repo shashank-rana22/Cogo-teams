@@ -28,7 +28,7 @@ function Filters({
 	return (
 		<div
 			className={styles.filter_box}
-			className={`${isScrollable ? 'scroll' : ''} ${className}`}
+
 			width={width}
 		>
 			<Popover

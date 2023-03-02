@@ -6,8 +6,6 @@ import { useEffect } from 'react';
 
 import currencyCoversion from '../../../utils/currencyCoversion';
 import getMonthYear from '../../../utils/getMonthYear';
-import getNextData from '../../../utils/getNextData';
-import getPreviousData from '../../../utils/getPreviousData';
 import isNextRevenueAllowed from '../../../utils/isNextRevenueAllowed';
 import Empty from '../../Empty';
 import PieChart from '../../PieChart';
@@ -77,40 +75,6 @@ function CommonData({
 					revenue_analysis={revenue_analysis}
 					etd={etd}
 				/>
-				{/* <div className={styles.bar}>
-					<IcMArrowLeft
-						height={20}
-						width={20}
-						className={styles.arrow_icon}
-						style={{
-							cursor: isClickable ? 'not-allowed' : 'pointer',
-						}}
-						onClick={
-						isClickable
-							? () => {}
-							: () => getNextData(
-								selectedFilterTab,
-								revenue_analysis,
-								param,
-								setParam,
-								'revenue',
-						)
-				}
-					/>
-
-					<IcMArrowRight
-						height={20}
-						width={20}
-						className={styles.down_arrow_icon}
-						onClick={() => getPreviousData(
-							selectedFilterTab,
-							rev[rev.length + 1],
-							param,
-							setParam,
-							'revenue',
-						)}
-					/>
-				</div> */}
 
 				{Object.keys(rev).length > 0
 					&& (
@@ -123,20 +87,6 @@ function CommonData({
 						>
 							<div className={styles.row}>
 								<div className={styles.revenue_data}>
-									{/* <div className={styles.flex_filter}>
-										<div className={styles.text_filter}>
-											{selectedFilterTab === 'week' && rev?.day}
-											{' '}
-											{rev?.month}
-											{' '}
-											{rev?.year}
-											<div className={styles.revenue_span}>
-												{selectedFilterTab === 'month'
-													&& currentMonth === `${rev?.month}${rev?.year}`
-													&& '(current Month)'}
-											</div>
-										</div>
-									</div> */}
 									<div className={styles.booking_pie}>
 										<div className={styles.flex_currency}>
 											<div className={styles.text_currency}>

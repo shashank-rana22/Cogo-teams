@@ -10,9 +10,3 @@
 .loading{
 	margin: 16px 0;
 }
-
-@media screen and (max-width: 576px) {
-	.card_wrapper{
-		margin-top: 50px;
-	}
-  }

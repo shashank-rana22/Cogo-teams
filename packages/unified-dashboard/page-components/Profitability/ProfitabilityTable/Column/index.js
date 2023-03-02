@@ -1,6 +1,5 @@
 import { Tooltip, Tags } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
-import { useMemo } from 'react';
+import { format } from '@cogoport/utils';
 
 import getShortFormatNumber from '../../../../utils/getShortFormatNumber';
 

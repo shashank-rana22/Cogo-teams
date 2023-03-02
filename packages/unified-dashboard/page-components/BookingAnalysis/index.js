@@ -20,30 +20,28 @@ function BookingAnalysis({ headerFilters = {} }) {
 
 	const { months_considered = [], max_etd = '' } = bookingAnalysis || {};
 	const [showRevenue, setShowRevenue] = useState(false);
-	const renderBookingData = () =>
-	// if (loading) {
-	// 	return <LoadingPage className={styles.loading} />;
-	// }
+	if (loading) {
+		return <LoadingPage className={styles.loading} />;
+	}
 
-	// if (!bookingAnalysis) {
-	// 	return <Empty />;
-	// }
-
-		(
-			<RenderView
-				loading={loading}
-				selectedFilterTab={selectedFilterTab}
-				setSelectedFilterTab={setSelectedFilterTab}
-				setFilters={setParams}
-				filters={params}
-				maxEtd={max_etd}
-				data={months_considered}
-				headerFilters={headerFilters}
-				bookingAnalysis={bookingAnalysis}
-				showRevenue={showRevenue}
-				setShowRevenue={setShowRevenue}
-			/>
-		);
+	if (!bookingAnalysis) {
+		return <Empty />;
+	}
+	const renderBookingData = () => (
+		<RenderView
+			loading={loading}
+			selectedFilterTab={selectedFilterTab}
+			setSelectedFilterTab={setSelectedFilterTab}
+			setFilters={setParams}
+			filters={params}
+			maxEtd={max_etd}
+			data={months_considered}
+			headerFilters={headerFilters}
+			bookingAnalysis={bookingAnalysis}
+			showRevenue={showRevenue}
+			setShowRevenue={setShowRevenue}
+		/>
+	);
 	return (
 		<div className={styles.card_wrapper}>
 			<BookingAnalysisHeading

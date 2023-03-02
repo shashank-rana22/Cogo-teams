@@ -7,11 +7,10 @@ import useIsInViewport from '../../hooks/useIntersection';
 import DateFilter from './DateFilter';
 import styles from './styles.module.css';
 
-function Filter() {
+function Filter({ setFilters = () => {}, range = '', setRange = () => {} }) {
 	// const { currency: selectedCurrency, entity_code = [] } = headerFilters;
 	// const currency = selectedCurrency ? 'INR' : 'USD';
 	// const [isInViewport, setisInViewport] = useState(false);
-	const { loading, data, setFilters, range, setRange, filters } = useGetProfitability();
 	// const ref = useRef(null);
 	// const inViewport = useIsInViewport(ref, '-200px');
 

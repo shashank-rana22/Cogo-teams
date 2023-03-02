@@ -91,6 +91,20 @@ function asyncFieldsPartnerRoles() {
 	};
 }
 
+function asyncFieldsCogoEntities() {
+	return {
+		labelKey    : 'entity_code',
+		valueKey    : 'id',
+		endpoint    : 'list_cogo_entities',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 100,
+			page       : 1,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -99,4 +113,5 @@ export {
 	asyncFieldsOrganization,
 	asyncFieldsOrganizationUsers,
 	asyncFieldsOperators,
+	asyncFieldsCogoEntities,
 };

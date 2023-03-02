@@ -10,11 +10,6 @@ function DeclaredRevenue({
 	currency,
 	selectedFilterTab,
 }) {
-	const { general } = useSelector((state) => (state));
-
-	// console.log(isMobile, 'isMobile');
-	const isMobile = false;
-
 	return (
 		<div>
 			<div className={styles.desktop}>
@@ -35,26 +30,6 @@ function DeclaredRevenue({
 			</div>
 		</div>
 	);
-
-	// return (
-	// 	<div className={styles.container}>
-	// 		{isMobile ? (
-	// 			<MobileView
-	// 				master={months}
-	// 				keys={data}
-	// 				selectedFilterTab={selectedFilterTab}
-	// 				currency={currency}
-	// 			/>
-	// 		) : (
-	// 			<DesktopView
-	// 				master={months}
-	// 				keys={data}
-	// 				selectedFilterTab={selectedFilterTab}
-	// 				currency={currency}
-	// 			/>
-	// 		)}
-	// 	</div>
-	// );
 }
 
 export default DeclaredRevenue;

@@ -78,7 +78,7 @@ function FilterContent({
 					'haulage_freight',
 				].includes(service) ? (
 					<>
-						<div style={{ borderRight: '1px solid #e0e0e0' }} />
+						<div className={styles.filter_bottomborder} />
 
 						<div className={styles.filter_block}>
 							<div className={styles.filter_labelHeading}>Origin</div>
@@ -129,7 +129,7 @@ function FilterContent({
 					service,
 				) ? (
 					<>
-						<div style={{ borderRight: '1px solid #e0e0e0' }} />
+						<div className={styles.filter_bottomborder} />
 
 						<div className={styles.filter_block}>
 							{(controls || [])
@@ -168,20 +168,13 @@ function FilterContent({
 
 			<div
 				className={styles.button_wrap}
-				style={{
-					padding        : '12px 28px 12px 0px',
-					display        : 'flex',
-					justifyContent : 'flex-end',
-				}}
 			>
 				<Button onClick={() => handleReset()} id="clear_button">
 					CLEAR
 				</Button>
 
 				<Button
-					style={{
-						marginLeft: '14px',
-					}}
+					className={styles.cancel_btn}
 					onClick={() => setOpen(false)}
 					id="cancel_button"
 				>
@@ -190,11 +183,7 @@ function FilterContent({
 
 				<Button
 					onClick={() => handleClick()}
-					style={{
-						background : '#000000',
-						color      : '#ffffff',
-						marginLeft : '14px',
-					}}
+					className={styles.apply_btn}
 					id="save_button"
 				>
 					APPLY

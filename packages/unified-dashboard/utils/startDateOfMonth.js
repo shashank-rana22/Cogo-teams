@@ -6,7 +6,7 @@ export const startDateOfMonth = (date = {}, dateformat = 'yyyy-MM-dd') => ({
 	start_date : format(date.startDate || new Date(), dateformat),
 	end_date   : format(
 		addDays(date.endDate || new Date(), 1),
-		format,
+		dateformat,
 	),
 });
 

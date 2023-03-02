@@ -11,7 +11,19 @@
 	border-top: 1px solid #e0e0e0;
 }
 
+.filter_bottomborder{
+	border-right: 1px solid #e0e0e0;
+}
 
+.cancel_btn{
+	margin-left: 14px;
+}
+
+.apply_btn{
+	background: #000;
+	color: #fff;
+	margin-left: 14px;
+}
 
 /* Filter Content */
 

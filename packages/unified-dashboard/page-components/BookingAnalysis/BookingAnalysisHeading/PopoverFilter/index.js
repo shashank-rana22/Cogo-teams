@@ -46,7 +46,7 @@ function PopoverFilter({
 
 				>
 					<div className={styles.flex_filter}>
-						<span style={{ marginRight: '5px' }}>Filter by</span>
+						<span className={styles.filter_btn}>Filter by</span>
 						<IcMFilter />
 
 					</div>

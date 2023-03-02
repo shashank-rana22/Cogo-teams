@@ -1,0 +1,54 @@
+.heading{
+font-size: 28px;
+font-weight: 600;
+margin-right: 10px;
+}
+
+.flex_col{
+    display: flex;
+}
+
+.flex_toggle{
+    display: flex;
+    align-items: flex-end;
+}
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+
+}
+
+.dropdown{
+    width: 350px;
+
+    :global {
+        .ui_multiselect_input_control {
+        
+                display: flex;
+            
+        }
+    }
+ }
+
+
+
+@media (max-width: 767px) {
+  
+    /* CSS */
+    .container{
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+    
+    }
+    .flex_col{
+        display: flex;
+        flex-direction: column;
+    }
+    .dropdown{
+        width: 100%;
+    }
+ }
+  

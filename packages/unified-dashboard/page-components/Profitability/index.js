@@ -21,15 +21,16 @@ function Profitability({ headerFilters }) {
 	// 	}
 	// }, [inViewport]);
 
-	useEffect(() => {
-		setFilters((prevFilters) => ({
-			...prevFilters,
-			to_currency : currency,
-			entity_code : entity_code.length > 0 ? entity_code : undefined,
-		}));
-	}, [JSON.stringify(headerFilters)]);
+	// useEffect(() => {
+	// 	setFilters((prevFilters) => ({
+	// 		...prevFilters,
+	// 		to_currency : currency,
+	// 		entity_code : entity_code.length > 0 ? entity_code : undefined,
+	// 	}));
+	// }, [JSON.stringify(headerFilters)]);
 
-	// console.log(data,"data");
+	console.log('filtersfilters', loading);
+
 	return (
 		<div className={styles.container} ref={ref}>
 			<Header

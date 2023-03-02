@@ -41,6 +41,7 @@ function DatesFilterContent({
 					<div>
 						<DateRangepicker
 							value={date}
+							isPreviousDaysAllowed
 							onChange={(val) => setDate(val)}
 						/>
 					</div>
@@ -49,14 +50,10 @@ function DatesFilterContent({
 
 			<div
 				className={styles.button_wrap}
-				style={{
-					padding        : '12px 28px 12px 0px',
-					display        : 'flex',
-					justifyContent : 'flex-end',
-				}}
+
 			>
 				<Button
-					style={{ marginLeft: '14px' }}
+					className={styles.cancel_btn}
 					onClick={() => setOpen(false)}
 					id="cancel_button"
 				>
@@ -66,11 +63,7 @@ function DatesFilterContent({
 				<Button
 					onClick={() => handleClick()}
 					id="apply_button"
-					style={{
-						background : '#000000',
-						color      : '#ffffff',
-						marginLeft : '14px',
-					}}
+					className={styles.apply_btn}
 				>
 					APPLY
 				</Button>

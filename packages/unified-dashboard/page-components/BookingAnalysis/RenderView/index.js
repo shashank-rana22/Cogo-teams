@@ -99,60 +99,6 @@ function RenderView({
 			</div>
 		</>
 	);
-
-	// if (isMobile) {
-	// 	return (
-	// 		<div>
-	// 			{loading ? (
-	// 				[...Array(4)].map(() => (
-	// 					<div className={styles.card_wrapper}>
-	// 						<Loader count={4} />
-	// 					</div>
-	// 				))
-	// 			) : (
-	// 				<>
-	// 					{' '}
-	// 					<MobileBookingAnalysis
-	// 						setFilters={setFilters}
-	// 						filters={filters}
-	// 						maxEtd={maxEtd}
-	// 						data={data}
-	// 						selectedFilterTab={selectedFilterTab}
-	// 					/>
-	// 					<RevenueSection
-	// 						currency={selectedCurrency}
-	// 						data={bookingAnalysis}
-	// 						selectedFilterTab={selectedFilterTab}
-	// 					/>
-	// 				</>
-	// 			)}
-	// 		</div>
-	// 	);
-	// }
-
-	// return (
-	// 	<div>
-	// 		{loading === true ? (
-	// 			<LoadingPage />
-	// 		) : (
-	// 			<>
-	// 				<Months
-	// 					data={data}
-	// 					setFilters={setFilters}
-	// 					filters={filters}
-	// 					maxEtd={maxEtd}
-	// 					selectedFilterTab={selectedFilterTab}
-	// 				/>
-	// 				<RevenueSection
-	// 					selectedFilterTab={selectedFilterTab}
-	// 					currency={selectedCurrency}
-	// 					data={bookingAnalysis}
-	// 				/>
-	// 				{' '}
-	// 			</>
-	// 		)}
-	// 	</div>
-	// );
 }
 
 export default RenderView;

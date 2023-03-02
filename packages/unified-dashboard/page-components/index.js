@@ -1,18 +1,37 @@
 /* eslint-disable import/no-unresolved */
+import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import BookingAnalysis from './BookingAnalysis';
+import Header from './Header';
 import Profitability from './Profitability';
 import RevenueAnalysis from './RevenueAnalysis';
+import styles from './styles.module.css';
 
 function UnifiedDashboard() {
 	const [headerFilters, setHeaderFilters] = useState({ currency: false });
+	const [activeTab, setActiveTab] = useState('unified_dashboard');
 	return (
-		<>
-			<BookingAnalysis headerFilters={headerFilters} />
-			<RevenueAnalysis headerFilters={headerFilters} />
-			<Profitability headerFilters={headerFilters} />
-		</>
+		<div className={styles.container}>
+			<Tabs
+				activeTab={activeTab}
+				onChange={setActiveTab}
+				themeType="primary"
+			>
+				<TabPanel
+					name="unified_dashboard"
+					title="Unified Dashboard"
+				>
+					<Header
+						headerFilters={headerFilters}
+						setHeaderFilters={setHeaderFilters}
+					/>
+					<BookingAnalysis headerFilters={headerFilters} />
+					<RevenueAnalysis headerFilters={headerFilters} />
+					<Profitability headerFilters={headerFilters} />
+				</TabPanel>
+			</Tabs>
+		</div>
 
 	);
 }
