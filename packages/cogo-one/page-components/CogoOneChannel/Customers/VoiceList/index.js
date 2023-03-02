@@ -104,7 +104,7 @@ function VoiceList({
 											/>
 											{callStatus(item) === 'missed' && (
 												<div className={styles.activity_duration}>
-													{callStatus(item) === 'missed' && initiated_by === 'user'
+													{initiated_by === 'user'
 														? 'by you' : 'by user'}
 												</div>
 											)}
