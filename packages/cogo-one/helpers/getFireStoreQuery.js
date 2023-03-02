@@ -10,9 +10,17 @@ function getFireStoreQuery({
 	let firestoreQuery;
 	let queryFilters = [];
 	if (showBotMessages) {
+		if (isomniChannelAdmin) {
+			return query(
+				omniChannelCollection,
+				where('session_type', '==', 'bot'),
+				orderBy('new_message_sent_at', 'desc'),
+			);
+		}
 		return query(
 			omniChannelCollection,
 			where('session_type', '==', 'bot'),
+			where('spectators_ids', 'array-contains', userId),
 			orderBy('new_message_sent_at', 'desc'),
 		);
 	}
