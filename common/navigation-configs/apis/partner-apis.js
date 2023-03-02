@@ -6426,6 +6426,10 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api         : 'get_common_job_shipment_id_view',
+			access_type : 'private',
+		},
+		{
 			api         : 'get_purchase_treasury_live_status',
 			access_type : 'private',
 		},

@@ -54,6 +54,7 @@ import {
 } from '@cogoport/icons-react';
 
 import apis from './apis';
+import business_finance from './apis/business-finance-apis';
 
 const navigationMappingAdmin = {
 	things_to_do: {
@@ -762,7 +763,17 @@ const navigationMappingAdmin = {
 		title     : 'Business Finance',
 		icon      : IcMBusinessFinance,
 		isSubNavs : true,
+		main_apis : ['get_purchase_payment_upload_list'],
 		options   : [
+			{
+				key           : 'business_finance-coe_finance',
+				title         : ' COE Finance',
+				href          : '/v2/business-finance/coe-finance/dashboard',
+				as            : '/v2/business-finance/coe-finance/dashboard',
+				icon          : IcMProductCodeMapping,
+				main_apis     : [],
+				possible_apis : [...business_finance.coeFinance],
+			},
 			{
 				key           : 'business_finance-account_payables',
 				title         : 'AP',

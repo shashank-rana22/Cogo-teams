@@ -38,7 +38,7 @@ function OrganizationDetails({
 	if (isEmpty(organizationId)) {
 		return (
 			<div className={styles.container}>
-				<div className={styles.title}>Organisation Details</div>
+				<div className={styles.title}>Organization Details</div>
 				<EmptyState type="organization" />
 			</div>
 		);
@@ -63,7 +63,7 @@ function OrganizationDetails({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>Organisation Details</div>
+			<div className={styles.title}>Organization Details</div>
 			{orgLoading ? (
 				<>
 					<div className={styles.content}>
