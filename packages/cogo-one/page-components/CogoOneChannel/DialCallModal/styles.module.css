@@ -1,0 +1,101 @@
+.styled_ui_modal_dialog {
+	border: none !important;
+
+	:global {
+		.ui_modal_body_container {
+			padding: 0 16px 16px !important;
+			border-top: none !important;
+			border-bottom: none !important;
+		}
+
+		.styles_row_container {
+			justify-content: space-between !important;
+		}
+
+		.ui_select_options_container {
+			min-width: 165px;
+		}
+
+		.ui_input_control {
+			font-size: 14px !important;
+		}
+
+		.ui_input_container {
+			margin-left: 4px;
+		}
+	}
+}
+
+.number_div {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	margin-top: 32px;
+}
+
+.number_pad {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100px;
+	height: 50px;
+	margin: 4px 6px 7px 4px;
+	cursor: pointer;
+	background: #fcfcfe;
+	border-radius: 5px;
+	box-shadow: 0 0 5px 0 rgb(0 0 0 / 10%), 0 0 1px 0 rgb(0 0 0 / 10%);
+
+	&:active {
+		box-shadow:
+			inset 3px 4px 1px #fff,
+			inset -4px -4px 1px #fff,
+			inset 9px 9px 3px #f1f1f1,
+			inset -9px -9px 3px #f1f1f1;
+	}
+}
+
+.number {
+	display: flex;
+	padding-top: 9px;
+	font-size: 23px;
+	font-weight: 400;
+	color: #393f70;
+	text-align: center;
+}
+
+.letter {
+	display: flex;
+	padding-bottom: 12px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #393f70;
+	text-align: center;
+}
+
+.delete_icon {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: -60px;
+	cursor: pointer;
+}
+
+.delete_div {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.call_div {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding-top: 18px;
+}
+
+.call_icon {
+	width: 70px;
+	height: 70px;
+	cursor: pointer;
+}

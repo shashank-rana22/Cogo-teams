@@ -54,6 +54,7 @@ import {
 } from '@cogoport/icons-react';
 
 import apis from './apis';
+import business_finance from './apis/business-finance-apis';
 
 const navigationMappingAdmin = {
 	things_to_do: {
@@ -762,7 +763,17 @@ const navigationMappingAdmin = {
 		title     : 'Business Finance',
 		icon      : IcMBusinessFinance,
 		isSubNavs : true,
+		main_apis : ['get_purchase_payment_upload_list'],
 		options   : [
+			{
+				key           : 'business_finance-coe_finance',
+				title         : ' COE Finance',
+				href          : '/v2/business-finance/coe-finance/dashboard',
+				as            : '/v2/business-finance/coe-finance/dashboard',
+				icon          : IcMProductCodeMapping,
+				main_apis     : [],
+				possible_apis : [...business_finance.coeFinance],
+			},
 			{
 				key           : 'business_finance-account_payables',
 				title         : 'AP',
@@ -838,6 +849,16 @@ const navigationMappingAdmin = {
 			},
 		],
 		module_type: 'dashboards',
+	},
+	translate: {
+		key           : 'translate',
+		title         : 'Translation',
+		href          : '/v2/translate/[activeTab]',
+		as            : '/v2/translate/Requested',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.translate,
+		module_type   : 'dashboards',
 	},
 	finance: {
 		key           : 'finance',
@@ -1737,6 +1758,14 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
+	kam_monitoring: {
+		key         : 'kam_monitoring',
+		title       : 'KAM Monitoring',
+		module_type : 'dashboards',
+		href        : '/kam-monitoring',
+		as          : '/kam-monitoring',
+		main_apis   : [],
+	},
 	awb_inventory: {
 		key           : 'awb_inventory',
 		title         : 'AWB Inventory',
@@ -1877,7 +1906,7 @@ const navigationMappingAdmin = {
 		href          : '/manage-rfq',
 		as            : '/manage-rfq',
 		type          : 'link',
-		main_apis     : [],
+		main_apis     : ['list_rfqs'],
 		possible_apis : apis.manage_rfq,
 		module_type   : 'dashboards',
 	},
