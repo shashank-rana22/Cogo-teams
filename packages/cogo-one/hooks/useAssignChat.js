@@ -8,7 +8,7 @@ function useAssignChat({ closeModal = () => {}, activeMessageCard = {}, formatte
 	const [{ loading }, trigger] = useRequest({
 		url    : '/assign_chat',
 		method : 'post',
-	}, { manual: true, autoCancel: false });
+	}, { manual: true });
 
 	const assignChat = async (payload) => {
 		try {
