@@ -189,25 +189,6 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			id       : 'error_sheet_url',
-			Header   : 'ERROR SHEET URL',
-			accessor : ({ error_sheet_url }) => (
-				<section>
-					<Button
-						themeType="secondary"
-						size="md"
-						type="button"
-						disabled={error_sheet_url === null}
-						// eslint-disable-next-line no-undef
-						onClick={() => window.open(error_sheet_url, '_blank')}
-					>
-						Download
-					</Button>
-				</section>
-			),
-		},
-
-		{
 			id       : 'sheet_url',
 			Header   : 'SHEET URL',
 			accessor : ({ sheet_url }) => (
@@ -219,6 +200,24 @@ const useListEnrichment = () => {
 						disabled={sheet_url === null}
 						// eslint-disable-next-line no-undef
 						onClick={() => window.open(sheet_url, '_blank')}
+					>
+						Download
+					</Button>
+				</section>
+			),
+		},
+		{
+			id       : 'error_sheet_url',
+			Header   : 'ERROR SHEET URL',
+			accessor : ({ error_sheet_url }) => (
+				<section>
+					<Button
+						themeType="secondary"
+						size="md"
+						type="button"
+						disabled={error_sheet_url === null}
+						// eslint-disable-next-line no-undef
+						onClick={() => window.open(error_sheet_url, '_blank')}
 					>
 						Download
 					</Button>
