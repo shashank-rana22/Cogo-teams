@@ -1,3 +1,4 @@
+// ! remove dummy data
 import styles from './styles.module.css';
 
 function Header() {

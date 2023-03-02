@@ -68,7 +68,7 @@ function Badges() {
 							{
 								(window === 1)
 			&&	badgeList?.map(((data, index) => (
-				<BadgeListItem data={data} index={index} loading={loading} />
+				<BadgeListItem data={data} index={index} loading={loading} setWindow={setWindow} />
 			)))
 
 							}

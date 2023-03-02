@@ -4,7 +4,7 @@ import { format, startCase } from '@cogoport/utils';
 import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
 
-function BadgeListItem({ data, index, loading }) {
+function BadgeListItem({ data, index, loading, setWindow }) {
 	if (loading) {
 		return (
 			<div className={styles.container}>
@@ -33,23 +33,6 @@ function BadgeListItem({ data, index, loading }) {
 					<div className={styles.score_container}>
 						<Placeholder width="120px" height="24px" />
 						<div className={styles.score_badge}>
-							{/* <BadgeCard
-								medalType="Bronze"
-								score="2000"
-								img_url="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/nautical_ninja_bronze.svg"
-								isLast={false}
-							/> */}
-							{/* <BadgeCard
-								medalType="Silver"
-								score="5000"
-								img_url="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/silver_badge.svg"
-								isLast={false}
-							/> */}
-							{/* <BadgeCard
-								medalType="Gold"
-								score="9000"
-								img_url="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg"
-							/> */}
 							<Placeholder
 								height="120px"
 								width="220px"
@@ -75,7 +58,9 @@ function BadgeListItem({ data, index, loading }) {
 	}
 
 	const { badge_details = [] } = data;
-
+	const handleEdit = () => {
+		setWindow(3);
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.number_tag}>
@@ -83,7 +68,7 @@ function BadgeListItem({ data, index, loading }) {
 					#
 					{index + 1}
 				</p>
-				<Button themeType="secondary">Edit</Button>
+				<Button themeType="secondary" onClick={handleEdit}>Edit</Button>
 			</div>
 
 			<div className={styles.main_card}>
@@ -116,7 +101,7 @@ function BadgeListItem({ data, index, loading }) {
 							{format(data.updated_at, 'yyyy-MMM-dd')}
 						</p>
 
-						{/* // needs changes */}
+						{/* //! needs changes */}
 						<p>Last Modified By : Ankur Verma</p>
 					</div>
 				</div>
