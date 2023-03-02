@@ -14,6 +14,7 @@ function Calendar({ props }) {
 		selectedItem,
 		setSelectedItem,
 	} = props || {};
+	console.log(props, calendarData, 'props');
 
 	const [pagination, setPagination] = useState(0);
 	const [weekPagination, setWeekPagination] = useState(0);

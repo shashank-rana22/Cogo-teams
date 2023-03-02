@@ -4,17 +4,17 @@ import React from 'react';
 
 // import { configurationData } from '../../../../configurations/configurationData';
 import { agentAvatar, emptyEscalations } from '../../constants';
-import LoaderRedFlags from '../LoaderRedFlags';
+import LoaderEscalation from '../LoaderEscalations';
 
 import styles from './styles.module.css';
 
-function RedFlags({ loading = false, escalations = [] }) {
+function Escalation({ loading = false, escalations = [] }) {
 	// const { escalations: configEscalations = [] } = configurationData;
 
 	return (
 		<div className={styles.redflags_container}>
 			<div className={styles.heading}>Escalations</div>
-			{loading && <LoaderRedFlags />}
+			{loading && <LoaderEscalation />}
 			{(isEmpty(escalations)) && !loading
 				? (
 					<img
@@ -53,4 +53,4 @@ function RedFlags({ loading = false, escalations = [] }) {
 	);
 }
 
-export default RedFlags;
+export default Escalation;

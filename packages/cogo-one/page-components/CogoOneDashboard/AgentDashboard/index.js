@@ -11,7 +11,8 @@ import Intelligence from './Intelligence';
 import IntentServed from './IntentServed';
 import Statisfaction from './Statisfaction';
 import styles from './styles.module.css';
-import TimeSpent from './TimeSpent';
+// import TimeSpent from './TimeSpent';
+import TotalChatsHandled from './TotalChatshandled';
 
 function AgentDashboard(props) {
 	const { timeline, setTimeline, listData, loading } = props || {};
@@ -42,7 +43,8 @@ function AgentDashboard(props) {
 					</div>
 				</div>
 				<div className={styles.right_sub_container}>
-					<TimeSpent loading={loading} />
+					{/* <TimeSpent loading={loading} /> */}
+					<TotalChatsHandled loading={loading} />
 					<Intelligence />
 					<div className={styles.satisfaction_intent_served_box}>
 						<Statisfaction customerSatisfaction={customer_satisfaction} />

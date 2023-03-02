@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function RedFlagsLoader() {
+function LoaderEscalation() {
 	return (
 		<>
 			{
@@ -27,4 +27,4 @@ function RedFlagsLoader() {
 	);
 }
 
-export default RedFlagsLoader;
+export default LoaderEscalation;

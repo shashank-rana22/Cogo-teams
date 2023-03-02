@@ -9,8 +9,8 @@ import Header from '../../../common/Header';
 import LineChart from '../../../common/LineChart';
 
 import AgentActivity from './AgentActivity';
+import Escalation from './Escalations';
 import PerformanceTab from './PerformanceTabs';
-import RedFlags from './RedFlags';
 import styles from './styles.module.css';
 
 function AdminDashboard(props) {
@@ -39,7 +39,7 @@ function AdminDashboard(props) {
 						</div>
 						<LineChart cogoOneDashboardGraph={cogo_one_dashboard_graph} timeline={timeline} />
 					</div>
-					<RedFlags escalations={escalations} loading={loading} />
+					<Escalation escalations={escalations} loading={loading} />
 				</div>
 				<div className={styles.agentactivity_plus_performancetabs}>
 					<AgentActivity agentsDetails={agents_details} getCogoOneDashboard={getCogoOneDashboard} />

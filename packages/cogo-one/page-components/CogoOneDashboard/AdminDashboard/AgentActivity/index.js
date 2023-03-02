@@ -55,7 +55,7 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 				: (
 					<div className={styles.main_container_lowerpart}>
 						{agentsDetails?.[activeTab]?.agents?.map((item) => {
-							const { name, active_assigned_chats, duration, agent_id = '' } = item;
+							const { name, active_assigned_chats, agent_id = '' } = item;
 
 							const redirectToAgentView = (agentId = '42270ace-f97e-41e2-90bc-a336d90d791f') => {
 								if (!agentId) return;
