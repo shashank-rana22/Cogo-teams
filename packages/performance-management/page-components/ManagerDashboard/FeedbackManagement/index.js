@@ -43,7 +43,7 @@ function FeedbackManagement() {
 	const { total_count = '' } = pagination_data;
 
 	const setFilter = (val, type) => {
-		setParams({ ...params, [type]: val });
+		setParams({ ...params, [type]: val, Page: 1 });
 	};
 
 	const columnsToShow = ['name', 'cogo_id', 'designation', 'department', 'month', 'add-kpi'];

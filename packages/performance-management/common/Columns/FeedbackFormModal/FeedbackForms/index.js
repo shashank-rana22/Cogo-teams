@@ -8,7 +8,7 @@ import {
 } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import performanceIcons from '../../../../constants/performance-icon-mappings';
 import useCreateUserFeedback from '../../../../hooks/useCreateUserFeedback';
@@ -40,7 +40,7 @@ function FeedbackForms({
 	const questionsToShow = action === 'show' ? form_responses : form_questions;
 
 	const [rating, setRating] = useState({});
-	const [comment, setComment] = useState(feedback_data.feedback);
+	const [comment, setComment] = useState('');
 
 	const { onSubmitData, loading = false } = useCreateUserFeedback({
 		rating,
@@ -55,7 +55,8 @@ function FeedbackForms({
 	});
 
 	const onSubmit = () => {
-		const isRatingGiven = Object.keys(rating)?.length === questionsToShow.length;
+		const isRatingGiven = Object.keys(rating)?.length === questionsToShow.length
+		&& isEmpty(Object.values(rating).filter((feed) => !feed.rating));
 
 		if (!isRatingGiven) {
 			Toast.error('Please provide rating for all the questions');
@@ -102,6 +103,8 @@ function FeedbackForms({
 	});
 
 	const loadArr = [1, 2, 3, 4, 5];
+
+	useEffect(() => setComment(feedback_data.feedback), [feedback_data]);
 
 	if (questionsLoading) {
 		return (

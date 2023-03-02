@@ -42,7 +42,7 @@ const useGetColumns = ({
 	const feedbackYear = currentMonth > 0 ? currentYear : currentYear - 1;
 
 	const columns = [{
-		Header   : <div className={styles.head}>Reportee Name</div>,
+		Header   : <div className={styles.head}>REPORTEE NAME</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div
@@ -67,7 +67,7 @@ const useGetColumns = ({
 	},
 
 	{
-		Header   : <div className={styles.head}>Department</div>,
+		Header   : <div className={styles.head}>DEPARTMENT</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div>{startCase(item?.department) || '-'}</div>
@@ -78,7 +78,7 @@ const useGetColumns = ({
 	},
 
 	{
-		Header   : <div className={styles.head}>Designation</div>,
+		Header   : <div className={styles.head}>DESIGNATION</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div>{startCase(item?.designation) || '-'}</div>
@@ -89,7 +89,7 @@ const useGetColumns = ({
 	},
 
 	{
-		Header   : <div className={styles.head}>Rating</div>,
+		Header   : <div className={styles.head}>RATING</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div className={cl`styles.${ratingClass(item?.rating)}`}>
@@ -103,7 +103,7 @@ const useGetColumns = ({
 	},
 
 	{
-		Header   : <div className={styles.head}>Score</div>,
+		Header   : <div className={styles.head}>SCORE</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div className={cl`styles.${ratingClass(item?.score)}`}>
@@ -124,7 +124,7 @@ const useGetColumns = ({
 		key : 'feedback',
 	},
 	{
-		Header   : <div className={styles.head}>Month</div>,
+		Header   : <div className={styles.head}>MONTH</div>,
 		accessor : () => (
 			<div className={styles.head_content}>
 				<div>{format(new Date(feedbackYear, feedbackMonth, 1), 'MMM yyyy')}</div>
@@ -134,7 +134,7 @@ const useGetColumns = ({
 		key : 'month',
 	},
 	{
-		Header   : <div className={styles.head}>Feedback Form</div>,
+		Header   : <div className={styles.head}>FEEDBACK FORM</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<FeedbackFormModal
@@ -164,7 +164,7 @@ const useGetColumns = ({
 		key : 'view_form',
 	},
 	{
-		Header   : <div className={styles.head}>Manager</div>,
+		Header   : <div className={styles.head}>MANAGER</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div>{item?.manager_name}</div>

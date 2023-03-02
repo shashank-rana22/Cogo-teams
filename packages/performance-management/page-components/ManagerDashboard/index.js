@@ -24,7 +24,7 @@ function ManagerDashboard() {
 	const router = useRouter();
 
 	const setFilter = (val, type) => {
-		setParams({ ...params, [type]: val || undefined });
+		setParams({ ...params, [type]: val || undefined, Page: 1 });
 	};
 
 	const handleClick = () => {

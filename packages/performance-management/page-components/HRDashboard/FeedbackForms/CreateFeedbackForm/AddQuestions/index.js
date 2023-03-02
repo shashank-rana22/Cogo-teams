@@ -67,7 +67,7 @@ function AddQuestions({
 	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => setParams({ ...params, Tags: (tags || []).join(',') || undefined }), [tags]);
+	useEffect(() => setParams({ ...params, Tags: (tags || []).join(',') || undefined, Page: 1 }), [tags]);
 
 	useEffect(() => {
 		if (refetchList) {

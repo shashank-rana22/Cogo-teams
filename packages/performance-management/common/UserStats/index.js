@@ -55,6 +55,7 @@ function UserStats({ source = '' }) {
 		Month  : monthFilter || undefined,
 		Year   : yearFilter || undefined,
 		Rating : ratingFilter || undefined,
+		Page   : 1,
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	})), [monthFilter, yearFilter, ratingFilter]);
 

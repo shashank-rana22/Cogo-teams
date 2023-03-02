@@ -5,6 +5,7 @@
 }
 
 .input {
+	transform: rotate(-90deg) scale(125%);
 	display: flex;
 	width: 30px;
 	height: 18px;
@@ -16,6 +17,8 @@
 	border-radius: 6px;
 	outline: none;
 }
+
+.page_
 
 .number {
 	min-width: 14px;

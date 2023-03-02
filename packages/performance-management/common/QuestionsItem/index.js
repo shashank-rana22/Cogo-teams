@@ -41,7 +41,7 @@ function QuestionsItem({
 
 			pv.checked?.forEach((question) => {
 				if (question.id === item.id) {
-					newList.push({ ...question, weightage: Math.round(weight, 2) });
+					newList.push({ ...question, weightage: Math.round(weight) });
 					return;
 				}
 				newList.push(question);

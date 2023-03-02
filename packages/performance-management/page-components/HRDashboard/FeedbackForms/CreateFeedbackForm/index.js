@@ -56,7 +56,7 @@ function CreateFeedbackForm({
 
 		if (formStage === 'submit_form') {
 			if (isEmpty(questionActionList.checked)) {
-				Toast.error('Please select at least one question...');
+				// Toast.error('Please select at least one question...');s
 				setFormStage('add_questions');
 				return (
 					<AddQuestions

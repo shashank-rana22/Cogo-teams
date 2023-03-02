@@ -38,7 +38,7 @@ function SubmitForm({
 	let isFormSubmittable = true;
 
 	questionActionList.checked.forEach((que) => {
-		if (que.weightage < 0 && isFormSubmittable) {
+		if (que.weightage <= 0 && isFormSubmittable) {
 			isFormSubmittable = false;
 		}
 	});
