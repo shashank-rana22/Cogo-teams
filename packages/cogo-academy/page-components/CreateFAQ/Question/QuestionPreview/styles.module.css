@@ -54,7 +54,6 @@
   text-decoration-line: underline;
   color: #221f20;
   cursor: pointer;
-  
 }
 
 .button_container {
@@ -65,18 +64,20 @@
 
 .spinner {
   display: flex;
+  margin-top: 240px;
   justify-content: center;
+  align-items: center;
 }
 
-.publish_button{
+.publish_button {
   margin-right: 24px;
 }
 
-.header{
+.header {
   display: flex;
 }
 
-.back_icon{
+.back_icon {
   margin-top: 10px;
   margin-right: 8px;
   cursor: pointer;
