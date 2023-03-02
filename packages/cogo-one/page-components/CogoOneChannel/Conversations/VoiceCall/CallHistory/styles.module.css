@@ -27,7 +27,6 @@
 .ended_call_div {
 	display: flex;
 	flex-direction: column;
-	flex-wrap: wrap;
 	width: 220px;
 	background: #fff;
 	border-radius: 6px;
