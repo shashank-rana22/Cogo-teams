@@ -101,7 +101,7 @@ function MessageList({
 						const checkActiveCard = activeCardId === item?.id;
 
 						const showOrganization = () => {
-							if (user_name.includes('anonymous')) {
+							if (user_name?.includes('anonymous')) {
 								return startCase(PLATFORM_MAPPING[user_type] || '');
 							}
 							return startCase(organization_name);

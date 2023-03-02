@@ -30,6 +30,7 @@ function Header({
 	support_agent_id = null,
 	showBotMessages = false,
 	userId = '',
+	isomniChannelAdmin = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const {
@@ -45,9 +46,9 @@ function Header({
 		const mobileNo = HideDetails({ data: mobile_no, type: 'number' });
 		return mobile_no ? `+${mobileNo}` : business_name;
 	};
-	const disableAssignButton = !hasPermissionToEdit && !showBotMessages;
+	const disableAssignButton = !isomniChannelAdmin;
 	const assignButtonAction = () => {
-		if (showBotMessages) {
+		if (showBotMessages && isomniChannelAdmin) {
 			const payload = {
 				agent_id        : userId,
 				allowed_to_chat : true,
@@ -99,7 +100,7 @@ function Header({
 						onClick={assignButtonAction}
 						loading={showBotMessages && assignLoading}
 					>
-						{showBotMessages ? 'Stop and Assign' : 'Assign'}
+						{(showBotMessages && isomniChannelAdmin) ? 'Stop and Assign' : 'Assign'}
 
 					</Button>
 				</div>

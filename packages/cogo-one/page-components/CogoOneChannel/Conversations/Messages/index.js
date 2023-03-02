@@ -134,6 +134,7 @@ function Messages({
 					support_agent_id={support_agent_id}
 					showBotMessages={showBotMessages}
 					userId={userId}
+					isomniChannelAdmin={isomniChannelAdmin}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
