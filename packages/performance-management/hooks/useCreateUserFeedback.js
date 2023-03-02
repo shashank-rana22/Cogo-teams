@@ -50,16 +50,32 @@ const useCreateUserFeedback = ({
 
 			Toast.success('Feedback Created Successfully');
 			setRefetchReportees(true);
-			return;
 		} catch (e) {
 			Toast.error(e.response.data.error?.toString());
 		}
 	};
 
+	const onSubmit = ({ questionsToShow, showForm }) => {
+		const isRatingGiven = Object.keys(rating)?.length === questionsToShow.length
+		&& isEmpty(Object.values(rating).filter((feed) => !feed.rating));
+
+		if (!isRatingGiven) {
+			Toast.error('Please provide rating for all the questions');
+			return;
+		}
+
+		if (isEmpty(comment) && showForm !== 'resigned') {
+			Toast.error('Please provide final feedback');
+			return;
+		}
+
+		onSubmitData();
+	};
+
 	return {
 		data,
 		loading,
-		onSubmitData,
+		onSubmit,
 	};
 };
 

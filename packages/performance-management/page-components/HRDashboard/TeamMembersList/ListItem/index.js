@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../../../common/Columns';
 import UserTableData from '../../../../common/UserTableData';
+import feedbackDataColumns from '../../../../constants/feedback-data-columns';
 import useDownloadCsvFeedbacks from '../../../../hooks/useDownloadCsvFeedbacks';
 
 import styles from './styles.module.css';
@@ -24,7 +25,7 @@ function ListItem({ item, params: pageParams = {} }) {
 
 	const { getUserListCsv = () => {}, loading: downloadLoading = false } = useDownloadCsvFeedbacks({ params });
 
-	const columnsToShow = ['name', 'cogo_id', 'rating', 'score', 'user_details'];
+	const columnsToShow = feedbackDataColumns.feedbacksByManager;
 
 	const managerListItemColumns = useGetColumns({ source: 'hr_dashboard', columnsToShow });
 

@@ -36,7 +36,7 @@ request.interceptors.request.use((oldConfig) => {
 		authorizationparameters,
 	};
 
-	if (serviceName === 'user_feedback') {
+	if (serviceName === 'iris') {
 		newConfig.baseURL = 'https://iris-matrix3.dev.cogoport.io';
 
 		newConfig.url = `/${apiPath}`;

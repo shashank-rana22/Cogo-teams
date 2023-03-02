@@ -17,7 +17,6 @@ const getMonthControls = (selectedYear, selectedMonth) => {
 				{ label: `${year - 1}`, value: year - 1 },
 				{ label: `${year - 2}`, value: year - 2 },
 			],
-			span: 6,
 		},
 		{
 			name        : 'month',
@@ -27,7 +26,6 @@ const getMonthControls = (selectedYear, selectedMonth) => {
 			disabled    : !selectedYear,
 			placeholder : 'Month',
 			options     : monthOptions,
-			span        : 6,
 		},
 		{
 			name        : 'rating',
@@ -42,7 +40,6 @@ const getMonthControls = (selectedYear, selectedMonth) => {
 				{ label: '4', value: 4 },
 				{ label: '5', value: 5 },
 			],
-			span: 6,
 		},
 	];
 

@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
 import columnsMapping from '../../../constants/columns-mapping-card';
+import feedbackDataColumns from '../../../constants/feedback-data-columns';
 import LoadingState from '../../HRDashboard/TeamMembersList/LoadingState';
 
 import ListItem from './ListItem';
@@ -16,7 +17,8 @@ function TeamMembersList({
 	total_count,
 	loading = false,
 }) {
-	const columns = columnsMapping({ columnsToShow: ['total_feedbacks', 'BelowAverage', 'Average', 'GoodPerforming'] });
+	const columnsToShow = feedbackDataColumns.monthAccordion;
+	const columns = columnsMapping({ columnsToShow });
 
 	const titleSection = (i) => (
 		<div className={styles.accordion_item_container}>

@@ -8,7 +8,6 @@ const feedbackControls = {
 		{ label: 'Pending', value: 'pending' },
 		{ label: 'Submitted', value: 'successful' },
 	],
-	span: 6,
 };
 
 export default feedbackControls;

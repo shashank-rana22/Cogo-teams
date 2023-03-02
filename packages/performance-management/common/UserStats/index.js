@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
+import feedbackDataColumns from '../../constants/feedback-data-columns';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
 import getMonthControls from '../../utils/monthControls';
 import useGetColumns from '../Columns';
@@ -59,7 +60,7 @@ function UserStats({ source = '' }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	})), [monthFilter, yearFilter, ratingFilter]);
 
-	const columnsToShow = ['name', 'cogo_id', 'rating', 'month', 'designation', 'department', 'feedback'];
+	const columnsToShow = feedbackDataColumns.userStats;
 
 	const columns = useGetColumns({ columnsToShow });
 

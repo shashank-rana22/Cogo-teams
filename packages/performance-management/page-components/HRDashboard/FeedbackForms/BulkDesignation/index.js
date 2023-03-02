@@ -38,9 +38,9 @@ function BulkDesignation({
 	const addToDesignation = (val, role) => {
 		if (val) {
 			setCheckedDesignations([...checkedDesignations, role]);
-			return;
+		} else {
+			setCheckedDesignations((pv) => pv.filter((des) => des !== role));
 		}
-		setCheckedDesignations((pv) => pv.filter((des) => des !== role));
 	};
 
 	const selectAll = (val) => {
@@ -49,9 +49,9 @@ function BulkDesignation({
 				const { designation: newDes = '' } = des;
 				return newDes;
 			}));
-			return;
+		} else {
+			setCheckedDesignations(bulkDesignations);
 		}
-		setCheckedDesignations(bulkDesignations);
 	};
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps

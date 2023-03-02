@@ -14,6 +14,7 @@ const useGetFormsPage = () => {
 	useEffect(() => {
 		const newDesignationFormStatus = getFormResubmission(department, designation);
 		setFormId('');
+		setOpenCreateForm(false);
 
 		const {
 			stage: newFormStage = '', department: newFormDepartment = '',
@@ -30,11 +31,8 @@ const useGetFormsPage = () => {
 			}
 			setOpenCreateForm(true);
 			setFormStage(newFormStage);
-
-			return;
 		}
 
-		setOpenCreateForm(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [designation]);
 

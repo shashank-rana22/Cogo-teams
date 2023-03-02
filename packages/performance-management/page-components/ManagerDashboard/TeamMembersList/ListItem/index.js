@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../../../common/Columns';
 import UserTableData from '../../../../common/UserTableData';
+import feedbackDataColumns from '../../../../constants/feedback-data-columns';
 import getDepartmentControls from '../../../../hooks/useGetDepartmentControls';
 import useListUserFeedbacks from '../../../../hooks/useListUserFeedbacks';
 
@@ -17,7 +18,7 @@ function ListItem({ item }) {
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const columnsToShow = ['name', 'cogo_id', 'rating', 'department', 'designation', 'view_form'];
+	const columnsToShow = feedbackDataColumns.monthWiseFeedbacks;
 	const memberColumns = useGetColumns({ columnsToShow });
 
 	const { month = '', year = '' } = item;

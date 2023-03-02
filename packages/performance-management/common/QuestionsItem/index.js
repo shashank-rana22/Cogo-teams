@@ -20,12 +20,12 @@ function QuestionsItem({
 				...pv,
 				checked: [...(pv.checked || []), item],
 			}));
-			return;
+		} else {
+			setQuestionActionList((pv) => {
+				const newCheckedList = pv.checked?.filter((question) => question.id !== item.id);
+				return { ...pv, checked: newCheckedList };
+			});
 		}
-		setQuestionActionList((pv) => {
-			const newCheckedList = pv.checked?.filter((question) => question.id !== item.id);
-			return { ...pv, checked: newCheckedList };
-		});
 	};
 
 	const undoAdd = (questionItem) => {
@@ -42,9 +42,9 @@ function QuestionsItem({
 			pv.checked?.forEach((question) => {
 				if (question.id === item.id) {
 					newList.push({ ...question, weightage: Math.round(weight) });
-					return;
+				} else {
+					newList.push(question);
 				}
-				newList.push(question);
 			});
 
 			return { ...pv, checked: newList };

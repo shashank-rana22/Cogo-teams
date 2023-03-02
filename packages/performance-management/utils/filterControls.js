@@ -9,7 +9,6 @@ const useGetControls = ({ name = 'manager' }) => {
 			placeholder : 'Search Manager...',
 			type        : 'input',
 			isClearable : true,
-			span        : 5.5,
 		},
 		{
 			name        : 'rating',
@@ -24,7 +23,6 @@ const useGetControls = ({ name = 'manager' }) => {
 				{ label: '4', value: 4 },
 				{ label: '5', value: 5 },
 			],
-			span: 4.5,
 		},
 		{
 			name        : 'created_at_month',
@@ -46,7 +44,6 @@ const useGetControls = ({ name = 'manager' }) => {
 				{ label: 'November', value: 11 },
 				{ label: 'December', value: 12 },
 			],
-			span: 5,
 		},
 		{
 			name        : 'created_at_year',
@@ -59,7 +56,6 @@ const useGetControls = ({ name = 'manager' }) => {
 				{ label: `${year - 1}`, value: year - 1 },
 				{ label: `${year - 2}`, value: year - 2 },
 			],
-			span: 5,
 		},
 	];
 

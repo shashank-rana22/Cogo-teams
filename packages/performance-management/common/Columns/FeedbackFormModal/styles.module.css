@@ -33,12 +33,6 @@
 	border-radius: 4px;
 }
 
-.popover_item {
-	padding: 8px;
-	cursor: pointer;
-	border-radius: 4px;
-}
-
 .popover {
 	:global {
 		.ui_popover_container {

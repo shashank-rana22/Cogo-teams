@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
 import columnsMapping from '../../../constants/columns-mapping-card';
+import feedbackDataColumns from '../../../constants/feedback-data-columns';
 
 import ListItem from './ListItem';
 import LoadingState from './LoadingState';
@@ -33,7 +34,8 @@ function TeamMembersList({
 			</div>
 		);
 	}
-	const columns = columnsMapping({ columnsToShow: ['team_count', 'pending_count', 'rating'] });
+	const columnsToShow = feedbackDataColumns.managerAccordion;
+	const columns = columnsMapping({ columnsToShow });
 
 	const routeToManagerDetails = (id) => {
 		if (id) {

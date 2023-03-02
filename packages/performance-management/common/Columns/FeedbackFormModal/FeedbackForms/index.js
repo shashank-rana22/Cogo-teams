@@ -48,7 +48,7 @@ function FeedbackForms({
 	const [comment, setComment] = useState('');
 	const [questionsToShow, setQuestionsToShow] = useState([]);
 
-	const { onSubmitData, loading = false } = useCreateUserFeedback({
+	const { onSubmit, loading = false } = useCreateUserFeedback({
 		rating,
 		comment,
 		formId: form_id,
@@ -59,23 +59,6 @@ function FeedbackForms({
 		feedbackMonth,
 		feedbackYear,
 	});
-
-	const onSubmit = () => {
-		const isRatingGiven = Object.keys(rating)?.length === questionsToShow.length
-		&& isEmpty(Object.values(rating).filter((feed) => !feed.rating));
-
-		if (!isRatingGiven) {
-			Toast.error('Please provide rating for all the questions');
-			return;
-		}
-
-		if (isEmpty(comment) && showForm !== 'resigned') {
-			Toast.error('Please provide final feedback');
-			return;
-		}
-
-		onSubmitData();
-	};
 
 	const newOptions = Array(5).fill('').map((_, index) => ({
 		label : '',
@@ -112,6 +95,8 @@ function FeedbackForms({
 
 	useEffect(() => {
 		if (!isEmpty(formData)) {
+			const questions = action === 'show' || !!feedback_id ? form_responses : form_questions;
+
 			if (action === 'show' || !!feedback_id) {
 				const pastRating = {};
 
@@ -121,15 +106,11 @@ function FeedbackForms({
 						feedback : res.feedback,
 					};
 				});
-
-				setQuestionsToShow(form_responses);
 				setComment(feedback_data.feedback);
 				setRating(pastRating);
-				return;
 			}
-			setQuestionsToShow(form_questions);
+			setQuestionsToShow(questions);
 		}
-
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formData]);
 
@@ -307,7 +288,7 @@ function FeedbackForms({
 					size="md"
 					themeType="primary"
 					disabled={action === 'show'}
-					onClick={onSubmit}
+					onClick={onSubmit({ questionsToShow, showForm })}
 				>
 					Submit
 				</Button>

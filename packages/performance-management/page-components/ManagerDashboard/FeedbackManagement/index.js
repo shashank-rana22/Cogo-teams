@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
 import UserTableData from '../../../common/UserTableData';
+import feedbackDataColumns from '../../../constants/feedback-data-columns';
 import getDepartmentControls from '../../../hooks/useGetDepartmentControls';
 import useListReportees from '../../../hooks/useListReportees';
 import feedbackControls from '../../../utils/feedback-controls';
@@ -46,7 +47,7 @@ function FeedbackManagement() {
 		setParams({ ...params, [type]: val, Page: 1 });
 	};
 
-	const columnsToShow = ['name', 'cogo_id', 'designation', 'department', 'month', 'add-kpi'];
+	const columnsToShow = feedbackDataColumns.submitFeedback;
 
 	const feedbackManagementColumns = useGetColumns({
 		setRefetchReportees,

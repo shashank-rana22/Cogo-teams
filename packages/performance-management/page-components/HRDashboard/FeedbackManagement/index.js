@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import useGetColumns from '../../../common/Columns';
 import Filters from '../../../common/Filters';
 import UserTableData from '../../../common/UserTableData';
+import feedbackDataColumns from '../../../constants/feedback-data-columns';
 import useDownloadCsvFeedbacks from '../../../hooks/useDownloadCsvFeedbacks';
 import useListUserFeedbacks from '../../../hooks/useListUserFeedbacks';
 
@@ -25,7 +26,7 @@ function FeedbackManagement() {
 
 	const { getUserListCsv } = useDownloadCsvFeedbacks({ params });
 
-	const columnsToShow = ['name', 'cogo_id', 'designation', 'manager', 'score', 'month', 'feedback'];
+	const columnsToShow = feedbackDataColumns.allFeedbacks;
 	const tableColumns = useGetColumns({ source: 'hr_feedback', columnsToShow });
 
 	const { list = [], pagination_data = {} } = feedbackData;
