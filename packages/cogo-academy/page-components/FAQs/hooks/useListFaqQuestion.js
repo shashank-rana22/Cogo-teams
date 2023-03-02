@@ -46,10 +46,9 @@ function useListFaqQuestions({
 						faq_tag_id        : tagId,
 						auth_function     : scope === 'partner' ? role_functions : undefined,
 						auth_sub_function : scope === 'partner' ? role_sub_functions : undefined,
-
 						country_id,
-						cogo_entity_id : id,
-						persona        : scope === 'partner' ? 'admin_user' : 'importer_exporter',
+						cogo_entity_id    : id,
+						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
 
 					},
 					sort_by    : SORT_MODE,

@@ -38,7 +38,7 @@ function SearchFound({ searchState = '' }) {
 
 	return (
 		<div>
-			{data?.list.map((question) => (
+			{(data?.list || []).map((question) => (
 				<div className={styles.border}><Questions questions={question} /></div>
 			))}
 

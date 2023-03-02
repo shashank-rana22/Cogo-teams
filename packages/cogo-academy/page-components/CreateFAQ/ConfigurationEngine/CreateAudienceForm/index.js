@@ -24,14 +24,16 @@ const MAPPING = {
 
 };
 
-function CreateAudienceForm({
-	source = '',
-	setShowCreateAudienceModal,
-	setConfigurationPage,
-	displayBackButton,
-	customStyle,
-	fetchAudiences = () => {},
-}) {
+function CreateAudienceForm(props) {
+	const {
+		source = '',
+		setShowCreateAudienceModal,
+		setConfigurationPage,
+		displayBackButton,
+		customStyle,
+		fetchAudiences = () => {},
+	} = props;
+
 	const router = useRouter();
 	const { general } = useSelector((state) => state);
 	const { id:audienceId, update } = general.query || {};
@@ -44,6 +46,7 @@ function CreateAudienceForm({
 		setValue,
 		reset,
 		watch,
+		loading:createAudienceLoading,
 	} = useCreateAudience({
 		setConfigurationPage,
 		fetchAudiences,
@@ -188,6 +191,7 @@ function CreateAudienceForm({
 					className={styles.cancel_button}
 					onClick={onClickBackIcon}
 					size="md"
+					disabled={createAudienceLoading}
 				>
 					CANCEL
 				</Button>
@@ -195,6 +199,7 @@ function CreateAudienceForm({
 				<Button
 					size="md"
 					onClick={handleSubmit(createAudience)}
+					loading={createAudienceLoading}
 				>
 					SAVE
 				</Button>

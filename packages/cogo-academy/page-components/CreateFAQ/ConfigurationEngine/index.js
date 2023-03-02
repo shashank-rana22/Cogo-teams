@@ -7,37 +7,26 @@ import styles from './styles.module.css';
 import TagComponent from './TagComponent';
 import TopicComponent from './TopicComponent';
 
+const CONFIGURATION_MAPPING = {
+	audience : CreateAudienceForm,
+	tag      : CreateForm,
+	topic    : CreateForm,
+};
+
 function ConfigurationEngine() {
+	const props = useCreateFaq();
+
 	const {
-		createFaqComponent,
 		configurationPage = '',
 		setConfigurationPage = () => {},
-		control,
-		handleSubmit = () => {},
-		errors = {},
-		setValue,
 		reset,
-	} = useCreateFaq();
+	} = props;
 
-	if (configurationPage === 'audience') {
+	if (['audience', 'tag', 'topic'].includes(configurationPage)) {
+		const Component = CONFIGURATION_MAPPING[configurationPage];
 		return (
-			<CreateAudienceForm
-				setConfigurationPage={setConfigurationPage}
-			/>
-		);
-	}
-
-	if (['tag', 'topic'].includes(configurationPage)) {
-		return (
-			<CreateForm
-				viewType={configurationPage}
-				setConfigurationPage={setConfigurationPage}
-				control={control}
-				handleSubmit={handleSubmit}
-				errors={errors}
-				createFaqComponent={createFaqComponent}
-				setValue={setValue}
-				reset={reset}
+			<Component
+				{...props}
 			/>
 		);
 	}

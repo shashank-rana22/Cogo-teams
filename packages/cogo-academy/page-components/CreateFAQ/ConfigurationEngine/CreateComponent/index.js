@@ -11,20 +11,22 @@ import useGetFaq from '../hooks/useGetFaq';
 
 import styles from './styles.module.css';
 
-function CreateForm({
-	source = '',
-	viewType = 'topic',
-	setConfigurationPage,
-	handleSubmit,
-	control,
-	createFaqComponent,
-	setValue = () => {},
-	style = {},
-	setShow = () => {},
-	displayBackButton,
-	errors,
-	reset,
-}) {
+function CreateForm(props) {
+	const {
+		source = '',
+		viewType = 'topic',
+		setConfigurationPage,
+		handleSubmit,
+		control,
+		createFaqComponent,
+		setValue = () => {},
+		style = {},
+		setShow = () => {},
+		displayBackButton,
+		errors,
+		reset,
+	} = props;
+
 	const router = useRouter();
 
 	const { general } = useSelector((state) => state);
