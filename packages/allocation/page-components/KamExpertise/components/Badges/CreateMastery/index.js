@@ -1,5 +1,6 @@
 import { Textarea, Button, FileSelect } from '@cogoport/components';
-import { useState } from 'react';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import { useState, useEffect } from 'react';
 
 import GetLabelInputPair from '../CreateBadge/getLabelInputPair';
 import Header from '../CreateBadge/header';
@@ -9,6 +10,7 @@ import styles from './styles.module.css';
 function CreateMastery({ setWindow }) {
 	const [value, setValue] = useState([]);
 	const [file, setFile] = useState([]);
+
 	const params = {
 		name: {
 			size                     : 'md',
@@ -57,6 +59,7 @@ function CreateMastery({ setWindow }) {
 	const onClose = () => {
 		setWindow(1);
 	};
+
 	return (
 		// <div size="xl" show onClose={onClose} placement="center"></div>
 		<div>
@@ -77,7 +80,14 @@ function CreateMastery({ setWindow }) {
 					<div className={styles.lower_background}>
 						<div style={{ flexBasis: '29%' }}>
 							<p style={{ color: '#4f4f4f' }}>Badge PNG</p>
-							<FileSelect
+							{/* <FileSelect
+								uploadDesc="Upload files here"
+								className={styles.file_select_style}
+								value={file}
+								onChange={(val) => setFile(val)}
+							/> */}
+
+							<FileUploader
 								uploadDesc="Upload files here"
 								className={styles.file_select_style}
 								value={file}

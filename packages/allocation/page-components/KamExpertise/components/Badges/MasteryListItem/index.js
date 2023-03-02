@@ -17,7 +17,8 @@ const data = {
 			badge_name: 'Wings of Logistics',
 		},
 	],
-	last_modified_date : '31/September/2022',
+	// last_modified_date : '31/September/2022',
+	last_modified_date : '2022-Sept-31',
 	last_modified_by   : 'Ankur Verma',
 	url                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg',
 
@@ -32,7 +33,7 @@ function MasteryListItem() {
 	// // } = useBadgeConfigurationAttributes();
 
 	const handleSubmit = () => {
-		console.log('edit button clicked');
+		// console.log('edit button clicked');
 	};
 
 	if (false) {

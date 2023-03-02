@@ -2,6 +2,7 @@
     border-radius: 8px;
     background-color: #fff;
     width: 100%;
+    padding: 0;
 }
 .row_level {
     margin: 0 16px;
@@ -37,4 +38,11 @@ margin-bottom: 10px;
     opacity: 0.4;
    margin-left: 16px;
    margin-right:16px;   
+}
+.current_value{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    margin-top: 10px;
+    margin-left: 5px;
 }

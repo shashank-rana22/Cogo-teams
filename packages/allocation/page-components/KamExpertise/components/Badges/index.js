@@ -70,7 +70,11 @@ function Badges() {
 			&&	badgeList?.map(((data, index) => (
 				<BadgeListItem data={data} index={index} loading={loading} />
 			)))
+
 							}
+
+							{/* <MasteryListItem /> */}
+
 							{
 			(window === 2) && (
 				<div>

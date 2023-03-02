@@ -1,5 +1,5 @@
 import { Toast, Button } from '@cogoport/components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
 
@@ -23,6 +23,9 @@ function CreateBadge({ setWindow }) {
 		goldScore    : 0,
 		gold_url     : '',
 	});
+	// const [bronzeUrl, setBronzeUrl] = useState('');
+	// const [silverUrl, setSilverUrl] = useState('');
+	// const [goldUrl, setGoldUrl] = useState('');
 
 	const {
 		onCheckPublish, loading,
@@ -84,7 +87,7 @@ function CreateBadge({ setWindow }) {
 			value              : 'description',
 		},
 	];
-	console.log('badgeParams', badgeParams);
+
 	const medalType = [
 		{
 			medalType        : 'Bronze',
@@ -93,6 +96,9 @@ function CreateBadge({ setWindow }) {
 			scoreValue       : 'bronzeScore',
 			imageValue       : 'bronze_url',
 			imageSelected    : badgeParams.bronze_url,
+
+			// setUrl           : setBronzeUrl,
+			// setValue         : setBadgeParams,
 		},
 		{
 			medalType        : 'Silver',
@@ -101,6 +107,9 @@ function CreateBadge({ setWindow }) {
 			scoreValue       : 'silverScore',
 			imageValue       : 'silver_url',
 			imageSelected    : badgeParams.silver_url,
+
+			// setUrl           : setSilverUrl,
+			// setValue         : setBadgeParams,
 		},
 		{
 			medalType        : 'Gold',
@@ -109,6 +118,9 @@ function CreateBadge({ setWindow }) {
 			scoreValue       : 'goldScore',
 			imageValue       : 'gold_url',
 			imageSelected    : badgeParams.gold_url,
+
+			// setUrl           : setGoldUrl,
+			// setValue         : setBadgeParams,
 		},
 	];
 
@@ -120,22 +132,22 @@ function CreateBadge({ setWindow }) {
 		version_id    : '1',
 		badge_name    : badgeParams.badge_name,
 		description   : badgeParams.description,
-		// kam_expertise_event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9mkkwwvw930t45670',
+		// event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9mkkwwvw930t45670',
 		status        : 'active',
 		badge_details : [
 			{
 				score     : badgeParams.bronzeScore,
-				image_url : 'bjb',
+				image_url : badgeParams.bronze_url,
 				medal     : 'bronze',
 			},
 			{
 				score     : badgeParams.silverScore,
-				image_url : 'bmbb',
+				image_url : badgeParams.silver_url,
 				medal     : 'silver',
 			},
 			{
 				score     : badgeParams.goldScore,
-				image_url : 'hghjg',
+				image_url : badgeParams.gold_url,
 				medal     : 'gold',
 			},
 		],
@@ -145,13 +157,15 @@ function CreateBadge({ setWindow }) {
 		onCheckPublish(payload_data);
 		setBadgeInput(true);
 		// onClose();
-		// Toast.success('Badge Successfully Created');
 	};
 	const handelSave = () => {
 		// setCreateBadge((pv) => !pv);
 		onClose();
-		Toast.success('Badge Successfully Created');
 	};
+
+	if (loading) {
+		return null;
+	}
 	return (
 		<div>
 			<section className={styles.container}>
@@ -172,6 +186,7 @@ function CreateBadge({ setWindow }) {
 						{medalType.map((data, index) => (
 							<GetCard
 								data={data}
+								// setUrl={data.setUrl}
 								isLastItem={index === medalType.length - 1}
 							/>
 						))}
@@ -210,14 +225,6 @@ function CreateBadge({ setWindow }) {
 								</Button>
 							)
 					}
-					{/* <Button
-						size="md"
-						themeType="primary"
-						disabled={loading}
-						onClick={handelNext}
-					>
-						Save
-					</Button> */}
 				</div>
 			</section>
 		</div>

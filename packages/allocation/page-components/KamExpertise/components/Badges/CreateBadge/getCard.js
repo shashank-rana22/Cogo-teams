@@ -1,6 +1,7 @@
 import { Input, FileSelect, Button } from '@cogoport/components';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMInfo } from '@cogoport/icons-react';
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 // import useBadgeConfigurationAttributes from '../../../hooks/useBadgeConfigurationAttributes';
 
@@ -8,6 +9,19 @@ import styles from './styles.module.css';
 
 function GetCard({ data, isLastItem, isBadgeEdit }) {
 	const { medalType, inputPlaceHolder, setValue, scoreValue, imageValue, imageSelected } = data;
+
+	const [img_url, setImg_url] = useState('');
+
+	// ! here, setValue and imageValue are being monitored to re-render, need to watch only 'img_url'
+	useEffect(() => {
+		setValue((pv) => ({ ...pv, [imageValue]: img_url }));
+	}, [imageValue, img_url, setValue]);
+
+	function handleUrl(item = {}) {
+		// setUrl(item.finalUrl);
+		setImg_url(item.finalUrl);
+		// setValue((pv) => ({ ...pv, [imageValue]: item.finalUrl }));  //! (working but) gives an infinite loop of errors
+	}
 
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
@@ -37,22 +51,20 @@ function GetCard({ data, isLastItem, isBadgeEdit }) {
 				<IcMInfo className={styles.icm_info} />
 			</div>
 
-			<FileSelect
+			<FileUploader
 				uploadDesc="Upload files here"
 				className={styles.file_select_style}
 				value={imageSelected}
-				onChange={(val) => {
-					setValue((pv) => ({ ...pv, [imageValue]: val }));
-				}}
-				// accept=".png,.pkg"
+				onChange={(item) => handleUrl(item)}
 				style={{ width: isBadgeEdit ? '93%' : '80%' }}
+				// accept=".png,.pkg"
 			/>
+
 			{ isBadgeEdit && (
 				<div className={styles.save_update}>
 					<Button
 						size="sm"
 						themeType="primary"
-
 					>
 						Save
 					</Button>

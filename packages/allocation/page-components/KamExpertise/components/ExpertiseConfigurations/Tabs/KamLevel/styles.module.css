@@ -1,13 +1,13 @@
-.accrodian {
-	width: 100%;
-	margin-bottom: 18px;
-	:global(.ui_accordion_title){
-		flex: 1;
+.collapse {
+	:global(.ui_eAzQI){
+width: 100%;
 	}
-}
-.bottom_button{
-    margin-top: 12px;
-	background: #FFFFFF;
-	border: 1px solid #4F4F4F;
-	border-radius: 4px;
+	:global(.ui_OFaO2)
+	{
+		padding: 12px 16px;
+	}
+	
+	:global(.ui_NUlfK ){
+		padding: 0px;
+	}
 }
