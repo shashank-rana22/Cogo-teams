@@ -12,6 +12,7 @@ const useSendMessage = ({ channel_type = '' }) => {
 		user:{ id },
 
 	} = useSelector(({ profile }) => profile);
+
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : `/${API_MAPPING[channel_type]}`,
@@ -30,16 +31,17 @@ const useSendMessage = ({ channel_type = '' }) => {
 		try {
 			await trigger({
 				data: {
-					type       : channel_type,
+					type           : channel_type,
 					recipient,
 					message_metadata,
 					user_id,
 					organization_id,
-					service    : 'user',
-					service_id : id,
-					source     : 'CogoOne:AdminPlatform',
+					service        : 'user',
+					service_id     : (user_id || lead_user_id),
+					source         : 'CogoOne:AdminPlatform',
 					lead_user_id,
-					sender     : id,
+					sender         : id,
+					sender_user_id : id,
 				},
 			});
 		} catch (error) {
