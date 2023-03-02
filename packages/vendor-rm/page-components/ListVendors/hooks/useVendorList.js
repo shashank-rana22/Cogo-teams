@@ -124,6 +124,9 @@ const useVendorList = () => {
 		debounceQuery(value);
 	};
 
+	const expectedFilters = ['category', 'sub_categpry', 'registration_number'];
+	const isFilterInUse = expectedFilters.some((item) => Object.keys(params?.filters).includes(item));
+
 	const getHeader = () => (
 		<div className={styles.created_at_header}>
 			<div>
@@ -243,6 +246,7 @@ const useVendorList = () => {
 		setShowFilter,
 		searchValue,
 		handleChangeQuery,
+		isFilterInUse,
 	};
 };
 

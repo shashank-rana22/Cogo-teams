@@ -23,6 +23,10 @@
     letter-spacing: 0.02em;
 }
 
+.optional_tag {
+    font-size: 12px;
+}
+
 @media (max-width: 786px) {
     .form_container {
         display: flex;

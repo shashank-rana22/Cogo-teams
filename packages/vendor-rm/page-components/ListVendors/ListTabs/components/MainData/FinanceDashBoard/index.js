@@ -1,8 +1,10 @@
 import { Table } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useGetBfList from '../hooks/useGetBfList';
 
+import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
 function FinanceDashBoard() {
@@ -10,9 +12,13 @@ function FinanceDashBoard() {
 		data = [],
 		columns,
 		loading,
-	} = useGetBfList({
-		organizationId: '9f148fa6-79a7-4e60-8fab-bc889fc43a13',
-	});
+	} = useGetBfList();
+
+	if (isEmpty(data)) {
+		return (
+			<EmptyState />
+		);
+	}
 
 	return (
 		<div className={styles.main}>

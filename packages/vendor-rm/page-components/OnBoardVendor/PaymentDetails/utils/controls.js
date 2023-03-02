@@ -13,7 +13,7 @@ const controls = [
 		type        : 'text',
 		style       : { flexBasis: '30%' },
 		placeholder : 'Enter Account Number',
-		rules       : { required: 'Tax Number is Required' },
+		rules       : { required: 'Account Number is Required' },
 	},
 	{
 		name    : 'account_type',
@@ -59,7 +59,7 @@ const controls = [
 		style           : { flexBasis: '100%' },
 		themeType       : 'secondary',
 		draggable       : true,
-		uploadIcon      : 'ic-upload',
+		// uploadIcon      : 'ic-upload',
 		onlyURLOnChange : true,
 		accept          : 'image/*,.pdf,.doc,.docx',
 		uploadType      : 'aws',

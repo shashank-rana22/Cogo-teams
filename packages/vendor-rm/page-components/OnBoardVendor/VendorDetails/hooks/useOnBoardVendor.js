@@ -116,7 +116,7 @@ function useOnBoardVendor({
 						const { registrationType = '', registrationNumber = '' } = value || {};
 
 						if (!registrationNumber) {
-							return 'Tax Number is required';
+							return 'Registration Number is required';
 						}
 
 						if (Object.values(COUNTRY_IDS).includes(watchForm.country_id)) {

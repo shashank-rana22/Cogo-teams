@@ -22,6 +22,7 @@ function ListVendors() {
 		setShowFilter,
 		searchValue,
 		handleChangeQuery,
+		isFilterInUse,
 	} = useVendorList();
 
 	const {
@@ -74,7 +75,7 @@ function ListVendors() {
 							onClick={() => setShowFilter(!showFilter)}
 						>
 							{
-								!isFilterEmpty ? (
+								isFilterInUse ? (
 									<div className={styles.filter_in_use} />
 								) : null
 							}

@@ -37,7 +37,6 @@ const controls = [
 		type        : 'mobile-number-select',
 		style       : { flexBasis: '30%' },
 		placeholder : 'Type here',
-		rules       : { required: 'Whatsapp Number is required' },
 	},
 	{
 		name        : 'poc_role',
@@ -51,12 +50,12 @@ const controls = [
 	{
 		name            : 'contact_proof_url',
 		showLabel       : false,
-		label           : 'Upload Vendor Document Proof (Pan/Aadhar Card)',
+		label           : 'Upload Vendor Document Proof (PAN/Aadhar Card)',
 		style           : { flexBasis: '100%', marginRight: '0px' },
 		type            : 'file',
 		themeType       : 'secondary',
 		draggable       : true,
-		uploadIcon      : 'ic-upload',
+		// uploadIcon      : <IcMUpload height={40} width={40} />,
 		onlyURLOnChange : true,
 		uploadType      : 'aws',
 		rules           : { required: 'Tax Document is required' },

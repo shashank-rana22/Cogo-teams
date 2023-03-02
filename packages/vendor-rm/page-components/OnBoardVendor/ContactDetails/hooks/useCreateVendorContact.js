@@ -92,7 +92,7 @@ function useCreateVendorContact({
 				number: contact_details?.mobile_number?.number
 								|| contact_details?.mobile_number,
 				country_code: contact_details?.mobile_number?.country_code
-								|| contact_details?.mobile_country_code,
+								|| contact_details?.mobile_country_code || '+91',
 			},
 			whatsapp_number   : getWhatsAppNumber(),
 			contact_proof_url : contact_details?.contact_proof_url?.finalUrl || contact_details?.contact_proof_url,

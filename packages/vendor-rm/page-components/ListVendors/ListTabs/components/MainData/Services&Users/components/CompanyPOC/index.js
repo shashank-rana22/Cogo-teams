@@ -89,7 +89,7 @@ function CompanyPOC({
 						role="presentation"
 						onClick={() => setShowEditPocModal(!showEditPocModal)}
 					>
-						<IcMEdit style={{ marginRight: 5 }} />
+						<IcMEdit height={16} width={16} style={{ marginRight: '4px' }} />
 					</div>
 				</div>
 			</div>

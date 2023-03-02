@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 import subCategoryOptions from '../../../page-components/OnBoardVendor/VendorServices/utils/sub-category-options';
 import { getElementController } from '../../../utils/get-element-controller';
 
@@ -32,7 +34,12 @@ function FormLayout({
 
 				return (
 					<div className={styles.form_group} style={customStyle || element?.style}>
-						<div className={styles.form_label}>{element.label}</div>
+						<div className={styles.form_label}>
+							{element.label}
+							{isEmpty(controlItem?.rules)
+								? <span className={styles.optional_tag}> (optional) </span>
+								: null}
+						</div>
 						<div>
 							<Element
 								{...element}
