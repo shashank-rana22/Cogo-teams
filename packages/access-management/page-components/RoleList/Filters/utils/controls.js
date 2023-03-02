@@ -67,7 +67,6 @@ export const controls = (role_functions, partnerOptions) => [
 		...partnerOptions,
 		name        : 'stakeholder_id',
 		placeholder : 'Select partner',
-		size        : 'lg',
 		type        : 'select',
 		isClearable : true,
 		params      : { filters: { status: 'active' } },
@@ -75,7 +74,6 @@ export const controls = (role_functions, partnerOptions) => [
 	{
 		name           : 'navigation',
 		placeholder    : 'Select module',
-		size           : 'lg',
 		scope          : 'partner',
 		type           : 'select',
 		defaultOptions : true,
@@ -86,7 +84,6 @@ export const controls = (role_functions, partnerOptions) => [
 	{
 		name           : 'role_functions',
 		placeholder    : 'Select Function',
-		size           : 'lg',
 		scope          : 'partner',
 		type           : 'multiSelect',
 		defaultOptions : true,
@@ -115,7 +112,6 @@ export const controls = (role_functions, partnerOptions) => [
 	{
 		name           : 'role_sub_functions',
 		placeholder    : 'Select Sub-function',
-		size           : 'lg',
 		scope          : 'partner',
 		type           : 'multiSelect',
 		defaultOptions : true,
@@ -127,7 +123,6 @@ export const controls = (role_functions, partnerOptions) => [
 	{
 		name           : 'hierarchy_level',
 		placeholder    : 'Select Level',
-		size           : 'lg',
 		scope          : 'partner',
 		type           : 'select',
 		defaultOptions : true,

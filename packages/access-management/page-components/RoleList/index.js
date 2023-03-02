@@ -13,6 +13,7 @@ function RoleList() {
 		showCreateRoleModal = false,
 		onChangeShowCreateRoleModal = () => {},
 		filters = {},
+		onResetFilters = () => {},
 		onChangeFilters = () => {},
 		onChangeParams = () => {},
 		listAuthRolesApi = {},
@@ -30,6 +31,7 @@ function RoleList() {
 				onChangeShowCreateRoleModal={onChangeShowCreateRoleModal}
 				onChangeFilters={onChangeFilters}
 				stakeHolderType={stakeHolderType}
+				onResetFilters={onResetFilters}
 				setStakeHolderType={setStakeHolderType}
 			/>
 
