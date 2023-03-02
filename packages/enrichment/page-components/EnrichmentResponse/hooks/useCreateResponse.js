@@ -9,9 +9,9 @@ function useCreateResponse(props) {
 		user = {},
 		type,
 		index,
-		responseData,
 		setShowAddPoc,
-		setResponseData,
+		responses,
+		setResponses,
 		activeTab,
 		setShowDetailsForm,
 	} = props;
@@ -65,24 +65,24 @@ function useCreateResponse(props) {
 
 		};
 
-		const data = [...responseData];
+		const data = [...responses];
 
 		if (type === 'edit') {
 			const existingData = data[index];
 
 			data[index] = { ...existingData, ...newFormValues };
 
-			setResponseData(data);
+			setResponses(data);
 
 			setShowDetailsForm(false);
 		} else if (type === 'addPoc') {
 			const newData = [...data, newFormValues];
 
-			setResponseData(newData);
+			setResponses(newData);
 
 			setShowAddPoc(false);
 		} else {
-			setResponseData([{ ...newFormValues }]);
+			setResponses([{ ...newFormValues }]);
 		}
 	};
 

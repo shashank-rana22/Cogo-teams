@@ -1,4 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import { RESPONSE_TABS_MAPPING } from '../../constants/tab-panel-mapping';
 
@@ -15,12 +16,15 @@ function EnrichmentResponse() {
 		activeTab,
 		partner_id,
 		setActiveTab,
-		setResponseData,
+		list,
 		paginationData,
-		responseData,
 		showAddPoc,
 		setShowAddPoc,
 	} = useEnrichmentResponse();
+
+	if (isEmpty(list)) {
+		return null;
+	}
 
 	return (
 
@@ -41,14 +45,13 @@ function EnrichmentResponse() {
 						<TabPanel name={item.name} title={item.title}>
 
 							<Response
-								responseData={responseData}
-								setResponseData={setResponseData}
 								activeTab={activeTab}
 								loading={loading}
 								showAddPoc={showAddPoc}
 								setShowAddPoc={setShowAddPoc}
 								refetch={refetch}
 								paginationData={paginationData}
+								list={list}
 							/>
 
 						</TabPanel>

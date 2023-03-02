@@ -13,12 +13,12 @@ import Workscopes from './Workscopes';
 const cardHeading = getCardHeaders('card');
 
 function List({
-	user = {},
-	index = 1,
-	loading = false,
-	activeTab = '',
-	responseData = [],
-	setResponseData = () => {},
+	user,
+	index,
+	loading,
+	activeTab,
+	responses,
+	setResponses,
 }) {
 	const [showDetailsForm, setShowDetailsForm] = useState(false);
 
@@ -31,8 +31,8 @@ function List({
 			<CreateResponse
 				loading={loading}
 				activeTab={activeTab}
-				responseData={responseData}
-				setResponseData={setResponseData}
+				responses={responses}
+				setResponses={setResponses}
 				user={user}
 				index={index}
 				setShowDetailsForm={setShowDetailsForm}

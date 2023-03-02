@@ -4,11 +4,12 @@ import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const possibleResponseKeys = [
-	'name', 'email', 'mobile_number', 'mobile_country_code', 'whatsapp_number',
-	'whatsapp_country_code', 'alternate_mobile_number', 'alternate_mobile_country_code',
-	'work_scopes', 'tax_number', 'address', 'pincode', 'city', 'state', 'country',
-];
+const possibleResponseKeys = {
+	user: ['name', 'email', 'mobile_number', 'mobile_country_code', 'whatsapp_number',
+		'whatsapp_country_code', 'alternate_mobile_number', 'alternate_mobile_country_code', 'work_scopes'],
+
+	address: ['tax_number', 'address', 'pincode', 'city', 'state', 'country'],
+};
 
 const useSubmitResponses = (props) => {
 	const {
@@ -17,7 +18,7 @@ const useSubmitResponses = (props) => {
 
 	const router = useRouter();
 	const { query = {} } = router;
-	const { responseData = [], refetch } = props;
+	const { responses = [], refetch, activeTab } = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/feedback_response_bulk_create',
@@ -27,10 +28,10 @@ const useSubmitResponses = (props) => {
 
 	const handleResponseSubmit = async () => {
 		try {
-			const newResponses = responseData.map((response) => {
+			const newResponses = responses.map((response) => {
 				const filteredResponse = {};
 
-				possibleResponseKeys.forEach((key) => {
+				possibleResponseKeys[activeTab].forEach((key) => {
 					if (Object.keys(response).includes(key)) {
 						filteredResponse[key] = response[key];
 					}
@@ -41,7 +42,7 @@ const useSubmitResponses = (props) => {
 			await trigger({
 				data: {
 					responses           : newResponses,
-					response_type       : 'user',
+					response_type       : activeTab,
 					source              : 'manual',
 					feedback_request_id : query?.id,
 

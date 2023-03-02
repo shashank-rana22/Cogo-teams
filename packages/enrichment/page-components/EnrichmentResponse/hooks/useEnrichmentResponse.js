@@ -1,7 +1,6 @@
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 const useEnrichmentResponse = () => {
@@ -15,8 +14,6 @@ const useEnrichmentResponse = () => {
 	const { query = {} } = router;
 
 	const [activeTab, setActiveTab] = useState('user');
-
-	const [responseData, setResponseData] = useState([]);
 
 	const [showAddPoc, setShowAddPoc] = useState(false);
 
@@ -40,13 +37,6 @@ const useEnrichmentResponse = () => {
 	const { list = [], ...paginationData } = data || {};
 
 	useEffect(() => {
-		if (isEmpty(list)) {
-			return;
-		}
-		setResponseData(list);
-	}, [list]);
-
-	useEffect(() => {
 		setShowAddPoc(false);
 	}, [activeTab]);
 
@@ -58,8 +48,6 @@ const useEnrichmentResponse = () => {
 		setParams,
 		activeTab,
 		setActiveTab,
-		setResponseData,
-		responseData,
 		showAddPoc,
 		setShowAddPoc,
 		locale,
@@ -69,7 +57,3 @@ const useEnrichmentResponse = () => {
 };
 
 export default useEnrichmentResponse;
-
-// if list has data =>  show data
-// dont change data when tabs are changed
-// if list does not have data => show form

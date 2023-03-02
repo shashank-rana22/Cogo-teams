@@ -1,6 +1,7 @@
 import { Placeholder, Button } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import useSubmitResponses from '../../hooks/useSubmitResponses';
 
@@ -10,17 +11,19 @@ import styles from './styles.module.css';
 
 function Response(props) {
 	const {
-		responseData,
+		list,
 		loading,
 		activeTab,
-		setResponseData,
 		showAddPoc,
 		setShowAddPoc,
 		refetch,
 
 	} = props;
 
-	const { handleResponseSubmit, loadingSubmit } = useSubmitResponses({ responseData, setResponseData, refetch });
+	const [responses, setResponses] = useState([...list]);
+
+	// eslint-disable-next-line max-len
+	const { handleResponseSubmit, loadingSubmit }	 = 	useSubmitResponses({ responses, setResponses, refetch, activeTab });
 
 	if (loading) {
 		return (
@@ -30,13 +33,13 @@ function Response(props) {
 		);
 	}
 
-	if (isEmpty(responseData)) {
+	if (isEmpty(responses)) {
 		return (
 			<CreateResponse
 				loading={loading}
 				activeTab={activeTab}
-				responseData={responseData}
-				setResponseData={setResponseData}
+				responses={responses}
+				setResponses={setResponses}
 				type="create"
 			/>
 		);
@@ -46,15 +49,15 @@ function Response(props) {
 		<section>
 
 			<section>
-				{(responseData).map((user, index) => (
+				{(responses).map((user, index) => (
 					<List
 						key={user.id}
 						user={user}
 						index={index}
-						responseData={responseData}
-						setResponseData={setResponseData}
 						loading={loading}
 						activeTab={activeTab}
+						responses={responses}
+						setResponses={setResponses}
 					/>
 				))}
 
@@ -64,8 +67,8 @@ function Response(props) {
 					<CreateResponse
 						loading={loading}
 						activeTab={activeTab}
-						responseData={responseData}
-						setResponseData={setResponseData}
+						responses={responses}
+						setResponses={setResponses}
 						setShowAddPoc={setShowAddPoc}
 						showAddPoc={showAddPoc}
 						type="addPoc"
@@ -74,7 +77,7 @@ function Response(props) {
 				)}
 			</section>
 
-			{!isEmpty(responseData) && !showAddPoc && (
+			{!isEmpty(responses) && !showAddPoc && (
 				<section className={styles.footer}>
 
 					<div>
