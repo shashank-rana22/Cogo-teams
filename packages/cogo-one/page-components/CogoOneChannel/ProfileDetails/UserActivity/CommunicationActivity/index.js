@@ -22,6 +22,7 @@ function CommunicationActivity({ communication = {} }) {
 	};
 
 	let parseData;
+	let textData;
 	if (showDetails !== undefined && title === null) {
 		parseData = JSON.parse(showDetails);
 	}
@@ -39,6 +40,9 @@ function CommunicationActivity({ communication = {} }) {
 			{(list || []).map((item) => {
 				const { type = '', created_at = '', sender = '', content = {} } = item || {};
 				const { body = '', subject = '' } = content || {};
+				if (!subject && subject !== '') {
+					textData = JSON.parse(`${body}`);
+				}
 				return (
 					<>
 						<div className={styles.activity_date}>
@@ -51,13 +55,15 @@ function CommunicationActivity({ communication = {} }) {
 							<div className={styles.card}>
 								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 									<div className={styles.activity_type}>Communication</div>
-									<div
-										role="presentation"
-										onClick={() => handleContent(body, subject)}
-										style={{ fontSize: '12px', textDecoration: 'underline', color: '#034AFD', cursor: 'pointer' }}
-									>
-										View more
-									</div>
+									{(subject || subject === '') && (
+										<div
+											role="presentation"
+											onClick={() => handleContent(body, subject)}
+											style={{ fontSize: '12px', textDecoration: 'underline', color: '#034AFD', cursor: 'pointer' }}
+										>
+											View more
+										</div>
+									)}
 								</div>
 								<div className={styles.message_details}>
 									<div className={styles.title}>
@@ -70,15 +76,21 @@ function CommunicationActivity({ communication = {} }) {
 									</div>
 								</div>
 								<div className={styles.user_details}>
-									<div className={styles.user_message}>
-										You have a message On
-										{' '}
-										{format(created_at, 'dd MMM YYYY')}
-										{' '}
-										from
-										{' '}
-										{sender}
-									</div>
+									{(subject) ? (
+										<div className={styles.user_message}>
+											You have a message On
+											{' '}
+											{format(created_at, 'dd MMM YYYY')}
+											{' '}
+											from
+											{' '}
+											{sender}
+										</div>
+									) : (
+										<div className={styles.user_message}>
+											{textData?.text}
+										</div>
+									)}
 									<div className={styles.user_avatar}>
 										<Avatar
 											src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
@@ -102,6 +114,7 @@ function CommunicationActivity({ communication = {} }) {
 					closeOnOuterClick
 					onClose={onCloseModal}
 					className={styles.styled_ui_modal_dialog}
+					scroll={false}
 				>
 					<Modal.Header title={title || 'Message'} />
 					<Modal.Body>
