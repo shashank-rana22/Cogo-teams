@@ -1,4 +1,3 @@
-import { Pill } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -15,7 +14,6 @@ function LoginComponent({ login }) {
 			</div>
 			<div className={styles.main_card}>
 				<div className={styles.card}>
-					<Pill size="md" color="#f8aea8">Platform</Pill>
 					<div className={styles.title}>Secured Log in</div>
 					<div className={styles.description}>
 						On

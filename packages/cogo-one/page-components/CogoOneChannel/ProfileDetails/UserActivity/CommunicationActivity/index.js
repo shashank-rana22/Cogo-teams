@@ -53,52 +53,42 @@ function CommunicationActivity({ communication = {} }) {
 						</div>
 						<div className={styles.main_card}>
 							<div className={styles.card}>
-								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-									<div className={styles.activity_type}>Communication</div>
-									{(subject || subject === '') && (
-										<div
-											role="presentation"
-											onClick={() => handleContent(body, subject)}
-											style={{ fontSize: '12px', textDecoration: 'underline', color: '#034AFD', cursor: 'pointer' }}
-										>
-											View more
-										</div>
-									)}
-								</div>
-								<div className={styles.message_details}>
+								<div className={styles.activity_div}>
 									<div className={styles.title}>
 										Sent message on
 										{' '}
 										{startCase(type)}
 									</div>
-									<div className={styles.icon_type}>
+									<div role="presentation" className={styles.icon_type} onClick={() => handleContent(body, subject)}>
 										{SOURCE_ICON_MAPPING[type]}
 									</div>
 								</div>
-								<div className={styles.user_details}>
-									{(subject) ? (
-										<div className={styles.user_message}>
-											You have a message On
-											{' '}
-											{format(created_at, 'dd MMM YYYY')}
-											{' '}
-											from
-											{' '}
-											{sender}
-										</div>
-									) : (
-										<div className={styles.user_message}>
-											{textData?.text}
-										</div>
-									)}
-									<div className={styles.user_avatar}>
-										<Avatar
-											src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
-											alt="img"
-											disabled={false}
-											size="35px"
-										/>
+								<div className={styles.message_details}>
+									<div className={styles.user_details}>
+										{(subject) ? (
+											<div className={styles.user_message}>
+												You have a message On
+												{' '}
+												{format(created_at, 'dd MMM YYYY')}
+												{' '}
+												from
+												{' '}
+												<div>{sender}</div>
+											</div>
+										) : (
+											<div className={styles.user_message}>
+												{textData?.text}
+											</div>
+										)}
 									</div>
+								</div>
+								<div className={styles.user_avatar}>
+									<Avatar
+										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
+										alt="img"
+										disabled={false}
+										size="30px"
+									/>
 								</div>
 							</div>
 						</div>

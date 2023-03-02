@@ -1,4 +1,4 @@
-import { Tooltip, Pill } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -47,7 +47,6 @@ function PlatformActivity({ platform = {} }) {
 						</div>
 						<div className={styles.main_card}>
 							<div className={styles.card}>
-								<Pill size="md" color="#f8aea8">Platform</Pill>
 								<div className={styles.booking_details}>
 									<div className={styles.title}>
 										Shipment Status

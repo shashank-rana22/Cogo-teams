@@ -45,9 +45,6 @@ function TransactionalActivity({ transactional = {} }) {
 						</div>
 						<div className={styles.main_card}>
 							<div className={styles.card}>
-								<div className={styles.activity_type}>
-									Transactional
-								</div>
 								<div className={styles.booking_details}>
 									<div className={styles.title}>
 										{startCase(bookingStatus?.milestone)}

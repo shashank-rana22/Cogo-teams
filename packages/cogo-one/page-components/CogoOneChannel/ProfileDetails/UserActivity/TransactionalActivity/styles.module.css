@@ -35,14 +35,6 @@
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
-.activity_type {
-	width: fit-content;
-	padding: 2px 6px;
-	font-size: 10px;
-	background: #fef199;
-	border-radius: 6px;
-}
-
 .booking_details {
 	display: flex;
 	align-items: center;
