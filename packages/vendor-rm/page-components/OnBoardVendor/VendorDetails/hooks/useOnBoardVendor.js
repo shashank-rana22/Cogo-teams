@@ -7,7 +7,7 @@ import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty, merge, startCase } from '@cogoport/utils';
+import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
@@ -191,11 +191,16 @@ function useOnBoardVendor({
 	const createVendor = async ({ data, step }) => {
 		const formattedValues = getValues();
 
+		const {
+			registration_number: registrationNo,
+			registration_proof_url,
+		} = formattedValues || {};
+
 		const payload = {
 			...formattedValues,
-			registration_proof_url : formattedValues?.registration_proof_url?.finalUrl,
-			registration_number    : formattedValues?.registration_number?.registrationNumber,
-			registration_type      : formattedValues?.registration_number?.registrationType,
+			registration_proof_url : registration_proof_url?.finalUrl,
+			registration_number    : registrationNo?.registrationNumber,
+			registration_type      : registrationNo?.registrationType,
 		};
 
 		try {
@@ -214,7 +219,7 @@ function useOnBoardVendor({
 					...pv,
 					[key]: {
 						...data,
-						registration_proof_url: formattedValues?.registration_proof_url?.finalUrl,
+						registration_proof_url: registration_proof_url?.finalUrl,
 					},
 				};
 			});
@@ -228,20 +233,24 @@ function useOnBoardVendor({
 	};
 
 	useEffect(() => {
+		const {
+			vendor_details: vendorDetails = {},
+		} = vendorInformation;
+
 		fields.forEach((field) => {
 			if (field.name === 'registration_number') {
 				setValue(`${field.name}`, {
 					registrationNumber:
-					vendorInformation?.vendor_details?.registration_number?.registrationNumber
-					|| vendorInformation?.vendor_details?.registration_number,
-					registrationType: vendorInformation?.vendor_details?.registration_number?.registrationType
-					|| vendorInformation?.vendor_details?.registration_type,
+					vendorDetails?.registration_number?.registrationNumber
+					|| vendorDetails?.registration_number,
+					registrationType: vendorDetails?.registration_number?.registrationType
+					|| vendorDetails?.registration_type,
 				});
 			} else if (field.name === 'registration_proof_url') {
-				setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]
-				|| vendorInformation?.vendor_details?.[field.name].finalUrl);
+				setValue(`${field.name}`, vendorDetails?.[field.name]
+				|| vendorDetails?.[field.name]?.finalUrl);
 			} else {
-				setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
+				setValue(`${field.name}`, vendorDetails?.[field.name]);
 			}
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -36,19 +36,20 @@ function ServiceForm({
 			placement="center"
 		>
 			<Modal.Header title="Add Service" />
-			<Modal.Body>
-				<div className={styles.container}>
-					<FormLayout
-						fields={controls}
-						errors={errors}
-						control={control}
-						watch={watch}
-						setValue={setValue}
-						source="addServicePOC"
-					/>
-
-				</div>
-			</Modal.Body>
+			<div className={styles.body_container}>
+				<Modal.Body>
+					<div className={styles.container}>
+						<FormLayout
+							fields={controls}
+							errors={errors}
+							control={control}
+							watch={watch}
+							setValue={setValue}
+							source="addServicePOC"
+						/>
+					</div>
+				</Modal.Body>
+			</div>
 			<Modal.Footer>
 				<div className={styles.button_container}>
 					<Button
