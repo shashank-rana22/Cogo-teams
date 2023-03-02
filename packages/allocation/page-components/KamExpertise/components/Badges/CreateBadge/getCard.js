@@ -1,15 +1,13 @@
 import { Input, FileSelect, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 
 // import useBadgeConfigurationAttributes from '../../../hooks/useBadgeConfigurationAttributes';
 
 import styles from './styles.module.css';
 
-function GetCard(props) {
-	const { medalType, inputPlaceHolder, setScore, isLastItem, isBadgeEdit } = props;
-
-	const [value, setValue] = useState();
+function GetCard({ data, isLastItem, isBadgeEdit }) {
+	const { medalType, inputPlaceHolder, setValue, scoreValue, imageValue, imageSelected } = data;
 
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
@@ -24,7 +22,13 @@ function GetCard(props) {
 
 				<div>
 					<p style={{ color: '#4f4f4f' }}>Score</p>
-					<Input size="sm" placeholder={inputPlaceHolder} onChange={(val) => setScore(val)} />
+					<Input
+						size="sm"
+						placeholder={inputPlaceHolder}
+						onChange={(val) => {
+							setValue((pv) => ({ ...pv, [scoreValue]: val }));
+						}}
+					/>
 				</div>
 			</div>
 
@@ -33,13 +37,13 @@ function GetCard(props) {
 				<IcMInfo className={styles.icm_info} />
 			</div>
 
-			{/* <div className={styles.display_flex} style={{ alignItems: 'flex-end' }}> */}
-			{/* <FileSelect {... upload_props} /> */}
 			<FileSelect
 				uploadDesc="Upload files here"
 				className={styles.file_select_style}
-				value={value}
-				onChange={(val) => setValue(val)}
+				value={imageSelected}
+				onChange={(val) => {
+					setValue((pv) => ({ ...pv, [imageValue]: val }));
+				}}
 				// accept=".png,.pkg"
 				style={{ width: isBadgeEdit ? '93%' : '80%' }}
 			/>
