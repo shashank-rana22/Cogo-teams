@@ -52,7 +52,7 @@ function RightPanel(props) {
 							debounceQuery={debounceQuery}
 							searchValue={searchValue}
 							setSearchValue={setSearchValue}
-							showStatistics={secondaryTab === 'submitted_requests'}
+							showStatistics={false}
 						/>
 					</TabPanel>
 				))}

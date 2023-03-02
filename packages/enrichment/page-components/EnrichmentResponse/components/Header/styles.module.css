@@ -9,8 +9,8 @@
 }
 
 .header {
-	display: grid;
-	grid-template-columns: auto auto auto;
+	display: flex;
+	justify-content: space-between;
 	height: 60px;
 	padding: 20px;
 	margin-top: 16px;

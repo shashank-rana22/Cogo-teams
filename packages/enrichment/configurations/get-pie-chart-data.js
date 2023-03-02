@@ -23,7 +23,7 @@ function getPieChartData({ stats = {} }) {
 		chart_2: {
 
 			title  : 'Turnaround Time',
-			colors : ['#F7FAEF', '#C4DC91', '#ABCD62', '#849E4C'],
+			colors : ['#84af18','#aae11e', '#d0ee82', '#e3f5b5'],
 			data   : [
 
 				{

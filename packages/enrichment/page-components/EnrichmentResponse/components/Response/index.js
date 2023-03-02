@@ -3,7 +3,7 @@ import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import useSubmitResponses from '../../hooks/useSubmitResponses';
+// import useSubmitResponses from '../../hooks/useSubmitResponses';
 
 import CreateResponse from './CreateResponse';
 import List from './List';
@@ -17,7 +17,6 @@ function Response(props) {
 		showAddPoc,
 		setShowAddPoc,
 		refetch,
-
 	} = props;
 
 	const [responses, setResponses] = useState([]);
@@ -27,7 +26,7 @@ function Response(props) {
 	}, [list]);
 
 	// eslint-disable-next-line max-len
-	const { handleResponseSubmit, loadingSubmit }	 = 	useSubmitResponses({ responses, setResponses, refetch, activeTab });
+	// const { handleResponseSubmit, loadingSubmit } = useSubmitResponses({ responses, setResponses, refetch, activeTab });
 
 	if (loading) {
 		return (
@@ -76,6 +75,7 @@ function Response(props) {
 						setShowAddPoc={setShowAddPoc}
 						showAddPoc={showAddPoc}
 						type="addPoc"
+						refetch={refetch}
 					/>
 
 				)}
@@ -96,7 +96,7 @@ function Response(props) {
 						</Button>
 					</div>
 
-					<div>
+					{/* <div>
 						<Button
 							themeType="primary"
 							size="md"
@@ -106,7 +106,7 @@ function Response(props) {
 						>
 							Submit
 						</Button>
-					</div>
+					</div> */}
 				</section>
 			)}
 		</section>

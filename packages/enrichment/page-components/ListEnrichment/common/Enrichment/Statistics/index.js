@@ -33,12 +33,12 @@ function Statistics() {
 					<ResponsivePie
 						data={chartData.data}
 						innerRadius={0}
-						activeOuterRadiusOffset={8}
+						activeOuterRadiusOffset={4}
 						enableArcLinkLabels={false}
 						enableArcLabels={false}
 						colors={chartData.colors}
 						colorBy="index"
-						margin={{ top: 0, right: 40, bottom: 72, left: 40 }}
+						margin={{ top: 5, right: 40, bottom: 72, left: 40 }}
 						legends={[
 							{
 								anchor        : 'left',
