@@ -1,7 +1,7 @@
 import { Placeholder, Button } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useSubmitResponses from '../../hooks/useSubmitResponses';
 
@@ -20,7 +20,11 @@ function Response(props) {
 
 	} = props;
 
-	const [responses, setResponses] = useState([...list]);
+	const [responses, setResponses] = useState([]);
+
+	useEffect(() => {
+		setResponses([...list]);
+	}, [list]);
 
 	// eslint-disable-next-line max-len
 	const { handleResponseSubmit, loadingSubmit }	 = 	useSubmitResponses({ responses, setResponses, refetch, activeTab });

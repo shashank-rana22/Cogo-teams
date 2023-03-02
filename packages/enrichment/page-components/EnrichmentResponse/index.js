@@ -1,5 +1,4 @@
 import { TabPanel, Tabs } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 
 import { RESPONSE_TABS_MAPPING } from '../../constants/tab-panel-mapping';
 
@@ -21,10 +20,6 @@ function EnrichmentResponse() {
 		showAddPoc,
 		setShowAddPoc,
 	} = useEnrichmentResponse();
-
-	if (isEmpty(list)) {
-		return null;
-	}
 
 	return (
 

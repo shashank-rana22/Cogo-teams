@@ -54,11 +54,10 @@ const useSubmitResponses = (props) => {
 			});
 
 			Toast.success('Response Submitted Successfully');
-
-			refetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
+		refetch();
 	};
 
 	return {
