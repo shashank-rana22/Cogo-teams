@@ -30,7 +30,7 @@ export const CARD_LABELS_MAPPING = {
 		state      : 'State',
 		country    : 'Country',
 		pincode    : 'Pincode',
-		gst_number : 'Tax Number',
+		tax_number : 'Tax Number',
 
 	},
 };

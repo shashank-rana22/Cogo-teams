@@ -37,7 +37,7 @@ function EnrichmentResponse() {
 				>
 
 					{Object.values(RESPONSE_TABS_MAPPING).map((item) => (
-						<TabPanel name={item.name} title={item.title}>
+						<TabPanel key={item.name} name={item.name} title={item.title}>
 
 							<Response
 								activeTab={activeTab}
