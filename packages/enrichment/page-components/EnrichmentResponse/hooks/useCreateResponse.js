@@ -65,9 +65,9 @@ function useCreateResponse(props) {
 
 		};
 
-		if (type === 'edit') {
-			const data = [...responseData];
+		const data = [...responseData];
 
+		if (type === 'edit') {
 			const existingData = data[index];
 
 			data[index] = { ...existingData, ...newFormValues };
@@ -75,12 +75,14 @@ function useCreateResponse(props) {
 			setResponseData(data);
 
 			setShowDetailsForm(false);
+		} else if (type === 'addPoc') {
+			const newData = [...data, newFormValues];
+
+			setResponseData(newData);
+
+			setShowAddPoc(false);
 		} else {
 			setResponseData([{ ...newFormValues }]);
-
-			if (type === 'addPoc') {
-				setShowAddPoc(false);
-			}
 		}
 	};
 
