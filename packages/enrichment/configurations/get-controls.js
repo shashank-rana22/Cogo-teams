@@ -154,7 +154,7 @@ const getUserControls = ({ activeTab = '' }) => {
 
 			},
 			{
-				name        : 'gst_number',
+				name        : 'tax_number',
 				label       : 'GSTIN',
 				type        : 'text',
 				placeholder : 'Type here...',

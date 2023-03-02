@@ -6,8 +6,8 @@ import useEnrichmentRequests from '../../hooks/useEnrichmentRequests';
 import styles from './styles.module.css';
 
 const CARD_LABEL_MAPPING = {
-	business_name       : 'Organization Name',
-	registration_number : 'Registration Number',
+	business_name: 'Organization Name',
+	// registration_number : 'Registration Number',
 };
 
 function Header(props) {

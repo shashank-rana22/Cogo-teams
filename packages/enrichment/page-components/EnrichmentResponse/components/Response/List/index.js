@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
 import {
@@ -58,14 +57,14 @@ function List({
 
 				<div>
 
-					<Button
+					{/* <Button
 						themeType="secondary"
 						type="button"
 						size="md"
 						onClick={() => setShowDetailsForm(true)}
 					>
 						Edit
-					</Button>
+					</Button> */}
 				</div>
 			</div>
 
