@@ -5,6 +5,7 @@ import {
 	IcMAttach,
 	IcMSend,
 	IcMDelete,
+	IcMRefresh,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
@@ -147,7 +148,18 @@ function MessageConversations({
 
 	const messageConversation = (
 		<>
-			{loadingPrevMessages && loader}
+			{loadingPrevMessages
+				? loader
+				: (
+					<div className={styles.load_prev_messages}>
+						{!lastPage && (
+							<IcMRefresh
+								className={styles.refresh_icon}
+								onClick={getNextData}
+							/>
+						)}
+					</div>
+				)}
 			{(messagesData || []).map((eachMessage) => (
 				eachMessage?.conversation_type !== 'received' ? (
 					<ReceiveDiv

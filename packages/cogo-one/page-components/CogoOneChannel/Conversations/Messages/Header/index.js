@@ -5,7 +5,7 @@ import { useState } from 'react';
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import UserAvatar from '../../../../../common/UserAvatar';
 import { PLATFORM_MAPPING } from '../../../../../constants';
-import HideDetails from '../../../../../utils/hideDetails';
+import hideDetails from '../../../../../utils/hideDetails';
 
 import Assignes from './Assignes';
 import TagsPopOver from './HeaderFuncs';
@@ -42,9 +42,11 @@ function Header({
 		if (user_name?.includes('anonymous')) {
 			return PLATFORM_MAPPING[user_type] || '';
 		}
-		const mobileNo = HideDetails({ data: mobile_no, type: 'number' });
-		return mobile_no ? `+${mobileNo}` : business_name;
+		return mobile_no
+			? `+${hideDetails({ data: mobile_no, type: 'number' })}`
+			: business_name;
 	};
+
 	const disableAssignButton = !hasPermissionToEdit && !showBotMessages;
 	const assignButtonAction = () => {
 		if (showBotMessages) {

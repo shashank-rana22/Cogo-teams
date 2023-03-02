@@ -1,12 +1,12 @@
 import { Placeholder } from '@cogoport/components';
-import { IcCWhatsapp, IcMEmail } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+
+import OtherChannelsConfig from '../../../../../configurations/other-channels-config';
+import hideDetails from '../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
 function ConversationContainer({ userData, loading, noData = false }) {
-	const { email, name, whatsapp_number_eformat } = userData || {};
-
 	if (isEmpty(userData) || noData) {
 		return (
 			<div className={styles.empty}>No data Found...</div>
@@ -32,40 +32,28 @@ function ConversationContainer({ userData, loading, noData = false }) {
 				</div>
 			))
 		) : (
-
 			<div className={styles.wrapper}>
-				{!isEmpty(whatsapp_number_eformat) && (
+				{OtherChannelsConfig.map(({ name, icon, value_type }) => !isEmpty(userData?.[name]) && (
 					<div className={styles.contacts_container}>
 						<div className={styles.container}>
-							<div className={styles.icon_type}><IcCWhatsapp width={25} height={25} /></div>
+							<div className={styles.icon_type}>{icon}</div>
 							<div className={styles.details}>
 								<div className={styles.header}>
-									<div className={styles.name}>{name}</div>
+									<div className={styles.name}>{userData?.name || ''}</div>
 								</div>
-								<div className={styles.organization}>{whatsapp_number_eformat}</div>
+								<div className={styles.organization}>
+									{hideDetails({
+										data : userData?.[name],
+										type : value_type,
+									})}
+								</div>
 							</div>
-
 						</div>
 					</div>
-				)}
-				{!isEmpty(email) && (
-					<div className={styles.contacts_container}>
-						<div className={styles.container}>
-							<div className={styles.icon_type}><IcMEmail width={25} height={25} fill="#E09B3D" /></div>
-							<div className={styles.details}>
-
-								<div className={styles.header}>
-									<div className={styles.name}>{name}</div>
-								</div>
-								<div className={styles.organization}>{email}</div>
-
-							</div>
-
-						</div>
-					</div>
-				)}
+				))}
 			</div>
 		)
 	);
 }
+
 export default ConversationContainer;
