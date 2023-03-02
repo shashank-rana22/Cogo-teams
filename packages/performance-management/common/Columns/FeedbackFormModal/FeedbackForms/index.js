@@ -127,6 +127,7 @@ function FeedbackForms({
 			return;
 		}
 		setQuestionsToShow(form_questions);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formData]);
 
 	if (questionsLoading) {
@@ -198,7 +199,7 @@ function FeedbackForms({
 								<div className={styles.radio_group}>
 									<RadioGroup
 										options={resignedOptions}
-										value={pastRating.toString() || rating[id]?.rating}
+										value={rating[id]?.rating}
 										onChange={(val) => {
 											if (action !== 'show') {
 												setRating({ ...rating, [id]: { ...(rating[id]), rating: val } });
