@@ -1,4 +1,4 @@
-export const chatsStatsDummyData = [
+export const chatsStatsData = [
 	{
 		label      : 'No. of chats closed',
 		percentage : 'chats_closed_percent',

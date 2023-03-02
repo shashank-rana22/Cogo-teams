@@ -1,6 +1,6 @@
 import { IcCWhatsapp, IcCFacebook } from '@cogoport/icons-react';
 
-import { mailIcon, platformChatIcon } from '../page-components/CogoOneDashboard/constants';
+import { mailIcon, platformChatIcon } from '../constants';
 
 export const messageAnalytics = [
 	{

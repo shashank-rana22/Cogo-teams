@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import Calender from '../../../common/Calendar';
-import CallAnalytics from '../../../common/CallAnalytics';
-import ChannelMessageAnalytic from '../../../common/ChannelMessageAnalytics';
-import ChatStatistics from '../../../common/ChatStatistics';
-import Header from '../../../common/Header';
-import LineChart from '../../../common/LineChart';
+import Calendar from '../common/Calendar';
+import CallAnalytics from '../common/CallAnalytics';
+import ChannelMessageAnalytic from '../common/ChannelMessageAnalytics';
+import ChatStatistics from '../common/ChatStatistics';
+import Header from '../common/Header';
+import LineChart from '../common/LineChart';
 
-import Intelligence from './Intelligence';
+import Intelligence from './Improvement';
 import IntentServed from './IntentServed';
 import Statisfaction from './Statisfaction';
 import styles from './styles.module.css';
@@ -32,7 +32,7 @@ function AgentDashboard(props) {
 			/>
 			<div className={styles.sub_container}>
 				<div className={styles.left_sub_container}>
-					<Calender props={props} />
+					<Calendar props={props} />
 					<LineChart cogoOneDashboardGraph={cogo_one_dashboard_graph} timeline={timeline} />
 					<div className={styles.statistics}>
 						<ChannelMessageAnalytic

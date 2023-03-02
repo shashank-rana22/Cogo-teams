@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import { callAnalyticsStatData } from '../../configurations/dummyCallAnalyticData';
+import { callAnalyticsStatData } from '../../configurations/call-analytic-data';
 
 import styles from './styles.module.css';
 

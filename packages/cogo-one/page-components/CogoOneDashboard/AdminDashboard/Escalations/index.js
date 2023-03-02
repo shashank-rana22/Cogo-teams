@@ -4,8 +4,8 @@ import React from 'react';
 
 // import { configurationData } from '../../../../configurations/configurationData';
 import { agentAvatar, emptyEscalations } from '../../constants';
-import LoaderEscalation from '../LoaderEscalations';
 
+import LoaderEscalation from './LoaderEscalations';
 import styles from './styles.module.css';
 
 function Escalation({ loading = false, escalations = [] }) {

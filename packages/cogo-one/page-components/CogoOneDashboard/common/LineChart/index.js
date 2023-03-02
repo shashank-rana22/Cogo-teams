@@ -2,7 +2,7 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import React from 'react';
 
-import chartData from '../../configurations/dummyDateData';
+import chartData from '../../configurations/line-chart-data';
 
 import styles from './styles.module.css';
 

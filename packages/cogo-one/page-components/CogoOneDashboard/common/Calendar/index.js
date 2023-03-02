@@ -101,7 +101,9 @@ function Calendar({ props }) {
 
 	const addProcessData = (func) => {
 		const newData = [];
-		for (let i = numberOfDays + (shiftDays * (pagination - 1)); i < numberOfDays + (pagination * shiftDays); i += 1) {
+		for (let i = numberOfDays + (shiftDays * (pagination - 1));
+			i < numberOfDays + (pagination * shiftDays);
+			i += 1) {
 			newData.push(func(i));
 		}
 		const data = [];

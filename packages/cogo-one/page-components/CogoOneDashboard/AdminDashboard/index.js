@@ -1,12 +1,12 @@
 // import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-import Calender from '../../../common/Calendar';
-import CallAnalytics from '../../../common/CallAnalytics';
-import ChannelMessageAnalytic from '../../../common/ChannelMessageAnalytics';
-import ChatStatistics from '../../../common/ChatStatistics';
-import Header from '../../../common/Header';
-import LineChart from '../../../common/LineChart';
+import Calendar from '../common/Calendar';
+import CallAnalytics from '../common/CallAnalytics';
+import ChannelMessageAnalytic from '../common/ChannelMessageAnalytics';
+import ChatStatistics from '../common/ChatStatistics';
+import Header from '../common/Header';
+import LineChart from '../common/LineChart';
 
 import AgentActivity from './AgentActivity';
 import Escalation from './Escalations';
@@ -35,7 +35,7 @@ function AdminDashboard(props) {
 				<div className={styles.calenderchart_plus_escalations}>
 					<div className={styles.calender_chart}>
 						<div className={styles.calender_container}>
-							<Calender props={props} />
+							<Calendar props={props} />
 						</div>
 						<LineChart cogoOneDashboardGraph={cogo_one_dashboard_graph} timeline={timeline} />
 					</div>

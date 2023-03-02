@@ -8,8 +8,8 @@ import React, { useState } from 'react';
 // eslint-disable-next-line import/named
 // import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../../configurations/dummyPerformanceTabsData';
 import { emptyPerformance, agentAvatar } from '../../constants';
-import LoaderPerformance from '../LoaderPerformance';
 
+import LoaderPerformance from './LoaderPerformance';
 import styles from './styles.module.css';
 
 function PerformanceTab({ loading = false, agentsPerformance = {} }) {

@@ -1,15 +1,15 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import { chatsStatsDummyData } from '../../configurations/chats-statistics-dummny-data';
-import { dArrow, aArrow } from '../../page-components/CogoOneDashboard/constants';
+import { chatsStatsData } from '../../configurations/chats-statistics-data';
+import { dArrow, aArrow } from '../../constants';
 
 import styles from './styles.module.css';
 
 function ChatStatistics({ isAdminView = false, loading = false, statusOfChats = {} }) {
 	return (
 		<>
-			{chatsStatsDummyData.map((item) => {
+			{chatsStatsData.map((item) => {
 				const { label, percentage, isAgent, key } = item;
 				return (
 					(isAdminView || isAgent) && (

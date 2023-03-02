@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { intentServedData } from '../../../../configurations/dummyIntentservedData';
+import { intentServedData } from '../../configurations/intent-served-data';
 
 import styles from './styles.module.css';
 

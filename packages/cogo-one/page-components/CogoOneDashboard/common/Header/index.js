@@ -5,7 +5,7 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
-import { cogoOneLogo } from '../../page-components/CogoOneDashboard/constants';
+import { cogoOneLogo } from '../../constants';
 
 import styles from './styles.module.css';
 

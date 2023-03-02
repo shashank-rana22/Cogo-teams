@@ -1,4 +1,4 @@
-import { missedcallIcon, incomingcallIcon, outgoingcallIcon } from '../page-components/CogoOneDashboard/constants';
+import { missedcallIcon, incomingcallIcon, outgoingcallIcon } from '../constants';
 
 export const callAnalytics = [
 	{

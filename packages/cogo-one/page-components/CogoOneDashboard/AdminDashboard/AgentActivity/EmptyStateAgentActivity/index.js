@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { emptyImage } from '../constants';
+import { emptyImage } from '../../../constants';
 
 import styles from './styles.module.css';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { satisfactionData } from '../../../../configurations/dummyStatisfactionData';
+import { satisfactionData } from '../../configurations/statisfaction-data';
 
 import styles from './styles.module.css';
 

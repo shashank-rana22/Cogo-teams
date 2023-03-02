@@ -1,4 +1,4 @@
-import { happyIcon, neutralIcon, angryIcon } from '../page-components/CogoOneDashboard/constants';
+import { happyIcon, neutralIcon, angryIcon } from '../constants';
 
 export const satisfactionData = [
 	{

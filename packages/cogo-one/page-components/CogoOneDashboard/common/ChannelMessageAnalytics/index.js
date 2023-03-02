@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import { channelMessageAnayticsData } from '../../configurations/dummyChannelMessageAnalyticData';
+import { channelMessageAnayticsData } from '../../configurations/channel-message-analytic-data';
 
 import styles from './styles.module.css';
 

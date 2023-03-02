@@ -1,7 +1,6 @@
 import React from 'react';
 
-import LoaderIntelligence from '../LoaderIntelligence';
-
+import LoaderImprovement from './LoaderImprovement';
 import styles from './styles.module.css';
 
 // const Data = [
@@ -9,7 +8,7 @@ import styles from './styles.module.css';
 // 	'Work on reaching out to more customers ',
 // ];
 
-function Intelligence({ loading = false }) {
+function Improvement({ loading = false }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.improvement}>
@@ -19,7 +18,7 @@ function Intelligence({ loading = false }) {
 				<div className={styles.improvement_text_box}>
 					{
 						loading
-							? <LoaderIntelligence />
+							? <LoaderImprovement />
 							: (
 								<>
 									<div className={styles.dot} />
@@ -48,4 +47,4 @@ function Intelligence({ loading = false }) {
 	);
 }
 
-export default Intelligence;
+export default Improvement;

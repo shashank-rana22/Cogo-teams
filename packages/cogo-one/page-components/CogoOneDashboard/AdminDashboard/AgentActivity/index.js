@@ -4,10 +4,10 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { configurationData } from '../../../../configurations/configurationData';
+import { configurationData } from '../../configurations/configurationData';
 import { agentAvatar } from '../../constants';
-import EmptyState from '../../EmptyState';
 
+import EmptyStateAgentActivity from './EmptyStateAgentActivity';
 import styles from './styles.module.css';
 
 function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
@@ -51,7 +51,7 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 				})}
 
 			</div>
-			{isEmpty(agentsDetails?.[activeTab]?.agents) ? <EmptyState />
+			{isEmpty(agentsDetails?.[activeTab]?.agents) ? <EmptyStateAgentActivity />
 				: (
 					<div className={styles.main_container_lowerpart}>
 						{agentsDetails?.[activeTab]?.agents?.map((item) => {
