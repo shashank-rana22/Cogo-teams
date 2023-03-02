@@ -103,7 +103,6 @@ const useGetBfList = () => {
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => console.log('poiuytrewq')}
 					>
 						{' '}
 						VIEW MORE

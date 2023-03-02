@@ -46,8 +46,7 @@
 
 .element_container {
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap: row wrap;
 	width: 90.5%;
 }
 
@@ -55,7 +54,4 @@
 	/* display: flex;
 	justify-content: baseline; */
 	margin: 42px 0 0;
-}
-
-@media (max-width: 800px) {
 }

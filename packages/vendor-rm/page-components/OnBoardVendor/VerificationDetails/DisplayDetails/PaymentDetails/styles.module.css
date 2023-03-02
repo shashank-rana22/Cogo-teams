@@ -18,8 +18,7 @@
 
 .single_record {
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap: row wrap;
 }
 
 .label {

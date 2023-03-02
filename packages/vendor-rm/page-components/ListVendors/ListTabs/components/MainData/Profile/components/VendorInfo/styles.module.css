@@ -7,7 +7,6 @@
 	display: flex;
 	align-items: center;
 	margin-bottom: 1rem;
-	font-family: Poppins;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 600;
@@ -30,7 +29,6 @@
 }
 
 .top {
-	font-family: Poppins;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 400;
@@ -41,7 +39,6 @@
 
 .bottom {
 	width: 250px;
-	font-family: Poppins;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 500;
@@ -64,7 +61,6 @@
 
 .bottom1 {
 	width: 500px;
-	font-family: Poppins;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 500;
@@ -81,7 +77,14 @@
 .dis1 {
 	height: 1px;
 	background: #000;
-	background: repeating-linear-gradient(90deg, #000, #000 6px, transparent 6px, transparent 12px);
+	background:
+		repeating-linear-gradient(
+			90deg,
+			#000,
+			#000 6px,
+			transparent 6px,
+			transparent 12px
+		);
 	border: none;
 	opacity: 0.07;
 }

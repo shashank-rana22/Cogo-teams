@@ -43,7 +43,7 @@ function useGetVendor() {
 				router.push(href, as);
 			}
 		} catch (error) {
-			console.log('error :: ', error);
+			// console.log('error :: ', error);
 		}
 	};
 
