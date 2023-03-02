@@ -34,7 +34,7 @@ function useCreateQuestions({ data, setEditorError }) {
 		setEditorError,
 	});
 
-	const { onSubmitUpdatedForm, loading:updateApiLoading } = useUpdateFaqSet({
+	const { onSubmitUpdatedForm, loading: updateApiLoading } = useUpdateFaqSet({
 		setQuestionPreview,
 		editorValue,
 		data,

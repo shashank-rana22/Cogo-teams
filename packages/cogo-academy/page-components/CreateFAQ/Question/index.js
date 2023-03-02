@@ -117,7 +117,7 @@ function CreateFAQ() {
 			setQuestionValue('tag_ids', filterTags);
 			setQuestionValue('topic_ids', filterTopics);
 			setQuestionValue('audience_ids', filterAudiences);
-			setEditorValue(RichTextEditor?.createValueFromString((answers?.[0]?.answer || ''), 'markdown'));
+			setEditorValue(RichTextEditor?.createValueFromString((answers?.[0]?.answer || ''), 'html'));
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
