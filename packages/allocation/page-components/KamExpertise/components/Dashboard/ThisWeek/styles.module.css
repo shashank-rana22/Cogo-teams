@@ -18,6 +18,16 @@
 	padding: 16px 24px 4px;
 	background: #fff;
 	border-radius: 8px;
+	height: 160px;
+}
+
+.inner_card_item {
+	width: 100%;
+	padding: 16px 24px 4px;
+	background: #fff;
+	border-radius: 8px;
+	height: 124px;
+
 }
 
 .card_title {

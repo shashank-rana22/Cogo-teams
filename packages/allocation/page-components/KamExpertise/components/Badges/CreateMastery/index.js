@@ -1,4 +1,4 @@
-import { Textarea, Button, Modal, FileSelect } from '@cogoport/components';
+import { Textarea, Button, FileSelect } from '@cogoport/components';
 import { useState } from 'react';
 
 import GetLabelInputPair from '../CreateBadge/getLabelInputPair';
@@ -6,7 +6,7 @@ import Header from '../CreateBadge/header';
 
 import styles from './styles.module.css';
 
-function CreateMastery({ setCreateMastery }) {
+function CreateMastery({ setWindow }) {
 	const [value, setValue] = useState([]);
 	const [file, setFile] = useState([]);
 	const params = {
@@ -55,10 +55,11 @@ function CreateMastery({ setCreateMastery }) {
 		},
 	];
 	const onClose = () => {
-		setCreateMastery((pv) => !pv);
+		setWindow(1);
 	};
 	return (
-		<Modal size="xl" show onClose={onClose} placement="center">
+		// <div size="xl" show onClose={onClose} placement="center"></div>
+		<div>
 			<section className={styles.container}>
 				<Header />
 				<div className={styles.content_container}>
@@ -108,7 +109,7 @@ function CreateMastery({ setCreateMastery }) {
 					</Button>
 				</div>
 			</section>
-		</Modal>
+		</div>
 	);
 }
 export default CreateMastery;

@@ -1,8 +1,14 @@
 import React from 'react';
 
+import useGetBadgeConfiguration from '../../../hooks/useGetBadgeConfiguration';
+
 function ThisMonth() {
+	const { loading, userData } = useGetBadgeConfiguration();
+	console.log(userData);
 	return (
-		<div>ThisMonth</div>
+		<div>
+			This month
+		</div>
 	);
 }
 

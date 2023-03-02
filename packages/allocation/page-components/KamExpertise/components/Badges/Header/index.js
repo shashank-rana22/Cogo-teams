@@ -12,10 +12,11 @@ const OPTIONS = [
 	},
 ];
 
-function Header({ badgeList, setCreateBadge, setCreateMastery }) {
+function Header({ badgeList, setWindow }) {
 	const [searchValue, setSearchValue] = useState('Search');
 	const [disabled, setDisabled] = useState(true);
 	const [expertise, setExpertise] = useState('');
+
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.filter_container}>
@@ -44,7 +45,7 @@ function Header({ badgeList, setCreateBadge, setCreateMastery }) {
 					size="md"
 					className={styles.button}
 					onClick={() => {
-						setCreateMastery((pv) => !pv);
+						setWindow(2);
 					}}
 				>
 					Mastery
@@ -54,7 +55,7 @@ function Header({ badgeList, setCreateBadge, setCreateMastery }) {
 					themeType="primary"
 					size="md"
 					onClick={() => {
-						setCreateBadge((pv) => !pv);
+						setWindow(3);
 					}}
 				>
 					{

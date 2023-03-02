@@ -1,4 +1,4 @@
-import { Pill, Button } from '@cogoport/components';
+import { Pill, Button, Placeholder } from '@cogoport/components';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -28,12 +28,79 @@ function MasteryListItem() {
 
 	// const {
 	// 	onCheckPublish, loadingCheckPublishability,
-	// } = useBadgeConfiguration();
+	// } = useCreateBadgeConfiguration();
 	// // } = useBadgeConfigurationAttributes();
 
 	const handleSubmit = () => {
 		console.log('edit button clicked');
 	};
+
+	if (false) {
+		return (
+			<div className={styles.container}>
+
+				<div className={styles.header}>
+					{/* <p>
+						#000
+						{ruleType}
+					</p> */}
+					<Placeholder width="60px" height="20px" />
+					{/* <Button themeType="secondary" onClick={handleSubmit}>Edit</Button> */}
+					<Placeholder width="60px" height="20px" />
+				</div>
+
+				<div className={styles.content}>
+					<div className={styles.details}>
+						<div>
+							<div style={{ paddingBottom: '12px' }}>
+								{/* Event Name :
+								{' '}
+								<b>{data.event_name}</b> */}
+								<Placeholder width="160px" height="20px" style={{ marginTop: '12px' }} />
+							</div>
+							<div>
+								<Placeholder width="400px" height="20px" style={{ marginTop: '12px' }} />
+								{' '}
+								<Placeholder width="400px" height="20px" style={{ marginTop: '12px' }} />
+							</div>
+						</div>
+						<div className={styles.modified}>
+							<div>
+
+								{' '}
+								<Placeholder width="200px" height="20px" />
+
+							</div>
+							<div>
+								{' '}
+								<Placeholder width="200px" height="20px" />
+
+							</div>
+						</div>
+					</div>
+
+					<div className={styles.rules}>
+						<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
+						<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
+						{
+                        data.rules.map((item) => (
+	<span className={styles.pill}>
+		{/* <Pill color="#edd7a9">{item.badge_name}</Pill> */}
+		<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
+
+	</span>
+                        ))
+                    }
+					</div>
+
+					<div className={styles.badge}>
+						<Placeholder width="140px" height="140px" />
+					</div>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 
