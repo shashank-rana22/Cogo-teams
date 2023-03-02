@@ -25,6 +25,8 @@ function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call 
 
 	const conditionCheck = !isEmpty(dtmf_inputs) && type === 'user';
 
+	const dtmfOptions = Object.entries(dtmf_inputs || {})?.map(([key, value]) => ({ key, value }));
+
 	return (
 		<div>
 
@@ -62,12 +64,12 @@ function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call 
 								content={(
 									<div className={styles.ivr_details}>
 
-										{(dtmf_inputs || []).map((item) => {
-											const [label = '', value = ''] = item.split(':');
+										{(dtmfOptions || []).map((item) => {
+											const { key = '', value = '' } = item;
 
 											return (
 												<div className={styles.details}>
-													{startCase(label)}
+													{startCase(key)}
 													{' '}
 													:
 													{' '}
