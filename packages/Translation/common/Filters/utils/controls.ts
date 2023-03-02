@@ -4,7 +4,7 @@ export const filterControls: FilterItem[] = [
 	{
 		name        : 'serviceName',
 		placeholder : 'Service',
-		size        : 'lg',
+		// size        : 'lg',
 		type        : 'select',
 		caret       : true,
 		isClearable : true,
@@ -34,7 +34,7 @@ export const filterControls: FilterItem[] = [
 	{
 		name        : 'targetLanguage',
 		placeholder : 'Target Language',
-		size        : 'lg',
+		// size        : 'lg',
 		type        : 'select',
 		caret       : true,
 		isClearable : true,
