@@ -1,4 +1,4 @@
-import { Button, Input, Popover, Tooltip } from '@cogoport/components';
+import { Button, Input, Tooltip } from '@cogoport/components';
 import { IcMSearchlight, IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 

@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 interface Data {
 	vendorName?: string,
-	transactionDate?:object | string,
+	transactionDate?: Date,
 }
 
 interface Props {
@@ -45,10 +45,8 @@ function NonRecurringSummary({ nonRecurringData }:Props) {
 		},
 		{
 			title : 'Transaction Date',
-			value : <div>
-				{formatDate(nonRecurringData?.transactionDate, 'dd/MMM/yy', {}, false) || 'N/A'}
+			value : <div>{formatDate(nonRecurringData?.transactionDate, 'dd/MMM/yy', {}, false) || 'N/A'}</div>,
 
-			</div>,
 		},
 		{
 			title : 'Period',

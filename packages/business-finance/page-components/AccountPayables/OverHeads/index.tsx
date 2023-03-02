@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 
 import Expenses from './Expenses/index';
@@ -12,7 +13,7 @@ function Overheads() {
 				<div className={styles.flex}>
 					<div
 						onClick={() => {
-              	setActiveTab('vendors');
+							setActiveTab('vendors');
 						}}
 					>
 						<div
@@ -26,7 +27,7 @@ function Overheads() {
 
 					<div
 						onClick={() => {
-              	setActiveTab('expenses');
+							setActiveTab('expenses');
 						}}
 					>
 						<div
@@ -40,7 +41,7 @@ function Overheads() {
 
 					<div
 						onClick={() => {
-                	setActiveTab('reports');
+							setActiveTab('reports');
 						}}
 					>
 						<div

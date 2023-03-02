@@ -10,7 +10,7 @@ import TotalAfterTax from './TotalAfterTax';
 import TotalColumn from './TotalColumn';
 
 function LineItemsForm() {
-	const { control, handleSubmit, watch, register, setValue, getValues } = useForm(
+	const { control, watch, register } = useForm(
 		{
 			defaultValues: {
 				line_items: [
@@ -24,7 +24,8 @@ function LineItemsForm() {
 		name: 'line_items',
 	});
 
-	const { lineItemsData, loading } = usePostListItemTaxes();
+	const { lineItemsData } = usePostListItemTaxes();
+	console.log('lineItemsData->', lineItemsData);
 
 	const watchFieldArray = watch('line_items');
 	const controlledFields = fields.map((field, index) => ({

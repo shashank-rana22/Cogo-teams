@@ -64,7 +64,7 @@ const lineItemColumns = (remove, control, register) => {
 		{
 			Header   : 'TDS',
 			id       : 'tds',
-			accessor : (row, index) => (
+			accessor : () => (
 				<div style={{ width: '96px' }}>
 					TDS here...
 				</div>

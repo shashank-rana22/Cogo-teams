@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { useFieldArray, useForm } from '@cogoport/forms';
 import React from 'react';
 
@@ -10,7 +9,7 @@ import TotalAfterTax from './TotalAfterTax';
 import TotalColumn from './TotalColumn';
 
 function LineItemsForm() {
-	const { control, handleSubmit, watch, register, setValue } = useForm();
+	const { control, watch, register } = useForm();
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'line_items',

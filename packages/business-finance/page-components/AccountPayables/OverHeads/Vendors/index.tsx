@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { Select, Button, Input, Tooltip } from '@cogoport/components';
 import { IcMSearchlight, IcMFtick, IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -9,7 +10,6 @@ import useListVendors from './hooks/useListVendors';
 import styles from './styles.module.css';
 import VENDOR_CONFIG from './utils/config';
 import Controls from './utils/controls';
-import dummyData from './utils/data';
 
 interface ItemProps {
 	createdDate:String,
@@ -34,9 +34,9 @@ function VenderComponent() {
 	const [sort, setSort] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [dropdownId, setDropdownId] = useState(null);
-	const { listData, loading } = useListVendors(filters);
+	const { listData } = useListVendors(filters);
 
-	const { list, page, total, total_count, page_limit } = listData || {};
+	console.log('listData->', listData);
 
 	const handleChange = (e, value) => {
 		setFilters((previousState) => ({
@@ -49,7 +49,7 @@ function VenderComponent() {
 		<div className={styles.headerContainer}>
 			<div className={styles.leftContainer}>
 				{
-                        Object.keys(Controls).map((key) => {
+                Object.keys(Controls).map((key) => {
                         	const { options = [], placeholder = '', value = '' } = Controls[key];
                         	return (
 	<Select
@@ -60,8 +60,8 @@ function VenderComponent() {
 		className={styles.select}
 		isClearable
 	/>
-                        	);
-                        })
+                	);
+                })
                     }
 
 			</div>
@@ -207,7 +207,7 @@ function VenderComponent() {
 				sort={sort}
 				setSort={setSort}
 				functions={functions}
-				page={page || 1}
+				// page={page || 1}
 				handlePageChange={(pageValue:number) => {
 					setFilters((p) => ({ ...p, page: pageValue }));
 				}}
