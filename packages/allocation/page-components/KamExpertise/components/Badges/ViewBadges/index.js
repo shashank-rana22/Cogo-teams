@@ -12,6 +12,7 @@ function ViewBadges() {
 			<BadgesList />
 
 			<ProfileBadgeCard />
+
 		</>
 	);
 }

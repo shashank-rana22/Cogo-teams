@@ -1,4 +1,4 @@
-import { ProgressBar } from '@cogoport/components';
+import { ProgressBar, Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
@@ -19,6 +19,86 @@ function BadgeDescription() {
 
 	const star_url = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/star-icon.svg';
 
+	// ! loadingState logic
+	if (false) {
+		return (
+			<div className={styles.card}>
+				<p className={styles.heading}>
+					<Placeholder width="160px" height="20px" />
+				</p>
+				<div className={styles.main_container}>
+					<div className={styles.badge_container}>
+						<Placeholder width="140px" height="180px" />
+					</div>
+
+					<div className={styles.matter_container}>
+						<div className={styles.lable_value_container}>
+							<div className={styles.lable_value}>
+								<Placeholder width="120px" height="20px" />
+								<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
+							</div>
+							{Badge.type !== 'Mastery' && (
+								<div className={styles.lable_value}>
+									<Placeholder width="120px" height="20px" />
+									<Placeholder width="120px" height="60px" style={{ marginTop: '8px' }} />
+								</div>
+							)}
+						</div>
+						<div className={styles.lable_value}>
+							<Placeholder width="120px" height="20px" />
+							<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
+						</div>
+
+						<div className={styles.lable_value}>
+							<Placeholder width="120px" height="20px" />
+							<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
+
+						</div>
+						<div className={styles.description_container}>
+							<Placeholder width="120px" height="20px" />
+							<Placeholder width="120px" height="20px" />
+						</div>
+
+					</div>
+				</div>
+
+				{Badge.type !== 'Mastery' && (
+					<div>
+						<Placeholder width="240px" height="20px" />
+
+					</div>
+				)}
+				{
+				Badge.type === 'Mastery'
+				&& (
+					<div className={styles.mastery_unlock}>
+						<h6 className={styles.lable}>
+							{' '}
+							<Placeholder width="240px" height="20px" />
+						</h6>
+						<div className={styles.flex_container}>
+							<div className={styles.mastery_badge_container}>
+
+								<Placeholder width="80px" height="80px" />
+
+							</div>
+							<div className={styles.mastery_badge_container}>
+
+								<Placeholder width="80px" height="80px" />
+
+							</div>
+							<div className={styles.mastery_badge_container}>
+
+								<Placeholder width="80px" height="80px" />
+
+							</div>
+						</div>
+					</div>
+				)
+}
+			</div>
+		);
+	}
 	return (
 		<div className={styles.card}>
 			<p className={styles.heading}>
