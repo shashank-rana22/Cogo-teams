@@ -10,21 +10,21 @@
 }
 
 .pagination {
-	margin-top: 12px;
-	width: 100%;
 	display: flex;
 	justify-content: flex-end;
-  } 
+	width: 100%;
+	margin-top: 12px;
+}
 
 .border {
-	border-bottom: 0.1px solid #7e7a7a;
 	margin-left: 40px;
-  
+	border-bottom: 0.1px solid #7e7a7a;
+
 	&:hover {
-	  box-shadow: 2px 2px 4px #848282;
-	  background-color: #ffffff;
+		background-color: #fff;
+		box-shadow: 2px 2px 4px #848282;
 	}
-  }
+}
 
 .subtitle {
 	font-size: 14px;
@@ -32,10 +32,10 @@
 }
 
 .heading_container {
+	z-index: 10;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	z-index: 10;
 
 	@media (max-width: 768px) {
 		flex-flow: column wrap;

@@ -1,21 +1,18 @@
-.container{
-    padding: 4px;
+.container {
+	padding: 4px;
 }
 
-.header{
-    font-weight: 600;
-    padding-bottom: 6px;
+.header {
+	padding-bottom: 6px;
+	font-weight: 600;
 }
 
-.button_Container{
-    display: flex;
-    padding-top: 13px;
-    justify-content: flex-end;
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 13px;
 }
 
-.text_wrapper{
-    font-size: 13px;
+.text_wrapper {
+	font-size: 13px;
 }
-
-
-

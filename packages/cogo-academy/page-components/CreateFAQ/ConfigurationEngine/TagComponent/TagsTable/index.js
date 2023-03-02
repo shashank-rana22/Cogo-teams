@@ -74,9 +74,7 @@ function TagTable({
 	return (
 		<>
 			{renderTable()}
-
 		</>
-
 	);
 }
 

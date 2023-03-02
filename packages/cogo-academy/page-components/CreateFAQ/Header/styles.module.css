@@ -6,7 +6,7 @@
 	font-weight: 500;
 }
 
-.buttonContainer {
+.button_container {
 	display: flex;
 	align-items: center;
 }
