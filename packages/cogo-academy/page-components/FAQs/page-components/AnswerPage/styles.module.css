@@ -121,8 +121,7 @@
 
 .remark {
 	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
+	flex-flow: column wrap;
 	align-content: space-around;
 	margin-bottom: 16px;
 }

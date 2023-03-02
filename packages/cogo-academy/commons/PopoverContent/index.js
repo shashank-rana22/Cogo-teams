@@ -21,7 +21,7 @@ function PopOverContent({
 				{source}
 			</div>
 
-			<div className={styles.button_Container}>
+			<div className={styles.button_container}>
 				<div style={{ marginRight: '8px' }}>
 					<Button
 						size="sm"

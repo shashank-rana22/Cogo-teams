@@ -19,10 +19,6 @@
 	cursor: pointer;
 }
 
-.transition{
-
-}
-
 .title {
 	display: flex;
 	align-items: center;
@@ -37,7 +33,6 @@
 .relatedquestion {
 	margin-top: 20%;
 	margin-bottom: 2%;
-	font-family: Poppins;
 	font-size: 15px;
 	font-style: normal;
 	font-weight: 1000;
@@ -57,7 +52,6 @@
 	padding-bottom: 5px;
 	margin-top: 5%;
 	margin-bottom: 5%;
-	font-family: Poppins;
 	font-size: 11px;
 	font-style: normal;
 	font-weight: 400;
@@ -114,8 +108,7 @@
 
 .remark {
 	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
+	flex-flow: column wrap;
 	align-content: space-around;
 	margin-bottom: 16px;
 }

@@ -22,7 +22,6 @@
 
 .relatedquestion {
 	margin-top: 20%;
-	font-family: Poppins;
 	font-size: 15px;
 	font-style: normal;
 	font-weight: 1000;
@@ -47,7 +46,6 @@
 .sidetext {
 	padding-bottom: 5px;
 	margin-bottom: 5%;
-	font-family: Poppins;
 	font-size: 11px;
 	font-style: normal;
 	font-weight: 400;
@@ -104,8 +102,7 @@
 
 .remark {
 	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
+	flex-flow: column wrap;
 	align-content: space-around;
 	margin-bottom: 16px;
 }
