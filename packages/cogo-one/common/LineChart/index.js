@@ -1,19 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import chartData from '../../configurations/dummyDateData';
 
 import styles from './styles.module.css';
-
-// const funcs = {
-// 	day: formatDay(),
-// 	week: formatWeek(),
-// 	month: formatMonth(),
-// };
-
-// funcs[key]
 
 function LineChart({ cogoOneDashboardGraph = {}, timeline }) {
 	const { graph_stats = {} } = cogoOneDashboardGraph || {};
@@ -28,7 +19,7 @@ function LineChart({ cogoOneDashboardGraph = {}, timeline }) {
 						<div className={styles.legend_text}>On Message</div>
 					</div>
 					<div className={styles.users_nos}>
-						{graph_stats?.on_message_users}
+						{graph_stats?.on_message_users || 0}
 						<span>Users</span>
 					</div>
 				</div>
@@ -38,7 +29,7 @@ function LineChart({ cogoOneDashboardGraph = {}, timeline }) {
 						<div className={styles.legend_text}>On Call</div>
 					</div>
 					<div className={styles.users_nos}>
-						{graph_stats?.on_call_users}
+						{graph_stats?.on_call_users || 0}
 						<span>Users</span>
 					</div>
 				</div>
@@ -46,48 +37,46 @@ function LineChart({ cogoOneDashboardGraph = {}, timeline }) {
 			</div>
 
 			{
-				isEmpty(cogoOneDashboardGraph) ? <div>empty</div>
-					: (
-						<div className={styles.chart_container}>
-							{(
-								<ResponsiveLine
-									data={GraphData}
-									margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
-									xScale={{ type: 'point' }}
-									yFormat=" >-.2f"
-									axisTop={null}
-									axisRight={null}
-									axisBottom={{
-										orient         : 'bottom',
-										tickSize       : 5,
-										tickPadding    : 5,
-										tickRotation   : 0,
-										// legend         : 'transportation',
-										legendOffset   : 36,
-										legendPosition : 'middle',
-									}}
-									axisLeft={{
-										orient         : 'left',
-										tickSize       : 7,
-										tickValues     : 5,
-										tickPadding    : 5,
-										tickRotation   : 0,
-										legend         : 'Customers',
-										legendOffset   : -40,
-										legendPosition : 'middle',
-									}}
-									colors={['#C4C4C4', '#F98600']}
-									enableGridX={false}
-									pointSize={4}
-									pointColor={{ theme: 'background' }}
-									pointBorderWidth={4}
-									pointBorderColor={{ from: 'serieColor' }}
-									pointLabelYOffset={-12}
-									useMesh
-								/>
+
+				<div className={styles.chart_container}>
+					{(
+						<ResponsiveLine
+							data={GraphData}
+							margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+							xScale={{ type: 'point' }}
+							yFormat=" >-.2f"
+							axisTop={null}
+							axisRight={null}
+							axisBottom={{
+								orient         : 'bottom',
+								tickSize       : 5,
+								tickPadding    : 5,
+								tickRotation   : 0,
+								// legend         : 'transportation',
+								legendOffset   : 36,
+								legendPosition : 'middle',
+							}}
+							axisLeft={{
+								orient         : 'left',
+								tickSize       : 7,
+								tickValues     : 5,
+								tickPadding    : 5,
+								tickRotation   : 0,
+								legend         : 'Customers',
+								legendOffset   : -40,
+								legendPosition : 'middle',
+							}}
+							colors={['#C4C4C4', '#F98600']}
+							enableGridX={false}
+							pointSize={4}
+							pointColor={{ theme: 'background' }}
+							pointBorderWidth={4}
+							pointBorderColor={{ from: 'serieColor' }}
+							pointLabelYOffset={-12}
+							useMesh
+						/>
 					)}
-						</div>
-					)
+				</div>
 
 			}
 		</div>

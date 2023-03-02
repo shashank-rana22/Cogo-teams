@@ -33,7 +33,7 @@ function AgentDashboard(props) {
 			<div className={styles.sub_container}>
 				<div className={styles.left_sub_container}>
 					<Calender props={props} />
-					<LineChart cogoOneDashboardGraph={cogo_one_dashboard_graph} />
+					<LineChart cogoOneDashboardGraph={cogo_one_dashboard_graph} timeline={timeline} />
 					<div className={styles.statistics}>
 						<ChannelMessageAnalytic
 							loading={loading}

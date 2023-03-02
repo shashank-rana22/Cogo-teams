@@ -45,7 +45,7 @@ function CallAnalytics({ loading = false, callsAnalytics = {} }) {
 							? <Placeholder height="15px" width="100px" className={styles.customer_nos_placeholder} />
 							: (
 								<div className={styles.customer_nos}>
-									<span className={styles.calls_counts}>{callsAnalytics?.[stat.key]}</span>
+									<span className={styles.calls_counts}>{callsAnalytics?.[stat.key] || 0}</span>
 									<span>{stat.static_data}</span>
 								</div>
 							)}

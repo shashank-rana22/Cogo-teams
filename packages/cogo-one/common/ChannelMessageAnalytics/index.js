@@ -49,7 +49,7 @@ function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {}
 							? <Placeholder height="15px" width="100px" className={styles.customer_nos_placeholder} />
 							: (
 								<div className={styles.customer_nos}>
-									<span>{channelsMessageAnalytics?.[stat.key]}</span>
+									<span>{channelsMessageAnalytics?.[stat.key] || 0}</span>
 									{' '}
 									<span>{stat.static_data}</span>
 								</div>

@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-spaces-and-tabs */
 // import { Tabs, TabPanel } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -70,7 +71,13 @@ function PerformanceTab({ loading = false, agentsPerformance = {} }) {
 										<div className={styles.picture_name_kam_box}>
 											<div className={styles.picture}><img src={agentAvatar} alt="AA" /></div>
 											<div className={styles.name}>{agent_name}</div>
-											<div className={styles.job_role}>{role?.[0].name}</div>
+
+											<Tooltip
+												content={<div>{role?.[0].name}</div>}
+												placement="bottom"
+											>
+												<div className={styles.job_role}>{role?.[0].name}</div>
+											</Tooltip>
 										</div>
 										<div className={styles.notification_nos}>
 											{agents_performance}

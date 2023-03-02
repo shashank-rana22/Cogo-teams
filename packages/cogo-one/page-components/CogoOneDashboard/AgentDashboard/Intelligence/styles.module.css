@@ -17,14 +17,13 @@
 .improvement {
 	font-size: 16px;
 	font-weight: 600;
-	line-height: 28px;
 	color: #4f4f4f;
 }
 
-.box {
+/* .box {
 	overflow-y: auto;
 }
-.box::-webkit-scrollbar { display: none; }
+.box::-webkit-scrollbar { display: none; } */
 
 .improvement_text_box {
 	display: flex;
