@@ -32,15 +32,21 @@ function FeedbackForms({
 		formData = {},
 		loading: questionsLoading = false,
 	} = useGetForm({
-		item, action, showForm,
+		item,
+		action,
+		showForm,
+		feedback_id,
+		feedbackMonth,
+		feedbackYear,
 	});
 
 	const { form_questions = [], form_id = '', form_responses = [], feedback_data = {} } = formData;
 
-	const questionsToShow = action === 'show' ? form_responses : form_questions;
+	// const questionsToShow = action === 'show' || !feedback_id ? form_responses : form_questions;
 
 	const [rating, setRating] = useState({});
 	const [comment, setComment] = useState('');
+	const [questionsToShow, setQuestionsToShow] = useState([]);
 
 	const { onSubmitData, loading = false } = useCreateUserFeedback({
 		rating,
@@ -104,7 +110,24 @@ function FeedbackForms({
 
 	const loadArr = [1, 2, 3, 4, 5];
 
-	useEffect(() => setComment(feedback_data.feedback), [feedback_data]);
+	useEffect(() => {
+		if (action === 'show' || !!feedback_id) {
+			const pastRating = {};
+
+			form_responses.forEach((res) => {
+				pastRating[res.id] = {
+					rating   : res.rating.toString(),
+					feedback : res.feedback,
+				};
+			});
+
+			setQuestionsToShow(form_responses);
+			setComment(feedback_data.feedback);
+			setRating(pastRating);
+			return;
+		}
+		setQuestionsToShow(form_questions);
+	}, [formData]);
 
 	if (questionsLoading) {
 		return (
@@ -144,7 +167,7 @@ function FeedbackForms({
 			)}
 
 			{(questionsToShow || []).map((key) => {
-				const { id, question, rating: pastRating = '', description = '', feedback = '' } = key || {};
+				const { id, question, description = '' } = key || {};
 
 				if (showForm === 'resigned') {
 					return (
@@ -216,7 +239,7 @@ function FeedbackForms({
 							<div className={styles.radio_group}>
 								<RadioGroup
 									options={newOptions}
-									value={pastRating.toString() || rating[id]?.rating}
+									value={rating[id]?.rating}
 									onChange={(val) => {
 										if (action !== 'show') {
 											setRating({ ...rating, [id]: { ...(rating[id]), rating: val } });
@@ -228,12 +251,12 @@ function FeedbackForms({
 
 						<div className={styles.question_feedback}>
 							<Textarea
-								value={feedback || rating[id]?.feedback}
+								value={rating[id]?.feedback}
 								disabled={action === 'show'}
 								onChange={(val) => {
 									setRating({ ...rating, [id]: { ...(rating[id]), feedback: val } });
 								}}
-								placeholder={action === 'show' && isEmpty(feedback)
+								placeholder={action === 'show' && isEmpty(rating[id].feedback)
 									? 'No Feedback Provided' : 'Convey the reason for feedback...'}
 								style={{ height: '60px' }}
 							/>
