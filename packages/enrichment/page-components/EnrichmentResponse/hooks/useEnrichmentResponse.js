@@ -21,7 +21,7 @@ const useEnrichmentResponse = () => {
 	const [showAddPoc, setShowAddPoc] = useState(false);
 
 	const [params, setParams] = useState({
-		sort_type : 'desc',
+		sort_type : 'asc',
 		sort_by   : 'created_at',
 		page      : 1,
 		filters   : {
