@@ -26,9 +26,29 @@
 }
 
 .number {
+	position: relative;
+	display: inline-block;
 	font-size: 24px;
 	font-weight: 600;
 	color: #4f4f4f;
+}
+
+.number::after {
+	position: absolute;
+	bottom: 0;
+	left: 1px;
+	width: 12%;
+	height: 1px;
+	content: "";
+	background-color: #000;
+	transition: transform 0.25s ease-out;
+	transform: scaleX(0);
+	transform-origin: bottom right;
+}
+
+.number:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }
 
 .right_time_spent_container {

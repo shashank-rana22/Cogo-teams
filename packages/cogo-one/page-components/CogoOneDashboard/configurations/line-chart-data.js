@@ -144,10 +144,11 @@ const FORMAT_TYPE = {
 	},
 };
 
-const chartData = ({ cogoOneDashboardGraph = {} }, timeline) => {
-	const { message_graph_data = {}, call_graph_data = {} }	= isEmpty(cogoOneDashboardGraph)
+const chartData = ({ cogoOneDashboardGraph = {}, timeline }) => {
+	const data = isEmpty(cogoOneDashboardGraph)
 		? emptyChartData[timeline]
 		: cogoOneDashboardGraph;
+	const { message_graph_data = {}, call_graph_data = {} }	= data || {};
 
 	// console.log('message_ ::', message_graph_data);
 	// console.log('message_ ::', call_graph_data);

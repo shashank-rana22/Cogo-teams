@@ -19,11 +19,15 @@ function CogoOneDashboard() {
 	const {
 		userRoleId,
 		partnerUserId,
-	} = useSelector(({ profile }) => ({
+		query,
+	} = useSelector(({ profile, general }) => ({
 		userRoleId: profile.partner.user_role_ids[0]
 		|| {},
-		partnerUserId: profile.partner.partner_user_id,
+		partnerUserId : profile.partner.partner_user_id,
+		query         : general?.query,
+
 	}));
+	const { view = '' } = query || {};
 	const kamAgentRoleId = '0bc8c199-09ed-4a85-b3a3-a855f05a2716'; // KAM - SME Demand
 	const isAgentView = userRoleId.includes(kamAgentRoleId);
 	const { loading, listData = {}, getCogoOneDashboard = () => {} } = 	useGetCogoOneDashboard(
@@ -40,14 +44,13 @@ function CogoOneDashboard() {
 		listData,
 		loading,
 	};
-	console.log(isAgentView, 'isAgentView');
 
 	return (
 		<div>
 			{selectedItem && (
 				<div className={styles.prime_container}>
-					{!isAgentView
-						? <AgentDashboard {...commomProps} />
+					{isAgentView || view === 'agent'
+						? <AgentDashboard {...commomProps} timeline={timeline} />
 						: <AdminDashboard {...commomProps} getCogoOneDashboard={getCogoOneDashboard} />}
 				</div>
 			)}

@@ -6,9 +6,9 @@ import chartData from '../../configurations/line-chart-data';
 
 import styles from './styles.module.css';
 
-function LineChart({ cogoOneDashboardGraph = {}, timeline }) {
+function LineChart({ cogoOneDashboardGraph = {}, timeline = '' }) {
 	const { graph_stats = {} } = cogoOneDashboardGraph || {};
-	const GraphData = chartData({ cogoOneDashboardGraph }, timeline) || [];
+	const GraphData = chartData({ cogoOneDashboardGraph, timeline }) || [];
 
 	return (
 		<div className={styles.main_container}>

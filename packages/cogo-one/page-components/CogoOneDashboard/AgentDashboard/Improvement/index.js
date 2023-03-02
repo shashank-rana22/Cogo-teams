@@ -24,7 +24,7 @@ function Improvement({ loading = false }) {
 									<div className={styles.dot} />
 									<div className={styles.improvement_text}>
 										Your chat reply time was
-										{/* <span className={styles.time_durations_value}>
+										{/* <span className={styles.value}>
 											{(data[item] || 0) >= 60 ? ((data[item] || 0) / 60).toFixed(2)
     						   : (data[item] || 0)}
 										</span>

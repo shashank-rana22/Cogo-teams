@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Calendar from '../common/Calendar';
 import CallAnalytics from '../common/CallAnalytics';
 import ChannelMessageAnalytic from '../common/ChannelMessageAnalytics';
@@ -16,7 +14,6 @@ import TotalChatsHandled from './TotalChatshandled';
 
 function AgentDashboard(props) {
 	const { timeline, setTimeline, listData, loading } = props || {};
-	const [activeTab, setActiveTab] = useState('day');
 	const {
 		customer_satisfaction = {}, intents_served = {}, calls_analytics = {},
 		channels_message_analytics = {}, cogo_one_dashboard_graph = {}, status_of_chats = {},
@@ -25,8 +22,6 @@ function AgentDashboard(props) {
 	return (
 		<div className={styles.prime_container}>
 			<Header
-				activeTab={activeTab}
-				setActiveTab={setActiveTab}
 				timeline={timeline}
 				setTimeline={setTimeline}
 			/>

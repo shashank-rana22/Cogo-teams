@@ -11,7 +11,7 @@ import EmptyStateAgentActivity from './EmptyStateAgentActivity';
 import styles from './styles.module.css';
 
 function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
-	const router = useRouter();
+	const { push } = useRouter();
 	const [activeTab, setActiveTab] = useState('busy_agents');
 	const { agents_details_config } = configurationData;
 
@@ -59,7 +59,7 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 
 							const redirectToAgentView = (agentId = '42270ace-f97e-41e2-90bc-a336d90d791f') => {
 								if (!agentId) return;
-								router.push('/cogo-one/dashboard/[id]', `/cogo-one/dashboard/${agentId}`);
+								push('/cogo-one/dashboard/[id]', `/cogo-one/dashboard/${agentId}`);
 								if (agentId) {
 									getCogoOneDashboard(agentId);
 								}
