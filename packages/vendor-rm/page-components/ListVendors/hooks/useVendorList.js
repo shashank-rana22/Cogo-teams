@@ -8,12 +8,32 @@ import { useState, useEffect } from 'react';
 
 import styles from '../styles.module.css';
 
-const ICON_MAPPING = {
-	pending_verification : <IcMError width={16} height={16} />,
-	pending_from_user    : <IcMError width={16} height={16} />,
-	verified             : <IcCFtick width={16} height={16} />,
-	rejected             : <IcMCrossInCircle width={16} height={16} />,
+const ICON_STYLE = {
+	height : '16px',
+	width  : '16px',
 };
+
+const ICON_MAPPING = {
+	pending_verification : <IcMError {...ICON_STYLE} />,
+	pending_from_user    : <IcMError {...ICON_STYLE} />,
+	verified             : <IcCFtick {...ICON_STYLE} />,
+	rejected             : <IcMCrossInCircle {...ICON_STYLE} />,
+};
+
+const iconFilterMapping = [
+	{
+		icon       : IcMArrowRotateUp,
+		asc        : '#f68b21',
+		filterType : 'asc',
+		style      : { paddingTop: '2px' },
+	},
+	{
+		icon       : IcMArrowRotateDown,
+		desc       : '#f68b21',
+		filterType : 'desc',
+		style      : { paddingBottom: '2px' },
+	},
+];
 
 const renderToolTipContent = (unique_services) => (
 	<div>
@@ -133,22 +153,21 @@ const useVendorList = () => {
 				CREATED AT
 			</div>
 			<div className={styles.filter_icon_container}>
-				<IcMArrowRotateUp
-					fill={`${params?.sort_type === 'asc' ? '#f68b21' : '#000'}`}
-					onClick={() => setParams((pv) => ({
-						...pv,
-						sort_type: 'asc',
-					}))}
-					style={{ paddingTop: '2px' }}
-				/>
-				<IcMArrowRotateDown
-					fill={`${params?.sort_type === 'desc' ? '#f68b21' : '#000'}`}
-					onClick={() => setParams((pv) => ({
-						...pv,
-						sort_type: 'desc',
-					}))}
-					style={{ paddingBottom: '2px' }}
-				/>
+				{
+					iconFilterMapping.map((item) => {
+						const { icon: Icon, filterType = '', style = {} } = item;
+						return (
+							<Icon
+								fill={item[params?.sort_type] || '#000'}
+								onClick={() => setParams((pv) => ({
+									...pv,
+									sort_type: filterType,
+								}))}
+								style={style}
+							/>
+						);
+					})
+				}
 			</div>
 		</div>
 	);
