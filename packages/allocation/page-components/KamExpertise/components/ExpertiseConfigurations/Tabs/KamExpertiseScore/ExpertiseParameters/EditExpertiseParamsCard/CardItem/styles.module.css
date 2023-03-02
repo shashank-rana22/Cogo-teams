@@ -52,3 +52,13 @@
     margin-top: 8px;
     margin-bottom: 10px;
 }
+
+.current_value{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.view_label{
+    font-size: 14px;
+    color: #828282;
+}

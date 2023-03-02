@@ -8,7 +8,7 @@ import EDIT_CONFIG_CONTROLS_MAPPING from '../../../../../../../constants/edit-co
 
 import styles from './styles.module.css';
 
-function CardItem(item) {
+function CardItem({ item, editMode }) {
 	const { condition_name, data = [] } = item;
 
 	const isDoubleLevel = data.length > 1;
@@ -53,16 +53,32 @@ function CardItem(item) {
 								return (
 
 									<div className={styles.field_container}>
-										<div className={styles.label}>
-											{controlsObject.label}
-										</div>
 
-										<Element
-											{...singleField}
-											control={control}
-											key={singleField.name}
-											id={`${condition_name}_${singleField.name}`}
-										/>
+										{editMode ? (
+											<>
+												<div className={styles.label}>
+													{controlsObject.label}
+												</div>
+
+												<Element
+													{...controlsObject}
+													control={control}
+													key={controlsObject.name}
+													id={`${condition_name}_${controlsObject.name}`}
+												/>
+											</>
+
+										) : (
+											<>
+												<div className={styles.view_label}>
+													{controlsObject.label}
+												</div>
+												<div className={styles.current_value}>
+													{current_value}
+												</div>
+											</>
+
+										)}
 
 									</div>
 

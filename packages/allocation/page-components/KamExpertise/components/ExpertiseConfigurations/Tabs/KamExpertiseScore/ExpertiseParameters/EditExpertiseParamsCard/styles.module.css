@@ -1,3 +1,15 @@
 .card_container{
     background-color: #fff;
 }
+
+.cards{
+    display: flex;
+    flex-direction: column;
+}
+
+.button_container{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
