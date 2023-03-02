@@ -1,7 +1,6 @@
 .list {
 	box-sizing: border-box;
 	width: 100%;
-	min-height: 57vh;
 }
 
 .title {
@@ -9,19 +8,26 @@
 	align-items: center;
 	width: fit-content;
 	margin: 8px 0 12px 4px;
+}
+
+.back {
 	cursor: pointer;
+	transition: 0.3s ease;
+
+	&:hover {
+		transition: 0.3s ease;
+		transform: scale(1.2);
+	}
 }
 
 .go_back {
 	margin-left: 4px;
-	font-size: 12px;
+	font-size: 13px;
 }
 
 .module_text {
 	margin: 8px 0;
-	font-family: Poppins;
 	font-size: 11px;
-	font-style: normal;
 	font-weight: 400;
 	color: #221f20;
 	opacity: 0.6;
@@ -30,7 +36,6 @@
 .question {
 	width: 100%;
 	font-size: 17px;
-	font-style: normal;
 	font-weight: 500;
 	color: #221f20;
 }
@@ -38,20 +43,22 @@
 .no_of_people_like_it {
 	margin: 8px 0;
 	font-size: 11px;
-	font-style: normal;
-	font-weight: 400;
 	color: #221f20;
 	opacity: 0.6;
 }
 
 .ansofques {
-	padding: 0 0.5rem;
+	max-height: 30vh;
+	padding: 0 10px;
 	margin-top: 8px;
+	overflow-y: auto;
 	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
 	color: #000;
 	opacity: 0.6;
+}
+
+.ansofques::-webkit-scrollbar {
+	display: none;
 }
 
 .space {
@@ -70,19 +77,18 @@
 
 .help_text {
 	display: flex;
-	gap: 5px;
 	align-items: center;
 	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
 	cursor: pointer;
 	opacity: 0.5;
 }
 
 .emoji_like_yes {
 	all: unset;
-	padding: 0 1rem;
-	font-size: 3rem;
+	padding: 0 16px;
+
+	/* font-size: 3rem; */
+	font-size: 48px;
 	cursor: pointer;
 
 	&::before {
@@ -106,19 +112,39 @@
 
 .emoji_dislike {
 	all: unset;
-	padding: 0 1rem;
-	font-size: 3rem;
+	padding: 0 16px;
+
+	/* font-size: 3rem; */
+	font-size: 48px;
+	text-shadow: 0 2px 4px rgb(0 0 0 / 30%);
 	cursor: pointer;
+	transition: text-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+	transform: scale(0.5);
+
+	&:hover {
+		text-shadow: 0 5px 5px rgb(0 0 0 / 30%);
+		transform: scale(1) translateY(1px);
+	}
 
 	&::before {
+		content: "😕";
+	}
+
+	&:hover::before {
+		content: "😔";
+	}
+
+	&:active {
 		content: "😔";
 	}
 }
 
 .emoji_like {
 	all: unset;
-	padding: 0 1rem;
-	font-size: 3rem;
+
+	/* font-size: 3rem; */
+	padding: 0 16px;
+	font-size: 48px;
 	text-shadow: 0 2px 4px rgb(0 0 0 / 30%);
 	cursor: pointer;
 	content: "🙂";
@@ -145,11 +171,22 @@
 
 .emoji_dislike_yes {
 	all: unset;
-	padding: 0 1rem;
-	font-size: 3rem;
+
+	/* padding: 0 1rem;
+	font-size: 3rem; */
+	padding: 0 16px;
+	font-size: 48px;
 	cursor: pointer;
 
 	&::before {
 		content: "😔";
 	}
+}
+
+.like_dislike_container {
+	position: absolute;
+	bottom: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

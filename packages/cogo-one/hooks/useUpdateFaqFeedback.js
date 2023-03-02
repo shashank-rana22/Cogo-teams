@@ -1,23 +1,22 @@
 import { useRequest } from '@cogoport/request';
 
-const useUpdateFaqFeedback = ({ isLiked, setIsLiked, data = {}, fetch = () => {} }) => {
+const useUpdateFaqFeedback = ({ isLiked, setIsLiked, data = {}, fetch = () => {}, setShow = () => {} }) => {
 	const apiName = data?.answers?.[0]?.faq_feedbacks?.[0]?.id
 		? '/update_faq_feedback'
 		: '/create_faq_feedback';
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading: modalLoading }, trigger] = useRequest({
 		url    : apiName,
 		method : 'post',
 	}, { manual: true });
 
-	const onClickLikeDislikeButton = async ({ id, type = '' }) => {
+	const onClickLikeDislikeButton = async ({ id, type = '', remarks = '', reason = [] }) => {
 		if (type === 'like') {
 			let payload = {
 				faq_answer_id : id,
 				is_positive   : true,
 				status        : 'active',
 			};
-
 			if (isLiked === 'liked') {
 				payload = {
 					id     : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
@@ -30,19 +29,20 @@ const useUpdateFaqFeedback = ({ isLiked, setIsLiked, data = {}, fetch = () => {}
 					status      : 'active',
 				};
 			}
-
 			try {
 				await trigger({
 					data: payload,
 				});
+
 				setIsLiked(isLiked === 'liked' ? '' : 'liked');
+
 				fetch();
 			} catch (error) {
 				// console.log(error);
 			}
 		} else if (type === 'dislike') {
 			try {
-				trigger({
+				await trigger({
 					data: {
 						id     : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
 						status : 'inactive',
@@ -54,11 +54,39 @@ const useUpdateFaqFeedback = ({ isLiked, setIsLiked, data = {}, fetch = () => {}
 			} catch (error) {
 				// console.log(error);
 			}
+		} else {
+			let payload = {
+				faq_answer_id : data?.answers?.[0]?.id,
+				is_positive   : false,
+				remark        : `${reason}.${remarks}`,
+				status        : 'active',
+			};
+			if (data?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
+				payload = {
+					id            : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+					faq_answer_id : data?.answers?.[0]?.id,
+					is_positive   : false,
+					remark        : `${reason}.${remarks}`,
+					status        : 'active',
+				};
+			}
+
+			try {
+				await trigger({
+					data: payload,
+				});
+				setIsLiked('disliked');
+				setShow(false);
+				fetch();
+			} catch (error) {
+				// console.log(error);
+			}
 		}
 	};
 
 	return {
 		onClickLikeDislikeButton,
+		modalLoading,
 	};
 };
 

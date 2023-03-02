@@ -150,3 +150,19 @@ export const PLACEHOLDER_MAPPING = {
 	invoice        : 'Enter Invoice No',
 	onboarding_kyc : 'Enter Pan No',
 };
+
+export const DISLIKE_OPTIONS = [
+	{
+		label : 'Question not satisfactory',
+		value : 'Question not satisfactory',
+	},
+	{
+		label : 'Answer not satisfactory',
+		value : 'Answer not satisfactory',
+	},
+];
+
+export const FEEDBACK_MAPPING = {
+	true  : 'liked',
+	false : 'disliked',
+};

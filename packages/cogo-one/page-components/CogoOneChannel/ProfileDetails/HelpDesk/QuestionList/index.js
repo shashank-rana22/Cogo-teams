@@ -28,9 +28,9 @@ function QuestionList({ search = '', topic = {}, setTopic = () => {} }) {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div>
 
-			{!search ? (
+			{!search && (
 				<div className={styles.header}>
 					<IcMArrowBack
 						width={16}
@@ -41,7 +41,7 @@ function QuestionList({ search = '', topic = {}, setTopic = () => {} }) {
 					{' '}
 					Go Back to Search Result
 				</div>
-			) : null}
+			)}
 
 			{list?.length > 0 ? (
 				<>
@@ -57,9 +57,7 @@ function QuestionList({ search = '', topic = {}, setTopic = () => {} }) {
 								className={styles.question}
 								onClick={() => setQuestion(item)}
 							>
-								<div
-									className={styles.list_card}
-								>
+								<div className={styles.list_card}>
 
 									<div>
 										{item?.question_abstract}
