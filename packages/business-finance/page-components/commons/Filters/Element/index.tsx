@@ -28,7 +28,7 @@ type SelectedProp = {
 };
 interface ElementProps {
 	type?: string;
-	value?: string | Date | string[] | SelectedProp;
+	value?: string[] | Date | string | SelectedProp;
 	className?: string;
 	url?: string;
 	href?: string;

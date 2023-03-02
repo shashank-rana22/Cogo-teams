@@ -15,12 +15,12 @@ interface DataInterface {
 }
 interface HeaderInterface {
 	data?: DataInterface;
-	remarksVal: RemarksValInterface;
-	overAllRemark:string;
-	setOverAllRemark:Function;
+	remarksVal?: RemarksValInterface;
+	overAllRemark?:string;
+	setOverAllRemark?:Function;
 	lineItem?: boolean;
-	lineItemsRemarks: object;
-	status: string;
+	lineItemsRemarks?: object;
+	status?: string;
 }
 
 function Header({

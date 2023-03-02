@@ -80,6 +80,8 @@ interface GroupByProps {
 	value?:any;
 	dropareaProps?: any;
 	className?:string;
+	isClearable?:boolean;
+	isPreviousDaysAllowed?:boolean;
 }
 
 export interface ControlProps {
@@ -184,8 +186,8 @@ export interface DetailInterface {
 	destinationmainport?: PortDetailsInt
 }
 export interface RemarksValInterface {
-	collectionPartyRemark:string,
-	billingPartyRemark:string,
-	invoiceDetailsRemark:string,
-	overallRemark: string
+	collectionPartyRemark?:string,
+	billingPartyRemark?:string,
+	invoiceDetailsRemark?:string,
+	overallRemark?: string
 }

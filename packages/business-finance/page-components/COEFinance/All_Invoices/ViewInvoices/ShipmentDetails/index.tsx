@@ -77,7 +77,7 @@ interface ShipmentDetailsInterface {
 	data: DataInterface;
 	orgId: string;
 	jobNumber?: string;
-	remarksVal: RemarksValInterface;
+	remarksVal?: RemarksValInterface;
 	setRemarksVal: any;
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
