@@ -74,35 +74,37 @@ function BadgeListItem({ data, index, loading, setWindow }) {
 			<div className={styles.main_card}>
 
 				<div className={styles.card_description}>
-					<div className={styles.badge_name_tag}>
-						<p>
-							Badge Name
-							{' '}
-							:
-							{'  '}
-							<b>
-								{data.badge_name}
-							</b>
-						</p>
-					</div>
+					<div className={styles.details}>
+						<div className={styles.badge_name_tag}>
+							<p>
+								Badge Name
+								{' '}
+								:
+								{'  '}
+								<b>
+									{data.badge_name}
+								</b>
+							</p>
+						</div>
 
-					<div className={styles.desc}>
-						<p>
-							Description :
-							{' '}
-							{data.description}
-						</p>
+						<div className={styles.desc}>
+							<p>
+								Description :
+								{' '}
+								{data.description}
+							</p>
+						</div>
 					</div>
 
 					<div className={styles.modified}>
-						<p>
+						<div style={{ paddingRight: '4px' }}>
 							Last Modified :
 							{' '}
 							{format(data.updated_at, 'yyyy-MMM-dd')}
-						</p>
+						</div>
 
 						{/* //! needs changes */}
-						<p>Last Modified By : Ankur Verma</p>
+						<div>Last Modified By : Ankur Verma</div>
 					</div>
 				</div>
 

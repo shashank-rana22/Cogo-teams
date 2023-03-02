@@ -6,10 +6,11 @@ import { controls_bottom } from '../ControlsForScore/controls_bottom';
 
 import styles from './styles.module.css';
 
-function KamLevelDetailsEdit() {
+function KamLevelDetailsEdit({ data }) {
 	const formProps = useForm();
 
 	const { control } = formProps;
+
 	return (
 
 		<div className={styles.level_card_container}>
@@ -30,11 +31,14 @@ function KamLevelDetailsEdit() {
 									key={singleField.label}
 									control={control}
 									id={singleField.name}
+									placeholder={data[singleField.name]}
 								/>
-
 							</div>
-
-							{' '}
+							<div className={styles.current_value}>
+								Current value:
+								{' '}
+								{data[singleField.name]}
+							</div>
 
 						</div>
 						<div className={styles.border_class} />
@@ -61,8 +65,14 @@ function KamLevelDetailsEdit() {
 										key={singleField.label}
 										control={control}
 										id={singleField.name}
+										placeholder={data[singleField.name]}
 									/>
 
+								</div>
+								<div className={styles.current_value}>
+									Current value:
+									{' '}
+									{data[singleField.name]}
 								</div>
 
 								{' '}
