@@ -1,5 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 function useMostReadFAQs() {
@@ -18,6 +19,9 @@ function useMostReadFAQs() {
 	const { scope = '' } = general;
 	const { country_id = '', id = '' } = partner;
 
+	const roleFunction = !isEmpty(role_functions) ? role_functions : undefined;
+	const roleSubFunction = !isEmpty(role_sub_functions) ? role_sub_functions : undefined;
+
 	const fetchMostReadFAQs = async () => {
 		try {
 			await trigger({
@@ -25,8 +29,8 @@ function useMostReadFAQs() {
 					filters: {
 						state             : 'published',
 						status            : 'active',
-						auth_function     : scope === 'partner' ? role_functions : undefined,
-						auth_sub_function : scope === 'partner' ? role_sub_functions : undefined,
+						auth_function     : scope === 'partner' ? roleFunction : undefined,
+						auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
 						country_id,
 						cogo_entity_id    : id,
 						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',

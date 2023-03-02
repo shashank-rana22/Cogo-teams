@@ -1,6 +1,7 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 function useListFaqQuestions({
@@ -27,6 +28,9 @@ function useListFaqQuestions({
 
 	const { query, debounceQuery } = useDebounceQuery();
 
+	const roleFunction = !isEmpty(role_functions) ? role_functions : undefined;
+	const roleSubFunction = !isEmpty(role_sub_functions) ? role_sub_functions : undefined;
+
 	useEffect(() => {
 		debounceQuery(searchState);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,8 +46,8 @@ function useListFaqQuestions({
 						q                 : query,
 						faq_topic_id      : topicId,
 						faq_tag_id        : tagId,
-						auth_function     : scope === 'partner' ? role_functions : undefined,
-						auth_sub_function : scope === 'partner' ? role_sub_functions : undefined,
+						auth_function     : scope === 'partner' ? roleFunction : undefined,
+						auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
 						country_id,
 						cogo_entity_id    : id,
 						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
