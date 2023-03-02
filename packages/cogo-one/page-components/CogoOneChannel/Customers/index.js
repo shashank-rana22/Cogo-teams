@@ -50,7 +50,7 @@ function Customers({
 						CogoOne
 					</div>
 				</div>
-				{!isomniChannelAdmin ? (
+				{!isomniChannelAdmin && (
 					<div className={styles.styled_toggle}>
 						<Toggle
 							name="online"
@@ -62,20 +62,7 @@ function Customers({
 						/>
 
 					</div>
-				) : (
-					activeTab === 'message' && (
-						<div className={styles.bot_messages}>
-							<div>Only Bot Messages</div>
-							<Toggle
-								name="bot messages"
-								size="sm"
-								showOnOff
-								onChange={() => setShowBotMessages((p) => !p)}
-								checked={showBotMessages}
-							/>
-						</div>
-					)
-				)}
+				) }
 			</div>
 			<div className={styles.tabs}>
 				<Tabs
@@ -103,6 +90,7 @@ function Customers({
 					activeCardId={activeCardId}
 					setActiveCardId={setActiveCardId}
 					showBotMessages={showBotMessages}
+					setShowBotMessages={setShowBotMessages}
 				/>
 			)}
 
