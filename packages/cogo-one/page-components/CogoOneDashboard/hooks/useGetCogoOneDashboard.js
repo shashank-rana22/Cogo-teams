@@ -29,8 +29,11 @@ function useGetCogoOneDashboard(
 	};
 
 	useEffect(() => {
+		console.log('🚀useGetCogoOneDashboard ~ selectedItem:', selectedItem);
+		console.log('🚀useGetCogoOneDashboard ~ selectedTimeline:', selectedTimeline);
+		console.log('🚀useGetCogoOneDashboard ~ timeline:', timeline);
 		getCogoOneDashboard();
-	}, [timeline, selectedTimeline, selectedItem]);
+	}, [timeline, selectedItem]);
 
 	return {
 		loading,
