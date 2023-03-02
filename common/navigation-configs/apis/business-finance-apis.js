@@ -11,6 +11,11 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
+			api         : 'get_common_job_shipment_id_view',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api          : 'list_shipment_documents',
 			access_type  : 'private',
 			service_name : 'shipment',
@@ -123,7 +128,7 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
-			api         : 'get_payments_accounts_org_stats',
+			api         : 'get_payments_accounts_org_stats_for_coe_finance',
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},
