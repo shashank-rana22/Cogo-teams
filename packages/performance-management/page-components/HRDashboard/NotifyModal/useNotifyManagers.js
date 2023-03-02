@@ -1,10 +1,10 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
 	const [sendToAll, setSendToAll] = useState(false);
-	const [{ loading = false, data = {} }, trigger] = useRequest({
+	const [{ loading = false, data = {} }, trigger] = useIrisRequest({
 		url    : 'notify_managers',
 		method : 'post',
 	}, { manual: true });

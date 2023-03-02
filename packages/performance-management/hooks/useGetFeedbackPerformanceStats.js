@@ -1,9 +1,9 @@
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 
 const useGetFeedbackPerformanceStats = ({ userId = '', params = {} }) => {
 	const { Month = '', Year = '', ManagerID = '' } = params;
 
-	const [{ data: performanceStatsList = [], loading = false }] = useRequest({
+	const [{ data: performanceStatsList = [], loading = false }] = useIrisRequest({
 		method : 'get',
 		url    : 'get_average_ratings',
 		params : {

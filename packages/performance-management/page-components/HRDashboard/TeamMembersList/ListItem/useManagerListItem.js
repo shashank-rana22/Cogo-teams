@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 import monthOptions from '../../../../constants/month-options';
@@ -15,7 +15,7 @@ const useManagerListItem = ({ item, searchValue = '', pageParams = {} }) => {
 		Year      : Year || d.getFullYear(),
 	});
 
-	const [{ data = {}, loading = false }] = useRequest({
+	const [{ data = {}, loading = false }] = useIrisRequest({
 		method : 'get',
 		url    : 'list_user_feedbacks',
 		params,

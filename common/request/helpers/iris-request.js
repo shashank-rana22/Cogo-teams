@@ -17,10 +17,10 @@ const customSerializer = (params) => {
 
 const microServices = getMicroServiceName();
 
-const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
+const irisRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
 
-request.interceptors.request.use((oldConfig) => {
-	const newConfig = { ...oldConfig };
+irisRequest.interceptors.request.use((oldConfig) => {
+	const { ...newConfig } = oldConfig;
 
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 
@@ -45,4 +45,4 @@ request.interceptors.request.use((oldConfig) => {
 	};
 });
 
-export { request };
+export { irisRequest };

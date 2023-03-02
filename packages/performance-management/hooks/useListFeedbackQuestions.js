@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 const useListFeedbackQuestions = ({
@@ -11,7 +11,7 @@ const useListFeedbackQuestions = ({
 		PageLimit : 20,
 	});
 
-	const [{ data = {}, loading = false }, trigger] = useRequest({
+	const [{ data = {}, loading = false }, trigger] = useIrisRequest({
 		method : 'get',
 		url    : 'list_questions',
 		params,

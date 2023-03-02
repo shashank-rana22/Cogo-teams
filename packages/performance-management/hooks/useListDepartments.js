@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useListDepartments = () => {
-	const [{ data = {}, loading = false }, trigger] = useRequest({
+	const [{ data = {}, loading = false }, trigger] = useIrisRequest({
 		url    : 'list_departments',
 		method : 'get',
 	}, { manual: true });

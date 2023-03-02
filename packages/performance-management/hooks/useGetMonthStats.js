@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useGetMonthStats = ({ manager_id = '' }) => {
@@ -8,7 +8,7 @@ const useGetMonthStats = ({ manager_id = '' }) => {
 		PageLimit : 20,
 	});
 
-	const [{ data = {}, loading = false }] = useRequest({
+	const [{ data = {}, loading = false }] = useIrisRequest({
 		url    : 'get_month_stats',
 		method : 'get',
 		params,

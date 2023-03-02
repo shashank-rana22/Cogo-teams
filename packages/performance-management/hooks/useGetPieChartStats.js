@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 
 const useGetPieChartStats = ({ userId = '', params = {} }) => {
 	const { Month = '', Year = '', ManagerID = '' } = params;
@@ -10,7 +10,7 @@ const useGetPieChartStats = ({ userId = '', params = {} }) => {
 		Year      : Year || undefined,
 	};
 
-	const [{ loading = false, data : userData = {} }] = useRequest({
+	const [{ loading = false, data : userData = {} }] = useIrisRequest({
 		method : 'get',
 		url    : 'get_performance_stats',
 		params : newParams,

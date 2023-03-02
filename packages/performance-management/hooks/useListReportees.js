@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useListReportees = ({
@@ -12,7 +12,7 @@ const useListReportees = ({
 		PageLimit : 20,
 	});
 
-	const [{ data: feedbackData = {}, loading = false }, trigger] = useRequest({
+	const [{ data: feedbackData = {}, loading = false }, trigger] = useIrisRequest({
 		method : 'get',
 		url    : 'list_reportees',
 		params,

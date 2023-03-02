@@ -1,5 +1,5 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 
 function useGetCustomAsyncOptions({
@@ -12,14 +12,14 @@ function useGetCustomAsyncOptions({
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
-	const [{ data, loading }] = useRequest({
+	const [{ data, loading }] = useIrisRequest({
 		url    : endpoint,
 		method : 'GET',
 		params : merge(params, { [filterKey]: query }),
 	}, { manual: !(initialCall || query) });
 	const options = data?.list || [];
 
-	const [{ loading: loadingSingle }, triggerSingle] = useRequest({
+	const [{ loading: loadingSingle }, triggerSingle] = useIrisRequest({
 		url    : endpoint,
 		method : 'GET',
 	}, { manual: true });

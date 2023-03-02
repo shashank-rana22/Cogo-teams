@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
@@ -19,7 +19,7 @@ const useCreateUserFeedback = ({
 	const { profile:{ user:{ id: manager_id = '' } } } = useSelector((state) => state);
 	const url = isEmpty(feedback_id) ? 'create_form_responses' : 'update_form_responses';
 
-	const [{ data = {}, loading = false }, trigger] = useRequest({
+	const [{ data = {}, loading = false }, trigger] = useIrisRequest({
 		url,
 		method: 'post',
 	}, { manual: true });

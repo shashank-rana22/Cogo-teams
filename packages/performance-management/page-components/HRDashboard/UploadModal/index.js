@@ -2,7 +2,7 @@ import { Select, Tooltip, Toast, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 import { IcMInfo } from '@cogoport/icons-react';
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -15,7 +15,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 	const [year, setYear] = useState('');
 	const [month, setMonth] = useState('');
 
-	const [{ loading : uploadLoading = false }, trigger] = useRequest({
+	const [{ loading : uploadLoading = false }, trigger] = useIrisRequest({
 		url    : 'approve_ratings',
 		method : 'post',
 	}, { manual: true });

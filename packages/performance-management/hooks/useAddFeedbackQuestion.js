@@ -1,13 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 
 import { useGetCreateQuestionsControls } from '../utils/createQuestionControls';
 
 const useAddFeedbackQuestion = () => {
 	const formProps = useForm();
 
-	const [{ loading: apiLoading = false }, trigger] = useRequest({
+	const [{ loading: apiLoading = false }, trigger] = useIrisRequest({
 		method : 'post',
 		url    : 'create_question',
 	}, { manual: true });

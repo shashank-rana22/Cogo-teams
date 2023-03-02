@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useGetUserDetails = ({ userId = '' }) => {
-	const [{ loading = false, data : userData = {} }, trigger] = useRequest({
+	const [{ loading = false, data : userData = {} }, trigger] = useIrisRequest({
 		url    : 'get_user_info',
 		method : 'get',
 	}, { manual: true });

@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 
 const useCreateForm = () => {
-	const [{ loading:createFormLoading = false }, trigger] = useRequest({
+	const [{ loading:createFormLoading = false }, trigger] = useIrisRequest({
 		url    : 'create_form',
 		method : 'post',
 	}, { manual: true });

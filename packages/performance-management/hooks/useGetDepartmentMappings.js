@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 const useGetDepartmentMappings = ({ department, searchValue = '' }) => {
@@ -8,7 +8,7 @@ const useGetDepartmentMappings = ({ department, searchValue = '' }) => {
 		PageLimit    : 1000,
 	});
 
-	const [{ data = {}, loading = false }] = useRequest({
+	const [{ data = {}, loading = false }] = useIrisRequest({
 		url    : 'get_department_mappings',
 		method : 'get',
 		params,

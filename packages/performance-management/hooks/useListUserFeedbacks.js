@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useListUserFeedbacks = ({
@@ -18,7 +18,7 @@ const useListUserFeedbacks = ({
 		PageLimit    : 10,
 	});
 
-	const [{ data: feedbackData = {}, loading = false }] = useRequest({
+	const [{ data: feedbackData = {}, loading = false }] = useIrisRequest({
 		method : 'get',
 		url    : 'list_user_feedbacks',
 		params,

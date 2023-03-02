@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useListManagers = ({
@@ -9,7 +9,7 @@ const useListManagers = ({
 		PageLimit : 20,
 	});
 
-	const [{ data: feedbackData = {}, loading = false }] = useRequest({
+	const [{ data: feedbackData = {}, loading = false }] = useIrisRequest({
 		method : 'get',
 		url    : 'list_managers',
 		params,

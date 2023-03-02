@@ -1,12 +1,12 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 const useListForms = ({ formsParams = {} }) => {
 	const [pagination, setPagination] = useState(1);
 
-	const [{ data:formsData = {}, loading = false }, trigger] = useRequest({
+	const [{ data:formsData = {}, loading = false }, trigger] = useIrisRequest({
 		url    : 'list_forms',
 		method : 'get',
 	}, { manual: true });

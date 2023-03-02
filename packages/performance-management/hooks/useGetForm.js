@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
 import monthOptions from '../constants/month-options';
@@ -25,7 +25,7 @@ const useGetForm = ({
 	}
 		: { Department: newDepartment, Designation: newDesignation };
 
-	const [{ data: formData = {}, loading = false }] = useRequest({
+	const [{ data: formData = {}, loading = false }] = useIrisRequest({
 		url,
 		method: 'get',
 		params,

@@ -1,7 +1,7 @@
-import { useRequest } from '@cogoport/request';
+import { useIrisRequest } from '@cogoport/request';
 
 const useDownloadCsvFeedbacks = ({ params = {} }) => {
-	const [{ data = {}, loading = false }, trigger] = useRequest({
+	const [{ data = {}, loading = false }, trigger] = useIrisRequest({
 		method : 'get',
 		url    : 'download_csv',
 	}, { manual: true });
