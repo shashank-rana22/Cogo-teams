@@ -266,14 +266,14 @@ function ThisWeek() {
 							// Todo: add isEmpty and !loading condition for emptyState
 									false ? (
 										<div style={{
-											padding         : '60px 0',
+											padding         : '80px 0',
 											height          : '400px',
 											backgroundColor : 'white',
 											margin          : '20px 0',
 											// display : 'flex',
 										}}
 										>
-											<EmptyState height={400} width={600} flexDirection="column" />
+											<EmptyState height={300} width={400} flexDirection="column" />
 										</div>
 									)
 										: (
