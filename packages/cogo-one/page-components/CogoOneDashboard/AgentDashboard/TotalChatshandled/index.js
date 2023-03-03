@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import { aArrow } from '../../constants';
@@ -6,10 +7,16 @@ import { aArrow } from '../../constants';
 import styles from './styles.module.css';
 
 function TotalChatsHandled({ loading = true, totalCustomers = '' }) {
+	const { query } = useRouter();
+	const { agentName = '', view = '' } = query || {};
 	return (
 		<div className={styles.total_chats_container}>
 			<div className={styles.left_total_chats_container}>
-				<div className={styles.label}>Total no. of chats handled</div>
+				<div className={styles.label}>
+					Total no. of chats handled
+					{' '}
+					{ view === 'agent' && `by ${agentName}`}
+				</div>
 				{loading
 					? <Placeholder height="30px" width="50px" className={styles.time_placeholder} />
 					: <div className={styles.number}>{totalCustomers || 0}</div>}

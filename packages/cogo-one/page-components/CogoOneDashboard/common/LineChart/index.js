@@ -4,9 +4,10 @@ import React from 'react';
 
 import chartData from '../../configurations/line-chart-data';
 
+import LineChartLoader from './LoaderLineChart';
 import styles from './styles.module.css';
 
-function LineChart({ cogoOneDashboardGraph = {}, timeline = '' }) {
+function LineChart({ cogoOneDashboardGraph = {}, timeline = '', loading = false }) {
 	const { graph_stats = {} } = cogoOneDashboardGraph || {};
 	const GraphData = chartData({ cogoOneDashboardGraph, timeline }) || [];
 
@@ -40,64 +41,68 @@ function LineChart({ cogoOneDashboardGraph = {}, timeline = '' }) {
 
 			{
 
-				<div className={styles.chart_container}>
-					{(
-						<ResponsiveLine
-							data={GraphData}
-							margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
-							xScale={{ type: 'point' }}
-							yFormat=" >-.2f"
-							axisTop={null}
-							axisRight={null}
-							axisBottom={{
-								orient         : 'bottom',
-								tickSize       : 5,
-								tickPadding    : 5,
-								tickRotation   : 0,
-								// legend         : 'transportation',
-								legendOffset   : 36,
-								legendPosition : 'middle',
-							}}
-							axisLeft={{
-								orient         : 'left',
-								tickSize       : 7,
-								tickValues     : 5,
-								tickPadding    : 5,
-								tickRotation   : 0,
-								legend         : 'Customers',
-								legendOffset   : -40,
-								legendPosition : 'middle',
-							}}
-							colors={['#C4C4C4', '#F98600']}
-							enableGridX={false}
-							pointSize={4}
-							pointColor={{ theme: 'background' }}
-							pointBorderWidth={4}
-							pointBorderColor={{ from: 'serieColor' }}
-							pointLabelYOffset={-12}
-							useMesh
-							tooltip={({ point }) => (
-								<div className={styles.tooltip_box}>
-									<div className={styles.tooltip_text_color}>
-										<div>
-											Customers:
-											{' '}
-											{point.data.y || 0}
-										</div>
-										<div>
-											{timeline}
-											{' '}
-											:
-											{' '}
-											{point.data.x || 0}
-										</div>
-									</div>
-								</div>
-							)}
+				loading
+					? <LineChartLoader />
+					: (
 
-						/>
+						<div className={styles.chart_container}>
+							{(
+								<ResponsiveLine
+									data={GraphData}
+									margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+									xScale={{ type: 'point' }}
+									yFormat=" >-.2f"
+									axisTop={null}
+									axisRight={null}
+									axisBottom={{
+										orient         : 'bottom',
+										tickSize       : 5,
+										tickPadding    : 5,
+										tickRotation   : 0,
+										// legend         : 'transportation',
+										legendOffset   : 36,
+										legendPosition : 'middle',
+									}}
+									axisLeft={{
+										orient         : 'left',
+										tickSize       : 7,
+										tickValues     : 5,
+										tickPadding    : 5,
+										tickRotation   : 0,
+										legend         : 'Customers',
+										legendOffset   : -40,
+										legendPosition : 'middle',
+									}}
+									colors={['#C4C4C4', '#F98600']}
+									enableGridX={false}
+									pointSize={4}
+									pointColor={{ theme: 'background' }}
+									pointBorderWidth={4}
+									pointBorderColor={{ from: 'serieColor' }}
+									pointLabelYOffset={-12}
+									useMesh
+									tooltip={({ point }) => (
+										<div className={styles.tooltip_box}>
+											<div className={styles.tooltip_text_color}>
+												<div>
+													Customers:
+													{' '}
+													{point.data.y || 0}
+												</div>
+												<div>
+													{timeline}
+													{' '}
+													:
+													{' '}
+													{point.data.x || 0}
+												</div>
+											</div>
+										</div>
+									)}
+								/>
 					)}
-				</div>
+						</div>
+					)
 
 			}
 		</div>

@@ -8,9 +8,10 @@ import { configurationData } from '../../configurations/configurationData';
 import { agentAvatar } from '../../constants';
 
 import EmptyStateAgentActivity from './EmptyStateAgentActivity';
+import LoaderAgentActivity from './LoaderAgentActivityBox';
 import styles from './styles.module.css';
 
-function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
+function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 	const { push } = useRouter();
 	const [activeTab, setActiveTab] = useState('busy_agents');
 	const { agents_details_config } = configurationData;
@@ -51,17 +52,18 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 				})}
 
 			</div>
-			{isEmpty(agentsDetails?.[activeTab]?.agents) ? <EmptyStateAgentActivity />
+			{isEmpty(agentsDetails?.[activeTab]?.agents) && !loading && <EmptyStateAgentActivity />}
+			{loading ? <LoaderAgentActivity />
 				: (
 					<div className={styles.main_container_lowerpart}>
 						{agentsDetails?.[activeTab]?.agents?.map((item) => {
 							const { name, active_assigned_chats, agent_id = '' } = item;
 
-							const redirectToAgentView = (agentId = '42270ace-f97e-41e2-90bc-a336d90d791f') => {
+							const redirectToAgentView = (agentId = '') => {
 								if (!agentId) return;
 								push(
-									'/cogo-one/dashboard/[id]?view=agent',
-									`/cogo-one/dashboard/${agentId}?view=agent`,
+									`/cogo-one/dashboard/[id]?view=agent&agentName=${name}`,
+									`/cogo-one/dashboard/${agentId}?view=agent&agentName=${name}`,
 								);
 								if (agentId) {
 									getCogoOneDashboard(agentId);

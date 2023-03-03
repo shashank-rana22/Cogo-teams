@@ -118,6 +118,13 @@ function Calendar({ props }) {
 		setCalendarData([...data, ...calendarData]);
 	};
 
+	function getMonday(d) {
+		const newD = new Date(d);
+		const day = newD.getDay();
+		const diff = newD.getDate() - day + (day === 0 ? -6 : 1);
+		return new Date(newD.setDate(diff));
+	}
+
 	const loadWeeks = () => {
 		let newWeeks = [];
 		for (let i = 0;
@@ -135,7 +142,7 @@ function Calendar({ props }) {
 						key      : `cal-week-${pagination}-${index}`,
 						label    : `Week ${week.iterator}`,
 						subLabel : `${format(week.date, 'MMM')} ${week.start} to ${week.end}`,
-						date     : new Date(week.date),
+						date     : getMonday(new Date(week.date)),
 					},
 				);
 			}

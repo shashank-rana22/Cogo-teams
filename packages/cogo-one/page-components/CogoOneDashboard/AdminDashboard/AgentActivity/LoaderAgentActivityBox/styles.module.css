@@ -1,0 +1,12 @@
+.main_box {
+	margin-top: 18px;
+}
+
+.loader_box {
+	display: flex;
+}
+
+.profile_box {
+	margin: 5px;
+	border-radius: 4px;
+}

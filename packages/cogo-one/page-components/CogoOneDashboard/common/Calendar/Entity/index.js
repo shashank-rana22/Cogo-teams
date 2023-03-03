@@ -105,7 +105,7 @@ export function CalendarEntity({
 					} else if (timeline === 'week') {
 						isDateEqual = format(selectedItem, 'dd MMM YYYY') === format(date, 'dd MMM YYYY');
 					} else if (timeline === 'month') {
-						isDateEqual = format(selectedItem, 'dd MMM YYYY') === format(date, 'dd MMM YYYY');
+						isDateEqual = format(selectedItem, 'MMM YYYY') === format(date, 'MMM YYYY');
 					}
 
 					return (

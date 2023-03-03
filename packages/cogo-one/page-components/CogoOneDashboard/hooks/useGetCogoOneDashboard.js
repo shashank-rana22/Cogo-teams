@@ -18,8 +18,8 @@ function useGetCogoOneDashboard(
 			await trigger({
 				params: {
 					timeline      : timeline || 'day',
-					// timeline_date : date || new Date(),
-					timeline_date : '2023-02-28' || new Date(),
+					timeline_date : date || new Date(),
+					// timeline_date : '2023-02-28' || new Date(),
 					agent_id      : (partnerUserId && isAgentView) || agentId ? agentId || partnerUserId : undefined,
 				},
 			});

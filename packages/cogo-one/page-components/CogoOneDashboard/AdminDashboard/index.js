@@ -37,12 +37,21 @@ function AdminDashboard(props) {
 						<div className={styles.calender_container}>
 							<Calendar props={props} />
 						</div>
-						<LineChart cogoOneDashboardGraph={cogo_one_dashboard_graph} timeline={timeline} />
+						<LineChart
+							cogoOneDashboardGraph={cogo_one_dashboard_graph}
+							timeline={timeline}
+							loading={loading}
+						/>
 					</div>
 					<Escalation escalations={escalations} loading={loading} />
 				</div>
 				<div className={styles.agentactivity_plus_performancetabs}>
-					<AgentActivity agentsDetails={agents_details} getCogoOneDashboard={getCogoOneDashboard} />
+					<AgentActivity
+						agentsDetails={agents_details}
+						getCogoOneDashboard={getCogoOneDashboard}
+						loading={loading}
+
+					/>
 					<PerformanceTab agentsPerformance={agents_performance} loading={loading} />
 				</div>
 				<div className={styles.statistics_plus_characteristics}>
