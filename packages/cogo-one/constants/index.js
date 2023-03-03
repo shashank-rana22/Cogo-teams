@@ -103,6 +103,7 @@ export const OFFLINE_STATUS_OPTIONS = [
 export const PLATFORM_MAPPING = {
 	public_website : 'Website',
 	public_cp      : 'CP Platform',
+	public_app     : 'App Platform',
 };
 
 // eslint-disable-next-line max-len
@@ -148,4 +149,9 @@ export const PLACEHOLDER_MAPPING = {
 	shipment_id    : 'Select SID',
 	invoice        : 'Enter Invoice No',
 	onboarding_kyc : 'Enter Pan No',
+};
+
+export const ACCOUNT_TYPE = {
+	importer_exporter : 'Importer/Exporter',
+	service_provider  : 'Service Provider',
 };

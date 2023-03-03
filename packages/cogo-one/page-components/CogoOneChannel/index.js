@@ -13,6 +13,7 @@ import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 
 import Conversations from './Conversations';
 import Customers from './Customers';
+import DialCallModal from './DialCallModal';
 import EmptyChatPage from './EmptyChatPage';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
@@ -33,6 +34,7 @@ function CogoOne() {
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
 	const { suggestions = [] } = useListChatSuggestions();
+	const [showDialModal, setShowDialModal] = useState(false);
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
@@ -146,11 +148,18 @@ function CogoOne() {
 				activeCardId={activeCardId}
 				setShowBotMessages={setShowBotMessages}
 				showBotMessages={showBotMessages}
+				setShowDialModal={setShowDialModal}
 			/>
 
 			<div className={styles.chat_details_continer}>
 				{renderComponent()}
 			</div>
+			{showDialModal && (
+				<DialCallModal
+					setShowDialModal={setShowDialModal}
+					showDialModal={showDialModal}
+				/>
+			)}
 		</div>
 	);
 }

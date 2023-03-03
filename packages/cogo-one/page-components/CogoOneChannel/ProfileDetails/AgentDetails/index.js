@@ -185,10 +185,10 @@ function AgentDetails({
 					activeTab={activeTab}
 				/>
 			)}
-			{!isEmpty(mobile_no) && (
+			{(mobile_no || user_number) && (
 				<>
 					<div className={styles.conversation_title}>Other Channels</div>
-					<ConversationContainer userData={userData} userId={userId} />
+					<ConversationContainer userData={userData} noData={!leadUserId && !userId} loading={loading} />
 				</>
 			)}
 		</>

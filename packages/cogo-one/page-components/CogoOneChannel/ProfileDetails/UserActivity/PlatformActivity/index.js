@@ -13,11 +13,14 @@ function PlatformActivity({ platform = {} }) {
 	const { login = {}, spot_searches = {}, organization = {} } = platform || {};
 	const { list = [] } = spot_searches || {};
 
+	const organizationCheck = !isEmpty(organization) && organization?.kyc_status === 'verified';
 	return (
 		<div className={styles.container}>
-			<LoginComponent login={login} />
+			{!isEmpty(login?.last_email_token_sent_at) && (
+				<LoginComponent login={login} />
+			)}
 
-			{!isEmpty(organization) && (
+			{organizationCheck && (
 				<OrganizationVerification organization={organization} />
 			)}
 
@@ -50,7 +53,7 @@ function PlatformActivity({ platform = {} }) {
 								<Pill size="md" color="#f8aea8">Platform</Pill>
 								<div className={styles.booking_details}>
 									<div className={styles.title}>
-										Shipment Status
+										Spot Searches
 									</div>
 									<div className={styles.booking_id}>
 										ID:
@@ -85,7 +88,7 @@ function PlatformActivity({ platform = {} }) {
 									<IcMPortArrow width={22} height={22} />
 									<div className={styles.port}>
 										<div className={styles.port_details}>
-											<Tooltip content={startCase(origin_port?.name)} placement="bottom">
+											<Tooltip content={startCase(destination_port?.name)} placement="bottom">
 												<div className={styles.port_name}>
 													{startCase(destination_port?.name)}
 												</div>

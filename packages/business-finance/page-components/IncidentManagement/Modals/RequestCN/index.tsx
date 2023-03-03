@@ -21,7 +21,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 	const [shoPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
-	const { data = {} } = row || {};
+	const { data = {}, type } = row || {};
+	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
 	const { creditNoteRequest, consolidatedCreditNoteRequest, organization } = data;
 	const {
 		invoiceNumber,
@@ -45,6 +46,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		row,
 		remark,
 		CNCategoryValues,
+		isConsolidated,
 	});
 
 	const { businessName } = organization || {};

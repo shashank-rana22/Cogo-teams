@@ -52,7 +52,7 @@ function RenderEmpty({
 						width="100px"
 						height="100px"
 					/>
-					<div className={styles.title}>No organisation details found</div>
+					<div className={styles.title}>No organization details found</div>
 				</div>
 			);
 		case 'activities':

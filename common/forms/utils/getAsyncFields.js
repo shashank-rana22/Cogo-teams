@@ -158,6 +158,22 @@ function asyncFieldsListAgents() {
 		},
 	};
 }
+
+function asyncAllotBanks() {
+	return {
+		labelKey     : 'bankname',
+		valueKey     : 'bank_id',
+		endpoint     : '/purchase/treasury/live-status',
+		authkey      : 'get_purchase_treasury_live_status',
+		initialCall  : false,
+		microservice : true,
+		params       : {
+			entityCode : 301,
+			currency   : 'INR',
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -171,4 +187,5 @@ export {
 	asyncFieldsOrganizationUsers,
 	asyncFieldsOperators,
 	asyncFieldsListAgents,
+	asyncAllotBanks,
 };

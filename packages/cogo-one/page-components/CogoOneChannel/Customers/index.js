@@ -32,6 +32,7 @@ function Customers({
 	isomniChannelAdmin = false,
 	showBotMessages = false,
 	setShowBotMessages,
+	setShowDialModal = () => {},
 }) {
 	const onChangeToggle = () => {
 		if (toggleStatus) {
@@ -62,16 +63,18 @@ function Customers({
 
 					</div>
 				) : (
-					<div className={styles.bot_messages}>
-						<div>Only Bot Messages</div>
-						<Toggle
-							name="bot messages"
-							size="sm"
-							showOnOff
-							onChange={() => setShowBotMessages((p) => !p)}
-							checked={showBotMessages}
-						/>
-					</div>
+					activeTab === 'message' && (
+						<div className={styles.bot_messages}>
+							<div>Only Bot Messages</div>
+							<Toggle
+								name="bot messages"
+								size="sm"
+								showOnOff
+								onChange={() => setShowBotMessages((p) => !p)}
+								checked={showBotMessages}
+							/>
+						</div>
+					)
 				)}
 			</div>
 			<div className={styles.tabs}>
@@ -108,6 +111,7 @@ function Customers({
 					setActiveVoiceCard={setActiveVoiceCard}
 					activeVoiceCard={activeVoiceCard}
 					activeTab={activeTab}
+					setShowDialModal={setShowDialModal}
 				/>
 			)}
 

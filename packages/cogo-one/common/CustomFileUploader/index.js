@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function FileUploader(props) {
+function CustomFileUploader(props) {
 	const {
 		onChange,
 		showProgress = true,
@@ -170,4 +170,4 @@ function FileUploader(props) {
 	);
 }
 
-export default FileUploader;
+export default CustomFileUploader;

@@ -342,6 +342,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
 			api          : 'list_organization_billing_addresses',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -583,6 +588,11 @@ const partner = {
 			api          : 'verify_otp',
 			access_type  : 'private',
 			service_name : 'user',
+		},
+		{
+			api          : 'saas_get_user_active_plan',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
 		},
 	],
 	terms_and_conditons: [
@@ -1657,9 +1667,19 @@ const partner = {
 			service_name : 'user',
 		},
 		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
 			api          : 'create_event',
 			access_type  : 'private',
 			service_name : 'event',
+		},
+		{
+			api          : 'saas_get_user_active_plan',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
 		},
 	],
 	supply_crm: [
@@ -2376,6 +2396,11 @@ const partner = {
 			api          : 'create_organization_communication_log',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
 		},
 		{
 			api          : 'list_channel_partner_stakeholders',
@@ -6004,6 +6029,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -6394,6 +6424,14 @@ const partner = {
 			api          : 'list_organization_users',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api         : 'get_common_job_shipment_id_view',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_purchase_treasury_live_status',
+			access_type : 'private',
 		},
 	],
 	business_finance_income: [
@@ -7075,6 +7113,59 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api         : 'get_purchase_payable_bill_overseas_details',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'get_purchase_payable_bill_shipment_documents',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'get_purchase_payrun_download_overseas_utr',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'get_purchase_bills_list_overseas_trade_parties',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'post_purchase_payrun_download_zip',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'post_purchase_payrun_upload_documents',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'delete_purchase_payrun_documents',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'post_purchase_payrun_merged_pdf_by_id',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
 	],
 	my_incident: [
 		{
@@ -7194,69 +7285,69 @@ const partner = {
 		{
 			api         : 'get_sales_outstanding',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'get_sales_outstanding_invoice_list',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'post_sales_invoice_by_id_irn_generate',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'post_sales_invoice_post_to_sage',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'post_sales_invoice_by_id_irn_cancel',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'get_sales_invoice_generate_pdf',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'post_sales_outstanding_ledger_summary',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'post_sales_outstanding_create_communication',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'get_sales_outstanding_overall',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 
 		{
 			api         : 'get_sales_report_download_outstanding_list',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'get_sales_invoice_timeline_by_id',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'list_organization_trade_party_details',
@@ -7308,6 +7399,20 @@ const partner = {
 		},
 		{
 			api         : 'post_sales_upload_translated_invoice',
+			access_type : 'private',
+		},
+	],
+	translate: [
+		{
+			api         : 'get_translation_translate_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_translation_translate',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_translation_translate',
 			access_type : 'private',
 		},
 	],
@@ -8252,6 +8357,11 @@ const partner = {
 		},
 		{
 			api          : 'get_segment_tags',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'segmentation',
 		},
@@ -9623,6 +9733,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	supply_tools: [
 		{
@@ -9789,21 +9904,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'operator',
 		},
-		{
-			api          : 'create_air_india_awb_number',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'update_air_india_awb_status',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'get_awb_plugin_booking_information',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
 	],
 	airline_booking_plugin: [
 		{
@@ -9833,6 +9933,16 @@ const partner = {
 		},
 		{
 			api          : 'get_awb_plugin_booking_information',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_air_india_lms_password',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_air_india_lms_password',
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
@@ -10202,6 +10312,19 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+	],
+	inventory_management: [
+		{
+			api          : 'list_rail_domestic_freight_inventories',
+			access_type  : 'private',
+			service_name : 'inventory_management',
+		},
+		{
+			api          : 'get_rail_domestic_freight_inventories',
+			access_type  : 'private',
+			service_name : 'inventory_management',
+		},
+
 	],
 	cogo_one: [
 		{

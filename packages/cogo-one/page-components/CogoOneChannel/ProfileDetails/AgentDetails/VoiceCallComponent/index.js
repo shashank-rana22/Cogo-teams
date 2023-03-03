@@ -49,6 +49,7 @@ function VoiceCallComponent({
 						mobile_country_code : `+${code}`,
 						agentId             : profileData?.user?.id,
 						name                : userName,
+						dialCall            : false,
 						emptyState,
 
 					},

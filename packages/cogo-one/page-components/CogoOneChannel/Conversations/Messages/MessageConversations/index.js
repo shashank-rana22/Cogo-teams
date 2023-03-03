@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import { cl, Popover } from '@cogoport/components';
-import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import {
 	IcMHappy,
 	IcMAttach,
@@ -10,6 +9,7 @@ import {
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
 
+import CustomFileUploader from '../../../../../common/CustomFileUploader';
 import useGetEmojiList from '../../../../../hooks/useGetEmojis';
 import getFileAttributes from '../../../../../utils/getFileAttributes';
 
@@ -32,7 +32,7 @@ function MessageConversations({
 	uploading,
 	setUploading,
 	hasPermissionToEdit = false,
-	loadingMessages,
+	firstLoadingMessages,
 	loadingPrevMessages,
 	sentQuickSuggestions = () => {},
 	sendCommunicationTemplate = () => {},
@@ -65,7 +65,7 @@ function MessageConversations({
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [loadingMessages, id]);
+	}, [firstLoadingMessages, id]);
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
@@ -133,6 +133,39 @@ function MessageConversations({
 		</div>
 	);
 
+	const firstLoadingDiv = (
+		<div className={styles.flex_div}>
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif"
+				type="video/gif"
+				alt="loading"
+				className={styles.object_styles}
+			/>
+		</div>
+
+	);
+
+	const messageConversation = (
+		<>
+			{loadingPrevMessages && loader}
+			{(messagesData || []).map((eachMessage) => (
+				eachMessage?.conversation_type !== 'received' ? (
+					<ReceiveDiv
+						key={eachMessage?.created_at}
+						eachMessage={eachMessage}
+						activeMessageCard={activeMessageCard}
+					/>
+				) : (
+					<SentDiv
+						key={eachMessage?.created_at}
+						eachMessage={eachMessage}
+						activeMessageCard={activeMessageCard}
+					/>
+				)
+			))}
+
+		</>
+	);
 	return (
 		<div className={styles.styled_div}>
 			<div
@@ -141,20 +174,7 @@ function MessageConversations({
 				onScroll={handleScroll}
 				ref={messageRef}
 			>
-				{loadingPrevMessages && loader}
-				{(messagesData || []).map((eachMessage) => (
-					eachMessage?.conversation_type !== 'received' ? (
-						<ReceiveDiv
-							eachMessage={eachMessage}
-							activeMessageCard={activeMessageCard}
-						/>
-					) : (
-						<SentDiv
-							eachMessage={eachMessage}
-							activeMessageCard={activeMessageCard}
-						/>
-					)
-				))}
+				{firstLoadingMessages ? firstLoadingDiv : messageConversation }
 			</div>
 
 			<div
@@ -255,7 +275,7 @@ function MessageConversations({
 				<div className={styles.flex_space_between}>
 					<div className={styles.icon_tools}>
 						{hasPermissionToEdit && (
-							<FileUploader
+							<CustomFileUploader
 								disabled={uploading?.[id]}
 								handleProgress={handleProgress}
 								showProgress={false}

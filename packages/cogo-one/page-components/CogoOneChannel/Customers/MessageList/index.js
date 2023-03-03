@@ -100,7 +100,7 @@ function MessageList({
 						const checkActiveCard = activeCardId === item?.id;
 
 						const showOrganization = () => {
-							if (['public_website', 'public_cp'].includes(user_type)) {
+							if ((user_name?.toLowerCase() || '').includes('anonymous')) {
 								return startCase(PLATFORM_MAPPING[user_type] || '');
 							}
 							return startCase(organization_name);
@@ -127,9 +127,9 @@ function MessageList({
 													imageSource={item.image}
 												/>
 												<div className={styles.user_details}>
-													<Tooltip content={startCase(user_name)} placement="top">
+													<Tooltip content={startCase(user_name) || 'User'} placement="top">
 														<div className={styles.user_name}>
-															{startCase(user_name)}
+															{startCase(user_name) || 'User'}
 														</div>
 													</Tooltip>
 

@@ -4,10 +4,9 @@
   "description": "Package for Cogo Verse",
   "private": true,
   "main": "./index.js",
-
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
-    "@cogoport/components": "^1.0.340",
+    "@cogoport/components": "^1.0.353",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.58",
     "@cogoport/next": "workspace:0.1.0",
