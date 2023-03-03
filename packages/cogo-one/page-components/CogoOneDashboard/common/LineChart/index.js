@@ -16,7 +16,9 @@ function LineChart({ cogoOneDashboardGraph = {}, timeline = '' }) {
 				<div className={styles.legend}>
 					<div className={styles.legend_left_box}>
 						<div className={`${styles.color_dot} ${styles.grey_color}`} />
-						<div className={styles.legend_text}>On Message</div>
+						<div className={styles.legend_text}>
+							On Message
+						</div>
 					</div>
 					<div className={styles.users_nos}>
 						{graph_stats?.on_message_users || 0}

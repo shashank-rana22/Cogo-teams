@@ -1,12 +1,7 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	height: 150px;
-	height: 160px;
-	padding: 10px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 16px;
+	padding: 20px 10px 20px 16px;
 	margin-bottom: 12px;
 	cursor: default;
 	background-color: #fff;
@@ -25,26 +20,32 @@
 }
 .box::-webkit-scrollbar { display: none; } */
 
+.box {
+	padding: 24px 0 0;
+}
+
 .improvement_text_box {
 	display: flex;
 	justify-content: row;
 	padding: 3px;
+	margin-top: -16px;
 }
 
 .improvement_text {
+	max-width: 330px;
 	margin: 5px;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 600;
-	line-height: 22px;
+	line-height: 30px;
 	color: #828282;
 }
 
 .dot {
 	display: inline-block;
-	width: 5px;
-	height: 5px;
+	width: 8px;
+	height: 8px;
 	margin: 5px;
-	margin-top: 12px;
+	margin-top: 16px;
 	color: #828282;
 	background-color: #4f4f4f;
 	border-radius: 100%;
