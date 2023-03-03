@@ -21,7 +21,6 @@ jobs:
           script: |
             cd cogo-admin
             git pull
-            ./scripts/setup-node.sh
             pnpm install
             pnpm run deploy
             
