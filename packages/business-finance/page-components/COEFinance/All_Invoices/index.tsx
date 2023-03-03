@@ -21,7 +21,7 @@ const tabsKeyComponentMapping = {
 	'shipment-view' : ShipmentIdView,
 };
 
-function AllInvoices() {
+function AllInvoices({ statsData }) {
 	const { push } = useRouter();
 	const [filters, setFilters] = useState({});
 	const [subActiveTab, setSubActiveTab] = useState<string>('purchase-view');
@@ -29,6 +29,7 @@ function AllInvoices() {
 		'purchase-view': {
 			filters,
 			setFilters,
+			statsData,
 			subActiveTab,
 		},
 		'shipment-view': {},
