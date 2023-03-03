@@ -1,9 +1,23 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
-const useQuestionList = ({ topic = {}, search = '' }) => {
+const useQuestionList = ({
+	topic = {}, search = '', question = '',
+	setQuestion = () => {},
+}) => {
+	const {
+		user_data,
+	} = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+
+	console.log('user_data:', user_data);
+
 	const [page, setPage] = useState(1);
-	const [question, setQuestion] = useState(null);
+
+	const { query, debounceQuery } = useDebounceQuery();
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_faq_questions',
@@ -47,8 +61,6 @@ const useQuestionList = ({ topic = {}, search = '' }) => {
 		pageData,
 		loading,
 		list,
-		question,
-		setQuestion,
 	};
 };
 

@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Input, Pagination, Tooltip, Loader } from '@cogoport/components';
 import { IcMSearchlight, IcMFolder } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
+import EmptyState from '../../../../common/EmptyState';
 import IconMapping from '../../../../constants/HELP_DESK_ICON_MAPPING';
 import useTopicList from '../../../../hooks/useTopicList';
 
@@ -12,19 +13,28 @@ import styles from './styles.module.css';
 function HelpDesk() {
 	const {
 		search,
-		setSearch,
+		setSearch = () => {},
 		list,
 		loading,
 		paginationData,
 		page,
-		setPage,
+		setPage = () => {},
 		topic,
 		setTopic,
+		question,
+		setQuestion = () => {},
 	} = useTopicList();
 
 	const render = () => {
 		if (topic) {
-			return <QuestionList topic={topic} setTopic={setTopic} />;
+			return (
+				<QuestionList
+					topic={topic}
+					setTopic={setTopic}
+					question={question}
+					setQuestion={setQuestion}
+				/>
+			);
 		}
 
 		const renderIcon = ({ item }) => {
@@ -96,7 +106,13 @@ function HelpDesk() {
 
 	const renderQuestionList = () => {
 		if (search) {
-			return <QuestionList search={search} />;
+			return (
+				<QuestionList
+					search={search}
+					question={question}
+					setQuestion={setQuestion}
+				/>
+			);
 		}
 
 		return loading ? (
@@ -107,6 +123,12 @@ function HelpDesk() {
 			render()
 		);
 	};
+
+	if (!isEmpty(list)) {
+		return (
+			<EmptyState type="helpdesk" />
+		);
+	}
 
 	return (
 		<>

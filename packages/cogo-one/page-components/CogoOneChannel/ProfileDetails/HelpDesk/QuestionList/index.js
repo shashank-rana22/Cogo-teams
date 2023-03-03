@@ -10,8 +10,11 @@ import useQuestionList from '../../../../../hooks/useQuestionList';
 import Answer from './Answer';
 import styles from './styles.module.css';
 
-function QuestionList({ search = '', topic = {}, setTopic = () => {} }) {
-	const { loading, list, page, setPage, pageData, question, setQuestion } =	useQuestionList({ topic, search });
+function QuestionList({
+	search = '', topic = {}, setTopic = () => {}, question = '',
+	setQuestion = () => {},
+}) {
+	const { loading, list, page, setPage, pageData } =	useQuestionList({ topic, search, question, setQuestion });
 
 	if (question) {
 		return (

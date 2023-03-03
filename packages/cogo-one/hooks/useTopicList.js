@@ -5,6 +5,7 @@ const useTopicList = () => {
 	const [search, setSearch] = useState('');
 	const [topic, setTopic] = useState('');
 	const [page, setPage] = useState(1);
+	const [question, setQuestion] = useState(null);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_faq_topics',
@@ -18,8 +19,9 @@ const useTopicList = () => {
 					filters: {
 						status: 'active',
 					},
+					sort_by    : 'view_count',
 					page,
-					page_limit: 5,
+					page_limit : 6,
 				},
 			});
 		} catch (error) {
@@ -44,6 +46,8 @@ const useTopicList = () => {
 		setPage,
 		topic,
 		setTopic,
+		question,
+		setQuestion,
 	};
 };
 
