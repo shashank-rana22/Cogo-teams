@@ -1,27 +1,16 @@
-import { Input, Button } from '@cogoport/components';
-import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import { Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 
 function GetCard({ data, control, isLastItem, isBadgeEdit }) {
-	const { medalType, inputPlaceHolder, setValue, scoreValue, imageValue, imageSelected } = data;
+	const { medalType, inputPlaceHolder } = data;
 
-	const [img_url, setImg_url] = useState('');
 	const InputElement = getFieldController('text');
 	const UploadControler = getFieldController('fileUpload');
-
-	useEffect(() => {
-		setValue((pv) => ({ ...pv, [imageValue]: img_url }));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [img_url]);
-
-	const handleChange = (item) =>{
-		setImg_url(item)
-	}
 
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
@@ -42,9 +31,6 @@ function GetCard({ data, control, isLastItem, isBadgeEdit }) {
 						control={control}
 						size="sm"
 						placeholder={inputPlaceHolder}
-						// onChange={(val) => {
-						// 	setValue((pv) => ({ ...pv, [scoreValue]: val }));
-						// }}
 					/>
 				</div>
 			</div>
@@ -54,15 +40,13 @@ function GetCard({ data, control, isLastItem, isBadgeEdit }) {
 				<IcMInfo className={styles.icm_info} />
 			</div>
 
-			<FileUploader
+			<UploadControler
 				name={`${medalType}_img_value`}
+				control={control}
 				uploadDesc="Upload files here"
 				className={styles.file_select_style}
-				value={imageSelected}
-				onChange={(item)=>handleChange(item)}
-				// onChange={(item = {}) => setValue((pv) => ({ ...pv, [imageValue]: item.finalUrl }))}
 				style={{ width: isBadgeEdit ? '93%' : '80%' }}
-				// accept=".png,.pkg"
+				//? accept=".png,.pkg"
 			/>
 
 			{ isBadgeEdit && (
@@ -76,17 +60,6 @@ function GetCard({ data, control, isLastItem, isBadgeEdit }) {
 				</div>
 
 			)}
-
-			{/*
-				<Button
-					size="sm"
-					themeType="primary"
-					disabled={loading}
-					onClick={onCheckPublish}
-				>
-					Save
-				</Button> */}
-			{/* </div> */}
 
 		</div>
 	);
