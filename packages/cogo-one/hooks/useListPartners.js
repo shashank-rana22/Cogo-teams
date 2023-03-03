@@ -20,7 +20,9 @@ const useListPartners = () => {
 
 		}
 	};
-	const { id = '' } = data || {};
+	const { list = [] } = data || {};
+	const { id = '' } = list?.[0] || {};
+
 	return {
 		partnersLoading,
 		fetchPartnerId,
