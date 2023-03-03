@@ -59,7 +59,10 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 
 							const redirectToAgentView = (agentId = '42270ace-f97e-41e2-90bc-a336d90d791f') => {
 								if (!agentId) return;
-								push('/cogo-one/dashboard/[id]', `/cogo-one/dashboard/${agentId}`);
+								push(
+									'/cogo-one/dashboard/[id]?view=agent',
+									`/cogo-one/dashboard/${agentId}?view=agent`,
+								);
 								if (agentId) {
 									getCogoOneDashboard(agentId);
 								}

@@ -49,7 +49,7 @@ function CogoOneDashboard() {
 		<div>
 			{selectedItem && (
 				<div className={styles.prime_container}>
-					{!isAgentView || view === 'agent'
+					{isAgentView || view === 'agent'
 						? <AgentDashboard {...commomProps} timeline={timeline} />
 						: <AdminDashboard {...commomProps} getCogoOneDashboard={getCogoOneDashboard} />}
 				</div>
