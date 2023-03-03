@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 type Props = {
 	setOpen?: (v) => void;
-	uploadProof: { fileName: string; finalUrl : string };
+	uploadProof: string;
 	setUploadProof?: (v) => void;
 	itemData: {
 		id?: string,
@@ -22,16 +22,15 @@ type Props = {
 };
 
 function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, refetch, open }: Props) {
-	const { fileName, finalUrl } = uploadProof || {};
-	const bodyStyle = finalUrl ? styles.body : '';
+	const bodyStyle = uploadProof ? styles.body : '';
 	const { uploadDoc, loading } = useUpdateStatus({
-		finalUrl,
+		uploadProof,
 		setOpen,
 		itemData,
 		refetch,
 	});
 	const handleManualUpload = () => {
-		if (!isEmpty(finalUrl)) {
+		if (!isEmpty(uploadProof)) {
 			uploadDoc();
 		} else {
 			Toast.error('Invoice doc is required');
@@ -43,13 +42,10 @@ function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, re
 			<Modal.Body>
 				<section className={bodyStyle}>
 					<FileUploader
-						value={finalUrl}
-						docName={fileName}
-						fileName={fileName}
+						value={uploadProof}
 						onChange={setUploadProof}
 						showProgress
 						draggable
-						fileLink={finalUrl}
 						multipleUploadDesc="Upload Invoice"
 						uploadIcon={<IcMUpload height={40} width={40} />}
 						accept=".pdf"

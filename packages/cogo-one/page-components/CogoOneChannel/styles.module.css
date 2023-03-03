@@ -1,0 +1,13 @@
+.layout_container {
+	position: relative;
+	display: flex;
+	width: calc(100% - 14px);
+	height: 92vh;
+	margin-top: 10px;
+}
+
+.chat_details_continer {
+	display: flex;
+	width: calc(76% - 10px);
+	height: 100%;
+}

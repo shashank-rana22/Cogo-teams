@@ -22,13 +22,13 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 	const onOuterClick = () => {
 		setShowModal(false);
 		setEditNameModal(false);
-		setValue('profile_picture_url', watchProfilePicture?.finalUrl || picture);
+		setValue('profile_picture_url', watchProfilePicture || picture);
 	};
 
 	const onSubmit = async (values) => {
 		try {
 			const payload = {
-				picture : values?.profile_picture_url?.finalUrl,
+				picture : values?.profile_picture_url,
 				id      : partner_user_id,
 			};
 

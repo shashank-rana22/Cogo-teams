@@ -1,0 +1,25 @@
+.name {
+	font-size: 10px;
+	font-weight: 500;
+	color: #000;
+	text-align: left;
+}
+
+.time_stamp {
+	padding-left: 4px;
+	font-size: 10px;
+	font-weight: 500;
+	text-align: left;
+}
+
+.container {
+	float: left;
+	width: 100%;
+	height: fit-content;
+	padding: 10px;
+}
+
+.receive_message_container {
+	width: fit-content;
+	word-break: break-word;
+}
