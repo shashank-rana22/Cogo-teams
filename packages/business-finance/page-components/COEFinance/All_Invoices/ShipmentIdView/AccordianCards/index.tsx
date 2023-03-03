@@ -46,8 +46,6 @@ function AccordianCards({
 	});
 	const router = useRouter();
 
-	const listLength = !isEmpty(itemData);
-
 	return (
 		<div>
 			<div className={styles.container}>
@@ -200,7 +198,7 @@ function AccordianCards({
 								</Button>
 							) : (
 								<Button
-									disabled={listLength}
+									disabled={!dataCard?.jobNumber}
 									themeType="secondary"
 									style={{ height: '30px', fontSize: '12px' }}
 									onClick={() => {
