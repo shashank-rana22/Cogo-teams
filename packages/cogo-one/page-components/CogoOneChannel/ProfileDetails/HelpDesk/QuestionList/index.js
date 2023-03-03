@@ -79,7 +79,7 @@ function QuestionList({
 								<div className={styles.tags}>
 									{item?.faq_tags?.map((faqtag) => (
 										<div className={styles.tags_name}>
-											{(faqtag?.display_name)}
+											{startCase(faqtag?.display_name)}
 											{' '}
 											{' '}
 										</div>

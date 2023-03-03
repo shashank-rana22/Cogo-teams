@@ -15,12 +15,13 @@ const useAnswer = ({ question }) => {
 				},
 			});
 		} catch (error) {
-			console.log('error :: ', error);
+			// console.log(error);
 		}
 	};
 
 	useEffect(() => {
 		fetch();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return {
