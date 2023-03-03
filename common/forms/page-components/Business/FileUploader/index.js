@@ -12,6 +12,7 @@ function FileUploader(props) {
 		defaultValues,
 		multiple,
 		docName,
+		uploadIcon = null,
 		...rest
 	} = props;
 	const [fileName, setFileName] = useState(null); // remove
@@ -135,7 +136,7 @@ function FileUploader(props) {
 				onClick={handleDelete}
 				loading={loading}
 				uploadDesc="Upload files"
-				uploadIcon={<IcMCloudUpload color="#ACDADF" height={40} width={40} />}
+				uploadIcon={uploadIcon || <IcMCloudUpload color="#ACDADF" height={40} width={40} />}
 				fileData={urlStore}
 			/>
 
