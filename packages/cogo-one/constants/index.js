@@ -151,6 +151,22 @@ export const PLACEHOLDER_MAPPING = {
 	onboarding_kyc : 'Enter Pan No',
 };
 
+export const DISLIKE_OPTIONS = [
+	{
+		label : 'Question not satisfactory',
+		value : 'Question not satisfactory',
+	},
+	{
+		label : 'Answer not satisfactory',
+		value : 'Answer not satisfactory',
+	},
+];
+
+export const FEEDBACK_MAPPING = {
+	true  : 'liked',
+	false : 'disliked',
+};
+
 export const ACCOUNT_TYPE = {
 	importer_exporter : 'Importer/Exporter',
 	service_provider  : 'Service Provider',
