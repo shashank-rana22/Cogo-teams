@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-undef */
 import { Loader, cl } from '@cogoport/components';
 import { IcMArrowBack, IcMRedo } from '@cogoport/icons-react';
-// import { useSelector } from '@cogoport/store';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -14,8 +15,7 @@ import styles from './styles.module.css';
 
 function Answer({ topic = {}, question, setQuestion }) {
 	const [show, setShow] = useState(false);
-
-	// const partnerId = useSelector((s) => s?.profile?.partner?.id);
+	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
 	const { data, loading, fetch } = useAnswer({ question });
 
@@ -35,7 +35,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 	}, [loading]);
 
 	const GotoFAQ = () => {
-		const href = '/learning/faq';
+		const href = `/${partnerId}/learning/faq`;
 		window.open(href, '_self');
 	};
 
@@ -44,7 +44,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 			<div>
 				<div
 					className={styles.title}
-					onClick={() => setQuestion(null)}
+					onClick={() => setQuestion({})}
 				>
 					<IcMArrowBack width={16} height={16} className={styles.back} />
 					<div className={styles.go_back}>Go Back</div>
@@ -54,12 +54,14 @@ function Answer({ topic = {}, question, setQuestion }) {
 					{' '}
 					{startCase(topic.display_name) || data?.faq_topics?.[0]?.display_name}
 				</div>
+
 				<div>
 					<div className={styles.question}>
 						{question?.question_abstract}
 						?
 					</div>
 				</div>
+
 				{loading ? (
 					<div className={styles.spinner_container}>
 						<Loader themeType="primary" />
@@ -89,7 +91,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 				)}
 
 			</div>
-			{/* <div className={styles.like_dislike_container}> */}
+
 			<div className={styles.space} />
 			<div className={styles.information_helpful}>
 				<div className={styles.help_text}>Did this answer your question?</div>
@@ -132,13 +134,15 @@ function Answer({ topic = {}, question, setQuestion }) {
 					<IcMRedo />
 				</div>
 			</div>
-			{/* </div> */}
+
 			{show && (
 				<DislikeModal
 					setShow={setShow}
 					show={show}
 					onClickLikeDislikeButton={onClickLikeDislikeButton}
 					modalLoading={modalLoading}
+					setIsLiked={setIsLiked}
+					is_positive={is_positive}
 				/>
 			)}
 

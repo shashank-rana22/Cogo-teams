@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Loader, Pagination } from '@cogoport/components';
 import { IcMArrowBack, IcMArrowRight } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
@@ -16,7 +16,7 @@ function QuestionList({
 }) {
 	const { loading, list, page, setPage, pageData } =	useQuestionList({ topic, search, question, setQuestion });
 
-	if (question) {
+	if (!isEmpty(question)) {
 		return (
 			<Answer topic={topic} question={question} setQuestion={setQuestion} />
 		);
@@ -39,7 +39,7 @@ function QuestionList({
 						width={16}
 						height={16}
 						className={styles.back}
-						onClick={() => setTopic(null)}
+						onClick={() => setTopic({})}
 					/>
 					{' '}
 					Go Back to Search Result
@@ -75,6 +75,15 @@ function QuestionList({
 										/>
 
 									</div>
+								</div>
+								<div className={styles.tags}>
+									{item?.faq_tags?.map((faqtag) => (
+										<div className={styles.tags_name}>
+											{(faqtag?.display_name)}
+											{' '}
+											{' '}
+										</div>
+									))}
 								</div>
 							</div>
 

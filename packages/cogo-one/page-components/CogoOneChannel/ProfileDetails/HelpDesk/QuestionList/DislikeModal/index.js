@@ -2,11 +2,14 @@ import { Modal, CheckboxGroup, Button, Input } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { DISLIKE_OPTIONS } from '../../../../../../constants';
+import { FEEDBACK_MAPPING, DISLIKE_OPTIONS } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
-function DislikeModal({ setShow, show, onClickLikeDislikeButton = () => {}, modalLoading = false }) {
+function DislikeModal({
+	setShow, show, onClickLikeDislikeButton = () => {}, modalLoading = false,
+	setIsLiked = () => {}, is_positive,
+}) {
 	const [reason, setReason] = useState([]);
 	const [remarks, setRemarks] = useState('');
 
@@ -16,12 +19,17 @@ function DislikeModal({ setShow, show, onClickLikeDislikeButton = () => {}, moda
 		onClickLikeDislikeButton({ type: 'dislike_remark', reason, remarks });
 	};
 
+	const onClose = () => {
+		setIsLiked(FEEDBACK_MAPPING[is_positive] || '');
+		setShow(false);
+	};
+
 	return (
 		<Modal
 			size="sm"
 			show={show}
-			onClose={() => setShow(false)}
-			onOuterClick={() => setShow(false)}
+			onClose={onClose}
+			onOuterClick={onClose}
 			placement="top"
 		>
 			<Modal.Header title="Provide the reason for your dislike" />

@@ -34,6 +34,8 @@
 }
 
 .question {
+	display: flex;
+	flex-flow: column wrap;
 	padding: 10px;
 	margin: 10px 15px 0 10px;
 	font-size: 13px;
@@ -75,4 +77,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tags_name {
+	display: flex;
+	padding: 2px 5px;
+	margin: 5px  10px 0 0;
+	font-size: 11px;
+	border: 1px solid #fcdc00;
+	border-radius: 16px;
 }

@@ -35,7 +35,6 @@ const useUpdateFaqFeedback = ({ isLiked, setIsLiked, data = {}, fetch = () => {}
 				});
 
 				setIsLiked(isLiked === 'liked' ? '' : 'liked');
-
 				fetch();
 			} catch (error) {
 				// console.log(error);

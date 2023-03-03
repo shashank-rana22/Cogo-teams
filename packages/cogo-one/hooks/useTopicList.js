@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 
 const useTopicList = () => {
 	const [search, setSearch] = useState('');
-	const [topic, setTopic] = useState('');
+	const [topic, setTopic] = useState({});
 	const [page, setPage] = useState(1);
-	const [question, setQuestion] = useState(null);
+	const [question, setQuestion] = useState({});
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_faq_topics',

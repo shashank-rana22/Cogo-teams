@@ -12,21 +12,21 @@ import styles from './styles.module.css';
 
 function HelpDesk() {
 	const {
-		search,
+		search = '',
 		setSearch = () => {},
 		list,
 		loading,
 		paginationData,
 		page,
 		setPage = () => {},
-		topic,
-		setTopic,
-		question,
+		topic = {},
+		setTopic = () => {},
+		question = {},
 		setQuestion = () => {},
 	} = useTopicList();
 
 	const render = () => {
-		if (topic) {
+		if (!isEmpty(topic)) {
 			return (
 				<QuestionList
 					topic={topic}
@@ -98,7 +98,6 @@ function HelpDesk() {
 						pageSize={10}
 						onPageChange={(val) => setPage(val)}
 					/>
-
 				</div>
 			</div>
 		);
@@ -115,20 +114,20 @@ function HelpDesk() {
 			);
 		}
 
-		return loading ? (
-			<div className={styles.spinner_container}>
-				<Loader themeType="primary" />
+		if (loading) {
+			return (
+				<div className={styles.spinner_container}>
+					<Loader themeType="primary" />
+				</div>
+			);
+		}
+
+		return (
+			<div>
+				{isEmpty(list) ? <EmptyState type="helpdesk" /> : render()}
 			</div>
-		) : (
-			render()
 		);
 	};
-
-	if (!isEmpty(list)) {
-		return (
-			<EmptyState type="helpdesk" />
-		);
-	}
 
 	return (
 		<>
@@ -142,6 +141,7 @@ function HelpDesk() {
 				disabled={loading}
 			/>
 			{renderQuestionList()}
+
 		</>
 	);
 }
