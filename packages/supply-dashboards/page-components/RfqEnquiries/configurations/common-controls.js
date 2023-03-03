@@ -28,7 +28,7 @@ const commonControls = ({ service }) => {
 		type        : 'select',
 		span        : 4,
 		rules       : { required: 'This is required' },
-		requirement : service !== 'haulage_freight' ? true :false ,
+		requirement : service !== 'haulage_freight',
 	};
 	if (['fcl_freight', 'haulage_freight', 'air_freight'].includes(service)) {
 		return [...controls, lineControls];

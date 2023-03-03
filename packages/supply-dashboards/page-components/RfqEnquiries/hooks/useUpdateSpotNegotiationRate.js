@@ -82,32 +82,32 @@ const useUpdateSpotNegotiationRate = ({
 				prefillData.current = rateSelected;
 			}
 			(Object.keys(prefillData.current?.data || prefillData.current?.freight || prefillData.current?.ftl_freight || prefillData.current?.ltl_freight || prefillData.current?.fcl_customs || prefillData.current?.lcl_customs || prefillData.current?.air_customs || prefillData.current.fcl_cfs || prefillData.current.haulage_freight || {})).forEach((item) => {
-				let val ;
-				if(prefillData.current?.data){
-					val=prefillData?.current?.data[item];
+				let val;
+				if (prefillData.current?.data) {
+					val = prefillData?.current?.data[item];
 				}
-				if(prefillData.current?.freight){
-					val=prefillData?.current?.freight[item];
+				if (prefillData.current?.freight) {
+					val = prefillData?.current?.freight[item];
 				}
-				if(prefillData?.current?.ftl_freight){
-					val=prefillData?.current?.ftl_freight[item];
+				if (prefillData?.current?.ftl_freight) {
+					val = prefillData?.current?.ftl_freight[item];
 				}
-				if(prefillData?.current?.ltl_freight){
-					val=prefillData?.current?.ltl_freight[item];
+				if (prefillData?.current?.ltl_freight) {
+					val = prefillData?.current?.ltl_freight[item];
 				}
-				if(prefillData.current?.fcl_customs){
-					val =prefillData?.current?.fcl_customs[item];
+				if (prefillData.current?.fcl_customs) {
+					val = prefillData?.current?.fcl_customs[item];
 				}
-				if(prefillData.current?.lcl_customs){
-					val =prefillData?.current?.lcl_customs[item];
+				if (prefillData.current?.lcl_customs) {
+					val = prefillData?.current?.lcl_customs[item];
 				}
-				if(prefillData.current?.air_customs){
-					val =prefillData?.current?.air_customs[item];
+				if (prefillData.current?.air_customs) {
+					val = prefillData?.current?.air_customs[item];
 				}
-				if(prefillData.current?.fcl_cfs){
-					val=prefillData?.current?.fcl_cfs[item];
+				if (prefillData.current?.fcl_cfs) {
+					val = prefillData?.current?.fcl_cfs[item];
 				}
-				if(prefillData.current?.haulage_freight){
+				if (prefillData.current?.haulage_freight) {
 					val = prefillData?.current?.haulage_freight[item];
 				}
 				if (val) {
@@ -130,8 +130,8 @@ const useUpdateSpotNegotiationRate = ({
 							} else {
 								setValue(prefill, val[0]?.[prefill]);
 							}
-							if(service?.service === 'air_freight'){
-								mandatoryFreightCodes = [{code: 'BAS',min_price: (val[0]?.min_price).toString(), price: (val[0]?.min_price).toString()}]
+							if (service?.service === 'air_freight') {
+								mandatoryFreightCodes = [{ code: 'BAS', min_price: (val[0]?.min_price).toString(), price: (val[0]?.min_price).toString() }];
 							}
 						});
 					} else if (typeof (val) === 'object') {
@@ -228,7 +228,6 @@ const useUpdateSpotNegotiationRate = ({
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(data)]);
-
 
 	useEffect(() => {
 		if (values?.slabs) {
