@@ -1,9 +1,11 @@
 import allocations from './config/allocations';
 import businessFinance from './config/business-finance';
+import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import enrichment from './config/enrichment';
+import inventory_management from './config/inventory_management';
 import kamMonitoring from './config/kam-monitoring';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
@@ -16,12 +18,14 @@ const routeConfig = {
 	...supplyDashboard,
 	...contracts,
 	...businessFinance,
+	...cogoAcademy,
 	...myIncident,
 	...myProfile,
 	...enrichment,
 	...cogoVerseAnalytics,
 	...cogoOne,
 	...myProfile,
+	...inventory_management,
 	...kamMonitoring,
 };
 

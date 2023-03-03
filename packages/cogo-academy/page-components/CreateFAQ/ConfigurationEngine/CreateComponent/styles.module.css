@@ -1,0 +1,61 @@
+.container {
+	@media (max-width: 768px) {
+		margin-top: 80px;
+	}
+}
+
+.back_div {
+	display: flex;
+}
+
+.back {
+	margin-left: 10px;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.add_topic {
+	margin-top: 12px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.add_name {
+	margin-top: 16px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.name_input {
+	margin-top: 12px;
+}
+
+.user_tag {
+	margin-top: 24px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.select_tags {
+	margin-top: 12px;
+}
+
+.btn_row {
+	display: flex;
+	margin-top: 24px;
+}
+
+.save_btn {
+	margin-left: 10px;
+}
+
+.optional {
+	font-size: 12px;
+	font-weight: 100;
+	color: #6d6d6d;
+}
+
+.errors {
+	margin-top: 6px;
+	color: #ee3425;
+}
