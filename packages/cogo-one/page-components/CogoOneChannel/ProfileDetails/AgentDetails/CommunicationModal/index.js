@@ -5,7 +5,7 @@ import { TOOLBARCONFIG } from '../../../../../constants';
 
 import styles from './styles.module.css';
 
-function CommunicationModal({ modalType = '', setModalType = () => {}, receiverEmail = '' }) {
+function CommunicationModal({ setModalType = () => {}, receiverEmail = '' }) {
 	const closeModal = () => {
 		setModalType(null);
 	};
@@ -34,7 +34,7 @@ function CommunicationModal({ modalType = '', setModalType = () => {}, receiverE
 				/>
 				<RTE
 					value={emailState?.body}
-					setValue={(val) => setEmailState((p) => ({ ...p, body: val }))}
+					onChange={(val) => setEmailState((p) => ({ ...p, body: val }))}
 					toolbarConfig={TOOLBARCONFIG}
 					className={styles.styled_editor}
 				/>
@@ -44,7 +44,7 @@ function CommunicationModal({ modalType = '', setModalType = () => {}, receiverE
 					<Button size="md" themeType="tertiary" onClick={closeModal}>
 						cancel
 					</Button>
-					<Button size="md" themeType="accent">
+					<Button size="md" themeType="accent" onClick={handleSubmit}>
 						Send
 					</Button>
 				</div>

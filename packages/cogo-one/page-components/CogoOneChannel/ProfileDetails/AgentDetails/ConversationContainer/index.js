@@ -1,14 +1,14 @@
 import { Placeholder } from '@cogoport/components';
-import { IcCWhatsapp, IcMEmail } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import OtherChannelsConfig from '../../../../../configurations/other-channels-config';
+import hideDetails from '../../../../../utils/hideDetails';
 import CommunicationModal from '../CommunicationModal';
 
 import styles from './styles.module.css';
 
 function ConversationContainer({ userData, loading, noData = false }) {
-	const { email, name, whatsapp_number_eformat } = userData || {};
 	const [modalType, setModalType] = useState(null);
 	if (isEmpty(userData) || noData) {
 		return (
@@ -36,54 +36,51 @@ function ConversationContainer({ userData, loading, noData = false }) {
 					</div>
 				))
 			) : (
-
 				<div className={styles.wrapper}>
-					{!isEmpty(whatsapp_number_eformat) && (
-						<div className={styles.contacts_container}>
-							<div className={styles.container}>
-								<div className={styles.icon_type}><IcCWhatsapp width={25} height={25} /></div>
-								<div className={styles.details}>
-									<div className={styles.header}>
-										<div className={styles.name}>{name}</div>
-									</div>
-									<div className={styles.organization}>{whatsapp_number_eformat}</div>
-								</div>
-
-							</div>
-						</div>
-					)}
-					{!isEmpty(email) && (
+					{OtherChannelsConfig.map(({
+						name,
+						icon, value_type, channel_type,
+					}) => !isEmpty(userData?.[name]) && (
 						<div
-							className={styles.contacts_container}
 							role="presentation"
-							onClick={() => setModalType('email')}
+							className={styles.contacts_container}
+							onClick={() => {
+								if (channel_type === 'email') {
+									setModalType('email');
+								}
+							}}
 						>
 							<div className={styles.container}>
-								<div className={styles.icon_type}>
-									<IcMEmail width={25} height={25} fill="#E09B3D" />
-								</div>
+								<div className={styles.icon_type}>{icon}</div>
 								<div className={styles.details}>
-
 									<div className={styles.header}>
-										<div className={styles.name}>{name}</div>
+										<div className={styles.name}>{userData?.name || ''}</div>
 									</div>
-									<div className={styles.organization}>{email}</div>
-
+									<div className={styles.organization}>
+										{hideDetails({
+											data : userData?.[name],
+											type : value_type,
+										})}
+									</div>
 								</div>
-
 							</div>
 						</div>
-					)}
+					))}
 				</div>
 			)}
+
 			{modalType && (
 				<CommunicationModal
 					modalType={modalType}
 					setModalType={setModalType}
-					receiverEmail={email}
+					receiverEmail={hideDetails({
+						data : userData?.email,
+						type : 'mail',
+					})}
 				/>
 			)}
 		</>
 	);
 }
+
 export default ConversationContainer;
