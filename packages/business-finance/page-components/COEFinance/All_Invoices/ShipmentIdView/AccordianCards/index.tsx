@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
@@ -46,7 +46,7 @@ function AccordianCards({
 	});
 	const router = useRouter();
 
-	const listLength = expenseCount === 0 && incomeCount === 0;
+	const listLength = !isEmpty(itemData);
 
 	return (
 		<div>
