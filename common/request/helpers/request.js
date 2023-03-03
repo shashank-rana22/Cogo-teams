@@ -50,7 +50,6 @@ request.interceptors.request.use((oldConfig) => {
 		newConfig.url = `/${serviceName}/${apiPath}`;
 		if (serviceName === 'location') {
 			newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
-			newConfig.baseURL = process.env.NEXT_PUBLIC_COGO_MAPS_URL;
 		}
 	}
 
