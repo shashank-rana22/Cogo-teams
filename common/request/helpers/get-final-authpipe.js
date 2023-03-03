@@ -26,9 +26,11 @@ const getAuthorizationParams = (store, url) => {
 			if (pipe) {
 				return pipe;
 			}
+
 			if (!isMain) {
 				return null;
 			}
+
 			return authorizationparameters;
 		}
 		return null;
