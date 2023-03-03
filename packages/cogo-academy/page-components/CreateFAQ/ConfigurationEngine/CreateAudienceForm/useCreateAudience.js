@@ -3,7 +3,6 @@ import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-// import { useState } from 'react';
 
 function useCreateAudience({
 	setConfigurationPage,
@@ -52,8 +51,7 @@ function useCreateAudience({
 			...rest,
 			auth_function,
 			auth_sub_function : auth_function === 'all' ? 'all' : auth_sub_function,
-
-			persona: handlePersona({ personaValue, platform }),
+			persona           : handlePersona({ personaValue, platform }),
 
 		};
 

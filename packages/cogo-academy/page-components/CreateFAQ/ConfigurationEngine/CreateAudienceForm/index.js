@@ -117,6 +117,11 @@ function CreateAudienceForm(props) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loading]);
 
+	useEffect(() => {
+		setValue('auth_sub_function', null);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [watchFunctions]);
+
 	const onClickBackIcon = () => {
 		if (source === 'create') {
 			setShowCreateAudienceModal(false);
