@@ -1,26 +1,25 @@
 import { Toast } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
 function useBadgeConfigurationAttributes() {
+	const formProps = useForm();
+
 	const [{ loading }, trigger] = useAllocationRequest({
-		url     : '/kam_expertise_badge_configuration_attributes',
+		url     : '/post_allocation_kam_expertise_badge_configuration_detail_attributes',
 		method  : 'POST',
-		authkey : 'post_allocation_kam_expertise_badge_configuration_attributes',
+		authkey : 'post_allocation_kam_expertise_badge_configuration_detail_attributes',
 	});
 
-	const onCheckPublish = async () => {
+	const onCheckPublish = async (payload_data = {}) => {
 		try {
 			const payload = {
-				id                                   : '68f8a233-5387-4f33-a84a-739b10c97eac',
-				version_id                           : '1',
-				badge_name                           : 'nautical_ninja',
-				description                          : 'description for the 1st badge',
-				kam_expertise_event_configuration_id : '00245b2c-c754-400e-8dcf-bcbc18f90870',
-				status                               : 'active',
-				// performed_by_id                      : '00245b2c-c754-400e-8dcf-bcbc18f34598',
-				// performed_by_type                    : 'sales_person',
-
+				id        : payload_data.id,
+				medal     : payload_data.medal,
+				image_url : payload_data.image_url,
+				score     : payload_data.score,
+				status    : 'active',
 			};
 
 			await trigger({
@@ -40,6 +39,7 @@ function useBadgeConfigurationAttributes() {
 	return {
 		loading,
 		onCheckPublish,
+		formProps,
 	};
 }
 
