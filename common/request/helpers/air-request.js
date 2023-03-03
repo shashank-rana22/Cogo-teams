@@ -16,7 +16,7 @@ const decodedCustomSerializer = (params) => {
 	return paramsStringify;
 };
 
-const airRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_AIR_COE_BASE_URL });
+const airRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_AIR_BASE_URL });
 
 airRequest.interceptors.request.use((oldConfig) => {
 	const { authKey = '', ...axiosConfig } = oldConfig;

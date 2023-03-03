@@ -10,7 +10,6 @@ function getFileObject(dataurl, filename) {
 		n -= 1;
 	}
 
-	// eslint-disable-next-line no-undef
 	return { file: new File([u8arr], filename, { type: mime }) };
 }
 

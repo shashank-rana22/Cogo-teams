@@ -90,7 +90,7 @@
 		max-width: 200%;
 		padding-top: 40px;
 		padding-left: 60px;
-		margin-right: -100px;
+		right: 700px;
 	}
 
 	&.sci_text_style {

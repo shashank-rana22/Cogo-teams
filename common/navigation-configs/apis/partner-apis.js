@@ -10253,9 +10253,8 @@ const partner = {
 	],
 	ground_ops: [
 		{
-			api          : 'get_air_coe_pending_tasks_list',
-			access_type  : 'private',
-			service_name : 'shipment',
+			api         : 'get_air_coe_pending_tasks_list',
+			access_type : 'private',
 		},
 		{
 			api          : 'list_locations',

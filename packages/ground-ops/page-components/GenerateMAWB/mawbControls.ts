@@ -289,9 +289,7 @@ const mawbControls = () => ({
 			controls: [
 				{
 					name        : 'code',
-					type        : 'select',
-					labelKey    : 'code',
-					valueKey    : 'code',
+					type        : 'text',
 					className   : 'primary lg',
 					span        : 5,
 					placeholder : 'Enter Code',
@@ -302,7 +300,7 @@ const mawbControls = () => ({
 				{
 					name        : 'price',
 					placeholder : 'Enter Price',
-					type        : 'number',
+					type        : 'text',
 					span        : 5,
 					rules       : {
 						required: 'Price is Required',
@@ -327,9 +325,7 @@ const mawbControls = () => ({
 			controls: [
 				{
 					name        : 'code',
-					type        : 'select',
-					labelKey    : 'code',
-					valueKey    : 'code',
+					type        : 'text',
 					className   : 'primary lg',
 					span        : 5,
 					placeholder : 'Enter Code',
@@ -340,7 +336,7 @@ const mawbControls = () => ({
 				{
 					name        : 'price',
 					placeholder : 'Enter Price',
-					type        : 'number',
+					type        : 'text',
 					span        : 5,
 					className   : 'primary lg',
 					rules       : {

@@ -57,7 +57,6 @@ function DownloadModal({ show, setShow }) {
 			size="md"
 			show={show}
 			onClose={() => setShow(false)}
-			// handleSubmit={handleSubmit}
 			scroll={false}
 			className={styles.modal_container}
 		>

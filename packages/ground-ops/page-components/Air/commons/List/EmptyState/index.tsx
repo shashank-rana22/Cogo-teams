@@ -14,6 +14,7 @@ function EmptyState({ heading = 'results', placement = 'center' }) {
 				) : null}
 				<div className={styles.heading}>
 					Sorry! no
+					{' '}
 					{heading}
 					{' '}
 					found :(

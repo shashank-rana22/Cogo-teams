@@ -58,6 +58,7 @@ const apis = {
 		module  : 'shipment',
 		feature : 'revenue_desk',
 	})),
+
 	enquiry_supply: enquiry_supply.map((api) => ({
 		...api,
 		module: 'enquiry_supply',
