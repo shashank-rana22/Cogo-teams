@@ -3,15 +3,16 @@ import FileUploader from '@cogoport/forms/page-components/Business/FileUploader'
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
-// import useBadgeConfigurationAttributes from '../../../hooks/useBadgeConfigurationAttributes';
+import { getFieldController } from '../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 
-function GetCard({ data, isLastItem, isBadgeEdit }) {
+function GetCard({ data, control, isLastItem, isBadgeEdit }) {
 	const { medalType, inputPlaceHolder, setValue, scoreValue, imageValue, imageSelected } = data;
 
 	const [img_url, setImg_url] = useState('');
-
+	const InputElement = getFieldController('text');
+	const UploadControler = getFieldController('fileUpload');
 	// ! here, setValue and imageValue are being monitored to re-render, need to watch only 'img_url'
 	useEffect(() => {
 		setValue((pv) => ({ ...pv, [imageValue]: img_url }));
@@ -36,12 +37,15 @@ function GetCard({ data, isLastItem, isBadgeEdit }) {
 
 				<div>
 					<p style={{ color: '#4f4f4f' }}>Score</p>
-					<Input
+					<InputElement
+						name={`${medalType}_value`}
+						id={`${medalType}_value_input`}
+						control={control}
 						size="sm"
 						placeholder={inputPlaceHolder}
-						onChange={(val) => {
-							setValue((pv) => ({ ...pv, [scoreValue]: val }));
-						}}
+						// onChange={(val) => {
+						// 	setValue((pv) => ({ ...pv, [scoreValue]: val }));
+						// }}
 					/>
 				</div>
 			</div>
@@ -52,6 +56,7 @@ function GetCard({ data, isLastItem, isBadgeEdit }) {
 			</div>
 
 			<FileUploader
+				name={`${medalType}_img_value`}
 				uploadDesc="Upload files here"
 				className={styles.file_select_style}
 				value={imageSelected}

@@ -2,7 +2,9 @@ import { Toast, Button } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
+import useCreateNewBadge from '../../../hooks/useCreateNewBadge';
 
 import GetCard from './getCard';
 import GetLabelInputPair from './getLabelInputPair';
@@ -10,6 +12,16 @@ import Header from './header';
 import styles from './styles.module.css';
 
 function CreateBadge({ setWindow, autofill }) {
+	const {
+		getAddBadgesControls, formProps,
+	} = useCreateNewBadge();
+
+	const {
+		control, formState: { errors }, watch,
+	} = formProps;
+
+	console.log('getValues', watch());
+
 	const [badgeInput, setBadgeInput] = useState(false);
 	const [badgeParams, setBadgeParams] = useState({
 		version_id   : '1',
@@ -170,6 +182,7 @@ function CreateBadge({ setWindow, autofill }) {
 		setBadgeInput(true);
 		// onClose();
 	};
+
 	const handelSave = () => {
 		// setCreateBadge((pv) => !pv);
 		onClose();
@@ -188,8 +201,8 @@ function CreateBadge({ setWindow, autofill }) {
 							Last Modified :
 							{' '}
 							{format(autofill.updated_at, 'yyyy-MMM-dd')}
-
 						</p>
+
 						<p className={styles.text_styles}>
 							Last Modified By :
 							{/* {` ${autofill.lstModifiedBy}`} */}
@@ -205,7 +218,7 @@ function CreateBadge({ setWindow, autofill }) {
 					Select the conditions and number of completions necessary to obtain
 					the badge.
 				</p>
-				<div className={styles.content_container}>
+				{/* <div className={styles.content_container}>
 					{
 					labelInputPairs.map((data) => (
 						<GetLabelInputPair
@@ -213,14 +226,42 @@ function CreateBadge({ setWindow, autofill }) {
 						/>
 					))
 					}
-				</div>
+				</div> */}
+				<section className={styles.badge_form_container}>
+					{getAddBadgesControls.map((controlItem) => {
+						const el = { ...controlItem };
 
+						const Element = getFieldController(el.type);
+
+						if (!Element) return null;
+
+						return (
+							<div className={styles.form_group}>
+								<span className={styles.label}>{el.label}</span>
+
+								<div className={styles.input_group}>
+									<Element
+										{...el}
+										key={el.name}
+										control={control}
+										id={`${el.name}_input`}
+									/>
+								</div>
+
+								<div className={styles.error_message}>
+									{errors?.[el.name]?.message}
+								</div>
+							</div>
+						);
+					})}
+				</section>
 				<div className={styles.lower_background}>
 					<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
 					<div className={styles.display_flex}>
 						{medalType.map((data, index) => (
 							<GetCard
 								data={data}
+								control={control}
 								// setUrl={data.setUrl}
 								isLastItem={index === medalType.length - 1}
 							/>
