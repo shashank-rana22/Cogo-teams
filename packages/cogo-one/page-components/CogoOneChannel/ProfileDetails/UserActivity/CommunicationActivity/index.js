@@ -70,23 +70,25 @@ function CommunicationActivity({ communication = {} }) {
 												You have a message On
 												{' '}
 												{format(created_at, 'dd MMM YYYY')}
-												{' '}
-												from
-												{' '}
-												<div>{sender}</div>
+												{sender && (
+													<div>
+														from
+														{' '}
+														{sender}
+													</div>
+												)}
 											</div>
 										)}
 										{subject === '' && (
 											<div className={styles.user_message}>
-												<div>{service}</div>
+												<div>{service.replaceAll('_', ' ')}</div>
 											</div>
 										)}
-										{!subject && (
+										{subject === null && (
 											<div className={styles.user_message}>
 												{textData?.text}
 											</div>
 										)}
-
 									</div>
 								</div>
 								<div className={styles.user_avatar}>

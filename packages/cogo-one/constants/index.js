@@ -26,8 +26,8 @@ export const SOURCE_ICON_MAPPING = {
 	platform_notification: <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg"
 		alt=""
-		width="18px"
-		height="18px"
+		width="30px"
+		height="30px"
 	/>,
 
 };

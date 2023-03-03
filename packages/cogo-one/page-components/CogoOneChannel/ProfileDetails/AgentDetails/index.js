@@ -155,16 +155,24 @@ function AgentDetails({
 					const itemKey = `${snakeCase(item.label)}_${index}`;
 					return (
 						<div key={itemKey}>
-							<Pill
-								key={item.label}
-								prefix={item.prefixIcon}
-								size="md"
-								color={item.color}
-							>
-								<div className={styles.pill_name}>
-									{item.label}
-								</div>
-							</Pill>
+							{loading ? (
+								<Placeholder
+									height="20px"
+									width="120px"
+									margin="10px 0px 10px 0px"
+								/>
+							) : (
+								<Pill
+									key={item.label}
+									prefix={item.prefixIcon}
+									size="md"
+									color={item.color}
+								>
+									<div className={styles.pill_name}>
+										{item.label}
+									</div>
+								</Pill>
+							)}
 						</div>
 					);
 				})}
