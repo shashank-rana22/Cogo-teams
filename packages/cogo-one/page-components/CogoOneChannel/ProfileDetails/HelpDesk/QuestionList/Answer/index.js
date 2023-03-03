@@ -35,8 +35,8 @@ function Answer({ topic = {}, question, setQuestion }) {
 	}, [loading]);
 
 	const GotoFAQ = () => {
-		const href = `/${partnerId}/learning/faq`;
-		window.open(href, '_self');
+		const href = `/v2/${partnerId}/learning/faq`;
+		window.open(href, '_blank');
 	};
 
 	return (
