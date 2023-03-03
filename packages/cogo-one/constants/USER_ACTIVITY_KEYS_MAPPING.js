@@ -53,8 +53,8 @@ export const USER_ACTIVITY_KEYS_MAPPING = {
 	},
 
 	ftl_freight: {
-		origin      : 'pickup',
-		destination : 'drop',
+		origin      : 'origin_location',
+		destination : 'destination_location',
 
 	},
 
