@@ -10541,6 +10541,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
+		{
+			api          : 'list_helios_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
 	],
 };
 export default partner;

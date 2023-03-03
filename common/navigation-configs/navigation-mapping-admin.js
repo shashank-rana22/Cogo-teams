@@ -2014,9 +2014,9 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'helios_dashboard-view',
-				title         : 'Helios Dashboard View',
-				href          : '/helios-dashboard-view',
-				as            : '/helios-dashboard-view',
+				title         : 'Helios Dashboard',
+				href          : '/helios-dashboard',
+				as            : '/helios-dashboard',
 				type          : 'link',
 				main_apis     : ['list_dashboard_widgets', 'get_widget_data'],
 				possible_apis : apis.helios_dashboard,
