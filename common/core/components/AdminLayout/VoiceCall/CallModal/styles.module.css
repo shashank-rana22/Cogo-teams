@@ -1,0 +1,71 @@
+.modal_styles {
+	:global {
+		.ui_modal_body_container {
+			min-height: 375px;
+			border-top: none !important;
+			border-bottom: none !important;
+		}
+	}
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: fit-content;
+	padding: 16px;
+}
+
+.org_name {
+	display: flex;
+	justify-content: center;
+	margin-top: 12px;
+	font-size: 16px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.number {
+	display: flex;
+	justify-content: center;
+	margin-top: 12px;
+	font-size: 14px;
+	font-weight: 500;
+	text-align: center;
+}
+
+.avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
+	height: 60px;
+	background: #fdebe9;
+	border-radius: 12px;
+}
+
+.hang_up {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 52px;
+	cursor: pointer;
+}
+
+.status_div {
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+	font-size: 14px;
+}
+
+.timer {
+	margin-top: 8px;
+	font-size: 14px;
+}
+
+.disable {
+	cursor: "not-allowed";
+}

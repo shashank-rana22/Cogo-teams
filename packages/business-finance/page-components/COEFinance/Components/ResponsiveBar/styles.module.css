@@ -1,0 +1,22 @@
+.invoice {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	padding: 20px 0 0 36px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.border {
+	width: 96px;
+	height: 2px;
+	margin: 4px 0 0 36px;
+	background: #ed3726;
+	border-radius: 4px;
+}
+
+.icon {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}

@@ -2,6 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
 import BankDetails from '../Modals/BankDetails';
+import ConcorModal from '../Modals/ConcorModal';
 import ICJVModal from '../Modals/ICJV_Modal';
 import JvModal from '../Modals/JvModal';
 import RequestCN from '../Modals/RequestCN';
@@ -40,6 +41,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 
 			return list ? (
 				<Tooltip
+					interactive
 					content={(list || [{}]).map((item:TooltipInterface) => (
 						<div className={styles.trade_party_name}>
 							<div>{toTitleCase(item?.div || '-')}</div>
@@ -52,6 +54,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				<div>
 
 					<Tooltip
+						interactive
 						content={bankTradePartyName || tdsTradePartyName ? (
 							<div>
 								{(organization?.tradePartyType === 'SELF'
@@ -144,6 +147,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				settlementRequest,
 				journalVoucherRequest,
 				interCompanyJournalVoucherRequest,
+				concorPdaApprovalRequest,
 			} = data || {};
 
 			const { type, id } = row || {};
@@ -202,6 +206,16 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 							id={id}
 						/>
 					)}
+
+					{
+						type === 'CONCOR_PDA_APPROVAL' && (
+							<ConcorModal
+								concorData={concorPdaApprovalRequest}
+								id={id}
+								refetch={getIncidentData}
+							/>
+						)
+					}
 
 				</>
 			);

@@ -35,8 +35,12 @@ const useGetAuthorizationChecked = () => {
 	useEffect(() => {
 		(async () => {
 			if (!_initialized) {
-				const res = await request.get('get_user_session');
-				dispatch(setProfileState({ _initialized: true, ...res.data }));
+				try {
+					const res = await request.get('get_user_session');
+					dispatch(setProfileState({ _initialized: true, ...res.data }));
+				} catch (err) {
+					console.log(err);
+				}
 			}
 		})();
 	}, [_initialized, dispatch]);

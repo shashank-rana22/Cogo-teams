@@ -195,6 +195,26 @@ const apis = [
 		feature      : 'bl_do',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'raise_query',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_container_subscription',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_air_subscription',
+		access_type  : 'private',
+		service_name : 'air_tracking',
+	},
+	{
+		api          : 'get_container_sea_route',
+		access_type  : 'public',
+		service_name : 'saas_traceability',
+	},
 ];
 
 export default apis;

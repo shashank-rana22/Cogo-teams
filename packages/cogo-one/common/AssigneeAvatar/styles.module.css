@@ -1,0 +1,39 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 25px;
+	height: 25px;
+	background: #e0e0e0;
+	border-radius: 5px;
+}
+
+.name_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 10px;
+	min-height: 10px;
+	padding: 1px 2px;
+	font-size: 10px;
+	font-weight: 500;
+	color: #fff;
+	text-transform: uppercase;
+	background: #bdbdbd;
+	border-radius: 5px;
+}
+
+.arrow_right {
+	width: 0;
+	height: 0;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+	border-left: 6px solid #e0e0e0;
+}
+
+.relative_div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: fit-content;
+}

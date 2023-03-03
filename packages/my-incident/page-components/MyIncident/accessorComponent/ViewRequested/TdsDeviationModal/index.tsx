@@ -15,7 +15,6 @@ function TdsDeviationModal({
 	const { status, data, userIncidentStatus, userNotes, updatedBy, updatedAt, remark:rejectedRemark } = itemData || {};
 	const { name:updatedByName } = updatedBy || {};
 	const { tdsRequest } = data || {};
-	const { fileName, finalUrl } = selectedFile || {};
 	const {
 		currentTdsRate, currentTdsStyle, requestedTdsRate, requestedTdsStyle,
 		validFrom, validTo, remark, documentUrls,
@@ -196,13 +195,10 @@ function TdsDeviationModal({
 					&& name === 'Raise Again'
 					&& (
 						<FileUploader
-							value={finalUrl}
-							docName={fileName}
-							fileName={fileName}
+							value={selectedFile}
 							onChange={setSelectedFile}
 							showProgress
 							draggable
-							fileLink={finalUrl}
 							multipleUploadDesc="Upload Invoice"
 						/>
 					)}
@@ -213,7 +209,7 @@ function TdsDeviationModal({
 					{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION' && name === 'Raise Again'
 						? (
 							<Button
-								disabled={finalUrl === undefined || loadingOnRaise}
+								disabled={selectedFile === undefined || loadingOnRaise}
 								onClick={() => {
 									onRaiseAgain();
 								}}

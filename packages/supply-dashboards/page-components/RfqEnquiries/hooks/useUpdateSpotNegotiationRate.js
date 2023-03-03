@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { useForm, getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useRef } from 'react';
@@ -47,11 +47,12 @@ const useUpdateSpotNegotiationRate = ({
 		service  : service.service,
 	});
 
-	const { data:rateSelected } = useGetRates({ service, selectedRate });
+	const { data :rateSelected } = useGetRates({ service, selectedRate });
+
 	const prefillData = useRef();
 
 	const { newField } = FieldMutation({
-		fields, values, service, data,
+		fields, values, data,
 	});
 
 	useEffect(() => {
@@ -314,7 +315,7 @@ const useUpdateSpotNegotiationRate = ({
 				const newRes = await fetch(
 					{ service_provider_id: value?.service_provider_id, spot_negotiation_id: service?.id },
 				);
-				if (!(newRes?.data?.is_complete)) {
+				if (!newRes?.data?.is_complete && Object.keys(newRes?.data?.completion_messages || {}).length > 0) {
 					let completeMessage = 'Incompletion Reasons :';
 					const message = IncompletionReasons({ completionMessages: newRes?.data?.completion_messages });
 					completeMessage += message;
@@ -322,7 +323,7 @@ const useUpdateSpotNegotiationRate = ({
 				} else {
 					setActiveService(null);
 					setSubmittedEnquiry((prev) => [...prev, `${service?.id}${service?.service}`]);
-					Toast.success('Negotiation Updated');
+					Toast.success('Rate successfully Added, It may take up to 5 minutes to reflect in reverts');
 					if (!data?.is_complete) {
 						setRevertCounts((prev) => ({ ...prev, [selectedCard?.id]: prev[selectedCard.id] + 1 }));
 					}
@@ -331,7 +332,7 @@ const useUpdateSpotNegotiationRate = ({
 				// console.log(err?.message);
 			}
 		} catch (err) {
-			Toast.error(err?.response?.data?.message || 'Something Went Wrong');
+			Toast.error(getApiError(err?.response?.data) || 'Something Went Wrong');
 		}
 	};
 
@@ -346,6 +347,8 @@ const useUpdateSpotNegotiationRate = ({
 		handleData,
 		disableButton,
 		requiredValues : values,
+		setValue,
+		data,
 	};
 };
 export default useUpdateSpotNegotiationRate;
