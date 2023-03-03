@@ -21,7 +21,6 @@ function Header(props) {
 
 	return (
 		<div className={styles.header}>
-
 			<Filters
 				filters={filters}
 				searchValue={searchValue}

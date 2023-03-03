@@ -2,12 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-// import { useRef } from 'react';
 
 const useDownloadEnrichmentCsv = () => {
 	const { profile = {}, general = {} } = useSelector((store) => store);
-
-	// const anchorRef = useRef(null);
 
 	const { user: { id: user_id = '' } } = profile;
 

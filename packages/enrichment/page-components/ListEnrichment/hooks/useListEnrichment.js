@@ -13,9 +13,6 @@ import styles from '../styles.module.css';
 const useListEnrichment = () => {
 	const { profile, general } = useSelector((state) => state || {});
 
-	// const partner_id = profile?.partner?.id;
-	// const user_id = profile?.user?.id;
-
 	const { partner: { id: partner_id }, user: { id: user_id } } = profile;
 
 	const { query: { tab = '' }, locale = '' } = general;
@@ -25,9 +22,8 @@ const useListEnrichment = () => {
 	const [searchValue, setSearchValue] = useState('');
 
 	const [activeTab, setActiveTab] = useState(tab || 'enrichment_requests');
-	const [apiName, setApiName] = useState('feedback_requests');
 
-	// const [selectedItem, setSelectedItem] = useState();
+	const [apiName, setApiName] = useState('feedback_requests');
 
 	const [showUpload, setShowUpload] = useState(false);
 
@@ -152,7 +148,6 @@ const useListEnrichment = () => {
 				<section>-</section>
 			),
 		},
-
 		{
 			id       : 'file_name',
 			Header   : 'FILE NAME',
@@ -228,7 +223,6 @@ const useListEnrichment = () => {
 				</section>
 			),
 		},
-
 		{
 			id       : 'edit',
 			Header   : <div className={styles.action_header}>Action</div>,
@@ -268,7 +262,6 @@ const useListEnrichment = () => {
 			),
 
 		},
-
 		{
 			id       : 'status',
 			Header   : 'STATUS',

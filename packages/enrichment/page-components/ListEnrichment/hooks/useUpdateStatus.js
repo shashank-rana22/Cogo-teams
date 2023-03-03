@@ -27,7 +27,6 @@ const useUpdateStatus = (props) => {
 			await trigger({
 				data: {
 					sheet_url : uploadProof,
-					// feedback_request_id : selectedItem?.id,
 					file_name : formValues.file_name,
 
 					// ! Romove this before merge

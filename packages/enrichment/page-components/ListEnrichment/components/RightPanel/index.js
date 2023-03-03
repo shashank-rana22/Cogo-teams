@@ -29,17 +29,13 @@ function RightPanel(props) {
 	return (
 
 		<section className={styles.right_panel}>
-
 			<Tabs
 				activeTab={secondaryTab}
 				themeType="secondary"
 				onChange={setSecondaryTab}
 			>
-
 				{Object.values(ENRICHMENT_TABS_MAPPING).map((item) => (
-
 					<TabPanel name={item.name} title={item.title}>
-
 						<Enrichment
 							list={list}
 							loading={loading}
