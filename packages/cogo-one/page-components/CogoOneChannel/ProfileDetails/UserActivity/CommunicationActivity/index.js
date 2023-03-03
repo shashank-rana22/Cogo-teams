@@ -22,7 +22,6 @@ function CommunicationActivity({ communication = {} }) {
 	};
 
 	let parseData;
-	let textData;
 	if (showDetails !== undefined && title === null) {
 		parseData = JSON.parse(showDetails);
 	}
@@ -40,9 +39,11 @@ function CommunicationActivity({ communication = {} }) {
 			{(list || []).map((item) => {
 				const { type = '', created_at = '', sender = '', content = {}, service = '' } = item || {};
 				const { body = '', subject = '' } = content || {};
+				let textData;
 				if (!subject && subject !== '') {
 					textData = JSON.parse(`${body}`);
 				}
+
 				return (
 					<>
 						<div className={styles.activity_date}>
