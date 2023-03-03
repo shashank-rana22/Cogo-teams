@@ -549,6 +549,11 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
+		{
+			api          : 'create_credit_comment',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
 	],
 };
 export default common_apis;

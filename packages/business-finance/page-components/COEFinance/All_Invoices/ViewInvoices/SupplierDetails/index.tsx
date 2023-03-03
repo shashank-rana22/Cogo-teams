@@ -40,7 +40,8 @@ interface DataProps {
 interface PaymentsData {
 	payables?: string;
 	receivables?: string;
-	ledgerCurrency?: string;
+	payablesCurrency?: string;
+	receivablesCurrency?: string;
 }
 interface SupplierDetailsProps {
 	data: DataProps;
@@ -61,7 +62,7 @@ function SupplierDetails({
 		serviceProviderCategory = '',
 		serviceProviderDocuments,
 	} = data || {};
-	const { payables, receivables, ledgerCurrency } = paymentsData || {};
+	const { payables, receivables, payablesCurrency, receivablesCurrency } = paymentsData || {};
 
 	const handleChange = () => {
 		getSupplierHistory();
@@ -157,11 +158,11 @@ function SupplierDetails({
 						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
-									{ledgerCurrency}
+									{payablesCurrency || '-'}
 									{' '}
 &nbsp;
 									{' '}
-									{showOverflowingNumber(payables || '-', 7)}
+									{showOverflowingNumber(payables || 0, 7)}
 								</div>
 							) : (
 								<div>
@@ -188,11 +189,11 @@ function SupplierDetails({
 						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
-									{ledgerCurrency}
+									{receivablesCurrency || '-'}
 									{' '}
 &nbsp;
 									{' '}
-									{showOverflowingNumber(receivables || '-', 7)}
+									{showOverflowingNumber(receivables || 0, 7)}
 								</div>
 							) : (
 								<div>

@@ -1,0 +1,38 @@
+.label {
+	padding: 14px 4px 8px;
+	font-weight: 600;
+	color: #000;
+}
+
+.header {
+	margin: 12px 0;
+	font-size: 24px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.back_div {
+	display: flex;
+}
+
+.back {
+	padding-left: 8px;
+}
+
+.button_container {
+	display: flex;
+	flex-direction: row;
+	padding-top: 20px;
+}
+
+.cancel_button {
+	margin-right: 12px;
+}
+
+.controller_wrapper {
+	width: 70%;
+}
+
+.error_message {
+	color: #ee3425;
+}
