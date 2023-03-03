@@ -1,7 +1,7 @@
 import { Input } from '@cogoport/components';
 import React from 'react';
 
-import SelectCountryCode from '../SelectCountryCode';
+import SelectMobileCountryCode from '../SelectMobileCountryCode';
 
 import styles from './styles.module.css';
 
@@ -30,7 +30,7 @@ function SelectMobileNumber({
 	return (
 		<div className={styles.row_container} style={width ? { width: '104%' } : {}}>
 			<div className={styles.country_code} style={{ paddingRight: 0 }}>
-				<SelectCountryCode
+				<SelectMobileCountryCode
 					{...rest}
 					value={country_code || (value || {})[codeKey]}
 					onChange={handleCodeChange}

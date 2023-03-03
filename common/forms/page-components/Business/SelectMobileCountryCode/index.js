@@ -4,11 +4,10 @@ import React from 'react';
 /* eslint-disable */
 import countries from '../../../../../.data-store/constants/countries.json';
 
-function SelectCountryCode(props) {
-	
+function SelectMobileCountryCode(props) {
 	const formattedList = countries.map((code) => ({
-		value : code.id,
-		label : `${code.name}`,
+		value : code.mobile_country_code,
+		label : `${code.mobile_country_code}: ${code.name}`,
 	}));
 
 	return (
@@ -17,4 +16,4 @@ function SelectCountryCode(props) {
 }
 
 
-export default SelectCountryCode;
+export default SelectMobileCountryCode;
