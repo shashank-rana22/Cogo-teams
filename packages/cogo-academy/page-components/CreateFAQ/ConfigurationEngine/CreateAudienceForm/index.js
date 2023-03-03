@@ -1,10 +1,12 @@
 import { Button } from '@cogoport/components';
-import { SelectController, InputController, CountrySelectController } from '@cogoport/forms';
+import { SelectController, InputController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useMemo } from 'react';
 
+// eslint-disable-next-line import/no-relative-packages
+import countries from '../../../../../../.data-store/constants/countries.json';
 import useGetAudience from '../hooks/useGetFaqAudience';
 import useListCogoEntity from '../hooks/useListCogoEntities';
 
@@ -15,7 +17,7 @@ import createAudienceControls from './utils/createAudienceControls';
 const MAPPING = {
 	name              : InputController,
 	cogo_entity_id    : SelectController,
-	country_id        : CountrySelectController,
+	country_id        : SelectController,
 	platform          : SelectController,
 	work_scope        : SelectController,
 	auth_function     : SelectController,
@@ -74,6 +76,7 @@ function CreateAudienceForm(props) {
 	}, [audienceId]);
 
 	const entity_options = [];
+	const countryOptions = [];
 
 	entity_data.map((entityData) => {
 		const { business_name = '', id = '' } = entityData || {};
@@ -85,10 +88,20 @@ function CreateAudienceForm(props) {
 		return entity_options;
 	});
 
+	countries.map((country) => {
+		const { name = '', id = '' } = country || {};
+		const options = {
+			label : name,
+			value : id,
+		};
+		countryOptions.push(options);
+		return countryOptions;
+	});
+
 	const watchFunctions = watch('auth_function');
 	const watchPlatform = watch('platform');
 
-	const { controls } = createAudienceControls({ entity_options, watchFunctions });
+	const { controls } = createAudienceControls({ entity_options, watchFunctions, countryOptions });
 
 	useEffect(() => {
 		(Object.keys(controls) || []).forEach((controll) => {
@@ -154,7 +167,7 @@ function CreateAudienceForm(props) {
 			{(Object.keys(controls) || []).map((controlItem) => {
 				const { name = '', label = '' } = controls[controlItem] || {};
 
-				const DynamicController = MAPPING[name] || InputController;
+				const DynamicController = MAPPING[name];
 
 				if (showElements[name]) {
 					return (
