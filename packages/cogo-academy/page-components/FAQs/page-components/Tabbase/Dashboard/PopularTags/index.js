@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import React, { useState } from 'react';
 
-import useListFaqTag from '../../hooks/useListFaqTag';
-import TopicList from '../TopicList';
+import useListFaqTag from '../../../../hooks/useListFaqTag';
 
 import styles from './styles.module.css';
+import TopicList from './TopicList';
 
 function PopularTags({ tabTitle = '', searchState = '' }) {
 	const { profile } = useSelector((state) => state);

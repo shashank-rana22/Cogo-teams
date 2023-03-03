@@ -1,8 +1,7 @@
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
-import QuestionsCollapse from '../QuestionCollapse';
-
+import QuestionsCollapse from './QuestionCollapse';
 import styles from './styles.module.css';
 
 function Questions({ questions = {}, topicId = '' }) {

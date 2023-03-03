@@ -3,12 +3,12 @@ import { Tabs, TabPanel, Badge } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { React } from 'react';
 
-import EmptyQuestionListState from '../../../../commons/EmptyQuestionListState';
-import Spinner from '../../../../commons/Spinner';
-import useListFaqTopic from '../../hooks/useListFaqTopic';
-import TagQuestions from '../PopularTags/TagQuestions';
-import QuestionsList from '../QuestionsList';
-import SearchFound from '../SearchFound';
+import EmptyQuestionListState from '../../../../../../../commons/EmptyQuestionListState';
+import Spinner from '../../../../../../../commons/Spinner';
+import useListFaqTopic from '../../../../../hooks/useListFaqTopic';
+import QuestionsList from '../../../../QuestionsList';
+import SearchFound from '../../../SearchFound';
+import TagQuestions from '../TagQuestions';
 
 import styles from './styles.module.css';
 
