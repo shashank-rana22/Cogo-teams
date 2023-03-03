@@ -13,11 +13,14 @@ function PlatformActivity({ platform = {} }) {
 	const { login = {}, spot_searches = {}, organization = {} } = platform || {};
 	const { list = [] } = spot_searches || {};
 
+	const organizationCheck = !isEmpty(organization) && organization?.kyc_status === 'verified';
 	return (
 		<div className={styles.container}>
-			<LoginComponent login={login} />
+			{!isEmpty(login?.last_email_token_sent_at) && (
+				<LoginComponent login={login} />
+			)}
 
-			{!isEmpty(organization) && (
+			{organizationCheck && (
 				<OrganizationVerification organization={organization} />
 			)}
 
@@ -49,7 +52,7 @@ function PlatformActivity({ platform = {} }) {
 							<div className={styles.card}>
 								<div className={styles.booking_details}>
 									<div className={styles.title}>
-										Shipment Status
+										Spot Searches
 									</div>
 									<div className={styles.booking_id}>
 										ID:
