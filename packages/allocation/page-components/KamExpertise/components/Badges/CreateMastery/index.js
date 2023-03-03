@@ -1,6 +1,4 @@
-import { Textarea, Button } from '@cogoport/components';
-import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
-import { useState } from 'react';
+import { Button } from '@cogoport/components';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateMasterConfiguration from '../../../hooks/useCreateMasterConfiguration';
@@ -13,9 +11,7 @@ function CreateMastery({ setWindow }) {
 	const { formProps, getAddMasteryControls } = useCreateNewMastery();
 	const InputDesc = getFieldController('text');
 
-	const { control, watch, handleSubmit } = formProps;
-
-	// console.log(watch());
+	const { control, handleSubmit } = formProps;
 
 	const UploadController = getFieldController('fileUpload');
 
@@ -25,66 +21,7 @@ function CreateMastery({ setWindow }) {
 		setWindow(1);
 	};
 
-	const [value, setValue] = useState([]);
-	// const [file, setFile] = useState([]);
-
-	// const params = {
-	// 	name: {
-	// 		size                     : 'md',
-	// 		placeholder_singleSelect : 'Multi modal maestro',
-	// 	},
-	// 	badges: {
-	// 		value,
-	// 		onChange    : (val) => setValue(val),
-	// 		placeholder : 'Select Badges',
-	// 		options     : [
-	// 			{
-	// 				label : 'B',
-	// 				value : 'n',
-	// 			},
-	// 			{
-	// 				label : 'uy',
-	// 				value : 'dfs',
-	// 			},
-	// 		],
-	// 		isClearable : true,
-	// 		style       : { width: '200px' },
-	// 	},
-	// 	description: {
-	// 		size: 'md',
-	// 		placeholder_singleSelect:
-	//         'Multimodal maestro is awarded to users who complete gold 3 in all of these badges',
-	// 	},
-
-	// };
-	// const labelInputPairsdata = [
-	// 	{
-	// 		labelName          : 'Mastery Name',
-	// 		multiInput         : false,
-	// 		singleSelectParams : params.name,
-	// 		multiSelectParams  : {},
-	// 		style              : { flexBasis: '20%' },
-	// 	},
-	// 	{
-	// 		labelName          : 'Badges',
-	// 		multiInput         : true,
-	// 		singleSelectParams : {},
-	// 		multiSelectParams  : params.badges,
-	// 		style              : { flexBasis: '20%' },
-	// 	},
-	// ];
-
-	// const onClose = () => {
-	// 	setWindow(1);
-	// };
-
-	// const handleSubmit = async () => {
-	// 	await onMasterSubmit();
-	// 	// onClose();
-	// };
-
 	const onSave = async (formValues, e) => {
-		// console.log('formvalues :', formValues);
 		e.preventDefault();
 		const { name, image_input, description_input } = formValues;
 
@@ -100,26 +37,17 @@ function CreateMastery({ setWindow }) {
 
 		await onMasterSubmit(payload_data);
 	};
+		// ToDo: add loading states
 
+	if (loading) {
+		return null;
+	}
 	return (
-		// <div size="xl" show onClose={onClose} placement="center"></div>
 		<div>
 			<form onSubmit={handleSubmit(onSave)}>
 				<section className={styles.container}>
 					<Header />
 					<div className={styles.content_container}>
-						{/* {
-					labelInputPairsdata.map((data) => (
-						<GetLabelInputPair
-							data={data}
-							// labelName={data.labelName}
-							// multiInput={data.multiInput}
-							// singleSelectParams={data.singleSelectParams}
-							// multiSelectParams={data.multiSelectParams}
-							// style={data.style}
-						/>
-					))
-					} */}
 						{
 						getAddMasteryControls.map((controlItem) => {
 							const ele = { ...controlItem };
