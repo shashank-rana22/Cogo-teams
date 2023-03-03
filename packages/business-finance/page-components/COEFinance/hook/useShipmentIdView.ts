@@ -36,7 +36,7 @@ const useShipmentIdView = (allParams?: {}) => {
 		{
 			url     : 'common/job/shipment-id-view',
 			method  : 'get',
-			authkey : 'get_common_job_shipment_id_view',
+			authKey : 'get_common_job_shipment_id_view',
 		},
 	);
 

@@ -1,0 +1,43 @@
+.flex_items {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.caret_arrow {
+	transition: 0.3s;
+
+	&.caret_active {
+		transition: 0.3s;
+		transform: rotate(180deg);
+	}
+}
+
+.filters {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 8px 16px;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #d3d3d3;
+	border-radius: 4px;
+
+	&:hover {
+		border: 1px solid #f68a21;
+	}
+}
+
+.filter_text {
+	display: flex;
+	align-items: center;
+}
+
+.dot {
+	width: 8px;
+	height: 8px;
+	margin-right: 4px;
+	background-color: #ee3425;
+	border-radius: 50%;
+}
