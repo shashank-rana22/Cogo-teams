@@ -1,5 +1,5 @@
 import { Upload, Toast } from '@cogoport/components';
-import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
+import { IcMDocument, IcMCloudUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -12,7 +12,6 @@ function FileUploader(props) {
 		defaultValues,
 		multiple,
 		docName,
-		uploadIcon = null,
 		...rest
 	} = props;
 	const [fileName, setFileName] = useState(null); // remove
@@ -136,7 +135,7 @@ function FileUploader(props) {
 				onClick={handleDelete}
 				loading={loading}
 				uploadDesc="Upload files"
-				uploadIcon={uploadIcon || <IcMUpload height={40} width={40} />}
+				uploadIcon={<IcMCloudUpload color="#ACDADF" height={40} width={40} />}
 				fileData={urlStore}
 			/>
 
