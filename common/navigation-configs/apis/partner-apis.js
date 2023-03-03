@@ -4127,6 +4127,12 @@ const partner = {
 			feature          : 'rfq',
 			defaultparameter : 'supply_dashboard:allowed',
 		},
+		{
+			api          : 'get_fcl_cfs_rate',
+			access_type  : 'private',
+			service_name : 'fcl_cfs_rate',
+			feature      : 'rfq',
+		},
 	],
 	operations_dashboard: [
 		{
