@@ -2,6 +2,7 @@ import { Pill, Placeholder, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import { ACCOUNT_TYPE } from '../../../../constants';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
@@ -30,7 +31,7 @@ function OrganizationDetails({
 
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
 	const { list = [] } = promoData || {};
-	const { agent = {}, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
+	const { agent = {}, account_type, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
 	const { display_name } = city || {};
 
 	const { total_redeemable } = pointData || {};
@@ -121,7 +122,12 @@ function OrganizationDetails({
 							size="sm"
 							color="#FFF7BF"
 						>
-							{account_type === 'importer_exporter' ? 'Importer/Exporter' : 'Service Provider'}
+							{tags.includes('partner') ? 'Channel Partner' : (
+								<div>
+									{ACCOUNT_TYPE[account_type]}
+								</div>
+							)}
+
 						</Pill>
 					</div>
 				</>

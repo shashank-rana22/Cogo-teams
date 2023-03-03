@@ -51,6 +51,7 @@ import {
 	IcMDashboard,
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
+	IcMFaq,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -1950,6 +1951,33 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		main_apis     : [],
 		possible_apis : apis.contracts,
+	},
+	cogo_academy: {
+		key       : 'cogo_academy',
+		title     : 'Cogo Academy',
+		isSubNavs : true,
+		icon      : IcMFaq,
+		options   : [
+			{
+				key           : 'cogo_academy-create_faq',
+				title         : 'Creator Management System',
+				href          : '/v2/learning/faq/create',
+				as            : '/v2/learning/faq/create',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.create_faq,
+			},
+			{
+				key           : 'cogo_academy-faq',
+				title         : 'FAQs',
+				href          : '/v2/learning/faq',
+				as            : '/v2/learning/faq',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.faq,
+			},
+		],
+		module_type: 'crm',
 	},
 	inventory_management: {
 		key       : 'inventory_management',
