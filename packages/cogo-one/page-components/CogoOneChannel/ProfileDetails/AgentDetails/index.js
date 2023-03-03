@@ -150,33 +150,35 @@ function AgentDetails({
 					)}
 				</div>
 			</div>
-			<div className={styles.verification_pills}>
-				{VERIFICATION_STATUS.map((item, index) => {
-					const itemKey = `${snakeCase(item.label)}_${index}`;
-					return (
-						<div key={itemKey}>
-							{loading ? (
-								<Placeholder
-									height="20px"
-									width="120px"
-									margin="10px 0px 10px 0px"
-								/>
-							) : (
-								<Pill
-									key={item.label}
-									prefix={item.prefixIcon}
-									size="md"
-									color={item.color}
-								>
-									<div className={styles.pill_name}>
-										{item.label}
-									</div>
-								</Pill>
-							)}
-						</div>
-					);
-				})}
-			</div>
+			{(leadUserId || userId) && (
+				<div className={styles.verification_pills}>
+					{VERIFICATION_STATUS.map((item, index) => {
+						const itemKey = `${snakeCase(item.label)}_${index}`;
+						return (
+							<div key={itemKey}>
+								{loading ? (
+									<Placeholder
+										height="20px"
+										width="120px"
+										margin="10px 0px 10px 0px"
+									/>
+								) : (
+									<Pill
+										key={item.label}
+										prefix={item.prefixIcon}
+										size="md"
+										color={item.color}
+									>
+										<div className={styles.pill_name}>
+											{item.label}
+										</div>
+									</Pill>
+								)}
+							</div>
+						);
+					})}
+				</div>
+			)}
 			{loading ? (
 				<Placeholder
 					height="13px"
