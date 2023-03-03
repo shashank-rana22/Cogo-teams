@@ -25,13 +25,12 @@ function TransactionalActivity({ transactional = {} }) {
 
 				const {
 					created_at = '', serial_id, milestone_activity = [],
+
 				} = item || {};
 
 				const origin_port = item[origin] || {};
 
 				const destination_port = item[destination] || {};
-
-				const bookingStatus = milestone_activity.pop();
 
 				return (
 					<>
@@ -47,7 +46,9 @@ function TransactionalActivity({ transactional = {} }) {
 							<div className={styles.card}>
 								<div className={styles.booking_details}>
 									<div className={styles.title}>
-										{startCase(bookingStatus?.milestone)}
+										{startCase(
+											milestone_activity[(milestone_activity?.length || 0) - 1]?.milestone || '',
+										)}
 									</div>
 									<div className={styles.booking_id}>
 										ID:
