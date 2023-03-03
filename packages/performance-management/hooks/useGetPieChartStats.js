@@ -12,7 +12,7 @@ const useGetPieChartStats = ({ userId = '', params = {} }) => {
 
 	const [{ loading = false, data : userData = {} }] = useIrisRequest({
 		method : 'get',
-		url    : 'get_performance_stats',
+		url    : 'get_iris_get_performance_stats',
 		params : newParams,
 	}, { manual: false });
 

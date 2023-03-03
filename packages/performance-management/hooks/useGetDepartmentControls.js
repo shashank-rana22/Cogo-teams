@@ -2,7 +2,7 @@ import useGetCustomAsyncOptions from './useCustomAsyncOptions';
 
 const useGetDepartmentControls = ({ Department = '', Designation = '' }) => {
 	const designationOptions = useGetCustomAsyncOptions({
-		endpoint    : 'get_department_mappings',
+		endpoint    : 'get_iris_get_department_mappings',
 		initialCall : false,
 		params      : {
 			Department,

@@ -14,7 +14,7 @@ const useListReportees = ({
 
 	const [{ data: feedbackData = {}, loading = false }, trigger] = useIrisRequest({
 		method : 'get',
-		url    : 'list_reportees',
+		url    : 'get_iris_list_reportees',
 		params,
 	}, { manual: false });
 

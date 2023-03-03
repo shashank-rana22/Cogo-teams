@@ -3,7 +3,7 @@ import { useIrisRequest } from '@cogoport/request';
 const useDownloadCsvFeedbacks = ({ params = {} }) => {
 	const [{ data = {}, loading = false }, trigger] = useIrisRequest({
 		method : 'get',
-		url    : 'download_csv',
+		url    : 'get_iris_download_csv',
 	}, { manual: true });
 
 	const getUserListCsv = async () => {

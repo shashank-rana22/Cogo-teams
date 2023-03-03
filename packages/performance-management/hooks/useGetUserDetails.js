@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 const useGetUserDetails = ({ userId = '' }) => {
 	const [{ loading = false, data : userData = {} }, trigger] = useIrisRequest({
-		url    : 'get_user_info',
+		url    : 'get_iris_get_user_info',
 		method : 'get',
 	}, { manual: true });
 

@@ -11,7 +11,7 @@ const useListManagers = ({
 
 	const [{ data: feedbackData = {}, loading = false }] = useIrisRequest({
 		method : 'get',
-		url    : 'list_managers',
+		url    : 'get_iris_list_managers',
 		params,
 	}, { manual: false });
 

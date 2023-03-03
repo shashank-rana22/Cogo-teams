@@ -9,7 +9,7 @@ const useGetDepartmentMappings = ({ department, searchValue = '' }) => {
 	});
 
 	const [{ data = {}, loading = false }] = useIrisRequest({
-		url    : 'get_department_mappings',
+		url    : 'get_iris_get_department_mappings',
 		method : 'get',
 		params,
 	}, { manual: false });

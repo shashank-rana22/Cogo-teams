@@ -5,7 +5,7 @@ const useGetFeedbackPerformanceStats = ({ userId = '', params = {} }) => {
 
 	const [{ data: performanceStatsList = [], loading = false }] = useIrisRequest({
 		method : 'get',
-		url    : 'get_average_ratings',
+		url    : 'get_iris_get_average_ratings',
 		params : {
 			Month     : Month || undefined,
 			Year      : Year || undefined,

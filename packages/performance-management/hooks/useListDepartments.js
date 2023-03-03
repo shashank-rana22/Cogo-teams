@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 const useListDepartments = () => {
 	const [{ data = {}, loading = false }, trigger] = useIrisRequest({
-		url    : 'list_departments',
+		url    : 'get_iris_list_departments',
 		method : 'get',
 	}, { manual: true });
 

@@ -16,7 +16,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 	const [month, setMonth] = useState('');
 
 	const [{ loading : uploadLoading = false }, trigger] = useIrisRequest({
-		url    : 'approve_ratings',
+		url    : 'post_iris_approve_ratings',
 		method : 'post',
 	}, { manual: true });
 

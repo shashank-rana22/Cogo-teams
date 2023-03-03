@@ -9,7 +9,7 @@ const useAddFeedbackQuestion = () => {
 
 	const [{ loading: apiLoading = false }, trigger] = useIrisRequest({
 		method : 'post',
-		url    : 'create_question',
+		url    : 'post_iris_create_question',
 	}, { manual: true });
 
 	const controls = useGetCreateQuestionsControls();

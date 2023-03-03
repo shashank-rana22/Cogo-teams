@@ -9,7 +9,7 @@ const useGetForm = ({
 }) => {
 	const { month = '', year = '', department = '', designation = '', user_id = '' } = item;
 
-	const url = action === 'show' || !!feedback_id ? 'get_form_responses' : 'get_form';
+	const url = action === 'show' || !!feedback_id ? 'get_iris_get_form_responses' : 'get_iris_get_form';
 
 	const formType = showForm === true ? undefined : startCase(showForm);
 

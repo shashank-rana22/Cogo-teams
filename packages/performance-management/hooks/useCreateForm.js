@@ -3,7 +3,7 @@ import { useIrisRequest } from '@cogoport/request';
 
 const useCreateForm = () => {
 	const [{ loading:createFormLoading = false }, trigger] = useIrisRequest({
-		url    : 'create_form',
+		url    : 'post_iris_create_form',
 		method : 'post',
 	}, { manual: true });
 

@@ -9,7 +9,7 @@ const useGetMonthStats = ({ manager_id = '' }) => {
 	});
 
 	const [{ data = {}, loading = false }] = useIrisRequest({
-		url    : 'get_month_stats',
+		url    : 'get_iris_get_month_stats',
 		method : 'get',
 		params,
 	}, { manual: false });

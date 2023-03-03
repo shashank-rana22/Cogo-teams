@@ -1,6 +1,6 @@
 import { Button, Popover } from '@cogoport/components';
 import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
-import { addDays, getYear, getMonth, isEmpty } from '@cogoport/utils';
+import { addHours, addDays, getYear, getMonth, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -11,9 +11,9 @@ function ButtonComponent({
 	const currentDate = new Date();
 	const month = getMonth(currentDate);
 	const year = getYear(currentDate);
-	const formStartingDate = new Date(year, month, 1);
+	const formStartingDate = addHours(new Date(year, month, 1), 10);
 
-	const formEndingDate = addDays(formStartingDate, 2);
+	const formEndingDate = addDays(formStartingDate, 5);
 
 	const formTypes = [
 		{ label: 'Employed', value: 'employed' },

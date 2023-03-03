@@ -13,7 +13,7 @@ const useListFeedbackQuestions = ({
 
 	const [{ data = {}, loading = false }, trigger] = useIrisRequest({
 		method : 'get',
-		url    : 'list_questions',
+		url    : 'get_iris_list_questions',
 		params,
 	}, { manual: false });
 

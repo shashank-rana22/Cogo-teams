@@ -7,7 +7,7 @@ const useListForms = ({ formsParams = {} }) => {
 	const [pagination, setPagination] = useState(1);
 
 	const [{ data:formsData = {}, loading = false }, trigger] = useIrisRequest({
-		url    : 'list_forms',
+		url    : 'get_iris_list_forms',
 		method : 'get',
 	}, { manual: true });
 

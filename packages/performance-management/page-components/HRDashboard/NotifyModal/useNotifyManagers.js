@@ -5,7 +5,7 @@ import { useState } from 'react';
 const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
 	const [sendToAll, setSendToAll] = useState(false);
 	const [{ loading = false, data = {} }, trigger] = useIrisRequest({
-		url    : 'notify_managers',
+		url    : 'post_iris_notify_managers',
 		method : 'post',
 	}, { manual: true });
 
