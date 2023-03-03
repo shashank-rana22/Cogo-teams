@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
