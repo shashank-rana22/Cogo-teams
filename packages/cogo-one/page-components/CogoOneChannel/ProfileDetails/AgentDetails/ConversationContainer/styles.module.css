@@ -18,6 +18,7 @@
 
 .contacts_container {
 	overflow-y: scroll;
+	cursor: pointer;
 }
 
 .contacts_container::-webkit-scrollbar {

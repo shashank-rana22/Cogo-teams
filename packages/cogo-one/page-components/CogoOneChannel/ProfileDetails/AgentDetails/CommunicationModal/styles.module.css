@@ -1,0 +1,18 @@
+.footer_buttons {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.styled_editor {
+	:global {
+		.RichTextEditor__root___2QXK- { min-height: 400px; }
+	}
+}
+
+.styled_input {
+	margin: 10px 0;
+}
+
+.header {
+	font-weight: 600;
+}
