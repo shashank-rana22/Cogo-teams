@@ -31,9 +31,8 @@ const consolidated_invoices = {
 			service_name : 'shipment',
 		},
 		{
-			api          : 'get_sales_invoice_list',
-			access_type  : 'private',
-			service_name : 'shipment',
+			api         : 'get_sales_invoice_list',
+			access_type : 'private',
 		},
 		{
 			api          : 'get_sales_invoice_kam_overall_stats',
@@ -55,6 +54,16 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'create_shipment_consolidated_credit_note',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipment_consolidated_credit_notes',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	consolidated_purchase_invoices: [
 		{
@@ -73,9 +82,8 @@ const consolidated_invoices = {
 			service_name : 'shipment',
 		},
 		{
-			api          : 'get_purchase_bills_list',
-			access_type  : 'private',
-			service_name : 'shipment',
+			api         : 'get_purchase_bills_list',
+			access_type : 'private',
 		},
 		{
 			api          : 'list_organizations',

@@ -1,0 +1,74 @@
+.segmented_control {
+	width: max-content;
+	overflow-x: hidden;
+	font-style: normal;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.segmented_container {
+	position: relative;
+	display: flex;
+	flex-flow: row wrap;
+	padding: 6px 4px;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.segmented_option {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 4px 8px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #000;
+	cursor: pointer;
+	background: #fff;
+}
+
+.activeoption {
+	background: var(--background);
+	border-radius: 4px;
+}
+
+.segmented_icon {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-right: 8px;
+}
+
+.segmented_label {
+	font-size: 12px;
+	font-weight: 400;
+	color: #2c3e50;
+}
+
+.segmented_badge {
+	padding: 1px 4px;
+	margin-left: 8px;
+	color: #4b5c6d;
+	background: var(--background);
+	border-radius: 4px;
+}
+
+.activebadge {
+	color: #fff;
+	background: var(--color);
+	border-radius: 4px;
+}
+
+.atvbadge {
+	color: #fff;
+
+	/* border-radius: 4px; */
+	background: #f37166;
+}
+
+.active {
+	color: var(--color);
+}
