@@ -1,6 +1,7 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { format } from '@cogoport/utils';
+
+import getGeoConstants from '../constants/geo';
+import GLOBAL_CONSTANTS from '../constants/globals.json';
 
 const geoConstants = getGeoConstants();
 

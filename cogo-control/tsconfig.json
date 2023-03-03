@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+        "@/data-store/*": [
+            "../.data-store/*"
+        ],
+    },
     "target": "es5",
     "lib": [
       "dom",
