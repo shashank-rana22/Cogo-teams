@@ -16,17 +16,12 @@ function EnrichmentResponse() {
 		setActiveTab,
 		showAddPoc,
 		setShowAddPoc,
-		locale,
-		partner_id,
 	} = useEnrichmentResponse();
 
 	return (
 
 		<section>
-			<Header
-				locale={locale}
-				partner_id={partner_id}
-			/>
+			<Header />
 
 			<div className={styles.tabs_container}>
 				<Tabs
@@ -46,7 +41,6 @@ function EnrichmentResponse() {
 								refetch={refetch}
 								list={list}
 							/>
-
 						</TabPanel>
 					))}
 

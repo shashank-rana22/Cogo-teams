@@ -13,14 +13,18 @@ import styles from '../styles.module.css';
 const useListEnrichment = () => {
 	const { profile, general } = useSelector((state) => state || {});
 
-	const partner_id = profile?.partner?.id;
-	const user_id = profile?.user?.id;
+	// const partner_id = profile?.partner?.id;
+	// const user_id = profile?.user?.id;
+
+	const { partner: { id: partner_id }, user: { id: user_id } } = profile;
+
+	const { query: { tab = '' }, locale = '' } = general;
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState('');
 
-	const [activeTab, setActiveTab] = useState('enrichment_requests');
+	const [activeTab, setActiveTab] = useState(tab || 'enrichment_requests');
 	const [apiName, setApiName] = useState('feedback_requests');
 
 	// const [selectedItem, setSelectedItem] = useState();
@@ -90,7 +94,7 @@ const useListEnrichment = () => {
 	const router = useRouter();
 
 	const handleUploadClick = (feedback_request_id) => {
-		router.push('/enrichment/[id]', `/enrichment/${feedback_request_id}`);
+		router.push(`/enrichment/[id]?tab=${activeTab}`, `/enrichment/${feedback_request_id}?tab=${activeTab}`);
 	};
 
 	const columns = [
@@ -251,7 +255,6 @@ const useListEnrichment = () => {
 			Header   : <div className={styles.action_header}>Action</div>,
 			accessor : ({ id }) => (
 				<section className={styles.content_container}>
-
 					<Button
 						themeType="secondary"
 						type="button"
@@ -261,7 +264,6 @@ const useListEnrichment = () => {
 					>
 						Add Details
 					</Button>
-
 				</section>
 			),
 
@@ -271,10 +273,8 @@ const useListEnrichment = () => {
 			id       : 'status',
 			Header   : 'STATUS',
 			accessor : ({ status }) => (
-
 				<seaction>
 					<Pill size="md" color={UPLOAD_DOCUMENT_STATUS_MAPPING[status]}>{startCase(status) || '-'}</Pill>
-
 				</seaction>
 			),
 		},
@@ -282,8 +282,8 @@ const useListEnrichment = () => {
 
 	return {
 		columns,
-		listRefetch :	refetch,
-		locale      : general?.locale,
+		listRefetch:	refetch,
+		locale,
 		list,
 		paginationData,
 		loading,
@@ -300,7 +300,6 @@ const useListEnrichment = () => {
 		setSearchValue,
 		partner_id,
 		setApiName,
-
 	};
 };
 

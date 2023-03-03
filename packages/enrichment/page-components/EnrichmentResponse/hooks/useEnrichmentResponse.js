@@ -1,14 +1,8 @@
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 const useEnrichmentResponse = () => {
-	const { locale, partner_id } = useSelector(({ profile, general }) => ({
-		locale     : general?.locale,
-		partner_id : profile?.partner?.id,
-	}));
-
 	const router = useRouter();
 
 	const { query = {} } = router;
@@ -60,8 +54,6 @@ const useEnrichmentResponse = () => {
 		setActiveTab,
 		showAddPoc,
 		setShowAddPoc,
-		locale,
-		partner_id,
 	};
 };
 

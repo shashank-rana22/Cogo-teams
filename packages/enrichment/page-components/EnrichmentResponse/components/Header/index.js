@@ -1,4 +1,5 @@
 import { Breadcrumb, Placeholder } from '@cogoport/components';
+import { useRouter, Link } from '@cogoport/next';
 import { format } from '@cogoport/utils/';
 
 import useHeaderStats from '../../hooks/useHeaderStats';
@@ -10,8 +11,8 @@ const CARD_LABEL_MAPPING = {
 	// registration_number : 'Registration Number',
 };
 
-function Header(props) {
-	const { locale, partner_id } = props;
+function Header() {
+	const { query = {} } = useRouter();
 
 	const { requestData = {}, loading } = useHeaderStats();
 
@@ -22,13 +23,15 @@ function Header(props) {
 	return (
 
 		<section>
-
 			<Breadcrumb>
-
 				<Breadcrumb.Item
-					label={<a href={`/v2/${locale}/${partner_id}/enrichment/`}>Enrichment Requests</a>}
+					// label={<a href={`/v2/${locale}/${partner_id}/enrichment/`}>Enrichment Requests</a>}
+					label={(
+						<Link href={`/enrichment?tab=${query.tab}`}>
+							Enrichment
+						</Link>
+					)}
 				/>
-
 				<Breadcrumb.Item label="Organization Details" />
 
 			</Breadcrumb>
@@ -37,28 +40,25 @@ function Header(props) {
 
 				{Object.keys(CARD_LABEL_MAPPING).map((key) => (
 					<div className={styles.info}>
-
 						<div className={styles.info_label}>
 							{CARD_LABEL_MAPPING[key]}
 							{' '}
 							-
 						</div>
+
 						<div className={styles.value}>
 							{requestData.organization?.[key]}
 						</div>
-
 					</div>
 
 				))}
 
 				<div className={styles.info}>
-
 					<div className={styles.info_label}>Enrichment Request Created At -</div>
 
 					<div className={styles.value}>
 						{format(requestData.created_at, 'dd MMM yyyy')}
 					</div>
-
 				</div>
 			</div>
 
