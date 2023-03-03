@@ -32,14 +32,14 @@ const chartData = ({ cogoOneDashboardGraph = {}, timeline }) => {
 	const messageData = messageChatKeys.map((key) => {
 		const dates = key.split(' to ');
 		return {
-			x : `${format(dates[0], FORMAT_TYPE[timeline]?.label)} ${format(dates[1], FORMAT_TYPE[timeline]?.label)}`,
+			x : `${format(dates[0], FORMAT_TYPE[timeline]?.label)}-${format(dates[1], FORMAT_TYPE[timeline]?.label)}`,
 			y : message_graph_data[key],
 		};
 	});
 	const callData = callChatKeys.map((key) => {
 		const dates = key.split(' to ');
 		return {
-			x : `${format(dates[0], FORMAT_TYPE[timeline]?.label)} ${format(dates[1], FORMAT_TYPE[timeline]?.label)}`,
+			x : `${format(dates[0], FORMAT_TYPE[timeline]?.label)}-${format(dates[1], FORMAT_TYPE[timeline]?.label)}`,
 			y : call_graph_data[key],
 		};
 	});

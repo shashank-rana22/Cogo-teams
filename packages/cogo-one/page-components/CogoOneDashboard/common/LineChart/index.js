@@ -74,6 +74,25 @@ function LineChart({ cogoOneDashboardGraph = {}, timeline = '' }) {
 							pointBorderColor={{ from: 'serieColor' }}
 							pointLabelYOffset={-12}
 							useMesh
+							tooltip={({ point }) => (
+								<div className={styles.tooltip_box}>
+									<div className={styles.tooltip_text_color}>
+										<div>
+											Customers:
+											{' '}
+											{point.data.y || 0}
+										</div>
+										<div>
+											{timeline}
+											{' '}
+											:
+											{' '}
+											{point.data.x || 0}
+										</div>
+									</div>
+								</div>
+							)}
+
 						/>
 					)}
 				</div>
