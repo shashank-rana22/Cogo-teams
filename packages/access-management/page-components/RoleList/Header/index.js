@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function Header({
 	onChangeShowCreateRoleModal = () => {},
+	onResetFilters = () => {},
 	stakeHolderType,
 	setStakeHolderType,
 }) {
@@ -29,6 +30,7 @@ function Header({
 					]}
 					onItemChange={(val) => {
 						setStakeHolderType(val);
+						onResetFilters();
 					}}
 				/>
 			</section>

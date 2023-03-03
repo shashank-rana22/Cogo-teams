@@ -1,0 +1,9 @@
+.conatiner {
+	padding: 10px;
+	border-left: 3px solid green;
+	border-radius: 1px;
+}
+
+.list_style {
+	list-style: none;
+}

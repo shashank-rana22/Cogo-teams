@@ -144,6 +144,35 @@ function asyncFieldsCampaignSegments() {
 		},
 	};
 }
+function asyncFieldsListAgents() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'agent_id',
+		endpoint    : 'list_chat_agents',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+			sort_by    : 'active_assigned_chats',
+			sort_type  : 'asc',
+		},
+	};
+}
+
+function asyncAllotBanks() {
+	return {
+		labelKey     : 'bankname',
+		valueKey     : 'bank_id',
+		endpoint     : '/purchase/treasury/live-status',
+		authkey      : 'get_purchase_treasury_live_status',
+		initialCall  : false,
+		microservice : true,
+		params       : {
+			entityCode : 301,
+			currency   : 'INR',
+		},
+	};
+}
 
 export {
 	asyncFieldsLocations,
@@ -157,4 +186,6 @@ export {
 	asyncFieldsOrganization,
 	asyncFieldsOrganizationUsers,
 	asyncFieldsOperators,
+	asyncFieldsListAgents,
+	asyncAllotBanks,
 };
