@@ -23,11 +23,8 @@ function Statistics() {
 
 	return (
 		<section className={styles.container}>
-
 			{Object.values(pieChartData).map((chartData) => (
-
 				<div className={styles.chart_container}>
-
 					<div className={styles.chart_title}>{chartData.title}</div>
 
 					<ResponsivePie
@@ -38,13 +35,13 @@ function Statistics() {
 						enableArcLabels={false}
 						colors={chartData.colors}
 						colorBy="index"
-						margin={{ top: 5, right: 40, bottom: 72, left: 40 }}
+						margin={{ top: 5, right: 40, bottom: 72, left: 120 }}
 						legends={[
 							{
 								anchor        : 'left',
 								direction     : 'column',
 								justify       : false,
-								translateX    : 0,
+								translateX    : -80,
 								translateY    : 0,
 								itemsSpacing  : 5,
 								itemWidth     : 100,
@@ -77,11 +74,8 @@ function Statistics() {
 							</div>
 						)}
 					/>
-
 				</div>
-
 			))}
-
 		</section>
 	);
 }

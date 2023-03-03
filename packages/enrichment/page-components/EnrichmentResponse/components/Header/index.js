@@ -21,11 +21,9 @@ function Header() {
 	}
 
 	return (
-
 		<section>
 			<Breadcrumb>
 				<Breadcrumb.Item
-					// label={<a href={`/v2/${locale}/${partner_id}/enrichment/`}>Enrichment Requests</a>}
 					label={(
 						<Link href={`/enrichment?tab=${query.tab}`}>
 							Enrichment
@@ -33,16 +31,14 @@ function Header() {
 					)}
 				/>
 				<Breadcrumb.Item label="Organization Details" />
-
 			</Breadcrumb>
 
 			<div className={styles.header}>
-
 				{Object.keys(CARD_LABEL_MAPPING).map((key) => (
 					<div className={styles.info}>
 						<div className={styles.info_label}>
 							{CARD_LABEL_MAPPING[key]}
-							{' '}
+							&nbsp;
 							-
 						</div>
 
@@ -50,7 +46,6 @@ function Header() {
 							{requestData.organization?.[key]}
 						</div>
 					</div>
-
 				))}
 
 				<div className={styles.info}>
@@ -61,9 +56,7 @@ function Header() {
 					</div>
 				</div>
 			</div>
-
 		</section>
-
 	);
 }
 

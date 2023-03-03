@@ -31,14 +31,12 @@ function List(props) {
 				loading={loading}
 				refetch={refetch}
 				activeTab={activeTab}
-
 			/>
 		);
 	}
 
 	return (
 		<section>
-
 			{(list).map((user, index) => (
 				<ResponseCard
 					key={user.id}

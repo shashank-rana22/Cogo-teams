@@ -19,7 +19,7 @@ function Workscopes({ work_scopes = [] }) {
 	return (
 		<Tooltip content={renderToolTip} placement="bottom">
 			<div className={styles.overflow_flex}>
-				<div className={styles.workscopes_container}>
+				<div className={styles.item_value}>
 					{startCase(work_scopes?.[0] || '___')}
 				</div>
 				{totalWorkScopes > 1 && (

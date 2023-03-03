@@ -35,7 +35,6 @@ function ListEnrichment() {
 					onChange={setActiveTab}
 				>
 					<TabPanel name="enrichment_requests" title="Enrichment Requests">
-
 						<LeftPanel
 							list={list}
 							columns={columns}
@@ -50,11 +49,9 @@ function ListEnrichment() {
 							paginationData={paginationData}
 							setGlobalFilters={setGlobalFilters}
 						/>
-
 					</TabPanel>
 
 					<TabPanel name="requests_sent" title="Requests Sent">
-
 						<RightPanel
 							list={list}
 							columns={columns}
@@ -71,13 +68,10 @@ function ListEnrichment() {
 							paginationData={paginationData}
 							setGlobalFilters={setGlobalFilters}
 						/>
-
 					</TabPanel>
-
 				</Tabs>
 			</div>
 		</section>
-
 	);
 }
 

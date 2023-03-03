@@ -1,7 +1,6 @@
 const getUserControls = ({ activeTab = '' }) => {
 	const controls = {
 		user: [
-
 			{
 				name        : 'name',
 				label       : 'Point Of Contact (User Name)',
@@ -11,7 +10,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				rules       : {
 					required: 'Point of contact is required',
 				},
-
 			},
 			{
 				name        : 'email',
@@ -22,7 +20,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				rules       : {
 					required: 'Email is required',
 				},
-
 			},
 			{
 				name        : 'mobile_number',
@@ -30,7 +27,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				type        : 'mobileNumber',
 				inputType   : 'number',
 				placeholder : 'Mobile Number*',
-				rules       : { required: true },
 			},
 			{
 				name        : 'alternate_mobile_number',
@@ -38,18 +34,14 @@ const getUserControls = ({ activeTab = '' }) => {
 				type        : 'mobileNumber',
 				inputType   : 'number',
 				placeholder : 'Mobile Number*',
-				rules       : { required: true },
 			},
-
 			{
 				name        : 'whatsapp_number',
 				label       : 'Whatsapp Number',
 				type        : 'mobileNumber',
 				inputType   : 'number',
 				placeholder : 'Mobile Number*',
-				rules       : { required: true },
 			},
-
 			{
 				name        : 'work_scopes',
 				label       : 'Work Scope (designation)',
@@ -93,11 +85,9 @@ const getUserControls = ({ activeTab = '' }) => {
 				rules: {
 					required: 'Workscope is required',
 				},
-
 			},
 		],
 		address: [
-
 			{
 				name        : 'address',
 				label       : 'Full Address',
@@ -107,7 +97,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				rules       : {
 					required: 'Full Address is required',
 				},
-
 			},
 			{
 				name        : 'city',
@@ -118,7 +107,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				rules       : {
 					required: 'City is required',
 				},
-
 			},
 			{
 				name        : 'state',
@@ -129,7 +117,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				rules       : {
 					required: 'State is required',
 				},
-
 			},
 			{
 				name        : 'country',
@@ -140,7 +127,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				rules       : {
 					required: 'Country is required',
 				},
-
 			},
 			{
 				name        : 'pincode',
@@ -151,7 +137,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				rules       : {
 					required: 'PinCode is required',
 				},
-
 			},
 			{
 				name        : 'tax_number',
@@ -161,9 +146,7 @@ const getUserControls = ({ activeTab = '' }) => {
 				isClearable : true,
 				rules       : { required: 'GST Number is required' },
 			},
-
 		],
-
 	};
 
 	return controls[activeTab];

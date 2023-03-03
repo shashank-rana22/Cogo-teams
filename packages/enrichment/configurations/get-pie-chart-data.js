@@ -1,8 +1,6 @@
 function getPieChartData({ stats = {} }) {
 	return {
-
 		chart_1: {
-
 			title  : 'Status',
 			colors : ['#F37166', '#ABCD62'],
 			data   : [
@@ -11,7 +9,6 @@ function getPieChartData({ stats = {} }) {
 					label : 'Requested',
 					value : stats.requested_feedback_request_count,
 				},
-
 				{
 					id    : 'responded',
 					label : 'Responded',
@@ -19,32 +16,25 @@ function getPieChartData({ stats = {} }) {
 				},
 			],
 		},
-
 		chart_2: {
-
 			title  : 'Turnaround Time',
-			colors : ['#84af18','#aae11e', '#d0ee82', '#e3f5b5'],
+			colors : ['#84af18', '#aae11e', '#d0ee82', '#e3f5b5'],
 			data   : [
-
 				{
 					id    : 'zero_to_one_days',
 					label : '0-1 Days',
 					value : stats.tat_less_than_equal_to_one_day,
 				},
-
 				{
 					id    : 'one_to_three_days',
 					label : '1-3 Days',
 					value : stats.tat_one_to_three_day,
 				},
-
 				{
 					id    : 'three_to_seven_days',
 					label : '3-7 Days',
 					value : stats.tat_three_to_seven_day,
-
 				},
-
 				{
 					id    : 'greater_than_seven_days',
 					label : '> 7 Days',

@@ -17,11 +17,11 @@ function LeftPanel(props) {
 		listRefetch,
 	} = props;
 
-	// eslint-disable-next-line max-len
-	const filteredColumns = columns.filter((listItem) => LIST_PRIMARY_COLUMNS_MAPPING[activeTab]?.includes(listItem.id));
+	const filteredColumns = columns.filter(
+		(listItem) => LIST_PRIMARY_COLUMNS_MAPPING[activeTab]?.includes(listItem.id),
+	);
 
 	return (
-
 		<Enrichment
 			list={list}
 			loading={loading}
@@ -37,7 +37,6 @@ function LeftPanel(props) {
 			showStatistics
 			listRefetch={listRefetch}
 		/>
-
 	);
 }
 

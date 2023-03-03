@@ -15,21 +15,16 @@ function CreateResponse(props) {
 
 	return (
 		<section className={styles.card}>
-
 			<form onSubmit={handleSubmit(onSave)}>
-
 				<div className={styles.card_header}>
-
 					<div className={styles.card_header_icons}>
 						{cardHeading[activeTab].icon}
 					</div>
 
 					<div>{cardHeading[activeTab].label}</div>
-
 				</div>
 
 				<div className={styles.row_container}>
-
 					{controls.map((controlItem) => {
 						const el = { ...controlItem };
 
@@ -39,7 +34,6 @@ function CreateResponse(props) {
 
 						return (
 							<div style={el.style} className={styles.control_container}>
-
 								<span className={styles.control_label}>{el.label}</span>
 
 								<Element
@@ -53,15 +47,12 @@ function CreateResponse(props) {
 								<div className={styles.error_message}>
 									{errors?.[el.name]?.message}
 								</div>
-
 							</div>
 						);
 					})}
-
 				</div>
 
 				<div className={styles.card_footer}>
-
 					{type === 'addPoc' && (
 						<Button
 							type="button"

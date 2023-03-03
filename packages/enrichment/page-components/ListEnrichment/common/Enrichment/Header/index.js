@@ -35,7 +35,7 @@ function Header(props) {
 					<Button
 						size="lg"
 						themeType="secondary"
-						style={{ marginRight: '12px' }}
+						style={{ marginLeft: '12px' }}
 						disabled={loading}
 						onClick={onDownload}
 					>
@@ -47,11 +47,11 @@ function Header(props) {
 						size="lg"
 						themeType="primary"
 						onClick={() => setShowUpload(true)}
+						style={{ marginLeft: '12px' }}
 					>
 						<IcMCloudUpload width={16} height={16} style={{ marginRight: '4px' }} />
 						Upload
 					</Button>
-
 				</div>
 			)}
 		</div>

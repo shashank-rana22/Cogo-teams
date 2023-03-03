@@ -1,12 +1,10 @@
 import { IcMLocation, IcMProfile } from '@cogoport/icons-react';
 
 export const getCardHeaders = (type) => ({
-
 	user: {
 		icon  : <IcMProfile />,
 		label : type === 'form' ? 'Add POC Details' : 'POC',
 	},
-
 	address: {
 		icon  : <IcMLocation />,
 		label : type === 'form' ? 'Add Address Details' : 'Address',
@@ -14,7 +12,6 @@ export const getCardHeaders = (type) => ({
 });
 
 export const CARD_LABELS_MAPPING = {
-
 	user: {
 		name                    : 'Point Of Contact',
 		email                   : 'Email',
@@ -23,7 +20,6 @@ export const CARD_LABELS_MAPPING = {
 		whatsapp_number         : 'Whatsapp Number',
 
 	},
-
 	address: {
 		address    : 'Address',
 		city       : 'City',
@@ -31,7 +27,6 @@ export const CARD_LABELS_MAPPING = {
 		country    : 'Country',
 		pincode    : 'Pincode',
 		tax_number : 'Tax Number',
-
 	},
 };
 
