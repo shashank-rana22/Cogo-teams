@@ -34,7 +34,7 @@ function AgentDashboard(props) {
 							loading={loading}
 							channelsMessageAnalytics={channels_message_analytics}
 						/>
-						<CallAnalytics callsAnalytics={calls_analytics} />
+						<CallAnalytics callsAnalytics={calls_analytics} loading={loading} />
 					</div>
 				</div>
 				<div className={styles.right_sub_container}>
@@ -49,6 +49,7 @@ function AgentDashboard(props) {
 						<ChatStatistics
 							isAdminView={false}
 							statusOfChats={status_of_chats}
+							loading={loading}
 						/>
 					</div>
 				</div>
