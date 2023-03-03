@@ -15,6 +15,8 @@ function ContainerDetails({
 	taskItem = {},
 	chargeableWeight,
 }:Props) {
+	const { dimension = [] } = formData;
+
 	return (
 		<div className={styles.container} style={{ pointerEvents: 'none' }}>
 			<div className={styles.flex}>
@@ -130,7 +132,7 @@ function ContainerDetails({
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
-											{formData.dimension.map((item) => `${item.length}x${item.width}x${item.height}/${item.packages} 
+											{dimension.map((item) => `${item.length}x${item.width}x${item.height}/${item.packages} 
 											`)}
 										</p>
 									</div>

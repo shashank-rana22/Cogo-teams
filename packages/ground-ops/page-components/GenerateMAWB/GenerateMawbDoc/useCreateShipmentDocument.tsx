@@ -30,7 +30,7 @@ const useCreateShipmentDocument = ({
 				setEdit(false);
 			});
 		} catch (error) {
-			Toast.error('Failed to save Document');
+			Toast.error(error || 'Failed to save Document');
 		}
 	};
 

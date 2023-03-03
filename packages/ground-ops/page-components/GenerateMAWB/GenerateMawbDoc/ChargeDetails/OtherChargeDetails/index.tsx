@@ -28,6 +28,8 @@ function OtherChargeDetails({
 	taskItem = {},
 	formData = {},
 }:Props) {
+	const { agentOtherCharges = [], carrierOtherCharges = [] } = formData;
+
 	return (
 		<div className={cl`
 				${styles.block_col} 
@@ -53,10 +55,10 @@ function OtherChargeDetails({
 						>
 							<p style={{ fontSize: 13 }}>
 								<div style={{ height: '30%' }}>
-									{formData?.agentOtherCharges?.map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
+									{agentOtherCharges.map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
 								</div>
 								<br />
-								{formData?.carrierOtherCharges?.map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
+								{carrierOtherCharges.map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
 							</p>
 						</div>
 					</p>
