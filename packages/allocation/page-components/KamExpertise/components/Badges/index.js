@@ -1,7 +1,7 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import useBadgeConfigurationList from '../../hooks/useBadgeConfigurationList';
@@ -14,8 +14,6 @@ import MasteryListItem from './MasteryListItem';
 import styles from './styles.module.css';
 
 function Badges() {
-	const emptyList = [];
-
 	const router = useRouter();
 
 	const onClickBack = () => {
@@ -69,23 +67,28 @@ function Badges() {
 						<div>
 							{
 								(window === 1)
-			&&	badgeList?.map(((data, index) => { 
-					// console.log('data ',data);
-					return(
-						data.medal_collection.length > 0 
-						? <MasteryListItem/>
-						: <BadgeListItem
-							data={data}
-							index={index}
-							loading={loading}
-							setWindow={setWindow}
-							setAutofill={setAutofill}
-						/>
-				)}))
+			&&	badgeList?.map(((data, index) => (data.medal_collection.length > 0
+				? (
+					<MasteryListItem
+						data={data}
+						index={index}
+						loading={loading}
+						setWindow={setWindow}
+						setAutofill={setAutofill}
+					/>
+				)
+				: (
+					<BadgeListItem
+						data={data}
+						index={index}
+						loading={loading}
+						setWindow={setWindow}
+						setAutofill={setAutofill}
+					/>
+				)
+			)))
 
 							}
-
-							{/* <MasteryListItem /> */}
 
 							{
 			(window === 2) && (
