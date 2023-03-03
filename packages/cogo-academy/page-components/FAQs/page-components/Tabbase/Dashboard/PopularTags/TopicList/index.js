@@ -7,8 +7,6 @@ import EmptyQuestionListState from '../../../../../../../commons/EmptyQuestionLi
 import Spinner from '../../../../../../../commons/Spinner';
 import useListFaqTopic from '../../../../../hooks/useListFaqTopic';
 import QuestionsList from '../../../QuestionsList';
-import SearchFound from '../../../SearchFound';
-import TagQuestions from '../TagQuestions';
 
 import styles from './styles.module.css';
 
@@ -116,8 +114,8 @@ function TopicList({ searchState = '', tagId = [] }) {
 
 	return (
 		<div>
-			{searchState
-				? (<SearchFound searchState={searchState} />) : (<TagQuestions tagId={tagId} />)}
+			{' '}
+			<QuestionsList searchState={searchState} tagId={tagId} />
 		</div>
 
 	);

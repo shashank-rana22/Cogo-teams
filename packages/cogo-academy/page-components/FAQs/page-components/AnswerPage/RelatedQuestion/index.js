@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 import React from 'react';
 
-import useListFaqQuestions from '../../../../../hooks/useListFaqQuestion';
+import useListFaqQuestions from '../../../hooks/useListFaqQuestion';
 
 import styles from './styles.module.css';
 

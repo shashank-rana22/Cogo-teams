@@ -8,8 +8,8 @@ import { useSelector } from '@cogoport/store';
 import { startCase, format } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import Spinner from '../../../../../commons/Spinner';
-import useGetQuestions from '../../../hooks/useGetQuestions';
+import Spinner from '../../../../commons/Spinner';
+import useGetQuestions from '../../hooks/useGetQuestions';
 
 import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';

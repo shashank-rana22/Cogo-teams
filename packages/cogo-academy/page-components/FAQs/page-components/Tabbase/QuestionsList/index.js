@@ -9,7 +9,7 @@ import useListFaqQuestions from '../../../hooks/useListFaqQuestion';
 import Questions from './Questions';
 import styles from './styles.module.css';
 
-function QuestionsList({ tabTitle, searchState = '', topicId = '', tagId = '' }) {
+function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = '' }) {
 	const {
 		page,
 		setPage,
@@ -17,7 +17,7 @@ function QuestionsList({ tabTitle, searchState = '', topicId = '', tagId = '' })
 		loading = false,
 		paginationData,
 	// eslint-disable-next-line react-hooks/rules-of-hooks
-	} = useListFaqQuestions({ topicId, tagId });
+	} = useListFaqQuestions({ topicId, tagId, searchState });
 
 	if (loading) {
 		return (

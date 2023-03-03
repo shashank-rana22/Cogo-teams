@@ -4,7 +4,7 @@ import SearchInput from '../../../../../commons/SearchInput';
 
 import PopularTags from './PopularTags';
 
-function Dashboard({ tabTitle }) {
+function Dashboard({ tabTitle = '' }) {
 	const [searchState, setSearchState] = useState('');
 
 	return (
