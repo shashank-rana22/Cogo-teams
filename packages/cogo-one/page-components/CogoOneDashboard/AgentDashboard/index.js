@@ -16,7 +16,7 @@ function AgentDashboard(props) {
 	const { timeline, setTimeline, listData, loading } = props || {};
 	const {
 		customer_satisfaction = {}, intents_served = {}, calls_analytics = {},
-		channels_message_analytics = {}, cogo_one_dashboard_graph = {}, status_of_chats = {},
+		channels_message_analytics = {}, cogo_one_dashboard_graph = {}, status_of_chats = {}, total_customers = '',
 	} = listData || {};
 
 	return (
@@ -41,7 +41,7 @@ function AgentDashboard(props) {
 				</div>
 				<div className={styles.right_sub_container}>
 					{/* <TimeSpent loading={loading} /> */}
-					<TotalChatsHandled loading={loading} />
+					<TotalChatsHandled loading={loading} totalCustomers={total_customers} />
 					<Intelligence />
 					<div className={styles.satisfaction_intent_served_box}>
 						<Statisfaction customerSatisfaction={customer_satisfaction} />
