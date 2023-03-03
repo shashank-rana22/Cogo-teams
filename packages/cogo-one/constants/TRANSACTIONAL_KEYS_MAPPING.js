@@ -48,13 +48,13 @@ export const TRANSACTIONAL_KEYS_MAPPING = {
 	},
 
 	ltl_freight: {
-		origin      : 'pickup',
-		destination : 'drop',
+		origin      : 'origin_location',
+		destination : 'destination_location',
 	},
 
 	ftl_freight: {
-		origin      : 'pickup',
-		destination : 'drop',
+		origin      : 'origin_location',
+		destination : 'destination_location',
 
 	},
 
