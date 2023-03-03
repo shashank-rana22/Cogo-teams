@@ -41,14 +41,19 @@ function useCreateAudience({
 		const {
 			platform,
 			persona :personaValue = '',
+			auth_function,
+			auth_sub_function,
 			...rest
 		} = values || {};
 
 		const payload = {
-			id      : audienceId || undefined,
+			id                : audienceId || undefined,
 			platform,
 			...rest,
-			persona : handlePersona({ personaValue, platform }),
+			auth_function,
+			auth_sub_function : auth_function === 'all' ? 'all' : auth_sub_function,
+
+			persona: handlePersona({ personaValue, platform }),
 
 		};
 

@@ -76,10 +76,10 @@ function CreateAudienceForm(props) {
 	}, [audienceId]);
 
 	const entity_options = [];
-	const countryOptions = [];
 
 	entity_data.map((entityData) => {
 		const { business_name = '', id = '' } = entityData || {};
+
 		const options = {
 			label : business_name,
 			value : id,
@@ -88,13 +88,18 @@ function CreateAudienceForm(props) {
 		return entity_options;
 	});
 
-	countries.map((country) => {
-		const { name = '', id = '' } = country || {};
-		const options = {
-			label : name,
-			value : id,
-		};
-		countryOptions.push(options);
+	const indiaOption = countries.find((country) => country.country_code === 'IN');
+
+	const countryOptions = [{
+		label : indiaOption?.name,
+		value : indiaOption?.id,
+	}];
+
+	countries.filter((country) => country.country_code !== 'IN').map((country) => {
+		const option = { label: country.name, value: country.id };
+
+		countryOptions.push(option);
+
 		return countryOptions;
 	});
 
@@ -122,26 +127,23 @@ function CreateAudienceForm(props) {
 		}
 	};
 
-	const showElements = useMemo(() => controls.reduce((pv, cv) => {
-		const { name = '' } = cv;
+	const hiddenElements = {
+		work_scope        : watchPlatform === 'admin',
+		persona           : ['app', 'all', 'admin'].includes(watchPlatform),
+		auth_function     : ['app', 'partner'].includes(watchPlatform),
+		auth_sub_function : ['app', 'partner'].includes(watchPlatform) || watchFunctions === 'all',
+	};
 
-		let showElement = true;
-		if (['work_scope'].includes(name) && watchPlatform === 'admin') {
-			showElement = false;
-		}
+	const showElements = useMemo(
+		() => controls.reduce((pv, cv) => {
+			const { name = '' } = cv;
 
-		if (['persona'].includes(name) && ['app', 'all', 'admin'].includes(watchPlatform)) {
-			showElement = false;
-		}
+			return { ...pv, [name]: !hiddenElements[name] };
+		}, {}),
 
-		if (['auth_function', 'auth_sub_function'].includes(name)
-        && ['app', 'partner'].includes(watchPlatform)) {
-			showElement = false;
-		}
-
-		return { ...pv, [name]: showElement };
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, {}), [watchPlatform]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[watchPlatform, watchFunctions],
+	);
 
 	return (
 		<div className={styles.container}>
