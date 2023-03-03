@@ -127,9 +127,9 @@ function MessageList({
 													imageSource={item.image}
 												/>
 												<div className={styles.user_details}>
-													<Tooltip content={startCase(user_name)} placement="top">
+													<Tooltip content={startCase(user_name) || 'User'} placement="top">
 														<div className={styles.user_name}>
-															{startCase(user_name)}
+															{startCase(user_name) || 'User'}
 														</div>
 													</Tooltip>
 
