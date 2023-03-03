@@ -8,6 +8,6 @@
 
 .chat_details_continer {
 	display: flex;
-	width: 76%;
+	width: calc(76% - 10px);
 	height: 100%;
 }

@@ -13,6 +13,7 @@ function ReceiveDiv({ eachList = {} }) {
 		user_number = '',
 		start_time_of_call = '',
 		end_time_of_call,
+		dtmf_inputs = [],
 	} = eachList || {};
 	const date = format(new Date(created_at), 'dd MMM YYYY');
 	let name = user_number;
@@ -28,7 +29,7 @@ function ReceiveDiv({ eachList = {} }) {
 			</div>
 
 			<div className={styles.receive_message_container}>
-				<CallHistory type="user" end_time_of_call={end_time_of_call} start_time_of_call={start_time_of_call} />
+				<CallHistory type="user" end_time_of_call={end_time_of_call} start_time_of_call={start_time_of_call} dtmf_inputs={dtmf_inputs} />
 			</div>
 		</div>
 	);
