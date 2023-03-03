@@ -55,7 +55,7 @@ const addedQuestionsColumns = ({
 	{
 		Header   : 'ACTIONS',
 		accessor : (items) => (
-			<div className={styles.buttonContainer}>
+			<div className={styles.button_container}>
 				{activeList !== 'inactive' ? (
 					<IcMDelete
 						height={20}
@@ -120,7 +120,7 @@ const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) =>
 	{
 		Header   : 'ACTIONS',
 		accessor : (items) => (
-			<div className={styles.buttonContainer}>
+			<div className={styles.button_container}>
 
 				<IcMDelete
 					height={20}
