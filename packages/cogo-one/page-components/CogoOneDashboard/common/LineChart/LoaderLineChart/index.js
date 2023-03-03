@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function LineChartLoader() {
 	return (
 		<div className={styles.box}>
-			<Placeholder height="200px" width="950px" margin="5px 0px 0px 0px">
+			<Placeholder height="230px" width="900px" margin="5px 0px 0px 0px">
 				<svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path
 						d="M68.1727 38.5588H37.4414V7.82751C37.4414 7.44939 37.132 7.14001
