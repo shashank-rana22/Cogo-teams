@@ -39,7 +39,7 @@ function FeedbackManagement() {
 	}, [searchValue]);
 
 	const handleClick = () => {
-		router.push('/feedback-system/hr-dashboard');
+		router.push('/performance-management/hr-dashboard');
 	};
 
 	return (
