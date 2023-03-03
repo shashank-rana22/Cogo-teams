@@ -23,11 +23,11 @@ const options = [
 
 interface Props {
 	viewDoc?: boolean;
-	setViewDoc?: any;
+	setViewDoc?: Function;
 	item?: any;
 	edit?: any;
-	setEdit?: any;
-	setGenerate?:any;
+	setEdit?: Function;
+	setGenerate?:Function;
 }
 
 function GenerateMAWB({
@@ -107,7 +107,7 @@ function GenerateMAWB({
 				* Number(dimensionObj.packages);
 			}
 		});
-		setValue('volumetricWeight', ((+totalVolume * 166.67) || 0.0).toFixed(2));
+		setValue('volumetricWeight', (((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 
 	return (

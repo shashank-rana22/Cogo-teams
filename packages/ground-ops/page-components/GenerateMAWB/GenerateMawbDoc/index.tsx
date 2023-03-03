@@ -17,14 +17,14 @@ import Watermark from './watermark';
 interface Props {
 	taskItem?: any;
 	formData?: any;
-	setBack?: any;
+	setBack?: Function;
 	back?: boolean;
 	edit?: any;
-	setEdit?: any;
+	setEdit?: Function;
 	viewDoc?: boolean;
-	setViewDoc?:any;
+	setViewDoc?:Function;
 	chargeableWeight?:any;
-	setGenerate?:any;
+	setGenerate?:Function;
 }
 
 const downloadButton = {
@@ -192,7 +192,8 @@ function GenerateMawb({
 					background : '#fff',
 				}}
 			>
-				{!viewDoc && <Watermark text="draft" rotateAngle="315deg" />}
+				{taskItem?.documentState !== 'document_accepted'
+				&& <Watermark text="draft" rotateAngle="315deg" />}
 				<div style={{ position: 'relative' }}>
 					<ShipperConsigneeDetails
 						formData={filteredData}
