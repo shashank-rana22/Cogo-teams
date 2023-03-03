@@ -4,7 +4,7 @@ import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
-import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../constants/TRANSACTIONAL_KEYS_MAPPING';
+import { USER_ACTIVITY_KEYS_MAPPING } from '../../../../../constants/USER_ACTIVITY_KEYS_MAPPING';
 
 import styles from './styles.module.css';
 
@@ -21,7 +21,7 @@ function TransactionalActivity({ transactional = {} }) {
 		<div>
 			{(list || []).map((item) => {
 				const services = item?.shipment_type;
-				const { origin = '', destination = '' } = TRANSACTIONAL_KEYS_MAPPING[services];
+				const { origin = '', destination = '' } = USER_ACTIVITY_KEYS_MAPPING[services];
 
 				const {
 					created_at = '', serial_id, milestone_activity = [],

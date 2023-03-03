@@ -1,4 +1,4 @@
-export const TRANSACTIONAL_KEYS_MAPPING = {
+export const USER_ACTIVITY_KEYS_MAPPING = {
 	fcl_freight: {
 		origin      : 'origin_port',
 		destination : 'destination_port',
