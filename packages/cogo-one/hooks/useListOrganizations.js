@@ -48,7 +48,12 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 	const { list = [] } = data || {};
 	const { tags = [] } = list?.[0] || {};
 
-	const isChannelPartner = tags?.includes('partner') || false;
+	let isChannelPartner = loading ? false : tags?.includes('partner') || false;
+
+	if (!orgId) {
+		isChannelPartner = false;
+	}
+
 	const ORGID = orgId || PARAMOUNT_ORG_ID;
 
 	let ORG_PAGE_URL = '';
