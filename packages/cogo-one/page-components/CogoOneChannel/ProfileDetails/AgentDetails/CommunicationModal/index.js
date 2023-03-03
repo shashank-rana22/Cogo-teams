@@ -44,7 +44,7 @@ function CommunicationModal({ setModalType = () => {}, receiverEmail = '' }) {
 					<Button size="md" themeType="tertiary" onClick={closeModal}>
 						cancel
 					</Button>
-					<Button size="md" themeType="accent" onClick={handleSubmit}>
+					<Button size="md" themeType="accent">
 						Send
 					</Button>
 				</div>
