@@ -1,3 +1,5 @@
+import { IcMCloudUpload } from '@cogoport/icons-react';
+
 import workScopes from '../../../../utils/work-scopes.json';
 
 const controls = [
@@ -55,7 +57,7 @@ const controls = [
 		type            : 'file',
 		themeType       : 'secondary',
 		draggable       : true,
-		// uploadIcon      : <IcMUpload height={40} width={40} />,
+		uploadIcon      : <IcMCloudUpload height={56} width={56} />,
 		onlyURLOnChange : true,
 		uploadType      : 'aws',
 		rules           : { required: 'Tax Document is required' },

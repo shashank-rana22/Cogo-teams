@@ -1,3 +1,5 @@
+import { IcMCloudUpload } from '@cogoport/icons-react';
+
 const controls = [
 	{
 		name        : 'account_holder_name',
@@ -59,7 +61,7 @@ const controls = [
 		style           : { flexBasis: '100%' },
 		themeType       : 'secondary',
 		draggable       : true,
-		// uploadIcon      : 'ic-upload',
+		uploadIcon      : <IcMCloudUpload height={56} width={56} />,
 		onlyURLOnChange : true,
 		accept          : 'image/*,.pdf,.doc,.docx',
 		uploadType      : 'aws',

@@ -1,3 +1,5 @@
+import { IcMCloudUpload } from '@cogoport/icons-react';
+
 export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 	{
 		...countryOptions,
@@ -37,7 +39,7 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 		type            : 'file',
 		themeType       : 'secondary',
 		draggable       : true,
-		// uploadIcon      : 'ic-upload',
+		uploadIcon      : <IcMCloudUpload height={56} width={56} />,
 		onlyURLOnChange : true,
 		accept          : 'image/*',
 		uploadType      : 'aws',
