@@ -15,6 +15,7 @@ import document_walet from './doc-walet';
 import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
 import enrichment from './enrichment';
+import faq from './faq-apis';
 import feedback from './feedback-apis';
 import kam_desk from './kam-desk-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
@@ -117,6 +118,7 @@ const apis = {
 	...consolidated_invoices,
 	login_apis,
 	enrichment,
+	...faq,
 	performance_management,
 };
 

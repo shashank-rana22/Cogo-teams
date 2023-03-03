@@ -150,3 +150,8 @@ export const PLACEHOLDER_MAPPING = {
 	invoice        : 'Enter Invoice No',
 	onboarding_kyc : 'Enter Pan No',
 };
+
+export const ACCOUNT_TYPE = {
+	importer_exporter : 'Importer/Exporter',
+	service_provider  : 'Service Provider',
+};

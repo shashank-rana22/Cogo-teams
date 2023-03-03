@@ -28,6 +28,8 @@ function Header({
 	activeMessageCard,
 	tagOptions = [],
 	support_agent_id = null,
+	showBotMessages = false,
+	userId = '',
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const {
@@ -42,6 +44,26 @@ function Header({
 		}
 		const mobileNo = HideDetails({ data: mobile_no, type: 'number' });
 		return mobile_no ? `+${mobileNo}` : business_name;
+	};
+	const disableAssignButton = !hasPermissionToEdit && !showBotMessages;
+	const assignButtonAction = () => {
+		if (showBotMessages) {
+			const payload = {
+				agent_id        : userId,
+				allowed_to_chat : true,
+			};
+			assignChat(payload);
+		} else {
+			setOpenModal({
+				type : 'assign',
+				data : {
+					closeModal,
+					assignLoading,
+					assignChat,
+					support_agent_id,
+				},
+			});
+		}
 	};
 	return (
 		<div className={styles.container}>
@@ -60,7 +82,7 @@ function Header({
 					/>
 					<ShowContent list={chat_tags} showMorePlacement="right" />
 				</div>
-				<div className={cl`${styles.flex} ${!hasPermissionToEdit ? styles.disabled_button : ''}`}>
+				<div className={cl`${styles.flex} ${disableAssignButton ? styles.disabled_button : ''}`}>
 					{!isEmpty(filteredSpectators)
 					&& <Assignes filteredSpectators={filteredSpectators} />}
 					{activeAgentName
@@ -72,19 +94,12 @@ function Header({
 					<Button
 						themeType="secondary"
 						size="md"
-						disabled={!hasPermissionToEdit}
+						disabled={disableAssignButton}
 						className={styles.styled_button}
-						onClick={() => setOpenModal({
-							type : 'assign',
-							data : {
-								closeModal,
-								assignLoading,
-								assignChat,
-								support_agent_id,
-							},
-						})}
+						onClick={assignButtonAction}
+						loading={showBotMessages && assignLoading}
 					>
-						Assign
+						{showBotMessages ? 'Stop and Assign' : 'Assign'}
 
 					</Button>
 				</div>

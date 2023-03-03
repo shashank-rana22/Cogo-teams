@@ -1,16 +1,16 @@
 import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { useRequestBf } from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 
 const useSupplierHistory = () => {
 	const { query } = useRouter();
 	const { orgId } = query;
 
-	const [{ data:historyData, loading }, trigger] = useRequestBf(
+	const [{ data:historyData, loading }, trigger] = useRequest(
 		{
-			url     : '/purchase/bills/supplier-history',
-			method  : 'get',
-			authKey : 'get_supplier_shipment_history',
+			url    : 'get_supplier_shipment_history',
+			method : 'get',
+
 		},
 		{ autoCancel: false },
 	);

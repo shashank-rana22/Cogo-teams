@@ -96,7 +96,7 @@ function Messages({
 	const {
 		getNextData = () => {},
 		lastPage,
-		loadingMessages,
+		firstLoadingMessages,
 		messagesData,
 		loadingPrevMessages,
 	} = useGetMessages({ activeChatCollection, id });
@@ -132,6 +132,8 @@ function Messages({
 					filteredSpectators={filteredSpectators}
 					tagOptions={tagOptions}
 					support_agent_id={support_agent_id}
+					showBotMessages={showBotMessages}
+					userId={userId}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
@@ -143,7 +145,7 @@ function Messages({
 						setDraftUploadedFiles={setDraftUploadedFiles}
 						sendChatMessage={sendChatMessage}
 						getNextData={getNextData}
-						loadingMessages={loadingMessages}
+						firstLoadingMessages={firstLoadingMessages}
 						lastPage={lastPage}
 						setOpenModal={setOpenModal}
 						activeMessageCard={activeMessageCard}

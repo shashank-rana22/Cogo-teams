@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
 
@@ -47,6 +46,7 @@ function Rejected() {
 			'/business-finance/coe-finance/[active_tab]/[view]',
 			`/business-finance/coe-finance/rejected/${subActiveTab}`,
 		);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [subActiveTab]);
 
 	const { statsData }: any = usePurchaseViewStats();

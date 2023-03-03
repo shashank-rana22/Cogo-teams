@@ -70,7 +70,7 @@ function VoiceList({
 				{(list || []).map((item) => {
 					const {
 						user_data = null, user_number = '', organization_data = null,
-						start_time_of_call = '',
+						start_time_of_call = '', initiated_by = '',
 					} = item || {};
 					const checkActiveCard = activeVoiceCard?.id === item?.id;
 					const checkUserData = !isEmpty(Object.keys(user_data || {}));
@@ -95,11 +95,20 @@ function VoiceList({
 							<div className={styles.card}>
 								<div className={styles.user_information}>
 									<div className={styles.avatar_container}>
-										<img
-											src={VOICE_ICON_MAPPING[callStatus(item)]}
-											className={styles.avatar}
-											alt=""
-										/>
+										<div className={styles.status_icons}>
+
+											<img
+												src={VOICE_ICON_MAPPING[callStatus(item)]}
+												className={styles.avatar}
+												alt=""
+											/>
+											{callStatus(item) === 'missed' && (
+												<div className={styles.activity_duration}>
+													{initiated_by === 'user'
+														? 'by you' : 'by user'}
+												</div>
+											)}
+										</div>
 										<div className={styles.user_details}>
 											<Tooltip content={showUserData} placement="top">
 												<div className={styles.user_name}>

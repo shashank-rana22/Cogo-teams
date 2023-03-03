@@ -51,6 +51,7 @@ import {
 	IcMDashboard,
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
+	IcMFaq,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -431,6 +432,12 @@ const navigationMappingAdmin = {
 				as    : '/rate-management/air-customs',
 				type  : 'link',
 			},
+			{
+				title : 'Rails Domestic',
+				href  : '/rate-management/rails-domestic',
+				as    : '/rate-management/rails-domestic',
+				type  : 'link',
+			},
 		],
 		module_type: 'crm',
 	},
@@ -768,7 +775,7 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-coe_finance',
 				title         : ' COE Finance',
-				href          : '/v2/business-finance/coe-finance/dashboard',
+				href          : '/v2/business-finance/coe-finance/[active_tab]',
 				as            : '/v2/business-finance/coe-finance/dashboard',
 				icon          : IcMProductCodeMapping,
 				main_apis     : [],
@@ -1944,6 +1951,51 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		main_apis     : [],
 		possible_apis : apis.contracts,
+	},
+	cogo_academy: {
+		key       : 'cogo_academy',
+		title     : 'Cogo Academy',
+		isSubNavs : true,
+		icon      : IcMFaq,
+		options   : [
+			{
+				key           : 'cogo_academy-create_faq',
+				title         : 'Creator Management System',
+				href          : '/v2/learning/faq/create',
+				as            : '/v2/learning/faq/create',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.create_faq,
+			},
+			{
+				key           : 'cogo_academy-faq',
+				title         : 'FAQs',
+				href          : '/v2/learning/faq',
+				as            : '/v2/learning/faq',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.faq,
+			},
+		],
+		module_type: 'crm',
+	},
+	inventory_management: {
+		key       : 'inventory_management',
+		title     : 'Inventory Management',
+		icon      : IcMRateManagement,
+		isSubNavs : true,
+		options   : [
+			{
+				key           : 'inventory_management-rail',
+				title         : 'Rail',
+				href          : '/inventory-management/rail',
+				as            : '/inventory-management/rail',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.inventory_management,
+			},
+		],
+		module_type: 'dashboards',
 	},
 	performance_management: {
 		key         : 'performance_management',
