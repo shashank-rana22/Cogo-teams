@@ -23,6 +23,7 @@ function Badges() {
 	};
 
 	const [window, setWindow] = useState(1);
+	const [autofill, setAutofill] = useState({});
 
 	const { loading, list:badgeList } = useBadgeConfigurationList();
 
@@ -46,6 +47,7 @@ function Badges() {
 					<Header
 						badgeList={badgeList.length}
 						setWindow={setWindow}
+						setAutofill={setAutofill}
 					/>
 				</div>
 			</section>
@@ -68,7 +70,13 @@ function Badges() {
 							{
 								(window === 1)
 			&&	badgeList?.map(((data, index) => (
-				<BadgeListItem data={data} index={index} loading={loading} setWindow={setWindow} />
+				<BadgeListItem
+					data={data}
+					index={index}
+					loading={loading}
+					setWindow={setWindow}
+					setAutofill={setAutofill}
+				/>
 			)))
 
 							}
@@ -85,7 +93,7 @@ function Badges() {
 							{
 			(window === 3) && (
 				<div>
-					<CreateBadge setWindow={setWindow} />
+					<CreateBadge setWindow={setWindow} autofill={autofill} />
 				</div>
 			)
 }
