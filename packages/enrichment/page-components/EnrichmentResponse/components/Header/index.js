@@ -1,7 +1,7 @@
 import { Breadcrumb, Placeholder } from '@cogoport/components';
 import { format } from '@cogoport/utils/';
 
-import useEnrichmentRequests from '../../hooks/useEnrichmentRequests';
+import useHeaderStats from '../../hooks/useHeaderStats';
 
 import styles from './styles.module.css';
 
@@ -13,7 +13,7 @@ const CARD_LABEL_MAPPING = {
 function Header(props) {
 	const { locale, partner_id } = props;
 
-	const { requestData = {}, loading } = useEnrichmentRequests();
+	const { requestData = {}, loading } = useHeaderStats();
 
 	if (loading) {
 		return <Placeholder height="60px" width="100%" />;
@@ -21,8 +21,10 @@ function Header(props) {
 
 	return (
 
-		<div>
+		<section>
+
 			<Breadcrumb>
+
 				<Breadcrumb.Item
 					label={<a href={`/v2/${locale}/${partner_id}/enrichment/`}>Enrichment Requests</a>}
 				/>
@@ -52,6 +54,7 @@ function Header(props) {
 				<div className={styles.info}>
 
 					<div className={styles.info_label}>Enrichment Request Created At -</div>
+
 					<div className={styles.value}>
 						{format(requestData.created_at, 'dd MMM yyyy')}
 					</div>
@@ -59,7 +62,7 @@ function Header(props) {
 				</div>
 			</div>
 
-		</div>
+		</section>
 
 	);
 }

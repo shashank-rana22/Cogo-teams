@@ -3,22 +3,21 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import { RESPONSE_TABS_MAPPING } from '../../constants/tab-panel-mapping';
 
 import Header from './components/Header';
-import Response from './components/Response';
+import List from './components/List';
 import useEnrichmentResponse from './hooks/useEnrichmentResponse';
 import styles from './styles.module.css';
 
 function EnrichmentResponse() {
 	const {
-		locale,
+		list,
 		refetch,
 		loading,
 		activeTab,
-		partner_id,
 		setActiveTab,
-		list,
-		paginationData,
 		showAddPoc,
 		setShowAddPoc,
+		locale,
+		partner_id,
 	} = useEnrichmentResponse();
 
 	return (
@@ -35,17 +34,16 @@ function EnrichmentResponse() {
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-
 					{Object.values(RESPONSE_TABS_MAPPING).map((item) => (
+
 						<TabPanel key={item.name} name={item.name} title={item.title}>
 
-							<Response
+							<List
 								activeTab={activeTab}
 								loading={loading}
 								showAddPoc={showAddPoc}
 								setShowAddPoc={setShowAddPoc}
 								refetch={refetch}
-								paginationData={paginationData}
 								list={list}
 							/>
 

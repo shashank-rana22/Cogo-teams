@@ -9,30 +9,20 @@ import styles from './styles.module.css';
 const cardHeading = getCardHeaders('form');
 
 function CreateResponse(props) {
-	const {
-		loading,
-		activeTab,
-		type,
-	} = props;
+	const { loading, activeTab, type, setShowAddPoc } = props;
 
-	const {
-		handleSubmit,
-		onSave,
-		controls,
-		control,
-		errors,
-		handleCancel,
-	} = useCreateResponse(props);
+	const { handleSubmit, onSave, controls, control, errors } = useCreateResponse(props);
 
 	return (
-
 		<section className={styles.card}>
 
 			<form onSubmit={handleSubmit(onSave)}>
 
 				<div className={styles.card_header}>
 
-					<div className={styles.card_header_icons}>{cardHeading[activeTab].icon}</div>
+					<div className={styles.card_header_icons}>
+						{cardHeading[activeTab].icon}
+					</div>
 
 					<div>{cardHeading[activeTab].label}</div>
 
@@ -61,31 +51,30 @@ function CreateResponse(props) {
 								/>
 
 								<div className={styles.error_message}>
-
 									{errors?.[el.name]?.message}
-
 								</div>
 
 							</div>
 						);
 					})}
+
 				</div>
 
 				<div className={styles.card_footer}>
 
-					{ type !== 'create' && (
+					{type === 'addPoc' && (
 						<Button
 							type="button"
 							size="md"
 							themeType="secondary"
 							disabled={loading}
 							className={styles.cancel_cta}
-							onClick={(e) => handleCancel(e)}
+							onClick={() => setShowAddPoc(false)}
 						>
 							Cancel
-
 						</Button>
 					)}
+
 					<Button
 						type="submit"
 						size="md"
@@ -95,11 +84,8 @@ function CreateResponse(props) {
 						Save
 					</Button>
 				</div>
-
 			</form>
-
 		</section>
-
 	);
 }
 

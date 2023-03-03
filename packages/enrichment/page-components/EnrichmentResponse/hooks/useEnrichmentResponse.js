@@ -22,7 +22,8 @@ const useEnrichmentResponse = () => {
 		sort_by   : 'created_at',
 		page      : 1,
 		filters   : {
-			feedback_request_id: query.id,
+			feedback_request_id : query.id,
+			response_type       : 'user',
 		},
 		is_third_party: true,
 	});
@@ -34,25 +35,33 @@ const useEnrichmentResponse = () => {
 		params,
 	}, { manual: false });
 
-	const { list = [], ...paginationData } = data || {};
+	const { list = [] } = data || {};
 
 	useEffect(() => {
-		setShowAddPoc(false);
+		if (showAddPoc) {
+			setShowAddPoc(false);
+		}
+
+		setParams((prev) => ({
+			...prev,
+			filters: {
+				...prev.filters,
+				response_type: activeTab,
+			},
+		}));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
 	return {
 		list,
-		paginationData,
 		refetch,
 		loading,
-		setParams,
 		activeTab,
 		setActiveTab,
 		showAddPoc,
 		setShowAddPoc,
 		locale,
 		partner_id,
-
 	};
 };
 
