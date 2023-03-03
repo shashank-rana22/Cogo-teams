@@ -49,92 +49,96 @@ function Answer({ topic = {}, question, setQuestion }) {
 					<IcMArrowBack width={16} height={16} className={styles.back} />
 					<div className={styles.go_back}>Go Back</div>
 				</div>
-				<div className={styles.module_text}>
-					Module:
-					{' '}
-					{startCase(topic.display_name) || data?.faq_topics?.[0]?.display_name}
-				</div>
+				<div className={styles.ans_container}>
 
-				<div>
-					<div className={styles.question}>
-						{question?.question_abstract}
-						?
+					<div className={styles.module_text}>
+						Module:
+						{' '}
+						{startCase(topic.display_name) || data?.faq_topics?.[0]?.display_name}
 					</div>
-				</div>
 
-				{loading ? (
-					<div className={styles.spinner_container}>
-						<Loader themeType="primary" />
-					</div>
-				) : (
-					<>
-						<div className={styles.no_of_people_like_it} style={{ marginBottom: 24 }}>
-							{data?.faq_topics?.[0]?.view_count
-								? data?.faq_topics?.[0]?.view_count
-								: '0'}
-							{' '}
-							people viewed this question
+					<div>
+						<div className={styles.question}>
+							{question?.question_abstract}
+							?
 						</div>
+					</div>
 
-						<div className={styles.ansofques}>
+					{loading ? (
+						<div className={styles.spinner_container}>
+							<Loader themeType="primary" />
+						</div>
+					) : (
+						<div className={styles.ans_of_ques}>
 							<div dangerouslySetInnerHTML={{ __html: answer }} />
 						</div>
+					)}
 
-						<div className={styles.no_of_people_like_it} style={{ marginTop: 24 }}>
-							{data?.faq_topics?.[0]?.view_count
-								? data?.faq_topics?.[0]?.view_count
-								: '0'}
-							{' '}
-							people liked this answer
-						</div>
-					</>
-				)}
-
+				</div>
 			</div>
 
-			<div className={styles.space} />
-			<div className={styles.information_helpful}>
-				<div className={styles.help_text}>Did this answer your question?</div>
+			<div className={styles.like_dislike_container}>
 
-				<div className={styles.show_buttons}>
+				<div className={styles.no_of_people_like_it}>
+					{data?.faq_topics?.[0]?.view_count
+						? data?.faq_topics?.[0]?.view_count
+						: '0'}
+					{' '}
+					people viewed this question
+				</div>
 
-					<div
-						className={cl`
+				<div className={styles.no_of_people_like_it}>
+					{data?.faq_topics?.[0]?.view_count
+						? data?.faq_topics?.[0]?.view_count
+						: '0'}
+					{' '}
+					people liked this answer
+				</div>
+
+				<div className={styles.space} />
+
+				<div className={styles.information_helpful}>
+					<div className={styles.help_text}>Did this answer your question?</div>
+
+					<div className={styles.show_buttons}>
+
+						<div
+							className={cl`
 						${isLiked === 'liked' ? styles.emoji_like_yes : ''} 
 						${isLiked === 'disliked' || isLiked === '' ? styles.emoji_like : ''}`}
-						role="presentation"
-						onClick={() => {
-							onClickLikeDislikeButton({ id: data?.answers?.[0]?.id, type: 'like' });
-						}}
-					/>
+							role="presentation"
+							onClick={() => {
+								onClickLikeDislikeButton({ id: data?.answers?.[0]?.id, type: 'like' });
+							}}
+						/>
 
-					<div
-						className={cl`
+						<div
+							className={cl`
 						${isLiked === 'liked' ? styles.emoji_dislike : ''} 
 						${isLiked === 'disliked' ? styles.emoji_dislike_yes : ''}
 						${isLiked === '' ? styles.emoji_dislike : ''}
 						`}
-						role="presentation"
-						onClick={() => {
-							if (isLiked !== 'disliked') {
-								setShow(true);
-								setIsLiked('disliked');
-							} else {
-								onClickLikeDislikeButton({ type: 'dislike' });
-							}
-						}}
-					/>
-				</div>
+							role="presentation"
+							onClick={() => {
+								if (isLiked !== 'disliked') {
+									setShow(true);
+									setIsLiked('disliked');
+								} else {
+									onClickLikeDislikeButton({ type: 'dislike' });
+								}
+							}}
+						/>
+					</div>
 
-				<div
-					className={styles.help_text}
-					onClick={() => GotoFAQ()}
-				>
-					<div>Open in help center</div>
-					<IcMRedo />
+					<div
+						className={styles.help_text}
+						onClick={() => GotoFAQ()}
+					>
+						<div>Open in help center</div>
+						<IcMRedo />
+					</div>
 				</div>
 			</div>
-
 			{show && (
 				<DislikeModal
 					setShow={setShow}

@@ -18,7 +18,7 @@ const useQuestionList = ({
 
 	const [page, setPage] = useState(1);
 
-	const { role_functions = [], role_sub_functions = [] } =		auth_role_data?.[0] || {};
+	const { role_functions = [], role_sub_functions = [] } = auth_role_data?.[0] || {};
 
 	const roleFunction = !isEmpty(role_functions) ? role_functions : undefined;
 

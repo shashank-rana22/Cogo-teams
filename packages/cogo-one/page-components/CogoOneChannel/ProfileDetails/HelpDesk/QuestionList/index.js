@@ -14,7 +14,7 @@ function QuestionList({
 	search = '', topic = {}, setTopic = () => {}, question = '',
 	setQuestion = () => {},
 }) {
-	const { loading, list, page, setPage, pageData } =	useQuestionList({ topic, search, question, setQuestion });
+	const { loading, list, page, setPage, pageData } = useQuestionList({ topic, search, question, setQuestion });
 
 	if (!isEmpty(question)) {
 		return (
@@ -104,7 +104,7 @@ function QuestionList({
 				</>
 			) : (
 				<div className={styles.empty}>
-					<EmptyState type="helpdesk" />
+					<EmptyState type="help_desk" />
 				</div>
 			)}
 

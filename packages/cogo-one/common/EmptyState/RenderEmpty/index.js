@@ -70,7 +70,7 @@ function RenderEmpty({
 					</div>
 				</div>
 			);
-		case 'helpdesk':
+		case 'help_desk':
 			return (
 				<div className={styles.content}>
 					<img

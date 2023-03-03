@@ -72,13 +72,16 @@ function HelpDesk() {
 						>
 							{renderIcon({ item })}
 
-							<div style={{ width: 150 }}>
+							<div>
 								<Tooltip
 									content={startCase(item?.display_name)}
 									placement="bottom"
 
 								>
-									<div className={styles.display_name}>{startCase(item?.display_name)}</div>
+									<div className={styles.display_name}>
+										{startCase(item?.display_name)}
+										{' '}
+									</div>
 								</Tooltip>
 								<div className={styles.question_count}>
 									{item?.question_count}
@@ -124,7 +127,7 @@ function HelpDesk() {
 
 		return (
 			<div>
-				{isEmpty(list) ? <EmptyState type="helpdesk" /> : render()}
+				{isEmpty(list) ? <EmptyState type="help_desk" /> : render()}
 			</div>
 		);
 	};

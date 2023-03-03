@@ -60,8 +60,10 @@
 
 .display_name {
 	width: 100%;
+	width: 150px;
 	padding: 0 8px;
 	overflow: hidden;
+	font-size: 12px;
 	font-weight: 600;
 	text-overflow: ellipsis;
 	white-space: nowrap;

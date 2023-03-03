@@ -10484,31 +10484,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
-		{
-			api          : 'get_question',
-			access_type  : 'private',
-			service_name : 'faq',
-		},
-		{
-			api          : 'list_faq_questions',
-			access_type  : 'private',
-			service_name : 'faq',
-		},
-		{
-			api          : 'list_faq_topics',
-			access_type  : 'private',
-			service_name : 'faq',
-		},
-		{
-			api          : 'update_faq_feedback',
-			access_type  : 'private',
-			service_name : 'faq',
-		},
-		{
-			api          : 'create_faq_feedback',
-			access_type  : 'private',
-			service_name : 'faq',
-		},
 
 	],
 };
