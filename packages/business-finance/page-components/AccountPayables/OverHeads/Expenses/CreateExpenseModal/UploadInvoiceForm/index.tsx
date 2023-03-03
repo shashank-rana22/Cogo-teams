@@ -31,7 +31,7 @@ function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.uploadInvoice}>
+			<div className={styles.upload_invoice}>
 				{!isUploadConfirm ? (
 					<>
 						<Filter
@@ -67,7 +67,7 @@ function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 
 			</div>
 			<div className={`${styles.upload_invoice} ${styles.line_item}`}>
-				<LineItemsForm />
+				<LineItemsForm setFormData={setFormData} formData={formData} />
 			</div>
 		</div>
 

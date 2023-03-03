@@ -1,3 +1,4 @@
 .modal_data {
-	min-height: 528px;
+    height: 650px;
+	max-height: 650px !important;
 }

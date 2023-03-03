@@ -7,17 +7,21 @@ import UploadInvoiceForm from '../UploadInvoiceForm';
 
 interface Props {
 	active:string
-	createExpenseType:string
+	createExpenseType:string,
+	recurringData?:object,
+	setRecurringData?:(obj)=>void,
+	nonRecurringData?:object,
+	setNonRecurringData?:(obj)=>void,
 }
 
-function CreateExpenseForm({ active, createExpenseType }:Props) {
-	const [recurringData, setRecurringData] = useState({
-		repeatEvery: 'week',
-	});
-
-	const [nonRecurringData, setNonRecurringData] = useState({
-	});
-
+function CreateExpenseForm({
+	active,
+	createExpenseType,
+	recurringData,
+	setRecurringData,
+	nonRecurringData,
+	setNonRecurringData,
+}:Props) {
 	return (
 		<div>
 			{active === 'Expense Details'

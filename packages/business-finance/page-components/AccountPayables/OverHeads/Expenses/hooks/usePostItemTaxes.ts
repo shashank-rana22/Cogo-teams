@@ -14,13 +14,15 @@ const usePostListItemTaxes = () => {
 
 	const api = async () => {
 		try {
-			await trigger({
-				data: {
-					serviceName : 'overhead',
-					tradeType   : 'LOCAL',
-					countryCode : 'IN',
+			await trigger(
+				{
+					data: {
+						serviceName : 'overhead',
+						tradeType   : 'LOCAL',
+						countryCode : 'IN',
+					},
 				},
-			});
+			);
 		} catch (err) {
 			Toast.error(err);
 		}
@@ -33,7 +35,7 @@ const usePostListItemTaxes = () => {
 
 	return {
 		loading,
-		lineItemsData: data,
+		lineItemsList: data?.list,
 	};
 };
 

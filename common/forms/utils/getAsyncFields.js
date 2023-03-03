@@ -180,7 +180,6 @@ function listVendors() {
 		valueKey    : 'business_name',
 		endpoint    : 'list_vendors',
 		initialCall : false,
-		customQuery : 'business_name',
 	};
 }
 

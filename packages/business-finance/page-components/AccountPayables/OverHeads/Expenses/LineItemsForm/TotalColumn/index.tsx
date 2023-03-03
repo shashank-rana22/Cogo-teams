@@ -20,7 +20,7 @@ function TotalColumn({ append, totalAmountBeforeTax }) {
 						TOTAL
 						AMOUNT
 					</span>
-					<span>{totalAmountBeforeTax}</span>
+					<span>{Number.isNaN(totalAmountBeforeTax) ? '---' : totalAmountBeforeTax }</span>
 				</div>
 				<div className={`${styles.col}`} style={{ width: '16%' }}>
 					Tax

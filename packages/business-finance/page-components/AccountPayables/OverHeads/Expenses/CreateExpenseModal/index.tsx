@@ -1,6 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import useListVendors from '../hooks/useListVendors';
 import Timeline from '../Timeline';
 
 import CreateExpenseForm from './CreateExpenseForm';
@@ -18,12 +19,24 @@ function CreateExpenseModal({
 	showModal = false,
 	createExpenseType = '',
 }:Props) {
+	const [recurringData, setRecurringData] = useState({
+		repeatEvery: 'week',
+	});
+
+	const [nonRecurringData, setNonRecurringData] = useState({
+	});
 	const timeline = ['Expense Details', 'Upload Invoice', 'Final Confirmation'];
 	const [active, setActive] = useState('Expense Details');
 
+	const { listVendorApi, loading } = useListVendors();
+
 	const handleClick = () => {
-		const current = timeline.indexOf(active);
-		if (current < timeline.length - 1) { setActive(timeline[current + 1]); }
+		if (active === 'Expense Details' && createExpenseType !== 'recurring') {
+			listVendorApi({ checkCombination: true, nonRecurringData, timeline, active, setActive });
+		} else {
+			const current = timeline.indexOf(active);
+			if (current < timeline.length - 1) { setActive(timeline[current + 1]); }
+		}
 	};
 	const handleBack = () => {
 		const current = timeline.indexOf(active);
@@ -43,6 +56,10 @@ function CreateExpenseModal({
 					<CreateExpenseForm
 						active={active}
 						createExpenseType={createExpenseType}
+						recurringData={recurringData}
+						setRecurringData={setRecurringData}
+						nonRecurringData={nonRecurringData}
+						setNonRecurringData={setNonRecurringData}
 					/>
 				</div>
 
@@ -54,7 +71,14 @@ function CreateExpenseModal({
 					</Button>
 				)}
 				{timeline.indexOf(active) !== timeline.length - 1
-					? <Button onClick={handleClick}>Save & Next</Button> : <Button>Request Email</Button>}
+					? (
+						<Button
+							loading={loading}
+							onClick={handleClick}
+						>
+							Save & Next
+						</Button>
+					) : <Button>Request Email</Button>}
 			</Modal.Footer>
 		</Modal>
 	);
