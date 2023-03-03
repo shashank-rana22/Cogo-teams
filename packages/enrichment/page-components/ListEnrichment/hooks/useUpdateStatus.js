@@ -1,13 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useAllocationRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 const useUpdateStatus = (props) => {
-	const {
-		profile = {},
-	} = useSelector((state) => state);
-
 	const {
 		setShowUpload,
 		uploadProof,
@@ -28,10 +23,6 @@ const useUpdateStatus = (props) => {
 				data: {
 					sheet_url : uploadProof,
 					file_name : formValues.file_name,
-
-					// ! Romove this before merge
-					performed_by_type : 'agent',
-					performed_by_id   : profile.user?.id,
 				},
 			});
 			Toast.success('Uploaded successful');

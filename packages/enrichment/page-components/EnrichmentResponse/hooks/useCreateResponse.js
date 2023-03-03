@@ -3,7 +3,6 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 import getUserControls from '../../../configurations/get-controls';
 
@@ -14,8 +13,6 @@ function useCreateResponse(props) {
 		activeTab,
 		setShowAddPoc,
 	} = props;
-
-	const {	profile = {} } = useSelector((state) => state);
 
 	const router = useRouter();
 
@@ -51,10 +48,6 @@ function useCreateResponse(props) {
 				response_type       : activeTab,
 				source              : 'manual',
 				feedback_request_id : query?.id,
-
-				// ! Romove this before merge
-				performed_by_type : 'agent',
-				performed_by_id   : profile.user?.id,
 			};
 
 			await trigger({
