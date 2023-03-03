@@ -41,7 +41,7 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 	subActiveTab: string;
-	statsData?:GenericObject
+	statsData?:object
 }
 
 function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props) {

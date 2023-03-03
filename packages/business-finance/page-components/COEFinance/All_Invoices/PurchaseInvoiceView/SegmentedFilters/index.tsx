@@ -16,7 +16,7 @@ interface SegmentFilterProps {
 	setSearchValue: any;
 	searchValue: string;
 	currentTab: string;
-	statsData?:GenericObject
+	statsData?:object
 	tab:string;
 	setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
 	setTab: React.Dispatch<React.SetStateAction<string>>;
