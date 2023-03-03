@@ -12,10 +12,10 @@ const useCreateShipmentDocument = () => {
 			await trigger({
 				data: payload,
 			});
-			listAPi({});
+			listAPi({ filters: {} });
 			Toast.success('Document Created Successfully');
 		} catch (err) {
-			console.log(err);
+			Toast.error(err || 'Failed to Upload');
 		}
 	};
 

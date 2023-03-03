@@ -77,15 +77,8 @@ function Child({
 									control={control}
 
 								/>
-								<p style={{
-									fontStyle     : 'normal',
-									fontSize      : '12px',
-									lineHeight    : '16px',
-									letterSpacing : '0.02em',
-									paddingLeft   : '4px',
-									margin        : '0px',
-									color         : '#cb6464',
-								}}
+								<p
+									className={styles.font_style}
 								>
 									{errorOriginal}
 

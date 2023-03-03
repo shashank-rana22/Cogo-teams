@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 function Header() {
 	return (
-		<div className={styles.container}>
+		<div>
 			<div className={styles.heading}>Ground Ops Dashboard Air</div>
 		</div>
 	);

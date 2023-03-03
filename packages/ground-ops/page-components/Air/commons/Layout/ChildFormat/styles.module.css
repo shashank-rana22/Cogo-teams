@@ -13,6 +13,15 @@
 	width: 100%;
 }
 
+.font_style {
+	padding-left: 4px;
+	margin: 0;
+	font-size: 12px;
+	line-height: 16px;
+	color: "#cb6464";
+	letter-spacing: 0.02em;
+}
+
 .element {
 	padding: 4px;
 

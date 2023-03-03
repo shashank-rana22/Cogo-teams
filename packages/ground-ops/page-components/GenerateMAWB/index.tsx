@@ -140,7 +140,9 @@ function GenerateMAWB({
 							setActive={setActiveKey}
 							items={items}
 						/>
-						<RadioGroup options={options} onChange={onChange} value={value} />
+
+						{!edit
+						&& <RadioGroup options={options} onChange={onChange} value={value} />}
 					</div>
 
 					{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} />
@@ -154,6 +156,13 @@ function GenerateMAWB({
 
 											{!back ? (
 												<div className={styles.button_div}>
+													<Button
+														onClick={() => setGenerate(false)}
+														themeType="secondary"
+														style={{ border: '1px solid #333' }}
+													>
+														CANCEL
+													</Button>
 													<Button
 														onClick={handleSubmit(() => setActiveKey('package'))}
 														themeType="accent"
@@ -240,6 +249,7 @@ function GenerateMAWB({
 								edit={edit}
 								setEdit={setEdit}
 								viewDoc={viewDoc}
+								setViewDoc={setViewDoc}
 								chargeableWeight={chargeableWeight}
 								setGenerate={setGenerate}
 							/>

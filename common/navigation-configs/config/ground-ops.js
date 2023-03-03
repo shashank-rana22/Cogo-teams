@@ -5,4 +5,4 @@ const groundOps = {
 	},
 };
 
-module.exports = groundOps;
+export default groundOps;

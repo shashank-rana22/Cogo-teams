@@ -132,6 +132,7 @@ function ApprovalPending({
 						<Button
 							style={{ marginRight: '10px', border: '1px solid #333' }}
 							size="md"
+							disabled={updateLoading}
 							onClick={() => setShowApprove(null)}
 							themeType="secondary"
 						>
@@ -140,6 +141,7 @@ function ApprovalPending({
 						<Button
 							size="md"
 							themeType="accent"
+							disabled={updateLoading}
 							onClick={() => { handleUpdate(showApprove); }}
 						>
 							Approve
