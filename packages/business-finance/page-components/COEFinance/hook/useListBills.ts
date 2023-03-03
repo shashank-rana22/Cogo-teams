@@ -52,7 +52,7 @@ const useListBills = (allParams) => {
 		{
 			url     : '/purchase/bills/list',
 			method  : 'get',
-			authkey : 'get_purchase_bills_list',
+			authKey : 'get_purchase_bills_list',
 		},
 		{ autoCancel: false },
 	);
@@ -64,7 +64,7 @@ const useListBills = (allParams) => {
 		{
 			url     : '/sales/invoice/list',
 			method  : 'get',
-			authkey : 'get_sales_invoice_list',
+			authKey : 'get_sales_invoice_list',
 		},
 		{ autoCancel: false },
 	);
