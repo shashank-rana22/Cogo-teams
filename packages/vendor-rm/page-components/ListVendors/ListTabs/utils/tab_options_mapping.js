@@ -14,8 +14,7 @@ const TAB_OPTION_MAPPING = {
 		containerComponent : Profile,
 	},
 	finance_dashboard: {
-		key: 'finance_dashboard',
-
+		key                : 'finance_dashboard',
 		title              : 'Finance Dashboard',
 		containerComponent : FinanceDashBoard,
 	},

@@ -14,15 +14,13 @@ function MainData({
 
 	return (
 		<div className={styles.main}>
-
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary-vertical"
 				onChange={setActiveTab}
-				className={styles.change}
-
+				className={styles.main_tab_container}
 			>
-				{options?.map((option) => {
+				{(options || []).map((option) => {
 					const { key = '', title = '', containerComponent: ContainerComponent = null } = option;
 
 					if (!ContainerComponent) return null;
@@ -41,7 +39,6 @@ function MainData({
 				})}
 
 			</Tabs>
-
 		</div>
 	);
 }
