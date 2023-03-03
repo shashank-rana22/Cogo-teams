@@ -11,12 +11,9 @@ const useUpdateFaqFeedback = ({ isLiked, setIsLiked, data = {}, fetch = () => {}
 	}, { manual: true });
 
 	const onClickLikeDislikeButton = async ({ id, type = '', remarks = '', reason = [] }) => {
+		let payload = {};
+
 		if (type === 'like') {
-			let payload = {
-				faq_answer_id : id,
-				is_positive   : true,
-				status        : 'active',
-			};
 			if (isLiked === 'liked') {
 				payload = {
 					id     : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
@@ -28,58 +25,51 @@ const useUpdateFaqFeedback = ({ isLiked, setIsLiked, data = {}, fetch = () => {}
 					is_positive : true,
 					status      : 'active',
 				};
-			}
-			try {
-				await trigger({
-					data: payload,
-				});
-
-				setIsLiked(isLiked === 'liked' ? '' : 'liked');
-				fetch();
-			} catch (error) {
-				// console.log(error);
+			} else {
+				payload = {
+					faq_answer_id : id,
+					is_positive   : true,
+					status        : 'active',
+				};
 			}
 		} else if (type === 'dislike') {
-			try {
-				await trigger({
-					data: {
-						id     : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-						status : 'inactive',
-					},
-				});
-
-				setIsLiked('');
-				fetch();
-			} catch (error) {
-				// console.log(error);
-			}
-		} else {
-			let payload = {
+			payload = {
+				id     : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+				status : 'inactive',
+			};
+		} else if (data?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
+			payload = {
+				id            : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
 				faq_answer_id : data?.answers?.[0]?.id,
 				is_positive   : false,
 				remark        : `${reason}.${remarks}`,
 				status        : 'active',
 			};
-			if (data?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
-				payload = {
-					id            : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-					faq_answer_id : data?.answers?.[0]?.id,
-					is_positive   : false,
-					remark        : `${reason}.${remarks}`,
-					status        : 'active',
-				};
-			}
+		} else {
+			payload = {
+				faq_answer_id : data?.answers?.[0]?.id,
+				is_positive   : false,
+				remark        : `${reason}.${remarks}`,
+				status        : 'active',
+			};
+		}
 
-			try {
-				await trigger({
-					data: payload,
-				});
+		try {
+			await trigger({
+				data: payload,
+			});
+
+			if (type === 'like') {
+				setIsLiked(isLiked === 'liked' ? '' : 'liked');
+			} else if (type === 'dislike') {
+				setIsLiked('');
+			} else {
 				setIsLiked('disliked');
 				setShow(false);
-				fetch();
-			} catch (error) {
-				// console.log(error);
 			}
+			fetch();
+		} catch (error) {
+			// console.log(error);
 		}
 	};
 
