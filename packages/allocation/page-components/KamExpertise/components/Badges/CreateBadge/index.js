@@ -1,5 +1,6 @@
 import { Toast, Button } from '@cogoport/components';
-import { useState } from 'react';
+import { format, startCase } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
 
@@ -8,9 +9,8 @@ import GetLabelInputPair from './getLabelInputPair';
 import Header from './header';
 import styles from './styles.module.css';
 
-function CreateBadge({ setWindow }) {
+function CreateBadge({ setWindow, autofill }) {
 	const [badgeInput, setBadgeInput] = useState(false);
-
 	const [badgeParams, setBadgeParams] = useState({
 		version_id   : '1',
 		badge_name   : '',
@@ -23,6 +23,21 @@ function CreateBadge({ setWindow }) {
 		goldScore    : 0,
 		gold_url     : '',
 	});
+	// useEffect(() => {
+	// 	if (Object.keys(autofill).length > 0) {
+	// 		setBadgeParams((previousParams) => ({
+	// 			...previousParams,
+	// 			badge_name  : autofill.badge_name,
+	// 			description : autofill.badge_details,
+	// 			bronzeScore : autofill.badge_details,
+	// 			bronze_url  : '',
+	// 			silverScore : 0,
+	// 			silver_url  : '',
+	// 			goldScore   : 0,
+	// 			gold_url    : '',
+	// 		}));
+	// 	}
+	// }, [autofill]);
 
 	const {
 		onCheckPublish, loading,
@@ -166,7 +181,30 @@ function CreateBadge({ setWindow }) {
 	return (
 		<div>
 			<section className={styles.container}>
-				<Header />
+				{Object.keys(autofill).length > 0
+				&& (
+					<div className={styles.fields_container}>
+						<p className={styles.text_styles}>
+							Last Modified :
+							{' '}
+							{format(autofill.updated_at, 'yyyy-MMM-dd')}
+
+						</p>
+						<p className={styles.text_styles}>
+							Last Modified By :
+							{/* {` ${autofill.lstModifiedBy}`} */}
+						</p>
+					</div>
+				)}
+				{/* <p className={styles.text_styles}>
+					{`#${dummyDatas.bdgeNumber}`}
+				</p> */}
+
+				<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>Add Badge</h2>
+				<p className={styles.text_styles2}>
+					Select the conditions and number of completions necessary to obtain
+					the badge.
+				</p>
 				<div className={styles.content_container}>
 					{
 					labelInputPairs.map((data) => (
