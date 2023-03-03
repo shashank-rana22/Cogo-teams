@@ -1,3 +1,4 @@
+import Badges from './Badges';
 import Partners from './Partners';
 import Services from './Services';
 import styles from './styles.module.css';
@@ -23,6 +24,10 @@ function Details({
 					<TaggedAgent detailsData={detailsData} />
 				</div>
 
+			</div>
+			<div className={styles.badge_details}>
+				{/* <Badges detailsData={detailsData} /> */}
+				<Badges />
 			</div>
 		</div>
 

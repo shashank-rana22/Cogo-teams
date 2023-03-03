@@ -22,7 +22,6 @@ function CreateBadge({ setWindow, autofill }) {
 
 	console.log('getValues', watch());
 
-	const [badgeInput, setBadgeInput] = useState(false);
 	const [badgeParams, setBadgeParams] = useState({
 		version_id   : '1',
 		badge_name   : '',
@@ -177,14 +176,8 @@ function CreateBadge({ setWindow, autofill }) {
 		],
 	};
 
-	const handelNext = () => {
-		onCheckPublish(payload_data);
-		setBadgeInput(true);
-		// onClose();
-	};
-
-	const handelSave = () => {
-		// setCreateBadge((pv) => !pv);
+	const handleSave = async() =>{
+		await onCheckPublish(payload_data);
 		onClose();
 	};
 
@@ -279,28 +272,15 @@ function CreateBadge({ setWindow, autofill }) {
 						Cancel
 					</Button>
 
-					{
-						!badgeInput
-							? (
-								<Button
-									size="md"
-									themeType="primary"
-									// disabled={loading}
-									onClick={handelNext}
-								>
-									Next
-								</Button>
-							)
-							:					(
-								<Button
-									size="md"
-									themeType="primary"
-									onClick={handelSave}
-								>
-									Save
-								</Button>
-							)
-					}
+					<Button
+						size="md"
+						themeType="primary"
+						type="submit"
+						// disabled={loading}
+						onClick={handleSave}
+					>
+						Save
+					</Button>
 				</div>
 			</section>
 		</div>

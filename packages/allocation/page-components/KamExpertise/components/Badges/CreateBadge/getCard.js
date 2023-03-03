@@ -1,4 +1,4 @@
-import { Input, FileSelect, Button } from '@cogoport/components';
+import { Input, Button } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
@@ -13,15 +13,14 @@ function GetCard({ data, control, isLastItem, isBadgeEdit }) {
 	const [img_url, setImg_url] = useState('');
 	const InputElement = getFieldController('text');
 	const UploadControler = getFieldController('fileUpload');
-	// ! here, setValue and imageValue are being monitored to re-render, need to watch only 'img_url'
+
 	useEffect(() => {
 		setValue((pv) => ({ ...pv, [imageValue]: img_url }));
-	}, [imageValue, img_url, setValue]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [img_url]);
 
-	function handleUrl(item = {}) {
-		// setUrl(item.finalUrl);
-		setImg_url(item.finalUrl);
-		// setValue((pv) => ({ ...pv, [imageValue]: item.finalUrl }));  //! (working but) gives an infinite loop of errors
+	const handleChange = (item) =>{
+		setImg_url(item)
 	}
 
 	return (
@@ -60,7 +59,8 @@ function GetCard({ data, control, isLastItem, isBadgeEdit }) {
 				uploadDesc="Upload files here"
 				className={styles.file_select_style}
 				value={imageSelected}
-				onChange={(item) => handleUrl(item)}
+				onChange={(item)=>handleChange(item)}
+				// onChange={(item = {}) => setValue((pv) => ({ ...pv, [imageValue]: item.finalUrl }))}
 				style={{ width: isBadgeEdit ? '93%' : '80%' }}
 				// accept=".png,.pkg"
 			/>
