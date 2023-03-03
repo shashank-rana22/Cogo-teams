@@ -5,7 +5,7 @@ import React from 'react';
 import EmptyQuestionListState from '../../../../../commons/EmptyQuestionListState';
 import Spinner from '../../../../../commons/Spinner';
 import useListFaqQuestions from '../../../hooks/useListFaqQuestion';
-import Questions from '../../QuestionsList/Questions';
+import Questions from '../QuestionsList/Questions';
 
 import styles from './styles.module.css';
 

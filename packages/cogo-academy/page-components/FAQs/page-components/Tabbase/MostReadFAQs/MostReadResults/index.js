@@ -4,7 +4,7 @@ import { startCase, isEmpty } from '@cogoport/utils';
 import EmptyQuestionListState from '../../../../../../commons/EmptyQuestionListState';
 import Spinner from '../../../../../../commons/Spinner';
 import useListFaqQuestions from '../../../../hooks/useListFaqQuestion';
-import Questions from '../../../QuestionsList/Questions';
+import Questions from '../../QuestionsList/Questions';
 import SearchFound from '../../SearchFound';
 
 import styles from './styles.module.css';
