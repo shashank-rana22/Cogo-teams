@@ -32,6 +32,7 @@ function CreateMastery({ setWindow }) {
 			event_configuration_id : '',
 			status                 : 'active',
 			image_url              : image_input,
+			// ToDo: add  badges data
 			// badges,
 		};
 
