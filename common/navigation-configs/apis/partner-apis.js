@@ -10488,7 +10488,6 @@ const partner = {
 			api          : 'list_partners',
 			access_type  : 'private',
 			service_name : 'partner',
-
 		},
 
 	],
