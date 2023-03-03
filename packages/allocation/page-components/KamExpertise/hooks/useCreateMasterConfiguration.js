@@ -12,26 +12,18 @@ function useCreateMasterConfiguration() {
 	const onMasterSubmit = async (payload_data = {}) => {
 		try {
 			const payload = {
-				// performed_by_id        : null,
-				// performed_by_type      : null,
-				// version_id             : '1',
-				// mastery_name           : null,
-				// description            : null,
-				// event_configuration_id : '',
-				// status                 : 'active',
-				// image_url              : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBvLI6YDUpfHdQI0Mu9r1VagQ4yrEbWFW6hs-hGtU&s',
-				// badges                 : [
-				// 	{
-				// 		name: 'master modal',
-				// 	},
-				// ],
-				
 				mastery_name           : payload_data.mastery_name,
 				description            : payload_data.description,
 				event_configuration_id : '',
 				status                 : 'active',
 				image_url              : payload_data.image_url,
-				badges                 : payload_data.badges,
+				//! need to add badges through a different api  (can be done by list)
+				// badges                 : payload_data.badges,
+				badges                 : [
+					{ name: 'nautical_ninja' },
+					{ name: 'wings_silver' },
+					{ name: 'wings_gold' },
+				],
 			};
 
 			await trigger({
