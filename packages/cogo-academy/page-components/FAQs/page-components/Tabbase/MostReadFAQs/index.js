@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import SearchInput from '../../../../commons/SearchInput';
+import SearchInput from '../../../../../commons/SearchInput';
 
 import MostReadFaqResults from './MostReadResults';
 
