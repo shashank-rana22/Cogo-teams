@@ -3,12 +3,10 @@ import { Tabs, TabPanel, Badge } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { React } from 'react';
 
-import EmptyQuestionListState from '../../../../commons/EmptyQuestionListState';
-import Spinner from '../../../../commons/Spinner';
-import useListFaqTopic from '../../hooks/useListFaqTopic';
-import TagQuestions from '../PopularTags/TagQuestions';
-import QuestionsList from '../QuestionsList';
-import SearchFound from '../SearchFound';
+import EmptyQuestionListState from '../../../../../../../commons/EmptyQuestionListState';
+import Spinner from '../../../../../../../commons/Spinner';
+import useListFaqTopic from '../../../../../hooks/useListFaqTopic';
+import QuestionsList from '../../../QuestionsList';
 
 import styles from './styles.module.css';
 
@@ -116,8 +114,8 @@ function TopicList({ searchState = '', tagId = [] }) {
 
 	return (
 		<div>
-			{searchState
-				? (<SearchFound searchState={searchState} />) : (<TagQuestions tagId={tagId} />)}
+			{' '}
+			<QuestionsList searchState={searchState} tagId={tagId} />
 		</div>
 
 	);
