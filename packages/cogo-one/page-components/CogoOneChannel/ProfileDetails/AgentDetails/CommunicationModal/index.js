@@ -54,8 +54,12 @@ function CommunicationModal({
 	const ActiveModalComp = COMPONENT_MAPPING[modalType] || null;
 
 	const whatsappTemplatesData = {
-		sendCommunicationTemplate : sendQuickCommuncation,
-		communicationLoading      : loading,
+		sendCommunicationTemplate: (args) => sendQuickCommuncation({
+			...args,
+			otherChannelRecipient : userData?.whatsapp_number_eformat,
+			type                  : 'whatsapp',
+		}),
+		communicationLoading: loading,
 	};
 	return (
 		<Modal

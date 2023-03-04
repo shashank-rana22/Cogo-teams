@@ -7,7 +7,7 @@ import hideDetails from '../../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
-function ComposeEmail({ closeModal = () => {}, userData = {} }) {
+function ComposeEmail({ closeModal = () => {}, userData = {}, sendQuickCommuncation = () => {} }) {
 	const [emailState, setEmailState] = useState({
 		subject : '',
 		body    : '',
@@ -17,6 +17,13 @@ function ComposeEmail({ closeModal = () => {}, userData = {} }) {
 		const isEmpty = getFormatedEmailBody({ emailState });
 		if (isEmpty) {
 			Toast.error("You can't send a blank email");
+		} else {
+			sendQuickCommuncation({
+				template_name         : 'send_email_template',
+				otherChannelRecipient : userData?.email,
+				variables             : { ...emailState },
+				type                  : 'email',
+			});
 		}
 	};
 	return (
