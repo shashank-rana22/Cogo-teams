@@ -2,10 +2,10 @@ import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import EmptyState from '../../../../../commons/EmpyState';
-import Spinner from '../../../../../commons/Spinner';
-import useListFaqQuestions from '../../../hooks/useListFaqQuestion';
-import Questions from '../../Questions';
+import EmptyState from '../../../../../../../commons/EmpyState';
+import Spinner from '../../../../../../../commons/Spinner';
+import useListFaqQuestions from '../../../../../hooks/useListFaqQuestion';
+import Questions from '../../../QuestionsList/Questions';
 
 import styles from './styles.module.css';
 
