@@ -1,17 +1,16 @@
 import { Pagination } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import EmptyQuestionListState from '../../../../../commons/EmptyQuestionListState';
-import Spinner from '../../../../../commons/Spinner';
-import useListFaqQuestions from '../../../hooks/useListFaqQuestion';
-import Questions from '../../Questions';
-import SearchFound from '../../SearchFound';
+import EmptyQuestionListState from '../../../../../../commons/EmptyQuestionListState';
+import Spinner from '../../../../../../commons/Spinner';
+import useListFaqQuestions from '../../../../hooks/useListFaqQuestion';
+import QuestionsList from '../../QuestionsList';
+import Questions from '../../QuestionsList/Questions';
 
 import styles from './styles.module.css';
 
-function MostReadFaqResults({ searchState }) {
-	const sort = true;
-
+function MostReadFaqResults({ searchState = '' }) {
+	const sort = 'view_count';
 	const {
 		page,
 		setPage = () => {},
@@ -63,7 +62,7 @@ function MostReadFaqResults({ searchState }) {
 						</div>
 					</>
 
-				) : <SearchFound searchState={searchState} />}
+				) : <QuestionsList searchState={searchState} />}
 		</div>
 	);
 }

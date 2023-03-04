@@ -3,12 +3,10 @@ import { Tabs, TabPanel, Badge } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { React } from 'react';
 
-import EmptyQuestionListState from '../../../../commons/EmptyQuestionListState';
-import Spinner from '../../../../commons/Spinner';
-import useListFaqTopic from '../../hooks/useListFaqTopic';
-import TagQuestions from '../PopularTags/TagQuestions';
-import QuestionsList from '../QuestionsList';
-import SearchFound from '../SearchFound';
+import EmptyQuestionListState from '../../../../../../../commons/EmptyQuestionListState';
+import Spinner from '../../../../../../../commons/Spinner';
+import useListFaqTopic from '../../../../../hooks/useListFaqTopic';
+import QuestionsList from '../../../QuestionsList';
 
 import styles from './styles.module.css';
 
@@ -42,7 +40,7 @@ function TopicList({ searchState = '', tagId = [] }) {
 		return (<EmptyQuestionListState />);
 	}
 
-	const truncate = (input) => (input?.length > 40 ? `${input.substring(0, 29)}..` : input);
+	const truncate = (input) => (input?.length > 30 ? `${input.substring(0, 28)}..` : input);
 
 	if (!searchState && (tagId.length === 0)) {
 		return (
@@ -90,6 +88,7 @@ function TopicList({ searchState = '', tagId = [] }) {
 												color="#FA9E96"
 												size="md"
 												text={singleOption.question_count}
+												style={{ marginLeft: 2 }}
 											/>
 										</div>
 
@@ -116,8 +115,8 @@ function TopicList({ searchState = '', tagId = [] }) {
 
 	return (
 		<div>
-			{searchState
-				? (<SearchFound searchState={searchState} />) : (<TagQuestions tagId={tagId} />)}
+			{' '}
+			<QuestionsList searchState={searchState} tagId={tagId} />
 		</div>
 
 	);
