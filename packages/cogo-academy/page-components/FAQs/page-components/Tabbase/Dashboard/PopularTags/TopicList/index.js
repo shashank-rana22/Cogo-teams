@@ -40,7 +40,7 @@ function TopicList({ searchState = '', tagId = [] }) {
 		return (<EmptyQuestionListState />);
 	}
 
-	const truncate = (input) => (input?.length > 40 ? `${input.substring(0, 29)}..` : input);
+	const truncate = (input) => (input?.length > 30 ? `${input.substring(0, 28)}..` : input);
 
 	if (!searchState && (tagId.length === 0)) {
 		return (
@@ -88,6 +88,7 @@ function TopicList({ searchState = '', tagId = [] }) {
 												color="#FA9E96"
 												size="md"
 												text={singleOption.question_count}
+												style={{ marginLeft: 2 }}
 											/>
 										</div>
 
