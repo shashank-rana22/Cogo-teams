@@ -10,6 +10,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // eslint-disable-next-line import/extensions
 const { i18n } = require('./next-i18next.config.js');
 
+const isProd = process.env.NODE_ENV === 'production';
+
 // eslint-disable-next-line
 const fs = require('fs-extra');
 
@@ -21,6 +23,10 @@ const loadCogoModules = () => {
 };
 
 const modulesToTranspile = loadCogoModules();
+
+const removeConsole = {
+	exclude: ['error'],
+};
 
 module.exports = withBundleAnalyzer({
 	env               : { ...loadEnvConfig.parsed },
@@ -36,5 +42,8 @@ module.exports = withBundleAnalyzer({
 			use  : [{ loader: '@svgr/webpack' }],
 		});
 		return config;
+	},
+	compiler: {
+		removeConsole: isProd ? removeConsole : false,
 	},
 });
