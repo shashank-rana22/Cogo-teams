@@ -1,4 +1,4 @@
-import { IcMSearchdark, IcMFaq } from '@cogoport/icons-react';
+import { IcMSearchdark, IcMDocument, IcMHelpInCircle } from '@cogoport/icons-react';
 
 const IconMapping = [
 	{
@@ -65,9 +65,15 @@ const IconMapping = [
 		/>,
 	},
 	{
+		name    : 'documents',
+		content : 'Documents',
+		icon    : <IcMDocument width={18} height={18} />,
+	},
+	{
 		name    : 'help_desk',
 		content : 'Help Desk',
-		icon    : <IcMFaq width={18} height={18} />,
+		icon    : <IcMHelpInCircle width={18} height={18} />,
 	},
+
 ];
 export default IconMapping;
