@@ -1,6 +1,5 @@
 function getFormatedEmailBody({ emailState }) {
 	const emailBody = emailState?.body || '';
-	console.log('emailBody:', emailBody);
 	const checkRegex = /<p>(.+)<\/p>/gm;
 	const checkH1Regex = /<h1>(.+)<\/h1>/gm;
 	const checkH2Regex = /<h2>(.+)<\/h2>/gm;

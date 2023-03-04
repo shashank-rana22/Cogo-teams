@@ -50,6 +50,8 @@ function useSendCommunicationTemplate({
 					type          : type === 'email' ? 'email' : 'whatsapp',
 					provider_name : type === 'email' ? 'aws' : 'meta',
 					service,
+					user_id,
+					lead_user_id,
 					service_id,
 					template_name,
 					recipient     : isOtherChannels ? otherChannelRecipient : mobile_no,
