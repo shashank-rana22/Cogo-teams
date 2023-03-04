@@ -1,7 +1,8 @@
-import { Modal, Button, RTE, Input } from '@cogoport/components';
+import { Toast, Modal, Button, RTE, Input } from '@cogoport/components';
 import { useState } from 'react';
 
 import { TOOLBARCONFIG } from '../../../../../constants';
+import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
 
 import styles from './styles.module.css';
 
@@ -14,6 +15,13 @@ function CommunicationModal({ setModalType = () => {}, receiverEmail = '' }) {
 		subject : '',
 		body    : '',
 	});
+
+	const handleSend = () => {
+		const isEmpty = getFormatedEmailBody({ emailState });
+		if (isEmpty) {
+			Toast.error("You can't send a blank email");
+		}
+	};
 
 	return (
 		<Modal show size="md" onClose={closeModal} onClickOutside={closeModal} scroll={false}>
@@ -44,7 +52,7 @@ function CommunicationModal({ setModalType = () => {}, receiverEmail = '' }) {
 					<Button size="md" themeType="tertiary" onClick={closeModal}>
 						cancel
 					</Button>
-					<Button size="md" themeType="accent">
+					<Button size="md" themeType="accent" onClick={handleSend}>
 						Send
 					</Button>
 				</div>
@@ -52,4 +60,5 @@ function CommunicationModal({ setModalType = () => {}, receiverEmail = '' }) {
 		</Modal>
 	);
 }
+
 export default CommunicationModal;
