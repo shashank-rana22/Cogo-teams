@@ -39,7 +39,6 @@ function MessageConversations({
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
 	lastPage = false,
-	closeModal = () => {},
 
 }) {
 	const messageRef = useRef();

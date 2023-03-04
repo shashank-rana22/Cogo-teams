@@ -106,7 +106,6 @@ function CogoOne() {
 						firestore={firestore}
 						updateLeaduser={updateLeaduser}
 						activeCardId={activeCardId}
-						isomniChannelAdmin={isomniChannelAdmin}
 					/>
 				</>
 			);

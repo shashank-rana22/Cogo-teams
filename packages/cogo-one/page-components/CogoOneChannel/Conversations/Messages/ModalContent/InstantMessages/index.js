@@ -6,7 +6,7 @@ import Templates from '../../../../../../common/Templates';
 import InstantReplies from './InstantReplies';
 import styles from './styles.module.css';
 
-function InstantRepliesModal({ data = {}, isomniChannelAdmin = false }) {
+function InstantRepliesModal({ data = {} }) {
 	const [activeTab, setActiveTab] = useState('quick_reply');
 	const [openCreateReply, setOpenCreateReply] = useState(false);
 
@@ -53,7 +53,6 @@ function InstantRepliesModal({ data = {}, isomniChannelAdmin = false }) {
 						activeTab={activeTab}
 						openCreateReply={openCreateReply}
 						setOpenCreateReply={setOpenCreateReply}
-						isomniChannelAdmin={isomniChannelAdmin}
 					/>
 				</TabPanel>
 

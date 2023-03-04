@@ -12,7 +12,6 @@ function CommunicationModal({
 	userData = {},
 	modalType = '',
 	activeCardData = {},
-	isomniChannelAdmin = false,
 }) {
 	const COMPONENT_MAPPING = {
 		email    : ComposeEmail,
@@ -85,7 +84,6 @@ function CommunicationModal({
 					setOpenCreateReply={setOpenCreateReply}
 					userData={userData}
 					sendQuickCommuncation={sendQuickCommuncation}
-					isomniChannelAdmin={isomniChannelAdmin}
 					data={whatsappTemplatesData}
 					loading={loading}
 				/>

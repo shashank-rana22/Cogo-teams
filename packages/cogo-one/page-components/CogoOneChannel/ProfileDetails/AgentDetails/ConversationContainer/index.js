@@ -13,7 +13,6 @@ function ConversationContainer({
 	loading,
 	noData = false,
 	activeCardData = {},
-	isomniChannelAdmin = false,
 }) {
 	const [modalType, setModalType] = useState(null);
 	if (isEmpty(userData) || noData) {
@@ -86,7 +85,6 @@ function ConversationContainer({
 					setModalType={setModalType}
 					userData={userData}
 					activeCardData={activeCardData}
-					isomniChannelAdmin={isomniChannelAdmin}
 				/>
 			)}
 		</>

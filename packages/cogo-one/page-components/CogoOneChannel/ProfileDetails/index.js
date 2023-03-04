@@ -13,7 +13,6 @@ function ProfileDetails({
 	activeVoiceCard,
 	updateLeaduser,
 	activeCardId,
-	isomniChannelAdmin = false,
 }) {
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
@@ -48,7 +47,6 @@ function ProfileDetails({
 						updateLeaduser={updateLeaduser}
 						orgId={orgId}
 						disableQuickActions={disableQuickActions}
-						isomniChannelAdmin={isomniChannelAdmin}
 					/>
 				)}
 			</div>

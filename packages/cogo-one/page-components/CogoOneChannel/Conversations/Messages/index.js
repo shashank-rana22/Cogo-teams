@@ -183,7 +183,6 @@ function Messages({
 						data={openModal?.data || {}}
 						assignLoading={assignLoading}
 						loading={loading}
-						isomniChannelAdmin={isomniChannelAdmin}
 					/>
 				</Modal>
 			)}

@@ -19,7 +19,6 @@ function AgentDetails({
 	formattedMessageData = {},
 	customerId = '',
 	updateLeaduser = () => {},
-	isomniChannelAdmin = false,
 }) {
 	const { user_details = null, user_type } = activeMessageCard || {};
 	const {
@@ -207,7 +206,6 @@ function AgentDetails({
 						noData={!leadUserId && !userId}
 						loading={loading}
 						activeCardData={DATA_MAPPING[activeTab] || {}}
-						isomniChannelAdmin={isomniChannelAdmin}
 					/>
 				</>
 			)}
