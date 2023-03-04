@@ -81,7 +81,11 @@ const useUpdateSpotNegotiationRate = ({
 			} else if (!prefillData.current) {
 				prefillData.current = rateSelected;
 			}
-			(Object.keys(prefillData.current?.data || prefillData.current?.freight || prefillData.current?.ftl_freight || prefillData.current?.ltl_freight || prefillData.current?.fcl_customs || prefillData.current?.lcl_customs || prefillData.current?.air_customs || prefillData.current.fcl_cfs || prefillData.current.haulage_freight || {})).forEach((item) => {
+			(Object.keys(prefillData.current?.data
+				|| prefillData.current?.freight || prefillData.current?.ftl_freight
+				|| prefillData.current?.ltl_freight || prefillData.current?.fcl_customs
+				|| prefillData.current?.lcl_customs || prefillData.current?.air_customs
+				|| prefillData.current.fcl_cfs || prefillData.current.haulage_freight || {})).forEach((item) => {
 				let val;
 				if (prefillData.current?.data) {
 					val = prefillData?.current?.data[item];
@@ -131,7 +135,12 @@ const useUpdateSpotNegotiationRate = ({
 								setValue(prefill, val[0]?.[prefill]);
 							}
 							if (service?.service === 'air_freight') {
-								mandatoryFreightCodes = [{ code: 'BAS', min_price: (val[0]?.min_price).toString(), price: (val[0]?.min_price).toString() }];
+								mandatoryFreightCodes = [
+									{
+										code      : 'BAS',
+										min_price : (val[0].min_price).toString(),
+										price     : (val[0].min_price).toString(),
+									}];
 							}
 						});
 					} else if (typeof (val) === 'object') {
