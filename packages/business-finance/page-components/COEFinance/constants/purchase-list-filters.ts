@@ -1,11 +1,16 @@
-function filtersData(statsData) {
+interface StatsDataInterface {
+	INITIATED?:string
+	FINANCE_ACCEPTED?:string
+	ON_HOLD?:string
+}
+function filtersData(statsData:StatsDataInterface) {
 	const { INITIATED = '', FINANCE_ACCEPTED = '', ON_HOLD = '' } = statsData || {};
 
 	return [
 		{
 			label : 'Initiated',
 			value : 'INITIATED',
-			badge : INITIATED,
+			badge : INITIATED || '0',
 		},
 		{
 			label : 'On Hold',
@@ -15,7 +20,7 @@ function filtersData(statsData) {
 		{
 			label : 'Approved',
 			value : 'FINANCE_ACCEPTED',
-			badge : FINANCE_ACCEPTED,
+			badge : FINANCE_ACCEPTED || '0',
 		},
 
 	];

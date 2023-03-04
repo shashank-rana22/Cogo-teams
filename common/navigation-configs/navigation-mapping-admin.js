@@ -1997,6 +1997,63 @@ const navigationMappingAdmin = {
 		],
 		module_type: 'dashboards',
 	},
+	helios_dashboard: {
+		key         : 'helios_dashboard',
+		title       : 'Helios Dashboard',
+		isSubNavs   : true,
+		module_type : 'dashboards',
+		options     : [
+			{
+				key           : 'helios_dashboard-management',
+				title         : 'Helios Dashboard Management',
+				href          : '/helios-dashboard-management',
+				as            : '/helios-dashboard-management',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.helios_dashboard,
+			},
+			{
+				key           : 'helios_dashboard-view',
+				title         : 'Helios Dashboard',
+				href          : '/helios-dashboard',
+				as            : '/helios-dashboard',
+				type          : 'link',
+				main_apis     : ['list_dashboard_widgets', 'get_widget_data'],
+				possible_apis : apis.helios_dashboard,
+			},
+		],
+	},
+	performance_management: {
+		key         : 'performance_management',
+		title       : 'Performance Management',
+		isSubNavs   : true,
+		module_type : 'dashboards',
+		main_apis   : ['list_user_feedbacks'],
+		icon        : IcMPartnersCogoport,
+		options     : [
+			{
+				key           : 'performance_management-user_dashboard',
+				title         : 'User Dashboard',
+				href          : '/v2/performance-management/user-dashboard',
+				as            : '/v2/performance-management/user-dashboard',
+				possible_apis : apis.performance_management,
+			},
+			{
+				key           : 'performance_management-manager_dashboard',
+				title         : 'Manager Dashboard',
+				href          : '/v2/performance-management/manager-dashboard',
+				as            : '/v2/performance-management/manager-dashboard',
+				possible_apis : apis.performance_management,
+			},
+			{
+				key           : 'performance_management-hr_dashboard',
+				title         : 'HR Dashboard',
+				href          : '/v2/performance-management/hr-dashboard',
+				as            : '/v2/performance-management/hr-dashboard',
+				possible_apis : apis.performance_management,
+			},
+		],
+	},
 };
 
 export default navigationMappingAdmin;
