@@ -35,20 +35,19 @@ const useGetRates = ({ service, selectedRate }) => {
 					destination_port_id    : selectedRate?.destination_port_id,
 					origin_airport_id      : selectedRate?.origin_airport_id,
 					destination_airport_id : selectedRate?.destination_airport_id,
-					origin_main_port_id    : selectedRate?.origin_main_port_id
-						? selectedRate?.origin_main_port_id : undefined,
-					destination_main_port_id: selectedRate?.destination_main_port_id
-						? selectedRate?.destination_main_port_id : undefined,
+					origin_main_port_id:
+						selectedRate?.origin_main_port_id ? selectedRate?.origin_main_port_id : undefined,
+					destination_main_port_id:
+						selectedRate?.destination_main_port_id ? selectedRate?.destination_main_port_id : undefined,
 					container_size      : selectedRate?.container_size,
 					container_type      : selectedRate?.container_type,
 					commodity           : selectedRate?.commodity ? selectedRate?.commodity : undefined,
 					service_provider_id : selectedRate?.service_provider_id,
-					shipping_line_id    : selectedRate?.shipping_line_id
-						? selectedRate?.shipping_line_id : undefined,
-					importer_exporter_id: selectedRate?.importer_exporter_id
-						? selectedRate?.importer_exporter_id : undefined,
-					cogo_entity_id: selectedRate?.cogo_entity_id
-						? selectedRate?.cogo_entity_id : undefined,
+					shipping_line_id:
+						selectedRate?.shipping_line_id ? selectedRate?.shipping_line_id : undefined,
+					importer_exporter_id:
+						selectedRate?.importer_exporter_id ? selectedRate?.importer_exporter_id : undefined,
+					cogo_entity_id          : selectedRate?.cogo_entity_id ? selectedRate?.cogo_entity_id : undefined,
 					origin_location_id      : selectedRate?.origin_location_id,
 					destination_location_id : selectedRate?.destination_location_id,
 					airline_id              : selectedRate?.airline_id,
