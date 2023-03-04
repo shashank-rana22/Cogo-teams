@@ -4,10 +4,10 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import controls from '../../../../../../../configurations/create-instant-reply';
-import { statusMapping, statusColorMapping } from '../../../../../../../constants/index';
-import useCreateCommunicationTemplate from '../../../../../../../hooks/useCreateCommunicationTemplate';
-import useListTemplate from '../../../../../../../hooks/useListTemplates';
+import controls from '../../configurations/create-instant-reply';
+import { statusMapping, statusColorMapping } from '../../constants';
+import useCreateCommunicationTemplate from '../../hooks/useCreateCommunicationTemplate';
+import useListTemplate from '../../hooks/useListTemplates';
 
 import styles from './styles.module.css';
 
@@ -16,6 +16,7 @@ function Templates({
 	openCreateReply,
 	setOpenCreateReply = () => {},
 	data = {},
+	isomniChannelAdmin = false,
 }) {
 	const { sendCommunicationTemplate, communicationLoading } = data || {};
 	const [showPreview, setShowPreview] = useState(false);
@@ -39,6 +40,7 @@ function Templates({
 		loading,
 		refetch,
 	} = useListTemplate({ activeTab });
+
 	const { createTemplate, loading: CreateLoading } = useCreateCommunicationTemplate({
 		reset: () => {
 			reset({ title: '', content: '' });
@@ -62,7 +64,7 @@ function Templates({
 	};
 
 	const handleClick = () => {
-		sendCommunicationTemplate(templateName);
+		sendCommunicationTemplate({ templateName, type: 'whatsapp' });
 	};
 
 	function CreateReactComponent() {
@@ -159,14 +161,16 @@ function Templates({
 					</div>
 				</div>
 				<div className={styles.footer}>
-					<Button
-						themeType="accent"
-						size="md"
-						disabled={openCreateReply || showPreview}
-						onClick={() => setOpenCreateReply(true)}
-					>
-						+ Create Reply
-					</Button>
+					{isomniChannelAdmin && (
+						<Button
+							themeType="accent"
+							size="md"
+							disabled={openCreateReply || showPreview}
+							onClick={() => setOpenCreateReply(true)}
+						>
+							+ Create Reply
+						</Button>
+					)}
 				</div>
 			</div>
 			{openCreateReply && (

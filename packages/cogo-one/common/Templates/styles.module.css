@@ -58,7 +58,7 @@
 .create_footer {
 	display: flex;
 	justify-content: flex-end;
-	padding: 10px;
+	padding: 10px 0;
 }
 
 .create_container {
@@ -80,7 +80,10 @@
 	:global {
 		.ui_input_container {
 			min-height: 230px;
-			font-family: Poppins, sans-serif;
+		}
+
+		.ui_input_control {
+			font-family: Poppins, sans-serif !important;
 		}
 	}
 }

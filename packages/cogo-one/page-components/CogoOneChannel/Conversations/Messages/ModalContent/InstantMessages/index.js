@@ -1,11 +1,12 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
+import Templates from '../../../../../../common/Templates';
+
 import InstantReplies from './InstantReplies';
 import styles from './styles.module.css';
-import Templates from './Templates';
 
-function InstantRepliesModal({ data = {} }) {
+function InstantRepliesModal({ data = {}, isomniChannelAdmin = false }) {
 	const [activeTab, setActiveTab] = useState('quick_reply');
 	const [openCreateReply, setOpenCreateReply] = useState(false);
 
@@ -52,7 +53,7 @@ function InstantRepliesModal({ data = {} }) {
 						activeTab={activeTab}
 						openCreateReply={openCreateReply}
 						setOpenCreateReply={setOpenCreateReply}
-						setActiveTab={setActiveTab}
+						isomniChannelAdmin={isomniChannelAdmin}
 					/>
 				</TabPanel>
 

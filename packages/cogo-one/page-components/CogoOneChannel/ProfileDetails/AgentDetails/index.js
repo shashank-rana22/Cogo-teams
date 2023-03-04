@@ -6,6 +6,7 @@ import { useState } from 'react';
 import EmptyState from '../../../../common/EmptyState';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetUser from '../../../../hooks/useGetUser';
+import hideDetails from '../../../../utils/hideDetails';
 
 import ConversationContainer from './ConversationContainer';
 import styles from './styles.module.css';
@@ -18,6 +19,7 @@ function AgentDetails({
 	formattedMessageData = {},
 	customerId = '',
 	updateLeaduser = () => {},
+	isomniChannelAdmin = false,
 }) {
 	const { user_details = null, user_type } = activeMessageCard || {};
 	const {
@@ -145,7 +147,9 @@ function AgentDetails({
 							<div className={styles.name}>
 								{name || 'unknown user'}
 							</div>
-							<div className={styles.email}>{userEmail || '-'}</div>
+							<div className={styles.email}>
+								{userEmail ? hideDetails({ data: userEmail, type: 'mail' }) : ''}
+							</div>
 						</>
 					)}
 				</div>
@@ -198,7 +202,13 @@ function AgentDetails({
 			{(mobile_no || user_number) && (
 				<>
 					<div className={styles.conversation_title}>Other Channels</div>
-					<ConversationContainer userData={userData} noData={!leadUserId && !userId} loading={loading} />
+					<ConversationContainer
+						userData={userData}
+						noData={!leadUserId && !userId}
+						loading={loading}
+						activeCardData={DATA_MAPPING[activeTab] || {}}
+						isomniChannelAdmin={isomniChannelAdmin}
+					/>
 				</>
 			)}
 		</>

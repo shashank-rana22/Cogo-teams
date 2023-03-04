@@ -1,62 +1,90 @@
-import { Toast, Modal, Button, RTE, Input } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
 import { useState } from 'react';
 
-import { TOOLBARCONFIG } from '../../../../../constants';
-import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
+import Templates from '../../../../../common/Templates';
+import useSendCommunicationTemplate from '../../../../../hooks/useSendCommunicationTemplate';
 
+import ComposeEmail from './ComposeEmail';
 import styles from './styles.module.css';
 
-function CommunicationModal({ setModalType = () => {}, receiverEmail = '' }) {
+function CommunicationModal({
+	setModalType = () => {},
+	userData = {},
+	modalType = '',
+	activeCardData = {},
+	isomniChannelAdmin = false,
+}) {
+	const COMPONENT_MAPPING = {
+		email    : ComposeEmail,
+		whatsapp : Templates,
+	};
+	const { userId, name, leadUserId } = activeCardData;
+	const formattedData = {
+		user_name    : name,
+		user_id      : userId,
+		lead_user_id : leadUserId,
+	};
 	const closeModal = () => {
 		setModalType(null);
 	};
 
-	const [emailState, setEmailState] = useState({
-		subject : '',
-		body    : '',
-	});
+	const { sendCommunicationTemplate, loading } = useSendCommunicationTemplate(
+		{
+			formattedData,
+			isOtherChannels : true,
+			callbackfunc    : closeModal,
+		},
+	);
 
-	const handleSend = () => {
-		const isEmpty = getFormatedEmailBody({ emailState });
-		if (isEmpty) {
-			Toast.error("You can't send a blank email");
-		}
+	const sendQuickCommuncation = ({
+		otherChannelRecipient = '',
+		type = '',
+		template_name = '',
+		variables = {},
+	}) => {
+		sendCommunicationTemplate({
+			template_name,
+			otherChannelRecipient,
+			variables,
+			type,
+		});
 	};
 
+	const [openCreateReply, setOpenCreateReply] = useState(false);
+	const ActiveModalComp = COMPONENT_MAPPING[modalType] || null;
+
+	const whatsappTemplatesData = {
+		sendCommunicationTemplate : sendQuickCommuncation,
+		communicationLoading      : loading,
+	};
 	return (
-		<Modal show size="md" onClose={closeModal} onClickOutside={closeModal} scroll={false}>
-			<Modal.Header title={<div className={styles.header}>COMPOSE EMAIL</div>} />
-			<Modal.Body>
-				<Input
-					value={receiverEmail}
-					disabled
-					size="md"
-					className={styles.styled_input}
+		<Modal
+			show
+			size={modalType === 'whatsapp' ? 'xs' : 'md'}
+			onClose={closeModal}
+			onClickOutside={closeModal}
+			scroll={false}
+		>
+			<Modal.Header
+				title={(
+					<div className={styles.header}>
+						{modalType === 'whatsapp'
+							? 'Send Whatsapp Template'
+							: 'Compose Email'}
+					</div>
+				)}
+			/>
+			{ActiveModalComp && (
+				<ActiveModalComp
+					closeModal={closeModal}
+					openCreateReply={openCreateReply}
+					setOpenCreateReply={setOpenCreateReply}
+					userData={userData}
+					sendQuickCommuncation={sendQuickCommuncation}
+					isomniChannelAdmin={isomniChannelAdmin}
+					data={whatsappTemplatesData}
 				/>
-				<Input
-					value={emailState?.subject}
-					onChange={(val) => setEmailState((p) => ({ ...p, subject: val }))}
-					size="md"
-					placeholder="subject"
-					className={styles.styled_input}
-				/>
-				<RTE
-					value={emailState?.body}
-					onChange={(val) => setEmailState((p) => ({ ...p, body: val }))}
-					toolbarConfig={TOOLBARCONFIG}
-					className={styles.styled_editor}
-				/>
-			</Modal.Body>
-			<Modal.Footer>
-				<div className={styles.footer_buttons}>
-					<Button size="md" themeType="tertiary" onClick={closeModal}>
-						cancel
-					</Button>
-					<Button size="md" themeType="accent" onClick={handleSend}>
-						Send
-					</Button>
-				</div>
-			</Modal.Footer>
+			)}
 		</Modal>
 	);
 }

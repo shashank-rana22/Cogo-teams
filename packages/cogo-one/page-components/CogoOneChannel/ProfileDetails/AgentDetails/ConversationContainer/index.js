@@ -8,64 +8,75 @@ import CommunicationModal from '../CommunicationModal';
 
 import styles from './styles.module.css';
 
-function ConversationContainer({ userData, loading, noData = false }) {
+function ConversationContainer({
+	userData,
+	loading,
+	noData = false,
+	activeCardData = {},
+	isomniChannelAdmin = false,
+}) {
 	const [modalType, setModalType] = useState(null);
 	if (isEmpty(userData) || noData) {
-		return (
-			<div className={styles.empty}>No data Found...</div>
-		);
+		return <div className={styles.empty}>No data Found...</div>;
 	}
 	return (
 		<>
-			{loading ? (
-				[...Array(2)].map(() => (
-					<div className={styles.container}>
-						<div className={styles.icon_type}>
-							<Placeholder type="circle" radius="30px" />
+			{loading ? ([...Array(2)].map(() => (
+				<div className={styles.container}>
+					<div className={styles.icon_type}>
+						<Placeholder type="circle" radius="30px" />
+					</div>
+					<div className={styles.details}>
+						<div className={styles.header}>
+							<div className={styles.name}>
+								<Placeholder
+									height="10px"
+									width="160px"
+									margin="0px 0px 0px 0px"
+								/>
+							</div>
 						</div>
-						<div className={styles.details}>
-							<div className={styles.header}>
-								<div className={styles.name}>
-									<Placeholder height="10px" width="160px" margin="0px 0px 0px 0px" />
-								</div>
-							</div>
-							<div className={styles.organization}>
-								<Placeholder height="10px" width="80px" margin="10px 0px 0px 0px" />
-							</div>
+						<div className={styles.organization}>
+							<Placeholder
+								height="10px"
+								width="80px"
+								margin="10px 0px 0px 0px"
+							/>
 						</div>
 					</div>
-				))
+				</div>
+			))
 			) : (
 				<div className={styles.wrapper}>
-					{OtherChannelsConfig.map(({
-						name,
-						icon, value_type, channel_type,
-					}) => !isEmpty(userData?.[name]) && (
-						<div
-							role="presentation"
-							className={styles.contacts_container}
-							onClick={() => {
-								if (channel_type === 'email') {
-									setModalType('email');
-								}
-							}}
-						>
-							<div className={styles.container}>
-								<div className={styles.icon_type}>{icon}</div>
-								<div className={styles.details}>
-									<div className={styles.header}>
-										<div className={styles.name}>{userData?.name || ''}</div>
+					{OtherChannelsConfig
+						.map(({ name, icon, value_type, channel_type }) => !isEmpty(userData?.[name]) && (
+							<div
+								role="presentation"
+								className={styles.contacts_container}
+								onClick={() => setModalType(channel_type)}
+							>
+								<div className={styles.container}>
+									<div className={styles.icon_type}>
+										{icon}
 									</div>
-									<div className={styles.organization}>
-										{hideDetails({
-											data : userData?.[name],
-											type : value_type,
-										})}
+									<div className={styles.details}>
+										<div className={styles.header}>
+											<div className={styles.name}>
+												{userData?.name || ''}
+											</div>
+										</div>
+										<div
+											className={styles.organization}
+										>
+											{hideDetails({
+												data : userData?.[name],
+												type : value_type,
+											})}
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					))}
+						))}
 				</div>
 			)}
 
@@ -73,10 +84,9 @@ function ConversationContainer({ userData, loading, noData = false }) {
 				<CommunicationModal
 					modalType={modalType}
 					setModalType={setModalType}
-					receiverEmail={hideDetails({
-						data : userData?.email,
-						type : 'mail',
-					})}
+					userData={userData}
+					activeCardData={activeCardData}
+					isomniChannelAdmin={isomniChannelAdmin}
 				/>
 			)}
 		</>

@@ -32,7 +32,7 @@ function Messages({
 	const [uploading, setUploading] = useState({});
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
-
+	const closeModal = () => setOpenModal({ type: null, data: {} });
 	let activeChatCollection;
 
 	const {
@@ -46,7 +46,7 @@ function Messages({
 	const {
 		sendCommunicationTemplate,
 		loading: communicationLoading,
-	} = useSendCommunicationTemplate({ formattedData, setOpenModal });
+	} = useSendCommunicationTemplate({ formattedData, callbackfunc: closeModal, isOtherChannels: false });
 
 	const hasPermissionToEdit = !showBotMessages && (userId === support_agent_id || isomniChannelAdmin);
 
@@ -69,8 +69,6 @@ function Messages({
 			`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
 		);
 	}
-
-	const closeModal = () => setOpenModal({ type: null, data: {} });
 
 	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions } = useSendChat({
 		firestore,
@@ -157,6 +155,7 @@ function Messages({
 						loadingPrevMessages={loadingPrevMessages}
 						sendCommunicationTemplate={sendCommunicationTemplate}
 						communicationLoading={communicationLoading}
+						closeModal={closeModal}
 					/>
 				</div>
 			</div>
@@ -184,6 +183,7 @@ function Messages({
 						data={openModal?.data || {}}
 						assignLoading={assignLoading}
 						loading={loading}
+						isomniChannelAdmin={isomniChannelAdmin}
 					/>
 				</Modal>
 			)}
