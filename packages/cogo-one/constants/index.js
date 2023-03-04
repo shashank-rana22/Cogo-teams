@@ -171,3 +171,8 @@ export const ACCOUNT_TYPE = {
 	importer_exporter : 'Importer/Exporter',
 	service_provider  : 'Service Provider',
 };
+
+export const ACCOUNT_TYPE_MAPPING = {
+	importer_exporter : 'twin_importer_exporter_id',
+	service_provider  : 'twin_service_provider_id',
+};

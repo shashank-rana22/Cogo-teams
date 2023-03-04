@@ -10490,6 +10490,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'list_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	helios_dashboard: [
 		{
@@ -10554,4 +10559,5 @@ const partner = {
 		},
 	],
 };
+
 export default partner;
