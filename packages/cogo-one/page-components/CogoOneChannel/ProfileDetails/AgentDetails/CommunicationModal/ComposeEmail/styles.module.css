@@ -5,8 +5,9 @@
 
 .styled_editor {
 	:global {
-		/* stylelint-disable-next-line selector-class-pattern */
-		.RichTextEditor__root___2QXK- { min-height: 400px; }
+		.notranslate {
+			min-height: 300px;
+		}
 	}
 }
 
