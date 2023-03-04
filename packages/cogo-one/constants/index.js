@@ -181,7 +181,7 @@ export const TOOLBARCONFIG = {
 		'HISTORY_BUTTONS',
 	],
 	INLINE_STYLE_BUTTONS: [
-		{ label: 'Bold', style: 'BOLD', className: 'custom-css-class' },
+		{ label: 'Bold', style: 'BOLD', className: 'custom_css_class' },
 		{ label: 'Italic', style: 'ITALIC' },
 		{ label: 'Underline', style: 'UNDERLINE' },
 	],

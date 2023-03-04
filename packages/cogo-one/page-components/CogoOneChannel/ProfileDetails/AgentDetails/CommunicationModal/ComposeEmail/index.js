@@ -15,8 +15,8 @@ function ComposeEmail({ closeModal = () => {}, userData = {}, sendQuickCommuncat
 
 	const handleSend = () => {
 		const isEmpty = getFormatedEmailBody({ emailState });
-		if (isEmpty) {
-			Toast.error("You can't send a blank email");
+		if (isEmpty || !emailState?.subject) {
+			Toast.error('Both Subject and Body are Requied');
 		} else {
 			sendQuickCommuncation({
 				template_name         : 'send_email_template',
@@ -39,7 +39,7 @@ function ComposeEmail({ closeModal = () => {}, userData = {}, sendQuickCommuncat
 					value={emailState?.subject}
 					onChange={(val) => setEmailState((p) => ({ ...p, subject: val }))}
 					size="md"
-					placeholder="subject"
+					placeholder="Enter your Subject here..."
 					className={styles.styled_input}
 				/>
 				<RTE
