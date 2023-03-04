@@ -12,7 +12,7 @@ const useListDepartments = () => {
 		try {
 			trigger();
 		} catch (e) {
-			Toast.error(e.response.data.error?.toString());
+			Toast.error(e.response?.data.error?.toString());
 		}
 	};
 

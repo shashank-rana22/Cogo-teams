@@ -36,7 +36,7 @@ const useAddFeedbackQuestion = () => {
 
 			return null;
 		} catch (e) {
-			Toast.error(e.response.data.error?.toString());
+			Toast.error(e.response?.data.error?.toString());
 		}
 		return null;
 	};

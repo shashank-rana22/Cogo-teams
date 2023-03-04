@@ -51,7 +51,7 @@ const useCreateUserFeedback = ({
 			Toast.success('Feedback Created Successfully');
 			setRefetchReportees(true);
 		} catch (e) {
-			Toast.error(e.response.data.error?.toString());
+			Toast.error(e.response?.data.error?.toString());
 		}
 	};
 

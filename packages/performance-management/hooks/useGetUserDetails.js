@@ -12,7 +12,7 @@ const useGetUserDetails = ({ userId = '' }) => {
 		try {
 			trigger({ params: { UserID: userId } });
 		} catch (e) {
-			Toast.error(e.response.data.error?.toString());
+			Toast.error(e.response?.data.error?.toString());
 		}
 	};
 

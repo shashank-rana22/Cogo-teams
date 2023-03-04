@@ -17,7 +17,7 @@ const useManagerListItem = ({ item, searchValue = '', pageParams = {} }) => {
 
 	const [{ data = {}, loading = false }] = useIrisRequest({
 		method : 'get',
-		url    : 'list_user_feedbacks',
+		url    : 'get_iris_list_user_feedbacks',
 		params,
 	}, { manual: false });
 

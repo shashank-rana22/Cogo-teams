@@ -22,7 +22,7 @@ const useListReportees = ({
 		try {
 			await trigger({ params });
 		} catch (e) {
-			Toast.error(e.response.data.error?.toString());
+			Toast.error(e.response?.data.error?.toString());
 		}
 	};
 	const setPage = (p) => { setParams({ ...params, Page: p }); };

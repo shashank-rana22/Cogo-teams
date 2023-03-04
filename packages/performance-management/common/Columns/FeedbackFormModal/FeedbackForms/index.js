@@ -287,7 +287,7 @@ function FeedbackForms({
 					size="md"
 					themeType="primary"
 					disabled={action === 'show'}
-					onClick={onSubmit({ questionsToShow, showForm })}
+					onClick={() => onSubmit({ questionsToShow, showForm })}
 				>
 					Submit
 				</Button>

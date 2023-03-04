@@ -42,7 +42,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 			setFiles({});
 			setOpenUploadModal(false);
 		} catch (e) {
-			Toast.error(e.response.data.error?.toString());
+			Toast.error(e.response?.data.error?.toString());
 		}
 	};
 

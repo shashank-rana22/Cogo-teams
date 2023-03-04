@@ -17,7 +17,7 @@ const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
 			setNotifyModal(false);
 			Toast.success(`${manager_count} Managers Notified...`);
 		} catch (e) {
-			Toast.error(e.response.data.error?.toString());
+			Toast.error(e.response?.data.error?.toString());
 		}
 	};
 
