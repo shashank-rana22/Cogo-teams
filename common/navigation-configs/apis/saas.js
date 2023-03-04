@@ -1544,6 +1544,22 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api         : 'get_saas_faq',
+			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
+		},
 	],
 	app_saas_trade_partner: [
 		{
