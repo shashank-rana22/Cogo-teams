@@ -27,11 +27,12 @@ irisRequest.interceptors.request.use((oldConfig) => {
 	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
 
 	const apiPath =	newConfig.url.split('/')[1] || newConfig.url.split('/')[0];
+	const irisApiPath = apiPath.split('iris_')[1];
 
 	const serviceName = microServices[apiPath];
 
 	if (serviceName) {
-		newConfig.url = `/${serviceName}/${apiPath}`;
+		newConfig.url = `/${serviceName}/${irisApiPath}`;
 	}
 
 	return {
