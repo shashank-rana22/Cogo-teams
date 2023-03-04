@@ -87,6 +87,7 @@ function CommunicationModal({
 					sendQuickCommuncation={sendQuickCommuncation}
 					isomniChannelAdmin={isomniChannelAdmin}
 					data={whatsappTemplatesData}
+					loading={loading}
 				/>
 			)}
 		</Modal>

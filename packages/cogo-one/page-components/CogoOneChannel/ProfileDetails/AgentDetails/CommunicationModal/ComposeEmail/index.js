@@ -7,7 +7,7 @@ import hideDetails from '../../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
-function ComposeEmail({ closeModal = () => {}, userData = {}, sendQuickCommuncation = () => {} }) {
+function ComposeEmail({ closeModal = () => {}, userData = {}, sendQuickCommuncation = () => {}, loading }) {
 	const [emailState, setEmailState] = useState({
 		subject : '',
 		body    : '',
@@ -54,7 +54,7 @@ function ComposeEmail({ closeModal = () => {}, userData = {}, sendQuickCommuncat
 					<Button size="md" themeType="tertiary" onClick={closeModal}>
 						cancel
 					</Button>
-					<Button size="md" themeType="accent" onClick={handleSend}>
+					<Button size="md" themeType="accent" onClick={handleSend} loading={loading}>
 						Send
 					</Button>
 				</div>

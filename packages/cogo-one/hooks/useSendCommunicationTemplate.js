@@ -56,8 +56,7 @@ function useSendCommunicationTemplate({
 					source        : 'CogoOne:AdminPlatform',
 					variables:
 					type === 'email' ? variables : { user_first_name: user_name?.split(' ')[0] || 'User' },
-					sender         : id,
-					sender_user_id : id,
+					sender_user_id: id,
 
 				},
 			});
