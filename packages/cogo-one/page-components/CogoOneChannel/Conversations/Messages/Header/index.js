@@ -5,7 +5,7 @@ import { useState } from 'react';
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import UserAvatar from '../../../../../common/UserAvatar';
 import { PLATFORM_MAPPING } from '../../../../../constants';
-import HideDetails from '../../../../../utils/hideDetails';
+import hideDetails from '../../../../../utils/hideDetails';
 
 import Assignes from './Assignes';
 import TagsPopOver from './HeaderFuncs';
@@ -30,6 +30,7 @@ function Header({
 	support_agent_id = null,
 	showBotMessages = false,
 	userId = '',
+	isomniChannelAdmin = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const {
@@ -42,12 +43,13 @@ function Header({
 		if (user_name?.includes('anonymous')) {
 			return PLATFORM_MAPPING[user_type] || '';
 		}
-		const mobileNo = HideDetails({ data: mobile_no, type: 'number' });
-		return mobile_no ? `+${mobileNo}` : business_name;
+		return mobile_no
+			? `+${hideDetails({ data: mobile_no, type: 'number' })}`
+			: business_name;
 	};
-	const disableAssignButton = !hasPermissionToEdit && !showBotMessages;
+	const disableAssignButton = !isomniChannelAdmin;
 	const assignButtonAction = () => {
-		if (showBotMessages) {
+		if (showBotMessages && isomniChannelAdmin) {
 			const payload = {
 				agent_id        : userId,
 				allowed_to_chat : true,
@@ -80,7 +82,7 @@ function Header({
 						tagOptions={tagOptions}
 						hasPermissionToEdit={hasPermissionToEdit}
 					/>
-					<ShowContent list={chat_tags} showMorePlacement="right" />
+					<ShowContent list={chat_tags} showMorePlacement="right" hasPermissionToEdit={hasPermissionToEdit} />
 				</div>
 				<div className={cl`${styles.flex} ${disableAssignButton ? styles.disabled_button : ''}`}>
 					{!isEmpty(filteredSpectators)
@@ -99,7 +101,7 @@ function Header({
 						onClick={assignButtonAction}
 						loading={showBotMessages && assignLoading}
 					>
-						{showBotMessages ? 'Stop and Assign' : 'Assign'}
+						{(showBotMessages && isomniChannelAdmin) ? 'Stop and Assign' : 'Assign'}
 
 					</Button>
 				</div>

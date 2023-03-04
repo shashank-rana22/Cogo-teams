@@ -20,7 +20,7 @@ function LocalLabel({ label, field, setValue, values, service }) {
 	const allIds = (list || []).map((item) => item.id);
 
 	const content = (
-		<div>
+		<div className={styles.locals}>
 			{(list || []).map((item) => (
 				<div
 					className={styles.charge_item}
