@@ -82,7 +82,7 @@ function Header({
 						tagOptions={tagOptions}
 						hasPermissionToEdit={hasPermissionToEdit}
 					/>
-					<ShowContent list={chat_tags} showMorePlacement="right" />
+					<ShowContent list={chat_tags} showMorePlacement="right" hasPermissionToEdit={hasPermissionToEdit} />
 				</div>
 				<div className={cl`${styles.flex} ${disableAssignButton ? styles.disabled_button : ''}`}>
 					{!isEmpty(filteredSpectators)
