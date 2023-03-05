@@ -47,7 +47,7 @@ function Header({
 			? `+${hideDetails({ data: mobile_no, type: 'number' })}`
 			: business_name;
 	};
-	const disableAssignButton = !isomniChannelAdmin;
+	const disableAssignButton = showBotMessages && !isomniChannelAdmin;
 	const assignButtonAction = () => {
 		if (showBotMessages && isomniChannelAdmin) {
 			const payload = {
@@ -55,7 +55,7 @@ function Header({
 				allowed_to_chat : true,
 			};
 			assignChat(payload);
-		} else {
+		} else if (!showBotMessages) {
 			setOpenModal({
 				type : 'assign',
 				data : {
