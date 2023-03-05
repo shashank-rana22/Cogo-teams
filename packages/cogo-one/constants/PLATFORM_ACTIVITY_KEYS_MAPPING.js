@@ -1,4 +1,4 @@
-export const USER_ACTIVITY_KEYS_MAPPING = {
+export const PLATFORM_ACTIVITY_KEYS_MAPPING = {
 	fcl_freight: {
 		origin      : 'origin_port',
 		destination : 'destination_port',
@@ -48,13 +48,13 @@ export const USER_ACTIVITY_KEYS_MAPPING = {
 	},
 
 	ltl_freight: {
-		origin      : 'pickup',
-		destination : 'drop',
+		origin      : 'origin_location',
+		destination : 'destination_location',
 	},
 
 	ftl_freight: {
-		origin      : 'pickup',
-		destination : 'drop',
+		origin      : 'origin_location',
+		destination : 'destination_location',
 
 	},
 
