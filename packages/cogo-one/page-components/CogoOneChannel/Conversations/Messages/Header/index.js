@@ -55,7 +55,7 @@ function Header({
 				allowed_to_chat : true,
 			};
 			assignChat(payload);
-		} else {
+		} else if (!showBotMessages) {
 			setOpenModal({
 				type : 'assign',
 				data : {
