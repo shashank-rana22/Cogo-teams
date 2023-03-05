@@ -83,11 +83,28 @@ const useRoleList = () => {
 		setShowCreateRoleModal(!!value);
 	}, []);
 
+	const resetFilters = {
+		hierarchy_level    : undefined,
+		navigation         : undefined,
+		q                  : undefined,
+		role_functions     : undefined,
+		role_sub_functions : undefined,
+		stakeholder_id     : undefined,
+	};
+
 	const onChangeFilters = (values) => {
 		setFilters((previousState) => ({
 			...getFilter(null),
 			...previousState,
 			...values,
+		}));
+	};
+
+	const onResetFilters = () => {
+		setFilters((previousState) => ({
+			...getFilter(undefined),
+			...previousState,
+			...resetFilters,
 		}));
 	};
 
@@ -266,6 +283,7 @@ const useRoleList = () => {
 		listAuthRolesApi: {
 			data, trigger, loading, error,
 		},
+		onResetFilters,
 		redirect,
 		stakeHolderType,
 		setStakeHolderType: handleSTChange,

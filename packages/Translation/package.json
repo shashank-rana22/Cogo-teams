@@ -4,13 +4,13 @@
   "description": "Package for Translation",
   "private": true,
   "dependencies": {
-    "@cogoport/components": "^1.0.316",
+    "@cogoport/components": "^1.0.359",
     "@cogoport/forms": "workspace:0.1.0",
-    "@cogoport/icons-react": "^1.0.57",
+    "@cogoport/icons-react": "^1.0.58",
     "@cogoport/next": "workspace:0.1.0",
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
-    "@cogoport/utils": "^1.2.2",
+    "@cogoport/utils": "^1.2.6",
     "react": "18.2.0"
   },
   "devDependencies": {

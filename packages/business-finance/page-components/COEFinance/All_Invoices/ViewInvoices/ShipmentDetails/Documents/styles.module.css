@@ -1,0 +1,12 @@
+.download {
+	cursor: pointer;
+}
+
+.list {
+	section {
+		header + div {
+			max-height: 600px;
+			overflow: scroll;
+		}
+	}
+}

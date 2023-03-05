@@ -5,7 +5,7 @@ import { useState } from 'react';
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import UserAvatar from '../../../../../common/UserAvatar';
 import { PLATFORM_MAPPING } from '../../../../../constants';
-import HideDetails from '../../../../../utils/hideDetails';
+import hideDetails from '../../../../../utils/hideDetails';
 
 import Assignes from './Assignes';
 import TagsPopOver from './HeaderFuncs';
@@ -28,6 +28,9 @@ function Header({
 	activeMessageCard,
 	tagOptions = [],
 	support_agent_id = null,
+	showBotMessages = false,
+	userId = '',
+	isomniChannelAdmin = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const {
@@ -40,8 +43,29 @@ function Header({
 		if (user_name?.includes('anonymous')) {
 			return PLATFORM_MAPPING[user_type] || '';
 		}
-		const mobileNo = HideDetails({ data: mobile_no, type: 'number' });
-		return mobile_no ? `+${mobileNo}` : business_name;
+		return mobile_no
+			? `+${hideDetails({ data: mobile_no, type: 'number' })}`
+			: business_name;
+	};
+	const disableAssignButton = !isomniChannelAdmin;
+	const assignButtonAction = () => {
+		if (showBotMessages && isomniChannelAdmin) {
+			const payload = {
+				agent_id        : userId,
+				allowed_to_chat : true,
+			};
+			assignChat(payload);
+		} else {
+			setOpenModal({
+				type : 'assign',
+				data : {
+					closeModal,
+					assignLoading,
+					assignChat,
+					support_agent_id,
+				},
+			});
+		}
 	};
 	return (
 		<div className={styles.container}>
@@ -58,9 +82,9 @@ function Header({
 						tagOptions={tagOptions}
 						hasPermissionToEdit={hasPermissionToEdit}
 					/>
-					<ShowContent list={chat_tags} showMorePlacement="right" />
+					<ShowContent list={chat_tags} showMorePlacement="right" hasPermissionToEdit={hasPermissionToEdit} />
 				</div>
-				<div className={cl`${styles.flex} ${!hasPermissionToEdit ? styles.disabled_button : ''}`}>
+				<div className={cl`${styles.flex} ${disableAssignButton ? styles.disabled_button : ''}`}>
 					{!isEmpty(filteredSpectators)
 					&& <Assignes filteredSpectators={filteredSpectators} />}
 					{activeAgentName
@@ -72,19 +96,12 @@ function Header({
 					<Button
 						themeType="secondary"
 						size="md"
-						disabled={!hasPermissionToEdit}
+						disabled={disableAssignButton}
 						className={styles.styled_button}
-						onClick={() => setOpenModal({
-							type : 'assign',
-							data : {
-								closeModal,
-								assignLoading,
-								assignChat,
-								support_agent_id,
-							},
-						})}
+						onClick={assignButtonAction}
+						loading={showBotMessages && assignLoading}
 					>
-						Assign
+						{(showBotMessages && isomniChannelAdmin) ? 'Stop and Assign' : 'Assign'}
 
 					</Button>
 				</div>

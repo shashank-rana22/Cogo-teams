@@ -51,10 +51,11 @@ import {
 	IcMDashboard,
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
-
+	IcMFaq,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
+import business_finance from './apis/business-finance-apis';
 
 const navigationMappingAdmin = {
 	things_to_do: {
@@ -431,6 +432,12 @@ const navigationMappingAdmin = {
 				as    : '/rate-management/air-customs',
 				type  : 'link',
 			},
+			{
+				title : 'Rails Domestic',
+				href  : '/rate-management/rails-domestic',
+				as    : '/rate-management/rails-domestic',
+				type  : 'link',
+			},
 		],
 		module_type: 'crm',
 	},
@@ -763,7 +770,17 @@ const navigationMappingAdmin = {
 		title     : 'Business Finance',
 		icon      : IcMBusinessFinance,
 		isSubNavs : true,
+		main_apis : ['get_purchase_payment_upload_list'],
 		options   : [
+			{
+				key           : 'business_finance-coe_finance',
+				title         : ' COE Finance',
+				href          : '/v2/business-finance/coe-finance/[active_tab]',
+				as            : '/v2/business-finance/coe-finance/dashboard',
+				icon          : IcMProductCodeMapping,
+				main_apis     : [],
+				possible_apis : [...business_finance.coeFinance],
+			},
 			{
 				key           : 'business_finance-account_payables',
 				title         : 'AP',
@@ -1960,6 +1977,108 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		main_apis     : [],
 		possible_apis : apis.contracts,
+	},
+	cogo_academy: {
+		key       : 'cogo_academy',
+		title     : 'Cogo Academy',
+		isSubNavs : true,
+		icon      : IcMFaq,
+		options   : [
+			{
+				key           : 'cogo_academy-create_faq',
+				title         : 'Creator Management System',
+				href          : '/v2/learning/faq/create',
+				as            : '/v2/learning/faq/create',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.create_faq,
+			},
+			{
+				key           : 'cogo_academy-faq',
+				title         : 'FAQs',
+				href          : '/v2/learning/faq',
+				as            : '/v2/learning/faq',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.faq,
+			},
+		],
+		module_type: 'crm',
+	},
+	inventory_management: {
+		key       : 'inventory_management',
+		title     : 'Inventory Management',
+		icon      : IcMRateManagement,
+		isSubNavs : true,
+		options   : [
+			{
+				key           : 'inventory_management-rail',
+				title         : 'Rail',
+				href          : '/inventory-management/rail',
+				as            : '/inventory-management/rail',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.inventory_management,
+			},
+		],
+		module_type: 'dashboards',
+	},
+	helios_dashboard: {
+		key         : 'helios_dashboard',
+		title       : 'Helios Dashboard',
+		isSubNavs   : true,
+		module_type : 'dashboards',
+		options     : [
+			{
+				key           : 'helios_dashboard-management',
+				title         : 'Helios Dashboard Management',
+				href          : '/helios-dashboard-management',
+				as            : '/helios-dashboard-management',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.helios_dashboard,
+			},
+			{
+				key           : 'helios_dashboard-view',
+				title         : 'Helios Dashboard',
+				href          : '/helios-dashboard',
+				as            : '/helios-dashboard',
+				type          : 'link',
+				main_apis     : ['list_dashboard_widgets', 'get_widget_data'],
+				possible_apis : apis.helios_dashboard,
+			},
+		],
+	},
+	performance_management: {
+		key         : 'performance_management',
+		title       : 'Performance Management',
+		isSubNavs   : true,
+		module_type : 'dashboards',
+		main_apis   : ['list_user_feedbacks'],
+		icon        : IcMPartnersCogoport,
+		options     : [
+			{
+				key           : 'performance_management-user_dashboard',
+				title         : 'User Dashboard',
+				href          : '/v2/performance-management/user-dashboard',
+				as            : '/v2/performance-management/user-dashboard',
+				possible_apis : apis.performance_management,
+			},
+			{
+				key           : 'performance_management-manager_dashboard',
+				title         : 'Manager Dashboard',
+				href          : '/v2/performance-management/manager-dashboard',
+				as            : '/v2/performance-management/manager-dashboard',
+				possible_apis : apis.performance_management,
+			},
+			{
+				key           : 'performance_management-hr_dashboard',
+				title         : 'HR Dashboard',
+				href          : '/v2/performance-management/hr-dashboard',
+				as            : '/v2/performance-management/hr-dashboard',
+				possible_apis : apis.performance_management,
+			},
+		],
 	},
 };
 

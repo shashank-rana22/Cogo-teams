@@ -8,26 +8,26 @@ import {
 } from '@cogoport/icons-react';
 
 export const SOURCE_ICON_MAPPING = {
-	whatsapp  : <IcCWhatsapp width={20} height={20} />,
-	facebook  : <IcCFacebook width={20} height={20} />,
-	instagram : <IcCInstagram width={20} height={20} />,
+	whatsapp  : <IcCWhatsapp width={25} height={25} />,
+	facebook  : <IcCFacebook width={25} height={25} />,
+	instagram : <IcCInstagram width={25} height={25} />,
 	email     : <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg"
 		alt=""
-		width="16px"
-		height="16px"
+		width="18px"
+		height="18px"
 	/>,
 	platform_chat: <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg"
 		alt=""
-		width="16px"
-		height="16px"
+		width="18px"
+		height="18px"
 	/>,
 	platform_notification: <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg"
 		alt=""
-		width="22px"
-		height="22px"
+		width="30px"
+		height="30px"
 	/>,
 
 };
@@ -149,4 +149,30 @@ export const PLACEHOLDER_MAPPING = {
 	shipment_id    : 'Select SID',
 	invoice        : 'Enter Invoice No',
 	onboarding_kyc : 'Enter Pan No',
+};
+
+export const DISLIKE_OPTIONS = [
+	{
+		label : 'Question not satisfactory',
+		value : 'Question not satisfactory',
+	},
+	{
+		label : 'Answer not satisfactory',
+		value : 'Answer not satisfactory',
+	},
+];
+
+export const FEEDBACK_MAPPING = {
+	true  : 'liked',
+	false : 'disliked',
+};
+
+export const ACCOUNT_TYPE = {
+	importer_exporter : 'Importer/Exporter',
+	service_provider  : 'Service Provider',
+};
+
+export const ACCOUNT_TYPE_MAPPING = {
+	importer_exporter : 'twin_importer_exporter_id',
+	service_provider  : 'twin_service_provider_id',
 };
