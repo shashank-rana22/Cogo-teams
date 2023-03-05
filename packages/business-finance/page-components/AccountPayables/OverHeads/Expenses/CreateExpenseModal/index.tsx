@@ -5,6 +5,7 @@ import useListVendors from '../hooks/useListVendors';
 import Timeline from '../Timeline';
 
 import CreateExpenseForm from './CreateExpenseForm';
+import MailTemplate from './MailTemplate';
 import styles from './styles.module.css';
 
 interface Props {
@@ -19,6 +20,7 @@ function CreateExpenseModal({
 	showModal = false,
 	createExpenseType = '',
 }:Props) {
+	const [mailModal, setMailModal] = useState(false);
 	const [recurringData, setRecurringData] = useState({
 		repeatEvery: 'week',
 	});
@@ -78,8 +80,19 @@ function CreateExpenseModal({
 						>
 							Save & Next
 						</Button>
-					) : <Button>Request Email</Button>}
+					) : <Button onClick={() => setMailModal(true)}>Request Email</Button>}
 			</Modal.Footer>
+
+			{mailModal 	&& (
+				<Modal size="lg" show={mailModal} onClose={() => setMailModal(false)} placement="top">
+					<Modal.Header title="Request Email Preview" />
+					<Modal.Body>
+						<MailTemplate
+							nonRecurringData={nonRecurringData}
+						/>
+					</Modal.Body>
+				</Modal>
+			)}
 		</Modal>
 	);
 }

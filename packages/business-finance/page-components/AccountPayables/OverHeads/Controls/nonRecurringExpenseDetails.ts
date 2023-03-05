@@ -1,10 +1,12 @@
 import { startCase } from '@cogoport/utils';
 
+import { MONTH_OPTIONS } from '../constants/MONTH_OPTIONS';
 import { officeLocations } from '../utils/officeLocations';
 
 interface FormDataInterface {
 	registrationNumber?: string,
 	entityObject?:{ id?:string },
+	periodOfTransaction?:string,
 }
 
 interface EntityInt {
@@ -121,23 +123,25 @@ export const nonRecurringExpenseDetails = ({
 					label          : 'Vendor Name*',
 					type           : 'asyncSelect',
 					asyncKey       : 'list_vendors',
-					onChange       : (item, obj) => handleVendorChange(obj),
+					onChange       : (item, obj:object) => handleVendorChange(obj),
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Vendor name',
 					span           : 2,
 				},
 				{
-					name  : 'invoiceDate',
-					label : 'Invoice Date*',
-					type  : 'datepicker',
-					span  : 1.5,
+					name                  : 'invoiceDate',
+					label                 : 'Invoice Date*',
+					type                  : 'datepicker',
+					isPreviousDaysAllowed : true,
+					span                  : 1.5,
 				},
 				{
-					name  : 'transactionDate',
-					label : 'Transaction Date*',
-					type  : 'datepicker',
-					span  : 1.5,
+					name                  : 'transactionDate',
+					label                 : 'Transaction Date*',
+					type                  : 'datepicker',
+					isPreviousDaysAllowed : true,
+					span                  : 1.5,
 				},
 				{
 					name           : 'periodOfTransaction',
@@ -147,20 +151,9 @@ export const nonRecurringExpenseDetails = ({
 					defaultOptions : false,
 					placeholder    : 'Select Month',
 					span           : 2,
-					options        : [
-						{ value: 'January', label: 'January' },
-						{ value: 'February', label: 'February' },
-						{ value: 'March', label: 'March' },
-						{ value: 'April', label: 'April' },
-						{ value: 'May', label: 'May' },
-						{ value: 'June', label: 'June' },
-						{ value: 'July', label: 'July' },
-						{ value: 'August', label: 'August' },
-						{ value: 'September', label: 'September' },
-						{ value: 'October', label: 'October' },
-						{ value: 'November', label: 'November' },
-						{ value: 'December', label: 'December' },
-					],
+					value          : formData?.periodOfTransaction,
+					onChange       : (month:string) => setFormData({ ...formData, periodOfTransaction: month }),
+					options        : MONTH_OPTIONS,
 				},
 				{
 					name           : 'cogoEntity',

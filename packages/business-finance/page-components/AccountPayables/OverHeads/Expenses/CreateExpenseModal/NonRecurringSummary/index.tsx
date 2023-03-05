@@ -1,3 +1,7 @@
+/* eslint-disable react/jsx-indent */
+import { startCase } from '@cogoport/utils';
+
+import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../../commons/utils/formatDate';
 
 import styles from './styles.module.css';
@@ -5,25 +9,37 @@ import styles from './styles.module.css';
 interface Data {
 	vendorName?: string,
 	transactionDate?: Date,
+	paymentMode?:string,
+	uploadedInvoice?:string,
+	periodOfTransaction?:string,
+	expenseCategory?:string,
+	expenseSubCategory?:string,
+	branch?:string,
 }
 
 interface Props {
-	nonRecurringData: Data,
+	nonRecurringData?: Data,
 }
 
 function NonRecurringSummary({ nonRecurringData }:Props) {
+	const {
+		periodOfTransaction,
+		vendorName, expenseCategory,
+		expenseSubCategory, branch, paymentMode,
+	} = nonRecurringData || {};
+
 	const summaryDataFirst = [
 		{
 			title : 'Vendor Name',
-			value : nonRecurringData?.vendorName || 'N/A',
+			value : vendorName || 'N/A',
 		},
 		{
 			title : 'Expense Category',
-			value : 'N/A',
+			value : expenseCategory || 'N/A',
 		},
 		{
 			title : 'Expense Sub-Category',
-			value : 'N/A',
+			value : expenseSubCategory || 'N/A',
 		},
 		{
 			title : 'Entity',
@@ -31,7 +47,7 @@ function NonRecurringSummary({ nonRecurringData }:Props) {
 		},
 		{
 			title : 'Branch ',
-			value : 'N/A',
+			value : branch || 'N/A',
 		},
 	];
 	const summaryDataSecond = [
@@ -45,16 +61,22 @@ function NonRecurringSummary({ nonRecurringData }:Props) {
 		},
 		{
 			title : 'Transaction Date',
-			value : <div>{formatDate(nonRecurringData?.transactionDate, 'dd/MMM/yy', {}, false) || 'N/A'}</div>,
+			value : <div>
+				{nonRecurringData?.transactionDate
+					? formatDate(nonRecurringData?.transactionDate, 'dd/MMM/yy', {}, false) : 'N/A'}
 
+           </div>,
 		},
 		{
 			title : 'Period',
-			value : <div>N/A</div>,
+			value : <div>
+				{periodOfTransaction ? startCase(periodOfTransaction) : 'N/A'}
+				{' '}
+           </div>,
 		},
 		{
 			title : 'Payment Mode ',
-			value : <div>N/A</div>,
+			value : startCase(paymentMode || '') || 'N/A',
 		},
 	];
 	const summaryDataThird = [
@@ -63,12 +85,19 @@ function NonRecurringSummary({ nonRecurringData }:Props) {
 			value : 'N/A',
 		},
 		{
-			title : 'Proof of Approval',
-			value : 'N/A',
-		},
-		{
 			title : 'Uploaded Documents',
-			value : 'N/A',
+			value : <div>
+				{nonRecurringData?.uploadedInvoice
+					? (
+						<a
+							href={nonRecurringData?.uploadedInvoice}
+							style={{ color: 'blue', textDecoration: 'underline', fontSize: '16px' }}
+						>
+							{showOverflowingNumber(nonRecurringData?.uploadedInvoice, 20)}
+						</a>
+					)
+					: 'N/A'}
+           </div>,
 		},
 	];
 	return (

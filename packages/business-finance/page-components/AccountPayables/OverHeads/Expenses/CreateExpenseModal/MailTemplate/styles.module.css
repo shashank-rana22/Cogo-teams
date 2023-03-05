@@ -1,0 +1,49 @@
+.container{
+    padding:0px 64px;
+    font-size: 12px;
+}
+
+.heading{
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.section{
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+.keys{
+    width: 16%;
+}
+
+.recipient_values{
+    width: 500px;
+}
+.subject{
+    width: 604px;
+}
+.heading_subject{
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.heading_body{
+    font-weight: 600;
+    margin-bottom: 8px;
+    margin-top: 12px
+}
+
+.button{
+    display: flex;
+    justify-content: end;
+    margin-right: 32px;
+}
+.file{
+    margin: 12px 0px;
+    padding: 8px;
+    background : #d9ffff;
+    width :16%;
+    border-radius:8px ;
+    text-decoration: underline;
+}

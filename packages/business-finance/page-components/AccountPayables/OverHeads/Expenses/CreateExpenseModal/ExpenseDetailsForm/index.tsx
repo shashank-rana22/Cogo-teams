@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import { getMonth } from '@cogoport/utils';
+import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../../../commons/Filters';
+import { months } from '../../../constants/months';
 import { nonRecurringExpenseDetails } from '../../../Controls/nonRecurringExpenseDetails';
 import { recurringExpenseDetails } from '../../../Controls/recurringExpenseDetails';
 import useListCogoEntities from '../../hooks/useListCogoEntities';
 
+interface FormData {
+	transactionDate?:string | Date,
+}
 interface Props {
-	formData:object,
+	formData:FormData,
 	setFormData:(p: object) => void,
 	createExpenseType:string,
 }
@@ -16,6 +21,17 @@ function ExpenseDetailsForm({ formData, setFormData, createExpenseType }:Props) 
 	const [subCategoryOptions, setSubCategoryOptions] = useState();
 	const [branchOptions, setBranchOptions] = useState();
 	const [entityOptions, setEntityOptions] = useState();
+
+	const date = formData?.transactionDate;
+
+	useEffect(() => {
+		if (date) {
+			setFormData({ ...formData, periodOfTransaction: months[getMonth(date) + 1] });
+		} else {
+			setFormData({ ...formData, periodOfTransaction: null });
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [date]);
 
 	const { entityList } = useListCogoEntities();
 
