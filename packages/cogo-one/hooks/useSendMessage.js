@@ -50,7 +50,7 @@ const useSendMessage = ({ channel_type = '' }) => {
 					service_id,
 					source         : 'CogoOne:AdminPlatform',
 					lead_user_id,
-					sender         : id,
+					sender         : channel_type === 'platform_chat' ? id : undefined,
 					sender_user_id : id,
 				},
 			});
