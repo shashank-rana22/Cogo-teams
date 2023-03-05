@@ -21,7 +21,7 @@ function TransactionalActivity({ transactional = {} }) {
 		<div>
 			{(list || []).map((item) => {
 				const services = item?.shipment_type;
-				const { origin = '', destination = '' } = USER_ACTIVITY_KEYS_MAPPING[services];
+				const { origin = '', destination = '' } = USER_ACTIVITY_KEYS_MAPPING[services] || {};
 
 				const {
 					created_at = '', serial_id, milestone_activity = [],
