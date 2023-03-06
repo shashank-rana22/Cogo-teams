@@ -61,8 +61,6 @@
     flex: 1;
 }
 
-
-
 .form_group:not(:first-child) { margin: 16px 0; }
 
 .label {
@@ -84,9 +82,13 @@
     width: 250px;
 }
 
-.field_array_container{
-	/* :global(.styles_list__TYei0){
-		flex: unset;
-		width: 150px;
-	} */
+.expertise_score_type{
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.description{
+	color:#221F20;
+	font-size: 12px;
+	margin: 4px 0px 16px;
 }

@@ -1,7 +1,7 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import useBadgeConfigurationList from '../../hooks/useBadgeConfigurationList';
@@ -10,12 +10,9 @@ import BadgeListItem from './BadgeListItem';
 import CreateBadge from './CreateBadge';
 import CreateMastery from './CreateMastery';
 import Header from './Header';
-import MasteryListItem from './MasteryListItem';
 import styles from './styles.module.css';
 
 function Badges() {
-	const emptyList = [];
-
 	const router = useRouter();
 
 	const onClickBack = () => {

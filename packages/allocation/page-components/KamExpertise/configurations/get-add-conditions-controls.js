@@ -3,7 +3,7 @@ const controls = [
 		name        : 'condition_type',
 		label       : 'Condition Parameter (event)',
 		placeholder : '',
-		type        : 'select',
+		type        : 'select', // Todo list-api from backend with async creatable select
 		options     : [
 			{ value: 'reactivation', label: 'Reactivation' },
 			{ value: 'enrichment', label: 'Enrichment' },
@@ -20,7 +20,7 @@ const controls = [
 		rules: {
 			required: 'Condition Parameter is required',
 		},
-		isClearable: true,
+		// isClearable: true,
 	},
 	{
 		name        : 'score_type',
@@ -35,7 +35,7 @@ const controls = [
 		rules: {
 			required: 'Score Type is required',
 		},
-		isClearable: true,
+		// isClearable: true,
 	},
 	{
 		name               : 'milestones',
@@ -95,14 +95,21 @@ const controls = [
 		type        : 'number',
 		label       : 'Score on Completion',
 		placeholder : '0',
-		// rules       : { required: 'Score on Completion is required' },
+		rules       : { required: 'Score on Completion is required' },
 	},
 	{
-		name        : 'score_on_completion',
+		name        : 'score_on_repetition',
 		type        : 'number',
 		label       : 'Score on Repetition',
 		placeholder : '0',
-		// rules       : { required: 'Score on Repetition is required' },
+		rules       : { required: 'Score on Repetition is required' },
+	},
+	{
+		name        : 'score_reduced_on_churn',
+		type        : 'number',
+		label       : 'Score reduced on churn',
+		placeholder : '0',
+		rules       : { required: 'Score on Repetition is required' },
 	},
 	{
 		name    : 'impact',
