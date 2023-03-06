@@ -48,8 +48,6 @@ function AccordianCards({
 	});
 	const router = useRouter();
 
-	console.log(dataCard, 'dataCard');
-
 	return (
 		<div>
 			<div className={styles.container}>
