@@ -53,9 +53,9 @@ function KamExpertiseScoreConfig() {
 
 	const { control, formState:{ errors = {} }, watch, handleSubmit } = useForm({
 		defaultValues: {
-			// condition_type : 'enrichment', // Todo based on expertise
-			// score_type     : 'absolute', // Todo based on expertise
-			milestones: [{
+			condition_type : 'enrichment', // Todo based on expertise
+			score_type     : 'absolute', // Todo based on expertise
+			milestones     : [{
 				milestone : '',
 				score     : '',
 			}],
