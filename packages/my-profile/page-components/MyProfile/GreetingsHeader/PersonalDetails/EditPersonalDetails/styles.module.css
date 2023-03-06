@@ -1,0 +1,29 @@
+.heading {
+	font-size: 16px;
+	font-weight: 500;
+	color: #000;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	padding: 24px 0 0;
+}
+
+.error_text {
+	color: red;
+}
+
+.label {
+	display: flex;
+	align-items: center;
+	padding-bottom: 4px;
+}
+
+.value {
+	:global {
+		.ui_select_display_container {
+			margin-right: 8px;
+		}
+	}
+}

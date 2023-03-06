@@ -28,6 +28,7 @@ const getCountries = async (callBack, path, baseUrl) => {
 			});
 		})
 		.on('error', (err) => {
+			// eslint-disable-next-line no-console
 			console.log(`Error in getCountries func: ${err.message}`);
 		});
 };

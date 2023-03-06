@@ -1,0 +1,49 @@
+.main_card {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 24px;
+	margin-top: 16px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 16px rgb(44 62 80 / 20%);
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.label {
+	flex: 1;
+	font-size: 12px;
+	line-height: 20px;
+	color: #828282;
+
+	@media (max-width: 768px) {
+		margin-bottom: 4px;
+		font-size: 14px;
+	}
+}
+
+.value {
+	flex: 1;
+	font-size: 14px;
+	line-height: 20px;
+
+	@media (max-width: 768px) {
+		margin-bottom: 4px;
+	}
+}
+
+.item_container {
+	@media (max-width: 768px) {
+		display: flex;
+	}
+}
+
+.column_container > :first-child {
+	margin-bottom: 12px;
+
+	@media (max-width: 768px) {
+		margin-bottom: 0;
+	}
+}

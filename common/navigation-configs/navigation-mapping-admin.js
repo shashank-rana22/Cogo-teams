@@ -51,9 +51,11 @@ import {
 	IcMDashboard,
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
+	IcMFaq,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
+import business_finance from './apis/business-finance-apis';
 
 const navigationMappingAdmin = {
 	things_to_do: {
@@ -171,6 +173,7 @@ const navigationMappingAdmin = {
 			...apis.app_pay_later,
 			...apis.feedback,
 			...apis.checkout_promotions,
+			...apis.export_factoring,
 		],
 		main_apis: [
 			'list_organization_users',
@@ -427,6 +430,12 @@ const navigationMappingAdmin = {
 				title : 'Air Customs',
 				href  : '/rate-management/air-customs',
 				as    : '/rate-management/air-customs',
+				type  : 'link',
+			},
+			{
+				title : 'Rails Domestic',
+				href  : '/rate-management/rails-domestic',
+				as    : '/rate-management/rails-domestic',
 				type  : 'link',
 			},
 		],
@@ -761,42 +770,16 @@ const navigationMappingAdmin = {
 		title     : 'Business Finance',
 		icon      : IcMBusinessFinance,
 		isSubNavs : true,
+		main_apis : ['get_purchase_payment_upload_list'],
 		options   : [
 			{
-				key           : 'business_finance-jobs',
-				title         : 'Old Jobs',
-				href          : '/business-finance',
-				as            : '/business-finance',
-				type          : 'link',
+				key           : 'business_finance-coe_finance',
+				title         : ' COE Finance',
+				href          : '/v2/business-finance/coe-finance/[active_tab]',
+				as            : '/v2/business-finance/coe-finance/dashboard',
+				icon          : IcMProductCodeMapping,
 				main_apis     : [],
-				possible_apis : apis.business_finance,
-			},
-			{
-				key           : 'business_finance-sales_list',
-				title         : 'Old Income',
-				href          : '/business-finance/sales-list',
-				as            : '/business-finance/sales-list',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.business_finance_income,
-			},
-			{
-				key           : 'business_finance-purchase_list',
-				title         : 'Old Expense',
-				href          : '/business-finance/purchase-list',
-				as            : '/business-finance/purchase-list',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.business_finance_expense,
-			},
-			{
-				key           : 'business_finance-vendor_payment',
-				title         : 'Old Vendor Payment',
-				href          : '/business-finance/vendor-list',
-				as            : '/business-finance/vendor-list',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.vendor_payment,
+				possible_apis : [...business_finance.coeFinance],
 			},
 			{
 				key           : 'business_finance-account_payables',
@@ -826,13 +809,22 @@ const navigationMappingAdmin = {
 				possible_apis : apis.settlement,
 			},
 			{
-				key           : 'business_finance-controller_dashboard',
-				title         : 'Controller Dashboard',
-				href          : '/business-finance/controller-dashboard/[active_tab]',
-				as            : '/business-finance/controller-dashboard/IncidentManagement',
+				key           : 'business_finance-cogo_book',
+				title         : 'Cogo Books',
+				href          : '/business-finance/cogo-book/[active_tab]',
+				as            : '/business-finance/cogo-book/Accruals',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.controller_dashboard,
+				possible_apis : apis.cogo_book,
+			},
+			{
+				key           : 'business_finance-incident_management',
+				title         : 'Incident Management',
+				href          : '/v2/business-finance/incident-management/[activeTab]',
+				as            : '/v2/business-finance/incident-management/requested',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.incident_controller,
 			},
 			{
 				key           : 'business_finance-manual_invoice',
@@ -852,6 +844,7 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
 			},
+
 			{
 				key           : 'business_finance-reports',
 				title         : 'Reports',
@@ -864,6 +857,16 @@ const navigationMappingAdmin = {
 		],
 		module_type: 'dashboards',
 	},
+	translate: {
+		key           : 'translate',
+		title         : 'Translation',
+		href          : '/v2/translate/[activeTab]',
+		as            : '/v2/translate/Requested',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.translate,
+		module_type   : 'dashboards',
+	},
 	finance: {
 		key           : 'finance',
 		title         : 'Finance',
@@ -874,6 +877,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.finance,
 		main_apis     : ['list_cogo_entities'],
 		module_type   : 'crm',
+	},
+	my_incident: {
+		key           : 'my_incident',
+		title         : 'My Incidents',
+		href          : '/v2/my-incident/[activeIncidentTab]',
+		as            : '/v2/my-incident/requested',
+		type          : 'link',
+		icon          : IcMFinance,
+		possible_apis : apis.my_incident,
+		main_apis     : [],
+		module_type   : 'dashboards',
 	},
 	incentives: {
 		key       : 'incentives',
@@ -1327,7 +1341,7 @@ const navigationMappingAdmin = {
 				as            : '/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk],
+				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
 			},
 			{
 				key           : 'coe-document_desk',
@@ -1336,7 +1350,7 @@ const navigationMappingAdmin = {
 				as            : '/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk],
+				possible_apis : [...apis.document_desk, ...apis.cogolens],
 			},
 			{
 				key           : 'coe-last_mile',
@@ -1345,7 +1359,7 @@ const navigationMappingAdmin = {
 				as            : '/last-mile',
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
-				possible_apis : [...apis.document_desk],
+				possible_apis : [...apis.document_desk, ...apis.cogolens],
 			},
 		],
 	},
@@ -1391,6 +1405,7 @@ const navigationMappingAdmin = {
 			...apis.feedback,
 			...apis.cogopoints,
 			...apis.checkout_promotions,
+			...apis.export_factoring,
 		],
 		module_type: 'crm',
 	},
@@ -1725,6 +1740,8 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 		possible_apis : apis.my_profile,
+		showInNav     : false,
+
 	},
 	allocations: {
 		key         : 'allocations',
@@ -1732,45 +1749,30 @@ const navigationMappingAdmin = {
 		isSubNavs   : true,
 		icon        : IcMUserAllocations,
 		module_type : 'dashboards',
-		options     : [
+		main_apis   : [
+			'get_allocation_configurations',
+			'get_allocation_relations',
+			'get_allocation_requests',
+			'get_allocation_quotas',
+		],
+		options: [
 			{
-				key           : 'allocations-allocation_configurations',
-				title         : 'Configurations',
-				href          : '/allocation/configurations',
-				as            : '/allocation/configurations',
-				main_apis     : ['get_allocation_configurations'],
-				possible_apis : apis.allocation,
-			},
-			{
-				key           : 'allocations-allocation_relations',
-				title         : 'Relations',
-				href          : '/allocation/relations',
-				as            : '/allocation/relations',
-				main_apis     : ['get_allocation_relations'],
-				possible_apis : apis.allocation,
-
-			},
-			{
-				key           : 'allocations-allocation_requests',
-				title         : 'Requests',
-				href          : '/allocation/requests',
-				as            : '/allocation/requests',
-				main_apis     : ['get_allocation_requests'],
-				possible_apis : apis.allocation,
-
-			},
-			{
-				key           : 'allocations-allocation_quotas',
-				title         : 'Quotas',
-				href          : '/allocation/quotas',
-				as            : '/allocation/quotas',
-				main_apis     : ['get_allocation_quotas'],
-				possible_apis : apis.allocation,
-
+				key           : 'allocations-core_engine',
+				title         : 'Core Engine',
+				href          : '/v2/allocation/core-engine',
+				as            : '/v2/allocation/core-engine',
+				possible_apis : apis.allocation_engine,
 			},
 		],
 	},
-
+	kam_monitoring: {
+		key         : 'kam_monitoring',
+		title       : 'KAM Monitoring',
+		module_type : 'dashboards',
+		href        : '/kam-monitoring',
+		as          : '/kam-monitoring',
+		main_apis   : [],
+	},
 	awb_inventory: {
 		key           : 'awb_inventory',
 		title         : 'AWB Inventory',
@@ -1842,6 +1844,24 @@ const navigationMappingAdmin = {
 		],
 		module_type: 'dashboards',
 	},
+	cogo_verse_analytics: {
+		key   : 'cogo_verse_analytics',
+		title : 'CogoVerse',
+		icon  : () => (
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg"
+				alt="cogo-verse"
+				width="22px"
+				height="22px"
+			/>
+		),
+		href          : '/v2/cogo-verse-analytics',
+		as            : '/v2/cogo-verse-analytics',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.cogo_verse_analytics,
+		module_type   : 'dashboards',
+	},
 	roles_permissions: {
 		key           : 'roles_permissions',
 		title         : 'Roles and Permissions',
@@ -1852,6 +1872,59 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_auth_roles'],
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
+	},
+	ticket_management: {
+		key       : 'ticket_management',
+		title     : 'Ticket Management',
+		isSubNavs : true,
+		icon      : IcMDocument,
+		options   : [
+			{
+				key           : 'ticket_management-ticket_management_dashboard',
+				title         : 'Dashboard',
+				href          : '/ticket-management/dashboard',
+				as            : '/ticket-management/dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.ticket_management,
+			},
+			{
+				key           : 'ticket_management-ticket_configurations',
+				title         : 'Ticket Configurations',
+				href          : '/ticket-management/configurations',
+				as            : '/ticket-management/configurations',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.ticket_management,
+			},
+		],
+	},
+	cogo_one: {
+		key   : 'cogo_one',
+		title : 'Cogo One',
+		icon  : () => (
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
+				alt="cogo-one"
+				width="22px"
+				height="22px"
+			/>
+		),
+		isSubNavs     : true,
+		main_apis     : [],
+		possible_apis : apis.cogo_one,
+		options       : [
+			{
+				key           : 'cogo_one-omni_channel',
+				title         : 'Omni Channel',
+				href          : '/v2/cogo-one/omni-channel',
+				as            : '/v2/cogo-one/omni-channel',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_one,
+			},
+		],
+		module_type: 'dashboards',
 	},
 	home: {
 		key   : 'home',
@@ -1866,7 +1939,7 @@ const navigationMappingAdmin = {
 		href          : '/manage-rfq',
 		as            : '/manage-rfq',
 		type          : 'link',
-		main_apis     : [],
+		main_apis     : ['list_rfqs'],
 		possible_apis : apis.manage_rfq,
 		module_type   : 'dashboards',
 	},
@@ -1912,6 +1985,108 @@ const navigationMappingAdmin = {
 		as        : '/crm-feedback-dashboard',
 		type      : 'link',
 		main_apis : [],
+	},
+	cogo_academy: {
+		key       : 'cogo_academy',
+		title     : 'Cogo Academy',
+		isSubNavs : true,
+		icon      : IcMFaq,
+		options   : [
+			{
+				key           : 'cogo_academy-create_faq',
+				title         : 'Creator Management System',
+				href          : '/v2/learning/faq/create',
+				as            : '/v2/learning/faq/create',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.create_faq,
+			},
+			{
+				key           : 'cogo_academy-faq',
+				title         : 'FAQs',
+				href          : '/v2/learning/faq',
+				as            : '/v2/learning/faq',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.faq,
+			},
+		],
+		module_type: 'crm',
+	},
+	inventory_management: {
+		key       : 'inventory_management',
+		title     : 'Inventory Management',
+		icon      : IcMRateManagement,
+		isSubNavs : true,
+		options   : [
+			{
+				key           : 'inventory_management-rail',
+				title         : 'Rail',
+				href          : '/inventory-management/rail',
+				as            : '/inventory-management/rail',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.inventory_management,
+			},
+		],
+		module_type: 'dashboards',
+	},
+	helios_dashboard: {
+		key         : 'helios_dashboard',
+		title       : 'Helios Dashboard',
+		isSubNavs   : true,
+		module_type : 'dashboards',
+		options     : [
+			{
+				key           : 'helios_dashboard-management',
+				title         : 'Helios Dashboard Management',
+				href          : '/helios-dashboard-management',
+				as            : '/helios-dashboard-management',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.helios_dashboard,
+			},
+			{
+				key           : 'helios_dashboard-view',
+				title         : 'Helios Dashboard',
+				href          : '/helios-dashboard',
+				as            : '/helios-dashboard',
+				type          : 'link',
+				main_apis     : ['list_dashboard_widgets', 'get_widget_data'],
+				possible_apis : apis.helios_dashboard,
+			},
+		],
+	},
+	performance_management: {
+		key         : 'performance_management',
+		title       : 'Performance Management',
+		isSubNavs   : true,
+		module_type : 'dashboards',
+		main_apis   : ['list_user_feedbacks'],
+		icon        : IcMPartnersCogoport,
+		options     : [
+			{
+				key           : 'performance_management-user_dashboard',
+				title         : 'User Dashboard',
+				href          : '/v2/performance-management/user-dashboard',
+				as            : '/v2/performance-management/user-dashboard',
+				possible_apis : apis.performance_management,
+			},
+			{
+				key           : 'performance_management-manager_dashboard',
+				title         : 'Manager Dashboard',
+				href          : '/v2/performance-management/manager-dashboard',
+				as            : '/v2/performance-management/manager-dashboard',
+				possible_apis : apis.performance_management,
+			},
+			{
+				key           : 'performance_management-hr_dashboard',
+				title         : 'HR Dashboard',
+				href          : '/v2/performance-management/hr-dashboard',
+				as            : '/v2/performance-management/hr-dashboard',
+				possible_apis : apis.performance_management,
+			},
+		],
 	},
 };
 

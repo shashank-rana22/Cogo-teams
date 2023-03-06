@@ -10,15 +10,16 @@ const setCountries = async () => {
 	try {
 		fs.mkdirSync(dirPath, { recursive: true });
 	} catch (err) {
+		// eslint-disable-next-line no-console
 		console.log("Can't make Countries folder");
-		console.log(err);
 	}
-	console.log('Building Countries ...');
+	// console.log('Building Countries ...');
 	await getCountries(
 		fs.writeFileSync,
 		countriesPath,
 		'https://api.cogoport.com/',
 	);
+	// eslint-disable-next-line no-console
 	console.log('Successfully Built Countries ...');
 };
 

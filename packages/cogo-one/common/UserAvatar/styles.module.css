@@ -1,0 +1,11 @@
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	margin-top: -5px;
+}
+
+.source_icon {
+	position: absolute;
+	margin: -2px 0 0 -5px;
+}

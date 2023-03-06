@@ -1,0 +1,75 @@
+.list_container {
+	height: 75vh;
+	margin-top: 10px;
+	overflow-y: auto;
+}
+
+.list_container::-webkit-scrollbar {
+	display: none;
+}
+
+.main_card {
+	padding: 8px;
+	margin: -5px 0 -5px 5px;
+	border-left: 1px solid #bdbdbd;
+}
+
+.main_card:last-child {
+	border-left: none;
+}
+
+.activity_date {
+	display: flex;
+	align-items: center;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	background: #bdbdbd;
+	border-radius: 50%;
+}
+
+.card {
+	padding: 8px;
+	margin: 5px 10px;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.card_transactional {
+	border-left: 2px solid #d6b300;
+}
+
+.card_platform {
+	border-left: 2px solid #c26d1a;
+}
+
+.card_communication {
+	border-left: 2px solid #6fa5ab;
+}
+
+.booking_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 6px 0;
+}
+
+.port_pair {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+
+.port {
+	display: flex;
+	flex-direction: column;
+}
+
+.port_details {
+	display: flex;
+	align-items: center;
+}
