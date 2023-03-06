@@ -1,5 +1,4 @@
 /* eslint-disable consistent-return */
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useListVendors = () => {
@@ -12,7 +11,9 @@ const useListVendors = () => {
 	);
 
 	const listVendorApi = async ({ checkCombination, nonRecurringData, timeline, active, setActive }) => {
-		const { vendorName, expenseCategory, expenseSubCategory } = nonRecurringData;
+		console.log('nonRecurringData->', nonRecurringData);
+
+		// const { vendorName, expenseCategory, expenseSubCategory } = nonRecurringData;
 
 		try {
 			if (checkCombination) {
