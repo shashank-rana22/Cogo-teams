@@ -6,7 +6,7 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useMemo } from 'react';
 
-// eslint-disable-next-line import/no-relative-packages
+/* eslint-disable */
 import countries from '../../../../../../.data-store/constants/countries.json';
 import useGetAudience from '../hooks/useGetFaqAudience';
 import useListCogoEntity from '../hooks/useListCogoEntities';

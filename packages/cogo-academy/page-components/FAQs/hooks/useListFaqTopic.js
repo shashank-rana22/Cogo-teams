@@ -12,15 +12,6 @@ function useListFaqTopic() {
 	const { scope = '', query } = general;
 	const { country_id = '', id = '' } = partner;
 
-	const roleFunction = !isEmpty(role_functions) ? role_functions : undefined;
-	const roleSubFunction = !isEmpty(role_sub_functions) ? role_sub_functions : undefined;
-
-	const { auth_role_data = [], partner = {} } = profile;
-	const { role_functions = [], role_sub_functions = [] } = auth_role_data?.[0] || {};
-
-	const { scope = '' } = general;
-	const { country_id = '', id = '' } = partner;
-
 	const { topicId = '' } = query || {};
 	const [activeTab, setActiveTab] = useState(topicId || 'All Topics');
 
