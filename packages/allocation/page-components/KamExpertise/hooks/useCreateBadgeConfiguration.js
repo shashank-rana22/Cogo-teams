@@ -2,7 +2,8 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-function useCreateBadgeConfiguration() {
+function useCreateBadgeConfiguration(props) {
+	const { listRefetch } = props;
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_badge_configuration',
 		method  : 'POST',
@@ -23,11 +24,11 @@ function useCreateBadgeConfiguration() {
 				data: payload,
 			});
 
-			// listRefetch();
-
 			// setShow(false);
 
 			Toast.success('Badge Created!');
+
+			listRefetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

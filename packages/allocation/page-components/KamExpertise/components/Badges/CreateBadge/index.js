@@ -8,7 +8,9 @@ import useCreateNewBadge from '../../../hooks/useCreateNewBadge';
 import GetCard from './getCard';
 import styles from './styles.module.css';
 
-function CreateBadge({ setToggleScreen, autofill }) {
+function CreateBadge(props) {
+	const { setToggleScreen, autofill, listRefetch } = props;
+
 	const {
 		getAddBadgesControls, formProps,
 	} = useCreateNewBadge();
@@ -19,7 +21,7 @@ function CreateBadge({ setToggleScreen, autofill }) {
 
 	const {
 		onCheckPublish, loading,
-	} = useCreateBadgeConfiguration();
+	} = useCreateBadgeConfiguration({ listRefetch });
 
 	const medalType = [
 		{

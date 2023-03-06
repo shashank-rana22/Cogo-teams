@@ -1,3 +1,4 @@
+import { Pagination } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -28,7 +29,9 @@ function Badges() {
 	const [autofill, setAutofill] = useState({});
 	const [masteryListData, setMasteryListData] = useState({});
 
-	const { loading, list:badgeList } = useBadgeConfigurationList();
+	const { loading, list:badgeList, paginationData, getNextPage, listRefetch } = useBadgeConfigurationList();
+
+	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
 	return (
 		<section className={styles.main_container}>
@@ -64,28 +67,40 @@ function Badges() {
 						: ''
 				}
 				{
-				(toggleScreen === 1)
-			&&	(badgeList?.map(((data, index) => (data.medal_collection.length > 0
-				? (
-					<MasteryListItem
-						data={data}
-						index={index}
-						loading={loading}
-						setToggleScreen={setToggleScreen}
-						setMasteryListData={setMasteryListData}
-					/>
+					(toggleScreen === 1)
+				&&	(
+					<div>
+						{badgeList?.map(((data, index) => (data.medal_collection.length > 0
+							? (
+								<MasteryListItem
+									data={data}
+									index={index}
+									loading={loading}
+									setToggleScreen={setToggleScreen}
+									setMasteryListData={setMasteryListData}
+								/>
+							)
+							: (
+								<BadgeListItem
+									data={data}
+									index={index}
+									loading={loading}
+									setToggleScreen={setToggleScreen}
+									setAutofill={setAutofill}
+								/>
+							)
+						)))}
+						<div className={styles.pagination_container}>
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={total_count}
+								pageSize={page_limit}
+								onPageChange={getNextPage}
+							/>
+						</div>
+					</div>
 				)
-				: (
-					<BadgeListItem
-						data={data}
-						index={index}
-						loading={loading}
-						setToggleScreen={setToggleScreen}
-						setAutofill={setAutofill}
-					/>
-				)
-			))))
-
 			}
 
 				{
@@ -95,6 +110,7 @@ function Badges() {
 						setToggleScreen={setToggleScreen}
 						badgeList={badgeList}
 						masteryListData={masteryListData}
+						listRefetch={listRefetch}
 					/>
 				</div>
 			)
@@ -102,7 +118,11 @@ function Badges() {
 				{
 				(toggleScreen === 3) && (
 					<div>
-						<CreateBadge setToggleScreen={setToggleScreen} autofill={autofill} />
+						<CreateBadge
+							setToggleScreen={setToggleScreen}
+							autofill={autofill}
+							listRefetch={listRefetch}
+						/>
 					</div>
 				)
 			}

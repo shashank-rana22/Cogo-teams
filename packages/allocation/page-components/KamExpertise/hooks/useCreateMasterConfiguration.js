@@ -9,7 +9,7 @@ function useCreateMasterConfiguration(props) {
 		authkey : 'post_allocation_kam_expertise_mastery_badge_configuration',
 	});
 
-	const { onClose } = props;
+	const { onClose, listRefetch } = props;
 
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
@@ -37,6 +37,8 @@ function useCreateMasterConfiguration(props) {
 			});
 
 			Toast.success('Master Badge Created!');
+
+			listRefetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response.data));
 		}
