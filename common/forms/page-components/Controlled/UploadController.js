@@ -10,14 +10,15 @@ function UploadController(props) {
 
 	return (
 		<Controller
-			key={rest.id}
+			key={name}
 			control={control}
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
 				<FileUploader
 					{...rest}
-					key={rest.id}
+					key={name}
+					id={name}
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}

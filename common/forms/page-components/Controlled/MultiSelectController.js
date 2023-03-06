@@ -8,6 +8,7 @@ function MultiSelectController(props) {
 	} = props;
 	return (
 		<Controller
+			key={name}
 			control={control}
 			name={name}
 			rules={rules}

@@ -1,0 +1,148 @@
+.blocked_user_tag {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px 12px;
+	font-size: 10px;
+	font-weight: 500;
+	background: #ffe3e3;
+	border-radius: 0 0 0 10px;
+}
+
+.main_container {
+	:global {
+		.tippy_content {
+			padding: 0;
+		}
+	}
+}
+
+.container {
+	position: relative;
+	display: flex;
+	width: fit-content;
+	padding: 4px;
+	background: #fff;
+	border: 3px solid #f9ae64;
+	border-radius: 6px;
+	transform: rotate(-45deg);
+}
+
+.profile_image_container {
+	width: 28px;
+	height: 28px;
+	padding: 4px;
+	overflow: hidden;
+	border-radius: 2px;
+
+	.img {
+		width: 40px;
+		height: 40px;
+		border-radius: 4px;
+		transform: translateX(-10px) translateY(-8px) rotate(45deg) scale(1.25);
+	}
+}
+
+.avatar {
+	width: 26px;
+	height: 26px;
+	padding: 4px;
+	background: #cfdae8;
+	border-radius: 4px;
+}
+
+.avatar_text {
+	display: flex;
+	justify-content: center;
+	transform: rotate(45deg);
+}
+
+.division_line {
+	display: flex;
+	width: 100%;
+	margin: 4px 0;
+	border-bottom: 3px solid #f9ae64;
+}
+
+.card_container {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 200px;
+	padding: 16px;
+
+	&:hover {
+		cursor: pointer;
+		background: #fffaea;
+		border-radius: 6px;
+		box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+	}
+}
+
+.line_container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.name_text {
+	max-width: 120px;
+	margin-left: 12px;
+	overflow: hidden;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 12px;
+	color: #000;
+	text-overflow: ellipsis;
+	letter-spacing: 0.04em;
+	white-space: nowrap;
+}
+
+.designation {
+	max-width: 120px;
+	margin-left: 12px;
+	overflow: hidden;
+	font-size: 8px;
+	font-weight: normal;
+	line-height: 12px;
+	color: #464646;
+	text-overflow: ellipsis;
+	letter-spacing: 0.04em;
+	white-space: nowrap;
+}
+
+.icon_container {
+	position: absolute;
+	top: 4px;
+	right: 8px;
+}
+
+.popover_container {
+	display: flex;
+	flex-direction: column;
+	padding: 12px 16px;
+	background: #fffaea;
+}
+
+.value_text {
+	font-size: 10px;
+	line-height: 12px;
+	color: #828282;
+}
+
+.header_text {
+	margin-bottom: 6px;
+	font-size: 10px;
+	font-weight: 700;
+	line-height: 10px;
+	color: #000;
+	letter-spacing: 0.04em;
+}
+
+.flex_div {
+	display: flex;
+}

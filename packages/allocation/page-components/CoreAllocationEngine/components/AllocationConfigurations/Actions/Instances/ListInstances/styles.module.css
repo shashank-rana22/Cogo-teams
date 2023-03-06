@@ -1,0 +1,44 @@
+.container {
+	overflow: scroll;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.table {
+	tr {
+		height: 60px;
+	}
+}
+
+.legend {
+	margin: 0;
+
+	:global(.ui_legend_item) {
+		margin: 0;
+	}
+}
+
+.daterange_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-bottom: 12px;
+}
+
+.popover_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.popover_heading {
+	margin-bottom: 12px;
+	word-break: initial;
+}
+
+.popover_button_container {
+	display: flex;
+	justify-content: flex-end;
+}

@@ -1,0 +1,10 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.pagination_container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}

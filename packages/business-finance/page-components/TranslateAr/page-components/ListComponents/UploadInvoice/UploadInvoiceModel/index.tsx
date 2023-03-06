@@ -22,7 +22,7 @@ type Props = {
 };
 
 function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, refetch, open }: Props) {
-	const { fileName, finalUrl } = uploadProof || {};
+	const { fileName = '', finalUrl } = uploadProof || {};
 	const bodyStyle = finalUrl ? styles.body : '';
 	const { uploadDoc, loading } = useUpdateStatus({
 		finalUrl,
@@ -30,9 +30,12 @@ function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, re
 		itemData,
 		refetch,
 	});
+	const fileExtension = fileName.split('.').pop();
 	const handleManualUpload = () => {
-		if (!isEmpty(finalUrl)) {
+		if (!isEmpty(finalUrl) && fileExtension === 'pdf') {
 			uploadDoc();
+		} else if (fileExtension !== 'pdf' && fileExtension) {
+			Toast.error('Only pdf files are allowed');
 		} else {
 			Toast.error('Invoice doc is required');
 		}
@@ -52,7 +55,7 @@ function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, re
 						fileLink={finalUrl}
 						multipleUploadDesc="Upload Invoice"
 						uploadIcon={<IcMUpload height={40} width={40} />}
-						accept=".pdf"
+						accept="application/pdf"
 					/>
 				</section>
 			</Modal.Body>

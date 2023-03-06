@@ -1,0 +1,100 @@
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.remarks {
+	margin: 8px 0;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.name_data {
+	display: flex;
+	align-items: center;
+	margin: 8px 0;
+}
+
+.view {
+	color: green;
+	text-decoration: underline;
+	background-color: transparent;
+}
+
+.view_flex {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.name {
+	padding-left: 60px;
+	font-weight: 600;
+}
+
+.name:hover {
+	color: rgb(76 71 167);
+	text-decoration: underline;
+	cursor: pointer;
+	background-color: transparent;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.party_name {
+	padding-left: 78px;
+	font-weight: 600;
+}
+
+.category {
+	padding-left: 128px;
+	font-weight: 600;
+}
+
+.border {
+	display: flex;
+	width: 100%;
+	margin: 20px 0;
+	border: 1px solid #d9d9d9;
+}
+
+.font_name {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.simple_name {
+	font-size: 12px;
+}
+
+.branch_name {
+	margin: 0 4px;
+}
+
+.font_name_data {
+	display: flex;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.flex_remark {
+	display: flex;
+	gap: 4px;
+}
+
+.document {
+	margin: 4px 0;
+	font-weight: 600;
+}
+
+.document_flex {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	text-align: center;
+}

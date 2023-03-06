@@ -1,0 +1,17 @@
+.service {
+	display: flex;
+	flex-direction: column;
+}
+
+.heading {
+	padding: 8px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #221f20;
+}
+
+.form {
+	height: 76vh;
+	overflow: scroll;
+}

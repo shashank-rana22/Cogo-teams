@@ -446,6 +446,11 @@ const saas = {
 			access_type  : 'public',
 			service_name : 'saas_subscriptions_v2',
 		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	app_saas_schedules: [
 		{
@@ -658,6 +663,11 @@ const saas = {
 			api          : 'list_saas_store_quota',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'delete_freight_trend_subscription',
+			access_type  : 'private',
+			service_name : 'freight_trend',
 		},
 	],
 	app_saas_cpq_products: [
@@ -1410,12 +1420,22 @@ const saas = {
 		{
 			api          : 'create_organization_address',
 			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_coupons',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'update_saas_checkout',
+			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
 		{
 			api          : 'list_organization_addresses',
 			access_type  : 'private',
-			service_name : 'saas_subscriptions_v2',
+			service_name : 'organization',
 		},
 	],
 	app_saas_insurance: [
@@ -1454,7 +1474,7 @@ const saas = {
 			feature     : 'insurance',
 		},
 		{
-			api         : 'get_saas_insurance_check_sanctioned',
+			api         : 'post_saas_insurance_checkout',
 			access_type : 'private',
 			module      : 'insurance',
 			feature     : 'insurance',
@@ -1496,20 +1516,54 @@ const saas = {
 			feature     : 'insurance',
 		},
 		{
+			api         : 'get_saas_insurance_draft_details',
+			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
+		},
+		{
 			api         : 'get_saas_insurance_list_countries',
 			access_type : 'private',
 			module      : 'insurance',
 			feature     : 'insurance',
 		},
 		{
-			api         : 'get_saas_insurance_list_commodities',
+			api          : 'list_locations',
+			access_type  : 'public',
+			service_name : 'location',
+		},
+		{
+			api         : 'get_saas_insurance_terms',
 			access_type : 'private',
 			module      : 'insurance',
 			feature     : 'insurance',
 		},
 		{
-			api         : 'get_location_from_postal_code',
+			api         : 'get_saas_insurance_cancel',
 			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
+		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api         : 'get_saas_faq',
+			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
 		},
 	],
 	app_saas_trade_partner: [
