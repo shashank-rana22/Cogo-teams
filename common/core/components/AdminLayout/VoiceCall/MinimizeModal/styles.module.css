@@ -1,0 +1,57 @@
+.container {
+	position: fixed;
+	top: 4px;
+	right: 4%;
+	z-index: 10000;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 50px;
+	padding: 12px;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 -18px 60px #000;
+}
+
+.details {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-right: 20px;
+}
+
+.avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	margin-right: 20px;
+	background: #fdebe9;
+	border-radius: 12px;
+}
+
+.status_container {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.min_duration {
+	font-size: 10px;
+	font-weight: 500;
+	color: #393f70;
+}
+
+.min_number {
+	font-size: 16px;
+	font-weight: 700;
+	color: #393f70;
+}
+
+.end_icon {
+	width: 29px;
+	height: 29px;
+	margin-top: 5px;
+	cursor: pointer;
+}

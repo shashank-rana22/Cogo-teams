@@ -1,0 +1,35 @@
+.text_content {
+	&.title {
+		width: 240px;
+		height: 20px;
+		overflow: hidden;
+		text-align: left;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+.feedback {
+	width: 100%;
+	font-size: 14px;
+	font-weight: 300;
+	color: #4f4f4f;
+	text-align: justify;
+	word-wrap: break-word;
+}
+
+.feedback_button {
+	cursor: pointer;
+
+	.styled_text {
+		padding: 2px 8px;
+		color: #5936f0;
+		background: #ded7fc;
+		border: 1px solid #ded7fc;
+		border-radius: 4px;
+
+		&.styled_text {
+			width: fit-content;
+		}
+	}
+}

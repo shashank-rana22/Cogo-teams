@@ -15,6 +15,7 @@ import document_walet from './doc-walet';
 import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
 import enrichment from './enrichment';
+import faq from './faq-apis';
 import feedback from './feedback-apis';
 import kam_desk from './kam-desk-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
@@ -25,6 +26,7 @@ import manage_rfq from './manage-rfq-apis';
 import okam_task_apis from './okam-task-dashboard';
 import partner from './partner-apis';
 import payments from './payments-apis';
+import performance_management from './performance-managment-apis';
 import pms from './port-management';
 import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
@@ -116,6 +118,8 @@ const apis = {
 	...consolidated_invoices,
 	login_apis,
 	enrichment,
+	...faq,
+	performance_management,
 };
 
 export default apis;

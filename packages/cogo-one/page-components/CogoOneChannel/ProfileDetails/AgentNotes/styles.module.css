@@ -1,0 +1,53 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.container::-webkit-scrollbar {
+	display: none;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.submit_button {
+	display: flex;
+	align-items: center;
+	padding: 0 6px;
+	cursor: pointer;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+
+	&:hover {
+		background: #fffce6;
+		border: 1px solid #fde74d;
+	}
+}
+
+.disable {
+	cursor: not-allowed;
+}
+
+.loader_div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.loader_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+}
