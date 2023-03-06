@@ -150,8 +150,9 @@ function AnswerPage() {
 	};
 
 	const onClickBackIcon = () => {
-		const href = `/learning/faq?topicId=${topicId}`;
-		router.push(href, href);
+		// const href = `/learning/faq?topicId=${topicId}`;
+		// router.push(href, href);
+		router.back();
 	};
 
 	if (loading && load) {
