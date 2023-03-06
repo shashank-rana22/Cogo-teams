@@ -2,27 +2,25 @@ import { Modal } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import useBadgeConfigurationAttributes from '../../../../hooks/useBadgeConfigurationAttributes';
 import GetCard from '../../CreateBadge/getCard';
 
 import styles from './styles.module.css';
 
 function BadgeCard({ medalType = '', score = '', img_url = '', isLast = {} }) {
+	const {
+		onCheckPublish, loading, formProps,
+	} = useBadgeConfigurationAttributes();
+	const {
+		control, handleSubmit, formState: { errors }, watch,
+	} = formProps;
+	console.log('watching', watch());
 	const [openModal, setOpenModal] = useState(false);
-	const [badgeUpdateParams, setBadgeUpdateparams] = useState({
-		medal_type  : medalType,
-		medal_score : score,
-		medal_url   : img_url,
-	});
 	const badgeData = {
 		medalType,
-		inputPlaceHolder : score,
-		setValue         : setBadgeUpdateparams,
-		scoreValue       : 'medal_score',
-		imageValue       : 'medal_url',
-		imageSelected    : badgeUpdateParams.medal_url,
+		inputPlaceHolder: score,
 	};
 
-	console.log(badgeUpdateParams);
 	return (
 		<>
 			{' '}
@@ -60,6 +58,7 @@ function BadgeCard({ medalType = '', score = '', img_url = '', isLast = {} }) {
 									<div style={{ padding: '10px' }}>
 										<GetCard
 											data={badgeData}
+											control={control}
 											isLastItem
 											isBadgeEdit
 										/>

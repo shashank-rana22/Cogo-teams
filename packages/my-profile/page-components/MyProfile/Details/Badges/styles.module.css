@@ -1,0 +1,51 @@
+.container {
+    padding: 12px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: #6fa5ab;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.badge_list {
+    display: flex;
+    flex: 0.9;
+    justify-content: space-around;
+}
+
+.badge {
+    height: 40px;
+    width: 40px;
+}
+
+.badge img {
+    height: 100%;
+    width: 100%;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+}
+
+.view_more {
+    display: flex;
+    align-items: end;
+    color: #034afd;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: underline;
+}
