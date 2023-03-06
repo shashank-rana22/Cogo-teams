@@ -1,6 +1,6 @@
 function getPieChartData({ stats = {} }) {
 	return {
-		chart_1: {
+		request_status_chart: {
 			title  : 'Status',
 			colors : ['#F37166', '#ABCD62'],
 			data   : [
@@ -17,9 +17,9 @@ function getPieChartData({ stats = {} }) {
 			],
 		},
 		chart_2: {
-			title  : 'Turnaround Time',
-			colors : ['#84af18', '#aae11e', '#d0ee82', '#e3f5b5'],
-			data   : [
+			turnaround_time_chart : 'Turnaround Time',
+			colors                : ['#84af18', '#aae11e', '#d0ee82', '#e3f5b5'],
+			data                  : [
 				{
 					id    : 'zero_to_one_days',
 					label : '0-1 Days',
