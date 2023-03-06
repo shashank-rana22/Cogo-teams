@@ -1,4 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 
 import LeftPanel from './components/LeftPanel';
 import RightPanel from './components/RightPanel';
@@ -24,6 +25,14 @@ function ListEnrichment() {
 		setParams,
 	} = useListEnrichment();
 
+	const router = useRouter();
+
+	const OnChangeTab = (newTab) => {
+		router.push(`/enrichment?tab=${newTab}`, `/enrichment?tab=${newTab}`);
+
+		setActiveTab(newTab);
+	};
+
 	return (
 		<section>
 			<div className={styles.title}>Enrichment Data</div>
@@ -32,7 +41,7 @@ function ListEnrichment() {
 				<Tabs
 					themeType="primary"
 					activeTab={activeTab}
-					onChange={setActiveTab}
+					onChange={OnChangeTab}
 				>
 					<TabPanel name="enrichment_requests" title="Enrichment Requests">
 						<LeftPanel

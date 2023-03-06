@@ -267,7 +267,12 @@ const useListEnrichment = () => {
 			Header   : 'STATUS',
 			accessor : ({ status }) => (
 				<seaction>
-					<Pill size="md" color={UPLOAD_DOCUMENT_STATUS_MAPPING[status]}>{startCase(status) || '-'}</Pill>
+					<Pill
+						size="md"
+						color={UPLOAD_DOCUMENT_STATUS_MAPPING[status]}
+					>
+						{startCase(status) || '-'}
+					</Pill>
 				</seaction>
 			),
 		},
