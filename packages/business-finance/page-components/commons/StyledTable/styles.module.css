@@ -1,11 +1,9 @@
 .table {
-
 	:global {
 		padding: 24px 16px;
 		margin-bottom: 0 !important;
-		background-color: #ffff;
 		overflow: unset;
-
+		background-color: #ffff;
 
 		.ui_table_container {
 			border: none;

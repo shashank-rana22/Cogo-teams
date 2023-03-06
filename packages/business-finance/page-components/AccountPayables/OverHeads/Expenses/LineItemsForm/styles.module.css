@@ -1,4 +1,4 @@
-.section{
+.section {
 	border: 1px solid #000;
 	border-radius: 4px;
 }
@@ -7,15 +7,14 @@
 	background-color: #fff;
 
 
-	
 
 	:global {
 		.ui_table_container {
 			padding: 0;
 		}
 
-		.table_class{
-			padding:0;
+		.table_class {
+			padding: 0;
 		}
 
 		.ui_table_head_cell {
@@ -98,7 +97,7 @@
 	color: #f68b21;
 }
 
-.tableContainer{
-	max-height: 315px ;
+.table_container {
+	max-height: 315px;
 	overflow: scroll;
 }

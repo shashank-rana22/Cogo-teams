@@ -42,12 +42,12 @@
 		font-size: 11px !important;
 	}
 }
-
+/* 
 .verified {
 	display: flex;
 	align-items: center;
 	color: #67c676;
-}
+} */
 
 .pending {
 	display: flex;
@@ -57,7 +57,7 @@
 
 .segmented_control {
 	div {
-		font-family: Poppins;
+		/* font-family: Poppins; */
 		font-weight: 600;
 	}
 }
