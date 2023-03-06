@@ -3,7 +3,9 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-function useBadgeConfigurationAttributes() {
+const useUpdateSingleBadge = (props) => {
+	const { medal, id, image_url:previous_image_url, score:previous_score, onClose } = props;
+
 	const formProps = useForm();
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -12,37 +14,59 @@ function useBadgeConfigurationAttributes() {
 		authkey : 'post_allocation_kam_expertise_badge_configuration_detail_attributes',
 	});
 
-	const onSingleBadgeUpdate = async (payload_data = {}) => {
+	const onSave = async (formValues, e) => {
+		e.preventDefault();
+
+		const {
+			Bronze_value = '',
+			Bronze_img_value = '',
+			Silver_value = '',
+			Silver_img_value = '',
+			Gold_value = '',
+			Gold_img_value = '',
+
+		} = formValues || {};
+
+		let score = '';
+		let image_url = '';
+
+		if (medal === 'Bronze') {
+			score = Bronze_value;
+			image_url = Bronze_img_value;
+		} else if (medal === 'Silver') {
+			score = Silver_value;
+			image_url = Silver_img_value;
+		} else {
+			score = Gold_value;
+			image_url = Gold_img_value;
+		}
+
 		try {
 			const payload = {
 				performed_by_id   : '1234',
 				performed_by_type : 'user',
-				id                : payload_data.id,
-				medal             : payload_data.medal,
-				image_url         : payload_data.image_url,
-				score             : payload_data.score,
 				status            : 'active',
+				id,
+				medal,
+				image_url         : image_url || previous_image_url,
+				score             : score || previous_score,
 			};
 
-			await trigger({
-				data: payload,
-			});
+			await trigger({ data: payload });
 
-			// listRefetch();
-
-			// setShow(false);
+			onClose();
+			// refetch
 
 			Toast.success('Badge Updated!');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
-
 	return {
 		loading,
-		onSingleBadgeUpdate,
+		onSave,
 		formProps,
 	};
-}
+};
 
-export default useBadgeConfigurationAttributes;
+export default useUpdateSingleBadge;
