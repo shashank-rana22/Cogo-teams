@@ -196,7 +196,7 @@ const allocation = {
 
 		},
 		{
-			api          : 'get_allocation_kam_expertise_configuration_list',
+			api          : 'get_allocation_kam_expertise_configuration_levels',
 			access_type  : 'private',
 			feature      : 'kam_expertise',
 			service_name : 'allocation',

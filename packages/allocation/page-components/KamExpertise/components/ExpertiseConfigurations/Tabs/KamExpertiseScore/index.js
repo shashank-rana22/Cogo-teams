@@ -6,86 +6,13 @@ import { useState } from 'react';
 import FieldArray from '../../../../../../common/Form/FieldArray';
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
 import getControls from '../../../../configurations/get-add-conditions-controls';
-import ADD_CONDITION_CONTROL_MAPPING from '../../../../constants/add-condition-controls-mapping';
+import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mapping';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
 import EXPERTISE_CARDS_MAPPING from '../../../../constants/expertise-cards-mapping';
 
 import ExpertiseParameters from './ExpertiseParameters';
 import Header from './Header';
 import styles from './styles.module.css';
-
-const CONTROL_MAPPING = {
-	percentage: [{
-		name               : 'milestones',
-		label              : 'Enter milestones (%) and score allocated at each milestone',
-		type               : 'fieldArray',
-		buttonText         : 'Add More',
-		noDeleteButtonTill : 1,
-		controls           : [
-			{
-				name        : 'milestone',
-				type        : 'number',
-				label       : 'Milestone',
-				placeholder : '0',
-				rules       : { required: 'Milestone is required' },
-			},
-			{
-				name        : 'score',
-				type        : 'number',
-				label       : 'Score',
-				placeholder : '0',
-				rules       : { required: 'Score is required' },
-			},
-		],
-	}],
-	tat: [{
-		name               : 'tat',
-		label              : 'Enter duration (days) and score allocated on completion',
-		type               : 'fieldArray',
-		buttonText         : 'Add More',
-		noDeleteButtonTill : 1,
-		controls           : [
-			{
-				name        : 'from',
-				type        : 'number',
-				label       : 'From',
-				placeholder : '0',
-				rules       : { required: 'From is required' },
-			},
-			{
-				name        : 'to',
-				type        : 'number',
-				label       : 'To',
-				placeholder : '0',
-				rules       : { required: 'To is required' },
-			},
-			{
-				name        : 'score',
-				type        : 'number',
-				label       : 'Score',
-				placeholder : '0',
-				rules       : { required: 'Score is required' },
-			},
-		],
-	}],
-	absolute: [{
-		name        : 'score_on_completion',
-		type        : 'number',
-		label       : 'Score on Completion',
-		placeholder : '0',
-		rules       : { required: 'Score on Completion is required' },
-	},
-	{
-		name        : 'score_on_repetition',
-		type        : 'number',
-		label       : 'Score on Repetition',
-		placeholder : '0',
-		rules       : { required: 'Score on Repetition is required' },
-	},
-	],
-};
-
-// Todo getControls from utility function
 
 const titleSection = (expertiseItem = {}) => (
 	<div>
@@ -141,16 +68,6 @@ function KamExpertiseScoreConfig() {
 	const expertiseType = startCase(addConditionModal.type || '');
 
 	const { score_type } = watch();
-
-	// const filteredControls = controls.filter(
-	// 	(controlObj) => {
-	// 		if (score_type) {
-	// 			return (ADD_CONDITION_CONTROL_MAPPING[score_type]).includes(controlObj.name);
-	// 		}
-
-	// 		return controlObj;
-	// 	},
-	// );
 
 	const controls = getControls({ modifiedControls: CONTROL_MAPPING[score_type] });
 
