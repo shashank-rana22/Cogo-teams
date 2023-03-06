@@ -6,8 +6,6 @@
 .container {
 	background-color: #fff;
 
-
-
 	:global {
 		.ui_table_container {
 			padding: 0;
