@@ -3,7 +3,12 @@ import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function MasteryListItem({ data, index, loading, setWindow, setAutofill }) {
+function MasteryListItem({ data, index, loading, setToggleScreen, setMasteryListData }) {
+	const handleEdit = () => {
+		setMasteryListData(data);
+		setToggleScreen(2);
+	};
+
 	if (loading) {
 		return (
 			<div className={styles.container}>
@@ -44,10 +49,9 @@ function MasteryListItem({ data, index, loading, setWindow, setAutofill }) {
 						<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
 						<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
 						{
-                        data.rules.map((item) => (
+                        data.medal_collection.map((item) => (
 	<span className={styles.pill}>
 		<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
-
 	</span>
                         ))
                     }
@@ -60,10 +64,6 @@ function MasteryListItem({ data, index, loading, setWindow, setAutofill }) {
 			</div>
 		);
 	}
-	const handleEdit = () => {
-		setAutofill(data);
-		setWindow(2);
-	};
 
 	return (
 		<div className={styles.container}>
@@ -82,7 +82,7 @@ function MasteryListItem({ data, index, loading, setWindow, setAutofill }) {
 						<div style={{ paddingBottom: '12px' }}>
 							Event Name :
 							{' '}
-							<b>{data.mastery_name}</b>
+							<b>{data.badge_name}</b>
 						</div>
 						<div>
 							Description :

@@ -4,7 +4,7 @@ import { format, startCase } from '@cogoport/utils';
 import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
 
-function BadgeListItem({ data, index, loading, setWindow, setAutofill }) {
+function BadgeListItem({ data, index, loading, setToggleScreen, setAutofill }) {
 	if (loading) {
 		return (
 			<div className={styles.container}>
@@ -60,7 +60,7 @@ function BadgeListItem({ data, index, loading, setWindow, setAutofill }) {
 	const { badge_details = [] } = data;
 	const handleEdit = () => {
 		setAutofill(data);
-		setWindow(3);
+		setToggleScreen(3);
 	};
 	return (
 		<div className={styles.container}>
