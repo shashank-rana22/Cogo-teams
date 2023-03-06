@@ -55,7 +55,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query?.id]);
 
-	const onclickBack = () => {
+	const onclickEdit = () => {
 		const href = `/learning/faq/create/question?mode=create&id=${id}`;
 		router.push(href, href);
 		setQuestionPreview('create');
@@ -150,13 +150,24 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 							Publish
 						</Button>
 					)}
-				<div
-					className={styles.goback_button}
-					role="presentation"
-					onClick={() => onclickBack(id)}
-				>
-					Go Back & Edit
-				</div>
+				<Button
+							themeType="secondary"
+							size="md"
+							className={styles.publish_button}
+							onClick={() => onClickBackButton(id)}
+						>
+							Back
+				</Button>
+				<Button
+							themeType="primary"
+							size="md"
+							className={styles.publish_button}
+							onClick={() => onclickEdit(id)}
+						>
+							Edit
+				</Button>
+
+						
 			</div>
 		</div>
 	);
