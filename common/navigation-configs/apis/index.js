@@ -26,6 +26,7 @@ import manage_rfq from './manage-rfq-apis';
 import okam_task_apis from './okam-task-dashboard';
 import partner from './partner-apis';
 import payments from './payments-apis';
+import performance_management from './performance-managment-apis';
 import pms from './port-management';
 import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
@@ -118,6 +119,7 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
+	performance_management,
 };
 
 export default apis;

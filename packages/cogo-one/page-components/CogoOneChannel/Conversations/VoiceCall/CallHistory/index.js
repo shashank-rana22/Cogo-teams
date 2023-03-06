@@ -4,7 +4,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call = '', dtmf_inputs = [] }) {
+function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call = '', dtmf_inputs = {} }) {
 	const ICON_MAPPING = {
 		user: {
 
