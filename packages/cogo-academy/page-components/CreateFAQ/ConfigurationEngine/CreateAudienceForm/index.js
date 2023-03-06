@@ -1,3 +1,4 @@
+/* eslint-disable import/no-relative-packages */
 import { Button } from '@cogoport/components';
 import { SelectController, InputController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
