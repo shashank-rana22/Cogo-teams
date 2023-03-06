@@ -31,7 +31,7 @@ function Child(props) {
 							control={control}
 							id={`create_form_${controlItem.name}_field`}
 							{...controlItem}
-							name={`${index} ${controlItem.name}`}
+							name={`${controlItem.name}_${index}`}
 						/>
 
 						{/* // Todo errors */}

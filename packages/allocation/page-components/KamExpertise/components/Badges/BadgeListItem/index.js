@@ -115,9 +115,8 @@ function BadgeListItem({ data, index, loading, setToggleScreen, setAutofill }) {
 						{
 							badge_details.map((badge, i) => (
 								<BadgeCard
-									medalType={startCase(badge.medal)}
-									score={badge.score}
-									img_url={badge.image_url}
+									data={badge}
+									medal={startCase(badge.medal)}
 									isLast={i === badge_details.length - 1}
 								/>
 							))
