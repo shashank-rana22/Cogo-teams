@@ -66,19 +66,28 @@ function Badges() {
 						<div>
 							{
 								(window === 1)
-			&&	badgeList?.map(((data, index) => (
-				<BadgeListItem
-					data={data}
-					index={index}
-					loading={loading}
-					setWindow={setWindow}
-					setAutofill={setAutofill}
-				/>
+			&&	badgeList?.map(((data, index) => (data.medal_collection.length > 0
+				? (
+					<MasteryListItem
+						data={data}
+						index={index}
+						loading={loading}
+						setWindow={setWindow}
+						setAutofill={setAutofill}
+					/>
+				)
+				: (
+					<BadgeListItem
+						data={data}
+						index={index}
+						loading={loading}
+						setWindow={setWindow}
+						setAutofill={setAutofill}
+					/>
+				)
 			)))
 
 							}
-
-							{/* <MasteryListItem /> */}
 
 							{
 			(window === 2) && (

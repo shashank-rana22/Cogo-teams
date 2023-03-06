@@ -1,52 +1,15 @@
 import { Pill, Button, Placeholder } from '@cogoport/components';
-import { useState } from 'react';
+import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const data = {
-	event_name  : 'Multimodal Maestro',
-	description : 'Multimodal maestro is awarded to users who complete gold 3 in all of these badges',
-	rules       : [
-		{
-			badge_name: 'Nautical Ninja',
-		},
-		{
-			badge_name: 'Highway Hero',
-		},
-		{
-			badge_name: 'Wings of Logistics',
-		},
-	],
-	// last_modified_date : '31/September/2022',
-	last_modified_date : '2022-Sept-31',
-	last_modified_by   : 'Ankur Verma',
-	url                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg',
-
-};
-
-function MasteryListItem() {
-	const [ruleType, setRuleType] = useState(1);
-
-	// const {
-	// 	onCheckPublish, loadingCheckPublishability,
-	// } = useCreateBadgeConfiguration();
-	// // } = useBadgeConfigurationAttributes();
-
-	const handleSubmit = () => {
-		// console.log('edit button clicked');
-	};
-
-	if (false) {
+function MasteryListItem({ data, index, loading, setWindow, setAutofill }) {
+	if (loading) {
 		return (
 			<div className={styles.container}>
 
 				<div className={styles.header}>
-					{/* <p>
-						#000
-						{ruleType}
-					</p> */}
 					<Placeholder width="60px" height="20px" />
-					{/* <Button themeType="secondary" onClick={handleSubmit}>Edit</Button> */}
 					<Placeholder width="60px" height="20px" />
 				</div>
 
@@ -54,9 +17,6 @@ function MasteryListItem() {
 					<div className={styles.details}>
 						<div>
 							<div style={{ paddingBottom: '12px' }}>
-								{/* Event Name :
-								{' '}
-								<b>{data.event_name}</b> */}
 								<Placeholder width="160px" height="20px" style={{ marginTop: '12px' }} />
 							</div>
 							<div>
@@ -86,7 +46,6 @@ function MasteryListItem() {
 						{
                         data.rules.map((item) => (
 	<span className={styles.pill}>
-		{/* <Pill color="#edd7a9">{item.badge_name}</Pill> */}
 		<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
 
 	</span>
@@ -101,16 +60,20 @@ function MasteryListItem() {
 			</div>
 		);
 	}
+	const handleEdit = () => {
+		setAutofill(data);
+		setWindow(2);
+	};
 
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.header}>
 				<p>
-					#000
-					{ruleType}
+					#
+					{index + 1}
 				</p>
-				<Button themeType="secondary" onClick={handleSubmit}>Edit</Button>
+				<Button themeType="secondary" onClick={handleEdit}>Edit</Button>
 			</div>
 
 			<div className={styles.content}>
@@ -119,7 +82,7 @@ function MasteryListItem() {
 						<div style={{ paddingBottom: '12px' }}>
 							Event Name :
 							{' '}
-							<b>{data.event_name}</b>
+							<b>{data.mastery_name}</b>
 						</div>
 						<div>
 							Description :
@@ -131,12 +94,13 @@ function MasteryListItem() {
 						<div>
 							Last Modified :
 							{' '}
-							{data.last_modified_date}
+							{format(data.created_at, 'yyyy-MMM-dd')}
 						</div>
 						<div>
 							Last Modified By:
 							{' '}
-							{data.last_modified_by}
+							{/* //! needs changes */}
+							{/* {data.last_modified_by} */}
 						</div>
 					</div>
 				</div>
@@ -145,9 +109,9 @@ function MasteryListItem() {
 					<div className={styles.rule_heading}>Rules</div>
 					<span>Mastery in</span>
 					{
-                        data.rules.map((item) => (
+                        data.medal_collection.map((item) => (
 	<span className={styles.pill}>
-		<Pill color="#edd7a9">{item.badge_name}</Pill>
+		<Pill color="#edd7a9">{item}</Pill>
 
 	</span>
                         ))
@@ -158,7 +122,7 @@ function MasteryListItem() {
 					<img
 						height={140}
 						style={{ objectFit: 'contain' }}
-						src={data.url}
+						src={data.badge_details[0].image_url}
 						alt="Mastery Modal"
 					/>
 				</div>

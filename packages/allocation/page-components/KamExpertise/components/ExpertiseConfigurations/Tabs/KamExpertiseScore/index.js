@@ -1,4 +1,4 @@
-import { Button, Modal, Accordion } from '@cogoport/components';
+import { Collapse, Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -47,6 +47,8 @@ const titleSection = (expertiseItem = {}) => (
 function KamExpertiseScoreConfig() {
 	const [addConditionModal, setAddConditionModal] = useState({});
 
+	const [activeCollapse, setActiveCollapse] = useState('');
+
 	const showModal = !isEmpty(addConditionModal);
 
 	const { control, formState:{ errors = {} }, watch, handleSubmit } = useForm({
@@ -78,6 +80,18 @@ function KamExpertiseScoreConfig() {
 		console.log('values', values);
 	};
 
+	const options = Object.entries(EXPERTISE_CARDS_MAPPING).map(([key, value]) => (
+		{
+			key,
+			title    : titleSection(value),
+			children : <ExpertiseParameters
+				expertiseData={value}
+				onClickAddCondition={() => setAddConditionModal({ type: value?.name })}
+			/>,
+
+		}
+	));
+
 	return (
 		<>
 			<div className={styles.container}>
@@ -86,14 +100,15 @@ function KamExpertiseScoreConfig() {
 
 			<div className={styles.expertise_cards_container}>
 				{
-					Object.entries(EXPERTISE_CARDS_MAPPING).map(([key, value]) => (
-						<Accordion id={key} title={titleSection(value)}>
-							<ExpertiseParameters
-								expertiseData={value}
-								onClickAddCondition={() => setAddConditionModal({ type: value?.name })}
-							/>
-						</Accordion>
-					))
+					// Object.entries(EXPERTISE_CARDS_MAPPING).map(([key, value]) => (
+					// 	<Accordion id={key} title={titleSection(value)}>
+					// 		<ExpertiseParameters
+					// 			expertiseData={value}
+					// 			onClickAddCondition={() => setAddConditionModal({ type: value?.name })}
+					// 		/>
+					// 	</Accordion>
+					// ))
+					<Collapse panel={options} activeKey={activeCollapse} setActive={setActiveCollapse} type="text" />
 				}
 			</div>
 
