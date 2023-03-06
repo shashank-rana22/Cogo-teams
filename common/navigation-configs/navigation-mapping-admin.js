@@ -1873,6 +1873,32 @@ const navigationMappingAdmin = {
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
 	},
+	ticket_management: {
+		key       : 'ticket_management',
+		title     : 'Ticket Management',
+		isSubNavs : true,
+		icon      : IcMDocument,
+		options   : [
+			{
+				key           : 'ticket_management-ticket_management_dashboard',
+				title         : 'Dashboard',
+				href          : '/ticket-management/dashboard',
+				as            : '/ticket-management/dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.ticket_management,
+			},
+			{
+				key           : 'ticket_management-ticket_configurations',
+				title         : 'Ticket Configurations',
+				href          : '/ticket-management/configurations',
+				as            : '/ticket-management/configurations',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.ticket_management,
+			},
+		],
+	},
 	cogo_one: {
 		key   : 'cogo_one',
 		title : 'Cogo One',

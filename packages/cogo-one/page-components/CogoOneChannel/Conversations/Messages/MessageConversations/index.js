@@ -39,6 +39,7 @@ function MessageConversations({
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
 	lastPage = false,
+
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '' } = activeMessageCard;

@@ -1,13 +1,15 @@
 import { cl, Input, Button, Placeholder, Pill } from '@cogoport/components';
 import { useForm, TextAreaController, InputController } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import controls from '../../../../../../../configurations/create-instant-reply';
-import { statusMapping, statusColorMapping } from '../../../../../../../constants/index';
-import useCreateCommunicationTemplate from '../../../../../../../hooks/useCreateCommunicationTemplate';
-import useListTemplate from '../../../../../../../hooks/useListTemplates';
+import controls from '../../configurations/create-instant-reply';
+import { statusMapping, statusColorMapping } from '../../constants';
+import { hasPermission } from '../../constants/IDS_CONSTANTS';
+import useCreateCommunicationTemplate from '../../hooks/useCreateCommunicationTemplate';
+import useListTemplate from '../../hooks/useListTemplates';
 
 import styles from './styles.module.css';
 
@@ -23,7 +25,11 @@ function Templates({
 	const [templateName, setTemplateName] = useState('');
 	const [activeCard, setActiveCard] = useState('');
 	const { title, content = '' } = controls;
+	const { userRoleIds } = useSelector(({ profile }) => ({
+		userRoleIds: profile.partner?.user_role_ids || [],
+	}));
 
+	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
 	const {
 		control,
 		handleSubmit,
@@ -39,6 +45,7 @@ function Templates({
 		loading,
 		refetch,
 	} = useListTemplate({ activeTab });
+
 	const { createTemplate, loading: CreateLoading } = useCreateCommunicationTemplate({
 		reset: () => {
 			reset({ title: '', content: '' });
@@ -62,7 +69,7 @@ function Templates({
 	};
 
 	const handleClick = () => {
-		sendCommunicationTemplate(templateName);
+		sendCommunicationTemplate({ template_name: templateName, type: 'whatsapp' });
 	};
 
 	function CreateReactComponent() {
@@ -159,14 +166,16 @@ function Templates({
 					</div>
 				</div>
 				<div className={styles.footer}>
-					<Button
-						themeType="accent"
-						size="md"
-						disabled={openCreateReply || showPreview}
-						onClick={() => setOpenCreateReply(true)}
-					>
-						+ Create Reply
-					</Button>
+					{isomniChannelAdmin && (
+						<Button
+							themeType="accent"
+							size="md"
+							disabled={openCreateReply || showPreview}
+							onClick={() => setOpenCreateReply(true)}
+						>
+							+ Create Reply
+						</Button>
+					)}
 				</div>
 			</div>
 			{openCreateReply && (
