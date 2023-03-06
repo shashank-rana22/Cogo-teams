@@ -11,9 +11,9 @@ const useDownloadEnrichmentCsv = () => {
 	const { query: { partner_id = '' } } = general;
 
 	const [{ loading }, trigger] = useAllocationRequest({
-		url     : 'feedback_response_sample_sheet',
-		mathod  : 'GET',
-		authkey : 'get_allocation_feedback_response_sample_sheet',
+		url     : 'feedback_response_csv',
+		method  : 'GET',
+		authkey : 'get_allocation_feedback_response_csv',
 		headers : {},
 	}, { manual: true });
 

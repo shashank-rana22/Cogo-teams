@@ -61,7 +61,7 @@ const enrichment = [
 		service_name : 'lead',
 	},
 	{
-		api          : 'get_allocation_feedback_response_sample_sheet',
+		api          : 'get_allocation_feedback_response_csv',
 		access_type  : 'private',
 		feature      : 'enrichment',
 		service_name : 'allocation',
