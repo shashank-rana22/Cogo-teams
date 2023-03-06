@@ -18,9 +18,7 @@ function List(props) {
 
 	if (loading) {
 		return (
-			<div className={styles.loading}>
-				<Placeholder height="320px" width="100%" />
-			</div>
+			<Placeholder margin="16px" height="320px" width="100%" />
 		);
 	}
 

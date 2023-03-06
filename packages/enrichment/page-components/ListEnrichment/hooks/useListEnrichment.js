@@ -123,7 +123,6 @@ const useListEnrichment = () => {
 					{created_at	 ? (
 						<div>
 							{format(created_at, 'dd MMM yyyy') || '-'}
-
 						</div>
 					) : '___'}
 
@@ -164,7 +163,7 @@ const useListEnrichment = () => {
 			accessor : ({ created_at }) => (
 
 				<section>
-					{format(created_at, 'dd MMM yyyy')}
+					{created_at ? format(created_at, 'dd MMM yyyy') : '-'}
 				</section>
 			),
 		},

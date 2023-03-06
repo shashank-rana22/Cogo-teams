@@ -14,9 +14,7 @@ function UploadDocumentModal(props) {
 		refetch,
 	} = props;
 
-	const formProps = useForm();
-
-	const { handleSubmit } = formProps;
+	const { handleSubmit } = useForm();
 
 	const [uploadProof, setUploadProof] = useState();
 

@@ -27,7 +27,7 @@ function ListEnrichment() {
 
 	const router = useRouter();
 
-	const OnChangeTab = (newTab) => {
+	const onChangeTab = (newTab) => {
 		router.push(`/enrichment?tab=${newTab}`, `/enrichment?tab=${newTab}`);
 
 		setActiveTab(newTab);
@@ -41,7 +41,7 @@ function ListEnrichment() {
 				<Tabs
 					themeType="primary"
 					activeTab={activeTab}
-					onChange={OnChangeTab}
+					onChange={onChangeTab}
 				>
 					<TabPanel name="enrichment_requests" title="Enrichment Requests">
 						<LeftPanel

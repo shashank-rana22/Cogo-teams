@@ -1,7 +1,7 @@
 import { Tooltip, Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 function Workscopes({ work_scopes = [] }) {
 	const totalWorkScopes = work_scopes.length;

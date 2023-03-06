@@ -35,15 +35,15 @@ function Header() {
 
 			<div className={styles.header}>
 				{Object.keys(CARD_LABEL_MAPPING).map((key) => (
-					<div className={styles.info}>
+					<div key={key} className={styles.info}>
 						<div className={styles.info_label}>
 							{CARD_LABEL_MAPPING[key]}
-							&nbsp;
+							{' '}
 							-
 						</div>
 
 						<div className={styles.value}>
-							{requestData.organization?.[key]}
+							{requestData.organization?.[key] || '-'}
 						</div>
 					</div>
 				))}
@@ -52,7 +52,7 @@ function Header() {
 					<div className={styles.info_label}>Enrichment Request Created At -</div>
 
 					<div className={styles.value}>
-						{format(requestData.created_at, 'dd MMM yyyy')}
+						{requestData.created_at ? format(requestData.created_at, 'dd MMM yyyy') : '-'}
 					</div>
 				</div>
 			</div>

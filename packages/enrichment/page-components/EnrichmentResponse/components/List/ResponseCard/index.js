@@ -17,10 +17,10 @@ function ResponseCard({
 		<section className={styles.card}>
 			<div className={styles.card_header}>
 				<div className={styles.left_header}>
-					{CARD_HEADER[activeTab].icon}
+					{CARD_HEADER[activeTab]?.icon}
 
 					<div className={styles.card_heading_label}>
-						{CARD_HEADER[activeTab].label}
+						{CARD_HEADER[activeTab]?.label}
 						-
 						{index + 1}
 					</div>
@@ -54,9 +54,7 @@ function ResponseCard({
 					<div className={styles.card_item}>
 						<div className={styles.item_label}>Workscopes</div>
 
-						<div className={styles.item_value}>
-							{user.work_scopes ? <Workscopes work_scopes={user.work_scopes} /> : '-'}
-						</div>
+						{user.work_scopes ? <Workscopes work_scopes={user.work_scopes} /> : '-'}
 					</div>
 				)}
 			</div>

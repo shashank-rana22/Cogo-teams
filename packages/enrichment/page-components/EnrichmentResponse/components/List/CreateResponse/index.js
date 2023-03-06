@@ -18,10 +18,10 @@ function CreateResponse(props) {
 			<form onSubmit={handleSubmit(onSave)}>
 				<div className={styles.card_header}>
 					<div className={styles.card_header_icons}>
-						{cardHeading[activeTab].icon}
+						{cardHeading[activeTab]?.icon}
 					</div>
 
-					<div>{cardHeading[activeTab].label}</div>
+					<div>{cardHeading[activeTab]?.label}</div>
 				</div>
 
 				<div className={styles.row_container}>
