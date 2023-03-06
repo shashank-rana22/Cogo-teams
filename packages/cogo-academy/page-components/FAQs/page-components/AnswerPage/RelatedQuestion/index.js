@@ -30,7 +30,11 @@ function RelatedQuestion({ tags = '', question_abstract = '' }) {
 				{(data?.list || []).map((question) => (
 					<div className={styles.title}>
 						{(question?.question_abstract !== question_abstract) ? (
-							<div className={styles.relatedquestion_clickable} onClick={() => handleClick(question?.id)}>
+							<div
+								role="presentation"
+								className={styles.relatedquestion_clickable}
+								onClick={() => handleClick(question?.id)}
+							>
 								Q.
 								{' '}
 								{question?.question_abstract}

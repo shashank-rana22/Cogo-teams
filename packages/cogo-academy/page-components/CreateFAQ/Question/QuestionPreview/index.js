@@ -151,23 +151,21 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 						</Button>
 					)}
 				<Button
-							themeType="secondary"
-							size="md"
-							className={styles.publish_button}
-							onClick={() => onClickBackButton(id)}
-						>
-							Back
+					themeType="secondary"
+					size="md"
+					className={styles.publish_button}
+					onClick={() => onClickBackButton(id)}
+				>
+					Back
 				</Button>
 				<Button
-							themeType="primary"
-							size="md"
-							className={styles.publish_button}
-							onClick={() => onclickEdit(id)}
-						>
-							Edit
+					themeType="primary"
+					size="md"
+					className={styles.publish_button}
+					onClick={() => onclickEdit(id)}
+				>
+					Edit
 				</Button>
-
-						
 			</div>
 		</div>
 	);
