@@ -16,10 +16,10 @@ function getPieChartData({ stats = {} }) {
 				},
 			],
 		},
-		chart_2: {
-			turnaround_time_chart : 'Turnaround Time',
-			colors                : ['#84af18', '#aae11e', '#d0ee82', '#e3f5b5'],
-			data                  : [
+		turnaround_time_chart: {
+			title  : 'Turnaround Time',
+			colors : ['#84af18', '#aae11e', '#d0ee82', '#e3f5b5'],
+			data   : [
 				{
 					id    : 'zero_to_one_days',
 					label : '0-1 Days',
