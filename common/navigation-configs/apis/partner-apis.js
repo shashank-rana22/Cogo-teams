@@ -10579,6 +10579,101 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'auth',
 		},
+		{
+			api          : 'list_ticket_types',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'list_ticket_default_types',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'list_ticket_tags',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'list_tickets',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_ticket_graph',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_ticket_stats',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'list_ticket_activities',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_ticket_details',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'create_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'update_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'create_ticket_activity',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'reassign_ticket_reviewer',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'create_ticket_default_role',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'create_ticket_default_timing',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'create_ticket_default_type',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'update_ticket_default_timing',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'update_ticket_default_type',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'delete_ticket_default_timing',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'delete_ticket_default_type',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
 	],
 };
 
