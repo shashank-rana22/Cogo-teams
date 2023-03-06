@@ -43,8 +43,12 @@ function AccordianCards({
 		jobSource      : '',
 		jobType        : '',
 		organizationId : '',
+		referenceId    : '',
+		shipmentId     : '',
 	});
 	const router = useRouter();
+
+	console.log(dataCard, 'dataCard');
 
 	return (
 		<div>
@@ -204,7 +208,8 @@ function AccordianCards({
 									onClick={() => {
 										setCurrentOpenSID(jobId);
 										router.push(
-											`/business-finance/coe-finance/cost-sheet?shipmentId=${jobId}
+											`/business-finance/coe-finance/cost-sheet?shipmentId=
+											${dataCard?.shipmentId || dataCard?.referenceId}
 										&jobNumber=${dataCard?.jobNumber}&jobSource=${dataCard?.jobSource}
 										&jobType=${dataCard?.jobType}&orgId=${dataCard?.organizationId}
 										&IsJobClose=${jobStatus}`,
