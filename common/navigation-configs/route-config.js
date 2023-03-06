@@ -1,6 +1,7 @@
 import allocations from './config/allocations';
 import businessFinance from './config/business-finance';
 import cogoAcademy from './config/cogo-academy';
+import cogoAssured from './config/cogo-assured';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
@@ -27,6 +28,7 @@ const routeConfig = {
 	...inventory_management,
 	...kamMonitoring,
 	...performanceManagement,
+	...cogoAssured,
 };
 
 export default routeConfig;
