@@ -10,6 +10,7 @@ import BadgeListItem from './BadgeListItem';
 import CreateBadge from './CreateBadge';
 import CreateMastery from './CreateMastery';
 import Header from './Header';
+import MasteryListItem from './MasteryListItem';
 import styles from './styles.module.css';
 
 function Badges() {
@@ -19,8 +20,13 @@ function Badges() {
 		router.push('/allocation/kam-expertise');
 	};
 
-	const [window, setWindow] = useState(1);
+	const [toggleScreen, setToggleScreen] = useState(1);
+	// Screen 1 - Badge List
+	// Screen 2 - Create Mastery
+	// Screen 3 - Create Badge
+
 	const [autofill, setAutofill] = useState({});
+	const [masteryListData, setMasteryListData] = useState({});
 
 	const { loading, list:badgeList } = useBadgeConfigurationList();
 
@@ -43,37 +49,30 @@ function Badges() {
 				<div>
 					<Header
 						badgeList={badgeList.length}
-						setWindow={setWindow}
+						setToggleScreen={setToggleScreen}
+						setMasteryListData={setMasteryListData}
 						setAutofill={setAutofill}
 					/>
 				</div>
 			</section>
-			{
+			<div>
 
-				(isEmpty(badgeList) && !loading) ? (
-					<div style={{
-						padding         : '60px 0',
-						height          : '400px',
-						backgroundColor : 'white',
-						margin          : '20px 0',
-					}}
-					>
-						<EmptyState height={400} width={600} flexDirection="column" />
-					</div>
-				)
-
-					: 	(
-						<div>
-							{
-								(window === 1)
-			&&	badgeList?.map(((data, index) => (data.medal_collection.length > 0
+				{
+					// ToDo: add empty state's dimensions
+					(toggleScreen === 1) && isEmpty(badgeList)
+						? <EmptyState />
+						: ''
+				}
+				{
+				(toggleScreen === 1)
+			&&	(badgeList?.map(((data, index) => (data.medal_collection.length > 0
 				? (
 					<MasteryListItem
 						data={data}
 						index={index}
 						loading={loading}
-						setWindow={setWindow}
-						setAutofill={setAutofill}
+						setToggleScreen={setToggleScreen}
+						setMasteryListData={setMasteryListData}
 					/>
 				)
 				: (
@@ -81,32 +80,33 @@ function Badges() {
 						data={data}
 						index={index}
 						loading={loading}
-						setWindow={setWindow}
+						setToggleScreen={setToggleScreen}
 						setAutofill={setAutofill}
 					/>
 				)
-			)))
+			))))
 
-							}
+			}
 
-							{
-			(window === 2) && (
+				{
+			(toggleScreen === 2) && (
 				<div>
-					<CreateMastery setWindow={setWindow} />
+					<CreateMastery
+						setToggleScreen={setToggleScreen}
+						badgeList={badgeList}
+						masteryListData={masteryListData}
+					/>
 				</div>
 			)
 			}
-							{
-			(window === 3) && (
-				<div>
-					<CreateBadge setWindow={setWindow} autofill={autofill} />
-				</div>
-			)
-}
-						</div>
-					)
-
+				{
+				(toggleScreen === 3) && (
+					<div>
+						<CreateBadge setToggleScreen={setToggleScreen} autofill={autofill} />
+					</div>
+				)
 			}
+			</div>
 
 		</section>
 	);
