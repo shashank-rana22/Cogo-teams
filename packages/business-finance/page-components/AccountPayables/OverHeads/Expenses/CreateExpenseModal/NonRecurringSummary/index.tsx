@@ -3,8 +3,13 @@ import { startCase } from '@cogoport/utils';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../../commons/utils/formatDate';
+import useGetStakeholders from '../../hooks/useGetStakeholders';
 
 import styles from './styles.module.css';
+
+interface Entity {
+	entity_code?:number | string,
+}
 
 interface Data {
 	vendorName?: string,
@@ -15,6 +20,9 @@ interface Data {
 	expenseCategory?:string,
 	expenseSubCategory?:string,
 	branch?:string,
+	entityObject?:Entity,
+	invoiceDate?:Date,
+	totalPayable?:number | string,
 }
 
 interface Props {
@@ -24,46 +32,63 @@ interface Props {
 function NonRecurringSummary({ nonRecurringData }:Props) {
 	const {
 		periodOfTransaction,
-		vendorName, expenseCategory,
-		expenseSubCategory, branch, paymentMode,
+		vendorName,
+		expenseCategory,
+		expenseSubCategory,
+		branch,
+		paymentMode,
+		entityObject,
+		invoiceDate,
+		transactionDate,
+		uploadedInvoice,
+		totalPayable,
 	} = nonRecurringData || {};
+
+	const stakeholders = useGetStakeholders(expenseCategory);
+	console.log('stakeholders-', stakeholders);
 
 	const summaryDataFirst = [
 		{
 			title : 'Vendor Name',
-			value : vendorName || 'N/A',
+			value : vendorName ? showOverflowingNumber(vendorName, 18) : 'N/A',
 		},
 		{
 			title : 'Expense Category',
-			value : expenseCategory || 'N/A',
+			value : expenseCategory ? (showOverflowingNumber(startCase(expenseCategory), 18)) : 'N/A',
 		},
 		{
 			title : 'Expense Sub-Category',
-			value : expenseSubCategory || 'N/A',
+			value : expenseSubCategory ? showOverflowingNumber(
+				startCase(expenseSubCategory.replaceAll('_', ' ')),
+				18,
+			) : 'N/A',
 		},
 		{
 			title : 'Entity',
-			value : 'N/A',
+			value : entityObject?.entity_code || 'N/A',
 		},
 		{
 			title : 'Branch ',
-			value : branch || 'N/A',
+			value : branch ? showOverflowingNumber(JSON.parse(branch)?.name, 18) : 'N/A',
 		},
 	];
 	const summaryDataSecond = [
 		{
 			title : 'Payable Amount',
-			value : <div>N/A</div>,
+			value : <div>{totalPayable || 'N/A'}</div>,
 		},
 		{
 			title : 'Expense Date',
-			value : <div>N/A</div>,
+			value : <div>
+{invoiceDate
+	? formatDate(invoiceDate, 'dd/MMM/yy', {}, false) : 'N/A'}
+           </div>,
 		},
 		{
 			title : 'Transaction Date',
 			value : <div>
-				{nonRecurringData?.transactionDate
-					? formatDate(nonRecurringData?.transactionDate, 'dd/MMM/yy', {}, false) : 'N/A'}
+				{transactionDate
+					? formatDate(transactionDate, 'dd/MMM/yy', {}, false) : 'N/A'}
 
            </div>,
 		},
@@ -87,13 +112,15 @@ function NonRecurringSummary({ nonRecurringData }:Props) {
 		{
 			title : 'Uploaded Documents',
 			value : <div>
-				{nonRecurringData?.uploadedInvoice
+				{uploadedInvoice
 					? (
 						<a
-							href={nonRecurringData?.uploadedInvoice}
+							href={uploadedInvoice}
 							style={{ color: 'blue', textDecoration: 'underline', fontSize: '16px' }}
+							target="_blank"
+							rel="noreferrer"
 						>
-							{showOverflowingNumber(nonRecurringData?.uploadedInvoice, 20)}
+							{showOverflowingNumber(uploadedInvoice, 20)}
 						</a>
 					)
 					: 'N/A'}

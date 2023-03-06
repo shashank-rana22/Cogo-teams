@@ -71,9 +71,10 @@ export const nonRecurringExpenseDetails = ({
 
 		if (branchIds?.length > 0) {
 			const branches = [];
+
 			branchIds.forEach((id) => {
 				(officeLocations || []).forEach((location) => {
-					if (id === location.value) {
+					if (id === JSON.parse(location?.value)?.branchId) {
 						branches.push(location);
 					}
 				});

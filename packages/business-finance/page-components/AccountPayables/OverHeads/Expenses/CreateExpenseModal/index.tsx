@@ -89,6 +89,7 @@ function CreateExpenseModal({
 					<Modal.Body>
 						<MailTemplate
 							nonRecurringData={nonRecurringData}
+							setNonRecurringData={setNonRecurringData}
 						/>
 					</Modal.Body>
 				</Modal>

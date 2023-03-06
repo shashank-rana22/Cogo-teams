@@ -2,7 +2,13 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-function TotalColumn({ append, totalAmountBeforeTax }) {
+function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterTax, totalPayable }) {
+	const getValue = (value) => {
+		if (Number.isNaN(value)) {
+			return '---';
+		}
+		return parseFloat(value).toFixed(2);
+	};
 	return (
 		<>
 			<div className={styles.flexend}>
@@ -17,18 +23,24 @@ function TotalColumn({ append, totalAmountBeforeTax }) {
 			<div className={styles.flex}>
 				<div className={`${styles.col} ${styles.total}`} style={{ width: '42%' }}>
 					<span>
-						TOTAL
-						AMOUNT
+						Total amount before tax
 					</span>
-					<span>{Number.isNaN(totalAmountBeforeTax) ? '---' : totalAmountBeforeTax }</span>
+					<span>
+						{ getValue(totalAmountBeforeTax)}
+					</span>
 				</div>
 				<div className={`${styles.col}`} style={{ width: '16%' }}>
 					Tax
-					<span>200000</span>
+					<span>
+						{ getValue(totalTax)}
+						%
+					</span>
 				</div>
 				<div className={`${styles.col}`} style={{ width: '18%' }}>
 					Amount after Tax
-					<span>200000</span>
+					<span>
+						{ getValue(totalAmountAfterTax)}
+					</span>
 				</div>
 				<div className={`${styles.col}`} style={{ width: '20%' }}>
 					TDS
@@ -36,7 +48,7 @@ function TotalColumn({ append, totalAmountBeforeTax }) {
 				</div>
 				<div className={`${styles.col}`} style={{ width: '24%' }}>
 					Payable
-					<span>200000</span>
+					<span>{ getValue(totalPayable)}</span>
 				</div>
 			</div>
 		</>

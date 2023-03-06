@@ -2,9 +2,10 @@
 
 	:global {
 		padding: 24px 16px;
-		overflow: unset;
 		margin-bottom: 0 !important;
 		background-color: #ffff;
+		overflow: unset;
+
 
 		.ui_table_container {
 			border: none;

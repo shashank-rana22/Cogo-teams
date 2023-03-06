@@ -1,11 +1,20 @@
 import { Button } from '@cogoport/components';
 import { IcMFileUploader } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
+
+import useCreateExpense from '../../hooks/useCreateExpense';
 
 import Details from './Details';
 import styles from './styles.module.css';
 
-function MailTemplate({ nonRecurringData }) {
-	const { uploadedInvoice } = nonRecurringData || {};
+function MailTemplate({ nonRecurringData, setNonRecurringData }) {
+	const { uploadedInvoice, vendorName = '', expenseCategory = '' } = nonRecurringData || {};
+	console.log('nonRecurringData-', nonRecurringData);
+	const { submitData, loading } = useCreateExpense(nonRecurringData);
+
+	const handleSubmit = () => {
+		submitData();
+	};
 
 	return (
 		<div className={styles.container}>
@@ -32,21 +41,27 @@ function MailTemplate({ nonRecurringData }) {
 
 			<div className={styles.heading_subject}>Email subject</div>
 			<div className={styles.subject}>
-				<Details text="Vendor Name | Expense Category | Expense Approval Request" />
+				<Details text={`${vendorName} | ${startCase(expenseCategory)} | Expense Approval Request`} />
 			</div>
 
 			<div className={styles.heading_body}>Email body</div>
 			<div className={styles.subject}>
-				<Details isBody />
+				<Details
+					isBody
+					nonRecurringData={nonRecurringData}
+					setNonRecurringData={setNonRecurringData}
+				/>
 			</div>
 
-			<div className={styles.file}>
-				<a href={uploadedInvoice}>
-					<IcMFileUploader />
-					Uploaded File
-				</a>
-			</div>
-			<div className={styles.button}><Button>Send</Button></div>
+			{uploadedInvoice && (
+				<div className={styles.file}>
+					<a href={uploadedInvoice} target="_blank" rel="noreferrer">
+						<IcMFileUploader />
+						Uploaded File
+					</a>
+				</div>
+			)}
+			<div className={styles.button}><Button onClick={handleSubmit}>Send</Button></div>
 		</div>
 	);
 }

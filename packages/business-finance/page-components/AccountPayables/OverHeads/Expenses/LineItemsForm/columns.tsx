@@ -1,27 +1,27 @@
 import { InputController, SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 
-const lineItemColumns = (remove, control, register, taxOptions) => [
+const lineItemColumns = ({
+	remove, control, taxOptions,
+}) => [
 	{
 		Header   : 'Item',
 		id       : 'itemName',
-		accessor : (row, index) => (
+		accessor : (row:any, index:number) => (
 			<InputController
 				control={control}
 				name={`line_items.${index}.itemName`}
-				{...register(`line_items.${index}.itemName`)}
 			/>
 		),
 	},
 	{
 		Header   : 'Amount before tax',
 		id       : 'amount_before_tax',
-		accessor : (row, index) => (
+		accessor : (row:any, index:number) => (
 			<div style={{ width: '110px' }}>
 				<InputController
 					control={control}
 					name={`line_items.${index}.amount_before_tax`}
-					{...register(`line_items.${index}.amount_before_tax`)}
 				/>
 			</div>
 		),
@@ -29,13 +29,13 @@ const lineItemColumns = (remove, control, register, taxOptions) => [
 	{
 		Header   : 'Tax ',
 		id       : 'tax',
-		accessor : (row, index) => (
-			<div style={{ width: '96px' }}>
+		accessor : (row:any, index:number) => (
+			<div style={{ width: '122px' }}>
 				<SelectController
 					control={control}
 					options={taxOptions}
 					name={`line_items.${index}.tax`}
-					{...register(`line_items.${index}.tax`)}
+					size="md"
 				/>
 			</div>
 		),
@@ -43,40 +43,42 @@ const lineItemColumns = (remove, control, register, taxOptions) => [
 	{
 		Header   : 'Amount after tax',
 		id       : 'amount_after_tax',
-		accessor : (row, index) => (
+		accessor : (row:any, index:number) => (
 			<div style={{ width: '110px' }}>
 				<InputController
 					control={control}
 					name={`line_items.${index}.amount_after_tax`}
-					{...register(`line_items.${index}.amount_after_tax`)}
 				/>
 			</div>
-		),
+		)
+		,
 	},
 	{
 		Header   : 'TDS',
 		id       : 'tds',
-		accessor : () => (
-			<div style={{ width: '96px' }}>
-				TDS here...
+		accessor : (row:any, index:number) => (
+			<div style={{ width: '110px' }}>
+				<InputController
+					control={control}
+					name={`line_items.${index}.tds`}
+				/>
 			</div>
 		),
 	},
 	{
 		Header   : 'Payable Amount',
 		id       : 'payable_amount',
-		accessor : (row, index) => (
+		accessor : (row:any, index:number) => (
 			<InputController
 				control={control}
 				name={`line_items.${index}.payable_amount`}
-				{...register(`line_items.${index}.payable_amount`)}
 			/>
 		),
 	},
 	{
 		Header   : '',
 		id       : 'delete',
-		accessor : (row, index) => (
+		accessor : (row:any, index:number) => (
 			<div>
 				{index !== 0 && (
 					<IcMDelete

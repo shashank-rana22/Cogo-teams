@@ -4,14 +4,14 @@ import React, { useEffect, useState } from 'react';
 import StyledTable from '../../../../commons/StyledTable';
 import usePostListItemTaxes from '../hooks/usePostItemTaxes';
 
-import lineItemColumns from './coulmns';
+import lineItemColumns from './columns';
 import styles from './styles.module.css';
 import TotalAfterTax from './TotalAfterTax';
 import TotalColumn from './TotalColumn';
 
 function LineItemsForm({ formData, setFormData }) {
 	const [taxOptions, setTaxOptions] = useState([]);
-	const { control, watch, register } = useForm(
+	const { control, watch, setValue } = useForm(
 		{
 			defaultValues: {
 				line_items: [
@@ -20,6 +20,7 @@ function LineItemsForm({ formData, setFormData }) {
 			},
 		},
 	);
+
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'line_items',
@@ -33,8 +34,8 @@ function LineItemsForm({ formData, setFormData }) {
 		if (lineItemsList?.length > 0) {
 			lineItemsList.forEach((item) => {
 				taxList.push({
-					label : `${item?.itemName} - ${item?.taxPercent}%`,
-					value : item?.productCode,
+					label : `${item?.taxPercent}%-${item?.itemName}`,
+					value : item?.taxPercent?.toString(),
 				});
 			});
 			setTaxOptions([...taxList]);
@@ -52,30 +53,64 @@ function LineItemsForm({ formData, setFormData }) {
 		if (watchFieldArray?.length > 0) {
 			setFormData({ ...formData, lineItemsList: watchFieldArray });
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [watchFieldArray]);
 
-	const totalAmountBeforeTax = watchFieldArray?.reduce((acc, curr) => {
-		const amount = curr?.amount_before_tax;
-		if (!Number.isNaN(+amount)) {
-			return +acc + +amount;
-		}
-		return +acc;
-	}, 0);
+		controlledFields.forEach((item, index) => {
+			const beforeTax = +watch(`line_items.${index}.amount_before_tax`);
+			const tax = +watch(`line_items.${index}.tax`);
+
+			if (beforeTax && tax >= 0) {
+				const amountAfterTax = beforeTax + (beforeTax * (tax / 100));
+				setValue(`line_items.${index}.amount_after_tax`, +amountAfterTax);
+				const tds = +watch(`line_items.${index}.tds`);
+				if (tds) { setValue(`line_items.${index}.payable_amount`, +amountAfterTax + tds); }
+			}
+		});
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(controlledFields)]);
+
+	const getSum = (columnName:string) => {
+		const sum = watchFieldArray?.reduce((acc, curr) => {
+			const columnVal = curr?.[columnName];
+			if (!Number.isNaN(+columnVal)) {
+				return +acc + +columnVal;
+			}
+			return +acc;
+		}, 0);
+		return sum;
+	};
+
+	const totalAmountBeforeTax = getSum('amount_before_tax');
+	const totalTax = getSum('tax');
+	const totalAmountAfterTax = getSum('amount_after_tax');
+	const totalPayable = getSum('payable_amount');
+
+	useEffect(() => {
+		if (totalPayable) { setFormData({ ...formData, totalPayable }); }
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [totalPayable]);
 
 	return (
 		<div className={styles.section}>
 			<form className={styles.container}>
-				<div className={styles.tableContainer}>
-					<StyledTable
-						columns={lineItemColumns(remove, control, register, taxOptions)}
-						data={controlledFields}
-						style={{ margin: '0px' }}
-					/>
+				<StyledTable
+					columns={lineItemColumns({
+						remove, control, taxOptions,
+					})}
+					data={controlledFields}
+					style={{ margin: '0px' }}
+				/>
 
-				</div>
-				<TotalColumn append={append} totalAmountBeforeTax={totalAmountBeforeTax} />
-				<TotalAfterTax />
+				<TotalColumn
+					append={append}
+					totalAmountBeforeTax={totalAmountBeforeTax}
+					totalTax={totalTax}
+					totalAmountAfterTax={totalAmountAfterTax}
+					totalPayable={totalPayable}
+				/>
+				<TotalAfterTax
+					totalPayable={totalPayable}
+				/>
 			</form>
 		</div>
 	);
