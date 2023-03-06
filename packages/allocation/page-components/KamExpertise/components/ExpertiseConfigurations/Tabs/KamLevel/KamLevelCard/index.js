@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -11,15 +11,17 @@ function KamLevelCard({
 	data = {},
 	id = '',
 	dataLength = -1,
+
 }) {
-	const [editItem, setEditItem] = useState(true);
+	const [showEditBtn, setshowEditBtn] = useState(true);
 	const {
-		transition_level,
+		transition_level = '',
 		expertise_details = [],
 	} = data;
 
 	const expertiseObject = expertise_details.map((item) => item);
-	console.log('hihi', expertiseObject);
+
+	// isEmpty(title) ? (setshowEditBtn(false)) : (setshowEditBtn(true));
 
 	// const COLUMN_MAPPING = [
 	// 	{
@@ -62,7 +64,8 @@ function KamLevelCard({
 				</div>
 
 				<div className={styles.button_container}>
-					{editItem ? (
+
+					{showEditBtn || isEmpty(title) ? (
 						<Button
 							themeType="secondary"
 							className={styles.delete_button}
@@ -71,7 +74,7 @@ function KamLevelCard({
 									e.stopPropagation();
 								}
 
-								setEditItem((pv) => (!pv));
+								setshowEditBtn(false);
 
 								setAction('edit');
 							}}
@@ -80,37 +83,47 @@ function KamLevelCard({
 
 						</Button>
 					) : (
-						<Button
-							className={styles.delete_button}
-							themeType="secondary"
-							style={{ marginRight: '0' }}
-							onClick={(e) => {
-								e.stopPropagation();
-								setEditItem((pv) => (!pv));
-								setAction('show');
-							}}
-						>
-							Cancel
-						</Button>
+						<>
+							<Button
+								className={styles.delete_button}
+								themeType="secondary"
+								style={{ marginRight: '0' }}
+								onClick={(e) => {
+									e.stopPropagation();
+									setshowEditBtn(true);
+									setAction('show');
+								}}
+							>
+								Cancel
+							</Button>
+							<Button
+								className={styles.delete_button}
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+								type="submit"
+
+							>
+								{' '}
+								Save
+							</Button>
+						</>
 					)}
 
-					{dataLength === id - 1
+					{dataLength === data.transition_level - 1
+
 						? (
 							<div className={styles.delete_button}>
 								<IcMDelete onClick={(event) => {
-									console.log('ffgg', event);
 									event.stopPropagation();
 								}}
 								/>
 							</div>
 						)
 						: (
-							// <div className={styles.delete_button_disable}>
-							// 	<IcMDelete />
-							// </div>
 							null
 						)}
-					{!editItem
+					{/* {!showEditBtn
 						? (
 							<Button
 								className={styles.delete_button}
@@ -125,12 +138,15 @@ function KamLevelCard({
 						)
 						: (
 							null
-						)}
+						)} */}
 
 				</div>
 
 			</div>
-			{ title === id
+			{
+
+			title === id + 1
+
 				? (
 					<div className={styles.title_show}>
 						To level up from KAM 1 TO KAM 2, A KAM needs to fulfill all of the following criteria
@@ -143,13 +159,16 @@ function KamLevelCard({
 							<div className={styles.list_item}>
 								<div className={styles.label_text}>
 									{startCase(item.expertise_type)}
+									{' '}
+									Score
 								</div>
-								<div><b>{item.threshold_score}</b></div>
+								<div><b>{item?.threshold_score || '---'}</b></div>
 							</div>
 						))}
 
 					</div>
-				)}
+				)
+}
 
 		</div>
 	);

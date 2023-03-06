@@ -1,4 +1,7 @@
+import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { IcMArrowNext } from '@cogoport/icons-react';
+import React from 'react';
 
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
 import { controls } from '../ControlsForScore/controls';
@@ -6,18 +9,50 @@ import { controls_bottom } from '../ControlsForScore/controls_bottom';
 
 import styles from './styles.module.css';
 
-function KamLevelDetailsEdit({ data }) {
+function ResponseCard({
+	// createKam,
+	setCreateKam,
+	dataLength,
+}) {
 	const formProps = useForm();
 
 	const { control } = formProps;
-	console.log('edit data', data);
 
 	return (
-
 		<div className={styles.level_card_container}>
-			{/* <form onSubmit={handleSubmit(onSave)}> */}
-			{controls.map((singleField, key) => {
+			<div className={styles.level_desc}>
+				<b>
+					KAM
+					{' '}
+					{dataLength + 1 }
+					<IcMArrowNext className={styles.arrow} />
+					{' '}
+					{dataLength + 2}
+				</b>
+
+			</div>
+			<div style={{
+				width          : '12%',
+				float          : 'right',
+				justifyContent : 'center',
+				alignItems     : 'center',
+				display        : 'flex',
+			}}
+			>
+				<Button
+					style={{ margin: '10px' }}
+					themeType="secondary"
+					onClick={() => setCreateKam(false)}
+				>
+					Cancel
+
+				</Button>
+				<Button style={{ margin: '10px' }}>Save</Button>
+
+			</div>
+			{controls.map((singleField) => {
 				const Element = getFieldController(singleField.type) || null;
+
 				if (!Element) return null;
 
 				return (
@@ -25,8 +60,6 @@ function KamLevelDetailsEdit({ data }) {
 						<div className={styles.row_level}>
 							{' '}
 							{singleField.label}
-							{' '}
-							Score
 							<div className={styles.supporting_text}>Score</div>
 							<div>
 								<Element
@@ -34,13 +67,7 @@ function KamLevelDetailsEdit({ data }) {
 									key={singleField.label}
 									control={control}
 									id={singleField.name}
-									placeholder={data[singleField.name]}
 								/>
-							</div>
-							<div className={styles.current_value}>
-								Current value:
-								{' '}
-								{data.expertise_details[`${key}`]?.threshold_score || '--'}
 							</div>
 
 						</div>
@@ -68,14 +95,8 @@ function KamLevelDetailsEdit({ data }) {
 										key={singleField.label}
 										control={control}
 										id={singleField.name}
-										placeholder={data[singleField.name]}
 									/>
 
-								</div>
-								<div className={styles.current_value}>
-									Current value:
-									{' '}
-									{data[singleField.name]}
 								</div>
 
 								{' '}
@@ -87,10 +108,10 @@ function KamLevelDetailsEdit({ data }) {
 				</div>
 
 			</div>
-			{/* </form> */}
+
 		</div>
 
 	);
 }
 
-export default KamLevelDetailsEdit;
+export default ResponseCard;
