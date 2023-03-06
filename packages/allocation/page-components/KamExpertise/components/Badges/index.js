@@ -10,6 +10,7 @@ import BadgeListItem from './BadgeListItem';
 import CreateBadge from './CreateBadge';
 import CreateMastery from './CreateMastery';
 import Header from './Header';
+import MasteryListItem from './MasteryListItem';
 import styles from './styles.module.css';
 
 function Badges() {
