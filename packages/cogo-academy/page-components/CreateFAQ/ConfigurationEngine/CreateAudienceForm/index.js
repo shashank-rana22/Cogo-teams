@@ -15,18 +15,6 @@ import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
 import createAudienceControls from './utils/createAudienceControls';
 
-const MAPPING = {
-	name              : InputController,
-	cogo_entity_id    : SelectController,
-	country_id        : SelectController,
-	platform          : SelectController,
-	work_scope        : SelectController,
-	auth_function     : SelectController,
-	auth_sub_function : SelectController,
-	persona           : SelectController,
-
-};
-
 function CreateAudienceForm(props) {
 	const {
 		source = '',
@@ -175,7 +163,7 @@ function CreateAudienceForm(props) {
 			{(Object.keys(controls) || []).map((controlItem) => {
 				const { name = '', label = '' } = controls[controlItem] || {};
 
-				const DynamicController = MAPPING[name];
+				const DynamicController = name === 'name' ? InputController : SelectController;
 
 				if (showElements[name]) {
 					return (
