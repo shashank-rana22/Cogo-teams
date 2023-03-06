@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function MailTemplate({ nonRecurringData, setNonRecurringData }) {
 	const { uploadedInvoice, vendorName = '', expenseCategory = '' } = nonRecurringData || {};
 	console.log('nonRecurringData-', nonRecurringData);
-	const { submitData, loading } = useCreateExpense(nonRecurringData);
+	const { submitData } = useCreateExpense(nonRecurringData);
 
 	const handleSubmit = () => {
 		submitData();

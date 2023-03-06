@@ -17,6 +17,8 @@ const useListVendors = () => {
 
 		try {
 			if (checkCombination) {
+				// THIS IS TO CHECK THE COMBINATION OF THE INPUT VALUES CORRESPONDING TO VENDOR DATA
+
 				// const value = await trigger({
 				// 	params: {
 				// 		filters: {
