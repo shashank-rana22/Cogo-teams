@@ -1,6 +1,7 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
+import { NestedObj } from '../../List/Interfaces';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 
@@ -53,7 +54,7 @@ function Child({
 							rules : controlItem?.rules,
 							label : controlItem?.label,
 						});
-						const extraProps:any = {};
+						const extraProps:NestedObj = {};
 						if (controlItem.customProps?.options) {
 							extraProps.options = controlItem.customProps.options[index];
 						}

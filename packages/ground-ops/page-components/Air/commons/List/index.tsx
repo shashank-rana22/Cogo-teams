@@ -3,17 +3,17 @@ import React from 'react';
 
 import EmptyState from './EmptyState';
 import GetFinalList from './GetFinalList';
-import { FunctionObjects, FieldType, DataType } from './Interfaces';
+import { FunctionObjects, FieldType, ListDataType } from './Interfaces';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 interface Props {
 	fields: FieldType[];
-	data: DataType;
+	data: ListDataType;
 	loading?: boolean;
 	page?: number;
-	setPage?: any;
+	setPage?: Function;
 	functions?: FunctionObjects;
 }
 
@@ -25,7 +25,7 @@ function List({
 	setPage,
 	functions,
 } :Props) {
-	const { data = {} }:any = listData;
+	const { data = {} } = listData;
 	const { finalData = [], resourceLoading } = GetFinalList({ data, listData, loading });
 
 	const render = () => {
@@ -56,7 +56,7 @@ function List({
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}
-							totalItems={data?.totalRecords}
+							totalItems={Number(data?.totalRecords)}
 							pageSize={10}
 							type="table"
 							onPageChange={(val) => { setPage(val); }}

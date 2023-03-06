@@ -88,6 +88,7 @@ function GenerateMAWB({
 		setValue('city', 'NEW DELHI');
 		setValue('place', 'NEW DELHI');
 		setValue('class', 'q');
+		setValue('commodity', `${'SAID TO CONTAIN\n'}${taskItem.commodity}`);
 	}, []);
 
 	useEffect(() => {
@@ -249,7 +250,6 @@ function GenerateMAWB({
 								edit={edit}
 								setEdit={setEdit}
 								viewDoc={viewDoc}
-								setViewDoc={setViewDoc}
 								chargeableWeight={chargeableWeight}
 								setGenerate={setGenerate}
 							/>

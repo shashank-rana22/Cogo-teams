@@ -58,7 +58,7 @@ function ApprovalPending({
 	};
 
 	const functions = {
-		handleDownload: (singleItem:any) => (
+		handleDownload: (singleItem) => (
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
@@ -70,7 +70,7 @@ function ApprovalPending({
 
 			</Button>
 		),
-		handleEdit: (singleItem:any) => (
+		handleEdit: (singleItem) => (
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
@@ -81,7 +81,7 @@ function ApprovalPending({
 				<IcMEdit fill="#8B8B8B" />
 			</Button>
 		),
-		handleStatus: (singleItem:any) => (
+		handleStatus: (singleItem) => (
 			singleItem.documentState === 'document_amendment_requested'
 				? (
 					<Button

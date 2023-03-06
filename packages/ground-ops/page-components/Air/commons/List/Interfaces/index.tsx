@@ -1,9 +1,5 @@
 import React, { ReactNode } from 'react';
 
-export interface GenericObject {
-	[key: string]: any;
-}
-
 export interface FunctionObjects {
 	[key: string]: React.FC;
 }
@@ -19,9 +15,17 @@ export interface FieldType {
 	className?: string;
 	styles?: NestedObj;
 	func?: string;
+	render?: Function;
+}
+
+export interface ListDataType {
+	data?: NestedObj;
 }
 
 export interface DataType {
-	list?: Array<object>;
-	total_count?: number;
+	airlineIds?: Array<string>;
+	airportIds?: Array<string>;
+	importerExporterIds?: Array<string>;
+	shipmentPendingTasks?: Array<object>;
+	totalRecords?: number;
 }

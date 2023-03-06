@@ -281,9 +281,9 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 											By First Carrier
 											{' '}
 											<div className={cl`
-						${styles.flex} 
-						${styles.flex_font_bold}
-					`}
+													${styles.flex} 
+													${styles.flex_font_bold}
+												`}
 											>
 												<p style={{ fontSize: 12 }}>
 													{taskItem.airlineIataCode}
@@ -320,7 +320,18 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.to_by}
 					`}
 							>
-								<p style={{ fontSize: 9 }}>to</p>
+								<p style={{ fontSize: 9 }}>
+									to
+									<div className={cl`
+										${styles.flex} 
+										${styles.flex_font_bold}
+									`}
+									>
+										<p style={{ fontSize: 12 }}>
+											{formData.to_one}
+										</p>
+									</div>
+								</p>
 							</div>
 							<div className={cl`
 						${styles.flex} 
@@ -329,7 +340,18 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.to_by}
 					`}
 							>
-								<p style={{ fontSize: 9 }}>by</p>
+								<p style={{ fontSize: 9 }}>
+									by
+									<div className={cl`
+										${styles.flex} 
+										${styles.flex_font_bold}
+									`}
+									>
+										<p style={{ fontSize: 12 }}>
+											{formData.by_one}
+										</p>
+									</div>
+								</p>
 							</div>
 							<div className={cl`
 						${styles.flex} 
@@ -338,7 +360,18 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.to_by}
 					`}
 							>
-								<p style={{ fontSize: 9 }}>to</p>
+								<p style={{ fontSize: 9 }}>
+									to
+									<div className={cl`
+										${styles.flex} 
+										${styles.flex_font_bold}
+									`}
+									>
+										<p style={{ fontSize: 12 }}>
+											{formData.to_two}
+										</p>
+									</div>
+								</p>
 							</div>
 							<div className={cl`
 						${styles.flex} 
@@ -346,7 +379,18 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.to_by}
 					`}
 							>
-								<p style={{ fontSize: 9 }}>by</p>
+								<p style={{ fontSize: 9 }}>
+									by
+									<div className={cl`
+										${styles.flex} 
+										${styles.flex_font_bold}
+									`}
+									>
+										<p style={{ fontSize: 12 }}>
+											{formData.by_two}
+										</p>
+									</div>
+								</p>
 							</div>
 						</div>
 					</div>

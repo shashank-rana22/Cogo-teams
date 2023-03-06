@@ -104,6 +104,39 @@ const mawbControls = () => ({
 				required: 'Freight is Required',
 			},
 		},
+		{},
+		{
+			name        : 'to_one',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'To',
+			placeholder : 'To',
+			span        : 2,
+		},
+		{
+			name        : 'by_one',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'By',
+			placeholder : 'By',
+			span        : 2,
+		},
+		{
+			name        : 'to_two',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'To',
+			placeholder : 'To',
+			span        : 2,
+		},
+		{
+			name        : 'by_two',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'By',
+			placeholder : 'By',
+			span        : 2,
+		},
 	],
 	package: [
 		{
@@ -400,8 +433,8 @@ const mawbControls = () => ({
 		},
 		{
 			name         : 'handlingInformation',
-			type         : 'text',
-			className    : 'primary lg',
+			type         : 'textarea',
+			className    : 'textarea',
 			label        : 'Handling Information:',
 			showOptional : false,
 			span         : 5,
@@ -438,9 +471,9 @@ const mawbControls = () => ({
 
 		{
 			name        : 'commodity',
-			className   : 'primary lg',
 			label       : 'Commodity Details:',
 			type        : 'textarea',
+			className   : 'textarea',
 			span        : 5,
 			maxLength   : 300,
 			placeholder : 'Commodity...',

@@ -3,19 +3,24 @@ import {
 } from '@cogoport/utils';
 import React, { ReactElement } from 'react';
 
-import { GenericObject, FunctionObjects, FieldType } from '../Interfaces/index';
+import { NestedObj, FunctionObjects, FieldType } from '../Interfaces/index';
 
 const ACTIONS = {
 	startCase,
 };
 
-type TypeObject = string | number | Date | GenericObject | null | React.FC ;
+type TypeObject = string | number | Date | null | React.FC ;
 
 type EmptyState = string | number | Date | React.FC;
 
-type Value = Object | ReactElement<any, any> | null;
+type Value = Object | ReactElement | null;
 
-const getValue = (itemData:any, itemField:FieldType, functions:FunctionObjects, emptyState:EmptyState):TypeObject => {
+const getValue = (
+	itemData:NestedObj,
+	itemField:FieldType,
+	functions:FunctionObjects,
+	emptyState:EmptyState,
+):TypeObject => {
 	if (isEmpty(itemData) || isEmpty(itemField)) {
 		return emptyState || '';
 	}

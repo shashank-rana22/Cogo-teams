@@ -137,7 +137,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 					>
 
-						<p className={styles.font_style} style={{ fontSize: 14.5 }}>{taskItem?.airline}</p>
+						<p className={styles.font_style} style={{ fontSize: 14.5 }}>{formData?.airline}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 

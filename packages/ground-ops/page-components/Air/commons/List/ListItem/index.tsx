@@ -1,14 +1,14 @@
 import { Placeholder } from '@cogoport/components';
 import React, { ReactNode } from 'react';
 
-import { FieldType, FunctionObjects } from '../Interfaces/index';
+import { FieldType, FunctionObjects, NestedObj } from '../Interfaces/index';
 import styles from '../styles.module.css';
 
 import getValue from './getValue';
 
 export interface Props {
 	fields: FieldType[];
-	singleitem?: any;
+	singleitem?: NestedObj;
 	functions?: FunctionObjects;
 	loading?: boolean;
 	isMobile?: boolean;
@@ -28,7 +28,7 @@ function CardItem({
 					isMobile ? styles.is_mobile : ''
 				}`}
 			>
-				{fields.map((field:any) => {
+				{fields.map((field:FieldType) => {
 					const itemStyle = field.styles || {};
 					return (
 						<div

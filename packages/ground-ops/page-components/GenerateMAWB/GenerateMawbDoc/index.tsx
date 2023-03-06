@@ -22,7 +22,6 @@ interface Props {
 	edit?: any;
 	setEdit?: Function;
 	viewDoc?: boolean;
-	setViewDoc?:Function;
 	chargeableWeight?:any;
 	setGenerate?:Function;
 }
@@ -41,7 +40,6 @@ function GenerateMawb({
 	edit,
 	setEdit = () => {},
 	viewDoc = false,
-	setViewDoc = () => {},
 	chargeableWeight,
 	setGenerate = () => {},
 }:Props) {
@@ -138,7 +136,6 @@ function GenerateMawb({
 			saveAs(newImage, 'ORIGINAL 1 (FOR ISSUING CARRIER)');
 		}
 		setSaveDocument(false);
-		setViewDoc(false);
 	};
 
 	let agentCharge = 0;
