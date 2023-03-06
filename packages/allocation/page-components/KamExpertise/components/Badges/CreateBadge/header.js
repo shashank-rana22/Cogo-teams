@@ -1,7 +1,7 @@
 // ! remove dummy data
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ badge_type = 'Badge' }) {
 	const dummyDatas = {
 		lstModified   : '31/September/2023',
 		lstModifiedBy : 'Ankur Verma',
@@ -25,7 +25,11 @@ function Header() {
 				{`#${dummyDatas.bdgeNumber}`}
 			</p>
 
-			<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>Add Badge</h2>
+			<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>
+				Add
+				{' '}
+				{badge_type}
+			</h2>
 			<p className={styles.text_styles2}>
 				Select the conditions and number of completions necessary to obtain
 				the badge.

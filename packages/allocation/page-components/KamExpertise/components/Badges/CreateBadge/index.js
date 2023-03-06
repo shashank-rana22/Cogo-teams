@@ -1,4 +1,4 @@
-import { Toast, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
@@ -6,10 +6,9 @@ import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfigurat
 import useCreateNewBadge from '../../../hooks/useCreateNewBadge';
 
 import GetCard from './getCard';
-import Header from './header';
 import styles from './styles.module.css';
 
-function CreateBadge({ setWindow, autofill }) {
+function CreateBadge({ setToggleScreen, autofill }) {
 	const {
 		getAddBadgesControls, formProps,
 	} = useCreateNewBadge();
@@ -38,7 +37,7 @@ function CreateBadge({ setWindow, autofill }) {
 	];
 
 	const onClose = () => {
-		setWindow(1);
+		setToggleScreen(1);
 	};
 
 	const onSave = async (formValues, e) => {

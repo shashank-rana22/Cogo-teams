@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateMasterConfiguration from '../../../hooks/useCreateMasterConfiguration';
@@ -7,38 +8,29 @@ import Header from '../CreateBadge/header';
 
 import styles from './styles.module.css';
 
-function CreateMastery({ setWindow }) {
-	const { formProps, getAddMasteryControls } = useCreateNewMastery();
+function CreateMastery({ setToggleScreen, badgeList = {}, masteryListData = {} }) {
+	const { formProps, getAddMasteryControls } = useCreateNewMastery(masteryListData);
+
 	const InputDesc = getFieldController('text');
 
-	const { control, handleSubmit } = formProps;
+	const { control, watch, handleSubmit } = formProps;
 
 	const UploadController = getFieldController('fileUpload');
 
-	const { loading, onMasterSubmit } = useCreateMasterConfiguration();
-
 	const onClose = () => {
-		setWindow(1);
+		setToggleScreen(1);
 	};
 
-	const onSave = async (formValues, e) => {
-		e.preventDefault();
-		const { name, image_input, description_input } = formValues;
+	const { loading, onSave } = useCreateMasterConfiguration({ onClose });
 
-		const payload_data = {
-
-			mastery_name           : name,
-			description            : description_input,
-			event_configuration_id : '',
-			status                 : 'active',
-			image_url              : image_input,
-			// ToDo: add  badges data
-			// badges,
-		};
-
-		await onMasterSubmit(payload_data);
-	};
-		// ToDo: add loading states
+	const badge_options = []; // for multi-select badges
+	(badgeList || {}).forEach((badge_data) => {
+		if (badge_data.medal_collection.length === 0) {
+			badge_options.push(
+				{ value: badge_data.badge_name, label: badge_data.badge_name },
+			);
+		}
+	});
 
 	if (loading) {
 		return null;
@@ -47,7 +39,7 @@ function CreateMastery({ setWindow }) {
 		<div>
 			<form onSubmit={handleSubmit(onSave)}>
 				<section className={styles.container}>
-					<Header />
+					<Header badge_type="Mastery" />
 					<div className={styles.content_container}>
 						{
 						getAddMasteryControls.map((controlItem) => {
@@ -66,6 +58,7 @@ function CreateMastery({ setWindow }) {
 										key={ele.name}
 										id={`${ele.name}_input`}
 										style={ele.styles}
+										options={badgeList.length > 0 ? badge_options : ele.options}
 									/>
 								</div>
 							);
@@ -77,7 +70,33 @@ function CreateMastery({ setWindow }) {
 								<UploadController
 									name="image_input"
 									control={control}
+									// value={masteryListData ? masteryListData.badge_details[0].image_url : ''}
 								/>
+
+								<div>
+									{
+									watch('image_input')
+										? 										(
+											<div className={styles.preview}>
+												<img src={watch('image_input')} alt="preview_image" />
+											</div>
+										)
+										: null
+									}
+									{
+									!isEmpty(masteryListData) && !watch('image_input')
+										? (
+											<div className={styles.preview}>
+												<img
+													src={masteryListData.badge_details[0].image_url}
+													alt="Modal img preview"
+												/>
+											</div>
+										)
+										: null
+								}
+								</div>
+
 							</div>
 							<div className={styles.text_area_container}>
 								<p style={{ color: '#4f4f4f' }}>Description</p>
@@ -88,6 +107,7 @@ function CreateMastery({ setWindow }) {
 									placeholder="Multimodal maestro is awarded
                                 to users who complete gold 3 in all of these badges"
 									control={control}
+									value={masteryListData ? masteryListData.description : ''}
 								/>
 							</div>
 						</div>

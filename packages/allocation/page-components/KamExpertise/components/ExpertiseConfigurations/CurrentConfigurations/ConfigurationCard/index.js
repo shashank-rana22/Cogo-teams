@@ -44,7 +44,9 @@ const HEADING_MAPPING = {
 	),
 	live: (version) => (
 		<div className={styles.heading}>
-			Version&nbsp;
+			Version
+			{' '}
+			{' '}
 			{version}
 		</div>
 	),
@@ -70,11 +72,12 @@ function ConfigurationCard(props) {
 						<strong>{format(last_modified, 'dd-MM-yyyy')}</strong>
 					</div>
 				</div>
+
 				<Button themeType="secondary">Edit</Button>
 			</div>
 
 			<div className={styles.cards}>
-				{CARD_DATA.map((item) => <CardItem {...item} />)}
+				{CARD_DATA.map((item) => <CardItem key={item.event} {...item} />)}
 			</div>
 		</div>
 	);
