@@ -109,7 +109,7 @@ const useListEnrichment = () => {
 		{
 			id       : 'business_name',
 			Header   : 'ORGANIZATION',
-			accessor : ({ organization = '' }) => (
+			accessor : ({ organization = {} }) => (
 				<section>
 					{organization.business_name || '-'}
 				</section>
@@ -118,7 +118,7 @@ const useListEnrichment = () => {
 		{
 			id       : 'created_at',
 			Header   : 'REQUESTED AT',
-			accessor : ({ created_at }) => (
+			accessor : ({ created_at = '' }) => (
 				<section>
 					{created_at	 ? (
 						<div>
@@ -213,7 +213,7 @@ const useListEnrichment = () => {
 						themeType="secondary"
 						size="md"
 						type="button"
-						disabled={error_sheet_url === null}
+						disabled={!error_sheet_url}
 						// eslint-disable-next-line no-undef
 						onClick={() => window.open(error_sheet_url, '_blank')}
 					>
