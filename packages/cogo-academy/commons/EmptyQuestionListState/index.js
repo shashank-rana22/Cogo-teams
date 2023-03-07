@@ -3,7 +3,7 @@ import { IcCFtick } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
 import useCreateQuestionSet
-	from '../../page-components/FAQs/page-components/QuestionsList/hooks/useCreateQuestionRequest';
+	from '../../page-components/FAQs/page-components/Tabbase/QuestionsList/hooks/useCreateQuestionRequest';
 
 import styles from './styles.module.css';
 
