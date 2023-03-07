@@ -2,9 +2,9 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 interface Props {
-	edit?: boolean;
-	setGenerate?:any;
-	setEdit?:any;
+	edit?: boolean | string;
+	setGenerate?:Function;
+	setEdit?:Function;
 }
 
 const useCreateShipmentDocument = ({

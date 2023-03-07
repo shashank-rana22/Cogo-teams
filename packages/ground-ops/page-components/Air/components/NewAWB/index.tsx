@@ -13,7 +13,7 @@ function NewAWB({ data, loading, page, setPage, setGenerate, setItem }) {
 	};
 
 	const functions = {
-		handleGenerate: (singleItem:any) => (
+		handleGenerate: (singleItem) => (
 			<Button
 				style={{ border: '1px solid #333', padding: '2px 8px', fontSize: 12 }}
 				themeType="secondary"

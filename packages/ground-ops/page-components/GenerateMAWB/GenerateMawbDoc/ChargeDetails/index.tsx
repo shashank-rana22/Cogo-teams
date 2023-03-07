@@ -5,11 +5,15 @@ import OtherChargeDetails from './OtherChargeDetails';
 import styles from './styles.module.css';
 import WeightChargeDetails from './WeightChargeDetails';
 
+interface NestedObj {
+	[key: string]: NestedObj | string | number;
+}
+
 interface Props {
-	taskItem?: any;
-	footerValues?: any;
-	formData?: any;
-	data?:any;
+	taskItem?: NestedObj;
+	footerValues?: Array<string>;
+	formData?: NestedObj;
+	data?:NestedObj;
 }
 
 function ChargeDetails({

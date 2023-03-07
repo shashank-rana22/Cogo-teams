@@ -10,16 +10,16 @@ import filterControls from './filter-controls';
 import styles from './styles.module.css';
 
 interface Props {
-	setFilters: any;
-	filters: any;
+	setFilters: Function;
+	filters: object;
 }
 
 function Filters({ setFilters = () => {}, filters = {} }:Props) {
 	const [visible, setVisible] = useState(false);
 	const { control, handleSubmit, reset, setValue, formState:{ errors } } = useForm();
 
-	const onSubmit = (formValues: any) => {
-		setFilters((prev?:any) => ({ ...prev, ...formValues }));
+	const onSubmit = (formValues: object) => {
+		setFilters((prev?:object) => ({ ...prev, ...formValues }));
 		setVisible(false);
 	};
 	const handleClear = () => {
@@ -52,7 +52,7 @@ function Filters({ setFilters = () => {}, filters = {} }:Props) {
 					themeType="secondary"
 					size="md"
 					className={styles.filter_svg}
-					onClick={() => setVisible((prev: any) => !prev)}
+					onClick={() => setVisible((prev: boolean) => !prev)}
 				>
 					Filters
 					{' '}

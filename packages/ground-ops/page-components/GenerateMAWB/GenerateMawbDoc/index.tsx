@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { saveAs } from 'file-saver';
 import * as htmlToImage from 'html-to-image';
-import React, { createRef, useState } from 'react';
+import React, { createRef, useState, ReactFragment } from 'react';
 
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
@@ -14,15 +14,19 @@ import useCreateShipmentDocument from './useCreateShipmentDocument';
 import useGetMediaUrl from './useGetMediaUrl';
 import Watermark from './watermark';
 
+interface NestedObj {
+	[key: string]: ReactFragment;
+}
+
 interface Props {
-	taskItem?: any;
-	formData?: any;
+	taskItem?: NestedObj;
+	formData?: NestedObj;
 	setBack?: Function;
 	back?: boolean;
-	edit?: any;
+	edit?: boolean | string;
 	setEdit?: Function;
 	viewDoc?: boolean;
-	chargeableWeight?:any;
+	chargeableWeight?:number;
 	setGenerate?:Function;
 }
 

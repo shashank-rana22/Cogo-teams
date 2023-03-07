@@ -30,7 +30,7 @@ function ApprovedAWB({
 	};
 
 	const functions = {
-		handleDownload: (singleItem:any) => (
+		handleDownload: (singleItem) => (
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
@@ -42,7 +42,7 @@ function ApprovedAWB({
 
 			</Button>
 		),
-		handleEdit: (singleItem:any) => (
+		handleEdit: (singleItem) => (
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}

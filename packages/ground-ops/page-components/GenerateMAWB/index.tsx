@@ -21,11 +21,15 @@ const options = [
 	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
 ];
 
+interface NestedObj {
+	[key: string]: NestedObj;
+}
+
 interface Props {
 	viewDoc?: boolean;
 	setViewDoc?: Function;
-	item?: any;
-	edit?: any;
+	item?: NestedObj;
+	edit?: boolean;
 	setEdit?: Function;
 	setGenerate?:Function;
 }
@@ -66,13 +70,13 @@ function GenerateMAWB({
 		...fields.handling,
 	];
 
-	let chargeableWeight:any = ((Math.max(
+	let chargeableWeight:number = Number((Math.max(
 		+formValues.weight * +taskItem.packagesCount,
 		(+taskItem.volume * 166.67),
 	) || 0.0).toFixed(2));
 
 	useEffect(() => {
-		chargeableWeight = ((Math.max(
+		chargeableWeight = Number((Math.max(
 			+formValues.weight * +formValues.packagesCount,
 			+formValues.volumetricWeight,
 		) || 0.0).toFixed(2));
@@ -92,7 +96,7 @@ function GenerateMAWB({
 	}, []);
 
 	useEffect(() => {
-		let totalVolume:any = 0;
+		let totalVolume:number = 0;
 		(formValues.dimension || []).forEach((dimensionObj) => {
 			if (dimensionObj.unit === 'inch') {
 				totalVolume

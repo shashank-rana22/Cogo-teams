@@ -1,10 +1,14 @@
 import { cl } from '@cogoport/components';
-import React from 'react';
+import React, { ReactFragment } from 'react';
 
 import styles from './styles.module.css';
 
+interface NestedObj {
+	[key: string]: ReactFragment;
+}
+
 interface Props {
-	data?:any;
+	data?:NestedObj;
 }
 
 function WeightChargeDetails({ data = {} }:Props) {

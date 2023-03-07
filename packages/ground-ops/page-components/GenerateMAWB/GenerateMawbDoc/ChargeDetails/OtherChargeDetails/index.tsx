@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { cl } from '@cogoport/components';
-import React from 'react';
+import React, { ReactFragment } from 'react';
 
 import styles from './styles.module.css';
 
@@ -19,9 +19,13 @@ function formatDate(date) {
 	});
 }
 
+interface NestedObj {
+	[key: string]: ReactFragment ;
+}
+
 interface Props {
-	taskItem?: any;
-	formData?: any;
+	taskItem?: NestedObj;
+	formData?: NestedObj;
 }
 
 function OtherChargeDetails({
@@ -55,7 +59,7 @@ function OtherChargeDetails({
 						>
 							<p style={{ fontSize: 13 }}>
 								<div style={{ height: '30%' }}>
-									{agentOtherCharges.map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
+									{(agentOtherCharges || [{}]).map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
 								</div>
 								<br />
 								{carrierOtherCharges.map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
@@ -95,7 +99,6 @@ function OtherChargeDetails({
 				`}
 				>
 					<p style={{ fontSize: 14 }}>
-						{' '}
 						{taskItem?.customer_name}
 					</p>
 				</div>

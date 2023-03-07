@@ -1,11 +1,15 @@
 import { cl } from '@cogoport/components';
-import React from 'react';
+import React, { ReactFragment } from 'react';
 
 import styles from './styles.module.css';
 
+interface NestedObj {
+	[key: string]: ReactFragment;
+}
+
 interface Props {
-	formData?: any;
-	taskItem?: any;
+	formData?: NestedObj;
+	taskItem?: NestedObj;
 }
 
 function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
