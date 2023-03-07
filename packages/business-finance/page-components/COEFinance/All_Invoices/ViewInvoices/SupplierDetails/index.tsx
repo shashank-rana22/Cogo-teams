@@ -1,4 +1,5 @@
 import {
+	Loader,
 	Button,
 	Pill,
 	Placeholder,
@@ -226,14 +227,17 @@ function SupplierDetails({
 						>
 							<Modal.Header title="SUPPLIER HISTORY" />
 							<Modal.Body>
-								{!isEmpty(historyData) ? (
+								{!loading ? (
 									<List
 										config={config}
 										itemData={{ list: historyData }}
 										loading={loading}
 									/>
 								) : (
-									<div className={styles.supply_card}>NO HISTORY</div>
+									<div className={styles.loader_main}>
+										<Loader className={styles.loader} />
+									</div>
+
 								)}
 							</Modal.Body>
 						</Modal>
