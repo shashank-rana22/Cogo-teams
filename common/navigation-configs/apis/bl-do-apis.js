@@ -208,6 +208,13 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_rail_cost_sheet',
+		access_type  : 'private',
+		feature      : 'bl_do',
+		service_name : 'shipment',
+
+	},
+	{
 		api          : 'raise_query',
 		access_type  : 'private',
 		service_name : 'saas_traceability',
