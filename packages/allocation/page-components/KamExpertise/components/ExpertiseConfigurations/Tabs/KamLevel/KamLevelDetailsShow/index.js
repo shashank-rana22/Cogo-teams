@@ -3,58 +3,59 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function KamLevelDetailsShow({ data }) {
-	const {
-		expertise_details = [],
-	} = data;
+function KamLevelDetailsShow({ data = {} }) {
+	const transacting_accounts = data.list && data.list['Transacting Accounts'];
+	const COLUMN_MAPPING = [
+		{
+			label: 'Customer Expertise',
 
-	// const SCORE_MAPPING = [
-	// 	{
-	// 		label : 'customer_expertise_score',
-	// 		value : customer_expertise_score,
-	// 	},
-	// 	{
-	// 		label : 'trade_expertise_score',
-	// 		value : trade_expertise_score,
-	// 	},
-	// 	{
-	// 		label : 'commodity_expertise_score',
-	// 		value : commodity_expertise_score,
-	// 	},
-	// 	{
-	// 		label : 'misc_expertise_score',
-	// 		value : misc_expertise_score,
-	// 	},
-	// ];
+		},
+		{
+			label: 'Trade Expertise',
+
+		},
+		{
+			label: 'Commodity Expertise',
+
+		},
+		{
+			label: 'Misc Expertise',
+
+		},
+
+	];
 
 	const TRANSACTION_MAPPING = [
 		{
-			label : 'minuimum_transacting_account',
-			value : 'minimum_transacting_account',
+			label: 'Minimum Transacting Accounts',
+
 		},
 		{
-			label : 'retained_account_count',
-			value : 'retained_account_count',
+			label: 'Retained Account Count',
+
 		},
 		{
-			label : 'retained_account_min_duration',
-			value : 'retained_account_min_duration',
+			label: 'Retained Account Min Duration',
+
 		},
 	];
-	const expertiseObject = expertise_details.map((item) => item);
 	return (
 		<div className={styles.level_card_container}>
 
-			{expertiseObject.map((item) => (
+			{COLUMN_MAPPING.map((item) => (
 				<div>
 					<div className={styles.row_level}>
-						{startCase(item.expertise_type)}
+						{startCase(item.label)}
 						{' '}
 						Score
 					</div>
 					<div style={{ marginLeft: '8px', opacity: '0.7' }}>Score</div>
 					<div className={styles.score_value}>
-						{item?.threshold_score || '-'}
+						{data.list
+						&& data.list[item.label]
+						&& data.list[item.label][0]
+						&& data.list[item.label][0].threshold_score
+							? data.list[item.label][0].threshold_score : '--'}
 					</div>
 					<div style={{
 						border     : '1px solid #BDBDBD',
@@ -66,6 +67,7 @@ function KamLevelDetailsShow({ data }) {
 					/>
 
 				</div>
+
 			))}
 
 			<div className={styles.row_level_end}>
@@ -75,8 +77,9 @@ function KamLevelDetailsShow({ data }) {
 						<div style={{ width: '24%' }}>
 							<div>{startCase(item.label)}</div>
 							<div className={styles.score_value}>
-								{/* {item.value} */}
-
+								{transacting_accounts
+									? transacting_accounts.find((account) => account.threshold_score_type
+									=== item.label)?.threshold_score || '--' : '--'}
 							</div>
 
 						</div>

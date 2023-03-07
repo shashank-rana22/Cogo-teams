@@ -6,12 +6,16 @@ import KamLevelDetailsShow from '../KamLevelDetailsShow';
 
 import styles from './styles.module.css';
 
-function Children({ action = '', data }) {
+function Children({ action = '', title }) {
+	const { listkamLevelDetails } = useKamExpertiseLevelConfig({ title });
+
+	console.log('hello', listkamLevelDetails);
+
 	return (
 		<div className={styles.child}>
 			{action === 'show'
-				? <KamLevelDetailsShow data={data} />
-				: <KamLevelDetailsEdit data={data} />}
+				? <KamLevelDetailsShow data={listkamLevelDetails} />
+				: <KamLevelDetailsEdit data={listkamLevelDetails} />}
 		</div>
 	);
 }

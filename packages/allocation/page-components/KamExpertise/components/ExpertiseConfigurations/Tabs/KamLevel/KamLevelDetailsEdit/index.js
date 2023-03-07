@@ -8,15 +8,16 @@ import styles from './styles.module.css';
 
 function KamLevelDetailsEdit({ data }) {
 	const formProps = useForm();
+	const transacting_accounts = data.list && data.list['Transacting Accounts'];
+	console.log('ta', transacting_accounts);
 
 	const { control } = formProps;
-	console.log('edit data', data);
 
 	return (
 
 		<div className={styles.level_card_container}>
 			{/* <form onSubmit={handleSubmit(onSave)}> */}
-			{controls.map((singleField, key) => {
+			{controls.map((singleField) => {
 				const Element = getFieldController(singleField.type) || null;
 				if (!Element) return null;
 
@@ -40,7 +41,11 @@ function KamLevelDetailsEdit({ data }) {
 							<div className={styles.current_value}>
 								Current value:
 								{' '}
-								{data.expertise_details[`${key}`]?.threshold_score || '--'}
+								{data.list
+						&& data.list[singleField.label]
+						&& data.list[singleField.label][0]
+						&& data.list[singleField.label][0].threshold_score
+									? data.list[singleField.label][0].threshold_score : '--'}
 							</div>
 
 						</div>
@@ -75,7 +80,9 @@ function KamLevelDetailsEdit({ data }) {
 								<div className={styles.current_value}>
 									Current value:
 									{' '}
-									{data[singleField.name]}
+									{transacting_accounts
+										? transacting_accounts.find((account) => account.threshold_score_type
+									=== singleField.label)?.threshold_score || '--' : '--'}
 								</div>
 
 								{' '}

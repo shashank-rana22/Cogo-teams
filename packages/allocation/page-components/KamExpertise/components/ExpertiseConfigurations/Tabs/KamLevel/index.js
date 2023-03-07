@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Children from './Children';
 import HeaderCard from './HeaderCard';
 import useKamExpertiseConfig from './hooks/useKamExpertiseConfig';
-import useKamExpertiseLevelConfig from './hooks/useKamExpertiseLevelConfig';
 import KamLevelCard from './KamLevelCard';
 import ResponseCard from './ResponseCard';
 import styles from './styles.module.css';
@@ -12,13 +11,10 @@ import styles from './styles.module.css';
 // todobug : delete button
 function KamLevel() {
 	const { kamConfigDetails = [], loading = false } = useKamExpertiseConfig();
-	const { listkamLevelDetails } = useKamExpertiseLevelConfig();
-	console.log('Loading::', listkamLevelDetails);
-
+	console.log('loading', loading);
 	const [title, setTitle] = useState(0);
 	const [action, setAction] = useState('show');
 	const [createKam, setCreateKam] = useState(false);
-
 	const dataLength = kamConfigDetails.length;
 	const options = kamConfigDetails.map((data) => ({
 		key   : data.transition_level,
@@ -34,9 +30,8 @@ function KamLevel() {
 			key={data.transition_level}
 			action={action}
 			id={data.transition_level - 1}
-			data={data}
+			// ,data={data}
 			title={title}
-			// isActive={data.transition_level === title}
 		/>,
 	}));
 

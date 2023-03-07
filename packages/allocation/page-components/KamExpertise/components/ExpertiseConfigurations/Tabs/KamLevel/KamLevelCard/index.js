@@ -18,33 +18,28 @@ function KamLevelCard({
 		transition_level = '',
 		expertise_details = [],
 	} = data;
-
 	const expertiseObject = expertise_details.map((item) => item);
-
 	// isEmpty(title) ? (setshowEditBtn(false)) : (setshowEditBtn(true));
 
-	// const COLUMN_MAPPING = [
-	// 	{
-	// 		label : 'customer_expertise_score',
-	// 		value : customer_expertise_score,
-	// 	},
-	// 	{
-	// 		label : 'trade_expertise_score',
-	// 		value : trade_expertise_score,
-	// 	},
-	// 	{
-	// 		label : 'commodity_expertise_score',
-	// 		value : commodity_expertise_score,
-	// 	},
-	// 	{
-	// 		label : 'misc_expertise_score',
-	// 		value : misc_expertise_score,
-	// 	},
+	const COLUMN_MAPPING = [
+		{
+			label: 'Customer Expertise',
 
-	// ];
+		},
+		{
+			label: 'Trade Expertise',
 
-	// console.log('LENGHT', dataLength);
-	// console.log('ID', id);
+		},
+		{
+			label: 'Commodity Expertise',
+
+		},
+		{
+			label: 'Misc Expertise',
+
+		},
+
+	];
 	return (
 		<div className={styles.whole}>
 			<div style={{
@@ -155,17 +150,19 @@ function KamLevelCard({
 				)
 				: (
 					<div className={styles.score_container}>
-						{expertiseObject.map((item) => (
+						{COLUMN_MAPPING.map((item) => (
 							<div className={styles.list_item}>
 								<div className={styles.label_text}>
-									{startCase(item.expertise_type)}
+									{startCase(item.label)}
 									{' '}
 									Score
 								</div>
-								<div><b>{item?.threshold_score || '---'}</b></div>
+								<div>
+									{expertiseObject.find((expertise) => expertise.expertise_type
+									=== item.label)?.threshold_score || '--'}
+								</div>
 							</div>
 						))}
-
 					</div>
 				)
 }
