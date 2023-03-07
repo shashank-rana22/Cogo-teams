@@ -63,7 +63,7 @@ function List({
 
 	return (
 		<>
-			<section style={{ overflow: 'scroll' }}>
+			<section>
 				{showHeader && !isMobile && (
 					<Header
 						fields={fields}

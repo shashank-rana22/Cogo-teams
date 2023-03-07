@@ -104,8 +104,6 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 				}}
 				subActiveTab={subActiveTab}
 				showPagination={false}
-				width="1800px"
-				scrollable
 			/>
 		</div>
 	);
