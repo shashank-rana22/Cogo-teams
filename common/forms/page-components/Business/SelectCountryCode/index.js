@@ -7,8 +7,8 @@ import countries from '../../../../../.data-store/constants/countries.json';
 function SelectCountryCode(props) {
 	
 	const formattedList = countries.map((code) => ({
-		value : code.id,
-		label : `${code.name}`,
+		value : code.mobile_country_code,
+		label : `${code.mobile_country_code}: ${code.name}`,
 	}));
 
 	return (

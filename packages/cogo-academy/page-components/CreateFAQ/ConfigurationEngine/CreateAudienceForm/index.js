@@ -1,28 +1,19 @@
+/* eslint-disable import/no-relative-packages */
 import { Button } from '@cogoport/components';
-import { SelectController, InputController, CountrySelectController } from '@cogoport/forms';
+import { SelectController, InputController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useMemo } from 'react';
 
+/* eslint-disable */
+import countries from '../../../../../../.data-store/constants/countries.json';
 import useGetAudience from '../hooks/useGetFaqAudience';
 import useListCogoEntity from '../hooks/useListCogoEntities';
 
 import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
 import createAudienceControls from './utils/createAudienceControls';
-
-const MAPPING = {
-	name              : InputController,
-	cogo_entity_id    : SelectController,
-	country_id        : CountrySelectController,
-	platform          : SelectController,
-	work_scope        : SelectController,
-	auth_function     : SelectController,
-	auth_sub_function : SelectController,
-	persona           : SelectController,
-
-};
 
 function CreateAudienceForm(props) {
 	const {
@@ -77,6 +68,7 @@ function CreateAudienceForm(props) {
 
 	entity_data.map((entityData) => {
 		const { business_name = '', id = '' } = entityData || {};
+
 		const options = {
 			label : business_name,
 			value : id,
@@ -85,10 +77,25 @@ function CreateAudienceForm(props) {
 		return entity_options;
 	});
 
+	const indiaOption = countries.find((country) => country.country_code === 'IN');
+
+	const countryOptions = [{
+		label : indiaOption?.name,
+		value : indiaOption?.id,
+	}];
+
+	countries.filter((country) => country.country_code !== 'IN').map((country) => {
+		const option = { label: country.name, value: country.id };
+
+		countryOptions.push(option);
+
+		return countryOptions;
+	});
+
 	const watchFunctions = watch('auth_function');
 	const watchPlatform = watch('platform');
 
-	const { controls } = createAudienceControls({ entity_options, watchFunctions });
+	const { controls } = createAudienceControls({ entity_options, watchFunctions, countryOptions });
 
 	useEffect(() => {
 		(Object.keys(controls) || []).forEach((controll) => {
@@ -98,6 +105,11 @@ function CreateAudienceForm(props) {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loading]);
+
+	useEffect(() => {
+		setValue('auth_sub_function', null);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [watchFunctions]);
 
 	const onClickBackIcon = () => {
 		if (source === 'create') {
@@ -109,26 +121,23 @@ function CreateAudienceForm(props) {
 		}
 	};
 
-	const showElements = useMemo(() => controls.reduce((pv, cv) => {
-		const { name = '' } = cv;
+	const hiddenElements = {
+		work_scope        : watchPlatform === 'admin',
+		persona           : ['app', 'all', 'admin'].includes(watchPlatform),
+		auth_function     : ['app', 'partner'].includes(watchPlatform),
+		auth_sub_function : ['app', 'partner'].includes(watchPlatform) || watchFunctions === 'all',
+	};
 
-		let showElement = true;
-		if (['work_scope'].includes(name) && watchPlatform === 'admin') {
-			showElement = false;
-		}
+	const showElements = useMemo(
+		() => controls.reduce((pv, cv) => {
+			const { name = '' } = cv;
 
-		if (['persona'].includes(name) && ['app', 'all', 'admin'].includes(watchPlatform)) {
-			showElement = false;
-		}
+			return { ...pv, [name]: !hiddenElements[name] };
+		}, {}),
 
-		if (['auth_function', 'auth_sub_function'].includes(name)
-        && ['app', 'partner'].includes(watchPlatform)) {
-			showElement = false;
-		}
-
-		return { ...pv, [name]: showElement };
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, {}), [watchPlatform]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[watchPlatform, watchFunctions],
+	);
 
 	return (
 		<div className={styles.container}>
@@ -154,7 +163,7 @@ function CreateAudienceForm(props) {
 			{(Object.keys(controls) || []).map((controlItem) => {
 				const { name = '', label = '' } = controls[controlItem] || {};
 
-				const DynamicController = MAPPING[name] || InputController;
+				const DynamicController = name === 'name' ? InputController : SelectController;
 
 				if (showElements[name]) {
 					return (
