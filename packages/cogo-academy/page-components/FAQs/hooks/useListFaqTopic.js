@@ -6,12 +6,10 @@ import { useEffect, useState } from 'react';
 function useListFaqTopic() {
 	const { general = {}, profile = {} } = useSelector((state) => state);
 
-	const { query } = general || {};
-
 	const { auth_role_data = [], partner = {} } = profile;
 	const { role_functions = [], role_sub_functions = [] } = auth_role_data?.[0] || {};
 
-	const { scope = '' } = general;
+	const { scope = '', query } = general;
 	const { country_id = '', id = '' } = partner;
 
 	const { topicId = '' } = query || {};
