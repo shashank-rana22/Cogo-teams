@@ -18,7 +18,6 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages =
 
 	const [firstLoading, setFirstLoading] = useState(true);
 	const [activeCardId, setActiveCardId] = useState('');
-
 	const [loading, setLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
 
@@ -89,9 +88,9 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages =
 				newMessagesCount : count,
 				unReadChatsCount : chats,
 			});
+			setLoading(false);
 		});
 
-		setLoading(false);
 		return () => {
 			snapshotCleaner();
 		};

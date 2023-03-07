@@ -57,6 +57,11 @@ function OrganizationDetails({
 			</div>
 		) : (
 			<div className={styles.promotion_cards}>
+				<div className={styles.wrapper}>
+					<h3>
+						Coming Soon...
+					</h3>
+				</div>
 				<PromocodeThumbnail list={list} />
 			</div>
 		);
