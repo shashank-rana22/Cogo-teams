@@ -140,14 +140,23 @@ function GenerateMAWB({
 			&& (
 				<div className={styles.form_container}>
 					<div className={styles.header_flex}>
-						<Stepper
-							active={activeKey}
-							setActive={setActiveKey}
-							items={items}
-						/>
+						{value === 'manual' && (
+							<Stepper
+								active={activeKey}
+								setActive={setActiveKey}
+								items={items}
+							/>
+						)}
 
 						{!edit
-						&& <RadioGroup options={options} onChange={onChange} value={value} />}
+						&& (
+							<RadioGroup
+								options={options}
+								onChange={onChange}
+								value={value}
+								style={{ marginLeft: 'auto' }}
+							/>
+						)}
 					</div>
 
 					{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} />
