@@ -10580,11 +10580,6 @@ const partner = {
 			service_name : 'auth',
 		},
 		{
-			api          : 'get_tickets_types',
-			access_type  : 'private',
-			service_name : 'tickets',
-		},
-		{
 			api          : 'get_tickets_tags',
 			access_type  : 'private',
 			service_name : 'tickets',
@@ -10646,6 +10641,11 @@ const partner = {
 		},
 		{
 			api          : 'post_tickets_default_timing',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_default_types',
 			access_type  : 'private',
 			service_name : 'tickets',
 		},
