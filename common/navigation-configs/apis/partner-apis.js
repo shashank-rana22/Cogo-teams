@@ -10605,6 +10605,11 @@ const partner = {
 			service_name : 'tickets',
 		},
 		{
+			api          : 'get_tickets_detail',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
 			api          : 'get_tickets_activities',
 			access_type  : 'private',
 			service_name : 'tickets',
