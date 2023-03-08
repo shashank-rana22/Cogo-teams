@@ -10496,32 +10496,7 @@ const partner = {
 			service_name : 'partner',
 		},
 	],
-	helios_dashboard: [
-		{
-			api          : 'list_partner_users',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-		{
-			api          : 'list_auth_roles',
-			access_type  : 'private',
-			service_name : 'auth',
-		},
-		{
-			api          : 'list_analytics_dashboards',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'create_analytics_permission_entry',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'list_analytics_permission_entries',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
+	analytics_dashboard: [
 		{
 			api          : 'list_analytics_permitted_dashboards',
 			access_type  : 'private',
@@ -10552,8 +10527,35 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
+	],
+	analytics_dashboard_management: [
 		{
-			api          : 'list_helios_dashboards',
+			api          : 'create_analytics_permission_entry',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_permission_entries',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'list_analytics_permission_entries',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
