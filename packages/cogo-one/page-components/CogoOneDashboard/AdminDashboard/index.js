@@ -29,7 +29,6 @@ function AdminDashboard(props) {
 				timeline={timeline}
 				setTimeline={setTimeline}
 			/>
-
 			<div className={styles.sub_container}>
 				<div className={styles.calenderchart_plus_escalations}>
 					<div className={styles.calender_chart}>
@@ -49,7 +48,6 @@ function AdminDashboard(props) {
 						agentsDetails={agents_details}
 						getCogoOneDashboard={getCogoOneDashboard}
 						loading={loading}
-
 					/>
 					<PerformanceTab agentsPerformance={agents_performance} loading={loading} />
 				</div>

@@ -3,11 +3,6 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-// const Data = [
-// 	'Your chat reply time was 2min slower than your peers',
-// 	'Work on reaching out to more customers ',
-// ];
-
 function Improvement({ loading = false, agentDelay = '' }) {
 	return (
 		<div className={styles.container}>

@@ -22,22 +22,19 @@ const chartData = ({ cogoOneDashboardGraph = {}, timeline }) => {
 		: cogoOneDashboardGraph;
 	const { message_graph_data = {}, call_graph_data = {} }	= data || {};
 
-	// console.log('message_ ::', message_graph_data);
-	// console.log('message_ ::', call_graph_data);
-
 	const messageChatKeys = Object.keys(message_graph_data);
 	const callChatKeys = Object.keys(call_graph_data);
 
-	// console.log('messageChatKeys ::', messageChatKeys);
-	// console.log('callChatKeys ::', callChatKeys);
+	function getDateValue(date) {
+		return Number(format(date, FORMAT_TYPE[timeline]?.label));
+	}
 
 	const messageData = messageChatKeys.map((key, index) => {
 		const dates = key.split(' to ');
 		return {
 			x: timeline === 'week'
 				? daysOfWeek[index]
-				: `${Number(format(dates[0], FORMAT_TYPE[timeline]?.label))}
-				-${Number(format(dates[1], FORMAT_TYPE[timeline]?.label))}`,
+				: `${getDateValue(dates[0])}-${getDateValue(dates[1])}`,
 			y: message_graph_data[key],
 		};
 	});
@@ -46,8 +43,7 @@ const chartData = ({ cogoOneDashboardGraph = {}, timeline }) => {
 		return {
 			x: timeline === 'week'
 				? daysOfWeek[index]
-				: `${Number(format(dates[0], FORMAT_TYPE[timeline]?.label))}
-				-${Number(format(dates[1], FORMAT_TYPE[timeline]?.label))}`,
+				: `${getDateValue(dates[0])}-${getDateValue(dates[1])}`,
 			y: call_graph_data[key],
 		};
 	});

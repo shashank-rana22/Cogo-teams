@@ -90,10 +90,6 @@ function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboar
 												<div><IcMProfile fill="#BDBDBD" /></div>
 												<div className={styles.contact_nos}>{active_assigned_chats}</div>
 											</div>
-											{/* <div className={styles.icon_plus_time}>
-												<div><IcMTimer fill="#BDBDBD" /></div>
-												<div className={styles.duration}>{duration}</div>
-											</div> */}
 										</div>
 									</div>
 								</div>

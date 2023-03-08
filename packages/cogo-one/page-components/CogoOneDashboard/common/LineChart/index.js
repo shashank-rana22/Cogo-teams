@@ -126,7 +126,6 @@ function LineChart({ cogoOneDashboardGraph = {}, timeline = '', loading = false 
 							/>
 						</div>
 					)
-
 			}
 		</div>
 	);
