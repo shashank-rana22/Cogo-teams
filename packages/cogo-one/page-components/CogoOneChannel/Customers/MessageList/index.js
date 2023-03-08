@@ -41,13 +41,10 @@ function MessageList({
 	}
 
 	function lastMessagePreview(previewData = '') {
-		const preview = previewData
-			?.replaceAll(/<img[\w\W]+?\/>/gm, '');
-
 		return (
 			<div
 				className={styles.content}
-				dangerouslySetInnerHTML={{ __html: preview }}
+				dangerouslySetInnerHTML={{ __html: previewData }}
 			/>
 		);
 	}
