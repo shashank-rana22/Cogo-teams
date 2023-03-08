@@ -173,7 +173,7 @@ function Templates({
 							disabled={openCreateReply || showPreview}
 							onClick={() => setOpenCreateReply(true)}
 						>
-							+ Create Reply
+							+ Create Template
 						</Button>
 					)}
 				</div>
