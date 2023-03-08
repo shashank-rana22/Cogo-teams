@@ -63,7 +63,7 @@ function useSendCommunicationTemplate({
 				},
 			});
 			callbackfunc();
-			Toast.success('Template Sent Successfully');
+			Toast.success(`${type === 'email' ? 'Email Sent Sucessfully' : 'Message Sent Sucessfully'}`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React from 'react';
 
@@ -81,12 +81,15 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 
 	return (
 		<div className={styles.list}>
-			<List
-				config={config}
-				itemData={documentData}
-				functions={functions}
-				loading={loading}
-			/>
+			{isEmpty(documentData) ? (
+				<List
+					config={config}
+					itemData={documentData}
+					functions={functions}
+					loading={loading}
+				/>
+			) : 'NO DATA FOUND'}
+
 		</div>
 	);
 }
