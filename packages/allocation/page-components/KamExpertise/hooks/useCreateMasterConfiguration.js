@@ -12,7 +12,7 @@ function useCreateMasterConfiguration(props) {
 		method  : 'POST',
 		url     : '/kam_expertise_mastery_badge_configuration',
 		authkey : 'post_allocation_kam_expertise_mastery_badge_configuration',
-	});
+	}, { manual: true });
 
 	const formProps = useForm({
 		defaultValues: {
