@@ -1,9 +1,17 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function useBadgeConfigurationList() {
+	const [searchValue, setSearchValue] = useState();
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 	const [params, setParams] = useState({
-		page: 1,
+		page    : 1,
+		filters : {
+			status : 'active',
+			id     : searchQuery || undefined,
+			// badge_name : searchQuery || undefined,
+		},
 	});
 
 	const [{ loading, data = {} }, refetch] = useAllocationRequest({
@@ -13,8 +21,19 @@ function useBadgeConfigurationList() {
 		params,
 	}, { manual: false });
 
+	useEffect(() => {
+		setParams((previousParams) => ({
+			...previousParams,
+			filters: {
+				...previousParams.filters,
+				id: searchQuery || undefined,
+			},
+		}));
+	}, [searchQuery]);
+
 	const getNextPage = (newPage) => {
-		setParams(() => ({
+		setParams((previousParams) => ({
+			...previousParams,
 			page: newPage,
 		}));
 	};
@@ -24,6 +43,10 @@ function useBadgeConfigurationList() {
 	return {
 		loading,
 		list,
+		searchValue,
+		setSearchValue,
+		debounceQuery,
+		// searchQuery,
 		paginationData,
 		getNextPage,
 		listRefetch: refetch,

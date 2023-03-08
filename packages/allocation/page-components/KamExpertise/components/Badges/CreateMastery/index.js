@@ -36,7 +36,6 @@ function CreateMastery(props) {
 		return null;
 	}
 
-	console.log(masteryListData);
 	return (
 		<div>
 			<form onSubmit={handleSubmit(onSave)}>
