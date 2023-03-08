@@ -158,7 +158,6 @@
 }
 
 .content {
-	display: flex;
 	max-width: 80%;
 	height: 18px;
 	margin-top: 3px;
@@ -169,20 +168,14 @@
 
 	:global {
 		img {
-			max-width: 20px;
-			max-height: 20px;
+			display: none;
 		}
 
 		p {
 			width: 100%;
-			margin-bottom: 0;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
-		}
-
-		p:not(:first-child) {
-			display: none;
 		}
 
 		div {
