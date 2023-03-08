@@ -14,6 +14,8 @@ const FORMAT_TYPE = {
 	},
 };
 
+const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
 const chartData = ({ cogoOneDashboardGraph = {}, timeline }) => {
 	const data = isEmpty(cogoOneDashboardGraph)
 		? emptyChartData[timeline]
@@ -29,18 +31,22 @@ const chartData = ({ cogoOneDashboardGraph = {}, timeline }) => {
 	// console.log('messageChatKeys ::', messageChatKeys);
 	// console.log('callChatKeys ::', callChatKeys);
 
-	const messageData = messageChatKeys.map((key) => {
+	const messageData = messageChatKeys.map((key, index) => {
 		const dates = key.split(' to ');
 		return {
-			x : `${format(dates[0], FORMAT_TYPE[timeline]?.label)}-${format(dates[1], FORMAT_TYPE[timeline]?.label)}`,
-			y : message_graph_data[key],
+			x: timeline === 'week'
+				? daysOfWeek[index]
+				: `${format(dates[0], FORMAT_TYPE[timeline]?.label)}-${format(dates[1], FORMAT_TYPE[timeline]?.label)}`,
+			y: message_graph_data[key],
 		};
 	});
-	const callData = callChatKeys.map((key) => {
+	const callData = callChatKeys.map((key, index) => {
 		const dates = key.split(' to ');
 		return {
-			x : `${format(dates[0], FORMAT_TYPE[timeline]?.label)}-${format(dates[1], FORMAT_TYPE[timeline]?.label)}`,
-			y : call_graph_data[key],
+			x: timeline === 'week'
+				? daysOfWeek[index]
+				: `${format(dates[0], FORMAT_TYPE[timeline]?.label)}-${format(dates[1], FORMAT_TYPE[timeline]?.label)}`,
+			y: call_graph_data[key],
 		};
 	});
 

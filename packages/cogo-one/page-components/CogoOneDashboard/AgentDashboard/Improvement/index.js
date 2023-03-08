@@ -40,7 +40,9 @@ function Improvement({ loading = false, agentDelay = '' }) {
 																: (agentDelay || 0)}
 														</span>
 														{' '}
-														<span>{(agentDelay || 0) >= 60 ? 'hr' : 'min'}</span>
+														<span className={styles.unit}>
+															{(agentDelay || 0) >= 60 ? 'hr' : 'min'}
+														</span>
 													</>
 												)
 										}
