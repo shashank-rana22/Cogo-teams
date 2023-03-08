@@ -128,12 +128,9 @@ function Calendar({ props }) {
 
 	const loadWeeks = () => {
 		const newData = [];
-		for (let i = numberOfDays + (shiftDays * (weekPagination - 1));
-			i < numberOfDays + (weekPagination * shiftDays);
-			i += 1) {
+		for (let i = 0; i < numberOfDays; i += 1) {
 			newData.push(calcWeek(i));
 		}
-		// console.log('newData:', newData);
 		const data = [];
 		newData.reverse().forEach((item, iterator) => {
 			const startDate = new Date(item);
@@ -148,6 +145,29 @@ function Calendar({ props }) {
 			});
 		});
 		setCalendarData(data);
+	};
+
+	const addWeeks = () => {
+		const newData = [];
+		for (let i = numberOfDays + (shiftDays * (pagination - 1));
+			i < numberOfDays + (pagination * shiftDays);
+			i += 1) {
+			newData.push(calcWeek(i));
+		}
+		const data = [];
+		newData.reverse().forEach((item, iterator) => {
+			const startDate = new Date(item);
+			const endDate = startDate;
+			endDate.setDate(startDate.getDate() + 6);
+			data.push({
+				key      : `cal-${timeline}-${pagination}-${iterator}`,
+				label    : format(item, FORMAT_TYPE[timeline].label),
+				subLabel : `${format(item, FORMAT_TYPE[timeline].subLabel)} to ${format(endDate, FORMAT_TYPE[timeline].subLabel)}`,
+				date     : item,
+				endDate,
+			});
+		});
+		setCalendarData([...data, ...calendarData]);
 	};
 
 	// function getMonday(d) {
@@ -185,33 +205,35 @@ function Calendar({ props }) {
 	useEffect(() => {
 		setCalendarData([]);
 		setPagination(0);
-		setWeekPagination(0);
+		// setWeekPagination(0);
 		if (timeline === 'day') processData(calcDate);
 		else if (timeline === 'month') processData(calcMonth);
 		else loadWeeks();
 	}, [timeline]);
 
 	function addPagination(x) {
-		if (timeline === 'day' || timeline === 'month') {
-			setPagination(x);
-		} else {
-			console.log('___x___: ', x);
-			// setWeekPagination(x);
-		}
+		console.log('timeline', timeline);
+		// if (timeline === 'day' || timeline === 'month') {
+		// 	setPagination(x);
+		// } else {
+		// 	console.log('___x___: ', x);
+		// 	setWeekPagination(x);
+		// }
+		setPagination(x);
 	}
 
 	function doPagination() {
+		console.log('proceeding to CHECK weeks', pagination, pagination);
 		if (pagination !== 0) {
 			if (timeline === 'day') addProcessData(calcDate);
 			else if (timeline === 'month') addProcessData(calcMonth);
-			return;
+			else addWeeks();
 		}
-		if (weekPagination !== 0) loadWeeks();
 	}
 
 	useEffect(() => {
 		doPagination();
-	}, [pagination, weekPagination]);
+	}, [pagination]);
 
 	useEffect(() => {
 		console.log('calendarData', calendarData);
