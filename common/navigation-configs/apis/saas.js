@@ -1418,6 +1418,11 @@ const saas = {
 			service_name : 'saas_subscriptions_v2',
 		},
 		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_coupons',
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
