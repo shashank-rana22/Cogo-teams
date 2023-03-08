@@ -96,7 +96,6 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 				<h5 className={styles.question_title}>Question</h5>
 				<h1 className={styles.question}>
 					{question_abstract}
-					?
 				</h1>
 			</div>
 			<div>
