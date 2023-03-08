@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Modal, Placeholder } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -7,7 +7,7 @@ import GetCard from '../../CreateBadge/getCard';
 
 import styles from './styles.module.css';
 
-function BadgeCard({ data, medal = '', isLast = {} }) {
+function BadgeCard({ data, medal = '', isLast = {}, listRefetch }) {
 	const { score = '', image_url = '', id = '' } = data;
 
 	const [openModal, setOpenModal] = useState(false);
@@ -18,7 +18,7 @@ function BadgeCard({ data, medal = '', isLast = {} }) {
 
 	const {
 		onSave, loading, formProps,
-	} = useUpdateSingleBadge({ medal, id, image_url, score, onClose });
+	} = useUpdateSingleBadge({ medal, id, image_url, score, onClose, listRefetch });
 
 	const {
 		control, handleSubmit,
@@ -28,6 +28,15 @@ function BadgeCard({ data, medal = '', isLast = {} }) {
 		medalType: medal,
 		score,
 	};
+	if (loading) {
+		return (
+			<Placeholder
+				height="120px"
+				width="220px"
+				style={{ marginRight: '20px', marginTop: '20px' }}
+			/>
+		);
+	}
 
 	return (
 		<>

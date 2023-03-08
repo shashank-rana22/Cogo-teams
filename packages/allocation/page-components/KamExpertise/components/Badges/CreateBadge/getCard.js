@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function GetCard({ data, control, isLastItem }) {
 	const { medalType, score = '', inputPlaceHolder = '' } = data;
 
-	const InputElement = getFieldController('text');
+	const InputElement = getFieldController('number');
 	const UploadControler = getFieldController('fileUpload');
 
 	return (

@@ -24,7 +24,7 @@ function Header(props) {
 		setBadgeListData,
 	} = props;
 	// const [searchValue, setSearchValue] = useState('Search');
-	const [disabled, setDisabled] = useState(true);
+	// const [disabled, setDisabled] = useState(true);
 	const [expertise, setExpertise] = useState('');
 
 	return (

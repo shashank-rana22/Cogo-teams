@@ -100,7 +100,7 @@ function CreateMastery(props) {
 								<div>
 									{
 									watch('image_input')
-										? 										(
+										? (
 											<div className={styles.preview}>
 												<img src={watch('image_input')} alt="preview_image" />
 											</div>

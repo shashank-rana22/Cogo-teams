@@ -6,6 +6,21 @@ import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfigurat
 import GetCard from './getCard';
 import styles from './styles.module.css';
 
+const MEDALS_MAPPING = [
+	{
+		medalType        : 'Bronze',
+		inputPlaceHolder : '2000',
+	},
+	{
+		medalType        : 'Silver',
+		inputPlaceHolder : '5000',
+	},
+	{
+		medalType        : 'Gold',
+		inputPlaceHolder : '9000',
+	},
+];
+
 function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	const onClose = () => {
 		setToggleScreen(1);
@@ -18,21 +33,6 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	const {
 		control, handleSubmit, formState: { errors },
 	} = formProps;
-
-	const medalType = [
-		{
-			medalType        : 'Bronze',
-			inputPlaceHolder : '2000',
-		},
-		{
-			medalType        : 'Silver',
-			inputPlaceHolder : '5000',
-		},
-		{
-			medalType        : 'Gold',
-			inputPlaceHolder : '9000',
-		},
-	];
 
 	if (loading) {
 		return null;
@@ -96,11 +96,11 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 					<div className={styles.lower_background}>
 						<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
 						<div className={styles.display_flex}>
-							{medalType.map((data, index) => (
+							{MEDALS_MAPPING.map((data, index) => (
 								<GetCard
 									data={data}
 									control={control}
-									isLastItem={index === medalType.length - 1}
+									isLastItem={index === MEDALS_MAPPING.length - 1}
 								/>
 							))}
 						</div>
