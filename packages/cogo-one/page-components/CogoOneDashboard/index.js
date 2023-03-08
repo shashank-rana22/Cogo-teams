@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function CogoOneDashboard() {
 	const [timeline, setTimeline] = useState('day');
 	const [calendarData, setCalendarData] = useState([]);
-	const [selectedItem, setSelectedItem] = useState(format(new Date(), 'dd MMM YYYY'));
+	const [selectedItem, setSelectedItem] = useState(new Date());
 
 	const selectedTimeline = (calendarData || []).filter(
 		(d) => format(d.date, 'dd MMM YYYY') === format(selectedItem, 'dd MMM YYYY'),

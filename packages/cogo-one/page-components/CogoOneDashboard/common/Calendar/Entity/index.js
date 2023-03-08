@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { throttle } from '@cogoport/utils';
 import { format } from '@cogoport/utils';
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import styles from './styles.module.css';
 
@@ -13,7 +12,6 @@ export function CalendarEntity({
 	timeline,
 	addPagination,
 }) {
-	console.log('selectedItem', selectedItem);
 	const [offset, setOffset] = useState(29);
 	const intersectionOptions = {
 		root       : null,
@@ -37,12 +35,10 @@ export function CalendarEntity({
 
 	function leftShift() {
 		leftCount += 1;
-		// console.log('leftShift: ', leftCount);
 		if (leftCount > 4 && leftCount % 2 === 0) {
 			addPagination(Math.floor((leftCount - 4) / 2));
 		} else if (leftCount > 4) {
 			setTimeout(() => {
-				// console.log('scrolling::::::::::::');
 				middle?.current?.scrollIntoView({
 					behavior : 'instant',
 					block    : 'nearest',
@@ -98,12 +94,13 @@ export function CalendarEntity({
 	return (
 		<div ref={calendarRef} className={`${styles.calendar} ${isWeek ? styles.week_calendar : ''}`}>
 			{
-				calendarData?.map(({ label, subLabel, key, date }, index) => {
+				calendarData?.map(({ label, subLabel, key, date, endDate }, index) => {
 					let isDateEqual;
 					if (timeline === 'day') {
 						isDateEqual = format(selectedItem, 'dd MMM YYYY') === format(date, 'dd MMM YYYY');
 					} else if (timeline === 'week') {
-						isDateEqual = format(selectedItem, 'dd MMM YYYY') === format(date, 'dd MMM YYYY');
+						isDateEqual = (selectedItem.getTime() >= date.getTime())
+						&& (selectedItem.getTime() <= endDate?.getTime());
 					} else if (timeline === 'month') {
 						isDateEqual = format(selectedItem, 'MMM YYYY') === format(date, 'MMM YYYY');
 					}
@@ -113,10 +110,7 @@ export function CalendarEntity({
 							{index === 0 && (
 								<div
 									ref={leftEnd}
-									onClick={() => setSelectedItem(format(
-										date,
-										'dd MMM YYYY',
-									))}
+									onClick={() => setSelectedItem(date)}
 									className={`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
 								>
 									<div className={styles.day_hours1}>
@@ -131,10 +125,7 @@ export function CalendarEntity({
 							{index > 0 && (index < offset) && 								(
 								<div
 									key={key}
-									onClick={() => setSelectedItem(format(
-										date,
-										'dd MMM YYYY',
-									))}
+									onClick={() => setSelectedItem(date)}
 									className={`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
 								>
 									<div className={styles.day_hours1}>
@@ -151,10 +142,7 @@ export function CalendarEntity({
 							&& (
 								<div
 									ref={middle}
-									onClick={() => setSelectedItem(format(
-										date,
-										'dd MMM YYYY',
-									))}
+									onClick={() => setSelectedItem(date)}
 									className={`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
 								>
 									<div className={styles.day_hours1}>
@@ -171,10 +159,7 @@ export function CalendarEntity({
 
 							&& (
 								<div
-									onClick={() => setSelectedItem(format(
-										date,
-										'dd MMM YYYY',
-									))}
+									onClick={() => setSelectedItem(date)}
 									className={`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
 								>
 									<div className={styles.day_hours1}>
@@ -191,10 +176,7 @@ export function CalendarEntity({
 
 							&& (
 								<div
-									onClick={() => setSelectedItem(format(
-										date,
-										'dd MMM YYYY',
-									))}
+									onClick={() => setSelectedItem(date)}
 									className={`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
 								>
 									<div className={styles.day_hours1}>
@@ -212,10 +194,7 @@ export function CalendarEntity({
 							&& (
 								<div
 									ref={rightEnd}
-									onClick={() => setSelectedItem(format(
-										date,
-										'dd MMM YYYY',
-									))}
+									onClick={() => setSelectedItem(date)}
 									className={`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
 								>
 									<div className={styles.day_hours1}>
@@ -232,10 +211,7 @@ export function CalendarEntity({
 
 							&& (
 								<div
-									onClick={() => setSelectedItem(format(
-										date,
-										'dd MMM YYYY',
-									))}
+									onClick={() => setSelectedItem(date)}
 									className={`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
 								>
 									<div className={styles.day_hours1}>
