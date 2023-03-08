@@ -2,7 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-function useBadgeConfigurationList() {
+function useGetBadgeList() {
 	const [searchValue, setSearchValue] = useState();
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 	const [params, setParams] = useState({
@@ -52,5 +52,4 @@ function useBadgeConfigurationList() {
 		listRefetch: refetch,
 	};
 }
-
-export default useBadgeConfigurationList;
+export default useGetBadgeList;

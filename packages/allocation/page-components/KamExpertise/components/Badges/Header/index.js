@@ -21,7 +21,7 @@ function Header(props) {
 		setSearchValue = () => {},
 		debounceQuery,
 		setMasteryListData = () => {},
-		setAutofill,
+		setBadgeListData,
 	} = props;
 	// const [searchValue, setSearchValue] = useState('Search');
 	const [disabled, setDisabled] = useState(true);
@@ -69,7 +69,7 @@ function Header(props) {
 					themeType="primary"
 					size="md"
 					onClick={() => {
-						setAutofill({});
+						setBadgeListData({});
 						setToggleScreen(3);
 					}}
 					disabled={toggleScreen === 3}

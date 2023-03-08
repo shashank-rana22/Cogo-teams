@@ -15,7 +15,7 @@ const controls = [
 		placeholder : 'Select Events',
 		type        : 'select',
 		options     : [
-			{ value: 'shipment_creation', label: 'Shipment Creation' },
+			{ value: 'Dummy_Value', label: 'Dummy_Value' },
 		],
 		rules: {
 			required: 'Specify Condition',
