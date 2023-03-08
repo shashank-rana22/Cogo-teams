@@ -16,7 +16,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	} = useCreateBadgeConfiguration({ onClose, badgeListData, listRefetch });
 
 	const {
-		control, handleSubmit, formState: { errors },
+		control, watch, handleSubmit, formState: { errors },
 	} = formProps;
 
 	const medalType = [
@@ -99,7 +99,9 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 							{medalType.map((data, index) => (
 								<GetCard
 									data={data}
+									badgeListData={badgeListData}
 									control={control}
+									watch={watch}
 									isLastItem={index === medalType.length - 1}
 								/>
 							))}

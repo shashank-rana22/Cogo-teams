@@ -1,15 +1,26 @@
 import { Toast } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
+import getAddMasteryControls from '../configurations/get-add-mastery-controls';
+
 function useCreateMasterConfiguration(props) {
+	const { masteryListData, onClose, listRefetch } = props;
+
 	const [{ loading }, trigger] = useAllocationRequest({
 		method  : 'POST',
 		url     : '/kam_expertise_mastery_badge_configuration',
 		authkey : 'post_allocation_kam_expertise_mastery_badge_configuration',
 	});
 
-	const { onClose, listRefetch } = props;
+	const formProps = useForm({
+		defaultValues: {
+			mastery_name : masteryListData.badge_name,
+			badges       : masteryListData.medal_collection,
+			// ToDo : image url -> handle using previous data
+		},
+	});
 
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
@@ -38,15 +49,17 @@ function useCreateMasterConfiguration(props) {
 
 			Toast.success('Master Badge Created!');
 
+			onClose();
+
 			listRefetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response.data));
 		}
-
-		onClose();
 	};
 
 	return {
+		formProps,
+		getAddMasteryControls,
 		loading,
 		onSave,
 	};

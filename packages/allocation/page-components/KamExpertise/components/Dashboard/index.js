@@ -1,5 +1,4 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-// import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import Header from './Header';
@@ -33,7 +32,6 @@ const TAB_PANEL_MAPPING = {
 };
 
 function KamExpertise() {
-	// const router = useRouter();
 	const [activeTab, setActiveTab] = useState('this_week');
 
 	return (

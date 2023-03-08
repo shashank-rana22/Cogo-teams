@@ -1,81 +1,79 @@
 import { Placeholder } from '@cogoport/components';
 import { IcCStar } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
+const list_data = [
+	{
+		id            : 1,
+		user_name     : 'John Appleseed',
+		total         : 12000,
+		customer_exp  : 12000,
+		trade_exp     : 12000,
+		commodity_exp : 12000,
+		misc_exp      : 12000,
+		badges        : [
+			{
+				url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg',
+			},
+			{
+				url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/silver_badge.svg',
+			},
+			{
+				url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/nautical_ninja_bronze.svg',
+			},
+		],
+	},
+	{
+		id            : 2,
+		user_name     : 'Beatrice Needlespoon',
+		total         : 12000,
+		customer_exp  : 12000,
+		trade_exp     : 12000,
+		commodity_exp : 12000,
+		misc_exp      : 12000,
+		badges        : [],
+
+	},
+	{
+		id            : 3,
+		user_name     : 'John Appleseed',
+		total         : 12000,
+		customer_exp  : 12000,
+		trade_exp     : 12000,
+		commodity_exp : 12000,
+		misc_exp      : 12000,
+		badges        : [
+			{
+				url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg',
+			},
+		],
+	},
+	{
+		id            : 4,
+		user_name     : 'Beatrice Needlespoon',
+		total         : 12000,
+		customer_exp  : 12000,
+		trade_exp     : 12000,
+		commodity_exp : 12000,
+		misc_exp      : 12000,
+		badges        : [],
+
+	},
+	{
+		id            : 5,
+		user_name     : 'John Appleseed',
+		total         : 12000,
+		customer_exp  : 12000,
+		trade_exp     : 12000,
+		commodity_exp : 12000,
+		misc_exp      : 12000,
+		badges        : [],
+	},
+];
+
 function LeaderboardList() {
-	// const router = useRouter();
-	const list_data = [
-		{
-			id            : 1,
-			user_name     : 'John Appleseed',
-			total         : 12000,
-			customer_exp  : 12000,
-			trade_exp     : 12000,
-			commodity_exp : 12000,
-			misc_exp      : 12000,
-			badges        : [
-				{
-					url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg',
-				},
-				{
-					url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/silver_badge.svg',
-				},
-				{
-					url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/nautical_ninja_bronze.svg',
-				},
-			],
-		},
-		{
-			id            : 2,
-			user_name     : 'Beatrice Needlespoon',
-			total         : 12000,
-			customer_exp  : 12000,
-			trade_exp     : 12000,
-			commodity_exp : 12000,
-			misc_exp      : 12000,
-			badges        : [],
-
-		},
-		{
-			id            : 3,
-			user_name     : 'John Appleseed',
-			total         : 12000,
-			customer_exp  : 12000,
-			trade_exp     : 12000,
-			commodity_exp : 12000,
-			misc_exp      : 12000,
-			badges        : [
-				{
-					url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg',
-				},
-			],
-		},
-		{
-			id            : 4,
-			user_name     : 'Beatrice Needlespoon',
-			total         : 12000,
-			customer_exp  : 12000,
-			trade_exp     : 12000,
-			commodity_exp : 12000,
-			misc_exp      : 12000,
-			badges        : [],
-
-		},
-		{
-			id            : 5,
-			user_name     : 'John Appleseed',
-			total         : 12000,
-			customer_exp  : 12000,
-			trade_exp     : 12000,
-			commodity_exp : 12000,
-			misc_exp      : 12000,
-			badges        : [],
-		},
-	];
-
 	return (
 		<div className={styles.container}>
 
@@ -89,19 +87,13 @@ function LeaderboardList() {
 					>
 						<div className={styles.card_description}>
 							<div className={styles.card_description_left}>
-								<div className={styles.index}>
-									{/* {index + 1} */}
-								</div>
 								<div>
 									<div
 										className={styles.user_name}
 									>
-										{/* {data.user_name} */}
 										<Placeholder width="100px" height="16px" />
 									</div>
 									<div>
-										{/* Total:&nbsp;
-										<b>{data.total}</b> */}
 										<Placeholder width="100px" height="16px" />
 									</div>
 								</div>
@@ -116,9 +108,6 @@ function LeaderboardList() {
 							))) : ''
 						}
 								</div>
-								{/* <span className={styles.link}>
-
-								</span> */}
 							</div>
 
 							<div className={styles.card_description_right}>

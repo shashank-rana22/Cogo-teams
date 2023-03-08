@@ -1,16 +1,29 @@
 import { Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-// import { useState, useEffect } from 'react';
+import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 
-function GetCard({ data, control, isLastItem }) {
+function GetCard({ data = {}, badgeListData = {}, control, watch, isLastItem }) {
 	const { medalType, score = '', inputPlaceHolder = '' } = data;
 
 	const InputElement = getFieldController('text');
 	const UploadControler = getFieldController('fileUpload');
+
+	const getBadgeImage = (medal) => {
+		switch (medal) {
+			case 'Bronze':
+				return badgeListData.badge_details[0].image_url;
+			case 'Silver':
+				return badgeListData.badge_details[1].image_url;
+			case 'Gold':
+				return badgeListData.badge_details[2].image_url;
+			default:
+				return '';
+		}
+	};
 
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
@@ -40,15 +53,37 @@ function GetCard({ data, control, isLastItem }) {
 				{`${medalType} Medal`}
 				<IcMInfo className={styles.icm_info} />
 			</div>
-
-			<UploadControler
-				name={`${medalType}_img_value`}
-				control={control}
-				uploadDesc="Upload files here"
-				className={styles.file_select_style}
-				style={{ width: score ? '93%' : '80%' }}
-				// ? accept=".png,.pkg"
-			/>
+			<div className={styles.file_select_style}>
+				<UploadControler
+					name={`${medalType}_img_value`}
+					control={control}
+					uploadDesc="Upload files here"
+					// style={{ width: score ? '93%' : '80%' }}
+				/>
+				<div>
+					{
+						watch(`${medalType}_img_value`)
+							? 										(
+								<div className={styles.preview}>
+									<img src={watch(`${medalType}_img_value`)} alt="preview_image" />
+								</div>
+							)
+							: null
+					}
+					{
+					!isEmpty(data) && !watch(`${medalType}_img_value`)
+						? (
+							<div className={styles.preview}>
+								<img
+									src={getBadgeImage(medalType)}
+									alt="badge img preview"
+								/>
+							</div>
+						)
+						: null
+					}
+				</div>
+			</div>
 
 			{ score && (
 				<div className={styles.save_update}>

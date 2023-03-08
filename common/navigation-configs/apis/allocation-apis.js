@@ -171,6 +171,12 @@ const allocation = {
 	],
 	kam_expertise: [
 		{
+			api          : 'get_allocation_kam_expertise_stats',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
 			api          : 'post_allocation_kam_expertise_badge_configuration',
 			access_type  : 'private',
 			feature      : 'kam_expertise',
