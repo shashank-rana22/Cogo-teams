@@ -1,14 +1,14 @@
 import { Button } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, format } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateMasterConfiguration from '../../../hooks/useCreateMasterConfiguration';
 import useCreateNewMastery from '../../../hooks/useCreateNewMastery';
-import Header from '../CreateBadge/header';
 
 import styles from './styles.module.css';
 
-function CreateMastery({ setToggleScreen, badgeList = {}, masteryListData = {} }) {
+function CreateMastery(props) {
+	const { setToggleScreen, badgeList = {}, masteryListData = {}, listRefetch } = props;
 	const { formProps, getAddMasteryControls } = useCreateNewMastery(masteryListData);
 
 	const InputDesc = getFieldController('text');
@@ -21,7 +21,7 @@ function CreateMastery({ setToggleScreen, badgeList = {}, masteryListData = {} }
 		setToggleScreen(1);
 	};
 
-	const { loading, onSave } = useCreateMasterConfiguration({ onClose });
+	const { loading, onSave } = useCreateMasterConfiguration({ onClose, listRefetch });
 
 	const badge_options = []; // for multi-select badges
 	(badgeList || {}).forEach((badge_data) => {
@@ -35,11 +35,36 @@ function CreateMastery({ setToggleScreen, badgeList = {}, masteryListData = {} }
 	if (loading) {
 		return null;
 	}
+
+	console.log(masteryListData);
 	return (
 		<div>
 			<form onSubmit={handleSubmit(onSave)}>
 				<section className={styles.container}>
-					<Header badge_type="Mastery" />
+					<div>
+						{isEmpty(masteryListData)
+							? null
+							: (
+								<div className={styles.fields_container}>
+									<p className={styles.text_styles} style={{ paddingRight: '10px' }}>
+										Last Modified :
+										{' '}
+										{format(masteryListData.updated_at, 'yyyy-MMM-dd')}
+									</p>
+
+									{/* //! needs changes */}
+									<p className={styles.text_styles}>Last Modified By :</p>
+								</div>
+							)}
+
+						<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>
+							Add Mastery
+						</h2>
+						<p className={styles.text_styles2}>
+							Select the conditions and number of completions necessary to obtain
+							the badge.
+						</p>
+					</div>
 					<div className={styles.content_container}>
 						{
 						getAddMasteryControls.map((controlItem) => {

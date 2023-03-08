@@ -2,7 +2,7 @@ const controls = [
 	{
 		name        : 'mastery_name',
 		label       : 'Mastery Name',
-		placeholder : 'Multi Modal Maestro',
+		placeholder : 'Multi Modal',
 		type        : 'text',
 		rules       : {
 			required: 'Mastery name is required',

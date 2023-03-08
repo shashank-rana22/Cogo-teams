@@ -7,7 +7,7 @@ import { getFieldController } from '../../../common/Form/getFieldController';
 import getAddBadgesControls from '../configurations/get-add-badges-control';
 
 function useCreateBadgeConfiguration(props) {
-	const { onClose, badgeListData = {} } = props;
+	const { onClose, listRefetch, badgeListData = {} } = props;
 
 	const { badge_name, description: badge_description, badge_details:badgeDetails } = badgeListData;
 
@@ -82,6 +82,8 @@ function useCreateBadgeConfiguration(props) {
 			onClose();
 
 			Toast.success('Badge Created!');
+
+			listRefetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

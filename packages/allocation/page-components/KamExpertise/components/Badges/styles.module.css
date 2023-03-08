@@ -39,3 +39,8 @@
     font-weight: 600;
     line-height: 42px;
 }
+
+.pagination_container {
+    display: flex;
+    justify-content: flex-end;
+}

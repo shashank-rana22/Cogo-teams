@@ -6,14 +6,14 @@ import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfigurat
 import GetCard from './getCard';
 import styles from './styles.module.css';
 
-function CreateBadge({ setToggleScreen, badgeListData = {} }) {
+function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	const onClose = () => {
 		setToggleScreen(1);
 	};
 
 	const {
 		onSave, getFieldController, loading, getAddBadgesControls, formProps,
-	} = useCreateBadgeConfiguration({ onClose, badgeListData });
+	} = useCreateBadgeConfiguration({ onClose, badgeListData, listRefetch });
 
 	const {
 		control, handleSubmit, formState: { errors },

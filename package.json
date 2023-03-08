@@ -23,7 +23,7 @@
     "clean": "turbo run clean"
   },
   "dependencies": {
-    "@cogoport/components": "^1.0.349",
+    "@cogoport/components": "^1.0.362",
     "@sentry/nextjs": "^7.38.0",
     "accept-language": "^3.0.18",
     "i18next": "^22.4.10",

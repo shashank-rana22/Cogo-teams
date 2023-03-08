@@ -75,3 +75,14 @@
     width: 60%;
     height: 60%;
 }
+
+.fields_container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.text_styles {
+    font-size: 12px;
+    color: #333333;
+}

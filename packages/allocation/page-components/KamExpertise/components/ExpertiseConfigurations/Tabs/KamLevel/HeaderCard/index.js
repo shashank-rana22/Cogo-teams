@@ -26,7 +26,6 @@ function HeaderCard() {
 				</div>
 			</div>
 			<div className={styles.button_container}>
-				<Button>Create Kam Level</Button>
 				<Button themeType="secondary">Save as Draft</Button>
 				<Button>Publish</Button>
 
