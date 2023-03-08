@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { cl } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 
@@ -28,7 +27,7 @@ function SentDiv({
 				<div className={styles.name}>
 					Replied by
 					{' '}
-					{session_type === 'admin' ? send_by || 'kam' : send_by || 'bot'}
+					{send_by || (session_type === 'admin' ? 'kam' : 'bot')}
 					,
 					<span className={styles.time_stamp}>{date}</span>
 				</div>

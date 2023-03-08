@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable max-len */
+/* eslint-disable no-undef, max-len */
 import { Avatar, Pill, Placeholder, Toast } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
@@ -106,7 +105,7 @@ function AgentDetails({
 		Toast.success('Copied!!!');
 	};
 
-	return (isEmpty(userId) && isEmpty(leadUserId)) && isEmpty(mobile_no) ? (
+	return (isEmpty(userId) && isEmpty(leadUserId) && isEmpty(mobile_no)) ? (
 		<>
 			<div className={styles.title}>Profile</div>
 			<EmptyState
@@ -127,11 +126,16 @@ function AgentDetails({
 			<div className={styles.top_div}>
 				<div className={styles.title}>Profile</div>
 				{activeTab === 'message' && (
-					<div role="presentation" className={styles.copy_link} onClick={handleClick}>Share</div>
+					<div
+						role="presentation"
+						className={styles.copy_link}
+						onClick={handleClick}
+					>
+						Share
+					</div>
 				)}
 			</div>
 			<div className={styles.content}>
-
 				<Avatar
 					src="https://www.w3schools.com/howto/img_avatar.png"
 					alt="img"

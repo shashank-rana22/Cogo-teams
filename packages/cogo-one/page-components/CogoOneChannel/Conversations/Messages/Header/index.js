@@ -50,6 +50,7 @@ function Header({
 			: business_name;
 	};
 	const disableAssignButton = showBotMessages && !isomniChannelAdmin;
+
 	const assignButtonAction = (type) => {
 		if (showBotMessages && isomniChannelAdmin) {
 			const payload = {
@@ -70,6 +71,7 @@ function Header({
 			});
 		}
 	};
+
 	const renderButtonOption = () => (
 		<div className={styles.button_container}>
 			<Button
@@ -92,9 +94,9 @@ function Header({
 			>
 				Auto Assign
 			</Button>
-
 		</div>
 	);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_space_between}>
@@ -110,20 +112,29 @@ function Header({
 						tagOptions={tagOptions}
 						hasPermissionToEdit={hasPermissionToEdit}
 					/>
-					<ShowContent list={chat_tags} showMorePlacement="right" hasPermissionToEdit={hasPermissionToEdit} />
+					<ShowContent
+						list={chat_tags}
+						showMorePlacement="right"
+						hasPermissionToEdit={hasPermissionToEdit}
+					/>
 				</div>
 				<div className={cl`${styles.flex} ${disableAssignButton ? styles.disabled_button : ''}`}>
-					{!isEmpty(filteredSpectators)
-					&& <Assignes filteredSpectators={filteredSpectators} />}
-					{activeAgentName
-					&& (
+					{!isEmpty(filteredSpectators) && <Assignes filteredSpectators={filteredSpectators} />}
+					{activeAgentName && (
 						<div className={styles.active_agent}>
-							<AssigneeAvatar name={activeAgentName} type="active" key={activeAgentName} />
+							<AssigneeAvatar
+								name={activeAgentName}
+								type="active"
+								key={activeAgentName}
+							/>
 						</div>
 					)}
-
-					{(showBotMessages && isomniChannelAdmin) ? (
-						<Popover placement="bottom" trigger="click" caret={false} render={renderButtonOption()}>
+					{showBotMessages && isomniChannelAdmin ? (
+						<Popover
+							placement="bottom"
+							trigger="click"
+							render={renderButtonOption()}
+						>
 							<Button
 								themeType="secondary"
 								size="md"
