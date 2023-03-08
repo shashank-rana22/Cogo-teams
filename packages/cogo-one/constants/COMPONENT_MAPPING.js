@@ -2,6 +2,7 @@ import AgentDetails from '../page-components/CogoOneChannel/ProfileDetails/Agent
 import AgentNotes from '../page-components/CogoOneChannel/ProfileDetails/AgentNotes';
 import AgentReminder from '../page-components/CogoOneChannel/ProfileDetails/AgentReminder';
 import CustomerInsight from '../page-components/CogoOneChannel/ProfileDetails/CustomerInsight';
+import HelpDesk from '../page-components/CogoOneChannel/ProfileDetails/HelpDesk';
 import OrganizationDetails from '../page-components/CogoOneChannel/ProfileDetails/OrganizationDetails';
 import QuickActions from '../page-components/CogoOneChannel/ProfileDetails/QuickActions';
 import UserActivities from '../page-components/CogoOneChannel/ProfileDetails/UserActivity';
@@ -14,6 +15,7 @@ const COMPONENT_MAPPING = {
 	notes             : AgentNotes,
 	quick_actions     : QuickActions,
 	customer_insights : CustomerInsight,
+	help_desk         : HelpDesk,
 };
 
 export default COMPONENT_MAPPING;

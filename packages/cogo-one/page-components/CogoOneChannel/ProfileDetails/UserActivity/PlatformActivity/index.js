@@ -1,9 +1,9 @@
-import { Tooltip, Pill } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../constants/TRANSACTIONAL_KEYS_MAPPING';
+import { PLATFORM_ACTIVITY_KEYS_MAPPING } from '../../../../../constants/PLATFORM_ACTIVITY_KEYS_MAPPING';
 
 import LoginComponent from './LoginComponent';
 import OrganizationVerification from './OrganizationVerification';
@@ -13,11 +13,14 @@ function PlatformActivity({ platform = {} }) {
 	const { login = {}, spot_searches = {}, organization = {} } = platform || {};
 	const { list = [] } = spot_searches || {};
 
+	const organizationCheck = !isEmpty(organization) && organization?.kyc_status === 'verified';
 	return (
 		<div className={styles.container}>
-			<LoginComponent login={login} />
+			{!isEmpty(login?.last_email_token_sent_at) && (
+				<LoginComponent login={login} />
+			)}
 
-			{!isEmpty(organization) && (
+			{organizationCheck && (
 				<OrganizationVerification organization={organization} />
 			)}
 
@@ -27,7 +30,7 @@ function PlatformActivity({ platform = {} }) {
 				const {
 					origin = 'origin_location',
 					destination = 'destination_location',
-				} = TRANSACTIONAL_KEYS_MAPPING[services] || {};
+				} = PLATFORM_ACTIVITY_KEYS_MAPPING[services] || {};
 
 				const origin_port = item[origin] || {};
 
@@ -47,10 +50,9 @@ function PlatformActivity({ platform = {} }) {
 						</div>
 						<div className={styles.main_card}>
 							<div className={styles.card}>
-								<Pill size="md" color="#f8aea8">Platform</Pill>
 								<div className={styles.booking_details}>
 									<div className={styles.title}>
-										Shipment Status
+										Spot Searches
 									</div>
 									<div className={styles.booking_id}>
 										ID:

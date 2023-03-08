@@ -4127,6 +4127,12 @@ const partner = {
 			feature          : 'rfq',
 			defaultparameter : 'supply_dashboard:allowed',
 		},
+		{
+			api          : 'get_fcl_cfs_rate',
+			access_type  : 'private',
+			service_name : 'fcl_cfs_rate',
+			feature      : 'rfq',
+		},
 	],
 	operations_dashboard: [
 		{
@@ -10313,6 +10319,19 @@ const partner = {
 			service_name : 'shipment',
 		},
 	],
+	inventory_management: [
+		{
+			api          : 'list_rail_domestic_freight_inventories',
+			access_type  : 'private',
+			service_name : 'inventory_management',
+		},
+		{
+			api          : 'get_rail_domestic_freight_inventories',
+			access_type  : 'private',
+			service_name : 'inventory_management',
+		},
+
+	],
 	cogo_one: [
 		{
 			api          : 'get_user',
@@ -10471,7 +10490,191 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
-
+		{
+			api          : 'list_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+	],
+	helios_dashboard: [
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'list_analytics_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'create_analytics_permission_entry',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_permission_entries',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_permitted_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'get_analytics_widget_data',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'get_widget_data',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboard_widgets',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'update_widget_data_for_filtered_query',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'run_analytics_query',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_helios_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+	],
+	ticket_management: [
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'get_tickets_tags',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_list',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_graph',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_stats',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_detail',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_activities',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_details',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'put_tickets_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_activity',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_reassign_reviewer',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_default_role',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_default_timing',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_default_types',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_default_type',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'put_tickets_default_timing',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'put_tickets_default_type',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'delete_tickets_default_timing',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'delete_tickets_default_type',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
 	],
 };
+
 export default partner;

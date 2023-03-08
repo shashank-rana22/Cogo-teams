@@ -1,0 +1,72 @@
+.header_text {
+	font-size: 28px;
+	font-weight: 700;
+}
+
+.no_manager {
+	height: calc(100vh - 48px);
+	background: #fff;
+}
+
+.stats_section {
+	margin-top: 16px;
+}
+
+.page_actions {
+	display: flex;
+	justify-content: space-between;
+
+	:global(.ui_select_container) {
+		width: 160px;
+		height: 38px;
+	}
+}
+
+.filters {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.question_button_container {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.redirect_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+
+	p {
+		margin: 0;
+		font-size: 18px;
+		font-weight: 700;
+	}
+}
+
+.table_section {
+	margin-top: 16px;
+	background: #faf5ec;
+	border-radius: 8px;
+}
+
+.list_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 0 0;
+	margin-top: 16px;
+
+	.list_title {
+		margin: 0;
+		font-size: 18px;
+		font-weight: 700;
+	}
+
+	.list_actions {
+		display: flex;
+		align-items: center;
+	}
+}
