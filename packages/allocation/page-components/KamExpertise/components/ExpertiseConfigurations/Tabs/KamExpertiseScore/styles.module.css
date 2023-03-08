@@ -39,18 +39,11 @@
 	width: 100%;
 
 		:global {
-			.ui_accordion_title {
+			.ui_collapse_title{
 				width: 100%;
-				margin-right: 24px;
 			}
-
-			.ui_accordion_container {
-				margin-bottom: 12px;
-			}
-
-			.ui_accordion_content {
-				background-color: #fff;
-				border-top: 1px solid #bdbdbd;
+			.ui_collapse_content{
+				padding: 0px 12px;
 			}
 		}
 }
