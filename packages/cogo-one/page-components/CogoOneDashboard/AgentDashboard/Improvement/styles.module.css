@@ -50,3 +50,7 @@
 	background-color: #4f4f4f;
 	border-radius: 100%;
 }
+
+.text_placeholder {
+	display: inline-block;
+}

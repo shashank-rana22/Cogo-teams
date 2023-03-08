@@ -5,7 +5,7 @@ import ChatStatistics from '../common/ChatStatistics';
 import Header from '../common/Header';
 import LineChart from '../common/LineChart';
 
-import Intelligence from './Improvement';
+import Improvement from './Improvement';
 import IntentServed from './IntentServed';
 import Statisfaction from './Statisfaction';
 import styles from './styles.module.css';
@@ -17,6 +17,7 @@ function AgentDashboard(props) {
 	const {
 		customer_satisfaction = {}, intents_served = {}, calls_analytics = {},
 		channels_message_analytics = {}, cogo_one_dashboard_graph = {}, status_of_chats = {}, total_customers = '',
+		agent_delay = '',
 	} = listData || {};
 
 	return (
@@ -46,7 +47,7 @@ function AgentDashboard(props) {
 				<div className={styles.right_sub_container}>
 					{/* <TimeSpent loading={loading} /> */}
 					<TotalChatsHandled loading={loading} totalCustomers={total_customers} />
-					<Intelligence />
+					<Improvement loading={loading} agentDelay={agent_delay} />
 					<div className={styles.satisfaction_intent_served_box}>
 						<Statisfaction customerSatisfaction={customer_satisfaction} />
 						<IntentServed intentsServed={intents_served} />

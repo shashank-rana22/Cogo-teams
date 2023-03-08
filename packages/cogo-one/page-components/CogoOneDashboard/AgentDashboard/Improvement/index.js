@@ -1,6 +1,6 @@
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import LoaderImprovement from './LoaderImprovement';
 import styles from './styles.module.css';
 
 // const Data = [
@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 // 	'Work on reaching out to more customers ',
 // ];
 
-function Improvement({ loading = false }) {
+function Improvement({ loading = false, agentDelay = '' }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.improvement}>
@@ -16,27 +16,39 @@ function Improvement({ loading = false }) {
 			</div>
 			<div className={styles.box}>
 				<div className={styles.improvement_text_box}>
-					{
-						loading
-							? <LoaderImprovement />
-							: (
-								<>
-									<div className={styles.dot} />
-									<div className={styles.improvement_text}>
-										Your chat reply time was
-										{/* <span className={styles.value}>
-											{(data[item] || 0) >= 60 ? ((data[item] || 0) / 60).toFixed(2)
-    						   : (data[item] || 0)}
-										</span>
-										<span>{(data[itemKey] || 0) >= 60 ? 'hr' : 'min'}</span> */}
-										{' 12 min '}
-										slower than your peers
-									</div>
 
-								</>
+					<div className={styles.dot} />
+					<div className={styles.improvement_text}>
+						Your chat reply time was
+						{' '}
 
-							)
-					}
+						{
+											loading
+												? (
+													<Placeholder
+														width="40px"
+														height="20px"
+														className={styles.text_placeholder}
+													/>
+												)
+
+												: (
+													<>
+														<span className={styles.value}>
+															{(agentDelay || 0) >= 60
+																? ((agentDelay || 0) / 60).toFixed(2)
+																: (agentDelay || 0)}
+														</span>
+														{' '}
+														<span>{(agentDelay || 0) >= 60 ? 'hr' : 'min'}</span>
+													</>
+												)
+										}
+
+						{' '}
+						slower than your peers
+					</div>
+
 				</div>
 				<div className={styles.improvement_text_box}>
 					<div className={styles.dot} />
