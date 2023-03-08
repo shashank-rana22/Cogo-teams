@@ -12,7 +12,7 @@ const useUpdateSingleBadge = (props) => {
 		url     : 'allocation/kam_expertise_badge_configuration_detail_attributes',
 		method  : 'POST',
 		authkey : 'post_allocation_kam_expertise_badge_configuration_detail_attributes',
-	});
+	}, { manual: true });
 
 	const onSave = async (formValues, e) => {
 		e.preventDefault();

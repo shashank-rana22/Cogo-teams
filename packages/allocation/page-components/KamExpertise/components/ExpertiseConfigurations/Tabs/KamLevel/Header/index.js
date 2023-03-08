@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function HeaderCard() {
+function Header() {
 	return (
 		<div className={styles.container}>
 			<div>
@@ -30,4 +30,4 @@ function HeaderCard() {
 		</div>
 	);
 }
-export default HeaderCard;
+export default Header;

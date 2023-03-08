@@ -4,8 +4,7 @@ import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
-import { controls } from '../ControlsForScore/controls';
-import { controls_bottom } from '../ControlsForScore/controls_bottom';
+import { controls, controlsBottom } from '../controls';
 
 import styles from './styles.module.css';
 
@@ -79,7 +78,7 @@ function ResponseCard({
 			<div className={styles.row_level_end}>
 				<h2>Transacting Accounts</h2>
 				<div className={styles.row_level_end_options}>
-					{controls_bottom.map((singleField) => {
+					{controlsBottom.map((singleField) => {
 						const Element = getFieldController(singleField.type) || null;
 
 						if (!Element) return null;
