@@ -1,9 +1,9 @@
-const controls = [
+const getControls = ({ modifiedControls = [] }) => [
 	{
 		name        : 'condition_type',
 		label       : 'Condition Parameter (event)',
 		placeholder : '',
-		type        : 'select',
+		type        : 'select', // Todo list-api from backend with async creatable select
 		options     : [
 			{ value: 'reactivation', label: 'Reactivation' },
 			{ value: 'enrichment', label: 'Enrichment' },
@@ -20,7 +20,7 @@ const controls = [
 		rules: {
 			required: 'Condition Parameter is required',
 		},
-		isClearable: true,
+		// isClearable: true,
 	},
 	{
 		name        : 'score_type',
@@ -35,75 +35,9 @@ const controls = [
 		rules: {
 			required: 'Score Type is required',
 		},
-		isClearable: true,
+		// isClearable: true,
 	},
-	{
-		name               : 'milestones',
-		label              : 'Enter milestones (%) and score allocated at each milestone',
-		type               : 'fieldArray',
-		buttonText         : 'Add More',
-		noDeleteButtonTill : 1,
-		controls           : [
-			{
-				name        : 'milestone',
-				type        : 'number',
-				label       : 'Milestone',
-				placeholder : '0',
-				rules       : { required: 'Milestone is required' },
-			},
-			{
-				name        : 'score',
-				type        : 'number',
-				label       : 'Score',
-				placeholder : '0',
-				rules       : { required: 'Score is required' },
-			},
-		],
-	},
-	{
-		name               : 'tat',
-		label              : 'Enter duration (days) and score allocated on completion',
-		type               : 'fieldArray',
-		buttonText         : 'Add More',
-		noDeleteButtonTill : 1,
-		controls           : [
-			{
-				name        : 'from',
-				type        : 'number',
-				label       : 'From',
-				placeholder : '0',
-				rules       : { required: 'From is required' },
-			},
-			{
-				name        : 'to',
-				type        : 'number',
-				label       : 'To',
-				placeholder : '0',
-				rules       : { required: 'To is required' },
-			},
-			{
-				name        : 'score',
-				type        : 'number',
-				label       : 'Score',
-				placeholder : '0',
-				rules       : { required: 'Score is required' },
-			},
-		],
-	},
-	{
-		name        : 'score_on_completion',
-		type        : 'number',
-		label       : 'Score on Completion',
-		placeholder : '0',
-		// rules       : { required: 'Score on Completion is required' },
-	},
-	{
-		name        : 'score_on_completion',
-		type        : 'number',
-		label       : 'Score on Repetition',
-		placeholder : '0',
-		// rules       : { required: 'Score on Repetition is required' },
-	},
+	...modifiedControls,
 	{
 		name    : 'impact',
 		label   : 'Impact',
@@ -120,4 +54,4 @@ const controls = [
 	},
 ];
 
-export default controls;
+export default getControls;

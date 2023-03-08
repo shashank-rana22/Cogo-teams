@@ -2,23 +2,31 @@ import { Modal } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import useBadgeConfigurationAttributes from '../../../../hooks/useBadgeConfigurationAttributes';
+import useUpdateSingleBadge from '../../../../hooks/useBadgeConfigurationAttributes';
 import GetCard from '../../CreateBadge/getCard';
 
 import styles from './styles.module.css';
 
-function BadgeCard({ medalType = '', score = '', img_url = '', isLast = {} }) {
-	const {
-		onCheckPublish, loading, formProps,
-	} = useBadgeConfigurationAttributes();
-	const {
-		control, handleSubmit, formState: { errors }, watch,
-	} = formProps;
-	console.log('watching', watch());
+function BadgeCard({ data, medal = '', isLast = {} }) {
+	const { score = '', image_url = '', id = '' } = data;
+
 	const [openModal, setOpenModal] = useState(false);
+
+	const onClose = () => {
+		setOpenModal((pv) => !pv);
+	};
+
+	const {
+		onSave, loading, formProps,
+	} = useUpdateSingleBadge({ medal, id, image_url, score, onClose });
+
+	const {
+		control, handleSubmit,
+	} = formProps;
+
 	const badgeData = {
-		medalType,
-		inputPlaceHolder: score,
+		medalType: medal,
+		score,
 	};
 
 	return (
@@ -27,7 +35,7 @@ function BadgeCard({ medalType = '', score = '', img_url = '', isLast = {} }) {
 			<div className={isLast ? styles.badge_card_right : styles.badge_card_left}>
 				<div className={styles.badge_header}>
 					<span>
-						{medalType}
+						{medal}
 						{' '}
 						:
 						<b>
@@ -38,34 +46,35 @@ function BadgeCard({ medalType = '', score = '', img_url = '', isLast = {} }) {
 						</b>
 					</span>
 					<span>
-						<IcMEdit onClick={() => setOpenModal((pv) => !pv)} />
+						<IcMEdit onClick={onClose} />
 					</span>
 				</div>
 				<div className={styles.badge_icon}>
-					<img src={img_url} alt="badge-icon" />
+					<img src={image_url} alt="badge-icon" />
 				</div>
 			</div>
 			{ openModal
-						&& (
-							<Modal
-								size="sm"
-								show={openModal}
-								onClose={() => setOpenModal((pv) => !pv)}
-								placement="center"
-								className={styles.modal_class}
-							>
-								<Modal.Body>
-									<div style={{ padding: '10px' }}>
-										<GetCard
-											data={badgeData}
-											control={control}
-											isLastItem
-											isBadgeEdit
-										/>
-									</div>
-								</Modal.Body>
-							</Modal>
-						)}
+			&& (
+				<Modal
+					size="sm"
+					show={openModal}
+					onClose={onClose}
+					placement="center"
+					className={styles.modal_class}
+				>
+					<form onSubmit={handleSubmit(onSave)}>
+						<Modal.Body>
+							<div style={{ padding: '10px' }}>
+								<GetCard
+									data={badgeData}
+									control={control}
+									isLastItem
+								/>
+							</div>
+						</Modal.Body>
+					</form>
+				</Modal>
+			)}
 		</>
 
 	);

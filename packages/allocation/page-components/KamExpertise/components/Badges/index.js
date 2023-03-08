@@ -1,3 +1,4 @@
+import { Pagination } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -20,10 +21,17 @@ function Badges() {
 		router.push('/allocation/kam-expertise');
 	};
 
-	const [window, setWindow] = useState(1);
-	const [autofill, setAutofill] = useState({});
+	const [toggleScreen, setToggleScreen] = useState(1);
+	// Screen 1 - Badge List
+	// Screen 2 - Create Mastery
+	// Screen 3 - Create Badge
 
-	const { loading, list:badgeList } = useBadgeConfigurationList();
+	const [autofill, setAutofill] = useState({});
+	const [masteryListData, setMasteryListData] = useState({});
+
+	const { loading, list:badgeList, paginationData, getNextPage, listRefetch } = useBadgeConfigurationList();
+
+	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
 	return (
 		<section className={styles.main_container}>
@@ -44,70 +52,81 @@ function Badges() {
 				<div>
 					<Header
 						badgeList={badgeList.length}
-						setWindow={setWindow}
+						setToggleScreen={setToggleScreen}
+						setMasteryListData={setMasteryListData}
 						setAutofill={setAutofill}
 					/>
 				</div>
 			</section>
-			{
+			<div>
 
-				(isEmpty(badgeList) && !loading) ? (
-					<div style={{
-						padding         : '60px 0',
-						height          : '400px',
-						backgroundColor : 'white',
-						margin          : '20px 0',
-					}}
-					>
-						<EmptyState height={400} width={600} flexDirection="column" />
+				{
+					// ToDo: add empty state's dimensions
+					(toggleScreen === 1) && isEmpty(badgeList)
+						? <EmptyState />
+						: ''
+				}
+				{
+					(toggleScreen === 1)
+				&&	(
+					<div>
+						{badgeList?.map(((data, index) => (data.medal_collection.length > 0
+							? (
+								<MasteryListItem
+									data={data}
+									index={index}
+									loading={loading}
+									setToggleScreen={setToggleScreen}
+									setMasteryListData={setMasteryListData}
+								/>
+							)
+							: (
+								<BadgeListItem
+									data={data}
+									index={index}
+									loading={loading}
+									setToggleScreen={setToggleScreen}
+									setAutofill={setAutofill}
+								/>
+							)
+						)))}
+						<div className={styles.pagination_container}>
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={total_count}
+								pageSize={page_limit}
+								onPageChange={getNextPage}
+							/>
+						</div>
 					</div>
 				)
+			}
 
-					: 	(
-						<div>
-							{
-								(window === 1)
-			&&	badgeList?.map(((data, index) => (data.medal_collection.length > 0
-				? (
-					<MasteryListItem
-						data={data}
-						index={index}
-						loading={loading}
-						setWindow={setWindow}
-						setAutofill={setAutofill}
-					/>
-				)
-				: (
-					<BadgeListItem
-						data={data}
-						index={index}
-						loading={loading}
-						setWindow={setWindow}
-						setAutofill={setAutofill}
-					/>
-				)
-			)))
-
-							}
-
-							{
-			(window === 2) && (
+				{
+			(toggleScreen === 2) && (
 				<div>
-					<CreateMastery setWindow={setWindow} />
+					<CreateMastery
+						setToggleScreen={setToggleScreen}
+						badgeList={badgeList}
+						masteryListData={masteryListData}
+						listRefetch={listRefetch}
+					/>
 				</div>
 			)
 			}
-							{
-			(window === 3) && (
-				<div>
-					<CreateBadge setWindow={setWindow} autofill={autofill} />
-				</div>
-			)
-}
-						</div>
-					)
-
+				{
+				(toggleScreen === 3) && (
+					<div>
+						<CreateBadge
+							setToggleScreen={setToggleScreen}
+							autofill={autofill}
+							listRefetch={listRefetch}
+						/>
+					</div>
+				)
 			}
+			</div>
 
 		</section>
 	);

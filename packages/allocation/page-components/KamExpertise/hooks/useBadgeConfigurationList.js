@@ -1,32 +1,23 @@
-// import { Toast } from '@cogoport/components';
-// import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { useState } from 'react';
 
 function useBadgeConfigurationList() {
-	// const [params, setParams] = useState({
-	// 	sort_type : 'desc',
-	// 	sort_by   : 'created_at',
-	// 	page      : 1,
-	// 	// filters   : {
-	// 	// 	status: ['active', 'draft', 'publishable', 'checking', 'not_publishable'],
-	// 	// },
-	// });
+	const [params, setParams] = useState({
+		page: 1,
+	});
 
 	const [{ loading, data = {} }, refetch] = useAllocationRequest({
 		url     : '/allocation/kam_expertise_badge_configuration_list',
 		method  : 'get',
 		authkey : 'get_allocation_kam_expertise_badge_configuration_list',
-		params  : {},
+		params,
 	}, { manual: false });
 
-	// console.log(refetch);
-	// const getNextPage = (newPage) => {
-	// 	setParams((previousParams) => ({
-	// 		...previousParams,
-	// 		page: newPage,
-	// 	}));
-	// };
-	// ToDo :[ Toast success and Error mssges]
+	const getNextPage = (newPage) => {
+		setParams(() => ({
+			page: newPage,
+		}));
+	};
 
 	const { list = [], ...paginationData } = data || {};
 
@@ -34,6 +25,8 @@ function useBadgeConfigurationList() {
 		loading,
 		list,
 		paginationData,
+		getNextPage,
+		listRefetch: refetch,
 	};
 }
 

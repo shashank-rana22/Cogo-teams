@@ -11,3 +11,11 @@ width: 100%;
 		padding: 0px;
 	}
 }
+.create_button{
+	background: #FFFFFF;
+	border: 1px solid #4F4F4F;
+	border-radius: 4px;
+}
+.response_card{
+	margin-top:12px;
+}
