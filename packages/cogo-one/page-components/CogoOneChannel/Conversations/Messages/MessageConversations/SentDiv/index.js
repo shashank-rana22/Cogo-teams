@@ -14,7 +14,7 @@ function SentDiv({
 		message_type = 'text',
 		created_at = '',
 		response,
-		send_by = 'kam',
+		send_by = '',
 		session_type = 'bot',
 	} = eachMessage;
 
@@ -28,7 +28,7 @@ function SentDiv({
 				<div className={styles.name}>
 					Replied by
 					{' '}
-					{session_type === 'admin' ? send_by : 'bot'}
+					{session_type === 'admin' ? send_by || 'kam' : send_by || 'bot'}
 					,
 					<span className={styles.time_stamp}>{date}</span>
 				</div>

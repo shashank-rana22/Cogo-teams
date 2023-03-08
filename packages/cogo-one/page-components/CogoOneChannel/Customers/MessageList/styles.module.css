@@ -238,3 +238,9 @@
 .warning {
 	background: #fef199;
 }
+
+.media_preview {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}

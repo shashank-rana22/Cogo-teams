@@ -1,5 +1,5 @@
 import { cl, Input, Popover, Tooltip } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight, IcMDocument } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -38,6 +38,18 @@ function MessageList({
 
 	if (messagesLoading) {
 		return <LoadingState />;
+	}
+
+	function CreateReactComponent(previewData) {
+		const preview = previewData
+			?.replaceAll(/<p>\s+(<[/]p>)/g, '<br>')
+			?.replaceAll(/<p>(<[/]p>)/g, '<br>')
+			?.replaceAll('<p', '<div')
+			?.replaceAll('<p>', '<div>')
+			?.replaceAll('</p>', '&nbsp;</div>')
+			?.replaceAll('</span>', '&nbsp;</span>');
+
+		return <div dangerouslySetInnerHTML={{ __html: preview }} />;
 	}
 
 	return (
@@ -166,7 +178,12 @@ function MessageList({
 
 										<div className={styles.content_div}>
 											<div className={styles.content}>
-												{item.last_message}
+												{item?.last_message ? CreateReactComponent(item.last_message) : (
+													<div className={styles.media_preview}>
+														<IcMDocument width={20} height={20} fill="#4f4f4f" />
+														Media
+													</div>
+												) }
 											</div>
 
 											{item.new_message_count > 0 && (
