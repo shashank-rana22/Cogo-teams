@@ -8,26 +8,26 @@ import {
 } from '@cogoport/icons-react';
 
 export const SOURCE_ICON_MAPPING = {
-	whatsapp  : <IcCWhatsapp width={20} height={20} />,
-	facebook  : <IcCFacebook width={20} height={20} />,
-	instagram : <IcCInstagram width={20} height={20} />,
+	whatsapp  : <IcCWhatsapp width={25} height={25} />,
+	facebook  : <IcCFacebook width={25} height={25} />,
+	instagram : <IcCInstagram width={25} height={25} />,
 	email     : <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg"
 		alt=""
-		width="16px"
-		height="16px"
+		width="18px"
+		height="18px"
 	/>,
 	platform_chat: <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg"
 		alt=""
-		width="16px"
-		height="16px"
+		width="18px"
+		height="18px"
 	/>,
 	platform_notification: <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg"
 		alt=""
-		width="22px"
-		height="22px"
+		width="30px"
+		height="30px"
 	/>,
 
 };
@@ -151,7 +151,53 @@ export const PLACEHOLDER_MAPPING = {
 	onboarding_kyc : 'Enter Pan No',
 };
 
+export const DISLIKE_OPTIONS = [
+	{
+		label : 'Question not satisfactory',
+		value : 'Question not satisfactory',
+	},
+	{
+		label : 'Answer not satisfactory',
+		value : 'Answer not satisfactory',
+	},
+];
+
+export const FEEDBACK_MAPPING = {
+	true  : 'liked',
+	false : 'disliked',
+};
+
 export const ACCOUNT_TYPE = {
 	importer_exporter : 'Importer/Exporter',
 	service_provider  : 'Service Provider',
+};
+
+export const TOOLBARCONFIG = {
+	display: [
+		'INLINE_STYLE_BUTTONS',
+		'BLOCK_TYPE_BUTTONS',
+		'LINK_BUTTONS',
+		'BLOCK_TYPE_DROPDOWN',
+		'HISTORY_BUTTONS',
+	],
+	INLINE_STYLE_BUTTONS: [
+		{ label: 'Bold', style: 'BOLD', className: 'custom_css_class' },
+		{ label: 'Italic', style: 'ITALIC' },
+		{ label: 'Underline', style: 'UNDERLINE' },
+	],
+	BLOCK_TYPE_DROPDOWN: [
+		{ label: 'Normal', style: 'unstyled' },
+		{ label: 'Heading Large', style: 'header-one' },
+		{ label: 'Heading Medium', style: 'header-two' },
+		{ label: 'Heading Small', style: 'header-three' },
+	],
+	BLOCK_TYPE_BUTTONS: [
+		{ label: 'UL', style: 'unordered-list-item' },
+		{ label: 'OL', style: 'ordered-list-item' },
+	],
+};
+
+export const ACCOUNT_TYPE_MAPPING = {
+	importer_exporter : 'twin_importer_exporter_id',
+	service_provider  : 'twin_service_provider_id',
 };

@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
 const useUpdateSingleBadge = (props) => {
-	const { medal, id, image_url:previous_image_url, score:previous_score, onClose } = props;
+	const { medal, id, image_url:previous_image_url, score:previous_score, onClose, listRefetch } = props;
 
 	const formProps = useForm();
 
@@ -54,8 +54,8 @@ const useUpdateSingleBadge = (props) => {
 
 			await trigger({ data: payload });
 
-			// refetch
 			onClose();
+			listRefetch();
 
 			Toast.success('Badge Updated!');
 		} catch (error) {

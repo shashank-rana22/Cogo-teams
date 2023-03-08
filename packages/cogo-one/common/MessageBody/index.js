@@ -9,9 +9,9 @@ import styles from './styles.module.css';
 function MessageBody({ response = {}, message_type = 'text' }) {
 	const { message = '', media_url = '' } = response;
 	const URLRegex = new RegExp(URL_MATCH_REGEX);
-	const fileExtension = media_url.split('.').pop();
+	const fileExtension = media_url?.split('.').pop();
 	const renderText = (txt = '') => (
-		(txt.split(' ') || [])
+		(txt?.split(' ') || [])
 			.map((part) => (URLRegex.test(part) ? (
 				`<a href=${part} target="_blank">${part} </a>`
 			) : `${part} `))

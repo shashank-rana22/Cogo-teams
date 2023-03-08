@@ -214,6 +214,12 @@ const allocation = {
 			feature      : 'kam_expertise',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'post_allocation_kam_expertise_bulk_configuration',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
 
 	],
 };

@@ -37,8 +37,13 @@ function CommunicationActivity({ communication = {} }) {
 	return (
 		<div className={styles.container}>
 			{(list || []).map((item) => {
-				const { type = '', created_at = '', sender = '', content = {} } = item || {};
+				const { type = '', created_at = '', sender = '', content = {}, service = '' } = item || {};
 				const { body = '', subject = '' } = content || {};
+				let textData;
+				if (!subject && subject !== '') {
+					textData = JSON.parse(`${body}`);
+				}
+
 				return (
 					<>
 						<div className={styles.activity_date}>
@@ -49,44 +54,51 @@ function CommunicationActivity({ communication = {} }) {
 						</div>
 						<div className={styles.main_card}>
 							<div className={styles.card}>
-								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-									<div className={styles.activity_type}>Communication</div>
-									<div
-										role="presentation"
-										onClick={() => handleContent(body, subject)}
-										style={{ fontSize: '12px', textDecoration: 'underline', color: '#034AFD', cursor: 'pointer' }}
-									>
-										View more
-									</div>
-								</div>
-								<div className={styles.message_details}>
+								<div className={styles.activity_div}>
 									<div className={styles.title}>
 										Sent message on
 										{' '}
 										{startCase(type)}
 									</div>
-									<div className={styles.icon_type}>
+									<div role="presentation" className={styles.icon_type} onClick={() => handleContent(body, subject)}>
 										{SOURCE_ICON_MAPPING[type]}
 									</div>
 								</div>
-								<div className={styles.user_details}>
-									<div className={styles.user_message}>
-										You have a message On
-										{' '}
-										{format(created_at, 'dd MMM YYYY')}
-										{' '}
-										from
-										{' '}
-										{sender}
+								<div className={styles.message_details}>
+									<div className={styles.user_details}>
+										{subject && (
+											<div className={styles.user_message}>
+												You have a message On
+												{' '}
+												{format(created_at, 'dd MMM YYYY')}
+												{sender && (
+													<div>
+														from
+														{' '}
+														{sender}
+													</div>
+												)}
+											</div>
+										)}
+										{subject === '' && (
+											<div className={styles.user_message}>
+												<div>{service.replaceAll('_', ' ')}</div>
+											</div>
+										)}
+										{subject === null && (
+											<div className={styles.user_message}>
+												{textData?.text}
+											</div>
+										)}
 									</div>
-									<div className={styles.user_avatar}>
-										<Avatar
-											src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
-											alt="img"
-											disabled={false}
-											size="35px"
-										/>
-									</div>
+								</div>
+								<div className={styles.user_avatar}>
+									<Avatar
+										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
+										alt="img"
+										disabled={false}
+										size="30px"
+									/>
 								</div>
 							</div>
 						</div>
@@ -94,7 +106,7 @@ function CommunicationActivity({ communication = {} }) {
 				);
 			})}
 
-			{showModal && (
+			{(showModal && (title || title === '')) && (
 				<Modal
 					show={showModal}
 					placement="top"
@@ -102,6 +114,7 @@ function CommunicationActivity({ communication = {} }) {
 					closeOnOuterClick
 					onClose={onCloseModal}
 					className={styles.styled_ui_modal_dialog}
+					scroll={false}
 				>
 					<Modal.Header title={title || 'Message'} />
 					<Modal.Body>
