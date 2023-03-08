@@ -4757,6 +4757,11 @@ const partner = {
 			service_name : 'location',
 		},
 		{
+			api          : 'list_locations_mapping',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+		{
 			api          : 'create_location',
 			access_type  : 'private',
 			service_name : 'location',
@@ -9844,9 +9849,10 @@ const partner = {
 			feature     : 'fcl_freight_rate_extensions',
 		},
 		{
-			api         : 'get_location_cluster',
-			access_type : 'private',
-			feature     : 'fcl_freight_rate_extensions',
+			api          : 'get_location_cluster',
+			access_type  : 'private',
+			feature      : 'fcl_freight_rate_extensions',
+			service_name : 'location',
 		},
 		{
 			api          : 'list_fcl_freight_rate_free_days',
