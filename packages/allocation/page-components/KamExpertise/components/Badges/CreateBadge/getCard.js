@@ -71,7 +71,7 @@ function GetCard({ data = {}, badgeListData = {}, control, watch, isLastItem }) 
 							: null
 					}
 					{
-					!isEmpty(data) && !watch(`${medalType}_img_value`)
+					!isEmpty(data && badgeListData) && !watch(`${medalType}_img_value`)
 						? (
 							<div className={styles.preview}>
 								<img
