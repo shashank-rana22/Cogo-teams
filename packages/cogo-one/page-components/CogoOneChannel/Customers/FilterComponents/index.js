@@ -1,7 +1,7 @@
-import { Button } from '@cogoport/components';
+import { Button, Checkbox, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import { useState, useEffect } from 'react';
 
 import filterControls from '../../../../configurations/filter-controls';
 
@@ -26,14 +26,37 @@ function FilterComponents({
 	setAppliedFilters = () => {},
 	appliedFilters = {},
 	setActiveCardId = () => {},
+	setShowBotMessages = () => {},
+	showBotMessages = false,
 }) {
+	const [botToggle, setBotToggle] = useState(false);
+
 	const defaultValues = getDefaultValues({ filters: appliedFilters });
+
 	const {
 		control, formState: { errors }, watch, setValue,
 	} = useForm({ defaultValues });
 
 	const formValues = watch();
+
 	let filterValues = {};
+
+	const resetForm = () => {
+		filterControls.forEach((item) => {
+			setValue(item.name, item.name === 'channels' ? [] : '');
+		});
+	};
+
+	useEffect(() => {
+		if (botToggle) {
+			resetForm();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [botToggle]);
+
+	useEffect(() => {
+		setBotToggle(showBotMessages);
+	}, [showBotMessages]);
 
 	Object.keys(formValues).forEach((item) => {
 		if (!isEmpty(formValues[item])) {
@@ -43,16 +66,11 @@ function FilterComponents({
 
 	const checkFiltersCount = Object.keys(filterValues).length;
 
-	const resetForm = () => {
-		filterControls.forEach((item) => {
-			setValue(item.name, item.name === 'channels' ? [] : '');
-		});
-	};
-
 	const handleClick = () => {
 		setActiveCardId('');
 		setAppliedFilters(filterValues);
 		setFilterVisible(false);
+		setShowBotMessages(botToggle);
 	};
 
 	return (
@@ -77,15 +95,28 @@ function FilterComponents({
 						) : null}
 				</div>
 			</div>
+			<div className={styles.styled_flex}>
+				<Checkbox
+					name="closed"
+					size="sm"
+					onChange={() => setBotToggle((p) => !p)}
+					checked={botToggle}
+				/>
+				<div>
+					Closed
+				</div>
+			</div>
 
 			{filterControls.map((field) => (
-				<div className={styles.filter_container} key={field.name}>
+				<div className={cl`${styles.filter_container} ${botToggle ? styles.disabled : ''}`} key={field.name}>
 					<Item
 						{...field}
 						control={control}
 						value={formValues[field.name]}
 						setValue={setValue}
 						error={errors[field.name]}
+						botToggle={botToggle}
+
 					/>
 				</div>
 			))}

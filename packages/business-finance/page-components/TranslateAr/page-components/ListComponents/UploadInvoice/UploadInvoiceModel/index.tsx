@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 type Props = {
 	setOpen?: (v) => void;
-	uploadProof: string;
+	uploadProof: { fileName: string; finalUrl : string };
 	setUploadProof?: (v) => void;
 	itemData: {
 		id?: string,
@@ -22,16 +22,20 @@ type Props = {
 };
 
 function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, refetch, open }: Props) {
-	const bodyStyle = uploadProof ? styles.body : '';
+	const { fileName = '', finalUrl } = uploadProof || {};
+	const bodyStyle = finalUrl ? styles.body : '';
 	const { uploadDoc, loading } = useUpdateStatus({
-		uploadProof,
+		finalUrl,
 		setOpen,
 		itemData,
 		refetch,
 	});
+	const fileExtension = fileName.split('.').pop();
 	const handleManualUpload = () => {
-		if (!isEmpty(uploadProof)) {
+		if (!isEmpty(finalUrl) && fileExtension === 'pdf') {
 			uploadDoc();
+		} else if (fileExtension !== 'pdf' && fileExtension) {
+			Toast.error('Only pdf files are allowed');
 		} else {
 			Toast.error('Invoice doc is required');
 		}
@@ -42,13 +46,16 @@ function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, re
 			<Modal.Body>
 				<section className={bodyStyle}>
 					<FileUploader
-						value={uploadProof}
+						value={finalUrl}
+						docName={fileName}
+						fileName={fileName}
 						onChange={setUploadProof}
 						showProgress
 						draggable
+						fileLink={finalUrl}
 						multipleUploadDesc="Upload Invoice"
 						uploadIcon={<IcMUpload height={40} width={40} />}
-						accept=".pdf"
+						accept="application/pdf"
 					/>
 				</section>
 			</Modal.Body>
