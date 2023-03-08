@@ -674,7 +674,7 @@ const saas = {
 		{
 			api          : 'list_locations',
 			access_type  : 'public',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 	],
 	app_saas_cpq_contacts: [
@@ -686,7 +686,7 @@ const saas = {
 		{
 			api          : 'list_locations',
 			access_type  : 'public',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 	],
 	app_saas_cpq_dashboard    : [],
@@ -714,7 +714,7 @@ const saas = {
 		{
 			api          : 'list_locations',
 			access_type  : 'public',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 	],
 	app_saas_edit_quotation: [
@@ -741,7 +741,7 @@ const saas = {
 		{
 			api          : 'list_locations',
 			access_type  : 'public',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 	],
 	app_saas_view_quotation  : [],
@@ -770,7 +770,7 @@ const saas = {
 		{
 			api          : 'list_locations',
 			access_type  : 'public',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 	],
 	app_saas_edit_purchase: [
@@ -797,7 +797,7 @@ const saas = {
 		{
 			api          : 'list_locations',
 			access_type  : 'public',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 	],
 	app_saas_view_purchase  : [],
@@ -826,7 +826,7 @@ const saas = {
 		{
 			api          : 'list_locations',
 			access_type  : 'public',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 	],
 	app_saas_edit_invoice: [
@@ -853,7 +853,7 @@ const saas = {
 		{
 			api          : 'list_locations',
 			access_type  : 'public',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 	],
 	app_saas_view_invoice  : [],
@@ -1916,7 +1916,7 @@ const saas = {
 		{
 			api          : 'list_locations',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api         : 'get_saas_trade_engine',
