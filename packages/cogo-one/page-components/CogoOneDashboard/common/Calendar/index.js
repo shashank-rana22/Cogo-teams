@@ -142,8 +142,10 @@ function Calendar({ props }) {
 			data.push({
 				key      : `cal-${timeline}-${pagination}-${iterator}`,
 				label    : format(item, FORMAT_TYPE[timeline].label),
-				subLabel : `${format(item, FORMAT_TYPE[timeline].subLabel)} to ${format(endDate, FORMAT_TYPE[timeline].subLabel)}`,
-				date     : item,
+				subLabel : `${format(item, FORMAT_TYPE[timeline].subLabel)} 
+							to
+				 			${format(endDate, FORMAT_TYPE[timeline].subLabel)}`,
+				date: item,
 				endDate,
 			});
 		});
@@ -183,6 +185,7 @@ function Calendar({ props }) {
 	// };
 
 	useEffect(() => {
+		setSelectedItem(new Date());
 		setCalendarData([]);
 		setPagination(0);
 		setWeekPagination(0);
