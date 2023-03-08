@@ -31,7 +31,7 @@ function useOnBoardVendor({
 }) {
 	const { general: { query } } = useSelector((state) => state);
 
-	const { vendor_id } = query;
+	const { vendor_id, partner_id = '' } = query;
 
 	const router = useRouter();
 
@@ -201,6 +201,7 @@ function useOnBoardVendor({
 			registration_proof_url : registration_proof_url?.finalUrl,
 			registration_number    : registrationNo?.registrationNumber,
 			registration_type      : registrationNo?.registrationType,
+			cogo_entity_id         : partner_id,
 		};
 
 		try {
