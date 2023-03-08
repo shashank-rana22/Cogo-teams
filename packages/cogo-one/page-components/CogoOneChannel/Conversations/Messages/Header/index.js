@@ -31,6 +31,8 @@ function Header({
 	showBotMessages = false,
 	userId = '',
 	isomniChannelAdmin = false,
+	setDisableButton = () => {},
+	disableButton = '',
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const {
@@ -48,12 +50,13 @@ function Header({
 			: business_name;
 	};
 	const disableAssignButton = showBotMessages && !isomniChannelAdmin;
-	const assignButtonAction = () => {
+	const assignButtonAction = (type) => {
 		if (showBotMessages && isomniChannelAdmin) {
 			const payload = {
-				agent_id        : userId,
+				agent_id        : type === 'stop_and_assign' ? userId : undefined,
 				allowed_to_chat : true,
 			};
+			setDisableButton(type);
 			assignChat(payload);
 		} else if (!showBotMessages) {
 			setOpenModal({
@@ -96,14 +99,25 @@ function Header({
 					<Button
 						themeType="secondary"
 						size="md"
-						disabled={disableAssignButton}
+						disabled={disableAssignButton || disableButton === 'auto_assign'}
 						className={styles.styled_button}
-						onClick={assignButtonAction}
-						loading={showBotMessages && assignLoading}
+						onClick={() => assignButtonAction('stop_and_assign')}
+						loading={showBotMessages && assignLoading && disableButton === 'stop_and_assign'}
 					>
 						{(showBotMessages && isomniChannelAdmin) ? 'Stop and Assign' : 'Assign'}
-
 					</Button>
+					{(showBotMessages && isomniChannelAdmin) && (
+						<Button
+							themeType="secondary"
+							size="md"
+							disabled={disableAssignButton || disableButton === 'stop_and_assign'}
+							className={styles.styled_button}
+							onClick={() => assignButtonAction('auto_assign')}
+							loading={showBotMessages && assignLoading && disableButton === 'auto_assign'}
+						>
+							Auto Assign
+						</Button>
+					)}
 				</div>
 			</div>
 			<div className={styles.flex_space_between}>
