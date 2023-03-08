@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 // todobug : delete button
 function KamLevel() {
-	const { kamConfigDetails = [], loading = false } = useKamExpertiseConfig();
+	const { kamConfigDetails = [], loading = false, refetch } = useKamExpertiseConfig();
 	console.log('loading', loading);
 	const [title, setTitle] = useState(0);
 	const [action, setAction] = useState('show');
@@ -22,15 +22,16 @@ function KamLevel() {
 			key={data.transition_level}
 			data={data}
 			title={title}
+			setTitle={setTitle}
 			setAction={setAction}
 			id={data.transition_level - 1}
 			dataLength={dataLength}
+			refetch={refetch}
 		/>,
 		children: <Children
 			key={data.transition_level}
 			action={action}
 			id={data.transition_level - 1}
-			// ,data={data}
 			title={title}
 		/>,
 	}));
