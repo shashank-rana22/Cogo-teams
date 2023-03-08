@@ -31,14 +31,14 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	const audiences = [];
 
 	(faq_topics || []).map((faq_topic) => {
-		const { name } = faq_topic || {};
-		topics.push(name);
+		const { display_name } = faq_topic || {};
+		topics.push(display_name);
 		return topics;
 	});
 
 	(faq_tags || []).map((faq_tag) => {
-		const { name } = faq_tag || {};
-		tags.push(name);
+		const { display_name } = faq_tag || {};
+		tags.push(display_name);
 		return tags;
 	});
 
