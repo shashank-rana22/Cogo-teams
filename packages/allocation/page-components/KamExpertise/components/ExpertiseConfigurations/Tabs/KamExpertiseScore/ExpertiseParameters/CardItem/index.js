@@ -3,8 +3,8 @@ import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import { getFieldController } from '../../../../../../../../../common/Form/getFieldController';
-import EDIT_CONFIG_CONTROLS_MAPPING from '../../../../../../../constants/edit-config-controls-mapping';
+import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
+import EDIT_CONFIG_CONTROLS_MAPPING from '../../../../../../constants/edit-config-controls-mapping';
 
 import styles from './styles.module.css';
 
