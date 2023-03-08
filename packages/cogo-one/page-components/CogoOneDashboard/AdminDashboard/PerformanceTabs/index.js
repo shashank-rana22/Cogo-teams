@@ -1,19 +1,15 @@
-/* eslint-disable max-len */
 /* eslint-disable no-mixed-spaces-and-tabs */
-// import { Tabs, TabPanel } from '@cogoport/components';
 import { Tooltip } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import/named
-// import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../../configurations/dummyPerformanceTabsData';
 import { emptyPerformance, agentAvatar } from '../../constants';
 
 import LoaderPerformance from './LoaderPerformance';
 import styles from './styles.module.css';
 
 function PerformanceTab({ loading = false, agentsPerformance = {} }) {
-	// const { agents_performance: configAgentPerformance } = configurationData;
 	const { best_performance = [], worst_performance = [] } = agentsPerformance;
 
 	const [activeTab, setActiveTab] = useState('best_performance');
@@ -33,13 +29,7 @@ function PerformanceTab({ loading = false, agentsPerformance = {} }) {
 
 	return (
 	// eslint-disable-next-line react/jsx-no-useless-fragment
-
 		<div className={styles.main_box}>
-			{/* <Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab}>
-				<TabPanel name="best_performance" title="Best Performance" />
-				<TabPanel name="worst_performance" title="Worst Performance" />
-			</Tabs> */}
-
 			<div className={styles.performance_btn_box}>
 				{performanceBtnMapping.map((item) => (
 					<button
@@ -61,7 +51,15 @@ function PerformanceTab({ loading = false, agentsPerformance = {} }) {
 			<div className={styles.performance_tab_container}>
 				{loading && <LoaderPerformance />}
 				{(isEmpty(agentsPerformance?.[activeTab])) && !loading
-					? <img src={emptyPerformance} alt="" width="150px" height="150px" className={styles.empty_performance_picture} />
+					? (
+						<img
+							src={emptyPerformance}
+							alt=""
+							width="150px"
+							height="150px"
+							className={styles.empty_performance_picture}
+						/>
+					)
 					: (
 						<div className={styles.performance_tab_lists}>
 							{(data || []).map((item) => {

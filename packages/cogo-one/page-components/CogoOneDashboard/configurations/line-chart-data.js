@@ -36,7 +36,8 @@ const chartData = ({ cogoOneDashboardGraph = {}, timeline }) => {
 		return {
 			x: timeline === 'week'
 				? daysOfWeek[index]
-				: `${format(dates[0], FORMAT_TYPE[timeline]?.label)}-${format(dates[1], FORMAT_TYPE[timeline]?.label)}`,
+				: `${Number(format(dates[0], FORMAT_TYPE[timeline]?.label))}
+				-${Number(format(dates[1], FORMAT_TYPE[timeline]?.label))}`,
 			y: message_graph_data[key],
 		};
 	});
@@ -45,7 +46,8 @@ const chartData = ({ cogoOneDashboardGraph = {}, timeline }) => {
 		return {
 			x: timeline === 'week'
 				? daysOfWeek[index]
-				: `${format(dates[0], FORMAT_TYPE[timeline]?.label)}-${format(dates[1], FORMAT_TYPE[timeline]?.label)}`,
+				: `${Number(format(dates[0], FORMAT_TYPE[timeline]?.label))}
+				-${Number(format(dates[1], FORMAT_TYPE[timeline]?.label))}`,
 			y: call_graph_data[key],
 		};
 	});
