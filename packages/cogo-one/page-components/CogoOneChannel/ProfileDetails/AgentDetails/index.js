@@ -101,7 +101,7 @@ function AgentDetails({
 	};
 
 	const handleClick = () => {
-		navigator.clipboard.writeText(`https://admin-apollo.dev.cogoport.io/v2/6fd98605-9d5d-479d-9fac-cf905d292b88/cogo-one/omni-channel?assigned_chat=${id}`);
+		navigator.clipboard.writeText(`https://admin.cogoport.com/v2/6fd98605-9d5d-479d-9fac-cf905d292b88/cogo-one/omni-channel?assigned_chat=${id}`);
 		Toast.success('Copied!!!');
 	};
 
