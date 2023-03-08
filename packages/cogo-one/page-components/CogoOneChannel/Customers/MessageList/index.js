@@ -40,16 +40,16 @@ function MessageList({
 		return <LoadingState />;
 	}
 
-	function CreateReactComponent(previewData) {
+	function lastMessagePreview(previewData = '') {
 		const preview = previewData
-			?.replaceAll(/<p>\s+(<[/]p>)/g, '<br>')
-			?.replaceAll(/<p>(<[/]p>)/g, '<br>')
-			?.replaceAll('<p', '<div')
-			?.replaceAll('<p>', '<div>')
-			?.replaceAll('</p>', '&nbsp;</div>')
-			?.replaceAll('</span>', '&nbsp;</span>');
+			?.replaceAll(/<img[\w\W]+?\/>/gm, '');
 
-		return <div dangerouslySetInnerHTML={{ __html: preview }} />;
+		return (
+			<div
+				className={styles.content}
+				dangerouslySetInnerHTML={{ __html: preview }}
+			/>
+		);
 	}
 
 	return (
@@ -177,15 +177,14 @@ function MessageList({
 										</div>
 
 										<div className={styles.content_div}>
-											<div className={styles.content}>
-												{item?.last_message ? CreateReactComponent(item.last_message) : (
+											{item?.last_message
+												? lastMessagePreview(item?.last_message || '')
+												: (
 													<div className={styles.media_preview}>
 														<IcMDocument width={20} height={20} fill="#4f4f4f" />
 														Media
 													</div>
-												) }
-											</div>
-
+												)}
 											{item.new_message_count > 0 && (
 												<div className={styles.new_message_count}>
 													{item.new_message_count > 100 ? '99+' : (
