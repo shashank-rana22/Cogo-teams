@@ -1,17 +1,18 @@
 import { Collapse, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import Children from './Children';
-import HeaderCard from './HeaderCard';
-import useKamExpertiseConfig from './hooks/useKamExpertiseConfig';
+import useKamExpertiseConfig from '../../../../hooks/useKamExpertiseConfig';
+
+import Header from './Header';
 import KamLevelCard from './KamLevelCard';
+import KamLevelDropDown from './KamLevelDropDown';
 import ResponseCard from './ResponseCard';
 import styles from './styles.module.css';
 
 // todobug : delete button
 function KamLevel() {
 	const { kamConfigDetails = [], loading = false, refetch } = useKamExpertiseConfig();
-	console.log('loading', loading);
+	// console.log('loading', loading);
 	const [title, setTitle] = useState(0);
 	const [action, setAction] = useState('show');
 	const [createKam, setCreateKam] = useState(false);
@@ -28,7 +29,7 @@ function KamLevel() {
 			dataLength={dataLength}
 			refetch={refetch}
 		/>,
-		children: <Children
+		children: <KamLevelDropDown
 			key={data.transition_level}
 			action={action}
 			id={data.transition_level - 1}
@@ -37,7 +38,7 @@ function KamLevel() {
 	}));
 	return (
 		<div>
-			<HeaderCard />
+			<Header />
 			<Collapse
 				panel={options}
 				activeKey={title}

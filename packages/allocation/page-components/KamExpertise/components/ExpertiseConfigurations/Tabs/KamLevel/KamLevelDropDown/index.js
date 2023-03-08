@@ -1,12 +1,12 @@
 import React from 'react';
 
-import useKamExpertiseLevelConfig from '../hooks/useKamExpertiseLevelConfig';
-import KamLevelDetailsEdit from '../KamLevelDetailsEdit';
-import KamLevelDetailsShow from '../KamLevelDetailsShow';
+import useKamExpertiseLevelConfig from '../../../../../hooks/useKamExpertiseLevelConfig';
 
+import KamLevelDetailsEdit from './KamLevelDetailsEdit';
+import KamLevelDetailsShow from './KamLevelDetailsShow';
 import styles from './styles.module.css';
 
-function Children({ action = '', title }) {
+function KamLevelDropDown({ action = '', title }) {
 	const { listkamLevelDetails } = useKamExpertiseLevelConfig({ title });
 	console.log('listkamLevelDetails', listkamLevelDetails);
 	return (
@@ -17,4 +17,4 @@ function Children({ action = '', title }) {
 		</div>
 	);
 }
-export default Children;
+export default KamLevelDropDown;

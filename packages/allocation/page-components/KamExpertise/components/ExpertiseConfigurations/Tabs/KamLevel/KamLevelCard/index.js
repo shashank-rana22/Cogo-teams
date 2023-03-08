@@ -3,7 +3,7 @@ import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useUpdateKamScores from '../hooks/useUpdateKamScores';
+import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
 
 import styles from './styles.module.css';
 
