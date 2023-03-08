@@ -76,7 +76,7 @@ function LineChart({ cogoOneDashboardGraph = {}, timeline = '', loading = false 
 								}}
 								axisLeft={{
 									orient         : 'left',
-									tickSize       : 7,
+									tickSize       : 5,
 									tickValues     : 5,
 									tickPadding    : 5,
 									tickRotation   : 0,
