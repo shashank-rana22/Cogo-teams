@@ -150,7 +150,7 @@ function AnswerPage() {
 	};
 
 	const onClickBackIcon = () => {
-		const href = `/learning/faq?topicId=${topicId}`;
+		const href = `/learning/faq${topicId ? `?topicId=${topicId}` : ''}`;
 		router.push(href, href);
 	};
 

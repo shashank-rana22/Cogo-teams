@@ -4,7 +4,6 @@ import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import WORK_SCOPES_OPTIONS from '../../ConfigurationEngine/CreateAudienceForm/utils/workScopeMappings';
-import useListCogoEntity from '../../ConfigurationEngine/hooks/useListCogoEntities';
 /* eslint-disable */
 import countries from '../../../../../../.data-store/constants/countries.json';
 
@@ -90,13 +89,12 @@ const useGetTopicTagList = () => {
 	const tagOptions = [];
 	const audienceOptions = [];
 
-	const { entity_data } = useListCogoEntity();
 
 	const getAudienceOption = (item) => {
 		const {
 			auth_function = '',
 			auth_sub_function = '',
-			cogo_entity_id = '',
+			cogo_entity_name = '',
 			name = '',
 			platform = '',
 			work_scope = '',
@@ -104,24 +102,30 @@ const useGetTopicTagList = () => {
 		} = item || {};
 
 		const workScopeLabel = (WORK_SCOPES_OPTIONS || []).find((workScope) => workScope.value === work_scope);
-		const cogoEntityLabel = (entity_data || []).find((cogoEntity) => cogoEntity.id === cogo_entity_id);
-		const selectedCountry = countries.find((country)=> country.id===country_id)
+		const selectedCountry = countries.find((country)=> country.id===country_id);
 
-		const pillsArray = [
-			workScopeLabel?.label,
-			auth_function||'All',
-			startCase(auth_sub_function)||'All',
-			cogoEntityLabel?.business_name,
-			startCase(platform),
-			selectedCountry?.name];
+		const pillsObject= {
+			'work_scope':workScopeLabel?.label,
+			'function':auth_function||'all',
+			'sub_function':startCase(auth_sub_function)||'all',
+			'cogo_entity_name':cogo_entity_name,
+			'platform':startCase(platform),
+			'country':selectedCountry?.name
+		};
 
+		const pillsArray = Object.keys(pillsObject);
 
 		const label = (
 			<div>
 				<div style={{ fontWeight: 600, paddingTop:'4px', paddingBottom:'6px' }}>{startCase(name)}</div>
-				{(pillsArray || []).map((ele) => (
-					ele && <Pill color='blue'>{ele}</Pill>
-				))}
+				{(pillsArray || []).map((ele) => {
+					return (pillsObject[ele] && 
+					<Pill color='blue'>
+						{['all','All']. includes(pillsObject[ele])?
+						`${startCase(ele)} - ${startCase(pillsObject[ele])}`
+						: startCase(pillsObject[ele]) }
+					</Pill>)
+	})}
 			</div>
 		);
 		const q = `${item.name || ''}-${pillsArray.join('-')}`;

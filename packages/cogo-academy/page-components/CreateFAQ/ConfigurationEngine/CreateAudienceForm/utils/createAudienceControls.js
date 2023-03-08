@@ -20,7 +20,7 @@ const PERSONA_OPTIONS = [
 	{ label: 'All', value: 'all' },
 ];
 
-const createQuestionControls = ({ watchFunctions, entity_options }) => {
+const createQuestionControls = ({ watchFunctions, entity_options, countryOptions }) => {
 	const controls = [
 		{
 			name        : 'name',
@@ -43,6 +43,7 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			name        : 'country_id',
 			label       : 'Country',
 			type        : 'select',
+			options     : countryOptions,
 			placeholder : 'Select country',
 		},
 
