@@ -301,7 +301,7 @@ function AnswerPage() {
 						{' '}
 						people found it useful.
 					</span>
-				) : <></>}
+				) : null}
 				{'    '}
 				<span className={styles.sidetext}>
 					Last updated on:

@@ -81,7 +81,7 @@ function AddedQuestions(props) {
 								pageSize={paginationData?.page_limit}
 								onPageChange={setPage}
 							/>
-						) : <></>}
+						) : null}
 				</div>
 			</>
 		);
