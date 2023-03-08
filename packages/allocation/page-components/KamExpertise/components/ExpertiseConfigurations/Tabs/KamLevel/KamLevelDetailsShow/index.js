@@ -4,44 +4,35 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function KamLevelDetailsShow({ data = {} }) {
-	const transacting_accounts = data.list && data.list['Transacting Accounts'];
+	const transacting_accounts = data && data.list && data.list['Transacting Accounts'];
 	const COLUMN_MAPPING = [
 		{
 			label: 'Customer Expertise',
-
 		},
 		{
 			label: 'Trade Expertise',
-
 		},
 		{
 			label: 'Commodity Expertise',
-
 		},
 		{
 			label: 'Misc Expertise',
-
 		},
 
 	];
-
 	const TRANSACTION_MAPPING = [
 		{
 			label: 'Minimum Transacting Accounts',
-
 		},
 		{
 			label: 'Retained Account Count',
-
 		},
 		{
 			label: 'Retained Account Min Duration',
-
 		},
 	];
 	return (
 		<div className={styles.level_card_container}>
-
 			{COLUMN_MAPPING.map((item) => (
 				<div>
 					<div className={styles.row_level}>
@@ -51,25 +42,15 @@ function KamLevelDetailsShow({ data = {} }) {
 					</div>
 					<div style={{ marginLeft: '8px', opacity: '0.7' }}>Score</div>
 					<div className={styles.score_value}>
-						{data.list
+						{data && data.list
 						&& data.list[item.label]
 						&& data.list[item.label][0]
 						&& data.list[item.label][0].threshold_score
-							? data.list[item.label][0].threshold_score : '--'}
+							? data.list[item.label][0].threshold_score : '-'}
 					</div>
-					<div style={{
-						border     : '1px solid #BDBDBD',
-						opacity    : '0.4',
-						width      : '98%',
-						marginLeft : '8px',
-
-					}}
-					/>
-
+					<div className={styles.border_class} />
 				</div>
-
 			))}
-
 			<div className={styles.row_level_end}>
 				<h2>Transacting Account</h2>
 				<div className={styles.row_level_end_options}>
@@ -79,20 +60,13 @@ function KamLevelDetailsShow({ data = {} }) {
 							<div className={styles.score_value}>
 								{transacting_accounts
 									? transacting_accounts.find((account) => account.threshold_score_type
-									=== item.label)?.threshold_score || '--' : '--'}
+									=== item.label)?.threshold_score || '-' : '-'}
 							</div>
-
 						</div>
-
 					))}
-
 				</div>
-
 			</div>
-
 		</div>
-
 	);
 }
-
 export default KamLevelDetailsShow;

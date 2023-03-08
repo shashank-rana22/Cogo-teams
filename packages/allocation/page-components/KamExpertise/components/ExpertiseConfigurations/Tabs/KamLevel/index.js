@@ -34,11 +34,9 @@ function KamLevel() {
 			title={title}
 		/>,
 	}));
-
 	return (
 		<div>
 			<HeaderCard />
-
 			<Collapse
 				panel={options}
 				activeKey={title}
@@ -46,7 +44,6 @@ function KamLevel() {
 				type="text"
 				className={styles.collapse}
 			/>
-
 			{createKam ? (
 				<div className={styles.response_card}>
 					<ResponseCard
@@ -64,12 +61,9 @@ function KamLevel() {
 					>
 						Create Kam Level
 					</Button>
-
 				</div>
 			)}
-
 		</div>
 	);
 }
-
 export default KamLevel;
