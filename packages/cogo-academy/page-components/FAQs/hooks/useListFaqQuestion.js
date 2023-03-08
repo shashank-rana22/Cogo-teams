@@ -57,6 +57,7 @@ function useListFaqQuestions({
 					sort_by    : sort,
 					page,
 					page_limit : limit || undefined,
+					faq_tags_data_required:true
 				},
 			});
 		} catch (error) {

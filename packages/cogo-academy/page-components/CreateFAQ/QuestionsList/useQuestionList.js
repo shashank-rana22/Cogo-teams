@@ -187,6 +187,9 @@ const useQuestionList = () => {
 					},
 					page,
 					is_admin_view: true,
+					faq_tags_data_required:true,
+					faq_topics_data_required:true
+					
 
 				},
 			});
@@ -207,7 +210,9 @@ const useQuestionList = () => {
 					data: {
 						id,
 						status: 'inactive',
+						
 					},
+					
 				},
 			);
 

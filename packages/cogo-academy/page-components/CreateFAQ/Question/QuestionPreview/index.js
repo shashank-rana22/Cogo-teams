@@ -138,17 +138,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 			</div>
 
 			<div className={styles.button_container}>
-				{!(source === 'view')
-					&& (
-						<Button
-							themeType="primary"
-							size="md"
-							className={styles.publish_button}
-							onClick={() => onClickPublish({ data })}
-						>
-							Publish
-						</Button>
-					)}
+				
 				<Button
 					themeType="secondary"
 					size="md"
@@ -165,6 +155,17 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 				>
 					Edit
 				</Button>
+				{!(source === 'view')
+					&& (
+						<Button
+							themeType="primary"
+							size="md"
+							className={styles.publish_button}
+							onClick={() => onClickPublish({ data })}
+						>
+							Publish
+						</Button>
+					)}
 			</div>
 		</div>
 	);
