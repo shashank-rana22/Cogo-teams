@@ -100,6 +100,7 @@ function Badges() {
 									loading={loading}
 									setToggleScreen={setToggleScreen}
 									setBadgeListData={setBadgeListData}
+									listRefetch={listRefetch}
 								/>
 							)
 						)))}

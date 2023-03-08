@@ -1,87 +1,86 @@
 .container {
-	width: 200%;
+    width: 200%;
+    @media (max-width: 1000px) {
+        width: 100%;
+    }
 }
 
 .cards {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	margin: 20px 0;
-}
-
-.card_container {
-	flex-basis: 24%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 16px 0;
 }
 
 .card_item {
-	width: 100%;
-	padding: 16px 24px 4px;
-	background: #fff;
-	border-radius: 8px;
-	height: 160px;
+    flex-basis: 24%;
+    padding: 16px 24px 4px;
+    background: #fff;
+    border-radius: 8px;
+    height: 140px;
+    margin: 4px;
 }
 
 .inner_card_item {
-	width: 100%;
-	padding: 16px 24px 4px;
-	background: #fff;
-	border-radius: 8px;
-	height: 124px;
-
+    flex-basis: 24%;
+    padding: 16px 24px 4px;
+    background: #fff;
+    border-radius: 8px;
+    height: 132px;
+    margin: 4px;
 }
 
 .card_title {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .card_content {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .card_data_score {
-	display: flex;
-	flex-direction: column;
-	width: 50%;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
 }
 
 .overview_container {
-	width: 100%;
-	padding-top: 20px;
-	border-top: 1px solid #bdbdbd;
+    padding-top: 20px;
+    border-top: 1px solid #bdbdbd;
 }
 
 .leaderboard_header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 20px 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0 12px;
 }
 
 .overview_header {
-	font-size: 22px;
-	font-weight: bold;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .overview_cards {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	margin: 12px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 12px 0;
 }
 
 .overview_card_title {
-	display: flex;
+    display: flex;
 }
 
 .overview_card_content {
-	display: flex;
-	justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .filters {
-	width: 100%;
+    width: 100%;
 }

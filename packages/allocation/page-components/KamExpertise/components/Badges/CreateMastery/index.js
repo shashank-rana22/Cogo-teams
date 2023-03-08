@@ -3,25 +3,28 @@ import { isEmpty, format } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateMasterConfiguration from '../../../hooks/useCreateMasterConfiguration';
-import useCreateNewMastery from '../../../hooks/useCreateNewMastery';
 
 import styles from './styles.module.css';
 
 function CreateMastery(props) {
 	const { setToggleScreen, badgeList = {}, masteryListData = {}, listRefetch } = props;
-	const { formProps, getAddMasteryControls } = useCreateNewMastery(masteryListData);
+
+	const onClose = () => {
+		setToggleScreen(1);
+	};
+
+	const {
+		formProps,
+		getAddMasteryControls,
+		loading,
+		onSave,
+	} = useCreateMasterConfiguration({ masteryListData, onClose, listRefetch });
 
 	const InputDesc = getFieldController('text');
 
 	const { control, watch, handleSubmit } = formProps;
 
 	const UploadController = getFieldController('fileUpload');
-
-	const onClose = () => {
-		setToggleScreen(1);
-	};
-
-	const { loading, onSave } = useCreateMasterConfiguration({ onClose, listRefetch });
 
 	const badge_options = []; // for multi-select badges
 	(badgeList || {}).forEach((badge_data) => {
@@ -100,7 +103,7 @@ function CreateMastery(props) {
 								<div>
 									{
 									watch('image_input')
-										? 										(
+										? (
 											<div className={styles.preview}>
 												<img src={watch('image_input')} alt="preview_image" />
 											</div>

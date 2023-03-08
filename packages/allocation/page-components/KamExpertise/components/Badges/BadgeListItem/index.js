@@ -4,7 +4,7 @@ import { format, startCase } from '@cogoport/utils';
 import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
 
-function BadgeListItem({ data, index, loading, setToggleScreen, setBadgeListData }) {
+function BadgeListItem({ data, index, loading, setToggleScreen, setBadgeListData, listRefetch }) {
 	if (loading) {
 		return (
 			<div className={styles.container}>
@@ -117,7 +117,9 @@ function BadgeListItem({ data, index, loading, setToggleScreen, setBadgeListData
 								<BadgeCard
 									data={badge}
 									medal={startCase(badge.medal)}
+									badgeListData={data}
 									isLast={i === badge_details.length - 1}
+									listRefetch={listRefetch}
 								/>
 							))
 						}

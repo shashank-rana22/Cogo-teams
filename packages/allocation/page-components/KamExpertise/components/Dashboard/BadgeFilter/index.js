@@ -16,7 +16,7 @@ function BadgeFilter() {
 		<div className={styles.container}>
 			<div className={styles.select_container}>
 				<Select
-					size="md"
+					size="sm"
 					// value={value}
 					// onChange={setValue(value)}
 					placeholder="Select Badge"
@@ -26,7 +26,7 @@ function BadgeFilter() {
 
 			<div className={styles.search}>
 				<Input
-					size="md"
+					size="sm"
 					suffix={<IcMSearchlight style={{ margin: '0 8px' }} />}
 					placeholder={search}
 					onChange={setSearch}

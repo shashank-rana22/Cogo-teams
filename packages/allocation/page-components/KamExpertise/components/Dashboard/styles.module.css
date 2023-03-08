@@ -1,27 +1,29 @@
 .container {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-	@media (max-width: 576px) {
-		padding-top: 50px;
-	}
+    @media (max-width: 576px) {
+        padding-top: 50px;
+    }
 }
 
 .heading_container {
-	margin-bottom: 28px;
-	font-size: 28px;
-	font-weight: 600;
-	line-height: 42px;
+    margin-bottom: 28px;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 42px;
 }
 
 .create_button_container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
 }
 
 .tab_list {
-	width: 50%;
-	background: #f8f5ec;
+    width: 50%;
+    @media (max-width: 1000px) {
+        width: 100%;
+    }
 }

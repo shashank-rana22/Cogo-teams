@@ -3,6 +3,8 @@ import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useUpdateKamScores from '../hooks/useUpdateKamScores';
+
 import styles from './styles.module.css';
 
 function KamLevelCard({
@@ -11,6 +13,8 @@ function KamLevelCard({
 	data = {},
 	id = '',
 	dataLength = -1,
+	refetch = () => {},
+	setTitle = () => {},
 }) {
 	const [showEditBtn, setshowEditBtn] = useState(true);
 	const {
@@ -19,6 +23,9 @@ function KamLevelCard({
 	} = data;
 	const expertiseObject = expertise_details.map((item) => item);
 	// isEmpty(title) ? (setshowEditBtn(false)) : (setshowEditBtn(true));
+
+	const { onSave } = useUpdateKamScores({ refetch, setAction, setTitle, setshowEditBtn });
+
 	const COLUMN_MAPPING = [
 		{
 			label: 'Customer Expertise',
@@ -83,6 +90,7 @@ function KamLevelCard({
 								className={styles.delete_button}
 								onClick={(e) => {
 									e.stopPropagation();
+									onSave();
 								}}
 								type="submit"
 							>
