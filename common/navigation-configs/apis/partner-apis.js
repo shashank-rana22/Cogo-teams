@@ -1681,6 +1681,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
+		{
+			api          : 'post_allocation_feedback',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_feedbacks',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'create_event',
+			access_type  : 'private',
+			service_name : 'event',
+		},
 	],
 	supply_crm: [
 		{
@@ -10496,7 +10511,54 @@ const partner = {
 			service_name : 'partner',
 		},
 	],
-	helios_dashboard: [
+	analytics_dashboard: [
+		{
+			api          : 'list_analytics_permitted_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'get_analytics_widget_data',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'get_widget_data',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboard_widgets',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'update_widget_data_for_filtered_query',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'run_analytics_query',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+	],
+	analytics_dashboard_management: [
+		{
+			api          : 'create_analytics_permission_entry',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_permission_entries',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
 		{
 			api          : 'list_partner_users',
 			access_type  : 'private',
@@ -10508,52 +10570,7 @@ const partner = {
 			service_name : 'auth',
 		},
 		{
-			api          : 'list_all_helios_dashboards',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'create_permission_entry',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'list_permission_entries',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'retrieve_permitted_dashboards',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'get_widget_data',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'get_widget_data',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'list_dashboard_widgets',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'update_widget_data_for_filtered_query',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'run_query',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'list_helios_dashboards',
+			api          : 'list_analytics_permission_entries',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},

@@ -1,0 +1,18 @@
+.overflow_flex {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.item_value {
+	margin-top: 4px;
+	font-weight: 600;
+
+	@media (max-width: 768px) {
+		display: flex;
+		flex: 1;
+		justify-content: flex-start;
+		margin-top: 0;
+		line-height: none;
+	}
+}
