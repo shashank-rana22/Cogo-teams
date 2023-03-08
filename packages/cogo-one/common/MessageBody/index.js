@@ -19,7 +19,12 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 
 	function ShowMessage() {
 		return (
-			<div dangerouslySetInnerHTML={{ __html: renderText(message) }} />
+			message_type === 'template' ? (
+				<div dangerouslySetInnerHTML={{ __html: message }} />
+
+			) : (
+				<div dangerouslySetInnerHTML={{ __html: renderText(message) }} />
+			)
 		);
 	}
 
