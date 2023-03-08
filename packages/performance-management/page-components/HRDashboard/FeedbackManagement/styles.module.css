@@ -1,0 +1,54 @@
+.redirect_container {
+	display: flex;
+	align-items: center;
+}
+
+.go_back_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	font-size: 16px;
+	font-weight: 500;
+
+	p {
+		margin: 0;
+		font-size: 28px;
+		font-weight: 600;
+	}
+}
+
+.top_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 16px 0;
+}
+
+.filters {
+	display: flex;
+	align-items: center;
+}
+
+.department_select {
+	display: flex;
+	justify-content: flex-start;
+
+	:global(.ui_select_display_container) {
+		width: 160px;
+	}
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 16px;
+}
+
+.select_container {
+	margin-left: 16px;
+
+	p {
+		font-size: 18px;
+	}
+}

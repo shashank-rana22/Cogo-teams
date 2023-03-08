@@ -1,0 +1,10 @@
+.filters {
+	display: flex;
+	padding: 20px 0;
+}
+
+.chips_container {
+	:global(.ui_ps_size_md) {
+		min-width: 86px;
+	}
+}

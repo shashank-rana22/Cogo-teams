@@ -1,0 +1,54 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.margin {
+	display: flex;
+	gap: 12px;
+}
+
+.heading {
+	max-width: 100px;
+	min-height: 60px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 150%;
+	color: #7b7f8e;
+}
+
+.percent {
+	font-size: 14.7124px;
+	font-weight: 700;
+	line-height: 17px;
+	color: #ed3726;
+}
+
+.value_ctr {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 24px;
+	color: #333;
+}
+
+.percentage {
+	font-size: 21px;
+	font-weight: 700;
+	line-height: 32px;
+	color: #229b32;
+}
+
+.neg_percentage {
+	font-size: 21px;
+	font-weight: 700;
+	line-height: 32px;
+	color: #ed3726;
+}
+
+.price {
+	font-size: 21px;
+	font-weight: 700;
+	line-height: 32px;
+	color: #000;
+}

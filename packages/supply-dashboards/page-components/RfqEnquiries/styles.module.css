@@ -1,0 +1,38 @@
+.heading {
+	margin: 12px;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 23px;
+	color: #221f20;
+}
+
+.line {
+	max-width: 100px;
+	background-color: #ed3726;
+	border: 2px solid #ed3726;
+}
+
+.stats {
+	max-width: 1400px;
+	height: 249.89px;
+	background: #fff;
+	border-radius: 6px;
+}
+
+.body {
+	display: flex;
+	flex-direction: row;
+}
+
+.cardlist {
+	width: 100%;
+}
+
+.filter {
+	width: 349px;
+	max-height: 748px;
+	padding-bottom: 4px;
+	margin-top: 8px;
+	background: #fff;
+}

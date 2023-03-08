@@ -1,0 +1,26 @@
+.header_text {
+	font-size: 16px;
+	font-weight: 600;
+	color: #6fa5ab;
+}
+
+.card_container {
+	padding: 12px;
+}
+
+.sub_container {
+	display: flex;
+	gap: 16px;
+	margin: 12px 0;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.empty_text {
+	display: flex;
+	align-items: flex-end;
+	font-size: 14px;
+	color: #bdbdbd;
+}

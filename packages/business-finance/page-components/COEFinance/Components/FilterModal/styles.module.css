@@ -1,0 +1,109 @@
+.heading_container {
+	padding-left: 10px;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 15px;
+	color: #333;
+	letter-spacing: 0.04em;
+}
+
+.filter_button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 38px;
+	padding: 8px 20px;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 16px;
+	color: #333;
+	cursor: pointer;
+	background-color: #fff;
+	border: 1px solid #333;
+	border-radius: 4px;
+}
+
+.buttons {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 40px;
+}
+
+.clear {
+	margin-right: 10px;
+}
+
+.modal_container {
+	:global {
+		.ui_modal_dialog {
+			width: 600px !important;
+		}
+	}
+}
+
+.icon {
+	padding-top: 2px;
+	padding-left: 5px;
+	color: #ed3726;
+}
+
+.container_filter {
+	padding-left: 25px;
+	margin-top: -20px;
+}
+
+.filter_applied {
+	margin-top: -15px;
+	margin-left: -2px;
+}
+
+.currency_values {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: fit-content;
+	padding: 14px 20px;
+	margin-right: 8px;
+	margin-left: 10px;
+	cursor: pointer;
+	border: 1px solid #333;
+	border-radius: 8px;
+
+	&.selected {
+		color: #ed3726;
+		background-color: #fffaeb;
+		border: 1px solid #ed3726;
+	}
+
+	&.unselected {
+		color: #333;
+		background-color: #fff;
+	}
+
+	&.icon_show {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 4px;
+	}
+
+	&.text_show {
+		display: flex;
+		justify-content: center;
+		font-size: 14px;
+		font-weight: 500;
+	}
+}
+
+.currencys {
+	width: 100%;
+	padding-left: 5px;
+	margin: 8px 8px 24px 28px;
+	font-size: 16px;
+	font-weight: 800;
+	line-height: 22px;
+	text-decoration: underline;
+	text-decoration-thickness: 3px;
+	text-decoration-color: #ed3726;
+	text-underline-offset: 10px;
+}

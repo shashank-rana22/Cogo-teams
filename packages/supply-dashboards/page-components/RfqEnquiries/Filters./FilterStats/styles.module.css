@@ -1,0 +1,57 @@
+.service {
+	display: flex;
+	width: 100%;
+}
+
+.tag_active {
+	background: #fbd1a6;
+}
+
+.tag_primary {
+	background: #fef3e9;
+}
+
+.tag_active,
+.tag_primary {
+	display: flex;
+	align-items: center;
+	padding: 8px 16px;
+	margin: 4px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 14px;
+	border: none;
+	border-radius: 4px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.filter {
+	margin-left: 8px;
+}
+
+.checkbox_container {
+	margin-left: 30px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.checkbox {
+	padding: 0 !important;
+}
+
+.radio {
+	font-size: 12px;
+	font-weight: 400;
+	color: #221f20;
+}
+
+.heading {
+	padding: 4px 0 0 8px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
+}

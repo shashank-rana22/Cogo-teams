@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function Header({
 	onChangeShowCreateRoleModal = () => {},
+	onResetFilters = () => {},
 	stakeHolderType,
 	setStakeHolderType,
 }) {
@@ -20,7 +21,7 @@ function Header({
 				/>
 
 				<Chips
-					selectedItems={[stakeHolderType]}
+					selectedItems={stakeHolderType}
 					items={[
 						{ children: 'All Roles', key: 'all' },
 						{ children: 'Cogoport', key: 'cogoport' },
@@ -29,6 +30,7 @@ function Header({
 					]}
 					onItemChange={(val) => {
 						setStakeHolderType(val);
+						onResetFilters();
 					}}
 				/>
 			</section>

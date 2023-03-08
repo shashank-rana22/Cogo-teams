@@ -1,0 +1,20 @@
+.footer_buttons {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.styled_editor {
+	:global {
+		.notranslate {
+			min-height: 300px;
+		}
+	}
+}
+
+.styled_input {
+	margin: 10px 0;
+}
+
+.header {
+	font-weight: 600;
+}

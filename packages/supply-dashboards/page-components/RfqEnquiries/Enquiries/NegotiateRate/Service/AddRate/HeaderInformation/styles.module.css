@@ -1,0 +1,21 @@
+.styled_info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 2px;
+}
+
+.styled_tag {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.important_text {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 4px;
+	margin-top: 0;
+	color: #cc3b3b;
+}

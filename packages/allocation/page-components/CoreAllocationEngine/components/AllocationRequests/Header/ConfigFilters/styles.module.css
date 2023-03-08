@@ -1,0 +1,10 @@
+.filter_dot {
+	position: relative;
+	right: 4px;
+	bottom: 4px;
+	width: 8px;
+	height: 8px;
+	background: #ee3425;
+	border: 1px solid #fff;
+	border-radius: 100%;
+}

@@ -1,0 +1,26 @@
+.container {
+	display: flex;
+	align-items: center;
+}
+
+.item {
+	padding: 20px;
+	margin-bottom: 3px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 25px;
+	color: #333;
+	word-break: break-all;
+	cursor: pointer;
+	background-color: #fff;
+	box-shadow: 4px 4px 4px 0 rgb(0 0 0 / 10%);
+}
+
+.line {
+	margin-right: 15px;
+	border: 1px solid #ffe5ce;
+}
+
+.placeholder {
+	margin: 0;
+}

@@ -153,6 +153,90 @@ const apis = [
 		feature      : 'tech_ops',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_rfq_request_sheets',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'rfq',
+	},
+	{
+		api          : 'list_contract_plan_sheet_uploads',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'update_rfq_request_sheet',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'rfq',
+	},
+	{
+		api          : 'list_contracts',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_fcl_freight_services',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_lcl_freight_services',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_air_freight_services',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_services_utilisations',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'create_bulk_contract_utilisation',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'update_bulk_contract_utilisation',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'update_bulk_contract_service_utilisations',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'update_contract_plan_sheet_upload',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'get_contract',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'get_contract_service_shipment_data',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
 ];
 
 export default apis;
