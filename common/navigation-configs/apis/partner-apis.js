@@ -6041,7 +6041,7 @@ const partner = {
 			service_name : 'unified_dashboard',
 		},
 		{
-			api          : 'outstanding_amount_bifurcation',
+			api          : 'get_outstanding_data_bifurcation',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
