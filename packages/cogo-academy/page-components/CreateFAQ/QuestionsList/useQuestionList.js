@@ -189,8 +189,7 @@ const useQuestionList = () => {
 					is_admin_view            : true,
 					faq_tags_data_required   : true,
 					faq_topics_data_required : true,
-					author_data_required :true,
-
+					author_data_required     : true,
 
 				},
 			});
