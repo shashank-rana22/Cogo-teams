@@ -31,14 +31,14 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	const audiences = [];
 
 	(faq_topics || []).map((faq_topic) => {
-		const { name } = faq_topic || {};
-		topics.push(name);
+		const { display_name } = faq_topic || {};
+		topics.push(display_name);
 		return topics;
 	});
 
 	(faq_tags || []).map((faq_tag) => {
-		const { name } = faq_tag || {};
-		tags.push(name);
+		const { display_name } = faq_tag || {};
+		tags.push(display_name);
 		return tags;
 	});
 
@@ -96,7 +96,6 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 				<h5 className={styles.question_title}>Question</h5>
 				<h1 className={styles.question}>
 					{question_abstract}
-					?
 				</h1>
 			</div>
 			<div>
@@ -139,17 +138,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 			</div>
 
 			<div className={styles.button_container}>
-				{!(source === 'view')
-					&& (
-						<Button
-							themeType="primary"
-							size="md"
-							className={styles.publish_button}
-							onClick={() => onClickPublish({ data })}
-						>
-							Publish
-						</Button>
-					)}
+
 				<Button
 					themeType="secondary"
 					size="md"
@@ -166,6 +155,17 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 				>
 					Edit
 				</Button>
+				{!(source === 'view')
+					&& (
+						<Button
+							themeType="primary"
+							size="md"
+							className={styles.publish_button}
+							onClick={() => onClickPublish({ data })}
+						>
+							Publish
+						</Button>
+					)}
 			</div>
 		</div>
 	);
