@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, cl, Popover } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -70,6 +70,31 @@ function Header({
 			});
 		}
 	};
+	const renderButtonOption = () => (
+		<div className={styles.button_container}>
+			<Button
+				themeType="secondary"
+				size="md"
+				disabled={disableAssignButton || disableButton === 'auto_assign'}
+				className={styles.styled_buttons}
+				onClick={() => assignButtonAction('stop_and_assign')}
+				loading={showBotMessages && assignLoading && disableButton === 'stop_and_assign'}
+			>
+				Assign to me
+			</Button>
+			<Button
+				themeType="secondary"
+				size="md"
+				disabled={disableAssignButton || disableButton === 'stop_and_assign'}
+				className={styles.styled_buttons}
+				onClick={() => assignButtonAction('auto_assign')}
+				loading={showBotMessages && assignLoading && disableButton === 'auto_assign'}
+			>
+				Auto Assign
+			</Button>
+
+		</div>
+	);
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_space_between}>
@@ -96,26 +121,27 @@ function Header({
 							<AssigneeAvatar name={activeAgentName} type="active" key={activeAgentName} />
 						</div>
 					)}
-					<Button
-						themeType="secondary"
-						size="md"
-						disabled={disableAssignButton || disableButton === 'auto_assign'}
-						className={styles.styled_button}
-						onClick={() => assignButtonAction('stop_and_assign')}
-						loading={showBotMessages && assignLoading && disableButton === 'stop_and_assign'}
-					>
-						{(showBotMessages && isomniChannelAdmin) ? 'Stop and Assign' : 'Assign'}
-					</Button>
-					{(showBotMessages && isomniChannelAdmin) && (
+
+					{(showBotMessages && isomniChannelAdmin) ? (
+						<Popover placement="bottom" trigger="click" caret={false} render={renderButtonOption()}>
+							<Button
+								themeType="secondary"
+								size="md"
+								className={styles.styled_button}
+							>
+								Assign To
+							</Button>
+						</Popover>
+					) : (
 						<Button
 							themeType="secondary"
 							size="md"
-							disabled={disableAssignButton || disableButton === 'stop_and_assign'}
+							disabled={disableAssignButton}
 							className={styles.styled_button}
-							onClick={() => assignButtonAction('auto_assign')}
-							loading={showBotMessages && assignLoading && disableButton === 'auto_assign'}
+							onClick={() => assignButtonAction('assign')}
+							loading={showBotMessages && assignLoading}
 						>
-							Auto Assign
+							Assign
 						</Button>
 					)}
 				</div>
