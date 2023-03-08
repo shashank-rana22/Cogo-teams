@@ -3,6 +3,8 @@ import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useUpdateKamScores from '../hooks/useUpdateKamScores';
+
 import styles from './styles.module.css';
 
 function KamLevelCard({
@@ -11,7 +13,8 @@ function KamLevelCard({
 	data = {},
 	id = '',
 	dataLength = -1,
-
+	refetch = () => {},
+	setTitle = () => {},
 }) {
 	const [showEditBtn, setshowEditBtn] = useState(true);
 	const {
@@ -21,24 +24,21 @@ function KamLevelCard({
 	const expertiseObject = expertise_details.map((item) => item);
 	// isEmpty(title) ? (setshowEditBtn(false)) : (setshowEditBtn(true));
 
+	const { onSave } = useUpdateKamScores({ refetch, setAction, setTitle, setshowEditBtn });
+
 	const COLUMN_MAPPING = [
 		{
 			label: 'Customer Expertise',
-
 		},
 		{
 			label: 'Trade Expertise',
-
 		},
 		{
 			label: 'Commodity Expertise',
-
 		},
 		{
 			label: 'Misc Expertise',
-
 		},
-
 	];
 	return (
 		<div className={styles.whole}>
@@ -57,9 +57,7 @@ function KamLevelCard({
 					<IcMArrowNext className={styles.arrow} />
 					<b>{transition_level}</b>
 				</div>
-
 				<div className={styles.button_container}>
-
 					{showEditBtn || isEmpty(title) ? (
 						<Button
 							themeType="secondary"
@@ -68,14 +66,11 @@ function KamLevelCard({
 								if (title) {
 									e.stopPropagation();
 								}
-
 								setshowEditBtn(false);
-
 								setAction('edit');
 							}}
 						>
 							Edit
-
 						</Button>
 					) : (
 						<>
@@ -95,18 +90,16 @@ function KamLevelCard({
 								className={styles.delete_button}
 								onClick={(e) => {
 									e.stopPropagation();
+									onSave();
 								}}
 								type="submit"
-
 							>
 								{' '}
 								Save
 							</Button>
 						</>
 					)}
-
 					{dataLength === data.transition_level - 1
-
 						? (
 							<div className={styles.delete_button}>
 								<IcMDelete onClick={(event) => {
@@ -134,14 +127,10 @@ function KamLevelCard({
 						: (
 							null
 						)} */}
-
 				</div>
-
 			</div>
 			{
-
 			title === id + 1
-
 				? (
 					<div className={styles.title_show}>
 						To level up from KAM 1 TO KAM 2, A KAM needs to fulfill all of the following criteria
@@ -157,18 +146,16 @@ function KamLevelCard({
 									{' '}
 									Score
 								</div>
-								<div>
+								<div style={{ fontWeight: '700' }}>
 									{expertiseObject.find((expertise) => expertise.expertise_type
-									=== item.label)?.threshold_score || '--'}
+									=== item.label)?.threshold_score || '-'}
 								</div>
 							</div>
 						))}
 					</div>
 				)
 }
-
 		</div>
 	);
 }
-
 export default KamLevelCard;

@@ -8,9 +8,7 @@ import styles from './styles.module.css';
 
 function Children({ action = '', title }) {
 	const { listkamLevelDetails } = useKamExpertiseLevelConfig({ title });
-
-	console.log('hello', listkamLevelDetails);
-
+	console.log('listkamLevelDetails', listkamLevelDetails);
 	return (
 		<div className={styles.child}>
 			{action === 'show'
@@ -19,5 +17,4 @@ function Children({ action = '', title }) {
 		</div>
 	);
 }
-
 export default Children;

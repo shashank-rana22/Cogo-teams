@@ -13,8 +13,8 @@
     "@cogoport/next": "workspace:0.1.0",
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
-    "@cogoport/utils": "^1.2.2",
-    "firebase": "^9.17.1",
+    "@cogoport/utils": "^1.2.6",
+    "firebase": "^9.17.2",
     "react": "18.2.0",
     "stylelint": "^14.16.1",
     "uuid": "^9.0.0"
