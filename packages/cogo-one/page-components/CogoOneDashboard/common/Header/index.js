@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 function Header({ timeline, setTimeline }) {
 	const { query, back } = useRouter();
 	const { id: agentId = '' } = query || {};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -27,7 +26,6 @@ function Header({ timeline, setTimeline }) {
 			</div>
 
 			<div className={styles.header_right_section}>
-				<div className={styles.filter_dot} />
 				<Tabs
 					activeTab={timeline}
 					themeType="tertiary"

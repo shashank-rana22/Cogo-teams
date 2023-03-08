@@ -67,7 +67,18 @@
 	border-radius: 4px;
 }
 
-.tooltip_text_color {
+.tooltip_text {
+	display: flex;
 	font-weight: 600;
 	color: #1c1c1c;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+}
+
+.column_center {
+	margin: 0 6px;
 }

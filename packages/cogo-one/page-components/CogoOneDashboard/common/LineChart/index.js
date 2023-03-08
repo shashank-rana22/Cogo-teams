@@ -11,6 +11,18 @@ function LineChart({ cogoOneDashboardGraph = {}, timeline = '', loading = false 
 	const { graph_stats = {} } = cogoOneDashboardGraph || {};
 	const GraphData = chartData({ cogoOneDashboardGraph, timeline }) || [];
 
+	const LABLE_TYPE = {
+		day: {
+			label: 'Hour',
+		},
+		week: {
+			label: 'Day',
+		},
+		month: {
+			label: 'Week',
+		},
+	};
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.chart_legends_box}>
@@ -46,64 +58,74 @@ function LineChart({ cogoOneDashboardGraph = {}, timeline = '', loading = false 
 					: (
 
 						<div className={styles.chart_container}>
-							{(
-								<ResponsiveLine
-									data={GraphData}
-									margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
-									xScale={{ type: 'point' }}
-									yFormat=" >-.2f"
-									axisTop={null}
-									axisRight={null}
-									axisBottom={{
-										orient         : 'bottom',
-										tickSize       : 5,
-										tickPadding    : 5,
-										tickRotation   : 0,
-										// legend         : 'transportation',
-										legendOffset   : 36,
-										legendPosition : 'middle',
-									}}
-									axisLeft={{
-										orient         : 'left',
-										tickSize       : 7,
-										tickValues     : 5,
-										tickPadding    : 5,
-										tickRotation   : 0,
-										legend         : 'Customers',
-										legendOffset   : -40,
-										legendPosition : 'middle',
-									}}
-									colors={['#C4C4C4', '#F98600']}
-									enableGridX={false}
-									pointSize={4}
-									pointColor={{ theme: 'background' }}
-									pointBorderWidth={4}
-									pointBorderColor={{ from: 'serieColor' }}
-									pointLabelYOffset={-12}
-									useMesh
-									tooltip={({ point }) => (
-										<div className={styles.tooltip_box}>
-											<div className={styles.tooltip_text_color}>
+							<ResponsiveLine
+								data={GraphData}
+								margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+								xScale={{ type: 'point' }}
+								yFormat=" >-.2f"
+								axisTop={null}
+								axisRight={null}
+								axisBottom={{
+									orient         : 'bottom',
+									tickSize       : 5,
+									tickPadding    : 5,
+									tickRotation   : 0,
+									legend         : LABLE_TYPE[timeline].label,
+									legendOffset   : 36,
+									legendPosition : 'middle',
+								}}
+								axisLeft={{
+									orient         : 'left',
+									tickSize       : 7,
+									tickValues     : 5,
+									tickPadding    : 5,
+									tickRotation   : 0,
+									legend         : 'Customers',
+									legendOffset   : -40,
+									legendPosition : 'middle',
+								}}
+								colors={['#C4C4C4', '#F98600']}
+								enableGridX={false}
+								pointSize={4}
+								pointColor={{ theme: 'background' }}
+								pointBorderWidth={4}
+								pointBorderColor={{ from: 'serieColor' }}
+								pointLabelYOffset={-12}
+								useMesh
+								tooltip={({ point }) => (
+									<div className={styles.tooltip_box}>
+										<div className={styles.tooltip_text}>
+											<div className={styles.column}>
 												<div>
-													Customers:
-													{' '}
+													Customers
+												</div>
+												<div>
+													{LABLE_TYPE[timeline].label}
+												</div>
+											</div>
+											<div className={`${styles.column} ${styles.column_center} `}>
+												<div>
+													:
+												</div>
+												<div>
+													:
+												</div>
+											</div>
+
+											<div className={styles.column}>
+												<div>
 													{point.data.y || 0}
 												</div>
 												<div>
-													{timeline}
-													{' '}
-													:
-													{' '}
 													{point.data.x || 0}
 												</div>
 											</div>
 										</div>
-									)}
-								/>
-					)}
+									</div>
+								)}
+							/>
 						</div>
 					)
-
 			}
 		</div>
 	);

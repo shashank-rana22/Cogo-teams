@@ -2,15 +2,12 @@ import { Tooltip } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-// import { configurationData } from '../../../../configurations/configurationData';
 import { agentAvatar, emptyEscalations } from '../../constants';
 
 import LoaderEscalation from './LoaderEscalations';
 import styles from './styles.module.css';
 
 function Escalation({ loading = false, escalations = [] }) {
-	// const { escalations: configEscalations = [] } = configurationData;
-
 	return (
 		<div className={styles.redflags_container}>
 			<div className={styles.heading}>Escalations</div>

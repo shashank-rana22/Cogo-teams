@@ -9,7 +9,6 @@ import Improvement from './Improvement';
 import IntentServed from './IntentServed';
 import Statisfaction from './Statisfaction';
 import styles from './styles.module.css';
-// import TimeSpent from './TimeSpent';
 import TotalChatsHandled from './TotalChatshandled';
 
 function AgentDashboard(props) {
@@ -45,7 +44,6 @@ function AgentDashboard(props) {
 					</div>
 				</div>
 				<div className={styles.right_sub_container}>
-					{/* <TimeSpent loading={loading} /> */}
 					<TotalChatsHandled loading={loading} totalCustomers={total_customers} />
 					<Improvement loading={loading} agentDelay={agent_delay} />
 					<div className={styles.satisfaction_intent_served_box}>
