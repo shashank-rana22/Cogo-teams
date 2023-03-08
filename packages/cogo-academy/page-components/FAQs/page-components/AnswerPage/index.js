@@ -295,11 +295,13 @@ function AnswerPage() {
 			</div>
 
 			<div>
-				{answerData?.answers[0]?.upvote_count>0?<span className={styles.sidetext}>
-					{answerData?.answers[0]?.upvote_count}
-					{' '}
-					people found it useful.
-				</span>:<></>}
+				{answerData?.answers[0]?.upvote_count > 0 ? (
+					<span className={styles.sidetext}>
+						{answerData?.answers[0]?.upvote_count}
+						{' '}
+						people found it useful.
+					</span>
+				) : <></>}
 				{'    '}
 				<span className={styles.sidetext}>
 					Last updated on:

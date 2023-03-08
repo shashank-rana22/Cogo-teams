@@ -138,7 +138,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 			</div>
 
 			<div className={styles.button_container}>
-				
+
 				<Button
 					themeType="secondary"
 					size="md"

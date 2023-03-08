@@ -14,7 +14,7 @@ function useGetQuestion() {
 	const fetchQuestion = async () => {
 		try {
 			await trigger({
-				params: { id },
+				params: { id , is_admin_view:true },
 			});
 		} catch (err) {
 			console.log(err);
