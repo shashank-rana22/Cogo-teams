@@ -1,0 +1,22 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	height: 60px;
+	padding: 20px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.info {
+	display: flex;
+}
+
+.info_label {
+	margin-right: 12px;
+}
+
+.value {
+	font-weight: 600;
+}
