@@ -29,7 +29,16 @@ function Badges() {
 	const [autofill, setAutofill] = useState({});
 	const [masteryListData, setMasteryListData] = useState({});
 
-	const { loading, list:badgeList, paginationData, getNextPage, listRefetch } = useBadgeConfigurationList();
+	const {
+		loading,
+		list:badgeList,
+		searchValue,
+		setSearchValue = () => {},
+		debounceQuery,
+		paginationData,
+		getNextPage = () => {},
+		listRefetch,
+	} = useBadgeConfigurationList();
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
@@ -52,7 +61,11 @@ function Badges() {
 				<div>
 					<Header
 						badgeList={badgeList.length}
+						toggleScreen={toggleScreen}
 						setToggleScreen={setToggleScreen}
+						searchValue={searchValue}
+						setSearchValue={setSearchValue}
+						debounceQuery={debounceQuery}
 						setMasteryListData={setMasteryListData}
 						setAutofill={setAutofill}
 					/>
