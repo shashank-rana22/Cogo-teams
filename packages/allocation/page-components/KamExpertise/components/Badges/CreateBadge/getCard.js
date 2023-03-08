@@ -15,11 +15,11 @@ function GetCard({ data = {}, badgeListData = {}, control, watch, isLastItem }) 
 	const getBadgeImage = (medal) => {
 		switch (medal) {
 			case 'Bronze':
-				return badgeListData.badge_details[0].image_url;
+				return badgeListData?.badge_details[0]?.image_url;
 			case 'Silver':
-				return badgeListData.badge_details[1].image_url;
+				return badgeListData?.badge_details[1]?.image_url;
 			case 'Gold':
-				return badgeListData.badge_details[2].image_url;
+				return badgeListData?.badge_details[2]?.image_url;
 			default:
 				return '';
 		}

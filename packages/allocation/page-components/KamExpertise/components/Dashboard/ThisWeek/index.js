@@ -73,10 +73,8 @@ const overview_data = [
 
 function ThisWeek() {
 	const [cardData, setCardData] = useState();
-	const { loading, kam_level_data, refetch } = useGetAllocationKamExpertiseStats();
+	// const { loading, kam_level_data, refetch } = useGetAllocationKamExpertiseStats();
 	// const [visible, setVisible] = useState(false);
-
-	console.log('kam_level_data', kam_level_data);
 
 	return (
 		<div className={styles.container}>
