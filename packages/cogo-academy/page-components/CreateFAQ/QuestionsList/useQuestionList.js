@@ -53,17 +53,32 @@ const addedQuestionsColumns = ({
 		) : '-'),
 	},
 	{
+		Header   : 'LAST UPDATED AT',
+		accessor : (items) => {
+			const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
+			return (
+				<div>
+					{formatDate}
+				</div>
+			);
+		},
+	},
+	{
 		Header   : 'ACTIONS',
 		accessor : (items) => (
-			<div className={styles.buttonContainer}>
-				{activeList !== 'inactive' ? (
-					<IcMDelete
-						height={20}
-						width={20}
-						style={{ marginRight: 8, cursor: 'pointer' }}
-						onClick={() => deactivateQuestion(items?.id)}
-					/>
-				) : null}
+			<div className={styles.button_container}>
+				{!['inactive', 'draft'].includes(activeList)
+					? (
+						<Button
+							themeType="primary"
+							size="sm"
+							style={{ marginRight: 8 }}
+							onClick={() => onClickViewButton(items?.id)}
+						>
+							VIEW
+						</Button>
+					)
+					: null}
 				<Button
 					themeType="secondary"
 					size="sm"
@@ -71,19 +86,15 @@ const addedQuestionsColumns = ({
 					onClick={() => onClickEditButton(items?.id)}
 				>
 					EDIT
-
 				</Button>
-				{!['inactive', 'draft'].includes(activeList)
-					? (
-						<Button
-							themeType="primary"
-							size="sm"
-							onClick={() => onClickViewButton(items?.id)}
-						>
-							VIEW
-						</Button>
-					)
-					: null}
+				{activeList !== 'inactive' ? (
+					<IcMDelete
+						height={20}
+						width={20}
+						style={{ cursor: 'pointer' }}
+						onClick={() => deactivateQuestion(items?.id)}
+					/>
+				) : null}
 			</div>
 		),
 	},
@@ -120,15 +131,7 @@ const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) =>
 	{
 		Header   : 'ACTIONS',
 		accessor : (items) => (
-			<div className={styles.buttonContainer}>
-
-				<IcMDelete
-					height={20}
-					width={20}
-					style={{ marginRight: 8 }}
-					onClick={() => deactivateQuestion(items?.id)}
-				/>
-
+			<div className={styles.button_container}>
 				<Button
 					themeType="primary"
 					size="sm"
@@ -136,8 +139,14 @@ const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) =>
 					onClick={() => onClickEditButton(items.id)}
 				>
 					ADD ANSWER
-
 				</Button>
+				<IcMDelete
+					height={20}
+					width={20}
+					style={{ marginRight: 8 }}
+					onClick={() => deactivateQuestion(items?.id)}
+				/>
+
 			</div>
 		),
 	},
