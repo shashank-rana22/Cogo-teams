@@ -31,10 +31,11 @@ function useAssignChat({
 				},
 			});
 			closeModal();
-			setDisableButton('');
 			Toast.success('Successfully Assigned');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
+		} finally {
+			setDisableButton('');
 		}
 	};
 	return {
