@@ -6,6 +6,7 @@ import { useState } from 'react';
 import EmptyState from '../../../../common/EmptyState';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetUser from '../../../../hooks/useGetUser';
+import hideDetails from '../../../../utils/hideDetails';
 
 import ConversationContainer from './ConversationContainer';
 import styles from './styles.module.css';
@@ -145,30 +146,42 @@ function AgentDetails({
 							<div className={styles.name}>
 								{name || 'unknown user'}
 							</div>
-							<div className={styles.email}>{userEmail || '-'}</div>
+							<div className={styles.email}>
+								{userEmail ? hideDetails({ data: userEmail, type: 'mail' }) : ''}
+							</div>
 						</>
 					)}
 				</div>
 			</div>
-			<div className={styles.verification_pills}>
-				{VERIFICATION_STATUS.map((item, index) => {
-					const itemKey = `${snakeCase(item.label)}_${index}`;
-					return (
-						<div key={itemKey}>
-							<Pill
-								key={item.label}
-								prefix={item.prefixIcon}
-								size="md"
-								color={item.color}
-							>
-								<div className={styles.pill_name}>
-									{item.label}
-								</div>
-							</Pill>
-						</div>
-					);
-				})}
-			</div>
+			{(leadUserId || userId) && (
+				<div className={styles.verification_pills}>
+					{VERIFICATION_STATUS.map((item, index) => {
+						const itemKey = `${snakeCase(item.label)}_${index}`;
+						return (
+							<div key={itemKey}>
+								{loading ? (
+									<Placeholder
+										height="20px"
+										width="120px"
+										margin="10px 0px 10px 0px"
+									/>
+								) : (
+									<Pill
+										key={item.label}
+										prefix={item.prefixIcon}
+										size="md"
+										color={item.color}
+									>
+										<div className={styles.pill_name}>
+											{item.label}
+										</div>
+									</Pill>
+								)}
+							</div>
+						);
+					})}
+				</div>
+			)}
 			{loading ? (
 				<Placeholder
 					height="13px"
@@ -188,7 +201,12 @@ function AgentDetails({
 			{(mobile_no || user_number) && (
 				<>
 					<div className={styles.conversation_title}>Other Channels</div>
-					<ConversationContainer userData={userData} noData={!leadUserId && !userId} loading={loading} />
+					<ConversationContainer
+						userData={userData}
+						noData={!leadUserId && !userId}
+						loading={loading}
+						activeCardData={DATA_MAPPING[activeTab] || {}}
+					/>
 				</>
 			)}
 		</>
