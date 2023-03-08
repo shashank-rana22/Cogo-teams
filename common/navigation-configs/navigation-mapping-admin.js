@@ -1798,8 +1798,8 @@ const navigationMappingAdmin = {
 	enrichment: {
 		key           : 'enrichment',
 		title         : 'Enrichment',
-		href          : '/enrichment',
-		as            : '/enrichment',
+		href          : '/v2/enrichment',
+		as            : '/v2/enrichment',
 		main_apis     : ['/list_lead_organizations_enrichment'],
 		possible_apis : apis.enrichment,
 		module_type   : 'dashboards',
