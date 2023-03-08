@@ -12,7 +12,7 @@ const OPTIONS = [
 	},
 ];
 
-function Header({ badgeList, setToggleScreen, setMasteryListData, setAutofill }) {
+function Header({ badgeList, setToggleScreen, setMasteryListData, setBadgeListData }) {
 	const [searchValue, setSearchValue] = useState('Search');
 	const [disabled, setDisabled] = useState(true);
 	const [expertise, setExpertise] = useState('');
@@ -56,7 +56,7 @@ function Header({ badgeList, setToggleScreen, setMasteryListData, setAutofill })
 					themeType="primary"
 					size="md"
 					onClick={() => {
-						setAutofill({});
+						setBadgeListData({});
 						setToggleScreen(3);
 					}}
 				>

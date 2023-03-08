@@ -54,8 +54,8 @@ const useUpdateSingleBadge = (props) => {
 
 			await trigger({ data: payload });
 
-			onClose();
 			// refetch
+			onClose();
 
 			Toast.success('Badge Updated!');
 		} catch (error) {

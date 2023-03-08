@@ -4,7 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import useBadgeConfigurationList from '../../hooks/useBadgeConfigurationList';
+import useGetBadgeList from '../../hooks/useGetBadgeList';
 
 import BadgeListItem from './BadgeListItem';
 import CreateBadge from './CreateBadge';
@@ -25,10 +25,11 @@ function Badges() {
 	// Screen 2 - Create Mastery
 	// Screen 3 - Create Badge
 
-	const [autofill, setAutofill] = useState({});
+	const [badgeListData, setBadgeListData] = useState({});
+	// const [autofill, setAutofill] = useState({});
 	const [masteryListData, setMasteryListData] = useState({});
 
-	const { loading, list:badgeList } = useBadgeConfigurationList();
+	const { loading, list:badgeList } = useGetBadgeList();
 
 	return (
 		<section className={styles.main_container}>
@@ -51,7 +52,7 @@ function Badges() {
 						badgeList={badgeList.length}
 						setToggleScreen={setToggleScreen}
 						setMasteryListData={setMasteryListData}
-						setAutofill={setAutofill}
+						setBadgeListData={setBadgeListData}
 					/>
 				</div>
 			</section>
@@ -81,7 +82,7 @@ function Badges() {
 						index={index}
 						loading={loading}
 						setToggleScreen={setToggleScreen}
-						setAutofill={setAutofill}
+						setBadgeListData={setBadgeListData}
 					/>
 				)
 			))))
@@ -102,7 +103,7 @@ function Badges() {
 				{
 				(toggleScreen === 3) && (
 					<div>
-						<CreateBadge setToggleScreen={setToggleScreen} autofill={autofill} />
+						<CreateBadge setToggleScreen={setToggleScreen} badgeListData={badgeListData} />
 					</div>
 				)
 			}

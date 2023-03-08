@@ -1,25 +1,23 @@
 import { Button } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
-import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
-import useCreateNewBadge from '../../../hooks/useCreateNewBadge';
 
 import GetCard from './getCard';
 import styles from './styles.module.css';
 
-function CreateBadge({ setToggleScreen, autofill }) {
+function CreateBadge({ setToggleScreen, badgeListData = {} }) {
+	const onClose = () => {
+		setToggleScreen(1);
+	};
+
 	const {
-		getAddBadgesControls, formProps,
-	} = useCreateNewBadge();
+		onSave, getFieldController, loading, getAddBadgesControls, formProps,
+	} = useCreateBadgeConfiguration({ onClose, badgeListData });
 
 	const {
 		control, handleSubmit, formState: { errors },
 	} = formProps;
-
-	const {
-		onCheckPublish, loading,
-	} = useCreateBadgeConfiguration();
 
 	const medalType = [
 		{
@@ -36,75 +34,29 @@ function CreateBadge({ setToggleScreen, autofill }) {
 		},
 	];
 
-	const onClose = () => {
-		setToggleScreen(1);
-	};
-
-	const onSave = async (formValues, e) => {
-		e.preventDefault();
-
-		const {
-			badge,
-			description,
-			Bronze_value,
-			Bronze_img_value,
-			Silver_value,
-			Silver_img_value,
-			Gold_value,
-			Gold_img_value,
-		} = formValues || {};
-
-		const payload_data = {
-			version_id    : '1',
-			badge_name    : badge,
-			description,
-			// event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9mkkwwvw930t45670',
-			status        : 'active',
-			badge_details : [
-				{
-					score     : Bronze_value,
-					image_url : Bronze_img_value,
-					medal     : 'bronze',
-				},
-				{
-					score     : Silver_value,
-					image_url : Silver_img_value,
-					medal     : 'silver',
-				},
-				{
-					score     : Gold_value,
-					image_url : Gold_img_value,
-					medal     : 'gold',
-				},
-			],
-		};
-		await onCheckPublish(payload_data);
-		onClose();
-	};
-
 	if (loading) {
 		return null;
 	}
 	return (
 		<div>
 			<section className={styles.container}>
-				{Object.keys(autofill).length > 0
+				{Object.keys(badgeListData).length > 0
 				&& (
 					<div className={styles.fields_container}>
 						<p className={styles.text_styles}>
 							Last Modified :
 							{' '}
-							{format(autofill.updated_at, 'yyyy-MMM-dd')}
+							{format(badgeListData.updated_at, 'yyyy-MMM-dd')}
 						</p>
 
 						<p className={styles.text_styles}>
 							Last Modified By :
-							{/* {` ${autofill.lstModifiedBy}`} */}
+							{/* {` ${badgeListData.lstModifiedBy}`} */}
 						</p>
 					</div>
 				)}
 				{/* <p className={styles.text_styles}>
-					{`#${dummyDatas.bdgeNumber}`}
+					{index}
 				</p> */}
 
 				<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>Add Badge</h2>
