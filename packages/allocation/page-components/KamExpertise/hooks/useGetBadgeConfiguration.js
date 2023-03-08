@@ -1,3 +1,4 @@
+// ! NOT USED YET
 import { useAllocationRequest } from '@cogoport/request';
 
 function useGetBadgeConfiguration() {

@@ -12,8 +12,18 @@ const OPTIONS = [
 	},
 ];
 
-function Header({ badgeList, setToggleScreen, setMasteryListData, setAutofill }) {
-	const [searchValue, setSearchValue] = useState('Search');
+function Header(props) {
+	const {
+		badgeList,
+		toggleScreen,
+		setToggleScreen = () => {},
+		searchValue,
+		setSearchValue = () => {},
+		debounceQuery,
+		setMasteryListData = () => {},
+		setBadgeListData,
+	} = props;
+	// const [searchValue, setSearchValue] = useState('Search');
 	const [disabled, setDisabled] = useState(true);
 	const [expertise, setExpertise] = useState('');
 
@@ -33,8 +43,10 @@ function Header({ badgeList, setToggleScreen, setMasteryListData, setAutofill })
 				<SearchInput
 					size="sm"
 					placeholder="Search"
+					setGlobalSearch={setSearchValue}
+					debounceQuery={debounceQuery}
 					value={searchValue}
-					disabled={disabled}
+					// disabled={disabled}
 					className={styles.search_bar}
 				/>
 			</div>
@@ -48,17 +60,19 @@ function Header({ badgeList, setToggleScreen, setMasteryListData, setAutofill })
 						setMasteryListData({});
 						setToggleScreen(2);
 					}}
+					disabled={toggleScreen === 2}
 				>
-					Mastery
+					Add Mastery
 				</Button>
 
 				<Button
 					themeType="primary"
 					size="md"
 					onClick={() => {
-						setAutofill({});
+						setBadgeListData({});
 						setToggleScreen(3);
 					}}
+					disabled={toggleScreen === 3}
 				>
 					{
 						badgeList

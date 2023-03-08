@@ -95,17 +95,7 @@ function KamExpertiseScoreConfig() {
 			</div>
 
 			<div className={styles.expertise_cards_container}>
-				{
-					// Object.entries(EXPERTISE_CARDS_MAPPING).map(([key, value]) => (
-					// 	<Accordion id={key} title={titleSection(value)}>
-					// 		<ExpertiseParameters
-					// 			expertiseData={value}
-					// 			onClickAddCondition={() => setAddConditionModal({ type: value?.name })}
-					// 		/>
-					// 	</Accordion>
-					// ))
-					<Collapse panel={options} activeKey={activeCollapse} setActive={setActiveCollapse} type="text" />
-				}
+				<Collapse panel={options} activeKey={activeCollapse} setActive={setActiveCollapse} type="text" />
 			</div>
 
 			{showModal ? (
