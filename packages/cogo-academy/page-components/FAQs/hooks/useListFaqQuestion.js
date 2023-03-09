@@ -54,9 +54,10 @@ function useListFaqQuestions({
 						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
 
 					},
-					sort_by    : sort,
+					sort_by                : sort,
 					page,
-					page_limit : limit || undefined,
+					page_limit             : limit || undefined,
+					faq_tags_data_required : true,
 				},
 			});
 		} catch (error) {

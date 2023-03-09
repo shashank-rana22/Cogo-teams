@@ -7,7 +7,7 @@ function asyncFieldsLocations2() {
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 20,
-			includes   : { country: null, main_ports: null },
+			includes   : { country: null, default_params_required: true },
 		},
 	};
 }
@@ -23,7 +23,7 @@ function asyncFieldsLocations() {
 			page_limit : 10,
 			sort_by    : 'name',
 			sort_type  : 'asc',
-			includes   : { country: null, main_ports: null },
+			includes   : { country: null, default_params_required: true },
 		},
 	};
 }

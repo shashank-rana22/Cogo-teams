@@ -4,6 +4,7 @@ import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
+import enrichment from './config/enrichment';
 import groundOps from './config/ground-ops';
 import inventory_management from './config/inventory_management';
 import kamMonitoring from './config/kam-monitoring';
@@ -23,6 +24,7 @@ const routeConfig = {
 	...cogoAcademy,
 	...myIncident,
 	...myProfile,
+	...enrichment,
 	...cogoVerseAnalytics,
 	...cogoOne,
 	...myProfile,
