@@ -134,6 +134,7 @@ function Calendar({ props }) {
 		if (timeline === 'day') processData(calcDate);
 		else if (timeline === 'month') processData(calcMonth);
 		else loadWeeks();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [timeline]);
 
 	function addPagination(x) {
@@ -152,6 +153,7 @@ function Calendar({ props }) {
 		console.log(pagination, 'pagination');
 
 		doPagination();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pagination]);
 
 	useEffect(() => {
@@ -161,12 +163,12 @@ function Calendar({ props }) {
 	return (
 		<div className={styles.calendar}>
 			<button
-				className={styles.navBtn}
+				className={styles.nav_btn}
 				disabled
 			>
 				<IcMArrowDoubleLeft />
 			</button>
-			<div ref={calendarRef} className={styles.calendarEntity}>
+			<div ref={calendarRef} className={styles.calendar_entity}>
 				<CalendarEntity
 					calendarData={calendarData}
 					selectedItem={selectedItem}
@@ -174,12 +176,13 @@ function Calendar({ props }) {
 					pagination={pagination}
 					setPagination={setPagination}
 					timeline={timeline}
+					// eslint-disable-next-line react/jsx-no-bind
 					addPagination={addPagination}
 				/>
 			</div>
 			<button
 				disabled
-				className={`${styles.navBtn} 
+				className={`${styles.nav_btn} 
 				`}
 			>
 				<IcMArrowDoubleRight />

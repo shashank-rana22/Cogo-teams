@@ -36,38 +36,8 @@
 	transition: 0.1s;
 }
 
-.date_container:hover .day_hours1 {
-	font-size: 16px;
-	font-weight: 500;
-	color: #444;
-	transition: 0.3s;
-}
-
-.date_container:hover .day_hours2 {
-	font-size: 12px;
-	font-weight: 500;
-	color: #444;
-	transition: 0.3s;
-}
-
 .week_calendar {
 	gap: 15px;
-}
-
-.week_calendar .date_container {
-	scroll-snap-stop: always;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 93px;
-	height: 60px;
-	margin: 0 10px;
-}
-
-.week_calendar .day_hours1 {
-	font-size: 14px;
-	white-space: nowrap;
 }
 
 .day_hours2 {
@@ -103,4 +73,34 @@
 		color: #444;
 		transition: 0.3s;
 	}
+}
+
+.week_calendar .day_hours1 {
+	font-size: 14px;
+	white-space: nowrap;
+}
+
+.date_container:hover .day_hours1 {
+	font-size: 16px;
+	font-weight: 500;
+	color: #444;
+	transition: 0.3s;
+}
+
+.date_container:hover .day_hours2 {
+	font-size: 12px;
+	font-weight: 500;
+	color: #444;
+	transition: 0.3s;
+}
+
+.week_calendar .date_container {
+	scroll-snap-stop: always;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 93px;
+	height: 60px;
+	margin: 0 10px;
 }

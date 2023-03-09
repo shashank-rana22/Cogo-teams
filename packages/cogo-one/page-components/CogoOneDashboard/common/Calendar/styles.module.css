@@ -3,16 +3,16 @@
 	align-items: center;
 }
 
-.calendarEntity {
+.calendar_entity {
 	width: calc(100% - 33px);
 	overflow: scroll;
 }
 
-.calendarEntity::-webkit-scrollbar {
+.calendar_entity::-webkit-scrollbar {
 	display: none;
 }
 
-.navBtn {
+.nav_btn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -22,9 +22,9 @@
 	margin: 10px;
 	font-size: 18px;
 	cursor: default;
+	background: none;
 	border: none;
 	outline: none;
-	background:none;
 }
 
 .inactive {

@@ -41,6 +41,7 @@ export function CalendarEntity({
 	useEffect(() => {
 		setOffset(29);
 		if (typeof window !== 'undefined') {
+			// eslint-disable-next-line no-undef
 			const leftObserver = new window.IntersectionObserver(leftShift, intersectionOptions);
 			setTimeout(() => {
 				if (leftEnd.current)leftObserver.observe(leftEnd.current);
@@ -54,6 +55,7 @@ export function CalendarEntity({
 				setOffset(59);
 			}, 1000);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [timeline]);
 
 	return (
