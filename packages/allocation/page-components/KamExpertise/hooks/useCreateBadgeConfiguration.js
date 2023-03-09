@@ -29,7 +29,7 @@ function useCreateBadgeConfiguration(props) {
 		url     : '/kam_expertise_badge_configuration',
 		method  : 'POST',
 		authkey : 'post_allocation_kam_expertise_badge_configuration',
-	});
+	}, { manual: true });
 
 	const onSave = async (formValues, e) => {
 		e.preventDefault();

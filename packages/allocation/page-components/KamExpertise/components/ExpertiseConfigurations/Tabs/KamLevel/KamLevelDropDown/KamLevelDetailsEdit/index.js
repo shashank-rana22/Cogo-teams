@@ -1,9 +1,7 @@
 import { useForm } from '@cogoport/forms';
 
-import { getFieldController } from '../../../../../../../common/Form/getFieldController';
-import { controls } from '../ControlsForScore/controls';
-import { controls_bottom } from '../ControlsForScore/controls_bottom';
-import useUpdateKamScores from '../hooks/useUpdateKamScores';
+import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
+import { controls, controlsBottom } from '../../controls';
 
 import styles from './styles.module.css';
 
@@ -47,7 +45,7 @@ function KamLevelDetailsEdit({ data = {} }) {
 			<div className={styles.row_level_end}>
 				<h2>Transacting Accounts</h2>
 				<div className={styles.row_level_end_options}>
-					{controls_bottom.map((singleField) => {
+					{controlsBottom.map((singleField) => {
 						const Element = getFieldController(singleField.type) || null;
 						if (!Element) return null;
 						return (

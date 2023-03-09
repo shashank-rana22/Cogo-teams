@@ -7,7 +7,7 @@ import GetCard from '../../CreateBadge/getCard';
 
 import styles from './styles.module.css';
 
-function BadgeCard({ data, medal = '', isLast = {}, listRefetch }) {
+function BadgeCard({ data, badgeListData = {}, medal = '', isLast = {}, listRefetch }) {
 	const { score = '', image_url = '', id = '' } = data;
 
 	const [openModal, setOpenModal] = useState(false);
@@ -21,7 +21,7 @@ function BadgeCard({ data, medal = '', isLast = {}, listRefetch }) {
 	} = useUpdateSingleBadge({ medal, id, image_url, score, onClose, listRefetch });
 
 	const {
-		control, handleSubmit,
+		control, handleSubmit, watch,
 	} = formProps;
 
 	const badgeData = {
@@ -76,6 +76,8 @@ function BadgeCard({ data, medal = '', isLast = {}, listRefetch }) {
 							<div style={{ padding: '10px' }}>
 								<GetCard
 									data={badgeData}
+									badgeListData={badgeListData}
+									watch={watch}
 									control={control}
 									isLastItem
 								/>
