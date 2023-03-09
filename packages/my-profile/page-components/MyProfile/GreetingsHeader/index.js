@@ -101,29 +101,35 @@ function Greetings({
 						className="icon"
 					/>
 				</div>
+				<div className={styles.badge_icon}>
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg"
+						alt="current badge"
+						height="40px"
+					/>
+				</div>
 			</div>
 			{/* //ToDo:  add badges div */}
-			<div>
+			<div className={styles.badges}>
 				<div className={styles.badge_list}>
 					{
                     badge_data.map((data) => (
 	<div key={data.badge_name} className={styles.badge_container}>
-		<Tooltip content={data.badge_name}>
-			<div className={styles.badge}>
-				<img src={data.badge_url} alt="badge icon" />
-			</div>
-			<div className={styles.stars}>
-				<IcCStar width={8} stroke="#FFDF33" />
-				<IcCStar width={8} stroke="#FFDF33" />
-				<IcCStar width={8} stroke="#FFDF33" />
-			</div>
-		</Tooltip>
+		<div className={styles.badge}>
+			<img src={data.badge_url} alt="badge icon" />
+		</div>
+		<div className={styles.stars}>
+			<IcCStar width={8} stroke="#FFDF33" />
+			<IcCStar width={8} stroke="#FFDF33" />
+			<IcCStar width={8} stroke="#FFDF33" />
+		</div>
 	</div>
                     ))
                 }
 
 				</div>
 			</div>
+			{/*   ///// */}
 
 			<div>
 				<div className={styles.greeting_text}>

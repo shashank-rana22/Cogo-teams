@@ -26,7 +26,6 @@ function Details({
 
 			</div>
 			<div className={styles.badge_details}>
-				{/* <Badges detailsData={detailsData} /> */}
 				<Badges />
 			</div>
 		</div>
