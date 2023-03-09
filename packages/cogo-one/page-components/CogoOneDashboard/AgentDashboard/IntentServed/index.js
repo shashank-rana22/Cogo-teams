@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { intentServedData } from '../../configurations/intent-served-data';
+import { intentServedData } from '../../configurations/dashboard';
 
 import styles from './styles.module.css';
 
@@ -18,7 +18,6 @@ function IntentServed({ intentsServed }) {
 				);
 			})}
 		</div>
-
 	);
 }
 

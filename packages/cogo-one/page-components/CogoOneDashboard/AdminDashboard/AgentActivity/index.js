@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { configurationData } from '../../configurations/configurationData';
+import { agentsConfigurationData, callStatusMapping } from '../../configurations/dashboard';
 import { agentAvatar } from '../../constants';
 
 import EmptyStateAgentActivity from './EmptyStateAgentActivity';
@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 	const { push } = useRouter();
 	const [activeTab, setActiveTab] = useState('busy_agents');
-	const { agents_details_config } = configurationData;
+	const { agents_details_config } = agentsConfigurationData;
 
 	const tabMapping = {
 		busy_agents    : styles.busy,
@@ -22,18 +22,12 @@ function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboar
 		offline_agents : styles.offline,
 	};
 
-	const callStatusMapping = {
-		busy_agents    : 'on call',
-		online_agents  : 'online',
-		offline_agents : 'offline',
-	};
-
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.activity_name}>Your Agents</div>
 			<div className={styles.main_container_upperpart}>
 				{Object.keys(agents_details_config).map((agentType) => {
-					const { agent_label } = agents_details_config[agentType];
+					const { agent_label = '' } = agents_details_config[agentType];
 					return (
 						<button
 							className={`${styles.agent_nos_box} 
@@ -57,7 +51,7 @@ function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboar
 				: (
 					<div className={styles.main_container_lowerpart}>
 						{agentsDetails?.[activeTab]?.agents?.map((item) => {
-							const { name, active_assigned_chats, agent_id = '' } = item;
+							const { name = '', active_assigned_chats, agent_id = '' } = item;
 
 							const redirectToAgentView = (agentId = '') => {
 								if (!agentId) return;
@@ -88,7 +82,11 @@ function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboar
 										<div className={styles.profile_box_right_down}>
 											<div className={styles.icon_plus_nos}>
 												<div><IcMProfile fill="#BDBDBD" /></div>
-												<div className={styles.contact_nos}>{active_assigned_chats}</div>
+												<div
+													className={styles.active_assigned_chats}
+												>
+													{active_assigned_chats || 0}
+												</div>
 											</div>
 										</div>
 									</div>

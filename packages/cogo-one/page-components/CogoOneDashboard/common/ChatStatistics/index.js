@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import { chatsStatsData } from '../../configurations/chats-statistics-data';
+import { chatsStatsData } from '../../configurations/dashboard';
 import { dArrow, aArrow } from '../../constants';
 
 import styles from './styles.module.css';
@@ -10,7 +10,7 @@ function ChatStatistics({ isAdminView = false, loading = false, statusOfChats = 
 	return (
 		<>
 			{chatsStatsData.map((item) => {
-				const { label, percentage, isAgent, key } = item;
+				const { label = '', percentage, isAgent, key } = item;
 				return (
 					(isAdminView || isAgent) && (
 						<div className={`${styles.chatstatistics_box} 

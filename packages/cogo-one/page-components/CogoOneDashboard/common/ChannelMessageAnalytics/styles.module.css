@@ -3,8 +3,6 @@
 	flex-direction: column;
 	width: 100%;
 	padding: 15px;
-
-	/* margin-top: 12px; */
 	margin-right: 12px;
 	cursor: default;
 	background-color: #fff;
@@ -25,7 +23,6 @@
 }
 
 .time_durations {
-	/* width: fit-content; */
 	width: 100%;
 	padding: 7px 8px;
 	background: rgb(224 224 224 / 40%);
@@ -87,8 +84,6 @@
 	align-items: center;
 	justify-content: space-between;
 	padding-top: 22px;
-
-	/* color: #000; */
 }
 
 .social_icons_and_its_name {

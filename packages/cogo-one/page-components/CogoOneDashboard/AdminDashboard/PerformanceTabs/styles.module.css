@@ -1,7 +1,5 @@
 .main_box {
 	width: 25%;
-
-	/* flex-basis: 26%; */
 	cursor: default;
 }
 
@@ -69,8 +67,6 @@
 .performance_list {
 	display: flex;
 	align-items: center;
-
-	/* padding: 5px; */
 	justify-content: space-between;
 	padding: 5px 0;
 	border-bottom: 1px solid #f8f2e7;

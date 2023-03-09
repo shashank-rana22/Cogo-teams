@@ -24,13 +24,11 @@ function TotalChatsHandled({ loading = true, totalCustomers = '' }) {
 			<div className={styles.right_time_spent_container}>
 				<img
 					src={aArrow}
-					alt="-"
-					className={styles.aArrowImg}
+					alt="increasing"
+					className={styles.a_ArrowImg}
 				/>
 			</div>
-
 		</div>
-
 	);
 }
 export default TotalChatsHandled;

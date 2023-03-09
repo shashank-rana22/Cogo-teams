@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import/named
+import { performanceBtnMapping } from '../../configurations/dashboard';
 import { emptyPerformance, agentAvatar } from '../../constants';
 
 import LoaderPerformance from './LoaderPerformance';
@@ -11,21 +12,8 @@ import styles from './styles.module.css';
 
 function PerformanceTab({ loading = false, agentsPerformance = {} }) {
 	const { best_performance = [], worst_performance = [] } = agentsPerformance;
-
 	const [activeTab, setActiveTab] = useState('best_performance');
 	const data = activeTab === 'best_performance' ? best_performance : worst_performance;
-
-	const performanceBtnMapping = [
-		{
-			key   : 'best_performance',
-			label : 'Best Performance',
-		},
-		{
-			key   : 'worst_performance',
-			label : 'Worst Performance',
-		},
-
-	];
 
 	return (
 	// eslint-disable-next-line react/jsx-no-useless-fragment
@@ -87,7 +75,6 @@ function PerformanceTab({ loading = false, agentsPerformance = {} }) {
 					)}
 			</div>
 		</div>
-
 	);
 }
 
