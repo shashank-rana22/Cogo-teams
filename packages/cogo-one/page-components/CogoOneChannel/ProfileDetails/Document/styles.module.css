@@ -1,5 +1,24 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.list_container {
+	height: 80vh;
+	margin-top: 10px;
+	overflow-y: auto;
+
+	@media (max-width: 1280px) {
+		padding-bottom: 28px;
+	}
+}
+
+.list_container::-webkit-scrollbar {
+	display: none;
+}
+
 .title {
-	margin: 10px 0;
 	font-size: 14px;
 	font-weight: 500;
 }
@@ -14,6 +33,11 @@
 	height: 10px;
 	background: #bdbdbd;
 	border-radius: 50%;
+}
+
+.filter_icon {
+	margin-top: 10px;
+	cursor: pointer;
 }
 
 .durations {
@@ -33,7 +57,7 @@
 }
 
 .card {
-	padding: 8px;
+	padding: 8px 8px 8px 15px;
 	margin: 5px 5px 15px;
 	background: #fff;
 	border-radius: 12px;
@@ -54,12 +78,6 @@
 	}
 }
 
-.header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
 .content {
 	display: flex;
 	margin: 5px 0;
@@ -69,8 +87,26 @@
 	display: flex;
 	align-items: center;
 	margin-top: 10px;
+	cursor: pointer;
 }
 
 .document_name {
 	margin-left: 5px;
+}
+
+.filters_applied {
+	position: relative;
+	top: -28px;
+	left: 15px;
+	width: 5px;
+	height: 5px;
+	background: #f68b21;
+	border-radius: 5px;
+}
+
+.empty {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
 }

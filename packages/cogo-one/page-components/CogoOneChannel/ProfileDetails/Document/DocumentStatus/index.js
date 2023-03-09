@@ -1,10 +1,10 @@
-import { IcCFtick, IcMInfo } from '@cogoport/icons-react';
+import { IcMFtick, IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
 function DocumentStatus(status) {
 	switch (status) {
-		case 'progress':
+		case 'in_progress':
 			return (
 				<div className={styles.in_progress}>
 					In Progress...
@@ -16,13 +16,12 @@ function DocumentStatus(status) {
 				<div className={styles.in_progress}>
 					Document verified!
 				</div>
-
 			);
 
-		case 'submitted':
+		case 'success':
 			return (
 				<div className={styles.submitted_div}>
-					<IcCFtick fill="#DDEBC0" />
+					<IcMFtick fill="#DDEBC0" width={20} height={20} />
 					<div className={styles.in_submitted}>
 						Submitted
 					</div>
@@ -35,6 +34,17 @@ function DocumentStatus(status) {
 					<IcMInfo fill="#BF291E" />
 					<div className={styles.not_submitted}>
 						Not submitted
+					</div>
+				</div>
+			);
+
+		case 'failed':
+			return (
+
+				<div className={styles.submitted_div}>
+					<IcMInfo fill="#BF291E" />
+					<div className={styles.not_submitted}>
+						Failed
 					</div>
 				</div>
 			);
