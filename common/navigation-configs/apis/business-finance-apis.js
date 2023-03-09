@@ -13,7 +13,7 @@ const business_finance = {
 		{
 			api          : 'get_purchase_supplier_history',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'coeFinance',
 		},
 		{
 			api         : 'get_common_job_shipment_id_view',
