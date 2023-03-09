@@ -1,7 +1,7 @@
 import { Pagination } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import EmptyState from '../../../../commons/EmpyState';
 import StyledTable from '../../../../commons/StyledTable';
@@ -23,6 +23,8 @@ function AddedQuestions(props) {
 		activeList,
 		setActiveList,
 		questionListLoading,
+		sortType,
+		setSortType,
 	} = props;
 
 	const router = useRouter();
@@ -96,6 +98,8 @@ function AddedQuestions(props) {
 				setSearchInput={setSearchInput}
 				activeList={activeList}
 				setActiveList={setActiveList}
+				sortType={sortType}
+				setSortType={setSortType}
 			/>
 
 			{renderTable()}
