@@ -1,35 +1,25 @@
-import { Button } from '@cogoport/components';
 import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { startCase } from '@cogoport/utils';
+// import React, { useState } from 'react';
 
-import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
+// import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
 
 import styles from './styles.module.css';
 
 function KamLevelCard({
 	title = '',
-	setAction = () => {},
+	// setAction = () => {},
 	data = {},
 	id = '',
 	dataLength = -1,
-	refetch = () => {},
-	setTitle = () => {},
+	// refetch = () => {},
+	// setTitle = () => {},
 }) {
 	const {
 		transition_level = '',
 		expertise_details = [],
 	} = data;
-	// console.log('tr level', transition_level);
-	const [showEditBtn, setshowEditBtn] = useState(true);
 
-	const { onSave } = useUpdateKamScores({
-		transition_level,
-		refetch,
-		setTitle,
-		setAction,
-		setshowEditBtn,
-	});
 	// const { handleSubmit } = formProps;
 	const expertiseObject = expertise_details.map((item) => item);
 
@@ -65,47 +55,7 @@ function KamLevelCard({
 					<b>{transition_level}</b>
 				</div>
 				<div className={styles.button_container}>
-					{showEditBtn || isEmpty(title) ? (
-						<Button
-							themeType="secondary"
-							className={styles.delete_button}
-							onClick={(e) => {
-								if (title) {
-									e.stopPropagation();
-								}
-								setshowEditBtn(false);
-								setAction('edit');
-							}}
-						>
-							Edit
-						</Button>
-					) : (
-						<>
-							<Button
-								className={styles.delete_button}
-								themeType="secondary"
-								style={{ marginRight: '0' }}
-								onClick={(e) => {
-									e.stopPropagation();
-									setshowEditBtn(true);
-									setAction('show');
-								}}
-							>
-								Cancel
-							</Button>
-							<Button
-								className={styles.delete_button}
-								onClick={(e) => {
-									e.stopPropagation();
-									onSave();
-								}}
-								type="submit"
-							>
-								{' '}
-								Save
-							</Button>
-						</>
-					)}
+
 					{dataLength === data.transition_level - 1
 						? (
 							<div className={styles.delete_button}>

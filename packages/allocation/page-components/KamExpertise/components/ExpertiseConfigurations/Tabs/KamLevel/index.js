@@ -38,6 +38,7 @@ function KamLevel() {
 			action={action}
 			id={data.transition_level - 1}
 			title={title}
+			setAction={setAction}
 		/>,
 
 	}));
