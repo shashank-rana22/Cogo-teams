@@ -1,10 +1,11 @@
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
-import { firebaseConfig } from '../../configurations/firebase-config';
+import { firebaseConfig, firebase_auth_email, firebase_auth_password } from '../../configurations/firebase-config';
 import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
@@ -37,6 +38,16 @@ function CogoOne() {
 	const [showDialModal, setShowDialModal] = useState(false);
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+	const auth = getAuth();
+
+	signInWithEmailAndPassword(auth, firebase_auth_email, firebase_auth_password)
+		.catch((error) => {
+			const errorCode = error.code;
+			console.log('errorCode:', errorCode);
+			const errorMessage = error.message;
+			console.log('errorMessage:', errorMessage);
+		});
 
 	const firestore = getFirestore(app);
 
