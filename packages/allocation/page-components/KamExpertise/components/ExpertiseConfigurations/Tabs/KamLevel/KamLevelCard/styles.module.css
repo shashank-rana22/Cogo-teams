@@ -1,76 +1,54 @@
-.whole{
-    margin-top: 10px;
-    width: 100%;  
-    flex: 1;
-   
+.whole {
+  width: 100%;
+  flex: 1;
 }
 
-.arrow{
-    align-items: center;
-    justify-content: center;
-    font-size: 21px;
+.arrow {
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
 }
 
-.button_container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-
+.button_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap:15px;
 }
 
-.score_container{
-    display: flex;
+.score_container {
+  display: flex;
 }
 
-.text{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 400;
-font-size: 21px;
-color: #221F20;
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 21px;
+  color: #221f20;
 }
 
-.list_item{
-    flex-basis: 24%;
-    margin-bottom: 10px;
-    margin-top: 10px;
+.list_item {
+  flex-basis: 24%;
 }
-.label_text{
-font-weight: 400;
-font-size: 14px;
-line-height: 21px;
-color: #333333;
-width: 100%;
-
-opacity: 0.7;
+.label_text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #333333;
+  width: 100%;
+  opacity: 0.7;
 }
-.delete_button{
-align-items: center;
-justify-content: center;
-margin-right: 32px;
-
+.delete_button {
+  align-items: center;
+  justify-content: center;
+  margin-right: 32px;
 }
-.title_show{
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 18px;
-    color: #221F20;
-    opacity: 0.6;
+.title_show {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #221f20;
+  opacity: 0.6;
 }
-.delete_button_disable{
-    align-items: center;
-    justify-content: center;
-    margin-right: 32px;
-    opacity: 0.3;
-    pointer-events: none;
-    
- }
-
-
-
-
-
-
-

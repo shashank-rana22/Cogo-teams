@@ -12,33 +12,42 @@ import styles from './styles.module.css';
 // todobug : delete button
 function KamLevel() {
 	const { kamConfigDetails = [], loading = false, refetch } = useKamExpertiseConfig();
-	// console.log('loading', loading);
+
 	const [title, setTitle] = useState(0);
-	const [action, setAction] = useState('show');
+	const [editMode, setEditMode] = useState(false);
 	const [createKam, setCreateKam] = useState(false);
+
 	const dataLength = kamConfigDetails.length;
 	const options = kamConfigDetails.map((data) => ({
-		key   : data.transition_level,
-		title : <KamLevelCard
+
+		key: data.transition_level,
+
+		title: <KamLevelCard
 			key={data.transition_level}
 			data={data}
 			title={title}
 			setTitle={setTitle}
-			setAction={setAction}
+			editMode={editMode}
+			setEditMode={setEditMode}
 			id={data.transition_level - 1}
 			dataLength={dataLength}
 			refetch={refetch}
 		/>,
+
 		children: <KamLevelDropDown
 			key={data.transition_level}
-			action={action}
+			editMode={editMode}
 			id={data.transition_level - 1}
 			title={title}
+			setEditMode={setEditMode}
 		/>,
+
 	}));
+
 	return (
 		<div>
 			<Header />
+
 			<Collapse
 				panel={options}
 				activeKey={title}
@@ -46,6 +55,7 @@ function KamLevel() {
 				type="text"
 				className={styles.collapse}
 			/>
+
 			{createKam ? (
 				<div className={styles.response_card}>
 					<ResponseCard
@@ -65,6 +75,7 @@ function KamLevel() {
 					</Button>
 				</div>
 			)}
+
 		</div>
 	);
 }

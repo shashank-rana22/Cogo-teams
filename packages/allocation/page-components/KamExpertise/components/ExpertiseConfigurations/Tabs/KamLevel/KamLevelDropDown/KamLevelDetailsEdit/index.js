@@ -43,11 +43,13 @@ function KamLevelDetailsEdit({ data = {} }) {
 				);
 			})}
 			<div className={styles.row_level_end}>
-				<h2>Transacting Accounts</h2>
+				<h2 style={{ margin: '8px' }}>Transacting Accounts</h2>
 				<div className={styles.row_level_end_options}>
 					{controlsBottom.map((singleField) => {
 						const Element = getFieldController(singleField.type) || null;
+
 						if (!Element) return null;
+
 						return (
 							<div className={styles.row_level} style={{ width: '30%' }}>
 								{' '}
