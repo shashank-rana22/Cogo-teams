@@ -1,4 +1,5 @@
 import {
+	Popover,
 	Loader,
 	Button,
 	Pill,
@@ -17,10 +18,10 @@ import { startCase, isEmpty } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React, { useState } from 'react';
 
+import EmptyStateDocs from '../../../../commons/EmptyStateDocs';
 import List from '../../../../commons/List/index';
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import DOCUMENTS from '../../../configurations/DOCUMENTS';
-import config from '../../../configurations/SUPPLIER_HISTORY';
 import useSupplierHistory from '../../../hook/useSupplierHistory';
 
 import styles from './styles.module.css';
@@ -95,7 +96,7 @@ function SupplierDetails({
 			</div>
 		),
 		sidDetailsFunc: (item:any) => (
-			<div>
+			<div className={styles.sid_details}>
 				{' '}
 				SID -
 				{' '}
@@ -116,12 +117,18 @@ function SupplierDetails({
 			return <div>First Time</div>;
 		}
 		return (
-			<List
-				config={config}
-				itemData={{ list: historyData }}
-				loading={loading}
-				functions={functions}
-			/>
+			<>
+				<div className={styles.details}>LAST 10 SID Details</div>
+				{historyData.map((item:any) => (
+					<div>
+						{' '}
+						SID -
+						{' '}
+						{item}
+					</div>
+				))}
+
+			</>
 		);
 	};
 
@@ -233,32 +240,22 @@ function SupplierDetails({
 				<div className={styles.vertical_small_hr} />
 
 				<div className={styles.supplier_details}>
-					<div
-						className={styles.supplier_history}
-						onClick={() => {
-							handleChange();
-						}}
-						role="presentation"
+					<Popover
+						placement="bottom"
+						caret
+						visible={showModal}
+						render={getSupplierData()}
 					>
-						Supplier History
-					</div>
-					{showModal && (
-						<Modal
-							size="lg"
-							show={showModal}
-							onClose={() => {
-								setShowModal(false);
+						<div
+							className={styles.supplier_history}
+							onClick={() => {
+								handleChange();
 							}}
+							role="presentation"
 						>
-							<Modal.Header title="SUPPLIER HISTORY" />
-							<Modal.Body>
-								<div className={styles.details}>Last 10 SID Details</div>
-
-								{getSupplierData()}
-
-							</Modal.Body>
-						</Modal>
-					)}
+							Supplier History
+						</div>
+					</Popover>
 
 					<div className={styles.docs_container}>
 						<div className={styles.docs_icon}>
@@ -292,7 +289,7 @@ function SupplierDetails({
 											functions={functions}
 										/>
 									) : (
-										<div className={styles.supply_card}>NO Documents</div>
+										<div className={styles.supply_card}><EmptyStateDocs /></div>
 									)}
 								</Modal.Body>
 							</Modal>

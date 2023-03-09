@@ -4,6 +4,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React from 'react';
 
+import EmptyStateDocs from '../../../../../commons/EmptyStateDocs';
 import List from '../../../../../commons/List/index';
 import { formatDate } from '../../../../../commons/utils/formatDate';
 import config from '../../../../configurations/SHIPMENT_DOCUMENTS_CONFIG';
@@ -88,7 +89,7 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 			);
 		}
 		if (isEmpty(documentData)) {
-			return <div>NO DATA FOUND</div>;
+			return <EmptyStateDocs />;
 		}
 		return (
 			<List

@@ -7,6 +7,7 @@ import {
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import EmptyStateDocs from '../../../../commons/EmptyStateDocs';
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useGetVariance from '../../../hook/useGetVariance';
 import useGetWallet from '../../../hook/useGetWallet';
@@ -126,7 +127,7 @@ function ShipmentDetails({
 		if (tradeType) {
 			return <Pill color="yellow">{startCase(tradeType)}</Pill>;
 		}
-		return <div>No Data Found</div>;
+		return <EmptyStateDocs />;
 	};
 
 	return (
