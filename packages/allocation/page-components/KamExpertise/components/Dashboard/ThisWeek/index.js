@@ -1,16 +1,13 @@
-import { Placeholder, Card, Tooltip } from '@cogoport/components';
-import {
-	IcMArrowNext,
-	IcMInfo, IcMAgentManagement, IcMTradeparties, IcMBreakBulkCargoType, IcMMiscellaneous,
-} from '@cogoport/icons-react';
+import { IcMAgentManagement, IcMTradeparties, IcMBreakBulkCargoType, IcMMiscellaneous } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
 import useGetAllocationKamExpertiseStats from '../../../hooks/useGetAllocationKamExpertiseStats';
 import BadgeFilter from '../BadgeFilter';
 
-import CardContent from './CardContent';
+import KamLevelScoreCard from './KamLevelScoreCard';
 import LeaderboardList from './LeaderboardList';
+import OverviewCard from './OverviewCard';
 import styles from './styles.module.css';
 
 const dummy_card_data = [
@@ -81,52 +78,8 @@ function ThisWeek() {
 			<div className={styles.cards}>
 				{
 					dummy_card_data.map((dummy_data) => (
-						// ! loading state logic below
-
-						false ? (
-							<Card
-								key={dummy_data.title}
-								className={styles.card_item}
-							>
-								<Card.Title title={(
-									<div className={styles.card_title}>
-										<Placeholder width="60px" height="20px" />
-									</div>
-								)}
-								/>
-								<Card.Description className={styles.card_content}>
-									<Placeholder width="100px" height="60px" style={{ marginTop: '16px' }} />
-									<Placeholder width="100px" height="60px" style={{ marginTop: '16px' }} />
-								</Card.Description>
-							</Card>
-						) : (
-						// <div
-						// 	key={dummy_data.title}
-						// 	role="presentation"
-						// 	className={styles.card_container}
-						// 	// onClick={() => setCardData(dummy_data)}
-						// >
-							<Card
-								themetype="primary"
-								disabled={false}
-								className={styles.card_item}
-								onClick={() => setCardData(dummy_data)}
-							>
-								<Card.Title title={(
-									<div className={styles.card_title}>
-										<h3>{dummy_data.title}</h3>
-										<IcMArrowNext width={28} height={28} style={{ color: 'red' }} />
-									</div>
-								)}
-								/>
-								<Card.Description className={styles.card_content}>
-									<CardContent dummy_data={dummy_data} value="count" />
-									<CardContent dummy_data={dummy_data} value="avg_score" />
-								</Card.Description>
-							</Card>
-						// </div>
-						)
-
+						//! pass loading
+						<KamLevelScoreCard dummy_data={dummy_data} setCardData={setCardData} />
 					))
 				}
 			</div>
@@ -139,95 +92,7 @@ function ThisWeek() {
 						<div className={styles.overview_cards}>
 							{
 							overview_data.map((data) => (
-
-								// ! loading state logic
-								false ? (
-									<Card
-										key={data.title}
-										themetype="primary"
-										disabled={false}
-										className={styles.inner_card_item}
-									>
-										<Card.Title title={(
-											<div className={styles.overview_card_title}>
-												<Placeholder width="200px" height="24px" />
-											</div>
-										)}
-										/>
-										<Card.Description className={styles.overview_card_content}>
-											<div style={{
-												display       : 'flex',
-												flexDirection : 'column',
-												paddingTop    : '20px',
-											}}
-											>
-												<Placeholder width="60px" />
-												<Placeholder style={{ marginTop: '8px' }} width="60px" />
-											</div>
-											<div style={{
-												display       : 'flex',
-												flexDirection : 'column',
-												paddingTop    : '20px',
-											}}
-											>
-												<Placeholder width="60px" />
-												<Placeholder style={{ marginTop: '8px' }} width="60px" />
-											</div>
-										</Card.Description>
-									</Card>
-								) : (
-									<Card
-										key={data.title}
-										themetype="primary"
-										disabled={false}
-										className={styles.inner_card_item}
-									>
-										<Card.Title title={(
-											<div className={styles.overview_card_title}>
-												<span>{data.icon}</span>
-												<span style={{ padding: '0 10px' }}><h3>{data.title}</h3></span>
-												<span style={{ paddingTop: '4px', width: '40px', height: '40px' }}>
-													<Tooltip
-														content={data.title}
-														placement="top"
-													>
-														<IcMInfo
-															width={16}
-															height={16}
-														/>
-													</Tooltip>
-												</span>
-											</div>
-										)}
-										/>
-										<Card.Description className={styles.overview_card_content}>
-											<div style={{ display: 'flex', flexDirection: 'column' }}>
-												<span
-													style={{
-														fontSize: '12px',
-													}}
-												>
-													Avg Score
-												</span>
-												<span style={{ display: 'flex', fontWeight: 'bold' }}>
-													{data.avg_score}
-												</span>
-											</div>
-											<div style={{ display: 'flex', flexDirection: 'column' }}>
-												<span
-													style={{
-														fontSize: '12px',
-													}}
-												>
-													Most Points in
-												</span>
-												<span style={{ display: 'flex', fontWeight: 'bold' }}>
-													{data.points_in}
-												</span>
-											</div>
-										</Card.Description>
-									</Card>
-								)
+								<OverviewCard data={data} />
 							))
 						}
 						</div>
@@ -242,25 +107,24 @@ function ThisWeek() {
 							</div>
 						</div>
 						{
-
 							// Todo: add isEmpty and !loading condition for emptyState
-									false ? (
-										<div style={{
-											padding         : '80px 0',
-											height          : '400px',
-											backgroundColor : 'white',
-											margin          : '20px 0',
-											// display : 'flex',
-										}}
-										>
-											<EmptyState height={300} width={400} flexDirection="column" />
-										</div>
-									)
-										: (
-											<div className={styles.list}>
-												<LeaderboardList />
-											</div>
-										)
+							false
+								? (
+									<div style={{
+										padding         : '80px 0',
+										height          : '400px',
+										backgroundColor : 'white',
+										margin          : '20px 0',
+									}}
+									>
+										<EmptyState height={300} width={400} flexDirection="column" />
+									</div>
+								)
+								: (
+									<div className={styles.list}>
+										<LeaderboardList />
+									</div>
+								)
 						}
 
 					</div>

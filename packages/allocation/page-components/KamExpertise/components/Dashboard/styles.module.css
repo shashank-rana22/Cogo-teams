@@ -13,17 +13,12 @@
     font-weight: 600;
     line-height: 42px;
 }
-
-.create_button_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
+.tabs {
+    width: 100%;
 }
-
 .tab_list {
     width: 50%;
-    @media (max-width: 1000px) {
+    @media (max-width: 576px) {
         width: 100%;
     }
 }

@@ -11,6 +11,9 @@
 
 .button_container {
     display: flex;
+    :global(.ui_button_container.ui_ps_themeType_secondary:disabled) {
+        border: none;
+    }
 }
 
 .dropdown {
