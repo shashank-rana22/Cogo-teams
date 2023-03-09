@@ -22,6 +22,7 @@ export function CalendarEntity({
 	const calendarRef = useRef();
 	const leftEnd = useRef();
 	const middle = useRef();
+	const end = useRef();
 
 	function leftShift() {
 		leftCount += 1;
@@ -43,7 +44,7 @@ export function CalendarEntity({
 			const leftObserver = new window.IntersectionObserver(leftShift, intersectionOptions);
 			setTimeout(() => {
 				if (leftEnd.current)leftObserver.observe(leftEnd.current);
-				middle?.current?.scrollIntoView({
+				end?.current?.scrollIntoView({
 					behavior : 'smooth',
 					block    : 'nearest',
 					inline   : 'end',
@@ -87,7 +88,8 @@ export function CalendarEntity({
 								</div>
 							)}
 
-							{index > 0 && (index < offset) && 								(
+							{index > 0 && (index < offset) && index !== calendarData.length - 1
+							&& (
 								<div
 									key={key}
 									onClick={() => setSelectedItem(date)}
@@ -103,7 +105,7 @@ export function CalendarEntity({
 								</div>
 							)}
 							{
-								index === offset
+								index === offset && index !== calendarData.length - 1
 
 							&& (
 								<div
@@ -122,10 +124,29 @@ export function CalendarEntity({
 							)
 							}
 							{
-								index > offset
+								index > offset && index !== calendarData.length - 1
 
 							&& (
 								<div
+									onClick={() => setSelectedItem(date)}
+									className={`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
+									role="presentation"
+								>
+									<div className={styles.day_hours1}>
+										{label}
+									</div>
+									<div className={styles.day_hours2}>
+										{subLabel}
+									</div>
+								</div>
+							)
+							}
+							{
+								index === calendarData.length - 1
+
+							&& (
+								<div
+									ref={end}
 									onClick={() => setSelectedItem(date)}
 									className={`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
 									role="presentation"

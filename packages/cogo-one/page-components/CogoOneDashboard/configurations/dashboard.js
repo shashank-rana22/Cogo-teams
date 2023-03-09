@@ -154,3 +154,17 @@ export const LABLE_TYPE = {
 		label: 'Week',
 	},
 };
+export const FORMAT_TYPE = {
+	day: {
+		label    : 'dd',
+		subLabel : 'MMM yy',
+	},
+	week: {
+		label    : 'MMM yyyy',
+		subLabel : 'dd',
+	},
+	month: {
+		label    : 'MMM',
+		subLabel : 'yyyy',
+	},
+};

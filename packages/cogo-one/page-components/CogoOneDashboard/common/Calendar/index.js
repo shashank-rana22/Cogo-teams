@@ -2,6 +2,8 @@ import { IcMArrowDoubleLeft, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React, { useState, useEffect, useRef } from 'react';
 
+import { FORMAT_TYPE } from '../../configurations/dashboard';
+
 import { CalendarEntity } from './Entity';
 import styles from './styles.module.css';
 
@@ -19,21 +21,6 @@ function Calendar({ props }) {
 	const calendarRef = useRef();
 	const numberOfElements = 30;
 	const elementShift = 30;
-
-	const FORMAT_TYPE = {
-		day: {
-			label    : 'dd',
-			subLabel : 'MMM yy',
-		},
-		week: {
-			label    : 'MMM yyyy',
-			subLabel : 'dd',
-		},
-		month: {
-			label    : 'MMM',
-			subLabel : 'yyyy',
-		},
-	};
 
 	const calcDate = (subtractDays) => {
 		const d = new Date();
@@ -59,7 +46,7 @@ function Calendar({ props }) {
 
 	const processData = (func) => {
 		const newData = [];
-		for (let i = 0; i < numberOfElements; i += 1) {
+		for (let i = 0; i < numberOfElements + (pagination * numberOfElements); i += 1) {
 			newData.push(func(i));
 		}
 		const data = [];
@@ -95,7 +82,7 @@ function Calendar({ props }) {
 
 	const loadWeeks = () => {
 		const newData = [];
-		for (let i = 0; i < numberOfElements; i += 1) {
+		for (let i = 0; i < numberOfElements + (pagination * numberOfElements); i += 1) {
 			newData.push(calcWeek(i));
 		}
 		const data = [];
@@ -143,7 +130,7 @@ function Calendar({ props }) {
 	useEffect(() => {
 		setSelectedItem(new Date());
 		setCalendarData([]);
-		setPagination(0);
+		// setPagination(0);
 		if (timeline === 'day') processData(calcDate);
 		else if (timeline === 'month') processData(calcMonth);
 		else loadWeeks();
@@ -162,8 +149,14 @@ function Calendar({ props }) {
 	}
 
 	useEffect(() => {
+		console.log(pagination, 'pagination');
+
 		doPagination();
 	}, [pagination]);
+
+	useEffect(() => {
+		console.log(calendarData, 'calendarData');
+	}, [calendarData]);
 
 	return (
 		<div className={styles.calendar}>
