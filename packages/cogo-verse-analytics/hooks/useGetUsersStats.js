@@ -20,10 +20,7 @@ function useGetUsersStats() {
 
 	signInWithEmailAndPassword(auth, firebase_auth_email, firebase_auth_password)
 		.catch((error) => {
-			const errorCode = error.code;
-			console.log('errorCode:', errorCode);
-			const errorMessage = error.message;
-			console.log('errorMessage:', errorMessage);
+			console.log('errorMessage:', error.message);
 		});
 
 	const getUserSats = async () => {
