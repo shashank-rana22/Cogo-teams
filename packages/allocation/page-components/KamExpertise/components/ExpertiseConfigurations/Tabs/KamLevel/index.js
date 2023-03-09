@@ -39,6 +39,7 @@ function KamLevel() {
 			editMode={editMode}
 			id={data.transition_level - 1}
 			title={title}
+			setEditMode={setEditMode}
 		/>,
 
 	}));
