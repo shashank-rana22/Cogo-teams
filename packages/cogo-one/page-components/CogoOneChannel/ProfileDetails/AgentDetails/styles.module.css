@@ -39,11 +39,13 @@
 }
 
 .name {
-	display: flex;
 	width: 100%;
+	overflow: hidden;
 	font-size: 15px;
 	color: #4f4f4f;
+	text-overflow: ellipsis;
 	text-transform: capitalize;
+	white-space: nowrap;
 }
 
 .email {
