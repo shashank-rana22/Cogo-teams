@@ -1,7 +1,7 @@
 // const {format} from '@cogoport/utils/';
 
 import { ButtonIcon, Tooltip, Checkbox } from '@cogoport/components';
-// import { IcMView } from '@cogoport/icons-react';
+import { IcMView } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useMemo, useState, useEffect } from 'react';
 
@@ -16,6 +16,7 @@ const useFeedbackTableData = () => {
 	// HAVE TO REMOVE THIS DUMMY DATA
 	const data = [
 		{
+			id                   : 'something1',
 			organization         : 'AB Logistics Pvt Ltd.',
 			cogo_entity          : 'India',
 			type                 : 'Account Information',
@@ -30,30 +31,54 @@ const useFeedbackTableData = () => {
 			kam                  : 'Mohit Nagar',
 		},
 		{
-			organization : 'linsley',
-			type         : 'some type',
-			sub_type     : 'some sub type',
-			createdDate  : '22 Feb 2023',
-			kam          : 'some kam',
+			id                   : 'something2',
+			organization         : 'AB Logistics Pvt Ltd.',
+			cogo_entity          : 'India',
+			type                 : 'Account Information',
+			sub_type             : 'Email',
+			current_data         : 'anmolbansal@gmail.com',
+			feedback             : 'Email is Incorrect',
+			feedback_proof_url   : 'https://www.google.com/',
+			correction           : 'abanmolbansal5@gmail.com',
+			correction_proof_url : 'https://www.google.com/cogoport',
+			createdDate          : '01 March 2023',
+			kam_manager          : 'Parth Samnani',
+			kam                  : 'Mohit Nagar',
 		},
 		{
-			organization : 'linsley',
-			type         : 'some type',
-			sub_type     : 'some sub type',
-			createdDate  : '22 Feb 2023',
-			kam          : 'some kam',
+			id                   : 'something3',
+			organization         : 'AB Logistics Pvt Ltd.',
+			cogo_entity          : 'India',
+			type                 : 'Account Information',
+			sub_type             : 'Email',
+			current_data         : 'anmolbansal@gmail.com',
+			feedback             : 'Email is Incorrect',
+			feedback_proof_url   : 'https://www.google.com/',
+			correction           : 'abanmolbansal5@gmail.com',
+			correction_proof_url : 'https://www.google.com/cogoport',
+			createdDate          : '01 March 2023',
+			kam_manager          : 'Parth Samnani',
+			kam                  : 'Mohit Nagar',
 		},
 		{
-
-			type        : 'some type',
-			sub_type    : 'some sub type',
-			createdDate : '22 Feb 2023',
-			kam         : 'some kam',
+			id                   : 'something4',
+			organization         : 'AB Logistics Pvt Ltd.',
+			cogo_entity          : 'India',
+			type                 : 'Account Information',
+			sub_type             : 'Email',
+			current_data         : 'anmolbansal@gmail.com',
+			feedback             : 'Email is Incorrect',
+			feedback_proof_url   : 'https://www.google.com/',
+			correction           : 'abanmolbansal5@gmail.com',
+			correction_proof_url : 'https://www.google.com/cogoport',
+			createdDate          : '01 March 2023',
+			kam_manager          : 'Parth Samnani',
+			kam                  : 'Mohit Nagar',
 		},
 	];
 	// HAVE TO REMOVE THIS DUMMY DATA
 
-	const { list = [] } = data || {};
+	const list = data;
 
 	const currentPageListIds = useMemo(() => list.map(({ id }) => id), [list]);
 
@@ -73,7 +98,7 @@ const useFeedbackTableData = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPageListIds]);
 
-	const onChangeSingleCheckbox = (event, id) => {
+	const onChangeBodyCheckbox = (event, id) => {
 		setCheckedRowsId((previousIds) => {
 			let newCheckedIds = [];
 
@@ -89,7 +114,7 @@ const useFeedbackTableData = () => {
 		});
 	};
 
-	const onChangeSelectAllCheckbox = (event) => {
+	const onChangeTableHeadCheckbox = (event) => {
 		setCheckedRowsId((previousIds) => {
 			let newCheckedRowsIds = [...previousIds];
 
@@ -107,25 +132,29 @@ const useFeedbackTableData = () => {
 
 	const columns = [
 		{
-
-			id     : 'a',
-			key    : 'checkbox',
-			Header : <Checkbox
-				checked={selectAll}
-				onChange={(event) => onChangeSelectAllCheckbox(event)}
-				// className={styles.select_all_checkbox}
-
-			/>,
+			id  : 'checkbox',
+			key : 'checkbox',
+			Header:
+	<div>
+		<Checkbox
+			checked={selectAll}
+			onChange={(event) => onChangeTableHeadCheckbox(event)}
+			className={styles.select_all_checkbox}
+		/>
+	</div>,
 			accessor: ({ id = '' }) => (
-				<Checkbox
-					checked={checkedRowsId.includes(id)}
-					onChange={(event) => onChangeSingleCheckbox(event, id)}
-				/>
+				<div>
+					<Checkbox
+						checked={checkedRowsId.includes(id)}
+						onChange={(event) => onChangeBodyCheckbox(event, id)}
+					/>
+				</div>
 			),
 		},
 		{
 			Header   : <div>ORGANIZATION</div>,
-			id       : 'b',
+			key      : 'organization',
+			id       : 'organization',
 			accessor : ({ organization = '' }) => (
 				<section className={styles.table_cell}>
 					{organization || '__'}
@@ -134,7 +163,8 @@ const useFeedbackTableData = () => {
 		},
 		{
 			Header   : <div>COGO-ENTITY</div>,
-			id       : 'c',
+			key      : 'cogo_entity',
+			id       : 'cogo_entity',
 			accessor : ({ cogo_entity = '' }) => (
 				<section className={styles.table_cell}>
 					{cogo_entity || '__'}
@@ -143,7 +173,8 @@ const useFeedbackTableData = () => {
 		},
 		{
 			Header   : <div>TYPE</div>,
-			id       : 'd',
+			key      : 'type',
+			id       : 'type',
 			accessor : ({ type = '' }) => (
 				<section className={styles.table_cell}>
 					{type || '__'}
@@ -152,7 +183,8 @@ const useFeedbackTableData = () => {
 		},
 		{
 			Header   : <div>SUB-TYPE</div>,
-			id       : 'e',
+			key      : 'sub_type',
+			id       : 'sub_type',
 			accessor : ({ sub_type = '' }) => (
 				<section className={styles.table_cell}>
 					{sub_type || '__'}
@@ -161,7 +193,8 @@ const useFeedbackTableData = () => {
 		},
 		{
 			Header   : <div>CURRENT DATA</div>,
-			id       : 'f',
+			key      : 'current_data',
+			id       : 'current_data',
 			accessor : ({ current_data = '' }) => (
 				<section className={styles.table_cell}>
 					<Tooltip content={current_data} placement="top" interactive>
@@ -174,7 +207,8 @@ const useFeedbackTableData = () => {
 		},
 		{
 			Header   : <div>FEEDBACK & PROOF</div>,
-			id       : 'g',
+			key      : 'feedback',
+			id       : 'feedback',
 			accessor : ({ feedback = '', feedback_proof_url = '' }) => (
 				<section className={styles.feedback}>
 					<Tooltip content={feedback} placement="top" interactive>
@@ -186,20 +220,21 @@ const useFeedbackTableData = () => {
 						<ButtonIcon
 							size="md"
 							themeType="primary"
-							// icon={<IcMView />}
+							icon={<IcMView />}
 							className={styles.table_button}
 							// eslint-disable-next-line no-undef
 							onClick={() => { window.open(feedback_proof_url, '_blank'); }}
 						/>
 					) : (
-						null
+						<div />
 					)}
 				</section>
 			),
 		},
 		{
 			Header   : <div>CORRECTION & PROOF</div>,
-			id       : 'h',
+			key      : 'correction',
+			id       : 'correction',
 			accessor : ({ correction = '', correction_proof_url = '' }) => (
 				<section className={styles.feedback}>
 					<Tooltip content={correction} placement="top" interactive>
@@ -211,13 +246,13 @@ const useFeedbackTableData = () => {
 						<ButtonIcon
 							size="md"
 							themeType="primary"
-							// icon={<IcMView />}
+							icon={<IcMView />}
 							className={styles.table_button}
 							// eslint-disable-next-line no-undef
 							onClick={() => { window.open(correction_proof_url, '_blank'); }}
 						/>
 					) : (
-						null
+						<div />
 					)}
 
 				</section>
@@ -225,16 +260,18 @@ const useFeedbackTableData = () => {
 		},
 		{
 			Header   : <div>CREATION DATE</div>,
-			id       : 'i',
-			accessor : ({ createdDate = '' }) => (
+			key      : 'created_date',
+			id       : 'created_date',
+			accessor : ({ created_date = '' }) => (
 				<section className={styles.table_cell}>
-					{createdDate || '__'}
+					{created_date || '__'}
 				</section>
 			),
 		},
 		{
 			Header   : <div>KAM Manager</div>,
-			id       : 'j',
+			key      : 'kam_manager',
+			id       : 'kam_manager',
 			accessor : ({ kam_manager = '' }) => (
 				<section className={styles.table_cell}>
 					{kam_manager || '__'}
@@ -243,11 +280,11 @@ const useFeedbackTableData = () => {
 		},
 		{
 			Header   : <div>KAM</div>,
-			id       : 'k',
+			key      : 'kam',
+			id       : 'kam',
 			accessor : ({ kam = '' }) => (
 				<section className={styles.table_cell}>
 					{kam || '__'}
-
 				</section>
 			),
 		},

@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 
 function CrmTable() {
 	const { columns, data } = useFeedbackTableData();
-	// const data = [{}];
 
 	// EMPTY STATE TO BE MADE
 	return (
@@ -15,10 +14,11 @@ function CrmTable() {
 			<div className={styles.table_container}>
 				<Table
 					className={styles.table}
-					columns={columns}
-					data={data || []}
+					columns={columns || [{}]}
+					data={data || [{}]}
 				/>
 			</div>
+
 			{/* <div className={styles.pagination_container}>
 				<Pagination
 					type="table"
