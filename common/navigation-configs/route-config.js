@@ -5,6 +5,7 @@ import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import enrichment from './config/enrichment';
+import groundOps from './config/ground-ops';
 import inventory_management from './config/inventory_management';
 import kamMonitoring from './config/kam-monitoring';
 import myIncident from './config/my-incident';
@@ -15,6 +16,7 @@ import supplyDashboard from './config/supply-dashboards';
 
 const routeConfig = {
 	...rolesAndPermissions,
+	...groundOps,
 	...allocations,
 	...supplyDashboard,
 	...contracts,
