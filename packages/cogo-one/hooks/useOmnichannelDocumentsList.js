@@ -16,7 +16,7 @@ function useOmnichannelDocumentsList({
 		method : 'get',
 	}, { manual: true });
 
-	const { userId = '', userMobile = '', leadUserId = '' } = FormatData({
+	const { userId = '', userMobile = '', leadUserId = '', orgId = '' } = FormatData({
 		activeMessageCard,
 		activeVoiceCard,
 		activeTab,
@@ -54,6 +54,7 @@ function useOmnichannelDocumentsList({
 		documentsList,
 		data,
 		loading,
+		orgId,
 	};
 }
 
