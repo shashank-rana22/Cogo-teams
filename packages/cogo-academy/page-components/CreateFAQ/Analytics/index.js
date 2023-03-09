@@ -1,9 +1,7 @@
-
-
 function Analytics() {
 	return (
 		<>
-		dkvcnedcjhc	
+			dkvcnedcjhc
 		</>
 	);
 }

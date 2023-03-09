@@ -1,4 +1,4 @@
-import { Pill, Button,Modal } from '@cogoport/components';
+import { Pill, Button, Modal } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -22,9 +22,9 @@ const addedQuestionsColumns = ({
 	deactivateQuestion,
 	onClickViewButton = () => {},
 	show,
-	setShow = () =>{},
+	setShow = () => {},
 	deleteitem,
-	setDeleteitem = () =>{}
+	setDeleteitem = () => {},
 }) => [
 	{
 		Header   : 'QUESTIONS',
@@ -69,8 +69,7 @@ const addedQuestionsColumns = ({
 	},
 	{
 		Header   : 'ACTIONS',
-		accessor : (items) => (<>
-			
+		accessor : (items) => (
 			<div className={styles.button_container}>
 				{!['inactive', 'draft'].includes(activeList)
 					? (
@@ -93,30 +92,38 @@ const addedQuestionsColumns = ({
 					EDIT
 				</Button>
 				{activeList !== 'inactive' ? (
-					<><IcMDelete
-						height={20}
-						width={20}
-						style={{ cursor: 'pointer' }}
-						onClick={() =>{setShow(true);setDeleteitem(items)}
-				}/>
-				<div>
-					<Modal size="md" show={show}  onClose={() => setShow(false)} closeOnOuterClick={false}  placement='center' className={styles.model_container}>
-					<Modal.Header title="Are you sure?" />
-					<Modal.Body>
-						<section>
-						<h3>Are you sure you want to delete it?</h3>
-						{deleteitem?.question_abstract}
-						</section>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button onClick={() =>deactivateQuestion(deleteitem?.id)}>OK</Button>
-					</Modal.Footer>
-				</Modal></div>
+					<>
+						<IcMDelete
+							height={20}
+							width={20}
+							style={{ cursor: 'pointer' }}
+							onClick={() => { setShow(true); setDeleteitem(items); }}
+						/>
+						<div>
+							<Modal
+								size="md"
+								show={show}
+								onClose={() => setShow(false)}
+								closeOnOuterClick={false}
+								placement="center"
+								className={styles.model_container}
+							>
+								<Modal.Header title="Are you sure?" />
+								<Modal.Body>
+									<section>
+										<h3>Are you sure you want to delete it?</h3>
+										{deleteitem?.question_abstract}
+									</section>
+								</Modal.Body>
+								<Modal.Footer>
+									<Button onClick={() => deactivateQuestion(deleteitem?.id)}>OK</Button>
+								</Modal.Footer>
+							</Modal>
+						</div>
 					</>
 				) : null}
-				
-	
-			</div></>
+
+			</div>
 		),
 	},
 ];
@@ -174,7 +181,6 @@ const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) =>
 ];
 
 const useQuestionList = () => {
-	
 	const [sortType, setSortType] = useState(true);
 	const { query, debounceQuery } = useDebounceQuery();
 	const [searchInput, setSearchInput] = useState('');
@@ -183,14 +189,12 @@ const useQuestionList = () => {
 	const [page, setPage] = useState(1);
 	const router = useRouter();
 
-	const SORT_TYPE=(sortType)?'desc':'asc';
-	const SORT_MODE='updated_at'
+	const SORT_TYPE = (sortType) ? 'desc' : 'asc';
+	const SORT_MODE = 'updated_at';
 	const [{ data: questionList, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_faq_questions',
-	},
-	
-	 { manual: true });
+	}, { manual: true });
 
 	const [{ error }, updateTrigger] = useRequest({
 		url    : '/update_question_answer_set',
@@ -210,12 +214,11 @@ const useQuestionList = () => {
 						...filters,
 						...FILTER_MAPPING[activeList],
 						q: query || undefined,
-
 					},
 					page,
-					is_admin_view: true,
-					sort_by  : SORT_MODE,
-					sort_type:SORT_TYPE,
+					is_admin_view            : true,
+					sort_by                  : SORT_MODE,
+					sort_type                : SORT_TYPE,
 					faq_tags_data_required   : true,
 					faq_topics_data_required : true,
 					author_data_required     : true,
@@ -230,10 +233,7 @@ const useQuestionList = () => {
 	useEffect(() => {
 		getQuestionsList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, filters, query, activeList,SORT_TYPE]);
-
-
-
+	}, [page, filters, query, activeList, SORT_TYPE]);
 
 	const deactivateQuestion = async (id) => {
 		try {
@@ -242,11 +242,11 @@ const useQuestionList = () => {
 					data: {
 						id,
 						status: 'inactive',
-
 					},
 
 				},
 			);
+			// eslint-disable-next-line no-use-before-define
 			setShow(false);
 			getQuestionsList();
 		} catch {
@@ -267,8 +267,8 @@ const useQuestionList = () => {
 			`/learning/faq/create/question?mode=preview&id=${id}&source=view`,
 		);
 	};
-	const [show,setShow]=useState(false);
-	const [deleteitem,setDeleteitem]=useState('')
+	const [show, setShow] = useState(false);
+	const [deleteitem, setDeleteitem] = useState('');
 	const columns = activeList !== 'requested'
 		? addedQuestionsColumns({
 			activeList,
@@ -278,7 +278,7 @@ const useQuestionList = () => {
 			show,
 			setShow,
 			deleteitem,
-			setDeleteitem
+			setDeleteitem,
 		})
 		: requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
 
@@ -299,7 +299,7 @@ const useQuestionList = () => {
 		questionListLoading: loading,
 		onClickViewButton,
 		sortType,
-		setSortType
+		setSortType,
 	};
 };
 

@@ -7,9 +7,8 @@ function CreateFAQ() {
 	return (
 		<div>
 			<Header />
-			
+
 			<QuestionsList />
-			
 
 		</div>
 	);

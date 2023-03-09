@@ -1,7 +1,7 @@
 import { Pagination } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import EmptyState from '../../../../commons/EmpyState';
 import StyledTable from '../../../../commons/StyledTable';

@@ -1,12 +1,11 @@
-import { TabPanel, Tabs } from '@cogoport/components';
+import { TabPanel, Tabs, Button } from '@cogoport/components';
+import { IcMArrowDoubleDown, IcMArrowDoubleUp } from '@cogoport/icons-react';
 import React from 'react';
 
 import SearchInput from '../../../../../commons/SearchInput';
-import {IcMArrowDoubleDown} from '@cogoport/icons-react';
+
 import FilterPopover from './FilterPopover';
 import styles from './styles.module.css';
-import { Button } from '@cogoport/components';
-import { IcMArrowDoubleUp } from '@cogoport/icons-react';
 
 function Header({
 	filters,
@@ -18,7 +17,6 @@ function Header({
 	sortType,
 	setSortType,
 }) {
-
 	return (
 		<div>
 			<div className={styles.container}>
@@ -34,19 +32,20 @@ function Header({
 				<div className={styles.filter_popover}>
 					<FilterPopover filters={filters} setFilters={setFilters} />
 				</div>
-				<div><Button
+				<div>
+					<Button
 						themeType="secondary"
-						style={{ marginLeft: 8,height:'40px' }}
+						style={{ marginLeft: 8, height: '40px' }}
 						size="md"
 						onClick={() => setSortType(!sortType)}
-						
 					>
-						Sort By Last Updated{sortType? <IcMArrowDoubleDown/>: <IcMArrowDoubleUp/>}
-						
-						 
+						Sort By Last Updated
+						{sortType ? <IcMArrowDoubleDown /> : <IcMArrowDoubleUp />}
+
 					</Button>
-					
-			</div></div>
+
+				</div>
+			</div>
 
 			<div className={styles.tab_group}>
 				<Tabs
