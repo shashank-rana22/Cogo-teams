@@ -1,14 +1,10 @@
-import { useForm } from '@cogoport/forms';
-
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
 import { controls, controlsBottom } from '../../controls';
 
 import styles from './styles.module.css';
 
-function KamLevelDetailsEdit({ data = {} }) {
-	const formProps = useForm();
+function KamLevelDetailsEdit({ data = {}, control }) {
 	const transacting_accounts = data && data.list && data.list['Transacting Accounts'];
-	const { control } = formProps;
 	return (
 		<div className={styles.level_card_container}>
 			{controls.map((singleField) => {

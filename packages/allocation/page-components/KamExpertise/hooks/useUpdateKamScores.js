@@ -5,7 +5,8 @@ import { useAllocationRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
 function useUpdateKamScores(props) {
-	const { transition_level, refetch, setEditMode, setTitle } = props;
+	// const { transition_level, refetch, setEditMode, setTitle } = props;
+	const { transition_level } = props;
 
 	const formProps = useForm();
 
@@ -30,17 +31,6 @@ function useUpdateKamScores(props) {
 
 		console.log('checking values', commodity_expertise);
 
-		// const transition_level = '2';
-
-		// const {
-		// 	commodity_expertise,
-		// 	customer_expertise,
-		// 	minimum_transacting_accounts,
-		// 	misc_expertise,
-		// 	retained_account_count,
-		// 	retained_accont_min_duration,
-		// 	trade_expertise,
-		// } = watch();
 		try {
 			const payload = {
 				payload: [
@@ -114,10 +104,10 @@ function useUpdateKamScores(props) {
 				data: payload,
 			});
 
-			setEditMode(false);
-			refetch();
-			// setshowEditBtn(true);
-			setTitle(0);
+			// setEditMode(false);
+			// refetch();
+			// // setshowEditBtn(true);
+			// setTitle(0);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response.data));
 		}
