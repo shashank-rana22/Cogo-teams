@@ -174,14 +174,7 @@ function MessageList({
 										</div>
 
 										<div className={styles.content_div}>
-											{item?.last_message
-												? lastMessagePreview(item?.last_message || '')
-												: (
-													<div className={styles.media_preview}>
-														<IcMDocument width={20} height={20} fill="#4f4f4f" />
-														Media
-													</div>
-												)}
+											{lastMessagePreview(item?.last_message || '')}
 											{item.new_message_count > 0 && (
 												<div className={styles.new_message_count}>
 													{item.new_message_count > 100 ? '99+' : (
