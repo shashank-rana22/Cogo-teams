@@ -77,7 +77,7 @@ function CreateMastery(props) {
 							if (!Element) return null;
 
 							return (
-								<div>
+								<div className={styles.form_container}>
 									<div>{ele.label}</div>
 									<Element
 										{...ele}

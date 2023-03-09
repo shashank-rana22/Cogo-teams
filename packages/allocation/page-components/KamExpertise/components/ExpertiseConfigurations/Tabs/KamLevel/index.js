@@ -14,7 +14,7 @@ function KamLevel() {
 	const { kamConfigDetails = [], loading = false, refetch } = useKamExpertiseConfig();
 
 	const [title, setTitle] = useState(0);
-	const [action, setAction] = useState('show');
+	const [editMode, setEditMode] = useState(false);
 	const [createKam, setCreateKam] = useState(false);
 
 	const dataLength = kamConfigDetails.length;
@@ -27,7 +27,8 @@ function KamLevel() {
 			data={data}
 			title={title}
 			setTitle={setTitle}
-			setAction={setAction}
+			editMode={editMode}
+			setEditMode={setEditMode}
 			id={data.transition_level - 1}
 			dataLength={dataLength}
 			refetch={refetch}
@@ -35,10 +36,10 @@ function KamLevel() {
 
 		children: <KamLevelDropDown
 			key={data.transition_level}
-			action={action}
+			editMode={editMode}
 			id={data.transition_level - 1}
 			title={title}
-			setAction={setAction}
+			setEditMode={setEditMode}
 		/>,
 
 	}));

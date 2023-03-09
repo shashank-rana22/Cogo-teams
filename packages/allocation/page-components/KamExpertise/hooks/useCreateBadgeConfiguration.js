@@ -36,6 +36,7 @@ function useCreateBadgeConfiguration(props) {
 
 		const {
 			badge,
+			condition,
 			description,
 			Bronze_value,
 			Bronze_img_value,
@@ -45,47 +46,51 @@ function useCreateBadgeConfiguration(props) {
 			Gold_img_value,
 		} = formValues || {};
 
-		try {
-			const payload = {
-				version_id    : '1',
-				badge_name    : badge,
-				description,
-				// event_configuration_id : payload_data.event_configuration_id,
-				badge_details : [
-					{
-						score     : Bronze_value,
-						image_url : Bronze_img_value || badgeDetails?.[0]?.image_url,
-						medal     : 'bronze',
-					},
-					{
-						score     : Silver_value,
-						image_url : Silver_img_value || badgeDetails?.[1]?.image_url,
-						medal     : 'silver',
-					},
-					{
-						score     : Gold_value,
-						image_url : Gold_img_value || badgeDetails?.[2]?.image_url,
-						medal     : 'gold',
-					},
-				],
-			};
-			if (Object.keys(badgeListData).length > 0) {
-				payload.id = badgeListData.id;
-				payload.badge_details[0].badge_detail_id = badgeDetails?.[0]?.id;
-				payload.badge_details[1].badge_detail_id = badgeDetails?.[1]?.id;
-				payload.badge_details[2].badge_detail_id = badgeDetails?.[2]?.id;
+		if (Bronze_value < Silver_value && Silver_value < Gold_value) {
+			try {
+				const payload = {
+					version_id             : '1',
+					badge_name             : badge,
+					description,
+					event_configuration_id : condition,
+					badge_details          : [
+						{
+							score     : Bronze_value,
+							image_url : Bronze_img_value || badgeDetails?.[0]?.image_url,
+							medal     : 'bronze',
+						},
+						{
+							score     : Silver_value,
+							image_url : Silver_img_value || badgeDetails?.[1]?.image_url,
+							medal     : 'silver',
+						},
+						{
+							score     : Gold_value,
+							image_url : Gold_img_value || badgeDetails?.[2]?.image_url,
+							medal     : 'gold',
+						},
+					],
+				};
+
+				if (Object.keys(badgeListData).length > 0) {
+					payload.id = badgeListData.id;
+					payload.badge_details[0].badge_detail_id = badgeDetails?.[0]?.id;
+					payload.badge_details[1].badge_detail_id = badgeDetails?.[1]?.id;
+					payload.badge_details[2].badge_detail_id = badgeDetails?.[2]?.id;
+				}
+
+				await trigger({ data: payload });
+
+				onClose();
+
+				Toast.success('Badge Created!');
+
+				listRefetch();
+			} catch (error) {
+				Toast.error(getApiErrorString(error.response?.data));
 			}
-
-			await trigger({ data: payload });
-
-			// refetch
-			onClose();
-
-			Toast.success('Badge Created!');
-
-			listRefetch();
-		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+		} else {
+			Toast.error('Provide Scores in proper order: Bronze < Silver <Gold');
 		}
 	};
 

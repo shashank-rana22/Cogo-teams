@@ -8,9 +8,8 @@ function useGetBadgeList() {
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			status : 'active',
-			id     : searchQuery || undefined,
-			// badge_name : searchQuery || undefined,
+			status     : 'active',
+			badge_name : searchQuery || undefined,
 		},
 	});
 
@@ -26,7 +25,7 @@ function useGetBadgeList() {
 			...previousParams,
 			filters: {
 				...previousParams.filters,
-				id: searchQuery || undefined,
+				badge_name: searchQuery || undefined,
 			},
 		}));
 	}, [searchQuery]);

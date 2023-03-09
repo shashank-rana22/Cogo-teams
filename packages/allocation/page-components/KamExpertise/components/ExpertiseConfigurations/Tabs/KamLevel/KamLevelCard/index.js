@@ -1,26 +1,21 @@
 import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-// import React, { useState } from 'react';
-
-// import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
 
 import styles from './styles.module.css';
 
-function KamLevelCard({
-	title = '',
-	// setAction = () => {},
-	data = {},
-	id = '',
-	dataLength = -1,
-	// refetch = () => {},
-	// setTitle = () => {},
-}) {
+function KamLevelCard(props) {
+	const {
+		title = '',
+		data = {},
+		id = '',
+		dataLength = -1,
+	} = props;
+
 	const {
 		transition_level = '',
 		expertise_details = [],
 	} = data;
 
-	// const { handleSubmit } = formProps;
 	const expertiseObject = expertise_details.map((item) => item);
 
 	const COLUMN_MAPPING = [

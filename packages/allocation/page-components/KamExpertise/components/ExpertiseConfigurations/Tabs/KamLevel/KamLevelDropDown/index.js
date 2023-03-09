@@ -1,21 +1,21 @@
 import { Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import useKamExpertiseLevelConfig from '../../../../../hooks/useKamExpertiseLevelConfig';
-// import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
+import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
 
 import KamLevelDetailsEdit from './KamLevelDetailsEdit';
 import KamLevelDetailsShow from './KamLevelDetailsShow';
 import styles from './styles.module.css';
 
-function KamLevelDropDown({ action = '', title, setAction = () => {} }) {
+function KamLevelDropDown({ editMode, title, setEditMode }) {
 	const { listkamLevelDetails } = useKamExpertiseLevelConfig({ title });
-	const [showEditBtn, setshowEditBtn] = useState(true);
-	console.log('listkamLevelDetails', listkamLevelDetails);
-
+	const transition_level = listkamLevelDetails.list?.['Commodity Expertise']?.[0].transition_level;
+	const { formProps, onSave } = useUpdateKamScores({ transition_level });
+	const { control, handleSubmit } = formProps;
 	return (
 		<>
-			{showEditBtn ? (
+			{!editMode ? (
 				<Button
 					themeType="secondary"
 					className={styles.delete_button}
@@ -23,8 +23,7 @@ function KamLevelDropDown({ action = '', title, setAction = () => {} }) {
 						if (title) {
 							e.stopPropagation();
 						}
-						setshowEditBtn(false);
-						setAction('edit');
+						setEditMode(true);
 					}}
 				>
 					Edit
@@ -34,10 +33,7 @@ function KamLevelDropDown({ action = '', title, setAction = () => {} }) {
 
 					<Button
 						className={styles.delete_button}
-						onClick={(e) => {
-							e.stopPropagation();
-							// onSave();
-						}}
+						onClick={handleSubmit(onSave)}
 						type="submit"
 					>
 						{' '}
@@ -49,8 +45,7 @@ function KamLevelDropDown({ action = '', title, setAction = () => {} }) {
 						style={{ marginRight: '0' }}
 						onClick={(e) => {
 							e.stopPropagation();
-							setshowEditBtn(true);
-							setAction('show');
+							setEditMode(false);
 						}}
 					>
 						Cancel
@@ -59,9 +54,9 @@ function KamLevelDropDown({ action = '', title, setAction = () => {} }) {
 			)}
 
 			<div className={styles.child}>
-				{action === 'show'
-					? <KamLevelDetailsShow data={listkamLevelDetails} />
-					: <KamLevelDetailsEdit data={listkamLevelDetails} />}
+				{editMode
+					? <KamLevelDetailsEdit data={listkamLevelDetails} control={control} />
+					: <KamLevelDetailsShow data={listkamLevelDetails} />}
 			</div>
 		</>
 	);

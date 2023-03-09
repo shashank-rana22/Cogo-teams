@@ -69,15 +69,6 @@ function KamExpertise() {
 					})}
 				</Tabs>
 			</div>
-
-			{/* <div className={styles.create_button_container}>
-				<Button
-					onClick={() => router.push('/allocation/kam-expertise/configurations')}
-					themeType="primary"
-				>
-					Create Configuration
-				</Button>
-			</div> */}
 		</section>
 
 	);
