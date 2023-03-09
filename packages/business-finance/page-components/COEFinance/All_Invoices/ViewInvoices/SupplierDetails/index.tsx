@@ -6,6 +6,7 @@ import {
 	Tooltip,
 	Modal,
 } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 import {
 	IcADocumentTemplates,
 	IcCFtick,
@@ -95,6 +96,26 @@ function SupplierDetails({
 		),
 	};
 
+	const getSupplierData = () => {
+		if (loading) {
+			return (
+				<div className={styles.loader_main}>
+					<Loader className={styles.loader} />
+				</div>
+			);
+		}
+		if (isEmpty([{ id: 'fnk' }])) {
+			return <div>First Time</div>;
+		}
+		return (
+			<List
+				config={config}
+				itemData={{ list: historyData }}
+				loading={loading}
+			/>
+		);
+	};
+
 	return (
 		<div className={styles.container}>
 			<h3>Supplier Details</h3>
@@ -159,11 +180,7 @@ function SupplierDetails({
 						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
-									{payablesCurrency || '-'}
-									{' '}
-&nbsp;
-									{' '}
-									{showOverflowingNumber(payables || 0, 7)}
+									{showOverflowingNumber(getFormattedPrice(payables, payablesCurrency) || 0, 10)}
 								</div>
 							) : (
 								<div>
@@ -190,11 +207,10 @@ function SupplierDetails({
 						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
-									{receivablesCurrency || '-'}
-									{' '}
-&nbsp;
-									{' '}
-									{showOverflowingNumber(receivables || 0, 7)}
+									{showOverflowingNumber(getFormattedPrice(
+										receivables,
+										receivablesCurrency,
+									) || 0, 10)}
 								</div>
 							) : (
 								<div>
@@ -227,18 +243,8 @@ function SupplierDetails({
 						>
 							<Modal.Header title="SUPPLIER HISTORY" />
 							<Modal.Body>
-								{!loading ? (
-									<List
-										config={config}
-										itemData={{ list: historyData }}
-										loading={loading}
-									/>
-								) : (
-									<div className={styles.loader_main}>
-										<Loader className={styles.loader} />
-									</div>
+								{getSupplierData()}
 
-								)}
 							</Modal.Body>
 						</Modal>
 					)}

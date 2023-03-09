@@ -87,7 +87,7 @@ const PURCHASE_VIEW_CONFIG = {
 		},
 		{
 			label : 'Urgency',
-			span  : 0.8,
+			span  : 1,
 			key   : 'urgencyTag',
 			func  : 'renderUrgencyTag',
 		},
