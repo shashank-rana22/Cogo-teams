@@ -1,6 +1,6 @@
 const EXPERTISE_CARDS_COLUMNS_MAPPING = [
 	{
-		key   : 'high_impact_conditions',
+		key   : 'high_priority_count',
 		label : 'No. of high impact conditions',
 		flex  : 2.5,
 	},
@@ -10,7 +10,7 @@ const EXPERTISE_CARDS_COLUMNS_MAPPING = [
 		flex  : 2.5,
 	},
 	{
-		key   : 'parameters_count',
+		key   : 'parameters',
 		label : 'Number of parameters',
 		flex  : 2,
 	},

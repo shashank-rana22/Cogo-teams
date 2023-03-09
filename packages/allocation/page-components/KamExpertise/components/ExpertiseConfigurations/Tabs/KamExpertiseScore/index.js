@@ -86,7 +86,7 @@ function KamExpertiseScoreConfig() {
 			key,
 			title    : titleSection(value),
 			children : <ExpertiseParameters
-				expertiseData={value}
+				name={value.name}
 				onClickAddCondition={() => setAddConditionModal({ type: value?.name })}
 			/>,
 

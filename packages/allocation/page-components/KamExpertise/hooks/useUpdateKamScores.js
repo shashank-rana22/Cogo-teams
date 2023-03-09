@@ -28,8 +28,7 @@ function useUpdateKamScores(props) {
 			retained_accont_min_duration,
 			trade_expertise,
 		} = formValues || {};
-
-		console.log('checking values', commodity_expertise);
+		console.log('type', typeof (commodity_expertise));
 
 		try {
 			const payload = {
@@ -37,8 +36,8 @@ function useUpdateKamScores(props) {
 					{
 						transition_level,
 						config_type          : 'KAM',
-						expertise_type       : `${startCase(customer_expertise)}`,
-						threshold_score      : customer_expertise,
+						expertise_type       : 'cu',
+						threshold_score      : customer_expertise || undefined,
 						threshold_score_type : 'score',
 						description          : 'Trade',
 						status               : 'active',
@@ -46,8 +45,8 @@ function useUpdateKamScores(props) {
 					{
 						transition_level,
 						config_type          : 'KAM',
-						expertise_type       : `${startCase(commodity_expertise)}`,
-						threshold_score      : commodity_expertise,
+						expertise_type       : startCase('commodity_expertise'),
+						threshold_score      : commodity_expertise || undefined,
 						threshold_score_type : 'score',
 						description          : 'Trade',
 						status               : 'active',
@@ -56,7 +55,7 @@ function useUpdateKamScores(props) {
 						transition_level,
 						config_type          : 'KAM',
 						expertise_type       : `${startCase(minimum_transacting_accounts)}`,
-						threshold_score      : minimum_transacting_accounts,
+						threshold_score      : minimum_transacting_accounts || undefined,
 						threshold_score_type : 'score',
 						description          : 'Trade',
 						status               : 'active',
@@ -65,7 +64,7 @@ function useUpdateKamScores(props) {
 						transition_level,
 						config_type          : 'KAM',
 						expertise_type       : `${startCase(misc_expertise)}`,
-						threshold_score      : misc_expertise,
+						threshold_score      : misc_expertise || undefined,
 						threshold_score_type : 'score',
 						description          : 'Trade',
 						status               : 'active',
@@ -74,7 +73,7 @@ function useUpdateKamScores(props) {
 						transition_level,
 						config_type          : 'KAM',
 						expertise_type       : `${startCase(retained_account_count)}`,
-						threshold_score      : retained_account_count,
+						threshold_score      : retained_account_count || undefined,
 						threshold_score_type : 'score',
 						description          : 'Trade',
 						status               : 'active',
@@ -83,7 +82,7 @@ function useUpdateKamScores(props) {
 						transition_level,
 						config_type          : 'KAM',
 						expertise_type       : `${startCase(retained_accont_min_duration)}`,
-						threshold_score      : retained_accont_min_duration,
+						threshold_score      : retained_accont_min_duration || undefined,
 						threshold_score_type : 'score',
 						description          : 'Trade',
 						status               : 'active',
@@ -92,7 +91,7 @@ function useUpdateKamScores(props) {
 						transition_level,
 						config_type          : 'KAM',
 						expertise_type       : `${startCase(trade_expertise)}`,
-						threshold_score      : trade_expertise,
+						threshold_score      : trade_expertise || undefined,
 						threshold_score_type : 'score',
 						description          : 'Trade',
 						status               : 'active',
