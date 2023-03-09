@@ -14,7 +14,7 @@ import cost_booking_desk from './cost-booking-desk-apis';
 import document_walet from './doc-walet';
 import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
-import enrichment from './enrichment';
+import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
 import kam_desk from './kam-desk-apis';
