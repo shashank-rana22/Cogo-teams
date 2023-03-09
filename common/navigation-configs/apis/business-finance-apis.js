@@ -11,7 +11,7 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
-			api          : 'get_purchase_supplier_history',
+			api          : 'get_purchase_bills_supplier_history',
 			access_type  : 'private',
 			service_name : 'coeFinance',
 		},
