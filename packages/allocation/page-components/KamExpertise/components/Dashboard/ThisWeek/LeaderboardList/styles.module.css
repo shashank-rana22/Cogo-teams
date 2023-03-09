@@ -11,6 +11,10 @@
     background: #fff;
     border-radius: 8px;
     height: 92px;
+    @media (max-width: 576px) {
+        /* width: 450px; */
+        overflow-x: scroll;
+    }
 }
 
 .card_description {
@@ -24,6 +28,10 @@
     display: flex;
     align-items: center;
     width: 20%;
+    @media (max-width: 576px) {
+        width: 250px;
+        margin-right: 50px;
+    }
 }
 
 .user_name {
@@ -35,6 +43,10 @@
 
 .badge_container {
     width: 20%;
+    @media (max-width: 576px) {
+        width: 250px;
+        margin-right: 20px;
+    }
     display: flex;
 }
 
@@ -43,6 +55,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.badge_item {
+    margin-bottom: 4px;
+    @media (max-width: 576px) {
+        padding: 0 10px;
+    }
 }
 
 .badges_loading {
@@ -56,6 +75,11 @@
     justify-content: space-between;
     align-items: center;
     width: 50%;
+    @media (max-width: 576px) {
+        width: 650px;
+        margin-left: 20px;
+        padding-right: 20px;
+    }
     margin-right: 40px;
 }
 
@@ -81,4 +105,12 @@
 .star {
     display: flex;
     justify-content: center;
+}
+
+.exp {
+    @media (max-width: 576px) {
+        /* width: 650px; */
+        /* margin-left: 20px; */
+        padding: 0 20px;
+    }
 }
