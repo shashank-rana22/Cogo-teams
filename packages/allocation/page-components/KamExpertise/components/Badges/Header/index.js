@@ -37,6 +37,7 @@ function Header(props) {
 					options={OPTIONS}
 					onChange={(value) => setExpertise(value)}
 					className={styles.dropdown}
+					disabled={toggleScreen === 2 || toggleScreen === 3}
 				/>
 
 				<SearchInput
@@ -47,6 +48,7 @@ function Header(props) {
 					value={searchValue}
 					// disabled={disabled}
 					className={styles.search_bar}
+					disabled={toggleScreen === 2 || toggleScreen === 3}
 				/>
 			</div>
 
@@ -54,7 +56,7 @@ function Header(props) {
 				<Button
 					themeType="secondary"
 					size="md"
-					className={styles.button}
+					className={styles.button_mastery}
 					onClick={() => {
 						setMasteryListData({});
 						setToggleScreen(2);
@@ -67,6 +69,7 @@ function Header(props) {
 				<Button
 					themeType="primary"
 					size="md"
+					className={styles.button_badge}
 					onClick={() => {
 						setBadgeListData({});
 						setToggleScreen(3);
