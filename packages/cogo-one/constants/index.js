@@ -73,7 +73,7 @@ export const SERVICE_ICON_MAPPING = {
 };
 
 export const LOGO_URL = {
-	admin : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/10118f395f681ff8ce69dc191c28d45d/XMLID_816_.svg',
+	admin : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/admin_icon.svg',
 	bot   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-notification.svg',
 };
 
