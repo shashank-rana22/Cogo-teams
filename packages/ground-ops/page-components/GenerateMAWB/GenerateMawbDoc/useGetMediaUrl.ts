@@ -7,7 +7,7 @@ const useGetMediaUrl = () => {
 		const { url, headers } = JSON.parse(documentData);
 		if (url) {
 			xhr.open('PUT', url);
-			xhr.onreadystatechange = function () {
+			xhr.onreadystatechange = () => {
 				if (xhr.readyState === 4) {
 					if (xhr.status === 200) {
 						resolve(documentData);
@@ -28,7 +28,7 @@ const useGetMediaUrl = () => {
 	const getRequest = (url, params) => new Promise((resolve, reject) => {
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', `${url}?file_name=${params.file_name}`, true);
-		xhr.onreadystatechange = function () {
+		xhr.onreadystatechange = () => {
 			if (xhr.readyState === 4) {
 				if (xhr.status === 200) {
 					resolve(xhr.responseText);
