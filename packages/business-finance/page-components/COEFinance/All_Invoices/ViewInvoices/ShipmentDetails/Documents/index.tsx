@@ -1,6 +1,6 @@
 import { Loader, Button } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React from 'react';
 
@@ -79,17 +79,30 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 		},
 	};
 
+	const getDocumentData = () => {
+		if (loading) {
+			return (
+				<div className={styles.loader_main}>
+					<Loader className={styles.loader} />
+				</div>
+			);
+		}
+		if (isEmpty(documentData)) {
+			return <div>NO DATA FOUND</div>;
+		}
+		return (
+			<List
+				config={config}
+				itemData={documentData}
+				functions={functions}
+				loading={loading}
+			/>
+		);
+	};
+
 	return (
 		<div className={styles.list}>
-			{!loading ? (
-				<List
-					config={config}
-					itemData={documentData}
-					functions={functions}
-					loading={loading}
-				/>
-			) : <Loader />}
-
+			{getDocumentData()}
 		</div>
 	);
 }

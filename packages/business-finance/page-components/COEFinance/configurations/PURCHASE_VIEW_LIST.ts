@@ -76,13 +76,13 @@ const PURCHASE_VIEW_CONFIG = {
 		{
 			label : 'Status',
 			key   : 'status',
-			span  : 1,
+			span  : 0.9,
 			func  : 'renderStatus',
 		},
 		{
 			label : 'Remarks ',
 			key   : 'remarks',
-			span  : 1,
+			span  : 0.9,
 			func  : 'renderRemarks',
 		},
 		{
