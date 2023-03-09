@@ -14,3 +14,6 @@ export const FIRESTORE_PATH = {
 	whatsapp      : firestoreWhatsappPath,
 	platform_chat : firestoreChatbotPath,
 };
+
+export const firebase_auth_email = process.env.NEXT_PUBLIC_FIRESTORE_AUTH_EMAIL;
+export const firebase_auth_password = process.env.NEXT_PUBLIC_FIRESTORE_AUTH_PASSWORD;

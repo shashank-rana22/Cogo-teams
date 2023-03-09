@@ -1,4 +1,5 @@
 import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import {
 	query,
 	where,
@@ -7,7 +8,7 @@ import {
 } from 'firebase/firestore';
 import { useState } from 'react';
 
-import { firebaseConfig } from '../configurations/firebase-configs';
+import { firebaseConfig, firebase_auth_email, firebase_auth_password } from '../configurations/firebase-configs';
 
 function useGetUsersStats() {
 	const [userStats, setUserStats] = useState({ ai_chats: 0, kam_chats: 0 });
@@ -15,6 +16,15 @@ function useGetUsersStats() {
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
+	const auth = getAuth();
+
+	signInWithEmailAndPassword(auth, firebase_auth_email, firebase_auth_password)
+		.catch((error) => {
+			const errorCode = error.code;
+			console.log('errorCode:', errorCode);
+			const errorMessage = error.message;
+			console.log('errorMessage:', errorMessage);
+		});
 
 	const getUserSats = async () => {
 		setFirebaseLoading(true);
