@@ -1,0 +1,30 @@
+.checkbox{
+    max-width: 50px;
+    border: 2px solid red;
+}
+
+.feedback{
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    min-width: 300px;
+}
+
+
+.tooltip_text{
+    display: block;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table_button{
+    font-weight: bold;
+    margin-left: 8px;
+    margin-right: 20px;
+}
+
+.table_cell{
+    min-width: 180px;
+}

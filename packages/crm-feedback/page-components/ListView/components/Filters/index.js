@@ -15,21 +15,35 @@ function Filters() {
 	];
 
 	const [filterValue, setFilterValue] = useState({
-		organization : null,
-		kam          : null,
 		cogo_entity  : null,
-		year         : null,
-		month        : null,
-		date         : null,
+		organization : null,
+		kam_manager  : null,
+		kam          : null,
+		start_date   : null,
+		end_date     : null,
 	});
 
 	return (
 		<div className={styles.filter}>
 			<Select
-				placeholder="Organziation"
+				placeholder="Cogo Entity"
+				className={styles.select}
+				value={filterValue.cogo_entity}
+				onChange={(val) => setFilterValue({ ...filterValue, cogo_entity: val })}
+				options={options}
+			/>
+			<Select
+				placeholder="Organization"
 				className={styles.select}
 				value={filterValue.organization}
 				onChange={(val) => setFilterValue({ ...filterValue, organization: val })}
+				options={options}
+			/>
+			<Select
+				placeholder="KAM Manager"
+				className={styles.select}
+				value={filterValue.kam_manager}
+				onChange={(val) => setFilterValue({ ...filterValue, kam_manager: val })}
 				options={options}
 			/>
 			<Select
@@ -39,34 +53,28 @@ function Filters() {
 				onChange={(val) => setFilterValue({ ...filterValue, kam: val })}
 				options={options}
 			/>
+
 			<Select
-				placeholder="Cogo Entity"
+				placeholder="Start Date"
 				className={styles.select}
-				value={filterValue.cogo_entity}
-				onChange={(val) => setFilterValue({ ...filterValue, cogo_entity: val })}
+				value={filterValue.start_date}
+				onChange={(val) => setFilterValue({ ...filterValue, start_date: val })}
 				options={options}
 			/>
 			<Select
-				placeholder="Year"
+				placeholder="End Date"
 				className={styles.select}
-				value={filterValue.year}
-				onChange={(val) => setFilterValue({ ...filterValue, year: val })}
+				value={filterValue.end_date}
+				onChange={(val) => setFilterValue({ ...filterValue, end_date: val })}
 				options={options}
 			/>
-			<Select
-				placeholder="Month"
-				className={styles.select}
-				value={filterValue.month}
-				onChange={(val) => setFilterValue({ ...filterValue, month: val })}
-				options={options}
-			/>
-			<Select
+			{/* <Select
 				placeholder="Date"
 				className={styles.select}
 				value={filterValue.date}
 				onChange={(val) => setFilterValue({ ...filterValue, date: val })}
 				options={options}
-			/>
+			/> */}
 		</div>
 	);
 }
