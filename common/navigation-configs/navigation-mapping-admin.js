@@ -1177,7 +1177,7 @@ const navigationMappingAdmin = {
 				as            : '/revenue-desk/air',
 				type          : 'link',
 				main_apis     : ['list_shipments'],
-				possible_apis : apis.revenue_desk,
+				possible_apis : [...apis.shipment, ...apis.air_revenue_desk],
 
 			},
 			{
@@ -1781,6 +1781,16 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
 		possible_apis : apis.awb_inventory,
+		module_type   : 'dashboards',
+	},
+	ground_ops: {
+		key           : 'ground_ops',
+		title         : 'Ground Ops Dashboard',
+		href          : '/ground-ops',
+		as            : '/ground-ops',
+		main_apis     : [],
+		icon          : IcMInvoiceApprovals,
+		possible_apis : apis.ground_ops,
 		module_type   : 'dashboards',
 	},
 
