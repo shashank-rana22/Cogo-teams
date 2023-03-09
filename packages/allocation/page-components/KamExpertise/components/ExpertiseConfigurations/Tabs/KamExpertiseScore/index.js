@@ -9,6 +9,7 @@ import getControls from '../../../../configurations/get-add-conditions-controls'
 import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mapping';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
 import EXPERTISE_CARDS_MAPPING from '../../../../constants/expertise-cards-mapping';
+import useGetKamExpertiseScore from '../../../../hooks/useGetKamExpertiseScore';
 
 import ExpertiseParameters from './ExpertiseParameters';
 import Header from './Header';
@@ -64,6 +65,10 @@ function KamExpertiseScoreConfig() {
 			}],
 		},
 	});
+
+	const { data, loading } = useGetKamExpertiseScore();
+
+	console.log('data', data);
 
 	const expertiseType = startCase(addConditionModal.type || '');
 

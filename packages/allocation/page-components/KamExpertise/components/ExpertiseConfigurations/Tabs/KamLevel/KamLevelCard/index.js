@@ -16,15 +16,22 @@ function KamLevelCard({
 	refetch = () => {},
 	setTitle = () => {},
 }) {
-	const [showEditBtn, setshowEditBtn] = useState(true);
 	const {
 		transition_level = '',
 		expertise_details = [],
 	} = data;
-	const expertiseObject = expertise_details.map((item) => item);
-	// isEmpty(title) ? (setshowEditBtn(false)) : (setshowEditBtn(true));
+	// console.log('tr level', transition_level);
+	const [showEditBtn, setshowEditBtn] = useState(true);
 
-	const { onSave } = useUpdateKamScores({ refetch, setAction, setTitle, setshowEditBtn });
+	const { onSave } = useUpdateKamScores({
+		transition_level,
+		refetch,
+		setTitle,
+		setAction,
+		setshowEditBtn,
+	});
+	// const { handleSubmit } = formProps;
+	const expertiseObject = expertise_details.map((item) => item);
 
 	const COLUMN_MAPPING = [
 		{
