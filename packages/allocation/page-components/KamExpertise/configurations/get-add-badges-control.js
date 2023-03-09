@@ -14,10 +14,8 @@ const controls = [
 		label       : 'Condition',
 		placeholder : 'Select Events',
 		type        : 'select',
-		options     : [
-			{ value: 'Dummy_Value', label: 'Dummy_Value' },
-		],
-		rules: {
+		options     : [],
+		rules       : {
 			required: 'Specify Condition',
 		},
 	},

@@ -72,8 +72,8 @@ function BadgeCard({ data, badgeListData = {}, medal = '', isLast = {}, listRefe
 					className={styles.modal_class}
 				>
 					<form onSubmit={handleSubmit(onSave)}>
-						<Modal.Body>
-							<div style={{ padding: '10px' }}>
+						<Modal.Body className={styles.modal_body}>
+							<div style={{ padding: '10px', margin: '10px' }}>
 								<GetCard
 									data={badgeData}
 									badgeListData={badgeListData}

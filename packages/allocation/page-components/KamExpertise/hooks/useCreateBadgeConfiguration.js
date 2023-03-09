@@ -36,6 +36,7 @@ function useCreateBadgeConfiguration(props) {
 
 		const {
 			badge,
+			condition,
 			description,
 			Bronze_value,
 			Bronze_img_value,
@@ -47,11 +48,11 @@ function useCreateBadgeConfiguration(props) {
 
 		try {
 			const payload = {
-				version_id    : '1',
-				badge_name    : badge,
+				version_id             : '1',
+				badge_name             : badge,
 				description,
-				// event_configuration_id : payload_data.event_configuration_id,
-				badge_details : [
+				event_configuration_id : condition,
+				badge_details          : [
 					{
 						score     : Bronze_value,
 						image_url : Bronze_img_value || badgeDetails?.[0]?.image_url,
@@ -78,7 +79,6 @@ function useCreateBadgeConfiguration(props) {
 
 			await trigger({ data: payload });
 
-			// refetch
 			onClose();
 
 			Toast.success('Badge Created!');
