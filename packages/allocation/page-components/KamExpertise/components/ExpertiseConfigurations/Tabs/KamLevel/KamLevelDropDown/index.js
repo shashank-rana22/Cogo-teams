@@ -1,8 +1,8 @@
 import { Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import useKamExpertiseLevelConfig from '../../../../../hooks/useKamExpertiseLevelConfig';
-// import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
+import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
 
 import KamLevelDetailsEdit from './KamLevelDetailsEdit';
 import KamLevelDetailsShow from './KamLevelDetailsShow';
@@ -10,7 +10,9 @@ import styles from './styles.module.css';
 
 function KamLevelDropDown({ editMode, title, setEditMode }) {
 	const { listkamLevelDetails } = useKamExpertiseLevelConfig({ title });
-	// console.log('listkamLevelDetails', listkamLevelDetails);
+	const transition_level = listkamLevelDetails.list?.['Commodity Expertise']?.[0].transition_level;
+	const { formProps, onSave } = useUpdateKamScores({ transition_level });
+	const { control, handleSubmit } = formProps;
 	return (
 		<>
 			{!editMode ? (
@@ -31,10 +33,7 @@ function KamLevelDropDown({ editMode, title, setEditMode }) {
 
 					<Button
 						className={styles.delete_button}
-						onClick={(e) => {
-							e.stopPropagation();
-							// onSave();
-						}}
+						onClick={handleSubmit(onSave)}
 						type="submit"
 					>
 						{' '}
@@ -56,7 +55,7 @@ function KamLevelDropDown({ editMode, title, setEditMode }) {
 
 			<div className={styles.child}>
 				{editMode
-					? <KamLevelDetailsEdit data={listkamLevelDetails} />
+					? <KamLevelDetailsEdit data={listkamLevelDetails} control={control} />
 					: <KamLevelDetailsShow data={listkamLevelDetails} />}
 			</div>
 		</>
