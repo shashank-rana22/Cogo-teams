@@ -105,10 +105,12 @@ function MasteryListItem({ data, index, loading, setToggleScreen, setMasteryList
 					</div>
 				</div>
 
-				<div className={styles.rules}>
-					<div className={styles.rule_heading}>Rules</div>
-					<span>Mastery in</span>
-					{
+				<div className={styles.badge_icon_container}>
+
+					<div className={styles.rules}>
+						<div className={styles.rule_heading}>Rules</div>
+						<span>Mastery in</span>
+						{
                         data.medal_collection.map((item) => (
 	<span className={styles.pill}>
 		<Pill color="#edd7a9">{item}</Pill>
@@ -116,15 +118,16 @@ function MasteryListItem({ data, index, loading, setToggleScreen, setMasteryList
 	</span>
                         ))
                     }
-				</div>
+					</div>
 
-				<div className={styles.badge}>
-					<img
-						height={140}
-						style={{ objectFit: 'contain' }}
-						src={data.badge_details[0].image_url}
-						alt="Mastery Modal"
-					/>
+					<div className={styles.badge}>
+						<img
+							height={140}
+							style={{ objectFit: 'contain' }}
+							src={data.badge_details[0].image_url}
+							alt="Mastery Modal"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

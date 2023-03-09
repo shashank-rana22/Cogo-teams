@@ -8,6 +8,9 @@
     margin-top: 28px;
     display: flex;
     justify-content: space-between;
+    @media (max-width: 576px) {
+        flex-direction: column;
+    }
 }
 .lower_background {
     margin-top: -20px;
@@ -20,6 +23,9 @@
     border-radius: 10px;
     justify-content: space-between;
     width: 100%;
+    @media (max-width: 576px) {
+        margin-top: 10px;
+    }
 }
 .text_area_container {
     justify-content: space-between;
@@ -85,4 +91,10 @@
 .text_styles {
     font-size: 12px;
     color: #333333;
+}
+
+.form_container {
+    @media (max-width: 576px) {
+        padding-bottom: 20px;
+    }
 }
