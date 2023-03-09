@@ -144,11 +144,40 @@ function asyncFieldsCampaignSegments() {
 		},
 	};
 }
+function asyncFieldsListOperators() {
+	return {
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_operators',
+		initialCall : true,
+		params      : {
+			filters    : { operator_type: 'airline', status: 'active' },
+			page_limit : 100,
+			sort_by    : 'short_name',
+			sort_type  : 'asc',
+		},
+	};
+}
+
 function asyncFieldsListAgents() {
 	return {
 		labelKey    : 'name',
 		valueKey    : 'agent_id',
 		endpoint    : 'list_chat_agents',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+			sort_by    : 'active_assigned_chats',
+			sort_type  : 'asc',
+		},
+	};
+}
+function asyncFieldListRateChargeCodes() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'code',
+		endpoint    : 'list_rate_charge_codes',
 		initialCall : true,
 		params      : {
 			filters    : { status: 'active' },
@@ -186,6 +215,8 @@ export {
 	asyncFieldsOrganization,
 	asyncFieldsOrganizationUsers,
 	asyncFieldsOperators,
+	asyncFieldsListOperators,
 	asyncFieldsListAgents,
+	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
 };
