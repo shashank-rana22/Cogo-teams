@@ -10534,11 +10534,6 @@ const partner = {
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'get_widget_data',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
 			api          : 'list_analytics_dashboard_widgets',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
@@ -10552,6 +10547,11 @@ const partner = {
 			api          : 'run_analytics_query',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	analytics_dashboard_management: [
