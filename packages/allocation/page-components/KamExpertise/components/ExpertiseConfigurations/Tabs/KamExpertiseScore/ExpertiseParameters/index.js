@@ -6,11 +6,11 @@ import dummyData from './dummyData';
 import styles from './styles.module.css';
 
 function ExpertiseParameters(props) {
-	const { expertiseData, onClickAddCondition } = props;
+	const { onClickAddCondition, name } = props;
 
 	const [editMode, setEditMode] = useState(false);
 
-	const { name = '' } = expertiseData;
+	// const { name = '' } = expertiseData;
 
 	const req = dummyData.find((element) => name in element);
 
