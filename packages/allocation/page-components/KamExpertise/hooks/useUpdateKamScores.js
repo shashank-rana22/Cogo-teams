@@ -5,7 +5,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
 function useUpdateKamScores(props) {
-	const { transition_level, refetch, setAction, setTitle, setshowEditBtn } = props;
+	const { transition_level, refetch, setEditMode, setTitle } = props;
 
 	const formProps = useForm();
 
@@ -112,9 +112,9 @@ function useUpdateKamScores(props) {
 				data: payload,
 			});
 
-			setAction('show');
+			setEditMode(false);
 			refetch();
-			setshowEditBtn(true);
+			// setshowEditBtn(true);
 			setTitle(0);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response.data));

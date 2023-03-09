@@ -7,30 +7,33 @@ import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
 
 import styles from './styles.module.css';
 
-function KamLevelCard({
-	title = '',
-	setAction = () => {},
-	data = {},
-	id = '',
-	dataLength = -1,
-	refetch = () => {},
-	setTitle = () => {},
-}) {
+function KamLevelCard(props) {
+	const {
+		title = '',
+		setEditMode = () => {},
+		editMode,
+		data = {},
+		id = '',
+		dataLength = -1,
+		refetch = () => {},
+		setTitle = () => {},
+	} = props;
+
 	const {
 		transition_level = '',
 		expertise_details = [],
 	} = data;
-	// console.log('tr level', transition_level);
-	const [showEditBtn, setshowEditBtn] = useState(true);
+
+	// const [showEditBtn, setshowEditBtn] = useState(true);
 
 	const { onSave } = useUpdateKamScores({
 		transition_level,
 		refetch,
 		setTitle,
-		setAction,
-		setshowEditBtn,
+		setEditMode,
+		// setshowEditBtn,
 	});
-	// const { handleSubmit } = formProps;
+
 	const expertiseObject = expertise_details.map((item) => item);
 
 	const COLUMN_MAPPING = [
@@ -65,7 +68,7 @@ function KamLevelCard({
 					<b>{transition_level}</b>
 				</div>
 				<div className={styles.button_container}>
-					{showEditBtn || isEmpty(title) ? (
+					{!editMode || isEmpty(title) ? (
 						<Button
 							themeType="secondary"
 							className={styles.delete_button}
@@ -73,8 +76,8 @@ function KamLevelCard({
 								if (title) {
 									e.stopPropagation();
 								}
-								setshowEditBtn(false);
-								setAction('edit');
+								// setshowEditBtn(false);
+								setEditMode(true);
 							}}
 						>
 							Edit
@@ -87,8 +90,8 @@ function KamLevelCard({
 								style={{ marginRight: '0' }}
 								onClick={(e) => {
 									e.stopPropagation();
-									setshowEditBtn(true);
-									setAction('show');
+									// setshowEditBtn(true);
+									setEditMode(false);
 								}}
 							>
 								Cancel

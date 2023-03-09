@@ -6,14 +6,14 @@ import KamLevelDetailsEdit from './KamLevelDetailsEdit';
 import KamLevelDetailsShow from './KamLevelDetailsShow';
 import styles from './styles.module.css';
 
-function KamLevelDropDown({ action = '', title }) {
+function KamLevelDropDown({ editMode, title }) {
 	const { listkamLevelDetails } = useKamExpertiseLevelConfig({ title });
-	console.log('listkamLevelDetails', listkamLevelDetails);
+	// console.log('listkamLevelDetails', listkamLevelDetails);
 	return (
 		<div className={styles.child}>
-			{action === 'show'
-				? <KamLevelDetailsShow data={listkamLevelDetails} />
-				: <KamLevelDetailsEdit data={listkamLevelDetails} />}
+			{editMode
+				? <KamLevelDetailsEdit data={listkamLevelDetails} />
+				: <KamLevelDetailsShow data={listkamLevelDetails} />}
 		</div>
 	);
 }
