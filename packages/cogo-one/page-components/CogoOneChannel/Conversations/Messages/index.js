@@ -32,8 +32,10 @@ function Messages({
 	const [uploading, setUploading] = useState({});
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
-
+	const closeModal = () => setOpenModal({ type: null, data: {} });
 	let activeChatCollection;
+
+	const [disableButton, setDisableButton] = useState('');
 
 	const {
 		id = '',
@@ -46,7 +48,7 @@ function Messages({
 	const {
 		sendCommunicationTemplate,
 		loading: communicationLoading,
-	} = useSendCommunicationTemplate({ formattedData, setOpenModal });
+	} = useSendCommunicationTemplate({ formattedData, callbackfunc: closeModal, isOtherChannels: false });
 
 	const hasPermissionToEdit = !showBotMessages && (userId === support_agent_id || isomniChannelAdmin);
 
@@ -70,8 +72,6 @@ function Messages({
 		);
 	}
 
-	const closeModal = () => setOpenModal({ type: null, data: {} });
-
 	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions } = useSendChat({
 		firestore,
 		channel_type,
@@ -91,6 +91,7 @@ function Messages({
 		closeModal,
 		activeMessageCard,
 		formattedData,
+		setDisableButton,
 	});
 
 	const {
@@ -134,6 +135,9 @@ function Messages({
 					support_agent_id={support_agent_id}
 					showBotMessages={showBotMessages}
 					userId={userId}
+					isomniChannelAdmin={isomniChannelAdmin}
+					setDisableButton={setDisableButton}
+					disableButton={disableButton}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
@@ -156,6 +160,7 @@ function Messages({
 						loadingPrevMessages={loadingPrevMessages}
 						sendCommunicationTemplate={sendCommunicationTemplate}
 						communicationLoading={communicationLoading}
+						closeModal={closeModal}
 					/>
 				</div>
 			</div>

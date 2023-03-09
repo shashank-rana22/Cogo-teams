@@ -37,7 +37,7 @@ function FilterPopover({ filters, setFilters }) {
 					setShowFilter(!showFilter);
 				}}
 			>
-				<div className={styles.filterText}>
+				<div className={styles.filter_text}>
 					{!isEmpty(filters) ? <div className={styles.dot} /> : null}
 					Filter By
 				</div>

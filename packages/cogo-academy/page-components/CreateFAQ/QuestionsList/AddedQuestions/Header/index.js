@@ -31,7 +31,7 @@ function Header({
 				</div>
 			</div>
 
-			<div className={styles.tabGroup}>
+			<div className={styles.tab_group}>
 				<Tabs
 					activeTab={activeList}
 					themeType="primary"

@@ -25,6 +25,7 @@ function MessageList({
 	setActiveMessage,
 	setActiveCardId = () => {},
 	showBotMessages = false,
+	setShowBotMessages = () => {},
 }) {
 	function getShowChat({ user_name }) {
 		if (searchValue) {
@@ -39,6 +40,15 @@ function MessageList({
 		return <LoadingState />;
 	}
 
+	function lastMessagePreview(previewData = '') {
+		return (
+			<div
+				className={styles.content}
+				dangerouslySetInnerHTML={{ __html: previewData }}
+			/>
+		);
+	}
+
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -51,11 +61,10 @@ function MessageList({
 						onChange={(val) => setSearchValue(val)}
 					/>
 				</div>
-				{!showBotMessages && (
-					<div className={styles.filter_icon}>
-						<Popover
-							placement="right"
-							render={(
+				<div className={styles.filter_icon}>
+					<Popover
+						placement="right"
+						render={(
 							filterVisible && (
 								<FilterComponents
 									setFilterVisible={setFilterVisible}
@@ -63,20 +72,21 @@ function MessageList({
 									appliedFilters={appliedFilters}
 									setAppliedFilters={setAppliedFilters}
 									setActiveCardId={setActiveCardId}
+									setShowBotMessages={setShowBotMessages}
+									showBotMessages={showBotMessages}
 								/>
 							)
-							)}
-							visible={filterVisible}
-							onClickOutside={() => setFilterVisible(false)}
-						>
-							<IcMFilter
-								onClick={() => setFilterVisible((prev) => !prev)}
-								className={styles.filter_icon}
-							/>
-						</Popover>
-						{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
-					</div>
-				)}
+						)}
+						visible={filterVisible}
+						onClickOutside={() => setFilterVisible(false)}
+					>
+						<IcMFilter
+							onClick={() => setFilterVisible((prev) => !prev)}
+							className={styles.filter_icon}
+						/>
+					</Popover>
+					{(!isEmpty(appliedFilters) || showBotMessages) && <div className={styles.filters_applied} />}
+				</div>
 			</div>
 
 			{ isEmpty(messagesList) ? (
@@ -100,7 +110,7 @@ function MessageList({
 						const checkActiveCard = activeCardId === item?.id;
 
 						const showOrganization = () => {
-							if (['public_website', 'public_cp', 'public_app'].includes(user_type)) {
+							if ((user_name?.toLowerCase() || '').includes('anonymous')) {
 								return startCase(PLATFORM_MAPPING[user_type] || '');
 							}
 							return startCase(organization_name);
@@ -127,9 +137,9 @@ function MessageList({
 													imageSource={item.image}
 												/>
 												<div className={styles.user_details}>
-													<Tooltip content={startCase(user_name)} placement="top">
+													<Tooltip content={startCase(user_name) || 'User'} placement="top">
 														<div className={styles.user_name}>
-															{startCase(user_name)}
+															{startCase(user_name) || 'User'}
 														</div>
 													</Tooltip>
 
@@ -164,10 +174,7 @@ function MessageList({
 										</div>
 
 										<div className={styles.content_div}>
-											<div className={styles.content}>
-												{item.last_message}
-											</div>
-
+											{lastMessagePreview(item?.last_message || '')}
 											{item.new_message_count > 0 && (
 												<div className={styles.new_message_count}>
 													{item.new_message_count > 100 ? '99+' : (

@@ -13,6 +13,7 @@ function useListFaqTags({ searchTagsInput = '' }) {
 
 	useEffect(() => {
 		debounceQuery(searchTagsInput);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchTagsInput]);
 
 	const fetchFaqTag = async () => {

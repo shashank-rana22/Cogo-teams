@@ -1,0 +1,43 @@
+.table_container {
+	padding: 0;
+	margin-top: 16px;
+	overflow-x: scroll;
+	border-radius: 8px;
+
+	:global {
+		.ui_table_head_container {
+			height: 60px;
+		}
+
+		.ui_table_body_row {
+			height: 50px;
+		}
+	}
+}
+
+.table {
+	background: #fff;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.details_button {
+	font-size: 11px;
+	font-weight: 600;
+	text-decoration: underline;
+	background: #fff;
+	border: 0;
+}
+
+.empty_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px;
+	margin-top: 8px;
+	background: #fff;
+	border-radius: 5px;
+}

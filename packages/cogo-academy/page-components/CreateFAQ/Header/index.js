@@ -32,7 +32,7 @@ function Header() {
 		<div className={styles.container}>
 			<div>Manage FAQs</div>
 
-			<div className={styles.buttonContainer}>
+			<div className={styles.button_container}>
 				<Button themeType="secondary" onClick={onClickConfiguration}>
 					Configuration
 				</Button>

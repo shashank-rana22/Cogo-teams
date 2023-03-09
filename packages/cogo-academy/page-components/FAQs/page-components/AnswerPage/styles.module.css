@@ -1,7 +1,6 @@
 .content {
 	border: 1px solid rgb(128 123 123);
 	border-radius: 5px;
-	
 }
 
 .contentparent {
@@ -9,21 +8,22 @@
 	overflow: hidden;
 	transition: height ease 0.9s;
 }
+
 .questionheading {
-	color: #090808;
-	font-weight: 1000;
 	padding-bottom: 0.2%;
 	margin-top: 12px;
+	font-weight: 1000;
+	color: #090808;
 }
 
 .questionabstract {
-	font-weight: 1000;
-	font-size: 20px;
-	color: #221F20;
 	padding-bottom: 2%;
+	font-size: 20px;
+	font-weight: 1000;
+	color: #221f20;
 }
 
-.answer{
+.answer {
 	font-weight: 1000;
 }
 
@@ -38,10 +38,10 @@
 	}
 }
 
-.back{
-	cursor: pointer;
+.back {
 	display: flex;
 	align-items: center;
+	cursor: pointer;
 }
 
 .subtitle {
@@ -50,24 +50,20 @@
 	margin-bottom: 1.5%;
 	font-size: 13px;
 	font-weight: 1000;
-	
 }
 
 .subtitle_related_question {
 	margin-right: 1%;
-
 	font-size: 13px;
 	font-weight: 700;
-	
 }
 
-.arrow{
-	width: 28.33px;
-	height: 24.67px;
+.arrow {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
+	width: 28.33px;
+	height: 24.67px;
 }
 
 .sidetext {
@@ -88,7 +84,6 @@
 	overflow: auto;
 	opacity: 0.7;
 
-
 	@media (max-width: 768px) {
 		flex-flow: column wrap;
 		align-items: flex-start;
@@ -98,7 +93,6 @@
 			flex-wrap: wrap;
 			width: 100%;
 			margin-top: 20px;
-			
 		}
 	}
 }
@@ -115,41 +109,40 @@
 }
 
 .dislike_container {
-	margin-left:8px;
-	margin-top:4px;
-	cursor:pointer;
+	margin-top: 4px;
+	margin-left: 8px;
+	cursor: pointer;
 }
 
-.aftercheckbox{
+.aftercheckbox {
 	margin-top: 12px;
 	font-weight: 600;
 }
 
-.remark{
-	display:flex;
-	flex-direction:column;
-	flex-wrap: wrap;
-    align-content: space-around;
+.remark {
+	display: flex;
+	flex-flow: column wrap;
+	align-content: space-around;
 	margin-bottom: 16px;
 }
 
 .spinner {
-    padding: 20px;
-    margin-top: 12px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding: 20px;
+	margin-top: 12px;
 }
 
 .pills {
-	:global{
+	:global {
 		.ui_pill_container.ui_ps_size_sm {
 			padding: 3px 8px;
 			font-size: 10px;
-			background: white;
-			border: 1px solid #FFE4AF;
-			border-radius: 16px;
 			font-weight: 600;
+			background: white;
+			border: 1px solid #ffe4af;
+			border-radius: 16px;
 		}
 	}
 }
