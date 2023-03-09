@@ -94,6 +94,14 @@ function SupplierDetails({
 				<IcMDownload height={20} width={20} />
 			</div>
 		),
+		sidDetailsFunc: (item:any) => (
+			<div>
+				{' '}
+				SID -
+				{' '}
+				{item}
+			</div>
+		),
 	};
 
 	const getSupplierData = () => {
@@ -104,7 +112,7 @@ function SupplierDetails({
 				</div>
 			);
 		}
-		if (isEmpty([{ id: 'fnk' }])) {
+		if (isEmpty(historyData)) {
 			return <div>First Time</div>;
 		}
 		return (
@@ -112,6 +120,7 @@ function SupplierDetails({
 				config={config}
 				itemData={{ list: historyData }}
 				loading={loading}
+				functions={functions}
 			/>
 		);
 	};
@@ -243,6 +252,8 @@ function SupplierDetails({
 						>
 							<Modal.Header title="SUPPLIER HISTORY" />
 							<Modal.Body>
+								<div className={styles.details}>Last 10 SID Details</div>
+
 								{getSupplierData()}
 
 							</Modal.Body>
