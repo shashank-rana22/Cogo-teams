@@ -1,19 +1,37 @@
 import { Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateNewEvent from '../../../hooks/useCreateNewEvent';
+import useGetAllocationKamExpertiseRules from '../../../hooks/useGetAllocationKamExpertiseRules';
 
 import styles from './styles.module.css';
 
+const CONTROL_TYPE_MAPPING = {
+	string  : 'text',
+	integer : 'number',
+	select  : 'select',
+};
+
 function CreateNewEvent() {
 	const {
+		attributeList,
+		loading,
+		refetch,
+	} = useGetAllocationKamExpertiseRules();
+
+	const {
+		onSave,
+		formProps,
 		getAddRuleControls,
-		getAttributeRuleControls, formProps,
 	} = useCreateNewEvent();
 
 	const {
-		control, formState: { errors },
+		control,
+		handleSubmit,
+		formState: { errors },
+		watch,
 	} = formProps;
 
 	return (
@@ -75,11 +93,23 @@ function CreateNewEvent() {
 							<IcMInfo />
 						</div>
 
-						<section className={styles.row_container}>
-							{getAttributeRuleControls.map((controlItem, index) => {
-								const el = { ...controlItem };
+						{/* // Todo atleast one of them is required */}
 
-								const Element = getFieldController(el.type);
+						<section className={styles.row_container}>
+							{attributeList.map((controlItem, index) => {
+								const { name = '', parameters } = controlItem;
+								const { params_type, options = [] } = parameters || {};
+
+								const type = CONTROL_TYPE_MAPPING[params_type || ''];
+
+								const el = {
+									name,
+									label: startCase(name),
+									type,
+									...(type === 'select' && { options, isClearable: true }),
+								};
+
+								const Element = getFieldController(el?.type);
 
 								if (!Element) return null;
 
@@ -88,7 +118,7 @@ function CreateNewEvent() {
 										<span className={styles.label}>{el.label}</span>
 
 										<div
-											className={`${styles.input_group} 
+											className={`${styles.input_group}
 										${index < 3 ? styles.margin_bottom : ''}`}
 										>
 											<Element
@@ -123,6 +153,7 @@ function CreateNewEvent() {
 					<Button
 						size="md"
 						type="submit"
+						onClick={handleSubmit(onSave)}
 					>
 						Save
 					</Button>

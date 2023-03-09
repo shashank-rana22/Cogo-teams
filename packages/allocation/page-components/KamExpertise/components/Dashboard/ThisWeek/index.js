@@ -76,8 +76,6 @@ function ThisWeek() {
 	const { loading, kam_level_data, refetch } = useGetAllocationKamExpertiseStats();
 	// const [visible, setVisible] = useState(false);
 
-	console.log('kam_level_data', kam_level_data);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.cards}>

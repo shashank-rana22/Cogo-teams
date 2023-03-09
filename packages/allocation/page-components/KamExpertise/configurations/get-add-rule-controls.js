@@ -1,11 +1,14 @@
 const controls = [
 	{
-		name        : 'expertise',
+		name        : 'expertise_type',
 		label       : 'Select Expertise',
 		placeholder : '',
 		type        : 'select',
 		options     : [
-			{ value: 'customer', label: 'Customer' },
+			{ value: 'customer_expertise', label: 'Customer Expertise' },
+			{ value: 'trade_expertise', label: 'Trade Expertise' },
+			{ value: 'commodity_expertise', label: 'Commodity Expertise' },
+			{ value: 'miscellaneous', label: 'Miscellaneous' },
 		],
 		rules: {
 			required: 'Expertise is required',
@@ -13,7 +16,7 @@ const controls = [
 		isClearable: true,
 	},
 	{
-		name        : 'condition',
+		name        : 'condition_name',
 		label       : 'Condition Name',
 		placeholder : '',
 		type        : 'text',
@@ -22,12 +25,19 @@ const controls = [
 		},
 	},
 	{
-		name        : 'event_trigger',
+		name        : 'group_name',
+		label       : 'Group Name',
+		placeholder : '',
+		type        : 'text',
+	},
+	{
+		name        : 'event_state_on',
 		label       : 'Event Trigger',
 		placeholder : '',
 		type        : 'select',
 		options     : [
-			{ value: 'shipment_creation', label: 'Shipment Creation' },
+			{ value: 'in_progress', label: 'Shipment Creation' },
+			{ value: 'completed', label: 'Shipment Completed' },
 		],
 		rules: {
 			required: 'Event Trigger is required',
@@ -39,8 +49,9 @@ const controls = [
 		label       : 'Attribute',
 		placeholder : '',
 		type        : 'select',
-		options     : [
+		options     : [// Todo api will hit on the basis of select
 			{ value: 'account_attribute', label: 'Account Attribute' },
+			{ value: 'shipment_attribute', label: 'Shipment Attribute' },
 		],
 		rules: {
 			required: 'Expertise is required',
@@ -53,7 +64,7 @@ const controls = [
 		placeholder : '',
 		type        : 'text',
 		// rules       : {
-		// 	required: 'Specify reason',
+		// 	required: 'Specify description',
 		// },
 	},
 ];
