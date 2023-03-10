@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
+import useGetOmnichannelDocumentCount from '../../../hooks/useGetOmnichannelDocumentCount';
 import useListOrganizations from '../../../hooks/useListOrganizations';
 import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 
@@ -29,6 +30,13 @@ function ProfileDetails({
 		ORG_PAGE_URL = '',
 		disableQuickActions,
 	} = useListOrganizations({ orgId, activeCardId, activeTab });
+
+	const { data = {}, documentCount = () => {} } = useGetOmnichannelDocumentCount({
+		activeMessageCard,
+		activeVoiceCard,
+		activeTab,
+	});
+	console.log('data:', data);
 
 	return (
 		<div className={styles.profile_div}>
