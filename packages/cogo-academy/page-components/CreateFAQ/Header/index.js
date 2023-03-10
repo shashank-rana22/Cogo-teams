@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ setSwitchDashboard = () => {} }) {
+function Header() {
 	const router = useRouter();
 
 	const onClickConfiguration = () => {
@@ -33,9 +33,6 @@ function Header({ setSwitchDashboard = () => {} }) {
 			<div className={styles.header}>Manage FAQs</div>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => { setSwitchDashboard(false); }}>
-					Analytics
-				</Button>
 				<Button style={{ marginLeft: 8 }} themeType="secondary" onClick={onClickConfiguration}>
 					Configuration
 				</Button>

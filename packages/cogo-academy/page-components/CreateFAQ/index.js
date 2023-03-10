@@ -1,24 +1,15 @@
 import React, { useState } from 'react';
 
-import Analytics from './Analytics';
 import Header from './Header';
 import QuestionsList from './QuestionsList';
 
 function CreateFAQ() {
 	const [switchDashboard, setSwitchDashboard] = useState(true);
-	console.log(switchDashboard);
 	return (
 		<div>
-			{switchDashboard
-				? (
-					<>
-						<Header setSwitchDashboard={setSwitchDashboard} />
+			<Header setSwitchDashboard={setSwitchDashboard} />
 
-						<QuestionsList />
-					</>
-				)
-
-				: <Analytics setSwitchDashboard={setSwitchDashboard} />}
+			<QuestionsList />
 
 		</div>
 	);
