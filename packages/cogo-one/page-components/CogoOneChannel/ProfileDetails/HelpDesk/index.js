@@ -1,5 +1,5 @@
 import { Input, Pagination, Tooltip, Loader } from '@cogoport/components';
-import { IcMSearchlight, IcMFolder } from '@cogoport/icons-react';
+import { IcMCross, IcMSearchlight, IcMFolder } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
@@ -142,6 +142,14 @@ function HelpDesk() {
 				value={search}
 				onChange={(val) => setSearch(val)}
 				disabled={loading}
+				suffix={!isEmpty(search) && (
+					<IcMCross
+						className={styles.cross_icon}
+						onClick={() => {
+							setSearch('');
+						}}
+					/>
+				)}
 			/>
 			{renderQuestionList()}
 
