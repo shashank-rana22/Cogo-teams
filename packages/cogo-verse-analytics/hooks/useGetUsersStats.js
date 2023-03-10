@@ -8,7 +8,7 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
-import { firebaseConfig, firebase_auth_email, firebase_auth_password } from '../configurations/firebase-configs';
+import { firebaseConfig, firebaseAuthEmail, firebaseAuthPassword } from '../configurations/firebase-configs';
 
 function useGetUsersStats() {
 	const [userStats, setUserStats] = useState({ ai_chats: 0, kam_chats: 0 });
@@ -19,7 +19,7 @@ function useGetUsersStats() {
 
 	useEffect(() => {
 		const auth = getAuth();
-		signInWithEmailAndPassword(auth, firebase_auth_email, firebase_auth_password)
+		signInWithEmailAndPassword(auth, firebaseAuthEmail, firebaseAuthPassword)
 			.catch((error) => {
 				console.log(error.message);
 			});
