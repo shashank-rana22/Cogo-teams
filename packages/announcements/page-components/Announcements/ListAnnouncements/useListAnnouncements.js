@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 function useListAnnouncements() {
 	const [searchInput, setSearchInput] = useState('');
+	const [currentAnnouncement, setCurrentAnnouncement] = useState(null);
 	const [activeList, setActiveList] = useState('active');
 	const [page, setPage] = useState(1);
 
@@ -70,6 +71,8 @@ function useListAnnouncements() {
 		searchInput,
 		setSearchInput,
 		activeList,
+		currentAnnouncement,
+		setCurrentAnnouncement,
 		setActiveList,
 		questionListLoading: loading,
 	};

@@ -2,12 +2,27 @@ import React from 'react';
 
 import DisplayCard from './DisplayCard';
 import styles from './styles.module.css';
+import useGetSingleAnnouncement from './useGetSingleAnnouncement';
 
-function DisplayCards({ data = [] }) {
+function DisplayCards({ data = [], setCurrentAnnouncement = () => {}, currentAnnouncement = null }) {
+	const {
+		handleAnnouncementDetails = () => {},
+		refetch = () => {},
+		loading = false,
+		announcementDetails = {},
+	} = useGetSingleAnnouncement({ currentAnnouncement, setCurrentAnnouncement, listData: data });
+	console.log('details', announcementDetails);
 	return (
 		<div className={styles.container}>
-			{data.map((item) => (
-				<DisplayCard data={item} />
+			{data.map((item, index) => (
+				<DisplayCard
+					loading={loading}
+					refetch={refetch}
+					data={item}
+					index={index}
+					accordianData={announcementDetails}
+					handleAnnouncementDetails={handleAnnouncementDetails}
+				/>
 			))}
 		</div>
 	);

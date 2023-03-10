@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Accordion, Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
@@ -5,9 +6,15 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function DisplayCard({ data = {} }) {
-	console.log(data, 'dasdsf');
+function DisplayCard({
+	accordianData = {},
+	data = {},
+	index,
+	handleAnnouncementDetails = () => {},
+	refetch = () => {},
+	loading = false,
 
+}) {
 	const options = [
 		{ label: 'Title', value: data?.title },
 		{ label: 'Created At', value: format(data?.created_at, 'dd MMM yyyy hh:mm a') },
@@ -53,9 +60,16 @@ function DisplayCard({ data = {} }) {
 					))}
 				</div>
 			</div>
-			<Accordion type="card" title="Display Details" className={styles.accordian}>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-			</Accordion>
+			<div onClick={() => handleAnnouncementDetails(index)}>
+				<Accordion
+					type="card"
+					title="Display Details"
+					className={styles.accordian}
+				>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+				</Accordion>
+			</div>
+
 		</div>
 	);
 }

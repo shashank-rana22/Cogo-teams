@@ -31,7 +31,7 @@ function AddedAnnouncements(props) {
 	const { profile } = useSelector((reduxState) => reduxState);
 
 	const router = useRouter();
-	const { data, loading } = useListAnnouncements();
+	const { data, currentAnnouncement, setCurrentAnnouncement, loading } = useListAnnouncements();
 
 	const columns1 = [
 		{
@@ -125,12 +125,16 @@ function AddedAnnouncements(props) {
 				'/learning/faq/create/question',
 			);
 		};
-		console.log(data);
+		// console.log(data);
 		return (
 			<>
 				<div className={styles.table}>
 					{/* <StyledTable columns={columns1} data={data?.list} loading={loading} /> */}
-					<DisplayCards data={data?.list} />
+					<DisplayCards
+						data={data?.list}
+						currentAnnouncement={currentAnnouncement}
+						setCurrentAnnouncement={setCurrentAnnouncement}
+					/>
 				</div>
 
 				<div className={styles.pagination}>
