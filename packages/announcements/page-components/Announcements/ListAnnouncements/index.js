@@ -144,6 +144,7 @@ function AddedAnnouncements() {
 					{/* <StyledTable columns={columns1} data={data?.list} loading={loading} /> */}
 					<DisplayCards
 						data={data?.list}
+						activeTab={activeList}
 						currentAnnouncement={currentAnnouncement}
 						setCurrentAnnouncement={setCurrentAnnouncement}
 						deleteAnnouncement={deleteAnnouncement}

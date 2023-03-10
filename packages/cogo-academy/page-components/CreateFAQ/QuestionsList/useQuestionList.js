@@ -103,7 +103,6 @@ const addedQuestionsColumns = ({
 const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) => [
 	{
 		Header   : 'QUESTIONS',
-		 CREATED BY',
 		accessor : (items) => (
 			<div>
 				{items?.created_by || '-'}

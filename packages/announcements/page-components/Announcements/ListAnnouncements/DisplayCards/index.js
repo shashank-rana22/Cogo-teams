@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 import useGetSingleAnnouncement from './useGetSingleAnnouncement';
 
 function DisplayCards({
+	activeTab = 'active',
 	data = [],
 	setCurrentAnnouncement = () => {},
 	currentAnnouncement = null,
@@ -21,6 +22,7 @@ function DisplayCards({
 		<div className={styles.container}>
 			{data.map((item, index) => (
 				<DisplayCard
+					activeTab={activeTab}
 					loading={loading}
 					refetch={refetch}
 					data={item}

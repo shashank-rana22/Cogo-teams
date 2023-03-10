@@ -9,6 +9,14 @@
 }
 
 .tab_group {
-	width: fit-content;
+	/* width: fit-content; */
+	width: 100%;
 	margin-top: 12px;
+
+	:global {
+		.ui_tab_list_container {
+			border-radius: 0 !important;
+			box-shadow: none !important;
+		}
+	}
 }

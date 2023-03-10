@@ -8,6 +8,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function DisplayCard({
+	activeTab = 'active',
 	accordianData = {},
 	data = {},
 	index,
@@ -60,12 +61,15 @@ function DisplayCard({
 										>
 											Edit
 										</Button>
-										<IcMDelete
-											height={20}
-											width={20}
-											style={{ cursor: 'pointer' }}
-											onClick={() => deleteAnnouncement(data?.id)}
-										/>
+										{activeTab === 'active' && (
+											<IcMDelete
+												height={20}
+												width={20}
+												style={{ cursor: 'pointer' }}
+												onClick={() => deleteAnnouncement(data?.id)}
+											/>
+										)}
+
 									</div>
 								)
 								: <div className={styles.value}>{i.value}</div>}
