@@ -1,9 +1,11 @@
 import { Button } from '@cogoport/components';
+import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ auditData }) {
+	const { name, updated_at } = auditData;
 	return (
 		<div className={styles.container}>
 			<div className={styles.config_basic_details}>
@@ -16,13 +18,15 @@ function Header() {
 
 				<div className={styles.lower_details}>
 					<div>
-						Last Modified: 31-02-23
+						Last Modified:
+						{' '}
+						{format(updated_at, 'dd-MM-YYYY')}
 					</div>
 
 					<div>
 						Last Edit By:
 						{' '}
-						<b>Cogoparth</b>
+						<b>{startCase(name)}</b>
 					</div>
 				</div>
 			</div>

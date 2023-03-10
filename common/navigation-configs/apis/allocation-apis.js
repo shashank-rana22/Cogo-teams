@@ -211,14 +211,12 @@ const allocation = {
 			access_type  : 'private',
 			feature      : 'kam_expertise',
 			service_name : 'allocation',
-
 		},
 		{
 			api          : 'get_allocation_kam_expertise_configuration_levels',
 			access_type  : 'private',
 			feature      : 'kam_expertise',
 			service_name : 'allocation',
-
 		},
 		{
 			api          : 'post_allocation_kam_expertise_mastery_badge_configuration',
@@ -227,7 +225,7 @@ const allocation = {
 			service_name : 'allocation',
 		},
 		{
-			api          : 'post_allocation_kam_expertise_bulk_configuration',
+			api          : 'post_allocation_kam_expertise_configuration_attributes',
 			access_type  : 'private',
 			feature      : 'kam_expertise',
 			service_name : 'allocation',
