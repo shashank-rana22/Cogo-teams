@@ -1,6 +1,8 @@
 import { Modal } from '@cogoport/components';
+import { IcMAttach } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import CustomFileUploader from '../../../../../common/CustomFileUploader';
 import Templates from '../../../../../common/Templates';
 import useSendCommunicationTemplate from '../../../../../hooks/useSendCommunicationTemplate';
 
@@ -77,6 +79,33 @@ function CommunicationModal({
 					</div>
 				)}
 			/>
+			{/* <CustomFileUploader
+				disabled={uploading?.[id]}
+				handleProgress={handleProgress}
+				showProgress={false}
+				draggable
+				className="file_uploader"
+				uploadIcon={(
+					<div className={styles.attach_docs}>
+						<IcMAttach />
+					</div>
+					<IcMAttach
+						className={styles.upload_icon}
+						style={{
+							cursor: !hasPermissionToEdit
+								? 'not-allowed'
+								: 'pointer',
+						}}
+					/>
+				)}
+				onChange={(val) => {
+					setDraftUploadedFiles((prev) => ({
+						...prev,
+						[id]: val,
+					}));
+				}}
+			/> */}
+
 			{ActiveModalComp && (
 				<ActiveModalComp
 					closeModal={closeModal}
