@@ -4,10 +4,10 @@ import { IcMArrowBack, IcMArrowRight } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import EmptyState from '../../../../../common/EmptyState';
 import useQuestionList from '../../../../../hooks/useQuestionList';
 
 import Answer from './Answer';
+import EmptySearchState from './EmptySearchState';
 import styles from './styles.module.css';
 
 function QuestionList({
@@ -103,9 +103,7 @@ function QuestionList({
 					) : null}
 				</>
 			) : (
-				<div className={styles.empty}>
-					<EmptyState type="help_desk" />
-				</div>
+				<EmptySearchState search={search} />
 			)}
 
 		</div>
