@@ -11,8 +11,10 @@
   "dependencies": {
     "@cogoport/access-management": "workspace:0.1.0",
     "@cogoport/allocation": "workspace:0.1.0",
+    "@cogoport/enrichment": "workspace:0.1.0",
     "@cogoport/authentication": "workspace:0.1.0",
     "@cogoport/business-finance": "workspace:0.1.0",
+    "@cogoport/ground-ops": "workspace:0.1.0",
     "@cogoport/cogo-academy": "workspace:0.1.0",
     "@cogoport/cogo-one": "workspace:0.1.1",
     "@cogoport/cogo-verse-analytics": "workspace:0.1.0",
