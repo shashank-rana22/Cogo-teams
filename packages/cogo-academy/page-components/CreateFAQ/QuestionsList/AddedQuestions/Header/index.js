@@ -34,12 +34,13 @@ function Header({
 				</div>
 				<div>
 					<Button
+						type="button"
 						themeType="secondary"
 						style={{ marginLeft: 8, height: '40px' }}
 						size="md"
 						onClick={() => setSortType(!sortType)}
 					>
-						Sort By Last Updated
+						{activeList === 'requested' ? 'Sort By Last Created' : 'Sort By Last Updated'}
 						{sortType ? <IcMArrowDoubleDown /> : <IcMArrowDoubleUp />}
 
 					</Button>

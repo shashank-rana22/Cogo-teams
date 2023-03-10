@@ -10,6 +10,7 @@
 	display: flex;
 	align-items: center;
 }
+
 .header {
 	margin-left: 2px;
 	font-weight: 600;
@@ -23,6 +24,7 @@
 	0% {
 		background-position: 0 0;
 	}
+
 	100% {
 		background-position: 100% 100%;
 	}
