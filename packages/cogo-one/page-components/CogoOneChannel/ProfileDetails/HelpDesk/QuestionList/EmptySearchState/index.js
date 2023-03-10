@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Input, Button } from '@cogoport/components';
 import { IcCFtick } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
@@ -62,6 +61,7 @@ function EmptySearchState({ search = '' }) {
 				</div>
 			) : (
 				<div
+					role="presentation"
 					className={styles.request_text}
 					onClick={() => setShow(true)}
 				>
