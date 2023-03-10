@@ -1,12 +1,9 @@
 import { Modal, Button } from '@cogoport/components';
 import { asyncFieldsAudiences } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-// import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useCreateAnnouncements from '../useCreateAnnouncement';
-
-// import useCreateAnnouncements from '../useCreateAnnouncement';
 
 import CreateAudienceForm from './CreateAudienceForm';
 import FieldArray from './FieldArray';
@@ -45,7 +42,6 @@ function AnnouncementForm() {
 				themeType="secondary"
 				size="sm"
 				className={styles.add_audience_button}
-				// onClick={onClickAddAudience}
 				onClick={() => setShowCreateAudience(true)}
 			>
 				+ADD
@@ -54,7 +50,6 @@ function AnnouncementForm() {
 	);
 	return (
 		<div className={styles.container}>
-			{/* <form onSubmit={}> */}
 			<div className={styles.form}>
 				{controls.map((controlItem) => {
 					const controlStyle = controlItem?.style;
@@ -98,9 +93,7 @@ function AnnouncementForm() {
 				</div>
 
 				<div>
-					{/* {console.log('hello', handleSubmit)} */}
 					<Button
-						// type="submit"
 						loading={loading}
 						themeType="primary"
 						size="md"
@@ -111,11 +104,10 @@ function AnnouncementForm() {
 				</div>
 			</div>
 
-			{/* </form> */}
 			<Modal
 				show={showPreview}
 				scroll={false}
-				size="xl"
+				size="lg"
 				placement="top"
 				onClose={() => setShowPreview(false)}
 			>

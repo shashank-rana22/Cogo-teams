@@ -7,7 +7,6 @@ import { useState } from 'react';
 import getFormControls from './controls/get-form-controls';
 
 const useCreateAnnouncements = () => {
-	// const { control, watch, handleSubmit, formState: { errors }, setValue } = useForm();
 	const { control, watch, handleSubmit, formState:{ errors }, setValue } = useForm();
 	const [showPreview, setShowPreview] = useState(false);
 	const [{ loading }, trigger] = useRequest({
@@ -17,7 +16,7 @@ const useCreateAnnouncements = () => {
 
 	const controls = getFormControls();
 
-	console.log('errors', errors);
+	// console.log('errors', errors);
 
 	const onSubmit = async (values) => {
 		if (!values) return;
@@ -81,10 +80,6 @@ const useCreateAnnouncements = () => {
 			Toast.error(error?.message || 'Something went wrong');
 		}
 	};
-
-	// const onSubmit = () => {
-	// 	console.log('lolkjnbjhvjb');
-	// };
 
 	return {
 		controls,

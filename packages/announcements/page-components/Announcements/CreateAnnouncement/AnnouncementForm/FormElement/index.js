@@ -13,12 +13,9 @@ import {
 
 import styles from './styles.module.css';
 
-// import ErrorMessage from '@/temp/components/error-message';
-
 function FormElement({ name, field, control, options, errors }) {
 	const finalFields = {
 		...field,
-		// options: renderOptions(),
 	};
 
 	return (

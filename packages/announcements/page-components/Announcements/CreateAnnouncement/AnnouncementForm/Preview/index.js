@@ -9,16 +9,16 @@ function Preview({ formValues = {} }) {
 	const scrollRefImages = useRef('');
 	const scrollRefVideos = useRef('');
 	const scrollHandlerRightImages = () => {
-		scrollRefImages.current.scrollLeft += 510;
+		scrollRefImages.current.scrollLeft += 341;
 	};
 	const scrollHandlerLeftImages = () => {
-		scrollRefImages.current.scrollLeft -= 510;
+		scrollRefImages.current.scrollLeft -= 341;
 	};
 	const scrollHandlerRightVideos = () => {
-		scrollRefVideos.current.scrollLeft += 510;
+		scrollRefVideos.current.scrollLeft += 341;
 	};
 	const scrollHandlerLeftVideos = () => {
-		scrollRefVideos.current.scrollLeft -= 510;
+		scrollRefVideos.current.scrollLeft -= 341;
 		// scrollRefVideos.current.scrollLeft -= 332;
 	};
 	const openDocument = (url) => {
@@ -56,8 +56,8 @@ function Preview({ formValues = {} }) {
 								{videos?.map((video) => (
 									<div className={styles.video_item}>
 										<iframe
-											width="502"
-											height="315"
+											width="333"
+											height="210"
 											src={video}
 											title="YouTube video player"
 											frameBorder="0"
