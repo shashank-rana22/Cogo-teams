@@ -45,11 +45,23 @@
 }
 
 .value_data {
-	margin: 20px 30px 20px 0;
+	margin: 20px 20px 20px 0;
+}
+
+.view {
+	color: green;
+	text-decoration: underline;
+	background-color: transparent;
 }
 
 .label_value {
 	font-size: 12px;
+}
+
+.view_flex {
+	display: flex;
+	gap: 4px;
+	align-items: center;
 }
 
 .date_value {
@@ -64,8 +76,8 @@
 
 .document_flex {
 	display: flex;
+	gap: 8px;
 	align-items: center;
-	text-align: center;
 }
 
 .remarks {
@@ -80,8 +92,22 @@
 	margin-left: 2px;
 }
 
+.wrapper {
+	width: 600px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
 .select_container {
 	margin: 4px 0 16px;
+
+	:global {
+		.ui_select_options_container {
+			max-height: 180px !important;
+		}
+	}
 }
 
 .button_container {

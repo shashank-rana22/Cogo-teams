@@ -1,0 +1,84 @@
+.title {
+	margin-bottom: 8px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.top_div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.copy_link {
+	font-size: 12px;
+	color: #034afd;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.content {
+	display: flex;
+	width: 100%;
+
+	:global {
+		.ui_avatar_container {
+			width: 18% !important;
+			height: 50px !important;
+			padding: 4px 6px !important;
+		}
+	}
+}
+
+.details {
+	display: flex;
+	flex-direction: column;
+	width: 77%;
+}
+
+.name {
+	width: 100%;
+	overflow: hidden;
+	font-size: 15px;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	text-transform: capitalize;
+	white-space: nowrap;
+}
+
+.email {
+	display: flex;
+	width: 100%;
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.conversation_title {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding-top: 30px;
+	margin-bottom: 11px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.verification_pills {
+	display: flex;
+	margin: 7px 4px 10px 0;
+}
+
+.pill_name {
+	font-size: 10px;
+	color: #221f20;
+}
+
+.user_div {
+	z-index: 1;
+	padding: 2px;
+	background: #fffce6;
+	border-radius: 10px;
+}

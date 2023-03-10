@@ -1,10 +1,10 @@
-import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
+import { global } from '../constants';
 import { FilterProps } from '../interface';
 
 interface Tab {
@@ -14,10 +14,12 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 	const { user_profile:userProfile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
+
 	const isSettlementExecutive = userProfile.partner.user_role_ids.includes(
 		global.PROD_SETTLEMENT_EXECUTIVE,
 
 	);
+
 	const [filters, setFilters] = useState<FilterProps>({
 		page        : 1,
 		pageLimit   : 10,
@@ -87,7 +89,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 				},
 			});
 		} catch (err) {
-			Toast.error(err);
+			console.log(err);
 		}
 	};
 

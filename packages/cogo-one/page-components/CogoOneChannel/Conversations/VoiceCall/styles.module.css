@@ -1,0 +1,32 @@
+.container {
+	width: 100%;
+	margin-right: 10px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.message_container {
+	width: 100%;
+	height: calc(100% - 104px);
+	overflow-y: scroll;
+	background: #f9f9f9;
+}
+
+.message_container::-webkit-scrollbar {
+	display: none;
+}
+
+.loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: fit-content;
+	margin-top: 10px;
+	background: transparent;
+
+	img {
+		width: 18px;
+		height: 18px;
+	}
+}
