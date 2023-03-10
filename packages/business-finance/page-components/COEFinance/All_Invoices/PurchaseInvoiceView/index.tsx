@@ -103,9 +103,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 					setFilters((p: GenericObject) => ({ ...p, pageIndex: pageValue }));
 				}}
 				subActiveTab={subActiveTab}
-				showPagination={false}
-				width="1800px"
-				scrollable
+				showPagination
 			/>
 		</div>
 	);
