@@ -68,6 +68,8 @@ function KamExpertiseScoreConfig() {
 
 	const { data, loading } = useGetKamExpertiseScore();
 
+	const { list = [], audit_data: auditData = {} } = data || {};
+
 	console.log('data', data);
 
 	const expertiseType = startCase(addConditionModal.type || '');
@@ -86,7 +88,7 @@ function KamExpertiseScoreConfig() {
 			key,
 			title    : titleSection(value),
 			children : <ExpertiseParameters
-				expertiseData={value}
+				name={value.name}
 				onClickAddCondition={() => setAddConditionModal({ type: value?.name })}
 			/>,
 
@@ -96,7 +98,7 @@ function KamExpertiseScoreConfig() {
 	return (
 		<>
 			<div className={styles.container}>
-				<Header />
+				<Header auditData={auditData} />
 			</div>
 
 			<div className={styles.expertise_cards_container}>

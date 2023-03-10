@@ -27,8 +27,8 @@ const useFilterPopover = ({ setFilters }) => {
 
 	const onSubmit = (values) => {
 		setFilters({
-			tag_id   : values?.tag,
-			topic_id : values?.topic,
+			faq_tag_id   : values?.tag,
+			faq_topic_id : values?.topic,
 		});
 
 		setShowFilter(false);

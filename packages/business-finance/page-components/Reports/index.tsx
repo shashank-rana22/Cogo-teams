@@ -69,6 +69,7 @@ function Reports() {
 					<div className={styles.title}>Select Date Range*</div>
 					<div className={styles.date}>
 						<SingleDateRange
+							isPreviousDaysAllowed
 							placeholder="Enter Date Range"
 							dateFormat="yyyy-MM-dd"
 							name="date"

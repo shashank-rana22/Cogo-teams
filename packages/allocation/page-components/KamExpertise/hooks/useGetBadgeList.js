@@ -14,7 +14,7 @@ function useGetBadgeList() {
 	});
 
 	const [{ loading, data = {} }, refetch] = useAllocationRequest({
-		url     : '/allocation/kam_expertise_badge_configuration_list',
+		url     : '/kam_expertise_badge_configuration_list',
 		method  : 'get',
 		authkey : 'get_allocation_kam_expertise_badge_configuration_list',
 		params,
