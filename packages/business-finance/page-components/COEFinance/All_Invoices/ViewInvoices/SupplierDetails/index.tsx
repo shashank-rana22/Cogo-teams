@@ -245,6 +245,7 @@ function SupplierDetails({
 						caret
 						visible={showModal}
 						render={getSupplierData()}
+						onClickOutside={() => { setShowModal(false); }}
 					>
 						<div
 							className={styles.supplier_history}
