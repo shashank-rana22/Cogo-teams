@@ -1,0 +1,14 @@
+.container {
+	display: flex;
+	margin-top: 20px;
+}
+
+.search {
+	width: 80%;
+	margin-right: 12px;
+}
+
+.tab_group {
+	width: fit-content;
+	margin-top: 12px;
+}
