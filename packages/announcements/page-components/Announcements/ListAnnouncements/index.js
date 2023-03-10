@@ -1,7 +1,8 @@
-import { Button, Pagination } from '@cogoport/components';
+import { Pill, Button, Pagination } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
+import { useSelector } from '@cogoport/store';
+import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../commons/EmptyState';
@@ -9,13 +10,13 @@ import StyledTable from '../../../commons/StyledTable';
 
 import Header from './Header';
 import styles from './styles.module.css';
+import useListAnnouncements from './useListAnnouncements';
 
-function AddedQuestions(props) {
+function AddedAnnouncements(props) {
 	const {
 		page,
 		setPage,
 		paginationData,
-		data,
 		columns,
 		filters,
 		setFilters,
@@ -26,21 +27,74 @@ function AddedQuestions(props) {
 		AnnouncementListLoading,
 	} = props;
 
-	const router = useRouter();
-	const columns1 = [
-		{ Header: 'Description', accessor: 'description' },
-		{ Header: 'Tags', accessor: 'tags' },
-		{ Header: 'Topics', accessor: 'topics' },
-		{ Header: 'Last Edited', accessor: 'last_edited' },
-		{
-			Header   : 'Actions',
-			accessor : () => (
-				<div className={styles.action_container}>
+	const { profile } = useSelector((reduxState) => reduxState);
+	console.log('profile', profile);
 
+	const router = useRouter();
+	const { data, loading } = useListAnnouncements();
+	console.log(data);
+
+	const columns1 = [
+		{
+			Header   : 'Description',
+			accessor : (item) => (
+				<div>
+					{item.title}
+				</div>
+			),
+		},
+		{
+			Header   : 'Topics',
+			accessor : (items) => (items?.topics?.length > 0 ? (
+				<div className={styles.topics}>
+					{items.faq_topics.map((topic) => {
+						const { display_name } = topic || {};
+						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+					})}
+				</div>
+			) : '-'),
+		},
+		{
+			Header   : 'Tags',
+			accessor : (items) => (items?.tags?.length > 0 ? (
+				<div className={styles.tags}>
+					{items.faq_tags.map((tag) => {
+						const { display_name } = tag || {};
+						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+					})}
+				</div>
+			) : '-'),
+		},
+
+		{
+			Header   : 'Announcement Type',
+			accessor : (items) => (items?.announcement_type !== '' ? (
+				<div className={styles.question}>
+					{items?.announcement_type}
+				</div>
+			) : '-'),
+		},
+
+		{
+			Header   : 'Last Updated At',
+			accessor : (items) => {
+				const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
+				return (
+					<div>
+						{formatDate}
+					</div>
+				);
+			},
+		},
+		{
+			Header   : 'ACTIONS',
+			accessor : (items) => (
+				<div className={styles.button_container}>
 					<Button
 						themeType="primary"
 						size="sm"
 						style={{ marginRight: 8 }}
+						onClick={() => onClickViewButton(items?.id)}
 					>
 						VIEW
 					</Button>
@@ -48,14 +102,18 @@ function AddedQuestions(props) {
 						themeType="secondary"
 						size="sm"
 						style={{ marginRight: 8 }}
+						onClick={() => onClickEditButton(items?.id)}
 					>
 						EDIT
 					</Button>
-					<IcMDelete
-						height={20}
-						width={20}
-						style={{ cursor: 'pointer' }}
-					/>
+					{activeList !== 'inactive' ? (
+						<IcMDelete
+							height={20}
+							width={20}
+							style={{ cursor: 'pointer' }}
+							onClick={() => deactivateQuestion(items?.id)}
+						/>
+					) : null}
 				</div>
 			),
 		},
@@ -114,7 +172,7 @@ function AddedQuestions(props) {
 		return (
 			<>
 				<div className={styles.table}>
-					<StyledTable columns={columns1} data={data1} loading={AnnouncementListLoading} />
+					<StyledTable columns={columns1} data={data?.list} loading={loading} />
 				</div>
 
 				<div className={styles.pagination}>
@@ -146,4 +204,4 @@ function AddedQuestions(props) {
 	);
 }
 
-export default AddedQuestions;
+export default AddedAnnouncements;
