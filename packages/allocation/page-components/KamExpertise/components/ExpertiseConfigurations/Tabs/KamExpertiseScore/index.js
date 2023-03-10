@@ -3,14 +3,12 @@ import { useForm } from '@cogoport/forms';
 import { IcMAgentManagement } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
-
 import FieldArray from '../../../../../../common/Form/FieldArray';
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
 import getControls from '../../../../configurations/get-add-conditions-controls';
 import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mapping';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
 import useGetKamExpertiseScore from '../../../../hooks/useGetKamExpertiseScore';
-
 import ExpertiseParameters from './ExpertiseParameters';
 import Header from './Header';
 import styles from './styles.module.css';

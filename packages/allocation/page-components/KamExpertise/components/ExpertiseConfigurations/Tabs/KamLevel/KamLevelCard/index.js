@@ -1,6 +1,8 @@
 import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import useDeleteKamLevel from '../../../../../hooks/useDeleteKamLevel';
+
 import styles from './styles.module.css';
 
 function KamLevelCard(props) {
@@ -15,6 +17,8 @@ function KamLevelCard(props) {
 		transition_level = '',
 		expertise_details = [],
 	} = data;
+
+	const { onDelete } = useDeleteKamLevel();
 
 	const expertiseObject = expertise_details.map((item) => item);
 
@@ -55,6 +59,7 @@ function KamLevelCard(props) {
 						? (
 							<div className={styles.delete_button}>
 								<IcMDelete onClick={(event) => {
+									onDelete();
 									event.stopPropagation();
 								}}
 								/>
