@@ -29,15 +29,14 @@ const useGetSuggestedLocals = ({ section, data, formValues }) => {
 	}
 	const { fetchSystemData, systemData, loadingSystemRates } = useGetRmsRates({ service: { service } });
 	const body = {
-		port_id             : data?.data?.[`${type}_port_id`] || undefined,
-		airport_id          : data?.data?.[`${type}_airport_id`] || undefined,
-		shipping_line_id    : formValues?.shipping_line_id || undefined,
-		airline_id          : formValues?.airline_id || undefined,
-		container_size      : data?.data?.container_size || undefined,
-		container_type      : data?.data?.container_type || undefined,
-		commodity           : HAZ_CLASSES.includes(data?.data?.commodity) ? data?.data?.commodity : undefined,
-		trade_type          : type === 'origin' ? 'export' : 'import',
-		service_provider_id : formValues?.service_provider_id,
+		port_id          : data?.data?.[`${type}_port_id`] || undefined,
+		airport_id       : data?.data?.[`${type}_airport_id`] || undefined,
+		shipping_line_id : formValues?.shipping_line_id || undefined,
+		airline_id       : formValues?.airline_id || undefined,
+		container_size   : data?.data?.container_size || undefined,
+		container_type   : data?.data?.container_type || undefined,
+		commodity        : HAZ_CLASSES.includes(data?.data?.commodity) ? data?.data?.commodity : undefined,
+		trade_type       : type === 'origin' ? 'export' : 'import',
 		main_port_id:
 			type === 'origin'
 				? formValues?.origin_main_port_id || undefined
