@@ -51,3 +51,7 @@
 .label {
 	color: #828282;
 }
+
+.placeholder {
+	border-radius: 4px;
+}

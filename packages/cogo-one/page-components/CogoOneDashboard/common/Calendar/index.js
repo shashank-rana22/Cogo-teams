@@ -3,6 +3,7 @@ import { format } from '@cogoport/utils';
 import React, { useState, useEffect, useRef } from 'react';
 
 import { FORMAT_TYPE } from '../../configurations/dashboard';
+import useRenderCalender from '../../hooks/useRenderCalender';
 
 import { CalendarEntity } from './Entity';
 import styles from './styles.module.css';
@@ -22,27 +23,33 @@ function Calendar({ props }) {
 	const numberOfElements = 30;
 	const elementShift = 30;
 
-	const calcDate = (subtractDays) => {
-		const d = new Date();
-		d.setDate(d.getDate() - subtractDays);
-		return d;
-	};
+	const {
+		calcDate,
+		calcMonth,
+		calcWeek,
+	} = useRenderCalender();
 
-	const calcMonth = (subtractMonths) => {
-		const d = new Date();
-		d.setDate(1);
-		d.setMonth(d.getMonth() - subtractMonths);
-		return d;
-	};
+	// const calcDate = (subtractDays) => {
+	// 	const d = new Date();
+	// 	d.setDate(d.getDate() - subtractDays);
+	// 	return d;
+	// };
 
-	const calcWeek = (subtractWeeks) => {
-		const d = new Date();
-		if (d.getDay() !== 1) {
-			d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
-		}
-		d.setDate(d.getDate() - (subtractWeeks * 7));
-		return d;
-	};
+	// const calcMonth = (subtractMonths) => {
+	// 	const d = new Date();
+	// 	d.setDate(1);
+	// 	d.setMonth(d.getMonth() - subtractMonths);
+	// 	return d;
+	// };
+
+	// const calcWeek = (subtractWeeks) => {
+	// 	const d = new Date();
+	// 	if (d.getDay() !== 1) {
+	// 		d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+	// 	}
+	// 	d.setDate(d.getDate() - (subtractWeeks * 7));
+	// 	return d;
+	// };
 
 	const processData = (func) => {
 		const newData = [];

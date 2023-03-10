@@ -47,8 +47,8 @@ function AgentDashboard(props) {
 					<TotalChatsHandled loading={loading} totalCustomers={total_customers} />
 					<Improvement loading={loading} agentDelay={agent_delay} />
 					<div className={styles.satisfaction_intent_served_box}>
-						<Statisfaction customerSatisfaction={customer_satisfaction} />
-						<IntentServed intentsServed={intents_served} />
+						<Statisfaction customerSatisfaction={customer_satisfaction} loading={loading} />
+						<IntentServed intentsServed={intents_served} loading={loading} />
 					</div>
 					<div className={styles.two_characterisctics_container}>
 						<ChatStatistics

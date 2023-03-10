@@ -26,6 +26,7 @@
 .icon_plus_number {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 
 .customers_numbers {
@@ -59,4 +60,9 @@
 
 .label {
 	color: #828282;
+}
+
+.placeholder {
+	margin-left: 5px;
+	border-radius: 4px;
 }
