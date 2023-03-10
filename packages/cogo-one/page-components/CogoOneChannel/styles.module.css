@@ -17,9 +17,10 @@
 	right: 0;
 	bottom: 0;
 	z-index: 10;
-	width: 100px;
-	height: 100px;
+	width: 75px;
+	height: 75px;
 	margin-right: -33px;
+	cursor: pointer;
 	background: #fcdc00;
 	border-radius: 100% 0 0;
 }
@@ -33,13 +34,13 @@
 }
 
 .bot_icon_styles {
-	width: 23px;
+	width: 15px;
 	margin: 20px 10px 0 0;
 }
 
 .text_styles {
-	margin-top: 10px;
-	font-size: 12px;
+	margin-top: 5px;
+	font-size: 10px;
 	font-weight: 600;
 	line-height: 15px;
 	text-align: right;
@@ -51,8 +52,6 @@
 }
 
 .download_icon {
-	width: 15px;
 	height: 15px;
 	margin-right: 5px;
-	cursor: pointer;
 }

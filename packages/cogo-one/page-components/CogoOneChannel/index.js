@@ -164,8 +164,15 @@ function CogoOne() {
 			<div className={styles.chat_details_continer}>
 				{renderComponent()}
 			</div>
-			<div className={styles.download_apk}>
-				<div className={styles.download_div}>
+			<div
+				className={styles.download_apk}
+			>
+				<div
+					role="presentation"
+					className={styles.download_div}
+					// eslint-disable-next-line no-undef
+					onClick={() => window.open(ANDRIOD_APK, '_blank')}
+				>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg"
 						alt="bot"
@@ -176,15 +183,12 @@ function CogoOne() {
 							<IcMDownload
 								fill="#EE3425"
 								className={styles.download_icon}
-								// eslint-disable-next-line no-undef
-								onClick={() => window.open(ANDRIOD_APK, '_blank')}
 							/>
 							<div>Get the</div>
 						</div>
 						app now
 					</div>
 				</div>
-
 			</div>
 			{showDialModal && (
 				<DialCallModal
