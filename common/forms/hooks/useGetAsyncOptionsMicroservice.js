@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import useDebounceQuery from './useDebounceQuery';
 
 const REQUEST_HOOK_MAPPING = {
-	business_fincance : useRequestBf,
-	allocation        : useAllocationRequest,
+	business_finance : useRequestBf,
+	allocation       : useAllocationRequest,
 };
 
 function useGetAsyncOptionsMicroservice({
