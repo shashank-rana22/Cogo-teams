@@ -2,12 +2,13 @@ import { Pill, Button, Pagination } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { format, startCase, isEmpty } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
-import EmptyState from '../../../commons/EmptyState';
-import StyledTable from '../../../commons/StyledTable';
+// import EmptyState from '../../../commons/EmptyState';
+// import StyledTable from '../../../commons/StyledTable';
 
+import DisplayCards from './DisplayCards';
 import Header from './Header';
 import styles from './styles.module.css';
 import useListAnnouncements from './useListAnnouncements';
@@ -28,11 +29,9 @@ function AddedAnnouncements(props) {
 	} = props;
 
 	const { profile } = useSelector((reduxState) => reduxState);
-	console.log('profile', profile);
 
 	const router = useRouter();
 	const { data, loading } = useListAnnouncements();
-	console.log(data);
 
 	const columns1 = [
 		{
@@ -118,32 +117,6 @@ function AddedAnnouncements(props) {
 			),
 		},
 	];
-	const data1 = [
-		{
-			description : 'tanner',
-			tags        : 'linsley',
-			topics      : 'nfjre',
-			last_edited : 'ejnrfrj',
-			Actions     : 'fer',
-
-		},
-		{
-			description : 'tanner',
-			tags        : 'linsley',
-			topics      : 'nfjre',
-			last_edited : 'ejnrfrj',
-			Actions     : 'fer',
-
-		},
-		{
-			description : 'tanner',
-			tags        : 'linsley',
-			topics      : 'nfjre',
-			last_edited : 'ejnrfrj',
-			Actions     : 'fer',
-
-		},
-	];
 
 	const renderTable = () => {
 		const onClick = () => {
@@ -152,27 +125,12 @@ function AddedAnnouncements(props) {
 				'/learning/faq/create/question',
 			);
 		};
-
-		// if (!AnnouncementListLoading && isEmpty(data)) {
-		// 	if (activeList === 'active') {
-		// 		return (
-		// 			<EmptyState
-		// 				text="There are no announcements right now. Start with adding a announcement."
-		// 				btn_text="Add Announcement"
-		// 				onClick={onClick}
-		// 			/>
-		// 		);
-		// 	}
-		// 	return (
-		// 		<EmptyState
-		// 			text="There are no inactive announcements right now."
-		// 		/>
-		// 	);
-		// }
+		console.log(data);
 		return (
 			<>
 				<div className={styles.table}>
-					<StyledTable columns={columns1} data={data?.list} loading={loading} />
+					{/* <StyledTable columns={columns1} data={data?.list} loading={loading} /> */}
+					<DisplayCards data={data?.list} />
 				</div>
 
 				<div className={styles.pagination}>

@@ -20,6 +20,8 @@ function useListAnnouncements() {
 		url    : '/list_announcement',
 	}, { manual: true });
 
+	const [{ error }, updateTrigger] = useRequest({ url: '/update_announcement', method: 'post' }, { manual: true });
+
 	const roleFunction = !isEmpty(role_functions) ? role_functions : undefined;
 	const roleSubFunction = !isEmpty(role_sub_functions) ? role_sub_functions : undefined;
 
@@ -47,6 +49,15 @@ function useListAnnouncements() {
 		} catch (err) {
 			console.log(err);
 		}
+	};
+
+	const deactivateQuestion = async (id) => {
+		try {
+			await updateTrigger(
+				{ data: { id, status: 'inactive' } },
+			);
+			getAnnouncementList();
+		} catch { console.log('Error', error); }
 	};
 	useEffect(() => {
 		getAnnouncementList();
