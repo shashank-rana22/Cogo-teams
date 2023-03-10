@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Input, Pagination, Tooltip, Loader } from '@cogoport/components';
 import { IcMSearchlight, IcMFolder } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -67,6 +66,7 @@ function HelpDesk() {
 				<div className={styles.display_topics}>
 					{(list || []).map((item) => (
 						<div
+							role="presentation"
 							className={styles.square_div}
 							onClick={() => setTopic(item)}
 						>

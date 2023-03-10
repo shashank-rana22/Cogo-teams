@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Loader, Pagination } from '@cogoport/components';
 import { IcMArrowBack, IcMArrowRight } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
@@ -57,6 +56,7 @@ function QuestionList({
 					<div className={styles.list}>
 						{(list || []).map((item) => (
 							<div
+								role="presentation"
 								className={styles.question}
 								onClick={() => setQuestion(item)}
 							>
