@@ -10,89 +10,79 @@ function EventListItem({ data, index }) {
 	} = data;
 	console.log('data', data);
 	return (
-		<section key={id} className={styles.list_item_container}>
-			<div className={styles.top_div}>
+		<>
+
+			<section key={id} className={styles.list_item_container}>
+				<div className={styles.top_div}>
+					
+						
 				#
 				{index + 1}
 				<IcMEdit />
-				{/* <div className={styles.left_id} /> */}
-				{/* <div className={styles.top_right_div}>
-					<p>Last Modified : 31/September/2023</p>
-					<p>Last Modified By : Ankur Verma</p>
-				</div> */}
-			</div>
-			<div>
-				<div className={styles.info_tag}>
-					Expertise :
-					{' '}
-					<h4 style={{ marginLeft: 4 }}>{Type}</h4>
 				</div>
-				<div className={styles.info_tag}>
-					Event Name :
-					{' '}
-					<h4 style={{ marginLeft: 4 }}>{conditionName}</h4>
-				</div>
-				<div className={styles.info_tag}>
-					Description :
-					{' '}
-					{description}
+				<div>
+					<p className={styles.info_tag}>
+						Expertise :
+						{' '}
+						<b style={{ marginLeft: 4 }}>Customer Expertise</b>
+					</p>
+					<div className={styles.info_tag}>
+						Event Name :
+						{' '}
+						<h4 style={{ marginLeft: 4 }}>Re-Activation</h4>
+					</div>
+					<p className={styles.info_tag}>
+						Description : Converting a
+						churned customer → 4 months no transaction for now.
 
+					</p>
 				</div>
-			</div>
 
-			<div className={styles.rule}>
-				<div className={styles.rule_head}>
-					Rule
-				</div>
-				{rules.map((res, i) => {
-					console.log('res::', res);
-					return (
-						<div className={styles.rule_body}>
-							<div>
-								Rule #
+				<div className={styles.rule}>
+					<p className={styles.rule_head}>
+						Rule
+					</p>
+					{rules.map((res, i) => {
+					console.log('res::', res) 
+				return (
+					<div className={styles.rule_body}>
+					Rule #
 								{i + 1}
-							</div>
-							<div>
-								<Pill
-									key="Reactivation"
-									size="l"
-									color="blue"
-								>
-									{res?.name}
-								</Pill>
+						<Pill
+							key="Reactivation"
+							size="l"
+							color="blue"
+						>
+							Reactivation
+						</Pill>
 
-							</div>
-							<div>is triggered on</div>
-							<div>
-								{' '}
-								<Pill
-									key="Shipment_creation"
-									size="l"
-									color="#FEF3E9"
-								>
-									Shipment creation
-								</Pill>
+					
+					is triggered on
+						<Pill
+							key="Shipment_creation"
+							size="l"
+							color="#FEF3E9"
+						>
+							Shipment creation
+						</Pill>
 
-							</div>
-							<div>of</div>
-							<div>
-								<Pill
-									key="Account"
-									size="l"
-									color="#FEF3E9"
-								>
-									{res?.rule_type}
-								</Pill>
+					of
+						<Pill
+							key="Account"
+							size="l"
+							color="#FEF3E9"
+						>
+							Account
+						</Pill>
 
-							</div>
-							<div>having attribute</div>
-						</div>
-					);
-				})}
+					having attribute
+				</div>
+				)}
+					
 
 				<div className={styles.rule_end}>
-					<div>last booking date</div>
-					<div>
+					{' last booking date '}
+					
 						<Pill
 							key="Account"
 							size="l"
@@ -101,7 +91,6 @@ function EventListItem({ data, index }) {
 							{params}
 						</Pill>
 
-					</div>
 
 				</div>
 

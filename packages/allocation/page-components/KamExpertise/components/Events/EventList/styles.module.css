@@ -9,22 +9,9 @@
 .top_div {
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
-	padding-top: 16px;
+	padding: 16px 16px 0px 16px;
 }
 
-/* .top_right_div {
-	
-	width: 50%;
-	margin-right: 16px;
-} */
-
-.left_id {
-	width: 100%;
-	margin: 0 16px;
-	display: flex;
-	justify-content: space-between;
-}
 
 .info_tag {
 	display: flex;
@@ -34,7 +21,7 @@
 }
 
 .rule {
-	width: 55%;
+	max-width: 760px;
 	margin-left: 16px;
 }
 
