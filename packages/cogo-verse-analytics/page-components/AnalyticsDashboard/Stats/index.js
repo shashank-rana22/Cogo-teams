@@ -15,17 +15,14 @@ import PrimaryStats from './PrimaryStats';
 import styles from './styles.module.css';
 
 function Stats(props = {}) {
+	const { userStats = {}, getUserSats, firebaseLoading = false } = useGetUsersStats();
+
 	useEffect(() => {
 		const auth = getAuth();
 		signInWithEmailAndPassword(auth, firebaseAuthEmail, firebaseAuthPassword)
 			.catch((error) => {
 				console.log('firestore_auth_error:', error.message);
 			});
-	}, []);
-
-	const { userStats = {}, getUserSats, firebaseLoading = false } = useGetUsersStats();
-
-	useEffect(() => {
 		getUserSats();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
