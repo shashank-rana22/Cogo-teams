@@ -28,6 +28,7 @@ function FilterComponents({
 	setActiveCardId = () => {},
 	setShowBotMessages = () => {},
 	showBotMessages = false,
+	isomniChannelAdmin = false,
 }) {
 	const [botToggle, setBotToggle] = useState(false);
 
@@ -95,17 +96,19 @@ function FilterComponents({
 						) : null}
 				</div>
 			</div>
-			<div className={styles.styled_flex}>
-				<Checkbox
-					name="closed"
-					size="sm"
-					onChange={() => setBotToggle((p) => !p)}
-					checked={botToggle}
-				/>
-				<div>
-					Closed
+			{!isomniChannelAdmin && (
+				<div className={styles.styled_flex}>
+					<Checkbox
+						name="closed"
+						size="sm"
+						onChange={() => setBotToggle((p) => !p)}
+						checked={botToggle}
+					/>
+					<div>
+						Closed
+					</div>
 				</div>
-			</div>
+			)}
 
 			{filterControls.map((field) => (
 				<div className={cl`${styles.filter_container} ${botToggle ? styles.disabled : ''}`} key={field.name}>

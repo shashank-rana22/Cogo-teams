@@ -201,3 +201,5 @@ export const ACCOUNT_TYPE_MAPPING = {
 	importer_exporter : 'twin_importer_exporter_id',
 	service_provider  : 'twin_service_provider_id',
 };
+
+export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/prod_cogo_one.apk';

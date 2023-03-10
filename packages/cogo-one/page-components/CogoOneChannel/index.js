@@ -1,3 +1,4 @@
+import { IcMDownload } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -6,6 +7,7 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig, firebase_auth_email, firebase_auth_password } from '../../configurations/firebase-config';
+import { ANDRIOD_APK } from '../../constants';
 import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
@@ -161,6 +163,28 @@ function CogoOne() {
 
 			<div className={styles.chat_details_continer}>
 				{renderComponent()}
+			</div>
+			<div className={styles.download_apk}>
+				<div className={styles.download_div}>
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg"
+						alt="bot"
+						className={styles.bot_icon_styles}
+					/>
+					<div className={styles.text_styles}>
+						<div className={styles.flex}>
+							<IcMDownload
+								fill="#EE3425"
+								className={styles.download_icon}
+								// eslint-disable-next-line no-undef
+								onClick={() => window.open(ANDRIOD_APK, '_blank')}
+							/>
+							<div>Get the</div>
+						</div>
+						app now
+					</div>
+				</div>
+
 			</div>
 			{showDialModal && (
 				<DialCallModal
