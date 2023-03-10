@@ -1,7 +1,12 @@
+import Header from './Header';
+import Tabbase from './Tabbase';
+
 function Analytics() {
 	return (
 		<>
-			dkvcnedcjhc
+			<Header />
+
+			<Tabbase />
 		</>
 	);
 }
