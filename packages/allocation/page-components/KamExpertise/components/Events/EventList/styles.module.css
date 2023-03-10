@@ -1,7 +1,9 @@
 .list_item_container {
-	height: 240px;
+	height: auto;
 	background-color: #fff;
 	border-radius: 8px;
+	margin-bottom: 16px;
+	padding-bottom: 20px;
 }
 
 .top_div {
@@ -11,16 +13,17 @@
 	padding-top: 16px;
 }
 
-.top_right_div {
-	display: flex;
-	justify-content: space-between;
+/* .top_right_div {
+	
 	width: 50%;
 	margin-right: 16px;
-}
+} */
 
 .left_id {
-	width: 10%;
-	margin-left: 16px;
+	width: 100%;
+	margin: 0 16px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .info_tag {

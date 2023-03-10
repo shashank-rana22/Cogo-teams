@@ -1,7 +1,7 @@
 import { Button, Select } from '@cogoport/components';
 import { useState } from 'react';
 
-import SearchInput from '../../../../../../common/SearchInput';
+import SearchInput from '../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
@@ -38,9 +38,9 @@ function Header(props) {
 						size="md"
 						placeholder="Search"
                         // setGlobalSearch={setSearchValue}
-					    // debounceQuery={debounceQuery}
-				        // value={searchValue}
-				        // disabled={disabled}
+						// debounceQuery={debounceQuery}
+						// value={searchValue}
+						// disabled={disabled}
 						className={styles.search_bar}
 					/>
 				</div>
