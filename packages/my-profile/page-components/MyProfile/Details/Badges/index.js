@@ -1,5 +1,6 @@
 import { Modal, Button, Select, Tooltip } from '@cogoport/components';
 import { IcCStar } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -33,6 +34,8 @@ const badge_data = [
 ];
 
 function Badges() {
+	const router = useRouter();
+
 	const [show, setShow] = useState(false);
 	const onClose = () => setShow(false);
 	return (
@@ -68,7 +71,16 @@ function Badges() {
                 }
 				</div>
 
-				<div className={styles.view_more}>View More</div>
+				<div
+					role="presentation"
+					onClick={() => {
+						router.push('/badges');
+					}}
+					className={styles.view_more}
+				>
+					View More
+
+				</div>
 
 			</div>
 
@@ -80,20 +92,12 @@ function Badges() {
 				closeOnOuterClick
 			>
 				<Modal.Header title="Preview Badges" />
-				<Modal.Body>
+				<Modal.Body style={{ height: '300px' }}>
 					<p className={styles.lable}>
 						Select the mastery badge to preview on your profile
 					</p>
-					Select Mastery Badge
 
 					<Select placeholder="Multimodal Mastery" />
-
-					Eu do culpa occaecat veniam aute incididunt
-					ipsum eiusmod do excepteur exercitation. Non minim esse ex amet amet
-					aliqua enim incididunt reprehenderit culpa commodo deserunt. Nisi minim
-					aute labore cillum exercitation amet. Esse Lorem adipisicing dolor sunt
-					culpa ipsum ut laborum incididunt nostrud. Ipsum fugiat duis cupidatat
-					ipsum et ex. Et aliquip nostrud ad in sit.
 
 				</Modal.Body>
 				<Modal.Footer>

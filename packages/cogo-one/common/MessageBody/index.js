@@ -18,9 +18,9 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 	).join(' ');
 
 	function ShowMessage() {
-		return (
-			<div dangerouslySetInnerHTML={{ __html: renderText(message) }} />
-		);
+		return message_type === 'template'
+			? <div dangerouslySetInnerHTML={{ __html: message }} />
+			: <div dangerouslySetInnerHTML={{ __html: renderText(message) }} />;
 	}
 
 	function LoadMedia(type) {

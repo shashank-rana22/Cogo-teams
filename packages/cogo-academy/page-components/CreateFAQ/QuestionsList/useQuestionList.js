@@ -113,7 +113,7 @@ const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) =>
 		Header   : 'CREATED BY',
 		accessor : (items) => (
 			<div>
-				{items?.created_by || '-'}
+				{items?.author?.name || '-'}
 			</div>
 		),
 	},
@@ -186,7 +186,10 @@ const useQuestionList = () => {
 
 					},
 					page,
-					is_admin_view: true,
+					is_admin_view            : true,
+					faq_tags_data_required   : true,
+					faq_topics_data_required : true,
+					author_data_required     : true,
 
 				},
 			});
@@ -207,7 +210,9 @@ const useQuestionList = () => {
 					data: {
 						id,
 						status: 'inactive',
+
 					},
+
 				},
 			);
 
