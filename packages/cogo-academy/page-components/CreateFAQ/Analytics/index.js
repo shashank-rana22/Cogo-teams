@@ -1,10 +1,10 @@
 import Header from './Header';
 import Tabbase from './Tabbase';
 
-function Analytics() {
+function Analytics({ setSwitchDashboard = () => {} }) {
 	return (
 		<>
-			<Header />
+			<Header setSwitchDashboard={setSwitchDashboard} />
 
 			<Tabbase />
 		</>

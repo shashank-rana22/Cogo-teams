@@ -7,9 +7,8 @@ import useListFaqQuestions from '../../../hooks/useListFaqQuestion';
 import styles from './styles.module.css';
 
 function RelatedQuestion({ tags = '', question_abstract = '' }) {
-	const tagId = [tags?.[0]?.id];
+	const tagId = tags?.[0]?.id;
 	const router = useRouter();
-
 	const { data } = useListFaqQuestions({ tagId, limit: 3 });
 
 	if ((data?.list || []).length === 0) {
@@ -24,7 +23,9 @@ function RelatedQuestion({ tags = '', question_abstract = '' }) {
 
 	return (
 		<div style={{ paddingTop: '1.2%' }}>
-			<span className={styles.relatedquestion}>Related Questions</span>
+			{data?.list.length > 1 && (
+				<span className={styles.relatedquestion}>Related Questions</span>
+			)}
 			<div>
 
 				{(data?.list || []).map((question) => (

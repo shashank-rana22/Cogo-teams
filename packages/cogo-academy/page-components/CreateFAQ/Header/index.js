@@ -2,14 +2,10 @@ import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
-import Analytics from '../Analytics';
-
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ setSwitchDashboard = () => {} }) {
 	const router = useRouter();
-
-	const onClickAnalytics = () => <Analytics />;
 
 	const onClickConfiguration = () => {
 		router.push(
@@ -34,10 +30,10 @@ function Header() {
 
 	return (
 		<div className={styles.container}>
-			<div>Manage FAQs</div>
+			<div className={styles.header}>Manage FAQs</div>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={onClickAnalytics}>
+				<Button themeType="secondary" onClick={() => { setSwitchDashboard(false); }}>
 					Analytics
 				</Button>
 				<Button style={{ marginLeft: 8 }} themeType="secondary" onClick={onClickConfiguration}>

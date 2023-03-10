@@ -310,7 +310,7 @@ function AnswerPage() {
 				</span>
 			</div>
 
-			<RelatedQuestion tags={answerData?.faq_tags[0]} question_abstract={answerData?.question_abstract} />
+			<RelatedQuestion tags={answerData?.faq_tags} question_abstract={answerData?.question_abstract} />
 		</div>
 	);
 }
