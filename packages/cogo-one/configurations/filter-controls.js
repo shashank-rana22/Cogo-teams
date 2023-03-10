@@ -1,10 +1,9 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
-import { merge } from '@cogoport/utils';
 
 const useGetControls = () => {
 	const listAgentsOptions = useGetAsyncOptions(
-		merge(asyncFieldsListAgents()),
+		asyncFieldsListAgents(),
 	);
 
 	const controls = [

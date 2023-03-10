@@ -6,7 +6,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
-import { firebaseConfig, firebase_auth_email, firebase_auth_password } from '../../configurations/firebase-config';
+import { firebaseConfig, firebaseAuthEmail, firebaseAuthPassword } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
 import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
@@ -43,7 +43,7 @@ function CogoOne() {
 
 	useEffect(() => {
 		const auth = getAuth();
-		signInWithEmailAndPassword(auth, firebase_auth_email, firebase_auth_password)
+		signInWithEmailAndPassword(auth, firebaseAuthEmail, firebaseAuthPassword)
 			.catch((error) => {
 				console.log(error.message);
 			});
