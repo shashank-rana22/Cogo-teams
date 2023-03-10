@@ -3,12 +3,16 @@
 import { useAllocationRequest } from '@cogoport/request';
 
 const useKamExpertiseConfig = () => {
-	const [{ data = [], loading }, refetch] = useAllocationRequest({
-		url     : 'kam_expertise_configuration_levels',
-		method  : 'get',
+	const [{ data, loading }, refetch] = useAllocationRequest({
+		url     : '/kam_expertise_configuration_levels',
+		method  : 'GET',
 		authkey : 'get_allocation_kam_expertise_configuration_levels',
 		params  : {
-			sort_type: 'desc',
+			filters: {
+				expertise_type : ['Customer Expertise', 'Trade Expertise', 'Commodity Expertise', 'Misc Expertise'],
+				status         : 'draft',
+			},
+
 		},
 	}, { manual: false });
 

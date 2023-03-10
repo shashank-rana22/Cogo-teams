@@ -14,11 +14,11 @@ function Header() {
 				</div>
 				<div className={styles.sub_container}>
 					<div className={styles.left_text}>
-						Published On&nbsp;:&nbsp;
+						Last Modified&nbsp;:&nbsp;
 						<strong>{format(new Date(), 'dd MMM yyyy')}</strong>
 					</div>
 					<div>
-						Published by&nbsp;:&nbsp;
+						Last Edit by &nbsp;:&nbsp;
 						<strong>Cogoparth</strong>
 					</div>
 				</div>
