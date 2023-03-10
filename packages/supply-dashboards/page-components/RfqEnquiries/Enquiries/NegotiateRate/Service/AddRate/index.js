@@ -22,6 +22,7 @@ function AddRate({
 		requiredValues,
 		setValue,
 		data,
+		prefillData,
 	} = useUpdateSpotNegotiationRate({
 		service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard, setRevertCounts,
 	});
@@ -30,6 +31,9 @@ function AddRate({
 		if (['destination_local', 'origin_local'].includes(item.name)) {
 			return {
 				...item,
+				noDeleteButtonTill: item.name === 'destination_local'
+					? prefillData.current?.mandatoryDestinationChargeCodes?.length
+					: prefillData.current?.mandatoryOriginChargeCodes?.length,
 				heading: data?.spot_negotiation_id ? (
 					<LocalLabel
 						label={item.heading}
@@ -37,8 +41,17 @@ function AddRate({
 						service={service}
 						values={requiredValues}
 						setValue={setValue}
+						prefillData={prefillData}
 					/>
 				) : item.heading,
+			};
+		}
+		if (['freights', 'surcharge'].includes(item.name)) {
+			return {
+				...item,
+				noDeleteButtonTill: item.name === 'freights'
+					? prefillData.current?.mandatoryFreightCodes?.length
+					: prefillData.current?.mandatorySurchargeCodes?.length,
 			};
 		}
 		return item;
