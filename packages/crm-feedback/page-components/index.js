@@ -10,6 +10,7 @@ function CrmFeedback() {
 		<>
 			<Header />
 			<PrimaryTabs />
+			{/* <Filters filters={filters} onChangeFilters={onChangeFilters} /> */}
 			<Filters />
 			<Statistics />
 			<EnrichmentRequest />

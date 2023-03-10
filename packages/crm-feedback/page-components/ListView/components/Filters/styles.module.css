@@ -11,4 +11,25 @@
 .select{
     width: 200px;
     margin-right: 4px;
+    
+    :global(.ui_tNl3D){
+        font-size: 14px;
+    }
+}
+
+
+.time{
+    width: 400px;
+    margin-right: 4px;
+
+    :global(input){
+       margin-right: 4px;
+       height: 40px !important;
+
+        &::placeholder{
+            font-size: 14px;
+            color: #221f20;
+        }
+    }
+    
 }

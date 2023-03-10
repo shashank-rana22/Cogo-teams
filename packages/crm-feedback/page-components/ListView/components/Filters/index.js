@@ -1,80 +1,37 @@
-import { Select } from '@cogoport/components';
+import { Select, DateRangepicker } from '@cogoport/components';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
+import { controls } from './utils/controls';
 
-function Filters() {
-	const options = [{
-		label : 'Option 1',
-		value : 'option1',
-	},
-	{
-		label : 'Option 2',
-		value : 'option2',
-	},
-	];
-
+function Filters({ filters = {}, onChangeFilters = () => {} }) {
 	const [filterValue, setFilterValue] = useState({
 		cogo_entity  : null,
 		organization : null,
 		kam_manager  : null,
 		kam          : null,
-		start_date   : null,
-		end_date     : null,
+		date         : null,
 	});
 
+	console.log('CONTROLS::', controls);
 	return (
 		<div className={styles.filter}>
-			<Select
-				placeholder="Cogo Entity"
-				className={styles.select}
-				value={filterValue.cogo_entity}
-				onChange={(val) => setFilterValue({ ...filterValue, cogo_entity: val })}
-				options={options}
-			/>
-			<Select
-				placeholder="Organization"
-				className={styles.select}
-				value={filterValue.organization}
-				onChange={(val) => setFilterValue({ ...filterValue, organization: val })}
-				options={options}
-			/>
-			<Select
-				placeholder="KAM Manager"
-				className={styles.select}
-				value={filterValue.kam_manager}
-				onChange={(val) => setFilterValue({ ...filterValue, kam_manager: val })}
-				options={options}
-			/>
-			<Select
-				placeholder="KAM"
-				className={styles.select}
-				value={filterValue.kam}
-				onChange={(val) => setFilterValue({ ...filterValue, kam: val })}
-				options={options}
-			/>
-
-			<Select
-				placeholder="Start Date"
-				className={styles.select}
-				value={filterValue.start_date}
-				onChange={(val) => setFilterValue({ ...filterValue, start_date: val })}
-				options={options}
-			/>
-			<Select
-				placeholder="End Date"
-				className={styles.select}
-				value={filterValue.end_date}
-				onChange={(val) => setFilterValue({ ...filterValue, end_date: val })}
-				options={options}
-			/>
-			{/* <Select
-				placeholder="Date"
-				className={styles.select}
+			{controls?.map((control) => (
+				<Select
+					key={control.name}
+					placeholder={control.placeholder}
+					className={styles.select}
+					value={filters?.[control?.name]}
+					onChange={(val) => onChangeFilters({ [control?.name]: val || undefined })}
+					{...control}
+				/>
+			))}
+			<DateRangepicker
+				className={styles.time}
 				value={filterValue.date}
-				onChange={(val) => setFilterValue({ ...filterValue, date: val })}
-				options={options}
-			/> */}
+				isPreviousDaysAllowed
+				onChange={(val) => onChangeFilters({ date: val || undefined })}
+			/>
 		</div>
 	);
 }
