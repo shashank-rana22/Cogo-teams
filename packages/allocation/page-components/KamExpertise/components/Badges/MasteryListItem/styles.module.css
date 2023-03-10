@@ -18,6 +18,9 @@
 .content {
     display: flex;
     justify-content: space-between;
+    @media (max-width: 576px) {
+        flex-direction: column;
+    }
 }
 
 .details {
@@ -28,6 +31,9 @@
     margin-top: 60px;
     font-weight: 500;
     justify-content: space-between;
+    @media (max-width: 576px) {
+        margin-top: 20px;
+    }
 }
 
 .rules {
@@ -36,6 +42,9 @@
     margin-left: 10%;
     flex-direction: column;
     flex-wrap: wrap;
+    @media (max-width: 576px) {
+        margin: 0;
+    }
 }
 
 .rule_heading {
@@ -57,4 +66,15 @@
     flex-basis: 25%;
     padding-left: 5%;
     align-items: center;
+    @media (max-width: 576px) {
+        padding: 0;
+    }
+}
+
+.badge_icon_container {
+    @media (max-width: 576px) {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
 }

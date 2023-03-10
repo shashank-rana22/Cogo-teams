@@ -1,47 +1,45 @@
 .level_card_container {
-    border-radius: 8px;
-    background-color: #fff;
-    width: 100%;
-    padding: 0;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
 }
 .row_level {
-    margin: 0 16px;
-    padding: 44px 0;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 150%;
-    width: 20%; 
-    
+  margin: 0 16px;
+  padding: 36px 0;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 150%;
+  width: 20%;
 }
 .row_level_end {
-    margin: 0 16px;
-    padding: 44px 0;
-    font-weight: 700;
+  margin: 0 16px;
+  /* padding: 44px 0;  */
+  font-weight: 700;
 }
 .row_level_end_options {
-    display: flex;
-    width: 100%;
-    margin: 28px 0 0 0 ;
+  display: flex;
+  width: 100%;
+  margin: 28px 0 0 0;
 }
-.supporting_text{
-    font-weight: 500;
-font-size: 14px;
-line-height: 150%;
-align-items: center;
-color: #4F4F4F;
-margin-top: 10px;
-margin-bottom: 10px;
+.supporting_text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  align-items: center;
+  color: #4f4f4f;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
-.border_class{
-    border: 1px solid #BDBDBD;
-    opacity: 0.4;
-   margin-left: 16px;
-   margin-right:16px;   
+.border_class {
+  border: 1px solid #bdbdbd;
+  opacity: 0.4;
+  margin-left: 16px;
+  margin-right: 16px;
 }
-.current_value{
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 150%;
-    margin-top: 10px;
-    margin-left: 5px;
+.current_value {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  margin-top: 10px;
+  margin-left: 5px;
 }

@@ -1,17 +1,25 @@
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	width: 100%;
-
-	/* background:black */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    @media (max-width: 576px) {
+        padding: 10px 0;
+        justify-content: flex-start;
+    }
 }
 
 .search {
-	width: 180px;
+    width: 180px;
+    @media (max-width: 576px) {
+        flex-basis: 50%;
+    }
 }
 
 .select_container {
-	width: 180px;
-	margin-right: 8px;
+    width: 180px;
+    margin-right: 8px;
+    @media (max-width: 576px) {
+        flex-basis: 50%;
+    }
 }

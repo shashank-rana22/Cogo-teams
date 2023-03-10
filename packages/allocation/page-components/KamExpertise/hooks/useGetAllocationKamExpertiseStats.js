@@ -9,7 +9,7 @@ function useGetAllocationKamExpertiseStats() {
 
 	const [{ loading, data: kam_level_data = {} }, refetch] = useAllocationRequest({
 		method  : 'get',
-		url     : 'kam_expertise_stats',
+		url     : '/kam_expertise_stats',
 		authkey : 'get_allocation_kam_expertise_stats',
 		params,
 	});

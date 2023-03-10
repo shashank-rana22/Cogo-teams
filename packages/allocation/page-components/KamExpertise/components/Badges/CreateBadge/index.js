@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
+import useGetAllocationKamExpertiseEventConfigurationName from '../../../hooks/useGetAllocationKamExpertiseEventConfigurationName';
 
 import GetCard from './getCard';
 import styles from './styles.module.css';
@@ -29,6 +30,17 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	const {
 		onSave, getFieldController, loading, getAddBadgesControls, formProps,
 	} = useCreateBadgeConfiguration({ onClose, badgeListData, listRefetch });
+
+	const {
+		event_configuration_list,
+	} = useGetAllocationKamExpertiseEventConfigurationName();
+
+	const event_config_list = [];
+	(event_configuration_list)?.forEach((item) => {
+		event_config_list.push(
+			{ value: item.event_configuration_id, label: item.condition_name },
+		);
+	});
 
 	const {
 		control, watch, handleSubmit, formState: { errors },
@@ -83,6 +95,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 											key={el.name}
 											control={control}
 											id={`${el.name}_input`}
+											options={event_config_list}
 										/>
 									</div>
 

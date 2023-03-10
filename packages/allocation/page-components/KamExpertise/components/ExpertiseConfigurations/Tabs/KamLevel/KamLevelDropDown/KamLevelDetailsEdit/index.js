@@ -1,14 +1,10 @@
-import { useForm } from '@cogoport/forms';
-
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
 import { controls, controlsBottom } from '../../controls';
 
 import styles from './styles.module.css';
 
-function KamLevelDetailsEdit({ data = {} }) {
-	const formProps = useForm();
+function KamLevelDetailsEdit({ data = {}, control }) {
 	const transacting_accounts = data && data.list && data.list['Transacting Accounts'];
-	const { control } = formProps;
 	return (
 		<div className={styles.level_card_container}>
 			{controls.map((singleField) => {
@@ -43,11 +39,13 @@ function KamLevelDetailsEdit({ data = {} }) {
 				);
 			})}
 			<div className={styles.row_level_end}>
-				<h2>Transacting Accounts</h2>
+				<h2 style={{ margin: '8px' }}>Transacting Accounts</h2>
 				<div className={styles.row_level_end_options}>
 					{controlsBottom.map((singleField) => {
 						const Element = getFieldController(singleField.type) || null;
+
 						if (!Element) return null;
+
 						return (
 							<div className={styles.row_level} style={{ width: '30%' }}>
 								{' '}

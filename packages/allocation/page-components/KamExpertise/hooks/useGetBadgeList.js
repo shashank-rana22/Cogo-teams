@@ -8,14 +8,13 @@ function useGetBadgeList() {
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			status : 'active',
-			id     : searchQuery || undefined,
-			// badge_name : searchQuery || undefined,
+			status     : 'active',
+			badge_name : searchQuery || undefined,
 		},
 	});
 
 	const [{ loading, data = {} }, refetch] = useAllocationRequest({
-		url     : '/allocation/kam_expertise_badge_configuration_list',
+		url     : '/kam_expertise_badge_configuration_list',
 		method  : 'get',
 		authkey : 'get_allocation_kam_expertise_badge_configuration_list',
 		params,
@@ -26,7 +25,7 @@ function useGetBadgeList() {
 			...previousParams,
 			filters: {
 				...previousParams.filters,
-				id: searchQuery || undefined,
+				badge_name: searchQuery || undefined,
 			},
 		}));
 	}, [searchQuery]);

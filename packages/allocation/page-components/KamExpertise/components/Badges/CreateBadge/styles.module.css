@@ -22,6 +22,9 @@
 
 .display_flex {
     display: flex;
+    @media (max-width: 576px) {
+        flex-direction: column;
+    }
 }
 
 .text_styles2 {
@@ -59,6 +62,11 @@
     padding: 0 10px 0 30px;
     margin-top: 10px;
     border-right: 1px solid #000000;
+    @media (max-width: 576px) {
+        border-right: none;
+        border-bottom: 1px solid #03030346;
+        padding-bottom: 20px;
+    }
 }
 
 .file_select_style {
@@ -91,6 +99,10 @@
 
 .last_item {
     border-right: none;
+    @media (max-width: 576px) {
+        border-bottom: none;
+        padding-bottom: 20px;
+    }
 }
 
 .btncls {
@@ -108,9 +120,15 @@
 .badge_form_container {
     display: flex;
     justify-content: space-between;
+    @media (max-width: 576px) {
+        flex-direction: column;
+    }
 }
 .form_group {
     flex-basis: 22%;
+    @media (max-width: 576px) {
+        padding-top: 20px;
+    }
 }
 .form_group:last-child {
     flex-basis: 50%;

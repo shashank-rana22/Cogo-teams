@@ -32,3 +32,7 @@
         padding: 16px 0;
     }
 }
+
+.modal_body {
+    min-height: 500px;
+}

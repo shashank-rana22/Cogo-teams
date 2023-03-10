@@ -1,38 +1,37 @@
 const controls = [
 	{
-		name        : 'customer_expertise_score',
+		name        : 'customer_expertise',
 		label       : 'Customer Expertise',
 		placeholder : 'Enter Score',
 		type        : 'number',
-		// value       : '28000',
+
 	},
 	{
-		name        : 'trade_expertise_score',
+		name        : 'trade_expertise',
 		label       : 'Trade Expertise',
 		placeholder : 'Enter Score',
 		type        : 'number',
-		// value       : '28000',
+
 	},
 	{
-		name        : 'commodity_expertise_score',
+		name        : 'commodity_expertise',
 		label       : 'Commodity Expertise',
 		placeholder : 'Enter Score',
 		type        : 'number',
-		// value       : '28000',
+
 	},
 	{
-		name        : 'misc_expertise_score',
+		name        : 'misc_expertise',
 		label       : 'Misc Expertise',
 		placeholder : 'Enter Score',
 		type        : 'number',
-		// value       : '28000',
 
 	},
 
 ];
 
 const controlsBottom = [{
-	name        : 'minimum_transacting_account',
+	name        : 'minimum_transacting_accounts',
 	label       : 'Minimum Transacting Accounts',
 	placeholder : 'Enter Score',
 	type        : 'number',

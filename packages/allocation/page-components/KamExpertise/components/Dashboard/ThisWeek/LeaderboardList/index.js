@@ -80,69 +80,70 @@ function LeaderboardList() {
 			{list_data.map((data, index) => (
 				// ! loading state logic
 
-				false ? (
-					<div
-						key={data.id}
-						className={styles.card}
-					>
-						<div className={styles.card_description}>
-							<div className={styles.card_description_left}>
-								<div>
-									<div
-										className={styles.user_name}
-									>
-										<Placeholder width="100px" height="16px" />
+				false
+					? (
+						<div
+							key={data.id}
+							className={styles.card}
+						>
+							<div className={styles.card_description}>
+								<div className={styles.card_description_left}>
+									<div>
+										<div
+											className={styles.user_name}
+										>
+											<Placeholder width="100px" height="16px" />
+										</div>
+										<div>
+											<Placeholder width="100px" height="16px" />
+										</div>
+									</div>
+								</div>
+								<div className={styles.badge_container}>
+									<div className={styles.badges_loading}>
+										{
+											data.badges.length > 0 ? (data.badges.map(() => (
+												<div key={data.badges.url} style={{ marginBottom: '4px' }}>
+													<Placeholder width="48px" height="48px" style={{ marginRight: '28px' }} />
+												</div>
+											))) : ''
+										}
+									</div>
+								</div>
+
+								<div className={styles.card_description_right}>
+									<div>
+										<div style={{ color: '#333333', paddingBottom: '8px' }}>
+											<Placeholder width="100px" height="16px" />
+
+										</div>
+										<div><b><Placeholder width="100px" height="16px" /></b></div>
 									</div>
 									<div>
-										<Placeholder width="100px" height="16px" />
-									</div>
-								</div>
-							</div>
-							<div className={styles.badge_container}>
-								<div className={styles.badges_loading}>
-									{
-							data.badges.length > 0 ? (data.badges.map((value) => (
-								<div key={data.badges.url} style={{ marginBottom: '4px' }}>
-									<Placeholder width="48px" height="48px" style={{ marginRight: '28px' }} />
-								</div>
-							))) : ''
-						}
-								</div>
-							</div>
+										<div style={{ color: '#333333', paddingBottom: '8px' }}>
+											<Placeholder width="100px" height="16px" />
 
-							<div className={styles.card_description_right}>
-								<div>
-									<div style={{ color: '#333333', paddingBottom: '8px' }}>
-										<Placeholder width="100px" height="16px" />
-
+										</div>
+										<div><b><Placeholder width="100px" height="16px" /></b></div>
 									</div>
-									<div><b><Placeholder width="100px" height="16px" /></b></div>
-								</div>
-								<div>
-									<div style={{ color: '#333333', paddingBottom: '8px' }}>
-										<Placeholder width="100px" height="16px" />
+									<div>
+										<div style={{ color: '#333333', paddingBottom: '8px' }}>
+											<Placeholder width="100px" height="16px" />
 
+										</div>
+										<div><b><Placeholder width="100px" height="16px" /></b></div>
 									</div>
-									<div><b><Placeholder width="100px" height="16px" /></b></div>
-								</div>
-								<div>
-									<div style={{ color: '#333333', paddingBottom: '8px' }}>
-										<Placeholder width="100px" height="16px" />
+									<div>
+										<div style={{ color: '#333333', paddingBottom: '8px' }}>
+											<Placeholder width="100px" height="16px" />
 
+										</div>
+										<div><b><Placeholder width="100px" height="16px" /></b></div>
 									</div>
-									<div><b><Placeholder width="100px" height="16px" /></b></div>
-								</div>
-								<div>
-									<div style={{ color: '#333333', paddingBottom: '8px' }}>
-										<Placeholder width="100px" height="16px" />
-
-									</div>
-									<div><b><Placeholder width="100px" height="16px" /></b></div>
 								</div>
 							</div>
 						</div>
-					</div>
-				)
+					)
 					: (
 						<div
 							key={data.id}
@@ -169,7 +170,7 @@ function LeaderboardList() {
 									<div className={styles.badges}>
 										{
                                 data.badges.length > 0 ? (data.badges.map((value) => (
-	<div key={data.badges.url} style={{ marginBottom: '4px' }}>
+	<div key={data.badges.url} className={styles.badge_item}>
 		<img src={value.url} alt="badge" width={48} height={48} />
 		<div className={styles.star}>
 			<IcCStar width={10} stroke="#FFDF33" />
@@ -194,19 +195,19 @@ function LeaderboardList() {
 								</div>
 
 								<div className={styles.card_description_right}>
-									<div>
+									<div className={styles.exp}>
 										<div style={{ color: '#333333', paddingBottom: '8px' }}>Customer Exp.</div>
 										<div><b>{data.customer_exp}</b></div>
 									</div>
-									<div>
+									<div className={styles.exp}>
 										<div style={{ color: '#333333', paddingBottom: '8px' }}>Trade Exp.</div>
 										<div><b>{data.trade_exp}</b></div>
 									</div>
-									<div>
+									<div className={styles.exp}>
 										<div style={{ color: '#333333', paddingBottom: '8px' }}>Commodity Exp.</div>
 										<div><b>{data.commodity_exp}</b></div>
 									</div>
-									<div>
+									<div className={styles.exp}>
 										<div style={{ color: '#333333', paddingBottom: '8px' }}>Misc Exp.</div>
 										<div><b>{data.misc_exp}</b></div>
 									</div>

@@ -1,0 +1,22 @@
+.card_item {
+    flex-basis: 24%;
+    padding: 16px 24px 4px;
+    background: #fff;
+    border-radius: 8px;
+    height: 140px;
+    margin: 4px;
+    @media (max-width: 576px) {
+        flex-basis: 100%;
+    }
+}
+
+.card_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card_content {
+    display: flex;
+    align-items: center;
+}
