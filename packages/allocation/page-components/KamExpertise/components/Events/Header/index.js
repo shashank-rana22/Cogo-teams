@@ -14,7 +14,7 @@ const OPTIONS = [
 
 function Header(props) {
 	// Todo take it from params like in case of search
-	const { params } = props;
+	const { params, setToggleNewEvent = () => {}, toggleNewEvent = '' } = props;
 
 	const [expertise, setExpertise] = useState('');
 
@@ -32,6 +32,7 @@ function Header(props) {
 						options={OPTIONS}
 						onChange={(value) => setExpertise(value)}
 						style={{ marginRight: 16 }}
+						disabled={toggleNewEvent === false}
 					/>
 
 					<SearchInput
@@ -40,12 +41,17 @@ function Header(props) {
                         // setGlobalSearch={setSearchValue}
 						// debounceQuery={debounceQuery}
 						// value={searchValue}
-						// disabled={disabled}
+						disabled={toggleNewEvent === false}
 						className={styles.search_bar}
 					/>
 				</div>
 
-				<Button themeType="primary" size="md">
+				<Button
+					themeType="primary"
+					size="md"
+					onClick={() => setToggleNewEvent((pv) => !pv)}
+					disabled={toggleNewEvent === false}
+				>
 					Add New Event
 				</Button>
 			</div>

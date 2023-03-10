@@ -1,51 +1,69 @@
+import { Pagination } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useState } from 'react';
+
+import useGetEventList from '../../hooks/useGetEventList';
 
 import CreateNewEvent from './CreateNewEvent';
 import EventListItem from './EventList';
 import Header from './Header';
 import styles from './styles.module.css';
 
-const DummyList = [
-	{
-		id             : 'hgf',
-		status         : 'jhgf',
-		expertise_type : 'Customer_Expertise',
-		condition_name : 'Re-Activation',
-		description    : 'dfghjk',
-		trigger        : 'Shipment Creation',
-		params         : 'Greater than 120 days',
-		rules          : [{ id: 'ertyui', name: 'Reactivation', rule_type: 'Account' }],
-	},
-	{
-		id             : 'hgf',
-		status         : 'jhgf',
-		expertise_type : 'cus',
-		condition_name : 'sdfghj',
-		description    : 'dfghjk',
-		trigger        : 'cfvghjk',
-		params         : 'dfghjk',
-		rules          : [{ id: 'ertyui', name: 'dfghj', rule_type: 'account' },
-			{ id: 'ertyui', name: 'dfghj', rule_type: 'account' },
-			{ id: 'ertyui', name: 'dfghj', rule_type: 'account' }],
-	},
-	{
-		id             : 'hgf',
-		status         : 'jhgf',
-		expertise_type : 'cus',
-		condition_name : 'sdfghj',
-		description    : 'dfghjk',
-		trigger        : 'cfvghjk',
-		params         : 'dfghjk',
-		rules          : [{ id: 'ertyui', name: 'dfghj', rule_type: 'account' }],
-	},
-];
+// const DummyList = [
+// 	{
+// 		id             : 'hgf',
+// 		status         : 'jhgf',
+// 		expertise_type : 'Customer_Expertise',
+// 		condition_name : 'Re-Activation',
+// 		description    : 'dfghjk',
+// 		trigger        : 'Shipment Creation',
+// 		params         : 'Greater than 120 days',
+// 		rules          : [{ id: 'ertyui', name: 'Reactivation', rule_type: 'Account' }],
+// 	},
+// 	{
+// 		id             : 'hgf',
+// 		status         : 'jhgf',
+// 		expertise_type : 'cus',
+// 		condition_name : 'sdfghj',
+// 		description    : 'dfghjk',
+// 		trigger        : 'cfvghjk',
+// 		params         : 'dfghjk',
+// 		rules          : [{ id: 'ertyui', name: 'dfghj', rule_type: 'account' },
+// 			{ id: 'ertyui', name: 'dfghj', rule_type: 'account' },
+// 			{ id: 'ertyui', name: 'dfghj', rule_type: 'account' }],
+// 	},
+// 	{
+// 		id             : 'hgf',
+// 		status         : 'jhgf',
+// 		expertise_type : 'cus',
+// 		condition_name : 'sdfghj',
+// 		description    : 'dfghjk',
+// 		trigger        : 'cfvghjk',
+// 		params         : 'dfghjk',
+// 		rules          : [{ id: 'ertyui', name: 'dfghj', rule_type: 'account' }],
+// 	},
+// ];
 function Events() {
 	const router = useRouter();
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise');
 	};
+
+	const {
+		list = [],
+		loading,
+		paginationData,
+		getNextPage,
+	} = useGetEventList();
+
+	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
+
+	const [toggleNewEvent, setToggleNewEvent] = useState(true);
+
+	// console.log('list:::', list);
+	// console.log('paginationData', paginationData);
 	return (
 		<>
 			{/* <CreateNewEvent /> */}
@@ -57,13 +75,30 @@ function Events() {
 					Back to Dashboard
 				</div>
 			</div>
-			<Header />
+			<Header setToggleNewEvent={setToggleNewEvent} toggleNewEvent={toggleNewEvent} />
 
-			{
-				DummyList.map((data, index) => (
-					<EventListItem data={data} index={index} />
-				))
-			}
+			{toggleNewEvent
+				?		(
+					<div>
+						{list.map((data, index) => {
+							console.log(data);
+							return (
+								<EventListItem data={data} index={index} />
+							);
+						})}
+						<div className={styles.pagination_container}>
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={total_count}
+								pageSize={page_limit}
+								onPageChange={getNextPage}
+							/>
+						</div>
+					</div>
+				)
+				:	<div><CreateNewEvent setToggleNewEvent={setToggleNewEvent} toggleNewEvent={toggleNewEvent} /></div>}
+
 			{/* <EventListItem /> */}
 		</>
 	);
