@@ -39,12 +39,13 @@ function CogoOne() {
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
-	const auth = getAuth();
-
-	signInWithEmailAndPassword(auth, firebase_auth_email, firebase_auth_password)
-		.catch((error) => {
-			console.log('errorMessage:', error.message);
-		});
+	useEffect(() => {
+		const auth = getAuth();
+		signInWithEmailAndPassword(auth, firebase_auth_email, firebase_auth_password)
+			.catch((error) => {
+				console.log(error.message);
+			});
+	}, []);
 
 	const firestore = getFirestore(app);
 
