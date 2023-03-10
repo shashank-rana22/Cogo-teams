@@ -414,6 +414,7 @@ const useUpdateSpotNegotiationRate = ({
 		setValue,
 		data,
 		prefillData,
+		rateSelected,
 	};
 };
 export default useUpdateSpotNegotiationRate;

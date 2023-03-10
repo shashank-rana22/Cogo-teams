@@ -9,7 +9,7 @@ import useGetSuggestedLocals from '../../../../../hooks/useGetSuggestedLocals';
 
 import styles from './styles.module.css';
 
-function LocalLabel({ label, field, setValue, values, service, prefillData }) {
+function LocalLabel({ label, field, setValue, values, service, prefillData, rateSelected }) {
 	const [selected, setSelected] = useState(null);
 	const { list } = useGetSuggestedLocals({
 		section    : { name: field.name },
@@ -81,7 +81,7 @@ function LocalLabel({ label, field, setValue, values, service, prefillData }) {
 			}
 		});
 
-		if (line_items.length) {
+		if (line_items.length && (selected || !rateSelected?.spot_negotiation_id)) {
 			setValue(field.name, [...mandatoryLineItems, ...actualLineItems]);
 		}
 	}, [selected?.id, JSON.stringify(allIds)]);

@@ -23,6 +23,7 @@ function AddRate({
 		setValue,
 		data,
 		prefillData,
+		rateSelected,
 	} = useUpdateSpotNegotiationRate({
 		service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard, setRevertCounts,
 	});
@@ -42,6 +43,7 @@ function AddRate({
 						values={requiredValues}
 						setValue={setValue}
 						prefillData={prefillData}
+						rateSelected={rateSelected}
 					/>
 				) : item.heading,
 			};
