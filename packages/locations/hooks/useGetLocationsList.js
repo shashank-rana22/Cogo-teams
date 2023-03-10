@@ -23,7 +23,7 @@ const useGetLocationsList = () => {
 		params : {
 			page,
 			page_limit,
-			includes : { aliases: null, main_ports: null },
+			includes : { aliases: null, default_params_required: true },
 			filters  : {
 				...(restFilters || {}),
 			},
