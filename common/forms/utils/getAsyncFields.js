@@ -174,6 +174,20 @@ function asyncAllotBanks() {
 	};
 }
 
+function asyncFieldsExpertiseConfigurations() {
+	return {
+		labelKey    : 'condition_name',
+		valueKey    : 'expertise_configuration_ids',
+		endpoint    : '/allocation/kam_expertise_event_configuration_name',
+		authkey     : 'get_allocation_kam_expertise_event_configuration_name',
+		initialCall : false,
+		// params      : {
+		// 	filters    : { status: 'active' },
+		// 	page_limit : 100,
+		// },
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -188,4 +202,5 @@ export {
 	asyncFieldsOperators,
 	asyncFieldsListAgents,
 	asyncAllotBanks,
+	asyncFieldsExpertiseConfigurations,
 };

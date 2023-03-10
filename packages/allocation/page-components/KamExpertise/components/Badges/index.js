@@ -83,7 +83,7 @@ function Badges() {
 					(toggleScreen === 1)
 				&&	(
 					<div>
-						{badgeList?.map(((data, index) => (data.medal_collection.length > 0
+						{badgeList?.map(((data, index) => (data.expertise_configuration_type === 'badge_configuration'
 							? (
 								<MasteryListItem
 									data={data}

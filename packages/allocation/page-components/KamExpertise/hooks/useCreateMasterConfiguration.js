@@ -6,50 +6,60 @@ import { useAllocationRequest } from '@cogoport/request';
 import getAddMasteryControls from '../configurations/get-add-mastery-controls';
 
 function useCreateMasterConfiguration(props) {
-	const { masteryListData, onClose, listRefetch } = props;
+	const { masteryListData = {}, onClose, listRefetch } = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
+		url     : '/kam_expertise_badge_configuration',
 		method  : 'POST',
-		url     : '/kam_expertise_mastery_badge_configuration',
-		authkey : 'post_allocation_kam_expertise_mastery_badge_configuration',
+		authkey : 'post_allocation_kam_expertise_badge_configuration',
 	}, { manual: true });
 
 	const formProps = useForm({
 		defaultValues: {
-			mastery_name : masteryListData.badge_name,
-			badges       : masteryListData.medal_collection,
+			mastery_name      : masteryListData.badge_name,
+			badges            : masteryListData.expertise_configuration_ids,
+			description_input : masteryListData.description,
 			// ToDo : image url -> handle using previous data
 		},
 	});
 
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
-		const { mastery_name, badges, image_input, description_input } = formValues;
 
-		// badges array in payload is in the below format
-		const badges_selected = [];
-		(badges || []).forEach((badge) => {
-			badges_selected.push({ name: badge });
-		});
+		const {
+			mastery_name,
+			badges,
+			image_input,
+			description_input,
+		} = formValues || {};
 
 		try {
 			const payload = {
+				version_id                   : '1',
+				badge_name                   : mastery_name,
+				description                  : description_input,
+				expertise_configuration_ids  : badges,
+				expertise_configuration_type : 'badge_configuration',
+				status                       : 'active',
+				badge_details                : [
+					{
+						image_url : image_input,
+						medal     : mastery_name,
+					},
 
-				mastery_name,
-				description            : description_input,
-				event_configuration_id : '',
-				status                 : 'active',
-				image_url              : image_input,
-				badges                 : badges_selected,
+				],
 			};
 
-			await trigger({
-				data: payload,
-			});
+			if (Object.keys(masteryListData).length > 0) {
+				payload.id = masteryListData.id;
+				payload.badge_details[0].badge_detail_id = masteryListData?.badge_details?.[0]?.id;
+			}
 
-			Toast.success('Master Badge Created!');
+			await trigger({ data: payload });
 
 			onClose();
+
+			Toast.success('Master Badge Created!');
 
 			listRefetch();
 		} catch (error) {

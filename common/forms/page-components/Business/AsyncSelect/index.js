@@ -11,6 +11,7 @@ import {
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
 	asyncAllotBanks,
+	asyncFieldsExpertiseConfigurations,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -32,13 +33,14 @@ import {
  * getModifiedOptions
  */
 const keyAsyncFieldsParamsMapping = {
-	organizations      : asyncFieldsOrganizations,
-	organization_users : asyncFieldsOrganizationUser,
-	partners           : asyncFieldsPartner,
-	partner_users      : asyncFieldsPartnerUsers,
-	partner_roles      : asyncFieldsPartnerRoles,
-	segments           : asyncFieldsCampaignSegments,
-	allot_bank         : asyncAllotBanks,
+	organizations           : asyncFieldsOrganizations,
+	organization_users      : asyncFieldsOrganizationUser,
+	partners                : asyncFieldsPartner,
+	partner_users           : asyncFieldsPartnerUsers,
+	partner_roles           : asyncFieldsPartnerRoles,
+	segments                : asyncFieldsCampaignSegments,
+	allot_bank              : asyncAllotBanks,
+	expertise_configuration : asyncFieldsExpertiseConfigurations,
 };
 
 function AsyncSelect(props) {
