@@ -11,89 +11,71 @@ function EventListItem() {
 
 			<section className={styles.list_item_container}>
 				<div className={styles.top_div}>
-					<div className={styles.left_id}>
-						#001
-					</div>
-					<div className={styles.top_right_div}>
-						<p>Last Modified : 31/September/2023</p>
-						<p>Last Modified By : Ankur Verma</p>
-						<IcMEdit />
-					</div>
+					<p>#001</p>
+					<p>Last Modified : 31/September/2023</p>
+					<p>Last Modified By : Ankur Verma</p>
+					<IcMEdit />
 				</div>
 				<div>
-					<div className={styles.info_tag}>
+					<p className={styles.info_tag}>
 						Expertise :
 						{' '}
-						<h4 style={{ marginLeft: 4 }}>Customer Expertise</h4>
-					</div>
-					<div className={styles.info_tag}>
+						<b style={{ marginLeft: 4 }}>Customer Expertise</b>
+					</p>
+					<p className={styles.info_tag}>
 						Event Name :
 						{' '}
-						<h4 style={{ marginLeft: 4 }}>Re-Activation</h4>
-					</div>
-					<div className={styles.info_tag}>
+						<b style={{ marginLeft: 4 }}>Re-Activation</b>
+					</p>
+					<p className={styles.info_tag}>
 						Description : Converting a
 						churned customer → 4 months no transaction for now.
 
-					</div>
+					</p>
 				</div>
 
 				<div className={styles.rule}>
-					<div className={styles.rule_head}>
+					<p className={styles.rule_head}>
 						Rule
-					</div>
+					</p>
 
 					<div className={styles.rule_body}>
-						<div>Rule #001</div>
-						<div>
-							<Pill
-								key="Reactivation"
-								size="l"
-								color="blue"
-							>
-								Reactivation
-							</Pill>
-
-						</div>
-						<div>is triggered on</div>
-						<div>
-							{' '}
-							<Pill
-								key="Shipment_creation"
-								size="l"
-								color="#FEF3E9"
-							>
-								Shipment creation
-							</Pill>
-
-						</div>
-						<div>of</div>
-						<div>
-							<Pill
-								key="Account"
-								size="l"
-								color="#FEF3E9"
-							>
-								Account
-							</Pill>
-
-						</div>
-						<div>having attribute</div>
+						{' Rule #001 '}
+						<Pill
+							key="Reactivation"
+							size="l"
+							color="blue"
+						>
+							Reactivation
+						</Pill>
+						{' is triggered on '}
+						<Pill
+							key="Shipment_creation"
+							size="l"
+							color="#FEF3E9"
+						>
+							Shipment creation
+						</Pill>
+						{' of '}
+						<Pill
+							key="Account"
+							size="l"
+							color="#FEF3E9"
+						>
+							Account
+						</Pill>
+						{' having attribute '}
 					</div>
 
 					<div className={styles.rule_end}>
-						<div>last booking date</div>
-						<div>
-							<Pill
-								key="Account"
-								size="l"
-								color="#FEF3E9"
-							>
-								Greater than 120 Days
-							</Pill>
-
-						</div>
-
+						{' last booking date '}
+						<Pill
+							key="Account"
+							size="l"
+							color="#FEF3E9"
+						>
+							Greater than 120 Days
+						</Pill>
 					</div>
 
 				</div>
