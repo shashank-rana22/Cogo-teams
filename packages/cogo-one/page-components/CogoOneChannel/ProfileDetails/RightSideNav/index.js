@@ -42,6 +42,7 @@ function RightSideNav({
 						onClick={() => handleClick(name)}
 					>
 						<Tooltip content={content} placement="left">
+							{name === 'documents' && <div className={styles.count}>20</div>}
 							<div>{icon}</div>
 						</Tooltip>
 					</div>
