@@ -1,11 +1,9 @@
 /* eslint-disable max-len */
 import { Placeholder, cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useEffect } from 'react';
 
 import chartData from '../../../configurations/chart-data';
-import { firebaseAuthEmail, firebaseAuthPassword } from '../../../configurations/firebase-configs';
 import { imgURL } from '../../../constants/image-urls';
 import useGetUsersStats from '../../../hooks/useGetUsersStats';
 
@@ -18,11 +16,6 @@ function Stats(props = {}) {
 	const { userStats = {}, getUserSats, firebaseLoading = false } = useGetUsersStats();
 
 	useEffect(() => {
-		const auth = getAuth();
-		signInWithEmailAndPassword(auth, firebaseAuthEmail, firebaseAuthPassword)
-			.catch((error) => {
-				console.log('firestore_auth_error:', error.message);
-			});
 		getUserSats();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

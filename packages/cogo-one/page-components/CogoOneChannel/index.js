@@ -2,11 +2,10 @@ import { IcMDownload } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
-import { firebaseConfig, firebaseAuthEmail, firebaseAuthPassword } from '../../configurations/firebase-config';
+import { firebaseConfig } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
 import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
@@ -40,14 +39,6 @@ function CogoOne() {
 	const [showDialModal, setShowDialModal] = useState(false);
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-
-	useEffect(() => {
-		const auth = getAuth();
-		signInWithEmailAndPassword(auth, firebaseAuthEmail, firebaseAuthPassword)
-			.catch((error) => {
-				console.log(error.message);
-			});
-	}, []);
 
 	const firestore = getFirestore(app);
 
