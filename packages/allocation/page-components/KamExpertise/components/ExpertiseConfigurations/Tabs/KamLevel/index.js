@@ -62,6 +62,7 @@ function KamLevel() {
 						createKAM={createKam}
 						setCreateKam={setCreateKam}
 						dataLength={dataLength}
+						refetch={refetch}
 					/>
 				</div>
 			) : (
