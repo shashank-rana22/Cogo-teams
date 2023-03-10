@@ -1,5 +1,6 @@
 import { Collapse, Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { IcMAgentManagement } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -8,22 +9,29 @@ import { getFieldController } from '../../../../../../common/Form/getFieldContro
 import getControls from '../../../../configurations/get-add-conditions-controls';
 import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mapping';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
-import EXPERTISE_CARDS_MAPPING from '../../../../constants/expertise-cards-mapping';
 import useGetKamExpertiseScore from '../../../../hooks/useGetKamExpertiseScore';
 
 import ExpertiseParameters from './ExpertiseParameters';
 import Header from './Header';
 import styles from './styles.module.css';
 
+const ICON_MAPPING = {
+	customer_expertise  : <IcMAgentManagement />,
+	trade_expertise     : <IcMAgentManagement />,
+	commodity_expertise : <IcMAgentManagement />,
+	misc_expertise      : <IcMAgentManagement />,
+
+};
+
 const titleSection = (expertiseItem = {}) => (
 	<div>
 		<div className={styles.expertise_name}>
 
 			<div className={styles.icon_container}>
-				{expertiseItem.icon}
+				{ICON_MAPPING[expertiseItem.expertise_type]}
 			</div>
 
-			{startCase(expertiseItem.name || '')}
+			{startCase(expertiseItem.expertise_type || '')}
 		</div>
 
 		<div className={styles.expertise_stats}>
@@ -70,8 +78,6 @@ function KamExpertiseScoreConfig() {
 
 	const { list = [], audit_data: auditData = {} } = data || {};
 
-	console.log('data', data);
-
 	const expertiseType = startCase(addConditionModal.type || '');
 
 	const { score_type } = watch();
@@ -83,12 +89,12 @@ function KamExpertiseScoreConfig() {
 		console.log('values', values);
 	};
 
-	const options = Object.entries(EXPERTISE_CARDS_MAPPING).map(([key, value]) => (
+	const options = (list).map((value) => (
 		{
-			key,
+			key      : value.expertise_type,
 			title    : titleSection(value),
 			children : <ExpertiseParameters
-				name={value.name}
+				activeCollapse={activeCollapse}
 				onClickAddCondition={() => setAddConditionModal({ type: value?.name })}
 			/>,
 
