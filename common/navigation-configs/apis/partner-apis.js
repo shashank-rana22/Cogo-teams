@@ -3190,6 +3190,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'create_announcement',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	okam_dashboard: [
 		{

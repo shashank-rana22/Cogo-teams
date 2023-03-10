@@ -35,7 +35,6 @@ function Preview({ formValues = {} }) {
 
 	const videos = formValues.videos.filter((item) => item.video_item).map((item) => item.video_item);
 	const { files, images } = formValues;
-	console.log('files', files);
 	return (
 		<div className={styles.container}>
 

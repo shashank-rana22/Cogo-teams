@@ -1,13 +1,13 @@
 /* eslint-disable import/no-relative-packages */
 import { Button } from '@cogoport/components';
 import { SelectController, InputController } from '@cogoport/forms';
-import { IcMArrowBack } from '@cogoport/icons-react';
+// import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useMemo } from 'react';
 
 /* eslint-disable */
-import countries from '../../../../../../../.data-store/constants/countries.json';
+import countries from '../../../../../../supply-dashboards/page-components/RfqEnquiries/helpers/countries.json';
 import useGetAudience from './useGetFaqAudience';
 import useListCogoEntity from './useListCogoEntities';
 
@@ -45,7 +45,7 @@ function CreateAudienceForm(props) {
 		setShowCreateAudience,
 	});
 
-	const { fetchAudience = () => {}, data, loading } = useGetAudience();
+	// const { fetchAudience = () => {}, data, loading } = useGetAudience();
 
 	const {
 		listCogoEntities,
@@ -97,14 +97,14 @@ function CreateAudienceForm(props) {
 
 	const { controls } = createAudienceControls({ entity_options, watchFunctions, countryOptions });
 
-	useEffect(() => {
-		(Object.keys(controls) || []).forEach((controll) => {
-			const { name:controlName } = controls[controll] || {};
-			setValue(controlName, data?.[controlName]);
-		});
+	// useEffect(() => {
+	// 	(Object.keys(controls) || []).forEach((controll) => {
+	// 		const { name:controlName } = controls[controll] || {};
+	// 		setValue(controlName, data?.[controlName]);
+	// 	});
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [loading]);
 
 	useEffect(() => {
 		setValue('auth_sub_function', null);

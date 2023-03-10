@@ -8,7 +8,7 @@ import {
 	ChipsController,
 	LocationSelectController,
 	MultiselectController,
-	DatepickerController,
+	DateRangePickerController,
 } from '@cogoport/forms';
 
 import styles from './styles.module.css';
@@ -53,7 +53,7 @@ function FormElement({ name, field, control, options, errors }) {
 					<TextAreaController control={control} {...finalFields} />
 				)}
 				{finalFields.type === 'datepicker' && (
-					<DatepickerController control={control} {...finalFields} showTimeSelect />
+					<DateRangePickerController control={control} {...finalFields} showTimeSelect />
 				)}
 				{finalFields.type === 'upload' && (
 					<UploadController multiple name={name} key={name} control={control} accept={finalFields?.accept} />

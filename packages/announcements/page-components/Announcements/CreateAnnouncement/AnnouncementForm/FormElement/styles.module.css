@@ -52,6 +52,11 @@
 		.ui_chip_container {
 			min-width: 40px;
 		}
+
+
+		.ui_dateRange_content_start {
+			width: 50%;
+		}
 	}
 }
 

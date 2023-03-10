@@ -20,8 +20,6 @@ function Child({
 	error = {},
 	length = 0,
 }) {
-	console.log('error', error);
-
 	return (
 		<div className={styles.form_container}>
 			<div className={styles.content}>
