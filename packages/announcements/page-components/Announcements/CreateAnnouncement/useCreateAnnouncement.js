@@ -1,25 +1,24 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import getFormControls from './controls/get-form-controls';
+import getFormControls from '../controls/get-form-controls';
 
-const useCreateAnnouncements = ({ defaultValues = {} }) => {
-	console.log('default', defaultValues);
-	const { control, watch, handleSubmit, setValue } = useForm();
+const useCreateAnnouncements = ({ defaultValues }) => {
+	const { control, watch, formState: { errors }, handleSubmit, setValue } = useForm({ defaultValues });
 	const [showPreview, setShowPreview] = useState(false);
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_auth_role',
 		method : 'POST',
 	});
-	const setDefaultValues = () => {
-		// setValue('title', defaultValues?.name);
-	};
+	// const setDefaultValues = () => {
+	// 	setValue('title', defaultValues?.title);
+	// };
 
-	useEffect(() => {
-		if (Object.keys(defaultValues).length !== 0) setDefaultValues();
-	}, [defaultValues]);
+	// useEffect(() => {
+	// 	if (Object.keys(defaultValues).length !== 0) setDefaultValues();
+	// }, [defaultValues]);
 
 	const controls = getFormControls();
 
@@ -27,8 +26,6 @@ const useCreateAnnouncements = ({ defaultValues = {} }) => {
 		if (!values) return;
 
 		const videos = values.videos.filter((item) => item.video_item).map((item) => item.video_item);
-		// console.log('videos', videos);
-		// delete values.videos;
 
 		try {
 			const payload = {
@@ -56,6 +53,7 @@ const useCreateAnnouncements = ({ defaultValues = {} }) => {
 		watch,
 		handleSubmit,
 		onSubmit,
+		errors,
 		showPreview,
 		setShowPreview,
 		loading,

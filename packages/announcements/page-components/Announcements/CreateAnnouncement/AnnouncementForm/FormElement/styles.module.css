@@ -1,3 +1,4 @@
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
 /* stylelint-disable selector-class-pattern */
 .container {
 	margin-bottom: 24px;
@@ -10,6 +11,7 @@
 
 		.ui_input_control {
 			padding: 4px 8px;
+			font-family: Poppins;
 			font-size: 12px !important;
 			border: 1px solid #dedede;
 			border-radius: 4px;
@@ -59,4 +61,12 @@
 	font-weight: 600;
 	line-height: 14px;
 	color: #4f4f4f;
+}
+
+.error_message {
+	min-height: 16px;
+	margin-top: 4px;
+	font-size: 12px;
+	line-height: 16px;
+	color: #cb6464;
 }

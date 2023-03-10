@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/announcements/page-components/Announcements/AnnouncementForm';
+export { default } from '@cogoport/announcements/page-components/Announcements/CreateAnnouncement';

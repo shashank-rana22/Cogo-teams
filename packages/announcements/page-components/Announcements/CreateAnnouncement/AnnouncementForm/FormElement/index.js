@@ -8,45 +8,14 @@ import {
 	ChipsController,
 	LocationSelectController,
 	MultiselectController,
-	DateRangePickerController,
+	DatepickerController,
 } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
 // import ErrorMessage from '@/temp/components/error-message';
 
-function FormElement({ name, field, control, options }) {
-	// let options = [];
-
-	// if (
-	// 	field.optionsListKey
-	// 	&& field?.type === 'select'
-	// ) {
-	// 	options = getStaticOptions(
-	// 		...field,
-	// 	);
-	// }
-	// const { options } = useGetAsyncOptions({
-	// 	...asyncFieldsPartner(),
-	// 	params: {
-	// 		filters: {
-	// 			status       : 'active',
-	// 			entity_types : ['cogoport'],
-	// 		},
-	// 		page_limit: 10,
-	// 	},
-	// });
-
-	// const finalOptions = options?.map((o) => ({
-	// 	label : `${startCase(o.business_name)}`,
-	// 	value : `${o.id}`,
-	// }));
-
-	// const renderOptions = () => {
-	// 	if (!field?.options) return finalOptions;
-	// 	return field?.options;
-	// };
-
+function FormElement({ name, field, control, options, errors }) {
 	const finalFields = {
 		...field,
 		// options: renderOptions(),
@@ -54,11 +23,9 @@ function FormElement({ name, field, control, options }) {
 
 	return (
 		<div className={styles.container}>
-			{
-				finalFields.type !== 'checkbox' && (
-					<div className={styles.label}>{finalFields.label}</div>
-				)
-			}
+			{finalFields.type !== 'checkbox' && (
+				<div className={styles.label}>{finalFields.label}</div>
+			)}
 			<div>
 				{finalFields.type === 'chips' && (
 					<ChipsController control={control} {...finalFields} />
@@ -86,13 +53,15 @@ function FormElement({ name, field, control, options }) {
 					<TextAreaController control={control} {...finalFields} />
 				)}
 				{finalFields.type === 'datepicker' && (
-					<DateRangePickerController control={control} {...finalFields} showTimeSelect />
+					<DatepickerController control={control} {...finalFields} showTimeSelect />
 				)}
 				{finalFields.type === 'upload' && (
 					<UploadController multiple name={name} key={name} control={control} accept={finalFields?.accept} />
 				)}
 			</div>
-			{/* <ErrorMessage message={errors[finalFields.name]?.message} /> */}
+			{errors[name] && (
+				<div className={styles.error_message}>{`${finalFields?.label} is ${errors[name]?.message}`}</div>
+			)}
 		</div>
 	);
 }

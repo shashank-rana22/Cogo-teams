@@ -5,7 +5,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 // eslint-disable-next-line import/order
-import { getElementController } from '../../../../../access-management/utils/get-element-controller';
+import { getElementController } from '../../../../../../access-management/utils/get-element-controller';
 
 function Child({
 	controls,
@@ -20,6 +20,8 @@ function Child({
 	error = {},
 	length = 0,
 }) {
+	console.log('error', error);
+
 	return (
 		<div className={styles.form_container}>
 			<div className={styles.content}>

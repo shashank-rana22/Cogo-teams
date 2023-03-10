@@ -2,38 +2,33 @@ import { Modal, Button } from '@cogoport/components';
 import { asyncFieldsAudiences } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { useRouter } from '@cogoport/next';
-import React from 'react';
+import React, { useState } from 'react';
 
-// import getFormControls from '../controls/get-form-controls';
-import useCreateAnnouncements from '../useCreateAnnouncement';
+// import useCreateAnnouncements from '../useCreateAnnouncement';
 
+import CreateAudienceForm from './CreateAudienceForm';
 import FieldArray from './FieldArray';
 import FormElement from './FormElement';
 import Preview from './Preview';
 import styles from './styles.module.css';
 
-function AnnouncementForm({ defaultValues = {} }) {
-	const {
-		controls,
-		control,
-		watch,
-		handleSubmit,
-		onSubmit,
-		showPreview,
-		setShowPreview,
-		loading,
-		// setValue,
-	} = useCreateAnnouncements({ defaultValues });
-	// const { control, watch, handleSubmit } = useForm();
+function AnnouncementForm({
+	controls,
+	control,
+	watch,
+	handleSubmit,
+	onSubmit,
+	showPreview,
+	setShowPreview,
+	loading,
+	errors,
+}) {
+	const [showCreateAudience, setShowCreateAudience] = useState(false);
 	const formValues = watch();
-	// const allControls = getFormControls(formValues);
-	// const [showPreview, setShowPreview] = useState(false);
-	console.log('values', formValues);
 
 	const { options } = useGetAsyncOptions({
 		...asyncFieldsAudiences(),
 	});
-	// console.log('options', options);
 	const finalOptions = options?.map((o) => ({
 		label : `${o.name}`,
 		value : `${o.id}`,
@@ -44,27 +39,21 @@ function AnnouncementForm({ defaultValues = {} }) {
 			'/learning/faq/create/configuration?create=audience',
 			'/learning/faq/create/configuration?create=audience',
 		);
-		// setConfigurationPage('audience');
-		// reset();
 	};
 
 	const renderAddButton = () => (
 		<div>
 			<Button
-				loading={loading}
-				themeType="primary"
+				themeType="secondary"
 				size="sm"
 				className={styles.add_audience_button}
-				onClick={onClickAddAudience}
+				// onClick={onClickAddAudience}
+				onClick={() => setShowCreateAudience(true)}
 			>
-				Add Audience
+				+ADD
 			</Button>
 		</div>
 	);
-
-	// const onSubmit = async (values) => {
-	// 	console.log('values', values);
-	// };
 	return (
 		<div className={styles.container}>
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -75,15 +64,12 @@ function AnnouncementForm({ defaultValues = {} }) {
 						if (type === 'field-array') {
 							return (
 								<div style={{ ...controlStyle }}>
-
 									<FieldArray
+										formValues={formValues}
 										control={control}
-									// controls={controlItem.controls}
 										{...controlItem}
-										// controlStyle={controlStyle}
 									/>
 								</div>
-
 							);
 						}
 						return (
@@ -95,6 +81,7 @@ function AnnouncementForm({ defaultValues = {} }) {
 									name={controlItem.name}
 									control={control}
 									field={controlItem}
+									errors={errors}
 									options={controlItem.options || finalOptions}
 								/>
 							</div>
@@ -104,7 +91,6 @@ function AnnouncementForm({ defaultValues = {} }) {
 				<div className={styles.button_container}>
 					<div>
 						<Button
-							loading={loading}
 							themeType="tertiary"
 							size="md"
 							onClick={() => setShowPreview(true)}
@@ -135,6 +121,18 @@ function AnnouncementForm({ defaultValues = {} }) {
 					<Modal.Header title="Preview" />
 					<Modal.Body className={styles.modal}>
 						<Preview formValues={formValues} />
+					</Modal.Body>
+				</Modal>
+
+				<Modal
+					show={showCreateAudience}
+					size="lg"
+					onClose={() => setShowCreateAudience(false)}
+					// scroll
+				>
+					<Modal.Header title="Add Audience" />
+					<Modal.Body className={styles.audience_modal}>
+						<CreateAudienceForm setShowCreateAudience={setShowCreateAudience} />
 					</Modal.Body>
 				</Modal>
 

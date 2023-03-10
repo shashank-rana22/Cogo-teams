@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 function FieldArray({
 	name,
 	control,
+	formValues,
 	controls,
 	error,
 	showElements,
@@ -37,8 +38,14 @@ function FieldArray({
 			});
 			return;
 		}
-
-		append(childEmptyValues);
+		let flag = true;
+		const { videos } = formValues;
+		videos.forEach((video) => {
+			if (!video.video_item || video.video_item?.length === 0) flag = false;
+		});
+		if (flag) {
+			append(childEmptyValues);
+		}
 	};
 
 	if (isEmpty(fields)) {

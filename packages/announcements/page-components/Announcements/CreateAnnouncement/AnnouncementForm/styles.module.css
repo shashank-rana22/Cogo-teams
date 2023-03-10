@@ -16,7 +16,12 @@
 
 .modal {
 	/* height: 100%; */
-	margin: -24px 0 26px;
+
+	/* margin: -24px 0 26px; */
+}
+
+.audience_modal {
+	min-height: 70vh;
 }
 
 .add_audience_button {

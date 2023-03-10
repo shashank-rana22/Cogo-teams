@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-undef */
-import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowLeft, IcMArrowRight, IcMDocument } from '@cogoport/icons-react';
 import React, { useRef } from 'react';
 
 import styles from './styles.module.css';
@@ -30,86 +30,101 @@ function Preview({ formValues = {} }) {
 		window.open(modifiedUrl, '_blank');
 	};
 
-	// let flag = true;
+	// https://www.youtube.com/embed/R8_veQiYBjI
+	// https://www.youtube.com/embed/VnvRFRk_51k
 
-	// Object.keys(formValues).forEach((key) => {
-	// 	if (key === 'videos') {
-	// 		formValues.videos.forEach((element) => {
-	// 			if (element.video_item) flag = false;
-	// 		});
-	// 	} else if (formValues.key?.length !== 0 && formValues.key) flag = false;
-	// });
-	// if (flag) {
-	// 	return (
-	// 		<div className={styles.nothing}>Nothing To Preview</div>
-	// 	);
-	// }
+	const videos = formValues.videos.filter((item) => item.video_item).map((item) => item.video_item);
+	const { files, images } = formValues;
+	console.log('files', files);
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.title}>{formValues?.title}</div>
 			<div className={styles.description}>{formValues?.description}</div>
 			<div className={styles.images_video_container}>
-				{formValues?.videos?.[0]?.video_item && (
+				{videos?.length > 0 && (
 					<div
-						className={styles.images_container}
-						style={formValues?.images?.length === 1 ? { alignItems: 'center' } : {}}
+						className={styles.videos_container}
+						style={videos?.length === 1 ? { alignItems: 'center' } : {}}
 					>
-						<div className={styles.heading}>Videos</div>
-						<div className={styles.images_inner_container}>
-							{formValues?.images?.length > 1 && (
+						<div className={styles.videos_inner_container}>
+							{videos?.length > 1 && (
 								<div className={styles.icn_container} onClick={scrollHandlerLeftVideos}>
-									{/* <IcMArrowLeft className="animated_arrow" width={25} height={25} /> */}
 									<IcMArrowLeft width={25} height={25} />
 								</div>
 							)}
-							<div className={styles.images} ref={scrollRefVideos}>
-								{formValues?.images?.map((item) => (
-									<div className={styles.image_item}>
-										<img src={item} alt="img" />
+							<div className={styles.videos} ref={scrollRefVideos}>
+								{videos?.map((video) => (
+									<div className={styles.video_item}>
+										<iframe
+											width="502"
+											height="315"
+											src={video}
+											title="YouTube video player"
+											frameBorder="0"
+											allow="accelerometer; autoplay;
+                                        clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+											allowfullscreen
+										/>
+
 									</div>
 								))}
 							</div>
-							{formValues?.images?.length > 1 && (
+							{videos?.length > 1 && (
 								<div className={styles.icn_container} onClick={scrollHandlerRightVideos}>
-									{/* <IcMArrowRight className="animated_arrow" width={25} height={25} /> */}
 									<IcMArrowRight width={25} height={25} />
 								</div>
 							)}
 						</div>
 					</div>
 				)}
-				{formValues?.images?.length > 0 && (
+				{images?.length > 0 && (
 					<div
 						className={styles.images_container}
-						style={formValues?.images?.length === 1 ? { alignItems: 'center' } : {}}
+						style={images?.length === 1 ? { alignItems: 'center' } : {}}
 					>
-						{/* <div className={styles.heading}>Images</div> */}
 						<div className={styles.images_inner_container}>
-							{formValues?.images?.length > 1 && (
+							{images?.length > 1 && (
 								<div className={styles.icn_container} onClick={scrollHandlerLeftImages}>
-									{/* <IcMArrowLeft className="animated_arrow" width={25} height={25} /> */}
 									<IcMArrowLeft width={25} height={25} />
 								</div>
 							)}
 							<div className={styles.images} ref={scrollRefImages}>
-								{formValues?.images?.map((item) => (
-									<div className={styles.image_item} onClick={() => openDocument(item)}>
-										<img src={item} alt="img" />
+								{images?.map((image) => (
+									<div className={styles.image_item} onClick={() => openDocument(image)}>
+										<img src={image} alt="img" />
 									</div>
 								))}
 							</div>
-							{formValues?.images?.length > 1 && (
+							{images?.length > 1 && (
 								<div className={styles.icn_container} onClick={scrollHandlerRightImages}>
-									{/* <IcMArrowRight className="animated_arrow" width={25} height={25} /> */}
 									<IcMArrowRight width={25} height={25} />
 								</div>
 							)}
 						</div>
 					</div>
 				)}
-
 			</div>
+			{files?.length > 0 && (
+				<div className={styles.files_container}>
+					<div className={styles.file_heading}>Files Attached:</div>
+					<div className={styles.files}>
+						{files?.map((file, index) => (
+							<div className={styles.file_item}>
+								<IcMDocument onClick={() => openDocument(file)} className={styles.doc_icon} />
+								<div style={{ fontSize: '10px', marginLeft: '4px' }}>
+									Doc
+									{'  '}
+									{index + 1}
+								</div>
+								{/* <object data={file} height="20%" width="20%">
+								<a href={file}>Document</a>
+							</object> */}
+							</div>
+						))}
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
