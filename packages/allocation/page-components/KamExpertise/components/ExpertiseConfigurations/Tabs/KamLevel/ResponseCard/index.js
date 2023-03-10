@@ -1,5 +1,4 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -10,15 +9,12 @@ import { controls, controlsBottom } from '../controls';
 import styles from './styles.module.css';
 
 function ResponseCard({
-	// createKam,
-	setCreateKam,
+	setCreateKam = () => {},
 	dataLength,
+	refetch,
 }) {
-	const formProps = useForm();
-
+	const { formProps, onCreate } = useCreateKamLevel({ dataLength, setCreateKam, refetch });
 	const { control, handleSubmit } = formProps;
-
-	const { onCreate } = useCreateKamLevel({});
 
 	return (
 		<div className={styles.level_card_container}>

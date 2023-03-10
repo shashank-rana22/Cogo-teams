@@ -10,9 +10,9 @@ const useGetKamExpertiseScore = () => {
 	});
 
 	const [{ loading, data }] = useAllocationRequest({
-		url     : '/allocation/kam_expertise_event_configuration',
-		method  : 'get',
-		authKey : 'get_allocation_kam_expertise_event_configuration',
+		url     : '/kam_expertise_event_configuration',
+		method  : 'GET',
+		authkey : 'get_allocation_kam_expertise_event_configuration',
 		params,
 	}, { manual: false });
 
