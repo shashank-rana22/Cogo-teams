@@ -50,7 +50,7 @@ function LocalLabel({ label, field, setValue, values, service, prefillData }) {
 		</div>
 	);
 	useEffect(() => {
-		const rate_data = selected || {};
+		const rate_data = selected || list[0] || {};
 		const line_items = rate_data?.data?.line_items || [];
 
 		let actualLineItems = [];
