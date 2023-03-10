@@ -33,6 +33,7 @@ function Customers({
 	showBotMessages = false,
 	setShowBotMessages,
 	setShowDialModal = () => {},
+
 }) {
 	const onChangeToggle = () => {
 		if (toggleStatus) {
@@ -50,7 +51,7 @@ function Customers({
 						CogoOne
 					</div>
 				</div>
-				{!isomniChannelAdmin && (
+				{!isomniChannelAdmin ? (
 					<div className={styles.styled_toggle}>
 						<Toggle
 							name="online"
@@ -62,7 +63,17 @@ function Customers({
 						/>
 
 					</div>
-				) }
+				) : (
+					<div className={styles.bot_messages}>
+						<div>Bot Messages</div>
+						<Toggle
+							name="online"
+							size="sm"
+							onChange={() => setShowBotMessages((p) => !p)}
+							checked={showBotMessages}
+						/>
+					</div>
+				)}
 			</div>
 			<div className={styles.tabs}>
 				<Tabs
@@ -78,6 +89,7 @@ function Customers({
 
 			{activeTab === 'message' && (
 				<MessageList
+					isomniChannelAdmin={isomniChannelAdmin}
 					messagesList={messagesList}
 					setActiveMessage={setActiveMessage}
 					setSearchValue={setSearchValue}
