@@ -8,20 +8,23 @@ function NotifyModal({ setNotifyModal = () => {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.notify_header}>Are you sure you wish to send notifications to the following?</div>
+			<div className={styles.notify_header}>
+				Are you sure you wish to send notifications to all
+				the managers?
+			</div>
 
 			<div className={styles.checkbox}>
+				<div className={styles.checkbox_label}>
+					Include CEOs
+					{' '}
+					<span>(Amitabh Shankar, Purnendu Shekhar)</span>
+				</div>
 				<Checkbox
 					checked={sendToAll}
 					onChange={(e) => setSendToAll(e.target.checked)}
 					style={{ paddingLeft: '0px' }}
 
 				/>
-				<div className={styles.checkbox_label}>
-					Send to All Cogoport Managers
-					{' '}
-					<span>(Including CEOs)</span>
-				</div>
 			</div>
 
 			<div className={styles.button_container}>

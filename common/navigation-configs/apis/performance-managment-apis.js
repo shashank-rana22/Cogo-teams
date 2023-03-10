@@ -109,6 +109,11 @@ const performance_management = [
 		access_type  : 'private',
 		service_name : 'iris',
 	},
+	{
+		api          : 'get_partner_user_rm_mapping',
+		access_type  : 'private',
+		service_name : 'partner',
+	},
 ];
 
 export default performance_management;

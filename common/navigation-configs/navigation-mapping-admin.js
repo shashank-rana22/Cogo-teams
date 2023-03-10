@@ -2058,6 +2058,13 @@ const navigationMappingAdmin = {
 		icon        : IcMPartnersCogoport,
 		options     : [
 			{
+				key           : 'performance_management-employee_directory',
+				title         : 'Employee Directory',
+				href          : '/v2/performance-management/employee-directory',
+				as            : '/v2/performance-management/employee-directory',
+				possible_apis : apis.performance_management,
+			},
+			{
 				key           : 'performance_management-user_dashboard',
 				title         : 'User Dashboard',
 				href          : '/v2/performance-management/user-dashboard',
