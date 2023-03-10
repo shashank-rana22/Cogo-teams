@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Accordion, Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
@@ -13,6 +14,7 @@ function DisplayCard({
 	handleAnnouncementDetails = () => {},
 	refetch = () => {},
 	loading = false,
+	deleteAnnouncement = () => {},
 
 }) {
 	const options = [
@@ -22,6 +24,15 @@ function DisplayCard({
 		{ label: 'Updated At', value: format(data?.updated_at, 'dd MMM yyyy hh:mm a') },
 		{ label: 'Action', value: 1 },
 	];
+
+	const router = useRouter();
+
+	const editDetails = () => {
+		router.push(
+			`/announcements/create?announcement_id=${data?.id}`,
+			`/announcements/create?announcement_id=${data?.id}`,
+		);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -45,6 +56,7 @@ function DisplayCard({
 											themeType="secondary"
 											size="sm"
 											style={{ marginRight: 8 }}
+											onClick={() => editDetails()}
 										>
 											Edit
 										</Button>
@@ -52,6 +64,7 @@ function DisplayCard({
 											height={20}
 											width={20}
 											style={{ cursor: 'pointer' }}
+											onClick={() => deleteAnnouncement(data?.id)}
 										/>
 									</div>
 								)

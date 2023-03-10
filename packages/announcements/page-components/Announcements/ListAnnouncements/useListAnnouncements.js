@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -8,6 +9,7 @@ function useListAnnouncements() {
 	const [currentAnnouncement, setCurrentAnnouncement] = useState(null);
 	const [activeList, setActiveList] = useState('active');
 	const [page, setPage] = useState(1);
+	const [paginationData, setPaginationData] = useState({});
 
 	const { general = {}, profile = {} } = useSelector((state) => state);
 	const { auth_role_data = {}, partner = {} } = profile;
@@ -31,7 +33,7 @@ function useListAnnouncements() {
 			const res =	await trigger({
 				params: {
 					filters: {
-						status            : 'active',
+						status            : activeList,
 						auth_function     : scope === 'partner' ? roleFunction : undefined,
 						auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
 						cogo_entity_id    : id,
@@ -46,19 +48,29 @@ function useListAnnouncements() {
 				},
 
 			});
+			setPaginationData(
+				{
+					total_count : res?.data?.total_count,
+					page_limit  : res?.data?.page_limit,
+				},
+			);
 			console.log('res', res);
 		} catch (err) {
-			console.log(err);
+			Toast.error(err?.message);
+			// console.log(err);
 		}
 	};
 
-	const deactivateQuestion = async (id) => {
+	const deleteAnnouncement = async (announcement_id) => {
 		try {
 			await updateTrigger(
-				{ data: { id, status: 'inactive' } },
+				{ data: { id: announcement_id, status: 'inactive' } },
 			);
 			getAnnouncementList();
-		} catch { console.log('Error', error); }
+		} catch (err) {
+			Toast.error(err?.message);
+			console.log('Error', error);
+		}
 	};
 	useEffect(() => {
 		getAnnouncementList();
@@ -67,10 +79,12 @@ function useListAnnouncements() {
 	return {
 		page,
 		setPage,
+		paginationData,
 		data,
 		searchInput,
 		setSearchInput,
 		activeList,
+		deleteAnnouncement,
 		currentAnnouncement,
 		setCurrentAnnouncement,
 		setActiveList,

@@ -39,7 +39,7 @@ function Preview({ formValues = {} }) {
 		<div className={styles.container}>
 
 			<div className={styles.title}>{formValues?.title}</div>
-			<div className={styles.description}>{formValues?.description}</div>
+			<div className={styles.description}>{formValues?.content}</div>
 			<div className={styles.images_video_container}>
 				{videos?.length > 0 && (
 					<div

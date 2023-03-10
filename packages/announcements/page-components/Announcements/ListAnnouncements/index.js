@@ -13,110 +13,123 @@ import Header from './Header';
 import styles from './styles.module.css';
 import useListAnnouncements from './useListAnnouncements';
 
-function AddedAnnouncements(props) {
+function AddedAnnouncements() {
+	// const {
+	// 	page,
+	// 	setPage,
+	// 	paginationData,
+	// 	columns,
+	// 	filters,
+	// 	setFilters,
+	// 	searchInput,
+	// 	setSearchInput,
+	// 	activeList,
+	// 	setActiveList,
+	// 	AnnouncementListLoading,
+	// } = props;
+
+	// const { profile } = useSelector((reduxState) => reduxState);
+
+	const router = useRouter();
+	const props = useListAnnouncements();
+
 	const {
+		data,
+		currentAnnouncement,
+		setCurrentAnnouncement,
+		loading,
+		deleteAnnouncement,
+		activeList,
+		setActiveList,
 		page,
 		setPage,
 		paginationData,
-		columns,
-		filters,
-		setFilters,
-		searchInput,
-		setSearchInput,
-		activeList,
-		setActiveList,
-		AnnouncementListLoading,
 	} = props;
 
-	const { profile } = useSelector((reduxState) => reduxState);
+	// const columns1 = [
+	// 	{
+	// 		Header   : 'Description',
+	// 		accessor : (item) => (
+	// 			<div>
+	// 				{item.title}
+	// 			</div>
+	// 		),
+	// 	},
+	// 	{
+	// 		Header   : 'Topics',
+	// 		accessor : (items) => (items?.topics?.length > 0 ? (
+	// 			<div className={styles.topics}>
+	// 				{items.faq_topics.map((topic) => {
+	// 					const { display_name } = topic || {};
+	// 					return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+	// 				})}
+	// 			</div>
+	// 		) : '-'),
+	// 	},
+	// 	{
+	// 		Header   : 'Tags',
+	// 		accessor : (items) => (items?.tags?.length > 0 ? (
+	// 			<div className={styles.tags}>
+	// 				{items.faq_tags.map((tag) => {
+	// 					const { display_name } = tag || {};
+	// 					return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+	// 				})}
+	// 			</div>
+	// 		) : '-'),
+	// 	},
 
-	const router = useRouter();
-	const { data, currentAnnouncement, setCurrentAnnouncement, loading } = useListAnnouncements();
+	// 	{
+	// 		Header   : 'Announcement Type',
+	// 		accessor : (items) => (items?.announcement_type !== '' ? (
+	// 			<div className={styles.question}>
+	// 				{items?.announcement_type}
+	// 			</div>
+	// 		) : '-'),
+	// 	},
 
-	const columns1 = [
-		{
-			Header   : 'Description',
-			accessor : (item) => (
-				<div>
-					{item.title}
-				</div>
-			),
-		},
-		{
-			Header   : 'Topics',
-			accessor : (items) => (items?.topics?.length > 0 ? (
-				<div className={styles.topics}>
-					{items.faq_topics.map((topic) => {
-						const { display_name } = topic || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-					})}
-				</div>
-			) : '-'),
-		},
-		{
-			Header   : 'Tags',
-			accessor : (items) => (items?.tags?.length > 0 ? (
-				<div className={styles.tags}>
-					{items.faq_tags.map((tag) => {
-						const { display_name } = tag || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-					})}
-				</div>
-			) : '-'),
-		},
-
-		{
-			Header   : 'Announcement Type',
-			accessor : (items) => (items?.announcement_type !== '' ? (
-				<div className={styles.question}>
-					{items?.announcement_type}
-				</div>
-			) : '-'),
-		},
-
-		{
-			Header   : 'Last Updated At',
-			accessor : (items) => {
-				const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
-				return (
-					<div>
-						{formatDate}
-					</div>
-				);
-			},
-		},
-		{
-			Header   : 'ACTIONS',
-			accessor : (items) => (
-				<div className={styles.button_container}>
-					<Button
-						themeType="primary"
-						size="sm"
-						style={{ marginRight: 8 }}
-						onClick={() => onClickViewButton(items?.id)}
-					>
-						VIEW
-					</Button>
-					<Button
-						themeType="secondary"
-						size="sm"
-						style={{ marginRight: 8 }}
-						onClick={() => onClickEditButton(items?.id)}
-					>
-						EDIT
-					</Button>
-					{activeList !== 'inactive' ? (
-						<IcMDelete
-							height={20}
-							width={20}
-							style={{ cursor: 'pointer' }}
-							onClick={() => deactivateQuestion(items?.id)}
-						/>
-					) : null}
-				</div>
-			),
-		},
-	];
+	// 	{
+	// 		Header   : 'Last Updated At',
+	// 		accessor : (items) => {
+	// 			const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
+	// 			return (
+	// 				<div>
+	// 					{formatDate}
+	// 				</div>
+	// 			);
+	// 		},
+	// 	},
+	// 	{
+	// 		Header   : 'ACTIONS',
+	// 		accessor : (items) => (
+	// 			<div className={styles.button_container}>
+	// 				<Button
+	// 					themeType="primary"
+	// 					size="sm"
+	// 					style={{ marginRight: 8 }}
+	// 					onClick={() => onClickViewButton(items?.id)}
+	// 				>
+	// 					VIEW
+	// 				</Button>
+	// 				<Button
+	// 					themeType="secondary"
+	// 					size="sm"
+	// 					style={{ marginRight: 8 }}
+	// 					onClick={() => onClickEditButton(items?.id)}
+	// 				>
+	// 					EDIT
+	// 				</Button>
+	// 				{activeList !== 'inactive' ? (
+	// 					<IcMDelete
+	// 						height={20}
+	// 						width={20}
+	// 						style={{ cursor: 'pointer' }}
+	// 						onClick={() => deactivateQuestion(items?.id)}
+	// 					/>
+	// 				) : null}
+	// 			</div>
+	// 		),
+	// 	},
+	// ];
 
 	const renderTable = () => {
 		const onClick = () => {
@@ -125,7 +138,6 @@ function AddedAnnouncements(props) {
 				'/learning/faq/create/question',
 			);
 		};
-		// console.log(data);
 		return (
 			<>
 				<div className={styles.table}>
@@ -134,6 +146,7 @@ function AddedAnnouncements(props) {
 						data={data?.list}
 						currentAnnouncement={currentAnnouncement}
 						setCurrentAnnouncement={setCurrentAnnouncement}
+						deleteAnnouncement={deleteAnnouncement}
 					/>
 				</div>
 
@@ -153,10 +166,10 @@ function AddedAnnouncements(props) {
 	return (
 		<div className={styles.container}>
 			<Header
-				filters={filters}
-				setFilters={setFilters}
-				searchInput={searchInput}
-				setSearchInput={setSearchInput}
+				// filters={filters}
+				// setFilters={setFilters}
+				// searchInput={searchInput}
+				// setSearchInput={setSearchInput}
 				activeList={activeList}
 				setActiveList={setActiveList}
 			/>

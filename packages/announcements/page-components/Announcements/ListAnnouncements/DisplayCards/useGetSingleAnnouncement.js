@@ -4,19 +4,38 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useGetSingleAnnouncement = ({
+	announcement_id = '',
 	listData = [],
 	currentAnnouncement = null,
 	setCurrentAnnouncement = () => {},
 }) => {
-	// console.log('currentUser', currentUser);
 	const [announcementDetailsToggle, setAnnouncementDetailsToggle] = useState(false);
-
 	const [announcementDetails, setAnnouncementDetails] = useState({});
+	const [defaultValues, setDefaultValues] = useState({});
+	const [disabled, setDisabled] = useState(false);
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_announcement',
 	}, { manual: true });
+
+	useEffect(() => {
+		(async () => {
+			if (announcement_id) {
+				try {
+					const res = await trigger({
+						params: { announcement_id },
+					});
+					setDisabled(true);
+
+					setDefaultValues(res?.data);
+				} catch (err) {
+					// Toast.error(err?.message);
+					console.log(err?.message);
+				}
+			}
+		})();
+	}, []);
 
 	useEffect(() => {
 		(async () => {
@@ -54,9 +73,11 @@ const useGetSingleAnnouncement = ({
 	return {
 		handleAnnouncementDetails,
 		// announcementDetailsToggle,
+		defaultValues,
 		refetch             : getAnnouncement,
 		loading,
 		announcementDetails : announcementDetails || {},
+		disabled,
 	};
 };
 

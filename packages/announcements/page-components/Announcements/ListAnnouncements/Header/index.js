@@ -6,8 +6,8 @@ import SearchInput from '../../../../commons/SearchInput';
 import styles from './styles.module.css';
 
 function Header({
-	searchInput,
-	setSearchInput,
+	searchInput = '',
+	setSearchInput = () => {},
 	activeList,
 	setActiveList,
 }) {

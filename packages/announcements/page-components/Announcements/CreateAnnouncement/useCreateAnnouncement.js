@@ -1,12 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { addDays } from '@cogoport/utils';
-import { useState } from 'react';
+import { format, addDays } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import getFormControls from './controls/get-form-controls';
 
-const useCreateAnnouncements = () => {
+const useCreateAnnouncements = ({ defaultValues = {} }) => {
+	console.log('check', defaultValues);
 	const { control, watch, handleSubmit, formState:{ errors }, setValue } = useForm();
 	const [showPreview, setShowPreview] = useState(false);
 	const [{ loading }, trigger] = useRequest({
@@ -16,7 +17,22 @@ const useCreateAnnouncements = () => {
 
 	const controls = getFormControls();
 
-	// console.log('errors', errors);
+	useEffect(() => {
+		const { validity_end = '', validity_start = '', hot_duration, faq_audiences = [] } = defaultValues;
+		console.log('check', validity_start);
+		const validity = {
+			startDate : format(validity_start, 'd/MM/yyyy hh:mm a'),
+			endDate   : format(validity_end, 'd/MM/yyyy hh:mm a'),
+		};
+		setValue('title', defaultValues?.title);
+		setValue('content', defaultValues?.content);
+		setValue('announcement_type', defaultValues?.announcement_type);
+		setValue('redirection_url', defaultValues?.redirection_url);
+		// setValue('is_important', 'true');
+		setValue('audience_ids', [...faq_audiences.map((item) => item.id)]);
+		// setValue('validity', validity);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [defaultValues]);
 
 	const onSubmit = async (values) => {
 		if (!values) return;

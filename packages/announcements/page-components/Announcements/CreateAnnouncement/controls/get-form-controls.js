@@ -88,7 +88,16 @@ const getFormControls = () => [
 		accept     : '.png, .jpeg',
 		// rules       : { required: 'Required' },
 	},
-
+	{
+		name  : 'redirection_url',
+		label : 'Redirection URL',
+		type  : 'text',
+		style : {
+			flexBasis: '48%',
+		},
+		placeholder: 'Enter Redirection URL',
+		// rules       : { required: 'Required' },
+	},
 	{
 		type           : 'multi-select',
 		optionsListKey : 'audiences',
@@ -110,16 +119,7 @@ const getFormControls = () => [
 		// value       : formvalue?.partner_id || '',
 		// rules       : { required: 'Required' },
 	},
-	{
-		name  : 'redirection_url',
-		label : 'Redirection URL',
-		type  : 'text',
-		style : {
-			flexBasis: '48%',
-		},
-		placeholder: 'Enter Redirection URL',
-		// rules       : { required: 'Required' },
-	},
+	
 	{
 		name            : 'validity',
 		label           : 'Validity',

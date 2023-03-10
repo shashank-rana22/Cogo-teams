@@ -46,6 +46,7 @@ function Child({
 								control={control}
 								id={`create_form_${controlItem.name}_${index}`}
 								{...controlItem}
+								disabled={disabled}
 								name={`${name}[${index}].${controlItem.name}`}
 							/>
 							<div className={styles.error_message}>

@@ -11,7 +11,7 @@ import FormElement from './FormElement';
 import Preview from './Preview';
 import styles from './styles.module.css';
 
-function AnnouncementForm() {
+function AnnouncementForm({ defaultValues = {}, disabled = false }) {
 	const {
 		controls,
 		control,
@@ -23,7 +23,7 @@ function AnnouncementForm() {
 		loading,
 		errors,
 		// setValue,
-	} = useCreateAnnouncements();
+	} = useCreateAnnouncements({ defaultValues });
 
 	const [showCreateAudience, setShowCreateAudience] = useState(false);
 	const formValues = watch();
@@ -54,6 +54,7 @@ function AnnouncementForm() {
 				{controls.map((controlItem) => {
 					const controlStyle = controlItem?.style;
 					const type = controlItem?.type;
+					if (['files', 'images', 'videos'].includes(controlItem.name) && disabled) return null;
 					if (type === 'field-array') {
 						return (
 							<div style={{ ...controlStyle }}>
@@ -61,6 +62,7 @@ function AnnouncementForm() {
 									formValues={formValues}
 									control={control}
 									{...controlItem}
+									disabled={disabled}
 								/>
 							</div>
 						);
@@ -76,6 +78,7 @@ function AnnouncementForm() {
 								field={controlItem}
 								errors={errors}
 								options={controlItem.options || finalOptions}
+								disabled={['files', 'images'].includes(controlItem.name) && disabled}
 							/>
 						</div>
 					);

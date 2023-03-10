@@ -13,7 +13,7 @@ import {
 
 import styles from './styles.module.css';
 
-function FormElement({ name, field, control, options, errors }) {
+function FormElement({ name, field, control, options, errors, disabled = false }) {
 	const finalFields = {
 		...field,
 	};
@@ -53,7 +53,14 @@ function FormElement({ name, field, control, options, errors }) {
 					<DateRangePickerController control={control} {...finalFields} showTimeSelect />
 				)}
 				{finalFields.type === 'upload' && (
-					<UploadController multiple name={name} key={name} control={control} accept={finalFields?.accept} />
+					<UploadController
+						multiple
+						name={name}
+						key={name}
+						disabled={disabled}
+						control={control}
+						accept={finalFields?.accept}
+					/>
 				)}
 			</div>
 			{errors[name] && (
