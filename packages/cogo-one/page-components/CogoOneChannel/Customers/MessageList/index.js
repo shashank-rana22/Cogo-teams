@@ -25,6 +25,8 @@ function MessageList({
 	setActiveMessage,
 	setActiveCardId = () => {},
 	showBotMessages = false,
+	setShowBotMessages = () => {},
+	isomniChannelAdmin = false,
 }) {
 	function getShowChat({ user_name }) {
 		if (searchValue) {
@@ -39,6 +41,15 @@ function MessageList({
 		return <LoadingState />;
 	}
 
+	function lastMessagePreview(previewData = '') {
+		return (
+			<div
+				className={styles.content}
+				dangerouslySetInnerHTML={{ __html: previewData }}
+			/>
+		);
+	}
+
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -51,11 +62,10 @@ function MessageList({
 						onChange={(val) => setSearchValue(val)}
 					/>
 				</div>
-				{!showBotMessages && (
-					<div className={styles.filter_icon}>
-						<Popover
-							placement="right"
-							render={(
+				<div className={styles.filter_icon}>
+					<Popover
+						placement="right"
+						render={(
 							filterVisible && (
 								<FilterComponents
 									setFilterVisible={setFilterVisible}
@@ -63,20 +73,24 @@ function MessageList({
 									appliedFilters={appliedFilters}
 									setAppliedFilters={setAppliedFilters}
 									setActiveCardId={setActiveCardId}
+									setShowBotMessages={setShowBotMessages}
+									showBotMessages={showBotMessages}
+									isomniChannelAdmin={isomniChannelAdmin}
 								/>
 							)
-							)}
-							visible={filterVisible}
-							onClickOutside={() => setFilterVisible(false)}
-						>
-							<IcMFilter
-								onClick={() => setFilterVisible((prev) => !prev)}
-								className={styles.filter_icon}
-							/>
-						</Popover>
-						{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
-					</div>
-				)}
+						)}
+						visible={filterVisible}
+						onClickOutside={() => setFilterVisible(false)}
+					>
+						<IcMFilter
+							onClick={() => setFilterVisible((prev) => !prev)}
+							className={styles.filter_icon}
+						/>
+					</Popover>
+					{(!isEmpty(appliedFilters)
+					|| (showBotMessages && !isomniChannelAdmin))
+					&& <div className={styles.filters_applied} />}
+				</div>
 			</div>
 
 			{ isEmpty(messagesList) ? (
@@ -164,10 +178,7 @@ function MessageList({
 										</div>
 
 										<div className={styles.content_div}>
-											<div className={styles.content}>
-												{item.last_message}
-											</div>
-
+											{lastMessagePreview(item?.last_message || '')}
 											{item.new_message_count > 0 && (
 												<div className={styles.new_message_count}>
 													{item.new_message_count > 100 ? '99+' : (

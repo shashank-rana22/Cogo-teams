@@ -127,6 +127,12 @@ const apis = [
 		service_name : 'spot_search',
 
 	},
+	{
+		api          : 'download_rfq_excel',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
 ];
 
 export default apis;

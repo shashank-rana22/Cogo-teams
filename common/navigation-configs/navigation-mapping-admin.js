@@ -1177,7 +1177,7 @@ const navigationMappingAdmin = {
 				as            : '/revenue-desk/air',
 				type          : 'link',
 				main_apis     : ['list_shipments'],
-				possible_apis : apis.revenue_desk,
+				possible_apis : [...apis.shipment, ...apis.air_revenue_desk],
 
 			},
 			{
@@ -1783,6 +1783,16 @@ const navigationMappingAdmin = {
 		possible_apis : apis.awb_inventory,
 		module_type   : 'dashboards',
 	},
+	ground_ops: {
+		key           : 'ground_ops',
+		title         : 'Ground Ops Dashboard',
+		href          : '/ground-ops',
+		as            : '/ground-ops',
+		main_apis     : [],
+		icon          : IcMInvoiceApprovals,
+		possible_apis : apis.ground_ops,
+		module_type   : 'dashboards',
+	},
 
 	airline_booking_plugin: {
 		key           : 'airline_booking_plugin',
@@ -1798,8 +1808,8 @@ const navigationMappingAdmin = {
 	enrichment: {
 		key           : 'enrichment',
 		title         : 'Enrichment',
-		href          : '/enrichment',
-		as            : '/enrichment',
+		href          : '/v2/enrichment',
+		as            : '/v2/enrichment',
 		main_apis     : ['/list_lead_organizations_enrichment'],
 		possible_apis : apis.enrichment,
 		module_type   : 'dashboards',
@@ -1872,6 +1882,32 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_auth_roles'],
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
+	},
+	ticket_management: {
+		key       : 'ticket_management',
+		title     : 'Ticket Management',
+		isSubNavs : true,
+		icon      : IcMDocument,
+		options   : [
+			{
+				key           : 'ticket_management-ticket_management_dashboard',
+				title         : 'Dashboard',
+				href          : '/ticket-management/dashboard',
+				as            : '/ticket-management/dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.ticket_management,
+			},
+			{
+				key           : 'ticket_management-ticket_configurations',
+				title         : 'Ticket Configurations',
+				href          : '/ticket-management/configurations',
+				as            : '/ticket-management/configurations',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.ticket_management,
+			},
+		],
 	},
 	cogo_one: {
 		key   : 'cogo_one',
@@ -1996,6 +2032,64 @@ const navigationMappingAdmin = {
 			},
 		],
 		module_type: 'dashboards',
+	},
+	analytics_dashboard: {
+		key         : 'analytics_dashboard',
+		title       : 'Analytics Dashboard',
+		isSubNavs   : true,
+		icon        : IcMDashboard,
+		module_type : 'dashboards',
+		options     : [
+			{
+				key           : 'analytics_dashboard-management',
+				title         : 'Analytics Dashboard Management',
+				href          : '/analytics-dashboard-management',
+				as            : '/analytics-dashboard-management',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.analytics_dashboard_management,
+			},
+			{
+				key           : 'analytics_dashboard-view',
+				title         : 'Analytics Dashboard',
+				href          : '/analytics-dashboard',
+				as            : '/analytics-dashboard',
+				type          : 'link',
+				main_apis     : ['list_analytics_dashboard_widgets', 'get_analytics_widget_data'],
+				possible_apis : apis.analytics_dashboard,
+			},
+		],
+	},
+	performance_management: {
+		key         : 'performance_management',
+		title       : 'Performance Management',
+		isSubNavs   : true,
+		module_type : 'dashboards',
+		main_apis   : ['list_user_feedbacks'],
+		icon        : IcMPartnersCogoport,
+		options     : [
+			{
+				key           : 'performance_management-user_dashboard',
+				title         : 'User Dashboard',
+				href          : '/v2/performance-management/user-dashboard',
+				as            : '/v2/performance-management/user-dashboard',
+				possible_apis : apis.performance_management,
+			},
+			{
+				key           : 'performance_management-manager_dashboard',
+				title         : 'Manager Dashboard',
+				href          : '/v2/performance-management/manager-dashboard',
+				as            : '/v2/performance-management/manager-dashboard',
+				possible_apis : apis.performance_management,
+			},
+			{
+				key           : 'performance_management-hr_dashboard',
+				title         : 'HR Dashboard',
+				href          : '/v2/performance-management/hr-dashboard',
+				as            : '/v2/performance-management/hr-dashboard',
+				possible_apis : apis.performance_management,
+			},
+		],
 	},
 };
 

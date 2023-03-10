@@ -5,10 +5,11 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 function useListFaqQuestions({
-	searchState = '',
+	searchState = undefined,
 	topicId = undefined,
 	tagId = [],
 	limit = undefined,
+	sort = undefined,
 }) {
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
@@ -43,9 +44,9 @@ function useListFaqQuestions({
 					filters: {
 						state             : 'published',
 						status            : 'active',
-						q                 : query,
-						faq_topic_id      : topicId,
-						faq_tag_id        : tagId,
+						q                 : query || undefined,
+						faq_topic_id      : topicId || undefined,
+						faq_tag_id        : tagId || undefined,
 						auth_function     : scope === 'partner' ? roleFunction : undefined,
 						auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
 						country_id,
@@ -53,9 +54,10 @@ function useListFaqQuestions({
 						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
 
 					},
-					sort_by    : 'view_count',
+					sort_by                : sort,
 					page,
-					page_limit : limit || undefined,
+					page_limit             : limit || undefined,
+					faq_tags_data_required : true,
 				},
 			});
 		} catch (error) {

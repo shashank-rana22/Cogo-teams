@@ -31,14 +31,14 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	const audiences = [];
 
 	(faq_topics || []).map((faq_topic) => {
-		const { name } = faq_topic || {};
-		topics.push(name);
+		const { display_name } = faq_topic || {};
+		topics.push(display_name);
 		return topics;
 	});
 
 	(faq_tags || []).map((faq_tag) => {
-		const { name } = faq_tag || {};
-		tags.push(name);
+		const { display_name } = faq_tag || {};
+		tags.push(display_name);
 		return tags;
 	});
 
@@ -55,7 +55,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query?.id]);
 
-	const onclickBack = () => {
+	const onclickEdit = () => {
 		const href = `/learning/faq/create/question?mode=create&id=${id}`;
 		router.push(href, href);
 		setQuestionPreview('create');
@@ -96,7 +96,6 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 				<h5 className={styles.question_title}>Question</h5>
 				<h1 className={styles.question}>
 					{question_abstract}
-					?
 				</h1>
 			</div>
 			<div>
@@ -139,6 +138,23 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 			</div>
 
 			<div className={styles.button_container}>
+
+				<Button
+					themeType="secondary"
+					size="md"
+					className={styles.publish_button}
+					onClick={() => onClickBackButton(id)}
+				>
+					Back
+				</Button>
+				<Button
+					themeType="primary"
+					size="md"
+					className={styles.publish_button}
+					onClick={() => onclickEdit(id)}
+				>
+					Edit
+				</Button>
 				{!(source === 'view')
 					&& (
 						<Button
@@ -150,13 +166,6 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 							Publish
 						</Button>
 					)}
-				<div
-					className={styles.goback_button}
-					role="presentation"
-					onClick={() => onclickBack(id)}
-				>
-					Go Back & Edit
-				</div>
 			</div>
 		</div>
 	);

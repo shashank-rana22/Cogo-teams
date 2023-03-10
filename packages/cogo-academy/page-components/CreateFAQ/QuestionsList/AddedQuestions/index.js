@@ -72,13 +72,16 @@ function AddedQuestions(props) {
 				</div>
 
 				<div className={styles.pagination}>
-					<Pagination
-						type="table"
-						currentPage={page}
-						totalItems={paginationData?.total_count}
-						pageSize={paginationData?.page_limit}
-						onPageChange={setPage}
-					/>
+					{paginationData?.total_count > 10
+						? (
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={paginationData?.total_count}
+								pageSize={paginationData?.page_limit}
+								onPageChange={setPage}
+							/>
+						) : null}
 				</div>
 			</>
 		);
