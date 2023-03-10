@@ -34,6 +34,7 @@ import {
  * @returns {Array} Modified Async Options
  * getModifiedOptions
  */
+
 const keyAsyncFieldsParamsMapping = {
 	organizations          : asyncFieldsOrganizations,
 	organization_users     : asyncFieldsOrganizationUser,
@@ -55,7 +56,7 @@ function AsyncSelect(props) {
 		initialCall,
 		getModifiedOptions,
 		getSelectedOption,
-		microService = false,
+		microService = '',
 		...rest
 	} = props;
 
