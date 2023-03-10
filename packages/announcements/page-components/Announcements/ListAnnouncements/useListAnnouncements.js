@@ -1,257 +1,67 @@
-import { Pill, Button } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
-import { IcMDelete } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { startCase, format } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect, useState } from 'react';
 
-import styles from './styles.module.css';
-
-const FILTER_MAPPING = {
-
-	active   : { status: 'active' },
-	inactive : { status: 'inactive' },
-};
-
-const addedQuestionsColumns = ({
-	activeList,
-	onClickEditButton,
-	deactivateQuestion,
-	onClickViewButton = () => {},
-}) => [
-	{
-		Header   : 'Description',
-		accessor : (items) => (
-			<div className={styles.question}>
-				{items?.Title}
-			</div>
-		),
-	},
-	{
-		Header   : 'TOPICS',
-		accessor : (items) => (items?.topics?.length > 0 ? (
-			<div className={styles.topics}>
-				{items.faq_topics.map((topic) => {
-					const { display_name } = topic || {};
-					return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-				})}
-			</div>
-		) : '-'),
-	},
-	{
-		Header   : 'TAGS',
-		accessor : (items) => (items?.faq_tags?.length > 0 ? (
-			<div className={styles.tags}>
-				{items.faq_tags.map((tag) => {
-					const { display_name } = tag || {};
-					return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-				})}
-			</div>
-		) : '-'),
-	},
-	{
-		Header   : 'LAST UPDATED AT',
-		accessor : (items) => {
-			const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
-			return (
-				<div>
-					{formatDate}
-				</div>
-			);
-		},
-	},
-	{
-		Header   : 'ACTIONS',
-		accessor : (items) => (
-			<div className={styles.button_container}>
-				{!['inactive', 'draft'].includes(activeList)
-					? (
-						<Button
-							themeType="primary"
-							size="sm"
-							style={{ marginRight: 8 }}
-							onClick={() => onClickViewButton(items?.id)}
-						>
-							VIEW
-						</Button>
-					)
-					: null}
-				<Button
-					themeType="secondary"
-					size="sm"
-					style={{ marginRight: 8 }}
-					onClick={() => onClickEditButton(items?.id)}
-				>
-					EDIT
-				</Button>
-				{activeList !== 'inactive' ? (
-					<IcMDelete
-						height={20}
-						width={20}
-						style={{ cursor: 'pointer' }}
-						onClick={() => deactivateQuestion(items?.id)}
-					/>
-				) : null}
-			</div>
-		),
-	},
-];
-
-const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) => [
-	{
-		Header   : 'QUESTIONS',
-		accessor : (items) => (
-			<div className={styles.question}>
-				{items?.question_abstract}
-			</div>
-		),
-	},
-	{
-		Header   : 'CREATED BY',
-		accessor : (items) => (
-			<div>
-				{items?.created_by || '-'}
-			</div>
-		),
-	},
-	{
-		Header   : 'CREATED AT',
-		accessor : (items) => {
-			const formatDate = format(items?.created_at, 'dd MMM yyyy');
-			return (
-				<div>
-					{formatDate}
-				</div>
-			);
-		},
-	},
-	{
-		Header   : 'ACTIONS',
-		accessor : (items) => (
-			<div className={styles.button_container}>
-				<Button
-					themeType="primary"
-					size="sm"
-					style={{ marginRight: 8 }}
-					onClick={() => onClickEditButton(items.id)}
-				>
-					ADD ANSWER
-				</Button>
-				<IcMDelete
-					height={20}
-					width={20}
-					style={{ marginRight: 8 }}
-					onClick={() => deactivateQuestion(items?.id)}
-				/>
-
-			</div>
-		),
-	},
-];
-
-const useQuestionList = () => {
-	const { query, debounceQuery } = useDebounceQuery();
+function useListAnnouncements() {
 	const [searchInput, setSearchInput] = useState('');
 	const [activeList, setActiveList] = useState('active');
 	const [page, setPage] = useState(1);
-	const router = useRouter();
 
-	const [{ data: questionList, loading }, trigger] = useRequest({
+	const { general = {}, profile = {} } = useSelector((state) => state);
+	const { auth_role_data = {}, partner = {} } = profile;
+	const { role_functions = [], role_sub_functions = [] } = auth_role_data?.[0] || {};
+
+	const { scope = '' } = general;
+	const { country_id = '', id = '' } = partner;
+
+	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/list_faq_questions',
+		url    : '/list_announcement',
 	}, { manual: true });
 
-	const [{ error }, updateTrigger] = useRequest({
-		url    : '/update_question_answer_set',
-		method : 'post',
-	}, { manual: true });
+	const roleFunction = !isEmpty(role_functions) ? role_functions : undefined;
+	const roleSubFunction = !isEmpty(role_sub_functions) ? role_sub_functions : undefined;
 
-	useEffect(() => {
-		debounceQuery(searchInput);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchInput]);
-
-	const getQuestionsList = async () => {
+	const getAnnouncementList = async () => {
 		try {
-			await trigger({
+			const res =	await trigger({
 				params: {
 					filters: {
-						// ...filters,
-						...FILTER_MAPPING[activeList],
-						q: query || undefined,
+						status            : 'active',
+						auth_function     : scope === 'partner' ? roleFunction : undefined,
+						auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
+						cogo_entity_id    : id,
+						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
 
 					},
+					country_id,
+					user_id       : id,
 					page,
-					is_admin_view: true,
+					is_admin_view : true,
 
 				},
+
 			});
+			console.log('res', res);
 		} catch (err) {
 			console.log(err);
 		}
 	};
-
-	// useEffect(() => {
-	// 	getQuestionsList();
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [page, filters, query, activeList]);
-
-	const deactivateQuestion = async (id) => {
-		try {
-			await updateTrigger(
-				{
-					data: {
-						id,
-						status: 'inactive',
-					},
-				},
-			);
-
-			getQuestionsList();
-		} catch {
-			console.log('Error', error);
-		}
-	};
-
-	const onClickEditButton = (id) => {
-		router.push(
-			`/learning/faq/create/question?mode=create&id=${id}`,
-			`/learning/faq/create/question?mode=create&id=${id}`,
-		);
-	};
-
-	const onClickViewButton = (id) => {
-		router.push(
-			`/learning/faq/create/question?mode=preview&id=${id}&source=view`,
-			`/learning/faq/create/question?mode=preview&id=${id}&source=view`,
-		);
-	};
-
-	const columns = activeList !== 'requested'
-		? addedQuestionsColumns({
-			activeList,
-			onClickEditButton,
-			deactivateQuestion,
-			onClickViewButton,
-		})
-		: requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
-
-	const { list: data = [], ...paginationData } = questionList || {};
-
+	useEffect(() => {
+		getAnnouncementList();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [page, activeList]);
 	return {
 		page,
 		setPage,
-		paginationData,
 		data,
-		columns,
 		searchInput,
 		setSearchInput,
 		activeList,
 		setActiveList,
 		questionListLoading: loading,
-		onClickViewButton,
 	};
-};
+}
 
-export default useQuestionList;
+export default useListAnnouncements;
