@@ -190,7 +190,7 @@ const useQuestionList = () => {
 	const router = useRouter();
 
 	const SORT_TYPE = (sortType) ? 'desc' : 'asc';
-	const SORT_MODE = 'updated_at';
+	const SORT_MODE = (activeList === 'requested') ? 'created_at' : 'updated_at';
 	const [{ data: questionList, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_faq_questions',
