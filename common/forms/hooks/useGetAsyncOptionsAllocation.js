@@ -1,31 +1,34 @@
-import { useRequestBf } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
 
-function useGetAsyncOptionsMicroservice({
+function useGetAsyncOptionsAllocation({
 	endpoint = '',
 	initialCall = false,
 	valueKey = '',
 	labelKey = '',
 	params = {},
+	authkey = '',
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
 
-	const [{ data, loading }] = useRequestBf({
+	const [{ data, loading }] = useAllocationRequest({
 		url    : endpoint,
 		method : 'GET',
+		authkey,
 		params : merge(params, { filters: { q: query } }),
 	}, { manual: !(initialCall || query) });
 	const options = data?.list || [];
 
 	const optionValues = options.map((item) => item[valueKey]);
 
-	const [{ loading: loadingSingle }, triggerSingle] = useRequestBf({
+	const [{ loading: loadingSingle }, triggerSingle] = useAllocationRequest({
 		url    : endpoint,
 		method : 'GET',
+		authkey,
 	}, { manual: true });
 	useEffect(() => {
 		storeoptions.push(...options);
@@ -91,4 +94,4 @@ function useGetAsyncOptionsMicroservice({
 	};
 }
 
-export default useGetAsyncOptionsMicroservice;
+export default useGetAsyncOptionsAllocation;
