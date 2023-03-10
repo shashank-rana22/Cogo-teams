@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { IcMArrowDoubleLeft, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React, { useState, useEffect, useRef } from 'react';
@@ -28,28 +30,6 @@ function Calendar({ props }) {
 		calcMonth,
 		calcWeek,
 	} = useRenderCalender();
-
-	// const calcDate = (subtractDays) => {
-	// 	const d = new Date();
-	// 	d.setDate(d.getDate() - subtractDays);
-	// 	return d;
-	// };
-
-	// const calcMonth = (subtractMonths) => {
-	// 	const d = new Date();
-	// 	d.setDate(1);
-	// 	d.setMonth(d.getMonth() - subtractMonths);
-	// 	return d;
-	// };
-
-	// const calcWeek = (subtractWeeks) => {
-	// 	const d = new Date();
-	// 	if (d.getDay() !== 1) {
-	// 		d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
-	// 	}
-	// 	d.setDate(d.getDate() - (subtractWeeks * 7));
-	// 	return d;
-	// };
 
 	const processData = (func) => {
 		const newData = [];
@@ -137,11 +117,9 @@ function Calendar({ props }) {
 	useEffect(() => {
 		setSelectedItem(new Date());
 		setCalendarData([]);
-		// setPagination(0);
 		if (timeline === 'day') processData(calcDate);
 		else if (timeline === 'month') processData(calcMonth);
 		else loadWeeks();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [timeline]);
 
 	function addPagination(x) {
@@ -157,22 +135,12 @@ function Calendar({ props }) {
 	}
 
 	useEffect(() => {
-		console.log(pagination, 'pagination');
-
 		doPagination();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pagination]);
-
-	useEffect(() => {
-		console.log(calendarData, 'calendarData');
-	}, [calendarData]);
 
 	return (
 		<div className={styles.calendar}>
-			<button
-				className={styles.nav_btn}
-				disabled
-			>
+			<button className={styles.nav_btn} disabled>
 				<IcMArrowDoubleLeft />
 			</button>
 			<div ref={calendarRef} className={styles.calendar_entity}>
@@ -183,19 +151,13 @@ function Calendar({ props }) {
 					pagination={pagination}
 					setPagination={setPagination}
 					timeline={timeline}
-					// eslint-disable-next-line react/jsx-no-bind
 					addPagination={addPagination}
 				/>
 			</div>
-			<button
-				disabled
-				className={`${styles.nav_btn} 
-				`}
-			>
+			<button disabled className={`${styles.nav_btn}`}>
 				<IcMArrowDoubleRight />
 			</button>
 		</div>
 	);
 }
-
 export default Calendar;

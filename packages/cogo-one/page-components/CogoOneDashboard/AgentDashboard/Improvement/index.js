@@ -6,12 +6,9 @@ import styles from './styles.module.css';
 function Improvement({ loading = false, agentDelay = '' }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.improvement}>
-				Improvements:
-			</div>
+			<div className={styles.improvement}>Improvements:</div>
 			<div className={styles.box}>
 				<div className={styles.improvement_text_box}>
-
 					<div className={styles.dot} />
 					<div className={styles.improvement_text}>
 						Your chat reply time was
@@ -49,5 +46,4 @@ function Improvement({ loading = false, agentDelay = '' }) {
 		</div>
 	);
 }
-
 export default Improvement;

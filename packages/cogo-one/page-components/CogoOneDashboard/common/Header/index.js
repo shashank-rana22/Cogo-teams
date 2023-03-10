@@ -16,12 +16,7 @@ function Header({ timeline, setTimeline }) {
 				{agentId && (
 					<IcMArrowBack className={styles.back_icon} onClick={() => back()} />
 				)}
-				<div>
-					<img
-						src={cogoOneLogo}
-						alt="-"
-					/>
-				</div>
+				<div><img src={cogoOneLogo} alt="CogoOne" /></div>
 				<div className={styles.heading_name}>ogoOne Dashboard</div>
 			</div>
 
@@ -40,5 +35,4 @@ function Header({ timeline, setTimeline }) {
 		</div>
 	);
 }
-
 export default Header;

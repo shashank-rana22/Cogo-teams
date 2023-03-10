@@ -5,8 +5,6 @@ import { useEffect } from 'react';
 function useGetCogoOneDashboard(
 	{ timeline = '', selectedTimeline = {}, selectedItem = '', partnerUserId = '', isAgentView },
 ) {
-	// const { query } = useRouter();
-	// const { id : agentId = '' } = query || {};
 	const { date = '' } = selectedTimeline || {};
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_cogo_one_dashboard',
@@ -19,7 +17,6 @@ function useGetCogoOneDashboard(
 				params: {
 					timeline      : timeline || 'day',
 					timeline_date : date || new Date(),
-					// timeline_date : '2023-02-28' || new Date(),
 					agent_id      : (partnerUserId && isAgentView) || agentId ? agentId || partnerUserId : undefined,
 				},
 			});

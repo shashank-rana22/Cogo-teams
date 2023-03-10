@@ -22,11 +22,7 @@ function TotalChatsHandled({ loading = true, totalCustomers = '' }) {
 					: <div className={styles.number}>{totalCustomers || 0}</div>}
 			</div>
 			<div className={styles.right_time_spent_container}>
-				<img
-					src={aArrow}
-					alt="increasing"
-					className={styles.a_ArrowImg}
-				/>
+				<img src={aArrow} alt="increasing" className={styles.a_ArrowImg} />
 			</div>
 		</div>
 	);

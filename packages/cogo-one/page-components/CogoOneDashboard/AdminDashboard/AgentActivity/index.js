@@ -82,9 +82,7 @@ function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboar
 										<div className={styles.profile_box_right_down}>
 											<div className={styles.icon_plus_nos}>
 												<div><IcMProfile fill="#BDBDBD" /></div>
-												<div
-													className={styles.active_assigned_chats}
-												>
+												<div className={styles.active_assigned_chats}>
 													{active_assigned_chats || 0}
 												</div>
 											</div>
@@ -98,5 +96,4 @@ function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboar
 		</div>
 	);
 }
-
 export default AgentActivity;

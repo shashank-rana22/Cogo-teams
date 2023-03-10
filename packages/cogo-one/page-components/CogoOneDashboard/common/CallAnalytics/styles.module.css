@@ -96,7 +96,6 @@
 .social_name {
 	padding-left: 10px;
 	font-size: 14px;
-	font-weight: 400;
 	line-height: 20px;
 	color: #475569;
 	transition: 0.4s;
@@ -104,7 +103,6 @@
 
 .customer_nos {
 	font-size: 14px;
-	font-weight: 400;
 	line-height: 20px;
 	color: #828282;
 	text-align: right;

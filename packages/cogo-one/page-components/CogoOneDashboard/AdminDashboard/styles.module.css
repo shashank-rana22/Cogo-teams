@@ -19,13 +19,11 @@
 	width: 100%;
 }
 
-/* second Row */
 .agentactivity_plus_performancetabs {
 	display: flex;
 	justify-content: space-between;
 }
 
-/* third Row */
 .statistics_plus_characteristics {
 	display: flex;
 }

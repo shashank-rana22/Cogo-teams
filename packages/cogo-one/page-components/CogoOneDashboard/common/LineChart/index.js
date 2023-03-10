@@ -90,7 +90,6 @@ function LineChart({
 										<div>:</div>
 										<div>:</div>
 									</div>
-
 									<div className={styles.column}>
 										<div>{point.data.y || 0}</div>
 										<div>{point.data.x || 0}</div>

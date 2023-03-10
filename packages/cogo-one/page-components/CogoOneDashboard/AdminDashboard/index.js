@@ -65,7 +65,6 @@ function AdminDashboard(props) {
 				</div>
 			</div>
 		</div>
-
 	);
 }
 export default AdminDashboard;

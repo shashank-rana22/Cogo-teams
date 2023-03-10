@@ -16,7 +16,6 @@ function PerformanceTab({ loading = false, agentsPerformance = {} }) {
 	const data = activeTab === 'best_performance' ? best_performance : worst_performance;
 
 	return (
-	// eslint-disable-next-line react/jsx-no-useless-fragment
 		<div className={styles.main_box}>
 			<div className={styles.performance_btn_box}>
 				{performanceBtnMapping.map((item) => (

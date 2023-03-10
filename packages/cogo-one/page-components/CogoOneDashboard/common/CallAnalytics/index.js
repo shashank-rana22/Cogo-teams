@@ -9,9 +9,7 @@ function CallAnalytics({ loading = false, callsAnalytics = {} }) {
 	const { calls = [], channel = [] } = callAnalyticsStatData || {};
 	return (
 		<div className={styles.statistics}>
-			<div className={styles.heading}>
-				Calls Analytics
-			</div>
+			<div className={styles.heading}>Calls Analytics</div>
 			<div className={styles.time_durations_section}>
 				{(calls || []).map((itm) => {
 					const itemKey = itm.key;

@@ -9,9 +9,7 @@ function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {}
 	const { calls = [], channel = [] } = channelMessageAnayticsData;
 	return (
 		<div className={styles.statistics}>
-			<div className={styles.heading}>
-				Channels Messages Analytics
-			</div>
+			<div className={styles.heading}>Channels Messages Analytics</div>
 			<div className={styles.time_durations_section}>
 				{(calls || []).map((itm) => {
 					const itemKey = itm?.key;

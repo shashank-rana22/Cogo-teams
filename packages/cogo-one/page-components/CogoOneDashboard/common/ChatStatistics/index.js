@@ -41,5 +41,4 @@ function ChatStatistics({ isAdminView = false, loading = false, statusOfChats = 
 		</>
 	);
 }
-
 export default ChatStatistics;

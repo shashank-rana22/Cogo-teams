@@ -1,9 +1,9 @@
+/* stylelint-disable selector-class-pattern */
 .container {
 	display: flex;
 	justify-content: space-between;
 
 	:global {
-		/* stylelint-disable-next-line selector-class-pattern */
 		.ui_tab_container .ui_ps_themeType_tertiary {
 			margin: 4px 0;
 		}

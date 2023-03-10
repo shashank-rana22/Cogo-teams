@@ -16,7 +16,7 @@ function Escalation({ loading = false, escalations = [] }) {
 				? (
 					<img
 						src={emptyEscalations}
-						alt=""
+						alt="No Escalations"
 						width="200px"
 						height="200px"
 						className={styles.empty_escalations_picture}
@@ -49,5 +49,4 @@ function Escalation({ loading = false, escalations = [] }) {
 		</div>
 	);
 }
-
 export default Escalation;
