@@ -10,6 +10,9 @@ import {
 	asyncFieldsPartner,
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
+	asyncFieldsLocations,
+	asyncFieldsListOperators,
+	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
 	asyncFieldsExpertiseConfigurations,
 } from '../../../utils/getAsyncFields';
@@ -39,6 +42,9 @@ const keyAsyncFieldsParamsMapping = {
 	partner_users           : asyncFieldsPartnerUsers,
 	partner_roles           : asyncFieldsPartnerRoles,
 	segments                : asyncFieldsCampaignSegments,
+	list_locations          : asyncFieldsLocations,
+	list_operators          : asyncFieldsListOperators,
+	list_rate_charge_codes  : asyncFieldListRateChargeCodes,
 	allot_bank              : asyncAllotBanks,
 	expertise_configuration : asyncFieldsExpertiseConfigurations,
 };

@@ -2,7 +2,6 @@ import { Collapse, Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
-
 import FieldArray from '../../../../../../common/Form/FieldArray';
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
 import getControls from '../../../../configurations/get-add-conditions-controls';
@@ -10,7 +9,6 @@ import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mappin
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
 import EXPERTISE_CARDS_MAPPING from '../../../../constants/expertise-cards-mapping';
 import useGetKamExpertiseScore from '../../../../hooks/useGetKamExpertiseScore';
-
 import ExpertiseParameters from './ExpertiseParameters';
 import Header from './Header';
 import styles from './styles.module.css';
@@ -68,6 +66,8 @@ function KamExpertiseScoreConfig() {
 
 	const { data, loading } = useGetKamExpertiseScore();
 
+	const { list = [], audit_data: auditData = {} } = data || {};
+
 	console.log('data', data);
 
 	const expertiseType = startCase(addConditionModal.type || '');
@@ -86,7 +86,7 @@ function KamExpertiseScoreConfig() {
 			key,
 			title    : titleSection(value),
 			children : <ExpertiseParameters
-				expertiseData={value}
+				name={value.name}
 				onClickAddCondition={() => setAddConditionModal({ type: value?.name })}
 			/>,
 
@@ -96,7 +96,7 @@ function KamExpertiseScoreConfig() {
 	return (
 		<>
 			<div className={styles.container}>
-				<Header />
+				<Header auditData={auditData} />
 			</div>
 
 			<div className={styles.expertise_cards_container}>

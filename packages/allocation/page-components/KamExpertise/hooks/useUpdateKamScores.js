@@ -12,12 +12,12 @@ function useUpdateKamScores(props) {
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		method  : 'POST',
-		url     : 'kam_expertise_bulk_configuration',
-		authkey : 'post_allocation_kam_expertise_bulk_configuration',
+		url     : 'kam_expertise_configuration_attributes',
+		authkey : 'post_allocation_kam_expertise_configuration_attributes',
 	}, { manual: true });
 
 	const onSave = async (formValues, e) => {
-		console.log('formValues', formValues);
+		console.log('formValues', transition_level);
 
 		const {
 			commodity_expertise,
@@ -28,74 +28,15 @@ function useUpdateKamScores(props) {
 			retained_accont_min_duration,
 			trade_expertise,
 		} = formValues || {};
-
-		console.log('checking values', commodity_expertise);
+		console.log('type', typeof (customer_expertise));
 
 		try {
 			const payload = {
-				payload: [
+				transition_level,
+				configuration_details: [
 					{
-						transition_level,
-						config_type          : 'KAM',
-						expertise_type       : `${startCase(customer_expertise)}`,
-						threshold_score      : customer_expertise,
-						threshold_score_type : 'score',
-						description          : 'Trade',
-						status               : 'active',
-					},
-					{
-						transition_level,
-						config_type          : 'KAM',
-						expertise_type       : `${startCase(commodity_expertise)}`,
-						threshold_score      : commodity_expertise,
-						threshold_score_type : 'score',
-						description          : 'Trade',
-						status               : 'active',
-					},
-					{
-						transition_level,
-						config_type          : 'KAM',
-						expertise_type       : `${startCase(minimum_transacting_accounts)}`,
-						threshold_score      : minimum_transacting_accounts,
-						threshold_score_type : 'score',
-						description          : 'Trade',
-						status               : 'active',
-					},
-					{
-						transition_level,
-						config_type          : 'KAM',
-						expertise_type       : `${startCase(misc_expertise)}`,
-						threshold_score      : misc_expertise,
-						threshold_score_type : 'score',
-						description          : 'Trade',
-						status               : 'active',
-					},
-					{
-						transition_level,
-						config_type          : 'KAM',
-						expertise_type       : `${startCase(retained_account_count)}`,
-						threshold_score      : retained_account_count,
-						threshold_score_type : 'score',
-						description          : 'Trade',
-						status               : 'active',
-					},
-					{
-						transition_level,
-						config_type          : 'KAM',
-						expertise_type       : `${startCase(retained_accont_min_duration)}`,
-						threshold_score      : retained_accont_min_duration,
-						threshold_score_type : 'score',
-						description          : 'Trade',
-						status               : 'active',
-					},
-					{
-						transition_level,
-						config_type          : 'KAM',
-						expertise_type       : `${startCase(trade_expertise)}`,
-						threshold_score      : trade_expertise,
-						threshold_score_type : 'score',
-						description          : 'Trade',
-						status               : 'active',
+						configuration_id : 'e0c15e8d-b351-4100-a389-82ec3e87b1e1',
+						threshold_score  : 100,
 					},
 				],
 			};

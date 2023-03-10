@@ -40,6 +40,15 @@ function MessageList({
 		return <LoadingState />;
 	}
 
+	function lastMessagePreview(previewData = '') {
+		return (
+			<div
+				className={styles.content}
+				dangerouslySetInnerHTML={{ __html: previewData }}
+			/>
+		);
+	}
+
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -165,10 +174,7 @@ function MessageList({
 										</div>
 
 										<div className={styles.content_div}>
-											<div className={styles.content}>
-												{item.last_message}
-											</div>
-
+											{lastMessagePreview(item?.last_message || '')}
 											{item.new_message_count > 0 && (
 												<div className={styles.new_message_count}>
 													{item.new_message_count > 100 ? '99+' : (

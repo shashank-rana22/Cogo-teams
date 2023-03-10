@@ -1,27 +1,17 @@
 .list_item_container {
-	height: 240px;
+	height: auto;
 	background-color: #fff;
 	border-radius: 8px;
+	margin-bottom: 16px;
+	padding-bottom: 20px;
 }
 
 .top_div {
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
-	padding-top: 16px;
+	padding: 16px 16px 0px 16px;
 }
 
-.top_right_div {
-	display: flex;
-	justify-content: space-between;
-	width: 50%;
-	margin-right: 16px;
-}
-
-.left_id {
-	width: 10%;
-	margin-left: 16px;
-}
 
 .info_tag {
 	display: flex;
@@ -31,7 +21,7 @@
 }
 
 .rule {
-	width: 55%;
+	max-width: 760px;
 	margin-left: 16px;
 }
 
@@ -49,9 +39,10 @@
 }
 
 .rule_end {
+	padding-left: 16px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 40%;
+	max-width: 24%;
 	margin-top: 8px;
 }

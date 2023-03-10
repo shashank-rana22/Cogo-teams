@@ -14,18 +14,22 @@ const CONTROL_TYPE_MAPPING = {
 	select  : 'select',
 };
 
-function CreateNewEvent() {
+function CreateNewEvent(props) {
 	const {
 		attributeList,
 		loading,
 		refetch,
 	} = useGetAllocationKamExpertiseRules();
 
+	const { toggleNewEvent = '', setToggleNewEvent = () => {} } = props;
+
 	const {
 		onSave,
 		formProps,
 		getAddRuleControls,
-	} = useCreateNewEvent();
+	} = useCreateNewEvent(attributeList);
+
+	console.log('attributeList:', attributeList);
 
 	const {
 		control,
@@ -41,14 +45,14 @@ function CreateNewEvent() {
 			</div>
 
 			<div className={styles.form_container}>
-				<div className={styles.header}>
+				{/* <div className={styles.header}>
 					#001
 
 					<div className={styles.modified_data}>
 						<div className={styles.modified_date}>Last Modified : 31/September/2023</div>
 						<div>Last Modified By : Ankur Verma</div>
 					</div>
-				</div>
+				</div> */}
 
 				<div className={styles.rule_and_attribute}>
 					<div className={styles.add_rule_container}>
@@ -146,6 +150,7 @@ function CreateNewEvent() {
 						themeType="tertiary"
 				// onClick={onCloseModal}
 						style={{ marginRight: '10px' }}
+						onClick={() => setToggleNewEvent(true)}
 					>
 						Cancel
 					</Button>

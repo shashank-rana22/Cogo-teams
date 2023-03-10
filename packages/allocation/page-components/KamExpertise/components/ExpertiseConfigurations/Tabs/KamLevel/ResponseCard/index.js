@@ -1,21 +1,20 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
+import useCreateKamLevel from '../../../../../hooks/useCreateKamLevel';
 import { controls, controlsBottom } from '../controls';
 
 import styles from './styles.module.css';
 
 function ResponseCard({
-	// createKam,
-	setCreateKam,
+	setCreateKam = () => {},
 	dataLength,
+	refetch,
 }) {
-	const formProps = useForm();
-
-	const { control } = formProps;
+	const { formProps, onCreate } = useCreateKamLevel({ dataLength, setCreateKam, refetch });
+	const { control, handleSubmit } = formProps;
 
 	return (
 		<div className={styles.level_card_container}>
@@ -46,7 +45,13 @@ function ResponseCard({
 					Cancel
 
 				</Button>
-				<Button style={{ margin: '10px' }}>Save</Button>
+				<Button
+					style={{ margin: '10px' }}
+					onClick={handleSubmit(onCreate)}
+				>
+					Save
+
+				</Button>
 
 			</div>
 			{controls.map((singleField) => {
