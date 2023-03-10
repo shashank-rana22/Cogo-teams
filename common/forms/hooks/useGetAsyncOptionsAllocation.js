@@ -21,7 +21,7 @@ function useGetAsyncOptionsAllocation({
 		authkey,
 		params : merge(params, { filters: { q: query } }),
 	}, { manual: !(initialCall || query) });
-	const options = data?.list || [];
+	const options = data?.list || data || [];
 
 	const optionValues = options.map((item) => item[valueKey]);
 
@@ -77,7 +77,7 @@ function useGetAsyncOptionsAllocation({
 			const res = await triggerSingle({
 				params: merge(params, { filters: { [valueKey]: value } }),
 			});
-			return res?.data?.list?.[0] || null;
+			return res?.data?.list?.[0] || res?.data?.[0] || null;
 		} catch (err) {
 			// console.log(err);
 			return {};
