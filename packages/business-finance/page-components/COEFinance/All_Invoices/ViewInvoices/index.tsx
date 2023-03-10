@@ -10,7 +10,7 @@ import SupplierDetails from './SupplierDetails/index';
 
 function ViewInvoices() {
 	const { query } = useRouter();
-	const { billId, orgId, jobNumber, status } = query;
+	const { billId, orgId, status } = query;
 	const [remarksVal, setRemarksVal] = useState({
 		collectionPartyRemark : '',
 		billingPartyRemark    : '',
@@ -49,7 +49,6 @@ function ViewInvoices() {
 			<ShipmentDetails
 				data={fullResponse}
 				orgId={query?.orgId || ''}
-				jobNumber={jobNumber}
 				remarksVal={remarksVal}
 				setRemarksVal={setRemarksVal}
 				lineItemsRemarks={lineItemsRemarks}

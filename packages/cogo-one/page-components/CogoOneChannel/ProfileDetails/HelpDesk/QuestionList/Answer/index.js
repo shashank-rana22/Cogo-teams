@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-undef */
 import { Loader, cl } from '@cogoport/components';
 import { IcMArrowBack, IcMRedo } from '@cogoport/icons-react';
@@ -43,6 +42,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 		<div className={styles.list}>
 			<div>
 				<div
+					role="presentation"
 					className={styles.title}
 					onClick={() => setQuestion({})}
 				>
@@ -131,6 +131,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 					</div>
 
 					<div
+						role="presentation"
 						className={styles.help_text}
 						onClick={() => GotoFAQ()}
 					>
