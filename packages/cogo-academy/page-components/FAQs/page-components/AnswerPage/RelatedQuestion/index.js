@@ -11,9 +11,6 @@ function RelatedQuestion({ tags = '', question_abstract = '' }) {
 	const router = useRouter();
 	const { data } = useListFaqQuestions({ tagId, limit: 3 });
 
-	if ((data?.list || []).length === 0) {
-		return null;
-	}
 	const handleClick = (id) => {
 		router.push(
 			`/learning/faq/answer?id=${id}`,

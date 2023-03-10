@@ -33,15 +33,15 @@ function Header() {
 			<div className={styles.header}>Manage FAQs</div>
 
 			<div className={styles.button_container}>
-				<Button style={{ marginLeft: 8 }} themeType="secondary" onClick={onClickConfiguration}>
+				<Button type="button" style={{ marginLeft: 8 }} themeType="secondary" onClick={onClickConfiguration}>
 					Configuration
 				</Button>
 
-				<Button style={{ marginLeft: 8 }} onClick={onClickUpload}>
+				<Button type="button" style={{ marginLeft: 8 }} onClick={onClickUpload}>
 					Upload in Bulk
 				</Button>
 
-				<Button style={{ marginLeft: 8 }} onClick={onClickQuestion}>
+				<Button type="button" style={{ marginLeft: 8 }} onClick={onClickQuestion}>
 					Add Question
 				</Button>
 			</div>
