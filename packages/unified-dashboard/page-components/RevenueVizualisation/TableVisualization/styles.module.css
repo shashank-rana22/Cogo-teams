@@ -1,0 +1,48 @@
+.heading{
+    color: #333333;
+	font-weight: 500;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.pagination_container{
+    display: flex;
+	justify-content: flex-end;
+}
+
+.style_table{
+    background: #fff;
+	overflow-x: scroll;
+	border-radius: 5px;
+	max-height: 300px;
+}
+
+.head{
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	color: #4f4f4f;
+	padding: 20px 4px;
+}
+
+.sub_heading{
+	margin-left: 10px;
+}
+
+.data{
+    width: 100%;
+	max-width: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #fff;
+}
+
+/* :global{
+	.ui_table_head_row{
+		border-bottom: 1px solid red;
+	}
+} */

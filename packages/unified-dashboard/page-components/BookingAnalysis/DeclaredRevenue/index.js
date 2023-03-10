@@ -1,5 +1,3 @@
-import { useSelector } from '@cogoport/store';
-
 import DesktopView from './DesktopView';
 import MobileView from './MobileView';
 import styles from './styles.module.css';

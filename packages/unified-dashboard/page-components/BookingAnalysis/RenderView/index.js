@@ -1,4 +1,3 @@
-import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import LoadingPage from '../../../common/LoadingPage';
@@ -20,12 +19,7 @@ function RenderView({
 	bookingAnalysis,
 	showRevenue,
 	setShowRevenue,
-	
 }) {
-	// const isMobile = useSelector((state) => (state.general || {}).isMobile);
-
-	const isMobile = false;
-
 	const { currency } = headerFilters;
 
 	const selectedCurrency = currency === false ? 'USD' : 'INR';

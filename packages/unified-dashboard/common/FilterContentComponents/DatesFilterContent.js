@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, RadioGroup, DateRangepicker } from '@cogoport/components';
 import React, { useEffect } from 'react';
 
@@ -43,6 +44,7 @@ function DatesFilterContent({
 							value={date}
 							isPreviousDaysAllowed
 							onChange={(val) => setDate(val)}
+							maxDate={new Date()}
 						/>
 					</div>
 				) : null}

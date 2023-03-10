@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 // import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';

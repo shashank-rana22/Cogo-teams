@@ -6,6 +6,9 @@ import BookingAnalysis from './BookingAnalysis';
 import Header from './Header';
 import Profitability from './Profitability';
 import RevenueAnalysis from './RevenueAnalysis';
+import RevenueVisualization from './RevenueVizualisation';
+import SalesFunnel from './SalesFunnel';
+import SalesOverall from './SalesOverall';
 import styles from './styles.module.css';
 
 function UnifiedDashboard() {
@@ -28,6 +31,9 @@ function UnifiedDashboard() {
 					/>
 					<BookingAnalysis headerFilters={headerFilters} />
 					<RevenueAnalysis headerFilters={headerFilters} />
+					<RevenueVisualization headerFilters={headerFilters} />
+					<SalesOverall headerFilters={headerFilters} />
+					<SalesFunnel headerFilters={headerFilters} />
 					<Profitability headerFilters={headerFilters} />
 				</TabPanel>
 			</Tabs>

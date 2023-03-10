@@ -1,0 +1,97 @@
+.card_wrapper{
+    background: #fafafa;
+	box-shadow: none;
+	padding-top: 14px;
+	border: 1px solid #efefef;
+    position: relative;
+}
+
+.collapse_icon {
+    width: 20px;
+    height: 14px;
+}
+
+
+.colllapse_icon_active {
+    width: 20px;
+    height: 14px;
+    min-width: 20px;
+    margin-left: 40px;
+    margin-right: 5px;
+    margin-top: 1px;
+    transform: rotate(360deg);
+    transition: transform 400ms;
+}
+
+.colllapse_icon_inactive {
+    width: 20px;
+    height: 14px;
+    min-width: 20px;
+    margin-left: 40px;
+    margin-right: 5px;
+    margin-top: 1px;
+    transform: rotate(270deg);
+    transition: transform 400ms;
+}
+
+
+
+.colllapse_icon path {
+    fill: #e7e7e7;
+}
+
+.revenue_col{
+    position: relative;
+	display: flex;
+	flex-direction: column;
+    border-right: none;
+	align-items: center;
+    flex: 33%;
+    text-align: center;
+    justify-content: center;
+    margin: 4px 0px;
+}
+
+.revenue_gap{
+    flex: 25%;
+    display: flex;
+}
+
+.role_name {
+    font-size: 12px;
+    align-self: center;
+}
+
+.revenue_arrow{
+    position: relative;
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 14px;
+    cursor: pointer;
+    border-right: none;
+    flex: 25%;
+}
+
+.view_btn{
+    font-size: 10px;
+	font-weight: 300;
+	position: absolute;
+	left: 80px;
+	bottom: 3px;
+	color: #407fc3;
+	cursor: pointer;
+    z-index: 2;
+}
+
+.row{
+    display: flex;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+}

@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 1rem 0 0.8rem 0;
+    margin: 20px 2px 2px 2px;
 }
 
 .revenue{
@@ -17,9 +17,9 @@
 }
 
 .text_title{
-    font-size: 1rem;
-    margin: 10px 10px;
-    font-weight: 500;
+    font-size: 18px;
+    margin: 3px 10px;
+    font-weight: 600;
 }
 
 .flex_info{
@@ -33,21 +33,22 @@
 }
 
 
-    .collapse_icon {
-		width: 20px;
-		height: 14px;
-	}
-	.collapse_icon.active {
-		transform: rotate(180deg);
-		transition: transform 400ms;
-	}
-	.collapse_icon.inactive {
-		transform: rotate(0deg);
-		transition: transform 400ms;
-	}
-	@media (max-width: 540px) {
-		padding: 15px;
-	}
+.collapse_icon {
+    width: 20px;
+    height: 14px;
+}
+.collapse_icon.active {
+    transform: rotate(180deg);
+    transition: transform 400ms;
+}
+.collapse_icon.inactive {
+    transform: rotate(0deg);
+    transition: transform 400ms;
+}
+@media (max-width: 540px) {
+    padding: 15px;
+}
+
 
 .flex_container{
     display: flex;

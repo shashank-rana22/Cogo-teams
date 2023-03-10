@@ -42,7 +42,7 @@ function RevenueCardHeading({
 
 			{showCollapse && (
 				<div className={styles.collapse_container}>
-					<div className={styles.flex_container} onClick={() => setIsCollapsed()}>
+					<div className={styles.flex_container} role="button" tabIndex="0" onClick={() => setIsCollapsed()}>
 						<IcMArrowRotateDown
 							className={styles.collapse_icon`{${isCollapsed ? 'active' : 'inactive'}`}
 						/>

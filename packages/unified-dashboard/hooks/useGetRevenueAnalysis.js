@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
@@ -14,12 +15,6 @@ const useGetRevenueAnalysis = (headerFilters) => {
 		method : 'GET',
 		scope,
 	}, { manual: false });
-
-	// const { loading, data, trigger } = useRequest(
-	// 	'get',
-	// 	false,
-	// 	scope,
-	// )('/get_invoiced_revenue_analysis_breakdown');
 
 	const fetchRevenueAnalysisData = async () => {
 		try {

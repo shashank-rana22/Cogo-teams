@@ -1,0 +1,31 @@
+.header{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.8rem;
+}
+
+.heading_container{
+    display: flex;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.heading_text{
+    font-size: 22px;
+    color: #333333;
+    margin-right: 0;
+    font-weight: 600;
+    display: flex;
+}
+
+.filter_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter{
+    display: flex;
+}

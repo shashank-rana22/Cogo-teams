@@ -1,15 +1,11 @@
 import { Select } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import Filter from '../../../common/Filter';
-import FilterContent from '../../../common/FilterContentComponents/FilterContent';
 
 import styles from './styles.module.css';
 
 function Header({ setFilters, range = 'current_month', setRange, filters }) {
-	const [openCalendar, setOpenCalendar] = useState(false);
-	const [date, setDate] = useState({});
-
 	const handleApplyFilters = (key, val) => {
 		const dates = '01-01-2003';
 		setFilters((prevFilters) => ({

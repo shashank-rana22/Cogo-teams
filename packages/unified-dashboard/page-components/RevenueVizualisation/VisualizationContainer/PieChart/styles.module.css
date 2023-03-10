@@ -1,0 +1,12 @@
+.pie_tooltip_container{
+    padding: 8px;
+	color: #000;
+	background: #f5f2f2;
+	border-radius: 4px;
+	font-weight: 500;
+}
+
+.text_pie{
+    font-size: 12px;
+    margin-bottom: 4px;
+}

@@ -1,17 +1,10 @@
 import React from 'react';
 
 import currencyCoversion from '../../../../utils/currencyCoversion';
-import getMonthYear from '../../../../utils/getMonthYear';
 import getShortFormatNumber from '../../../../utils/getShortFormatNumber';
 import styles from '../styles.module.css';
 
 function MobileView({ master, keys, selectedFilterTab, currency }) {
-	// const backgroundColor = (item) => (
-	// 	selectedFilterTab === 'month'
-	// 		&& `${item?.month || ''}${item?.year || ''}`
-	// 			=== `${getMonthYear().getMonth}${getMonthYear().getYear}`
-	// );
-
 	const declaredRevenueData = master.map((el) => {
 		const keyToUse = selectedFilterTab === 'week' ? 'day' : 'month';
 		return keys.find((val) => val[keyToUse] === el[keyToUse]);

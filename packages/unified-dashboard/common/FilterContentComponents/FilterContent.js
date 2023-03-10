@@ -31,7 +31,7 @@ function FilterContent({
 		if (!element) {
 			// TODO remove this, and throw an error
 			return function () {
-				return <></>;
+
 			};
 			// return () => <div>No element found {type}</div>;
 		}
@@ -154,7 +154,7 @@ function FilterContent({
 									const Element = getField(control.type);
 									return (
 										control.show !== false && (
-											<div className={filter_item}>
+											<div className={styles.filter_item}>
 												<div className={styles.filter_label}>{control.label}</div>
 												<Element {...fields[control.name]} />
 											</div>

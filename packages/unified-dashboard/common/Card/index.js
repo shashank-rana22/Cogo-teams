@@ -1,4 +1,3 @@
-import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import RevenueCardHeading from '../RevenueCardHeading';
@@ -16,9 +15,6 @@ function Card({
 	toolTipContent = '',
 	selectedFilterTab,
 }) {
-	// const isMobile = useSelector((state) => (state.general || {}).isMobile);
-	const isMobile = false;
-
 	return (
 		<>
 			<RevenueCardHeading
@@ -48,35 +44,6 @@ function Card({
 			</div>
 		</>
 	);
-
-	// return (
-	// 	<>
-	// 		<RevenueCardHeading
-	// 			showIcon={false}
-	// 			title={title}
-	// 			toolTipContent={toolTipContent}
-	// 		/>
-	// 		<div className={styles.card}>
-	// 			{isMobile ? (
-	// 				<MobileCard
-	// 					master={months}
-	// 					keys={data}
-	// 					selectedFilterTab={selectedFilterTab}
-	// 					currency={currency}
-	// 					borderLeftColor={borderLeftColor}
-	// 				/>
-	// 			) : (
-	// 				<DesktopCard
-	// 					master={months}
-	// 					keys={data}
-	// 					selectedFilterTab={selectedFilterTab}
-	// 					currency={currency}
-	// 					borderLeftColor={borderLeftColor}
-	// 				/>
-	// 			)}
-	// 		</div>
-	// 	</>
-	// );
 }
 
 export default Card;

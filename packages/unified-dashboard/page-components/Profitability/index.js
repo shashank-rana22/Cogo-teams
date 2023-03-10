@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from 'react';
 
 import useGetProfitability from '../../hooks/useGetProfitability';
@@ -10,26 +11,24 @@ import styles from './styles.module.css';
 function Profitability({ headerFilters }) {
 	const { currency: selectedCurrency, entity_code = [] } = headerFilters;
 	const currency = selectedCurrency ? 'INR' : 'USD';
-	// const [isInViewport, setisInViewport] = useState(false);
+	const [isInViewport, setisInViewport] = useState(false);
 	const ref = useRef(null);
-	// const inViewport = useIsInViewport(ref, '-200px');
-	const { loading, data, setFilters, range, setRange, filters } = useGetProfitability();
+	const inViewport = useIsInViewport(ref, '-200px');
+	const { loading, data, setFilters, range, setRange, filters } = useGetProfitability(isInViewport);
 
-	// useEffect(() => {
-	// 	if (!isInViewport) {
-	// 		setisInViewport(inViewport);
-	// 	}
-	// }, [inViewport]);
+	useEffect(() => {
+		if (!isInViewport) {
+			setisInViewport(inViewport);
+		}
+	}, [inViewport]);
 
-	// useEffect(() => {
-	// 	setFilters((prevFilters) => ({
-	// 		...prevFilters,
-	// 		to_currency : currency,
-	// 		entity_code : entity_code.length > 0 ? entity_code : undefined,
-	// 	}));
-	// }, [JSON.stringify(headerFilters)]);
-
-	console.log('filtersfilters', loading);
+	useEffect(() => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			to_currency : currency,
+			entity_code : entity_code.length > 0 ? entity_code : undefined,
+		}));
+	}, [JSON.stringify(headerFilters)]);
 
 	return (
 		<div className={styles.container} ref={ref}>

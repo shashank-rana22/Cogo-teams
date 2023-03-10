@@ -1,0 +1,133 @@
+.card_wrapper{
+    background: #fff;
+	box-shadow: none;
+	padding: 10px 0 0 0;
+	margin-top: 20px;
+	border-radius: 4px;
+	max-width: 100%;
+	display: flex;
+	align-items: stretch;
+	flex-direction: column;
+}
+
+.sales_filter_btn{
+    border-radius: 1px;
+	border: 1px solid #2c3e50;
+	padding: 4px 14px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 16px;
+	letter-spacing: 0.04em;
+	text-align: center;
+	position: relative;
+    cursor: pointer;
+}
+
+
+.flex{
+    display: flex;
+}
+
+.flex_btn{
+    display: flex;
+    margin-left: 0;
+    align-items: center;
+}
+
+
+.fixed_header{
+    top: 3rem;
+	z-index: 1;
+}
+
+
+@media (max-width: 768px) {
+
+    .fixed_header{
+        top: 3rem;
+        z-index: 1;
+        width: max-content;
+    }
+    
+  }
+
+.sales_row{
+    display: flex;
+    background  : #F1F1F1;
+	font-size    : 13px;
+	font-weight  : 500;
+	margin-left  : 0px;
+	margin-right : 0px;
+}
+
+.revenue_col{
+    position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border-right: none;
+    flex: 25%;
+}
+
+.row_2{
+    background: #F9F9F9;
+    font-size: 11px;
+    font-weight: 400;
+    margin-left: 0px;
+    margin-right: 0px;
+    display: flex;
+}
+
+.revenue_col_2{
+    position: relative;
+	display: flex;
+	flex-direction: column;
+    background: #f1f1f1;
+    align-items: center;
+    border-right: none;
+    flex: 33%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.revenue_col_3{
+    position: relative;
+	display: flex;
+	flex-direction: column;
+    background: #f1f1f1;
+    align-items: center;
+    border-right: none;
+    flex: 50%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.revenue_gap{
+    flex: 25%;
+    display: flex;
+}
+
+.nodata{
+    height: 300px;
+    margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+  
+    .card_wrapper{
+        background: #fff;
+        box-shadow: none;
+        padding: 10px 0 0 0;
+        margin-top: 20px;
+        border-radius: 4px;
+        width: max-content;
+        display: flex;
+        align-items: stretch;
+        flex-direction: column;
+        overflow: scroll;
+    }
+    
+    
+  }

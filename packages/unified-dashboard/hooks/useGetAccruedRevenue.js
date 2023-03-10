@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
@@ -7,12 +8,6 @@ const useGetAccruedRevenue = (headerFilters) => {
 	const scope = useSelector(({ general }) => general.scope);
 	const [revenueAnalysis, setRevenueAnalysis] = useState(null);
 	const [params, setParams] = useState();
-
-	// const { loading, data, trigger } = useRequest(
-	// 	'get',
-	// 	false,
-	// 	scope,
-	// )('/get_accrual_revenue_breakdown');
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'get_accrual_revenue_breakdown',

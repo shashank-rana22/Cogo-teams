@@ -1,5 +1,5 @@
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import Card from '../../../../common/Card';
 import RevenueCardHeading from '../../../../common/RevenueCardHeading';
@@ -34,6 +34,7 @@ function RevenueSection({ data = {}, currency, selectedFilterTab, showRevenue, s
 			data            : delta_revenue,
 			borderLeftColor : '#CDF7D4',
 			toolTipContent:
+				// eslint-disable-next-line max-len
 				'Sum of SI in the month - Sum of PI/SO/Quotation for corresponding shipment | Applicable where ETD is not in the month',
 		},
 	];

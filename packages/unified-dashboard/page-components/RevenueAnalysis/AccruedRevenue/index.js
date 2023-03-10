@@ -57,23 +57,6 @@ function AccruedRevenue({
 						/>
 					</div>
 				</div>
-			// <AccruedData
-			// 	selectedFilter={selectedFilter}
-			// 	selectedFilterTab={selectedFilterTab}
-			// 	headerFilters={headerFilters}
-			// />
-			// <RevenueAnalysis
-			// 	selectedFilter={selectedFilter}
-			// 	selectedFilterTab={selectedFilterTab}
-			// 	headerFilters={headerFilters}
-			// 	revenue={accruedRevenue}
-			// 	param={params}
-			// 	setParam={setParams}
-			// 	loading={loading}
-			// 	revenue_analysis={accrual_revenue}
-			// 	etd={max_etd}
-			// 	heading="Accrued"
-			// />
 			)}
 		</div>
 	);

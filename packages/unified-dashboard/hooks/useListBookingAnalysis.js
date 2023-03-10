@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 import { serviceTypeArr, tradeTypeArr } from '../constants/checkbox-data';
@@ -23,12 +23,6 @@ const useGetBookingAnalysis = (headerFilters) => {
 		url    : 'list_booking_analysis',
 		method : 'GET',
 	}, { manual: false });
-
-	// const { loading, data, trigger } = useRequest(
-	// 	'get',
-	// 	false,
-	// 	scope,
-	// )('/list_booking_analysis');
 
 	const fetchBookingAnalysisData = async () => {
 		try {

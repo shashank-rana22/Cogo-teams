@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import useGetRevenueAnalysis from '../../hooks/useGetRevenueAnalysis';
 import currencyCoversion from '../../utils/currencyCoversion';
 import getMonthYear from '../../utils/getMonthYear';
 import getNextData from '../../utils/getNextData';
@@ -21,7 +21,6 @@ function RevenueAnalysis({
 	selectedFilter,
 	selectedFilterTab,
 	headerFilters,
-	revenue,
 	param,
 	setParam,
 	loading,
@@ -83,8 +82,9 @@ function RevenueAnalysis({
 								param,
 								setParam,
 								'revenue',
-					)
-				}
+							// eslint-disable-next-line react/jsx-indent
+							)
+					}
 				/>
 				<div className={styles.stepper_line} />
 

@@ -1,12 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import currencyCoversion from '../../../utils/currencyCoversion';
 import getMonthYear from '../../../utils/getMonthYear';
-import isNextRevenueAllowed from '../../../utils/isNextRevenueAllowed';
 import Empty from '../../Empty';
 import PieChart from '../../PieChart';
 import RevenueData from '../../RevenueData';
@@ -19,7 +18,6 @@ function CommonData({
 	selectedFilter,
 	selectedFilterTab,
 	headerFilters,
-	revenue,
 	param,
 	setParam,
 	loading,
@@ -43,13 +41,12 @@ function CommonData({
 	}, [selectedFilter]);
 
 	const rev = revenue_analysis[0] || [];
-	console.log('rev', rev);
 
-	const isClickable = isNextRevenueAllowed(
-		selectedFilterTab,
-		revenue_analysis[0],
-		etd,
-	);
+	// const isClickable = isNextRevenueAllowed(
+	// 	selectedFilterTab,
+	// 	revenue_analysis[0],
+	// 	etd,
+	// );
 
 	const currentMonth = `${getMonthYear()?.getMonth}${getMonthYear()?.getYear}`;
 

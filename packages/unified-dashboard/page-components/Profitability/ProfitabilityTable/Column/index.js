@@ -34,16 +34,19 @@ function columns() {
 			accessor: (item) => (
 				<>
 					{/* {console.log('item', item)} */}
-					<div className={styles.serial_id}>{item.serial_id}</div>
-					<div className={styles.created_at}>
-						{format(item.created_at, 'dd MMM yyyy')}
+					<div className={styles.head}>
+						<div className={styles.serial_id}>{item.serial_id}</div>
+						<div className={styles.created_at}>
+							{format(item.created_at, 'dd MMM yyyy')}
+						</div>
 					</div>
+
 				</>
 			),
 			id: 'serial_id',
 		},
 		{
-			Header   : <div>Customer Name</div>,
+			Header   : <div className={styles.head}>Customer Name</div>,
 			accessor : (item) => (
 				<Tooltip animation="shift-toward" content={item.customer_name}>
 					<div className={styles.container}>

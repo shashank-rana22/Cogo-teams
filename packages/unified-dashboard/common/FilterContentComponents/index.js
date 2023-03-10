@@ -10,16 +10,12 @@ function Filters({
 	applyFilters = () => {},
 	open = false,
 	setOpen = () => {},
-	isScrollable = true,
 	name = 'APPLY',
-	type = '',
 	date = {},
 	setDate = () => {},
 	range = '',
 	setRange = () => {},
 }) {
-	const className = type === 'date-range' ? 'date' : '';
-
 	let width = '760px;';
 	if (controls?.length < 7) {
 		width = 'fit-content';
@@ -28,7 +24,6 @@ function Filters({
 	return (
 		<div
 			className={styles.filter_box}
-
 			width={width}
 		>
 			<Popover

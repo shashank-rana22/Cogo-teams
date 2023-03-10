@@ -185,37 +185,6 @@
 @media (max-width: 767px) {
   
 	/* CSS */
-
-	/* .flex_container{
-		display: flex;
-		flex-direction: column;
-		flex-wrap: wrap;
-		align-items: center;
-		position: relative;
-	}
-	
-	.stepper_line{
-		height: 96%;
-		width: 2px;
-		flex-direction: column;
-		background: #bdbdbd;
-		margin: 0 6px;
-	}
-	.row{
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	.col_2{
-		display: flex;
-		flex-direction: row;
-		padding: 20px;
-	} */
-
-	.card_wrapper{
-	
-
-	}
 	
 	.revenue_span{
 		color: #828282;
@@ -242,22 +211,6 @@
 	
 	.test_tag{
 		font-weight: 500;
-	}
-	
-	.flex_container{
-
-	}
-	
-	.flex_filter{
-
-	}
-	
-	.text_filter{
-
-	}
-	
-	.flex_currency{
-
 	}
 	
 	.text_currency{
@@ -291,38 +244,4 @@
 	.text_customers_data{
 		margin-left: 16px;
 	}
-	
-	.flex_nodata{
-
-	}
-	
-	.row{
-
-	}
-	
-	.revenue_data{
-
-	}
-	
-	.col_2{
-	
-	}
-	
-	.row_2{
-	
-	}
-	
-	.col_pie{
-		
-	}
-	
-	.chart_container{
-	
-	}
-	
-	.revenue_trade_data{
-		
-	}
-	
-
   }

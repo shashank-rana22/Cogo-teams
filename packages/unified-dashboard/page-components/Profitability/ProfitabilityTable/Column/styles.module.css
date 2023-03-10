@@ -1,6 +1,7 @@
 .head{
 	color: #4f4f4f;
 	white-space: nowrap;
+	text-align: center;
 }
 
 .data{
@@ -25,25 +26,6 @@
 			padding-left: 0;
 		}
 	}
-	
-
-	/* .trade-tags {
-		font-size: 8px;
-		padding: 0 4px;
-	}
-
-	.trade-tags.core-ui-tag-root {
-		margin-top: 4px;
-	}
-
-	.import {
-		background: #ded7fc;
-		border: 1px solid #ded7fc;
-	}
-	.export {
-		background: #dfe1ef;
-		border: 1px solid #dfe1ef;
-	} */
 }
 
 .created_at{

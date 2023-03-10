@@ -14,7 +14,4 @@ function CustomerCountCard({ isBooking, title, count }) {
 		</div>
 	);
 }
-
 export default CustomerCountCard;
-
-{ /* <div className={isBooking ? `${styles.flex_div}${styles.customer_card}` : `${styles.flex_div}${styles.pt}`}> */ }
