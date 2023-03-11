@@ -36,7 +36,7 @@ const getFormControls = () => [
 				value : 'tasks',
 			},
 		],
-		// rules: { required: 'Required' },
+		rules: { required: 'Required' },
 	},
 	{
 		name  : 'content',
@@ -115,16 +115,16 @@ const getFormControls = () => [
 				status: 'active',
 			},
 		},
-		placeholder: 'Select Audience',
+		placeholder : 'Select Audience',
 		// value       : formvalue?.partner_id || '',
-		// rules       : { required: 'Required' },
+		rules       : { required: 'Required' },
 	},
 
 	{
 		name            : 'validity',
 		label           : 'Validity',
 		type            : 'datepicker',
-		dateFormat      : 'dd/MM/yyyy hh:mm a',
+		dateFormat      : 'dd MMM yyyy hh:mm a',
 		use12hourformat : true,
 		style           : {
 			flexBasis: '48%',

@@ -1,9 +1,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+import { Modal } from '@cogoport/components';
 import { Accordion, Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { format } from '@cogoport/utils';
-import React from 'react';
+import { startCase, format } from '@cogoport/utils';
+import React, { useState } from 'react';
+
+import Preview from '../../../CreateAnnouncement/AnnouncementForm/Preview';
 
 import styles from './styles.module.css';
 
@@ -18,15 +21,21 @@ function DisplayCard({
 	deleteAnnouncement = () => {},
 
 }) {
+	const [showModal, setShowModal] = useState(false);
+
 	const options = [
 		{ label: 'Title', value: data?.title },
 		{ label: 'Created At', value: format(data?.created_at, 'dd MMM yyyy hh:mm a') },
-		{ label: 'Announcement Type', value: data?.announcement_type },
+		{ label: 'Announcement Type', value: startCase(data?.announcement_type) },
 		{ label: 'Updated At', value: format(data?.updated_at, 'dd MMM yyyy hh:mm a') },
 		{ label: 'Action', value: 1 },
 	];
 
 	const router = useRouter();
+	const handleView = (i) => {
+		handleAnnouncementDetails(i);
+		setShowModal(true);
+	};
 
 	const editDetails = () => {
 		router.push(
@@ -50,17 +59,20 @@ function DisplayCard({
 											themeType="primary"
 											size="sm"
 											style={{ marginRight: 8 }}
+											onClick={() => handleView(index)}
 										>
 											View
 										</Button>
-										<Button
-											themeType="secondary"
-											size="sm"
-											style={{ marginRight: 8 }}
-											onClick={() => editDetails()}
-										>
-											Edit
-										</Button>
+										{activeTab === 'active' && (
+											<Button
+												themeType="secondary"
+												size="sm"
+												style={{ marginRight: 8 }}
+												onClick={() => editDetails()}
+											>
+												Edit
+											</Button>
+										)}
 										{activeTab === 'active' && (
 											<IcMDelete
 												height={20}
@@ -86,6 +98,21 @@ function DisplayCard({
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
 				</Accordion>
 			</div>
+
+			{showModal && (
+				<Modal
+					show={showModal}
+					scroll={false}
+					size="lg"
+					placement="center"
+					onClose={() => setShowModal(false)}
+				>
+					<Modal.Header title="Preview" />
+					<Modal.Body className={styles.modal}>
+						<Preview formValues={accordianData} announcement_id={accordianData?.id} />
+					</Modal.Body>
+				</Modal>
+			)}
 
 		</div>
 	);

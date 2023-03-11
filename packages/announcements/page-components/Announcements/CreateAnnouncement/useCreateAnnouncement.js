@@ -17,20 +17,23 @@ const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '' }) =>
 	}, { manual: true });
 
 	const controls = getFormControls();
+	const getDateValue = (date) => format(date, 'dd MMM yyyy hh:mm a').split(' ')[0];
 
 	useEffect(() => {
 		const { validity_end = '', validity_start = '', hot_duration, faq_audiences = [] } = defaultValues;
 		// console.log('check', validity_start);
 		const validity = {
-			startDate : format(validity_start, 'd/MM/yyyy hh:mm a'),
-			endDate   : format(validity_end, 'd/MM/yyyy hh:mm a'),
+			endDate   : format(validity_end, 'dd MMM yyyy hh:mm a'),
+			startDate : format(validity_start, 'dd MMM yyyy hh:mm a'),
 		};
+		const audience_ids = [...faq_audiences.map((item) => item.id)];
 		setValue('title', defaultValues?.title);
 		setValue('content', defaultValues?.content);
 		setValue('announcement_type', defaultValues?.announcement_type);
 		setValue('redirection_url', defaultValues?.redirection_url);
-		// setValue('is_important', 'true');
-		setValue('audience_ids', [...faq_audiences.map((item) => item.id)]);
+		setValue('is_important', defaultValues?.is_important);
+		setValue('audience_ids', audience_ids);
+		setValue('hot_duration', getDateValue(hot_duration) - getDateValue(validity_start));
 		// setValue('validity', validity);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [defaultValues]);

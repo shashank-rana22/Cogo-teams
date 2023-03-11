@@ -1,11 +1,14 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-undef */
 import { IcMArrowLeft, IcMArrowRight, IcMDocument } from '@cogoport/icons-react';
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function Preview({ formValues = {} }) {
+function Preview({ formValues = {}, announcement_id = '' }) {
+	const [videos, setVideos] = useState([]);
+	const [files, setFiles] = useState([]);
+	const [images, setImages] = useState([]);
 	const scrollRefImages = useRef('');
 	const scrollRefVideos = useRef('');
 	const scrollHandlerRightImages = () => {
@@ -29,12 +32,25 @@ function Preview({ formValues = {} }) {
 
 		window.open(modifiedUrl, '_blank');
 	};
+	useEffect(() => {
+		if (announcement_id) {
+			const { announcement_attachments } = formValues;
+			const { image, pdf, video } = announcement_attachments;
+			setImages(image?.map((item) => item.document_url));
+			setVideos(video?.map((item) => item.document_url));
+			setFiles(pdf?.map((item) => item.document_url));
+		} else {
+			setVideos(formValues?.videos?.filter((item) => item.video_item)?.map((item) => item.video_item));
+			setFiles(formValues?.files);
+			setImages(formValues?.images);
+		}
+	}, [announcement_id, formValues]);
 
 	// https://www.youtube.com/embed/R8_veQiYBjI
 	// https://www.youtube.com/embed/VnvRFRk_51k
 
-	const videos = formValues.videos.filter((item) => item.video_item).map((item) => item.video_item);
-	const { files, images } = formValues;
+	// const videos = formValues?.videos?.filter((item) => item.video_item).map((item) => item.video_item);
+	// const { files, images } = formValues;
 	return (
 		<div className={styles.container}>
 

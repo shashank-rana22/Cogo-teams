@@ -19,7 +19,7 @@ function Header({
 						value={searchInput}
 						onChange={setSearchInput}
 						size="md"
-						placeholder="Search a question"
+						placeholder="Search an announcement"
 					/>
 				</div>
 			</div>

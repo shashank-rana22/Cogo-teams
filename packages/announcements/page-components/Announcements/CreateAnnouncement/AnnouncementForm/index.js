@@ -86,15 +86,17 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 				})}
 			</div>
 			<div className={styles.button_container}>
-				<div>
-					<Button
-						themeType="tertiary"
-						size="md"
-						onClick={() => setShowPreview(true)}
-					>
-						Preview
-					</Button>
-				</div>
+				{!announcement_id && (
+					<div>
+						<Button
+							themeType="tertiary"
+							size="md"
+							onClick={() => setShowPreview(true)}
+						>
+							Preview
+						</Button>
+					</div>
+				)}
 
 				<div>
 					<Button
@@ -112,7 +114,7 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 				show={showPreview}
 				scroll={false}
 				size="lg"
-				placement="top"
+				placement="center"
 				onClose={() => setShowPreview(false)}
 			>
 				<Modal.Header title="Preview" />
