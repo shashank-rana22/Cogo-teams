@@ -1,4 +1,4 @@
-import { Pill, Button, Modal } from '@cogoport/components';
+import { Pill, Button, Popover } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -21,8 +21,7 @@ const addedQuestionsColumns = ({
 	onClickEditButton,
 	deactivateQuestion,
 	onClickViewButton = () => {},
-	show,
-	setShow = () => {},
+
 	deleteitem,
 	setDeleteitem = () => {},
 }) => [
@@ -92,35 +91,27 @@ const addedQuestionsColumns = ({
 					EDIT
 				</Button>
 				{activeList !== 'inactive' ? (
-					<>
+					<Popover
+						placement="right"
+						render="right"
+						content={(
+							<div>
+								<section>
+									<h3>Are you sure you want to delete it?</h3>
+									{deleteitem?.question_abstract}
+								</section>
+								<Button onClick={() => deactivateQuestion(deleteitem?.id)}>OK</Button>
+							</div>
+						)}
+					>
 						<IcMDelete
 							height={20}
 							width={20}
 							style={{ cursor: 'pointer' }}
-							onClick={() => { setShow(true); setDeleteitem(items); }}
+							onClick={() => { setDeleteitem(items); }}
 						/>
-						<div>
-							<Modal
-								size="md"
-								show={show}
-								onClose={() => setShow(false)}
-								closeOnOuterClick={false}
-								placement="center"
-								className={styles.model_container}
-							>
-								<Modal.Header title="Are you sure?" />
-								<Modal.Body>
-									<section>
-										<h3>Are you sure you want to delete it?</h3>
-										{deleteitem?.question_abstract}
-									</section>
-								</Modal.Body>
-								<Modal.Footer>
-									<Button onClick={() => deactivateQuestion(deleteitem?.id)}>OK</Button>
-								</Modal.Footer>
-							</Modal>
-						</div>
-					</>
+					</Popover>
+
 				) : null}
 
 			</div>
@@ -128,7 +119,9 @@ const addedQuestionsColumns = ({
 	},
 ];
 
-const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) => [
+const requestedQuestionsColumns = ({
+	deactivateQuestion, onClickEditButton,
+}) => [
 	{
 		Header   : 'QUESTIONS',
 		accessor : (items) => (
@@ -168,12 +161,25 @@ const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) =>
 				>
 					ADD ANSWER
 				</Button>
-				<IcMDelete
-					height={20}
-					width={20}
-					style={{ marginRight: 8 }}
-					onClick={() => deactivateQuestion(items?.id)}
-				/>
+				<Popover
+					placement="right"
+					render="right"
+					content={(
+						<div>
+							<section>
+								<h3>Are you sure you want to delete it?</h3>
+							</section>
+							<Button onClick={() => deactivateQuestion(items.id)}>OK</Button>
+						</div>
+					)}
+				>
+					<IcMDelete
+						height={20}
+						width={20}
+						style={{ cursor: 'pointer' }}
+
+					/>
+				</Popover>
 
 			</div>
 		),
@@ -247,7 +253,6 @@ const useQuestionList = () => {
 				},
 			);
 			// eslint-disable-next-line no-use-before-define
-			setShow(false);
 			getQuestionsList();
 		} catch {
 			console.log('Error', error);
@@ -267,7 +272,6 @@ const useQuestionList = () => {
 			`/learning/faq/create/question?mode=preview&id=${id}&source=view`,
 		);
 	};
-	const [show, setShow] = useState(false);
 	const [deleteitem, setDeleteitem] = useState('');
 	const columns = activeList !== 'requested'
 		? addedQuestionsColumns({
@@ -275,8 +279,6 @@ const useQuestionList = () => {
 			onClickEditButton,
 			deactivateQuestion,
 			onClickViewButton,
-			show,
-			setShow,
 			deleteitem,
 			setDeleteitem,
 		})
