@@ -61,7 +61,7 @@ function ButtonComponent({
 				size="sm"
 				themeType="primary"
 				onClick={() => 	setShowTypePopover(!showTypePopover)}
-				disabled={!(currentDate <= formEndingDate && currentDate >= formStartingDate)}
+				// disabled={!(currentDate <= formEndingDate && currentDate >= formStartingDate)}
 			>
 				{isEmpty(feedback_id) ? (
 					<>
