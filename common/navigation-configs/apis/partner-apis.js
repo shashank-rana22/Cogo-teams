@@ -1681,6 +1681,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
+		{
+			api          : 'post_allocation_feedback',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_feedbacks',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'create_event',
+			access_type  : 'private',
+			service_name : 'event',
+		},
 	],
 	supply_crm: [
 		{
@@ -4785,6 +4800,11 @@ const partner = {
 	locations: [
 		{
 			api          : 'update_location',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+		{
+			api          : 'list_locations_mapping',
 			access_type  : 'private',
 			service_name : 'location',
 		},
@@ -9246,6 +9266,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api          : 'delete_saas_container_timeline_detail',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
 	],
 
 	ftl_freight: [
@@ -9724,6 +9749,26 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rail_domestic_freight_rate',
 		},
+		{
+			api          : 'create_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'get_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'list_rail_domestic_freight_rate_free_days',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'update_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
 	],
 	voice_call: [
 		{
@@ -9876,9 +9921,10 @@ const partner = {
 			feature     : 'fcl_freight_rate_extensions',
 		},
 		{
-			api         : 'get_location_cluster',
-			access_type : 'private',
-			feature     : 'fcl_freight_rate_extensions',
+			api          : 'get_location_cluster',
+			access_type  : 'private',
+			feature      : 'fcl_freight_rate_extensions',
+			service_name : 'location',
 		},
 		{
 			api          : 'list_fcl_freight_rate_free_days',
@@ -10266,6 +10312,32 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
+		{
+			api          : 'get_exchange_rate_shipment_frequency_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_shipment_revenue_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_currency_pair_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_shipment_applicable_state_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_source_count_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+
 	],
 	contracts: [
 		{
@@ -10302,6 +10374,42 @@ const partner = {
 			api          : 'get_contract_port_pair_projected_stats',
 			access_type  : 'private',
 			service_name : 'contract',
+		},
+	],
+	ground_ops: [
+		{
+			api         : 'get_air_coe_pending_tasks_list',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_locations',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+		{
+			api          : 'list_operators',
+			access_type  : 'private',
+			service_name : 'operator',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_shipment_document',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_document',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_rate_charge_codes',
+			access_type  : 'private',
+			service_name : 'rate_sheet',
 		},
 	],
 	cost_booking: [
@@ -10543,32 +10651,7 @@ const partner = {
 			service_name : 'partner',
 		},
 	],
-	helios_dashboard: [
-		{
-			api          : 'list_partner_users',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-		{
-			api          : 'list_auth_roles',
-			access_type  : 'private',
-			service_name : 'auth',
-		},
-		{
-			api          : 'list_analytics_dashboards',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'create_analytics_permission_entry',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'list_analytics_permission_entries',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
+	analytics_dashboard: [
 		{
 			api          : 'list_analytics_permitted_dashboards',
 			access_type  : 'private',
@@ -10580,17 +10663,12 @@ const partner = {
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'get_widget_data',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
 			api          : 'list_analytics_dashboard_widgets',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'update_widget_data_for_filtered_query',
+			api          : 'update_widget_data_for_analytics_filtered_query',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
@@ -10600,7 +10678,39 @@ const partner = {
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'list_helios_dashboards',
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+	],
+	analytics_dashboard_management: [
+		{
+			api          : 'create_analytics_permission_entry',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_permission_entries',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'list_analytics_permission_entries',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},

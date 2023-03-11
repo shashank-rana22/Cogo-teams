@@ -26,6 +26,7 @@ function MessageList({
 	setActiveCardId = () => {},
 	showBotMessages = false,
 	setShowBotMessages = () => {},
+	isomniChannelAdmin = false,
 }) {
 	function getShowChat({ user_name }) {
 		if (searchValue) {
@@ -38,6 +39,15 @@ function MessageList({
 
 	if (messagesLoading) {
 		return <LoadingState />;
+	}
+
+	function lastMessagePreview(previewData = '') {
+		return (
+			<div
+				className={styles.content}
+				dangerouslySetInnerHTML={{ __html: previewData }}
+			/>
+		);
 	}
 
 	return (
@@ -65,6 +75,7 @@ function MessageList({
 									setActiveCardId={setActiveCardId}
 									setShowBotMessages={setShowBotMessages}
 									showBotMessages={showBotMessages}
+									isomniChannelAdmin={isomniChannelAdmin}
 								/>
 							)
 						)}
@@ -76,7 +87,9 @@ function MessageList({
 							className={styles.filter_icon}
 						/>
 					</Popover>
-					{(!isEmpty(appliedFilters) || showBotMessages) && <div className={styles.filters_applied} />}
+					{(!isEmpty(appliedFilters)
+					|| (showBotMessages && !isomniChannelAdmin))
+					&& <div className={styles.filters_applied} />}
 				</div>
 			</div>
 
@@ -165,10 +178,7 @@ function MessageList({
 										</div>
 
 										<div className={styles.content_div}>
-											<div className={styles.content}>
-												{item.last_message}
-											</div>
-
+											{lastMessagePreview(item?.last_message || '')}
 											{item.new_message_count > 0 && (
 												<div className={styles.new_message_count}>
 													{item.new_message_count > 100 ? '99+' : (
