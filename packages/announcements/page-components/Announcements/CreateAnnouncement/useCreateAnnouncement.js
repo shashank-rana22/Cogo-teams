@@ -1,13 +1,14 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { format, addDays } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import getFormControls from './controls/get-form-controls';
 
-const useCreateAnnouncements = ({ defaultValues = {} }) => {
-	console.log('check', defaultValues);
+const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '' }) => {
+	const router = useRouter();
 	const { control, watch, handleSubmit, formState:{ errors }, setValue } = useForm();
 	const [showPreview, setShowPreview] = useState(false);
 	const [{ loading }, trigger] = useRequest({
@@ -19,7 +20,7 @@ const useCreateAnnouncements = ({ defaultValues = {} }) => {
 
 	useEffect(() => {
 		const { validity_end = '', validity_start = '', hot_duration, faq_audiences = [] } = defaultValues;
-		console.log('check', validity_start);
+		// console.log('check', validity_start);
 		const validity = {
 			startDate : format(validity_start, 'd/MM/yyyy hh:mm a'),
 			endDate   : format(validity_end, 'd/MM/yyyy hh:mm a'),
@@ -33,6 +34,49 @@ const useCreateAnnouncements = ({ defaultValues = {} }) => {
 		// setValue('validity', validity);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [defaultValues]);
+
+	const [{ error }, updateTrigger] = useRequest({ url: '/update_announcement', method: 'post' }, { manual: true });
+
+	const editAnnouncementDetails = async (values) => {
+		// console.log(announcement_id, 'check', values);
+		try {
+			const {
+				title,
+				announcement_type,
+				content,
+				validity,
+				redirection_url,
+				is_important,
+				audience_ids,
+			} = values;
+			const { startDate:validity_start, endDate:validity_end } = validity;
+			const hot_duration = addDays(validity_start, values?.hot_duration);
+			const payload = {
+				title,
+				announcement_type,
+				content,
+				validity_start,
+				validity_end,
+				hot_duration,
+				redirection_url,
+				is_important,
+				audience_ids,
+			};
+			const response = await updateTrigger(
+				{ data: { id: announcement_id, ...payload } },
+			);
+			if (response.hasError) {
+				Toast.error(response?.message || 'Something went wrong');
+				return;
+			}
+
+			Toast.success('Announcement updated successfully...');
+			router.back();
+		} catch (err) {
+			Toast.error(err?.message);
+			console.log('Error', error);
+		}
+	};
 
 	const onSubmit = async (values) => {
 		if (!values) return;
@@ -92,8 +136,9 @@ const useCreateAnnouncements = ({ defaultValues = {} }) => {
 			}
 
 			Toast.success('Announcement created successfully...');
-		} catch (error) {
-			Toast.error(error?.message || 'Something went wrong');
+			router.back();
+		} catch (err) {
+			Toast.error(err?.message || 'Something went wrong');
 		}
 	};
 
@@ -105,6 +150,7 @@ const useCreateAnnouncements = ({ defaultValues = {} }) => {
 		onSubmit,
 		errors,
 		showPreview,
+		editAnnouncementDetails,
 		setShowPreview,
 		loading,
 		setValue,

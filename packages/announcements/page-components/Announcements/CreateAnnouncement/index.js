@@ -29,7 +29,7 @@ function CreateAnnouncement() {
 				{announcement_id ? 'Update Announcement' : 'Create Announcement'}
 			</div>
 			<div className="form">
-				<AnnouncementForm defaultValues={defaultValues} disabled={disabled} />
+				<AnnouncementForm defaultValues={defaultValues} disabled={disabled} announcement_id={announcement_id} />
 			</div>
 		</div>
 	);

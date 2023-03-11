@@ -119,7 +119,7 @@ const getFormControls = () => [
 		// value       : formvalue?.partner_id || '',
 		// rules       : { required: 'Required' },
 	},
-	
+
 	{
 		name            : 'validity',
 		label           : 'Validity',

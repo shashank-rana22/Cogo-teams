@@ -11,7 +11,7 @@ import FormElement from './FormElement';
 import Preview from './Preview';
 import styles from './styles.module.css';
 
-function AnnouncementForm({ defaultValues = {}, disabled = false }) {
+function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_id = '' }) {
 	const {
 		controls,
 		control,
@@ -20,10 +20,11 @@ function AnnouncementForm({ defaultValues = {}, disabled = false }) {
 		onSubmit,
 		showPreview,
 		setShowPreview,
+		editAnnouncementDetails = () => {},
 		loading,
 		errors,
 		// setValue,
-	} = useCreateAnnouncements({ defaultValues });
+	} = useCreateAnnouncements({ defaultValues, announcement_id });
 
 	const [showCreateAudience, setShowCreateAudience] = useState(false);
 	const formValues = watch();
@@ -100,7 +101,7 @@ function AnnouncementForm({ defaultValues = {}, disabled = false }) {
 						loading={loading}
 						themeType="primary"
 						size="md"
-						onClick={handleSubmit(onSubmit)}
+						onClick={announcement_id ? handleSubmit(editAnnouncementDetails) : handleSubmit(onSubmit)}
 					>
 						Submit
 					</Button>
