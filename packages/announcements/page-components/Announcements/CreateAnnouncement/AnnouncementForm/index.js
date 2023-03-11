@@ -1,6 +1,4 @@
 import { Modal, Button } from '@cogoport/components';
-import { asyncFieldsAudiences } from '@cogoport/forms';
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import React, { useState } from 'react';
 
 import useCreateAnnouncements from '../useCreateAnnouncement';
@@ -10,6 +8,7 @@ import FieldArray from './FieldArray';
 import FormElement from './FormElement';
 import Preview from './Preview';
 import styles from './styles.module.css';
+import useListAudiences from './useListAudiences';
 
 function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_id = '' }) {
 	const {
@@ -28,14 +27,7 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 
 	const [showCreateAudience, setShowCreateAudience] = useState(false);
 	const formValues = watch();
-
-	const { options } = useGetAsyncOptions({
-		...asyncFieldsAudiences(),
-	});
-	const finalOptions = options?.map((o) => ({
-		label : `${o.name}`,
-		value : `${o.id}`,
-	}));
+	const { audienceOptions = [], fetchAudiences = () => {} } = useListAudiences();
 
 	const renderAddButton = () => (
 		<div>
@@ -78,7 +70,7 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 								control={control}
 								field={controlItem}
 								errors={errors}
-								options={controlItem.options || finalOptions}
+								options={controlItem.options || audienceOptions}
 								disabled={['files', 'images'].includes(controlItem.name) && disabled}
 							/>
 						</div>
@@ -130,7 +122,7 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 			>
 				<Modal.Header title="Add Audience" />
 				<Modal.Body className={styles.audience_modal}>
-					<CreateAudienceForm setShowCreateAudience={setShowCreateAudience} />
+					<CreateAudienceForm setShowCreateAudience={setShowCreateAudience} fetchAudiences={fetchAudiences} />
 				</Modal.Body>
 			</Modal>
 		</div>
