@@ -21,6 +21,7 @@ function DisplayCard({
 
 }) {
 	const [showModal, setShowModal] = useState(false);
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const options = [
 		{ label: 'Title', value: data?.title },
@@ -77,7 +78,7 @@ function DisplayCard({
 												height={20}
 												width={20}
 												style={{ cursor: 'pointer' }}
-												onClick={() => deleteAnnouncement(data?.id)}
+												onClick={() => setShowDeleteModal(true)}
 											/>
 										)}
 
@@ -110,6 +111,35 @@ function DisplayCard({
 					<Modal.Body className={styles.modal}>
 						<Preview formValues={accordianData} announcement_id={accordianData?.id} />
 					</Modal.Body>
+				</Modal>
+			)}
+			{showDeleteModal && (
+				<Modal
+					show={showDeleteModal}
+					scroll={false}
+					size="md"
+					placement="center"
+					onClose={() => setShowDeleteModal(false)}
+				>
+					<Modal.Header title="Are you sure to delete this announcement" />
+					<Modal.Footer>
+						<div className={styles.delete_buttons}>
+							<Button
+								themeType="secondary"
+								size="md"
+								onClick={() => setShowDeleteModal(false)}
+							>
+								Cancel
+							</Button>
+							<Button
+								themeType="primary"
+								size="md"
+								onClick={() => deleteAnnouncement(data?.id)}
+							>
+								Delete
+							</Button>
+						</div>
+					</Modal.Footer>
 				</Modal>
 			)}
 

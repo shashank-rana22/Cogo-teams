@@ -63,9 +63,15 @@ function useListAnnouncements() {
 
 	const deleteAnnouncement = async (announcement_id) => {
 		try {
-			await updateTrigger(
+			const response = await updateTrigger(
 				{ data: { id: announcement_id, status: 'inactive' } },
 			);
+			if (response?.hasError) {
+				Toast.error(response?.message || 'Something went wrong');
+				return;
+			}
+
+			Toast.success('Announcement deleted successfully...');
 			getAnnouncementList();
 		} catch (err) {
 			Toast.error(err?.message);

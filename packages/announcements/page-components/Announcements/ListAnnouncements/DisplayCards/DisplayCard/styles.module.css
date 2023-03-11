@@ -66,3 +66,7 @@
     display: flex;
     justify-content: space-between;
 }
+.delete_buttons{
+    display: flex;
+    gap: 20px;
+}
