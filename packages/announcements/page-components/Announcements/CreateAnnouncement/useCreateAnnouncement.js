@@ -39,18 +39,19 @@ const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '' }) =>
 
 	const editAnnouncementDetails = async (values) => {
 		// console.log(announcement_id, 'check', values);
+		if (!values) return;
+		const {
+			title,
+			announcement_type,
+			content,
+			validity,
+			redirection_url,
+			is_important,
+			audience_ids,
+		} = values;
+		const { startDate:validity_start, endDate:validity_end } = validity;
+		const hot_duration = addDays(validity_start, values?.hot_duration);
 		try {
-			const {
-				title,
-				announcement_type,
-				content,
-				validity,
-				redirection_url,
-				is_important,
-				audience_ids,
-			} = values;
-			const { startDate:validity_start, endDate:validity_end } = validity;
-			const hot_duration = addDays(validity_start, values?.hot_duration);
 			const payload = {
 				title,
 				announcement_type,
