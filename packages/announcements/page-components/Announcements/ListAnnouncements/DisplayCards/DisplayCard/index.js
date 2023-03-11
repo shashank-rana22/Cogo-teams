@@ -15,8 +15,8 @@ function DisplayCard({
 	data = {},
 	index,
 	handleAnnouncementDetails = () => {},
-	refetch = () => {},
-	loading = false,
+	// refetch = () => {},
+	// loading = false,
 	deleteAnnouncement = () => {},
 
 }) {

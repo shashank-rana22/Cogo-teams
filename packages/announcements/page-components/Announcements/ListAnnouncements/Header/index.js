@@ -1,4 +1,4 @@
-import { Button, TabPanel, Tabs } from '@cogoport/components';
+import { TabPanel, Tabs } from '@cogoport/components';
 import React from 'react';
 
 import SearchInput from '../../../../commons/SearchInput';
