@@ -120,8 +120,7 @@ const addedQuestionsColumns = ({
 ];
 
 const requestedQuestionsColumns = ({
-	deactivateQuestion, onClickEditButton, deleteitem,
-	setDeleteitem = () => {},
+	deactivateQuestion, onClickEditButton,
 }) => [
 	{
 		Header   : 'QUESTIONS',
@@ -169,7 +168,6 @@ const requestedQuestionsColumns = ({
 						<div>
 							<section>
 								<h3>Are you sure you want to delete it?</h3>
-								{deleteitem?.question_abstract}
 							</section>
 							<Button onClick={() => deactivateQuestion(items.id)}>OK</Button>
 						</div>
