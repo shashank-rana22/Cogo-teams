@@ -119,7 +119,10 @@ const addedQuestionsColumns = ({
 	},
 ];
 
-const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) => [
+const requestedQuestionsColumns = ({
+	deactivateQuestion, onClickEditButton, deleteitem,
+	setDeleteitem = () => {},
+}) => [
 	{
 		Header   : 'QUESTIONS',
 		accessor : (items) => (
@@ -159,12 +162,26 @@ const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) =>
 				>
 					ADD ANSWER
 				</Button>
-				<IcMDelete
-					height={20}
-					width={20}
-					style={{ marginRight: 8 }}
-					onClick={() => deactivateQuestion(items?.id)}
-				/>
+				<Popover
+					placement="right"
+					render="right"
+					content={(
+						<div>
+							<section>
+								<h3>Are you sure you want to delete it?</h3>
+								{deleteitem?.question_abstract}
+							</section>
+							<Button onClick={() => deactivateQuestion(items.id)}>OK</Button>
+						</div>
+					)}
+				>
+					<IcMDelete
+						height={20}
+						width={20}
+						style={{ cursor: 'pointer' }}
+
+					/>
+				</Popover>
 
 			</div>
 		),
