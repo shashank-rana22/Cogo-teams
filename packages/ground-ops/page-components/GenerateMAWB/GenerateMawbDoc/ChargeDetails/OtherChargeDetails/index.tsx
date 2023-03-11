@@ -51,7 +51,7 @@ function OtherChargeDetails({
 				`}
 				>
 					<p style={{ fontSize: 9 }}>
-						Other Charges
+						<span style={{ color: 'transparent' }}>Other Charges</span>
 						<div className={cl`
 							${styles.flex} 
 							${styles.other_charge_text} 
@@ -79,7 +79,7 @@ function OtherChargeDetails({
 					${styles.hereby_container_text} 
 				`}
 				>
-					<p style={{ fontSize: 10 }} className="text">
+					<p style={{ fontSize: 10, color: 'transparent' }} className="text">
 						I hereby certify that the particulars on the face hereof are
 						correct and that insofar as any part of the consignment contains
 						dangerous goods.
@@ -107,7 +107,7 @@ function OtherChargeDetails({
 					${styles.signature_text} 
 				`}
 				>
-					<p style={{ fontSize: 9 }}>Signature of Shipper or his Agent</p>
+					<p style={{ fontSize: 9, color: 'transparent' }}>Signature of Shipper or his Agent</p>
 				</div>
 			</div>
 			<div className={cl`
@@ -160,21 +160,21 @@ function OtherChargeDetails({
 							${styles.date_text} 
 						`}
 						>
-							<p style={{ fontSize: 8 }}>Executed on (date)</p>
+							<p style={{ fontSize: 8, color: 'transparent' }}>Executed on (date)</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
 							${styles.place_text} 
 						`}
 						>
-							<p style={{ fontSize: 8 }}>at (place)</p>
+							<p style={{ fontSize: 8, color: 'transparent' }}>at (place)</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
 							${styles.signature_value} 
 						`}
 						>
-							<p style={{ fontSize: 8 }}>Signature of Issuing Carrier or its Agent</p>
+							<p style={{ fontSize: 8, color: 'transparent' }}>Signature of Issuing Carrier or its Agent</p>
 						</div>
 					</div>
 				</div>
@@ -204,7 +204,7 @@ function OtherChargeDetails({
 								${styles.trapezium}
 							`}
 							>
-								<p style={{ fontSize: 9 }}>Total Collected</p>
+								<p style={{ fontSize: 9, color: 'transparent' }}>Total Collected</p>
 							</div>
 							<div className={cl`
 								${styles.flex} 

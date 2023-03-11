@@ -72,7 +72,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						`}
 						>
 
-							<p style={{ fontSize: 10 }}>Shipper&apos;s Name and Address</p>
+							<p style={{ fontSize: 10, color: 'transparent' }}>Shipper&apos;s Name and Address</p>
 						</div>
 						<div className={cl`
 							${styles.flex_col} 
@@ -80,7 +80,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						`}
 						>
 
-							<p style={{ fontSize: 10 }}>Shipper&apos;s Account Number</p>
+							<p style={{ fontSize: 10, color: 'transparent' }}>Shipper&apos;s Account Number</p>
 						</div>
 					</div>
 					<div>
@@ -113,7 +113,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.not_negotiable_issuedby} 
 					`}
 					>
-						<p style={{ fontSize: 10 }}>Not Negotiable</p>
+						<p style={{ fontSize: 10, color: 'transparent' }}>Not Negotiable</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -130,7 +130,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.not_negotiable_issuedby} 
 					`}
 					>
-						<p style={{ fontSize: 10 }}>Issued By</p>
+						<p style={{ fontSize: 10, color: 'transparent' }}>Issued By</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -148,7 +148,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.same_validity} 
 					`}
 					>
-						<p style={{ fontSize: 10 }}>
+						<p style={{ fontSize: 10, color: 'transparent' }}>
 							Copies 1, 2 and 3 of this Air Waybill are originals and have the
 							same validity.
 						</p>
@@ -167,7 +167,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 							${styles.shipper_consignee_name_address} 
 						`}
 						>
-							<p style={{ fontSize: 10 }}>Consignee&apos;s Name and Address</p>
+							<p style={{ fontSize: 10, color: 'transparent' }}>Consignee&apos;s Name and Address</p>
 						</div>
 						<div className={cl`
 							${styles.flex_col} 
@@ -175,7 +175,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						`}
 						>
 
-							<p style={{ fontSize: 10 }}>Consignee&apos;s Account Number</p>
+							<p style={{ fontSize: 10, color: 'transparent' }}>Consignee&apos;s Account Number</p>
 						</div>
 					</div>
 
@@ -207,7 +207,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 							${styles.flex_left_padding} 
 						`}
 					>
-						<p style={{ fontSize: 9 }} className={styles.text}>
+						<p style={{ fontSize: 9, color: 'transparent' }} className={styles.text}>
 							It is agreed that the goods declared herein are accepted in
 							apparent good order and condition (except as noted) for carriage
 							SUBJECT TO THE CONDITIONS OF CONTRACT ON THE REVERSE HEREOF. ALL

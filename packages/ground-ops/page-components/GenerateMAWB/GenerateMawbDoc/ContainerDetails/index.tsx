@@ -36,7 +36,7 @@ function ContainerDetails({
 					`}
 					>
 
-						<p style={{ fontSize: 10 }}>Handling Information</p>
+						<p style={{ fontSize: 10, color: 'transparent' }}>Handling Information</p>
 						<div className={cl`
 							${styles.flex} 
 							${styles.flex_font_weight}
@@ -57,7 +57,7 @@ function ContainerDetails({
 							${styles.sci_text_style}
 						`}
 						>
-							<p style={{ fontSize: 10 }}>SCI</p>
+							<p style={{ fontSize: 10, color: 'transparent' }}>SCI</p>
 						</div>
 					</div>
 				</div>
@@ -82,7 +82,7 @@ function ContainerDetails({
 							${styles.block_a_container_section_rcp}
 						`}
 						>
-							<p style={{ fontSize: 7 }}>No. of Pieces RCP</p>
+							<p style={{ fontSize: 7, color: 'transparent' }}>No. of Pieces RCP</p>
 						</div>
 
 						<div className={cl`
@@ -190,7 +190,7 @@ function ContainerDetails({
 								${styles.grossweight_text}
 							`}
 							>
-								<p style={{ fontSize: 8 }}>Gross Weight</p>
+								<p style={{ fontSize: 8, color: 'transparent' }}>Gross Weight</p>
 							</div>
 						</div>
 						<div className={cl`
@@ -273,7 +273,7 @@ function ContainerDetails({
 								${styles.block_e_container_rateclass_section}
 							`}
 							>
-								<p style={{ fontSize: 7 }}>Rate Class</p>
+								<p style={{ fontSize: 7, color: 'transparent' }}>Rate Class</p>
 							</div>
 							<div className={cl`
 								${styles.flex_row} 
@@ -294,7 +294,7 @@ function ContainerDetails({
 									${styles.block_e_container_commodity_text_section}
 								`}
 								>
-									<p style={{ fontSize: 7 }}>
+									<p style={{ fontSize: 7, color: 'transparent' }}>
 										Commodity
 										<div className={cl`
 											${styles.flex} 
@@ -359,7 +359,7 @@ function ContainerDetails({
 								${styles.chargeableweight_text}
 							`}
 							>
-								<p style={{ fontSize: 8 }}>
+								<p style={{ fontSize: 8, color: 'transparent' }}>
 									Chargeable
 									<div className={cl`
 										${styles.flex} 
@@ -415,7 +415,7 @@ function ContainerDetails({
 								${styles.grossweight_text}
 							`}
 							>
-								<p style={{ fontSize: 9 }}>Rate / Charge</p>
+								<p style={{ fontSize: 9, color: 'transparent' }}>Rate / Charge</p>
 							</div>
 						</div>
 						<div className={cl`
@@ -462,7 +462,7 @@ function ContainerDetails({
 								${styles.grossweight_text}
 							`}
 							>
-								<p style={{ fontSize: 9 }}>Total</p>
+								<p style={{ fontSize: 9, color: 'transparent' }}>Total</p>
 							</div>
 						</div>
 						<div className={cl`
@@ -527,7 +527,7 @@ function ContainerDetails({
 								${styles.commodity_text_style}
 							`}
 							>
-								<p style={{ fontSize: 9 }}>
+								<p style={{ fontSize: 9, color: 'transparent' }}>
 									Nature and Quantity of Goods
 									<div className={cl`
 										${styles.flex} 

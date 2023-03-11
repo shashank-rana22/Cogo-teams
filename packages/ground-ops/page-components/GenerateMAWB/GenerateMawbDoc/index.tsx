@@ -193,8 +193,8 @@ function GenerateMawb({
 					background : '#fff',
 				}}
 			>
-				{taskItem?.documentState !== 'document_accepted'
-				&& <Watermark text="draft" rotateAngle="315deg" />}
+				{/* {taskItem?.documentState !== 'document_accepted'
+				&& <Watermark text="draft" rotateAngle="315deg" />} */}
 				<div style={{ position: 'relative' }}>
 					<ShipperConsigneeDetails
 						formData={filteredData}

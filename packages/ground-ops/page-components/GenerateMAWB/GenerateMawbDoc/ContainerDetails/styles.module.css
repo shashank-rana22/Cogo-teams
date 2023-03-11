@@ -10,7 +10,7 @@
 	}
 
 	&.flex_border_solid {
-		border-bottom: 1px solid;
+		border-bottom: 1px solid transparent;
 	}
 
 	&.flex_in_flex {
@@ -46,11 +46,11 @@
 	}
 
 	&.block_e_container_commodity_text_section {
-		border-top: 1px solid;
+		border-top: 1px solid transparent;
 	}
 
 	&.block_e_container_commodity_empty_section {
-		border-right: 1px solid;
+		border-right: 1px solid transparent;
 	}
 
 	&.block_e_container_rateclass_section {
@@ -71,7 +71,7 @@
 
 	&.block_e_container_q_section {
 		padding-top: 1px;
-		border-right: 1px solid;
+		border-right: 1px solid transparent;
 	}
 
 	&.chargeableweight_text {
@@ -95,8 +95,8 @@
 
 	&.sci_text_style {
 		padding: 2px 14px 2px 12px;
-		border-top: 1px solid;
-		border-left: 1px solid;
+		border-top: 1px solid transparent;
+		border-left: 1px solid transparent;
 	}
 
 	.input_control {
@@ -165,7 +165,7 @@
 
 .block {
 	display: flex;
-	border: 1px #8b8b8b solid;
+	border: 1px transparent solid;
 
 	&.block_flex_border {
 		flex: 1;
@@ -213,7 +213,7 @@
 	}
 
 	&.border_right_solid {
-		border-right: 1px solid;
+		border-right: 1px solid transparent;
 	}
 
 	&.block_a_container_section {
@@ -250,6 +250,6 @@
 
 	&.block_dfhjl_container_section {
 		flex: 0.07;
-		border-right: 1px solid;
+		border-right: 1px solid transparent;
 	}
 }

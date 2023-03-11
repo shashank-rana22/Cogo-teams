@@ -40,7 +40,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.trapezium}
 					`}
 					>
-						<p style={{ fontSize: 9 }}>Prepaid</p>
+						<p style={{ fontSize: 9, color: 'transparent' }}>Prepaid</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -54,7 +54,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.trapezium}
 					`}
 					>
-						<p style={{ fontSize: 9 }}>Weight Charge</p>
+						<p style={{ fontSize: 9, color: 'transparent' }}>Weight Charge</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -67,7 +67,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.trapezium}
 					`}
 					>
-						<p style={{ fontSize: 9 }}>Collect</p>
+						<p style={{ fontSize: 9, color: 'transparent' }}>Collect</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -120,7 +120,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.trapezium}
 					`}
 					>
-						<p style={{ fontSize: 9 }}>Valuation Charge</p>
+						<p style={{ fontSize: 9, color: 'transparent' }}>Valuation Charge</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -170,7 +170,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.trapezium}
 					`}
 					>
-						<p style={{ fontSize: 9 }}>Tax</p>
+						<p style={{ fontSize: 9, color: 'transparent' }}>Tax</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -220,7 +220,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.trapezium}
 					`}
 					>
-						<p style={{ fontSize: 9 }}>Total Other Charges Due Agent</p>
+						<p style={{ fontSize: 9, color: 'transparent' }}>Total Other Charges Due Agent</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -277,7 +277,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.trapezium}
 					`}
 					>
-						<p style={{ fontSize: 9 }}>Total Other Charges Due Carrier</p>
+						<p style={{ fontSize: 9, color: 'transparent' }}>Total Other Charges Due Carrier</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -356,7 +356,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 							${styles.trapezium}
 						`}
 						>
-							<p style={{ fontSize: 9 }}>Total Prepaid</p>
+							<p style={{ fontSize: 9, color: 'transparent' }}>Total Prepaid</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
@@ -399,7 +399,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 							${styles.trapezium}
 						`}
 						>
-							<p style={{ fontSize: 9 }}>Total Collect</p>
+							<p style={{ fontSize: 9, color: 'transparent' }}>Total Collect</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
@@ -444,7 +444,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 							${styles.trapezium}
 						`}
 						>
-							<p style={{ fontSize: 9 }}>Currency Conversion Rates</p>
+							<p style={{ fontSize: 9, color: 'transparent' }}>Currency Conversion Rates</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
@@ -483,7 +483,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 							${styles.trapezium}
 						`}
 						>
-							<p style={{ fontSize: 9 }}>CC Charges in Dest. Currency</p>
+							<p style={{ fontSize: 9, color: 'transparent' }}>CC Charges in Dest. Currency</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
@@ -511,7 +511,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 					${styles.common_border_right}
 				`}
 				>
-					<p style={{ fontSize: 9 }}>
+					<p style={{ fontSize: 9, color: 'transparent' }}>
 						For Carrier&apos;s Use only at
 						<div className={cl`
 							${styles.flex} 
@@ -543,7 +543,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 							${styles.trapezium}
 						`}
 						>
-							<p style={{ fontSize: 9 }}>Charges at Destination</p>
+							<p style={{ fontSize: 9, color: 'transparent' }}>Charges at Destination</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 

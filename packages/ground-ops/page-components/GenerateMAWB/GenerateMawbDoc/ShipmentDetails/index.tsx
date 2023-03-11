@@ -31,7 +31,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.input_issuing_agent} 
 					`}
 					>
-						<p style={{ fontSize: 10 }}>Issuing Carrier&apos;s Agent Name and City</p>
+						<p style={{ fontSize: 10, color: 'transparent' }}>Issuing Carrier&apos;s Agent Name and City</p>
 						<div className={cl`
 						${styles.flex} 
 						${styles.flex_font_bold} 
@@ -60,7 +60,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						>
 							<p style={{ fontSize: 10 }}>
 								{' '}
-								Agent&apos;s IATA Code
+								<span style={{ color: 'transparent' }}>Agent&apos;s IATA Code</span>
 								<div
 									className={cl`
 									${styles.flex} 
@@ -80,7 +80,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.flex_in_flex}
 					`}
 						>
-							<p style={{ fontSize: 10 }}> Account No.</p>
+							<p style={{ fontSize: 10, color: 'transparent' }}> Account No.</p>
 						</div>
 					</div>
 				</div>
@@ -96,7 +96,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.flex_in_flex}
 					`}
 					>
-						<p style={{ fontSize: 10 }}>Accounting Information</p>
+						<p style={{ fontSize: 10, color: 'transparent' }}>Accounting Information</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -124,8 +124,11 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 				`}
 					>
 						<p style={{ fontSize: 10 }}>
-							Airport of Departure (Addr. of First Carrier) and Requested
-							Routing
+							<span style={{ color: 'transparent' }}>
+								Airport of Departure (Addr. of First Carrier) and Requested
+								Routing
+
+							</span>
 							<div className={cl`
 						${styles.flex}
 						${styles.flex_font_bold}
@@ -169,7 +172,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.flex_padding_left}
 				`}
 								>
-									<p style={{ fontSize: 9 }}>Reference Number</p>
+									<p style={{ fontSize: 9, color: 'transparent' }}>Reference Number</p>
 								</div>
 							</div>
 							<div className={cl`
@@ -183,7 +186,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.optional_shipping_text}
 				`}
 								/>
-								<p style={{ fontSize: 8 }}>Optional Shipping Information</p>
+								<p style={{ fontSize: 8, color: 'transparent' }}>Optional Shipping Information</p>
 							</div>
 							<div className={cl`
 					${styles.flex}
@@ -254,7 +257,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 							>
 								<p style={{ fontSize: 8 }}>
-									To
+									<span style={{ color: 'transparent' }}>To</span>
 									<div className={cl`
 						${styles.flex} 
 						${styles.flex_font_bold}
@@ -282,7 +285,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 									>
 										<p style={{ fontSize: 9 }}>
-											By First Carrier
+											<span style={{ color: 'transparent' }}>By First Carrier</span>
 											{' '}
 											<div className={cl`
 													${styles.flex} 
@@ -306,7 +309,15 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 										${styles.trapezium}
 									`}
 									>
-										<p style={{ fontSize: 9, padding: '0 4px' }}>Routing and Destination</p>
+										<p style={{
+											fontSize : 9,
+											padding  : '0 4px',
+											color    : 'transparent',
+										}}
+										>
+											Routing and Destination
+
+										</p>
 									</div>
 								</div>
 							</div>
@@ -325,7 +336,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 							>
 								<p style={{ fontSize: 9 }}>
-									to
+									<span style={{ color: 'transparent' }}>to</span>
 									<div className={cl`
 										${styles.flex} 
 										${styles.flex_font_bold}
@@ -345,7 +356,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 							>
 								<p style={{ fontSize: 9 }}>
-									by
+									<span style={{ color: 'transparent' }}>by</span>
 									<div className={cl`
 										${styles.flex} 
 										${styles.flex_font_bold}
@@ -365,7 +376,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 							>
 								<p style={{ fontSize: 9 }}>
-									to
+									<span style={{ color: 'transparent' }}>to</span>
 									<div className={cl`
 										${styles.flex} 
 										${styles.flex_font_bold}
@@ -384,7 +395,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 							>
 								<p style={{ fontSize: 9 }}>
-									by
+									<span style={{ color: 'transparent' }}>by</span>
 									<div className={cl`
 										${styles.flex} 
 										${styles.flex_font_bold}
@@ -405,7 +416,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							${styles.blockrow_border}
 							${styles.currency_declared_value_to_by_flight}
 						`}
-					style={{ borderBottom: '1px solid' }}
+					style={{ borderBottom: '1px solid transparent' }}
 				>
 					<div className={cl`
 					${styles.flex} 
@@ -431,7 +442,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.currency_top_chgs}
 				`}
 								>
-									<p style={{ fontSize: 9 }}>Currency</p>
+									<p style={{ fontSize: 9, color: 'transparent' }}>Currency</p>
 								</div>
 								<div className={cl`
 					${styles.flex} 
@@ -448,7 +459,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.chgs}
 				`}
 							>
-								<p style={{ fontSize: 8 }}>CHGS</p>
+								<p style={{ fontSize: 8, color: 'transparent' }}>CHGS</p>
 							</div>
 						</div>
 						<div className={cl`
@@ -469,7 +480,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.wtval_top}
 				`}
 								>
-									<p style={{ fontSize: 9 }}>WT/VAL</p>
+									<p style={{ fontSize: 9, color: 'transparent' }}>WT/VAL</p>
 								</div>
 								<div className={cl`
 					${styles.flex_row} 
@@ -489,7 +500,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.wtval_other_bottom_left_ppd_coll}
 				`}
 										>
-											<p style={{ margin: '2px 0px', fontSize: 7 }}>
+											<p style={{ margin: '2px 0px', fontSize: 7, color: 'transparent' }}>
 												PPD
 											</p>
 										</div>
@@ -500,7 +511,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 12 }}>P</p>
+											<p style={{ fontSize: 12, color: 'transparent' }}>P</p>
 										</div>
 									</div>
 									<div className={cl`
@@ -515,7 +526,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.flex_in_flex}
 				`}
 										>
-											<p style={{ margin: '2px 0px', fontSize: 7 }}>
+											<p style={{ margin: '2px 0px', fontSize: 7, color: 'transparent' }}>
 												COLL
 											</p>
 										</div>
@@ -543,7 +554,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.other_top}
 				`}
 								>
-									<p style={{ fontSize: 9 }}>Other</p>
+									<p style={{ fontSize: 9, color: 'transparent' }}>Other</p>
 								</div>
 								<div className={cl`
 					${styles.flex_row} 
@@ -565,7 +576,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.wtval_other_bottom_left_ppd_coll}
 				`}
 										>
-											<p style={{ margin: '2px 0px', fontSize: 7 }}>
+											<p style={{ margin: '2px 0px', fontSize: 7, color: 'transparent' }}>
 												PPD
 											</p>
 										</div>
@@ -576,7 +587,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 12 }}>P</p>
+											<p style={{ fontSize: 12, color: 'transparent' }}>P</p>
 										</div>
 									</div>
 									<div className={cl`
@@ -592,7 +603,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 				`}
 										>
 
-											<p style={{ margin: '2px 0px', fontSize: 7 }}>
+											<p style={{ margin: '2px 0px', fontSize: 7, color: 'transparent' }}>
 												COLL
 											</p>
 										</div>
@@ -617,7 +628,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.declared_carriage_box}
 				`}
 					>
-						<p style={{ fontSize: 8.3 }}>Declared Value for Carriage</p>
+						<p style={{ fontSize: 8.3, color: 'transparent' }}>Declared Value for Carriage</p>
 						{formData.declaredValueForCarriage}
 					</div>
 					<div className={cl`
@@ -628,21 +639,21 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 				`}
 					>
 						<div className={styles.flex_col}>
-							<p style={{ fontSize: 8.3 }}>Declared Value for Customs</p>
+							<p style={{ fontSize: 8.3, color: 'transparent' }}>Declared Value for Customs</p>
 							{formData.valueForCustom}
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div className={styles.flex} style={{ borderBottom: '1px solid' }}>
+			<div className={styles.flex} style={{ borderBottom: '1px solid transparent' }}>
 				<div
 					className={cl`
 						${styles.block_row} 
 						${styles.blockrow_border}
 						${styles.blockrow_in_flex}
 					`}
-					style={{ borderLeft: '1px solid' }}
+					style={{ borderLeft: '1px solid transparent' }}
 				>
 					<div
 						className={cl`
@@ -655,7 +666,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						style={{ paddingLeft: 5, paddingRight: 5 }}
 					>
 						<p style={{ fontSize: 9 }}>
-							Airport of Destination
+							<span style={{ color: 'transparent' }}>Airport of Destination</span>
 							{' '}
 							<div className={cl`
 						${styles.flex} 
@@ -701,7 +712,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 										${styles.requested_flight_date_text}
 									`}
 								>
-									<p style={{ fontSize: 9 }}>Requested Flight/Date</p>
+									<p style={{ fontSize: 9, color: 'transparent' }}>Requested Flight/Date</p>
 								</div>
 							</div>
 							<div className={cl`
@@ -743,7 +754,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.flexcol_border_right}
 					${styles.amount_of_insurance}
 				`}
-						style={{ borderLeft: '1px solid' }}
+						style={{ borderLeft: '1px solid transparent' }}
 					>
 						<div className={cl`
 					${styles.flex} 
@@ -751,7 +762,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.amount_of_insurance_top}
 				`}
 						>
-							<p style={{ fontSize: 9 }}>Amount of Insurance</p>
+							<p style={{ fontSize: 9, color: 'transparent' }}>Amount of Insurance</p>
 						</div>
 						<div className={cl`
 					${styles.flex} 
@@ -769,7 +780,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.insurance}
 				`}
 					>
-						<p style={{ fontSize: 8 }} className="text">
+						<p style={{ fontSize: 8, color: 'transparent' }} className="text">
 							INSURANCE - If carrier offers insurance, and such insurance is
 							requested in accordance with the conditions thereof, indicate
 							amount to be insured in figures in box marked “Amount of
