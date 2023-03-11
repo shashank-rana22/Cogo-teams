@@ -24,7 +24,7 @@ const useGetSingleAnnouncement = ({
 			if (announcement_id) {
 				try {
 					const res = await trigger({
-						params: { announcement_id },
+						params: { id: announcement_id },
 					});
 					setDisabled(true);
 
@@ -42,7 +42,7 @@ const useGetSingleAnnouncement = ({
 			if (currentAnnouncement?.id) {
 				try {
 					const res = await trigger({
-						params: { announcement_id: currentAnnouncement?.id },
+						params: { id: currentAnnouncement?.id },
 					});
 					setAnnouncementDetails(res?.data);
 				} catch (err) {
@@ -54,7 +54,7 @@ const useGetSingleAnnouncement = ({
 
 	const getAnnouncement = async () => {
 		const res = await trigger({
-			params: { announcement_id: currentAnnouncement?.id },
+			params: { id: currentAnnouncement?.id },
 		});
 
 		setAnnouncementDetails(res?.data);

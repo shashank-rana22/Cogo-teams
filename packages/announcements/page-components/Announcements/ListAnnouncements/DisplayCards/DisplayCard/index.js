@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { Modal } from '@cogoport/components';
-import { Accordion, Button } from '@cogoport/components';
+import { Accordion, Button, Modal } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';

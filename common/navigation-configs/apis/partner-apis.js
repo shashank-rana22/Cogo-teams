@@ -3216,7 +3216,7 @@ const partner = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'list_announcement',
+			api          : 'list_announcements',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},

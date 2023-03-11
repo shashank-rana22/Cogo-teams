@@ -20,7 +20,7 @@ function useListAnnouncements() {
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/list_announcement',
+		url    : '/list_announcements',
 	}, { manual: true });
 
 	const [{ error }, updateTrigger] = useRequest({ url: '/update_announcement', method: 'post' }, { manual: true });
@@ -54,10 +54,10 @@ function useListAnnouncements() {
 					page_limit  : res?.data?.page_limit,
 				},
 			);
-			console.log('res', res);
+			// console.log('res', res);
 		} catch (err) {
-			Toast.error(err?.message);
-			// console.log(err);
+			// Toast.error(err?.message);
+			console.log(err);
 		}
 	};
 
