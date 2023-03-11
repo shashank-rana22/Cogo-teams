@@ -41,7 +41,6 @@ const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '' }) =>
 	const [{ error }, updateTrigger] = useRequest({ url: '/update_announcement', method: 'post' }, { manual: true });
 
 	const editAnnouncementDetails = async (values) => {
-		// console.log(announcement_id, 'check', values);
 		if (!values) return;
 		const {
 			title,

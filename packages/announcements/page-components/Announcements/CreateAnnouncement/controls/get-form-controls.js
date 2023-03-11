@@ -48,7 +48,6 @@ const getFormControls = () => [
 			flexBasis : '48%',
 		},
 		placeholder: 'Description about the post',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name  : 'videos',
@@ -64,7 +63,6 @@ const getFormControls = () => [
 				type  : 'text',
 			},
 		],
-		// rules: { required: 'Required' },
 	},
 	{
 		name       : 'files',
@@ -75,7 +73,6 @@ const getFormControls = () => [
 		style      : {
 			flexBasis: '48%',
 		},
-		// rules       : { required: 'Required' },
 	},
 	{
 		name  : 'images',
@@ -86,7 +83,6 @@ const getFormControls = () => [
 		},
 		uploadType : 'aws',
 		accept     : '.png, .jpeg',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name  : 'redirection_url',
@@ -96,7 +92,6 @@ const getFormControls = () => [
 			flexBasis: '48%',
 		},
 		placeholder: 'Enter Redirection URL',
-		// rules       : { required: 'Required' },
 	},
 	{
 		type           : 'multi-select',
@@ -107,19 +102,14 @@ const getFormControls = () => [
 			flexBasis: '48%',
 		},
 		name   : 'audience_ids',
-		// labelKey : 'name',
-		// valueKey : 'id',
-		// defaultOptions : true,
 		params : {
 			filters: {
 				status: 'active',
 			},
 		},
 		placeholder : 'Select Audience',
-		// value       : formvalue?.partner_id || '',
 		rules       : { required: 'Required' },
 	},
-
 	{
 		name            : 'validity',
 		label           : 'Validity',
@@ -129,13 +119,13 @@ const getFormControls = () => [
 		style           : {
 			flexBasis: '48%',
 		},
-		// placeholder: 'Enter Date',
 		rules: { required: 'Required' },
 	},
 	{
 		name        : 'hot_duration',
 		label       : 'Hot Duration',
 		type        : 'select',
+		themeType   : 'secondary',
 		placeholder : 'Select Hot Time Duration',
 		style       : {
 			flexBasis: '48%',
@@ -163,8 +153,6 @@ const getFormControls = () => [
 		style : {
 			flexBasis: '48%',
 		},
-		// placeholder: 'Enter Date',
-		// rules       : { required: 'Required' },
 	},
 ];
 

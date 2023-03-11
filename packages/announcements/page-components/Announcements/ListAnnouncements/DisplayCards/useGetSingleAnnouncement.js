@@ -74,9 +74,9 @@ const useGetSingleAnnouncement = ({
 		handleAnnouncementDetails,
 		// announcementDetailsToggle,
 		defaultValues,
-		refetch             : getAnnouncement,
-		loading,
-		announcementDetails : announcementDetails || {},
+		refetch                   : getAnnouncement,
+		loadingSingleAnnouncement : loading,
+		announcementDetails       : announcementDetails || {},
 		disabled,
 	};
 };

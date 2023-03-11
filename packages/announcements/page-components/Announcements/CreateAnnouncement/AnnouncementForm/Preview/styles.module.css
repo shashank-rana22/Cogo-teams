@@ -117,3 +117,10 @@
 	font-size: 32px;
 	cursor: pointer;
 }
+
+.spinner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 300px;
+}

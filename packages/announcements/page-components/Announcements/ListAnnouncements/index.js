@@ -1,8 +1,8 @@
-import { Pill, Button, Pagination } from '@cogoport/components';
-import { IcMDelete } from '@cogoport/icons-react';
+import { Pagination } from '@cogoport/components';
+// import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
-import { format, startCase } from '@cogoport/utils';
+// import { useSelector } from '@cogoport/store';
+// import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
 // import EmptyState from '../../../commons/EmptyState';
@@ -145,6 +145,7 @@ function AddedAnnouncements() {
 					<DisplayCards
 						data={data?.list}
 						activeTab={activeList}
+						loading={loading}
 						currentAnnouncement={currentAnnouncement}
 						setCurrentAnnouncement={setCurrentAnnouncement}
 						deleteAnnouncement={deleteAnnouncement}

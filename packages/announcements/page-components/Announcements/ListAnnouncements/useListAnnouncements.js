@@ -94,7 +94,7 @@ function useListAnnouncements() {
 		currentAnnouncement,
 		setCurrentAnnouncement,
 		setActiveList,
-		questionListLoading: loading,
+		loading,
 	};
 }
 

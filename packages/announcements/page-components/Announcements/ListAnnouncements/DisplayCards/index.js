@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import DisplayCard from './DisplayCard';
@@ -7,6 +8,7 @@ import useGetSingleAnnouncement from './useGetSingleAnnouncement';
 function DisplayCards({
 	activeTab = 'active',
 	data = [],
+	loading = false,
 	setCurrentAnnouncement = () => {},
 	currentAnnouncement = null,
 	deleteAnnouncement = () => {},
@@ -14,17 +16,30 @@ function DisplayCards({
 	const {
 		handleAnnouncementDetails = () => {},
 		refetch = () => {},
-		loading = false,
+		loadingSingleAnnouncement = false,
 		announcementDetails = {},
 	} = useGetSingleAnnouncement({ currentAnnouncement, setCurrentAnnouncement, listData: data });
 	// console.log('details', announcementDetails);
+
+	if (loading) {
+		if (activeTab === 'active') {
+			return Array.from(Array(6)).map(() => (
+				<Placeholder
+					height="90px"
+					width="100%"
+					margin="16px 0px 20px 0px"
+				/>
+			));
+		}
+		return Array.from(Array(6)).map(() => <Placeholder height="65px" width="100%" margin="16px 0px 20px 0px" />);
+	}
 	return (
 		<div className={styles.container}>
 			{data.map((item, index) => (
 				<DisplayCard
 					activeTab={activeTab}
-					loading={loading}
 					refetch={refetch}
+					loadingSingleAnnouncement={loadingSingleAnnouncement}
 					data={item}
 					index={index}
 					accordianData={announcementDetails}

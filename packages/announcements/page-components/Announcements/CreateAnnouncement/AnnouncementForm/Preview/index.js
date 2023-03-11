@@ -3,9 +3,11 @@
 import { IcMArrowLeft, IcMArrowRight, IcMDocument } from '@cogoport/icons-react';
 import React, { useRef, useState, useEffect } from 'react';
 
+import Spinner from '../../../../../commons/Spinner';
+
 import styles from './styles.module.css';
 
-function Preview({ formValues = {}, announcement_id = '' }) {
+function Preview({ formValues = {}, announcement_id = '', previewLoading = false }) {
 	const [videos, setVideos] = useState([]);
 	const [files, setFiles] = useState([]);
 	const [images, setImages] = useState([]);
@@ -51,6 +53,13 @@ function Preview({ formValues = {}, announcement_id = '' }) {
 
 	// const videos = formValues?.videos?.filter((item) => item.video_item).map((item) => item.video_item);
 	// const { files, images } = formValues;
+	if (previewLoading) {
+		return (
+			<div className={styles.spinner}>
+				<Spinner width="90px" height="90px" />
+			</div>
+		);
+	}
 	return (
 		<div className={styles.container}>
 

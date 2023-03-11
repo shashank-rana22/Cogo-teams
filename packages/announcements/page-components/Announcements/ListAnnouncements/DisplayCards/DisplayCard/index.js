@@ -16,8 +16,8 @@ function DisplayCard({
 	index,
 	handleAnnouncementDetails = () => {},
 	// refetch = () => {},
-	// loading = false,
 	deleteAnnouncement = () => {},
+	loadingSingleAnnouncement = false,
 
 }) {
 	const [showModal, setShowModal] = useState(false);
@@ -89,15 +89,17 @@ function DisplayCard({
 					))}
 				</div>
 			</div>
-			<div onClick={() => handleAnnouncementDetails(index)}>
-				<Accordion
-					type="card"
-					title="Display Details"
-					className={styles.accordian}
-				>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-				</Accordion>
-			</div>
+			{activeTab === 'active' && (
+				<div onClick={() => handleAnnouncementDetails(index)}>
+					<Accordion
+						type="card"
+						title="Display Details"
+						className={styles.accordian}
+					>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+					</Accordion>
+				</div>
+			)}
 
 			{showModal && (
 				<Modal
@@ -109,7 +111,11 @@ function DisplayCard({
 				>
 					<Modal.Header title="Preview" />
 					<Modal.Body className={styles.modal}>
-						<Preview formValues={accordianData} announcement_id={accordianData?.id} />
+						<Preview
+							formValues={accordianData}
+							announcement_id={accordianData?.id}
+							previewLoading={loadingSingleAnnouncement}
+						/>
 					</Modal.Body>
 				</Modal>
 			)}
