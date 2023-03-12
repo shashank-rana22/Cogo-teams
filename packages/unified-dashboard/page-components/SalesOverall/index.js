@@ -28,15 +28,20 @@ function SalesOverall({ headerFilters }) {
 		if (!salesCompInViewport) {
 			setsalesCompInViewport(inViewport);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [inViewport]);
 
-	const { salesOverall, setFilters, filters, loading, range, setRange } = useListSalesOverallData(salesCompInViewport);
+	const {
+		salesOverall, setFilters, filters,
+		loading, range, setRange,
+	} = useListSalesOverallData(salesCompInViewport);
 	useEffect(() => {
 		setFilters((prevFilters) => ({
 			...prevFilters,
 			to_currency : currency,
 			entity_code : entity_code.length > 0 ? entity_code : undefined,
 		}));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [headerFilters]);
 	const { revenue_per_month } = salesOverall?.summary || {};
 	const revenueMonth = (revenue_per_month || [])?.map((item) => ({

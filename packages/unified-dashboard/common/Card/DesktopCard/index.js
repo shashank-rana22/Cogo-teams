@@ -9,7 +9,6 @@ const DesktopCard = ({
 	keys = [],
 	selectedFilterTab,
 	currency,
-	borderLeftColor,
 }) => {
 	const borderColor = (item) => (
 		selectedFilterTab === 'month'

@@ -24,17 +24,6 @@ function RenderView({
 
 	const selectedCurrency = currency === false ? 'USD' : 'INR';
 
-	// return (
-	// 	<>
-	// 		<div className={styles.desktop}>
-	// 			Desktop
-	// 		</div>
-	// 		<div className={styles.mobile}>
-	// 			Mobile
-	// 		</div>
-	// 	</>
-	// );
-
 	return (
 		<>
 			<div className={styles.desktop}>

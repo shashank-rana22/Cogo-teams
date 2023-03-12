@@ -14,4 +14,3 @@ function Empty() {
 }
 
 export default Empty;
-

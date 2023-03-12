@@ -9,11 +9,10 @@ import styles from './styles.module.css';
 
 function SalesFunnelHeading({
 	setFilters = {},
-	dateFilter = false,
 	range,
 	setRange,
 }) {
-	const [openCalendar, setOpenCalendar] = useState(false);
+	// eslint-disable-next-line no-unused-vars
 	const [date, setDate] = useState({});
 
 	const handleApplyFilters = () => {

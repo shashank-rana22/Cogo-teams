@@ -30,8 +30,6 @@ function FunnelHeader({
 								show_my_zone: false,
 							}));
 						}}
-
-						ghost={showZone}
 						size="m"
 						role="button"
 						tabIndex="0"
@@ -52,7 +50,6 @@ function FunnelHeader({
 								show_my_zone: true,
 							}));
 						}}
-						ghost={!showZone}
 						size="m"
 						role="button"
 						tabIndex="0"

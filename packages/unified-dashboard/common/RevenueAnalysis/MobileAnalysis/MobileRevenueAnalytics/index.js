@@ -1,8 +1,5 @@
 import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 
-import getNextData from '../../../../utils/getNextData';
-import getPreviousData from '../../../../utils/getPreviousData';
-import isNextRevenueAllowed from '../../../../utils/isNextRevenueAllowed';
 import mobileGetNextData from '../../../../utils/mobileGetNextData';
 import mobileGetPreviousData from '../../../../utils/mobileGetPreviousData';
 import mobileNextArrowAllowed from '../../../../utils/mobileNextArrowAllowed';
@@ -10,19 +7,12 @@ import mobileNextArrowAllowed from '../../../../utils/mobileNextArrowAllowed';
 import styles from './styles.module.css';
 
 function MobileBookingAnalysis({
-	selectedFilter,
 	selectedFilterTab = 'month',
-	headerFilters,
-	revenue,
 	param,
 	setParam,
-	loading,
 	revenue_analysis,
 	etd,
-	heading,
 }) {
-	const rev = revenue_analysis[0] || [];
-
 	const isClickable = mobileNextArrowAllowed(
 		selectedFilterTab,
 		revenue_analysis,
@@ -56,6 +46,7 @@ function MobileBookingAnalysis({
 							revenue_analysis[0],
 							param,
 							setParam,
+						// eslint-disable-next-line react/jsx-indent
 						)
 				}
 			/>

@@ -3,7 +3,6 @@ import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
 import useListShipments from '../../../../../../hooks/useListShipments';
-import Loader from '../../../../../../utils/loader';
 import NoData from '../NoData';
 
 import AfterHeader from './AfterHeader';
@@ -23,6 +22,7 @@ function Employee({ val = {}, currency, filters, employeePad = 30 }) {
 				agent_id: val?.manager_id,
 			}));
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filters, showShipments]);
 
 	return (

@@ -1,7 +1,5 @@
 import SummaryCard from '../SummaryCard';
 
-import styles from './styles.module.css';
-
 function InvoiceCard({ salesFunnel, currency, revenueMonth, loading }) {
 	const sale = salesFunnel?.summary?.revenue?.invoices;
 	const customers = salesFunnel?.summary?.revenue?.customers_count;

@@ -1,7 +1,5 @@
 import { CheckboxGroup, Checkbox, Button } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { serviceTypeArr, tradeTypeArr } from '../../../../../constants/checkbox-data';
 import { trade, shipment } from '../../../../../constants/filter-data';
@@ -9,7 +7,6 @@ import { trade, shipment } from '../../../../../constants/filter-data';
 import styles from './styles.module.css';
 
 function Filters({
-	loading,
 	closePopover = () => {},
 	setParams,
 	params = {},
