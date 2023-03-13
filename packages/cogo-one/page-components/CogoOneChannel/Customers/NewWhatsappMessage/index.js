@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Toast, Modal } from '@cogoport/components';
 import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
 import React, { useState } from 'react';
 
@@ -9,8 +9,6 @@ import styles from './styles.module.css';
 
 function NewWhatsappMessage({
 	setModalType = () => {},
-	// modalType = '',
-	// data = {},
 }) {
 	const [activeTab, setActiveTab] = useState('quick_reply');
 	const [openCreateReply, setOpenCreateReply] = useState(false);
@@ -30,8 +28,13 @@ function NewWhatsappMessage({
 		},
 	);
 	const sendWhatsappCommunication = (args) => {
-		const numberWithCountryCode = dialNumber.country_code + dialNumber.number;
-		sendCommunicationTemplate({ ...args, otherChannelRecipient: numberWithCountryCode });
+		const { country_code = '', number = '' } = dialNumber;
+		const numberWithCountryCode = country_code + number;
+		if (number === '') {
+			Toast.error('Please enter mobile number ');
+		} else {
+			sendCommunicationTemplate({ ...args, otherChannelRecipient: numberWithCountryCode });
+		}
 	};
 	const data = {
 		sendCommunicationTemplate : sendWhatsappCommunication,
@@ -43,15 +46,19 @@ function NewWhatsappMessage({
 			size="xs"
 			onClose={closeModal}
 			onClickOutside={closeModal}
-			scroll={false}
+			scroll
+			className={styles.styled_modal_class}
 		>
 			<Modal.Header
 				title={(
 					<div className={styles.header}>
-						Send New Whatsapp Chat
+						Send New Whatsapp Message
 					</div>
 				)}
 			/>
+			<div className={styles.wrap_heading}>
+				<div>Enter mobile number</div>
+			</div>
 			<div className={styles.wrap_mobile_number}>
 
 				<SelectMobileNumber
@@ -61,8 +68,8 @@ function NewWhatsappMessage({
 					placeholder="Enter number"
 				/>
 			</div>
-			<div className={styles.wrap_mobile_number}>
-				<h3>Select a template</h3>
+			<div className={styles.wrap_heading}>
+				<div>Select a template</div>
 			</div>
 			<Templates
 				data={data}
@@ -71,15 +78,6 @@ function NewWhatsappMessage({
 				setOpenCreateReply={setOpenCreateReply}
 				setActiveTab={setActiveTab}
 			/>
-			{/* <Button
-				size="md"
-				themeType="accent"
-				disabled={!dialNumber.number || dialNumber.number.length !== 10}
-			>
-				Send Message
-
-			</Button> */}
-
 		</Modal>
 	);
 }

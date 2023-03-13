@@ -259,8 +259,8 @@
 
 .plus_circle{
 	position : fixed;
-	bottom   : 3rem;
-	left     : 21rem;
+	bottom   : 33px;
+	left     : 350px;
 	cursor   : pointer;
 }
 .plus_circle svg{
