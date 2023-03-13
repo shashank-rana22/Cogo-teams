@@ -1,5 +1,25 @@
 .container {
 	margin-top: 20px;
+	background-color:  rgba(255, 255, 255, 0.8);
+	:global{
+		.ui_table_head_cell {
+			padding: 10px;
+			color: #4F4F4F;
+			background-color:  rgba(255, 255, 255, 0.8);
+		}
+		.ui_jqHkt .ui_dos8d {
+			border-bottom: 1px solid var(--color-tertiary-beige-4);
+			width: 1239px;
+			height: 63px;
+			font-size: 14px;
+			line-height: 300%;
+			font-weight: 400;
+			height: 32px;
+			margin: 0;
+			padding: 4px 8px;
+			text-align: left;
+		}
+	}
 }
 
 .pagination {

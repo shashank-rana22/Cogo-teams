@@ -4,7 +4,9 @@ import styles from './styles.module.css';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
 
-function AllQuestionCardView() {
+function AllQuestionCardView(props) {
+	const { data } = props;
+	const { total_count } = data || 0;
 	return (
 		<div style={{ marginTop: '1rem' }}>
 			<div className={styles.container}>
@@ -33,7 +35,9 @@ function AllQuestionCardView() {
 
 						}}
 					>
-						No of Questions: 56
+						No of Questions:
+						{' '}
+						{total_count}
 
 					</Pill>
 					<Pill
