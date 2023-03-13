@@ -1,5 +1,5 @@
 import { Tabs, TabPanel, Popover, Pagination } from '@cogoport/components';
-import { IcMFdollar, IcMFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
+import { IcMFdollar, IcMFilter, IcMCampaignTool, IcMPlatformDemo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -108,7 +108,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 						name="transactional"
 						title={<IcMFdollar width={20} height={20} />}
 					/>
-					<TabPanel name="platform" title={<IcMDesktop width={20} height={20} />} />
+					<TabPanel name="platform" title={<IcMPlatformDemo width={20} height={20} />} />
 					<TabPanel name="communication" title={<IcMCampaignTool width={20} height={20} />} />
 				</Tabs>
 			</div>
