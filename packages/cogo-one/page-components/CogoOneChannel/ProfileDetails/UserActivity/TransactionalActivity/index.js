@@ -46,7 +46,11 @@ function TransactionalActivity({ transactional = {} }) {
 
 				const origin_port = item[origin] || {};
 
+				const { name = '', port_code = '' } = origin_port || {};
+
 				const destination_port = item[destination] || {};
+
+				const { name:destination_name = '', port_code:destination_port_code = '' } = destination_port || {};
 
 				return (
 					<>
@@ -74,17 +78,16 @@ function TransactionalActivity({ transactional = {} }) {
 											<div className={styles.port_details}>
 
 												<Tooltip
-													content={startCase(origin_port?.name)}
+													content={startCase(name)}
 													placement="bottom"
 												>
 													<div className={styles.port_name}>
-														{startCase(origin_port?.name)}
+														{startCase(name)}
 													</div>
 												</Tooltip>
 												<div className={styles.port_codes}>
-													{!isEmpty(origin_port?.port_code) && (
-														<div>{origin_port?.port_code}</div>
-
+													{!isEmpty(port_code) && (
+														<div>{port_code}</div>
 													)}
 												</div>
 											</div>
@@ -96,16 +99,16 @@ function TransactionalActivity({ transactional = {} }) {
 										<div className={styles.port}>
 											<div className={styles.port_details}>
 												<Tooltip
-													content={startCase(destination_port?.name)}
+													content={startCase(destination_name)}
 													placement="bottom"
 												>
 													<div className={styles.port_name}>
-														{startCase(destination_port?.name)}
+														{startCase(destination_name)}
 													</div>
 												</Tooltip>
 												<div className={styles.port_codes}>
-													{!isEmpty(destination_port?.port_code) && (
-														<div>{destination_port?.port_code}</div>
+													{!isEmpty(destination_port_code) && (
+														<div>{destination_port_code}</div>
 													)}
 												</div>
 											</div>
