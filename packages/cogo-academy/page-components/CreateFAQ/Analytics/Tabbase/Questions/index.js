@@ -1,8 +1,14 @@
 import AllQuestionCardView from './AllQuestionCardView';
+import Filter from './Filter';
+import QuestionList from './QuestionList';
 
 function Questions() {
 	return (
-		<AllQuestionCardView />
+		<div>
+			<Filter />
+			<AllQuestionCardView />
+			<QuestionList />
+		</div>
 
 	);
 }

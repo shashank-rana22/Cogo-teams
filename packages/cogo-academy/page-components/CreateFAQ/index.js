@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 
+import Analytics from './Analytics';
 import Header from './Header';
 import QuestionsList from './QuestionsList';
 
 function CreateFAQ() {
-	// eslint-disable-next-line no-unused-vars
-	const [switchDashboard, setSwitchDashboard] = useState(true);
+	const [switchDashboard, setSwitchDashboard] = useState(false);
+	console.log(switchDashboard);
 	return (
 		<div>
-			<Header setSwitchDashboard={setSwitchDashboard} />
+			{switchDashboard
+				? (
+					<>
+						<Header setSwitchDashboard={setSwitchDashboard} />
 
-			<QuestionsList />
+						<QuestionsList />
+					</>
+				)
+
+				: <Analytics setSwitchDashboard={setSwitchDashboard} />}
 
 		</div>
 	);
