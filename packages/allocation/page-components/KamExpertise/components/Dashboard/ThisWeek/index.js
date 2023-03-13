@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
-import useGetAllocationKamExpertiseDashboard from '../../../hooks/useGetAllocationKamExpertiseDashboard';
+// import useGetAllocationKamExpertiseDashboard from '../../../hooks/useGetAllocationKamExpertiseDashboard';
 import BadgeFilter from '../BadgeFilter';
 
 import KamLevelScoreCard from './KamLevelScoreCard';
@@ -71,14 +71,10 @@ const overview_data = [
 
 function ThisWeek({ params }) {
 	const [cardData, setCardData] = useState();
-	const {
-		loading,
-		DashboardData,
-	} = useGetAllocationKamExpertiseDashboard(params);
-
-	console.log('DashboardData : ', DashboardData);
-
-	const { list = [] } = DashboardData;
+	// const {
+	// 	loading,
+	// 	DashboardData,
+	// } = useGetAllocationKamExpertiseDashboard(params);
 
 	// if (loading) {
 	// 	return <>loading...</>;
@@ -93,7 +89,11 @@ function ThisWeek({ params }) {
 			<div className={styles.cards}>
 				{
 					dummy_card_data.map((dummy_data) => (
-						<KamLevelScoreCard dummy_data={dummy_data} setCardData={setCardData} loading={loading} />
+						<KamLevelScoreCard
+							dummy_data={dummy_data}
+							setCardData={setCardData}
+							// loading={loading}
+						/>
 					))
 				}
 			</div>
@@ -121,7 +121,7 @@ function ThisWeek({ params }) {
 							</div>
 						</div>
 						{
-							isEmpty(DashboardData.list)
+							isEmpty([])
 								? (
 									<div style={{
 										padding         : '80px 0',

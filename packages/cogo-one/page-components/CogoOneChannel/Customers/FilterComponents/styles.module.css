@@ -1,8 +1,6 @@
 .container {
 	width: 180px;
-	max-height: 550px;
 	padding: 0 0 15px;
-	overflow-y: scroll;
 }
 
 .container::-webkit-scrollbar {

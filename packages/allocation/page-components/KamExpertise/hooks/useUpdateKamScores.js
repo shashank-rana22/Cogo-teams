@@ -2,11 +2,34 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
+
+const transactingMapping = {
+	'Minimum Transacting Accounts'  : 'minimum_transacting_accounts_id',
+	'Retained Account Count'        : 'retained_account_count_id',
+	'Retained Account Min Duration' : 'retained_account_min_duration_id',
+};
 
 function useUpdateKamScores(props) {
-	// const { transition_level, refetch, setEditMode, setTitle } = props;
-	const { transition_level } = props;
+	const {
+		title,
+		listrefetch,
+		setEditMode, refetch, listkamLevelDetails,
+	} = props;
+
+	const { list = [] } = listkamLevelDetails;
+	const {
+		'Transacting Accounts': transacting = [],
+		'Trade Expertise':trade = [], 'Customer Expertise':customer = [], 'Misc Expertise':misc = [],
+		'Commodity Expertise': commodity = [],
+	} = list;
+	const valueObj = {};
+
+	valueObj.trade_expertise_id = trade[0]?.id;
+	valueObj.customer_expertise_id = customer[0]?.id;
+	valueObj.commodity_expertise_id = commodity[0]?.id;
+	valueObj.misc_expertise_id = misc[0]?.id;
+
+	transacting.forEach((i) => { valueObj[transactingMapping[i.threshold_score_type]] = i.id; });
 
 	const formProps = useForm();
 
@@ -16,41 +39,30 @@ function useUpdateKamScores(props) {
 		authkey : 'post_allocation_kam_expertise_configuration_attributes',
 	}, { manual: true });
 
-	const onSave = async (formValues, e) => {
-		console.log('formValues', transition_level);
-
-		const {
-			commodity_expertise,
-			customer_expertise,
-			minimum_transacting_accounts,
-			misc_expertise,
-			retained_account_count,
-			retained_accont_min_duration,
-			trade_expertise,
-		} = formValues || {};
-		console.log('type', typeof (customer_expertise));
+	const onSave = async (formValues) => {
+		const formResponse = [];
+		Object.keys(formValues).forEach((key) => {
+			if (formValues[key]) {
+				formResponse.push(
+					{ configuration_id: valueObj[`${key}_id`], threshold_score: Number(formValues[key]) },
+				);
+			}
+		});
 
 		try {
 			const payload = {
-				transition_level,
-				configuration_details: [
-					{
-						configuration_id : 'e0c15e8d-b351-4100-a389-82ec3e87b1e1',
-						threshold_score  : 100,
-					},
-				],
+				transition_level      : title,
+				configuration_details : formResponse,
 			};
 
 			await trigger({
 				data: payload,
 			});
-
-			// setEditMode(false);
-			// refetch();
-			// // setshowEditBtn(true);
-			// setTitle(0);
+			setEditMode(false);
+			listrefetch();
+			refetch();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response.data));
+			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 	return {
