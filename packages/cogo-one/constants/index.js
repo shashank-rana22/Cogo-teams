@@ -109,6 +109,8 @@ export const PLATFORM_MAPPING = {
 // eslint-disable-next-line max-len
 export const URL_MATCH_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
+export const ENDS_WITH_STAR = /\* /;
+
 export const DEFAULT_PILLS_ITEMS = [
 	{
 		label : 'Introductory',

@@ -17,7 +17,7 @@ function SentDiv({
 		session_type = 'bot',
 	} = eachMessage;
 
-	const { btns = [] } = response;
+	const { btns = [], list = [] } = response;
 
 	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
 	const adminStyles = !!(send_by || session_type === 'admin') || false;
@@ -45,6 +45,16 @@ function SentDiv({
 					{!isEmpty(btns) && (
 						<div className={styles.btns_container}>
 							{(btns || []).map((eachbtn) => <div className={styles.btn}>{eachbtn}</div>)}
+						</div>
+					) }
+					{!isEmpty(list) && (
+						<div className={styles.list_container}>
+							{(list || []).map((listItem) => (
+								<div className={styles.list_item}>
+									<div className={styles.list_item_title}>{listItem?.title}</div>
+									<div className={styles.list_item_description}>{listItem?.description}</div>
+								</div>
+							))}
 						</div>
 					) }
 				</div>
