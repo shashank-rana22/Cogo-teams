@@ -21,7 +21,7 @@ function useGetOmnichannelDocumentCount({
 		activeTab,
 	});
 
-	const checkConditions = !isEmpty(userId) && !isEmpty(userMobile);
+	const checkConditions = isEmpty(userId) && isEmpty(userMobile);
 
 	const documentCount = async () => {
 		try {
