@@ -1,6 +1,6 @@
 import { Toast, Modal, Button, RTE, Input } from '@cogoport/components';
 import { IcMCross, IcMAttach } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
 import { TOOLBARCONFIG } from '../../../../../../constants';
@@ -22,7 +22,7 @@ function ComposeEmail({
 		body    : '',
 	});
 	const [uploading, setUploading] = useState(false);
-
+	const uploaderRef = useRef(null);
 	const handleSend = () => {
 		const isEmpty = getFormatedEmailBody({ emailState });
 		if (isEmpty || !emailState?.subject) {
@@ -40,7 +40,7 @@ function ComposeEmail({
 		setUploading(val);
 	};
 
-	const decode = (data) => {
+	const decode = (data = '') => {
 		const val = decodeURI(data).split('/');
 		const fileName = val[val.length - 1];
 		const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
@@ -48,8 +48,9 @@ function ComposeEmail({
 	};
 
 	const handleDelete = (url) => {
-		const attachment = attachments.filter((data) => data !== url);
-		setAttachments(attachment);
+		const filteredAttachments = attachments.filter((data) => data !== url);
+		setAttachments(filteredAttachments);
+		uploaderRef?.current?.externalHandleDelete(filteredAttachments);
 	};
 
 	return (
@@ -90,6 +91,7 @@ function ComposeEmail({
 								setAttachments(val);
 							}}
 							showProgress={false}
+							ref={uploaderRef}
 						/>
 
 					</div>
@@ -99,19 +101,24 @@ function ComposeEmail({
 						toolbarConfig={TOOLBARCONFIG}
 						className={styles.styled_editor}
 					/>
+
 					<div className={attachments.length >= 3 ? styles.attachments_scroll : styles.attachments}>
+						{uploading && (<div className={styles.uploading}>Uploding</div>)}
 						{attachments.length
 							? attachments.map((data) => (
-								<div className={styles.uploaded_files}>
-									<div className={styles.uploaded_files_content}>
-										{decode(data).fileIcon}
-										{decode(data).uploadedFileName}
+								(
+									<div className={styles.uploaded_files}>
+										<div className={styles.uploaded_files_content}>
+											{decode(data).fileIcon}
+											{decode(data)?.uploadedFileName}
+										</div>
+										<IcMCross style={{ cursor: 'pointer' }} onClick={() => handleDelete(data)} />
 									</div>
-									<IcMCross style={{ cursor: 'pointer' }} onClick={() => handleDelete(data)} />
-								</div>
+								)
 							))
 							: ''}
 					</div>
+
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
@@ -135,4 +142,5 @@ function ComposeEmail({
 		</>
 	);
 }
+
 export default ComposeEmail;

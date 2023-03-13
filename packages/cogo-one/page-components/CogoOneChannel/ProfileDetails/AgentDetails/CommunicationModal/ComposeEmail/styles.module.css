@@ -32,8 +32,8 @@
 	margin-right: 77px;
 	border: 1px solid #999999;
 	border-radius: 2px;
-	width: 28px;
-	height: 28px;
+	width: 29px;
+	height: 29px;
 
 	:global {
 		.file_uploader {
@@ -62,8 +62,9 @@
 }
 
 .upload_icon {
-	width: 20px;
-	height: 20px;
+	width: 18px;
+	height: 18px;
+	margin-top: 4px;
 }
 
 .uploaded_files {
@@ -82,8 +83,6 @@
 }
 
 .attachments {
-	/* position: relative; */
-	/* top:220px; */
 	width: 100%;
 	
 }
@@ -92,4 +91,10 @@
 	margin-top: 10px;
 	overflow-y: scroll;
 	max-height: 120px;
+}
+
+.uploading {
+	margin: 12px;
+	font-size: 13px;
+	font-weight: 500;
 }
