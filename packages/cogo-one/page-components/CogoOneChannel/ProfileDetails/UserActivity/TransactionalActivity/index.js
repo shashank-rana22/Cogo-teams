@@ -4,7 +4,7 @@ import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
-import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../constants/TRANSACTIONAL_KEYS_MAPPING';
+import { USER_ACTIVITY_KEYS_MAPPING } from '../../../../../constants/USER_ACTIVITY_KEYS_MAPPING';
 
 import styles from './styles.module.css';
 
@@ -21,17 +21,16 @@ function TransactionalActivity({ transactional = {} }) {
 		<div>
 			{(list || []).map((item) => {
 				const services = item?.shipment_type;
-				const { origin = '', destination = '' } = TRANSACTIONAL_KEYS_MAPPING[services];
+				const { origin = '', destination = '' } = USER_ACTIVITY_KEYS_MAPPING[services] || {};
 
 				const {
 					created_at = '', serial_id, milestone_activity = [],
+
 				} = item || {};
 
 				const origin_port = item[origin] || {};
 
 				const destination_port = item[destination] || {};
-
-				const bookingStatus = milestone_activity.pop();
 
 				return (
 					<>
@@ -45,12 +44,11 @@ function TransactionalActivity({ transactional = {} }) {
 						</div>
 						<div className={styles.main_card}>
 							<div className={styles.card}>
-								<div className={styles.activity_type}>
-									Transactional
-								</div>
 								<div className={styles.booking_details}>
 									<div className={styles.title}>
-										{startCase(bookingStatus?.milestone)}
+										{startCase(
+											milestone_activity[(milestone_activity?.length || 0) - 1]?.milestone || '',
+										)}
 									</div>
 									<div className={styles.booking_id}>
 										ID:
@@ -81,7 +79,7 @@ function TransactionalActivity({ transactional = {} }) {
 									<IcMPortArrow width={22} height={22} />
 									<div className={styles.port}>
 										<div className={styles.port_details}>
-											<Tooltip content={startCase(origin_port?.name)} placement="bottom">
+											<Tooltip content={startCase(destination_port?.name)} placement="bottom">
 												<div className={styles.port_name}>
 													{startCase(destination_port?.name)}
 												</div>

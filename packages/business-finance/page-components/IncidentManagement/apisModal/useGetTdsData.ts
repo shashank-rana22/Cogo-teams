@@ -4,7 +4,9 @@ import { useSelector } from '@cogoport/store';
 
 const useGetTdsData = ({
 	refetch, setShowTdsModal, row, id,
-	CNCategoryValues = { CNType: '', CNValues: '', remarks: '' }, remark,
+	CNCategoryValues = { CNType: '', CNValues: '', remarks: '' },
+	remark,
+	isConsolidated = false,
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -14,6 +16,8 @@ const useGetTdsData = ({
 	const creditNoteRemarks = CNValues === 'revenueOthers' || CNValues === 'nonRevenueOthers'
 		? remarks
 		: CNValues;
+
+	const payloadKey = isConsolidated ? 'consolidatedCreditNoteRequest' : 'creditNoteRequest';
 
 	const [
 		{ loading },
@@ -31,8 +35,8 @@ const useGetTdsData = ({
 		const payload =	row.type !== 'TDS_APPROVAL'
 			? {
 				data: {
-					creditNoteRequest: {
-						...row.data.creditNoteRequest,
+					[payloadKey]: {
+						...row.data?.[payloadKey],
 						creditNoteType: CNType,
 						creditNoteRemarks,
 					},

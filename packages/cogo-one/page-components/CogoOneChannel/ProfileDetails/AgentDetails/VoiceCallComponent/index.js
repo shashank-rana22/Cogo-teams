@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 
-import hideNumber from '../../../../../utils/hideNumber';
+import hideDetails from '../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
@@ -49,6 +49,7 @@ function VoiceCallComponent({
 						mobile_country_code : `+${code}`,
 						agentId             : profileData?.user?.id,
 						name                : userName,
+						dialCall            : false,
 						emptyState,
 
 					},
@@ -75,7 +76,10 @@ function VoiceCallComponent({
 								+
 								{code}
 								{' '}
-								{hideNumber(number)}
+								{hideDetails({
+									data : number,
+									type : 'number',
+								})}
 							</div>
 						</div>
 					) : (

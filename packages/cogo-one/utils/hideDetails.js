@@ -1,4 +1,4 @@
-function HideDetails({
+function hideDetails({
 	data = '',
 	type = 'number',
 }) {
@@ -20,4 +20,4 @@ function HideDetails({
 	return finalString;
 }
 
-export default HideDetails;
+export default hideDetails;

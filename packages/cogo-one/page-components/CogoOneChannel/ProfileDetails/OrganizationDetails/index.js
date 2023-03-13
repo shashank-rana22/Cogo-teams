@@ -2,6 +2,7 @@ import { Pill, Placeholder, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import { ACCOUNT_TYPE } from '../../../../constants';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
@@ -30,7 +31,7 @@ function OrganizationDetails({
 
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
 	const { list = [] } = promoData || {};
-	const { agent = {}, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
+	const { agent = {}, account_type, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
 	const { display_name } = city || {};
 
 	const { total_redeemable } = pointData || {};
@@ -38,7 +39,7 @@ function OrganizationDetails({
 	if (isEmpty(organizationId)) {
 		return (
 			<div className={styles.container}>
-				<div className={styles.title}>Organisation Details</div>
+				<div className={styles.title}>Organization Details</div>
 				<EmptyState type="organization" />
 			</div>
 		);
@@ -56,6 +57,11 @@ function OrganizationDetails({
 			</div>
 		) : (
 			<div className={styles.promotion_cards}>
+				<div className={styles.wrapper}>
+					<h3>
+						Coming Soon...
+					</h3>
+				</div>
 				<PromocodeThumbnail list={list} />
 			</div>
 		);
@@ -63,7 +69,7 @@ function OrganizationDetails({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>Organisation Details</div>
+			<div className={styles.title}>Organization Details</div>
 			{orgLoading ? (
 				<>
 					<div className={styles.content}>
@@ -121,7 +127,12 @@ function OrganizationDetails({
 							size="sm"
 							color="#FFF7BF"
 						>
-							{account_type === 'importer_exporter' ? 'Importer/Exporter' : 'Service Provider'}
+							{tags.includes('partner') ? 'Channel Partner' : (
+								<div>
+									{ACCOUNT_TYPE[account_type]}
+								</div>
+							)}
+
 						</Pill>
 					</div>
 				</>

@@ -1,0 +1,99 @@
+.small_hr {
+	width: 5%;
+	border: 1px solid #ed3726;
+	border-radius: 30px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.card {
+	display: flex;
+	align-items: center;
+	padding: 8px 16px;
+	margin: 12px 0;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.vertical_small_hr {
+	width: 2px;
+	height: 36px;
+	border: 1px solid #ed3726;
+	border-radius: 30px;
+}
+
+.details {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.heading {
+	display: flex;
+	gap: 6px;
+}
+
+.card_field {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	justify-content: center;
+}
+
+.card_field_first {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 27%;
+}
+
+.card_field_second {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 46%;
+}
+
+.card_field_third {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 26%;
+}
+
+.amount {
+	font-weight: 700;
+	color: #f68b21;
+}
+
+.tag {
+	font-weight: 600;
+	color: red;
+}
+
+.flexdiv {
+	display: flex;
+	align-items: center;
+}
+
+.button_container {
+	display: flex;
+	gap: 4px;
+	justify-content: space-between;
+	width: 210px;
+	margin-left: 10px;
+}
+
+.remarks {
+	font-weight: 600;
+}
+
+.tags {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+}
