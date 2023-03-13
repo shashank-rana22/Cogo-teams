@@ -1,10 +1,10 @@
-import { Button } from '@cogoport/components';
+import { Placeholder, Button } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
 import useCreateKamLevel from '../../../../../hooks/useCreateKamLevel';
-import { controls, controlsBottom } from '../controls';
+import getControls from '../getControls';
 
 import styles from './styles.module.css';
 
@@ -13,8 +13,11 @@ function ResponseCard({
 	dataLength,
 	refetch,
 }) {
-	const { formProps, onCreate } = useCreateKamLevel({ dataLength, setCreateKam, refetch });
-	const { control, handleSubmit } = formProps;
+	const { formProps, onCreate, createLoading } = useCreateKamLevel({ dataLength, setCreateKam, refetch });
+	const { control, handleSubmit, formState:{ errors } } = formProps;
+
+	const controls = getControls('top', true);
+	const controlsBottom = getControls('bottom', true);
 
 	return (
 		<div className={styles.level_card_container}>
@@ -66,14 +69,24 @@ function ResponseCard({
 							{singleField.label}
 							<div className={styles.supporting_text}>Score</div>
 							<div>
-								<Element
-									{...singleField}
-									key={singleField.label}
-									control={control}
-									id={singleField.name}
-								/>
-							</div>
+								{
+									createLoading ? (<Placeholder height="30px" width="300px" />) : (
+										<Element
+											{...singleField}
+											key={singleField.label}
+											control={control}
+											id={singleField.name}
+										/>
+									)
+								}
 
+								{errors[singleField.name] && (
+									<span className={styles.errors}>
+										{errors[singleField.name].message}
+									</span>
+								)}
+
+							</div>
 						</div>
 						<div className={styles.border_class} />
 					</>
@@ -94,12 +107,22 @@ function ResponseCard({
 								{singleField.label}
 
 								<div>
-									<Element
-										{...singleField}
-										key={singleField.label}
-										control={control}
-										id={singleField.name}
-									/>
+									{
+									createLoading ? (<Placeholder height="30px" width="300px" />) : (
+										<Element
+											{...singleField}
+											key={singleField.label}
+											control={control}
+											id={singleField.name}
+										/>
+									)
+								}
+
+									{errors[singleField.name] && (
+										<span className={styles.errors}>
+											{errors[singleField.name].message}
+										</span>
+									)}
 
 								</div>
 
