@@ -13,13 +13,12 @@ const controls = [
 		name        : 'condition',
 		label       : 'Condition',
 		placeholder : 'Select Events',
-		type        : 'multiSelect',
-		options     : [],
-		// asyncKey    : 'expertise_configuration',
-		// multiple    : true,
-		// initialCall : false,
+		type        : 'asyncSelect',
+		asyncKey    : 'expertise_configuration',
+		multiple    : true,
+		initialCall : false,
 		rules       : {
-			required: 'Specify Condition',
+			required: 'Specify Events',
 		},
 	},
 	{
