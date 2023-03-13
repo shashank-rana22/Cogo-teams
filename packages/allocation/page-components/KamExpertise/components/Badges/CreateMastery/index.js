@@ -84,6 +84,7 @@ function CreateMastery(props) {
 										key={ele.name}
 										id={`${ele.name}_input`}
 										style={ele.styles}
+										disabled={!isEmpty(masteryListData) && ele.name === 'badges'}
 										options={badgeList.length > 0 ? badge_options : ele.options}
 									/>
 								</div>
@@ -96,7 +97,6 @@ function CreateMastery(props) {
 								<UploadController
 									name="image_input"
 									control={control}
-									// value={masteryListData ? masteryListData.badge_details[0].image_url : ''}
 								/>
 
 								<div>
