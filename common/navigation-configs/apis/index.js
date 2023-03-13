@@ -11,6 +11,7 @@ import common_apis from './common-apis';
 import consolidated_invoices from './consolidated-invoices';
 import contract_rates from './contract-rates-apis';
 import cost_booking_desk from './cost-booking-desk-apis';
+import crm_feedback_dashboard from './crm-feedback-dashboard-apis';
 import document_walet from './doc-walet';
 import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
@@ -120,6 +121,7 @@ const apis = {
 	enrichment,
 	...faq,
 	performance_management,
+	crm_feedback_dashboard,
 };
 
 export default apis;

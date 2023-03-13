@@ -67,6 +67,7 @@ const useRoleList = () => {
 	}, []);
 
 	const getListAuthRoles = useCallback(() => {
+		console.log('when am I called?');
 		trigger({
 			params: {
 				...params,

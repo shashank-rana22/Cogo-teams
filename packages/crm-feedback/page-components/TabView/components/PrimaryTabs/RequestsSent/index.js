@@ -1,6 +1,6 @@
 function RequestsSent() {
 	return (
-		<div>RequestsSent</div>
+		<div>Requests Sent</div>
 	);
 }
 

@@ -1,8 +1,7 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { startCase } from '@cogoport/utils';
 
-import getPieChartData from '../../../configurations/get-pie-chart-data';
-
+import getPieChartData from './configurations/get-pie-chart-data';
 import styles from './styles.module.css';
 
 function Statistics() {

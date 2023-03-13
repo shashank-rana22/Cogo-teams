@@ -1,9 +1,5 @@
-import CrmTable from './ListView/components/CrmTable';
-import EnrichmentRequest from './ListView/components/EnrichmentRequest';
-import Filters from './ListView/components/Filters';
-import Header from './ListView/components/Header';
-import PrimaryTabs from './ListView/components/PrimaryTabs';
-import Statistics from './ListView/components/Statistics';
+import Header from './TabView/components/Header';
+import PrimaryTabs from './TabView/components/PrimaryTabs';
 
 function CrmFeedback() {
 	return (
@@ -11,10 +7,6 @@ function CrmFeedback() {
 			<Header />
 			<PrimaryTabs />
 			{/* <Filters filters={filters} onChangeFilters={onChangeFilters} /> */}
-			<Filters />
-			<Statistics />
-			<EnrichmentRequest />
-			<CrmTable />
 		</>
 
 	);

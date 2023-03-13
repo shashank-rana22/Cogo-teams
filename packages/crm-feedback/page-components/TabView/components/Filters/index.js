@@ -1,4 +1,5 @@
 import { Select, DateRangepicker } from '@cogoport/components';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -13,7 +14,6 @@ function Filters({ filters = {}, onChangeFilters = () => {} }) {
 		date         : null,
 	});
 
-	console.log('CONTROLS::', controls);
 	return (
 		<div className={styles.filter}>
 			{controls?.map((control) => (
