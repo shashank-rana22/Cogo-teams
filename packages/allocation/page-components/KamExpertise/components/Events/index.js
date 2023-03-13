@@ -320,6 +320,8 @@ function Events() {
 						debounceQuery={debounceQuery}
 						setSearchValue={setSearchValue}
 						searchValue={searchValue}
+						expertise={expertise}
+						setExpertise={setExpertise}
 					/>
 					<div>
 						{
