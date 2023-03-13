@@ -128,10 +128,10 @@ function GenerateMAWB({
 				* Number(dimensionObj.height)
 				* Number(dimensionObj.packages_count);
 			}
-			totalPackage += Number(dimensionObj.packages);
+			totalPackage += Number(dimensionObj.packages_count);
 		});
 		setValue('volumetricWeight', Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
-		setValue('packagesCount', totalPackage || taskItem.packagesCount);
+		setValue('totalPackagesCount', totalPackage || taskItem.totalPackagesCount);
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 
 	return (
