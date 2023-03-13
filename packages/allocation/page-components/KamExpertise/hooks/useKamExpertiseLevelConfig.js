@@ -3,17 +3,23 @@ import { useAllocationRequest } from '@cogoport/request';
 // import { useEffect } from 'react';
 
 const useKamExpertiseLevelConfig = ({ title }) => {
-	const [{ data = [], loading }, refetch] = useAllocationRequest({
+	const [{ data = [], loading }, listrefetch] = useAllocationRequest({
 		url     : 'kam_expertise_configuration',
 		method  : 'get',
 		authkey : 'get_allocation_kam_expertise_configuration',
-		params  : { filters: { transition_level: title } },
+		params  : {
+			filters: {
+				transition_level : title,
+				status           : 'draft',
+			},
+
+		},
 	}, { manual: false });
 
 	return {
 		listkamLevelDetails: data,
 		loading,
-		refetch,
+		listrefetch,
 	};
 };
 

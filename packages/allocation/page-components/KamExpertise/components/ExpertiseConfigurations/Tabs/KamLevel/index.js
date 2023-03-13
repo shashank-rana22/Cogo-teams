@@ -9,16 +9,19 @@ import KamLevelDropDown from './KamLevelDropDown';
 import ResponseCard from './ResponseCard';
 import styles from './styles.module.css';
 
-// todobug : delete button
 function KamLevel() {
-	const { kamConfigDetails = [], loading = false, refetch } = useKamExpertiseConfig();
+	const { kamConfigDetails, loading, refetch } = useKamExpertiseConfig();
 
 	const [title, setTitle] = useState(0);
 	const [editMode, setEditMode] = useState(false);
 	const [createKam, setCreateKam] = useState(false);
 
-	const dataLength = kamConfigDetails.length;
-	const options = kamConfigDetails.map((data) => ({
+	const audit_data = kamConfigDetails?.audit_data || {};
+	const kamConfigLevelDetails = kamConfigDetails?.data || [];
+
+	const dataLength = kamConfigLevelDetails.length;
+	console.log('ll', dataLength);
+	const options = kamConfigLevelDetails.map((data) => ({
 
 		key: data.transition_level,
 
@@ -32,6 +35,7 @@ function KamLevel() {
 			id={data.transition_level - 1}
 			dataLength={dataLength}
 			refetch={refetch}
+			loading={loading}
 		/>,
 
 		children: <KamLevelDropDown
@@ -40,13 +44,16 @@ function KamLevel() {
 			id={data.transition_level - 1}
 			title={title}
 			setEditMode={setEditMode}
+			refetch={refetch}
 		/>,
 
 	}));
 
 	return (
 		<div>
-			<Header />
+			<Header
+				audit_data={audit_data}
+			/>
 
 			<Collapse
 				panel={options}
