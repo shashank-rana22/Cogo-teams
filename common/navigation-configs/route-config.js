@@ -5,6 +5,7 @@ import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import enrichment from './config/enrichment';
+import fclFreight from './config/fcl-freight';
 import groundOps from './config/ground-ops';
 import inventory_management from './config/inventory_management';
 import kamMonitoring from './config/kam-monitoring';
@@ -31,6 +32,7 @@ const routeConfig = {
 	...inventory_management,
 	...kamMonitoring,
 	...performanceManagement,
+	...fclFreight,
 };
 
 export default routeConfig;
