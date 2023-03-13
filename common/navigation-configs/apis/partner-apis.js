@@ -5827,6 +5827,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api          : 'list_dunning_cycle_executions',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
 	],
 	invoice_triggers: [
 		{
@@ -10270,6 +10275,32 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
+		{
+			api          : 'get_exchange_rate_shipment_frequency_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_shipment_revenue_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_currency_pair_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_shipment_applicable_state_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_source_count_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+
 	],
 	contracts: [
 		{
