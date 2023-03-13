@@ -85,11 +85,12 @@ function CommunicationModal({
 				showProgress={false}
 				draggable
 				className="file_uploader"
-				uploadIcon={(
-					<div className={styles.attach_docs}>
-						<IcMAttach />
-					</div>
-					<IcMAttach
+				uploadIcon={( */}
+			<div className={styles.attach_docs}>
+				<IcMAttach />
+			</div>
+
+			{/* <IcMAttach
 						className={styles.upload_icon}
 						style={{
 							cursor: !hasPermissionToEdit
