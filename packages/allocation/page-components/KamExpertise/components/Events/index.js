@@ -1,8 +1,10 @@
-import { Pagination } from '@cogoport/components';
+import { Pagination, Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import EmptyState from '../../../../common/EmptyState';
 import useGetEventList from '../../hooks/useGetEventList';
 
 import CreateNewEvent from './CreateNewEvent';
@@ -56,17 +58,249 @@ function Events() {
 		loading,
 		paginationData,
 		getNextPage,
+		debounceQuery,
+		setSearchValue,
+		searchValue,
+		expertise,
+		setExpertise,
 	} = useGetEventList();
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
-	const [toggleNewEvent, setToggleNewEvent] = useState(true);
+	const [toggleEvent, setToggleEvent] = useState('eventList');
+	const [eventListData, setEventListData] = useState({});
 
-	// console.log('list:::', list);
-	// console.log('paginationData', paginationData);
+	// console.log('toggleEvent::', toggleEvent);
+
+	if (loading) {
+		return (
+			<>
+				<div className={styles.back_container} role="presentation" onClick={onClickBack}>
+					<div className={styles.icon_container}>
+						<IcMArrowBack width={16} height={16} />
+					</div>
+					<div className={styles.back_text}>
+						Back to Dashboard
+					</div>
+				</div>
+
+				<Header
+					setToggleEvent={setToggleEvent}
+					toggleEvent={toggleEvent}
+					debounceQuery={debounceQuery}
+					setSearchValue={setSearchValue}
+					searchValue={searchValue}
+					setExpertise={setExpertise}
+					expertise={expertise}
+				/>
+
+				<section className={styles.list_item_container}>
+
+					<div className={styles.top_div}>
+
+						<Placeholder width="20px" style={{ marginBottom: '4px' }} />
+
+					</div>
+
+					<div>
+
+						<p className={styles.info_tag}>
+
+							<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+
+						</p>
+
+						<div className={styles.info_tag}>
+
+							<Placeholder width="120px" style={{ marginBottom: '12px' }} />
+
+						</div>
+
+						<p className={styles.info_tag}>
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						</p>
+
+					</div>
+
+					<div className={styles.rule}>
+
+						<p className={styles.rule_head}>
+
+							<Placeholder width="100px" height="20px" style={{ marginBottom: '4px' }} />
+
+						</p>
+
+						<div className={styles.rule_body}>
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						</div>
+
+					</div>
+
+					<div className={styles.rule_end}>
+
+						<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+
+					</div>
+
+				</section>
+				<section className={styles.list_item_container}>
+
+					<div className={styles.top_div}>
+
+						<Placeholder width="20px" style={{ marginBottom: '4px' }} />
+
+					</div>
+
+					<div>
+
+						<p className={styles.info_tag}>
+
+							<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+
+						</p>
+
+						<div className={styles.info_tag}>
+
+							<Placeholder width="120px" style={{ marginBottom: '12px' }} />
+
+						</div>
+
+						<p className={styles.info_tag}>
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						</p>
+
+					</div>
+
+					<div className={styles.rule}>
+
+						<p className={styles.rule_head}>
+
+							<Placeholder width="100px" height="20px" style={{ marginBottom: '4px' }} />
+
+						</p>
+
+						<div className={styles.rule_body}>
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						</div>
+
+					</div>
+
+					<div className={styles.rule_end}>
+
+						<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+
+					</div>
+
+				</section>
+				<section className={styles.list_item_container}>
+
+					<div className={styles.top_div}>
+
+						<Placeholder width="20px" style={{ marginBottom: '4px' }} />
+
+					</div>
+
+					<div>
+
+						<p className={styles.info_tag}>
+
+							<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+
+						</p>
+
+						<div className={styles.info_tag}>
+
+							<Placeholder width="120px" style={{ marginBottom: '12px' }} />
+
+						</div>
+
+						<p className={styles.info_tag}>
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						</p>
+
+					</div>
+
+					<div className={styles.rule}>
+
+						<p className={styles.rule_head}>
+
+							<Placeholder width="100px" height="20px" style={{ marginBottom: '4px' }} />
+
+						</p>
+
+						<div className={styles.rule_body}>
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						</div>
+
+					</div>
+
+					<div className={styles.rule_end}>
+
+						<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+
+					</div>
+
+				</section>
+			</>
+		);
+	}
+
 	return (
 		<>
-			{/* <CreateNewEvent /> */}
 			<div className={styles.back_container} role="presentation" onClick={onClickBack}>
 				<div className={styles.icon_container}>
 					<IcMArrowBack width={16} height={16} />
@@ -75,17 +309,45 @@ function Events() {
 					Back to Dashboard
 				</div>
 			</div>
-			<Header setToggleNewEvent={setToggleNewEvent} toggleNewEvent={toggleNewEvent} />
 
-			{toggleNewEvent
-				?		(
+			{
+
+			(toggleEvent === 'eventList') && (
+				<>
+					<Header
+						setToggleEvent={setToggleEvent}
+						toggleEvent={toggleEvent}
+						debounceQuery={debounceQuery}
+						setSearchValue={setSearchValue}
+						searchValue={searchValue}
+						expertise={expertise}
+						setExpertise={setExpertise}
+					/>
 					<div>
-						{list.map((data, index) => {
-							console.log(data);
-							return (
-								<EventListItem data={data} index={index} />
-							);
-						})}
+						{
+						(isEmpty(list) && !loading)
+							? (
+								<div style={{ padding: '48px 0', backgroundColor: '#fff', marginBottom: '12px' }}>
+
+									<EmptyState height="400px" width="600px" flexDirection="column" />
+
+								</div>
+							)
+
+							: list.map((data, index) =>
+								// console.log(data);
+								// console.log('loading::::::::', loading);
+								(
+									<EventListItem
+										data={data}
+										index={index}
+										// loading={loading}
+										setEventListData={setEventListData}
+										setToggleEvent={setToggleEvent}
+
+									/>
+								))
+						}
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"
@@ -96,10 +358,26 @@ function Events() {
 							/>
 						</div>
 					</div>
-				)
-				:	<div><CreateNewEvent setToggleNewEvent={setToggleNewEvent} toggleNewEvent={toggleNewEvent} /></div>}
+				</>
 
-			{/* <EventListItem /> */}
+			)
+}
+
+			{(toggleEvent === 'createNew') && (
+				<CreateNewEvent
+					setToggleEvent={setToggleEvent}
+					eventListData={{}}
+				/>
+			)}
+
+			{(toggleEvent === 'updateEvent') && (
+				<CreateNewEvent
+					setToggleEvent={setToggleEvent}
+					eventListData={eventListData}
+
+				/>
+			)}
+
 		</>
 	);
 }
