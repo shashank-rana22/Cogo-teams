@@ -1,22 +1,20 @@
 import React from 'react';
 
-import useGetAllocationKamExpertiseDashboard from '../../../hooks/useGetAllocationKamExpertiseDashboard';
+// import useGetAllocationKamExpertiseDashboard from '../../../hooks/useGetAllocationKamExpertiseDashboard';
 
 function ThisMonth({ params }) {
-	const {
-		loading,
-		DashboardData,
-	} = useGetAllocationKamExpertiseDashboard(params);
+	// const {
+	// 	loading,
+	// 	// DashboardData,
+	// } = useGetAllocationKamExpertiseDashboard(params);
 
-	console.log('DashboardData : ', DashboardData);
-
-	if (loading) {
-		return (
-			<div>
-				loading ...
-			</div>
-		);
-	}
+	// if (loading) {
+	// 	return (
+	// 		<div>
+	// 			loading ...
+	// 		</div>
+	// 	);
+	// }
 
 	return (
 		<div>
