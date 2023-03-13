@@ -9,20 +9,30 @@ interface NestedObj {
 
 interface Props {
 	data?:NestedObj;
+	whiteout?:boolean;
 }
 
-function WeightChargeDetails({ data = {} }:Props) {
+function WeightChargeDetails({ data = {}, whiteout = false }:Props) {
+	let tempColor = '#333';
+	if (whiteout) {
+		tempColor = 'transparent';
+	}
+
 	return (
-		<div className={cl`
+		<div
+			className={cl`
 				${styles.block_col} 
 				${styles.weight_charge_container} 
 			`}
+			style={{ '--temp-color': tempColor } as React.CSSProperties}
 		>
-			<div className={cl`
+			<div
+				className={cl`
 				${styles.flex_col} 
 				${styles.common_border_bottom}
 				${styles.common_flex} 
 			`}
+				style={{ '--temp-color': tempColor } as React.CSSProperties}
 			>
 				<div className={cl`
 					${styles.flex_row} 
@@ -34,40 +44,46 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.prepaid_sub_block}
 					`}
 					/>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.prepaid_sub_devision}
 						${styles.trapezium}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 9, color: 'transparent' }}>Prepaid</p>
+						<p style={{ fontSize: 9, color: tempColor }}>Prepaid</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
 						${styles.collect_block}
 					`}
 					/>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.weight_charge_sub_block}
 						${styles.trapezium}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 9, color: 'transparent' }}>Weight Charge</p>
+						<p style={{ fontSize: 9, color: tempColor }}>Weight Charge</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
 						${styles.collect_block}
 					`}
 					/>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.collect_sub_block}
 						${styles.trapezium}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 9, color: 'transparent' }}>Collect</p>
+						<p style={{ fontSize: 9, color: tempColor }}>Collect</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -81,13 +97,15 @@ function WeightChargeDetails({ data = {} }:Props) {
 					${styles.total_price_block}
 				`}
 				>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.total_price_sub_block}
 						${styles.common_flex}
 						${styles.common_border_right}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p className={styles.font_style} style={{ fontSize: 13 }}>
 							{(data?.totalCharge || 0.0).toFixed(2)}
@@ -97,11 +115,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 					<div style={{ flex: 1 }} />
 				</div>
 			</div>
-			<div className={cl`
+			<div
+				className={cl`
 				${styles.flex_col} 
 				${styles.common_border_bottom}
 				${styles.common_flex} 
 			`}
+				style={{ '--temp-color': tempColor } as React.CSSProperties}
 			>
 				<div className={cl`
 					${styles.flex_row} 
@@ -113,14 +133,16 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.valuable_charge_sub_block}
 					`}
 					/>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.valuable_charge_text_block}
 						${styles.trapezium}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 9, color: 'transparent' }}>Valuation Charge</p>
+						<p style={{ fontSize: 9, color: tempColor }}>Valuation Charge</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -134,11 +156,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 					${styles.total_price_block}
 				`}
 				>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.common_flex}
 						${styles.common_border_right}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					/>
 					<div className={cl`
 						${styles.flex} 
@@ -147,11 +171,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 					/>
 				</div>
 			</div>
-			<div className={cl`
+			<div
+				className={cl`
 				${styles.flex_col} 
 				${styles.common_border_bottom}
 				${styles.common_flex} 
 			`}
+				style={{ '--temp-color': tempColor } as React.CSSProperties}
 			>
 				<div className={cl`
 					${styles.flex_row} 
@@ -163,14 +189,16 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.tax_sub_block}
 					`}
 					/>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.tax_text_block}
 						${styles.trapezium}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 9, color: 'transparent' }}>Tax</p>
+						<p style={{ fontSize: 9, color: tempColor }}>Tax</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -184,11 +212,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 					${styles.total_price_block}
 				`}
 				>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.common_flex}
 						${styles.common_border_right}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					/>
 					<div className={cl`
 						${styles.flex} 
@@ -197,11 +227,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 					/>
 				</div>
 			</div>
-			<div className={cl`
+			<div
+				className={cl`
 				${styles.flex_col} 
 				${styles.common_border_bottom}
 				${styles.common_flex} 
 			`}
+				style={{ '--temp-color': tempColor } as React.CSSProperties}
 			>
 				<div className={cl`
 					${styles.flex_row} 
@@ -213,14 +245,16 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.total_other_charge_sub_block}
 					`}
 					/>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.total_other_charge_text_block}
 						${styles.trapezium}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 9, color: 'transparent' }}>Total Other Charges Due Agent</p>
+						<p style={{ fontSize: 9, color: tempColor }}>Total Other Charges Due Agent</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -233,13 +267,15 @@ function WeightChargeDetails({ data = {} }:Props) {
 					${styles.total_price_block}
 				`}
 				>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.total_other_charge_text_value_block}
 						${styles.common_flex}
 						${styles.common_border_right}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p className={styles.font_style} style={{ fontSize: 13 }}>
 							{(data?.agentCharge || 0.0).toFixed(2)}
@@ -253,12 +289,14 @@ function WeightChargeDetails({ data = {} }:Props) {
 					/>
 				</div>
 			</div>
-			<div className={cl`
+			<div
+				className={cl`
 				${styles.flex_col}
 				${styles.carrier_container}
 				${styles.common_border_bottom}
 				${styles.common_flex} 
 			`}
+				style={{ '--temp-color': tempColor } as React.CSSProperties}
 			>
 				<div className={cl`
 					${styles.flex_row} 
@@ -270,14 +308,16 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.carrier_sub_block}
 					`}
 					/>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.carrier_text_block}
 						${styles.trapezium}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 9, color: 'transparent' }}>Total Other Charges Due Carrier</p>
+						<p style={{ fontSize: 9, color: tempColor }}>Total Other Charges Due Carrier</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -291,13 +331,15 @@ function WeightChargeDetails({ data = {} }:Props) {
 					${styles.total_price_block}
 				`}
 				>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.carrier_final_sub_block}
 						${styles.common_flex}
 						${styles.common_border_right}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p className={styles.font_style} style={{ fontSize: 13 }}>
 							{(data?.carrierCharge || 0.0).toFixed(2)}
@@ -311,16 +353,20 @@ function WeightChargeDetails({ data = {} }:Props) {
 					/>
 				</div>
 			</div>
-			<div className={cl`
+			<div
+				className={cl`
 					${styles.flex_row} 
 					${styles.total_prepaid_container}
 				`}
+				style={{ '--temp-color': tempColor } as React.CSSProperties}
 			>
-				<div className={cl`
+				<div
+					className={cl`
 						${styles.flex} 
 						${styles.common_flex}
 						${styles.common_border_right}
 					`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				/>
 				<div className={cl`
 						${styles.flex} 
@@ -333,11 +379,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 					${styles.total_prepaid_container}
 				`}
 			>
-				<div className={cl`
+				<div
+					className={cl`
 					${styles.flex_col}
 					${styles.common_flex}
 					${styles.common_border_right} 
 				`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
 					<div className={cl`
 						${styles.flex_row} 
@@ -349,14 +397,16 @@ function WeightChargeDetails({ data = {} }:Props) {
 							${styles.prepaid_sub_block}
 						`}
 						/>
-						<div className={cl`
+						<div
+							className={cl`
 							${styles.flex} 
 							${styles.common_justify_center}
 							${styles.prepaid_total_text_block}
 							${styles.trapezium}
 						`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
-							<p style={{ fontSize: 9, color: 'transparent' }}>Total Prepaid</p>
+							<p style={{ fontSize: 9, color: tempColor }}>Total Prepaid</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
@@ -392,14 +442,16 @@ function WeightChargeDetails({ data = {} }:Props) {
 							${styles.prepaid_sub_block}
 						`}
 						/>
-						<div className={cl`
+						<div
+							className={cl`
 							${styles.flex} 
 							${styles.common_justify_center}
 							${styles.prepaid_collect_text_block}
 							${styles.trapezium}
 						`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
-							<p style={{ fontSize: 9, color: 'transparent' }}>Total Collect</p>
+							<p style={{ fontSize: 9, color: tempColor }}>Total Collect</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
@@ -421,11 +473,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 				${styles.total_prepaid_container}
 			`}
 			>
-				<div className={cl`
+				<div
+					className={cl`
 					${styles.flex_col}
 					${styles.common_flex}
 					${styles.common_border_right} 
 				`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
 					<div className={cl`
 						${styles.flex_row} 
@@ -437,14 +491,16 @@ function WeightChargeDetails({ data = {} }:Props) {
 							${styles.conversion_outer_text_block}
 						`}
 						/>
-						<div className={cl`
+						<div
+							className={cl`
 							${styles.flex} 
 							${styles.common_justify_center}
 							${styles.conversion_text_block}
 							${styles.trapezium}
 						`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
-							<p style={{ fontSize: 9, color: 'transparent' }}>Currency Conversion Rates</p>
+							<p style={{ fontSize: 9, color: tempColor }}>Currency Conversion Rates</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
@@ -476,14 +532,16 @@ function WeightChargeDetails({ data = {} }:Props) {
 							${styles.currency_outer_text_block}
 						`}
 						/>
-						<div className={cl`
+						<div
+							className={cl`
 							${styles.flex} 
 							${styles.common_justify_center}
 							${styles.currency_text_block}
 							${styles.trapezium}
 						`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
-							<p style={{ fontSize: 9, color: 'transparent' }}>CC Charges in Dest. Currency</p>
+							<p style={{ fontSize: 9, color: tempColor }}>CC Charges in Dest. Currency</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
@@ -503,15 +561,17 @@ function WeightChargeDetails({ data = {} }:Props) {
 				${styles.destination_container}
 			`}
 			>
-				<div className={cl`
+				<div
+					className={cl`
 					${styles.flex} 
 					${styles.common_justify_center}
 					${styles.destination_text}
 					${styles.common_flex}
 					${styles.common_border_right}
 				`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
-					<p style={{ fontSize: 9, color: 'transparent' }}>
+					<p style={{ fontSize: 9, color: tempColor }}>
 						For Carrier&apos;s Use only at
 						<div className={cl`
 							${styles.flex} 
@@ -537,13 +597,15 @@ function WeightChargeDetails({ data = {} }:Props) {
 							${styles.prepaid_sub_block}
 						`}
 						/>
-						<div className={cl`
+						<div
+							className={cl`
 							${styles.flex} 
 							${styles.charges_container_text}
 							${styles.trapezium}
 						`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
-							<p style={{ fontSize: 9, color: 'transparent' }}>Charges at Destination</p>
+							<p style={{ fontSize: 9, color: tempColor }}>Charges at Destination</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 

@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../Air/commons/Layout';
 
 import GenerateMawbDoc from './GenerateMawbDoc';
+import usePackingList from './Helpers/hooks/usePackingList';
 import mawbControls from './mawbControls';
 import styles from './styles.module.css';
 import UploadMAWB from './UploadMAWB';
@@ -51,6 +52,10 @@ function GenerateMAWB({
 
 	const fields = mawbControls();
 
+	const { packingData, packingList } = usePackingList();
+
+	console.log('packingData', packingData);
+
 	const onSubmit = () => {
 		setBack(true);
 	};
@@ -84,6 +89,7 @@ function GenerateMAWB({
 	}, [formValues.volumetricWeight, formValues.weight, formValues.packagesCount]);
 
 	useEffect(() => {
+		packingList({ item });
 		finalFields.forEach((c:any) => {
 			setValue(c.name, taskItem[c.name]);
 		});
@@ -92,7 +98,7 @@ function GenerateMAWB({
 		setValue('city', 'NEW DELHI');
 		setValue('place', 'NEW DELHI');
 		setValue('class', 'q');
-		setValue('commodity', `${'SAID TO CONTAIN\n'}${taskItem.commodity}`);
+		setValue('commodity', `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
 	}, []);
 
 	useEffect(() => {
@@ -192,6 +198,14 @@ function GenerateMAWB({
 								{activeKey === 'package'
 								&& (
 									<>
+										<Button
+											size="md"
+											themeType="primary"
+											onClick={() => window.open(packingData?.list[0]?.documentUrl, '_blank')}
+											className={styles.packing_button}
+										>
+											Refer Packing List
+										</Button>
 										<Layout fields={fields?.package} control={control} errors={errors} />
 										<div className={styles.button_container}>
 											{!back ? (

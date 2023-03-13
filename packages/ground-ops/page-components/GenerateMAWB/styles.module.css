@@ -32,6 +32,11 @@
 	}
 }
 
+.packing_button {
+	min-width: 20%;
+	margin-left: 12px;
+}
+
 .button_container {
 	position: fixed;
 	bottom: 0;

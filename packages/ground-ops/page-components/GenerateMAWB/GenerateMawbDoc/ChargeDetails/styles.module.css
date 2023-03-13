@@ -15,7 +15,7 @@
 	padding-left: 240px;
 	font-weight: bold;
 	letter-spacing: 0;
-	border: 1px transparent solid;
+	border: 1px var(--temp-color) solid;
 	border: 0;
 }
 
