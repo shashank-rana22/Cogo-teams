@@ -20,17 +20,16 @@ function CreateMastery(props) {
 		onSave,
 	} = useCreateMasterConfiguration({ masteryListData, onClose, listRefetch });
 
+	const UploadController = getFieldController('fileUpload');
 	const InputDesc = getFieldController('text');
 
 	const { control, watch, handleSubmit } = formProps;
 
-	const UploadController = getFieldController('fileUpload');
-
 	const badge_options = []; // for multi-select badges
 	(badgeList || {}).forEach((badge_data) => {
-		if (badge_data.medal_collection.length === 0) {
+		if (badge_data.expertise_configuration_type === 'event_configuration') {
 			badge_options.push(
-				{ value: badge_data.badge_name, label: badge_data.badge_name },
+				{ value: badge_data.id, label: badge_data.badge_name },
 			);
 		}
 	});
@@ -134,7 +133,7 @@ function CreateMastery(props) {
 									placeholder="Multimodal maestro is awarded
                                 to users who complete gold 3 in all of these badges"
 									control={control}
-									value={masteryListData ? masteryListData.description : ''}
+									// value={masteryListData ? masteryListData.description : ''}
 								/>
 							</div>
 						</div>

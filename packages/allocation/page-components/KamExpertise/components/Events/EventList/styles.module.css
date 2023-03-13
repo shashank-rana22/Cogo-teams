@@ -1,7 +1,9 @@
 .list_item_container {
-	height: 240px;
+	height: auto;
 	background-color: #fff;
 	border-radius: 8px;
+	margin-bottom: 16px;
+	padding-bottom: 20px;
 }
 
 .top_div {
@@ -9,6 +11,7 @@
 	justify-content: space-between;
 	padding: 16px 16px 0px 16px;
 }
+
 
 .info_tag {
 	display: flex;
@@ -36,9 +39,10 @@
 }
 
 .rule_end {
+	padding-left: 16px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 40%;
+	max-width: 24%;
 	margin-top: 8px;
 }

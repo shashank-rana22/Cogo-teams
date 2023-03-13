@@ -243,12 +243,47 @@ const allocation = {
 			service_name : 'allocation',
 		},
 		{
+			api          : 'get_allocation_kam_expertise_badge_configuration_list',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_badge_configuration_detail_attributes',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
 			api          : 'post_allocation_kam_expertise_configuration',
 			access_type  : 'private',
 			feature      : 'kam_expertise',
 			service_name : 'allocation',
 		},
-
+		{
+			api          : 'get_allocation_kam_expertise_event_configuration_attributes',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_event_configuration',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_dashboard',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_profile',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
 	],
 };
 

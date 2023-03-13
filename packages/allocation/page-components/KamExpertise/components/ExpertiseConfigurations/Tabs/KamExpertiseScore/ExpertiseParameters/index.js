@@ -1,18 +1,18 @@
 import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import useGetExpertiseParameters from '../../../../../hooks/useGetExpertiseParameters';
+
 import CardItem from './CardItem';
-import dummyData from './dummyData';
 import styles from './styles.module.css';
 
 function ExpertiseParameters(props) {
-	const { onClickAddCondition, name } = props;
+	const { onClickAddCondition, activeCollapse = '' } = props;
 
 	const [editMode, setEditMode] = useState(false);
 
-	// const { name = '' } = expertiseData;
-
-	const req = dummyData.find((element) => name in element);
+	const { data } = useGetExpertiseParameters({ activeCollapse });
+	const { list = [] } = data || {};
 
 	return (
 		<div>
@@ -32,7 +32,7 @@ function ExpertiseParameters(props) {
 							: <Button themeType="secondary" onClick={() => setEditMode(!editMode)}>Edit</Button>}
 					</div>
 
-					{req[name].map((item) => <CardItem editMode={editMode} item={item} />)}
+					{list.map((item) => <CardItem editMode={editMode} item={item} />)}
 				</div>
 			</div>
 

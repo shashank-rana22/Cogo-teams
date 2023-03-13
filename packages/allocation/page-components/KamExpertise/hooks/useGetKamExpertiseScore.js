@@ -1,19 +1,26 @@
 import { useAllocationRequest } from '@cogoport/request';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const useGetKamExpertiseScore = () => {
-	const [params, setParams] = useState({
-		pagination_data_required : false,
-		for_configuration_stats  : true,
-		// for_configuration_details : true,
-		audit_data_required      : true,
-	});
+	// const [params, setParams] = useState({
+	// 	pagination_data_required  : false,
+	// 	for_configuration_stats   : true,
+	// 	for_configuration_details : activeCollapse ? true : undefined,
+	// 	audit_data_required       : true,
+	// 	filter                    : {
+	// 		expertise_type: activeCollapse || undefined,
+	// 	},
+	// });
 
 	const [{ loading, data }] = useAllocationRequest({
 		url     : '/kam_expertise_event_configuration',
 		method  : 'GET',
 		authkey : 'get_allocation_kam_expertise_event_configuration',
-		params,
+		params  : {
+			pagination_data_required : false,
+			for_configuration_stats  : true,
+			audit_data_required      : true,
+		},
 	}, { manual: false });
 
 	return {

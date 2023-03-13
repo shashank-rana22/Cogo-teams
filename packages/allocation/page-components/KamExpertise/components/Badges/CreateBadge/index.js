@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { MultiSelect, Button } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
