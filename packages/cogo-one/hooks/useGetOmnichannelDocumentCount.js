@@ -8,6 +8,7 @@ function useGetOmnichannelDocumentCount({
 	activeMessageCard,
 	activeVoiceCard,
 	activeTab,
+	customerId,
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_omnichannel_document',
@@ -38,9 +39,11 @@ function useGetOmnichannelDocumentCount({
 	};
 
 	useEffect(() => {
-		documentCount();
+		if (!(isEmpty(userId)) || !(isEmpty(leadUserId)) || !(isEmpty(userMobile))) {
+			documentCount();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [customerId, activeTab]);
 
 	return {
 		documentCount,

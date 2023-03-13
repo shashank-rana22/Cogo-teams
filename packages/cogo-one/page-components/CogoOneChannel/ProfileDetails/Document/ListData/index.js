@@ -11,15 +11,16 @@ import documentStatus from '../DocumentStatus';
 
 import styles from './styles.module.css';
 
-function ListData({ list = [], orgId = '' }) {
-	const partnerId = useSelector((s) => s?.profile?.partner?.id);
+function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
+	// const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
 	};
 
 	const handleClick = () => {
-		window.open(`/${partnerId}/details/onboarding/${orgId}/importer_exporter`, '_blank');
+		// window.open(`/${partnerId}/details/onboarding/${orgId}/importer_exporter`, '_blank');
+		setShowModal(true);
 	};
 
 	const checkStatus = (status, state) => {

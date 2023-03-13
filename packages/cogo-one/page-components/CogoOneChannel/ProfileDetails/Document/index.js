@@ -1,7 +1,7 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useOmnichannelDocumentsList from '../../../../hooks/useOmnichannelDocumentsList';
 import LoadingState from '../UserActivity/LoadingState';
@@ -9,15 +9,18 @@ import LoadingState from '../UserActivity/LoadingState';
 import Filters from './Filters';
 import ListData from './ListData';
 import styles from './styles.module.css';
+import UploadDetailsModal from './UploadDetailsModal';
 
 function Documents({
 	activeMessageCard,
 	activeVoiceCard,
 	activeTab,
 	customerId,
+	setListIds = () => {},
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState('');
+	const [showModal, setShowModal] = useState(false);
 	const { data = {}, loading = false, documentsList = () => {}, orgId = '' } = useOmnichannelDocumentsList({
 		activeMessageCard,
 		activeVoiceCard,
@@ -36,6 +39,11 @@ function Documents({
 	};
 
 	const { list = [] } = data || {};
+
+	useEffect(() => {
+		setListIds(list.map((i) => i.id));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [list]);
 
 	return (
 		<>
@@ -64,8 +72,11 @@ function Documents({
 				</div>
 			</div>
 
-			{loading ? <LoadingState /> : <ListData list={list} orgId={orgId} />}
-
+			{loading ? <LoadingState /> : <ListData list={list} orgId={orgId} setShowModal={setShowModal} />}
+			<Button onClick={() => setShowModal(true)}>OK</Button>
+			{showModal && (
+				<UploadDetailsModal setShowModal={setShowModal} />
+			)}
 		</>
 	);
 }

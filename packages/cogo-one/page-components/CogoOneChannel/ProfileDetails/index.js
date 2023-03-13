@@ -15,6 +15,8 @@ function ProfileDetails({
 	updateLeaduser,
 	activeCardId,
 }) {
+	const [listIds, setListIds] = useState([]);
+
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
 	const [activeSelect, setActiveSelect] = useState('profile');
@@ -35,8 +37,8 @@ function ProfileDetails({
 		activeMessageCard,
 		activeVoiceCard,
 		activeTab,
+		customerId,
 	});
-	console.log('data:', data);
 
 	return (
 		<div className={styles.profile_div}>
@@ -55,6 +57,7 @@ function ProfileDetails({
 						updateLeaduser={updateLeaduser}
 						orgId={orgId}
 						disableQuickActions={disableQuickActions}
+						setListIds={setListIds}
 					/>
 				)}
 			</div>
@@ -65,6 +68,12 @@ function ProfileDetails({
 				openNewTab={openNewTab}
 				loading={loading}
 				disableQuickActions={disableQuickActions}
+				data={data}
+				documentCount={documentCount}
+				listIds={listIds}
+				activeMessageCard={activeMessageCard}
+				activeVoiceCard={activeVoiceCard}
+				activeTab={activeTab}
 			/>
 		</div>
 	);

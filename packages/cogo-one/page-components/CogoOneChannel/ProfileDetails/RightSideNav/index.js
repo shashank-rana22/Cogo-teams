@@ -1,5 +1,8 @@
 import { Tooltip, cl } from '@cogoport/components';
-import { snakeCase } from '@cogoport/utils';
+import { isEmpty, snakeCase } from '@cogoport/utils';
+
+import useUpdateOmnichannelDocuments from '../../../../hooks/useUpdateOmnichannelDocuments';
+import FormatData from '../../../../utils/formatData';
 
 import IconMapping from './IconMapping';
 import styles from './styles.module.css';
@@ -10,7 +13,14 @@ function RightSideNav({
 	openNewTab,
 	loading,
 	disableQuickActions = false,
+	data = {},
+	documentCount = () => {},
+	listIds = [],
+	activeMessageCard,
+	activeVoiceCard,
+	activeTab,
 }) {
+	const { count } = data || {};
 	const handleClick = (val) => {
 		if (val === 'spot_search') {
 			if (!loading) {
@@ -20,8 +30,20 @@ function RightSideNav({
 			setActiveSelect(val);
 		}
 	};
-
+	const { documentCountUpdates = () => {} } = useUpdateOmnichannelDocuments({ documentCount });
 	const disabledSpotSearch = loading || disableQuickActions;
+
+	const { userId = '', userMobile = '', leadUserId = '' } = FormatData({
+		activeMessageCard,
+		activeVoiceCard,
+		activeTab,
+	});
+
+	const checkConditions = isEmpty(userId) && isEmpty(userMobile) && isEmpty(leadUserId);
+
+	const handleUpdates = () => {
+		documentCountUpdates({ listIds });
+	};
 
 	return (
 		<div className={styles.right_container}>
@@ -42,8 +64,20 @@ function RightSideNav({
 						onClick={() => handleClick(name)}
 					>
 						<Tooltip content={content} placement="left">
-							{name === 'documents' && <div className={styles.count}>20</div>}
-							<div>{icon}</div>
+							{(name === 'documents' && count > 0 && !checkConditions) && (
+								<div className={styles.count}>
+									{count > 100 ? '99+' : (
+										count
+									)}
+								</div>
+							)}
+							<div
+								role="presentation"
+								onClick={(name === 'documents' && !isEmpty(listIds) && handleUpdates)}
+							>
+								{icon}
+
+							</div>
 						</Tooltip>
 					</div>
 				);

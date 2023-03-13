@@ -216,3 +216,4 @@ export const DOCUMENT_FILTERS_MAPPING = [
 		value : 'wrong_document',
 	},
 ];
+export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/prod_cogo_one.apk';
