@@ -35,6 +35,8 @@ function Messages({
 	const closeModal = () => setOpenModal({ type: null, data: {} });
 	let activeChatCollection;
 
+	const [disableButton, setDisableButton] = useState('');
+
 	const {
 		id = '',
 		channel_type = '',
@@ -89,6 +91,7 @@ function Messages({
 		closeModal,
 		activeMessageCard,
 		formattedData,
+		setDisableButton,
 	});
 
 	const {
@@ -133,6 +136,8 @@ function Messages({
 					showBotMessages={showBotMessages}
 					userId={userId}
 					isomniChannelAdmin={isomniChannelAdmin}
+					setDisableButton={setDisableButton}
+					disableButton={disableButton}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations

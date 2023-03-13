@@ -11,6 +11,11 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
+			api         : 'get_purchase_bills_supplier_history',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api         : 'get_common_job_shipment_id_view',
 			access_type : 'private',
 			feature     : 'coeFinance',
