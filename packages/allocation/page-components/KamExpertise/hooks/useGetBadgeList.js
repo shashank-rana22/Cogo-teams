@@ -4,15 +4,16 @@ import { useState, useEffect } from 'react';
 
 function useGetBadgeList() {
 	const [searchValue, setSearchValue] = useState();
+	const [expertise, setExpertise] = useState([]);
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			status     : 'active',
-			badge_name : searchQuery || undefined,
+			status                      : 'active',
+			badge_name                  : searchQuery || undefined,
+			expertise_configuration_ids : expertise || undefined,
 		},
 	});
-
 	const [{ loading, data = {} }, refetch] = useAllocationRequest({
 		url     : '/kam_expertise_badge_configuration_list',
 		method  : 'get',
@@ -25,10 +26,11 @@ function useGetBadgeList() {
 			...previousParams,
 			filters: {
 				...previousParams.filters,
-				badge_name: searchQuery || undefined,
+				badge_name                  : searchQuery || undefined,
+				expertise_configuration_ids : expertise || undefined,
 			},
 		}));
-	}, [searchQuery]);
+	}, [searchQuery, expertise]);
 
 	const getNextPage = (newPage) => {
 		setParams((previousParams) => ({
@@ -44,8 +46,9 @@ function useGetBadgeList() {
 		list,
 		searchValue,
 		setSearchValue,
+		expertise,
+		setExpertise,
 		debounceQuery,
-		// searchQuery,
 		paginationData,
 		getNextPage,
 		listRefetch: refetch,

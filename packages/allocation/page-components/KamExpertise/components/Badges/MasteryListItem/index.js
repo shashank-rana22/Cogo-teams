@@ -3,7 +3,7 @@ import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function MasteryListItem({ data, index, loading, setToggleScreen, setMasteryListData }) {
+function MasteryListItem({ data = {}, index, loading, setToggleScreen, setMasteryListData }) {
 	const handleEdit = () => {
 		setMasteryListData(data);
 		setToggleScreen(2);
@@ -49,7 +49,7 @@ function MasteryListItem({ data, index, loading, setToggleScreen, setMasteryList
 						<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
 						<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
 						{
-                        data.expertise_configuration_ids.map(() => (
+                        data.expertise_configuration_ids?.map(() => (
 	<span className={styles.pill}>
 		<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
 	</span>
@@ -111,7 +111,7 @@ function MasteryListItem({ data, index, loading, setToggleScreen, setMasteryList
 						<div className={styles.rule_heading}>Rules</div>
 						<span>Mastery in</span>
 						{
-                        data.mastery_in.map((item) => (
+                        data.mastery_in?.map((item) => (
 	<span className={styles.pill}>
 		<Pill color="#edd7a9">{item}</Pill>
 
@@ -124,7 +124,7 @@ function MasteryListItem({ data, index, loading, setToggleScreen, setMasteryList
 						<img
 							height={140}
 							style={{ objectFit: 'contain' }}
-							src={data.badge_details[0].image_url}
+							src={data.badge_details?.[0].image_url}
 							alt="Mastery Modal"
 						/>
 					</div>

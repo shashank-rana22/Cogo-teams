@@ -1,16 +1,10 @@
-import { Select, Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import { Button } from '@cogoport/components';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import React from 'react';
 
 import SearchInput from '../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
-
-const OPTIONS = [
-	{
-		label : 'NNM',
-		value : 'nnm',
-	},
-];
 
 function Header(props) {
 	const {
@@ -19,23 +13,25 @@ function Header(props) {
 		setToggleScreen = () => {},
 		searchValue,
 		setSearchValue = () => {},
+		expertise,
+		setExpertise = () => {},
 		debounceQuery,
 		setMasteryListData = () => {},
 		setBadgeListData,
 	} = props;
 
-	const [expertise, setExpertise] = useState('');
-
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.filter_container}>
-				<Select
-					size="sm"
-					isClearable
+
+				<AsyncSelect
 					placeholder="Expertise"
+					size="sm"
 					value={expertise}
-					options={OPTIONS}
 					onChange={(value) => setExpertise(value)}
+					asyncKey="expertise_configuration"
+					multiple
+					isClearable
 					className={styles.dropdown}
 					disabled={toggleScreen === 2 || toggleScreen === 3}
 				/>
@@ -46,7 +42,6 @@ function Header(props) {
 					setGlobalSearch={setSearchValue}
 					debounceQuery={debounceQuery}
 					value={searchValue}
-					// disabled={disabled}
 					className={styles.search_bar}
 					disabled={toggleScreen === 2 || toggleScreen === 3}
 				/>
