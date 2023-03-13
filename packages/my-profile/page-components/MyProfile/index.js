@@ -84,6 +84,7 @@ function MyProfile() {
 				<div className={styles.container}>
 					<div className={styles.header}>
 						<Header
+							badgeList={badgeList}
 							detailsData={detailsData}
 							setRefetch={refetch}
 							partner_user_id={partner_user_id}

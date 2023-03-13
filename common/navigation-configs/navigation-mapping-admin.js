@@ -1743,6 +1743,16 @@ const navigationMappingAdmin = {
 		showInNav     : false,
 
 	},
+	all_badges: {
+		key         : 'all_badges',
+		title       : 'All Badges',
+		href        : '/badges',
+		as          : '/badges',
+		main_apis   : apis.all_badges,
+		module_type : 'dashboards',
+		showInNav   : false,
+
+	},
 	allocations: {
 		key         : 'allocations',
 		title       : 'Allocations',
