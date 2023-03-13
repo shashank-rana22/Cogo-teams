@@ -1,6 +1,6 @@
 import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { IcMArrowDoubleDown, IcMArrowDoubleUp } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import SearchInput from '../../../../../commons/SearchInput';
 
@@ -17,7 +17,9 @@ function Header({
 	sortType,
 	setSortType,
 }) {
-	const handleClick = (previousValue) => setSortType(!previousValue);
+	const handleClick = useCallback(() => {
+		setSortType(!sortType);
+	}, [setSortType, sortType]);
 
 	return (
 		<div>
@@ -41,7 +43,7 @@ function Header({
 						themeType="secondary"
 						style={{ marginLeft: 8, height: '40px' }}
 						size="md"
-						onClick={() => handleClick(sortType)}
+						onClick={handleClick}
 					>
 						{activeList === 'requested' ? 'Sort By Last Created' : 'Sort By Last Updated'}
 						{sortType ? <IcMArrowDoubleDown /> : <IcMArrowDoubleUp />}
