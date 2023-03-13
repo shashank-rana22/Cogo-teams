@@ -5,4 +5,9 @@ const ROLE_IDS = {
 	COGOVERSE_ADMIN    : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 };
 
+export const PARTNER_IDS = {
+	VIETNAM_PARTNER_ID : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
+	INDIA_PARTNER_ID   : '6fd98605-9d5d-479d-9fac-cf905d292b88',
+};
+
 export default ROLE_IDS;
