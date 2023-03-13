@@ -96,12 +96,12 @@ function MasteryListItem({ data = {}, index, loading, setToggleScreen, setMaster
 							{' '}
 							{format(data.created_at, 'yyyy-MMM-dd')}
 						</div>
-						<div>
+						{/* //! needs changes */}
+						{/* <div>
 							Last Modified By:
 							{' '}
-							{/* //! needs changes */}
-							{/* {data.last_modified_by} */}
-						</div>
+							{data.last_modified_by}
+						</div> */}
 					</div>
 				</div>
 
