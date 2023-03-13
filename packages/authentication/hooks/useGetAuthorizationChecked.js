@@ -54,9 +54,8 @@ const useGetAuthorizationChecked = () => {
 						if (configs?.href?.includes('/v2')) {
 							const replaceHref = configs?.href?.replace('/v2', '');
 							const replaceAs = configs?.as?.replace('/v2', '');
-							await push(replaceHref?.href, replaceAs?.as);
-						}
-						if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
+							await push(replaceHref, replaceAs);
+						} else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 							// eslint-disable-next-line no-undef
 							window.location.href = `/${profile?.partner?.id}${configs.as || configs.href}`;
 						} else {
