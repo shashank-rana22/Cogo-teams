@@ -48,7 +48,8 @@ request.interceptors.request.use((oldConfig) => {
 
 	if (serviceName) {
 		newConfig.url = `/${serviceName}/${apiPath}`;
-		if (serviceName === 'location') {
+		if (serviceName === 'location'
+		&& process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com')) {
 			newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
 		}
 	}
