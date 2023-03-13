@@ -1,18 +1,26 @@
 import { Toast, Modal, Button, RTE, Input } from '@cogoport/components';
+import { IcMAttach } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import CustomFileUploader from '../../../../../../common/CustomFileUploader';
 import { TOOLBARCONFIG } from '../../../../../../constants';
 import getFormatedEmailBody from '../../../../../../helpers/getFormatedEmailBody';
 import hideDetails from '../../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
-function ComposeEmail({ closeModal = () => {}, userData = {}, sendQuickCommuncation = () => {}, loading }) {
+function ComposeEmail({
+	closeModal = () => {},
+	userData = {},
+	sendQuickCommuncation = () => {},
+	loading,
+}) {
+	const [attachments, setAttachments] = useState([]);
 	const [emailState, setEmailState] = useState({
 		subject : '',
 		body    : '',
 	});
-
+	const [uploading, setUploading] = useState(false);
 	const handleSend = () => {
 		const isEmpty = getFormatedEmailBody({ emailState });
 		if (isEmpty || !emailState?.subject) {
@@ -25,6 +33,9 @@ function ComposeEmail({ closeModal = () => {}, userData = {}, sendQuickCommuncat
 				type                  : 'email',
 			});
 		}
+	};
+	const handleProgress = (val) => {
+		setUploading(val);
 	};
 	return (
 		<>
@@ -42,23 +53,58 @@ function ComposeEmail({ closeModal = () => {}, userData = {}, sendQuickCommuncat
 					placeholder="Enter your Subject here..."
 					className={styles.styled_input}
 				/>
-				<RTE
-					value={emailState?.body}
-					onChange={(val) => setEmailState((p) => ({ ...p, body: val }))}
-					toolbarConfig={TOOLBARCONFIG}
-					className={styles.styled_editor}
-				/>
+				<div className={styles.rte_container}>
+					<div className={styles.file_uploader_div}>
+						<CustomFileUploader
+							disabled={uploading}
+							handleProgress={handleProgress}
+							className="file_uploader"
+							uploadIcon={(
+								<IcMAttach
+									className={styles.upload_icon}
+									fill="#000000"
+									style={{
+										cursor: uploading
+											? 'not-allowed'
+											: 'pointer',
+									}}
+								/>
+							)}
+							onChange={(val) => {
+								setAttachments((p) => ([...p, val]));
+							}}
+							showProgress={false}
+						/>
+
+					</div>
+					<RTE
+						value={emailState?.body}
+						onChange={(val) => setEmailState((p) => ({ ...p, body: val }))}
+						toolbarConfig={TOOLBARCONFIG}
+						className={styles.styled_editor}
+					/>
+
+				</div>
+
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.footer_buttons}>
 					<Button size="md" themeType="tertiary" onClick={closeModal}>
 						cancel
 					</Button>
-					<Button size="md" themeType="accent" onClick={handleSend} loading={loading}>
+					<Button
+						size="md"
+						themeType="accent"
+						onClick={handleSend}
+						loading={loading}
+					>
 						Send
 					</Button>
+
 				</div>
+
 			</Modal.Footer>
+
 		</>
 	);
 }
