@@ -72,12 +72,15 @@ function SentDiv({
 					) }
 					{!isEmpty(list) && showList && (
 						<div className={styles.list_container}>
-							{(list || []).map((listItem) => (
-								<div key={`msg-list-item-${listItem.id}`} className={styles.list_item}>
-									<div className={styles.list_item_title}>{listItem?.title}</div>
-									<div className={styles.list_item_description}>{listItem?.description}</div>
-								</div>
-							))}
+							{(list || []).map((listItem) => {
+								const { id, title, description } = listItem;
+								return (
+									<div key={`msg-list-item-${id}`} className={styles.list_item}>
+										<div className={styles.list_item_title}>{title}</div>
+										<div className={styles.list_item_description}>{description}</div>
+									</div>
+								);
+							})}
 						</div>
 					) }
 				</div>
