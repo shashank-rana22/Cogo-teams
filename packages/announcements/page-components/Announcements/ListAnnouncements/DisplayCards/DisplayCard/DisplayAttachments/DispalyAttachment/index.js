@@ -1,11 +1,12 @@
 /* eslint-disable no-undef */
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function DisplayAttachment({ data = {}, name, deleteAttachment = () => {} }) {
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const openDocument = (url) => {
 		let modifiedUrl = `https://${url}`;
 		if (url?.includes('http://') || url?.includes('https://')) {
@@ -50,9 +51,40 @@ function DisplayAttachment({ data = {}, name, deleteAttachment = () => {} }) {
 								height={20}
 								width={20}
 								style={{ cursor: 'pointer' }}
-								onClick={() => deleteAttachment(item?.id)}
+								onClick={() => setShowDeleteModal(true)}
 							/>
 						</div>
+
+						{setShowDeleteModal && (
+							<Modal
+								show={showDeleteModal}
+								scroll={false}
+								size="md"
+								placement="center"
+								onClose={() => setShowDeleteModal(false)}
+							>
+								<Modal.Header title="Are you sure to delete this announcement" />
+								<Modal.Footer>
+									<div className={styles.delete_buttons}>
+										<Button
+											themeType="secondary"
+											size="md"
+											onClick={() => setShowDeleteModal(false)}
+										>
+											Cancel
+										</Button>
+										<Button
+											themeType="primary"
+											size="md"
+											onClick={() => deleteAttachment(item?.id)}
+
+										>
+											Delete
+										</Button>
+									</div>
+								</Modal.Footer>
+							</Modal>
+						)}
 					</div>
 				))}
 			</div>

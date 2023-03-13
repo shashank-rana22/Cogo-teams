@@ -43,7 +43,7 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 		</div>
 	);
 	return (
-		<div key={JSON.stringify(defaultValues)} className={styles.container}>
+		<div className={styles.container}>
 			<div className={styles.form}>
 				{controls.map((controlItem) => {
 					const controlStyle = controlItem?.style;
@@ -59,7 +59,6 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 									formValues={formValues}
 									control={control}
 									{...controlItem}
-									disabled={disabled}
 								/>
 							</div>
 						);
@@ -76,7 +75,6 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 								errors={errors}
 								value={name === 'is_important' && formValues.is_important}
 								options={controlItem.options || audienceOptions}
-								disabled={['files', 'images'].includes(controlItem.name) && disabled}
 							/>
 						</div>
 					);
