@@ -126,3 +126,8 @@
 .btn_icon {
 	margin-right: 3px;
 }
+
+.message_tick_container {
+	display: flex;
+	justify-content: flex-end;
+}

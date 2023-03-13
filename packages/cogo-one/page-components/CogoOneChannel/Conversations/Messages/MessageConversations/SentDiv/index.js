@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { IcMCross, IcMListView } from '@cogoport/icons-react';
+import { IcMCross, IcMListView, IcMTick, IcMDoubleTick } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -17,6 +17,7 @@ function SentDiv({
 		response,
 		send_by = '',
 		session_type = 'bot',
+		message_status = '',
 	} = eachMessage;
 
 	const { btns = [], list = [] } = response;
@@ -42,7 +43,14 @@ function SentDiv({
 						<MessageBody
 							response={response}
 							message_type={message_type}
+							message_status={message_status}
 						/>
+						<div
+							className={styles.message_tick_container}
+						>
+							{(message_status === 'seen') ? <IcMDoubleTick fill="#0000FF" /> : <IcMTick />}
+						</div>
+
 					</div>
 
 					{!isEmpty(btns) && (
