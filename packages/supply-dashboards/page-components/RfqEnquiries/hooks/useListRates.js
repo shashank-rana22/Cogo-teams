@@ -3,9 +3,17 @@ import { useEffect } from 'react';
 
 const useGetRates = ({ service }) => {
 	const apiMapping = {
-		lcl_freight : '/list_lcl_freight_rates',
-		fcl_freight : '/list_fcl_freight_rates',
-		air_freight : '/list_air_freight_rates',
+		lcl_freight     : '/list_lcl_freight_rates',
+		fcl_freight     : '/list_fcl_freight_rates',
+		air_freight     : '/list_air_freight_rates',
+		trailer_freight : './list_trailer_freight_rates',
+		haulage_freight : './list_haulage_freight_rates',
+		ltl_freight     : './list_ltl_freight_rates',
+		ftl_freight     : './list_ftl_freight_rates',
+		fcl_customs     : './list_fcl_customs_rates',
+		lcl_customs     : './list_lcl_customs_rates',
+		air_customs     : './list_air_customs_rates',
+		fcl_cfs         : './list_fcl_cfs_rates',
 	};
 
 	const api = apiMapping[service?.service];
@@ -24,11 +32,19 @@ const useGetRates = ({ service }) => {
 			await triggerSystemData({
 				params: {
 					filters: {
-						origin_port_id         : service?.data?.origin_port_id,
-						destination_port_id    : service?.data?.destination_port_id,
-						is_rate_not_available  : false,
-						origin_airport_id      : service?.data?.origin_airport_id,
-						destination_airport_id : service?.data?.destination_airport_id,
+						origin_port_id      : service?.data?.origin_port_id,
+						destination_port_id : service?.data?.destination_port_id,
+						is_rate_available   : service?.service === 'fcl_freight'
+						|| service?.service === 'ftl_freight' ? true : undefined,
+						origin_airport_id       : service?.data?.origin_airport_id,
+						rate_type               : service?.service === 'air_freight' ? 'general' : undefined,
+						destination_airport_id  : service?.data?.destination_airport_id,
+						container_size          : service?.data?.container_size,
+						container_type          : service?.data?.container_type,
+						commodity               : service?.data?.contaner_type,
+						origin_location_id      : service?.data?.origin_location_id,
+						destination_location_id : service?.data?.destination_location_id,
+						location_id             : service?.data?.location_id || service?.data?.port_id,
 					},
 					page_limit: 5,
 				},

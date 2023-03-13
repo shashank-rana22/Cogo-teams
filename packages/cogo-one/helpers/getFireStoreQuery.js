@@ -10,9 +10,17 @@ function getFireStoreQuery({
 	let firestoreQuery;
 	let queryFilters = [];
 	if (showBotMessages) {
+		if (isomniChannelAdmin) {
+			return query(
+				omniChannelCollection,
+				where('session_type', '==', 'bot'),
+				orderBy('new_message_sent_at', 'desc'),
+			);
+		}
 		return query(
 			omniChannelCollection,
 			where('session_type', '==', 'bot'),
+			where('spectators_ids', 'array-contains', userId),
 			orderBy('new_message_sent_at', 'desc'),
 		);
 	}
@@ -38,6 +46,17 @@ function getFireStoreQuery({
 			queryFilters = [
 				...queryFilters,
 				where('chat_status', '==', appliedFilters[item]),
+			];
+		} else if (item === 'assigned_to') {
+			let filterId = '';
+			if (appliedFilters.assigned_to === 'me') {
+				filterId = userId;
+			} else {
+				filterId = appliedFilters?.assigned_agent;
+			}
+			queryFilters = [
+				...queryFilters,
+				where('spectators_ids', 'array-contains', filterId),
 			];
 		}
 	});

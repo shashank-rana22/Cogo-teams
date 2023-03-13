@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import useRequest from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 import React, { useEffect } from 'react';
 
 import Quotation from './quotation/index';

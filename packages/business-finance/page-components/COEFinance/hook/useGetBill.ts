@@ -24,9 +24,9 @@ const useGetBill = (allParams = {}) => {
 		accPaymentTrigger,
 	] = useRequestBf(
 		{
-			url     : 'payments/accounts/org-stats',
+			url     : 'payments/accounts/org-stats-for-coe-finance',
 			method  : 'get',
-			authKey : 'get_payments_accounts_org_stats',
+			authKey : 'get_payments_accounts_org_stats_for_coe_finance',
 		},
 		{ autoCancel: false },
 	);
