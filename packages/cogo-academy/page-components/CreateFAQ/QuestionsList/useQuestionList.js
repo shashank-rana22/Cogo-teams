@@ -190,13 +190,16 @@ const requestedQuestionsColumns = ({
 ];
 
 const useQuestionList = () => {
+	const router = useRouter();
+
 	const [sortType, setSortType] = useState(true);
-	const { query, debounceQuery } = useDebounceQuery();
 	const [searchInput, setSearchInput] = useState('');
 	const [activeList, setActiveList] = useState('published');
+	const [deleteitem, setDeleteitem] = useState('');
 	const [filters, setFilters] = useState({});
 	const [page, setPage] = useState(1);
-	const router = useRouter();
+
+	const { query, debounceQuery } = useDebounceQuery();
 
 	const SORT_TYPE = (sortType) ? 'desc' : 'asc';
 	const SORT_MODE = (activeList === 'requested') ? 'created_at' : 'updated_at';
@@ -275,7 +278,7 @@ const useQuestionList = () => {
 			`/learning/faq/create/question?mode=preview&id=${id}&source=view`,
 		);
 	};
-	const [deleteitem, setDeleteitem] = useState('');
+
 	const columns = activeList !== 'requested'
 		? addedQuestionsColumns({
 			activeList,

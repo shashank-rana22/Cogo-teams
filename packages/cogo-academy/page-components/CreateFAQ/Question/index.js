@@ -147,7 +147,7 @@ function CreateFAQ() {
 				<Spinner
 					height={60}
 					width={60}
-					borderWidth="7px"
+					borderWidth="6px"
 					outerBorderColor="#FBD69F"
 					spinBorderColor="red"
 				/>

@@ -1,5 +1,5 @@
 .container {
-	padding-left: 25px;
+	padding-left: 24px;
 }
 
 .heading {
@@ -42,7 +42,7 @@
 
 .tags_button {
 	padding: 4px 10px;
-	margin-right: 5px;
+	margin-right: 4px;
 	background: white;
 	border: 1px solid #ffe4af;
 	border-radius: 14px;
