@@ -1,6 +1,6 @@
 import { IcMUserAllocations } from '@cogoport/icons-react';
 
-import { URL_MATCH_REGEX, ENDS_WITH_STAR } from '../../constants';
+import { URL_MATCH_REGEX, ENDS_WITH_STAR_SPACE, ENDS_WITH_STAR_CHAR } from '../../constants';
 import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
 
 import CustomFileDiv from './CustomFileDiv';
@@ -9,7 +9,8 @@ import styles from './styles.module.css';
 function MessageBody({ response = {}, message_type = 'text' }) {
 	const { message = '', media_url = '' } = response;
 	const URLRegex = new RegExp(URL_MATCH_REGEX);
-	const endWithStar = new RegExp(ENDS_WITH_STAR);
+	const endWithStarSpace = new RegExp(ENDS_WITH_STAR_SPACE);
+	const endWithStarChar = new RegExp(ENDS_WITH_STAR_CHAR);
 	const fileExtension = media_url?.split('.').pop();
 
 	const renderURLText = (txt = '') => (
@@ -22,13 +23,24 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 	const addStrongTag = (txt = '') => {
 		const boldText = ` ${txt} `.split(' *').map((part, index) => {
 			if (index === 0) return part;
-			if (endWithStar.test(part)) {
-				return part.split('* ').map((str, i) => {
+			if (endWithStarSpace.test(part)) {
+				return part.split(endWithStarSpace).map((str, i) => {
 					if (i === 0) {
 						return ` <strong>${str.substring(0, txt.length - 1)}</strong> `;
 					}
 					return str;
 				}).join('');
+			}
+			if (endWithStarChar.test(part)) {
+				if (part.match(/\*/g).length === 1) {
+					return part.split('*').map((str, i) => {
+						if (i === 0) {
+							return ` <strong>${str.substring(0, txt.length - 1)}</strong>`;
+						}
+						return str;
+					}).join('');
+				}
+				return part;
 			}
 			return ` *${part}`;
 		}).join('');

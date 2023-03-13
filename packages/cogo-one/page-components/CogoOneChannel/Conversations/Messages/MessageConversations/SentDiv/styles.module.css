@@ -77,25 +77,26 @@
 }
 
 .list_container {
-	color: #615f5f;
 	margin-top: 6px;
+	color: #615f5f;
 	border: 1px solid #cfeaed;
 	border-radius: 4px;
 }
-.list_item{
-	padding:10px 12px;
+
+.list_item {
+	padding: 10px 12px;
 	border-bottom: 1px solid #cfeaed;
 
-	&:last-child{
+	&:last-child {
 		border: none;
 	}
 }
 
-.list_item_title{
+.list_item_title {
 	font-size: 12px;
 	font-weight: 600;
 }
 
-.list_item_description{
+.list_item_description {
 	font-size: 10px;
 }
