@@ -58,18 +58,15 @@ function TransactionalActivity({ transactional = {} }) {
 							</div>
 						</div>
 						<div className={styles.main_card}>
-
 							<div className={styles.card}>
-
-								<div className={cl`${styles.card_details} 
-						${viewCheck ? styles.open_card_details : ''}`}
+								<div
+									className={cl`${viewCheck ? styles.open_card_details : styles.card_details}`}
 								>
 
 									<div className={styles.booking_id}>
 										SID:
 										{' '}
 										{serial_id}
-
 									</div>
 									<div className={styles.port_pair}>
 										<div className={styles.port}>
@@ -117,12 +114,10 @@ function TransactionalActivity({ transactional = {} }) {
 										</div>
 									</div>
 									<div className={styles.milestone_container}>
-
 										{(filteredMilestoneActivity || []).map((val, index) => {
-											const { milestone = '', completed_on = '' } = val || {};
+											const { milestone = '', completed_on = null } = val || {};
 											return (
 												<div>
-
 													<div className={styles.activity_date}>
 														<div className={styles.dot} />
 														<div className={styles.durations}>
@@ -133,7 +128,8 @@ function TransactionalActivity({ transactional = {} }) {
 													</div>
 													<div
 														className={cl`${styles.milestone_main_card} 
-																 ${index === milestoneActivity.length - 1
+																 ${index
+																	=== (filteredMilestoneActivity?.length || 0) - 1
 															? styles.milestone_last_card : ''}`}
 													>
 
@@ -175,7 +171,6 @@ function TransactionalActivity({ transactional = {} }) {
 								)}
 
 							</div>
-
 						</div>
 
 					</>

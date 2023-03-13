@@ -35,7 +35,7 @@
 }
 
 .card_details {
-	height: 135px;
+	max-height: 135px;
 	padding: 8px;
 	overflow: hidden;
 	transition: all 0.5s ease-in-out;
@@ -43,6 +43,8 @@
 
 .open_card_details {
 	height: auto;
+	padding: 8px;
+	overflow: hidden;
 	transition: all 0.5s ease-in-out;
 }
 
