@@ -256,3 +256,14 @@
 .warning {
 	background: #fef199;
 }
+
+.plus_circle{
+	position : fixed;
+	bottom   : 3rem;
+	left     : 21rem;
+	cursor   : pointer;
+}
+.plus_circle svg{
+	background-color: white;
+	border-radius: 100%;
+}

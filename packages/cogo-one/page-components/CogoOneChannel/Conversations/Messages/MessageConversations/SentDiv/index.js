@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { IcMTick, IcMDoubleTick } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
 
 import MessageBody from '../../../../../../common/MessageBody';
@@ -15,6 +16,7 @@ function SentDiv({
 		response,
 		send_by = '',
 		session_type = 'bot',
+		message_status = '',
 	} = eachMessage;
 
 	const { btns = [] } = response;
@@ -39,7 +41,14 @@ function SentDiv({
 						<MessageBody
 							response={response}
 							message_type={message_type}
+							message_status={message_status}
 						/>
+						<div
+							className={styles.message_tick_container}
+						>
+							{(message_status === 'seen') ? <IcMDoubleTick fill="blue" /> : <IcMTick />}
+						</div>
+
 					</div>
 
 					{!isEmpty(btns) && (

@@ -75,3 +75,8 @@
 	width: 30px;
 	height: 30px;
 }
+
+.message_tick_container{
+	display: flex;
+	justify-content: end;
+}
