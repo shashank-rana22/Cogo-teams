@@ -3,71 +3,73 @@ import { IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function EventListItem({ data, index, loading, setEventListData, setToggleNewEvent }) {
+function EventListItem({ data, index, loading = true, setEventListData, setToggleEvent }) {
 	const {
 		id, condition_name:conditionName = '', expertise_type:Type = '',
 		description = '',
 		rules = [],
 		params = '',
 	} = data;
-	console.log('data', data);
+	// console.log('data loading :::::', loading);
 
 	const handleEdit = () => {
 		setEventListData(data);
-		setToggleNewEvent((pv) => !pv);
+		setToggleEvent('updateEvent');
 	};
-	if (loading) {
-		return (
-			<section key={id} className={styles.list_item_container}>
-				<div className={styles.top_div}>
-					<Placeholder width="20px" style={{ marginBottom: '4px' }} />
-				</div>
-				<div>
-					<p className={styles.info_tag}>
-						<Placeholder width="160px" style={{ marginBottom: '4px' }} />
 
-					</p>
-					<div className={styles.info_tag}>
-						<Placeholder width="120px" style={{ marginBottom: '12px' }} />
+	// if (loading) {
+	// 	// return (
+	// 	// 	<section key={id} className={styles.list_item_container}>
+	// 	// 		<div className={styles.top_div}>
+	// 	// 			<Placeholder width="20px" style={{ marginBottom: '4px' }} />
+	// 	// 		</div>
+	// 	// 		<div>
+	// 	// 			<p className={styles.info_tag}>
+	// 	// 				<Placeholder width="160px" style={{ marginBottom: '4px' }} />
 
-					</div>
-					<p className={styles.info_tag}>
-						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+	// 	// 			</p>
+	// 	// 			<div className={styles.info_tag}>
+	// 	// 				<Placeholder width="120px" style={{ marginBottom: '12px' }} />
 
-					</p>
-				</div>
+	// 	// 			</div>
+	// 	// 			<p className={styles.info_tag}>
+	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-				<div className={styles.rule}>
-					<p className={styles.rule_head}>
-						<Placeholder width="100px" height="20px" style={{ marginBottom: '4px' }} />
+	// 	// 			</p>
+	// 	// 		</div>
 
-					</p>
+	// 	// 		<div className={styles.rule}>
+	// 	// 			<p className={styles.rule_head}>
+	// 	// 				<Placeholder width="100px" height="20px" style={{ marginBottom: '4px' }} />
 
-					<div className={styles.rule_body}>
-						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+	// 	// 			</p>
 
-						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+	// 	// 			<div className={styles.rule_body}>
+	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-					</div>
+	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-				</div>
+	// 	// 			</div>
 
-				<div className={styles.rule_end}>
-					<Placeholder width="160px" style={{ marginBottom: '4px' }} />
-				</div>
-			</section>
-		);
-	}
+	// 	// 		</div>
+
+	// 	// 		<div className={styles.rule_end}>
+	// 	// 			<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+	// 	// 		</div>
+	// 	// 	</section>
+	// 	// );
+	// 	<div>loading</div>;
+	// }
 	return (
 
 		<section key={id} className={styles.list_item_container}>
@@ -110,7 +112,7 @@ function EventListItem({ data, index, loading, setEventListData, setToggleNewEve
 								size="l"
 								color="blue"
 							>
-								Reactivation
+								{res?.name}
 							</Pill>
 
 							is triggered on
@@ -128,7 +130,7 @@ function EventListItem({ data, index, loading, setEventListData, setToggleNewEve
 								size="l"
 								color="#FEF3E9"
 							>
-								Account
+								{res?.rule_type}
 							</Pill>
 
 							having attribute

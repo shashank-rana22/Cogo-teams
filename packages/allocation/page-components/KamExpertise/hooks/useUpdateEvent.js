@@ -5,21 +5,27 @@ import { useAllocationRequest } from '@cogoport/request';
 
 import getAddRuleControls from '../configurations/get-add-rule-controls';
 
-function useCreateNewEvent(props) {
+function useUpdateEvent(props) {
 	const { attributeList = [], eventListData = {} } = props;
+	// const [{ loading }, trigger] = useAllocationRequest({
+	// 	method  : 'POST',
+	// 	url     : '/kam_expertise_event_configuration',
+	// 	authkey : 'post_allocation_kam_expertise_event_configuration',
+	// }, { manual: true });
+
 	const [{ loading }, trigger] = useAllocationRequest({
 		method  : 'POST',
-		url     : '/kam_expertise_event_configuration',
-		authkey : 'post_allocation_kam_expertise_event_configuration',
+		url     : '/kam_expertise_event_rule_mapping',
+		authkey : 'post_allocation_kam_expertise_event_rule_mapping',
 	}, { manual: true });
 
-	const {
-		expertise_type : expertiseType,
-		group_name : groupName,
-		condition_name : conditionName,
-		event_state_on : eventStateOn,
-		description : eventDescription,
-	} = eventListData;
+	// const {
+	// 	expertise_type : expertiseType,
+	// 	group_name : groupName,
+	// 	condition_name : conditionName,
+	// 	event_state_on : eventStateOn,
+	// 	description : eventDescription,
+	// } = eventListData;
 
 	const formProps = useForm({
 		// defaultValues: {
@@ -33,7 +39,7 @@ function useCreateNewEvent(props) {
 
 	// console.log('eventListData', eventListData);
 
-	const onSave = async (formValues, e) => {
+	const onUpdate = async (formValues, e) => {
 		e.preventDefault();
 		console.log('formValues::', formValues);
 
@@ -50,26 +56,20 @@ function useCreateNewEvent(props) {
 						console.log('param:', formValues[response]);
 						payloadAttribute.push({
 							rule_id   : res?.id,
-							parameter : formValues[response] || '',
+							parameter : formValues[response],
 						});
 					}
 				});
 
 				console.log('payloadAttribute::', payloadAttribute);
 
+				// console.log('updateEvent', updateEvent);
+
 				// formValues[Object.keys(formValues).find((response) => response === res?.name)]
 				// console.log('obnject', Object.keys(res?.name));
 			});
 			const payload = {
-				version_id : '123',
-				expertise_type,
-				group_name,
-				condition_name,
-				event_state_on,
-				attributes : payloadAttribute,
-				status     : 'draft',
-				description,
-
+                
 			};
 
 			await trigger({
@@ -82,11 +82,11 @@ function useCreateNewEvent(props) {
 	};
 
 	return {
-		onSave,
+		onUpdate,
 		formProps,
 		getAddRuleControls,
 		loading,
 	};
 }
 
-export default useCreateNewEvent;
+export default useUpdateEvent;
