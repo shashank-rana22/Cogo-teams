@@ -10,7 +10,7 @@ import ResponseCard from './ResponseCard';
 import styles from './styles.module.css';
 
 function KamLevel() {
-	const { kamConfigDetails, loading, refetch } = useKamExpertiseConfig();
+	const { kamConfigDetails, levleLoading, refetch } = useKamExpertiseConfig();
 
 	const [title, setTitle] = useState(0);
 	const [editMode, setEditMode] = useState(false);
@@ -34,7 +34,7 @@ function KamLevel() {
 			id={data.transition_level - 1}
 			dataLength={dataLength}
 			refetch={refetch}
-			loading={loading}
+			levleLoading={levleLoading}
 		/>,
 
 		children: <KamLevelDropDown

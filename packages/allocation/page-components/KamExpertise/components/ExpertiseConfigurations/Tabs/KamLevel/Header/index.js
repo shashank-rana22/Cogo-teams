@@ -21,8 +21,7 @@ function Header(props) {
 						Last Modified:
 						{' '}
 
-						{(audit_data?.updated_at || 'abhi ')}
-						{/* {audit_data.updated_at} */}
+						{format(audit_data.updated_at, 'dd-MM-YYYY')}
 					</div>
 
 					<div>
