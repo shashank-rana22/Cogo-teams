@@ -13,9 +13,10 @@ interface Props {
 	setFilters: (p: object) => void;
 	sort: NestedObj;
 	subActiveTab?:string
+	jobNumber?:string
 }
 
-const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Props) => {
+const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab, jobNumber }: Props) => {
 	const getStatus = () => {
 		if (subActiveTab === 'finance_rejected') {
 			return 'FINANCE_REJECTED';
@@ -29,7 +30,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Pro
 	const [currentTab, setCurrentTab] = useState(getStatus());
 	const [tab, setTab] = useState('all');
 	const { debounceQuery, query } = useDebounceQuery();
-	const [searchValue, setSearchValue] = useState('');
+	const [searchValue, setSearchValue] = useState(jobNumber || '');
 
 	const showFilter = () => {
 		if (filters?.billType === 'PURCHASE') {
