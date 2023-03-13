@@ -27,14 +27,15 @@ function Badges() {
 	// Screen 3 - Create Badge
 
 	const [badgeListData, setBadgeListData] = useState({});
-	// const [autofill, setAutofill] = useState({});
 	const [masteryListData, setMasteryListData] = useState({});
 
 	const {
 		loading,
-		list:badgeList,
+		list:badgeList = {},
 		searchValue,
 		setSearchValue = () => {},
+		expertise,
+		setExpertise = () => {},
 		debounceQuery,
 		paginationData,
 		getNextPage = () => {},
@@ -70,6 +71,8 @@ function Badges() {
 						debounceQuery={debounceQuery}
 						setMasteryListData={setMasteryListData}
 						setBadgeListData={setBadgeListData}
+						expertise={expertise}
+						setExpertise={setExpertise}
 					/>
 				</div>
 			</section>
@@ -77,7 +80,11 @@ function Badges() {
 				{
 					// Todo: add empty state's dimensions
 					(toggleScreen === 1) && isEmpty(badgeList)
-						? <EmptyState />
+						? (
+							<div style={{ padding: '48px 0', backgroundColor: '#fff', marginBottom: '12px' }}>
+								<EmptyState height="400px" width="600px" flexDirection="column" />
+							</div>
+						)
 						: ''
 				}
 				{

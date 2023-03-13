@@ -1,10 +1,11 @@
 import { Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateNewEvent from '../../../hooks/useCreateNewEvent';
 import useGetAllocationKamExpertiseRules from '../../../hooks/useGetAllocationKamExpertiseRules';
+// import useUpdateEvent from '../../../hooks/useUpdateEvent';
 
 import styles from './styles.module.css';
 
@@ -21,13 +22,26 @@ function CreateNewEvent(props) {
 		refetch,
 	} = useGetAllocationKamExpertiseRules();
 
-	const { toggleNewEvent = '', setToggleNewEvent = () => {} } = props;
+	const { setToggleEvent = () => {}, eventListData = {} } = props;
+	console.log('eventListData', eventListData);
+
+	const onClose = () => {
+		setToggleEvent('eventList');
+	};
+
+	// if(isEmpty(eventListData)){
+
+	// }
 
 	const {
 		onSave,
 		formProps,
 		getAddRuleControls,
-	} = useCreateNewEvent(attributeList);
+	} = useCreateNewEvent({ attributeList, eventListData });
+
+	// const {
+	// 	onUpdate,
+	// } = useUpdateEvent();
 
 	console.log('attributeList:', attributeList);
 
@@ -41,18 +55,18 @@ function CreateNewEvent(props) {
 	return (
 		<div>
 			<div className={styles.create_new_event}>
-				Create New Event
+				{!isEmpty(eventListData) ? (
+					<p>
+						Update Event
+					</p>
+				) : (
+					<p>
+						Create New Event
+					</p>
+				)}
 			</div>
 
 			<div className={styles.form_container}>
-				{/* <div className={styles.header}>
-					#001
-
-					<div className={styles.modified_data}>
-						<div className={styles.modified_date}>Last Modified : 31/September/2023</div>
-						<div>Last Modified By : Ankur Verma</div>
-					</div>
-				</div> */}
 
 				<div className={styles.rule_and_attribute}>
 					<div className={styles.add_rule_container}>
@@ -78,6 +92,7 @@ function CreateNewEvent(props) {
 												key={el.name}
 												control={control}
 												id={`${el.name}_input`}
+												disabled={!isEmpty(eventListData)}
 											/>
 										</div>
 
@@ -123,7 +138,7 @@ function CreateNewEvent(props) {
 
 										<div
 											className={`${styles.input_group}
-										${index < 3 ? styles.margin_bottom : ''}`}
+										${index < 12 ? styles.margin_bottom : ''}`}
 										>
 											<Element
 												{...el}
@@ -150,7 +165,7 @@ function CreateNewEvent(props) {
 						themeType="tertiary"
 				// onClick={onCloseModal}
 						style={{ marginRight: '10px' }}
-						onClick={() => setToggleNewEvent(true)}
+						onClick={onClose}
 					>
 						Cancel
 					</Button>

@@ -104,8 +104,8 @@ function BadgeListItem({ data, index, loading, setToggleScreen, setBadgeListData
 							{format(data.updated_at, 'yyyy-MMM-dd')}
 						</div>
 
-						{/* //! needs changes */}
-						<div>Last Modified By :</div>
+						{/* //! need from backend */}
+						{/* <div>Last Modified By :</div> */}
 					</div>
 				</div>
 

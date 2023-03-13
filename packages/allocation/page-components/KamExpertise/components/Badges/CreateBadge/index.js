@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import { format, isEmpty } from '@cogoport/utils';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
 
@@ -49,10 +49,10 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 							{format(badgeListData.updated_at, 'yyyy-MMM-dd')}
 						</p>
 
-						<p className={styles.text_styles}>
+						{/* <p className={styles.text_styles}>
 							Last Modified By :
-							{/* {` ${badgeListData.lstModifiedBy}`} */}
-						</p>
+							{` ${badgeListData.lstModifiedBy}`}
+						</p> */}
 					</div>
 				)}
 				{/* <p className={styles.text_styles}>
@@ -83,6 +83,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 											key={el.name}
 											control={control}
 											id={`${el.name}_input`}
+											disabled={!isEmpty(badgeListData) && el.name === 'condition'}
 										/>
 									</div>
 
