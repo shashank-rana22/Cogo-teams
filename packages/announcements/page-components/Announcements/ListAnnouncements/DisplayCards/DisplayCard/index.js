@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Accordion, Button, Modal } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
@@ -7,6 +8,7 @@ import React, { useState } from 'react';
 
 import Preview from '../../../CreateAnnouncement/AnnouncementForm/Preview';
 
+import DisplayAttachments from './DisplayAttachments';
 import styles from './styles.module.css';
 
 function DisplayCard({
@@ -24,7 +26,7 @@ function DisplayCard({
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const options = [
-		{ label: 'Title', value: data?.title },
+		{ label: 'Title', value: startCase(data?.title) },
 		{ label: 'Created At', value: format(data?.created_at, 'dd MMM yyyy hh:mm a') },
 		{ label: 'Announcement Type', value: startCase(data?.announcement_type) },
 		{ label: 'Updated At', value: format(data?.updated_at, 'dd MMM yyyy hh:mm a') },
@@ -96,7 +98,10 @@ function DisplayCard({
 						title="Display Details"
 						className={styles.accordian}
 					>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+						<div className={styles.titles}>Displaying Documents:</div>
+						<div className={styles.document_container}>
+							<DisplayAttachments data={accordianData} />
+						</div>
 					</Accordion>
 				</div>
 			)}
