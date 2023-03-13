@@ -20,9 +20,9 @@ function RelatedQuestion({ tags = '', question_abstract = '' }) {
 
 	return (
 		<div style={{ paddingTop: '1.2%' }}>
-			{data?.list.length > 1 && (
+			{(data?.list || []).length > 1 ? (
 				<span className={styles.relatedquestion}>Related Questions</span>
-			)}
+			) : null}
 			<div>
 
 				{(data?.list || []).map((question) => (

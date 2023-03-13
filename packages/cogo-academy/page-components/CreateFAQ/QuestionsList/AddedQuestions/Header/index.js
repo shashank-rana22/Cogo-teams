@@ -17,6 +17,8 @@ function Header({
 	sortType,
 	setSortType,
 }) {
+	const handleClick = (previousValue) => setSortType(!previousValue);
+
 	return (
 		<div>
 			<div className={styles.container}>
@@ -32,13 +34,14 @@ function Header({
 				<div className={styles.filter_popover}>
 					<FilterPopover filters={filters} setFilters={setFilters} />
 				</div>
+
 				<div>
 					<Button
 						type="button"
 						themeType="secondary"
 						style={{ marginLeft: 8, height: '40px' }}
 						size="md"
-						onClick={() => setSortType(!sortType)}
+						onClick={() => handleClick(sortType)}
 					>
 						{activeList === 'requested' ? 'Sort By Last Created' : 'Sort By Last Updated'}
 						{sortType ? <IcMArrowDoubleDown /> : <IcMArrowDoubleUp />}
