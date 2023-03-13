@@ -11,9 +11,6 @@ function RelatedQuestion({ tags = '', question_abstract = '' }) {
 	const router = useRouter();
 	const { data } = useListFaqQuestions({ tagId, limit: 3 });
 
-	if ((data?.list || []).length === 0) {
-		return null;
-	}
 	const handleClick = (id) => {
 		router.push(
 			`/learning/faq/answer?id=${id}`,
@@ -23,9 +20,9 @@ function RelatedQuestion({ tags = '', question_abstract = '' }) {
 
 	return (
 		<div style={{ paddingTop: '1.2%' }}>
-			{data?.list.length > 1 && (
+			{(data?.list || []).length > 1 ? (
 				<span className={styles.relatedquestion}>Related Questions</span>
-			)}
+			) : null}
 			<div>
 
 				{(data?.list || []).map((question) => (
