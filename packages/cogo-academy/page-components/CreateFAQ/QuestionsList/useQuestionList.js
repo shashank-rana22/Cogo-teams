@@ -73,6 +73,7 @@ const addedQuestionsColumns = ({
 				{!['inactive', 'draft'].includes(activeList)
 					? (
 						<Button
+							type="button"
 							themeType="primary"
 							size="sm"
 							style={{ marginRight: 8 }}
@@ -83,6 +84,7 @@ const addedQuestionsColumns = ({
 					)
 					: null}
 				<Button
+					type="button"
 					themeType="secondary"
 					size="sm"
 					style={{ marginRight: 8 }}
@@ -100,7 +102,7 @@ const addedQuestionsColumns = ({
 									<h3>Are you sure you want to delete it?</h3>
 									{deleteitem?.question_abstract}
 								</section>
-								<Button onClick={() => deactivateQuestion(deleteitem?.id)}>OK</Button>
+								<Button type="button" onClick={() => deactivateQuestion(deleteitem?.id)}>OK</Button>
 							</div>
 						)}
 					>
@@ -154,6 +156,7 @@ const requestedQuestionsColumns = ({
 		accessor : (items) => (
 			<div className={styles.button_container}>
 				<Button
+					type="button"
 					themeType="primary"
 					size="sm"
 					style={{ marginRight: 8 }}

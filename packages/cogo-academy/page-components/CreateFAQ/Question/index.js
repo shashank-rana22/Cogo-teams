@@ -342,6 +342,7 @@ function CreateFAQ() {
 
 				<Modal.Footer>
 					<Button
+						type="button"
 						themeType="secondary"
 						style={{ marginRight: 8 }}
 						onClick={onClickCancelButton}
@@ -349,7 +350,7 @@ function CreateFAQ() {
 						CANCEL
 					</Button>
 
-					<Button onClick={handleCreate(createFaqComponent)}>
+					<Button type="button" onClick={handleCreate(createFaqComponent)}>
 						SUBMIT
 					</Button>
 				</Modal.Footer>
@@ -372,6 +373,7 @@ function CreateFAQ() {
 
 				<Modal.Footer>
 					<Button
+						type="button"
 						themeType="tertiary"
 						style={{ marginRight: 8 }}
 						onClick={() => setShowModalOnCancel(false)}
@@ -380,6 +382,7 @@ function CreateFAQ() {
 					</Button>
 
 					<Button
+						type="button"
 						onClick={onClickYesButton}
 					>
 						Yes
