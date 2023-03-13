@@ -1696,6 +1696,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'event',
 		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	supply_crm: [
 		{
