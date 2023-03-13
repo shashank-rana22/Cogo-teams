@@ -29,7 +29,7 @@
 		width: 100%;
 		height: 100%;
 		content: "";
-		border: 1px solid transparent;
+		border: 1px solid var(--temp-color);
 		border-bottom: none;
 		transform: rotateX(160deg) rotateY(0deg);
 	}
@@ -135,7 +135,7 @@
 .block_col {
 	display: flex;
 	flex-direction: column;
-	border: 1px transparent solid;
+	border: 1px var(--temp-color) solid;
 
 	&.other_charge_container {
 		flex: 1.2;
@@ -166,25 +166,25 @@
 
 	&.other_container {
 		flex: 1;
-		border-right: 1px solid transparent;
-		border-bottom: 1px solid transparent;
+		border-right: 1px solid var(--temp-color);
+		border-bottom: 1px solid var(--temp-color);
 	}
 
 	&.hereby_container {
 		flex: 1;
-		border-right: 1px solid transparent;
+		border-right: 1px solid var(--temp-color);
 	}
 
 	&.place_container {
 		flex: 0.67;
-		border-right: 1px solid transparent;
-		border-bottom: 1px solid transparent;
+		border-right: 1px solid var(--temp-color);
+		border-bottom: 1px solid var(--temp-color);
 	}
 
 	&.down_container_block {
 		flex: 0.644;
-		border-right: 1px solid transparent;
-		border-bottom: 1px solid transparent;
+		border-right: 1px solid var(--temp-color);
+		border-bottom: 1px solid var(--temp-color);
 	}
 }
 
@@ -199,24 +199,24 @@
 	&.signature_text {
 		flex: 0.3;
 		justify-content: center;
+		color: transparent;
 		border-style: dashed;
 		border-width: 1;
 		border-right: 0;
 		border-bottom: 0;
 		border-left: 0;
 		border-radius: 1;
-		color: transparent;
 	}
 
 	&.date_container {
 		flex: 0.4;
+		color: transparent;
 		border-style: dashed;
 		border-width: 1;
 		border-right: 0;
 		border-bottom: 0;
 		border-left: 0;
 		border-radius: 1;
-		color: transparent;
 	}
 
 	&.down_container {

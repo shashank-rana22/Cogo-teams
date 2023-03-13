@@ -12,23 +12,32 @@ interface Props {
 	formData?: NestedObj;
 	taskItem?: NestedObj;
 	chargeableWeight?: number;
+	whiteout?:boolean;
 }
 
 function ContainerDetails({
 	formData = {},
 	taskItem = {},
 	chargeableWeight,
+	whiteout = false,
 }:Props) {
 	const { dimension = [] } = formData;
+
+	let tempColor = '#333';
+	if (whiteout) {
+		tempColor = 'transparent';
+	}
 
 	return (
 		<div className={styles.container} style={{ pointerEvents: 'none' }}>
 			<div className={styles.flex}>
-				<div className={cl`
+				<div
+					className={cl`
 						${styles.block} 
 						${styles.block_flex_border} 
 						${styles.handling_information} 
 					`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
 					<div className={cl`
 						${styles.flex_col} 
@@ -36,7 +45,7 @@ function ContainerDetails({
 					`}
 					>
 
-						<p style={{ fontSize: 10, color: 'transparent' }}>Handling Information</p>
+						<p style={{ fontSize: 10, color: tempColor }}>Handling Information</p>
 						<div className={cl`
 							${styles.flex} 
 							${styles.flex_font_weight}
@@ -52,46 +61,56 @@ function ContainerDetails({
 						${styles.sci_handling_information} 
 					`}
 					>
-						<div className={cl`
+						<div
+							className={cl`
 							${styles.flex} 
 							${styles.sci_text_style}
 						`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
-							<p style={{ fontSize: 10, color: 'transparent' }}>SCI</p>
+							<p style={{ fontSize: 10, color: tempColor }}>SCI</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div className={styles.flex}>
-				<div className={cl`
+				<div
+					className={cl`
 						${styles.block} 
 						${styles.block_flex_border} 
 						${styles.container_section} 
 					`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex_col} 
 						${styles.border_right_solid}
 						${styles.block_a_container_section}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<div className={cl`
+						<div
+							className={cl`
 							${styles.flex} 
 							${styles.flex_border_solid}
 							${styles.flex_in_flex}
 							${styles.block_a_container_section_rcp}
 						`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
-							<p style={{ fontSize: 7, color: 'transparent' }}>No. of Pieces RCP</p>
+							<p style={{ fontSize: 7, color: tempColor }}>No. of Pieces RCP</p>
 						</div>
 
-						<div className={cl`
+						<div
+							className={cl`
 							${styles.flex} 
 							${styles.flex_font_weight}
 							${styles.flex_border_solid}
 							${styles.flex_in_flex_b}
 							${styles.flex_justify_end}
 						`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
 							<div className={cl`
 								${styles.flex} 
@@ -172,34 +191,40 @@ function ContainerDetails({
 						</div>
 					</div>
 
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex_col} 
 						${styles.border_right_solid}
 						${styles.block_b_container_section}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<div className={cl`
+						<div
+							className={cl`
 							${styles.flex} 
 							${styles.flex_border_solid}
 							${styles.flex_in_flex}
 							${styles.flex_justify_center}
 						`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
 							<div className={cl`
 								${styles.flex} 
 								${styles.grossweight_text}
 							`}
 							>
-								<p style={{ fontSize: 8, color: 'transparent' }}>Gross Weight</p>
+								<p style={{ fontSize: 8, color: tempColor }}>Gross Weight</p>
 							</div>
 						</div>
-						<div className={cl`
+						<div
+							className={cl`
 								${styles.flex} 
 								${styles.flex_font_weight}
 								${styles.flex_border_solid}
 								${styles.flex_in_flex_b}
 								${styles.flex_justify_end}
 							`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
 							<div className={cl`
 								${styles.flex} 
@@ -226,17 +251,21 @@ function ContainerDetails({
 						</div>
 					</div>
 
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex_col} 
 						${styles.border_right_solid}
 						${styles.block_c_container_section}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<div className={cl`
+						<div
+							className={cl`
 								${styles.flex} 
 								${styles.flex_border_solid}
 								${styles.flex_in_flex_empty_top}
 							`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
 							<p style={{ fontSize: 8 }} />
 						</div>
@@ -249,19 +278,23 @@ function ContainerDetails({
 							<p className={styles.font_style} style={{ fontSize: 13 }}>K</p>
 						</div>
 					</div>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex_row} 
 						${styles.block_dfhjl_container_section} 
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p style={{ fontSize: 11 }}> </p>
 					</div>
 
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex_col} 
 						${styles.border_right_solid}
 						${styles.block_egi_container_section}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<div className={cl`
 							${styles.flex_col} 
@@ -273,28 +306,32 @@ function ContainerDetails({
 								${styles.block_e_container_rateclass_section}
 							`}
 							>
-								<p style={{ fontSize: 7, color: 'transparent' }}>Rate Class</p>
+								<p style={{ fontSize: 7, color: tempColor }}>Rate Class</p>
 							</div>
 							<div className={cl`
 								${styles.flex_row} 
 								${styles.block_e_container_commodity_section} 
 							`}
 							>
-								<div className={cl`
+								<div
+									className={cl`
 									${styles.flex} 
 									${styles.flex_in_flex_empty_top}
 									${styles.block_e_container_commodity_empty_section}
 								`}
+									style={{ '--temp-color': tempColor } as React.CSSProperties}
 								/>
-								<div className={cl`
+								<div
+									className={cl`
 									${styles.flex} 
 									${styles.flex_justify_center}
 									${styles.flex_border_solid}
 									${styles.flex_in_flex_empty_bottom}
 									${styles.block_e_container_commodity_text_section}
 								`}
+									style={{ '--temp-color': tempColor } as React.CSSProperties}
 								>
-									<p style={{ fontSize: 7, color: 'transparent' }}>
+									<p style={{ fontSize: 7, color: tempColor }}>
 										Commodity
 										<div className={cl`
 											${styles.flex} 
@@ -313,13 +350,14 @@ function ContainerDetails({
 								${styles.block_e_container_bottom_section} 
 							`}
 						>
-							<div className={cl`
+							<div
+								className={cl`
 								${styles.flex} 
 								${styles.flex_font_weight}
 								${styles.flex_in_flex_empty_top}
 								${styles.block_e_container_q_section}
-
 							`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
 								<p style={{ fontSize: 13 }}>Q</p>
 							</div>
@@ -333,33 +371,39 @@ function ContainerDetails({
 							</div>
 						</div>
 					</div>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex_row} 
 						${styles.block_dfhjl_container_section} 
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p style={{ fontSize: 7 }}> </p>
 					</div>
 
-					<div className={cl`
+					<div
+						className={cl`
 							${styles.flex_col} 
 							${styles.border_right_solid}
 							${styles.block_egi_container_section}
 						`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<div className={cl`
+						<div
+							className={cl`
 								${styles.flex} 
 								${styles.flex_border_solid}
 								${styles.flex_justify_center}
 								${styles.flex_in_flex_empty_top}
 							`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
 							<div className={cl`
 								${styles.flex} 
 								${styles.chargeableweight_text}
 							`}
 							>
-								<p style={{ fontSize: 8, color: 'transparent' }}>
+								<p style={{ fontSize: 8, color: tempColor }}>
 									Chargeable
 									<div className={cl`
 										${styles.flex} 
@@ -389,33 +433,39 @@ function ContainerDetails({
 						</div>
 					</div>
 
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex_row} 
 						${styles.block_dfhjl_container_section} 
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p style={{ fontSize: 7 }}> </p>
 					</div>
 
-					<div className={cl`
+					<div
+						className={cl`
 							${styles.flex_col} 
 							${styles.border_right_solid}
 							${styles.block_egi_container_section}
 						`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<div className={cl`
+						<div
+							className={cl`
 								${styles.flex} 
 								${styles.flex_border_solid}
 								${styles.flex_justify_center}
 								${styles.flex_in_flex_empty_top}
 							`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
 							<div className={cl`
 								${styles.flex} 
 								${styles.grossweight_text}
 							`}
 							>
-								<p style={{ fontSize: 9, color: 'transparent' }}>Rate / Charge</p>
+								<p style={{ fontSize: 9, color: tempColor }}>Rate / Charge</p>
 							</div>
 						</div>
 						<div className={cl`
@@ -431,47 +481,55 @@ function ContainerDetails({
 								${styles.font_style}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{formData.ratePerKg}</p>
+								<p style={{ fontSize: 13 }}>{formData?.class === 'a' ? 'AS AGREED' : formData.ratePerKg}</p>
 							</div>
 						</div>
 					</div>
 
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex_row} 
 						${styles.block_dfhjl_container_section} 
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p style={{ fontSize: 7 }}> </p>
 					</div>
 
-					<div className={cl`
+					<div
+						className={cl`
 							${styles.flex_col} 
 							${styles.border_right_solid}
 							${styles.block_k_container_section}
 						`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<div className={cl`
+						<div
+							className={cl`
 								${styles.flex} 
 								${styles.flex_border_solid}
 								${styles.flex_in_flex}
 								${styles.flex_justify_center}
 							`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
 							<div className={cl`
 								${styles.flex} 
 								${styles.grossweight_text}
 							`}
 							>
-								<p style={{ fontSize: 9, color: 'transparent' }}>Total</p>
+								<p style={{ fontSize: 9, color: tempColor }}>Total</p>
 							</div>
 						</div>
-						<div className={cl`
+						<div
+							className={cl`
 								${styles.flex} 
 								${styles.flex_font_weight}
 								${styles.flex_border_solid}
 								${styles.flex_in_flex_b}
 								${styles.flex_justify_end}
 							`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
 							<div className={cl`
 								${styles.flex} 
@@ -480,7 +538,7 @@ function ContainerDetails({
 							`}
 							>
 								<p style={{ fontSize: 13 }}>
-									{((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
+									{formData?.class === 'a' ? 'AS AGREED' : ((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
 								</p>
 							</div>
 						</div>
@@ -497,15 +555,17 @@ function ContainerDetails({
 								${styles.font_style}
 							`}
 							>
-								{((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
+								{formData?.class === 'a' ? 'AS AGREED' : ((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
 							</div>
 						</div>
 					</div>
 
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex_row} 
 						${styles.block_dfhjl_container_section} 
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p style={{ fontSize: 7 }}> </p>
 					</div>
@@ -515,19 +575,21 @@ function ContainerDetails({
 							${styles.block_m_container_section}
 						`}
 					>
-						<div className={cl`
+						<div
+							className={cl`
 								${styles.flex} 
 								${styles.flex_border_solid}
 								${styles.flex_justify_center}
 								${styles.flex_in_flex_empty_top}
 							`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
 							<div className={cl`
 								${styles.flex} 
 								${styles.commodity_text_style}
 							`}
 							>
-								<p style={{ fontSize: 9, color: 'transparent' }}>
+								<p style={{ fontSize: 9, color: tempColor }}>
 									Nature and Quantity of Goods
 									<div className={cl`
 										${styles.flex} 

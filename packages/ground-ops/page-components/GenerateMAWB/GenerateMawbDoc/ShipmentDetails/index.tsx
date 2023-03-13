@@ -10,28 +10,37 @@ interface NestedObj {
 interface Props {
 	formData?: NestedObj;
 	taskItem?: NestedObj;
+	whiteout?:boolean;
 }
 
-function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
+function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Props) {
+	let tempColor = '#333';
+	if (whiteout) {
+		tempColor = 'transparent';
+	}
 	return (
 		<div className={styles.container} style={{ pointerEvents: 'none' }}>
 			<div className={styles.flex}>
-				<div className={cl`
+				<div
+					className={cl`
 					${styles.block_col} 
 					${styles.blockcol_in_flex}
 					${styles.blockcol_minheight}
 					${styles.carrier_information}
 				`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.flex_padding_left} 
 						${styles.flex_border_solid} 
 						${styles.flex_in_flex_b} 
 						${styles.input_issuing_agent} 
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 10, color: 'transparent' }}>Issuing Carrier&apos;s Agent Name and City</p>
+						<p style={{ fontSize: 10, color: tempColor }}>Issuing Carrier&apos;s Agent Name and City</p>
 						<div className={cl`
 						${styles.flex} 
 						${styles.flex_font_bold} 
@@ -45,22 +54,26 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							</div>
 						</div>
 					</div>
-					<div className={cl`
-					${styles.block_row} 
-					${styles.blockrow_left_padding}
-					${styles.blockrow_border}
-					${styles.agent_iata_accounting_info}
-				`}
+					<div
+						className={cl`
+							${styles.block_row} 
+							${styles.blockrow_left_padding}
+							${styles.blockrow_border}
+							${styles.agent_iata_accounting_info}
+						`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<div className={cl`
-						${styles.flex} 
-						${styles.flex_border_right} 
-						${styles.flex_in_flex} 
-					`}
+						<div
+							className={cl`
+								${styles.flex} 
+								${styles.flex_border_right} 
+								${styles.flex_in_flex} 
+							`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
 							<p style={{ fontSize: 10 }}>
 								{' '}
-								<span style={{ color: 'transparent' }}>Agent&apos;s IATA Code</span>
+								<span style={{ color: tempColor }}>Agent&apos;s IATA Code</span>
 								<div
 									className={cl`
 									${styles.flex} 
@@ -80,15 +93,17 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.flex_in_flex}
 					`}
 						>
-							<p style={{ fontSize: 10, color: 'transparent' }}> Account No.</p>
+							<p style={{ fontSize: 10, color: tempColor }}> Account No.</p>
 						</div>
 					</div>
 				</div>
-				<div className={cl`
-					${styles.block_row} 
-					${styles.agent_iata_accounting_info}
-					${styles.accounting_information}
-				`}
+				<div
+					className={cl`
+						${styles.block_row} 
+						${styles.agent_iata_accounting_info}
+						${styles.accounting_information}
+					`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
 					<div className={cl`
 						${styles.flex} 
@@ -96,7 +111,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.flex_in_flex}
 					`}
 					>
-						<p style={{ fontSize: 10, color: 'transparent' }}>Accounting Information</p>
+						<p style={{ fontSize: 10, color: tempColor }}>Accounting Information</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -113,18 +128,22 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 			</div>
 
 			<div className={styles.flex}>
-				<div className={cl`
+				<div
+					className={cl`
 					${styles.block_col}
 					${styles.blockcol_in_flex}
 				`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
-					<div className={cl`
-					${styles.block}
-					${styles.departure_airport}
-				`}
+					<div
+						className={cl`
+							${styles.block}
+							${styles.departure_airport}
+						`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p style={{ fontSize: 10 }}>
-							<span style={{ color: 'transparent' }}>
+							<span style={{ color: tempColor }}>
 								Airport of Departure (Addr. of First Carrier) and Requested
 								Routing
 
@@ -145,17 +164,21 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						</p>
 					</div>
 				</div>
-				<div className={cl`
+				<div
+					className={cl`
 					${styles.block_col}
 					${styles.blockcol_in_flex}
 					${styles.referrence_block}
 				`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
-					<div className={cl`
+					<div
+						className={cl`
 							${styles.block_col}
 							${styles.blockcol_border}
 							${styles.referrence_optional}
 						`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<div className={cl`
 								${styles.flex_row}
@@ -172,21 +195,23 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.flex_padding_left}
 				`}
 								>
-									<p style={{ fontSize: 9, color: 'transparent' }}>Reference Number</p>
+									<p style={{ fontSize: 9, color: tempColor }}>Reference Number</p>
 								</div>
 							</div>
-							<div className={cl`
-					${styles.flex}
-					${styles.flex_in_flex}
-					${styles.trapezium}
-				`}
+							<div
+								className={cl`
+									${styles.flex}
+									${styles.flex_in_flex}
+									${styles.trapezium}
+								`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
 								<div className={cl`
 					${styles.flex}
 					${styles.optional_shipping_text}
 				`}
 								/>
-								<p style={{ fontSize: 8, color: 'transparent' }}>Optional Shipping Information</p>
+								<p style={{ fontSize: 8, color: tempColor }}>Optional Shipping Information</p>
 							</div>
 							<div className={cl`
 					${styles.flex}
@@ -201,19 +226,23 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.referrence_optional_bottom}
 				`}
 						>
-							<div className={cl`
-					${styles.flex}
-					${styles.flex_border_right}
-					${styles.flex_in_flex_c}
-				`}
+							<div
+								className={cl`
+								${styles.flex}
+								${styles.flex_border_right}
+								${styles.flex_in_flex_c}
+							`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
 								<p style={{ fontSize: 9 }} />
 							</div>
-							<div className={cl`
-					${styles.flex}
-					${styles.flex_border_right}
-					${styles.referrence_optional_bottom_middle}
-				`}
+							<div
+								className={cl`
+								${styles.flex}
+								${styles.flex_border_right}
+								${styles.referrence_optional_bottom_middle}
+							`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
 								<p style={{ fontSize: 9 }} />
 							</div>
@@ -230,34 +259,42 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 			</div>
 
 			<div className={styles.flex}>
-				<div className={cl`
+				<div
+					className={cl`
 					${styles.block_col}
 					${styles.blockcol_in_flex}
 					${styles.routing_block}
 				`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
-					<div className={cl`
-					${styles.block_row} 
-					${styles.blockrow_border}
-					${styles.currency_declared_value_to_by_flight}
-				`}
-					>
-						<div className={cl`
-					${styles.block_row} 
-					${styles.blockrow_left_padding}
-					${styles.blockrow_border}
-					${styles.blockrow_in_flex}
-					${styles.to_by_first_carrier}
-				`}
-						>
-							<div className={cl`
-						${styles.flex} 
-						${styles.flex_border_right}
-						${styles.destination_portcode}
+					<div
+						className={cl`
+						${styles.block_row} 
+						${styles.blockrow_border}
+						${styles.currency_declared_value_to_by_flight}
 					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
+					>
+						<div
+							className={cl`
+							${styles.block_row} 
+							${styles.blockrow_left_padding}
+							${styles.blockrow_border}
+							${styles.blockrow_in_flex}
+							${styles.to_by_first_carrier}
+						`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
+						>
+							<div
+								className={cl`
+									${styles.flex} 
+									${styles.flex_border_right}
+									${styles.destination_portcode}
+								`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
 								<p style={{ fontSize: 8 }}>
-									<span style={{ color: 'transparent' }}>To</span>
+									<span style={{ color: tempColor }}>To</span>
 									<div className={cl`
 						${styles.flex} 
 						${styles.flex_font_bold}
@@ -285,7 +322,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 									>
 										<p style={{ fontSize: 9 }}>
-											<span style={{ color: 'transparent' }}>By First Carrier</span>
+											<span style={{ color: tempColor }}>By First Carrier</span>
 											{' '}
 											<div className={cl`
 													${styles.flex} 
@@ -304,15 +341,17 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.routing_and_destination}
 					`}
 								>
-									<div className={cl`
+									<div
+										className={cl`
 										${styles.flex} 
 										${styles.trapezium}
 									`}
+										style={{ '--temp-color': tempColor } as React.CSSProperties}
 									>
 										<p style={{
 											fontSize : 9,
 											padding  : '0 4px',
-											color    : 'transparent',
+											color    : tempColor,
 										}}
 										>
 											Routing and Destination
@@ -322,21 +361,25 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 								</div>
 							</div>
 						</div>
-						<div className={cl`
-						${styles.block_row} 
-						${styles.blockrow_border}
-						${styles.to_by_to}
-					`}
+						<div
+							className={cl`
+							${styles.block_row} 
+							${styles.blockrow_border}
+							${styles.to_by_to}
+						`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
-							<div className={cl`
-						${styles.flex} 
-						${styles.flex_border_right}
-						${styles.flex_padding_left}
-						${styles.to_by}
-					`}
+							<div
+								className={cl`
+									${styles.flex} 
+									${styles.flex_border_right}
+									${styles.flex_padding_left}
+									${styles.to_by}
+								`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
 								<p style={{ fontSize: 9 }}>
-									<span style={{ color: 'transparent' }}>to</span>
+									<span style={{ color: tempColor }}>to</span>
 									<div className={cl`
 										${styles.flex} 
 										${styles.flex_font_bold}
@@ -348,15 +391,17 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 									</div>
 								</p>
 							</div>
-							<div className={cl`
-						${styles.flex} 
-						${styles.flex_border_right}
-						${styles.flex_padding_left}
-						${styles.to_by}
-					`}
+							<div
+								className={cl`
+								${styles.flex} 
+								${styles.flex_border_right}
+								${styles.flex_padding_left}
+								${styles.to_by}
+							`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
 								<p style={{ fontSize: 9 }}>
-									<span style={{ color: 'transparent' }}>by</span>
+									<span style={{ color: tempColor }}>by</span>
 									<div className={cl`
 										${styles.flex} 
 										${styles.flex_font_bold}
@@ -368,15 +413,17 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 									</div>
 								</p>
 							</div>
-							<div className={cl`
-						${styles.flex} 
-						${styles.flex_border_right}
-						${styles.flex_padding_left}
-						${styles.to_by}
-					`}
+							<div
+								className={cl`
+								${styles.flex} 
+								${styles.flex_border_right}
+								${styles.flex_padding_left}
+								${styles.to_by}
+							`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
 								<p style={{ fontSize: 9 }}>
-									<span style={{ color: 'transparent' }}>to</span>
+									<span style={{ color: tempColor }}>to</span>
 									<div className={cl`
 										${styles.flex} 
 										${styles.flex_font_bold}
@@ -395,7 +442,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 							>
 								<p style={{ fontSize: 9 }}>
-									<span style={{ color: 'transparent' }}>by</span>
+									<span style={{ color: tempColor }}>by</span>
 									<div className={cl`
 										${styles.flex} 
 										${styles.flex_font_bold}
@@ -416,33 +463,39 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							${styles.blockrow_border}
 							${styles.currency_declared_value_to_by_flight}
 						`}
-					style={{ borderBottom: '1px solid transparent' }}
+					style={{ '--temp-color': tempColor, borderBottom: `1px solid ${tempColor}` } as React.CSSProperties}
 				>
-					<div className={cl`
-					${styles.flex} 
-					${styles.flex_border_right}
-					${styles.flex_in_flex_c}
-					${styles.currency_section}
-				`}
+					<div
+						className={cl`
+						${styles.flex} 
+						${styles.flex_border_right}
+						${styles.flex_in_flex_c}
+						${styles.currency_section}
+					`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<div className={cl`
-					${styles.flex} 
-					${styles.flex_border_right}
-					${styles.currency_top_chgs}
-				`}
+						<div
+							className={cl`
+								${styles.flex} 
+								${styles.flex_border_right}
+								${styles.currency_top_chgs}
+							`}
+							style={{ '--temp-color': tempColor } as React.CSSProperties}
 						>
-							<div className={cl`
-					${styles.flex_col} 
-					${styles.flexcol_border_right}
-					${styles.currency}
-				`}
+							<div
+								className={cl`
+									${styles.flex_col} 
+									${styles.flexcol_border_right}
+									${styles.currency}
+								`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
 								<div className={cl`
 					${styles.flex} 
 					${styles.currency_top_chgs}
 				`}
 								>
-									<p style={{ fontSize: 9, color: 'transparent' }}>Currency</p>
+									<p style={{ fontSize: 9, color: tempColor }}>Currency</p>
 								</div>
 								<div className={cl`
 					${styles.flex} 
@@ -459,7 +512,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.chgs}
 				`}
 							>
-								<p style={{ fontSize: 8, color: 'transparent' }}>CHGS</p>
+								<p style={{ fontSize: 8, color: tempColor }}>CHGS</p>
 							</div>
 						</div>
 						<div className={cl`
@@ -467,31 +520,37 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.flex_in_flex_d}
 				`}
 						>
-							<div className={cl`
-					${styles.flex_col} 
-					${styles.flexcol_border_right}
-					${styles.flexcol_in_flex}
-				`}
+							<div
+								className={cl`
+									${styles.flex_col} 
+									${styles.flexcol_border_right}
+									${styles.flexcol_in_flex}
+								`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
-								<div className={cl`
-					${styles.flex} 
-					${styles.flex_border_solid}
-					${styles.optional_shipping_text}
-					${styles.wtval_top}
-				`}
+								<div
+									className={cl`
+										${styles.flex} 
+										${styles.flex_border_solid}
+										${styles.optional_shipping_text}
+										${styles.wtval_top}
+									`}
+									style={{ '--temp-color': tempColor } as React.CSSProperties}
 								>
-									<p style={{ fontSize: 9, color: 'transparent' }}>WT/VAL</p>
+									<p style={{ fontSize: 9, color: tempColor }}>WT/VAL</p>
 								</div>
 								<div className={cl`
 					${styles.flex_row} 
 					${styles.requested_wtval_other}
 				`}
 								>
-									<div className={cl`
-					${styles.flex_col} 
-					${styles.flexcol_border_right}
-					${styles.flexcol_in_flex}
-				`}
+									<div
+										className={cl`
+											${styles.flex_col} 
+											${styles.flexcol_border_right}
+											${styles.flexcol_in_flex}
+										`}
+										style={{ '--temp-color': tempColor } as React.CSSProperties}
 									>
 										<div className={cl`
 					${styles.flex} 
@@ -500,7 +559,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.wtval_other_bottom_left_ppd_coll}
 				`}
 										>
-											<p style={{ margin: '2px 0px', fontSize: 7, color: 'transparent' }}>
+											<p style={{ margin: '2px 0px', fontSize: 7, color: tempColor }}>
 												PPD
 											</p>
 										</div>
@@ -511,7 +570,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 12, color: 'transparent' }}>P</p>
+											<p style={{ fontSize: 12, color: tempColor }}>P</p>
 										</div>
 									</div>
 									<div className={cl`
@@ -526,7 +585,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.flex_in_flex}
 				`}
 										>
-											<p style={{ margin: '2px 0px', fontSize: 7, color: 'transparent' }}>
+											<p style={{ margin: '2px 0px', fontSize: 7, color: tempColor }}>
 												COLL
 											</p>
 										</div>
@@ -547,14 +606,16 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.flexcol_in_flex}
 				`}
 							>
-								<div className={cl`
-					${styles.flex} 
-					${styles.flex_border_solid}
-					${styles.optional_shipping_text}
-					${styles.other_top}
-				`}
+								<div
+									className={cl`
+										${styles.flex} 
+										${styles.flex_border_solid}
+										${styles.optional_shipping_text}
+										${styles.other_top}
+									`}
+									style={{ '--temp-color': tempColor } as React.CSSProperties}
 								>
-									<p style={{ fontSize: 9, color: 'transparent' }}>Other</p>
+									<p style={{ fontSize: 9, color: tempColor }}>Other</p>
 								</div>
 								<div className={cl`
 					${styles.flex_row} 
@@ -562,11 +623,13 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 				`}
 								>
 
-									<div className={cl`
-					${styles.flex_col} 
-					${styles.flexcol_border_right}
-					${styles.flexcol_in_flex}
-				`}
+									<div
+										className={cl`
+											${styles.flex_col} 
+											${styles.flexcol_border_right}
+											${styles.flexcol_in_flex}
+										`}
+										style={{ '--temp-color': tempColor } as React.CSSProperties}
 									>
 
 										<div className={cl`
@@ -576,7 +639,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.wtval_other_bottom_left_ppd_coll}
 				`}
 										>
-											<p style={{ margin: '2px 0px', fontSize: 7, color: 'transparent' }}>
+											<p style={{ margin: '2px 0px', fontSize: 7, color: tempColor }}>
 												PPD
 											</p>
 										</div>
@@ -587,7 +650,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 12, color: 'transparent' }}>P</p>
+											<p style={{ fontSize: 12, color: tempColor }}>P</p>
 										</div>
 									</div>
 									<div className={cl`
@@ -603,7 +666,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 				`}
 										>
 
-											<p style={{ margin: '2px 0px', fontSize: 7, color: 'transparent' }}>
+											<p style={{ margin: '2px 0px', fontSize: 7, color: tempColor }}>
 												COLL
 											</p>
 										</div>
@@ -621,39 +684,43 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							</div>
 						</div>
 					</div>
-					<div className={cl`
-					${styles.flex} 
-					${styles.flex_border_right}
-					${styles.declared_carriage}
-					${styles.declared_carriage_box}
-				`}
+					<div
+						className={cl`
+							${styles.flex} 
+							${styles.flex_border_right}
+							${styles.declared_carriage}
+							${styles.declared_carriage_box}
+						`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 8.3, color: 'transparent' }}>Declared Value for Carriage</p>
+						<p style={{ fontSize: 8.3, color: tempColor }}>Declared Value for Carriage</p>
 						{formData.declaredValueForCarriage}
 					</div>
-					<div className={cl`
-					${styles.flex} 
-					${styles.flex_padding_left}
-					${styles.flex_in_flex_c}
-					${styles.flex_border_right}
-				`}
+					<div
+						className={cl`
+							${styles.flex} 
+							${styles.flex_padding_left}
+							${styles.flex_in_flex_c}
+							${styles.flex_border_right}
+						`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<div className={styles.flex_col}>
-							<p style={{ fontSize: 8.3, color: 'transparent' }}>Declared Value for Customs</p>
+							<p style={{ fontSize: 8.3, color: tempColor }}>Declared Value for Customs</p>
 							{formData.valueForCustom}
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div className={styles.flex} style={{ borderBottom: '1px solid transparent' }}>
+			<div className={styles.flex} style={{ borderBottom: `1px solid ${tempColor}` }}>
 				<div
 					className={cl`
 						${styles.block_row} 
 						${styles.blockrow_border}
 						${styles.blockrow_in_flex}
 					`}
-					style={{ borderLeft: '1px solid transparent' }}
+					style={{ '--temp-color': tempColor, borderLeft: `1px solid ${tempColor}` } as React.CSSProperties}
 				>
 					<div
 						className={cl`
@@ -661,12 +728,11 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.flex_justify_center}
 						${styles.flex_border_right}
 						${styles.flex_in_flex}
-						
 					`}
-						style={{ paddingLeft: 5, paddingRight: 5 }}
+						style={{ '--temp-color': tempColor, paddingLeft: 5, paddingRight: 5 } as React.CSSProperties}
 					>
 						<p style={{ fontSize: 9 }}>
-							<span style={{ color: 'transparent' }}>Airport of Destination</span>
+							<span style={{ color: tempColor }}>Airport of Destination</span>
 							{' '}
 							<div className={cl`
 						${styles.flex} 
@@ -684,11 +750,13 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							</div>
 						</p>
 					</div>
-					<div className={cl`
+					<div
+						className={cl`
 							${styles.block_col} 
 							${styles.blockcol_in_flex}
 							${styles.blockcol_border}
 						`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<div className={cl`
 								${styles.flex_row} 
@@ -701,18 +769,20 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 									${styles.requested_flight_date_top_left}
 								`}
 							/>
-							<div className={cl`
+							<div
+								className={cl`
 									${styles.flex} 
 									${styles.flex_in_flex}
 									${styles.trapezium}
 								`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
 								<div className={cl`
 										${styles.flex} 
 										${styles.requested_flight_date_text}
 									`}
 								>
-									<p style={{ fontSize: 9, color: 'transparent' }}>Requested Flight/Date</p>
+									<p style={{ fontSize: 9, color: tempColor }}>Requested Flight/Date</p>
 								</div>
 							</div>
 							<div className={cl`
@@ -726,11 +796,13 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 									${styles.requested_wtval_other}
 								`}
 						>
-							<div className={cl`
+							<div
+								className={cl`
 										${styles.flex}
 										${styles.flex_border_right}
 										${styles.flex_in_flex}
 									`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							/>
 							<div className={cl`
 										${styles.flex} 
@@ -742,19 +814,24 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					</div>
 
 				</div>
-				<div className={cl`
+				<div
+					className={cl`
 							${styles.block_row} 
 							${styles.blockrow_border}
 							${styles.blockrow_in_flex}
 						`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
 					<div
 						className={cl`
-					${styles.flex_col} 
-					${styles.flexcol_border_right}
-					${styles.amount_of_insurance}
-				`}
-						style={{ borderLeft: '1px solid transparent' }}
+							${styles.flex_col} 
+							${styles.flexcol_border_right}
+							${styles.amount_of_insurance}
+						`}
+						style={{
+							'--temp-color' : tempColor,
+							borderLeft     : `1px solid ${tempColor}`,
+						} as React.CSSProperties}
 					>
 						<div className={cl`
 					${styles.flex} 
@@ -762,7 +839,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.amount_of_insurance_top}
 				`}
 						>
-							<p style={{ fontSize: 9, color: 'transparent' }}>Amount of Insurance</p>
+							<p style={{ fontSize: 9, color: tempColor }}>Amount of Insurance</p>
 						</div>
 						<div className={cl`
 					${styles.flex} 
@@ -774,13 +851,15 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							<p style={{ fontSize: 15 }}>NIL</p>
 						</div>
 					</div>
-					<div className={cl`
-					${styles.flex} 
-					${styles.flex_padding_left}
-					${styles.insurance}
-				`}
+					<div
+						className={cl`
+							${styles.flex} 
+							${styles.flex_padding_left}
+							${styles.insurance}
+						`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 8, color: 'transparent' }} className="text">
+						<p style={{ fontSize: 8, color: tempColor }} className="text">
 							INSURANCE - If carrier offers insurance, and such insurance is
 							requested in accordance with the conditions thereof, indicate
 							amount to be insured in figures in box marked “Amount of

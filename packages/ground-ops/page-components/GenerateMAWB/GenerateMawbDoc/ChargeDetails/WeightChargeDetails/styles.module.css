@@ -21,7 +21,7 @@
 		width: 100%;
 		height: 100%;
 		content: "";
-		border: 1px solid transparent;
+		border: 1px solid var(--temp-color);
 		border-bottom: none;
 		transform: rotateX(160deg) rotateY(0deg);
 	}
@@ -35,11 +35,11 @@
 	}
 
 	&.common_border_right {
-		border-right: 1px solid transparent;
+		border-right: 1px solid var(--temp-color);
 	}
 
 	&.common_border_bottom {
-		border-bottom: 1px solid transparent;
+		border-bottom: 1px solid var(--temp-color);
 	}
 
 	&.prepaid_sub_devision {
@@ -195,7 +195,7 @@
 .block_col {
 	display: flex;
 	flex-direction: column;
-	border: 1px transparent solid;
+	border: 1px var(--temp-color) solid;
 
 	&.weight_charge_container {
 		flex: 0.8;
@@ -216,11 +216,11 @@
 	}
 
 	&.common_border_bottom {
-		border-bottom: 1px solid transparent;
+		border-bottom: 1px solid var(--temp-color);
 	}
 
 	&.common_border_right {
-		border-right: 1px solid transparent;
+		border-right: 1px solid var(--temp-color);
 	}
 }
 
@@ -242,7 +242,7 @@
 
 	&.total_prepaid_container {
 		flex: 1;
-		border-bottom: 1px solid transparent;
+		border-bottom: 1px solid var(--temp-color);
 	}
 
 	&.destination_container {
