@@ -36,7 +36,7 @@ function ChargeDetails({
 				${styles.charge_container} 
 			`}
 			>
-				<WeightChargeDetails data={data} whiteout={whiteout} />
+				<WeightChargeDetails formData={formData} data={data} whiteout={whiteout} />
 				<OtherChargeDetails
 					taskItem={taskItem}
 					formData={formData}

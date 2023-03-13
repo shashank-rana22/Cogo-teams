@@ -8,11 +8,12 @@ interface NestedObj {
 }
 
 interface Props {
+	formData?: NestedObj;
 	data?:NestedObj;
 	whiteout?:boolean;
 }
 
-function WeightChargeDetails({ data = {}, whiteout = false }:Props) {
+function WeightChargeDetails({ data = {}, formData = {}, whiteout = false }:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';
@@ -108,7 +109,7 @@ function WeightChargeDetails({ data = {}, whiteout = false }:Props) {
 						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p className={styles.font_style} style={{ fontSize: 13 }}>
-							{(data?.totalCharge || 0.0).toFixed(2)}
+							{formData?.class === 'a' ? 'AS AGREED' : (data?.totalCharge || 0.0).toFixed(2)}
 
 						</p>
 					</div>
@@ -278,7 +279,7 @@ function WeightChargeDetails({ data = {}, whiteout = false }:Props) {
 						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p className={styles.font_style} style={{ fontSize: 13 }}>
-							{(data?.agentCharge || 0.0).toFixed(2)}
+							{formData?.class === 'a' ? 'AS AGREED' : (data?.agentCharge || 0.0).toFixed(2)}
 
 						</p>
 					</div>
@@ -342,7 +343,7 @@ function WeightChargeDetails({ data = {}, whiteout = false }:Props) {
 						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p className={styles.font_style} style={{ fontSize: 13 }}>
-							{(data?.carrierCharge || 0.0).toFixed(2)}
+							{formData?.class === 'a' ? 'AS AGREED' : (data?.carrierCharge || 0.0).toFixed(2)}
 
 						</p>
 					</div>
@@ -421,7 +422,7 @@ function WeightChargeDetails({ data = {}, whiteout = false }:Props) {
 					`}
 					>
 						<p className={styles.font_style} style={{ fontSize: 13 }}>
-							{(data?.finalCharge || 0.0).toFixed(2)}
+							{formData?.class === 'a' ? 'AS AGREED' : (data?.finalCharge || 0.0).toFixed(2)}
 
 						</p>
 					</div>

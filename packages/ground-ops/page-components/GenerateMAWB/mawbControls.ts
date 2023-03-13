@@ -1,6 +1,6 @@
 import currencies from './Helpers/currencies';
 
-const mawbControls = () => ({
+const mawbControls = (disableClass) => ({
 	basic: [
 		{
 			name         : 'shipperName',
@@ -262,6 +262,7 @@ const mawbControls = () => ({
 			options     : [
 				{ value: 'q', label: 'Q' },
 				{ value: 'a', label: 'A' },
+				{ value: 'm', label: 'M' },
 			],
 			className : 'primary lg',
 			span      : 2,
@@ -291,8 +292,9 @@ const mawbControls = () => ({
 			span         : 5,
 			placeholder  : 'Rate per Kg',
 			rules        : {
-				required: 'Rate is Required',
+				required: disableClass,
 			},
+			disabled: disableClass,
 		},
 		{
 			name        : 'currency',

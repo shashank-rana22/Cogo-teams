@@ -481,7 +481,7 @@ function ContainerDetails({
 								${styles.font_style}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{formData.ratePerKg}</p>
+								<p style={{ fontSize: 13 }}>{formData?.class === 'a' ? 'AS AGREED' : formData.ratePerKg}</p>
 							</div>
 						</div>
 					</div>
@@ -538,7 +538,7 @@ function ContainerDetails({
 							`}
 							>
 								<p style={{ fontSize: 13 }}>
-									{((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
+									{formData?.class === 'a' ? 'AS AGREED' : ((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
 								</p>
 							</div>
 						</div>
@@ -555,7 +555,7 @@ function ContainerDetails({
 								${styles.font_style}
 							`}
 							>
-								{((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
+								{formData?.class === 'a' ? 'AS AGREED' : ((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
 							</div>
 						</div>
 					</div>

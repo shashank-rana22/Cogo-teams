@@ -50,11 +50,11 @@ function GenerateMAWB({
 
 	const [value, onChange] = useState('manual');
 
-	const fields = mawbControls();
+	const [disableClass, setDisableClass] = useState(false);
+
+	const fields = mawbControls(disableClass);
 
 	const { packingData, packingList } = usePackingList();
-
-	console.log('packingData', packingData);
 
 	const onSubmit = () => {
 		setBack(true);
@@ -90,7 +90,12 @@ function GenerateMAWB({
 
 	useEffect(() => {
 		setValue('amount', ((chargeableWeight * formValues.ratePerKg) || 0.0).toFixed(2));
-	}, [formValues.chargeableWeight, formValues.ratePerKg]);
+		if (formValues.class === 'a') {
+			setDisableClass(true);
+		} else {
+			setDisableClass(false);
+		}
+	}, [formValues.chargeableWeight, formValues.ratePerKg, formValues.class]);
 
 	useEffect(() => {
 		packingList({ item });
@@ -102,7 +107,8 @@ function GenerateMAWB({
 		setValue('city', 'NEW DELHI');
 		setValue('place', 'NEW DELHI');
 		setValue('class', 'q');
-		setValue('commodity', `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
+		setValue('commodity', edit ? `${taskItem.commodity || ''}`
+			: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
 	}, []);
 
 	useEffect(() => {
@@ -124,7 +130,7 @@ function GenerateMAWB({
 			}
 			totalPackage += Number(dimensionObj.packages);
 		});
-		setValue('volumetricWeight', (((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
+		setValue('volumetricWeight', Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
 		setValue('packagesCount', totalPackage || taskItem.packagesCount);
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 

@@ -160,8 +160,6 @@ function GenerateMawb({
 		chargeableWeight * formData.ratePerKg + agentCharge + carrierCharge,
 	};
 
-	console.log('whiteout', whiteout);
-
 	return (
 		<div className={styles.flex_col}>
 
