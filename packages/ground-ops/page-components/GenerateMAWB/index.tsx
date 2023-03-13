@@ -19,7 +19,7 @@ const items = [
 
 const options = [
 	{ name: 'Add Manually', value: 'manual', label: 'Add Manually' },
-	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
+	// { name: 'Upload Document', value: 'upload', label: 'Upload Document' },
 ];
 
 interface NestedObj {
@@ -89,6 +89,10 @@ function GenerateMAWB({
 	}, [formValues.volumetricWeight, formValues.weight, formValues.packagesCount]);
 
 	useEffect(() => {
+		setValue('amount', ((chargeableWeight * formValues.ratePerKg) || 0.0).toFixed(2));
+	}, [formValues.chargeableWeight, formValues.ratePerKg]);
+
+	useEffect(() => {
 		packingList({ item });
 		finalFields.forEach((c:any) => {
 			setValue(c.name, taskItem[c.name]);
@@ -103,6 +107,7 @@ function GenerateMAWB({
 
 	useEffect(() => {
 		let totalVolume:number = 0;
+		let totalPackage:number = 0;
 		(formValues.dimension || []).forEach((dimensionObj) => {
 			if (dimensionObj.unit === 'inch') {
 				totalVolume
@@ -117,8 +122,10 @@ function GenerateMAWB({
 				* Number(dimensionObj.height)
 				* Number(dimensionObj.packages);
 			}
+			totalPackage += Number(dimensionObj.packages);
 		});
 		setValue('volumetricWeight', (((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
+		setValue('packagesCount', totalPackage || taskItem.packagesCount);
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 
 	return (

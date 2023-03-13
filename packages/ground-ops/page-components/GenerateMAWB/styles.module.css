@@ -33,7 +33,7 @@
 }
 
 .packing_button {
-	min-width: 20%;
+	max-width: 20%;
 	margin-left: 12px;
 }
 

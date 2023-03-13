@@ -3,9 +3,9 @@ import { useRequestAir } from '@cogoport/request';
 const usePackingList = () => {
 	const [{ data = {} }, trigger] = useRequestAir(
 		{
-			url    : '/air-coe/document/list',
-			method : 'get',
-			// authKey : 'get_air_coe_pending_tasks_list',92ui\
+			url     : '/air-coe/document/list',
+			method  : 'get',
+			authKey : 'get_air_coe_documents_list',
 		},
 		{ manual: true },
 	);

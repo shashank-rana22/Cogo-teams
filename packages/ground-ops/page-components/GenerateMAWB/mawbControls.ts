@@ -283,6 +283,30 @@ const mawbControls = () => ({
 			disabled: true,
 		},
 		{
+			name         : 'ratePerKg',
+			type         : 'number',
+			className    : 'primary lg',
+			label        : 'Rate per Kg',
+			showOptional : false,
+			span         : 5,
+			placeholder  : 'Rate per Kg',
+			rules        : {
+				required: 'Rate is Required',
+			},
+		},
+		{
+			name        : 'currency',
+			placeholder : 'Select Currency',
+			type        : 'select',
+			span        : 5,
+			label       : 'Currency',
+			options     : currencies,
+			className   : 'primary lg',
+			rules       : {
+				required: 'Currency is Required',
+			},
+		},
+		{
 			name      : 'amount',
 			type      : 'text',
 			className : 'primary lg',
@@ -444,31 +468,6 @@ const mawbControls = () => ({
 				required: 'Handling Information is Required',
 			},
 		},
-		{
-			name         : 'ratePerKg',
-			type         : 'number',
-			className    : 'primary lg',
-			label        : 'Rate per Kg',
-			showOptional : false,
-			span         : 5,
-			placeholder  : 'Rate per Kg',
-			rules        : {
-				required: 'Rate is Required',
-			},
-		},
-		{
-			name        : 'currency',
-			placeholder : 'Select Currency',
-			type        : 'select',
-			span        : 5,
-			label       : 'Currency',
-			options     : currencies,
-			className   : 'primary lg',
-			rules       : {
-				required: 'Currency is Required',
-			},
-		},
-
 		{
 			name        : 'commodity',
 			label       : 'Commodity Details:',
