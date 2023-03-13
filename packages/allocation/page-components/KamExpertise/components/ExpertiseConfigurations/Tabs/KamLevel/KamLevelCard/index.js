@@ -13,7 +13,7 @@ function KamLevelCard(props) {
 		id = '',
 		dataLength = -1,
 		refetch = () => {},
-		loading,
+		levelLoading,
 	} = props;
 
 	const {
@@ -40,6 +40,7 @@ function KamLevelCard(props) {
 		},
 	];
 	return (
+
 		<div className={styles.whole}>
 			<div style={{
 				width          : '100%',
@@ -61,7 +62,7 @@ function KamLevelCard(props) {
 					{dataLength === data.transition_level - 1
 						? (
 							<div className={styles.delete_button}>
-								{ !loading ? (
+								{ !levelLoading ? (
 									<ButtonIcon
 										size="lg"
 										icon={(
