@@ -47,6 +47,17 @@ function getFireStoreQuery({
 				...queryFilters,
 				where('chat_status', '==', appliedFilters[item]),
 			];
+		} else if (item === 'assigned_to') {
+			let filterId = '';
+			if (appliedFilters.assigned_to === 'me') {
+				filterId = userId;
+			} else {
+				filterId = appliedFilters?.assigned_agent;
+			}
+			queryFilters = [
+				...queryFilters,
+				where('spectators_ids', 'array-contains', filterId),
+			];
 		}
 	});
 
