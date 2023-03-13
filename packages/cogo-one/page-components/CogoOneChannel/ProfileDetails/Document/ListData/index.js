@@ -18,6 +18,7 @@ function documentTypeMapping(type) {
 			return 'Shipment';
 	}
 }
+
 function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
 	const handleOpenFile = (val) => {
 		// eslint-disable-next-line no-undef

@@ -3,7 +3,7 @@ import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import useOmnichannelDocumentsList from '../../../../hooks/useOmnichannelDocumentsList';
+import useListOmnichannelDocuments from '../../../../hooks/useListOmnichannelDocuments';
 import LoadingState from '../UserActivity/LoadingState';
 
 import Filters from './Filters';
@@ -26,11 +26,12 @@ function Documents({
 		loading = false,
 		documentsList = () => {},
 		orgId = '',
-	} = useOmnichannelDocumentsList({
+	} = useListOmnichannelDocuments({
 		activeMessageCard,
 		activeVoiceCard,
 		activeTab,
 		customerId,
+		type: 'list',
 		setFilterVisible,
 	});
 
@@ -99,4 +100,5 @@ function Documents({
 		</>
 	);
 }
+
 export default Documents;
