@@ -20,7 +20,6 @@ function KamLevel() {
 	const kamConfigLevelDetails = kamConfigDetails?.data || [];
 
 	const dataLength = kamConfigLevelDetails.length;
-	console.log('ll', dataLength);
 	const options = kamConfigLevelDetails.map((data) => ({
 
 		key: data.transition_level,

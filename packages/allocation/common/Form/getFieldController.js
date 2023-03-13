@@ -1,4 +1,5 @@
 import {
+	CreatableSelectController,
 	AsyncSelectController,
 	ChipsController,
 	DatepickerController,
@@ -23,6 +24,7 @@ const controlTypeControllerMapping = {
 	datePicker         : DatepickerController,
 	dateRangePicker    : DateRangePickerController,
 	fileUpload         : UploadController,
+	creatableSelect    : CreatableSelectController,
 };
 
 export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;

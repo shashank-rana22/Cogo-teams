@@ -1,57 +1,61 @@
-const getControls = ({ modifiedControls = [] }) => [
-	{
-		name        : 'condition_type',
-		label       : 'Condition Name',
-		placeholder : '',
-		type        : 'select', // Todo list-api from backend with async creatable select
-		options     : [
-			{ value: 'reactivation', label: 'Reactivation' },
-			{ value: 'enrichment', label: 'Enrichment' },
-			{ value: 'persona', label: 'Persona' },
-			{ value: 'conversion', label: 'Conversion' },
-			{ value: 'conversion_time', label: 'Conversion Time' },
-			{ value: 'retention', label: 'Retention' },
-			{ value: 'collection', label: 'Collection' },
-			{ value: 'wallet_share_increase', label: 'Wallet Share Increase' },
-			{ value: 'industry', label: 'Industry' },
-			{ value: 'country', label: 'Country' },
-			{ value: 'churn', label: 'Churn/Bad Customer Experience' },
-		],
-		rules: {
-			required: 'Condition Parameter is required',
+import useGetAsyncOptionsMicroservice from '@cogoport/forms/hooks/useGetAsyncOptionsMicroservice';
+import { asyncFieldsExpertiseConfigurations } from '@cogoport/forms/utils/getAsyncFields';
+
+const getControls = ({ modifiedControls = [] }) => {
+	// const conditions = useGetAsyncOptionsMicroservice(asyncFieldsExpertiseConfigurations() || {});
+
+	const asyncControl = useGetAsyncOptionsMicroservice({
+		labelKey     : 'condition_name',
+		valueKey     : 'event_configuration_id',
+		endpoint     : '/kam_expertise_event_configuration_name',
+		authkey      : 'get_allocation_kam_expertise_event_configuration_name',
+		microService : 'allocation',
+		initialCall  : false,
+	});
+
+	return [
+		{
+			name        : 'condition_type',
+			label       : 'Condition Name',
+			placeholder : '',
+			...asyncControl,
+			type        : 'creatableSelect',
+			rules       : {
+				required: 'Condition Parameter is required',
+			},
+			isClearable: true,
 		},
+		{
+			name        : 'score_type',
+			label       : 'Score Type',
+			placeholder : '',
+			type        : 'select',
+			options     : [
+				{ value: 'absolute', label: 'Absolute' },
+				{ value: 'percentage', label: 'Percentage' },
+				{ value: 'tat', label: 'TAT' },
+			],
+			rules: {
+				required: 'Score Type is required',
+			},
 		// isClearable: true,
-	},
-	{
-		name        : 'score_type',
-		label       : 'Score Type',
-		placeholder : '',
-		type        : 'select',
-		options     : [
-			{ value: 'absolute', label: 'Absolute' },
-			{ value: 'percentage', label: 'Percentage' },
-			{ value: 'tat', label: 'TAT' },
-		],
-		rules: {
-			required: 'Score Type is required',
 		},
-		// isClearable: true,
-	},
-	...modifiedControls,
-	{
-		name    : 'impact',
-		label   : 'Impact',
-		type    : 'select',
-		options : [
-			{ value: 'low', label: 'Low' },
-			{ value: 'medium', label: 'Medium' },
-			{ value: 'high', label: 'High' },
-		],
-		rules: {
-			required: 'Impact is required',
+		...modifiedControls,
+		{
+			name    : 'impact',
+			label   : 'Impact',
+			type    : 'select',
+			options : [
+				{ value: 'low', label: 'Low' },
+				{ value: 'medium', label: 'Medium' },
+				{ value: 'high', label: 'High' },
+			],
+			rules: {
+				required: 'Impact is required',
+			},
+			isClearable: true,
 		},
-		isClearable: true,
-	},
-];
+	];
+};
 
 export default getControls;

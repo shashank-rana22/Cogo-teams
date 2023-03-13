@@ -173,6 +173,7 @@ function asyncFieldsListAgents() {
 		},
 	};
 }
+
 function asyncFieldListRateChargeCodes() {
 	return {
 		labelKey    : 'name',
