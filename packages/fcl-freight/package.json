@@ -1,0 +1,10 @@
+{
+  "name": "@cogoport/fcl-freight",
+  "version": "0.1.0",
+  "description": "Package for Shipment Fcl Freight Service",
+  "main": "index.js",
+  "dependencies": {
+    "@cogoport/components": "^1.0.372",
+    "react": "18.2.0"
+  }
+}
