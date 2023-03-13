@@ -19,8 +19,8 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 
 	function ShowMessage() {
 		return message_type === 'template'
-			? <div dangerouslySetInnerHTML={{ __html: message }} />
-			: <div dangerouslySetInnerHTML={{ __html: renderText(message) }} />;
+			? <div dangerouslySetInnerHTML={{ __html: message.replace(/(\r\n|\r|\n)/g, '<br>') }} />
+			: <div dangerouslySetInnerHTML={{ __html: renderText(message.replace(/(\r\n|\r|\n)/g, '<br>')) }} />;
 	}
 
 	function LoadMedia(type) {
