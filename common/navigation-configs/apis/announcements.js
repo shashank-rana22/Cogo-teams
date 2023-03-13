@@ -41,7 +41,7 @@ const announcements = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'update_announcement',
+			api          : 'update_announcement_attachment',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},

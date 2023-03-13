@@ -10,7 +10,7 @@ import Preview from './Preview';
 import styles from './styles.module.css';
 import useListAudiences from './useListAudiences';
 
-function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_id = '' }) {
+function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_id = '', actionType }) {
 	const {
 		controls,
 		control,
@@ -23,10 +23,11 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 		loading,
 		errors,
 		// setValue,
-	} = useCreateAnnouncements({ defaultValues, announcement_id });
+	} = useCreateAnnouncements({ defaultValues, announcement_id, actionType });
 
 	const [showCreateAudience, setShowCreateAudience] = useState(false);
 	const formValues = watch();
+	//  console.log('check', formValues);
 	const { audienceOptions = [], fetchAudiences = () => {} } = useListAudiences();
 
 	const renderAddButton = () => (
@@ -42,12 +43,15 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 		</div>
 	);
 	return (
-		<div className={styles.container}>
+		<div key={JSON.stringify(defaultValues)} className={styles.container}>
 			<div className={styles.form}>
 				{controls.map((controlItem) => {
 					const controlStyle = controlItem?.style;
 					const type = controlItem?.type;
+					const { name } = controlItem || {};
+
 					if (['files', 'images', 'videos'].includes(controlItem.name) && disabled) return null;
+
 					if (type === 'field-array') {
 						return (
 							<div style={{ ...controlStyle }}>
@@ -70,6 +74,7 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 								control={control}
 								field={controlItem}
 								errors={errors}
+								value={name === 'is_important' && formValues.is_important}
 								options={controlItem.options || audienceOptions}
 								disabled={['files', 'images'].includes(controlItem.name) && disabled}
 							/>

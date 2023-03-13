@@ -13,7 +13,7 @@ import {
 
 import styles from './styles.module.css';
 
-function FormElement({ name, field, control, options, errors, disabled = false }) {
+function FormElement({ name, field, control, options, errors, value = false }) {
 	const finalFields = {
 		...field,
 	};
@@ -33,7 +33,7 @@ function FormElement({ name, field, control, options, errors, disabled = false }
 					<ChipsController control={control} {...finalFields} />
 				)}
 				{finalFields.type === 'checkbox' && (
-					<CheckboxController control={control} {...finalFields} />
+					<CheckboxController control={control} {...finalFields} checked={value} />
 				)}
 
 				{finalFields.type === 'location-select' && (
@@ -62,7 +62,6 @@ function FormElement({ name, field, control, options, errors, disabled = false }
 						multiple
 						name={name}
 						key={name}
-						disabled={disabled}
 						control={control}
 						accept={finalFields?.accept}
 					/>

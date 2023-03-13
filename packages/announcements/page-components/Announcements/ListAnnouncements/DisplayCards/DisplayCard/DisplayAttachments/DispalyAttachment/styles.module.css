@@ -1,5 +1,6 @@
 .conatiner{
     border: 2px solid #f2f3f4;
+    height: fit-content;
     margin: 10px ;
     padding: 10px;
     border-radius: 10px;

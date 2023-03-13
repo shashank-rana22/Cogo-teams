@@ -5,7 +5,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function DisplayAttachment({ data = {}, name }) {
+function DisplayAttachment({ data = {}, name, deleteAttachment = () => {} }) {
 	const openDocument = (url) => {
 		let modifiedUrl = `https://${url}`;
 		if (url?.includes('http://') || url?.includes('https://')) {
@@ -50,6 +50,7 @@ function DisplayAttachment({ data = {}, name }) {
 								height={20}
 								width={20}
 								style={{ cursor: 'pointer' }}
+								onClick={() => deleteAttachment(item?.id)}
 							/>
 						</div>
 					</div>

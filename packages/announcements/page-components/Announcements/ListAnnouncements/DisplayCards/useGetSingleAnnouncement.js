@@ -52,9 +52,9 @@ const useGetSingleAnnouncement = ({
 		})();
 	}, [currentAnnouncement]);
 
-	const getAnnouncement = async () => {
+	const getAnnouncement = async (id) => {
 		const res = await trigger({
-			params: { id: currentAnnouncement?.id },
+			params: { id },
 		});
 
 		setAnnouncementDetails(res?.data);

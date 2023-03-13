@@ -18,6 +18,7 @@ function CreateAnnouncement() {
 	};
 	const { query } = useRouter();
 	const { announcement_id = '' } = query;
+	const actionType = announcement_id ? 'edit' : 'create';
 	const { defaultValues = {}, disabled = false } = useGetSingleAnnouncement({ announcement_id });
 	return (
 		<div className={styles.container}>
@@ -29,7 +30,12 @@ function CreateAnnouncement() {
 				{announcement_id ? 'Update Announcement' : 'Create Announcement'}
 			</div>
 			<div className="form">
-				<AnnouncementForm defaultValues={defaultValues} disabled={disabled} announcement_id={announcement_id} />
+				<AnnouncementForm
+					defaultValues={defaultValues}
+					disabled={disabled}
+					announcement_id={announcement_id}
+					actionType={actionType}
+				/>
 			</div>
 		</div>
 	);

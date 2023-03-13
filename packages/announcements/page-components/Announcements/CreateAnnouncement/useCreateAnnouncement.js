@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 
 import getFormControls from './controls/get-form-controls';
 
-const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '' }) => {
+const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '', actionType }) => {
 	const router = useRouter();
 	const { control, watch, handleSubmit, formState:{ errors }, setValue } = useForm();
 	const [showPreview, setShowPreview] = useState(false);
@@ -20,22 +20,29 @@ const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '' }) =>
 	const getDateValue = (date) => format(date, 'dd MMM yyyy hh:mm a').split(' ')[0];
 
 	useEffect(() => {
-		const { validity_start = '', validity_end = '', hot_duration, faq_audiences = [] } = defaultValues;
-		// console.log('check', validity_start);
-		const validity = {
-			endDate   : format(validity_end, 'dd MMM yyyy hh:mm a'),
-			startDate : format(validity_start, 'dd MMM yyyy hh:mm a'),
-		};
-		console.log('validity', validity);
-		const audience_ids = [...faq_audiences.map((item) => item.id)];
-		setValue('title', defaultValues?.title);
-		setValue('content', defaultValues?.content);
-		setValue('announcement_type', defaultValues?.announcement_type);
-		setValue('redirection_url', defaultValues?.redirection_url);
-		setValue('is_important', defaultValues?.is_important);
-		setValue('audience_ids', audience_ids);
-		setValue('hot_duration', getDateValue(hot_duration) - getDateValue(validity_start));
-		// setValue('validity', validity);
+		if (actionType === 'edit') {
+			const {
+				validity_start = '',
+				validity_end = '',
+				faq_audiences = [],
+				hot_duration,
+				is_important = false,
+			} = defaultValues;
+			const validity = {
+				endDate   : new Date(format(validity_end, 'dd MMM yyyy hh:mm a')),
+				startDate : new Date(format(validity_start, 'dd MMM yyyy hh:mm a')),
+			};
+			// console.log('checkbox', is_important);
+			const audience_ids = [...faq_audiences.map((item) => item.id)];
+			setValue('title', defaultValues?.title);
+			setValue('content', defaultValues?.content);
+			setValue('announcement_type', defaultValues?.announcement_type);
+			setValue('redirection_url', defaultValues?.redirection_url);
+			setValue('is_important', is_important);
+			setValue('audience_ids', audience_ids);
+			setValue('hot_duration', getDateValue(hot_duration) - getDateValue(validity_start));
+			setValue('validity', validity);
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [defaultValues]);
 

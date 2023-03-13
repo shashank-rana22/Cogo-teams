@@ -17,7 +17,7 @@ function DisplayCard({
 	data = {},
 	index,
 	handleAnnouncementDetails = () => {},
-	// refetch = () => {},
+	refetch = () => {},
 	deleteAnnouncement = () => {},
 	loadingSingleAnnouncement = false,
 
@@ -100,7 +100,7 @@ function DisplayCard({
 					>
 						<div className={styles.titles}>Displaying Documents:</div>
 						<div className={styles.document_container}>
-							<DisplayAttachments data={accordianData} />
+							<DisplayAttachments data={accordianData} refetch={refetch} announcement_id={data?.id} />
 						</div>
 					</Accordion>
 				</div>
