@@ -24,6 +24,7 @@ const useGetAccountWiseFunnel = (byEtd, headerFilters) => {
 
 	useEffect(() => {
 		getAccountWiseFunnel();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [byEtd, JSON.stringify(entity_code)]);
 
 	return {
