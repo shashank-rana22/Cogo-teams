@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 function DisplayAttachment({ data = {}, name, index, deleteAttachment = () => {} }) {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [showEditModal, setShowEditModal] = useState(false);
 	const openDocument = (url) => {
 		let modifiedUrl = `https://${url}`;
 		if (url?.includes('http://') || url?.includes('https://')) {
@@ -27,7 +28,7 @@ function DisplayAttachment({ data = {}, name, index, deleteAttachment = () => {}
 					<div className={styles.data_container}>
 						<div className={styles.data_display}>
 							<span className={styles.name}>Name :&nbsp;</span>
-							<span className={styles.name_data}>{item?.document_name}</span>
+							<span className={styles.name_data}>{item?.document_url}</span>
 						</div>
 
 						<div className={styles.buttoncontainer}>
@@ -43,7 +44,7 @@ function DisplayAttachment({ data = {}, name, index, deleteAttachment = () => {}
 								themeType="secondary"
 								size="sm"
 								style={{ marginRight: 8 }}
-								// onClick={() => editDetails()}
+								onClick={() => setShowEditModal(true)}
 							>
 								Edit
 							</Button>
@@ -63,13 +64,14 @@ function DisplayAttachment({ data = {}, name, index, deleteAttachment = () => {}
 								placement="center"
 								onClose={() => setShowDeleteModal(false)}
 							>
-								<Modal.Header title="Are you sure to delete this announcement" />
+								<Modal.Header title="Are you sure to Delete this announcement" />
 								<Modal.Footer>
 									<div className={styles.delete_buttons}>
 										<Button
 											themeType="secondary"
 											size="md"
 											onClick={() => setShowDeleteModal(false)}
+											style={{ marginRight: '20px' }}
 										>
 											Cancel
 										</Button>
@@ -78,6 +80,42 @@ function DisplayAttachment({ data = {}, name, index, deleteAttachment = () => {}
 											size="md"
 											onClick={() => deleteAttachment(item?.id, index)}
 
+										>
+											Delete
+										</Button>
+									</div>
+								</Modal.Footer>
+							</Modal>
+						)}
+
+						{setShowEditModal && (
+							<Modal
+								show={showEditModal}
+								scroll={false}
+								size="md"
+								placement="center"
+								onClose={() => setShowEditModal(false)}
+							>
+								<Modal.Header title="Are you sure to Edit this announcement" />
+								<Modal.Body>
+									{name === 'Image' ? <div>Image</div> : null}
+									{name === 'Files' ? <div>Files</div> : null}
+									{name === 'Video' ? <div>Video</div> : null}
+								</Modal.Body>
+								<Modal.Footer>
+									<div className={styles.delete_buttons}>
+										<Button
+											themeType="secondary"
+											size="md"
+											onClick={() => setShowEditModal(false)}
+											style={{ marginRight: '20px' }}
+										>
+											Cancel
+										</Button>
+										<Button
+											themeType="primary"
+											size="md"
+											onClick={() => editAttachment(item?.id)}
 										>
 											Delete
 										</Button>

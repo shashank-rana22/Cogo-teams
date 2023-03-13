@@ -1,20 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
 
 const useUpdateAnnouncement = ({
 	announcement_id = '',
-	listData = [],
-	currentAttachment = null,
 	refetch = () => {},
-	setCurrentAttachment = () => {},
-}) => {
-	const [attachmentDetailsToggle, setAttachmentDetailsToggle] = useState(false);
-	const [attachmentDetails, setAttachmentDetails] = useState({});
-	// const [defaultValues, setDefaultValues] = useState({});
-	const [disabled, setDisabled] = useState(false);
 
+}) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_announcement_attachment',
@@ -79,6 +71,32 @@ const useUpdateAnnouncement = ({
 		}
 	};
 
+	const editAttachment = async (id, url, index) => {
+		try {
+			const response = await trigger(
+				{
+					data: {
+						id,
+						document_name : '',
+						document_type : '',
+						document_url  : { url },
+						status        : 'inactive',
+					},
+				},
+			);
+			if (response?.hasError) {
+				Toast.error(response?.message || 'Something went wrong');
+				return;
+			}
+
+			Toast.success('Attachment deleted successfully...');
+			refetch(announcement_id, index);
+		} catch (err) {
+			Toast.error(err?.message);
+			// console.log('Error', error);
+		}
+	};
+
 	// const handleAttachmentDetails = (key) => {
 	// 	setAttachmentDetailsToggle(attachmentDetailsToggle === key ? false : key);
 	// 	if (currentAttachment && attachmentDetailsToggle === key) {
@@ -90,14 +108,10 @@ const useUpdateAnnouncement = ({
 	// };
 
 	return {
-		// handleAttachmentDetails,
-		// announcementDetailsToggle,
-		// defaultValues,
-		// refetch                   : getAnnouncement,
+
 		deleteAttachment,
-		loadingSingleAnnouncement : loading,
-		attachmentDetails         : attachmentDetails || {},
-		disabled,
+		editAttachment,
+		loading,
 	};
 };
 

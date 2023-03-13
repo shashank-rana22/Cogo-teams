@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { Accordion, Button, Modal } from '@cogoport/components';
+import { Accordion, Button, Modal, Pill } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -46,6 +46,12 @@ function DisplayCard({
 		);
 	};
 
+	const displayValues = (label, values) => (
+		label === 'Announcement Type' ? <Pill color="green">{values}</Pill>
+			: <div className={styles.value}>{values}</div>
+	);
+
+	// console.log('asass', accordianData);
 	return (
 		<div className={styles.container}>
 
@@ -86,7 +92,7 @@ function DisplayCard({
 
 									</div>
 								)
-								: <div className={styles.value}>{i.value}</div>}
+								: displayValues(i.label, i.value)}
 						</div>
 					))}
 				</div>

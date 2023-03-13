@@ -7,3 +7,15 @@
        grid-template-columns: 1fr;  
     } 
 }
+
+.nodisplay{
+    color: #4f4f4f;
+    opacity: 0.9;
+    font-weight: 500;
+    display: block;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 10px;
+}

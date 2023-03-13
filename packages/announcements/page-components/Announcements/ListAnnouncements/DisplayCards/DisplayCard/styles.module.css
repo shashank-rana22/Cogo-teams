@@ -41,14 +41,14 @@
 }
 
 .label{    
-    font-size: 15px;    
-    color: #ee3425;    
-    font-weight: 600;
+    font-size: 15px;        
+    font-weight: 500;
     margin-bottom: 5px;
 }
 
 .value{    
-    color: #4f4f4f;    
+    color: #4f4f4f;  
+    opacity: 0.9;;  
     font-weight: 500;    
     display: block;    
     text-align: center;    
@@ -72,7 +72,6 @@
 }
 
 .titles{
-    font-size: 15px;    
-    color: #ee3425;    
-    font-weight: 600;
+    font-size: 15px;       
+    font-weight: 500;
 }

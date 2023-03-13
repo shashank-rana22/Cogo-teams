@@ -49,12 +49,12 @@
 }
 .name{
     font-size: 15px;
-    color: #ee3425;
     font-weight: 400;
 }
 
 .name_data{
     color: #4f4f4f;
+    opacity: 0.9;
     font-weight: 500;
     display: block;
     width: 200px;
@@ -74,4 +74,8 @@
     {        
        width: 100px;
     }
+}
+
+.delete_buttons{
+    display: flex;
 }
