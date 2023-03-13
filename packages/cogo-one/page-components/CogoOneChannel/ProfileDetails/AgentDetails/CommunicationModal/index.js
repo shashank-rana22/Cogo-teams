@@ -40,12 +40,14 @@ function CommunicationModal({
 		type = '',
 		template_name = '',
 		variables = {},
+		...restArgs
 	}) => {
 		sendCommunicationTemplate({
 			template_name,
 			otherChannelRecipient,
 			variables,
 			type,
+			...restArgs,
 		});
 	};
 
