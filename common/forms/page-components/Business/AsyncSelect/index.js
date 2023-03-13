@@ -34,6 +34,7 @@ import {
  * @returns {Array} Modified Async Options
  * getModifiedOptions
  */
+
 const keyAsyncFieldsParamsMapping = {
 	organizations          : asyncFieldsOrganizations,
 	organization_users     : asyncFieldsOrganizationUser,
@@ -55,20 +56,23 @@ function AsyncSelect(props) {
 		initialCall,
 		getModifiedOptions,
 		getSelectedOption,
-		microService = false,
+		microService = '',
 		...rest
 	} = props;
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const asyncOptionsHook = microService ? useGetAsyncOptionsMicroservice : useGetAsyncOptions;
+	const asyncOptionsHook = (microService || defaultParams.microService)
+		? useGetAsyncOptionsMicroservice
+		: useGetAsyncOptions;
 
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
 		initialCall,
-		params   : params || defaultParams.params,
-		labelKey : rest.labelKey || defaultParams.labelKey,
-		valueKey : rest.valueKey || defaultParams.valueKey,
+		params       : params || defaultParams.params,
+		labelKey     : rest.labelKey || defaultParams.labelKey,
+		valueKey     : rest.valueKey || defaultParams.valueKey,
+		microService : microService || defaultParams.microService,
 	});
 
 	if (typeof getModifiedOptions === 'function' && !isEmpty(getAsyncOptionsProps.options)) {
