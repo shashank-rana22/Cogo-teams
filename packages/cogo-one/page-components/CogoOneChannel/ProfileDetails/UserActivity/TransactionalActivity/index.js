@@ -30,8 +30,9 @@ function TransactionalActivity({ transactional = {} }) {
 	return (
 		<div>
 			{(list || []).map((item) => {
-				const viewCheck = viewDetails === item?.id;
-				const services = item?.shipment_type;
+				const { id = '', shipment_type = '' } = item || {};
+				const viewCheck = viewDetails === id;
+				const services = shipment_type;
 				const { origin = '', destination = '' } = USER_ACTIVITY_KEYS_MAPPING[services] || {};
 
 				const {
@@ -158,12 +159,11 @@ function TransactionalActivity({ transactional = {} }) {
 									<div
 										role="presentation"
 										className={styles.show_more}
-										onClick={() => handleOnClick(item.id)}
+										onClick={() => handleOnClick(id)}
 									>
 										<IcMArrowDown
 											width={16}
 											height={16}
-											onClick={() => handleOnClick(item.id)}
 											className={cl`${styles.arrow_down_icon} 
 																 ${viewCheck ? styles.arrow_up_icon : ''}`}
 										/>
