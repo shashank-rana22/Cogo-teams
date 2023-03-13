@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useGetRates = ({ service }) => {
 	const apiMapping = {
@@ -17,6 +17,9 @@ const useGetRates = ({ service }) => {
 	};
 
 	const api = apiMapping[service?.service];
+
+	const [systemPage, setSystemPage] = useState(1);
+	const [revertedPage, setRevertedPage] = useState(1);
 
 	const [{ data:systemData, loading: loadingSystemRates }, triggerSystemData] = useRequest({
 		method : 'get',
@@ -46,7 +49,9 @@ const useGetRates = ({ service }) => {
 						destination_location_id : service?.data?.destination_location_id,
 						location_id             : service?.data?.location_id || service?.data?.port_id,
 					},
-					page_limit: 5,
+					page_limit               : 5,
+					pagination_data_required : true,
+					page                     : systemPage,
 				},
 			});
 		} catch (err) {
@@ -61,7 +66,8 @@ const useGetRates = ({ service }) => {
 					filters             : {
 						past_similar_negotiation_reverts_for_negotiation_id: service?.id,
 					},
-					page_limit: 5,
+					page_limit : 5,
+					page       : revertedPage,
 				},
 			});
 		} catch (err) {
@@ -71,15 +77,23 @@ const useGetRates = ({ service }) => {
 
 	useEffect(() => {
 		fetchSystemData();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [systemPage]);
+
+	useEffect(() => {
 		fetchRevertedData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [revertedPage]);
 
 	return {
 		systemData,
 		revertedData,
 		loadingSystemRates,
 		loadingRevertedRates,
+		systemPage,
+		revertedPage,
+		setRevertedPage,
+		setSystemPage,
 	};
 };
 export default useGetRates;
