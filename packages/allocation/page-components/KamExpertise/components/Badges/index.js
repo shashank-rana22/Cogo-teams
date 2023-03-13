@@ -55,7 +55,7 @@ function Badges() {
 
 			<section className={styles.container}>
 				<div className={styles.heading_container}>
-					Configurations
+					Badges
 				</div>
 
 				<div>
