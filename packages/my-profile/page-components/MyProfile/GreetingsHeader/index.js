@@ -9,25 +9,8 @@ import useEditPersonalDetails from './PersonalDetails/EditPersonalDetails/useEdi
 import styles from './styles.module.css';
 import useUpdatePartnerUser from './useUpdatePartnerUser';
 
-const badge_data = [
-	{
-		badge_name : 'Wings of Logistics GOLD LVL 2',
-		badge_url  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg',
-		stars      : 3,
-	},
-	{
-		badge_name : 'Wings of Logistics SILVER LVL 3',
-		badge_url  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/silver_badge.svg',
-		stars      : 3,
-	},
-	{
-		badge_name : 'Wings of Logistics BRONZE LVL 1',
-		badge_url  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/nautical_ninja_bronze.svg',
-		stars      : 3,
-	},
-];
-
 function Greetings({
+	badgeList,
 	detailsData,
 	setRefetch = () => {},
 	partner_user_id = '',
@@ -56,6 +39,8 @@ function Greetings({
 		loading,
 		onClickCancel,
 	} = useUpdatePartnerUser({ picture, partner_user_id, setRefetch, detailsData });
+
+	const { badges_got = [], grouped_badges_got = {} } = badgeList || {};
 
 	const { name: locationName = '' } = lowest_geo_location || {};
 
@@ -101,6 +86,8 @@ function Greetings({
 						className="icon"
 					/>
 				</div>
+
+				{/* //! add mastry badge through the selectory modal */}
 				<div className={styles.badge_icon}>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg"
@@ -109,27 +96,30 @@ function Greetings({
 					/>
 				</div>
 			</div>
-			{/* //ToDo:  add badges div */}
+
 			<div className={styles.badges}>
 				<div className={styles.badge_list}>
 					{
-                    badge_data.map((data) => (
-	<div key={data.badge_name} className={styles.badge_container}>
-		<div className={styles.badge}>
-			<img src={data.badge_url} alt="badge icon" />
-		</div>
-		<div className={styles.stars}>
-			<IcCStar width={8} stroke="#FFDF33" />
-			<IcCStar width={8} stroke="#FFDF33" />
-			<IcCStar width={8} stroke="#FFDF33" />
-		</div>
-	</div>
-                    ))
-                }
+					badges_got?.map((data, i) => (
+						(i < 3)
+							? (
+								<div key={data.id} className={styles.badge_container}>
+									<div className={styles.badge}>
+										<img src={data.iamge_url} alt="badge icon" />
+									</div>
+									<div className={styles.stars}>
+										<IcCStar width={8} stroke="#FFDF33" />
+										<IcCStar width={8} stroke="#FFDF33" />
+										<IcCStar width={8} stroke="#FFDF33" />
+									</div>
+								</div>
+							)
+							: null
+					))
+				}
 
 				</div>
 			</div>
-			{/*   ///// */}
 
 			<div>
 				<div className={styles.greeting_text}>

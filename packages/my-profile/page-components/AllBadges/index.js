@@ -3,39 +3,24 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
-// import useGetAllocationKamExpertiseProfile from '../hooks/useGetAllocationKamExpertiseProfile';
-import useGetAllocationKamExpertiseProfile from '../../hooks/useGetAllocationKamExpertiseProfile';
+import useGetAllocationKamExpertiseProfile from '../hooks/useGetAllocationKamExpertiseProfile';
 
 import BadgeDescription from './BadgeDescription';
 import styles from './styles.module.css';
 
-const data = [
-	{
-		id: '1',
-	},
-	{
-		id: '2',
-	},
-	{
-		id: '3',
-	},
-	{
-		id: '4',
-	},
-];
 function AllBadges() {
 	const {
 		profile: { partner = {} },
 	} = useSelector((state) => state);
 
-	const { partner_user_id = '' } = partner || {}; const {
-		loading,
+	const { partner_user_id = '' } = partner || {};
+
+	const {
+		loading = false,
 		badgeList,
 	} = useGetAllocationKamExpertiseProfile(partner_user_id);
 
-	console.log('badgeList : ', badgeList);
-
-	const { badges_got = {}, badges_not_got = {} } = badgeList;
+	const { badges_got = [], badges_not_got = [] } = badgeList || {};
 
 	const router = useRouter();
 	const showProfile = () => {
@@ -52,8 +37,10 @@ function AllBadges() {
 		setModalDetail('0');
 	};
 
+	// Todo: add loading state
+
 	if (loading) {
-		return <>Loading..</>;
+		return null;
 	}
 
 	return (
@@ -85,7 +72,7 @@ function AllBadges() {
 					<div className={styles.badges_container}>
 
 						{
-                        badges_got.map((item) => (
+                        badges_got?.map((item) => (
 	<div key={item.id} className={styles.container} role="presentation" onClick={() => showBadgeDetails(item)}>
 		<img className={styles.badge} src={item.image_url} alt="" />
 		<div className={styles.stars_container}>
@@ -100,8 +87,14 @@ function AllBadges() {
 					<div className={styles.badges_container}>
 
 						{
-                        badges_not_got.map((item) => (
-	<div key={item.id} className={styles.container} role="presentation" onClick={() => showBadgeDetails(item)}>
+                        badges_not_got?.map((item) => (
+	<div
+		key={item.id}
+		style={{ pointerEvents: 'none', opacity: 0.4 }}
+		className={styles.container}
+		role="presentation"
+		onClick={() => showBadgeDetails(item)}
+	>
 		<img className={styles.badge} src={item.image_url} alt="" />
 		<div className={styles.stars_container}>
 			<IcCStar width={24} stroke="#FFDF33" />
