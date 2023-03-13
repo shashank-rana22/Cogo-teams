@@ -1,25 +1,26 @@
 import PATTERNS from '@cogoport/constants/patterns';
 
 const controls = {
-	file: {
-		name  : 'file',
+	utility_bill_document_url: {
+		name  : 'utility_bill_document_url',
 		type  : 'file',
 		rules : {
-			required: 'This is required',
+			required: 'Business address Proof is required',
 		},
 	},
-	registration_country: {
-		name  : 'registration_country',
-		type  : 'input',
-		rules : {
-			required: 'This is required',
+	country_id: {
+		name           : 'country_id',
+		type           : 'select',
+		optionsListKey : 'countries',
+		rules          : {
+			required: 'Registration country is required',
 		},
 	},
-	pan_number: {
-		name  : 'pan_number',
+	registration_number: {
+		name  : 'registration_number',
 		type  : 'input',
 		rules : {
-			required : 'This is required',
+			required : 'Pan Number is required',
 			pattern  : {
 				value   : PATTERNS.PAN_NUMBER,
 				message : 'Enter a valid PAN number',
@@ -27,7 +28,7 @@ const controls = {
 		},
 	},
 	preferred_languages: {
-		name           : 'preferred_languages',
+		name           : 'Preferred languages is required',
 		type           : 'select',
 		optionsListKey : 'languages',
 		rules          : { required: 'This is required' },

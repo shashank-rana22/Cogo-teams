@@ -1,4 +1,4 @@
-import { Popover, Button } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -73,9 +73,9 @@ function Documents({
 			</div>
 
 			{loading ? <LoadingState /> : <ListData list={list} orgId={orgId} setShowModal={setShowModal} />}
-			<Button onClick={() => setShowModal(true)}>OK</Button>
+
 			{showModal && (
-				<UploadDetailsModal setShowModal={setShowModal} />
+				<UploadDetailsModal setShowModal={setShowModal} orgId={orgId} />
 			)}
 		</>
 	);

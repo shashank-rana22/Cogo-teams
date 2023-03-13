@@ -73,7 +73,11 @@ function RightSideNav({
 							)}
 							<div
 								role="presentation"
-								onClick={(name === 'documents' && !isEmpty(listIds) && handleUpdates)}
+								onClick={() => {
+									if (name === 'documents' && !isEmpty(listIds)) {
+										handleUpdates();
+									}
+								}}
 							>
 								{icon}
 
