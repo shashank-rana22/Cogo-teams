@@ -48,7 +48,7 @@ const useUpdateSpotNegotiationRate = ({
 		service  : service.service,
 	});
 
-	const { data :rateSelected } = useGetRates({ service, selectedRate });
+	const { data :rateSelected, loading: loadingRateSelected } = useGetRates({ service, selectedRate });
 
 	const prefillData = useRef();
 
@@ -415,6 +415,7 @@ const useUpdateSpotNegotiationRate = ({
 		data,
 		prefillData,
 		rateSelected,
+		loadingRateSelected,
 	};
 };
 export default useUpdateSpotNegotiationRate;

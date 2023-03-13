@@ -6,7 +6,7 @@ const useGetRates = ({ service }) => {
 		lcl_freight     : '/list_lcl_freight_rates',
 		fcl_freight     : '/list_fcl_freight_rates',
 		air_freight     : '/list_air_freight_rates',
-		trailer_freight : './list_trailer_freight_rates',
+		trailer_freight : './list_haulage_freight_rates',
 		haulage_freight : './list_haulage_freight_rates',
 		ltl_freight     : './list_ltl_freight_rates',
 		ftl_freight     : './list_ftl_freight_rates',

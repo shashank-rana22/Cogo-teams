@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Loader } from '@cogoport/components';
 
 import useUpdateSpotNegotiationRate from '../../../../hooks/useUpdateSpotNegotiationRate';
 import Layout from '../../../../Layout';
@@ -24,6 +24,7 @@ function AddRate({
 		data,
 		prefillData,
 		rateSelected,
+		loadingRateSelected,
 	} = useUpdateSpotNegotiationRate({
 		service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard, setRevertCounts,
 	});
@@ -62,7 +63,15 @@ function AddRate({
 	return (
 		<>
 			<HeaderInformation serviceType={service?.service} requiredValues={requiredValues} service={service} />
-			<Layout fields={newFields} control={control} showElements={showElements} errors={errors} />
+			{!loadingRateSelected
+				? <Layout fields={newFields} control={control} showElements={showElements} errors={errors} />
+				: (
+					<div className={styles.loading}>
+						Filling Data
+						<Loader />
+					</div>
+				) }
+
 			<div className={styles.button}>
 				<Button
 					themeType="accent"
