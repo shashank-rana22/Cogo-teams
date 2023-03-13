@@ -55,7 +55,7 @@ function MessageList({
 	const openModelForNewContact = () => {
 		setModalType(true);
 	};
-
+	const disabled = true;
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -200,14 +200,15 @@ function MessageList({
 					})}
 				</div>
 			)}
-			<div
-				className={styles.plus_circle}
-			>
-				<IcMPlusInCircle onClick={openModelForNewContact} fill="red" width={50} height={50} />
-			</div>
+			{!disabled && (
+				<div
+					className={styles.plus_circle}
+				>
+					<IcMPlusInCircle onClick={openModelForNewContact} fill="red" width={50} height={50} />
+				</div>
+			)}
 			{modalType && (
 				<NewWhatsappMessage
-					// modalType={modalType}
 					setModalType={setModalType}
 				/>
 			)}
