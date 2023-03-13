@@ -60,11 +60,13 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 			</div>
 		);
 	}
+	const { title, content } = formValues;
+
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.title}>{formValues?.title}</div>
-			<div className={styles.description}>{formValues?.content}</div>
+			<div className={styles.title}>{title}</div>
+			<div className={styles.description}>{content}</div>
 			<div className={styles.images_video_container}>
 				{videos?.length > 0 && (
 					<div

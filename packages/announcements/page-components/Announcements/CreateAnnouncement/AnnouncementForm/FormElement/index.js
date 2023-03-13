@@ -17,11 +17,16 @@ function FormElement({ name, field, control, options, errors, disabled = false }
 	const finalFields = {
 		...field,
 	};
+	const required = ['title', 'validity', 'hot_duration', 'announcement_type', 'audience_ids'];
 
 	return (
 		<div className={styles.container}>
 			{finalFields.type !== 'checkbox' && (
-				<div className={styles.label}>{finalFields.label}</div>
+				<div className={styles.label}>
+					{finalFields.label}
+					{' '}
+					{required.includes(name) && <sup className={styles.sup}>*</sup>}
+				</div>
 			)}
 			<div>
 				{finalFields.type === 'chips' && (

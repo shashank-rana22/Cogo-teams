@@ -89,7 +89,6 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 						</Button>
 					</div>
 				)}
-
 				<div>
 					<Button
 						loading={loading}
@@ -101,30 +100,35 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 					</Button>
 				</div>
 			</div>
-
-			<Modal
-				show={showPreview}
-				scroll={false}
-				size="lg"
-				placement="center"
-				onClose={() => setShowPreview(false)}
-			>
-				<Modal.Header title="Preview" />
-				<Modal.Body className={styles.modal}>
-					<Preview formValues={formValues} />
-				</Modal.Body>
-			</Modal>
-
-			<Modal
-				show={showCreateAudience}
-				size="lg"
-				onClose={() => setShowCreateAudience(false)}
-			>
-				<Modal.Header title="Add Audience" />
-				<Modal.Body className={styles.audience_modal}>
-					<CreateAudienceForm setShowCreateAudience={setShowCreateAudience} fetchAudiences={fetchAudiences} />
-				</Modal.Body>
-			</Modal>
+			{showPreview && (
+				<Modal
+					show={showPreview}
+					scroll={false}
+					size="lg"
+					placement="center"
+					onClose={() => setShowPreview(false)}
+				>
+					<Modal.Header title="Preview" />
+					<Modal.Body className={styles.modal}>
+						<Preview formValues={formValues} />
+					</Modal.Body>
+				</Modal>
+			)}
+			{showCreateAudience && (
+				<Modal
+					show={showCreateAudience}
+					size="lg"
+					onClose={() => setShowCreateAudience(false)}
+				>
+					<Modal.Header title="Add Audience" />
+					<Modal.Body className={styles.audience_modal}>
+						<CreateAudienceForm
+							setShowCreateAudience={setShowCreateAudience}
+							fetchAudiences={fetchAudiences}
+						/>
+					</Modal.Body>
+				</Modal>
+			)}
 		</div>
 	);
 }

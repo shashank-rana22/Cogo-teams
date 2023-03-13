@@ -20,12 +20,13 @@ const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '' }) =>
 	const getDateValue = (date) => format(date, 'dd MMM yyyy hh:mm a').split(' ')[0];
 
 	useEffect(() => {
-		const { validity_start = '', hot_duration, faq_audiences = [] } = defaultValues;
+		const { validity_start = '', validity_end = '', hot_duration, faq_audiences = [] } = defaultValues;
 		// console.log('check', validity_start);
-		// const validity = {
-		// 	endDate   : format(validity_end, 'dd MMM yyyy hh:mm a'),
-		// 	startDate : format(validity_start, 'dd MMM yyyy hh:mm a'),
-		// };
+		const validity = {
+			endDate   : format(validity_end, 'dd MMM yyyy hh:mm a'),
+			startDate : format(validity_start, 'dd MMM yyyy hh:mm a'),
+		};
+		console.log('validity', validity);
 		const audience_ids = [...faq_audiences.map((item) => item.id)];
 		setValue('title', defaultValues?.title);
 		setValue('content', defaultValues?.content);
