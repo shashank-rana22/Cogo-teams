@@ -9,15 +9,31 @@ const useGetSingleAnnouncement = ({
 	currentAnnouncement = null,
 	setCurrentAnnouncement = () => {},
 }) => {
-	const [announcementDetailsToggle, setAnnouncementDetailsToggle] = useState(false);
+	// const [announcementDetailsToggle, setAnnouncementDetailsToggle] = useState(false);
 	const [announcementDetails, setAnnouncementDetails] = useState({});
 	const [defaultValues, setDefaultValues] = useState({});
 	const [disabled, setDisabled] = useState(false);
+	const [index, setIndex] = useState();
+	// console.log('details', announcementDetails);
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_announcement',
 	}, { manual: true });
+
+	const getDetails = async (key) => {
+		if (currentAnnouncement?.id) {
+			try {
+				const res = await trigger({
+					params: { id: currentAnnouncement?.id },
+				});
+				setAnnouncementDetails({ ...announcementDetails, [key]: res?.data });
+			} catch (err) {
+				// Toast.error(err?.data);
+				console.log(err?.data);
+			}
+		}
+	};
 
 	useEffect(() => {
 		(async () => {
@@ -38,36 +54,26 @@ const useGetSingleAnnouncement = ({
 	}, []);
 
 	useEffect(() => {
-		(async () => {
-			if (currentAnnouncement?.id) {
-				try {
-					const res = await trigger({
-						params: { id: currentAnnouncement?.id },
-					});
-					setAnnouncementDetails(res?.data);
-				} catch (err) {
-					Toast.error(err?.data);
-				}
-			}
-		})();
+		getDetails(index);
 	}, [currentAnnouncement]);
 
-	const getAnnouncement = async (id) => {
+	const getAnnouncement = async (id, key) => {
 		const res = await trigger({
 			params: { id },
 		});
 
-		setAnnouncementDetails(res?.data);
+		setAnnouncementDetails({ ...announcementDetails, [key]: res?.data });
 	};
 
 	const handleAnnouncementDetails = (key) => {
-		setAnnouncementDetailsToggle(announcementDetailsToggle === key ? false : key);
-		if (currentAnnouncement && announcementDetailsToggle === key) {
-			setCurrentAnnouncement(null);
-		} else {
-			setAnnouncementDetails(null);
-			setCurrentAnnouncement(listData?.[key]);
-		}
+		// setAnnouncementDetailsToggle(announcementDetailsToggle === key ? false : key);
+		// if (currentAnnouncement && announcementDetailsToggle === key) {
+		// 	setCurrentAnnouncement(null);
+		// } else {
+		// 	setAnnouncementDetails(null);
+		// }
+		setCurrentAnnouncement(listData?.[key]);
+		setIndex(key);
 	};
 
 	return {

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function DisplayAttachment({ data = {}, name, deleteAttachment = () => {} }) {
+function DisplayAttachment({ data = {}, name, index, deleteAttachment = () => {} }) {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const openDocument = (url) => {
 		let modifiedUrl = `https://${url}`;
@@ -76,7 +76,7 @@ function DisplayAttachment({ data = {}, name, deleteAttachment = () => {} }) {
 										<Button
 											themeType="primary"
 											size="md"
-											onClick={() => deleteAttachment(item?.id)}
+											onClick={() => deleteAttachment(item?.id, index)}
 
 										>
 											Delete

@@ -100,7 +100,12 @@ function DisplayCard({
 					>
 						<div className={styles.titles}>Displaying Documents:</div>
 						<div className={styles.document_container}>
-							<DisplayAttachments data={accordianData} refetch={refetch} announcement_id={data?.id} />
+							<DisplayAttachments
+								data={accordianData}
+								index={index}
+								refetch={refetch}
+								announcement_id={data?.id}
+							/>
 						</div>
 					</Accordion>
 				</div>

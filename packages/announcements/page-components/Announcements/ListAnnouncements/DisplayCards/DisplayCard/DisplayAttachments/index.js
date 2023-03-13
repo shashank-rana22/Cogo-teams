@@ -4,7 +4,7 @@ import DisplayAttachment from './DispalyAttachment';
 import styles from './styles.module.css';
 import useUpdateAnnouncement from './useUpdateAttachment';
 
-function DisplayAttachments({ data = [], refetch = () => {}, announcement_id = '' }) {
+function DisplayAttachments({ data = [], index, refetch = () => {}, announcement_id = '' }) {
 	// console.log('acc::', data);
 	const image = data?.announcement_attachments?.image || '';
 	const pdf = data?.announcement_attachments?.pdf || '';
@@ -18,6 +18,7 @@ function DisplayAttachments({ data = [], refetch = () => {}, announcement_id = '
 					{image ? (
 						<DisplayAttachment
 							data={image}
+							index={index}
 							deleteAttachment={deleteAttachment}
 							name="Images"
 						/>
@@ -25,6 +26,7 @@ function DisplayAttachments({ data = [], refetch = () => {}, announcement_id = '
 					{pdf ? (
 						<DisplayAttachment
 							data={pdf}
+							index={index}
 							deleteAttachment={deleteAttachment}
 							name="Files"
 						/>
@@ -32,6 +34,7 @@ function DisplayAttachments({ data = [], refetch = () => {}, announcement_id = '
 					{video ? (
 						<DisplayAttachment
 							data={video}
+							index={index}
 							deleteAttachment={deleteAttachment}
 							name="Video"
 						/>

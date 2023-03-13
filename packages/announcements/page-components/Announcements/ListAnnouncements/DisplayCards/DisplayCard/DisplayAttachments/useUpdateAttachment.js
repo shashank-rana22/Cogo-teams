@@ -53,7 +53,7 @@ const useUpdateAnnouncement = ({
 	// 	})();
 	// }, [currentAnnouncement]);
 
-	const deleteAttachment = async (id) => {
+	const deleteAttachment = async (id, index) => {
 		try {
 			const response = await trigger(
 				{
@@ -72,7 +72,7 @@ const useUpdateAnnouncement = ({
 			}
 
 			Toast.success('Attachment deleted successfully...');
-			refetch(announcement_id);
+			refetch(announcement_id, index);
 		} catch (err) {
 			Toast.error(err?.message);
 			// console.log('Error', error);

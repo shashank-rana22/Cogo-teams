@@ -42,7 +42,7 @@ function DisplayCards({
 					loadingSingleAnnouncement={loadingSingleAnnouncement}
 					data={item}
 					index={index}
-					accordianData={announcementDetails}
+					accordianData={announcementDetails?.[index]}
 					handleAnnouncementDetails={handleAnnouncementDetails}
 					deleteAnnouncement={deleteAnnouncement}
 				/>
