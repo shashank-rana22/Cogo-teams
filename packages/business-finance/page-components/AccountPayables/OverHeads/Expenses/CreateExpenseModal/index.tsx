@@ -86,7 +86,7 @@ function CreateExpenseModal({
 			{mailModal 	&& (
 				<Modal size="lg" show={mailModal} onClose={() => setMailModal(false)} placement="top">
 					<Modal.Header title="Request Email Preview" />
-					<Modal.Body>
+					<Modal.Body className={styles.modal_body}>
 						<MailTemplate
 							nonRecurringData={nonRecurringData}
 							setNonRecurringData={setNonRecurringData}

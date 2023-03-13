@@ -9,7 +9,8 @@ interface Data {
 	vendorName?:string,
 	expenseCategory?:string,
 	totalPayable?:number | string,
-	invoiceDate?: Date
+	invoiceDate?: Date,
+	stakeholderName?:string,
 }
 interface Props {
 	text?:string,
@@ -25,14 +26,25 @@ function Details({
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	setNonRecurringData = (p:object) => {},
 }:Props) {
-	const { vendorName = '', expenseCategory = '', totalPayable, invoiceDate } = nonRecurringData || {};
+	const {
+		vendorName = '',
+		expenseCategory = '',
+		totalPayable,
+		invoiceDate,
+		stakeholderName,
+	} = nonRecurringData || {};
 
 	if (!isBody) {
 		return <div className={styles.section}>{text}</div>;
 	}
 	return (
 		<div className={styles.section}>
-			<div>Hi Zubin Khanna,</div>
+			<div>
+				Hi
+				{' '}
+				{stakeholderName || 'N/A'}
+				,
+			</div>
 
 			<div className={styles.textarea}>
 				<Textarea
