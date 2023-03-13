@@ -1,7 +1,6 @@
 import { Button, Popover } from '@cogoport/components';
 import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-// import { addHours, addDays, getYear, getMonth, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -9,13 +8,6 @@ function ButtonComponent({
 	action = '', setShowModal = () => {}, showTypePopover = false,
 	setShowTypePopover = () => {}, feedback_id = '',
 }) {
-	// const currentDate = new Date();
-	// const month = getMonth(currentDate);
-	// const year = getYear(currentDate);
-	// const formStartingDate = addHours(new Date(year, month, 1), 10);
-
-	// const formEndingDate = addDays(formStartingDate, 5);
-
 	const formTypes = [
 		{ label: 'Employed', value: 'employed' },
 		{ label: 'New', value: 'new' },
@@ -62,7 +54,6 @@ function ButtonComponent({
 				size="sm"
 				themeType="primary"
 				onClick={() => 	setShowTypePopover(!showTypePopover)}
-				// disabled={!(currentDate <= formEndingDate && currentDate >= formStartingDate)}
 			>
 				{isEmpty(feedback_id) ? (
 					<>
