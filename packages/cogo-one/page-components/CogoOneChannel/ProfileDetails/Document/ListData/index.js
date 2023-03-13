@@ -1,8 +1,5 @@
-/* eslint-disable no-undef */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { cl } from '@cogoport/components';
 import { IcMPdf } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -12,14 +9,12 @@ import documentStatus from '../DocumentStatus';
 import styles from './styles.module.css';
 
 function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
-	// const partnerId = useSelector((s) => s?.profile?.partner?.id);
-
 	const handleOpenFile = (val) => {
+		// eslint-disable-next-line no-undef
 		window.open(val, '_blank');
 	};
 
 	const handleClick = () => {
-		// window.open(`/${partnerId}/details/onboarding/${orgId}/importer_exporter`, '_blank');
 		setShowModal(true);
 	};
 
@@ -55,7 +50,6 @@ function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
 						} = item || {};
 
 						return (
-
 							<>
 								<div className={styles.activity_date}>
 									<div className={styles.dot} />
@@ -72,18 +66,20 @@ function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
 											{documentStatus(checkStatus(verification_status, state))}
 
 											<div className={cl`${styles.document_type} 
-									${document_type === 'undefined' ? styles.wrong_document_type : ''}`}
+												${document_type === 'undefined'
+												? styles.wrong_document_type
+												: ''}`}
 											>
 
 												{document_type === 'undefined' ? 'Wrong document' : 'KYC document'}
 											</div>
-
 										</div>
 
 										<div className={styles.content}>
 											Document sent by customer
 										</div>
 										<div
+											role="presentation"
 											className={styles.document}
 											onClick={() => handleOpenFile(document_url)}
 										>
@@ -94,32 +90,34 @@ function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
 											/>
 											<div className={styles.document_name}>
 												{startCase(file_name)}
-												{' '}
 											</div>
-
 										</div>
 
 										{!isEmpty(orgId) && (
 											<div>
 												{isEmpty(state) || state === 'document_rejected' ? (
 													<div
+														role="presentation"
 														className={styles.manually}
 														onClick={handleClick}
 													>
 														Upload Manually
 													</div>
-												) : <div className={styles.upload}>Upload</div>}
+												) : (
+													<div
+														className={styles.upload}
+													>
+														Upload
+													</div>
+												)}
 											</div>
 										)}
-
 									</div>
 								</div>
 							</>
 						);
 					})}
-
 				</div>
-
 			)}
 		</div>
 	);

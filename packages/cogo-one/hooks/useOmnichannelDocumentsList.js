@@ -52,7 +52,7 @@ function useOmnichannelDocumentsList({
 
 	return {
 		documentsList,
-		data,
+		list: data?.list || [],
 		loading,
 		orgId,
 	};

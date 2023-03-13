@@ -21,7 +21,12 @@ function Documents({
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState('');
 	const [showModal, setShowModal] = useState(false);
-	const { data = {}, loading = false, documentsList = () => {}, orgId = '' } = useOmnichannelDocumentsList({
+	const {
+		list = [],
+		loading = false,
+		documentsList = () => {},
+		orgId = '',
+	} = useOmnichannelDocumentsList({
 		activeMessageCard,
 		activeVoiceCard,
 		activeTab,
@@ -38,10 +43,10 @@ function Documents({
 		documentsList();
 	};
 
-	const { list = [] } = data || {};
-
 	useEffect(() => {
-		setListIds(list.map((i) => i.id));
+		if (!isEmpty(list)) {
+			setListIds(list.map((i) => i.id));
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [list]);
 
@@ -65,17 +70,31 @@ function Documents({
 						visible={filterVisible}
 						onClickOutside={() => setFilterVisible(false)}
 					>
-
-						<IcMFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
+						<IcMFilter
+							width={20}
+							height={20}
+							onClick={() => setFilterVisible(!filterVisible)}
+						/>
 					</Popover>
 					{!isEmpty(filters) && <div className={styles.filters_applied} />}
 				</div>
 			</div>
 
-			{loading ? <LoadingState /> : <ListData list={list} orgId={orgId} setShowModal={setShowModal} />}
+			{loading ? (
+				<LoadingState />
+			) : (
+				<ListData
+					list={list}
+					orgId={orgId}
+					setShowModal={setShowModal}
+				/>
+			)}
 
 			{showModal && (
-				<UploadDetailsModal setShowModal={setShowModal} orgId={orgId} />
+				<UploadDetailsModal
+					setShowModal={setShowModal}
+					orgId={orgId}
+				/>
 			)}
 		</>
 	);

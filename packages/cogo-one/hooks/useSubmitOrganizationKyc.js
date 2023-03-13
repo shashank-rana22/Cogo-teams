@@ -6,16 +6,19 @@ const useSubmitOrganizationKyc = ({ orgId = '' }) => {
 		url    : '/submit_organization_kyc',
 		method : 'post',
 	}, { manual: true });
-	const { profile:{ user:{ id = '' } } } = useSelector((state) => state);
+
+	const {
+		profile :{ user: { id = '' } },
+	} = useSelector((state) => state);
 
 	const submitOrganizationKyc = async (data) => {
 		try {
 			await trigger({
 				params: {
+					...data,
 					performed_by_id   : id,
 					performed_by_type : 'agent',
 					id                : orgId,
-					...data,
 				},
 			});
 		} catch (error) {

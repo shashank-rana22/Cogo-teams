@@ -80,7 +80,6 @@ function RightSideNav({
 								}}
 							>
 								{icon}
-
 							</div>
 						</Tooltip>
 					</div>
@@ -89,4 +88,5 @@ function RightSideNav({
 		</div>
 	);
 }
+
 export default RightSideNav;

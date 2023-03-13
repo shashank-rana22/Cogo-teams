@@ -34,4 +34,5 @@ const controls = {
 		rules          : { required: 'This is required' },
 	},
 };
+
 export default controls;

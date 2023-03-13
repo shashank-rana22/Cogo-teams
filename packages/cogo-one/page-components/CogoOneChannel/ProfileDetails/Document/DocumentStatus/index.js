@@ -1,4 +1,5 @@
 import { IcMFtick, IcMInfo } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -11,17 +12,13 @@ function DocumentStatus(finalStatus) {
 				</div>
 			);
 
-		case 'verified':
+		case 'verified' || 'unverified':
 			return (
 				<div className={styles.in_progress}>
-					Document verified!
-				</div>
-			);
-
-		case 'unverified':
-			return (
-				<div className={styles.in_progress}>
-					Document Unverified!
+					Document
+					{' '}
+					{startCase(finalStatus)}
+					!
 				</div>
 			);
 
@@ -35,23 +32,12 @@ function DocumentStatus(finalStatus) {
 				</div>
 			);
 
-		case 'not_submitted':
+		case 'not_submitted' || 'failed':
 			return (
 				<div className={styles.submitted_div}>
 					<IcMInfo fill="#BF291E" />
 					<div className={styles.not_submitted}>
-						Not submitted
-					</div>
-				</div>
-			);
-
-		case 'failed':
-			return (
-
-				<div className={styles.submitted_div}>
-					<IcMInfo fill="#BF291E" />
-					<div className={styles.not_submitted}>
-						Failed
+						{startCase(finalStatus)}
 					</div>
 				</div>
 			);
