@@ -1,3 +1,4 @@
+import { ButtonIcon } from '@cogoport/components';
 import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -11,6 +12,8 @@ function KamLevelCard(props) {
 		data = {},
 		id = '',
 		dataLength = -1,
+		refetch = () => {},
+		loading,
 	} = props;
 
 	const {
@@ -18,7 +21,7 @@ function KamLevelCard(props) {
 		expertise_details = [],
 	} = data;
 
-	const { onDelete } = useDeleteKamLevel();
+	const { onDelete } = useDeleteKamLevel({ refetch, dataLength });
 
 	const expertiseObject = expertise_details.map((item) => item);
 
@@ -58,39 +61,51 @@ function KamLevelCard(props) {
 					{dataLength === data.transition_level - 1
 						? (
 							<div className={styles.delete_button}>
-								<IcMDelete onClick={(event) => {
-									onDelete();
-									event.stopPropagation();
-								}}
-								/>
+								{ !loading ? (
+									<ButtonIcon
+										size="lg"
+										icon={(
+											<IcMDelete
+												onClick={(event) => {
+													onDelete();
+													event.stopPropagation();
+												}}
+											/>
+										)}
+										themeType="primary"
+									/>
+								) : (
+									<ButtonIcon
+										size="lg"
+										icon={(
+											<IcMDelete
+												style={{ opacity: '0.4', PointerEvent: 'none' }}
+												onClick={(event) => {
+													event.stopPropagation();
+												}}
+											/>
+										)}
+										themeType="primary"
+									/>
+								)}
+
 							</div>
 						)
-						: (
-							null
-						)}
-					{/* {!showEditBtn
-						? (
-							<Button
-								className={styles.delete_button}
-								onClick={(e) => {
-									e.stopPropagation();
-								}}
-							>
-								{' '}
-								Save
-							</Button>
-
-						)
-						: (
-							null
-						)} */}
+						: (null)}
 				</div>
 			</div>
 			{
 			title === id + 1
 				? (
 					<div className={styles.title_show}>
-						To level up from KAM 1 TO KAM 2, A KAM needs to fulfill all of the following criteria
+						To level up from KAM
+						{' '}
+						{transition_level - 1}
+						{' '}
+						TO KAM
+						{' '}
+						{transition_level}
+						, A KAM needs to fulfill all of the following criteria
 						as defined -
 					</div>
 				)
