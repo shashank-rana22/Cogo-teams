@@ -6,8 +6,7 @@
 
 .chart_legends_box {
 	display: flex;
-	padding-top: 3px;
-	padding-left: 12px;
+	padding: 3px 0 0 12px;
 }
 
 .chart_container {

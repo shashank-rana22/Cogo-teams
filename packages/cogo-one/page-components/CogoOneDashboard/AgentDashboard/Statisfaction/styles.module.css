@@ -19,8 +19,7 @@
 .sub_section {
 	display: flex;
 	flex-direction: column;
-	padding: 5px;
-	padding-top: 15px;
+	padding: 15px 5px 5px;
 }
 
 .icon_plus_number {

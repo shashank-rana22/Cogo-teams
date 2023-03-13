@@ -20,8 +20,7 @@
 .sub_section {
 	display: flex;
 	flex-direction: column;
-	padding: 5px;
-	padding-top: 12px;
+	padding: 12px 5px 5px;
 	border-bottom: 1px solid #f8f2e7;
 }
 
