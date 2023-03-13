@@ -98,7 +98,7 @@ function ContainerDetails({
 								${styles.block_a_container_top_package}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{taskItem?.packagesCount}</p>
+								<p style={{ fontSize: 13 }}>{taskItem?.totalPackagesCount}</p>
 							</div>
 							<div className={cl`
 								${styles.flex} 
@@ -136,7 +136,7 @@ function ContainerDetails({
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
-											{dimension.map((item) => `${item.length}x${item.width}x${item.height}/${item.packages} 
+											{dimension.map((item) => `${item.length}x${item.width}x${item.height}/${item.packages_count} 
 											`)}
 										</p>
 									</div>
@@ -168,7 +168,7 @@ function ContainerDetails({
 							${styles.block_a_container_bottom_package}
 						`}
 						>
-							<p className={styles.font_style} style={{ fontSize: 13 }}>{taskItem?.packagesCount}</p>
+							<p className={styles.font_style} style={{ fontSize: 13 }}>{taskItem?.totalPackagesCount}</p>
 						</div>
 					</div>
 

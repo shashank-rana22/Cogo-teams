@@ -71,17 +71,17 @@ function GenerateMAWB({
 	];
 
 	let chargeableWeight:number = Number((Math.max(
-		+formValues.weight * +taskItem.packagesCount,
+		+formValues.weight * +taskItem.totalPackagesCount,
 		(+taskItem.volume * 166.67),
 	) || 0.0).toFixed(2));
 
 	useEffect(() => {
 		chargeableWeight = Number((Math.max(
-			+formValues.weight * +formValues.packagesCount,
+			+formValues.weight * +formValues.totalPackagesCount,
 			+formValues.volumetricWeight,
 		) || 0.0).toFixed(2));
 		setValue('chargeableWeight', (+chargeableWeight || 0.0).toFixed(2));
-	}, [formValues.volumetricWeight, formValues.weight, formValues.packagesCount]);
+	}, [formValues.volumetricWeight, formValues.weight, formValues.totalPackagesCount]);
 
 	useEffect(() => {
 		finalFields.forEach((c:any) => {
@@ -103,13 +103,13 @@ function GenerateMAWB({
 				+= Number(dimensionObj.length) * 2.54
 				* Number(dimensionObj.width) * 2.54
 				* Number(dimensionObj.height) * 2.54
-				* Number(dimensionObj.packages);
+				* Number(dimensionObj.packages_count);
 			} else if (dimensionObj.unit === 'cm') {
 				totalVolume
 				+= Number(dimensionObj.length)
 				* Number(dimensionObj.width)
 				* Number(dimensionObj.height)
-				* Number(dimensionObj.packages);
+				* Number(dimensionObj.packages_count);
 			}
 		});
 		setValue('volumetricWeight', (((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));

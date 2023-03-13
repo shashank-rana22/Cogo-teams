@@ -194,7 +194,7 @@ const mawbControls = () => ({
 					},
 				},
 				{
-					name        : 'packages',
+					name        : 'packages_count',
 					placeholder : 'Packages count',
 					label       : 'Number of Packages',
 					type        : 'number',
@@ -231,7 +231,7 @@ const mawbControls = () => ({
 		{
 		},
 		{
-			name        : 'packagesCount',
+			name        : 'totalPackagesCount',
 			placeholder : 'Package Count',
 			label       : 'Package Count',
 			type        : 'number',
