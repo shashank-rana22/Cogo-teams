@@ -41,6 +41,8 @@ function TransactionalActivity({ transactional = {} }) {
 
 				const milestoneActivity = [...milestone_activity].reverse();
 
+				const filteredMilestoneActivity = milestoneActivity.filter((val) => val?.completed_on);
+
 				const origin_port = item[origin] || {};
 
 				const destination_port = item[destination] || {};
@@ -116,64 +118,62 @@ function TransactionalActivity({ transactional = {} }) {
 									</div>
 									<div className={styles.milestone_container}>
 
-										{(milestoneActivity || []).map((val, index) => {
+										{(filteredMilestoneActivity || []).map((val, index) => {
 											const { milestone = '', completed_on = '' } = val || {};
-
 											return (
 												<div>
-													{!isEmpty(completed_on) && (
-														<>
-															<div className={styles.activity_date}>
-																<div className={styles.dot} />
-																<div className={styles.durations}>
-																	{format(completed_on, 'hh:mm a,')}
-																	{format(completed_on, ' MMM dd')}
 
-																</div>
-															</div>
-															<div
-																className={cl`${styles.milestone_main_card} 
+													<div className={styles.activity_date}>
+														<div className={styles.dot} />
+														<div className={styles.durations}>
+															{format(completed_on, 'hh:mm a,')}
+															{format(completed_on, ' MMM dd')}
+
+														</div>
+													</div>
+													<div
+														className={cl`${styles.milestone_main_card} 
 																 ${index === milestoneActivity.length - 1
-																	? styles.milestone_last_card : ''}`}
+															? styles.milestone_last_card : ''}`}
+													>
+
+														<div
+															className={styles.milestone_name_container}
+														>
+															<IcCFtick width={16} height={16} />
+															<Tooltip
+																content={startCase(milestone)}
+																placement="bottom"
 															>
-
-																<div
-																	className={styles.milestone_name_container}
-																>
-																	<IcCFtick width={16} height={16} />
-																	<Tooltip
-																		content={startCase(milestone)}
-																		placement="bottom"
-																	>
-																		<div className={styles.milestone_name}>
-																			{startCase(milestone)}
-																		</div>
-																	</Tooltip>
+																<div className={styles.milestone_name}>
+																	{startCase(milestone)}
 																</div>
-															</div>
+															</Tooltip>
+														</div>
+													</div>
 
-														</>
-													)}
 												</div>
 											);
 										})}
 									</div>
 
 								</div>
-								<div
-									role="presentation"
-									className={styles.show_more}
-									onClick={() => handleOnClick(item.id)}
-								>
-									<IcMArrowDown
-										width={16}
-										height={16}
+								{filteredMilestoneActivity.length > 1 && (
+									<div
+										role="presentation"
+										className={styles.show_more}
 										onClick={() => handleOnClick(item.id)}
-										className={cl`${styles.arrow_down_icon} 
+									>
+										<IcMArrowDown
+											width={16}
+											height={16}
+											onClick={() => handleOnClick(item.id)}
+											className={cl`${styles.arrow_down_icon} 
 																 ${viewCheck ? styles.arrow_up_icon : ''}`}
+										/>
+									</div>
+								)}
 
-									/>
-								</div>
 							</div>
 
 						</div>
