@@ -14,7 +14,7 @@ function MailTemplate({ nonRecurringData, setNonRecurringData }) {
 	const handleSubmit = () => {
 		submitData();
 	};
-	const { stakeholderName = '' } = nonRecurringData;
+	const { stakeholderEmail = '' } = nonRecurringData;
 
 	return (
 		<div className={styles.container}>
@@ -29,7 +29,7 @@ function MailTemplate({ nonRecurringData, setNonRecurringData }) {
 			<div className={styles.section}>
 				<div className={styles.keys}>To :</div>
 				<div className={styles.recipient_values}>
-					<Details text={stakeholderName} />
+					<Details text={stakeholderEmail} />
 				</div>
 			</div>
 			<div className={styles.section}>
