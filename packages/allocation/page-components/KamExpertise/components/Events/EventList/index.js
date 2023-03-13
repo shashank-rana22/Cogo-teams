@@ -1,4 +1,4 @@
-import { Placeholder, Pill } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
