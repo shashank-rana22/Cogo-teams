@@ -84,8 +84,10 @@ function KamData({ params }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.cards}>
-				{
+			{ !isEmpty(list)
+				? (
+					<div className={styles.cards}>
+						{
 					// dummy_card_data
 					list.map((list_data, index_lvl) => (
 						<KamLevelScoreCard
@@ -96,7 +98,19 @@ function KamData({ params }) {
 						/>
 					))
 				}
-			</div>
+					</div>
+				)
+				: (
+					<div className={styles.empty_list}>
+						<EmptyState
+							height={250}
+							width={450}
+							flexDirection="column"
+							textSize={20}
+						/>
+					</div>
+				)}
+
 			{kamLevel && (
 				<>
 					<div className={styles.overview_container}>
