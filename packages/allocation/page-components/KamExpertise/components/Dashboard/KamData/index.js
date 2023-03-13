@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
-// import useGetAllocationKamExpertiseDashboard from '../../../hooks/useGetAllocationKamExpertiseDashboard';
+import useGetKamExpertiseDashboard from '../../../hooks/useGetKamExpertiseDashboard';
 import BadgeFilter from '../BadgeFilter';
 
 import KamLevelScoreCard from './KamLevelScoreCard';
@@ -69,39 +69,53 @@ const overview_data = [
 	},
 ];
 
-function ThisWeek({ params }) {
-	const [cardData, setCardData] = useState();
-	// const {
-	// 	loading,
-	// 	DashboardData,
-	// } = useGetAllocationKamExpertiseDashboard(params);
+function KamData({ params }) {
+	const [kamLevel, setKamLevel] = useState();
+	const {
+		loading = false,
+		dashboardData,
+	} = useGetKamExpertiseDashboard(params);
 
-	// if (loading) {
-	// 	return <>loading...</>;
-	// }
+	const { list = [] } = dashboardData || {};
 
 	useEffect(() => {
-		setCardData();
+		setKamLevel();
 	}, [params]);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.cards}>
-				{
-					dummy_card_data.map((dummy_data) => (
+			{ !isEmpty(list)
+				? (
+					<div className={styles.cards}>
+						{
+					// dummy_card_data
+					list.map((list_data, index_lvl) => (
 						<KamLevelScoreCard
-							dummy_data={dummy_data}
-							setCardData={setCardData}
-							// loading={loading}
+							index_lvl={index_lvl}
+							list_data={list_data}
+							loading={loading}
+							setKamLevel={setKamLevel}
 						/>
 					))
 				}
-			</div>
-			{cardData && (
+					</div>
+				)
+				: (
+					<div className={styles.empty_list}>
+						<EmptyState
+							height={250}
+							width={450}
+							flexDirection="column"
+							textSize={20}
+						/>
+					</div>
+				)}
+
+			{kamLevel && (
 				<>
 					<div className={styles.overview_container}>
 						<div className={styles.overview_header}>
-							{`${cardData.title} Overview`}
+							{`KAM ${kamLevel} Overview`}
 						</div>
 						<div className={styles.overview_cards}>
 							{
@@ -121,7 +135,8 @@ function ThisWeek({ params }) {
 							</div>
 						</div>
 						{
-							isEmpty([])
+							// isEmpty(dashboardData.list)
+							(false)
 								? (
 									<div style={{
 										padding         : '80px 0',
@@ -147,4 +162,4 @@ function ThisWeek({ params }) {
 	);
 }
 
-export default ThisWeek;
+export default KamData;

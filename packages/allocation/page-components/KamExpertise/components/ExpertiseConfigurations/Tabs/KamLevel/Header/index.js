@@ -21,7 +21,7 @@ function Header(props) {
 						Last Modified:
 						{' '}
 
-						{(audit_data.updated_at)}
+						{(audit_data?.updated_at || 'abhi ')}
 						{/* {audit_data.updated_at} */}
 					</div>
 
@@ -29,7 +29,7 @@ function Header(props) {
 						Last Edit By:
 						{' '}
 
-						<b>{startCase(audit_data.name)}</b>
+						<b>{startCase(audit_data?.name || 'I did this')}</b>
 					</div>
 				</div>
 			</div>
