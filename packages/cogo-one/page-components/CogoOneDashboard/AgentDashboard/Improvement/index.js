@@ -23,7 +23,7 @@ function Improvement({ loading = false, agentDelay = '' }) {
 							)
 							: (
 								<>
-									<span className={styles.value}>
+									<span className={styles.agent_delay}>
 										{(agentDelay || 0) >= 60
 											? ((agentDelay || 0) / 60).toFixed(2)
 											: (agentDelay || 0)}

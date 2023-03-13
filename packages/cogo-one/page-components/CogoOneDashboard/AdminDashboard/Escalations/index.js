@@ -29,10 +29,10 @@ function Escalation({ loading = false, escalations = [] }) {
 							return (
 								<div className={styles.escalations_list}>
 									<div className={styles.picture_name_kam_box}>
-										<div className={styles.picture}>
-											<img src={agentAvatar} alt="AA" />
+										<div className={styles.agent_picture}>
+											<img src={agentAvatar} alt="Agent Avatar" />
 										</div>
-										<div className={styles.name}>{agent_name}</div>
+										<div className={styles.agent_name}>{agent_name}</div>
 										<Tooltip
 											content={<div>{role?.[0].name}</div>}
 											placement="bottom"

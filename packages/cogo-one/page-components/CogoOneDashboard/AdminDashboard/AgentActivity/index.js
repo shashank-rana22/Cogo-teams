@@ -72,7 +72,9 @@ function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboar
 								>
 									<div className={styles.profile_box_left}>
 										<div className={cl`${styles.circle_icon} ${tabMapping[activeTab]}`} />
-										<div className={styles.profile_icon}><img src={agentAvatar} alt="AA" /></div>
+										<div className={styles.profile_icon}>
+											<img src={agentAvatar} alt="Agent avatar" />
+										</div>
 									</div>
 									<div className={styles.profile_box_right}>
 										<div className={styles.profile_box_right_up}>

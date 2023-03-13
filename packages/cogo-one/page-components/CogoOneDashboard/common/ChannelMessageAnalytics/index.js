@@ -16,7 +16,7 @@ function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {}
 					return (
 						<div className={styles.time_durations}>
 							{loading
-								? <Placeholder height="15px" width="60px" className={styles.duration_placeholder} />
+								? <Placeholder height="15px" width="60px" className={styles.placeholder} />
 								: (
 									<div
 										className={styles.time_durations_header}
@@ -44,7 +44,7 @@ function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {}
 							<div className={styles.social_name}>{stat.channel}</div>
 						</div>
 						{loading
-							? <Placeholder height="15px" width="100px" className={styles.customer_nos_placeholder} />
+							? <Placeholder height="15px" width="100px" className={styles.placeholder} />
 							: (
 								<div className={styles.customer_nos}>
 									<span>{channelsMessageAnalytics?.[stat.key] || 0}</span>

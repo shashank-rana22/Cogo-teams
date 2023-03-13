@@ -42,7 +42,7 @@
 
 .customers_numbers::after {
 	position: absolute;
-	bottom: 10px;
+	bottom: 4px;
 	left: 6px;
 	width: 80%;
 	height: 1px;
@@ -58,7 +58,7 @@
 	transform-origin: bottom left;
 }
 
-.label {
+.customer_type {
 	color: #828282;
 }
 

@@ -49,7 +49,7 @@
 	display: flex;
 }
 
-.picture {
+.agent_picture {
 	width: 25px;
 	height: 25px;
 	padding: 3px;
@@ -63,7 +63,7 @@
 	border-radius: 3.9px;
 }
 
-.name {
+.agent_name {
 	padding-left: 14px;
 	font-size: 12px;
 	font-weight: 500;

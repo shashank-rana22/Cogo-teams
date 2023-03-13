@@ -25,16 +25,16 @@
 	border-bottom: 1px solid #f8f2e7;
 }
 
-.numbers {
+.served_intent_numbers {
 	position: relative;
 	display: inline-block;
 }
 
-.numbers::after {
+.served_intent_numbers::after {
 	position: absolute;
 	bottom: 0;
 	left: 1px;
-	width: 10%;
+	width: 7%;
 	height: 1px;
 	content: "";
 	background-color: #000;
@@ -43,12 +43,12 @@
 	transform-origin: bottom right;
 }
 
-.numbers:hover::after {
+.served_intent_numbers:hover::after {
 	transform: scaleX(1);
 	transform-origin: bottom left;
 }
 
-.label {
+.intents_served_name {
 	color: #828282;
 }
 

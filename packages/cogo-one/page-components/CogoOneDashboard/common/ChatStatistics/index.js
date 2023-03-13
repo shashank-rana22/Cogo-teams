@@ -16,12 +16,12 @@ function ChatStatistics({ isAdminView = false, loading = false, statusOfChats = 
 						<div className={`${styles.chatstatistics_box} 
 							${isAdminView ? '' : styles.chatstatistics_box_agent}`}
 						>
-							<div className={styles.text}>{label}</div>
+							<div className={styles.chatstatistics_type}>{label}</div>
 							{loading
 								? <Placeholder height="40px" width="123px" className={styles.placeholder} />
 								: (
 									<div className={styles.small_data_box}>
-										<div className={styles.numbers}>{statusOfChats[key] || 0}</div>
+										<div className={styles.chat_numbers}>{statusOfChats[key] || 0}</div>
 										<div
 											className={`${styles.percentage} 
 											${percentage < 0 ? styles.negative : styles.positive}`}

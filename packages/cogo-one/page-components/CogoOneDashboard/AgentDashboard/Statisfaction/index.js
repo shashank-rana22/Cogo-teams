@@ -19,7 +19,7 @@ function Statisfaction({ loading = false, customerSatisfaction = {} }) {
 								? (<Placeholder width="40px" height="18px" className={styles.placeholder} />)
 								: (<div className={styles.customers_numbers}>{customerSatisfaction[key] || 0}</div>)}
 						</div>
-						<div className={styles.label}>{label}</div>
+						<div className={styles.customer_type}>{label}</div>
 					</div>
 				);
 			})}

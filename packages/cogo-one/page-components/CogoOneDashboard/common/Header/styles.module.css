@@ -15,21 +15,6 @@
 	display: flex;
 }
 
-.filter_icon {
-	padding: 5px 15px 0 0;
-	cursor: pointer;
-}
-
-.filter_dot {
-	position: absolute;
-	left: 15px;
-	display: inline-block;
-	width: 10px;
-	height: 10px;
-	background-color: #f68b21;
-	border-radius: 50%;
-}
-
 .heading {
 	display: flex;
 	flex-direction: row;

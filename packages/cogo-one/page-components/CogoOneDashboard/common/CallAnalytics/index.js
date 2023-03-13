@@ -16,7 +16,7 @@ function CallAnalytics({ loading = false, callsAnalytics = {} }) {
 					return (
 						<div className={styles.time_durations}>
 							{loading
-								? <Placeholder height="15px" width="60px" className={styles.duration_placeholder} />
+								? <Placeholder height="15px" width="60px" className={styles.placeholder} />
 								: (
 									<div className={styles.time_durations_header}>
 										<span className={styles.time_durations_value}>
@@ -40,7 +40,7 @@ function CallAnalytics({ loading = false, callsAnalytics = {} }) {
 							<div className={styles.social_name}>{stat.channel}</div>
 						</div>
 						{loading
-							? <Placeholder height="15px" width="100px" className={styles.customer_nos_placeholder} />
+							? <Placeholder height="15px" width="100px" className={styles.placeholder} />
 							: (
 								<div className={styles.customer_nos}>
 									<span className={styles.calls_counts}>{callsAnalytics?.[stat.key] || 0}</span>

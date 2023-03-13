@@ -106,11 +106,7 @@
 	transition: 0.4s;
 }
 
-.duration_placeholder {
-	border-radius: 5px;
-}
-
-.customer_nos_placeholder {
+.placeholder {
 	border-radius: 5px;
 }
 

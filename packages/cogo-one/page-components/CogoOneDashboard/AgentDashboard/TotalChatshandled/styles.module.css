@@ -17,7 +17,7 @@
 	margin: 10px;
 }
 
-.label {
+.heading {
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 400;
@@ -25,7 +25,7 @@
 	color: #828282;
 }
 
-.number {
+.totalCustomers {
 	position: relative;
 	display: inline-block;
 	font-size: 24px;
@@ -33,7 +33,7 @@
 	color: #4f4f4f;
 }
 
-.number::after {
+.totalCustomers::after {
 	position: absolute;
 	bottom: 0;
 	left: 1px;
@@ -46,7 +46,7 @@
 	transform-origin: bottom right;
 }
 
-.number:hover::after {
+.totalCustomers:hover::after {
 	transform: scaleX(1);
 	transform-origin: bottom left;
 }

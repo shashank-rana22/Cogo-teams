@@ -41,7 +41,7 @@ function PerformanceTab({ loading = false, agentsPerformance = {} }) {
 					? (
 						<img
 							src={emptyPerformance}
-							alt=""
+							alt="Empty Performance"
 							width="150px"
 							height="150px"
 							className={styles.empty_performance_picture}
@@ -54,8 +54,10 @@ function PerformanceTab({ loading = false, agentsPerformance = {} }) {
 								return (
 									<div className={styles.performance_list}>
 										<div className={styles.picture_name_kam_box}>
-											<div className={styles.picture}><img src={agentAvatar} alt="AA" /></div>
-											<div className={styles.name}>{agent_name}</div>
+											<div className={styles.agent_picture}>
+												<img src={agentAvatar} alt="Agent Avatar" />
+											</div>
+											<div className={styles.agent_name}>{agent_name}</div>
 
 											<Tooltip
 												content={<div>{role?.[0].name}</div>}
