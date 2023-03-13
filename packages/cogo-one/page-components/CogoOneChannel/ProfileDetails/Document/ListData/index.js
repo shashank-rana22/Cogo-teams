@@ -8,6 +8,16 @@ import documentStatus from '../DocumentStatus';
 
 import styles from './styles.module.css';
 
+function documentTypeMapping(type) {
+	switch (type) {
+		case 'gst' || 'pan':
+			return 'KYC Document';
+		case 'undefined':
+			return 'Wrong Document';
+		default:
+			return 'Shipment';
+	}
+}
 function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
 	const handleOpenFile = (val) => {
 		// eslint-disable-next-line no-undef
@@ -70,8 +80,7 @@ function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
 												? styles.wrong_document_type
 												: ''}`}
 											>
-
-												{document_type === 'undefined' ? 'Wrong document' : 'KYC document'}
+												{documentTypeMapping(document_type)}
 											</div>
 										</div>
 
@@ -107,7 +116,7 @@ function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
 													<div
 														className={styles.upload}
 													>
-														Upload
+														Uploaded
 													</div>
 												)}
 											</div>

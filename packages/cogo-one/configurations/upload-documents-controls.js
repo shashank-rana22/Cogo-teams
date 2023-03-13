@@ -2,9 +2,10 @@ import PATTERNS from '@cogoport/constants/patterns';
 
 const controls = {
 	utility_bill_document_url: {
-		name  : 'utility_bill_document_url',
-		type  : 'file',
-		rules : {
+		name   : 'utility_bill_document_url',
+		type   : 'file',
+		accept : 'image/*,.pdf,.doc,.docx',
+		rules  : {
 			required: 'Business address Proof is required',
 		},
 	},
@@ -16,8 +17,8 @@ const controls = {
 			required: 'Registration country is required',
 		},
 	},
-	registration_number: {
-		name  : 'registration_number',
+	pan_number: {
+		name  : 'pan_number',
 		type  : 'input',
 		rules : {
 			required : 'Pan Number is required',

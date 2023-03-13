@@ -31,7 +31,7 @@ function UploadDetailsModal({ setShowModal = () => {}, orgId = '' }) {
 	const {
 		utility_bill_document_url,
 		country_id,
-		registration_number,
+		pan_number,
 		preferred_languages,
 	} = controls;
 
@@ -76,24 +76,24 @@ function UploadDetailsModal({ setShowModal = () => {}, orgId = '' }) {
 					</div>
 					<div className={styles.input_container}>
 						<div className={styles.label}>
-							Organization’s Registration Number
+							Organization’s PAN Number
 						</div>
 						<div className={styles.input_field}>
 							<InputController
-								{...registration_number}
+								{...pan_number}
 								control={control}
-								id="registration_number"
+								id="pan_number"
 							/>
 							<div
 								className={styles.error_text}
 							>
-								{errors?.registration_number?.message}
+								{errors?.pan_number?.message}
 							</div>
 						</div>
 					</div>
 					<div className={styles.input_container}>
 						<div className={styles.label}>
-							Organization’s Preferred Languages
+							Preferred Languages
 						</div>
 						<div className={styles.input_field}>
 							<SelectController
