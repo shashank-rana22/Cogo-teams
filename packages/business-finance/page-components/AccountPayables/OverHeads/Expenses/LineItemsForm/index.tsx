@@ -62,7 +62,7 @@ function LineItemsForm({ formData, setFormData }) {
 				const amountAfterTax = beforeTax + (beforeTax * (tax / 100));
 				setValue(`line_items.${index}.amount_after_tax`, +amountAfterTax);
 				const tds = +watch(`line_items.${index}.tds`);
-				if (tds) { setValue(`line_items.${index}.payable_amount`, +amountAfterTax + tds); }
+				if (tds >= 0) { setValue(`line_items.${index}.payable_amount`, +amountAfterTax + tds); }
 			}
 		});
 

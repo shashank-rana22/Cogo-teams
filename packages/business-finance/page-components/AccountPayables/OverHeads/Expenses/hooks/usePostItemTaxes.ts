@@ -24,7 +24,7 @@ const usePostListItemTaxes = () => {
 				},
 			);
 		} catch (err) {
-			Toast.error(err);
+			Toast.error('Something went wrong');
 		}
 	};
 

@@ -11,8 +11,6 @@ const useListVendors = () => {
 	);
 
 	const listVendorApi = async ({ checkCombination, nonRecurringData, timeline, active, setActive }) => {
-		console.log('nonRecurringData->', nonRecurringData);
-
 		// const { vendorName, expenseCategory, expenseSubCategory } = nonRecurringData;
 
 		try {

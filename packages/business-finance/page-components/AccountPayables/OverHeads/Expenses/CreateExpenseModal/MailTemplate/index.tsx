@@ -8,13 +8,13 @@ import Details from './Details';
 import styles from './styles.module.css';
 
 function MailTemplate({ nonRecurringData, setNonRecurringData }) {
-	const { uploadedInvoice, vendorName = '', expenseCategory = '' } = nonRecurringData || {};
-	console.log('nonRecurringData-', nonRecurringData);
+	const { uploadedInvoice, vendorName = '-', expenseCategory = '-' } = nonRecurringData || {};
 	const { submitData } = useCreateExpense(nonRecurringData);
 
 	const handleSubmit = () => {
 		submitData();
 	};
+	const { stakeholderName = '' } = nonRecurringData;
 
 	return (
 		<div className={styles.container}>
@@ -29,13 +29,13 @@ function MailTemplate({ nonRecurringData, setNonRecurringData }) {
 			<div className={styles.section}>
 				<div className={styles.keys}>To :</div>
 				<div className={styles.recipient_values}>
-					<Details text="Stakeholder" />
+					<Details text={stakeholderName} />
 				</div>
 			</div>
 			<div className={styles.section}>
 				<div className={styles.keys}>CC :</div>
 				<div className={styles.recipient_values}>
-					<Details text="Arjun Dhupe, Mayur Chamaria" />
+					<Details text="e.g.Arjun Dhupe, Mayur Chamaria" />
 				</div>
 			</div>
 

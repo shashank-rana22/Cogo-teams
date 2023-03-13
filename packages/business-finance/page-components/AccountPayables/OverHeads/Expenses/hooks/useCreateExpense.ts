@@ -2,8 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
 const useCreateExpense = (nonRecurringData) => {
-	console.log('nonRecurringData->', nonRecurringData);
-
 	const [{ loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense',
@@ -18,7 +16,6 @@ const useCreateExpense = (nonRecurringData) => {
 			const response = await trigger({
 				payload: 'payload',
 			});
-			console.log('response->', response);
 		} catch (err) {
 			Toast.error('Something went wrong');
 		}

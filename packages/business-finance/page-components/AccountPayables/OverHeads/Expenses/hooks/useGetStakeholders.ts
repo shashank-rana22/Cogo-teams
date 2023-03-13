@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetStakeholders = (expenseCategory) => {
+const useGetStakeholders = (expenseCategory:string) => {
 	const [{ data }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense/stakeholder',
@@ -16,7 +16,8 @@ const useGetStakeholders = (expenseCategory) => {
 		try {
 			await trigger({
 				params: {
-					category: expenseCategory || undefined,
+					category : expenseCategory || undefined,
+					level    : 1,
 				},
 			});
 		} catch (err) {
@@ -30,7 +31,7 @@ const useGetStakeholders = (expenseCategory) => {
 	}, []);
 
 	return {
-		stakeholders: data,
+		stakeholdersData: data?.data,
 	};
 };
 

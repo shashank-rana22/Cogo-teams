@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-indent */
 import { startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../../commons/utils/formatDate';
@@ -23,13 +24,15 @@ interface Data {
 	entityObject?:Entity,
 	invoiceDate?:Date,
 	totalPayable?:number | string,
+	stakeholderName?:string,
 }
 
 interface Props {
 	nonRecurringData?: Data,
+	setNonRecurringData?:(obj)=>void,
 }
 
-function NonRecurringSummary({ nonRecurringData }:Props) {
+function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 	const {
 		periodOfTransaction,
 		vendorName,
@@ -42,10 +45,22 @@ function NonRecurringSummary({ nonRecurringData }:Props) {
 		transactionDate,
 		uploadedInvoice,
 		totalPayable,
+		stakeholderName,
 	} = nonRecurringData || {};
 
-	const stakeholders = useGetStakeholders(expenseCategory);
-	console.log('stakeholders-', stakeholders);
+	const { stakeholdersData } = useGetStakeholders(expenseCategory);
+	useEffect(() => {
+		if (stakeholdersData) {
+			const { userEmail, userId, userName } = stakeholdersData;
+			setNonRecurringData({
+				...nonRecurringData,
+				stakeholderEmail : userEmail,
+				stakeholderId    : userId,
+				stakeholderName  : userName,
+			});
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [stakeholdersData]);
 
 	const summaryDataFirst = [
 		{
@@ -107,7 +122,7 @@ function NonRecurringSummary({ nonRecurringData }:Props) {
 	const summaryDataThird = [
 		{
 			title : 'To be Approved by',
-			value : 'N/A',
+			value : startCase(stakeholderName || '') || 'N/A',
 		},
 		{
 			title : 'Uploaded Documents',

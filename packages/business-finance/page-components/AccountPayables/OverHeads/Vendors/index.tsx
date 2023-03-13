@@ -36,8 +36,6 @@ function VenderComponent() {
 	const [dropdownId, setDropdownId] = useState(null);
 	const { listData } = useListVendors(filters);
 
-	console.log('listData->', listData);
-
 	const handleChange = (e, value) => {
 		setFilters((previousState) => ({
 			...previousState,

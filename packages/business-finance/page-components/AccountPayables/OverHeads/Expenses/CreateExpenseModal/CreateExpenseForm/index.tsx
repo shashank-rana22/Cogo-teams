@@ -44,6 +44,7 @@ function CreateExpenseForm({
 					{createExpenseType === 'recurring' ? <RecurringSummary /> : (
 						<NonRecurringSummary
 							nonRecurringData={nonRecurringData}
+							setNonRecurringData={setNonRecurringData}
 						/>
 					)}
 				</div>
