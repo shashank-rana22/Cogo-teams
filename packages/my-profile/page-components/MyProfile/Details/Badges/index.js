@@ -4,43 +4,11 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import badges from '../../../../pages/badges';
-
 import styles from './styles.module.css';
-
-const badge_data = [
-	{
-		badge_name : 'Wings of Logistics GOLD LVL 3',
-		badge_url  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg',
-		stars      : 3,
-	},
-	{
-		badge_name : 'Wings of Logistics BRONZE LVL 3',
-		badge_url  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/nautical_ninja_bronze.svg',
-		stars      : 3,
-	},
-	{
-		badge_name : 'Wings of Logistics GOLD LVL 2',
-		badge_url  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg',
-		stars      : 3,
-	},
-	{
-		badge_name : 'Wings of Logistics SILVER LVL 3',
-		badge_url  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/silver_badge.svg',
-		stars      : 3,
-	},
-	{
-		badge_name : 'Wings of Logistics BRONZE LVL 1',
-		badge_url  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/nautical_ninja_bronze.svg',
-		stars      : 3,
-	},
-];
 
 function Badges({ badgeList = {} }) {
 	const router = useRouter();
-	const { badges_got = {}, badges_not_got = {} } = badgeList;
-
-	console.log('ajcnjncajc : ', badgeList);
+	const { badges_got = [] } = badgeList || {};
 
 	const [show, setShow] = useState(false);
 	const onClose = () => setShow(false);
@@ -59,13 +27,13 @@ function Badges({ badgeList = {} }) {
 			<div className={styles.content}>
 
 				{
-				isEmpty(badges_got)
+				!isEmpty(badges_got)
 					?				(
 						<>
 
 							<div className={styles.badge_list}>
 								{
-									badges_not_got.map((item, index) => (
+									badges_got?.map((item, index) => (
 										(index < 5)
 											?		(
 												<div key={item.id} className={styles.badge_container}>
@@ -97,7 +65,7 @@ function Badges({ badgeList = {} }) {
 						</>
 					)
 					: (
-						<div>No Badges to Display..</div>
+						<div className={styles.badges_empty}>No Badges to Display..</div>
 					)
 				}
 

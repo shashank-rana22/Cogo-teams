@@ -3,12 +3,12 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import filterControls from '../../../../configurations/filter-controls';
+import useGetControls from '../../../../configurations/filter-controls';
 
 import Item from './Item';
 import styles from './styles.module.css';
 
-function getDefaultValues({ filters }) {
+function getDefaultValues({ filters, filterControls }) {
 	let defaultValues = {};
 
 	filterControls.forEach((item) => {
@@ -28,16 +28,21 @@ function FilterComponents({
 	setActiveCardId = () => {},
 	setShowBotMessages = () => {},
 	showBotMessages = false,
+	isomniChannelAdmin = false,
 }) {
 	const [botToggle, setBotToggle] = useState(false);
 
-	const defaultValues = getDefaultValues({ filters: appliedFilters });
+	const filterControls = useGetControls();
+
+	const defaultValues = getDefaultValues({ filters: appliedFilters, filterControls });
 
 	const {
-		control, formState: { errors }, watch, setValue,
+		control, formState: { errors }, watch, setValue, handleSubmit,
 	} = useForm({ defaultValues });
 
 	const formValues = watch();
+	const { assigned_to = '' } = formValues || {};
+	const showElements = { assigned_agent: assigned_to === 'agent' };
 
 	let filterValues = {};
 
@@ -53,7 +58,12 @@ function FilterComponents({
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [botToggle]);
-
+	useEffect(() => {
+		if (assigned_to === 'me') {
+			setValue('assigned_agent', '');
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [assigned_to]);
 	useEffect(() => {
 		setBotToggle(showBotMessages);
 	}, [showBotMessages]);
@@ -72,9 +82,40 @@ function FilterComponents({
 		setFilterVisible(false);
 		setShowBotMessages(botToggle);
 	};
-
+	const renderComp = (singleField) => {
+		const show = !(singleField?.name in showElements) || showElements[singleField?.name];
+		if (singleField?.onlyForAdmin) {
+			if (isomniChannelAdmin) {
+				return (
+					show && (
+						<Item
+							{...singleField}
+							control={control}
+							value={formValues[singleField.name]}
+							setValue={setValue}
+							error={errors[singleField.name]}
+							botToggle={botToggle}
+						/>
+					)
+				);
+			}
+			return null;
+		}
+		return (
+			show && (
+				<Item
+					{...singleField}
+					control={control}
+					value={formValues[singleField.name]}
+					setValue={setValue}
+					error={errors[singleField.name]}
+					botToggle={botToggle}
+				/>
+			)
+		);
+	};
 	return (
-		<div className={styles.container}>
+		<form className={styles.container} onSubmit={handleSubmit(handleClick)}>
 			<div className={styles.header}>
 				<div className={styles.title}>
 					Filters
@@ -95,37 +136,31 @@ function FilterComponents({
 						) : null}
 				</div>
 			</div>
-			<div className={styles.styled_flex}>
-				<Checkbox
-					name="closed"
-					size="sm"
-					onChange={() => setBotToggle((p) => !p)}
-					checked={botToggle}
-				/>
-				<div>
-					Closed
+			{!isomniChannelAdmin && (
+				<div className={styles.styled_flex}>
+					<Checkbox
+						name="closed"
+						size="sm"
+						onChange={() => setBotToggle((p) => !p)}
+						checked={botToggle}
+					/>
+					<div>
+						Closed
+					</div>
 				</div>
-			</div>
+			)}
 
 			{filterControls.map((field) => (
 				<div className={cl`${styles.filter_container} ${botToggle ? styles.disabled : ''}`} key={field.name}>
-					<Item
-						{...field}
-						control={control}
-						value={formValues[field.name]}
-						setValue={setValue}
-						error={errors[field.name]}
-						botToggle={botToggle}
-
-					/>
+					{renderComp(field)}
 				</div>
 			))}
 
 			<div className={styles.actions}>
 				<Button size="md" themeType="tertiary" onClick={() => setFilterVisible(false)}>Cancel</Button>
-				<Button size="md" themeType="accent" onClick={() => handleClick()}>Apply</Button>
+				<Button size="md" themeType="accent" type="submit">Apply</Button>
 			</div>
-		</div>
+		</form>
 	);
 }
 

@@ -1,10 +1,13 @@
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
-import { controls, controlsBottom } from '../../controls';
+import getControls from '../../getControls';
 
 import styles from './styles.module.css';
 
 function KamLevelDetailsEdit({ data = {}, control }) {
 	const transacting_accounts = data && data.list && data.list['Transacting Accounts'];
+	const controls = getControls('top', false);
+	const controlsBottom = getControls('bottom', false);
+
 	return (
 		<div className={styles.level_card_container}>
 			{controls.map((singleField) => {
@@ -29,9 +32,7 @@ function KamLevelDetailsEdit({ data = {}, control }) {
 							<div className={styles.current_value}>
 								Current value:
 								{' '}
-								{ data && data.list
-									&& data.list[singleField.label]
-									? data.list[singleField.label][0].threshold_score : '-'}
+								{ data?.list?.[singleField.label]?.[0].threshold_score || '-'}
 							</div>
 						</div>
 						<div className={styles.border_class} />

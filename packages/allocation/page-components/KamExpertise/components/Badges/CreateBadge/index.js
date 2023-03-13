@@ -1,8 +1,7 @@
-import { MultiSelect, Button } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import { Button } from '@cogoport/components';
+import { format, isEmpty } from '@cogoport/utils';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
-import useGetAllocationKamExpertiseEventConfigurationName from '../../../hooks/useGetAllocationKamExpertiseEventConfigurationName';
 
 import GetCard from './getCard';
 import styles from './styles.module.css';
@@ -32,17 +31,6 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	} = useCreateBadgeConfiguration({ onClose, badgeListData, listRefetch });
 
 	const {
-		event_configuration_list,
-	} = useGetAllocationKamExpertiseEventConfigurationName();
-
-	const event_config_list = [];
-	(event_configuration_list)?.forEach((item) => {
-		event_config_list.push(
-			{ value: item.event_configuration_id, label: item.condition_name },
-		);
-	});
-
-	const {
 		control, watch, handleSubmit, formState: { errors },
 	} = formProps;
 
@@ -61,10 +49,10 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 							{format(badgeListData.updated_at, 'yyyy-MMM-dd')}
 						</p>
 
-						<p className={styles.text_styles}>
+						{/* <p className={styles.text_styles}>
 							Last Modified By :
-							{/* {` ${badgeListData.lstModifiedBy}`} */}
-						</p>
+							{` ${badgeListData.lstModifiedBy}`}
+						</p> */}
 					</div>
 				)}
 				{/* <p className={styles.text_styles}>
@@ -95,7 +83,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 											key={el.name}
 											control={control}
 											id={`${el.name}_input`}
-											options={event_config_list}
+											disabled={!isEmpty(badgeListData) && el.name === 'condition'}
 										/>
 									</div>
 
@@ -126,7 +114,6 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 							size="md"
 							type="button"
 							themeType="secondary"
-						// disabled
 							id="cancel_request_btn"
 							style={{ marginRight: 10, borderWidth: 0 }}
 							onClick={onClose}

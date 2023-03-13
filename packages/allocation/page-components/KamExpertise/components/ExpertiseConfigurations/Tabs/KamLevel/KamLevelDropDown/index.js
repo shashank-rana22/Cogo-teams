@@ -9,12 +9,15 @@ import KamLevelDetailsShow from './KamLevelDetailsShow';
 import styles from './styles.module.css';
 
 function KamLevelDropDown({ editMode, title, setEditMode, refetch }) {
-	const { listkamLevelDetails, listrefetch } = useKamExpertiseLevelConfig({ title });
+	const { listkamLevelDetails, listrefetch, listLoading } = useKamExpertiseLevelConfig({ title });
 
 	console.log('listkamLevelDetails', listkamLevelDetails);
 
 	const { formProps, onSave } = useUpdateKamScores({ title, listrefetch, setEditMode, refetch, listkamLevelDetails });
-	const { control, handleSubmit } = formProps;
+	const { control, handleSubmit, watch } = formProps;
+
+	console.log('watch', watch());
+
 	return (
 		<>
 			{!editMode ? (
@@ -66,6 +69,7 @@ function KamLevelDropDown({ editMode, title, setEditMode, refetch }) {
 					: (
 						<KamLevelDetailsShow
 							data={listkamLevelDetails}
+							listLoading={listLoading}
 						/>
 					)}
 			</div>
