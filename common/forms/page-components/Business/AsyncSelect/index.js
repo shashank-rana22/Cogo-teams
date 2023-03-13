@@ -62,7 +62,7 @@ function AsyncSelect(props) {
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const asyncOptionsHook = microService ? useGetAsyncOptionsMicroservice : useGetAsyncOptions;
+	const asyncOptionsHook = (microService || defaultParams.microService) ? useGetAsyncOptionsMicroservice : useGetAsyncOptions;
 
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
@@ -70,6 +70,7 @@ function AsyncSelect(props) {
 		params   : params || defaultParams.params,
 		labelKey : rest.labelKey || defaultParams.labelKey,
 		valueKey : rest.valueKey || defaultParams.valueKey,
+		microService: microService || defaultParams.microService,
 	});
 
 	if (typeof getModifiedOptions === 'function' && !isEmpty(getAsyncOptionsProps.options)) {
