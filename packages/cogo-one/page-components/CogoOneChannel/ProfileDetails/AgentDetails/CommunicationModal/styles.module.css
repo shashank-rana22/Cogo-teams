@@ -6,12 +6,12 @@
 	position: absolute;
 	top: 201px;
 	left: 484px;
-	border: solid 1px;
-	border-radius: 2px;
-	width: 30px;
-	height: 30px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-color: #999999;
+	width: 30px;
+	height: 30px;
+	border: solid 1px;
+	border-color: #999;
+	border-radius: 2px;
 }
