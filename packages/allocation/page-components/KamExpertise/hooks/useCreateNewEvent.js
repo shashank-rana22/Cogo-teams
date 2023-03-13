@@ -55,8 +55,6 @@ function useCreateNewEvent(props) {
 			await trigger({
 				data: payload,
 			});
-
-			Toast.success('It works now');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 			console.log('error', error);

@@ -1,8 +1,10 @@
 import { Pagination } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import EmptyState from '../../../../common/EmptyState';
 import useGetEventList from '../../hooks/useGetEventList';
 
 import CreateNewEvent from './CreateNewEvent';
@@ -61,12 +63,17 @@ function Events() {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
 	const [toggleNewEvent, setToggleNewEvent] = useState(true);
+	const [eventListData, setEventListData] = useState({});
 
 	// console.log('list:::', list);
 	// console.log('paginationData', paginationData);
+	// if (loading) {
+	// 	return (
+	// 		<div>loading...</div>
+	// 	);
+	// }
 	return (
 		<>
-			{/* <CreateNewEvent /> */}
 			<div className={styles.back_container} role="presentation" onClick={onClickBack}>
 				<div className={styles.icon_container}>
 					<IcMArrowBack width={16} height={16} />
@@ -80,12 +87,23 @@ function Events() {
 			{toggleNewEvent
 				?		(
 					<div>
-						{list.map((data, index) => {
-							console.log(data);
-							return (
-								<EventListItem data={data} index={index} />
-							);
-						})}
+						{
+						(isEmpty(list) && !loading) ? <EmptyState />
+
+							: list.map((data, index) => {
+								console.log(data);
+								return (
+									<EventListItem
+										data={data}
+										index={index}
+										loading={loading}
+										setEventListData={setEventListData}
+										setToggleNewEvent={setToggleNewEvent}
+
+									/>
+								);
+							})
+						}
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"
@@ -97,7 +115,12 @@ function Events() {
 						</div>
 					</div>
 				)
-				:	<div><CreateNewEvent setToggleNewEvent={setToggleNewEvent} toggleNewEvent={toggleNewEvent} /></div>}
+				:	(
+					<CreateNewEvent
+						setToggleNewEvent={setToggleNewEvent}
+						eventListData={eventListData}
+					/>
+				)}
 
 			{/* <EventListItem /> */}
 		</>

@@ -1,9 +1,9 @@
-import { Pill } from '@cogoport/components';
+import { Placeholder, Pill } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function EventListItem({ data, index }) {
+function EventListItem({ data, index, loading, setEventListData, setToggleNewEvent }) {
 	const {
 		id, condition_name:conditionName = '', expertise_type:Type = '',
 		description = '',
@@ -11,12 +11,70 @@ function EventListItem({ data, index }) {
 		params = '',
 	} = data;
 	console.log('data', data);
+
+	const handleEdit = () => {
+		setEventListData(data);
+		setToggleNewEvent((pv) => !pv);
+	};
+	if (loading) {
+		return (
+			<section key={id} className={styles.list_item_container}>
+				<div className={styles.top_div}>
+					<Placeholder width="20px" style={{ marginBottom: '4px' }} />
+				</div>
+				<div>
+					<p className={styles.info_tag}>
+						<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+
+					</p>
+					<div className={styles.info_tag}>
+						<Placeholder width="120px" style={{ marginBottom: '12px' }} />
+
+					</div>
+					<p className={styles.info_tag}>
+						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+					</p>
+				</div>
+
+				<div className={styles.rule}>
+					<p className={styles.rule_head}>
+						<Placeholder width="100px" height="20px" style={{ marginBottom: '4px' }} />
+
+					</p>
+
+					<div className={styles.rule_body}>
+						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+					</div>
+
+				</div>
+
+				<div className={styles.rule_end}>
+					<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+				</div>
+			</section>
+		);
+	}
 	return (
+
 		<section key={id} className={styles.list_item_container}>
 			<div className={styles.top_div}>
 				#
 				{index + 1}
-				<IcMEdit />
+				<IcMEdit onClick={handleEdit} />
 			</div>
 			<div>
 				<p className={styles.info_tag}>

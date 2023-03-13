@@ -21,7 +21,8 @@ function CreateNewEvent(props) {
 		refetch,
 	} = useGetAllocationKamExpertiseRules();
 
-	const { toggleNewEvent = '', setToggleNewEvent = () => {} } = props;
+	const { setToggleNewEvent = () => {}, eventListData = {} } = props;
+	console.log('eventListData', eventListData);
 
 	const {
 		onSave,
@@ -45,14 +46,6 @@ function CreateNewEvent(props) {
 			</div>
 
 			<div className={styles.form_container}>
-				{/* <div className={styles.header}>
-					#001
-
-					<div className={styles.modified_data}>
-						<div className={styles.modified_date}>Last Modified : 31/September/2023</div>
-						<div>Last Modified By : Ankur Verma</div>
-					</div>
-				</div> */}
 
 				<div className={styles.rule_and_attribute}>
 					<div className={styles.add_rule_container}>
