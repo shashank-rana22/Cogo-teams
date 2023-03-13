@@ -1,7 +1,7 @@
 import { Button, Modal, Avatar, Tooltip } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
 import { IcMDelete, IcCCamera, IcMEdit, IcCStar } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import PersonDetails from './PersonalDetails';
 import EditPersonalDetails from './PersonalDetails/EditPersonalDetails';
@@ -88,36 +88,37 @@ function Greetings({
 				</div>
 
 				{/* //! add mastry badge through the selectory modal */}
-				<div className={styles.badge_icon}>
+				{/* <div className={styles.badge_icon}>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg"
 						alt="current badge"
 						height="40px"
 					/>
-				</div>
+				</div> */}
 			</div>
 
 			<div className={styles.badges}>
 				<div className={styles.badge_list}>
 					{
-					badges_got?.map((data, i) => (
-						(i < 3)
-							? (
-								<div key={data.id} className={styles.badge_container}>
-									<div className={styles.badge}>
-										<img src={data.iamge_url} alt="badge icon" />
-									</div>
-									<div className={styles.stars}>
-										<IcCStar width={8} stroke="#FFDF33" />
-										<IcCStar width={8} stroke="#FFDF33" />
-										<IcCStar width={8} stroke="#FFDF33" />
-									</div>
-								</div>
-							)
+						!isEmpty(badges_got)
+							? badges_got.map((data, i) => (
+								(i < 3)
+									? (
+										<div key={data.id} className={styles.badge_container}>
+											<div className={styles.badge}>
+												<img src={data.iamge_url} alt="badge icon" />
+											</div>
+											<div className={styles.stars}>
+												<IcCStar width={8} stroke="#FFDF33" />
+												<IcCStar width={8} stroke="#FFDF33" />
+												<IcCStar width={8} stroke="#FFDF33" />
+											</div>
+										</div>
+									)
+									: null
+							))
 							: null
-					))
-				}
-
+					}
 				</div>
 			</div>
 
@@ -132,7 +133,6 @@ function Greetings({
 
 						</div>
 					</Tooltip>
-
 					,
 					{' '}
 					<div className={styles.location_name}>{locationName}</div>

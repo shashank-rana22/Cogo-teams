@@ -3,11 +3,8 @@ import { endOfWeek, endOfMonth, getYear, getMonth, getDate } from '@cogoport/uti
 import { useState } from 'react';
 
 import Header from './Header';
+import KamData from './KamData';
 import styles from './styles.module.css';
-import ThisMonth from './ThisMonth';
-import ThisQuarter from './ThisQuarter';
-import ThisWeek from './ThisWeek';
-import ThisYear from './ThisYear';
 
 function KamExpertise() {
 	const [activeTab, setActiveTab] = useState('this_week');
@@ -17,11 +14,8 @@ function KamExpertise() {
 	const day = getDate(currentTime);
 	const year = getYear(currentTime);
 
-	// console.log('year', year);
-
 	// week end
 	const weekEnd = endOfWeek(new Date(year, month, day));
-	// console.log('week end : ', weekEnd);
 
 	// month end
 	const monthEnd = endOfMonth(new Date(year, month, day));
@@ -38,7 +32,7 @@ function KamExpertise() {
 		this_week: {
 			name      : 'this_week',
 			title     : 'This Week',
-			Component : ThisWeek,
+			Component : KamData,
 			params    : {
 				start_date : (`${currentTime}`),
 				end_date   : `${weekEnd}`,
@@ -47,7 +41,7 @@ function KamExpertise() {
 		this_month: {
 			name      : 'this_month',
 			title     : 'This Month',
-			Component : ThisWeek,
+			Component : KamData,
 			params    : {
 				start_date : (`${currentTime}`),
 				end_date   : `${monthEnd}`,
@@ -56,7 +50,7 @@ function KamExpertise() {
 		this_quarter: {
 			name      : 'this_quarter',
 			title     : 'This Quarter',
-			Component : ThisWeek,
+			Component : KamData,
 			params    : {
 				start_date : (`${currentTime}`),
 				end_date   : `${endFullQuarter}`,
@@ -65,7 +59,7 @@ function KamExpertise() {
 		this_year: {
 			name      : 'this_year',
 			title     : 'This Year',
-			Component : ThisWeek,
+			Component : KamData,
 			params    : {
 				start_date : (`${currentTime}`),
 				end_date   : `${yearEnd}`,
