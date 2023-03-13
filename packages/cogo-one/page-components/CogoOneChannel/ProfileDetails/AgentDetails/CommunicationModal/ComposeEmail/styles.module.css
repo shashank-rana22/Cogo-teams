@@ -87,3 +87,9 @@
 	width: 100%;
 	
 }
+
+.attachments_scroll {
+	margin-top: 10px;
+	overflow-y: scroll;
+	max-height: 120px;
+}

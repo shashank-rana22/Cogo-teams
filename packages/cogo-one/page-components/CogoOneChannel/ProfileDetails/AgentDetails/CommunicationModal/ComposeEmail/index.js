@@ -47,9 +47,9 @@ function ComposeEmail({
 		return { uploadedFileName, fileIcon };
 	};
 
-	const handleDelete = (fileName) => {
-		// const name = e.target.getAttribute('name');
-		attachments.filter((item) => (decode(item) !== fileName));
+	const handleDelete = (url) => {
+		const attachment = attachments.filter((data) => data !== url);
+		setAttachments(attachment);
 	};
 
 	return (
@@ -99,23 +99,20 @@ function ComposeEmail({
 						toolbarConfig={TOOLBARCONFIG}
 						className={styles.styled_editor}
 					/>
-					<div className={styles.attachments}>
+					<div className={attachments.length >= 3 ? styles.attachments_scroll : styles.attachments}>
 						{attachments.length
 							? attachments.map((data) => (
 								<div className={styles.uploaded_files}>
 									<div className={styles.uploaded_files_content}>
 										{decode(data).fileIcon}
-
 										{decode(data).uploadedFileName}
 									</div>
-									<IcMCross style={{ cursor: 'pointer' }} onClick={handleDelete} />
+									<IcMCross style={{ cursor: 'pointer' }} onClick={() => handleDelete(data)} />
 								</div>
 							))
 							: ''}
 					</div>
-
 				</div>
-
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.footer_buttons}>
