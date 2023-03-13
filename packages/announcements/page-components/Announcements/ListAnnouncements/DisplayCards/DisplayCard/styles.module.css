@@ -42,8 +42,8 @@
 
 .label{    
     font-size: 15px;    
-    color: #777db0;    
-    font-weight: 400;
+    color: #ee3425;    
+    font-weight: 600;
     margin-bottom: 5px;
 }
 
@@ -58,9 +58,9 @@
      text-overflow: ellipsis;
     }
 
-.accordian{    
+/* .accordian{    
     box-shadow: none;
-}
+} */
 
 .buttoncontainer{
     display: flex;
@@ -69,4 +69,10 @@
 .delete_buttons{
     display: flex;
     gap: 20px;
+}
+
+.titles{
+    font-size: 15px;    
+    color: #ee3425;    
+    font-weight: 600;
 }
