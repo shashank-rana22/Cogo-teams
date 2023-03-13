@@ -50,7 +50,7 @@ function SentDiv({
 					{!isEmpty(list) && (
 						<div className={styles.list_container}>
 							{(list || []).map((listItem) => (
-								<div className={styles.list_item}>
+								<div key={`msg-list-item-${listItem.id}`} className={styles.list_item}>
 									<div className={styles.list_item_title}>{listItem?.title}</div>
 									<div className={styles.list_item_description}>{listItem?.description}</div>
 								</div>

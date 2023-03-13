@@ -20,27 +20,35 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 			) : `${part} `))
 	).join(' ');
 
+	const replaceStarSpace = (txt = '') => (
+		txt.split(endWithStarSpace).map((str, i) => {
+			if (i === 0) {
+				return ` <strong>${str.substring(0, txt.length - 1)}</strong> `;
+			}
+			return str;
+		}).join('')
+	);
+
+	const replaceStarChar = (txt = '') => {
+		if (txt.match(/\*/g).length === 1) {
+			return txt.split('*').map((str, i) => {
+				if (i === 0) {
+					return ` <strong>${str.substring(0, txt.length - 1)}</strong>`;
+				}
+				return str;
+			}).join('');
+		}
+		return txt;
+	};
+
 	const addStrongTag = (txt = '') => {
 		const boldText = ` ${txt} `.split(' *').map((part, index) => {
 			if (index === 0) return part;
 			if (endWithStarSpace.test(part)) {
-				return part.split(endWithStarSpace).map((str, i) => {
-					if (i === 0) {
-						return ` <strong>${str.substring(0, txt.length - 1)}</strong> `;
-					}
-					return str;
-				}).join('');
+				return replaceStarSpace(part);
 			}
 			if (endWithStarChar.test(part)) {
-				if (part.match(/\*/g).length === 1) {
-					return part.split('*').map((str, i) => {
-						if (i === 0) {
-							return ` <strong>${str.substring(0, txt.length - 1)}</strong>`;
-						}
-						return str;
-					}).join('');
-				}
-				return part;
+				return replaceStarChar(part);
 			}
 			return ` *${part}`;
 		}).join('');
