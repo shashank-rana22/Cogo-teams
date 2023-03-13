@@ -731,6 +731,18 @@ const apis = [
 		feature      : 'contract_rates',
 		service_name : 'contract',
 	},
+	{
+		api          : 'get_rail_contract_location_rate_details',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'generate_rail_contract_id',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
 ];
 
 export default apis;

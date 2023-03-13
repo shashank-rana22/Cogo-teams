@@ -195,7 +195,7 @@ function asyncAllotBanks() {
 		endpoint     : '/purchase/treasury/live-status',
 		authkey      : 'get_purchase_treasury_live_status',
 		initialCall  : false,
-		microservice : true,
+		microService : 'business_finance',
 		params       : {
 			entityCode : 301,
 			currency   : 'INR',
