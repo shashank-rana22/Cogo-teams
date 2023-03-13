@@ -8,7 +8,6 @@
 .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     margin: 16px 0;
 }
 .overview_container {
@@ -41,4 +40,8 @@
 
 .filters {
     width: 100%;
+}
+
+.empty_list {
+    margin: 20px 0;
 }

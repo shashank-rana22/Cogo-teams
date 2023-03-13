@@ -26,6 +26,7 @@ function MessageList({
 	setActiveCardId = () => {},
 	showBotMessages = false,
 	setShowBotMessages = () => {},
+	isomniChannelAdmin = false,
 }) {
 	function getShowChat({ user_name }) {
 		if (searchValue) {
@@ -74,6 +75,7 @@ function MessageList({
 									setActiveCardId={setActiveCardId}
 									setShowBotMessages={setShowBotMessages}
 									showBotMessages={showBotMessages}
+									isomniChannelAdmin={isomniChannelAdmin}
 								/>
 							)
 						)}
@@ -85,7 +87,9 @@ function MessageList({
 							className={styles.filter_icon}
 						/>
 					</Popover>
-					{(!isEmpty(appliedFilters) || showBotMessages) && <div className={styles.filters_applied} />}
+					{(!isEmpty(appliedFilters)
+					|| (showBotMessages && !isomniChannelAdmin))
+					&& <div className={styles.filters_applied} />}
 				</div>
 			</div>
 

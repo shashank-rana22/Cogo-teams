@@ -7,7 +7,7 @@ import CardContent from '../CardContent';
 import styles from './styles.module.css';
 
 function KamLevelScoreCard(props) {
-	const { dummy_data, setCardData, loading } = props;
+	const { index_lvl, list_data, setKamLevel, loading } = props;
 	return (
 		(loading)
 			? (
@@ -31,18 +31,22 @@ function KamLevelScoreCard(props) {
 					themetype="primary"
 					disabled={false}
 					className={styles.card_item}
-					onClick={() => setCardData(dummy_data)}
+					onClick={() => setKamLevel(index_lvl + 1)}
 				>
 					<Card.Title title={(
 						<div className={styles.card_title}>
-							<h3>{dummy_data.title}</h3>
+							<h3>
+								KAM
+								{' '}
+								{index_lvl + 1}
+							</h3>
 							<IcMArrowNext width={28} height={28} style={{ color: 'red' }} />
 						</div>
 					)}
 					/>
 					<Card.Description className={styles.card_content}>
-						<CardContent dummy_data={dummy_data} value="count" />
-						<CardContent dummy_data={dummy_data} value="avg_score" />
+						<CardContent list_data={list_data} value="count" />
+						<CardContent list_data={list_data} value="average" />
 					</Card.Description>
 				</Card>
 			)

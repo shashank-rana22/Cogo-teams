@@ -9219,6 +9219,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api          : 'delete_saas_container_timeline_detail',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
 	],
 
 	ftl_freight: [
@@ -9697,6 +9702,26 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rail_domestic_freight_rate',
 		},
+		{
+			api          : 'create_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'get_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'list_rail_domestic_freight_rate_free_days',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'update_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
 	],
 	voice_call: [
 		{
@@ -9899,10 +9924,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'event',
 		},
+	],
+	all_badges: [
 		{
 			api          : 'get_allocation_kam_expertise_profile',
 			access_type  : 'private',
-			feature      : 'kam_expertise',
 			service_name : 'allocation',
 		},
 	],
@@ -10246,6 +10272,32 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
+		{
+			api          : 'get_exchange_rate_shipment_frequency_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_shipment_revenue_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_currency_pair_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_shipment_applicable_state_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_source_count_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+
 	],
 	contracts: [
 		{
