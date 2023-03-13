@@ -2,6 +2,22 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
+
+const expertiseTypes = {
+	minimum_transacting_accounts: {
+		expertise_type       : 'Transacting Accounts',
+		threshold_score_type : 'Minimum Transacting Accounts',
+	},
+	retained_account_count: {
+		expertise_type       : 'Transacting Accounts',
+		threshold_score_type : 'Retained Account Count',
+	},
+	retained_account_min_duration: {
+		expertise_type       : 'Transacting Accounts',
+		threshold_score_type : 'Retained Account Min Duration',
+	},
+};
 
 function useCreateKamLevel(props) {
 	const { dataLength = '', setCreateKam, refetch } = props;
@@ -13,58 +29,30 @@ function useCreateKamLevel(props) {
 	}, { manual: true });
 
 	const onCreate = async (formValues) => {
-		console.log('level', dataLength);
-		const {
-			commodity_expertise,
-			customer_expertise,
-			minimum_transacting_accounts,
-			misc_expertise,
-			retained_account_count,
-			retained_account_min_duration,
-			trade_expertise,
+		const formResponse = [];
 
-		} = formValues || {};
+		Object.keys(formValues).forEach((key) => {
+			let expertise_type = startCase(key);
+			const threshold_score = Number(formValues[key]);
+			let threshold_score_type = 'Score';
+
+			if (expertiseTypes[key]) {
+				expertise_type = expertiseTypes[key].expertise_type;
+				threshold_score_type = expertiseTypes[key].threshold_score_type;
+			}
+
+			formResponse.push({
+				expertise_type,
+				threshold_score,
+				threshold_score_type,
+			});
+		});
+
 		try {
 			const payload = {
 				transition_level      : dataLength + 2,
 				configuration_type    : 'kam',
-				configuration_details : [
-					{
-						expertise_type       : 'Customer Expertise',
-						threshold_score      : Number(customer_expertise),
-						threshold_score_type : 'Score',
-					},
-					{
-						expertise_type       : 'Trade Expertise',
-						threshold_score      : Number(trade_expertise),
-						threshold_score_type : 'Score',
-					},
-					{
-						expertise_type       : 'Commodity Expertise',
-						threshold_score      : Number(commodity_expertise),
-						threshold_score_type : 'Score',
-					},
-					{
-						expertise_type       : 'Misc Expertise',
-						threshold_score      : Number(misc_expertise),
-						threshold_score_type : 'Score',
-					},
-					{
-						expertise_type       : 'Transacting Accounts',
-						threshold_score      : Number(retained_account_count),
-						threshold_score_type : 'Retained Account Count',
-					},
-					{
-						expertise_type       : 'Transacting Accounts',
-						threshold_score      : Number(retained_account_min_duration),
-						threshold_score_type : 'Retained Account Min Duration',
-					},
-					{
-						expertise_type       : 'Transacting Accounts',
-						threshold_score      : Number(minimum_transacting_accounts),
-						threshold_score_type : 'Minimum Transacting Accounts',
-					},
-				],
+				configuration_details : formResponse,
 			};
 			await trigger({
 				data: payload,
@@ -72,7 +60,7 @@ function useCreateKamLevel(props) {
 			setCreateKam(false);
 			refetch();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response.data));
+			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 	return {

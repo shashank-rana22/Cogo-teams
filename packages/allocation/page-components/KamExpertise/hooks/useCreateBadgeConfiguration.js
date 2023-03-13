@@ -9,19 +9,22 @@ import getAddBadgesControls from '../configurations/get-add-badges-control';
 function useCreateBadgeConfiguration(props) {
 	const { onClose, listRefetch, badgeListData = {} } = props;
 
-	const { badge_name, description: badge_description, badge_details:badgeDetails } = badgeListData;
+	const {
+		badge_name,
+		description: badge_description,
+		badge_details:badgeDetails,
+		expertise_configuration_ids:event_ids,
+	} = badgeListData;
 
 	const formProps = useForm({
 		defaultValues: {
 			badge        : badge_name,
 			description  : badge_description,
-			condition    : 'Dummy_Value',
+			condition    : event_ids,
 			Bronze_value : badgeDetails?.[0]?.score,
-			// Bronze_img_value : badgeDetails?.[0]?.image_url,
 			Silver_value : badgeDetails?.[1]?.score,
-			// Silver_img_value : badgeDetails?.[1]?.image_url,
 			Gold_value   : badgeDetails?.[2]?.score,
-			// Gold_img_value   : badgeDetails?.[1]?.image_url,
+			// ToDo : image url -> handle using previous data
 		},
 	});
 
@@ -49,11 +52,13 @@ function useCreateBadgeConfiguration(props) {
 		if (Bronze_value < Silver_value && Silver_value < Gold_value) {
 			try {
 				const payload = {
-					version_id             : '1',
-					badge_name             : badge,
+					version_id                   : '1',
+					badge_name                   : badge,
 					description,
-					event_configuration_id : condition,
-					badge_details          : [
+					expertise_configuration_ids  : condition,
+					expertise_configuration_type : 'event_configuration',
+					status                       : 'active',
+					badge_details                : [
 						{
 							score     : Bronze_value,
 							image_url : Bronze_img_value || badgeDetails?.[0]?.image_url,
@@ -83,7 +88,7 @@ function useCreateBadgeConfiguration(props) {
 
 				onClose();
 
-				Toast.success('Badge Created!');
+				Toast.success('Event Created!');
 
 				listRefetch();
 			} catch (error) {

@@ -8,10 +8,12 @@ import KamLevelDetailsEdit from './KamLevelDetailsEdit';
 import KamLevelDetailsShow from './KamLevelDetailsShow';
 import styles from './styles.module.css';
 
-function KamLevelDropDown({ editMode, title, setEditMode }) {
-	const { listkamLevelDetails } = useKamExpertiseLevelConfig({ title });
-	const transition_level = listkamLevelDetails.list?.['Commodity Expertise']?.[0].transition_level;
-	const { formProps, onSave } = useUpdateKamScores({ transition_level });
+function KamLevelDropDown({ editMode, title, setEditMode, refetch }) {
+	const { listkamLevelDetails, listrefetch } = useKamExpertiseLevelConfig({ title });
+
+	console.log('listkamLevelDetails', listkamLevelDetails);
+
+	const { formProps, onSave } = useUpdateKamScores({ title, listrefetch, setEditMode, refetch, listkamLevelDetails });
 	const { control, handleSubmit } = formProps;
 	return (
 		<>
@@ -55,8 +57,17 @@ function KamLevelDropDown({ editMode, title, setEditMode }) {
 
 			<div className={styles.child}>
 				{editMode
-					? <KamLevelDetailsEdit data={listkamLevelDetails} control={control} />
-					: <KamLevelDetailsShow data={listkamLevelDetails} />}
+					? (
+						<KamLevelDetailsEdit
+							data={listkamLevelDetails}
+							control={control}
+						/>
+					)
+					: (
+						<KamLevelDetailsShow
+							data={listkamLevelDetails}
+						/>
+					)}
 			</div>
 		</>
 	);

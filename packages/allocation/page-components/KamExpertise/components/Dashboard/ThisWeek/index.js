@@ -1,8 +1,9 @@
 import { IcMAgentManagement, IcMTradeparties, IcMBreakBulkCargoType, IcMMiscellaneous } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
-import useGetAllocationKamExpertiseStats from '../../../hooks/useGetAllocationKamExpertiseStats';
+// import useGetAllocationKamExpertiseDashboard from '../../../hooks/useGetAllocationKamExpertiseDashboard';
 import BadgeFilter from '../BadgeFilter';
 
 import KamLevelScoreCard from './KamLevelScoreCard';
@@ -68,18 +69,31 @@ const overview_data = [
 	},
 ];
 
-function ThisWeek() {
+function ThisWeek({ params }) {
 	const [cardData, setCardData] = useState();
-	// const { loading, kam_level_data, refetch } = useGetAllocationKamExpertiseStats();
-	// const [visible, setVisible] = useState(false);
+	// const {
+	// 	loading,
+	// 	DashboardData,
+	// } = useGetAllocationKamExpertiseDashboard(params);
+
+	// if (loading) {
+	// 	return <>loading...</>;
+	// }
+
+	useEffect(() => {
+		setCardData();
+	}, [params]);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.cards}>
 				{
 					dummy_card_data.map((dummy_data) => (
-						//! pass loading
-						<KamLevelScoreCard dummy_data={dummy_data} setCardData={setCardData} />
+						<KamLevelScoreCard
+							dummy_data={dummy_data}
+							setCardData={setCardData}
+							// loading={loading}
+						/>
 					))
 				}
 			</div>
@@ -107,8 +121,7 @@ function ThisWeek() {
 							</div>
 						</div>
 						{
-							// Todo: add isEmpty and !loading condition for emptyState
-							false
+							isEmpty([])
 								? (
 									<div style={{
 										padding         : '80px 0',

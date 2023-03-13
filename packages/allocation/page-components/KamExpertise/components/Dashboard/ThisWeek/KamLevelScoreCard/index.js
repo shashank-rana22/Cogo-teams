@@ -7,10 +7,9 @@ import CardContent from '../CardContent';
 import styles from './styles.module.css';
 
 function KamLevelScoreCard(props) {
-	const { dummy_data, setCardData } = props;
-	//! pass loading
+	const { dummy_data, setCardData, loading } = props;
 	return (
-		(false)
+		(loading)
 			? (
 				<Card
 					className={styles.card_item}

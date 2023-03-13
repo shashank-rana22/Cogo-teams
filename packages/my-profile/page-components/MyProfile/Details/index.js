@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 import TaggedAgent from './TaggedAgents';
 
 function Details({
-	detailsData,
+	detailsData, badgeList,
 }) {
 	return (
 
@@ -26,7 +26,7 @@ function Details({
 
 			</div>
 			<div className={styles.badge_details}>
-				<Badges />
+				<Badges badgeList={badgeList} />
 			</div>
 		</div>
 

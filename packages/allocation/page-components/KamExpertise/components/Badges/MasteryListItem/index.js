@@ -49,7 +49,7 @@ function MasteryListItem({ data, index, loading, setToggleScreen, setMasteryList
 						<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
 						<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
 						{
-                        data.medal_collection.map((item) => (
+                        data.expertise_configuration_ids.map(() => (
 	<span className={styles.pill}>
 		<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
 	</span>
@@ -111,7 +111,7 @@ function MasteryListItem({ data, index, loading, setToggleScreen, setMasteryList
 						<div className={styles.rule_heading}>Rules</div>
 						<span>Mastery in</span>
 						{
-                        data.medal_collection.map((item) => (
+                        data.mastery_in.map((item) => (
 	<span className={styles.pill}>
 		<Pill color="#edd7a9">{item}</Pill>
 

@@ -1,7 +1,10 @@
 import { Modal, Button, Select, Tooltip } from '@cogoport/components';
 import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
+
+import badges from '../../../../pages/badges';
 
 import styles from './styles.module.css';
 
@@ -33,8 +36,11 @@ const badge_data = [
 	},
 ];
 
-function Badges() {
+function Badges({ badgeList = {} }) {
 	const router = useRouter();
+	const { badges_got = {}, badges_not_got = {} } = badgeList;
+
+	console.log('ajcnjncajc : ', badgeList);
 
 	const [show, setShow] = useState(false);
 	const onClose = () => setShow(false);
@@ -52,35 +58,48 @@ function Badges() {
 			</div>
 			<div className={styles.content}>
 
-				<div className={styles.badge_list}>
-					{
-                    badge_data.map((data) => (
-	<div key={data.badge_name} className={styles.badge_container}>
-		<Tooltip content={data.badge_name}>
-			<div className={styles.badge}>
-				<img src={data.badge_url} alt="badge icon" />
-			</div>
-			<div className={styles.stars}>
-				<IcCStar width={8} stroke="#FFDF33" />
-				<IcCStar width={8} stroke="#FFDF33" />
-				<IcCStar width={8} stroke="#FFDF33" />
-			</div>
-		</Tooltip>
-	</div>
-                    ))
-                }
-				</div>
+				{
+				isEmpty(badges_got)
+					?				(
+						<>
 
-				<div
-					role="presentation"
-					onClick={() => {
-						router.push('/badges');
-					}}
-					className={styles.view_more}
-				>
-					View More
+							<div className={styles.badge_list}>
+								{
+									badges_not_got.map((item, index) => (
+										(index < 5)
+											?		(
+												<div key={item.id} className={styles.badge_container}>
+													<Tooltip content={item.medal}>
+														<div className={styles.badge}>
+															<img src={item.image_url} alt="badge icon" />
+														</div>
+														<div className={styles.stars}>
+															<IcCStar width={8} stroke="#FFDF33" />
+															<IcCStar width={8} stroke="#FFDF33" />
+															<IcCStar width={8} stroke="#FFDF33" />
+														</div>
+													</Tooltip>
+												</div>
+											) : ''
+									))
+								}
+							</div>
+							<div
+								role="presentation"
+								onClick={() => {
+									router.push('/badges');
+								}}
+								className={styles.view_more}
+							>
+								View More
 
-				</div>
+							</div>
+						</>
+					)
+					: (
+						<div>No Badges to Display..</div>
+					)
+				}
 
 			</div>
 

@@ -1,15 +1,15 @@
 const EDIT_CONFIG_CONTROLS_MAPPING = {
-	score_first_completion:
+	first_completeion:
 		{
-			name        : 'score_first_completion',
+			name        : 'first_completeion',
 			type        : 'number',
 			label       : 'Score credited on first completion',
 			placeholder : 'Enter Score',
 		},
 
-	score_repetition:
+	second_completion:
 		{
-			name        : 'score_repetition',
+			name        : 'second_completion',
 			type        : 'number',
 			label       : 'Score credited on repetition',
 			placeholder : 'Enter Score',

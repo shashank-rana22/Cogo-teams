@@ -2,6 +2,8 @@ import { Button, Modal, Loader } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
+import useGetAllocationKamExpertiseProfile from '../hooks/useGetAllocationKamExpertiseProfile';
+
 import ChangePassword from './ChangePassword';
 import useChangePassword from './ChangePassword/useChangePassword';
 import Details from './Details';
@@ -41,6 +43,10 @@ function MyProfile() {
 		personDetails : detailsData,
 		setShowModal  : setChangepasswordModal,
 	});
+
+	const {
+		badgeList,
+	} = useGetAllocationKamExpertiseProfile(partner_user_id);
 
 	const { name = '' } = detailsData || {};
 
@@ -89,6 +95,7 @@ function MyProfile() {
 					<div className={styles.details}>
 						<Details
 							detailsData={detailsData}
+							badgeList={badgeList}
 						/>
 
 					</div>
