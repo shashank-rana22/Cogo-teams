@@ -5827,6 +5827,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api          : 'list_dunning_cycle_executions',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
 	],
 	invoice_triggers: [
 		{
@@ -9221,6 +9226,11 @@ const partner = {
 		},
 		{
 			api          : 'delete_saas_container_timeline_detail',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'update_saas_container_timeline_detail',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
