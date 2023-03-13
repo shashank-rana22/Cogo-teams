@@ -81,7 +81,9 @@ function AllBadges() {
 									role="presentation"
 									onClick={() => showBadgeDetails(item)}
 								>
-									<img className={styles.badge} src={item.image_url} alt="" />
+									<div className={styles.image_container}>
+										<img className={styles.badge} src={item.image_url} alt="" />
+									</div>
 									<div className={styles.stars_container}>
 										<IcCStar width={24} stroke="#FFDF33" />
 										<IcCStar width={24} stroke="#FFDF33" />
@@ -102,7 +104,9 @@ function AllBadges() {
 									role="presentation"
 									onClick={() => showBadgeDetails(item)}
 								>
-									<img className={styles.badge} src={item.image_url} alt="" />
+									<div className={styles.image_container}>
+										<img className={styles.badge} src={item.image_url} alt="" />
+									</div>
 									<div className={styles.stars_container}>
 										<IcCStar width={24} stroke="#FFDF33" />
 										<IcCStar width={24} stroke="#FFDF33" />
