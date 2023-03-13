@@ -1,8 +1,6 @@
 import { Modal } from '@cogoport/components';
-import { IcMAttach } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import CustomFileUploader from '../../../../../common/CustomFileUploader';
 import Templates from '../../../../../common/Templates';
 import useSendCommunicationTemplate from '../../../../../hooks/useSendCommunicationTemplate';
 

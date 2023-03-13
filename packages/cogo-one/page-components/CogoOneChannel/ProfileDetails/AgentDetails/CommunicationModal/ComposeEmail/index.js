@@ -1,10 +1,11 @@
 import { Toast, Modal, Button, RTE, Input } from '@cogoport/components';
-import { IcMAttach } from '@cogoport/icons-react';
+import { IcMCross, IcMAttach } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
 import { TOOLBARCONFIG } from '../../../../../../constants';
 import getFormatedEmailBody from '../../../../../../helpers/getFormatedEmailBody';
+import getFileAttributes from '../../../../../../utils/getFileAttributes';
 import hideDetails from '../../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
@@ -21,6 +22,7 @@ function ComposeEmail({
 		body    : '',
 	});
 	const [uploading, setUploading] = useState(false);
+
 	const handleSend = () => {
 		const isEmpty = getFormatedEmailBody({ emailState });
 		if (isEmpty || !emailState?.subject) {
@@ -37,6 +39,19 @@ function ComposeEmail({
 	const handleProgress = (val) => {
 		setUploading(val);
 	};
+
+	const decode = (data) => {
+		const val = decodeURI(data).split('/');
+		const fileName = val[val.length - 1];
+		const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
+		return { uploadedFileName, fileIcon };
+	};
+
+	const handleDelete = (fileName) => {
+		// const name = e.target.getAttribute('name');
+		attachments.filter((item) => (decode(item) !== fileName));
+	};
+
 	return (
 		<>
 			<Modal.Body>
@@ -59,6 +74,7 @@ function ComposeEmail({
 							disabled={uploading}
 							handleProgress={handleProgress}
 							className="file_uploader"
+							multiple
 							uploadIcon={(
 								<IcMAttach
 									className={styles.upload_icon}
@@ -71,7 +87,7 @@ function ComposeEmail({
 								/>
 							)}
 							onChange={(val) => {
-								setAttachments((p) => ([...p, val]));
+								setAttachments(val);
 							}}
 							showProgress={false}
 						/>
@@ -83,6 +99,20 @@ function ComposeEmail({
 						toolbarConfig={TOOLBARCONFIG}
 						className={styles.styled_editor}
 					/>
+					<div className={styles.attachments}>
+						{attachments.length
+							? attachments.map((data) => (
+								<div className={styles.uploaded_files}>
+									<div className={styles.uploaded_files_content}>
+										{decode(data).fileIcon}
+
+										{decode(data).uploadedFileName}
+									</div>
+									<IcMCross style={{ cursor: 'pointer' }} onClick={handleDelete} />
+								</div>
+							))
+							: ''}
+					</div>
 
 				</div>
 
