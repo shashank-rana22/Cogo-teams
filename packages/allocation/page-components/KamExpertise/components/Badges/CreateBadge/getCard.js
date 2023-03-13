@@ -57,7 +57,7 @@ function GetCard({ data = {}, badgeListData = {}, control, watch, isLastItem }) 
 				<UploadControler
 					name={`${medalType}_img_value`}
 					control={control}
-					uploadDesc="Upload files here"
+					// uploadDesc="Upload files here"
 					// style={{ width: score ? '93%' : '80%' }}
 				/>
 				<div>

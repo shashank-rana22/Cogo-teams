@@ -1,7 +1,7 @@
 import { Button, Select } from '@cogoport/components';
 import { useState } from 'react';
 
-import SearchInput from '../../../../../../common/SearchInput';
+import SearchInput from '../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
@@ -14,7 +14,7 @@ const OPTIONS = [
 
 function Header(props) {
 	// Todo take it from params like in case of search
-	const { params } = props;
+	const { params, setToggleNewEvent = () => {}, toggleNewEvent = '' } = props;
 
 	const [expertise, setExpertise] = useState('');
 
@@ -32,20 +32,26 @@ function Header(props) {
 						options={OPTIONS}
 						onChange={(value) => setExpertise(value)}
 						style={{ marginRight: 16 }}
+						disabled={toggleNewEvent === false}
 					/>
 
 					<SearchInput
 						size="md"
 						placeholder="Search"
                         // setGlobalSearch={setSearchValue}
-					    // debounceQuery={debounceQuery}
-				        // value={searchValue}
-				        // disabled={disabled}
+						// debounceQuery={debounceQuery}
+						// value={searchValue}
+						disabled={toggleNewEvent === false}
 						className={styles.search_bar}
 					/>
 				</div>
 
-				<Button themeType="primary" size="md">
+				<Button
+					themeType="primary"
+					size="md"
+					onClick={() => setToggleNewEvent((pv) => !pv)}
+					disabled={toggleNewEvent === false}
+				>
 					Add New Event
 				</Button>
 			</div>

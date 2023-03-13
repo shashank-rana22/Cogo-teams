@@ -40,6 +40,7 @@ function Badges() {
 		getNextPage = () => {},
 		listRefetch,
 	} = useGetBadgeList();
+
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
 	return (
@@ -48,6 +49,7 @@ function Badges() {
 				<div className={styles.icon_container}>
 					<IcMArrowBack width={16} height={16} />
 				</div>
+
 				<div className={styles.back_text}>
 					Back to Dashboard
 				</div>
@@ -55,7 +57,7 @@ function Badges() {
 
 			<section className={styles.container}>
 				<div className={styles.heading_container}>
-					Configurations
+					Badges
 				</div>
 
 				<div>
@@ -72,9 +74,8 @@ function Badges() {
 				</div>
 			</section>
 			<div>
-
 				{
-					// ToDo: add empty state's dimensions
+					// Todo: add empty state's dimensions
 					(toggleScreen === 1) && isEmpty(badgeList)
 						? <EmptyState />
 						: ''
@@ -83,7 +84,7 @@ function Badges() {
 					(toggleScreen === 1)
 				&&	(
 					<div>
-						{badgeList?.map(((data, index) => (data.medal_collection.length > 0
+						{badgeList?.map(((data, index) => (data.expertise_configuration_type === 'badge_configuration'
 							? (
 								<MasteryListItem
 									data={data}
@@ -104,6 +105,7 @@ function Badges() {
 								/>
 							)
 						)))}
+
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"

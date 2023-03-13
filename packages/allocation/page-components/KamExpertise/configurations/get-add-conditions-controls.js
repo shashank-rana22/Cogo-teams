@@ -1,7 +1,7 @@
 const getControls = ({ modifiedControls = [] }) => [
 	{
 		name        : 'condition_type',
-		label       : 'Condition Parameter (event)',
+		label       : 'Condition Name',
 		placeholder : '',
 		type        : 'select', // Todo list-api from backend with async creatable select
 		options     : [

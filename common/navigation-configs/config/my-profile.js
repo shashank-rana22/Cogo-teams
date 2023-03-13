@@ -4,8 +4,9 @@ const myProfile = {
 		isMainNav  : false,
 	},
 	'/[partner_id]/badges': {
-		navigation : 'all_badges',
+		navigation : 'badges',
 		isMainNav  : false,
 	},
 };
+
 module.exports = myProfile;

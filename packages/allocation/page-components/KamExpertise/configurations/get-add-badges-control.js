@@ -13,8 +13,11 @@ const controls = [
 		name        : 'condition',
 		label       : 'Condition',
 		placeholder : 'Select Events',
-		type        : 'select',
+		type        : 'multiSelect',
 		options     : [],
+		// asyncKey    : 'expertise_configuration',
+		// multiple    : true,
+		// initialCall : false,
 		rules       : {
 			required: 'Specify Condition',
 		},

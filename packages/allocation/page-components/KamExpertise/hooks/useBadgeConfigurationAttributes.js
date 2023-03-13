@@ -9,7 +9,7 @@ const useUpdateSingleBadge = (props) => {
 	const formProps = useForm();
 
 	const [{ loading }, trigger] = useAllocationRequest({
-		url     : 'allocation/kam_expertise_badge_configuration_detail_attributes',
+		url     : '/kam_expertise_badge_configuration_detail_attributes',
 		method  : 'POST',
 		authkey : 'post_allocation_kam_expertise_badge_configuration_detail_attributes',
 	}, { manual: true });

@@ -1,51 +1,52 @@
 import { Pill } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 
-import Header from './Header';
 import styles from './styles.module.css';
 
-function EventListItem() {
+function EventListItem({ data, index }) {
+	const {
+		id, condition_name:conditionName = '', expertise_type:Type = '',
+		description = '',
+		rules = [],
+		params = '',
+	} = data;
+	console.log('data', data);
 	return (
-		<>
-			<Header />
-
-			<section className={styles.list_item_container}>
-				<div className={styles.top_div}>
-					<div className={styles.left_id}>
-						#001
-					</div>
-					<div className={styles.top_right_div}>
-						<p>Last Modified : 31/September/2023</p>
-						<p>Last Modified By : Ankur Verma</p>
-						<IcMEdit />
-					</div>
+		<section key={id} className={styles.list_item_container}>
+			<div className={styles.top_div}>
+				#
+				{index + 1}
+				<IcMEdit />
+			</div>
+			<div>
+				<p className={styles.info_tag}>
+					Expertise :
+					{' '}
+					<b style={{ marginLeft: 4 }}>{Type}</b>
+				</p>
+				<div className={styles.info_tag}>
+					Event Name :
+					{' '}
+					<h4 style={{ marginLeft: 4 }}>{conditionName}</h4>
 				</div>
-				<div>
-					<div className={styles.info_tag}>
-						Expertise :
-						{' '}
-						<h4 style={{ marginLeft: 4 }}>Customer Expertise</h4>
-					</div>
-					<div className={styles.info_tag}>
-						Event Name :
-						{' '}
-						<h4 style={{ marginLeft: 4 }}>Re-Activation</h4>
-					</div>
-					<div className={styles.info_tag}>
-						Description : Converting a
-						churned customer → 4 months no transaction for now.
+				<p className={styles.info_tag}>
+					Description :
+					{' '}
+					{description}
 
-					</div>
-				</div>
+				</p>
+			</div>
 
-				<div className={styles.rule}>
-					<div className={styles.rule_head}>
-						Rule
-					</div>
-
-					<div className={styles.rule_body}>
-						<div>Rule #001</div>
-						<div>
+			<div className={styles.rule}>
+				<p className={styles.rule_head}>
+					Rule
+				</p>
+				{rules.map((res, i) =>
+				// console.log('res::', res);
+					(
+						<div className={styles.rule_body}>
+							Rule #
+							{i + 1}
 							<Pill
 								key="Reactivation"
 								size="l"
@@ -54,10 +55,7 @@ function EventListItem() {
 								Reactivation
 							</Pill>
 
-						</div>
-						<div>is triggered on</div>
-						<div>
-							{' '}
+							is triggered on
 							<Pill
 								key="Shipment_creation"
 								size="l"
@@ -66,9 +64,7 @@ function EventListItem() {
 								Shipment creation
 							</Pill>
 
-						</div>
-						<div>of</div>
-						<div>
+							of
 							<Pill
 								key="Account"
 								size="l"
@@ -77,28 +73,25 @@ function EventListItem() {
 								Account
 							</Pill>
 
+							having attribute
 						</div>
-						<div>having attribute</div>
-					</div>
+					))}
+			</div>
 
-					<div className={styles.rule_end}>
-						<div>last booking date</div>
-						<div>
-							<Pill
-								key="Account"
-								size="l"
-								color="#FEF3E9"
-							>
-								Greater than 120 Days
-							</Pill>
+			<div className={styles.rule_end}>
+				last booking date
 
-						</div>
+				<Pill
+					key="Account"
+					size="l"
+					color="#FEF3E9"
+				>
+					{/* {params} */}
+				</Pill>
 
-					</div>
+			</div>
 
-				</div>
-			</section>
-		</>
+		</section>
 	);
 }
 
