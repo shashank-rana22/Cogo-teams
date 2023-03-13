@@ -1,5 +1,7 @@
 import { cl } from '@cogoport/components';
+import { IcMCross, IcMListView } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import MessageBody from '../../../../../../common/MessageBody';
 import { LOGO_URL } from '../../../../../../constants';
@@ -17,7 +19,8 @@ function SentDiv({
 		session_type = 'bot',
 	} = eachMessage;
 
-	const { btns = [] } = response;
+	const { btns = [], list = [] } = response;
+	const [showList, setShowList] = useState(false);
 
 	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
 	const adminStyles = !!(send_by || session_type === 'admin') || false;
@@ -45,6 +48,39 @@ function SentDiv({
 					{!isEmpty(btns) && (
 						<div className={styles.btns_container}>
 							{(btns || []).map((eachbtn) => <div className={styles.btn}>{eachbtn}</div>)}
+						</div>
+					) }
+					{!isEmpty(list) && (
+						<button
+							className={styles.list_button}
+							onClick={() => setShowList(!showList)}
+						>
+							{
+								showList ? (
+									<span className={styles.btn_container}>
+										<IcMCross className={styles.btn_icon} />
+										Hide
+									</span>
+								) : (
+									<span className={styles.btn_container}>
+										<IcMListView className={styles.btn_icon} />
+										List
+									</span>
+								)
+							}
+						</button>
+					) }
+					{!isEmpty(list) && showList && (
+						<div className={styles.list_container}>
+							{(list || []).map((listItem) => {
+								const { id, title, description } = listItem;
+								return (
+									<div key={`msg-list-item-${id}`} className={styles.list_item}>
+										<div className={styles.list_item_title}>{title}</div>
+										<div className={styles.list_item_description}>{description}</div>
+									</div>
+								);
+							})}
 						</div>
 					) }
 				</div>
