@@ -46,7 +46,7 @@ function SentDiv({
 						<div
 							className={styles.message_tick_container}
 						>
-							{(message_status === 'seen') ? <IcMDoubleTick fill="blue" /> : <IcMTick />}
+							{(message_status === 'seen') ? <IcMDoubleTick fill="#0000FF" /> : <IcMTick />}
 						</div>
 
 					</div>

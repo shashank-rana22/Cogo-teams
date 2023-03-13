@@ -76,7 +76,7 @@
 	height: 30px;
 }
 
-.message_tick_container{
+.message_tick_container {
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 }
