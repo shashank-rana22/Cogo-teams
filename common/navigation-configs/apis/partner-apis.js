@@ -10613,6 +10613,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'send_user_whatsapp_template',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+
 	],
 	analytics_dashboard: [
 		{

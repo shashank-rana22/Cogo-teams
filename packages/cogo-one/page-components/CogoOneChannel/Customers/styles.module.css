@@ -71,3 +71,95 @@
 	font-size: 10px;
 	color: #000;
 }
+
+.plus_circle {
+	position: absolute;
+    left: 240px;
+	bottom: 1px;
+	cursor: pointer;
+	height: 45px;
+	width: 45px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(0, 0, 0);
+	border-radius: 100%;
+	box-shadow: 0.2rem 0.4rem 1rem rgba(138, 121, 93, 0.6);
+
+
+	
+}
+
+
+.wrapper{
+	cursor: pointer;
+	z-index: 99;
+
+	&.wrapper {
+		position: absolute;
+
+	}
+
+	& .checkbox {
+		display: none;
+
+		&:checked ~ .widget:before {
+			width: 90%;
+			height: 90%;
+			left: 5%;
+			top: 5%;
+			background-color: rgba(255, 255, 255, 0.2);
+		}
+
+		&:checked ~ .widget .dots {
+			height: 6px;
+		}
+
+		&:checked ~ .wheel {
+			transform: scale(1);
+		}
+
+		&:checked ~ .wheel .action {
+			opacity: 1;
+		}
+	}
+}
+
+.wheel{
+	position: absolute;
+	bottom: 0;
+	left: 270px;
+    bottom: 26px;
+    height: 128px;
+	transition: all 0.3s ease;
+	transform-origin: bottom right;
+	transform: scale(0);
+}
+.action{
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 1s ease;
+	opacity: 1;
+
+	/* :hover {
+		box-shadow: 0 0.1rem 1rem rgba(24, 66, 154, 0.7);
+		border-radius: 100%;
+	} */
+}
+.action img{
+	width: 50px;
+	height: 50px;
+}
+.callicon{
+	right: 15px;
+    top: 27px;
+}
+.whatsappicon{
+	right: 78px;
+    top: 98px;
+}

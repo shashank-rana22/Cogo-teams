@@ -1,8 +1,10 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
-import React from 'react';
+import { IcMPlus } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import InactiveModal from './InactiveModal';
 import MessageList from './MessageList';
+import NewWhatsappMessage from './NewWhatsappMessage';
 import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
@@ -35,12 +37,22 @@ function Customers({
 	setShowDialModal = () => {},
 
 }) {
+	const [modalType, setModalType] = useState(false);
+	const [isChecked, setIsChecked] = useState(false);
 	const onChangeToggle = () => {
 		if (toggleStatus) {
 			setOpenModal(true);
 		} else {
 			updateUserStatus({ status: 'active' });
 		}
+	};
+
+	// const openModelForNewContact = () => {
+	// 	setModalType(true);
+	// };
+
+	const handleOpenOptions = () => {
+		setIsChecked(!isChecked);
 	};
 	return (
 		<div className={styles.container}>
@@ -122,6 +134,53 @@ function Customers({
 					loading={statusLoading}
 					updateUserStatus={updateUserStatus}
 
+				/>
+			)}
+			<div className={styles.wrapper}>
+
+				<input
+					id="fabCheckbox"
+					type="checkbox"
+					className={styles.checkbox}
+					checked={isChecked}
+				/>
+				<div htmlFor="fabCheckbox" className={styles.plus_circle}>
+					<IcMPlus onClick={handleOpenOptions} fill="#ffffff" width={35} height={35} />
+				</div>
+				<div className={styles.wheel}>
+					<div className={`${styles.action} ${styles.callicon}`}>
+						{/* <IcMCall onClick={() => setShowDialModal(true)} width={50} height={50} /> */}
+						{/* <img
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/phone_dark.svg"
+							alt=""
+						/> */}
+
+						<img
+							onClick={() => setShowDialModal(true)}
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/phone_light.svg"
+							alt=""
+							role="presentation"
+						/>
+					</div>
+					<div className={`${styles.action} ${styles.whatsappicon}`}>
+						{/* <IcCSendWhatsapp onClick={() => setModalType(true)} width={50} height={50} /> */}
+						{/* <img
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/whatsapp_light.svg"
+							alt=""
+						/> */}
+						<img
+							onClick={() => setModalType(true)}
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/w_app_d.svg"
+							alt=""
+							role="presentation"
+						/>
+
+					</div>
+				</div>
+			</div>
+			{modalType && (
+				<NewWhatsappMessage
+					setModalType={setModalType}
 				/>
 			)}
 		</div>

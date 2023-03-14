@@ -3,7 +3,7 @@ import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectM
 import React, { useState } from 'react';
 
 import Templates from '../../../../common/Templates';
-import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
+import useSendUserWhatsappTemplate from '../../../../hooks/useSendUserWhatsappTemplate';
 
 import styles from './styles.module.css';
 
@@ -20,20 +20,19 @@ function NewWhatsappMessage({
 		number       : '',
 		country_code : '+91',
 	});
-	const { sendCommunicationTemplate, loading } = useSendCommunicationTemplate(
+	const { sendUserWhatsappTemplate, loading } = useSendUserWhatsappTemplate(
 		{
-			formattedData   : {},
-			isOtherChannels : true,
-			callbackfunc    : closeModal,
+			callbackfunc: closeModal,
 		},
 	);
-	const sendWhatsappCommunication = (args) => {
+	const sendWhatsappCommunication = (args = {}) => {
 		const { country_code = '', number = '' } = dialNumber;
-		const numberWithCountryCode = country_code + number;
-		if (number === '') {
-			Toast.error('Please enter mobile number ');
+
+		if (!number) {
+			Toast.error('Please enter mobile number');
 		} else {
-			sendCommunicationTemplate({ ...args, otherChannelRecipient: numberWithCountryCode });
+			const { template_name } = args;
+			sendUserWhatsappTemplate({ country_code, whatsapp_number: number, template_name });
 		}
 	};
 	const data = {

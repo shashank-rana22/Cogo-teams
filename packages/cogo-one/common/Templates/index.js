@@ -19,7 +19,7 @@ function Templates({
 	setOpenCreateReply = () => {},
 	data = {},
 }) {
-	const { sendCommunicationTemplate, communicationLoading } = data || {};
+	const { sendCommunicationTemplate = () => {}, communicationLoading = false } = data || {};
 	const [showPreview, setShowPreview] = useState(false);
 	const [previewData, setPreviewData] = useState();
 	const [templateName, setTemplateName] = useState('');
