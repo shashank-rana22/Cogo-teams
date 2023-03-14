@@ -5,8 +5,8 @@ const useGetControls = (isomniChannelAdmin) => {
 	const listAgentsOptions = useGetAsyncOptions(
 		asyncFieldsListAgents(),
 	);
-
-	const controls = [
+	const HIDE_CONTROLS_ADMIN = ['assigned_to_me'];
+	let controls = [
 		{
 			label     : '',
 			name      : 'status',
@@ -86,8 +86,7 @@ const useGetControls = (isomniChannelAdmin) => {
 			},
 			...(listAgentsOptions || {}),
 		},
-		!isomniChannelAdmin
-		&& {
+		{
 			label        : 'Assigned To',
 			name         : 'assigned_to_me',
 			type         : 'radio',
@@ -102,6 +101,11 @@ const useGetControls = (isomniChannelAdmin) => {
 			],
 		},
 	];
+
+	if (isomniChannelAdmin) {
+		controls = controls.filter((item) => !HIDE_CONTROLS_ADMIN.includes(item?.name));
+	}
+
 	return controls;
 };
 
