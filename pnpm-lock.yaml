@@ -491,9 +491,19 @@ importers:
   packages/fcl-freight:
     specifiers:
       '@cogoport/components': ^1.0.372
+      '@cogoport/constants': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.60
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.372_react@18.2.0
+      '@cogoport/components': 1.0.372_aydyy3gkshtlrnyh7fafj36que
+      '@cogoport/constants': link:../../common/constants
+      '@cogoport/icons-react': 1.0.60_react@18.2.0
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.6
       react: 18.2.0
 
   packages/ground-ops:
@@ -2052,13 +2062,14 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.372_react@18.2.0:
+  /@cogoport/components/1.0.372_aydyy3gkshtlrnyh7fafj36que:
     resolution: {integrity: sha512-KbwhoGEDy9gXAu63u/MUTdwRilQzJ0pDAUJ9LZjrT7Xe2ODsQfyPXQsXdlp1/6hWZbR0GCR9kWScotCNFSwwpQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
+      '@cogoport/icons-react': 1.0.60_react@18.2.0
       '@tippyjs/react': 4.2.6_react@18.2.0
       '@types/quill': 2.0.10
       '@types/react-rte': 0.16.5
@@ -2142,12 +2153,26 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@cogoport/icons-react/1.0.60_react@18.2.0:
+    resolution: {integrity: sha512-GWjnr6NKTJTJEkgIZw6L3p6A6SQHZVaLl0CttyASr6hGRNXfhBcPt3octCj5lm5yj+s4WTrGazQ3z/i2WQxTOg==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.60
+      react: 18.2.0
+    dev: false
+
   /@cogoport/icons/1.0.53:
     resolution: {integrity: sha512-fiRn9hLaotomnUB4MdYk02L7AcgQBsGIIm6E3b67EUC5nGz8AhZ5HNFZLqiinOlm6INzv+CWvZmSN52FngUxVA==}
     dev: false
 
   /@cogoport/icons/1.0.58:
     resolution: {integrity: sha512-8ort8jOyO9P8mK3gy7i+wdqqUkKRjkeTVT61beqUzcUCxk/V+4LaVtg+GQg8pK8dTy9ePGThduB860WHzw7Vkw==}
+    dev: false
+
+  /@cogoport/icons/1.0.60:
+    resolution: {integrity: sha512-NIqS22UssbCvX9oYx37TCDW8ezfOZmp6x1ZRXApcherj6A/C+tlxx9/FZL9AArMNTGjcqLQJH0189xWMWfLAHg==}
     dev: false
 
   /@cogoport/stylelint-config/1.0.3_stylelint@14.16.1:
