@@ -73,7 +73,7 @@ export const SERVICE_ICON_MAPPING = {
 };
 
 export const LOGO_URL = {
-	admin : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/10118f395f681ff8ce69dc191c28d45d/XMLID_816_.svg',
+	admin : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/admin_icon.svg',
 	bot   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-notification.svg',
 };
 
@@ -108,6 +108,9 @@ export const PLATFORM_MAPPING = {
 
 // eslint-disable-next-line max-len
 export const URL_MATCH_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+
+export const ENDS_WITH_STAR_SPACE = /\* /;
+export const ENDS_WITH_STAR_CHAR = /\*[^0-9a-zA-Z]/;
 
 export const DEFAULT_PILLS_ITEMS = [
 	{
@@ -201,3 +204,5 @@ export const ACCOUNT_TYPE_MAPPING = {
 	importer_exporter : 'twin_importer_exporter_id',
 	service_provider  : 'twin_service_provider_id',
 };
+
+export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/prod_cogo_one.apk';

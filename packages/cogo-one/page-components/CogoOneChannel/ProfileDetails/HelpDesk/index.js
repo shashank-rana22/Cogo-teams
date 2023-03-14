@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Input, Pagination, Tooltip, Loader } from '@cogoport/components';
-import { IcMSearchlight, IcMFolder } from '@cogoport/icons-react';
+import { IcMCross, IcMSearchlight, IcMFolder } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
@@ -67,6 +66,7 @@ function HelpDesk() {
 				<div className={styles.display_topics}>
 					{(list || []).map((item) => (
 						<div
+							role="presentation"
 							className={styles.square_div}
 							onClick={() => setTopic(item)}
 						>
@@ -142,6 +142,14 @@ function HelpDesk() {
 				value={search}
 				onChange={(val) => setSearch(val)}
 				disabled={loading}
+				suffix={!isEmpty(search) && (
+					<IcMCross
+						className={styles.cross_icon}
+						onClick={() => {
+							setSearch('');
+						}}
+					/>
+				)}
 			/>
 			{renderQuestionList()}
 

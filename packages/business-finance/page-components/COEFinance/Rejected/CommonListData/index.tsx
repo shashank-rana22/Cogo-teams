@@ -92,9 +92,7 @@ function CommonListData({ filters, setFilters, subActiveTab }: Props) {
 					setFilters((p: GenericObject) => ({ ...p, pageIndex: pageValue }));
 				}}
 				subActiveTab={subActiveTab}
-				showPagination={false}
-				width="1800px"
-				scrollable
+				showPagination
 			/>
 		</div>
 	);

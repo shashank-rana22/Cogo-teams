@@ -93,7 +93,7 @@ function QuestionsItem({
 
 			{questionStatus === 'add_weightage' && (
 				<>
-					<div className={styles.weightage} style={{ width: '25%' }}>
+					<div className={styles.weightage}>
 						<p className={styles.label}>Weightage</p>
 						<Input
 							value={Math.round(item.weightage)}

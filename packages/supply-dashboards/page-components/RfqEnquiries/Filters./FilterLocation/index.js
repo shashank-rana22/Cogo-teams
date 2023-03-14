@@ -21,6 +21,7 @@ function FilterLocation({ filters, hookSetters }) {
 	if (!service) {
 		heading = 'Port or Airport';
 	}
+	const name = service ? heading : 'location';
 	const handleChange = (value) => {
 		hookSetters?.setFilters({ ...filters, trade_type: value, page: 1 });
 	};
@@ -58,9 +59,9 @@ function FilterLocation({ filters, hookSetters }) {
 					{...locationOptions}
 					isClearable
 					placeholder="Select Origin Location"
-					value={filters[`origin_${heading}_id`]}
+					value={filters[`origin_${name}_id`]}
 					onChange={(value) => {
-						hookSetters.setFilters({ ...filters, [`origin_${heading}_id`]: value, page: 1 });
+						hookSetters.setFilters({ ...filters, [`origin_${name}_id`]: value, page: 1 });
 					}}
 				/>
 				<div>
@@ -73,10 +74,10 @@ function FilterLocation({ filters, hookSetters }) {
 					{...locationOptions}
 					isClearable
 					placeholder="Select Destination Location"
-					value={filters[`destination_${heading}_id`]}
+					value={filters[`destination_${name}_id`]}
 					onChange={(value) => {
 						hookSetters.setFilters(
-							{ ...filters, [`destination_${heading}_id`]: value, page: 1 },
+							{ ...filters, [`destination_${name}_id`]: value, page: 1 },
 						);
 					}}
 				/>
