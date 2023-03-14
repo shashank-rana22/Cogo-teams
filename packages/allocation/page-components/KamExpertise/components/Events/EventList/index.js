@@ -1,5 +1,6 @@
 import { Pill } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -11,6 +12,12 @@ function EventListItem({ data, index, loading = true, setEventListData, setToggl
 		params = '',
 	} = data;
 	// console.log('data loading :::::', loading);
+
+	const COMPLETION_MAPPING = {
+		completed   : 'Shipment Completion',
+		in_progress : 'Shipment Creation',
+
+	};
 
 	const handleEdit = () => {
 		setEventListData(data);
@@ -76,7 +83,7 @@ function EventListItem({ data, index, loading = true, setEventListData, setToggl
 			<div className={styles.top_div}>
 				#
 				{index + 1}
-				<IcMEdit onClick={handleEdit} />
+				<IcMEdit style={{ cursor: 'pointer' }} onClick={handleEdit} />
 			</div>
 			<div>
 				<p className={styles.info_tag}>
@@ -101,55 +108,81 @@ function EventListItem({ data, index, loading = true, setEventListData, setToggl
 				<p className={styles.rule_head}>
 					Rule
 				</p>
-				{rules.map((res, i) =>
-				// console.log('res::', res);
-					(
-						<div className={styles.rule_body}>
+				{rules.map((res, i) => (
+					<div className={styles.rule_body}>
+						<div style={{ display: 'flex' }}>
 							Rule #
 							{i + 1}
+
+						</div>
+						<span style={{ display: 'flex' }}>
 							<Pill
 								key="Reactivation"
 								size="l"
 								color="blue"
 							>
-								{res?.name}
-							</Pill>
 
+								{startCase(res?.name)}
+
+							</Pill>
+						</span>
+						<div style={{ display: 'flex' }}>
 							is triggered on
+						</div>
+
+						<span style={{ display: 'flex' }}>
 							<Pill
 								key="Shipment_creation"
 								size="l"
 								color="#FEF3E9"
 							>
-								Shipment creation
+								{COMPLETION_MAPPING[data?.event_state_on]}
+								{/* {startCase(COMPLETION_MAPPING[])} */}
 							</Pill>
+						</span>
 
-							of
+						of
+						<span style={{ display: 'flex' }}>
 							<Pill
 								key="Account"
 								size="l"
 								color="#FEF3E9"
 							>
-								{res?.rule_type}
+								{startCase(res?.rule_type)}
 							</Pill>
+						</span>
+						<span style={{ display: 'flex' }}>
+							having attribute and last booking date :
+						</span>
 
-							having attribute
-						</div>
-					))}
+						{' '}
+						<span style={{ display: 'flex' }}>
+							<Pill
+								key="Account"
+								size="l"
+								color="#FEF3E9"
+							>
+								{startCase(res?.parameters)}
+							</Pill>
+						</span>
+
+					</div>
+				))}
 			</div>
 
-			<div className={styles.rule_end}>
+			{/* <div className={styles.rule_end}>
 				last booking date
 
 				<Pill
 					key="Account"
 					size="l"
 					color="#FEF3E9"
+					// style={{ width: '8%' }}
 				>
-					{/* {params} */}
+					{params}
 				</Pill>
 
-			</div>
+			</div> */}
 
 		</section>
 	);
