@@ -7287,6 +7287,7 @@ const partner = {
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
 		},
+		
 		{
 			api         : 'get_sales_dashboard_monthly_outstanding',
 			access_type : 'private',
@@ -7661,10 +7662,10 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
-			api: 'post_payments_accounts_post_to_sage',
-			access_type: 'private',
-			module: 'onAccount',
-			feature: 'onAccount',
+			api         : 'post_payments_accounts_post_to_sage',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
 		},
 		{
 			api         : 'put_sales_accounts',
