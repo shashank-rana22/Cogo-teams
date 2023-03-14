@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
-import { useForm, InputController, UploadController, SelectController } from '@cogoport/forms';
+import { useForm, InputController, UploadController, SelectController, MultiselectController } from '@cogoport/forms';
 
-import controls from '../../../../../configurations/upload-documents-controls';
+import getControls from '../../../../../configurations/upload-documents-controls';
 import useSubmitOrganizationKyc from '../../../../../hooks/useSubmitOrganizationKyc';
 
 import styles from './styles.module.css';
@@ -13,6 +13,7 @@ function UploadDetailsModal({ setShowModal = () => {}, orgId = '' }) {
 		formState: { errors },
 		reset,
 	} = useForm();
+	console.log('errors:', errors);
 
 	const {
 		submitOrganizationKyc = () => {},
@@ -28,25 +29,38 @@ function UploadDetailsModal({ setShowModal = () => {}, orgId = '' }) {
 		setShowModal(false);
 	};
 
-	const { utility_bill_document_url, country_id, registration_number, preferred_languages } = controls;
+	const {
+		utility_bill_document_url,
+		country_id,
+		pan_number,
+		preferred_languages,
+	} = getControls();
+
 	return (
-		<Modal size="lg" show onClose={handleClose} placement="top">
+		<Modal
+			size="lg"
+			show
+			onClose={handleClose}
+			placement="top"
+		>
 			<Modal.Header title="KYC Details" />
 			<Modal.Body>
 				<div className={styles.container}>
-
 					<div className={styles.input_container}>
 						<div className={styles.label}>
-							Business address Proof
+							Business Address Proof
 						</div>
 						<div className={styles.input_field}>
 							<UploadController
-								control={control}
 								{...utility_bill_document_url}
+								control={control}
 								id="utility_bill_document_url"
 							/>
-							<div className={styles.error_text}>{errors?.utility_bill_document_url?.message}</div>
-
+							<div
+								className={styles.error_text}
+							>
+								{errors?.utility_bill_document_url?.message}
+							</div>
 						</div>
 					</div>
 					<div className={styles.input_container}>
@@ -54,33 +68,63 @@ function UploadDetailsModal({ setShowModal = () => {}, orgId = '' }) {
 							Organization’s registration country
 						</div>
 						<div className={styles.input_field}>
-							<InputController control={control} {...country_id} id="registration_country" />
-							<div className={styles.error_text}>{errors?.country_id?.message}</div>
+							<SelectController
+								{...country_id}
+								control={control}
+								id="registration_country"
+							/>
+							<div
+								className={styles.error_text}
+							>
+								{errors?.country_id?.message}
+							</div>
 						</div>
 					</div>
 					<div className={styles.input_container}>
 						<div className={styles.label}>
-							Organization’s PAN number
+							Organization’s PAN Number
 						</div>
 						<div className={styles.input_field}>
-							<InputController control={control} {...registration_number} id="registration_number" />
-							<div className={styles.error_text}>{errors?.registration_number?.message}</div>
+							<InputController
+								{...pan_number}
+								control={control}
+								id="pan_number"
+							/>
+							<div
+								className={styles.error_text}
+							>
+								{errors?.pan_number?.message}
+							</div>
 						</div>
 					</div>
 					<div className={styles.input_container}>
 						<div className={styles.label}>
-							Organization’s PAN number
+							Preferred Languages
 						</div>
 						<div className={styles.input_field}>
-							<SelectController control={control} {...preferred_languages} id="preferred_languages" />
-							<div className={styles.error_text}>{errors?.preferred_languages?.message}</div>
+							<MultiselectController
+								{...preferred_languages}
+								control={control}
+								id="preferred_languages"
+							/>
+							<div
+								className={styles.error_text}
+							>
+								{errors?.preferred_languages?.message}
+							</div>
 						</div>
 					</div>
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.actions}>
-					<Button size="md" themeType="secondary" onClick={handleCancel}>Cancel</Button>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={handleCancel}
+					>
+						Cancel
+					</Button>
 					<Button
 						themeType="accent"
 						className={styles.last_button}

@@ -10628,7 +10628,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
-
 	],
 	analytics_dashboard: [
 		{

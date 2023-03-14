@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
-import useGetOmnichannelDocumentCount from '../../../hooks/useGetOmnichannelDocumentCount';
+import useListOmnichannelDocuments from '../../../hooks/useListOmnichannelDocuments';
 import useListOrganizations from '../../../hooks/useListOrganizations';
 import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 
@@ -33,11 +33,15 @@ function ProfileDetails({
 		disableQuickActions,
 	} = useListOrganizations({ orgId, activeCardId, activeTab });
 
-	const { data = {}, documentCount = () => {} } = useGetOmnichannelDocumentCount({
+	const {
+		documents_count = 0,
+		documentsList: documentCount = () => {},
+	} = useListOmnichannelDocuments({
 		activeMessageCard,
 		activeVoiceCard,
 		activeTab,
 		customerId,
+		type: 'count',
 	});
 
 	return (
@@ -68,8 +72,8 @@ function ProfileDetails({
 				openNewTab={openNewTab}
 				loading={loading}
 				disableQuickActions={disableQuickActions}
-				data={data}
 				documentCount={documentCount}
+				documents_count={documents_count}
 				listIds={listIds}
 				activeMessageCard={activeMessageCard}
 				activeVoiceCard={activeVoiceCard}
@@ -78,4 +82,5 @@ function ProfileDetails({
 		</div>
 	);
 }
+
 export default ProfileDetails;

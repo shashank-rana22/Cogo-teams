@@ -24,7 +24,11 @@ function Filters({
 				</div>
 
 				<div className={styles.styled_icon}>
-					<IcMCross width={20} height={20} onClick={() => setFilterVisible(false)} />
+					<IcMCross
+						width={20}
+						height={20}
+						onClick={() => setFilterVisible(false)}
+					/>
 				</div>
 			</div>
 
@@ -36,14 +40,24 @@ function Filters({
 			/>
 
 			<div className={styles.actions}>
-				<Button size="sm" themeType="tertiary" onClick={handleReset}>
+				<Button
+					size="sm"
+					themeType="tertiary"
+					onClick={handleReset}
+				>
 					<div className={styles.refresh_icon}>
 						<IcMRefresh width={10} height={10} />
 					</div>
 					Reset Status
-
 				</Button>
-				<Button size="sm" themeType="primary" onClick={handleFilters} disabled={emptyCheck}>Submit</Button>
+				<Button
+					size="sm"
+					themeType="primary"
+					onClick={handleFilters}
+					disabled={emptyCheck}
+				>
+					Submit
+				</Button>
 			</div>
 		</div>
 	);

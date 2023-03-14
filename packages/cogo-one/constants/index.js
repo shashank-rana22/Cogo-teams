@@ -207,16 +207,17 @@ export const ACCOUNT_TYPE_MAPPING = {
 
 export const DOCUMENT_FILTERS_MAPPING = [
 	{
-		label : 'KYC document',
+		label : 'KYC Document',
 		value : 'kyc_document',
 	},
 	{
-		label : 'Shipment document',
+		label : 'Shipment Document',
 		value : 'shipment_document',
 	},
 	{
-		label : 'Wrong document',
+		label : 'Wrong Document',
 		value : 'wrong_document',
 	},
 ];
+
 export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/prod_cogo_one.apk';

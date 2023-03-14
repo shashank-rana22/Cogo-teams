@@ -4,12 +4,13 @@ import { useEffect } from 'react';
 
 import FormatData from '../utils/formatData';
 
-function useOmnichannelDocumentsList({
+function useListOmnichannelDocuments({
 	activeMessageCard,
 	activeVoiceCard,
 	activeTab,
 	customerId,
 	setFilterVisible,
+	type = '',
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_omnichannel_documents',
@@ -26,15 +27,27 @@ function useOmnichannelDocumentsList({
 
 	const documentsList = async (filters) => {
 		try {
+			let filters_payload = {
+				user_id       : !isEmpty(userId) ? userId : undefined,
+				mobile_number : isEmpty(userId) ? userMobile : undefined,
+				lead_user_id  : checkConditions ? leadUserId : undefined,
+
+			};
+
+			if (type === 'count') {
+				filters_payload = { ...filters_payload, is_seen: false };
+			} else {
+				filters_payload = {
+					...filters_payload,
+					document_type: !isEmpty(filters) ? filters : undefined,
+				};
+			}
+
 			await trigger({
 				params: {
-					page_limit : 1000,
-					filters    : {
-						user_id       : !isEmpty(userId) ? userId : undefined,
-						mobile_number : isEmpty(userId) ? userMobile : undefined,
-						lead_user_id  : checkConditions ? leadUserId : undefined,
-						document_type : !isEmpty(filters) ? filters : undefined,
-					},
+					page_limit                : type !== 'count' ? 1000 : undefined,
+					only_total_count_required : type === 'count',
+					filters                   : filters_payload,
 				},
 			});
 			setFilterVisible(false);
@@ -52,10 +65,11 @@ function useOmnichannelDocumentsList({
 
 	return {
 		documentsList,
-		data,
+		list            : data?.list || [],
+		documents_count : data?.total_count || 0,
 		loading,
 		orgId,
 	};
 }
 
-export default useOmnichannelDocumentsList;
+export default useListOmnichannelDocuments;
