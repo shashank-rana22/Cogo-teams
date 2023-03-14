@@ -1,0 +1,45 @@
+
+import { Skeleton } from '@cogoport/front/components/admin';
+
+.Container{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+};
+
+.ButtonWrap{
+	display: flex;
+	justify-content: flex-end;
+};
+
+.Remarks{
+	margin-left: 5px;
+	color: #393f70;
+};
+
+.CustomDiv{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+};
+
+.CustomSkeleton {
+	margin-bottom: 5px;
+	width: 100%;
+};
+
+.RemarkHead{
+	color: #393f70;
+	font-size: 16px;
+	font-weight: 500;
+};
+
+.RemarkValue{
+	margin-left: 6px;
+	margin-top: 2px;
+};
+
+.Remark{
+	display: flex;
+	margin-left: 5px;
+};

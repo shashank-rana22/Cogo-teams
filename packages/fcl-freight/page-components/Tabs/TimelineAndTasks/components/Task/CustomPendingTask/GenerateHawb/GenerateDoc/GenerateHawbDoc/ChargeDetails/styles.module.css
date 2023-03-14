@@ -1,0 +1,41 @@
+
+
+.Flex{
+	display: flex;
+};
+
+.Block{
+	display: flex;
+	border: 1px #333 solid;
+	flex: 1;
+	min-height: 20px;
+	border: 0px;
+	font-weight: bold;
+	padding-left: 240px;
+	letter-spacing: 0px;
+};
+
+.BlockRow{
+	display: flex;
+	border: 1px #333 solid;
+};
+
+.BlockCol{
+	display: flex;
+	flex-direction: column;
+	border: 1px #333 solid;
+};
+
+.FlexCol{
+	display: flex;
+	flex-direction: column;
+};
+
+.FlexRow{
+	display: flex;
+
+	&.charge_container {
+		flex: 1;
+		min-height: 288px;
+	}
+};

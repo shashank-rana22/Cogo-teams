@@ -1,0 +1,10 @@
+
+
+.Flex{
+	display: flex;
+};
+
+.FlexCol{
+	display: flex;
+	flex-direction: column;
+};

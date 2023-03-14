@@ -1,0 +1,32 @@
+
+
+.container{
+	background: #f9f9f9;
+	height: fit-content;
+	display: flex;
+	padding: 8px 8px;
+	flex-wrap: wrap;
+};
+
+.item{
+	display: flex;
+	align-items: center;
+	margin: 0px 10px 20px 0px;
+};
+
+.item_label{
+	margin: 0px;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 16px;
+	color: #4f4f4f;
+};
+
+.item_value{
+	margin: 0px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	color: #393f70;
+	margin-left: 4px;
+};

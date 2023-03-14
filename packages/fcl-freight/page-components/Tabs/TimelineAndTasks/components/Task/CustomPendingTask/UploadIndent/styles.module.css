@@ -1,0 +1,13 @@
+
+
+.Container{
+	.button-wrapper {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		margin-top: 10px;
+		.right {
+			margin-left: 10px;
+		}
+	}
+};

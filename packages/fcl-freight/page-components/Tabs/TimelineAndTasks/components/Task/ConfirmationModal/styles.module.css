@@ -1,0 +1,26 @@
+
+.text{
+	font-weight: 500;
+	font-size: 18px;
+	text-transform: capitalize;
+	color: #333333;
+	text-align: center;
+	align-self: center;
+	margin-bottom: 10px;
+};
+
+.description{
+	font-weight: 400;
+	font-size: 14px;
+	text-align: center;
+	margin-bottom: 10px;
+	margin-top: 20px;
+	color: #828282;
+	align-self: center;
+};
+
+.buttons_container{
+	background: #fff;
+	display: flex;
+	justify-content: space-evenly;
+};

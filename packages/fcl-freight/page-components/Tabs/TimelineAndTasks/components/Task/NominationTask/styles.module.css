@@ -1,0 +1,41 @@
+
+
+.Container{};
+
+.ButtonWrap{
+	margin: 20px 0px;
+	display: flex;
+	justify-content: flex-end;
+
+	.core-ui-button-root {
+		margin-left: 10px;
+		text-transform: capitalize;
+		width: 100px;
+	}
+};
+
+.EmailPreview{};
+
+.RecieptNameSelect{
+	display: flex;
+	justify-content: start;
+};
+
+.To{
+	font-weight: bold;
+	font-size: 14px;
+	padding: 6px;
+};
+
+.CC{
+	font-weight: bold;
+	font-size: 14px;
+	padding: 6px;
+};
+
+.Subject{
+	font-weight: bold;
+	font-size: 14px;
+	padding: 6px;
+	border: none;
+};

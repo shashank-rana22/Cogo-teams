@@ -1,0 +1,20 @@
+
+.container{
+	display: flex;
+	flex-wrap: wrap;
+
+	.cargo-detail-pill {
+		color: #4f4f4f;
+		font-weight: 500;
+		text-transform: capitalize;
+	}
+
+	.core-ui-button-root {
+		letter-spacing: 0px;
+		white-space: nowrap;
+
+		&:hover {
+			box-shadow: none;
+		}
+	}
+};

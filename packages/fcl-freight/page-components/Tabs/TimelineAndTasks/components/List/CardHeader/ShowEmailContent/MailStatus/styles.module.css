@@ -1,0 +1,19 @@
+
+
+.container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 14px;
+	color: #393f70;
+	margin-bottom: 8px;
+
+	&.green {
+		color: #358856;
+	}
+	&.red {
+		color: #ff0000;
+	}
+};

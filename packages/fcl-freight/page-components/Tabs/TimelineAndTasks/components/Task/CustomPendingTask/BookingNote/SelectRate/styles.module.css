@@ -1,0 +1,40 @@
+
+
+.Container{
+	padding: 30px;
+	.core-ui-select__menu {
+		min-width: 100%;
+	}
+};
+
+.ButtonDiv{
+	display: flex;
+	justify-content: flex-end;
+};
+
+.Selection{
+	display: flex;
+	align-items: center;
+	margin-top: 36px;
+};
+
+.Text = styled.p}
+	margin: 0px;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
+	color: #393f70;
+
+	&.light {
+		color: #5936f0;
+	}
+};
+
+.SelectionDiv{};
+
+.SkeletonWrap{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+};

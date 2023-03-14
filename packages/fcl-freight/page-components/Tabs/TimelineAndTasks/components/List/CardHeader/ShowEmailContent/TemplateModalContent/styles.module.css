@@ -1,0 +1,18 @@
+
+.template{
+	height: 75vh;
+	width: 100%;
+	overflow: auto;
+	color: #393f70;
+};
+
+.empty_state{
+	padding: 20px 40px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #393f70;
+};
+
+.flexbox{
+	background-color: #ffffff;
+};

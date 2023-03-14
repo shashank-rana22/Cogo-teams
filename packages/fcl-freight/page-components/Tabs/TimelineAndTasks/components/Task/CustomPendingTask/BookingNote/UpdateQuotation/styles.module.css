@@ -1,0 +1,19 @@
+
+import { Skeleton } from '@cogoport/front/components/admin';
+
+.Container{};
+
+.ButtonDiv{
+	display: flex;
+	justify-content: flex-end;
+};
+
+.CustomSkeleton {
+	width: 100%;
+	margin-bottom: 5px;
+};
+
+.SkeletonWrapper{
+	display: flex;
+	flex-direction: column;
+};

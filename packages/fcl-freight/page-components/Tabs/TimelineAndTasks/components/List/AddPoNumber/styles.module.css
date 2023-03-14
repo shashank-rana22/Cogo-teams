@@ -1,0 +1,32 @@
+
+.container{
+	.form-item-label {
+		margin-bottom: 8px;
+	}
+};
+
+.button_wrap{
+	margin-top: 32px;
+	display: flex;
+	justify-content: flex-end;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+		width: 150px;
+	}
+};
+
+.line{
+	width: 64px;
+	border: 2px solid #393f70;
+};
+
+.heading{
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 15px;
+	text-transform: uppercase;
+	color: #393f70;
+	margin-bottom: 8px;
+	margin-top: 6px;
+};

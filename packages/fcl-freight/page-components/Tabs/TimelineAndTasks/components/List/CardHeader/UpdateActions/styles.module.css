@@ -1,0 +1,53 @@
+
+
+.updated_by{
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 14px;
+	color: #393f70;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 32%;
+	@media (max-width: 768px) {
+		width: 100%;
+		display: flex;
+		align-items: flex-start;
+		margin-top: 20px;
+	}
+};
+
+.task_action{
+	font-size: 10px;
+	line-height: 16px;
+	color: #828282;
+	cursor: pointer;
+	text-align: center;
+
+	&:hover {
+		color: #393f70;
+	}
+};
+
+.action{
+	cursor: pointer;
+
+	&.completed {
+		cursor: default;
+		opacity: 0.4;
+	}
+};
+
+.stakeholder_info{
+	display: flex;
+};
+
+.line{
+	border-bottom: 1px solid #333333;
+	margin: 2px 0px;
+	width: 100%;
+};
+
+.in_line{
+	padding-right: 40px;
+};

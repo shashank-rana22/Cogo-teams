@@ -1,0 +1,28 @@
+
+
+.Container{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+};
+
+.FileContainer{
+	display: flex;
+	margin-bottom: 8px;
+	width: 805px;
+};
+
+.LoadingContainer{
+	display: flex;
+	margin-top: 10px;
+};
+
+.ButtonDiv{
+	display: flex;
+	margin-bottom: 10px;
+};
+
+.BtnDiv{
+	display: flex;
+	justify-content: flex-end;
+};
