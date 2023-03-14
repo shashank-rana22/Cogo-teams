@@ -65,7 +65,6 @@ function CaseStudyForm({ control, register }) {
 								onClick={() => handleAppendChild()}
 							>
 								+ Add Another Question
-
 							</Button>
 						</div>
 					) : null}

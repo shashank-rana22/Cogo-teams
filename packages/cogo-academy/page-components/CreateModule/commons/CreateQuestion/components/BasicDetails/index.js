@@ -1,13 +1,14 @@
 import { useForm } from '@cogoport/forms';
+import { useEffect } from 'react';
 
 import getElementController from '../../../../../../configs/getElementController';
 
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function BasicDetails() {
+function BasicDetails({ setQuestionTypeWatch }) {
 	const {
-		// watch,
+		watch,
 		// handleSubmit = () => {},
 		formState: { errors = {} },
 		// reset,
@@ -17,6 +18,13 @@ function BasicDetails() {
 	} = useForm();
 
 	const controls = getControls();
+
+	const questionTypeWatch = watch('question_type');
+
+	useEffect(() => {
+		setQuestionTypeWatch(questionTypeWatch);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [questionTypeWatch]);
 
 	return (
 		<div className={styles.container}>
