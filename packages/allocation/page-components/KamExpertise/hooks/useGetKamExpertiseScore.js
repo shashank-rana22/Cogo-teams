@@ -12,7 +12,7 @@ const useGetKamExpertiseScore = () => {
 	// 	},
 	// });
 
-	const [{ loading, data }] = useAllocationRequest({
+	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : '/kam_expertise_event_configuration',
 		method  : 'GET',
 		authkey : 'get_allocation_kam_expertise_event_configuration',
@@ -26,6 +26,7 @@ const useGetKamExpertiseScore = () => {
 	return {
 		data,
 		loading,
+		refetch,
 	};
 };
 
