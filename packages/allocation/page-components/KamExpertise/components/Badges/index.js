@@ -61,7 +61,7 @@ function Badges() {
 					Badges
 				</div>
 
-				<div>
+				{(toggleScreen === 1) && (
 					<Header
 						badgeList={badgeList.length}
 						toggleScreen={toggleScreen}
@@ -74,11 +74,10 @@ function Badges() {
 						expertise={expertise}
 						setExpertise={setExpertise}
 					/>
-				</div>
+				)}
 			</section>
 			<div>
 				{
-					// Todo: add empty state's dimensions
 					(toggleScreen === 1) && isEmpty(badgeList)
 						? (
 							<div style={{ padding: '48px 0', backgroundColor: '#fff', marginBottom: '12px' }}>
