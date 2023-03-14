@@ -12,7 +12,6 @@ interface Props {
 	setShowModal:any,
 	showModal?: boolean,
 	createExpenseType?: string
-
 }
 
 function CreateExpenseModal({

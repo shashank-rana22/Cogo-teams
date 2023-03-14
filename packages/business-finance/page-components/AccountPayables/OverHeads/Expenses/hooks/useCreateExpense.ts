@@ -14,7 +14,7 @@ const useCreateExpense = (nonRecurringData) => {
 	const submitData = async () => {
 		try {
 			const response = await trigger({
-				payload: 'payload',
+				data: { payload: 'payload' },
 			});
 		} catch (err) {
 			Toast.error('Something went wrong');

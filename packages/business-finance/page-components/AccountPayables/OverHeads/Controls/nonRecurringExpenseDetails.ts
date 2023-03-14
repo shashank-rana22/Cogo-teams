@@ -7,6 +7,7 @@ interface FormDataInterface {
 	registrationNumber?: string,
 	entityObject?:{ id?:string },
 	periodOfTransaction?:string,
+	vendorName?:string,
 }
 
 interface EntityInt {
@@ -86,7 +87,7 @@ export const nonRecurringExpenseDetails = ({
 
 		if (entityList?.length > 0) {
 			const entities = [];
-			fetchedEntities.forEach((singleEntity) => {
+			(fetchedEntities || []).forEach((singleEntity) => {
 				(entityList || []).forEach((entity) => {
 					const { id, entity_code:entityCode, business_name:name } = entity || {};
 					if (singleEntity === id) {
@@ -124,11 +125,14 @@ export const nonRecurringExpenseDetails = ({
 					label          : 'Vendor Name*',
 					type           : 'asyncSelect',
 					asyncKey       : 'list_vendors',
+					value          : formData?.vendorName,
 					onChange       : (item, obj:object) => handleVendorChange(obj),
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Vendor name',
 					span           : 2,
+					initialCall    : false,
+					style          : { width: '220px' },
 				},
 				{
 					name                  : 'invoiceDate',

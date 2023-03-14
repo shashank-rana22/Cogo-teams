@@ -177,7 +177,7 @@ function asyncAllotBanks() {
 function listVendors() {
 	return {
 		labelKey    : 'business_name',
-		valueKey    : 'business_name',
+		valueKey    : 'q',
 		endpoint    : 'list_vendors',
 		initialCall : false,
 	};
