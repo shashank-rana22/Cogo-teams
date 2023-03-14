@@ -1,0 +1,135 @@
+.container{
+	width: 100%;
+	height: fit-content;
+}
+
+.spinner_container{
+    width: 100%;
+	margin: 40px 0 8px 0;
+	display: flex;
+	justify-content: center;
+}
+
+.title{
+    font-weight: 500;
+	font-size: 20px;
+	color: #000000;
+	line-height: 30px;
+}
+
+.input_container{
+	margin-top: 12px;
+	background: #ffffff;
+	border: 1px solid #000000;
+	border-radius: 4px;
+}
+
+.input_placeholder{
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 41px;
+	opacity: 0.3;
+}
+
+.display_topics{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-bottom: 24px;
+	padding-left: 24px;
+	width: 0;
+	@media (max-width: 770px) {
+		grid-template-columns: 1fr;
+		place-items: center;
+	}
+}
+
+.pagination_container{
+    width: 100%;
+	display: flex;
+	padding-bottom: 20px;
+	justify-content: flex-end;
+	padding-right: 20px;
+}
+
+.square_div{
+    width: 184px;
+	height: 144px;
+	box-sizing: border-box;
+	/* border: 1px solid #333333; */
+	margin: 12px;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	text-align: center;
+	background: #ffffff;
+	border: 1px solid #eaeaea;
+	border-radius: 4px;
+
+	&:hover {
+		border: 2px solid #f8f2e7;
+	}
+}
+
+.icon{
+    margin-top: 8px;
+	font-size: 40px;
+}
+
+.display_name{
+	padding: 0px 8px;
+	width: 100%;
+	font-weight: 600;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.popular_topics{
+    font-weight: 600;
+	font-size: 15px;
+	line-height: 21px;
+	color: #221f20;
+	margin-top: 12px;
+	margin-bottom: 0;
+	margin-left: 36px;
+}
+
+.question_count{
+    font-weight: 500;
+	font-size: 11px;
+	line-height: 16px;
+	text-align: center;
+	color: #221f20;
+	opacity: 0.6;
+	margin-top: 0px;
+}
+
+.icon_grid{
+    width: 100%;
+	height: 100%;
+	transition: transform 0.1s;
+	margin-top: 13px;
+
+	&:hover {
+		transform: scale(1.1);
+	}
+}
+
+.display_name_and_topic{
+	padding: 0 8px;
+	margin-right: 4px;
+	display: flex;
+	flex-direction: column;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.icon {
+	margin-top: 8px;
+	font-size: 40px;
+}
