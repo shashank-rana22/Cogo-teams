@@ -174,6 +174,16 @@ function asyncAllotBanks() {
 	};
 }
 
+function asyncCountries() {
+	return {
+		labelKey    : 'origin_country',
+		valueKey    : 'id',
+		endpoint    : '/list_countries',
+		initialCall : false,
+
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -188,4 +198,5 @@ export {
 	asyncFieldsOperators,
 	asyncFieldsListAgents,
 	asyncAllotBanks,
+	asyncCountries,
 };

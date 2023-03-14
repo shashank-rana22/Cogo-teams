@@ -1765,6 +1765,21 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
+	athena_dashboard: {
+		key         : 'athena_dashboard',
+		title       : 'Athena Dashboard',
+		module_type : 'dashboards',
+		href        : '/athena-dashboard',
+		as          : '/athena-dashboard',
+		main_apis   : [
+			'list_countries',
+		],
+		options: [
+			{
+				possible_apis: apis.athena,
+			},
+		],
+	},
 	kam_monitoring: {
 		key         : 'kam_monitoring',
 		title       : 'KAM Monitoring',

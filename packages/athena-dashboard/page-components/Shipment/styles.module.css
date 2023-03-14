@@ -1,0 +1,209 @@
+.search_container{
+   width: 400px;
+   border-radius: 4px;
+   cursor: pointer;
+   overflow: hidden;
+}
+
+.left_container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+
+.table{
+    display: block;
+    width: 150vw;
+    /* overflow-x: auto;
+    white-space: nowrap; */
+    margin-top: 50px;
+     background-color: white;
+    box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+    height: 120%;
+   
+    @media (max-width: 768px) {
+        overflow-x: scroll;
+    }
+}
+
+.exportinfo{
+    display: flex;
+}
+.shipmentreport{
+    width: 182px;
+    height: 30px;
+    top: 261px;
+    left: 476px;
+    /* Heading/LG/Semi-Bold */
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 150%;
+    /* identical to box height, or 30px */
+
+
+    /* Black 80 */
+
+    color: #4F4F4F;
+}
+.exportresults{
+  
+    padding-left: 12px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 150%;
+    cursor: pointer;
+    /* identical to box height, or 18px */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: capitalize;
+
+    /* Black */
+
+    color: #221F20;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+.sortby{
+    width: 41px;
+    height: 18px;
+
+    /* Body/SM/Regular */
+    display: block;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    /* identical to box height, or 18px */
+
+    display: flex;
+    align-items: center;
+
+    /* Black 80 */
+
+    color: #4F4F4F;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+.selectbox{
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 4px 0px 0px;
+    gap: 2px;
+
+    width: 180px;
+    height: 32px;
+
+    /* Greyscale Secondary/White */
+
+    background: #FFFFFF;
+    /* Black 20
+
+    Disable BG
+    */
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+.sortbybox{
+    padding-top: 20px;
+}
+
+.ul{
+    list-style-type: none;
+    padding-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.fromto{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+.to{
+    margin-left: 93px;
+}
+.daterange{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    margin-left: 5px;
+}
+.microfilternames{
+    margin-left: 3px;
+    margin-top: 20px;
+}
+
+.filtertab{
+    background: #F9F9F9;
+    border-radius: 10px;
+    width: 348px;
+    margin-top: 5px;
+    margin-left: 3px;
+}
+.leftpadding{
+    padding-left: 15px;
+    padding-top: 10px;
+}
+.lowerhalf{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 10px;
+    background-color: white;
+}
+.tableandtabs{
+    display: block;
+    margin-left: 30px;
+    overflow-x: auto;
+}
+.tablower{
+  margin: 20px;
+  margin-left: 0px !important;
+}
+.collapsible {
+    border: none;
+    background-color: #F9F9F9;
+    color: black;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.asynccontroller{
+    margin-bottom: 4px;
+}
+
+.rotatearrow{
+    cursor: pointer;
+}
+

@@ -1,4 +1,5 @@
 import allocations from './config/allocations';
+import athenaDashboard from './config/athena-dashboard';
 import businessFinance from './config/business-finance';
 import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
@@ -25,6 +26,7 @@ const routeConfig = {
 	...myProfile,
 	...inventory_management,
 	...kamMonitoring,
+	...athenaDashboard,
 };
 
 export default routeConfig;
