@@ -9,7 +9,6 @@ import useGetMessages from '../../../../hooks/useGetMessages';
 import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
 import useSendChat from '../../../../hooks/useSendChat';
 import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
-import useSendMessage from '../../../../hooks/useSendMessage';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
@@ -42,7 +41,6 @@ function Messages({
 		channel_type = '',
 		support_agent_id = '',
 		spectators_data = [],
-		sender = null,
 	} = activeMessageCard || {};
 
 	const {
@@ -60,11 +58,6 @@ function Messages({
 		(val) => val.agent_id === support_agent_id,
 	)?.agent_name;
 
-	const {
-		sendMessage,
-		loading:createCommunicationLoading,
-	} = useSendMessage({ channel_type, sender });
-
 	if (channel_type && id) {
 		activeChatCollection = collection(
 			firestore,
@@ -81,8 +74,6 @@ function Messages({
 		activeChatCollection,
 		draftUploadedFiles,
 		setDraftUploadedFiles,
-		sendMessage,
-		createCommunicationLoading,
 		formattedData,
 	});
 
