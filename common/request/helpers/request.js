@@ -9,8 +9,7 @@ import { getCookie } from './getCookieFromCtx';
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
-		arrayFormat   : 'brackets',
-		serializeDate : (date) => format(date, 'isoUtcDateTime'),
+		arrayFormat: 'brackets', serializeDate: (date) => format(date, 'isoUtcDateTime'),
 	});
 	return paramsStringify;
 };
@@ -23,8 +22,7 @@ const customPeeweeSerializer = (params) => {
 		return acc;
 	}, {});
 	const paramsStringify = qs.stringify(newParams, {
-		arrayFormat   : 'repeat',
-		serializeDate : (date) => format(date),
+		arrayFormat: 'repeat', serializeDate: (date) => format(date),
 	});
 
 	return paramsStringify;
@@ -40,15 +38,21 @@ request.interceptors.request.use((oldConfig) => {
 
 	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
 
-	const apiPath =	newConfig.url.split('/')[1] || newConfig.url.split('/')[0];
+	const apiPath = newConfig.url.split('/').pop();
+
+	const originalApiPath = newConfig.url
+		.split('/')
+		.filter((t) => t)
+		.join('/');
 
 	const serviceName = microServices[apiPath];
 
 	newConfig.paramsSerializer = { serialize: customSerializer };
 
 	if (serviceName) {
-		newConfig.url = `/${serviceName}/${apiPath}`;
-		if (serviceName === 'location') {
+		newConfig.url = `/${serviceName}/${originalApiPath}`;
+		if (serviceName === 'location'
+			&& process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com')) {
 			newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
 		}
 	}
@@ -56,9 +60,7 @@ request.interceptors.request.use((oldConfig) => {
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope : 'partner',
-			authorization      : `Bearer: ${token}`,
-			authorizationparameters,
+			authorizationscope: 'partner', authorization: `Bearer: ${token}`, authorizationparameters,
 		},
 	};
 });
