@@ -1,4 +1,4 @@
-import { Collapse, Button } from '@cogoport/components';
+import { Collapse } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import useKamExpertiseConfig from '../../../../hooks/useKamExpertiseConfig';
@@ -6,13 +6,14 @@ import useKamExpertiseConfig from '../../../../hooks/useKamExpertiseConfig';
 import Header from './Header';
 import KamLevelCard from './KamLevelCard';
 import KamLevelDropDown from './KamLevelDropDown';
+import LoadingState from './LoadingState';
 import ResponseCard from './ResponseCard';
 import styles from './styles.module.css';
 
 function KamLevel() {
-	const { kamConfigDetails, levleLoading, refetch } = useKamExpertiseConfig();
+	const { kamConfigDetails, levelLoading, refetch } = useKamExpertiseConfig();
 
-	const [title, setTitle] = useState(0);
+	const [activeCard, setActiveCard] = useState(0);
 	const [editMode, setEditMode] = useState(false);
 	const [createKam, setCreateKam] = useState(false);
 
@@ -25,23 +26,18 @@ function KamLevel() {
 		key: data.transition_level,
 
 		title: <KamLevelCard
-			key={data.transition_level}
 			data={data}
-			title={title}
-			setTitle={setTitle}
-			editMode={editMode}
-			setEditMode={setEditMode}
+			activeCard={activeCard}
+			setActiveCard={setActiveCard}
 			id={data.transition_level - 1}
 			dataLength={dataLength}
 			refetch={refetch}
-			levleLoading={levleLoading}
+
 		/>,
 
 		children: <KamLevelDropDown
-			key={data.transition_level}
 			editMode={editMode}
-			id={data.transition_level - 1}
-			title={title}
+			activeCard={activeCard}
 			setEditMode={setEditMode}
 			refetch={refetch}
 		/>,
@@ -52,35 +48,30 @@ function KamLevel() {
 		<div>
 			<Header
 				audit_data={audit_data}
+				levelLoading={levelLoading}
 			/>
 
-			<Collapse
-				panel={options}
-				activeKey={title}
-				setActive={setTitle}
-				type="text"
-				className={styles.collapse}
-			/>
-
-			{createKam ? (
-				<div className={styles.response_card}>
-					<ResponseCard
-						createKAM={createKam}
-						setCreateKam={setCreateKam}
-						dataLength={dataLength}
-						refetch={refetch}
+			{!levelLoading ? (
+				<>
+					<Collapse
+						panel={options}
+						activeKey={activeCard}
+						setActive={setActiveCard}
+						type="text"
+						className={styles.collapse}
 					/>
-				</div>
+					<div className={styles.response_card}>
+						<ResponseCard
+							createKAM={createKam}
+							setCreateKam={setCreateKam}
+							dataLength={dataLength}
+							refetch={refetch}
+						/>
+					</div>
+				</>
+
 			) : (
-				<div style={{ marginTop: '10px' }}>
-					<Button
-						themeType="secondary"
-						className={styles.create_button}
-						onClick={() => setCreateKam(true)}
-					>
-						Create Kam Level
-					</Button>
-				</div>
+				<LoadingState />
 			)}
 
 		</div>

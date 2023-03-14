@@ -27,20 +27,17 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	};
 
 	const {
-		onSave, getFieldController, loading, getAddBadgesControls, formProps,
+		onSave, getFieldController, loading = false, getAddBadgesControls, formProps,
 	} = useCreateBadgeConfiguration({ onClose, badgeListData, listRefetch });
 
 	const {
 		control, watch, handleSubmit, formState: { errors },
 	} = formProps;
 
-	if (loading) {
-		return null;
-	}
 	return (
 		<div>
 			<section className={styles.container}>
-				{Object.keys(badgeListData).length > 0
+				{!isEmpty(badgeListData)
 				&& (
 					<div className={styles.fields_container}>
 						<p className={styles.text_styles}>
@@ -59,7 +56,9 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 					{index}
 				</p> */}
 
-				<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>Add Badge</h2>
+				<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>
+					{isEmpty(badgeListData) ? 'Add Badge' : 'Update Badge'}
+				</h2>
 				<p className={styles.text_styles2}>
 					Select the conditions and number of completions necessary to obtain
 					the badge.
@@ -102,6 +101,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 									data={data}
 									badgeListData={badgeListData}
 									control={control}
+									errors={errors}
 									watch={watch}
 									isLastItem={index === MEDALS_MAPPING.length - 1}
 								/>
@@ -116,6 +116,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 							themeType="secondary"
 							id="cancel_request_btn"
 							style={{ marginRight: 10, borderWidth: 0 }}
+							disabled={loading}
 							onClick={onClose}
 						>
 							Cancel
@@ -126,6 +127,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 							type="submit"
 							themeType="primary"
 							id="save_request_btn"
+							disabled={loading}
 						>
 							Save
 						</Button>

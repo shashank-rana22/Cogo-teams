@@ -54,7 +54,7 @@ function BadgeCard({ data, badgeListData = {}, medal = '', isLast = {}, listRefe
 							Score
 						</b>
 					</span>
-					<span>
+					<span style={{ cursor: 'pointer' }}>
 						<IcMEdit onClick={onClose} />
 					</span>
 				</div>

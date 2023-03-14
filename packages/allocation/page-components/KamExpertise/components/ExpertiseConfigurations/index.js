@@ -1,4 +1,4 @@
-import { TabPanel, Tabs } from '@cogoport/components';
+import { Button, TabPanel, Tabs } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
@@ -59,6 +59,13 @@ function ViewAllConfigs() {
 							) : null;
 						})}
 					</Tabs>
+					<Button
+						themeType="primary"
+						className={styles.pub_button}
+					>
+						Publish
+
+					</Button>
 				</div>
 			</section>
 		</section>

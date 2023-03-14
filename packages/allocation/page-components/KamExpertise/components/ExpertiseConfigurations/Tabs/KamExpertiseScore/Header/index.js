@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -31,7 +30,7 @@ function Header({ auditData }) {
 				</div>
 			</div>
 
-			<div className={styles.button_container}>
+			{/* <div className={styles.button_container}>
 				<Button themeType="secondary">
 					Save As Draft
 				</Button>
@@ -39,7 +38,7 @@ function Header({ auditData }) {
 				<Button themeType="primary" style={{ marginLeft: '8px' }}>
 					Publish
 				</Button>
-			</div>
+			</div> */}
 
 		</div>
 	);
