@@ -28,11 +28,22 @@ function Header() {
 		);
 	};
 
+	const onClickTestModule = () => {
+		router.push(
+			'/learning/faq/create/test-module',
+			'/learning/faq/create/test-module',
+		);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div>Manage FAQs</div>
 
 			<div className={styles.button_container}>
+				<Button themeType="secondary" onClick={onClickTestModule}>
+					Test Module
+				</Button>
+
 				<Button themeType="secondary" onClick={onClickConfiguration}>
 					Configuration
 				</Button>

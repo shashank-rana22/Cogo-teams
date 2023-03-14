@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.field_container {
+    display: flex;
+    align-items: center;
+}
+
+.button_container {
+    margin-left: 12px;
+    display: flex;
+    flex-direction: row;
+}

@@ -1,0 +1,11 @@
+.container {
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    position: relative;
+    padding: 20px;
+    display: flex;
+}
+
+.question_label {
+    width: 200px;
+}
