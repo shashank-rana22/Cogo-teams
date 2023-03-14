@@ -94,9 +94,9 @@ function FeedbackForms({
 
 	useEffect(() => {
 		if (!isEmpty(formData)) {
-			const questions = action === 'show' || !!feedback_id ? form_responses : form_questions;
+			const questions = !isEmpty(form_responses) ? form_responses : form_questions;
 
-			if (action === 'show' || !!feedback_id) {
+			if (!isEmpty(form_responses)) {
 				const pastRating = {};
 
 				(form_responses || []).forEach((res) => {
