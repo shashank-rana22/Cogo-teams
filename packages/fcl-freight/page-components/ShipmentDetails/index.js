@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import Header from '../Header';
+import Tab from '../Tabs';
 import Timeline from '../TimeLine';
-import Tab from '../Tabs'
 
 function ShipmentDetails() {
 	const [activeTab, setActiveTab] = useState('overview');

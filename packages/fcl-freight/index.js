@@ -1,1 +1,1 @@
-export { default as Layout } from './page-components/ShipmentDetails';
+export { default as ShipmentDetails } from './page-components/ShipmentDetails';
