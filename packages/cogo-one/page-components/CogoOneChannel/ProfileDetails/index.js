@@ -33,7 +33,10 @@ function ProfileDetails({
 		disableQuickActions,
 	} = useListOrganizations({ orgId, activeCardId, activeTab });
 
-	const { data = {}, documentCount = () => {} } = useListOmnichannelDocuments({
+	const {
+		documents_count = 0,
+		documentsList: documentCount = () => {},
+	} = useListOmnichannelDocuments({
 		activeMessageCard,
 		activeVoiceCard,
 		activeTab,
@@ -69,8 +72,8 @@ function ProfileDetails({
 				openNewTab={openNewTab}
 				loading={loading}
 				disableQuickActions={disableQuickActions}
-				data={data}
 				documentCount={documentCount}
+				documents_count={documents_count}
 				listIds={listIds}
 				activeMessageCard={activeMessageCard}
 				activeVoiceCard={activeVoiceCard}

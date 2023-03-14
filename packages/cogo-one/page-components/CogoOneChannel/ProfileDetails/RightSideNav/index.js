@@ -13,14 +13,13 @@ function RightSideNav({
 	openNewTab,
 	loading,
 	disableQuickActions = false,
-	data = {},
+	documents_count = {},
 	documentCount = () => {},
 	listIds = [],
 	activeMessageCard,
 	activeVoiceCard,
 	activeTab,
 }) {
-	const { count } = data || {};
 	const handleClick = (val) => {
 		if (val === 'spot_search') {
 			if (!loading) {
@@ -64,10 +63,10 @@ function RightSideNav({
 						onClick={() => handleClick(name)}
 					>
 						<Tooltip content={content} placement="left">
-							{(name === 'documents' && count > 0 && !checkConditions) && (
+							{(name === 'documents' && documents_count > 0 && !checkConditions) && (
 								<div className={styles.count}>
-									{count > 100 ? '99+' : (
-										count
+									{documents_count > 100 ? '99+' : (
+										documents_count
 									)}
 								</div>
 							)}

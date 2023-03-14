@@ -65,7 +65,8 @@ function useListOmnichannelDocuments({
 
 	return {
 		documentsList,
-		list: data?.list || [],
+		list            : data?.list || [],
+		documents_count : data?.total_count || 0,
 		loading,
 		orgId,
 	};

@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
-import { useForm, InputController, UploadController, SelectController } from '@cogoport/forms';
+import { useForm, InputController, UploadController, SelectController, MultiselectController } from '@cogoport/forms';
 
-import controls from '../../../../../configurations/upload-documents-controls';
+import getControls from '../../../../../configurations/upload-documents-controls';
 import useSubmitOrganizationKyc from '../../../../../hooks/useSubmitOrganizationKyc';
 
 import styles from './styles.module.css';
@@ -13,6 +13,7 @@ function UploadDetailsModal({ setShowModal = () => {}, orgId = '' }) {
 		formState: { errors },
 		reset,
 	} = useForm();
+	console.log('errors:', errors);
 
 	const {
 		submitOrganizationKyc = () => {},
@@ -33,10 +34,15 @@ function UploadDetailsModal({ setShowModal = () => {}, orgId = '' }) {
 		country_id,
 		pan_number,
 		preferred_languages,
-	} = controls;
+	} = getControls();
 
 	return (
-		<Modal size="lg" show onClose={handleClose} placement="top">
+		<Modal
+			size="lg"
+			show
+			onClose={handleClose}
+			placement="top"
+		>
 			<Modal.Header title="KYC Details" />
 			<Modal.Body>
 				<div className={styles.container}>
@@ -62,7 +68,7 @@ function UploadDetailsModal({ setShowModal = () => {}, orgId = '' }) {
 							Organization’s registration country
 						</div>
 						<div className={styles.input_field}>
-							<InputController
+							<SelectController
 								{...country_id}
 								control={control}
 								id="registration_country"
@@ -96,7 +102,7 @@ function UploadDetailsModal({ setShowModal = () => {}, orgId = '' }) {
 							Preferred Languages
 						</div>
 						<div className={styles.input_field}>
-							<SelectController
+							<MultiselectController
 								{...preferred_languages}
 								control={control}
 								id="preferred_languages"
