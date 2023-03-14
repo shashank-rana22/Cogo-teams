@@ -98,13 +98,15 @@ function CreateMastery(props) {
 						<div className={styles.lower_background}>
 							<div style={{ flexBasis: '29%' }}>
 								<p style={{ color: '#4f4f4f' }}>Badge PNG</p>
-								<UploadController
-									name="image_input"
-									control={control}
-									rules={isEmpty(masteryListData) ? {
-										required: 'Image is required',
-									} : {}}
-								/>
+								<div className={styles.uploader}>
+									<UploadController
+										name="image_input"
+										control={control}
+										rules={isEmpty(masteryListData) ? {
+											required: 'Image is required',
+										} : {}}
+									/>
+								</div>
 								<div className={styles.error_message}>
 									{errors?.image_input?.message}
 								</div>

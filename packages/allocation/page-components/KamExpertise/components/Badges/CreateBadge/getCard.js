@@ -60,13 +60,15 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 				<IcMInfo className={styles.icm_info} />
 			</div>
 			<div className={styles.file_select_style}>
-				<UploadControler
-					name={`${medalType}_img_value`}
-					control={control}
-					rules={isEmpty(badgeListData) ? {
-						required: 'Image is required',
-					} : {}}
-				/>
+				<div className={styles.uploader}>
+					<UploadControler
+						name={`${medalType}_img_value`}
+						control={control}
+						rules={isEmpty(badgeListData) ? {
+							required: 'Image is required',
+						} : {}}
+					/>
+				</div>
 				<div className={styles.error_message}>
 					{errors?.[`${medalType}_img_value`]?.message}
 				</div>

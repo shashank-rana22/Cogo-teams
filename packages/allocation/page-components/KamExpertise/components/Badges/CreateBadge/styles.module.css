@@ -37,7 +37,7 @@
 .lower_background {
     padding: 20px;
     margin-top: 28px;
-    background: #F9F9F9;
+    background: #f9f9f9;
     border-radius: 10px;
     opacity: 0.9;
 }
@@ -71,6 +71,15 @@
     }
     :global(.ui_lqy5Q) {
         margin: 8px 0 0 0;
+    }
+}
+
+.uploader {
+    :global(.styles_progress_container__cQeyN) {
+        width: 100%;
+    }
+    :global(.styles_progress_bar__2P_k1) {
+        display: none;
     }
 }
 
