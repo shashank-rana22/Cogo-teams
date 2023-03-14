@@ -1,6 +1,5 @@
 import { Toast, Select, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
 import EmptyState from '../../common/EmptyState';
@@ -12,9 +11,7 @@ import styles from './styles.module.css';
 import TeamMembersList from './TeamMembersList';
 
 function ManagerDashboard() {
-	const { profile:{ user:{ id: manager_id = '' } } } = useSelector((state) => state);
-
-	const { data = {}, loading = false, params, setParams, setPage } = useGetMonthStats({ manager_id });
+	const { data = {}, loading = false, params, setParams, setPage } = useGetMonthStats();
 
 	const { list = [], pagination_data = {}, is_manager = true } = data;
 	const { total_count = '' } = pagination_data;
