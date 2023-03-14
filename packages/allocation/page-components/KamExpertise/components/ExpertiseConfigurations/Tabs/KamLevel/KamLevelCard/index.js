@@ -120,7 +120,7 @@ function KamLevelCard(props) {
 								</div>
 								<div style={{ fontWeight: '700' }}>
 									{expertiseObject.find((expertise) => expertise.expertise_type
-									=== item.label)?.threshold_score || '-'}
+									=== item.label)?.threshold_score?.toLocaleString('en-IN') || '-'}
 								</div>
 							</div>
 						))}

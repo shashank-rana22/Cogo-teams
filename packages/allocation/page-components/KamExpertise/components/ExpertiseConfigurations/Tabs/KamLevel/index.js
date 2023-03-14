@@ -48,26 +48,31 @@ function KamLevel() {
 		<div>
 			<Header
 				audit_data={audit_data}
+				levelLoading={levelLoading}
 			/>
 
 			{!levelLoading ? (
-				<Collapse
-					panel={options}
-					activeKey={activeCard}
-					setActive={setActiveCard}
-					type="text"
-					className={styles.collapse}
-				/>
-			) : (<LoadingState />)}
+				<>
+					<Collapse
+						panel={options}
+						activeKey={activeCard}
+						setActive={setActiveCard}
+						type="text"
+						className={styles.collapse}
+					/>
+					<div className={styles.response_card}>
+						<ResponseCard
+							createKAM={createKam}
+							setCreateKam={setCreateKam}
+							dataLength={dataLength}
+							refetch={refetch}
+						/>
+					</div>
+				</>
 
-			<div className={styles.response_card}>
-				<ResponseCard
-					createKAM={createKam}
-					setCreateKam={setCreateKam}
-					dataLength={dataLength}
-					refetch={refetch}
-				/>
-			</div>
+			) : (
+				<LoadingState />
+			)}
 
 		</div>
 	);

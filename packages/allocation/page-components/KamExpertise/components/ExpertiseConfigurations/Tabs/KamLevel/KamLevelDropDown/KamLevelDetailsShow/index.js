@@ -58,24 +58,30 @@ function KamLevelDetailsShow({ data = {}, listLoading, activeCard, setEditMode }
 
 						<div className={styles.score_value}>
 							{listLoading ? (<Placeholder height="30px" width="300px" />)
-								: (data?.list?.[item.label]?.[0].threshold_score || '-')}
+								: ((data?.list?.[item.label]?.[0].threshold_score)?.toLocaleString('en-IN') || '-')}
 
 						</div>
 						<div className={styles.border_class} />
 					</div>
 				))}
 				<div className={styles.row_level_end}>
+
 					<h2>Transacting Account</h2>
+
 					<div className={styles.row_level_end_options}>
+
 						{TRANSACTION_MAPPING.map((item) => (
+
 							<div style={{ width: '24%' }}>
+
 								<div>{startCase(item.label)}</div>
+
 								<div className={styles.score_value}>
 									{listLoading && <Placeholder height="30px" width="250" />}
 
 									{transacting_accounts && !listLoading
 									&& (transacting_accounts.find((account) => account.threshold_score_type
-									=== item.label)?.threshold_score || '-')}
+									=== item.label)?.threshold_score?.toLocaleString('en-IN') || '-')}
 								</div>
 							</div>
 						))}
