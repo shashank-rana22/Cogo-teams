@@ -1,6 +1,5 @@
-import { Toast, Modal, Button, RTE, Input, Popover } from '@cogoport/components';
+import { Toast, Modal, Button, RTE, Input } from '@cogoport/components';
 import { IcMCross, IcMAttach } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
@@ -17,7 +16,6 @@ function ComposeEmail({
 	sendQuickCommuncation = () => {},
 	loading,
 }) {
-	const [openPopover, setPopover] = useState(false);
 	const [attachments, setAttachments] = useState([]);
 	const [emailState, setEmailState] = useState({
 		subject : '',
@@ -56,65 +54,9 @@ function ComposeEmail({
 		uploaderRef?.current?.externalHandleDelete(filteredAttachments);
 	};
 
-	function ToolTipFunc() {
-		const attachmentDiv = (singleUploadData) => (
-			<div className={styles.uploaded_files}>
-				<div className={styles.uploaded_files_content}>
-					{decode(singleUploadData).fileIcon}
-					{decode(singleUploadData)?.uploadedFileName}
-				</div>
-				<IcMCross
-					style={{ cursor: 'pointer' }}
-					onClick={(e) => {
-						e.stopPropagation();
-						handleDelete(singleUploadData);
-					}}
-				/>
-			</div>
-		);
-		if (isEmpty(attachments)) {
-			return null;
-		}
-		const showMore = (attachments || []).length > 1;
-		const lessAttachments = (attachments || []).slice(0, 1);
-		const moreAttachments = (attachments || []).slice(1);
-
-		const moreAttachmentContent = (
-			<div className={styles.tool_tip_div}>
-				{(moreAttachments || []).map((eachData) => (
-					attachmentDiv(eachData)
-				))}
-			</div>
-		);
-		return (
-			<div className={styles.flex}>
-				{(lessAttachments || []).map((eachData) => (
-					attachmentDiv(eachData)
-				))}
-				{showMore && (
-					<Popover
-						theme="light"
-						render={moreAttachmentContent}
-						placement="top"
-						visible={openPopover}
-						onClickOutside={() => setPopover(false)}
-					>
-						<div
-							className={styles.show_more_tags}
-							role="presentation"
-							onClick={() => setPopover((p) => !p)}
-						>
-							+
-							{moreAttachments?.length}
-						</div>
-					</Popover>
-				)}
-			</div>
-		);
-	}
 	return (
 		<>
-			<Modal.Body>
+			<Modal.Body className={styles.modal_body}>
 				<Input
 					value={hideDetails({ data: userData?.email, type: 'mail' })}
 					disabled
@@ -134,6 +76,7 @@ function ComposeEmail({
 							disabled={uploading}
 							handleProgress={handleProgress}
 							className="file_uploader"
+							accept=".png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx"
 							multiple
 							uploadIcon={(
 								<IcMAttach
@@ -162,13 +105,28 @@ function ComposeEmail({
 
 					<div className={styles.attachments_scroll}>
 						<div className={styles.uploading}>{uploading && 'Uploading...'}</div>
-						<ToolTipFunc />
-
+						{(attachments || []).map((data) => (
+							<div className={styles.uploaded_files}>
+								<div className={styles.uploaded_files_content}>
+									{decode(data).fileIcon}
+									<div className={styles.content_div}>
+										{decode(data)?.uploadedFileName}
+									</div>
+								</div>
+								<IcMCross
+									className={styles.cross_svg}
+									onClick={(e) => {
+										e.stopPropagation();
+										handleDelete(data);
+									}}
+								/>
+							</div>
+						))}
 					</div>
 
 				</div>
 			</Modal.Body>
-			<Modal.Footer>
+			<Modal.Footer className={styles.footer_shadow}>
 				<div className={styles.footer_buttons}>
 					<Button size="md" themeType="tertiary" onClick={closeModal}>
 						cancel
