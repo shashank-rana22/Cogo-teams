@@ -1,4 +1,5 @@
 .container {
+	width:100px;
 	align-items: center;
 	justify-content: space-between;
 	padding: 1rem;
@@ -6,6 +7,7 @@
 	font-weight: 500;
 	background-color: #fff;
 	border-radius: 8px;
+	
 }
 
 .main_container {
@@ -112,7 +114,8 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 100%;
-	margin: 2%;
+	margin: 1.5%;
+	:global {.styles_active_users__0WZvd {width:275px;}}
 }
 
 .active_users {

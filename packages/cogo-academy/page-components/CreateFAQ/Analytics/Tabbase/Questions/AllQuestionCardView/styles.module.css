@@ -105,7 +105,15 @@
 .placeholder_element {
 	border-radius: 4px;
 }
-
+.arrow{
+	&:hover {
+		box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
+		transform: scaleX(1);
+		transform-origin: bottom left;
+		transition: 0.5s;
+		cursor:pointer
+	}
+}
 .primary_right {
 	display: flex;
 	flex-basis: 38%;
@@ -113,6 +121,7 @@
 	justify-content: space-between;
 	height: 100%;
 	margin: 2%;
+	
 }
 
 .active_users {
