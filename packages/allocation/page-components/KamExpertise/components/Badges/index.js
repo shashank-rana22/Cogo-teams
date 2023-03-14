@@ -31,7 +31,7 @@ function Badges() {
 
 	const {
 		loading,
-		list:badgeList = {},
+		list: badgeList = {},
 		searchValue,
 		setSearchValue = () => {},
 		expertise,
@@ -46,22 +46,22 @@ function Badges() {
 
 	return (
 		<section className={styles.main_container}>
-			<div className={styles.back_container} role="presentation" onClick={onClickBack}>
+			<div
+				className={styles.back_container}
+				role="presentation"
+				onClick={onClickBack}
+			>
 				<div className={styles.icon_container}>
 					<IcMArrowBack width={16} height={16} />
 				</div>
 
-				<div className={styles.back_text}>
-					Back to Dashboard
-				</div>
+				<div className={styles.back_text}>Back to Dashboard</div>
 			</div>
 
 			<section className={styles.container}>
-				<div className={styles.heading_container}>
-					Badges
-				</div>
+				<div className={styles.heading_container}>Badges</div>
 
-				{(toggleScreen === 1) && (
+				{toggleScreen === 1 && (
 					<Header
 						badgeList={badgeList.length}
 						toggleScreen={toggleScreen}
@@ -77,21 +77,29 @@ function Badges() {
 				)}
 			</section>
 			<div>
-				{
-					(toggleScreen === 1) && isEmpty(badgeList)
-						? (
-							<div style={{ padding: '48px 0', backgroundColor: '#fff', marginBottom: '12px' }}>
-								<EmptyState height="400px" width="600px" flexDirection="column" />
-							</div>
-						)
-						: ''
-				}
-				{
-					(toggleScreen === 1)
-				&&	(
+				{toggleScreen === 1 && isEmpty(badgeList) ? (
+					<div
+						style={{
+							padding         : '48px 0',
+							backgroundColor : '#fff',
+							marginBottom    : '12px',
+						}}
+					>
+						<EmptyState
+							height="400px"
+							width="600px"
+							flexDirection="column"
+							emptyText="Badges not Found"
+							textSize="20px"
+						/>
+					</div>
+				) : (
+					''
+				)}
+				{toggleScreen === 1 && (
 					<div>
-						{badgeList?.map(((data, index) => (data.expertise_configuration_type === 'badge_configuration'
-							? (
+						{badgeList?.map(
+							(data, index) => (data.expertise_configuration_type === 'badge_configuration' ? (
 								<MasteryListItem
 									data={data}
 									index={index}
@@ -99,8 +107,7 @@ function Badges() {
 									setToggleScreen={setToggleScreen}
 									setMasteryListData={setMasteryListData}
 								/>
-							)
-							: (
+							) : (
 								<BadgeListItem
 									data={data}
 									index={index}
@@ -109,8 +116,8 @@ function Badges() {
 									setBadgeListData={setBadgeListData}
 									listRefetch={listRefetch}
 								/>
-							)
-						)))}
+							)),
+						)}
 
 						<div className={styles.pagination_container}>
 							<Pagination
@@ -122,23 +129,19 @@ function Badges() {
 							/>
 						</div>
 					</div>
-				)
-			}
+				)}
 
-				{
-			(toggleScreen === 2) && (
-				<div>
-					<CreateMastery
-						setToggleScreen={setToggleScreen}
-						badgeList={badgeList}
-						masteryListData={masteryListData}
-						listRefetch={listRefetch}
-					/>
-				</div>
-			)
-			}
-				{
-				(toggleScreen === 3) && (
+				{toggleScreen === 2 && (
+					<div>
+						<CreateMastery
+							setToggleScreen={setToggleScreen}
+							badgeList={badgeList}
+							masteryListData={masteryListData}
+							listRefetch={listRefetch}
+						/>
+					</div>
+				)}
+				{toggleScreen === 3 && (
 					<div>
 						<CreateBadge
 							setToggleScreen={setToggleScreen}
@@ -146,10 +149,8 @@ function Badges() {
 							listRefetch={listRefetch}
 						/>
 					</div>
-				)
-			}
+				)}
 			</div>
-
 		</section>
 	);
 }

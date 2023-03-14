@@ -17,8 +17,7 @@
     padding: 20px;
     display: flex;
     flex-basis: 55%;
-    /* background: rgba(252, 244, 244, 0.597); */
-    background: #e2e2e2;
+    background: #f9f9f9;
     opacity: 0.9;
     border-radius: 10px;
     justify-content: space-between;
@@ -74,7 +73,6 @@
 .preview {
     display: flex;
     justify-content: center;
-    /* width: 50%; */
     height: auto;
 }
 .preview img {

@@ -16,7 +16,7 @@ function CreateMastery(props) {
 	const {
 		formProps,
 		getAddMasteryControls,
-		loading,
+		loading = false,
 		onSave,
 	} = useCreateMasterConfiguration({ masteryListData, onClose, listRefetch });
 
@@ -33,10 +33,6 @@ function CreateMastery(props) {
 			);
 		}
 	});
-
-	if (loading) {
-		return null;
-	}
 
 	return (
 		<div>
@@ -101,6 +97,7 @@ function CreateMastery(props) {
 								<UploadController
 									name="image_input"
 									control={control}
+									accept=".png, .jpeg"
 									rules={isEmpty(masteryListData) ? {
 										required: 'Image is required',
 									} : {}}
@@ -158,6 +155,7 @@ function CreateMastery(props) {
 							themeType="secondary"
 							style={{ marginRight: 10, borderWidth: 0 }}
 							onClick={onClose}
+							disabled={loading}
 						>
 							Cancel
 						</Button>
@@ -166,6 +164,7 @@ function CreateMastery(props) {
 							themeType="primary"
 							type="submit"
 							id="save_button"
+							disabled={loading}
 						>
 							Save
 						</Button>

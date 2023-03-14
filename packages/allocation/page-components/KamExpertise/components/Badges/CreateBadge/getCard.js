@@ -57,6 +57,7 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 					<UploadControler
 						name={`${medalType}_img_value`}
 						control={control}
+						accept=".png, .jpeg"
 						rules={isEmpty(badgeListData) ? {
 							required: 'Image is required',
 						} : {}}
