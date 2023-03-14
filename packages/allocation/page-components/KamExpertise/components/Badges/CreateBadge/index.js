@@ -40,7 +40,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	return (
 		<div>
 			<section className={styles.container}>
-				{Object.keys(badgeListData).length > 0
+				{!isEmpty(badgeListData)
 				&& (
 					<div className={styles.fields_container}>
 						<p className={styles.text_styles}>
@@ -59,7 +59,9 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 					{index}
 				</p> */}
 
-				<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>Add Badge</h2>
+				<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>
+					{isEmpty(badgeListData) ? 'Add Badge' : 'Update Badge'}
+				</h2>
 				<p className={styles.text_styles2}>
 					Select the conditions and number of completions necessary to obtain
 					the badge.

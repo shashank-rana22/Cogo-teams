@@ -1,6 +1,6 @@
 import currencies from './Helpers/currencies';
 
-const mawbControls = () => ({
+const mawbControls = (disableClass) => ({
 	basic: [
 		{
 			name         : 'shipperName',
@@ -194,7 +194,7 @@ const mawbControls = () => ({
 					},
 				},
 				{
-					name        : 'packages',
+					name        : 'packages_count',
 					placeholder : 'Packages count',
 					label       : 'Number of Packages',
 					type        : 'number',
@@ -231,7 +231,7 @@ const mawbControls = () => ({
 		{
 		},
 		{
-			name        : 'packagesCount',
+			name        : 'totalPackagesCount',
 			placeholder : 'Package Count',
 			label       : 'Package Count',
 			type        : 'number',
@@ -262,6 +262,7 @@ const mawbControls = () => ({
 			options     : [
 				{ value: 'q', label: 'Q' },
 				{ value: 'a', label: 'A' },
+				{ value: 'm', label: 'M' },
 			],
 			className : 'primary lg',
 			span      : 2,
@@ -281,6 +282,31 @@ const mawbControls = () => ({
 				validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
 			},
 			disabled: true,
+		},
+		{
+			name         : 'ratePerKg',
+			type         : 'number',
+			className    : 'primary lg',
+			label        : 'Rate per Kg',
+			showOptional : false,
+			span         : 5,
+			placeholder  : 'Rate per Kg',
+			rules        : {
+				required: disableClass,
+			},
+			disabled: disableClass,
+		},
+		{
+			name        : 'currency',
+			placeholder : 'Select Currency',
+			type        : 'select',
+			span        : 5,
+			label       : 'Currency',
+			options     : currencies,
+			className   : 'primary lg',
+			rules       : {
+				required: 'Currency is Required',
+			},
 		},
 		{
 			name      : 'amount',
@@ -444,31 +470,6 @@ const mawbControls = () => ({
 				required: 'Handling Information is Required',
 			},
 		},
-		{
-			name         : 'ratePerKg',
-			type         : 'number',
-			className    : 'primary lg',
-			label        : 'Rate per Kg',
-			showOptional : false,
-			span         : 5,
-			placeholder  : 'Rate per Kg',
-			rules        : {
-				required: 'Rate is Required',
-			},
-		},
-		{
-			name        : 'currency',
-			placeholder : 'Select Currency',
-			type        : 'select',
-			span        : 5,
-			label       : 'Currency',
-			options     : currencies,
-			className   : 'primary lg',
-			rules       : {
-				required: 'Currency is Required',
-			},
-		},
-
 		{
 			name        : 'commodity',
 			label       : 'Commodity Details:',
