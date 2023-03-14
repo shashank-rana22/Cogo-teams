@@ -76,7 +76,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 
 		prevMessages.forEach((mes) => {
 			const timeStamp = mes.data()?.created_at;
-			prevMessageData = { [timeStamp]: mes.data(), ...prevMessageData };
+			prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
 		});
 		setMessagesState((p) => ({
 			...p,
