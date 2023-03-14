@@ -25,8 +25,8 @@ function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
 		window.open(val, '_blank');
 	};
 
-	const handleClick = () => {
-		setShowModal(true);
+	const handleClick = (type) => {
+		setShowModal(type);
 	};
 
 	const checkStatus = (status, state) => {
@@ -103,13 +103,13 @@ function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
 											</div>
 										</div>
 
-										{!isEmpty(orgId) && (
+										{!isEmpty(orgId) && documentTypeMapping(document_type) !== 'Shipment' && (
 											<div>
 												{isEmpty(state) || state === 'document_rejected' ? (
 													<div
 														role="presentation"
 														className={styles.manually}
-														onClick={handleClick}
+														onClick={() => handleClick(document_type)}
 													>
 														Upload Manually
 													</div>

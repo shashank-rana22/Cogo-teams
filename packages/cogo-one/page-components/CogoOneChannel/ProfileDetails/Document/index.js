@@ -107,6 +107,7 @@ function Documents({
 				<UploadDetailsModal
 					setShowModal={setShowModal}
 					orgId={orgId}
+					documentType={showModal}
 				/>
 			)}
 		</>
