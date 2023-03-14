@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { TextAreaController, useFieldArray } from '@cogoport/forms';
-import { IcMDelete } from '@cogoport/icons-react';
+import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import SingleQuestionComponent from '../../../SingleQuestionComponent';
@@ -31,26 +31,42 @@ function CaseStudyForm({ control, register }) {
 		append(childEmptyValues);
 	}
 
+	console.log('fields1', fields);
 	return (
 		<div className={styles.container}>
 			<TextAreaController {...controls[0]} control={control} />
 
 			{fields.map((field, index) => (
-				<div key={field.id} className={styles.field_container}>
+				<div className={styles.field_container}>
 
-					<SingleQuestionComponent controls={controls} control={control} register={register} />
+					<div key={field.id} className={styles.question_container}>
+						<SingleQuestionComponent
+							control={control}
+							field={field}
+							register={register}
+							index={index}
+
+						/>
+
+						<IcMCrossInCircle
+							className={styles.delete_button}
+							width={20}
+							height={20}
+							onClick={() => remove(index, 1)}
+						/>
+					</div>
 
 					<div className={styles.button_container}>
 						<Button
 							type="button"
-							className="primary sm"
+							themeType="secondary"
+							className={styles.add_button}
 							onClick={() => handleAppendChild()}
 						>
-							Add
+							+ Add Another Question
 
 						</Button>
 
-						<IcMDelete onClick={() => remove(index, 1)} />
 					</div>
 				</div>
 			))}

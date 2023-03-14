@@ -12,13 +12,14 @@ function SingleQuestionComponent({ control, register }) {
 			<div className={styles.first_row}>
 				<InputController {...controls[0]} control={control} />
 
-				<SelectController {...controls[1]} control={control} />
+				<SelectController className={styles.answer_type} {...controls[1]} control={control} />
 			</div>
 
 			<OptionsComponent control={control} {...controls[2]} register={register} />
 
 			<div className={styles.difficulty_level}>
 				<div className={styles.label}>Set Difficulty level</div>
+
 				<ChipsController control={control} {...controls[3]} />
 			</div>
 		</div>

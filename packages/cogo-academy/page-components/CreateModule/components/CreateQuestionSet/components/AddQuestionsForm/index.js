@@ -1,4 +1,6 @@
 // import { useForm } from '@cogoport/forms';
+import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CreateQuestion from '../../../../commons/CreateQuestion';
@@ -38,6 +40,17 @@ function AddQuestionsForm() {
 
 				return null;
 			})}
+
+			<div className={styles.button_container}>
+				<Button
+					type="button"
+					disabled={!isEmpty(formToShow)}
+					themeType="secondary"
+				>
+					+ Add Another Question
+
+				</Button>
+			</div>
 		</div>
 	);
 }

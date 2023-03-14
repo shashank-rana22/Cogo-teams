@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.answer_type {
+    margin-left: 20px;
+}
+
 .difficulty_level {
     display: flex;
     margin-top: 20px;

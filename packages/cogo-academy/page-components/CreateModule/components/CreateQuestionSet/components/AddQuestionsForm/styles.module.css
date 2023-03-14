@@ -14,3 +14,8 @@
     border-radius: 6px;
     position: relative;
 }
+
+.button_container {
+    display: flex;
+    margin-top: 12px;
+}

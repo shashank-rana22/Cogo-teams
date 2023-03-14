@@ -25,8 +25,6 @@ function OptionsComponent({ control, controls, register, name }) {
 		append(childEmptyValues);
 	}
 
-	console.log('fields', fields, name);
-
 	return (
 		<div className={styles.container}>
 			{fields.map((field, index) => (

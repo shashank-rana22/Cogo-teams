@@ -25,8 +25,6 @@ function OptionsComponent({ control, controls, register, name }) {
 		append(childEmptyValues);
 	}
 
-	console.log('fields', fields, name);
-
 	return (
 		<div className={styles.container}>
 			{fields.map((field, index) => (
@@ -42,14 +40,15 @@ function OptionsComponent({ control, controls, register, name }) {
 					<div className={styles.button_container}>
 						<Button
 							type="button"
-							className="primary sm"
+							themeType="secondary"
+							className={styles.add_button}
 							onClick={() => handleAppendChild()}
 						>
-							Add
+							+ Add
 
 						</Button>
 
-						<IcMDelete onClick={() => remove(index, 1)} />
+						<IcMDelete width={20} height={20} onClick={() => remove(index, 1)} />
 					</div>
 				</div>
 			))}
