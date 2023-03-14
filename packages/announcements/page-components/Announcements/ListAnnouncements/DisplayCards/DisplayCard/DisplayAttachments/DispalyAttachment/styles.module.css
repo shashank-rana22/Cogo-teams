@@ -1,4 +1,4 @@
-.conatiner{
+.container{
     border: 2px solid #f2f3f4;
     height: fit-content;
     margin: 10px ;
@@ -6,7 +6,7 @@
     border-radius: 10px;
 }
 
-.map_conatiner{
+.map_container{
     display: flex;
     flex-direction: column;
 }
@@ -37,10 +37,10 @@
 }
 .data_display{
     display: flex;
-    width: 70%;
+    width: 40%;
     @media (max-width: 1120px) 
     {        
-       width: 100%;
+       width: 50%;
     }
     @media (max-width: 400px) 
     {        
@@ -57,7 +57,7 @@
     opacity: 0.9;
     font-weight: 500;
     display: block;
-    width: 200px;
+    width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -66,16 +66,28 @@
     {        
        width: 70%;
     }
-    @media (max-width: 800px) 
+    @media (max-width: 885px) 
     {        
        width: 300px;
     }
     @media (max-width: 650px) 
     {        
-       width: 100px;
+       width: 120px;
     }
 }
 
 .delete_buttons{
     display: flex;
+}
+
+.nodisplay{
+    color: #4f4f4f;
+    opacity: 0.9;
+    font-weight: 500;
+    display: block;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 10px;
 }

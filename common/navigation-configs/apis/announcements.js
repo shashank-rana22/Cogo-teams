@@ -50,6 +50,11 @@ const announcements = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'create_announcement_attachment',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 };
 

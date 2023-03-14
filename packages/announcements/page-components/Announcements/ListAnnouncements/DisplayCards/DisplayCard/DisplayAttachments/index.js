@@ -11,39 +11,39 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 	const pdf = data?.announcement_attachments?.pdf || '';
 	const video = data?.announcement_attachments?.video || '';
 
-	const { deleteAttachment, editAttachment } = useUpdateAnnouncement({ refetch, announcement_id });
+	const { deleteAttachment, editAttachment, addAttachment } = useUpdateAnnouncement({ refetch, announcement_id });
 
-	console.log('data:::', data);
+	// console.log('data:::', data);
 	const displayBoxes = (item) => (
 		item ? (
 			<div className={styles.contain}>
-				{image ? (
-					<DisplayAttachment
-						data={image}
-						index={index}
-						deleteAttachment={deleteAttachment}
-						editAttachment={editAttachment}
-						name="Images"
-					/>
-				) : null}
-				{pdf ? (
-					<DisplayAttachment
-						data={pdf}
-						index={index}
-						deleteAttachment={deleteAttachment}
-						editAttachment={editAttachment}
-						name="Files"
-					/>
-				) : null}
-				{video ? (
-					<DisplayAttachment
-						data={video}
-						index={index}
-						deleteAttachment={deleteAttachment}
-						editAttachment={editAttachment}
-						name="Video"
-					/>
-				) : null}
+				<DisplayAttachment
+					data={image}
+					announcement_id={data?.id}
+					index={index}
+					deleteAttachment={deleteAttachment}
+					editAttachment={editAttachment}
+					addAttachment={addAttachment}
+					name="image"
+				/>
+				<DisplayAttachment
+					data={pdf}
+					announcement_id={data?.id}
+					index={index}
+					deleteAttachment={deleteAttachment}
+					editAttachment={editAttachment}
+					addAttachment={addAttachment}
+					name="pdf"
+				/>
+				<DisplayAttachment
+					data={video}
+					announcement_id={data?.id}
+					index={index}
+					deleteAttachment={deleteAttachment}
+					editAttachment={editAttachment}
+					addAttachment={addAttachment}
+					name="video"
+				/>
 				{image || pdf || video ? null : <div className={styles.nodisplay}>No Attachments to Display...</div>}
 			</div>
 		)

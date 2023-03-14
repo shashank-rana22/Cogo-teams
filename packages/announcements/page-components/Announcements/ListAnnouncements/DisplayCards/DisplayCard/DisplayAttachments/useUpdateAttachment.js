@@ -12,6 +12,11 @@ const useUpdateAnnouncement = ({
 		url    : '/update_announcement_attachment',
 	}, { manual: true });
 
+	const [{ loadingAdd }, triggerAdd] = useRequest({
+		method : 'post',
+		url    : '/create_announcement_attachment',
+	}, { manual: true });
+
 	// useEffect(() => {
 	// 	(async () => {
 	// 		if (id) {
@@ -45,16 +50,37 @@ const useUpdateAnnouncement = ({
 	// 	})();
 	// }, [currentAnnouncement]);
 
+	const addAttachment = async (id, url, type, index) => {
+		try {
+			const response = await triggerAdd(
+				{
+					data: {
+						announcement_id : id,
+						document_type   : type,
+						document_name   : type,
+						document_url    : url,
+					},
+				},
+			);
+			if (response?.hasError) {
+				Toast.error(response?.message || 'Something went wrong');
+				return;
+			}
+
+			Toast.success('Attachment added successfully...');
+			refetch(announcement_id, index);
+		} catch (err) {
+			Toast.error(err?.message);
+			// console.log('Error', error);
+		}
+	};
 	const deleteAttachment = async (id, index) => {
 		try {
 			const response = await trigger(
 				{
 					data: {
 						id,
-						document_name : '',
-						document_type : '',
-						document_url  : '',
-						status        : 'inactive',
+						status: 'inactive',
 					},
 				},
 			);
@@ -71,16 +97,15 @@ const useUpdateAnnouncement = ({
 		}
 	};
 
-	const editAttachment = async (id, url, index) => {
+	const editAttachment = async (data, url, index) => {
 		try {
 			const response = await trigger(
 				{
 					data: {
-						id,
-						document_name : '',
-						document_type : '',
-						document_url  : { url },
-						status        : 'inactive',
+						id            : data?.id,
+						document_name : data?.document_name,
+						document_type : data?.document_type,
+						document_url  : url,
 					},
 				},
 			);
@@ -89,28 +114,19 @@ const useUpdateAnnouncement = ({
 				return;
 			}
 
-			Toast.success('Attachment deleted successfully...');
+			Toast.success('Attachment updated successfully...');
 			refetch(announcement_id, index);
 		} catch (err) {
 			Toast.error(err?.message);
 			// console.log('Error', error);
 		}
 	};
-
-	// const handleAttachmentDetails = (key) => {
-	// 	setAttachmentDetailsToggle(attachmentDetailsToggle === key ? false : key);
-	// 	if (currentAttachment && attachmentDetailsToggle === key) {
-	// 		setCurrentAttachment(null);
-	// 	} else {
-	// 		setAttachmentDetails(null);
-	// 		setCurrentAttachment(listData?.[key]);
-	// 	}
-	// };
 
 	return {
 
 		deleteAttachment,
 		editAttachment,
+		addAttachment,
 		loading,
 	};
 };

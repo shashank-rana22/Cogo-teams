@@ -25,11 +25,12 @@ function DisplayCard({
 	const [showModal, setShowModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+	// console.log(data);
 	const options = [
 		{ label: 'Title', value: startCase(data?.title) },
-		{ label: 'Created At', value: format(data?.created_at, 'dd MMM yyyy hh:mm a') },
+		{ label: 'Validity Start', value: format(data?.validity_start, 'dd MMM yyyy hh:mm a') },
+		{ label: 'Validity End', value: format(data?.validity_end, 'dd MMM yyyy hh:mm a') },
 		{ label: 'Announcement Type', value: startCase(data?.announcement_type) },
-		{ label: 'Updated At', value: format(data?.updated_at, 'dd MMM yyyy hh:mm a') },
 		{ label: 'Action', value: 1 },
 	];
 
@@ -104,7 +105,7 @@ function DisplayCard({
 						title="Display Details"
 						className={styles.accordian}
 					>
-						<div className={styles.titles}>Displaying Documents:</div>
+						<div className={styles.titles}>Embedded Media :</div>
 						<div className={styles.document_container}>
 							<DisplayAttachments
 								data={accordianData}
