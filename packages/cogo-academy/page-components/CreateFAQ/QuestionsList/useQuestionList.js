@@ -6,6 +6,8 @@ import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import PopOverContent from '../../../commons/PopoverContent';
+
 import styles from './styles.module.css';
 
 const FILTER_MAPPING = {
@@ -94,16 +96,11 @@ const addedQuestionsColumns = ({
 				</Button>
 				{activeList !== 'inactive' ? (
 					<Popover
-						placement="right"
-						render="right"
 						content={(
-							<div>
-								<section>
-									<h3>Are you sure you want to delete it?</h3>
-									{deleteitem?.question_abstract}
-								</section>
-								<Button type="button" onClick={() => deactivateQuestion(deleteitem?.id)}>OK</Button>
-							</div>
+							<PopOverContent
+								source="question"
+								onCLickYesButton={() => deactivateQuestion(deleteitem.id)}
+							/>
 						)}
 					>
 						<IcMDelete
@@ -165,15 +162,11 @@ const requestedQuestionsColumns = ({
 					ADD ANSWER
 				</Button>
 				<Popover
-					placement="right"
-					render="right"
 					content={(
-						<div>
-							<section>
-								<h3>Are you sure you want to delete it?</h3>
-							</section>
-							<Button onClick={() => deactivateQuestion(items.id)}>OK</Button>
-						</div>
+						<PopOverContent
+							source="question"
+							onCLickYesButton={() => deactivateQuestion(items.id)}
+						/>
 					)}
 				>
 					<IcMDelete

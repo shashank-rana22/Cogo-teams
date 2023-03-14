@@ -17,10 +17,6 @@ function Header({
 	sortType,
 	setSortType,
 }) {
-	const handleClick = useCallback(() => {
-		setSortType(!sortType);
-	}, [setSortType, sortType]);
-
 	return (
 		<div>
 			<div className={styles.container}>
@@ -43,7 +39,7 @@ function Header({
 						themeType="secondary"
 						style={{ marginLeft: 8, height: '40px' }}
 						size="md"
-						onClick={handleClick}
+						onClick={() => { setSortType((prev) => !prev); }}
 					>
 						{activeList === 'requested' ? 'Sort By Last Created' : 'Sort By Last Updated'}
 						{sortType ? <IcMArrowDoubleDown /> : <IcMArrowDoubleUp />}
