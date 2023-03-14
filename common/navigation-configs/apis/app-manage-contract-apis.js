@@ -3,7 +3,7 @@ const app_contract_management = [
 		api          : 'list_locations',
 		access_type  : 'private',
 		feature      : 'contract',
-		service_name : 'contract',
+		service_name : 'location',
 	},
 	{
 		api          : 'list_operators',
