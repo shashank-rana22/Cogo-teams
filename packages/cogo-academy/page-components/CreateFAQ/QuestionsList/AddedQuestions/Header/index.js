@@ -1,6 +1,6 @@
 import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { IcMArrowDoubleDown, IcMArrowDoubleUp } from '@cogoport/icons-react';
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import SearchInput from '../../../../../commons/SearchInput';
 
