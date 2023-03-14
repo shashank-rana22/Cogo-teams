@@ -7661,6 +7661,12 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
+			api: 'post_payments_accounts_post_to_sage',
+			access_type: 'private',
+			module: 'onAccount',
+			feature: 'onAccount',
+		},
+		{
 			api         : 'put_sales_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
