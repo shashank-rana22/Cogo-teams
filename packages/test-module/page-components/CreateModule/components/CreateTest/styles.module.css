@@ -62,7 +62,7 @@
   display: flex;
   margin  : 20px;
   justify-content: flex-start;
-  gap: 20px;
+  align-items: center;
 }
 
 .superscript {
@@ -70,9 +70,23 @@
 }
 
 .label_wrapper {
-  flex: 1;
+  width: 40%;
 }
 
-.input{
-  flex: 1;
+.input {
+  width: 60%;
+}
+
+.input_duration{
+  width: 200px;
+}
+
+.input_type{
+  width: 60px;
+}
+
+.input_wrapper{
+  display: flex;
+  width: 60%;
+  gap: 8px;
 }

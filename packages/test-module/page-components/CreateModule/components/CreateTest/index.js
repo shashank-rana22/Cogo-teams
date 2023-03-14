@@ -7,9 +7,16 @@ import styles from './styles.module.css';
 function CreateTest() {
 	const [value, onChange] = useState([]);
 
-	const options = [
-		{ label: 'all', value: 'all' },
-		{ label: 'none', value: 'none' },
+	const options1 = [
+		{ label: 'India', value: 'IN' },
+		{ label: 'Vietnam', value: 'VI' },
+	];
+
+	const options2 = [
+		{ label: 'KAM1', value: 'KAM1' },
+		{ label: 'KAM2', value: 'KAM2' },
+		{ label: 'KAM3', value: 'KAM3' },
+		{ label: 'KAM4', value: 'KAM4' },
 	];
 	return (
 		<div className={styles.container}>
@@ -29,19 +36,32 @@ function CreateTest() {
 					</div>
 					<div className={styles.wrapper}>
 						<div className={styles.label_wrapper}>
-							<span>Select Test User Groups</span>
+							<span>Select Entity & User Groups</span>
 							<sup className={styles.superscript}>*</sup>
 						</div>
-						<MultiSelect
-							value={value}
-							onChange={onChange}
-							placeholder="all"
-							options={options}
-							isClearable
-							style={{ width: '250px' }}
-							size="md"
-							className={styles.input}
-						/>
+						<div className={styles.input_wrapper}>
+							<MultiSelect
+								value={value}
+								onChange={onChange}
+								placeholder="Cogo Entity"
+								options={options1}
+								isClearable
+								style={{ width: '200px' }}
+								size="md"
+								className={styles.input}
+							/>
+							<MultiSelect
+								value={value}
+								onChange={onChange}
+								placeholder="User Group"
+								options={options2}
+								isClearable
+								style={{ width: '200px' }}
+								size="md"
+								className={styles.input}
+							/>
+						</div>
+
 					</div>
 				</div>
 
@@ -51,14 +71,18 @@ function CreateTest() {
 							<span>No of Questions</span>
 							<sup className={styles.superscript}>*</sup>
 						</div>
-						<Input size="md" placeholder="type" className={styles.input} />
+						<Input size="md" placeholder="type" className={`${styles.input} ${styles.input_type}`} />
 					</div>
 					<div className={styles.wrapper}>
 						<div className={styles.label_wrapper}>
 							<span>Duration of Test</span>
 							<sup className={styles.superscript}>*</sup>
 						</div>
-						<Input size="md" placeholder="00 h : 00 min" className={styles.input} />
+						<Input
+							size="md"
+							placeholder="00 h : 00 min"
+							className={`${styles.input} ${styles.input_duration}`}
+						/>
 					</div>
 
 				</div>
