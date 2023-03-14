@@ -21,7 +21,7 @@ function useDeleteKamLevel(props) {
 				data: payload,
 			});
 			refetch();
-			Toast.success('level Deleted');
+			Toast.success('Level Deleted');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

@@ -1,27 +1,24 @@
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-	margin-top: 10px;
-	margin-bottom: 20px;
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px 0 20px 0;
 }
 
 .button_container {
-	display: flex;
+  display: flex;
 }
 
 .config_basic_details {
-	display: flex;
-	flex-direction: column;
-	width: 30%;
-	
+  display: flex;
+  flex-direction: column;
+  width: 30%;
 }
 
 .lower_details {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 8px;
-	font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
 }
