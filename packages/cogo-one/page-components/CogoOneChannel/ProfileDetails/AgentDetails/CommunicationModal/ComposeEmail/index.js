@@ -108,7 +108,7 @@ function ComposeEmail({
 						{(attachments || []).map((data) => (
 							<div className={styles.uploaded_files}>
 								<div className={styles.uploaded_files_content}>
-									{decode(data).fileIcon}
+									{decode(data)?.fileIcon}
 									<div className={styles.content_div}>
 										{decode(data)?.uploadedFileName}
 									</div>

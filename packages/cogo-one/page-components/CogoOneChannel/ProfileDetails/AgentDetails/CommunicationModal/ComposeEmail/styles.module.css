@@ -116,27 +116,6 @@
 	font-weight: 500;
 }
 
-.show_more_tags {
-	width: 120px;
-	padding: 5px 7px;
-	font-size: 12px;
-	font-weight: bold;
-	color: #7495fc;
-	text-align: center;
-	cursor: pointer;
-}
-
-.flex {
-	display: flex;
-	align-items: center;
-	width: 100%;
-}
-
-.tool_tip_div {
-	min-width: 400px;
-	padding-bottom: 10px;
-}
-
 .footer_shadow {
 	box-shadow: 0 0 4px 0 #627fac33;
 }
