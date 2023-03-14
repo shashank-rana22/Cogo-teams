@@ -53,7 +53,6 @@ function Header(props) {
 							setExpertise(value)
 						)}
 						style={{ marginRight: 16, width: '440px' }}
-						// disabled={toggleEvent === 'updateEvent'}
 						disabled={loading}
 					/>
 
@@ -63,7 +62,6 @@ function Header(props) {
 						setGlobalSearch={setSearchValue}
 						debounceQuery={debounceQuery}
 						value={searchValue}
-						// disabled={toggleEvent === false}
 						className={styles.search_bar}
 						disabled={loading}
 					/>
@@ -73,7 +71,6 @@ function Header(props) {
 					themeType="primary"
 					size="md"
 					onClick={onClose}
-					// disabled={toggleEvent === false}
 					disabled={loading}
 				>
 					Add New Event

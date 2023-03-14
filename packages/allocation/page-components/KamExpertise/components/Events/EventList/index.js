@@ -4,14 +4,13 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function EventListItem({ data, index, loading = true, setEventListData, setToggleEvent }) {
+function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 	const {
 		id, condition_name:conditionName = '', expertise_type:Type = '',
 		description = '',
 		rules = [],
 		params = '',
 	} = data;
-	// console.log('data loading :::::', loading);
 
 	const COMPLETION_MAPPING = {
 		completed   : 'Shipment Completion',
@@ -24,59 +23,6 @@ function EventListItem({ data, index, loading = true, setEventListData, setToggl
 		setToggleEvent('updateEvent');
 	};
 
-	// if (loading) {
-	// 	// return (
-	// 	// 	<section key={id} className={styles.list_item_container}>
-	// 	// 		<div className={styles.top_div}>
-	// 	// 			<Placeholder width="20px" style={{ marginBottom: '4px' }} />
-	// 	// 		</div>
-	// 	// 		<div>
-	// 	// 			<p className={styles.info_tag}>
-	// 	// 				<Placeholder width="160px" style={{ marginBottom: '4px' }} />
-
-	// 	// 			</p>
-	// 	// 			<div className={styles.info_tag}>
-	// 	// 				<Placeholder width="120px" style={{ marginBottom: '12px' }} />
-
-	// 	// 			</div>
-	// 	// 			<p className={styles.info_tag}>
-	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-
-	// 	// 			</p>
-	// 	// 		</div>
-
-	// 	// 		<div className={styles.rule}>
-	// 	// 			<p className={styles.rule_head}>
-	// 	// 				<Placeholder width="100px" height="20px" style={{ marginBottom: '4px' }} />
-
-	// 	// 			</p>
-
-	// 	// 			<div className={styles.rule_body}>
-	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-
-	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-
-	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-
-	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-
-	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-
-	// 	// 				<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-
-	// 	// 			</div>
-
-	// 	// 		</div>
-
-	// 	// 		<div className={styles.rule_end}>
-	// 	// 			<Placeholder width="160px" style={{ marginBottom: '4px' }} />
-	// 	// 		</div>
-	// 	// 	</section>
-	// 	// );
-	// 	<div>loading</div>;
-	// }
 	return (
 
 		<section key={id} className={styles.list_item_container}>
@@ -137,7 +83,6 @@ function EventListItem({ data, index, loading = true, setEventListData, setToggl
 								color="#FEF3E9"
 							>
 								{COMPLETION_MAPPING[data?.event_state_on]}
-								{/* {startCase(COMPLETION_MAPPING[])} */}
 							</Pill>
 						</span>
 
@@ -169,20 +114,6 @@ function EventListItem({ data, index, loading = true, setEventListData, setToggl
 					</div>
 				))}
 			</div>
-
-			{/* <div className={styles.rule_end}>
-				last booking date
-
-				<Pill
-					key="Account"
-					size="l"
-					color="#FEF3E9"
-					// style={{ width: '8%' }}
-				>
-					{params}
-				</Pill>
-
-			</div> */}
 
 		</section>
 	);

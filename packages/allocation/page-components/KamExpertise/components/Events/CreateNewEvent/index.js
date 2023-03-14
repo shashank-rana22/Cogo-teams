@@ -25,13 +25,10 @@ const FILTER_ATTRIBUTE_MAPPING = {
 
 function CreateNewEvent(props) {
 	const { setToggleEvent = () => {}, eventListData = {}, listRefetch = () => {}, updateEventListData = {} } = props;
-	// console.log('eventListData', eventListData);
 
 	const onClose = () => {
 		setToggleEvent('eventList');
 	};
-
-	// const [attribute, setAttribute] = useState('');
 
 	const {
 		attributeList,
@@ -49,7 +46,6 @@ function CreateNewEvent(props) {
 	const {
 		onUpdate,
 		formProps,
-		// gg,
 	} = useUpdateEvent({ updateEventListData, listRefetch, attributeList });
 	const {
 		control,
@@ -62,22 +58,9 @@ function CreateNewEvent(props) {
 
 	useEffect(() => {
 		setRuleType(FILTER_ATTRIBUTE_MAPPING[watchListener]);
-		console.log('watchListener', watchListener);
-		console.log('heheheheheh', FILTER_ATTRIBUTE_MAPPING[watchListener]);
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [watchListener]);
-
-	// console.log('attributeList', attributeList);
-
-	// if(isEmpty(eventListData)){
-
-	// }
-
-	// console.log('updateEventListData', updateEventListData);
-
-	// console.log('attributeList:', attributeList);
-
-	// console.log('watching', watch('attribute'));
 
 	return (
 		<div>
@@ -167,8 +150,6 @@ function CreateNewEvent(props) {
 
 									return (
 										<div className={styles.attribute_form_group}>
-											{/* <span className={styles.label}><Placeholder /></span> */}
-
 											<div
 												className={`${styles.input_group}
 													${index < attributeList.length ? styles.margin_bottom : ''}`}
@@ -243,9 +224,6 @@ function CreateNewEvent(props) {
 					>
 						Save
 					</Button>
-					{/* <Button onClick={gg}>
-						okokokokok
-					</Button> */}
 				</div>
 			</div>
 

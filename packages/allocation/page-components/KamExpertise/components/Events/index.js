@@ -12,7 +12,7 @@ import EventListItem from './EventList';
 import Header from './Header';
 import styles from './styles.module.css';
 
-// const DummyList = [
+
 // 	{
 // 		id             : 'hgf',
 // 		status         : 'jhgf',
@@ -71,7 +71,6 @@ function Events() {
 	const [toggleEvent, setToggleEvent] = useState('eventList');
 	const [eventListData, setEventListData] = useState({});
 
-	// console.log('toggleEvent::', toggleEvent);
 
 	if (loading) {
 		return (
@@ -337,7 +336,6 @@ function Events() {
 							)
 
 							: list.map((data, index) => {
-								console.log('data::::', data)
 								return(
 									<EventListItem
 										data={data}

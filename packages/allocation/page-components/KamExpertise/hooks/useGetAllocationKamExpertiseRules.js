@@ -10,8 +10,6 @@ function useGetAllocationKamExpertiseRules() {
 		},
 	});
 
-	// Todo const [params,setParams] for attributes
-
 	const [{ loading, data = {} }, refetch] = useAllocationRequest({
 		method  : 'get',
 		url     : '/kam_expertise_rules',

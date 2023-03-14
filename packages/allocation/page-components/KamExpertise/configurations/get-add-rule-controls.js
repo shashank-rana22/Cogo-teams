@@ -49,7 +49,7 @@ const controls = [
 		label       : 'Attribute',
 		placeholder : '',
 		type        : 'select',
-		options     : [// Todo api will hit on the basis of select
+		options     : [
 			{ value: 'account_attribute', label: 'Account Attribute' },
 			{ value: 'shipment_attribute', label: 'Shipment Attribute' },
 			{ value: 'misc_attribute', label: 'Miscellaneous Attribute' },
