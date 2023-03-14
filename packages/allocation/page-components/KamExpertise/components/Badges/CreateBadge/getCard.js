@@ -13,9 +13,9 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 	const UploadControler = getFieldController('fileUpload');
 
 	const MEDAL_IMAGE_MAPPING = {
-		Bronze : badgeListData?.badge_details[0]?.image_url,
-		Silver : badgeListData?.badge_details[1]?.image_url,
-		Gold   : badgeListData?.badge_details[2]?.image_url,
+		Bronze : badgeListData?.badge_details?.[0]?.image_url,
+		Silver : badgeListData?.badge_details?.[1]?.image_url,
+		Gold   : badgeListData?.badge_details?.[2]?.image_url,
 	};
 
 	return (
