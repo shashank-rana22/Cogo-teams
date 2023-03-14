@@ -6,20 +6,16 @@ import QuestionsList from './QuestionsList';
 
 function CreateFAQ() {
 	const [switchDashboard, setSwitchDashboard] = useState(false);
-	console.log(switchDashboard);
+
+	if (!switchDashboard) {
+		return <Analytics setSwitchDashboard={setSwitchDashboard} />;
+	}
+
 	return (
 		<div>
-			{switchDashboard
-				? (
-					<>
-						<Header setSwitchDashboard={setSwitchDashboard} />
+			<Header setSwitchDashboard={setSwitchDashboard} />
 
-						<QuestionsList />
-					</>
-				)
-
-				: <Analytics setSwitchDashboard={setSwitchDashboard} />}
-
+			<QuestionsList />
 		</div>
 	);
 }
