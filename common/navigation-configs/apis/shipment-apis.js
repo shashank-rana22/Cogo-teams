@@ -1278,10 +1278,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api: 'send_whatsapp_counter_price',
-		access_type: 'private',
-		service_name: 'shipment',
-	}
+		api          : 'send_whatsapp_counter_price',
+		access_type  : 'private',
+		service_name : 'shipment',
+		feature      : 'revenue_desk',
+	},
 ];
 
 export default apis;
