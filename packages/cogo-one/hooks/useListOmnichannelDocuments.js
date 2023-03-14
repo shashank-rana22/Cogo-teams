@@ -10,6 +10,7 @@ function useListOmnichannelDocuments({
 	activeTab,
 	customerId,
 	setFilterVisible,
+	activeSelect = '',
 	type = '',
 }) {
 	const [{ data, loading }, trigger] = useRequest({
@@ -50,6 +51,7 @@ function useListOmnichannelDocuments({
 					filters                   : filters_payload,
 				},
 			});
+
 			setFilterVisible(false);
 		} catch (error) {
 			// console.log(error);
@@ -61,7 +63,7 @@ function useListOmnichannelDocuments({
 			documentsList();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [customerId]);
+	}, [customerId, activeSelect]);
 
 	return {
 		documentsList,

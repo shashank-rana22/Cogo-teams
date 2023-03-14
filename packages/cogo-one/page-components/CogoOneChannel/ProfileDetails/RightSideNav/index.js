@@ -1,7 +1,6 @@
 import { Tooltip, cl } from '@cogoport/components';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 
-import useUpdateOmnichannelDocuments from '../../../../hooks/useUpdateOmnichannelDocuments';
 import FormatData from '../../../../utils/formatData';
 
 import IconMapping from './IconMapping';
@@ -14,8 +13,6 @@ function RightSideNav({
 	loading,
 	disableQuickActions = false,
 	documents_count = {},
-	documentCount = () => {},
-	listIds = [],
 	activeMessageCard,
 	activeVoiceCard,
 	activeTab,
@@ -29,7 +26,7 @@ function RightSideNav({
 			setActiveSelect(val);
 		}
 	};
-	const { documentCountUpdates = () => {} } = useUpdateOmnichannelDocuments({ documentCount });
+
 	const disabledSpotSearch = loading || disableQuickActions;
 
 	const { userId = '', userMobile = '', leadUserId = '' } = FormatData({
@@ -39,10 +36,6 @@ function RightSideNav({
 	});
 
 	const checkConditions = isEmpty(userId) && isEmpty(userMobile) && isEmpty(leadUserId);
-
-	const handleUpdates = () => {
-		documentCountUpdates({ listIds });
-	};
 
 	return (
 		<div className={styles.right_container}>
@@ -70,14 +63,7 @@ function RightSideNav({
 									)}
 								</div>
 							)}
-							<div
-								role="presentation"
-								onClick={() => {
-									if (name === 'documents' && !isEmpty(listIds)) {
-										handleUpdates();
-									}
-								}}
-							>
+							<div>
 								{icon}
 							</div>
 						</Tooltip>

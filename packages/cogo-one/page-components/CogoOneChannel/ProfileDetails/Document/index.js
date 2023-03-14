@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import useListOmnichannelDocuments from '../../../../hooks/useListOmnichannelDocuments';
+import useUpdateOmnichannelDocuments from '../../../../hooks/useUpdateOmnichannelDocuments';
 import LoadingState from '../UserActivity/LoadingState';
 
 import Filters from './Filters';
@@ -16,11 +17,13 @@ function Documents({
 	activeVoiceCard,
 	activeTab,
 	customerId,
-	setListIds = () => {},
+	documentCount,
+	documents_count,
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState('');
 	const [showModal, setShowModal] = useState(false);
+	const [listIds, setListIds] = useState([]);
 	const {
 		list = [],
 		loading = false,
@@ -50,6 +53,15 @@ function Documents({
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [list]);
+
+	const { documentCountUpdates = () => {} } = useUpdateOmnichannelDocuments();
+
+	useEffect(() => {
+		if (!isEmpty(listIds) && documents_count > 0) {
+			documentCountUpdates({ documentCount, listIds });
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [listIds]);
 
 	return (
 		<>

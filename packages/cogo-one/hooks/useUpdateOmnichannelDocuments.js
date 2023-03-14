@@ -1,12 +1,12 @@
 import { useRequest } from '@cogoport/request';
 
-function useUpdateOmnichannelDocuments({ documentCount }) {
+function useUpdateOmnichannelDocuments() {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_omnichannel_documents',
 		method : 'post',
 	}, { manual: true });
 
-	const documentCountUpdates = async ({ listIds = [] }) => {
+	const documentCountUpdates = async ({ documentCount, listIds = [] }) => {
 		try {
 			await trigger({
 				params: {
@@ -22,6 +22,7 @@ function useUpdateOmnichannelDocuments({ documentCount }) {
 
 	return {
 		documentCountUpdates,
+		loading,
 	};
 }
 

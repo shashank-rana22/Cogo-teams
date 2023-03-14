@@ -15,8 +15,6 @@ function ProfileDetails({
 	updateLeaduser,
 	activeCardId,
 }) {
-	const [listIds, setListIds] = useState([]);
-
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
 	const [activeSelect, setActiveSelect] = useState('profile');
@@ -41,6 +39,7 @@ function ProfileDetails({
 		activeVoiceCard,
 		activeTab,
 		customerId,
+		activeSelect,
 		type: 'count',
 	});
 
@@ -61,7 +60,8 @@ function ProfileDetails({
 						updateLeaduser={updateLeaduser}
 						orgId={orgId}
 						disableQuickActions={disableQuickActions}
-						setListIds={setListIds}
+						documents_count={documents_count}
+						documentCount={documentCount}
 					/>
 				)}
 			</div>
@@ -72,9 +72,7 @@ function ProfileDetails({
 				openNewTab={openNewTab}
 				loading={loading}
 				disableQuickActions={disableQuickActions}
-				documentCount={documentCount}
 				documents_count={documents_count}
-				listIds={listIds}
 				activeMessageCard={activeMessageCard}
 				activeVoiceCard={activeVoiceCard}
 				activeTab={activeTab}
