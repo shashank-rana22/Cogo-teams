@@ -146,7 +146,6 @@ function ApprovalPending({
 				</Modal>
 			)}
 			<UploadModal showUpload={showUpload} setShowUpload={setShowUpload} listAPi={listAPi} />
-			;
 		</>
 	);
 }
