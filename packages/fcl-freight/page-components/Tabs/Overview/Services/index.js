@@ -25,8 +25,7 @@ function Services({
 		<div className={styles.container}>
 			<Accordion title="Service Details" style={{ width: '100%' }}>
 				<div className={styles.service_container}>
-					<div className="card-block">
-						hi
+					<div className={styles.card_block}>
 						{(serviceObj?.origin || []).map((service) => (
 							<ServiceDetails
 								className={styles.service_details}
@@ -42,7 +41,7 @@ function Services({
 						))}
 					</div>
 
-					<div className="card-block">
+					<div className={styles.card_block}>
 						{(serviceObj?.multipleMainService || []).map((service) => (
 							<MutipleSimilarServices
 								serviceList={serviceList}
@@ -57,19 +56,19 @@ function Services({
 						))}
 					</div>
 
-					{/* <div className="card-block">
+					<div className={styles.card_block}>
 						{(serviceObj?.destination || []).map((service) => (
 							<ServiceDetails
-								cancelUpsellFor={cancelUpsellDestinationFor}
+								// cancelUpsellFor={cancelUpsellDestinationFor}
 								serviceData={service}
 								serviceList={serviceList}
 								shipmentData={shipment_data}
 								isSeller={isSeller}
-								refetchServices={refetchServices}
+								// refetchServices={refetchServices}
 								primary_service={primary_service}
 							/>
 						))}
-					</div> */}
+					</div>
 				</div>
 			</Accordion>
 		</div>
