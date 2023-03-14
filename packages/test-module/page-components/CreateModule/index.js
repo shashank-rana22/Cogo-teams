@@ -1,4 +1,6 @@
+import CreateQuestionSet from './components/CreateQuestionSet';
+
 function CreateModule() {
-	return <>div qwerty</>;
+	return <CreateQuestionSet />;
 }
 export default CreateModule;

@@ -1,4 +1,6 @@
+import CreateQuestionSet from '../CreateModule/components/CreateQuestionSet';
+
 function HomePage() {
-	return <>div qwerty</>;
+	return <CreateQuestionSet />;
 }
 export default HomePage;
