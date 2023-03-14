@@ -39,3 +39,7 @@
   width: 98%;
   margin-left: 8px;
 }
+.delete_button{
+  float: right;
+  margin: 10px 32px 10px 10px ;
+ }

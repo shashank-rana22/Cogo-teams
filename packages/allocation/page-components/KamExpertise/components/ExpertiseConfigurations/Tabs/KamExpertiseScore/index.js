@@ -88,17 +88,21 @@ function KamExpertiseScoreConfig() {
 		console.log('values', values);
 	};
 
-	const options = (list).map((value) => (
-		{
+	const options = (list).map((value) => {
+		console.log('value', value);
+
+		return {
 			key      : value.expertise_type,
 			title    : titleSection(value),
 			children : <ExpertiseParameters
 				activeCollapse={activeCollapse}
-				onClickAddCondition={() => setAddConditionModal({ type: value?.name })}
+				onClickAddCondition={() => setAddConditionModal({ type: value?.expertise_type })}
 			/>,
 
-		}
-	));
+		};
+	});
+
+	console.log('addConditionModal ::', addConditionModal);
 
 	return (
 		<>

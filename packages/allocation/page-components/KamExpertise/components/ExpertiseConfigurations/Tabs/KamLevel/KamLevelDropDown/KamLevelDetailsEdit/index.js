@@ -1,12 +1,14 @@
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
-import getControls from '../../getControls';
+// import getControls from '../../getControls';
+import { controls, controlsBottom } from '../../getControls';
 
 import styles from './styles.module.css';
 
 function KamLevelDetailsEdit({ data = {}, control }) {
 	const transacting_accounts = data && data.list && data.list['Transacting Accounts'];
-	const controls = getControls('top', false);
-	const controlsBottom = getControls('bottom', false);
+	// const controls = getControls('top', false);
+	// const controlsBottom = getControls('bottom', false);
+	console.log('controls', controls);
 
 	return (
 		<div className={styles.level_card_container}>
