@@ -69,6 +69,7 @@ function LoadingState() {
 			activeKey={value}
 			setActive={onChange}
 			type="text"
+			className={styles.collapse}
 		/>
 	);
 }

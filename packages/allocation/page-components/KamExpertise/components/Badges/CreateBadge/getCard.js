@@ -12,17 +12,10 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 	const InputElement = getFieldController('number');
 	const UploadControler = getFieldController('fileUpload');
 
-	const getBadgeImage = (medal) => {
-		switch (medal) {
-			case 'Bronze':
-				return badgeListData?.badge_details[0]?.image_url;
-			case 'Silver':
-				return badgeListData?.badge_details[1]?.image_url;
-			case 'Gold':
-				return badgeListData?.badge_details[2]?.image_url;
-			default:
-				return '';
-		}
+	const MEDAL_IMAGE_MAPPING = {
+		Bronze : badgeListData?.badge_details?.[0]?.image_url,
+		Silver : badgeListData?.badge_details?.[1]?.image_url,
+		Gold   : badgeListData?.badge_details?.[2]?.image_url,
 	};
 
 	return (
@@ -30,7 +23,7 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 
 			<div className={styles.display_flex} style={{ justifyContent: score ? 'center' : 'flex-start' }}>
 				<div>
-					<p style={{ color: '#4f4f4f', marginBottom: 15 }}>Medal</p>
+					<p style={{ color: '#4f4f4f', marginBottom: 16 }}>Medal</p>
 					<p>{medalType}</p>
 				</div>
 
@@ -73,21 +66,20 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 					{errors?.[`${medalType}_img_value`]?.message}
 				</div>
 				<div>
-					{
-						watch(`${medalType}_img_value`)
-							? 										(
-								<div className={styles.preview}>
-									<img src={watch(`${medalType}_img_value`)} alt="preview_image" />
-								</div>
-							)
-							: null
-					}
+					{ watch(`${medalType}_img_value`)
+						? (
+							<div className={styles.preview}>
+								<img src={watch(`${medalType}_img_value`)} alt="preview_image" />
+							</div>
+						)
+						: null}
+
 					{
 					!isEmpty(data && badgeListData) && !watch(`${medalType}_img_value`)
 						? (
 							<div className={styles.preview}>
 								<img
-									src={getBadgeImage(medalType)}
+									src={MEDAL_IMAGE_MAPPING[medalType]}
 									alt="badge img preview"
 								/>
 							</div>

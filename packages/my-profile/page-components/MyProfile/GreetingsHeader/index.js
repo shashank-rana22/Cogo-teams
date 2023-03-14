@@ -40,7 +40,7 @@ function Greetings({
 		onClickCancel,
 	} = useUpdatePartnerUser({ picture, partner_user_id, setRefetch, detailsData });
 
-	const { badges_got = [], badges_not_got = [], grouped_badges_got = {} } = badgeList || {};
+	const { badges_got = [], grouped_badges_got = {} } = badgeList || {};
 
 	const { name: locationName = '' } = lowest_geo_location || {};
 
@@ -100,7 +100,7 @@ function Greetings({
 			<div className={styles.badges}>
 				<div className={styles.badge_list}>
 					{
-						!isEmpty(badges_not_got)
+						!isEmpty(badges_got)
 							? badges_got.map((data, i) => (
 								(i < 3)
 									? (
