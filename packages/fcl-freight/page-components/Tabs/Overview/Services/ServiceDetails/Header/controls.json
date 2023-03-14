@@ -1,0 +1,470 @@
+[
+	{
+		"name":"containers_count",
+		"type":"number",
+		"label":"Containers Count",
+		"min":1,
+	   	"conditions":[
+			{
+				"shipment_type":[
+					"ltl_freight"
+				]
+			},
+		 	{
+				"shipment_type":[
+					"fcl_freight"
+				],
+				"main_service_state": ["confirmed_by_service_provider"],
+				"main_service_trade_type": ["export"],
+				"main_service_bl_type": ["rfs"]
+			},
+			{
+				"shipment_type":[
+					"fcl_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"containers_gated_in"
+				],
+				"main_service_trade_type":[
+					"export"
+				],
+				"main_service_bl_type":[
+					"sob",
+					"seaway"
+				]
+			},
+			{
+				"shipment_type":[
+					"fcl_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"containers_gated_in",
+					"vessel_departed"
+				],
+				"main_service_trade_type":[
+					"import"
+				]
+			}
+		],
+		"rules":{
+			"min":1
+		}
+	},
+	{
+		"name":"cargo_weight_per_container",
+		"type":"number",
+		"label":"Cargo Weight per Container",
+		"conditions":[
+			{
+                "shipment_type":[
+                    "rail_domestic_freight"
+                ]
+            },
+		  	{
+				"shipment_type":[
+					"fcl_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider"
+				],
+				"main_service_trade_type":[
+					"export"
+				],
+				"main_service_bl_type":[
+					"rfs"
+				]
+		  	},
+			{
+				"shipment_type":[
+					"fcl_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"containers_gated_in"
+				],
+				"main_service_trade_type":[
+					"export"
+				],
+				"main_service_bl_type":[
+					"sob",
+					"seaway"
+				]
+			},
+			{
+				"shipment_type":[
+					"fcl_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"containers_gated_in",
+					"vessel_departed"
+				],
+				"main_service_trade_type":[
+					"import"
+				]
+			}
+		],
+		"min":0.1,
+		"rules":{
+			"min":0.1
+		}
+	},
+	{
+		"name":"packages_count",
+		"type":"number",
+		"label":"Packages Count",
+		"conditions":[
+			{
+				"shipment_type":[
+					"air_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_handed_over_at_origin",
+					"flight_departed",
+					"flight_arrived",
+					"cargo_handed_over_at_destination",
+					"completed"
+				],
+				"main_service_trade_type":[
+					"export"
+				]
+			},
+			{
+				"shipment_type":[
+					"air_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_handed_over_at_origin",
+					"flight_departed",
+					"flight_arrived",
+					"cargo_handed_over_at_destination",
+					"completed"
+				],
+				"main_service_trade_type":[
+					"import"
+				]
+			},
+			{
+				"shipment_type":[
+					"lcl_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_carted_in",
+					"cargo_stuffed"
+				],
+				"main_service_trade_type":[
+					"export"
+				]
+			},
+			{
+				"shipment_type":[
+					"lcl_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_carted_in",
+					"cargo_stuffed",
+					"vessel_departed"
+				],
+				"main_service_trade_type":[
+					"import"
+				]
+			}
+		],
+		"min":1,
+		"rules":{
+			"min":1
+		}
+	},
+	{
+		"name": "packages",
+		"type": "fieldArray",
+		"label": "Dimension (lxbxh)",
+		"showButtons": true,
+		"showOptional": false,
+		"showHeader": true,
+		"showDeleteButton": true,
+		"value":[
+			{
+				"length":0,
+				"width":0,
+				"height":0,
+				"packing_type": "",
+				"handling_type": "",
+				"total_packages_weight": "",
+				"packages_count": ""
+			}
+		],
+		"controls": [
+			{
+				"name":"length",
+				"type":"number",
+				"label": "Length",
+				"span":0.9,
+				"showOptional":false,
+				"className": "length"
+			},
+			{
+				"name":"width",
+				"type":"number",
+				"label":"Width",
+				"showOptional":false,
+				"span":0.9,
+				"className": "width"
+			},
+			{
+				"name":"height",
+				"type":"number",
+				"label":"Height",
+				"showOptional":false,
+				"span":0.9,
+				"className": "height"
+			},
+			{
+				"name": "packing_type",
+				"type": "select",
+				"label": "Packing Type",
+				"showOptional": false,
+				"span": 2,
+				"options":[
+					{
+						"label":"Pallet",
+						"value":"pallet"
+					},
+					{
+						"label":"Box",	
+						"value":"box"
+					},
+					{
+						"label":"Crate",
+						"value":"crate"
+					},
+					{
+						"label":"Loose",
+						"value":"loose"
+					},
+					{
+						"label":"Carton",
+						"value":"carton"
+					},
+					{
+						"label":"Roll",
+						"value":"roll"
+					},
+					{
+						"label":"Drum",
+						"value":"drum"
+					},
+					{
+						"label":"Bag",
+						"value":"bag"
+					}
+				], 
+				"rules":{
+					"required":true
+				}
+			},
+			{
+				"name": "handling_type",
+				"type": "select",
+				"label": "Handling Type",
+				"showOptional": false,
+				"span": 2,
+				"options": [
+					{
+						"label": "Stackable",
+						"value": "stackable"
+					},
+					{
+						"label": "Non Stackable",
+						"value": "non_stackable"
+					}
+				],
+				"rules": {
+					"required": true
+				}
+			},
+			{
+				"name": "total_packages_weight",
+				"type": "number",
+				"label": "Total Package Weight",
+				"showOptional": false,
+				"span": 2.4
+			},
+			{
+				"name": "packages_count",
+				"type": "number",
+				"label": "Package Count",
+				"showOptional": false,
+				"span": 1.8,
+				"rules": {
+					"required": true
+				}
+			}
+		],
+		"conditions":[
+			{
+				"shipment_type":[
+					"air_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_handed_over_at_origin",
+					"flight_departed",
+					"flight_arrived",
+					"cargo_handed_over_at_destination",
+					"completed"
+				],
+				"main_service_trade_type":[
+					"export",
+					"import"
+				]
+			}
+		]
+	},
+	{
+		"name":"weight",
+		"type":"number",
+		"label":"Weight (Kgs)",
+		"conditions":[
+			{
+				"shipment_type":[
+					"air_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_handed_over_at_origin",
+					"flight_departed",
+					"flight_arrived",
+					"cargo_handed_over_at_destination",
+					"completed"
+				],
+				"main_service_trade_type":[
+					"export"
+				]
+			},
+			{
+				"shipment_type":[
+					"air_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_handed_over_at_origin",
+					"flight_departed",
+					"flight_arrived",
+					"cargo_handed_over_at_destination",
+					"completed"
+				],
+				"main_service_trade_type":[
+					"import"
+				]
+			},
+			{
+				"shipment_type":[
+					"lcl_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_carted_in",
+					"cargo_stuffed"
+				],
+				"main_service_trade_type":[
+					"export"
+				]
+			},
+			{
+				"shipment_type":[
+					"lcl_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_carted_in",
+					"cargo_stuffed",
+					"vessel_departed"
+				],
+				"main_service_trade_type":[
+					"import"
+				]
+			}
+		],
+		"min":0.1,
+		"rules":{
+			"min":0.1
+		}
+	},
+	{
+		"name":"volume",
+		"type":"number",
+		"label":"Container Count",
+		"conditions":[
+			{
+				"shipment_type":[
+					"air_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_handed_over_at_origin",
+					"flight_departed",
+					"flight_arrived",
+					"cargo_handed_over_at_destination",
+					"completed"
+				],
+				"main_service_trade_type":[
+					"export"
+				]
+			},
+			{
+				"shipment_type":[
+					"air_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_handed_over_at_origin",
+					"flight_departed",
+					"flight_arrived",
+					"cargo_handed_over_at_destination",
+					"completed"
+				],
+				"main_service_trade_type":[
+					"import"
+				]
+			},
+			{
+				"shipment_type":[
+					"lcl_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_carted_in",
+					"cargo_stuffed"
+				],
+				"main_service_trade_type":[
+					"export"
+				]
+			},
+			{
+				"shipment_type":[
+					"lcl_freight"
+				],
+				"main_service_state":[
+					"confirmed_by_service_provider",
+					"cargo_carted_in",
+					"cargo_stuffed",
+					"vessel_departed"
+				],
+				"main_service_trade_type":[
+					"import"
+				]
+			}
+		],
+		"min":0.000001,
+		"rules":{
+			"min":0.000001
+		}
+	}
+ ]
