@@ -3,7 +3,7 @@ import PATTERNS from '@cogoport/constants/patterns';
 /* eslint-disable */
 import countries from '../../../.data-store/constants/countries.json';
 
-const getControls = () => {
+const getControls = (documentType) => {
 
 	const indiaOption = countries.find(
 		(country) => country.country_code === 'IN');
@@ -36,14 +36,14 @@ const getControls = () => {
 				required: 'Registration country is required',
 			},
 		},
-		pan_number: {
-			name: 'pan_number',
+		registration_number: {
+			name: 'registration_number',
 			type: 'input',
 			rules: {
-				required: 'Pan Number is required',
+				required: `${documentType==='pan'? "PAN": "GST"} Number is required`,
 				pattern: {
-					value: PATTERNS.PAN_NUMBER,
-					message: 'Enter a valid PAN number',
+					value: documentType==='pan'? PATTERNS.PAN_NUMBER: PATTERNS.GST_NUMBER,
+					message: `Enter a valid ${documentType==='pan'? "PAN": "GST"} number`,
 				},
 			},
 		},

@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -22,7 +24,7 @@ const useSubmitOrganizationKyc = ({ orgId = '' }) => {
 				},
 			});
 		} catch (error) {
-			// console.log(error);
+			Toast.error(getApiErrorString(error));
 		}
 	};
 
