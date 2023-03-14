@@ -2,6 +2,7 @@ import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import React from 'react';
 
 import InactiveModal from './InactiveModal';
+import MailList from './MailList';
 import MessageList from './MessageList';
 import styles from './styles.module.css';
 import VoiceList from './VoiceList';
@@ -84,6 +85,7 @@ function Customers({
 				>
 					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
 					<TabPanel name="voice" title="Voice" />
+					<TabPanel name="mail" title="Mail" />
 				</Tabs>
 			</div>
 
@@ -113,6 +115,10 @@ function Customers({
 					activeTab={activeTab}
 					setShowDialModal={setShowDialModal}
 				/>
+			)}
+
+			{activeTab === 'mail' && (
+				<MailList />
 			)}
 
 			{openModal && (
