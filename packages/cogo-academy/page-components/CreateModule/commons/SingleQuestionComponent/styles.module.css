@@ -1,23 +1,23 @@
 .container {
-    border: 1px solid #E0E0E0;
-    border-radius: 6px;
-    padding: 32px 20px;
+	padding: 32px 20px;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
 }
 
 .first_row {
-    display: flex;
+	display: flex;
 }
 
 .answer_type {
-    margin-left: 20px;
+	margin-left: 20px;
 }
 
 .difficulty_level {
-    display: flex;
-    margin-top: 20px;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
 }
 
 .label {
-    margin-right: 20px;
+	margin-right: 20px;
 }

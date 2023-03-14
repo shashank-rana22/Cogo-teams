@@ -1,49 +1,49 @@
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 6px;
-    padding: 24px 72px;
-    margin-top: 40px;
-    justify-content: space-between;
-    gap: 24px;
-  
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+	justify-content: space-between;
+	padding: 24px 72px;
+	margin-top: 40px;
+	background: rgb(255 255 255 / 70%);
+	border-radius: 6px;
 
-    @media (max-width:768px) {
-        padding: 24px;
-    }
+
+	@media (max-width: 768px) {
+		padding: 24px;
+	}
 }
 
 .control_container {
-    display: flex;
-    justify-content: space-between;
-    flex-basis: 40%;
-    align-items: center;
+	display: flex;
+	flex-basis: 40%;
+	align-items: center;
+	justify-content: space-between;
 
-    @media (max-width:768px) {
-       flex-direction: column;
-       margin: auto;
-    }
+	@media (max-width: 768px) {
+		flex-direction: column;
+		margin: auto;
+	}
 
-    :global {
-        .ui_input_container {
-            width: 250px;
-        }
+	:global {
+		.ui_input_container {
+			width: 250px;
+		}
 
-        .ui_select_container {
-            width: 250px;
-        }
-    }
+		.ui_select_container {
+			width: 250px;
+		}
+	}
 }
 
 .control {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    .error_msg {
-        margin: 0px;
-        font-weight: 500;
-        font-size: 12px;
-        color: #cb6464;
-    }
+	.error_msg {
+		margin: 0;
+		font-size: 12px;
+		font-weight: 500;
+		color: #cb6464;
+	}
 }

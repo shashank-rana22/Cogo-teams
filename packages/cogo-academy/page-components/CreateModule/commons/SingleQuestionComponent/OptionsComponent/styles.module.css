@@ -1,23 +1,23 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-top: 12px;
 }
 
 .field_container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .button_container {
-    margin-left: 16px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-left: 16px;
 
-    .add_button {
-        width: 72px;
-        margin-right: 12px;
-    }
+	.add_button {
+		width: 72px;
+		margin-right: 12px;
+	}
 }

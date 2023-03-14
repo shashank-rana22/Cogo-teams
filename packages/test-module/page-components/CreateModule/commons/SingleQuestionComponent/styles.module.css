@@ -1,12 +1,12 @@
 .first_row {
-    display: flex;
+	display: flex;
 }
 
 .difficulty_level {
-    display: flex;
-    margin-top: 20px;
+	display: flex;
+	margin-top: 20px;
 }
 
 .label {
-    margin-right: 20px;
+	margin-right: 20px;
 }
