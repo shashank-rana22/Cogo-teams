@@ -42,8 +42,15 @@
 
 .tab_list {
 	margin: 16px 0;
+	position: relative;
 
 	@media (max-width: 768px) {
 		overflow-x: scroll;
 	}
+}
+.pub_button{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 91px;
 }

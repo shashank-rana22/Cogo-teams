@@ -22,6 +22,7 @@ const expertiseTypes = {
 function useCreateKamLevel(props) {
 	const { dataLength = '', setCreateKam, refetch } = props;
 	const formProps = useForm();
+	const { reset } = formProps;
 	const [{ loading:createLoading = false }, trigger] = useAllocationRequest({
 		method  : 'POST',
 		url     : 'kam_expertise_configuration',
@@ -58,6 +59,7 @@ function useCreateKamLevel(props) {
 				data: payload,
 			});
 			setCreateKam(false);
+			reset({ formResponse: '' });
 			refetch();
 			Toast.success('Level Added!');
 		} catch (error) {

@@ -4,7 +4,14 @@ import { format, startCase } from '@cogoport/utils';
 import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
 
-function BadgeListItem({ data, index, loading, setToggleScreen, setBadgeListData, listRefetch }) {
+function BadgeListItem(props) {
+	const { data, index, loading, setToggleScreen, setBadgeListData, listRefetch } = props;
+	const { badge_details = [] } = data;
+	const handleEdit = () => {
+		setBadgeListData(data);
+		setToggleScreen(3);
+	};
+
 	if (loading) {
 		return (
 			<div className={styles.container}>
@@ -46,13 +53,6 @@ function BadgeListItem({ data, index, loading, setToggleScreen, setBadgeListData
 			</div>
 		);
 	}
-
-	const { badge_details = [] } = data;
-
-	const handleEdit = () => {
-		setBadgeListData(data);
-		setToggleScreen(3);
-	};
 
 	return (
 		<div className={styles.container}>
