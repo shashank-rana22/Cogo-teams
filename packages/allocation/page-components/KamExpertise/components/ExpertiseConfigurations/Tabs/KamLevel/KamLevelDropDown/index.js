@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 
 import useKamExpertiseLevelConfig from '../../../../../hooks/useKamExpertiseLevelConfig';
 import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
@@ -7,13 +7,15 @@ import KamLevelDetailsEdit from './KamLevelDetailsEdit';
 import KamLevelDetailsShow from './KamLevelDetailsShow';
 import styles from './styles.module.css';
 
-function KamLevelDropDown({ editMode, activeCard, setEditMode, refetch }) {
-	const { listkamLevelDetails, listrefetch, listLoading } = useKamExpertiseLevelConfig({ activeCard });
+function KamLevelDropDown({ refetch, transition_level }) {
+	const [editMode, setEditMode] = useState(false);
+
+	const { listkamLevelDetails, listrefetch, listLoading } = useKamExpertiseLevelConfig({ transition_level });
 
 	console.log('listkamLevelDetails', listkamLevelDetails);
 
 	const { formProps, onSave } = useUpdateKamScores({
-		activeCard,
+		transition_level,
 		listrefetch,
 		setEditMode,
 		refetch,
@@ -40,8 +42,8 @@ function KamLevelDropDown({ editMode, activeCard, setEditMode, refetch }) {
 					<KamLevelDetailsShow
 						data={listkamLevelDetails}
 						listLoading={listLoading}
-						activeCard={activeCard}
 						setEditMode={setEditMode}
+						transition_level={transition_level}
 					/>
 				)}
 		</div>

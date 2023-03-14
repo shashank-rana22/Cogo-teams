@@ -13,33 +13,30 @@ import styles from './styles.module.css';
 function KamLevel() {
 	const { kamConfigDetails, levelLoading, refetch } = useKamExpertiseConfig();
 
-	const [activeCard, setActiveCard] = useState(0);
-	const [editMode, setEditMode] = useState(false);
+	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
 
 	const audit_data = kamConfigDetails?.audit_data || {};
 	const kamConfigLevelDetails = kamConfigDetails?.data || [];
 
 	const dataLength = kamConfigLevelDetails.length;
-	const options = kamConfigLevelDetails.map((data) => ({
+	const options = kamConfigLevelDetails.map((data, id) => ({
 
-		key: data.transition_level,
+		key: id,
 
 		title: <KamLevelCard
 			data={data}
 			activeCard={activeCard}
 			setActiveCard={setActiveCard}
-			id={data.transition_level - 1}
+			id={id}
 			dataLength={dataLength}
 			refetch={refetch}
 
 		/>,
 
 		children: <KamLevelDropDown
-			editMode={editMode}
-			activeCard={activeCard}
-			setEditMode={setEditMode}
 			refetch={refetch}
+			transition_level={data.transition_level}
 		/>,
 
 	}));
