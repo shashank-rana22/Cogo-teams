@@ -1,0 +1,32 @@
+.container{
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px dashed #bdbdbd;
+	border-radius: 4px;
+	background: #ffffff;
+	margin: 22px 22px 0px 0px;
+	border-radius: 4px;
+	cursor: pointer;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 22px 0px 0px 0px;
+	}
+	:hover {
+		border: 1px solid #5936f0;
+	}
+}
+
+.text{
+	margin-right: 8px;
+	padding: 0px 4px 0px 4px;
+	color: #828282;
+}
+
+.styled_modal{
+	.ui-modal-dialog {
+		min-height: calc(100vh - 20vh) !important;
+	}
+}

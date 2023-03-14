@@ -1,0 +1,17 @@
+.certificate_container{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	a {
+		font-weight: 400;
+		font-size: 14px;
+		color: #a8acce;
+		display: flex;
+		align-items: center;
+
+		svg {
+			margin-left: 4px;
+		}
+	}
+}
