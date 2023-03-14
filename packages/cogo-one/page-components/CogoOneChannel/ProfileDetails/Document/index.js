@@ -24,6 +24,8 @@ function Documents({
 	const [filters, setFilters] = useState('');
 	const [showModal, setShowModal] = useState(false);
 	const [listIds, setListIds] = useState([]);
+	const [singleItem, setSingleItem] = useState({});
+
 	const {
 		list = [],
 		loading = false,
@@ -100,6 +102,7 @@ function Documents({
 					list={list}
 					orgId={orgId}
 					setShowModal={setShowModal}
+					setSingleItem={setSingleItem}
 				/>
 			)}
 
@@ -108,6 +111,9 @@ function Documents({
 					setShowModal={setShowModal}
 					orgId={orgId}
 					documentType={showModal}
+					documentsList={documentsList}
+					singleItem={singleItem}
+					setSingleItem={setSingleItem}
 				/>
 			)}
 		</>

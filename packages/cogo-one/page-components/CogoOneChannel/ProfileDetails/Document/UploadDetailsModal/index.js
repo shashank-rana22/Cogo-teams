@@ -11,6 +11,9 @@ function UploadDetailsModal({
 	setShowModal = () => {},
 	orgId = '',
 	documentType,
+	documentsList = () => {},
+	singleItem = {},
+	setSingleItem = () => {},
 }) {
 	const {
 		control,
@@ -22,22 +25,24 @@ function UploadDetailsModal({
 	const {
 		submitOrganizationKyc = () => {},
 		loading,
-	} = useSubmitOrganizationKyc({ orgId });
+	} = useSubmitOrganizationKyc({ orgId, documentsList, singleItem, setSingleItem });
 
 	const handleCancel = () => {
 		reset();
 		setShowModal(false);
+		setSingleItem({});
 	};
 
 	const handleClose = () => {
 		setShowModal(false);
+		setSingleItem({});
 	};
 
 	const formControls = getControls(documentType);
 
 	return (
 		<Modal
-			size="lg"
+			size="md"
 			show
 			onClose={handleClose}
 			placement="top"

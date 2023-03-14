@@ -19,14 +19,15 @@ function documentTypeMapping(type) {
 	}
 }
 
-function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
+function ListData({ list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {} }) {
 	const handleOpenFile = (val) => {
 		// eslint-disable-next-line no-undef
 		window.open(val, '_blank');
 	};
 
-	const handleClick = (type) => {
-		setShowModal(type);
+	const handleClick = (item) => {
+		setShowModal(item?.document_type);
+		setSingleItem(item);
 	};
 
 	const checkStatus = (status, state) => {
@@ -109,7 +110,7 @@ function ListData({ list = [], orgId = '', setShowModal = () => {} }) {
 													<div
 														role="presentation"
 														className={styles.manually}
-														onClick={() => handleClick(document_type)}
+														onClick={() => handleClick(item)}
 													>
 														Upload Manually
 													</div>

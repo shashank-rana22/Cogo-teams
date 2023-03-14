@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 function useUpdateOmnichannelDocuments() {
@@ -16,7 +18,7 @@ function useUpdateOmnichannelDocuments() {
 			});
 			documentCount();
 		} catch (error) {
-			// console.log(error);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 
