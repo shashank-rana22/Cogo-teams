@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import getAddMasteryControls from '../configurations/get-add-mastery-controls';
 
@@ -59,7 +60,7 @@ function useCreateMasterConfiguration(props) {
 
 			onClose();
 
-			Toast.success('Master Badge Created!');
+			Toast.success(isEmpty(masteryListData) ? 'Master Badge Created !' : 'Master Badge Updated !');
 
 			listRefetch();
 		} catch (error) {

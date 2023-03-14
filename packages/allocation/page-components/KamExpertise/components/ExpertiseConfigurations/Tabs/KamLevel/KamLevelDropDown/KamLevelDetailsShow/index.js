@@ -17,7 +17,7 @@ function KamLevelDetailsShow({ data = {}, listLoading }) {
 			label: 'Commodity Expertise',
 		},
 		{
-			label: 'x',
+			label: 'Misc Expertise',
 		},
 
 	];

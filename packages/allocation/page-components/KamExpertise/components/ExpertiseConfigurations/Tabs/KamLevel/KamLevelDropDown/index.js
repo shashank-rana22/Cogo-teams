@@ -8,12 +8,18 @@ import KamLevelDetailsEdit from './KamLevelDetailsEdit';
 import KamLevelDetailsShow from './KamLevelDetailsShow';
 import styles from './styles.module.css';
 
-function KamLevelDropDown({ editMode, title, setEditMode, refetch }) {
-	const { listkamLevelDetails, listrefetch, listLoading } = useKamExpertiseLevelConfig({ title });
+function KamLevelDropDown({ editMode, activeCard, setEditMode, refetch }) {
+	const { listkamLevelDetails, listrefetch, listLoading } = useKamExpertiseLevelConfig({ activeCard });
 
 	console.log('listkamLevelDetails', listkamLevelDetails);
 
-	const { formProps, onSave } = useUpdateKamScores({ title, listrefetch, setEditMode, refetch, listkamLevelDetails });
+	const { formProps, onSave } = useUpdateKamScores({
+		activeCard,
+		listrefetch,
+		setEditMode,
+		refetch,
+		listkamLevelDetails,
+	});
 	const { control, handleSubmit, watch } = formProps;
 
 	console.log('watch', watch());
@@ -25,7 +31,7 @@ function KamLevelDropDown({ editMode, title, setEditMode, refetch }) {
 					themeType="secondary"
 					className={styles.delete_button}
 					onClick={(e) => {
-						if (title) {
+						if (activeCard) {
 							e.stopPropagation();
 						}
 						setEditMode(true);

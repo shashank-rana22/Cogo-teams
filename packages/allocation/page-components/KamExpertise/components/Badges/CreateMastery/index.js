@@ -23,7 +23,7 @@ function CreateMastery(props) {
 	const UploadController = getFieldController('fileUpload');
 	const InputDesc = getFieldController('text');
 
-	const { control, watch, handleSubmit } = formProps;
+	const { control, watch, handleSubmit, formState: { errors } } = formProps;
 
 	const badge_options = []; // for multi-select badges
 	(badgeList || {}).forEach((badge_data) => {
@@ -87,6 +87,10 @@ function CreateMastery(props) {
 										disabled={!isEmpty(masteryListData) && ele.name === 'badges'}
 										options={badgeList.length > 0 ? badge_options : ele.options}
 									/>
+
+									<div className={styles.error_message}>
+										{errors?.[ele.name]?.message}
+									</div>
 								</div>
 							);
 						})
@@ -97,8 +101,13 @@ function CreateMastery(props) {
 								<UploadController
 									name="image_input"
 									control={control}
+									rules={isEmpty(masteryListData) ? {
+										required: 'Image is required',
+									} : {}}
 								/>
-
+								<div className={styles.error_message}>
+									{errors?.image_input?.message}
+								</div>
 								<div>
 									{
 									watch('image_input')
@@ -131,10 +140,15 @@ function CreateMastery(props) {
 									className={styles.text_area}
 									size="sm"
 									placeholder="Multimodal maestro is awarded
-                                to users who complete gold 3 in all of these badges"
+                                				to users who complete gold 3 in all of these badges"
 									control={control}
-									// value={masteryListData ? masteryListData.description : ''}
+									rules={{
+										required: 'Desc is required',
+									}}
 								/>
+								<div className={styles.error_message}>
+									{isEmpty(masteryListData) && errors?.description_input?.message}
+								</div>
 							</div>
 						</div>
 					</div>

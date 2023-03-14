@@ -2,7 +2,6 @@ import { Select, Input } from '@cogoport/components';
 import { SelectController, useDebounceQuery, useForm } from '@cogoport/forms';
 import { IcMArrowBack, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
@@ -20,8 +19,6 @@ function FeedbackManagement() {
 		router.push('/performance-management/manager-dashboard');
 	};
 
-	const { profile: { user : { id: userId = '' } } } = useSelector((state) => state);
-
 	const [searchValue, setSearchValue] = useState('');
 	const [refetchReportees, setRefetchReportees] = useState(false);
 
@@ -35,7 +32,6 @@ function FeedbackManagement() {
 		setPage,
 		fetchReportees,
 	} = useListReportees({
-		userId,
 		searchValue: query,
 	});
 

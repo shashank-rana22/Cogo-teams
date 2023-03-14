@@ -31,12 +31,13 @@
     font-size: 12px;
     color: #221f20;
     opacity: 0.6;
+    padding-bottom: 6px;
 }
 
 .lower_background {
     padding: 20px;
     margin-top: 28px;
-    background: #e2e2e2;
+    background: #F9F9F9;
     border-radius: 10px;
     opacity: 0.9;
 }
