@@ -1,15 +1,6 @@
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
-import {
-	Container,
-	Pill,
-	Text,
-	PaymentText,
-	PillMain,
-	PaymentStatus,
-	Collect,
-} from './styles';
+import styles from './styles.module.css';
 
 function Status({ state, payment_term }) {
 	let statusText = startCase(state);
@@ -18,24 +9,24 @@ function Status({ state, payment_term }) {
 	}
 
 	return (
-		<Container>
-			<PillMain>
-				<Pill className={state}>
-					<Text className={state}>{statusText}</Text>
-				</Pill>
-			</PillMain>
+		<div className={styles.container}>
+			<div className={styles.pill_main}>
+				<div className={`${styles.pill} ${state}`}>
+					<div className={`${styles.text} ${state}`}>{statusText}</div>
+				</div>
+			</div>
 
 			{payment_term ? (
-				<PaymentStatus>
-					<PaymentText>Payment Term: </PaymentText>
+				<div className={styles.payment_status}>
+					<div className={styles.payment_text}>Payment Term: </div>
 
-					<Collect className={state}>
+					<div className={`${styles.collect} ${state}`}>
 						{startCase(payment_term)}
 						{' '}
-					</Collect>
-				</PaymentStatus>
+					</div>
+				</div>
 			) : null}
-		</Container>
+		</div>
 	);
 }
 
