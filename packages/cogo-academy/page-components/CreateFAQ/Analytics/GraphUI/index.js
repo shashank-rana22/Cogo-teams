@@ -153,7 +153,7 @@ function GraphUI() {
           },
           {
             x : 'Sep',
-            y : 182,
+            y : 18,
           },
           {
             x : 'Oct',
@@ -161,11 +161,11 @@ function GraphUI() {
           },
           {
             x : 'Nov',
-            y : 254,
+            y : 25,
           },
           {
             x : 'Dec',
-            y : 140,
+            y : 14,
           },
     ],
   },
@@ -217,22 +217,23 @@ const data2 = [
         display         : 'flex',
 			}}
 			>
-
-				<ResponsiveLine
-					data={data}
-					margin={{ right: 10, top: 50, bottom: 50, left: 60 }}
-					xScale={{ type: 'point' }}
-					yScale={{
+				<div style={{ width: '100%' }}>
+					<ResponsiveLine
+						style={{ flexBasis: '10%' }}
+						data={data}
+						margin={{ right: 10, top: 50, bottom: 50, left: 60 }}
+						xScale={{ type: 'point' }}
+						yScale={{
             type    : 'linear',
             min     : 'auto',
             max     : 'auto',
             stacked : true,
             reverse : false,
-					}}
-					yFormat=" >-.2f"
-					axisTop={null}
-					axisRight={null}
-					axisBottom={{
+						}}
+						yFormat=" >-.2f"
+						axisTop={null}
+						axisRight={null}
+						axisBottom={{
             orient         : 'bottom',
             tickSize       : 5,
             tickPadding    : 5,
@@ -240,8 +241,8 @@ const data2 = [
             legend         : 'transportation',
             legendOffset   : 36,
             legendPosition : 'middle',
-					}}
-					axisLeft={{
+						}}
+						axisLeft={{
             orient         : 'left',
             tickSize       : 5,
             tickPadding    : 5,
@@ -249,26 +250,26 @@ const data2 = [
             legend         : 'count',
             legendOffset   : -40,
             legendPosition : 'middle',
-					}}
-					pointSize={10}
-					pointColor={{ theme: 'background' }}
-					pointBorderWidth={2}
-					pointBorderColor={{ from: 'serieColor' }}
-					pointLabelYOffset={-14}
-					useMesh
-					legends={[
+						}}
+						pointSize={10}
+						pointColor={{ theme: 'background' }}
+						pointBorderWidth={2}
+						pointBorderColor={{ from: 'serieColor' }}
+						pointLabelYOffset={-14}
+						useMesh
+						legends={[
             {
-                anchor            : 'bottom-right',
-                direction         : 'column',
+                anchor            : 'upper-left',
+                direction         : 'row',
                 justify           : false,
                 translateX        : 100,
                 translateY        : 0,
-                itemsSpacing      : 0,
+                itemsSpacing      : 40,
                 itemDirection     : 'left-to-right',
-                itemWidth         : 80,
-                itemHeight        : 20,
+                itemWidth         : 90,
+                itemHeight        : 90,
                 itemOpacity       : 0.75,
-                symbolSize        : 12,
+                symbolSize        : 16,
                 symbolShape       : 'circle',
                 symbolBorderColor : 'rgba(0, 0, 0, .5)',
                 effects           : [
@@ -281,17 +282,20 @@ const data2 = [
                     },
                 ],
             },
-					]}
-				/>
-				<ResponsivePie
-					data={data2}
-					margin={{ top: 50, right: 10, bottom: 80, left: 40 }}
-					innerRadius={0}
-					padAngle={0.7}
-					cornerRadius={3}
-					activeOuterRadiusOffset={8}
-					borderWidth={1}
-					borderColor={{
+						]}
+					/>
+				</div>
+
+				<div style={{ width: '50%' }}>
+					<ResponsivePie
+						data={data2}
+						margin={{ top: 50, right: 10, bottom: 80, left: 40 }}
+						innerRadius={0}
+						padAngle={0.7}
+						cornerRadius={3}
+						activeOuterRadiusOffset={8}
+						borderWidth={1}
+						borderColor={{
             from      : 'color',
             modifiers : [
                 [
@@ -299,13 +303,13 @@ const data2 = [
                     0.2,
                 ],
             ],
-					}}
-					arcLinkLabelsSkipAngle={10}
-					arcLinkLabelsTextColor="#333333"
-					arcLinkLabelsThickness={2}
-					arcLinkLabelsColor={{ from: 'color' }}
-					arcLabelsSkipAngle={10}
-					arcLabelsTextColor={{
+						}}
+						arcLinkLabelsSkipAngle={10}
+						arcLinkLabelsTextColor="#333333"
+						arcLinkLabelsThickness={2}
+						arcLinkLabelsColor={{ from: 'color' }}
+						arcLabelsSkipAngle={10}
+						arcLabelsTextColor={{
             from      : 'color',
             modifiers : [
                 [
@@ -313,8 +317,8 @@ const data2 = [
                     2,
                 ],
             ],
-					}}
-					defs={[
+						}}
+						defs={[
             {
                 id         : 'dots',
                 type       : 'patternDots',
@@ -333,8 +337,8 @@ const data2 = [
                 lineWidth  : 6,
                 spacing    : 10,
             },
-					]}
-					fill={[
+						]}
+						fill={[
             {
                 match: {
                     id: 'ruby',
@@ -383,8 +387,8 @@ const data2 = [
                 },
                 id: 'lines',
             },
-					]}
-					legends={[
+						]}
+						legends={[
             {
                 anchor        : 'bottom',
                 direction     : 'row',
@@ -408,8 +412,10 @@ const data2 = [
                     },
                 ],
             },
-					]}
-				/>
+						]}
+					/>
+				</div>
+
 			</div>
 		</>
 	);
