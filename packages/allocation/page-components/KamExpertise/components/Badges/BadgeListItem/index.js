@@ -14,7 +14,6 @@ function BadgeListItem({ data, index, loading, setToggleScreen, setBadgeListData
 				</div>
 
 				<div className={styles.main_card}>
-
 					<div className={styles.card_description}>
 						<div>
 							<Placeholder width="180px" height="20px" />
@@ -33,23 +32,14 @@ function BadgeListItem({ data, index, loading, setToggleScreen, setBadgeListData
 					<div className={styles.score_container}>
 						<Placeholder width="120px" height="24px" />
 						<div className={styles.score_badge}>
-							<Placeholder
-								height="120px"
-								width="220px"
-								style={{ marginRight: '20px', marginTop: '20px' }}
-							/>
-							<Placeholder
-								height="120px"
-								width="220px"
-								style={{ marginRight: '20px', marginTop: '20px' }}
-							/>
-
-							<Placeholder
-								height="120px"
-								width="220px"
-								style={{ marginRight: '20px', marginTop: '20px' }}
-							/>
-
+							{[1, 2, 3].map((skeletonItem) => (
+								<Placeholder
+									key={skeletonItem}
+									height="120px"
+									width="220px"
+									style={{ marginRight: '20px', marginTop: '20px' }}
+								/>
+							))}
 						</div>
 					</div>
 				</div>
@@ -58,10 +48,12 @@ function BadgeListItem({ data, index, loading, setToggleScreen, setBadgeListData
 	}
 
 	const { badge_details = [] } = data;
+
 	const handleEdit = () => {
 		setBadgeListData(data);
 		setToggleScreen(3);
 	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.number_tag}>
@@ -116,7 +108,7 @@ function BadgeListItem({ data, index, loading, setToggleScreen, setBadgeListData
 							badge_details.map((badge, i) => (
 								<BadgeCard
 									data={badge}
-									medal={startCase(badge.medal)}
+									medal={startCase(badge.medal || '')}
 									badgeListData={data}
 									isLast={i === badge_details.length - 1}
 									listRefetch={listRefetch}
