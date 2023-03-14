@@ -46,25 +46,4 @@ const controlsBottom = [
 	},
 ];
 
-function getControls(position, validate) {
-	let controlsToReturn;
-
-	if (position === 'top') {
-		controlsToReturn = controls;
-	} else if (position === 'bottom') {
-		controlsToReturn = controlsBottom;
-	} else {
-		throw new Error('Invalid Position');
-	}
-
-	if (validate) {
-		controlsToReturn.forEach((control) => {
-			control.rules = {
-				required: 'This Field is Required',
-			};
-		});
-	}
-
-	return controlsToReturn;
-}
-export default getControls;
+export { controls, controlsBottom };

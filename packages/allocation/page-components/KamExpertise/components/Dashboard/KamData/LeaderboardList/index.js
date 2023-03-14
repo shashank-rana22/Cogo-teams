@@ -1,5 +1,6 @@
 import { Placeholder } from '@cogoport/components';
 import { IcCStar } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -74,6 +75,7 @@ const list_data = [
 ];
 
 function LeaderboardList() {
+	const router = useRouter();
 	return (
 		<div className={styles.container}>
 
@@ -186,7 +188,8 @@ function LeaderboardList() {
 											? (
 												<span
 													role="presentation"
-													// onClick={() => router.push('/allocation/kam-expertise/view-badges')}
+													style={{ cursor: 'pointer' }}
+													onClick={() => router.push('/badges')}
 												>
 													View More
 												</span>

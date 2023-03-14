@@ -9,6 +9,7 @@ function Header(props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.config_basic_details}>
+
 				<div className={styles.draft_name}>
 					Currently Editing :
 					{' '}
@@ -20,29 +21,16 @@ function Header(props) {
 					<div>
 						Last Modified:
 						{' '}
-
 						{format(audit_data.updated_at, 'dd-MM-YYYY')}
 					</div>
 
 					<div>
 						Last Edit By:
 						{' '}
-
 						<b>{startCase(audit_data?.name || 'I did this')}</b>
 					</div>
 				</div>
 			</div>
-
-			{/* <div className={styles.button_container}>
-				<Button themeType="secondary">
-					Save As Draft
-				</Button>
-
-				<Button themeType="primary" style={{ marginLeft: '8px' }}>
-					Publish
-				</Button>
-			</div> */}
-
 		</div>
 	);
 }

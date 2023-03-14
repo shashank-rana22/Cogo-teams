@@ -1,4 +1,4 @@
-import { Placeholder, ButtonIcon } from '@cogoport/components';
+import { ButtonIcon } from '@cogoport/components';
 import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -13,7 +13,6 @@ function KamLevelCard(props) {
 		id = '',
 		dataLength = -1,
 		refetch = () => {},
-		levelLoading,
 	} = props;
 
 	const {
@@ -21,7 +20,7 @@ function KamLevelCard(props) {
 		expertise_details = [],
 	} = data;
 
-	const { onDelete } = useDeleteKamLevel({ refetch, dataLength });
+	const { onDelete, deleteLoading } = useDeleteKamLevel({ refetch, dataLength });
 
 	const expertiseObject = expertise_details.map((item) => item);
 
@@ -40,7 +39,7 @@ function KamLevelCard(props) {
 		},
 	];
 	return (
-		(levelLoading ? (<Placeholder height="30px" width="100%" />) : (
+		(
 			<div className={styles.whole}>
 				<div style={{
 					width          : '100%',
@@ -62,13 +61,13 @@ function KamLevelCard(props) {
 						{dataLength === data.transition_level - 1
 							? (
 								<div className={styles.delete_button}>
-									{ !levelLoading ? (
+									{deleteLoading ? (
 										<ButtonIcon
 											size="lg"
 											icon={(
 												<IcMDelete
+													style={{ opacity: '0.4', PointerEvent: 'none' }}
 													onClick={(event) => {
-														onDelete();
 														event.stopPropagation();
 													}}
 												/>
@@ -80,9 +79,9 @@ function KamLevelCard(props) {
 											size="lg"
 											icon={(
 												<IcMDelete
-													style={{ opacity: '0.4', PointerEvent: 'none' }}
 													onClick={(event) => {
 														event.stopPropagation();
+														onDelete();
 													}}
 												/>
 											)}
@@ -129,7 +128,7 @@ function KamLevelCard(props) {
 				)
 }
 			</div>
-		))
+		)
 
 	);
 }
