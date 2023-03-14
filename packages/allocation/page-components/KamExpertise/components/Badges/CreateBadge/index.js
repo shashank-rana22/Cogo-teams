@@ -104,6 +104,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 									data={data}
 									badgeListData={badgeListData}
 									control={control}
+									errors={errors}
 									watch={watch}
 									isLastItem={index === MEDALS_MAPPING.length - 1}
 								/>

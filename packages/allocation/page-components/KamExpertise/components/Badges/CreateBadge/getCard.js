@@ -6,7 +6,7 @@ import { getFieldController } from '../../../../../common/Form/getFieldControlle
 
 import styles from './styles.module.css';
 
-function GetCard({ data = {}, badgeListData = {}, control, watch, isLastItem }) {
+function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, isLastItem }) {
 	const { medalType, score = '', inputPlaceHolder = '' } = data;
 
 	const InputElement = getFieldController('number');
@@ -45,7 +45,13 @@ function GetCard({ data = {}, badgeListData = {}, control, watch, isLastItem }) 
 						control={control}
 						size="sm"
 						placeholder={inputPlaceHolder}
+						rules={{
+							required: 'Score is required',
+						}}
 					/>
+					<div className={styles.error_message}>
+						{errors?.[`${medalType}_value_input`]?.message}
+					</div>
 				</div>
 			</div>
 
@@ -57,7 +63,13 @@ function GetCard({ data = {}, badgeListData = {}, control, watch, isLastItem }) 
 				<UploadControler
 					name={`${medalType}_img_value`}
 					control={control}
+					rules={isEmpty(badgeListData) ? {
+						required: 'Image is required',
+					} : {}}
 				/>
+				<div className={styles.error_message}>
+					{errors?.[`${medalType}_img_value`]?.message}
+				</div>
 				<div>
 					{
 						watch(`${medalType}_img_value`)
