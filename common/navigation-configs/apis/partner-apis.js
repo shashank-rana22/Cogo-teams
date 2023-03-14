@@ -5827,6 +5827,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api          : 'list_dunning_cycle_executions',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
 	],
 	invoice_triggers: [
 		{
@@ -6046,7 +6051,7 @@ const partner = {
 			service_name : 'unified_dashboard',
 		},
 		{
-			api          : 'outstanding_amount_bifurcation',
+			api          : 'get_outstanding_data_bifurcation',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
@@ -9219,6 +9224,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api          : 'delete_saas_container_timeline_detail',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'update_saas_container_timeline_detail',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
 	],
 
 	ftl_freight: [
@@ -10260,6 +10275,32 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
+		{
+			api          : 'get_exchange_rate_shipment_frequency_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_shipment_revenue_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_currency_pair_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_shipment_applicable_state_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_source_count_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+
 	],
 	contracts: [
 		{

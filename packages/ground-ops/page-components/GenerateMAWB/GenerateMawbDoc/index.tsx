@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Checkbox } from '@cogoport/components';
 import { saveAs } from 'file-saver';
 import * as htmlToImage from 'html-to-image';
 import React, { createRef, useState, ReactFragment } from 'react';
@@ -61,6 +61,8 @@ function GenerateMawb({
 	const ref = createRef(null);
 
 	const [saveDocument, setSaveDocument] = useState(false);
+
+	const [whiteout, setWhiteout] = useState(false);
 
 	const handleClick = () => {
 		if (edit) {
@@ -166,7 +168,8 @@ function GenerateMawb({
 				<div
 					className={styles.download_button_div}
 				>
-					<div style={{ marginRight: '36px' }}>
+					<div style={{ marginRight: '36px', display: 'flex', alignItems: 'center' }}>
+						<Checkbox label="Whiteout" value={whiteout} onChange={() => setWhiteout((p) => !p)} />
 						<Button
 							className="primary md"
 							onClick={() => {
@@ -199,21 +202,25 @@ function GenerateMawb({
 					<ShipperConsigneeDetails
 						formData={filteredData}
 						taskItem={taskItem}
+						whiteout={whiteout}
 					/>
 					<ShipmentDetails
 						formData={filteredData}
 						taskItem={taskItem}
+						whiteout={whiteout}
 					/>
 					<ContainerDetails
 						formData={filteredData}
 						taskItem={taskItem}
 						chargeableWeight={chargeableWeight}
+						whiteout={whiteout}
 					/>
 					<ChargeDetails
 						taskItem={taskItem}
 						footerValues={footerValues}
 						formData={filteredData}
 						data={data}
+						whiteout={whiteout}
 					/>
 				</div>
 			</div>
