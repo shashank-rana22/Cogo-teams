@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 function AllQuestions(props) {
 	const { data } = props;
 	const listdata = data?.list;
-	console.log('propsdata22', listdata);
 	const addedQuestionsColumns = () => [
 		{
 			Header   : 'Questions',

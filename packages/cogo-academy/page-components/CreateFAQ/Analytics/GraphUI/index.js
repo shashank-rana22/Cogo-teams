@@ -2,6 +2,8 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { ResponsivePie } from '@cogoport/charts/pie';
 
+import Filters from './Filters';
+
 function GraphUI() {
 	const data = [
 
@@ -203,32 +205,34 @@ const data2 = [
   ];
 
 	return (
-		<div style={{
-                    margin          : '20px',
-                    borderRadius    : '10px',
-                    height          : '400px',
-                    width           : '1337px',
-                    backgroundColor : '#FFF',
-                    display         : 'flex',
-                    justifyContent  : 'flex',
-		}}
-		>
+		<>
+			<Filters />
+			<div style={{
+        margin          : '20px',
+        borderRadius    : '10px',
+        height          : '400px',
+        width           : '1337px',
+        backgroundColor : '#FFF',
+        justifyContent  : 'space-between',
+        display         : 'flex',
+			}}
+			>
 
-			<ResponsiveLine
-				data={data}
-				margin={{ top: 50, right: 10, bottom: 50, left: 60 }}
-				xScale={{ type: 'point' }}
-				yScale={{
+				<ResponsiveLine
+					data={data}
+					margin={{ right: 10, top: 50, bottom: 50, left: 60 }}
+					xScale={{ type: 'point' }}
+					yScale={{
             type    : 'linear',
             min     : 'auto',
             max     : 'auto',
             stacked : true,
             reverse : false,
-				}}
-				yFormat=" >-.2f"
-				axisTop={null}
-				axisRight={null}
-				axisBottom={{
+					}}
+					yFormat=" >-.2f"
+					axisTop={null}
+					axisRight={null}
+					axisBottom={{
             orient         : 'bottom',
             tickSize       : 5,
             tickPadding    : 5,
@@ -236,8 +240,8 @@ const data2 = [
             legend         : 'transportation',
             legendOffset   : 36,
             legendPosition : 'middle',
-				}}
-				axisLeft={{
+					}}
+					axisLeft={{
             orient         : 'left',
             tickSize       : 5,
             tickPadding    : 5,
@@ -245,14 +249,14 @@ const data2 = [
             legend         : 'count',
             legendOffset   : -40,
             legendPosition : 'middle',
-				}}
-				pointSize={10}
-				pointColor={{ theme: 'background' }}
-				pointBorderWidth={2}
-				pointBorderColor={{ from: 'serieColor' }}
-				pointLabelYOffset={-14}
-				useMesh
-				legends={[
+					}}
+					pointSize={10}
+					pointColor={{ theme: 'background' }}
+					pointBorderWidth={2}
+					pointBorderColor={{ from: 'serieColor' }}
+					pointLabelYOffset={-14}
+					useMesh
+					legends={[
             {
                 anchor            : 'bottom-right',
                 direction         : 'column',
@@ -277,17 +281,17 @@ const data2 = [
                     },
                 ],
             },
-				]}
-			/>
-			<ResponsivePie
-				data={data2}
-				margin={{ top: 50, right: 10, bottom: 80, left: 40 }}
-				innerRadius={0}
-				padAngle={0.7}
-				cornerRadius={3}
-				activeOuterRadiusOffset={8}
-				borderWidth={1}
-				borderColor={{
+					]}
+				/>
+				<ResponsivePie
+					data={data2}
+					margin={{ top: 50, right: 10, bottom: 80, left: 40 }}
+					innerRadius={0}
+					padAngle={0.7}
+					cornerRadius={3}
+					activeOuterRadiusOffset={8}
+					borderWidth={1}
+					borderColor={{
             from      : 'color',
             modifiers : [
                 [
@@ -295,13 +299,13 @@ const data2 = [
                     0.2,
                 ],
             ],
-				}}
-				arcLinkLabelsSkipAngle={10}
-				arcLinkLabelsTextColor="#333333"
-				arcLinkLabelsThickness={2}
-				arcLinkLabelsColor={{ from: 'color' }}
-				arcLabelsSkipAngle={10}
-				arcLabelsTextColor={{
+					}}
+					arcLinkLabelsSkipAngle={10}
+					arcLinkLabelsTextColor="#333333"
+					arcLinkLabelsThickness={2}
+					arcLinkLabelsColor={{ from: 'color' }}
+					arcLabelsSkipAngle={10}
+					arcLabelsTextColor={{
             from      : 'color',
             modifiers : [
                 [
@@ -309,8 +313,8 @@ const data2 = [
                     2,
                 ],
             ],
-				}}
-				defs={[
+					}}
+					defs={[
             {
                 id         : 'dots',
                 type       : 'patternDots',
@@ -329,8 +333,8 @@ const data2 = [
                 lineWidth  : 6,
                 spacing    : 10,
             },
-				]}
-				fill={[
+					]}
+					fill={[
             {
                 match: {
                     id: 'ruby',
@@ -379,8 +383,8 @@ const data2 = [
                 },
                 id: 'lines',
             },
-				]}
-				legends={[
+					]}
+					legends={[
             {
                 anchor        : 'bottom',
                 direction     : 'row',
@@ -404,9 +408,10 @@ const data2 = [
                     },
                 ],
             },
-				]}
-			/>
-		</div>
+					]}
+				/>
+			</div>
+		</>
 	);
 }
 
