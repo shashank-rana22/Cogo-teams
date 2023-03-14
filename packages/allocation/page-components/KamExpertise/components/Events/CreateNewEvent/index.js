@@ -1,11 +1,13 @@
-import { Button } from '@cogoport/components';
+import { Placeholder, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
+// import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateNewEvent from '../../../hooks/useCreateNewEvent';
 import useGetAllocationKamExpertiseRules from '../../../hooks/useGetAllocationKamExpertiseRules';
-// import useUpdateEvent from '../../../hooks/useUpdateEvent';
+import useUpdateEvent from '../../../hooks/useUpdateEvent';
 
 import styles from './styles.module.css';
 
@@ -15,36 +17,40 @@ const CONTROL_TYPE_MAPPING = {
 	select  : 'select',
 };
 
-function CreateNewEvent(props) {
-	const {
-		attributeList,
-		loading,
-		refetch,
-	} = useGetAllocationKamExpertiseRules();
+const FILTER_ATTRIBUTE_MAPPING = {
+	account_attribute  : 'account',
+	shipment_attribute : 'shipment',
+	misc_attribute     : 'misc',
+};
 
-	const { setToggleEvent = () => {}, eventListData = {} } = props;
-	console.log('eventListData', eventListData);
+function CreateNewEvent(props) {
+	const { setToggleEvent = () => {}, eventListData = {}, listRefetch = () => {}, updateEventListData = {} } = props;
+	// console.log('eventListData', eventListData);
 
 	const onClose = () => {
 		setToggleEvent('eventList');
 	};
 
-	// if(isEmpty(eventListData)){
+	// const [attribute, setAttribute] = useState('');
 
-	// }
+	const {
+		attributeList,
+		loading,
+		refetch,
+		setRuleType = () => {},
+	} = useGetAllocationKamExpertiseRules();
 
 	const {
 		onSave,
-		formProps,
 		getAddRuleControls,
-	} = useCreateNewEvent({ attributeList, eventListData });
+		// newEventFormProps,
+	} = useCreateNewEvent({ attributeList, eventListData, listRefetch });
 
-	// const {
-	// 	onUpdate,
-	// } = useUpdateEvent();
-
-	console.log('attributeList:', attributeList);
-
+	const {
+		onUpdate,
+		formProps,
+		// gg,
+	} = useUpdateEvent({ updateEventListData, listRefetch, attributeList });
 	const {
 		control,
 		handleSubmit,
@@ -52,16 +58,38 @@ function CreateNewEvent(props) {
 		watch,
 	} = formProps;
 
+	const watchListener = watch('attribute');
+
+	useEffect(() => {
+		setRuleType(FILTER_ATTRIBUTE_MAPPING[watchListener]);
+		console.log('watchListener', watchListener);
+		console.log('heheheheheh', FILTER_ATTRIBUTE_MAPPING[watchListener]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [watchListener]);
+
+	// console.log('attributeList', attributeList);
+
+	// if(isEmpty(eventListData)){
+
+	// }
+
+	// console.log('updateEventListData', updateEventListData);
+
+	// console.log('attributeList:', attributeList);
+
+	// console.log('watching', watch('attribute'));
+
 	return (
 		<div>
 			<div className={styles.create_new_event}>
-				{!isEmpty(eventListData) ? (
-					<p>
-						Update Event
-					</p>
-				) : (
+				{isEmpty(updateEventListData) ? (
 					<p>
 						Create New Event
+					</p>
+				) : (
+
+					<p>
+						Update Event
 					</p>
 				)}
 			</div>
@@ -75,7 +103,8 @@ function CreateNewEvent(props) {
 						</div>
 
 						<section className={styles.rule_form_container}>
-							{getAddRuleControls.map((controlItem) => {
+							{
+							getAddRuleControls.map((controlItem) => {
 								const el = { ...controlItem };
 
 								const Element = getFieldController(el.type);
@@ -92,7 +121,7 @@ function CreateNewEvent(props) {
 												key={el.name}
 												control={control}
 												id={`${el.name}_input`}
-												disabled={!isEmpty(eventListData)}
+												disabled={!isEmpty(updateEventListData)}
 											/>
 										</div>
 
@@ -101,7 +130,8 @@ function CreateNewEvent(props) {
 										</div>
 									</div>
 								);
-							})}
+							})
+}
 						</section>
 					</div>
 
@@ -115,45 +145,77 @@ function CreateNewEvent(props) {
 						{/* // Todo atleast one of them is required */}
 
 						<section className={styles.row_container}>
-							{attributeList.map((controlItem, index) => {
-								const { name = '', parameters } = controlItem;
-								const { params_type, options = [] } = parameters || {};
+							{loading
+								? attributeList.map((controlItem, index) => {
+									const { name = '', parameters } = controlItem;
+									const { params_type, options = [] } = parameters || {};
 
-								const type = CONTROL_TYPE_MAPPING[params_type || ''];
+									const type = CONTROL_TYPE_MAPPING[params_type || ''];
 
-								const el = {
-									name,
-									label: startCase(name),
-									type,
-									...(type === 'select' && { options, isClearable: true }),
-								};
+									const el = {
+										name,
+										label: startCase(name),
+										type,
+										...(type === 'select' && { options, isClearable: true }),
+									};
 
-								const Element = getFieldController(el?.type);
+									const Element = getFieldController(el?.type);
 
-								if (!Element) return null;
+									if (!Element) return null;
 
-								return (
-									<div className={styles.attribute_form_group}>
-										<span className={styles.label}>{el.label}</span>
+									return (
+										<div className={styles.attribute_form_group}>
+											{/* <span className={styles.label}><Placeholder /></span> */}
 
-										<div
-											className={`${styles.input_group}
-										${index < 12 ? styles.margin_bottom : ''}`}
-										>
-											<Element
-												{...el}
-												key={el.name}
-												control={control}
-												id={`${el.name}_input`}
-											/>
+											<div
+												className={`${styles.input_group}
+													${index < attributeList.length ? styles.margin_bottom : ''}`}
+											>
+												<Placeholder height="40px" style={{ margin: '8px 0 16px 0' }} />
+											</div>
+
 										</div>
+									);
+								})
+								:	attributeList.map((controlItem, index) => {
+									const { name = '', parameters } = controlItem;
+									const { params_type, options = [] } = parameters || {};
 
-										<div className={styles.error_message}>
-											{errors?.[el.name]?.message}
+									const type = CONTROL_TYPE_MAPPING[params_type || ''];
+
+									const el = {
+										name,
+										label: startCase(name),
+										type,
+										...(type === 'select' && { options, isClearable: true }),
+									};
+
+									const Element = getFieldController(el?.type);
+
+									if (!Element) return null;
+
+									return (
+										<div className={styles.attribute_form_group}>
+											<span className={styles.label}>{el.label}</span>
+
+											<div
+												className={`${styles.input_group}
+										${index < attributeList.length ? styles.margin_bottom : ''}`}
+											>
+												<Element
+													{...el}
+													key={el.name}
+													control={control}
+													id={`${el.name}_input`}
+												/>
+											</div>
+
+											<div className={styles.error_message}>
+												{errors?.[el.name]?.message}
+											</div>
 										</div>
-									</div>
-								);
-							})}
+									);
+								})}
 						</section>
 					</div>
 				</div>
@@ -173,10 +235,13 @@ function CreateNewEvent(props) {
 					<Button
 						size="md"
 						type="submit"
-						onClick={handleSubmit(onSave)}
+						onClick={(isEmpty(updateEventListData)) ? handleSubmit(onSave) : handleSubmit(onUpdate)}
 					>
 						Save
 					</Button>
+					{/* <Button onClick={gg}>
+						okokokokok
+					</Button> */}
 				</div>
 			</div>
 
