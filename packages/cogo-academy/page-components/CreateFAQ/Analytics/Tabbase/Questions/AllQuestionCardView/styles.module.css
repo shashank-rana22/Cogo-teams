@@ -1,11 +1,11 @@
 .container {
 	align-items: center;
 	justify-content: space-between;
+	padding: 1rem;
 	font-size: 20px;
 	font-weight: 500;
 	background-color: #fff;
 	border-radius: 8px;
-	padding: 1rem;
 }
 
 .main_container {

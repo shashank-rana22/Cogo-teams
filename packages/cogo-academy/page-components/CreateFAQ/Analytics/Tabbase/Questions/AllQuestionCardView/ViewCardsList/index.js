@@ -11,7 +11,7 @@ function ViewCardsList({ cardHeading = '', contentQuestion = '' }) {
 					{cardHeading}
 				</div>
 
-				<div className={styles.subHeading}>
+				<div className={styles.sub_heading}>
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 						<div>{contentQuestion}</div>
 						<div style={{ display: 'flex' }}>

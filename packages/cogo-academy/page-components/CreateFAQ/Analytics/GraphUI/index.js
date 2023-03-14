@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { ResponsiveSunburst } from '@cogoport/charts/sunburst';
+import { ResponsivePie } from '@cogoport/charts/pie';
 
 function GraphUI() {
 	const data = [
@@ -168,13 +168,55 @@ function GraphUI() {
     ],
   },
 ];
-	const colors = ['#BDBDBD', '#ABCD62', '#DDEBC0'];
+
+const data2 = [
+    {
+      id    : 'hack',
+      label : 'hack',
+      value : 504,
+      color : 'hsl(199, 70%, 50%)',
+    },
+    {
+      id    : 'elixir',
+      label : 'elixir',
+      value : 551,
+      color : 'hsl(359, 70%, 50%)',
+    },
+    {
+      id    : 'php',
+      label : 'php',
+      value : 529,
+      color : 'hsl(86, 70%, 50%)',
+    },
+    {
+      id    : 'c',
+      label : 'c',
+      value : 485,
+      color : 'hsl(253, 70%, 50%)',
+    },
+    {
+      id    : 'javascript',
+      label : 'javascript',
+      value : 51,
+      color : 'hsl(174, 70%, 50%)',
+    },
+  ];
+
 	return (
-		<div style={{ height: '400px', width: '1300px', backgroundColor: '#FFF', display: 'flex' }}>
+		<div style={{
+                    margin          : '20px',
+                    borderRadius    : '10px',
+                    height          : '400px',
+                    width           : '1337px',
+                    backgroundColor : '#FFF',
+                    display         : 'flex',
+                    justifyContent  : 'flex',
+		}}
+		>
 
 			<ResponsiveLine
 				data={data}
-				margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+				margin={{ top: 50, right: 10, bottom: 50, left: 60 }}
 				xScale={{ type: 'point' }}
 				yScale={{
             type    : 'linear',
@@ -237,36 +279,133 @@ function GraphUI() {
             },
 				]}
 			/>
-			<ResponsiveSunburst
-				data={data}
-				margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-				id="name"
-				value="loc"
-				cornerRadius={2}
-				borderColor={{ theme: 'background' }}
-				colors={{ scheme: 'nivo' }}
-				childColor={{
+			<ResponsivePie
+				data={data2}
+				margin={{ top: 50, right: 10, bottom: 80, left: 40 }}
+				innerRadius={0}
+				padAngle={0.7}
+				cornerRadius={3}
+				activeOuterRadiusOffset={8}
+				borderWidth={1}
+				borderColor={{
             from      : 'color',
             modifiers : [
                 [
-                    'brighter',
-                    0.1,
+                    'darker',
+                    0.2,
                 ],
             ],
 				}}
-				enableArcLabels
+				arcLinkLabelsSkipAngle={10}
+				arcLinkLabelsTextColor="#333333"
+				arcLinkLabelsThickness={2}
+				arcLinkLabelsColor={{ from: 'color' }}
 				arcLabelsSkipAngle={10}
 				arcLabelsTextColor={{
             from      : 'color',
             modifiers : [
                 [
                     'darker',
-                    1.4,
+                    2,
                 ],
             ],
 				}}
+				defs={[
+            {
+                id         : 'dots',
+                type       : 'patternDots',
+                background : 'inherit',
+                color      : 'rgba(255, 255, 255, 0.3)',
+                size       : 4,
+                padding    : 1,
+                stagger    : true,
+            },
+            {
+                id         : 'lines',
+                type       : 'patternLines',
+                background : 'inherit',
+                color      : 'rgba(255, 255, 255, 0.3)',
+                rotation   : -45,
+                lineWidth  : 6,
+                spacing    : 10,
+            },
+				]}
+				fill={[
+            {
+                match: {
+                    id: 'ruby',
+                },
+                id: 'dots',
+            },
+            {
+                match: {
+                    id: 'c',
+                },
+                id: 'dots',
+            },
+            {
+                match: {
+                    id: 'go',
+                },
+                id: 'dots',
+            },
+            {
+                match: {
+                    id: 'python',
+                },
+                id: 'dots',
+            },
+            {
+                match: {
+                    id: 'scala',
+                },
+                id: 'lines',
+            },
+            {
+                match: {
+                    id: 'lisp',
+                },
+                id: 'lines',
+            },
+            {
+                match: {
+                    id: 'elixir',
+                },
+                id: 'lines',
+            },
+            {
+                match: {
+                    id: 'javascript',
+                },
+                id: 'lines',
+            },
+				]}
+				legends={[
+            {
+                anchor        : 'bottom',
+                direction     : 'row',
+                justify       : false,
+                translateX    : 0,
+                translateY    : 56,
+                itemsSpacing  : 0,
+                itemWidth     : 100,
+                itemHeight    : 18,
+                itemTextColor : '#999',
+                itemDirection : 'left-to-right',
+                itemOpacity   : 1,
+                symbolSize    : 18,
+                symbolShape   : 'circle',
+                effects       : [
+                    {
+                        on    : 'hover',
+                        style : {
+                            itemTextColor: '#000',
+                        },
+                    },
+                ],
+            },
+				]}
 			/>
-
 		</div>
 	);
 }

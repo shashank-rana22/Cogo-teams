@@ -10,13 +10,13 @@ function ViewCards({ cardHeading = '' }) {
 						{cardHeading}
 					</div>
 				</div>
-				<div className={styles.subHeading} style={{ color: '#6FA5AB' }}>
+				<div className={styles.sub_heading} style={{ color: '#6FA5AB' }}>
 					<div>
-						<div className={styles.subHeadingContext}>Shipment</div>
+						<div className={styles.sub_heading_context}>Shipment</div>
 						140 Views,40%
 					</div>
 					<div>
-						<div className={styles.subHeadingContext}>Import</div>
+						<div className={styles.sub_heading_context}>Import</div>
 						112 Views,28%
 
 					</div>
