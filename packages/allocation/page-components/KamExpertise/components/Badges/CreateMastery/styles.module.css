@@ -98,3 +98,7 @@
         padding-bottom: 20px;
     }
 }
+.error_message {
+    font-size: 10px;
+    color: #cb6464;
+}

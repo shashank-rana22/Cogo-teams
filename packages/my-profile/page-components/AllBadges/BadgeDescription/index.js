@@ -18,6 +18,19 @@ const Badge = {
 
 const star_url = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/star-icon.svg';
 
+function MasteryBadgeItem() {
+	return (
+		<div className={styles.mastery_badge_container}>
+			<img className={styles.mastery_badge} src={Badge.url} alt="" />
+			<div className={styles.star_container}>
+				<img className={styles.smallstar} src={star_url} alt="" />
+				<img className={styles.smallstar} src={star_url} alt="" />
+				<img className={styles.smallstar} src={star_url} alt="" />
+			</div>
+		</div>
+	);
+}
+
 function BadgeDescription(props) {
 	// Todo: loadingState logic
 	if (false) {
@@ -169,30 +182,9 @@ function BadgeDescription(props) {
 					<div className={styles.mastery_unlock}>
 						<h6 className={styles.lable}>Badge unlocked for mastery</h6>
 						<div className={styles.flex_container}>
-							<div className={styles.mastery_badge_container}>
-								<img className={styles.mastery_badge} src={Badge.url} alt="" />
-								<div className={styles.star_container}>
-									<img className={styles.smallstar} src={star_url} alt="" />
-									<img className={styles.smallstar} src={star_url} alt="" />
-									<img className={styles.smallstar} src={star_url} alt="" />
-								</div>
-							</div>
-							<div className={styles.mastery_badge_container}>
-								<img className={styles.mastery_badge} src={Badge.url} alt="" />
-								<div className={styles.star_container}>
-									<img className={styles.smallstar} src={star_url} alt="" />
-									<img className={styles.smallstar} src={star_url} alt="" />
-									<img className={styles.smallstar} src={star_url} alt="" />
-								</div>
-							</div>
-							<div className={styles.mastery_badge_container}>
-								<img className={styles.mastery_badge} src={Badge.url} alt="" />
-								<div className={styles.star_container}>
-									<img className={styles.smallstar} src={star_url} alt="" />
-									<img className={styles.smallstar} src={star_url} alt="" />
-									<img className={styles.smallstar} src={star_url} alt="" />
-								</div>
-							</div>
+							<MasteryBadgeItem />
+							<MasteryBadgeItem />
+							<MasteryBadgeItem />
 						</div>
 					</div>
 				)}
