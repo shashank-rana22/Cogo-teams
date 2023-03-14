@@ -27,16 +27,13 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	};
 
 	const {
-		onSave, getFieldController, loading, getAddBadgesControls, formProps,
+		onSave, getFieldController, loading = false, getAddBadgesControls, formProps,
 	} = useCreateBadgeConfiguration({ onClose, badgeListData, listRefetch });
 
 	const {
 		control, watch, handleSubmit, formState: { errors },
 	} = formProps;
 
-	if (loading) {
-		return null;
-	}
 	return (
 		<div>
 			<section className={styles.container}>
@@ -119,6 +116,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 							themeType="secondary"
 							id="cancel_request_btn"
 							style={{ marginRight: 10, borderWidth: 0 }}
+							disabled={loading}
 							onClick={onClose}
 						>
 							Cancel
@@ -129,6 +127,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 							type="submit"
 							themeType="primary"
 							id="save_request_btn"
+							disabled={loading}
 						>
 							Save
 						</Button>
