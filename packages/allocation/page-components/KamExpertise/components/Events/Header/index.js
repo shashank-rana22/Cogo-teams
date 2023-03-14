@@ -29,6 +29,7 @@ function Header(props) {
 	const {
 		setToggleEvent = () => {},
 		// toggleEvent = '',
+		loading,
 		debounceQuery, setSearchValue = () => {}, searchValue, expertise, setExpertise = () => {},
 	} = props;
 
@@ -51,8 +52,9 @@ function Header(props) {
 						onChange={(value) => (
 							setExpertise(value)
 						)}
-						style={{ marginRight: 16, width: '320px' }}
+						style={{ marginRight: 16, width: '440px' }}
 						// disabled={toggleEvent === 'updateEvent'}
+						disabled={loading}
 					/>
 
 					<SearchInput
@@ -63,6 +65,7 @@ function Header(props) {
 						value={searchValue}
 						// disabled={toggleEvent === false}
 						className={styles.search_bar}
+						disabled={loading}
 					/>
 				</div>
 
@@ -71,6 +74,7 @@ function Header(props) {
 					size="md"
 					onClick={onClose}
 					// disabled={toggleEvent === false}
+					disabled={loading}
 				>
 					Add New Event
 				</Button>

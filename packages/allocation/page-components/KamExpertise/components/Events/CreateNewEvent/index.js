@@ -145,7 +145,9 @@ function CreateNewEvent(props) {
 						{/* // Todo atleast one of them is required */}
 
 						<section className={styles.row_container}>
-							{loading
+							{
+
+							loading
 								? attributeList.map((controlItem, index) => {
 									const { name = '', parameters } = controlItem;
 									const { params_type, options = [] } = parameters || {};
@@ -215,7 +217,8 @@ function CreateNewEvent(props) {
 											</div>
 										</div>
 									);
-								})}
+								})
+}
 						</section>
 					</div>
 				</div>
@@ -236,6 +239,7 @@ function CreateNewEvent(props) {
 						size="md"
 						type="submit"
 						onClick={(isEmpty(updateEventListData)) ? handleSubmit(onSave) : handleSubmit(onUpdate)}
+
 					>
 						Save
 					</Button>
