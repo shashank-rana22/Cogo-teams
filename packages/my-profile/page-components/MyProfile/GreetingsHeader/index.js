@@ -40,7 +40,7 @@ function Greetings({
 		onClickCancel,
 	} = useUpdatePartnerUser({ picture, partner_user_id, setRefetch, detailsData });
 
-	const { badges_got = [], grouped_badges_got = {} } = badgeList || {};
+	const { badges_got = [], badges_not_got = [], grouped_badges_got = {} } = badgeList || {};
 
 	const { name: locationName = '' } = lowest_geo_location || {};
 
@@ -88,32 +88,34 @@ function Greetings({
 				</div>
 
 				{/* //! add mastry badge through the selectory modal */}
-				{/* <div className={styles.badge_icon}>
+				<div className={styles.badge_icon}>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg"
 						alt="current badge"
 						height="40px"
 					/>
-				</div> */}
+				</div>
 			</div>
 
 			<div className={styles.badges}>
 				<div className={styles.badge_list}>
 					{
-						!isEmpty(badges_got)
+						!isEmpty(badges_not_got)
 							? badges_got.map((data, i) => (
 								(i < 3)
 									? (
-										<div key={data.id} className={styles.badge_container}>
-											<div className={styles.badge}>
-												<img src={data.iamge_url} alt="badge icon" />
+										<Tooltip content={data.medal}>
+											<div key={data.id} className={styles.badge_container}>
+												<div className={styles.badge}>
+													<img src={data.image_url} alt="badge" />
+												</div>
+												<div className={styles.stars}>
+													{Array(3).fill('').map(() => (
+														<IcCStar width={10} stroke="#FFDF33" />
+													))}
+												</div>
 											</div>
-											<div className={styles.stars}>
-												<IcCStar width={8} stroke="#FFDF33" />
-												<IcCStar width={8} stroke="#FFDF33" />
-												<IcCStar width={8} stroke="#FFDF33" />
-											</div>
-										</div>
+										</Tooltip>
 									)
 									: null
 							))

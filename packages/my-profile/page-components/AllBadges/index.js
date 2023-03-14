@@ -1,5 +1,5 @@
-import { Placeholder, Tooltip } from '@cogoport/components';
-import { IcCStar, IcMArrowLeft } from '@cogoport/icons-react';
+import { Tooltip } from '@cogoport/components';
+import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -15,9 +15,9 @@ import styles from './styles.module.css';
 function StarCollection() {
 	return (
 		<div className={styles.stars_container}>
-			<IcCStar width={24} stroke="#FFDF33" />
-			<IcCStar width={24} stroke="#FFDF33" />
-			<IcCStar width={24} stroke="#FFDF33" />
+			{Array(3).fill('').map(() => (
+				<IcCStar width={24} stroke="#FFDF33" />
+			))}
 		</div>
 	);
 }
