@@ -1,6 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import Spinner from '../../../../commons/Spinner';
 import useCreateAnnouncements from '../useCreateAnnouncement';
 
 import CreateAudienceForm from './CreateAudienceForm';
@@ -10,7 +11,14 @@ import Preview from './Preview';
 import styles from './styles.module.css';
 import useListAudiences from './useListAudiences';
 
-function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_id = '', actionType }) {
+function AnnouncementForm({
+	defaultValues = {},
+	disabled = false,
+	announcement_id = '',
+	actionType,
+	loadingForm = false,
+}) {
+	const { audienceOptions = [], fetchAudiences = () => {}, listAudienceLoading = false } = useListAudiences();
 	const {
 		controls,
 		control,
@@ -23,12 +31,11 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 		loading,
 		errors,
 		// setValue,
-	} = useCreateAnnouncements({ defaultValues, announcement_id, actionType });
+	} = useCreateAnnouncements({ defaultValues, announcement_id, actionType, listAudienceLoading });
 
 	const [showCreateAudience, setShowCreateAudience] = useState(false);
 	const formValues = watch();
 	//  console.log('check', formValues);
-	const { audienceOptions = [], fetchAudiences = () => {} } = useListAudiences();
 
 	const renderAddButton = () => (
 		<div>
@@ -42,6 +49,11 @@ function AnnouncementForm({ defaultValues = {}, disabled = false, announcement_i
 			</Button>
 		</div>
 	);
+	if (listAudienceLoading || loadingForm) {
+		<div className={styles.spinner}>
+			<Spinner width="90px" height="90px" />
+		</div>;
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.form}>

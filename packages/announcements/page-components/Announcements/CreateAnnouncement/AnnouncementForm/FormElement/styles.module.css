@@ -17,8 +17,13 @@
 			border-radius: 4px;
 		}
 
+		.ui_multiselect_display_container {
+			height: fit-content !important;
+		}
+
 		.ui_multiselect_input_control {
 			font-size: 12px !important;
+			white-space: normal !important;
 		}
 
 		.ui_select_input_control,
@@ -55,6 +60,10 @@
 
 		.ui_dateRange_content_start {
 			width: 50%;
+		}
+
+		.ui_upload_droparea_container {
+			background-color: #fff !important;
 		}
 	}
 }

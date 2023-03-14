@@ -7,8 +7,15 @@ import { useState, useEffect } from 'react';
 
 import getFormControls from './controls/get-form-controls';
 
-const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '', actionType }) => {
+const useCreateAnnouncements = ({
+	defaultValues = {},
+	announcement_id = '',
+	actionType,
+	listAudienceLoading = false,
+}) => {
 	const router = useRouter();
+	const prev_audiences = defaultValues?.faq_audiences?.map((item) => item.id);
+
 	const { control, watch, handleSubmit, formState:{ errors }, setValue } = useForm();
 	const [showPreview, setShowPreview] = useState(false);
 	const [{ loading }, trigger] = useRequest({
@@ -32,7 +39,6 @@ const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '', acti
 				endDate   : new Date(format(validity_end, 'dd MMM yyyy hh:mm a')),
 				startDate : new Date(format(validity_start, 'dd MMM yyyy hh:mm a')),
 			};
-			// console.log('checkbox', is_important);
 			const audience_ids = [...faq_audiences.map((item) => item.id)];
 			setValue('title', defaultValues?.title);
 			setValue('content', defaultValues?.content);
@@ -44,7 +50,7 @@ const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '', acti
 			setValue('validity', validity);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [defaultValues]);
+	}, [defaultValues, listAudienceLoading]);
 
 	const [{ error }, updateTrigger] = useRequest({ url: '/update_announcement', method: 'post' }, { manual: true });
 
@@ -59,6 +65,9 @@ const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '', acti
 			is_important,
 			audience_ids,
 		} = values;
+		const common = audience_ids.filter((x) => prev_audiences.indexOf(x) !== -1);
+		const inactive_audience_ids = prev_audiences.filter((n) => !common.includes(n));
+		const new_audiences = audience_ids.filter((n) => !common.includes(n));
 		const { startDate:validity_start, endDate:validity_end } = validity;
 		const hot_duration = addDays(validity_start, values?.hot_duration);
 		try {
@@ -71,7 +80,8 @@ const useCreateAnnouncements = ({ defaultValues = {}, announcement_id = '', acti
 				hot_duration,
 				redirection_url,
 				is_important,
-				audience_ids,
+				audience_ids: new_audiences,
+				inactive_audience_ids,
 			};
 			const response = await updateTrigger(
 				{ data: { id: announcement_id, ...payload } },

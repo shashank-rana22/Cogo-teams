@@ -13,3 +13,10 @@
 .back {
 	margin-left: 12px;
 }
+
+.spinner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 250px;
+}

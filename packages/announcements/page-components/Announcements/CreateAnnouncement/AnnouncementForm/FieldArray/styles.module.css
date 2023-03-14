@@ -10,6 +10,7 @@
 
 .container {
 	display: flex;
+	align-items: flex-end;
 	width: 100%;
 }
 
@@ -30,7 +31,7 @@
 }
 
 .add_button {
-	margin-top: 26px;
+	margin-bottom: 20px;
 	margin-left: 8px;
 }
 

@@ -85,15 +85,6 @@ const getFormControls = () => [
 		accept     : '.png, .jpeg',
 	},
 	{
-		name  : 'redirection_url',
-		label : 'Redirection URL',
-		type  : 'text',
-		style : {
-			flexBasis: '48%',
-		},
-		placeholder: 'Enter Redirection URL',
-	},
-	{
 		type           : 'multi-select',
 		optionsListKey : 'audiences',
 		isClearable    : true,
@@ -109,6 +100,15 @@ const getFormControls = () => [
 		},
 		placeholder : 'Select Audience',
 		rules       : { required: 'Required' },
+	},
+	{
+		name  : 'redirection_url',
+		label : 'Redirection URL',
+		type  : 'text',
+		style : {
+			flexBasis: '48%',
+		},
+		placeholder: 'Enter Redirection URL',
 	},
 	{
 		name            : 'validity',

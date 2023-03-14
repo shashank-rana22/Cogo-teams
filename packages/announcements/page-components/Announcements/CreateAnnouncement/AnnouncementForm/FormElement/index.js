@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
 	CheckboxController,
 	UploadController,
@@ -6,7 +5,6 @@ import {
 	SelectController,
 	TextAreaController,
 	ChipsController,
-	LocationSelectController,
 	MultiselectController,
 	DateRangePickerController,
 } from '@cogoport/forms';
@@ -34,10 +32,6 @@ function FormElement({ name, field, control, options, errors, value = false }) {
 				)}
 				{finalFields.type === 'checkbox' && (
 					<CheckboxController control={control} {...finalFields} checked={value} />
-				)}
-
-				{finalFields.type === 'location-select' && (
-					<LocationSelectController control={control} {...finalFields} />
 				)}
 
 				{finalFields.type === 'select' && (

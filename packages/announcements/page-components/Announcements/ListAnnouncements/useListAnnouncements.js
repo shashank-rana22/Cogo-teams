@@ -38,9 +38,9 @@ function useListAnnouncements() {
 						auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
 						cogo_entity_id    : id,
 						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
+						country_id,
 
 					},
-					country_id,
 					user_id       : id,
 					page,
 					is_admin_view : true,
