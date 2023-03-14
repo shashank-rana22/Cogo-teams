@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function KamLevelCard(props) {
 	const {
-		title = '',
+		activeCard = '',
 		data = {},
 		id = '',
 		dataLength = -1,
@@ -96,7 +96,7 @@ function KamLevelCard(props) {
 					</div>
 				</div>
 				{
-			title === id + 1
+			activeCard === id + 1
 				? (
 					<div className={styles.title_show}>
 						To level up from KAM

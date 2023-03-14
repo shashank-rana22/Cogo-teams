@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 function KamLevel() {
 	const { kamConfigDetails, levleLoading, refetch } = useKamExpertiseConfig();
 
-	const [title, setTitle] = useState(0);
+	const [activeCard, setActiveCard] = useState(0);
 	const [editMode, setEditMode] = useState(false);
 	const [createKam, setCreateKam] = useState(false);
 
@@ -25,12 +25,12 @@ function KamLevel() {
 		key: data.transition_level,
 
 		title: <KamLevelCard
-			key={data.transition_level}
 			data={data}
-			title={title}
-			setTitle={setTitle}
-			editMode={editMode}
-			setEditMode={setEditMode}
+			activeCard={activeCard}
+			// setactiveCard
+			setActiveCard={setActiveCard}
+			// editMode={editMode}
+			// setEditMode={setEditMode}
 			id={data.transition_level - 1}
 			dataLength={dataLength}
 			refetch={refetch}
@@ -38,10 +38,10 @@ function KamLevel() {
 		/>,
 
 		children: <KamLevelDropDown
-			key={data.transition_level}
+			// key={data.transition_level}
 			editMode={editMode}
-			id={data.transition_level - 1}
-			title={title}
+			// id={data.transition_level - 1}
+			activeCard={activeCard}
 			setEditMode={setEditMode}
 			refetch={refetch}
 		/>,
@@ -56,8 +56,8 @@ function KamLevel() {
 
 			<Collapse
 				panel={options}
-				activeKey={title}
-				setActive={setTitle}
+				activeKey={activeCard}
+				setActive={setActiveCard}
 				type="text"
 				className={styles.collapse}
 			/>
