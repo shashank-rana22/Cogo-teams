@@ -26,7 +26,7 @@ function BasicDetails() {
 				const Element = getElementController(type);
 
 				return (
-					<div className={styles.control_container}>
+					<div className={`${styles.control_container} ${styles[name]}`}>
 						<div className={styles.label}>
 							{label}
 						</div>

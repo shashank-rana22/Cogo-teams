@@ -23,3 +23,17 @@
     font-size: 12px;
     color: #cb6464;
 }
+
+.question_type {
+    margin-left: 80px;
+
+    .control {
+        margin-top: 4px;
+
+        :global {
+            .ui_chip_container {
+                height: 28px;
+            }
+        }
+    }
+}

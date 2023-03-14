@@ -31,43 +31,44 @@ function CaseStudyForm({ control, register }) {
 		append(childEmptyValues);
 	}
 
-	console.log('fields1', fields);
 	return (
 		<div className={styles.container}>
 			<TextAreaController {...controls[0]} control={control} />
 
 			{fields.map((field, index) => (
-				<div className={styles.field_container}>
+				<div key={field.id} className={styles.field_container}>
 
-					<div key={field.id} className={styles.question_container}>
+					<div className={styles.question_container}>
 						<SingleQuestionComponent
 							control={control}
 							field={field}
 							register={register}
 							index={index}
-
 						/>
 
-						<IcMCrossInCircle
-							className={styles.delete_button}
-							width={20}
-							height={20}
-							onClick={() => remove(index, 1)}
-						/>
+						{fields.length > 1 ? (
+							<IcMCrossInCircle
+								className={styles.delete_button}
+								width={20}
+								height={20}
+								onClick={() => remove(index, 1)}
+							/>
+						) : null}
 					</div>
 
-					<div className={styles.button_container}>
-						<Button
-							type="button"
-							themeType="secondary"
-							className={styles.add_button}
-							onClick={() => handleAppendChild()}
-						>
-							+ Add Another Question
+					{index === fields.length - 1 ? (
+						<div className={styles.button_container}>
+							<Button
+								type="button"
+								themeType="secondary"
+								className={styles.add_button}
+								onClick={() => handleAppendChild()}
+							>
+								+ Add Another Question
 
-						</Button>
-
-					</div>
+							</Button>
+						</div>
+					) : null}
 				</div>
 			))}
 		</div>
