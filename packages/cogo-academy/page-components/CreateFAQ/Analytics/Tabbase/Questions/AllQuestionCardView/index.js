@@ -1,10 +1,13 @@
-import { Pill } from '@cogoport/components';
-
+import { Pill,Button } from '@cogoport/components';
+import QuestionsList from '../QuestionList';
+import {useState} from 'react';
 import styles from './styles.module.css';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
+import { IcMArrowDown,IcMArrowUp } from '@cogoport/icons-react';
 
 function AllQuestionCardView(props) {
+	const [showQuestions,setShowQuestions]=useState(false)
 	const { data } = props;
 	const { total_count } = data || 0;
 	return (
@@ -87,8 +90,9 @@ function AllQuestionCardView(props) {
 					<ViewCardsList cardHeading="Top Viewed Questions" contentQuestion="What are Incoterms?" />
 					<ViewCardsList cardHeading="Top Liked Questions" contentQuestion="What are Incoterms?" />
 				</div>
-
+				<div style={{marginTop:'-25px',float:'right'}}><Button size="md" themeType="tertiary" onClick={()=>setShowQuestions((pv)=>!pv)}><div style={{fontWeight:600}}>All Questions..</div>{!showQuestions?<IcMArrowDown/>:<IcMArrowUp/>}</Button></div>
 			</div>
+			{showQuestions?<QuestionsList {...props}/>:null}
 		</div>
 
 	);

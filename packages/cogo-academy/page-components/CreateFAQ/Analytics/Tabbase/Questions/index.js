@@ -10,7 +10,6 @@ function Questions() {
 		<div>
 			<Filter />
 			<AllQuestionCardView {...props} />
-			<QuestionList {...props} />
 		</div>
 
 	);

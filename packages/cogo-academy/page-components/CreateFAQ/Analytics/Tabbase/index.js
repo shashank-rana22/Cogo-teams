@@ -9,7 +9,7 @@ function Tabbase() {
 	const [activeTab, setActiveTab] = useState('By_Questions');
 	return (
 
-		<div style={{ margin: 20 }}>
+		<div style={{ margin: 20, marginTop: -2 }}>
 			<Tabs
 				tabIcon={<IcMProfile />}
 				activeTab={activeTab}
