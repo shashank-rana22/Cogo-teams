@@ -7287,7 +7287,7 @@ const partner = {
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
 		},
-		
+
 		{
 			api         : 'get_sales_dashboard_monthly_outstanding',
 			access_type : 'private',
