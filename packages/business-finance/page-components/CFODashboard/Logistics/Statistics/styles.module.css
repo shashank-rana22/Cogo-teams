@@ -1,0 +1,75 @@
+.card {
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.border {
+	width: 60px;
+	height: 2px;
+	margin: 4px 0 0 2px;
+	background: #ed3726;
+	border-radius: 4px;
+}
+
+.border_left_side {
+	height: 76px;
+	margin: 0 5%;
+	border-left: 2px solid #cfcfcf;
+}
+
+.border_right_side {
+	height: 76px;
+
+	/* margin: 0 20%; */
+	border-left: 2px solid #cfcfcf;
+}
+
+.expense_div {
+	display: flex;
+
+	/* justify-content: flex-start; */
+
+	/* margin-top: -70px; */
+}
+
+.expense_main {
+	/* margin-left: -170px; */
+}
+
+.main_div {
+	margin: 22px 0 22px 36px;
+}
+
+.expense_text {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.amount_styles {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.invoices_styles {
+	margin-right: 20px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.revenue_main {
+	margin: 0 0 22px 88px;
+}
+
+.text {
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: 0.02em;
+}
+
+.icon {
+	margin: 30px 0 0 5px;
+	cursor: pointer;
+}

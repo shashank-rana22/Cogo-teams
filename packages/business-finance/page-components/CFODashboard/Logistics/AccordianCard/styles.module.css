@@ -1,0 +1,55 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px;
+	margin: 12px 1px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
+}
+
+.border {
+	height: 76px;
+	margin: 0 12%;
+	border-left: 2px solid #f68b21;
+}
+
+.view_button {
+	width: 10%;
+}
+
+.amounts {
+	width: 115px;
+}
+
+.ar_amount {
+	margin-right: 40px;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.amount_div {
+	margin-left: 70px;
+}
+
+.text {
+	display: flex;
+}
+
+.icon_div {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.icons {
+	margin-left: 10px;
+}
+
+.texts {
+	margin-left: 20px;
+	font-size: 16px;
+	font-weight: 500;
+}
