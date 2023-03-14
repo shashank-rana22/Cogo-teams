@@ -63,6 +63,15 @@
     }
 }
 
+.uploader {
+    :global(.styles_progress_container__cQeyN) {
+        width: 100%;
+    }
+    :global(.styles_progress_bar__2P_k1) {
+        display: none;
+    }
+}
+
 .btncls {
     display: flex;
     justify-content: flex-end;

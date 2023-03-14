@@ -53,7 +53,7 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 				<IcMInfo className={styles.icm_info} />
 			</div>
 			<div className={styles.file_select_style}>
-				<div style={{ alignItems: 'center' }}>
+				<div className={styles.uploader}>
 					<UploadControler
 						name={`${medalType}_img_value`}
 						control={control}

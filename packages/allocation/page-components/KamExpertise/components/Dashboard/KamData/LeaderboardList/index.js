@@ -175,9 +175,9 @@ function LeaderboardList() {
 	<div key={data.badges.url} className={styles.badge_item}>
 		<img src={value.url} alt="badge" width={48} height={48} />
 		<div className={styles.star}>
-			<IcCStar width={10} stroke="#FFDF33" />
-			<IcCStar width={10} stroke="#FFDF33" />
-			<IcCStar width={10} stroke="#FFDF33" />
+			{Array(3).fill('').map(() => (
+				<IcCStar width={10} stroke="#FFDF33" />
+			))}
 		</div>
 	</div>
                                 ))) : ''

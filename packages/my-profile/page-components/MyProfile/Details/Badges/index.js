@@ -42,9 +42,9 @@ function Badges({ badgeList = {} }) {
 															<img src={item.image_url} alt="badge icon" />
 														</div>
 														<div className={styles.stars}>
-															<IcCStar width={8} stroke="#FFDF33" />
-															<IcCStar width={8} stroke="#FFDF33" />
-															<IcCStar width={8} stroke="#FFDF33" />
+															{Array(3).fill('').map(() => (
+																<IcCStar width={10} stroke="#FFDF33" />
+															))}
 														</div>
 													</Tooltip>
 												</div>
