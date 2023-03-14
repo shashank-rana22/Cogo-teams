@@ -1,4 +1,4 @@
-import { ButtonIcon } from '@cogoport/components';
+import { Placeholder, ButtonIcon } from '@cogoport/components';
 import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -40,62 +40,62 @@ function KamLevelCard(props) {
 		},
 	];
 	return (
+		(levelLoading ? (<Placeholder height="30px" width="100%" />) : (
+			<div className={styles.whole}>
+				<div style={{
+					width          : '100%',
+					display        : 'flex',
+					justifyContent : 'space-between',
+					alignItems     : 'center',
+				}}
+				>
+					<div className={styles.text}>
+						<div style={{ marginRight: '8px' }}>KAM</div>
+						<b>
+							{transition_level - 1}
+						</b>
+						<IcMArrowNext className={styles.arrow} />
+						<b>{transition_level}</b>
+					</div>
+					<div className={styles.button_container}>
 
-		<div className={styles.whole}>
-			<div style={{
-				width          : '100%',
-				display        : 'flex',
-				justifyContent : 'space-between',
-				alignItems     : 'center',
-			}}
-			>
-				<div className={styles.text}>
-					<div style={{ marginRight: '8px' }}>KAM</div>
-					<b>
-						{transition_level - 1}
-					</b>
-					<IcMArrowNext className={styles.arrow} />
-					<b>{transition_level}</b>
+						{dataLength === data.transition_level - 1
+							? (
+								<div className={styles.delete_button}>
+									{ !levelLoading ? (
+										<ButtonIcon
+											size="lg"
+											icon={(
+												<IcMDelete
+													onClick={(event) => {
+														onDelete();
+														event.stopPropagation();
+													}}
+												/>
+											)}
+											themeType="primary"
+										/>
+									) : (
+										<ButtonIcon
+											size="lg"
+											icon={(
+												<IcMDelete
+													style={{ opacity: '0.4', PointerEvent: 'none' }}
+													onClick={(event) => {
+														event.stopPropagation();
+													}}
+												/>
+											)}
+											themeType="primary"
+										/>
+									)}
+
+								</div>
+							)
+							: (null)}
+					</div>
 				</div>
-				<div className={styles.button_container}>
-
-					{dataLength === data.transition_level - 1
-						? (
-							<div className={styles.delete_button}>
-								{ !levelLoading ? (
-									<ButtonIcon
-										size="lg"
-										icon={(
-											<IcMDelete
-												onClick={(event) => {
-													onDelete();
-													event.stopPropagation();
-												}}
-											/>
-										)}
-										themeType="primary"
-									/>
-								) : (
-									<ButtonIcon
-										size="lg"
-										icon={(
-											<IcMDelete
-												style={{ opacity: '0.4', PointerEvent: 'none' }}
-												onClick={(event) => {
-													event.stopPropagation();
-												}}
-											/>
-										)}
-										themeType="primary"
-									/>
-								)}
-
-							</div>
-						)
-						: (null)}
-				</div>
-			</div>
-			{
+				{
 			title === id + 1
 				? (
 					<div className={styles.title_show}>
@@ -128,7 +128,9 @@ function KamLevelCard(props) {
 					</div>
 				)
 }
-		</div>
+			</div>
+		))
+
 	);
 }
 export default KamLevelCard;
