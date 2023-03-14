@@ -36,6 +36,7 @@ const useSubmitOrganizationKyc = ({
 					id                : orgId,
 				},
 			});
+			Toast.success('Successfully Uploaded');
 			updatelNewDocument({ data });
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
