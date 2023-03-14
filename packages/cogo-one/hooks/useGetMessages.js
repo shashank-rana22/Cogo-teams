@@ -40,7 +40,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 				const islastPage = querySnapshot.docs.length < 10;
 				querySnapshot.forEach((mes) => {
 					const timeStamp = mes.data()?.created_at;
-					prevMessageData = { [timeStamp]: mes.data(), ...prevMessageData };
+					prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
 				});
 
 				setMessagesState((p) => ({
