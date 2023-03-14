@@ -11,7 +11,7 @@ const transactingMapping = {
 
 function useUpdateKamScores(props) {
 	const {
-		title,
+		activeCard,
 		listrefetch,
 		setEditMode, refetch, listkamLevelDetails,
 	} = props;
@@ -51,7 +51,7 @@ function useUpdateKamScores(props) {
 
 		try {
 			const payload = {
-				transition_level      : title,
+				transition_level      : activeCard,
 				configuration_details : formResponse,
 			};
 
