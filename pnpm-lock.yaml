@@ -70,6 +70,7 @@ importers:
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/supply-dashboards': workspace:0.1.0
+      '@cogoport/test-module': workspace:0.1.0
       '@cogoport/translate': workspace:0.1.0
       '@cogoport/utils': ^1.2.6
       '@next/bundle-analyzer': ^13.2.3
@@ -104,6 +105,7 @@ importers:
       '@cogoport/request': link:../common/request
       '@cogoport/store': link:../common/store
       '@cogoport/supply-dashboards': link:../packages/supply-dashboards
+      '@cogoport/test-module': link:../packages/test-module
       '@cogoport/translate': link:../packages/Translation
       '@cogoport/utils': 1.2.6
       '@next/bundle-analyzer': 13.2.4
@@ -622,6 +624,32 @@ importers:
       '@cogoport/utils': 1.2.6
       react: 18.2.0
       react-hook-form: 7.43.5_react@18.2.0
+
+  packages/test-module:
+    specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.359
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.58
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      axios: ^1.3.4
+      axios-hooks: ^4.0.0
+      react: 18.2.0
+    dependencies:
+      '@cogoport/charts': 1.0.1_react@18.2.0
+      '@cogoport/components': 1.0.366_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.58_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.6
+      axios: 1.3.4
+      axios-hooks: 4.0.0_axios@1.3.4+react@18.2.0
+      react: 18.2.0
 
 packages:
 

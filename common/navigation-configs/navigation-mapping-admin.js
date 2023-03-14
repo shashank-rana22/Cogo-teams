@@ -2091,6 +2091,15 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
+	test_module: {
+		key           : 'test_module',
+		title         : 'Test Module',
+		href          : '/v2/test-module',
+		as            : '/v2/test-module',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.test_module,
+	},
 };
 
 export default navigationMappingAdmin;
