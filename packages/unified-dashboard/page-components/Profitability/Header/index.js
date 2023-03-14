@@ -5,7 +5,7 @@ import Filter from '../../../common/Filter';
 
 import styles from './styles.module.css';
 
-function Header({ setFilters, range = 'current_month', setRange, filters }) {
+function Header({ setFilters, range = 'current_month', setRange, filters, debounceQuery }) {
 	const handleApplyFilters = (key, val) => {
 		const dates = '01-01-2003';
 		setFilters((prevFilters) => ({
@@ -14,6 +14,14 @@ function Header({ setFilters, range = 'current_month', setRange, filters }) {
 			[key] : val,
 			page  : 1,
 		}));
+	};
+
+	const handleSearch = (val) => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			q: val,
+		}));
+		debounceQuery(val);
 	};
 
 	return (
@@ -37,6 +45,15 @@ function Header({ setFilters, range = 'current_month', setRange, filters }) {
 				theme="admin"
 				onChange={(e) => handleApplyFilters('job_status', e)}
 			/>
+			<div className={styles.search_container}>
+				<input
+					className={styles.search}
+					type="text"
+					value={filters.q || ''}
+					onChange={(e) => handleSearch(e.target.value)}
+					placeholder="Search by Serial ID / Shipment ID"
+				/>
+			</div>
 		</div>
 
 	);

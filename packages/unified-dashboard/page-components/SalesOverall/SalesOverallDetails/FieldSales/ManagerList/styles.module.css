@@ -8,22 +8,6 @@
 	border: 1px solid #efefef;
 }
 
-@media (max-width: 768px) {
-  
-    .card_wrapper{
-        background: #ffffff;
-        box-shadow: none;
-        padding-bottom: 0px;
-        padding-top: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
-        border: 1px solid #efefef;
-        width: max-content;
-        overflow: scroll;
-    }
-
-    
-  }
 
 .colllapse_icon_active {
     transform: rotate(360deg);
@@ -116,3 +100,20 @@
     border-right: none;
     flex: 25%;
 }
+
+@media (max-width: 768px) {
+  
+    .card_wrapper{
+        background: #ffffff;
+        box-shadow: none;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        border: 1px solid #efefef;
+        width: max-content;
+        overflow: scroll;
+    }
+
+    
+  }

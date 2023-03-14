@@ -40,6 +40,10 @@
 	background: #fff;
 }
 
+.table_container{
+	overflow: scroll;
+}
+
 /* :global{
 	.ui_table_head_row{
 		border-bottom: 1px solid red;

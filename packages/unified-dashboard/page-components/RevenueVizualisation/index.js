@@ -64,7 +64,7 @@ function RevenueVisualization({ headerFilters }) {
 					<div className={styles.heading}>Revenue Visualization</div>
 					<Select
 						className={styles.dropdown}
-						placeholder="Type here..."
+						placeholder="By Shipment Date"
 						value={byEtd}
 						onChange={(e) => handleDateType(e)}
 						options={selectOptions}
@@ -138,6 +138,7 @@ function RevenueVisualization({ headerFilters }) {
 						headerFilters={headerFilters}
 					/>
 				</div>
+				<div className={styles.divider_line} />
 				<div className={styles.flex_col_2}>
 					<Funnel byEtd={byEtd} headerFilters={headerFilters} />
 				</div>

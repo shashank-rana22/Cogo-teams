@@ -63,6 +63,11 @@
 	border-top: 1px solid #e0e0e0;
 }
 
+.divider_line{
+	margin: 0px;
+	border-right: 1px solid #e0e0e0;
+}
+
 .flex_row_2{
     display: flex;
 }
@@ -71,28 +76,26 @@
     box-sizing: border-box;
     min-height: 1px;
     position: relative;
-    padding-left: 8px;
-    padding-right: 8px;
     width: 58%;
     flex: 0 0 58%;
     max-width: 58%;
     margin-left: 0%;
     right: auto;
     left: auto;
+    padding: 10px;
 }
 
 .flex_col_2{
     box-sizing: border-box;
     min-height: 1px;
     position: relative;
-    padding-left: 8px;
-    padding-right: 8px;
     width: 42%;
     flex: 0 0 42%;
     max-width: 42%;
     margin-left: 0%;
     right: auto;
     left: auto;
+    padding: 10px;
 } 
 
 .dropdown{

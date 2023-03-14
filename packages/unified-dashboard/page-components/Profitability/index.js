@@ -14,7 +14,7 @@ function Profitability({ headerFilters }) {
 	const [isInViewport, setisInViewport] = useState(false);
 	const ref = useRef(null);
 	const inViewport = useIsInViewport(ref, '-200px');
-	const { loading, data, setFilters, range, setRange, filters } = useGetProfitability(isInViewport);
+	const { loading, data, setFilters, range, setRange, filters, debounceQuery } = useGetProfitability(isInViewport);
 
 	useEffect(() => {
 		if (!isInViewport) {
@@ -37,6 +37,7 @@ function Profitability({ headerFilters }) {
 				range={range}
 				setRange={setRange}
 				filters={filters}
+				debounceQuery={debounceQuery}
 			/>
 			<ProfitabilityTable
 				loading={loading}

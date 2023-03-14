@@ -4,6 +4,7 @@
 	flex-direction: column;
 	align-items: center;
 	height: 370px;
+	flex: 1;
 	margin: auto;
 	width: 100%;
 }

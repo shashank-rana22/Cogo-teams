@@ -1,12 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequest } from '@cogoport/request';
 // import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 import { getDefaultFilters } from '../utils/startDateOfMonth';
 
-const useGetProfitability = () => {
+const useGetProfitability = (isInViewport) => {
 	const [range, setRange] = useState('current_month');
+	const { query = '', debounceQuery } = useDebounceQuery();
 	const [shipmentData, setShipmentData] = useState({});
 	const [filters, setFilters] = useState({
 		// start_date : '2023-02-11',
@@ -20,7 +22,9 @@ const useGetProfitability = () => {
 		method : 'GET',
 	}, { manual: true });
 
-	const { job_status, ...rest } = filters;
+	const { q: search, ...restData } = filters || {};
+
+	const { job_status, q, ...rest } = filters;
 
 	const getProfitabilityData = async () => {
 		try {
@@ -28,6 +32,7 @@ const useGetProfitability = () => {
 				params: {
 					filters: {
 						job_status,
+						q: query,
 					},
 					...rest,
 				},
@@ -41,10 +46,10 @@ const useGetProfitability = () => {
 	console.log('loading', loading);
 
 	useEffect(() => {
-		// if (isInViewport) {
-		getProfitabilityData();
-		// }
-	}, [filters]);
+		if (isInViewport) {
+			getProfitabilityData();
+		}
+	}, [JSON.stringify(restData), isInViewport, JSON.stringify(query)]);
 
 	console.log('laodddingg', loading);
 
@@ -55,6 +60,7 @@ const useGetProfitability = () => {
 		setRange,
 		range,
 		filters,
+		debounceQuery,
 	};
 };
 

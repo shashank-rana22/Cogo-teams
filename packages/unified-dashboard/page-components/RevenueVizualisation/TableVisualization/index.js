@@ -44,27 +44,27 @@ function TableVisualization({
 					)
 				</span>
 			</div>
+			<div className={styles.table_container}>
+				{loading ? (
+					<Loader />
+				) : (
+					<Table
+						className={styles.style_table}
+						columns={newColumns}
+						data={data || []}
+						loading={loading}
+						loadingRowsCount={10}
+					/>
+				)}
+			</div>
 
-			{loading ? (
-				<Loader containerHeight="500px" />
-			) : (
-				<Table
-					className={styles.style_table}
-					columns={newColumns}
-					data={data || []}
-					loading={loading}
-					loadingRowsCount={10}
-				/>
-			)}
 			{data.length > 0 && total_count > page_size && (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="page"
 						pageSize={page_size}
-						totalItems={page}
-						// pageRange={5}
-						// className="md"
-						// total={total_count}
+						totalItems={1000}
+						currentPage={page}
 						onPageChange={(val) => setPage(val)}
 					/>
 				</div>
