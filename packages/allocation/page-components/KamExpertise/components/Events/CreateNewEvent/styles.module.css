@@ -38,7 +38,7 @@
     flex: 4;
 
     padding: 16px;
-    background: #E2E2E2;
+    background: rgb(226, 226, 226,0.2);
     opacity: 0.8;
     border-radius: 8px;
 }

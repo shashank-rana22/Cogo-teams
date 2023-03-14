@@ -11,6 +11,7 @@
 
 .search_bar {
 	width: fit-content;
+	width: 80%;
 }
 
 .all_events {

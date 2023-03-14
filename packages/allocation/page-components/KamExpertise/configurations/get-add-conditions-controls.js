@@ -15,18 +15,18 @@ const getControls = ({ modifiedControls = [] }) => {
 
 	return [
 		{
-			name        : 'condition_type',
+			name        : 'event_configuration_rule_mapping_id',
 			label       : 'Condition Name',
 			placeholder : '',
 			...asyncControl,
-			type        : 'creatableSelect',
+			type        : 'select',
 			rules       : {
 				required: 'Condition Parameter is required',
 			},
 			isClearable: true,
 		},
 		{
-			name        : 'score_type',
+			name        : 'scoring_type',
 			label       : 'Score Type',
 			placeholder : '',
 			type        : 'select',
@@ -38,7 +38,7 @@ const getControls = ({ modifiedControls = [] }) => {
 			rules: {
 				required: 'Score Type is required',
 			},
-		// isClearable: true,
+			isClearable: true,
 		},
 		...modifiedControls,
 		{

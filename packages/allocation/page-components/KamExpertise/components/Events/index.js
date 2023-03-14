@@ -12,7 +12,7 @@ import EventListItem from './EventList';
 import Header from './Header';
 import styles from './styles.module.css';
 
-// const DummyList = [
+
 // 	{
 // 		id             : 'hgf',
 // 		status         : 'jhgf',
@@ -63,6 +63,7 @@ function Events() {
 		searchValue,
 		expertise,
 		setExpertise,
+		listRefetch,
 	} = useGetEventList();
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
@@ -70,7 +71,6 @@ function Events() {
 	const [toggleEvent, setToggleEvent] = useState('eventList');
 	const [eventListData, setEventListData] = useState({});
 
-	// console.log('toggleEvent::', toggleEvent);
 
 	if (loading) {
 		return (
@@ -92,6 +92,7 @@ function Events() {
 					searchValue={searchValue}
 					setExpertise={setExpertise}
 					expertise={expertise}
+					loading={loading}
 				/>
 
 				<section className={styles.list_item_container}>
@@ -334,19 +335,17 @@ function Events() {
 								</div>
 							)
 
-							: list.map((data, index) =>
-								// console.log(data);
-								// console.log('loading::::::::', loading);
-								(
+							: list.map((data, index) => {
+								return(
 									<EventListItem
 										data={data}
 										index={index}
 										// loading={loading}
 										setEventListData={setEventListData}
 										setToggleEvent={setToggleEvent}
-
-									/>
-								))
+									/>,
+								);
+							})
 						}
 						<div className={styles.pagination_container}>
 							<Pagination
@@ -367,13 +366,15 @@ function Events() {
 				<CreateNewEvent
 					setToggleEvent={setToggleEvent}
 					eventListData={{}}
+					listRefetch={listRefetch}
 				/>
 			)}
 
 			{(toggleEvent === 'updateEvent') && (
 				<CreateNewEvent
 					setToggleEvent={setToggleEvent}
-					eventListData={eventListData}
+					updateEventListData={eventListData}
+					listRefetch={listRefetch}
 
 				/>
 			)}

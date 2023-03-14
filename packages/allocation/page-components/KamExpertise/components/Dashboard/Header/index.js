@@ -46,7 +46,8 @@ function Header() {
 					View Events
 
 				</Button>
-				<Button
+
+				{/* <Button
 					// onClick={() => { router.push('/allocation/kam-expertise/'); }}
 					size="lg"
 					themeType="secondary"
@@ -54,7 +55,8 @@ function Header() {
 				>
 					View All Configs
 
-				</Button>
+				</Button> */}
+
 				<Button
 					onClick={() => { router.push('/allocation/kam-expertise/configurations'); }}
 					size="lg"
