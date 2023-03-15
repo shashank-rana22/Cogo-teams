@@ -17,14 +17,18 @@ function TimeLine({ eachMessage, key }) {
 
 	return (
 		<div className={styles.container} key={key}>
-			<div className={styles.timeline_container}>
-				{format(new Date(created_at), 'dd MMM YYYY, HH:mm')}
-				{' '}
-				{renderStatement({
-					type     : conversation_type,
-					present  : presentAgent,
-					previous : previousAgent,
-				})}
+			<div className={styles.line} />
+			<div className={styles.timeline_text}>
+				<div className={styles.timeline_container}>
+					{renderStatement({
+						type     : conversation_type,
+						present  : presentAgent,
+						previous : previousAgent,
+					})}
+				</div>
+				<div className={styles.timeline_container}>
+					{format(new Date(created_at), 'dd MMM YYYY, HH:mm')}
+				</div>
 			</div>
 		</div>
 	);
