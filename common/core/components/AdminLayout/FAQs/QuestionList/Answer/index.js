@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import {
 	IcMRedo,
 	IcMSad,
@@ -214,7 +213,7 @@ function Answer({ topic = {}, question }) {
 					/>
 				) : null}
 
-				<div className={styles.open_faq} onClick={GotoFAQ}>
+				<div role="presentation" className={styles.open_faq} onClick={GotoFAQ}>
 					Open in Help Center
 					<IcMRedo style={{ marginLeft: 8 }} />
 				</div>
