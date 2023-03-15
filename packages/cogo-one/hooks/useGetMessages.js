@@ -8,6 +8,8 @@ import {
 } from 'firebase/firestore';
 import { useState, useEffect, useRef } from 'react';
 
+import useListCogooneTimeline from './useListCogooneTimeline';
+
 const useGetMessages = ({ activeChatCollection, id }) => {
 	const [messagesState, setMessagesState] = useState({});
 
@@ -15,6 +17,14 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 	const [firstLoadingMessages, setFirstLoadingMessages] = useState(false);
 
 	const [loadingPrevMessages, setLoadingPrevMessages] = useState(false);
+
+	const {
+		data,
+		getCogooneTimeline,
+		loading,
+	} = useListCogooneTimeline({ id });
+	console.log('data:', data, loading);
+
 	const snapshotCleaner = () => {
 		if (firstMessages.current) {
 			firstMessages.current();
@@ -31,26 +41,32 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 			limit(10),
 		);
 
-		let prevMessageData = { ...messagesState?.[id]?.messagesData } || {};
+		const prevMessageData = { ...messagesState?.[id]?.messagesData } || {};
 
 		firstMessages.current = onSnapshot(
 			chatCollectionQuery,
 			(querySnapshot) => {
 				const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length - 1]?.data()?.created_at;
 				const islastPage = querySnapshot.docs.length < 10;
+				let currentMessages = {};
 				querySnapshot.forEach((mes) => {
 					const timeStamp = mes.data()?.created_at;
-					prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
+					currentMessages = { ...currentMessages, [timeStamp]: mes.data() };
 				});
 
 				setMessagesState((p) => ({
 					...p,
 					[id]: {
-						messagesData: { ...prevMessageData },
+						messagesData: { ...prevMessageData, ...currentMessages },
 						lastDocumentTimeStamp,
 						islastPage,
 					},
 				}));
+				const currentTimeLine = Object.keys(currentMessages).sort();
+				getCogooneTimeline({
+					startDate : currentTimeLine[0],
+					endDate   : currentTimeLine.at(-1),
+				});
 				setFirstLoadingMessages(false);
 			},
 		);
