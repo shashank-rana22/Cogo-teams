@@ -1,4 +1,4 @@
-.inner_card_item {
+.container {
     flex-basis: 24%;
     padding: 16px 24px 4px;
     background: #fff;
@@ -10,11 +10,22 @@
     }
 }
 
-.overview_card_title {
+.title {
     display: flex;
 }
 
-.overview_card_content {
+.content {
     display: flex;
     justify-content: space-between;
+}
+
+.display_flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.display_flex_loading {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
 }

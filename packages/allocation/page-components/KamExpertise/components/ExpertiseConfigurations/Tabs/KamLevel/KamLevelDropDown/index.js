@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 
-import useKamExpertiseLevelConfig from '../../../../../hooks/useKamExpertiseLevelConfig';
+import useGetKamExpertiseLevelConfig from '../../../../../hooks/useGetKamExpertiseLevelConfig';
 import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
 
 import KamLevelDetailsEdit from './KamLevelDetailsEdit';
@@ -10,9 +10,7 @@ import styles from './styles.module.css';
 function KamLevelDropDown({ refetch, transition_level }) {
 	const [editMode, setEditMode] = useState(false);
 
-	const { listkamLevelDetails, listrefetch, listLoading } = useKamExpertiseLevelConfig({ transition_level });
-
-	console.log('listkamLevelDetails', listkamLevelDetails);
+	const { listkamLevelDetails, listrefetch, listLoading } = useGetKamExpertiseLevelConfig({ transition_level });
 
 	const { formProps, onSave } = useUpdateKamScores({
 		transition_level,
@@ -21,9 +19,7 @@ function KamLevelDropDown({ refetch, transition_level }) {
 		refetch,
 		listkamLevelDetails,
 	});
-	const { control, handleSubmit, watch } = formProps;
-
-	console.log('watch', watch());
+	const { control, handleSubmit } = formProps;
 
 	return (
 		<div className={styles.child}>

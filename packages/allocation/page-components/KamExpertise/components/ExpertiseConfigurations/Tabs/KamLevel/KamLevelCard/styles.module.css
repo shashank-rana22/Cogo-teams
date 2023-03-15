@@ -37,7 +37,6 @@
 .label_text {
   font-weight: 400;
   font-size: 14px;
-  line-height: 21px;
   color: #333333;
   width: 100%;
   opacity: 0.7;
@@ -53,7 +52,13 @@
 .title_show {
   font-weight: 400;
   font-size: 12px;
-  line-height: 18px;
   color: #221f20;
   opacity: 0.6;
+}
+
+.card_container{
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

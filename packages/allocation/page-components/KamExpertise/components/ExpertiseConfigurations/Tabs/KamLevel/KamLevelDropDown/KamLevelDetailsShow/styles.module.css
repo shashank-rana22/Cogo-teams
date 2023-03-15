@@ -7,7 +7,6 @@
 .row_level {
   font-weight: 700;
   font-size: 18px;
-  line-height: 150%;
   display: flex;
   align-items: center;
   color: #4f4f4f;
@@ -25,7 +24,6 @@
 .score_value {
   font-weight: 500;
   font-size: 21px;
-  line-height: 32px;
   color: #333333;
   margin :0 0 24px 8px;
 }
