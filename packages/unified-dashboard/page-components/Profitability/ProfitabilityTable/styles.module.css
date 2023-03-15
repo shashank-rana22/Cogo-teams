@@ -1,15 +1,27 @@
-.container{
-    overflow: auto;
+.container {
+	overflow: auto;
 }
 
-.table_container{
-    background-color: #ffffff;
+.table_container {
+	width: fit-content;
 	overflow-x: auto;
+	background-color: #fff;
 	border-radius: 5px;
-    width: fit-content;
+
+	:global {
+		.ui_table_head_cell {
+			margin: 4px 14px 8px;
+			border-bottom: 2px solid red;
+		}
+
+		.styles_head__DZGVT {
+			padding: 4px 8px;
+		}
+	}
 }
 
-.pagination_container{
-    display: flex;
+.pagination_container {
+	display: flex;
 	justify-content: flex-end;
+	margin: 8px 0;
 }

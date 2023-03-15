@@ -57,13 +57,12 @@ function TableVisualization({
 					/>
 				)}
 			</div>
-
 			{data.length > 0 && total_count > page_size && (
 				<div className={styles.pagination_container}>
 					<Pagination
-						type="page"
+						type="table"
 						pageSize={page_size}
-						totalItems={1000}
+						totalItems={total_count}
 						currentPage={page}
 						onPageChange={(val) => setPage(val)}
 					/>

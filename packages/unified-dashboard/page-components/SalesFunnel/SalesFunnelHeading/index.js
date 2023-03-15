@@ -28,19 +28,23 @@ function SalesFunnelHeading({
 			<div className={styles.heading_container}>
 				<div className={styles.heading_text}>
 					Sales View As On Date&nbsp;
-					<Tooltip
-						content={
-							<>All the values are calculated on the basis of action date</>
+					<div className={styles.tooltip}>
+						<Tooltip
+							content={
+								<>All the values are calculated on the basis of action date</>
 						}
-					>
-						<IcMInfo
-							style={{
-								width  : '14px',
-								height : '14px',
-							}}
-						/>
+						>
+							<IcMInfo
+								style={{
+									width  : '20px',
+									height : '14px',
+								}}
+							/>
 
-					</Tooltip>
+						</Tooltip>
+
+					</div>
+
 				</div>
 			</div>
 			<div>

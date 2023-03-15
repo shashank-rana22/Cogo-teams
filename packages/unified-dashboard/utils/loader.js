@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components'
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
 function Loader({ count = 2, width }) {

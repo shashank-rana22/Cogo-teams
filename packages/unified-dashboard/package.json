@@ -4,6 +4,7 @@
 	"version": "0.1.0",
 	"dependencies": {
 		"@cogoport/components": "^1.0.354",
+		"@cogoport/charts": "^1.0.1",
 		"@cogoport/icons-react": "^1.0.57",
 		"@cogoport/request": "workspace:^0.1.0",
 		"@cogoport/globalization" : "workspace:^0.0.1",

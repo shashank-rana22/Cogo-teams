@@ -6,7 +6,7 @@ const getShortFormatNumber = (locale, price, currency, options = {}) => (currenc
 		compactDisplay        : 'short',
 		minimumFractionDigits : 2,
 		...options,
-		  }).format(Number(price || 0))
+	}).format(Number(price || 0))
 	: null);
 
 export default getShortFormatNumber;

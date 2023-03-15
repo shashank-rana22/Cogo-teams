@@ -124,18 +124,38 @@ function VisualizationContainer({
 				</span>
 			</div>
 			{renderChartData()}
-			{!isDataSelected && isDataAvailable && (
-				<div className={styles.pagination_container}>
-					<Pagination
-						type="page"
-						className={styles.pagination}
-						currentPage={filters.page}
-						totalItems={1000}
-						pageSize={4}
-						onPageChange={handlePagination}
-					/>
+			<div className={styles.pagination}>
+				<div>
+					{filters.page !== 1 && (
+						<div
+							style={{
+								cursor : loading ? 'not-allowed' : 'pointer',
+								color  : 'blue',
+							}}
+							onClick={loading ? () => {} : () => handlePagination(1)}
+							role="button"
+							tabIndex="0"
+						>
+							Go to page 1
+						</div>
+					)}
 				</div>
-			)}
+				<div>
+					{!isDataSelected && (
+						<div className={styles.pagination_container}>
+							<Pagination
+								type="page"
+								className={styles.pagination}
+								currentPage={filters.page}
+								totalItems={1000}
+								pageSize={4}
+								onPageChange={handlePagination}
+							/>
+						</div>
+					)}
+				</div>
+			</div>
+
 		</div>
 	);
 }

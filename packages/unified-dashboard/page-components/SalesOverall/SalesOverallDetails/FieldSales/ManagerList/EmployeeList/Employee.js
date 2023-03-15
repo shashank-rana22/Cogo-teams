@@ -2,14 +2,14 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
+import Shipment from '../../../../../../common/SaleShipmentTable';
+import AfterHeader from '../../../../../../common/SaleShipmentTable/AfterHeader';
 import useListShipments from '../../../../../../hooks/useListShipments';
 import NoData from '../NoData';
 
-import AfterHeader from './AfterHeader';
-import Shipment from './Shipment';
 import styles from './styles.module.css';
 
-function Employee({ val = {}, currency, filters, employeePad = 30 }) {
+function Employee({ val = {}, currency, filters, employeePad = 20 }) {
 	const [showGrid, setShowGrid] = useState(false);
 	const [showShipments, setShowShipments] = useState(false);
 	const { shipments, setFilters, loading } = useListShipments();
@@ -32,6 +32,7 @@ function Employee({ val = {}, currency, filters, employeePad = 30 }) {
 					role="button"
 					tabIndex="0"
 					className={styles.view_btn}
+					style={{ left: `${50 + employeePad}` }}
 					onClick={() => {
 						setShowShipments(!showShipments);
 						setShowGrid(false);
@@ -52,6 +53,7 @@ function Employee({ val = {}, currency, filters, employeePad = 30 }) {
 								setShowShipments(false);
 							}
 						}}
+						style={{ paddingLeft: `${employeePad}px` }}
 					>
 						<div className={styles.flex}>
 							<IcMArrowRotateDown

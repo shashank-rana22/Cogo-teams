@@ -39,7 +39,7 @@ function Funnel({ byEtd, headerFilters }) {
 							className={styles.account_titlebox}
 							style={{
 								background : val === activeAccount ? '#FDE74D' : '#fff',
-							 color      : val === activeAccount ? '#EE3425' : '#000',
+								color      : val === activeAccount ? '#EE3425' : '#000',
 							}}
 							onClick={() => setActiveAccount(val)}
 							role="button"

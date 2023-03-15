@@ -1,9 +1,9 @@
-.row_load{
-    padding: 10px;
-    border: 1px solid #e5e5e5;
-    margin: 10px 0 10px 0;
+.row_load {
+	padding: 10px;
+	margin: 10px 0;
+	border: 1px solid #e5e5e5;
 }
 
-.load{
- margin: 0px 0px 15px 0;
+.load {
+	margin: 0 0 15px;
 }

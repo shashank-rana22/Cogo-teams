@@ -1,3 +1,4 @@
+import { Tabs, TabPanel } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { useEffect, useRef, useState } from 'react';
 
@@ -9,7 +10,8 @@ import BookingConfirmed from './Card/BookingConfirmed';
 import BookingsDone from './Card/BookingsDone';
 import InvoiceCard from './Card/InvoiceCard';
 import QuotationCard from './Card/QuotationCard';
-import FunnelHeader from './SalesFunnelHead';
+import FunnelHeader from './SalesFunnelDetails';
+import MobileFunnelHeader from './SalesFunnelDetails/MobileSalesFunnelDetails';
 import SalesFunnelHeading from './SalesFunnelHeading';
 import styles from './styles.module.css';
 
@@ -51,6 +53,14 @@ function SalesFunnel({ headerFilters }) {
 		value : item?.revenue_amount,
 	}));
 
+	const handleTabs = (val) => {
+		setShowZone(!!val);
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			show_my_zone: !!val,
+		}));
+	};
+
 	return (
 		<div className={styles.card_wrapper} ref={ref}>
 			<SalesFunnelHeading
@@ -91,18 +101,45 @@ function SalesFunnel({ headerFilters }) {
 						/>
 					</div>
 				</div>
-				{loading ? (
-					<LoadingPage />
-				) : (
-					<FunnelHeader
-						currency={currency}
-						salesFunnel={salesFunnel}
-						filters={filters}
-						setFilters={setFilters}
-						showZone={showZone}
-						setShowZone={setShowZone}
-					/>
-				)}
+				<div className={styles.desktop}>
+					<div className={styles.tab_container}>
+						<Tabs
+							activeTab={showZone}
+							themeType="primary"
+							onChange={(e) => handleTabs(e)}
+						>
+							<TabPanel name={false} title="ORG" />
+							<TabPanel name title="ZONE" />
+						</Tabs>
+					</div>
+					{loading ? (
+						<LoadingPage />
+					) : (
+						<FunnelHeader
+							currency={currency}
+							salesFunnel={salesFunnel}
+							filters={filters}
+							setFilters={setFilters}
+							showZone={showZone}
+							setShowZone={setShowZone}
+						/>
+					)}
+				</div>
+				<div className={styles.mobile}>
+					{loading ? (
+						<LoadingPage />
+					) : (
+						<MobileFunnelHeader
+							currency={currency}
+							salesFunnel={salesFunnel}
+							filters={filters}
+							setFilters={setFilters}
+							showZone={showZone}
+							setShowZone={setShowZone}
+						/>
+					)}
+				</div>
+
 			</div>
 
 		</div>

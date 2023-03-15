@@ -1,4 +1,5 @@
-import { Select } from '@cogoport/components';
+import { Select, Input } from '@cogoport/components';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import React from 'react';
 
 import Filter from '../../../common/Filter';
@@ -46,12 +47,12 @@ function Header({ setFilters, range = 'current_month', setRange, filters, deboun
 				onChange={(e) => handleApplyFilters('job_status', e)}
 			/>
 			<div className={styles.search_container}>
-				<input
-					className={styles.search}
-					type="text"
+				<Input
+					size="sm"
+					prefix={<IcMSearchlight />}
 					value={filters.q || ''}
-					onChange={(e) => handleSearch(e.target.value)}
-					placeholder="Search by Serial ID / Shipment ID"
+					onChange={(e) => handleSearch(e)}
+					placeholder="Serial ID / Shipment ID"
 				/>
 			</div>
 		</div>

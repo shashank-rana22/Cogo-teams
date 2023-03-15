@@ -1,12 +1,8 @@
-const mobileNextArrowAllowed = (selectedFilterTab = 'month', data, maxEtd) => {
+const mobileNextArrowAllowed = (data, maxEtd, selectedFilterTab = 'month') => {
 	switch (selectedFilterTab) {
 		case 'month': {
-			const etdMonth = new Date(
-				`${data[data?.length - 1]?.year}/${data[data?.length - 1]?.month}/${
-					data[data?.length - 1]?.day
-				}`,
-			);
-
+			const lastData = data && data.length > 0 ? data[data.length - 1] : null;
+			const etdMonth = lastData ? new Date(`${lastData.year}/${lastData.month}/${lastData.day}`) : null;
 			const getMonth = etdMonth.getMonth();
 			const getYear = etdMonth.getFullYear();
 

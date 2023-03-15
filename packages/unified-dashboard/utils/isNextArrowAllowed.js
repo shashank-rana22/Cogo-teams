@@ -3,11 +3,8 @@ import getNextWeekDate from './getNextWeek';
 const isNextArrowAllowed = (selectedFilterTab, data, maxEtd = '') => {
 	switch (selectedFilterTab) {
 		case 'month': {
-			const etdMonth = new Date(
-				`${data[data?.length - 1]?.year}/${data[data?.length - 1]?.month}/${
-					data[data?.length - 1]?.day
-				}`,
-			);
+			const lastData = data && data.length > 0 ? data[data.length - 1] : null;
+			const etdMonth = lastData ? new Date(`${lastData.year}/${lastData.month}/${lastData.day}`) : null;
 
 			const getMonth = etdMonth.getMonth();
 			const getYear = etdMonth.getFullYear();
@@ -18,8 +15,8 @@ const isNextArrowAllowed = (selectedFilterTab, data, maxEtd = '') => {
 			const getEtdYear = maxEtdMonth.getFullYear();
 
 			if (
-				new Date(getYear, getMonth).toString() ===
-				new Date(getEtdYear, getEtdMonth).toString()
+				new Date(getYear, getMonth).toString()
+				=== new Date(getEtdYear, getEtdMonth).toString()
 			) {
 				return true;
 			}

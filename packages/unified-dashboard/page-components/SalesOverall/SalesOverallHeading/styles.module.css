@@ -1,31 +1,36 @@
-.header{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 0.8rem;
+.header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 12px;
 }
 
-.heading_container{
-    display: flex;
-    margin-right: 10px;
-    align-items: center;
-    justify-content: flex-end;
-    flex-wrap: wrap;
+.heading_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-end;
+	margin-right: 10px;
 }
 
-.heading_text{
-    font-size: 22px;
-    color: #333333;
-    margin-right: 0;
-    font-weight: 600;
-    display: flex;
+.heading_text {
+	display: flex;
+	margin-right: 0;
+	font-size: 22px;
+	font-weight: 600;
+	color: #333;
 }
 
-.filter_container{
-    display: flex;
-    justify-content: space-between;
+.filter_container {
+	display: flex;
+	justify-content: space-between;
 }
 
-.filter{
-    display: flex;
+.filter {
+	display: flex;
+}
+
+.tooltip {
+	margin: 0 5px;
 }

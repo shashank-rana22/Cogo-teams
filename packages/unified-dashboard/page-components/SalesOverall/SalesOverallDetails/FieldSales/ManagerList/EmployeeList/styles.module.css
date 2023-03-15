@@ -1,97 +1,94 @@
-.card_wrapper{
-    background: #fafafa;
-	box-shadow: none;
+.card_wrapper {
+	position: relative;
 	padding-top: 14px;
+	background: #fafafa;
 	border: 1px solid #efefef;
-    position: relative;
+	box-shadow: none;
 }
 
 .collapse_icon {
-    width: 20px;
-    height: 14px;
+	width: 20px;
+	height: 14px;
 }
 
-
 .colllapse_icon_active {
-    width: 20px;
-    height: 14px;
-    min-width: 20px;
-    margin-left: 40px;
-    margin-right: 5px;
-    margin-top: 1px;
-    transform: rotate(360deg);
-    transition: transform 400ms;
+	width: 20px;
+	min-width: 20px;
+	height: 14px;
+	margin-top: 1px;
+	margin-right: 5px;
+	margin-left: 40px;
+	transition: transform 400ms;
+	transform: rotate(360deg);
 }
 
 .colllapse_icon_inactive {
-    width: 20px;
-    height: 14px;
-    min-width: 20px;
-    margin-left: 40px;
-    margin-right: 5px;
-    margin-top: 1px;
-    transform: rotate(270deg);
-    transition: transform 400ms;
+	width: 20px;
+	min-width: 20px;
+	height: 14px;
+	margin-top: 1px;
+	margin-right: 5px;
+	margin-left: 40px;
+	transition: transform 400ms;
+	transform: rotate(270deg);
 }
-
-
 
 .colllapse_icon path {
-    fill: #e7e7e7;
+	fill: #e7e7e7;
 }
 
-.revenue_col{
-    position: relative;
+.revenue_col {
+	position: relative;
 	display: flex;
+	flex: 33%;
 	flex-direction: column;
-    border-right: none;
 	align-items: center;
-    flex: 33%;
-    text-align: center;
-    justify-content: center;
-    margin: 4px 0px;
+	justify-content: center;
+	margin: 4px 0;
+	text-align: center;
+	border-right: none;
 }
 
-.revenue_gap{
-    flex: 25%;
-    display: flex;
+.revenue_gap {
+	display: flex;
+	flex: 25%;
 }
 
 .role_name {
-    font-size: 12px;
-    align-self: center;
+	align-self: center;
+	font-size: 12px;
 }
 
-.revenue_arrow{
-    position: relative;
+.revenue_arrow {
+	position: relative;
 	display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 14px;
-    cursor: pointer;
-    border-right: none;
-    flex: 25%;
+	flex: 25%;
+	flex-direction: row;
+	align-items: center;
+	padding: 14px;
+	cursor: pointer;
+	border-right: none;
 }
 
-.view_btn{
-    font-size: 10px;
-	font-weight: 300;
+.view_btn {
 	position: absolute;
-	left: 80px;
 	bottom: 3px;
+	left: 80px;
+	z-index: 2;
+	font-size: 10px;
+	font-weight: 300;
 	color: #407fc3;
 	cursor: pointer;
-    z-index: 2;
 }
 
-.row{
-    display: flex;
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 10px;
+.row {
+	display: flex;
+	margin-bottom: 10px;
+	font-size: 14px;
+	font-weight: 400;
 }
 
-.flex{
-    display: flex;
-    align-items: center;
+.flex {
+	display: flex;
+	align-items: center;
 }

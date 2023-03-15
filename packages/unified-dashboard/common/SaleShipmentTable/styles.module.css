@@ -1,0 +1,35 @@
+.card_wrapper {
+	margin: 0 10px;
+	background: #fefefe;
+	border-bottom: 1px solid #e5e3e3;
+	box-shadow: none;
+}
+
+.revenue_col {
+	position: relative;
+	display: flex;
+	flex: 11.11%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 0 15px;
+	border-right: none;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 0;
+	font-size: 13px;
+	font-weight: 400;
+	text-align: center;
+	cursor: pointer;
+}
+
+.arrange {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100px;
+}

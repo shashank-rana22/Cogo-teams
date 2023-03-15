@@ -1,4 +1,4 @@
-import { ResponsivePie } from '@cogoport/charts/pie';
+import ResponsivePie from '@cogoport/charts/pie';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';

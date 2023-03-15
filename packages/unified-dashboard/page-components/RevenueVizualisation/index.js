@@ -55,6 +55,7 @@ function RevenueVisualization({ headerFilters }) {
 		if (!isComponentInViewport) {
 			setisComponentInViewport(inViewportBarChart);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [inViewportBarChart]);
 
 	return (

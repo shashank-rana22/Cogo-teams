@@ -21,7 +21,6 @@ function Header({ headerFilters, setHeaderFilters }) {
 	const { currency, entity_code } = headerFilters;
 
 	const handleFilters = (key, val) => {
-		console.log('val', val);
 		setHeaderFilters({
 			...headerFilters,
 			[key]: val,

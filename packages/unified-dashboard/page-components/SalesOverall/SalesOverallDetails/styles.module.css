@@ -1,107 +1,100 @@
-.card_wrapper{
-    background: #fff;
-	box-shadow: none;
-	padding: 10px 0 0 0;
-	margin-top: 20px;
-	border-radius: 4px;
-	max-width: 100%;
+.card_wrapper {
 	display: flex;
-	align-items: stretch;
 	flex-direction: column;
+	align-items: stretch;
+	max-width: 100%;
+	padding: 10px 0 0;
+	margin-top: 20px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: none;
 }
 
-
 @media (max-width: 768px) {
-  
-    .card_wrapper{
-        background: #fff;
-        box-shadow: none;
-        padding: 10px 0 0 0;
-        margin-top: 20px;
-        border-radius: 4px;
-        width: max-content;
-        display: flex;
-        align-items: stretch;
-        flex-direction: column;
-        overflow: scroll;
-    }
+	.card_wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		width: max-content;
+		padding: 10px 0 0;
+		margin-top: 20px;
+		overflow: scroll;
+		background: #fff;
+		border-radius: 4px;
+		box-shadow: none;
+	}
 
-    .fixed_header{
-        top: 3rem;
-        z-index: 1;
-        width: max-content;
-    }
-    
-    
-  }
+	.fixed_header {
+		top: 3rem;
+		z-index: 1;
+		width: max-content;
+	}
+}
 
-.fixed_header{
-    top: 3rem;
+.fixed_header {
+	top: 3rem;
 	z-index: 1;
 }
 
-
-.sales_row{
-    display: flex;
-    background  : #F1F1F1;
-	font-size    : 13px;
-	font-weight  : 500;
-	margin-left  : 0px;
-	margin-right : 0px;
+.sales_row {
+	display: flex;
+	margin-right: 0;
+	margin-left: 0;
+	font-size: 13px;
+	font-weight: 500;
+	background: #f1f1f1;
 }
 
-.revenue_col{
-    position: relative;
+.revenue_col {
+	position: relative;
 	display: flex;
+	flex: 25%;
 	flex-direction: column;
 	align-items: center;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border-right: none;
-    flex: 25%;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	border-right: none;
 }
 
-
-.row_2{
-    background: #F9F9F9;
-    font-size: 11px;
-    font-weight: 400;
-    margin-left: 0px;
-    margin-right: 0px;
-    display: flex;
-}
-
-.revenue_col_2{
-    position: relative;
+.row_2 {
 	display: flex;
-	flex-direction: column;
-    background: #f1f1f1;
-    align-items: center;
-    border-right: none;
-    flex: 33%;
-    margin-top: 4px;
-    margin-bottom: 4px;
+	margin-right: 0;
+	margin-left: 0;
+	font-size: 11px;
+	font-weight: 400;
+	background: #f9f9f9;
 }
 
-.revenue_col_3{
-    position: relative;
+.revenue_col_2 {
+	position: relative;
 	display: flex;
+	flex: 33%;
 	flex-direction: column;
-    background: #f1f1f1;
-    align-items: center;
-    border-right: none;
-    flex: 50%;
-    margin-top: 4px;
-    margin-bottom: 4px;
+	align-items: center;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	background: #f1f1f1;
+	border-right: none;
 }
 
-
-.revenue_gap{
-    flex: 25%;
-    display: flex;
+.revenue_col_3 {
+	position: relative;
+	display: flex;
+	flex: 50%;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	background: #f1f1f1;
+	border-right: none;
 }
 
-.nodata{
-    height: 300px;
-    margin-top: 30px;
+.revenue_gap {
+	display: flex;
+	flex: 25%;
+}
+
+.nodata {
+	height: 300px;
+	margin-top: 30px;
 }

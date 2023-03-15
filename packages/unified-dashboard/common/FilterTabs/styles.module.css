@@ -1,16 +1,16 @@
-.revenue_filter_btn{
-    height: 32px;
-	background: #fff;
-	color: #000;
-	border-radius: 0;
-	font-weight: 400;
-	font-size: 12px;
+.revenue_filter_btn {
+	height: 32px;
 	padding-top: 3.5px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #000;
+	background: #fff;
 	border-color: #e0e0e0;
+	border-radius: 0;
 }
 
 .active {
-	background: #000;
 	font-weight: 500;
 	color: #fff;
+	background: #000;
 }

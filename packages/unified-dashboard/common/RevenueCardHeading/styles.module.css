@@ -1,59 +1,60 @@
-.container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 20px 2px 2px 2px;
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px 2px 2px;
 }
 
-.revenue{
-    width: 18px;
-    height: 18px;
-    margin-right: 0.8rem;
+.revenue {
+	width: 18px;
+	height: 18px;
+	margin-right: 0.8rem;
 }
 
-.revenue_container{
-    display: flex;
-    align-items: center;
+.revenue_container {
+	display: flex;
+	align-items: center;
 }
 
-.text_title{
-    font-size: 18px;
-    margin: 3px 10px;
-    font-weight: 600;
+.text_title {
+	margin: 3px 10px;
+	font-size: 18px;
+	font-weight: 600;
 }
 
-.flex_info{
-    display: flex;
-    align-items: center;
+.flex_info {
+	display: flex;
+	align-items: center;
 }
 
-.info{
-    width: 1rem;
-    height: 1rem;
+.info {
+	width: 1rem;
+	height: 1rem;
 }
-
 
 .collapse_icon {
-    width: 20px;
-    height: 14px;
+	width: 20px;
+	height: 14px;
 }
+
 .collapse_icon.active {
-    transform: rotate(180deg);
-    transition: transform 400ms;
+	transition: transform 400ms;
+	transform: rotate(180deg);
 }
+
 .collapse_icon.inactive {
-    transform: rotate(0deg);
-    transition: transform 400ms;
+	transition: transform 400ms;
+	transform: rotate(0deg);
 }
+
 @media (max-width: 540px) {
-    padding: 15px;
+	padding: 15px;
 }
 
-
-.flex_container{
-    display: flex;
-    padding: 10px 0;
-    cursor: pointer;
-    justify-content: center;
-    align-items: center;
+.flex_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 0;
+	cursor: pointer;
 }

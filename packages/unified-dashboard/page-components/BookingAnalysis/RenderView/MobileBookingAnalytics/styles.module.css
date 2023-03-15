@@ -1,14 +1,14 @@
-.row{
+.row {
 	display: flex;
-	justify-content: space-around;
 	align-items: center;
+	justify-content: space-around;
 }
 
-.btn_na{
-	cursor: not-allowed;
+.btn_na {
 	color: #e0e0e0;
+	cursor: not-allowed;
 }
 
-.btn_pointer{
+.btn_pointer {
 	cursor: pointer;
 }

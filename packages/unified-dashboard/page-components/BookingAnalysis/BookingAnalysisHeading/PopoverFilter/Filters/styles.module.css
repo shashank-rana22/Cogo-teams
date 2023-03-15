@@ -7,89 +7,89 @@
 	color: #fff;
 } */
 
-
-.container{
-    display: flex;
-    flex-direction: column;
+.container {
+	display: flex;
+	flex-direction: column;
 }
 
-.filter{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.filter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-
-.text_trade{
-display: block;
+.text_trade {
+	display: block;
 }
 
-.text_error{
-    color: red;
-    font-weight: bold;
+.text_error {
+	font-weight: bold;
+	color: red;
 }
 
-.trade_checkbox{
-    display: flex;
-    flex-wrap: wrap;
+.trade_checkbox {
+	display: flex;
+	flex-wrap: wrap;
 }
 
-.text_shipment{
-    display: block;
+.text_shipment {
+	display: block;
 }
 
-.shipment_checkbox{
-    display: flex;
-    flex-wrap: wrap;
-    :global {
-		.ui_checkbox_container{
+.shipment_checkbox {
+	display: flex;
+	flex-wrap: wrap;
+
+	:global {
+		.ui_checkbox_container {
 			min-width: 33%;
-            padding: 10px 0px;
+			padding: 10px 0;
 		}
 	}
 }
 
-.trade_checkbox{
-    display: flex;
-    flex-wrap: wrap;
-    :global {
-		.ui_checkbox_container{
+.trade_checkbox {
+	display: flex;
+	flex-wrap: wrap;
+
+	:global {
+		.ui_checkbox_container {
 			min-width: 33%;
-            padding: 10px 0px;
+			padding: 10px 0;
 		}
 	}
 }
 
-.trade{
-    width: 100%;
+.trade {
+	width: 100%;
 }
 
-.shipment{
-    width: 100%;
+.shipment {
+	width: 100%;
 }
 
-.border{
-    border: 1px solid #e0e0e0;
-    margin: 10px 0px;
+.border {
+	margin: 10px 0;
+	border: 1px solid #e0e0e0;
 }
 
-.detail_text{
-    font-size: 16px;
-    font-weight: bold;
+.detail_text {
+	font-size: 16px;
+	font-weight: bold;
 }
 
-.text_trade{
-    font-weight: bold;
+.text_trade {
+	font-weight: bold;
 }
 
-.text_shipment{
-    font-weight: bold;
+.text_shipment {
+	font-weight: bold;
 }
 
-.flex_apply{
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 16px;
+.flex_apply {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
 }
 
 /* .detail_container{
@@ -146,8 +146,7 @@ display: block;
     font-weight: 500;
 } */
 
-.checkbox_wrapper{
-    display: flex;
-    flex-wrap: wrap;
+.checkbox_wrapper {
+	display: flex;
+	flex-wrap: wrap;
 }
-

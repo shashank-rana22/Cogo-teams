@@ -1,66 +1,66 @@
-.container{
+.container {
 	margin-top: 1.3rem;
 }
 
-.btn_na{
-	cursor: not-allowed;
+.btn_na {
 	color: #e0e0e0;
+	cursor: not-allowed;
 }
 
-.btn_pointer{
+.btn_pointer {
 	cursor: pointer;
 }
 
-.flex_arrow{
-    display: flex;
-    align-items: center;
-    position: relative;
+.flex_arrow {
+	position: relative;
+	display: flex;
+	align-items: center;
 }
 
-.flex_months{
-    display: flex;
-    justify-content: space-evenly;
+.flex_months {
+	display: flex;
+	justify-content: space-evenly;
+	margin: 0.5rem 1.5rem 1.5rem;
 	font-size: 14px;
 	font-weight: bold;
-    margin: 0.5rem 1.5rem 1.5rem 1.5rem;
 }
 
-.stepper_line{
-    height: 2px;
+.stepper_line {
 	width: 100%;
-	background: #bdbdbd;
+	height: 2px;
 	margin: 0 10px;
+	background: #bdbdbd;
 }
 
-.stepper_dots{
-    height: 10px;
-	width: 10px;
-	background: #fff;
-	border-radius: 50%;
+.stepper_dots {
 	position: absolute;
+	width: 10px;
+	height: 10px;
+	background: #fff;
 	border: 2px solid #8cc1f9;
+	border-radius: 50%;
 }
 
-.stepper_dots_top{
-    height: 10px;
-	width: 10px;
-	background: #fff;
-	border-radius: 50%;
+.stepper_dots_top {
 	position: absolute;
-	border: 2px solid #8cc1f9;
 	top: -1.25rem;
+	width: 10px;
+	height: 10px;
+	background: #fff;
+	border: 2px solid #8cc1f9;
+	border-radius: 50%;
 }
 
-.text_month{
-    font-weight: 400;
-    padding-top: 3px;
+.text_month {
+	padding-top: 3px;
+	font-weight: 400;
 }
 
-.month_container{
-    width: 25%;
+.month_container {
+	position: relative;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
 	align-items: center;
-	position: relative;
+	justify-content: flex-start;
+	width: 25%;
 }

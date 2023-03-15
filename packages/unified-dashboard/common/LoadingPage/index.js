@@ -36,24 +36,6 @@ function LoadingPage() {
 
 				<CardLoader />
 			</div>
-			<div style={{ marginTop: '1rem' }}>
-				<div>
-					<Loader count={1} />
-				</div>
-				<CardLoader />
-			</div>
-			<div style={{ marginTop: '1rem' }}>
-				<div>
-					<Loader count={1} />
-				</div>
-				<CardLoader />
-			</div>
-			<div style={{ marginTop: '1rem' }}>
-				<div>
-					<Loader count={1} />
-				</div>
-				<CardLoader />
-			</div>
 		</div>
 	);
 }

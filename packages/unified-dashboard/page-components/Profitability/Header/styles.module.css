@@ -1,47 +1,54 @@
-.container{
-    display: flex;
+.container {
+	display: flex;
 	align-items: center;
 	margin-bottom: 24px;
 }
 
 .job_status {
-	margin-left: 16px;
 	width: 150px;
+	margin-left: 16px;
 }
 
-.heading{
-    display: flex;
+.heading {
+	display: flex;
 	align-items: center;
-	color: #333333;
-	font-weight: bold;
-	font-size: 22px;
 	margin-right: 24px;
+	font-size: 22px;
+	font-weight: bold;
+	color: #333;
 }
 
-.search_container{
+.search_container {
 	max-width: 230px;
-	max-height: 32px;
-	margin-left: auto;
 	margin-right: 30px;
+	margin-left: auto;
+
+	:global {
+		.ui_input_container {
+			width: 250px;
+			height: 40px;
+		}
+	}
 }
 
-.search{
-	padding: 10px;
-	border-radius: 5px;
-	border: 1px solid #e0e0e0;
+.search {
 	width: 250px;
+	padding: 10px;
+	border: 1px solid #e0e0e0;
+	border-radius: 5px;
 }
 
 @media screen and (max-width: 724px) {
-	.heading{
-		font-size: 16px;
+	.heading {
 		margin-right: 18px;
+		font-size: 16px;
 	}
 
-	.container{
+	.container {
 		flex-direction: column;
 	}
-	.job_status{
+
+	.job_status {
 		margin-top: 10px;
 	}
-  }
+}

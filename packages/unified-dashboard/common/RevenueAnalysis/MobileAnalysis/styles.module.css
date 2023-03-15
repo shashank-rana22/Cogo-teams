@@ -1,108 +1,108 @@
- .card_wrapper{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
- }
-
-.revenue_data{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 20px;
+.card_wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
-.bar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.revenue_data {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
-.stepper_line{
-    width: 90%;
-    height: 2px;
-	background: #bdbdbd;
+.bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.stepper_line {
+	width: 90%;
+	height: 2px;
 	margin: 0 6px;
+	background: #bdbdbd;
 }
 
-.chart_container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100px;
-    width: 50%;
+.chart_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	height: 100px;
+	text-align: center;
 }
 
-.booking_pie{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    margin-top: 20px;
+.booking_pie {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 100%;
+	margin-top: 20px;
 }
 
-.booking{
-    width: 100%;
-    margin-right: 20px;
+.booking {
+	width: 100%;
+	margin-right: 20px;
 }
 
-.flex_currency{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+.flex_currency {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
 }
 
-.flex_booking{
-    display: flex;
-    flex-direction: row;
-    font-size: 10px;
-    justify-content:center;
-    align-items: center;
-    margin-bottom: 4px;
+.flex_booking {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 4px;
+	font-size: 10px;
 }
 
-.text_currency{
-    display: flex;
-    flex-direction: row;
-    font-size: 16px;
-    justify-content:center;
-    font-weight: 600;
-    margin-bottom: 10px;
+.text_currency {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
-.flex_customers{
-    display: flex;
-    flex-direction: row;
-    font-size: 10px;
-    justify-content:center;
-    align-items: center;
-    margin-bottom: 8px;
+.flex_customers {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 8px;
+	font-size: 10px;
 }
 
-  
-    .text_booking{
-     padding: 0px 2px;
-     font-size: 10px;
-    }
- 
-    .text_customers{
-     padding: 0px 2px;
-     font-size: 10px;
-    }
-     
-.text_filter{
-    font-size: 11px;
+
+.text_booking {
+	padding: 0 2px;
+	font-size: 10px;
 }
 
-.text_booking_data{
-    font-size: 12px;
-    font-weight: 600;
+.text_customers {
+	padding: 0 2px;
+	font-size: 10px;
 }
-.text_customers_data{
-    font-size: 12px;
-    font-weight: 600;
+
+.text_filter {
+	font-size: 11px;
+}
+
+.text_booking_data {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.text_customers_data {
+	font-size: 12px;
+	font-weight: 600;
 }

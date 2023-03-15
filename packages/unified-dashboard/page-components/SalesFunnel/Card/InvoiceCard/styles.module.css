@@ -1,95 +1,95 @@
-.card_wrapper{
-    background: #fff;
-	padding: 10px 0 0 0;
-	margin-top: 20px;
-	border-radius: 4px;
-	max-width: 100%;
+.card_wrapper {
 	display: flex;
-	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-	padding: 14px;
-	align-items: stretch;
 	flex-direction: column;
+	align-items: stretch;
+	max-width: 100%;
+	padding: 10px 0 0;
+	padding: 14px;
+	margin-top: 20px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
 }
 
 .horizontal_bar_graph {
-    width: 355px;
-    height: 200px;
-    overflow-y: hidden;
+	width: 355px;
+	height: 200px;
+	overflow-y: hidden;
 }
 
 @media (max-width: 768px) {
-    .horizontal_bar_graph {
-        width: 260px;
-    }
+	.horizontal_bar_graph {
+		width: 260px;
+	}
 }
 
-.summary_card{
-    width: 100%;
-	overflow: hidden;
+.summary_card {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	overflow: hidden;
 	border: 1px solid #e0e0e0;
 	box-shadow: none;
 }
 
 .summary_p {
-    width: 100%;
-    padding: 0 25px 0 30px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 0 25px 0 30px;
 }
 
 .via_enquiry {
-    background: #f7f7f7;
+	background: #f7f7f7;
 }
 
 .amount {
-    padding: 1rem 0;
+	padding: 1rem 0;
 }
 
 .amount_data {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .count_data {
-    width: 45%;
-    padding-left: 10px;
+	width: 45%;
+	padding-left: 10px;
 }
 
 .quotation_count {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e0e0e0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e0e0e0;
 }
 
-
 .vertical_col {
-    background: #e0e0e0;
-    display: flex;
-    align-items: center;
-    padding-left: 0px;
-    font-size: 14px;
+	display: flex;
+	align-items: center;
+	padding-left: 0;
+	font-size: 14px;
+	background: #e0e0e0;
 }
 
 .vertical_text {
-    padding-top: 0px;
-    margin-left: -6px;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+	padding-top: 0;
+	margin-left: -6px;
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
 }
 
-.text_tag{
-    font-weight: 500;
+.text_tag {
+	font-weight: 500;
+
 	&.text-width {
 		width: 100%;
 	}
 }
 
-.stat{
-    padding: 8px;
-	color: #828282;
+.stat {
 	width: 100%;
+	padding: 8px;
+	color: #828282;
 }

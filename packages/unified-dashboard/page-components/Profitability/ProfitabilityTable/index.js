@@ -13,7 +13,7 @@ function ProfitabilityTable({ loading, data, setFilters }) {
 
 	// console.log('column ::', column, list);
 
-	if (list.length === 0) {
+	if (list.length === 0 && !loading) {
 		return <Empty />;
 	}
 
@@ -25,6 +25,7 @@ function ProfitabilityTable({ loading, data, setFilters }) {
 					columns={column}
 					data={list || []}
 					loading={loading}
+					loadingRowsCount={10}
 				/>
 			</div>
 			<div className={styles.pagination_container}>

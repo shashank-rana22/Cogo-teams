@@ -1,52 +1,55 @@
-.radio{
-    display: block;
-    flex: 1;
-    padding: 12px;
+.radio {
+	display: block;
+	flex: 1;
+	padding: 12px;
 }
 
-.button_wrap{
-    display: flex;
-	justify-content:flex-end;
-	padding: 22px 28px 12px 0px;
+.button_wrap {
+	display: flex;
+	justify-content: center;
+	padding-top: 10px;
 	border-top: 1px solid #e0e0e0;
 }
 
-.filter_bottomborder{
+.filter_bottomborder {
 	border-right: 1px solid #e0e0e0;
 }
 
-.cancel_btn{
-	margin-left: 14px;
+.cancel_btn {
+	margin: 0 5px;
 }
 
-.apply_btn{
-	background: #000;
+.apply_btn {
+	margin: 0 5px;
 	color: #fff;
-	margin-left: 14px;
+	background: #000;
 }
 
 /* Filter Content */
 
-.filterContainer{
-    .custom_select_input_select_value {
+.filterContainer {
+	.custom_select_input_select_value {
 		font-size: 12px;
-		color: #000000;
 		line-height: 20px;
+		color: #000;
 	}
 
 	.custom_select_input_subcontainer {
 		height: 30px;
-		border: solid 1px #e0e0e0;
 		cursor: text;
+		border: solid 1px #e0e0e0;
 		box-shadow: none;
+
 		:focus {
 			border: 1px solid black;
 			box-shadow: none;
 		}
+
 		:focus-within {
 			border: 1px solid black;
 			box-shadow: none;
 		}
+
 		:hover {
 			border: 1px solid black;
 			box-shadow: none;
@@ -57,87 +60,90 @@
 		}
 
 		.core_ui_input_root {
+			padding: 0;
 			border: none;
-			padding: 0px;
 		}
 	}
 
 	.custom_select_input_chip {
-		padding: 0px 6px;
+		padding: 0 6px;
 	}
+
 	.custom_select_input_chip_button {
-		height: 20px;
 		width: 20px;
+		height: 20px;
 	}
+
 	.custom_select_input_chip_icon {
-		height: 20px;
 		width: 20px;
+		height: 20px;
 	}
 }
 
-.filter_heading{
-    margin: 0px;
+.filter_heading {
+	padding: 16px 0 12px 24px;
+	margin: 0;
+	font-size: 16px;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 16px;
 	line-height: 19px;
-	color: #000000;
-	padding: 16px 0px 12px 24px;
+	color: #000;
 	border-bottom: 1px solid #e0e0e0;
 }
 
-.filter_block{
-    display: block;
-    flex: 1;
-    padding: 0px 22px 14px 18px;
+.filter_block {
+	display: block;
+	flex: 1;
+	padding: 0 22px 14px 18px;
 }
 
-.filter_controls{
-    display: flex;
+.filter_controls {
+	display: flex;
 }
 
-.filter_item{
-    padding: 0px 4px;
+.filter_item {
+	padding: 0 4px;
 }
 
-.filter_label{
-    margin: 0px;
+.filter_label {
+	margin: 0;
+	margin-top: 16px;
+	margin-bottom: 6px;
+	font-size: 14px;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 14px;
 	line-height: 16px;
+	color: #000;
 	letter-spacing: 0.02em;
-	color: #000000;
-	margin-bottom: 6px;
-	margin-top: 16px;
 }
 
-.filter_labelHeading{
-    font-weight: 700;
-	font-size: 18px;
+.filter_labelHeading {
 	margin-top: 10px;
 	margin-bottom: -4px;
+	font-size: 18px;
+	font-weight: 700;
 }
 
-.line{
-    border-bottom: 1px solid #e0e0e0;
+.line {
 	margin-top: 12px;
+	border-bottom: 1px solid #e0e0e0;
 }
 
-.filter_box{
-    .tippy-content {
-		background: #ffffff;
-		border: 1px solid #bdbdbd;
+.filter_box {
+	.tippy-content {
 		box-sizing: border-box;
-		border-radius: 10px;
 		width: 760px;
 		height: fit-content;
-		padding: 0px;
+		padding: 0;
+		background: #fff;
+		border: 1px solid #bdbdbd;
+		border-radius: 10px;
 
 		@media (max-width: 760px) {
 			width: 100%;
 		}
 	}
+
 	.tippy_box {
 		border-radius: 10px;
 	}
@@ -151,9 +157,9 @@
 	}
 }
 
-.radio_container{
-	:global{
-		.ui_radiogroup_container{
+.radio_container {
+	:global {
+		.ui_radiogroup_container {
 			display: block;
 		}
 	}

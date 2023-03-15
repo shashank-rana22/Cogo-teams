@@ -10,6 +10,7 @@ import BookingsDone from './Card/BookingsDone';
 import InvoiceCard from './Card/InvoiceCard';
 import QuotationCard from './Card/QuotationCard';
 import SalesOverallDetails from './SalesOverallDetails';
+import MobileSalesOverallDetails from './SalesOverallDetails/MobileSalesOverallDetails';
 import SalesOverallHeading from './SalesOverallHeading';
 import styles from './styles.module.css';
 
@@ -89,16 +90,31 @@ function SalesOverall({ headerFilters }) {
 						/>
 					</div>
 				</div>
-				{loading ? (
-					<LoadingPage />
-				) : (
-					<SalesOverallDetails
-						currency={currency}
-						salesFunnel={salesOverall}
-						filters={filters}
-						setFilters={setFilters}
-					/>
-				)}
+				<div className={styles.desktop}>
+					{loading ? (
+						<LoadingPage />
+					) : (
+						<SalesOverallDetails
+							currency={currency}
+							salesFunnel={salesOverall}
+							filters={filters}
+							setFilters={setFilters}
+						/>
+					)}
+				</div>
+				<div className={styles.mobile}>
+					{loading ? (
+						<LoadingPage />
+					) : (
+						<MobileSalesOverallDetails
+							currency={currency}
+							salesFunnel={salesOverall}
+							filters={filters}
+							setFilters={setFilters}
+						/>
+					)}
+				</div>
+
 			</div>
 		</div>
 	);

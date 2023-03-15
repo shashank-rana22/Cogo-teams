@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from 'react';
 
 import useGetProfitability from '../../hooks/useGetProfitability';
@@ -20,6 +19,7 @@ function Profitability({ headerFilters }) {
 		if (!isInViewport) {
 			setisInViewport(inViewport);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [inViewport]);
 
 	useEffect(() => {
