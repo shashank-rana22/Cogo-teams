@@ -1,4 +1,4 @@
-import { ToolTip } from '@cogoport/components';
+import { ToolTip, cl } from '@cogoport/components';
 
 import { renderValue } from '../../../../../../../common/cargo-details/renderValue';
 
@@ -14,7 +14,7 @@ function Item({ state, label, detail }) {
 				:
 			</div>
 			<ToolTip theme="light" content={valueFormatted}>
-				<div className={`${styles.value} ${state}`}>{valueFormatted}</div>
+				<div className={cl`${styles.value} ${state}`}>{valueFormatted}</div>
 			</ToolTip>
 		</div>
 	);

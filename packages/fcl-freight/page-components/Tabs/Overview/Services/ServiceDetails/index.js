@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 // import getConfigs from '../../../../configurations/Supplier/get-configs';
@@ -55,7 +56,7 @@ function ServiceDetails({
 	// const service_items_key = getConfigs(service_type).details || {};
 
 	const addedServiceComponent = (
-		<div className={`${styles.container} ${state}`}>
+		<div className={cl`${styles.container} ${state}`}>
 			<Header
 				service_type={service_type}
 				id={id}

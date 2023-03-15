@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 function Assured({ shipment_data = {} }) {
 	return (
-		<div className={cl` ${styles.container} cogo-assured`}>
+		<div className={cl`${styles.container} cogo-assured`}>
 			<div className={styles.text}>
 				<img
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-verifiedmark.svg"

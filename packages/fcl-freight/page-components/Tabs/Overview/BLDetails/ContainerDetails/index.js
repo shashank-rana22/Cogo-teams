@@ -1,4 +1,4 @@
-import { Tag } from '@cogoport/components';
+import { Tag, cl } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -17,7 +17,7 @@ function ConatinerDetails({ containerDetails = [] }) {
 		<div>
 			<div className={styles.container}>
 				{containerDetails?.map((item, index) => (
-					<div md={6} className={`${className} random`}>
+					<div md={6} className={cl`${className} random`}>
 						<div className={styles.container_item}>
 							<div className={styles.container_description}>
 								<div className={styles.serial_number}>{index + 1}</div>
