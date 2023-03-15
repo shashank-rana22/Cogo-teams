@@ -1,7 +1,7 @@
 import Assured from './Assured';
 import BLDetails from './BLDetails';
 import { shipment_data } from './dummy_data';
-import ManageServices from './ManageServices';
+import ManageServices from './OverviewManageServices';
 import Services from './Services';
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';

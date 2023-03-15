@@ -1,14 +1,16 @@
 import { Modal, cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
+import FormSearch from '../../../../../../common/Route/Form';
 import React, { useState } from 'react';
 
+import { shipment_data } from '../../../dummy_data';
 import styles from './styles.module.css';
 
 function CreateNew({
 	routeLeg,
 	// serviceList,
-	shipment_data = {},
+	// shipment_data = {},
 	// isIE = false,
 }) {
 	const isMobile = useSelector((state) => (state.general || {}).isMobile);
@@ -65,7 +67,7 @@ function CreateNew({
 				className="primary lg"
 				styles={{ dialog: { width: isMobile ? 360 : 700 } }}
 			>
-				{/* <FormSearch
+				<FormSearch
 					extraParams={{
 						importer_exporter_id: user_id,
 						importer_exporter_branch_id:
@@ -75,12 +77,9 @@ function CreateNew({
 					service={form.service}
 					onClose={handleClose}
 					shipment_data={shipment_data}
-					services={serviceList}
-					isIE={isIE}
-				/> */}
-				<div>
-					Hello
-				</div>
+					// services={serviceList}
+					// isIE={isIE}
+				/>
 			</Modal>
 		</>
 	);

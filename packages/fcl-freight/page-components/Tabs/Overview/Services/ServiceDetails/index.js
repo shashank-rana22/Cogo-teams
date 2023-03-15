@@ -64,7 +64,7 @@ function ServiceDetails({
 				state={state}
 				heading={routeLeg.display}
 				service_supply_agent={service_supply_agent}
-				serviceList={serviceList}
+				// serviceList={serviceList}
 				shipmentData={shipmentData}
 				isSeller={isSeller}
 				service_provider={service_provider}
@@ -84,7 +84,7 @@ function ServiceDetails({
 	const createNew = canUpsell ? (
 		<CreateNew
 			routeLeg={routeLeg}
-			serviceList={serviceList}
+			// serviceList={serviceList}
 			shipment_data={shipmentData}
 		/>
 	) : null;

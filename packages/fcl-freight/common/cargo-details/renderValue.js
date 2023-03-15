@@ -1,4 +1,3 @@
-// import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
 import { ToolTip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/constants/globals.json';
 import { IcMOpenlink } from '@cogoport/icons-react';

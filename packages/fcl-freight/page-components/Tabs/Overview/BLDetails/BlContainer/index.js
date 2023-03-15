@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 
 // import FormLayout from '../../../../../commons/Layout';
 import useBlContainer from '../../../../../hooks/useBlContainer';
+import styles from './styles.module.css';
 
 function BlContainer({
 	data,
@@ -26,13 +27,14 @@ function BlContainer({
 	});
 
 	return (
-		<div>
+		<div className={styles.container}>
 			{/* <FormLayout
 				controls={controls}
 				fields={fields}
 				errors={error}
 				showElements={showElements}
 			/> */}
+			Hii, under construction
 			<Button
 				// onClick={handleSubmit(updateDetails, onError)}
 				className="primary sg"

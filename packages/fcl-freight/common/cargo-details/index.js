@@ -1,5 +1,5 @@
 import { renderValue } from './renderValue';
-import { Box } from './styles';
+import styles from './styles.module.css';
 
 const labels = [
 	'airline',
