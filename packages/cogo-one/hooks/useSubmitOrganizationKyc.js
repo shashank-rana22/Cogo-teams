@@ -1,43 +1,36 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 import useUpdateOmnichannelNewDocument from './useUpdateOmnichannelNewDocument';
 
 const useSubmitOrganizationKyc = ({
 	orgId = '', documentsList = () => {},
 	singleItem = {}, setSingleItem = () => {},
+	setShowModal = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/submit_organization_kyc',
 		method : 'post',
 	}, { manual: true });
 
-	const { updatelNewDocument = () => {} } = useUpdateOmnichannelNewDocument({
+	const { updateNewDocument = () => {} } = useUpdateOmnichannelNewDocument({
 		documentsList,
 		singleItem,
 		setSingleItem,
+		setShowModal,
+		type: 'update_file',
 	});
 
-	const {
-		profile :{ user: { id = '' } },
-	} = useSelector((state) => state);
-
 	const submitOrganizationKyc = async (data) => {
-		console.log('data:', data);
-
 		try {
 			await trigger({
 				data: {
 					...data,
-					performed_by_id   : id,
-					performed_by_type : 'agent',
-					id                : orgId,
+					id: orgId,
 				},
 			});
-			Toast.success('Successfully Uploaded');
-			updatelNewDocument({ data });
+			updateNewDocument({ data });
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

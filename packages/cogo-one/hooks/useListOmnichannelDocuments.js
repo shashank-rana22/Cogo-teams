@@ -65,10 +65,12 @@ function useListOmnichannelDocuments({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [customerId, activeSelect]);
 
+	const { list = [], total_count = 0 } = data || {};
+
 	return {
 		documentsList,
-		list            : data?.list || [],
-		documents_count : data?.total_count || 0,
+		list,
+		documents_count: total_count,
 		loading,
 		orgId,
 	};

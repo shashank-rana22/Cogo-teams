@@ -4,7 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import useListOmnichannelDocuments from '../../../../hooks/useListOmnichannelDocuments';
-import useUpdateOmnichannelDocuments from '../../../../hooks/useUpdateOmnichannelDocuments';
+import useUpdateOmnichannelNewDocument from '../../../../hooks/useUpdateOmnichannelNewDocument';
 import LoadingState from '../UserActivity/LoadingState';
 
 import Filters from './Filters';
@@ -56,7 +56,9 @@ function Documents({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [list]);
 
-	const { documentCountUpdates = () => {} } = useUpdateOmnichannelDocuments();
+	const { updateNewDocument: documentCountUpdates = () => {} } = useUpdateOmnichannelNewDocument({
+		type: 'update_count',
+	});
 
 	useEffect(() => {
 		if (!isEmpty(listIds) && documents_count > 0) {

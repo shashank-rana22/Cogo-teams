@@ -10641,12 +10641,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'update_omnichannel_documents',
-			access_type  : 'private',
-			service_name : 'communication',
-		},
-		{
-			api          : 'update_omnichannel_document',
+			api          : 'update_omnichannel_document_details',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

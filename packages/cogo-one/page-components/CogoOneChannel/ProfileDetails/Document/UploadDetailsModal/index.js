@@ -25,7 +25,7 @@ function UploadDetailsModal({
 	const {
 		submitOrganizationKyc = () => {},
 		loading,
-	} = useSubmitOrganizationKyc({ orgId, documentsList, singleItem, setSingleItem });
+	} = useSubmitOrganizationKyc({ orgId, documentsList, singleItem, setSingleItem, setShowModal });
 
 	const handleCancel = () => {
 		reset();
