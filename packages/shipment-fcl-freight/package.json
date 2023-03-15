@@ -1,5 +1,5 @@
 {
-  "name": "@cogoport/fcl-freight",
+  "name": "@cogoport/shipment-fcl-freight",
   "version": "0.1.0",
   "description": "Package for Shipment Fcl Freight Service",
   "main": "index.js",

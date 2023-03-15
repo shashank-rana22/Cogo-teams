@@ -16,7 +16,6 @@ import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
 import enrichment from './enrichment-apis';
 import faq from './faq-apis';
-import fcl_freight from './fcl-freight';
 import feedback from './feedback-apis';
 import kam_desk from './kam-desk-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
@@ -121,7 +120,6 @@ const apis = {
 	enrichment,
 	...faq,
 	performance_management,
-	fcl_freight,
 };
 
 export default apis;
