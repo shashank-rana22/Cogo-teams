@@ -6,6 +6,7 @@ import {
 	ChipsController,
 	RadioGroupController,
 	TextAreaController,
+	MultiselectController,
 } from '@cogoport/forms';
 
 function getElementController(type) {
@@ -26,6 +27,8 @@ function getElementController(type) {
 			return RadioGroupController;
 		case 'textarea':
 			return TextAreaController;
+		case 'multi-select':
+			return MultiselectController;
 		default:
 			return SelectController;
 	}

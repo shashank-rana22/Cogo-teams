@@ -2,15 +2,16 @@ const getControls = () => [
 	{
 		name        : 'topic',
 		label       : 'Topic',
-		type        : 'select',
+		type        : 'input',
 		placeholder : 'Question Topic',
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'user_groups',
+		name        : 'audience_ids',
 		label       : 'User Groups',
-		type        : 'select',
+		type        : 'multi-select',
 		placeholder : 'Select users',
+		options     : [{ label: 'KAM1', value: 'kam1' }, { label: 'KAM2', value: 'kam2' }],
 		rules       : { required: 'This is required' },
 	},
 	{

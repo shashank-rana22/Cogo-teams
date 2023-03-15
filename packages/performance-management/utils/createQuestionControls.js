@@ -11,7 +11,7 @@ export const useGetCreateQuestionsControls = () => {
 
 	return [
 		{
-			name        : 'question',
+			name        : 'question_text',
 			label       : 'Question',
 			placeholder : 'Write Question Here...',
 			type        : 'text_area',

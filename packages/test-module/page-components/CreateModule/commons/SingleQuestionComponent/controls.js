@@ -1,13 +1,13 @@
 const getControls = () => [
 	{
-		name        : 'question',
+		name        : 'question_text',
 		label       : 'Question',
 		type        : 'input',
 		placeholder : 'Type Question',
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'answer_type',
+		name        : 'question_type',
 		label       : 'Answer type',
 		type        : 'select',
 		placeholder : 'Select Answer type',
@@ -29,7 +29,7 @@ const getControls = () => [
 		],
 		controls: [
 			{
-				name        : 'option',
+				name        : 'answer_text',
 				type        : 'input',
 				placeholder : 'type option',
 				rules       : { required: 'Required' },

@@ -1,9 +1,11 @@
 import { Button } from '@cogoport/components';
-import { InputController, useFieldArray } from '@cogoport/forms';
+import { ChipsController, InputController, useFieldArray } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+
+const alphabetMapping = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
 function OptionsComponent({ control, controls, register, name, errors }) {
 	const childEmptyValues = {};
@@ -26,34 +28,56 @@ function OptionsComponent({ control, controls, register, name, errors }) {
 	}
 
 	return (
-		<div className={styles.container}>
+		<>
 			{fields.map((field, index) => (
 				<div key={field.id} className={styles.field_container}>
-					<InputController
-						{...controls[0]}
-						control={control}
-						{...register(`${name}.${index}.${controls[0].name}`, {
-							...(controls[0].rules || {}),
-						})}
-						className={errors[index]?.[controls[0].name] ? styles.error : null}
-					/>
+					<div className={styles.option_container}>
+						<div className={styles.alphabet_container}>{alphabetMapping[index]}</div>
 
-					<div className={styles.button_container}>
-						<Button
-							type="button"
-							themeType="secondary"
-							className={styles.add_button}
-							onClick={() => handleAppendChild()}
-						>
-							+ Add
+						<InputController
+							{...controls[0]}
+							control={control}
+							{...register(`${name}.${index}.${controls[0].name}`, {
+								...(controls[0].rules || {}),
+							})}
+							className={errors[index]?.[controls[0].name] ? styles.error : null}
+						/>
 
-						</Button>
+						<div className={styles.right_button_container}>
+							{fields.length < 11 && index === fields.length - 1 ? (
+								<Button
+									type="button"
+									themeType="secondary"
+									className={styles.add_button}
+									onClick={() => handleAppendChild()}
+								>
+									+ Add
+								</Button>
+							) : null}
 
-						<IcMDelete width={20} height={20} onClick={() => remove(index, 1)} />
+							{fields.length > 1 ? (
+								<IcMDelete
+									style={{ cursor: 'pointer' }}
+									width={20}
+									height={20}
+									onClick={() => remove(index, 1)}
+								/>
+							) : null}
+
+							<div className={styles.left_button_container}>
+								<ChipsController
+									control={control}
+									{...controls[1]}
+									{...register(`${name}.${index}.${controls[1].name}`, {
+										...(controls[1].rules || {}),
+									})}
+								/>
+							</div>
+						</div>
 					</div>
 				</div>
 			))}
-		</div>
+		</>
 	);
 }
 

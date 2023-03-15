@@ -2,14 +2,17 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
+import useCreateTestQuestion from '../../hooks/useCreateTestQuestion';
 import SingleQuestionComponent from '../SingleQuestionComponent';
 
 import BasicDetails from './components/BasicDetails';
 import CaseStudyForm from './components/CaseStudyForm';
 import styles from './styles.module.css';
 
-function CreateQuestion({ index }) {
+function CreateQuestion({ index, questionSetId }) {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
+
+	console.log('questionSetId', questionSetId);
 
 	const {
 		watch,
@@ -22,8 +25,10 @@ function CreateQuestion({ index }) {
 		register,
 	} = useForm();
 
+	const { createTestQuestion } = useCreateTestQuestion();
+
 	const onsubmit = (values) => {
-		console.log('values', values);
+		createTestQuestion({ values, questionSetId });
 	};
 
 	const onError = (err) => {
@@ -54,8 +59,8 @@ function CreateQuestion({ index }) {
 					) : (
 						<CaseStudyForm
 							errors={{
-								case_questions   : errors.case_questions,
-								case_description : errors?.case_description,
+								case_questions : errors.case_questions,
+								question_text  : errors?.question_text,
 							}}
 							control={control}
 							register={register}
