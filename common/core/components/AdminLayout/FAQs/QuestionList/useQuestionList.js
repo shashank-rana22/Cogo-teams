@@ -2,7 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const useQuestionList = ({
 	topic = {},
@@ -34,47 +34,47 @@ const useQuestionList = ({
 
 	useEffect(() => {
 		debounceQuery(search);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [search]);
+	}, [debounceQuery, search]);
 
-	const fetch = async () => {
-		try {
-			await trigger({
-				params: {
-					filters: {
-						status        : 'active',
-						state         : 'published',
-						faq_topic_id  : [topic?.id] || undefined,
-						auth_function : scope === 'partner' ? roleFunction : undefined,
-						auth_sub_function:
+	const fetch = useCallback(
+		async () => {
+			try {
+				await trigger({
+					params: {
+						filters: {
+							status        : 'active',
+							state         : 'published',
+							faq_topic_id  : [topic?.id] || undefined,
+							auth_function : scope === 'partner' ? roleFunction : undefined,
+							auth_sub_function:
 							scope === 'partner' ? roleSubFunction : undefined,
-						country_id,
-						cogo_entity_id : id,
-						persona        : scope === 'partner' ? 'admin_user' : 'importer_exporter',
-						q              : query || undefined,
+							country_id,
+							cogo_entity_id : id,
+							persona        : scope === 'partner' ? 'admin_user' : 'importer_exporter',
+							q              : query || undefined,
+						},
+						sort_by                  : 'view_count',
+						page,
+						faq_tags_data_required   : true,
+						faq_topics_data_required : true,
 					},
-					sort_by                  : 'view_count',
-					page,
-					faq_tags_data_required   : true,
-					faq_topics_data_required : true,
-				},
-			});
-		} catch (error) {
-			console.log('error :: ', error);
-		}
-	};
+				});
+			} catch (error) {
+				console.log('error :: ', error);
+			}
+		},
+		[country_id, id, page, query, roleFunction, roleSubFunction, scope, topic?.id, trigger],
+	);
 
 	useEffect(() => {
 		fetch();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(topic), page, query]);
+	}, [fetch, page, query]);
 
 	useEffect(() => {
 		if (search && question) {
 			setQuestion(null);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [search]);
+	}, [question, search, setQuestion]);
 
 	const { list = [], ...pageData } = data || {};
 
