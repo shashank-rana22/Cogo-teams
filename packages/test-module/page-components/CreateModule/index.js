@@ -1,6 +1,6 @@
-import CreateQuestionSet from './components/CreateQuestionSet';
+import CreateTest from './components/CreateTest';
 
 function CreateModule() {
-	return <CreateQuestionSet />;
+	return <CreateTest />;
 }
 export default CreateModule;

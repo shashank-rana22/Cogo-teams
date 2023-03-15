@@ -1,0 +1,13 @@
+.title {
+	margin: 16px 0px;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.flex_div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
