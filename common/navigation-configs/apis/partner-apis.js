@@ -3183,6 +3183,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'spot_search',
 		},
+		{
+			api          : 'list_cogo_assured_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'cogo_assured_rate',
+			feature      : 'rate_feedbacks',
+		},
 	],
 	okam_dashboard: [
 		{
