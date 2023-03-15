@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 const useTopicList = () => {
 	const { general = {}, profile = {} } = useSelector((state) => state);
-	const { auth_role_data = [], partner = {} } = profile;
+	const { auth_role_data = {}, partner = {} } = profile;
 	const { scope = '' } = general || {};
 	const { country_id = '', id = '' } = partner;
 
@@ -13,7 +13,7 @@ const useTopicList = () => {
 	const [page, setPage] = useState(1);
 	const [question, setQuestion] = useState(null);
 
-	const { role_functions = [], role_sub_functions = [] } = auth_role_data?.[0] || {};
+	const { role_functions = [], role_sub_functions = [] } = auth_role_data || {};
 
 	const [{ data, loading }, trigger] = useRequest({
 		url    : 'list_faq_topics',
