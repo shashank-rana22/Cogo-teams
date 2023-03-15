@@ -30,7 +30,7 @@ function QuestionList({
 		);
 	}
 
-	if (loading) return <Loader />;
+	if (loading) return <Loader topic={topic} />;
 
 	const allpills = (item) => (
 		<div>
