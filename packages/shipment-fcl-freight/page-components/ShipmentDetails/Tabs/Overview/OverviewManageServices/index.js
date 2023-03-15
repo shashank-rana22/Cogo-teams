@@ -1,6 +1,6 @@
 import Route from '../../../../../common/Route';
 import { Button, Accordion } from '@cogoport/components';
-import ManageServices from '../../../../../../fcl-freight/common/ManageServices';
+import ManageServices from '../../../../../common/ManageServices';
 import styles from './styles.module.css';
 
 function OverviewManageServices() {
