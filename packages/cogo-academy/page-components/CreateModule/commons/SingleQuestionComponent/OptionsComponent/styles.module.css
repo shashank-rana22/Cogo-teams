@@ -1,0 +1,27 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-top: 12px;
+}
+
+.field_container {
+	display: flex;
+	align-items: center;
+}
+
+.error {
+	border: 1px solid #cb6464;
+}
+
+.button_container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-left: 16px;
+
+	.add_button {
+		width: 72px;
+		margin-right: 12px;
+	}
+}

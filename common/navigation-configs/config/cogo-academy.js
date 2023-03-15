@@ -14,6 +14,9 @@ const cogoAcademy = {
 		navigation : 'cogo_academy-create_faq',
 		isMainNav  : false,
 	},
+	'/[partner_id]/learning/faq/create/test-module': {
+		navigation: 'cogo_academy-create_faq',
+	},
 	'/[partner_id]/learning/faq': {
 		navigation : 'cogo_academy-faq',
 		isMainNav  : true,

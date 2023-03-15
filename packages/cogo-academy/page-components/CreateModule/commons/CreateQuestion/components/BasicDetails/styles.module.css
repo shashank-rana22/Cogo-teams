@@ -1,0 +1,40 @@
+.container {
+	display: flex;
+	gap: 32px;
+	margin-bottom: 24px;
+}
+
+.control_container {
+	align-items: center;
+
+	:global {
+		.ui_input_container {
+			width: 250px;
+		}
+
+		.ui_select_container {
+			width: 250px;
+		}
+	}
+}
+
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.question_type {
+	margin-left: 80px;
+
+	.control {
+		margin-top: 4px;
+
+		:global {
+			.ui_chip_container {
+				height: 28px;
+			}
+		}
+	}
+}
