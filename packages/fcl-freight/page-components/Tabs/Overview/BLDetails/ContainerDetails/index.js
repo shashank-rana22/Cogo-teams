@@ -1,16 +1,9 @@
-import Grid, { Tag } from '@cogoport/components';
+import { Tag } from '@cogoport/components';
 import React from 'react';
 
-import {
-	ContainerDescription,
-	SerialNumber,
-	ContainerNumber,
-	Container,
-	ContainerItem,
-	TagWrapper,
-} from './styles';
+import styles from './styles.module.css';
 
-const { Row, Col } = Grid;
+// const { Row, Col } = Grid;
 
 function ConatinerDetails({ containerDetails = [] }) {
 	let even = false;
@@ -21,30 +14,29 @@ function ConatinerDetails({ containerDetails = [] }) {
 	const className = !even ? 'no-border' : '';
 
 	return (
-		<Row>
-			<Container>
+		<div>
+			<div className={styles.container}>
 				{containerDetails?.map((item, index) => (
-					<Col md={6} className={`${className} random`}>
-						<ContainerItem>
-							<ContainerDescription>
-								<SerialNumber>{index + 1}</SerialNumber>
+					<div md={6} className={`${className} random`}>
+						<div className={styles.container_item}>
+							<div className={styles.container_description}>
+								<div className={styles.serial_number}>{index + 1}</div>
 
-								<ContainerNumber>{item?.container_number}</ContainerNumber>
+								<div className={styles.container_number}>{item?.container_number}</div>
 
-								<TagWrapper>
+								<div className={styles.tag_wrapper}>
 									<Tag>{item?.container_type}</Tag>
-								</TagWrapper>
+								</div>
 
-								<TagWrapper>
+								<div className={styles.tag_wrapper}>
 									<Tag>{item?.container_size}</Tag>
-									{' '}
-								</TagWrapper>
-							</ContainerDescription>
-						</ContainerItem>
-					</Col>
+								</div>
+							</div>
+						</div>
+					</div>
 				))}
-			</Container>
-		</Row>
+			</div>
+		</div>
 	);
 }
 

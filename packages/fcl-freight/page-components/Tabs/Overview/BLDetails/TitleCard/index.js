@@ -1,18 +1,9 @@
+import { cl } from '@cogoport/components';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import documentType from './documentType';
-import {
-	Ontrack,
-	TitleContainer,
-	RollOver,
-	BlNumber,
-	Details,
-	DisplayCard,
-	Container,
-	DocumentType,
-	CaretBox,
-} from './styles';
+import styles from './styles.module.css';
 
 function TitleCard({
 	item = {},
@@ -35,39 +26,35 @@ function TitleCard({
 	};
 
 	return (
-		<Container className="title-card">
-			<DisplayCard>
+		<div className={cl` ${styles.container} title-card`}>
+			<div className={styles.display_card}>
 				{shipment_data?.shipment_type === 'fcl_freight' ? (
-					<Details>
-						<TitleContainer>
-							<DocumentType>
+					<div className={styles.details}>
+						<div className={styles.title_container}>
+							<div className={styles.document_type}>
 								{doc_type}
-								{' '}
 								{startCase(item?.status)}
-								{' '}
 								:
-							</DocumentType>
+							</div>
 
-							<Ontrack>
+							<div className={styles.ontrack}>
 								{`${startCase(item?.containers_count || 0)} ${
 									item?.containers_count === 1 ? 'Container' : 'Containers'
 								} on track`}
-							</Ontrack>
+							</div>
 
 							{item?.containers_rolled_over ? (
-								<RollOver>
+								<div className={styles.roll_over}>
 									,
-									{' '}
 									{startCase(item?.containers_rolled_over)}
-									{' '}
 									rolled over
-								</RollOver>
+								</div>
 							) : null}
-						</TitleContainer>
-					</Details>
+						</div>
+					</div>
 				) : null}
 
-				<BlNumber>
+				<div className={styles.bl_number}>
 					{shipment_data?.shipment_type === 'air_freight' ? (
 						<>AWB Number</>
 					) : (
@@ -77,17 +64,17 @@ function TitleCard({
 					{' '}
 					{item?.bl_number}
 					{' '}
-				</BlNumber>
-			</DisplayCard>
+				</div>
+			</div>
 
 			{!isEmpty(item?.container_details) ? (
-				<CaretBox onClick={() => handleClick(item?.id)}>
+				<div className={styles.caret_box} onClick={() => handleClick(item?.id)} role="button" tabIndex={0}>
 					<IcMArrowRotateDown />
-				</CaretBox>
+				</div>
 			) : (
 				<div style={{ marginRight: '50px' }} />
 			)}
-		</Container>
+		</div>
 	);
 }
 

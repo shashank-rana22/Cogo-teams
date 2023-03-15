@@ -1,6 +1,4 @@
-import styled from '@cogoport/front/styled';
-
-DocumentType{
+.document_type{
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
@@ -8,14 +6,14 @@ DocumentType{
 	margin-right: 8px;
 }
 
-Ontrack{
+.ontrack{
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
 	color: #7a5ef3;
 }
 
-RollOver{
+.roll_over{
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
@@ -23,13 +21,13 @@ RollOver{
 	margin-left: 4px;
 }
 
-BlNumber{
+.bl_number{
 	font-size: 14px;
 	line-height: 16px;
 	color: #4f4f4f;
 }
 
-Container{
+.container{
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
@@ -37,12 +35,12 @@ Container{
 	border-radius: 4px;
 }
 
-TitleContainer{
+.title_container{
 	display: flex;
 	align-items: center;
 }
 
-DisplayCard{
+.display_card{
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
@@ -51,12 +49,12 @@ DisplayCard{
 	border-radius: 4px 4px 0px 0px;
 }
 
-Details{
+.details{
 	display: flex;
 	flex-direction: column;
 }
 
-CaretBox{
+.caret_box{
 	background: #ded7fc;
 	border-radius: 0px 4px 0px 0px;
 	display: flex;
