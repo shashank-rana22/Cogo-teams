@@ -28,15 +28,18 @@ function useListFaqTopic() {
 			await trigger({
 				params: {
 					filters: {
-						status            : 'active',
-						auth_function     : scope === 'partner' ? roleFunction : undefined,
-						auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
-						country_id,
-						cogo_entity_id    : id,
-						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
+						// status            : 'active',
+						// auth_function     : scope === 'partner' ? roleFunction : undefined,
+						// auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
+						// country_id,
+						// cogo_entity_id    : id,
+						// persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
 					},
-					page_limit               : 100000,
-					pagination_data_required : false,
+					page_limit                     : 100000,
+					pagination_data_required       : false,
+					most_viewed_questions_required : true,
+					topic_wise_questions_required  : true,
+					topic_wise_stats_required      : true,
 				},
 			});
 		} catch (error) {
