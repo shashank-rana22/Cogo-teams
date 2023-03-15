@@ -161,3 +161,15 @@
 	position: relative;
 	display: flex;
 }
+
+.tag_and_errorcontainer{
+	display: flex;
+	flex-direction: column;
+}
+
+.error_content_container{
+	color: #fc0101;
+	font-size: 11px;
+	margin-left: 8px;
+}
+

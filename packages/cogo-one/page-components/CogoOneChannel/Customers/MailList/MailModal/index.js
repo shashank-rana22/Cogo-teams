@@ -114,20 +114,27 @@ function MailModal({ showMailModal, setShowMailModal }) {
 						/>
 					</div>
 					{(showControl && type === 'recipient') && (
-						<div className={styles.tag_container}>
-							<input
-								size="sm"
-								placeholder="Enter recipient"
-								type="text"
-								value={recipientValue}
-								onChange={(e) => handleChange(e)}
-								onKeyPress={(e) => handleKeyPress(e)}
-								className={cl`${error ? styles.error_input_container : styles.input_container}`}
-								id="inputId"
-							/>
-							<div className={styles.cross_icon}>
-								<IcMCross />
+						<div className={styles.tag_and_errorcontainer}>
+							<div className={styles.tag_container}>
+								<input
+									size="sm"
+									placeholder="Enter recipient"
+									type="text"
+									value={recipientValue}
+									onChange={(e) => handleChange(e)}
+									onKeyPress={(e) => handleKeyPress(e)}
+									className={cl`${error ? styles.error_input_container : styles.input_container}`}
+									id="inputId"
+								/>
+								<div className={styles.cross_icon}>
+									<IcMCross />
+								</div>
 							</div>
+							{(error) && (
+								<div className={styles.error_content_container}>
+									Enter valid mail
+								</div>
+							)}
 						</div>
 					)}
 					<div
