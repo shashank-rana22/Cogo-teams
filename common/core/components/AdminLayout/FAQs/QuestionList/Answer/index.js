@@ -54,10 +54,10 @@ function Answer({ topic = {}, question }) {
 	}, [getQuestionLoading]);
 
 	const apiName = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id
-		? 'update_faq_feedback'
-		: 'create_faq_feedback';
+		? '/update_faq_feedback'
+		: '/create_faq_feedback';
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading = false }, trigger] = useRequest({
 		url    : apiName,
 		method : 'post',
 	}, { manual: true });

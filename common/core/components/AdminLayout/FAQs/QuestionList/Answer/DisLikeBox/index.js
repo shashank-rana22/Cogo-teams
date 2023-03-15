@@ -1,9 +1,13 @@
-// eslint-disable-next-line import/no-unresolved
 import { Button, Checkbox } from '@cogoport/components';
 import { useForm, InputController } from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
+
+const FEEDBACK_MAPPING = {
+	true  : 'liked',
+	false : 'disliked',
+};
 
 function DisLikeBox({
 	loading,
@@ -25,10 +29,7 @@ function DisLikeBox({
 		control,
 	} = useForm();
 	console.log(checkboxA);
-	const FEEDBACK_MAPPING = {
-		true  : 'liked',
-		false : 'disliked',
-	};
+
 	const onSubmit = async (values) => {
 		setload(false);
 
