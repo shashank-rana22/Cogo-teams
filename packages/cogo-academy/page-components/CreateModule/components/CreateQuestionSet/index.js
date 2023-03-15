@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -18,6 +19,10 @@ function CreateQuestionSet() {
 			<BasicDetailsForm setQuestionSetId={setQuestionSetId} />
 
 			<AddQuestionsForm questionSetId={questionSetId} />
+
+			<div className={styles.button_container}>
+				<Button className={styles.create_button} type="button">Create</Button>
+			</div>
 		</div>
 	);
 }
