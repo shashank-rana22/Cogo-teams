@@ -39,9 +39,12 @@
 	margin-bottom: 24px;
 	padding-left: 24px;
 	width: 0;
-	@media (max-width: 770px) {
+
+	@media (max-width: 768px) {
 		grid-template-columns: 1fr;
 		place-items: center;
+		width: 100%;
+		padding-left:  0;	
 	}
 }
 
@@ -96,6 +99,12 @@
 	margin-top: 12px;
 	margin-bottom: 0;
 	margin-left: 36px;
+
+	@media (max-width: 768px) {
+		text-align: center;
+		margin-left:  0;
+	}
+
 }
 
 .question_count{
