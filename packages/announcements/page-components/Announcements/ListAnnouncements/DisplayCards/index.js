@@ -23,7 +23,7 @@ function DisplayCards({
 
 	if (loading) {
 		if (activeTab === 'active') {
-			return Array.from(Array(6)).map(() => (
+			return Array.from(Array(5)).map(() => (
 				<Placeholder
 					height="90px"
 					width="100%"

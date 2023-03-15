@@ -50,9 +50,11 @@ function AnnouncementForm({
 		</div>
 	);
 	if (listAudienceLoading || loadingForm) {
-		<div className={styles.spinner}>
-			<Spinner width="90px" height="90px" />
-		</div>;
+		return (
+			<div className={styles.spinner}>
+				<Spinner width="100px" height="100px" />
+			</div>
+		);
 	}
 	return (
 		<div className={styles.container}>
