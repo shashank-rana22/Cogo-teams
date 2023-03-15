@@ -33,8 +33,7 @@ const DISLIKE_MAPPING = {
 
 function Answer({ topic = {}, question }) {
 	const {
-		// eslint-disable-next-line no-unused-vars
-		general: { scope = '' },
+		profile: { partner = '' },
 	} = useSelector((state) => state);
 
 	const [show, setShow] = useState(false);
@@ -110,7 +109,9 @@ function Answer({ topic = {}, question }) {
 	};
 
 	const GotoFAQ = () => {
-		const href = '/v2/6fd98605-9d5d-479d-9fac-cf905d292b88/learning/faq';
+		const { id: partnerId = '' } = partner || {};
+
+		const href = `/v2/${partnerId}/learning/faq`;
 
 		// eslint-disable-next-line no-undef
 		window.open(href);
