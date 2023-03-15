@@ -3,8 +3,6 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-// import EmptyState from '../EmptyState';
-
 import Answer from './Answer';
 import EmptySearchState from './EmptySearchState';
 import Loader from './Loader';
