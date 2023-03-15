@@ -18,21 +18,20 @@ function useCreateTestQuestion() {
 		case_study  : triggerCaseStudy,
 	};
 
-	const createTestQuestion = async ({ values, questionSetId }) => {
+	const createTestQuestion = async ({ values, questionSetId, getTestQuestionTest, reset }) => {
 		const { question_type = '' } = values || {};
-
-		console.log('question_type', question_type);
 
 		const triggerToUse = TriggerMapping?.[question_type] || triggerStandAlone;
 
 		const payload = getPayload({ values, questionSetId, type: question_type });
 
-		console.log('payload', payload);
-
 		try {
 			await triggerToUse({
 				data: payload,
 			});
+
+			reset();
+			getTestQuestionTest({ questionSetId });
 		} catch (err) {
 			console.log(err);
 		}

@@ -106,6 +106,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'get_test_question_set',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'list_partners',
 			access_type  : 'private',
 			service_name : 'partner',

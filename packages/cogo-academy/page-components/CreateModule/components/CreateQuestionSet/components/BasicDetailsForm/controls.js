@@ -24,9 +24,8 @@ const getControls = () => [
 	{
 		name        : 'topic',
 		label       : 'Select Set Topic',
-		type        : 'select',
+		type        : 'input',
 		placeholder : 'Select topic name',
-		options     : [{ label: 'Shipments', value: 'shipments' }],
 		rules       : { required: 'This is required' },
 	},
 	{

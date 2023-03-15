@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
 import useCreateTestQuestion from '../../hooks/useCreateTestQuestion';
@@ -9,16 +10,16 @@ import BasicDetails from './components/BasicDetails';
 import CaseStudyForm from './components/CaseStudyForm';
 import styles from './styles.module.css';
 
-function CreateQuestion({ index, questionSetId }) {
+function CreateQuestion({ index, questionSetId, getTestQuestionTest, item, setSavedQuestionDetails, setAllKeysSaved }) {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
 
-	console.log('questionSetId', questionSetId);
+	const { isNew = true, id } = item || {};
 
 	const {
 		watch,
 		handleSubmit = () => {},
 		formState: { errors = {} },
-		// reset,
+		reset,
 		// setValue,
 		// getValues,
 		control,
@@ -28,11 +29,19 @@ function CreateQuestion({ index, questionSetId }) {
 	const { createTestQuestion } = useCreateTestQuestion();
 
 	const onsubmit = (values) => {
-		createTestQuestion({ values, questionSetId });
+		createTestQuestion({ values, questionSetId, getTestQuestionTest, reset });
 	};
 
 	const onError = (err) => {
 		console.log('err', err);
+	};
+
+	const deleteQuestion = () => {
+		if (isNew) {
+			setSavedQuestionDetails((prev) => prev.filter((item1) => item1.id !== id));
+		}
+
+		setAllKeysSaved(true);
 	};
 
 	useEffect(() => {
@@ -70,6 +79,10 @@ function CreateQuestion({ index, questionSetId }) {
 
 				<div className={styles.button_container}>
 					<Button type="submit" themeType="accent">save Question</Button>
+				</div>
+
+				<div className={styles.delete_icon}>
+					<IcMCrossInCircle onClick={() => deleteQuestion()} width={20} height={20} />
 				</div>
 			</div>
 
