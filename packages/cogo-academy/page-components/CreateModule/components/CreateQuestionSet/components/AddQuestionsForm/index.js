@@ -14,7 +14,7 @@ function AddQuestionsForm({ questionSetId }) {
 
 	console.log(setFormToShow, setSavedQuestionDetails);
 
-	if (!isEmpty(questionSetId)) {
+	if (isEmpty(questionSetId)) {
 		return null;
 	}
 

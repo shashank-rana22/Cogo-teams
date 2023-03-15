@@ -47,10 +47,10 @@ function getPayload({ values, type, questionSetId }) {
 				} = item || {};
 
 				const answers = options.map((option, index) => {
-					const { is_correct } = option || {};
+					const { is_correct, answer_text } = option || {};
 
 					return {
-						...item,
+						answer_text,
 						is_correct      : is_correct === 'true',
 						status          : 'active',
 						explanation     : [],
@@ -64,6 +64,7 @@ function getPayload({ values, type, questionSetId }) {
 			});
 
 			return {
+				test_question_set_id: questionSetId,
 				audience_ids,
 				question_text,
 				topic,
