@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import DisplayAttachment from './DispalyAttachment';
+import DisplayAttachment from './DisplayAttachment';
 import styles from './styles.module.css';
 import useUpdateAnnouncement from './useUpdateAttachment';
 
@@ -11,7 +11,12 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 	const pdf = data?.announcement_attachments?.pdf || '';
 	const video = data?.announcement_attachments?.video || '';
 
-	const { deleteAttachment, editAttachment, addAttachment } = useUpdateAnnouncement({ refetch, announcement_id });
+	const {
+		deleteAttachment,
+		editAttachment,
+		addAttachment,
+		openDocument,
+	} = useUpdateAnnouncement({ refetch, announcement_id });
 
 	// console.log('data:::', data);
 	const displayBoxes = (item) => (
@@ -25,6 +30,7 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 					deleteAttachment={deleteAttachment}
 					editAttachment={editAttachment}
 					addAttachment={addAttachment}
+					openDocument={openDocument}
 					name="image"
 				/>
 				<DisplayAttachment
@@ -35,6 +41,7 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 					deleteAttachment={deleteAttachment}
 					editAttachment={editAttachment}
 					addAttachment={addAttachment}
+					openDocument={openDocument}
 					name="pdf"
 				/>
 				<DisplayAttachment
@@ -45,6 +52,7 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 					deleteAttachment={deleteAttachment}
 					editAttachment={editAttachment}
 					addAttachment={addAttachment}
+					openDocument={openDocument}
 					name="video"
 				/>
 				{image || pdf || video ? null : <div className={styles.nodisplay}>No Attachments to Display...</div>}

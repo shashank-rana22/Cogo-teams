@@ -5,6 +5,7 @@ import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import AddModal from './AddModal';
 import { getElementController } from './getElementController';
 import styles from './styles.module.css';
 
@@ -16,6 +17,7 @@ function DisplayAttachment(
 		deleteAttachment = () => {},
 		editAttachment = () => {},
 		addAttachment = () => {},
+		openDocument = () => {},
 		announcement_id,
 		isValid,
 	},
@@ -23,66 +25,87 @@ function DisplayAttachment(
 	const [showDeleteModal, setShowDeleteModal] = useState(null);
 	const [showEditModal, setShowEditModal] = useState(null);
 	const [showAddModal, setShowAddModal] = useState(null);
-	const openDocument = (url) => {
-		let modifiedUrl = `https://${url}`;
-		if (url?.includes('http://') || url?.includes('https://')) {
-			modifiedUrl = url;
-		}
-		window.open(modifiedUrl, '_blank');
-	};
-	const { control, setValue, handleSubmit, watch } = useForm();
+
+	const { control, setValue, handleSubmit, formState:{ errors }, watch } = useForm();
 
 	const fa = watch();
-	// console.log('watch', fa);
-
-	console.log('data', data);
-	const renderEditModal = (value) => {
-		const Element = getElementController(value?.document_type);
-
-		return (
-			<div>
-				<Element
-					key={value?.id}
-					name={value?.document_type}
-					control={control}
-					placeholder="Enter Video URL"
-					accept={value?.document_type === 'image' ? '.png, .jpeg' : '.pdf'}
-				/>
-			</div>
-		);
+	const URL_ERROR_MAPPING = {
+		pdf   : errors?.pdf?.message,
+		image : errors?.image?.message,
+		video : errors?.video?.message,
 	};
-	const renderAddModal = (value) => {
-		const Element = getElementController(value);
 
-		return (
-			<div>
-				<Element
-					name={value}
-					control={control}
-					placeholder="Enter Video URL"
-					accept={value === 'image' ? '.png, .jpeg' : '.pdf'}
-				/>
-			</div>
-		);
-	};
 	const URL_MAPPING = {
 		pdf   : fa?.pdf,
 		image : fa?.image,
 		video : fa?.video,
 	};
 
-	const addFunction = (type) => {
-		const url = URL_MAPPING[type];
-		console.log(type);
-		addAttachment(announcement_id, url, type, index);
+	const renderEditModal = (value) => {
+		const Element = getElementController(value?.document_type);
+		console.log(value);
+		return (
+			<div>
+				{value?.document_type === 'video'
+					? (
+						<>
+							<Element
+								key={value?.id}
+								name={value?.document_type}
+								control={control}
+								value={value?.document_url}
+								placeholder="Enter Video URL"
+								accept={value?.document_type === 'image' ? '.png, .jpeg' : '.pdf'}
+							/>
+							{console.log(errors)}
+							{URL_ERROR_MAPPING[value?.document_type] && (
+								<div className={styles.errors}>
+									{URL_ERROR_MAPPING[value?.document_type]}
+									<span>*</span>
+								</div>
+							)}
+						</>
+					)
+					:	(
+						<>
+							<Element
+								key={value?.id}
+								name={value?.document_type}
+								control={control}
+								defaultValues={value?.document_url}
+								accept={value?.document_type === 'image' ? '.png, .jpeg' : '.pdf'}
+							/>
+							{console.log(errors)}
+							{URL_ERROR_MAPPING[value?.document_type] && (
+								<div className={styles.errors}>
+									{URL_ERROR_MAPPING[value?.document_type]}
+									<span>*</span>
+								</div>
+							)}
+						</>
+					)}
+			</div>
+		);
+	};
+
+	const addFunction = () => {
+		const url = URL_MAPPING[name];
+		addAttachment(announcement_id, url, name, index);
 		setShowAddModal(null);
 	};
 
-	const editFunction = (values, type) => {
-		const url = URL_MAPPING[type];
-		editAttachment(values, url, index);
+	const editFunction = () => {
+		const url = URL_MAPPING[name];
+		console.log('data', fa);
+		editAttachment(showEditModal, url, index);
 		setShowEditModal(null);
 	};
+
+	const deleteFunction = (id) => {
+		deleteAttachment(id, index);
+		setShowDeleteModal(null);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -91,11 +114,11 @@ function DisplayAttachment(
 					{name}
 				</div>
 
-				{isValid !== -1 && (
+				{isValid!==-1 && (
 					<Button size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
-						Add
-						{' '}
-						{name}
+					Add
+					{' '}
+					{name}
 					</Button>
 				)}
 			</div>
@@ -104,7 +127,6 @@ function DisplayAttachment(
 					? data.map((item) => (
 						<div className={styles.data_container}>
 							<div className={styles.data_display}>
-								{/* <span className={styles.name}>Name :&nbsp;</span> */}
 								<span className={styles.name_data}>{item?.document_url}</span>
 							</div>
 
@@ -117,24 +139,24 @@ function DisplayAttachment(
 								>
 									View
 								</Button>
-								{isValid !== -1 && (
-									<>
-										<Button
-											themeType="secondary"
-											size="sm"
-											style={{ marginRight: 8 }}
-											onClick={() => setShowEditModal(item)}
-										>
-											Edit
-										</Button>
-										<IcMDelete
-											height={20}
-											width={20}
-											style={{ cursor: 'pointer' }}
-											onClick={() => setShowDeleteModal(item)}
-										/>
-									</>
-								)}
+							{isValid!==-1 && (
+								<>
+									<Button
+									themeType="secondary"
+									size="sm"
+									style={{ marginRight: 8 }}
+									onClick={() => setShowEditModal(item)}
+								>
+									Edit
+								</Button>
+								<IcMDelete
+									height={20}
+									width={20}
+									style={{ cursor: 'pointer' }}
+									onClick={() => setShowDeleteModal(item)}
+								/>
+								</>
+							)}
 							</div>
 
 						</div>
@@ -149,7 +171,7 @@ function DisplayAttachment(
 						placement="center"
 						onClose={() => setShowDeleteModal(null)}
 					>
-						<Modal.Header title="Are you sure to Delete this announcement" />
+						<Modal.Header title="Are you sure you want to Delete this announcement" />
 						<Modal.Footer>
 							<div className={styles.delete_buttons}>
 								<Button
@@ -163,7 +185,7 @@ function DisplayAttachment(
 								<Button
 									themeType="primary"
 									size="md"
-									onClick={() => deleteAttachment(showDeleteModal?.id, index)}
+									onClick={() => deleteFunction(showDeleteModal?.id)}
 								>
 									Delete
 								</Button>
@@ -172,7 +194,7 @@ function DisplayAttachment(
 					</Modal>
 				)}
 
-				{!isEmpty(showEditModal) && (
+				{!isEmpty(showEditModal) ? (
 					<Modal
 						show={showEditModal}
 						scroll={false}
@@ -180,7 +202,7 @@ function DisplayAttachment(
 						placement="center"
 						onClose={() => setShowEditModal(null)}
 					>
-						<Modal.Header title="Are you sure to Edit this announcement" />
+						<Modal.Header title="Are you sure you want to Edit this announcement" />
 						<Modal.Body>
 							{renderEditModal(showEditModal)}
 						</Modal.Body>
@@ -197,47 +219,28 @@ function DisplayAttachment(
 								<Button
 									themeType="primary"
 									size="md"
-									onClick={() => editFunction(showEditModal, showEditModal?.document_type)}
+									onClick={handleSubmit(editFunction)}
 								>
 									Update
 								</Button>
 							</div>
 						</Modal.Footer>
 					</Modal>
-				)}
-				{!isEmpty(showAddModal) && (
-					<Modal
-						show={showAddModal}
-						scroll={false}
-						size="md"
-						placement="center"
-						onClose={() => setShowAddModal(null)}
-					>
-						<Modal.Header title="Are you sure to Add this announcement" />
-						<Modal.Body>
-							{renderAddModal(showAddModal)}
-						</Modal.Body>
-						<Modal.Footer>
-							<div className={styles.delete_buttons}>
-								<Button
-									themeType="secondary"
-									size="md"
-									onClick={() => setShowAddModal(null)}
-									style={{ marginRight: '20px' }}
-								>
-									Cancel
-								</Button>
-								<Button
-									themeType="primary"
-									size="md"
-									onClick={() => addFunction(showAddModal)}
-								>
-									Add
-								</Button>
-							</div>
-						</Modal.Footer>
-					</Modal>
-				)}
+				) : null}
+
+				{!isEmpty(showAddModal) ? (
+					<AddModal
+						setShowAddModal={setShowAddModal}
+						showAddModal={showAddModal}
+						setValue={setValue}
+						control={control}
+						errors={errors}
+						addFunction={addFunction}
+						handleSubmit={handleSubmit}
+					/>
+				)
+					: null}
+
 			</div>
 		</div>
 	);

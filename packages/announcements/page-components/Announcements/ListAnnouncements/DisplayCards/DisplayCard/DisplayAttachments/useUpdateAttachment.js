@@ -17,39 +17,6 @@ const useUpdateAnnouncement = ({
 		url    : '/create_announcement_attachment',
 	}, { manual: true });
 
-	// useEffect(() => {
-	// 	(async () => {
-	// 		if (id) {
-	// 			try {
-	// 				const res = await trigger({
-	// 					params: { id },
-	// 				});
-	// 				setDisabled(true);
-
-	// 				setDefaultValues(res?.data);
-	// 			} catch (err) {
-	// 				// Toast.error(err?.message);
-	// 				console.log(err?.message);
-	// 			}
-	// 		}
-	// 	})();
-	// }, []);
-
-	// useEffect(() => {
-	// 	(async () => {
-	// 		if (currentAnnouncement?.id) {
-	// 			try {
-	// 				const res = await trigger({
-	// 					params: { id: currentAnnouncement?.id },
-	// 				});
-	// 				setAnnouncementDetails(res?.data);
-	// 			} catch (err) {
-	// 				Toast.error(err?.data);
-	// 			}
-	// 		}
-	// 	})();
-	// }, [currentAnnouncement]);
-
 	const addAttachment = async (id, url, type, index) => {
 		try {
 			const response = await triggerAdd(
@@ -121,13 +88,21 @@ const useUpdateAnnouncement = ({
 			// console.log('Error', error);
 		}
 	};
-
+	const openDocument = (url) => {
+		let modifiedUrl = `https://${url}`;
+		if (url?.includes('http://') || url?.includes('https://')) {
+			modifiedUrl = url;
+		}
+		// eslint-disable-next-line no-undef
+		window.open(modifiedUrl, '_blank');
+	};
 	return {
 
 		deleteAttachment,
 		editAttachment,
 		addAttachment,
 		loading,
+		openDocument,
 	};
 };
 

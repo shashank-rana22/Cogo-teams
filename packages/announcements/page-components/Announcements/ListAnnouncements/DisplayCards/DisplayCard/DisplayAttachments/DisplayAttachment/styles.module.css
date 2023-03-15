@@ -80,6 +80,11 @@
     display: flex;
 }
 
+.errors {
+	font-size: 12px;
+	color: var(--color-primary-error-red-1);
+    padding-left: 10px;
+}
 .nodisplay{
     color: #4f4f4f;
     opacity: 0.9;
