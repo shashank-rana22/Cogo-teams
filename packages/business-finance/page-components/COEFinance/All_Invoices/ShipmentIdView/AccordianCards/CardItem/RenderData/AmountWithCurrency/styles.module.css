@@ -32,3 +32,6 @@
 	background: #fffaeb;
 }
 
+.amount_value{
+	min-width: 80px;
+}

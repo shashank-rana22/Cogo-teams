@@ -47,7 +47,10 @@ function AmountWithCurrency({ item, field }: PropsType) {
 			<div className={styles.text}>
 				{field.key === 'grandTotal' && (
 					<div className={styles.size}>
-						<text>{showOverflowingNumber(formatAmount, 12)}</text>
+						<div className={styles.amount_value}>
+							{' '}
+							{showOverflowingNumber(formatAmount, 12)}
+						</div>
 						<Tooltip placement="top" content={content}>
 							<div className={styles.ic_min_icon}>
 								<IcMInfo width="16px" height="16px" />
