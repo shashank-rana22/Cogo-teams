@@ -32,8 +32,9 @@ function NewWhatsappMessage({
 			Toast.error('Please enter mobile number');
 			return;
 		}
+
 		const { template_name } = args;
-		sendUserWhatsappTemplate({ country_code, whatsapp_number: number, template_name });
+		sendUserWhatsappTemplate({ country_code: country_code.slice(1), whatsapp_number: number, template_name });
 	};
 	const data = {
 		sendCommunicationTemplate : sendWhatsappCommunication,

@@ -42,7 +42,7 @@ function MessageConversations({
 
 }) {
 	const messageRef = useRef();
-	const { id = '', channel_type = '' } = activeMessageCard;
+	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
 
 	const {
 		emojisList = {},
@@ -146,6 +146,18 @@ function MessageConversations({
 
 	);
 
+	const countUnreadMessages = () => {
+		const messsageLength = messagesData.length;
+		// let unread = 0;
+		// if (new_user_message_count > messsageLength) {
+		// 	unread = 0;
+		// } else {
+		// 	unread = messsageLength - new_user_message_count;
+		// }
+		const unread = new_user_message_count > messsageLength ? 0 : messsageLength - new_user_message_count;
+		return unread;
+	};
+	const unread = countUnreadMessages();
 	const messageConversation = (
 		<>
 			{loadingPrevMessages
@@ -160,7 +172,7 @@ function MessageConversations({
 						)}
 					</div>
 				)}
-			{(messagesData || []).map((eachMessage) => (
+			{(messagesData || []).map((eachMessage, index) => (
 				eachMessage?.conversation_type !== 'received' ? (
 					<ReceiveDiv
 						key={eachMessage?.created_at}
@@ -172,6 +184,7 @@ function MessageConversations({
 						key={eachMessage?.created_at}
 						eachMessage={eachMessage}
 						activeMessageCard={activeMessageCard}
+						messageStatus={channel_type === 'platform_chat' && !(index >= unread)}
 					/>
 				)
 			))}
