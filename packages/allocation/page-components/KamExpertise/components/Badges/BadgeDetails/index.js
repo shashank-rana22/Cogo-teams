@@ -4,7 +4,6 @@ import Header from './Header';
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
-// Todo:- pass props from parents
 function BadgeDetails(props) {
 	const {
 		badgeList, setToggleScreen, searchValue, setSearchValue,
@@ -17,7 +16,7 @@ function BadgeDetails(props) {
 	return (
 		<div>
 			<Header
-				badgeList={badgeList.length}
+				badgeLength={badgeList.length}
 				setToggleScreen={setToggleScreen}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
