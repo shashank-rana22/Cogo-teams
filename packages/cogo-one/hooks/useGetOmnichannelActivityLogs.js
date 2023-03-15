@@ -8,6 +8,7 @@ const useGetOmnichannelActivityLogs = ({
 	customerId,
 	user_id = null,
 	lead_user_id = null,
+	activeSubTab = '',
 }) => {
 	const [pagination, setPagination] = useState(1);
 
@@ -41,11 +42,12 @@ const useGetOmnichannelActivityLogs = ({
 	};
 
 	useEffect(() => {
-		if (user_id || lead_user_id) {
+		if ((user_id || lead_user_id)
+		&& (activeSubTab === 'channels')) {
 			fetchActivityLogs();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activityTab, customerId, pagination]);
+	}, [activityTab, customerId, pagination, activeSubTab]);
 
 	return {
 		data,

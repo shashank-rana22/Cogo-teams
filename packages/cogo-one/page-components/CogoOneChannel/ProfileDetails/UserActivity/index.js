@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Tabs, TabPanel, Popover, Pagination } from '@cogoport/components';
 import { IcMFdollar, IcMFilter, IcMCampaignTool, IcMPlatformDemo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -7,6 +8,7 @@ import EmptyState from '../../../../common/EmptyState';
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
 import USER_ACTIVITY_COMPONENT_MAPPING from '../../../../constants/USER_ACTIVITY_MAPPING';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
+import useListTimeLine from '../../../../hooks/useListTimeline';
 
 import Filters from './Filters';
 import LoadingState from './LoadingState';
@@ -16,14 +18,15 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 	const [activityTab, setActivityTab] = useState('transactional');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState([]);
+	const [activeSubTab, setActiveSubTab] = useState('channels');
 
-	const { user_id:messageUserId, lead_user_id:messageLeadUserId = null } = formattedMessageData || {};
+	const { user_id:messageUserId, lead_user_id:messageLeadUserId = null, id = '' } = formattedMessageData || {};
 
 	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
 
 	const user_id = activeTab === 'message' ? messageUserId : voiceCallUserId;
 	const lead_user_id = activeTab === 'message' ? messageLeadUserId : null;
-	const ActiveComp = USER_ACTIVITY_COMPONENT_MAPPING[activityTab] || null;
+	const ActiveComp = USER_ACTIVITY_COMPONENT_MAPPING(activityTab, activeSubTab) || null;
 
 	const {
 		loading = false,
@@ -39,9 +42,23 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		user_id,
 		lead_user_id,
 		activityTab,
+		activeSubTab,
 	});
 
+	const {
+		loading: timeLineLoading = false,
+		data: timeLineData = {},
+		page,
+		setPage = () => {},
+	} = useListTimeLine({
+		activeSubTab,
+		id,
+		user_id,
+		lead_user_id,
+	});
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
+
+	const { list: timeLineList = [], total_count: count } = timeLineData || {};
 
 	let list = [];
 	let total_count;
@@ -69,9 +86,22 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 
 	useEffect(() => {
 		setFilters([]);
+		setActiveSubTab('channels');
 		setPagination(1);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		setPage(1);
 	}, [activityTab]);
+
+	useEffect(() => {
+		setPage(1);
+	}, [activeSubTab]);
+
+	const pageChange = (value) => {
+		if (activeSubTab === 'agent') {
+			setPage(value);
+		} else {
+			setPagination(value);
+		}
+	};
 
 	const emptyCheck = (!user_id && !lead_user_id) || isEmpty(list);
 
@@ -89,6 +119,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 						communication={communication}
 						platform={platform}
 						transactional={transactional}
+						timeLineList={timeLineList}
 					/>
 				)}
 			</div>
@@ -113,51 +144,67 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 				</Tabs>
 			</div>
 
-			<div className={styles.filters_container}>
-				<div className={styles.title}>
-					{USER_ACTIVITY_MAPPING[activityTab]}
+			{(activeTab === 'message' && activityTab === 'communication') && (
+				<div className={styles.communication_options}>
+					<Tabs
+						activeSubTab={activeSubTab}
+						themeType="secondary"
+						onChange={setActiveSubTab}
+						fullWidth={false}
+					>
+						<TabPanel name="channels" title="Channels" />
+						<TabPanel name="agent" title="Agents" />
+					</Tabs>
 				</div>
+			)}
 
-				{activityTab !== 'platform' && (
-					<div className={styles.filter_icon}>
-						<Popover
-							placement="left"
-							render={(
-								<Filters
-									setFilterVisible={setFilterVisible}
-									activityTab={activityTab}
-									filters={filters}
-									setFilters={setFilters}
-									handleFilters={handleFilters}
-									handleReset={handleReset}
-								/>
-							)}
-							visible={filterVisible}
-							onClickOutside={() => setFilterVisible(false)}
-						>
-
-							<IcMFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
-						</Popover>
-						{!isEmpty(filters) && <div className={styles.filters_applied} />}
+			{activeSubTab !== 'agent' && (
+				<div className={styles.filters_container}>
+					<div className={styles.title}>
+						{USER_ACTIVITY_MAPPING[activityTab]}
 					</div>
-				)}
 
-			</div>
-			{loading ? (
+					{activityTab !== 'platform' && (
+						<div className={styles.filter_icon}>
+							<Popover
+								placement="left"
+								render={(
+									<Filters
+										setFilterVisible={setFilterVisible}
+										activityTab={activityTab}
+										filters={filters}
+										setFilters={setFilters}
+										handleFilters={handleFilters}
+										handleReset={handleReset}
+									/>
+								)}
+								visible={filterVisible}
+								onClickOutside={() => setFilterVisible(false)}
+							>
+
+								<IcMFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
+							</Popover>
+							{!isEmpty(filters) && <div className={styles.filters_applied} />}
+						</div>
+					)}
+
+				</div>
+			)}
+			{(loading || timeLineLoading) ? (
 				<LoadingState activityTab={activityTab} />
 			) : (
 				<ShowData />
 
 			)}
 
-			{!loading && (
+			{(!loading || !timeLineLoading) && (
 				<div className={styles.pagination}>
 					<Pagination
 						type="page"
-						currentPage={pagination}
-						totalItems={total_count}
+						currentPage={activeSubTab === 'agent' ? page : pagination}
+						totalItems={activeSubTab === 'agent' ? count : total_count}
 						pageSize={10}
-						onPageChange={(val) => setPagination(val)}
+						onPageChange={(val) => pageChange(val)}
 					/>
 				</div>
 			)}
