@@ -1,3 +1,11 @@
 .container{
-    background-color: #fff;
+
+    & > div{
+        margin-bottom: 22px;
+    }
+}
+
+.extra_details{
+    display: flex;
+	width: 100%;
 }
