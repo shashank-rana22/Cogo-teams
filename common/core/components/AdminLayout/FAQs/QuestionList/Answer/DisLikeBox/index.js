@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function DisLikeBox({
-	api,
+	loading,
 	trigger,
 	setIsLiked,
 	is_positive,
@@ -16,6 +16,8 @@ function DisLikeBox({
 	checkboxQ,
 	data = {},
 	setShow = () => {},
+	setload = () => {},
+	fetch = () => {},
 }) {
 	const {
 		handleSubmit,
@@ -28,6 +30,8 @@ function DisLikeBox({
 		false : 'disliked',
 	};
 	const onSubmit = async (values) => {
+		setload(false);
+
 		let remark = values?.remark;
 		if (checkboxA) {
 			remark = `Answer not satisfactory. ${remark}`;
@@ -131,7 +135,7 @@ function DisLikeBox({
 						color      : '#ffffff',
 						border     : '1px solid #ee3425',
 					}}
-					loading={api?.loading}
+					loading={loading}
 				>
 					Submit
 				</Button>

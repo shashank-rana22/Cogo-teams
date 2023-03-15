@@ -39,28 +39,32 @@ function Answer({ topic = {}, question }) {
 	const [show, setShow] = useState(false);
 	const [checkboxQ, setCheckboxQ] = useState(false);
 	const [checkboxA, setCheckboxA] = useState(false);
+	const [load, setload] = useState(true);
 
-	const api = useAnswer({ question });
+	const { data: answerData, loading: getQuestionLoading, fetch } = useAnswer({ question });
 
-	const answer = api?.data?.answers?.[0]?.answer;
-	const is_positive = api?.data?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
+	const answer = answerData?.answers?.[0]?.answer;
+	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
 
 	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING[is_positive] || '');
+
 	useEffect(() => {
 		setIsLiked(FEEDBACK_MAPPING[is_positive] || '');
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [api?.loading]);
+	}, [getQuestionLoading]);
 
-	const apiName = api?.data?.answers?.[0]?.faq_feedbacks?.[0]?.id
+	const apiName = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id
 		? 'update_faq_feedback'
 		: 'create_faq_feedback';
 
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : apiName,
 		method : 'post',
 	}, { manual: true });
 
 	const onClickLikeButton = async ({ id }) => {
+		setload(false);
+
 		let payload = {
 			faq_answer_id : id,
 			is_positive   : true,
@@ -68,12 +72,12 @@ function Answer({ topic = {}, question }) {
 		};
 		if (isLiked === 'liked') {
 			payload = {
-				id     : api?.data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+				id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
 				status : 'inactive',
 			};
 		} else if (isLiked === 'disliked') {
 			payload = {
-				id          : api?.data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+				id          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
 				is_positive : true,
 				status      : 'active',
 			};
@@ -92,11 +96,12 @@ function Answer({ topic = {}, question }) {
 	};
 
 	const onClickRemoveDisLike = async () => {
-		// setload(false);
+		setload(false);
+
 		try {
 			await trigger({
 				data: {
-					id     : api?.data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+					id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
 					status : 'inactive',
 				},
 			});
@@ -123,7 +128,7 @@ function Answer({ topic = {}, question }) {
 				<div className={styles.module_text}>
 					Topic:
 					{' '}
-					{startCase(topic.display_name) || api?.data?.faq_topics?.[0]?.display_name}
+					{startCase(topic.display_name) || answerData?.faq_topics?.[0]?.display_name}
 				</div>
 
 				<div>
@@ -133,14 +138,12 @@ function Answer({ topic = {}, question }) {
 					</div>
 				</div>
 
-				{loading ? (
+				{getQuestionLoading && load ? (
 					<Loader />
 				) : (
 					<>
 						<div className={styles.no_of_people_like_it} style={{ marginBottom: 24 }}>
-							{api?.data?.faq_topics?.[0]?.view_count
-								? api?.data?.faq_topics?.[0]?.view_count
-								: '0'}
+							{answerData?.view_count || '0'}
 							{' '}
 							people viewed this question
 						</div>
@@ -150,8 +153,8 @@ function Answer({ topic = {}, question }) {
 						</div>
 
 						<div className={styles.no_of_people_like_it} style={{ marginTop: 24 }}>
-							{api?.data?.answers?.[0]?.upvote_count
-								? api?.data?.answers?.[0]?.upvote_count
+							{answerData?.answers?.[0]?.upvote_count
+								? answerData?.answers?.[0]?.upvote_count
 								: '0'}
 							{' '}
 							people liked this answer
@@ -170,7 +173,7 @@ function Answer({ topic = {}, question }) {
 						className={styles.emoji_like}
 						role="presentation"
 						onClick={() => {
-							onClickLikeButton({ id: data?.answers?.[0]?.id });
+							onClickLikeButton({ id: answerData?.answers?.[0]?.id });
 						}}
 						style={{ marginLeft: 8, cursor: 'pointer' }}
 					>
@@ -197,8 +200,8 @@ function Answer({ topic = {}, question }) {
 				{show ? (
 					<DisLikeBox
 						setShow={setShow}
-						data={api?.data}
-						api={api}
+						data={answerData}
+						loading={loading}
 						trigger={trigger}
 						setIsLiked={setIsLiked}
 						is_positive={is_positive}
@@ -206,6 +209,8 @@ function Answer({ topic = {}, question }) {
 						setCheckboxQ={setCheckboxQ}
 						checkboxA={checkboxA}
 						checkboxQ={checkboxQ}
+						setload={setload}
+						fetch={fetch}
 					/>
 				) : null}
 

@@ -28,8 +28,8 @@ const useAnswer = ({ question }) => {
 	}, []);
 
 	return {
-		data    : data || {},
-		loading : loading || false,
+		data,
+		loading,
 		fetch,
 	};
 };
