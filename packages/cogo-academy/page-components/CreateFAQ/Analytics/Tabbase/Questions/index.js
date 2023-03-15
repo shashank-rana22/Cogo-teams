@@ -14,7 +14,8 @@ function Questions() {
 	return (
 		<div>
 			<Filter selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
-			{selectedItem === 'All_Questions' ? <AllQuestionCardView {...props?.data} /> : <AllTopicCardView />}
+			{selectedItem === 'All_Questions' ? <AllQuestionCardView {...props?.data} />
+				: <AllTopicCardView />}
 		</div>
 
 	);
