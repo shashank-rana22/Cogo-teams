@@ -2,6 +2,7 @@ import { Button, Checkbox } from '@cogoport/components';
 import { saveAs } from 'file-saver';
 import * as htmlToImage from 'html-to-image';
 import React, { createRef, useState, ReactFragment } from 'react';
+import { useScreenshot } from 'use-react-screenshot';
 
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
@@ -73,12 +74,14 @@ function GenerateMawb({
 		}
 	};
 
-	const takeScreenShot = async (node) => {
+	const [, takeScreenShot] = useScreenshot();
+
+	const takeImageScreenShot = async (node) => {
 		const dataURI = await htmlToImage.toJpeg(node);
 		return dataURI;
 	};
 
-	const downloadScreenshot = () => takeScreenShot(document.getElementById('mawb'));
+	const downloadScreenshot = () => takeImageScreenShot(document.getElementById('mawb'));
 
 	const handleSave = async () => {
 		const newImage = await downloadScreenshot();
@@ -138,7 +141,7 @@ function GenerateMawb({
 			});
 			await a.map((i) => i());
 		} else {
-			const newImage = await takeScreenShot(document.getElementById('mawb'));
+			const newImage = await takeImageScreenShot(document.getElementById('mawb'));
 			saveAs(newImage, 'ORIGINAL 1 (FOR ISSUING CARRIER)');
 		}
 		setSaveDocument(false);
