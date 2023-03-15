@@ -17,7 +17,7 @@ function useListFaqTopic() {
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'faq/list_faq_topics',
+		url    : '/list_faq_topics',
 	}, { manual: true });
 
 	const roleFunction = !isEmpty(role_functions) ? role_functions : undefined;
