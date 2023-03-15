@@ -1,8 +1,8 @@
-import List from './components/List'
+// import List from './components/List'
 function TimelineAndTask() {
 	return (
 		<div>
-			<List />
+			Timenline and tasks
 		</div>
 	);
 }
