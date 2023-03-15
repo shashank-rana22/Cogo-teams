@@ -12,8 +12,6 @@ function KamLevelDropDown({ refetch, transition_level }) {
 
 	const { listkamLevelDetails, listrefetch, listLoading } = useKamExpertiseLevelConfig({ transition_level });
 
-	console.log('listkamLevelDetails', listkamLevelDetails);
-
 	const { formProps, onSave } = useUpdateKamScores({
 		transition_level,
 		listrefetch,
@@ -21,9 +19,7 @@ function KamLevelDropDown({ refetch, transition_level }) {
 		refetch,
 		listkamLevelDetails,
 	});
-	const { control, handleSubmit, watch } = formProps;
-
-	console.log('watch', watch());
+	const { control, handleSubmit } = formProps;
 
 	return (
 		<div className={styles.child}>

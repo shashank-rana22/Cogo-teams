@@ -8,7 +8,6 @@
   padding: 36px 0;
   font-weight: 700;
   font-size: 18px;
-  line-height: 150%;
   width: 20%;
 }
 .row_level_end {
@@ -23,7 +22,6 @@
 .supporting_text {
   font-weight: 500;
   font-size: 14px;
-  line-height: 150%;
   align-items: center;
   color: #4f4f4f;
   margin:10px 0 10px 0;
@@ -36,7 +34,6 @@
 .current_value {
   font-weight: 400;
   font-size: 12px;
-  line-height: 150%;
   margin:10px 0 0 5px;
 }
 .delete_button{

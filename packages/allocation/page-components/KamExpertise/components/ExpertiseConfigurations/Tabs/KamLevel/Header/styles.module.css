@@ -21,14 +21,10 @@
   margin-top: 8px;
   font-weight: 400;
   font-size: 14px;
-  line-height: 21px;
-  align-items: center;
 }
 .draft_name {
   font-weight: 400;
   font-size: 18px;
-  line-height: 27px;
   display: flex;
   align-items: center;
-  
 }
