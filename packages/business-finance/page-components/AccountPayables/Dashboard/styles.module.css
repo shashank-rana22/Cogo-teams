@@ -1,0 +1,60 @@
+.container{
+    padding-top: 10px;
+}
+.sub_container{
+   display: flex;
+   justify-content: space-between;
+}
+.box{
+    border-radius: 8px;
+    background: #FFFFFF;
+    padding: 20px;
+    padding-top: 28px;
+}
+.label_text{
+    font-weight: 600;
+    font-size: 14px;
+    color: #333333;
+
+}
+.value_text{
+    font-size: 22px;
+    font-weight: 700;
+    color: #333333;
+    line-height: 18px;
+    margin-left: 8px;
+}
+.vr{
+    width: 2px;
+    height: 50px;
+    background: #ED3726;
+    border-radius: 10px;
+    margin-left: 16px;
+    margin-right: 4px;
+    margin-top: -16px;
+    margin-bottom: -18px;
+}
+.account_payables{
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    margin-top: -10px;
+}
+.invoices_org{
+    font-weight: 500;
+    font-size: 12px;
+    color: #979797;
+}
+.percentage_text{
+    font-weight: 400;
+    font-size: 12px;    
+    display: flex;
+    align-items: center;
+    color: #333333
+}
+.profit_icon {
+	color: #34c759;
+	transform: translate(10px, 2px) rotate(-45deg);
+    margin-right: 12px;
+    margin-left: -8px;
+}
