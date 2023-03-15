@@ -14,8 +14,6 @@ function Layout({ children, layout }) {
 
 	const { role_functions = [] } = auth_role_data || {};
 
-	console.log('role_functions', role_functions);
-
 	if (hideLayout) {
 		return <div>{children}</div>;
 	}
