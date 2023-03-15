@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Pagination, Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -66,7 +65,7 @@ function TopicList() {
 				<div className={styles.popular_topics}>Popular Topics</div>
 				<div className={styles.display_topics}>
 					{(list || []).map((item) => (
-						<div onClick={() => setTopic(item)} className={styles.square_div}>
+						<div role="presentation" onClick={() => setTopic(item)} className={styles.square_div}>
 							<div className={styles.icon_grid}>
 								{renderIcon({ item })}
 								<div className={styles.display_name_and_topic}>
