@@ -33,6 +33,7 @@ function useSendCommunicationTemplate({
 			otherChannelRecipient = '',
 			variables = {},
 			type = '',
+			...restArgs
 		},
 	) => {
 		let service = 'user';
@@ -59,6 +60,7 @@ function useSendCommunicationTemplate({
 					variables:
 					type === 'email' ? variables : { user_first_name: user_name?.split(' ')[0] || 'User' },
 					sender_user_id: id,
+					...(restArgs || {}),
 
 				},
 			});

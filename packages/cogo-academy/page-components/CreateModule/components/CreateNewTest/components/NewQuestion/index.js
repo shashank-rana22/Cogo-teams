@@ -121,7 +121,7 @@ function NewQuestion() {
 	return (
 		<div>
 			<Breadcrumb>
-				<Breadcrumb.Item label="Add Questions to test" />
+				<Breadcrumb.Item label="Add Questions to test" className={styles.breadcrumb_item} />
 				<Breadcrumb.Item label="New Questions" />
 			</Breadcrumb>
 			<div className={styles.filter}>

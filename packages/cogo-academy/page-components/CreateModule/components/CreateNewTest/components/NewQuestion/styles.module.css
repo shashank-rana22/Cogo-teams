@@ -64,3 +64,9 @@
 	margin-right: -15px;
 	margin-left: 12px;
 }
+
+.breadcrumb_item {
+	font-size: 16px;
+	font-weight: 600;
+	color: #6fa5ab;
+}
