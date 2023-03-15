@@ -1,9 +1,9 @@
 import { Collapse } from '@cogoport/components';
-// import { isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import EmptyState from '../../../../../../common/EmptyState';
-import useKamExpertiseConfig from '../../../../hooks/useKamExpertiseConfig';
+import EmptyState from '../../../../../../common/EmptyState';
+import useGetKamExpertiseConfig from '../../../../hooks/useGetKamExpertiseConfig';
 
 import Header from './Header';
 import KamLevelCard from './KamLevelCard';
@@ -13,7 +13,7 @@ import ResponseCard from './ResponseCard';
 import styles from './styles.module.css';
 
 function KamLevel() {
-	const { kamConfigDetails, levelLoading, refetch } = useKamExpertiseConfig();
+	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig();
 
 	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
@@ -49,7 +49,7 @@ function KamLevel() {
 				audit_data={audit_data}
 				levelLoading={levelLoading}
 			/>
-			{/* {isEmpty(kamConfigLevelDetails) ? (<EmptyState />) : (null)} */}
+			{isEmpty(kamConfigLevelDetails) && !levelLoading ? (<EmptyState />) : (null)}
 			{!levelLoading ? (
 				<>
 					<Collapse
