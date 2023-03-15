@@ -62,7 +62,7 @@ const HEADING_MAPPING = {
 };
 
 function ConfigurationCard(props) {
-	const { version, last_edit_by, last_modified, status } = props;
+	const { version, last_edit_by, last_modified, status, handleClick } = props;
 
 	return (
 		<div className={styles.card_container}>
@@ -83,7 +83,7 @@ function ConfigurationCard(props) {
 					</div>
 				</div>
 
-				<Button themeType="secondary">Edit</Button>
+				<Button onClick={handleClick} themeType="secondary">Edit</Button>
 			</div>
 
 			<div className={styles.cards}>

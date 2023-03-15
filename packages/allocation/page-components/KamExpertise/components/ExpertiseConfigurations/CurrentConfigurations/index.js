@@ -19,14 +19,17 @@ const VERSION_CARDS = [
 	},
 ];
 
-function CurrentConfigurations() {
+function CurrentConfigurations({ handleClick = () => {} }) {
 	const router = useRouter();
 	return (
 		<div>
 			<Header />
 
 			{VERSION_CARDS.map((item) => (
-				<ConfigurationCard {...item} />
+				<ConfigurationCard
+					{...item}
+					handleClick={handleClick}
+				/>
 			))}
 
 			<Button
