@@ -1,7 +1,7 @@
 import Assured from './Assured';
 import BLDetails from './BLDetails';
 import { shipment_data } from './dummy_data';
-import ManageServices from './OverviewManageServices';
+import OverviewManageServices from './OverviewManageServices';
 import Services from './Services';
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
@@ -9,7 +9,7 @@ import TermsAndConditions from './TermsAndConditions';
 function Overview() {
 	return (
 		<div className={styles.container}>
-			<ManageServices />
+			<OverviewManageServices />
 			<BLDetails />
 			<Services />
 			<div className={styles.extra_details}>

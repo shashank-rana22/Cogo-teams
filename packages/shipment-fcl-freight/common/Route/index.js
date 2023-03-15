@@ -7,7 +7,7 @@ import ActiveService from './ActiveService';
 import InactiveService from './InactiveService';
 import Loader from './Loader';
 import styles from './styles.module.css';
-import { shipment_data } from '../../../fcl-freight/page-components/Tabs/Overview/dummy_data';
+import { shipment_data } from '../../page-components/ShipmentDetails/Tabs/Overview/dummy_data';
 
 const trasportationServices = [
 	'ftl_freight_service',
