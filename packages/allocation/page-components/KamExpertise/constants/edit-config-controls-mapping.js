@@ -1,7 +1,7 @@
 const EDIT_CONFIG_CONTROLS_MAPPING = {
-	first_completeion:
+	first_completion:
 		{
-			name        : 'first_completeion',
+			name        : 'first_completion',
 			type        : 'number',
 			label       : 'Score credited on first completion',
 			placeholder : 'Enter Score',
@@ -409,6 +409,7 @@ const EDIT_CONFIG_CONTROLS_MAPPING = {
 			label       : 'Score credited only once for every uncommon',
 			placeholder : 'Enter Score',
 		},
+
 
 };
 
