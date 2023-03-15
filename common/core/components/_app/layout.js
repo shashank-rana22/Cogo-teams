@@ -26,11 +26,9 @@ function Layout({ children, layout }) {
 			showTopbar
 			navbar={navigationMappingAdmin}
 		>
-
 			<div style={{ margin: 0, padding: '24px 20px' }}>
 				{role_functions.includes('sales') && <ChatFAQs />}
 				{children}
-
 			</div>
 		</AdminLayout>
 	);
