@@ -48,49 +48,50 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+	width: 100%;
+	padding: 6px 12px;
+	margin: 6px 0;
 	font-size: 12px;
 	font-weight: 600;
 	cursor: pointer;
-	margin:6px 0px;
-	width: 100%;
-	padding: 6px 12px;
 }
 
-.options > div:hover{
-	background-color: #FFFCE6;
+.options > div:hover {
+	background-color: #fffce6;
 }
 
-.view_more{
-	font-weight: 400;
-	color: #6FA5AB;
-	cursor: pointer;
+.view_more {
 	margin-left: 4px;
+	font-weight: 400;
+	color: #6fa5ab;
+	cursor: pointer;
 }
 
-.tooltip_pad{
+.tooltip_pad {
 	padding: 0;
 }
 
-.tooltip_content{
+.tooltip_content {
 	display: flex;
 	flex-wrap: wrap;
 	overflow-y: scroll;
 }
-.name_field{
+
+.name_field {
 	max-width: 100px;
 	overflow: hidden;
-	overflow: hidden;
-  	text-overflow: ellipsis;
+	text-overflow: ellipsis;
 }
 
-.u_list li{
-	color: #849E4C;
+.u_list li {
+	color: #849e4c;
 }
-.u_list li span{
+
+.u_list li span {
 	color: #221f20;
 }
 
-.tooltip{
+.tooltip {
 	padding: 0;
 	margin: 0;
 }

@@ -1,5 +1,4 @@
 import { Button, Input, ButtonIcon, Table, Checkbox } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import AddQuestionsForm from '../CreateQuestionSet/components/AddQuestionsForm';
@@ -14,10 +13,6 @@ function CreateTest() {
 	const [showNewQuestion, setShowNewQuestion] = useState(false);
 	return (
 		<div>
-			<div className={styles.header}>
-				<IcMArrowBack width={20} height={20} />
-				<div className={styles.title}>New Test</div>
-			</div>
 			<TestDetails />
 			{!showQuestionSet && !showNewQuestion && (
 				<div className={styles.btn_container}>

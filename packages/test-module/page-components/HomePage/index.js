@@ -1,5 +1,5 @@
+import CreateNewTest from '../CreateModule/components/CreateNewTest/components/TestDetails';
 import CreateQuestionSet from '../CreateModule/components/CreateQuestionSet';
-import CreateTest from '../CreateModule/components/CreateTest';
 import Header from '../Header';
 import TestsList from '../TestsList';
 

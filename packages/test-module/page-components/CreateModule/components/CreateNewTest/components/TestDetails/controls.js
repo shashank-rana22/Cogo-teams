@@ -38,4 +38,5 @@ const getControls = () => [
 		placeholder : '00 h : 00 min',
 	},
 ];
+
 export default getControls;
