@@ -74,9 +74,9 @@ function QuestionSet({ setShowNewQuestion }) {
 		},
 	];
 	return (
-		<div>
+		<div className={styles.container}>
 			<Breadcrumb>
-				<Breadcrumb.Item label="Add Questions to test" />
+				<Breadcrumb.Item label="Add Questions to test" className={styles.breadcrumb_item} />
 				<Breadcrumb.Item label="From Question Set" />
 			</Breadcrumb>
 			<p>Select from applicable Question Sets made earlier to get probable questions for the Test</p>
