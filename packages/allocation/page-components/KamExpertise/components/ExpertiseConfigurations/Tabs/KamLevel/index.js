@@ -1,6 +1,7 @@
 import { Collapse } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import EmptyState from '../../../../../../common/EmptyState';
 import useKamExpertiseConfig from '../../../../hooks/useKamExpertiseConfig';
 
 import Header from './Header';
@@ -47,7 +48,7 @@ function KamLevel() {
 				audit_data={audit_data}
 				levelLoading={levelLoading}
 			/>
-
+			{dataLength === 0 ? (<EmptyState />) : (null)}
 			{!levelLoading ? (
 				<>
 					<Collapse
