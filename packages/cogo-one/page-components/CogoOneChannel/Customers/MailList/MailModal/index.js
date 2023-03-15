@@ -1,4 +1,4 @@
-import { Modal, Button, Tags } from '@cogoport/components';
+import { cl, Modal, Button, Tags } from '@cogoport/components';
 import { IcMSend, IcMAttach, IcMCross } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -9,7 +9,7 @@ function MailModal({ showMailModal, setShowMailModal }) {
 	const [type, setType] = useState('');
 	const [recipientValue, setRecipientValue] = useState('');
 	const [ccBccValue, setCcBccValue] = useState('');
-
+	const [error, setError] = useState(false);
 	const [recipientArray, setRecipientArray] = useState([]);
 	const [bccArray, setBccArray] = useState([]);
 
@@ -39,16 +39,28 @@ function MailModal({ showMailModal, setShowMailModal }) {
 		}
 	};
 
+	const validateEmail = (emailInput) => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return emailRegex.test(emailInput);
+	};
+
 	const handleKeyPress = (event) => {
+		console.log(recipientValue);
+		console.log(event.target.value);
 		if (event.key === 'Enter') {
+			event.preventDefault();
+			console.log(validateEmail(recipientValue));
+			if (!validateEmail(recipientValue)) {
+				setError(true);
+				return;
+			}
+			setError(false);
 			if (type === 'recipient') {
-				event.preventDefault();
 				setRecipientArray((prev) => [...prev, recipientValue]);
 				setRecipientValue('');
 				setType('');
 				setShowControl(false);
 			} else {
-				event.preventDefault();
 				setBccArray((prev) => [...prev, ccBccValue]);
 				setCcBccValue('');
 				setType('');
@@ -74,10 +86,9 @@ function MailModal({ showMailModal, setShowMailModal }) {
 		return recipientTags;
 	};
 
-	const handleDelete = (bishal, setValue) => {
-		const newValues = [];
-		bishal.forEach((itm) => { newValues.push(itm.children); });
-		setValue(newValues);
+	const handleDelete = (val, setValue) => {
+		const formattedValue = val.map((item) => item?.children);
+		setValue(formattedValue);
 	};
 	return (
 		<Modal
@@ -99,7 +110,7 @@ function MailModal({ showMailModal, setShowMailModal }) {
 						<Tags
 							items={formatData({ data: recipientArray, color: '#FEF199' })}
 							className={styles.styled_ui_tags_container}
-							onItemsChange={(val) => handleDelete(val, setRecipientValue)}
+							onItemsChange={(val) => handleDelete(val, setRecipientArray)}
 						/>
 					</div>
 					{(showControl && type === 'recipient') && (
@@ -111,7 +122,8 @@ function MailModal({ showMailModal, setShowMailModal }) {
 								value={recipientValue}
 								onChange={(e) => handleChange(e)}
 								onKeyPress={(e) => handleKeyPress(e)}
-								className={styles.input_container}
+								className={cl`${error ? styles.error_input_container : styles.input_container}`}
+								id="inputId"
 							/>
 							<div className={styles.cross_icon}>
 								<IcMCross />
@@ -135,7 +147,7 @@ function MailModal({ showMailModal, setShowMailModal }) {
 						<Tags
 							items={formatData({ data: bccArray, color: '#CFEAED' })}
 							className={styles.styled_ui_tags_container}
-							onItemsChange={(val) => handleDelete(val, setCcBccValue)}
+							onItemsChange={(val) => handleDelete(val, setBccArray)}
 						/>
 					</div>
 					{(showControl && type === 'cc_bcc') && (

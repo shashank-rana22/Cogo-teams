@@ -120,6 +120,32 @@
 	}
 }
 
+.error_input_container{
+	display: flex;
+	height: 28px;
+	padding: 3px 8px;
+	margin-left: 8px;
+	border: 1px solid #828282;
+	border-radius: 6px;
+
+	&:hover {
+		border: 1px solid #FF0000;
+	}
+
+	&:focus {
+		border: 1px solid #FF0000 !important;
+	}
+
+	&:focus-within {
+		border: 1px solid #FF0000 !important;
+	}
+
+	&:focus-visible {
+		outline: #FF0000 solid 0.2px !important;
+	}
+}
+
+
 .cross_icon {
 	position: absolute;
 	top: 6px;
