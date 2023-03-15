@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Tooltip, Pagination } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -85,7 +84,11 @@ function QuestionList({
 									marginRight : '4px',
 								}}
 							>
-								<div className={styles.question} onClick={() => setQuestion(item)}>
+								<div
+									role="presentation"
+									className={styles.question}
+									onClick={() => setQuestion(item)}
+								>
 									<div
 										style={{
 											marginLeft     : '20px',
