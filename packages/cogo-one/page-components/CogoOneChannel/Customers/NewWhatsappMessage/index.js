@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 
 function NewWhatsappMessage({
 	setModalType = () => {},
+	modalType = false,
 }) {
 	const [activeTab, setActiveTab] = useState('quick_reply');
 	const [openCreateReply, setOpenCreateReply] = useState(false);
@@ -27,13 +28,12 @@ function NewWhatsappMessage({
 	);
 	const sendWhatsappCommunication = (args = {}) => {
 		const { country_code = '', number = '' } = dialNumber;
-
 		if (!number) {
 			Toast.error('Please enter mobile number');
-		} else {
-			const { template_name } = args;
-			sendUserWhatsappTemplate({ country_code, whatsapp_number: number, template_name });
+			return;
 		}
+		const { template_name } = args;
+		sendUserWhatsappTemplate({ country_code, whatsapp_number: number, template_name });
 	};
 	const data = {
 		sendCommunicationTemplate : sendWhatsappCommunication,
@@ -41,7 +41,7 @@ function NewWhatsappMessage({
 	};
 	return (
 		<Modal
-			show
+			show={modalType}
 			size="xs"
 			onClose={closeModal}
 			onClickOutside={closeModal}

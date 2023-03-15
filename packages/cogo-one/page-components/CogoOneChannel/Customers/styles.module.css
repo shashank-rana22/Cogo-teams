@@ -1,4 +1,5 @@
 .container {
+	position: relative;
 	width: 24%;
 	padding: 10px;
 	margin-right: 10px;
@@ -74,8 +75,6 @@
 
 .plus_circle {
 	position: absolute;
-	bottom: 1px;
-	left: 240px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -87,14 +86,23 @@
 	box-shadow: 3px 7px 16px #8a795d99;
 }
 
+.plus_circle svg {
+	transition: 0.5s;
+}
+
 .wheel {
 	position: absolute;
 	bottom: 26px;
-	left: 270px;
 	height: 128px;
 	transition: all 0.3s ease;
 	transform: scale(0);
 	transform-origin: bottom right;
+}
+
+.wheel_box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .action {
@@ -110,34 +118,26 @@
 }
 
 .wrapper {
+	position: absolute;
+	right: 65px;
+	bottom: 65px;
 	z-index: 99;
 	cursor: pointer;
-
-	&.wrapper {
-		position: absolute;
-	}
 
 	& .checkbox {
 		display: none;
 
-		&:checked ~ .widget::before {
-			top: 5%;
-			left: 5%;
-			width: 90%;
-			height: 90%;
-			background-color: #fff3;
-		}
-
-		&:checked ~ .widget .dots {
-			height: 6px;
-		}
-
-		&:checked ~ .wheel {
+		&:checked ~ .plus_circle .wheel_box .wheel {
 			transform: scale(1);
 		}
 
-		&:checked ~ .wheel .action {
+		&:checked ~ .plus_circle .wheel_box .wheel .action {
 			opacity: 1;
+		}
+
+		&:checked ~ .plus_circle svg {
+			transition: 0.5s;
+			transform: rotate(45deg);
 		}
 	}
 }
@@ -147,12 +147,14 @@
 	height: 50px;
 }
 
-.callicon {
-	top: 27px;
-	right: 15px;
+.call_icon {
+	top: 38px;
+	right: 11px;
+	user-select: none;
 }
 
-.whatsappicon {
-	top: 98px;
-	right: 78px;
+.whatsapp_icon {
+	top: 101px;
+	right: 40px;
+	user-select: none;
 }

@@ -141,33 +141,34 @@ function Customers({
 					checked={isChecked}
 				/>
 				<div htmlFor="plus_checkbox" className={styles.plus_circle}>
-					<IcMPlus onClick={handleOpenOptions} fill="#ffffff" width={35} height={35} />
-				</div>
-				<div className={styles.wheel}>
-					<div className={`${styles.action} ${styles.callicon}`}>
-						<img
-							onClick={() => setShowDialModal(true)}
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/phone_light.svg"
-							alt=""
-							role="presentation"
-						/>
-					</div>
-					<div className={`${styles.action} ${styles.whatsappicon}`}>
-						<img
-							onClick={() => setModalType(true)}
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/w_app_d.svg"
-							alt=""
-							role="presentation"
-						/>
+					<div className={styles.wheel_box}>
+						<IcMPlus onClick={handleOpenOptions} fill="#ffffff" width={35} height={35} />
+						<div className={styles.wheel}>
+							<div className={`${styles.action} ${styles.call_icon}`}>
+								<img
+									onClick={() => setShowDialModal(true)}
+									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/phone_light.svg"
+									alt="call icon"
+									role="presentation"
+								/>
+							</div>
+							<div className={`${styles.action} ${styles.whatsapp_icon}`}>
+								<img
+									onClick={() => setModalType(true)}
+									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/w_app_d.svg"
+									alt="whatsapp icon"
+									role="presentation"
+								/>
 
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			{modalType && (
-				<NewWhatsappMessage
-					setModalType={setModalType}
-				/>
-			)}
+			<NewWhatsappMessage
+				setModalType={setModalType}
+				modalType={modalType}
+			/>
 		</div>
 	);
 }
