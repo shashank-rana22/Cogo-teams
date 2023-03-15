@@ -1,9 +1,9 @@
 import { Placeholder, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
-// import { useState } from 'react';
 import { useEffect } from 'react';
 
+import EmptyState from '../../../../../common/EmptyState';
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateNewEvent from '../../../hooks/useCreateNewEvent';
 import useGetAllocationKamExpertiseRules from '../../../hooks/useGetAllocationKamExpertiseRules';
@@ -23,8 +23,13 @@ const FILTER_ATTRIBUTE_MAPPING = {
 	misc_attribute     : 'misc',
 };
 
-function CreateNewEvent(props) {
-	const { setToggleEvent = () => {}, eventListData = {}, listRefetch = () => {}, updateEventListData = {} } = props;
+function CreateEvent(props) {
+	const {
+		setToggleEvent = () => {},
+		eventListData = {},
+		listRefetch = () => {},
+		updateEventListData = {},
+	} = props;
 
 	const onClose = () => {
 		setToggleEvent('eventList');
@@ -41,12 +46,12 @@ function CreateNewEvent(props) {
 		onSave,
 		getAddRuleControls,
 		// newEventFormProps,
-	} = useCreateNewEvent({ attributeList, eventListData, listRefetch });
+	} = useCreateNewEvent({ attributeList, eventListData, listRefetch, setToggleEvent });
 
 	const {
 		onUpdate,
 		formProps,
-	} = useUpdateEvent({ updateEventListData, listRefetch, attributeList });
+	} = useUpdateEvent({ updateEventListData, listRefetch, attributeList, setToggleEvent });
 	const {
 		control,
 		handleSubmit,
@@ -118,17 +123,26 @@ function CreateNewEvent(props) {
 						</section>
 					</div>
 
-					<div className={styles.account_attributes}>
-						<div className={styles.account_attribute_text}>
-							Account Attribute
-							{' '}
-							<IcMInfo />
-						</div>
+					{
+						(isEmpty(attributeList) && !loading)
 
-						{/* // Todo atleast one of them is required */}
+							? (
+								<div style={{ flex: '4', padding: '160px 0 0 16px' }}>
+									<EmptyState height="320px" width="500px" flexDirection="column" />
+								</div>
+							)
+							: (
+								<div className={styles.account_attributes}>
+									<div className={styles.account_attribute_text}>
+										Account Attribute
+										{' '}
+										<IcMInfo />
+									</div>
 
-						<section className={styles.row_container}>
-							{
+									{/* // Todo atleast one of them is required */}
+
+									<section className={styles.row_container}>
+										{
 
 							loading
 								? attributeList.map((controlItem, index) => {
@@ -200,8 +214,11 @@ function CreateNewEvent(props) {
 									);
 								})
 }
-						</section>
-					</div>
+									</section>
+								</div>
+							)
+					}
+
 				</div>
 
 				<div className={styles.btn_container}>
@@ -231,4 +248,4 @@ function CreateNewEvent(props) {
 	);
 }
 
-export default CreateNewEvent;
+export default CreateEvent;

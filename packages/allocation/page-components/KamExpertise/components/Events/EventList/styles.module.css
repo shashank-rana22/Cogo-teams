@@ -9,7 +9,7 @@
 .top_div {
 	display: flex;
 	justify-content: space-between;
-	padding: 16px 16px 0px 16px;
+	padding: 16px 16px 4px 16px;
 }
 
 
@@ -21,14 +21,14 @@
 }
 
 .rule {
-	width: 70%;
+	width: 90%;
 	margin-left: 16px;
 }
 
 .rule_body {
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	flex-wrap: wrap;
 	margin-top: 8px;
 	width: 100%;
 }
