@@ -17,7 +17,7 @@ function Documents({
 	activeVoiceCard,
 	activeTab,
 	customerId,
-	documentCount,
+	documentCount = () => {},
 	documents_count,
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);

@@ -13,7 +13,7 @@ function useUpdateOmnichannelNewDocument({
 		method : 'post',
 	}, { manual: true });
 
-	const updateNewDocument = async ({ data = {}, documentCount, listIds = [] }) => {
+	const updateNewDocument = async ({ data = {}, documentCount = () => {}, listIds = [] }) => {
 		const {
 			utility_bill_document_url = '', country_id = '', preferred_languages = [],
 			registration_number = '',
