@@ -431,5 +431,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'spot_search',
 	},
+	{
+		api          : 'get_checkout_cargo_insurance_rate',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
 ];
 export default apis;
