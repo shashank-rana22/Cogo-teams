@@ -114,8 +114,8 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 100%;
-	margin: 1.5%;
-	:global {.styles_active_users__0WZvd {width:275px;}}
+	margin: 1.05%;
+	:global {.styles_active_users__0WZvd {width:270px;}}
 }
 
 .active_users {
@@ -149,6 +149,7 @@
 .right_stat_label {
 	font-size: 14px;
 	color: #828282;
+	margin-bottom: 1.3%;
 }
 
 .right_stat_value {
@@ -317,14 +318,18 @@
 .sub_heading {
 	display: flex;
 	flex-wrap: wrap;
+	float:right;
 	justify-content: space-between;
 	font-size: 12px;
 	font-weight: 600;
 	color: "#6FA5AB";
 	text-align: left;
+	margin:1%;
+	
 }
 
 .sub_heading_context {
-	font-size: 16px;
+	font-size: 14px;
 	color: "#6FA5AB";
+	
 }

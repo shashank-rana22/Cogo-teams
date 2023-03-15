@@ -112,8 +112,8 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 100%;
-	margin: 1.5%;
-	:global{.styles_active_users__IHCuh {width:275px;}}
+	margin: 1.05%;
+	:global{.styles_active_users__IHCuh {width:270px;}}
 	
 }
 

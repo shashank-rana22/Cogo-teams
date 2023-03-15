@@ -1,9 +1,15 @@
 import { Select, DateRangepicker } from '@cogoport/components';
-
+import {useState} from 'react';
 import styles from './styles.module.css';
 
 function Filter() {
-	// const locationOptions = ['All Questions', 'Cogoport'];
+	const [selectedItem,setSelectedItem]=useState('All_Questions')
+	const options = [
+		{ label: 'All Questions', value: 'All_Questions' },
+		{ label: 'All Topics', value: 'All_topics' },
+	
+	];
+	
 	return (
 		<div style={{ marginTop: '1rem' }}>
 			<div className={styles.top_content}>
@@ -18,18 +24,14 @@ function Filter() {
 						GroupBy
 
 					</div>
-					<Select
-						// value={country?.mobile_country_code}
-						// onChange={}
-						placeholder="Group By"
-						// options={locationOptions}
-						id="group_by"
-						labelKey="display_name"
-						valueKey="group_by"
-						isClearable
-						// onSearch={onSearch}
-						// loading={locationsLoading}
-					/>
+					<Select  
+					type="select" 
+					value={selectedItem} 
+					onChange={(val) => {
+						setSelectedItem(val);
+					}} 
+					placeholder="Group By" 
+					options={options}/>
 				</div>
 				<div className={styles.date_range_container}>
 					<div style={{

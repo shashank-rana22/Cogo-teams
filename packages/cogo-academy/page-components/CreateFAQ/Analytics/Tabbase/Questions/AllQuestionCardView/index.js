@@ -1,18 +1,45 @@
-import { Pill,Button } from '@cogoport/components';
+import { Pill, Button } from '@cogoport/components';
+import { IcMArrowDown, IcMArrowUp, IcMArrowDoubleRight } from '@cogoport/icons-react';
+import { useState, forwardRef } from 'react';
+
 import QuestionsList from '../QuestionList';
-import {useState} from 'react';
+
+import Scroll from './Scroll';
 import styles from './styles.module.css';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
-import { IcMArrowDown,IcMArrowUp } from '@cogoport/icons-react';
-import { IcMArrowDoubleRight } from '@cogoport/icons-react';
 
-function AllQuestionCardView(props) {
-	const [showQuestions,setShowQuestions]=useState(false)
-	const { data } = props;
-	const { total_count } = data || 0;
+const scrollHorizontal = (scrollOffset, ref) => {
+	const tableRootElement = ref.current.querySelector('.ui-table-root');
+	tableRootElement.scrollLeft += scrollOffset;
+};
+
+function AllQuestionCardView(props = '') {
+	const {
+		active_audiences = [],
+		most_viewed_questions = [],
+		popular_questions,
+		question_stats = '',
+		topic_wise_questions,
+		trending_tags,
+		trending_topics,
+		unpopular_questions,
+	} = props;
+	console.log(most_viewed_questions);
+	// const{
+	// 	topic_wise_disliked_questions=[],
+
+	// } = topic_wise_questions
+	const {
+		no_of_questions = '',
+		no_of_likes = '',
+		no_of_dislikes = '',
+		no_of_views = '',
+	} = question_stats;
+	console.log(props);
+	const [showQuestions, setShowQuestions] = useState(false);
 	return (
-		<div style={{ marginTop: '1rem' ,overflow: 'hidden'}}>
+		<div style={{ marginTop: '1rem', overflow: 'hidden' }}>
 			<div className={styles.container}>
 				<div style={{ justifyContent: 'space-between' }}>
 					<Pill
@@ -41,7 +68,7 @@ function AllQuestionCardView(props) {
 					>
 						No of Questions:
 						{' '}
-						{total_count}
+						{no_of_questions}
 
 					</Pill>
 					<Pill
@@ -54,7 +81,9 @@ function AllQuestionCardView(props) {
 
 						}}
 					>
-						No of Views: 56
+						No of Views:
+						{' '}
+						{no_of_views}
 
 					</Pill>
 					<Pill
@@ -67,7 +96,9 @@ function AllQuestionCardView(props) {
 
 						}}
 					>
-						No of Likes: 56
+						No of Likes:
+						{' '}
+						{no_of_likes}
 
 					</Pill>
 					<Pill
@@ -80,26 +111,43 @@ function AllQuestionCardView(props) {
 
 						}}
 					>
-						No of Dislikes: 56
+						No of Dislikes:
+						{' '}
+						{no_of_dislikes}
 
 					</Pill>
 
 				</div>
 				<div style={{ display: 'flex' }}>
-					<ViewCards cardHeading="Topic from which Most Questions viewed" subHeading="ed" />
-					<ViewCards cardHeading="User group that viewed the Most Questions " subHeading="ecd" />
-					<ViewCardsList cardHeading="Top Viewed Questions" contentQuestion="What are Incoterms?" />
-					<ViewCardsList cardHeading="Top Liked Questions" contentQuestion="What are Incoterms?" />
-					<div><IcMArrowDoubleRight style={{marginTop:'60px',marginLeft:'5px',height:'40px',width:'30px'}} className={styles.arrow}/></div>
-					<ViewCards cardHeading="Topic from which Most Questions viewed" subHeading="ed" />
-					<ViewCards cardHeading="User group that viewed the Most Questions " subHeading="ecd" />
-					<ViewCardsList cardHeading="Top Viewed Questions" contentQuestion="What are Incoterms?" />
-					<ViewCardsList cardHeading="Top Liked Questions" contentQuestion="What are Incoterms?" />
+					<div style={{ display: 'flex' }}>
+						<ViewCards
+							cardHeading="Topic from which Most Questions viewed"
+							subHeading={active_audiences}
+						/>
+						<ViewCards
+							cardHeading="User group that viewed the Most Questions "
+							subHeading={active_audiences}
+						/>
+						<ViewCardsList
+							cardHeading="Top Viewed Questions"
+							contentQuestion={most_viewed_questions}
+						/>
+						<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={most_viewed_questions} />
+						<Scroll />
+						{/* <ViewCards cardHeading="Topic from which Most Questions viewed" subHeading="ed" /> */}
+						{/* <ViewCards cardHeading="User group that viewed the Most Questions " subHeading="ecd" /> */}
+						{/* <ViewCardsList cardHeading="Top Viewed Questions" contentQuestion="What are Incoterms?" /> */}
+						{/* <ViewCardsList cardHeading="Top Liked Questions" contentQuestion="What are Incoterms?" /> */}
+					</div>
 				</div>
-
-				<div style={{marginTop:'-25px',float:'right'}}><Button size="md" themeType="tertiary" onClick={()=>setShowQuestions((pv)=>!pv)}><div style={{fontWeight:600}}>All Questions..</div>{!showQuestions?<IcMArrowDown/>:<IcMArrowUp/>}</Button></div>
+				<div style={{ marginTop: '-25px', float: 'right' }}>
+					<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
+						<div style={{ fontWeight: 600 }}>All Questions..</div>
+						{!showQuestions ? <IcMArrowDown /> : <IcMArrowUp />}
+					</Button>
+				</div>
 			</div>
-			{showQuestions?<QuestionsList {...props}/>:null}
+			{showQuestions ? <QuestionsList {...props} /> : null}
 		</div>
 
 	);

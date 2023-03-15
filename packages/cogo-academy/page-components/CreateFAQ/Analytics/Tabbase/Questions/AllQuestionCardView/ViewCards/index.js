@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function ViewCards({ cardHeading = '' }) {
+function ViewCards({ cardHeading = '', subHeading = [] }) {
 	return (
 
 		<div className={styles.primary_right}>
@@ -12,12 +12,22 @@ function ViewCards({ cardHeading = '' }) {
 				</div>
 				<div className={styles.sub_heading} style={{ color: '#6FA5AB' }}>
 					<div>
-						<div className={styles.sub_heading_context}>Shipment</div>
-						140 Views,40%
+						<div className={styles.sub_heading_context}>{subHeading[0]?.name}</div>
+						{subHeading[0]?.views}
+						{' '}
+						Views
+						,
+						{subHeading[0]?.view_percentage}
+						%
 					</div>
 					<div>
-						<div className={styles.sub_heading_context}>Import</div>
-						112 Views,28%
+						<div className={styles.sub_heading_context}>{subHeading[1]?.name}</div>
+						{subHeading[1]?.views}
+						{' '}
+						Views
+						,
+						{subHeading[1]?.view_percentage}
+						%
 
 					</div>
 				</div>
