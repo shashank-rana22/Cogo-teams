@@ -176,7 +176,7 @@ const useListAllocationRequests = () => {
 			accessor : ({ service }) => (
 				<Tooltip content={(
 					<div className={styles.tooltip_text}>
-						{service.business_name ? service.business_name : null}
+						{service.business_name || null}
 					</div>
 				)}
 				>
