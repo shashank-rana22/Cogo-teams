@@ -1,31 +1,22 @@
-// import { useForm } from '@cogoport/forms';
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CreateQuestion from '../../../../commons/CreateQuestion';
+import SavedQuestionDetails from '../../../../commons/SavedQuestionDetails';
 
 import styles from './styles.module.css';
 
-function AddQuestionsForm() {
-	// const [allKeysSaved, setAllKeysSaved] = useState(false);
-
+function AddQuestionsForm({ questionSetId }) {
 	const [savedQuestionDetails, setSavedQuestionDetails] = useState([{ id: new Date().getTime(), isNew: true }]);
 
 	const [formToShow, setFormToShow] = useState(savedQuestionDetails[0].id);
 
 	console.log(setFormToShow, setSavedQuestionDetails);
 
-	// const {
-	// 	fields = {},
-	// 	watch,
-	// 	handleSubmit = () => {},
-	// 	formState: { errors = {} },
-	// 	reset,
-	// 	setValue,
-	// 	getValues,
-	// 	register,
-	// } = useForm();
+	if (!isEmpty(questionSetId)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -35,10 +26,10 @@ function AddQuestionsForm() {
 				const { id } = item;
 
 				if (id === formToShow) {
-					return <CreateQuestion index={index} />;
+					return <CreateQuestion index={index} item={item} questionSetId={questionSetId} />;
 				}
 
-				return null;
+				return <SavedQuestionDetails index={index} item={item} />;
 			})}
 
 			<div className={styles.button_container}>
@@ -48,7 +39,6 @@ function AddQuestionsForm() {
 					themeType="secondary"
 				>
 					+ Add Another Question
-
 				</Button>
 			</div>
 		</div>

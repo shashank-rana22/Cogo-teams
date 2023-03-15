@@ -24,7 +24,7 @@ function SingleQuestionComponent({ control, register, index, name = 'case_questi
 				/>
 
 				<SelectController
-					className={`${styles.answer_type} ${
+					className={`${styles.question_type} ${
 						errors?.[controls[1].name]
 							? styles[`${controls[1].name}_err`]
 							: null

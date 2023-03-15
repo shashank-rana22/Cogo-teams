@@ -1,10 +1,13 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import AddQuestionsForm from './components/AddQuestionsForm';
 import BasicDetailsForm from './components/BasicDetailsForm';
 import styles from './styles.module.css';
 
 function CreateQuestionSet() {
+	const [questionSetId, setQuestionSetId] = useState('');
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -12,9 +15,9 @@ function CreateQuestionSet() {
 				<div className={styles.title}>New Question Set</div>
 			</div>
 
-			<BasicDetailsForm />
+			<BasicDetailsForm setQuestionSetId={setQuestionSetId} />
 
-			<AddQuestionsForm />
+			<AddQuestionsForm questionSetId={questionSetId} />
 		</div>
 	);
 }

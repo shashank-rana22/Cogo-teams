@@ -1,12 +1,19 @@
 .container {
 	display: flex;
-	flex-wrap: wrap;
-	gap: 24px;
-	justify-content: space-between;
-	padding: 24px 72px;
+	flex-direction: column;
+	gap: 12px;
 	margin-top: 40px;
 	background: rgb(255 255 255 / 70%);
 	border-radius: 6px;
+	padding: 20px;
+}
+
+.form_component {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+	padding: 20px 60px;
+	justify-content: space-between;
 
 	@media (max-width: 768px) {
 		padding: 24px;
@@ -32,6 +39,10 @@
 		.ui_select_container {
 			width: 250px;
 		}
+
+		.ui_multiselect_container {
+			width: 250px;
+		}
 	}
 }
 
@@ -45,4 +56,9 @@
 		font-weight: 500;
 		color: #cb6464;
 	}
+}
+
+.button_container {
+	display: flex;
+	justify-content: end;
 }

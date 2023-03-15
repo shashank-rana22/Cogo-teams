@@ -7,7 +7,7 @@ const getControls = () => [
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'user_groups',
+		name        : 'audience_ids',
 		label       : 'User Groups',
 		type        : 'select',
 		placeholder : 'Select users',

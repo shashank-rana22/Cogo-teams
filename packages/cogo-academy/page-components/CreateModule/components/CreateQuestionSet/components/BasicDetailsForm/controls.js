@@ -1,29 +1,39 @@
 const getControls = () => [
 	{
-		name        : 'question_name',
+		name        : 'name',
 		label       : 'Name of Question Set',
 		type        : 'input',
 		placeholder : 'Type name...',
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'cogo_entity',
-		label       : 'Select Cogo Entity',
-		type        : 'select',
+		name     : 'cogo_entity_id',
+		label    : 'Select Cogo Entity',
+		type     : 'async-select',
+		asyncKey : 'partners',
+		params   : {
+			filters: {
+				entity_types : ['cogoport'],
+				status       : 'active',
+			},
+			page_limit: 10,
+		},
 		placeholder : 'Select Cogo Entity',
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'set_topic',
+		name        : 'topic',
 		label       : 'Select Set Topic',
 		type        : 'select',
 		placeholder : 'Select topic name',
+		options     : [{ label: 'Shipments', value: 'shipments' }],
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'set_user_groups',
+		name        : 'audience_ids',
 		label       : 'Select Set User Groups',
-		type        : 'select',
+		type        : 'multi-select',
+		options     : [],
 		placeholder : 'Select User Groups',
 	},
 ];
