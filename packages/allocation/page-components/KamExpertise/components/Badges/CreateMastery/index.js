@@ -62,7 +62,7 @@ function CreateMastery(props) {
 								</p>
 
 								{/* //! needs changes */}
-								<p className={styles.text_styles}>Last Modified By :</p>
+								{/* <p className={styles.text_styles}>Last Modified By :</p> */}
 							</div>
 						)}
 
