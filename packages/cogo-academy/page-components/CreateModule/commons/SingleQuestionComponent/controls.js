@@ -46,7 +46,8 @@ const getControls = () => [
 			{ value: 'medium', label: 'Medium' },
 			{ value: 'high', label: 'High' },
 		],
-		multiple: false,
+		rules    : { required: 'Required' },
+		multiple : false,
 	},
 ];
 

@@ -17,6 +17,7 @@ const getControls = () => [
 		name    : 'question_type',
 		type    : 'chips',
 		label   : 'Pick Question Type',
+		value   : 'stand_alone',
 		options : [
 			{ value: 'stand_alone', label: 'Stand Alone' },
 			{ value: 'case_study', label: 'Case Study' },

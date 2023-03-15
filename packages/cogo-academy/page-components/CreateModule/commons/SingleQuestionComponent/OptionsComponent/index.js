@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function OptionsComponent({ control, controls, register, name }) {
+function OptionsComponent({ control, controls, register, name, errors }) {
 	const childEmptyValues = {};
 
 	controls.forEach((controlItem) => {
@@ -35,6 +35,7 @@ function OptionsComponent({ control, controls, register, name }) {
 						{...register(`${name}.${index}.${controls[0].name}`, {
 							...(controls[0].rules || {}),
 						})}
+						className={errors[index]?.[controls[0].name] ? styles.error : null}
 					/>
 
 					<div className={styles.button_container}>

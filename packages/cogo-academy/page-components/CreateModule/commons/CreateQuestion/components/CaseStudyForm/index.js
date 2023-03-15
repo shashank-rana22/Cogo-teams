@@ -8,7 +8,7 @@ import SingleQuestionComponent from '../../../SingleQuestionComponent';
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function CaseStudyForm({ control, register }) {
+function CaseStudyForm({ control, register, errors }) {
 	const controls = getControls();
 
 	const fieldArrayControls = controls[1];
@@ -34,6 +34,7 @@ function CaseStudyForm({ control, register }) {
 	return (
 		<div className={styles.container}>
 			<TextAreaController {...controls[0]} control={control} />
+			{errors?.[controls[0].name] && <div className={styles.error_msg}>This is required</div>}
 
 			{fields.map((field, index) => (
 				<div key={field.id} className={styles.field_container}>
@@ -44,6 +45,7 @@ function CaseStudyForm({ control, register }) {
 							field={field}
 							register={register}
 							index={index}
+							errors={errors?.case_questions?.[index]}
 						/>
 
 						{fields.length > 1 ? (
