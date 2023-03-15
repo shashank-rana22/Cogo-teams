@@ -8,7 +8,7 @@ function EmptyState({
 	textSize = '16px',
 }) {
 	return (
-		<div className={`${styles.container} ${styles[flexDirection]}`}>
+		<div className={cl`${styles.container} ${styles[flexDirection]}`}>
 			<img
 				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man"
 				width={width}
