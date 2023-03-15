@@ -5,7 +5,7 @@ const useCreateFaqQuestion = () => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/request_faq_question',
 		method : 'post',
-	}, { manual: false });
+	}, { manual: true });
 
 	const createFaqQuestion = async ({
 		searchState = '',

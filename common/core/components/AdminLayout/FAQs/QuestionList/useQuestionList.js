@@ -16,7 +16,7 @@ const useQuestionList = ({
 	const { scope = '' } = general || {};
 	const { country_id = '', id = '' } = partner;
 
-	const { query, debounceQuery } = useSearchQuery();
+	const { query = '', debounceQuery } = useSearchQuery();
 
 	const [page, setPage] = useState(1);
 
@@ -37,6 +37,7 @@ const useQuestionList = ({
 		debounceQuery(search);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [search]);
+
 	const fetch = async () => {
 		try {
 			await trigger({
