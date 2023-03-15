@@ -1,9 +1,8 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
-
-import useSearchQuery from '../../../../hooks/useSearchQuery';
 
 const useQuestionList = ({
 	topic = {},
@@ -16,7 +15,7 @@ const useQuestionList = ({
 	const { scope = '' } = general || {};
 	const { country_id = '', id = '' } = partner;
 
-	const { query = '', debounceQuery } = useSearchQuery();
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [page, setPage] = useState(1);
 
