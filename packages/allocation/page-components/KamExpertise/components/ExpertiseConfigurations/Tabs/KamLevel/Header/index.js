@@ -28,7 +28,7 @@ function Header(props) {
 						{' '}
 						:
 					</div>
-					{!levelLoading ? (format(audit_data.updated_at, 'dd-MM-YYYY'))
+					{!levelLoading ? (format(audit_data?.updated_at, 'dd-MM-YYYY') || '--')
 						: (<Placeholder height="20px" width="120px" />)}
 
 					<div style={{ marginLeft: '36px', display: 'flex' }}>
