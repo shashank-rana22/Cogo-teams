@@ -95,7 +95,7 @@ function KamLevelCard(props) {
 					</div>
 				</div>
 				{
-			activeCard === id + 1
+			activeCard === id
 				? (
 					<div className={styles.title_show}>
 						To level up from KAM

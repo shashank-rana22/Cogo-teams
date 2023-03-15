@@ -2,15 +2,15 @@
 import { useAllocationRequest } from '@cogoport/request';
 // import { useEffect } from 'react';
 
-const useKamExpertiseLevelConfig = ({ activeCard }) => {
+const useKamExpertiseLevelConfig = ({ transition_level }) => {
 	const [{ data = [], loading:listLoading }, listrefetch] = useAllocationRequest({
 		url     : 'kam_expertise_configuration',
 		method  : 'get',
 		authkey : 'get_allocation_kam_expertise_configuration',
 		params  : {
 			filters: {
-				transition_level : activeCard,
-				status           : 'draft',
+				transition_level,
+				status: 'draft',
 			},
 
 		},

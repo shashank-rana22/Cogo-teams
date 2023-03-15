@@ -4,8 +4,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function KamLevelDetailsShow({ data = {}, listLoading, activeCard, setEditMode }) {
-	const transacting_accounts = data && data.list && data.list['Transacting Accounts'];
+function KamLevelDetailsShow({ data = {}, listLoading, transition_level, setEditMode }) {
+	const transacting_accounts = data?.list?.['Transacting Accounts'];
 	const COLUMN_MAPPING = [
 		{
 			label: 'Customer Expertise',
@@ -38,7 +38,7 @@ function KamLevelDetailsShow({ data = {}, listLoading, activeCard, setEditMode }
 				themeType="secondary"
 				className={styles.delete_button}
 				onClick={(e) => {
-					if (activeCard) {
+					if (transition_level) {
 						e.stopPropagation();
 					}
 					setEditMode(true);

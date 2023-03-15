@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 
 import ConfigurationCard from './ConfigurationCard';
 import Header from './Header';
@@ -19,6 +20,7 @@ const VERSION_CARDS = [
 ];
 
 function CurrentConfigurations() {
+	const router = useRouter();
 	return (
 		<div>
 			<Header />
@@ -27,7 +29,13 @@ function CurrentConfigurations() {
 				<ConfigurationCard {...item} />
 			))}
 
-			<Button themeType="secondary">View All Configurations</Button>
+			<Button
+				onClick={() => { router.push('/allocation/kam-expertise/configurations/viewall-configurations'); }}
+				themeType="secondary"
+			>
+				View All Configurations
+
+			</Button>
 		</div>
 	);
 }
