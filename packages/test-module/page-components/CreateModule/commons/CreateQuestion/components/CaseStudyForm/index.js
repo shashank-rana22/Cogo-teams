@@ -6,7 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import SingleQuestionComponent from '../../../SingleQuestionComponent';
 
 import getControls from './controls';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
 function CaseStudyForm({ control, register }) {
 	const controls = getControls();
@@ -32,15 +32,15 @@ function CaseStudyForm({ control, register }) {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<TextAreaController {...controls[0]} control={control} />
 
 			{fields.map((field, index) => (
-				<div key={field.id} className={styles.field_container}>
+				<div key={field.id}>
 
 					<SingleQuestionComponent controls={controls} control={control} register={register} />
 
-					<div className={styles.button_container}>
+					<div>
 						<Button
 							type="button"
 							className="primary sm"
