@@ -19,29 +19,6 @@ function MailList() {
 		setShowContent(true);
 	};
 
-	// const TagOptions = [
-	// 	{
-	// 		// key      : '5',
-	// 		disabled : false,
-	// 		children : 'Cogoport Shipments',
-	// 		prefix   : null,
-	// 		suffix   : null,
-	// 		color    : 'orange',
-	// 		tooltip  : false,
-	// 		closable : true,
-	// 	},
-	// 	{
-	// 		// key      : '5',
-	// 		disabled : false,
-	// 		children : 'Cogoport Shipments',
-	// 		prefix   : null,
-	// 		suffix   : null,
-	// 		color    : 'blue',
-	// 		tooltip  : false,
-	// 		closable : true,
-	// 	},
-	// ];
-
 	return (
 		<div className={styles.container}>
 			{!showContent ? (
