@@ -36,7 +36,7 @@ const useTopicList = () => {
 					},
 					sort_by    : 'view_count',
 					page,
-					page_limit : 6,
+					page_limit : 20,
 				},
 			});
 		} catch (error) {

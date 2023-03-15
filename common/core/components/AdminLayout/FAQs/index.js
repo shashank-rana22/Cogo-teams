@@ -45,6 +45,7 @@ function FAQs() {
 					onClose={() => setShow(false)}
 					placement={isMobile ? 'fullscreen' : 'right'}
 					size={isMobile ? 'fullscreen' : ''}
+					style={{ left: '99.5%' }}
 				>
 					<div className={styles.topiclist_container}>
 						<TopicList />

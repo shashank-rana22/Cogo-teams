@@ -93,7 +93,6 @@ function TopicList() {
 
 				<div className={styles.pagination_container}>
 					<Pagination
-						className="md"
 						totalItems={paginationData?.total_count || 0}
 						currentPage={page || 1}
 						pageSize={paginationData?.page_limit}

@@ -5,7 +5,7 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import Spinner from '../../Spinner';
-import EmptyState from '../EmptyState';
+// import EmptyState from '../EmptyState';
 
 import Answer from './Answer';
 import styles from './styles.module.css';
@@ -150,7 +150,8 @@ function QuestionList({
 						) : null}
 					</>
 				) : (
-					<EmptyState />
+					// <EmptyState />
+					<div>Empty State</div>
 				)}
 			</div>
 		</div>
