@@ -28,7 +28,6 @@ function DisLikeBox({
 		formState: { errors },
 		control,
 	} = useForm();
-	console.log(checkboxA);
 
 	const onSubmit = async (values) => {
 		setload(false);
