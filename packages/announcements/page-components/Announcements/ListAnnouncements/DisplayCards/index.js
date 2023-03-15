@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { compareAsc } from '@cogoport/utils';
 import React from 'react';
 
 import DisplayCard from './DisplayCard';
@@ -35,18 +36,22 @@ function DisplayCards({
 	}
 	return (
 		<div className={styles.container}>
-			{data.map((item, index) => (
-				<DisplayCard
-					activeTab={activeTab}
-					refetch={refetch}
-					loadingSingleAnnouncement={loadingSingleAnnouncement}
-					data={item}
-					index={index}
-					accordianData={announcementDetails?.[index]}
-					handleAnnouncementDetails={handleAnnouncementDetails}
-					deleteAnnouncement={deleteAnnouncement}
-				/>
-			))}
+			{data.map((item, index) => {
+				const isValid = compareAsc(new Date(item?.validity_start), new Date());
+				return (
+					<DisplayCard
+						activeTab={activeTab}
+						refetch={refetch}
+						loadingSingleAnnouncement={loadingSingleAnnouncement}
+						data={item}
+						isValid={isValid}
+						index={index}
+						accordianData={announcementDetails?.[index]}
+						handleAnnouncementDetails={handleAnnouncementDetails}
+						deleteAnnouncement={deleteAnnouncement}
+					/>
+				);
+			})}
 		</div>
 	);
 }

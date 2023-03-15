@@ -17,6 +17,7 @@ function DisplayAttachment(
 		editAttachment = () => {},
 		addAttachment = () => {},
 		announcement_id,
+		isValid,
 	},
 ) {
 	const [showDeleteModal, setShowDeleteModal] = useState(null);
@@ -90,11 +91,13 @@ function DisplayAttachment(
 					{name}
 				</div>
 
-				<Button size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
-					Add
-					{' '}
-					{name}
-				</Button>
+				{isValid !== -1 && (
+					<Button size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
+						Add
+						{' '}
+						{name}
+					</Button>
+				)}
 			</div>
 			<div className={styles.map_container}>
 				{data
@@ -114,20 +117,24 @@ function DisplayAttachment(
 								>
 									View
 								</Button>
-								<Button
-									themeType="secondary"
-									size="sm"
-									style={{ marginRight: 8 }}
-									onClick={() => setShowEditModal(item)}
-								>
-									Edit
-								</Button>
-								<IcMDelete
-									height={20}
-									width={20}
-									style={{ cursor: 'pointer' }}
-									onClick={() => setShowDeleteModal(item)}
-								/>
+								{isValid !== -1 && (
+									<>
+										<Button
+											themeType="secondary"
+											size="sm"
+											style={{ marginRight: 8 }}
+											onClick={() => setShowEditModal(item)}
+										>
+											Edit
+										</Button>
+										<IcMDelete
+											height={20}
+											width={20}
+											style={{ cursor: 'pointer' }}
+											onClick={() => setShowDeleteModal(item)}
+										/>
+									</>
+								)}
 							</div>
 
 						</div>

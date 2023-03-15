@@ -16,6 +16,7 @@ function DisplayCard({
 	accordianData = {},
 	data = {},
 	index,
+	isValid,
 	handleAnnouncementDetails = () => {},
 	refetch = () => {},
 	deleteAnnouncement = () => {},
@@ -72,7 +73,7 @@ function DisplayCard({
 										>
 											View
 										</Button>
-										{activeTab === 'active' && (
+										{activeTab === 'active' && isValid !== -1 && (
 											<Button
 												themeType="secondary"
 												size="sm"
@@ -82,7 +83,7 @@ function DisplayCard({
 												Edit
 											</Button>
 										)}
-										{activeTab === 'active' && (
+										{activeTab === 'active' && isValid !== -1 && (
 											<IcMDelete
 												height={20}
 												width={20}
@@ -109,6 +110,7 @@ function DisplayCard({
 						<div className={styles.document_container}>
 							<DisplayAttachments
 								data={accordianData}
+								isValid={isValid}
 								index={index}
 								refetch={refetch}
 								announcement_id={data?.id}
