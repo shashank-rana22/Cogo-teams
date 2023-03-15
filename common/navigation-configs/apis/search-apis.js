@@ -436,5 +436,17 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
+	{
+		api         : 'saas_insurance_list_commodities',
+		access_type : 'private',
+		model       : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'saas_insurance_list_countries',
+		access_type : 'private',
+		model       : 'insurance',
+		feature     : 'insurance',
+	},
 ];
 export default apis;
