@@ -2,21 +2,18 @@
     margin-top: 12px;
     display: flex;
     flex-direction: flex-start;
-    /* justify-content: space-between; */
     width: 100%;
-    margin-bottom: 12px;
-    
+    flex-wrap: wrap;
 }
 
 .select{
     width: 200px;
     margin-right: 4px;
-    
+
     :global(.ui_tNl3D){
         font-size: 14px;
     }
 }
-
 
 .time{
     width: 400px;
@@ -30,6 +27,11 @@
             font-size: 14px;
             color: #221f20;
         }
-    }
-    
+    }    
+}
+
+@media (max-width: 576px) {
+	.select, .time{
+		margin-bottom: 8px;
+	}
 }

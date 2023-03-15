@@ -4,7 +4,6 @@
 
 .feedback{
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
     min-width: 300px;
 }
@@ -25,4 +24,11 @@
 
 .table_cell{
     min-width: 180px;
+}
+
+.view{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 280px;
 }

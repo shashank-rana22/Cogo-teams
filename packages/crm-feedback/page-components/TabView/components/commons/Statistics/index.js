@@ -1,26 +1,33 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { startCase } from '@cogoport/utils';
 
-import getPieChartData from './configurations/get-pie-chart-data';
+import useChartStats from '../../../hooks/useChartStats';
+
+import getStatsData from './configurations/get-stats-data';
 import styles from './styles.module.css';
 
-function Statistics() {
-	// get data for stats from hook
+function Statistics({ activeTab = '' }) {
+	const { stats = {}, loading = false } = useChartStats(activeTab);
+	const statsControl = getStatsData(activeTab, stats);
 
-	// get pie chart controls data
-	const pieChartData = getPieChartData();
+	const isEmpty = Object.values(stats).every((item) => item === 0);
 
-	// check if statsData is empty then show empty state or loading state accordingly
-
-	// @mohit loading state for pie chart in enrichment?
+	if (isEmpty && !loading) {
+		return (
+			<section className={styles.empty_container}>
+				<div className={styles.empty_text}>Pie Statistics Not Found !!!</div>
+			</section>
+		);
+	}
 
 	return (
 		<section className={styles.container}>
-			{Object.values(pieChartData).map((chartData) => (
+			{Object.values(statsControl).map((chartData) => (
 				<div className={styles.chart_container}>
 					<div className={styles.chart_title}>{chartData.title}</div>
 
 					<ResponsivePie
+						loading={loading}
 						data={chartData.data}
 						innerRadius={0}
 						activeOuterRadiusOffset={4}

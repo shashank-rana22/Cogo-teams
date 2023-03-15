@@ -3,3 +3,9 @@
 	font-weight: 600;
 	color: #221f20;
 }
+
+@media (max-width: 576px) {
+	.title{
+		margin-top: 50px;
+	}
+}

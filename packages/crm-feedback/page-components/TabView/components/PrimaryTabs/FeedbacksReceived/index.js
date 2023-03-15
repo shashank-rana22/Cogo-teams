@@ -1,34 +1,34 @@
-import Pagination from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 
 import useFeedbackTableData from '../../../hooks/useFeedbackTableData';
-import CrmTable from '../../CrmTable';
+import CrmTable from '../../commons/CrmTable';
+import Filters from '../../commons/Filters';
+import Statistics from '../../commons/Statistics';
 import EnrichmentRequest from '../../EnrichmentRequest';
-import Filters from '../../Filters';
-import Statistics from '../../Statistics';
 
-function FeedbacksReceived() {
+import styles from './styles.module.css';
+
+function FeedbacksReceived({ activeTab = '' }) {
 	const {
 		columns = [],
 		data = {},
 		loading = false,
 		filters = {},
 		onChangeFilters = () => {},
-		onResetFilters = () => {},
 		onChangeParams = () => {},
 		paginationData = {},
-
 	} = useFeedbackTableData();
 
 	const { page, page_limit, total_count } = paginationData;
-	return (
 
-		<div style={{ marginTop: 30 }}>
-			<Filters filters={filters} onChangeFilters={onChangeFilters} />
-			<Statistics />
+	return (
+		<div className={styles.container}>
+			<Filters pageFilters={filters} onChangeFilters={onChangeFilters} activeTab={activeTab} />
+			<Statistics activeTab={activeTab} />
 			<EnrichmentRequest />
 			<CrmTable columns={columns} data={data} loading={loading} />
 
-			<div>
+			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"
 					currentPage={page}
