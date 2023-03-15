@@ -29,9 +29,11 @@
 	justify-content: space-between;
 	cursor: pointer;
 
-	&.closed {
-		border-bottom: none;
-	}
+
+}
+
+.header_closed {
+	border-bottom: none;
 }
 
 /* export const AnimatedContainer = animated({

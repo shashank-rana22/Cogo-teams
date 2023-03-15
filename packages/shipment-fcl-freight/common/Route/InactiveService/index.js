@@ -1,38 +1,40 @@
-import React, { useState } from 'react';
-import { useSelector } from '@cogoport/store';
 import { Button, Modal, cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
+import React, { useState } from 'react';
+
 import FormSearch from '../Form';
-import icons from '../Icons/icons';
 import Icon from '../Icons/Icon';
+import icons from '../Icons/icons';
+
 import styles from './styles.module.css';
 
-const InactiveService = ({
+function InactiveService({
 	routeLeg = {},
 	shipment_data,
 	services,
 	isUpsellServiceAvailable,
-}) => {
+}) {
 	const isMobile = useSelector(({ general }) => general?.isMobile);
 
 	const [upsellModal, setUpsellModal] = useState(false);
 	const [form, setShowForm] = useState({
-		show: false,
-		service: null,
-		isAdditional: false,
+		show         : false,
+		service      : null,
+		isAdditional : false,
 	});
 
 	const handleClick = () => {
 		setShowForm({
 			service: {
 				service:
-					routeLeg?.service_types?.[0].replace('_service', '') ||
-					routeLeg?.service_types?.[1].replace('_service', ''),
-				service_type: routeLeg?.service_types?.[0].replace('_service', ''),
-				type: routeLeg?.trade_type === 'export' ? 'origin' : 'destination',
+					routeLeg?.service_types?.[0].replace('_service', '')
+					|| routeLeg?.service_types?.[1].replace('_service', ''),
+				service_type : routeLeg?.service_types?.[0].replace('_service', ''),
+				type         : routeLeg?.trade_type === 'export' ? 'origin' : 'destination',
 			},
-			show: true,
-			additionalShow: true,
+			show           : true,
+			additionalShow : true,
 		});
 		setUpsellModal(true);
 	};
@@ -44,8 +46,12 @@ const InactiveService = ({
 
 	return (
 		<>
-			<div className={cl` ${styles.container} ${isUpsellServiceAvailable ? 'hover_click' : 'upsell_not_allowed'}`}
+			<div
+				className={cl`${styles.container} 
+				${isUpsellServiceAvailable ? styles.container_hover_click : styles.upsell_not_allowed}`}
 				onClick={isUpsellServiceAvailable ? handleClick : null}
+				role="button"
+				tabIndex={0}
 			>
 				{isMobile ? (
 					<div className={styles.mob_container}>
@@ -58,7 +64,7 @@ const InactiveService = ({
 						</div>
 
 						{isUpsellServiceAvailable ? (
-							<Button themeType='tertiary'>
+							<Button themeType="tertiary">
 								<IcMPlus />
 							</Button>
 						) : null}
@@ -69,7 +75,7 @@ const InactiveService = ({
 							<Icon type={icons[routeLeg?.iconType]} />
 
 							{isUpsellServiceAvailable ? (
-								<Button themeType='tertiary' onClick={handleClick}>
+								<Button themeType="tertiary" onClick={handleClick} className={styles.button}>
 									<IcMPlus />
 								</Button>
 							) : null}
@@ -103,6 +109,6 @@ const InactiveService = ({
 			) : null}
 		</>
 	);
-};
+}
 
 export default InactiveService;

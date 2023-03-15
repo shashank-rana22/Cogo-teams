@@ -1,3 +1,5 @@
+import { cl } from '@cogoport/components';
+
 import { renderValue } from './renderValue';
 import styles from './styles.module.css';
 
@@ -38,9 +40,9 @@ function CargoDetails({ detail }) {
 			{labels.map((label) => {
 				if (detail?.[label] && renderValue(label, detail)) {
 					return (
-						<Box className="cargo-detail-pill" key={label}>
+						<div className={cl` ${styles.box} cargo-detail-pill`} key={label}>
 							{renderValue(label, detail)}
-						</Box>
+						</div>
 					);
 				}
 

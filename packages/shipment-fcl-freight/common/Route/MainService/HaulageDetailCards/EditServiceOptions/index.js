@@ -1,12 +1,12 @@
 import React from 'react';
 // import EditTrailerDetails from '../../../../TrailerDetails/EditTrailerDetails';
 
-const EditServiceOptions = ({
+function EditServiceOptions({
 	refetch = () => {},
 	subServiceName = 'trailer',
 	trailerData = [],
 	trailerType = '',
-}) => {
+}) {
 	return (
 		<>
 			{/* {subServiceName === 'trailer' ? (
@@ -20,6 +20,6 @@ const EditServiceOptions = ({
 			hii
 		</>
 	);
-};
+}
 
 export default EditServiceOptions;

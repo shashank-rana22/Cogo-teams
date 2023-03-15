@@ -8,9 +8,10 @@
 		margin: 0px 0px 8px 0px;
 		width: 100%;
 	}
-	.service_info {
-		font-size: 10px;
-	}
+}
+
+.service_info {
+	font-size: 10px;
 }
 
 .service_name {

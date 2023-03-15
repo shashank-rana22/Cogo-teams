@@ -1,0 +1,25 @@
+.container{
+	padding: 8px 12px;
+	.core-ui-select__control {
+		width: 90px;
+	}
+	.core-ui-select__clear-indicator {
+		padding: 0px 8px;
+	}
+}
+
+.heading{
+	margin: 0px;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 15px;
+	text-transform: uppercase;
+	color: #393f70;
+	margin-right: 12px;
+}
+
+.row{
+	display: flex;
+	align-items: center;
+	margin-bottom: 40px;
+}

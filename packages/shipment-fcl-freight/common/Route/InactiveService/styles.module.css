@@ -6,21 +6,6 @@
 	width: 18%;
 	height: 90px;
 	margin: 0px 8px 0px 0px;
-	&.hover_click {
-		&:hover {
-			border: 1px solid #5936f0;
-		}
-		cursor: pointer;
-	}
-
-	&.icon_and_service {
-		display: flex;
-	}
-
-	&.upsell_not_allowed {
-		opacity: 0.5;
-		cursor: not-allowed;
-	}
 
 	@media (max-width: 768px) {
 		display: flex;
@@ -28,6 +13,23 @@
 		height: 30px;
 		width: 100%;
 	}
+}
+
+.container_hover_click {
+	cursor: pointer;
+}
+
+.container_hover_click:hover{
+	border: 1px solid #5936f0;
+}
+
+.icon_and_service {
+	display: flex;
+}
+
+.upsell_not_allowed {
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
 .inactive_service{
@@ -45,10 +47,10 @@
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 8px;
-
-	&.hover-click {
-		&:hover {
-			color: #5936f0;
-		}
-	}
+	height: 14px;
+	align-items: center;
+}
+.button{
+	margin: 0;
+	height: fit-content;
 }
