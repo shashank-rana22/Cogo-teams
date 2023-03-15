@@ -1,12 +1,12 @@
 .container {
-    z-index: 100;
+	z-index: 100;
 	transition: 150ms ease-in-out;
 }
 
-.topiclist_container{
+.topiclist_container {
 	display: flex;
-	height: 98vh;
 	width: 460px;
+	height: 98vh;
 	overflow-y: auto;
 
 	@media (max-width: 768px) {
@@ -15,17 +15,17 @@
 }
 
 .faq_icon {
-	width: 60px;
-	height: 60px;
+	position: fixed;
+	right: 2rem;
+	bottom: 2rem;
 	z-index: 100;
 	display: flex;
-	overflow: hidden;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
+	width: 60px;
+	height: 60px;
+	overflow: hidden;
 	border-radius: 50%;
-	position: fixed;
-	bottom: 2rem;
-	right: 2rem;
 
 	@media (max-width: 768px) {
 		margin: 8px;

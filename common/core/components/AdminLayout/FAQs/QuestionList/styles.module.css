@@ -1,58 +1,54 @@
-.container{
+.container {
 	min-height: 57vh;
 }
 
-.question{
-    font-size: 13px;
-	cursor: pointer;
+.question {
 	padding-bottom: 12px;
+	font-size: 13px;
+	cursor: pointer;
 
 	&:hover {
-		background: #fdebe8;
-		color: #f26054;
-		padding-left: -10px;
-		padding-right: -10px;
 		align-items: center;
+		padding-right: -10px;
+		padding-left: -10px;
+		color: #f26054;
+		background: #fdebe8;
 		transition: 0.3s;
 	}
 }
 
-.pagination_container{
-    font-size: 13px;
-	cursor: pointer;
-	padding-bottom: 12px;
+.pagination_container {
 	display: flex;
 	justify-content: flex-end;
 	padding-right: 20px;
+	padding-bottom: 12px;
+	font-size: 13px;
+	cursor: pointer;
 }
 
-.pill{
-    display: flex;
+.pill {
+	display: flex;
 	flex-wrap: wrap;
+	padding: 5px 10px;
+	margin: 0 8px;
+	font-size: 8px;
 	background: white;
 	border: 1px solid #ffe4af;
 	border-radius: 16px;
-	font-size: 8px;
-	margin: 0 8px 0 8px;
-	padding: 5px 10px 5px 10px;
 	opacity: 0.8;
 }
 
-.spinner_container{
-    width: 100%;
+.spinner_container {
 	display: flex;
 	justify-content: center;
+	width: 100%;
 	margin-top: 52px;
 }
 
-.module_text{
-    font-weight: 400;
+.module_text {
+	margin: 16px 0 8px;
 	font-size: 11px;
+	font-weight: 400;
 	color: #221f20;
-	margin: 16px 0 8px 0;
-	opacity: 0.6; 
-}
-
-.list{
-    
+	opacity: 0.6;
 }

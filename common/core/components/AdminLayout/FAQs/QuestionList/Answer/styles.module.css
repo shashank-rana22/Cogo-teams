@@ -1,132 +1,128 @@
-.module_text{
-    font-weight: 400;
+.module_text {
+	margin: 16px 0 8px;
 	font-size: 11px;
+	font-weight: 400;
 	color: #221f20;
-	margin: 16px 0 8px 0;
-	opacity: 0.6; 
-    /* font-weight: 400;
-	font-size: 11px;
-	color: #221f20;
-	margin-bottom: 4px;
 	opacity: 0.6;
-	margin-top: 10px; */
 }
 
-.title{
-    display: flex;
+.title {
+	display: flex;
 	align-items: center;
+	width: fit-content;
 	margin: 8px 0 12px 4px;
 	cursor: pointer;
-	width: fit-content;
 }
 
-.question{
-    font-weight: 500;
+.question {
+	width: 100%;
 	font-size: 17px;
+	font-weight: 500;
 	color: #221f20;
-	width: 100%;
 }
 
-.list{
-    min-height: 57vh;
+.list {
 	box-sizing: border-box;
-	margin:0 24px;
+	min-height: 57vh;
+	margin: 0 24px;
 }
 
-.go_back{
-    font-size: 12px;
-	margin-left: 4px; 
+.go_back {
+	margin-left: 4px;
+	font-size: 12px;
 }
 
-.ansofques{
-	font-weight: 400;
-	font-size: 14px;
-	color: #000000;
-	opacity: 0.6;
+.ansofques {
 	margin-top: 8px;
+	font-size: 14px;
+	font-weight: 400;
 	line-height: 180%;
+	color: #000;
+	opacity: 0.6;
 }
 
-.dislikebox{
-    width: 100%;
-}
-
-.information_helpful{
-    margin: 10px 0 0 0;
-	display: flex;
+.dislikebox {
 	width: 100%;
+}
+
+.information_helpful {
+	display: flex;
 	flex-direction: column;
+	align-items: center;
 	justify-content: center;
-	align-items: center;
+	width: 100%;
+	margin: 10px 0 0;
 }
 
-.help_text{
-    font-weight: 400;
-	font-size: 14px;
-	opacity: 0.5;
+.help_text {
 	display: flex;
-	cursor: pointer;
 	align-items: center;
+	font-size: 14px;
+	font-weight: 400;
+	cursor: pointer;
+	opacity: 0.5;
 }
 
-.open_faq{
-    font-weight: 400;
-	font-size: 14px;
-	opacity: 0.5;
+.open_faq {
 	display: flex;
-	cursor: pointer;
 	align-items: center;
 	margin-top: 20px;
 	margin-bottom: 20px;
+	font-size: 14px;
+	font-weight: 400;
+	cursor: pointer;
+	opacity: 0.5;
+
 	&:hover {
 		font-weight: 500;
-		opacity: 0.7;
 		color: red;
 		text-decoration: underline;
+		opacity: 0.7;
 	}
 }
 
-.no_of_people_like_it{
-    font-weight: 400;
+.no_of_people_like_it {
+	margin: 8px 0;
 	font-size: 11px;
+	font-weight: 400;
 	color: #221f20;
-	margin: 8px 0 8px 0;
 	opacity: 0.6;
 }
-.space{
-    border-bottom: 1px solid #000;
-	margin: 24px 0 24px 0;
+
+.space {
+	margin: 24px 0;
+	border-bottom: 1px solid #000;
 	opacity: 0.1;
 }
 
-.emoji_like{
-    all: unset;
+.emoji_like {
+	all: unset;
 	font-size: 3rem;
 	cursor: pointer;
-	transform: scale(0.8);
 	transition: text-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+	transform: scale(0.8);
 
 	&:hover {
-		transform: scale(1) translatey(1px);
-		text-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+		text-shadow: 0 10px 10px rgb(0 0 0 / 30%);
+		transform: scale(1) translateY(1px);
 	}
 }
 
-.emoji_dislike{
-    all: unset;
+.emoji_dislike {
+	all: unset;
 	font-size: 3rem;
 	cursor: pointer;
-	transform: scale(0.8);
 	transition: text-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+	transform: scale(0.8);
 
 	&:hover {
-		transform: scale(1) translatey(1px);
-		text-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+		text-shadow: 0 10px 10px rgb(0 0 0 / 30%);
+		transform: scale(1) translateY(1px);
 	}
 }
 
-.show_buttons{
-    display: flex;
+.show_buttons {
+	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;

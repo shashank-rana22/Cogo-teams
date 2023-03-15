@@ -1,53 +1,48 @@
-.form{
-    border: 1px solid #e6e6e6;
-	padding: 20px;
-	border-radius: 6px;
+.form {
 	width: 100%;
+	padding: 20px;
+	border: 1px solid #e6e6e6;
+	border-radius: 6px;
 }
 
 .remark {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: space-around;
-    margin: 20px 0;
+	display: flex;
+	flex-flow: column wrap;
+	align-content: space-around;
+	margin: 20px 0;
 }
 
 .error {
-    color: red;
-    font-size: 12px;
+	font-size: 12px;
+	color: red;
 }
 
 .title {
-    font-size: 12px;
-    color: #221f20;
-    font-weight: 400;
-    opacity: 0.5;
-    margin-bottom: 4px;
-}
-
-.core-ui-input-root {
-    border: 1px solid #a8acce;
-}
-.modal_header{
-    font-weight: 400;
-	color: #221f20;
-	width: 100%;
-	opacity: 0.7;
-	margin-bottom: 20px;
-}
-
-.checkbox_group{
-    display: flex;
-	align-items: center;
-	margin-bottom: 6px;
-	color: #221f20;
+	margin-bottom: 4px;
+	font-size: 12px;
 	font-weight: 400;
+	color: #221f20;
+	opacity: 0.5;
+}
+
+.modal_header {
+	width: 100%;
+	margin-bottom: 20px;
+	font-weight: 400;
+	color: #221f20;
+	opacity: 0.7;
+}
+
+.checkbox_group {
+	display: flex;
+	align-items: center;
+	font-weight: 400;
+	color: #221f20;
 	opacity: 0.6;
 }
 
-.button_box{
-    display: flex;
-	justify-content: flex-end;
+.button_box {
+	display: flex;
 	align-items: center;
+	justify-content: flex-end;
 }

@@ -3,11 +3,11 @@ import { Pagination, Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import Spinner from '../../Spinner';
 import QuestionList from '../QuestionList';
 import Header from '../QuestionList/Header';
 
 import IconMapping from './iconMapping';
+import Loader from './Loader';
 import styles from './styles.module.css';
 import useTopicList from './useTopicList';
 
@@ -114,18 +114,9 @@ function TopicList() {
 			);
 		}
 
-		return loading ? (
-			<div className={styles.spinner_container}>
-				<Spinner
-					size={40}
-					borderWidth={4}
-					outerBorderColor="#f2f6ff"
-					spinBorderColor="#f38e7e"
-				/>
-			</div>
-		) : (
-			render()
-		);
+		if (loading) return <Loader />;
+
+		return render();
 	};
 
 	return (
