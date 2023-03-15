@@ -1,1 +1,3 @@
-export { default as Shipment } from './page-components/Shipment';
+export { default as AthenaDashboard } from './page-components';
+
+// export { default as Trends } from './page-components/Trend';

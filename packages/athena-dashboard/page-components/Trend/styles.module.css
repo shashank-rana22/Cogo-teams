@@ -1,0 +1,59 @@
+.wholepage{
+    margin-top: 18px;
+}
+.multiselect{
+    margin-top: 5px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+.tradedn{
+    margin-top: 8px;
+}
+.codesn{
+    margin-top: 8px;
+}
+.button{
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+.search_container{
+    display: flex;
+    background-color: white;
+    margin-top: 20px;
+}
+.rectdiv{
+    height: 208px;
+    background-color: #f9f9f9;
+    text-align: center;
+    display: flex;
+}
+.textrect{
+    padding-top: 90px;
+    margin-left: 330px;
+}
+.checkbox{
+    width: 150px;
+    height: 40px;
+    background-color: #E0E0E0;
+    border-radius: 6px;
+}
+.codes{
+    margin-top: 24px;
+    display: block;
+}
+.description{
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.setcssoutput{
+    display:flex;
+}
+.buildreportbutton{
+    margin-top: 140px;
+    margin-left: 50px;
+    display: none;
+}

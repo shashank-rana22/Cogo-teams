@@ -33,7 +33,6 @@ function formatDate(date) {
 }
 
 function Shipment() {
-	const [activeTab, setActiveTab] = useState('Shipment');
 	const [value2, setValue2] = useState([]);
 	const [activeTab2, setActiveTab2] = useState('Shipments');
 	const [date, setDate] = useState('');
@@ -98,6 +97,7 @@ function Shipment() {
 				},
 				start_date               : start_date || 'NaN-NaN-NaN',
 				end_date                 : end_date || 'NaN-NaN-NaN',
+				// total                    : localStorage.getItem('total') || 0,
 				pagination_data_required : true,
 			},
 		});
@@ -115,8 +115,6 @@ function Shipment() {
 		}
 		setChecked1(arr);
 	};
-
-	console.log(checked1);
 
 	const handleCheck2 = (e) => {
 		let arr = [...checked2];
@@ -171,7 +169,10 @@ function Shipment() {
 	};
 
 	useEffect(() => {
-		if (!isEmpty(responseData)) { setAnswer(responseData.list); }
+		if (!isEmpty(responseData)) {
+			setAnswer(responseData.list);
+			// if (!localStorage.getItem('total')) localStorage.setItem('total', responseData.total);
+		}
 	}, [responseData]);
 
 	// const [{ data: res = {} }] = useAthenaRequest({
@@ -360,24 +361,7 @@ function Shipment() {
 	// 	},
 	// ];
 	return (
-		<div>
-			<div style={{ margin: 20 }}>
-				<Tabs
-					activeTab={activeTab}
-					fullWidth
-					themeType="primary"
-					onChange={setActiveTab}
-				>
-					<TabPanel name="Shipment" title="Shipment">
-						<div>Search by shipments</div>
-					</TabPanel>
-
-					<TabPanel name="Trends" title="Trends">
-						<div>Check trends</div>
-					</TabPanel>
-				</Tabs>
-			</div>
-
+		<div className={styles.wholepage}>
 			<div className={styles.left_container}>
 				{/* <input
 					className={styles.search_bar}
