@@ -6,16 +6,15 @@ import AdminLayout from '../AdminLayout';
 import ChatFAQs from '../AdminLayout/FAQs';
 
 function Layout({ children, layout }) {
-
 	const hideLayout = layout === 'hidden';
 
 	const { profile = {} } = useSelector((state) => state);
 
-	const { auth_role_data = []} = profile;
+	const { auth_role_data = [] } = profile;
 
-	const { role_functions = []} = auth_role_data|| {};
+	const { role_functions = [] } = auth_role_data || {};
 
-	console.log('role_functions',role_functions);
+	console.log('role_functions', role_functions);
 
 	if (hideLayout) {
 		return <div>{children}</div>;
@@ -27,9 +26,9 @@ function Layout({ children, layout }) {
 			showTopbar
 			navbar={navigationMappingAdmin}
 		>
-			
+
 			<div style={{ margin: 0, padding: '24px 20px' }}>
-				{role_functions.includes('sales') &&  <ChatFAQs />}
+				{role_functions.includes('sales') && <ChatFAQs />}
 				{children}
 
 			</div>
