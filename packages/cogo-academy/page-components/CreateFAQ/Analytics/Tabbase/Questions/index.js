@@ -1,17 +1,20 @@
-import useListFaqQuestions from '../../../../FAQs/hooks/useListFaqQuestion';
+import { useState } from 'react';
+
 import useListFaqStats from '../../hooks/useListFaqStats';
 
 import AllQuestionCardView from './AllQuestionCardView';
+import AllTopicCardView from './AllTopicCardView';
 import Filter from './Filter';
-import QuestionList from './QuestionList';
 
 function Questions() {
 	const props = useListFaqStats({});
+	const [selectedItem, setSelectedItem] = useState('All_Questions');
+
 	console.log('mega', props);
 	return (
 		<div>
-			<Filter />
-			<AllQuestionCardView {...props?.data} />
+			<Filter selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+			{selectedItem === 'All_Questions' ? <AllQuestionCardView {...props?.data} /> : <AllTopicCardView />}
 		</div>
 
 	);

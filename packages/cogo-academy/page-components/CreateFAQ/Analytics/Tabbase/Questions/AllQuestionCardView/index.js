@@ -2,8 +2,7 @@ import { Pill, Button } from '@cogoport/components';
 import { IcMArrowDown, IcMArrowUp, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { useState, forwardRef } from 'react';
 
-import QuestionsList from '../QuestionList';
-
+import QuestionsList from './QuestionList';
 import Scroll from './Scroll';
 import styles from './styles.module.css';
 import ViewCards from './ViewCards';

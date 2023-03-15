@@ -1,15 +1,14 @@
 import { Select, DateRangepicker } from '@cogoport/components';
-import {useState} from 'react';
+
 import styles from './styles.module.css';
 
-function Filter() {
-	const [selectedItem,setSelectedItem]=useState('All_Questions')
+function Filter({ selectedItem, setSelectedItem }) {
 	const options = [
 		{ label: 'All Questions', value: 'All_Questions' },
 		{ label: 'All Topics', value: 'All_topics' },
-	
+
 	];
-	
+
 	return (
 		<div style={{ marginTop: '1rem' }}>
 			<div className={styles.top_content}>
@@ -24,14 +23,15 @@ function Filter() {
 						GroupBy
 
 					</div>
-					<Select  
-					type="select" 
-					value={selectedItem} 
-					onChange={(val) => {
-						setSelectedItem(val);
-					}} 
-					placeholder="Group By" 
-					options={options}/>
+					<Select
+						type="select"
+						value={selectedItem}
+						onChange={(val) => {
+							setSelectedItem(val);
+						}}
+						placeholder="Group By"
+						options={options}
+					/>
 				</div>
 				<div className={styles.date_range_container}>
 					<div style={{

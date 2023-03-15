@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function ShipmentCardView() {
+function AllTopicCardView() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.primary_right}>
@@ -28,4 +28,4 @@ function ShipmentCardView() {
 	);
 }
 
-export default ShipmentCardView;
+export default AllTopicCardView;

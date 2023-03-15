@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useListFaqQuestions from '../../../../../FAQs/hooks/useListFaqQuestion';
+import useListFaqQuestions from '../../../../../../FAQs/hooks/useListFaqQuestion';
 
 import AllQuestions from './AllQuestions';
 import styles from './styles.module.css';

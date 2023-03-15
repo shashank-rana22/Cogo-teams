@@ -3,7 +3,7 @@ import { Pill } from '@cogoport/components';
 import startCase from '@cogoport/utils/src/utilities/startCase';
 import React from 'react';
 
-import StyledTable from '../../../../../../../commons/StyledTable';
+import StyledTable from '../../../../../../../../commons/StyledTable';
 
 import styles from './styles.module.css';
 
