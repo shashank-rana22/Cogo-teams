@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function Header(props) {
 	const {
-		badgeList,
+		badgeLength = 1,
 		setToggleScreen = () => {},
 		searchValue,
 		setSearchValue = () => {},
@@ -67,7 +67,7 @@ function Header(props) {
 					}}
 				>
 					{
-						badgeList
+						badgeLength
 							? 'Add New Badge'
 							: 'Create New Badge'
 					}

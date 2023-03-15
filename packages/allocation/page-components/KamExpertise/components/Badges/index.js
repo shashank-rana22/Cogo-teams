@@ -49,12 +49,14 @@ function Badges() {
 			paginationData={paginationData}
 			getNextPage={getNextPage}
 		/>,
+
 		2: <CreateMastery
 			setToggleScreen={setToggleScreen}
 			badgeList={badgeList}
 			masteryListData={masteryListData}
 			listRefetch={listRefetch}
 		/>,
+
 		3: <CreateBadge
 			setToggleScreen={setToggleScreen}
 			badgeListData={badgeListData}
