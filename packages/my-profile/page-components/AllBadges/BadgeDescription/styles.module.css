@@ -1,10 +1,9 @@
-.card {
-    max-width: 650px;
+.container {
+    max-width: 652px;
     background-color: white;
-    border-radius: 6px;
-    padding: 18px 20px;
+    border-radius: 8px;
+    padding: 20px;
     margin: 20px;
-    /* height: 440px; */
 }
 
 .heading {
@@ -13,15 +12,21 @@
     color: #6fa5ab;
 }
 
-.main_container {
+.display_flex {
     display: flex;
+    padding: 8px 0;
+    justify-content: space-around;
 }
 
 .main_badge {
-    width: 160px;
-    height: 160px;
-    margin-top: 20px;
-    margin-bottom: 14px;
+    padding-top: 20px;
+    width: 100%;
+    height: auto;
+}
+
+.star {
+    width: 40px;
+    display: flex;
 }
 
 .badge_container {
@@ -31,32 +36,29 @@
     width: 30%;
 }
 
-.stars_container {
+.stars {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    margin-top: 16px;
 }
 
-.matter_container {
+.details {
     display: flex;
     flex-direction: column;
-    margin: 20px 40px 20px 0;
     justify-content: space-between;
     width: 60%;
 }
 
 .lable_value {
-    margin-right: 8px;
-    padding: 8px;
+    margin: 8px 8px 0 0;
 }
-
 .small_badge {
-    width: 48px;
-    margin-right: 10px;
+    width: 40px;
+    margin-right: 8px;
 }
 .lable_value_container {
     display: flex;
     justify-content: space-between;
-    width: 100%;
 }
 .next_badge {
     display: flex;
@@ -72,11 +74,12 @@
 
 .value {
     font-weight: bold;
+    font-size: 12px;
     color: #221f20;
 }
 
 .description_container {
-    margin: 8px;
+    margin-top: 12px;
 }
 
 .mastery_unlock {
@@ -93,16 +96,27 @@
 .mastery_badge_container {
     display: flex;
     flex-direction: column;
-    justify-content: middle;
     align-items: center;
 }
 
 .smallstar {
-    width: 16px;
-    margin-top: 8px;
+    width: 20px;
+    margin-top: 4px;
 }
 
 .button {
     display: flex;
     justify-content: flex-end;
+}
+
+.progressbar_container {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: row;
+    :global(.ui_I2xfq) {
+        font-weight: 400;
+    }
+    :global(.ui_1trfb) {
+        width: 180px;
+    }
 }

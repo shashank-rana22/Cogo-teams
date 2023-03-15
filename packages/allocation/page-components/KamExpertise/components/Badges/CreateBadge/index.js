@@ -3,7 +3,7 @@ import { format, isEmpty } from '@cogoport/utils';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
 
-import GetCard from './BadgeCard/getCard';
+import GetCard from '../BadgeUpdateCard';
 import styles from './styles.module.css';
 
 const MEDALS_MAPPING = [

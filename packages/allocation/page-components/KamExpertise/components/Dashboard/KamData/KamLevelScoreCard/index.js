@@ -2,8 +2,7 @@ import { Card, Placeholder } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
-import CardContent from '../CardContent';
-
+import CardContent from './CardContent';
 import styles from './styles.module.css';
 
 function KamLevelScoreCard(props) {
