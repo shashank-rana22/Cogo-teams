@@ -1,6 +1,6 @@
 import { ToolTip, cl } from '@cogoport/components';
 
-import { renderValue } from '../../../../../../../common/cargo-details/renderValue';
+import { renderValue } from '../../../../../../../../common/cargo-details/renderValue';
 
 import styles from './styles.module.css';
 

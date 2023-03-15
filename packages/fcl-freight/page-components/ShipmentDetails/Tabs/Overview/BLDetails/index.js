@@ -1,7 +1,7 @@
 import { Button, Modal, Accordion } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import EmptyState from '../../../../common/EmptyState';
+import EmptyState from '../../../../../common/EmptyState';
 // import { ShipmentDetailContext } from '../../../../commons/Context';
 // import ManageServices from '../../../../commons/ManageServices';
 // import useListContainerDetails from '../../../hooks/useListContainerDetails';
