@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../common/Form/getFieldController';
 import getAddBadgesControls from '../configurations/get-add-badges-control';
@@ -49,7 +50,7 @@ function useCreateBadgeConfiguration(props) {
 			Gold_img_value,
 		} = formValues || {};
 
-		if (Bronze_value < Silver_value && Silver_value < Gold_value) {
+		if (Number(Bronze_value) < Number(Silver_value) && Number(Silver_value) < Number(Gold_value)) {
 			try {
 				const payload = {
 					version_id                   : '1',
@@ -88,7 +89,7 @@ function useCreateBadgeConfiguration(props) {
 
 				onClose();
 
-				Toast.success('Event Created!');
+				Toast.success(isEmpty(badgeListData) ? 'Event Created !' : 'Event Updated !');
 
 				listRefetch();
 			} catch (error) {

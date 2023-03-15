@@ -30,14 +30,14 @@ const CONTROL_MAPPING = {
 		noDeleteButtonTill : 1,
 		controls           : [
 			{
-				name        : 'from',
+				name        : 'lower_limit',
 				type        : 'number',
 				label       : 'From',
 				placeholder : '0',
 				rules       : { required: 'From is required' },
 			},
 			{
-				name        : 'to',
+				name        : 'upper_limit',
 				type        : 'number',
 				label       : 'To',
 				placeholder : '0',

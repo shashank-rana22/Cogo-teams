@@ -1,5 +1,4 @@
 import { Collapse, Button, Modal } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { IcMAgentManagement } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -9,6 +8,7 @@ import { getFieldController } from '../../../../../../common/Form/getFieldContro
 import getControls from '../../../../configurations/get-add-conditions-controls';
 import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mapping';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
+import useCreateAllocationKamExpertiseEventScoring from '../../../../hooks/useCreateAllocationKamExpertiseEventScoring';
 import useGetKamExpertiseScore from '../../../../hooks/useGetKamExpertiseScore';
 
 import ExpertiseParameters from './ExpertiseParameters';
@@ -57,48 +57,40 @@ function KamExpertiseScoreConfig() {
 
 	const showModal = !isEmpty(addConditionModal);
 
-	const { control, formState:{ errors = {} }, watch, handleSubmit } = useForm({
-		defaultValues: {
-			condition_type : '', // Todo based on expertise
-			score_type     : '', // Todo based on expertise
-			milestones     : [{
-				milestone : '',
-				score     : '',
-			}],
-			tat: [{
-				from  : '',
-				to    : '',
-				score : '',
-			}],
-		},
+	const onClose = () => {
+		setAddConditionModal({});
+	};
+
+	const { data, loading, refetch } = useGetKamExpertiseScore({});
+
+	const {
+		createConditionloading,
+		formProps,
+		onSave,
+	} = useCreateAllocationKamExpertiseEventScoring({
+		onClose,
+		refetch,
 	});
 
-	const { data, loading } = useGetKamExpertiseScore();
+	const { control, formState:{ errors = {} }, watch, handleSubmit } = formProps;
 
 	const { list = [], audit_data: auditData = {} } = data || {};
 
 	const expertiseType = startCase(addConditionModal.type || '');
 
-	const { score_type } = watch();
+	const { scoring_type } = watch();
 
-	const controls = getControls({ modifiedControls: CONTROL_MAPPING[score_type] });
+	const controls = getControls({ modifiedControls: CONTROL_MAPPING[scoring_type] });
 
-	// Todo need to format Values before sending it in payload
-	const onSave = async (values) => {
-		console.log('values', values);
-	};
+	const options = list.map((value) => ({
+		key      : value.expertise_type,
+		title    : titleSection(value),
+		children : <ExpertiseParameters
+			activeCollapse={activeCollapse}
+			onClickAddCondition={() => setAddConditionModal({ type: value?.expertise_type })}
+		/>,
 
-	const options = (list).map((value) => (
-		{
-			key      : value.expertise_type,
-			title    : titleSection(value),
-			children : <ExpertiseParameters
-				activeCollapse={activeCollapse}
-				onClickAddCondition={() => setAddConditionModal({ type: value?.name })}
-			/>,
-
-		}
-	));
+	}));
 
 	return (
 		<>
@@ -114,7 +106,7 @@ function KamExpertiseScoreConfig() {
 				<Modal
 					size="md"
 					show={showModal}
-					onClose={() => setAddConditionModal({})}
+					onClose={onClose}
 					placement="center"
 				>
 					<Modal.Header title="Add Condition" />

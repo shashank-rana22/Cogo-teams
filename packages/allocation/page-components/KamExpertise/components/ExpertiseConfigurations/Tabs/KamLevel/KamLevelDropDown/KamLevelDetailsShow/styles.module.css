@@ -2,18 +2,15 @@
   height: 100%;
   border-radius: 8px;
   background-color: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 .row_level {
   font-weight: 700;
   font-size: 18px;
-  line-height: 150%;
   display: flex;
   align-items: center;
   color: #4f4f4f;
-  margin-bottom: 12px;
-  margin-left: 8px;
-  margin-top: 12px;
+  margin : 12px 0 12px 8px;
 }
 .row_level_end {
   margin: 0 12px;
@@ -27,11 +24,8 @@
 .score_value {
   font-weight: 500;
   font-size: 21px;
-  line-height: 32px;
   color: #333333;
-  margin-left: 8px;
-  margin-top: 6px;
-  margin-bottom: 12px;
+  margin :0 0 24px 8px;
 }
 .border_class {
   border: 1px solid #bdbdbd;
@@ -39,3 +33,7 @@
   width: 98%;
   margin-left: 8px;
 }
+.delete_button{
+  float: right;
+  margin: 10px 32px 10px 10px ;
+ }

@@ -1,0 +1,31 @@
+.container {
+    flex-basis: 24%;
+    padding: 16px 24px 4px;
+    background: #fff;
+    border-radius: 8px;
+    height: 132px;
+    margin: 4px;
+    @media (max-width: 576px) {
+        flex-basis: 100%;
+    }
+}
+
+.title {
+    display: flex;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.display_flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.display_flex_loading {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}

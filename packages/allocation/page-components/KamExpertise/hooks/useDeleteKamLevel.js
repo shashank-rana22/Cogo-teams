@@ -4,8 +4,8 @@ import { useAllocationRequest } from '@cogoport/request';
 // import React from 'react';
 
 function useDeleteKamLevel(props) {
-	const { refetch, dataLength } = props;
-	const [{ loading }, trigger] = useAllocationRequest({
+	const { refetch, transition_level } = props;
+	const [{ loading:deleteLoading }, trigger] = useAllocationRequest({
 		method  : 'POST',
 		url     : 'kam_expertise_configuration_attributes',
 		authkey : 'post_allocation_kam_expertise_configuration_attributes',
@@ -14,19 +14,20 @@ function useDeleteKamLevel(props) {
 	const onDelete = async () => {
 		try {
 			const payload = {
-				transition_level    : dataLength + 1,
-				level_to_be_deleted : true,
+				transition_level,
+				level_to_be_deleted: true,
 			};
 			await trigger({
 				data: payload,
 			});
+			refetch();
+			Toast.success('Level Deleted');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
-		refetch();
 	};
 	return {
-		loading,
+		deleteLoading,
 		onDelete,
 	};
 }

@@ -1,15 +1,16 @@
-import { Select, Input } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { Select } from '@cogoport/components';
+import React from 'react';
+
+import SearchInput from '../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
-function BadgeFilter() {
-	const [search, setSearch] = useState('Search KAM');
+function BadgeFilter(props) {
+	const { searchKAM, setSearchKAM, debounceQuery } = props;
 	const options = [
-		{ label: 'Gold', value: 355 },
-		{ label: 'Silver', value: 54 },
-		{ label: 'Bronze', value: 43 },
+		{ label: 'Gold', value: 300 },
+		{ label: 'Silver', value: 200 },
+		{ label: 'Bronze', value: 100 },
 	];
 
 	return (
@@ -25,11 +26,12 @@ function BadgeFilter() {
 			</div>
 
 			<div className={styles.search}>
-				<Input
+				<SearchInput
 					size="sm"
-					suffix={<IcMSearchlight style={{ margin: '0 8px' }} />}
-					placeholder={search}
-					onChange={setSearch}
+					placeholder="Search KAM"
+					value={searchKAM}
+					setGlobalSearch={setSearchKAM}
+					debounceQuery={debounceQuery}
 				/>
 			</div>
 		</div>

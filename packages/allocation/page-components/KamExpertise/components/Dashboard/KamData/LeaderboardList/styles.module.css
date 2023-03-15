@@ -1,0 +1,30 @@
+.container {
+    width: 100%;
+}
+
+.badges_loading {
+    flex-basis: 70%;
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    display: flex;
+    justify-content: center;
+}
+
+.exp {
+    @media (max-width: 576px) {
+        padding: 0 20px;
+    }
+}
+
+.expertise {
+    color: #333333;
+    padding-bottom: 8px;
+}
+
+.pagination_container {
+    display: flex;
+    justify-content: flex-end;
+}

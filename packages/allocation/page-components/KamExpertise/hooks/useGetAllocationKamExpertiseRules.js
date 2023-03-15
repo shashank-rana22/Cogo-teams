@@ -1,13 +1,14 @@
 import { useAllocationRequest } from '@cogoport/request';
+import { useState, useEffect } from 'react';
 
 function useGetAllocationKamExpertiseRules() {
-	const params = {
+	const [ruleType, setRuleType] = useState('');
+	const [params, setParams] = useState({
 		filters: {
-			status: 'active',
+			status    : 'active',
+			rule_type : ruleType || undefined,
 		},
-	};
-
-	// Todo const [params,setParams] for attributes
+	});
 
 	const [{ loading, data = {} }, refetch] = useAllocationRequest({
 		method  : 'get',
@@ -16,10 +17,22 @@ function useGetAllocationKamExpertiseRules() {
 		params,
 	});
 
+	useEffect(() => {
+		setParams((previousParams) => ({
+			...previousParams,
+			filters: {
+				...previousParams.filters,
+				status    : 'active',
+				rule_type : ruleType || undefined,
+			},
+		}));
+	}, [ruleType]);
+
 	return {
 		attributeList: data.list || [],
 		loading,
 		refetch,
+		setRuleType,
 	};
 }
 

@@ -11,7 +11,7 @@ const transactingMapping = {
 
 function useUpdateKamScores(props) {
 	const {
-		title,
+		transition_level,
 		listrefetch,
 		setEditMode, refetch, listkamLevelDetails,
 	} = props;
@@ -22,12 +22,12 @@ function useUpdateKamScores(props) {
 		'Trade Expertise':trade = [], 'Customer Expertise':customer = [], 'Misc Expertise':misc = [],
 		'Commodity Expertise': commodity = [],
 	} = list;
-	const valueObj = {};
-
-	valueObj.trade_expertise_id = trade[0]?.id;
-	valueObj.customer_expertise_id = customer[0]?.id;
-	valueObj.commodity_expertise_id = commodity[0]?.id;
-	valueObj.misc_expertise_id = misc[0]?.id;
+	const valueObj = {
+		trade_expertise_id     : trade[0]?.id,
+		customer_expertise_id  : customer[0]?.id,
+		commodity_expertise_id : commodity[0]?.id,
+		misc_expertise_id      : misc[0]?.id,
+	};
 
 	transacting.forEach((i) => { valueObj[transactingMapping[i.threshold_score_type]] = i.id; });
 
@@ -51,8 +51,8 @@ function useUpdateKamScores(props) {
 
 		try {
 			const payload = {
-				transition_level      : title,
-				configuration_details : formResponse,
+				transition_level,
+				configuration_details: formResponse,
 			};
 
 			await trigger({

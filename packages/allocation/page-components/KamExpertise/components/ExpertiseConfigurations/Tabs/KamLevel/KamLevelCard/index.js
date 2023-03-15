@@ -6,14 +6,28 @@ import useDeleteKamLevel from '../../../../../hooks/useDeleteKamLevel';
 
 import styles from './styles.module.css';
 
+const COLUMN_MAPPING = [
+	{
+		label: 'Customer Expertise',
+	},
+	{
+		label: 'Trade Expertise',
+	},
+	{
+		label: 'Commodity Expertise',
+	},
+	{
+		label: 'Misc Expertise',
+	},
+];
+
 function KamLevelCard(props) {
 	const {
-		title = '',
+		activeCard = '',
 		data = {},
 		id = '',
-		dataLength = -1,
+		dataLength,
 		refetch = () => {},
-		loading,
 	} = props;
 
 	const {
@@ -21,81 +35,62 @@ function KamLevelCard(props) {
 		expertise_details = [],
 	} = data;
 
-	const { onDelete } = useDeleteKamLevel({ refetch, dataLength });
+	const { onDelete, deleteLoading } = useDeleteKamLevel({ refetch, transition_level });
 
 	const expertiseObject = expertise_details.map((item) => item);
 
-	const COLUMN_MAPPING = [
-		{
-			label: 'Customer Expertise',
-		},
-		{
-			label: 'Trade Expertise',
-		},
-		{
-			label: 'Commodity Expertise',
-		},
-		{
-			label: 'Misc Expertise',
-		},
-	];
 	return (
-		<div className={styles.whole}>
-			<div style={{
-				width          : '100%',
-				display        : 'flex',
-				justifyContent : 'space-between',
-				alignItems     : 'center',
-			}}
-			>
-				<div className={styles.text}>
-					<div style={{ marginRight: '8px' }}>KAM</div>
-					<b>
-						{transition_level - 1}
-					</b>
-					<IcMArrowNext className={styles.arrow} />
-					<b>{transition_level}</b>
-				</div>
-				<div className={styles.button_container}>
+		(
+			<div className={styles.whole}>
+				<div className={styles.card_container}>
+					<div className={styles.text}>
+						<div style={{ marginRight: '8px' }}>KAM</div>
+						<b>
+							{transition_level - 1}
+						</b>
+						<IcMArrowNext className={styles.arrow} />
+						<b>{transition_level}</b>
+					</div>
+					<div className={styles.button_container}>
+						{/* !to do  */}
+						{dataLength === id + 1
+							? (
+								<div className={styles.delete_button}>
+									{deleteLoading ? (
+										<ButtonIcon
+											size="lg"
+											icon={(
+												<IcMDelete
+													style={{ opacity: '0.4', PointerEvent: 'none' }}
+													onClick={(event) => {
+														event.stopPropagation();
+													}}
+												/>
+											)}
+											themeType="primary"
+										/>
+									) : (
+										<ButtonIcon
+											size="lg"
+											icon={(
+												<IcMDelete
+													onClick={(event) => {
+														event.stopPropagation();
+														onDelete();
+													}}
+												/>
+											)}
+											themeType="primary"
+										/>
+									)}
 
-					{dataLength === data.transition_level - 1
-						? (
-							<div className={styles.delete_button}>
-								{ !loading ? (
-									<ButtonIcon
-										size="lg"
-										icon={(
-											<IcMDelete
-												onClick={(event) => {
-													onDelete();
-													event.stopPropagation();
-												}}
-											/>
-										)}
-										themeType="primary"
-									/>
-								) : (
-									<ButtonIcon
-										size="lg"
-										icon={(
-											<IcMDelete
-												style={{ opacity: '0.4', PointerEvent: 'none' }}
-												onClick={(event) => {
-													event.stopPropagation();
-												}}
-											/>
-										)}
-										themeType="primary"
-									/>
-								)}
-
-							</div>
-						)
-						: (null)}
+								</div>
+							)
+							: (null)}
+					</div>
 				</div>
-			</div>
-			{
-			title === id + 1
+				{
+			activeCard === id
 				? (
 					<div className={styles.title_show}>
 						To level up from KAM
@@ -120,14 +115,16 @@ function KamLevelCard(props) {
 								</div>
 								<div style={{ fontWeight: '700' }}>
 									{expertiseObject.find((expertise) => expertise.expertise_type
-									=== item.label)?.threshold_score || '-'}
+									=== item.label)?.threshold_score?.toLocaleString('en-IN') || '-'}
 								</div>
 							</div>
 						))}
 					</div>
 				)
 }
-		</div>
+			</div>
+		)
+
 	);
 }
 export default KamLevelCard;

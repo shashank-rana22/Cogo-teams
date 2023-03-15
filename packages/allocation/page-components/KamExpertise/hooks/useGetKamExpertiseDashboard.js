@@ -2,7 +2,7 @@ import { useAllocationRequest } from '@cogoport/request';
 
 function useGetKamExpertiseDashboard(date_data) {
 	const [{ loading, data }, refetch] = useAllocationRequest({
-		url     : 'get_allocation_kam_expertise_dashboard',
+		url     : '/kam_expertise_dashboard',
 		method  : 'GET',
 		authkey : 'get_allocation_kam_expertise_dashboard',
 		params  : {

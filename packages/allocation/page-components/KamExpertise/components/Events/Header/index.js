@@ -1,5 +1,4 @@
 import { Button, Select } from '@cogoport/components';
-import { useState } from 'react';
 
 import SearchInput from '../../../../../common/SearchInput';
 
@@ -7,16 +6,35 @@ import styles from './styles.module.css';
 
 const OPTIONS = [
 	{
-		label : 'NNM',
-		value : 'nnm',
+		label : 'Customer Expertise',
+		value : 'customer_expertise',
+	},
+	{
+		label : 'Trade Expertise',
+		value : 'trade_expertise',
+	},
+	{
+		label : 'Commodity Expertise',
+		value : 'commodity_expertise',
+	},
+	{
+		label : 'Misc Expertise',
+		value : 'misc_expertise',
 	},
 ];
 
 function Header(props) {
 	// Todo take it from params like in case of search
-	const { params, setToggleNewEvent = () => {}, toggleNewEvent = '' } = props;
+	const {
+		setToggleEvent = () => {},
+		// toggleEvent = '',
+		loading,
+		debounceQuery, setSearchValue = () => {}, searchValue, expertise, setExpertise = () => {},
+	} = props;
 
-	const [expertise, setExpertise] = useState('');
+	const onClose = () => {
+		setToggleEvent('createNew');
+	};
 
 	return (
 		<div>
@@ -27,30 +45,32 @@ function Header(props) {
 					<Select
 						size="md"
 						isClearable
-						placeholder="Expertise"
+						placeholder="Expertise Type"
 						value={expertise}
 						options={OPTIONS}
-						onChange={(value) => setExpertise(value)}
-						style={{ marginRight: 16 }}
-						disabled={toggleNewEvent === false}
+						onChange={(value) => (
+							setExpertise(value)
+						)}
+						style={{ marginRight: 16, width: '440px' }}
+						disabled={loading}
 					/>
 
 					<SearchInput
 						size="md"
 						placeholder="Search"
-                        // setGlobalSearch={setSearchValue}
-						// debounceQuery={debounceQuery}
-						// value={searchValue}
-						disabled={toggleNewEvent === false}
+						setGlobalSearch={setSearchValue}
+						debounceQuery={debounceQuery}
+						value={searchValue}
 						className={styles.search_bar}
+						disabled={loading}
 					/>
 				</div>
 
 				<Button
 					themeType="primary"
 					size="md"
-					onClick={() => setToggleNewEvent((pv) => !pv)}
-					disabled={toggleNewEvent === false}
+					onClick={onClose}
+					disabled={loading}
 				>
 					Add New Event
 				</Button>
