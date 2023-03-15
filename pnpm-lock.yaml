@@ -58,7 +58,6 @@ importers:
       '@cogoport/contracts': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
       '@cogoport/enrichment': workspace:0.1.0
-      '@cogoport/fcl-freight': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/ground-ops': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
@@ -69,6 +68,7 @@ importers:
       '@cogoport/next': workspace:0.1.0
       '@cogoport/performance-management': workspace:1.0.0
       '@cogoport/request': workspace:0.1.0
+      '@cogoport/shipment-fcl-freight': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/supply-dashboards': workspace:0.1.0
       '@cogoport/translate': workspace:0.1.0
@@ -93,7 +93,6 @@ importers:
       '@cogoport/contracts': link:../packages/contracts
       '@cogoport/core': link:../common/core
       '@cogoport/enrichment': link:../packages/enrichment
-      '@cogoport/fcl-freight': link:../packages/fcl-freight
       '@cogoport/forms': link:../common/forms
       '@cogoport/ground-ops': link:../packages/ground-ops
       '@cogoport/icons-react': 1.0.58_biqbaboplfbrettd7655fr4n2y
@@ -104,6 +103,7 @@ importers:
       '@cogoport/next': link:../common/next
       '@cogoport/performance-management': link:../packages/performance-management
       '@cogoport/request': link:../common/request
+      '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
       '@cogoport/store': link:../common/store
       '@cogoport/supply-dashboards': link:../packages/supply-dashboards
       '@cogoport/translate': link:../packages/Translation
@@ -490,26 +490,6 @@ importers:
       '@cogoport/utils': 1.2.4
       react: 18.2.0
 
-  packages/fcl-freight:
-    specifiers:
-      '@cogoport/components': ^1.0.372
-      '@cogoport/constants': workspace:^0.1.0
-      '@cogoport/forms': workspace:^0.1.0
-      '@cogoport/icons-react': ^1.0.60
-      '@cogoport/request': workspace:^0.1.0
-      '@cogoport/store': workspace:^0.1.0
-      '@cogoport/utils': ^1.2.6
-      react: 18.2.0
-    dependencies:
-      '@cogoport/components': 1.0.372_aydyy3gkshtlrnyh7fafj36que
-      '@cogoport/constants': link:../../common/constants
-      '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.60_react@18.2.0
-      '@cogoport/request': link:../../common/request
-      '@cogoport/store': link:../../common/store
-      '@cogoport/utils': 1.2.6
-      react: 18.2.0
-
   packages/ground-ops:
     specifiers:
       '@cogoport/components': ^1.0.322
@@ -619,6 +599,26 @@ importers:
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.4
+      react: 18.2.0
+
+  packages/shipment-fcl-freight:
+    specifiers:
+      '@cogoport/components': ^1.0.372
+      '@cogoport/constants': workspace:^0.1.0
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.60
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.372_aydyy3gkshtlrnyh7fafj36que
+      '@cogoport/constants': link:../../common/constants
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.60_react@18.2.0
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.6
       react: 18.2.0
 
   packages/supply-dashboards:
@@ -5653,7 +5653,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5664,7 +5664,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5675,7 +5675,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -5687,7 +5687,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5698,7 +5698,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -5710,7 +5710,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       immutable: 3.8.2
     dev: false
 

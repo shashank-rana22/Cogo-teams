@@ -1361,15 +1361,6 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens],
 			},
-			{
-				key           : 'coe-fcl-freight',
-				title         : 'FCL Freight',
-				href          : '/fcl-freight',
-				as            : '/fcl-freight',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.fcl_freight,
-			},
 		],
 	},
 	terms_and_conditions: {
