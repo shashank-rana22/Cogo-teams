@@ -54,8 +54,6 @@ function ComposeEmail({
 		uploaderRef?.current?.externalHandleDelete(filteredAttachments);
 	};
 
-	// const toolbar = typeof document.getElementsByClassName('EditorToolbar__root___3_Aqz');
-
 	return (
 		<>
 			<Modal.Body className={styles.modal_body}>
