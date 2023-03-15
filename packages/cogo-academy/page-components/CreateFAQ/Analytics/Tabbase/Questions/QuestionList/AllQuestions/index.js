@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 function AllQuestions(props) {
 	const { data } = props;
 	const listdata = data?.list;
+	console.log('listdata', listdata);
 	const addedQuestionsColumns = () => [
 		{
 			Header   : 'Questions',
@@ -43,36 +44,27 @@ function AllQuestions(props) {
 		},
 		{
 			Header   : 'No.Of Views',
-			accessor : (items) => (items?.faq_tags?.length > 0 ? (
-				<div className={styles.tags}>
-					{items.faq_tags.map((tag) => {
-						const { display_name } = tag || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-					})}
+			accessor : (items) => (
+				<div className={styles.question}>
+					{items?.view_count}
 				</div>
-			) : '-'),
+			),
 		},
 		{
 			Header   : 'No.of Likes',
-			accessor : (items) => (items?.faq_tags?.length > 0 ? (
-				<div className={styles.tags}>
-					{items.faq_tags.map((tag) => {
-						const { display_name } = tag || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-					})}
+			accessor : (items) => (
+				<div className={styles.question}>
+					{items?.answers[0]?.upvote_count}
 				</div>
-			) : '-'),
+			),
 		},
 		{
 			Header   : 'No.of Dislikes',
-			accessor : (items) => (items?.faq_tags?.length > 0 ? (
-				<div className={styles.tags}>
-					{items.faq_tags.map((tag) => {
-						const { display_name } = tag || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-					})}
+			accessor : (items) => (
+				<div className={styles.question}>
+					{items?.answers[0]?.downvote_count}
 				</div>
-			) : '-'),
+			),
 		},
 
 	];

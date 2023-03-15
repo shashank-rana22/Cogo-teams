@@ -115,6 +115,7 @@
 	justify-content: space-between;
 	height: 100%;
 	margin: 1.05%;
+	margin-right: 2%;
 	:global {.styles_active_users__0WZvd {width:270px;}}
 }
 

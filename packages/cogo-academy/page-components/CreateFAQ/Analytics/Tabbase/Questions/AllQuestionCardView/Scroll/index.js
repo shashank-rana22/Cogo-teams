@@ -11,7 +11,7 @@ function ScrollBar({ rightOffSet, leftOffSet }, ref) {
 	};
 
 	return (
-		<div style={{ marginTop: '2.5%' }}>
+		<div style={{ marginTop: '4.25%' }}>
 			{/* <Button
 				themeType="teritary"
 				className="secondary sm"

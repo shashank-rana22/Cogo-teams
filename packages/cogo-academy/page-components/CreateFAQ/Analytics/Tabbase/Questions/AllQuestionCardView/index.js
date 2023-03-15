@@ -25,7 +25,7 @@ function AllQuestionCardView(props = '') {
 		trending_topics,
 		unpopular_questions,
 	} = props;
-	console.log(most_viewed_questions);
+	console.log(trending_topics, 'topics');
 	// const{
 	// 	topic_wise_disliked_questions=[],
 
@@ -122,7 +122,7 @@ function AllQuestionCardView(props = '') {
 					<div style={{ display: 'flex' }}>
 						<ViewCards
 							cardHeading="Topic from which Most Questions viewed"
-							subHeading={active_audiences}
+							subHeading={trending_topics}
 						/>
 						<ViewCards
 							cardHeading="User group that viewed the Most Questions "
@@ -140,14 +140,14 @@ function AllQuestionCardView(props = '') {
 						{/* <ViewCardsList cardHeading="Top Liked Questions" contentQuestion="What are Incoterms?" /> */}
 					</div>
 				</div>
-				<div style={{ marginTop: '-25px', float: 'right' }}>
+				<div style={{ marginTop: '-25px', marginRight: '-10px', float: 'right' }}>
 					<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
 						<div style={{ fontWeight: 600 }}>All Questions..</div>
 						{!showQuestions ? <IcMArrowDown /> : <IcMArrowUp />}
 					</Button>
 				</div>
 			</div>
-			{showQuestions ? <QuestionsList {...props} /> : null}
+			{showQuestions ? <QuestionsList /> : null}
 		</div>
 
 	);
