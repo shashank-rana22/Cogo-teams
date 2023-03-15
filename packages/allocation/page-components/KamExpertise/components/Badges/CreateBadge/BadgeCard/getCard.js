@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
-import { getFieldController } from '../../../../../common/Form/getFieldController';
+import { getFieldController } from '../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 

@@ -2,14 +2,13 @@ import { Button } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import React from 'react';
 
-import SearchInput from '../../../../../common/SearchInput';
+import SearchInput from '../../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
 function Header(props) {
 	const {
-		badgeList,
-		toggleScreen,
+		badgeLength = 1,
 		setToggleScreen = () => {},
 		searchValue,
 		setSearchValue = () => {},
@@ -33,7 +32,6 @@ function Header(props) {
 					multiple
 					isClearable
 					className={styles.dropdown}
-					disabled={toggleScreen === 2 || toggleScreen === 3}
 				/>
 
 				<SearchInput
@@ -43,7 +41,6 @@ function Header(props) {
 					debounceQuery={debounceQuery}
 					value={searchValue}
 					className={styles.search_bar}
-					disabled={toggleScreen === 2 || toggleScreen === 3}
 				/>
 			</div>
 
@@ -56,7 +53,6 @@ function Header(props) {
 						setMasteryListData({});
 						setToggleScreen(2);
 					}}
-					disabled={toggleScreen === 2}
 				>
 					Add Mastery
 				</Button>
@@ -69,10 +65,9 @@ function Header(props) {
 						setBadgeListData({});
 						setToggleScreen(3);
 					}}
-					disabled={toggleScreen === 3}
 				>
 					{
-						badgeList
+						badgeLength
 							? 'Add New Badge'
 							: 'Create New Badge'
 					}

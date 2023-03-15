@@ -7,10 +7,7 @@ import { controls, controlsBottom } from '../../getControls';
 import styles from './styles.module.css';
 
 function KamLevelDetailsEdit({ data = {}, control, handleSubmit, onSave, setEditMode }) {
-	const transacting_accounts = data && data.list && data.list['Transacting Accounts'];
-	// const controls = getControls('top', false);
-	// const controlsBottom = getControls('bottom', false);
-	// console.log('controls', controls);
+	const transacting_accounts = data?.list?.['Transacting Accounts'] || {};
 
 	return (
 		<>

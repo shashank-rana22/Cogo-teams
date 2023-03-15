@@ -4,43 +4,42 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function KamLevelDetailsShow({ data = {}, listLoading, activeCard, setEditMode }) {
-	const transacting_accounts = data && data.list && data.list['Transacting Accounts'];
-	const COLUMN_MAPPING = [
-		{
-			label: 'Customer Expertise',
-		},
-		{
-			label: 'Trade Expertise',
-		},
-		{
-			label: 'Commodity Expertise',
-		},
-		{
-			label: 'Misc Expertise',
-		},
+const COLUMN_MAPPING = [
+	{
+		label: 'Customer Expertise',
+	},
+	{
+		label: 'Trade Expertise',
+	},
+	{
+		label: 'Commodity Expertise',
+	},
+	{
+		label: 'Misc Expertise',
+	},
 
-	];
-	const TRANSACTION_MAPPING = [
-		{
-			label: 'Minimum Transacting Accounts',
-		},
-		{
-			label: 'Retained Account Count',
-		},
-		{
-			label: 'Retained Account Min Duration',
-		},
-	];
+];
+const TRANSACTION_MAPPING = [
+	{
+		label: 'Minimum Transacting Accounts',
+	},
+	{
+		label: 'Retained Account Count',
+	},
+	{
+		label: 'Retained Account Min Duration',
+	},
+];
+
+function KamLevelDetailsShow({ data = {}, listLoading, setEditMode }) {
+	const transacting_accounts = data?.list?.['Transacting Accounts'];
+
 	return (
 		<>
 			<Button
 				themeType="secondary"
 				className={styles.delete_button}
-				onClick={(e) => {
-					if (activeCard) {
-						e.stopPropagation();
-					}
+				onClick={() => {
 					setEditMode(true);
 				}}
 			>

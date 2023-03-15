@@ -32,8 +32,9 @@ const CARD_DATA = [
 ];
 
 const STATUS_COLOR_MAPPING = {
-	draft : 'yellow',
-	live  : 'green',
+	draft   : 'yellow',
+	live    : 'green',
+	expired : 'red',
 };
 
 const HEADING_MAPPING = {
@@ -50,10 +51,19 @@ const HEADING_MAPPING = {
 			{version}
 		</div>
 	),
+	expired: (version) => (
+		<div className={styles.heading}>
+			Version
+			{' '}
+			{' '}
+			{version}
+		</div>
+	),
 };
 
 function ConfigurationCard(props) {
-	const { version, last_edit_by, last_modified, status } = props;
+	const { version, last_edit_by, last_modified, status, handleClick } = props;
+
 	return (
 		<div className={styles.card_container}>
 			<div className={styles.card_header}>
@@ -73,7 +83,7 @@ function ConfigurationCard(props) {
 					</div>
 				</div>
 
-				<Button themeType="secondary">Edit</Button>
+				<Button onClick={handleClick} themeType="secondary">Edit</Button>
 			</div>
 
 			<div className={styles.cards}>
