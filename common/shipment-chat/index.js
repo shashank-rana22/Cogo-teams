@@ -1,1 +1,1 @@
-export { default as shipmentChat } from './page-components';
+export { default as ShipmentChat } from './page-components';

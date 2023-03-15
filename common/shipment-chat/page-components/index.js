@@ -1,11 +1,11 @@
 import React from 'react'
 
-function shipmentChat() {
+function ShipmentChat() {
     return (
         <div>
-            Hello world
+            <h1>Hello ShipmentChat</h1>
         </div>
     )
 }
 
-export default shipmentChat;
+export default ShipmentChat;
