@@ -427,9 +427,9 @@ const apis = [
 		service_name : 'user',
 	},
 	{
-		api          : 'get_exchange_rate',
+		api          : 'get_spot_search_cargo_insurance_rate',
 		access_type  : 'private',
-		service_name : 'exchange_rate',
+		service_name : 'spot_search',
 	},
 ];
 export default apis;
