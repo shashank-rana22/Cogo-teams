@@ -8,6 +8,7 @@ import Spinner from '../../Spinner';
 // import EmptyState from '../EmptyState';
 
 import Answer from './Answer';
+import EmptySearchState from './EmptySearchState';
 import styles from './styles.module.css';
 import useQuestionList from './useQuestionList';
 
@@ -150,8 +151,7 @@ function QuestionList({
 						) : null}
 					</>
 				) : (
-					// <EmptyState />
-					<div>Empty State</div>
+					<EmptySearchState search={search} />
 				)}
 			</div>
 		</div>
