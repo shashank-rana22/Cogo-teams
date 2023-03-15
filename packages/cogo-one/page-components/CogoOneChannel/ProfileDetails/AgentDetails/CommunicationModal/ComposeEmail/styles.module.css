@@ -26,7 +26,6 @@
 .rte_container {
 	position: relative;
 	height: 460px;
-	padding-bottom: 80px;
 	overflow-y: auto;
 }
 
@@ -104,7 +103,7 @@
 }
 
 .attachments_scroll {
-	height: 80px;
+	padding-bottom: 10px;
 	margin-top: 10px;
 }
 
