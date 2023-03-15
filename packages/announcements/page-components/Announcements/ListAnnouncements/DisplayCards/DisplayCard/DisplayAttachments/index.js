@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 import useUpdateAnnouncement from './useUpdateAttachment';
 
 function DisplayAttachments({ data = [], index, refetch = () => {}, announcement_id = '', isValid }) {
-	// console.log('acc::', data);
 	const image = data?.announcement_attachments?.image || '';
 	const pdf = data?.announcement_attachments?.pdf || '';
 	const video = data?.announcement_attachments?.video || '';
@@ -18,7 +17,6 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 		openDocument,
 	} = useUpdateAnnouncement({ refetch, announcement_id });
 
-	// console.log('data:::', data);
 	const displayBoxes = (item) => (
 		item ? (
 			<div className={styles.contain}>
