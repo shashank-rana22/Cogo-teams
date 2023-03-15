@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Input } from '@cogoport/components';
 import { IcMSearchlight, IcMCross, IcMArrowLeft } from '@cogoport/icons-react';
 
@@ -52,7 +51,7 @@ function Header({
 					}}
 				>
 					{(!search && topic) || question ? (
-						<div className={styles.arrow} onClick={onClickBackButton}>
+						<div role="presentation" className={styles.arrow} onClick={onClickBackButton}>
 							<IcMArrowLeft style={{ height: '25px', width: '25px' }} />
 						</div>
 					) : (
