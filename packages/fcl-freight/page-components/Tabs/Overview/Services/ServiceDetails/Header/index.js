@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 // import EditCancelService from '../../../../EditCancelService';
@@ -19,12 +20,12 @@ function Header({
 	shipmentData = {},
 }) {
 	return (
-		<div className={`${state} ${styles.container}`}>
+		<div className={cl`${state} ${styles.container}`}>
 			<div className={styles.heading_wrap}>
 				<div>
-					<div className={`${styles.heading} ${state}`}>{heading}</div>
+					<div className={cl`${styles.heading} ${state}`}>{heading}</div>
 					{shipmentData?.stakeholder_types.map((obj) => (obj !== ('booking_agent' || 'sales_agent') ? (
-						<div className={`${styles.sub_heading} ${state}`}>
+						<div className={cl`${styles.sub_heading} ${state}`}>
 							{service_provider?.business_name}
 						</div>
 					) : null))}
@@ -43,7 +44,7 @@ function Header({
 			</div>
 
 			{service_supply_agent ? (
-				<div className={`${styles.sub_heading} ${state}`}>{service_supply_agent?.name}</div>
+				<div className={cl`${styles.sub_heading} ${state}`}>{service_supply_agent?.name}</div>
 			) : null}
 		</div>
 	);

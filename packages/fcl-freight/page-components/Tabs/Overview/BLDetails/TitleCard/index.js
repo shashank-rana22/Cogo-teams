@@ -26,7 +26,7 @@ function TitleCard({
 	};
 
 	return (
-		<div className={cl` ${styles.container} title-card`}>
+		<div className={cl`${styles.container} title-card`}>
 			<div className={styles.display_card}>
 				{shipment_data?.shipment_type === 'fcl_freight' ? (
 					<div className={styles.details}>

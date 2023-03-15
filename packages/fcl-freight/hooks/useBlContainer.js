@@ -14,15 +14,24 @@ const useBlContainer = ({
 }) => {
 	const scope = useSelector(({ general }) => general.scope);
 
-	const {
-		trigger: containerDetailTrigger,
-		data: containerDetails,
-	} =	 useRequest('get', false, scope)('/list_shipment_container_details');
+	const [{ loading: listLoading, data: containerDetails },
+		containerDetailTrigger] = useRequest({
+		url    : '/list_shipment_container_details',
+		method : 'GET',
+		scope,
+	});
 
-	const {
-		trigger: updateShipmentContainerTrigger,
-		loading: containerLoading,
-	} = useRequest('post', false, scope)('/update_shipment_container_details');
+	// const {
+	// 	trigger: updateShipmentContainerTrigger,
+	// 	loading: containerLoading,
+	// } = useRequest('post', false, scope)('/update_shipment_container_details');
+
+	const [{ loading: containerLoading },
+		updateShipmentContainerTrigger] = useRequest({
+		url    : '/update_shipment_container_details',
+		method : 'POST',
+		scope,
+	});
 
 	const controls = getContainerControl();
 
@@ -57,25 +66,25 @@ const useBlContainer = ({
 		setError(err);
 	};
 
-	const { fields, watch, setValues, handleSubmit } = useForm(controls);
+	const { fields, watch, setValue, handleSubmit } = useForm(controls);
 
 	const formValues = watch();
 
-	const selectedContainers = [];
-	(formValues.bl_details || []).forEach((singleVal) => {
-		selectedContainers.push(...singleVal.container_number);
-	});
+	// const selectedContainers = [];
+	// (formValues.bl_details || []).forEach((singleVal) => {
+	// 	selectedContainers.push(...singleVal.container_number);
+	// });
 
-	useEffect(() => {
-		const containerValues = (data?.list || []).map((obj) => ({
-			bl_id            : obj.id,
-			bl_number        : obj?.bl_number,
-			container_number : '',
-			id               : '',
-		}));
+	// useEffect(() => {
+	// 	const containerValues = (data?.list || []).map((obj) => ({
+	// 		bl_id            : obj.id,
+	// 		bl_number        : obj?.bl_number,
+	// 		container_number : '',
+	// 		id               : '',
+	// 	}));
 
-		setValues({ bl_details: containerValues });
-	}, [data]);
+	// 	setValue({ bl_details: containerValues });
+	// }, [data, setValue]);
 
 	useEffect(() => {
 		(async () => {
@@ -85,41 +94,41 @@ const useBlContainer = ({
 				});
 			}
 		})();
-	}, [shipment_data?.id]);
+	}, []);
 
-	const updateDetails = async () => {
-		const update_data = [];
-		let totalContainerSelected = 0;
-		(formValues?.bl_details || []).forEach((blDetailObj) => {
-			totalContainerSelected += blDetailObj.container_number?.length;
-			(blDetailObj.container_number || []).forEach((containerVal) => {
-				const reqObj = {
-					id   : containerVal?.split(':')[1],
-					data : {
-						container_number : containerVal?.split(':')[0],
-						bl_number        : blDetailObj.bl_number,
-						bl_id            : blDetailObj.bl_id,
-					},
-				};
-				update_data.push(reqObj);
-			});
-		});
-		if (totalContainerSelected !== containerDetails?.list?.length) {
-			toast.warn('Please Select All Containers !');
-			return;
-		}
+	// const updateDetails = async () => {
+	// 	const update_data = [];
+	// 	let totalContainerSelected = 0;
+	// 	(formValues?.bl_details || []).forEach((blDetailObj) => {
+	// 		totalContainerSelected += blDetailObj.container_number?.length;
+	// 		(blDetailObj.container_number || []).forEach((containerVal) => {
+	// 			const reqObj = {
+	// 				id   : containerVal?.split(':')[1],
+	// 				data : {
+	// 					container_number : containerVal?.split(':')[0],
+	// 					bl_number        : blDetailObj.bl_number,
+	// 					bl_id            : blDetailObj.bl_id,
+	// 				},
+	// 			};
+	// 			update_data.push(reqObj);
+	// 		});
+	// 	});
+	// 	if (totalContainerSelected !== containerDetails?.list?.length) {
+	// 		toast.warn('Please Select All Containers !');
+	// 		return;
+	// 	}
 
-		const res = await updateShipmentContainerTrigger({ data: { update_data } });
+	// 	const res = await updateShipmentContainerTrigger({ data: { update_data } });
 
-		if (!res?.hasError) {
-			toast.success('Container Details Updated Successfully');
-			setMappingModal(false);
-			refetch();
-		}
-	};
+	// 	if (!res?.hasError) {
+	// 		toast.success('Container Details Updated Successfully');
+	// 		setMappingModal(false);
+	// 		refetch();
+	// 	}
+	// };
 
 	return {
-		updateDetails,
+		// updateDetails,
 		onError,
 		error,
 		handleSubmit,
