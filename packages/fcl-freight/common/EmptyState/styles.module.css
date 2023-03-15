@@ -17,5 +17,5 @@
 
 .text {
 	font-size: 16px;
-	color: #bdbdbd;
+	color: var(--color-secondary-greyscale-4);
 }

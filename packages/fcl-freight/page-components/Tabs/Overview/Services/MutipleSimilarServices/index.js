@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -45,7 +46,7 @@ function MutipleSimilarServices({
 	}
 
 	const addedServiceComponent = () => (
-		<div className={`${styles.container} ${state}`}>
+		<div className={cl`${styles.container} ${state}`}>
 			<Header
 				service_type={service_type}
 				id={id}
@@ -65,7 +66,7 @@ function MutipleSimilarServices({
 
 			{(toBeDisplayed || []).map((service, index) => (
 				<div
-					className={`${styles.services_details_container} 
+					className={cl`${styles.services_details_container} 
 					${similarServices?.length === index + 1 ? 'last' : 'other'}`}
 
 				>

@@ -1,20 +1,16 @@
-import EmptyState from '@cogo/bookings/commons/EmptyState';
-import { Button, Modal } from '@cogoport/components';;
-import React, { useContext, useState } from 'react';
+import { Button, Modal, Accordion } from '@cogoport/components';
+import React, { useState } from 'react';
 
-import { ShipmentDetailContext } from '../../../../commons/Context';
-import ManageServices from '../../../../commons/ManageServices';
-import useListContainerDetails from '../../../hooks/useListContainerDetails';
+import EmptyState from '../../../../common/EmptyState';
+// import { ShipmentDetailContext } from '../../../../commons/Context';
+// import ManageServices from '../../../../commons/ManageServices';
+// import useListContainerDetails from '../../../hooks/useListContainerDetails';
+import { shipment_data, primary_service, data } from '../dummy_data';
 
 import BlContainer from './BlContainer';
 import ContainerDetails from './ContainerDetails';
 import ContainerNmUpdate from './ContainerNumUpdate';
-import {
-	BlCountContainer,
-	ManageServicesDiv,
-	ServiceCard,
-	ButtonContainer,
-} from './styles';
+import styles from './styles.module.css';
 import TitleCard from './TitleCard';
 
 function BLDetails() {
@@ -23,38 +19,37 @@ function BLDetails() {
 	const [mappingModal, setMappingModal] = useState(false);
 	const [editContainerNum, setEditContainerNum] = useState(false);
 
-	const [{ shipment_data, primary_service }] = useContext(
-		ShipmentDetailContext,
-	);
+	// const [{ shipment_data, primary_service }] = useContext(
+	// 	ShipmentDetailContext,
+	// );
 
-	const {
-		list: { data },
-		loading,
-		isMobile,
-		refetch,
-	} = useListContainerDetails({
-		shipment_id: shipment_data?.id || undefined,
-		shipment_type: shipment_data?.shipment_type,
-	});
+	// const {
+	// 	list: { data },
+	// 	loading,
+	// 	isMobile,
+	// 	refetch,
+	// } = useListContainerDetails({
+	// 	shipment_id   : shipment_data?.id || undefined,
+	// 	shipment_type : shipment_data?.shipment_type,
+	// });
+
+	const loading = false;
 
 	const showConditionForBlContainerBtn = data?.list?.length
 		&& shipment_data?.stakeholder_types?.some((ele) => ['superadmin', 'service_ops2'].includes(ele));
 
-	const renderBlCount = shipment_data?.shipment_type === 'fcl_freight' ? (
-		<BlCountContainer>
+	const renderBlCount = (
+		<div className={styles.bl_count_container}>
 			BL and Container Details
 			<div className="bl-count">
 				(
 				{primary_service?.bls_count || 0}
-				{' '}
 				BL’s,
-				{' '}
 				{primary_service?.containers_count || 0}
-				{' '}
 				Containers)
 			</div>
 			{showConditionForBlContainerBtn ? (
-				<ButtonContainer>
+				<div className={styles.button_container}>
 					<Button
 						onClick={(e) => {
 							setMappingModal(true);
@@ -82,15 +77,14 @@ function BLDetails() {
 							onClose={() => {
 								setMappingModal(false);
 							}}
-							position={isMobile ? 'bottom' : ''}
-							fullscreen={isMobile}
+							// position={isMobile ? 'bottom' : ''}
+							// fullscreen={isMobile}
 							className="primary lg"
 						>
 							<BlContainer
 								shipment_data={shipment_data}
 								data={data}
 								setMappingModal={setMappingModal}
-								refetch={refetch}
 							/>
 						</Modal>
 					) : null}
@@ -110,26 +104,9 @@ function BLDetails() {
 							/>
 						</Modal>
 					) : null}
-				</ButtonContainer>
+				</div>
 			) : null}
-		</BlCountContainer>
-	) : (
-		<BlCountContainer>
-			{shipment_data?.shipment_type === 'air_freight' ? (
-				<>AWB Details </>
-			) : (
-				<>
-					BL Details
-					{' '}
-					<div className="bl-count">
-						(
-						{primary_service?.bls_count || data?.list?.length || 0}
-						{' '}
-						BL’s)
-					</div>
-				</>
-			)}
-		</BlCountContainer>
+		</div>
 	);
 
 	const contentMapping = {
@@ -146,13 +123,13 @@ function BLDetails() {
 	};
 
 	return (
-		<ManageServices title={renderBlCount}>
+		<Accordion title={renderBlCount} style={{ width: '100%' }}>
 			{!loading && !data?.list?.length ? (
 				<EmptyState isMobile={isMobile} showContent={emptyStateContent} />
 			) : (
-				<ManageServicesDiv>
+				<div className={styles.manage_services_div}>
 					{data?.list?.map((item) => (
-						<ServiceCard>
+						<div className={styles.service_card}>
 							<TitleCard
 								item={item}
 								setOpen={setOpen}
@@ -163,15 +140,14 @@ function BLDetails() {
 							/>
 
 							{open
-								&& activeId === item?.id
-								&& shipment_data?.shipment_type === 'fcl_freight' ? (
+								&& activeId === item?.id ? (
 								<ContainerDetails containerDetails={item?.container_details} />
 							) : null}
-						</ServiceCard>
+						</div>
 					))}
-				</ManageServicesDiv>
+				</div>
 			)}
-		</ManageServices>
+		</Accordion>
 	);
 }
 

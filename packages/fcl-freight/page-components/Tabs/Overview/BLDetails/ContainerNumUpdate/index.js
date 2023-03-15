@@ -1,15 +1,8 @@
 import { Input, Button } from '@cogoport/components';;
 import React, { useState } from 'react';
 
-import useContainerNumUpdate from '../../../../hooks/useContainerNumUpdate';
-
-import {
-	Container,
-	Heading,
-	RenderContainer,
-	ButtonContainer,
-	ContainerNum,
-} from './styles';
+// import useContainerNumUpdate from '../../../../hooks/useContainerNumUpdate';
+import styles from './styles.module.css';
 
 function ContainerNmUpdate({
 	setEditContainerNum = () => { },
@@ -30,22 +23,22 @@ function ContainerNmUpdate({
 	};
 
 	return (
-		<Container>
-			<Heading>Update Container Number</Heading>
+		<div className={styles.container}>
+			<div className={styles.heading}>Update Container Number</div>
 
 			{(containerDetails?.list || []).map((container) => (
-				<RenderContainer>
-					<ContainerNum>{container?.container_number}</ContainerNum>
+				<div className={styles.render_container}>
+					<div className={styles.container_num}>{container?.container_number}</div>
 
 					<Input
 						width="100%"
 						value={containerValue[container?.id]}
 						onChange={(e) => handleChange(e, container?.id)}
 					/>
-				</RenderContainer>
+				</div>
 			))}
 
-			<ButtonContainer>
+			<div className={styles.button_container}>
 				<Button
 					className="secondary md"
 					onClick={() => setEditContainerNum(false)}
@@ -61,8 +54,8 @@ function ContainerNmUpdate({
 				>
 					Submit
 				</Button>
-			</ButtonContainer>
-		</Container>
+			</div>
+		</div>
 	);
 }
 

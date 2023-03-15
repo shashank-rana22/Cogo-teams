@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';;
+import { Modal, cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
@@ -49,7 +49,7 @@ function CreateNew({
 		<>
 			{!notUpsell && routeLeg?.display ? (
 				<div
-					className={` ${styles.container} ie_create_new_service `}
+					className={cl` ${styles.container} ie_create_new_service `}
 					onClick={handleClick}
 					role="button"
 					tabIndex={0}

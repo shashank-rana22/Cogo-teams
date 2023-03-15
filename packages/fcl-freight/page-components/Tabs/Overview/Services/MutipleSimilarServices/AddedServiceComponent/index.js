@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -36,7 +37,7 @@ function AddedServiceComponent({
 			{allSimilar > 1 ? (
 				<div
 					onClick={() => setShow(!show)}
-					className={`${styles.expander} ${state}`}
+					className={cl`${styles.expander} ${state}`}
 					role="button"
 					tabIndex={0}
 				>

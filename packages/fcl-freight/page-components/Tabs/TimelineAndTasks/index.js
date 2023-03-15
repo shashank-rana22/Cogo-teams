@@ -1,7 +1,8 @@
+// import List from './components/List'
 function TimelineAndTask() {
 	return (
 		<div>
-			Timeline and Tasks
+			Timenline and tasks
 		</div>
 	);
 }

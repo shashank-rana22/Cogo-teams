@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -11,8 +12,8 @@ function Status({ state, payment_term }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.pill_main}>
-				<div className={`${styles.pill} ${state}`}>
-					<div className={`${styles.text} ${state}`}>{statusText}</div>
+				<div className={cl`${styles.pill} ${state}`}>
+					<div className={cl`${styles.text} ${state}`}>{statusText}</div>
 				</div>
 			</div>
 
@@ -20,7 +21,7 @@ function Status({ state, payment_term }) {
 				<div className={styles.payment_status}>
 					<div className={styles.payment_text}>Payment Term: </div>
 
-					<div className={`${styles.collect} ${state}`}>
+					<div className={cl`${styles.collect} ${state}`}>
 						{startCase(payment_term)}
 						{' '}
 					</div>

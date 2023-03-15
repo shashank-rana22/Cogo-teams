@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';;
 
-import FormLayout from '../../../../../commons/Layout';
-import useBlContainer from '../../../../hooks/useBlContainer';
+// import FormLayout from '../../../../../commons/Layout';
+import useBlContainer from '../../../../../hooks/useBlContainer';
 
 function BlContainer({
 	data,
@@ -10,14 +10,14 @@ function BlContainer({
 	refetch = () => { },
 }) {
 	const {
-		updateDetails,
-		onError,
-		error,
-		handleSubmit,
-		containerLoading,
-		controls,
-		fields,
-		showElements,
+		// updateDetails,
+		// onError,
+		// error,
+		// handleSubmit,
+		// containerLoading,
+		// controls,
+		// fields,
+		// showElements,
 	} = useBlContainer({
 		data,
 		shipment_data,
@@ -27,17 +27,17 @@ function BlContainer({
 
 	return (
 		<div>
-			<FormLayout
+			{/* <FormLayout
 				controls={controls}
 				fields={fields}
 				errors={error}
 				showElements={showElements}
-			/>
+			/> */}
 			<Button
-				onClick={handleSubmit(updateDetails, onError)}
+				// onClick={handleSubmit(updateDetails, onError)}
 				className="primary sg"
 				style={{ marginTop: '5px' }}
-				disabled={containerLoading}
+				// disabled={containerLoading}
 			>
 				Update Details
 			</Button>
