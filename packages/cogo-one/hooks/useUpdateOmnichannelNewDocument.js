@@ -19,6 +19,10 @@ function useUpdateOmnichannelNewDocument({
 			registration_number = '',
 		} = data || {};
 
+		const urlArray = decodeURI(utility_bill_document_url)?.split('/');
+
+		const fileName = urlArray[(urlArray?.length || 0) - 1] || '';
+
 		const {
 			document_type = '',
 			document_url = '',
@@ -30,11 +34,12 @@ function useUpdateOmnichannelNewDocument({
 		};
 
 		const updateFilePayload = {
-			media_url        : document_url,
-			document_data    : { country_id, preferred_languages, registration_number },
-			update_media_url : utility_bill_document_url,
-			state            : 'document_uploaded',
-			document_type,
+			media_url         : document_url,
+			document_data     : { country_id, preferred_languages, registration_number },
+			updated_media_url : utility_bill_document_url,
+			state             : 'document_uploaded',
+			document_type     : document_type === 'pan' ? 'pan' : 'gst',
+			file_name         : fileName,
 		};
 
 		const finalPayload = type === 'update_count' ? updateCountPayload : updateFilePayload;
