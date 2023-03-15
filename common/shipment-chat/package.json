@@ -1,0 +1,7 @@
+{
+  "name": "@cogoport/shipment-chat",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "license": "ISC"
+}

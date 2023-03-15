@@ -1,0 +1,1 @@
+export { default as shipmentChat } from './page-components';
