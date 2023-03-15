@@ -5,7 +5,9 @@ import { useState, useEffect } from 'react';
 function useGetBadgeList() {
 	const [searchValue, setSearchValue] = useState();
 	const [expertise, setExpertise] = useState([]);
+
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
@@ -14,6 +16,7 @@ function useGetBadgeList() {
 			expertise_configuration_ids : expertise || undefined,
 		},
 	});
+
 	const [{ loading, data = {} }, refetch] = useAllocationRequest({
 		url     : '/kam_expertise_badge_configuration_list',
 		method  : 'get',

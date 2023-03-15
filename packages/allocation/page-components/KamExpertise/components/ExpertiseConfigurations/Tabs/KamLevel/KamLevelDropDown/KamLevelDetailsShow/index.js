@@ -4,43 +4,42 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function KamLevelDetailsShow({ data = {}, listLoading, activeCard, setEditMode }) {
-	const transacting_accounts = data && data.list && data.list['Transacting Accounts'];
-	const COLUMN_MAPPING = [
-		{
-			label: 'Customer Expertise',
-		},
-		{
-			label: 'Trade Expertise',
-		},
-		{
-			label: 'Commodity Expertise',
-		},
-		{
-			label: 'Misc Expertise',
-		},
+const COLUMN_MAPPING = [
+	{
+		label: 'Customer Expertise',
+	},
+	{
+		label: 'Trade Expertise',
+	},
+	{
+		label: 'Commodity Expertise',
+	},
+	{
+		label: 'Misc Expertise',
+	},
 
-	];
-	const TRANSACTION_MAPPING = [
-		{
-			label: 'Minimum Transacting Accounts',
-		},
-		{
-			label: 'Retained Account Count',
-		},
-		{
-			label: 'Retained Account Min Duration',
-		},
-	];
+];
+const TRANSACTION_MAPPING = [
+	{
+		label: 'Minimum Transacting Accounts',
+	},
+	{
+		label: 'Retained Account Count',
+	},
+	{
+		label: 'Retained Account Min Duration',
+	},
+];
+
+function KamLevelDetailsShow({ data = {}, listLoading, setEditMode }) {
+	const transacting_accounts = data?.list?.['Transacting Accounts'];
+
 	return (
 		<>
 			<Button
 				themeType="secondary"
 				className={styles.delete_button}
-				onClick={(e) => {
-					if (activeCard) {
-						e.stopPropagation();
-					}
+				onClick={() => {
 					setEditMode(true);
 				}}
 			>
@@ -58,24 +57,30 @@ function KamLevelDetailsShow({ data = {}, listLoading, activeCard, setEditMode }
 
 						<div className={styles.score_value}>
 							{listLoading ? (<Placeholder height="30px" width="300px" />)
-								: (data?.list?.[item.label]?.[0].threshold_score || '-')}
+								: ((data?.list?.[item.label]?.[0].threshold_score)?.toLocaleString('en-IN') || '-')}
 
 						</div>
 						<div className={styles.border_class} />
 					</div>
 				))}
 				<div className={styles.row_level_end}>
+
 					<h2>Transacting Account</h2>
+
 					<div className={styles.row_level_end_options}>
+
 						{TRANSACTION_MAPPING.map((item) => (
+
 							<div style={{ width: '24%' }}>
+
 								<div>{startCase(item.label)}</div>
+
 								<div className={styles.score_value}>
 									{listLoading && <Placeholder height="30px" width="250" />}
 
 									{transacting_accounts && !listLoading
 									&& (transacting_accounts.find((account) => account.threshold_score_type
-									=== item.label)?.threshold_score || '-')}
+									=== item.label)?.threshold_score?.toLocaleString('en-IN') || '-')}
 								</div>
 							</div>
 						))}

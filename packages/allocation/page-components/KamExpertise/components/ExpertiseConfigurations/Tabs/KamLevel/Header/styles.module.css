@@ -13,12 +13,18 @@
 .config_basic_details {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 100%;
 }
 
 .lower_details {
   display: flex;
-  justify-content: space-between;
   margin-top: 8px;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 14px;
+}
+.draft_name {
+  font-weight: 400;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
 }

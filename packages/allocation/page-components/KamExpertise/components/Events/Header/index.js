@@ -1,5 +1,4 @@
 import { Button, Select } from '@cogoport/components';
-// import { useState } from 'react';
 
 import SearchInput from '../../../../../common/SearchInput';
 
@@ -29,6 +28,7 @@ function Header(props) {
 	const {
 		setToggleEvent = () => {},
 		// toggleEvent = '',
+		loading,
 		debounceQuery, setSearchValue = () => {}, searchValue, expertise, setExpertise = () => {},
 	} = props;
 
@@ -51,8 +51,8 @@ function Header(props) {
 						onChange={(value) => (
 							setExpertise(value)
 						)}
-						style={{ marginRight: 16, width: '320px' }}
-						// disabled={toggleEvent === 'updateEvent'}
+						style={{ marginRight: 16, width: '440px' }}
+						disabled={loading}
 					/>
 
 					<SearchInput
@@ -61,8 +61,8 @@ function Header(props) {
 						setGlobalSearch={setSearchValue}
 						debounceQuery={debounceQuery}
 						value={searchValue}
-						// disabled={toggleEvent === false}
 						className={styles.search_bar}
+						disabled={loading}
 					/>
 				</div>
 
@@ -70,7 +70,7 @@ function Header(props) {
 					themeType="primary"
 					size="md"
 					onClick={onClose}
-					// disabled={toggleEvent === false}
+					disabled={loading}
 				>
 					Add New Event
 				</Button>

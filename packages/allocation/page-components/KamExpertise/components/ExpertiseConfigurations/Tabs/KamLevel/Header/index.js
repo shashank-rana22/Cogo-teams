@@ -1,33 +1,48 @@
 // import { Button } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import { startCase, format } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function Header(props) {
-	const { audit_data } = props;
+	const { audit_data, levelLoading } = props;
 	return (
 		<div className={styles.container}>
 			<div className={styles.config_basic_details}>
 
 				<div className={styles.draft_name}>
-					Currently Editing :
-					{' '}
-				&nbsp;
-					<b>Saved Draft</b>
+					<div style={{ marginRight: '8px' }}>
+						Currently Editing :
+						{' '}
+					</div>
+					{!levelLoading ? (<b>Saved Draft</b>)
+						: (<Placeholder height="20px" width="120px" />)}
+
 				</div>
 
 				<div className={styles.lower_details}>
-					<div>
-						Last Modified:
-						{' '}
-						{format(audit_data.updated_at, 'dd-MM-YYYY')}
-					</div>
 
-					<div>
-						Last Edit By:
+					<div style={{ marginRight: '8px' }}>
+						Last Modified
 						{' '}
-						<b>{startCase(audit_data?.name || 'I did this')}</b>
+						:
+					</div>
+					{!levelLoading ? (format(audit_data?.updated_at, 'dd-MM-YYYY') || '--')
+						: (<Placeholder height="20px" width="120px" />)}
+
+					<div style={{ marginLeft: '36px', display: 'flex' }}>
+
+						<div style={{ marginRight: '8px' }}>
+							Last Edit By
+							{' '}
+							:
+							{' '}
+						</div>
+
+						{!levelLoading ? (<b>{startCase(audit_data?.name || '----')}</b>)
+							: (<Placeholder height="20px" width="120px" />)}
+
 					</div>
 				</div>
 			</div>

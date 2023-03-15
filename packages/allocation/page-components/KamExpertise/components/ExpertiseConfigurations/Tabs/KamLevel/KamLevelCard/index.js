@@ -6,12 +6,27 @@ import useDeleteKamLevel from '../../../../../hooks/useDeleteKamLevel';
 
 import styles from './styles.module.css';
 
+const COLUMN_MAPPING = [
+	{
+		label: 'Customer Expertise',
+	},
+	{
+		label: 'Trade Expertise',
+	},
+	{
+		label: 'Commodity Expertise',
+	},
+	{
+		label: 'Misc Expertise',
+	},
+];
+
 function KamLevelCard(props) {
 	const {
 		activeCard = '',
 		data = {},
 		id = '',
-		dataLength = -1,
+		dataLength,
 		refetch = () => {},
 	} = props;
 
@@ -20,34 +35,14 @@ function KamLevelCard(props) {
 		expertise_details = [],
 	} = data;
 
-	const { onDelete, deleteLoading } = useDeleteKamLevel({ refetch, dataLength });
+	const { onDelete, deleteLoading } = useDeleteKamLevel({ refetch, transition_level });
 
 	const expertiseObject = expertise_details.map((item) => item);
 
-	const COLUMN_MAPPING = [
-		{
-			label: 'Customer Expertise',
-		},
-		{
-			label: 'Trade Expertise',
-		},
-		{
-			label: 'Commodity Expertise',
-		},
-		{
-			label: 'Misc Expertise',
-		},
-	];
 	return (
 		(
 			<div className={styles.whole}>
-				<div style={{
-					width          : '100%',
-					display        : 'flex',
-					justifyContent : 'space-between',
-					alignItems     : 'center',
-				}}
-				>
+				<div className={styles.card_container}>
 					<div className={styles.text}>
 						<div style={{ marginRight: '8px' }}>KAM</div>
 						<b>
@@ -57,8 +52,8 @@ function KamLevelCard(props) {
 						<b>{transition_level}</b>
 					</div>
 					<div className={styles.button_container}>
-
-						{dataLength === data.transition_level - 1
+						{/* !to do  */}
+						{dataLength === id + 1
 							? (
 								<div className={styles.delete_button}>
 									{deleteLoading ? (
@@ -95,7 +90,7 @@ function KamLevelCard(props) {
 					</div>
 				</div>
 				{
-			activeCard === id + 1
+			activeCard === id
 				? (
 					<div className={styles.title_show}>
 						To level up from KAM
@@ -120,7 +115,7 @@ function KamLevelCard(props) {
 								</div>
 								<div style={{ fontWeight: '700' }}>
 									{expertiseObject.find((expertise) => expertise.expertise_type
-									=== item.label)?.threshold_score || '-'}
+									=== item.label)?.threshold_score?.toLocaleString('en-IN') || '-'}
 								</div>
 							</div>
 						))}

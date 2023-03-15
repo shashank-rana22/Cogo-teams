@@ -28,10 +28,11 @@ function Child(props) {
 						<div className={styles.label}>{controlItem.label}</div>
 
 						<Element
+							key={`${name}.${index}.${controlItem.name}`}
 							control={control}
 							id={`create_form_${controlItem.name}_field`}
 							{...controlItem}
-							name={`${controlItem.name}_${index}`}
+							name={`${name}.${index}.${controlItem.name}`}
 						/>
 
 						{/* // Todo errors */}

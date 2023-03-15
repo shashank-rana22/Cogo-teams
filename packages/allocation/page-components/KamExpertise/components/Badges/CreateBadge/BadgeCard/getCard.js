@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
-import { getFieldController } from '../../../../../common/Form/getFieldController';
+import { getFieldController } from '../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 
@@ -57,6 +57,7 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 					<UploadControler
 						name={`${medalType}_img_value`}
 						control={control}
+						accept=".png, .jpeg"
 						rules={isEmpty(badgeListData) ? {
 							required: 'Image is required',
 						} : {}}

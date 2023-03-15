@@ -47,14 +47,7 @@ function ResponseCard({
 					</b>
 
 				</div>
-				<div style={{
-					width          : '12%',
-					float          : 'right',
-					justifyContent : 'center',
-					alignItems     : 'center',
-					display        : 'flex',
-				}}
-				>
+				<div className={styles.cancel_button}>
 					<Button
 						style={{ margin: '10px' }}
 						themeType="secondary"
