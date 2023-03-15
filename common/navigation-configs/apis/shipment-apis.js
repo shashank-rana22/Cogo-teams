@@ -1277,6 +1277,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api         : 'get_exchange_rate',
+		access_type : 'private',
+	},
 ];
 
 export default apis;
