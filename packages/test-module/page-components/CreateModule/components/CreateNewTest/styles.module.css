@@ -15,6 +15,18 @@
 .label_type {
   flex: 1;
 }
+
+.header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .control_container {
   display: flex;
   flex-basis: 40%;
