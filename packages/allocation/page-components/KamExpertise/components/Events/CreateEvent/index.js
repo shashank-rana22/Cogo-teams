@@ -42,7 +42,6 @@ function CreateEvent(props) {
 		setRuleType = () => {},
 	} = useGetAllocationKamExpertiseRules();
 
-
 	const {
 		onSave,
 		getAddRuleControls,

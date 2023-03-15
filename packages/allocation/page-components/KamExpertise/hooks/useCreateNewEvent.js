@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
 
 import getAddRuleControls from '../configurations/get-add-rule-controls';
 
