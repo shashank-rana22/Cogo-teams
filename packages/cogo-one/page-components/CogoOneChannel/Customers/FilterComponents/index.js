@@ -32,7 +32,7 @@ function FilterComponents({
 }) {
 	const [botToggle, setBotToggle] = useState(false);
 
-	const filterControls = useGetControls();
+	const filterControls = useGetControls(isomniChannelAdmin);
 
 	const defaultValues = getDefaultValues({ filters: appliedFilters, filterControls });
 
