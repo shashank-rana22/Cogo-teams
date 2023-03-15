@@ -1,4 +1,4 @@
-import { cl, Tooltip, Button } from '@cogoport/components';
+import { cl, Tooltip } from '@cogoport/components';
 import { IcMCall } from '@cogoport/icons-react';
 import { startCase, format, isEmpty } from '@cogoport/utils';
 
@@ -13,7 +13,6 @@ function VoiceList({
 	setActiveVoiceCard = () => { },
 	activeVoiceCard,
 	activeTab,
-	setShowDialModal = () => {},
 }) {
 	const {
 		loading,

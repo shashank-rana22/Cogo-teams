@@ -47,10 +47,6 @@ function Customers({
 		}
 	};
 
-	// const openModelForNewContact = () => {
-	// 	setModalType(true);
-	// };
-
 	const handleOpenOptions = () => {
 		setIsChecked(!isChecked);
 	};
@@ -139,22 +135,16 @@ function Customers({
 			<div className={styles.wrapper}>
 
 				<input
-					id="fabCheckbox"
+					id="plus_checkbox"
 					type="checkbox"
 					className={styles.checkbox}
 					checked={isChecked}
 				/>
-				<div htmlFor="fabCheckbox" className={styles.plus_circle}>
+				<div htmlFor="plus_checkbox" className={styles.plus_circle}>
 					<IcMPlus onClick={handleOpenOptions} fill="#ffffff" width={35} height={35} />
 				</div>
 				<div className={styles.wheel}>
 					<div className={`${styles.action} ${styles.callicon}`}>
-						{/* <IcMCall onClick={() => setShowDialModal(true)} width={50} height={50} /> */}
-						{/* <img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/phone_dark.svg"
-							alt=""
-						/> */}
-
 						<img
 							onClick={() => setShowDialModal(true)}
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/phone_light.svg"
@@ -163,11 +153,6 @@ function Customers({
 						/>
 					</div>
 					<div className={`${styles.action} ${styles.whatsappicon}`}>
-						{/* <IcCSendWhatsapp onClick={() => setModalType(true)} width={50} height={50} /> */}
-						{/* <img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/whatsapp_light.svg"
-							alt=""
-						/> */}
 						<img
 							onClick={() => setModalType(true)}
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/w_app_d.svg"
