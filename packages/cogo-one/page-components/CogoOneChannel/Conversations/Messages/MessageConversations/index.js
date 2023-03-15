@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { cl, Popover } from '@cogoport/components';
 import {
 	IcMHappy,
@@ -18,6 +17,18 @@ import EmojisBody from './EmojisBody';
 import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
+import TimeLine from './TimeLine';
+
+function MessageMapping({ conversation_type, ...restProps }) {
+	switch (conversation_type) {
+		case 'sent':
+			return <ReceiveDiv {...restProps} />;
+		case 'received':
+			return <SentDiv {...restProps} />;
+		default:
+			return <TimeLine {...restProps} />;
+	}
+}
 
 function MessageConversations({
 	messagesData = [],
@@ -41,6 +52,7 @@ function MessageConversations({
 	lastPage = false,
 
 }) {
+	console.log('messagesData:', messagesData);
 	const messageRef = useRef();
 	const { id = '', channel_type = '' } = activeMessageCard;
 
@@ -161,19 +173,12 @@ function MessageConversations({
 					</div>
 				)}
 			{(messagesData || []).map((eachMessage) => (
-				eachMessage?.conversation_type !== 'received' ? (
-					<ReceiveDiv
-						key={eachMessage?.created_at}
-						eachMessage={eachMessage}
-						activeMessageCard={activeMessageCard}
-					/>
-				) : (
-					<SentDiv
-						key={eachMessage?.created_at}
-						eachMessage={eachMessage}
-						activeMessageCard={activeMessageCard}
-					/>
-				)
+				<MessageMapping
+					key={eachMessage?.created_at}
+					conversation_type={eachMessage?.conversation_type || 'unknown'}
+					eachMessage={eachMessage}
+					activeMessageCard={activeMessageCard}
+				/>
 			))}
 
 		</>

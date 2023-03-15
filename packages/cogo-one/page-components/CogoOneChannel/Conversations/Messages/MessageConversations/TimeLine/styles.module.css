@@ -1,0 +1,14 @@
+.container {
+	display: flex;
+	justify-content: center;
+	margin: 5px 0;
+}
+
+.timeline_container {
+	max-width: 80%;
+	padding: 0 7px;
+	font-size: 12px;
+	text-align: center;
+	background: #e0e0e0;
+	border-radius: 4px;
+}

@@ -19,11 +19,9 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 	const [loadingPrevMessages, setLoadingPrevMessages] = useState(false);
 
 	const {
-		data,
 		getCogooneTimeline,
 		loading,
-	} = useListCogooneTimeline({ id });
-	console.log('data:', data, loading);
+	} = useListCogooneTimeline({ id, setMessagesState });
 
 	const snapshotCleaner = () => {
 		if (firstMessages.current) {
@@ -41,8 +39,6 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 			limit(10),
 		);
 
-		const prevMessageData = { ...messagesState?.[id]?.messagesData } || {};
-
 		firstMessages.current = onSnapshot(
 			chatCollectionQuery,
 			(querySnapshot) => {
@@ -54,18 +50,12 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 					currentMessages = { ...currentMessages, [timeStamp]: mes.data() };
 				});
 
-				setMessagesState((p) => ({
-					...p,
-					[id]: {
-						messagesData: { ...prevMessageData, ...currentMessages },
-						lastDocumentTimeStamp,
-						islastPage,
-					},
-				}));
-				const currentTimeLine = Object.keys(currentMessages).sort();
 				getCogooneTimeline({
-					startDate : currentTimeLine[0],
-					endDate   : currentTimeLine.at(-1),
+					startDate : lastDocumentTimeStamp,
+					endDate   : Date.now(),
+					currentMessages,
+					lastDocumentTimeStamp,
+					islastPage,
 				});
 				setFirstLoadingMessages(false);
 			},
@@ -83,26 +73,26 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 			orderBy('created_at', 'desc'),
 			limit(10),
 		);
-		let prevMessageData = messagesState?.[id]?.messagesData || {};
+
 		setLoadingPrevMessages(true);
 		const prevMessagesPromise = await getDocs(chatCollectionQuery);
 		const prevMessages = prevMessagesPromise?.docs;
 		const lastDocumentTimeStamp = prevMessages[(prevMessages?.length || 0) - 1]?.data()?.created_at;
 		const islastPage = prevMessages?.length < 10;
-
+		let currentMessages = {};
 		prevMessages.forEach((mes) => {
 			const timeStamp = mes.data()?.created_at;
-			prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
+			currentMessages = { ...currentMessages, [timeStamp]: mes.data() };
 		});
-		setMessagesState((p) => ({
-			...p,
-			[id]: {
-				...(messagesState?.[id] || {}),
-				messagesData: prevMessageData,
-				lastDocumentTimeStamp,
-				islastPage,
-			},
-		}));
+		const prevTimeStamp = Number(messagesState?.[id]?.lastDocumentTimeStamp);
+
+		getCogooneTimeline({
+			startDate : lastDocumentTimeStamp,
+			endDate   : prevTimeStamp,
+			currentMessages,
+			lastDocumentTimeStamp,
+			islastPage,
+		});
 		setLoadingPrevMessages(false);
 	};
 
@@ -122,10 +112,10 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 
 	return {
 		getNextData,
-		lastPage     : messagesState?.[id]?.islastPage,
-		messagesData : sortedMessageData,
+		lastPage            : messagesState?.[id]?.islastPage,
+		messagesData        : sortedMessageData,
 		firstLoadingMessages,
-		loadingPrevMessages,
+		loadingPrevMessages : loadingPrevMessages || loading,
 		messagesState,
 	};
 };
