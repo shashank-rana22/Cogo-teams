@@ -21,7 +21,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 	const {
 		getCogooneTimeline,
 		loading,
-	} = useListCogooneTimeline({ id, setMessagesState });
+	} = useListCogooneTimeline({ id, setMessagesState, type: 'messages' });
 
 	const snapshotCleaner = () => {
 		if (firstMessages.current) {

@@ -8,7 +8,7 @@ import EmptyState from '../../../../common/EmptyState';
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
 import USER_ACTIVITY_COMPONENT_MAPPING from '../../../../constants/USER_ACTIVITY_MAPPING';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
-import useListTimeLine from '../../../../hooks/useListTimeline';
+import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
 
 import Filters from './Filters';
 import LoadingState from './LoadingState';
@@ -50,11 +50,12 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		data: timeLineData = {},
 		page,
 		setPage = () => {},
-	} = useListTimeLine({
+	} = useListCogooneTimeline({
 		activeSubTab,
 		id,
 		user_id,
 		lead_user_id,
+		type: 'activity',
 	});
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
