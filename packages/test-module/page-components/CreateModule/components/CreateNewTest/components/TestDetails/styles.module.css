@@ -1,68 +1,68 @@
 .container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: space-between;
-  padding: 24px 72px;
-  margin-top: 40px;
-  background: rgb(255 255 255 / 70%);
-  border-radius: 6px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+	justify-content: space-between;
+	padding: 24px 72px;
+	margin-top: 40px;
+	background: rgb(255 255 255 / 70%);
+	border-radius: 6px;
 
-  @media (max-width: 768px) {
-    padding: 24px;
-  }
+	@media (max-width: 768px) {
+		padding: 24px;
+	}
 }
 
 .label_type {
-  flex: 1;
+	flex: 1;
 }
 
 .header {
-  display: flex;
-  gap: 8px;
-  align-items: center;
+	display: flex;
+	gap: 8px;
+	align-items: center;
 }
 
 .title {
-  font-size: 20px;
-  font-weight: 600;
+	font-size: 20px;
+	font-weight: 600;
 }
 
 .control_container {
-  display: flex;
-  flex-basis: 40%;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	flex-basis: 40%;
+	align-items: center;
+	justify-content: space-between;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    margin: auto;
-  }
+	@media (max-width: 768px) {
+		flex-direction: column;
+		margin: auto;
+	}
 
-  .control_type {
-    display: flex;
-    flex-direction: row;
-  }
+	.control_type {
+		display: flex;
+		flex-direction: row;
+	}
 
-  :global {
-    .ui_input_container {
-      width: 250px;
-    }
+	:global {
+		.ui_input_container {
+			width: 250px;
+		}
 
-    .ui_select_container {
-      width: 124px;
-    }
-  }
+		.ui_select_container {
+			width: 124px;
+		}
+	}
 }
 
 .control {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  .error_msg {
-    margin: 0;
-    font-size: 12px;
-    font-weight: 500;
-    color: #cb6464;
-  }
+	.error_msg {
+		margin: 0;
+		font-size: 12px;
+		font-weight: 500;
+		color: #cb6464;
+	}
 }
