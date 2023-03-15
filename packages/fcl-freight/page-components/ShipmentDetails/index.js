@@ -1,9 +1,17 @@
-import styles from './styles.module.css';
+import React, { useState } from 'react';
+
+import Header from '../Header';
+import Tab from '../Tabs';
+import Timeline from '../TimeLine';
 
 function ShipmentDetails() {
+	const [activeTab, setActiveTab] = useState('overview');
+
 	return (
-		<div className={styles.container}>
-			ShipmentDetails
+		<div>
+			<Header />
+			<Timeline />
+			<Tab />
 		</div>
 	);
 }

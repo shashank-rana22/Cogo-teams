@@ -1,1 +1,1 @@
-export { default } from '@cogoport/fcl-freight/page-components/Layout';
+export { default } from '@cogoport/fcl-freight/page-components/ShipmentDetails';

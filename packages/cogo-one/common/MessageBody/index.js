@@ -1,21 +1,21 @@
 import { IcMUserAllocations } from '@cogoport/icons-react';
 
-import { URL_MATCH_REGEX } from '../../constants';
 import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
+import whatsappTextFormatting from '../../helpers/whatsappTextFormatting';
 
 import CustomFileDiv from './CustomFileDiv';
 import styles from './styles.module.css';
 
 function MessageBody({ response = {}, message_type = 'text' }) {
 	const { message = '', media_url = '' } = response;
-	const URLRegex = new RegExp(URL_MATCH_REGEX);
 	const fileExtension = media_url?.split('.').pop();
-	const renderText = (txt = '') => (
-		(txt?.split(' ') || [])
-			.map((part) => (URLRegex.test(part) ? (
-				`<a href=${part} target="_blank">${part} </a>`
-			) : `${part} `))
-	).join(' ');
+	const { renderURLText, renderBoldText } = whatsappTextFormatting();
+
+	const renderText = (txt = '') => {
+		let newTxt = renderURLText(txt);
+		newTxt = renderBoldText(newTxt);
+		return newTxt;
+	};
 
 	function ShowMessage() {
 		return message_type === 'template'

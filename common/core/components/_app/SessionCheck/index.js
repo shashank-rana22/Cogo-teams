@@ -9,7 +9,7 @@ function SessionCheck({ children }) {
 			<div className={styles.container}>
 				<img
 					alt="cogoport-loading"
-					src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif"
+					src="https://media.tenor.com/rtY9m7EokSYAAAAC/cat-loading.gif"
 				/>
 			</div>
 		);
