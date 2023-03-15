@@ -5,7 +5,7 @@ import React from 'react';
 import EmptyState from '../../../common/Empty';
 import useGetOrganizationCohort from '../../../hooks/useGetOrganizationCohort';
 
-import resultColumns from './resultColumns';
+import ResultColumns from './resultColumns';
 import styles from './styles.module.css';
 
 function CohortTable({ isComponentInViewport, byEtd, headerFilters }) {
@@ -17,7 +17,7 @@ function CohortTable({ isComponentInViewport, byEtd, headerFilters }) {
 
 	const { data = [], page, page_size } = apiData || {};
 
-	const newColumns = resultColumns({ loading });
+	const newColumns = ResultColumns({ loading });
 
 	return (
 		<div className={styles.container_table}>

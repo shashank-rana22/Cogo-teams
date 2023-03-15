@@ -36,6 +36,7 @@ const useListSalesOverallData = (salesCompInViewport) => {
 		if (Object.keys(filters).length > 0 && salesCompInViewport) {
 			fetchSalesOverallData();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filters, salesCompInViewport]);
 
 	return {

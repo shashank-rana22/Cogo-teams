@@ -20,7 +20,6 @@ function MobileBookingAnalysis({
 	);
 	return (
 		<div className={styles.row}>
-			{console.log('revenue', revenue_analysis)}
 			<IcMArrowLeft
 				onClick={() => mobileGetPreviousData(
 					revenue_analysis[0],
@@ -46,8 +45,8 @@ function MobileBookingAnalysis({
 							revenue_analysis[0],
 							param,
 							setParam,
-						// eslint-disable-next-line react/jsx-indent
-						)
+							// eslint-disable-next-line indent
+				)
 				}
 			/>
 

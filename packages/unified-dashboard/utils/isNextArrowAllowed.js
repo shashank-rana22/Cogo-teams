@@ -24,7 +24,8 @@ const isNextArrowAllowed = (selectedFilterTab, data, maxEtd = '') => {
 		}
 
 		case 'week': {
-			const etdWeek = data[data?.length - 1];
+			const lastDataIndex = data && data.length > 0 ? data.length - 1 : null;
+			const etdWeek = lastDataIndex !== null ? data[lastDataIndex] : null;
 			const nextWeekDate = getNextWeekDate(etdWeek, true);
 			if (nextWeekDate > new Date(maxEtd)) {
 				return true;
@@ -32,11 +33,12 @@ const isNextArrowAllowed = (selectedFilterTab, data, maxEtd = '') => {
 			return false;
 		}
 		case 'quarter': {
-			const date = new Date(
-				`${data[data?.length - 1]?.year}/${data[data?.length - 1]?.month}/${
-					data[data?.length - 1]?.day
-				}`,
-			);
+			const lastData = data && data.length > 0 ? data[data.length - 1] : null;
+			const year = lastData?.year;
+			const month = lastData?.month;
+			const day = lastData?.day;
+			const date = year && month && day ? new Date(`${year}/${month}/${day}`) : null;
+
 			const nextQuarterMonth = new Date(date.setMonth(date.getMonth() + 5));
 			const getEndDate = new Date(
 				nextQuarterMonth.getFullYear(),

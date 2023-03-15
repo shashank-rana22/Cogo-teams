@@ -44,6 +44,7 @@ const useGetTypewiseBreakdown = ({
 
 	useEffect(() => {
 		if (isDataSelected) getTypewiseBreakdown();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(selectedData), JSON.stringify(entity_code)]);
 
 	return {

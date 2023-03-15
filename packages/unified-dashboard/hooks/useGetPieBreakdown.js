@@ -42,6 +42,7 @@ const useGetPieBreakdown = ({ selectedPieData, byEtd, headerFilters }) => {
 
 	useEffect(() => {
 		if (selectedPieData) getPieBreakdown();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(selectedPieData), page, JSON.stringify(entity_code)]);
 
 	return {

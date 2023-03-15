@@ -1,7 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequest } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 import { getDefaultFilters } from '../utils/startDateOfMonth';
@@ -43,15 +41,12 @@ const useGetProfitability = (isInViewport) => {
 		}
 	};
 
-	console.log('loading', loading);
-
 	useEffect(() => {
 		if (isInViewport) {
 			getProfitabilityData();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(restData), isInViewport, JSON.stringify(query)]);
-
-	console.log('laodddingg', loading);
 
 	return {
 		loading,

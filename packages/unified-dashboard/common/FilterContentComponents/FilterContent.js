@@ -30,10 +30,15 @@ function FilterContent({
 
 		if (!element) {
 			// TODO remove this, and throw an error
-			return function () {
 
+			return function () {
+				return (
+					<div>
+						No element found
+						{type}
+					</div>
+				);
 			};
-			// return () => <div>No element found {type}</div>;
 		}
 
 		return element;

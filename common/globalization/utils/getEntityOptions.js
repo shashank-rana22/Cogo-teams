@@ -1,7 +1,6 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-
 import IN from '../constants/geo/IN';
 import VN from '../constants/geo/VN';
+import GLOBAL_CONSTANTS from '../constants/globals.json';
 
 const { country_ids } = GLOBAL_CONSTANTS;
 

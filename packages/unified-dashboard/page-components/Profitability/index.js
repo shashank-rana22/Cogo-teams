@@ -28,6 +28,7 @@ function Profitability({ headerFilters }) {
 			to_currency : currency,
 			entity_code : entity_code.length > 0 ? entity_code : undefined,
 		}));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(headerFilters)]);
 
 	return (

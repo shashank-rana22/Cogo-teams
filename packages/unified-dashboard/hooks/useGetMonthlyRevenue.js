@@ -35,6 +35,7 @@ const useGetMonthlyRevenue = ({
 
 	useEffect(() => {
 		if (!isDataSelected && inViewport) getMonthlyRevenue();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filters, inViewport, JSON.stringify(entity_code)]);
 
 	return {

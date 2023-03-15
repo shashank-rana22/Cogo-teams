@@ -34,6 +34,7 @@ const useGetOrganizationCohort = ({
 		if (isComponentInViewport) {
 			getOrganizationCohort();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [page, isComponentInViewport, byEtd, JSON.stringify(entity_code)]);
 
 	return {

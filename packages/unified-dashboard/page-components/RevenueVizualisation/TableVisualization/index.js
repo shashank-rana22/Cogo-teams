@@ -5,7 +5,7 @@ import React from 'react';
 import EmptyState from '../../../common/Empty';
 import Loader from '../../../common/PopoverLoader';
 
-import resultColumns from './resultColumns';
+import ResultColumns from './resultColumns';
 import styles from './styles.module.css';
 
 function TableVisualization({
@@ -23,7 +23,7 @@ function TableVisualization({
 		columns = [],
 	} = apiData || {};
 
-	const newColumns = resultColumns({ columns });
+	const newColumns = ResultColumns({ columns });
 
 	if (!loading && (error !== null || isEmpty(data))) {
 		return <EmptyState />;

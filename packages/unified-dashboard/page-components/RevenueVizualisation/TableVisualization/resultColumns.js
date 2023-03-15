@@ -18,7 +18,7 @@ const getAmount = (amount) => formatAmount({
 	},
 });
 
-function resultColumns({ columns = [] }) {
+function ResultColumns({ columns = [] }) {
 	return useMemo(
 		() => columns.map((column, index) => ({
 			Header   : <div className={styles.head}>{startCase(column)}</div>,
@@ -51,8 +51,9 @@ function resultColumns({ columns = [] }) {
 			key : column,
 			id  : `${column}${index}`,
 		})),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[JSON.stringify(columns)],
 	);
 }
 
-export default resultColumns;
+export default ResultColumns;

@@ -36,6 +36,7 @@ const useListSalesFunnelData = (salesFunnelInViewport) => {
 		if (Object.keys(filters).length > 0 && salesFunnelInViewport) {
 			fetchSalesFunnelData();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filters, salesFunnelInViewport]);
 
 	return {

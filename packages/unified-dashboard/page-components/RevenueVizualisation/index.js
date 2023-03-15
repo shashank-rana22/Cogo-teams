@@ -37,6 +37,7 @@ function RevenueVisualization({ headerFilters }) {
 		setSelectedBarData();
 		setSelectedPieData();
 		setByEtd(false);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(entity_code)]);
 
 	const handleResetCharts = () => {
