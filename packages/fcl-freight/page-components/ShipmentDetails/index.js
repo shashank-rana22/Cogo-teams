@@ -5,8 +5,6 @@ import Tab from '../Tabs';
 import Timeline from '../TimeLine';
 
 function ShipmentDetails() {
-	const [activeTab, setActiveTab] = useState('overview');
-
 	return (
 		<div>
 			<Header />

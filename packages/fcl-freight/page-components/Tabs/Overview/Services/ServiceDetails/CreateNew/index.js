@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Modal } from '@cogoport/components';;
 import { IcMPlus } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
@@ -14,8 +14,8 @@ function CreateNew({
 	const isMobile = useSelector((state) => (state.general || {}).isMobile);
 
 	const [form, setShowForm] = useState({
-		service      : null,
-		isAdditional : false,
+		service: null,
+		isAdditional: false,
 	});
 	const [upsellModal, setUpsellModal] = useState(false);
 
@@ -24,12 +24,12 @@ function CreateNew({
 	const handleClick = () => {
 		setShowForm({
 			service: {
-				service      : routeLeg?.service_types?.[0].replace('_service', ''),
-				service_type : routeLeg?.service_types?.[0].replace('_service', ''),
-				type         : routeLeg?.trade_type === 'export' ? 'origin' : 'destination',
+				service: routeLeg?.service_types?.[0].replace('_service', ''),
+				service_type: routeLeg?.service_types?.[0].replace('_service', ''),
+				type: routeLeg?.trade_type === 'export' ? 'origin' : 'destination',
 			},
-			show           : true,
-			additionalShow : true,
+			show: true,
+			additionalShow: true,
 		});
 		setUpsellModal(true);
 	};

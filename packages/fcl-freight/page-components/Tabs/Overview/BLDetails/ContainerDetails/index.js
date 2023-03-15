@@ -1,4 +1,4 @@
-import Grid, { Tag } from '@cogoport/components';
+import Grid, { Tag } from '@cogoport/components';;
 import React from 'react';
 
 import {

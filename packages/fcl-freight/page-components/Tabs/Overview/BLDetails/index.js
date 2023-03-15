@@ -1,5 +1,5 @@
 import EmptyState from '@cogo/bookings/commons/EmptyState';
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';;
 import React, { useContext, useState } from 'react';
 
 import { ShipmentDetailContext } from '../../../../commons/Context';
@@ -33,14 +33,14 @@ function BLDetails() {
 		isMobile,
 		refetch,
 	} = useListContainerDetails({
-		shipment_id   : shipment_data?.id || undefined,
-		shipment_type : shipment_data?.shipment_type,
+		shipment_id: shipment_data?.id || undefined,
+		shipment_type: shipment_data?.shipment_type,
 	});
 
-	const showConditionForBlContainerBtn =		data?.list?.length
+	const showConditionForBlContainerBtn = data?.list?.length
 		&& shipment_data?.stakeholder_types?.some((ele) => ['superadmin', 'service_ops2'].includes(ele));
 
-	const renderBlCount =		shipment_data?.shipment_type === 'fcl_freight' ? (
+	const renderBlCount = shipment_data?.shipment_type === 'fcl_freight' ? (
 		<BlCountContainer>
 			BL and Container Details
 			<div className="bl-count">
@@ -133,18 +133,16 @@ function BLDetails() {
 	);
 
 	const contentMapping = {
-		air_freight : 'AWB',
-		fcl_freight : 'BL',
-		lcl_freight : 'BL',
+		air_freight: 'AWB',
+		fcl_freight: 'BL',
+		lcl_freight: 'BL',
 	};
 
 	const emptyStateContent = {
-		heading: `No ${
-			contentMapping[shipment_data?.shipment_type]
-		} Details Found!`,
-		description: `Currently ${
-			contentMapping[shipment_data?.shipment_type]
-		} is not uploaded from the respective stakeholder.`,
+		heading: `No ${contentMapping[shipment_data?.shipment_type]
+			} Details Found!`,
+		description: `Currently ${contentMapping[shipment_data?.shipment_type]
+			} is not uploaded from the respective stakeholder.`,
 	};
 
 	return (
@@ -165,10 +163,10 @@ function BLDetails() {
 							/>
 
 							{open
-							&& activeId === item?.id
-							&& shipment_data?.shipment_type === 'fcl_freight' ? (
+								&& activeId === item?.id
+								&& shipment_data?.shipment_type === 'fcl_freight' ? (
 								<ContainerDetails containerDetails={item?.container_details} />
-								) : null}
+							) : null}
 						</ServiceCard>
 					))}
 				</ManageServicesDiv>

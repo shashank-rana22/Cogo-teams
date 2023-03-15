@@ -1,4 +1,4 @@
-import { Input, Button } from '@cogoport/components';
+import { Input, Button } from '@cogoport/components';;
 import React, { useState } from 'react';
 
 import useContainerNumUpdate from '../../../../hooks/useContainerNumUpdate';
@@ -12,9 +12,9 @@ import {
 } from './styles';
 
 function ContainerNmUpdate({
-	setEditContainerNum = () => {},
+	setEditContainerNum = () => { },
 	shipment_data = {},
-	refetch = () => {},
+	refetch = () => { },
 }) {
 	const [containerValue, setContainerValue] = useState({});
 

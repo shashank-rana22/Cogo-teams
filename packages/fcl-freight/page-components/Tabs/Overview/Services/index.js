@@ -1,4 +1,4 @@
-import { Accordion } from '@cogoport/components';
+import { Accordion } from '@cogoport/components';;
 
 import { serviceObj, serviceList, shipment_data, primary_service } from '../dummy_data';
 
@@ -50,8 +50,8 @@ function Services({
 								isMain
 								similarServices={service}
 								primary_service={primary_service}
-								// refetchServices={refetchServices}
-								// refetchList={refetchList}
+							// refetchServices={refetchServices}
+							// refetchList={refetchList}
 							/>
 						))}
 					</div>

@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';;
 
 import FormLayout from '../../../../../commons/Layout';
 import useBlContainer from '../../../../hooks/useBlContainer';
@@ -6,8 +6,8 @@ import useBlContainer from '../../../../hooks/useBlContainer';
 function BlContainer({
 	data,
 	shipment_data,
-	setMappingModal = () => {},
-	refetch = () => {},
+	setMappingModal = () => { },
+	refetch = () => { },
 }) {
 	const {
 		updateDetails,

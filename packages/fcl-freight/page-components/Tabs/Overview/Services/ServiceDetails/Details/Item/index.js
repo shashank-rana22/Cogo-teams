@@ -1,4 +1,4 @@
-import { ToolTip } from '@cogoport/components';
+import { ToolTip } from '@cogoport/components';;
 
 import { renderValue } from '../../../../../../../common/cargo-details/renderValue';
 
