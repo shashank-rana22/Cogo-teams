@@ -7,8 +7,6 @@ function useGetEventList() {
 	const [expertise, setExpertise] = useState();
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
-	console.log('hook call expertise::', expertise);
-
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
@@ -24,10 +22,6 @@ function useGetEventList() {
 		authkey : 'get_allocation_kam_expertise_event_configuration_attributes',
 		params,
 	}, { manual: false });
-
-	// console.log('EVENTGET DATA::', data);
-
-	// console.log('loading :::', loading);
 
 	useEffect(() => {
 		console.log('expertise::', expertise);

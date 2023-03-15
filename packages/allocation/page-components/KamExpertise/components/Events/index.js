@@ -7,45 +7,12 @@ import { useState } from 'react';
 import EmptyState from '../../../../common/EmptyState';
 import useGetEventList from '../../hooks/useGetEventList';
 
-import CreateNewEvent from './CreateNewEvent';
+import CreateEvent from './CreateEvent';
 import EventListItem from './EventList';
 import Header from './Header';
 import styles from './styles.module.css';
 
 
-// 	{
-// 		id             : 'hgf',
-// 		status         : 'jhgf',
-// 		expertise_type : 'Customer_Expertise',
-// 		condition_name : 'Re-Activation',
-// 		description    : 'dfghjk',
-// 		trigger        : 'Shipment Creation',
-// 		params         : 'Greater than 120 days',
-// 		rules          : [{ id: 'ertyui', name: 'Reactivation', rule_type: 'Account' }],
-// 	},
-// 	{
-// 		id             : 'hgf',
-// 		status         : 'jhgf',
-// 		expertise_type : 'cus',
-// 		condition_name : 'sdfghj',
-// 		description    : 'dfghjk',
-// 		trigger        : 'cfvghjk',
-// 		params         : 'dfghjk',
-// 		rules          : [{ id: 'ertyui', name: 'dfghj', rule_type: 'account' },
-// 			{ id: 'ertyui', name: 'dfghj', rule_type: 'account' },
-// 			{ id: 'ertyui', name: 'dfghj', rule_type: 'account' }],
-// 	},
-// 	{
-// 		id             : 'hgf',
-// 		status         : 'jhgf',
-// 		expertise_type : 'cus',
-// 		condition_name : 'sdfghj',
-// 		description    : 'dfghjk',
-// 		trigger        : 'cfvghjk',
-// 		params         : 'dfghjk',
-// 		rules          : [{ id: 'ertyui', name: 'dfghj', rule_type: 'account' }],
-// 	},
-// ];
 function Events() {
 	const router = useRouter();
 
@@ -93,8 +60,11 @@ function Events() {
 					setExpertise={setExpertise}
 					expertise={expertise}
 					loading={loading}
+					// listRefetch={listRefetch}
 				/>
 
+				
+				
 				<section className={styles.list_item_container}>
 
 					<div className={styles.top_div}>
@@ -154,12 +124,49 @@ function Events() {
 						</div>
 
 					</div>
+					<div className={styles.rule}>
 
-					<div className={styles.rule_end}>
+						
 
-						<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+						<div className={styles.rule_body}>
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						</div>
 
 					</div>
+					<div className={styles.rule}>
+
+						
+
+						<div className={styles.rule_body}>
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+
+						</div>
+
+					</div>
+
 
 				</section>
 				<section className={styles.list_item_container}>
@@ -221,55 +228,30 @@ function Events() {
 						</div>
 
 					</div>
+					<div className={styles.rule}>
 
-					<div className={styles.rule_end}>
+						
 
-						<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+						<div className={styles.rule_body}>
 
-					</div>
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-				</section>
-				<section className={styles.list_item_container}>
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-					<div className={styles.top_div}>
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-						<Placeholder width="20px" style={{ marginBottom: '4px' }} />
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-					</div>
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
-					<div>
-
-						<p className={styles.info_tag}>
-
-							<Placeholder width="160px" style={{ marginBottom: '4px' }} />
-
-						</p>
-
-						<div className={styles.info_tag}>
-
-							<Placeholder width="120px" style={{ marginBottom: '12px' }} />
+							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
 
 						</div>
 
-						<p className={styles.info_tag}>
-
-							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-
-							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-
-							<Placeholder width="120px" style={{ marginBottom: '4px' }} />
-
-						</p>
-
 					</div>
-
 					<div className={styles.rule}>
 
-						<p className={styles.rule_head}>
-
-							<Placeholder width="100px" height="20px" style={{ marginBottom: '4px' }} />
-
-						</p>
+						
 
 						<div className={styles.rule_body}>
 
@@ -289,13 +271,9 @@ function Events() {
 
 					</div>
 
-					<div className={styles.rule_end}>
-
-						<Placeholder width="160px" style={{ marginBottom: '4px' }} />
-
-					</div>
 
 				</section>
+				
 			</>
 		);
 	}
@@ -336,7 +314,7 @@ function Events() {
 							)
 
 							: list.map((data, index) => {
-								return(
+								return (
 									<EventListItem
 										data={data}
 										index={index}
@@ -363,15 +341,16 @@ function Events() {
 }
 
 			{(toggleEvent === 'createNew') && (
-				<CreateNewEvent
+				<CreateEvent
 					setToggleEvent={setToggleEvent}
 					eventListData={{}}
 					listRefetch={listRefetch}
+					
 				/>
 			)}
 
 			{(toggleEvent === 'updateEvent') && (
-				<CreateNewEvent
+				<CreateEvent
 					setToggleEvent={setToggleEvent}
 					updateEventListData={eventListData}
 					listRefetch={listRefetch}

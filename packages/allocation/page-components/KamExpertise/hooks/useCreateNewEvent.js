@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import getAddRuleControls from '../configurations/get-add-rule-controls';
 
@@ -10,6 +11,7 @@ function useCreateNewEvent(props) {
 		attributeList = [],
 		// eventListData = {},
 		listRefetch = () => {},
+		setToggleEvent = () => {},
 	} = props;
 	const [{ loading }, trigger] = useAllocationRequest({
 		method  : 'POST',
@@ -29,7 +31,7 @@ function useCreateNewEvent(props) {
 		try {
 			const payloadAttribute = [];
 			attributeList.forEach((res) => {
-				Object.keys(formValues).find((response) => {
+				Object.keys(formValues).forEach((response) => {
 					if (response === res?.name && formValues[response]) {
 						payloadAttribute.push({
 							rule_id   : res?.id,
@@ -38,8 +40,12 @@ function useCreateNewEvent(props) {
 					}
 				});
 			});
+
+			if (payloadAttribute.length === 0) {
+				Toast.error('Enter Attribute Value');
+				return null;
+			}
 			const payload = {
-				version_id : '123', // Todo ask for version_id logic
 				expertise_type,
 				group_name,
 				condition_name,
@@ -54,8 +60,10 @@ function useCreateNewEvent(props) {
 			await trigger({
 				data: payload,
 			});
-			listRefetch();
+
 			Toast.success('Sucessfully Created!');
+			listRefetch();
+			setToggleEvent('eventList');
 		} catch (error) {
 			Toast.error(
 				getApiErrorString(error?.response?.data)

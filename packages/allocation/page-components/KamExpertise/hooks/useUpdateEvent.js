@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import getAddRuleControls from '../configurations/get-add-rule-controls';
 
@@ -14,7 +15,7 @@ function useUpdateEvent(props) {
 	};
 
 	const {
-		updateEventListData = {}, listRefetch = () => {}, attributeList = [],
+		updateEventListData = {}, listRefetch = () => {}, attributeList = [], setToggleEvent = () => {},
 	} = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -33,6 +34,8 @@ function useUpdateEvent(props) {
 		rules,
 	} = updateEventListData;
 
+	console.log('updateEventListData', updateEventListData);
+
 	const formProps = useForm({
 		defaultValues: {
 			expertise_type : expertiseType,
@@ -50,17 +53,20 @@ function useUpdateEvent(props) {
 		try {
 			const payloadAttribute = [];
 			attributeList.forEach((res) => {
-				Object.keys(formValues).find((response) => {
-					if (response === res?.name) {
-						if (formValues[response]) {
-							payloadAttribute.push({
-								rule_id   : res?.id,
-								parameter : formValues[response],
-							});
-						}
+				Object.keys(formValues).forEach((response) => {
+					if (response === res?.name && formValues[response]) {
+						payloadAttribute.push({
+							rule_id   : res?.id,
+							parameter : formValues[response],
+						});
 					}
 				});
 			});
+
+			if (payloadAttribute.length === 0) {
+				Toast.error('Enter Attribute Value');
+				return null;
+			}
 			const payload = {
 				rule_mapping_id : ruleMappingId,
 				attributes      : payloadAttribute,
@@ -70,7 +76,9 @@ function useUpdateEvent(props) {
 				data: payload,
 			});
 
+			setToggleEvent('eventList');
 			Toast.success('Sucessfully Updated!');
+			listRefetch();
 		} catch (error) {
 			Toast.error(
 				getApiErrorString(error?.response?.data)
