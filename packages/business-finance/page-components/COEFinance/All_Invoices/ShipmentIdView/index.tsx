@@ -54,6 +54,13 @@ function ShipmentIdView() {
 				</div>
 			);
 		}
+		if (data.length === 0) {
+			return (
+				<div className={styles.no_data}>
+					No data Available
+				</div>
+			);
+		}
 		return data?.map((item: ItemDataProps) => (
 			<AccordianCards
 				itemData={item}
