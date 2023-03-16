@@ -152,48 +152,48 @@ function FeedbackForms({
 
 			{(questionsToShow || []).map((key) => {
 				const { id, question, description = '' } = key || {};
+				// Can be changed by using condititonal rendering
+				// if (showForm === 'resigned') {
+				// 	return (
+				// 		<div
+				// 			className={styles.controls}
+				// 			key={id || question}
+				// 		>
+				// 			<div className={styles.question_rating}>
+				// 				<div className={styles.side_heading}>
+				// 					<div className={styles.question_container}>{startCase(question)}</div>
 
-				if (showForm === 'resigned') {
-					return (
-						<div
-							className={styles.controls}
-							key={id || question}
-						>
-							<div className={styles.question_rating}>
-								<div className={styles.side_heading}>
-									<div className={styles.question_container}>{startCase(question)}</div>
+				// 					{!!description && (
+				// 						<Tooltip
+				// 							placement="top"
+				// 							theme="light"
+				// 							animation="shift-away"
+				// 							content={<div>{description}</div>}
+				// 						>
+				// 							<IcMInfo
+				// 								fill="#393f70"
+				// 								width={16}
+				// 								height={16}
+				// 							/>
+				// 						</Tooltip>
+				// 					)}
 
-									{!!description && (
-										<Tooltip
-											placement="top"
-											theme="light"
-											animation="shift-away"
-											content={<div>{description}</div>}
-										>
-											<IcMInfo
-												fill="#393f70"
-												width={16}
-												height={16}
-											/>
-										</Tooltip>
-									)}
-
-								</div>
-								<div className={styles.radio_group}>
-									<RadioGroup
-										options={resignedOptions}
-										value={rating[id]?.rating}
-										onChange={(val) => {
-											if (action !== 'show') {
-												setRating({ ...rating, [id]: { ...(rating[id]), rating: val } });
-											}
-										}}
-									/>
-								</div>
-							</div>
-						</div>
-					);
-				}
+				// 				</div>
+				// 				<div className={styles.radio_group}>
+				// 					<RadioGroup
+				// 						options={resignedOptions}
+				// 						value={rating[id]?.rating}
+				// 						onChange={(val) => {
+				// 							if (action !== 'show') {
+				// 								setRating({ ...rating, [id]: { ...(rating[id]), rating: val } });
+				// 							}
+				// 						}}
+				// 					/>
+				// 				</div>
+				// 			</div>
+				// 		</div>
+				// 	);
+				// }
 
 				return (
 					<div
@@ -222,7 +222,7 @@ function FeedbackForms({
 
 							<div className={styles.radio_group}>
 								<RadioGroup
-									options={newOptions}
+									options={showForm === 'resigned' ? resignedOptions : newOptions}
 									value={rating[id]?.rating}
 									onChange={(val) => {
 										if (action !== 'show') {
@@ -233,18 +233,20 @@ function FeedbackForms({
 							</div>
 						</div>
 
-						<div className={styles.question_feedback}>
-							<Textarea
-								value={rating[id]?.feedback}
-								disabled={action === 'show'}
-								onChange={(val) => {
-									setRating({ ...rating, [id]: { ...(rating[id]), feedback: val } });
-								}}
-								placeholder={action === 'show' && isEmpty(rating[id].feedback)
-									? 'No Feedback Provided' : 'Convey the reason for feedback...'}
-								style={{ height: '60px' }}
-							/>
-						</div>
+						{showForm !== 'resigned' && (
+							<div className={styles.question_feedback}>
+								<Textarea
+									value={rating[id]?.feedback}
+									disabled={action === 'show'}
+									onChange={(val) => {
+										setRating({ ...rating, [id]: { ...(rating[id]), feedback: val } });
+									}}
+									placeholder={action === 'show' && isEmpty(rating[id].feedback)
+										? 'No Feedback Provided' : 'Convey the reason for feedback...'}
+									style={{ height: '60px' }}
+								/>
+							</div>
+						)}
 					</div>
 				);
 			})}

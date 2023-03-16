@@ -61,17 +61,18 @@ function FeedbackManagement() {
 			</div>
 
 			<div className={styles.top_container}>
-				<div className={styles.filters}>
-					<div className={styles.department_select}>
-						<Filters setParams={setParams} params={params} source="hr_feedback" />
+				{/* <div className={styles.filters}> */}
+				<div className={styles.department_select}>
+					<Filters setParams={setParams} params={params} source="hr_feedback" />
 
-						<Input
-							value={searchValue}
-							onChange={setSearchValue}
-							placeholder="Search User..."
-						/>
-					</div>
+					<Input
+						className={styles.filters}
+						value={searchValue}
+						onChange={setSearchValue}
+						placeholder="Search User..."
+					/>
 				</div>
+				{/* </div> */}
 
 				<Button size="lg" onClick={() => getUserListCsv()}>Download CSV</Button>
 			</div>
