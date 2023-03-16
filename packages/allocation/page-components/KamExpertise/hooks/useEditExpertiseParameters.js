@@ -4,15 +4,15 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
-const useEditExpertiseParameters = (list=[]) => {
+const useEditExpertiseParameters = ({list=[], refetch = ()=> {}, setEditMode = ()=>{}}) => {
 	const formProps = useForm();
 
-	const { handleSubmit, control } = formProps;
+	const { handleSubmit, control, reset } = formProps;
 
 	const [{loading}, trigger] = useAllocationRequest({
-		url: '/kam_expertise_event_scoring',
+		url: '/kam_expertise_event_scoring_attribute',
 		method: 'POST',
-		authkey: 'post_allocation_kam_expertise_event_scoring',
+		authkey: 'post_allocation_kam_expertise_event_scoring_attribute',
 	}, {manual: true});
 
 	const onSave = async (formValues = {}) => {
@@ -43,7 +43,7 @@ const useEditExpertiseParameters = (list=[]) => {
 			}) 
 
 			if(isEmpty(attributes)){
-				Toast.error('Please change at least one field...');
+				Toast.error('No change in scores');
 				return;
 			}
 			const payload = { attributes };
@@ -52,8 +52,14 @@ const useEditExpertiseParameters = (list=[]) => {
 				data: payload,
 			});
 
+			refetch();
+
+			setEditMode(false);
+
+			reset();
+
 			Toast.success('Edited Successfully!');
-			
+
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}
@@ -63,6 +69,7 @@ const useEditExpertiseParameters = (list=[]) => {
 		handleSubmit,
 		onSave,
 		control,
+		loading,
 	};
 };
 

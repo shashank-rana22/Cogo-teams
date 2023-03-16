@@ -24,6 +24,7 @@ const TAB_PANEL_MAPPING = {
 function ViewAllConfigs() {
 	const router = useRouter();
 	const [activeConfigTab, setActiveConfigTab] = useState('kam-expertise-score-config');
+	const [selectedVersion, setSelectedVersion] = useState('');
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise');
@@ -53,6 +54,7 @@ function ViewAllConfigs() {
 
 				<CurrentConfigurations
 					handleClick={handleClick}
+					selectedVersion={selectedVersion}
 				/>
 
 				<div className={styles.tab_list} ref={scrollToRef}>
@@ -62,7 +64,7 @@ function ViewAllConfigs() {
 
 							return Component ? (
 								<TabPanel key={name} name={name} title={title}>
-									<Component />
+									<Component selectedVersion={selectedVersion} />
 								</TabPanel>
 							) : null;
 						})}

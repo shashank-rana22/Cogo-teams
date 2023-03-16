@@ -50,7 +50,7 @@ const titleSection = (expertiseItem = {}) => (
 	</div>
 );
 
-function KamExpertiseScoreConfig() {
+function KamExpertiseScoreConfig({selectedVersion}) {
 	const [addConditionModal, setAddConditionModal] = useState({});
 
 	const [activeCollapse, setActiveCollapse] = useState('');
@@ -61,7 +61,7 @@ function KamExpertiseScoreConfig() {
 		setAddConditionModal({});
 	};
 
-	const { data, loading, refetch } = useGetKamExpertiseScore({});
+	const { data, loading, refetch } = useGetKamExpertiseScore({selectedVersion});
 
 	const {
 		createConditionloading,
