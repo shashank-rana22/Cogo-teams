@@ -32,10 +32,10 @@ const useListEnrichment = () => {
 		sort_type  : 'desc',
 		page_limit : 10,
 		page       : 1,
-		partner_id,
-		user_id,
 		filters    : {
 			q: searchQuery || undefined,
+			partner_id,
+			user_id,
 		},
 	});
 
