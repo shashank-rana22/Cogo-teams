@@ -1,4 +1,5 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import useGetTestQuestionTest from '../../hooks/useGetTestQuestionTest';
@@ -8,6 +9,8 @@ import BasicDetailsForm from './components/BasicDetailsForm';
 import styles from './styles.module.css';
 
 function CreateQuestionSet() {
+	const router = useRouter();
+
 	const [questionSetId, setQuestionSetId] = useState('');
 	const [savedQuestionDetails, setSavedQuestionDetails] = useState([]);
 
@@ -22,7 +25,13 @@ function CreateQuestionSet() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<IcMArrowBack width={20} height={20} />
+				<IcMArrowBack
+					style={{ cursor: 'pointer' }}
+					width={20}
+					height={20}
+					onClick={() => router.push('/learning/faq/create/test-module')}
+				/>
+
 				<div className={styles.title}>New Question Set</div>
 			</div>
 
