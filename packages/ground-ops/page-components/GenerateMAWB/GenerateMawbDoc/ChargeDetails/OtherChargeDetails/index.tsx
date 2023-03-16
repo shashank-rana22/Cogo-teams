@@ -112,7 +112,7 @@ function OtherChargeDetails({
 				`}
 				>
 					<p style={{ fontSize: 14 }}>
-						{taskItem?.customer_name}
+						{formData?.shipperSignature}
 					</p>
 				</div>
 				<div className={cl`

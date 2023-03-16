@@ -124,6 +124,7 @@ function GenerateMAWB({
 				{ code: 'AMS', price: '' }, { code: 'CGC', price: '' },
 			]);
 		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
+		setValue('shipperSignature', taskItem.customer_name);
 	}, []);
 
 	useEffect(() => {
