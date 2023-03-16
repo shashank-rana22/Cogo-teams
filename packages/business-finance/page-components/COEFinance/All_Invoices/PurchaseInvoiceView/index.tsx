@@ -41,9 +41,10 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 	subActiveTab: string;
+	statsData?:object
 }
 
-function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
+function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props) {
 	const [sort, setSort] = useState({});
 
 	const {
@@ -81,6 +82,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		<div>
 			<SegmentedFilters
 				filters={filters}
+				statsData={statsData}
 				setFilters={setFilters}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
@@ -101,9 +103,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 					setFilters((p: GenericObject) => ({ ...p, pageIndex: pageValue }));
 				}}
 				subActiveTab={subActiveTab}
-				showPagination={false}
-				width="1800px"
-				scrollable
+				showPagination
 			/>
 		</div>
 	);

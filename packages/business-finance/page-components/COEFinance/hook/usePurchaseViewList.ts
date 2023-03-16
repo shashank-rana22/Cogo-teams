@@ -112,6 +112,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Pro
 				isUrgent : tab === 'Urgency_tag' ? true : undefined,
 				...sort,
 				pageSize : 10,
+				jobType  : 'SHIPMENT',
 			},
 			authKey: 'get_purchase_bills_list',
 		},

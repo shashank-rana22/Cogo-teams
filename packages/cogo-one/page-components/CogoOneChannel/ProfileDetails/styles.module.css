@@ -13,6 +13,7 @@
 	padding: 12px;
 	overflow-y: scroll;
 	background: #f9f9f9;
+	filter: drop-shadow(0 0 16px rgb(98 127 172 / 20%));
 	border-radius: 8px 0 0 8px;
 
 	@media (max-width: 1280px) {
