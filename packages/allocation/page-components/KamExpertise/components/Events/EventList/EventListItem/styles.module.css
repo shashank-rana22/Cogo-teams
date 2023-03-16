@@ -28,7 +28,7 @@
 .rule_body {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	flex-wrap: wrap;
 	margin-top: 8px;
 	width: 100%;
@@ -40,11 +40,3 @@
 	font-weight: 600;
 }
 
-.rule_end {
-	padding-left: 16px;
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	max-width: 24%;
-	margin-top: 8px;
-}

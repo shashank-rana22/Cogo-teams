@@ -40,7 +40,13 @@ function EventList(props) {
 							{[1, 2].map(() => (
 								<div className={styles.rule_body}>
 									{[1, 2, 3, 4, 5].map(() => (
-										<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+										<Placeholder
+											width="120px"
+											style={{
+												marginBottom : '4px',
+												marginRight  : '12px',
+											}}
+										/>
 									))}
 								</div>
 							))}
