@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 
-import Header from './Header';
+import { ShipmentDetailContext } from '../../common/context';
+import useGetShipment from '../../hooks/useGetShipment';
+
+import ShipmentInfo from './ShipmentInfo';
 import Tab from './Tabs';
 import Timeline from './TimeLine';
+import TopBar from './TopBar';
 
 function ShipmentDetails() {
+	const { isGettingShipment, refetch, data } = useGetShipment();
+
+	const contextValues = useMemo(() => ({
+		isGettingShipment,
+		refetch,
+		...data,
+	}), [data, isGettingShipment, refetch]);
+
 	return (
-		<div>
-			<Header />
+		<ShipmentDetailContext.Provider value={contextValues}>
+			<ShipmentInfo />
+			<TopBar />
 			<Timeline />
 			<Tab />
-		</div>
+		</ShipmentDetailContext.Provider>
 	);
 }
 
