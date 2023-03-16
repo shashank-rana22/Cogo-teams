@@ -8,7 +8,7 @@ import SingleQuestionComponent from '../../../SingleQuestionComponent';
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function CaseStudyForm({ control, register, errors }) {
+function CaseStudyForm({ control, register, errors, isNewQuestion }) {
 	const controls = getControls();
 
 	const fieldArrayControls = controls[1];
@@ -24,11 +24,11 @@ function CaseStudyForm({ control, register, errors }) {
 	});
 
 	const handleAppendChild = () => {
-		append(childEmptyValues);
+		append({ ...childEmptyValues, isNew: true });
 	};
 
 	if (isEmpty(fields)) {
-		append(childEmptyValues);
+		append({ ...childEmptyValues, isNew: true });
 	}
 
 	return (
@@ -46,9 +46,12 @@ function CaseStudyForm({ control, register, errors }) {
 							register={register}
 							index={index}
 							errors={errors?.case_questions?.[index]}
+							type="case_study"
+							isNewQuestion={isNewQuestion}
+							remove={remove}
 						/>
 
-						{fields.length > 1 ? (
+						{fields.length > 1 && isNewQuestion ? (
 							<IcMCrossInCircle
 								className={styles.delete_button}
 								width={20}

@@ -2,6 +2,14 @@
 	display: flex;
 	gap: 32px;
 	margin-bottom: 24px;
+	align-items: center;
+}
+
+.cancel_button {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	cursor: pointer;
 }
 
 .control_container {
@@ -37,4 +45,33 @@
 			}
 		}
 	}
+}
+
+.flex_row {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	background: rgb(255 255 255 / 70%);
+	border-radius: 6px;
+	padding: 12px;
+	position: relative;
+}
+
+.flex_container {
+	align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+	cursor: pointer;
+}
+
+.label {
+	font-size: 12px;
+}
+
+.value {
+	font-weight: 600;
+	margin-top: 8px;
 }
