@@ -25,8 +25,6 @@ function Filters({
 		},
 	});
 
-	// console.log('partner options::', partnerOptions);
-
 	const modifiedControls = controls(filters?.role_functions || [], partnerOptions);
 
 	const getElements = (type) => {
