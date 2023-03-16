@@ -17,6 +17,7 @@ function Header(props) {
 		debounceQuery,
 		setMasteryListData = () => {},
 		setBadgeListData,
+		loading,
 	} = props;
 
 	return (
@@ -31,6 +32,7 @@ function Header(props) {
 					asyncKey="expertise_configuration"
 					multiple
 					isClearable
+					disabled={loading}
 					className={styles.dropdown}
 				/>
 
@@ -41,6 +43,7 @@ function Header(props) {
 					debounceQuery={debounceQuery}
 					value={searchValue}
 					className={styles.search_bar}
+					disabled={loading}
 				/>
 			</div>
 
@@ -49,6 +52,7 @@ function Header(props) {
 					themeType="secondary"
 					size="md"
 					className={styles.button_mastery}
+					disabled={loading}
 					onClick={() => {
 						setMasteryListData({});
 						setToggleScreen('mastery');
