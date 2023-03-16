@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-function LoaderCard() {
+function LoaderCard({columnsToLoad}) {
 	return (
 		<>
 			<div>
@@ -12,7 +12,7 @@ function LoaderCard() {
 
 			<div style={{ display: 'flex' }}>
 
-				{[1, 2, 3, 4].map(() => (
+				{[...Array(columnsToLoad)].map(() => (
 					<div style={{ flexBasis: '24%' }}>
 
 						<div style={{ marginBottom: '8px' }}>
