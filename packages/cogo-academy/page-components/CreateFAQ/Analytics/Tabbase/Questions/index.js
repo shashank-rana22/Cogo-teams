@@ -1,13 +1,10 @@
 import { useState } from 'react';
 
-import useListFaqStats from '../../hooks/useListFaqStats';
-
 import AllQuestionCardView from './AllQuestionCardView';
 import AllTopicCardView from './AllTopicCardView';
 import Filter from './Filter';
 
-function Questions() {
-	const props = useListFaqStats({});
+function Questions({ props }) {
 	const [selectedItem, setSelectedItem] = useState('All_Questions');
 
 	return (
