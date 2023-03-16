@@ -102,7 +102,7 @@
 .input_container {
 	display: flex;
 	height: 28px;
-	padding: 3px 8px;
+	padding: 3px 25px 3px 8px;
 	margin-left: 8px;
 	border: 1px solid #828282;
 	border-radius: 6px;
@@ -127,7 +127,7 @@
 .error_input_container {
 	display: flex;
 	height: 28px;
-	padding: 3px 8px;
+	padding: 3px 25px 3px 8px;
 	margin-left: 8px;
 	border: 1px solid #828282;
 	border-radius: 6px;
@@ -152,7 +152,7 @@
 .cross_icon {
 	position: absolute;
 	top: 6px;
-	left: 144px;
+	right: 5px;
 	cursor: pointer;
 
 	svg {
