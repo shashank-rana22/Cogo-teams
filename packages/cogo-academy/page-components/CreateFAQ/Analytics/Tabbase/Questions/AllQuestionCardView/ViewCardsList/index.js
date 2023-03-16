@@ -15,10 +15,13 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 
 				<div className={styles.sub_heading}>
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-						1.
+
 						<div style={{ marginLeft: '-9px' }}>
 							<Tooltip content={contentQuestion[0]?.question_abstract} placement="right">
-								<div>{truncate(contentQuestion[0]?.question_abstract)}</div>
+								<div>
+									1.
+									{truncate(contentQuestion[0]?.question_abstract)}
+								</div>
 							</Tooltip>
 
 						</div>
@@ -37,11 +40,14 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 
 					</div>
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-						2.
+
 						<div style={{ marginLeft: '-9px' }}>
 
 							<Tooltip content={contentQuestion[1]?.question_abstract} placement="right">
-								<div>{truncate(contentQuestion[1]?.question_abstract)}</div>
+								<div>
+									2.
+									{truncate(contentQuestion[1]?.question_abstract)}
+								</div>
 							</Tooltip>
 						</div>
 						<div style={{ display: 'flex' }}>
@@ -59,10 +65,13 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 
 					</div>
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-						3.
+
 						<div style={{ marginLeft: '-9px' }}>
 							<Tooltip content={contentQuestion[2]?.question_abstract} placement="right">
-								<div>{truncate(contentQuestion[2]?.question_abstract)}</div>
+								<div>
+									3.
+									{truncate(contentQuestion[2]?.question_abstract)}
+								</div>
 							</Tooltip>
 
 						</div>
@@ -81,10 +90,13 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 
 					</div>
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-						4.
+
 						<div style={{ marginLeft: '-9px' }}>
 							<Tooltip content={contentQuestion[3]?.question_abstract} placement="right">
-								<div>{truncate(contentQuestion[3]?.question_abstract)}</div>
+								<div>
+									4.
+									{truncate(contentQuestion[3]?.question_abstract)}
+								</div>
 							</Tooltip>
 
 						</div>

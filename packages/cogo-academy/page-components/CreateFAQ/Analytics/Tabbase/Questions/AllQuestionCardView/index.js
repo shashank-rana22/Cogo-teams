@@ -59,7 +59,7 @@ function AllQuestionCardView(props = '') {
 						style={{
 							fontWeight : '600',
 							marginTop  : '-9%',
-							marginLeft : '45%',
+							marginLeft : '40%',
 
 						}}
 					>
