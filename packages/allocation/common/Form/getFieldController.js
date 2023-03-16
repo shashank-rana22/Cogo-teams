@@ -10,6 +10,7 @@ import {
 	RadioGroupController,
 	SelectController,
 	UploadController,
+	TextAreaController,
 } from '@cogoport/forms';
 
 const controlTypeControllerMapping = {
@@ -25,6 +26,7 @@ const controlTypeControllerMapping = {
 	dateRangePicker    : DateRangePickerController,
 	fileUpload         : UploadController,
 	creatableSelect    : CreatableSelectController,
+	textarea           : TextAreaController,
 };
 
 export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;
