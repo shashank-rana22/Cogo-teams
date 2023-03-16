@@ -2,9 +2,11 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
 
+const EmptyFunction = () => {};
+
 const useListCogooneTimeline = ({
 	id = '',
-	setMessagesState = () => {},
+	setMessagesState = EmptyFunction,
 	activeSubTab = '',
 	user_id = '',
 	lead_user_id = '',
