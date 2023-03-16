@@ -1,6 +1,6 @@
 .primary_right {
 	display: flex;
-	flex-basis: 38%;
+	flex: 1;
 	flex-direction: column;
 	justify-content: space-between;
 	padding: 12px 18px;
