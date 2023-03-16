@@ -10,6 +10,8 @@ import TotalAfterTax from './TotalAfterTax';
 import TotalColumn from './TotalColumn';
 
 function LineItemsForm({ formData, setFormData }) {
+	const { invoiceCurrency = '' } = formData || {};
+
 	const [taxOptions, setTaxOptions] = useState([]);
 	const { control, watch, setValue } = useForm(
 		{
@@ -28,19 +30,17 @@ function LineItemsForm({ formData, setFormData }) {
 
 	const { lineItemsList } = usePostListItemTaxes();
 
-	const taxList = [];
-
 	useEffect(() => {
+		const taxList = [];
 		if (lineItemsList?.length > 0) {
 			lineItemsList.forEach((item) => {
 				taxList.push({
 					label : `${item?.taxPercent}%-${item?.itemName}`,
-					value : item?.taxPercent?.toString(),
+					value : JSON.stringify(item),
 				});
 			});
 			setTaxOptions([...taxList]);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [lineItemsList]);
 
 	const watchFieldArray = watch('line_items');
@@ -49,25 +49,30 @@ function LineItemsForm({ formData, setFormData }) {
 		...watchFieldArray[index],
 	}));
 
+	const stringifiedControlledFields = JSON.stringify(controlledFields);
+
 	useEffect(() => {
 		if (watchFieldArray?.length > 0) {
-			setFormData({ ...formData, lineItemsList: watchFieldArray });
+			setFormData((prev:object) => ({ ...prev, lineItemsList: watchFieldArray }));
 		}
+		const fieldsLength = (controlledFields).length || 0;
+		const mappingArray = Array(fieldsLength)?.fill('value');
 
-		controlledFields.forEach((item, index) => {
+		mappingArray?.forEach((item, index) => {
 			const beforeTax = +watch(`line_items.${index}.amount_before_tax`);
-			const tax = +watch(`line_items.${index}.tax`);
+			const tax = watch(`line_items.${index}.tax`);
 
-			if (beforeTax && tax >= 0) {
-				const amountAfterTax = beforeTax + (beforeTax * (tax / 100));
-				setValue(`line_items.${index}.amount_after_tax`, +amountAfterTax);
-				const tds = +watch(`line_items.${index}.tds`);
-				if (tds >= 0) { setValue(`line_items.${index}.payable_amount`, +amountAfterTax + tds); }
+			if (tax) {
+				const taxPercent = JSON.parse(tax || '')?.taxPercent;
+				if (beforeTax && +taxPercent >= 0) {
+					const amountAfterTax = beforeTax + (beforeTax * (taxPercent / 100));
+					setValue(`line_items.${index}.amount_after_tax`, +amountAfterTax);
+					const tds = +watch(`line_items.${index}.tds`);
+					if (tds >= 0) { setValue(`line_items.${index}.payable_amount`, +amountAfterTax + tds); }
+				}
 			}
 		});
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(controlledFields)]);
+	}, [setFormData, setValue, watchFieldArray, watch, controlledFields?.length, stringifiedControlledFields]);
 
 	const getSum = (columnName:string) => {
 		const sum = watchFieldArray?.reduce((acc, curr) => {
@@ -80,15 +85,28 @@ function LineItemsForm({ formData, setFormData }) {
 		return sum;
 	};
 
+	const getTotalTax = () => {
+		const sum = watchFieldArray?.reduce((acc, curr) => {
+			const columnVal = JSON.parse(curr?.tax || '{}')?.taxPercent;
+			if (!Number.isNaN(+columnVal)) {
+				return +acc + +columnVal;
+			}
+			return +acc;
+		}, 0);
+		return sum;
+	};
+
 	const totalAmountBeforeTax = getSum('amount_before_tax');
-	const totalTax = getSum('tax');
+	const totalTax = getTotalTax();
 	const totalAmountAfterTax = getSum('amount_after_tax');
 	const totalPayable = getSum('payable_amount');
+	const totalTds = getSum('tds');
 
 	useEffect(() => {
-		if (totalPayable) { setFormData({ ...formData, totalPayable }); }
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [totalPayable]);
+		if (totalPayable) {
+			setFormData((prev:object) => ({ ...prev, totalPayable }));
+		}
+	}, [totalPayable, setFormData]);
 
 	return (
 		<div className={styles.section}>
@@ -107,9 +125,11 @@ function LineItemsForm({ formData, setFormData }) {
 					totalTax={totalTax}
 					totalAmountAfterTax={totalAmountAfterTax}
 					totalPayable={totalPayable}
+					totalTds={totalTds}
 				/>
 				<TotalAfterTax
 					totalPayable={totalPayable}
+					invoiceCurrency={invoiceCurrency}
 				/>
 			</form>
 		</div>

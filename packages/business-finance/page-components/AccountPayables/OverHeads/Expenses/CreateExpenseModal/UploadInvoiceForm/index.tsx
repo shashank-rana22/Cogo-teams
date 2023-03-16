@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Input, Select, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Filter from '../../../../../commons/Filters';
@@ -10,7 +10,8 @@ import styles from './styles.module.css';
 
 interface FilterInterface {
 	uploadedInvoice?:string,
-	repeatEvery?:string
+	repeatEvery?:string,
+	invoiceCurrency?:string,
 }
 interface Props {
 	formData:FilterInterface,
@@ -29,9 +30,35 @@ function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 		uploadControls = nonRecurringUploadInvoice;
 	}
 
+	const currencyOptions = [
+		{ label: 'INR', value: 'INR' },
+		{ label: 'USD', value: 'USD' },
+		{ label: 'VN', value: 'VN' },
+		{ label: 'GBP', value: 'GBP' },
+	];
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.upload_invoice}>
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<Select
+						value={formData?.invoiceCurrency}
+						onChange={(val:string) => setFormData({ ...formData, invoiceCurrency: val })}
+						placeholder="Select Invoice Currency*"
+						options={currencyOptions}
+						size="sm"
+						className={styles.select}
+					/>
+					<div className={styles.input}>
+						<Input
+							name="invoiceNumber"
+							size="sm"
+							placeholder="Enter unique invoice no."
+							onChange={(e:string) => setFormData({ ...formData, invoiceNumber: e })}
+						/>
+
+					</div>
+				</div>
 				{!isUploadConfirm ? (
 					<>
 						<Filter

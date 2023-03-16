@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../../commons/utils/formatDate';
 import useGetStakeholders from '../../hooks/useGetStakeholders';
+import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
 import styles from './styles.module.css';
 
@@ -25,6 +26,8 @@ interface Data {
 	invoiceDate?:Date,
 	totalPayable?:number | string,
 	stakeholderName?:string,
+	invoiceCurrency?:string,
+	vendorID?:number | string,
 }
 
 interface Props {
@@ -46,83 +49,99 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 		uploadedInvoice,
 		totalPayable,
 		stakeholderName,
+		invoiceCurrency,
+		vendorID,
 	} = nonRecurringData || {};
 
-	const { stakeholdersData } = useGetStakeholders(expenseCategory);
+	const { stakeholdersData, loading } = useGetStakeholders(expenseCategory);
+	const { tradePartyData } = useGetTradePartyDetails(vendorID);
+
 	useEffect(() => {
 		if (stakeholdersData) {
-			const { userEmail, userId, userName } = stakeholdersData;
-			setNonRecurringData({
-				...nonRecurringData,
+			const { userEmail, userId, userName } = stakeholdersData || {};
+			setNonRecurringData((prev:object) => ({
+				...prev,
 				stakeholderEmail : userEmail,
 				stakeholderId    : userId,
 				stakeholderName  : userName,
-			});
+			}));
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [stakeholdersData]);
+	}, [stakeholdersData, setNonRecurringData]);
+
+	useEffect(() => {
+		if (tradePartyData?.length > 0) {
+			setNonRecurringData((prev:object) => ({
+				...prev,
+				tradeParty: tradePartyData?.[0],
+			}));
+		}
+	}, [tradePartyData, setNonRecurringData]);
 
 	const summaryDataFirst = [
 		{
 			title : 'Vendor Name',
-			value : vendorName ? showOverflowingNumber(vendorName, 18) : 'N/A',
+			value : vendorName ? showOverflowingNumber(vendorName, 18) : '-',
 		},
 		{
 			title : 'Expense Category',
-			value : expenseCategory ? (showOverflowingNumber(startCase(expenseCategory), 18)) : 'N/A',
+			value : expenseCategory ? (showOverflowingNumber(startCase(expenseCategory), 18)) : '-',
 		},
 		{
 			title : 'Expense Sub-Category',
 			value : expenseSubCategory ? showOverflowingNumber(
 				startCase(expenseSubCategory.replaceAll('_', ' ')),
 				18,
-			) : 'N/A',
+			) : '-',
 		},
 		{
 			title : 'Entity',
-			value : entityObject?.entity_code || 'N/A',
+			value : entityObject?.entity_code || '-',
 		},
 		{
 			title : 'Branch ',
-			value : branch ? showOverflowingNumber(JSON.parse(branch)?.name, 18) : 'N/A',
+			value : branch ? showOverflowingNumber(JSON.parse(branch)?.name, 18) : '-',
 		},
 	];
 	const summaryDataSecond = [
 		{
 			title : 'Payable Amount',
-			value : <div>{totalPayable || 'N/A'}</div>,
+			value : <div>
+{invoiceCurrency}
+{' '}
+{totalPayable || '-'}
+           </div>,
 		},
 		{
 			title : 'Expense Date',
 			value : <div>
 {invoiceDate
-	? formatDate(invoiceDate, 'dd/MMM/yy', {}, false) : 'N/A'}
+	? formatDate(invoiceDate, 'dd/MMM/yy', {}, false) : '-'}
            </div>,
 		},
 		{
 			title : 'Transaction Date',
 			value : <div>
 				{transactionDate
-					? formatDate(transactionDate, 'dd/MMM/yy', {}, false) : 'N/A'}
+					? formatDate(transactionDate, 'dd/MMM/yy', {}, false) : '-'}
 
            </div>,
 		},
 		{
 			title : 'Period',
 			value : <div>
-				{periodOfTransaction ? startCase(periodOfTransaction) : 'N/A'}
+				{periodOfTransaction ? startCase(periodOfTransaction) : '-'}
 				{' '}
            </div>,
 		},
 		{
 			title : 'Payment Mode ',
-			value : startCase(paymentMode || '') || 'N/A',
+			value : startCase(paymentMode || '') || '-',
 		},
 	];
 	const summaryDataThird = [
 		{
 			title : 'To be Approved by',
-			value : startCase(stakeholderName || '') || 'N/A',
+			value : loading ? '-' : startCase(stakeholderName || '') || '-',
 		},
 		{
 			title : 'Uploaded Documents',
@@ -138,7 +157,7 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 							{showOverflowingNumber(uploadedInvoice, 20)}
 						</a>
 					)
-					: 'N/A'}
+					: '-'}
            </div>,
 		},
 	];

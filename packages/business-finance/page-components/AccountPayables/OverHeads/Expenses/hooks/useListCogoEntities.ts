@@ -11,18 +11,16 @@ const useListCogoEntities = () => {
 		{ autoCancel: false },
 	);
 
-	const api = async () => {
-		try {
-			await trigger();
-		} catch (err) {
-			Toast.error('Something went wrong');
-		}
-	};
-
 	useEffect(() => {
+		const api = async () => {
+			try {
+				await trigger();
+			} catch (err) {
+				Toast.error('Something went wrong');
+			}
+		};
 		api();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [trigger]);
 
 	return {
 		entityList: data?.list,

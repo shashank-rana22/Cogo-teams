@@ -21,3 +21,12 @@
 	justify-content: end;
 	margin: 64px 20px 0 0;
 }
+.select{
+    width: 40%;
+    margin: 12px 0px 0px 8px;
+}
+
+.input{
+	margin: 12px 0px 0px 8px;
+	width: 50%;
+}

@@ -22,8 +22,7 @@ const useListVendors = (filters) => {
 				verification_data_required : true,
 			},
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page]);
+	}, [page, trigger, pageLimit]);
 
 	return {
 		listData: data,

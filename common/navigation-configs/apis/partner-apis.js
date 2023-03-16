@@ -6745,8 +6745,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'list_organization_trade_parties',
-			access_type : 'private',
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'trade_party',
 		},
 		{
 			api         : 'get_purchase_bills_sid_details_by_id',

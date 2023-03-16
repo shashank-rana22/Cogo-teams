@@ -175,7 +175,7 @@ export const recurringExpenseDetails = ({
 				type           : 'select',
 				multiple       : false,
 				defaultOptions : false,
-				value          : filters.repeatEvery,
+				value          : filters?.repeatEvery,
 				onChange       : (e:any) => setFilters({ ...filters, repeatEvery: e }),
 				span           : 1,
 				options        : [

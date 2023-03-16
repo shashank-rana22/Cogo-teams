@@ -1,4 +1,5 @@
 import { Textarea } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
 import { formatDate } from '../../../../../../commons/utils/formatDate';
@@ -34,15 +35,19 @@ function Details({
 		stakeholderName,
 	} = nonRecurringData || {};
 
+	const profileData = useSelector(({ profile }) => profile);
+	const userName = profileData?.user.name;
+
 	if (!isBody) {
 		return <div className={styles.section}>{text}</div>;
 	}
+
 	return (
 		<div className={styles.section}>
 			<div>
 				Hi
 				{' '}
-				{stakeholderName || 'N/A'}
+				{stakeholderName || '-'}
 				,
 			</div>
 
@@ -74,14 +79,18 @@ function Details({
 					Expense date:
 					{' '}
 					{invoiceDate
-						? formatDate(invoiceDate, 'dd/MMM/yy', {}, false) : 'N/A'}
+						? formatDate(invoiceDate, 'dd/MMM/yy', {}, false) : '-'}
 				</div>
 				<div>
 					Payable Amount:
 					{' '}
-					{totalPayable || 'N/A'}
+					{totalPayable || '-'}
 				</div>
-				<div>Requested By:</div>
+				<div>
+					Requested By:
+					{' '}
+					{userName}
+				</div>
 				<div>
 					Your Response:
 					{' '}

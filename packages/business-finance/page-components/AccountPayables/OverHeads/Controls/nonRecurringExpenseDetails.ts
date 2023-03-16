@@ -8,6 +8,7 @@ interface FormDataInterface {
 	entityObject?:{ id?:string },
 	periodOfTransaction?:string,
 	vendorName?:string,
+	expenseCategory?:string,
 }
 
 interface EntityInt {
@@ -41,6 +42,8 @@ interface VendorObject {
 	services?: ObjInt[],
 	business_name?:string,
 	registration_number?:string | number,
+	id?:string | number,
+	serial_id?: number | string,
 }
 
 export const nonRecurringExpenseDetails = ({
@@ -105,6 +108,9 @@ export const nonRecurringExpenseDetails = ({
 			...formData,
 			vendorName         : obj?.business_name,
 			registrationNumber : obj?.registration_number,
+			vendorID           : obj?.id,
+			vendorSerialId     : obj?.serial_id,
+			vendorData         : obj,
 		});
 	};
 
@@ -193,6 +199,7 @@ export const nonRecurringExpenseDetails = ({
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Category',
+					value          : formData?.expenseCategory,
 					span           : 2,
 					options        : categoryOptions,
 				},

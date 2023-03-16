@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-function TotalAfterTax({ totalPayable }) {
+function TotalAfterTax({ totalPayable, invoiceCurrency }) {
 	const getValue = (value) => {
 		if (Number.isNaN(value)) {
 			return '---';
@@ -12,7 +12,11 @@ function TotalAfterTax({ totalPayable }) {
 	return (
 		<div className={styles.tat}>
 			<span className={styles.label}>Total Payable :</span>
-			<span className={styles.value}>{getValue(totalPayable)}</span>
+			<span className={styles.value}>
+				{invoiceCurrency}
+				{' '}
+				{getValue(totalPayable)}
+			</span>
 		</div>
 	);
 }

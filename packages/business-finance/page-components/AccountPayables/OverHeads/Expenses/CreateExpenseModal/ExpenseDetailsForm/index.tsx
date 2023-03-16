@@ -26,12 +26,11 @@ function ExpenseDetailsForm({ formData, setFormData, createExpenseType }:Props) 
 
 	useEffect(() => {
 		if (date) {
-			setFormData({ ...formData, periodOfTransaction: months[getMonth(date) + 1] });
+			setFormData((prev) => ({ ...prev, periodOfTransaction: months[getMonth(date) + 1] }));
 		} else {
-			setFormData({ ...formData, periodOfTransaction: null });
+			setFormData((prev) => ({ ...prev, periodOfTransaction: null }));
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [date]);
+	}, [date, setFormData]);
 
 	const { entityList } = useListCogoEntities();
 

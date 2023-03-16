@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useGetStakeholders = (expenseCategory:string) => {
-	const [{ data }, trigger] = useRequestBf(
+	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense/stakeholder',
 			method  : 'get',
@@ -12,26 +12,26 @@ const useGetStakeholders = (expenseCategory:string) => {
 		{ autoCancel: false },
 	);
 
-	const api = async () => {
-		try {
-			await trigger({
-				params: {
-					category : expenseCategory || undefined,
-					level    : 1,
-				},
-			});
-		} catch (err) {
-			Toast.error('Something went wrong');
-		}
-	};
-
 	useEffect(() => {
+		const api = async () => {
+			try {
+				await trigger({
+					params: {
+						category : expenseCategory || undefined,
+						level    : 1,
+					},
+				});
+			} catch (err) {
+				Toast.error('Something went wrong');
+			}
+		};
+
 		api();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [trigger, expenseCategory]);
 
 	return {
 		stakeholdersData: data?.data,
+		loading,
 	};
 };
 
