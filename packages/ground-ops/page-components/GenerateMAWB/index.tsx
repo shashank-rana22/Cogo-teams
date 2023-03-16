@@ -22,8 +22,14 @@ const options = [
 	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
 ];
 
+const iataCodeMapping = {
+	'7391cac2-e8db-467f-a59b-574d01dd7e7c' : '14-3-4526/0020',
+	'aa0e7e59-cbb9-43b2-98ce-1f992ae7ab19' : '14-3-4525/0006',
+	'bdef6da0-8353-4b9a-b422-550ebe9c2474' : '14-3-4526/0042',
+};
+
 interface NestedObj {
-	[key: string]: NestedObj;
+	[key: string]: NestedObj | React.FC ;
 }
 
 interface Props {
@@ -76,17 +82,17 @@ function GenerateMAWB({
 	];
 
 	let chargeableWeight:number = Number((Math.max(
-		+formValues.weight * +taskItem.totalPackagesCount,
+		+formValues.weight,
 		(+taskItem.volume * 166.67),
 	) || 0.0).toFixed(2));
 
 	useEffect(() => {
 		chargeableWeight = Number((Math.max(
-			+formValues.weight * +formValues.totalPackagesCount,
+			+formValues.weight,
 			+formValues.volumetricWeight,
 		) || 0.0).toFixed(2));
 		setValue('chargeableWeight', (+chargeableWeight || 0.0).toFixed(2));
-	}, [formValues.volumetricWeight, formValues.weight, formValues.totalPackagesCount]);
+	}, [formValues.volumetricWeight, formValues.weight]);
 
 	useEffect(() => {
 		setValue('amount', ((chargeableWeight * formValues.ratePerKg) || 0.0).toFixed(2));
@@ -102,18 +108,22 @@ function GenerateMAWB({
 		finalFields.forEach((c:any) => {
 			setValue(c.name, taskItem[c.name]);
 		});
-		setValue('iataCode', '14-3-4525/0006');
+		setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
 		setValue('declaredValueForCarriage', 'NVD');
 		setValue('city', 'NEW DELHI');
 		setValue('place', 'NEW DELHI');
 		setValue('class', 'q');
+		setValue('currency', 'INR');
 		setValue('commodity', edit ? `${taskItem.commodity || ''}`
 			: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
+		setValue('agentOtherCharges', edit ? taskItem.agentOtherCharges
+			: [{ code: 'AWB', price: '' }, { code: 'PCA', price: '' },
+			]);
 		setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
-			: [{ code: 'FSC', price: '' }, { code: 'SSC', price: '' },
-				{ code: 'XRAY', price: '' }, { code: 'AWC', price: '' },
+			: [{ code: 'XRAY', price: '' }, { code: 'AWC', price: '' },
 				{ code: 'AMS', price: '' }, { code: 'CGC', price: '' },
 			]);
+		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 	}, []);
 
 	useEffect(() => {
@@ -284,9 +294,9 @@ function GenerateMAWB({
 						onClose={() => { setBack(false); setViewDoc(false); }}
 						size="lg"
 						className={styles.modal_container}
-						style={{ width: '900px' }}
+						style={{ width: '900px', height: '92vh' }}
 					>
-						<Modal.Body style={{ minHeight: '720px' }}>
+						<Modal.Body style={{ minHeight: '90vh' }}>
 							<GenerateMawbDoc
 								taskItem={taskItem}
 								formData={formData}
