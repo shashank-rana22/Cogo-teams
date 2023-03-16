@@ -1,41 +1,32 @@
-import ServiceDetails from '../MultiServiceDetails';
+import { cl } from '@cogoport/components';
+
+import MultiServiceDetails from '../MultiServiceDetails';
 
 import RenderCargoPills from './RenderCargoPills';
 import styles from './styles.module.css';
 
-function CargoDetails({ primary_service, shipment_data }) {
-	const mainServices = shipment_data?.all_services?.filter(
-		(item) => item?.service_type === primary_service?.service_type,
-	);
-
-	const includeShipment = [
-		'air_freight',
-		'fcl_freight',
-		'rail_domestic_freight',
-	];
-
-	const isMultiService =		includeShipment.includes(shipment_data?.shipment_type)
-		&& mainServices?.length > 1;
-
-	const newPrimaryService = { ...primary_service };
-	if (shipment_data?.shipment_type === 'ftl_freight') {
-		newPrimaryService.trucks_count = shipment_data?.trucks_total_count;
-	}
-	if (shipment_data?.shipment_type === 'ltl_freight') {
-		newPrimaryService.payment_term = shipment_data?.payment_term;
-	}
-
+function CargoDetails({ primary_service }) {
 	return (
-		<div className={`${styles.container} ${styles.shipment_cargo_details_root}`}>
-			<RenderCargoPills detail={newPrimaryService || {}} />
-
-			{isMultiService ? (
-				<ServiceDetails mainServices={mainServices}>
-					+
-					{mainServices.length - 1}
-					Details
-				</ServiceDetails>
-			) : null}
+		<div className={cl`${styles.container} ${styles.shipment_cargo_details_root}`}>
+			<RenderCargoPills detail={primary_service || {}} />
+			{primary_service?.cargo_details?.length > 1 ? (
+				<div className={styles.multi_service}>
+					<CargoDetails
+						detail={{ ...primary_service, ...primary_service?.cargo_details?.[0] } || {}}
+					/>
+					<MultiServiceDetails mainServices={primary_service?.cargo_details}>
+						+
+						{' '}
+						{(primary_service?.cargo_details?.length || 1) - 1}
+						{' '}
+						Details
+					</MultiServiceDetails>
+				</div>
+			) : (
+				<RenderCargoPills
+					detail={{ ...primary_service, ...primary_service?.cargo_details?.[0] } || {}}
+				/>
+			)}
 		</div>
 	);
 }

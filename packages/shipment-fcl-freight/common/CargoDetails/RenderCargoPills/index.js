@@ -40,7 +40,7 @@ function RenderCargoPills({ detail }) {
 			{labels.map((label) => {
 				if (detail?.[label] && renderValue(label, detail)) {
 					return (
-						<div className={cl` ${styles.box} cargo-detail-pill`} key={label}>
+						<div className={cl` ${styles.box} ${styles.cargo_detail_pill}`} key={label}>
 							{renderValue(label, detail)}
 						</div>
 					);

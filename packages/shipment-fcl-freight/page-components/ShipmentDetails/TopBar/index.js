@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 function TopBar() {
 	return (
-		<div className={styles.mainTopBar}>
+		<div className={styles.main_top_bar}>
 			<ShipmentHeader />
 			<PocSop />
 		</div>
