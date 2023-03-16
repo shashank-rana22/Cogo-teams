@@ -2,9 +2,9 @@ import React, { useState, useRef } from 'react';
 import { startCase } from '@cogoport/front/utils';
 import { Button, Popover } from '@cogoport/components';
 import getField from '@cogo/business-modules/form/components';
-import { useFormCogo } from '@cogoport/front/hooks';
+import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogo/next';
-import PortDetails from '@cogo/bookings/ShipmentDetails/commons/Header/PortDetails';
+// import PortDetails from '@cogo/bookings/ShipmentDetails/commons/Header/PortDetails';
 import {
 	IcMSend,
 	IcMAttach,
@@ -19,21 +19,7 @@ import SendTo from './SendTo';
 import MessageContainer from './MessageContainer';
 import useFireBase from '../../hooks/useFireBase';
 import stakeholderMappings from './SendTo/stakeholder-mappings';
-import {
-	Container,
-	Header,
-	SerialId,
-	ChatSections,
-	TypingContainer,
-	IconWrap,
-	AttachedDoc,
-	AttachedContainer,
-	PopoverContainer,
-	Name,
-	ChatUsers,
-	UserName,
-	Send,
-} from './styles';
+import styles from './styles.module.css';
 
 const Text = getField('textarea');
 const Uploader = getField('file');
@@ -79,16 +65,16 @@ const Details = ({
 
 	const content = () => {
 		return (
-			<ChatUsers>
+			<div className={styles.chat_users}>
 				{groupChatUsers?.map((item) => (
-					<UserName>{startCase(item)}</UserName>
+					<div className={styles.user_name}>{startCase(item)}</div>
 				))}
-			</ChatUsers>
+			</div>
 		);
 	};
 
 	const controls = getControls({ rows });
-	const { watch, fields, handleSubmit, reset } = useFormCogo(controls);
+	const { watch, fields, handleSubmit, reset } = useForm(controls);
 	const formValues = watch();
 
 	const { onCreate, onError, loading } = useCreateMessage({
@@ -134,11 +120,11 @@ const Details = ({
 	}
 
 	return (
-		<Container>
+		<div className={styles.container}>
 			{isGettingShipment ? (
 				<Loader />
 			) : (
-				<Header>
+				<div className={styles.header}>
 					{isMobile ? (
 						<IcMListView
 							className="bar-icon"
@@ -148,24 +134,24 @@ const Details = ({
 						/>
 					) : null}
 					{serial_id ? (
-						<SerialId onClick={() => handleClick()}>
+						<div className={styles.serial_id} onClick={() => handleClick()}>
 							Shipment ID
 							<span style={{ fontWeight: 700, marginLeft: '4px' }}>
 								#{serial_id}
 							</span>
-						</SerialId>
+						</div>
 					) : null}
 
-					<PortDetails
+					{/* <PortDetails
 						data={shipment_data}
 						primary_service={primary_service}
 						isShow={false}
-					/>
+					/> */}
 
 					{personal_data?.channel_name ? (
-						<Name>{startCase(personal_data?.channel_name)}</Name>
+						<div className={styles.name}>{startCase(personal_data?.channel_name)}</div>
 					) : (
-						<PopoverContainer className="popOver-container">
+						<div className={styles.popover_container} className="popOver-container">
 							<Popover
 								theme="light"
 								interactive
@@ -177,12 +163,12 @@ const Details = ({
 									{groupChatUsers?.length}
 								</Button>
 							</Popover>
-						</PopoverContainer>
+						</div>
 					)}
-				</Header>
+				</div>
 			)}
 
-			<ChatSections>
+			<div className={styles.chat_sections}>
 				<MessageContainer
 					msgContent={msgContent}
 					isGettingShipment={isGettingShipment}
@@ -199,26 +185,26 @@ const Details = ({
 					<div style={{ padding: '21px' }} />
 				)}
 
-				<TypingContainer>
+				<div className={styles.typing_container}>
 					<Popover
 						theme="light"
 						interactive
 						content={<Uploader {...fields.file} />}
 					>
-						<IconWrap>
+						<div className={styles.icon_wrap}>
 							<IcMAttach width={21} height={21} />
-						</IconWrap>
+						</div>
 					</Popover>
-					<AttachedContainer>
+					<div className={styles.attached_container}>
 						{(formValues?.file || []).map((url) => {
 							return (
-								<AttachedDoc>
+								<div className={styles.attached_doc}>
 									<IcMDocument style={{ marginRight: '4px' }} />
 									{url.name}
-								</AttachedDoc>
+								</div>
 							);
 						})}
-					</AttachedContainer>
+					</div>
 
 					<Text
 						onKeyPress={(e) => handleKeyPress(e)}
@@ -226,15 +212,15 @@ const Details = ({
 						{...fields.message}
 					/>
 
-					<Send
+					<div className={styles.send}
 						onClick={!loading ? handleSubmit(onCreate, onError) : null}
 						className={loading ? 'loading' : null}
 					>
 						<IcMSend style={{ width: '2em', height: '2em', fill: '#303b67' }} />
-					</Send>
-				</TypingContainer>
-			</ChatSections>
-		</Container>
+					</div>
+				</div>
+			</div>
+		</div>
 	);
 };
 

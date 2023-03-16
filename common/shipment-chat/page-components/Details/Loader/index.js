@@ -1,52 +1,27 @@
 import React from 'react';
-import { SkeletonV1 } from '@cogoport/front/components';
-import styled from '@cogoport/front/styled';
+import { Placeholder } from '@cogoport/components';
+import styles from './styles.module.css';
 
 const customStyle = { height: '14px' };
 
 const Loader = () => {
 	return (
-		<Container>
-			<Details>
-				<SkeletonV1 style={{ marginRight: '50px' }} />
+		<div className={styles.container}>
+			<div className={styles.details}>
+				<Placeholder style={{ marginRight: '50px' }} />
 
-				<Ports>
-					<SkeletonV1 style={{ ...customStyle, margin: '0 0 10px 0' }} />
-					<SkeletonV1 style={customStyle} />
-				</Ports>
+				<div className={styles.ports}>
+					<Placeholder style={{ ...customStyle, margin: '0 0 10px 0' }} />
+					<Placeholder style={customStyle} />
+				</div>
 
-				<Ports className="destination">
-					<SkeletonV1 style={{ ...customStyle, margin: '0 0 10px 0' }} />
-					<SkeletonV1 style={customStyle} />
-				</Ports>
-			</Details>
-		</Container>
+				<div className={styles.ports} className="destination">
+					<Placeholder style={{ ...customStyle, margin: '0 0 10px 0' }} />
+					<Placeholder style={customStyle} />
+				</div>
+			</div>
+		</div>
 	);
 };
 
 export default Loader;
-
-const Container = styled.div`
-	width: 100%;
-	border-radius: 10px;
-	display: flex;
-`;
-
-const Details = styled.div`
-	background: #ffffff;
-	width: 100%;
-	padding: 10px 18px;
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-`;
-
-const Ports = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin: 0 20px;
-
-	&.destination {
-		margin: 0 30px 0 60px;
-	}
-`;

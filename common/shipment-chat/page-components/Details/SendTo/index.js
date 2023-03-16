@@ -5,9 +5,9 @@ import React, {
 	useImperativeHandle,
 } from 'react';
 import { Input } from '@cogoport/components';
-import { startCase } from '@cogoport/front/utils';
+import { startCase } from '@cogoport/utils';
 import stakeholderMappings from './stakeholder-mappings';
-import { SendToContainer, Container, Options, OptionsCon } from './styles';
+import styles from './styles.module.css';
 
 const Sendto = (
 	{ data, setStakeHolderView = () => { }, isStakeholder = true },
@@ -74,20 +74,20 @@ const Sendto = (
 		}
 
 		return (
-			<Container role="listbox">
+			<div className={styles.container} role="listbox">
 				{(suggestions || []).map((item) => {
 					return (
-						<Options
+						<div className={styles.options}
 							onKeyPress={selectedText}
 							role="button"
 							tabIndex="0"
 							onClick={() => selectedText(item)}
 						>
 							<div className="text-option">{startCase(item)}</div>
-						</Options>
+						</div>
 					);
 				})}
-			</Container>
+			</div>
 		);
 	};
 
@@ -106,8 +106,8 @@ const Sendto = (
 
 	return (
 		<>
-			<OptionsCon>{renderSuggestions()}</OptionsCon>
-			<SendToContainer>
+			<div>{renderSuggestions()}</div>
+			<div className={styles.send_to_container}>
 				<div className="send-text">Sending to -</div>
 				<div className="stakeholders">
 					<Input
@@ -116,7 +116,7 @@ const Sendto = (
 						placeholder="Type @"
 					/>
 				</div>
-			</SendToContainer>
+			</div>
 		</>
 	);
 };

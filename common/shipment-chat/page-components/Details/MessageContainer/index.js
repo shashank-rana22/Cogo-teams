@@ -1,24 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from '@cogoport/store';
-import { startCase } from '@cogoport/front/utils';
+import { startCase } from '@cogoport/utils';
 import { Toggle } from '@cogoport/components';
 import { IcMStar, IcCStar, IcMDocument } from '@cogoport/icons-react';
-import formatDate from '@cogo/globalization/utils/formatDate';
-import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
+// import formatDate from '@cogo/globalization/utils/formatDate';
+// import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
 import MsgLoader from '../MsgLoader';
 import useUpdateMessage from '../../../hooks/useUpdateMessage';
-import {
-	Container,
-	SendMsg,
-	MainContainer,
-	Details,
-	Msg,
-	FlexRow,
-	FileName,
-	Time,
-	ImpSign,
-	FilterBox,
-} from './styles';
+import styles from './styles.module.css';
 
 const MessageContainer = ({ msgContent, isGettingShipment }) => {
 	const [showImpMsg, setShowImpMsg] = useState(false);
@@ -94,14 +83,14 @@ const MessageContainer = ({ msgContent, isGettingShipment }) => {
 
 	const allMessage = () => {
 		return (
-			<MainContainer>
+			<div className={styles.main_container}>
 				{isGettingShipment ? (
 					<MsgLoader />
 				) : (
 					<>
 						{(totalMessages || []).map((msg, index) => {
 							return (
-								<Container
+								<div className={styles.container}
 									id={`shipment_chat_message_container${index}`}
 									className={
 										msg?.created_by_user === user_name ? 'right' : 'left'
@@ -110,15 +99,15 @@ const MessageContainer = ({ msgContent, isGettingShipment }) => {
 									{(msg?.visible_to_user_ids || []).map((item) =>
 										item === user_id ? (
 											<div style={{ display: 'flex' }}>
-												<SendMsg
+												<div className={styles.send_msg}
 													className={
 														msg?.created_by_user === user_name
 															? 'right'
 															: 'left'
 													}
 												>
-													<Details>
-														<ImpSign
+													<div className={styles.details}>
+														<div className={styles.imp_sign}
 															className={
 																msg?.created_by_user === user_name
 																	? 'right'
@@ -135,7 +124,7 @@ const MessageContainer = ({ msgContent, isGettingShipment }) => {
 																	style={{ width: '1.3em', height: '1.3em' }}
 																/>
 															)}
-														</ImpSign>
+														</div>
 
 														<span style={{ margin: '0px 8px' }}>
 															{msg?.created_by_stakeholder ? (
@@ -147,26 +136,26 @@ const MessageContainer = ({ msgContent, isGettingShipment }) => {
 																</span>
 															) : null}
 														</span>
-													</Details>
+													</div>
 
 													{(msg?.attachment_urls || []).map((url) => {
 														return (
-															<FlexRow>
-																<FileName
+															<div className={styles.file_name}>
+																<div className={styles.flex_row}
 																	onClick={() => window.open(url, '_blank')}
 																>
 																	<IcMDocument style={{ marginRight: '6px' }} />
 																	{url?.split('/').pop()}
-																</FileName>
-															</FlexRow>
+																</div>
+															</div>
 														);
 													})}
 
 													{msg?.content ? (
-														<Msg>{`${getSplited(msg.content)}`}</Msg>
+														<div className={styles.msg}>{`${getSplited(msg.content)}`}</div>
 													) : null}
 
-													<Time>
+													{/* <div className={styles.time}>
 														{formatDate({
 															date: msg?.created_at,
 															dateFormat:
@@ -176,26 +165,26 @@ const MessageContainer = ({ msgContent, isGettingShipment }) => {
 															formatType: 'dateTime',
 															separator: ' | ',
 														})}
-													</Time>
-												</SendMsg>
+													</div> */}
+												</div>
 											</div>
 										) : null,
 									)}
-								</Container>
+								</div>
 							);
 						})}
 					</>
 				)}
-			</MainContainer>
+			</div>
 		);
 	};
 
 	return (
 		<>
-			<FilterBox>
+			<div className={styles.filter_box}>
 				<div>Show only important Message</div>
 				<Toggle value={showImpMsg} onChange={setShowImpMsg} />
-			</FilterBox>
+			</div>
 			{allMessage()}
 		</>
 	);
