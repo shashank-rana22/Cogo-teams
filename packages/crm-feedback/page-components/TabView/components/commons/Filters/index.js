@@ -27,6 +27,7 @@ function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' 
 				status: 'active',
 			},
 		},
+		valueKey: 'user_id',
 	});
 
 	const kamOptions = useGetAsyncOptions({

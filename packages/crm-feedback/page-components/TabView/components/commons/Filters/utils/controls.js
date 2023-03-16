@@ -34,8 +34,7 @@ export const controlsFeedbacks = (organizationOptions, kamOptions, kamManagerOpt
 		placeholder : 'KAM Manager',
 		type        : 'select',
 		isClearable : true,
-		valueKey    : 'user_id',
-		labelKey    : 'name',
+		params      : { filters: { status: 'active' } },
 	},
 	{
 		...kamOptions,
@@ -43,7 +42,6 @@ export const controlsFeedbacks = (organizationOptions, kamOptions, kamManagerOpt
 		placeholder : 'KAM',
 		type        : 'select',
 		isClearable : true,
-		valueKey    : 'user_id',
 	},
 ];
 

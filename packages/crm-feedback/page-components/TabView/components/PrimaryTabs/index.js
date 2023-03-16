@@ -15,7 +15,7 @@ function PrimaryTabs() {
 				onChange={setActiveTab}
 			>
 				<TabPanel name="feedbacks_received" title="Feedbacks Received">
-					<FeedbacksReceived activeTab={activeTab} />
+					<FeedbacksReceived activeTab={activeTab} setActiveTab={setActiveTab} />
 				</TabPanel>
 
 				<TabPanel name="requests_sent" title="Requests Sent">
