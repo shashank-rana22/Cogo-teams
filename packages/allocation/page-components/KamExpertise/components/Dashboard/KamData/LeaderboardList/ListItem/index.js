@@ -1,15 +1,9 @@
 import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
-
-const EXPERTISE_MAPPING = {
-	commodity_expertise : 'Commodity Expertise',
-	customer_expertise  : 'Customer Expertise',
-	trade_expertise     : 'Trade Expertise',
-	miscellaneous       : 'Misc Exp.',
-};
 
 function ListItem(props) {
 	const { data = {}, index } = props;
@@ -39,7 +33,6 @@ function ListItem(props) {
 						</div>
 					</div>
 				</div>
-				{/* //! badges response structure needs to be changed */}
 				<div className={styles.badge_container}>
 					<div className={styles.badges}>
 						{
@@ -73,7 +66,7 @@ function ListItem(props) {
 					{
                         expertise_score.map((expertise) => (
 	<div className={styles.exp}>
-		<div className={styles.expertise}>{EXPERTISE_MAPPING[expertise.expertise_type]}</div>
+		<div className={styles.expertise}>{startCase(expertise.expertise_type)}</div>
 		<div><b>{expertise.score}</b></div>
 	</div>
                         ))

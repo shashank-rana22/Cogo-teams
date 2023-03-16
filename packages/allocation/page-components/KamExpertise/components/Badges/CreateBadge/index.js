@@ -2,8 +2,8 @@ import { Button } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
-
 import GetCard from '../BadgeUpdateCard';
+
 import styles from './styles.module.css';
 
 const MEDALS_MAPPING = [
