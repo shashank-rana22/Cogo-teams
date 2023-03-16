@@ -7,24 +7,23 @@ function useGetKamExpertiseStatsList() {
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 	const [badgeName, setBadgeName] = useState('');
 	const [params, setParams] = useState({
-		page            : 1,
-		partner_user_id : '',
-		filters         : {
-			// name of the kam
-			name: searchQuery || undefined,
-
-			// badge
-			badge: badgeName || undefined,
+		page    : 1,
+		filters : {
+			created_at_greater_than : '',
+			created_at_less_than    : '',
+			kam_expertise_level     : '',
+			name                    : searchQuery || undefined,
+			// badge : badgeName || undefined,
 		},
-	});
+	}, { manual: false });
 
 	useEffect(() => {
 		setParams((pv) => ({
 			...pv,
 			filters: {
 				...pv.filters,
-				name  : searchQuery || undefined,
-				badge : badgeName || undefined,
+				name: searchQuery || undefined,
+				// badge : badgeName || undefined,
 			},
 		}));
 	}, [searchQuery, badgeName]);
@@ -43,11 +42,14 @@ function useGetKamExpertiseStatsList() {
 		}));
 	};
 
-	const { leaderboardList = [], ...paginationData } = data || {};
+	const { list = [], ...paginationData } = data || {};
+
+	// console.log('leaderboardList', leaderboardList);
 
 	return {
+		setParams,
 		leaderboardLoading : loading,
-		leaderboardList,
+		leaderboardList    : list,
 		listRefetch        : refetch,
 		searchKAM,
 		setSearchKAM,
