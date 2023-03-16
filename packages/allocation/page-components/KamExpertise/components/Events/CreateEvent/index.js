@@ -26,7 +26,6 @@ const FILTER_ATTRIBUTE_MAPPING = {
 function CreateEvent(props) {
 	const {
 		setToggleEvent = () => {},
-		eventListData = {},
 		listRefetch = () => {},
 		updateEventListData = {},
 	} = props;
@@ -38,15 +37,13 @@ function CreateEvent(props) {
 	const {
 		attributeList,
 		loading,
-		refetch,	//! Use it or remove it
 		setRuleType = () => {},
 	} = useGetAllocationKamExpertiseRules();
 
 	const {
 		onSave,
 		getAddRuleControls,
-		// newEventFormProps,
-	} = useCreateNewEvent({ attributeList, eventListData, listRefetch, setToggleEvent });
+	} = useCreateNewEvent({ attributeList, listRefetch, setToggleEvent });
 
 	const {
 		onUpdate,
@@ -234,7 +231,6 @@ function CreateEvent(props) {
 						size="md"
 						type="submit"
 						onClick={(isEmpty(updateEventListData)) ? handleSubmit(onSave) : handleSubmit(onUpdate)}
-
 					>
 						Save
 					</Button>

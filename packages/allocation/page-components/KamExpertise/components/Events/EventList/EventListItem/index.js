@@ -11,13 +11,6 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 		rules = [],
 	} = data;
 
-	const EXPERTISE_MAPPING = {
-		customer_expertise  : 'Customer Expertise',
-		trade_expertise     : 'Trade Expertise',
-		commodity_expertise : 'Commodity Expertise',
-		misc_expertise      : 'Misc Expertise',
-	};
-
 	const COMPLETION_MAPPING = {
 		completed   : 'Shipment Completion',
 		in_progress : 'Shipment Creation',
@@ -41,7 +34,7 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 				<p className={styles.info_tag}>
 					Expertise :
 					{' '}
-					<b style={{ marginLeft: 4 }}>{EXPERTISE_MAPPING[Type]}</b>
+					<b style={{ marginLeft: 4 }}>{startCase(Type)}</b>
 				</p>
 				<div className={styles.info_tag}>
 					Event Name :

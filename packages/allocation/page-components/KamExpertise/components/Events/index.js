@@ -46,13 +46,12 @@ function Events() {
 			</div>
 
 			{
-
 			(toggleEvent === 'eventList') && (
 				<>
 					<Header
 						setToggleEvent={setToggleEvent}
-						toggleEvent={toggleEvent}
 						debounceQuery={debounceQuery}
+						loading={loading}
 						setSearchValue={setSearchValue}
 						searchValue={searchValue}
 						expertise={expertise}
@@ -83,7 +82,6 @@ function Events() {
 			{(toggleEvent === 'createNew') && (
 				<CreateEvent
 					setToggleEvent={setToggleEvent}
-					eventListData={{}}
 					listRefetch={listRefetch}
 
 				/>
