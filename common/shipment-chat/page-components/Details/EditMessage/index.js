@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from '@cogoport/components';
 import { IcMTick, IcMCross } from '@cogoport/icons-react';
-import useUpdateMessage from '../../hooks/useUpdateMessage';
+import useUpdateMessage from '../../../hooks/useUpdateMessage';
 import { Container, ButtonWrap, IconWrap } from './styles';
 
 const EditMessage = ({ oldmsg, editMsg, setShowEdit = () => { } }) => {

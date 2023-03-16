@@ -18,12 +18,12 @@ import {
 	IcMUnread,
 } from '@cogoport/icons-react';
 // import Details from '../Details';
-import useGetShipmentChatList from '../hooks/useGetShipmentChatList';
+import useGetShipmentChatList from '../../hooks/useGetShipmentChatList';
 // import { ShipmentDetailContext } from '../../../Context';
-import EmptyState from '../../../common/EmptyState';
+import EmptyState from '../../common/EmptyState';
 // import CreateChannel from './CreateChannel';
 // import useUpdateSeen from '../hooks/useUpdateSeen';
-import useGetChannel from '../hooks/useGetChannel';
+import useGetChannel from '../../hooks/useGetChannel';
 // import ListLoader from './ListLoader';
 import styles from './styles.module.css';
 

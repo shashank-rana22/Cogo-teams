@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useSelector } from '@cogoport/store';
 import { useRequest } from '@cogoport/request';
-import useGetInfiniteList from '../../../hooks/useGetInfiniteList';
+import useGetInfiniteList from './useGetInfiniteList';
 
 const useGetShipmentChatList = ({ status }) => {
 	const { user_id } = useSelector((s) => ({

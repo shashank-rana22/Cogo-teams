@@ -6,7 +6,7 @@ import { IcMStar, IcCStar, IcMDocument } from '@cogoport/icons-react';
 import formatDate from '@cogo/globalization/utils/formatDate';
 import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
 import MsgLoader from '../MsgLoader';
-import useUpdateMessage from '../../hooks/useUpdateMessage';
+import useUpdateMessage from '../../../hooks/useUpdateMessage';
 import {
 	Container,
 	SendMsg,

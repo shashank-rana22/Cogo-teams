@@ -14,10 +14,10 @@ import {
 } from '@cogoport/icons-react';
 import Loader from './Loader';
 import getControls from './controls';
-import useCreateMessage from '../hooks/useCreateMessage';
+import useCreateMessage from '../../hooks/useCreateMessage';
 import SendTo from './SendTo';
 import MessageContainer from './MessageContainer';
-import useFireBase from '../hooks/useFireBase';
+import useFireBase from '../../hooks/useFireBase';
 import stakeholderMappings from './SendTo/stakeholder-mappings';
 import {
 	Container,

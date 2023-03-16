@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useFormCogo } from '@cogoport/front/hooks';
 import { Button } from '@cogoport/components';
-import FormLayout from '../../../..';
+import FormLayout from '../../..';
 import { controls } from './controls';
 import useAddUser from './UseAddUser';
 
