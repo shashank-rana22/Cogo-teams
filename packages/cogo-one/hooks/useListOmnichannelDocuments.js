@@ -12,7 +12,6 @@ function useListOmnichannelDocuments({
 	setFilterVisible,
 	activeSelect = '',
 	type = '',
-	updateFunc = () => {},
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_omnichannel_documents',
@@ -25,10 +24,10 @@ function useListOmnichannelDocuments({
 		activeTab,
 	});
 
-	const checkConditions = isEmpty(userId) && isEmpty(userMobile);
-
 	const documentsList = useCallback(async (filters) => {
 		try {
+			const checkConditions = isEmpty(userId) && isEmpty(userMobile);
+
 			let filters_payload = {
 				user_id       : !isEmpty(userId) ? userId : undefined,
 				mobile_number : isEmpty(userId) ? userMobile : undefined,
@@ -45,7 +44,7 @@ function useListOmnichannelDocuments({
 				};
 			}
 
-			const res = await trigger({
+			await trigger({
 				params: {
 					page_limit                : type !== 'count' ? 1000 : undefined,
 					only_total_count_required : type === 'count',
@@ -54,13 +53,10 @@ function useListOmnichannelDocuments({
 			});
 
 			setFilterVisible(false);
-			const list = res?.data?.list;
-			const listId = await list.map((i) => i.id);
-			updateFunc(listId);
 		} catch (error) {
 			// console.log(error);
 		}
-	}, [checkConditions, leadUserId, setFilterVisible, trigger, type, userId, updateFunc, userMobile]);
+	}, [leadUserId, setFilterVisible, trigger, type, userId, userMobile]);
 
 	const emptyCheck = useMemo(() => !isEmpty(userId) || !isEmpty(userMobile), [userId, userMobile]);
 

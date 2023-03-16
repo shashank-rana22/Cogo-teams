@@ -40,7 +40,6 @@ const useSubmitOrganizationKyc = ({
 		} else {
 			finalUrl = utility_bill_document_url || '';
 		}
-		console.log('utility_bill_document_url:', utility_bill_document_url);
 
 		try {
 			await trigger({

@@ -21,7 +21,6 @@ function documentTypeMapping(type) {
 
 function ListData({ list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {} }) {
 	const handleOpenFile = (val) => {
-		// eslint-disable-next-line no-undef
 		window.open(val, '_blank');
 	};
 
