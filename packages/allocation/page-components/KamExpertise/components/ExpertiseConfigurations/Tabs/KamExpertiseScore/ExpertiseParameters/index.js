@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
+import useEditExpertiseParameters from '../../../../../hooks/useEditExpertiseParameters';
 
 import useGetExpertiseParameters from '../../../../../hooks/useGetExpertiseParameters';
 
@@ -11,20 +12,31 @@ function ExpertiseParameters(props) {
 
 	const [editMode, setEditMode] = useState(false);
 
-	const { data } = useGetExpertiseParameters({ activeCollapse });
+	const { data, refetch } = useGetExpertiseParameters({ activeCollapse });
 	const { list = [] } = data || {};
+
+	const { onSave, handleSubmit, control, loading: editLoading } = useEditExpertiseParameters({list, refetch, setEditMode});
 
 	return (
 		<div>
-
 			<div className={styles.card_container}>
 				<div className={styles.cards}>
 					<div className={styles.button_container}>
 
 						{editMode ? (
 							<>
-								<Button themeType="secondary" onClick={() => setEditMode(false)}>Cancel</Button>
-								<Button style={{ marginLeft: '8px' }}>Save</Button>
+								<Button themeType="secondary" onClick={() => setEditMode(false)} disabled={editLoading}>Cancel</Button>
+								<Button
+									themeType="primary"
+									type="submit"
+									size="md"
+									style={{ marginLeft: '8px' }}
+									onClick={handleSubmit(onSave)}
+									disabled={editLoading}
+								>
+									Save
+
+								</Button>
 
 							</>
 
@@ -32,7 +44,7 @@ function ExpertiseParameters(props) {
 							: <Button themeType="secondary" onClick={() => setEditMode(!editMode)}>Edit</Button>}
 					</div>
 
-					{list.map((item) => <CardItem editMode={editMode} item={item} />)}
+					{list.map((item) => <CardItem editMode={editMode} item={item} control={control}/>)}
 				</div>
 			</div>
 

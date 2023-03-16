@@ -9,7 +9,7 @@ function BadgeListItem(props) {
 	const { badge_details = [] } = data;
 	const handleEdit = () => {
 		setBadgeListData(data);
-		setToggleScreen(3);
+		setToggleScreen('create_badge');
 	};
 
 	return (

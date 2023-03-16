@@ -16,7 +16,7 @@ function Badges() {
 		router.push('/allocation/kam-expertise');
 	};
 
-	const [toggleScreen, setToggleScreen] = useState(1);
+	const [toggleScreen, setToggleScreen] = useState('badge_details');
 	const [badgeListData, setBadgeListData] = useState({});
 	const [masteryListData, setMasteryListData] = useState({});
 
@@ -34,7 +34,7 @@ function Badges() {
 	} = useGetBadgeList();
 
 	const BADGES_COMPONENTS_MAPPING = {
-		1: <BadgeDetails
+		badge_details: <BadgeDetails
 			badgeList={badgeList}
 			setToggleScreen={setToggleScreen}
 			expertise={expertise}
@@ -50,14 +50,14 @@ function Badges() {
 			getNextPage={getNextPage}
 		/>,
 
-		2: <CreateMastery
+		mastery: <CreateMastery
 			setToggleScreen={setToggleScreen}
 			badgeList={badgeList}
 			masteryListData={masteryListData}
 			listRefetch={listRefetch}
 		/>,
 
-		3: <CreateBadge
+		create_badge: <CreateBadge
 			setToggleScreen={setToggleScreen}
 			badgeListData={badgeListData}
 			listRefetch={listRefetch}

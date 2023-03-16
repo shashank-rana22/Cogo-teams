@@ -279,7 +279,7 @@ const allocation = {
 			service_name : 'allocation',
 		},
 		{
-			api          : 'post_allocation_kam_expertise_event_scoring',
+			api          : 'post_allocation_kam_expertise_event_scoring_attribute',
 			access_type  : 'private',
 			feature      : 'kam_expertise',
 			service_name : 'allocation',

@@ -15,7 +15,7 @@ function CreateMastery(props) {
 	} = props;
 
 	const onClose = () => {
-		setToggleScreen(1);
+		setToggleScreen('badge_details');
 	};
 
 	const {
@@ -26,7 +26,7 @@ function CreateMastery(props) {
 	} = useCreateMasterConfiguration({ masteryListData, onClose, listRefetch });
 
 	const UploadController = getFieldController('fileUpload');
-	const InputDesc = getFieldController('text');
+	const InputDesc = getFieldController('textarea');
 
 	const {
 		control,
@@ -138,11 +138,11 @@ function CreateMastery(props) {
 								<InputDesc
 									name="description_input"
 									className={styles.text_area}
-									size="sm"
+									multiline
 									placeholder="Multimodal maestro is awarded
                                 				to users who complete gold 3 in all of these badges"
 									control={control}
-									rules={{ required: 'Desc is required' }}
+									rules={{ required: 'Description is required' }}
 								/>
 								<div className={styles.error_message}>
 									{isEmpty(masteryListData) && errors?.description_input?.message}

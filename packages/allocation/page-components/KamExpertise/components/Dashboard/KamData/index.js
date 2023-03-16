@@ -39,7 +39,8 @@ const overview_data = [
 	},
 ];
 
-function KamData({ params }) {
+function KamData(props) {
+	const { params = {} } = props;
 	const [kamLevel, setKamLevel] = useState();
 	const {
 		loading = false,
@@ -56,7 +57,7 @@ function KamData({ params }) {
 		debounceQuery,
 		paginationData,
 		getNextPage,
-	} = useGetKamExpertiseStatsList();
+	} = useGetKamExpertiseStatsList(params);
 
 	const { list = [] } = dashboardData || {};
 

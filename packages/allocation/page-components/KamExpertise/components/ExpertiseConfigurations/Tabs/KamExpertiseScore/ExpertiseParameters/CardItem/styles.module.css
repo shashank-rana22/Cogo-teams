@@ -38,6 +38,7 @@
 
 .label{
     margin-bottom: 12px;
+    font-size: 13px;
 }
 .child_name_container{
     display: flex;
@@ -60,5 +61,11 @@
 
 .view_label{
     font-size: 14px;
+    color: #828282;
+}
+
+.lower_current_value{
+    margin-top: 4px;
+    font-size: 10px;
     color: #828282;
 }

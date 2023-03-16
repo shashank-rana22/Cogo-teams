@@ -8,7 +8,7 @@ import useGetKamExpertiseConfig from '../../../../hooks/useGetKamExpertiseConfig
 import Header from './Header';
 import KamLevelCard from './KamLevelCard';
 import KamLevelDropDown from './KamLevelDropDown';
-import LoadingState from './LoadingState';
+import LoadingState from '../LoadingState';
 import ResponseCard from './ResponseCard';
 import styles from './styles.module.css';
 
@@ -49,7 +49,7 @@ function KamLevel() {
 				audit_data={audit_data}
 				levelLoading={levelLoading}
 			/>
-			{isEmpty(kamConfigLevelDetails) && !levelLoading ? (<EmptyState />) : (null)}
+			{isEmpty(kamConfigLevelDetails) && !levelLoading && !createKam ? (<EmptyState />) : (null)}
 			{!levelLoading ? (
 				<>
 					<Collapse
@@ -70,7 +70,7 @@ function KamLevel() {
 				</>
 
 			) : (
-				<LoadingState />
+				<LoadingState columnsToLoad={4}/>
 			)}
 
 		</div>
