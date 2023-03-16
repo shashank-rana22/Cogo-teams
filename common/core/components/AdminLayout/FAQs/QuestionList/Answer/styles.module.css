@@ -127,3 +127,18 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.skeleton_container_one {
+	display: flex;
+	margin: 12px 0 0;
+}
+
+.skeleton_container_two {
+	display: flex;
+	margin: 25px 0 0;
+}
+
+.skeleton_container_mid {
+	display: flex;
+	margin: 10px 0 0;
+}

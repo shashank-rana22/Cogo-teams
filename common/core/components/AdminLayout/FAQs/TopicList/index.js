@@ -14,7 +14,7 @@ const generalIcon = (
 	<img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg"
 		alt="logo cogoport"
-		style={{ width: 40, height: 40 }}
+		className={styles.general_icon}
 	/>
 );
 

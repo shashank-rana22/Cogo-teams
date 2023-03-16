@@ -1,4 +1,4 @@
-import { Button, Input } from '@cogoport/front/components/admin';
+import { Button, Input } from '@cogoport/components';
 import { IcCFtick } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
@@ -28,12 +28,13 @@ function EmptySearchState({ search = '' }) {
 				}}
 			/>
 			<div className={styles.button_row}>
-				<Button className="secondary md" onClick={() => setShow(false)}>
+				<Button size="md" themeType="secondary" onClick={() => setShow(false)}>
 					Cancel
 				</Button>
 				<Button
 					disabled={createQuestionloading}
 					size="md"
+					themeType="primary"
 					onClick={() => {
 						createFaqQuestion({
 							searchState: searchquestion,
@@ -41,12 +42,7 @@ function EmptySearchState({ search = '' }) {
 							setQuestionCreated,
 						});
 					}}
-					style={{
-						background  : '#ea3825',
-						borderColor : '#ea3825',
-						color       : '#ffffff',
-						marginLeft  : '8px',
-					}}
+					className={styles.submit_btn}
 				>
 					Submit
 				</Button>

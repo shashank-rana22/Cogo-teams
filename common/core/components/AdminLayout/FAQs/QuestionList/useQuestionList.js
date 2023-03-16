@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -28,7 +29,7 @@ const useQuestionList = ({
 		: undefined;
 
 	const [{ data, loading }, trigger] = useRequest({
-		url    : 'list_faq_questions',
+		url    : '/list_faq_questions',
 		method : 'get',
 	}, { manual: true });
 
@@ -60,7 +61,7 @@ const useQuestionList = ({
 					},
 				});
 			} catch (error) {
-				console.log('error :: ', error);
+				Toast.error(error);
 			}
 		},
 		[country_id, id, page, query, roleFunction, roleSubFunction, scope, topic?.id, trigger],

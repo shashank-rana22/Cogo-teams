@@ -1,4 +1,4 @@
-import { Skeleton } from '@cogoport/front/components/admin';
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -13,18 +13,18 @@ function Loader() {
 					<div className={styles.square_div} style={{ cursor: 'not-allowed' }}>
 						<div className={styles.icon_grid}>
 							<div className={styles.icon_loader}>
-								<Skeleton width="50px" height="50px" />
+								<Placeholder width="50px" height="50px" />
 							</div>
 
 							<div className={styles.display_name_and_topic}>
-								<Skeleton
+								<Placeholder
 									width="150px"
 									height="15px"
 									style={{ margin: '2px 0px 10px 8px' }}
 								/>
 
 								<div className={styles.skeleton_container}>
-									<Skeleton
+									<Placeholder
 										width="100px"
 										height="15px"
 										style={{ margin: '2px 0px 10px 8px' }}

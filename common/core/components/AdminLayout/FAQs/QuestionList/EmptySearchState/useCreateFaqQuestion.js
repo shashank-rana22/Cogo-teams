@@ -29,7 +29,7 @@ const useCreateFaqQuestion = () => {
 			setQuestionCreated(true);
 			setShow(false);
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error);
 		}
 	};
 

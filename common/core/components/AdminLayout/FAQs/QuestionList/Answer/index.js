@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import {
 	IcMRedo,
 	IcMSad,
@@ -49,8 +50,7 @@ function Answer({ topic = {}, question }) {
 
 	useEffect(() => {
 		setIsLiked(FEEDBACK_MAPPING[is_positive] || '');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [getQuestionLoading]);
+	}, [getQuestionLoading, is_positive]);
 
 	const apiName = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id
 		? '/update_faq_feedback'
@@ -90,7 +90,7 @@ function Answer({ topic = {}, question }) {
 
 			fetch();
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error);
 		}
 	};
 
@@ -108,11 +108,11 @@ function Answer({ topic = {}, question }) {
 			setIsLiked('');
 			fetch();
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error);
 		}
 	};
 
-	const GotoFAQ = () => {
+	const goToFAQ = () => {
 		const { id: partnerId = '' } = partner || {};
 
 		const href = `/v2/${partnerId}/learning/faq`;
@@ -213,7 +213,7 @@ function Answer({ topic = {}, question }) {
 					/>
 				) : null}
 
-				<div role="presentation" className={styles.open_faq} onClick={GotoFAQ}>
+				<div role="presentation" className={styles.open_faq} onClick={goToFAQ}>
 					Open in Help Center
 					<IcMRedo style={{ marginLeft: 8 }} />
 				</div>

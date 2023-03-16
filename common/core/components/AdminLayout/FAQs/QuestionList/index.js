@@ -1,4 +1,4 @@
-import { Tooltip, Pagination } from '@cogoport/components';
+import { Pill, Tooltip, Pagination } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -32,9 +32,9 @@ function QuestionList({
 	const allpills = (item) => (
 		<div>
 			{item?.faq_tags?.map((faqtag, i) => (i >= 3 ? (
-				<div style={{ margin: '3px' }}>
-					<div className={styles.pill}>{(faqtag.display_name).toUpperCase()}</div>
-				</div>
+				<Pill size="md" className={styles.pill}>
+					{(faqtag.display_name).toUpperCase()}
+				</Pill>
 			) : null))}
 		</div>
 	);
@@ -43,9 +43,9 @@ function QuestionList({
 		return (
 			<div style={{ display: 'flex' }}>
 				{item?.faq_tags?.slice(0, 3).map((faqtag) => (
-					<div style={{ display: 'flex' }} className={styles.pill}>
+					<Pill size="md" className={styles.pill}>
 						{(faqtag.display_name).toUpperCase()}
-					</div>
+					</Pill>
 				))}
 				<Tooltip
 					content={allpills(item)}
@@ -53,7 +53,7 @@ function QuestionList({
 					theme="light"
 					style={{ marginBottom: '24px' }}
 				>
-					<div style={{ display: 'flex' }} className={styles.pill}>
+					<div className={styles.pill}>
 						+
 						{REMAINING}
 						{' '}
@@ -69,34 +69,20 @@ function QuestionList({
 		<div className={styles.container}>
 			{list?.length > 0 ? (
 				<>
-					<div style={{ fontWeight: '600', marginBottom: 16, marginTop: 18, marginLeft: 24 }}>
+					<div className={styles.topic_heading}>
 						Topic:
 						{' '}
 						{startCase(topic.display_name) || 'Search Result'}
 					</div>
 					<div className={styles.list}>
 						{(list || []).map((item) => (
-							<div
-								style={{
-									marginLeft  : '4px',
-									marginRight : '4px',
-								}}
-							>
+							<div className={styles.list_container}>
 								<div
 									role="presentation"
 									className={styles.question}
 									onClick={() => setQuestion(item)}
 								>
-									<div
-										style={{
-											marginLeft     : '20px',
-											marginRight    : '15px',
-											paddingTop     : '15px',
-											alignItems     : 'center',
-											display        : 'flex',
-											justifyContent : 'space-between',
-										}}
-									>
+									<div className={styles.question_container}>
 										<div style={{ marginRight: 4 }}>
 											{item?.question_abstract}
 											?
@@ -109,17 +95,13 @@ function QuestionList({
 											/>
 										</div>
 									</div>
-									<div
-										style={{
-											margin  : '8px 15px 3px 15px',
-											display : 'flex',
-										}}
-									>
+									<div className={styles.pill_container}>
+
 										{item?.faq_tags.length <= 3
 											? item?.faq_tags?.map((faqtag) => (
-												<div style={{ display: 'flex' }} className={styles.pill}>
+												<Pill size="md" className={styles.pill}>
 													{(faqtag.display_name).toUpperCase()}
-												</div>
+												</Pill>
 											))
 											: extendedPills(item)}
 									</div>

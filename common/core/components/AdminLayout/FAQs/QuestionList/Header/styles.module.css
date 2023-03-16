@@ -1,3 +1,26 @@
+.container {
+	padding-bottom: 12px;
+	margin-top: -21px;
+	background-color: #f8f2e7;
+	border-radius: 10px 0 0;
+}
+
+.wrapper {
+	align-items: center;
+	margin: 21px;
+}
+
+.heading_container {
+	display: flex;
+	align-items: center;
+	padding: 20px 0 0;
+}
+
+.gap {
+	width: 50px;
+	height: 44px;
+}
+
 .title {
 	display: flex;
 	justify-content: center;
@@ -31,4 +54,9 @@
 		background: #f79289;
 		border-radius: 5px;
 	}
+}
+
+.input_container {
+	margin-top: 10px;
+	margin-bottom: -15px;
 }

@@ -1,16 +1,13 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useAnswer = ({ question }) => {
-	// eslint-disable-next-line no-unused-vars
-	const scope = useSelector(({ general }) => general?.scope);
-
 	const [{ data, loading }, trigger] = useRequest({
-		url    : 'get_question',
+		url    : '/get_question',
 		method : 'get',
 	}, { manual: true });
-	const fetch = async () => {
+	const fetch = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -18,14 +15,13 @@ const useAnswer = ({ question }) => {
 				},
 			});
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error);
 		}
-	};
+	}, [question?.id, trigger]);
 
 	useEffect(() => {
 		fetch();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [fetch]);
 
 	return {
 		data,

@@ -29,39 +29,21 @@ function Header({
 	};
 
 	return (
-		<div
-			style={{
-				backgroundColor : '#f8f2e7',
-				marginTop       : '-21px',
-				paddingBottom   : '13px',
-				borderRadius    : '10px 0 0 0',
-			}}
-		>
-			<div
-				style={{
-					margin     : '21px',
-					alignItems : 'center',
-				}}
-			>
-				<div
-					style={{
-						display    : 'flex',
-						alignItems : 'center',
-						padding    : '19px 0 0 0',
-					}}
-				>
+		<div className={styles.container}>
+			<div className={styles.wrapper}>
+				<div className={styles.heading_container}>
 					{(!search && topic) || question ? (
 						<div role="presentation" className={styles.arrow} onClick={onClickBackButton}>
 							<IcMArrowLeft style={{ height: '25px', width: '25px' }} />
 						</div>
 					) : (
-						<div style={{ height: 44, width: 50 }} />
+						<div className={styles.gap} />
 					)}
 
 					<div className={styles.title}>Cogo Assist</div>
 				</div>
 
-				<div style={{ marginTop: '10px', marginBottom: '-15px' }}>
+				<div className={styles.input_container}>
 					<Input
 						className="primary lg"
 						placeholder="Search for a question or a topic"

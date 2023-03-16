@@ -1,4 +1,4 @@
-import { Button, Checkbox } from '@cogoport/components';
+import { Toast, Button, Checkbox } from '@cogoport/components';
 import { useForm, InputController } from '@cogoport/forms';
 import React from 'react';
 
@@ -64,7 +64,7 @@ function DisLikeBox({
 			setShow(false);
 			fetch();
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error);
 		}
 	};
 
@@ -86,7 +86,7 @@ function DisLikeBox({
 							setCheckboxQ(!checkboxQ);
 						}}
 					/>
-					<div style={{ marginLeft: 8 }}>Question not satisfactory</div>
+					<div className={styles.tag}>Question not satisfactory</div>
 				</div>
 
 				<div className={styles.checkbox_group}>
@@ -97,7 +97,7 @@ function DisLikeBox({
 							setCheckboxA(!checkboxA);
 						}}
 					/>
-					<div style={{ marginLeft: 8 }}>Answer not satisfactory</div>
+					<div className={styles.tag}>Answer not satisfactory</div>
 				</div>
 			</div>
 
@@ -117,24 +117,18 @@ function DisLikeBox({
 
 			<div className={styles.button_box}>
 				<Button
-					className="secondary sm"
+					size="sm"
+					themeType="secondary"
 					onClick={onClose}
-					style={{
-						color      : '#ee3425',
-						background : '#ffffff',
-						border     : '1px solid #ee3425',
-					}}
+					className={styles.close_btn}
 				>
 					Close
 				</Button>
 				<Button
 					type="submit"
-					className="primary sm"
-					style={{
-						marginLeft : 8,
-						color      : '#ffffff',
-						border     : '1px solid #ee3425',
-					}}
+					size="sm"
+					themeType="primary"
+					className={styles.submit_btn}
 					loading={loading}
 				>
 					Submit

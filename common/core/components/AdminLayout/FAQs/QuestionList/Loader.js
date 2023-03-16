@@ -1,4 +1,4 @@
-import { Skeleton } from '@cogoport/front/components/admin';
+import { Placeholder } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function Loader({ topic = {} }) {
 	return (
 		<div className={styles.container}>
-			<div style={{ fontWeight: '600', marginBottom: 16, marginTop: 18, marginLeft: 24 }}>
+			<div className={styles.topic_heading}>
 				Topic:
 				{' '}
 				{startCase(topic.display_name) || 'Search Result'}
@@ -20,30 +20,17 @@ function Loader({ topic = {} }) {
 							className={styles.question}
 							style={{ cursor: 'not-allowed' }}
 						>
-							<div style={{
-								marginLeft     : '20px',
-								marginRight    : '15px',
-								paddingTop     : '15px',
-								alignItems     : 'center',
-								display        : 'flex',
-								justifyContent : 'space-between',
-							}}
-							>
-								<Skeleton
+							<div className={styles.skeleton_container}>
+								<Placeholder
 									width="90%"
 									height="20px"
 									style={{ borderRadius: 4 }}
 								/>
 							</div>
 
-							<div
-								style={{
-									margin  : '8px 15px 3px 20px',
-									display : 'flex',
-								}}
-							>
+							<div className={styles.skeleton_wrapper}>
 								{[...Array(3)].map(() => (
-									<Skeleton
+									<Placeholder
 										width="60px"
 										height="16px"
 										margin="4px 12px 0 0"

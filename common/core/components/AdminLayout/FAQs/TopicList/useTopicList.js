@@ -1,6 +1,7 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const useTopicList = () => {
 	const { general = {}, profile = {} } = useSelector((state) => state);
@@ -20,7 +21,7 @@ const useTopicList = () => {
 		method : 'get',
 	}, { manual: true });
 
-	const fetch = async () => {
+	const fetch = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -40,15 +41,13 @@ const useTopicList = () => {
 				},
 			});
 		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.log('error :: ', error);
+			Toast.error(error);
 		}
-	};
+	}, [country_id, id, page, role_functions, role_sub_functions, scope, trigger]);
 
 	useEffect(() => {
 		fetch();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page]);
+	}, [fetch, page]);
 
 	const { list, ...paginationData } = data || {};
 
