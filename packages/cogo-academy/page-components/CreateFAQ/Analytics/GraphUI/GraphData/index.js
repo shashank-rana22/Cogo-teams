@@ -3,7 +3,10 @@ import useListFaqSearchHistories from '../../hooks/ListFaqSearchHistories';
 function GraphData() {
 	const props = useListFaqSearchHistories({});
 
-	const pie_chart = props?.data?.pie_chart_data || 0;
+	const { data } = props || {};
+
+	const { pie_chart_data:pie_chart = 0, graph_data } = data || {};
+
 	const {
 		total_dislike = 0,
 		total_dislike_percentage = 0,
@@ -78,7 +81,7 @@ function GraphData() {
 		},
 
 	];
-	return { pie_data, pie_outer_data };
+	return { pie_data, pie_outer_data, graph_data };
 }
 
 export default GraphData;

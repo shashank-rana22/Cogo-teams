@@ -1,178 +1,29 @@
 /* eslint-disable indent */
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { ResponsivePie } from '@cogoport/charts/pie';
+import { format } from '@cogoport/utils';
+// import { format } from '@cogoport/utils';
 
 import Filters from './Filters';
 import GraphData from './GraphData';
 import styles from './styles.module.css';
 
-const data = [
-  {
-    id    : 'Search',
-    color : 'hsl(112, 70%, 50%)',
-    data  : [
-      {
-        x : 'Jan',
-        y : 15,
-      },
-      {
-        x : 'Feb',
-        y : 56,
-      },
-      {
-        x : 'Mar',
-        y : 264,
-      },
-      {
-        x : 'Apr',
-        y : 15,
-      },
-      {
-        x : 'May',
-        y : 154,
-      },
-      {
-        x : 'Jun',
-        y : 264,
-      },
-      {
-        x : 'Jul',
-        y : 27,
-      },
-      {
-        x : 'Aug',
-        y : 8,
-      },
-      {
-        x : 'Sep',
-        y : 182,
-      },
-      {
-        x : 'Oct',
-        y : 79,
-      },
-      {
-        x : 'Nov',
-        y : 254,
-      },
-      {
-        x : 'Dec',
-        y : 140,
-      },
-    ],
-  },
-  {
-    id    : 'Answer Available',
-    color : 'hsl(71, 70%, 50%)',
-    data  : [
-      {
-        x : 'Jan',
-        y : 15,
-      },
-      {
-        x : 'Feb',
-        y : 56,
-      },
-      {
-        x : 'Mar',
-        y : 264,
-      },
-      {
-        x : 'Apr',
-        y : 15,
-      },
-      {
-        x : 'May',
-        y : 154,
-      },
-      {
-        x : 'Jun',
-        y : 264,
-      },
-      {
-        x : 'Jul',
-        y : 27,
-      },
-      {
-        x : 'Aug',
-        y : 8,
-      },
-      {
-        x : 'Sep',
-        y : 182,
-      },
-      {
-        x : 'Oct',
-        y : 79,
-      },
-      {
-        x : 'Nov',
-        y : 254,
-      },
-      {
-        x : 'Dec',
-        y : 140,
-      },
-    ],
-  },
-  {
-    id    : 'Answer Requested',
-    color : 'hsl(24, 70%, 50%)',
-    data  : [
-      {
-        x : 'Jan',
-        y : 15,
-      },
-      {
-        x : 'Feb',
-        y : 56,
-      },
-      {
-        x : 'Mar',
-        y : 264,
-      },
-      {
-        x : 'Apr',
-        y : 15,
-      },
-      {
-        x : 'May',
-        y : 154,
-      },
-      {
-        x : 'Jun',
-        y : 264,
-      },
-      {
-        x : 'Jul',
-        y : 27,
-      },
-      {
-        x : 'Aug',
-        y : 8,
-      },
-      {
-        x : 'Sep',
-        y : 18,
-      },
-      {
-        x : 'Oct',
-        y : 79,
-      },
-      {
-        x : 'Nov',
-        y : 25,
-      },
-      {
-        x : 'Dec',
-        y : 14,
-      },
-    ],
-  },
-];
-
 function GraphUI() {
-  const { pie_data, pie_outer_data } = GraphData();
+  const { pie_data, pie_outer_data, graph_data } = GraphData();
+
+  const graphData = [];
+  Object.keys(graph_data || {}).forEach((key) => {
+    const array = [];
+    Object.keys(graph_data[key] || {}).forEach((timeKey) => {
+      array.push({ x: format(timeKey, 'dd-MMM-yyyy'), y: graph_data[key][timeKey] });
+    });
+
+    graphData.push({
+      id    : key,
+      color : 'hsl(24, 70%, 50%)',
+      data  : array,
+    });
+  });
 
   return (
 	<>
@@ -188,7 +39,7 @@ function GraphUI() {
 		>
 			<div style={{ width: '100%' }}>
 				<ResponsiveLine
-					data={data}
+					data={graphData}
 					margin={{ right: 10, top: 50, bottom: 50, left: 60 }}
 					xScale={{ type: 'point' }}
 					yScale={{

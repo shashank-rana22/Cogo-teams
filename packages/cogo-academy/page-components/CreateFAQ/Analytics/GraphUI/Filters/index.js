@@ -1,9 +1,13 @@
 import { Select, DateRangepicker } from '@cogoport/components';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function Filters() {
 	// const locationOptions = ['All Questions', 'Cogoport'];
+
+	const [dateRange, setDateRange] = useState('');
+
 	return (
 		<div className={styles.top_content}>
 			<div className={styles.date_range_container}>
@@ -17,12 +21,19 @@ function Filters() {
 
 				</div>
 
-				<DateRangepicker
+				{/* <DateRangepicker
 					style={{ height: '20px' }}
 					id="select_date_range"
 					name="date"
-						// onChange={setDate}
-						// value={date}
+					onChange={setDateRange}
+					value={dateRange}
+					dateFormat="MMM dd, yyyy"
+					isPreviousDaysAllowed
+				/> */}
+				<DateRangepicker
+					name="date"
+					onChange={setDateRange}
+					value={dateRange}
 					dateFormat="MMM dd, yyyy"
 					isPreviousDaysAllowed
 				/>
