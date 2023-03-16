@@ -13,7 +13,6 @@ function Questions({ props }) {
 			{selectedItem === 'All_Questions' ? <AllQuestionCardView {...props?.data} />
 				: <AllTopicCardView />}
 		</div>
-
 	);
 }
 

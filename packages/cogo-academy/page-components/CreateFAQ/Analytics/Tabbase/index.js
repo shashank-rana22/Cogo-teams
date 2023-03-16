@@ -10,8 +10,8 @@ import Users from './Users';
 function Tabbase() {
 	const [activeTab, setActiveTab] = useState('By_Questions');
 	const props = useListFaqStats({});
-	return (
 
+	return (
 		<div style={{ margin: 20, marginTop: -2 }}>
 			<Tabs
 				tabIcon={<IcMProfile />}
@@ -19,7 +19,6 @@ function Tabbase() {
 				fullWidth
 				themeType="primary"
 				onChange={setActiveTab}
-
 			>
 				<TabPanel
 					name="By_Questions"
