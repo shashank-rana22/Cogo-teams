@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 interface ItemTypes {
 	remarksTimeline?: [];
-	remark?: string;
+	remarks?: string;
 }
 interface ItemProps {
 	billStatus?:string;
@@ -22,11 +22,11 @@ interface PropsType {
 }
 
 function Remarks({ itemData }: PropsType) {
-	const { remarksTimeline = [] } = itemData || {};
+	const { remarksTimeline } = itemData || {};
 	const remarkData = remarksTimeline;
 
 	function RemarksContent() {
-		if (!itemData?.remark) {
+		if (!remarksTimeline) {
 			return <div>No Remarks</div>;
 		}
 		return (remarkData || []).map((item:ItemProps, idx: number) => {
