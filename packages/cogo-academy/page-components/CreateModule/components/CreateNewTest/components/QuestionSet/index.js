@@ -1,6 +1,7 @@
 import { Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill } from '@cogoport/components';
 import { IcMSearchlight, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
+import { useState } from 'react';
 
 import useGetTestQuestionSets from '../../../../hooks/useGetTestQuestionSets';
 
@@ -8,6 +9,20 @@ import styles from './styles.module.css';
 
 function QuestionSet() {
 	const { data, loading } = useGetTestQuestionSets();
+	const [idArray, setIdArray] = useState([]);
+	const handleChange = ({ event, id }) => {
+		if (event.target.checked) {
+			setIdArray([...idArray, id]);
+			return;
+		}
+		const temp = [...idArray];
+		const index = temp.indexOf(id);
+		if (index !== -1) {
+			temp.splice(index, 1);
+			setIdArray([...temp]);
+		}
+	};
+	console.log(idArray, 'after');
 	const columns = [
 		{
 			Header   : '',
@@ -19,7 +34,7 @@ function QuestionSet() {
 					className={styles.checkbox}
 					// checked={value.includes(nestedOptionValue)}
 					value={id}
-					// onChange={(event) => { handleChange({ event, name }); }}
+					onChange={(event) => { handleChange({ event, id }); }}
 					// disabled={disabled}
 				/>
 			),

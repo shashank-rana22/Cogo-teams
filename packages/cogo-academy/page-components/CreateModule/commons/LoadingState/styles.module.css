@@ -1,9 +1,9 @@
 .card_container {
 	padding: 10px 12px;
 	margin-top: 10px;
-    background: rgb(255 255 255 / 70%);
+	background: rgb(255 255 255 / 70%);
 	border: 1px solid #e0e0e0;
-    border-radius: 6px;
+	border-radius: 6px;
 }
 
 .card {
@@ -28,8 +28,8 @@
 
 .list_container {
 	height: 75vh;
+	margin-top: 20px;
 	overflow-y: auto;
-    margin-top: 20px;
 }
 
 .list_container::-webkit-scrollbar {
