@@ -1,5 +1,6 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect, useState, useCallback } from 'react';
 
 const useListCogooneTimeline = ({
 	id = '',
@@ -15,10 +16,10 @@ const useListCogooneTimeline = ({
 		method : 'get',
 	}, { manual: true, autoCancel: false });
 
-	const getCogooneTimeline = async ({
+	const getCogooneTimeline = useCallback(async ({
 		endDate = '',
 		startDate = '',
-		currentMessages = {},
+		prevMessageData = {},
 		lastDocumentTimeStamp = '',
 		islastPage = '',
 	}) => {
@@ -46,9 +47,14 @@ const useListCogooneTimeline = ({
 				params: payload,
 			});
 			if (type === 'messages') {
-				let formatTimeLineData = { ...currentMessages };
+				let formatTimeLineData = { ...prevMessageData };
 				(res.data.list || []).forEach((itm) => {
-					formatTimeLineData = { ...formatTimeLineData, [itm.created_at_epoch]: itm };
+					if (!isEmpty(itm) && (itm?.created_at_epoch)) {
+						formatTimeLineData = {
+							...formatTimeLineData,
+							[itm.created_at_epoch]: itm,
+						};
+					}
 				});
 
 				const sortedMessages = {};
@@ -71,14 +77,13 @@ const useListCogooneTimeline = ({
 		} catch (error) {
 			// console.log(error);
 		}
-	};
+	}, [id, page, setMessagesState, trigger, type]);
 
 	useEffect(() => {
 		if (activeSubTab === 'agent' && (user_id || lead_user_id)) {
 			getCogooneTimeline({});
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeSubTab, page]);
+	}, [activeSubTab, getCogooneTimeline, lead_user_id, user_id]);
 
 	return {
 		data,

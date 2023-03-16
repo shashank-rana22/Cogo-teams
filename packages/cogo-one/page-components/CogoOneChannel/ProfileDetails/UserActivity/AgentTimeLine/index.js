@@ -43,7 +43,6 @@ function AgentTimeLine({ timeLineList = [] }) {
 									<Avatar
 										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
 										alt="img"
-										disabled={false}
 										size="30px"
 									/>
 								</div>

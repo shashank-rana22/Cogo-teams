@@ -18,6 +18,8 @@ function VoiceTimeLine({ item }) {
 	const { name = '' } = agent_data || {};
 	const { renderDuration, callStatus } = timeLineFunctions();
 
+	const voiceIconUrl = VOICE_ICON_MAPPING[callStatus(call_status, call_type)];
+
 	return (
 		<>
 			<div
@@ -40,7 +42,7 @@ function VoiceTimeLine({ item }) {
 							className={styles.icon_type}
 						>
 							<img
-								src={VOICE_ICON_MAPPING[callStatus(call_status, call_type)]}
+								src={voiceIconUrl}
 								className={styles.avatar}
 								alt=""
 							/>

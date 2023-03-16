@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-function HTMLPreview({ html = '', type }) {
+function HTMLPreview({ html = '', type = '' }) {
 	const frameRef = useRef();
 
 	useEffect(() => {

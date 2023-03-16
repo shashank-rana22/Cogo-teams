@@ -105,7 +105,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		}
 	};
 
-	const emptyCheck = (!user_id && !lead_user_id) || isEmpty(list);
+	const emptyCheck = (!user_id && !lead_user_id) || isEmpty(list) || isEmpty(timeLineList);
 
 	function ShowData() {
 		return emptyCheck ? (

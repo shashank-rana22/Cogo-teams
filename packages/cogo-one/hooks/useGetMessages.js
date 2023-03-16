@@ -44,16 +44,16 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 			(querySnapshot) => {
 				const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length - 1]?.data()?.created_at;
 				const islastPage = querySnapshot.docs.length < 10;
-				let currentMessages = {};
+				let prevMessageData = {};
 				querySnapshot.forEach((mes) => {
 					const timeStamp = mes.data()?.created_at;
-					currentMessages = { ...currentMessages, [timeStamp]: mes.data() };
+					prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
 				});
 
 				getCogooneTimeline({
 					startDate : lastDocumentTimeStamp,
 					endDate   : Date.now(),
-					currentMessages,
+					prevMessageData,
 					lastDocumentTimeStamp,
 					islastPage,
 				});
@@ -63,12 +63,14 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 	};
 
 	const getNextData = async () => {
+		const prevTimeStamp = Number(messagesState?.[id]?.lastDocumentTimeStamp);
+
 		const chatCollectionQuery = query(
 			activeChatCollection,
 			where(
 				'created_at',
 				'<',
-				Number(messagesState?.[id]?.lastDocumentTimeStamp),
+				prevTimeStamp,
 			),
 			orderBy('created_at', 'desc'),
 			limit(10),
@@ -79,17 +81,16 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 		const prevMessages = prevMessagesPromise?.docs;
 		const lastDocumentTimeStamp = prevMessages[(prevMessages?.length || 0) - 1]?.data()?.created_at;
 		const islastPage = prevMessages?.length < 10;
-		let currentMessages = {};
+		let prevMessageData = {};
 		prevMessages.forEach((mes) => {
 			const timeStamp = mes.data()?.created_at;
-			currentMessages = { ...currentMessages, [timeStamp]: mes.data() };
+			prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
 		});
-		const prevTimeStamp = Number(messagesState?.[id]?.lastDocumentTimeStamp);
 
 		getCogooneTimeline({
 			startDate : lastDocumentTimeStamp,
 			endDate   : prevTimeStamp,
-			currentMessages,
+			prevMessageData,
 			lastDocumentTimeStamp,
 			islastPage,
 		});
