@@ -1,7 +1,7 @@
 import { IcMArrowRight } from '@cogoport/icons-react';
 import React, { useContext } from 'react';
 
-import { ShipmentDetailContext } from '../context';
+import { ShipmentDetailContext } from '@cogoport/context';
 
 import ActiveService from './ActiveService';
 import InactiveService from './InactiveService';
@@ -26,12 +26,12 @@ const isTrasportationAvailable = (allServices, trade_type) => {
 
 const getServiceData = (allServices, routeLeg) => allServices?.find(
 	(service) => ((routeLeg?.service_types || []).includes(service?.service_type)
-				|| (routeLeg?.service_types || []).includes(
-					service?.display_service_type,
-				))
-			&& (!service?.trade_type
-				|| !routeLeg?.trade_type
-				|| service?.trade_type === routeLeg?.trade_type),
+		|| (routeLeg?.service_types || []).includes(
+			service?.display_service_type,
+		))
+		&& (!service?.trade_type
+			|| !routeLeg?.trade_type
+			|| service?.trade_type === routeLeg?.trade_type),
 );
 
 const isServiceTakenFunc = (allServices, routeLeg) => (
@@ -39,9 +39,9 @@ const isServiceTakenFunc = (allServices, routeLeg) => (
 		(service) => (routeLeg?.service_types || []).includes(
 			service?.display_service_type,
 		)
-				&& (!service?.trade_type
-					|| !routeLeg?.trade_type
-					|| service?.trade_type === routeLeg?.trade_type),
+			&& (!service?.trade_type
+				|| !routeLeg?.trade_type
+				|| service?.trade_type === routeLeg?.trade_type),
 	)?.length > 0
 );
 
@@ -57,7 +57,7 @@ const isHaulageAvailable = (
 	return destination_port?.is_icd || port?.is_icd;
 };
 
-function Route({ allServices = [], loading = false, refetch = () => {} }) {
+function Route({ allServices = [], loading = false, refetch = () => { } }) {
 	const { shipment_data, isGettingShipment, servicesList, primary_service } = useContext(
 		ShipmentDetailContext,
 	);

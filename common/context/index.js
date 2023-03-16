@@ -1,1 +1,1 @@
-export { default as ShipmentDetailContext } from './package-components/shipment-context';
+export { default as ShipmentDetailContext } from './page-components/ShipmentDetailContext';

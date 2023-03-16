@@ -2,7 +2,7 @@ import { Accordion } from '@cogoport/components';
 import { useContext } from 'react';
 
 import { AdditionalServiceList } from '../../../../../common/AdditionalServices';
-import { ShipmentDetailContext } from '../../../../../common/context';
+import { ShipmentDetailContext } from '@cogoport/context';
 import Route from '../../../../../common/Route';
 
 import styles from './styles.module.css';
@@ -23,8 +23,8 @@ function OverviewManageServices() {
 
 			<AdditionalServiceList
 				services={servicesList}
-				// refetchServices={refetchServices}
-				// activeTab={activeTab}
+			// refetchServices={refetchServices}
+			// activeTab={activeTab}
 			/>
 		</Accordion>
 	);

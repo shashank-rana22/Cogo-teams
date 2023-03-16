@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
-import { ShipmentDetailContext } from '../../../context';
+import { ShipmentDetailContext } from '@cogoport/context';
 import AddRate from '../AddRate';
 
 import AddService from './AddService';
@@ -19,17 +19,17 @@ function List({
 	services = [],
 	isSeller = false,
 	activeTab = '',
-	refetchServices = () => {},
+	refetchServices = () => { },
 }) {
 	// const { isConditionMatches } = useGetPermission();
 	const { scope, isShipper, isMobile } = useSelector(({ general }) => ({
-		isShipper : general.query.account_type === 'importer_exporter',
-		scope     : general.scope,
-		isMobile  : general.isMobile,
+		isShipper: general.query.account_type === 'importer_exporter',
+		scope: general.scope,
+		isMobile: general.isMobile,
 	}));
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const isSops = 	shipment_data?.stakeholder_types?.some((ele) => ['service_ops1', 'service_ops2', 'service_ops3']
+	const isSops = shipment_data?.stakeholder_types?.some((ele) => ['service_ops1', 'service_ops2', 'service_ops3']
 		.includes(ele));
 
 	const [addRate, setAddRate] = useState(null);

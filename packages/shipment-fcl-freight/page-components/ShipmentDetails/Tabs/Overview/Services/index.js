@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ShipmentDetailContext } from '../../../../../common/context';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { serviceObj, serviceList } from '../dummy_data';
 
 import Loader from './Loader';
@@ -65,13 +65,13 @@ function Services({
 						{(serviceObj?.origin || []).map((service) => (
 							<ServiceDetails
 								className={styles.service_details}
-									// cancelUpsellFor={cancelUpsellOriginFor}
+								// cancelUpsellFor={cancelUpsellOriginFor}
 								serviceData={service}
 								serviceList={serviceList}
 								shipmentData={shipment_data}
 								isSeller={isSeller}
 								isMain={service?.isMain}
-									// refetchServices={refetchServices}
+								// refetchServices={refetchServices}
 								primary_service={primary_service}
 							/>
 						))}
@@ -93,12 +93,12 @@ function Services({
 					<div className={styles.card_block}>
 						{(serviceObj?.destination || []).map((service) => (
 							<ServiceDetails
-									// cancelUpsellFor={cancelUpsellDestinationFor}
+								// cancelUpsellFor={cancelUpsellDestinationFor}
 								serviceData={service}
 								serviceList={serviceList}
 								shipmentData={shipment_data}
 								isSeller={isSeller}
-									// refetchServices={refetchServices}
+								// refetchServices={refetchServices}
 								primary_service={primary_service}
 							/>
 						))}
