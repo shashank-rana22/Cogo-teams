@@ -36,7 +36,9 @@ const useListCogooneTimeline = ({
 				};
 			} else {
 				payload = {
-					channel_chat_id: id,
+					filters: {
+						channel_chat_id: id,
+					},
 					page,
 				};
 			}
