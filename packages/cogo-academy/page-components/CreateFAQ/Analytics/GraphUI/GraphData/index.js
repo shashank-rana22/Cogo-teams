@@ -60,7 +60,7 @@ function GraphData() {
 		},
 		{
 			id    : 'No Action',
-			label : 'N0 Action',
+			label : 'No Action',
 			value : Available_Remaining,
 			color : 'hsl(255, 100%, 100%)',
 		},

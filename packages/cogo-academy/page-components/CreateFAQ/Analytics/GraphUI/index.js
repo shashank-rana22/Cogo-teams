@@ -347,11 +347,11 @@ function GraphUI() {
 						legends={[
               {
                 anchor        : 'bottom',
-                direction     : 'row',
+                direction     : 'column',
                 justify       : false,
-                translateX    : 0,
+                translateX    : -150,
                 translateY    : 56,
-                itemsSpacing  : 40,
+                itemsSpacing  : 10,
                 itemWidth     : 80,
                 itemHeight    : 18,
                 itemTextColor : '#999',
@@ -423,6 +423,31 @@ function GraphUI() {
 
                 },
 
+						]}
+						legends={[
+              {
+                anchor        : 'bottom',
+                direction     : 'column',
+                justify       : false,
+                translateX    : 140,
+                translateY    : 76,
+                itemsSpacing  : 3,
+                itemWidth     : 80,
+                itemHeight    : 18,
+                itemTextColor : '#999',
+                itemDirection : 'left-to-right',
+                itemOpacity   : 1,
+                symbolSize    : 18,
+                symbolShape   : 'circle',
+                effects       : [
+                  {
+                    on    : 'hover',
+                    style : {
+                      itemTextColor: '#000',
+                    },
+                  },
+                ],
+              },
 						]}
 
 					/>
