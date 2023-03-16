@@ -1,1 +1,1 @@
-export { default as CrmFeedback } from './page-components';
+export { default as CrmFeedback } from './page-components/Dashboard';

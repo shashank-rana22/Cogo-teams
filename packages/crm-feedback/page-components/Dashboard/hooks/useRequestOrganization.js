@@ -1,4 +1,5 @@
 import { Button, Pill } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { format, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -6,6 +7,8 @@ import { useState, useEffect } from 'react';
 import styles from '../styles.module.css';
 
 const useRequestOrganization = () => {
+	const router = useRouter();
+
 	const [filters, setFilters] = useState({});
 
 	const [params, setParams] = useState({
@@ -51,7 +54,9 @@ const useRequestOrganization = () => {
 	const dummyData = [
 		{
 			id                 : 'something',
+			serial_id          : '1',
 			organization       : 'Some Org',
+			organization_id    : 'hfhfhduiasuhuishnui',
 			count_of_feedbacks : 23,
 			last_feedback_date : '2023-03-13T08:09:59.087Z',
 			cogo_entity        : 'Singapore',
@@ -59,7 +64,9 @@ const useRequestOrganization = () => {
 		},
 		{
 			id                 : 'something1',
+			serial_id          : '2',
 			organization       : 'Some Organzation Name',
+			organization_id    : 'hdkghfklre',
 			count_of_feedbacks : 12,
 			last_feedback_date : '2021-04-13T08:09:59.087Z',
 			cogo_entity        : 'India',
@@ -79,6 +86,17 @@ const useRequestOrganization = () => {
 	const list = dummyData;
 
 	const columns = [
+		{
+			Header   : <div>S. No.</div>,
+			key      : 'serial_id',
+			id       : 'serial_id',
+			accessor : ({ serial_id = '' }) => (
+				<section>
+					#
+					{serial_id || '__'}
+				</section>
+			),
+		},
 		{
 			Header   : <div>ORGANIZATION</div>,
 			key      : 'organization',
@@ -124,21 +142,24 @@ const useRequestOrganization = () => {
 			key      : 'correction',
 			id       : 'correction',
 			accessor : ({
-				status = '',
+				status = '', organization_id = '', organization = '',
 			}) => (
 				<section className={styles.view}>
-					{
-						status === 'Request Created' ? (
-							<Pill size="md" color="blue">
-								{status || 'Status not found'}
-							</Pill>
-						) : (
-							<Pill size="md" color="green">
-								{status || 'Status not found'}
-							</Pill>
-						)
-					}
-					<Button size="sm" themeType="secondary">View Request</Button>
+					<Pill
+						size="md"
+						color={status === 'Request Created' ? ('blue') : ('green')}
+					>
+						{status || 'Status not found'}
+					</Pill>
+					<Button
+						size="sm"
+						themeType="secondary"
+						onClick={() => {
+							router.push(`/feedbacks/${organization_id}?organization=${organization}&status=${status}`);
+						}}
+					>
+						View Request
+					</Button>
 
 				</section>
 			),

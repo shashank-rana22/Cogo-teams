@@ -3,6 +3,10 @@ const crmFeedback = {
 		navigation : 'crm_feedback_dashboard',
 		isMainNav  : true,
 	},
+	'/[partner_id]/feedbacks/[organization_id]': {
+		navigation : 'crm_feedback_dashboard',
+		isMainNav  : false,
+	},
 };
 
 export default crmFeedback;

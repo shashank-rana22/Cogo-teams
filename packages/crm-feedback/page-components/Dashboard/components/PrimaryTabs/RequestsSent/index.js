@@ -19,7 +19,6 @@ function RequestsSent({ activeTab = '' }) {
 	} = useRequestOrganization();
 
 	const { page, page_limit, total_count } = paginationData;
-	console.log('SOMETHING SOMETHING');
 
 	return (
 		<div className={styles.container}>

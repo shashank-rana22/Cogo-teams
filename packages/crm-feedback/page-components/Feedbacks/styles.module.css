@@ -1,0 +1,28 @@
+.checkbox{
+    max-width: 50px;
+}
+
+.feedback{
+    display: flex;
+    align-items: center;
+    min-width: 300px;
+}
+
+.tooltip_text{
+    display: block;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table_cell{
+    min-width: 180px;
+}
+
+.view{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 280px;
+}
