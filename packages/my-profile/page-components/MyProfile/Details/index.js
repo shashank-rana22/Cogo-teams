@@ -15,7 +15,6 @@ function Details({
 			</div>
 
 			<div className={styles.detail_container}>
-
 				<div className={styles.card_details}>
 					<Services detailsData={detailsData} />
 				</div>
@@ -23,8 +22,8 @@ function Details({
 				<div className={styles.tagged_card_details}>
 					<TaggedAgent detailsData={detailsData} />
 				</div>
-
 			</div>
+
 			<div className={styles.badge_details}>
 				<Badges badgeList={badgeList} />
 			</div>

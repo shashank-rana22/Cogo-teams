@@ -16,12 +16,12 @@ function Header() {
 				</p>
 				<div className={styles.left_container}>
 					<p style={{ fontSize: '14px', marginRight: '34px' }}>
-						Published on :&nbsp;
+						Published on :
+						{' '}
 						<b>31st January, 2023</b>
 					</p>
 					<p style={{ fontSize: '14px' }}>
 						Published by
-						{' '}
 						{' '}
 						<b>CogoParth</b>
 					</p>

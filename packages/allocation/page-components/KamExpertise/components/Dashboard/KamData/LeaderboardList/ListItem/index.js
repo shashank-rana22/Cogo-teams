@@ -14,6 +14,8 @@ const EXPERTISE_MAPPING = {
 function ListItem(props) {
 	const { data = {}, index } = props;
 
+	const { badge_details = [], expertise_score = [] } = data || undefined;
+
 	const router = useRouter();
 
 	return (
@@ -27,9 +29,8 @@ function ListItem(props) {
 						{index + 1}
 					</div>
 					<div>
-						<div className={styles.user_name}>
-							{/* //! user name is not provided yet by the api */}
-							{data.user_name}
+						<div className={styles.kam_name}>
+							{data.name}
 						</div>
 						<div>
 							Total:
@@ -42,18 +43,17 @@ function ListItem(props) {
 				<div className={styles.badge_container}>
 					<div className={styles.badges}>
 						{
-                            data?.milestone_mappings?.length > 0 ? (data?.milestone_mappings?.map((value) => (
-	<div key={value.badge_details?.url} className={styles.badge_item}>
-		<img src={value.badge_details?.image_url} alt="badge" width={48} height={48} />
-		<div className={styles.star}>
-			{Array(3).fill('').map(() => (
-				<IcCStar width={10} stroke="#FFDF33" />
-			))}
-		</div>
-	</div>
-                            ))
-                            ) : null
-                        }
+							badge_details.map((value) => (
+								<div key={value.id} className={styles.badge_item}>
+									<img src={value.image_url} alt="badge" />
+									<div className={styles.star}>
+										{Array(3).fill('').map(() => (
+											<IcCStar width={10} stroke="#FFDF33" />
+										))}
+									</div>
+								</div>
+							))
+						}
 					</div>
 					<span className={styles.link}>
 						{data?.milestone_mappings?.length > 2
@@ -71,9 +71,9 @@ function ListItem(props) {
 
 				<div className={styles.card_description_right}>
 					{
-                        data?.expertise_score?.map((expertise) => (
+                        expertise_score.map((expertise) => (
 	<div className={styles.exp}>
-		<div className={styles.expertise}>{EXPERTISE_MAPPING[expertise?.expertise_type]}</div>
+		<div className={styles.expertise}>{EXPERTISE_MAPPING[expertise.expertise_type]}</div>
 		<div><b>{expertise.score}</b></div>
 	</div>
                         ))

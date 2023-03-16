@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryListData }) {
 	const handleEdit = () => {
 		setMasteryListData(data);
-		setToggleScreen(2);
+		setToggleScreen('mastery');
 	};
 	return (
 		<div className={styles.container}>
@@ -65,7 +65,6 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryListData
 
 					<div className={styles.badge}>
 						<img
-							height={140}
 							style={{ objectFit: 'contain' }}
 							src={data.badge_details?.[0].image_url}
 							alt="Mastery Modal"
