@@ -1,0 +1,10 @@
+.heading {
+	font-size: 14px;
+	color: #221f20;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 32px;
+}
