@@ -4,206 +4,327 @@ import { ResponsivePie } from '@cogoport/charts/pie';
 
 import Filters from './Filters';
 
-function GraphUI() {
-	const data = [
-
-  {
-    id    : 'Search',
-    color : 'hsl(112, 70%, 50%)',
-    data  : [
+const data = [
+{
+  id    : 'Search',
+  color : 'hsl(112, 70%, 50%)',
+  data  : [
+    {
+      x : 'Jan',
+      y : 15,
+    },
+    {
+      x : 'Feb',
+      y : 56,
+    },
+    {
+      x : 'Mar',
+      y : 264,
+    },
+    {
+      x : 'Apr',
+      y : 15,
+    },
+    {
+      x : 'May',
+      y : 154,
+    },
+    {
+      x : 'Jun',
+      y : 264,
+    },
+    {
+      x : 'Jul',
+      y : 27,
+    },
+    {
+      x : 'Aug',
+      y : 8,
+    },
+    {
+      x : 'Sep',
+      y : 182,
+    },
+    {
+      x : 'Oct',
+      y : 79,
+    },
+    {
+      x : 'Nov',
+      y : 254,
+    },
+    {
+      x : 'Dec',
+      y : 140,
+    },
+  ],
+},
+{
+  id    : 'Answer Available',
+  color : 'hsl(71, 70%, 50%)',
+  data  : [
       {
-        x : 'Jan',
-        y : 15,
-      },
-      {
-        x : 'Feb',
-        y : 56,
-      },
-      {
-        x : 'Mar',
-        y : 264,
-      },
-      {
-        x : 'Apr',
-        y : 15,
-      },
-      {
-        x : 'May',
-        y : 154,
-      },
-      {
-        x : 'Jun',
-        y : 264,
-      },
-      {
-        x : 'Jul',
-        y : 27,
-      },
-      {
-        x : 'Aug',
-        y : 8,
-      },
-      {
-        x : 'Sep',
-        y : 182,
-      },
-      {
-        x : 'Oct',
-        y : 79,
-      },
-      {
-        x : 'Nov',
-        y : 254,
-      },
-      {
-        x : 'Dec',
-        y : 140,
-      },
-    ],
-  },
-  {
-    id    : 'Answer Available',
-    color : 'hsl(71, 70%, 50%)',
-    data  : [
+          x : 'Jan',
+          y : 15,
+        },
         {
-            x : 'Jan',
-            y : 15,
-          },
-          {
-            x : 'Feb',
-            y : 56,
-          },
-          {
-            x : 'Mar',
-            y : 264,
-          },
-          {
-            x : 'Apr',
-            y : 15,
-          },
-          {
-            x : 'May',
-            y : 154,
-          },
-          {
-            x : 'Jun',
-            y : 264,
-          },
-          {
-            x : 'Jul',
-            y : 27,
-          },
-          {
-            x : 'Aug',
-            y : 8,
-          },
-          {
-            x : 'Sep',
-            y : 182,
-          },
-          {
-            x : 'Oct',
-            y : 79,
-          },
-          {
-            x : 'Nov',
-            y : 254,
-          },
-          {
-            x : 'Dec',
-            y : 140,
-          },
-    ],
-  },
-  {
-    id    : 'Answer Requested',
-    color : 'hsl(24, 70%, 50%)',
-    data  : [
+          x : 'Feb',
+          y : 56,
+        },
         {
-            x : 'Jan',
-            y : 15,
-          },
-          {
-            x : 'Feb',
-            y : 56,
-          },
-          {
-            x : 'Mar',
-            y : 264,
-          },
-          {
-            x : 'Apr',
-            y : 15,
-          },
-          {
-            x : 'May',
-            y : 154,
-          },
-          {
-            x : 'Jun',
-            y : 264,
-          },
-          {
-            x : 'Jul',
-            y : 27,
-          },
-          {
-            x : 'Aug',
-            y : 8,
-          },
-          {
-            x : 'Sep',
-            y : 18,
-          },
-          {
-            x : 'Oct',
-            y : 79,
-          },
-          {
-            x : 'Nov',
-            y : 25,
-          },
-          {
-            x : 'Dec',
-            y : 14,
-          },
-    ],
-  },
+          x : 'Mar',
+          y : 264,
+        },
+        {
+          x : 'Apr',
+          y : 15,
+        },
+        {
+          x : 'May',
+          y : 154,
+        },
+        {
+          x : 'Jun',
+          y : 264,
+        },
+        {
+          x : 'Jul',
+          y : 27,
+        },
+        {
+          x : 'Aug',
+          y : 8,
+        },
+        {
+          x : 'Sep',
+          y : 182,
+        },
+        {
+          x : 'Oct',
+          y : 79,
+        },
+        {
+          x : 'Nov',
+          y : 254,
+        },
+        {
+          x : 'Dec',
+          y : 140,
+        },
+  ],
+},
+{
+  id    : 'Answer Requested',
+  color : 'hsl(24, 70%, 50%)',
+  data  : [
+      {
+          x : 'Jan',
+          y : 15,
+        },
+        {
+          x : 'Feb',
+          y : 56,
+        },
+        {
+          x : 'Mar',
+          y : 264,
+        },
+        {
+          x : 'Apr',
+          y : 15,
+        },
+        {
+          x : 'May',
+          y : 154,
+        },
+        {
+          x : 'Jun',
+          y : 264,
+        },
+        {
+          x : 'Jul',
+          y : 27,
+        },
+        {
+          x : 'Aug',
+          y : 8,
+        },
+        {
+          x : 'Sep',
+          y : 18,
+        },
+        {
+          x : 'Oct',
+          y : 79,
+        },
+        {
+          x : 'Nov',
+          y : 25,
+        },
+        {
+          x : 'Dec',
+          y : 14,
+        },
+  ],
+},
 ];
 
 const data2 = [
-    {
-      id    : 'hack',
-      label : 'hack',
-      value : 504,
-      color : 'hsl(199, 70%, 50%)',
-    },
-    {
-      id    : 'elixir',
-      label : 'elixir',
-      value : 551,
-      color : 'hsl(359, 70%, 50%)',
-    },
-    {
-      id    : 'php',
-      label : 'php',
-      value : 529,
-      color : 'hsl(86, 70%, 50%)',
-    },
-    {
-      id    : 'c',
-      label : 'c',
-      value : 485,
-      color : 'hsl(253, 70%, 50%)',
-    },
-    {
-      id    : 'javascript',
-      label : 'javascript',
-      value : 51,
-      color : 'hsl(174, 70%, 50%)',
-    },
-  ];
+  {
+    id    : 'hack',
+    label : 'hack',
+    value : 504,
+    color : 'hsl(199, 70%, 50%)',
+  },
+  {
+    id    : 'elixir',
+    label : 'elixir',
+    value : 551,
+    color : 'hsl(359, 70%, 50%)',
+  },
+  {
+    id    : 'php',
+    label : 'php',
+    value : 529,
+    color : 'hsl(86, 70%, 50%)',
+  },
+  {
+    id    : 'c',
+    label : 'c',
+    value : 485,
+    color : 'hsl(253, 70%, 50%)',
+  },
+  {
+    id    : 'javascript',
+    label : 'javascript',
+    value : 51,
+    color : 'hsl(174, 70%, 50%)',
+  },
+];
 
+function ActivePieArc({ centerX, centerY }) {
+  return (
+	<div>
+		<ResponsivePie
+			data={data2}
+			margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+			innerRadius={centerX}
+			padAngle={0.7}
+			cornerRadius={3}
+			activeOuterRadiusOffset={8}
+			borderWidth={1}
+			borderColor={{
+          from      : 'color',
+          modifiers : [
+              [
+                  'darker',
+                  0.2,
+              ],
+          ],
+			}}
+			enableArcLabels={false}
+			enableArcLinkLabels={false}
+			defs={[
+          {
+              id         : 'dots',
+              type       : 'patternDots',
+              background : 'inherit',
+              color      : 'rgba(255, 255, 255, 0.3)',
+              size       : 4,
+              padding    : 1,
+              stagger    : true,
+          },
+          {
+              id         : 'lines',
+              type       : 'patternLines',
+              background : 'inherit',
+              color      : 'rgba(255, 255, 255, 0.3)',
+              rotation   : -45,
+              lineWidth  : 6,
+              spacing    : 10,
+          },
+			]}
+			fill={[
+          {
+              match: {
+                  id: 'ruby',
+              },
+              id: 'dots',
+          },
+          {
+              match: {
+                  id: 'c',
+              },
+              id: 'dots',
+          },
+          {
+              match: {
+                  id: 'go',
+              },
+              id: 'dots',
+          },
+          {
+              match: {
+                  id: 'python',
+              },
+              id: 'dots',
+          },
+          {
+              match: {
+                  id: 'scala',
+              },
+              id: 'lines',
+          },
+          {
+              match: {
+                  id: 'lisp',
+              },
+              id: 'lines',
+          },
+          {
+              match: {
+                  id: 'elixir',
+              },
+              id: 'lines',
+          },
+          {
+              match: {
+                  id: 'javascript',
+              },
+              id: 'lines',
+          },
+			]}
+			legends={[
+          {
+              anchor        : 'bottom',
+              direction     : 'row',
+              justify       : false,
+              translateX    : 0,
+              translateY    : 56,
+              itemsSpacing  : 0,
+              itemWidth     : 100,
+              itemHeight    : 18,
+              itemTextColor : '#999',
+              itemDirection : 'left-to-right',
+              itemOpacity   : 1,
+              symbolSize    : 18,
+              symbolShape   : 'circle',
+              effects       : [
+                  {
+                      on    : 'hover',
+                      style : {
+                          itemTextColor: '#000',
+                      },
+                  },
+              ],
+          },
+			]}
+		/>
+	</div>
+  );
+}
+
+function GraphUI() {
 	return (
 		<>
 			<Filters />
@@ -376,6 +497,7 @@ const data2 = [
                 id: 'lines',
             },
 						]}
+						layers={[ActivePieArc, 'arcs', 'arcLabels', 'arcLinkLabels', 'legends']}
 						legends={[
             {
                 anchor        : 'bottom',
@@ -403,7 +525,6 @@ const data2 = [
 						]}
 					/>
 				</div>
-
 			</div>
 		</>
 	);

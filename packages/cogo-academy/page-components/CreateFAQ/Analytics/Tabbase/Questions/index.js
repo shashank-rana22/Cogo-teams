@@ -10,7 +10,6 @@ function Questions() {
 	const props = useListFaqStats({});
 	const [selectedItem, setSelectedItem] = useState('All_Questions');
 
-	console.log('mega', props);
 	return (
 		<div>
 			<Filter selectedItem={selectedItem} setSelectedItem={setSelectedItem} />

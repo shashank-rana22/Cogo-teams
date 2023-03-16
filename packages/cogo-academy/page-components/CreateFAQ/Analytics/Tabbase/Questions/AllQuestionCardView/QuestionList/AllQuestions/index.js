@@ -73,9 +73,7 @@ function AllQuestions(props) {
 	const columns = addedQuestionsColumns();
 	return (
 		<div className={styles.container}>
-			{console.log('props', props)}
 			<StyledTable columns={columns} layoutType="table" data={listdata} />
-
 		</div>
 	);
 }

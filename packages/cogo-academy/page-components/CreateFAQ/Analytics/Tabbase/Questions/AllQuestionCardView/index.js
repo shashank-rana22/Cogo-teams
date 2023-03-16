@@ -24,7 +24,6 @@ function AllQuestionCardView(props = '') {
 		trending_topics,
 		unpopular_questions,
 	} = props;
-	console.log(popular_questions, 'topics');
 	// const{
 	// 	topic_wise_disliked_questions=[],
 

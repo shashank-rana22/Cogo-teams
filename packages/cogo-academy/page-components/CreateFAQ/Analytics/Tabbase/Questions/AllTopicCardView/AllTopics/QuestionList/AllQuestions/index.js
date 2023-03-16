@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function AllQuestions({ props = [] }) {
 	const listdata = props || [];
-	console.log('listdata', listdata);
+
 	const addedQuestionsColumns = () => [
 		{
 			Header   : 'Questions',
