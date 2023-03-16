@@ -2,5 +2,11 @@
   "name": "@cogoport/shipment-chat",
   "version": "0.1.0",
   "private": true,
-  "main": "index.js"
+  "main": "index.js",
+  "dependencies": {
+    "@cogoport/components": "^1.0.377",
+    "@cogoport/request": "workspace:^0.1.0",
+    "@cogoport/store": "workspace:^0.1.0",
+    "@cogoport/utils": "^1.2.6"
+  }
 }
