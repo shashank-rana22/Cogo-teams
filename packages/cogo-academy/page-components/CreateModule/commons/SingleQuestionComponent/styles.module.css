@@ -46,7 +46,7 @@
 }
 
 .button_container {
-	float: right;
 	display: flex;
 	gap: 12px;
+	float: right;
 }

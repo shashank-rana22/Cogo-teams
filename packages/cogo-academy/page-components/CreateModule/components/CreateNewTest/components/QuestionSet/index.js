@@ -7,22 +7,23 @@ import useGetTestQuestionSets from '../../../../hooks/useGetTestQuestionSets';
 
 import styles from './styles.module.css';
 
-function QuestionSet() {
+function QuestionSet({ setIdArray }) {
 	const { data, loading } = useGetTestQuestionSets();
-	const [idArray, setIdArray] = useState([]);
+	// const [idArray, setIdArray] = useState([]);
 	const handleChange = ({ event, id }) => {
 		if (event.target.checked) {
-			setIdArray([...idArray, id]);
+			setIdArray((prev) => [...prev, id]);
 			return;
 		}
-		const temp = [...idArray];
-		const index = temp.indexOf(id);
-		if (index !== -1) {
-			temp.splice(index, 1);
-			setIdArray([...temp]);
-		}
+		setIdArray((prev) => {
+			const temp = [...prev];
+			const index = temp.indexOf(id);
+			if (index !== -1) {
+				temp.splice(index, 1);
+			}
+			return temp;
+		});
 	};
-	console.log(idArray, 'after');
 	const columns = [
 		{
 			Header   : '',
