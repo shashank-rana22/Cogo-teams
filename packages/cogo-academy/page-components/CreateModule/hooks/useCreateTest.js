@@ -10,9 +10,11 @@ function useCreateTest() {
 			console.log(formValues, idArray);
 			const res = await trigger({
 				data: {
-					...formValues,
-					set_wise_distribution : [],
-					test_duration         : '1hr',
+					name                  : formValues.name,
+					set_wise_distribution : [
+						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'case_study' })),
+						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'stand_alone' }))],
+					test_duration: '1hr',
 				},
 			});
 			console.log('done:: ', res);

@@ -12,8 +12,8 @@ const onClickBack = () => {
 	Router.back();
 };
 
-function CreateNewTest() {
-	const { control, formState:{ errors } } = useForm();
+function TestDetails({ setFormValues }) {
+	const { control, formState:{ errors }, getValues } = useForm();
 
 	const controls = getControls();
 
@@ -80,4 +80,4 @@ function CreateNewTest() {
 	);
 }
 
-export default CreateNewTest;
+export default TestDetails;

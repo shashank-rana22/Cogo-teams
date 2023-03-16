@@ -15,8 +15,8 @@ function HomePage() {
 		// 	<TestsList />
 		// </div>
 		// <CreateQuestionSet />
-		//	<CreateTest />
-		<ReviewAndCriteria />
+		<CreateTest />
+		// <ReviewAndCriteria />
 	);
 }
 export default HomePage;
