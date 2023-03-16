@@ -1,7 +1,7 @@
 .main_container {
 	display: flex;
-    padding: 32px;
 	justify-content: space-between;
+	padding: 32px;
 }
 
 .instructions {

@@ -1,31 +1,31 @@
 .container {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 18px 32px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+	padding: 18px 32px;
 }
 
 .stats_container {
-    display: flex;
-    width: 45%;
-    margin-bottom: 12px;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	width: 45%;
+	margin-bottom: 12px;
 }
 
 .stats_count {
-    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
-    border-radius: 6px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	margin-right: 8px;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
 .label {
-    display: flex;
-    word-wrap: break-word;
-    width: 65%;
+	display: flex;
+	width: 65%;
+	word-wrap: break-word;
 }
