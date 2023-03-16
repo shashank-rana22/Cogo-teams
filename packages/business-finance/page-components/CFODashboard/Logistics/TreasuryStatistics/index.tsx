@@ -34,10 +34,14 @@ function TreasuryStatistics({ filters, setFilters }) {
 				<div className={styles.main}>
 					<div>
 						<div className={styles.filters_styles}>
-							<div>
-								Treasury Statistics
-								<IcMInfo />
-								<div className={styles.border} />
+							<div className={styles.text_filters_gap}>
+								<div className={styles.text_style}>
+									Treasury Statistics
+									<div className={styles.border} />
+								</div>
+								<div className={styles.icon}>
+									<IcMInfo />
+								</div>
 							</div>
 							<div>
 								<Filter
@@ -73,11 +77,11 @@ function TreasuryStatistics({ filters, setFilters }) {
 							Allocated Funds
 							<div className={styles.amount_style}>INR 5,40,000</div>
 						</div>
-						<div className={styles.text_style}>
+						<div className={styles.text_styles}>
 							Utilized Funds
 							<div className={styles.amount_style}>INR 5,40,000</div>
 						</div>
-						<div className={styles.text_style}>
+						<div className={styles.text_styles}>
 							Balance Amount
 							<div className={styles.amount_style}>INR 5,40,000</div>
 						</div>

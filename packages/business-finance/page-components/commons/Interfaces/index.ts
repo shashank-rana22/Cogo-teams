@@ -49,6 +49,7 @@ export interface TableProps {
 	onRowSelect?: (row: object) => void;
 	onRowClick?: (row: object) => void;
 	getRowId?: (row: object) => string;
+	imageFind:string;
 }
 
 export interface ListDataProps {

@@ -5,18 +5,34 @@
 	border-radius: 8px;
 }
 
+.responsive {
+	min-width: 35%;
+	height: 420px;
+	margin-left: -10px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.text_filters_gap {
+	display: flex;
+	margin-bottom: -54px;
+}
+
+.text_style {
+	margin: 24px 0 0 20px;
+	font-size: 18px;
+	color: #333;
+}
+
+.icon {
+	margin: 30px 0 0 5px;
+	cursor: pointer;
+}
+
 .border {
-	width: 60px;
+	width: 70px;
 	height: 2px;
 	margin: 4px 0 0 2px;
 	background: #ed3726;
 	border-radius: 4px;
-}
-
-.responsive {
-	min-width: 35%;
-	height: 420px;
-	margin-top: 16px;
-	background: #fff;
-	border-radius: 8px;
 }

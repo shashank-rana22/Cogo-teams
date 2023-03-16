@@ -6,7 +6,7 @@ import { TableProps } from '../Interfaces/index';
 import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
-function StyledTable({ id, className, columns, data, ...rest }:TableProps) {
+function StyledTable({ id, imageFind, className, columns, data, ...rest }:TableProps) {
 	return (
 		<div className={styles.table}>
 			<Table
@@ -17,7 +17,7 @@ function StyledTable({ id, className, columns, data, ...rest }:TableProps) {
 				{...rest}
 			/>
 
-			{data?.length === 0 && <EmptyState />}
+			{data?.length === 0 && <EmptyState imageFind={imageFind} />}
 		</div>
 	);
 }

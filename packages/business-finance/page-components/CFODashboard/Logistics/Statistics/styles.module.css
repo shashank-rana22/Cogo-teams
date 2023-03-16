@@ -28,10 +28,6 @@
 
 .expense_div {
 	display: flex;
-
-	/* justify-content: flex-start; */
-
-	/* margin-top: -70px; */
 }
 
 .expense_main {
@@ -39,7 +35,7 @@
 }
 
 .main_div {
-	margin: 22px 0 22px 36px;
+	margin: 22px 0 22px 18px;
 }
 
 .expense_text {

@@ -23,10 +23,14 @@ function Profitabillity({ searchValue, setSearchValue }) {
 	return (
 		<div>
 			<div className={styles.card}>
-				<div>
-					Profitabillity
-					<IcMInfo />
-					<div className={styles.border} />
+				<div className={styles.text_filters_gap}>
+					<div className={styles.text_style}>
+						Profitabillity
+						<div className={styles.border} />
+					</div>
+					<div className={styles.icon}>
+						<IcMInfo />
+					</div>
 				</div>
 				<div className={styles.container}>
 					<div className={styles.flex}>
@@ -62,6 +66,7 @@ function Profitabillity({ searchValue, setSearchValue }) {
 					<StyledTable
 						data={[]}
 						columns={columns}
+						imageFind="cfoDashboard"
 					/>
 				</div>
 

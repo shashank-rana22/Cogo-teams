@@ -5,19 +5,11 @@
 	border-radius: 8px;
 }
 
-.border {
-	width: 60px;
-	height: 2px;
-	margin: 4px 0 0 2px;
-	background: #ed3726;
-	border-radius: 4px;
-}
-
 .container {
 	display: flex;
 	justify-content: space-between;
 	height: 59px;
-	margin-top: 15px;
+	margin: 15px 0 0 24px;
 }
 
 .flex {
@@ -98,4 +90,28 @@
 .table_data {
 	height: 45vh;
 	overflow: scroll;
+}
+
+.text_filters_gap {
+	display: flex;
+	margin-left: 24px;
+}
+
+.text_style {
+	margin: 20px 0 16px;
+	font-size: 18px;
+	color: #333;
+}
+
+.icon {
+	margin: 30px 0 0 5px;
+	cursor: pointer;
+}
+
+.border {
+	width: 70px;
+	height: 2px;
+	margin: 4px 0 0 2px;
+	background: #ed3726;
+	border-radius: 4px;
 }
