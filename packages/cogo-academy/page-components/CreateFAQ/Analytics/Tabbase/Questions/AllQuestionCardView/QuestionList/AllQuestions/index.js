@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 // eslint-disable-next-line import/no-unresolved
 import startCase from '@cogoport/utils/src/utilities/startCase';
 import React from 'react';
@@ -10,13 +10,15 @@ import styles from './styles.module.css';
 function AllQuestions(props) {
 	const { data } = props;
 	const listdata = data?.list;
-	console.log('listdata', listdata);
+	const truncate = (str) => (str?.length > 28 ? `${str.substring(0, 26)}...` : str);
 	const addedQuestionsColumns = () => [
 		{
 			Header   : 'Questions',
 			accessor : (items) => (
 				<div className={styles.question}>
-					{items?.question_abstract}
+					<Tooltip content={items?.question_abstract} placement="right">
+						<div>{truncate(items?.question_abstract)}</div>
+					</Tooltip>
 				</div>
 			),
 		},

@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import { IcMLike, IcMEyeopen } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
@@ -16,7 +17,10 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 						1.
 						<div style={{ marginLeft: '-9px' }}>
-							{truncate(contentQuestion[0]?.question_abstract)}
+							<Tooltip content={contentQuestion[0]?.question_abstract} placement="right">
+								<div>{truncate(contentQuestion[0]?.question_abstract)}</div>
+							</Tooltip>
+
 						</div>
 						<div style={{ display: 'flex' }}>
 							<div style={{ marginRight: '0.25rem' }}>
@@ -36,7 +40,9 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 						2.
 						<div style={{ marginLeft: '-9px' }}>
 
-							{truncate(contentQuestion[1]?.question_abstract)}
+							<Tooltip content={contentQuestion[1]?.question_abstract} placement="right">
+								<div>{truncate(contentQuestion[1]?.question_abstract)}</div>
+							</Tooltip>
 						</div>
 						<div style={{ display: 'flex' }}>
 							<div style={{ marginRight: '0.25rem' }}>
@@ -54,7 +60,12 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 					</div>
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 						3.
-						<div style={{ marginLeft: '-9px' }}>{truncate(contentQuestion[2]?.question_abstract)}</div>
+						<div style={{ marginLeft: '-9px' }}>
+							<Tooltip content={contentQuestion[2]?.question_abstract} placement="right">
+								<div>{truncate(contentQuestion[2]?.question_abstract)}</div>
+							</Tooltip>
+
+						</div>
 						<div style={{ display: 'flex' }}>
 							<div style={{ marginRight: '0.25rem' }}>
 
@@ -71,7 +82,12 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 					</div>
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 						4.
-						<div style={{ marginLeft: '-9px' }}>{truncate(contentQuestion[3]?.question_abstract)}</div>
+						<div style={{ marginLeft: '-9px' }}>
+							<Tooltip content={contentQuestion[3]?.question_abstract} placement="right">
+								<div>{truncate(contentQuestion[3]?.question_abstract)}</div>
+							</Tooltip>
+
+						</div>
 						<div style={{ display: 'flex' }}>
 							<div style={{ marginRight: '0.25rem' }}>
 
