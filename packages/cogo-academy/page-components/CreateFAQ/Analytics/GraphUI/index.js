@@ -172,40 +172,64 @@ const data = [
   },
 ];
 
-const data2 = [
-  {
-    id    : 'hack',
-    label : 'hack',
-    value : 504,
-    color : 'hsl(199, 70%, 50%)',
-  },
-  {
-    id    : 'elixir',
-    label : 'elixir',
-    value : 551,
-    color : 'hsl(359, 70%, 50%)',
-  },
-  {
-    id    : 'php',
-    label : 'php',
-    value : 529,
-    color : 'hsl(86, 70%, 50%)',
-  },
-  {
-    id    : 'c',
-    label : 'c',
-    value : 485,
-    color : 'hsl(253, 70%, 50%)',
-  },
-  {
-    id    : 'javascript',
-    label : 'javascript',
-    value : 51,
-    color : 'hsl(174, 70%, 50%)',
-  },
-];
-
 function GraphUI() {
+  const props = useListFaqSearchHistories({}) || undefined;
+  console.log(props);
+  const { pie_chart_data } = props?.data || 0;
+  const {
+        total_dislike = 0,
+        total_dislike_percentage = 0,
+        total_like = 0,
+        total_like_percentage = 0,
+        total_requested_questions = 0,
+        total_requested_questions_percentage = 0,
+        total_search_result_available = 0,
+        total_search_result_available_percentage = 0,
+        total_search_result_not_available = 0,
+        total_search_result_not_available_percentage = 0,
+        total_searches = 0,
+        total_searches_percentage = 0,
+        total_viewed_only_questions = 0,
+        total_viewed_only_questions_percentage = 0,
+  } = pie_chart_data;
+
+  const data2 = [
+    {
+      id    : 'Like',
+      label : 'Likes',
+      value : total_like,
+    },
+    {
+      id    : 'Dislikes',
+      label : 'Dislikes',
+      value : total_dislike,
+    },
+    {
+      id    : 'Requested',
+      label : 'Requested',
+      value : total_requested_questions,
+    },
+    {
+      id    : 'Total Search',
+      label : 'Total Search',
+      value : total_searches,
+    },
+    {
+      id    : 'Viewed Only',
+      label : 'Viewed Only',
+      value : total_viewed_only_questions,
+    },
+    {
+      id    : 'Search Available',
+      label : 'Search Available',
+      value : total_search_result_available,
+    },
+    {
+      id    : 'Search not Available',
+      label : 'Search not Available',
+      value : total_search_result_not_available,
+    },
+  ];
   return (
 	<>
 		<Filters />
