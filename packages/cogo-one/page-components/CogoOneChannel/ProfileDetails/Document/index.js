@@ -1,15 +1,15 @@
 import { Popover } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
+// import useGetDocumentCount from '../../../../hooks/useGetDocumentCount';
 import useListOmnichannelDocuments from '../../../../hooks/useListOmnichannelDocuments';
 import useUpdateOmnichannelNewDocument from '../../../../hooks/useUpdateOmnichannelNewDocument';
 import LoadingState from '../UserActivity/LoadingState';
 
 import Filters from './Filters';
 import ListData from './ListData';
-// import OptionsModal from './OptionsModal';
 import styles from './styles.module.css';
 import UploadDetailsModal from './UploadDetailsModal';
 
@@ -26,17 +26,23 @@ function Documents({
 	const [showModal, setShowModal] = useState(false);
 
 	const [singleItem, setSingleItem] = useState({});
-	console.log('singleItem:', singleItem);
+
+	// const { data, documentsCount = () => {} } = useGetDocumentCount({
+	// 	activeMessageCard,
+	// 	activeVoiceCard,
+	// 	activeTab,
+	// // });
+	// console.log(' data:', data);
 
 	const { updateNewDocument: documentCountUpdates = () => {} } = useUpdateOmnichannelNewDocument({
 		type: 'update_count',
 	});
 
-	const updateFunc = (listIdsArr) => {
+	const updateFunc = useCallback((listIdsArr) => {
 		if (!isEmpty(listIdsArr) && documents_count > 0) {
 			documentCountUpdates({ documentCount, listIds: listIdsArr });
 		}
-	};
+	}, [documentCount, documentCountUpdates, documents_count]);
 
 	const {
 		list = [],

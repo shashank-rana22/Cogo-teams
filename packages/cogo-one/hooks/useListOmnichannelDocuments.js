@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 
 import FormatData from '../utils/formatData';
 
@@ -27,7 +27,7 @@ function useListOmnichannelDocuments({
 
 	const checkConditions = isEmpty(userId) && isEmpty(userMobile);
 
-	const documentsList = async (filters) => {
+	const documentsList = useCallback(async (filters) => {
 		try {
 			let filters_payload = {
 				user_id       : !isEmpty(userId) ? userId : undefined,
@@ -60,15 +60,15 @@ function useListOmnichannelDocuments({
 		} catch (error) {
 			// console.log(error);
 		}
-	};
-	const emptyCheck = !isEmpty(userId) || !isEmpty(userMobile);
+	}, [checkConditions, leadUserId, setFilterVisible, trigger, type, userId, updateFunc, userMobile]);
+
+	const emptyCheck = useMemo(() => !isEmpty(userId) || !isEmpty(userMobile), [userId, userMobile]);
 
 	useEffect(() => {
 		if (emptyCheck) {
 			documentsList();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [customerId, activeSelect]);
+	}, [customerId, activeSelect, emptyCheck, documentsList]);
 
 	const { list = [], total_count = 0 } = data || {};
 

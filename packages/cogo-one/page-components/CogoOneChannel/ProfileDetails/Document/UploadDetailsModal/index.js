@@ -90,8 +90,6 @@ function UploadDetailsModal({
 		}
 	};
 
-	console.log('FileType:', fileType);
-
 	const formControls = getControls(fileType);
 
 	return (
