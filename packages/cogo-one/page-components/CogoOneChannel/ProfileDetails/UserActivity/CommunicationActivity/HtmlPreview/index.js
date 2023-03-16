@@ -12,7 +12,7 @@ function HTMLPreview({ html = '', type }) {
 	return (
 		<iframe
 			width="100%"
-			height={type !== 'push_notification' ? '400px' : '150px'}
+			height={type === 'email' ? '400px' : '150px'}
 			frameBorder="0"
 			title="Preview"
 			ref={frameRef}
