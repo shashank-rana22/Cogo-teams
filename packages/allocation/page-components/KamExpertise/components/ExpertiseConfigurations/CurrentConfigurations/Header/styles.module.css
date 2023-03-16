@@ -1,20 +1,27 @@
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
 }
 
 .heading {
-	margin-bottom: 8px;
-	font-size: 18px;
-	line-height: 36px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 36px;
 }
 
 .sub_container {
-	display: flex;
+  display: flex;
 }
 
 .left_text {
-	margin-right: 36px;
+  margin-right: 36px;
+}
+.modal_body {
+  height: 9000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
