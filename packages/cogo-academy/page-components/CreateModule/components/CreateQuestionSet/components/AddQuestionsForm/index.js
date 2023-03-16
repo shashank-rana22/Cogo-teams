@@ -1,33 +1,26 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import CreateQuestion from '../../../../commons/CreateQuestion';
 import LoadingState from '../../../../commons/LoadingState';
 import SavedQuestionDetails from '../../../../commons/SavedQuestionDetails';
-import useGetTestQuestionTest from '../../../../hooks/useGetTestQuestionTest';
 
 import styles from './styles.module.css';
 
-function AddQuestionsForm({ questionSetId }) {
-	const [savedQuestionDetails, setSavedQuestionDetails] = useState([]);
-
-	const [allKeysSaved, setAllKeysSaved] = useState(true);
-
-	const {
-		loading,
-		data,
-		getTestQuestionTest,
-	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved });
+function AddQuestionsForm({
+	questionSetId,
+	savedQuestionDetails,
+	allKeysSaved,
+	data,
+	loading,
+	getTestQuestionTest,
+	setSavedQuestionDetails,
+	setAllKeysSaved,
+}) {
+	const [editDetails, setEditDetails] = useState({});
 
 	const { question_count, test_questions } = data || {};
-
-	useEffect(() => {
-		if (!isEmpty(questionSetId)) {
-			getTestQuestionTest({ questionSetId });
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [questionSetId]);
 
 	if (isEmpty(questionSetId)) {
 		return null;
@@ -45,6 +38,10 @@ function AddQuestionsForm({ questionSetId }) {
 				<SavedQuestionDetails
 					savedQuestionDetails={savedQuestionDetails}
 					test_questions={test_questions}
+					editDetails={editDetails}
+					setEditDetails={setEditDetails}
+					allKeysSaved={allKeysSaved}
+					setAllKeysSaved={setAllKeysSaved}
 				/>
 			) : null}
 
@@ -60,12 +57,27 @@ function AddQuestionsForm({ questionSetId }) {
 							getTestQuestionTest={getTestQuestionTest}
 							setSavedQuestionDetails={setSavedQuestionDetails}
 							setAllKeysSaved={setAllKeysSaved}
+							editDetails={editDetails}
+							setEditDetails={setEditDetails}
 						/>
 					);
 				}
 
 				return null;
 			})}
+
+			{!isEmpty(editDetails) ? (
+				<CreateQuestion
+					editDetails={editDetails}
+					index={test_questions.findIndex((item1) => item1?.id === editDetails?.id)}
+					type="edit"
+					questionSetId={questionSetId}
+					getTestQuestionTest={getTestQuestionTest}
+					setSavedQuestionDetails={setSavedQuestionDetails}
+					setAllKeysSaved={setAllKeysSaved}
+					setEditDetails={setEditDetails}
+				/>
+			) : null}
 
 			<div className={styles.button_container}>
 				<Button

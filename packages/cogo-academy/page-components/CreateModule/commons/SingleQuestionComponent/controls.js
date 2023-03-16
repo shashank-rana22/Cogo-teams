@@ -24,7 +24,8 @@ const getControls = () => [
 		buttonText  : 'Add another option',
 		value       : [
 			{
-				option: '',
+				answer_text : '',
+				is_correct  : '',
 			},
 		],
 		controls: [

@@ -8,6 +8,16 @@
 	border-radius: 6px;
 }
 
+.flex_row {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.value {
+	font-weight: 600;
+}
+
 .form_component {
 	display: flex;
 	flex-wrap: wrap;
@@ -61,4 +71,23 @@
 .button_container {
 	display: flex;
 	justify-content: end;
+	align-items: center;
+	gap: 20px;
+}
+
+.vertical_line {
+	width: 2px;
+    border-left: 2px solid rgb(222, 215, 252);
+    height: 24px;
+    margin: 10px 20px;
+}
+
+.flex_container {
+	align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+	cursor: pointer;
 }

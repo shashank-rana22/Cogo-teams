@@ -17,14 +17,14 @@ const getControls = () => [
 		name  : 'select_entity_usergroups',
 		label : 'Select Entity & User Groups',
 		use   : [{
-			name        : 'no_of_questions',
-			label       : 'No of Questions',
+			name        : 'select_entity',
+			label       : 'Select Entity & User Groups',
 			type        : 'select',
 			placeholder : 'Cogo Entity',
 			rules       : { required: 'This is required' },
 		}, {
-			name        : 'no_of_questions',
-			label       : 'No of Questions',
+			name        : 'select_user_group',
+			label       : 'Select Entity & User Groups',
 			type        : 'multiselect',
 			placeholder : 'User group',
 			rules       : { required: 'This is required' },
