@@ -34,7 +34,8 @@ function BLDetails() {
 
 	const loading = false;
 
-	console.log('primary_service', primary_service, shipment_data);
+	const totalContainers = primary_service?.cargo_details
+		.reduce((acc, { containers_count }) => acc + containers_count, 0);
 
 	const renderBlCount = (
 		<div className={styles.bl_count_container}>
@@ -42,9 +43,11 @@ function BLDetails() {
 			<div className="bl-count">
 				(
 				{primary_service?.bls_count || 0}
-				BL’s,
-				{primary_service?.containers_count || 0}
-				Containers)
+				BL’s, &nbsp;
+				{totalContainers || 0}
+				&nbsp;
+				Containers
+				)
 			</div>
 
 			<div className={styles.button_container}>

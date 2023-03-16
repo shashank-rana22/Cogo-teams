@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 // import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-function useListShipmentServices() {
+function useListShipmentServices({ shipment_data }) {
 	// const {
 	// 	id,
 	// } = useSelector(({ general }) => ({
@@ -20,7 +20,9 @@ function useListShipmentServices() {
 			try {
 				const res = await trigger({
 					params: {
-						shipment_id: 'cad59832-2185-4ead-aadb-91e36bea4a05',
+						filters: {
+							shipment_id: shipment_data?.id,
+						},
 					},
 				}); if (!res.hasError) {
 					Toast.error('dsfghj');
@@ -29,7 +31,7 @@ function useListShipmentServices() {
 				console.log(err);
 			}
 		})();
-	}, [trigger]);
+	}, [trigger, shipment_data?.id]);
 
 	useEffect(() => {
 		listServices();

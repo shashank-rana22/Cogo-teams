@@ -12,7 +12,7 @@ import TopBar from './TopBar';
 function ShipmentDetails() {
 	const { get } = useGetShipment();
 
-	const { servicesGet } = useListShipmentServices();
+	const { servicesGet } = useListShipmentServices({ ...get });
 
 	const contextValues = useMemo(() => ({
 		...get,

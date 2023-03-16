@@ -10,7 +10,6 @@ const useUpdateContainerNumber = (
 	shipment_data = {},
 	refetch = () => {},
 ) => {
-	console.log(containerValue, 'containerValue');
 	const { scope } = useSelector(({ general }) => ({ scope: general?.scope }));
 
 	const [{ data: containerDetails },
