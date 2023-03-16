@@ -1,4 +1,4 @@
-import { Pagination, Input } from '@cogoport/components';
+import { Tabs, TabPanel, Pagination, Input } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -7,11 +7,13 @@ import useGetColumns from '../../../../../common/Columns';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
 import useListEmployees from '../../../../../hooks/useListEmployees';
+import AllLogs from '../../../AllLogs';
 
 import styles from './styles.module.css';
 
 function LogModal({ item = {}, setItem = () => {} }) {
 	const [searchValue, setSearchValue] = useState('');
+	const [activeTab, setActiveTab] = useState('new');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const { employeeData = {}, loading = false, params, setPage } = useListEmployees({ searchValue: query });
@@ -73,7 +75,20 @@ function LogModal({ item = {}, setItem = () => {} }) {
 						total_count={4}
 					/>
 				</>
-			) : 'hi'}
+			) : (
+				<Tabs
+					activeTab={activeTab}
+					themeType="primary"
+					onChange={setActiveTab}
+				>
+					<TabPanel name="new" title="New Log">
+						{/* <KPIFeedbacks /> */}
+					</TabPanel>
+					<TabPanel name="all" title="All Logs">
+						<AllLogs />
+					</TabPanel>
+				</Tabs>
+			)}
 
 		</div>
 	);

@@ -4,7 +4,7 @@ import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function LogModal() {
+function AllLogs() {
 	const currentDate = new Date();
 
 	const object = {
@@ -36,28 +36,28 @@ function LogModal() {
 			<div className={styles.sub_container}>
 				<div className={styles.flex_container}>
 					<div className={styles.circle} />
-					<p className={styles.date}>{format(currentDate, 'dd-MMM-yyyy')}</p>
+					<div className={styles.date}>{format(currentDate, 'dd-MMM-yyyy')}</div>
 				</div>
 
 				<div className={styles.content}>
-					<p>
+					<div>
 						{' '}
 						By
 						{' '}
 						<b>{object.manager_name}</b>
-					</p>
+					</div>
 
-					<p>{object.status?.name}</p>
+					<div>{object.status?.name}</div>
 
 					{object.status ? (
 						<div className={styles.dates_container}>
 							<div>
-								<p>Start Date</p>
-								<p>{object.status?.start_date}</p>
+								<div>Start Date</div>
+								<div>{object.status?.start_date}</div>
 							</div>
 							<div>
-								<p>End Date</p>
-								<p>{object.status?.end_date}</p>
+								<div>End Date</div>
+								<div>{object.status?.end_date}</div>
 							</div>
 						</div>
 					) : null}
@@ -66,7 +66,7 @@ function LogModal() {
 						items={object.options}
 						selectedItems={selectedItems}
 					/>
-					<p>{object.comments}</p>
+					<div>{object.comments}</div>
 
 					<Checkbox className={styles.checkbox} label="Email sent to Manager" disabled checked />
 				</div>
@@ -75,4 +75,4 @@ function LogModal() {
 	);
 }
 
-export default LogModal;
+export default AllLogs;

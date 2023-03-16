@@ -2,8 +2,7 @@
 }
 
 .sub_container{
-    margin-left: 60px;
-    padding: 16px;
+    padding: 16px 0px;
 }
 
 .flex_container{
@@ -22,13 +21,12 @@
 .date{
     color: #828282;
     font-size: 10px;
-    margin-bottom: 12px;
 }
 
 .content{
     border-left: 2px solid #F68B21;
     padding-left: 24px;
-    margin-left: 4px;
+    margin: 8px 0 0 4px;
 
     p{
         margin: 16px 0;
