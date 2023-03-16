@@ -120,6 +120,12 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'list_test_question_sets',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+
 	],
 	faq: [
 		{
