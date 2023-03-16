@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
@@ -6,8 +7,8 @@ import getElementController from '../../../../../../configs/getElementController
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function CreateNewTest() {
-	const { control, formState:{ errors } } = useForm();
+function CreateNewTest({ setFormValues }) {
+	const { control, formState:{ errors }, getValues } = useForm();
 
 	const controls = getControls();
 
@@ -61,6 +62,15 @@ function CreateNewTest() {
 					);
 				})}
 			</div>
+			<Button
+				themeType="primary"
+				onClick={() => {
+					setFormValues(getValues());
+				}}
+			>
+				Save
+
+			</Button>
 		</div>
 	);
 }

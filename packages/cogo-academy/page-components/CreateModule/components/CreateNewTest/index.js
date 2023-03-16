@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
+import useCreateTest from '../../hooks/useCreateTest';
 import AddQuestionsForm from '../CreateQuestionSet/components/AddQuestionsForm';
 
 import NewQuestion from './components/NewQuestion';
@@ -11,9 +12,10 @@ import styles from './styles.module.css';
 function CreateTest() {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 	const [showNewQuestion, setShowNewQuestion] = useState(false);
+	const [formValues, setFormValues] = useState({});
 	return (
 		<div>
-			<TestDetails />
+			<TestDetails setFormValues={setFormValues} />
 			{!showQuestionSet && !showNewQuestion && (
 				<div className={styles.btn_container}>
 					<Button
@@ -47,7 +49,14 @@ function CreateTest() {
 						+ Add New Question
 					</Button>
 					<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
-						<Button size="md" themeType="tertiary" style={{ marginRight: '10px' }}>
+						<Button
+							size="md"
+							themeType="tertiary"
+							style={{ marginRight: '10px' }}
+							onClick={() => {
+								useCreateTest();
+							}}
+						>
 							Save As Draft
 						</Button>
 						<Button size="md" themeType="primary">Review And Set Validity</Button>

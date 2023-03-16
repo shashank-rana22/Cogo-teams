@@ -1,6 +1,6 @@
 const getControls = () => [
 	{
-		name        : 'test_name',
+		name        : 'name',
 		label       : 'Name of Test',
 		type        : 'input',
 		placeholder : 'Type name...',
