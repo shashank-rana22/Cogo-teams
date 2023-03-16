@@ -16,22 +16,26 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 	const { name : previousAgent } = performed_by_data || {};
 	const { renderStatement } = timeLineFunctions();
 
+	const timelineText = renderStatement({
+		type     : conversation_type,
+		present  : presentAgent,
+		previous : previousAgent,
+	});
+
 	return (
-		<div className={styles.container} key={key}>
-			<div className={styles.break_the_chat} />
-			<div className={styles.timeline_text}>
-				<div className={styles.timeline_container}>
-					{renderStatement({
-						type     : conversation_type,
-						present  : presentAgent,
-						previous : previousAgent,
-					})}
-				</div>
-				<div className={styles.timeline_container}>
-					{format(new Date(created_at), 'dd MMM YYYY, HH:mm')}
+		timelineText && (
+			<div className={styles.container} key={key}>
+				<div className={styles.break_the_chat} />
+				<div className={styles.timeline_text}>
+					<div className={styles.timeline_container}>
+						{timelineText}
+					</div>
+					<div className={styles.timeline_container}>
+						{format(new Date(created_at), 'dd MMM YYYY, HH:mm')}
+					</div>
 				</div>
 			</div>
-		</div>
+		)
 	);
 }
 
