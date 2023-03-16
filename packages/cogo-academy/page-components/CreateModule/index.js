@@ -1,7 +1,9 @@
-import CreateNewTest from './components/CreateNewTest';
-// import CreateQuestionSet from './components/CreateQuestionSet';
+// import CreateNewTest from './components/CreateNewTest';
+
+import HomePage from './components/HomePage';
 
 function CreateModule() {
-	return <CreateNewTest />;
+	return <HomePage />;
 }
+
 export default CreateModule;
