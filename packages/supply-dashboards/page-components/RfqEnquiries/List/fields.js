@@ -1,4 +1,10 @@
+import { Button, Tooltip } from '@cogoport/components';
 import { format } from '@cogoport/utils';
+
+const handleOnClick = ({ e, setShow, show }) => {
+	e.stopPropagation();
+	setShow(!show);
+};
 
 const columns = [
 	{
@@ -15,11 +21,19 @@ const columns = [
 		label  : 'Customer Name',
 		key    : 'customer_name',
 		render : (item) => (
-			<div className="card-list-item-value">
-				{item?.importer_exporter?.short_name}
-			</div>
+			<Tooltip content={(
+				<div className="card-list-item-value">
+					{item?.importer_exporter?.short_name}
+				</div>
+			)}
+			>
+				<div className="card-list-item-value">
+					{item?.importer_exporter?.short_name}
+				</div>
+			</Tooltip>
+
 		),
-		flex: 4,
+		flex: 2,
 	},
 	{
 		label  : 'No Of Port Pairs',
@@ -55,6 +69,31 @@ const columns = [
 				</div>
 			);
 		},
+		flex: 2,
+	},
+	{
+		label  : '',
+		key    : 'action',
+		render : (item, setSelectedRate, selectedRate, show, setShow) => (
+			<div className="card-list-item-value">
+				<Button
+					onClick={(e) => handleOnClick(
+						{
+							e,
+							item,
+							setSelectedRate,
+							selectedRate,
+							show,
+							setShow,
+						},
+					)}
+					size="sm"
+				>
+					Close RFQ
+
+				</Button>
+			</div>
+		),
 		flex: 2,
 	},
 ];
