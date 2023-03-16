@@ -172,7 +172,13 @@ function GenerateMawb({
 					className={styles.download_button_div}
 				>
 					<div style={{ marginRight: '36px', display: 'flex', alignItems: 'center' }}>
-						<Checkbox label="Whiteout" value={whiteout} onChange={() => setWhiteout((p) => !p)} />
+						{taskItem.documentState === 'document_accepted' && (
+							<Checkbox
+								label="Whiteout"
+								value={whiteout}
+								onChange={() => setWhiteout((p) => !p)}
+							/>
+						)}
 						<Button
 							className="primary md"
 							onClick={() => {
