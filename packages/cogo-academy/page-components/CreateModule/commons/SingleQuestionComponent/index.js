@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { SelectController, InputController, ChipsController } from '@cogoport/forms';
 
 import getControls from './controls';
@@ -10,9 +11,19 @@ function SingleQuestionComponent({
 	index,
 	name = 'case_questions',
 	errors,
+	field,
+	remove,
 	editAnswerDetails,
+	isNewQuestion,
+	type,
 }) {
 	const controls = getControls();
+
+	const handleDelete = () => {
+		if (field.isNew) {
+			remove(index, 1);
+		}
+	};
 
 	return (
 		<div className={styles.container}>
@@ -58,8 +69,20 @@ function SingleQuestionComponent({
 					<ChipsController control={control} {...controls[3]} name={`${name}.${index}.${controls[3].name}`} />
 					{errors?.[controls[3].name] && <div className={styles.error_msg}>This is required</div>}
 				</div>
-
 			</div>
+
+			{type === 'case_study' && !isNewQuestion ? (
+				<div className={styles.button_container}>
+					<Button onClick={() => handleDelete()} themeType="accent" size="sm" type="button">
+						Delete
+					</Button>
+
+					<Button size="sm" type="button">
+						Edit
+					</Button>
+				</div>
+
+			) : null}
 		</div>
 	);
 }

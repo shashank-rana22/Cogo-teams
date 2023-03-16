@@ -1,21 +1,26 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { Router } from '@cogoport/next';
 
 import getElementController from '../../../../../../configs/getElementController';
 
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function CreateNewTest({ setFormValues }) {
-	const { control, formState:{ errors }, getValues } = useForm();
+const onClickBack = () => {
+	Router.back();
+};
+
+function CreateNewTest() {
+	const { control, formState:{ errors } } = useForm();
 
 	const controls = getControls();
 
 	return (
 		<div>
 			<div className={styles.header}>
-				<IcMArrowBack width={20} height={20} />
+				<IcMArrowBack className={styles.back_icon} onClick={() => onClickBack()} width={20} height={20} />
 				<div className={styles.title}>New Test</div>
 			</div>
 			<div className={styles.container}>

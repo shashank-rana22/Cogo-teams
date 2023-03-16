@@ -24,7 +24,7 @@ function CreateQuestion({
 }) {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
 
-	const { isNew = false, id } = item || {};
+	const { isNew:isNewQuestion = false, id } = item || {};
 
 	const {
 		watch,
@@ -50,7 +50,7 @@ function CreateQuestion({
 	const deleteQuestion = () => {
 		if (!isEmpty(editDetails)) {
 			setEditDetails({});
-		} else if (isNew) {
+		} else if (isNewQuestion) {
 			setSavedQuestionDetails((prev) => prev.filter((item1) => item1.id !== id));
 		}
 
@@ -116,7 +116,13 @@ function CreateQuestion({
 			<div className={styles.question_label}>{`Question ${index + 1}`}</div>
 
 			<div className={styles.form_component}>
-				<BasicDetails errors={errors} control={control} />
+				<BasicDetails
+					errors={errors}
+					control={control}
+					isNewQuestion={isNewQuestion}
+					editDetails={editDetails}
+					setValue={setValue}
+				/>
 
 				<div className={styles.question_form}>
 					{questionTypeWatch === 'stand_alone' ? (
@@ -127,6 +133,7 @@ function CreateQuestion({
 							control={control}
 							register={register}
 							name="question"
+							isNewQuestion={isNewQuestion}
 						/>
 					) : (
 						<CaseStudyForm
@@ -136,19 +143,27 @@ function CreateQuestion({
 							}}
 							control={control}
 							register={register}
+							isNewQuestion={isNewQuestion}
 						/>
 					)}
 				</div>
 
-				<div className={styles.button_container}>
-					<Button type="submit" themeType="accent">save Question</Button>
-				</div>
+				{!(!isNewQuestion && editDetails?.question_type === 'case_study') ? (
+					<div className={styles.button_container}>
+						<Button
+							type="submit"
+							themeType="accent"
+						>
+							{isNewQuestion ? 'Save Question' : 'Update Question'}
+
+						</Button>
+					</div>
+				) : null}
 
 				<div className={styles.delete_icon}>
 					<IcMCrossInCircle onClick={() => deleteQuestion()} width={20} height={20} />
 				</div>
 			</div>
-
 		</form>
 	);
 }

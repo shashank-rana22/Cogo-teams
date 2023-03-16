@@ -44,3 +44,9 @@
 	font-weight: 500;
 	color: #cb6464;
 }
+
+.button_container {
+	display: flex;
+	gap: 12px;
+	float: right;
+}

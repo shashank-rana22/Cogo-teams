@@ -20,7 +20,7 @@ function AddQuestionsForm({
 }) {
 	const [editDetails, setEditDetails] = useState({});
 
-	const { question_count, test_questions } = data || {};
+	const { test_questions } = data || {};
 
 	if (isEmpty(questionSetId)) {
 		return null;
@@ -34,7 +34,7 @@ function AddQuestionsForm({
 		<div className={styles.container}>
 			<div className={styles.label}>Questions</div>
 
-			{question_count ? (
+			{test_questions.filter((item) => item.id !== editDetails?.id).length > 0 ? (
 				<SavedQuestionDetails
 					savedQuestionDetails={savedQuestionDetails}
 					test_questions={test_questions}
