@@ -7452,6 +7452,12 @@ const partner = {
 			api         : 'post_translation_translate',
 			access_type : 'private',
 		},
+
+		{
+			api         : 'post_translation_translate_bulk',
+			access_type : 'private',
+		},
+
 	],
 	reports: [
 		{
