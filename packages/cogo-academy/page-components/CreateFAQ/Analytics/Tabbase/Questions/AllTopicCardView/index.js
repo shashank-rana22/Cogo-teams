@@ -6,12 +6,7 @@ function AllTopicCardView() {
 	const props = useListFaqTopic();
 	const { data } = props;
 
-	return (
-		<div>
-			{data?.list.map((items) => (<AllTopic props={items} />))}
-
-		</div>
-	);
+	return data?.list.map((items) => (<AllTopic props={items} />));
 }
 
 export default AllTopicCardView;
