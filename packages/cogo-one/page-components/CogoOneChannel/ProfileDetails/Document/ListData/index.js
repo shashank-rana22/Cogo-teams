@@ -10,7 +10,8 @@ import styles from './styles.module.css';
 
 function documentTypeMapping(type) {
 	switch (type) {
-		case 'gst' || 'pan':
+		case 'gst':
+		case 'pan':
 			return 'KYC Document';
 		case 'undefined':
 			return 'Wrong Document';
@@ -57,7 +58,6 @@ function ListData({ list = [], orgId = '', setShowModal = () => {}, setSingleIte
 							state = '',
 							file_name = '',
 							verification_status = '',
-
 						} = item || {};
 
 						return (
