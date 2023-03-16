@@ -28,7 +28,17 @@ const columns = [
 			)}
 			>
 				<div className="card-list-item-value">
-					{item?.importer_exporter?.short_name}
+					<div style={{
+						width        : '100px',
+						overflow     : 'hidden',
+						textOverflow : 'ellipsis',
+						whiteSpace   : 'nowrap',
+					}}
+					>
+						{item?.importer_exporter?.short_name}
+
+					</div>
+
 				</div>
 			</Tooltip>
 
