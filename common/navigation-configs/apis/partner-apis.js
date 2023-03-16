@@ -1709,6 +1709,12 @@ const partner = {
 	],
 	supply_crm: [
 		{
+			feature      : 'supply_crm',
+			api          : 'list_organization_service_expertises',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_bank_details',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -4740,6 +4746,11 @@ const partner = {
 		},
 		{
 			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_service_expertises',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
