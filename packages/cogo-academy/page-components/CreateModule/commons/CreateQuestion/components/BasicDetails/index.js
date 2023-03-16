@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { TextAreaController } from '@cogoport/forms';
 import { IcMCrossInCircle, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -18,7 +19,7 @@ const getQuestionType = (question_type) => {
 	return 'Stand Alone';
 };
 
-function BasicDetails({ control, errors, isNewQuestion, editDetails, setValue }) {
+function BasicDetails({ control, errors, isNewQuestion, editDetails, setValue, questionTypeWatch }) {
 	const [showForm, setShowForm] = useState(false);
 
 	const controls = getControls();
@@ -38,7 +39,7 @@ function BasicDetails({ control, errors, isNewQuestion, editDetails, setValue })
 
 	if (!isNewQuestion && !showForm) {
 		return (
-			<div className={`${styles.container} ${styles.flex_row}`}>
+			<div className={`${styles.container} ${styles.flex_row} ${styles.flex}`}>
 				{constants.map((item) => (
 					<div className={styles.flex_container}>
 						<div className={styles.label}>{startCase(item)}</div>
@@ -60,26 +61,50 @@ function BasicDetails({ control, errors, isNewQuestion, editDetails, setValue })
 
 	return (
 		<div className={`${styles.container} ${!isNewQuestion ? styles.flex_row : null}`}>
-			{controls.map((controlItem) => {
-				const { type, label, name } = controlItem || {};
+			<div className={styles.upper_form}>
+				{controls.map((controlItem) => {
+					const { type, label, name } = controlItem || {};
 
-				const Element = getElementController(type);
+					if (name === 'question_text') {
+						return null;
+					}
 
-				return (
-					<div className={`${styles.control_container} ${styles[name]}`}>
-						<div className={styles.label}>
-							{label}
+					const Element = getElementController(type);
+
+					return (
+						<div className={`${styles.control_container} ${styles[name]}`}>
+							<div className={styles.label}>
+								{label}
+							</div>
+
+							<div className={styles.control}>
+								<Element control={control} {...controlItem} />
+								{errors[name] && <div className={styles.error_msg}>This is required</div>}
+							</div>
 						</div>
+					);
+				})}
+			</div>
 
-						<div className={styles.control}>
-							<Element control={control} {...controlItem} />
-							{errors[name] && <div className={styles.error_msg}>This is required</div>}
-						</div>
-					</div>
-				);
-			})}
+			{questionTypeWatch === 'case_study' ? (
+				<div className={!isNewQuestion ? styles.bottom : null}>
+					<TextAreaController
+						control={control}
+						{...controls[3]}
+					/>
+					{errors?.question_text ? <div className={styles.error_msg}>This is required</div> : null}
+				</div>
+			) : null}
 
-			{!isNewQuestion ? <Button style={{ marginTop: '22px' }} size="sm" type="button">Edit</Button> : null}
+			{!isNewQuestion ? (
+				<Button
+					className={styles.edit_button}
+					size="sm"
+					type="button"
+				>
+					Edit
+				</Button>
+			) : null}
 
 			{!isNewQuestion ? (
 				<div

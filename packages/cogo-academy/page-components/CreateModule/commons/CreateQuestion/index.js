@@ -6,6 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useCreateTestQuestion from '../../hooks/useCreateTestQuestion';
+import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
 import SingleQuestionComponent from '../SingleQuestionComponent';
 
 import BasicDetails from './components/BasicDetails';
@@ -37,9 +38,14 @@ function CreateQuestion({
 		register,
 	} = useForm();
 
-	const { createTestQuestion } = useCreateTestQuestion();
+	const { createTestQuestion, loading } = useCreateTestQuestion();
+
+	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion();
 
 	const onsubmit = (values) => {
+		if (!isNewQuestion && editDetails?.question_type !== 'case_study') {
+			updateStandAloneTestQuestion({ values, questionSetId, getTestQuestionTest, reset });
+		}
 		createTestQuestion({ values, questionSetId, getTestQuestionTest, reset });
 	};
 
@@ -122,6 +128,7 @@ function CreateQuestion({
 					isNewQuestion={isNewQuestion}
 					editDetails={editDetails}
 					setValue={setValue}
+					questionTypeWatch={questionTypeWatch}
 				/>
 
 				<div className={styles.question_form}>
@@ -151,6 +158,7 @@ function CreateQuestion({
 				{!(!isNewQuestion && editDetails?.question_type === 'case_study') ? (
 					<div className={styles.button_container}>
 						<Button
+							loading={loading}
 							type="submit"
 							themeType="accent"
 						>

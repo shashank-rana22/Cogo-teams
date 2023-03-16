@@ -1,4 +1,4 @@
-function getPayload({ values, type, questionSetId }) {
+function getPayload({ values, type, questionSetId, action }) {
 	switch (type) {
 		case 'stand_alone': {
 			const { audience_ids, question = [], topic } = values || {};
@@ -23,7 +23,7 @@ function getPayload({ values, type, questionSetId }) {
 			});
 
 			return {
-				test_question_set_id: questionSetId,
+				...(action === 'update' ? { id: questionSetId } : { test_question_set_id: questionSetId }),
 				audience_ids,
 				question_type,
 				topic,
