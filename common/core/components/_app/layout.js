@@ -1,9 +1,11 @@
 import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
+import { dynamic } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import AdminLayout from '../AdminLayout';
-import ChatFAQs from '../AdminLayout/FAQs';
+
+const ChatFAQs = dynamic(() => import('../AdminLayout/FAQs'), { ssr: false });
 
 function Layout({ children, layout }) {
 	const hideLayout = layout === 'hidden';
