@@ -20,7 +20,8 @@ const useGetInfiniteList = (hook, params = {}) => {
 	const refetch = () => {
 		setLoading(true);
 		hook(restFilters, page)
-			?.then((res) => {
+			.then((res) => {
+				console.log(res, 'res');
 				const { data = { list: [], total: 0 } } = res;
 				setList((prevState) => ({
 					data:

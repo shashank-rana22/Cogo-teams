@@ -1,14 +1,16 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from '@cogoport/store';
 import { useRequest } from '@cogoport/request';
-import useGetInfiniteList from './useGetInfiniteList';
+// import useGetFiniteList from './useGetFiniteList';
 
 const useGetShipmentChatList = ({ status }) => {
-	const { user_id } = useSelector((s) => ({
-		user_id: s?.profile.id,
-	}));
+	const { user_id } = useSelector((s) => (
+		console.log(s, 'sss'), {
 
-	const [{ loading: apiLoading }, trigger] = useRequest({
+			user_id: s?.profile?.user.id,
+		}));
+
+	const [{ loading: apiLoading, data }, trigger] = useRequest({
 		url: 'list_chat_channels',
 		method: 'GET',
 	}, { manual: true })
@@ -21,22 +23,24 @@ const useGetShipmentChatList = ({ status }) => {
 
 	const getShipmentChatList = useCallback(() => {
 		(async (restFilters, currentPage) => {
-			try {
-				await trigger({
-					params: {
-						filters: {
-							subscribe_user_id: user_id,
-							status,
-							...(restFilters || {}),
-						},
-						page: currentPage,
+			return trigger({
+				params: {
+					filters: {
+						subscribe_user_id: user_id,
+						status,
+						...(restFilters || {}),
 					},
-				});
-			} catch (err) {
-				console.log(err);
-			}
+					page: currentPage,
+				},
+			});
 		})();
 	}, [trigger]);
+
+	useEffect(() => {
+		getShipmentChatList();
+	}, [getShipmentChatList, status]);
+
+	console.log(getShipmentChatList, 'get');
 
 	// const getShipmentChatList = async (restFilters, currentPage) => {
 	// 	return trigger({
@@ -51,23 +55,25 @@ const useGetShipmentChatList = ({ status }) => {
 	// 	});
 	// };
 
-	const {
-		filters,
-		page,
-		list: { data, total_page },
-		hookSetters,
-		refetch,
-		loading,
-	} = useGetInfiniteList(getShipmentChatList, status);
+	// const {
+	// 	filters,
+	// 	page,
+	// 	list: { data, total_page },
+	// 	hookSetters,
+	// 	refetch,
+	// 	loading,
+	// } = useGetFiniteList(getShipmentChatList, status);
+
+	console.log(data, 'dataaa');
 
 	return {
-		filters,
-		ListData: data,
-		loading: apiLoading || loading,
-		page,
-		total_page,
-		hookSetters,
-		refetch,
+		// filters,
+		ListData: data?.list,
+		// loading: apiLoading || loading,
+		// page,
+		// total_page,
+		// hookSetters,
+		// refetch,
 	};
 };
 

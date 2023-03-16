@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Input, Popover, cl } from '@cogoport/components';
-// import { Flex } from '@cogoport/front/components';
 // import formatDate from '@cogo/globalization/utils/formatDate';
 // import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -26,27 +25,6 @@ import EmptyState from '../../common/EmptyState';
 import useGetChannel from '../../hooks/useGetChannel';
 // import ListLoader from './ListLoader';
 import styles from './styles.module.css';
-
-// import {
-// 	Container,
-// 	Heading,
-// 	Search,
-// 	ListContainer,
-// 	Card,
-// 	SerialId,
-// 	UpdatedAt,
-// 	Circle,
-// 	SubContainer,
-// 	Initial,
-// 	MenuCloseBtn,
-// 	FilterBox,
-// 	CustomLoader,
-// 	Header,
-// 	ChannelsType,
-// 	Text,
-// 	PopoverContainer,
-// 	Line,
-// } from './styles';
 
 const List = ({
 	setShow = () => { },
@@ -113,43 +91,47 @@ const List = ({
 		setShowUnreadChat(!showUnreadChat);
 	};
 
-	const channelList = showUnreadChat ? unreadDataList : ListData;
+	// const channelList = showUnreadChat ? unreadDataList : ListData;
+	const channelList = ListData;
+	console.log(channelList, 'channelList');
 
-	const loadMore = useCallback(() => {
-		setTimeout(() => {
-			if (!loading) {
-				hookSetters.setFilters({ ...filters, page: page + 1 });
-			}
-		}, 200);
-	}, [loading]);
+	// const loadMore = useCallback(() => {
+	// 	setTimeout(() => {
+	// 		if (!loading) {
+	// 			hookSetters.setFilters({ ...filters, page: page + 1 });
+	// 		}
+	// 	}, 200);
+	// }, [loading]);
 
 	const renderContent = () => {
 		// if (loading && isEmpty(ListData)) {
 		// 	return <ListLoader />;
 		// }
 
-		if (!loading && !channelList?.length) {
-			return <EmptyState isMobile />;
-		}
+		// if (!loading && !channelList?.length) {
+		// 	return <EmptyState isMobile />;
+		// }
 
 		return channelList?.map((item) => {
 			const className = id === item?.id ? 'colored' : 'not_color';
 
 			return (
-				<div className={styles.card} onClick={() => setId(item?.id)} className={className}>
-					<Flex direction="column">
-						<div className={styles.serial_id} className={className}>{item?.channel_name}</div>
+				<div className={cl` ${styles.card} ${styles.className}`} onClick={() => setId(item?.id)}>
+					<div div className={styles.card_item}>
 
-						{/* <UpdatedAt className={className}>
-							{formatDate({
+						<div className={styles.serial_id}>{item?.channel_name}</div>
+
+						<div div className={styles.updated_at}>
+							{/* {formatDate({
 								date: item?.updated_at,
 								dateFormat: GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 								timeFormat: GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 								formatType: 'dateTime',
 								separator: ' | ',
-							})}
-						</UpdatedAt> */}
-					</Flex>
+							})} */}
+							'11/11/1111'
+						</div>
+					</div>
 
 					{(MessageContentArr || []).map((obj) =>
 						obj?.mainKey === item?.id && obj[user_id] > 0 && id !== item?.id ? (
@@ -163,7 +145,7 @@ const List = ({
 
 	const handleSelect = (currentStatus) => {
 		refOuter.current.scrollTop = 0;
-		hookSetters.setFilters({ page: 1 });
+		// hookSetters.setFilters({ page: 1 });
 		setStatus(currentStatus);
 	};
 
@@ -197,15 +179,15 @@ const List = ({
 				<div className={styles.sub_container}>
 					<div className={styles.search}>
 						<Input
-							className="primary sm"
-							value={filters?.q}
+							className={styles.input_styles}
+							// value={filters?.q}
 							placeholder="Search for a Shipment ID"
-							onChange={(e) =>
-								hookSetters.setFilters({
-									...(filters || {}),
-									q: e.target?.value,
-								})
-							}
+							// onChange={(e) =>
+							// 	hookSetters.setFilters({
+							// 		...(filters || {}),
+							// 		q: e.target?.value,
+							// 	})
+							// }
 							suffix={<IcMSearchlight />}
 						/>
 						<div className={styles.filter_box}
@@ -230,9 +212,9 @@ const List = ({
 							{renderContent()}
 						</div>
 
-						{loading && !isEmpty(ListData) && !showUnreadChat && (
+						{/* {loading && !isEmpty(ListData) && !showUnreadChat && (
 							<div className={styles.custom_loader}>Loading...</div>
-						)}
+						)} */}
 					</div>
 
 					{isMobile ? (
