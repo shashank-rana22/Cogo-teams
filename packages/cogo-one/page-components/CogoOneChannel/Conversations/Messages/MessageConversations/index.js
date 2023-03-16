@@ -148,16 +148,10 @@ function MessageConversations({
 
 	const countUnreadMessages = () => {
 		const messsageLength = messagesData.length;
-		// let unread = 0;
-		// if (new_user_message_count > messsageLength) {
-		// 	unread = 0;
-		// } else {
-		// 	unread = messsageLength - new_user_message_count;
-		// }
-		const unread = new_user_message_count > messsageLength ? 0 : messsageLength - new_user_message_count;
-		return unread;
+		const unreadIndex = new_user_message_count > messsageLength ? 0 : messsageLength - new_user_message_count;
+		return unreadIndex;
 	};
-	const unread = countUnreadMessages();
+	const unreadIndex = countUnreadMessages();
 	const messageConversation = (
 		<>
 			{loadingPrevMessages
@@ -184,7 +178,7 @@ function MessageConversations({
 						key={eachMessage?.created_at}
 						eachMessage={eachMessage}
 						activeMessageCard={activeMessageCard}
-						messageStatus={channel_type === 'platform_chat' && !(index >= unread)}
+						messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
 					/>
 				)
 			))}
