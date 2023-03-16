@@ -11,7 +11,7 @@
 }
 
 .question_form {
-	margin-bottom: 48px;
+	margin-bottom: 60px;
 }
 
 .form_component {
@@ -20,7 +20,9 @@
 
 .button_container {
 	position: absolute;
+	display: flex;
 	right: 24px;
+	gap: 16px;
 	bottom: 24px;
 }
 

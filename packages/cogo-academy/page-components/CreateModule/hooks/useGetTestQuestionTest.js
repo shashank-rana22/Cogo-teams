@@ -9,7 +9,7 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved }) {
 	const getTestQuestionTest = async ({ questionSetId }) => {
 		try {
 			const res = await trigger({
-				params: { id: questionSetId },
+				params: { id: questionSetId, filters: { status: 'active' } },
 			});
 
 			if (res?.data?.question_count === 0) {

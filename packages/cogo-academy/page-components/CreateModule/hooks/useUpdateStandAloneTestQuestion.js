@@ -13,15 +13,29 @@ function useUpdateStandAloneTestQuestion() {
 		questionSetId,
 		getTestQuestionTest,
 		reset,
-		type = 'edit',
+		testQuestionId,
+		action,
+		setEditDetails,
+		setAllKeysSaved,
 	}) => {
 		try {
 			await trigger({
-				data: getPayload({ values, type, questionSetId, action: 'update' }),
+				data:
+						action === 'delete'
+							? { id: testQuestionId, status: 'inactive' }
+							: getPayload({
+								values,
+								type: 'stand_alone',
+								questionSetId,
+								action,
+								testQuestionId,
+							}),
 			});
 
-			reset();
 			getTestQuestionTest({ questionSetId });
+			setAllKeysSaved(true);
+			setEditDetails({});
+			reset();
 		} catch (err) {
 			console.log(err);
 		}

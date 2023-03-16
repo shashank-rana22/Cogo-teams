@@ -38,15 +38,27 @@ function CreateQuestion({
 		register,
 	} = useForm();
 
+	console.log('getTestQuestionTest', getTestQuestionTest);
+
 	const { createTestQuestion, loading } = useCreateTestQuestion();
 
 	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion();
 
 	const onsubmit = (values) => {
 		if (!isNewQuestion && editDetails?.question_type !== 'case_study') {
-			updateStandAloneTestQuestion({ values, questionSetId, getTestQuestionTest, reset });
+			updateStandAloneTestQuestion({
+				values,
+				questionSetId,
+				getTestQuestionTest,
+				reset,
+				action         : 'update',
+				setAllKeysSaved,
+				setEditDetails,
+				testQuestionId : editDetails?.id,
+			});
+		} else {
+			createTestQuestion({ values, questionSetId, getTestQuestionTest, reset });
 		}
-		createTestQuestion({ values, questionSetId, getTestQuestionTest, reset });
 	};
 
 	const onError = (err) => {
@@ -61,6 +73,20 @@ function CreateQuestion({
 		}
 
 		setAllKeysSaved(true);
+	};
+
+	const handleDeleteStandAloneQuestion = async () => {
+		await updateStandAloneTestQuestion({
+			testQuestionId : editDetails?.id,
+			action         : 'delete',
+			getTestQuestionTest,
+			questionSetId,
+			setEditDetails,
+			setAllKeysSaved,
+			reset,
+		});
+
+		getTestQuestionTest({ questionSetId });
 	};
 
 	useEffect(() => {
@@ -129,6 +155,12 @@ function CreateQuestion({
 					editDetails={editDetails}
 					setValue={setValue}
 					questionTypeWatch={questionTypeWatch}
+					getValues={getValues}
+					setEditDetails={setEditDetails}
+					reset={reset}
+					setAllKeysSaved={setAllKeysSaved}
+					getTestQuestionTest={getTestQuestionTest}
+					questionSetId={questionSetId}
 				/>
 
 				<div className={styles.question_form}>
@@ -157,13 +189,25 @@ function CreateQuestion({
 
 				{!(!isNewQuestion && editDetails?.question_type === 'case_study') ? (
 					<div className={styles.button_container}>
+						{!isNewQuestion
+								&& editDetails?.question_type !== 'case_study' ? (
+									<Button
+										themeType="accent"
+										loading={loading}
+										onClick={() => handleDeleteStandAloneQuestion()}
+										type="button"
+									>
+										Delete Question
+
+									</Button>
+							) : null}
+
 						<Button
 							loading={loading}
 							type="submit"
-							themeType="accent"
+							themeType="primary"
 						>
 							{isNewQuestion ? 'Save Question' : 'Update Question'}
-
 						</Button>
 					</div>
 				) : null}

@@ -5,6 +5,7 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import getElementController from '../../../../../../configs/getElementController';
+import useUpdateCaseStudy from '../../../../hooks/useUpdateCaseStudy';
 
 import getControls from './controls';
 import styles from './styles.module.css';
@@ -19,10 +20,28 @@ const getQuestionType = (question_type) => {
 	return 'Stand Alone';
 };
 
-function BasicDetails({ control, errors, isNewQuestion, editDetails, setValue, questionTypeWatch }) {
+function BasicDetails({
+	control,
+	errors,
+	isNewQuestion,
+	editDetails,
+	setValue,
+	questionTypeWatch,
+	getValues,
+	setEditDetails,
+	setAllKeysSaved,
+	reset,
+	getTestQuestionTest,
+	questionSetId,
+}) {
 	const [showForm, setShowForm] = useState(false);
 
 	const controls = getControls();
+
+	const {
+		loading,
+		updateCaseStudy,
+	} = useUpdateCaseStudy();
 
 	const editForm = () => {
 		setValue('topic', editDetails?.topic);
@@ -37,7 +56,27 @@ function BasicDetails({ control, errors, isNewQuestion, editDetails, setValue, q
 		setShowForm(true);
 	};
 
-	if (!isNewQuestion && !showForm) {
+	const handleUpdateCaseStudy = () => {
+		const formValues = getValues();
+		const { audience_ids, topic, question_text, question_type } = formValues || {};
+
+		updateCaseStudy({
+			values: {
+				audience_ids,
+				topic,
+				question_text,
+				question_type,
+			},
+			id: editDetails?.id,
+			setEditDetails,
+			setAllKeysSaved,
+			reset,
+			getTestQuestionTest,
+			questionSetId,
+		});
+	};
+
+	if (!isNewQuestion && !showForm && editDetails?.question_type === 'case_study') {
 		return (
 			<div className={`${styles.container} ${styles.flex_row} ${styles.flex}`}>
 				{constants.map((item) => (
@@ -96,17 +135,19 @@ function BasicDetails({ control, errors, isNewQuestion, editDetails, setValue, q
 				</div>
 			) : null}
 
-			{!isNewQuestion ? (
+			{!isNewQuestion && editDetails?.question_type === 'case_study' ? (
 				<Button
 					className={styles.edit_button}
 					size="sm"
 					type="button"
+					loading={loading}
+					onClick={() => handleUpdateCaseStudy()}
 				>
 					Edit
 				</Button>
 			) : null}
 
-			{!isNewQuestion ? (
+			{!isNewQuestion && editDetails?.question_type === 'case_study' ? (
 				<div
 					role="presentation"
 					onClick={() => setShowForm(false)}
