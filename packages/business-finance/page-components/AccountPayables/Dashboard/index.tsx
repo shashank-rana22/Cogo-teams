@@ -1,9 +1,11 @@
 import { IcMArrowNext } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
+import TotalPayables from './TotalPayables';
 
 function Dashboard() {
+	const [payablesFilter, setPayablesFilter] = useState('overall');
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
@@ -70,6 +72,8 @@ function Dashboard() {
 					</div>
 				</div>
 			</div>
+			<TotalPayables payablesFilter={payablesFilter} setPayablesFilter={setPayablesFilter} />
+
 		</div>
 	);
 }
