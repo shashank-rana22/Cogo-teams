@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function AllQuestions(props) {
 	const { data } = props;
 	const listdata = data?.list;
-	const truncate = (str) => (str?.length > 28 ? `${str.substring(0, 26)}...` : str);
+	const truncate = (str) => (str?.length > 38 ? `${str.substring(0, 36)}...` : str);
 	const addedQuestionsColumns = () => [
 		{
 			Header   : 'Questions',

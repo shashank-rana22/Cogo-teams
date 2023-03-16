@@ -1,4 +1,4 @@
-import { Pill, Button } from '@cogoport/components';
+import { Pill, Button, Tooltip } from '@cogoport/components';
 import { IcMArrowDown, IcMArrowUp, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { useState, forwardRef } from 'react';
 
@@ -31,11 +31,8 @@ function AllTopic({ props = '' }) {
 		faq_questions = [],
 
 	} = props;
-	console.log(props, 'vfvrfv');
-	// const{
-	// 	topic_wise_disliked_questions=[],
+	const truncate = (str) => (str?.length > 30 ? `${str.substring(0, 28)}...` : str);
 
-	// } = topic_wise_questions
 	const {
 		no_of_questions = '',
 		no_of_likes = '',
@@ -58,7 +55,11 @@ function AllTopic({ props = '' }) {
 
 						}}
 					>
-						{name}
+						<Tooltip content={name} placement="right">
+							<div>
+								{truncate(name)}
+							</div>
+						</Tooltip>
 
 					</Pill>
 

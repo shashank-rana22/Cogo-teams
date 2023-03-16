@@ -35,7 +35,6 @@ function AllQuestionCardView(props = '') {
 		no_of_dislikes = '',
 		no_of_views = '',
 	} = question_stats;
-	console.log(props);
 	const [showQuestions, setShowQuestions] = useState(false);
 	return (
 		<div style={{ marginTop: '1rem', overflow: 'hidden' }}>
