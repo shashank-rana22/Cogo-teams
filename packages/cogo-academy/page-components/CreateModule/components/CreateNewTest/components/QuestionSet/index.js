@@ -1,22 +1,40 @@
-import { Button, Input, ButtonIcon, Table, Checkbox, Breadcrumb } from '@cogoport/components';
+import { Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill } from '@cogoport/components';
 import { IcMSearchlight, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { startCase, format } from '@cogoport/utils';
+import { useState } from 'react';
+
+import useGetTestQuestionSets from '../../../../hooks/useGetTestQuestionSets';
 
 import styles from './styles.module.css';
 
-function QuestionSet({ setShowNewQuestion }) {
-	const list = [];
+function QuestionSet() {
+	const { data, loading } = useGetTestQuestionSets();
+	const [idArray, setIdArray] = useState([]);
+	const handleChange = ({ event, id }) => {
+		if (event.target.checked) {
+			setIdArray([...idArray, id]);
+			return;
+		}
+		const temp = [...idArray];
+		const index = temp.indexOf(id);
+		if (index !== -1) {
+			temp.splice(index, 1);
+			setIdArray([...temp]);
+		}
+	};
+	console.log(idArray, 'after');
 	const columns = [
 		{
 			Header   : '',
 			id       : 'check',
-			accessor : () => (
+			accessor : ({ id = '' }) => (
 				<Checkbox
 					key="hello"
 					name="hello"
 					className={styles.checkbox}
 					// checked={value.includes(nestedOptionValue)}
-					value="hello"
-					// onChange={(event) => { handleChange({ event, name }); }}
+					value={id}
+					onChange={(event) => { handleChange({ event, id }); }}
 					// disabled={disabled}
 				/>
 			),
@@ -24,52 +42,76 @@ function QuestionSet({ setShowNewQuestion }) {
 		{
 			Header   : 'QUESTION SET NAME',
 			id       : 'a',
-			accessor : () => (
+			accessor : ({ name = '' }) => (
 				<section>
-					hello
+					{startCase(name) || '-'}
 				</section>
 			),
 		},
 		{
 			Header   : 'TOPIC',
 			id       : 'b',
-			accessor : () => (
-				<section>hello</section>
+			accessor : ({ topic = '-' }) => (
+				<section>
+					<Pill
+						key={topic}
+						size="sm"
+						color="blue"
+					>
+						{startCase(topic)}
+					</Pill>
+				</section>
 			),
 		},
 		{
 			Header   : 'USER GROUPS',
 			id       : 'c',
-			accessor : () => (
-				<section>hello</section>
+			accessor : ({ audience_ids = [] }) => (
+				<section>
+					{audience_ids.map((audience_id) => (
+						<Pill
+							key={audience_id}
+							size="sm"
+							color="blue"
+						>
+							{startCase(audience_id)}
+						</Pill>
+					))}
+					{audience_ids.length === 0 && '-'}
+				</section>
 			),
 		},
 		{
 			Header   : 'NO. OF QUESTIONS',
 			id       : 'd',
-			accessor : () => (
-				<section>hello</section>
+			accessor : ({ non_case_study_question_count = 0 }) => (
+				<section>{non_case_study_question_count}</section>
 			),
 		},
 		{
 			Header   : 'NO. OF CASES',
 			id       : 'e',
-			accessor : () => (
-				<section>hello</section>
+			accessor : ({
+				case_study_question_count
+				= 0,
+			}) => (
+				<section>{case_study_question_count}</section>
 			),
 		},
 		{
 			Header   : 'NO. OF TESTS USING THE SET',
 			id       : 'f',
-			accessor : () => (
-				<section>hello</section>
+			accessor : ({ set_count = 0 }) => (
+				<section>{set_count}</section>
 			),
 		},
 		{
 			Header   : 'LAST UPDATED',
 			id       : 'g',
-			accessor : () => (
-				<section>hello</section>
+			accessor : ({ updated_at = '' }) => (
+				<section>
+					{format(updated_at, 'dd MMM yyyy')}
+				</section>
 			),
 		},
 	];
@@ -94,8 +136,9 @@ function QuestionSet({ setShowNewQuestion }) {
 			</div>
 			<Table
 				className={styles.table_container}
-				data={[1, 2, 3]}
+				data={data?.list || []}
 				columns={columns}
+				loading={loading}
 			/>
 		</div>
 	);

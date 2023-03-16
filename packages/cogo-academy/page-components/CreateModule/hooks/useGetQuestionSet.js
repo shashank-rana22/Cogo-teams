@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 function useGetTestList() {
 	const [{ loading = false }, trigger] = useRequest({
-		url    : 'list_tests',
+		url    : 'list_question_sets',
 		method : 'GET',
 	}, { manual: true });
 
@@ -19,6 +19,7 @@ function useGetTestList() {
 					...params,
 				},
 			});
+			console.log('resdata:: ', res.data);
 			setListData(res.data);
 		} catch (error) {
 			console.log(error);
