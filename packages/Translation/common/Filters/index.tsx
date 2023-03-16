@@ -55,7 +55,7 @@ function Filters({
 					size="md"
 					placeholder="Search by Original Text "
 				/>
-				<BulkUploadTranslation show={show} setShow={setShow} />
+				<BulkUploadTranslation show={show} setShow={setShow} refetch={refetch} />
 				<CreateRoleModal status={status} refetch={refetch} />
 			</div>
 		</section>

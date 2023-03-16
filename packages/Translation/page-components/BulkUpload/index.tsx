@@ -6,15 +6,15 @@ import useBulkUpload from '../../hooks/useBulkUpload';
 
 import styles from './styles.module.css';
 
-function BulkUploadTranslation({ show, setShow }) {
+function BulkUploadTranslation({ show, setShow, refetch }) {
 	// eslint-disable-next-line max-len
-	const SAMPLE_LINK =	'https://cogoport-production.sgp1.digitaloceanspaces.com/a2f93b327cc6dc1847d4610b45b79793/ItemTaxesUploadSampleFile.xlsx';
+	const SAMPLE_LINK =	'https://cogoport-production.sgp1.digitaloceanspaces.com/23cf9dd949c2735691b0382a901a991c/sample_excel.xlsx';
 
 	const onOuterClick = () => {
 		setShow(false);
 	};
 
-	const { loading, fileUrl, setFileUrl, bulkUpload } = useBulkUpload();
+	const { fileUrl, setFileUrl, bulkUpload } = useBulkUpload({ refetch, setShow });
 
 	const handleChange = (info) => {
 		setFileUrl(info);
@@ -33,30 +33,36 @@ function BulkUploadTranslation({ show, setShow }) {
 				show={show}
 				onClose={() => setShow(false)}
 				onOuterClick={onOuterClick}
-				styles={{ dialog: { overflow: 'visible' } }}
+				style={{ dialog: { overflow: 'visible' } }}
 				width={500}
 			>
 				<Modal.Header title={(<h2>Upload Translation File</h2>)} />
-				<Button
-					className="primary sm"
-					onClick={() => window.open(SAMPLE_LINK, '_blank')}
-					styles={styles.sample_button}
+				<div
+					className={styles.sample_file_button}
 				>
-					Download Sample File Format
-					<IcMDownload width={16} height={16} />
-				</Button>
-				<FileUploader
-					uploadDesc="Upload files"
-					uploadIcon={(
-						<IcMAttach
-							height={40}
-							width={40}
-						/>
-					)}
-					accept=".xlsx"
-					onChange={handleChange}
-					value={fileUrl}
-				/>
+					<Button
+						className="primary sm"
+						onClick={() => window.open(SAMPLE_LINK, '_blank')}
+					>
+						Download Sample File Format
+						<IcMDownload width={16} height={16} />
+					</Button>
+
+				</div>
+				<div className={styles.uploader}>
+					<FileUploader
+						uploadDesc="Upload files"
+						uploadIcon={(
+							<IcMAttach
+								height={40}
+								width={40}
+							/>
+						)}
+						accept=".xlsx"
+						onChange={handleChange}
+						value={fileUrl}
+					/>
+				</div>
 				<Modal.Footer>
 					<Button onClick={bulkUpload}>
 						Upload
