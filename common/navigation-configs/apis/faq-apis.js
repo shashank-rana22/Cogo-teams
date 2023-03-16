@@ -125,6 +125,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'create_test',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 
 	],
 	faq: [

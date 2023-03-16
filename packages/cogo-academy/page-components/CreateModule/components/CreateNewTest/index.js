@@ -13,6 +13,8 @@ function CreateTest() {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 	const [showNewQuestion, setShowNewQuestion] = useState(false);
 	const [formValues, setFormValues] = useState({});
+	const [idArray, setIdArray] = useState([]);
+	const { loading, createTest } = useCreateTest();
 	return (
 		<div>
 			<TestDetails setFormValues={setFormValues} />
@@ -36,7 +38,7 @@ function CreateTest() {
 				</div>
 			)}
 			{/* {showQuestionSet && <QuestionSet setShowNewQuestion={setShowNewQuestion} />} */}
-			<QuestionSet />
+			<QuestionSet setIdArray={setIdArray} />
 			{showNewQuestion && <NewQuestion />}
 			{showNewQuestion && <AddQuestionsForm />}
 			{(showQuestionSet || showNewQuestion) && (
@@ -50,11 +52,12 @@ function CreateTest() {
 					</Button>
 					<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 						<Button
+							loading={loading}
 							size="md"
 							themeType="tertiary"
 							style={{ marginRight: '10px' }}
 							onClick={() => {
-								useCreateTest();
+								createTest({ formValues, idArray });
 							}}
 						>
 							Save As Draft

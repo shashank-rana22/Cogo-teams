@@ -1,5 +1,6 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 
+import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
 function ReviewAndCriteria() {
@@ -7,8 +8,9 @@ function ReviewAndCriteria() {
 		<div>
 			<div className={styles.header}>
 				<IcMArrowBack width={20} height={20} />
-				<div className={styles.title}>New Test</div>
+				<div className={styles.title}>Review and Set Criteria</div>
 			</div>
+			<QuestionsAndDistribution />
 		</div>
 	);
 }
