@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { cl, Popover } from '@cogoport/components';
 import {
 	IcMHappy,
@@ -146,12 +145,9 @@ function MessageConversations({
 
 	);
 
-	const countUnreadMessages = () => {
-		const messsageLength = messagesData.length;
-		const unreadIndex = new_user_message_count > messsageLength ? 0 : messsageLength - new_user_message_count;
-		return unreadIndex;
-	};
-	const unreadIndex = countUnreadMessages();
+	const unreadIndex = new_user_message_count > messagesData.length
+		? 0 : messagesData.length - new_user_message_count;
+
 	const messageConversation = (
 		<>
 			{loadingPrevMessages

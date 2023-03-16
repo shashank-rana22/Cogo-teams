@@ -53,11 +53,11 @@ function Templates({
 	} = useListTemplate({ activeTab });
 
 	const { createTemplate, loading: CreateLoading } = useCreateCommunicationTemplate({
-        	reset: () => {
-        		reset({ title: '', content: '' });
-        	},
-        	refetch,
-        	setOpenCreateReply,
+		reset: () => {
+			reset({ title: '', content: '' });
+		},
+		refetch,
+		setOpenCreateReply,
 	});
 
 	const handleSelect = (val, status, name, id) => {
@@ -104,7 +104,7 @@ function Templates({
 		setShowPreview(false);
 		setActiveCard('');
 		setPreviewData('');
-		templateName('');
+		setTemplateName('');
 	};
 	return (
 		<div className={styles.main_container}>
