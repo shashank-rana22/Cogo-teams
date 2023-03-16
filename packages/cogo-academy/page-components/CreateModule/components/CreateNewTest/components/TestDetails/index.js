@@ -25,14 +25,19 @@ function CreateNewTest() {
 					if (name === 'select_entity_usergroups') {
 						return (
 							<div className={styles.control_container}>
-								<div className={`${styles.label} ${styles.label_type}`}>
+								<div className={`${styles.label}`}>
 									{label}
+									<sup style={{ color: 'red' }}>*</sup>
 								</div>
 								<div className={styles.control_type}>
 
 									{use.map((inp) => (
-										<div>
-											<Element control={control} {...inp} />
+										<div className={styles.input_wrapper}>
+											<Element
+												control={control}
+												{...inp}
+												className={styles[`element_${inp.name}}`]}
+											/>
 											{errors[name] && <div className={styles.error_msg}>This is required</div>}
 										</div>
 									))}
@@ -42,13 +47,14 @@ function CreateNewTest() {
 						);
 					}
 					return (
-						<div className={styles.control_container}>
+						<div className={styles.control_container_two}>
 							<div className={styles.label}>
 								{label}
+								<sup style={{ color: 'red' }}>*</sup>
 							</div>
 
 							<div className={styles.control}>
-								<Element control={control} {...controlItem} />
+								<Element control={control} {...controlItem} className={styles[`element_${name}`]} />
 								{errors[name] && <div className={styles.error_msg}>This is required</div>}
 							</div>
 						</div>
