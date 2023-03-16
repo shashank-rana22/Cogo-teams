@@ -26,13 +26,14 @@ function BlContainer({
 	});
 
 	return (
-		<div>
+		<div className={styles.container}>
 			{/* <FormLayout
 				controls={controls}
 				fields={fields}
 				errors={error}
 				showElements={showElements}
 			/> */}
+			Hii, under construction
 			<Button
 				// onClick={handleSubmit(updateDetails, onError)}
 				className="primary sg"

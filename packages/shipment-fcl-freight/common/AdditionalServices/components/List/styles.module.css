@@ -1,0 +1,78 @@
+
+.Container{
+	padding: 20px 14px;
+}
+
+.not_added{
+	display: flex;
+	justify-content: flex-end;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+	}
+	@media (max-width: 768px) {
+		justify-content: center;
+	}
+}
+
+.add_icon{
+	margin-right: 6px;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.AddedServices{
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.Circle{
+	width: 12px;
+	height: 12px;
+	background: #f7cdcd;
+	margin-right: 8px;
+	border-radius: 50%;
+
+	&.upsell {
+		background: #d9eafd;
+	}
+}
+
+.ServiceName{
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #333333;
+	margin-right: 40px;
+}
+
+.Row{
+	display: flex;
+	align-items: center;
+}
+
+.Heading{
+	margin-bottom: 20px;
+	font-weight: 500;
+	font-size: 14px;
+	color: #363e6e;
+}
+
+.CogoLensDiv{
+	display: flex;
+	flex-direction: column;
+}
+
+.SkeletonWrapper{
+	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.IncidentalChargeDiv{
+	display: flex;
+	width: 100%;
+}
+

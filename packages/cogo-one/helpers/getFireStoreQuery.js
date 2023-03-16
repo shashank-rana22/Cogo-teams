@@ -58,6 +58,11 @@ function getFireStoreQuery({
 				...queryFilters,
 				where('spectators_ids', 'array-contains', filterId),
 			];
+		} else if (item === 'assigned_to_me' && appliedFilters?.[item] === 'me' && !isomniChannelAdmin) {
+			queryFilters = [
+				...queryFilters,
+				where('support_agent_id', '==', userId),
+			];
 		}
 	});
 

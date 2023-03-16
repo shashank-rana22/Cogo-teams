@@ -1,8 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-
-
 function readDirRecursively(dir, fileCallback) {
 	fs.readdirSync(dir).forEach((file) => {
 		const filePath = path.join(dir, file);
@@ -16,7 +14,7 @@ function readDirRecursively(dir, fileCallback) {
 
 // Example usage:
 readDirRecursively(
-	'/Users/rajkamalsingh/Desktop/COGOPORT/cogo-admin/packages/fcl-freight/page-components/Tabs/TimelineAndTasks',
+	'/Users/rk/Documents/Cogoport/cogo-admin/packages/shipment-fcl-freight/common',
 	(filePath) => {
 		if (filePath.includes('styles.js')) {
 			console.log(filePath);
@@ -27,17 +25,18 @@ readDirRecursively(
 
 				// Find and replace text
 				let updatedData = data.replaceAll(
-					"import styled from '@cogoport/front/styled';",
+					'',
 					'',
 				);
 				updatedData = updatedData.replaceAll('export const ', '.');
-				updatedData = updatedData.replaceAll(' = styled.div`', '{');
+				updatedData = updatedData.replaceAll('{', '{');
 				updatedData = updatedData.replaceAll('= styled(Skeleton)`', '{');
 				updatedData = updatedData.replaceAll('`', '}');
 
 				// Write the updated contents back to the file
-				//fs.writeFileSync(filePath, updatedData, 'utf8');
-        const newFilePath = filePath.replaceAll(
+				fs.writeFileSync(filePath, updatedData, 'utf8');
+
+				const newFilePath = filePath.replaceAll(
 					'styles.js',
 					'styles.module.css',
 				);
