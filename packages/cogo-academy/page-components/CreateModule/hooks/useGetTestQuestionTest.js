@@ -9,10 +9,10 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved }) {
 	const getTestQuestionTest = async ({ questionSetId }) => {
 		try {
 			const res = await trigger({
-				params: { id: questionSetId, filters: { status: 'active' } },
+				params: { id: questionSetId },
 			});
 
-			if (res?.data?.question_count === 0) {
+			if (!res?.data?.question_count) {
 				setSavedQuestionDetails([{ id: new Date().getTime(), isNew: true }]);
 				setAllKeysSaved(false);
 			} else {

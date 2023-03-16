@@ -1,4 +1,4 @@
-function getPayload({ values, type, questionSetId, action, testQuestionId }) {
+function getPayload({ values, type, questionSetId, action, testQuestionId, caseStudyQuestionId }) {
 	switch (type) {
 		case 'stand_alone': {
 			const { audience_ids, question = [], topic } = values || {};
@@ -35,8 +35,6 @@ function getPayload({ values, type, questionSetId, action, testQuestionId }) {
 
 		case 'case_study': {
 			const { audience_ids, question_text, case_questions = [], topic, question_type } = values || {};
-
-			console.log('case_questions', case_questions);
 
 			const questions = case_questions.map((item) => {
 				const {

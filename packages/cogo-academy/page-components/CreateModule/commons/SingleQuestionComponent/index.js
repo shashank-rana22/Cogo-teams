@@ -1,6 +1,8 @@
 import { Button } from '@cogoport/components';
 import { SelectController, InputController, ChipsController } from '@cogoport/forms';
 
+import useUpdateCaseStudyQuestion from '../../hooks/useUpdateCaseStudyQuestion';
+
 import getControls from './controls';
 import OptionsComponent from './OptionsComponent';
 import styles from './styles.module.css';
@@ -16,12 +18,47 @@ function SingleQuestionComponent({
 	editAnswerDetails,
 	isNewQuestion,
 	type,
+	editDetails,
+	getValues,
+	questionSetId,
+	getTestQuestionTest,
+	reset,
+	setEditDetails,
+	setAllKeysSaved,
 }) {
 	const controls = getControls();
+
+	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion();
 
 	const handleDelete = () => {
 		if (field.isNew) {
 			remove(index, 1);
+		} else {
+			updateCaseStudyQuestion({
+				action              : 'delete',
+				caseStudyQuestionId : editDetails?.case_questions?.[index],
+				questionSetId,
+				getTestQuestionTest,
+				reset,
+				setEditDetails,
+				setAllKeysSaved,
+			});
+		}
+	};
+
+	const handleUpdateCaseStudyQuestion = () => {
+		const formValues = getValues();
+
+		if (!field.isNew) {
+			updateCaseStudyQuestion({
+				values : formValues?.case_questions?.[index],
+				questionSetId,
+				getTestQuestionTest,
+				reset,
+				setEditDetails,
+				setAllKeysSaved,
+				action : 'update',
+			});
 		}
 	};
 
@@ -73,12 +110,12 @@ function SingleQuestionComponent({
 
 			{type === 'case_study' && !isNewQuestion ? (
 				<div className={styles.button_container}>
-					<Button onClick={() => handleDelete()} themeType="accent" size="sm" type="button">
+					<Button loading={loading} onClick={() => handleDelete()} themeType="accent" size="sm" type="button">
 						Delete
 					</Button>
 
-					<Button size="sm" type="button">
-						Edit
+					<Button loading={loading} onClick={() => handleUpdateCaseStudyQuestion()} size="sm" type="button">
+						{field.isNew ? 'Save' : 'Edit'}
 					</Button>
 				</div>
 

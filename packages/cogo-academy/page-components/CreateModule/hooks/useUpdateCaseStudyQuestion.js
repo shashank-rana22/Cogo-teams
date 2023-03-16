@@ -2,19 +2,18 @@ import { useRequest } from '@cogoport/request';
 
 import getPayload from '../utils/getPayload';
 
-function useUpdateStandAloneTestQuestion() {
+function useUpdateCaseStudyQuestion() {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/update_stand_alone_test_question',
+		url    : '/update_case_study_question',
 	}, { manual: true });
 
-	const updateStandAloneTestQuestion = async ({
-		values,
+	const updateCaseStudyQuestion = async ({
+		action,
+		caseStudyQuestionId,
 		questionSetId,
 		getTestQuestionTest,
-		reset = () => {},
-		testQuestionId,
-		action,
+		reset,
 		setEditDetails,
 		setAllKeysSaved,
 	}) => {
@@ -22,13 +21,13 @@ function useUpdateStandAloneTestQuestion() {
 			await trigger({
 				data:
 						action === 'delete'
-							? { id: testQuestionId, status: 'inactive' }
+							? { id: caseStudyQuestionId, status: 'inactive' }
 							: getPayload({
-								values,
-								type: 'stand_alone',
+								// values,
+								type: 'case_study',
 								questionSetId,
 								action,
-								testQuestionId,
+								caseStudyQuestionId,
 							}),
 			});
 
@@ -43,8 +42,8 @@ function useUpdateStandAloneTestQuestion() {
 
 	return {
 		loading,
-		updateStandAloneTestQuestion,
+		updateCaseStudyQuestion,
 	};
 }
 
-export default useUpdateStandAloneTestQuestion;
+export default useUpdateCaseStudyQuestion;

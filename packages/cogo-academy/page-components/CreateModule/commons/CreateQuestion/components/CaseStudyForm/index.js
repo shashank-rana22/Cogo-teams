@@ -8,7 +8,19 @@ import SingleQuestionComponent from '../../../SingleQuestionComponent';
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function CaseStudyForm({ control, register, errors, isNewQuestion }) {
+function CaseStudyForm({
+	control,
+	register,
+	errors,
+	isNewQuestion,
+	editDetails,
+	getValues,
+	questionSetId,
+	getTestQuestionTest,
+	reset,
+	setEditDetails,
+	setAllKeysSaved,
+}) {
 	const controls = getControls();
 
 	const fieldArrayControls = controls[0];
@@ -35,7 +47,6 @@ function CaseStudyForm({ control, register, errors, isNewQuestion }) {
 		<div className={styles.container}>
 			{fields.map((field, index) => (
 				<div key={field.id} className={styles.field_container}>
-
 					<div className={styles.question_container}>
 						<SingleQuestionComponent
 							control={control}
@@ -46,6 +57,13 @@ function CaseStudyForm({ control, register, errors, isNewQuestion }) {
 							type="case_study"
 							isNewQuestion={isNewQuestion}
 							remove={remove}
+							editDetails={editDetails}
+							getValues={getValues}
+							questionSetId={questionSetId}
+							getTestQuestionTest={getTestQuestionTest}
+							reset={reset}
+							setEditDetails={setEditDetails}
+							setAllKeysSaved={setAllKeysSaved}
 						/>
 
 						{fields.length > 1 && isNewQuestion ? (

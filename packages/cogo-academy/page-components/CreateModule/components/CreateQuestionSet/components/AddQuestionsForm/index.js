@@ -33,7 +33,7 @@ function AddQuestionsForm({
 		<div className={styles.container}>
 			<div className={styles.label}>Questions</div>
 
-			{test_questions.filter((item) => item.id !== editDetails?.id).length > 0 ? (
+			{(test_questions || []).filter((item) => item.id !== editDetails?.id).length > 0 ? (
 				<SavedQuestionDetails
 					savedQuestionDetails={savedQuestionDetails}
 					test_questions={test_questions}
@@ -41,6 +41,8 @@ function AddQuestionsForm({
 					setEditDetails={setEditDetails}
 					allKeysSaved={allKeysSaved}
 					setAllKeysSaved={setAllKeysSaved}
+					questionSetId={questionSetId}
+					getTestQuestionTest={getTestQuestionTest}
 				/>
 			) : null}
 

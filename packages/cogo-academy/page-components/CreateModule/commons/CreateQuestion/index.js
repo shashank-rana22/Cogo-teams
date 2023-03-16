@@ -38,8 +38,6 @@ function CreateQuestion({
 		register,
 	} = useForm();
 
-	console.log('getTestQuestionTest', getTestQuestionTest);
-
 	const { createTestQuestion, loading } = useCreateTestQuestion();
 
 	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion();
@@ -173,6 +171,11 @@ function CreateQuestion({
 							register={register}
 							name="question"
 							isNewQuestion={isNewQuestion}
+							questionSetId={questionSetId}
+							getTestQuestionTest={getTestQuestionTest}
+							reset={reset}
+							setEditDetails={setEditDetails}
+							setAllKeysSaved={setAllKeysSaved}
 						/>
 					) : (
 						<CaseStudyForm
@@ -183,6 +186,13 @@ function CreateQuestion({
 							control={control}
 							register={register}
 							isNewQuestion={isNewQuestion}
+							editDetails={editDetails}
+							getValues={getValues}
+							questionSetId={questionSetId}
+							getTestQuestionTest={getTestQuestionTest}
+							reset={reset}
+							setEditDetails={setEditDetails}
+							setAllKeysSaved={setAllKeysSaved}
 						/>
 					)}
 				</div>
