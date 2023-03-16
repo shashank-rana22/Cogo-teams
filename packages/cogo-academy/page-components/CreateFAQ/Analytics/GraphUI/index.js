@@ -173,18 +173,18 @@ const data = [
 
 function GraphUI() {
   const { pie_data, pie_outer_data } = GraphData();
+
   return (
 	<>
 		<Filters />
 		<div
 			style={{
+          display         : 'flex',
+          justifyContent  : 'space-between',
           margin          : '20px',
           borderRadius    : '10px',
           height          : '400px',
-          width           : '1337px',
           backgroundColor : '#FFF',
-          justifyContent  : 'space-between',
-          display         : 'flex',
 			}}
 		>
 			<div style={{ width: '100%' }}>
@@ -345,29 +345,29 @@ function GraphUI() {
                 },
 						]}
 						legends={[
-              {
-                anchor        : 'bottom',
-                direction     : 'column',
-                justify       : false,
-                translateX    : -150,
-                translateY    : 56,
-                itemsSpacing  : 10,
-                itemWidth     : 80,
-                itemHeight    : 18,
-                itemTextColor : '#999',
-                itemDirection : 'left-to-right',
-                itemOpacity   : 1,
-                symbolSize    : 20,
-                symbolShape   : 'circle',
-                effects       : [
-                  {
-                    on    : 'hover',
-                    style : {
-                      itemTextColor: '#000',
+                {
+                  anchor        : 'bottom',
+                  direction     : 'column',
+                  justify       : false,
+                  translateX    : -150,
+                  translateY    : 56,
+                  itemsSpacing  : 10,
+                  itemWidth     : 80,
+                  itemHeight    : 18,
+                  itemTextColor : '#999',
+                  itemDirection : 'left-to-right',
+                  itemOpacity   : 1,
+                  symbolSize    : 20,
+                  symbolShape   : 'circle',
+                  effects       : [
+                    {
+                      on    : 'hover',
+                      style : {
+                        itemTextColor: '#000',
+                      },
                     },
-                  },
-                ],
-              },
+                  ],
+                },
 						]}
 					/>
 				</div>
@@ -420,36 +420,33 @@ function GraphUI() {
                     id: 'N/A2',
                   },
                   id: 'dots',
-
                 },
-
 						]}
 						legends={[
-              {
-                anchor        : 'bottom',
-                direction     : 'column',
-                justify       : false,
-                translateX    : 140,
-                translateY    : 76,
-                itemsSpacing  : 3,
-                itemWidth     : 80,
-                itemHeight    : 18,
-                itemTextColor : '#999',
-                itemDirection : 'left-to-right',
-                itemOpacity   : 1,
-                symbolSize    : 18,
-                symbolShape   : 'circle',
-                effects       : [
-                  {
-                    on    : 'hover',
-                    style : {
-                      itemTextColor: '#000',
+                {
+                  anchor        : 'bottom',
+                  direction     : 'column',
+                  justify       : false,
+                  translateX    : 140,
+                  translateY    : 76,
+                  itemsSpacing  : 3,
+                  itemWidth     : 80,
+                  itemHeight    : 18,
+                  itemTextColor : '#999',
+                  itemDirection : 'left-to-right',
+                  itemOpacity   : 1,
+                  symbolSize    : 18,
+                  symbolShape   : 'circle',
+                  effects       : [
+                    {
+                      on    : 'hover',
+                      style : {
+                        itemTextColor: '#000',
+                      },
                     },
-                  },
-                ],
-              },
+                  ],
+                },
 						]}
-
 					/>
 				</div>
 			</div>
