@@ -117,7 +117,6 @@ function Answer({ topic = {}, question }) {
 
 		const href = `/v2/${partnerId}/learning/faq`;
 
-		// eslint-disable-next-line no-undef
 		window.open(href);
 	};
 
