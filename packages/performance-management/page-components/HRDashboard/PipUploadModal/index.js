@@ -101,7 +101,6 @@ function PipUloadModal({ setOpenUploadModal = () => {} }) {
 								style={{ width: '120px' }}
 							>
 								PIP
-
 							</Button>
 						</div>
 					</div>

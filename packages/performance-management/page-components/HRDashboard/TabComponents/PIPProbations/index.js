@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Tabs, TabPanel, Modal, Button } from '@cogoport/components';
 import { IcMEdit, IcMUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -8,13 +8,34 @@ import feedbackDataColumns from '../../../../constants/feedback-data-columns';
 import useListEmployees from '../../../../hooks/useListEmployees';
 import UploadModalBody from '../../UploadModal';
 
+import Dashboard from './Dashboard';
 import LogModal from './LogModal';
 import styles from './styles.module.css';
+
+// Todo put it inside constants
+const TAB_PANEL_COMPONENT_MAPPING = {
+	dashboard: {
+		name      : 'dashboard',
+		title     : 'Dashboard',
+		Component : Dashboard,
+	},
+	pending_reviews: {
+		name      : 'pending_reviews',
+		title     : 'Pending Reviews',
+		Component : () => <div>bvnm,,,,</div>,
+	},
+	uploaded_files: {
+		name      : 'uploaded_files',
+		title    	: 'Uploaded Files',
+		Component : () => <div>bvnm,,,,</div>,
+	},
+};
 
 function PIPProbations() {
 	const [openUploadModal, setOpenUploadModal] = useState(false);
 	const [openUpdate, setOpenUpdate] = useState(false);
 	const [item, setItem] = useState({});
+	const [activeTab, setActiveTab] = useState('dashboard');
 
 	const { employeeData = {}, loading = false, params, setPage } = useListEmployees({});
 
@@ -59,10 +80,34 @@ function PIPProbations() {
 	};
 
 	return (
-		<div>
+		<div className={styles.container}>
+			<div>
+				<Tabs
+					activeTab={activeTab}
+					themeType="secondary"
+					onChange={setActiveTab}
+				>
+					{Object.values(TAB_PANEL_COMPONENT_MAPPING).map((tabPanelItem) => {
+						const { name = '', title = '', Component } = tabPanelItem;
+
+						if (!Component) return null;
+
+						return (
+							<TabPanel
+								key={name}
+								name={name}
+								title={title}
+							>
+								<Component />
+							</TabPanel>
+						);
+					})}
+				</Tabs>
+			</div>
+
 			<div className={styles.button_container}>
 				<Button
-					size="lg"
+					size="md"
 					themeType="tertiary"
 					style={{ marginRight: '16px' }}
 					onClick={() => setOpenUploadModal(true)}
@@ -72,7 +117,7 @@ function PIPProbations() {
 				</Button>
 
 				<Button
-					size="lg"
+					size="md"
 					themeType="secondary"
 					onClick={() => setOpenUpdate(true)}
 				>
@@ -102,7 +147,6 @@ function PIPProbations() {
 								<UploadModalBody setOpenUploadModal={setOpenUploadModal} />
 							</Modal.Body>
 						</div>
-
 					</Modal>
 				)}
 

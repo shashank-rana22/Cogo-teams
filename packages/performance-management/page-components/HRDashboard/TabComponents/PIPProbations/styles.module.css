@@ -1,5 +1,13 @@
+.container {
+    position: relative; 
+    margin: 16px 0px;
+}
+
 .button_container {
     display: flex;
     justify-content: flex-end;
-    margin-top: 16px;
+
+    position: absolute;
+    top: 0;
+    right: 0;
 }
