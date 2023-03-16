@@ -78,7 +78,7 @@
 	margin-top: 50px;
 
 	:global {
-		.ui_input_container {
+		.ui_text_area_container {
 			min-height: 230px;
 			font-family: Poppins, sans-serif;
 		}

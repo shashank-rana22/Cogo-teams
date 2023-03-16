@@ -3,7 +3,7 @@ import { useForm, TextAreaController, InputController } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 import controls from '../../configurations/create-instant-reply';
 import { statusMapping, statusColorMapping } from '../../constants';
@@ -20,7 +20,10 @@ function Templates({
 	data = {},
 	type = '',
 }) {
-	const { sendCommunicationTemplate = () => {}, communicationLoading = false } = data || {};
+	const {
+		sendCommunicationTemplate = () => {},
+		communicationLoading = false,
+	} = data || {};
 	const [showPreview, setShowPreview] = useState(false);
 	const [previewData, setPreviewData] = useState();
 	const [templateName, setTemplateName] = useState('');
@@ -31,7 +34,8 @@ function Templates({
 	}));
 	const isDefaultOpen = type === 'defaultOpen';
 
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
+	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole))
+        || false;
 	const {
 		control,
 		handleSubmit,
@@ -49,11 +53,11 @@ function Templates({
 	} = useListTemplate({ activeTab });
 
 	const { createTemplate, loading: CreateLoading } = useCreateCommunicationTemplate({
-		reset: () => {
-			reset({ title: '', content: '' });
-		},
-		refetch,
-		setOpenCreateReply,
+        	reset: () => {
+        		reset({ title: '', content: '' });
+        	},
+        	refetch,
+        	setOpenCreateReply,
 	});
 
 	const handleSelect = (val, status, name, id) => {
@@ -66,7 +70,10 @@ function Templates({
 	};
 
 	const handleClick = () => {
-		sendCommunicationTemplate({ template_name: templateName, type: 'whatsapp' });
+		sendCommunicationTemplate({
+			template_name : templateName,
+			type          : 'whatsapp',
+		});
 	};
 
 	function CreateReactComponent() {
@@ -88,17 +95,17 @@ function Templates({
 		</div>
 	));
 
-	const handleDefaultOpen = useCallback(() => {
-		if (isDefaultOpen) {
-			setShowPreview(true);
-		} else {
-			setShowPreview(false);
-		}
+	useEffect(() => {
+		setShowPreview(isDefaultOpen);
 	}, [isDefaultOpen]);
 
-	useEffect(() => {
-		handleDefaultOpen();
-	}, [handleDefaultOpen]);
+	const createAction = () => {
+		setOpenCreateReply(true);
+		setShowPreview(false);
+		setActiveCard('');
+		setPreviewData('');
+		templateName('');
+	};
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.messages_container}>
@@ -146,11 +153,10 @@ function Templates({
 											id,
 										)}
 										style={{
-											cursor: whatsapp_approval_status
-												!== 'approved'
-											|| openCreateReply
-												? 'not-allowed'
-												: 'pointer',
+											cursor:
+                                                whatsapp_approval_status
+                                                    !== 'approved'
+                                                || openCreateReply ? 'not-allowed' : 'pointer',
 										}}
 									>
 										<div className={styles.wrap}>
@@ -158,8 +164,15 @@ function Templates({
 												{messageTitle}
 											</div>
 											<div>
-												<Pill size="md" color={statusColorMapping[whatsapp_approval_status]}>
-													{statusMapping[whatsapp_approval_status]}
+												<Pill
+													size="md"
+													color={
+                                                        statusColorMapping[whatsapp_approval_status]
+                                                    }
+												>
+													{
+                                                        statusMapping[whatsapp_approval_status]
+                                                    }
 												</Pill>
 											</div>
 										</div>
@@ -184,9 +197,7 @@ function Templates({
 							themeType="accent"
 							size="md"
 							disabled={openCreateReply}
-							onClick={() => {
-								setOpenCreateReply(true); setShowPreview(false); setActiveCard(''); setPreviewData('');
-							}}
+							onClick={createAction}
 						>
 							+ Create Template
 						</Button>
@@ -229,7 +240,7 @@ function Templates({
 							className={styles.button_styles}
 							onClick={() => {
 								setOpenCreateReply((p) => !p);
-								handleDefaultOpen();
+								setShowPreview(isDefaultOpen);
 							}}
 						>
 							Cancel
@@ -258,21 +269,20 @@ function Templates({
 						</div>
 					</div>
 					<div className={styles.create_footer}>
-						{!isDefaultOpen
-							&& (
-								<Button
-									themeType="tertiary"
-									size="md"
-									className={styles.button_styles}
-									onClick={() => {
-										setShowPreview(false);
-										setActiveCard('');
-										setPreviewData('');
-									}}
-								>
-									Cancel
-								</Button>
-							)}
+						{!isDefaultOpen && (
+							<Button
+								themeType="tertiary"
+								size="md"
+								className={styles.button_styles}
+								onClick={() => {
+									setShowPreview(false);
+									setActiveCard('');
+									setPreviewData('');
+								}}
+							>
+								Cancel
+							</Button>
+						)}
 						<Button
 							themeType="accent"
 							size="md"
