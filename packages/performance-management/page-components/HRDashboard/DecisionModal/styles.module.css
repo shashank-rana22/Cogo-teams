@@ -1,0 +1,17 @@
+.container{
+    /* display: flex; */
+    padding-left: 16px 0;
+}
+
+.user_profile {
+	flex: 6;
+	padding-left: 16px 0;
+}
+
+.lable{
+    margin: 16px 0 8px 0;
+}
+
+.dates{
+    margin-top: 16px;
+}
