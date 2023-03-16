@@ -1,9 +1,14 @@
-import { Button } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { format } from '@cogoport/utils';
+import React, { useState } from 'react';
 
+import CreateModal from './CreateModal';
 import styles from './styles.module.css';
 
 function Header() {
+	const [mode, setMode] = useState('');
+	const [showModal, setShowModal] = useState(false);
+
 	return (
 		<div className={styles.container}>
 			<div>
@@ -25,9 +30,33 @@ function Header() {
 				</div>
 			</div>
 
-			<Button>
-				Create New Configuration
-			</Button>
+			<div>
+				<Button onClick={() => { setShowModal(true); }}>
+					Create
+				</Button>
+
+				<Modal
+					size="md"
+					show={showModal}
+					onClose={() => {
+						setShowModal(false);
+						setMode('');
+					}}
+					placement="top"
+				>
+					<Modal.Header title="Create" />
+					<Modal.Body className={styles.modal_body}>
+
+						<CreateModal
+							mode={mode}
+							setMode={setMode}
+						/>
+
+					</Modal.Body>
+
+				</Modal>
+			</div>
+
 		</div>
 	);
 }
