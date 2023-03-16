@@ -1,4 +1,4 @@
-function getPayload({ values, type, questionSetId, action, testQuestionId, caseStudyQuestionId }) {
+function getPayload({ values, type, questionSetId, action, testQuestionId }) {
 	switch (type) {
 		case 'stand_alone': {
 			const { audience_ids, question = [], topic } = values || {};

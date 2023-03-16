@@ -12,7 +12,6 @@
 .table_container {
 	padding: unset !important;
 
-
 	:global {
 		.ui_table_head_row {
 			.ui_table_head_cell {
