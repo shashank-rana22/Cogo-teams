@@ -33,7 +33,7 @@ function BulkUploadTranslation({ show, setShow, refetch }) {
 				show={show}
 				onClose={() => setShow(false)}
 				onOuterClick={onOuterClick}
-				style={{ dialog: { overflow: 'visible' } }}
+				styles={{ dialog: { overflow: 'visible' } }}
 				width={500}
 			>
 				<Modal.Header title={(<h2>Upload Translation File</h2>)} />
