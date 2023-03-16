@@ -4153,6 +4153,12 @@ const partner = {
 			service_name : 'fcl_cfs_rate',
 			feature      : 'rfq',
 		},
+		{
+			api          : 'get_contract_previous_service_providers',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+			feature      : 'live_booking',
+		},
 	],
 	operations_dashboard: [
 		{
