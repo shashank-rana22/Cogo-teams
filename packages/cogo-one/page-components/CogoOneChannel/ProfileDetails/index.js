@@ -33,7 +33,6 @@ function ProfileDetails({
 
 	const {
 		documents_count = 0,
-		documentsList: documentCount = () => {},
 	} = useListOmnichannelDocuments({
 		activeMessageCard,
 		activeVoiceCard,
@@ -61,7 +60,6 @@ function ProfileDetails({
 						orgId={orgId}
 						disableQuickActions={disableQuickActions}
 						documents_count={documents_count}
-						documentCount={documentCount}
 					/>
 				)}
 			</div>

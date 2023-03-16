@@ -3,7 +3,9 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 function useUpdateOmnichannelNewDocument({
-	documentsList = () => {}, singleItem = {}, setSingleItem = () => {},
+	documentsList = () => {},
+	singleItem = {},
+	setSingleItem = () => {},
 	setShowModal = () => {},
 	type = '',
 	fileType = '',
@@ -14,7 +16,7 @@ function useUpdateOmnichannelNewDocument({
 		method : 'post',
 	}, { manual: true });
 
-	const updateNewDocument = async ({ data = {}, documentCount = () => {}, listIds = [] }) => {
+	const updateNewDocument = async ({ data = {}, listIds = [] }) => {
 		const {
 			country_id = '', preferred_languages = [],
 			registration_number = '',
@@ -44,9 +46,7 @@ function useUpdateOmnichannelNewDocument({
 				data: finalPayload,
 			});
 
-			if (type === 'update_count') {
-				documentCount();
-			} else {
+			if (type !== 'update_count') {
 				documentsList();
 				Toast.success('Successfully Uploaded');
 				setShowModal(false);
