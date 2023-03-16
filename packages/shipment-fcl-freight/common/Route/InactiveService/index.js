@@ -64,7 +64,7 @@ function InactiveService({
 						</div>
 
 						{isUpsellServiceAvailable ? (
-							<Button themeType="tertiary">
+							<Button themeType="tertiary" size="xs">
 								<IcMPlus />
 							</Button>
 						) : null}
@@ -75,7 +75,7 @@ function InactiveService({
 							<Icon type={icons[routeLeg?.iconType]} />
 
 							{isUpsellServiceAvailable ? (
-								<Button themeType="tertiary" onClick={handleClick} className={styles.button}>
+								<Button themeType="tertiary" size="xs" onClick={handleClick}>
 									<IcMPlus />
 								</Button>
 							) : null}

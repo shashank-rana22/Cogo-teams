@@ -1,5 +1,5 @@
 
-.Container{
+.container{
 	padding: 20px 14px;
 }
 
@@ -21,13 +21,13 @@
 	font-weight: 400;
 }
 
-.AddedServices{
+.added_services{
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 }
 
-.Circle{
+.circle{
 	width: 12px;
 	height: 12px;
 	background: #f7cdcd;
@@ -39,7 +39,7 @@
 	}
 }
 
-.ServiceName{
+.service_name{
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
@@ -52,26 +52,26 @@
 	align-items: center;
 }
 
-.Heading{
+.heading{
 	margin-bottom: 20px;
 	font-weight: 500;
 	font-size: 14px;
 	color: #363e6e;
 }
 
-.CogoLensDiv{
+.cogo_lens_div{
 	display: flex;
 	flex-direction: column;
 }
 
-.SkeletonWrapper{
+.skeleton_wrapper{
 	display: flex;
 	flex-direction: column;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
-.IncidentalChargeDiv{
+.incidental_charge_div{
 	display: flex;
 	width: 100%;
 }

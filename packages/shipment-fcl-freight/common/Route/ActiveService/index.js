@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 function ActiveService({ routeLeg, data = {} }) {
 	return (
 		<div className={styles.container}>
-			hello
 			<div className={styles.service_info_container}>
 				<div className={styles.icon_container}>
 					<Icon type={icons[routeLeg?.iconType]} />

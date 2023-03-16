@@ -1,11 +1,10 @@
 import { Button, Modal, Accordion } from '@cogoport/components';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
+import { ShipmentDetailContext } from '@cogoport/context';
 import EmptyState from '../../../../../common/EmptyState';
-// import { ShipmentDetailContext } from '../../../../commons/Context';
-// import ManageServices from '../../../../commons/ManageServices';
 // import useListContainerDetails from '../../../hooks/useListContainerDetails';
-import { shipment_data, primary_service, data } from '../dummy_data';
+import { data } from '../dummy_data';
 
 import BlContainer from './BlContainer';
 import ContainerDetails from './ContainerDetails';
@@ -19,9 +18,9 @@ function BLDetails() {
 	const [mappingModal, setMappingModal] = useState(false);
 	const [editContainerNum, setEditContainerNum] = useState(false);
 
-	// const [{ shipment_data, primary_service }] = useContext(
-	// 	ShipmentDetailContext,
-	// );
+	const { shipment_data, primary_service } = useContext(
+		ShipmentDetailContext,
+	);
 
 	// const {
 	// 	list: { data },
@@ -35,8 +34,8 @@ function BLDetails() {
 
 	const loading = false;
 
-	const showConditionForBlContainerBtn = data?.list?.length
-		&& shipment_data?.stakeholder_types?.some((ele) => ['superadmin', 'service_ops2'].includes(ele));
+	const totalContainers = primary_service?.cargo_details
+		.reduce((acc, { containers_count }) => acc + containers_count, 0);
 
 	const renderBlCount = (
 		<div className={styles.bl_count_container}>
@@ -44,68 +43,68 @@ function BLDetails() {
 			<div className="bl-count">
 				(
 				{primary_service?.bls_count || 0}
-				BL’s,
-				{primary_service?.containers_count || 0}
-				Containers)
+				BL’s, &nbsp;
+				{totalContainers || 0}
+				&nbsp;
+				Containers
+				)
 			</div>
-			{showConditionForBlContainerBtn ? (
-				<div className={styles.button_container}>
-					<Button
-						onClick={(e) => {
-							setMappingModal(true);
-							e.stopPropagation();
+
+			<div className={styles.button_container}>
+				<Button
+					onClick={(e) => {
+						setMappingModal(true);
+						e.stopPropagation();
+					}}
+					className="primary sm"
+					style={{ marginLeft: '6px' }}
+				>
+					Bl Container Mapping
+				</Button>
+
+				<Button
+					onClick={(e) => {
+						setEditContainerNum(true);
+						e.stopPropagation();
+					}}
+					className="primary sm"
+				>
+					Update Container Number
+				</Button>
+
+				{mappingModal ? (
+					<Modal
+						show={mappingModal}
+						onClose={() => {
+							setMappingModal(false);
+						}}
+						// position={isMobile ? 'bottom' : ''}
+						// fullscreen={isMobile}
+						className="primary lg"
+					>
+						<BlContainer
+							shipment_data={shipment_data}
+							data={data}
+							setMappingModal={setMappingModal}
+						/>
+					</Modal>
+				) : null}
+
+				{editContainerNum ? (
+					<Modal
+						show={editContainerNum}
+						onClose={() => {
+							setEditContainerNum(false);
 						}}
 						className="primary sm"
-						style={{ marginLeft: '6px' }}
 					>
-						Bl Container Mapping
-					</Button>
-
-					<Button
-						onClick={(e) => {
-							setEditContainerNum(true);
-							e.stopPropagation();
-						}}
-						className="primary sm"
-					>
-						Update Container Number
-					</Button>
-
-					{mappingModal ? (
-						<Modal
-							show={mappingModal}
-							onClose={() => {
-								setMappingModal(false);
-							}}
-							// position={isMobile ? 'bottom' : ''}
-							// fullscreen={isMobile}
-							className="primary lg"
-						>
-							<BlContainer
-								shipment_data={shipment_data}
-								data={data}
-								setMappingModal={setMappingModal}
-							/>
-						</Modal>
-					) : null}
-
-					{editContainerNum ? (
-						<Modal
-							show={editContainerNum}
-							onClose={() => {
-								setEditContainerNum(false);
-							}}
-							className="primary sm"
-						>
-							<ContainerNmUpdate
-								setEditContainerNum={setEditContainerNum}
-								shipment_data={shipment_data}
-								refetch={refetch}
-							/>
-						</Modal>
-					) : null}
-				</div>
-			) : null}
+						<ContainerNmUpdate
+							setEditContainerNum={setEditContainerNum}
+							shipment_data={shipment_data}
+						/>
+					</Modal>
+				) : null}
+			</div>
 		</div>
 	);
 

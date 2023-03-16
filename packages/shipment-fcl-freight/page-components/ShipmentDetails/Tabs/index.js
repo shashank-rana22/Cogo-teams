@@ -13,7 +13,7 @@ function Tab() {
 	const [activeTab, setActiveTab] = useState('overview');
 
 	return (
-		<div style={{ margin: 20 }}>
+		<div style={{ marginTop: 20 }}>
 			<Tabs
 				activeTab={activeTab}
 				fullWidth

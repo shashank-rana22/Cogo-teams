@@ -1,7 +1,8 @@
-import { Input, Button } from '@cogoport/components';;
+import { Input, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
-// import useContainerNumUpdate from '../../../../hooks/useContainerNumUpdate';
+import useUpdateContainerNumber from '../../../../../../hooks/useUpdateContainerNumber';
+
 import styles from './styles.module.css';
 
 function ContainerNmUpdate({
@@ -11,7 +12,7 @@ function ContainerNmUpdate({
 }) {
 	const [containerValue, setContainerValue] = useState({});
 
-	const { handleSubmit, containerDetails, loading } = useContainerNumUpdate(
+	const { handleSubmit, containerDetails, loading } = useUpdateContainerNumber(
 		containerValue,
 		setEditContainerNum,
 		shipment_data,
@@ -19,7 +20,7 @@ function ContainerNmUpdate({
 	);
 
 	const handleChange = (e, container_id) => {
-		setContainerValue({ ...containerValue, [container_id]: e.target?.value });
+		setContainerValue({ ...containerValue, [container_id]: e });
 	};
 
 	return (

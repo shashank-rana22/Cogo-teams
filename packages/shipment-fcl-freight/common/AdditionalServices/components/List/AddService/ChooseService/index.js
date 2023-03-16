@@ -2,9 +2,7 @@ import Pill from '@cogoport/components';
 import startCase from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-// import { ShipmentDetailContext } from '../../../../../commons/Context';
-
-import { shipment_data } from '../../../../../../page-components/ShipmentDetails/Tabs/Overview/dummy_data';
+import { ShipmentDetailContext } from '@cogoport/context';
 
 import FilterService from './FilterServices';
 import { getOtherServiceOptions } from './getOptions';
@@ -20,9 +18,9 @@ function ChooseService({
 	loading,
 	setFilters,
 	filters,
-	setShowPrice = () => {},
-	setShow = () => {},
-	refetch = () => {},
+	setShowPrice = () => { },
+	setShow = () => { },
+	refetch = () => { },
 	serviceCountTotal,
 }) {
 	const tagDisplay = (item) => (
@@ -33,8 +31,7 @@ function ChooseService({
 		</div>
 	);
 
-	// const [contextValues] = useContext(ShipmentDetailContext);
-	// const { shipment_data } = contextValues || {};
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const priceRequest = (item) => (
 		<Price
@@ -62,7 +59,7 @@ function ChooseService({
 
 	return (
 		<div className={styles.container}>
-			Choose SErvice
+			Choose Service
 			{/* <FilterService
 				setFilters={setFilters}
 				filters={filters}

@@ -1,7 +1,7 @@
-import React from 'react';
 import { string } from 'prop-types';
+import React from 'react';
 
-const Icon = (props, ref) => {
+function Icon(props, ref) {
 	const { type, ...rest } = props;
 
 	const { style = {} } = rest || {};
@@ -11,7 +11,7 @@ const Icon = (props, ref) => {
 	return CurrentIcon ? (
 		<CurrentIcon style={style} className="fade-in" ref={ref} {...rest} />
 	) : null;
-};
+}
 
 Icon.propTypes = { type: string.isRequired };
 

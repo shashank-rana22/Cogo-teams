@@ -2,7 +2,7 @@
 
 /* const { Row: GridRow } = Grid1; */
 
-.TitleBlack{
+.title_black{
 	font-weight: normal;
 	font-size: 12px;
 	line-height: 20px;
@@ -65,7 +65,7 @@
 	}
 }
 
-.EstTime{
+.est_time{
 	display: flex;
 	align-items: flex-start;
 	flex-direction: column;
@@ -78,7 +78,7 @@
 	color: #2c3e50;
 }
 
-.ButtonDiv{
+.button_div{
 	display: flex;
 	align-items: center;
 }
@@ -113,7 +113,7 @@
 	}
 }
 
-.BookingDetailsContainer{
+.booking_details_container{
 	padding: 12px 16px;
 	background: white;
 	border: 1px solid #e0e0e0;
@@ -122,7 +122,7 @@
 	width: 300px;
 }
 
-.LabelBook{
+.label_book{
 	margin: 0px;
 	font-weight: bold;
 	font-size: 10px;
@@ -136,7 +136,7 @@
 	width: 100%;
 }
 
-.Value{
+.value{
 	margin: 0px;
 	font-weight: bold;
 	font-size: 12px;
@@ -144,7 +144,7 @@
 	color: #000000;
 	width: 100%;
 }
-.Content{
+.content{
 	padding: 12px 16px;
 	background: white;
 	border: 1px solid #e0e0e0;

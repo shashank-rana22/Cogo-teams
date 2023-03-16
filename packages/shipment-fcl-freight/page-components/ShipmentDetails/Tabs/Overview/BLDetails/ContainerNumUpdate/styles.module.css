@@ -1,3 +1,7 @@
+.container{
+	padding: 12px;
+}
+
 .heading{
 	font-weight: 500;
 	color: #393f70;
@@ -16,9 +20,10 @@
 	display: flex;
 	justify-content: flex-end;
 
-	.secondary.md {
-		margin-right: 12px;
-	}
+	
+}
+.button_container > button:first-child{
+	margin-right: 8px;
 }
 
 .container_num{
