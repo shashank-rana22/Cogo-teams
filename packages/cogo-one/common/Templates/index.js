@@ -3,7 +3,7 @@ import { useForm, TextAreaController, InputController } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import controls from '../../configurations/create-instant-reply';
 import { statusMapping, statusColorMapping } from '../../constants';
@@ -30,13 +30,6 @@ function Templates({
 		userRoleIds: profile.partner?.user_role_ids || [],
 	}));
 	const isDefaultOpen = type === 'defaultOpen';
-	useEffect(() => {
-		if (isDefaultOpen) {
-			setShowPreview(true);
-		} else {
-			setShowPreview(false);
-		}
-	}, [isDefaultOpen]);
 
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
 	const {
@@ -63,14 +56,14 @@ function Templates({
 		setOpenCreateReply,
 	});
 
-	const handleSelect = (val, status, name, Id) => {
+	const handleSelect = (val, status, name, id) => {
 		if (status === 'approved' && !openCreateReply) {
 			setShowPreview(true);
 			setPreviewData(val);
 			setTemplateName(name);
 			setActiveCard((prev) => {
-				if (prev !== Id) {
-					return Id;
+				if (prev !== id) {
+					return id;
 				}
 				return '';
 			});
@@ -100,9 +93,17 @@ function Templates({
 		</div>
 	));
 
-	const handleDefaultOpen = () => {
-		if (isDefaultOpen) { setShowPreview(true); } else { setShowPreview(false); }
-	};
+	const handleDefaultOpen = useCallback(() => {
+		if (isDefaultOpen) {
+			setShowPreview(true);
+		} else {
+			setShowPreview(false);
+		}
+	}, [isDefaultOpen]);
+
+	useEffect(() => {
+		handleDefaultOpen();
+	}, [handleDefaultOpen]);
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.messages_container}>

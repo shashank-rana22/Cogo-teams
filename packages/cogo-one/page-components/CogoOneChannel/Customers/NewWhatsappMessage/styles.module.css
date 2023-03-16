@@ -20,11 +20,8 @@
 	align-items: center;
 	max-width: 361px;
 	padding: 6px 10px;
-	border-right: 1px solid #e0e0e0;
-}
-
-.wrap_heading div {
 	font-size: 16px;
+	border-right: 1px solid #e0e0e0;
 }
 
 .styled_modal_class {
