@@ -5,9 +5,9 @@ import { ResponsivePie } from '@cogoport/charts/pie';
 import useListFaqSearchHistories from '../hooks/ListFaqSearchHistories';
 
 import Filters from './Filters';
+import styles from './styles.module.css';
 
-	const data = [
-
+const data = [
   {
     id    : 'Search',
     color : 'hsl(112, 70%, 50%)',
@@ -66,108 +66,108 @@ import Filters from './Filters';
     id    : 'Answer Available',
     color : 'hsl(71, 70%, 50%)',
     data  : [
-        {
-            x : 'Jan',
-            y : 15,
-          },
-          {
-            x : 'Feb',
-            y : 56,
-          },
-          {
-            x : 'Mar',
-            y : 264,
-          },
-          {
-            x : 'Apr',
-            y : 15,
-          },
-          {
-            x : 'May',
-            y : 154,
-          },
-          {
-            x : 'Jun',
-            y : 264,
-          },
-          {
-            x : 'Jul',
-            y : 27,
-          },
-          {
-            x : 'Aug',
-            y : 8,
-          },
-          {
-            x : 'Sep',
-            y : 182,
-          },
-          {
-            x : 'Oct',
-            y : 79,
-          },
-          {
-            x : 'Nov',
-            y : 254,
-          },
-          {
-            x : 'Dec',
-            y : 140,
-          },
+      {
+        x : 'Jan',
+        y : 15,
+      },
+      {
+        x : 'Feb',
+        y : 56,
+      },
+      {
+        x : 'Mar',
+        y : 264,
+      },
+      {
+        x : 'Apr',
+        y : 15,
+      },
+      {
+        x : 'May',
+        y : 154,
+      },
+      {
+        x : 'Jun',
+        y : 264,
+      },
+      {
+        x : 'Jul',
+        y : 27,
+      },
+      {
+        x : 'Aug',
+        y : 8,
+      },
+      {
+        x : 'Sep',
+        y : 182,
+      },
+      {
+        x : 'Oct',
+        y : 79,
+      },
+      {
+        x : 'Nov',
+        y : 254,
+      },
+      {
+        x : 'Dec',
+        y : 140,
+      },
     ],
   },
   {
     id    : 'Answer Requested',
     color : 'hsl(24, 70%, 50%)',
     data  : [
-        {
-            x : 'Jan',
-            y : 15,
-          },
-          {
-            x : 'Feb',
-            y : 56,
-          },
-          {
-            x : 'Mar',
-            y : 264,
-          },
-          {
-            x : 'Apr',
-            y : 15,
-          },
-          {
-            x : 'May',
-            y : 154,
-          },
-          {
-            x : 'Jun',
-            y : 264,
-          },
-          {
-            x : 'Jul',
-            y : 27,
-          },
-          {
-            x : 'Aug',
-            y : 8,
-          },
-          {
-            x : 'Sep',
-            y : 18,
-          },
-          {
-            x : 'Oct',
-            y : 79,
-          },
-          {
-            x : 'Nov',
-            y : 25,
-          },
-          {
-            x : 'Dec',
-            y : 14,
-          },
+      {
+        x : 'Jan',
+        y : 15,
+      },
+      {
+        x : 'Feb',
+        y : 56,
+      },
+      {
+        x : 'Mar',
+        y : 264,
+      },
+      {
+        x : 'Apr',
+        y : 15,
+      },
+      {
+        x : 'May',
+        y : 154,
+      },
+      {
+        x : 'Jun',
+        y : 264,
+      },
+      {
+        x : 'Jul',
+        y : 27,
+      },
+      {
+        x : 'Aug',
+        y : 8,
+      },
+      {
+        x : 'Sep',
+        y : 18,
+      },
+      {
+        x : 'Oct',
+        y : 79,
+      },
+      {
+        x : 'Nov',
+        y : 25,
+      },
+      {
+        x : 'Dec',
+        y : 14,
+      },
     ],
   },
 ];
@@ -206,183 +206,62 @@ const data2 = [
 ];
 
 function GraphUI() {
-  function ActivePieArc({ centerX, centerY }) {
-    return (
-	<div>
-		<ResponsivePie
-			data={data2}
-			margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-			innerRadius={centerX}
-			padAngle={0.7}
-			cornerRadius={3}
-			activeOuterRadiusOffset={8}
-			borderWidth={1}
-			borderColor={{
-            from      : 'color',
-            modifiers : [
-                [
-                    'darker',
-                    0.2,
-                ],
-            ],
+  return (
+	<>
+		<Filters />
+		<div
+			style={{
+          margin          : '20px',
+          borderRadius    : '10px',
+          height          : '400px',
+          width           : '1337px',
+          backgroundColor : '#FFF',
+          justifyContent  : 'space-between',
+          display         : 'flex',
 			}}
-			enableArcLabels={false}
-			enableArcLinkLabels={false}
-			defs={[
-            {
-                id         : 'dots',
-                type       : 'patternDots',
-                background : 'inherit',
-                color      : 'rgba(255, 255, 255, 0.3)',
-                size       : 4,
-                padding    : 1,
-                stagger    : true,
-            },
-            {
-                id         : 'lines',
-                type       : 'patternLines',
-                background : 'inherit',
-                color      : 'rgba(255, 255, 255, 0.3)',
-                rotation   : -45,
-                lineWidth  : 6,
-                spacing    : 10,
-            },
-			]}
-			fill={[
-            {
-                match: {
-                    id: 'ruby',
-                },
-                id: 'dots',
-            },
-            {
-                match: {
-                    id: 'c',
-                },
-                id: 'dots',
-            },
-            {
-                match: {
-                    id: 'go',
-                },
-                id: 'dots',
-            },
-            {
-                match: {
-                    id: 'python',
-                },
-                id: 'dots',
-            },
-            {
-                match: {
-                    id: 'scala',
-                },
-                id: 'lines',
-            },
-            {
-                match: {
-                    id: 'lisp',
-                },
-                id: 'lines',
-            },
-            {
-                match: {
-                    id: 'elixir',
-                },
-                id: 'lines',
-            },
-            {
-                match: {
-                    id: 'javascript',
-                },
-                id: 'lines',
-            },
-			]}
-			legends={[
-            {
-                anchor        : 'bottom',
-                direction     : 'row',
-                justify       : false,
-                translateX    : 0,
-                translateY    : 56,
-                itemsSpacing  : 0,
-                itemWidth     : 100,
-                itemHeight    : 18,
-                itemTextColor : '#999',
-                itemDirection : 'left-to-right',
-                itemOpacity   : 1,
-                symbolSize    : 18,
-                symbolShape   : 'circle',
-                effects       : [
-                    {
-                        on    : 'hover',
-                        style : {
-                            itemTextColor: '#000',
-                        },
-                    },
-                ],
-            },
-			]}
-		/>
-	</div>
-    );
-  }
-
-	return (
-		<>
-			<Filters />
-			<div style={{
-        margin          : '20px',
-        borderRadius    : '10px',
-        height          : '400px',
-        width           : '1337px',
-        backgroundColor : '#FFF',
-        justifyContent  : 'space-between',
-        display         : 'flex',
-			}}
-			>
-				<div style={{ width: '100%' }}>
-					<ResponsiveLine
-						style={{ flexBasis: '10%' }}
-						data={data}
-						margin={{ right: 10, top: 50, bottom: 50, left: 60 }}
-						xScale={{ type: 'point' }}
-						yScale={{
-            type    : 'linear',
-            min     : 'auto',
-            max     : 'auto',
-            stacked : true,
-            reverse : false,
-						}}
-						yFormat=" >-.2f"
-						axisTop={null}
-						axisRight={null}
-						axisBottom={{
-            orient         : 'bottom',
-            tickSize       : 5,
-            tickPadding    : 5,
-            tickRotation   : 0,
-            legend         : 'transportation',
-            legendOffset   : 36,
-            legendPosition : 'middle',
-						}}
-						axisLeft={{
-            orient         : 'left',
-            tickSize       : 5,
-            tickPadding    : 5,
-            tickRotation   : 0,
-            legend         : 'count',
-            legendOffset   : -40,
-            legendPosition : 'middle',
-						}}
-						pointSize={10}
-						pointColor={{ theme: 'background' }}
-						pointBorderWidth={2}
-						pointBorderColor={{ from: 'serieColor' }}
-						pointLabelYOffset={-14}
-						useMesh
-						legends={[
-            {
+		>
+			<div style={{ width: '100%' }}>
+				<ResponsiveLine
+					style={{ flexBasis: '10%' }}
+					data={data}
+					margin={{ right: 10, top: 50, bottom: 50, left: 60 }}
+					xScale={{ type: 'point' }}
+					yScale={{
+              type    : 'linear',
+              min     : 'auto',
+              max     : 'auto',
+              stacked : true,
+              reverse : false,
+					}}
+					yFormat=" >-.2f"
+					axisTop={null}
+					axisRight={null}
+					axisBottom={{
+              orient         : 'bottom',
+              tickSize       : 5,
+              tickPadding    : 5,
+              tickRotation   : 0,
+              legend         : 'transportation',
+              legendOffset   : 36,
+              legendPosition : 'middle',
+					}}
+					axisLeft={{
+              orient         : 'left',
+              tickSize       : 5,
+              tickPadding    : 5,
+              tickRotation   : 0,
+              legend         : 'count',
+              legendOffset   : -40,
+              legendPosition : 'middle',
+					}}
+					pointSize={10}
+					pointColor={{ theme: 'background' }}
+					pointBorderWidth={2}
+					pointBorderColor={{ from: 'serieColor' }}
+					pointLabelYOffset={-14}
+					useMesh
+					legends={[
+              {
                 anchor            : 'upper-left',
                 direction         : 'row',
                 justify           : false,
@@ -397,20 +276,21 @@ function GraphUI() {
                 symbolShape       : 'circle',
                 symbolBorderColor : 'rgba(0, 0, 0, .5)',
                 effects           : [
-                    {
-                        on    : 'hover',
-                        style : {
-                            itemBackground : 'rgba(0, 0, 0, .03)',
-                            itemOpacity    : 1,
-                        },
+                  {
+                    on    : 'hover',
+                    style : {
+                      itemBackground : 'rgba(0, 0, 0, .03)',
+                      itemOpacity    : 1,
                     },
+                  },
                 ],
-            },
-						]}
-					/>
-				</div>
+              },
+					]}
+				/>
+			</div>
 
-				<div style={{ width: '50%' }}>
+			<div className={styles.pie_container}>
+				<div className={styles.inner_pie}>
 					<ResponsivePie
 						data={data2}
 						margin={{ top: 50, right: 10, bottom: 80, left: 40 }}
@@ -420,116 +300,199 @@ function GraphUI() {
 						activeOuterRadiusOffset={8}
 						borderWidth={1}
 						borderColor={{
-            from      : 'color',
-            modifiers : [
-                [
-                    'darker',
-                    0.2,
-                ],
-            ],
+                from      : 'color',
+                modifiers : [['darker', 0.2]],
 						}}
 						enableArcLabels={false}
 						enableArcLinkLabels={false}
 						defs={[
-            {
-                id         : 'dots',
-                type       : 'patternDots',
-                background : 'inherit',
-                color      : 'rgba(255, 255, 255, 0.3)',
-                size       : 4,
-                padding    : 1,
-                stagger    : true,
-            },
-            {
-                id         : 'lines',
-                type       : 'patternLines',
-                background : 'inherit',
-                color      : 'rgba(255, 255, 255, 0.3)',
-                rotation   : -45,
-                lineWidth  : 6,
-                spacing    : 10,
-            },
+                {
+                  id         : 'dots',
+                  type       : 'patternDots',
+                  background : 'inherit',
+                  color      : 'rgba(255, 255, 255, 0.3)',
+                  size       : 4,
+                  padding    : 1,
+                  stagger    : true,
+                },
+                {
+                  id         : 'lines',
+                  type       : 'patternLines',
+                  background : 'inherit',
+                  color      : 'rgba(255, 255, 255, 0.3)',
+                  rotation   : -45,
+                  lineWidth  : 6,
+                  spacing    : 10,
+                },
 						]}
 						fill={[
-            {
-                match: {
+                {
+                  match: {
                     id: 'ruby',
+                  },
+                  id: 'dots',
                 },
-                id: 'dots',
-            },
-            {
-                match: {
+                {
+                  match: {
                     id: 'c',
+                  },
+                  id: 'dots',
                 },
-                id: 'dots',
-            },
-            {
-                match: {
+                {
+                  match: {
                     id: 'go',
+                  },
+                  id: 'dots',
                 },
-                id: 'dots',
-            },
-            {
-                match: {
+                {
+                  match: {
                     id: 'python',
+                  },
+                  id: 'dots',
                 },
-                id: 'dots',
-            },
-            {
-                match: {
+                {
+                  match: {
                     id: 'scala',
+                  },
+                  id: 'lines',
                 },
-                id: 'lines',
-            },
-            {
-                match: {
+                {
+                  match: {
                     id: 'lisp',
+                  },
+                  id: 'lines',
                 },
-                id: 'lines',
-            },
-            {
-                match: {
+                {
+                  match: {
                     id: 'elixir',
+                  },
+                  id: 'lines',
                 },
-                id: 'lines',
-            },
-            {
-                match: {
+                {
+                  match: {
                     id: 'javascript',
+                  },
+                  id: 'lines',
                 },
-                id: 'lines',
-            },
 						]}
-						layers={[ActivePieArc, 'arcs', 'arcLabels', 'arcLinkLabels', 'legends']}
+					/>
+				</div>
+
+				<div className={styles.outer_pie}>
+					<ResponsivePie
+						data={data2}
+						margin={{ top: 50, right: 10, bottom: 80, left: 40 }}
+						innerRadius={0.8}
+						padAngle={0.7}
+						cornerRadius={3}
+						activeOuterRadiusOffset={8}
+						borderWidth={1}
+						borderColor={{
+                from      : 'color',
+                modifiers : [['darker', 0.2]],
+						}}
+						enableArcLabels={false}
+						enableArcLinkLabels={false}
+						defs={[
+                {
+                  id         : 'dots',
+                  type       : 'patternDots',
+                  background : 'inherit',
+                  color      : 'rgba(255, 255, 255, 0.3)',
+                  size       : 4,
+                  padding    : 1,
+                  stagger    : true,
+                },
+                {
+                  id         : 'lines',
+                  type       : 'patternLines',
+                  background : 'inherit',
+                  color      : 'rgba(255, 255, 255, 0.3)',
+                  rotation   : -45,
+                  lineWidth  : 6,
+                  spacing    : 10,
+                },
+						]}
+						fill={[
+                {
+                  match: {
+                    id: 'ruby',
+                  },
+                  id: 'dots',
+                },
+                {
+                  match: {
+                    id: 'c',
+                  },
+                  id: 'dots',
+                },
+                {
+                  match: {
+                    id: 'go',
+                  },
+                  id: 'dots',
+                },
+                {
+                  match: {
+                    id: 'python',
+                  },
+                  id: 'dots',
+                },
+                {
+                  match: {
+                    id: 'scala',
+                  },
+                  id: 'lines',
+                },
+                {
+                  match: {
+                    id: 'lisp',
+                  },
+                  id: 'lines',
+                },
+                {
+                  match: {
+                    id: 'elixir',
+                  },
+                  id: 'lines',
+                },
+                {
+                  match: {
+                    id: 'javascript',
+                  },
+                  id: 'lines',
+                },
+						]}
 						legends={[
-            {
-                anchor        : 'bottom',
-                direction     : 'row',
-                justify       : false,
-                translateX    : 0,
-                translateY    : 56,
-                itemsSpacing  : 0,
-                itemWidth     : 80,
-                itemHeight    : 18,
-                itemTextColor : '#999',
-                itemDirection : 'left-to-right',
-                itemOpacity   : 1,
-                symbolSize    : 18,
-                symbolShape   : 'circle',
-                effects       : [
+                {
+                  anchor        : 'bottom',
+                  direction     : 'row',
+                  justify       : false,
+                  translateX    : 0,
+                  translateY    : 56,
+                  itemsSpacing  : 0,
+                  itemWidth     : 80,
+                  itemHeight    : 18,
+                  itemTextColor : '#999',
+                  itemDirection : 'left-to-right',
+                  itemOpacity   : 1,
+                  symbolSize    : 18,
+                  symbolShape   : 'circle',
+                  effects       : [
                     {
-                        on    : 'hover',
-                        style : {
-                            itemTextColor: '#000',
-                        },
+                      on    : 'hover',
+                      style : {
+                        itemTextColor: '#000',
+                      },
                     },
-                ],
-            },
+                  ],
+                },
 						]}
 					/>
 				</div>
 			</div>
-		</>
-	);
+		</div>
+	</>
+  );
 }
 export default GraphUI;
