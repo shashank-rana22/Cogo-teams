@@ -1,5 +1,5 @@
-import isSingleLocation from '@cogo/app-search/utils/isSingleLocation';
-import getLocationDetails from '@cogo/app-search/utils/getLocationDetails';
+import getLocationDetails from '@cogoport/app-search/utils/getLocationDetails';
+import isSingleLocation from '@cogoport/app-search/utils/isSingleLocation';
 
 const getPortConfigs = (data, shipment_type) => {
 	if (shipment_type) {

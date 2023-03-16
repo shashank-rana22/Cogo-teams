@@ -1,6 +1,4 @@
-import styled from '@cogoport/front/styled';
-
-export const Container = styled.div`
+export const Container{
 	position: relative;
 
 	.form-item-label {
@@ -8,7 +6,7 @@ export const Container = styled.div`
 	}
 `;
 
-export const ButtonWrap = styled.div`
+export const ButtonWrap{
 	margin-top: 32px;
 	display: flex;
 	justify-content: flex-end;
@@ -19,7 +17,7 @@ export const ButtonWrap = styled.div`
 	}
 `;
 
-export const Heading = styled.div`
+export const Heading{
 	font-weight: 500;
 	font-size: 18px;
 	line-height: 15px;
@@ -29,7 +27,7 @@ export const Heading = styled.div`
 	margin-top: 6px;
 `;
 
-export const Form = styled.div`
+export const Form{
 	overflow: auto;
 	height: calc(100vh - 32.5vh);
 `;

@@ -1,0 +1,11 @@
+.Container{
+	.ui-textarea {
+		padding: 20px;
+	}
+}
+
+.ButtonRow{
+	margin: 12px 0px 0px 0px;
+	display: flex;
+	justify-content: flex-end;
+}

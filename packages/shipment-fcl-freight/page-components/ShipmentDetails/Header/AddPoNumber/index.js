@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import Layout from '@cogoport/bookings/commons/Layout';
+import useAddPoNumber from '@cogoport/bookings/ShipmentDetails/hooks/useAddPoNumber';
 import { Button } from '@cogoport/components';
-import Layout from '@cogo/bookings/commons/Layout';
 import { useFormCogo } from '@cogoport/front/hooks';
-import useAddPoNumber from '@cogo/bookings/ShipmentDetails/hooks/useAddPoNumber';
+import React, { useState } from 'react';
+
 import { controls } from './controls';
 import { Container, Heading, ButtonWrap, Form } from './styles';
 
-const AddPoNumber = ({
+function AddPoNumber({
 	setOpen = () => { },
 	shipment_data = {},
 	refetch = () => { },
-}) => {
+}) {
 	const { loading, onCreate } = useAddPoNumber({
 		shipment_data,
 		setOpen,
@@ -20,7 +21,7 @@ const AddPoNumber = ({
 	const { fields, handleSubmit } = useFormCogo(controls);
 
 	return (
-		<Container>
+		<div className={styles.container}>
 			<Form>
 				<Heading>ADD PO NUMBER</Heading>
 
@@ -45,8 +46,8 @@ const AddPoNumber = ({
 					{loading ? 'Submiting...' : 'Submit'}
 				</Button>
 			</ButtonWrap>
-		</Container>
+		</div>
 	);
-};
+}
 
 export default AddPoNumber;

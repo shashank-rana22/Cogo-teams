@@ -1,0 +1,62 @@
+.HeaderText{
+	font-weight: 500;
+	font-size: 18px;
+	text-transform: capitalize;
+	color: #393f70;
+}
+
+.Container{
+	background: #ffffff;
+}
+
+.CardContainer{
+	background: #ffffff;
+	border-radius: 1px;
+	padding: 24px 16px;
+	display: flex;
+	flex-direction: row;
+	border-bottom: 1px solid #ded7fc;
+	justify-content: space-between;
+}
+
+.ContainerHeader{
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 16px;
+	color: #393f70;
+	margin-right: 12px;
+}
+
+.CustomTag{
+	margin-right: 20px;
+	padding-left: 10px;
+	&.core-ui-tag-root {
+		background-color: #d9eafd;
+	}
+}
+
+.Row{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin-bottom: 40px;
+	.core-ui-select__control {
+		margin-left: 20px;
+		width: 90px;
+	}
+}
+.ButtonContainer{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 20px;
+}
+
+.Content{
+	padding: 0px 16px 24px 16px;
+	.core-ui-select__control {
+		width: 100% !important;
+	}
+}

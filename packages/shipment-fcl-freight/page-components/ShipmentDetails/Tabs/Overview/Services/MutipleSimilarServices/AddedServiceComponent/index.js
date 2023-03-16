@@ -37,7 +37,7 @@ function AddedServiceComponent({
 			{allSimilar > 1 ? (
 				<div
 					onClick={() => setShow(!show)}
-					className={cl`${styles.expander} ${state}`}
+					className={cl`${styles.expander} ${styles.state}`}
 					role="button"
 					tabIndex={0}
 				>
