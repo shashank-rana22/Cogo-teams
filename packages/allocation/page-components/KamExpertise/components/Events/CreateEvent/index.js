@@ -38,7 +38,7 @@ function CreateEvent(props) {
 	const {
 		attributeList,
 		loading,
-		refetch,
+		refetch,	//! Use it or remove it
 		setRuleType = () => {},
 	} = useGetAllocationKamExpertiseRules();
 
@@ -63,9 +63,7 @@ function CreateEvent(props) {
 
 	useEffect(() => {
 		setRuleType(FILTER_ATTRIBUTE_MAPPING[watchListener]);
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [watchListener]);
+	}, [setRuleType, watchListener]);
 
 	return (
 		<div>
@@ -226,7 +224,6 @@ function CreateEvent(props) {
 						size="md"
 						type="button"
 						themeType="tertiary"
-				// onClick={onCloseModal}
 						style={{ marginRight: '10px' }}
 						onClick={onClose}
 					>

@@ -1,132 +1,77 @@
-import { Pill } from '@cogoport/components';
-import { IcMEdit } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { Placeholder } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../../../common/EmptyState';
+
+import EventListItem from './EventListItem';
 import styles from './styles.module.css';
 
-function EventListItem({ data, index, setEventListData, setToggleEvent }) {
-	const {
-		id, condition_name:conditionName = '', expertise_type:Type = '',
-		description = '',
-		rules = [],
-	} = data;
+function EventList(props) {
+	const { list, setEventListData, setToggleEvent, loading } = props;
 
-	const EXPERTISE_MAPPING = {
-		customer_expertise  : 'Customer Expertise',
-		trade_expertise     : 'Trade Expertise',
-		commodity_expertise : 'Commodity Expertise',
-		misc_expertise      : 'Misc Expertise',
-	};
+	if (loading) {
+		return (
+			<>
+				{[1, 2, 3].map(() => (
 
-	const COMPLETION_MAPPING = {
-		completed   : 'Shipment Completion',
-		in_progress : 'Shipment Creation',
-
-	};
-
-	const handleEdit = () => {
-		setEventListData(data);
-		setToggleEvent('updateEvent');
-	};
-
-
-	return (
-
-		<section key={id} className={styles.list_item_container}>
-			<div className={styles.top_div}>
-				#
-				{index + 1}
-				<IcMEdit style={{ cursor: 'pointer' }} onClick={handleEdit} />
-			</div>
-			<div>
-				<p className={styles.info_tag}>
-					Expertise :
-					{' '}
-					<b style={{ marginLeft: 4 }}>{EXPERTISE_MAPPING[Type]}</b>
-				</p>
-				<div className={styles.info_tag}>
-					Event Name :
-					{' '}
-					<h4 style={{ marginLeft: 4 }}>{conditionName}</h4>
-				</div>
-				<p className={styles.info_tag}>
-					Description :
-					{' '}
-					{description}
-
-				</p>
-			</div>
-
-			<div className={styles.rule}>
-				<p className={styles.rule_head}>
-					Rule
-				</p>
-				{rules.map((res, i) => (
-					<div className={styles.rule_body}>
-						<div style={{ marginRight: '4px' }}>
-							Rule #
-							{i + 1}
-
-						</div>
-						<span style={{ marginRight: '4px' }}>
-							<Pill
-								key="Reactivation"
-								size="l"
-								color="blue"
-							>
-
-								{startCase(res?.name)}
-
-							</Pill>
-						</span>
-						<div style={{ marginRight: '4px' }}>
-							is triggered on
+					<section className={styles.list_item_container}>
+						<div className={styles.top_div}>
+							<Placeholder width="20px" style={{ marginBottom: '4px' }} />
 						</div>
 
-						<span style={{ marginRight: '4px' }}>
-							<Pill
-								key="Shipment_creation"
-								size="l"
-								color="#FEF3E9"
-							>
-								{COMPLETION_MAPPING[data?.event_state_on]}
-							</Pill>
-						</span>
+						<div>
+							<p className={styles.info_tag}>
+								<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+							</p>
 
-						of
-						<div style={{ marginRight: '4px' }} />
-						<span style={{ marginRight: '4px' }}>
-							<Pill
-								key="Account"
-								size="l"
-								color="#FEF3E9"
-							>
-								{startCase(res?.rule_type)}
-							</Pill>
-						</span>
-						<span style={{ marginRight: '4px' }}>
-							having attribute and last booking date :
-						</span>
+							<div className={styles.info_tag}>
+								<Placeholder width="120px" style={{ marginBottom: '12px' }} />
+							</div>
 
-						{' '}
-						<span style={{ marginRight: '4px' }}>
-							<Pill
-								key="Account"
-								size="l"
-								color="#FEF3E9"
-							>
-								{startCase(res?.parameters)}
-							</Pill>
-						</span>
+							<p className={styles.info_tag}>
+								<Placeholder width="360px" style={{ marginBottom: '4px' }} />
+							</p>
+						</div>
 
-					</div>
+						<div className={styles.rule}>
+							<p className={styles.rule_head}>
+								<Placeholder width="100px" height="20px" style={{ marginBottom: '4px' }} />
+							</p>
+							{[1, 2].map(() => (
+								<div className={styles.rule_body}>
+									{[1, 2, 3, 4, 5].map(() => (
+										<Placeholder width="120px" style={{ marginBottom: '4px' }} />
+									))}
+								</div>
+							))}
+						</div>
 
+					</section>
 				))}
 
-			</div>
+			</>
+		);
+	}
 
-		</section>
+	if (isEmpty(list)) {
+		return (
+			<div style={{ padding: '48px 0', backgroundColor: '#fff', marginBottom: '12px' }}>
+				<EmptyState height="400px" width="600px" flexDirection="column" />
+			</div>
+		);
+	}
+
+	return (
+		<div>
+			{list.map((data, index) => (
+				<EventListItem
+					data={data}
+					index={index}
+					setEventListData={setEventListData}
+					setToggleEvent={setToggleEvent}
+				/>
+			))}
+		</div>
 	);
 }
-
-export default EventListItem;
+export default EventList;
