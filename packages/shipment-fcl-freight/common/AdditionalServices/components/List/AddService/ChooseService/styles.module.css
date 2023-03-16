@@ -1,6 +1,6 @@
 /* // import { Placeholder } from '@cogoport/components'; */
 
-.PriceDiv{
+.price_div{
 	display: flex;
 	justify-content: flex-end;
 
@@ -9,13 +9,13 @@
 	}
 }
 
-.Container{
+.container{
 	.core-ui-tag-text {
 		font-size: 8px;
 	}
 }
 
-.Loading{
+.loading{
 	font-size: 22px;
 	font-weight: 600;
 	display: flex;
@@ -49,13 +49,13 @@
 	}
 }
 
-.CustomSkeleton{
+.custom_skeleton{
 	width: 100%;
 	height: 70px;
 	margin: 10px 0px;
 }
 
-.LoadingContainer{
+.loading_container{
 	display: flex;
 	justify-content: center;
 	flex-direction: column;

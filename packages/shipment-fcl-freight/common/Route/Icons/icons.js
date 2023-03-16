@@ -7,11 +7,11 @@ import {
 } from '@cogoport/icons-react';
 
 const icons = {
-	air: IcCAir,
-	train: IcCHaulage,
-	ship: IcCFfcl,
-	truck: IcMTrailorFull,
-	custom: IcMCustoms,
+	air    : IcCAir,
+	train  : IcCHaulage,
+	ship   : IcCFfcl,
+	truck  : IcMTrailorFull,
+	custom : IcMCustoms,
 };
 
 export default icons;

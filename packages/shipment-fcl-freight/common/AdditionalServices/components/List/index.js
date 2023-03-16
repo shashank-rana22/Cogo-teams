@@ -4,8 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
-// import { ShipmentDetailContext } from '../../../commons/Context';
-import { shipment_data } from '../../../../page-components/ShipmentDetails/Tabs/Overview/dummy_data';
+import { ShipmentDetailContext } from '../../../context';
 import AddRate from '../AddRate';
 
 import AddService from './AddService';
@@ -28,7 +27,7 @@ function List({
 		scope     : general.scope,
 		isMobile  : general.isMobile,
 	}));
-	// const [{ shipment_data }] = useContext(ShipmentDetailContext);
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const isSops = 	shipment_data?.stakeholder_types?.some((ele) => ['service_ops1', 'service_ops2', 'service_ops3']
 		.includes(ele));
