@@ -89,8 +89,10 @@ function AllTopic({ props = '' }) {
 
 				<div className={styles.button_container}>
 					<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
-						<div style={{ fontWeight: 600 }}>All Questions..</div>
-						{!showQuestions ? <IcMArrowDown /> : <IcMArrowUp />}
+						ALL QUESTIONS
+						{!showQuestions
+							? <IcMArrowDown style={{ marginLeft: 4, marginBottom: 2 }} />
+							: <IcMArrowUp style={{ marginLeft: 4, marginBottom: 2 }} />}
 					</Button>
 				</div>
 			</div>
