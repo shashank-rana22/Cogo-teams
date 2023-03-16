@@ -12,16 +12,16 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 	sort: NestedObj;
-	subActiveTab?:string
+	subActiveTabReject?:string
 	jobNumber?:string
 }
 
-const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab, jobNumber }: Props) => {
+const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject, jobNumber }: Props) => {
 	const getStatus = () => {
-		if (subActiveTab === 'finance_rejected') {
+		if (subActiveTabReject === 'finance_rejected') {
 			return 'FINANCE_REJECTED';
 		}
-		if (subActiveTab === 'coe_rejected') {
+		if (subActiveTabReject === 'coe_rejected') {
 			return 'COE_REJECTED';
 		}
 		return 'INITIATED';

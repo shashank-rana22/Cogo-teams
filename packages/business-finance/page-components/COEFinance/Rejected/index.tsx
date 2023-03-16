@@ -24,30 +24,39 @@ function Rejected({ statsData }) {
 	const { push } = useRouter();
 	const [filters, setFilters] = useState({});
 	const { FINANCE_REJECTED = '', COE_REJECTED = '' } = statsData || {};
-	const [subActiveTab, setSubActiveTab] = useState<string>('finance_rejected');
+	const [subActiveTabReject, setSubActiveTabReject] = useState<string>('finance_rejected');
 
 	const tabComponentProps = {
 		finance_rejected: {
 			filters,
 			setFilters,
-			subActiveTab,
+			subActiveTabReject,
 		},
 		coe_rejected: {
 			filters,
 			setFilters,
-			subActiveTab,
+			subActiveTabReject,
 		},
 	};
 
-	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
+	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTabReject] || null;
+
+	const handleTabChange = (tab) => {
+		setSubActiveTabReject(tab.key);
+
+		push(
+			'/business-finance/coe-finance/[active_tab]/[view]',
+			`/business-finance/coe-finance/rejected/${tab.key}  `,
+		);
+	};
 
 	useEffect(() => {
 		push(
 			'/business-finance/coe-finance/[active_tab]/[view]',
-			`/business-finance/coe-finance/rejected/${subActiveTab}`,
+			`/business-finance/coe-finance/rejected/${subActiveTabReject}`,
 		);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [subActiveTab]);
+	}, [subActiveTabReject]);
 
 	return (
 		<div>
@@ -60,11 +69,11 @@ function Rejected({ statsData }) {
 						<div
 							key={tab.key}
 							onClick={() => {
-								setSubActiveTab(tab.key);
+								handleTabChange(tab);
 							}}
 							role="presentation"
 						>
-							<div className={tab.key === subActiveTab
+							<div className={tab.key === subActiveTabReject
 								? styles.sub_container_click : styles.sub_container}
 							>
 								{tab.label}
@@ -79,7 +88,12 @@ function Rejected({ statsData }) {
 				</div>
 
 			</div>
-			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} {...tabComponentProps[subActiveTab]} />}
+			{ActiveTabComponent && (
+				<ActiveTabComponent
+					key={subActiveTabReject}
+					{...tabComponentProps[subActiveTabReject]}
+				/>
+			)}
 		</div>
 	);
 }
