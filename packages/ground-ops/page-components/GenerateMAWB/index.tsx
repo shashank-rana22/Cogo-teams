@@ -28,6 +28,10 @@ const iataCodeMapping = {
 	'bdef6da0-8353-4b9a-b422-550ebe9c2474' : '14-3-4526/0042',
 };
 
+const agentOtherChargesCode = [{ code: 'AWB', price: '' }, { code: 'PCA', price: '' }];
+const carrierOtherChargesCode = [{ code: 'XRAY', price: '' }, { code: 'AWC', price: '' },
+	{ code: 'AMS', price: '' }, { code: 'CGC', price: '' }];
+
 interface NestedObj {
 	[key: string]: NestedObj | React.FC ;
 }
@@ -117,12 +121,9 @@ function GenerateMAWB({
 		setValue('commodity', edit ? `${taskItem.commodity || ''}`
 			: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
 		setValue('agentOtherCharges', edit ? taskItem.agentOtherCharges
-			: [{ code: 'AWB', price: '' }, { code: 'PCA', price: '' },
-			]);
+			: agentOtherChargesCode);
 		setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
-			: [{ code: 'XRAY', price: '' }, { code: 'AWC', price: '' },
-				{ code: 'AMS', price: '' }, { code: 'CGC', price: '' },
-			]);
+			: carrierOtherChargesCode);
 		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 		setValue('shipperSignature', taskItem.customer_name);
 	}, []);
