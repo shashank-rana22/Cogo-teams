@@ -1,6 +1,8 @@
 .styled_ui_modal_dialog {
 	border-top: none !important;
-
+	max-height: 650px;
+	display: flex;
+	flex-direction: column;
 	:global {
 		.ui_modal_header_title {
 			display: flex !important;
@@ -14,6 +16,7 @@
 		}
 
 		.ui_modal_body_container {
+			max-height: unset !important;
 			border-top: none !important;
 			border-bottom: none !important;
 		}
@@ -60,7 +63,7 @@
 	align-items: center;
 	width: 100%;
 	padding: 10px 0;
-	margin-bottom: 8px;
+	margin-bottom: 6px;
 	border-bottom: 1px solid #e0e0e0;
 }
 
@@ -146,6 +149,7 @@
 }
 
 
+
 .cross_icon {
 	position: absolute;
 	top: 6px;
@@ -171,5 +175,101 @@
 	color: #fc0101;
 	font-size: 11px;
 	margin-left: 8px;
+}
+
+.styled_input {
+	textarea:focus{
+        outline: none;
+    }
+	border: 0!important;
+}
+
+.rte_container {
+	position: relative;
+	overflow-y: auto;
+	max-height: 400px;
+}
+.styled_editor {
+	:global {
+		.notranslate {
+			min-height: 300px;
+		}
+	}
+}
+.attachments_scroll {
+	margin-top: 5px;
+}
+
+.file_uploader_div {
+
+	:global {
+		.file_uploader {
+			height: fit-content !important;
+		}
+
+		.ui_upload_droparea_container {
+			min-height: 0 !important;
+			padding: unset !important;
+			margin-bottom: unset;
+			border: unset;
+		}
+
+		.ui_upload_droparea_heading {
+			display: none;
+		}
+
+		.ui_upload_droparea_subheading {
+			display: none;
+		}
+
+		.ui_upload_filesuccess_container {
+			display: none;
+		}
+	}
+}
+
+.upload_icon {
+	width: 18px;
+	height: 18px;
+	margin-top: 4px;
+}
+
+.uploaded_files {
+	top: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 70%;
+	padding: 5px 10px;
+	margin: 10px;
+	background-color: #f5f5f5;
+}
+
+.uploaded_files_content {
+	display: flex;
+	align-items: center;
+	width: 75%;
+}
+
+.content_div {
+	padding-left: 2px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cross_svg {
+	cursor: pointer;
+}
+
+.attachments_scroll {
+	margin-top: 10px;
+}
+
+.uploading {
+	min-height: 20px;
+	margin: 5px;
+	font-size: 13px;
+	font-weight: 500;
 }
 
