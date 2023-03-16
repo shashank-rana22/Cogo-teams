@@ -8,19 +8,16 @@ import EDIT_CONFIG_CONTROLS_MAPPING from '../../../../../../constants/edit-confi
 
 import styles from './styles.module.css';
 
-function CardItem({ item, editMode }) {
-	const { expertise_type = '', data = [] } = item;
-
+function CardItem({ item, editMode, control}) {
+	const { expertise_type = '', data = [], group_name = '' } = item;
 	const isDoubleLevel = data.length > 1;
 
-	const formProps = useForm();
-
-	const { control } = formProps;
+	const conditionName = data[0].condition_name;
 
 	return (
 		<div className={styles.card_item}>
 			<div className={styles.name_container}>
-				<div className={styles.parameter_name}>{startCase(expertise_type)}</div>
+				<div className={styles.parameter_name}>{startCase(data.length === 1 ? conditionName: group_name)}</div>
 				<div className={styles.icon_container}>
 					<Tooltip content="Lorem ipsum dolor sit amet, consectetur adipiscing elit" placement="top">
 						<div><IcMInfo width={14} height={14} /></div>
@@ -30,7 +27,8 @@ function CardItem({ item, editMode }) {
 			</div>
 
 			{data.map((childItem) => {
-				const { condition_name = '', attributes: controls, id = '' } = childItem;
+				const { condition_name = '', attributes: controls = [], id = '' } = childItem;
+
 
 				return (
 					<>
@@ -43,10 +41,21 @@ function CardItem({ item, editMode }) {
 						) : null}
 
 						<div className={styles.controls_container}>
-							{controls.map((singleField) => {
-								const { name: controlName = '', score } = singleField;
 
-								const controlsObject = EDIT_CONFIG_CONTROLS_MAPPING[controlName];
+							{controls.map((singleField) => {
+								const { name: controlName = '', score, type, label, placeholder, options = [] } = singleField;
+
+								const controlsObject = {
+									name: controlName,
+									type: type,
+									label: label,
+									placeholder: placeholder,
+									options: options || [],
+								}
+
+								// const controlsObject = EDIT_CONFIG_CONTROLS_MAPPING[`${group_name}_${condition_name}_${controlName}`];
+
+								// const controlsObject = EDIT_CONFIG_CONTROLS_MAPPING[controlName];
 
 								const Element = getFieldController(controlsObject.type) || null;
 
@@ -63,9 +72,13 @@ function CardItem({ item, editMode }) {
 												<Element
 													{...controlsObject}
 													control={control}
-													key={controlsObject.name}
-													id={`${expertise_type}_${controlsObject.name}`}
+													key={controlName}
+													id={`${group_name}_${condition_name}_${controlsObject.name}`}
 												/>
+
+												<div className={styles.lower_current_value}>
+													Current value: {startCase(score)}
+												</div>
 											</>
 
 										) : (
@@ -74,7 +87,7 @@ function CardItem({ item, editMode }) {
 													{controlsObject.label}
 												</div>
 												<div className={styles.current_value}>
-													{score}
+													{startCase(score)}
 												</div>
 											</>
 

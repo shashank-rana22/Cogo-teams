@@ -107,7 +107,7 @@ function AllBadges() {
 					)
 					: (modalDetail === '0'
 						&& (
-							<div style={{ }}>
+							<div style={{ background: '#fff', padding: '20px 0', borderRadius: '8px' }}>
 								<EmptyState
 									height={250}
 									width={450}

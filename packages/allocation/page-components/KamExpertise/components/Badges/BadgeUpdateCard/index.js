@@ -2,11 +2,11 @@ import { Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
-import { getFieldController } from '../../../../../../common/Form/getFieldController';
+import { getFieldController } from '../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 
-function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, isLastItem }) {
+function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', watch, isLastItem }) {
 	const { medalType, score = '', inputPlaceHolder = '' } = data;
 
 	const InputElement = getFieldController('number');
@@ -20,10 +20,10 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
-
 			<div className={styles.display_flex} style={{ justifyContent: score ? 'center' : 'flex-start' }}>
 				<div>
 					<p style={{ color: '#4f4f4f', marginBottom: 16 }}>Medal</p>
+
 					<p>{medalType}</p>
 				</div>
 
@@ -31,6 +31,7 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 
 				<div>
 					<p style={{ color: '#4f4f4f' }}>Score</p>
+
 					<InputElement
 						name={`${medalType}_value`}
 						value={score || ''}
@@ -42,9 +43,11 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 							required: 'Score is required',
 						}}
 					/>
+
 					<div className={styles.error_message}>
 						{errors?.[`${medalType}_value_input`]?.message}
 					</div>
+
 				</div>
 			</div>
 
@@ -52,6 +55,7 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 				{`${medalType} Medal`}
 				<IcMInfo className={styles.icm_info} />
 			</div>
+
 			<div className={styles.file_select_style}>
 				<div className={styles.uploader}>
 					<UploadControler
@@ -63,9 +67,11 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 						} : {}}
 					/>
 				</div>
+
 				<div className={styles.error_message}>
 					{errors?.[`${medalType}_img_value`]?.message}
 				</div>
+
 				<div>
 					{ watch(`${medalType}_img_value`)
 						? (
@@ -101,10 +107,8 @@ function GetCard({ data = {}, badgeListData = {}, control, errors = '', watch, i
 						Save
 					</Button>
 				</div>
-
 			)}
-
 		</div>
 	);
 }
-export default GetCard;
+export default BadgeUpdateCard;

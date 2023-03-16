@@ -2,8 +2,8 @@ import { Button } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
+import GetCard from '../BadgeUpdateCard';
 
-import GetCard from './BadgeCard/getCard';
 import styles from './styles.module.css';
 
 const MEDALS_MAPPING = [
@@ -23,7 +23,7 @@ const MEDALS_MAPPING = [
 
 function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	const onClose = () => {
-		setToggleScreen(1);
+		setToggleScreen('badge_details');
 	};
 
 	const {

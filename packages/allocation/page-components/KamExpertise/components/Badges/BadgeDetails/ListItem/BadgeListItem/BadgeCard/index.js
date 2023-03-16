@@ -3,7 +3,7 @@ import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useUpdateSingleBadge from '../../../../../../hooks/useBadgeConfigurationAttributes';
-import GetCard from '../../../../CreateBadge/BadgeCard/getCard';
+import GetCard from '../../../../BadgeUpdateCard';
 
 import styles from './styles.module.css';
 

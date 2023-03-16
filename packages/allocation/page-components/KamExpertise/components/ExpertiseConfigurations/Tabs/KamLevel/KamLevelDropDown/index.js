@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 
-import useKamExpertiseLevelConfig from '../../../../../hooks/useKamExpertiseLevelConfig';
+import useGetKamExpertiseLevelConfig from '../../../../../hooks/useGetKamExpertiseLevelConfig';
 import useUpdateKamScores from '../../../../../hooks/useUpdateKamScores';
 
 import KamLevelDetailsEdit from './KamLevelDetailsEdit';
@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function KamLevelDropDown({ refetch, transition_level }) {
 	const [editMode, setEditMode] = useState(false);
 
-	const { listkamLevelDetails, listrefetch, listLoading } = useKamExpertiseLevelConfig({ transition_level });
+	const { listkamLevelDetails, listrefetch, listLoading } = useGetKamExpertiseLevelConfig({ transition_level });
 
 	const { formProps, onSave } = useUpdateKamScores({
 		transition_level,

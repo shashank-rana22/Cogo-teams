@@ -1,224 +1,324 @@
-import { Placeholder } from '@cogoport/components';
-import { IcCStar } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyState from '../../../../../../common/EmptyState';
+
+import ListItem from './ListItem';
+import LeaderboardLoading from './ListItem/loadingState';
 import styles from './styles.module.css';
 
-const list_data = [
-	{
-		id            : 1,
-		user_name     : 'John Appleseed',
-		total         : 12000,
-		customer_exp  : 12000,
-		trade_exp     : 12000,
-		commodity_exp : 12000,
-		misc_exp      : 12000,
-		badges        : [
-			{
-				url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg',
-			},
-			{
-				url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/silver_badge.svg',
-			},
-			{
-				url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/nautical_ninja_bronze.svg',
-			},
-		],
-	},
-	{
-		id            : 2,
-		user_name     : 'Beatrice Needlespoon',
-		total         : 12000,
-		customer_exp  : 12000,
-		trade_exp     : 12000,
-		commodity_exp : 12000,
-		misc_exp      : 12000,
-		badges        : [],
+const dummy_data = {
+	leaderboardList:
+	[
+		{
+			id                  : '11066f7c-0b7d-4d38-917e-7b02c159c87d',
+			name                : 'John Appleseed',
+			partner_user_id     : '000c8a06-75c8-498d-af19-5e14443eea92',
+			kam_expertise_level : '2',
+			score               : 200,
+			status              : 'active',
+			created_at          : '2023-03-14T14:02:15.318Z',
+			updated_at          : '2023-03-14T14:02:15.318Z',
+			badge_details       : [
+				{
+					id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+					badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+					medal                  : 'gold',
+					image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+					score                  : 5000,
+					status                 : 'active',
+					created_at             : '2023-03-14T06:03:57.044Z',
+					updated_at             : '2023-03-14T13:58:50.619Z',
+				},
+				{
+					id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+					badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+					medal                  : 'gold',
+					image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+					score                  : 5000,
+					status                 : 'active',
+					created_at             : '2023-03-14T06:03:57.044Z',
+					updated_at             : '2023-03-14T13:58:50.619Z',
+				},
+				{
+					id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+					badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+					medal                  : 'gold',
+					image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+					score                  : 5000,
+					status                 : 'active',
+					created_at             : '2023-03-14T06:03:57.044Z',
+					updated_at             : '2023-03-14T13:58:50.619Z',
+				},
+			],
+			// milestone_mappings: [
+			// 	{
+			// 		id                         : '6e14c3fa-5f67-4350-a3e1-ea92b9d6820a',
+			// 		kam_expertise_milestone_id : '5a8dd624-baf8-4e7b-a7e8-098512f8420a',
+			// 		expertise_type             : 'badge',
+			// 		expertise_id               : '5049ac05-d55e-4928-8247-09697aa58575',
+			// 		status                     : 'active',
+			// 		created_at                 : '2023-03-14T14:04:12.683Z',
+			// 		updated_at                 : '2023-03-14T14:04:12.683Z',
+			// 		badge_details              : {
+			// 			id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+			// 			badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+			// 			medal                  : 'gold',
+			// 			image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+			// 			score                  : 5000,
+			// 			status                 : 'active',
+			// 			created_at             : '2023-03-14T06:03:57.044Z',
+			// 			updated_at             : '2023-03-14T13:58:50.619Z',
+			// 		},
+			// 	},
+			// 	{
+			// 		id                         : '6e14c3fa-5f67-4350-a3e1-ea92b9d6820a',
+			// 		kam_expertise_milestone_id : '5a8dd624-baf8-4e7b-a7e8-098512f8420a',
+			// 		expertise_type             : 'badge',
+			// 		expertise_id               : '5049ac05-d55e-4928-8247-09697aa58575',
+			// 		status                     : 'active',
+			// 		created_at                 : '2023-03-14T14:04:12.683Z',
+			// 		updated_at                 : '2023-03-14T14:04:12.683Z',
+			// 		badge_details              : {
+			// 			id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+			// 			badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+			// 			medal                  : 'gold',
+			// 			image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+			// 			score                  : 5000,
+			// 			status                 : 'active',
+			// 			created_at             : '2023-03-14T06:03:57.044Z',
+			// 			updated_at             : '2023-03-14T13:58:50.619Z',
+			// 		},
+			// 	},
+			// 	{
+			// 		id                         : '6e14c3fa-5f67-4350-a3e1-ea92b9d6820a',
+			// 		kam_expertise_milestone_id : '5a8dd624-baf8-4e7b-a7e8-098512f8420a',
+			// 		expertise_type             : 'badge',
+			// 		expertise_id               : '5049ac05-d55e-4928-8247-09697aa58575',
+			// 		status                     : 'active',
+			// 		created_at                 : '2023-03-14T14:04:12.683Z',
+			// 		updated_at                 : '2023-03-14T14:04:12.683Z',
+			// 		badge_details              : {
+			// 			id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+			// 			badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+			// 			medal                  : 'gold',
+			// 			image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+			// 			score                  : 5000,
+			// 			status                 : 'active',
+			// 			created_at             : '2023-03-14T06:03:57.044Z',
+			// 			updated_at             : '2023-03-14T13:58:50.619Z',
+			// 		},
+			// 	},
+			// ],
+			expertise_score: [
+				{ expertise_type: 'commodity_expertise', score: 20 },
+				{ expertise_type: 'customer_expertise', score: 0 },
+				{ expertise_type: 'trade_expertise', score: 10 },
+				{ expertise_type: 'miscellaneous', score: 0 }],
+		},
+		{
+			id                  : '11066f7c-0b7d-4d34-917e-7b02c159c87d',
+			name                : 'Beatrice Needlespoon',
+			partner_user_id     : '000c8a06-75c8-498d-af19-5e14443eea92',
+			kam_expertise_level : '2',
+			score               : 200,
+			status              : 'active',
+			created_at          : '2023-03-14T14:02:15.318Z',
+			updated_at          : '2023-03-14T14:02:15.318Z',
+			badge_details       : [
+				{
+					id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+					badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+					medal                  : 'gold',
+					image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+					score                  : 5000,
+					status                 : 'active',
+					created_at             : '2023-03-14T06:03:57.044Z',
+					updated_at             : '2023-03-14T13:58:50.619Z',
+				},
+			],
+			expertise_score: [
+				{ expertise_type: 'commodity_expertise', score: 20 },
+				{ expertise_type: 'customer_expertise', score: 0 },
+				{ expertise_type: 'trade_expertise', score: 10 },
+				{ expertise_type: 'miscellaneous', score: 0 }],
+		},
+		{
+			id                  : '11066f7c-0b7d-4d38-917e-7b02c109c87d',
+			name                : 'John Appleseed',
+			partner_user_id     : '000c8a06-75c8-498d-af19-5e14443eea92',
+			kam_expertise_level : '2',
+			score               : 200,
+			status              : 'active',
+			created_at          : '2023-03-14T14:02:15.318Z',
+			updated_at          : '2023-03-14T14:02:15.318Z',
+			badge_details       : [
+				{
+					id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+					badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+					medal                  : 'gold',
+					image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+					score                  : 5000,
+					status                 : 'active',
+					created_at             : '2023-03-14T06:03:57.044Z',
+					updated_at             : '2023-03-14T13:58:50.619Z',
+				},
+				{
+					id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+					badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+					medal                  : 'gold',
+					image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+					score                  : 5000,
+					status                 : 'active',
+					created_at             : '2023-03-14T06:03:57.044Z',
+					updated_at             : '2023-03-14T13:58:50.619Z',
+				},
+			],
+			expertise_score: [
+				{ expertise_type: 'commodity_expertise', score: 20 },
+				{ expertise_type: 'customer_expertise', score: 0 },
+				{ expertise_type: 'trade_expertise', score: 10 },
+				{ expertise_type: 'miscellaneous', score: 0 }],
+		},
+		{
+			id                  : '11066f7c-0b7d-4d34-917e-7b02c159c89d',
+			name                : 'Beatrice Needlespoon',
+			partner_user_id     : '000c8a06-75c8-498d-af19-5e14443eea92',
+			kam_expertise_level : '2',
+			score               : 200,
+			status              : 'active',
+			created_at          : '2023-03-14T14:02:15.318Z',
+			updated_at          : '2023-03-14T14:02:15.318Z',
+			expertise_score     : [
+				{ expertise_type: 'commodity_expertise', score: 20 },
+				{ expertise_type: 'customer_expertise', score: 0 },
+				{ expertise_type: 'trade_expertise', score: 10 },
+				{ expertise_type: 'miscellaneous', score: 0 }],
+		},
+		{
+			id                  : '11066f7c-0b7d-4d38-927e-7b02c159c87d',
+			name                : 'John Appleseed',
+			partner_user_id     : '000c8a06-75c8-498d-af19-5e14443eea92',
+			kam_expertise_level : '2',
+			score               : 200,
+			status              : 'active',
+			created_at          : '2023-03-14T14:02:15.318Z',
+			updated_at          : '2023-03-14T14:02:15.318Z',
+			expertise_score     : [
+				{ expertise_type: 'commodity_expertise', score: 20 },
+				{ expertise_type: 'customer_expertise', score: 0 },
+				{ expertise_type: 'trade_expertise', score: 10 },
+				{ expertise_type: 'miscellaneous', score: 0 }],
+		},
+		{
+			id                  : '11066f7c-0b7d-4d34-917e-7b12c159c87d',
+			name                : 'John Appleseed',
+			partner_user_id     : '000c8a06-75c8-498d-af19-5e14443eea92',
+			kam_expertise_level : '2',
+			score               : 200,
+			status              : 'active',
+			created_at          : '2023-03-14T14:02:15.318Z',
+			updated_at          : '2023-03-14T14:02:15.318Z',
+			badge_details       : [
+				{
+					id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+					badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+					medal                  : 'gold',
+					image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+					score                  : 5000,
+					status                 : 'active',
+					created_at             : '2023-03-14T06:03:57.044Z',
+					updated_at             : '2023-03-14T13:58:50.619Z',
+				},
+				{
+					id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+					badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+					medal                  : 'gold',
+					image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+					score                  : 5000,
+					status                 : 'active',
+					created_at             : '2023-03-14T06:03:57.044Z',
+					updated_at             : '2023-03-14T13:58:50.619Z',
+				},
+				{
+					id                     : '5049ac05-d55e-4928-8247-09697aa58575',
+					badge_configuration_id : 'd07cfcd2-f559-43b2-b005-f7e064e3f333',
+					medal                  : 'gold',
+					image_url              : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/514b4b2fac2b40c8f40657f982c1ac29/ascendant.webp',
+					score                  : 5000,
+					status                 : 'active',
+					created_at             : '2023-03-14T06:03:57.044Z',
+					updated_at             : '2023-03-14T13:58:50.619Z',
+				},
+			],
+			expertise_score: [
+				{ expertise_type: 'commodity_expertise', score: 20 },
+				{ expertise_type: 'customer_expertise', score: 0 },
+				{ expertise_type: 'trade_expertise', score: 10 },
+				{ expertise_type: 'miscellaneous', score: 0 }],
+		},
+	],
+	page        : 1,
+	total       : 1,
+	total_count : 1,
+	page_limit  : 10,
+};
 
-	},
-	{
-		id            : 3,
-		user_name     : 'John Appleseed',
-		total         : 12000,
-		customer_exp  : 12000,
-		trade_exp     : 12000,
-		commodity_exp : 12000,
-		misc_exp      : 12000,
-		badges        : [
-			{
-				url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg',
-			},
-		],
-	},
-	{
-		id            : 4,
-		user_name     : 'Beatrice Needlespoon',
-		total         : 12000,
-		customer_exp  : 12000,
-		trade_exp     : 12000,
-		commodity_exp : 12000,
-		misc_exp      : 12000,
-		badges        : [],
+function LeaderboardList(props) {
+	const {
+		leaderboardLoading = false,
+		// ! using dummy data, as the api is still being written
+		// leaderboardList = [],
+		// paginationData,
+		getNextPage,
+	} = props;
 
-	},
-	{
-		id            : 5,
-		user_name     : 'John Appleseed',
-		total         : 12000,
-		customer_exp  : 12000,
-		trade_exp     : 12000,
-		commodity_exp : 12000,
-		misc_exp      : 12000,
-		badges        : [],
-	},
-];
+	const { leaderboardList = [], ...paginationData } = dummy_data || {};
 
-function LeaderboardList() {
-	const router = useRouter();
+	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
+
+	if ((leaderboardLoading)) {
+		return (
+			<div>
+				{
+					leaderboardList?.map((data) => (
+						<LeaderboardLoading id={data?.id} />
+					))
+				}
+			</div>
+		);
+	}
+
+	if (isEmpty(leaderboardList)) {
+		return (
+			<div className={styles.empty_state}>
+				<EmptyState
+					width={450}
+					height={250}
+					flexDirection="column"
+					textSize="20px"
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 
-			{list_data.map((data, index) => (
-				// ! loading state logic
-
-				false
-					? (
-						<div
-							key={data.id}
-							className={styles.card}
-						>
-							<div className={styles.card_description}>
-								<div className={styles.card_description_left}>
-									<div>
-										<div
-											className={styles.user_name}
-										>
-											<Placeholder width="100px" height="16px" />
-										</div>
-										<div>
-											<Placeholder width="100px" height="16px" />
-										</div>
-									</div>
-								</div>
-								<div className={styles.badge_container}>
-									<div className={styles.badges_loading}>
-										{
-											data.badges.length > 0 ? (data.badges.map(() => (
-												<div key={data.badges.url} style={{ marginBottom: '4px' }}>
-													<Placeholder width="48px" height="48px" style={{ marginRight: '28px' }} />
-												</div>
-											))) : ''
-										}
-									</div>
-								</div>
-
-								<div className={styles.card_description_right}>
-									<div>
-										<div style={{ color: '#333333', paddingBottom: '8px' }}>
-											<Placeholder width="100px" height="16px" />
-
-										</div>
-										<div><b><Placeholder width="100px" height="16px" /></b></div>
-									</div>
-									<div>
-										<div style={{ color: '#333333', paddingBottom: '8px' }}>
-											<Placeholder width="100px" height="16px" />
-
-										</div>
-										<div><b><Placeholder width="100px" height="16px" /></b></div>
-									</div>
-									<div>
-										<div style={{ color: '#333333', paddingBottom: '8px' }}>
-											<Placeholder width="100px" height="16px" />
-
-										</div>
-										<div><b><Placeholder width="100px" height="16px" /></b></div>
-									</div>
-									<div>
-										<div style={{ color: '#333333', paddingBottom: '8px' }}>
-											<Placeholder width="100px" height="16px" />
-
-										</div>
-										<div><b><Placeholder width="100px" height="16px" /></b></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					)
-					: (
-						<div
-							key={data.id}
-							className={styles.card}
-						>
-							<div className={styles.card_description}>
-								<div className={styles.card_description_left}>
-									<div className={styles.index}>
-										{index + 1}
-									</div>
-									<div>
-										<div
-											className={styles.user_name}
-										>
-											{data.user_name}
-										</div>
-										<div>
-											Total:&nbsp;
-											<b>{data.total}</b>
-										</div>
-									</div>
-								</div>
-								<div className={styles.badge_container}>
-									<div className={styles.badges}>
-										{
-                                data.badges.length > 0 ? (data.badges.map((value) => (
-	<div key={data.badges.url} className={styles.badge_item}>
-		<img src={value.url} alt="badge" width={48} height={48} />
-		<div className={styles.star}>
-			{Array(3).fill('').map(() => (
-				<IcCStar width={10} stroke="#FFDF33" />
+			{leaderboardList?.map((data, index) => (
+				<ListItem data={data} index={index} />
 			))}
-		</div>
-	</div>
-                                ))) : ''
-                            }
-									</div>
-									<span className={styles.link}>
-										{data.badges.length > 1
-											? (
-												<span
-													role="presentation"
-													style={{ cursor: 'pointer' }}
-													onClick={() => router.push('/badges')}
-												>
-													View More
-												</span>
-											) : ''}
-									</span>
-								</div>
 
-								<div className={styles.card_description_right}>
-									<div className={styles.exp}>
-										<div style={{ color: '#333333', paddingBottom: '8px' }}>Customer Exp.</div>
-										<div><b>{data.customer_exp}</b></div>
-									</div>
-									<div className={styles.exp}>
-										<div style={{ color: '#333333', paddingBottom: '8px' }}>Trade Exp.</div>
-										<div><b>{data.trade_exp}</b></div>
-									</div>
-									<div className={styles.exp}>
-										<div style={{ color: '#333333', paddingBottom: '8px' }}>Commodity Exp.</div>
-										<div><b>{data.commodity_exp}</b></div>
-									</div>
-									<div className={styles.exp}>
-										<div style={{ color: '#333333', paddingBottom: '8px' }}>Misc Exp.</div>
-										<div><b>{data.misc_exp}</b></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					)
-			))}
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={getNextPage}
+				/>
+			</div>
 		</div>
 	);
 }

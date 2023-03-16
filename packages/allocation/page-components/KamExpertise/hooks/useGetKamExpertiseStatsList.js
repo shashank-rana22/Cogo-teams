@@ -2,7 +2,8 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-function useGetLeaderboard() {
+function useGetKamExpertiseStatsList() {
+	const [searchKAM, setSearchKAM] = useState('');
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 	const [badgeName, setBadgeName] = useState('');
 	const [params, setParams] = useState({
@@ -28,6 +29,13 @@ function useGetLeaderboard() {
 		}));
 	}, [searchQuery, badgeName]);
 
+	const [{ loading, data }, refetch] = useAllocationRequest({
+		url     : '/kam_expertise_stats_list',
+		method  : 'GET',
+		authkey : 'get_allocation_kam_expertise_stats_list',
+		params,
+	});
+
 	const getNextPage = (newPage) => {
 		setParams((pv) => ({
 			...pv,
@@ -35,19 +43,14 @@ function useGetLeaderboard() {
 		}));
 	};
 
-	const [{ loading, data }, refetch] = useAllocationRequest({
-		url     : '/kam_expertise_leaderboard',
-		method  : 'GET',
-		authkey : 'get_allocation_kam_expertise_leaderboard',
-		params,
-	});
-
-	const [leaderboardList = [], ...paginationData] = data || {};
+	const { leaderboardList = [], ...paginationData } = data || {};
 
 	return {
-		loading,
+		leaderboardLoading : loading,
 		leaderboardList,
-		listRefetch: refetch,
+		listRefetch        : refetch,
+		searchKAM,
+		setSearchKAM,
 		setBadgeName,
 		debounceQuery,
 		paginationData,
@@ -55,4 +58,4 @@ function useGetLeaderboard() {
 	};
 }
 
-export default useGetLeaderboard;
+export default useGetKamExpertiseStatsList;
