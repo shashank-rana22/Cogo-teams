@@ -5,7 +5,6 @@ import styles from './styles.module.css';
 
 function LeaderboardLoading(id) {
 	return (
-
 		<div
 			key={id}
 			className={styles.card}
@@ -13,7 +12,7 @@ function LeaderboardLoading(id) {
 			<div className={styles.card_description}>
 				<div className={styles.card_description_left}>
 					<div>
-						<div className={styles.user_name}>
+						<div className={styles.kam_name}>
 							<Placeholder width="100px" height="16px" />
 						</div>
 						<div>
