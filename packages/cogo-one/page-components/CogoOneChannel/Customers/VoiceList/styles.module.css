@@ -87,7 +87,7 @@
 }
 
 .list_container {
-	height: 74vh;
+	height: 85%;
 	overflow-y: auto;
 
 	@media (max-width: 1280px) {

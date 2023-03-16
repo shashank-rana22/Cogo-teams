@@ -3,7 +3,7 @@
 }
 
 .message_container {
-	height: 400px;
+	height: 470px;
 	padding-top: 20px;
 	overflow-y: scroll;
 }
@@ -78,16 +78,6 @@
 
 .text_area_container {
 	margin-top: 50px;
-
-	:global {
-		.ui_text_area_control {
-			min-height: 230px !important;
-		}
-
-		.ui_input_control {
-			font-family: Poppins, sans-serif !important;
-		}
-	}
 }
 
 .loader_div {

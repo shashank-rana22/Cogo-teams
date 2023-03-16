@@ -1,22 +1,3 @@
-.list_container {
-	height: calc(100% - 155px);
-	overflow-y: auto;
-
-	@media (max-width: 1280px) {
-		height: calc(100% - 95px);
-	}
-}
-
-.list_container::-webkit-scrollbar {
-	display: none;
-}
-
-.empty_container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
 .empty_state {
 	display: flex;
 	align-items: center;

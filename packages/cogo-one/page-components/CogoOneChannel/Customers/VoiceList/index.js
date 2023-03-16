@@ -81,7 +81,7 @@ function VoiceList({
 										<img
 											src={VOICE_ICON_MAPPING[callStatus(item)]}
 											className={styles.avatar}
-											alt=""
+											alt="voice_icon"
 										/>
 										{callStatus(item) === 'missed' && (
 											<div className={styles.activity_duration}>
