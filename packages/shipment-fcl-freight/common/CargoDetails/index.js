@@ -1,6 +1,6 @@
-import CargoDetailPills from '../cargo-details';
 import ServiceDetails from '../MultiServiceDetails';
 
+import RenderCargoPills from './RenderCargoPills';
 import styles from './styles.module.css';
 
 function CargoDetails({ primary_service, shipment_data }) {
@@ -27,12 +27,12 @@ function CargoDetails({ primary_service, shipment_data }) {
 
 	return (
 		<div className={`${styles.container} ${styles.shipment_cargo_details_root}`}>
-			<CargoDetailPills detail={newPrimaryService || {}} />
+			<RenderCargoPills detail={newPrimaryService || {}} />
 
 			{isMultiService ? (
 				<ServiceDetails mainServices={mainServices}>
 					+
-					{mainServices?.length - 1}
+					{mainServices.length - 1}
 					Details
 				</ServiceDetails>
 			) : null}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CargoDetails from '../../cargo-details';
+import CargoDetails from '../../CargoDetails/RenderCargoPills';
 import Icon from '../Icons/Icon';
 import icons from '../Icons/icons';
 
