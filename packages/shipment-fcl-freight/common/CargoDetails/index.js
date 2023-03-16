@@ -16,9 +16,8 @@ function CargoDetails({ primary_service }) {
 					/>
 					<MultiServiceDetails mainServices={primary_service?.cargo_details}>
 						+
-						{' '}
 						{(primary_service?.cargo_details?.length || 1) - 1}
-						{' '}
+						{ ' '}
 						Details
 					</MultiServiceDetails>
 				</div>

@@ -20,11 +20,11 @@ function MultiServiceDetails({
 	}
 
 	const renderBody = () => (
-			{mainServices?.map((item) => (
-				<div className={styles.container}>
-					<RenderCargoPills detail={item} className="details" />
-				</div>
-			))}
+		mainServices?.map((item) => (
+			<div className={styles.container}>
+				<RenderCargoPills detail={item} className="details" />
+			</div>
+		))
 	);
 
 	return (
@@ -51,7 +51,7 @@ function MultiServiceDetails({
 					{children}
 				</Button>
 			) : (
-				<>{children}</>
+				{ children }
 			)}
 		</Popover>
 	);
