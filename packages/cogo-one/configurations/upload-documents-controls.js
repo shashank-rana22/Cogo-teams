@@ -1,6 +1,6 @@
 import PATTERNS from '@cogoport/constants/patterns';
 
-// eslint-disable-next-line import/no-relative-packages
+// eslint-disable-next-line
 import countries from '../../../.data-store/constants/countries.json';
 
 const getControls = (fileType = '') => {

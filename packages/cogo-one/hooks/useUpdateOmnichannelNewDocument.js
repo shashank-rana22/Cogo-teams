@@ -1,12 +1,16 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
+
+const EmptyFunction = () => {};
+const EmptyObject = {};
 
 function useUpdateOmnichannelNewDocument({
-	documentsList = () => {},
-	singleItem = {},
-	setSingleItem = () => {},
-	setShowModal = () => {},
+	documentsList = EmptyFunction,
+	singleItem = EmptyObject,
+	setSingleItem = EmptyFunction,
+	setShowModal = EmptyFunction,
 	type = '',
 	fileType = '',
 
@@ -16,7 +20,7 @@ function useUpdateOmnichannelNewDocument({
 		method : 'post',
 	}, { manual: true });
 
-	const updateNewDocument = async ({ data = {}, listIds = [] }) => {
+	const updateNewDocument = useCallback(async ({ data = {}, listIds = [] }) => {
 		const {
 			country_id = '', preferred_languages = [],
 			registration_number = '',
@@ -55,7 +59,7 @@ function useUpdateOmnichannelNewDocument({
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
-	};
+	}, [documentsList, fileType, setShowModal, setSingleItem, singleItem, trigger, type]);
 
 	return {
 		updateNewDocument,
