@@ -34,7 +34,7 @@ const labels = [
  * @param {Object}      					props
  * @param {Array of Object} 				[props.detail=[{}]] - Specifies details of cargo
  */
-function CargoDetails({ detail }) {
+function RenderCargoPills({ detail }) {
 	return (
 		<>
 			{labels.map((label) => {
@@ -51,4 +51,4 @@ function CargoDetails({ detail }) {
 		</>
 	);
 }
-export default CargoDetails;
+export default RenderCargoPills;

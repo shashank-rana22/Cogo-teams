@@ -21,7 +21,7 @@ const feedback = [
 		api          : 'get_shipment',
 		access_type  : 'private',
 		feature      : 'feedback',
-		service_name : 'shipment',
+		service_name : 'bookings',
 	},
 ];
 

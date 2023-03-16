@@ -1,7 +1,7 @@
 import { Popover, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import ContainerInfo from '../cargo-details';
+import ContainerInfo from '../CargoDetails/RenderCargoPills';
 
 import styles from './styles.module.css';
 

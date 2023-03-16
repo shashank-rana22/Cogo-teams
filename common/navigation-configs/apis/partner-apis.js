@@ -6369,7 +6369,7 @@ const partner = {
 		{
 			api          : 'get_shipment',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'bookings',
 		},
 		{
 			api          : 'list_organization_invoicing_parties',
@@ -6494,7 +6494,7 @@ const partner = {
 		{
 			api          : 'get_shipment',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'bookings',
 		},
 		{
 			api          : 'list_organization_invoicing_parties',
@@ -6631,7 +6631,7 @@ const partner = {
 		{
 			api          : 'get_shipment',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'bookings',
 		},
 		{
 			api          : 'list_organization_invoicing_parties',

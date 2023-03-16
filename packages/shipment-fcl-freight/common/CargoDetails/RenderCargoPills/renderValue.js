@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/constants/globals.json';
 import { IcMOpenlink } from '@cogoport/icons-react';
 import { startCase, upperCase } from '@cogoport/utils';
 
-import formatDate from '../../utils/formatDate';
+import { formatDate } from '../../../utils/formatDate';
 
 import styles from './styles.module.css';
 
@@ -18,7 +18,7 @@ export const renderValue = (label, detail) => {
 
 	const chargableWeight = isLTL
 		? detail?.chargable_weight || detail?.weight
-		: Math.max(detail?.volume * 166.67, detail?.weight);
+		: Math.max(detail.volume * 166.67, detail?.weight);
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`

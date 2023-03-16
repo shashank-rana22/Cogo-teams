@@ -1,18 +1,33 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 
-import Header from './Header';
+import { ShipmentDetailContext } from '../../common/context';
+import useGetShipment from '../../hooks/useGetShipment';
+import useListShipmentServices from '../../hooks/useListShipmentServices';
+
+import ShipmentInfo from './ShipmentInfo';
 import Tab from './Tabs';
 import Timeline from './TimeLine';
-import { ShipmentChat } from '@cogoport/shipment-chat';
+import TopBar from './TopBar';
+import { ShipmentChat } from '../../../../common/shipment-chat';
 
 function ShipmentDetails() {
+	const { get } = useGetShipment();
+
+	const { servicesGet } = useListShipmentServices();
+
+	const contextValues = useMemo(() => ({
+		...get,
+		...servicesGet,
+	}), [get, servicesGet]);
+
 	return (
-		<div>
+		<ShipmentDetailContext.Provider value={contextValues}>
 			<ShipmentChat />
-			<Header />
+			<ShipmentInfo />
+			<TopBar />
 			<Timeline />
 			<Tab />
-		</div>
+		</ShipmentDetailContext.Provider>
 	);
 }
 
