@@ -1,65 +1,98 @@
-import { Pill } from '@cogoport/components';
-import { IcMArrowLeft, IcMFilter, IcMPin, IcMArrowRight } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+/* eslint-disable max-len */
+import { IcMArrowLeft, IcMFilter, IcMArrowRight } from '@cogoport/icons-react';
+import { isEmpty, format, startCase } from '@cogoport/utils';
 
-import DummyInboxData from '../../configurations/dummy-data-inboxes';
+import useListMail from '../../hooks/useListMail';
 
+import MailLoading from './MailLoading';
 import styles from './styles.module.css';
 
-function MailDetails({ activeSelect = '', setShowContent = () => {}, setActiveSelect = () => {} }) {
+function MailDetails({
+	activeSelect = '',
+	setShowContent = () => {},
+	setActiveSelect = () => {},
+	setActiveMail = () => {},
+}) {
+	const { data = {}, loading } = useListMail({ activeSelect });
+	const {
+		value: list = [],
+		handleScroll = () => {},
+	} = data || {};
+
 	const handleClick = () => {
 		setActiveSelect('');
 		setShowContent(false);
 	};
 
+	function lastMessagePreview(previewData = '') {
+		return (
+			<div
+				role="presentation"
+				dangerouslySetInnerHTML={{ __html: previewData }}
+			/>
+		);
+	}
+
+	if (loading) {
+		return <MailLoading />;
+	}
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.header}>
-				<div className={styles.left_div}>
-					<IcMArrowLeft className={styles.arrow_left} onClick={handleClick} />
-					<div className={styles.title}>{startCase(activeSelect.replace('_', ' '))}</div>
+		<div>
+			<div className={styles.container}>
+				<div className={styles.header}>
+					<div className={styles.left_div}>
+						<IcMArrowLeft className={styles.arrow_left} onClick={handleClick} />
+						<div className={styles.title}>{startCase(activeSelect.replace('_', ' '))}</div>
+					</div>
+					<IcMFilter className={styles.filter_icon} />
 				</div>
-				<IcMFilter className={styles.filter_icon} />
-			</div>
-			<div className={styles.list_container}>
-				{DummyInboxData.map((itm) => {
-					const { recipient, time, subject, message, tags, pin } = itm || {};
-					return (
-
-						<div className={styles.content}>
-							{(tags && pin) && (
-								<div className={styles.top_div}>
-									<div className={styles.tag_wrapper}>
-										<Pill size="md" color="#FDEBE9">Escalated</Pill>
-										<Pill size="md" color="#CFEAED">Shipment</Pill>
+				{isEmpty(list || []) && !loading ? (
+					<div className={styles.empty_div}>
+						No Data Found...
+					</div>
+				) : (
+					<div
+						className={styles.list_container}
+						onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
+					>
+						{(list || []).map((itm) => {
+							const { subject = '', sentDateTime = '', sender, bodyPreview = '' } = itm || {};
+							const { emailAddress } = sender || {};
+							const { name = '' } = emailAddress || {};
+							return (
+								<div
+									role="presentation"
+									className={styles.content}
+									onClick={() => setActiveMail(itm)}
+								>
+									<div className={styles.recipient_div}>
+										<div className={styles.recipient_left}>
+											<img
+												src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/share_reply.svg"
+												alt="reply"
+												className={styles.reply_back}
+											/>
+											<div className={styles.recipient_name}>{name}</div>
+										</div>
+										<div className={styles.recipient_right}>
+											<div className={styles.time}>{format(sentDateTime, 'HH:mm a')}</div>
+											<div className={styles.right_arrow}><IcMArrowRight fill="#BDBDBD" /></div>
+										</div>
 									</div>
-									<IcMPin className={styles.pin_icon} />
+									<div className={styles.message_div}>
+										<div className={styles.subject_container}>{subject}</div>
+										<div className={styles.message_content}>{lastMessagePreview(bodyPreview)}</div>
+									</div>
 								</div>
-							)}
-							<div className={styles.recipient_div}>
-								<div className={styles.recipient_left}>
-									<img
-										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/share_reply.svg"
-										alt="reply"
-										className={styles.reply_back}
-									/>
-									<div className={styles.recipient_name}>{recipient}</div>
-								</div>
-								<div className={styles.recipient_right}>
-									<div className={styles.time}>{time}</div>
-									<div className={styles.right_arrow}><IcMArrowRight fill="#BDBDBD" /></div>
-								</div>
-							</div>
-							<div className={styles.message_div}>
-								<div className={styles.subject_container}>{subject}</div>
-								<div className={styles.message_content}>{message}</div>
-							</div>
-						</div>
 
-					);
-				})}
+							);
+						})}
+					</div>
+				)}
 			</div>
 		</div>
+
 	);
 }
 export default MailDetails;

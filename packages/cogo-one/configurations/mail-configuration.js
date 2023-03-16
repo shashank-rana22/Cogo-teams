@@ -23,14 +23,14 @@ export const MailOptions = [
 			alt="inbox"
 		/>,
 	},
-	{
-		label : 'Tagged',
-		value : 'tagged',
-		icon  : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam.svg"
-			alt="inbox"
-		/>,
-	},
+	// {
+	// 	label : 'Tagged',
+	// 	value : 'tagged',
+	// 	icon  : <img
+	// 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam.svg"
+	// 		alt="inbox"
+	// 	/>,
+	// },
 ];
 
 export const Gmailoptions = [

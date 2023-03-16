@@ -18,6 +18,10 @@
 	}
 }
 
+.content:hover {
+	background-color: #fdfbf6;
+}
+
 .left_div {
 	display: flex;
 	align-items: center;

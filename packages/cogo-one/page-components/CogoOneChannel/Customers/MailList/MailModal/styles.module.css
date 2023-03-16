@@ -120,7 +120,7 @@
 	}
 }
 
-.error_input_container{
+.error_input_container {
 	display: flex;
 	height: 28px;
 	padding: 3px 8px;
@@ -129,27 +129,27 @@
 	border-radius: 6px;
 
 	&:hover {
-		border: 1px solid #FF0000;
+		border: 1px solid #f00;
 	}
 
 	&:focus {
-		border: 1px solid #FF0000 !important;
+		border: 1px solid #f00 !important;
 	}
 
 	&:focus-within {
-		border: 1px solid #FF0000 !important;
+		border: 1px solid #f00 !important;
 	}
 
 	&:focus-visible {
-		outline: #FF0000 solid 0.2px !important;
+		outline: #f00 solid 0.2px !important;
 	}
 }
-
 
 .cross_icon {
 	position: absolute;
 	top: 6px;
 	left: 144px;
+	cursor: pointer;
 
 	svg {
 		width: 14px;
@@ -162,14 +162,13 @@
 	display: flex;
 }
 
-.tag_and_errorcontainer{
+.tag_and_errorcontainer {
 	display: flex;
 	flex-direction: column;
 }
 
-.error_content_container{
-	color: #fc0101;
-	font-size: 11px;
+.error_content_container {
 	margin-left: 8px;
+	font-size: 11px;
+	color: #fc0101;
 }
-

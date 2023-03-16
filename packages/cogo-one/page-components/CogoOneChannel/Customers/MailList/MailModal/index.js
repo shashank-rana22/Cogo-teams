@@ -21,7 +21,7 @@ function MailModal({ showMailModal, setShowMailModal }) {
 			<div className={styles.title}>New Message</div>
 			<div className={styles.right_header}>
 				<IcMAttach />
-				<Button size="md" themeType="link" onClick={() => setShowMailModal(true)}>Cancel</Button>
+				<Button size="md" themeType="link" onClick={() => setShowMailModal(false)}>Cancel</Button>
 			</div>
 		</>
 	);

@@ -13,6 +13,8 @@ function MailList() {
 	const [activeSelect, setActiveSelect] = useState('');
 	const [showContent, setShowContent] = useState(false);
 	const [showMailModal, setShowMailModal] = useState(false);
+	const [activeMail, setActiveMail] = useState({});
+	console.log('activeMail:', activeMail);
 
 	const handleClick = (val) => {
 		setActiveSelect(val);
@@ -35,11 +37,15 @@ function MailList() {
 					activeSelect={activeSelect}
 					setShowContent={setShowContent}
 					setActiveSelect={setActiveSelect}
+					setActiveMail={setActiveMail}
 				/>
 			)}
 
 			{showMailModal && (
-				<MailModal showMailModal={showMailModal} setShowMailModal={setShowMailModal} />
+				<MailModal
+					showMailModal={showMailModal}
+					setShowMailModal={setShowMailModal}
+				/>
 			)}
 		</div>
 	);
