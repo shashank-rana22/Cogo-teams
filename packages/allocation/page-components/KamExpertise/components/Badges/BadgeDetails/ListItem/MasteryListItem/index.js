@@ -65,7 +65,6 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryListData
 
 					<div className={styles.badge}>
 						<img
-							height={140}
 							style={{ objectFit: 'contain' }}
 							src={data.badge_details?.[0].image_url}
 							alt="Mastery Modal"
