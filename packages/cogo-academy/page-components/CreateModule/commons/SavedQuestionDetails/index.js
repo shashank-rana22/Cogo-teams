@@ -1,5 +1,5 @@
 import { Tooltip, Button, Table, Pagination } from '@cogoport/components';
-import { IcMOverflowDot, IcMDelete, IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -20,17 +20,28 @@ const getCorrectAnswers = ({ answers }) => {
 	return correctAnswers.join(', ');
 };
 
-function SavedQuestionDetails({ savedQuestionDetails, test_questions }) {
-	console.log('test_questions', test_questions);
+function SavedQuestionDetails({
+	savedQuestionDetails,
+	test_questions,
+	setEditDetails,
+	editDetails,
+	allKeysSaved,
+	setAllKeysSaved,
+}) {
+	const handleEditQuestion = ({ item }) => {
+		setAllKeysSaved(false);
+		setEditDetails(item);
+	};
+
 	const columns = [
 		{
 			Header   : 'Topic',
-			id       : 'a',
+			id       : 'topic',
 			accessor : ({ topic }) => <section>{topic}</section>,
 		},
 		{
 			Header   : 'Question Type',
-			id       : 'c',
+			id       : 'question_type',
 			accessor : ({ question_type }) => (
 				<section>
 					{question_type === 'case_study' ? 'Case Study' : 'Stand Alone'}
@@ -39,28 +50,28 @@ function SavedQuestionDetails({ savedQuestionDetails, test_questions }) {
 		},
 		{
 			Header   : 'Question/Case',
-			id       : 'd',
+			id       : 'question_text',
 			accessor : ({ question_text }) => <section>{question_text}</section>,
 		},
 		{
 			Header   : 'Answer Type',
-			id       : 'ss',
+			id       : 'answer_type',
 			accessor : ({ question_type }) => <section>{startCase(question_type)}</section>,
 		},
 		{
 			Header   : 'Answer Key',
-			id       : 'e',
+			id       : 'answer_key',
 			accessor : ({ answers }) => <section>{getCorrectAnswers({ answers })}</section>,
 		},
 		{
 			Header   : 'Difficulty Level',
-			id       : 'ik',
+			id       : 'difficulty_level',
 			accessor : ({ difficulty_level = 'High' }) => <section>{difficulty_level}</section>,
 		},
 		{
 			Header   : '',
 			id       : 'options',
-			accessor : () => (
+			accessor : (item) => (
 				<section>
 					<div
 						style={{
@@ -72,17 +83,21 @@ function SavedQuestionDetails({ savedQuestionDetails, test_questions }) {
 							className={styles.tooltip_pad}
 							content={(
 								<div className={styles.options}>
-									<Button themeType="secondary" className={styles.btn}>
+									<Button
+										type="button"
+										onClick={() => handleEditQuestion({ item })}
+										themeType="secondary"
+										disabled={!allKeysSaved}
+										className={styles.btn}
+									>
 										<IcMEdit />
 										<div style={{ marginLeft: '8px' }}>Edit</div>
 									</Button>
-									<Button themeType="secondary" className={styles.btn}>
-										<IcMEyeopen />
-										<div style={{ marginLeft: '8px' }}>View</div>
-									</Button>
+
 									<Button
 										themeType="secondary"
 										className={styles.btn}
+										disabled={!allKeysSaved}
 									>
 										<IcMDelete />
 										<div style={{ marginLeft: '8px' }}>Delete</div>
@@ -101,13 +116,13 @@ function SavedQuestionDetails({ savedQuestionDetails, test_questions }) {
 		},
 	];
 
-	console.log('savedQuestionDetails', test_questions);
+	console.log('editDetails', editDetails);
 
 	return (
 		<div className={styles.table_container}>
 			<Table
 				className={styles.table_container}
-				data={test_questions}
+				data={test_questions.filter((item) => item.id !== editDetails?.id)}
 				columns={columns}
 			/>
 

@@ -1,9 +1,9 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useGetTestList() {
+function useGetTestQuestionSets() {
 	const [{ loading = false }, trigger] = useRequest({
-		url    : 'list_tests',
+		url    : 'list_test_question_sets',
 		method : 'GET',
 	}, { manual: true });
 
@@ -37,4 +37,4 @@ function useGetTestList() {
 	};
 }
 
-export default useGetTestList;
+export default useGetTestQuestionSets;

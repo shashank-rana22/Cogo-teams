@@ -33,7 +33,8 @@ function CreateTest() {
 					</Button>
 				</div>
 			)}
-			{showQuestionSet && <QuestionSet setShowNewQuestion={setShowNewQuestion} />}
+			{/* {showQuestionSet && <QuestionSet setShowNewQuestion={setShowNewQuestion} />} */}
+			<QuestionSet />
 			{showNewQuestion && <NewQuestion />}
 			{showNewQuestion && <AddQuestionsForm />}
 			{(showQuestionSet || showNewQuestion) && (

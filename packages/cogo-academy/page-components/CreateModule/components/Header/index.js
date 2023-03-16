@@ -9,7 +9,7 @@ function Header() {
 	return (
 		<div className={styles.flex_div}>
 			<div className={styles.title}>Test Module</div>
-			<Button onClick={() => router.push('/test-module/create')}>+ Create New Test</Button>
+			<Button onClick={() => router.push('/learning/faq/create/test-module/create')}>+ Create New Test</Button>
 		</div>
 	);
 }
