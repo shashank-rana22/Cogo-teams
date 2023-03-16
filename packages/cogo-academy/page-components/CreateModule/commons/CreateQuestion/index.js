@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useCreateTestQuestion from '../../hooks/useCreateTestQuestion';
@@ -10,18 +12,27 @@ import BasicDetails from './components/BasicDetails';
 import CaseStudyForm from './components/CaseStudyForm';
 import styles from './styles.module.css';
 
-function CreateQuestion({ index, questionSetId, getTestQuestionTest, item, setSavedQuestionDetails, setAllKeysSaved }) {
+function CreateQuestion({
+	index,
+	questionSetId,
+	getTestQuestionTest,
+	item,
+	setSavedQuestionDetails,
+	setAllKeysSaved,
+	editDetails,
+	setEditDetails,
+}) {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
 
-	const { isNew = true, id } = item || {};
+	const { isNew = false, id } = item || {};
 
 	const {
 		watch,
 		handleSubmit = () => {},
 		formState: { errors = {} },
 		reset,
-		// setValue,
-		// getValues,
+		setValue,
+		getValues,
 		control,
 		register,
 	} = useForm();
@@ -37,7 +48,9 @@ function CreateQuestion({ index, questionSetId, getTestQuestionTest, item, setSa
 	};
 
 	const deleteQuestion = () => {
-		if (isNew) {
+		if (!isEmpty(editDetails)) {
+			setEditDetails({});
+		} else if (isNew) {
 			setSavedQuestionDetails((prev) => prev.filter((item1) => item1.id !== id));
 		}
 
@@ -46,11 +59,60 @@ function CreateQuestion({ index, questionSetId, getTestQuestionTest, item, setSa
 
 	useEffect(() => {
 		setQuestionTypeWatch(watch('question_type'));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [watch('question_type')]);
 
+	useEffect(() => {
+		if (!isEmpty(editDetails)) {
+			const { topic, question_type } = editDetails || {};
+			setValue('topic', topic);
+
+			if (question_type === 'case_study') {
+				const { question_text, sub_question = [] } = editDetails || {};
+
+				setValue('question_type', question_type);
+				setValue('question_text', question_text);
+
+				sub_question.forEach((item1, ind) => {
+					const {
+						answers,
+						difficulty_level,
+						question_type: indQuestionType,
+						question_text: indQuestionText,
+					} = item1 || {};
+
+					setValue(`case_questions.${ind}.difficulty_level`, difficulty_level);
+					setValue(`case_questions.${ind}.question_type`, indQuestionType);
+					setValue(`case_questions.${ind}.question_text`, indQuestionText);
+
+					answers.forEach((item2, ind2) => {
+						const { answer_text, is_correct } = item2 || {};
+
+						setValue(`case_questions.${ind}.options.${ind2}.answer_text`, answer_text);
+
+						setValue(`case_questions.${ind}.options.${ind2}.is_correct`, is_correct ? 'true' : 'false');
+					});
+				});
+			} else {
+				const { answers = [], question_text, difficulty_level = '' } = editDetails || {};
+
+				setValue('question_type', 'stand_alone');
+				setValue('question.0.question_type', question_type);
+				setValue('question.0.difficulty_level', difficulty_level);
+				setValue('question.0.question_text', question_text);
+
+				answers.forEach((item1, ind) => {
+					const { answer_text, is_correct } = item1 || {};
+
+					setValue(`question.0.options.${ind}.answer_text`, answer_text);
+
+					setValue(`question.0.options.${ind}.is_correct`, is_correct ? 'true' : 'false');
+				});
+			}
+		}
+	}, [JSON.stringify(editDetails)]);
+
 	return (
-		<form onSubmit={handleSubmit(onsubmit, onError)} className={styles.container}>
+		<form key={JSON.stringify(getValues())} onSubmit={handleSubmit(onsubmit, onError)} className={styles.container}>
 			<div className={styles.question_label}>{`Question ${index + 1}`}</div>
 
 			<div className={styles.form_component}>
@@ -59,6 +121,7 @@ function CreateQuestion({ index, questionSetId, getTestQuestionTest, item, setSa
 				<div className={styles.question_form}>
 					{questionTypeWatch === 'stand_alone' ? (
 						<SingleQuestionComponent
+							editAnswerDetails={editDetails?.answers || []}
 							errors={errors.question?.[0] || {}}
 							index={0}
 							control={control}

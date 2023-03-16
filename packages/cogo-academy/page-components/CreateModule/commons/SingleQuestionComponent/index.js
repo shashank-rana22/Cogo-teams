@@ -4,7 +4,14 @@ import getControls from './controls';
 import OptionsComponent from './OptionsComponent';
 import styles from './styles.module.css';
 
-function SingleQuestionComponent({ control, register, index, name = 'case_questions', errors }) {
+function SingleQuestionComponent({
+	control,
+	register,
+	index,
+	name = 'case_questions',
+	errors,
+	editAnswerDetails,
+}) {
 	const controls = getControls();
 
 	return (
@@ -41,6 +48,7 @@ function SingleQuestionComponent({ control, register, index, name = 'case_questi
 				register={register}
 				errors={errors?.options || {}}
 				name={`${name}.${index}.${controls[2].name}`}
+				editAnswerDetails={editAnswerDetails}
 			/>
 
 			<div className={styles.difficulty_level}>

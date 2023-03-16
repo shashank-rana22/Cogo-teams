@@ -6,11 +6,13 @@ function useCreateQuestionSet() {
 		url    : '/create_test_question_set',
 	}, { manual: true });
 
-	const createQuestionSet = async ({ values, setQuestionSetId }) => {
+	const createQuestionSet = async ({ values, setQuestionSetId, getTestQuestionTest }) => {
 		try {
 			const res = await trigger({
 				data: values,
 			});
+
+			getTestQuestionTest({ questionSetId: res?.data?.id });
 
 			setQuestionSetId(res?.data?.id);
 		} catch (err) {
