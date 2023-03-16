@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Accordion, Button, Modal, Pill } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
@@ -26,7 +25,6 @@ function DisplayCard({
 	const [showModal, setShowModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-	// console.log(data);
 	const options = [
 		{ label: 'Title', value: startCase(data?.title) },
 		{ label: 'Validity Start', value: format(data?.validity_start, 'dd MMM yyyy hh:mm a') },
@@ -53,7 +51,6 @@ function DisplayCard({
 			: <div className={styles.value}>{values}</div>
 	);
 
-	// console.log('asass', accordianData);
 	return (
 		<div className={styles.container}>
 

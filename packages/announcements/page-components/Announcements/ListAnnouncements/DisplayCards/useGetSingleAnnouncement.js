@@ -14,7 +14,6 @@ const useGetSingleAnnouncement = ({
 	const [defaultValues, setDefaultValues] = useState({});
 	const [disabled, setDisabled] = useState(false);
 	const [index, setIndex] = useState();
-	// console.log('details', announcementDetails);
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'get',

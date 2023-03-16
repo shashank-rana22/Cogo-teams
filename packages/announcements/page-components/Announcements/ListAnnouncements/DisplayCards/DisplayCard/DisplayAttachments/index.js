@@ -53,7 +53,6 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 					openDocument={openDocument}
 					name="video"
 				/>
-				{image || pdf || video ? null : <div className={styles.nodisplay}>No Attachments to Display...</div>}
 			</div>
 		)
 			: null

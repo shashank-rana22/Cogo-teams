@@ -80,7 +80,7 @@ function DisplayAttachment(
 
 						</div>
 					))
-					: <div className={styles.nodisplay}> No Data </div>}
+					: <div className={styles.nodisplay}> No Attachment </div>}
 
 				{!isEmpty(showDeleteModal) ? (
 					<DeleteModal

@@ -1,4 +1,3 @@
-/* eslint-disable default-param-last */
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';

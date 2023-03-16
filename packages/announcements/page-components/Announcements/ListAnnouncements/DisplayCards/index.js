@@ -20,7 +20,6 @@ function DisplayCards({
 		loadingSingleAnnouncement = false,
 		announcementDetails = {},
 	} = useGetSingleAnnouncement({ currentAnnouncement, setCurrentAnnouncement, listData: data });
-	// console.log('details', announcementDetails);
 
 	if (loading) {
 		if (activeTab === 'active') {

@@ -38,7 +38,6 @@ const useUpdateAnnouncement = ({
 			refetch(announcement_id, index);
 		} catch (err) {
 			Toast.error(err?.message);
-			// console.log('Error', error);
 		}
 	};
 	const deleteAttachment = async (id, index) => {
@@ -60,7 +59,6 @@ const useUpdateAnnouncement = ({
 			refetch(announcement_id, index);
 		} catch (err) {
 			Toast.error(err?.message);
-			// console.log('Error', error);
 		}
 	};
 
@@ -85,7 +83,6 @@ const useUpdateAnnouncement = ({
 			refetch(announcement_id, index);
 		} catch (err) {
 			Toast.error(err?.message);
-			// console.log('Error', error);
 		}
 	};
 	const openDocument = (url) => {
@@ -97,7 +94,7 @@ const useUpdateAnnouncement = ({
 		window.open(modifiedUrl, '_blank');
 	};
 	return {
-
+		loadingAdd,
 		deleteAttachment,
 		editAttachment,
 		addAttachment,
