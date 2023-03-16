@@ -17,14 +17,14 @@ function AllQuestionCardView(props = '') {
 	const {
 		active_audiences = [],
 		most_viewed_questions = [],
-		popular_questions,
+		popular_questions = [],
 		question_stats = '',
 		topic_wise_questions,
 		trending_tags,
 		trending_topics,
 		unpopular_questions,
 	} = props;
-	console.log(trending_topics, 'topics');
+	console.log(popular_questions, 'topics');
 	// const{
 	// 	topic_wise_disliked_questions=[],
 
@@ -128,10 +128,15 @@ function AllQuestionCardView(props = '') {
 							subHeading={active_audiences}
 						/>
 						<ViewCardsList
+							state="Viewed_Question"
 							cardHeading="Top Viewed Questions"
 							contentQuestion={most_viewed_questions}
 						/>
-						<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={most_viewed_questions} />
+						<ViewCardsList
+							state="Liked_Question"
+							cardHeading="Top Liked Questions"
+							contentQuestion={popular_questions}
+						/>
 						<Scroll />
 						{/* <ViewCards cardHeading="Topic from which Most Questions viewed" subHeading="ed" /> */}
 						{/* <ViewCards cardHeading="User group that viewed the Most Questions " subHeading="ecd" /> */}
