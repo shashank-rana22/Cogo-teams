@@ -1,11 +1,12 @@
 import { Button, Modal, Accordion } from '@cogoport/components';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
+import { ShipmentDetailContext } from '../../../../../common/context';
 import EmptyState from '../../../../../common/EmptyState';
-// import { ShipmentDetailContext } from '../../../../commons/Context';
+
 // import ManageServices from '../../../../commons/ManageServices';
 // import useListContainerDetails from '../../../hooks/useListContainerDetails';
-import { shipment_data, primary_service, data } from '../dummy_data';
+import { data } from '../dummy_data';
 
 import BlContainer from './BlContainer';
 import ContainerDetails from './ContainerDetails';
@@ -19,9 +20,9 @@ function BLDetails() {
 	const [mappingModal, setMappingModal] = useState(false);
 	const [editContainerNum, setEditContainerNum] = useState(false);
 
-	// const [{ shipment_data, primary_service }] = useContext(
-	// 	ShipmentDetailContext,
-	// );
+	const { shipment_data, primary_service } = useContext(
+		ShipmentDetailContext,
+	);
 
 	// const {
 	// 	list: { data },
@@ -100,7 +101,7 @@ function BLDetails() {
 							<ContainerNmUpdate
 								setEditContainerNum={setEditContainerNum}
 								shipment_data={shipment_data}
-								refetch={refetch}
+								// refetch={refetch}
 							/>
 						</Modal>
 					) : null}
@@ -110,16 +111,16 @@ function BLDetails() {
 	);
 
 	const contentMapping = {
-		air_freight: 'AWB',
-		fcl_freight: 'BL',
-		lcl_freight: 'BL',
+		air_freight : 'AWB',
+		fcl_freight : 'BL',
+		lcl_freight : 'BL',
 	};
 
 	const emptyStateContent = {
 		heading: `No ${contentMapping[shipment_data?.shipment_type]
-			} Details Found!`,
+		} Details Found!`,
 		description: `Currently ${contentMapping[shipment_data?.shipment_type]
-			} is not uploaded from the respective stakeholder.`,
+		} is not uploaded from the respective stakeholder.`,
 	};
 
 	return (
@@ -141,8 +142,8 @@ function BLDetails() {
 
 							{open
 								&& activeId === item?.id ? (
-								<ContainerDetails containerDetails={item?.container_details} />
-							) : null}
+									<ContainerDetails containerDetails={item?.container_details} />
+								) : null}
 						</div>
 					))}
 				</div>

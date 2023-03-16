@@ -1,7 +1,9 @@
-import { Button } from '@cogoport/components';;
+import { Button } from '@cogoport/components';
 
-// import FormLayout from '../../../../../commons/Layout';
+import Layout from '../../../../../../common/Layout';
 import useBlContainer from '../../../../../../hooks/useBlContainer';
+
+import styles from './styles.module.css';
 
 function BlContainer({
 	data,
@@ -12,10 +14,11 @@ function BlContainer({
 	const {
 		// updateDetails,
 		// onError,
-		// error,
+		errors,
 		// handleSubmit,
 		// containerLoading,
-		// controls,
+		controls,
+		control,
 		// fields,
 		// showElements,
 	} = useBlContainer({
@@ -25,15 +28,12 @@ function BlContainer({
 		refetch,
 	});
 
+	console.log(controls, control, errors);
+
 	return (
 		<div className={styles.container}>
-			{/* <FormLayout
-				controls={controls}
-				fields={fields}
-				errors={error}
-				showElements={showElements}
-			/> */}
-			Hii, under construction
+			{/* <Layout fields={controls} errors={errors} control={control} /> */}
+			Hi!, under construction
 			<Button
 				// onClick={handleSubmit(updateDetails, onError)}
 				className="primary sg"

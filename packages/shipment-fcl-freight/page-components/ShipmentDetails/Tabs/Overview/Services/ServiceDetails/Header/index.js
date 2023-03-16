@@ -24,11 +24,9 @@ function Header({
 			<div className={styles.heading_wrap}>
 				<div>
 					<div className={cl`${styles.heading} ${state}`}>{heading}</div>
-					{shipmentData?.stakeholder_types.map((obj) => (obj !== ('booking_agent' || 'sales_agent') ? (
-						<div className={cl`${styles.sub_heading} ${state}`}>
-							{service_provider?.business_name}
-						</div>
-					) : null))}
+					<div className={cl`${styles.sub_heading} ${state}`}>
+						{service_provider?.business_name}
+					</div>
 				</div>
 
 				{/* <EditCancelService

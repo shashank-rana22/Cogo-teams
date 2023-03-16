@@ -1,9 +1,9 @@
-.Container{
+.container{
 	border: 1px solid #bdbdbd;
 	border-radius: 4px;
 }
 
-.CardList{
+.card_list{
 	height: 400px;
 	overflow: auto;
 }

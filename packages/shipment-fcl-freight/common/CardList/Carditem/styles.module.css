@@ -2,7 +2,7 @@
 /* // import Button from '@cogoport/front/components/Button'; */
 
 
-.TitleBlack{
+.title_black{
 	font-weight: normal;
 	font-size: 12px;
 	line-height: 20px;
@@ -58,7 +58,7 @@
 	}
 }
 
-.Label{
+.label{
 	font-size: 8px;
 	line-height: 12px;
 	text-transform: capitalize;
@@ -69,25 +69,18 @@
 	}
 }
 
-.EstTime{
+.est_time{
 	display: flex;
 	align-items: flex-start;
 	flex-direction: column;
 }
 
-.StyledButton{
-	background: #ffffff;
-	border-radius: 4px;
-	border: 1px solid #2c3e50;
-	color: #2c3e50;
-}
-
-.ButtonDiv{
+.button_div{
 	display: flex;
 	align-items: center;
 }
 
-.Pill{
+.pill{
 	margin: 0px;
 	font-weight: normal;
 	font-size: 12px;
@@ -117,7 +110,7 @@
 	}
 }
 
-.BookingDetailsContainer{
+.booking_details_container{
 	padding: 12px 16px;
 	background: white;
 	border: 1px solid #e0e0e0;
@@ -126,7 +119,7 @@
 	width: 300px;
 }
 
-.LabelBook{
+.label_book{
 	margin: 0px;
 	font-weight: bold;
 	font-size: 10px;
@@ -140,7 +133,7 @@
 	width: 100%;
 }
 
-.Value{
+.value{
 	margin: 0px;
 	font-weight: bold;
 	font-size: 12px;
@@ -148,7 +141,7 @@
 	color: #000000;
 	width: 100%;
 }
-.Content{
+.content{
 	padding: 12px 16px;
 	background: white;
 	border: 1px solid #e0e0e0;
@@ -157,7 +150,7 @@
 	width: 300px;
 }
 
-.Total{
+.total{
 	font-weight: 500;
 	color: black;
 }
