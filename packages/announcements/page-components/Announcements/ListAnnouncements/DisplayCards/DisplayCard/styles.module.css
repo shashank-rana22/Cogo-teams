@@ -58,10 +58,6 @@
      text-overflow: ellipsis;
     }
 
-/* .accordian{    
-    box-shadow: none;
-} */
-
 .buttoncontainer{
     display: flex;
     justify-content: space-between;

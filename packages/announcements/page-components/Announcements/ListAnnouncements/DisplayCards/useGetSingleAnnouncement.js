@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const useGetSingleAnnouncement = ({
 	announcement_id = '',
@@ -18,7 +17,7 @@ const useGetSingleAnnouncement = ({
 		url    : '/get_announcement',
 	}, { manual: true });
 
-	const getDetails = async (key) => {
+	const getDetails = useCallback(async (key) => {
 		if (currentAnnouncement?.id) {
 			try {
 				const res = await trigger({
@@ -29,7 +28,7 @@ const useGetSingleAnnouncement = ({
 				console.log(err?.data);
 			}
 		}
-	};
+	}, [announcementDetails, currentAnnouncement, trigger]);
 
 	useEffect(() => {
 		(async () => {
@@ -46,11 +45,11 @@ const useGetSingleAnnouncement = ({
 				}
 			}
 		})();
-	}, []);
+	}, [announcement_id, trigger]);
 
 	useEffect(() => {
 		getDetails(index);
-	}, [currentAnnouncement]);
+	}, [currentAnnouncement, getDetails, index]);
 
 	const getAnnouncement = async (id, key) => {
 		const res = await trigger({

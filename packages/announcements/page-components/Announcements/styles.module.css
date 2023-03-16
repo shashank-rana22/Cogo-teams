@@ -1,11 +1,5 @@
-.container {
-	/* width: 100%; */
-}
-
 .form_container {
 	padding: 20px;
-
-	/* display: flex; */
 }
 
 .heading {
@@ -15,7 +9,3 @@
 	font-size: 20px;
 	font-weight: 600;
 }
-
-/* .preview_container {
-	width: 50%;
-} */

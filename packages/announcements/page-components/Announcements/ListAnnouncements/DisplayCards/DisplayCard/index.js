@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Accordion, Button, Modal, Pill } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -97,7 +96,11 @@ function DisplayCard({
 				</div>
 			</div>
 			{activeTab === 'active' && (
-				<div onClick={() => handleAnnouncementDetails(index)}>
+				<div
+					role="button"
+					tabIndex={0}
+					onClick={() => handleAnnouncementDetails(index)}
+				>
 					<Accordion
 						type="card"
 						title="Display Details"

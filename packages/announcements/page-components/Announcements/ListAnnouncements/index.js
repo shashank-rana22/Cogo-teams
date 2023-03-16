@@ -1,5 +1,4 @@
 import { Pagination } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import DisplayCards from './DisplayCards';
@@ -8,7 +7,6 @@ import styles from './styles.module.css';
 import useListAnnouncements from './useListAnnouncements';
 
 function AddedAnnouncements() {
-	const router = useRouter();
 	const props = useListAnnouncements();
 
 	const {

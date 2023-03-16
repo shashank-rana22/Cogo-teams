@@ -2,8 +2,6 @@ import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
-// import AnnouncementForm from './AnnouncementForm';
-// import useAnnouncement from './useAnnouncement';
 import ListAnnoucemnets from './ListAnnouncements';
 import styles from './styles.module.css';
 
@@ -24,13 +22,7 @@ function Announcements() {
 
 				</div>
 				<ListAnnoucemnets />
-				{/* <AnnouncementForm /> */}
 			</div>
-			<div className={styles.preview_container}>
-				{/* Preview  */}
-
-			</div>
-
 		</div>
 	);
 }

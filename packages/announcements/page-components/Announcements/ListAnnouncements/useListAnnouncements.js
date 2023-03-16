@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 function useListAnnouncements() {
 	const [searchInput, setSearchInput] = useState('');
@@ -28,7 +28,7 @@ function useListAnnouncements() {
 	const roleFunction = !isEmpty(role_functions) ? role_functions : undefined;
 	const roleSubFunction = !isEmpty(role_sub_functions) ? role_sub_functions : undefined;
 
-	const getAnnouncementList = async () => {
+	const getAnnouncementList = useCallback(async () => {
 		try {
 			const res =	await trigger({
 				params: {
@@ -54,12 +54,10 @@ function useListAnnouncements() {
 					page_limit  : res?.data?.page_limit,
 				},
 			);
-			// console.log('res', res);
 		} catch (err) {
-			// Toast.error(err?.message);
 			console.log(err);
 		}
-	};
+	}, [activeList, country_id, id, page, roleFunction, roleSubFunction, scope, trigger]);
 
 	const deleteAnnouncement = async (announcement_id) => {
 		try {
@@ -80,8 +78,8 @@ function useListAnnouncements() {
 	};
 	useEffect(() => {
 		getAnnouncementList();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, activeList]);
+	}, [page, activeList, getAnnouncementList]);
+
 	return {
 		page,
 		setPage,
