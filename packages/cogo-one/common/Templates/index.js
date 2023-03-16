@@ -61,12 +61,7 @@ function Templates({
 			setShowPreview(true);
 			setPreviewData(val);
 			setTemplateName(name);
-			setActiveCard((prev) => {
-				if (prev !== id) {
-					return id;
-				}
-				return '';
-			});
+			setActiveCard(id);
 		}
 	};
 
