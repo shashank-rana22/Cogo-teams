@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -33,11 +33,11 @@ function DisplayAttachment(
 					{name}
 				</div>
 
-				{isValid!==-1 && (
+				{isValid !== -1 && (
 					<Button size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
-					Add
-					{' '}
-					{name}
+						Add
+						{' '}
+						{name}
 					</Button>
 				)}
 			</div>
@@ -58,24 +58,24 @@ function DisplayAttachment(
 								>
 									View
 								</Button>
-							{isValid!==-1 && (
-								<>
-									<Button
-									themeType="secondary"
-									size="sm"
-									style={{ marginRight: 8 }}
-									onClick={() => setShowEditModal(item)}
-								>
-									Edit
-								</Button>
-								<IcMDelete
-									height={20}
-									width={20}
-									style={{ cursor: 'pointer' }}
-									onClick={() => setShowDeleteModal(item)}
-								/>
-								</>
-							)}
+								{isValid !== -1 && (
+									<>
+										<Button
+											themeType="secondary"
+											size="sm"
+											style={{ marginRight: 8 }}
+											onClick={() => setShowEditModal(item)}
+										>
+											Edit
+										</Button>
+										<IcMDelete
+											height={20}
+											width={20}
+											style={{ cursor: 'pointer' }}
+											onClick={() => setShowDeleteModal(item)}
+										/>
+									</>
+								)}
 							</div>
 
 						</div>

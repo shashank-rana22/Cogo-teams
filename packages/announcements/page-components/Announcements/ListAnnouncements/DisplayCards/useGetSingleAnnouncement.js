@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
@@ -9,7 +8,6 @@ const useGetSingleAnnouncement = ({
 	currentAnnouncement = null,
 	setCurrentAnnouncement = () => {},
 }) => {
-	// const [announcementDetailsToggle, setAnnouncementDetailsToggle] = useState(false);
 	const [announcementDetails, setAnnouncementDetails] = useState({});
 	const [defaultValues, setDefaultValues] = useState({});
 	const [disabled, setDisabled] = useState(false);
@@ -28,7 +26,6 @@ const useGetSingleAnnouncement = ({
 				});
 				setAnnouncementDetails({ ...announcementDetails, [key]: res?.data });
 			} catch (err) {
-				// Toast.error(err?.data);
 				console.log(err?.data);
 			}
 		}
@@ -45,7 +42,6 @@ const useGetSingleAnnouncement = ({
 
 					setDefaultValues(res?.data);
 				} catch (err) {
-					// Toast.error(err?.message);
 					console.log(err?.message);
 				}
 			}
@@ -65,19 +61,12 @@ const useGetSingleAnnouncement = ({
 	};
 
 	const handleAnnouncementDetails = (key) => {
-		// setAnnouncementDetailsToggle(announcementDetailsToggle === key ? false : key);
-		// if (currentAnnouncement && announcementDetailsToggle === key) {
-		// 	setCurrentAnnouncement(null);
-		// } else {
-		// 	setAnnouncementDetails(null);
-		// }
 		setCurrentAnnouncement(listData?.[key]);
 		setIndex(key);
 	};
 
 	return {
 		handleAnnouncementDetails,
-		// announcementDetailsToggle,
 		defaultValues,
 		refetch                   : getAnnouncement,
 		loadingSingleAnnouncement : loading,
