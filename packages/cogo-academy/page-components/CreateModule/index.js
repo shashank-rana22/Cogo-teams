@@ -1,6 +1,7 @@
-import CreateNewTest from './components/CreateNewTest';
+// import CreateNewTest from './components/CreateNewTest';
+import HomePage from './components/HomePage';
 
 function CreateModule() {
-	return <CreateNewTest />;
+	return <HomePage />;
 }
 export default CreateModule;
