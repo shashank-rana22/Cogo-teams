@@ -20,10 +20,10 @@
 
 .button_container {
 	position: absolute;
-	display: flex;
 	right: 24px;
-	gap: 16px;
 	bottom: 24px;
+	display: flex;
+	gap: 16px;
 }
 
 .delete_icon {
