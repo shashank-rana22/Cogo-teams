@@ -1,6 +1,6 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useMemo } from 'react';
 
-import { ShipmentDetailContext } from '@cogoport/context';
 import useGetShipment from '../../hooks/useGetShipment';
 import useListShipmentServices from '../../hooks/useListShipmentServices';
 
@@ -10,7 +10,6 @@ import Timeline from './TimeLine';
 import TopBar from './TopBar';
 
 function ShipmentDetails() {
-
 	const { get } = useGetShipment();
 
 	const { servicesGet } = useListShipmentServices({ ...get });

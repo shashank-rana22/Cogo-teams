@@ -1,7 +1,6 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import React, { useContext } from 'react';
-
-import { ShipmentDetailContext } from '@cogoport/context';
 
 import ActiveService from './ActiveService';
 import InactiveService from './InactiveService';

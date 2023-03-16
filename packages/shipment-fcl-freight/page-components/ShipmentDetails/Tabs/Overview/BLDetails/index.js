@@ -1,7 +1,7 @@
 import { Button, Modal, Accordion } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useState, useContext } from 'react';
 
-import { ShipmentDetailContext } from '@cogoport/context';
 import EmptyState from '../../../../../common/EmptyState';
 // import useListContainerDetails from '../../../hooks/useListContainerDetails';
 import { data } from '../dummy_data';
@@ -109,16 +109,16 @@ function BLDetails() {
 	);
 
 	const contentMapping = {
-		air_freight: 'AWB',
-		fcl_freight: 'BL',
-		lcl_freight: 'BL',
+		air_freight : 'AWB',
+		fcl_freight : 'BL',
+		lcl_freight : 'BL',
 	};
 
 	const emptyStateContent = {
 		heading: `No ${contentMapping[shipment_data?.shipment_type]
-			} Details Found!`,
+		} Details Found!`,
 		description: `Currently ${contentMapping[shipment_data?.shipment_type]
-			} is not uploaded from the respective stakeholder.`,
+		} is not uploaded from the respective stakeholder.`,
 	};
 
 	return (
@@ -140,8 +140,8 @@ function BLDetails() {
 
 							{open
 								&& activeId === item?.id ? (
-								<ContainerDetails containerDetails={item?.container_details} />
-							) : null}
+									<ContainerDetails containerDetails={item?.container_details} />
+								) : null}
 						</div>
 					))}
 				</div>

@@ -1,8 +1,8 @@
 import { Accordion } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
 import { AdditionalServiceList } from '../../../../../common/AdditionalServices';
-import { ShipmentDetailContext } from '@cogoport/context';
 import Route from '../../../../../common/Route';
 
 import styles from './styles.module.css';
