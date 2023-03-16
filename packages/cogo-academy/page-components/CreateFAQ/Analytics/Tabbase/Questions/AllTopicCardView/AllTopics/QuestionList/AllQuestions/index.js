@@ -15,7 +15,6 @@ function AllQuestions({ id = '' }) {
 	const props = useListFaqQuestions({ topicId });
 
 	const listdata = props.data?.list || [];
-	console.log(listdata, 'lslslsls');
 
 	const addedQuestionsColumns = () => [
 		{

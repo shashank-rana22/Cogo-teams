@@ -11,7 +11,6 @@ function useListFaqQuestions({
 	// limit = undefined,
 	// sort = undefined,
 }) {
-	console.log('topicIdwd', topicId);
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
 

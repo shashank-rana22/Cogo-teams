@@ -124,8 +124,8 @@ function AllTopic({ props = '' }) {
 							cardHeading="Top Viewed Questions"
 							contentQuestion={faq_questions}
 						/>
-						<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={faq_questions} />
-						<ViewCardsList cardHeading="Top Disliked Questions" contentQuestion={faq_questions} />
+						<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={most_liked_questions} />
+						<ViewCardsList cardHeading="Top Disliked Questions" contentQuestion={most_disliked_questions} />
 					</div>
 				</div>
 				<div style={{ marginTop: '-25px', marginRight: '-10px', float: 'right' }}>
