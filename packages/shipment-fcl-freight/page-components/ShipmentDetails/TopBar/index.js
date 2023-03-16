@@ -1,10 +1,10 @@
-// import styles from './styles.module.css';
 import PocSop from './PocSop';
 import ShipmentHeader from './ShipmentHeader';
+import styles from './styles.module.css';
 
 function TopBar() {
 	return (
-		<div>
+		<div className={styles.mainTopBar}>
 			<ShipmentHeader />
 			<PocSop />
 		</div>
