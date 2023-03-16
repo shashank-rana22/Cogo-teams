@@ -155,8 +155,17 @@ function ContainerDetails({
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
-											{dimension.map((item) => `${item.length}x${item.width}x${item.height}/${item.packages_count} 
-											`)}
+											{dimension.map((item) => (
+												<p>
+													{item.length}
+													x
+													{item.width}
+													x
+													{item.height}
+													/
+													{item.packages_count}
+												</p>
+											))}
 										</p>
 									</div>
 								</div>

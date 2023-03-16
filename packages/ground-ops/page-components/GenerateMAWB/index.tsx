@@ -102,7 +102,7 @@ function GenerateMAWB({
 		finalFields.forEach((c:any) => {
 			setValue(c.name, taskItem[c.name]);
 		});
-		setValue('iataCode', '14-3-4525/0005');
+		setValue('iataCode', '14-3-4525/0006');
 		setValue('declaredValueForCarriage', 'NVD');
 		setValue('city', 'NEW DELHI');
 		setValue('place', 'NEW DELHI');
