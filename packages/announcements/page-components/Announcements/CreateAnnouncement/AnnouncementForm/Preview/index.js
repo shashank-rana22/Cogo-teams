@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-undef */
+/* global window */
 import { IcMArrowLeft, IcMArrowRight, IcMDocument } from '@cogoport/icons-react';
 import React, { useRef, useState, useEffect } from 'react';
 
@@ -24,7 +23,6 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 	};
 	const scrollHandlerLeftVideos = () => {
 		scrollRefVideos.current.scrollLeft -= 341;
-		// scrollRefVideos.current.scrollLeft -= 332;
 	};
 	const openDocument = (url) => {
 		let modifiedUrl = `https://${url}`;
@@ -48,11 +46,6 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 		}
 	}, [announcement_id, formValues]);
 
-	// https://www.youtube.com/embed/R8_veQiYBjI
-	// https://www.youtube.com/embed/VnvRFRk_51k
-
-	// const videos = formValues?.videos?.filter((item) => item.video_item).map((item) => item.video_item);
-	// const { files, images } = formValues;
 	if (previewLoading) {
 		return (
 			<div className={styles.spinner}>
@@ -75,7 +68,12 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 					>
 						<div className={styles.videos_inner_container}>
 							{videos?.length > 1 && (
-								<div className={styles.icn_container} onClick={scrollHandlerLeftVideos}>
+								<div
+									role="button"
+									tabIndex={0}
+									className={styles.icn_container}
+									onClick={scrollHandlerLeftVideos}
+								>
 									<IcMArrowLeft width={25} height={25} />
 								</div>
 							)}
@@ -97,7 +95,12 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 								))}
 							</div>
 							{videos?.length > 1 && (
-								<div className={styles.icn_container} onClick={scrollHandlerRightVideos}>
+								<div
+									role="button"
+									tabIndex={0}
+									className={styles.icn_container}
+									onClick={scrollHandlerRightVideos}
+								>
 									<IcMArrowRight width={25} height={25} />
 								</div>
 							)}
@@ -111,19 +114,34 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 					>
 						<div className={styles.images_inner_container}>
 							{images?.length > 1 && (
-								<div className={styles.icn_container} onClick={scrollHandlerLeftImages}>
+								<div
+									role="button"
+									tabIndex={0}
+									className={styles.icn_container}
+									onClick={scrollHandlerLeftImages}
+								>
 									<IcMArrowLeft width={25} height={25} />
 								</div>
 							)}
 							<div className={styles.images} ref={scrollRefImages}>
 								{images?.map((image) => (
-									<div className={styles.image_item} onClick={() => openDocument(image)}>
+									<div
+										role="button"
+										tabIndex={0}
+										className={styles.image_item}
+										onClick={() => openDocument(image)}
+									>
 										<img src={image} alt="img" />
 									</div>
 								))}
 							</div>
 							{images?.length > 1 && (
-								<div className={styles.icn_container} onClick={scrollHandlerRightImages}>
+								<div
+									role="button"
+									tabIndex={0}
+									className={styles.icn_container}
+									onClick={scrollHandlerRightImages}
+								>
 									<IcMArrowRight width={25} height={25} />
 								</div>
 							)}
@@ -143,9 +161,6 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 									{'  '}
 									{index + 1}
 								</div>
-								{/* <object data={file} height="20%" width="20%">
-								<a href={file}>Document</a>
-							</object> */}
 							</div>
 						))}
 					</div>

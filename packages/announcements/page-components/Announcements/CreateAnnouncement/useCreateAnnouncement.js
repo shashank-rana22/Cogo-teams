@@ -49,8 +49,7 @@ const useCreateAnnouncements = ({
 			setValue('hot_duration', getDateValue(hot_duration) - getDateValue(validity_start));
 			setValue('validity', validity);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [defaultValues, listAudienceLoading]);
+	}, [defaultValues, listAudienceLoading, actionType, setValue]);
 
 	const [{ error }, updateTrigger] = useRequest({ url: '/update_announcement', method: 'post' }, { manual: true });
 

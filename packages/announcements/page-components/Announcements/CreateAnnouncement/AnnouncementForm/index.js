@@ -30,12 +30,10 @@ function AnnouncementForm({
 		editAnnouncementDetails = () => {},
 		loading,
 		errors,
-		// setValue,
 	} = useCreateAnnouncements({ defaultValues, announcement_id, actionType, listAudienceLoading });
 
 	const [showCreateAudience, setShowCreateAudience] = useState(false);
 	const formValues = watch();
-	//  console.log('check', formValues);
 
 	const renderAddButton = () => (
 		<div>

@@ -17,8 +17,6 @@
 .videos_container {
 	display: flex;
 	flex-direction: column;
-
-	/* width: 100%; */
 	width: 50%;
 	height: 100%;
 }
@@ -41,8 +39,6 @@
 	align-items: center;
 	width: 100%;
 	max-width: 100%;
-
-	/* margin: 0 20px; */
 	overflow-x: scroll;
 	scroll-behavior: smooth;
 }
@@ -67,7 +63,6 @@
 }
 
 .image_item img {
-	/* width: 712px; */
 	width: 333px;
 	border-radius: 6px;
 }
@@ -97,10 +92,6 @@
 	justify-content: flex-start;
 	width: 100%;
 	margin-top: 12px;
-
-	/* min-height: 400px; */
-
-	/* padding: 12px 12px 0; */
 }
 
 .file_heading {

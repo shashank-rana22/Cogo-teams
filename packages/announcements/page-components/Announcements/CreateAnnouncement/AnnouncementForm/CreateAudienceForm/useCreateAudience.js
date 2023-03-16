@@ -1,17 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-// import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 function useCreateAudience({
-	// setConfigurationPage,
 	fetchAudiences = () => {},
-	// source = '',
 	setShowCreateAudience = () => {},
 }) {
-	// const router = useRouter();
-
 	const { control, handleSubmit, formState: { errors }, setValue, reset, watch } = useForm();
 
 	const { general } = useSelector((state) => state);
@@ -65,8 +60,6 @@ function useCreateAudience({
 
 			if (res?.data) {
 				Toast.success(`Audience ${toastText} sucessfully`);
-				// setConfigurationPage('dashboard');
-				// if (source !== 'create') router.back();
 			}
 		} catch (err) {
 			Toast.error('Something went wrong');

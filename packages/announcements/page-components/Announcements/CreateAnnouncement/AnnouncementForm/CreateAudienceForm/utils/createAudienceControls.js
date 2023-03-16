@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import SUB_FUNCTION_MAPPING from './subFunctionMappings';
 import WORK_SCOPES_OPTIONS from './workScopeMappings';
 
@@ -91,9 +90,6 @@ const createQuestionControls = ({ watchFunctions, entity_options, countryOptions
 			type        : 'select',
 			options     : SUB_FUNCTION_MAPPING[watchFunctions],
 			placeholder : 'Select Sub Functions',
-			// rules       : {
-			// 	required: 'Sub function is required',
-			// },
 		},
 	];
 

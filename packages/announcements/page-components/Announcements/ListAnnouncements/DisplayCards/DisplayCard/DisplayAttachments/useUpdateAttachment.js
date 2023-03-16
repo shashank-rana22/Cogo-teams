@@ -1,3 +1,4 @@
+/* global window */
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
@@ -89,7 +90,7 @@ const useUpdateAnnouncement = ({
 		if (url?.includes('http://') || url?.includes('https://')) {
 			modifiedUrl = url;
 		}
-		// eslint-disable-next-line no-undef
+
 		window.open(modifiedUrl, '_blank');
 	};
 	return {
