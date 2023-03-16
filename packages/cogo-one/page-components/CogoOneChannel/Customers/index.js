@@ -165,10 +165,12 @@ function Customers({
 					</div>
 				</div>
 			</div>
-			<NewWhatsappMessage
-				setModalType={setModalType}
-				modalType={modalType}
-			/>
+			{modalType && (
+				<NewWhatsappMessage
+					setModalType={setModalType}
+					modalType={modalType}
+				/>
+			)}
 		</div>
 	);
 }

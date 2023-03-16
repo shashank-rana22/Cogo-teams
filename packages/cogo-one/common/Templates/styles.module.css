@@ -42,6 +42,7 @@
 
 .main_container {
 	display: flex;
+	min-height: 575px;
 }
 
 .messages_container {
@@ -79,8 +80,8 @@
 	margin-top: 50px;
 
 	:global {
-		.ui_input_container {
-			min-height: 230px;
+		.ui_text_area_control {
+			min-height: 230px !important;
 		}
 
 		.ui_input_control {
@@ -168,4 +169,15 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+}
+
+.template_heading {
+	display: flex;
+	align-items: center;
+	max-width: 361px;
+	padding: 6px 10px;
+}
+
+.template_heading div {
+	font-size: 16px;
 }

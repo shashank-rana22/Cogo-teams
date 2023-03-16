@@ -3,7 +3,7 @@ import { useForm, TextAreaController, InputController } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import controls from '../../configurations/create-instant-reply';
 import { statusMapping, statusColorMapping } from '../../constants';
@@ -14,10 +14,11 @@ import useListTemplate from '../../hooks/useListTemplates';
 import styles from './styles.module.css';
 
 function Templates({
-	activeTab,
+	activeTab = '',
 	openCreateReply,
 	setOpenCreateReply = () => {},
 	data = {},
+	type = '',
 }) {
 	const { sendCommunicationTemplate = () => {}, communicationLoading = false } = data || {};
 	const [showPreview, setShowPreview] = useState(false);
@@ -28,6 +29,14 @@ function Templates({
 	const { userRoleIds } = useSelector(({ profile }) => ({
 		userRoleIds: profile.partner?.user_role_ids || [],
 	}));
+	const isDefaultOpen = type === 'defaultOpen';
+	useEffect(() => {
+		if (isDefaultOpen) {
+			setShowPreview(true);
+		} else {
+			setShowPreview(false);
+		}
+	}, [isDefaultOpen]);
 
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
 	const {
@@ -55,7 +64,7 @@ function Templates({
 	});
 
 	const handleSelect = (val, status, name, Id) => {
-		if (!previewData && status === 'approved' && !openCreateReply) {
+		if (status === 'approved' && !openCreateReply) {
 			setShowPreview(true);
 			setPreviewData(val);
 			setTemplateName(name);
@@ -91,9 +100,17 @@ function Templates({
 		</div>
 	));
 
+	const handleDefaultOpen = () => {
+		if (isDefaultOpen) { setShowPreview(true); } else { setShowPreview(false); }
+	};
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.messages_container}>
+				{isDefaultOpen && (
+					<div className={styles.template_heading}>
+						<div>Select a template</div>
+					</div>
+				)}
 				<div className={styles.container}>
 					<Input
 						value={qfilter}
@@ -132,13 +149,11 @@ function Templates({
 										id,
 									)}
 									style={{
-										cursor:
-											previewData
-											|| whatsapp_approval_status
+										cursor: whatsapp_approval_status
 												!== 'approved'
 											|| openCreateReply
-												? 'not-allowed'
-												: 'pointer',
+											? 'not-allowed'
+											: 'pointer',
 									}}
 								>
 									<div className={styles.wrap}>
@@ -170,15 +185,17 @@ function Templates({
 						<Button
 							themeType="accent"
 							size="md"
-							disabled={openCreateReply || showPreview}
-							onClick={() => setOpenCreateReply(true)}
+							disabled={openCreateReply}
+							onClick={() => {
+								setOpenCreateReply(true); setShowPreview(false); setActiveCard(''); setPreviewData('');
+							}}
 						>
 							+ Create Template
 						</Button>
 					)}
 				</div>
 			</div>
-			{openCreateReply && (
+			{openCreateReply && !showPreview && (
 				<div className={styles.create_container}>
 					<div>
 						<div className={styles.label}>Name</div>
@@ -211,7 +228,10 @@ function Templates({
 							themeType="tertiary"
 							size="md"
 							className={styles.button_styles}
-							onClick={() => setOpenCreateReply(!openCreateReply)}
+							onClick={() => {
+								setOpenCreateReply((p) => !p);
+								handleDefaultOpen();
+							}}
 						>
 							Cancel
 						</Button>
@@ -227,7 +247,7 @@ function Templates({
 				</div>
 			)}
 
-			{showPreview && (
+			{showPreview && !openCreateReply && (
 				<div className={styles.create_container}>
 					<div className={styles.preview}>
 						<div className={styles.whatsapp}>
@@ -239,23 +259,26 @@ function Templates({
 						</div>
 					</div>
 					<div className={styles.create_footer}>
-						<Button
-							themeType="tertiary"
-							size="md"
-							className={styles.button_styles}
-							onClick={() => {
-								setShowPreview(false);
-								setActiveCard('');
-								setPreviewData('');
-							}}
-						>
-							Cancel
-						</Button>
+						{!isDefaultOpen
+							&& (
+								<Button
+									themeType="tertiary"
+									size="md"
+									className={styles.button_styles}
+									onClick={() => {
+										setShowPreview(false);
+										setActiveCard('');
+										setPreviewData('');
+									}}
+								>
+									Cancel
+								</Button>
+							)}
 						<Button
 							themeType="accent"
 							size="md"
 							onClick={handleClick}
-							disabled={communicationLoading}
+							disabled={!templateName || communicationLoading}
 						>
 							Send
 						</Button>

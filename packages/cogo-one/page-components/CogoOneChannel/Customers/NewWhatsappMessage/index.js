@@ -13,14 +13,18 @@ function NewWhatsappMessage({
 }) {
 	const [activeTab, setActiveTab] = useState('quick_reply');
 	const [openCreateReply, setOpenCreateReply] = useState(false);
-	const closeModal = () => {
-		setModalType(false);
-	};
 
 	const [dialNumber, setDialNumber] = useState({
 		number       : '',
 		country_code : '+91',
 	});
+	const closeModal = () => {
+		setModalType(false);
+		setDialNumber({
+			number       : '',
+			country_code : '+91',
+		});
+	};
 	const { sendUserWhatsappTemplate, loading } = useSendUserWhatsappTemplate(
 		{
 			callbackfunc: closeModal,
@@ -68,15 +72,14 @@ function NewWhatsappMessage({
 					placeholder="Enter number"
 				/>
 			</div>
-			<div className={styles.wrap_heading}>
-				<div>Select a template</div>
-			</div>
+
 			<Templates
 				data={data}
 				activeTab={activeTab}
 				openCreateReply={openCreateReply}
 				setOpenCreateReply={setOpenCreateReply}
 				setActiveTab={setActiveTab}
+				type="defaultOpen"
 			/>
 		</Modal>
 	);
