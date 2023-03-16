@@ -6,6 +6,7 @@
 	display: flex;
 	font-size: 12px;
 }
+
 .ic_min_icon {
 	margin-left: 8px;
 	color: #f68b21;
@@ -32,6 +33,6 @@
 	background: #fffaeb;
 }
 
-.amount_value{
+.amount_value {
 	min-width: 80px;
 }
