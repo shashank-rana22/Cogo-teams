@@ -26,7 +26,6 @@ const FILTER_ATTRIBUTE_MAPPING = {
 function CreateEvent(props) {
 	const {
 		setToggleEvent = () => {},
-		eventListData = {},
 		listRefetch = () => {},
 		updateEventListData = {},
 	} = props;
@@ -38,15 +37,13 @@ function CreateEvent(props) {
 	const {
 		attributeList,
 		loading,
-		refetch,
 		setRuleType = () => {},
 	} = useGetAllocationKamExpertiseRules();
 
 	const {
 		onSave,
 		getAddRuleControls,
-		// newEventFormProps,
-	} = useCreateNewEvent({ attributeList, eventListData, listRefetch, setToggleEvent });
+	} = useCreateNewEvent({ attributeList, listRefetch, setToggleEvent });
 
 	const {
 		onUpdate,
@@ -63,9 +60,7 @@ function CreateEvent(props) {
 
 	useEffect(() => {
 		setRuleType(FILTER_ATTRIBUTE_MAPPING[watchListener]);
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [watchListener]);
+	}, [setRuleType, watchListener]);
 
 	return (
 		<div>
@@ -226,7 +221,6 @@ function CreateEvent(props) {
 						size="md"
 						type="button"
 						themeType="tertiary"
-				// onClick={onCloseModal}
 						style={{ marginRight: '10px' }}
 						onClick={onClose}
 					>
@@ -237,7 +231,6 @@ function CreateEvent(props) {
 						size="md"
 						type="submit"
 						onClick={(isEmpty(updateEventListData)) ? handleSubmit(onSave) : handleSubmit(onUpdate)}
-
 					>
 						Save
 					</Button>

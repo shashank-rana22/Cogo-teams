@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import LoaderCard from './LoaderCard';
 import styles from './styles.module.css';
 
-function LoadingState() {
+function LoadingState({columnsToLoad}) {
 	const options = [1, 2, 3].map(() => ({
-		title: <LoaderCard />,
+		title: <LoaderCard columnsToLoad={columnsToLoad} />,
 
 	}));
 	const [value, onChange] = useState('');

@@ -2,6 +2,7 @@ import { Collapse, Button, Modal } from '@cogoport/components';
 import { IcMAgentManagement } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
+import EmptyState from '../../../../../../common/EmptyState';
 
 import FieldArray from '../../../../../../common/Form/FieldArray';
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
@@ -10,6 +11,7 @@ import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mappin
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
 import useCreateAllocationKamExpertiseEventScoring from '../../../../hooks/useCreateAllocationKamExpertiseEventScoring';
 import useGetKamExpertiseScore from '../../../../hooks/useGetKamExpertiseScore';
+import LoadingState from '../LoadingState';
 
 import ExpertiseParameters from './ExpertiseParameters';
 import Header from './Header';
@@ -50,7 +52,7 @@ const titleSection = (expertiseItem = {}) => (
 	</div>
 );
 
-function KamExpertiseScoreConfig() {
+function KamExpertiseScoreConfig({selectedVersion}) {
 	const [addConditionModal, setAddConditionModal] = useState({});
 
 	const [activeCollapse, setActiveCollapse] = useState('');
@@ -61,7 +63,9 @@ function KamExpertiseScoreConfig() {
 		setAddConditionModal({});
 	};
 
-	const { data, loading, refetch } = useGetKamExpertiseScore({});
+	const { data, loading, refetch } = useGetKamExpertiseScore({selectedVersion});
+
+	const { list = [], audit_data: auditData = {} } = data || {};
 
 	const {
 		createConditionloading,
@@ -73,8 +77,6 @@ function KamExpertiseScoreConfig() {
 	});
 
 	const { control, formState:{ errors = {} }, watch, handleSubmit } = formProps;
-
-	const { list = [], audit_data: auditData = {} } = data || {};
 
 	const expertiseType = startCase(addConditionModal.type || '');
 
@@ -98,9 +100,14 @@ function KamExpertiseScoreConfig() {
 				<Header auditData={auditData} />
 			</div>
 
-			<div className={styles.expertise_cards_container}>
-				<Collapse panel={options} activeKey={activeCollapse} setActive={setActiveCollapse} type="text" />
-			</div>
+
+			{isEmpty(list) && !loading ? <EmptyState /> : null}
+			
+			{!loading ? (
+				<div className={styles.expertise_cards_container}>
+					<Collapse panel={options} activeKey={activeCollapse} setActive={setActiveCollapse} type="text" />
+				</div>
+			) : <LoadingState columnsToLoad = {2}/>}
 
 			{showModal ? (
 				<Modal

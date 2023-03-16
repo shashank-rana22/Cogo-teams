@@ -51,7 +51,7 @@ function Header(props) {
 					className={styles.button_mastery}
 					onClick={() => {
 						setMasteryListData({});
-						setToggleScreen(2);
+						setToggleScreen('mastery');
 					}}
 				>
 					Add Mastery
@@ -63,7 +63,7 @@ function Header(props) {
 					className={styles.button_badge}
 					onClick={() => {
 						setBadgeListData({});
-						setToggleScreen(3);
+						setToggleScreen('create_badge');
 					}}
 				>
 					{
