@@ -1696,6 +1696,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'event',
 		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	supply_crm: [
 		{
@@ -5827,6 +5832,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api          : 'list_dunning_cycle_executions',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
 	],
 	invoice_triggers: [
 		{
@@ -6046,7 +6056,7 @@ const partner = {
 			service_name : 'unified_dashboard',
 		},
 		{
-			api          : 'outstanding_amount_bifurcation',
+			api          : 'get_outstanding_data_bifurcation',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
@@ -7277,6 +7287,7 @@ const partner = {
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
 		},
+
 		{
 			api         : 'get_sales_dashboard_monthly_outstanding',
 			access_type : 'private',
@@ -7646,6 +7657,12 @@ const partner = {
 		},
 		{
 			api         : 'delete_sales_accounts',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
+			api         : 'post_payments_accounts_post_to_sage',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
@@ -9221,6 +9238,11 @@ const partner = {
 		},
 		{
 			api          : 'delete_saas_container_timeline_detail',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'update_saas_container_timeline_detail',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
