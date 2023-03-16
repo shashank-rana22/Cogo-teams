@@ -1,50 +1,50 @@
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	font-size: 20px;
-	font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .header {
-	margin-left: 2px;
-	font-weight: 600;
-	background: #111 -webkit-linear-gradient(left, #111, #ff2431) no-repeat 0 0 / 40px;
-	background-clip: text;
-	animation: sweep 2.5s ease-in infinite;
-	-webkit-text-fill-color: rgb(0 0 0 / 20%);
+  margin-left: 2px;
+  font-weight: 600;
+  background: #111 -webkit-linear-gradient(left, #111, #ff2431) no-repeat 0 0 / 40px;
+  background-clip: text;
+  animation: sweep 2.5s ease-in infinite;
+  -webkit-text-fill-color: rgb(0 0 0 / 20%);
 }
 
 @keyframes sweep {
-	0% {
-		background-position: 0 0;
-	}
+  0% {
+    background-position: 0 0;
+  }
 
-	100% {
-		background-position: 100% 100%;
-	}
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
 .button_container {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .pie_container {
-	position: relative;
-	width: 50%;
+  position: relative;
+  width: 50%;
 }
 
 .inner_pie {
-	position: absolute;
-	top: 30px;
-	z-index: 99999;
-	width: 100%;
-	height: 70%;
+  position: absolute;
+  top: 30px;
+  z-index: 99999;
+  width: 100%;
+  height: 70%;
 }
 
 .outer_pie {
-	position: absolute;
-	width: 100%;
-	height: 85%;
+  position: absolute;
+  width: 100%;
+  height: 85%;
 }
