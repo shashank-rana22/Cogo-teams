@@ -4159,6 +4159,12 @@ const partner = {
 			defaultparameter : 'supply_dashboard:allowed',
 		},
 		{
+			api          : 'list_location_expert_service_providers',
+			access_type  : 'private',
+			feature      : 'disliked_rates',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_fcl_cfs_rate',
 			access_type  : 'private',
 			service_name : 'fcl_cfs_rate',
