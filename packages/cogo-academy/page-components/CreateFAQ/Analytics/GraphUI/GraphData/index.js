@@ -8,19 +8,11 @@ function GraphData() {
 	const { pie_chart_data:pie_chart = 0, graph_data } = data || {};
 
 	const {
-		total_dislike = 0,
 		total_dislike_percentage = 0,
-		total_like = 0,
 		total_like_percentage = 0,
-		total_requested_questions = 0,
 		total_requested_questions_percentage = 0,
-		total_search_result_available = 0,
 		total_search_result_available_percentage = 0,
-		total_search_result_not_available = 0,
 		total_search_result_not_available_percentage = 0,
-		total_searches = 0,
-		total_searches_percentage = 0,
-		total_viewed_only_questions = 0,
 		total_viewed_only_questions_percentage = 0,
 	} = pie_chart;
 	const Like = (total_search_result_available_percentage / 100) * total_like_percentage;
