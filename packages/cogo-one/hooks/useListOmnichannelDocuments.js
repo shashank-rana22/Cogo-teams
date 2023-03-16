@@ -12,6 +12,7 @@ function useListOmnichannelDocuments({
 	setFilterVisible,
 	activeSelect = '',
 	type = '',
+	updateFunc = () => {},
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_omnichannel_documents',
@@ -44,7 +45,7 @@ function useListOmnichannelDocuments({
 				};
 			}
 
-			await trigger({
+			const res = await trigger({
 				params: {
 					page_limit                : type !== 'count' ? 1000 : undefined,
 					only_total_count_required : type === 'count',
@@ -53,13 +54,17 @@ function useListOmnichannelDocuments({
 			});
 
 			setFilterVisible(false);
+			const list = res?.data?.list;
+			const listId = await list.map((i) => i.id);
+			updateFunc(listId);
 		} catch (error) {
 			// console.log(error);
 		}
 	};
+	const emptyCheck = !isEmpty(userId) || !isEmpty(userMobile);
 
 	useEffect(() => {
-		if (!(isEmpty(userId)) || !(isEmpty(userMobile))) {
+		if (emptyCheck) {
 			documentsList();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps

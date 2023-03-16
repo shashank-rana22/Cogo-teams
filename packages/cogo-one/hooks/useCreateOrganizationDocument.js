@@ -4,18 +4,15 @@ import { useRequest } from '@cogoport/request';
 
 import useUpdateOmnichannelNewDocument from './useUpdateOmnichannelNewDocument';
 
-const useSubmitOrganizationKyc = ({
-	paramsData = {},
-	fileType = '',
-}) => {
+const useCreateOrganizationDocument = ({ paramsData = {}, fileType = '' }) => {
 	const {
 		orgId = '', documentsList = () => {},
 		singleItem = {}, setSingleItem = () => {},
 		setShowModal = () => {},
 	} = paramsData || {};
 
-	const [{ loading }, trigger] = useRequest({
-		url    : '/submit_organization_kyc',
+	const [{ loading: panLoading }, trigger] = useRequest({
+		url    : '/create_organization_document',
 		method : 'post',
 	}, { manual: true });
 
@@ -28,10 +25,9 @@ const useSubmitOrganizationKyc = ({
 		fileType,
 	});
 
-	const submitOrganizationKyc = async (data) => {
+	const createPanDocument = async (data) => {
 		const {
-			utility_bill_document_url = {}, country_id = '', preferred_languages = [],
-			registration_number = '',
+			utility_bill_document_url = {}, registration_number = '',
 		} = data || {};
 
 		let finalUrl;
@@ -40,16 +36,17 @@ const useSubmitOrganizationKyc = ({
 		} else {
 			finalUrl = utility_bill_document_url || '';
 		}
-		console.log('utility_bill_document_url:', utility_bill_document_url);
 
 		try {
 			await trigger({
 				data: {
-					country_id,
-					preferred_languages,
-					registration_number,
-					utility_bill_document_url : finalUrl,
-					id                        : orgId,
+					image_url     : finalUrl,
+					name          : 'PanDocument',
+					document_type : 'pan',
+					data          : {
+						identity_number: registration_number,
+					},
+					organization_id: orgId,
 				},
 			});
 			updateNewDocument({ data });
@@ -59,9 +56,9 @@ const useSubmitOrganizationKyc = ({
 	};
 
 	return {
-		submitOrganizationKyc,
-		loading,
+		createPanDocument,
+		panLoading,
 	};
 };
 
-export default useSubmitOrganizationKyc;
+export default useCreateOrganizationDocument;

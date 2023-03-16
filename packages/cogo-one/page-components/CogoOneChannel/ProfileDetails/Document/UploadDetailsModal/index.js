@@ -1,9 +1,12 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useState } from 'react';
 
 import getControls from '../../../../../configurations/upload-documents-controls';
+import useCreateOrganizationDocument from '../../../../../hooks/useCreateOrganizationDocument';
 import useSubmitOrganizationKyc from '../../../../../hooks/useSubmitOrganizationKyc';
 
+import SelectDocumentType from './SelectDocumentType';
 import styles from './styles.module.css';
 import UploadForm from './UploadForm';
 
@@ -15,17 +18,30 @@ function UploadDetailsModal({
 	singleItem = {},
 	setSingleItem = () => {},
 }) {
+	const [selectedDocumentType, setSelectedDocumentType] = useState('');
+
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
 		reset,
-	} = useForm();
+	} = useForm(
+		{
+			defaultValues: {
+				country_id          : singleItem?.country_id || '541d1232-58ce-4d64-83d6-556a42209eb7',
+				registration_number : singleItem?.registration_number || '',
+				preferred_languages : singleItem?.preferred_languages || ['english'],
+			},
+		},
+	);
 
-	const {
-		submitOrganizationKyc = () => {},
-		loading,
-	} = useSubmitOrganizationKyc({ orgId, documentsList, singleItem, setSingleItem, setShowModal });
+	const paramsData = {
+		orgId,
+		documentsList,
+		singleItem,
+		setSingleItem,
+		setShowModal,
+	};
 
 	const handleCancel = () => {
 		reset();
@@ -38,7 +54,45 @@ function UploadDetailsModal({
 		setSingleItem({});
 	};
 
-	const formControls = getControls(documentType);
+	const checkDocumentType = () => {
+		let documentName = '';
+		let fileType = '';
+		if (documentType === 'undefined' && !selectedDocumentType) {
+			documentName = 'Please select document type';
+			fileType = 'undefined';
+		} else if (documentType === 'pan' || selectedDocumentType === 'pan') {
+			documentName = 'PAN Details';
+			fileType = 'pan';
+		} else {
+			documentName = 'KYC Details';
+			fileType = 'gst';
+		}
+		return { documentName, fileType };
+	};
+
+	const { documentName = '', fileType = '' } = checkDocumentType();
+
+	const {
+		createPanDocument = () => {},
+		panLoading,
+	} = useCreateOrganizationDocument({ paramsData, fileType });
+
+	const {
+		submitOrganizationKyc = () => {},
+		loading,
+	} = useSubmitOrganizationKyc({ paramsData, fileType });
+
+	const onSubmit = (data) => {
+		if (fileType === 'pan') {
+			createPanDocument(data);
+		} else {
+			submitOrganizationKyc(data);
+		}
+	};
+
+	console.log('FileType:', fileType);
+
+	const formControls = getControls(fileType);
 
 	return (
 		<Modal
@@ -48,36 +102,47 @@ function UploadDetailsModal({
 			placement="top"
 		>
 			<Modal.Header
-				title={documentType === 'pan'
-					? 'PAN Details' : 'KYC Details'}
+				title={documentName}
 			/>
+
 			<Modal.Body>
-				<UploadForm
-					{...formControls}
-					errors={errors}
-					control={control}
-					documentType={documentType}
-				/>
+				{fileType === 'undefined' ? (
+					<SelectDocumentType
+						setSelectedDocumentType={setSelectedDocumentType}
+					/>
+				) : (
+					<UploadForm
+						{...formControls}
+						errors={errors}
+						control={control}
+						documentUrl={singleItem?.document_url || ''}
+						fileType={fileType}
+					/>
+				)}
+
 			</Modal.Body>
-			<Modal.Footer>
-				<div className={styles.actions}>
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={handleCancel}
-					>
-						Cancel
-					</Button>
-					<Button
-						themeType="accent"
-						className={styles.last_button}
-						loading={loading}
-						onClick={handleSubmit((data) => submitOrganizationKyc(data))}
-					>
-						Submit
-					</Button>
-				</div>
-			</Modal.Footer>
+			{fileType !== 'undefined' && (
+				<Modal.Footer>
+					<div className={styles.actions}>
+						<Button
+							size="md"
+							themeType="secondary"
+							onClick={handleCancel}
+						>
+							Cancel
+						</Button>
+						<Button
+							themeType="accent"
+							className={styles.last_button}
+							loading={loading || panLoading}
+							onClick={handleSubmit(onSubmit)}
+						>
+							Submit
+						</Button>
+					</div>
+				</Modal.Footer>
+			)}
+
 		</Modal>
 	);
 }

@@ -10645,6 +10645,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'create_organization_document',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	analytics_dashboard: [
 		{

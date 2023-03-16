@@ -1,0 +1,22 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.card {
+	padding: 15px 35px;
+	margin: 20px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+	transition: 0.5s;
+
+	&:hover {
+		color: #c26d1a;
+		transition: 0.5s;
+		transform: scale(1.2);
+	}
+}

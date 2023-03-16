@@ -1,12 +1,12 @@
 import PATTERNS from '@cogoport/constants/patterns';
 
-/* eslint-disable */
+// eslint-disable-next-line import/no-relative-packages
 import countries from '../../../.data-store/constants/countries.json';
 
-const getControls = (documentType) => {
-
+const getControls = (fileType = '') => {
 	const indiaOption = countries.find(
-		(country) => country.country_code === 'IN');
+		(country) => country.country_code === 'IN',
+	);
 
 	const countryOptions = [{
 		label : indiaOption?.name,
@@ -18,46 +18,46 @@ const getControls = (documentType) => {
 		countryOptions.push(option);
 		return countryOptions;
 	});
-	
+
 	const controls = {
 		utility_bill_document_url: {
-			name: 'utility_bill_document_url',
-			type: 'file',
-			accept: 'image/*,.pdf,.doc,.docx',
-			rules: {
+			name   : 'utility_bill_document_url',
+			type   : 'file',
+			accept : 'image/*,.pdf,.doc,.docx',
+			rules  : {
 				required: 'Business address Proof is required',
 			},
 		},
 		country_id: {
-			name: 'country_id',
-			type: 'select',
-			options: countryOptions,
-			rules: {
+			name    : 'country_id',
+			type    : 'select',
+			options : countryOptions,
+			rules   : {
 				required: 'Registration country is required',
 			},
 		},
 		registration_number: {
-			name: 'registration_number',
-			type: 'input',
-			rules: {
-				required: `${documentType==='pan'? "PAN": "GST"} Number is required`,
-				pattern: {
-					value: documentType==='pan'? PATTERNS.PAN_NUMBER: PATTERNS.GST_NUMBER,
-					message: `Enter a valid ${documentType==='pan'? "PAN": "GST"} number`,
+			name  : 'registration_number',
+			type  : 'input',
+			rules : {
+				required : `${fileType === 'pan' ? 'PAN' : 'GST'} Number is required`,
+				pattern  : {
+					value   : fileType === 'pan' ? PATTERNS.PAN_NUMBER : PATTERNS.GST_NUMBER,
+					message : `Enter a valid ${fileType === 'pan' ? 'PAN' : 'GST'} number`,
 				},
 			},
 		},
 		preferred_languages: {
-			name	: 'preferred_languages',
-			type: 'select',
-			rules: {
+			name 	: 'preferred_languages',
+			type  : 'select',
+			rules : {
 				required: 'Preferred languages is required',
 			},
-			multiple       : true,
-			isClearable    : true,
-			options        : [
-				{ value: 'uk_english', label: 'English UK' },
+			multiple    : true,
+			isClearable : true,
+			options     : [
 				{ value: 'english', label: 'English India' },
+				{ value: 'uk_english', label: 'English UK' },
 				{ value: 'us_english', label: 'English US' },
 				{ value: 'spanish', label: 'Spanish' },
 				{ value: 'mandarin_chinese', label: 'Mandarin chinese' },

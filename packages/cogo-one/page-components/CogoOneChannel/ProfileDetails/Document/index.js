@@ -1,7 +1,7 @@
 import { Popover } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import useListOmnichannelDocuments from '../../../../hooks/useListOmnichannelDocuments';
 import useUpdateOmnichannelNewDocument from '../../../../hooks/useUpdateOmnichannelNewDocument';
@@ -9,6 +9,7 @@ import LoadingState from '../UserActivity/LoadingState';
 
 import Filters from './Filters';
 import ListData from './ListData';
+// import OptionsModal from './OptionsModal';
 import styles from './styles.module.css';
 import UploadDetailsModal from './UploadDetailsModal';
 
@@ -23,8 +24,19 @@ function Documents({
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState('');
 	const [showModal, setShowModal] = useState(false);
-	const [listIds, setListIds] = useState([]);
+
 	const [singleItem, setSingleItem] = useState({});
+	console.log('singleItem:', singleItem);
+
+	const { updateNewDocument: documentCountUpdates = () => {} } = useUpdateOmnichannelNewDocument({
+		type: 'update_count',
+	});
+
+	const updateFunc = (listIdsArr) => {
+		if (!isEmpty(listIdsArr) && documents_count > 0) {
+			documentCountUpdates({ documentCount, listIds: listIdsArr });
+		}
+	};
 
 	const {
 		list = [],
@@ -38,6 +50,7 @@ function Documents({
 		customerId,
 		type: 'list',
 		setFilterVisible,
+		updateFunc,
 	});
 
 	const handleFilters = () => {
@@ -48,24 +61,6 @@ function Documents({
 		setFilters('');
 		documentsList();
 	};
-
-	useEffect(() => {
-		if (!isEmpty(list)) {
-			setListIds(list.map((i) => i.id));
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [list]);
-
-	const { updateNewDocument: documentCountUpdates = () => {} } = useUpdateOmnichannelNewDocument({
-		type: 'update_count',
-	});
-
-	useEffect(() => {
-		if (!isEmpty(listIds) && documents_count > 0) {
-			documentCountUpdates({ documentCount, listIds });
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [listIds]);
 
 	return (
 		<>
@@ -106,6 +101,7 @@ function Documents({
 					setShowModal={setShowModal}
 					setSingleItem={setSingleItem}
 				/>
+
 			)}
 
 			{showModal && (
@@ -118,6 +114,7 @@ function Documents({
 					setSingleItem={setSingleItem}
 				/>
 			)}
+
 		</>
 	);
 }

@@ -5,20 +5,21 @@ import styles from './styles.module.css';
 
 function UploadForm(props) {
 	const {
-		documentType,
 		utility_bill_document_url,
 		control,
 		errors,
 		country_id,
 		registration_number,
 		preferred_languages,
+		documentUrl,
+		fileType = '',
 	} = props;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.input_container}>
 				<div className={styles.label}>
-					{documentType === 'pan'
+					{fileType === 'pan'
 						? 'PAN Document'
 						: 'Business Address Proof'}
 				</div>
@@ -26,7 +27,9 @@ function UploadForm(props) {
 					<UploadController
 						{...utility_bill_document_url}
 						control={control}
+						defaultValues={documentUrl}
 						id="utility_bill_document_url"
+						disabled
 					/>
 					<div
 						className={styles.error_text}
@@ -35,28 +38,32 @@ function UploadForm(props) {
 					</div>
 				</div>
 			</div>
-			<div className={styles.input_container}>
-				<div className={styles.label}>
-					Organization’s registration country
-				</div>
-				<div className={styles.input_field}>
-					<SelectController
-						{...country_id}
-						control={control}
-						id="registration_country"
-					/>
-					<div
-						className={styles.error_text}
-					>
-						{errors?.country_id?.message}
+
+			{fileType !== 'pan' && (
+				<div className={styles.input_container}>
+					<div className={styles.label}>
+						Organization’s registration country
+					</div>
+					<div className={styles.input_field}>
+						<SelectController
+							{...country_id}
+							control={control}
+							id="registration_country"
+						/>
+						<div
+							className={styles.error_text}
+						>
+							{errors?.country_id?.message}
+						</div>
 					</div>
 				</div>
-			</div>
+			)}
+
 			<div className={styles.input_container}>
 				<div className={styles.label}>
 					Organization’s
 					{' '}
-					{documentType === 'pan' ? 'PAN' : 'GST'}
+					{fileType === 'pan' ? 'PAN' : 'GST'}
 					{' '}
 					Number
 				</div>
@@ -73,23 +80,26 @@ function UploadForm(props) {
 					</div>
 				</div>
 			</div>
-			<div className={styles.input_container}>
-				<div className={styles.label}>
-					Preferred Languages
-				</div>
-				<div className={styles.input_field}>
-					<MultiselectController
-						{...preferred_languages}
-						control={control}
-						id="preferred_languages"
-					/>
-					<div
-						className={styles.error_text}
-					>
-						{errors?.preferred_languages?.message}
+
+			{fileType !== 'pan' && (
+				<div className={styles.input_container}>
+					<div className={styles.label}>
+						Preferred Languages
+					</div>
+					<div className={styles.input_field}>
+						<MultiselectController
+							{...preferred_languages}
+							control={control}
+							id="preferred_languages"
+						/>
+						<div
+							className={styles.error_text}
+						>
+							{errors?.preferred_languages?.message}
+						</div>
 					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 }
