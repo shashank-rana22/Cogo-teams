@@ -2,7 +2,7 @@ import { Avatar } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
 import { VOICE_ICON_MAPPING } from '../../../../../../constants';
-import { renderDuration, callStatus } from '../../../../../../utils/voiceTimeLine';
+import timeLineFunctions from '../../../../../../utils/timeLineFunctions';
 
 import styles from './styles.module.css';
 
@@ -16,10 +16,14 @@ function VoiceTimeLine({ item }) {
 		initiated_by = '',
 	} = item || {};
 	const { name = '' } = agent_data || {};
+	const { renderDuration, callStatus } = timeLineFunctions();
 
 	return (
 		<>
-			<div className={styles.activity_date}>
+			<div
+				className={styles.activity_date}
+				key={created_at}
+			>
 				<div className={styles.dot} />
 				<div className={styles.durations}>
 					{format(created_at, 'HH:mm a dd MMM')}

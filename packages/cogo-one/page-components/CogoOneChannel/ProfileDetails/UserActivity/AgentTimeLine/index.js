@@ -1,7 +1,7 @@
 import { Avatar } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
-import { renderStatement } from '../../../../../utils/voiceTimeLine';
+import timeLineFunctions from '../../../../../utils/timeLineFunctions';
 
 import styles from './styles.module.css';
 
@@ -9,12 +9,22 @@ function AgentTimeLine({ timeLineList = [] }) {
 	return (
 		<div className={styles.container}>
 			{(timeLineList || []).map((item) => {
-				const { conversation_type = '', agent_data = {}, performed_by_data = {}, created_at } = item || {};
+				const {
+					conversation_type = '',
+					agent_data = {},
+					performed_by_data = {},
+					created_at,
+				} = item || {};
 				const { name : presentAgent } = agent_data || {};
 				const { name : previousAgent } = performed_by_data || {};
+				const { renderStatement } = timeLineFunctions();
+
 				return (
 					<>
-						<div className={styles.activity_date}>
+						<div
+							className={styles.activity_date}
+							key={created_at}
+						>
 							<div className={styles.dot} />
 							<div className={styles.durations}>
 								{format(created_at, 'HH:mm a dd MMM')}

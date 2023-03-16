@@ -52,7 +52,6 @@ function MessageConversations({
 	lastPage = false,
 
 }) {
-	console.log('messagesData:', messagesData);
 	const messageRef = useRef();
 	const { id = '', channel_type = '' } = activeMessageCard;
 

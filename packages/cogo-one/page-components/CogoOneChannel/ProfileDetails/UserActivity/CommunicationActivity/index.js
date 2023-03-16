@@ -1,6 +1,4 @@
-/* eslint-disable max-len */
-import { cl } from '@cogoport/components';
-import { Modal, Avatar } from '@cogoport/components';
+import { cl, Modal, Avatar } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -63,12 +61,18 @@ function CommunicationActivity({ communication = {} }) {
 											{' '}
 											{startCase(type)}
 										</div>
-										<div role="presentation" className={styles.icon_type} onClick={() => handleContent(body, subject)}>
+										<div
+											role="presentation"
+											className={styles.icon_type}
+											onClick={() => handleContent(body, subject)}
+										>
 											{SOURCE_ICON_MAPPING[type]}
 										</div>
 									</div>
 									<div className={styles.message_details}>
-										<div className={cl`${type === 'push_notification' ? styles.push_div : ''} ${styles.user_details}`}>
+										<div className={cl`${type === 'push_notification' ? styles.push_div : ''} 
+															${styles.user_details}`}
+										>
 											{subject && type === 'push_notification' && (
 												<div className={styles.user_message}>
 													<HTMLPreview html={body} type="push_notification" />
@@ -103,6 +107,7 @@ function CommunicationActivity({ communication = {} }) {
 									</div>
 									<div className={styles.user_avatar}>
 										<Avatar
+											// eslint-disable-next-line max-len
 											src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
 											alt="img"
 											disabled={false}
@@ -128,7 +133,12 @@ function CommunicationActivity({ communication = {} }) {
 				>
 					<Modal.Header title={title || 'Message'} />
 					<Modal.Body>
-						{title === null ? <MessageBody message_type={message_type} response={{ message: message || text, media_url }} /> : <HTMLPreview html={showDetails} type="email" />}
+						{title === null ? (
+							<MessageBody
+								message_type={message_type}
+								response={{ message: message || text, media_url }}
+							/>
+						) : <HTMLPreview html={showDetails} type="email" />}
 					</Modal.Body>
 				</Modal>
 

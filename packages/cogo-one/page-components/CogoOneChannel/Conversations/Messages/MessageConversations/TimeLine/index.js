@@ -1,23 +1,24 @@
 import { format } from '@cogoport/utils';
 import React from 'react';
 
-import { renderStatement } from '../../../../../../utils/voiceTimeLine';
+import timeLineFunctions from '../../../../../../utils/timeLineFunctions';
 
 import styles from './styles.module.css';
 
-function TimeLine({ eachMessage, key }) {
+function TimeLine({ eachMessage = {}, key = '' }) {
 	const {
 		conversation_type = '',
 		agent_data = {},
 		performed_by_data = {},
 		created_at,
-	} = eachMessage || {};
+	} = eachMessage;
 	const { name : presentAgent } = agent_data || {};
 	const { name : previousAgent } = performed_by_data || {};
+	const { renderStatement } = timeLineFunctions();
 
 	return (
 		<div className={styles.container} key={key}>
-			<div className={styles.line} />
+			<div className={styles.break_the_chat} />
 			<div className={styles.timeline_text}>
 				<div className={styles.timeline_container}>
 					{renderStatement({

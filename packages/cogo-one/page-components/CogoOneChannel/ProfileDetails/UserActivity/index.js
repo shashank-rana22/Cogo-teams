@@ -6,9 +6,9 @@ import { useState, useEffect } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
-import USER_ACTIVITY_COMPONENT_MAPPING from '../../../../constants/USER_ACTIVITY_MAPPING';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
 import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
+import getUserActivityComponent from '../../../../utils/getUserActivityComponent';
 
 import Filters from './Filters';
 import LoadingState from './LoadingState';
@@ -26,7 +26,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 
 	const user_id = activeTab === 'message' ? messageUserId : voiceCallUserId;
 	const lead_user_id = activeTab === 'message' ? messageLeadUserId : null;
-	const ActiveComp = USER_ACTIVITY_COMPONENT_MAPPING(activityTab, activeSubTab) || null;
+	const ActiveComp = getUserActivityComponent(activityTab, activeSubTab) || null;
 
 	const {
 		loading = false,
@@ -57,6 +57,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		lead_user_id,
 		type: 'activity',
 	});
+
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
 	const { list: timeLineList = [], total_count: count } = timeLineData || {};
@@ -182,8 +183,11 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 								visible={filterVisible}
 								onClickOutside={() => setFilterVisible(false)}
 							>
-
-								<IcMFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
+								<IcMFilter
+									width={20}
+									height={20}
+									onClick={() => setFilterVisible(!filterVisible)}
+								/>
 							</Popover>
 							{!isEmpty(filters) && <div className={styles.filters_applied} />}
 						</div>
