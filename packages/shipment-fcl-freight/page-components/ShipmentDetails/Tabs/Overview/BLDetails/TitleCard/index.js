@@ -28,42 +28,34 @@ function TitleCard({
 	return (
 		<div className={cl`${styles.container} title-card`}>
 			<div className={styles.display_card}>
-				{shipment_data?.shipment_type === 'fcl_freight' ? (
-					<div className={styles.details}>
-						<div className={styles.title_container}>
-							<div className={styles.document_type}>
-								{doc_type}
-								{startCase(item?.status)}
-								:
-							</div>
-
-							<div className={styles.ontrack}>
-								{`${startCase(item?.containers_count || 0)} ${
-									item?.containers_count === 1 ? 'Container' : 'Containers'
-								} on track`}
-							</div>
-
-							{item?.containers_rolled_over ? (
-								<div className={styles.roll_over}>
-									,
-									{startCase(item?.containers_rolled_over)}
-									rolled over
-								</div>
-							) : null}
+				<div className={styles.details}>
+					<div className={styles.title_container}>
+						<div className={styles.document_type}>
+							{doc_type}
+							{startCase(item?.status)}
+							:
 						</div>
+
+						<div className={styles.ontrack}>
+							{`${startCase(item?.containers_count || 0)} ${
+								item?.containers_count === 1 ? 'Container' : 'Containers'
+							} on track`}
+						</div>
+
+						{item?.containers_rolled_over ? (
+							<div className={styles.roll_over}>
+								,
+								{startCase(item?.containers_rolled_over)}
+								rolled over
+							</div>
+						) : null}
 					</div>
-				) : null}
+				</div>
 
 				<div className={styles.bl_number}>
-					{shipment_data?.shipment_type === 'air_freight' ? (
-						<>AWB Number</>
-					) : (
-						<>BL Number</>
-					)}
+					BL Number
 					:
-					{' '}
 					{item?.bl_number}
-					{' '}
 				</div>
 			</div>
 

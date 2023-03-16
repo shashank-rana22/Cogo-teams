@@ -3,8 +3,6 @@ import React, { useState, useContext } from 'react';
 
 import { ShipmentDetailContext } from '../../../../../common/context';
 import EmptyState from '../../../../../common/EmptyState';
-
-// import ManageServices from '../../../../commons/ManageServices';
 // import useListContainerDetails from '../../../hooks/useListContainerDetails';
 import { data } from '../dummy_data';
 
@@ -36,8 +34,7 @@ function BLDetails() {
 
 	const loading = false;
 
-	const showConditionForBlContainerBtn = data?.list?.length
-		&& shipment_data?.stakeholder_types?.some((ele) => ['superadmin', 'service_ops2'].includes(ele));
+	console.log('primary_service', primary_service, shipment_data);
 
 	const renderBlCount = (
 		<div className={styles.bl_count_container}>
@@ -49,64 +46,62 @@ function BLDetails() {
 				{primary_service?.containers_count || 0}
 				Containers)
 			</div>
-			{showConditionForBlContainerBtn ? (
-				<div className={styles.button_container}>
-					<Button
-						onClick={(e) => {
-							setMappingModal(true);
-							e.stopPropagation();
-						}}
-						className="primary sm"
-						style={{ marginLeft: '6px' }}
-					>
-						Bl Container Mapping
-					</Button>
 
-					<Button
-						onClick={(e) => {
-							setEditContainerNum(true);
-							e.stopPropagation();
-						}}
-						className="primary sm"
-					>
-						Update Container Number
-					</Button>
+			<div className={styles.button_container}>
+				<Button
+					onClick={(e) => {
+						setMappingModal(true);
+						e.stopPropagation();
+					}}
+					className="primary sm"
+					style={{ marginLeft: '6px' }}
+				>
+					Bl Container Mapping
+				</Button>
 
-					{mappingModal ? (
-						<Modal
-							show={mappingModal}
-							onClose={() => {
-								setMappingModal(false);
-							}}
+				<Button
+					onClick={(e) => {
+						setEditContainerNum(true);
+						e.stopPropagation();
+					}}
+					className="primary sm"
+				>
+					Update Container Number
+				</Button>
+
+				{mappingModal ? (
+					<Modal
+						show={mappingModal}
+						onClose={() => {
+							setMappingModal(false);
+						}}
 							// position={isMobile ? 'bottom' : ''}
 							// fullscreen={isMobile}
-							className="primary lg"
-						>
-							<BlContainer
-								shipment_data={shipment_data}
-								data={data}
-								setMappingModal={setMappingModal}
-							/>
-						</Modal>
-					) : null}
+						className="primary lg"
+					>
+						<BlContainer
+							shipment_data={shipment_data}
+							data={data}
+							setMappingModal={setMappingModal}
+						/>
+					</Modal>
+				) : null}
 
-					{editContainerNum ? (
-						<Modal
-							show={editContainerNum}
-							onClose={() => {
-								setEditContainerNum(false);
-							}}
-							className="primary sm"
-						>
-							<ContainerNmUpdate
-								setEditContainerNum={setEditContainerNum}
-								shipment_data={shipment_data}
-								// refetch={refetch}
-							/>
-						</Modal>
-					) : null}
-				</div>
-			) : null}
+				{editContainerNum ? (
+					<Modal
+						show={editContainerNum}
+						onClose={() => {
+							setEditContainerNum(false);
+						}}
+						className="primary sm"
+					>
+						<ContainerNmUpdate
+							setEditContainerNum={setEditContainerNum}
+							shipment_data={shipment_data}
+						/>
+					</Modal>
+				) : null}
+			</div>
 		</div>
 	);
 

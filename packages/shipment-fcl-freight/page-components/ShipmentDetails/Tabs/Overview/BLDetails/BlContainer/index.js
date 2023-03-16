@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 
-import Layout from '../../../../../../common/Layout';
 import useBlContainer from '../../../../../../hooks/useBlContainer';
 
 import styles from './styles.module.css';
