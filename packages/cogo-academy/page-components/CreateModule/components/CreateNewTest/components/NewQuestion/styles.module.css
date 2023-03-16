@@ -65,8 +65,8 @@
 	margin-left: 12px;
 }
 
-.breadcrumb_item{
-	font-weight: 600;
+.breadcrumb_item {
 	font-size: 16px;
-	color: #6FA5AB;
+	font-weight: 600;
+	color: #6fa5ab;
 }
