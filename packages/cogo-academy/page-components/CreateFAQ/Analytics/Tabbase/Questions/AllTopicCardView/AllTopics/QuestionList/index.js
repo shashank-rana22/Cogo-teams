@@ -3,10 +3,10 @@ import React from 'react';
 import AllQuestions from './AllQuestions';
 import styles from './styles.module.css';
 
-function QuestionsList({ props }) {
+function QuestionsList({ id }) {
 	return (
 		<div className={styles.container}>
-			<AllQuestions props={props} />
+			<AllQuestions id={id} />
 		</div>
 	);
 }

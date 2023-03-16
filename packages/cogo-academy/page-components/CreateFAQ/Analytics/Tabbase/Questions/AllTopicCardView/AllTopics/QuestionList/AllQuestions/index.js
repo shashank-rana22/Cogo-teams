@@ -1,21 +1,30 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 // eslint-disable-next-line import/no-unresolved
 import startCase from '@cogoport/utils/src/utilities/startCase';
 import React from 'react';
 
 import StyledTable from '../../../../../../../../../commons/StyledTable';
+import useListFaqQuestions from '../../../../../../hooks/useListFaqQuestions';
 
 import styles from './styles.module.css';
 
-function AllQuestions({ props = [] }) {
-	const listdata = props || [];
+function AllQuestions({ id = '' }) {
+	const truncate = (str) => (str?.length > 58 ? `${str.substring(0, 56)}...` : str);
+
+	const topicId = id;
+	const props = useListFaqQuestions({ topicId });
+
+	const listdata = props.data?.list || [];
+	console.log(listdata, 'lslslsls');
 
 	const addedQuestionsColumns = () => [
 		{
 			Header   : 'Questions',
 			accessor : (items) => (
 				<div className={styles.question}>
-					{items?.question_abstract}
+					<Tooltip content={items?.question_abstract} placement="right">
+						<div>{truncate(items?.question_abstract)}</div>
+					</Tooltip>
 				</div>
 			),
 		},
@@ -42,7 +51,7 @@ function AllQuestions({ props = [] }) {
 			Header   : 'No.of Likes',
 			accessor : (items) => (
 				<div className={styles.question}>
-					{items?.view_count}
+					{items?.answers[0]?.upvote_count}
 				</div>
 			),
 		},
@@ -50,7 +59,7 @@ function AllQuestions({ props = [] }) {
 			Header   : 'No.of Dislikes',
 			accessor : (items) => (
 				<div className={styles.question}>
-					{items?.view_count}
+					{items?.answers[0]?.downvote_count}
 				</div>
 			),
 		},

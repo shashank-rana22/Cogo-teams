@@ -16,6 +16,7 @@ function Tabbase() {
 				fullWidth
 				themeType="primary"
 				onChange={setActiveTab}
+
 			>
 				<TabPanel name="By_Questions" title="By Questions" badge="Total 200">
 					<Questions />

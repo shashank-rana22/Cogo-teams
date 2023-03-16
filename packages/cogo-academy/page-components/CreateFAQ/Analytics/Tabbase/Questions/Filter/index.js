@@ -1,8 +1,10 @@
 import { Select, DateRangepicker } from '@cogoport/components';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function Filter({ selectedItem, setSelectedItem }) {
+	const [date, setDate] = useState('');
 	const options = [
 		{ label: 'All Questions', value: 'All_Questions' },
 		{ label: 'All Topics', value: 'All_topics' },
@@ -48,8 +50,8 @@ function Filter({ selectedItem, setSelectedItem }) {
 					<DateRangepicker
 						id="select_date_range"
 						name="date"
-						// onChange={setDate}
-						// value={date}
+						onChange={setDate}
+						value={date}
 						dateFormat="MMM dd, yyyy"
 						isPreviousDaysAllowed
 						// maxDate={maxDate}

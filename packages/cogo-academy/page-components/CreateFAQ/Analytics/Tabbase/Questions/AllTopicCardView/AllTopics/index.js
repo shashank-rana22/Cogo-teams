@@ -1,5 +1,6 @@
 import { Pill, Button, Tooltip } from '@cogoport/components';
 import { IcMArrowDown, IcMArrowUp, IcMArrowDoubleRight } from '@cogoport/icons-react';
+import startCase from '@cogoport/utils/src/utilities/startCase';
 import { useState, forwardRef } from 'react';
 
 import QuestionsList from './QuestionList';
@@ -15,30 +16,18 @@ const scrollHorizontal = (scrollOffset, ref) => {
 
 function AllTopic({ props = '' }) {
 	const {
-		active_audiences = [],
-		most_viewed_questions = [],
-		popular_questions,
-		question_stats = '',
-		topic_wise_questions,
-		trending_tags,
-		trending_topics,
-		unpopular_questions,
-	} = props;
-	const {
-		name = '',
+		display_name = '',
 		question_count = 0,
 		view_count = 0,
 		faq_questions = [],
+		total_likes = 0,
+		total_dislikes = 0,
+		most_disliked_questions = [],
+		most_liked_questions = [],
+		id = '',
 
 	} = props;
 	const truncate = (str) => (str?.length > 30 ? `${str.substring(0, 28)}...` : str);
-
-	const {
-		no_of_questions = '',
-		no_of_likes = '',
-		no_of_dislikes = '',
-		no_of_views = '',
-	} = question_stats;
 
 	const [showQuestions, setShowQuestions] = useState(false);
 	return (
@@ -55,9 +44,9 @@ function AllTopic({ props = '' }) {
 
 						}}
 					>
-						<Tooltip content={name} placement="right">
+						<Tooltip content={display_name} placement="right">
 							<div>
-								{truncate(name)}
+								{truncate(startCase(display_name))}
 							</div>
 						</Tooltip>
 
@@ -105,7 +94,7 @@ function AllTopic({ props = '' }) {
 					>
 						No of Likes:
 						{' '}
-						{no_of_likes}
+						{total_likes}
 
 					</Pill>
 					<Pill
@@ -120,7 +109,7 @@ function AllTopic({ props = '' }) {
 					>
 						No of Dislikes:
 						{' '}
-						{no_of_dislikes}
+						{total_dislikes}
 
 					</Pill>
 
@@ -129,14 +118,14 @@ function AllTopic({ props = '' }) {
 					<div style={{ display: 'flex' }}>
 						<ViewCards
 							cardHeading="User group that viewed the Most Questions "
-							subHeading={active_audiences}
+							subHeading=""
 						/>
 						<ViewCardsList
 							cardHeading="Top Viewed Questions"
-							contentQuestion={most_viewed_questions}
+							contentQuestion={faq_questions}
 						/>
-						<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={most_viewed_questions} />
-						<ViewCardsList cardHeading="Top Disliked Questions" contentQuestion={most_viewed_questions} />
+						<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={faq_questions} />
+						<ViewCardsList cardHeading="Top Disliked Questions" contentQuestion={faq_questions} />
 					</div>
 				</div>
 				<div style={{ marginTop: '-25px', marginRight: '-10px', float: 'right' }}>
@@ -146,7 +135,7 @@ function AllTopic({ props = '' }) {
 					</Button>
 				</div>
 			</div>
-			{showQuestions ? <QuestionsList props={faq_questions} /> : null}
+			{showQuestions ? <QuestionsList id={id} /> : null}
 		</div>
 
 	);
