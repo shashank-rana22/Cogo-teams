@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useRequest } from '@cogoport/request';
-import { toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 
 const useUpdateSeen = ({ refetch = () => { }, channel_id }) => {
 
@@ -18,7 +18,7 @@ const useUpdateSeen = ({ refetch = () => { }, channel_id }) => {
 					},
 				});
 			} catch (err) {
-				toast.error(err?.data);
+				Toast.error(err?.data);
 			}
 		})();
 	}, [trigger]);

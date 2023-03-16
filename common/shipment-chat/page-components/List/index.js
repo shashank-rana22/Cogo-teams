@@ -18,12 +18,12 @@ import {
 } from '@cogoport/icons-react';
 // import Details from '../Details';
 import useGetShipmentChatList from '../../hooks/useGetShipmentChatList';
-// import { ShipmentDetailContext } from '../../../Context';
+import { ShipmentDetailContext } from '@cogoport/context';
 import EmptyState from '../../common/EmptyState';
 // import CreateChannel from './CreateChannel';
-// import useUpdateSeen from '../hooks/useUpdateSeen';
+import useUpdateSeen from '../../hooks/useUpdateSeen';
 import useGetChannel from '../../hooks/useGetChannel';
-// import ListLoader from './ListLoader';
+import ListLoader from './ListLoader';
 import styles from './styles.module.css';
 
 const List = ({
@@ -34,7 +34,7 @@ const List = ({
 	setSeenLoading = () => { },
 }) => {
 	const refOuter = useRef(null);
-	// const [{ shipment_data }] = useContext(ShipmentDetailContext);
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [count, setCount] = useState(0);
 	const [storeId, useStoreId] = useState();
 	const [id, setId] = useState();
@@ -45,32 +45,32 @@ const List = ({
 	const { ListData, page, total_page, filters, hookSetters, loading, refetch } =
 		useGetShipmentChatList({ status });
 
-	// const defaultChannel = ListData?.find((obj) => {
-	// 	return obj?.source_id === shipment_data?.id;
-	// });
+	console.log(ListData, page, total_page, filters, hookSetters, 'jjjjjjjjj');
 
-	const defaultChannel = {};
+	const defaultChannel = ListData?.find((obj) => {
+		return obj?.source_id === shipment_data?.id;
+	});
 
 	const data = defaultChannel ? defaultChannel?.id : ListData[0]?.id;
 
-	// const { onCreate, loading: seenLoading } = useUpdateSeen({ channel_id: id });
+	const { onCreate, loading: seenLoading } = useUpdateSeen({ channel_id: id });
 
 	const { get, personal_data } = useGetChannel({ channel_id: id });
 
-	// useEffect(() => {
-	// 	setSeenLoading(seenLoading);
-	// }, [seenLoading]);
+	useEffect(() => {
+		setSeenLoading(seenLoading);
+	}, [seenLoading]);
 
 	useEffect(() => {
-		// if (id && !showUnreadChat) {
-		// 	onCreate(id);
-		// } else if (showUnreadChat && count === 0) {
-		// 	setCount(1);
-		// 	useStoreId(id);
-		// } else {
-		// 	setCount(0);
-		// 	onCreate(storeId);
-		// }
+		if (id && !showUnreadChat) {
+			onCreate(id);
+		} else if (showUnreadChat && count === 0) {
+			setCount(1);
+			useStoreId(id);
+		} else {
+			setCount(0);
+			onCreate(storeId);
+		}
 	}, [id, showUnreadChat]);
 
 	useEffect(() => {
@@ -91,26 +91,25 @@ const List = ({
 		setShowUnreadChat(!showUnreadChat);
 	};
 
-	// const channelList = showUnreadChat ? unreadDataList : ListData;
-	const channelList = ListData;
+	const channelList = showUnreadChat ? unreadDataList : ListData;
 	console.log(channelList, 'channelList');
 
-	// const loadMore = useCallback(() => {
-	// 	setTimeout(() => {
-	// 		if (!loading) {
-	// 			hookSetters.setFilters({ ...filters, page: page + 1 });
-	// 		}
-	// 	}, 200);
-	// }, [loading]);
+	const loadMore = useCallback(() => {
+		setTimeout(() => {
+			if (!loading) {
+				hookSetters.setFilters({ ...filters, page: page + 1 });
+			}
+		}, 200);
+	}, [loading]);
 
 	const renderContent = () => {
-		// if (loading && isEmpty(ListData)) {
-		// 	return <ListLoader />;
-		// }
+		if (loading && isEmpty(ListData)) {
+			return <ListLoader />;
+		}
 
-		// if (!loading && !channelList?.length) {
-		// 	return <EmptyState isMobile />;
-		// }
+		if (!loading && !channelList?.length) {
+			return <EmptyState isMobile />;
+		}
 
 		return channelList?.map((item) => {
 			const className = id === item?.id ? 'colored' : 'not_color';
@@ -145,7 +144,7 @@ const List = ({
 
 	const handleSelect = (currentStatus) => {
 		refOuter.current.scrollTop = 0;
-		// hookSetters.setFilters({ page: 1 });
+		hookSetters.setFilters({ page: 1 });
 		setStatus(currentStatus);
 	};
 
@@ -199,7 +198,7 @@ const List = ({
 					</div>
 
 					<div className={styles.list_container} ref={refOuter}>
-						{/* <InfiniteScroll
+						<InfiniteScroll
 							pageStart={1}
 							initialLoad={false}
 							loadMore={!showUnreadChat && loadMore}
@@ -207,14 +206,14 @@ const List = ({
 							useWindow={false}
 						>
 							{renderContent()}
-						</InfiniteScroll> */}
+						</InfiniteScroll>
 						<div>
 							{renderContent()}
 						</div>
 
-						{/* {loading && !isEmpty(ListData) && !showUnreadChat && (
+						{loading && !isEmpty(ListData) && !showUnreadChat && (
 							<div className={styles.custom_loader}>Loading...</div>
-						)} */}
+						)}
 					</div>
 
 					{isMobile ? (
