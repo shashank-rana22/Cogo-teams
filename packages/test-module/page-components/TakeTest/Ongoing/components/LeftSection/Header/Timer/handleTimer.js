@@ -1,9 +1,9 @@
-const handleTimer = (kycSubmittedTime) => {
+const handleTimer = (testStartedAt = '1678887248100', duration = 60) => {
 	const timeNow = new Date().getTime();
-	let difference = timeNow - '1678858892495';
+	let difference = timeNow - testStartedAt;
 
-	if (difference < 30 * 60000) {
-		difference = 30 * 60000 - difference;
+	if (difference < duration * 60000) {
+		difference = duration * 60000 - difference;
 	}
 
 	let hours = Math.floor(
@@ -11,8 +11,6 @@ const handleTimer = (kycSubmittedTime) => {
 	);
 	let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
 	let seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-	console.log(seconds, 'seconds');
 
 	if (hours) {
 		hours = `${hours}${'h '}`;
@@ -26,7 +24,7 @@ const handleTimer = (kycSubmittedTime) => {
 		seconds = `${seconds}${'s '}`;
 	} else seconds = '';
 
-	if (difference < 30 * 60000) {
+	if (difference < duration * 60000) {
 		return `${hours}${minutes}${seconds}`;
 	}
 

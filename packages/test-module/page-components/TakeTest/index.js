@@ -20,7 +20,7 @@ const COMPONENT_MAPPING = {
 };
 
 function TakeTest() {
-	const [activeState, setActiveState] = useState('ongoing');
+	const [activeState, setActiveState] = useState('introduction');
 
 	const Component = COMPONENT_MAPPING[activeState].component;
 

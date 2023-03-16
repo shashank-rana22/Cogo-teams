@@ -1,0 +1,15 @@
+.container {
+    position: absolute;
+    bottom: 0;
+    width: 95%;
+    padding: 16px 0;
+}
+
+.button_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.right_button_container {
+    display: flex;
+}
