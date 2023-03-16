@@ -7,7 +7,7 @@ import { controls, controlsBottom } from '../../getControls';
 import styles from './styles.module.css';
 
 function KamLevelDetailsEdit({ data = {}, control, handleSubmit, onSave, setEditMode }) {
-	const transacting_accounts = data?.list?.['Transacting Accounts'] || {};
+	const transacting_accounts = data?.list?.['Transacting Accounts'] || [];
 
 	return (
 		<>
@@ -86,7 +86,7 @@ function KamLevelDetailsEdit({ data = {}, control, handleSubmit, onSave, setEdit
 										Current value:
 										{' '}
 										{transacting_accounts
-											? transacting_accounts.find((account) => account.threshold_score_type
+											? transacting_accounts.find((account) => account?.threshold_score_type
 									=== singleField.label)?.threshold_score || '-' : '-'}
 									</div>
 									{' '}
