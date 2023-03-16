@@ -147,7 +147,7 @@ function Customers({
 							<div className={`${styles.action} ${styles.call_icon}`}>
 								<img
 									onClick={() => setShowDialModal(true)}
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/phone_light.svg"
+									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/call_light.svg"
 									alt="call icon"
 									role="presentation"
 								/>
@@ -155,7 +155,7 @@ function Customers({
 							<div className={`${styles.action} ${styles.whatsapp_icon}`}>
 								<img
 									onClick={() => setModalType(true)}
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/w_app_d.svg"
+									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg"
 									alt="whatsapp icon"
 									role="presentation"
 								/>
