@@ -9,12 +9,10 @@ import MailOption from './MailBoxes';
 import MailModal from './MailModal';
 import styles from './styles.module.css';
 
-function MailList() {
+function MailList({ setActiveMail = () => {} }) {
 	const [activeSelect, setActiveSelect] = useState('');
 	const [showContent, setShowContent] = useState(false);
 	const [showMailModal, setShowMailModal] = useState(false);
-	const [activeMail, setActiveMail] = useState({});
-	console.log('activeMail:', activeMail);
 
 	const handleClick = (val) => {
 		setActiveSelect(val);

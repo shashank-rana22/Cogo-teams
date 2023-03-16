@@ -34,6 +34,8 @@ function Customers({
 	showBotMessages = false,
 	setShowBotMessages,
 	setShowDialModal = () => {},
+	activeMail = {},
+	setActiveMail = () => {},
 
 }) {
 	const onChangeToggle = () => {
@@ -118,7 +120,7 @@ function Customers({
 			)}
 
 			{activeTab === 'mail' && (
-				<MailList />
+				<MailList activeMail={activeMail} setActiveMail={setActiveMail} />
 			)}
 
 			{openModal && (

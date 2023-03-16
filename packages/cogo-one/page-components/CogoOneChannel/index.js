@@ -37,6 +37,7 @@ function CogoOne() {
 	const [openModal, setOpenModal] = useState(false);
 	const { suggestions = [] } = useListChatSuggestions();
 	const [showDialModal, setShowDialModal] = useState(false);
+	const [activeMail, setActiveMail] = useState({});
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
@@ -88,7 +89,8 @@ function CogoOne() {
 
 	const renderComponent = () => {
 		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
-			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))) {
+			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
+			|| (activeTab === 'mail' && !isEmpty(activeMail))) {
 			return (
 				<>
 					<Conversations
@@ -100,15 +102,18 @@ function CogoOne() {
 						userId={userId}
 						isomniChannelAdmin={isomniChannelAdmin}
 						showBotMessages={showBotMessages}
+						activeMail={activeMail}
 					/>
-					<ProfileDetails
-						activeMessageCard={activeMessageCard}
-						activeTab={activeTab}
-						activeVoiceCard={activeVoiceCard}
-						firestore={firestore}
-						updateLeaduser={updateLeaduser}
-						activeCardId={activeCardId}
-					/>
+					{activeTab !== 'mail' && (
+						<ProfileDetails
+							activeMessageCard={activeMessageCard}
+							activeTab={activeTab}
+							activeVoiceCard={activeVoiceCard}
+							firestore={firestore}
+							updateLeaduser={updateLeaduser}
+							activeCardId={activeCardId}
+						/>
+					)}
 				</>
 			);
 		}
@@ -150,6 +155,8 @@ function CogoOne() {
 				setShowBotMessages={setShowBotMessages}
 				showBotMessages={showBotMessages}
 				setShowDialModal={setShowDialModal}
+				activeMail={activeMail}
+				setActiveMail={setActiveMail}
 			/>
 
 			<div className={styles.chat_details_continer}>
