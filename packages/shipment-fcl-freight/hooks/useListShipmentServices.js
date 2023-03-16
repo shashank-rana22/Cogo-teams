@@ -3,25 +3,24 @@ import { useRequest } from '@cogoport/request';
 // import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-function useGetShipment() {
+function useListShipmentServices() {
 	// const {
 	// 	id,
 	// } = useSelector(({ general }) => ({
 	// 	id: general?.query?.id || '',
 	// }));
 
-	const [{ loading : isGettingShipment, data }, trigger] = useRequest({
-		url    : 'fcl_freight/get_shipment',
+	const [{ loading : servicesLoading, data }, trigger] = useRequest({
+		url    : 'list_shipment_services',
 		method : 'GET',
 	}, { manual: true });
 
-	const getShipment = useCallback(() => {
+	const listServices = useCallback(() => {
 		(async () => {
 			try {
 				const res = await trigger({
 					params: {
-						id                 : 'c2f006c3-37d0-443f-af04-5083b16c63c5',
-						additional_methods : ['main_service', 'documents'],
+						shipment_id: 'cad59832-2185-4ead-aadb-91e36bea4a05',
 					},
 				}); if (!res.hasError) {
 					Toast.error('dsfghj');
@@ -33,19 +32,19 @@ function useGetShipment() {
 	}, [trigger]);
 
 	useEffect(() => {
-		getShipment();
-	}, [getShipment]);
+		listServices();
+	}, [listServices]);
+
+	console.log({ data });
 
 	return {
-
-		get: {
-			isGettingShipment,
-			refetch         : getShipment,
-			primary_service : data?.primary_service,
-			documents       : data?.documents,
-			shipment_data   : data?.summary,
+		servicesGet: {
+			servicesLoading,
+			refetchServices : listServices,
+			servicesList    : data?.list || [],
 		},
+
 	};
 }
 
-export default useGetShipment;
+export default useListShipmentServices;

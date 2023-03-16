@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import { ShipmentDetailContext } from '../../common/context';
 import useGetShipment from '../../hooks/useGetShipment';
+import useListShipmentServices from '../../hooks/useListShipmentServices';
 
 import ShipmentInfo from './ShipmentInfo';
 import Tab from './Tabs';
@@ -9,13 +10,14 @@ import Timeline from './TimeLine';
 import TopBar from './TopBar';
 
 function ShipmentDetails() {
-	const { isGettingShipment, refetch, data } = useGetShipment();
+	const { get } = useGetShipment();
+
+	const { servicesGet } = useListShipmentServices();
 
 	const contextValues = useMemo(() => ({
-		isGettingShipment,
-		refetch,
-		...data,
-	}), [data, isGettingShipment, refetch]);
+		...get,
+		...servicesGet,
+	}), [get, servicesGet]);
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
