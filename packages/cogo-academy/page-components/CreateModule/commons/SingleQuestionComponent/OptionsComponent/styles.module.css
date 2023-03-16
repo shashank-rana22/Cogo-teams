@@ -1,27 +1,46 @@
-.container {
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-	margin-top: 12px;
-}
-
 .field_container {
-	display: flex;
+	gap: 8px;
 	align-items: center;
+	margin-top: 24px;
 }
 
 .error {
 	border: 1px solid #cb6464;
 }
 
-.button_container {
+.right_button_container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin-left: 16px;
+	margin-left: 20px;
 
 	.add_button {
 		width: 72px;
-		margin-right: 12px;
+		margin-right: 16px;
+	}
+}
+
+.option_container {
+	display: flex;
+	align-items: center;
+}
+
+.alphabet_container {
+	margin: 0 16px 0 32px;
+	font-weight: 500;
+}
+
+.left_button_container {
+	display: flex;
+	gap: 8px;
+	justify-content: center;
+	width: 168px;
+	margin-left: 16px;
+
+	:global {
+		.ui_chip_container {
+			min-width: 60px;
+			height: 24px;
+		}
 	}
 }

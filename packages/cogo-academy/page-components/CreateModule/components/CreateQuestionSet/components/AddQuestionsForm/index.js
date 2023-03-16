@@ -1,54 +1,94 @@
-// import { useForm } from '@cogoport/forms';
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import CreateQuestion from '../../../../commons/CreateQuestion';
+import LoadingState from '../../../../commons/LoadingState';
+import SavedQuestionDetails from '../../../../commons/SavedQuestionDetails';
 
 import styles from './styles.module.css';
 
-function AddQuestionsForm() {
-	// const [allKeysSaved, setAllKeysSaved] = useState(false);
+function AddQuestionsForm({
+	questionSetId,
+	savedQuestionDetails,
+	allKeysSaved,
+	data,
+	loading,
+	getTestQuestionTest,
+	setSavedQuestionDetails,
+	setAllKeysSaved,
+	editDetails,
+	setEditDetails,
+}) {
+	const { test_questions } = data || {};
 
-	const [savedQuestionDetails, setSavedQuestionDetails] = useState([{ id: new Date().getTime(), isNew: true }]);
+	if (isEmpty(questionSetId)) {
+		return null;
+	}
 
-	const [formToShow, setFormToShow] = useState(savedQuestionDetails[0].id);
-
-	console.log(setFormToShow, setSavedQuestionDetails);
-
-	// const {
-	// 	fields = {},
-	// 	watch,
-	// 	handleSubmit = () => {},
-	// 	formState: { errors = {} },
-	// 	reset,
-	// 	setValue,
-	// 	getValues,
-	// 	register,
-	// } = useForm();
+	if (loading) {
+		return <LoadingState />;
+	}
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.label}>Questions</div>
 
-			{savedQuestionDetails.map((item, index) => {
-				const { id } = item;
+			{test_questions.filter((item) => item.id !== editDetails?.id).length > 0 ? (
+				<SavedQuestionDetails
+					savedQuestionDetails={savedQuestionDetails}
+					test_questions={test_questions}
+					editDetails={editDetails}
+					setEditDetails={setEditDetails}
+					allKeysSaved={allKeysSaved}
+					setAllKeysSaved={setAllKeysSaved}
+				/>
+			) : null}
 
-				if (id === formToShow) {
-					return <CreateQuestion index={index} />;
+			{(savedQuestionDetails || []).map((item, index) => {
+				const { isNew } = item;
+
+				if (isNew) {
+					return (
+						<CreateQuestion
+							index={index}
+							item={item}
+							questionSetId={questionSetId}
+							getTestQuestionTest={getTestQuestionTest}
+							setSavedQuestionDetails={setSavedQuestionDetails}
+							setAllKeysSaved={setAllKeysSaved}
+							editDetails={editDetails}
+							setEditDetails={setEditDetails}
+						/>
+					);
 				}
 
 				return null;
 			})}
 
+			{!isEmpty(editDetails) ? (
+				<CreateQuestion
+					editDetails={editDetails}
+					index={test_questions.findIndex((item1) => item1?.id === editDetails?.id)}
+					type="edit"
+					questionSetId={questionSetId}
+					getTestQuestionTest={getTestQuestionTest}
+					setSavedQuestionDetails={setSavedQuestionDetails}
+					setAllKeysSaved={setAllKeysSaved}
+					setEditDetails={setEditDetails}
+				/>
+			) : null}
+
 			<div className={styles.button_container}>
 				<Button
 					type="button"
-					disabled={!isEmpty(formToShow)}
+					disabled={!allKeysSaved}
 					themeType="secondary"
+					onClick={() => {
+						setSavedQuestionDetails((prev) => [...prev, { id: new Date().getTime(), isNew: true }]);
+						setAllKeysSaved(false);
+					}}
 				>
 					+ Add Another Question
-
 				</Button>
 			</div>
 		</div>

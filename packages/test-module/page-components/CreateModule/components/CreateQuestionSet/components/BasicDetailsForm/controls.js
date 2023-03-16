@@ -21,7 +21,7 @@ const getControls = () => [
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'set_user_groups',
+		name        : 'audience_ids',
 		label       : 'Select Set User Groups',
 		type        : 'select',
 		placeholder : 'Select User Groups',

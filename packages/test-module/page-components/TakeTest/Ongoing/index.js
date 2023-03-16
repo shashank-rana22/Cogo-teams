@@ -1,5 +1,5 @@
 import LeftSection from './components/LeftSection';
-import RightSection from './components/RightSection';
+// import RightSection from './components/RightSection';
 import styles from './styles.module.css';
 
 function Ongoing() {
@@ -9,7 +9,7 @@ function Ongoing() {
 				<LeftSection />
 			</div>
 			<div className={styles.right_container}>
-				<RightSection />
+				{/* <RightSection /> */}
 			</div>
 		</div>
 	);

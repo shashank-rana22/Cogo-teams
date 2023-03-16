@@ -1,13 +1,13 @@
 const getControls = () => [
 	{
-		name        : 'question',
+		name        : 'question_text',
 		label       : 'Question',
 		type        : 'input',
 		placeholder : 'Type Question',
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'answer_type',
+		name        : 'question_type',
 		label       : 'Answer type',
 		type        : 'select',
 		placeholder : 'Select Answer type',
@@ -24,23 +24,34 @@ const getControls = () => [
 		buttonText  : 'Add another option',
 		value       : [
 			{
-				option: '',
+				answer_text : '',
+				is_correct  : '',
 			},
 		],
 		controls: [
 			{
-				name        : 'option',
+				name        : 'answer_text',
 				type        : 'input',
 				placeholder : 'type option',
 				rules       : { required: 'Required' },
 
+			},
+			{
+				name    : 'is_correct',
+				type    : 'chips',
+				options : [
+					{ value: 'true', label: 'True' },
+					{ value: 'false', label: 'False' },
+				],
+				rules    : { required: 'Required' },
+				multiple : false,
 			},
 		],
 	},
 	{
 		name    : 'difficulty_level',
 		type    : 'chips',
-		label   : 'Set Difficulty level*',
+		label   : 'Set Difficulty level',
 		options : [
 			{ value: 'low', label: 'Low' },
 			{ value: 'medium', label: 'Medium' },

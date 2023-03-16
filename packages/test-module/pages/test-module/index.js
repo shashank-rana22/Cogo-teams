@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/test-module/page-components/TakeTest';
+export { default } from '@cogoport/test-module/page-components/HomePage';

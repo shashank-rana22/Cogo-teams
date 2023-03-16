@@ -11,11 +11,24 @@
 }
 
 .question_form {
-	margin-bottom: 48px;
+	margin-bottom: 60px;
+}
+
+.form_component {
+	width: 70%;
 }
 
 .button_container {
 	position: absolute;
 	right: 24px;
 	bottom: 24px;
+	display: flex;
+	gap: 16px;
+}
+
+.delete_icon {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	cursor: pointer;
 }
