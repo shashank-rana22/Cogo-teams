@@ -1,5 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 // eslint-disable-next-line import/no-named-as-default
 import useGetTestList from '../../hooks/useGetTestList';
@@ -7,8 +7,8 @@ import useGetTestList from '../../hooks/useGetTestList';
 import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
 
-function TestsList() {
-	const [activeTab, setActiveTab] = useState('tests');
+function TestsList(props) {
+	const { activeTab, setActiveTab } = props;
 
 	const { data, loading, fetchList, setParams } = useGetTestList();
 
