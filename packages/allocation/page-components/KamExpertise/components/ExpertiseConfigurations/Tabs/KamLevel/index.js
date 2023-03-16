@@ -49,7 +49,7 @@ function KamLevel() {
 				audit_data={audit_data}
 				levelLoading={levelLoading}
 			/>
-			{isEmpty(kamConfigLevelDetails) && !levelLoading ? (<EmptyState />) : (null)}
+			{isEmpty(kamConfigLevelDetails) && !levelLoading && !createKam ? (<EmptyState />) : (null)}
 			{!levelLoading ? (
 				<>
 					<Collapse
