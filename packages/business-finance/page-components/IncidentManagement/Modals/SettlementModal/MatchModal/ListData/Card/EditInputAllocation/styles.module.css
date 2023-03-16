@@ -1,0 +1,27 @@
+.text_styles {
+	margin-top: 5px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.input_container {
+	font-size: 12px;
+	text-align: center;
+}
+
+.flex {
+	display: flex;
+}
+
+.edit_icon {
+	position: relative;
+	right: 12px;
+	z-index: 999999;
+	width: 20px;
+	min-width: 10px !important;
+	height: 20px;
+	padding: 0 !important;
+	margin-left: 4px;
+	color: #333 !important;
+	background: transparent !important;
+}

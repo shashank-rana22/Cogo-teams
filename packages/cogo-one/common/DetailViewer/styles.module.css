@@ -1,0 +1,15 @@
+.form_container {
+	height: fit-content;
+	max-height: 200px;
+	margin-bottom: 24px;
+	transition: all 0.3s ease-in-out;
+}
+
+.checkboxform:checked ~ .form_container {
+	max-height: 0;
+	overflow: hidden;
+}
+
+.list_container {
+	overflow: auto;
+}

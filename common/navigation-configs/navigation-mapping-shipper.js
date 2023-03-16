@@ -10,7 +10,7 @@ const navigationMappingShipper = {
 		icon          : 'nav-tasks',
 		line          : true,
 		main_apis     : [],
-		possible_apis : [...app_apis.app_dashboard, ...app_apis.app_pay_later],
+		possible_apis : [...app_apis.app_dashboard, ...app_apis.app_pay_later, ...app_apis.export_factoting],
 		module_type   : 'dashboards',
 	},
 	app_discover_rates: {
@@ -122,9 +122,9 @@ const navigationMappingShipper = {
 		possible_apis : app_apis.app_bookings,
 		module_type   : 'crm',
 	},
-	saas_insurance: {
-		key           : 'saas_insurance',
-		title         : 'Insurance',
+	saas_cogo_insurance: {
+		key           : 'saas_cogo_insurance',
+		title         : 'Cargo Insurance',
 		href          : '/saas/insurance/list',
 		as            : '/saas/insurance/list',
 		type          : 'link',

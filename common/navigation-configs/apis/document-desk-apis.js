@@ -20,11 +20,6 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_shipment_invoice_preference',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'update_shipment',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -153,42 +148,52 @@ const apis = [
 		access_type : 'private',
 	},
 	{
-		api          : 'list_shipment_credit_notes',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'update_shipment_credit_note',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'create_shipment_credit_note',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'get_shipment_credit_note',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'update_shipment_invoice_currency',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'update_shipment_invoice_status',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'create_shipment_revoked_invoice',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'bulk_update_shipment_services',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipments',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_partner_users',
+		access_type  : 'private',
+		service_name : 'partner',
+	},
+	{
+		api          : 'get_shipment_fault_alarm_description',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_additional_services',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_documents',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_container_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organizations',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_shipment_documents',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_pending_task',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -208,32 +213,77 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_shipments',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'get_shipment_fault_alarm_description',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'list_partner_users',
+		api          : 'list_cogo_entities',
 		access_type  : 'private',
 		service_name : 'partner',
 	},
 	{
-		api          : 'list_shipment_additional_services',
+		api          : 'list_organization_billing_addresses',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_all_exchange_rates',
+		access_type  : 'private',
+		service_name : 'exchange_rate',
+	},
+	{
+		api          : 'list_organization_trade_parties',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'search_products_v2',
+		access_type  : 'private',
+		service_name : 'sage',
+	},
+	{
+		api          : 'get_shipment_exchange_rate_deviation',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_shipment_currency_conversions',
+		api          : 'list_shipment_stakeholders',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_shipment_documents',
+		api          : 'update_shipment_stakeholders',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_fault_alarm',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_fault_alarm',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_booking_parameter',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_buy_quotations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_quotation',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_service',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_additional_service',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -243,14 +293,159 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
-		api          : 'update_shipment_pending_task',
+		api          : 'get_organization_trade_requirement_draft',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_users',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_addresses',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_pocs',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_invoicing_parties',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'submit_organization_kyc',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_organization',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_shipment_organizations',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_shipment_quotation',
+		api          : 'create_organization_billing_address',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_address',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_user_invitation',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_poc',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_billing_address',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_address',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_poc',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_billing_addresses',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_documents',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_document',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_invoicing_parties',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_billing_addresses',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_documents',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_organization_document',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_invoicing_parties',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_billing_addresses',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_documents',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_organization_document',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_trade_parties',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_trade_party',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_trade_party_poc',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_document',
+		access_type  : 'private',
+		service_name : 'organization',
 	},
 ];
 export default apis;

@@ -1,6 +1,21 @@
 import { Select, Tabs, TabPanel } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
+const days = [
+	{ label: 'Monday', value: 1 },
+	{ label: 'Tuesday', value: 2 },
+	{ label: 'Wednesday', value: 3 },
+	{ label: 'Thursday', value: 4 },
+	{ label: 'Friday', value: 5 },
+	{ label: 'Saturday', value: 6 },
+	{ label: 'Sunday', value: 7 },
+];
+
+const dates = [
+	1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+	15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
+];
+
 function SelectDayFrequency({
 	value = {},
 	onChange,
@@ -9,21 +24,6 @@ function SelectDayFrequency({
 	const [selectedScheduleType, setSelectedScheduleType] = useState(
 		value.schedule_type,
 	);
-
-	const days = [
-		{ label: 'Monday', value: 1 },
-		{ label: 'Tuesday', value: 2 },
-		{ label: 'Wednesday', value: 3 },
-		{ label: 'Thursday', value: 4 },
-		{ label: 'Friday', value: 5 },
-		{ label: 'Saturday', value: 6 },
-		{ label: 'Sunday', value: 7 },
-	];
-
-	const dates = [
-		1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-		22, 23, 24, 25, 26, 27, 28,
-	];
 
 	const onFrequencyChange = (type) => {
 		switch (type) {

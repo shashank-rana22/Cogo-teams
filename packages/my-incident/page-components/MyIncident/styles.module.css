@@ -1,0 +1,21 @@
+.header_text {
+	font-size: 25px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.list_container {
+	padding-top: 20px;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	padding-bottom: 50px;
+	background-color: #ffff;
+
+	@media (max-width: 768px) {
+		position: absolute;
+		right: 0;
+	}
+}

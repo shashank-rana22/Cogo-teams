@@ -1,0 +1,106 @@
+.container {
+	height: 75vh;
+	overflow-y: auto;
+}
+
+.container::-webkit-scrollbar {
+	display: none;
+}
+
+.main_card {
+	padding: 8px;
+	margin: -5px 0 -5px 5px;
+	border-left: 1px solid #bdbdbd;
+}
+
+.main_card:last-child {
+	border-left: none;
+}
+
+.activity_date {
+	display: flex;
+	align-items: center;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	background: #bdbdbd;
+	border-radius: 50%;
+}
+
+.durations {
+	margin-left: 5px;
+	font-size: 10px;
+	color: #828282;
+}
+
+.card {
+	padding: 8px;
+	margin: 5px 10px;
+	background: #fff;
+	border-left: 2px solid #c26d1a;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.activity_type {
+	width: fit-content;
+	padding: 2px 6px;
+	font-size: 10px;
+	background: #f8aea8;
+	border-radius: 6px;
+}
+
+.booking_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 6px 0;
+}
+
+.title {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.booking_id {
+	font-size: 10px;
+	color: #4f4f4f;
+}
+
+.port_pair {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+
+.port {
+	display: flex;
+	flex-direction: column;
+}
+
+.country {
+	font-size: 11px;
+}
+
+.port_details {
+	display: flex;
+	align-items: center;
+}
+
+.port_name {
+	max-width: 50px;
+	overflow: hidden;
+	font-size: 11px;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.port_codes {
+	margin-left: 2px;
+	font-size: 11px;
+	color: #bdbdbd;
+}

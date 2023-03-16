@@ -1,0 +1,49 @@
+.container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 16px;
+	margin: 16px 0 16px 10px;
+	font-size: 12px;
+	text-align: center;
+	background-color: #f8f2e7;
+	border-radius: 8px;
+
+	:first-child {
+		width: 15% !important;
+		padding: 0 0 0 47px;
+	}
+
+	:nth-child(4) {
+		width: 7% !important;
+		padding: 0 0 0 34px !important;
+	}
+
+	:nth-child(5) {
+		width: 14% !important;
+		padding: 0 0 0 34px !important;
+	}
+
+	:nth-child(6) {
+		width: 14% !important;
+		padding: 0 0 0 25px !important;
+	}
+
+	:nth-child(7) {
+		width: 10% !important;
+	}
+
+	:nth-child(2) {
+		width: 14% !important;
+		padding: 0 0 0 16px !important;
+	}
+
+	:nth-child(3) {
+		width: 7% !important;
+		padding: 0 0 0 16px !important;
+	}
+}
+
+.item {
+	width: 14%;
+}

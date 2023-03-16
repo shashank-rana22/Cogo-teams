@@ -17,6 +17,8 @@ const useLoginAuthenticate = () => {
 
 	const cogo_admin_auth_token = getCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME);
 
+	const emptyPath = '/empty';
+
 	const [{ loading: loginLoading }, trigger] = useRequest({
 		url    : '/login_user',
 		method : 'post',
@@ -60,19 +62,18 @@ const useLoginAuthenticate = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const redirectFunction = () => {
+	const redirectFunction = async () => {
 		const configs = redirections(profile);
 
 		if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
 			const replaceAs = configs?.as?.replace('/v2', '');
-			router.push(replaceHref?.href, replaceAs?.as);
-		}
-		if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
+			await router.push(replaceHref, replaceAs);
+		} else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 			// eslint-disable-next-line no-undef
-			window.location.href = `/${profile?.partner?.id}${configs.href}`;
+			window.location.href = `/${profile?.partner?.id}${configs?.href || emptyPath}`;
 		} else {
-			router.push(configs.href, configs.as);
+			await router.push(configs?.href || emptyPath, configs?.as || emptyPath);
 		}
 	};
 
@@ -121,7 +122,7 @@ const useLoginAuthenticate = () => {
 					...values,
 					auth_scope   : 'partner',
 					platform     : 'admin',
-					parent_token : cogo_admin_auth_token,
+					parent_token : cogo_admin_auth_token || undefined,
 				},
 			});
 
