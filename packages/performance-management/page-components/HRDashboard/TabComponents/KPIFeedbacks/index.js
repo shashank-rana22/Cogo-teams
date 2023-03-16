@@ -1,4 +1,4 @@
-import { Toast, Modal, Button } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { IcMUpload, IcMNotifications } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';

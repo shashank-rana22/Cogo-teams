@@ -1,0 +1,13 @@
+.update_dates_container{
+    display: flex;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.update_dates{
+    margin: 8px 16px 8px 0;
+}
+
+.radio_btns{
+    display: flex;
+    flex-direction: column;
+}

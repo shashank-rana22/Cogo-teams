@@ -8,6 +8,7 @@ import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
 import useListEmployees from '../../../../../hooks/useListEmployees';
 import AllLogs from '../../../AllLogs';
+import NewLog from '../../../NewLog';
 
 import styles from './styles.module.css';
 
@@ -82,7 +83,7 @@ function LogModal({ item = {}, setItem = () => {} }) {
 					onChange={setActiveTab}
 				>
 					<TabPanel name="new" title="New Log">
-						{/* <KPIFeedbacks /> */}
+						<NewLog />
 					</TabPanel>
 					<TabPanel name="all" title="All Logs">
 						<AllLogs />
