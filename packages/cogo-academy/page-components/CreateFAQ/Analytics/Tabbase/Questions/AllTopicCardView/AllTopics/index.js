@@ -87,7 +87,7 @@ function AllTopic({ props = '' }) {
 					<ViewCardsList cardHeading="Top Disliked Questions" contentQuestion={most_disliked_questions} />
 				</div>
 
-				<div style={{ marginTop: '25px', marginRight: '-10px', float: 'right' }}>
+				<div className={styles.button_container}>
 					<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
 						<div style={{ fontWeight: 600 }}>All Questions..</div>
 						{!showQuestions ? <IcMArrowDown /> : <IcMArrowUp />}
