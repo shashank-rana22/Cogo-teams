@@ -25,6 +25,7 @@ function BadgeDetails(props) {
 				setBadgeListData={setBadgeListData}
 				expertise={expertise}
 				setExpertise={setExpertise}
+				loading={loading}
 			/>
 
 			<ListItem
