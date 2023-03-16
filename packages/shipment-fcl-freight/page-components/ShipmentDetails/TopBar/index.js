@@ -1,7 +1,14 @@
 // import styles from './styles.module.css';
+import PocSop from './PocSop';
+import ShipmentHeader from './ShipmentHeader';
 
-function ShipmentInfo() {
-	return <div> ygreuh</div>;
+function TopBar() {
+	return (
+		<div>
+			<ShipmentHeader />
+			<PocSop />
+		</div>
+	);
 }
 
-export default ShipmentInfo;
+export default TopBar;
