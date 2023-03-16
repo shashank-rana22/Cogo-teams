@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react';
-import { useSelector } from '@cogoport/store';
 import { Button, Tooltip } from '@cogoport/components';
-// import CargoDetails from '@cogo/bookings/ShipmentDetails/commons/CargoDetails';
+import { useSelector } from '@cogoport/store';
+import React, { useContext, useState } from 'react';
+
+// import CargoDetails from '@cogoport/bookings/ShipmentDetails/commons/CargoDetails';
 // import { ShipmentDetailContext } from '../../../commons/Context';
 // import PortDetails from './PortDetails';
 // import Loader from './Loader';
@@ -22,17 +23,14 @@ function Header() {
 	const isGettingShipment = false;
 
 	const shipment_data = {
-		serial_id: '123456',
-		po_number: '9898989',
-		stakeholder_types: ['booking_agent']
-	}
+		serial_id         : '123456',
+		po_number         : '9898989',
+		stakeholder_types : ['booking_agent'],
+	};
 
-	const { serial_id, po_number, stakeholder_types, importer_exporter } =
-		shipment_data || {};
+	const { serial_id, po_number, stakeholder_types, importer_exporter } =		shipment_data || {};
 
-	const showFeature = stakeholder_types?.some((e) =>
-		['superadmin', 'booking_agent', 'sales_agent', 'user'].includes(e),
-	);
+	const showFeature = stakeholder_types?.some((e) => ['superadmin', 'booking_agent', 'sales_agent', 'user'].includes(e));
 
 	let type = 'Shipment';
 	if (shipment_data?.source === 'consol') {
@@ -54,9 +52,9 @@ function Header() {
 		}
 
 		if (
-			!po_number &&
-			showFeature &&
-			!excludeShipment.includes(shipment_data?.shipment_type)
+			!po_number
+			&& showFeature
+			&& !excludeShipment.includes(shipment_data?.shipment_type)
 		) {
 			return (
 				<Button className="secondary sm" onClick={() => setOpen(true)}>
@@ -81,19 +79,22 @@ function Header() {
 						<Tooltip
 							theme="light"
 							placement="right"
-							content={
+							content={(
 								<div style={{ fontSize: '10px' }}>
 									{/* {importer_exporter?.business_name} */}
 								</div>
-							}
+							)}
 						>
 							<div className={styles.customer}>{importer_exporter?.business_name || 'aaaa'}</div>
 						</Tooltip>
 					) : (
 						<div className={styles.serial_id}>
-							{type} ID
+							{type}
+							{' '}
+							ID
 							<span style={{ fontWeight: 700, marginLeft: '4px' }}>
-								#{serial_id}
+								#
+								{serial_id}
 							</span>
 						</div>
 					)}
@@ -134,6 +135,6 @@ function Header() {
 			) : null} */}
 		</div>
 	);
-};
+}
 
 export default Header;

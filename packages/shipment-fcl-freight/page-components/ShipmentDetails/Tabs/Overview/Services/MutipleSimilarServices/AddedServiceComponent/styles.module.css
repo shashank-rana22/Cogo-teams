@@ -38,20 +38,22 @@
 	background: #fef6df;
 	border-radius: 4px;
 	padding: 12px 16px 10px 20px;
+}
 
-	&.cancelled {
-		background: #f2f2f2;
-	}
+.cancelled {
+	background: #f2f2f2;
+}
 
-	&.completed {
-		background: #f6f5fe;
-	}
-	&.confirmed_by_service_provider {
-		background: #f6f5fe;
-	}
-	&.confirmed_by_importer_exporter {
-		background: #f6f5fe;
-	}
+.completed {
+	background: #f6f5fe;
+}
+
+.confirmed_by_service_provider {
+	background: #f6f5fe;
+}
+
+.confirmed_by_importer_exporter {
+	background: #f6f5fe;
 }
 
 .expander{
@@ -65,20 +67,6 @@
 	padding: 4px;
 	cursor: pointer;
 	border-radius: 4px;
-
-	&.cancelled {
-		background: #f2f2f2;
-	}
-
-	&.completed {
-		background: #f6f5fe;
-	}
-	&.confirmed_by_service_provider {
-		background: #f6f5fe;
-	}
-	&.confirmed_by_importer_exporter {
-		background: #f6f5fe;
-	}
 }
 
 .card{

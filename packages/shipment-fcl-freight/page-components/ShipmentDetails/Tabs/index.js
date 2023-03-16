@@ -2,6 +2,7 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Documents from './Documents';
+import Emails from './Emails';
 import PurchaseInvoice from './Invoicing/PurchaseInvoice';
 import SalesInvoice from './Invoicing/SalesInvoice';
 import Overview from './Overview';
@@ -33,6 +34,9 @@ function Tab() {
 				</TabPanel>
 				<TabPanel name="documents" title="Documents">
 					<Documents />
+				</TabPanel>
+				<TabPanel name="emails" title="Emails">
+					<Emails />
 				</TabPanel>
 				<TabPanel name="tracking" title="Tracking">
 					<Tracking />

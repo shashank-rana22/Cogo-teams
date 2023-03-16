@@ -1,0 +1,21 @@
+.Container{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 40px;
+
+	.core-ui-input-root {
+		width: 300px;
+		@media (max-width: 768px) {
+			margin-top: 8px;
+		}
+	}
+
+	.core-ui-select__control {
+		width: 300px;
+	}
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}

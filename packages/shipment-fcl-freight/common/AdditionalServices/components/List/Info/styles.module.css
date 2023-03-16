@@ -1,0 +1,75 @@
+.Container{
+	.tippy-box {
+		max-width: fit-content !important;
+	}
+}
+
+.InfoDiv{
+	margin-top: 4px;
+}
+
+.item_name{
+	margin: 0px;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	color: #000000;
+	margin-left: 18px;
+}
+
+.Row{
+	display: flex;
+	align-items: center;
+	padding: 10px 16px;
+	border-bottom: 1px solid #f2f2f2;
+	white-space: nowrap;
+
+	&:last-child {
+		border-bottom: none;
+	}
+}
+
+.Tag{
+	background: #fbd69f;
+	border-radius: 4px;
+	padding: 4px 10px;
+	font-size: 10px;
+	line-height: 12px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	color: #393f70;
+
+	&.approved {
+		background: #e6fbe9;
+		color: #393f70;
+	}
+
+	&.price_recieved,
+	&.customer_confirmation_pending {
+		background: #fcedbf;
+	}
+
+	&.charges_incurred {
+		background: #fbe6e6;
+	}
+
+	&.cancelled_by_supplier,
+	&.cancelled_by_customer {
+		background: #4f4f4f;
+		color: #fff;
+	}
+
+	&.disputed {
+		background: #f7cdcd;
+		color: ##393f70;
+	}
+}
+
+.ContentDiv{
+	width: 100%;
+	background: #fff;
+}

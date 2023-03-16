@@ -1,0 +1,106 @@
+.Container{
+	background: #ffffff;
+	mix-blend-mode: normal;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+	border: none;
+	padding: 8px 10px;
+	margin: 0px 12px 12px 0px;
+	min-width: 215px;
+	border-radius: 4px;
+}
+
+.Heading{
+	margin: 0px;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 16px;
+	color: #4f4f4f;
+}
+
+.Tag{
+	background: #fbd69f;
+	border-radius: 4px;
+	padding: 4px 10px;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	color: #393f70;
+
+	&.approved {
+		background: #e6fbe9;
+		color: #393f70;
+	}
+
+	&.price_recieved,
+	&.customer_confirmation_pending {
+		background: #fcedbf;
+	}
+
+	&.charges_incurred {
+		background: #fbe6e6;
+	}
+
+	&.cancelled_by_supplier,
+	&.cancelled_by_customer {
+		background: #4f4f4f;
+		color: #fff;
+	}
+
+	&.disputed {
+		background: #bdbdbd;
+		color: #fff;
+	}
+}
+
+.Row{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 4px;
+	&.status {
+		justify-content: flex-start;
+		margin: 12px 0 0 16px;
+	}
+	[data-tippy-root] {
+		z-index: 999 !important;
+	}
+}
+
+.NameType{
+	display: flex;
+	align-items: center;
+}
+
+
+.Circle{
+	width: 10px;
+	height: 10px;
+	background: #f7cdcd;
+	border-radius: 50%;
+	margin-right: 6px;
+
+	&.upsell {
+		background: #d9eafd;
+	}
+}
+
+.ButtonText{
+	font-size: 12px;
+	color: #828282;
+	text-align: center;
+	padding: 4px;
+	cursor: pointer;
+
+	:hover {
+		color: #356efd;
+	}
+}
+.Label{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-left: 16px;
+}

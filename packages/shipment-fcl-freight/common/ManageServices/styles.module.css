@@ -1,0 +1,67 @@
+/* import animated, { fadeOutBottom } from '@cogoport/front/animate'; */
+
+.container{
+	background: #ffffff;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
+	width: 100%;
+	margin-bottom: 22px;
+	overflow-x: auto;
+}
+
+.heading{
+	font-weight: 600;
+	font-size: 16px;
+	color: #393f70;
+	width: 100%;
+}
+
+.icon_wrapper{
+	display: flex;
+	align-items: center;
+	height: 20px;
+}
+
+.header{
+	border-bottom: 1px solid #ded7fc;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+
+
+}
+
+.header_closed {
+	border-bottom: none;
+}
+
+/* export const AnimatedContainer = animated({
+	enter: {
+		easing: 'easeInOutCirc',
+		duration: 500,
+	},
+	exit: {
+		height: 0,
+		paddingTop: 0,
+		paddingBottom: 0,
+		...fadeOutBottom,
+		easing: 'easeInOutCirc',
+		duration: 500,
+	},
+}); */
+
+.flex_row{
+	background: #f6f5fe;
+	border-radius: 0px 4px 4px 0px;
+	padding: 22px 32px;
+	@media (max-width: 768px) {
+		padding: 30px 32px;
+	}
+}
+
+.err_msz{
+	font-size: 10px;
+	line-height: 14px;
+	color: #cb6464;
+}
