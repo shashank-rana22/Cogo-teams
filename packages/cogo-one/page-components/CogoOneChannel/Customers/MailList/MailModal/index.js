@@ -90,6 +90,12 @@ function MailModal({ showMailModal, setShowMailModal }) {
 		const formattedValue = val.map((item) => item?.children);
 		setValue(formattedValue);
 	};
+
+	const handleError = () => {
+		setError(false);
+		setRecipientValue('');
+		setShowControl(false);
+	};
 	return (
 		<Modal
 			show={showMailModal}
@@ -127,7 +133,7 @@ function MailModal({ showMailModal, setShowMailModal }) {
 									id="inputId"
 								/>
 								<div className={styles.cross_icon}>
-									<IcMCross />
+									<IcMCross onClick={() => handleError()} />
 								</div>
 							</div>
 							{(error) && (
@@ -169,7 +175,7 @@ function MailModal({ showMailModal, setShowMailModal }) {
 								className={styles.input_container}
 							/>
 							<div className={styles.cross_icon}>
-								<IcMCross />
+								<IcMCross onClick={(e) => handleError(e)} />
 							</div>
 						</div>
 					)}
