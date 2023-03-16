@@ -23,7 +23,7 @@ function Tab() {
 				<TabPanel name="overview" title="Overview">
 					<Overview />
 				</TabPanel>
-				<TabPanel name="invoice" title="Timeline and Tasks">
+				<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 					<TimelineAndTask />
 				</TabPanel>
 				<TabPanel name="sales_live_invoice" title="Sales Live Invoice">

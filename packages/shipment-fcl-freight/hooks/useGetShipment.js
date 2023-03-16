@@ -11,7 +11,7 @@ function useGetShipment() {
 	// }));
 
 	const [{ loading : isGettingShipment, data }, trigger] = useRequest({
-		url    : 'get_shipment',
+		url    : 'fcl_freight/get_shipment',
 		method : 'GET',
 	}, { manual: true });
 
