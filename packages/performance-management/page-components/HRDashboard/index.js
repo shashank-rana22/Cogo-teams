@@ -7,6 +7,7 @@ import Filters from '../../common/Filters';
 import PerformanceChart from '../../common/PerformanceChart';
 import useListManagers from '../../hooks/useListManagers';
 
+import LogModal from './LogModal';
 import NotifyModal from './NotifyModal';
 import styles from './styles.module.css';
 import TeamMembersList from './TeamMembersList';
@@ -141,6 +142,12 @@ function HRDashboard() {
 						</div>
 					</Modal>
 				)}
+				<Modal
+					show
+				>
+					<Modal.Header title="Log" />
+					<LogModal />
+				</Modal>
 			</div>
 		</div>
 	);

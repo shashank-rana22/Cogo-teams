@@ -1,17 +1,19 @@
-.stats_container {
+/* .stats_container {
 	display: flex;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
 	}
-}
+} */
 
 .question_button_container {
 	display: flex;
 	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin : 8px 0;
 }
 
-.redirect_container {
+/* .redirect_container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -22,7 +24,7 @@
 		font-size: 18px;
 		font-weight: 700;
 	}
-}
+} */
 
 .table_section {
 	margin-top: 16px;
@@ -49,26 +51,27 @@
 	}
 }
 
-.info_container {
+/* .info_container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
+} */
 
-.top_container {
+/* .top_container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin: 16px 0;
-}
+} */
 
-.filter_container {
+/* .filter_container {
 	margin-right: 14px;
-}
+} */
 
 .filters {
 	display: flex;
 	align-items: center;
+	margin: 16px 0;
 }
 
 .top_most_container {
@@ -76,6 +79,9 @@
 	align-items: center;
 	justify-content: space-between;
 	margin: 4px 0;
+	@media(max-width:900px){
+		display: block;
+	}
 }
 
 .upload_modal {

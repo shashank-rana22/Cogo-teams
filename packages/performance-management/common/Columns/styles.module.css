@@ -25,3 +25,11 @@
 .good_performance {
 	color: #67c676;
 }
+
+.dot{
+	width: 12px;
+	height: 12px;
+	border-radius: 6px;
+	margin-right: 4px;
+	background-color: #67c676;
+}

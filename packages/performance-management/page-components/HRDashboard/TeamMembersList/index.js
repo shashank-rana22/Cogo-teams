@@ -25,8 +25,8 @@ function TeamMembersList({
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
-					height={280}
-					width={440}
+					style={{ flex: '1', maxWidth: '400' }}
+					// height={280}
 					emptyText="No Feedbacks Found"
 					textSize="24px"
 					flexDirection="column"

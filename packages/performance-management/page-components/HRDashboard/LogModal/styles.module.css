@@ -1,0 +1,47 @@
+.main_cotainer{
+}
+
+.sub_container{
+    margin-left: 60px;
+    padding: 16px;
+}
+
+.flex_container{
+    display: flex;
+    align-items: center;
+}
+
+.circle{
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    margin: 0px 16px 0px 0px;
+    background-color: #F68B21;
+}
+
+.date{
+    color: #828282;
+    font-size: 10px;
+    margin-bottom: 12px;
+}
+
+.content{
+    border-left: 2px solid #F68B21;
+    padding-left: 24px;
+    margin-left: 4px;
+
+    p{
+        margin: 16px 0;
+    }
+}
+
+.dates_container{
+    display: flex;
+    div{
+        margin-right: 32px;
+    }
+}
+
+.checkbox{
+    margin-left: -12px;
+}

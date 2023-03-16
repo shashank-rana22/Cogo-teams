@@ -183,6 +183,18 @@ const useGetColumns = ({
 		id  : 'user_details',
 		key : 'user_details',
 	},
+	{
+		Header  	: <div className={styles.head}>Progress</div>,
+		accessor : () => {
+			<div className={styles.had_content}>
+				<div className={styles.dot} />
+				<div className={styles.dot} />
+				<div className={styles.dot} />
+			</div>;
+		},
+		id  : 'progress',
+		key : 'progress',
+	},
 	];
 
 	const finalColumns = [];

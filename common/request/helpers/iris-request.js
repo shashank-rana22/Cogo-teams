@@ -17,7 +17,7 @@ const customSerializer = (params) => {
 
 const microServices = getMicroServiceName();
 
-const irisRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
+const irisRequest = Axios.create({ baseURL: 'https://iris-matrix3.dev.cogoport.io' });
 
 irisRequest.interceptors.request.use((oldConfig) => {
 	const { ...newConfig } = oldConfig;

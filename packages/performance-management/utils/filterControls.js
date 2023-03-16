@@ -1,3 +1,4 @@
+// const useGetControls = (filterArr) => {
 const useGetControls = ({ name = 'manager' }) => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
@@ -60,6 +61,15 @@ const useGetControls = ({ name = 'manager' }) => {
 	];
 
 	return control.find((cntrl) => cntrl.name === name);
+
+	// const newControls = [];
+
+	// filterArr.forEach((name) => {
+	// 	const updatedControl = control.find((ctrl) => ctrl.name === name);
+	// 	newControls.push(updatedControl);
+	// });
+
+	// return newControls;
 };
 
 export default useGetControls;

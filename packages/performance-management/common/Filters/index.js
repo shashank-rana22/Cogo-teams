@@ -16,8 +16,9 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const departmentDesignationControls = getDepartmentControls({ Department, Designation });
-
 	const managerControls = useGetControls({ name: 'manager_name' });
+	// const filterArr = ['manager_name'];
+	// const managerControls = useGetControls(filterArr);
 	const monthControls = getMonthControls(params.Year, params.Month);
 
 	const { watch, control } = useForm();
@@ -60,6 +61,15 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 					onChange={setManagerName}
 					style={{ marginRight: '8px' }}
 				/>
+				// managerControls.map((cntrl) => (
+				// 	<Input
+				// 		{...cntrl}
+				// 		key={cntrl.name}
+				// 		type={cntrl.type}
+				// 		options={cntrl.options}
+				// 		placeholder={cntrl.placeholder}
+				// 	/>
+				// ))
 			)}
 
 			{monthControls.map((cntrl) => {
