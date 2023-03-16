@@ -2,6 +2,7 @@ import { format } from '@cogoport/utils';
 
 import useListMailDetails from '../../../../hooks/useGetMail';
 
+import Header from './Header';
 import styles from './styles.module.css';
 
 function MailConversation({ activeMail }) {
@@ -12,6 +13,7 @@ function MailConversation({ activeMail }) {
 
 	return (
 		<div className={styles.container}>
+			<Header subject={data?.subject} />
 			<div>
 				<div className={styles.time_stamp}>
 					{format(sentDateTime, 'HH:mm a dd MMM')}

@@ -9,7 +9,7 @@ import MailOption from './MailBoxes';
 import MailModal from './MailModal';
 import styles from './styles.module.css';
 
-function MailList({ setActiveMail = () => {} }) {
+function MailList({ setActiveMail = () => {}, activeMail }) {
 	const [activeSelect, setActiveSelect] = useState('');
 	const [showContent, setShowContent] = useState(false);
 	const [showMailModal, setShowMailModal] = useState(false);
@@ -36,6 +36,7 @@ function MailList({ setActiveMail = () => {} }) {
 					setShowContent={setShowContent}
 					setActiveSelect={setActiveSelect}
 					setActiveMail={setActiveMail}
+					activeMail={activeMail}
 				/>
 			)}
 
