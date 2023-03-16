@@ -1,0 +1,90 @@
+.thumbnail_container {
+	display: flex;
+	padding-left: 8px;
+}
+
+.container {
+	position: relative;
+	width: 170px;
+	padding-bottom: 10px;
+	margin: 10px 15px 0 0;
+	border-radius: 4px;
+	box-shadow: 0 1px 6px rgb(179 213 251 / 45%);
+}
+
+.promo_image {
+	display: flex;
+	width: 170px;
+	height: 90px;
+	background-image: url("https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.promocode_description {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-top: 5px;
+}
+
+.promodiscount {
+	display: flex;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 700;
+	color: #4f4f4f;
+}
+
+.tooltip_div {
+	display: flex;
+	justify-content: center;
+}
+
+.terms_conditions {
+	margin-top: 4px;
+	font-size: 8px;
+	color: #356efd;
+	text-decoration-line: underline;
+}
+
+.holes_lower {
+	position: relative;
+	margin: 10px 20px;
+	border: 1px dashed #8cc1f9;
+}
+
+.holes_lower::before,
+.holes_lower::after {
+	position: absolute;
+	top: -13px;
+	width: 25px;
+	height: 25px;
+	content: "";
+	background: #f9f9f9;
+	border-radius: 50%;
+}
+
+.holes_lower::before {
+	left: -35px;
+}
+
+.holes_lower::after {
+	right: -35px;
+}
+
+.promo_code {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.promocode_name {
+	padding: 2px 10px;
+	font-size: 10px;
+	font-weight: 600;
+	color: #fff;
+	background: #f68b21;
+	border-radius: 4px;
+}

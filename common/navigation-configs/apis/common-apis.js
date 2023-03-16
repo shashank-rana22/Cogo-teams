@@ -43,6 +43,16 @@ const common_apis = {
 	],
 	app_dashboard: [
 		{
+			api          : 'assign_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_communication_platform_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_store_quota',
 			access_type  : 'private',
 			service_name : 'store',
@@ -536,6 +546,11 @@ const common_apis = {
 		},
 		{
 			api          : 'add_buyer_poc',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'create_credit_comment',
 			access_type  : 'private',
 			service_name : 'credit',
 		},
