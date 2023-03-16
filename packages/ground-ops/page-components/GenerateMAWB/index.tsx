@@ -109,6 +109,11 @@ function GenerateMAWB({
 		setValue('class', 'q');
 		setValue('commodity', edit ? `${taskItem.commodity || ''}`
 			: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
+		setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
+			: [{ code: 'FSC', price: '' }, { code: 'SSC', price: '' },
+				{ code: 'XRAY', price: '' }, { code: 'AWC', price: '' },
+				{ code: 'AMS', price: '' }, { code: 'CGC', price: '' },
+			]);
 	}, []);
 
 	useEffect(() => {
@@ -214,7 +219,7 @@ function GenerateMAWB({
 										<Button
 											size="md"
 											themeType="primary"
-											onClick={() => window.open(packingData?.list[0]?.documentUrl, '_blank')}
+											onClick={() => window.open(packingData?.list?.[0]?.documentUrl, '_blank')}
 											className={styles.packing_button}
 										>
 											Refer Packing List
