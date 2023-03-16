@@ -180,7 +180,6 @@ function GraphUI() {
 		<div
 			style={{
           display         : 'flex',
-          justifyContent  : 'space-between',
           margin          : '20px',
           borderRadius    : '10px',
           height          : '400px',
@@ -189,7 +188,6 @@ function GraphUI() {
 		>
 			<div style={{ width: '100%' }}>
 				<ResponsiveLine
-					style={{ flexBasis: '10%' }}
 					data={data}
 					margin={{ right: 10, top: 50, bottom: 50, left: 60 }}
 					xScale={{ type: 'point' }}
