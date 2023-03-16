@@ -7470,19 +7470,19 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_bill_payment_status_mismatch',
+			api         : 'get_muneem_reports_bill_payment_status_mismatch',
 			access_type : 'private',
 		},
 		{
-			api         : 'get_bills_account_utilization_mismatch',
+			api         : 'get_muneem_reports_bills_account_utilization_mismatch',
 			access_type : 'private',
 		},
 		{
-			api         : 'get_invoice_account_utilization_amount_mismatch',
+			api         : 'get_muneem_reports_invoice_account_utilization_amount_mismatch',
 			access_type : 'private',
 		},
 		{
-			api         : 'get_invoice_paymen_status_mismatch',
+			api         : 'get_muneem_reports_invoice_payment_status_mismatch',
 			access_type : 'private',
 		},
 	],

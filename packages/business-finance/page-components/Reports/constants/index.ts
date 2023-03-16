@@ -22,3 +22,9 @@ export const ACCOUNT_TYPE_OPTIONS = [
 	{ label: 'Importer Exporter', value: 'importer_exporter' },
 	{ label: 'Service Provider', value: 'service_provider' },
 ];
+export const DATE_OPTIONAL_APIS = [
+	'bill-payment-status-mismatch',
+	'bills-account-utilization-mismatch',
+	'invoice-account-utilization-amount-mismatch',
+	'invoice-payment-status-mismatch',
+];
