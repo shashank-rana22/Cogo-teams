@@ -317,3 +317,12 @@
 	font-weight: 400;
 	color: #a2a3a5;
 }
+
+.pill_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.info_pills {
+	display: flex;
+}

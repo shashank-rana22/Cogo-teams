@@ -1,18 +1,18 @@
 import { Pill, Button, Tooltip } from '@cogoport/components';
-import { IcMArrowDown, IcMArrowUp, IcMArrowDoubleRight } from '@cogoport/icons-react';
-import startCase from '@cogoport/utils/src/utilities/startCase';
-import { useState, forwardRef } from 'react';
+import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import QuestionsList from './QuestionList';
-import Scroll from './Scroll';
+// import Scroll from './Scroll';
 import styles from './styles.module.css';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
 
-const scrollHorizontal = (scrollOffset, ref) => {
-	const tableRootElement = ref.current.querySelector('.ui-table-root');
-	tableRootElement.scrollLeft += scrollOffset;
-};
+// const scrollHorizontal = (scrollOffset, ref) => {
+// 	const tableRootElement = ref.current.querySelector('.ui-table-root');
+// 	tableRootElement.scrollLeft += scrollOffset;
+// };
 
 function AllTopic({ props = '' }) {
 	const {
@@ -25,116 +25,76 @@ function AllTopic({ props = '' }) {
 		most_disliked_questions = [],
 		most_liked_questions = [],
 		id = '',
-
 	} = props;
-	const truncate = (str) => (str?.length > 30 ? `${str.substring(0, 28)}...` : str);
 
 	const [showQuestions, setShowQuestions] = useState(false);
+
+	const truncate = (str) => (str?.length > 40 ? `${str.substring(0, 38)}...` : str);
+
+	const PILL_MAPPING = {
+		'No of Questions' : question_count,
+		'No of Views'     : view_count,
+		'No of Likes'     : total_likes,
+		'No of Dislikes'  : total_dislikes,
+	};
+
 	return (
 		<div style={{ marginTop: '1rem', overflow: 'hidden' }}>
 			<div className={styles.container}>
-				<div style={{ justifyContent: 'space-between' }}>
+				<div className={styles.pill_container}>
 					<Pill
 						size="xl"
 						color="#CFEAED"
-						style={{
-							fontWeight : '600',
-							marginTop  : '-9%',
-							marginLeft : '1%',
-
-						}}
+						style={{ fontWeight: '600', height: 'fit-content' }}
 					>
 						<Tooltip content={display_name} placement="right">
 							<div>
 								{truncate(startCase(display_name))}
 							</div>
 						</Tooltip>
-
 					</Pill>
 
-					<Pill
-						size="lg"
-						color="#F3FAFA"
-						style={{
-							fontWeight : '600',
-							marginTop  : '-9%',
-							marginLeft : '45%',
-
-						}}
-					>
-						No of Questions:
-						{' '}
-						{question_count}
-
-					</Pill>
-					<Pill
-						size="lg"
-						color="#F3FAFA"
-						style={{
-							fontWeight : '600',
-							marginTop  : '-9%',
-							marginLeft : '1%',
-
-						}}
-					>
-						No of Views:
-						{' '}
-						{view_count}
-
-					</Pill>
-					<Pill
-						size="lg"
-						color="#F3FAFA"
-						style={{
-							fontWeight : '600',
-							marginTop  : '-9%',
-							marginLeft : '1%',
-
-						}}
-					>
-						No of Likes:
-						{' '}
-						{total_likes}
-
-					</Pill>
-					<Pill
-						size="lg"
-						color="#F3FAFA"
-						style={{
-							fontWeight : '600',
-							marginTop  : '-9%',
-							marginLeft : '1%',
-
-						}}
-					>
-						No of Dislikes:
-						{' '}
-						{total_dislikes}
-
-					</Pill>
-
-				</div>
-				<div style={{ display: 'flex' }}>
-					<div style={{ display: 'flex' }}>
-						<ViewCards
-							cardHeading="User group that viewed the Most Questions "
-							subHeading=""
-						/>
-						<ViewCardsList
-							cardHeading="Top Viewed Questions"
-							contentQuestion={faq_questions}
-						/>
-						<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={most_liked_questions} />
-						<ViewCardsList cardHeading="Top Disliked Questions" contentQuestion={most_disliked_questions} />
+					<div className={styles.info_pills}>
+						{Object.keys(PILL_MAPPING).map((key) => (
+							<Pill
+								key={key}
+								size="lg"
+								color="#F3FAFA"
+								style={{ fontWeight: '600' }}
+							>
+								{key}
+								:
+								{' '}
+								{PILL_MAPPING[key]}
+							</Pill>
+						))}
 					</div>
 				</div>
-				<div style={{ marginTop: '-25px', marginRight: '-10px', float: 'right' }}>
+
+				<div style={{ display: 'flex' }}>
+					<ViewCards
+						cardHeading="User group that viewed the Most Questions "
+						subHeading=""
+					/>
+
+					<ViewCardsList
+						cardHeading="Top Viewed Questions"
+						contentQuestion={faq_questions}
+					/>
+
+					<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={most_liked_questions} />
+
+					<ViewCardsList cardHeading="Top Disliked Questions" contentQuestion={most_disliked_questions} />
+				</div>
+
+				<div style={{ marginTop: '25px', marginRight: '-10px', float: 'right' }}>
 					<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
 						<div style={{ fontWeight: 600 }}>All Questions..</div>
 						{!showQuestions ? <IcMArrowDown /> : <IcMArrowUp />}
 					</Button>
 				</div>
 			</div>
+
 			{showQuestions ? <QuestionsList id={id} /> : null}
 		</div>
 
