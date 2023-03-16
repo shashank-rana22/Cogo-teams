@@ -20,7 +20,7 @@ import {
 // import Details from '../Details';
 import useGetShipmentChatList from '../hooks/useGetShipmentChatList';
 // import { ShipmentDetailContext } from '../../../Context';
-// import EmptyState from '../../../EmptyState';
+import EmptyState from '../../../common/EmptyState';
 // import CreateChannel from './CreateChannel';
 // import useUpdateSeen from '../hooks/useUpdateSeen';
 import useGetChannel from '../hooks/useGetChannel';
@@ -128,19 +128,19 @@ const List = ({
 		// 	return <ListLoader />;
 		// }
 
-		// if (!loading && !channelList?.length) {
-		// 	return <EmptyState isMobile />;
-		// }
+		if (!loading && !channelList?.length) {
+			return <EmptyState isMobile />;
+		}
 
 		return channelList?.map((item) => {
 			const className = id === item?.id ? 'colored' : 'not_color';
 
 			return (
 				<div className={styles.card} onClick={() => setId(item?.id)} className={className}>
-					{/* <Flex direction="column">
+					<Flex direction="column">
 						<div className={styles.serial_id} className={className}>{item?.channel_name}</div>
 
-						<UpdatedAt className={className}>
+						{/* <UpdatedAt className={className}>
 							{formatDate({
 								date: item?.updated_at,
 								dateFormat: GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -148,8 +148,8 @@ const List = ({
 								formatType: 'dateTime',
 								separator: ' | ',
 							})}
-						</UpdatedAt>
-					</Flex> */}
+						</UpdatedAt> */}
+					</Flex>
 
 					{(MessageContentArr || []).map((obj) =>
 						obj?.mainKey === item?.id && obj[user_id] > 0 && id !== item?.id ? (
@@ -217,7 +217,7 @@ const List = ({
 					</div>
 
 					<div className={styles.list_container} ref={refOuter}>
-						<InfiniteScroll
+						{/* <InfiniteScroll
 							pageStart={1}
 							initialLoad={false}
 							loadMore={!showUnreadChat && loadMore}
@@ -225,7 +225,10 @@ const List = ({
 							useWindow={false}
 						>
 							{renderContent()}
-						</InfiniteScroll>
+						</InfiniteScroll> */}
+						<div>
+							{renderContent()}
+						</div>
 
 						{loading && !isEmpty(ListData) && !showUnreadChat && (
 							<div className={styles.custom_loader}>Loading...</div>
