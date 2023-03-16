@@ -93,6 +93,12 @@ function MailModal({
 	const handleEdit = (val) => {
 		setType(val);
 		setShowControl(true);
+		setError(false);
+		if (type === 'recipient') {
+			setCcBccValue('');
+		} else {
+			setRecipientValue('');
+		}
 	};
 
 	const handleChange = (item) => {
@@ -111,7 +117,11 @@ function MailModal({
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter') {
 			event.preventDefault();
-			if (!validateEmail(recipientValue)) {
+			if (type === 'recipient' && !validateEmail(recipientValue)) {
+				setError(true);
+				return;
+			}
+			if (type === 'cc_bcc' && !validateEmail(ccBccValue)) {
 				setError(true);
 				return;
 			}
@@ -292,7 +302,7 @@ function MailModal({
 					/>
 
 					<div className={styles.attachments_scroll}>
-						<div className={styles.uploading}>{uploading && 'Uploading...'}</div>
+						{uploading && <div className={styles.uploading}>{uploading && 'Uploading...'}</div>}
 						{(attachments || []).map((data) => (
 							<div className={styles.uploaded_files}>
 								<div className={styles.uploaded_files_content}>
