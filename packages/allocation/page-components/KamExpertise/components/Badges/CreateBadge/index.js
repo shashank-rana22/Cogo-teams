@@ -23,7 +23,7 @@ const MEDALS_MAPPING = [
 
 function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	const onClose = () => {
-		setToggleScreen(1);
+		setToggleScreen('badge_details');
 	};
 
 	const {

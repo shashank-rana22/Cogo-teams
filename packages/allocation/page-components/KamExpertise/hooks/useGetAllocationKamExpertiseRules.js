@@ -22,8 +22,7 @@ function useGetAllocationKamExpertiseRules() {
 			...previousParams,
 			filters: {
 				...previousParams.filters,
-				status    : 'active',
-				rule_type : ruleType || undefined,
+				rule_type: ruleType || undefined,
 			},
 		}));
 	}, [ruleType]);

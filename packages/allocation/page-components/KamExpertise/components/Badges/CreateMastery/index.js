@@ -15,7 +15,7 @@ function CreateMastery(props) {
 	} = props;
 
 	const onClose = () => {
-		setToggleScreen(1);
+		setToggleScreen('badge_details');
 	};
 
 	const {

@@ -19,11 +19,11 @@ const VERSION_CARDS = [
 	},
 ];
 
-function CurrentConfigurations({ handleClick = () => {} }) {
+function CurrentConfigurations({ handleClick = () => {}, selectedVersion = '' }) {
 	const router = useRouter();
 	return (
 		<div>
-			<Header />
+			<Header selectedVersion={selectedVersion} />
 
 			{VERSION_CARDS.map((item) => (
 				<ConfigurationCard

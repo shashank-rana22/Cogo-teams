@@ -24,6 +24,7 @@ function ListItem(props) {
 					<Placeholder width="100px" height="20px" />
 					<Placeholder width="80px" height="28px" />
 				</div>
+
 				<div className={styles.main_card}>
 					<div className={styles.card_description}>
 						<div>
@@ -39,6 +40,7 @@ function ListItem(props) {
 							<Placeholder width="236px" height="20px" />
 						</div>
 					</div>
+
 					<div className={styles.score_container}>
 						<Placeholder width="120px" height="24px" />
 						<div className={styles.score_badge}>
@@ -79,7 +81,7 @@ function ListItem(props) {
 
 	return (
 		<div>
-			{badgeList?.map(
+			{badgeList.map(
 				(data, index) => (data.expertise_configuration_type === 'badge_configuration' ? (
 					<MasteryListItem
 						data={data}
