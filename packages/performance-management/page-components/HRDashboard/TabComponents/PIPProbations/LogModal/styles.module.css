@@ -1,0 +1,12 @@
+.name_input {
+    :global {
+        .ui_input_container {
+            width: 200px;
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    margin-top: 8px;
+}

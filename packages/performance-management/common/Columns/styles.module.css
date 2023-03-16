@@ -12,6 +12,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+
+	:global {
+		.ui_pill_container {
+			width: 50%;
+			display: flex;
+			justify-content: center;
+		}
+	}
 }
 
 .improvement_needed {

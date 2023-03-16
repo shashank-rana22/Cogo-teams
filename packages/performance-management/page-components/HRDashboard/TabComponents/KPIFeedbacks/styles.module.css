@@ -1,0 +1,56 @@
+.top_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 16px 0;
+}
+
+.filters {
+	display: flex;
+	align-items: center;
+}
+
+.button_container {
+    display: flex;
+}
+
+.stats_container {
+	display: flex;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.list_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 0 0;
+	margin-top: 16px;
+
+	.list_title {
+		margin: 0;
+		font-size: 18px;
+		font-weight: 700;
+	}
+
+	.list_actions {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.table_section {
+	margin-top: 16px;
+	background: #faf5ec;
+	border-radius: 8px;
+}
+
+.upload_modal {
+	:global {
+		.ui_modal_body_container {
+			max-height: fit-content;
+		}
+	}
+}

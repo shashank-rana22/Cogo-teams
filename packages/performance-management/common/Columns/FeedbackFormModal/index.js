@@ -54,7 +54,7 @@ function FeedbackFormModal({
 							<span>
 								{startCase(item.name)}
 							</span>
-							{showModal !== 'employed' && ` (${startCase(showModal)})`}
+							{![true, 'employed'].includes(showModal) && ` (${startCase(showModal)})`}
 						</div>
 					)}
 					/>

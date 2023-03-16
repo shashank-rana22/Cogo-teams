@@ -1,4 +1,5 @@
-import { Button, cl } from '@cogoport/components';
+import { ButtonIcon, Pill, Button, cl } from '@cogoport/components';
+import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getYear, getMonth, format, startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
@@ -9,9 +10,15 @@ import FeedbackFormModal from './FeedbackFormModal';
 import FeedbackModal from './FeedbackPopOver';
 import styles from './styles.module.css';
 
+const statusColorMapping = {
+	probation : 'red',
+	employed  : 'green',
+	young     : 'yellow',
+};
+
 const useGetColumns = ({
 	getTeamFeedbackList = () => {}, source = 'hr_dashboard', columnsToShow = [],
-	setRefetchReportees = () => {},
+	setRefetchReportees = () => {}, setItem = () => {}, setOpenUpdate = () => {},
 }) => {
 	const router = useRouter();
 	const handleClick = (user_id) => {
@@ -32,6 +39,13 @@ const useGetColumns = ({
 		if ([1, 2].includes(value)) { return 'improvement_needed'; }
 		if ([4, 5].includes(value)) { return 'good_performance'; }
 		return 'average';
+	};
+
+	const addLog = (item) => {
+		setItem(item);
+		if (source !== 'log_modal') {
+			setOpenUpdate(true);
+		}
 	};
 
 	const currentDate = new Date();
@@ -182,6 +196,67 @@ const useGetColumns = ({
 		),
 		id  : 'user_details',
 		key : 'user_details',
+	},
+	{
+		Header   : <div className={styles.head}>Employee Status</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<Pill color={statusColorMapping[item?.employee_status]}>{startCase(item?.employee_status)}</Pill>
+			</div>
+		),
+		id  : 'employee_status',
+		key : 'employee_status',
+	},
+	{
+		Header   : <div className={styles.head}>PIP Status</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<Pill
+					color={item?.is_pip ? 'red' : 'green'}
+				>
+					{item.is_pip ? 'In PIP' : 'Out Of Pip'}
+
+				</Pill>
+			</div>
+		),
+		id  : 'is_pip',
+		key : 'is_pip',
+	},
+	{
+		Header   : <div className={styles.head} />,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<ButtonIcon onClick={() => addLog(item)} icon={<IcMArrowRight />} />
+			</div>
+		),
+		id  : 'add_log_arrow',
+		key : 'add_log_arrow',
+	},
+	{
+		Header   : <div className={styles.head} />,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<Button onClick={() => handleClick(item.user_id)} themeType="link">View Details</Button>
+			</div>
+		),
+		id  : 'user_details',
+		key : 'user_details',
+	},
+	{
+		Header   : <div className={styles.head} />,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<Button
+					onClick={() => addLog(item)}
+					disabled={(item?.is_pip && source === 'hr_dashboard')
+					|| (item?.employee_status === 'probation' && source === 'manager_dashboard')}
+				>
+					Update
+				</Button>
+			</div>
+		),
+		id  : 'action',
+		key : 'action',
 	},
 	];
 
