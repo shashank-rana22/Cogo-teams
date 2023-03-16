@@ -19,7 +19,7 @@ const items = [
 
 const options = [
 	{ name: 'Add Manually', value: 'manual', label: 'Add Manually' },
-	// { name: 'Upload Document', value: 'upload', label: 'Upload Document' },
+	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
 ];
 
 interface NestedObj {
@@ -147,7 +147,7 @@ function GenerateMAWB({
 								role="link"
 								tabIndex={0}
 							>
-								Ground Ops Dashboard
+								SO2 - Docs Dashboard
 							</div>
 						)}
 						/>
