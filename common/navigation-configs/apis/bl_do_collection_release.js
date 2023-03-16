@@ -33,7 +33,7 @@ const apis = [
 		api          : 'get_shipment',
 		access_type  : 'private',
 		feature      : 'bl_do_collection_release',
-		service_name : 'shipment',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'generate_do_noc_certificate',
