@@ -9,7 +9,6 @@ import useGetFormattedGraphData from './useGetFormattedGraphData';
 function GraphUI() {
 	const { pie_data, pie_outer_data, graph_data } = GraphData();
 
-	console.log('graph_data', graph_data);
 
 	const { graphData = [] } = useGetFormattedGraphData({ graph_data });
 
