@@ -5,7 +5,7 @@ import { getDate } from '../utils/formatters';
 
 import {
 	container, connecting_line, circle, small, big,
-	display_milestone, completed, ellipsis, tooltip_content, label, deviated, value,
+	display_milestone, completed, ellipsis, tooltip_content, label, value,
 } from './styles.module.css';
 
 export default function TimelineItem({ item, isLast = false, consecutivelyCompleted = false }) {
@@ -24,14 +24,14 @@ export default function TimelineItem({ item, isLast = false, consecutivelyComple
 
 			{completed_on ? (
 				<>
-					<div className={label}>{isCompleted ? 'Completed On' : 'Expected'}</div>
+					<div className={label}>Completed On</div>
 					<div className={value}>{getDate(completed_on)}</div>
 				</>
 			) : null}
 
 			{actual_completed_on ? (
 				<>
-					<div className={`${label} ${deviated}`}>Actual Completed On</div>
+					<div className={label}>Actual Completed On</div>
 					<div className={value}>{getDate(actual_completed_on)}</div>
 				</>
 			) : null}
