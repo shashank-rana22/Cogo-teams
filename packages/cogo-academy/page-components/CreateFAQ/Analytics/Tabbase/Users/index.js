@@ -1,10 +1,17 @@
-import styles from './styles.module.css';
+import { useState } from 'react';
 
-function Users() {
+import AllQuestionCardView from './AllUsers';
+import Filter from './Filter';
+import AllTopicCardView from './UsersGroup';
+
+function Users({ props }) {
+	const [selectedItem, setSelectedItem] = useState('All_Users');
+
 	return (
-		<div className={styles.container}>
-			<div>Users Dashboard</div>
-
+		<div>
+			<Filter selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+			{selectedItem === 'All_Users' ? <AllQuestionCardView {...props?.data} />
+				: <AllTopicCardView />}
 		</div>
 	);
 }

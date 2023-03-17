@@ -6,8 +6,8 @@ import styles from './styles.module.css';
 function Filter({ selectedItem, setSelectedItem }) {
 	const [date, setDate] = useState('');
 	const options = [
-		{ label: 'All Questions', value: 'All_Questions' },
-		{ label: 'All Topics', value: 'All_topics' },
+		{ label: 'All Users', value: 'All_Users' },
+		{ label: 'Users Groups', value: 'Users Group' },
 
 	];
 
