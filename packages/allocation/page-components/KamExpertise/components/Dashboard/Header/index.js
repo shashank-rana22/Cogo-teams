@@ -21,7 +21,7 @@ function Header() {
 						<b>31st January, 2023</b>
 					</p>
 					<p style={{ fontSize: '14px' }}>
-						Published by
+						Published by :
 						{' '}
 						<b>CogoParth</b>
 					</p>

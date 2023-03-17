@@ -1,4 +1,4 @@
-import { Collapse } from '@cogoport/components';
+import { Button, Collapse } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -49,7 +49,9 @@ function KamLevel() {
 				audit_data={audit_data}
 				levelLoading={levelLoading}
 			/>
+
 			{isEmpty(kamConfigLevelDetails) && !levelLoading && !createKam ? (<EmptyState />) : (null)}
+
 			{!levelLoading ? (
 				<>
 					<Collapse
@@ -59,14 +61,29 @@ function KamLevel() {
 						type="text"
 						className={styles.collapse}
 					/>
-					<div className={styles.response_card}>
-						<ResponseCard
-							createKAM={createKam}
-							setCreateKam={setCreateKam}
-							dataLength={dataLength}
-							refetch={refetch}
-						/>
-					</div>
+
+					{createKam ? (
+						<div className={styles.response_card}>
+
+							<ResponseCard
+								createKAM={createKam}
+								setCreateKam={setCreateKam}
+								dataLength={dataLength}
+								refetch={refetch}
+							/>
+						</div>
+					) : (
+						<div style={{ marginTop: '10px' }}>
+							<Button
+								themeType="secondary"
+								className={styles.create_button}
+								onClick={() => setCreateKam(true)}
+							>
+								Create Kam Level
+							</Button>
+						</div>
+					)}
+
 				</>
 
 			) : (

@@ -1,4 +1,4 @@
-import { Toast, Modal, Button } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -6,6 +6,7 @@ import CreateModal from './CreateModal';
 import Draft from './CreateModal/Draft';
 import NewVersion from './CreateModal/NewVersion';
 import Published from './CreateModal/Published';
+import ModalFooter from './ModalFooter';
 import styles from './styles.module.css';
 
 const HEADER_DATA = {
@@ -17,7 +18,7 @@ const HEADER_DATA = {
 function Header() {
 	const [mode, setMode] = useState('');
 	const [showModal, setShowModal] = useState(false);
-	const [selectedVersion, setSelectedVersion] = useState();
+	const [selectedVersion, setSelectedVersion] = useState(0);
 	console.log('selected version::', selectedVersion);
 
 	return (
@@ -65,6 +66,7 @@ function Header() {
 					onClose={() => {
 						setShowModal(false);
 						setMode('');
+						setSelectedVersion(0);
 					}}
 					placement="top"
 				>
@@ -78,6 +80,7 @@ function Header() {
 											selectedVersion={selectedVersion}
 											setSelectedVersion={setSelectedVersion}
 										/>
+
 									);
 								case 'saved-draft':
 									return (
@@ -94,29 +97,13 @@ function Header() {
 					</Modal.Body>
 
 					{mode === 'published-version' ? (
-						<Modal.Footer>
-							<Button
-								themeType="teritiary"
-								className={styles.button}
-								onClick={() => { setMode(''); }}
-							>
-								Back
-
-							</Button>
-							{selectedVersion ? (
-								<Button
-									className={styles.button}
-									onClick={() => {
-										setShowModal(false);
-										setMode('');
-										Toast.success('Version Selected');
-										setSelectedVersion('');
-									}}
-								>
-									Create
-								</Button>
-							) : (<Button disabled={!selectedVersion}>Create</Button>)}
-
+						<Modal.Footer className={styles.test}>
+							<ModalFooter
+								setMode={setMode}
+								setSelectedVersion={setSelectedVersion}
+								setShowModal={setShowModal}
+								selectedVersion={selectedVersion}
+							/>
 						</Modal.Footer>
 					) : (
 						null
