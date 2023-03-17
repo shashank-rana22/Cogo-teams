@@ -35,7 +35,7 @@ function VoiceTimeLine({ item }) {
 				<div className={styles.card}>
 					<div className={styles.activity_div}>
 						<div className={styles.title}>
-							{startCase(name)}
+							{startCase(name) || 'User'}
 						</div>
 						<div
 							role="presentation"
