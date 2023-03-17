@@ -79,13 +79,22 @@ function AllTopic({ props = '' }) {
 					/>
 
 					<ViewCardsList
+						state="Viewed_Question"
 						cardHeading="Top Viewed Questions"
 						contentQuestion={most_viewed_questions}
 					/>
 
-					<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={most_liked_questions} />
+					<ViewCardsList
+						state="Liked_Question"
+						cardHeading="Top Liked Questions"
+						contentQuestion={most_liked_questions}
+					/>
 
-					<ViewCardsList cardHeading="Top Disliked Questions" contentQuestion={most_disliked_questions} />
+					<ViewCardsList
+						state="Disliked_Question"
+						cardHeading="Top Disliked Questions"
+						contentQuestion={most_disliked_questions}
+					/>
 				</div>
 
 				<div className={styles.button_container}>
