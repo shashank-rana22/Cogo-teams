@@ -1,11 +1,12 @@
 import { Tooltip, Button, Table, Pagination } from '@cogoport/components';
 import { IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-// import { useState } from 'react';
+import { useState } from 'react';
 
 import useUpdateCaseStudy from '../../hooks/useUpdateCaseStudy';
 import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
 
+import IconComponent from './IconComponent';
 import styles from './styles.module.css';
 
 const alphabetMapping = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -30,7 +31,7 @@ function SavedQuestionDetails({
 	getTestQuestionTest,
 	questionSetId,
 }) {
-	// const [caseToShow, setCaseToShow] = useState('');
+	const [caseToShow, setCaseToShow] = useState('');
 
 	const { updateStandAloneTestQuestion, loading } = useUpdateStandAloneTestQuestion();
 
@@ -68,6 +69,78 @@ function SavedQuestionDetails({
 		}
 	};
 
+	const getCaseQuestion = (item) => (
+		<div className={styles.flex_column}>
+			<div className={styles.flex_row}>
+				{item?.question_text}
+				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
+
+				<IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} />
+			</div>
+
+			{item.id === caseToShow ? item?.sub_question.map((item1) => <div>{item1.question_text}</div>) : null}
+		</div>
+	);
+
+	const getCaseAnswerType = (item) => (
+		<div className={styles.flex_column}>
+			<div className={styles.flex_row}>
+				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
+
+				<IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} />
+			</div>
+
+			{item.id === caseToShow
+				? item?.sub_question.map((item1) => (
+					<div>{startCase(item1.question_type)}</div>
+				))
+				: null}
+		</div>
+	);
+
+	const getCaseAnswerKey = (item) => (
+		<div className={styles.flex_column}>
+			<div className={styles.flex_row}>
+				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
+
+				<IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} />
+			</div>
+
+			{item.id === caseToShow
+				? (
+					item?.sub_question.map((item1) => (
+						<Tooltip content={(
+							<div className={styles.flex_column}>
+								{(getCorrectAnswersCombined({
+									correctOptions: (item1?.answers || []).filter((item2) => item2.is_correct),
+								} || [])).map((item2) => <div className={styles.answer}>{item2}</div>)}
+							</div>
+						)}
+						>
+							<div className={styles.answer_key}>{getCorrectAnswers({ answers: item1?.answers })}</div>
+						</Tooltip>
+					))
+				)
+				: null}
+		</div>
+	);
+
+	const getDifficultyLevel = (item) => (
+		<div className={styles.flex_column}>
+			<div className={styles.flex_row}>
+				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
+
+				<IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} />
+			</div>
+
+			{item.id === caseToShow
+				? item?.sub_question.map((item1) => (
+					<div>{startCase(item1.difficulty_level)}</div>
+				))
+				: null}
+		</div>
+	);
+
 	const columns = [
 		{
 			Header   : 'Topic',
@@ -86,35 +159,60 @@ function SavedQuestionDetails({
 		{
 			Header   : 'Question/Case',
 			id       : 'question_text',
-			accessor : (item) => <section>{item?.question_text}</section>,
+			accessor : (item) => (
+				<section>
+					{item?.question_type !== 'case_study'
+						? item?.question_text
+						: getCaseQuestion(item)}
+				</section>
+			),
 		},
 		{
 			Header   : 'Answer Type',
 			id       : 'answer_type',
-			accessor : ({ question_type }) => <section>{startCase(question_type)}</section>,
+			accessor : (item) => (
+				<section>
+					{item?.question_type !== 'case_study'
+						? startCase(item?.question_type)
+						: getCaseAnswerType(item)}
+				</section>
+			),
 		},
 		{
 			Header   : 'Answer Key',
 			id       : 'answer_key',
-			accessor : ({ answers = [] }) => (
-				<Tooltip content={(
-					<div className={styles.flex_column}>
-						{(getCorrectAnswersCombined({
-							correctOptions: (answers || []).filter((item) => item.is_correct),
-						} || [])).map((item) => <div className={styles.answer}>{item}</div>)}
-					</div>
-				)}
-				>
-					<div className={styles.answer_key}>
-						{getCorrectAnswers({ answers })}
-					</div>
-				</Tooltip>
+			accessor : (item) => (
+				<section>
+					{item?.question_type !== 'case_study'
+						? (
+							<Tooltip content={(
+								<div className={styles.flex_column}>
+									{(getCorrectAnswersCombined({
+										correctOptions: (item?.answers || []).filter((item1) => item1.is_correct),
+									} || [])).map((item1) => <div className={styles.answer}>{item1}</div>)}
+								</div>
+							)}
+							>
+								<div className={styles.answer_key}>
+									{getCorrectAnswers({ answers: item?.answers })}
+								</div>
+							</Tooltip>
+						)
+						: getCaseAnswerKey(item)}
+				</section>
+
 			),
 		},
 		{
 			Header   : 'Difficulty Level',
 			id       : 'difficulty_level',
-			accessor : ({ difficulty_level = 'High' }) => <section>{difficulty_level}</section>,
+			accessor : (item) => (
+				<section>
+					{item?.question_type !== 'case_study'
+						? startCase(item?.difficulty_level)
+						: getDifficultyLevel(item)}
+				</section>
+			),
 		},
 		{
 			Header   : '',
