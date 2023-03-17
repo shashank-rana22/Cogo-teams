@@ -16,7 +16,7 @@
 	background: #f9f9f9;
 	width: 100%;
 	overflow: auto;
-	height: 42vh;
+	/* height: 42vh; */
 	overflow: auto;
 
 	@media (max-width: 768px) {

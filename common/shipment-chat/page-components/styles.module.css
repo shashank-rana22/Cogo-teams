@@ -34,10 +34,11 @@
 }
 
 .modal_styles {
+	width: 900px !important;
+
 	:global {
 		.ui_modal_body_container {
-			width: 900px;
-			min-height: 500px;
+			min-height: 474px;
 			border-top: none !important;
 			border-bottom: none !important;
 			padding: 0px;
