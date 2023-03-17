@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
 import getControls from '../../../../../configurations/upload-documents-controls';
+import { INDIA_COUNTRY_ID } from '../../../../../constants';
 import useCreateOrganizationDocument from '../../../../../hooks/useCreateOrganizationDocument';
 import useSubmitOrganizationKyc from '../../../../../hooks/useSubmitOrganizationKyc';
 
@@ -20,6 +21,8 @@ function UploadDetailsModal({
 }) {
 	const [selectedDocumentType, setSelectedDocumentType] = useState('');
 
+	const { country_id = '', registration_number = '', preferred_languages = [], document_url = '' } = singleItem || {};
+
 	const {
 		control,
 		handleSubmit,
@@ -28,9 +31,9 @@ function UploadDetailsModal({
 	} = useForm(
 		{
 			defaultValues: {
-				country_id          : singleItem?.country_id || '541d1232-58ce-4d64-83d6-556a42209eb7',
-				registration_number : singleItem?.registration_number || '',
-				preferred_languages : singleItem?.preferred_languages || ['english'],
+				country_id          : country_id || INDIA_COUNTRY_ID,
+				registration_number : registration_number || '',
+				preferred_languages : preferred_languages || ['english'],
 			},
 		},
 	);
@@ -74,13 +77,13 @@ function UploadDetailsModal({
 
 	const {
 		createPanDocument = () => {},
-		panLoading,
-	} = useCreateOrganizationDocument({ paramsData, fileType });
+		panLoading = false,
+	} = useCreateOrganizationDocument({ paramsData, fileType, setSelectedDocumentType });
 
 	const {
 		submitOrganizationKyc = () => {},
-		loading,
-	} = useSubmitOrganizationKyc({ paramsData, fileType });
+		loading = false,
+	} = useSubmitOrganizationKyc({ paramsData, fileType, setSelectedDocumentType });
 
 	const onSubmit = (data) => {
 		if (fileType === 'pan') {
@@ -113,7 +116,7 @@ function UploadDetailsModal({
 						{...formControls}
 						errors={errors}
 						control={control}
-						documentUrl={singleItem?.document_url || ''}
+						documentUrl={document_url || ''}
 						fileType={fileType}
 					/>
 				)}

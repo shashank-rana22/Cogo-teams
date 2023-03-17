@@ -7,6 +7,7 @@ import useUpdateOmnichannelNewDocument from './useUpdateOmnichannelNewDocument';
 const useSubmitOrganizationKyc = ({
 	paramsData = {},
 	fileType = '',
+	setSelectedDocumentType = () => {},
 }) => {
 	const {
 		orgId = '', documentsList = () => {},
@@ -26,6 +27,7 @@ const useSubmitOrganizationKyc = ({
 		setShowModal,
 		type: 'update_file',
 		fileType,
+		setSelectedDocumentType,
 	});
 
 	const submitOrganizationKyc = async (data) => {

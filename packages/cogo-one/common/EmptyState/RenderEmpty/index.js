@@ -89,7 +89,7 @@ function RenderEmpty({
 				<div className={styles.content}>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/activities-empty.svg"
-						alt=""
+						alt="documents"
 						width="100px"
 						height="100px"
 					/>

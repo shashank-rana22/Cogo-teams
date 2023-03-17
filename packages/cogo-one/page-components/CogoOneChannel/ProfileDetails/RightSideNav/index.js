@@ -41,6 +41,10 @@ function RightSideNav({
 		<div className={styles.right_container}>
 			{IconMapping.map((item) => {
 				const { icon, name, content } = item;
+
+				const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
+				&& documents_count > 0 && !checkConditions;
+
 				return (
 					<div
 						key={snakeCase(name)}
@@ -56,7 +60,7 @@ function RightSideNav({
 						onClick={() => handleClick(name)}
 					>
 						<Tooltip content={content} placement="left">
-							{(name === 'documents' && documents_count > 0 && !checkConditions) && (
+							{showDocumentCount && (
 								<div className={styles.count}>
 									{documents_count > 100 ? '99+' : (
 										documents_count

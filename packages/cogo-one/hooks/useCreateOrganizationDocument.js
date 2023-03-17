@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 import useUpdateOmnichannelNewDocument from './useUpdateOmnichannelNewDocument';
 
-const useCreateOrganizationDocument = ({ paramsData = {}, fileType = '' }) => {
+const useCreateOrganizationDocument = ({ paramsData = {}, fileType = '', setSelectedDocumentType = () => {} }) => {
 	const {
 		orgId = '', documentsList = () => {},
 		singleItem = {}, setSingleItem = () => {},
@@ -23,6 +23,7 @@ const useCreateOrganizationDocument = ({ paramsData = {}, fileType = '' }) => {
 		setShowModal,
 		type: 'update_file',
 		fileType,
+		setSelectedDocumentType,
 	});
 
 	const createPanDocument = async (data) => {

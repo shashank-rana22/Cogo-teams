@@ -1,6 +1,12 @@
 .container {
 	display: flex;
 	flex-direction: column;
+
+	:global {
+		.ui_upload_droparea_container {
+			display: none;
+		}
+	}
 }
 
 .input_container {

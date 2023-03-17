@@ -11,6 +11,7 @@ function useUpdateOmnichannelNewDocument({
 	singleItem = EmptyObject,
 	setSingleItem = EmptyFunction,
 	setShowModal = EmptyFunction,
+	setSelectedDocumentType = EmptyFunction,
 	type = '',
 	fileType = '',
 
@@ -55,11 +56,12 @@ function useUpdateOmnichannelNewDocument({
 				Toast.success('Successfully Uploaded');
 				setShowModal(false);
 				setSingleItem({});
+				setSelectedDocumentType('');
 			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
-	}, [documentsList, fileType, setShowModal, setSingleItem, singleItem, trigger, type]);
+	}, [documentsList, fileType, setSelectedDocumentType, setShowModal, setSingleItem, singleItem, trigger, type]);
 
 	return {
 		updateNewDocument,
