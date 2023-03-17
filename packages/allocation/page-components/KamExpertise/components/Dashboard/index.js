@@ -96,7 +96,7 @@ function KamExpertise() {
 								name={name}
 								title={title}
 							>
-								<Component params={params} />
+								<Component date_params={params} />
 							</TabPanel>
 						);
 					})}

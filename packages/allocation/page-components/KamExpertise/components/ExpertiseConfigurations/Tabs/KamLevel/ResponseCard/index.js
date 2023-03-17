@@ -47,24 +47,29 @@ function ResponseCard({
 					</b>
 
 				</div>
-				<div className={styles.cancel_button}>
-					<Button
-						style={{ margin: '10px' }}
-						themeType="secondary"
-						onClick={() => setCreateKam(false)}
-					>
-						Cancel
+				{!createLoading ? (
+					<div className={styles.cancel_button}>
+						<Button
+							style={{ margin: '10px' }}
+							themeType="secondary"
+							onClick={() => setCreateKam(false)}
+						>
+							Cancel
 
-					</Button>
-					<Button
-						style={{ margin: '10px' }}
-						onClick={handleSubmit(onCreate)}
-					>
-						Save
+						</Button>
+						<Button
+							style={{ margin: '10px' }}
+							onClick={handleSubmit(onCreate)}
+						>
+							Save
 
-					</Button>
+						</Button>
 
-				</div>
+					</div>
+				) : (
+					<div className={styles.cancel_button} />
+				)}
+
 				{controlsWithValidations.map((singleField) => {
 					const Element = getFieldController(singleField.type) || null;
 
