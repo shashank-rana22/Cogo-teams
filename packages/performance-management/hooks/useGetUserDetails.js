@@ -10,7 +10,7 @@ const useGetUserDetails = ({ userId = '' }) => {
 
 	const getUserDetails = () => {
 		try {
-			trigger({ params: { UserID: userId } });
+			trigger({ params: { UserID: userId || undefined } });
 		} catch (e) {
 			Toast.error(e.response?.data.error?.toString());
 		}

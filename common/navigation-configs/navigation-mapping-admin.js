@@ -1797,9 +1797,9 @@ const navigationMappingAdmin = {
 	},
 	ground_ops: {
 		key           : 'ground_ops',
-		title         : 'Ground Ops Dashboard',
-		href          : '/ground-ops',
-		as            : '/ground-ops',
+		title         : 'SO2 - Docs Dashboard',
+		href          : '/v2/ground-ops',
+		as            : '/v2/ground-ops',
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
 		possible_apis : apis.ground_ops,

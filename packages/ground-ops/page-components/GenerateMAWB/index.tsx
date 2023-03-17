@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../Air/commons/Layout';
 
 import GenerateMawbDoc from './GenerateMawbDoc';
+import usePackingList from './Helpers/hooks/usePackingList';
 import mawbControls from './mawbControls';
 import styles from './styles.module.css';
 import UploadMAWB from './UploadMAWB';
@@ -21,8 +22,18 @@ const options = [
 	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
 ];
 
+const iataCodeMapping = {
+	'7391cac2-e8db-467f-a59b-574d01dd7e7c' : '14-3-4526/0020',
+	'aa0e7e59-cbb9-43b2-98ce-1f992ae7ab19' : '14-3-4525/0006',
+	'bdef6da0-8353-4b9a-b422-550ebe9c2474' : '14-3-4526/0042',
+};
+
+const agentOtherChargesCode = [{ code: 'AWB', price: '' }, { code: 'PCA', price: '' }];
+const carrierOtherChargesCode = [{ code: 'XRAY', price: '' }, { code: 'AWC', price: '' },
+	{ code: 'AMS', price: '' }, { code: 'CGC', price: '' }];
+
 interface NestedObj {
-	[key: string]: NestedObj;
+	[key: string]: NestedObj | React.FC ;
 }
 
 interface Props {
@@ -49,7 +60,11 @@ function GenerateMAWB({
 
 	const [value, onChange] = useState('manual');
 
-	const fields = mawbControls();
+	const [disableClass, setDisableClass] = useState(false);
+
+	const fields = mawbControls(disableClass);
+
+	const { packingData, packingList } = usePackingList();
 
 	const onSubmit = () => {
 		setBack(true);
@@ -71,48 +86,69 @@ function GenerateMAWB({
 	];
 
 	let chargeableWeight:number = Number((Math.max(
-		+formValues.weight * +taskItem.packagesCount,
+		+formValues.weight,
 		(+taskItem.volume * 166.67),
 	) || 0.0).toFixed(2));
 
 	useEffect(() => {
 		chargeableWeight = Number((Math.max(
-			+formValues.weight * +formValues.packagesCount,
+			+formValues.weight,
 			+formValues.volumetricWeight,
 		) || 0.0).toFixed(2));
 		setValue('chargeableWeight', (+chargeableWeight || 0.0).toFixed(2));
-	}, [formValues.volumetricWeight, formValues.weight, formValues.packagesCount]);
+	}, [formValues.volumetricWeight, formValues.weight]);
 
 	useEffect(() => {
+		setValue('amount', ((chargeableWeight * formValues.ratePerKg) || 0.0).toFixed(2));
+		if (formValues.class === 'a') {
+			setDisableClass(true);
+		} else {
+			setDisableClass(false);
+		}
+	}, [formValues.chargeableWeight, formValues.ratePerKg, formValues.class]);
+
+	useEffect(() => {
+		packingList({ item });
 		finalFields.forEach((c:any) => {
 			setValue(c.name, taskItem[c.name]);
 		});
-		setValue('iataCode', '14-3-4525/0005');
+		setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
 		setValue('declaredValueForCarriage', 'NVD');
 		setValue('city', 'NEW DELHI');
 		setValue('place', 'NEW DELHI');
 		setValue('class', 'q');
-		setValue('commodity', `${'SAID TO CONTAIN\n'}${taskItem.commodity}`);
+		setValue('currency', 'INR');
+		setValue('commodity', edit ? `${taskItem.commodity || ''}`
+			: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
+		setValue('agentOtherCharges', edit ? taskItem.agentOtherCharges
+			: agentOtherChargesCode);
+		setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
+			: carrierOtherChargesCode);
+		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
+		setValue('shipperSignature', taskItem.customer_name);
 	}, []);
 
 	useEffect(() => {
 		let totalVolume:number = 0;
+		let totalPackage:number = 0;
 		(formValues.dimension || []).forEach((dimensionObj) => {
 			if (dimensionObj.unit === 'inch') {
 				totalVolume
 				+= Number(dimensionObj.length) * 2.54
 				* Number(dimensionObj.width) * 2.54
 				* Number(dimensionObj.height) * 2.54
-				* Number(dimensionObj.packages);
+				* Number(dimensionObj.packages_count);
 			} else if (dimensionObj.unit === 'cm') {
 				totalVolume
 				+= Number(dimensionObj.length)
 				* Number(dimensionObj.width)
 				* Number(dimensionObj.height)
-				* Number(dimensionObj.packages);
+				* Number(dimensionObj.packages_count);
 			}
+			totalPackage += Number(dimensionObj.packages_count);
 		});
-		setValue('volumetricWeight', (((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
+		setValue('volumetricWeight', Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
+		setValue('totalPackagesCount', totalPackage || taskItem.totalPackagesCount);
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 
 	return (
@@ -128,7 +164,7 @@ function GenerateMAWB({
 								role="link"
 								tabIndex={0}
 							>
-								Ground Ops Dashboard
+								SO2 - Docs Dashboard
 							</div>
 						)}
 						/>
@@ -192,6 +228,14 @@ function GenerateMAWB({
 								{activeKey === 'package'
 								&& (
 									<>
+										<Button
+											size="md"
+											themeType="primary"
+											onClick={() => window.open(packingData?.list?.[0]?.documentUrl, '_blank')}
+											className={styles.packing_button}
+										>
+											Refer Packing List
+										</Button>
 										<Layout fields={fields?.package} control={control} errors={errors} />
 										<div className={styles.button_container}>
 											{!back ? (
@@ -252,9 +296,9 @@ function GenerateMAWB({
 						onClose={() => { setBack(false); setViewDoc(false); }}
 						size="lg"
 						className={styles.modal_container}
-						style={{ width: '900px' }}
+						style={{ width: '900px', height: '92vh' }}
 					>
-						<Modal.Body style={{ minHeight: '720px' }}>
+						<Modal.Body style={{ minHeight: '90vh' }}>
 							<GenerateMawbDoc
 								taskItem={taskItem}
 								formData={formData}

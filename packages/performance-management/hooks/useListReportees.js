@@ -3,11 +3,9 @@ import { useIrisRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useListReportees = ({
-	userId = '',
 	searchValue = '',
 }) => {
 	const [params, setParams] = useState({
-		ManagerID : userId || undefined,
 		Page      : 1,
 		PageLimit : 20,
 	});

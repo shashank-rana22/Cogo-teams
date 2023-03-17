@@ -1,9 +1,8 @@
 import { useIrisRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useGetMonthStats = ({ manager_id = '' }) => {
+const useGetMonthStats = () => {
 	const [params, setParams] = useState({
-		ManagerID : manager_id || undefined,
 		Page      : 1,
 		PageLimit : 20,
 	});
