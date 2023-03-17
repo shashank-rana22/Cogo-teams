@@ -1,18 +1,20 @@
+import { Input } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React, {
 	useState,
 	useEffect,
 	forwardRef,
 	useImperativeHandle,
+	useCallback,
 } from 'react';
-import { Input } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+
 import stakeholderMappings from './stakeholder-mappings';
 import styles from './styles.module.css';
 
-const Sendto = (
+function Sendto(
 	{ data, setStakeHolderView = () => { }, isStakeholder = true },
 	ref,
-) => {
+) {
 	const stakeholder_type = isStakeholder
 		? data?.shipment_data?.stakeholder_types?.[0]
 		: 'default';
@@ -29,7 +31,20 @@ const Sendto = (
 		return item;
 	});
 
-	const showSuggestions = () => {
+	// const showSuggestions = () => {
+	// 	let suggestion = [];
+
+	// 	if (userName.length > 0) {
+	// 		const updatedUserName = userName.replace(/\\/g, '\\\\');
+	// 		const regex = new RegExp(`^${updatedUserName}`, 'i');
+	// 		suggestion = cond.sort().filter((v) => regex.test(v));
+	// 		setSuggestions(suggestion);
+	// 	} else {
+	// 		setSuggestions([]);
+	// 	}
+	// };
+
+	const showSuggestions = useCallback(() => {
 		let suggestion = [];
 
 		if (userName.length > 0) {
@@ -40,7 +55,7 @@ const Sendto = (
 		} else {
 			setSuggestions([]);
 		}
-	};
+	}, [userName, cond]);
 
 	const handleMentions = (value) => {
 		const lastChar = value.split('')[value.length - 1];
@@ -75,29 +90,28 @@ const Sendto = (
 
 		return (
 			<div className={styles.container} role="listbox">
-				{(suggestions || []).map((item) => {
-					return (
-						<div className={styles.options}
-							onKeyPress={selectedText}
-							role="button"
-							tabIndex="0"
-							onClick={() => selectedText(item)}
-						>
-							<div className="text-option">{startCase(item)}</div>
-						</div>
-					);
-				})}
+				{(suggestions || []).map((item) => (
+					<div
+						className={styles.options}
+						onKeyPress={selectedText}
+						role="button"
+						tabIndex="0"
+						onClick={() => selectedText(item)}
+					>
+						<div className="text-option">{startCase(item)}</div>
+					</div>
+				))}
 			</div>
 		);
 	};
 
 	useEffect(() => {
 		showSuggestions();
-	}, [userName]);
+	}, [userName, showSuggestions]);
 
 	useEffect(() => {
 		setStakeHolderView(text);
-	}, [text]);
+	}, [text, setStakeHolderView]);
 
 	useImperativeHandle(ref, () => ({
 		setText,
@@ -119,6 +133,6 @@ const Sendto = (
 			</div>
 		</>
 	);
-};
+}
 
 export default forwardRef(Sendto);

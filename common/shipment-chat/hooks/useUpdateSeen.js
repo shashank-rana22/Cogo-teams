@@ -1,12 +1,11 @@
-import { useCallback } from 'react';
-import { useRequest } from '@cogoport/request';
 import { Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useUpdateSeen = ({ refetch = () => { }, channel_id }) => {
-
 	const [trigger] = useRequest({
-		url: 'update_chat_channel_seen',
-		method: 'POST',
+		url    : 'update_chat_channel_seen',
+		method : 'POST',
 	}, { manual: true });
 
 	const onCreate = useCallback(() => {
@@ -21,7 +20,7 @@ const useUpdateSeen = ({ refetch = () => { }, channel_id }) => {
 				Toast.error(err?.data);
 			}
 		})();
-	}, [trigger]);
+	}, [trigger, channel_id]);
 
 	return {
 		onCreate,

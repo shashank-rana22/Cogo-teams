@@ -1,10 +1,11 @@
-import React from 'react';
 import { Placeholder } from '@cogoport/components';
+import React from 'react';
+
 import styles from './styles.module.css';
 
 const customStyle = { height: '14px' };
 
-const Loader = () => {
+function Loader() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.details}>
@@ -22,6 +23,6 @@ const Loader = () => {
 			</div>
 		</div>
 	);
-};
+}
 
 export default Loader;

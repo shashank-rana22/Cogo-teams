@@ -1,6 +1,6 @@
-import { useRequest } from '@cogo/commons/hooks';
-import { useSelector } from '@cogoport/store';
 import { toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const useUpdateMessage = () => {
 	const scope = useSelector(({ general }) => general?.scope);

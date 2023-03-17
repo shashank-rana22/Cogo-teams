@@ -1,6 +1,6 @@
-import { useRequest } from '@cogo/commons/hooks';
-import { useSelector } from '@cogoport/store';
 import { toast } from '@cogoport/front/components';
+import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const useDeleteMessage = ({ refetch = () => { }, keys }) => {
 	const scope = useSelector(({ general }) => general?.scope);

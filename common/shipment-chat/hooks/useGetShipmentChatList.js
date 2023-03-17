@@ -1,14 +1,13 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from '@cogoport/store';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+import { useCallback, useEffect, useState } from 'react';
 // import useGetFiniteList from './useGetFiniteList';
 
 const useGetShipmentChatList = ({ status }) => {
-
 	const [list, setList] = useState({
-		data: [],
-		total: 0,
-		total_page: 0,
+		data       : [],
+		total      : 0,
+		total_page : 0,
 	});
 	const [filters, setFilters] = useState({ page: 1, highlight: undefined });
 	const { page } = filters;
@@ -18,9 +17,9 @@ const useGetShipmentChatList = ({ status }) => {
 	}));
 
 	const [{ loading: apiLoading }, trigger] = useRequest({
-		url: 'list_chat_channels',
-		method: 'GET',
-	}, { manual: true })
+		url    : 'list_chat_channels',
+		method : 'GET',
+	}, { manual: true });
 
 	const getShipmentChatList = async (restFilters, currentPage) => {
 		console.log(restFilters, 'pageee');
@@ -39,8 +38,8 @@ const useGetShipmentChatList = ({ status }) => {
 				res?.data?.page <= 1
 					? res?.data?.list || []
 					: [...(prevState.data || []), ...(res?.data?.list || [])],
-			total: res?.data?.total_count,
-			total_page: res?.data?.total,
+			total      : res?.data?.total_count,
+			total_page : res?.data?.total,
 		}));
 	};
 
@@ -55,13 +54,13 @@ const useGetShipmentChatList = ({ status }) => {
 	console.log(list, 'getttttt');
 
 	return {
-		filters: {},
-		ListData: list?.data,
-		loading: apiLoading,
+		filters    : {},
+		ListData   : list?.data,
+		loading    : apiLoading,
 		page,
-		total_page: list?.total_page,
-		hookSetters
-	}
+		total_page : list?.total_page,
+		hookSetters,
+	};
 };
 
 export default useGetShipmentChatList;

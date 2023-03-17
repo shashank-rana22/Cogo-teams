@@ -1,7 +1,7 @@
-import React from 'react';
 import { Placeholder } from '@cogoport/components';
+import React from 'react';
 
-const MsgLoader = () => {
+function MsgLoader() {
 	return (
 		<>
 			<div style={{ display: 'flex', justifyContent: 'flex-start' }}>
@@ -24,5 +24,5 @@ const MsgLoader = () => {
 			</div>
 		</>
 	);
-};
+}
 export default MsgLoader;

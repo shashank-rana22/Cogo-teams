@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useRequest } from '@cogo/commons/hooks';
+import { Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { toast } from '@cogoport/front/components';
+import { useState } from 'react';
 
 const shipmentChatStakeholders = [
 	'service_ops1',
@@ -35,9 +35,7 @@ const useCreateMessage = ({
 
 	const sh = stakeHolderView.split(' ');
 
-	const sh_arr = (sh || []).map((item) => {
-		return item.replace('@', '');
-	});
+	const sh_arr = (sh || []).map((item) => item.replace('@', ''));
 
 	const condition_arr = sh_arr.length && sh_arr[0] !== '' ? [...sh_arr] : [];
 
@@ -51,9 +49,7 @@ const useCreateMessage = ({
 		return item?.toLowerCase();
 	});
 
-	const url = (formValues?.file || []).map((obj) => {
-		return obj.url;
-	});
+	const url = (formValues?.file || []).map((obj) => obj.url);
 
 	const onError = (err) => {
 		setErrors(err);
@@ -67,19 +63,15 @@ const useCreateMessage = ({
 		? [...filtered_arr, shipment_data?.stakeholder_types?.[0]]
 		: [...filtered_arr];
 
-	visible_to_stakeholders = visible_to_stakeholders?.filter((item) =>
-		shipmentChatStakeholders.includes(item),
-	);
+	visible_to_stakeholders = visible_to_stakeholders?.filter((item) => shipmentChatStakeholders.includes(item));
 	const GroupChannel = filtered_arr.length
 		? {
-			created_by_stakeholder: shipment_data?.stakeholder_types?.[0],
-			source_id: sourceId,
-			visible_to_stakeholders,
+			created_by_stakeholder: shipment_data?.stakeholder_types?.[0], source_id: sourceId, visible_to_stakeholders,
 		}
 		: {
-			created_by_stakeholder: shipment_data?.stakeholder_types?.[0],
-			source_id: sourceId,
-			visible_to_user_ids: subscribedUsers,
+			created_by_stakeholder : shipment_data?.stakeholder_types?.[0],
+			source_id              : sourceId,
+			visible_to_user_ids    : subscribedUsers,
 		};
 
 	const payload = source === 'shipment' ? GroupChannel : PersonalChannel;
@@ -88,10 +80,7 @@ const useCreateMessage = ({
 		try {
 			const res = await createMessageAPI.trigger({
 				data: {
-					content: formValues?.message || '',
-					attachment_urls: url || [],
-					channel_id: id,
-					...payload,
+					content: formValues?.message || '', attachment_urls: url || [], channel_id: id, ...payload,
 				},
 			});
 
@@ -100,16 +89,16 @@ const useCreateMessage = ({
 				sendToRef?.current?.setText('');
 			}
 		} catch (err) {
-			toast.error(
-				err?.error?.base?.[0] ||
-				'Unable to send message, Please try again later!',
+			Toast.error(
+				err?.error?.base?.[0]
+				|| 'Unable to send message, Please try again later!',
 			);
 		}
 	};
 
 	const onCreate = () => {
 		if (payload?.visible_to_stakeholders?.length < 2) {
-			toast.error('Please tag appropriate stakeholder');
+			Toast.error('Please tag appropriate stakeholder');
 		} else {
 			handleSendMsg();
 		}

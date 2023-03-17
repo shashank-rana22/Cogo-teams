@@ -1,3 +1,14 @@
+import { Input, Popover, cl } from '@cogoport/components';
+// import formatDate from '@cogo/globalization/utils/formatDate';
+// import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
+import { ShipmentDetailContext } from '@cogoport/context';
+import {
+	IcMArrowDown,
+	IcMSearchlight,
+	IcMArrowBack,
+	IcMUnread,
+} from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, {
 	useState,
 	useEffect,
@@ -6,33 +17,24 @@ import React, {
 	useRef,
 } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import { Input, Popover, cl } from '@cogoport/components';
-// import formatDate from '@cogo/globalization/utils/formatDate';
-// import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
-import { isEmpty, startCase } from '@cogoport/utils';
-import {
-	IcMArrowDown,
-	IcMSearchlight,
-	IcMArrowBack,
-	IcMUnread,
-} from '@cogoport/icons-react';
-// import Details from '../Details';
-import useGetShipmentChatList from '../../hooks/useGetShipmentChatList';
-import { ShipmentDetailContext } from '@cogoport/context';
+
 import EmptyState from '../../common/EmptyState';
 // import CreateChannel from './CreateChannel';
-import useUpdateSeen from '../../hooks/useUpdateSeen';
 import useGetChannel from '../../hooks/useGetChannel';
+import useGetShipmentChatList from '../../hooks/useGetShipmentChatList';
+import useUpdateSeen from '../../hooks/useUpdateSeen';
+import Details from '../Details';
+
 import ListLoader from './ListLoader';
 import styles from './styles.module.css';
 
-const List = ({
+function List({
 	setShow = () => { },
 	isMobile,
 	MessageContentArr = [],
 	user_id = '',
 	setSeenLoading = () => { },
-}) => {
+}) {
 	const refOuter = useRef(null);
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [count, setCount] = useState(0);
@@ -42,14 +44,14 @@ const List = ({
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
 	const [status, setStatus] = useState('active');
 
-	const { ListData, page, total_page, filters, hookSetters, loading, refetch } =
-		useGetShipmentChatList({ status });
+	const {
+		ListData, page, total_page,
+		filters, hookSetters, loading, refetch,
+	} = useGetShipmentChatList({ status });
 
 	console.log(ListData, page, total_page, filters, hookSetters, 'jjjjjjjjj');
 
-	const defaultChannel = ListData?.find((obj) => {
-		return obj?.source_id === shipment_data?.id;
-	});
+	const defaultChannel = ListData?.find((obj) => obj?.source_id === shipment_data?.id);
 
 	const data = defaultChannel ? defaultChannel?.id : ListData[0]?.id;
 
@@ -59,7 +61,7 @@ const List = ({
 
 	useEffect(() => {
 		setSeenLoading(seenLoading);
-	}, [seenLoading]);
+	}, [seenLoading, setSeenLoading]);
 
 	useEffect(() => {
 		if (id && !showUnreadChat) {
@@ -71,20 +73,16 @@ const List = ({
 			setCount(0);
 			onCreate(storeId);
 		}
-	}, [id, showUnreadChat]);
+	}, [id, showUnreadChat, count, storeId, onCreate]);
 
 	useEffect(() => {
 		setId(data);
 	}, [data]);
 
 	let unSeenMsg = [];
-	unSeenMsg = MessageContentArr.filter((item) => {
-		return item[user_id];
-	});
+	unSeenMsg = MessageContentArr.filter((item) => item[user_id]);
 
-	const unreadDataList = unSeenMsg?.map((obj) => {
-		return obj?.channel_details;
-	});
+	const unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
 
 	const handleClick = () => {
 		refOuter.current.scrollTop = 0;
@@ -100,7 +98,7 @@ const List = ({
 				hookSetters.setFilters({ ...filters, page: page + 1 });
 			}
 		}, 200);
-	}, [loading]);
+	}, [loading, filters, hookSetters, page]);
 
 	const renderContent = () => {
 		if (loading && isEmpty(ListData)) {
@@ -111,16 +109,20 @@ const List = ({
 			return <EmptyState isMobile />;
 		}
 
-		return channelList?.map((item) => {
-			const className = id === item?.id ? 'colored' : 'not_color';
-
-			return (
-				<div className={cl` ${styles.card} ${styles.className}`} onClick={() => setId(item?.id)}>
-					<div div className={styles.card_item}>
+		return channelList?.map((item) =>
+		// const className = id === item?.id ? 'colored' : 'not_color';
+			(
+				<div
+					className={cl` ${styles.card} ${styles.className}`}
+					role="button"
+					tabIndex={0}
+					onClick={() => setId(item?.id)}
+				>
+					<div className={styles.card_item}>
 
 						<div className={styles.serial_id}>{item?.channel_name}</div>
 
-						<div div className={styles.updated_at}>
+						<div className={styles.updated_at}>
 							{/* {formatDate({
 								date: item?.updated_at,
 								dateFormat: GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -128,18 +130,16 @@ const List = ({
 								formatType: 'dateTime',
 								separator: ' | ',
 							})} */}
-							'11/11/1111'
+							`11/11/1111`
 						</div>
 					</div>
 
-					{(MessageContentArr || []).map((obj) =>
+					{(MessageContentArr || []).map((obj) => (
 						obj?.mainKey === item?.id && obj[user_id] > 0 && id !== item?.id ? (
 							<div className={styles.circle}>{obj[user_id]}</div>
-						) : null,
-					)}
+						) : null))}
 				</div>
-			);
-		});
+			));
 	};
 
 	const handleSelect = (currentStatus) => {
@@ -148,15 +148,30 @@ const List = ({
 		setStatus(currentStatus);
 	};
 
-	const content = () => {
-		return (
-			<div className={styles.channels_type}>
-				<div className={styles.text} onClick={() => handleSelect('active')}>Active</div>
-				<div className={styles.line} />
-				<div className={styles.text} onClick={() => handleSelect('inactive')}> Inactive</div>
+	const content = () => (
+		<div className={styles.channels_type}>
+			<div
+				className={styles.text}
+				role="button"
+				tabIndex={0}
+				onClick={() => handleSelect('active')}
+			>
+				Active
+
 			</div>
-		);
-	};
+			<div className={styles.line} />
+			<div
+				className={styles.text}
+				role="button"
+				tabIndex={0}
+				onClick={() => handleSelect('inactive')}
+			>
+				{' '}
+				Inactive
+
+			</div>
+		</div>
+	);
 
 	return (
 		<>
@@ -169,7 +184,12 @@ const List = ({
 						content={content()}
 					>
 						<div className={styles.header}>
-							<div className={styles.heading}>{startCase(status)} Shipments </div>
+							<div className={styles.heading}>
+								{startCase(status)}
+								{' '}
+								Shipments
+								{' '}
+							</div>
 							<IcMArrowDown width={15} height={15} />
 						</div>
 					</Popover>
@@ -189,8 +209,11 @@ const List = ({
 							// }
 							suffix={<IcMSearchlight />}
 						/>
-						<div className={styles.filter_box}
-							className={showUnreadChat ? 'filled' : ' '}
+						<div
+							className={styles.filter_box}
+							role="button"
+							tabIndex={0}
+							// className={showUnreadChat ? 'filled' : ' '}
 							onClick={() => handleClick()}
 						>
 							<IcMUnread />
@@ -243,25 +266,24 @@ const List = ({
 					</span>
 				</div>
 			) : (
-				// channelList?.map((item) => (
-				// 	<Details
-				// 		setShow={setShow}
-				// 		subscribedUsers={item?.subscribed_user_ids}
-				// 		id={item?.id}
-				// 		activeId={id}
-				// 		sourceId={item?.source_id}
-				// 		source={item?.source}
-				// 		onSeen={onCreate}
-				// 		setShowMenu={setShowMenu}
-				// 		isMobile={isMobile}
-				// 		get={get}
-				// 		personal_data={personal_data}
-				// 	/>
-				// ))
-				null
+				channelList?.map((item) => (
+					<Details
+						setShow={setShow}
+						subscribedUsers={item?.subscribed_user_ids}
+						id={item?.id}
+						activeId={id}
+						sourceId={item?.source_id}
+						source={item?.source}
+						onSeen={onCreate}
+						setShowMenu={setShowMenu}
+						isMobile={isMobile}
+						get={get}
+						personal_data={personal_data}
+					/>
+				))
 			)}
 		</>
 	);
-};
+}
 
 export default List;

@@ -1,7 +1,7 @@
-import React from 'react';
 import { Placeholder } from '@cogoport/components';
+import React from 'react';
 
-const Loader = () => {
+function Loader() {
 	return (
 		<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 			<div>
@@ -15,5 +15,5 @@ const Loader = () => {
 			</div>
 		</div>
 	);
-};
+}
 export default Loader;

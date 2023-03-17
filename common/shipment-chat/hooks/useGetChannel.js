@@ -1,8 +1,7 @@
-import { useEffect, useCallback } from 'react';
 import { useRequest } from '@cogoport/request';
+import { useEffect, useCallback } from 'react';
 
 const useGetChannel = ({ channel_id }) => {
-
 	// const {
 	// 	trigger,
 	// 	loading: isGettingShipment,
@@ -10,8 +9,8 @@ const useGetChannel = ({ channel_id }) => {
 	// } = useRequest('get', false, scope)('/get_chat_channel');
 
 	const [{ loading: isGettingShipment, data: shipment }, trigger] = useRequest({
-		url: 'get_chat_channel',
-		method: 'GET',
+		url    : 'get_chat_channel',
+		method : 'GET',
 	}, { manual: true });
 
 	const getChannel = useCallback(() => {
@@ -28,26 +27,18 @@ const useGetChannel = ({ channel_id }) => {
 		})();
 	}, [trigger, channel_id]);
 
-	// const getChannel = () => {
-	// 	return trigger({
-	// 		params: {
-	// 			id: channel_id,
-	// 		},
-	// 	});
-	// };
-
 	const primary_service = shipment?.primary_service_detail;
 	const shipment_data = shipment?.summary || {};
 
 	useEffect(() => {
 		getChannel();
-	}, [channel_id]);
+	}, [channel_id, getChannel]);
 
 	return {
 		get: {
 			isGettingShipment,
-			refetch: getChannel,
-			data: {
+			refetch : getChannel,
+			data    : {
 				shipment_data,
 				primary_service,
 			},
