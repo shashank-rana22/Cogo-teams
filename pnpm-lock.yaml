@@ -304,7 +304,7 @@ importers:
       cookies-next: ^2.1.1
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.359_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.366_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
@@ -5609,7 +5609,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5620,7 +5620,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5631,7 +5631,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -5643,7 +5643,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5654,7 +5654,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -5666,7 +5666,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       immutable: 3.8.2
     dev: false
 
