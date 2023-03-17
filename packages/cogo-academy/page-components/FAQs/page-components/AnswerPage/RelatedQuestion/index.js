@@ -6,10 +6,9 @@ import useListFaqQuestions from '../../../hooks/useListFaqQuestion';
 
 import styles from './styles.module.css';
 
-function RelatedQuestion({ tags = '', question_abstract = '' }) {
-	const tagId = tags?.[0]?.id;
+function RelatedQuestion({ query_name = '', question_abstract = '' }) {
 	const router = useRouter();
-	const { data } = useListFaqQuestions({ tagId, limit: 3 });
+	const { data } = useListFaqQuestions({ query_name });
 
 	const handleClick = (id) => {
 		router.push(

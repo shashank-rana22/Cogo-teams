@@ -20,7 +20,7 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 								<div>{truncate(subHeading[0]?.name)}</div>
 							</Tooltip>
 						</div>
-						{subHeading[0]?.views}
+						{subHeading[0]?.view_count ? subHeading[0]?.view_count : subHeading[0]?.views}
 						{' '}
 						Views
 						,
@@ -34,7 +34,7 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 							</Tooltip>
 
 						</div>
-						{subHeading[1]?.views}
+						{subHeading[1]?.view_count ? subHeading[1]?.view_count : subHeading[1]?.views}
 						{' '}
 						Views
 						,
