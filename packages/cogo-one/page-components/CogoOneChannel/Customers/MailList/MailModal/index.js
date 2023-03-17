@@ -7,7 +7,6 @@ import CustomInput from '../../../../../common/EmailCustomTag/index';
 import { TOOLBARCONFIG } from '../../../../../constants';
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
 import getFileAttributes from '../../../../../utils/getFileAttributes';
-//  import hideDetails from '../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
