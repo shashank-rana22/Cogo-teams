@@ -1,6 +1,7 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-function useCreateTest() {
+function useCreateTest({ setTestId, setActiveStepper }) {
 	const [{ loading = false }, trigger] = useRequest({
 		url    : 'create_test',
 		method : 'POST',
@@ -17,13 +18,12 @@ function useCreateTest() {
 					test_duration: '1hr',
 				},
 			});
+			setTestId(res?.data?.id);
+			setActiveStepper('review_and_criteria');
+			Toast.success('Created Successfully');
 			console.log('done:: ', res);
-		} catch (error) {
-			console.log({
-				...formValues,
-				set_wise_distribution: idArray.map((id) => ({ test_question_set_id: id })),
-			});
-			console.log(error);
+		} catch (err) {
+			Toast.error(err?.message || 'Something went wrong');
 		}
 	};
 	return {

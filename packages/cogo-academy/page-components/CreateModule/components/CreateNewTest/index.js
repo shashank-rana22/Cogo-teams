@@ -1,71 +1,44 @@
-import { Button } from '@cogoport/components';
+import { Stepper } from '@cogoport/components';
 import { useState } from 'react';
 
-import useCreateTest from '../../hooks/useCreateTest';
-import AddQuestionsForm from '../CreateQuestionSet/components/AddQuestionsForm';
-
-import NewQuestion from './components/NewQuestion';
-import QuestionSet from './components/QuestionSet';
-import TestDetails from './components/TestDetails';
+import DetailsAndQuestions from './components/DetailsAndQuestions';
+import ReviewAndCriteria from './components/ReviewAndCriteria';
+import TABS_MAPPING from './configs/TABS_MAPPING';
 import styles from './styles.module.css';
 
 function CreateTest() {
-	const [showQuestionSet, setShowQuestionSet] = useState(false);
-	const [showNewQuestion, setShowNewQuestion] = useState(false);
-	const [formValues, setFormValues] = useState({});
-	const [idArray, setIdArray] = useState([]);
-	const { loading, createTest } = useCreateTest();
+	const [activeStepper, setActiveStepper] = useState('details_and_questions');
+	const [testId, setTestId] = useState(null);
+	const COMPONENT_MAPPING = {
+		details_and_questions: {
+			component : DetailsAndQuestions,
+			props     : {
+				setTestId, setActiveStepper,
+			},
+		},
+		review_and_criteria: {
+			component : ReviewAndCriteria,
+			props     : {
+				testId, setActiveStepper,
+			},
+		},
+	};
+
+	const ActiveComponent = COMPONENT_MAPPING[activeStepper].component;
+
+	const activeComponentProps = COMPONENT_MAPPING[activeStepper].props;
+
 	return (
 		<div>
-			<TestDetails setFormValues={setFormValues} />
-			{!showQuestionSet && !showNewQuestion && (
-				<div className={styles.btn_container}>
-					<Button
-						onClick={() => setShowQuestionSet(true)}
-						size="md"
-						themeType="primary"
-						style={{ marginRight: '20px' }}
-					>
-						From Existing Question Set
-					</Button>
-					<Button
-						onClick={() => setShowNewQuestion(true)}
-						size="md"
-						themeType="accent"
-					>
-						+ Add New Question
-					</Button>
-				</div>
-			)}
-			{/* {showQuestionSet && <QuestionSet setShowNewQuestion={setShowNewQuestion} />} */}
-			<QuestionSet setIdArray={setIdArray} />
-			{showNewQuestion && <NewQuestion />}
-			{showNewQuestion && <AddQuestionsForm />}
-			{(showQuestionSet || showNewQuestion) && (
-				<>
-					<Button
-						onClick={() => setShowNewQuestion(true)}
-						size="md"
-						themeType="secondary"
-					>
-						+ Add New Question
-					</Button>
-					<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
-						<Button
-							loading={loading}
-							size="md"
-							themeType="tertiary"
-							style={{ marginRight: '10px' }}
-							onClick={() => {
-								createTest({ formValues, idArray });
-							}}
-						>
-							Save As Draft
-						</Button>
-						<Button size="md" themeType="primary">Review And Set Validity</Button>
-					</div>
-				</>
-			)}
+			<div className={styles.tab_container}>
+				<Stepper
+					active={activeStepper}
+					setActive={setActiveStepper}
+					items={TABS_MAPPING}
+				/>
+			</div>
+
+			<ActiveComponent {...activeComponentProps} />
 		</div>
 	);
 }

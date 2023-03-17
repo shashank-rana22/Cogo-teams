@@ -1,22 +1,17 @@
 // import CreateTest from '../CreateNewTest';
 // import CreateQuestionSet from '../CreateModule/components/CreateQuestionSet';
-import CreateTest from '../CreateNewTest';
-// import Header from '../Header';
-// import TestsList from '../TestsList';
-import ReviewAndCriteria from '../CreateNewTest/components/ReviewAndCriteria';
+// import CreateTest from '../CreateNewTest';
+import Header from '../Header';
+import TestsList from '../TestsList';
 
 function HomePage() {
-	// const [activeTab, setActiveTab] = useState('tests');
-
 	return (
-		// <div>
-		// 	<Header />
-		// 	{/* <Analytics /> */}
-		// 	<TestsList />
-		// </div>
+		<div>
+			<Header />
+			<TestsList />
+		</div>
 		// <CreateQuestionSet />
-		<CreateTest />
-		// <ReviewAndCriteria />
+		// <CreateTest />
 	);
 }
 export default HomePage;
