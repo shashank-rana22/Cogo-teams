@@ -1,6 +1,7 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateRfq = ({ item, reason, setShow }) => {
+const useUpdateRfq = ({ item, reason, setShow, refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_rfq',
 		method : 'POST',
@@ -10,12 +11,14 @@ const useUpdateRfq = ({ item, reason, setShow }) => {
 		try {
 			await trigger({
 				data: {
-					status : 'inactive',
+					status : 'closed',
 					id     : item?.id,
 					reason,
 				},
 			});
 			setShow(false);
+			refetch();
+			Toast.success('rfq closed successfully');
 		} catch (err) {
 			// console.log(err);
 		}

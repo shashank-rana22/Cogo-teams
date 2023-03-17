@@ -7,7 +7,7 @@ import useUpdateRfq from '../../../hooks/useUpdateRfq';
 import styles from './styles.module.css';
 
 function List({
-	fields, item, loading, headerRequired, setSelectedRate, selectedRate, status,
+	fields, item, loading, headerRequired, setSelectedRate, selectedRate, status, refetch,
 }) {
 	const { push } = useRouter();
 
@@ -22,7 +22,7 @@ function List({
 		}
 	};
 
-	const { updateRfq } = useUpdateRfq({ item, reason, setShow });
+	const { updateRfq } = useUpdateRfq({ item, reason, setShow, refetch });
 
 	const handleCloseModal = () => {
 		updateRfq();
@@ -65,11 +65,21 @@ function List({
 			<Modal show={show} onClose={() => setShow(false)}>
 				<Modal.Header title="Reason For Closing This RFQ?" />
 				<Modal.Body>
-					<Checkbox label="1" value="1" onChange={() => handleOnChange('1')} checked={reason === '1'} />
-					<Checkbox label="2" value="1" onChange={() => handleOnChange('2')} checked={reason === '2'} />
+					<Checkbox
+						label="Request not serviceable"
+						value="request_not_serviceable"
+						onChange={() => handleOnChange('request_not_serviceable')}
+						checked={reason === 'request_not_serviceable'}
+					/>
+					<Checkbox
+						label="No space with service provider"
+						value="no_space_with_service_provider"
+						onChange={() => handleOnChange('no_space_with_service_provider')}
+						checked={reason === 'no_space_with_service_provider'}
+					/>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={handleCloseModal}>Close</Button>
+					<Button onClick={handleCloseModal} disabled={!reason}>Close</Button>
 				</Modal.Footer>
 
 			</Modal>

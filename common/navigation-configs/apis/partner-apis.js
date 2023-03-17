@@ -4153,6 +4153,12 @@ const partner = {
 			service_name : 'fcl_cfs_rate',
 			feature      : 'rfq',
 		},
+		{
+			api          : 'update_rfq',
+			access_type  : 'private',
+			service_name : 'rfq',
+			feature      : 'rfq',
+		},
 	],
 	operations_dashboard: [
 		{
