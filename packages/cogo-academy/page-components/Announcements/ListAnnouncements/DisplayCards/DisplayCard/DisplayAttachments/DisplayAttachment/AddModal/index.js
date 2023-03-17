@@ -70,6 +70,7 @@ function AddModal({
 			<Modal.Footer>
 				<div className={styles.add_buttons}>
 					<Button
+						type="button"
 						themeType="secondary"
 						size="md"
 						onClick={() => setShowAddModal(null)}
@@ -78,6 +79,7 @@ function AddModal({
 						Cancel
 					</Button>
 					<Button
+						type="button"
 						themeType="primary"
 						size="md"
 						onClick={handleSubmit(addFunction)}

@@ -20,16 +20,25 @@
 
 		.ui_multiselect_input_control {
 			font-size: 12px !important;
-			white-space: normal !important;
+			white-space: normal;
 		}
 
 		.ui_text_area_container {
+			padding: 0;
 			background-color: #fff;
+			border: none;
+		}
+
+		.ui_text_area_control {
+			min-height: 100px;
+			padding: 4px 8px;
+			font-size: 12px;
+			border: 1px solid #dedede;
 		}
 
 		.ui_select_input_control,
 		.ui_checkbox_container {
-			padding: 0 !important;
+			padding: 0;
 			font-size: 12px !important;
 		}
 
@@ -44,7 +53,7 @@
 		}
 
 		.ui_upload_droparea_container {
-			background-color: #fff !important;
+			background-color: #fff;
 		}
 	}
 }

@@ -123,13 +123,13 @@ function DisplayCard({
 			{showModal && (
 				<Modal
 					show={showModal}
-					scroll={false}
 					size="lg"
 					placement="center"
 					onClose={() => setShowModal(false)}
+
 				>
-					<Modal.Header title="Preview" />
-					<Modal.Body className={styles.modal}>
+					<Modal.Header title={accordianData.title} />
+					<Modal.Body style={{ maxHeight: '90vh' }}>
 						<Preview
 							formValues={accordianData}
 							announcement_id={accordianData?.id}
