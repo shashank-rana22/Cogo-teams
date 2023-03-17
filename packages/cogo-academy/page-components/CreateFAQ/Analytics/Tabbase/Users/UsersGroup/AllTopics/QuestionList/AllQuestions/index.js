@@ -4,18 +4,14 @@ import startCase from '@cogoport/utils/src/utilities/startCase';
 import React from 'react';
 
 import StyledTable from '../../../../../../../../../commons/StyledTable';
-import useListFaqQuestions from '../../../../../../hooks/useListFaqQuestions';
 
 import styles from './styles.module.css';
 
-function AllQuestions({ id = '' }) {
+function AllQuestions({ props = [] }) {
 	const truncate = (str) => (str?.length > 58 ? `${str.substring(0, 56)}...` : str);
 
-	const topicId = id;
-	const props = useListFaqQuestions({ topicId });
-
-	const listdata = props.data?.list || [];
-
+	const listdata = props || [];
+	console.log(listdata, 'ld');
 	const addedQuestionsColumns = () => [
 		{
 			Header   : 'Questions',

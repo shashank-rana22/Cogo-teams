@@ -98,7 +98,7 @@ function AllTopic({ props = '' }) {
 				</div>
 			</div>
 
-			{showQuestions ? <QuestionsList id={id} /> : null}
+			{showQuestions ? <QuestionsList props={most_viewed_questions} /> : null}
 		</div>
 
 	);
