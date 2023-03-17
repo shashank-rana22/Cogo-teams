@@ -1,5 +1,7 @@
+import { Toast } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useCallback, useContext } from 'react';
 
 const timelineData = [
 	{
@@ -86,7 +88,7 @@ const timelineData = [
 		milestone           : 'Vessel Departed From Origin (ETD)',
 		completed_on        : '2023-02-13T04:18:00.000Z',
 		is_sub              : false,
-		actual_completed_on : null,
+		actual_completed_on : '2023-02-10T11:50:00.000Z',
 		is_date_fluctuate   : false,
 	},
 	{
@@ -117,32 +119,41 @@ const timelineData = [
 	},
 ];
 
-function useGetShipmentTimeLine({ shipment_id = '9645be5c-b956-4734-8094-4ef39944d54f' } = {}) {
+function useGetShipmentTimeLine() {
 	const [data, setData] = useState([]);
+
+	const { shipment_data: { id: shipment_id } } = useContext(ShipmentDetailContext);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'get_service_timeline',
 		method : 'GET',
 	}, { manual: true });
 
-	useEffect(() => {
-		(async () => {
-			try {
-				const res = await trigger({
-					params: { shipment_id },
-				});
-				if (res.status === 200) { setData(res.data); }
-			} catch (e) {
-				setData([]);
-				console.log(e.message);
+	const getShipmentTimeline = useCallback((async () => {
+		try {
+			const res = await trigger({
+				params: { shipment_id },
+			});
+			if (res.status === 200) {
+				setData(res.data);
 			}
-		})();
-	}, [shipment_id, trigger]);
+			// else {
+			// setData([]);
+			// 	Toast.error(JSON.stringify(res.error));
+			// }
+		} catch (e) {
+			setData([]);
+			Toast.error(e.message);
+		}
+	}), [shipment_id, trigger]);
+
+	console.log({ loading });
 
 	return {
 		loading,
 		// timelineData: data || [],
 		timelineData,
+		getShipmentTimeline,
 	};
 }
 
