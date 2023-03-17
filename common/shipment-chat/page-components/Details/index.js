@@ -8,7 +8,7 @@ import useFireBase from '../../hooks/useFireBase';
 import Header from './Header';
 import Loader from './Loader';
 import MessageContainer from './MessageContainer';
-// import SendTo from './SendTo';
+import SendTo from './SendTo';
 import styles from './styles.module.css';
 
 const shipmentChatStakeholders = [
@@ -110,56 +110,57 @@ function Details({
 					showImpMsg={showImpMsg}
 				/>
 
-				{source === 'shipment' ? (
-					// <SendTo
-					// 	ref={sendToRef}
-					// 	data={data}
-					// 	// setStakeHolderView={setStakeHolderView}
-					// 	isStakeholder={isStakeholder}
-					// />
-					null
-				) : (
-					<div style={{ padding: '21px' }} />
-				)}
+				<div>
+					{source === 'shipment' ? (
+						<SendTo
+							ref={sendToRef}
+							data={data}
+						// setStakeHolderView={setStakeHolderView}
+							isStakeholder={isStakeholder}
+						/>
+					) : (
+						<div style={{ padding: '21px' }} />
+					)}
 
-				<div className={styles.typing_container}>
-					<Popover
-						theme="light"
-						interactive
-						content="aaa"
-					>
-						<div className={styles.icon_wrap}>
-							<IcMAttach width={21} height={21} />
-						</div>
-					</Popover>
-					<div className={styles.attached_container}>
-						{/* {(formValues?.file || []).map((url) => (
+					<div className={styles.typing_container}>
+						<Popover
+							theme="light"
+							interactive
+							content="aaa"
+						>
+							<div className={styles.icon_wrap}>
+								<IcMAttach width={21} height={21} />
+							</div>
+						</Popover>
+						<div className={styles.attached_container}>
+							{/* {(formValues?.file || []).map((url) => (
 							<div className={styles.attached_doc}>
 								<IcMDocument style={{ marginRight: '4px' }} />
 								{url.name}
 							</div>
 						))} */}
-					</div>
+						</div>
 
-					<Textarea
-						className={styles.text_area}
-						placeholder="Type your message here...."
-						value={textContent}
-						rows
-						onKeyPress={(e) => handleKeyPress(e)}
-						onKeyDown={(e) => handleDelete(e)}
-						onChange={(val) => {
-							setTextContent(val);
-						}}
-					/>
+						<Textarea
+							className={styles.text_area}
+							placeholder="Type your message here...."
+							value={textContent}
+							rows
+							onKeyPress={(e) => handleKeyPress(e)}
+							onKeyDown={(e) => handleDelete(e)}
+							onChange={(val) => {
+								setTextContent(val);
+							}}
+						/>
 
-					<div
-						className={styles.send}
-						role="button"
-						tabIndex={0}
-						onClick={() => onCreate()}
-					>
-						<IcMSend style={{ width: '2em', height: '2em', fill: '#303b67' }} />
+						<div
+							className={styles.send}
+							role="button"
+							tabIndex={0}
+							onClick={() => onCreate()}
+						>
+							<IcMSend style={{ width: '2em', height: '2em', fill: '#303b67' }} />
+						</div>
 					</div>
 				</div>
 			</div>

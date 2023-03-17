@@ -105,9 +105,9 @@ function Sendto(
 		);
 	};
 
-	useEffect(() => {
-		showSuggestions();
-	}, [userName, showSuggestions]);
+	// useEffect(() => {
+	// 	showSuggestions();
+	// }, [userName, showSuggestions]);
 
 	useEffect(() => {
 		setStakeHolderView(text);
@@ -122,8 +122,8 @@ function Sendto(
 		<>
 			<div>{renderSuggestions()}</div>
 			<div className={styles.send_to_container}>
-				<div className="send-text">Sending to -</div>
-				<div className="stakeholders">
+				<div className={styles.send_text}>Sending to -</div>
+				<div className={styles.send_input}>
 					<Input
 						value={text}
 						onChange={(e) => handleMentions(e.target.value)}
