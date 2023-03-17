@@ -1,6 +1,6 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useMemo } from 'react';
 
-import { ShipmentDetailContext } from '../../common/context';
 import useGetShipment from '../../hooks/useGetShipment';
 import useListShipmentServices from '../../hooks/useListShipmentServices';
 

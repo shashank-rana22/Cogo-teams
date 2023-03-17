@@ -1,6 +1,6 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
-import { ShipmentDetailContext } from '../../../../../common/context';
 import possibleFullRouteConfigs from '../../../../../common/Route/possible-full-route.json';
 
 import { helperFuncs } from './helpers/getHelperFuncs';

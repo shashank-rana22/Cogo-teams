@@ -1,7 +1,7 @@
 import { Button, Modal, Accordion } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useState, useContext } from 'react';
 
-import { ShipmentDetailContext } from '../../../../../common/context';
 import EmptyState from '../../../../../common/EmptyState';
 // import useListContainerDetails from '../../../hooks/useListContainerDetails';
 import { data } from '../dummy_data';
@@ -78,8 +78,8 @@ function BLDetails() {
 						onClose={() => {
 							setMappingModal(false);
 						}}
-							// position={isMobile ? 'bottom' : ''}
-							// fullscreen={isMobile}
+						// position={isMobile ? 'bottom' : ''}
+						// fullscreen={isMobile}
 						className="primary lg"
 					>
 						<BlContainer

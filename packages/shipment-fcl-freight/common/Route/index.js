@@ -1,7 +1,6 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import React, { useContext } from 'react';
-
-import { ShipmentDetailContext } from '../context';
 
 import ActiveService from './ActiveService';
 import InactiveService from './InactiveService';
@@ -26,12 +25,12 @@ const isTrasportationAvailable = (allServices, trade_type) => {
 
 const getServiceData = (allServices, routeLeg) => allServices?.find(
 	(service) => ((routeLeg?.service_types || []).includes(service?.service_type)
-				|| (routeLeg?.service_types || []).includes(
-					service?.display_service_type,
-				))
-			&& (!service?.trade_type
-				|| !routeLeg?.trade_type
-				|| service?.trade_type === routeLeg?.trade_type),
+		|| (routeLeg?.service_types || []).includes(
+			service?.display_service_type,
+		))
+		&& (!service?.trade_type
+			|| !routeLeg?.trade_type
+			|| service?.trade_type === routeLeg?.trade_type),
 );
 
 const isServiceTakenFunc = (allServices, routeLeg) => (
@@ -39,9 +38,9 @@ const isServiceTakenFunc = (allServices, routeLeg) => (
 		(service) => (routeLeg?.service_types || []).includes(
 			service?.display_service_type,
 		)
-				&& (!service?.trade_type
-					|| !routeLeg?.trade_type
-					|| service?.trade_type === routeLeg?.trade_type),
+			&& (!service?.trade_type
+				|| !routeLeg?.trade_type
+				|| service?.trade_type === routeLeg?.trade_type),
 	)?.length > 0
 );
 
