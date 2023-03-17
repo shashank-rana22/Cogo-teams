@@ -1292,6 +1292,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
+	{
+		api          : 'get_service_timeline',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'update_shipment_service',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
