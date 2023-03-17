@@ -18,7 +18,10 @@ function AnnouncementForm({
 	actionType,
 	loadingForm = false,
 }) {
+	const [showCreateAudience, setShowCreateAudience] = useState(false);
+
 	const { audienceOptions = [], fetchAudiences = () => {}, listAudienceLoading = false } = useListAudiences();
+
 	const {
 		controls,
 		control,
@@ -32,7 +35,6 @@ function AnnouncementForm({
 		errors,
 	} = useCreateAnnouncements({ defaultValues, announcement_id, actionType, listAudienceLoading });
 
-	const [showCreateAudience, setShowCreateAudience] = useState(false);
 	const formValues = watch();
 
 	const renderAddButton = () => (
@@ -47,6 +49,7 @@ function AnnouncementForm({
 			</Button>
 		</div>
 	);
+
 	if (listAudienceLoading || loadingForm) {
 		return (
 			<div className={styles.spinner}>
@@ -54,6 +57,7 @@ function AnnouncementForm({
 			</div>
 		);
 	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.form}>
@@ -75,11 +79,13 @@ function AnnouncementForm({
 							</div>
 						);
 					}
+
 					return (
 						<div style={{ ...controlStyle, position: 'relative' }}>
 							{controlItem.optionsListKey === 'audiences' && (
 								renderAddButton()
 							)}
+
 							<FormElement
 								name={controlItem.name}
 								control={control}
@@ -92,6 +98,7 @@ function AnnouncementForm({
 					);
 				})}
 			</div>
+
 			<div className={styles.button_container}>
 				{!announcement_id && (
 					<div>
@@ -104,6 +111,7 @@ function AnnouncementForm({
 						</Button>
 					</div>
 				)}
+
 				<div>
 					<Button
 						loading={loading}
@@ -115,6 +123,7 @@ function AnnouncementForm({
 					</Button>
 				</div>
 			</div>
+
 			{showPreview && (
 				<Modal
 					show={showPreview}
@@ -124,11 +133,13 @@ function AnnouncementForm({
 					onClose={() => setShowPreview(false)}
 				>
 					<Modal.Header title="Preview" />
+
 					<Modal.Body className={styles.modal}>
 						<Preview formValues={formValues} />
 					</Modal.Body>
 				</Modal>
 			)}
+
 			{showCreateAudience && (
 				<Modal
 					show={showCreateAudience}
@@ -136,6 +147,7 @@ function AnnouncementForm({
 					onClose={() => setShowCreateAudience(false)}
 				>
 					<Modal.Header title="Add Audience" />
+
 					<Modal.Body className={styles.audience_modal}>
 						<CreateAudienceForm
 							setShowCreateAudience={setShowCreateAudience}

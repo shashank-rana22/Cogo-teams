@@ -15,6 +15,7 @@ function FormElement({ name, field, control, options, errors, value = false }) {
 	const finalFields = {
 		...field,
 	};
+
 	const required = ['title', 'validity', 'hot_duration', 'announcement_type', 'audience_ids'];
 
 	return (
@@ -26,10 +27,12 @@ function FormElement({ name, field, control, options, errors, value = false }) {
 					{required.includes(name) && <sup className={styles.sup}>*</sup>}
 				</div>
 			)}
+
 			<div>
 				{finalFields.type === 'chips' && (
 					<ChipsController control={control} {...finalFields} />
 				)}
+
 				{finalFields.type === 'checkbox' && (
 					<CheckboxController control={control} {...finalFields} checked={value} />
 				)}
@@ -37,6 +40,7 @@ function FormElement({ name, field, control, options, errors, value = false }) {
 				{finalFields.type === 'select' && (
 					<SelectController control={control} {...finalFields} options={options} />
 				)}
+
 				{finalFields.type === 'multi-select' && (
 					<MultiselectController control={control} {...finalFields} options={options} />
 				)}
@@ -48,9 +52,11 @@ function FormElement({ name, field, control, options, errors, value = false }) {
 				{finalFields.type === 'textarea' && (
 					<TextAreaController control={control} {...finalFields} />
 				)}
+
 				{finalFields.type === 'datepicker' && (
 					<DateRangePickerController control={control} {...finalFields} showTimeSelect />
 				)}
+
 				{finalFields.type === 'upload' && (
 					<UploadController
 						multiple
@@ -61,6 +67,7 @@ function FormElement({ name, field, control, options, errors, value = false }) {
 					/>
 				)}
 			</div>
+
 			{errors[name] && (
 				<div className={styles.error_message}>{`${finalFields?.label} is ${errors[name]?.message}`}</div>
 			)}

@@ -23,6 +23,10 @@
 			white-space: normal !important;
 		}
 
+		.ui_text_area_container {
+			background-color: #fff;
+		}
+
 		.ui_select_input_control,
 		.ui_checkbox_container {
 			padding: 0 !important;
