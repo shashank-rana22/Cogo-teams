@@ -37,6 +37,8 @@ function GraphUI() {
 							reverse : false,
 
 						}}
+						colors={{ datum: 'color' }}
+						curve="monotoneX"
 						yFormat=" >-.2f"
 						axisTop={null}
 						axisRight={null}

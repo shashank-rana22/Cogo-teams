@@ -1,5 +1,11 @@
 import { startCase, format } from '@cogoport/utils';
 
+const MAPPING = {
+	answers_available_data_points     : '#ABCD62',
+	answers_not_available_data_points : '#E0E0E0',
+	search_data_points                : '#EE3425',
+};
+
 const useGetFormattedGraphData = ({ graph_data = {} }) => {
 	const graphData = [];
 
@@ -13,7 +19,8 @@ const useGetFormattedGraphData = ({ graph_data = {} }) => {
 
 		graphData.push({
 			id    : startCase(key),
-			color : 'hsl(24, 70%, 50%)',
+			key,
+			color : MAPPING[key],
 			data  : array,
 		});
 	});
