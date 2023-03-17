@@ -36,17 +36,17 @@ function AllQuestionCardView({ props = {} }) {
 	} = question_stats;
 	const [showQuestions, setShowQuestions] = useState(false);
 
-	// const PILL_MAPPING = {
-	// 	'No of Questions' : no_of_questions,
-	// 	'No of Views'     : no_of_views,
-	// 	'No of Likes'     : no_of_likes,
-	// 	'No of Dislikes'  : no_of_dislikes,
-	// };
+	const PILL_MAPPING = {
+		'No of Questions' : no_of_questions,
+		'No of Views'     : no_of_views,
+		'No of Likes'     : no_of_likes,
+		'No of Dislikes'  : no_of_dislikes,
+	};
 
 	return (
-		<div style={{ marginTop: '1rem', overflow: 'hidden' }}>
+		<div style={{ marginTop: '12px' }}>
 			<div className={styles.container}>
-				<div style={{ justifyContent: 'space-between' }}>
+				<div className={styles.pills_container}>
 					<Pill
 						size="xl"
 						color="#CFEAED"
@@ -55,90 +55,46 @@ function AllQuestionCardView({ props = {} }) {
 						All Questions
 					</Pill>
 
-					<Pill
-						size="lg"
-						color="#F3FAFA"
-						style={{
-							fontWeight : '600',
-							marginTop  : '-9%',
-							marginLeft : '40%',
-						}}
-					>
-						No of Questions:
-						{' '}
-						{no_of_questions}
-					</Pill>
-					<Pill
-						size="lg"
-						color="#F3FAFA"
-						style={{
-							fontWeight : '600',
-							marginTop  : '-9%',
-							marginLeft : '1%',
-
-						}}
-					>
-						No of Views:
-						{' '}
-						{no_of_views}
-
-					</Pill>
-					<Pill
-						size="lg"
-						color="#F3FAFA"
-						style={{
-							fontWeight : '600',
-							marginTop  : '-9%',
-							marginLeft : '1%',
-
-						}}
-					>
-						No of Likes:
-						{' '}
-						{no_of_likes}
-
-					</Pill>
-					<Pill
-						size="lg"
-						color="#F3FAFA"
-						style={{
-							fontWeight : '600',
-							marginTop  : '-9%',
-							marginLeft : '1%',
-
-						}}
-					>
-						No of Dislikes:
-						{' '}
-						{no_of_dislikes}
-
-					</Pill>
-
+					<div>
+						{Object.keys(PILL_MAPPING).map((key) => (
+							<Pill
+								key={key}
+								size="lg"
+								color="#F3FAFA"
+								style={{ fontWeight: '600' }}
+							>
+								{key}
+								:
+								{' '}
+								{PILL_MAPPING[key]}
+							</Pill>
+						))}
+					</div>
 				</div>
+
 				<div style={{ display: 'flex' }}>
-					<div style={{ display: 'flex' }}>
-						<ViewCards
-							cardHeading="Topic from which Most Questions viewed"
-							subHeading={trending_topics}
-						/>
-						<ViewCards
-							cardHeading="User group that viewed the Most Questions "
-							subHeading={active_audiences}
-						/>
-						<ViewCardsList
-							state="Viewed_Question"
-							cardHeading="Top Viewed Questions"
-							contentQuestion={most_viewed_questions}
-						/>
-						<ViewCardsList
-							state="Liked_Question"
-							cardHeading="Top Liked Questions"
-							contentQuestion={popular_questions}
-						/>
-						<Scroll />
-						{/* <ViewCards cardHeading="Topic from which Most Questions viewed" subHeading="ed" /> */}
-						{/* <ViewCards cardHeading="User group that viewed the Most Questions " subHeading="ecd" /> */}
-						{/* <ViewCardsList
+					<ViewCards
+						cardHeading="Topic from which Most Questions viewed"
+						subHeading={trending_topics}
+					/>
+					<ViewCards
+						cardHeading="User group that viewed the Most Questions "
+						subHeading={active_audiences}
+					/>
+					<ViewCardsList
+						state="Viewed_Question"
+						cardHeading="Top Viewed Questions"
+						contentQuestion={most_viewed_questions}
+					/>
+					<ViewCardsList
+						state="Liked_Question"
+						cardHeading="Top Liked Questions"
+						contentQuestion={popular_questions}
+					/>
+					<Scroll />
+					{/* <ViewCards cardHeading="Topic from which Most Questions viewed" subHeading="ed" /> */}
+					{/* <ViewCards cardHeading="User group that viewed the Most Questions " subHeading="ecd" /> */}
+					{/* <ViewCardsList
 							cardHeading="Top Viewed Questions"
 							contentQuestion="What are Incoterms?"
 						/>
@@ -146,15 +102,18 @@ function AllQuestionCardView({ props = {} }) {
 							cardHeading="Top Liked Questions"
 							contentQuestion="What are Incoterms?"
 						/> */}
-					</div>
 				</div>
-				<div style={{ marginTop: '-25px', marginRight: '-10px', float: 'right' }}>
+
+				<div className={styles.button_container}>
 					<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
-						<div style={{ fontWeight: 600 }}>All Questions..</div>
-						{!showQuestions ? <IcMArrowDown /> : <IcMArrowUp />}
+						ALL QUESTIONS
+						{!showQuestions
+							? <IcMArrowDown style={{ marginLeft: 4 }} />
+							: <IcMArrowUp style={{ marginLeft: 4, marginBottom: 2 }} />}
 					</Button>
 				</div>
 			</div>
+
 			{showQuestions ? <QuestionsList /> : null}
 		</div>
 
