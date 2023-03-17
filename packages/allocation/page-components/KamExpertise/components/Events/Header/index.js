@@ -70,6 +70,7 @@ function Header(props) {
 					size="md"
 					onClick={onClose}
 					disabled={loading}
+					className={styles.add_button}
 				>
 					Add New Event
 				</Button>

@@ -5,10 +5,11 @@ import useEditExpertiseParameters from '../../../../../hooks/useEditExpertisePar
 import useGetExpertiseParameters from '../../../../../hooks/useGetExpertiseParameters';
 
 import CardItem from './CardItem';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function ExpertiseParameters(props) {
-	const { onClickAddCondition, activeCollapse = '' } = props;
+	const { onClickAddCondition, activeCollapse = '', loading } = props;
 
 	const [editMode, setEditMode] = useState(false);
 
@@ -56,7 +57,9 @@ function ExpertiseParameters(props) {
 							: <Button themeType="secondary" onClick={() => setEditMode(!editMode)}>Edit</Button>}
 					</div>
 
-					{list.map((item) => <CardItem editMode={editMode} item={item} control={control} />)}
+					{loading ? <LoadingState />
+						: list.map((item) => <CardItem editMode={editMode} item={item} control={control} />) }
+
 				</div>
 			</div>
 

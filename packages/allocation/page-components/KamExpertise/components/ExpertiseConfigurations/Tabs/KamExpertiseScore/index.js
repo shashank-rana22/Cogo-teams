@@ -90,6 +90,7 @@ function KamExpertiseScoreConfig({ selectedVersion }) {
 		children : <ExpertiseParameters
 			activeCollapse={activeCollapse}
 			onClickAddCondition={() => setAddConditionModal({ type: value?.expertise_type })}
+			loading={loading}
 		/>,
 
 	}));

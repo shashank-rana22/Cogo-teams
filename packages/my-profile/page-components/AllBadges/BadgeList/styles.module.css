@@ -1,0 +1,61 @@
+.badge_list_container {
+    width: 100%;
+    min-height: 460px;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 6px;
+}
+
+.heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: #6fa5ab;
+}
+
+.badges_container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+
+    &:after {
+        content: "";
+        flex: auto;
+    }
+}
+
+.badge {
+    width: 64px;
+    height: 64px;
+}
+
+.container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stars_container {
+    display: flex;
+    width: 50px;
+    margin-top: 8px;
+    align-items: center;
+}
+
+.image_container {
+    height: 60px;
+    width: 60px;
+}
+
+.image_container img {
+    height: 100%;
+    width: 100%;
+}
+
+.empty_container {
+    background: #fff;
+    padding: 20px 0;
+    border-radius: 8px;
+}

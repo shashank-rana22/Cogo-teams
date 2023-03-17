@@ -1,17 +1,21 @@
 import { Modal, Button, Select, Tooltip } from '@cogoport/components';
 import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function Badges({ badgeList = {} }) {
 	const router = useRouter();
-	const { badges_got = [] } = badgeList || {};
+
+	const { badges_got = [], badges_not_got = [] } = badgeList || {};
+
+	let max_badges = 0;
 
 	const [show, setShow] = useState(false);
+
 	const onClose = () => setShow(false);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -26,49 +30,62 @@ function Badges({ badgeList = {} }) {
 			</div>
 			<div className={styles.content}>
 
-				{
-				!isEmpty(badges_got)
-					?				(
-						<>
-
-							<div className={styles.badge_list}>
-								{
-									badges_got?.map((item, index) => (
-										(index < 5)
-											?		(
-												<div key={item.id} className={styles.badge_container}>
-													<Tooltip content={item.medal}>
-														<div className={styles.badge}>
-															<img src={item.image_url} alt="badge icon" />
-														</div>
-														<div className={styles.stars}>
-															{Array(3).fill('').map(() => (
-																<IcCStar width={10} stroke="#FFDF33" />
-															))}
-														</div>
-													</Tooltip>
+				<div className={styles.badge_list}>
+					{
+						badges_got?.map((item, index) => {
+							max_badges += 1;
+							return (
+								(index < 5 && max_badges < 6)
+									? (
+										<div key={item.id}>
+											<Tooltip content={item.medal}>
+												<div className={styles.badge}>
+													<img src={item.image_url} alt="badge icon" />
 												</div>
-											) : ''
-									))
-								}
-							</div>
-							<div
-								role="presentation"
-								onClick={() => {
-									router.push('/badges');
-								}}
-								className={styles.view_more}
-							>
-								View More
+												<div className={styles.stars}>
+													{Array(3).fill('').map(() => (
+														<IcCStar width={10} stroke="#FFDF33" />
+													))}
+												</div>
+											</Tooltip>
+										</div>
+									) : ''
+							);
+						})
+					}
+					{
+						badges_not_got?.map((item, index) => {
+							max_badges += 1;
+							return (
+								(index < 5 && max_badges < 6)
+									? (
+										<div key={item.id} style={{ opacity: 0.2 }}>
+											<Tooltip content={item.medal}>
+												<div className={styles.badge}>
+													<img src={item.image_url} alt="badge icon" />
+												</div>
+												<div className={styles.stars}>
+													{Array(3).fill('').map(() => (
+														<IcCStar width={10} stroke="#FFDF33" />
+													))}
+												</div>
+											</Tooltip>
+										</div>
+									) : ''
+							);
+						})
+					}
+				</div>
+				<div
+					role="presentation"
+					onClick={() => {
+						router.push('/badges');
+					}}
+					className={styles.view_more}
+				>
+					View More
 
-							</div>
-						</>
-					)
-					: (
-						<div className={styles.badges_empty}>No Badges to Display..</div>
-					)
-				}
-
+				</div>
 			</div>
 
 			<Modal

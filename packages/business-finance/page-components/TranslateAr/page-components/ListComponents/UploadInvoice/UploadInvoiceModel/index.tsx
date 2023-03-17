@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 type Props = {
 	setOpen?: (v) => void;
-	uploadProof: { fileName: string; finalUrl : string };
+	uploadProof: string;
 	setUploadProof?: (v) => void;
 	itemData: {
 		id?: string,
@@ -22,17 +22,15 @@ type Props = {
 };
 
 function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, refetch, open }: Props) {
-	const { fileName = '', finalUrl } = uploadProof || {};
-	const bodyStyle = finalUrl ? styles.body : '';
 	const { uploadDoc, loading } = useUpdateStatus({
-		finalUrl,
+		uploadProof,
 		setOpen,
 		itemData,
 		refetch,
 	});
-	const fileExtension = fileName.split('.').pop();
+	const fileExtension = uploadProof?.split('.')?.pop();
 	const handleManualUpload = () => {
-		if (!isEmpty(finalUrl) && fileExtension === 'pdf') {
+		if (!isEmpty(uploadProof) && fileExtension === 'pdf') {
 			uploadDoc();
 		} else if (fileExtension !== 'pdf' && fileExtension) {
 			Toast.error('Only pdf files are allowed');
@@ -44,15 +42,13 @@ function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, re
 		<Modal show={open} size="sm" onClose={() => setOpen(false)} className={styles.modal_container}>
 			<Modal.Header title="Upload Scan of Invoice" />
 			<Modal.Body>
-				<section className={bodyStyle}>
+				<section>
 					<FileUploader
-						value={finalUrl}
-						docName={fileName}
-						fileName={fileName}
+						value={uploadProof}
 						onChange={setUploadProof}
 						showProgress
 						draggable
-						fileLink={finalUrl}
+						fileLink={uploadProof}
 						multipleUploadDesc="Upload Invoice"
 						uploadIcon={<IcMUpload height={40} width={40} />}
 						accept="application/pdf"

@@ -35,7 +35,7 @@ function Events() {
 	const [toggleEvent, setToggleEvent] = useState('eventList');
 	const [eventListData, setEventListData] = useState({});
 	return (
-		<>
+		<section className={styles.main}>
 			<div className={styles.back_container} role="presentation" onClick={onClickBack}>
 				<div className={styles.icon_container}>
 					<IcMArrowBack width={16} height={16} />
@@ -96,7 +96,7 @@ function Events() {
 				/>
 			)}
 
-		</>
+		</section>
 	);
 }
 
