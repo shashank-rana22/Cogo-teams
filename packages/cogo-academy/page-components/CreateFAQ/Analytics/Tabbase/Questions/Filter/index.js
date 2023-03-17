@@ -1,10 +1,8 @@
 import { Select, DateRangepicker } from '@cogoport/components';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Filter({ selectedItem, setSelectedItem }) {
-	const [date, setDate] = useState('');
+function Filter({ selectedItem, setSelectedItem, date, setDate }) {
 	const options = [
 		{ label: 'All Questions', value: 'All_Questions' },
 		{ label: 'All Topics', value: 'All_topics' },

@@ -13,7 +13,7 @@ const scrollHorizontal = (scrollOffset, ref) => {
 	tableRootElement.scrollLeft += scrollOffset;
 };
 
-function AllQuestionCardView(props = '') {
+function AllQuestionCardView({ props = {} }) {
 	const {
 		active_audiences = [],
 		most_viewed_questions = [],
@@ -24,7 +24,7 @@ function AllQuestionCardView(props = '') {
 		trending_topics,
 		unpopular_questions,
 	} = props;
-	// const{
+		// const{
 	// 	topic_wise_disliked_questions=[],
 
 	// } = topic_wise_questions
