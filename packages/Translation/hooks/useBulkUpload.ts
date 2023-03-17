@@ -3,7 +3,12 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-const useBulkUpload = ({ refetch, setShow }) => {
+interface Props {
+	refetch: () => void;
+	setShow: (p: boolean) => void;
+}
+
+const useBulkUpload = ({ refetch, setShow }: Props) => {
 	const [fileUrl, setFileUrl] = useState(null);
 
 	const {

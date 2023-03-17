@@ -1,23 +1,17 @@
 import { Modal, Button } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMDownload, IcMAttach, IcMCloudUpload } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
 
+import SAMPLE_LINK from '../../constants/sample-bulk-upload-file';
 import useBulkUpload from '../../hooks/useBulkUpload';
 
 import styles from './styles.module.css';
 
 function BulkUploadTranslation({ show, setShow, refetch }) {
-	// eslint-disable-next-line max-len
-	const SAMPLE_LINK =	'https://cogoport-production.sgp1.digitaloceanspaces.com/23cf9dd949c2735691b0382a901a991c/sample_excel.xlsx';
-
-	const [disableUpload, setDisableUpload] = useState(true);
 	const { loading, fileUrl, setFileUrl, bulkUpload } = useBulkUpload({ refetch, setShow });
 
-	const handleChange = (info: any) => {
-		if (info != null) {
-			setDisableUpload(false);
-		}
+	const handleChange = (info: string) => {
 		setFileUrl(info);
 	};
 
@@ -62,7 +56,7 @@ function BulkUploadTranslation({ show, setShow, refetch }) {
 					/>
 				</div>
 				<Modal.Footer>
-					<Button loading={loading} onClick={bulkUpload} disabled={disableUpload}>
+					<Button loading={loading} onClick={bulkUpload} disabled={isEmpty(fileUrl)}>
 						Upload
 					</Button>
 				</Modal.Footer>
