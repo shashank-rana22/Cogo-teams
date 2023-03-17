@@ -1,5 +1,3 @@
-// import { useSelector } from '@cogoport/store';
-
 import { useAllocationRequest } from '@cogoport/request';
 
 const useGetKamExpertiseConfig = () => {

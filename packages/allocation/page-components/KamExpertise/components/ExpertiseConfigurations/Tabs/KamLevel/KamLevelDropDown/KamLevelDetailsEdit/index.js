@@ -11,7 +11,6 @@ function KamLevelDetailsEdit({ data = {}, control, handleSubmit, onSave, setEdit
 
 	return (
 		<>
-
 			<Button
 				className={styles.delete_button}
 				onClick={handleSubmit(onSave)}

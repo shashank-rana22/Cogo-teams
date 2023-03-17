@@ -1,8 +1,7 @@
 import { useAllocationRequest } from '@cogoport/request';
 // import { useState } from 'react';
 
-const useGetKamExpertiseScore = ({selectedVersion}) => {
-
+const useGetKamExpertiseScore = ({ selectedVersion }) => {
 	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : '/kam_expertise_event_configuration',
 		method  : 'GET',

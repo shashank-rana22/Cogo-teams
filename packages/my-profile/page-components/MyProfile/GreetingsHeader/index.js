@@ -40,7 +40,7 @@ function Greetings({
 		onClickCancel,
 	} = useUpdatePartnerUser({ picture, partner_user_id, setRefetch, detailsData });
 
-	const { badges_got = [], grouped_badges_got = {} } = badgeList || {};
+	const { badges_got = [] } = badgeList || {};
 
 	const { name: locationName = '' } = lowest_geo_location || {};
 
@@ -87,14 +87,14 @@ function Greetings({
 					/>
 				</div>
 
-				{/* //! add mastry badge through the selectory modal */}
-				<div className={styles.badge_icon}>
+				{/* //Todo: add mastry badge through the selectory modal */}
+				{/* <div className={styles.badge_icon}>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg"
 						alt="current badge"
 						height="40px"
 					/>
-				</div>
+				</div> */}
 			</div>
 
 			<div className={styles.badges}>

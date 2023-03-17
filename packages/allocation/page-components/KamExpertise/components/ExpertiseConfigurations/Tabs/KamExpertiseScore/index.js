@@ -2,8 +2,8 @@ import { Collapse, Button, Modal } from '@cogoport/components';
 import { IcMAgentManagement } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
-import EmptyState from '../../../../../../common/EmptyState';
 
+import EmptyState from '../../../../../../common/EmptyState';
 import FieldArray from '../../../../../../common/Form/FieldArray';
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
 import getControls from '../../../../configurations/get-add-conditions-controls';
@@ -52,7 +52,7 @@ const titleSection = (expertiseItem = {}) => (
 	</div>
 );
 
-function KamExpertiseScoreConfig({selectedVersion}) {
+function KamExpertiseScoreConfig({ selectedVersion }) {
 	const [addConditionModal, setAddConditionModal] = useState({});
 
 	const [activeCollapse, setActiveCollapse] = useState('');
@@ -63,7 +63,7 @@ function KamExpertiseScoreConfig({selectedVersion}) {
 		setAddConditionModal({});
 	};
 
-	const { data, loading, refetch } = useGetKamExpertiseScore({selectedVersion});
+	const { data, loading, refetch } = useGetKamExpertiseScore({ selectedVersion });
 
 	const { list = [], audit_data: auditData = {} } = data || {};
 
@@ -90,6 +90,7 @@ function KamExpertiseScoreConfig({selectedVersion}) {
 		children : <ExpertiseParameters
 			activeCollapse={activeCollapse}
 			onClickAddCondition={() => setAddConditionModal({ type: value?.expertise_type })}
+			loading={loading}
 		/>,
 
 	}));
@@ -100,14 +101,13 @@ function KamExpertiseScoreConfig({selectedVersion}) {
 				<Header auditData={auditData} />
 			</div>
 
-
 			{isEmpty(list) && !loading ? <EmptyState /> : null}
-			
+
 			{!loading ? (
 				<div className={styles.expertise_cards_container}>
 					<Collapse panel={options} activeKey={activeCollapse} setActive={setActiveCollapse} type="text" />
 				</div>
-			) : <LoadingState columnsToLoad = {2}/>}
+			) : <LoadingState columnsToLoad={2} />}
 
 			{showModal ? (
 				<Modal

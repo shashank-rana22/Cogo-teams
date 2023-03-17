@@ -35,7 +35,7 @@ function CreateEvent(props) {
 	};
 
 	const {
-		attributeList,
+		attributeList = ['', '', ''],
 		loading,
 		setRuleType = () => {},
 	} = useGetAllocationKamExpertiseRules();
@@ -49,6 +49,7 @@ function CreateEvent(props) {
 		onUpdate,
 		formProps,
 	} = useUpdateEvent({ updateEventListData, listRefetch, attributeList, setToggleEvent });
+
 	const {
 		control,
 		handleSubmit,
@@ -120,10 +121,21 @@ function CreateEvent(props) {
 
 					{
 						(isEmpty(attributeList) && !loading)
-
 							? (
-								<div style={{ flex: '4', padding: '160px 0 0 16px' }}>
-									<EmptyState height="320px" width="500px" flexDirection="column" />
+								<div
+									className={styles.account_attributes}
+									style={{
+										background : '#fff',
+										padding    : '80px 16px 0 16px',
+
+									}}
+								>
+									<EmptyState
+										height="320px"
+										width="500px"
+										flexDirection="column"
+
+									/>
 								</div>
 							)
 							: (
@@ -134,41 +146,22 @@ function CreateEvent(props) {
 										<IcMInfo />
 									</div>
 
-									{/* // Todo atleast one of them is required */}
-
 									<section className={styles.row_container}>
 										{
 
 							loading
-								? attributeList.map((controlItem, index) => {
-									const { name = '', parameters } = controlItem;
-									const { params_type, options = [] } = parameters || {};
-
-									const type = CONTROL_TYPE_MAPPING[params_type || ''];
-
-									const el = {
-										name,
-										label: startCase(name),
-										type,
-										...(type === 'select' && { options, isClearable: true }),
-									};
-
-									const Element = getFieldController(el?.type);
-
-									if (!Element) return null;
-
-									return (
-										<div className={styles.attribute_form_group}>
-											<div
-												className={`${styles.input_group}
-													${index < attributeList.length ? styles.margin_bottom : ''}`}
-											>
-												<Placeholder height="40px" style={{ margin: '8px 0 16px 0' }} />
-											</div>
-
+								? [1, 2, 3, 4, 5].map(() => (
+									<div className={styles.attribute_form_group}>
+										<div
+											className={`${styles.input_group}
+													${styles.margin_bottom}`}
+										>
+											<Placeholder height="40px" style={{ margin: '8px 0 16px 0' }} />
 										</div>
-									);
-								})
+
+									</div>
+								))
+
 								:	attributeList.map((controlItem, index) => {
 									const { name = '', parameters } = controlItem;
 									const { params_type, options = [] } = parameters || {};

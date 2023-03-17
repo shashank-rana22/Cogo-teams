@@ -14,7 +14,7 @@ function useCreateBadgeConfiguration(props) {
 		badge_name,
 		description: badge_description,
 		badge_details:badgeDetails,
-		expertise_configuration_ids:event_ids,
+		expertise_configuration_detail_ids:event_ids,
 	} = badgeListData;
 
 	const formProps = useForm({
@@ -53,13 +53,13 @@ function useCreateBadgeConfiguration(props) {
 		if (Number(Bronze_value) < Number(Silver_value) && Number(Silver_value) < Number(Gold_value)) {
 			try {
 				const payload = {
-					version_id                   : '1',
-					badge_name                   : badge,
+					version_id                         : '1',
+					badge_name                         : badge,
 					description,
-					expertise_configuration_ids  : condition,
-					expertise_configuration_type : 'event_configuration',
-					status                       : 'active',
-					badge_details                : [
+					expertise_configuration_detail_ids : condition,
+					expertise_configuration_type       : 'event_configuration',
+					status                             : 'active',
+					badge_details                      : [
 						{
 							score     : Bronze_value,
 							image_url : Bronze_img_value || badgeDetails?.[0]?.image_url,

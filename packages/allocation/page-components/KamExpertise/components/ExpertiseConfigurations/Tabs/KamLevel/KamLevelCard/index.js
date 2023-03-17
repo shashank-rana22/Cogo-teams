@@ -53,8 +53,8 @@ function KamLevelCard(props) {
 						<IcMArrowNext className={styles.arrow} />
 						<b>{transition_level}</b>
 					</div>
-					<div className={styles.button_container}>
 
+					<div className={styles.button_container}>
 						<div className={styles.delete_button}>
 
 							<div>

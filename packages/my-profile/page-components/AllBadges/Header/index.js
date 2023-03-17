@@ -1,4 +1,5 @@
 import { IcMArrowLeft } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -12,7 +13,7 @@ function Header(props) {
 				</div>
 				<span className={styles.span}>My Profile</span>
 			</div>
-			{ modalDetail !== '0'
+			{ !isEmpty(modalDetail)
 					&& (
 						<div className={styles.main_heading} role="presentation" onClick={showAllBadges}>
 							<div className={styles.icon_container}>

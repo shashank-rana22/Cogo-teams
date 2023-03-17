@@ -1,0 +1,9 @@
+.sample_file_button {
+	display: flex;
+	justify-content: flex-end;
+	margin: 0 20px 20px 0;
+}
+
+.uploader {
+	padding: 30px;
+}

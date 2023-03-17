@@ -28,7 +28,6 @@
 .rule_body {
 	display: flex;
 	align-items: center;
-	/* justify-content: space-between; */
 	flex-wrap: wrap;
 	margin-top: 8px;
 	width: 100%;

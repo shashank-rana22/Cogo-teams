@@ -14,8 +14,8 @@ function useGetAllocationKamExpertiseProfile(partner_user_id) {
 	}, { manual: false });
 
 	return {
-		loading,
-		badgeList: data,
+		listLoading : loading,
+		badgeList   : data,
 	};
 }
 
