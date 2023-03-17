@@ -1,0 +1,57 @@
+.container{
+    background: var(--color-secondary-5);
+    box-shadow: 0px 0px 10px rgb(152, 151, 151); 
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 16px;
+    overflow-x: auto;   
+}
+
+.header_button{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    background:  var(--color-secondary-5);
+    border: none;
+    padding: 0;
+    
+}
+
+.animated_container {
+    overflow: hidden;
+    transition: height 0.5s ease-in-out, padding-top 0.5s ease-in-out, padding-bottom 0.5s ease-in-out;
+    animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
+  
+  .animated_container.enter {
+    animation-name: fadeInTop;
+  }
+  
+  .animated_container.exit {
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    animation-name: fadeOutBottom;
+  }
+  
+  @keyframes fadeInTop {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeOutBottom {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+}
