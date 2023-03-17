@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
 import useCreateTest from '../../../../hooks/useCreateTest';
@@ -12,12 +13,12 @@ import styles from './styles.module.css';
 function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 	const [showNewQuestion, setShowNewQuestion] = useState(false);
-	const [formValues, setFormValues] = useState({});
 	const [idArray, setIdArray] = useState([]);
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
+	const { control, formState:{ errors }, watch } = useForm();
 	return (
 		<div className={styles.container}>
-			<TestDetails setFormValues={setFormValues} />
+			<TestDetails control={control} watch={watch} errors={errors} />
 			{!showQuestionSet && !showNewQuestion && (
 				<div className={styles.btn_container}>
 					<Button
@@ -56,7 +57,8 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 						themeType="tertiary"
 						style={{ marginRight: '10px' }}
 						onClick={() => {
-							createTest({ formValues, idArray });
+							const data = watch();
+							createTest({ data, idArray });
 						}}
 					>
 						Save As Draft
@@ -65,7 +67,9 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 						size="md"
 						themeType="primary"
 						onClick={() => {
-							createTest({ formValues, idArray });
+							const data = watch();
+							console.log('data:: ', data);
+							createTest({ data, idArray });
 						}}
 					>
 						Review And Set Validity
