@@ -1,0 +1,17 @@
+.manually {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 5px;
+	font-size: 10px;
+	color: #034afd;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.upload {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 5px;
+	font-size: 12px;
+	color: #828282;
+}

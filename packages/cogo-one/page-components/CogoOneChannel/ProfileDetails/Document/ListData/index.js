@@ -4,30 +4,15 @@ import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
+import documentTypeMapping from '../../../../../configurations/document-type-mapping';
 import documentStatus from '../DocumentStatus';
 
+import ActionsStatus from './ActionsStatus';
 import styles from './styles.module.css';
-
-function documentTypeMapping(type) {
-	switch (type) {
-		case 'gst':
-		case 'pan':
-			return 'KYC Document';
-		case 'undefined':
-			return 'Wrong Document';
-		default:
-			return 'Shipment';
-	}
-}
 
 function ListData({ list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {} }) {
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
-	};
-
-	const handleClick = (item) => {
-		setShowModal(item?.document_type);
-		setSingleItem(item);
 	};
 
 	const checkStatus = (status, state) => {
@@ -103,25 +88,13 @@ function ListData({ list = [], orgId = '', setShowModal = () => {}, setSingleIte
 											</div>
 										</div>
 
-										{!isEmpty(orgId) && documentTypeMapping(document_type) !== 'Shipment' && (
-											<div>
-												{isEmpty(state) || state === 'document_rejected' ? (
-													<div
-														role="presentation"
-														className={styles.manually}
-														onClick={() => handleClick(item)}
-													>
-														Upload Manually
-													</div>
-												) : (
-													<div
-														className={styles.upload}
-													>
-														Uploaded
-													</div>
-												)}
-											</div>
-										)}
+										<ActionsStatus
+											item={item}
+											orgId={orgId}
+											setShowModal={setShowModal}
+											setSingleItem={setSingleItem}
+										/>
+
 									</div>
 								</div>
 							</>

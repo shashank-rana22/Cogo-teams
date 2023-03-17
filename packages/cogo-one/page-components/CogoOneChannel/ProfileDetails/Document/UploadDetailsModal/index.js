@@ -21,8 +21,6 @@ function UploadDetailsModal({
 }) {
 	const [selectedDocumentType, setSelectedDocumentType] = useState('');
 
-	const { country_id = '', registration_number = '', preferred_languages = [], document_url = '' } = singleItem || {};
-
 	const {
 		control,
 		handleSubmit,
@@ -31,9 +29,9 @@ function UploadDetailsModal({
 	} = useForm(
 		{
 			defaultValues: {
-				country_id          : country_id || INDIA_COUNTRY_ID,
-				registration_number : registration_number || '',
-				preferred_languages : preferred_languages || ['english'],
+				country_id          : singleItem?.country_id || INDIA_COUNTRY_ID,
+				registration_number : singleItem?.registration_number || '',
+				preferred_languages : singleItem?.preferred_languages || ['english'],
 			},
 		},
 	);
@@ -116,7 +114,7 @@ function UploadDetailsModal({
 						{...formControls}
 						errors={errors}
 						control={control}
-						documentUrl={document_url || ''}
+						documentUrl={singleItem?.document_url || ''}
 						fileType={fileType}
 					/>
 				)}
