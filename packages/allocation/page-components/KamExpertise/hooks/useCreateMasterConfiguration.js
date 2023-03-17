@@ -18,7 +18,7 @@ function useCreateMasterConfiguration(props) {
 	const formProps = useForm({
 		defaultValues: {
 			mastery_name      : masteryListData.badge_name,
-			badges            : masteryListData.expertise_configuration_ids,
+			badges            : masteryListData.expertise_configuration_detail_ids,
 			description_input : masteryListData.description,
 			// ToDo : image url -> handle using previous data
 		},
@@ -36,13 +36,13 @@ function useCreateMasterConfiguration(props) {
 
 		try {
 			const payload = {
-				version_id                   : '1',
-				badge_name                   : mastery_name,
-				description                  : description_input,
-				expertise_configuration_ids  : badges,
-				expertise_configuration_type : 'badge_configuration',
-				status                       : 'active',
-				badge_details                : [
+				version_id                         : '1',
+				badge_name                         : mastery_name,
+				description                        : description_input,
+				expertise_configuration_detail_ids : badges,
+				expertise_configuration_type       : 'badge_configuration',
+				status                             : 'active',
+				badge_details                      : [
 					{
 						image_url : image_input,
 						medal     : mastery_name,
