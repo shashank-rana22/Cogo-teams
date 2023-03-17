@@ -1,14 +1,11 @@
-.contain{
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
+.contain {
+	display: grid;
+	grid-template-columns: 33% 33% 33%;
 
-    @media (max-width: 1125px) 
-    {        
-       grid-template-columns: 50% 50%;  
-    } 
-    @media (max-width: 755px) 
-    {        
-       grid-template-columns: 100%;  
-    }
+	@media (max-width: 1125px) {
+		grid-template-columns: 50% 50%;
+	}
+	@media (max-width: 755px) {
+		grid-template-columns: 100%;
+	}
 }
-
