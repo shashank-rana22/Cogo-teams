@@ -1,8 +1,9 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { ResponsivePie } from '@cogoport/charts/pie';
 
+import GraphData from '../hooks/useGraphData';
+
 import Filters from './Filters';
-import GraphData from './GraphData';
 import styles from './styles.module.css';
 import useGetFormattedGraphData from './useGetFormattedGraphData';
 
@@ -10,7 +11,7 @@ function GraphUI() {
 	const { pie_data, pie_outer_data, graph_data } = GraphData();
 
 	const { graphData = [] } = useGetFormattedGraphData({ graph_data });
-
+	console.log(graphData);
 	return (
 		<>
 			<Filters />
