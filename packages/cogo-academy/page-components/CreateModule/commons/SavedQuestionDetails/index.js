@@ -8,12 +8,11 @@ import styles from './styles.module.css';
 
 const alphabetMapping = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-const getCorrectAnswersCombined = ({ correctOptions = [] }) => 	(correctOptions || []).map(
+const getCorrectAnswersCombined = ({ correctOptions = [] }) => (correctOptions || []).map(
 	(item) => `${alphabetMapping[item.sequence_number]}) ${item.answer_text}`,
 );
-
 const getCorrectAnswers = ({ answers = [] }) => {
-	const correctOptions = answers.filter((item) => item.is_correct);
+	const correctOptions = (answers || []).filter((item) => item.is_correct);
 	const correctAnswers = getCorrectAnswersCombined({ correctOptions });
 
 	return correctAnswers.join(', ');
@@ -79,14 +78,12 @@ function SavedQuestionDetails({
 		{
 			Header   : 'Answer Key',
 			id       : 'answer_key',
-			accessor : ({ answers }) => (
+			accessor : ({ answers = [] }) => (
 				<Tooltip content={(
 					<div className={styles.flex_column}>
-						{getCorrectAnswersCombined({
+						{(getCorrectAnswersCombined({
 							correctOptions: (answers || []).filter((item) => item.is_correct),
-						}).map((item) => (
-							<div style={styles.answer}>{item}</div>
-						))}
+						} || [])).map((item) => <div className={styles.answer}>{item}</div>)}
 					</div>
 				)}
 				>
@@ -142,7 +139,6 @@ function SavedQuestionDetails({
 											style={{ marginLeft: '8px' }}
 										>
 											Delete
-
 										</div>
 									</Button>
 								</div>
@@ -158,8 +154,6 @@ function SavedQuestionDetails({
 			),
 		},
 	];
-
-	console.log('editDetails', editDetails);
 
 	return (
 		<div className={styles.table_container}>

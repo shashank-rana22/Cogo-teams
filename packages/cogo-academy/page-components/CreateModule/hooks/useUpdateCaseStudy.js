@@ -14,10 +14,11 @@ function useUpdateCaseStudy() {
 		setAllKeysSaved,
 		reset,
 		questionSetId,
+		action,
 	}) => {
 		try {
 			await trigger({
-				data: { ...values, id },
+				data: action === 'delete' ? { id, status: 'inactive' } : { ...values, id },
 			});
 
 			getTestQuestionTest({ questionSetId });
