@@ -1,7 +1,9 @@
 import { Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
 function useCreateTest({ setTestId, setActiveStepper }) {
+	const router = useRouter();
 	const [{ loading = false }, trigger] = useRequest({
 		url    : 'create_test',
 		method : 'POST',
@@ -19,6 +21,9 @@ function useCreateTest({ setTestId, setActiveStepper }) {
 				},
 			});
 			setTestId(res?.data?.id);
+			const as = `/learning/faq/create/test-module/create?id=${res?.data?.id}`;
+			const href = `/learning/faq/create/test-module/create?id=${res?.data?.id}`;
+			router.push(href, as);
 			setActiveStepper('review_and_criteria');
 			Toast.success('Created Successfully');
 			console.log('done:: ', res);

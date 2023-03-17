@@ -3,7 +3,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function QuestionsAndDistribution() {
+function QuestionsAndDistribution({ loading, data }) {
 	const columns = [
 		{
 			Header   : 'QUESTION SET NAME',
@@ -84,7 +84,8 @@ function QuestionsAndDistribution() {
 	return (
 		<Table
 			className={styles.table_container}
-			data={[1, 2, 3]}
+			data={data || []}
+			loading={loading}
 			columns={columns}
 		/>
 	);

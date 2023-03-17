@@ -61,7 +61,16 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 					>
 						Save As Draft
 					</Button>
-					<Button size="md" themeType="primary">Review And Set Validity</Button>
+					<Button
+						size="md"
+						themeType="primary"
+						onClick={() => {
+							createTest({ formValues, idArray });
+						}}
+					>
+						Review And Set Validity
+
+					</Button>
 				</div>
 			)}
 

@@ -68,6 +68,7 @@ function TestDetails({ setFormValues }) {
 				})}
 			</div>
 			<Button
+				className={styles.btn}
 				themeType="primary"
 				onClick={() => {
 					setFormValues(getValues());
@@ -76,6 +77,7 @@ function TestDetails({ setFormValues }) {
 				Save
 
 			</Button>
+
 		</div>
 	);
 }
