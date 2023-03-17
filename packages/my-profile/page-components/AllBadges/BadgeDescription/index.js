@@ -1,99 +1,61 @@
 import { ProgressBar, Placeholder } from '@cogoport/components';
+// import { IcCStar } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+
+import EmptyState from '../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
-const Badge = {
-	title        : 'Nautical Ninja',
-	DateAchieved : 'Jult 22 2022',
-	type         : 'Silver',
-	// type         : 'Mastery',
-	NextBadge    : 'Bronze',
-	url          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/nautical_ninja_bronze.svg',
-	stars        : 1,
-	rarity       : 80,
-	NumberofKAMs : 24,
-	description:
-  'This is a quick desciption of what this badge is and why the KAM should be proud to be earning it',
-};
-
-const star_url = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/star-icon.svg';
-
-function MasteryBadgeItem() {
-	return (
-		<div className={styles.mastery_badge_container}>
-			<img className={styles.mastery_badge} src={Badge.url} alt="" />
-			<div className={styles.star_container}>
-				<img className={styles.smallstar} src={star_url} alt="" />
-				<img className={styles.smallstar} src={star_url} alt="" />
-				<img className={styles.smallstar} src={star_url} alt="" />
-			</div>
-		</div>
-	);
-}
-
 function BadgeDescription(props) {
-	// Todo: loadingState logic
-	if (false) {
+	const { badgeDetailloading = false, badgeDetail } = props;
+
+	const { badge_details = [], next_badge = [] } = badgeDetail || {};
+
+	if (badgeDetailloading) {
 		return (
 			<div className={styles.container}>
 				<p className={styles.heading}>
-					<Placeholder width="160px" height="20px" style={{ marginTop: '8px' }} />
+					<Placeholder width="100%" height="24px" style={{ marginTop: '8px' }} />
 				</p>
 				<div className={styles.display_flex}>
-					<div className={styles.badge_container}>
-						<Placeholder width="140px" height="180px" style={{ marginTop: '8px' }} />
-					</div>
+					<Placeholder width="180px" height="180px" style={{ marginTop: '8px' }} />
 
 					<div className={styles.details}>
-						<div className={styles.lable_value_container}>
-							<div className={styles.lable_value}>
-								<Placeholder width="120px" height="20px" />
-								<Placeholder width="120px" height="20px" style={{ marginTop: '8px' }} />
+						<div className={styles.details_header}>
+							<div className={styles.next_unlock}>
+								<Placeholder width="160px" height="80px" />
 							</div>
-							{Badge.type !== 'Mastery' && (
-								<div className={styles.lable_value}>
-									<Placeholder width="120px" height="20px" />
-									<Placeholder width="120px" height="60px" style={{ marginTop: '8px' }} />
-								</div>
-							)}
+							<div className={styles.lable_value}>
+								<Placeholder width="160px" height="80px" />
+							</div>
 						</div>
 						{
-							Array(3).fill('').map(() => (
+							Array(2).fill('').map(() => (
 								<div className={styles.lable_value}>
-									<Placeholder width="200px" height="20px" />
-									<Placeholder width="100%" height="20px" style={{ marginTop: '4px' }} />
+									<Placeholder width="100%" height="32px" />
+									<Placeholder width="100%" height="32px" style={{ marginTop: '8px' }} />
 								</div>
 							))
 						}
 					</div>
 				</div>
+				<div>
+					<Placeholder width="100%" height="20px" style={{ marginTop: '16px', marginBottom: '16px' }} />
 
-				{Badge.type !== 'Mastery' && (
-					<div>
-						<Placeholder width="100%" height="20px" style={{ marginTop: '16px', marginBottom: '16px' }} />
+				</div>
+			</div>
+		);
+	}
 
-					</div>
-				)}
-				{
-				Badge.type === 'Mastery'
-				&& (
-					<div className={styles.mastery_unlock}>
-						<p className={styles.lable}>
-							{' '}
-							<Placeholder width="240px" height="20px" />
-						</p>
-						<div className={styles.flex_container}>
-							{
-							Array(3).fill('').map(() => (
-								<div className={styles.mastery_badge_container}>
-									<Placeholder width="80px" height="80px" />
-								</div>
-							))
-						}
-						</div>
-					</div>
-				)
-}
+	if (isEmpty(badgeDetail)) {
+		return (
+			<div style={{ background: '#fff', padding: '20px 0', borderRadius: '8px' }}>
+				<EmptyState
+					height={250}
+					width={450}
+					flexDirection="column"
+					emptyText="Badge Details not found"
+				/>
 			</div>
 		);
 	}
@@ -102,37 +64,43 @@ function BadgeDescription(props) {
 		<section>
 			<div className={styles.container}>
 				<p className={styles.heading}>
-					{Badge.title}
-					{' '}
-					{Badge.type}
-					{' '}
-					{Badge.stars}
+					{badge_details[0]?.badge_name}
 				</p>
 				<div className={styles.display_flex}>
 					<div className={styles.badge_container}>
-						<img className={styles.main_badge} src={Badge.url} alt="" />
-						<div className={styles.stars}>
+						<img
+							className={styles.main_badge}
+							src={badge_details.at(-1)?.image_url}
+							alt=""
+						/>
+						{/* //Todo: stars arent available in the response */}
+						{/* <div className={styles.stars}>
 							{Array(3).fill('').map(() => (
-								<div><img className={styles.star} src={star_url} alt="" /></div>
+								<IcCStar width={40} height={40} stroke="#FFDF33" />
 							))}
-						</div>
+						</div> */}
 					</div>
 
 					<div className={styles.details}>
-						<div className={styles.lable_value_container}>
+						<div className={styles.details_header}>
 							<div className={styles.lable_value}>
 								<p className={styles.lable}>Achievement Date</p>
-								<p className={styles.value}>{Badge.DateAchieved}</p>
+								<p className={styles.value}>
+									{badgeDetail.achievement_date ? badgeDetail.achievement_date : 'Not achieved yet'}
+								</p>
 							</div>
-							{Badge.type !== 'Mastery' && (
-								<div className={styles.lable_value}>
+							{ !isEmpty(next_badge) && (
+								<div className={styles.next_unlock}>
 									<p className={styles.lable}>Next unlock</p>
 									<div className={styles.next_badge}>
-										<img className={styles.small_badge} src={Badge.url} alt="" />
+										<img
+											className={styles.small_badge}
+											src={next_badge.image_url}
+											alt=""
+										/>
 										<p className={styles.value}>
-											{Badge.NextBadge}
-											{' '}
-											{Badge.stars === 3 ? 1 : Badge.stars + 1}
+											{next_badge.badge_name}
+											{/* //Todo: stars arent available in the response */}
 										</p>
 									</div>
 								</div>
@@ -140,41 +108,38 @@ function BadgeDescription(props) {
 						</div>
 						<div className={styles.lable_value}>
 							<p className={styles.lable}>Number of KAMs with badge</p>
-							<p className={styles.value}>{Badge.NumberofKAMs}</p>
+							<p className={styles.value}>{badgeDetail.kam_badge_count}</p>
 						</div>
 
 						<div className={styles.lable_value}>
 							<p className={styles.lable}>Rarity</p>
 							<p className={styles.value}>
-								{Badge.rarity}
+								{badgeDetail.rarity}
 								%
 							</p>
 						</div>
 						<div className={styles.description_container}>
 							<p className={styles.lable}>Description</p>
-							<p className={styles.value}>{Badge.description}</p>
+							<p className={styles.value}>{badge_details[0]?.description}</p>
 						</div>
 
 					</div>
 				</div>
 
-				{Badge.type !== 'Mastery' && (
-					<div className={styles.progressbar_container}>
-						<ProgressBar className={styles.progressbar} progress={60} uploadText="Bronze" />
-						<ProgressBar className={styles.progressbar} progress={0} uploadText="Silver" />
-						<ProgressBar className={styles.progressbar} progress={0} uploadText="Gold" />
-					</div>
-				)}
-				{Badge.type === 'Mastery' && (
-					<div className={styles.mastery_unlock}>
-						<h6 className={styles.lable}>Badge unlocked for mastery</h6>
-						<div className={styles.flex_container}>
-							<MasteryBadgeItem />
-							<MasteryBadgeItem />
-							<MasteryBadgeItem />
-						</div>
-					</div>
-				)}
+				<div className={styles.progressbar_container}>
+					{
+						badge_details.map((item) => {
+							const progress = (100 - item.percentage_score_required);
+							return (
+								<ProgressBar
+									className={styles.progressbar}
+									progress={progress > 0 ? progress : 0}
+									uploadText={item.medal}
+								/>
+							);
+						})
+					}
+				</div>
 			</div>
 		</section>
 	);

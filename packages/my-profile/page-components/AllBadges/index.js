@@ -1,53 +1,52 @@
-import { Tooltip } from '@cogoport/components';
-import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import EmptyState from '../../common/EmptyState';
 import useGetAllocationKamExpertiseProfile from '../hooks/useGetAllocationKamExpertiseProfile';
+import useGetBadgeDescription from '../hooks/useGetBadgeDescription';
 
 import BadgeDescription from './BadgeDescription';
+import BadgeList from './BadgeList';
 import Header from './Header';
 import styles from './styles.module.css';
 
-function StarCollection() {
-	return (
-		<div className={styles.stars_container}>
-			{Array(3).fill('').map(() => (
-				<IcCStar width={24} stroke="#FFDF33" />
-			))}
-		</div>
-	);
-}
-
 function AllBadges() {
+	const [modalDetail, setModalDetail] = useState();
+
 	const {
 		profile: { partner = {} },
 	} = useSelector((state) => state);
 
 	const { partner_user_id = '' } = partner || {};
 
-	const {
-		badgeList,
-	} = useGetAllocationKamExpertiseProfile(partner_user_id);
-
-	const { badges_got = [], badges_not_got = [] } = badgeList || {};
-
 	const router = useRouter();
+
 	const showProfile = () => {
 		router.push('/my-profile');
 	};
 
-	const [modalDetail, setModalDetail] = useState('0');
+	const {
+		listLoading,
+		badgeList,
+	} = useGetAllocationKamExpertiseProfile(partner_user_id);
 
-	const showBadgeDetails = (item) => {
-		setModalDetail(item.id);
-	};
+	const {
+		badgeDetail, badgeDetailloading, setBadgeParams,
+	} = useGetBadgeDescription();
 
 	const showAllBadges = () => {
-		setModalDetail('0');
+		setModalDetail();
+	};
+
+	const showBadgeDetails = (badge) => {
+		setModalDetail(badge.id);
+
+		setBadgeParams({
+			partner_user_id,
+			badge_detail_id : badge.id,
+			badge_id        : badge.badge_configuration_id,
+		});
 	};
 
 	return (
@@ -60,68 +59,19 @@ function AllBadges() {
 			/>
 
 			{
-				modalDetail === '0'
-				&& !isEmpty(badgeList)
-					? (
-						<div className={styles.badge_list_container}>
-							<p className={styles.heading}>Badges List</p>
-							<div className={styles.badges_container}>
-								{
-									badges_got?.map((item) => (
-										<Tooltip content={item.medal}>
-											<div
-												key={item.id}
-												className={styles.container}
-												role="presentation"
-												style={{ cursor: 'pointer' }}
-												onClick={() => showBadgeDetails(item)}
-											>
-												<div className={styles.image_container}>
-													<img className={styles.badge} src={item.image_url} alt="" />
-												</div>
-												<StarCollection />
-											</div>
-										</Tooltip>
-									))
-								}
-								{
-									badges_not_got?.map((item) => (
-										<Tooltip content={item.medal}>
-											<div
-												key={item.id}
-												style={{ pointerEvents: 'none', opacity: 0.2 }}
-												className={styles.container}
-												role="presentation"
-												onClick={() => showBadgeDetails(item)}
-											>
-												<div className={styles.image_container}>
-													<img className={styles.badge} src={item.image_url} alt="" />
-												</div>
-												<StarCollection />
-											</div>
-										</Tooltip>
-									))
-								}
-							</div>
-						</div>
-					)
-					: (modalDetail === '0'
-						&& (
-							<div style={{ background: '#fff', padding: '20px 0', borderRadius: '8px' }}>
-								<EmptyState
-									height={250}
-									width={450}
-									flexDirection="column"
-									emptyText="Badges not found"
-								/>
-							</div>
-						)
-					)
+				isEmpty(modalDetail)
+				&& (
+					<BadgeList
+						listLoading={listLoading}
+						badgeList={badgeList}
+						showBadgeDetails={showBadgeDetails}
+					/>
+				)
 			}
 
 			{
-                modalDetail !== '0'
-                && <BadgeDescription setModalDetail={setModalDetail} />
+                !isEmpty(modalDetail)
+                && <BadgeDescription badgeDetailloading={badgeDetailloading} badgeDetail={badgeDetail} />
             }
 
 		</div>
