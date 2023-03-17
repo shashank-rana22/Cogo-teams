@@ -3,9 +3,9 @@ import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import QuestionsList from './QuestionList';
-// import Scroll from './Scroll';
 import styles from './styles.module.css';
+import UsersQuestionList from './UsersQuestionList';
+// import Scroll from './Scroll';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
 
@@ -14,7 +14,7 @@ import ViewCardsList from './ViewCardsList';
 // 	tableRootElement.scrollLeft += scrollOffset;
 // };
 
-function AllTopic({ props = '' }) {
+function AllUsers({ props = '' }) {
 	const {
 		name = '',
 		total_questions = 0,
@@ -24,7 +24,6 @@ function AllTopic({ props = '' }) {
 		total_dislikes = 0,
 		most_disliked_questions = [],
 		most_liked_questions = [],
-		id = '',
 		topics = [],
 	} = props;
 
@@ -79,13 +78,22 @@ function AllTopic({ props = '' }) {
 					/>
 
 					<ViewCardsList
+						state="Viewed_Question"
 						cardHeading="Top Viewed Questions"
 						contentQuestion={most_viewed_questions}
 					/>
 
-					<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={most_liked_questions} />
+					<ViewCardsList
+						state="Liked_Question"
+						cardHeading="Top Liked Questions"
+						contentQuestion={most_liked_questions}
+					/>
 
-					<ViewCardsList cardHeading="Top Disliked Questions" contentQuestion={most_disliked_questions} />
+					<ViewCardsList
+						state="Disliked_Question"
+						cardHeading="Top Disliked Questions"
+						contentQuestion={most_disliked_questions}
+					/>
 				</div>
 
 				<div className={styles.button_container}>
@@ -98,10 +106,10 @@ function AllTopic({ props = '' }) {
 				</div>
 			</div>
 
-			{showQuestions ? <QuestionsList props={most_viewed_questions} /> : null}
+			{showQuestions ? <UsersQuestionList props={most_viewed_questions} /> : null}
 		</div>
 
 	);
 }
 
-export default AllTopic;
+export default AllUsers;

@@ -14,21 +14,21 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 			<div className={styles.sub_heading} style={{ color: '#6FA5AB' }}>
 				<div>
 					<div className={styles.sub_heading_context}>{truncate(subHeading[0]?.audience_name)}</div>
-					{subHeading[0]?.total_views}
+					{subHeading[0]?.total_views || 0}
 					{' '}
-					Views
-					,
-					{subHeading[0]?.view_percentage}
+					Views,
+					{' '}
+					{subHeading[0]?.view_percentage || 0}
 					%
 				</div>
 
 				<div>
 					<div className={styles.sub_heading_context}>{truncate(subHeading[1]?.audience_name)}</div>
-					{subHeading[1]?.total_views}
+					{subHeading[1]?.total_views || 0}
 					{' '}
-					Views
-					,
-					{subHeading[1]?.view_percentage}
+					Views,
+					{' '}
+					{subHeading[1]?.view_percentage || 0}
 					%
 				</div>
 			</div>

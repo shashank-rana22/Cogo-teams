@@ -1,4 +1,4 @@
-import useListFaqSearchHistories from '../../hooks/ListFaqSearchHistories';
+import useListFaqSearchHistories from './ListFaqSearchHistories';
 
 function GraphData() {
 	const props = useListFaqSearchHistories({});

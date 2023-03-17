@@ -1,15 +1,14 @@
 import { Select, DateRangepicker } from '@cogoport/components';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Filter({ selectedItem, setSelectedItem }) {
-	const [date, setDate] = useState('');
+function Filter({ selectedItem, setSelectedItem, date, setDate }) {
 	const options = [
 		{ label: 'All Questions', value: 'All_Questions' },
 		{ label: 'All Topics', value: 'All_topics' },
 
 	];
+	const today = new Date();
 
 	return (
 		<div style={{ marginTop: '1rem' }}>
@@ -54,7 +53,7 @@ function Filter({ selectedItem, setSelectedItem }) {
 						value={date}
 						dateFormat="MMM dd, yyyy"
 						isPreviousDaysAllowed
-						// maxDate={maxDate}
+						maxDate={today}
 						// disable={statsLoading || globeLoading || chatLoading}
 					/>
 

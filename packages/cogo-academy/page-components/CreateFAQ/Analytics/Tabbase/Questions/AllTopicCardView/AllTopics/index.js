@@ -14,7 +14,7 @@ import ViewCardsList from './ViewCardsList';
 // 	tableRootElement.scrollLeft += scrollOffset;
 // };
 
-function AllTopic({ props = '' }) {
+function AllTopic({ props = {} }) {
 	const {
 		audiences = [],
 		display_name = '',
@@ -78,13 +78,22 @@ function AllTopic({ props = '' }) {
 					/>
 
 					<ViewCardsList
+						state="Viewed_Question"
 						cardHeading="Top Viewed Questions"
 						contentQuestion={faq_questions}
 					/>
 
-					<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={most_liked_questions} />
+					<ViewCardsList
+						state="Liked_Question"
+						cardHeading="Top Liked Questions"
+						contentQuestion={most_liked_questions}
+					/>
 
-					<ViewCardsList cardHeading="Top Disliked Questions" contentQuestion={most_disliked_questions} />
+					<ViewCardsList
+						state="Disliked_Question"
+						cardHeading="Top Disliked Questions"
+						contentQuestion={most_disliked_questions}
+					/>
 				</div>
 
 				<div className={styles.button_container}>

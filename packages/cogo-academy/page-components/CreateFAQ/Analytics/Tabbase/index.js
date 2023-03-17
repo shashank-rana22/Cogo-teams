@@ -9,7 +9,8 @@ import Users from './Users';
 
 function Tabbase() {
 	const [activeTab, setActiveTab] = useState('By_Questions');
-	const props = useListFaqStats({});
+	const [date, setDate] = useState('');
+	const props = useListFaqStats({ date, setDate });
 
 	return (
 		<div>
@@ -31,7 +32,7 @@ function Tabbase() {
 						</>
 					)}
 				>
-					<Questions props={props} />
+					<Questions props={props} date={date} setDate={setDate} />
 				</TabPanel>
 
 				<TabPanel
@@ -45,7 +46,7 @@ function Tabbase() {
 						</>
 					)}
 				>
-					<Users props={props} />
+					<Users props={props} date={date} setDate={setDate} />
 				</TabPanel>
 			</Tabs>
 		</div>

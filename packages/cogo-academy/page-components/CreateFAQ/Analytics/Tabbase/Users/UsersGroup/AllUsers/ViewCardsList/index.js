@@ -1,9 +1,20 @@
 import { Tooltip } from '@cogoport/components';
-import { IcMEyeopen } from '@cogoport/icons-react';
+import { IcMEyeopen, IcMLike, IcMDislike } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function ViewCardsList({ cardHeading = '', contentQuestion = [{}] }) {
+function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] }) {
+	function Icon() {
+		if (state === 'Viewed_Question') {
+			return <IcMEyeopen style={{ marginTop: '0.15rem' }} />;
+		}
+		if (state === 'Liked_Question') {
+			return <IcMLike style={{ marginTop: '0.15rem' }} />;
+		}
+		if (state === 'Disliked_Question') {
+			return <IcMDislike style={{ marginTop: '0.15rem' }} />;
+		}
+	}
 	const truncate = (str) => (str?.length > 28 ? `${str.substring(0, 26)}...` : str);
 
 	if ((contentQuestion || []).length === 0) {
@@ -41,7 +52,7 @@ function ViewCardsList({ cardHeading = '', contentQuestion = [{}] }) {
 
 							<div style={{ display: 'flex' }}>
 								<div style={{ marginRight: '0.25rem' }}>{item?.view_count}</div>
-								<IcMEyeopen style={{ marginTop: '0.15rem' }} />
+								{Icon()}
 							</div>
 						</div>
 					);
