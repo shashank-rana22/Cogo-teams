@@ -108,6 +108,7 @@ function UploadDetailsModal({
 				{fileType === 'undefined' ? (
 					<SelectDocumentType
 						setSelectedDocumentType={setSelectedDocumentType}
+						singleItem={singleItem}
 					/>
 				) : (
 					<UploadForm

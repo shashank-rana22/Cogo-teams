@@ -218,6 +218,19 @@ export const DOCUMENT_FILTERS_MAPPING = [
 		label : 'Wrong Document',
 		value : 'wrong_document',
 	},
+	{
+		label : 'Document Uploaded',
+		value : 'document_uploaded',
+	},
+	{
+		label : 'Document Accepted',
+		value : 'document_accepted',
+	},
+	{
+		label : 'Document Rejected',
+		value : 'document_rejected',
+	},
+
 ];
 
 export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/prod_cogo_one.apk';

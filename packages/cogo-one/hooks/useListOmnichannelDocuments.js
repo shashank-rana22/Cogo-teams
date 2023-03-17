@@ -25,9 +25,10 @@ function useListOmnichannelDocuments({
 	});
 
 	const documentsList = useCallback(async (filters) => {
+		const documentTypeFilters = (['kyc_document', 'shipment_document', 'wrong_document']).includes(filters);
+		const checkfilters = !isEmpty(filters);
+		const checkConditions = isEmpty(userId) && isEmpty(userMobile);
 		try {
-			const checkConditions = isEmpty(userId) && isEmpty(userMobile);
-
 			let filters_payload = {
 				user_id       : !isEmpty(userId) ? userId : undefined,
 				mobile_number : isEmpty(userId) ? userMobile : undefined,
@@ -40,7 +41,8 @@ function useListOmnichannelDocuments({
 			} else {
 				filters_payload = {
 					...filters_payload,
-					document_type: !isEmpty(filters) ? filters : undefined,
+					document_type : checkfilters && documentTypeFilters ? filters : undefined,
+					state         : checkfilters && !documentTypeFilters ? filters : undefined,
 				};
 			}
 

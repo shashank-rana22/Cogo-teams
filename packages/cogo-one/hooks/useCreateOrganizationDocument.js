@@ -44,6 +44,7 @@ const useCreateOrganizationDocument = ({ paramsData = {}, fileType = '', setSele
 					image_url     : finalUrl,
 					name          : 'PanDocument',
 					document_type : 'pan',
+					source        : 'onboarding',
 					data          : {
 						identity_number: registration_number,
 					},
