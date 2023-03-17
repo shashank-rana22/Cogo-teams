@@ -36,6 +36,7 @@
 .modal_styles {
 	:global {
 		.ui_modal_body_container {
+			width: 900px;
 			min-height: 480px;
 			border-top: none !important;
 			border-bottom: none !important;

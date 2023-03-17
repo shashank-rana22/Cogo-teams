@@ -1,7 +1,6 @@
 import { Button, Popover } from '@cogoport/components';
 // import getField from '@cogo/business-modules/form/components';
 // import { useForm } from '@cogoport/forms';
-// import PortDetails from '@cogo/bookings/ShipmentDetails/commons/Header/PortDetails';
 import {
 	IcMSend,
 	// IcMAttach,
@@ -9,14 +8,13 @@ import {
 	// IcMDocument,
 	IcMListView,
 } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
 import React, { useRef } from 'react';
 
 // import useCreateMessage from '../../hooks/useCreateMessage';
 // import useFireBase from '../../hooks/useFireBase';
 
 // import getControls from './controls';
+import Header from './Header';
 import Loader from './Loader';
 // import MessageContainer from './MessageContainer';
 // import SendTo from './SendTo';
@@ -25,14 +23,6 @@ import styles from './styles.module.css';
 
 // const Text = getField('textarea');
 // const Uploader = getField('file');
-
-const shipmentChatStakeholders = [
-	'service_ops1',
-	'service_ops2',
-	'service_ops3',
-	'booking_agent',
-	'supply_agent',
-];
 
 function Details({
 	id,
@@ -46,35 +36,17 @@ function Details({
 	get = {},
 	personal_data = {},
 }) {
-	const { push } = useRouter();
 	// const sendToRef = useRef(null);
 	const { data, isGettingShipment } = get;
 	const {
 		shipment_data,
-		// primary_service,
+		primary_service,
 	} = data || {};
-	const { serial_id, id: shipment_id } = shipment_data || {};
 
 	// const [stakeHolderView, setStakeHolderView] = useState('');
 	// const [rows, setRows] = useState(1);
 
-	const isStakeholder = shipmentChatStakeholders.includes(
-		shipment_data?.stakeholder_types?.[0],
-	);
-	const groupChatUsers = isStakeholder
-		? stakeholderMappings[shipment_data?.stakeholder_types?.[0] || 'default']
-		|| []
-		: stakeholderMappings.default;
-
 	// const { msgContent } = useFireBase({ id });
-
-	const content = () => (
-		<div className={styles.chat_users}>
-			{groupChatUsers?.map((item) => (
-				<div className={styles.user_name}>{startCase(item)}</div>
-			))}
-		</div>
-	);
 
 	// const controls = getControls({ rows });
 	// const { watch, fields, handleSubmit, reset } = useForm(controls);
@@ -113,11 +85,6 @@ function Details({
 	// 	}
 	// };
 
-	const handleClick = () => {
-		push('/shipments/[id]', `/shipments/${shipment_id}`);
-		setShow(false);
-	};
-
 	if (activeId !== id) {
 		return null;
 	}
@@ -127,57 +94,7 @@ function Details({
 			{isGettingShipment ? (
 				<Loader />
 			) : (
-				<div className={styles.header}>
-					{isMobile ? (
-						<IcMListView
-							className="bar-icon"
-							width={21}
-							height={21}
-							onClick={() => setShowMenu(true)}
-						/>
-					) : null}
-					{serial_id ? (
-						<div
-							className={styles.serial_id}
-							role="button"
-							tabIndex={0}
-							onClick={() => handleClick()}
-						>
-							Shipment ID
-							<span style={{ fontWeight: 700, marginLeft: '4px' }}>
-								#
-								{serial_id}
-							</span>
-						</div>
-					) : null}
-
-					{/* <PortDetails
-						data={shipment_data}
-						primary_service={primary_service}
-						isShow={false}
-					/> */}
-
-					{personal_data?.channel_name ? (
-						<div className={styles.name}>{startCase(personal_data?.channel_name)}</div>
-					) : (
-						<div
-							className={styles.popover_container}
-							// className="popOver-container"
-						>
-							<Popover
-								theme="light"
-								interactive
-								placement="top"
-								content={content()}
-							>
-								<Button className="primary md">
-									<IcMProfile width={28} height={28} />
-									{groupChatUsers?.length}
-								</Button>
-							</Popover>
-						</div>
-					)}
-				</div>
+				<Header shipment_data={shipment_data} primary_service={primary_service} setShow={setShow} />
 			)}
 
 			<div className={styles.chat_sections}>

@@ -78,7 +78,7 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 					show={show}
 					onClose={() => setShow(false)}
 					closable={!seenLoading}
-					styles={{ dialog: { width: isMobile ? 360 : 850 } }}
+					// styles={{ dialog: { width: isMobile ? 360 : 850 } }}
 					className={styles.modal_styles}
 				>
 					<Modal.Body>
