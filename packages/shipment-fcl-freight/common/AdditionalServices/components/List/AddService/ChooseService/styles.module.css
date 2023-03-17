@@ -1,17 +1,9 @@
-/* // import { Placeholder } from '@cogoport/components'; */
-
 .price_div{
 	display: flex;
 	justify-content: flex-end;
 
 	.core-ui-button-root {
 		text-transform: capitalize;
-	}
-}
-
-.container{
-	.core-ui-tag-text {
-		font-size: 8px;
 	}
 }
 

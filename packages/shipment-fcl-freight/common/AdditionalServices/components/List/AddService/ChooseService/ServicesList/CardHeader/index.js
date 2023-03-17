@@ -1,9 +1,6 @@
-import { Grid } from '@cogoport/components';
-
 import Field from './Field';
 import styles from './styles.module.css';
 
-// const { Row } = Grid;
 function CardHeader({ fields = {} }) {
 	const stylesRow = {
 		paddingBottom  : 0,
@@ -16,7 +13,7 @@ function CardHeader({ fields = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div style={stylesdiv}>
+			<div>
 				{/* {fields.map((field) => <Field field={field} />)} */}
 			</div>
 		</div>

@@ -1,12 +1,12 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
 
-// import getConfigs from '../../../../configurations/Supplier/get-configs';
+import getConfigs from '../configurations/get-configs';
 
 import CreateNew from './CreateNew';
 import Details from './Details';
 import Header from './Header';
-// import Status from './Status';
+import Status from './Status';
 import styles from './styles.module.css';
 
 function ServiceDetails({
@@ -29,7 +29,6 @@ function ServiceDetails({
 		service_provider = '',
 	} = serviceData;
 
-	// const isSo1So2 = shipmentData?.stakeholder_types?.some((ele) => ['service_ops1', 'service_ops2'].includes(ele));
 	const { source = '', shipment_type = '' } = shipmentData;
 	const isHaulageAvailable = () => {
 		if (routeLeg.service_types[0] === 'haulage_freight_service') {
@@ -46,15 +45,14 @@ function ServiceDetails({
 		return true;
 	};
 
-	// const canUpsell = !isSo1So2
-	// 	&& source !== 'consol'
-	// 	&& shipment_type !== 'domestic_air_freight'
-	// 	&& !shipmentData?.is_job_closed
-	// 	&& routeLeg.service_types[0] !== cancelUpsellFor
-	// 	&& isHaulageAvailable(primary_service)
-	// 	&& shipmentData?.state !== 'cancelled';
+	const canUpsell = source !== 'consol'
+		&& shipment_type !== 'domestic_air_freight'
+		&& !shipmentData?.is_job_closed
+		&& routeLeg.service_types[0] !== cancelUpsellFor
+		&& isHaulageAvailable
+		&& shipmentData?.state !== 'cancelled';
 
-	// const service_items_key = getConfigs(service_type).details || {};
+	const service_items_key = getConfigs(service_type).details || {};
 
 	const addedServiceComponent = (
 		<div className={cl`${styles.container} ${state}`}>
@@ -65,29 +63,28 @@ function ServiceDetails({
 				state={state}
 				heading={routeLeg.display}
 				service_supply_agent={service_supply_agent}
-				// serviceList={serviceList}
+				serviceList={serviceList}
 				shipmentData={shipmentData}
 				isSeller={isSeller}
 				service_provider={service_provider}
 				refetchServices={refetchServices}
 			/>
 
-			{/* <Status state={state} payment_term={payment_term} /> */}
+			<Status state={state} payment_term={payment_term} />
 
 			<Details
 				state={state}
-				// serviceItemsKey={service_items_key}
+				serviceItemsKey={service_items_key}
 				service_data={serviceData}
 			/>
 		</div>
 	);
 
-	const canUpsell = true;
 	const createNew = canUpsell ? (
 		<CreateNew
 			routeLeg={routeLeg}
-			// serviceList={serviceList}
-			shipment_data={shipmentData}
+			serviceList={serviceList}
+			shipmentData={shipmentData}
 		/>
 	) : null;
 

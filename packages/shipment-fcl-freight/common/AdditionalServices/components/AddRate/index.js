@@ -38,7 +38,7 @@ function AddRate({
 	const [billToCustomer, setBillToCustomer] = useState(undefined);
 	const [showSecondStep, setSecondStep] = useState(false);
 
-	const { addRate, fields, controls, handleSubmit, loading, errors } =		useAddRate({
+	const { addRate, fields, controls, handleSubmit, loading, errors } = useAddRate({
 		item,
 		isSeller,
 		status,
@@ -94,7 +94,7 @@ function AddRate({
 		);
 	}
 	return (
-		<MainContainer>
+		<div>
 			<div className={styles.container}>
 				<Accordion
 					title={(
@@ -138,7 +138,7 @@ function AddRate({
 				loading={loading || updateDatas.loading}
 				onCancel={() => onCancel()}
 			/>
-		</MainContainer>
+		</div>
 	);
 }
 

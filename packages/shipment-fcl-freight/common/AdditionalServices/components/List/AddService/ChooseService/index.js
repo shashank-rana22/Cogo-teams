@@ -1,11 +1,10 @@
-import Pill from '@cogoport/components';
-import startCase from '@cogoport/utils';
+import { Pill } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
 import { ShipmentDetailContext } from '../../../../../context';
 
 import FilterService from './FilterServices';
-import { getOtherServiceOptions } from './getOptions';
 import Price from './Price';
 import ServicesList from './ServicesList';
 import styles from './styles.module.css';
@@ -41,7 +40,6 @@ function ChooseService({
 			setShow={setShow}
 			refetch={refetch}
 			setShowPrice={setShowPrice}
-			shipment_type={shipment_data?.shipment_type}
 		/>
 	);
 
@@ -49,34 +47,28 @@ function ChooseService({
 
 	const fields = tableFields(priceRequest, countObj, tagDisplay);
 
-	// let serviceOptions = (shipment_data?.services || []).map((service) => ({ label: startCase(service), value: service }));
-
-	// serviceOptions = getOtherServiceOptions({
-	// 	shipment_data,
-	// 	serviceOptions,
-	// 	startCase,
-	// });
+	const serviceOptions = (shipment_data?.services || []
+	).map((service) => ({ label: startCase(service), value: service }));
 
 	return (
-		<div className={styles.container}>
-			Choose Service
-			{/* <FilterService
+		<div>
+			<FilterService
 				setFilters={setFilters}
 				filters={filters}
 				uniqueServices={serviceOptions}
 			/>
 
 			{loading ? (
-				<LoadingContainer>
+				<div className={styles.loading_container}>
 					{Array(5)
 						.fill('')
 						.map(() => (
-							<CustomSkeleton />
+							<div className={styles.custom_skeleton} />
 						))}
-				</LoadingContainer>
+				</div>
 			) : (
 				<ServicesList fields={fields} data={list} loading={loading} />
-			)} */}
+			)}
 		</div>
 	);
 }

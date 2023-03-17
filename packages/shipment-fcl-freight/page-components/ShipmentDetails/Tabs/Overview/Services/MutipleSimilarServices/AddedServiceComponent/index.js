@@ -3,7 +3,7 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import getConfigs from '../../../../../configurations/Supplier/get-configs';
+import getConfigs from '../../configurations/get-configs';
 import CreateNew from '../../ServiceDetails/CreateNew';
 import Details from '../../ServiceDetails/Details';
 
@@ -26,11 +26,10 @@ function AddedServiceComponent({
 		container_size,
 		shipping_line,
 		commodity,
-		commodity_subtype,
-		cargo_weight_per_container,
 	} = serviceData || {};
 
-	// const service_items_key = getConfigs(service_type).details || {};
+	console.log('serviceData', serviceData);
+	const service_items_key = getConfigs(service_type).details || {};
 
 	const addedServiceComponent = () => (
 		<>
@@ -41,21 +40,11 @@ function AddedServiceComponent({
 					role="button"
 					tabIndex={0}
 				>
-					<div>
-						<div className={styles.card_details}>
-							{container_size}
-							{' '}
-							{shipping_line?.business_name}
-							{' '}
-							{startCase(commodity)}
-						</div>
-						{service_type === 'rail_domestic_freight_service' ? (
-							<div className={styles.card_sub_details}>
-								{startCase(commodity_subtype)}
-								,
-								{`${startCase(cargo_weight_per_container)}MT`}
-							</div>
-						) : null}
+					<div className={styles.card_details}>
+						{container_size}
+							&nbsp;
+						{shipping_line?.business_name}
+						{startCase(commodity)}
 					</div>
 
 					{show ? (
@@ -70,7 +59,7 @@ function AddedServiceComponent({
 				<div className={styles.container}>
 					<Details
 						state={state}
-						// serviceItemsKey={service_items_key}
+						serviceItemsKey={service_items_key}
 						service_data={serviceData}
 					/>
 				</div>

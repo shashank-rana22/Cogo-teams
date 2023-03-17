@@ -9,7 +9,7 @@
 	background: #ffffff;
 }
 
-.CardContainer{
+.card_container{
 	background: #ffffff;
 	border-radius: 1px;
 	padding: 24px 16px;
@@ -19,7 +19,7 @@
 	justify-content: space-between;
 }
 
-.ContainerHeader{
+.container_header{
 	font-weight: 700;
 	font-size: 16px;
 	line-height: 16px;

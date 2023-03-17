@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 function useGetContainerDetails(item = {}) {
 	const scope = useSelector(({ general }) => general?.scope);
 
-	const { trigger: containerDetailTrigger, data: containerDetails } =		useRequest('get', false, scope)('/list_shipment_container_details');
+	// const { trigger: containerDetailTrigger, data: containerDetails } =		useRequest('get', false, scope)('/list_shipment_container_details');
 
 	const getDetails = async () => {
 		try {

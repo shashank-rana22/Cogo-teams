@@ -11,17 +11,16 @@ function Price({
 	setShow = () => {},
 	refetch = () => {},
 	setShowPrice,
-	shipment_type = '',
 }) {
 	const { requestRate, scope, loading } = useRequestRate({ setShow, refetch });
 
 	return item?.rates ? (
 		<p>$ 0</p>
 	) : (
-		<PriceDiv>
+		<div className={styles.price_div}>
 			{!isSeller && scope === 'partner' ? (
 				<Button
-					className="secondary sm"
+					themeType="secondary"
 					onClick={(e) => {
 						e.stopPropagation();
 						setAddRate(item);
@@ -33,7 +32,7 @@ function Price({
 			) : null}
 
 			<Button
-				className="secondary sm"
+				themeType="secondary"
 				onClick={(e) => {
 					e.stopPropagation();
 					if (isSeller) {
@@ -48,16 +47,15 @@ function Price({
 				{isSeller ? 'Add Rate' : 'Request Rate'}
 			</Button>
 			<Button
-				className="secondary sm"
+				themeType="secondary"
 				onClick={async (e) => {
 					e.stopPropagation();
 					setShowPrice({ item });
 				}}
-				disabled={shipment_type === 'air_freight'}
 			>
 				View Rates
 			</Button>
-		</PriceDiv>
+		</div>
 	);
 }
 

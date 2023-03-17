@@ -58,7 +58,7 @@ const isHaulageAvailable = (
 };
 
 function Route({ allServices = [], loading = false, refetch = () => {} }) {
-	const { shipment_data, isGettingShipment, servicesList, primary_service } = useContext(
+	const { shipment_data, isGettingShipment, primary_service } = useContext(
 		ShipmentDetailContext,
 	);
 	const { source = '', shipment_type = '' } = shipment_data;

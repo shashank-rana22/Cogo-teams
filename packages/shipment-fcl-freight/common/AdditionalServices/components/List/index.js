@@ -1,5 +1,5 @@
 // import useGetPermission from '@cogoport/business-modules/hooks/useGetPermission';
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, cl } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
@@ -21,6 +21,7 @@ function List({
 	activeTab = '',
 	refetchServices = () => {},
 }) {
+	console.log('servicesservicesservices', services);
 	// const { isConditionMatches } = useGetPermission();
 	const { scope, isShipper, isMobile } = useSelector(({ general }) => ({
 		isShipper : general.query.account_type === 'importer_exporter',
@@ -61,7 +62,7 @@ function List({
 			</div>
 
 			{!isEmpty(listAdded) ? (
-				<AddedServices>
+				<div className={styles.added_services}>
 					{listAdded?.map((item) => {
 						const status = getStaus({ item });
 
@@ -87,23 +88,23 @@ function List({
 							/>
 						);
 					})}
-				</AddedServices>
+				</div>
 			) : null}
 
 			{listAdded?.length ? (
-				<Row>
-					<Circle />
-					<ServiceName>Incidental Services</ServiceName>
+				<div>
+					<div className={styles.circle} />
+					<div className={styles.service_name}>Incidental Services</div>
 
 					{!isSops ? (
 						<>
-							<Circle className="upsell" />
-							<ServiceName>Upselling Services</ServiceName>
+							<div className={cl` ${styles.circle} ${styles.upsell}`} />
+							<div className={styles.service_name}>Upselling Services</div>
 						</>
 					) : null}
 
 					<Info />
-				</Row>
+				</div>
 			) : null}
 
 			{/* {addRate && showIp ? (} */}
@@ -129,19 +130,23 @@ function List({
 
 			{show ? (
 				<Modal
-					className="primary lg"
-					styles={{ dialog: { width: isMobile ? 360 : 900 } }}
-					onClose={() => setShow(false)}
+					size="xl"
 					show={show}
+					onClose={() => setShow(false)}
+					placement="top"
+					className={styles.modal_container}
 				>
-					<AddService
-						shipment_id={shipment_data?.id}
-						services={services}
-						isSeller={isSeller}
+					<Modal.Header title="ADD NEW SERVICE" />
+					<Modal.Body>
+						<AddService
+							shipment_id={shipment_data?.id}
+							services={services}
+							isSeller={isSeller}
 						// refetch={refetch}
-						show={show}
-						setShow={setShow}
-					/>
+							show={show}
+							setShow={setShow}
+						/>
+					</Modal.Body>
 				</Modal>
 			) : null}
 		</div>

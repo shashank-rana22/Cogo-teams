@@ -25,7 +25,7 @@ function MutipleSimilarServices({
 		service_type = '',
 		service_supply_agent,
 		payment_term,
-	} = similarServices?.services[0];
+	} = similarServices.services[0];
 
 	const toBeDisplayed = [];
 
@@ -34,10 +34,8 @@ function MutipleSimilarServices({
 		return !dontPush?.length ? toBeDisplayed.push(obj) : null;
 	});
 
-	const heading =		similarServices?.services?.[0]?.service_type
-			=== 'haulage_freight_service'
-		&& similarServices?.services?.[0]?.display_service_type
-			=== 'trailer_freight_service'
+	const heading =	similarServices?.services?.[0]?.service_type === 'haulage_freight_service'
+		&& similarServices?.services?.[0]?.display_service_type === 'trailer_freight_service'
 		? 'Haulage Freight (Trailer)'
 		: similarServices?.routeLeg?.display;
 
@@ -66,9 +64,7 @@ function MutipleSimilarServices({
 
 			{(toBeDisplayed || []).map((service, index) => (
 				<div
-					className={cl`${styles.services_details_container} 
-					${similarServices?.length === index + 1 ? 'last' : 'other'}`}
-
+					className={cl`${similarServices?.length === index + 1 ? styles.last : styles.other}`}
 				>
 					<AddedServiceComponent
 						allSimilar={toBeDisplayed?.length}

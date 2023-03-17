@@ -29,14 +29,14 @@ function List({
 
 		return (
 			<>
-				{/* {(data || []).map((item, i) => (
+				{(data || []).map((item, i) => (
 					<CardItem
 						item={item}
 						loading={loading}
 						fields={fields}
 						isLast={data?.length === i + 1 && !isLclManifest}
 					/>
-				))} */}
+				))}
 
 				{/* {isLclManifest ? (
 					<CardItem
@@ -52,7 +52,7 @@ function List({
 	};
 
 	return (
-		<Container className="card-list-root">
+		<div className={styles.container}>
 			<Header
 				fields={fields}
 				showCode={showCode}
@@ -61,7 +61,7 @@ function List({
 			/>
 
 			{handleRender()}
-		</Container>
+		</div>
 	);
 }
 

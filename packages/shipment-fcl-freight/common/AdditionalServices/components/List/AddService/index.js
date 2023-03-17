@@ -4,9 +4,8 @@ import EmptyState from '../../../../EmptyState';
 import AddRate from '../../AddRate';
 
 import ChooseService from './ChooseService';
-import Header from './Header';
 import styles from './styles.module.css';
-// import useList from './useList';
+import useList from './useList';
 import ViewPrice from './ViewPrice';
 
 function AddService({
@@ -20,15 +19,14 @@ function AddService({
 	const [showAddRate, setAddRate] = useState(null);
 	const [showPrice, setShowPrice] = useState(null);
 
-	// const { list, loading, setFilters, filters, serviceCountTotal } = useList({
-	// 	shipment_id,
-	// 	services,
-	// 	show,
-	// 	isSeller,
-	// });
+	const { list, loading, setFilters, filters, serviceCountTotal } = useList({
+		shipment_id,
+		services,
+		show,
+		isSeller,
+	});
 
-	const list = [];
-	const loading = false;
+	console.log('servicesservices', services);
 
 	if (!list?.length && !loading) {
 		<EmptyState />;
@@ -36,23 +34,22 @@ function AddService({
 
 	return (
 		<div className={styles.container}>
-			<Header />
 			{!showAddRate && !showPrice ? (
 				<ChooseService
 					setAddRate={setAddRate}
 					isSeller={isSeller}
 					list={list}
 					loading={loading}
-					// setFilters={setFilters}
-					// filters={filters}
+					setFilters={setFilters}
+					filters={filters}
 					setShow={setShow}
 					setShowPrice={setShowPrice}
-					// serviceCountTotal={serviceCountTotal}
+					serviceCountTotal={serviceCountTotal}
 					services={services}
 					refetch={refetch}
 				/>
 			) : null}
-			{/* {showAddRate ? (
+			{showAddRate ? (
 				<AddRate
 					isSeller={isSeller}
 					item={showAddRate}
@@ -61,14 +58,14 @@ function AddService({
 					refetch={refetch}
 					filters={filters}
 				/>
-			) : null} */}
-			{/* {!showAddRate && showPrice ? (
+			) : null}
+			{!showAddRate && showPrice ? (
 				<ViewPrice
 					showPrice={showPrice}
 					setAddRate={setAddRate}
 					setShowPrice={setShowPrice}
 				/>
-			) : null} */}
+			) : null}
 		</div>
 	);
 }

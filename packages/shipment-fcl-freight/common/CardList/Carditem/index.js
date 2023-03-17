@@ -1,6 +1,7 @@
-// import getValue from '@cogo/smart-components/utils/getValue';
-import { Placeholder, Grid } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
+
+import getValue from '../../../utils/getValue';
 
 import styles from './styles.module.css';
 
@@ -17,14 +18,13 @@ function Item({
 	const stylesCol = { padding: '0px 4px' };
 
 	return (
-		<Row
+		<div
 			style={{
 				opacity      : disabled ? '0.4' : '1',
 				cursor       : disabled ? 'not-allowed' : 'pointer',
 				borderBottom : isLast ? 'none' : null,
 				borderRadius : isLast ? '0px 0px 4px 4px' : null,
 			}}
-			tabIndex="0"
 			className={`${item.expired ? 'expired' : ''} card-body-row ${
 				item.isDuplicates ? 'duplicate' : ''
 			}`}
@@ -35,11 +35,11 @@ function Item({
 				}
 
 				return (
-					<Col
-						xs={6}
-						sm={6}
-						md={singleItem.span}
-						lg={singleItem.span}
+					<div
+						// xs={6}
+						// sm={6}
+						// md={singleItem.span}
+						// lg={singleItem.span}
 						style={singleItem.hasStyle ? singleItem.styles : stylesCol}
 						key={singleItem?.key}
 						className="card-body-col"
@@ -52,18 +52,18 @@ function Item({
 									: null}
 							</div>
 						) : (
-							<Total>{item[singleItem?.name]}</Total>
+							<div className={styles.total}>{item[singleItem?.name]}</div>
 						)}
 
 						{!loading && !singleItem.render ? (
-							<TitleBlack className="card-list-item-value">
-								{/* {getValue(item, singleItem, false, {}) || '-'} */}
-							</TitleBlack>
+							<div className={` ${styles.title_black} card-list-item-value`}>
+								{getValue(item, singleItem, false, {}) || '-'}
+							</div>
 						) : null}
-					</Col>
+					</div>
 				);
 			})}
-		</Row>
+		</div>
 	);
 }
 

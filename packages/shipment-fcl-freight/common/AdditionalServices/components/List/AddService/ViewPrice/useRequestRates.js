@@ -8,18 +8,20 @@ import { incoTermTradeType } from '../../../../../../configurations/inco-terms';
 const useRequestRate = ({ item }) => {
 	const { scope } = useSelector(({ general }) => ({ scope: general?.scope }));
 
-	const { data, trigger, loading } = useRequest(
-		'get',
-		false,
+	const [{ data, loading }, trigger] = useRequest({
+		url    : '/get_subsidiary_service_rate_cards',
+		method : 'GET',
 		scope,
-	)('/get_subsidiary_service_rate_cards');
+	});
 	const serviceType = item?.service_type.replace('_service', '');
 
+	console.log('data', data);
 	const listRates = async () => {
 		try {
 			const addedService = (item.services || []).find(
 				(service) => service.service_type === item.service_type,
 			);
+			console.log('addedService', addedService);
 			const trade_type = incoTermTradeType[addedService?.inco_term] || '';
 			const date = new Date();
 			await trigger({
@@ -57,7 +59,7 @@ const useRequestRate = ({ item }) => {
 	};
 	useEffect(() => {
 		listRates();
-	}, []);
+	}, [trigger]);
 
 	return {
 		loading,

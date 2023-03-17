@@ -33,10 +33,10 @@
 	background: #f7cdcd;
 	margin-right: 8px;
 	border-radius: 50%;
+}
 
-	&.upsell {
-		background: #d9eafd;
-	}
+.upsell {
+	background: #d9eafd;
 }
 
 .service_name{
@@ -76,3 +76,10 @@
 	width: 100%;
 }
 
+.modal_container {
+	:global {
+		.ui_modal_body_container {
+			max-height: 400px;
+	}
+	}
+}

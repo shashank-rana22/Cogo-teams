@@ -5,11 +5,12 @@ import CardList from '../../../../../CardList';
 import EmptyState from '../../../../../EmptyState';
 
 import styles from './styles.module.css';
-import useListSubsidaryRates from './useListSubsidaryRates';
+import useRequestRates from './useRequestRates';
 import fields from './viewPriceFields';
 
 function ViewPrice({ showPrice, setAddRate, setShowPrice }) {
-	const { data, loading } = useListSubsidaryRates({
+	console.log('showPrice', showPrice);
+	const { data, loading } = useRequestRates({
 		item: showPrice?.item,
 	});
 
@@ -45,9 +46,9 @@ function ViewPrice({ showPrice, setAddRate, setShowPrice }) {
 				/>
 			)}
 
-			<StyledButton>
+			<Button>
 				<Button onClick={() => setShowPrice(null)}>Cancel</Button>
-			</StyledButton>
+			</Button>
 		</div>
 	);
 }
