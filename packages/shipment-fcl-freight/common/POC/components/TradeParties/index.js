@@ -2,7 +2,7 @@ import { TRADE_PARTY_MAPPING } from '../../../../constants/TRADE_PARTY_MAPPING';
 
 import styles from './styles.module.css';
 
-function AddTradeParty({ tradePartnersData }) {
+function TradeParties({ tradePartnersData }) {
 	const { list = [] } = tradePartnersData;
 
 	const addedTradeParty = list.map((i) => i.trade_party_type);
@@ -23,4 +23,4 @@ function AddTradeParty({ tradePartnersData }) {
 	);
 }
 
-export default AddTradeParty;
+export default TradeParties;
