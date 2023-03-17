@@ -19,6 +19,7 @@ function MailModal({
 	const [recipientValue, setRecipientValue] = useState('');
 	const [ccBccValue, setCcBccValue] = useState('');
 	const [error, setError] = useState(false);
+	const [errorValue, setErrorValue] = useState('');
 	const [recipientArray, setRecipientArray] = useState([]);
 	const [bccArray, setBccArray] = useState([]);
 	const [uploading, setUploading] = useState(false);
@@ -94,6 +95,7 @@ function MailModal({
 		setType(val);
 		setShowControl(true);
 		setError(false);
+		setErrorValue(null);
 		if (type === 'recipient') {
 			setCcBccValue('');
 		} else {
@@ -114,18 +116,26 @@ function MailModal({
 		return emailRegex.test(emailInput);
 	};
 
+	const isInList = (email, data) => data.includes(email);
+
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter') {
 			event.preventDefault();
-			if (type === 'recipient' && !validateEmail(recipientValue)) {
+			if ((type === 'recipient' && !validateEmail(recipientValue))
+			|| (type === 'cc_bcc' && !validateEmail(ccBccValue))) {
+				setErrorValue('Enter valid id');
 				setError(true);
 				return;
 			}
-			if (type === 'cc_bcc' && !validateEmail(ccBccValue)) {
+			if ((type === 'recipient' && isInList(recipientValue, recipientArray))
+			|| (type === 'cc_bcc' && isInList(ccBccValue, bccArray))) {
+				setErrorValue('Email already present');
 				setError(true);
 				return;
 			}
+
 			setError(false);
+			setErrorValue(null);
 			if (type === 'recipient') {
 				setRecipientArray((prev) => [...prev, recipientValue]);
 				setRecipientValue('');
@@ -223,7 +233,7 @@ function MailModal({
 							</div>
 							{(error) && (
 								<div className={styles.error_content_container}>
-									Enter valid mail
+									{errorValue}
 								</div>
 							)}
 						</div>
