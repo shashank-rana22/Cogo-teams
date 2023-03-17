@@ -158,12 +158,30 @@
 }
 
 .content {
-	max-width: 90%;
+	max-width: 80%;
+	height: 18px;
 	margin-top: 3px;
 	overflow: hidden;
 	font-size: 12px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	:global {
+		img {
+			display: none;
+		}
+
+		p {
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		div {
+			display: none;
+		}
+	}
 }
 
 .empty_state {
@@ -237,4 +255,16 @@
 
 .warning {
 	background: #fef199;
+}
+
+.plus_circle {
+	position: fixed;
+	bottom: 33px;
+	left: 350px;
+	cursor: pointer;
+}
+
+.plus_circle svg {
+	background-color: white;
+	border-radius: 100%;
 }

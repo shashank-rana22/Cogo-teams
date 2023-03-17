@@ -6,7 +6,7 @@
         "@cogoport/navigation-configs": "workspace:0.1.0",
         "@cogoport/next": "workspace:0.1.0",
         "@cogoport/store": "workspace:0.1.0",
-        "@cogoport/utils": "^1.2.3",
+        "@cogoport/utils": "^1.2.6",
         "axios": "^1.3.4",
         "axios-hooks": "^4.0.0",
         "dotenv": "^16.0.3",

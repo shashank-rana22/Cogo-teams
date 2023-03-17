@@ -5,6 +5,7 @@ import {
 	IcMAttach,
 	IcMSend,
 	IcMDelete,
+	IcMRefresh,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
@@ -38,6 +39,7 @@ function MessageConversations({
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
 	lastPage = false,
+
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '' } = activeMessageCard;
@@ -70,8 +72,7 @@ function MessageConversations({
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
 			event.preventDefault();
-			sendChatMessage();
-			scrollToBottom();
+			sendChatMessage(scrollToBottom);
 		}
 	};
 
@@ -147,7 +148,18 @@ function MessageConversations({
 
 	const messageConversation = (
 		<>
-			{loadingPrevMessages && loader}
+			{loadingPrevMessages
+				? loader
+				: (
+					<div className={styles.load_prev_messages}>
+						{!lastPage && (
+							<IcMRefresh
+								className={styles.refresh_icon}
+								onClick={getNextData}
+							/>
+						)}
+					</div>
+				)}
 			{(messagesData || []).map((eachMessage) => (
 				eachMessage?.conversation_type !== 'received' ? (
 					<ReceiveDiv
@@ -356,8 +368,7 @@ function MessageConversations({
 							fill="#EE3425"
 							onClick={() => {
 								if (hasPermissionToEdit) {
-									sendChatMessage();
-									scrollToBottom();
+									sendChatMessage(scrollToBottom);
 								}
 							}}
 							style={{

@@ -286,7 +286,7 @@ function CreateFAQ() {
 
 					{editorError && (
 						<span className={styles.errors}>
-							Anwser is required
+							Answer is required
 						</span>
 					)}
 
@@ -307,7 +307,7 @@ function CreateFAQ() {
 						type="submit"
 						loading={apiLoading}
 					>
-						Preview & Publish
+						Preview
 					</Button>
 				</div>
 
@@ -366,7 +366,7 @@ function CreateFAQ() {
 
 				<Modal.Body>
 					<div className={styles.text_wrapper}>
-						Your current chnges will not be saved, Are you sure want to cancel ?
+						Your current changes will not be saved, Are you sure want to cancel ?
 					</div>
 				</Modal.Body>
 

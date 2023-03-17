@@ -1,7 +1,7 @@
 import { cl, Input, Popover, Tooltip } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight, IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import UserAvatar from '../../../../common/UserAvatar';
 import { PLATFORM_MAPPING } from '../../../../constants';
@@ -9,6 +9,7 @@ import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 import FilterComponents from '../FilterComponents';
 import LoadingState from '../LoadingState';
+import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import styles from './styles.module.css';
 
@@ -25,7 +26,10 @@ function MessageList({
 	setActiveMessage,
 	setActiveCardId = () => {},
 	showBotMessages = false,
+	setShowBotMessages = () => {},
+	isomniChannelAdmin = false,
 }) {
+	const [modalType, setModalType] = useState(false);
 	function getShowChat({ user_name }) {
 		if (searchValue) {
 			const searchName = user_name?.toLowerCase();
@@ -39,6 +43,19 @@ function MessageList({
 		return <LoadingState />;
 	}
 
+	function lastMessagePreview(previewData = '') {
+		return (
+			<div
+				className={styles.content}
+				dangerouslySetInnerHTML={{ __html: previewData }}
+			/>
+		);
+	}
+
+	const openModelForNewContact = () => {
+		setModalType(true);
+	};
+	const disabled = true;
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -51,11 +68,10 @@ function MessageList({
 						onChange={(val) => setSearchValue(val)}
 					/>
 				</div>
-				{!showBotMessages && (
-					<div className={styles.filter_icon}>
-						<Popover
-							placement="right"
-							render={(
+				<div className={styles.filter_icon}>
+					<Popover
+						placement="right"
+						render={(
 							filterVisible && (
 								<FilterComponents
 									setFilterVisible={setFilterVisible}
@@ -63,20 +79,24 @@ function MessageList({
 									appliedFilters={appliedFilters}
 									setAppliedFilters={setAppliedFilters}
 									setActiveCardId={setActiveCardId}
+									setShowBotMessages={setShowBotMessages}
+									showBotMessages={showBotMessages}
+									isomniChannelAdmin={isomniChannelAdmin}
 								/>
 							)
-							)}
-							visible={filterVisible}
-							onClickOutside={() => setFilterVisible(false)}
-						>
-							<IcMFilter
-								onClick={() => setFilterVisible((prev) => !prev)}
-								className={styles.filter_icon}
-							/>
-						</Popover>
-						{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
-					</div>
-				)}
+						)}
+						visible={filterVisible}
+						onClickOutside={() => setFilterVisible(false)}
+					>
+						<IcMFilter
+							onClick={() => setFilterVisible((prev) => !prev)}
+							className={styles.filter_icon}
+						/>
+					</Popover>
+					{(!isEmpty(appliedFilters)
+					|| (showBotMessages && !isomniChannelAdmin))
+					&& <div className={styles.filters_applied} />}
+				</div>
 			</div>
 
 			{ isEmpty(messagesList) ? (
@@ -100,7 +120,7 @@ function MessageList({
 						const checkActiveCard = activeCardId === item?.id;
 
 						const showOrganization = () => {
-							if ((user_name.toLowerCase() || '').includes('anonymous')) {
+							if ((user_name?.toLowerCase() || '').includes('anonymous')) {
 								return startCase(PLATFORM_MAPPING[user_type] || '');
 							}
 							return startCase(organization_name);
@@ -127,9 +147,9 @@ function MessageList({
 													imageSource={item.image}
 												/>
 												<div className={styles.user_details}>
-													<Tooltip content={startCase(user_name)} placement="top">
+													<Tooltip content={startCase(user_name) || 'User'} placement="top">
 														<div className={styles.user_name}>
-															{startCase(user_name)}
+															{startCase(user_name) || 'User'}
 														</div>
 													</Tooltip>
 
@@ -164,10 +184,7 @@ function MessageList({
 										</div>
 
 										<div className={styles.content_div}>
-											<div className={styles.content}>
-												{item.last_message}
-											</div>
-
+											{lastMessagePreview(item?.last_message || '')}
 											{item.new_message_count > 0 && (
 												<div className={styles.new_message_count}>
 													{item.new_message_count > 100 ? '99+' : (
@@ -182,6 +199,18 @@ function MessageList({
 						);
 					})}
 				</div>
+			)}
+			{!disabled && (
+				<div
+					className={styles.plus_circle}
+				>
+					<IcMPlusInCircle onClick={openModelForNewContact} fill="red" width={50} height={50} />
+				</div>
+			)}
+			{modalType && (
+				<NewWhatsappMessage
+					setModalType={setModalType}
+				/>
 			)}
 		</>
 	);
