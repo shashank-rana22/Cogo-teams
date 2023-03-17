@@ -9,15 +9,14 @@ const useGetOmnichannelActivityLogs = ({
 	user_id = null,
 	lead_user_id = null,
 	activeSubTab = '',
+	pagination,
 }) => {
-	const [pagination, setPagination] = useState(1);
-
+	const [filters, setFilters] = useState(null);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_omnichannel_activity_logs',
 		method : 'get',
 	}, { manual: true });
-
-	const fetchActivityLogs = useCallback(async (filters = []) => {
+	const fetchActivityLogs = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -39,21 +38,21 @@ const useGetOmnichannelActivityLogs = ({
 		}
 
 		setFilterVisible(false);
-	}, [activityTab, lead_user_id, pagination, setFilterVisible, trigger, user_id]);
+	}, [activityTab, filters, lead_user_id, pagination, setFilterVisible, trigger, user_id]);
 
 	useEffect(() => {
 		if ((user_id || lead_user_id)
 		&& (activeSubTab === 'channels')) {
 			fetchActivityLogs();
 		}
-	}, [activeSubTab, user_id, lead_user_id, fetchActivityLogs, customerId]);
+	}, [activeSubTab, user_id, lead_user_id, fetchActivityLogs, customerId, pagination]);
 
 	return {
 		data,
 		loading,
 		fetchActivityLogs,
-		pagination,
-		setPagination,
+		filters,
+		setFilters,
 	};
 };
 
