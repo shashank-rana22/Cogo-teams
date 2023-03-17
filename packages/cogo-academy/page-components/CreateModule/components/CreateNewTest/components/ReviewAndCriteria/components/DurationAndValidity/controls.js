@@ -15,8 +15,8 @@ const getControls = () => [
 	{
 		name        : 'attempts_allowed',
 		label       : 'Attempts Allowed',
-		type        : 'select',
-		placeholder : '3',
+		type        : 'input',
+		placeholder : '0',
 		rules       : { required: 'This is required' },
 	},
 	{
