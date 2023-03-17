@@ -1,7 +1,6 @@
 import styles from './styles.module.css';
 
 function ViewCards({ cardHeading = '', subHeading = [] }) {
-	console.log(subHeading);
 	const truncate = (str) => (str?.length > 12 ? `${str.substring(0, 10)}...` : str);
 
 	return (
@@ -14,8 +13,8 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 
 			<div className={styles.sub_heading} style={{ color: '#6FA5AB' }}>
 				<div>
-					<div className={styles.sub_heading_context}>{truncate(subHeading[0]?.name)}</div>
-					{subHeading[0]?.views}
+					<div className={styles.sub_heading_context}>{truncate(subHeading[0]?.audience_name)}</div>
+					{subHeading[0]?.total_views}
 					{' '}
 					Views
 					,
@@ -24,8 +23,8 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 				</div>
 
 				<div>
-					<div className={styles.sub_heading_context}>{truncate(subHeading[1]?.name)}</div>
-					{subHeading[1]?.views}
+					<div className={styles.sub_heading_context}>{truncate(subHeading[1]?.audience_name)}</div>
+					{subHeading[1]?.total_views}
 					{' '}
 					Views
 					,

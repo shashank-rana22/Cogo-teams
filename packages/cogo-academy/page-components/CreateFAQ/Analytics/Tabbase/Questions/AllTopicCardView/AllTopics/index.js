@@ -16,6 +16,7 @@ import ViewCardsList from './ViewCardsList';
 
 function AllTopic({ props = '' }) {
 	const {
+		audiences = [],
 		display_name = '',
 		question_count = 0,
 		view_count = 0,
@@ -26,7 +27,6 @@ function AllTopic({ props = '' }) {
 		most_liked_questions = [],
 		id = '',
 	} = props;
-
 	const [showQuestions, setShowQuestions] = useState(false);
 
 	const truncate = (str) => (str?.length > 40 ? `${str.substring(0, 38)}...` : str);
@@ -74,7 +74,7 @@ function AllTopic({ props = '' }) {
 				<div style={{ display: 'flex' }}>
 					<ViewCards
 						cardHeading="User group that viewed the Most Questions "
-						subHeading=""
+						subHeading={audiences}
 					/>
 
 					<ViewCardsList
