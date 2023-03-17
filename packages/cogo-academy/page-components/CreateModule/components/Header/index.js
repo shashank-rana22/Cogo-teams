@@ -17,8 +17,13 @@ function Header(props) {
 	return (
 		<div className={styles.flex_div}>
 			<div className={styles.title}>Test Module</div>
-			<Button onClick={() => router.push('/learning/faq/create/test-module/create')}>
-				+ Create New
+			<Button onClick={() => router.push('/learning/faq/create/test-module/create-question')}>
+				+ Create New Question
+				{' '}
+				{BUTTON_TEXT_MAPPING[activeTab]}
+			</Button>
+			<Button onClick={() => router.push('/learning/faq/create/test-module/create-test')}>
+				+ Create New Test
 				{' '}
 				{BUTTON_TEXT_MAPPING[activeTab]}
 			</Button>

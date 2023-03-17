@@ -17,7 +17,10 @@ const cogoAcademy = {
 	'/[partner_id]/learning/faq/create/test-module': {
 		navigation: 'cogo_academy-create_faq',
 	},
-	'/[partner_id]/learning/faq/create/test-module/create': {
+	'/[partner_id]/learning/faq/create/test-module/create-question': {
+		navigation: 'cogo_academy-create_faq',
+	},
+	'/[partner_id]/learning/faq/create/test-module/create-test': {
 		navigation: 'cogo_academy-create_faq',
 	},
 	'/[partner_id]/learning/faq': {

@@ -1,6 +1,7 @@
 import { Tooltip, Button, Table, Pagination } from '@cogoport/components';
 import { IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+// import { useState } from 'react';
 
 import useUpdateCaseStudy from '../../hooks/useUpdateCaseStudy';
 import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
@@ -29,6 +30,8 @@ function SavedQuestionDetails({
 	getTestQuestionTest,
 	questionSetId,
 }) {
+	// const [caseToShow, setCaseToShow] = useState('');
+
 	const { updateStandAloneTestQuestion, loading } = useUpdateStandAloneTestQuestion();
 
 	const {
@@ -83,7 +86,7 @@ function SavedQuestionDetails({
 		{
 			Header   : 'Question/Case',
 			id       : 'question_text',
-			accessor : ({ question_text }) => <section>{question_text}</section>,
+			accessor : (item) => <section>{item?.question_text}</section>,
 		},
 		{
 			Header   : 'Answer Type',
