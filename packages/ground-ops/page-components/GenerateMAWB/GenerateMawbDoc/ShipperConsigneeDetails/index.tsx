@@ -158,7 +158,16 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 
-						<p className={styles.font_style} style={{ fontSize: 14.5 }}>{formData?.airline}</p>
+						<p
+							className={styles.font_style}
+							style={{
+								fontSize      : 14.5,
+								textTransform : 'uppercase',
+							}}
+						>
+							{formData?.airline}
+
+						</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
