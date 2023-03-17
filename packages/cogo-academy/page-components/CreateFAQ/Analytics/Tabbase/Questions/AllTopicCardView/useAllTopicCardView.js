@@ -6,9 +6,10 @@ function useAllTopicCardView({ date = '', setDate = () => {} }) {
 	const { general = {} } = useSelector((state) => state);
 	const { startDate, endDate } = date;
 	const { query } = general;
-	console.log(startDate, endDate);
+	// console.log(startDate, endDate);
 	const { topicId = '' } = query || {};
 	const [activeTab, setActiveTab] = useState(topicId || 'All Topics');
+	const [page, setPage] = useState(1);
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
@@ -25,8 +26,9 @@ function useAllTopicCardView({ date = '', setDate = () => {} }) {
 							created_at_less_than    : endDate,
 
 						},
-						page_limit                     : 100000,
-						pagination_data_required       : false,
+						page_limit                     : 10,
+						page,
+						pagination_data_required       : true,
 						most_viewed_questions_required : true,
 						topic_wise_questions_required  : true,
 						topic_wise_stats_required      : true,
@@ -38,17 +40,24 @@ function useAllTopicCardView({ date = '', setDate = () => {} }) {
 				console.log('error :: ', error);
 			}
 		},
-		[trigger],
+		[endDate, page, startDate, trigger],
 	);
 
-	useEffect(() => { fetchFaqTopic(); }, [fetchFaqTopic, date]);
+	useEffect(() => { fetchFaqTopic(); }, [fetchFaqTopic, date, page]);
 
+	const { page_limit, total, total_count } = data || {};
+	console.log(data);
 	return {
 		refetchTopic: fetchFaqTopic,
 		data,
 		loading,
 		activeTab,
 		setActiveTab,
+		page,
+		setPage,
+		page_limit,
+		total,
+		total_count,
 	};
 }
 
