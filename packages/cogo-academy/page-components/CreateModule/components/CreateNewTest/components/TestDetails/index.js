@@ -67,15 +67,7 @@ function CreateNewTest() {
 					);
 				})}
 			</div>
-			<Button
-				themeType="primary"
-				onClick={() => {
-					setFormValues(getValues());
-				}}
-			>
-				Save
-
-			</Button>
+			<Button themeType="primary"> Save </Button>
 		</div>
 	);
 }
