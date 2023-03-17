@@ -80,15 +80,13 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 					className={styles.modal_styles}
 				>
 					<Modal.Body>
-						<div style={{ display: 'flex' }}>
-							<List
-								setShow={setShow}
-								isMobile={isMobile}
-								MessageContentArr={MessageContentArr}
-								user_id={user_id}
-								setSeenLoading={setSeenLoading}
-							/>
-						</div>
+						<List
+							setShow={setShow}
+							isMobile={isMobile}
+							MessageContentArr={MessageContentArr}
+							user_id={user_id}
+							setSeenLoading={setSeenLoading}
+						/>
 					</Modal.Body>
 				</Modal>
 

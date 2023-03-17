@@ -63,11 +63,13 @@
 	:global {
 		.ui_input_container {
 			height: 32px;
-			width: 200px;		
+			width: 200px;
+			border-color: #000000;	
 		}
 
 		.ui_input_container.ui_ps_size_md .ui_input_control {
 			font-size: 14px;
+			color: #ff0000;
 		}
 
 		.ui_input_suffix {

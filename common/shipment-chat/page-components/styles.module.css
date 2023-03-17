@@ -38,7 +38,7 @@
 
 	:global {
 		.ui_modal_body_container {
-			min-height: 474px;
+			min-height: 472px;
 			border-top: none !important;
 			border-bottom: none !important;
 			padding: 0px;

@@ -148,7 +148,7 @@ function List({
 	// };
 
 	return (
-		<>
+		<div style={{ display: 'flex' }}>
 			<div className={cl`${styles.container} ${showMenu ? styles.show_menu : ''}`}>
 
 				<ListHeader
@@ -240,7 +240,7 @@ function List({
 					/>
 				))
 			)}
-		</>
+		</div>
 	);
 }
 
