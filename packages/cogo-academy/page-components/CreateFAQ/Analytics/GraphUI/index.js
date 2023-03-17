@@ -99,6 +99,7 @@ function GraphUI() {
 
 				<div className={styles.pie_container}>
 					<div className={styles.inner_pie}>
+
 						<ResponsivePie
 							data={pie_data}
 							margin={{ top: 50, right: 10, bottom: 80, left: 40 }}

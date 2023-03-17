@@ -10,11 +10,9 @@ function useListFaqStats({
 	setDate = () => {},
 
 }) {
-	console.log(date);
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
 	const { startDate, endDate } = date;
-	console.log(startDate, endDate);
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
