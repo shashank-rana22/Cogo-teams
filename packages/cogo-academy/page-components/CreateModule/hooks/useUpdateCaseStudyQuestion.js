@@ -3,31 +3,48 @@ import { useRequest } from '@cogoport/request';
 import getPayload from '../utils/getPayload';
 
 function useUpdateCaseStudyQuestion() {
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
 		method : 'post',
 		url    : '/update_case_study_question',
 	}, { manual: true });
 
+	const [{ loading }, trigger] = useRequest({
+		method : 'post',
+		url    : '/add_case_study_question',
+	}, { manual: true });
+
+	const triggerMapping = {
+		create : trigger,
+		update : triggerUpdate,
+		delete : triggerUpdate,
+	};
+
 	const updateCaseStudyQuestion = async ({
-		action,
-		caseStudyQuestionId,
+		values,
 		questionSetId,
 		getTestQuestionTest,
 		reset,
 		setEditDetails,
 		setAllKeysSaved,
+		action,
+		caseStudyQuestionId,
+		testQuestionId,
 	}) => {
+		const triggerToUse = triggerMapping?.[action];
+
 		try {
-			await trigger({
+			await triggerToUse({
 				data:
 						action === 'delete'
-							? { id: caseStudyQuestionId, status: 'inactive' }
+							? { id: caseStudyQuestionId, status: 'inactive', answers: [] }
 							: getPayload({
-								// values,
-								type: 'case_study',
+								values,
+								editType : 'case_question',
+								type     : 'case_study',
 								questionSetId,
 								action,
 								caseStudyQuestionId,
+								testQuestionId,
 							}),
 			});
 
@@ -41,7 +58,7 @@ function useUpdateCaseStudyQuestion() {
 	};
 
 	return {
-		loading,
+		loading: loading || loadingUpdate,
 		updateCaseStudyQuestion,
 	};
 }

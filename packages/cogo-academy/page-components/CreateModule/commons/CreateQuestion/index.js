@@ -113,6 +113,7 @@ function CreateQuestion({
 					setValue(`case_questions.${ind}.difficulty_level`, difficulty_level);
 					setValue(`case_questions.${ind}.question_type`, indQuestionType);
 					setValue(`case_questions.${ind}.question_text`, indQuestionText);
+					setValue(`case_questions.${ind}.audience_ids`, []);
 
 					answers.forEach((item2, ind2) => {
 						const { answer_text, is_correct } = item2 || {};

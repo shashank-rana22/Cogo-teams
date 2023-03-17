@@ -8,16 +8,13 @@ import styles from './styles.module.css';
 
 const alphabetMapping = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-const getCorrectAnswersCombined = ({ answers = [] }) => (answers || []).map((item) => {
-	if (item.is_correct) {
-		return `${alphabetMapping[item.sequence_number]}) ${item.answer_text}`;
-	}
+const getCorrectAnswersCombined = ({ correctOptions = [] }) => 	(correctOptions || []).map(
+	(item) => `${alphabetMapping[item.sequence_number]}) ${item.answer_text}`,
+);
 
-	return null;
-});
-
-const getCorrectAnswers = ({ answers }) => {
-	const correctAnswers = getCorrectAnswersCombined({ answers });
+const getCorrectAnswers = ({ answers = [] }) => {
+	const correctOptions = answers.filter((item) => item.is_correct);
+	const correctAnswers = getCorrectAnswersCombined({ correctOptions });
 
 	return correctAnswers.join(', ');
 };
@@ -82,7 +79,22 @@ function SavedQuestionDetails({
 		{
 			Header   : 'Answer Key',
 			id       : 'answer_key',
-			accessor : ({ answers }) => <section>{getCorrectAnswers({ answers })}</section>,
+			accessor : ({ answers }) => (
+				<Tooltip content={(
+					<div className={styles.flex_column}>
+						{getCorrectAnswersCombined({
+							correctOptions: (answers || []).filter((item) => item.is_correct),
+						}).map((item) => (
+							<div style={styles.answer}>{item}</div>
+						))}
+					</div>
+				)}
+				>
+					<div className={styles.answer_key}>
+						{getCorrectAnswers({ answers })}
+					</div>
+				</Tooltip>
+			),
 		},
 		{
 			Header   : 'Difficulty Level',
