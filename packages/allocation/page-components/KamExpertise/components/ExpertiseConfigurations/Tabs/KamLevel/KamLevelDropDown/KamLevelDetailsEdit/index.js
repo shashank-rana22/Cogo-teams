@@ -6,7 +6,7 @@ import { controls, controlsBottom } from '../../getControls';
 
 import styles from './styles.module.css';
 
-function KamLevelDetailsEdit({ data = {}, control, handleSubmit, onSave, setEditMode }) {
+function KamLevelDetailsEdit({ data = {}, control, handleSubmit, onSave, setEditMode, updateLoading }) {
 	const transacting_accounts = data?.list?.['Transacting Accounts'] || [];
 
 	return (
@@ -14,6 +14,7 @@ function KamLevelDetailsEdit({ data = {}, control, handleSubmit, onSave, setEdit
 			<Button
 				className={styles.delete_button}
 				onClick={handleSubmit(onSave)}
+				loading={updateLoading}
 				type="submit"
 			>
 				{' '}
@@ -22,6 +23,7 @@ function KamLevelDetailsEdit({ data = {}, control, handleSubmit, onSave, setEdit
 			<Button
 				className={styles.delete_button}
 				themeType="secondary"
+				disabled={updateLoading}
 				style={{ marginRight: '0' }}
 				onClick={(e) => {
 					e.stopPropagation();

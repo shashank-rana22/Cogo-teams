@@ -37,7 +37,7 @@ function KamLevelCard(props) {
 		expertise_details = [],
 	} = data;
 
-	const { onDelete } = useDeleteKamLevel({ refetch, transition_level });
+	const { onDelete, deleteLoading } = useDeleteKamLevel({ refetch, transition_level });
 
 	const expertiseObject = expertise_details.map((item) => item);
 
@@ -98,6 +98,7 @@ function KamLevelCard(props) {
 
 								</Button>
 								<Button
+									loading={deleteLoading}
 									onClick={(e) => {
 										e.stopPropagation();
 										onDelete();

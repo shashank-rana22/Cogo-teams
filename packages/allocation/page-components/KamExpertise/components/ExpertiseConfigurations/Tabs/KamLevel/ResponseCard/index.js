@@ -56,7 +56,7 @@ function ResponseCard({
 
 				</Button>
 				<Button
-					disabled={createLoading}
+					loading={createLoading}
 					style={{ margin: '10px' }}
 					onClick={handleSubmit(onCreate)}
 				>

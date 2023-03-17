@@ -12,7 +12,7 @@ function KamLevelDropDown({ refetch, transition_level }) {
 
 	const { listkamLevelDetails, listrefetch, listLoading } = useGetKamExpertiseLevelConfig({ transition_level });
 
-	const { formProps, onSave } = useUpdateKamScores({
+	const { formProps, onSave, updateLoading } = useUpdateKamScores({
 		transition_level,
 		listrefetch,
 		setEditMode,
@@ -31,6 +31,7 @@ function KamLevelDropDown({ refetch, transition_level }) {
 						handleSubmit={handleSubmit}
 						onSave={onSave}
 						setEditMode={setEditMode}
+						updateLoading={updateLoading}
 
 					/>
 				)
