@@ -34,7 +34,17 @@ function Tabbase() {
 					<Questions props={props} />
 				</TabPanel>
 
-				<TabPanel name="By_Users" title="By Users" badge="Total 400">
+				<TabPanel
+					name="By_Users"
+					title="By Users"
+					badge={(
+						<>
+							Total:
+							{' '}
+							{props?.data?.question_stats?.no_of_questions}
+						</>
+					)}
+				>
 					<Users />
 				</TabPanel>
 			</Tabs>
