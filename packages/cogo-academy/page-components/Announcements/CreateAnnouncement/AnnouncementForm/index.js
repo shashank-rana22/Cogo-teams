@@ -60,7 +60,6 @@ function AnnouncementForm({
 		<div className={styles.container}>
 			<div className={styles.form}>
 				{controls.map((controlItem) => {
-					const controlStyle = controlItem?.style;
 					const type = controlItem?.type;
 					const { name } = controlItem || {};
 
@@ -68,7 +67,7 @@ function AnnouncementForm({
 
 					if (type === 'field-array') {
 						return (
-							<div style={{ ...controlStyle }}>
+							<div className={styles.form_element}>
 								<FieldArray
 									formValues={formValues}
 									control={control}
@@ -79,7 +78,7 @@ function AnnouncementForm({
 					}
 
 					return (
-						<div style={{ ...controlStyle, position: 'relative' }}>
+						<div className={styles.form_element} style={{ position: 'relative' }}>
 							{controlItem.optionsListKey === 'audiences' && (
 								renderAddButton()
 							)}
@@ -125,14 +124,13 @@ function AnnouncementForm({
 			{showPreview && (
 				<Modal
 					show={showPreview}
-					scroll={false}
 					size="lg"
 					placement="center"
 					onClose={() => setShowPreview(false)}
 				>
-					<Modal.Header title="Preview" />
+					<Modal.Header title={formValues.title} />
 
-					<Modal.Body className={styles.modal}>
+					<Modal.Body style={{ maxHeight: '90vh' }}>
 						<Preview formValues={formValues} />
 					</Modal.Body>
 				</Modal>
