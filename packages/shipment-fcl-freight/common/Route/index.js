@@ -17,7 +17,7 @@ const trasportationServices = [
 
 const isTrasportationAvailable = (allServices, trade_type) => {
 	const obj = allServices?.find(
-		(service) => trasportationServices.includes(service?.display_service_type)
+		(service) => trasportationServices.includes(service?.service_type)
 			&& service?.trade_type === trade_type,
 	);
 	return !obj;
@@ -26,7 +26,7 @@ const isTrasportationAvailable = (allServices, trade_type) => {
 const getServiceData = (allServices, routeLeg) => allServices?.find(
 	(service) => ((routeLeg?.service_types || []).includes(service?.service_type)
 		|| (routeLeg?.service_types || []).includes(
-			service?.display_service_type,
+			service?.service_type,
 		))
 		&& (!service?.trade_type
 			|| !routeLeg?.trade_type
@@ -36,7 +36,7 @@ const getServiceData = (allServices, routeLeg) => allServices?.find(
 const isServiceTakenFunc = (allServices, routeLeg) => (
 	allServices?.filter(
 		(service) => (routeLeg?.service_types || []).includes(
-			service?.display_service_type,
+			service?.service_type,
 		)
 			&& (!service?.trade_type
 				|| !routeLeg?.trade_type

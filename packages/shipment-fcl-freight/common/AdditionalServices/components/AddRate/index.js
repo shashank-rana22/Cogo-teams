@@ -96,7 +96,6 @@ function AddRate({
 	return (
 		<div>
 			<div className={styles.container}>
-				hello
 				<Accordion
 					title={(
 						<Flex alignItems="center">
