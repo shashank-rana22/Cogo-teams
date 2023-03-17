@@ -130,7 +130,7 @@ function VisualizationContainer({
 						<div
 							style={{
 								cursor : loading ? 'not-allowed' : 'pointer',
-								color  : 'blue',
+								color  : 'red',
 							}}
 							onClick={loading ? () => {} : () => handlePagination(1)}
 							role="button"

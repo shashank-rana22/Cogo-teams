@@ -20,15 +20,11 @@ const useListSalesFunnelData = (salesFunnelInViewport) => {
 
 	const fetchSalesFunnelData = async () => {
 		try {
-			const res = await trigger({
+			await trigger({
 				params: filters,
 			});
-
-			const { hasError } = res || {};
-			if (hasError) throw new Error();
-			return data;
 		} catch (err) {
-			return false;
+			console.log(err, 'err');
 		}
 	};
 

@@ -27,17 +27,21 @@ const useGetPieBreakdown = ({ selectedPieData, byEtd, headerFilters }) => {
 			formatType : 'date',
 		});
 
-		await trigger({
-			params: {
-				type,
-				sub_type,
-				as_on_date  : formattedDate,
-				page,
-				page_size   : 10,
-				by_etd      : byEtd,
-				entity_code : entity_code.length > 0 ? entity_code : undefined,
-			},
-		});
+		try {
+			await trigger({
+				params: {
+					type,
+					sub_type,
+					as_on_date  : formattedDate,
+					page,
+					page_size   : 10,
+					by_etd      : byEtd,
+					entity_code : entity_code.length > 0 ? entity_code : undefined,
+				},
+			});
+		} catch (err) {
+			console.log(err, 'err');
+		}
 	};
 
 	useEffect(() => {

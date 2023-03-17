@@ -21,7 +21,7 @@ function RevenueVisualization({ headerFilters }) {
 	const [byEtd, setByEtd] = useState(false);
 	const [isComponentInViewport, setisComponentInViewport] = useState(false);
 	const ref = useRef(null);
-	const inViewportBarChart = useIntersection(ref, '-200px'); // Trigger if 200px is visible from the element
+	const inViewportBarChart = useIntersection(ref, '-200px');
 	const { entity_code } = headerFilters || {};
 
 	const {

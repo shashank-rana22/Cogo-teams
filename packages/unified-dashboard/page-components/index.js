@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 

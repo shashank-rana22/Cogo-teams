@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-// import getField from '@cogo/business-modules/form/components';
 import styles from './styles.module.css';
 
 function FilterContent({
@@ -24,13 +23,10 @@ function FilterContent({
 
 	const mapping = {};
 
-	// Need to remove this with getField from controlled form components
 	const getField = (type) => {
 		const element = mapping[type] || null;
 
 		if (!element) {
-			// TODO remove this, and throw an error
-
 			return function () {
 				return (
 					<div>

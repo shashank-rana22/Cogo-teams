@@ -11,13 +11,12 @@ function DateFilter({ setFilters, range = 'current_month', setRange }) {
 	const [openCalendar, setOpenCalendar] = useState(false);
 	const [date, setDate] = useState({});
 
-	const handleApplyFilters = (key, val) => {
+	const handleApplyFilters = () => {
 		const dates = startDateOfMonth(date);
 		setFilters((prevFilters) => ({
 			...prevFilters,
 			...dates,
-			[key] : val,
-			page  : 1,
+			page: 1,
 		}));
 	};
 

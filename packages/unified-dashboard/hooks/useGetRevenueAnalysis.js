@@ -7,7 +7,6 @@ const useGetRevenueAnalysis = (headerFilters) => {
 	const { entity_code = [] } = headerFilters;
 
 	const [params, setParams] = useState();
-	const [revenueAnalysis, setRevenueAnalysis] = useState(null);
 	const scope = useSelector(({ general }) => general.scope);
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -18,22 +17,14 @@ const useGetRevenueAnalysis = (headerFilters) => {
 
 	const fetchRevenueAnalysisData = async () => {
 		try {
-			const res = await trigger({
+			await trigger({
 				params: {
 					...params,
 					entity_code: entity_code.length > 0 ? entity_code : undefined,
 				},
 			});
-			const { hasError } = res || {};
-			if (hasError) throw new Error();
-
-			if (res?.data?.invoiced_revenue) {
-				setRevenueAnalysis(res?.data);
-			}
-
-			return data;
 		} catch (err) {
-			return false;
+			console.log(err, 'err');
 		}
 	};
 
@@ -42,8 +33,8 @@ const useGetRevenueAnalysis = (headerFilters) => {
 	}, [params, JSON.stringify(entity_code)]);
 
 	return {
-		revenueAnalysisLoading: loading,
-		revenueAnalysis,
+		revenueAnalysisLoading : loading,
+		revenueAnalysis        : data,
 		params,
 		setParams,
 	};

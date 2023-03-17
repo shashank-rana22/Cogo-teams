@@ -13,7 +13,7 @@ function AccruedRevenue({
 	selectedFilter,
 }) {
 	const [isCollapsed, setIsCollapsed] = useState(false);
-	const { accruedRevenue, params, setParams, loading } =		useGetAccruedRevenue(headerFilters);
+	const { accruedRevenue, params, setParams, loading } =	useGetAccruedRevenue(headerFilters);
 	const { accrual_revenue = [], max_etd } = accruedRevenue || {};
 
 	return (

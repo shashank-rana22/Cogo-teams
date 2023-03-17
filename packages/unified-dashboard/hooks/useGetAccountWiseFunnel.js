@@ -14,12 +14,16 @@ const useGetAccountWiseFunnel = (byEtd, headerFilters) => {
 	}, { manual: false });
 
 	const getAccountWiseFunnel = async () => {
-		await trigger({
-			params: {
-				by_etd      : byEtd,
-				entity_code : entity_code.length > 0 ? entity_code : undefined,
-			},
-		});
+		try {
+			await trigger({
+				params: {
+					by_etd      : byEtd,
+					entity_code : entity_code.length > 0 ? entity_code : undefined,
+				},
+			});
+		} catch (err) {
+			console.log(err, 'error');
+		}
 	};
 
 	useEffect(() => {

@@ -20,14 +20,18 @@ const useGetOrganizationCohort = ({
 	}, { manual: false });
 
 	const getOrganizationCohort = async () => {
-		await trigger({
-			params: {
-				page,
-				page_size   : 5,
-				by_etd      : byEtd,
-				entity_code : entity_code.length > 0 ? entity_code : undefined,
-			},
-		});
+		try {
+			await trigger({
+				params: {
+					page,
+					page_size   : 5,
+					by_etd      : byEtd,
+					entity_code : entity_code.length > 0 ? entity_code : undefined,
+				},
+			});
+		} catch (err) {
+			console.log(err, 'err');
+		}
 	};
 
 	useEffect(() => {

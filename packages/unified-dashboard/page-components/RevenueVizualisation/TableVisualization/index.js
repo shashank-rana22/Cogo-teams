@@ -57,7 +57,7 @@ function TableVisualization({
 					/>
 				)}
 			</div>
-			{data.length > 0 && total_count > page_size && (
+			{data && (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"

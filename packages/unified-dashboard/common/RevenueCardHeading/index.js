@@ -1,9 +1,10 @@
 import { Tooltip } from '@cogoport/components';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import {
+	IcMArrowRotateDown,
+	IcMInfo,
+	IcMUpwardGraph,
+} from '@cogoport/icons-react';
 import React from 'react';
-
-import Info from '../../Icons/info.svg';
-import Revenue from '../../Icons/revenue.svg';
 
 import styles from './styles.module.css';
 
@@ -20,7 +21,7 @@ function RevenueCardHeading({
 		<div className={styles.container}>
 			<div className={styles.revenue_container}>
 				{showIcon && (
-					<Revenue className={styles.revenue} />
+					<IcMUpwardGraph className={styles.revenue} />
 				)}
 				<div className={styles.text_title}>
 					{title}
@@ -29,12 +30,11 @@ function RevenueCardHeading({
 				{enableFilter && (
 					<Tooltip
 						placement="top"
-						// animation="shift-toward"
 						content={<i>{toolTipContent}</i>}
 						maxWidth={500}
 					>
 						<div className={styles.flex_info}>
-							<Info className={styles.info} />
+							<IcMInfo className={styles.info} />
 						</div>
 					</Tooltip>
 				)}

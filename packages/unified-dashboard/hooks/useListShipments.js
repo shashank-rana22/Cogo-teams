@@ -3645,7 +3645,7 @@ const useListShipments = () => {
 	const fetchShipments = async () => {
 		try {
 			const { agent_id, start_date, end_date } = filters;
-			const res = await trigger({
+			await trigger({
 				params: {
 					filters: {
 						created_at_greater_than : start_date,
@@ -3654,11 +3654,8 @@ const useListShipments = () => {
 					},
 				},
 			});
-			const { hasError } = res || {};
-			if (hasError) throw new Error();
-			return data;
 		} catch (err) {
-			return false;
+			console.log(err, 'err');
 		}
 	};
 

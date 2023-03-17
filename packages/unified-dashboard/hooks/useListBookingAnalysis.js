@@ -17,7 +17,6 @@ const useGetBookingAnalysis = (headerFilters) => {
 		is_amount_in_rupee : false,
 		period_type        : selectedFilterTab,
 	});
-	const [bookingAnalysis, setBookingAnalysis] = useState(null);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_booking_analysis',
@@ -26,21 +25,14 @@ const useGetBookingAnalysis = (headerFilters) => {
 
 	const fetchBookingAnalysisData = async () => {
 		try {
-			const res = await trigger({
+			await trigger({
 				params: {
 					...params,
 					entity_code: entity_code.length > 0 ? entity_code : undefined,
 				},
 			});
-			const { hasError } = res || {};
-			if (hasError) throw new Error();
-			if (res?.data?.months_considered) {
-				setBookingAnalysis(res?.data);
-			}
-
-			return data;
 		} catch (err) {
-			return false;
+			console.log(err, 'err');
 		}
 	};
 
@@ -50,7 +42,7 @@ const useGetBookingAnalysis = (headerFilters) => {
 
 	return {
 		loading,
-		bookingAnalysis,
+		bookingAnalysis: data,
 		setParams,
 		params,
 		selectedFilterTab,

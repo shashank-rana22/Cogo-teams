@@ -24,13 +24,17 @@ const useGetMonthlyRevenue = ({
 	}, { manual: false });
 
 	const getMonthlyRevenue = async (page) => {
-		await trigger({
-			params: {
-				page        : page || filters.page,
-				by_etd      : byEtd,
-				entity_code : entity_code.length > 0 ? entity_code : undefined,
-			},
-		});
+		try {
+			await trigger({
+				params: {
+					page        : page || filters.page,
+					by_etd      : byEtd,
+					entity_code : entity_code.length > 0 ? entity_code : undefined,
+				},
+			});
+		} catch (err) {
+			console.log(err, 'err');
+		}
 	};
 
 	useEffect(() => {

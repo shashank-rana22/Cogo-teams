@@ -9,8 +9,6 @@ const useGetProfitability = (isInViewport) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [shipmentData, setShipmentData] = useState({});
 	const [filters, setFilters] = useState({
-		// start_date : '2023-02-11',
-		// end_date   : '2023-02-18',
 		...getDefaultFilters(range),
 		page: 1,
 	});
@@ -37,7 +35,7 @@ const useGetProfitability = (isInViewport) => {
 			});
 			setShipmentData(resp.data);
 		} catch (e) {
-			// console.log(e);
+			console.log(e, 'err');
 		}
 	};
 

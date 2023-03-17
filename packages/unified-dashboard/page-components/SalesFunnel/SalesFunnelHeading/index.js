@@ -1,9 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import { useState } from 'react';
 
 import Filter from '../../../common/Filter';
-import { startDateOfMonth } from '../../../utils/startDateOfMonth';
 
 import styles from './styles.module.css';
 
@@ -12,17 +10,6 @@ function SalesFunnelHeading({
 	range,
 	setRange,
 }) {
-	// eslint-disable-next-line no-unused-vars
-	const [date, setDate] = useState({});
-
-	const handleApplyFilters = () => {
-		const dates = startDateOfMonth(date);
-		setFilters((prevFilters) => ({
-			...prevFilters,
-			...dates,
-		}));
-	};
-
 	return (
 		<div className={styles.header}>
 			<div className={styles.heading_container}>
@@ -49,7 +36,7 @@ function SalesFunnelHeading({
 			</div>
 			<div>
 				<Filter
-					setFilters={handleApplyFilters}
+					setFilters={setFilters}
 					range={range}
 					setRange={setRange}
 				/>

@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 const useGetAccruedRevenue = (headerFilters) => {
 	const { entity_code = [] } = headerFilters || {};
 	const scope = useSelector(({ general }) => general.scope);
-	const [revenueAnalysis, setRevenueAnalysis] = useState(null);
 	const [params, setParams] = useState();
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -17,22 +16,14 @@ const useGetAccruedRevenue = (headerFilters) => {
 
 	const fetchRevenueData = async () => {
 		try {
-			const res = await trigger({
+			await trigger({
 				params: {
 					...params,
 					entity_code: entity_code.length > 0 ? entity_code : undefined,
 				},
 			});
-			const { hasError } = res || {};
-			if (hasError) throw new Error();
-
-			if (res?.data?.accrual_revenue) {
-				setRevenueAnalysis(res?.data);
-			}
-
-			return data;
 		} catch (err) {
-			return false;
+			console.log(err, 'err');
 		}
 	};
 
@@ -42,7 +33,7 @@ const useGetAccruedRevenue = (headerFilters) => {
 
 	return {
 		loading,
-		accruedRevenue: revenueAnalysis,
+		accruedRevenue: data,
 		params,
 		setParams,
 	};

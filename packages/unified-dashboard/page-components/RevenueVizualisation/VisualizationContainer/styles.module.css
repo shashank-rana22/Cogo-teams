@@ -18,13 +18,11 @@
 	margin-top: 20px;
 }
 
-.pagination_container {
-	margin-top: 8px;
-}
 
 .pagination {
 	display: flex;
 	justify-content: end;
+    margin: 0px 10px;
 }
 
 .container {

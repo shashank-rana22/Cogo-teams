@@ -30,7 +30,6 @@ const DesktopCard = ({
 		}
 		return cardData;
 	});
-	// className={styles.card_wrapper}
 	return cardRevenueData.map((val) => (
 		<div className={styles.all_card}>
 			<div className={borderColor(val) ? `${styles.card_wrapper_border}` : `${styles.card_wrapper}`}>

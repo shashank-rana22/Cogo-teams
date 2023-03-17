@@ -1,5 +1,4 @@
 import currencyCoversion from '../../../utils/currencyCoversion';
-// import getMonthYear from '../../../utils/getMonthYear';
 import getShortFormatNumber from '../../../utils/getShortFormatNumber';
 import CustomerCountCard from '../../CustomerCountCard';
 import styles from '../styles.module.css';
@@ -10,12 +9,6 @@ function MobileCard({
 	selectedFilterTab,
 	currency,
 }) {
-	// const borderColor = (item) => (
-	// 	selectedFilterTab === 'month'
-	// 		&& item?.month === getMonthYear().getMonth
-	// 		&& item?.year === getMonthYear().getYear
-	// );
-
 	const cardRevenueData = master.map((el) => {
 		const keyToUse = selectedFilterTab === 'week' ? 'day' : 'month';
 		const cardData = keys?.find((val) => val[keyToUse] === el[keyToUse]);

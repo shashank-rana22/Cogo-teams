@@ -42,12 +42,6 @@ function CommonData({
 
 	const rev = revenue_analysis[0] || [];
 
-	// const isClickable = isNextRevenueAllowed(
-	// 	selectedFilterTab,
-	// 	revenue_analysis[0],
-	// 	etd,
-	// );
-
 	const currentMonth = `${getMonthYear()?.getMonth}${getMonthYear()?.getYear}`;
 
 	if (loading) {

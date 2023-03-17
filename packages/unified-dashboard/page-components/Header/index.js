@@ -27,8 +27,6 @@ function Header({ headerFilters, setHeaderFilters }) {
 		});
 	};
 
-	// console.log('entityOptions', entityOptions);
-
 	const formatedEntityOptions = entityOptions.options.map((val) => {
 		const { entity_code : entity, business_name, ledger_currency } = val;
 		return {
@@ -45,10 +43,6 @@ function Header({ headerFilters, setHeaderFilters }) {
 			value: entity,
 		};
 	});
-
-	// console.log('format', formatedEntityOptions);
-
-	// const options = { ...entityOptions, options: formatedEntityOptions };
 
 	return (
 		<div className={styles.container}>
