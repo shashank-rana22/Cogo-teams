@@ -9,7 +9,13 @@ const getControls = () => [
 		name        : 'test_duration',
 		label       : 'Duration',
 		type        : 'input',
-		placeholder : '00 h : 00 min',
+		placeholder : '00 h',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'test_duration',
+		type        : 'input',
+		placeholder : '00 min',
 		rules       : { required: 'This is required' },
 	},
 	{
