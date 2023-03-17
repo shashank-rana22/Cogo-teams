@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -10,7 +10,7 @@ import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
-function ReviewAndCriteria({ setActiveStepper }) {
+function ReviewAndCriteria() {
 	const router = useRouter();
 	const test_id = router.query?.id;
 	const {
@@ -19,6 +19,11 @@ function ReviewAndCriteria({ setActiveStepper }) {
 		getTest,
 	} = useGetTest({ test_id });
 
+	const navigate = () => {
+		const href = '/learning/faq/create/';
+		router.push(href, href);
+	};
+
 	useEffect(() => {
 		if (!isEmpty(test_id)) { getTest({ test_id }); }
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,7 +31,7 @@ function ReviewAndCriteria({ setActiveStepper }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<IcMArrowBack width={20} height={20} />
+				<IcMArrowBack width={20} height={20} onClick={navigate} />
 				<div className={styles.title}> Review and Set Criteria </div>
 			</div>
 			<div className={styles.subcontainer}>
@@ -58,6 +63,28 @@ function ReviewAndCriteria({ setActiveStepper }) {
 				</div>
 			</div>
 			<QuestionsAndDistribution loading={loading} data={data?.set_data} />
+			<DurationAndValidity />
+			<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
+				<Button
+					loading={loading}
+					size="md"
+					themeType="tertiary"
+					style={{ marginRight: '10px' }}
+					onClick={() => {
+					}}
+				>
+					Save As Draft
+				</Button>
+				<Button
+					size="md"
+					themeType="primary"
+					onClick={() => {
+					}}
+				>
+					Publish Test
+
+				</Button>
+			</div>
 		</div>
 	);
 }

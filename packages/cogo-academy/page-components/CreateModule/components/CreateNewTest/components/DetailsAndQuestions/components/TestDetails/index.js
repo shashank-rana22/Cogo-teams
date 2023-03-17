@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Router } from '@cogoport/next';
 
-import getElementController from '../../../../../../configs/getElementController';
+import getElementController from '../../../../../../../../configs/getElementController';
 
 import getControls from './controls';
 import styles from './styles.module.css';
