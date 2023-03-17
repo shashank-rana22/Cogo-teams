@@ -13,7 +13,6 @@ function GraphUI() {
 
 	const { graphData = [] } = useGetFormattedGraphData({ graph_data });
 
-<<<<<<< HEAD
 	return (
 		<>
 			<Filters />
@@ -37,102 +36,7 @@ function GraphUI() {
 							max     : 'auto',
 							stacked : true,
 							reverse : false,
-=======
-  return (
-	<>
-		<Filters />
-		<div
-			style={{
-          display         : 'flex',
-          margin          : '20px',
-          borderRadius    : '10px',
-          height          : '400px',
-          backgroundColor : '#FFF',
-			}}
-		>
-			<div style={{ width: '100%' }}>
-				<ResponsiveLine
-					data={graphData}
-					margin={{ right: 10, top: 50, bottom: 50, left: 60 }}
-					xScale={{ type: 'point' }}
-					yScale={{
-              type    : 'linear',
-              min     : 'auto',
-              max     : 'auto',
-              stacked : true,
-              reverse : false,
-					}}
-					yFormat=" >-.2f"
-					axisTop={null}
-					axisRight={null}
-					axisBottom={{
-              orient         : 'bottom',
-              tickSize       : 5,
-              tickPadding    : 5,
-              tickRotation   : 0,
-              legend         : 'transportation',
-              legendOffset   : 36,
-              legendPosition : 'middle',
-					}}
-					axisLeft={{
-              orient         : 'left',
-              tickSize       : 5,
-              tickPadding    : 5,
-              tickRotation   : 0,
-              legend         : 'count',
-              legendOffset   : -40,
-              legendPosition : 'middle',
-					}}
-					pointSize={10}
-					pointColor={{ theme: 'background' }}
-					pointBorderWidth={2}
-					pointBorderColor={{ from: 'serieColor' }}
-					pointLabelYOffset={-14}
-					useMesh
-					legends={[
-              {
-                anchor            : 'upper-left',
-                direction         : 'row',
-                justify           : false,
-                translateX        : 100,
-                translateY        : 0,
-                itemsSpacing      : 120,
-                itemDirection     : 'left-to-right',
-                itemWidth         : 90,
-                itemHeight        : 90,
-                itemOpacity       : 0.75,
-                symbolSize        : 16,
-                symbolShape       : 'circle',
-                symbolBorderColor : 'rgba(0, 0, 0, .5)',
-                effects           : [
-                  {
-                    on    : 'hover',
-                    style : {
-                      itemBackground : 'rgba(0, 0, 0, .03)',
-                      itemOpacity    : 1,
-                    },
-                  },
-                ],
-              },
-					]}
-				/>
-			</div>
 
-			<div className={styles.pie_container}>
-				<div className={styles.inner_pie}>
-					<ResponsivePie
-						data={pie_data}
-						margin={{ top: 50, right: 10, bottom: 80, left: 40 }}
-						innerRadius={0}
-						padAngle={0}
-						cornerRadius={0}
-						activeOuterRadiusOffset={8}
-						borderWidth={1}
-						colors={{ datum: 'data.color' }}
-						borderColor={{
-                from      : 'color',
-                modifiers : [['darker', 0.2]],
->>>>>>> cbaad80ed7882ea141c0b2b64bdeacd7feb98dbc
 						}}
 						yFormat=" >-.2f"
 						axisTop={null}
@@ -168,7 +72,7 @@ function GraphUI() {
 								justify           : false,
 								translateX        : 100,
 								translateY        : 0,
-								itemsSpacing      : 40,
+								itemsSpacing      : 120,
 								itemDirection     : 'left-to-right',
 								itemWidth         : 90,
 								itemHeight        : 90,
