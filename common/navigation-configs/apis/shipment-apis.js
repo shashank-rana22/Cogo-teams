@@ -1288,11 +1288,6 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
-		api          : 'update_shipment_service',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'list_services',
 		access_type  : 'private',
 		service_name : 'bookings',

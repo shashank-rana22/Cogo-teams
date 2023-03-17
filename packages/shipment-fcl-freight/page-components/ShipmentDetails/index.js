@@ -2,6 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useMemo } from 'react';
 
 import useGetShipment from '../../hooks/useGetShipment';
+import useGetShipmentTimeLine from '../../hooks/useGetShipmentTimeline';
 import useListShipmentServices from '../../hooks/useListShipmentServices';
 
 import ShipmentInfo from './ShipmentInfo';
@@ -16,16 +17,22 @@ function ShipmentDetails() {
 
 	const { servicesGet } = useListShipmentServices({ shipment_data });
 
+	const {
+		loading: shipmentTimelineLoading,
+		getShipmentTimeline, timelineData,
+	} = useGetShipmentTimeLine({ shipment_data });
+
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
-	}), [get, servicesGet]);
+		getShipmentTimeline,
+	}), [get, servicesGet, getShipmentTimeline]);
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
 			<ShipmentInfo />
 			<TopBar />
-			<Timeline />
+			<Timeline timelineData={timelineData} loading={shipmentTimelineLoading} />
 			<Tab />
 		</ShipmentDetailContext.Provider>
 	);
