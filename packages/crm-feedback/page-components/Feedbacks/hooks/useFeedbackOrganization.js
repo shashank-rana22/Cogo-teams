@@ -6,7 +6,7 @@ import { useMemo, useState, useEffect, useCallback } from 'react';
 
 import styles from '../styles.module.css';
 
-const useFeedbackTableData = ({ organization_id = '' }) => {
+const useFeedbackOrganization = ({ organization_id = '' }) => {
 	const [selectAll, setSelectAll] = useState(false);
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
 
@@ -278,4 +278,4 @@ const useFeedbackTableData = ({ organization_id = '' }) => {
 	};
 };
 
-export default useFeedbackTableData;
+export default useFeedbackOrganization;

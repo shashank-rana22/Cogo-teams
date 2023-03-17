@@ -5,10 +5,10 @@
 	height: max-content;
 	background: #fff;
 	padding: 24px 24px;
+	
 }
 
 .row {
-	display: flex;
 	flex-direction: row;
 }
 

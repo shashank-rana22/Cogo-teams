@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 import styles from '../styles.module.css';
 
-const useRequestOrganization = () => {
+const useRequestTableData = () => {
 	const router = useRouter();
 
 	const [filters, setFilters] = useState({});
@@ -31,17 +31,14 @@ const useRequestOrganization = () => {
 		}));
 	};
 
-	const getListTable = () => {
+	useEffect(() => {
 		trigger({
 			params: {
 				...params,
 				filters: { ...params?.filters, ...filters },
 			},
 		});
-	};
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => getListTable(), [params, filters]);
+	}, [params, filters, trigger]);
 
 	const onChangeFilters = (values) => {
 		setFilters((previousState) => ({
@@ -102,7 +99,7 @@ const useRequestOrganization = () => {
 			key      : 'organization',
 			id       : 'organization',
 			accessor : ({ organization = '' }) => (
-				<section className={styles.table_cell}>
+				<section>
 					{organization || '__'}
 				</section>
 			),
@@ -132,22 +129,22 @@ const useRequestOrganization = () => {
 			key      : 'cogo_entity',
 			id       : 'cogo_entity',
 			accessor : ({ cogo_entity = '' }) => (
-				<section className={styles.table_cell}>
+				<section>
 					{startCase(cogo_entity) || '__'}
 				</section>
 			),
 		},
 		{
 			Header   : <div>STATUS</div>,
-			key      : 'correction',
-			id       : 'correction',
+			key      : 'status',
+			id       : 'status',
 			accessor : ({
 				status = '', organization_id = '', organization = '',
 			}) => (
 				<section className={styles.view}>
 					<Pill
 						size="md"
-						color={status === 'Request Created' ? ('blue') : ('green')}
+						color={status !== 'Request Created' ? ('green') : ('blue')}
 					>
 						{status || 'Status not found'}
 					</Pill>
@@ -155,6 +152,7 @@ const useRequestOrganization = () => {
 						size="sm"
 						themeType="secondary"
 						onClick={() => {
+							console.log('router', router);
 							router.push(`/feedbacks/${organization_id}?organization=${organization}&status=${status}`);
 						}}
 					>
@@ -165,8 +163,6 @@ const useRequestOrganization = () => {
 			),
 		},
 	];
-
-	console.log(data);
 
 	return {
 		columns,
@@ -181,4 +177,4 @@ const useRequestOrganization = () => {
 	};
 };
 
-export default useRequestOrganization;
+export default useRequestTableData;

@@ -1,6 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
-import useFeedbackListData from '../../../hooks/useFeedbackListData';
+import useFeedbackOrganization from '../../../hooks/useFeedbackOrganization';
 import CrmTable from '../../commons/CrmTable';
 import EnrichmentRequest from '../../EnrichmentRequest';
 
@@ -14,7 +14,7 @@ function FeedbacksReceived({ organization_id = '', setActiveTab = () => {} }) {
 		onChangeParams = () => {},
 		paginationData = {},
 		checkedRowsId = [],
-	} = useFeedbackListData({ organization_id });
+	} = useFeedbackOrganization({ organization_id });
 
 	const { page, page_limit, total_count } = paginationData;
 

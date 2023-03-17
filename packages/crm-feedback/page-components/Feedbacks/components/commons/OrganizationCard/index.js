@@ -1,12 +1,19 @@
 import { Avatar, Pill } from '@cogoport/components';
+import { forwardRef } from 'react';
 
 import styles from './styles.module.css';
 
-function OrganizationCard({ organization = '', status = '' }) {
-	const str = organization;
-	const words = str.split(' ');
-	words.splice(-1, 1);
-	const avatarName = words.join(' ');
+function OrganizationCard(props, ref) {
+	const {
+		current : {
+			organization = '',
+			organization_id = '',
+			status = '',
+		},
+	} = ref;
+	const str = organization || '';
+	const avatarName = `${str.split(' ')[0]} ${str.split(' ')[1] || ''}`;
+
 	return (
 		<div className={styles.card}>
 			<Avatar personName={avatarName || '--'} size="72px" />
@@ -29,4 +36,4 @@ function OrganizationCard({ organization = '', status = '' }) {
 	);
 }
 
-export default OrganizationCard;
+export default forwardRef(OrganizationCard);

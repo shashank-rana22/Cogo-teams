@@ -1,6 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
-import useRequestOrganization from '../../../hooks/useRequestOrganization';
+import useRequestTableData from '../../../hooks/useRequestTableData';
 import CrmTable from '../../commons/CrmTable';
 import Filters from '../../commons/Filters';
 import Statistics from '../../commons/Statistics';
@@ -16,7 +16,7 @@ function RequestsSent({ activeTab = '' }) {
 		onChangeFilters = () => {},
 		onChangeParams = () => {},
 		paginationData = {},
-	} = useRequestOrganization();
+	} = useRequestTableData();
 
 	const { page, page_limit, total_count } = paginationData;
 

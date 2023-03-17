@@ -1,4 +1,5 @@
 import { useSelector } from '@cogoport/store';
+import { useState, useRef } from 'react';
 
 import Header from './components/commons/Header';
 import OrganizationCard from './components/commons/OrganizationCard';
@@ -15,10 +16,16 @@ function Feedbacks() {
 		},
 	} = useSelector((state) => state);
 
+	const routeDetails = useRef({
+		organization,
+		organization_id,
+		status,
+	});
+
 	return (
 		<>
 			<Header />
-			<OrganizationCard organization={organization} status={status} />
+			<OrganizationCard ref={routeDetails} />
 			<PrimaryTabs organization_id={organization_id} />
 		</>
 

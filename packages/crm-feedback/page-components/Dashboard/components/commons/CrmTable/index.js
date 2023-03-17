@@ -12,7 +12,7 @@ function CrmTable({ columns = [], data = [], loading = false }) {
 				height={280}
 				width={440}
 				emptyText="No records found"
-				textSize="24px"
+				textSize="20px"
 				flexDirection="column"
 			/>
 		);

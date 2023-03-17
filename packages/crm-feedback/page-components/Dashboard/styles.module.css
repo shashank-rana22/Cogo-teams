@@ -5,7 +5,7 @@
 .feedback{
     display: flex;
     align-items: center;
-    min-width: 300px;
+    min-width: 156px;
 }
 
 .tooltip_text{
@@ -17,12 +17,12 @@
 }
 
 .table_cell{
-    min-width: 180px;
+    min-width: 120px;
 }
 
 .view{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 280px;
+    max-width: 280px;
 }

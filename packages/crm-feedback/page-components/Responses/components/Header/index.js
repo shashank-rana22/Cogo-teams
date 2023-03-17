@@ -3,13 +3,16 @@ import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ organization = '' }) {
 	const router = useRouter();
 
 	return (
-		<button className={styles.back_button} onClick={() => router.back()}>
+		<button
+			className={styles.back_button}
+			onClick={() => router.back()}
+		>
 			<IcMArrowBack width="32px" height="20px" />
-			CRM Feedback Dashboard
+			{organization}
 		</button>
 
 	);

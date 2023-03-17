@@ -4,7 +4,7 @@ function EmptyState({
 	height = 125,
 	width = 225,
 	emptyText = 'Data not found',
-	flexDirection = 'row',
+	flexDirection = 'column',
 	textSize = '16px',
 }) {
 	return (
