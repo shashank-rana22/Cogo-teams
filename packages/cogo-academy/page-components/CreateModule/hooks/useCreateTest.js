@@ -20,8 +20,8 @@ function useCreateTest({ setTestId, setActiveStepper }) {
 				},
 			});
 			setTestId(res?.data?.id);
-			const as = `/learning/faq/create/test-module/create?id=${res?.data?.id}`;
-			const href = `/learning/faq/create/test-module/create?id=${res?.data?.id}`;
+			const as = `/learning/faq/create/test-module/create-test?id=${res?.data?.id}`;
+			const href = `/learning/faq/create/test-module/create-test?id=${res?.data?.id}`;
 			router.push(href, as);
 			setActiveStepper('review_and_criteria');
 			Toast.success('Created Successfully');
