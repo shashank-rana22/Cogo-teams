@@ -63,15 +63,15 @@ function CommunicationActivity({ communication = {} }) {
 												{subject && (
 													<div className={styles.user_message}>
 														You have a message On
-														{' '}
-														{format(created_at, 'dd MMM YYYY')}
-														{sender && (
-															<div>
-																from
-																{' '}
-																{sender}
-															</div>
-														)}
+														<span>
+															{format(created_at, 'dd MMM YYYY')}
+															{sender && (
+																<div>
+																	from
+																	<span>{sender}</span>
+																</div>
+															)}
+														</span>
 													</div>
 												)}
 												{subject === '' && (
@@ -82,7 +82,7 @@ function CommunicationActivity({ communication = {} }) {
 										<div className={styles.user_avatar}>
 											<Avatar
 												src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
-												alt="img"
+												alt="agent-image"
 												disabled={false}
 												size="30px"
 											/>

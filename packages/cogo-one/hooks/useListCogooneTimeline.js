@@ -87,9 +87,9 @@ const useListCogooneTimeline = ({
 	}, [activeSubTab, getCogooneTimeline, lead_user_id, user_id]);
 
 	return {
-		data,
+		timeLineData    : data || {},
 		getCogooneTimeline,
-		loading,
+		timeLineLoading : loading,
 	};
 };
 

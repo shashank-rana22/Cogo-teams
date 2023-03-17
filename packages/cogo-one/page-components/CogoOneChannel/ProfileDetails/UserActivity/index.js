@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Tabs, TabPanel, Popover, Pagination } from '@cogoport/components';
 import { IcMFdollar, IcMFilter, IcMCampaignTool, IcMPlatformDemo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -13,6 +12,8 @@ import getUserActivityComponent from '../../../../utils/getUserActivityComponent
 import Filters from './Filters';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
+
+const EmptyFunction = () => {};
 
 function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessageData }) {
 	const [activityTab, setActivityTab] = useState('transactional');
@@ -32,8 +33,8 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		loading = false,
 		data = {},
 		filters,
-		setFilters,
-		fetchActivityLogs = () => {},
+		setFilters = EmptyFunction,
+		fetchActivityLogs = EmptyFunction,
 	} = useGetOmnichannelActivityLogs({
 		activeVoiceCard,
 		activeTab,
@@ -46,9 +47,10 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		pagination,
 		setPagination,
 	});
+
 	const {
-		loading: timeLineLoading = false,
-		data: timeLineData = {},
+		timeLineLoading = false,
+		timeLineData = {},
 	} = useListCogooneTimeline({
 		activeSubTab,
 		id,
@@ -62,16 +64,16 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
-	const { list: timeLineList = [], total_count: count } = timeLineData || {};
+	const { list: timeLineList = [], total: count } = timeLineData || {};
 
 	let list = [];
 	let total_count;
 	if (activityTab === 'communication' || activityTab === 'transactional') {
 		list = data?.[activityTab]?.list || [];
-		total_count = data?.[activityTab]?.total_count || '0';
+		total_count = data?.[activityTab]?.total || '0';
 	} else {
 		list = data?.[activityTab]?.spot_searches?.list || [];
-		total_count = data?.[activityTab]?.spot_searches?.total_count || '0';
+		total_count = data?.[activityTab]?.spot_searches?.total || '0';
 	}
 
 	useEffect(() => {
@@ -82,7 +84,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		setFilters(null);
 		setActiveSubTab('channels');
 		setPagination(1);
-	}, [activityTab]);
+	}, [activityTab, setFilters]);
 
 	const handleFilters = (val) => {
 		setPagination(1);
@@ -94,7 +96,10 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		fetchActivityLogs();
 	};
 
-	useEffect(() => { setPagination(1); setFilters(null); }, [activeSubTab]);
+	useEffect(() => {
+		setPagination(1);
+		setFilters(null);
+	}, [activeSubTab, setFilters]);
 
 	const emptyList = activeSubTab !== 'channels' ? timeLineList : list;
 	const emptyCheck = (!user_id && !lead_user_id) || isEmpty(emptyList);
@@ -170,6 +175,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 										setFilters={setFilters}
 										handleFilters={handleFilters}
 										handleReset={handleReset}
+										loading={loading}
 									/>
 								)}
 								visible={filterVisible}
@@ -178,7 +184,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 								<IcMFilter
 									width={20}
 									height={20}
-									onClick={() => setFilterVisible(!filterVisible)}
+									onClick={() => setFilterVisible((prev) => !prev)}
 								/>
 							</Popover>
 							{!isEmpty(filters) && <div className={styles.filters_applied} />}

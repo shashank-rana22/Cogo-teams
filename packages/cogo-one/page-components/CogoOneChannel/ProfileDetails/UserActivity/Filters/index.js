@@ -13,6 +13,7 @@ function Filters({
 	filters: appliedFilters = null,
 	handleFilters = () => {},
 	handleReset = () => {},
+	loading = false,
 }) {
 	const { FILTERS_MAPPING } = filterOptions();
 	const [values, setValues] = useState(null);
@@ -67,6 +68,7 @@ function Filters({
 					themeType="accent"
 					onClick={() => handleFilters(values)}
 					disabled={emptyCheck}
+					loading={loading}
 				>
 					Apply
 				</Button>
