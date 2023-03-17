@@ -5,7 +5,7 @@ import useListFaqQuestions from '../../../../../../FAQs/hooks/useListFaqQuestion
 import AllQuestions from './AllQuestions';
 import styles from './styles.module.css';
 
-function QuestionsList() {
+function AudienceList() {
 	const props = useListFaqQuestions({});
 	return (
 		<div className={styles.container}>
@@ -14,4 +14,4 @@ function QuestionsList() {
 	);
 }
 
-export default QuestionsList;
+export default AudienceList;

@@ -45,7 +45,7 @@ function Tabbase() {
 						</>
 					)}
 				>
-					<Users />
+					<Users props={props} />
 				</TabPanel>
 			</Tabs>
 		</div>

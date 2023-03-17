@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import AllQuestionCardView from './AllUsers';
+import AllUsers from './AllUsers';
 import Filter from './Filter';
 import AllTopicCardView from './UsersGroup';
 
@@ -10,7 +10,7 @@ function Users({ props }) {
 	return (
 		<div>
 			<Filter selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
-			{selectedItem === 'All_Users' ? <AllQuestionCardView {...props?.data} />
+			{selectedItem === 'All_Users' ? <AllUsers {...props?.data} />
 				: <AllTopicCardView />}
 		</div>
 	);
