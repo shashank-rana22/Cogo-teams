@@ -6,16 +6,10 @@ const getControls = () => [
 		rules : { required: 'This is required' },
 	},
 	{
-		name        : 'test_duration_hr',
-		label       : 'Duration',
-		type        : 'number',
-		placeholder : '00 hr',
-		rules       : { required: 'This is required' },
-	},
-	{
 		name        : 'test_duration_min',
+		label       : 'Duration(in min)',
 		type        : 'number',
-		placeholder : '00 min',
+		placeholder : '0',
 		rules       : { required: 'This is required', max: 60 },
 	},
 	{
