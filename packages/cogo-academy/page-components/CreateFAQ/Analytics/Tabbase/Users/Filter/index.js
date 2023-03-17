@@ -6,9 +6,7 @@ import styles from './styles.module.css';
 function Filter({ selectedItem, setSelectedItem }) {
 	const [date, setDate] = useState('');
 	const options = [
-		{ label: 'All Users', value: 'All_Users' },
 		{ label: 'Users Groups', value: 'Users Group' },
-
 	];
 
 	return (

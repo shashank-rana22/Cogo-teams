@@ -5,7 +5,7 @@ import Filter from './Filter';
 import AllTopicCardView from './UsersGroup';
 
 function Users({ props }) {
-	const [selectedItem, setSelectedItem] = useState('All_Users');
+	const [selectedItem, setSelectedItem] = useState('Users Group');
 
 	return (
 		<div>
