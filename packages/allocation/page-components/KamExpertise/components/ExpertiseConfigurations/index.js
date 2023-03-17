@@ -54,7 +54,8 @@ function ViewAllConfigs() {
 
 				<CurrentConfigurations
 					handleClick={handleClick}
-					selectedVersion={selectedVersion} //! not used yet
+					selectedVersion={selectedVersion}
+					setSelectedVersion={setSelectedVersion}
 				/>
 
 				<div className={styles.tab_list} ref={scrollToRef}>

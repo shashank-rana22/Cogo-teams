@@ -23,9 +23,15 @@ function addValidationRulesToControls(item) {
 function ResponseCard({
 	setCreateKam = () => { },
 	dataLength,
+	selectedVersion,
 	refetch,
 }) {
-	const { formProps, onCreate, createLoading } = useCreateKamLevel({ dataLength, setCreateKam, refetch });
+	const {
+		formProps,
+		onCreate,
+		createLoading,
+	} = useCreateKamLevel({ dataLength, setCreateKam, refetch, selectedVersion });
+
 	const { control, handleSubmit, formState: { errors } } = formProps;
 
 	const controlsWithValidations = addValidationRulesToControls(controls);

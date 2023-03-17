@@ -15,11 +15,10 @@ const HEADER_DATA = {
 	published_by   : 'Cogoparth',
 };
 
-function Header() {
+function Header({ setSelectedVersion, selectedVersion }) {
 	const [mode, setMode] = useState('');
 	const [showModal, setShowModal] = useState(false);
-	const [selectedVersion, setSelectedVersion] = useState(0);
-	console.log('selected version::', selectedVersion);
+	// const [selectedVersion, setSelectedVersion] = useState(0);
 
 	return (
 		<div className={styles.container}>
