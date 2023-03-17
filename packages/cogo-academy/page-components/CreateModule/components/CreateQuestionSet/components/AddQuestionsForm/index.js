@@ -18,10 +18,11 @@ function AddQuestionsForm({
 	setAllKeysSaved,
 	editDetails,
 	setEditDetails,
+	from,
 }) {
 	const { test_questions } = data || {};
 
-	if (isEmpty(questionSetId)) {
+	if (isEmpty(questionSetId) && from !== 'test') {
 		return null;
 	}
 
@@ -80,19 +81,21 @@ function AddQuestionsForm({
 				/>
 			) : null}
 
-			<div className={styles.button_container}>
-				<Button
-					type="button"
-					disabled={!allKeysSaved}
-					themeType="secondary"
-					onClick={() => {
-						setSavedQuestionDetails((prev) => [...prev, { id: new Date().getTime(), isNew: true }]);
-						setAllKeysSaved(false);
-					}}
-				>
-					+ Add Another Question
-				</Button>
-			</div>
+			{from !== 'test' ? (
+				<div className={styles.button_container}>
+					<Button
+						type="button"
+						disabled={!allKeysSaved}
+						themeType="secondary"
+						onClick={() => {
+							setSavedQuestionDetails((prev) => [...prev, { id: new Date().getTime(), isNew: true }]);
+							setAllKeysSaved(false);
+						}}
+					>
+						+ Add Another Question
+					</Button>
+				</div>
+			) : null}
 		</div>
 	);
 }

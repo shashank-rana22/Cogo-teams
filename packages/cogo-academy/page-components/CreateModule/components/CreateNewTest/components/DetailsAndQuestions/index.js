@@ -3,7 +3,6 @@ import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
 import useCreateTest from '../../../../hooks/useCreateTest';
-import AddQuestionsForm from '../../../CreateQuestionSet/components/AddQuestionsForm';
 
 import NewQuestion from './components/NewQuestion';
 import QuestionSet from './components/QuestionSet';
@@ -14,13 +13,17 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 	const [showNewQuestion, setShowNewQuestion] = useState(false);
 	const [idArray, setIdArray] = useState([]);
+
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
+
 	const { control, formState:{ errors }, watch } = useForm();
+
 	return (
 		<div className={styles.container}>
 			<TestDetails control={control} watch={watch} errors={errors} />
-			{!showQuestionSet && !showNewQuestion && (
-				<div className={styles.btn_container}>
+
+			<div className={styles.btn_container}>
+				{!showQuestionSet ? (
 					<Button
 						onClick={() => setShowQuestionSet(true)}
 						size="md"
@@ -29,6 +32,8 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 					>
 						From Existing Question Set
 					</Button>
+				) : null}
+				{!showNewQuestion ? (
 					<Button
 						onClick={() => setShowNewQuestion(true)}
 						size="md"
@@ -36,19 +41,14 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 					>
 						+ Add New Question
 					</Button>
-				</div>
-			)}
-			{showQuestionSet && <QuestionSet setIdArray={setIdArray} />}
-			{showNewQuestion && <NewQuestion />}
-			{showNewQuestion && <AddQuestionsForm />}
+				) : null}
 
-			{/* <Button
-				onClick={() => setShowNewQuestion(true)}
-				size="md"
-				themeType="secondary"
-			>
-				+ Add New Question
-			</Button> */}
+			</div>
+
+			{showQuestionSet && <QuestionSet setIdArray={setIdArray} setShowQuestionSet={setShowQuestionSet} />}
+
+			{showNewQuestion && <NewQuestion setShowNewQuestion={setShowNewQuestion} />}
+
 			{(showQuestionSet || showNewQuestion) && (
 				<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 					<Button
@@ -73,7 +73,6 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 						}}
 					>
 						Review And Set Validity
-
 					</Button>
 				</div>
 			)}

@@ -1,13 +1,12 @@
 import { Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill } from '@cogoport/components';
 import { IcMSearchlight, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
-import { useState } from 'react';
 
 import useGetTestQuestionSets from '../../../../../../hooks/useGetTestQuestionSets';
 
 import styles from './styles.module.css';
 
-function QuestionSet({ setIdArray }) {
+function QuestionSet({ setIdArray, setShowQuestionSet }) {
 	const { data, loading } = useGetTestQuestionSets();
 	// const [idArray, setIdArray] = useState([]);
 	const handleChange = ({ event, id }) => {
@@ -119,7 +118,11 @@ function QuestionSet({ setIdArray }) {
 	return (
 		<div className={styles.container}>
 			<Breadcrumb>
-				<Breadcrumb.Item label="Add Questions to test" className={styles.breadcrumb_item} />
+				<Breadcrumb.Item
+					onClick={() => setShowQuestionSet(false)}
+					label="Add Questions to test"
+					className={styles.breadcrumb_item}
+				/>
 				<Breadcrumb.Item label="From Question Set" />
 			</Breadcrumb>
 			<p>Select from applicable Question Sets made earlier to get probable questions for the Test</p>
