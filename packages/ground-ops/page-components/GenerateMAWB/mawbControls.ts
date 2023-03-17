@@ -327,9 +327,6 @@ const mawbControls = (disableClass) => ({
 			maxLength   : 150,
 			placeholder : 'Remarks',
 			rows        : 3,
-			rules       : {
-				required: 'Remarks is Required',
-			},
 		},
 		{
 			name               : 'agentOtherCharges',
@@ -504,6 +501,15 @@ const mawbControls = (disableClass) => ({
 			rules       : {
 				required: 'Place is Required',
 			},
+		},
+		{
+			name        : 'shipperSignature',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Signature of Shipper or his Agent',
+			span        : 5,
+			placeholder : 'Shipper Signature',
+			rules       : { required: 'Shipper Signature is Required' },
 		},
 	],
 });
