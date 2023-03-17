@@ -1701,8 +1701,19 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'get_allocation_requests',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
 	],
 	supply_crm: [
+		{
+			feature      : 'supply_crm',
+			api          : 'list_organization_service_expertises',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 		{
 			api          : 'get_bank_details',
 			access_type  : 'private',
@@ -4148,10 +4159,22 @@ const partner = {
 			defaultparameter : 'supply_dashboard:allowed',
 		},
 		{
+			api          : 'list_location_expert_service_providers',
+			access_type  : 'private',
+			feature      : 'disliked_rates',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_fcl_cfs_rate',
 			access_type  : 'private',
 			service_name : 'fcl_cfs_rate',
 			feature      : 'rfq',
+		},
+		{
+			api          : 'get_contract_previous_service_providers',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+			feature      : 'live_booking',
 		},
 	],
 	operations_dashboard: [
@@ -4729,6 +4752,11 @@ const partner = {
 		},
 		{
 			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_service_expertises',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -7452,6 +7480,12 @@ const partner = {
 			api         : 'post_translation_translate',
 			access_type : 'private',
 		},
+
+		{
+			api         : 'post_translation_translate_bulk',
+			access_type : 'private',
+		},
+
 	],
 	reports: [
 		{
@@ -10370,6 +10404,10 @@ const partner = {
 	ground_ops: [
 		{
 			api         : 'get_air_coe_pending_tasks_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_documents_list',
 			access_type : 'private',
 		},
 		{
