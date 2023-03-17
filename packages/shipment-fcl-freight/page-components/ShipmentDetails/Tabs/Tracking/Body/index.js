@@ -1,150 +1,10 @@
+import React, { useState, useEffect } from 'react';
+import useOceanRoute from '../hooks/useOceanRoute';
+import getAirPoints from '../helper/getAirPoints';
 import TrackingData from "./TrackingData";
 import TrackingMap from "./TrackingMap";
+import LoadingState from './LoadingState';
 import styles from "./styles.module.css";
-
-const data = [
-  {
-    type: "CONTAINER_NO",
-    input: "MRKU9712946",
-    container_details: [
-      {
-        container_no: "MRKU9712946",
-        shipping_line_id: "c3649537-0c4b-4614-b313-98540cffcf40",
-        container_height: null,
-        container_length: null,
-        container_iso_code: null,
-        container_description: null,
-      },
-    ],
-    shipping_line_id: "c3649537-0c4b-4614-b313-98540cffcf40",
-    action: [
-      {
-        action: "Everything is per expected schedule",
-        message: "Shipment is on track",
-        severity: "LOW",
-        container_no: "MRKU9712946",
-      },
-    ],
-    poc_details: [],
-    shipment_details: [{ container_no: "MRKU9712946" }],
-    shipment_info: null,
-    id: "3477632e-d6f6-4327-a78f-7cd5f157bce3",
-    status: "active",
-    tracking_status: "Found",
-    data: [
-      {
-        container_no: "MRKU9712946",
-        vessel_eta_details: {
-          vessel_eta_details: null,
-          vessel_name: "MAERSK SENTOSA",
-        },
-        tracking_data: [
-          {
-            id: "776217d4-c876-4a70-b524-a7aec4ae1f4b",
-            saas_container_timeline_id: "939e7304-ff38-4077-afec-366a48e0bdb5",
-            milestone: "Empty Container Pickup",
-            milestone_metadata: null,
-            transport_mode: "TRUCK",
-            vessel_name: "MAERSK SENTOSA",
-            voyage_no: "308W",
-            location:
-              "Dnyaneshwar Empty Park Depot 2, Jawaharlal Nehru, MAHARASHTRA, India",
-            latitude: null,
-            longitude: null,
-            event_date: "2023-02-28T20:30:00.000Z",
-            alert_name: null,
-            alert_level: null,
-            alert_action: null,
-            alert_details: null,
-            sequence: 1,
-          },
-          {
-            id: "a4f9f48f-c17d-452b-9841-1c9be029097f",
-            saas_container_timeline_id: "939e7304-ff38-4077-afec-366a48e0bdb5",
-            milestone: "Gate In",
-            milestone_metadata: null,
-            transport_mode: "VESSEL",
-            vessel_name: "MAERSK SENTOSA",
-            voyage_no: "308W",
-            location:
-              "Jawaharlal Nehru NSICT DPW, Jawaharlal Nehru, MAHARASHTRA, India",
-            latitude: null,
-            longitude: null,
-            event_date: "2023-03-02T17:13:00.000Z",
-            alert_name: null,
-            alert_level: null,
-            alert_action: null,
-            alert_details: null,
-            sequence: 2,
-          },
-          {
-            id: "a5e6bfa3-6326-4261-af7f-1817bdb5f11a",
-            saas_container_timeline_id: "939e7304-ff38-4077-afec-366a48e0bdb5",
-            milestone: "Loaded on Vessel at T/S",
-            milestone_metadata: null,
-            transport_mode: "RAIL",
-            vessel_name: "MAERSK SENTOSA",
-            voyage_no: "308W",
-            location:
-              "Jawaharlal Nehru NSICT DPW, Jawaharlal Nehru, MAHARASHTRA, India",
-            latitude: null,
-            longitude: null,
-            event_date: "2023-03-06T02:13:00.000Z",
-            alert_name: null,
-            alert_level: null,
-            alert_action: null,
-            alert_details: null,
-            sequence: 3,
-          },
-          {
-            id: "bde18c8d-3299-468a-846e-c8235ee72e8c",
-            saas_container_timeline_id: "939e7304-ff38-4077-afec-366a48e0bdb5",
-            milestone: "Loaded on Vessel at T/S",
-            milestone_metadata: null,
-            transport_mode: "TRUCK",
-            vessel_name: "MAERSK SENTOSA",
-            voyage_no: "308W",
-            location:
-              "Jawaharlal Nehru NSICT DPW, Jawaharlal Nehru, MAHARASHTRA, India",
-            latitude: null,
-            longitude: null,
-            event_date: "2023-03-06T13:00:00.000Z",
-            alert_name: null,
-            alert_level: null,
-            alert_action: null,
-            alert_details: null,
-            sequence: 3,
-          },
-          {
-            id: "c97d2678-a9db-4d75-aa31-91a8cb15be32",
-            saas_container_timeline_id: "939e7304-ff38-4077-afec-366a48e0bdb5",
-            milestone: "Delivery",
-            milestone_metadata: null,
-            transport_mode: "",
-            vessel_name: "MAERSK SENTOSA",
-            voyage_no: "308W",
-            location: "Algeciras - ML Terminal, Algeciras, , Spain",
-            latitude: null,
-            longitude: null,
-            event_date: "2023-03-18T20:00:00.000Z",
-            alert_name: null,
-            alert_level: null,
-            alert_action: null,
-            alert_details: null,
-            sequence: 4,
-          },
-        ],
-      },
-    ],
-    itinerary: [{ container_no: "MRKU9712946" }],
-    shipping_line: {
-      id: "c3649537-0c4b-4614-b313-98540cffcf40",
-      business_name: "MAERSK LINE INDIA PVT LTD",
-      logo_url:
-        "https://prod-cogoport.s3.ap-south-1.amazonaws.com/3341a08bd807a189547419c9f62fa050/Maersk%20Line.svg",
-    },
-  },
-];
 
 const airData = {
   airway_bill_no: "098-97087126",
@@ -310,11 +170,41 @@ const airData = {
   },
 };
 
-function Body({ shipmentType = "fcl_freight" }) {
-  const listToRender =
+function Body({ list = [], loading = false, shipmentType = "fcl_freight" }) {
+  const [oceanPoints, setOceanPoints] = useState([]);
+	const [mapPoints, setMapPoints] = useState([]);
+
+	const listToRender =
 		shipmentType === 'fcl_freight'
-			? data?.[0]?.data?.[0]?.tracking_data
-			: airData?.data;
+			? list?.[0]?.data?.[0]?.tracking_data
+			: list?.data?.[0]?.tracking_data;
+
+	const { routesLoading } = useOceanRoute({
+		setMapPoints,
+		list: list?.[0],
+	});
+
+	const { airPoints, airLoading } = getAirPoints({ airTrackerDetails: list });
+
+	useEffect(() => {
+		if (mapPoints?.length) {
+			setOceanPoints(
+				mapPoints.find((x) => x.container_no === list?.[0]?.input)?.route,
+			);
+		}
+	}, [list, mapPoints]);
+
+	const points = shipmentType === 'fcl_freight' ? oceanPoints : airPoints;
+	const listLoading =
+		shipmentType === 'fcl_freight' ? routesLoading : airLoading;
+
+	if (loading) {
+		return (
+			<div className={styles.container}>
+				<LoadingState />
+			</div>
+		);
+	}
 
   return (
     <div className={styles.tracking_info}>
@@ -323,8 +213,8 @@ function Body({ shipmentType = "fcl_freight" }) {
         shippingLine={data?.[0]?.shipping_line}
       />
       <TrackingMap
-        // routesLoading={listLoading}
-        // points={points}
+        routesLoading={listLoading}
+        points={points}
         shipmentType={shipmentType}
       />
     </div>

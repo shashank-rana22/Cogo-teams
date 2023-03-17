@@ -16,9 +16,16 @@
   position: relative;
   height: fit-content;
 
-  .tippy-content{
-    padding: 0px;
-  }
+  :global {
+    .tippy-box {
+        padding: 10px;
+        min-height: initial;
+        min-width: initial;
+    }
+    .tippy-content {
+        padding: 0;
+    }
+}
 }
 
 .space {

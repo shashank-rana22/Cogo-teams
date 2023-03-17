@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { cl, Popover, Button, Select, Modal } from "@cogoport/components";
+import {
+  cl,
+  Popover,
+  Button,
+  Select,
+  Modal,
+  Textarea,
+} from "@cogoport/components";
 import RaiseQuery from "./RaiseQuery";
 import styles from "./styles.module.css";
 
@@ -9,19 +16,43 @@ function Header({
   containerNo = "",
   shipmentId = "",
   airwayBillNo = "",
-  shipmentType = "",
+  shipmentType = "fcl_freight",
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [queryType, setQueryType] = useState("");
   const [showModal, setShowModal] = useState(false);
 
   const content = (
     <div className={styles.content}>
-      {/* <Layout
-				controls={controls}
-				fields={fields}
-				errors={errors}
-				themeType="admin"
-			/> */}
+      <Select
+        size="sm"
+        style={{ width: "250px", paddingBottom: "20px" }}
+        name="query_type"
+        label="Issue Related to"
+        placeholder="Select"
+        value={queryType}
+        onChange={(e) => setQueryType(e)}
+        options={[
+          {
+            label: "Inaccurate data",
+            value: "inaccurate_data",
+          },
+          {
+            label: "Shipment Rollover",
+            value: "shipment_rollover",
+          },
+          {
+            label: "Map View is not available",
+            value: "map_view_not_available",
+          },
+          {
+            label: "Other",
+            value: "other",
+          },
+        ]}
+      />
+
+      <Textarea name="remarks" size="lg" placeholder="Please type here" />
       <div className={styles.button_div}>
         <Button
           onClick={() => {
@@ -38,10 +69,10 @@ function Header({
         <Button
           // disabled={loading}
           // onClick={handleSubmit(handleFormSubmit)}
-		  onClick={() => {
-			setShowModal(true);
-			setIsOpen(false);
-		  }}
+          onClick={() => {
+            setShowModal(true);
+            setIsOpen(false);
+          }}
           size="md"
           themeType="accent"
         >
@@ -58,8 +89,8 @@ function Header({
         <div className={styles.text}>Tracking Information</div>
         {shipmentType === "fcl_freight" ? (
           <Select
-            className="primary md custom"
-            theme="admin"
+            size="sm"
+            style={{ width: "200px" }}
             placeholder="Container no"
             value={containerNo}
             onChange={(e) => setContainerNo(e)}
