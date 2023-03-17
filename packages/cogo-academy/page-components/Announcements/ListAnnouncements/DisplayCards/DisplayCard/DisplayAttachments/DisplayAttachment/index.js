@@ -34,7 +34,7 @@ function DisplayAttachment(
 				</div>
 
 				{isValid !== -1 && (
-					<Button size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
+					<Button type="button" size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
 						Add
 						{' '}
 						{name}
@@ -51,6 +51,7 @@ function DisplayAttachment(
 
 							<div className={styles.buttoncontainer}>
 								<Button
+									type="button"
 									themeType="primary"
 									size="sm"
 									style={{ marginRight: 8 }}
@@ -61,6 +62,7 @@ function DisplayAttachment(
 								{isValid !== -1 && (
 									<>
 										<Button
+											type="button"
 											themeType="secondary"
 											size="sm"
 											style={{ marginRight: 8 }}

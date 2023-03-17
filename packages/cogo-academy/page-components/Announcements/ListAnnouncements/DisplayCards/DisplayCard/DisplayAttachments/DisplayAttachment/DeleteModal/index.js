@@ -26,6 +26,7 @@ function DeleteModal({
 			<Modal.Footer>
 				<div className={styles.delete_buttons}>
 					<Button
+						type="button"
 						themeType="secondary"
 						size="md"
 						onClick={() => setShowDeleteModal(null)}
@@ -34,6 +35,7 @@ function DeleteModal({
 						Cancel
 					</Button>
 					<Button
+						type="button"
 						themeType="primary"
 						size="md"
 						onClick={() => deleteFunction(showDeleteModal?.id)}
