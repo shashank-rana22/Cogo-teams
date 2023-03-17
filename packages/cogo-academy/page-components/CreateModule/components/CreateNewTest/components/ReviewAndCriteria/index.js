@@ -21,6 +21,11 @@ function ReviewAndCriteria({ setActiveStepper }) {
 		getTest,
 	} = useGetTest({ test_id });
 
+	const navigate = () => {
+		const href = '/learning/faq/create/';
+		router.push(href, href);
+	};
+
 	useEffect(() => {
 		if (!isEmpty(test_id)) { getTest({ test_id }); }
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,7 +33,7 @@ function ReviewAndCriteria({ setActiveStepper }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<IcMArrowBack width={20} height={20} />
+				<IcMArrowBack width={20} height={20} onClick={navigate} />
 				<div className={styles.title}> Review and Set Criteria </div>
 			</div>
  

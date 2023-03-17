@@ -2,6 +2,7 @@ import { Tooltip, Button, Table, Pagination } from '@cogoport/components';
 import { IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import useUpdateCaseStudy from '../../hooks/useUpdateCaseStudy';
 import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
 
 import styles from './styles.module.css';
@@ -30,6 +31,11 @@ function SavedQuestionDetails({
 }) {
 	const { updateStandAloneTestQuestion, loading } = useUpdateStandAloneTestQuestion();
 
+	const {
+		loading: caseStudyLoading,
+		updateCaseStudy,
+	} = useUpdateCaseStudy();
+
 	const handleEditQuestion = ({ item }) => {
 		setAllKeysSaved(false);
 		setEditDetails(item);
@@ -42,6 +48,15 @@ function SavedQuestionDetails({
 			updateStandAloneTestQuestion({
 				testQuestionId : id,
 				action         : 'delete',
+				getTestQuestionTest,
+				questionSetId,
+				setEditDetails,
+				setAllKeysSaved,
+			});
+		} else {
+			updateCaseStudy({
+				id,
+				action: 'delete',
 				getTestQuestionTest,
 				questionSetId,
 				setEditDetails,
@@ -119,7 +134,7 @@ function SavedQuestionDetails({
 										themeType="secondary"
 										disabled={!allKeysSaved}
 										className={styles.btn}
-										loading={loading}
+										loading={loading || caseStudyLoading}
 									>
 										<IcMEdit />
 										<div style={{ marginLeft: '8px' }}>Edit</div>
@@ -130,7 +145,7 @@ function SavedQuestionDetails({
 										themeType="secondary"
 										className={styles.btn}
 										disabled={!allKeysSaved}
-										loading={loading}
+										loading={loading || caseStudyLoading}
 									>
 										<IcMDelete />
 										<div
