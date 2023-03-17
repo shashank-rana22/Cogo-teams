@@ -1,0 +1,23 @@
+
+.card_title{
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 16px;
+	color: #000000;
+	display: flex;
+	align-items: center;
+
+	&.icon {
+		width: 100%;
+		justify-content: center;
+	}
+}
+/* 
+.Caret{
+	margin-left: 5px;
+	width: 12px;
+	transform: ${({ sortType }) =>
+		sortType === true ? 'rotate(180deg)' : 'rotate(0)'};
+	transition: transform 0.3s ease-in-out;
+	cursor: pointer;
+} */

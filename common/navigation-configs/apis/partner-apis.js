@@ -1696,6 +1696,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'event',
 		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	supply_crm: [
 		{
@@ -6364,7 +6369,7 @@ const partner = {
 		{
 			api          : 'get_shipment',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'bookings',
 		},
 		{
 			api          : 'list_organization_invoicing_parties',
@@ -6489,7 +6494,7 @@ const partner = {
 		{
 			api          : 'get_shipment',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'bookings',
 		},
 		{
 			api          : 'list_organization_invoicing_parties',
@@ -6626,7 +6631,7 @@ const partner = {
 		{
 			api          : 'get_shipment',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'bookings',
 		},
 		{
 			api          : 'list_organization_invoicing_parties',
@@ -7282,6 +7287,7 @@ const partner = {
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
 		},
+
 		{
 			api         : 'get_sales_dashboard_monthly_outstanding',
 			access_type : 'private',
@@ -7651,6 +7657,12 @@ const partner = {
 		},
 		{
 			api         : 'delete_sales_accounts',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
+			api         : 'post_payments_accounts_post_to_sage',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',

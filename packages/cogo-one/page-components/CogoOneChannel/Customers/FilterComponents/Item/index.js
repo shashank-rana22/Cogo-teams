@@ -35,11 +35,13 @@ function Item(props) {
 				{label}
 			</div>
 			<div className={cl`${styles.filters_types} ${botToggle ? styles.disabled : ''}`}>
-				<Element
-					{...props}
-					control={control}
-					className={styles.field_controller}
-				/>
+				{Element && (
+					<Element
+						{...props}
+						control={control}
+						className={styles.field_controller}
+					/>
+				)}
 				{error?.type && <div className={styles.error_text}>This is Required</div>}
 			</div>
 		</div>

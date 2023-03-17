@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
+import { ShipmentDetailContext } from '@cogoport/context';
+import React, { useMemo } from 'react';
 
-import Header from './Header';
+import useGetShipment from '../../hooks/useGetShipment';
+import useListShipmentServices from '../../hooks/useListShipmentServices';
+
+import ShipmentInfo from './ShipmentInfo';
 import Tab from './Tabs';
 import Timeline from './TimeLine';
+import TopBar from './TopBar';
 
 function ShipmentDetails() {
+	const { get } = useGetShipment();
+
+	const { shipment_data } = get;
+
+	const { servicesGet } = useListShipmentServices({ shipment_data });
+
+	const contextValues = useMemo(() => ({
+		...get,
+		...servicesGet,
+	}), [get, servicesGet]);
+
 	return (
-		<div>
-			<Header />
+		<ShipmentDetailContext.Provider value={contextValues}>
+			<ShipmentInfo />
+			<TopBar />
 			<Timeline />
 			<Tab />
-		</div>
+		</ShipmentDetailContext.Provider>
 	);
 }
 

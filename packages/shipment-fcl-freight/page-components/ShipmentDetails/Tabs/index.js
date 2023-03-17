@@ -2,6 +2,7 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Documents from './Documents';
+import Emails from './Emails';
 import PurchaseInvoice from './Invoicing/PurchaseInvoice';
 import SalesInvoice from './Invoicing/SalesInvoice';
 import Overview from './Overview';
@@ -12,7 +13,7 @@ function Tab() {
 	const [activeTab, setActiveTab] = useState('overview');
 
 	return (
-		<div style={{ margin: 20 }}>
+		<div style={{ marginTop: 20 }}>
 			<Tabs
 				activeTab={activeTab}
 				fullWidth
@@ -22,7 +23,7 @@ function Tab() {
 				<TabPanel name="overview" title="Overview">
 					<Overview />
 				</TabPanel>
-				<TabPanel name="invoice" title="Timeline and Tasks">
+				<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 					<TimelineAndTask />
 				</TabPanel>
 				<TabPanel name="sales_live_invoice" title="Sales Live Invoice">
@@ -33,6 +34,9 @@ function Tab() {
 				</TabPanel>
 				<TabPanel name="documents" title="Documents">
 					<Documents />
+				</TabPanel>
+				<TabPanel name="emails" title="Emails">
+					<Emails />
 				</TabPanel>
 				<TabPanel name="tracking" title="Tracking">
 					<Tracking />

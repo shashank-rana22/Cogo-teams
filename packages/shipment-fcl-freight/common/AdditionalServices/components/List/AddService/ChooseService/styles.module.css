@@ -1,0 +1,62 @@
+/* // import { Placeholder } from '@cogoport/components'; */
+
+.price_div{
+	display: flex;
+	justify-content: flex-end;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+	}
+}
+
+.container{
+	.core-ui-tag-text {
+		font-size: 8px;
+	}
+}
+
+.loading{
+	font-size: 22px;
+	font-weight: 600;
+	display: flex;
+	margin: auto;
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	span:nth-child(1) {
+		opacity: 0;
+		animation: fadeIn 1000ms infinite;
+		animation-delay: 300ms;
+	}
+
+	span:nth-child(2) {
+		opacity: 0;
+		animation: fadeIn 1000ms infinite;
+		animation-delay: 600ms;
+	}
+
+	span:nth-child(3) {
+		opacity: 0;
+		animation: fadeIn 1000ms infinite;
+		animation-delay: 900ms;
+	}
+}
+
+.custom_skeleton{
+	width: 100%;
+	height: 70px;
+	margin: 10px 0px;
+}
+
+.loading_container{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}

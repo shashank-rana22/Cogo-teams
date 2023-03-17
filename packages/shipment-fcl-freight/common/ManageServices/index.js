@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { cl, Button } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import React, { useState, useEffect } from 'react';
+
 import styles from './styles.module.css';
-import { cl } from '@cogoport/components';
-const ManageServices = ({
+
+function ManageServices({
 	isChild = false,
 	children = null,
 	title = 'Manage Services',
@@ -10,7 +12,7 @@ const ManageServices = ({
 	showLabel = true,
 	message = '',
 	// styles = {},
-}) => {
+}) {
 	const [open, setOpen] = useState(defaultOpen);
 
 	useEffect(() => {
@@ -24,10 +26,10 @@ const ManageServices = ({
 
 	if (isChild) {
 		stylesChild = {
-			position: 'relative',
-			bottom: '20px',
-			width: '1278px',
-			left: '12px',
+			position : 'relative',
+			bottom   : '20px',
+			width    : '1278px',
+			left     : '12px',
 		};
 		stylesChildIcon = {
 			height: '20px !important',
@@ -36,8 +38,8 @@ const ManageServices = ({
 	return (
 		<div className="manage_service_root" style={{ ...stylesChild }}>
 			{showLabel ? (
-				<div
-					className={cl` ${styles.header} ${open ? 'open' : 'closed'}`}
+				<Button
+					className={cl` ${styles.header} ${open ? '' : styles.header_closed}`}
 					style={{ ...styles }}
 					onClick={() => setOpen(!open)}
 				>
@@ -55,7 +57,7 @@ const ManageServices = ({
 							)}
 						</div>
 					</div>
-				</div>
+				</Button>
 			) : null}
 
 			<div type={open ? 'enter' : 'exit'}>
@@ -63,6 +65,6 @@ const ManageServices = ({
 			</div>
 		</div>
 	);
-};
+}
 
 export default ManageServices;

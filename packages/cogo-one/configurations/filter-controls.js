@@ -1,12 +1,12 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
 
-const useGetControls = () => {
+const useGetControls = (isomniChannelAdmin) => {
 	const listAgentsOptions = useGetAsyncOptions(
 		asyncFieldsListAgents(),
 	);
-
-	const controls = [
+	const HIDE_CONTROLS_ADMIN = ['assigned_to_me'];
+	let controls = [
 		{
 			label     : '',
 			name      : 'status',
@@ -86,7 +86,26 @@ const useGetControls = () => {
 			},
 			...(listAgentsOptions || {}),
 		},
+		{
+			label        : 'Assigned To',
+			name         : 'assigned_to_me',
+			type         : 'radio',
+			value        : '',
+			onlyForAdmin : false,
+			className    : 'escalation_field_controller',
+			options      : [
+				{
+					label : 'Me',
+					value : 'me',
+				},
+			],
+		},
 	];
+
+	if (isomniChannelAdmin) {
+		controls = controls.filter((item) => !HIDE_CONTROLS_ADMIN.includes(item?.name));
+	}
+
 	return controls;
 };
 

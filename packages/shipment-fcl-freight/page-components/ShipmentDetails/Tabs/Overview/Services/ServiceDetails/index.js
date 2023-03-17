@@ -28,7 +28,8 @@ function ServiceDetails({
 		routeLeg = '',
 		service_provider = '',
 	} = serviceData;
-	const isSo1So2 = shipmentData?.stakeholder_types?.some((ele) => ['service_ops1', 'service_ops2'].includes(ele));
+
+	// const isSo1So2 = shipmentData?.stakeholder_types?.some((ele) => ['service_ops1', 'service_ops2'].includes(ele));
 	const { source = '', shipment_type = '' } = shipmentData;
 	const isHaulageAvailable = () => {
 		if (routeLeg.service_types[0] === 'haulage_freight_service') {
@@ -45,13 +46,13 @@ function ServiceDetails({
 		return true;
 	};
 
-	const canUpsell =		!isSo1So2
-		&& source !== 'consol'
-		&& shipment_type !== 'domestic_air_freight'
-		&& !shipmentData?.is_job_closed
-		&& routeLeg.service_types[0] !== cancelUpsellFor
-		&& isHaulageAvailable(primary_service)
-		&& shipmentData?.state !== 'cancelled';
+	// const canUpsell = !isSo1So2
+	// 	&& source !== 'consol'
+	// 	&& shipment_type !== 'domestic_air_freight'
+	// 	&& !shipmentData?.is_job_closed
+	// 	&& routeLeg.service_types[0] !== cancelUpsellFor
+	// 	&& isHaulageAvailable(primary_service)
+	// 	&& shipmentData?.state !== 'cancelled';
 
 	// const service_items_key = getConfigs(service_type).details || {};
 
@@ -81,6 +82,7 @@ function ServiceDetails({
 		</div>
 	);
 
+	const canUpsell = true;
 	const createNew = canUpsell ? (
 		<CreateNew
 			routeLeg={routeLeg}

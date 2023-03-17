@@ -12,7 +12,7 @@ const apis = [
 	{
 		api          : 'get_shipment',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'list_shipments',

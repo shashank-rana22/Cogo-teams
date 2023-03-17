@@ -1,30 +1,25 @@
-import { toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
-import getContainerControl from '../utils/get-container-controls';
+import { controls } from '../configurations/get-container-controls';
 
 const useBlContainer = ({
 	data = {},
 	shipment_data = {},
-	setMappingModal = () => {},
-	refetch = () => {},
+	// setMappingModal = () => {},
+	// refetch = () => {},
 }) => {
 	const scope = useSelector(({ general }) => general.scope);
 
-	const [{ loading: listLoading, data: containerDetails },
+	const [{ data: containerDetails },
 		containerDetailTrigger] = useRequest({
 		url    : '/list_shipment_container_details',
 		method : 'GET',
 		scope,
 	});
-
-	// const {
-	// 	trigger: updateShipmentContainerTrigger,
-	// 	loading: containerLoading,
-	// } = useRequest('post', false, scope)('/update_shipment_container_details');
 
 	const [{ loading: containerLoading },
 		updateShipmentContainerTrigger] = useRequest({
@@ -33,10 +28,9 @@ const useBlContainer = ({
 		scope,
 	});
 
-	const controls = getContainerControl();
-
 	const showElements = {};
 
+	console.log('controls---', controls);
 	controls.forEach((controlObj, index) => {
 		if (controlObj.type === 'fieldArray') {
 			showElements[controlObj.name] = [];
@@ -66,9 +60,7 @@ const useBlContainer = ({
 		setError(err);
 	};
 
-	const { fields, watch, setValue, handleSubmit } = useForm(controls);
-
-	const formValues = watch();
+	const { control, handleSubmit, formState: { errors } } = useForm();
 
 	// const selectedContainers = [];
 	// (formValues.bl_details || []).forEach((singleVal) => {
@@ -114,14 +106,14 @@ const useBlContainer = ({
 	// 		});
 	// 	});
 	// 	if (totalContainerSelected !== containerDetails?.list?.length) {
-	// 		toast.warn('Please Select All Containers !');
+	// 		Toast.warn('Please Select All Containers !');
 	// 		return;
 	// 	}
 
 	// 	const res = await updateShipmentContainerTrigger({ data: { update_data } });
 
 	// 	if (!res?.hasError) {
-	// 		toast.success('Container Details Updated Successfully');
+	// 		Toast.success('Container Details Updated Successfully');
 	// 		setMappingModal(false);
 	// 		refetch();
 	// 	}
@@ -134,7 +126,8 @@ const useBlContainer = ({
 		handleSubmit,
 		containerLoading,
 		controls,
-		fields,
+		control,
+		errors,
 		showElements,
 	};
 };

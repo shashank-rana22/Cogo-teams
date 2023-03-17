@@ -170,7 +170,7 @@ const apis = [
 	{
 		api          : 'get_shipment',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'get_shipment_timeline',
@@ -1274,6 +1274,36 @@ const apis = [
 	},
 	{
 		api          : 'update_rail_shipment_container_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_services',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_service_timeline',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'update_shipment_service',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_services',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_service_timeline',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'update_shipment_service',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
