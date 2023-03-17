@@ -17,7 +17,7 @@ function GraphUI() {
 			<div
 				style={{
 					display         : 'flex',
-					margin          : '20px',
+					margin          : '-12px 0 20px 0',
 					borderRadius    : '10px',
 					height          : '400px',
 					backgroundColor : '#FFF',

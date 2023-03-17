@@ -11,7 +11,6 @@ function Header({ setSwitchDashboard = () => {} }) {
 				<Button type="button" themeType="primary" onClick={() => { setSwitchDashboard(true); }}>
 					Creator Management Dashboard
 				</Button>
-
 			</div>
 		</div>
 	);

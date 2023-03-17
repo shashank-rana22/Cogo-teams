@@ -12,7 +12,7 @@ function Tabbase() {
 	const props = useListFaqStats({});
 
 	return (
-		<div style={{ margin: 20, marginTop: -2 }}>
+		<div>
 			<Tabs
 				tabIcon={<IcMProfile />}
 				activeTab={activeTab}
