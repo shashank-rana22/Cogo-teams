@@ -25,6 +25,7 @@ import useGetShipmentChatList from '../../hooks/useGetShipmentChatList';
 import useUpdateSeen from '../../hooks/useUpdateSeen';
 import Details from '../Details';
 
+import ListHeader from './ListHeader';
 import ListLoader from './ListLoader';
 import styles from './styles.module.css';
 
@@ -65,15 +66,15 @@ function List({
 
 	useEffect(() => {
 		if (id && !showUnreadChat) {
-			// onCreate(id);
+			onCreate(id);
 		} else if (showUnreadChat && count === 0) {
 			setCount(1);
-			// useStoreId(id);
+			useStoreId(id);
 		} else {
 			setCount(0);
-			// onCreate(storeId);
+			onCreate(storeId);
 		}
-	}, [id, showUnreadChat, count, storeId]);
+	}, [id, showUnreadChat, count, storeId, onCreate]);
 
 	useEffect(() => {
 		setId(data);
@@ -105,102 +106,61 @@ function List({
 			return <ListLoader />;
 		}
 
-		if (!loading && !channelList?.length) {
-			return <EmptyState isMobile />;
-		}
+		// if (!loading && !channelList?.length) {
+		// 	return <EmptyState isMobile />;
+		// }
 
-		return channelList?.map((item) =>
-		// const className = id === item?.id ? 'colored' : 'not_color';
-			(
-				<div
-					className={cl` ${styles.card} ${styles.className}`}
-					role="button"
-					tabIndex={0}
-					onClick={() => setId(item?.id)}
-				>
-					<div className={styles.card_item}>
+		return channelList?.map((item) => (
+			<div
+				className={cl` ${styles.card} ${id === item?.id ? styles.colored : ''}`}
+				role="button"
+				tabIndex={0}
+				onClick={() => setId(item?.id)}
+			>
+				<div className={styles.card_item}>
 
-						<div className={styles.serial_id}>{item?.channel_name}</div>
+					<div className={styles.serial_id}>{item?.channel_name}</div>
 
-						<div className={styles.updated_at}>
-							{/* {formatDate({
+					<div className={styles.updated_at}>
+						{/* {formatDate({
 								date: item?.updated_at,
 								dateFormat: GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 								timeFormat: GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 								formatType: 'dateTime',
 								separator: ' | ',
 							})} */}
-							`11/11/1111`
-						</div>
+						2 Mar, 03:23 PM
 					</div>
-
-					{(MessageContentArr || []).map((obj) => (
-						obj?.mainKey === item?.id && obj[user_id] > 0 && id !== item?.id ? (
-							<div className={styles.circle}>{obj[user_id]}</div>
-						) : null))}
 				</div>
-			));
+
+				{(MessageContentArr || []).map((obj) => (
+					obj?.mainKey === item?.id && obj[user_id] > 0 && id !== item?.id ? (
+						<div className={styles.circle}>{obj[user_id]}</div>
+					) : null))}
+			</div>
+		));
 	};
 
-	const handleSelect = (currentStatus) => {
-		refOuter.current.scrollTop = 0;
-		hookSetters.setFilters({ page: 1 });
-		setStatus(currentStatus);
-	};
-
-	const content = () => (
-		<div className={styles.channels_type}>
-			<div
-				className={styles.text}
-				role="button"
-				tabIndex={0}
-				onClick={() => handleSelect('active')}
-			>
-				Active
-
-			</div>
-			<div className={styles.line} />
-			<div
-				className={styles.text}
-				role="button"
-				tabIndex={0}
-				onClick={() => handleSelect('inactive')}
-			>
-				{' '}
-				Inactive
-
-			</div>
-		</div>
-	);
+	// const handleSelect = (currentStatus) => {
+	// 	refOuter.current.scrollTop = 0;
+	// 	hookSetters.setFilters({ page: 1 });
+	// 	setStatus(currentStatus);
+	// };
 
 	return (
 		<>
 			<div className={cl`${styles.container} ${showMenu ? styles.show_menu : ''}`}>
-				<div className={styles.popover_container}>
-					<Popover
-						theme="light"
-						interactive
-						placement="top"
-						content={content()}
-					>
-						<div className={styles.header}>
-							<div className={styles.heading}>
-								{startCase(status)}
-								{' '}
-								Shipments
-								{' '}
-							</div>
-							<IcMArrowDown width={15} height={15} />
-						</div>
-					</Popover>
-				</div>
+
+				<ListHeader
+					status={status}
+					setStatus={setStatus}
+				/>
 
 				<div className={styles.sub_container}>
 					<div className={styles.search}>
 						<Input
-							className={styles.input_styles}
 							value={filters?.q}
-							placeholder="Search for a Shipment ID"
+							placeholder="Search"
 							onChange={(e) => hookSetters.setFilters({
 								...(filters || {}),
 								q: e.target?.value,

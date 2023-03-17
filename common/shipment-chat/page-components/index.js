@@ -7,7 +7,6 @@ import useSeen from '../hooks/useSeen';
 
 import List from './List';
 import styles from './styles.module.css';
-// import { ChatContainer, Circle, CustomModal, ChatIcon } from './styles';
 
 function ShipmentChat({ setMessagesCount = () => { } }) {
 	const [show, setShow] = useState(false);
@@ -78,7 +77,6 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 					show={show}
 					onClose={() => setShow(false)}
 					closable={!seenLoading}
-					// styles={{ dialog: { width: isMobile ? 360 : 850 } }}
 					className={styles.modal_styles}
 				>
 					<Modal.Body>
