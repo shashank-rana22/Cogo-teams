@@ -8,10 +8,10 @@ import styles from './styles.module.css';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
 
-const scrollHorizontal = (scrollOffset, ref) => {
-	const tableRootElement = ref.current.querySelector('.ui-table-root');
-	tableRootElement.scrollLeft += scrollOffset;
-};
+// const scrollHorizontal = (scrollOffset, ref) => {
+// 	const tableRootElement = ref.current.querySelector('.ui-table-root');
+// 	tableRootElement.scrollLeft += scrollOffset;
+// };
 
 function AllUsers(props = '') {
 	const {
@@ -19,10 +19,7 @@ function AllUsers(props = '') {
 		most_viewed_questions = [],
 		popular_questions = [],
 		question_stats = '',
-		topic_wise_questions,
-		trending_tags,
 		trending_topics,
-		unpopular_questions,
 	} = props;
 	// const{
 	// 	topic_wise_disliked_questions=[],
