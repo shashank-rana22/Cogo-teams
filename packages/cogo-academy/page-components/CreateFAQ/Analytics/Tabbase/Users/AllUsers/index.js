@@ -1,6 +1,6 @@
 import { Pill, Button } from '@cogoport/components';
-import { IcMArrowDown, IcMArrowUp, IcMArrowDoubleRight } from '@cogoport/icons-react';
-import { useState, forwardRef } from 'react';
+import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import AudienceList from './AudienceList';
 import Scroll from './Scroll';
