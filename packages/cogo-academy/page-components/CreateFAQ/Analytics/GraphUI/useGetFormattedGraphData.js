@@ -15,7 +15,7 @@ const useGetFormattedGraphData = ({ graph_data = {} }) => {
 		const array = [];
 		Object.keys(restData[key] || {}).forEach((timeKey) => {
 			if (y_axis_parameter === 'hour') {
-				array.push({ x: format(timeKey, 'HHmm'), y: restData[key][timeKey] });
+				array.push({ x: timeKey, y: restData[key][timeKey] });
 			} else {
 				array.push({ x: format(timeKey, 'dd-MMM-yyyy'), y: restData[key][timeKey] });
 			}

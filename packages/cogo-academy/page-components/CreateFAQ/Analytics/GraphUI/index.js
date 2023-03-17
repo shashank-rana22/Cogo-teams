@@ -1,5 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { ResponsivePie } from '@cogoport/charts/pie';
+import { format } from '@cogoport/utils';
 
 import GraphData from '../hooks/useGraphData';
 
@@ -24,7 +25,7 @@ function GraphUI() {
 					backgroundColor : '#FFF',
 				}}
 			>
-				<div style={{ width: '100%' }}>
+				<div className={styles.line_chart}>
 					<ResponsiveLine
 						data={graphData}
 						margin={{ right: 10, top: 50, bottom: 50, left: 60 }}
@@ -35,7 +36,6 @@ function GraphUI() {
 							max     : 'auto',
 							stacked : true,
 							reverse : false,
-
 						}}
 						colors={{ datum: 'color' }}
 						curve="monotoneX"
@@ -46,10 +46,12 @@ function GraphUI() {
 							orient         : 'bottom',
 							tickSize       : 5,
 							tickPadding    : 5,
-							tickRotation   : 0,
-							// legend         : 'transportation',
+							tickRotation   : 30,
 							legendOffset   : 36,
 							legendPosition : 'middle',
+							format(value) {
+								return format(value, 'dd/MM, HH:mm');
+							},
 						}}
 						axisLeft={{
 							orient         : 'left',

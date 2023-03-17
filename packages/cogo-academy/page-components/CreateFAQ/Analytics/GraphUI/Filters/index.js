@@ -18,21 +18,13 @@ function Filters({ setDateRange, dateRange }) {
 
 				</div>
 
-				{/* <DateRangepicker
-					style={{ height: '20px' }}
-					id="select_date_range"
-					name="date"
-					onChange={setDateRange}
-					value={dateRange}
-					dateFormat="MMM dd, yyyy"
-					isPreviousDaysAllowed
-				/> */}
 				<DateRangepicker
 					name="date"
 					onChange={setDateRange}
 					value={dateRange}
 					dateFormat="MMM dd, yyyy"
 					isPreviousDaysAllowed
+					maxDate={new Date()}
 				/>
 
 			</div>
