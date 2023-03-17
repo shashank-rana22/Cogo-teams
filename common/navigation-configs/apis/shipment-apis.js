@@ -1282,6 +1282,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'get_shipment_kam_customer_counts',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
