@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useSelector } from "@cogoport/store";
 import { useRequest } from "@cogoport/request";
 
@@ -7,16 +7,15 @@ const useOceanRoute = ({ setMapPoints = () => {}, list = {} }) => {
     scope: general?.scope,
   }));
 
-  const { trigger, loading } = useRequest({
+  const [{ loading }, trigger] = useRequest({
     url: "/get_container_sea_route",
     method: "POST",
     scope,
   });
 
-  const getAllOceanRoutes = async () => {
+  const getAllOceanRoutes = useCallback(() => {(async () => {
     try {
-      const container_no = list?.container_details
-        .map((c) => c?.container_no)
+      const container_no = list?.container_details?.map((c) => c?.container_no)
         .flat();
       const request_data = {
         saas_container_subscriptions: [
@@ -27,7 +26,9 @@ const useOceanRoute = ({ setMapPoints = () => {}, list = {} }) => {
           },
         ],
       };
+      console.log(request_data , " :request_data : ", list);
       const res = await trigger({ data: request_data });
+      console.log(res , " :res");
       if (res.data?.length) {
         container_no?.forEach((c) => {
           const container = res?.data?.filter((r) => r.container_no === c);
@@ -46,13 +47,15 @@ const useOceanRoute = ({ setMapPoints = () => {}, list = {} }) => {
       }
       return res.data;
     } catch (err) {
+      console.log(err)
       return [];
     }
-  };
+  })();
+}, [trigger]);
 
   useEffect(() => {
-    getAllOceanRoutes();
-  }, [list]);
+      getAllOceanRoutes();
+  }, [getAllOceanRoutes]);
 
   return {
     routesLoading: loading,

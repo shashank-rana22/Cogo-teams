@@ -1,4 +1,4 @@
-import { L, FeatureGroup, Marker } from '@cogoport/utils';
+import { L, FeatureGroup, Marker } from '@cogoport/maps';
 
 function Pointer({ lat = '', lng = '', iconSvg = 'location', map }) {
 	const icon = L.icon({

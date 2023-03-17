@@ -26,10 +26,8 @@ const useGetSaasContainerSubscription = ({
             shipment_id: shipmentId,
           },
         });
-        console.log(shipmentId, " :shipmentId");
       } catch (error) {
         Toast.error(getApiErrorString(error));
-        console.log(error);
       }
     })();
 	}, [trigger]);

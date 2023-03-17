@@ -13,7 +13,7 @@ function Tracking({ shipment_data = {} }) {
     shipmentId: '3534d9b2-7a8c-47a0-a3d1-93cfb7bf9f69' || shipment_data?.id,
     endPoint: shipmentType === "fcl_freight" ? "container" : "air",
   });
-console.log(list, " list");
+
   const ContainerOptions = Array.isArray(list)
     ? (list || [])
         .filter((e) => e?.type === "CONTAINER_NO")

@@ -24,7 +24,6 @@ function TrackingData({ data = [], shippingLine = {} }) {
   return (
     <div className={styles.container}>
       {data?.map((item, idx) => {
-        console.log(item?.transport_mode, " :transport_mode");
         return (
           <div className={styles.single_item}>
             {item?.transport_mode ? (

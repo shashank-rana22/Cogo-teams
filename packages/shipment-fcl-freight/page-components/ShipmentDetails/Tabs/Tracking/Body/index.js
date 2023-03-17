@@ -179,7 +179,7 @@ function Body({ list = [], loading = false, shipmentType = "fcl_freight" }) {
 			? list?.[0]?.data?.[0]?.tracking_data
 			: list?.data?.[0]?.tracking_data;
 
-	const { routesLoading } = useOceanRoute({
+      const { routesLoading } = useOceanRoute({
 		setMapPoints,
 		list: list?.[0],
 	});
@@ -198,7 +198,7 @@ function Body({ list = [], loading = false, shipmentType = "fcl_freight" }) {
 	const listLoading =
 		shipmentType === 'fcl_freight' ? routesLoading : airLoading;
 
-	if (loading) {
+    if (loading) {
 		return (
 			<div className={styles.container}>
 				<LoadingState />
@@ -210,7 +210,7 @@ function Body({ list = [], loading = false, shipmentType = "fcl_freight" }) {
     <div className={styles.tracking_info}>
       <TrackingData
         data={listToRender}
-        shippingLine={data?.[0]?.shipping_line}
+        shippingLine={list?.[0]?.shipping_line}
       />
       <TrackingMap
         routesLoading={listLoading}

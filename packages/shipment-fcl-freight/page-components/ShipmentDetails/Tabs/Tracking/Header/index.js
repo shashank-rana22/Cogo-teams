@@ -8,6 +8,7 @@ import {
   Textarea,
 } from "@cogoport/components";
 import RaiseQuery from "./RaiseQuery";
+import useCreateRaiseQuery from "../hooks/useCreateRaiseQuery";
 import styles from "./styles.module.css";
 
 function Header({
@@ -20,7 +21,17 @@ function Header({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [queryType, setQueryType] = useState("");
+  const [remarks, setRemarks] = useState("");
   const [showModal, setShowModal] = useState(false);
+
+  const { loading, handleFormSubmit, reset } =
+		useCreateRaiseQuery({
+			setShowModal,
+			setIsOpen,
+			shipmentId,
+      queryType,
+      remarks,
+		});
 
   const content = (
     <div className={styles.content}>
@@ -52,27 +63,23 @@ function Header({
         ]}
       />
 
-      <Textarea name="remarks" size="lg" placeholder="Please type here" />
+      <Textarea name="remarks" size="lg" placeholder="Please type here" onChange={(e) => setRemarks(e)} value={remarks}/>
       <div className={styles.button_div}>
         <Button
           onClick={() => {
             setIsOpen(false);
-            // reset();
+            reset();
           }}
           size="md"
           themeType="tertiary"
           style={{ marginRight: 10 }}
-          // disabled={loading}
+          disabled={loading}
         >
           Cancel
         </Button>
         <Button
-          // disabled={loading}
-          // onClick={handleSubmit(handleFormSubmit)}
-          onClick={() => {
-            setShowModal(true);
-            setIsOpen(false);
-          }}
+          disabled={loading}
+          onClick={handleFormSubmit}
           size="md"
           themeType="accent"
         >
