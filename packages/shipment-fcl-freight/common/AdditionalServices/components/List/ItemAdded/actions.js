@@ -11,7 +11,6 @@ const actions = ({
 	item,
 	isConditionMatches,
 	isShipper,
-	scope,
 	addRate,
 	setShowIp = () => {},
 	shipment_data = {},
@@ -30,7 +29,7 @@ const actions = ({
 	) {
 		return (
 			<Button
-				className="secondary sm"
+				themeType="secondary"
 				style={{ marginLeft: 10 }}
 				onClick={() => setAddRate({ item, status })}
 			>
@@ -44,7 +43,7 @@ const actions = ({
 	) {
 		return (
 			<Button
-				className="secondary sm"
+				themeType="secondary"
 				style={{ marginLeft: 10 }}
 				onClick={() => setAddRate({ item, status })}
 			>
@@ -55,7 +54,7 @@ const actions = ({
 	if (status.status === 'customer_confirmation_pending' && isShipper) {
 		return (
 			<Button
-				className="secondary sm"
+				themeType="secondary"
 				style={{ marginLeft: 10 }}
 				onClick={onClick}
 			>
@@ -64,30 +63,11 @@ const actions = ({
 		);
 	}
 	if (
-		status.status === 'requested_for_service_provider'
-		&& scope === 'app'
-		&& !isShipper
+		status.status === 'cancelled_by_supplier' && isConditionMatches(CC.SERVICE_OPS_VIEW)
 	) {
 		return (
 			<Button
-				className="secondary sm"
-				style={{ marginLeft: 10 }}
-				onClick={() => {
-					setAddRate({ item, status });
-				}}
-			>
-				EDIT PRICE
-			</Button>
-		);
-	}
-	if (
-		status.status === 'cancelled_by_supplier'
-		&& scope === 'partner'
-		&& isConditionMatches(CC.SERVICE_OPS_VIEW)
-	) {
-		return (
-			<Button
-				className="secondary sm"
+				themeType="secondary"
 				style={{ marginLeft: 10 }}
 				onClick={() => setAddRate({ item, status, setAddRate })}
 			>
@@ -97,13 +77,11 @@ const actions = ({
 	}
 
 	if (
-		status.status === 'amendment_requested_by_importer_exporter'
-		&& scope === 'partner'
-		&& isConditionMatches(CC.BOOKING_AGENT_VIEW, 'or')
+		status.status === 'amendment_requested_by_importer_exporter' && isConditionMatches(CC.BOOKING_AGENT_VIEW, 'or')
 	) {
 		return (
 			<Button
-				className="secondary sm"
+				themeType="secondary"
 				style={{ marginLeft: 10 }}
 				onClick={() => setAddRate({ item, status })}
 			>
@@ -116,11 +94,10 @@ const actions = ({
 		(!IP_STATE_CONDITONS.find((state) => state === item.state)
 			|| !item.invoice_preference)
 		&& activeTab !== 'purchase_invoice'
-		&& shipment_data?.shipment_type !== 'air_freight'
 	) {
 		return (
 			<Button
-				className="secondary sm"
+				themeType="secondary"
 				style={{ marginLeft: 10 }}
 				onClick={() => {
 					onClick();

@@ -23,7 +23,7 @@ function Status({ state, payment_term }) {
 
 					<div className={cl`${styles.collect} ${state}`}>
 						{startCase(payment_term)}
-						{' '}
+						&nbsp;
 					</div>
 				</div>
 			) : null}

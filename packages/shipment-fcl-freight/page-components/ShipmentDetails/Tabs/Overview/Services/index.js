@@ -1,77 +1,57 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
-import { serviceObj, serviceList } from '../dummy_data';
+import possibleFullRouteConfigs from '../../../../../common/Route/possible-full-route.json';
 
+import { helperFuncs } from './helpers/getHelperFuncs';
+import renderSubsidiaryServices from './helpers/renderSubsidiaryServices';
+import upsellTransportation from './helpers/upsellTransportation';
 import Loader from './Loader';
 import MutipleSimilarServices from './MutipleSimilarServices';
 import ServiceDetails from './ServiceDetails';
 import styles from './styles.module.css';
 
-function Services({
-	isSeller = false,
-	// serviceList = [],
-	loading = false,
-}) {
-	const { shipment_data, primary_service, isGettingShipment } = useContext(ShipmentDetailContext);
+function Services() {
+	const {
+		shipment_data,
+		primary_service,
+		isGettingShipment,
+		servicesList,
+		refetchServices,
+		servicesLoading,
+	} = useContext(ShipmentDetailContext);
 
 	const mainServiceName = primary_service?.service_type;
-	// const possibleFullRoute = possibleFullRouteConfigs?.[mainServiceName];
+	const possibleFullRoute = possibleFullRouteConfigs?.[mainServiceName];
 
-	const possibleRoute = [];
-	// if (primary_service?.trade_type) {
-	// 	possibleRoute = (possibleFullRoute || []).filter(
-	// 		(item) => (item.mainServices
-	// 				|| item?.trade_type === primary_service?.trade_type)
-	// 			&& !item.seperator,
-	// 	);
-	// } else {
-	// 	possibleRoute = possibleFullRoute;
-	// }
+	const { renderItem } = helperFuncs(servicesList);
 
-	// if (mainServiceName === 'rail_domestic_freight_service') {
-	// 	possibleRoute = possibleFullRoute;
-	// }
+	const serviceObj = {
+		origin              : [],
+		mainService         : [],
+		destination         : [],
+		multipleMainService : [],
+	};
 
-	// const { renderItem } = helperFuncs(serviceList);
+	(possibleFullRoute || []).map((routeService) => renderItem(routeService, serviceObj));
 
-	// const serviceObj = {
-	// 	origin              : [],
-	// 	mainService         : [],
-	// 	destination         : [],
-	// 	multipleMainService : [],
-	// };
+	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj, primary_service);
 
-	// (possibleRoute || []).map((routeService) => renderItem(routeService, serviceObj));
-
-	// const { cancelUpsellDestinationFor, cancelUpsellOriginFor } =		upsellTransportation(serviceObj, primary_service);
-
-	// if (mainServiceName === 'fcl_freight_service') {
-	// 	renderSubsidiaryServices(serviceObj, serviceList);
-	// }
-
-	const renderTitle = (
-		<div className={styles.title}>
-			Service Details
-		</div>
-	);
+	renderSubsidiaryServices(serviceObj, servicesList, primary_service);
 
 	return (
 		<div className={styles.container}>
-			{/* <Accordion title={renderTitle} style={{ width: '100%' }}> */}
-			{!loading || !isGettingShipment ? (
+			{!servicesLoading || !isGettingShipment ? (
 				<div className={styles.service_container}>
 					<div className={styles.card_block}>
 						{(serviceObj?.origin || []).map((service) => (
 							<ServiceDetails
 								className={styles.service_details}
-								// cancelUpsellFor={cancelUpsellOriginFor}
+								cancelUpsellFor={cancelUpsellOriginFor}
 								serviceData={service}
-								serviceList={serviceList}
+								serviceList={servicesList}
 								shipmentData={shipment_data}
-								isSeller={isSeller}
-								isMain={service?.isMain}
-								// refetchServices={refetchServices}
+								refetchServices={refetchServices}
 								primary_service={primary_service}
 							/>
 						))}
@@ -80,25 +60,24 @@ function Services({
 					<div className={styles.card_block}>
 						{(serviceObj?.multipleMainService || []).map((service) => (
 							<MutipleSimilarServices
-								serviceList={serviceList}
+								serviceList={servicesList}
 								shipmentData={shipment_data}
-								isSeller={isSeller}
 								isMain
 								similarServices={service}
 								primary_service={primary_service}
 							/>
+
 						))}
 					</div>
 
 					<div className={styles.card_block}>
 						{(serviceObj?.destination || []).map((service) => (
 							<ServiceDetails
-								// cancelUpsellFor={cancelUpsellDestinationFor}
+								cancelUpsellFor={cancelUpsellDestinationFor}
 								serviceData={service}
-								serviceList={serviceList}
+								serviceList={servicesList}
 								shipmentData={shipment_data}
-								isSeller={isSeller}
-								// refetchServices={refetchServices}
+								refetchServices={refetchServices}
 								primary_service={primary_service}
 							/>
 						))}
@@ -107,7 +86,6 @@ function Services({
 			) : (
 				<Loader />
 			)}
-			{/* </Accordion> */}
 		</div>
 	);
 }

@@ -44,31 +44,12 @@ const isServiceTakenFunc = (allServices, routeLeg) => (
 	)?.length > 0
 );
 
-const isHaulageAvailable = (
-	origin_port = {},
-	destination_port = {},
-	port = {},
-	tradeType,
-) => {
-	if (tradeType === 'export') {
-		return origin_port?.is_icd || port?.is_icd;
-	}
-	return destination_port?.is_icd || port?.is_icd;
-};
-
-function Route({ allServices = [], loading = false, refetch = () => { } }) {
-	const { shipment_data, isGettingShipment, servicesList, primary_service } = useContext(
+function Route({ allServices = [], loading = false, refetch = () => {} }) {
+	const { shipment_data, isGettingShipment, primary_service } = useContext(
 		ShipmentDetailContext,
 	);
-	const { source = '', shipment_type = '' } = shipment_data;
 
-	const {
-		origin_port = {},
-		destination_port = {},
-		port = {},
-	} = primary_service;
-
-	const mainServiceName = primary_service?.service_name;
+	const mainServiceName = primary_service?.service_type;
 	const possibleFullRoute = possibleFullRouteConfigs?.[mainServiceName];
 
 	const isOriginTransportionAvailable = isTrasportationAvailable(
@@ -93,26 +74,6 @@ function Route({ allServices = [], loading = false, refetch = () => { } }) {
 			isUpsellServiceAvailable = (routeLeg.trade_type === 'export' && isOriginTransportionAvailable)
 				|| (routeLeg.trade_type === 'import'
 					&& isDestinationTransportationAvailable);
-		}
-
-		if (
-			!isServiceTaken
-			&& isUpsellServiceAvailable
-			&& routeLeg?.service_types?.[0] === 'haulage_freight_service'
-		) {
-			isUpsellServiceAvailable = isHaulageAvailable(
-				origin_port,
-				destination_port,
-				port,
-				routeLeg.trade_type,
-			);
-		}
-
-		if (
-			shipment_data?.is_job_closed
-			|| (source === 'consol' && shipment_type === 'domestic_air_freight')
-		) {
-			isUpsellServiceAvailable = false;
 		}
 
 		if ('seperator' in routeLeg) {

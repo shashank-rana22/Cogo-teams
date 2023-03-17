@@ -5,7 +5,7 @@ import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';
 
-function MultiServiceDetails({
+function MultiServiceDetailsPopover({
 	children,
 	mainServices,
 	renderBody: renderBodyProp = null,
@@ -56,4 +56,4 @@ function MultiServiceDetails({
 		</Popover>
 	);
 }
-export default MultiServiceDetails;
+export default MultiServiceDetailsPopover;

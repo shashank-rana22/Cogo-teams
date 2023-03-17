@@ -23,8 +23,8 @@ function CardHeader({
 	setSort = () => {},
 }) {
 	return (
-		<Container className="card-list-header-root">
-			<Row style={stylesRow} className="card-list-header-root-row">
+		<div className={styles.container}>
+			<div style={stylesRow}>
 				{fields?.map((field) => {
 					if (field.show === false) {
 						return null;
@@ -39,8 +39,8 @@ function CardHeader({
 						/>
 					);
 				})}
-			</Row>
-		</Container>
+			</div>
+		</div>
 	);
 }
 

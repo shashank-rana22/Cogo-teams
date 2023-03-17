@@ -38,26 +38,26 @@ function AddRate({
 	const [billToCustomer, setBillToCustomer] = useState(undefined);
 	const [showSecondStep, setSecondStep] = useState(false);
 
-	const { addRate, fields, controls, handleSubmit, loading, errors } =		useAddRate({
-		item,
-		isSeller,
-		status,
-		setShow,
-		refetch,
-		setAddRate,
-		billToCustomer,
-		onCancel,
-		filters,
-	});
+	// const { addRate, fields, controls, handleSubmit, loading, errors } = useAddRate({
+	// 	item,
+	// 	isSeller,
+	// 	status,
+	// 	setShow,
+	// 	refetch,
+	// 	setAddRate,
+	// 	billToCustomer,
+	// 	onCancel,
+	// 	filters,
+	// });
 
-	const updateDatas = useServiceUpdate({
-		item,
-		setAddRate,
-		refetch,
-		showIp,
-		onCancel,
-		setShowIp,
-	});
+	// const updateDatas = useServiceUpdate({
+	// 	item,
+	// 	setAddRate,
+	// 	refetch,
+	// 	showIp,
+	// 	onCancel,
+	// 	setShowIp,
+	// });
 
 	if (showSecondStep) {
 		return (
@@ -66,7 +66,7 @@ function AddRate({
 				status={status}
 				isSeller={isSeller}
 				setSecondStep={setSecondStep}
-				updateDatas={updateDatas}
+				// updateDatas={updateDatas}
 			/>
 		);
 	}
@@ -78,7 +78,7 @@ function AddRate({
 	) {
 		return (
 			<BillToCustomer
-				updateDatas={updateDatas}
+				// updateDatas={updateDatas}
 				onCancel={() => setAddRate(null)}
 				onBillToCustomer={() => setBillToCustomer(true)}
 			/>
@@ -89,33 +89,34 @@ function AddRate({
 		return (
 			<AddIp
 				shipment_data={shipment_data}
-				handleInvoicingParty={updateDatas?.handleInvoicingParty}
+				// handleInvoicingParty={updateDatas?.handleInvoicingParty}
 			/>
 		);
 	}
 	return (
-		<MainContainer>
+		<div>
 			<div className={styles.container}>
+				hello
 				<Accordion
 					title={(
 						<Flex alignItems="center">
-							<ContainerHeader>
+							<div className={styles.container_header}>
 								{startCase(item.name)}
-								{' '}
+								&nbsp;
 								(
 								{startCase(item.service_type)}
 								)
-							</ContainerHeader>
+							</div>
 
 							{showLabel && item?.tags ? (
-								<CustomTag>{startCase(item?.tags?.[0])}</CustomTag>
+								<div className={styles.custom_tag}>{startCase(item?.tags?.[0])}</div>
 							) : null}
 						</Flex>
 					)}
 					showLabel={showLabel}
 					defaultOpen
 				>
-					<Content>
+					<div className={styles.content}>
 						{showRemarksStatus.includes(status?.status) ? (
 							<p>
 								Comments:
@@ -124,7 +125,7 @@ function AddRate({
 						) : null}
 
 						{/* <Layout fields={fields} controls={controls} errors={errors} /> */}
-					</Content>
+					</div>
 				</Accordion>
 			</div>
 
@@ -138,7 +139,7 @@ function AddRate({
 				loading={loading || updateDatas.loading}
 				onCancel={() => onCancel()}
 			/>
-		</MainContainer>
+		</div>
 	);
 }
 

@@ -1,7 +1,5 @@
-import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import { controls } from '../configurations/get-container-controls';
@@ -12,25 +10,20 @@ const useBlContainer = ({
 	// setMappingModal = () => {},
 	// refetch = () => {},
 }) => {
-	const scope = useSelector(({ general }) => general.scope);
-
 	const [{ data: containerDetails },
 		containerDetailTrigger] = useRequest({
 		url    : '/list_shipment_container_details',
 		method : 'GET',
-		scope,
 	});
 
 	const [{ loading: containerLoading },
 		updateShipmentContainerTrigger] = useRequest({
 		url    : '/update_shipment_container_details',
 		method : 'POST',
-		scope,
 	});
 
 	const showElements = {};
 
-	console.log('controls---', controls);
 	controls.forEach((controlObj, index) => {
 		if (controlObj.type === 'fieldArray') {
 			showElements[controlObj.name] = [];
@@ -86,7 +79,7 @@ const useBlContainer = ({
 				});
 			}
 		})();
-	}, []);
+	}, [containerDetailTrigger, shipment_data?.id]);
 
 	// const updateDetails = async () => {
 	// 	const update_data = [];

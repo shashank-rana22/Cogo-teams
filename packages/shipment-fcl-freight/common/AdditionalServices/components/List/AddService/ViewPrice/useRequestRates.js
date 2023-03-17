@@ -1,18 +1,14 @@
 // import incoTermMapping from '@cogoport/shipments/configurations/common/inco-term-mapping.json';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 import { incoTermTradeType } from '../../../../../../configurations/inco-terms';
 
 const useRequestRate = ({ item }) => {
-	const { scope } = useSelector(({ general }) => ({ scope: general?.scope }));
-
-	const { data, trigger, loading } = useRequest(
-		'get',
-		false,
-		scope,
-	)('/get_subsidiary_service_rate_cards');
+	const [{ data, loading }, trigger] = useRequest({
+		url    : '/get_subsidiary_service_rate_cards',
+		method : 'GET',
+	});
 	const serviceType = item?.service_type.replace('_service', '');
 
 	const listRates = async () => {
@@ -57,7 +53,7 @@ const useRequestRate = ({ item }) => {
 	};
 	useEffect(() => {
 		listRates();
-	}, []);
+	}, [trigger]);
 
 	return {
 		loading,

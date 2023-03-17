@@ -1,10 +1,8 @@
-import { ToolTip, Grid } from '@cogoport/components';
+import { ToolTip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
-
-// const { Col } = Grid;
 
 const stylesCol = {
 	display    : 'flex',
@@ -45,15 +43,15 @@ function Field({
 		&& field.sorting[sortingKey] === Object?.keys(sort)?.[0];
 
 	return (
-		<Col
-			xs={field.span}
-			sm={field.span}
-			md={field.span}
-			lg={field.span}
+		<div
+			// xs={field.span}
+			// sm={field.span}
+			// md={field.span}
+			// lg={field.span}
 			style={field.hasStyle ? field.styles : stylesCol}
 			key={field?.key || field?.label}
 		>
-			<CardTitle className="card-list-header-title">
+			<div className={styles.card_title}>
 				{field.tooltip ? (
 					<ToolTip theme="light" content={field.tooltip} placement="top">
 						<span>
@@ -66,13 +64,16 @@ function Field({
 				)}
 
 				{field.sorting && (
-					<Caret
+					<div
+						className={styles.caret}
 						sortType={showSortingType && show}
 						onClick={() => handleOnchange(field)}
+						role="button"
+						tabIndex={0}
 					/>
 				)}
-			</CardTitle>
-		</Col>
+			</div>
+		</div>
 	);
 }
 export default Field;

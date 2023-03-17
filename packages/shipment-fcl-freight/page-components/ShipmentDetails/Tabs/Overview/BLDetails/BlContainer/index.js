@@ -27,8 +27,6 @@ function BlContainer({
 		refetch,
 	});
 
-	console.log(controls, control, errors);
-
 	return (
 		<div className={styles.container}>
 			{/* <Layout fields={controls} errors={errors} control={control} /> */}

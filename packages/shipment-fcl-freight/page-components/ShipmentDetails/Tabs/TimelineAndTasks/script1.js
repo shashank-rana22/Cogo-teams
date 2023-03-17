@@ -13,7 +13,7 @@ function toSnakeCase(str) {
 	// Remove any leading or trailing underscores
 	return snakeCaseString.replace(/^_+|_+$/g, '');
 }
-const pattern = /^\.[a-zA-Z]+{$/
+const pattern = /^\.[a-zA-Z]+{$/;
 
 function readDirRecursively(dir, fileCallback) {
 	fs.readdirSync(dir).forEach((file) => {
@@ -35,20 +35,19 @@ readDirRecursively(
 
 			try {
 				// Read the contents of the file synchronously
-       
+
 				const data = fs.readFileSync(filePath, 'utf8');
 
-        let result = []
+				const result = [];
 
-        let match;
-        while ((match = pattern.exec(data)) !== null) {
-          results.push(match[0]);
-        }
-        console.log('results', result);
-       
+				let match;
+				while ((match = pattern.exec(data)) !== null) {
+					results.push(match[0]);
+				}
+				console.log('results', result);
+
 				// Write the updated contents back to the file
-				//fs.writeFileSync(filePath, updatedData, 'utf8');
-      
+				// fs.writeFileSync(filePath, updatedData, 'utf8');
 			} catch (err) {
 				console.error(err);
 			}
