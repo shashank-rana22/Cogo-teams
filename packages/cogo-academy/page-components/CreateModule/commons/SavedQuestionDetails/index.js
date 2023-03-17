@@ -87,7 +87,7 @@ function SavedQuestionDetails({
 			<div className={styles.flex_row}>
 				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
 
-				<IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} />
+				{/* <IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} /> */}
 			</div>
 
 			{item.id === caseToShow
@@ -103,7 +103,7 @@ function SavedQuestionDetails({
 			<div className={styles.flex_row}>
 				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
 
-				<IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} />
+				{/* <IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} /> */}
 			</div>
 
 			{item.id === caseToShow
@@ -130,7 +130,7 @@ function SavedQuestionDetails({
 			<div className={styles.flex_row}>
 				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
 
-				<IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} />
+				{/* <IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} /> */}
 			</div>
 
 			{item.id === caseToShow
