@@ -24,12 +24,11 @@ const useGetSingleAnnouncement = ({
 					params: { id: currentAnnouncement?.id },
 				});
 
-				setAnnouncementDetails({ ...announcementDetails, [key]: res?.data });
+				setAnnouncementDetails((prev) => ({ ...prev, [key]: res?.data }));
 			} catch (err) {
 				console.log(err.data);
 			}
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentAnnouncement, trigger]);
 
 	useEffect(() => {

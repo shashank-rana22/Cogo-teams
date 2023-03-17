@@ -1,11 +1,8 @@
 const getFormControls = () => [
 	{
-		name  : 'title',
-		label : 'Title',
-		type  : 'text',
-		style : {
-			flexBasis: '48%',
-		},
+		name        : 'title',
+		label       : 'Title',
+		type        : 'text',
 		placeholder : "Tell us what you're thinking?",
 		rules       : { required: 'Required' },
 	},
@@ -15,10 +12,7 @@ const getFormControls = () => [
 		type        : 'select',
 		themeType   : 'secondary',
 		placeholder : 'Type of Announcement',
-		style       : {
-			flexBasis: '48%',
-		},
-		options: [
+		options     : [
 			{
 				label : 'Announcement',
 				value : 'announcement',
@@ -39,24 +33,17 @@ const getFormControls = () => [
 		rules: { required: 'Required' },
 	},
 	{
-		name  : 'content',
-		label : 'Description',
-		type  : 'textarea',
-		size  : 'sm',
-		style : {
-			minHeight : 128,
-			flexBasis : '48%',
-		},
-		placeholder: 'Description about the post',
+		name        : 'content',
+		label       : 'Description',
+		type        : 'textarea',
+		size        : 'sm',
+		placeholder : 'Description about the post',
 	},
 	{
-		name  : 'videos',
-		label : 'Input Video URL',
-		type  : 'field-array',
-		style : {
-			flexBasis: '48%',
-		},
-		controls: [
+		name     : 'videos',
+		label    : 'Input Video URL',
+		type     : 'field-array',
+		controls : [
 			{
 				name  : 'video_item',
 				label : 'Input Video URL',
@@ -70,30 +57,21 @@ const getFormControls = () => [
 		type       : 'upload',
 		uploadType : 'aws',
 		accept     : '.pdf',
-		style      : {
-			flexBasis: '48%',
-		},
 	},
 	{
-		name  : 'images',
-		label : 'Upload Images',
-		type  : 'upload',
-		style : {
-			flexBasis: '48%',
-		},
+		name       : 'images',
+		label      : 'Upload Images',
+		type       : 'upload',
 		uploadType : 'aws',
 		accept     : '.png, .jpeg',
 	},
 	{
+		name           : 'audience_ids',
 		type           : 'multi-select',
 		optionsListKey : 'audiences',
 		isClearable    : true,
 		label          : 'Select Audience',
-		style          : {
-			flexBasis: '48%',
-		},
-		name   : 'audience_ids',
-		params : {
+		params         : {
 			filters: {
 				status: 'active',
 			},
@@ -102,13 +80,10 @@ const getFormControls = () => [
 		rules       : { required: 'Required' },
 	},
 	{
-		name  : 'redirection_url',
-		label : 'Redirection URL',
-		type  : 'text',
-		style : {
-			flexBasis: '48%',
-		},
-		placeholder: 'Enter Redirection URL',
+		name        : 'redirection_url',
+		label       : 'Redirection URL',
+		type        : 'text',
+		placeholder : 'Enter Redirection URL',
 	},
 	{
 		name            : 'validity',
@@ -116,10 +91,7 @@ const getFormControls = () => [
 		type            : 'datepicker',
 		dateFormat      : 'dd MMM yyyy hh:mm a',
 		use12hourformat : true,
-		style           : {
-			flexBasis: '48%',
-		},
-		rules: { required: 'Required' },
+		rules           : { required: 'Required' },
 	},
 	{
 		name        : 'hot_duration',
@@ -127,10 +99,7 @@ const getFormControls = () => [
 		type        : 'select',
 		themeType   : 'secondary',
 		placeholder : 'Select Hot Time Duration',
-		style       : {
-			flexBasis: '48%',
-		},
-		options: [
+		options     : [
 			{
 				label : '1 Day',
 				value : 1,
@@ -150,9 +119,6 @@ const getFormControls = () => [
 		name  : 'is_important',
 		label : 'Is It Important?',
 		type  : 'checkbox',
-		style : {
-			flexBasis: '48%',
-		},
 	},
 ];
 

@@ -19,10 +19,11 @@ function AnnouncementForm({
 	loadingForm = false,
 }) {
 	const { audienceOptions = [], fetchAudiences = () => {}, listAudienceLoading = false } = useListAudiences();
+
 	const {
 		controls,
 		control,
-		watch,
+		formValues,
 		handleSubmit,
 		onSubmit,
 		showPreview,
@@ -33,7 +34,6 @@ function AnnouncementForm({
 	} = useCreateAnnouncements({ defaultValues, announcement_id, actionType, listAudienceLoading });
 
 	const [showCreateAudience, setShowCreateAudience] = useState(false);
-	const formValues = watch();
 
 	const renderAddButton = () => (
 		<div>
@@ -47,6 +47,7 @@ function AnnouncementForm({
 			</Button>
 		</div>
 	);
+
 	if (listAudienceLoading || loadingForm) {
 		return (
 			<div className={styles.spinner}>
@@ -54,6 +55,7 @@ function AnnouncementForm({
 			</div>
 		);
 	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.form}>

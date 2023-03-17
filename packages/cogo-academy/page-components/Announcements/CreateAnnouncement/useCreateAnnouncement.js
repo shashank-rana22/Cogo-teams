@@ -17,6 +17,9 @@ const useCreateAnnouncements = ({
 	const prev_audiences = defaultValues?.faq_audiences?.map((item) => item.id);
 
 	const { control, watch, handleSubmit, formState:{ errors }, setValue } = useForm();
+
+	const formValues = watch();
+
 	const [showPreview, setShowPreview] = useState(false);
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_announcement',
@@ -166,6 +169,7 @@ const useCreateAnnouncements = ({
 		controls,
 		control,
 		watch,
+		formValues,
 		handleSubmit,
 		onSubmit,
 		errors,
