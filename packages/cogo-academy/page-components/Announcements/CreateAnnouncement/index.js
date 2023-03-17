@@ -32,6 +32,7 @@ function CreateAnnouncement() {
 		<div className={styles.container}>
 			<div className={styles.back_div} role="presentation" onClick={onClickBackIcon}>
 				<IcMArrowBack width={20} height={20} />
+
 				<div className={styles.back}>Back to Dashboard</div>
 			</div>
 

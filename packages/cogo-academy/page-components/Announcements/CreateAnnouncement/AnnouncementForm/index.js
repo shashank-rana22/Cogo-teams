@@ -25,7 +25,7 @@ function AnnouncementForm({
 	const {
 		controls,
 		control,
-		watch,
+		formValues,
 		handleSubmit,
 		onSubmit,
 		showPreview,
@@ -34,8 +34,6 @@ function AnnouncementForm({
 		loading,
 		errors,
 	} = useCreateAnnouncements({ defaultValues, announcement_id, actionType, listAudienceLoading });
-
-	const formValues = watch();
 
 	const renderAddButton = () => (
 		<div>
