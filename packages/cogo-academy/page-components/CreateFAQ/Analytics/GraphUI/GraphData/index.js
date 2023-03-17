@@ -3,7 +3,7 @@ import useListFaqSearchHistories from '../../hooks/ListFaqSearchHistories';
 function GraphData() {
 	const props = useListFaqSearchHistories({});
 
-	const { data } = props || {};
+	const { data, dateRange, setDateRange } = props || {};
 
 	const { pie_chart_data:pie_chart = 0, graph_data } = data || {};
 
@@ -75,7 +75,7 @@ function GraphData() {
 		},
 	];
 
-	return { pie_data, pie_outer_data, graph_data };
+	return { pie_data, pie_outer_data, graph_data, dateRange, setDateRange };
 }
 
 export default GraphData;

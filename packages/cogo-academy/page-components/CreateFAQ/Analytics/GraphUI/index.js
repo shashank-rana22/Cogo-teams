@@ -7,13 +7,13 @@ import styles from './styles.module.css';
 import useGetFormattedGraphData from './useGetFormattedGraphData';
 
 function GraphUI() {
-	const { pie_data, pie_outer_data, graph_data } = GraphData();
+	const { pie_data, pie_outer_data, graph_data, dateRange, setDateRange } = GraphData();
 
 	const { graphData = [] } = useGetFormattedGraphData({ graph_data });
 
 	return (
 		<>
-			<Filters />
+			<Filters dateRange={dateRange} setDateRange={setDateRange} />
 			<div
 				style={{
 					display         : 'flex',

@@ -1,12 +1,9 @@
 import { Select, DateRangepicker } from '@cogoport/components';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Filters() {
+function Filters({ setDateRange, dateRange }) {
 	// const locationOptions = ['All Questions', 'Cogoport'];
-
-	const [dateRange, setDateRange] = useState('');
 
 	return (
 		<div className={styles.top_content}>
