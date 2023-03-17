@@ -3,7 +3,7 @@ import { IcMSearchlight, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useGetTestQuestionSets from '../../../../hooks/useGetTestQuestionSets';
+import useGetTestQuestionSets from '../../../../../../hooks/useGetTestQuestionSets';
 
 import styles from './styles.module.css';
 

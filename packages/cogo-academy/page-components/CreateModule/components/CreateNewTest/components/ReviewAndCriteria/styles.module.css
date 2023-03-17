@@ -85,3 +85,8 @@
 	line-height: 150%;
 	color: #221f20;
 }
+
+.topic_pill_container{
+  display: flex;
+  flex-wrap: wrap;
+}

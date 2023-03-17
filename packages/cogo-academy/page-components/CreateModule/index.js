@@ -3,7 +3,7 @@ import ReviewAndCriteria from './components/CreateNewTest/components/ReviewAndCr
 import HomePage from './components/HomePage';
 
 function CreateModule() {
-	return <ReviewAndCriteria />;
+	return <HomePage />;
 }
 
 export default CreateModule;

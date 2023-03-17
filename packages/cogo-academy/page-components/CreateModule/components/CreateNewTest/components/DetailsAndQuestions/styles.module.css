@@ -1,0 +1,14 @@
+.container{
+    margin-top: 30px;
+    height: auto;
+}
+.btn_container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 20px;
+}
+.btn_cont_float {
+	justify-content: flex-end;
+}
+
