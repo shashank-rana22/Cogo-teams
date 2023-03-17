@@ -1,24 +1,21 @@
-import { Button, Popover } from '@cogoport/components';
-// import getField from '@cogo/business-modules/form/components';
-// import { useForm } from '@cogoport/forms';
+import { Textarea, Upload, Popover } from '@cogoport/components';
 import {
 	IcMSend,
-	// IcMAttach,
-	IcMProfile,
+	IcMAttach,
+
 	// IcMDocument,
 	IcMListView,
 } from '@cogoport/icons-react';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
-// import useCreateMessage from '../../hooks/useCreateMessage';
+import useCreateMessage from '../../hooks/useCreateMessage';
 // import useFireBase from '../../hooks/useFireBase';
 
-// import getControls from './controls';
+import getControls from './controls';
 import Header from './Header';
 import Loader from './Loader';
 // import MessageContainer from './MessageContainer';
 // import SendTo from './SendTo';
-import stakeholderMappings from './SendTo/stakeholder-mappings';
 import styles from './styles.module.css';
 
 // const Text = getField('textarea');
@@ -27,24 +24,29 @@ import styles from './styles.module.css';
 function Details({
 	id,
 	activeId,
-	// sourceId,
+	sourceId,
 	source,
-	// subscribedUsers = [],
+	subscribedUsers = [],
 	setShow = () => { },
 	isMobile,
 	setShowMenu = () => { },
 	get = {},
 	personal_data = {},
 }) {
-	// const sendToRef = useRef(null);
+	const sendToRef = useRef(null);
 	const { data, isGettingShipment } = get;
 	const {
 		shipment_data,
 		primary_service,
 	} = data || {};
 
-	// const [stakeHolderView, setStakeHolderView] = useState('');
-	// const [rows, setRows] = useState(1);
+	// console.log(getControls, 'getControls');
+
+	const [stakeHolderView, setStakeHolderView] = useState('');
+	const [rows, setRows] = useState(1);
+	const [textContent, setTextContent] = useState('');
+
+	console.log(textContent, 'textContent');
 
 	// const { msgContent } = useFireBase({ id });
 
@@ -52,19 +54,26 @@ function Details({
 	// const { watch, fields, handleSubmit, reset } = useForm(controls);
 	// const formValues = watch();
 
-	// const { onCreate, onError, loading } = useCreateMessage({
-	// 	shipment_data,
-	// 	formValues,
-	// 	reset,
-	// 	id,
-	// 	stakeHolderView,
-	// 	sourceId,
-	// 	source,
-	// 	sendToRef,
-	// 	personal_data,
-	// 	subscribedUsers,
-	// 	isStakeholder,
-	// });
+	const formValues = {
+		message: textContent,
+	};
+
+	const reset = () => {
+		setTextContent('');
+	};
+	const { onCreate, onError, loading } = useCreateMessage({
+		shipment_data,
+		formValues,
+		reset,
+		id,
+		stakeHolderView,
+		sourceId,
+		source,
+		sendToRef,
+		personal_data,
+		subscribedUsers,
+		// isStakeholder,
+	});
 
 	// const contentData = formValues?.message?.split('\n').length;
 	// const handleKeyPress = (e) => {
@@ -116,15 +125,15 @@ function Details({
 				)}
 
 				<div className={styles.typing_container}>
-					{/* <Popover
+					<Popover
 						theme="light"
 						interactive
-						content={<Uploader {...fields.file} />}
+						content="aaa"
 					>
 						<div className={styles.icon_wrap}>
 							<IcMAttach width={21} height={21} />
 						</div>
-					</Popover> */}
+					</Popover>
 					<div className={styles.attached_container}>
 						{/* {(formValues?.file || []).map((url) => (
 							<div className={styles.attached_doc}>
@@ -134,13 +143,20 @@ function Details({
 						))} */}
 					</div>
 
-					{/* <Text
-						onKeyPress={(e) => handleKeyPress(e)}
-						onKeyDown={(e) => handleDelete(e)}
-						{...fields.message}
-					/> */}
+					<Textarea
+						placeholder="Type here"
+						value={textContent}
+						onChange={(val) => {
+							setTextContent(val);
+						}}
+					/>
 
-					<div className={styles.send}>
+					<div
+						className={styles.send}
+						role="button"
+						tabIndex={0}
+						onClick={() => onCreate()}
+					>
 						<IcMSend style={{ width: '2em', height: '2em', fill: '#303b67' }} />
 					</div>
 				</div>

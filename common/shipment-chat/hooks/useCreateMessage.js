@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 const shipmentChatStakeholders = [
@@ -26,19 +25,15 @@ const useCreateMessage = ({
 	isStakeholder = true,
 }) => {
 	const [errors, setErrors] = useState({});
-	const scope = useSelector(({ general }) => general?.scope);
-	const createMessageAPI = useRequest(
-		'post',
-		false,
-		scope,
-	)('/create_chat_message');
+
+	const [{ loading }, trigger] = useRequest({
+		url    : 'create_chat_message',
+		method : 'POST',
+	}, { manual: true });
 
 	const sh = stakeHolderView.split(' ');
-
 	const sh_arr = (sh || []).map((item) => item.replace('@', ''));
-
 	const condition_arr = sh_arr.length && sh_arr[0] !== '' ? [...sh_arr] : [];
-
 	const filtered_arr = (condition_arr || []).map((item) => {
 		if (item === '') {
 			return null;
@@ -78,7 +73,7 @@ const useCreateMessage = ({
 
 	const handleSendMsg = async () => {
 		try {
-			const res = await createMessageAPI.trigger({
+			const res = await trigger({
 				data: {
 					content: formValues?.message || '', attachment_urls: url || [], channel_id: id, ...payload,
 				},
@@ -108,7 +103,7 @@ const useCreateMessage = ({
 		errors,
 		onError,
 		onCreate,
-		loading: createMessageAPI.loading,
+		loading,
 	};
 };
 
