@@ -11,7 +11,7 @@ function useListShipmentServices({ shipment_data }) {
 	// }));
 
 	const [{ loading : servicesLoading, data }, trigger] = useRequest({
-		url    : 'list_shipment_services',
+		url    : 'fcl_freight/list_services',
 		method : 'GET',
 	}, { manual: true });
 
@@ -35,8 +35,8 @@ function useListShipmentServices({ shipment_data }) {
 	}, [trigger, shipment_data?.id]);
 
 	useEffect(() => {
-		listServices();
-	}, [listServices]);
+		if (shipment_data?.id) { listServices(); }
+	}, [listServices, shipment_data?.id]);
 
 	return {
 		servicesGet: {
