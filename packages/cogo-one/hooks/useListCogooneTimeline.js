@@ -60,9 +60,8 @@ const useListCogooneTimeline = ({
 				});
 
 				const sortedMessages = {};
-				Object.keys(formatTimeLineData)
-					.sort()
-					.forEach((key) => {
+				Object.keys(formatTimeLineData).map((x) => Number(x))
+					.sort().forEach((key) => {
 						sortedMessages[key] = formatTimeLineData[key];
 					});
 
