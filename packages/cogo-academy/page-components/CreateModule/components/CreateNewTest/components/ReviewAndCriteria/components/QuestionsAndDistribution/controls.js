@@ -1,13 +1,13 @@
 const getControls = (id, value) => [
 	{
-		name         : `${id}_standalone`,
+		name         : `${id}q`,
 		type         : 'input',
 		placeholder  : 'Questions',
 		defaultValue : '0',
 		rules        : { required: 'This is required', max: value },
 	},
 	{
-		name         : `${id}_case`,
+		name         : `${id}c`,
 		type         : 'input',
 		defaultValue : '0',
 		placeholder  : 'Cases',

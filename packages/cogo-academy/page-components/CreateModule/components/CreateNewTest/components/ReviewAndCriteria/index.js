@@ -6,6 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import useGetTest from '../../../../hooks/useGetTest';
+import useUpdateTest from '../../../../hooks/useUpdateTest';
 
 import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
@@ -13,13 +14,14 @@ import styles from './styles.module.css';
 
 function ReviewAndCriteria() {
 	const { control, formState:{ errors }, watch } = useForm();
+	const { updateTest } = useUpdateTest();
 	const router = useRouter();
 	const test_id = router.query?.id;
 	const {
 		loading,
 		data,
 		getTest,
-	} = useGetTest({ test_id });
+	} = useGetTest();
 
 	const navigate = () => {
 		const href = '/learning/faq/create/';
@@ -85,7 +87,8 @@ function ReviewAndCriteria() {
 					themeType="primary"
 					onClick={() => {
 						const values = watch();
-						console.log('values:: ', values);
+						updateTest({ test_id, values });
+						console.log('values::', values);
 					}}
 				>
 					Publish Test
