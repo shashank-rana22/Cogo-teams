@@ -6,14 +6,35 @@ function useCreateQuestionSet() {
 		url    : '/create_test_question_set',
 	}, { manual: true });
 
-	const createQuestionSet = async ({ values, setQuestionSetId, getTestQuestionTest }) => {
+	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
+		method : 'post',
+		url    : '/update_test_question_set',
+	}, { manual: true });
+
+	const triggerMapping = {
+		edit   : triggerUpdate,
+		create : trigger,
+	};
+
+	const createQuestionSet = async ({
+		values,
+		setQuestionSetId,
+		getTestQuestionTest,
+		type,
+		questionSetId,
+		setEditDetails,
+		setShowForm,
+	}) => {
+		const triggerToUse = triggerMapping?.[type];
+
 		try {
-			const res = await trigger({
-				data: values,
+			const res = await triggerToUse({
+				data: { ...values, ...(type === 'edit' ? { id: questionSetId } : null) },
 			});
 
+			setShowForm(false);
+			setEditDetails({});
 			getTestQuestionTest({ questionSetId: res?.data?.id });
-
 			setQuestionSetId(res?.data?.id);
 		} catch (err) {
 			console.log(err);
@@ -21,7 +42,7 @@ function useCreateQuestionSet() {
 	};
 
 	return {
-		loading,
+		loading: loading || loadingUpdate,
 		createQuestionSet,
 	};
 }

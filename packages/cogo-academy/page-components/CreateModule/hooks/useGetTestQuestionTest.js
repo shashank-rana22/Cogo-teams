@@ -12,7 +12,7 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved }) {
 				params: { id: questionSetId },
 			});
 
-			if (res?.data?.question_count === 0) {
+			if (!res?.data?.question_count) {
 				setSavedQuestionDetails([{ id: new Date().getTime(), isNew: true }]);
 				setAllKeysSaved(false);
 			} else {

@@ -13,6 +13,7 @@ function CreateQuestionSet() {
 
 	const [questionSetId, setQuestionSetId] = useState('');
 	const [savedQuestionDetails, setSavedQuestionDetails] = useState([]);
+	const [editDetails, setEditDetails] = useState({});
 
 	const [allKeysSaved, setAllKeysSaved] = useState(true);
 
@@ -40,6 +41,7 @@ function CreateQuestionSet() {
 				getTestQuestionTest={getTestQuestionTest}
 				data={data}
 				questionSetId={questionSetId}
+				setEditDetails={setEditDetails}
 			/>
 
 			<AddQuestionsForm
@@ -51,6 +53,8 @@ function CreateQuestionSet() {
 				loading={loading}
 				setSavedQuestionDetails={setSavedQuestionDetails}
 				setAllKeysSaved={setAllKeysSaved}
+				editDetails={editDetails}
+				setEditDetails={setEditDetails}
 			/>
 		</div>
 	);

@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 import useGetTest from '../../../../hooks/useGetTest';
 
+import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 

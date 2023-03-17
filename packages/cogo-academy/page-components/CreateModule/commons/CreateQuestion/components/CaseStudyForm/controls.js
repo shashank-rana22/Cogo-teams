@@ -1,12 +1,5 @@
 const getControls = () => [
 	{
-		name        : 'question_text',
-		type        : 'textarea',
-		placeholder : 'Type Case...',
-		rules       : { required: 'This is required' },
-		rows        : 4,
-	},
-	{
 		name        : 'case_questions',
 		type        : 'fieldArray',
 		showButtons : true,

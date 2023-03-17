@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { TextAreaController, useFieldArray } from '@cogoport/forms';
+import { useFieldArray } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -8,10 +8,22 @@ import SingleQuestionComponent from '../../../SingleQuestionComponent';
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function CaseStudyForm({ control, register, errors, isNewQuestion }) {
+function CaseStudyForm({
+	control,
+	register,
+	errors,
+	isNewQuestion,
+	editDetails,
+	getValues,
+	questionSetId,
+	getTestQuestionTest,
+	reset,
+	setEditDetails,
+	setAllKeysSaved,
+}) {
 	const controls = getControls();
 
-	const fieldArrayControls = controls[1];
+	const fieldArrayControls = controls[0];
 
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -33,12 +45,8 @@ function CaseStudyForm({ control, register, errors, isNewQuestion }) {
 
 	return (
 		<div className={styles.container}>
-			<TextAreaController {...controls[0]} control={control} />
-			{errors?.[controls[0].name] && <div className={styles.error_msg}>This is required</div>}
-
 			{fields.map((field, index) => (
 				<div key={field.id} className={styles.field_container}>
-
 					<div className={styles.question_container}>
 						<SingleQuestionComponent
 							control={control}
@@ -49,6 +57,13 @@ function CaseStudyForm({ control, register, errors, isNewQuestion }) {
 							type="case_study"
 							isNewQuestion={isNewQuestion}
 							remove={remove}
+							editDetails={editDetails}
+							getValues={getValues}
+							questionSetId={questionSetId}
+							getTestQuestionTest={getTestQuestionTest}
+							reset={reset}
+							setEditDetails={setEditDetails}
+							setAllKeysSaved={setAllKeysSaved}
 						/>
 
 						{fields.length > 1 && isNewQuestion ? (

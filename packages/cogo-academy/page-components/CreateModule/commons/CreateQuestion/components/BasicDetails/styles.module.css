@@ -1,7 +1,7 @@
 .container {
 	display: flex;
+	flex-direction: column;
 	gap: 32px;
-	align-items: center;
 	margin-bottom: 24px;
 }
 
@@ -24,6 +24,17 @@
 			width: 250px;
 		}
 	}
+}
+
+.bottom {
+	margin-bottom: 60px;
+}
+
+.upper_form {
+	display: flex;
+	gap: 32px;
+	align-items: center;
+	margin-bottom: 20px;
 }
 
 .error_msg {
@@ -49,12 +60,15 @@
 
 .flex_row {
 	position: relative;
-	flex-direction: row;
-	align-items: center;
 	justify-content: space-between;
 	padding: 12px;
 	background: rgb(255 255 255 / 70%);
 	border-radius: 6px;
+}
+
+.flex {
+	flex-direction: row;
+	align-items: center;
 }
 
 .flex_container {
@@ -74,4 +88,11 @@
 .value {
 	margin-top: 8px;
 	font-weight: 600;
+}
+
+.edit_button {
+	position: absolute;
+	right: 12px;
+	bottom: 12px;
+	width: fit-content;
 }

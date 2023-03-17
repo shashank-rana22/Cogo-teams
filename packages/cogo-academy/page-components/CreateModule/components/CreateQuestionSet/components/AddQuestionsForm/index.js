@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import CreateQuestion from '../../../../commons/CreateQuestion';
 import LoadingState from '../../../../commons/LoadingState';
@@ -17,9 +16,9 @@ function AddQuestionsForm({
 	getTestQuestionTest,
 	setSavedQuestionDetails,
 	setAllKeysSaved,
+	editDetails,
+	setEditDetails,
 }) {
-	const [editDetails, setEditDetails] = useState({});
-
 	const { test_questions } = data || {};
 
 	if (isEmpty(questionSetId)) {
@@ -34,7 +33,7 @@ function AddQuestionsForm({
 		<div className={styles.container}>
 			<div className={styles.label}>Questions</div>
 
-			{test_questions.filter((item) => item.id !== editDetails?.id).length > 0 ? (
+			{(test_questions || []).filter((item) => item.id !== editDetails?.id).length > 0 ? (
 				<SavedQuestionDetails
 					savedQuestionDetails={savedQuestionDetails}
 					test_questions={test_questions}
@@ -42,6 +41,8 @@ function AddQuestionsForm({
 					setEditDetails={setEditDetails}
 					allKeysSaved={allKeysSaved}
 					setAllKeysSaved={setAllKeysSaved}
+					questionSetId={questionSetId}
+					getTestQuestionTest={getTestQuestionTest}
 				/>
 			) : null}
 

@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 const constants = ['name', 'topic', 'question_count', 'cogo_entity_id'];
 
-function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questionSetId }) {
+function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questionSetId, setEditDetails }) {
 	const [showForm, setShowForm] = useState(false);
 
 	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
@@ -25,7 +25,15 @@ function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questio
 	} = useCreateQuestionSet();
 
 	const onSubmit = (values) => {
-		createQuestionSet({ values, setQuestionSetId, getTestQuestionTest });
+		createQuestionSet({
+			values,
+			setQuestionSetId,
+			getTestQuestionTest,
+			type: isEmpty(questionSetId) ? 'create' : 'edit',
+			questionSetId,
+			setEditDetails,
+			setShowForm,
+		});
 	};
 
 	const editForm = () => {
@@ -79,9 +87,9 @@ function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questio
 			</div>
 
 			<div className={styles.button_container}>
-				{questionSetId ? (
+				{!isEmpty(questionSetId) ? (
 					<Button
-						loading={loading}
+						disabled={loading}
 						size="sm"
 						type="button"
 						themeType="secondary"
@@ -92,7 +100,7 @@ function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questio
 				) : null}
 
 				<Button loading={loading} size="sm" type="submit">
-					{questionSetId ? 'Edit' : 'Create'}
+					{!isEmpty(questionSetId) ? 'Edit' : 'Create'}
 				</Button>
 			</div>
 		</form>

@@ -2,20 +2,18 @@ import { Tooltip, Button, Table, Pagination } from '@cogoport/components';
 import { IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
+
 import styles from './styles.module.css';
 
 const alphabetMapping = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-const getCorrectAnswersCombined = ({ answers = [] }) => (answers || []).map((item) => {
-	if (item.is_correct) {
-		return `${alphabetMapping[item.sequence_number]}) ${item.answer_text}`;
-	}
-
-	return null;
-});
-
-const getCorrectAnswers = ({ answers }) => {
-	const correctAnswers = getCorrectAnswersCombined({ answers });
+const getCorrectAnswersCombined = ({ correctOptions = [] }) => (correctOptions || []).map(
+	(item) => `${alphabetMapping[item.sequence_number]}) ${item.answer_text}`,
+);
+const getCorrectAnswers = ({ answers = [] }) => {
+	const correctOptions = (answers || []).filter((item) => item.is_correct);
+	const correctAnswers = getCorrectAnswersCombined({ correctOptions });
 
 	return correctAnswers.join(', ');
 };
@@ -27,10 +25,29 @@ function SavedQuestionDetails({
 	editDetails,
 	allKeysSaved,
 	setAllKeysSaved,
+	getTestQuestionTest,
+	questionSetId,
 }) {
+	const { updateStandAloneTestQuestion, loading } = useUpdateStandAloneTestQuestion();
+
 	const handleEditQuestion = ({ item }) => {
 		setAllKeysSaved(false);
 		setEditDetails(item);
+	};
+
+	const handleDeleteQuestion = ({ item }) => {
+		const { question_type, id } = item || {};
+
+		if (question_type !== 'case_study') {
+			updateStandAloneTestQuestion({
+				testQuestionId : id,
+				action         : 'delete',
+				getTestQuestionTest,
+				questionSetId,
+				setEditDetails,
+				setAllKeysSaved,
+			});
+		}
 	};
 
 	const columns = [
@@ -61,7 +78,20 @@ function SavedQuestionDetails({
 		{
 			Header   : 'Answer Key',
 			id       : 'answer_key',
-			accessor : ({ answers }) => <section>{getCorrectAnswers({ answers })}</section>,
+			accessor : ({ answers = [] }) => (
+				<Tooltip content={(
+					<div className={styles.flex_column}>
+						{(getCorrectAnswersCombined({
+							correctOptions: (answers || []).filter((item) => item.is_correct),
+						} || [])).map((item) => <div className={styles.answer}>{item}</div>)}
+					</div>
+				)}
+				>
+					<div className={styles.answer_key}>
+						{getCorrectAnswers({ answers })}
+					</div>
+				</Tooltip>
+			),
 		},
 		{
 			Header   : 'Difficulty Level',
@@ -89,18 +119,27 @@ function SavedQuestionDetails({
 										themeType="secondary"
 										disabled={!allKeysSaved}
 										className={styles.btn}
+										loading={loading}
 									>
 										<IcMEdit />
 										<div style={{ marginLeft: '8px' }}>Edit</div>
 									</Button>
 
 									<Button
+										type="button"
 										themeType="secondary"
 										className={styles.btn}
 										disabled={!allKeysSaved}
+										loading={loading}
 									>
 										<IcMDelete />
-										<div style={{ marginLeft: '8px' }}>Delete</div>
+										<div
+											role="presentation"
+											onClick={() => handleDeleteQuestion({ item })}
+											style={{ marginLeft: '8px' }}
+										>
+											Delete
+										</div>
 									</Button>
 								</div>
 							)}
@@ -115,8 +154,6 @@ function SavedQuestionDetails({
 			),
 		},
 	];
-
-	console.log('editDetails', editDetails);
 
 	return (
 		<div className={styles.table_container}>
