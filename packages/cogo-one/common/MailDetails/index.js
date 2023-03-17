@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { cl } from '@cogoport/components';
 import { IcMArrowLeft, IcMFilter, IcMArrowRight } from '@cogoport/icons-react';
 import { isEmpty, format, startCase } from '@cogoport/utils';
 
@@ -12,6 +13,7 @@ function MailDetails({
 	setShowContent = () => {},
 	setActiveSelect = () => {},
 	setActiveMail = () => {},
+	activeMail,
 }) {
 	const { data = {}, loading } = useListMail({ activeSelect });
 	const {
@@ -58,13 +60,13 @@ function MailDetails({
 						onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
 					>
 						{(list || []).map((itm) => {
-							const { subject = '', sentDateTime = '', sender, bodyPreview = '' } = itm || {};
+							const { subject = '', sentDateTime = '', sender, bodyPreview = '', id = '' } = itm || {};
 							const { emailAddress } = sender || {};
 							const { name = '' } = emailAddress || {};
 							return (
 								<div
 									role="presentation"
-									className={styles.content}
+									className={cl`${activeMail?.id === id ? styles.active_content : ''} ${styles.content}`}
 									onClick={() => setActiveMail(itm)}
 								>
 									<div className={styles.recipient_div}>

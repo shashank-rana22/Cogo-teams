@@ -1,4 +1,7 @@
+import { Tooltip } from '@cogoport/components';
 import React from 'react';
+
+import { MAIL_REPLY_TYPE } from '../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -9,27 +12,17 @@ function Header({ subject = '' }) {
 				{subject}
 			</div>
 			<div className={styles.header_actions}>
-				<div className={styles.header_actions_reply}>
-					<img
-						src="https://cdn-icons-png.flaticon.com/512/1933/1933011.png"
-						alt="reply icon"
-						className={styles.icon_type}
-					/>
-				</div>
-				<div className={styles.header_actions_reply_all}>
-					<img
-						src="https://cdn-icons-png.flaticon.com/512/747/747334.png"
-						alt="reply all icon"
-						className={styles.icon_type}
-					/>
-				</div>
-				<div className={styles.header_actions_forward}>
-					<img
-						src="https://cdn-icons-png.flaticon.com/512/60/60546.png"
-						alt="reply all icon"
-						className={styles.icon_type}
-					/>
-				</div>
+				{MAIL_REPLY_TYPE.map(({ label, icon }) => (
+					<Tooltip
+						content={label}
+						placement="top"
+						caret={false}
+					>
+						<div className={styles.header_actions_reply}>
+							{icon}
+						</div>
+					</Tooltip>
+				))}
 			</div>
 		</div>
 	);

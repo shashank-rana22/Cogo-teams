@@ -206,3 +206,30 @@ export const ACCOUNT_TYPE_MAPPING = {
 };
 
 export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/prod_cogo_one.apk';
+
+export const MAIL_REPLY_TYPE = [
+	{
+		label : 'Reply',
+		value : 'reply',
+		icon  : <img
+			src="https://cdn-icons-png.flaticon.com/512/1933/1933011.png"
+			alt="reply icon"
+		/>,
+	},
+	{
+		label : 'Reply All',
+		value : 'reply_all',
+		icon  : <img
+			src="https://cdn-icons-png.flaticon.com/512/747/747334.png"
+			alt="reply all icon"
+		/>,
+	},
+	{
+		label : 'Forward',
+		value : 'forward',
+		icon  : <img
+			src="https://cdn-icons-png.flaticon.com/512/60/60546.png"
+			alt="forward icon"
+		/>,
+	},
+];
