@@ -2,13 +2,13 @@ import { Button } from '@cogoport/components';
 import { SelectController, InputController } from '@cogoport/forms';
 import { useEffect } from 'react';
 
-// eslint-disable-next-line import/no-relative-packages
-import countries from '../../../../../../../.data-store/constants/countries.json';
-
 import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
 import useListCogoEntity from './useListCogoEntities';
 import createAudienceControls from './utils/createAudienceControls';
+
+// eslint-disable-next-line import/no-unresolved
+import countries from '@/data-store/constants/countries.json';
 
 function CreateAudienceForm(props) {
 	const {
@@ -33,18 +33,10 @@ function CreateAudienceForm(props) {
 		entity_data,
 	} = useListCogoEntity();
 
-	const entity_options = [];
-
-	entity_data.map((entityData) => {
-		const { business_name = '', id = '' } = entityData || {};
-
-		const options = {
-			label : business_name,
-			value : id,
-		};
-		entity_options.push(options);
-		return entity_options;
-	});
+	const entity_options = entity_data.map((entityData) => ({
+		label : entityData.business_name,
+		value : entityData.id,
+	}));
 
 	const indiaOption = countries.find((country) => country.country_code === 'IN');
 
