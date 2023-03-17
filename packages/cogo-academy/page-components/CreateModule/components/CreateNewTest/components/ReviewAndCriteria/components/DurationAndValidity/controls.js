@@ -2,9 +2,10 @@ const getControls = () => [
 	{
 		name  : 'test_validity',
 		label : 'Test Validity',
-		type  : 'inputgroup',
+		type  : 'date-picker',
 		rules : { required: 'This is required' },
-	}, {
+	},
+	{
 		name        : 'duration',
 		label       : 'Duration',
 		type        : 'input',
