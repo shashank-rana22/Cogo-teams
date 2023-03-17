@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-function LoaderCard({columnsToLoad}) {
+function LoaderCard({ columnsToLoad }) {
 	return (
 		<>
 			<div>

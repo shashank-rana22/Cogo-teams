@@ -1,26 +1,8 @@
 import React from 'react';
 
-import DraftModalBody from './DraftModalBody';
-import NewVersionModalBody from './NewVersionModalBody';
-import PublishedModalBody from './PublishedModalBody';
 import styles from './styles.module.css';
 
-function CreateModal({ mode, setMode }) {
-	if (mode === 'new-version') {
-		return (
-			<NewVersionModalBody
-				setMode={setMode}
-			/>
-		);
-	} if (mode === 'published-version') {
-		return (
-			<PublishedModalBody />
-		);
-	} if (mode === 'saved-draft') {
-		return (
-			<DraftModalBody />
-		);
-	}
+function CreateModal({ setMode }) {
 	return (
 		<div className={styles.modal_container}>
 			<div className={styles.head_text}>

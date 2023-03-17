@@ -4,42 +4,24 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function CardContent({ list_data = {}, value }) {
-	function getTitle() {
-		switch (value) {
-			case 'count':
-				return 'Count';
-			case 'average':
-				return 'Avg. Score';
-			default:
-				return '';
-		}
-	}
+	const TITLE_MAPPING = {
+		count   : 'Count',
+		average : 'Avg. Score',
+	};
 
-	function getValue() {
-		switch (value) {
-			case 'count':
-				return list_data?.count;
-			case 'average':
-				return list_data?.average_score;
-			default:
-				return 0;
-		}
-	}
+	const VALUE_MAPPING = {
+		count   : list_data.count,
+		average : list_data.average_score,
+	};
 
-	function getPercentage() {
-		switch (value) {
-			case 'count':
-				return list_data?.percentage_count_change;
-			case 'average':
-				return list_data?.percentage_score_change;
-			default:
-				return 0;
-		}
-	}
+	const PERCENTAGE_MAPPING = {
+		count   : list_data.percentage_count_change,
+		average : list_data.percentage_score_change,
+	};
 
-	const title = getTitle();
-	const val = getValue();
-	const percentage_change = getPercentage();
+	const title = (value === 'count' ? TITLE_MAPPING.count : TITLE_MAPPING.average);
+	const val = (value === 'count' ? VALUE_MAPPING.count : VALUE_MAPPING.average);
+	const percentage_change = (value === 'count' ? PERCENTAGE_MAPPING.count : PERCENTAGE_MAPPING.average);
 
 	return (
 		<div className={styles.card_data_count}>
@@ -59,8 +41,10 @@ function CardContent({ list_data = {}, value }) {
 										? 'rotate(135deg)' : 'rotate(-45deg)'}`,
 								}}
 							/>
-							{percentage_change}
-							%
+							<span style={{ marginLeft: '4px' }}>
+								{percentage_change}
+								%
+							</span>
 						</span>
 					)
 					: ''}

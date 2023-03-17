@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import LoaderCard from './LoaderCard';
 import styles from './styles.module.css';
 
-function LoadingState({columnsToLoad}) {
+function LoadingState({ columnsToLoad }) {
 	const options = [1, 2, 3].map(() => ({
 		title: <LoaderCard columnsToLoad={columnsToLoad} />,
 

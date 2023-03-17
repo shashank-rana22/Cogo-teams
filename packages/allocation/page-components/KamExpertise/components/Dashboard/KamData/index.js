@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import EmptyState from '../../../../../common/EmptyState';
 import useGetKamExpertiseDashboard from '../../../hooks/useGetKamExpertiseDashboard';
 import useGetKamExpertiseStatsList from '../../../hooks/useGetKamExpertiseStatsList';
-import BadgeFilter from '../BadgeFilter';
+import BadgeFilterHeader from '../BadgeFilterHeader';
 
 import KamLevelScoreCard from './KamLevelScoreCard';
 import LeaderboardList from './LeaderboardList';
@@ -40,71 +40,78 @@ const overview_data = [
 ];
 
 function KamData(props) {
-	const { params = {} } = props;
+	const { date_params = {} } = props;
 	const [kamLevel, setKamLevel] = useState();
+
 	const {
 		loading = false,
 		dashboardData = [],
-	} = useGetKamExpertiseDashboard(params);
+	} = useGetKamExpertiseDashboard(date_params);
 
 	const {
-		leaderboardLoading,
-		leaderboardList,
-		listRefetch,
+		setParams = () => {},
+		leaderboardLoading = false,
+		leaderboardList = [],
+		listRefetch = () => {},
 		searchKAM,
 		setSearchKAM,
 		setBadgeName,
 		debounceQuery,
 		paginationData,
 		getNextPage,
-	} = useGetKamExpertiseStatsList(params);
-
-	const { list = [] } = dashboardData || {};
+	} = useGetKamExpertiseStatsList();
 
 	useEffect(() => {
 		setKamLevel();
-	}, [params]);
+	}, [date_params]);
 
-	return (
-		<div className={styles.container}>
-			{
-				loading
-				&& (
-					<div className={styles.cards}>
-						{
+	const { list = [] } = dashboardData || {};
+
+	if (loading) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.cards}>
+					{
 							Array(4).fill('').map(() => (
 								<KamLevelScoreCard loading={loading} />
 							))
 						}
-					</div>
-				)
-			}
-			{ !isEmpty(list) && !loading
-				? (
-					<div className={styles.cards}>
-						{
-							list.map((list_data, index_lvl) => (
-								<KamLevelScoreCard
-									index_lvl={index_lvl}
-									list_data={list_data}
-									setKamLevel={setKamLevel}
-								/>
-							))
-						}
-					</div>
-				)
-				: (!loading
-					&& (
-						<div className={styles.empty_kam}>
-							<EmptyState
-								height={250}
-								width={450}
-								flexDirection="column"
-								textSize={20}
-							/>
-						</div>
-					)
-				)}
+				</div>
+			</div>
+		);
+	}
+
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.empty_kam}>
+					<EmptyState
+						height={250}
+						width={450}
+						flexDirection="column"
+						textSize={20}
+					/>
+				</div>
+			</div>
+		);
+	}
+
+	return (
+		<div className={styles.container}>
+
+			<div className={styles.cards}>
+				{
+					list.map((list_data, index_lvl) => (
+						<KamLevelScoreCard
+							index_lvl={index_lvl}
+							list_data={list_data}
+							setKamLevel={setKamLevel}
+							date_params={date_params}
+							setParams={setParams}
+						/>
+					))
+				}
+			</div>
 
 			{kamLevel && (
 				<>
@@ -112,46 +119,30 @@ function KamData(props) {
 						<div className={styles.overview_header}>
 							{`KAM ${kamLevel} Overview`}
 						</div>
+
 						<div className={styles.overview_cards}>
+							{/* //!using dummy data for now */}
 							{
 								overview_data.map((data) => (
-									<OverviewCard data={data} />
+									<OverviewCard data={data} leaderboardLoading={leaderboardLoading} />
 								))
 							}
 						</div>
 					</div>
 					<div className={styles.leaderboard_container}>
-						<div className={styles.leaderboard_header}>
-							<div className={styles.overview_header}>
-								Leaderboard
-							</div>
-							<div className={styles.filters}>
-								<BadgeFilter
-									searchKAM={searchKAM}
-									setSearchKAM={setSearchKAM}
-									debounceQuery={debounceQuery}
-								/>
-							</div>
-						</div>
-						{
-							// isEmpty(dashboardData.list)
-							(false)
-								? (
-									<div className={styles.empty_leaderboard}>
-										<EmptyState height={300} width={400} flexDirection="column" />
-									</div>
-								)
-								: (
-									<div className={styles.list}>
-										<LeaderboardList
-											leaderboardLoading={leaderboardLoading}
-											leaderboardList={leaderboardList}
-											paginationData={paginationData}
-											getNextPage={getNextPage}
-										/>
-									</div>
-								)
-						}
+
+						<BadgeFilterHeader
+							searchKAM={searchKAM}
+							setSearchKAM={setSearchKAM}
+							debounceQuery={debounceQuery}
+						/>
+
+						<LeaderboardList
+							leaderboardLoading={leaderboardLoading}
+							leaderboardList={leaderboardList}
+							paginationData={paginationData}
+							getNextPage={getNextPage}
+						/>
 
 					</div>
 				</>
