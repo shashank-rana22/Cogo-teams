@@ -34,6 +34,8 @@ function Documents({
 		loading = false,
 		documentsList = () => {},
 		orgId = '',
+		is_pan_uploaded = false,
+		is_gst_uploaded = false,
 	} = useListOmnichannelDocuments({
 		activeMessageCard,
 		activeVoiceCard,
@@ -97,6 +99,8 @@ function Documents({
 					orgId={orgId}
 					setShowModal={setShowModal}
 					setSingleItem={setSingleItem}
+					isPanUploaded={is_pan_uploaded}
+					isGstUploaded={is_gst_uploaded}
 				/>
 
 			)}
@@ -109,6 +113,8 @@ function Documents({
 					documentsList={documentsList}
 					singleItem={singleItem}
 					setSingleItem={setSingleItem}
+					isPanUploaded={is_pan_uploaded}
+					isGstUploaded={is_gst_uploaded}
 				/>
 			)}
 

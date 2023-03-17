@@ -1,26 +1,55 @@
 import { IcCFtick } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import documentTypeMapping from '../../../../../../configurations/document-type-mapping';
 
 import styles from './styles.module.css';
 
-function ActionsStatus({ orgId = '', setShowModal = () => {}, setSingleItem = () => {}, item = {} }) {
-	const { document_type = '', state = '', is_pan_uploaded = false, is_gst_uploaded = false } = item || {};
+function ActionsStatus({
+	orgId = '',
+	setShowModal = () => {},
+	setSingleItem = () => {},
+	item = {},
+	isPanUploaded,
+	isGstUploaded,
+}) {
+	const { document_type = '' } = item || {};
+
 	const handleClick = (val) => {
 		setShowModal(val?.document_type);
 		setSingleItem(val);
 	};
-	const checkDocumentType = (['undefined']).includes(document_type);
+	const checkDocumentType = document_type === 'undefined';
 
-	const checkUploadManually = !is_pan_uploaded || !is_gst_uploaded || isEmpty(state) || state === 'document_rejected';
+	const reqDocuments = useMemo(() => {
+		const documents = [];
+		switch (document_type) {
+			case 'pan':
+				return !isPanUploaded ? ['pan'] : [];
+			case 'gst':
+				return !isGstUploaded ? ['gst'] : [];
+			default:
+				if (!isPanUploaded) {
+					documents.push('pan');
+				}
+				if (!isGstUploaded) {
+					documents.push('gst');
+				}
+				return documents;
+		}
+	}, [document_type, isGstUploaded, isPanUploaded]);
 
 	return (
 		<div>
 			{!isEmpty(orgId) && documentTypeMapping(document_type) !== 'Shipment' && (
-				<div>
-					{checkUploadManually ? (
+				<div className={styles.upload_container}>
+					<div className={styles.document_name}>
+						{!checkDocumentType && (
+							startCase(document_type)
+						)}
+					</div>
+					{!isEmpty(reqDocuments) ? (
 						<div
 							role="presentation"
 							className={styles.manually}
@@ -29,17 +58,13 @@ function ActionsStatus({ orgId = '', setShowModal = () => {}, setSingleItem = ()
 							Upload Manually
 						</div>
 					) : (
-						<div className={styles.upload_container}>
-							<div className={styles.document_name}>
-								{!checkDocumentType && (
-									startCase(document_type)
-								)}
-
-							</div>
-							<div className={styles.upload}>
-								<IcCFtick width={15} height={15} className={styles.ic_tick} />
-								Uploaded
-							</div>
+						<div className={styles.upload}>
+							{document_type !== 'undefined' && (
+								<>
+									<IcCFtick width={15} height={15} className={styles.ic_tick} />
+									Uploaded
+								</>
+							)}
 						</div>
 					)}
 				</div>

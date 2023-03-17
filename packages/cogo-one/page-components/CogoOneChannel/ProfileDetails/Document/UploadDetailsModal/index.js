@@ -18,6 +18,8 @@ function UploadDetailsModal({
 	documentsList = () => {},
 	singleItem = {},
 	setSingleItem = () => {},
+	isPanUploaded,
+	isGstUploaded,
 }) {
 	const [selectedDocumentType, setSelectedDocumentType] = useState('');
 
@@ -108,7 +110,8 @@ function UploadDetailsModal({
 				{fileType === 'undefined' ? (
 					<SelectDocumentType
 						setSelectedDocumentType={setSelectedDocumentType}
-						singleItem={singleItem}
+						isPanUploaded={isPanUploaded}
+						isGstUploaded={isGstUploaded}
 					/>
 				) : (
 					<UploadForm

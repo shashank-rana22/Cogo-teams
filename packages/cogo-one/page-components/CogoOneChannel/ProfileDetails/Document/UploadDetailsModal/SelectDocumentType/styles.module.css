@@ -2,20 +2,33 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	:global {
+		.ui_button_container {
+			padding: 20px 40px;
+		}
+
+		.ui_button_childeren {
+			font-size: 14px;
+			font-weight: 600;
+		}
+	}
 }
 
-.card {
-	padding: 15px 35px;
-	margin: 20px;
-	font-size: 14px;
-	font-weight: 600;
-	cursor: pointer;
-	border-radius: 6px;
-	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+.first_button {
 	transition: 0.5s;
 
 	&:hover {
-		color: #c26d1a;
+		transition: 0.5s;
+		transform: scale(1.2);
+	}
+}
+
+.last_button {
+	margin-left: 20px;
+	transition: 0.5s;
+
+	&:hover {
 		transition: 0.5s;
 		transform: scale(1.2);
 	}

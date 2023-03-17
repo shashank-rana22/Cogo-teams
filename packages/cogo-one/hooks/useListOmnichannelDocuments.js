@@ -68,7 +68,7 @@ function useListOmnichannelDocuments({
 		}
 	}, [customerId, activeSelect, emptyCheck, documentsList]);
 
-	const { list = [], total_count = 0 } = data || {};
+	const { list = [], total_count = 0, is_pan_uploaded, is_gst_uploaded } = data || {};
 
 	return {
 		documentsList,
@@ -76,6 +76,8 @@ function useListOmnichannelDocuments({
 		documents_count: total_count,
 		loading,
 		orgId,
+		is_pan_uploaded,
+		is_gst_uploaded,
 	};
 }
 

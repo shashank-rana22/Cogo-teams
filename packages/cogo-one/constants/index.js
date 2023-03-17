@@ -235,16 +235,4 @@ export const DOCUMENT_FILTERS_MAPPING = [
 
 export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/prod_cogo_one.apk';
 
-export const SELECT_TABS = [
-	{
-		label : 'PAN',
-		value : 'pan',
-	},
-
-	{
-		label : 'GST',
-		value : 'gst',
-	},
-];
-
 export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';

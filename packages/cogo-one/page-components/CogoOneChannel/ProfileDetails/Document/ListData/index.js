@@ -10,7 +10,10 @@ import documentStatus from '../DocumentStatus';
 import ActionsStatus from './ActionsStatus';
 import styles from './styles.module.css';
 
-function ListData({ list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {} }) {
+function ListData({
+	list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {},
+	isGstUploaded, isPanUploaded,
+}) {
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
 	};
@@ -93,6 +96,8 @@ function ListData({ list = [], orgId = '', setShowModal = () => {}, setSingleIte
 											orgId={orgId}
 											setShowModal={setShowModal}
 											setSingleItem={setSingleItem}
+											isPanUploaded={isPanUploaded}
+											isGstUploaded={isGstUploaded}
 										/>
 
 									</div>
