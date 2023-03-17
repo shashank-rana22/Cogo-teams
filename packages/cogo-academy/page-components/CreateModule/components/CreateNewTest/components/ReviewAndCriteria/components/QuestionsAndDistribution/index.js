@@ -1,9 +1,11 @@
-import { Pill, Table, Input } from '@cogoport/components';
+import { Pill, Table, Button } from '@cogoport/components';
+import { InputController, useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
+import getControls from './controls';
 import styles from './styles.module.css';
 
-function QuestionsAndDistribution({ loading, data }) {
+function QuestionsAndDistribution({ control, errors, data, loading }) {
 	const columns = [
 		{
 			Header   : 'QUESTION SET NAME',
@@ -67,18 +69,18 @@ function QuestionsAndDistribution({ loading, data }) {
 		{
 			Header   : 'DISTRIBUTION',
 			id       : 'f',
-			accessor : () => (
-				<section className={styles.distribution}>
-					<span>No. of</span>
-					<Input
-						className={styles.input}
-						size="sm"
-						name="n_of_questions"
-						placeholder="Questions"
-					/>
-					<Input className={styles.input} size="sm" name="n_of_cases" placeholder="Cases" />
-				</section>
-			),
+			accessor : ({ non_case_study_question_count = 0, id = '' }) => {
+				const controlItem1 = getControls(id, non_case_study_question_count || 0)[0];
+				const controlItem2 = getControls(id, non_case_study_question_count || 0)[1];
+
+				return (
+					<section className={styles.distribution}>
+						<span>No. of</span>
+						<InputController control={control} {...controlItem1} className={styles.input} />
+						<InputController control={control} {...controlItem2} className={styles.input} />
+					</section>
+				);
+			},
 		},
 	];
 	return (

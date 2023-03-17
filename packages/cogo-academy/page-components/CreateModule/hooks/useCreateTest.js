@@ -8,12 +8,11 @@ function useCreateTest({ setTestId, setActiveStepper }) {
 		url    : 'create_test',
 		method : 'POST',
 	}, { manual: true });
-	const createTest = async ({ formValues, idArray }) => {
+	const createTest = async ({ data, idArray }) => {
 		try {
-			console.log(formValues, idArray);
 			const res = await trigger({
 				data: {
-					name                  : formValues.name,
+					name                  : data?.name,
 					set_wise_distribution : [
 						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'case_study' })),
 						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'stand_alone' }))],

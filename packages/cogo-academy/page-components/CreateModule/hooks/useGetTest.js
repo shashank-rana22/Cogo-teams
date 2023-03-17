@@ -16,6 +16,7 @@ function useGetTest() {
 					id: test_id,
 				},
 			});
+			console.log('data:: ', res.data);
 			setData(res?.data);
 		} catch (err) {
 			console.log(err);

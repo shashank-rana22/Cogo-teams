@@ -1,4 +1,5 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -11,6 +12,7 @@ import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
 function ReviewAndCriteria({ setActiveStepper }) {
+	const { control, formState:{ errors }, watch } = useForm();
 	const router = useRouter();
 	const test_id = router.query?.id;
 	const {
@@ -29,6 +31,7 @@ function ReviewAndCriteria({ setActiveStepper }) {
 				<IcMArrowBack width={20} height={20} />
 				<div className={styles.title}> Review and Set Criteria </div>
 			</div>
+ 
 			<div className={styles.subcontainer}>
 				<div className={styles.label}>{data?.name || '-'}</div>
 				<div className={styles.topic}>
@@ -41,10 +44,12 @@ function ReviewAndCriteria({ setActiveStepper }) {
 						))}
 					</div>
 				</div>
+
 				<div className={styles.entity}>
 					<div className={styles.label_entity}>Cogo Entity </div>
 					<div className={styles.entity_name}>Cogo India</div>
 				</div>
+
 				<div className={styles.topic}>
 					<div className={styles.subtopic}> Users </div>
 					<div>
@@ -57,7 +62,31 @@ function ReviewAndCriteria({ setActiveStepper }) {
 					</div>
 				</div>
 			</div>
-			<QuestionsAndDistribution loading={loading} data={data?.set_data} />
+			<QuestionsAndDistribution control={control} errors={errors} loading={loading} data={data?.set_data} />
+			<DurationAndValidity control={control} errors={errors} loading={loading} />
+			<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
+				<Button
+					loading={loading}
+					size="md"
+					themeType="tertiary"
+					style={{ marginRight: '10px' }}
+					onClick={() => {
+					}}
+				>
+					Save As Draft
+				</Button>
+				<Button
+					size="md"
+					themeType="primary"
+					onClick={() => {
+						const values = watch();
+						console.log('values:: ', values);
+					}}
+				>
+					Publish Test
+
+				</Button>
+			</div>
 		</div>
 	);
 }

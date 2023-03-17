@@ -1,21 +1,15 @@
-import { useForm } from '@cogoport/forms';
-
 import getElementController from '../../../../../../../../configs/getElementController';
 
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function DurationAndValidity() {
-	const { control, formState:{ errors } } = useForm();
-
+function DurationAndValidity({ control, errors }) {
 	const controls = getControls();
 
 	return (
 		<div className={styles.container}>
-			{controls.map((controlItem) => {
+			{controls?.map((controlItem) => {
 				const { type, label, name } = controlItem || {};
-				console.log(type, label, name, 'item');
-
 				const Element = getElementController(type);
 				return (
 					<div className={styles.control_container_two}>

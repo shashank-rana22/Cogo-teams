@@ -1,9 +1,7 @@
-import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Router } from '@cogoport/next';
 
-import getElementController from '../../../../../../configs/getElementController';
+import getElementController from '../../../../../../../../configs/getElementController';
 
 import getControls from './controls';
 import styles from './styles.module.css';
@@ -12,10 +10,10 @@ const onClickBack = () => {
 	Router.back();
 };
 
-function CreateNewTest() {
-	const { control, formState:{ errors } } = useForm();
-
+function CreateNewTest({ control, errors }) {
 	const controls = getControls();
+
+	console.log('errors', errors);
 
 	return (
 		<div>
@@ -67,15 +65,6 @@ function CreateNewTest() {
 					);
 				})}
 			</div>
-			<Button
-				themeType="primary"
-				onClick={() => {
-					setFormValues(getValues());
-				}}
-			>
-				Save
-
-			</Button>
 		</div>
 	);
 }
