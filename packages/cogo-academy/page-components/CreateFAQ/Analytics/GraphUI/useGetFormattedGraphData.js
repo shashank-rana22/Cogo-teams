@@ -7,12 +7,14 @@ const MAPPING = {
 };
 
 const useGetFormattedGraphData = ({ graph_data = {} }) => {
+	const { y_axis_parameter, ...restData } = graph_data || {};
+
 	const graphData = [];
 
-	Object.keys(graph_data || {}).forEach((key) => {
+	Object.keys(restData || {}).forEach((key) => {
 		const array = [];
-		Object.keys(graph_data[key] || {}).forEach((timeKey) => {
-			array.push({ x: format(timeKey, 'dd-MMM-yyyy'), y: graph_data[key][timeKey] });
+		Object.keys(restData[key] || {}).forEach((timeKey) => {
+			array.push({ x: format(timeKey, 'dd-MMM-yyyy'), y: restData[key][timeKey] });
 		});
 
 		array.sort((a, b) => new Date(a.x) - new Date(b.x));
@@ -24,6 +26,7 @@ const useGetFormattedGraphData = ({ graph_data = {} }) => {
 			data  : array,
 		});
 	});
+
 	return { graphData };
 };
 

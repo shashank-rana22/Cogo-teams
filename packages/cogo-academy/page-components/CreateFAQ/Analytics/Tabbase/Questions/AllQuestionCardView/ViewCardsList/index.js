@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 
 function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] }) {
 	const truncate = (str) => (str?.length > 28 ? `${str.substring(0, 26)}...` : str);
+
 	return (
 
 		<div className={styles.primary_right}>
