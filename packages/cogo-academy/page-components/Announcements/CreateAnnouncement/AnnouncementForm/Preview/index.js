@@ -5,36 +5,46 @@ import Spinner from '../../../../../commons/Spinner';
 
 import styles from './styles.module.css';
 
+const openDocument = (url) => {
+	let modifiedUrl = `https://${url}`;
+	if (url?.includes('http://') || url?.includes('https://')) {
+		modifiedUrl = url;
+	}
+
+	window.open(modifiedUrl, '_blank');
+};
+
 function Preview({ formValues = {}, announcement_id = '', previewLoading = false }) {
 	const [videos, setVideos] = useState([]);
+
 	const [files, setFiles] = useState([]);
+
 	const [images, setImages] = useState([]);
+
 	const scrollRefImages = useRef('');
 	const scrollRefVideos = useRef('');
-	const scrollHandlerRightImages = () => {
-		scrollRefImages.current.scrollLeft += 341;
-	};
-	const scrollHandlerLeftImages = () => {
-		scrollRefImages.current.scrollLeft -= 341;
-	};
-	const scrollHandlerRightVideos = () => {
-		scrollRefVideos.current.scrollLeft += 341;
-	};
-	const scrollHandlerLeftVideos = () => {
-		scrollRefVideos.current.scrollLeft -= 341;
-	};
-	const openDocument = (url) => {
-		let modifiedUrl = `https://${url}`;
-		if (url?.includes('http://') || url?.includes('https://')) {
-			modifiedUrl = url;
-		}
 
-		window.open(modifiedUrl, '_blank');
+	const scrollHandlerRightImages = () => {
+		scrollRefImages.current.scrollLeft += 344;
 	};
+
+	const scrollHandlerLeftImages = () => {
+		scrollRefImages.current.scrollLeft -= 344;
+	};
+
+	const scrollHandlerRightVideos = () => {
+		scrollRefVideos.current.scrollLeft += 344;
+	};
+
+	const scrollHandlerLeftVideos = () => {
+		scrollRefVideos.current.scrollLeft -= 344;
+	};
+
 	useEffect(() => {
 		if (announcement_id) {
 			const { announcement_attachments } = formValues;
 			const { image, pdf, video } = announcement_attachments;
+
 			setImages(image?.map((item) => item.document_url));
 			setVideos(video?.map((item) => item.document_url));
 			setFiles(pdf?.map((item) => item.document_url));
@@ -52,13 +62,15 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 			</div>
 		);
 	}
+
 	const { title, content } = formValues;
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.title}>{title}</div>
+
 			<div className={styles.description}>{content}</div>
+
 			<div className={styles.images_video_container}>
 				{videos?.length > 0 && (
 					<div
@@ -76,11 +88,12 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 									<IcMArrowLeft width={25} height={25} />
 								</div>
 							)}
+
 							<div className={styles.videos} ref={scrollRefVideos}>
 								{videos?.map((video) => (
-									<div className={styles.video_item}>
+									<div key={video} className={styles.video_item}>
 										<iframe
-											width="333"
+											width="336"
 											height="210"
 											src={video}
 											title="YouTube video player"
@@ -93,6 +106,7 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 									</div>
 								))}
 							</div>
+
 							{videos?.length > 1 && (
 								<div
 									role="button"
@@ -106,6 +120,7 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 						</div>
 					</div>
 				)}
+
 				{images?.length > 0 && (
 					<div
 						className={styles.images_container}
@@ -122,10 +137,12 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 									<IcMArrowLeft width={25} height={25} />
 								</div>
 							)}
+
 							<div className={styles.images} ref={scrollRefImages}>
 								{images?.map((image) => (
 									<div
 										role="button"
+										key={image}
 										tabIndex={0}
 										className={styles.image_item}
 										onClick={() => openDocument(image)}
@@ -134,6 +151,7 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 									</div>
 								))}
 							</div>
+
 							{images?.length > 1 && (
 								<div
 									role="button"
@@ -148,13 +166,16 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 					</div>
 				)}
 			</div>
+
 			{files?.length > 0 && (
 				<div className={styles.files_container}>
-					<div className={styles.file_heading}>Files Attached:</div>
+					<div className={styles.file_heading}>Files Attached :</div>
+
 					<div className={styles.files}>
 						{files?.map((file, index) => (
-							<div className={styles.file_item}>
+							<div className={styles.file_item} key={file}>
 								<IcMDocument onClick={() => openDocument(file)} className={styles.doc_icon} />
+
 								<div style={{ fontSize: '10px', marginLeft: '4px' }}>
 									Doc
 									{'  '}

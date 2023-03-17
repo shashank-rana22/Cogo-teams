@@ -37,8 +37,10 @@ function DisplayCards({
 		<div className={styles.container}>
 			{data.map((item, index) => {
 				const isValid = compareAsc(new Date(item?.validity_start), new Date());
+
 				return (
 					<DisplayCard
+						key={item.id}
 						activeTab={activeTab}
 						refetch={refetch}
 						loadingSingleAnnouncement={loadingSingleAnnouncement}
