@@ -32,6 +32,8 @@ function getElementController(type) {
 			return MultiselectController;
 		case 'inputgroup':
 			return InputGroupController;
+		case 'number':
+			return InputController;
 		default:
 			return SelectController;
 	}

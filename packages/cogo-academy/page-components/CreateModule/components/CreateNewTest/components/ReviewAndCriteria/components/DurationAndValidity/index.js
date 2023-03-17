@@ -11,6 +11,7 @@ function DurationAndValidity({ control, errors }) {
 			{controls?.map((controlItem) => {
 				const { type, label, name } = controlItem || {};
 				const Element = getElementController(type);
+
 				return (
 					<div className={styles.control_container_two}>
 						<div className={styles.label}>
