@@ -42,7 +42,6 @@
 
 .main_container {
 	display: flex;
-	min-height: 575px;
 }
 
 .messages_container {
