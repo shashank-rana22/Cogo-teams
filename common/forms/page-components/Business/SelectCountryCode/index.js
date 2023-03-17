@@ -1,7 +1,7 @@
 import { Select } from '@cogoport/components';
 import React from 'react';
 
-/* eslint-disable-next-line */
+/* eslint-disable */
 import countries from '../../../../../.data-store/constants/countries.json';
 
 function SelectCountryCode(props) {
@@ -14,5 +14,6 @@ function SelectCountryCode(props) {
 		<Select {...props} options={formattedList} />
 	);
 }
+
 
 export default SelectCountryCode;
