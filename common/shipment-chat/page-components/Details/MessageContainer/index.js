@@ -1,8 +1,7 @@
-import { Toggle } from '@cogoport/components';
 import { IcMStar, IcCStar, IcMDocument } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 // import formatDate from '@cogo/globalization/utils/formatDate';
 // import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
@@ -10,21 +9,9 @@ import useUpdateMessage from '../../../hooks/useUpdateMessage';
 import MsgLoader from '../MsgLoader';
 
 import styles from './styles.module.css';
-// import {
-// 	Container,
-// 	SendMsg,
-// 	MainContainer,
-// 	Details,
-// 	Msg,
-// 	FlexRow,
-// 	FileName,
-// 	Time,
-// 	ImpSign,
-// 	FilterBox,
-// } from './styles';
 
-function MessageContainer({ msgContent, isGettingShipment }) {
-	const [showImpMsg, setShowImpMsg] = useState(false);
+function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
+	console.log(showImpMsg, 'showImpMsg');
 	const {
 		// user_name,
 		user_id,
@@ -199,10 +186,6 @@ function MessageContainer({ msgContent, isGettingShipment }) {
 
 	return (
 		<>
-			{/* <div className={styles.filter_box}>
-				<div>Show only important Message</div>
-				<Toggle value={showImpMsg} onChange={setShowImpMsg} />
-			</div> */}
 			{allMessage()}
 		</>
 	);

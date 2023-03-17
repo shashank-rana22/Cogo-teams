@@ -1,25 +1,23 @@
 import { Textarea, Upload, Popover } from '@cogoport/components';
-import {
-	IcMSend,
-	IcMAttach,
-
-	// IcMDocument,
-	IcMListView,
-} from '@cogoport/icons-react';
+import { IcMSend, IcMAttach, IcMDocument } from '@cogoport/icons-react';
 import React, { useRef, useState } from 'react';
 
 import useCreateMessage from '../../hooks/useCreateMessage';
 import useFireBase from '../../hooks/useFireBase';
 
-// import getControls from './controls';
 import Header from './Header';
 import Loader from './Loader';
 import MessageContainer from './MessageContainer';
 // import SendTo from './SendTo';
 import styles from './styles.module.css';
 
-// const Text = getField('textarea');
-// const Uploader = getField('file');
+const shipmentChatStakeholders = [
+	'service_ops1',
+	'service_ops2',
+	'service_ops3',
+	'booking_agent',
+	'supply_agent',
+];
 
 function Details({
 	id,
@@ -28,31 +26,22 @@ function Details({
 	source,
 	subscribedUsers = [],
 	setShow = () => { },
-	isMobile,
-	setShowMenu = () => { },
 	get = {},
 	personal_data = {},
 }) {
 	const sendToRef = useRef(null);
-	const { data, isGettingShipment } = get;
-	const {
-		shipment_data,
-		primary_service,
-	} = data || {};
-
-	// console.log(getControls, 'getControls');
-
 	const [stakeHolderView, setStakeHolderView] = useState('');
 	const [rows, setRows] = useState(1);
 	const [textContent, setTextContent] = useState('');
+	const [showImpMsg, setShowImpMsg] = useState(false);
 
-	console.log(textContent, 'textContent');
-
+	const { data, isGettingShipment } = get;
+	const { shipment_data, primary_service } = data || {};
 	const { msgContent } = useFireBase({ id });
 
-	// const controls = getControls({ rows });
-	// const { watch, fields, handleSubmit, reset } = useForm(controls);
-	// const formValues = watch();
+	const isStakeholder = shipmentChatStakeholders.includes(
+		shipment_data?.stakeholder_types?.[0],
+	);
 
 	const formValues = {
 		message: textContent,
@@ -61,7 +50,7 @@ function Details({
 	const reset = () => {
 		setTextContent('');
 	};
-	const { onCreate, onError, loading } = useCreateMessage({
+	const { onCreate, loading } = useCreateMessage({
 		shipment_data,
 		formValues,
 		reset,
@@ -72,7 +61,8 @@ function Details({
 		sendToRef,
 		personal_data,
 		subscribedUsers,
-		// isStakeholder,
+		isStakeholder,
+		shipmentChatStakeholders,
 	});
 
 	const contentData = formValues?.message?.split('\n').length;
@@ -81,11 +71,11 @@ function Details({
 			setRows(contentData + 1);
 		}
 
-		// if (e.key === 'Enter' && !e.shiftKey) {
-		// 	onCreate();
-		// 	reset();
-		// 	setRows(1);
-		// }
+		if (e.key === 'Enter' && !e.shiftKey) {
+			onCreate();
+			reset();
+			setRows(1);
+		}
 	};
 
 	const handleDelete = (e) => {
@@ -103,13 +93,21 @@ function Details({
 			{isGettingShipment ? (
 				<Loader />
 			) : (
-				<Header shipment_data={shipment_data} primary_service={primary_service} setShow={setShow} />
+				<Header
+					shipment_data={shipment_data}
+					primary_service={primary_service}
+					setShow={setShow}
+					isStakeholder={isStakeholder}
+					showImpMsg={showImpMsg}
+					setShowImpMsg={setShowImpMsg}
+				/>
 			)}
 
 			<div className={styles.chat_sections}>
 				<MessageContainer
 					msgContent={msgContent}
 					isGettingShipment={isGettingShipment}
+					showImpMsg={showImpMsg}
 				/>
 
 				{source === 'shipment' ? (
@@ -144,7 +142,8 @@ function Details({
 					</div>
 
 					<Textarea
-						placeholder="Type here"
+						className={styles.text_area}
+						placeholder="Type your message here...."
 						value={textContent}
 						rows
 						onKeyPress={(e) => handleKeyPress(e)}

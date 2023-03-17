@@ -1,15 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
-
-const shipmentChatStakeholders = [
-	'service_ops1',
-	'service_ops2',
-	'service_ops3',
-	'booking_agent',
-	'supply_agent',
-	'docs_team',
-];
 
 const useCreateMessage = ({
 	shipment_data = {},
@@ -23,9 +13,8 @@ const useCreateMessage = ({
 	personal_data,
 	subscribedUsers = [],
 	isStakeholder = true,
+	shipmentChatStakeholders = [],
 }) => {
-	const [errors, setErrors] = useState({});
-
 	const [{ loading }, trigger] = useRequest({
 		url    : 'create_chat_message',
 		method : 'POST',
@@ -45,10 +34,6 @@ const useCreateMessage = ({
 	});
 
 	const url = (formValues?.file || []).map((obj) => obj.url);
-
-	const onError = (err) => {
-		setErrors(err);
-	};
 
 	const PersonalChannel = {
 		visible_to_user_ids: personal_data?.subscribed_user_ids,
@@ -100,8 +85,6 @@ const useCreateMessage = ({
 	};
 
 	return {
-		errors,
-		onError,
 		onCreate,
 		loading,
 	};

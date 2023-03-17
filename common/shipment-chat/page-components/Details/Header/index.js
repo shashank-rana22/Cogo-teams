@@ -9,15 +9,13 @@ import stakeholderMappings from '../SendTo/stakeholder-mappings';
 import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
-const shipmentChatStakeholders = [
-	'service_ops1',
-	'service_ops2',
-	'service_ops3',
-	'booking_agent',
-	'supply_agent',
-];
-
-function Header({ shipment_data = {}, primary_service = {}, setShow = () => {} }) {
+function Header({
+	isStakeholder, shipment_data = {},
+	primary_service = {},
+	setShow = () => {},
+	showImpMsg,
+	setShowImpMsg = () => {},
+}) {
 	const { push } = useRouter();
 
 	const { serial_id, id: shipment_id } = shipment_data || {};
@@ -27,9 +25,6 @@ function Header({ shipment_data = {}, primary_service = {}, setShow = () => {} }
 		setShow(false);
 	};
 
-	const isStakeholder = shipmentChatStakeholders.includes(
-		shipment_data?.stakeholder_types?.[0],
-	);
 	const groupChatUsers = isStakeholder
 		? stakeholderMappings[shipment_data?.stakeholder_types?.[0] || 'default']
 		|| []
@@ -70,7 +65,7 @@ function Header({ shipment_data = {}, primary_service = {}, setShow = () => {} }
 			<div className={styles.sub_container}>
 				<div className={styles.filter_box}>
 					<div style={{ color: '#221F20' }}>Important Message</div>
-					<Toggle value="aaaa" onChange={setShow} />
+					<Toggle value={showImpMsg} onChange={setShowImpMsg} />
 				</div>
 
 				<Popover
