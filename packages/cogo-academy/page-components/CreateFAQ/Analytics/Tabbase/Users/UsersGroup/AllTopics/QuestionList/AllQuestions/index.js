@@ -3,14 +3,15 @@ import { Pill, Tooltip } from '@cogoport/components';
 import startCase from '@cogoport/utils/src/utilities/startCase';
 import React from 'react';
 
-import StyledTable from '../../../../../../../../commons/StyledTable';
+import StyledTable from '../../../../../../../../../commons/StyledTable';
 
 import styles from './styles.module.css';
 
-function AllQuestions(props) {
-	const { data } = props;
-	const listdata = data?.list;
-	const truncate = (str) => (str?.length > 38 ? `${str.substring(0, 36)}...` : str);
+function AllQuestions({ props = [] }) {
+	const truncate = (str) => (str?.length > 58 ? `${str.substring(0, 56)}...` : str);
+
+	const listdata = props || [];
+	console.log(listdata, 'ld');
 	const addedQuestionsColumns = () => [
 		{
 			Header   : 'Questions',
@@ -21,17 +22,6 @@ function AllQuestions(props) {
 					</Tooltip>
 				</div>
 			),
-		},
-		{
-			Header   : 'Topics',
-			accessor : (items) => (items?.faq_topics?.length > 0 ? (
-				<div className={styles.topics}>
-					{items.faq_topics.map((topic) => {
-						const { display_name } = topic || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-					})}
-				</div>
-			) : '-'),
 		},
 		{
 			Header   : 'Tags',
@@ -74,6 +64,7 @@ function AllQuestions(props) {
 	return (
 		<div className={styles.container}>
 			<StyledTable columns={columns} layoutType="table" data={listdata} />
+
 		</div>
 	);
 }

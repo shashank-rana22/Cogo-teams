@@ -1,14 +1,14 @@
 import React from 'react';
 
-import AllQuestions from './AllQuestions';
+import AllQuestions from './AllAudience';
 import styles from './styles.module.css';
 
-function QuestionsList({ id }) {
+function AudienceList(props) {
 	return (
 		<div className={styles.container}>
-			<AllQuestions id={id} />
+			<AllQuestions {...props} />
 		</div>
 	);
 }
 
-export default QuestionsList;
+export default AudienceList;

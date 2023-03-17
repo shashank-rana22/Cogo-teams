@@ -1,3 +1,5 @@
+import { Tooltip } from '@cogoport/components';
+
 import styles from './styles.module.css';
 
 function ViewCards({ cardHeading = '', subHeading = [] }) {
@@ -13,8 +15,13 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 
 			<div className={styles.sub_heading} style={{ color: '#6FA5AB' }}>
 				<div>
-					<div className={styles.sub_heading_context}>{truncate(subHeading[0]?.name)}</div>
-					{subHeading[0]?.views}
+					<div className={styles.sub_heading_context}>
+						<Tooltip content={subHeading[0]?.topic_name} placement="right">
+							<div>{truncate(subHeading[0]?.topic_name)}</div>
+						</Tooltip>
+
+					</div>
+					{subHeading[0]?.topic_views}
 					{' '}
 					Views
 					,
@@ -23,8 +30,13 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 				</div>
 
 				<div>
-					<div className={styles.sub_heading_context}>{truncate(subHeading[1]?.name)}</div>
-					{subHeading[1]?.views}
+					<div className={styles.sub_heading_context}>
+						<Tooltip content={subHeading[1]?.topic_name} placement="right">
+							<div>{truncate(subHeading[1]?.topic_name)}</div>
+						</Tooltip>
+
+					</div>
+					{subHeading[1]?.topic_views}
 					{' '}
 					Views
 					,

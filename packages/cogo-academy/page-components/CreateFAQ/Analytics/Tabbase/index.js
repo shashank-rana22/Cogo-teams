@@ -12,7 +12,7 @@ function Tabbase() {
 	const props = useListFaqStats({});
 
 	return (
-		<div style={{ margin: 20, marginTop: -2 }}>
+		<div>
 			<Tabs
 				tabIcon={<IcMProfile />}
 				activeTab={activeTab}
@@ -34,8 +34,18 @@ function Tabbase() {
 					<Questions props={props} />
 				</TabPanel>
 
-				<TabPanel name="By_Users" title="By Users" badge="Total 400">
-					<Users />
+				<TabPanel
+					name="By_Users"
+					title="By Users"
+					badge={(
+						<>
+							Total:
+							{' '}
+							{props?.data?.question_stats?.no_of_questions}
+						</>
+					)}
+				>
+					<Users props={props} />
 				</TabPanel>
 			</Tabs>
 		</div>

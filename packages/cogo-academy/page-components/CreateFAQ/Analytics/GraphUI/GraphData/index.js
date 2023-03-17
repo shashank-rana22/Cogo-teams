@@ -34,45 +34,47 @@ function GraphData() {
 			color : 'hsla(232, 44%, 96%, 1)',
 		},
 	];
+
 	const pie_outer_data = [
 		{
 			id    : 'Like',
 			label : 'Likes',
-			value : Like,
+			value : Math.round(Like * 100) / 100,
 			color : 'hsla(39, 55%, 94%, 1)',
 		},
 		{
 			id    : 'Dislikes',
 			label : 'Dislikes',
-			value : Dislike,
+			value : Math.round(Dislike * 100) / 100,
 			color : 'hsla(41, 64%, 86%, 1)',
 		},
 		{
 			id    : 'Viewed Only',
 			label : 'Viewed Only',
-			value : Viewed,
+			value : Math.round(Viewed * 100) / 100,
 			color : 'hsl(202, 0%, 50%)',
 		},
 		{
 			id    : 'No Action',
 			label : 'No Action',
-			value : Available_Remaining,
+			value : Math.round(Available_Remaining * 100) / 100,
 			color : 'hsl(255, 100%, 100%)',
 		},
 		{
 			id    : 'Not Requested',
 			label : 'Not Requested',
-			value : (total_search_result_not_available_percentage - Requested),
+			value : Math.round((total_search_result_not_available_percentage - Requested) * 100) / 100,
 			color : 'hsl(255, 100%, 100%)',
 		},
 		{
 			id    : 'Requested',
 			label : 'Requested',
-			value : (total_search_result_not_available_percentage / 100) * total_requested_questions_percentage,
-			color : 'hsla(234, 46%, 87%, 1)',
+			value : Math.round((total_search_result_not_available_percentage / 100)
+					* total_requested_questions_percentage * 100) / 100,
+			color: 'hsla(234, 46%, 87%, 1)',
 		},
-
 	];
+
 	return { pie_data, pie_outer_data, graph_data };
 }
 
