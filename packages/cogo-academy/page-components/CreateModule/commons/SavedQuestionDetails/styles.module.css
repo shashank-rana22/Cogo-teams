@@ -49,6 +49,16 @@
 	gap: 12px;
 }
 
+.flex_row {
+	display: flex;
+	align-items: center;
+}
+
+.bold {
+	font-weight: 600;
+	margin: 0px 8px;
+}
+
 .answer_key {
 	max-width: 250px;
 	overflow: hidden;

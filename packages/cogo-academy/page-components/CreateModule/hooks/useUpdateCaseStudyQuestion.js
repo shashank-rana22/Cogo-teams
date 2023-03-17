@@ -48,7 +48,7 @@ function useUpdateCaseStudyQuestion() {
 							}),
 			});
 
-			getTestQuestionTest({ questionSetId });
+			getTestQuestionTest({ questionSetId, questionToShow: testQuestionId });
 			setAllKeysSaved(true);
 			setEditDetails({});
 			reset();

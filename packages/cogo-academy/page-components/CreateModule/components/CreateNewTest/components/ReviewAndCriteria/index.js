@@ -12,7 +12,7 @@ import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
-function ReviewAndCriteria({ setActiveStepper }) {
+function ReviewAndCriteria() {
 	const { control, formState:{ errors }, watch } = useForm();
 	const { updateTest } = useUpdateTest();
 	const router = useRouter();

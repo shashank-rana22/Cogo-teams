@@ -42,6 +42,7 @@ function SingleQuestionComponent({
 				reset,
 				setEditDetails,
 				setAllKeysSaved,
+				testQuestionId      : editDetails?.id,
 			});
 		}
 	};

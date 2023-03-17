@@ -87,13 +87,14 @@ function CreateQuestion({
 		const apiToUse = apiMapping[editDetails?.question_type === 'case_study'];
 
 		await apiToUse({
-			id     : editDetails?.id,
-			action : 'delete',
+			id             : editDetails?.id,
+			action         : 'delete',
 			getTestQuestionTest,
 			questionSetId,
 			setEditDetails,
 			setAllKeysSaved,
 			reset,
+			testQuestionId : editDetails?.id,
 		});
 
 		getTestQuestionTest({ questionSetId });

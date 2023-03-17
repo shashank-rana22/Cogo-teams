@@ -6,10 +6,9 @@
 
 	:global {
 		.ui_stepper_container {
-			background-color: #f8f2e7;
-			margin-top: 0px;
+			margin-top: 0;
 			margin-bottom: 20px;
+			background-color: #f8f2e7;
 		}
 	}
 }
-

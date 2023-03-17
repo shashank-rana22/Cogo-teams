@@ -21,7 +21,7 @@ function CreateQuestionSet() {
 		loading,
 		data,
 		getTestQuestionTest,
-	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved });
+	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails });
 
 	return (
 		<div className={styles.container}>
