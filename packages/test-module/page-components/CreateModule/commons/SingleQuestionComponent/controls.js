@@ -42,9 +42,9 @@ const getControls = () => [
 		type    : 'chips',
 		label   : 'Set Difficulty level*',
 		options : [
-			{ value: 'low', label: 'Low' },
+			{ value: 'easy', label: 'Easy' },
 			{ value: 'medium', label: 'Medium' },
-			{ value: 'high', label: 'High' },
+			{ value: 'hard', label: 'Hard' },
 		],
 		multiple: false,
 	},
