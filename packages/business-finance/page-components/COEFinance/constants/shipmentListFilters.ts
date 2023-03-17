@@ -1,6 +1,6 @@
 export const APPROVAL = [
 	{
-		label : 'ALL',
+		label : 'All',
 		value : 'all',
 	},
 	{
@@ -14,7 +14,7 @@ export const APPROVAL = [
 ];
 export const JOBS = [
 	{
-		label : 'ALL',
+		label : 'All',
 		value : 'ALL',
 	},
 	{

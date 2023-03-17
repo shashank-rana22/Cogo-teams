@@ -23,11 +23,11 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Pro
 		if (subActiveTab === 'coe_rejected') {
 			return 'COE_REJECTED';
 		}
-		return 'INITIATED';
+		return 'ALL';
 	};
 
 	const [currentTab, setCurrentTab] = useState(getStatus());
-	const [tab, setTab] = useState('all');
+	const [tab, setTab] = useState('ALL');
 	const { debounceQuery, query } = useDebounceQuery();
 	const [searchValue, setSearchValue] = useState('');
 
@@ -108,7 +108,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Pro
 				billType        : showFilter(),
 				proforma        : showbillType || showProforma,
 				status:
-                    currentTab !== 'all' && currentTab !== 'Urgency_tag' ? currentTab : undefined,
+                    currentTab !== 'ALL' && currentTab !== 'Urgency_tag' ? currentTab : undefined,
 				isUrgent : tab === 'Urgency_tag' ? true : undefined,
 				...sort,
 				pageSize : 10,
