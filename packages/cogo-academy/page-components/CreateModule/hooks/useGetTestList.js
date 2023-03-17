@@ -16,8 +16,11 @@ function useGetTestList() {
 		try {
 			const res = await trigger({
 				params: {
-					...params,
+					filters: {
+						status: 'active',
+					},
 				},
+
 			});
 			setListData(res.data);
 		} catch (error) {

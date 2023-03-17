@@ -12,9 +12,6 @@ const onClickBack = () => {
 
 function CreateNewTest({ control, errors }) {
 	const controls = getControls();
-
-	console.log('errors', errors);
-
 	return (
 		<div>
 			<div className={styles.header}>
