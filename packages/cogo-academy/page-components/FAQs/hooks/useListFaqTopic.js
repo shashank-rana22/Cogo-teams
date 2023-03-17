@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 function useListFaqTopic() {
 	const { general = {}, profile = {} } = useSelector((state) => state);
 
-	const { auth_role_data = [], partner = {} } = profile;
-	const { role_functions = [], role_sub_functions = [] } = auth_role_data?.[0] || {};
+	const { auth_role_data = {}, partner = {} } = profile;
+	const { role_functions = [], role_sub_functions = [] } = auth_role_data || {};
 
 	const { scope = '', query } = general;
 	const { country_id = '', id = '' } = partner;
@@ -28,18 +28,15 @@ function useListFaqTopic() {
 			await trigger({
 				params: {
 					filters: {
-						// status            : 'active',
-						// auth_function     : scope === 'partner' ? roleFunction : undefined,
-						// auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
-						// country_id,
-						// cogo_entity_id    : id,
-						// persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
+						status            : 'active',
+						auth_function     : scope === 'partner' ? roleFunction : undefined,
+						auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
+						country_id,
+						cogo_entity_id    : id,
+						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
 					},
-					page_limit                     : 100000,
-					pagination_data_required       : false,
-					most_viewed_questions_required : true,
-					topic_wise_questions_required  : true,
-					topic_wise_stats_required      : true,
+					page_limit               : 100000,
+					pagination_data_required : false,
 				},
 			});
 		} catch (error) {

@@ -106,23 +106,34 @@
 	border-radius: 4px;
 }
 
+.arrow {
+	&:hover {
+		cursor: pointer;
+		box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
+		transition: 0.5s;
+		transform: scaleX(1);
+		transform-origin: bottom left;
+	}
+}
+
 .primary_right {
 	display: flex;
-	flex: 1;
+	flex-basis: 38%;
 	flex-direction: column;
 	justify-content: space-between;
+	height: 100%;
+	margin: 2%;
+}
+
+.active_users {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: fit-content;
 	padding: 12px 18px;
-	margin: 12px 12px 12px 0;
-	text-align: center;
 	background: #fff;
 	border-radius: 8px;
 	box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
-
-	:global {
-		.styles_active_users__NNcI_ {
-			width: 280px;
-		}
-	}
 }
 
 .right_stat_title {
@@ -177,6 +188,7 @@
 .ticket_container {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	justify-content: space-between;
 	width: 100%;
 	height: fit-content;
@@ -184,15 +196,6 @@
 	background-color: #fff;
 	border-radius: 8px;
 	box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
-}
-
-.sub_heading {
-	flex-wrap: wrap;
-	align-items: left;
-	justify-content: space-between;
-	font-size: 12px;
-	font-weight: 600;
-	text-align: left;
 }
 
 .ticket_details {
@@ -259,6 +262,8 @@
 .chart_heading {
 	display: flex;
 	justify-content: space-between;
+
+	/* padding: 10px 0px 0px 15px; */
 }
 
 .chart_heading_content {
@@ -311,4 +316,18 @@
 	font-size: 12px;
 	font-weight: 400;
 	color: #a2a3a5;
+}
+
+.pill_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.info_pills {
+	display: flex;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
 }
