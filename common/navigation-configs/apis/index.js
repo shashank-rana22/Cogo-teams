@@ -1,5 +1,4 @@
 import allocation from './allocation-apis';
-import announcements from './announcements';
 import app_contract_management from './app-manage-contract-apis';
 import app_manage_rfq from './app-manage-rfq-apis';
 import app_settings from './app-settings';
@@ -120,7 +119,6 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
-	...announcements,
 	performance_management,
 };
 
