@@ -10,7 +10,8 @@ function Questions({ props }) {
 	return (
 		<div>
 			<Filter selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
-			{selectedItem === 'All_Questions' ? <AllQuestionCardView {...props?.data} />
+			{selectedItem === 'All_Questions'
+				? <AllQuestionCardView {...props?.data} />
 				: <AllTopicCardView />}
 		</div>
 	);
