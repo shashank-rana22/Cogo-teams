@@ -53,7 +53,7 @@ function MessageConversations({
 
 }) {
 	const messageRef = useRef();
-	const { id = '', channel_type = '' } = activeMessageCard;
+	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
 
 	const {
 		emojisList = {},
@@ -157,6 +157,9 @@ function MessageConversations({
 
 	);
 
+	const unreadIndex = new_user_message_count > messagesData.length
+		? 0 : messagesData.length - new_user_message_count;
+
 	const messageConversation = (
 		<>
 			{loadingPrevMessages
@@ -171,12 +174,13 @@ function MessageConversations({
 						)}
 					</div>
 				)}
-			{(messagesData || []).map((eachMessage) => (
+			{(messagesData || []).map((eachMessage, index) => (
 				<MessageMapping
 					key={eachMessage?.created_at}
 					conversation_type={eachMessage?.conversation_type || 'unknown'}
 					eachMessage={eachMessage}
 					activeMessageCard={activeMessageCard}
+					messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
 				/>
 			))}
 
@@ -210,7 +214,6 @@ function MessageConversations({
 								role="presentation"
 								className={styles.file_name_container}
 								onClick={() => {
-									// eslint-disable-next-line no-undef
 									window.open(
 										finalUrl,
 										'_blank',
