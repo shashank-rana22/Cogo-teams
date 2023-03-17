@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
 
 function ViewCards({ cardHeading = '', subHeading = [] }) {
+	console.log(subHeading);
 	const truncate = (str) => (str?.length > 12 ? `${str.substring(0, 10)}...` : str);
 
 	return (
