@@ -9,12 +9,12 @@ import {
 import React, { useRef, useState } from 'react';
 
 import useCreateMessage from '../../hooks/useCreateMessage';
-// import useFireBase from '../../hooks/useFireBase';
+import useFireBase from '../../hooks/useFireBase';
 
-import getControls from './controls';
+// import getControls from './controls';
 import Header from './Header';
 import Loader from './Loader';
-// import MessageContainer from './MessageContainer';
+import MessageContainer from './MessageContainer';
 // import SendTo from './SendTo';
 import styles from './styles.module.css';
 
@@ -48,7 +48,7 @@ function Details({
 
 	console.log(textContent, 'textContent');
 
-	// const { msgContent } = useFireBase({ id });
+	const { msgContent } = useFireBase({ id });
 
 	// const controls = getControls({ rows });
 	// const { watch, fields, handleSubmit, reset } = useForm(controls);
@@ -75,24 +75,24 @@ function Details({
 		// isStakeholder,
 	});
 
-	// const contentData = formValues?.message?.split('\n').length;
-	// const handleKeyPress = (e) => {
-	// 	if (e.key === 'Enter' && e.shiftKey && rows < 5) {
-	// 		setRows(contentData + 1);
-	// 	}
+	const contentData = formValues?.message?.split('\n').length;
+	const handleKeyPress = (e) => {
+		if (e.key === 'Enter' && e.shiftKey && rows < 5) {
+			setRows(contentData + 1);
+		}
 
-	// 	// if (e.key === 'Enter' && !e.shiftKey) {
-	// 	// 	onCreate();
-	// 	// 	reset();
-	// 	// 	setRows(1);
-	// 	// }
-	// };
+		// if (e.key === 'Enter' && !e.shiftKey) {
+		// 	onCreate();
+		// 	reset();
+		// 	setRows(1);
+		// }
+	};
 
-	// const handleDelete = (e) => {
-	// 	if (contentData > 1 && (e.keyCode === 8 || e.keyCode === 46)) {
-	// 		setRows(contentData - 1);
-	// 	}
-	// };
+	const handleDelete = (e) => {
+		if (contentData > 1 && (e.keyCode === 8 || e.keyCode === 46)) {
+			setRows(contentData - 1);
+		}
+	};
 
 	if (activeId !== id) {
 		return null;
@@ -107,10 +107,10 @@ function Details({
 			)}
 
 			<div className={styles.chat_sections}>
-				{/* <MessageContainer
+				<MessageContainer
 					msgContent={msgContent}
 					isGettingShipment={isGettingShipment}
-				/> */}
+				/>
 
 				{source === 'shipment' ? (
 					// <SendTo
@@ -146,6 +146,9 @@ function Details({
 					<Textarea
 						placeholder="Type here"
 						value={textContent}
+						rows
+						onKeyPress={(e) => handleKeyPress(e)}
+						onKeyDown={(e) => handleDelete(e)}
 						onChange={(val) => {
 							setTextContent(val);
 						}}

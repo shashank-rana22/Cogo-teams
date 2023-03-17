@@ -199,10 +199,10 @@ function MessageContainer({ msgContent, isGettingShipment }) {
 
 	return (
 		<>
-			<div className={styles.filter_box}>
+			{/* <div className={styles.filter_box}>
 				<div>Show only important Message</div>
 				<Toggle value={showImpMsg} onChange={setShowImpMsg} />
-			</div>
+			</div> */}
 			{allMessage()}
 		</>
 	);

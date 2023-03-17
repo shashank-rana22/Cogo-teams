@@ -1,37 +1,33 @@
-import { toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 const useUpdateMessage = () => {
-	const scope = useSelector(({ general }) => general?.scope);
-
-	const updateShipmentAPI = useRequest(
-		'post',
-		false,
-		scope,
-	)('/update_chat_message');
+	const [{ loading }, trigger] = useRequest({
+		url    : 'update_chat_message',
+		method : 'POST',
+	}, { manual: true });
 
 	const onCreate = async ({ params }) => {
 		try {
-			await updateShipmentAPI.trigger({
+			await trigger({
 				data: {
 					...params,
 				},
 			});
 
 			if (params?.important === true) {
-				toast.success('Marked');
+				Toast.success('Marked');
 			} else {
-				toast.success('UnMarked');
+				Toast.success('UnMarked');
 			}
 		} catch (err) {
-			toast.error(err?.data?.message);
+			Toast.error(err?.data?.message);
 		}
 	};
 
 	return {
 		onCreate,
-		loading: updateShipmentAPI.loading,
+		loading,
 	};
 };
 
