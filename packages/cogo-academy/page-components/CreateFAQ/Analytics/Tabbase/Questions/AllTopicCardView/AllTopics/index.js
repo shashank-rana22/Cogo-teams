@@ -14,7 +14,7 @@ import ViewCardsList from './ViewCardsList';
 // 	tableRootElement.scrollLeft += scrollOffset;
 // };
 
-function AllTopic({ props = '' }) {
+function AllTopic({ props = {} }) {
 	const {
 		audiences = [],
 		display_name = '',
