@@ -120,20 +120,21 @@ function GenerateMAWB({
 		finalFields.forEach((c:any) => {
 			setValue(c.name, taskItem[c.name]);
 		});
-		setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
-		setValue('declaredValueForCarriage', 'NVD');
-		setValue('city', 'NEW DELHI');
-		setValue('place', 'NEW DELHI');
-		setValue('class', 'q');
-		setValue('currency', 'INR');
-		setValue('commodity', edit ? `${taskItem.commodity || ''}`
-			: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
-		setValue('agentOtherCharges', edit ? taskItem.agentOtherCharges
-			: agentOtherChargesCode);
-		setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
-			: carrierOtherChargesCode);
-		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
-		setValue('shipperSignature', taskItem.customer_name);
+		if (!viewDoc) {
+			setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
+			setValue('city', 'NEW DELHI');
+			setValue('place', 'NEW DELHI');
+			setValue('class', 'q');
+			setValue('currency', 'INR');
+			setValue('commodity', edit ? `${taskItem.commodity || ''}`
+				: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
+			setValue('agentOtherCharges', edit ? taskItem.agentOtherCharges
+				: agentOtherChargesCode);
+			setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
+				: carrierOtherChargesCode);
+			setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
+			setValue('shipperSignature', taskItem.customer_name);
+		}
 	}, []);
 
 	useEffect(() => {
