@@ -224,7 +224,7 @@ function Templates({
 								control={control}
 								{...content}
 								id="content"
-								rows={8}
+								rows={10}
 							/>
 							{errors?.content && (
 								<div className={styles.error_text}>

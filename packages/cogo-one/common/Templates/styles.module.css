@@ -78,13 +78,6 @@
 
 .text_area_container {
 	margin-top: 50px;
-
-	:global {
-		.ui_text_area_container {
-			min-height: 230px;
-			font-family: Poppins, sans-serif;
-		}
-	}
 }
 
 .loader_div {
