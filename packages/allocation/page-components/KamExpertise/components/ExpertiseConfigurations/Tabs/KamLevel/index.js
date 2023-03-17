@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
 import useGetKamExpertiseConfig from '../../../../hooks/useGetKamExpertiseConfig';
+import LoadingState from '../LoadingState';
 
 import Header from './Header';
 import KamLevelCard from './KamLevelCard';
 import KamLevelDropDown from './KamLevelDropDown';
-import LoadingState from '../LoadingState';
 import ResponseCard from './ResponseCard';
 import styles from './styles.module.css';
 
@@ -70,7 +70,7 @@ function KamLevel() {
 				</>
 
 			) : (
-				<LoadingState columnsToLoad={4}/>
+				<LoadingState columnsToLoad={4} />
 			)}
 
 		</div>
