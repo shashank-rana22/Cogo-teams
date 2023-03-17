@@ -6,6 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useCreateTestQuestion from '../../hooks/useCreateTestQuestion';
+import useUpdateCaseStudy from '../../hooks/useUpdateCaseStudy';
 import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
 import SingleQuestionComponent from '../SingleQuestionComponent';
 
@@ -42,6 +43,11 @@ function CreateQuestion({
 
 	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion();
 
+	const {
+		loading: updateCaseStudyLoading,
+		updateCaseStudy,
+	} = useUpdateCaseStudy();
+
 	const onsubmit = (values) => {
 		if (!isNewQuestion && editDetails?.question_type !== 'case_study') {
 			updateStandAloneTestQuestion({
@@ -74,9 +80,15 @@ function CreateQuestion({
 	};
 
 	const handleDeleteStandAloneQuestion = async () => {
-		await updateStandAloneTestQuestion({
-			testQuestionId : editDetails?.id,
-			action         : 'delete',
+		const apiMapping = {
+			true  : updateCaseStudy,
+			false : updateStandAloneTestQuestion,
+		};
+		const apiToUse = apiMapping[editDetails?.question_type === 'case_study'];
+
+		await apiToUse({
+			id     : editDetails?.id,
+			action : 'delete',
 			getTestQuestionTest,
 			questionSetId,
 			setEditDetails,
@@ -198,30 +210,28 @@ function CreateQuestion({
 					)}
 				</div>
 
-				{!(!isNewQuestion && editDetails?.question_type === 'case_study') ? (
-					<div className={styles.button_container}>
-						{!isNewQuestion
-								&& editDetails?.question_type !== 'case_study' ? (
-									<Button
-										themeType="accent"
-										loading={loading}
-										onClick={() => handleDeleteStandAloneQuestion()}
-										type="button"
-									>
-										Delete Question
-
-									</Button>
-							) : null}
-
+				<div className={styles.button_container}>
+					{!isNewQuestion ? (
 						<Button
-							loading={loading}
+							themeType="accent"
+							loading={loading || updateCaseStudyLoading}
+							onClick={() => handleDeleteStandAloneQuestion()}
+							type="button"
+						>
+							Delete Question
+						</Button>
+					) : null}
+
+					{!(!isNewQuestion && editDetails?.question_type === 'case_study') ? (
+						<Button
+							loading={loading || updateCaseStudyLoading}
 							type="submit"
 							themeType="primary"
 						>
 							{isNewQuestion ? 'Save Question' : 'Update Question'}
 						</Button>
-					</div>
-				) : null}
+					) : null}
+				</div>
 
 				<div className={styles.delete_icon}>
 					<IcMCrossInCircle onClick={() => deleteQuestion()} width={20} height={20} />

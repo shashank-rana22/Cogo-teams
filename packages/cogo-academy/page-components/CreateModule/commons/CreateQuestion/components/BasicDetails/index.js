@@ -60,7 +60,7 @@ function FormComponent({
 	setShowForm,
 	setValue,
 }) {
-	const editForm = () => {
+	const closeForm = () => {
 		setValue('topic', editDetails?.topic);
 		setValue('audience_ids', []);
 
@@ -125,7 +125,7 @@ function FormComponent({
 			{!isNewQuestion && editDetails?.question_type === 'case_study' ? (
 				<div
 					role="presentation"
-					onClick={() => editForm()}
+					onClick={() => closeForm()}
 					className={styles.cancel_button}
 				>
 					<IcMCrossInCircle />
