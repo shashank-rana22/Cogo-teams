@@ -29,21 +29,35 @@ const useCreateConfigurations = ({
 
 	const controls = getCreateConfigurationsControls({ setSegment });
 
+	const {
+		service_type,
+		role_ids,
+		user_ids,
+		exclusion_user_ids,
+		stakeholder_type,
+		segment_id,
+		locking_criterion,
+		locking_period,
+		cooling_period,
+		schedule_type,
+		days,
+	} = item;
+
 	const formProps = useForm({
 		defaultValues: {
-			service_type       : item.service_type || 'organization',
-			role_ids           : item.role_ids,
-			user_ids           : item.user_ids,
-			exclusion_user_ids : item.exclusion_user_ids,
-			stakeholder_type   : item.stakeholder_type,
-			segment_id         : item.segment_id || '6fd98605-9d5d-479d-9fac-cf905d292b88',
-			locking_criterion  : item.locking_criterion,
-			locking_period     : item.locking_period,
-			cooling_period     : item.cooling_period,
-			schedule_data      : {
-				schedule_type  : item.schedule_type || 'daily',
-				dates_of_month : item.days,
-				days_of_week   : item.days,
+			service_type  : service_type || 'organization',
+			role_ids,
+			user_ids,
+			exclusion_user_ids,
+			stakeholder_type,
+			segment_id,
+			locking_criterion,
+			locking_period,
+			cooling_period,
+			schedule_data : {
+				schedule_type  : schedule_type || 'daily',
+				dates_of_month : days,
+				days_of_week   : days,
 			},
 		},
 	});
@@ -124,7 +138,7 @@ const useCreateConfigurations = ({
 			...(values.user_ids?.length === 0 && {
 				user_ids: undefined,
 			}),
-			segment_type: segment || 'enterprise',
+			segment_type: segment,
 		};
 
 		delete propsForCreation.schedule_data;
