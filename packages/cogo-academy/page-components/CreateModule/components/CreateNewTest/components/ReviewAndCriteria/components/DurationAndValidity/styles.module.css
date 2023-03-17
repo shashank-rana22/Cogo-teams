@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background: #ffffff;
+  border-radius: 6px;
+  height: 130px;
+  width: 100%;
+  margin-top: 20px;
+}
+.sup {
+  color: red;
+}
+
+.control_container_two {
+  margin-top: 20px;
+}
+
+.label {
+  margin-bottom: 10px;
+}

@@ -18,6 +18,7 @@ export { default as AsyncSelectController } from './page-components/Controlled/A
 export { default as TextAreaController } from './page-components/Controlled/TextAreaController';
 export { default as CheckboxController } from './page-components/Controlled/CheckboxController';
 export { default as CountrySelectController } from './page-components/Controlled/CountrySelectController';
+export { default as InputGroupController } from './page-components/Controlled/InputGroupController';
 
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';

@@ -1,6 +1,7 @@
 import { Pill } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
+import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
@@ -41,6 +42,7 @@ function ReviewAndCriteria() {
 				</div>
 			</div>
 			<QuestionsAndDistribution />
+			<DurationAndValidity />
 		</div>
 	);
 }
