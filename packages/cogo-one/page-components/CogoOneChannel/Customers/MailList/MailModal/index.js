@@ -1,8 +1,9 @@
-import { Toast, cl, Modal, Button, Tags, RTE, Input } from '@cogoport/components';
+import { Toast, cl, Modal, Button, RTE, Input } from '@cogoport/components';
 import { IcMSend, IcMAttach, IcMCross } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
 import CustomFileUploader from '../../../../../common/CustomFileUploader';
+import CustomInput from '../../../../../common/EmailCustomTag/index';
 import { TOOLBARCONFIG } from '../../../../../constants';
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
 import getFileAttributes from '../../../../../utils/getFileAttributes';
@@ -150,26 +151,12 @@ function MailModal({
 		}
 	};
 
-	const formatData = ({ data, color }) => {
-		const recipientTags = [];
-		(data || []).map((itm, index) => (
-			recipientTags.push({
-				key      : index,
-				disabled : false,
-				children : itm,
-				prefix   : null,
-				suffix   : null,
-				color,
-				tooltip  : false,
-				closable : true,
-			})
-		));
-		return recipientTags;
-	};
-
-	const handleDelete = (val, setValue) => {
-		const formattedValue = val.map((item) => item?.children);
-		setValue(formattedValue);
+	const handleDelete = (val, emailType) => {
+		if (emailType === 'recipient') {
+			setRecipientArray((p) => p.filter((data) => data !== val));
+		} else {
+			setBccArray((p) => p.filter((data) => data !== val));
+		}
 	};
 
 	const handleAttachmentDelete = (url) => {
@@ -208,42 +195,46 @@ function MailModal({
 						{' '}
 					</div>
 					<div className={styles.tags_div}>
-						<Tags
-							items={formatData({ data: recipientArray, color: '#FEF199' })}
-							className={styles.styled_ui_tags_container}
-							onItemsChange={(val) => handleDelete(val, setRecipientArray)}
-						/>
-					</div>
-					{(showControl && type === 'recipient') && (
-						<div className={styles.tag_and_errorcontainer}>
-							<div className={styles.tag_container}>
-								<input
-									size="sm"
-									placeholder="Enter recipient"
-									type="text"
-									value={recipientValue}
-									onChange={(e) => handleChange(e)}
-									onKeyPress={(e) => handleKeyPress(e)}
-									className={cl`${error ? styles.error_input_container : styles.input_container}`}
-									id="inputId"
+						{
+							recipientArray.map((data) => (
+								<CustomInput
+									email={data}
+									handleDelete={handleDelete}
+									type="recipient"
 								/>
-								<div className={styles.cross_icon}>
-									<IcMCross onClick={() => handleError('receipient')} />
+							))
+						}
+						{(showControl && type === 'recipient') && (
+							<div className={styles.tag_and_errorcontainer}>
+								<div className={styles.tag_container}>
+									<input
+										size="sm"
+										placeholder="Enter recipient"
+										type="text"
+										value={recipientValue}
+										onChange={(e) => handleChange(e)}
+										onKeyPress={(e) => handleKeyPress(e)}
+										className={cl`${error ? styles.error_input_container : styles.input_container}`}
+										id="inputId"
+									/>
+									<div className={styles.cross_icon}>
+										<IcMCross onClick={() => handleError('receipient')} />
+									</div>
 								</div>
+								{(error) && (
+									<div className={styles.error_content_container}>
+										{errorValue}
+									</div>
+								)}
 							</div>
-							{(error) && (
-								<div className={styles.error_content_container}>
-									{errorValue}
-								</div>
-							)}
+						)}
+						<div
+							className={styles.add_icon}
+							onClick={() => handleEdit('recipient')}
+							role="presentation"
+						>
+							+
 						</div>
-					)}
-					<div
-						className={styles.add_icon}
-						onClick={() => handleEdit('recipient')}
-						role="presentation"
-					>
-						+
 					</div>
 				</div>
 				<div className={styles.type_to}>
@@ -252,11 +243,16 @@ function MailModal({
 						{' '}
 					</div>
 					<div className={styles.tags_div}>
-						<Tags
-							items={formatData({ data: bccArray, color: '#CFEAED' })}
-							className={styles.styled_ui_tags_container}
-							onItemsChange={(val) => handleDelete(val, setBccArray)}
-						/>
+						{
+							bccArray.map((data) => (
+								<CustomInput
+									email={data}
+									handleDelete={handleDelete}
+									type="cc_bcc"
+									className={styles.tags_coantiner}
+								/>
+							))
+						}
 					</div>
 					{(showControl && type === 'cc_bcc') && (
 						<div className={styles.tag_and_errorcontainer}>

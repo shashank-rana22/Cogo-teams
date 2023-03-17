@@ -1,0 +1,35 @@
+.email_tag_container {
+	display: flex;
+	width: fit-content;
+	border-radius: 6px;
+}
+
+.input_container {
+	align-items: center;
+	padding: 2px 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.input_value {
+	font-size: 12px;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.cross_icon {
+	height: 22px;
+	padding: 2px 4px;
+	cursor: pointer;
+	border-radius: 0 4px 4px 0;
+}
+
+.plus_icon {
+	width: 20px;
+	height: 20px;
+	margin-left: 8px;
+	color: #ffff;
+	cursor: pointer;
+	background: #ee3425;
+	border-radius: 50%;
+}
