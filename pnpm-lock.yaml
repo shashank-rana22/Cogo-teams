@@ -59,6 +59,7 @@ importers:
       '@cogoport/core': workspace:0.1.0
       '@cogoport/enrichment': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/ground-ops': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/locations': workspace:0.1.0
@@ -94,6 +95,7 @@ importers:
       '@cogoport/core': link:../common/core
       '@cogoport/enrichment': link:../packages/enrichment
       '@cogoport/forms': link:../common/forms
+      '@cogoport/globalization': link:../common/globalization
       '@cogoport/ground-ops': link:../packages/ground-ops
       '@cogoport/icons-react': 1.0.58_biqbaboplfbrettd7655fr4n2y
       '@cogoport/locations': link:../packages/locations
@@ -168,9 +170,15 @@ importers:
 
   common/globalization:
     specifiers:
+<<<<<<< HEAD
       '@cogoport/utils': ^1.2.6
     dependencies:
       '@cogoport/utils': 1.2.6
+=======
+      '@cogoport/utils': ^1.2.2
+    dependencies:
+      '@cogoport/utils': 1.2.4
+>>>>>>> 80dddf2c3a6a9e339739f6c27a07e929afc7a11f
 
   common/navigation-configs:
     specifiers:

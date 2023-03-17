@@ -155,7 +155,7 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 							>
 								<p
 									className={styles.font_style}
-									style={{ fontSize: 14 }}
+									style={{ fontSize: 14, textTransform: 'uppercase' }}
 								>
 									{formData?.origin}
 
@@ -742,7 +742,7 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 							>
 								<p
 									className={styles.font_style}
-									style={{ fontSize: 14 }}
+									style={{ fontSize: 14, textTransform: 'uppercase' }}
 								>
 									{formData?.destination}
 
