@@ -10,7 +10,7 @@ const useBulkUpload = ({ refetch, setShow }) => {
 		profile: profileData = {},
 	} = useSelector((state: object) => state);
 
-	const [trigger] = useRequestBf({
+	const [{ loading }, trigger] = useRequestBf({
 		url     : '/translation/translate/bulk-translations',
 		method  : 'POST',
 		authKey : 'post_translation_translate_bulk',
@@ -23,8 +23,11 @@ const useBulkUpload = ({ refetch, setShow }) => {
 	const bulkUpload = async () => {
 		try {
 			const response = await trigger({ data: {} });
-			if (response.hasError) {
-				Toast.error(response?.message || 'Something went wrong');
+
+			if (response.data?.rejectedCount !== 0) {
+				Toast.success(`${response.data?.successCount} Translations Added`);
+				Toast.error(`${response.data?.rejectedCount} Translations Rejected` || 'Something went wrong');
+				window.open(response.data?.errorFileUrl, '_blank');
 				return;
 			}
 			Toast.success('Translations Added');
@@ -36,6 +39,7 @@ const useBulkUpload = ({ refetch, setShow }) => {
 	};
 
 	return {
+		loading,
 		fileUrl,
 		setFileUrl,
 		bulkUpload,
