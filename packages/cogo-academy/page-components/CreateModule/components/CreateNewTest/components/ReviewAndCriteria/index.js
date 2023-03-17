@@ -11,7 +11,7 @@ import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
-function ReviewAndCriteria({ setActiveStepper }) {
+function ReviewAndCriteria() {
 	const { control, formState:{ errors }, watch } = useForm();
 	const router = useRouter();
 	const test_id = router.query?.id;
@@ -36,7 +36,7 @@ function ReviewAndCriteria({ setActiveStepper }) {
 				<IcMArrowBack width={20} height={20} onClick={navigate} />
 				<div className={styles.title}> Review and Set Criteria </div>
 			</div>
- 
+
 			<div className={styles.subcontainer}>
 				<div className={styles.label}>{data?.name || '-'}</div>
 				<div className={styles.topic}>
