@@ -51,9 +51,9 @@
 
 .answer_key {
 	max-width: 250px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	white-space: nowrap;
-  	overflow: hidden;
-  	text-overflow: ellipsis;	
 }
 
 .answer {

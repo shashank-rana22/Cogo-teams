@@ -1,6 +1,9 @@
+import { Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
-function useCreateTest() {
+function useCreateTest({ setTestId, setActiveStepper }) {
+	const router = useRouter();
 	const [{ loading = false }, trigger] = useRequest({
 		url    : 'create_test',
 		method : 'POST',
@@ -10,18 +13,22 @@ function useCreateTest() {
 			console.log(formValues, idArray);
 			const res = await trigger({
 				data: {
-					...formValues,
-					set_wise_distribution : [],
-					test_duration         : '1hr',
+					name                  : formValues.name,
+					set_wise_distribution : [
+						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'case_study' })),
+						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'stand_alone' }))],
+					test_duration: '1hr',
 				},
 			});
+			setTestId(res?.data?.id);
+			const as = `/learning/faq/create/test-module/create?id=${res?.data?.id}`;
+			const href = `/learning/faq/create/test-module/create?id=${res?.data?.id}`;
+			router.push(href, as);
+			setActiveStepper('review_and_criteria');
+			Toast.success('Created Successfully');
 			console.log('done:: ', res);
-		} catch (error) {
-			console.log({
-				...formValues,
-				set_wise_distribution: idArray.map((id) => ({ test_question_set_id: id })),
-			});
-			console.log(error);
+		} catch (err) {
+			Toast.error(err?.message || 'Something went wrong');
 		}
 	};
 	return {
