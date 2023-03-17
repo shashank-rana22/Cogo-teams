@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const EmptyFunction = () => {};
 
@@ -11,8 +11,8 @@ const useListCogooneTimeline = ({
 	user_id = '',
 	lead_user_id = '',
 	type = '',
+	pagination,
 }) => {
-	const [page, setPage] = useState(1);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_cogoone_timeline',
 		method : 'get',
@@ -42,7 +42,7 @@ const useListCogooneTimeline = ({
 					filters: {
 						channel_chat_id: id,
 					},
-					page,
+					pagination,
 				};
 			}
 			const res = await trigger({
@@ -78,7 +78,7 @@ const useListCogooneTimeline = ({
 		} catch (error) {
 			// console.log(error);
 		}
-	}, [id, page, setMessagesState, trigger, type]);
+	}, [id, pagination, setMessagesState, trigger, type]);
 
 	useEffect(() => {
 		if (activeSubTab === 'agent' && (user_id || lead_user_id)) {
@@ -90,8 +90,6 @@ const useListCogooneTimeline = ({
 		data,
 		getCogooneTimeline,
 		loading,
-		page,
-		setPage,
 	};
 };
 

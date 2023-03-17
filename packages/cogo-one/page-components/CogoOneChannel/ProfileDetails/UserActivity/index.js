@@ -17,7 +17,7 @@ import styles from './styles.module.css';
 function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessageData }) {
 	const [activityTab, setActivityTab] = useState('transactional');
 	const [filterVisible, setFilterVisible] = useState(false);
-	const [filters, setFilters] = useState([]);
+	const [pagination, setPagination] = useState(1);
 	const [activeSubTab, setActiveSubTab] = useState('channels');
 
 	const { user_id:messageUserId, lead_user_id:messageLeadUserId = null, id = '' } = formattedMessageData || {};
@@ -31,9 +31,9 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 	const {
 		loading = false,
 		data = {},
-		pagination,
+		filters,
+		setFilters,
 		fetchActivityLogs = () => {},
-		setPagination = () => {},
 	} = useGetOmnichannelActivityLogs({
 		activeVoiceCard,
 		activeTab,
@@ -43,19 +43,21 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		lead_user_id,
 		activityTab,
 		activeSubTab,
+		pagination,
+		setPagination,
 	});
-
 	const {
 		loading: timeLineLoading = false,
 		data: timeLineData = {},
-		page,
-		setPage = () => {},
 	} = useListCogooneTimeline({
 		activeSubTab,
 		id,
 		user_id,
 		lead_user_id,
 		type: 'activity',
+		pagination,
+		setPagination,
+
 	});
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
@@ -72,40 +74,30 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		total_count = data?.[activityTab]?.spot_searches?.total_count || '0';
 	}
 
-	const handleFilters = () => {
-		setPagination(1);
-		fetchActivityLogs(filters);
-	};
-
-	const handleReset = () => {
-		setFilters([]);
-		fetchActivityLogs();
-	};
-
 	useEffect(() => {
 		setActivityTab('transactional');
 	}, [customerId]);
 
 	useEffect(() => {
-		setFilters([]);
+		setFilters(null);
 		setActiveSubTab('channels');
 		setPagination(1);
-		setPage(1);
 	}, [activityTab]);
 
-	useEffect(() => {
-		setPage(1);
-	}, [activeSubTab]);
-
-	const pageChange = (value) => {
-		if (activeSubTab === 'agent') {
-			setPage(value);
-		} else {
-			setPagination(value);
-		}
+	const handleFilters = (val) => {
+		setPagination(1);
+		setFilters(val);
 	};
 
-	const emptyCheck = (!user_id && !lead_user_id) || isEmpty(list) || isEmpty(timeLineList);
+	const handleReset = () => {
+		setFilters(null);
+		fetchActivityLogs();
+	};
+
+	useEffect(() => { setPagination(1); setFilters(null); }, [activeSubTab]);
+
+	const emptyList = activeSubTab !== 'channels' ? timeLineList : list;
+	const emptyCheck = (!user_id && !lead_user_id) || isEmpty(emptyList);
 
 	function ShowData() {
 		return emptyCheck ? (
@@ -167,7 +159,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 					</div>
 
 					{activityTab !== 'platform' && (
-						<div className={styles.filter_icon}>
+						<div className={styles.filter_icon} key={activeTab}>
 							<Popover
 								placement="left"
 								render={(
@@ -206,10 +198,10 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 				<div className={styles.pagination}>
 					<Pagination
 						type="page"
-						currentPage={activeSubTab === 'agent' ? page : pagination}
+						currentPage={pagination}
 						totalItems={activeSubTab === 'agent' ? count : total_count}
 						pageSize={10}
-						onPageChange={(val) => pageChange(val)}
+						onPageChange={(val) => setPagination(val)}
 					/>
 				</div>
 			)}
