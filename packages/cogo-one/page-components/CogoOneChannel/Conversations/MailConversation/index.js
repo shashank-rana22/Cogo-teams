@@ -9,19 +9,28 @@ import styles from './styles.module.css';
 function MailConversation({ activeMail }) {
 	const { data = {} } = useListMailDetails({ activeMail });
 
-	const { bodyPreview = '', sentDateTime = '', subject = '', sender = {}, toRecipients = [] } = data || {};
+	const {
+		// bodyPreview = '',
+		sentDateTime = '',
+		subject = '',
+		sender = {},
+		toRecipients = [],
+		body = {},
+		ccRecipients = [],
+	} = data || {};
+	const { content = '' } = body || {};
 
 	return (
 		<div className={styles.container}>
 			<Header subject={subject} />
-			<Emailbody sender={sender} toRecipients={toRecipients} />
-			<div>
+			<Emailbody sender={sender} toRecipients={toRecipients} ccRecipients={ccRecipients} />
+			<div className={styles.message_div}>
 				<div className={styles.time_stamp}>
 					{format(sentDateTime, 'HH:mm a dd MMM')}
 				</div>
 				<div
 					className={styles.receive_message_container}
-					dangerouslySetInnerHTML={{ __html: bodyPreview.replace(/(\r\n|\r|\n)/g, '<br>') }}
+					dangerouslySetInnerHTML={{ __html: content }}
 				/>
 			</div>
 		</div>

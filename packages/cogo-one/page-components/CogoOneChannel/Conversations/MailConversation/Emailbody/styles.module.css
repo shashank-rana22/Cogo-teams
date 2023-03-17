@@ -10,7 +10,6 @@
 }
 
 .email_body_avatar {
-	margin: 0 10px;
 }
 
 .header_details {
@@ -18,9 +17,23 @@
 }
 
 .header_name {
-	margin: 0 0 2px;
+	font-size: 14px;
+	font-weight: 500;
+
+	span {
+		font-size: 12px;
+	}
 }
 
 .header_to {
 	display: flex;
+	align-items: center;
+}
+
+.name {
+	display: flex;
+	align-items: center;
+	margin: 0 4px;
+	font-size: 12px;
+	text-align: center;
 }
