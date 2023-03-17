@@ -69,7 +69,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 					<p className={styles.font_style} style={{ fontSize: 18 }}>{awbNumber}</p>
 				</div>
 			</div>
-			<div className={styles.flex}>
+			<div className={styles.flex} style={{ minHeight: 140 }}>
 				<div
 					className={cl`
 					${styles.block} 

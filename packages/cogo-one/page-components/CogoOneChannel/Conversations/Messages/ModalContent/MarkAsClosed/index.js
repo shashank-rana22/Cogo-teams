@@ -68,6 +68,7 @@ function MarkAsClosed({ data = {}, loading = false }) {
 							placeholder="Enter Remark"
 							value={inputValue}
 							onChange={(val) => setInputValue(val)}
+							rows={8}
 						/>
 					</div>
 					<div className={styles.button_container}>
