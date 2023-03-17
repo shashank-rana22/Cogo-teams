@@ -18,19 +18,19 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 
 	const payload = {
 		new_awb: {
-			assignedStakeholder : 'ground_ops',
+			assignedStakeholder : 'service_ops2_docs',
 			status              : 'pending',
 			task                : ['upload_mawb_freight_certificate'],
 		},
 		approval_pending: {
-			assignedStakeholder : 'ground_ops',
+			assignedStakeholder : 'service_ops2_docs',
 			status              : 'pending',
 			task                : ['approve_draft_airway_bill', 'amend_draft_airway_bill'],
 			documentType        : 'draft_airway_bill',
 			isDocDataRequired   : true,
 		},
 		approved_awb: {
-			assignedStakeholder : 'ground_ops',
+			assignedStakeholder : 'service_ops2_docs',
 			status              : 'completed',
 			task                : ['upload_mawb_freight_certificate'],
 			documentType        : 'draft_airway_bill',

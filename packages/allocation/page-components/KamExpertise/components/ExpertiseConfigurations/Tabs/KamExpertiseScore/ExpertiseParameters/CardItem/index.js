@@ -53,10 +53,6 @@ function CardItem({ item, editMode, control}) {
 									options: options || [],
 								}
 
-								// const controlsObject = EDIT_CONFIG_CONTROLS_MAPPING[`${group_name}_${condition_name}_${controlName}`];
-
-								// const controlsObject = EDIT_CONFIG_CONTROLS_MAPPING[controlName];
-
 								const Element = getFieldController(controlsObject.type) || null;
 
 								return (
