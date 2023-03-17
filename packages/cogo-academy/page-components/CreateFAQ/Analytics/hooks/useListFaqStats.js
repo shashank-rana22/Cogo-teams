@@ -61,7 +61,7 @@ function useListFaqStats({
 	useEffect(() => {
 		fetchFaqStats();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, query, topicId, JSON.stringify(tagId)]);
+	}, [page, query, topicId, JSON.stringify(tagId), date]);
 
 	const { page_limit, total_count } = data || {};
 

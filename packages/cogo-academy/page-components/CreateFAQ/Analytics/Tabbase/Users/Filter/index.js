@@ -8,6 +8,8 @@ function Filter({ selectedItem, setSelectedItem }) {
 	const options = [
 		{ label: 'Users Groups', value: 'Users Group' },
 	];
+	const today = new Date();
+	today.setDate(today.getDate() + 1);
 
 	return (
 		<div style={{ marginTop: '1rem' }}>
@@ -51,8 +53,7 @@ function Filter({ selectedItem, setSelectedItem }) {
 						onChange={setDate}
 						value={date}
 						dateFormat="MMM dd, yyyy"
-						isPreviousDaysAllowed
-						// maxDate={maxDate}
+						maxDate={today}
 						// disable={statsLoading || globeLoading || chatLoading}
 					/>
 

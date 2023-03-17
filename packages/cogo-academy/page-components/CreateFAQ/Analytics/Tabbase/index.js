@@ -46,7 +46,7 @@ function Tabbase() {
 						</>
 					)}
 				>
-					<Users props={props} />
+					<Users props={props} date={date} setDate={setDate} />
 				</TabPanel>
 			</Tabs>
 		</div>

@@ -21,7 +21,7 @@ function Questions({ props = {}, date = '', setDate = () => {} }) {
 
 				/>
 			)
-				: <AllTopicCardView />}
+				: <AllTopicCardView date={date} setDate={setDate} />}
 		</div>
 	);
 }

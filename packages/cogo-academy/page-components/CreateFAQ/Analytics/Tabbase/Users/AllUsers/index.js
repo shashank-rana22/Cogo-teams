@@ -13,7 +13,7 @@ import ViewCardsList from './ViewCardsList';
 // 	tableRootElement.scrollLeft += scrollOffset;
 // };
 
-function AllUsers(props = '') {
+function AllUsers({ props = '' }) {
 	const {
 		active_audiences = [],
 		most_viewed_questions = [],

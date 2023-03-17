@@ -8,6 +8,7 @@ function Filter({ selectedItem, setSelectedItem, date, setDate }) {
 		{ label: 'All Topics', value: 'All_topics' },
 
 	];
+	const today = new Date();
 
 	return (
 		<div style={{ marginTop: '1rem' }}>
@@ -52,7 +53,7 @@ function Filter({ selectedItem, setSelectedItem, date, setDate }) {
 						value={date}
 						dateFormat="MMM dd, yyyy"
 						isPreviousDaysAllowed
-						// maxDate={maxDate}
+						maxDate={today}
 						// disable={statsLoading || globeLoading || chatLoading}
 					/>
 
