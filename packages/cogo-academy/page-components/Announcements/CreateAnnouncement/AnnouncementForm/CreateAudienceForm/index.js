@@ -33,18 +33,10 @@ function CreateAudienceForm(props) {
 		entity_data,
 	} = useListCogoEntity();
 
-	const entity_options = [];
-
-	entity_data.map((entityData) => {
-		const { business_name = '', id = '' } = entityData || {};
-
-		const options = {
-			label : business_name,
-			value : id,
-		};
-		entity_options.push(options);
-		return entity_options;
-	});
+	const entity_options = entity_data.map((entityData) => ({
+		label : entityData.business_name,
+		value : entityData.id,
+	}));
 
 	const indiaOption = countries.find((country) => country.country_code === 'IN');
 
