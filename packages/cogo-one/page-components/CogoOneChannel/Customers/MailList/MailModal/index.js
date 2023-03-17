@@ -249,40 +249,39 @@ function MailModal({
 									email={data}
 									handleDelete={handleDelete}
 									type="cc_bcc"
-									className={styles.tags_coantiner}
 								/>
 							))
 						}
-					</div>
-					{(showControl && type === 'cc_bcc') && (
-						<div className={styles.tag_and_errorcontainer}>
-							<div className={styles.tag_container}>
-								<input
-									size="sm"
-									placeholder="Enter cc recipient"
-									type="text"
-									value={ccBccValue}
-									onChange={(e) => handleChange(e)}
-									onKeyPress={(e) => handleKeyPress(e)}
-									className={cl`${error ? styles.error_input_container : styles.input_container}`}
-								/>
-								<div className={styles.cross_icon}>
-									<IcMCross onClick={() => handleError('ccBccValue')} />
+						{(showControl && type === 'cc_bcc') && (
+							<div className={styles.tag_and_errorcontainer}>
+								<div className={styles.tag_container}>
+									<input
+										size="sm"
+										placeholder="Enter cc recipient"
+										type="text"
+										value={ccBccValue}
+										onChange={(e) => handleChange(e)}
+										onKeyPress={(e) => handleKeyPress(e)}
+										className={cl`${error ? styles.error_input_container : styles.input_container}`}
+									/>
+									<div className={styles.cross_icon}>
+										<IcMCross onClick={() => handleError('ccBccValue')} />
+									</div>
 								</div>
+								{(error) && (
+									<div className={styles.error_content_container}>
+										Enter valid mail
+									</div>
+								)}
 							</div>
-							{(error) && (
-								<div className={styles.error_content_container}>
-									Enter valid mail
-								</div>
-							)}
+						)}
+						<div
+							className={styles.add_icon}
+							onClick={() => handleEdit('cc_bcc')}
+							role="presentation"
+						>
+							+
 						</div>
-					)}
-					<div
-						className={styles.add_icon}
-						onClick={() => handleEdit('cc_bcc')}
-						role="presentation"
-					>
-						+
 					</div>
 				</div>
 				<div className={styles.type_to}>
