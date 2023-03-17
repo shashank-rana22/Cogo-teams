@@ -1,7 +1,7 @@
 import { Popover, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import RenderCargoPills from '../CargoDetails/RenderCargoPills';
+import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';
 
@@ -21,7 +21,7 @@ function MultiServiceDetails({
 
 	const renderBody = () => (
 		mainServices?.map((item) => (
-			<div className={styles.sd}>
+			<div className={styles.container}>
 				<RenderCargoPills detail={item} className="details" />
 			</div>
 		))

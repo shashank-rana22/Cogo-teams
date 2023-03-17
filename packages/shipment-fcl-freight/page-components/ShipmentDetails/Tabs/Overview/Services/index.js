@@ -1,6 +1,6 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
-import { ShipmentDetailContext } from '@cogoport/context';
 import { serviceObj, serviceList } from '../dummy_data';
 
 import Loader from './Loader';

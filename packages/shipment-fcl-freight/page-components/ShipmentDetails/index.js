@@ -1,6 +1,6 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useMemo } from 'react';
 
-import { ShipmentDetailContext } from '@cogoport/context';
 import useGetShipment from '../../hooks/useGetShipment';
 import useListShipmentServices from '../../hooks/useListShipmentServices';
 
@@ -11,10 +11,11 @@ import TopBar from './TopBar';
 import { ShipmentChat } from '../../../../common/shipment-chat';
 
 function ShipmentDetails() {
-
 	const { get } = useGetShipment();
 
-	const { servicesGet } = useListShipmentServices({ ...get });
+	const { shipment_data } = get;
+
+	const { servicesGet } = useListShipmentServices({ shipment_data });
 
 	const contextValues = useMemo(() => ({
 		...get,

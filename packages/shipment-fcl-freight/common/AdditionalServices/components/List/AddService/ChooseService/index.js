@@ -1,8 +1,7 @@
 import Pill from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import startCase from '@cogoport/utils';
 import React, { useContext } from 'react';
-
-import { ShipmentDetailContext } from '@cogoport/context';
 
 import FilterService from './FilterServices';
 import { getOtherServiceOptions } from './getOptions';

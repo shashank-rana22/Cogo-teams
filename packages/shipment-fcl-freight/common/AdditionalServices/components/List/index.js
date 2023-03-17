@@ -1,10 +1,10 @@
 // import useGetPermission from '@cogoport/business-modules/hooks/useGetPermission';
 import { Button, Modal } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
-import { ShipmentDetailContext } from '@cogoport/context';
 import AddRate from '../AddRate';
 
 import AddService from './AddService';
@@ -23,9 +23,9 @@ function List({
 }) {
 	// const { isConditionMatches } = useGetPermission();
 	const { scope, isShipper, isMobile } = useSelector(({ general }) => ({
-		isShipper: general.query.account_type === 'importer_exporter',
-		scope: general.scope,
-		isMobile: general.isMobile,
+		isShipper : general.query.account_type === 'importer_exporter',
+		scope     : general.scope,
+		isMobile  : general.isMobile,
 	}));
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
