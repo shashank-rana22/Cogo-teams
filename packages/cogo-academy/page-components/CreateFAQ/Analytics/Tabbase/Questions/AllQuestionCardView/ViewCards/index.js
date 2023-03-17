@@ -3,6 +3,7 @@ import { Tooltip } from '@cogoport/components';
 import styles from './styles.module.css';
 
 function ViewCards({ cardHeading = '', subHeading = [] }) {
+	console.log(subHeading[0]);
 	const truncate = (str) => (str?.length > 12 ? `${str.substring(0, 10)}...` : str);
 	return (
 
@@ -20,7 +21,7 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 								<div>{truncate(subHeading[0]?.name)}</div>
 							</Tooltip>
 						</div>
-						{subHeading[0]?.views}
+						{subHeading[0]?.view_count ? subHeading[0]?.view_count : subHeading[0]?.views}
 						{' '}
 						Views
 						,
@@ -34,7 +35,7 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 							</Tooltip>
 
 						</div>
-						{subHeading[1]?.views}
+						{subHeading[1]?.view_count ? subHeading[1]?.view_count : subHeading[1]?.views}
 						{' '}
 						Views
 						,

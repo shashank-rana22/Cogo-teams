@@ -83,7 +83,7 @@ function GraphUI() {
                 justify           : false,
                 translateX        : 100,
                 translateY        : 0,
-                itemsSpacing      : 40,
+                itemsSpacing      : 120,
                 itemDirection     : 'left-to-right',
                 itemWidth         : 90,
                 itemHeight        : 90,
