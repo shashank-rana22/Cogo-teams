@@ -1,0 +1,26 @@
+.email_body {
+	display: flex;
+	padding: 10px;
+	margin-top: 15px;
+}
+
+.body_header {
+	display: flex;
+	align-items: center;
+}
+
+.email_body_avatar {
+	margin: 0 10px;
+}
+
+.header_details {
+	margin: 0 10px;
+}
+
+.header_name {
+	margin: 0 0 2px;
+}
+
+.header_to {
+	display: flex;
+}
