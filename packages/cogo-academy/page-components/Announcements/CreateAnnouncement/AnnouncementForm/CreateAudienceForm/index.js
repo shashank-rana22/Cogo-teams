@@ -2,13 +2,13 @@ import { Button } from '@cogoport/components';
 import { SelectController, InputController } from '@cogoport/forms';
 import { useEffect } from 'react';
 
-// eslint-disable-next-line import/no-relative-packages
-import countries from '../../../../../../../.data-store/constants/countries.json';
-
 import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
 import useListCogoEntity from './useListCogoEntities';
 import createAudienceControls from './utils/createAudienceControls';
+
+// eslint-disable-next-line import/no-unresolved
+import countries from '@/data-store/constants/countries.json';
 
 function CreateAudienceForm(props) {
 	const {
