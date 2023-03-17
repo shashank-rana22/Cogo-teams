@@ -61,8 +61,8 @@ function GraphUI() {
 							legendOffset   : -40,
 							legendPosition : 'middle',
 						}}
-						pointSize={10}
-						pointColor={{ theme: 'background' }}
+						pointSize={8}
+						pointColor="white"
 						pointBorderWidth={2}
 						pointBorderColor={{ from: 'serieColor' }}
 						pointLabelYOffset={-14}
