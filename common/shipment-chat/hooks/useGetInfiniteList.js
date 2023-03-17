@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import { useSelector } from '@cogoport/store';
+import { useState, useEffect } from 'react';
 
 const useGetInfiniteList = (hook, params = {}) => {
 	const { pathname } = useSelector(({ general, profile }) => ({
@@ -11,9 +11,9 @@ const useGetInfiniteList = (hook, params = {}) => {
 	const [initialPath] = useState(pathname);
 	const [filters, setFilters] = useState({ page: 1, highlight: undefined });
 	const [list, setList] = useState({
-		data: [],
-		total: 0,
-		total_page: 0,
+		data       : [],
+		total      : 0,
+		total_page : 0,
 	});
 	const { page, highlight = false, ...restFilters } = filters;
 
@@ -28,9 +28,9 @@ const useGetInfiniteList = (hook, params = {}) => {
 						data?.page <= 1
 							? data?.list || []
 							: [...(prevState.data || []), ...(data?.list || [])],
-					total: data?.total_count,
-					total_page: data?.total,
-					fullResponse: res?.data,
+					total        : data?.total_count,
+					total_page   : data?.total,
+					fullResponse : res?.data,
 				}));
 				setLoading(false);
 			})

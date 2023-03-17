@@ -1,4 +1,4 @@
-import { toast } from '@cogoport/front/components';
+import { toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 

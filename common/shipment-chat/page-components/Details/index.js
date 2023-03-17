@@ -19,7 +19,7 @@ import React, { useRef } from 'react';
 // import getControls from './controls';
 import Loader from './Loader';
 // import MessageContainer from './MessageContainer';
-import SendTo from './SendTo';
+// import SendTo from './SendTo';
 import stakeholderMappings from './SendTo/stakeholder-mappings';
 import styles from './styles.module.css';
 
@@ -47,7 +47,7 @@ function Details({
 	personal_data = {},
 }) {
 	const { push } = useRouter();
-	const sendToRef = useRef(null);
+	// const sendToRef = useRef(null);
 	const { data, isGettingShipment } = get;
 	const {
 		shipment_data,
@@ -187,12 +187,13 @@ function Details({
 				/> */}
 
 				{source === 'shipment' ? (
-					<SendTo
-						ref={sendToRef}
-						data={data}
-						// setStakeHolderView={setStakeHolderView}
-						isStakeholder={isStakeholder}
-					/>
+					// <SendTo
+					// 	ref={sendToRef}
+					// 	data={data}
+					// 	// setStakeHolderView={setStakeHolderView}
+					// 	isStakeholder={isStakeholder}
+					// />
+					null
 				) : (
 					<div style={{ padding: '21px' }} />
 				)}

@@ -2,12 +2,6 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 const useGetChannel = ({ channel_id }) => {
-	// const {
-	// 	trigger,
-	// 	loading: isGettingShipment,
-	// 	data: shipment,
-	// } = useRequest('get', false, scope)('/get_chat_channel');
-
 	const [{ loading: isGettingShipment, data: shipment }, trigger] = useRequest({
 		url    : 'get_chat_channel',
 		method : 'GET',

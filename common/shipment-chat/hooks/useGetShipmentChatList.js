@@ -1,7 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
-// import useGetFiniteList from './useGetFiniteList';
 
 const useGetShipmentChatList = ({ status }) => {
 	const [list, setList] = useState({
@@ -20,32 +19,37 @@ const useGetShipmentChatList = ({ status }) => {
 		url    : 'list_chat_channels',
 		method : 'GET',
 	}, { manual: true });
-
-	const getShipmentChatList = async (restFilters, currentPage) => {
-		console.log(restFilters, 'pageee');
-		const res = await trigger({
-			params: {
-				filters: {
-					subscribe_user_id: user_id,
-					status,
-					...(restFilters || {}),
-				},
-				page: currentPage || '1',
-			},
-		});
-		setList((prevState) => ({
-			data:
-				res?.data?.page <= 1
-					? res?.data?.list || []
-					: [...(prevState.data || []), ...(res?.data?.list || [])],
-			total      : res?.data?.total_count,
-			total_page : res?.data?.total,
-		}));
-	};
+	const getShipmentChatList = useCallback(() => {
+		(async (restFilters, currentPage) => {
+			console.log(currentPage, 'currentPage');
+			try {
+				const res = await trigger({
+					params: {
+						filters: {
+							subscribe_user_id: user_id,
+							status,
+							...(restFilters || {}),
+						},
+						page: currentPage || '1',
+					},
+				});
+				setList((prevState) => ({
+					data:
+						res?.data?.page <= 1
+							? res?.data?.list || []
+							: [...(prevState.data || []), ...(res?.data?.list || [])],
+					total      : res?.data?.total_count,
+					total_page : res?.data?.total,
+				}));
+			} catch (err) {
+				console.log(err);
+			}
+		})();
+	}, [trigger, status, user_id]);
 
 	useEffect(() => {
 		getShipmentChatList();
-	}, [status]);
+	}, [status, getShipmentChatList]);
 
 	const hookSetters = {
 		setFilters,

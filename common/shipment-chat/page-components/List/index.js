@@ -65,15 +65,15 @@ function List({
 
 	useEffect(() => {
 		if (id && !showUnreadChat) {
-			onCreate(id);
+			// onCreate(id);
 		} else if (showUnreadChat && count === 0) {
 			setCount(1);
-			useStoreId(id);
+			// useStoreId(id);
 		} else {
 			setCount(0);
-			onCreate(storeId);
+			// onCreate(storeId);
 		}
-	}, [id, showUnreadChat, count, storeId, onCreate]);
+	}, [id, showUnreadChat, count, storeId]);
 
 	useEffect(() => {
 		setId(data);
@@ -199,14 +199,12 @@ function List({
 					<div className={styles.search}>
 						<Input
 							className={styles.input_styles}
-							// value={filters?.q}
+							value={filters?.q}
 							placeholder="Search for a Shipment ID"
-							// onChange={(e) =>
-							// 	hookSetters.setFilters({
-							// 		...(filters || {}),
-							// 		q: e.target?.value,
-							// 	})
-							// }
+							onChange={(e) => hookSetters.setFilters({
+								...(filters || {}),
+								q: e.target?.value,
+							})}
 							suffix={<IcMSearchlight />}
 						/>
 						<div
@@ -224,7 +222,7 @@ function List({
 						<InfiniteScroll
 							pageStart={1}
 							initialLoad={false}
-							loadMore={!showUnreadChat && loadMore}
+							// loadMore={!showUnreadChat && loadMore}
 							hasMore={page < total_page}
 							useWindow={false}
 						>
@@ -274,7 +272,7 @@ function List({
 						activeId={id}
 						sourceId={item?.source_id}
 						source={item?.source}
-						onSeen={onCreate}
+						// onSeen={onCreate}
 						setShowMenu={setShowMenu}
 						isMobile={isMobile}
 						get={get}

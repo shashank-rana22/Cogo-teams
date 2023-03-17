@@ -36,7 +36,7 @@
 .modal_styles {
 	:global {
 		.ui_modal_body_container {
-			min-height: 375px;
+			min-height: 480px;
 			border-top: none !important;
 			border-bottom: none !important;
 			padding: 0px;
