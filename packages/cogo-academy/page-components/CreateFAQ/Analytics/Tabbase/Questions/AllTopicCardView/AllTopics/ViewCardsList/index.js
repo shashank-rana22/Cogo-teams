@@ -28,12 +28,13 @@ function ViewCardsList({ cardHeading = '', contentQuestion = [{}] }) {
 					if (index > 3) return null;
 					return (
 						<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-							<div style={{ marginLeft: '-9px' }}>
+							<div style={{ margin: '3px 0 0 -8px' }}>
 								<Tooltip content={item?.question_abstract} placement="right">
-									<div>
-										{index + 1}
-										.
-										{' '}
+									<div className={styles.question_line}>
+										<div style={{ width: 12 }}>
+											{index + 1}
+											.
+										</div>
 										{truncate(item?.question_abstract)}
 									</div>
 								</Tooltip>
