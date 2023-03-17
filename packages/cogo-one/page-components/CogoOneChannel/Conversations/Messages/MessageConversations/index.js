@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { cl, Popover } from '@cogoport/components';
 import {
 	IcMHappy,
@@ -42,7 +41,7 @@ function MessageConversations({
 
 }) {
 	const messageRef = useRef();
-	const { id = '', channel_type = '' } = activeMessageCard;
+	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
 
 	const {
 		emojisList = {},
@@ -146,6 +145,9 @@ function MessageConversations({
 
 	);
 
+	const unreadIndex = new_user_message_count > messagesData.length
+		? 0 : messagesData.length - new_user_message_count;
+
 	const messageConversation = (
 		<>
 			{loadingPrevMessages
@@ -160,7 +162,7 @@ function MessageConversations({
 						)}
 					</div>
 				)}
-			{(messagesData || []).map((eachMessage) => (
+			{(messagesData || []).map((eachMessage, index) => (
 				eachMessage?.conversation_type !== 'received' ? (
 					<ReceiveDiv
 						key={eachMessage?.created_at}
@@ -172,6 +174,7 @@ function MessageConversations({
 						key={eachMessage?.created_at}
 						eachMessage={eachMessage}
 						activeMessageCard={activeMessageCard}
+						messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
 					/>
 				)
 			))}
