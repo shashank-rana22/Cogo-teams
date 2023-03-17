@@ -1,4 +1,4 @@
-import { cl, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -23,7 +23,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 		<>
 			<div className={styles.port_code}>
 				{location?.port_code || location?.postal_code ? (
-					<div className={` ${styles.code} core_ui_port_code`}>
+					<div className={styles.code}>
 						(
 						{location?.port_code || location?.postal_code}
 						)
@@ -32,7 +32,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 					<div style={{ height: '16px' }} />
 				)}
 
-				<div className={`${styles.country} core_ui_country_name`}>
+				<div className={styles.country}>
 					{location?.country?.name}
 				</div>
 			</div>
@@ -48,7 +48,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 					</div>
 				)}
 			>
-				<div className={cl`${styles.value} core_ui_loaction_name`}>{location?.name}</div>
+				<div className={styles.value}>{location?.name}</div>
 			</Tooltip>
 
 		</>
@@ -62,7 +62,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 
 			{destination ? (
 				<div className={styles.icon_wrapper}>
-					<IcMPortArrow className="core_ui_icon" />
+					<IcMPortArrow style={{ width: '1.5em', height: '1.5em' }} />
 				</div>
 			) : null}
 
@@ -75,7 +75,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 	);
 
 	return (
-		<div className={cl`${styles.container} core_ui_port_conatiner`}>
+		<div className={styles.container}>
 			{isShow ? <div className={styles.icons_and_service}>{serviceIcon}</div> : null}
 
 			{renderLocation()}
