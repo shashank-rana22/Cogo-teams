@@ -47,22 +47,6 @@ function SegmentedFilters({
 						background="#FFFAEB"
 					/>
 				</div>
-				<div className={styled.search_filter}>
-					<div className={styled.search}>
-						<Input
-							name="q"
-							size="sm"
-							value={searchValue}
-							onChange={(e: any) => setSearchValue(e)}
-							placeholder="Search by Invoice No./Shipment ID/Supplier name..."
-							suffix={(
-								<div style={{ margin: '4px', display: 'flex' }}>
-									<IcMSearchdark height={15} width={15} />
-								</div>
-							)}
-						/>
-					</div>
-				</div>
 
 			</div>
 			<div className={styled.main}>
@@ -85,6 +69,22 @@ function SegmentedFilters({
 						/>
 					</div>
 					<FilterModal setFilters={setFilters} filters={filters} />
+				</div>
+				<div className={styled.search_filter}>
+					<div className={styled.search}>
+						<Input
+							name="q"
+							size="sm"
+							value={searchValue}
+							onChange={(e: any) => setSearchValue(e)}
+							placeholder="Search by Invoice No./Shipment ID/Supplier name..."
+							suffix={(
+								<div style={{ margin: '4px', display: 'flex' }}>
+									<IcMSearchdark height={15} width={15} />
+								</div>
+							)}
+						/>
+					</div>
 				</div>
 
 			</div>
