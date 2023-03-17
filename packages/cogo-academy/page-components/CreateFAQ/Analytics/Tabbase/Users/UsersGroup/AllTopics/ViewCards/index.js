@@ -16,7 +16,7 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 			<div className={styles.sub_heading} style={{ color: '#6FA5AB' }}>
 				<div>
 					<div className={styles.sub_heading_context}>
-						<Tooltip content={subHeading[0]?.name} placement="right">
+						<Tooltip content={subHeading[0]?.topic_name} placement="right">
 							<div>{truncate(subHeading[0]?.topic_name)}</div>
 						</Tooltip>
 
@@ -30,7 +30,12 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 				</div>
 
 				<div>
-					<div className={styles.sub_heading_context}>{truncate(subHeading[1]?.topic_name)}</div>
+					<div className={styles.sub_heading_context}>
+						<Tooltip content={subHeading[1]?.topic_name} placement="right">
+							<div>{truncate(subHeading[1]?.topic_name)}</div>
+						</Tooltip>
+
+					</div>
 					{subHeading[1]?.topic_views}
 					{' '}
 					Views
