@@ -7,13 +7,12 @@ import styles from './styles.module.css';
 
 function MailConversation({ activeMail }) {
 	const { data } = useListMailDetails({ activeMail });
-	console.log('data:', data);
 
-	const { bodyPreview = '', sentDateTime = '' } = data || {};
+	const { bodyPreview = '', sentDateTime = '', subject = '' } = data || {};
 
 	return (
 		<div className={styles.container}>
-			<Header subject={data?.subject} />
+			<Header subject={subject} />
 			<div>
 				<div className={styles.time_stamp}>
 					{format(sentDateTime, 'HH:mm a dd MMM')}

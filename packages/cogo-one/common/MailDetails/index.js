@@ -20,6 +20,7 @@ function MailDetails({
 	} = data || {};
 
 	const handleClick = () => {
+		setActiveMail({});
 		setActiveSelect('');
 		setShowContent(false);
 	};
