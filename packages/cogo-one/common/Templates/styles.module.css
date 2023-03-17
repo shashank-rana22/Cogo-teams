@@ -3,7 +3,7 @@
 }
 
 .message_container {
-	height: 470px;
+	height: 350px;
 	padding-top: 20px;
 	overflow-y: scroll;
 }
@@ -117,8 +117,9 @@
 
 .whatsapp {
 	width: 241px;
-	height: 498px;
-	background-image: url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mobile.svg");
+	height: 445px;
+	background-image: url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mobile_2.svg");
+	background-repeat: no-repeat;
 }
 
 .back_icon {
@@ -131,7 +132,7 @@
 	position: absolute;
 	top: 85px;
 	left: 28px;
-	max-height: 380px;
+	max-height: 320px;
 	overflow-y: scroll;
 	font-size: 12px;
 	background: #fff;
