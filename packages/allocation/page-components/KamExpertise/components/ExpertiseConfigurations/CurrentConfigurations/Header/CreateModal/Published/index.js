@@ -30,22 +30,6 @@ function Published({ setSelectedVersion = () => {} }) {
 			Header   : 'LAST UPDATED',
 			accessor : 'last_updated',
 		},
-		{
-			Header   : 'Action',
-			accessor : ({ id = '' }) => (
-				<section>
-					<ButtonIcon
-						size="lg"
-						icon={(
-							<IcMPlus />
-						)}
-						onClick={() => {
-							setSelectedVersion(id);
-						}}
-					/>
-				</section>
-			),
-		},
 
 	];
 	const data = [
@@ -92,7 +76,7 @@ function Published({ setSelectedVersion = () => {} }) {
 
 		},
 		{
-			id           : '0',
+			id           : '19',
 			versionName  : 'Version 3',
 			last_updated : '22-Sep-2023',
 			status       : 'Expired',

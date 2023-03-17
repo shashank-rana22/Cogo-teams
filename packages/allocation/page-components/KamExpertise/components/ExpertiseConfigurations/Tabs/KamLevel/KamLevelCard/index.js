@@ -54,71 +54,60 @@ function KamLevelCard(props) {
 						<b>{transition_level}</b>
 					</div>
 					<div className={styles.button_container}>
-						{/* !to do  */}
 
 						<div className={styles.delete_button}>
-							{dataLength === id + 1 ? (
-								<div>
-									<ButtonIcon
-										size="lg"
-										icon={(
-											<IcMDelete onClick={(evnt) => {
-												evnt.stopPropagation();
-												setShowModal(true);
-											}}
-											/>
-										)}
-									/>
-									<Modal
-										size="md"
-										placement="center"
-										show={showModal}
-										onClose={() => setShowModal(false)}
-									>
-										<Modal.Header title="DELETE KAM LEVEL" />
-										<Modal.Body>
-											Are you sure you wish to permanently delete this KAM level?
-										</Modal.Body>
-										<Modal.Footer>
-											<Button
-												style={{ marginRight: '6px' }}
-												themeType="tertiary"
-												onClick={(e) => {
-													setShowModal(false);
-													e.stopPropagation();
-												}}
-											>
-												Cancel
 
-											</Button>
-											<Button
-												onClick={(e) => {
-													e.stopPropagation();
-													onDelete();
-												}}
-												themeType="primary"
-											>
-												Yes
-											</Button>
-										</Modal.Footer>
-									</Modal>
-								</div>
-							) : (
+							<div>
 								<ButtonIcon
 									size="lg"
+									onClick={(evnt) => {
+										evnt.stopPropagation();
+										if (dataLength === id + 1) {
+											setShowModal(true);
+										}
+									}}
 									icon={(
-										<IcMDelete
-											style={{ opacity: '0.4', PointerEvent: 'none', cursor: 'not-allowed' }}
-											onClick={(evnt) => {
-												evnt.stopPropagation();
-												setShowModal(true);
-											}}
-										/>
+										<IcMDelete />
 									)}
+									disabled={(dataLength !== id + 1)}
 								/>
-							)}
+
+							</div>
 
 						</div>
+						<Modal
+							size="md"
+							placement="center"
+							show={showModal}
+							onClose={() => setShowModal(false)}
+						>
+							<Modal.Header title="DELETE KAM LEVEL" />
+							<Modal.Body>
+								Are you sure you wish to permanently delete this KAM level?
+							</Modal.Body>
+							<Modal.Footer>
+								<Button
+									style={{ marginRight: '6px' }}
+									themeType="tertiary"
+									onClick={(e) => {
+										setShowModal(false);
+										e.stopPropagation();
+									}}
+								>
+									Cancel
+
+								</Button>
+								<Button
+									onClick={(e) => {
+										e.stopPropagation();
+										onDelete();
+									}}
+									themeType="primary"
+								>
+									Yes
+								</Button>
+							</Modal.Footer>
+						</Modal>
 
 					</div>
 				</div>
