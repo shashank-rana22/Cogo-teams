@@ -8,5 +8,4 @@ const countriesHash = countries.reduce(
 
 const getCountryDetails = ({ country_id }) => countriesHash[country_id] || {};
 
-
 export default getCountryDetails;
