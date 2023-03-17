@@ -14,7 +14,6 @@ const scrollHorizontal = (scrollOffset, ref) => {
 };
 
 function AllUsers(props = '') {
-	console.log(props);
 	const {
 		active_audiences = [],
 		most_viewed_questions = [],

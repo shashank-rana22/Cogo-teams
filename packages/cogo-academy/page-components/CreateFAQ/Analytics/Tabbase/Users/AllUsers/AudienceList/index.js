@@ -1,12 +1,9 @@
 import React from 'react';
 
-import useListFaqQuestions from '../../../../../../FAQs/hooks/useListFaqQuestion';
-
-import AllQuestions from './AllQuestions';
+import AllQuestions from './AllAudience';
 import styles from './styles.module.css';
 
-function AudienceList() {
-	const props = useListFaqQuestions({});
+function AudienceList(props) {
 	return (
 		<div className={styles.container}>
 			<AllQuestions {...props} />

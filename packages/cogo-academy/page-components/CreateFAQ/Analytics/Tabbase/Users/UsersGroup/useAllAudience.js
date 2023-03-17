@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-function useAllTopicCardView() {
+function useAllAudience() {
 	const { general = {} } = useSelector((state) => state);
 
 	const { query } = general;
@@ -12,7 +12,7 @@ function useAllTopicCardView() {
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/list_faq_topics',
+		url    : '/list_faq_audiences',
 	}, { manual: true });
 
 	const fetchFaqTopic = useCallback(
@@ -20,12 +20,12 @@ function useAllTopicCardView() {
 			try {
 				await trigger({
 					params: {
-						page_limit                     : 100000,
-						pagination_data_required       : false,
-						most_viewed_questions_required : true,
-						topic_wise_questions_required  : true,
-						topic_wise_stats_required      : true,
-						topic_wise_audience_required   : true,
+						page_limit                       : 100000,
+						pagination_data_required         : false,
+						most_viewed_questions_required   : true,
+						audience_wise_questions_required : true,
+						audience_wise_stats_required     : true,
+						audience_wise_topics_required    : true,
 					},
 				});
 			} catch (error) {
@@ -46,4 +46,4 @@ function useAllTopicCardView() {
 	};
 }
 
-export default useAllTopicCardView;
+export default useAllAudience;

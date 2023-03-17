@@ -16,15 +16,16 @@ import ViewCardsList from './ViewCardsList';
 
 function AllTopic({ props = '' }) {
 	const {
-		display_name = '',
-		question_count = 0,
-		view_count = 0,
-		faq_questions = [],
+		name = '',
+		total_questions = 0,
+		total_views = 0,
+		most_viewed_questions = [],
 		total_likes = 0,
 		total_dislikes = 0,
 		most_disliked_questions = [],
 		most_liked_questions = [],
 		id = '',
+		topics = [],
 	} = props;
 
 	const [showQuestions, setShowQuestions] = useState(false);
@@ -32,8 +33,8 @@ function AllTopic({ props = '' }) {
 	const truncate = (str) => (str?.length > 40 ? `${str.substring(0, 38)}...` : str);
 
 	const PILL_MAPPING = {
-		'No of Questions' : question_count,
-		'No of Views'     : view_count,
+		'No of Questions' : total_questions,
+		'No of Views'     : total_views,
 		'No of Likes'     : total_likes,
 		'No of Dislikes'  : total_dislikes,
 	};
@@ -47,9 +48,9 @@ function AllTopic({ props = '' }) {
 						color="#CFEAED"
 						style={{ fontWeight: '600', height: 'fit-content' }}
 					>
-						<Tooltip content={display_name} placement="right">
+						<Tooltip content={name} placement="right">
 							<div>
-								{truncate(startCase(display_name))}
+								{truncate(startCase(name))}
 							</div>
 						</Tooltip>
 					</Pill>
@@ -73,13 +74,13 @@ function AllTopic({ props = '' }) {
 
 				<div style={{ display: 'flex' }}>
 					<ViewCards
-						cardHeading="User group that viewed the Most Questions "
-						subHeading=""
+						cardHeading="Topics that viewed the Most Questions "
+						subHeading={topics}
 					/>
 
 					<ViewCardsList
 						cardHeading="Top Viewed Questions"
-						contentQuestion={faq_questions}
+						contentQuestion={most_viewed_questions}
 					/>
 
 					<ViewCardsList cardHeading="Top Liked Questions" contentQuestion={most_liked_questions} />
