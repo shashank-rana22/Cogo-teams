@@ -20,32 +20,49 @@ const getQuestionType = (question_type) => {
 	return 'Stand Alone';
 };
 
-function BasicDetails({
+function ContentComponent({ editDetails, setShowForm }) {
+	return (
+		<div className={`${styles.container} ${styles.flex_row} ${styles.flex}`}>
+			{constants.map((item) => (
+				<div className={styles.flex_container}>
+					<div className={styles.label}>{startCase(item)}</div>
+
+					<div className={styles.value}>
+						{item === 'question_type'
+							? getQuestionType(editDetails?.question_type)
+							: editDetails?.[item] || '--'}
+					</div>
+				</div>
+			))}
+
+			<div
+				role="presentation"
+				onClick={() => {
+					setShowForm(true);
+				}}
+				className={styles.button_container}
+			>
+				<IcMEdit className={styles.button} />
+			</div>
+		</div>
+	);
+}
+
+function FormComponent({
+	isNewQuestion,
+	controls,
 	control,
 	errors,
-	isNewQuestion,
-	editDetails,
-	setValue,
 	questionTypeWatch,
-	getValues,
-	setEditDetails,
-	setAllKeysSaved,
-	reset,
-	getTestQuestionTest,
-	questionSetId,
+	editDetails,
+	handleUpdateCaseStudy,
+	loading,
+	setShowForm,
+	setValue,
 }) {
-	const [showForm, setShowForm] = useState(false);
-
-	const controls = getControls();
-
-	const {
-		loading,
-		updateCaseStudy,
-	} = useUpdateCaseStudy();
-
 	const editForm = () => {
 		setValue('topic', editDetails?.topic);
-		setValue('audience_ids', editDetails?.audience_ids);
+		setValue('audience_ids', []);
 
 		if (editDetails?.question_type === 'case_study') {
 			setValue('question_type', editDetails?.question_type);
@@ -53,50 +70,8 @@ function BasicDetails({
 			setValue('question_type', 'stand_alone');
 		}
 
-		setShowForm(true);
+		setShowForm(false);
 	};
-
-	const handleUpdateCaseStudy = () => {
-		const formValues = getValues();
-		const { audience_ids, topic, question_text, question_type } = formValues || {};
-
-		updateCaseStudy({
-			values: {
-				audience_ids,
-				topic,
-				question_text,
-				question_type,
-			},
-			id: editDetails?.id,
-			setEditDetails,
-			setAllKeysSaved,
-			reset,
-			getTestQuestionTest,
-			questionSetId,
-		});
-	};
-
-	if (!isNewQuestion && !showForm && editDetails?.question_type === 'case_study') {
-		return (
-			<div className={`${styles.container} ${styles.flex_row} ${styles.flex}`}>
-				{constants.map((item) => (
-					<div className={styles.flex_container}>
-						<div className={styles.label}>{startCase(item)}</div>
-
-						<div className={styles.value}>
-							{item === 'question_type'
-								? getQuestionType(editDetails?.question_type)
-								: editDetails?.[item] || '--'}
-						</div>
-					</div>
-				))}
-
-				<div className={styles.button_container}>
-					<IcMEdit className={styles.button} onClick={() => editForm()} />
-				</div>
-			</div>
-		);
-	}
 
 	return (
 		<div className={`${styles.container} ${!isNewQuestion ? styles.flex_row : null}`}>
@@ -150,12 +125,79 @@ function BasicDetails({
 			{!isNewQuestion && editDetails?.question_type === 'case_study' ? (
 				<div
 					role="presentation"
-					onClick={() => setShowForm(false)}
+					onClick={() => editForm()}
 					className={styles.cancel_button}
 				>
 					<IcMCrossInCircle />
 				</div>
 			) : null}
+		</div>
+	);
+}
+
+function BasicDetails({
+	control,
+	errors,
+	isNewQuestion,
+	editDetails,
+	setValue,
+	questionTypeWatch,
+	getValues,
+	setEditDetails,
+	setAllKeysSaved,
+	reset,
+	getTestQuestionTest,
+	questionSetId,
+}) {
+	const [showForm, setShowForm] = useState(false);
+
+	const controls = getControls();
+
+	const {
+		loading,
+		updateCaseStudy,
+	} = useUpdateCaseStudy();
+
+	const handleUpdateCaseStudy = () => {
+		const formValues = getValues();
+		const { audience_ids, topic, question_text, question_type } = formValues || {};
+
+		updateCaseStudy({
+			values: {
+				audience_ids,
+				topic,
+				question_text,
+				question_type,
+			},
+			id: editDetails?.id,
+			setEditDetails,
+			setAllKeysSaved,
+			reset,
+			getTestQuestionTest,
+			questionSetId,
+		});
+	};
+
+	return (
+		<div key={showForm}>
+			{!isNewQuestion
+				&& !showForm
+				&& editDetails?.question_type === 'case_study' ? (
+					<ContentComponent editDetails={editDetails} setShowForm={setShowForm} />
+				) : (
+					<FormComponent
+						isNewQuestion={isNewQuestion}
+						controls={controls}
+						control={control}
+						errors={errors}
+						questionTypeWatch={questionTypeWatch}
+						editDetails={editDetails}
+						handleUpdateCaseStudy={handleUpdateCaseStudy}
+						loading={loading}
+						setValue={setValue}
+						setShowForm={setShowForm}
+					/>
+				)}
 		</div>
 	);
 }

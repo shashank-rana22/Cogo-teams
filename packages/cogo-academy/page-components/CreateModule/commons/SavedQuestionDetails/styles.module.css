@@ -43,6 +43,23 @@
 	}
 }
 
+.flex_column {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.answer_key {
+	max-width: 250px;
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;	
+}
+
+.answer {
+	max-width: fit-content;
+}
+
 .btn {
 	display: flex;
 	align-items: center;

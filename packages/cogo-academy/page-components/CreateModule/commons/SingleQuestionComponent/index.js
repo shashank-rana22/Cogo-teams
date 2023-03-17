@@ -36,7 +36,7 @@ function SingleQuestionComponent({
 		} else {
 			updateCaseStudyQuestion({
 				action              : 'delete',
-				caseStudyQuestionId : editDetails?.case_questions?.[index],
+				caseStudyQuestionId : editDetails?.sub_question?.[index]?.id,
 				questionSetId,
 				getTestQuestionTest,
 				reset,
@@ -49,17 +49,17 @@ function SingleQuestionComponent({
 	const handleUpdateCaseStudyQuestion = () => {
 		const formValues = getValues();
 
-		if (!field.isNew) {
-			updateCaseStudyQuestion({
-				values : formValues?.case_questions?.[index],
-				questionSetId,
-				getTestQuestionTest,
-				reset,
-				setEditDetails,
-				setAllKeysSaved,
-				action : 'update',
-			});
-		}
+		updateCaseStudyQuestion({
+			values              : formValues?.case_questions?.[index],
+			questionSetId,
+			getTestQuestionTest,
+			reset,
+			setEditDetails,
+			setAllKeysSaved,
+			action              : field.isNew ? 'create' : 'update',
+			caseStudyQuestionId : editDetails?.sub_question?.[index]?.id,
+			testQuestionId      : editDetails?.id,
+		});
 	};
 
 	return (
