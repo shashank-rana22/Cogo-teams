@@ -6,7 +6,7 @@ function HistoryPagination({ data = {}, filters = {}, setFilters = () => {} }) {
 		setFilters({ ...filters, page: val });
 	};
 	return (
-		<div>
+		<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 			<Pagination
 				currentPage={page}
 				pageSize={page_limit}

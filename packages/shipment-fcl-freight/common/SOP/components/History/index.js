@@ -4,6 +4,7 @@ import useListShipmentAudits from '../../../../hooks/useListShipmentAudits';
 
 import HistoryPagination from './HistoryPagination';
 import HistoryTable from './HistoryTable';
+import styles from './styles.module.css';
 
 function History() {
 	const { apiTrigger, data, setFilters, filters, loading } = useListShipmentAudits({
@@ -17,19 +18,15 @@ function History() {
 	}, []);
 
 	return (
-		<div>
-			<div>History (Booking Party)</div>
+		<>
+			<div className={styles.heading}>History (Booking Party)</div>
 
-			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-				<HistoryPagination data={data} filters={filters} setFilters={setFilters} />
-			</div>
-			<div>
-				<HistoryTable data={data} loading={loading} />
-			</div>
-			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-				<HistoryPagination data={data} filters={filters} setFilters={setFilters} />
-			</div>
-		</div>
+			<HistoryPagination data={data} filters={filters} setFilters={setFilters} />
+
+			<HistoryTable data={data} loading={loading} />
+
+			<HistoryPagination data={data} filters={filters} setFilters={setFilters} />
+		</>
 	);
 }
 

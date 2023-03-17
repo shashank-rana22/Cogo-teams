@@ -1,10 +1,9 @@
 .container{
     background: var(--color-secondary-5);
-    box-shadow: 0px 0px 10px rgb(152, 151, 151); 
+    box-shadow: 0px 0px 10px rgba(152, 151, 151, 50%); 
     border-radius: 4px;
-    width: 100%;
-    margin-bottom: 16px;
-    overflow-x: auto;   
+    margin: 10px 6px 16px;
+    overflow-x: auto;
 }
 
 .header_button{
@@ -13,45 +12,29 @@
     justify-content: space-between;
     background:  var(--color-secondary-5);
     border: none;
-    padding: 0;
-    
+    padding: 10px;
+    cursor: pointer;
 }
 
 .animated_container {
     overflow: hidden;
-    transition: height 0.5s ease-in-out, padding-top 0.5s ease-in-out, padding-bottom 0.5s ease-in-out;
-    animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
-  }
-  
-  .animated_container.enter {
-    animation-name: fadeInTop;
-  }
-  
-  .animated_container.exit {
-    height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    animation-name: fadeOutBottom;
-  }
-  
-  @keyframes fadeInTop {
-    from {
+    transition: all 0.5s;
+    padding: 0 10px;
+    
+    &.enter {
+      border-top: 1px solid var(--color-secondary-3);
+      padding-top: 4px;
+      opacity: 1;
+      transform: translateY(0px);
+      max-height: max-content;
+    }
+    &.exit {
       opacity: 0;
       transform: translateY(-10px);
+      max-height: 0;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+}
   
-  @keyframes fadeOutBottom {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(10px);
-    }
+.card_label {
+  font-weight: 600;
 }

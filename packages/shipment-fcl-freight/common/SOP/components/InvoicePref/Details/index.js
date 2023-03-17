@@ -1,5 +1,7 @@
 import { isEmpty, startCase } from '@cogoport/utils';
 
+import styles from './styles.module.css';
+
 function Details({ data = [] }) {
 	const mapping = (val = {}) => ({
 		Service                 : startCase(val.invoice_preference_service || ''),
@@ -20,10 +22,10 @@ function Details({ data = [] }) {
 
 	function LabelValue({ label, value }) {
 		return !isEmpty(value) ? (
-			<div>
-				<div>{label}</div>
-				<div>{value}</div>
-			</div>
+			<>
+				<div className={styles.label}>{label}</div>
+				<div className={styles.value}>{value}</div>
+			</>
 		) : null;
 	}
 
@@ -32,11 +34,7 @@ function Details({ data = [] }) {
 			{data.map((item) => {
 				const mapping_data = mapping(item.sop_detail || {});
 
-				return (
-					<div>
-						{columns.map((col) => col.map((key) => <LabelValue label={key} value={mapping_data[key]} />))}
-					</div>
-				);
+				return columns.map((col) => col.map((key) => <LabelValue label={key} value={mapping_data[key]} />));
 			})}
 		</div>
 	);

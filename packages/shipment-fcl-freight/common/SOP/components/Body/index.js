@@ -12,23 +12,17 @@ function Body({ data = {} }) {
 	} = getInstructionData({ data });
 
 	return (
-		<div>
-			<div>
-				<Card>
-					<Document data={document_handling_preference} />
-				</Card>
-			</div>
-			<div>
-				<Card>
-					<InvoicePref data={invoice_preference} />
-				</Card>
-			</div>
-			<div>
-				<Card>
-					<Additional data={additional_preference} />
-				</Card>
-			</div>
-		</div>
+		<>
+			<Card label="Document Handling">
+				<Document data={document_handling_preference} />
+			</Card>
+			<Card label="Invoice Preferences">
+				<InvoicePref data={invoice_preference} />
+			</Card>
+			<Card label="Additional Information">
+				<Additional data={additional_preference} />
+			</Card>
+		</>
 	);
 }
 export default Body;

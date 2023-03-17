@@ -12,10 +12,10 @@ function SOP() {
 	const { data, filters, loading, apiTrigger } = useGetShipmentOperatingProcedure({});
 
 	return (
-		<div>
+		<>
 			<Header setShowHistory={setShowHistory} showHistory={showHistory} />
 			{showHistory ? <History /> : <Body data={data} />}
-		</div>
+		</>
 	);
 }
 

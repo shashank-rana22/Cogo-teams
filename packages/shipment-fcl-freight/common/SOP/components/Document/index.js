@@ -1,13 +1,6 @@
 import Details from './Details';
 
 function Document({ data = [] }) {
-	return (
-		<div>
-			<div>
-				<Details data={data} />
-			</div>
-
-		</div>
-	);
+	return <Details data={data} />;
 }
 export default Document;

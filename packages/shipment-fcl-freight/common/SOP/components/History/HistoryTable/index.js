@@ -42,7 +42,7 @@ function HistoryTable({ data = {}, loading = false }) {
 	];
 
 	return (
-		<div>
+		<div style={{ overflow: 'auto' }}>
 			<Table
 				columns={columns}
 				data={formatData}

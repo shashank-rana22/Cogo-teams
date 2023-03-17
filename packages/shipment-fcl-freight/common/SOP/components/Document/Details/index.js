@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { isEmpty, startCase, upperCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -16,16 +17,21 @@ function Details({ data = [] }) {
 
 	function LabelValue({ label, value }) {
 		return !isEmpty(value) ? (
-			<div className={styles.detail}>
+			<>
 				<div className={styles.label}>{label}</div>
-				<div>{value}</div>
-			</div>
+				<div className={styles.value}>{value}</div>
+			</>
 		) : null;
 	}
 
 	return (
-		<div>
-			{Object.keys(mapping).map((key) => <LabelValue label={key} value={mapping[key]} />)}
+		<div className={styles.container}>
+			<div>
+				{Object.keys(mapping).map((key) => <LabelValue label={key} value={mapping[key]} />)}
+			</div>
+			<div>
+				<Button themeType="secondary" size="sm">Add/Edit</Button>
+			</div>
 		</div>
 	);
 }
