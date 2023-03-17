@@ -50,6 +50,7 @@ function useListOmnichannelDocuments({
 				params: {
 					page_limit                : type !== 'count' ? 1000 : undefined,
 					only_total_count_required : type === 'count',
+					kyc_data_required         : type === 'count' ? false : undefined,
 					filters                   : filters_payload,
 				},
 			});
