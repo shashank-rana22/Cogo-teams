@@ -26,6 +26,7 @@ function useAllTopicCardView() {
 						topic_wise_questions_required  : true,
 						topic_wise_stats_required      : true,
 						topic_wise_audience_required   : true,
+						sort_by                        : 'view_count',
 					},
 				});
 			} catch (error) {
