@@ -97,7 +97,7 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 							</Pill>
 						</span>
 						<span style={{ marginRight: '4px' }}>
-							having attribute and last booking date :
+							having attribute and parameter of:
 						</span>
 
 						{' '}

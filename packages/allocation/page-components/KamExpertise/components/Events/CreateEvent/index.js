@@ -35,7 +35,7 @@ function CreateEvent(props) {
 	};
 
 	const {
-		attributeList = ['', '', ''],
+		attributeList = [],
 		loading,
 		setRuleType = () => {},
 	} = useGetAllocationKamExpertiseRules();
