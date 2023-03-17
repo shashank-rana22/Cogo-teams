@@ -35,6 +35,14 @@ function AllQuestionCardView(props = '') {
 		no_of_views = '',
 	} = question_stats;
 	const [showQuestions, setShowQuestions] = useState(false);
+
+	// const PILL_MAPPING = {
+	// 	'No of Questions' : no_of_questions,
+	// 	'No of Views'     : no_of_views,
+	// 	'No of Likes'     : no_of_likes,
+	// 	'No of Dislikes'  : no_of_dislikes,
+	// };
+
 	return (
 		<div style={{ marginTop: '1rem', overflow: 'hidden' }}>
 			<div className={styles.container}>
@@ -42,15 +50,9 @@ function AllQuestionCardView(props = '') {
 					<Pill
 						size="xl"
 						color="#CFEAED"
-						style={{
-							fontWeight : '600',
-							marginTop  : '-9%',
-							marginLeft : '1%',
-
-						}}
+						style={{ fontWeight: '600' }}
 					>
 						All Questions
-
 					</Pill>
 
 					<Pill
@@ -60,13 +62,11 @@ function AllQuestionCardView(props = '') {
 							fontWeight : '600',
 							marginTop  : '-9%',
 							marginLeft : '40%',
-
 						}}
 					>
 						No of Questions:
 						{' '}
 						{no_of_questions}
-
 					</Pill>
 					<Pill
 						size="lg"
@@ -138,8 +138,14 @@ function AllQuestionCardView(props = '') {
 						<Scroll />
 						{/* <ViewCards cardHeading="Topic from which Most Questions viewed" subHeading="ed" /> */}
 						{/* <ViewCards cardHeading="User group that viewed the Most Questions " subHeading="ecd" /> */}
-						{/* <ViewCardsList cardHeading="Top Viewed Questions" contentQuestion="What are Incoterms?" /> */}
-						{/* <ViewCardsList cardHeading="Top Liked Questions" contentQuestion="What are Incoterms?" /> */}
+						{/* <ViewCardsList
+							cardHeading="Top Viewed Questions"
+							contentQuestion="What are Incoterms?"
+						/>
+						<ViewCardsList
+							cardHeading="Top Liked Questions"
+							contentQuestion="What are Incoterms?"
+						/> */}
 					</div>
 				</div>
 				<div style={{ marginTop: '-25px', marginRight: '-10px', float: 'right' }}>
