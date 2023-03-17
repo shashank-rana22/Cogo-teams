@@ -5,7 +5,7 @@ import Header from './Header';
 import QuestionsList from './QuestionsList';
 
 function CreateFAQ() {
-	const [switchDashboard, setSwitchDashboard] = useState(false);
+	const [switchDashboard, setSwitchDashboard] = useState(true);
 
 	if (!switchDashboard) {
 		return <Analytics setSwitchDashboard={setSwitchDashboard} />;
