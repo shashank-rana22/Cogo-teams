@@ -4,7 +4,7 @@ export const helperFuncs = (serviceList) => {
 	let serviceAvailable = {};
 	const renderItem = (routeService, serviceObj) => {
 		serviceAvailable = (serviceList || []).find(
-			(element) => routeService?.service_types?.[0] === element?.display_service_type
+			(element) => routeService?.service_types?.[0] === element?.service_type
 				&& element?.trade_type === routeService.trade_type,
 		);
 
@@ -51,7 +51,7 @@ export const helperFuncs = (serviceList) => {
 
 				const all_similar_services = serviceList?.filter(
 					(element) => element?.trade_type === data?.trade_type
-						&& element?.display_service_type === data.service_types[0],
+						&& element?.service_type === data.service_types[0],
 				);
 
 				if (all_similar_services?.length) {

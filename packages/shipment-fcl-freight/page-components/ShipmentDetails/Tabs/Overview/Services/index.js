@@ -65,6 +65,7 @@ function Services() {
 								isMain
 								similarServices={service}
 								primary_service={primary_service}
+								refetchServices={refetchServices}
 							/>
 
 						))}
