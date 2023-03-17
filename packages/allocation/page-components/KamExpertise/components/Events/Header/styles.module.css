@@ -20,3 +20,10 @@
 	font-weight: 600;
 	color: #221f20;
 }
+
+.add_button {
+	@media (max-width: 768px) {
+		margin: 0;
+		width: 100%;
+	  }
+}
