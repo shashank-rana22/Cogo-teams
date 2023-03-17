@@ -7,9 +7,9 @@ import useGetColumns from '../../../../../common/Columns';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
 import useListEmployees from '../../../../../hooks/useListEmployees';
-import AllLogs from '../../../AllLogs';
-import NewLog from '../../../NewLog';
 
+import AllLogs from './AllLogs';
+import NewLog from './NewLog';
 import styles from './styles.module.css';
 
 function LogModal({ item = {}, setItem = () => {} }) {

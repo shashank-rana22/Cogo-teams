@@ -1,21 +1,13 @@
 // import { ResponsiveLine } from '@cogoport/charts/line';
-import { useSelector } from '@cogoport/store';
+// import UserProfile from '../../../common/UserStats/UserProfile';
 
-import UserProfile from '../../../common/UserStats/UserProfile';
-
-import CreatePip from './CreatePip';
+import Create from './CreatePip';
 import styles from './styles.module.css';
-import UpdatePip from './UpdatePip';
+import Update from './UpdatePip';
 
-function DecisionModal() {
-	const {
-		general: {
-			query: { user_id = '' },
-		},
-	} = useSelector((state) => state);
-
+function DecisionModal({ type, params, setParams = () => {} }) {
 	const manager_name = 'Harshith';
-	const type = 'update';
+
 	// const {
 	// 	performanceStatsList = [],
 	// } = useGetFeedbackPerformanceStats({ userId, params });
@@ -31,7 +23,7 @@ function DecisionModal() {
 	return (
 		<>
 			<div className={styles.user_profile}>
-				<UserProfile userId={user_id} />
+				{/* <UserProfile userId={item.user_id} /> */}
 				<div className={styles.lable}>
 					Reports to :
 					{' '}
@@ -91,12 +83,10 @@ function DecisionModal() {
 					colorBy="index"
 				/> */}
 
-				{type === 'create' && (
-					<CreatePip />
-				)}
-
-				{type === 'update' && (
-					<UpdatePip />
+				{type === 'create' ? (
+					<Create params={params} setParams={setParams} />
+				) : (
+					<Update params={params} setParams={setParams} />
 				)}
 			</div>
 		</>

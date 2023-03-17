@@ -1,11 +1,14 @@
-import { Tabs, TabPanel, Modal, Button } from '@cogoport/components';
+import { Toast, Tabs, TabPanel, Modal, Button } from '@cogoport/components';
 import { IcMEdit, IcMUpload } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetColumns from '../../../../common/Columns';
 import UserTableData from '../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../constants/feedback-data-columns';
 import useListEmployees from '../../../../hooks/useListEmployees';
+import DecisionModal from '../../DecisionModal';
+import PipUloadModal from '../../PipUploadModal';
 import UploadModalBody from '../../UploadModal';
 
 import Dashboard from './Dashboard';
@@ -34,15 +37,30 @@ const TAB_PANEL_COMPONENT_MAPPING = {
 function PIPProbations() {
 	const [openUploadModal, setOpenUploadModal] = useState(false);
 	const [openUpdate, setOpenUpdate] = useState(false);
+	const [openLogModal, setOpenLogModal] = useState(false);
+
+	const [type, setType] = useState('');
 	const [item, setItem] = useState({});
 	const [activeTab, setActiveTab] = useState('dashboard');
+	const [pipParams, setPipParams] = useState({
+		show       : false,
+		diableNext : true,
+	});
+	const { show, diableNext } = pipParams;
 
 	const { employeeData = {}, loading = false, params, setPage } = useListEmployees({});
 
 	// useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	const columnsToShow = feedbackDataColumns.pipProbationList;
-	const columns = useGetColumns({ columnsToShow, setItem, source: 'hr_dashboard', setOpenUpdate });
+	const columns = useGetColumns({
+		columnsToShow,
+		setItem,
+		source: 'hr_dashboard',
+		setOpenUpdate,
+		setType,
+		setOpenLogModal,
+	});
 
 	const dataList = {
 		1: [{
@@ -77,6 +95,16 @@ function PIPProbations() {
 			employee_status : 'probation',
 			is_pip          : true,
 		}],
+	};
+
+	// update and create functions
+	const clickedNext = () => {
+		if (show) {
+			Toast.success('Update Sent to the Employee');
+			setOpenUpdate(false);
+		} else {
+			setPipParams({ ...pipParams, show: true, diableNext: true });
+		}
 	};
 
 	return (
@@ -119,7 +147,7 @@ function PIPProbations() {
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => setOpenUpdate(true)}
+					onClick={() => { setType('create'); console.log(type); setOpenUpdate(true); }}
 				>
 					<IcMEdit style={{ marginRight: '4px' }} />
 					Update User Status
@@ -144,7 +172,7 @@ function PIPProbations() {
 						<Modal.Header title="Upload CSV" />
 						<div className={styles.upload_modal}>
 							<Modal.Body>
-								<UploadModalBody setOpenUploadModal={setOpenUploadModal} />
+								<PipUloadModal setOpenUploadModal={setOpenUploadModal} />
 							</Modal.Body>
 						</div>
 					</Modal>
@@ -160,12 +188,71 @@ function PIPProbations() {
 						}}
 						size="lg"
 					>
-						<Modal.Header title="Log" />
+						<Modal.Header title={startCase(type)} />
 						<div className={styles.upload_modal}>
 							<Modal.Body>
-								<LogModal setOpenUpdate={setOpenUpdate} item={item} setItem={setItem} />
+								<DecisionModal
+									type={type}
+									params={pipParams}
+									setParams={setPipParams}
+								/>
 							</Modal.Body>
 						</div>
+						<Modal.Footer>
+							<Button
+								size="md"
+								themeType="tertiary"
+								onClick={() => {
+									if (type === 'create') {
+										setOpenUpdate(false);
+									} else {
+										setPipParams({ ...pipParams, show: false, diableNext: false });
+									}
+								}}
+							>
+								Back
+
+							</Button>
+
+							<Button
+								size="md"
+								style={{ marginLeft: '8px' }}
+								onClick={clickedNext}
+								disabled={diableNext}
+							>
+								{(show || type === 'create') ? ('Submit And Notify') : ('Next')}
+
+							</Button>
+						</Modal.Footer>
+					</Modal>
+				)}
+
+			{openLogModal
+				&& (
+					<Modal
+						show={openLogModal}
+						onClose={() => {
+							setOpenLogModal(false);
+							setItem({});
+						}}
+						size="lg"
+					>
+						<Modal.Header title="Logs" />
+						<div className={styles.upload_modal}>
+							<Modal.Body>
+								<LogModal item={item} setItem={setItem} />
+							</Modal.Body>
+						</div>
+						<Modal.Footer>
+							<Button
+								size="md"
+								themeType="tertiary"
+								onClick={() => setOpenLogModal(false)}
+							>
+								Back
+
+							</Button>
+						</Modal.Footer>
 					</Modal>
 				)}
 		</div>

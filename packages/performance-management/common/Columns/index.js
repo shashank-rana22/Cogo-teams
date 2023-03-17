@@ -19,6 +19,7 @@ const statusColorMapping = {
 const useGetColumns = ({
 	getTeamFeedbackList = () => {}, source = 'hr_dashboard', columnsToShow = [],
 	setRefetchReportees = () => {}, setItem = () => {}, setOpenUpdate = () => {},
+	setType = () => {}, setOpenLogModal = () => {},
 }) => {
 	const router = useRouter();
 	const handleClick = (user_id) => {
@@ -45,6 +46,7 @@ const useGetColumns = ({
 		setItem(item);
 		if (source !== 'log_modal') {
 			setOpenUpdate(true);
+			setType('update');
 		}
 	};
 
@@ -255,10 +257,11 @@ const useGetColumns = ({
 		key : 'user_details',
 	},
 	{
-		Header   : <div className={styles.head} />,
+		Header   : <div className={styles.head}>Action</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<Button
+					themeType="secondary"
 					onClick={() => addLog(item)}
 					disabled={(item?.is_pip && source === 'hr_dashboard')
 					|| (item?.employee_status === 'probation' && source === 'manager_dashboard')}
@@ -269,6 +272,41 @@ const useGetColumns = ({
 		),
 		id  : 'action',
 		key : 'action',
+	},
+	{
+		Header   : <div className={styles.head}>LOGS</div>,
+		accessor : () => (
+			<div className={styles.head_content}>
+				<Button
+					themeType="secondary"
+					onClick={() => setOpenLogModal(true)}
+				>
+					Logs
+				</Button>
+			</div>
+		),
+		id  : 'logs',
+		key : 'logs',
+	},
+	{
+		Header   : <div className={styles.head}>Start Date</div>,
+		accessor : () => (
+			<div className={styles.head_content}>
+				<div>{format(new Date(), 'dd-MMM-yyyy')}</div>
+			</div>
+		),
+		id  : 'start_date',
+		key : 'start_date',
+	},
+	{
+		Header   : <div className={styles.head}>End Date</div>,
+		accessor : () => (
+			<div className={styles.head_content}>
+				<div>{format(new Date(), 'dd-MMM-yyyy')}</div>
+			</div>
+		),
+		id  : 'end_date',
+		key : 'end_date',
 	},
 	];
 

@@ -1,10 +1,10 @@
 import { Textarea, Checkbox, Datepicker } from '@cogoport/components';
 import { toDate, getMonth } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function CreatePip() {
+function CreatePip({ params, setParams = () => {} }) {
 	const date = new Date();
 	const [startDate, setStartDate] = useState();
 	const [endDate, setEndDate] = useState();
@@ -20,6 +20,20 @@ function CreatePip() {
 		if (val !== date && startCheck) { setstartCheck(!startCheck); }
 		setStartDate(val);
 	};
+
+	useEffect(() => {
+		if (startDate && endDate) {
+			setParams({
+				...params,
+				diableNext: false,
+			});
+		} else {
+			setParams({
+				...params,
+				diableNext: true,
+			});
+		}
+	}, [startDate, endDate]);
 
 	return (
 		<div className={styles.container}>

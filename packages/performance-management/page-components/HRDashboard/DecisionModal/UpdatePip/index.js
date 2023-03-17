@@ -1,43 +1,61 @@
 import { RadioGroup, Textarea, Checkbox, Datepicker } from '@cogoport/components';
-import { format, toDate, getMonth } from '@cogoport/utils';
-import { useState } from 'react';
+import { format, getMonth } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function UpdatePip() {
+function UpdatePip({ params, setParams = () => {} }) {
+	const { show } = params;
 	const date = new Date();
-	const [value, onChange] = useState('');
+	const [value, onChange] = useState('R1');
 	const [decision, setDecision] = useState(false);
 	const [endDate, setEndDate] = useState();
 	const [endCheck, setEndCheck] = useState(false);
 
+	const setDisabledNext = (temp) => {
+		setParams({
+			...params,
+			diableNext: temp,
+		});
+	};
+
 	const clickedEndDate = (val) => {
 		if (val !== getMonth(date) + 1 && endCheck) { setEndCheck(!endCheck); }
 		setEndDate(val);
+		setDisabledNext(!val);
 	};
+
 	const status = {
 		name       : 'PIP Extended',
 		start_date : format(date, 'dd-MMM-yyyy'),
-		end_date   : '22-Apr-2023',
+		end_date   : format(date, 'dd-MMM-yyyy'),
 	};
 
 	const radioList = [
-		{ name: 'R1', value: 'R1', label: 'Extend' }, { name: 'R2', value: 'R2', label: 'Confirm' },
+		{ name: 'R1', value: 'R1', label: 'Extend' },
+		{ name: 'R2', value: 'R2', label: 'Confirm' },
 		{ name: 'R3', value: 'R3', label: 'PIP' },
 	];
+
+	useEffect(() => setDisabledNext(!endDate), [endDate]);
+
 	return (
 		<div className={styles.update_container}>
 			<div className={styles.update_dates_container}>
 				<div className={styles.update_dates}>
 					<div className={styles.lable}>Start Date</div>
+
 					<div style={{ fontWeight: 'bold' }}>{status?.start_date}</div>
 				</div>
+
 				<div className={styles.update_dates}>
 					<div className={styles.lable}>End Date</div>
+
 					<div style={{ fontWeight: 'bold' }}>{status?.end_date}</div>
 				</div>
 			</div>
-			{!value && (
+
+			{!show && (
 				<RadioGroup
 					className={styles.radio_btns}
 					options={radioList}
@@ -46,7 +64,7 @@ function UpdatePip() {
 				/>
 			)}
 
-			{value === 'R1' && (
+			{(show && value === 'R1') && (
 				<div className={styles.dates}>
 					<div className={styles.lable}>Extend End date</div>
 					<Datepicker
@@ -57,36 +75,39 @@ function UpdatePip() {
 						onChange={(val) => clickedEndDate(val)}
 						value={endDate}
 					/>
+
 					<Checkbox
 						className={styles.checkbox}
-						label=" +1 Month"
+						label=" +1 Month From Now"
 						checked={endCheck}
 						onChange={() => {
-							if (endCheck) {
-								setEndDate(null);
-							} else {
-								setEndDate(toDate(date).setMonth(getMonth(endDate) + 1));
-							}
 							setEndCheck(!endCheck);
+							if (endCheck) {
+								setEndDate();
+							} else {
+								setEndDate(date.setMonth(getMonth(date) + 1));
+							}
 						}}
 					/>
 				</div>
 			)}
-			{value === 'R2' && (
+			{show && value === 'R2' && (
 				<Checkbox
 					label="Check this box to confirm that Ankur Verma has cleared their probation."
 					value={decision}
-					onChange={() => setDecision(!decision)}
+					onChange={() => { setDecision(!decision); setParams({ ...params, diableNext: decision }); }}
 				/>
 			)}
-			{value === 'R3' && (
+
+			{show && value === 'R3' && (
 				<Checkbox
 					label="Check this box to confirm that Ankur Verma requires a PIP"
 					value={decision}
-					onChange={() => setDecision(!decision)}
+					onChange={() => { setDecision(!decision); setParams({ ...params, diableNext: decision }); }}
 				/>
 			)}
-			{value !== '' && (
+
+			{show && (
 				<div className={styles.sub_container}>
 					<div className={styles.lable}>Reason for Extention</div>
 

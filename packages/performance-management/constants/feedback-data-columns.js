@@ -7,7 +7,8 @@ const feedbackDataColumns = {
 	monthAccordion     : ['total_feedbacks', 'BelowAverage', 'Average', 'GoodPerforming'],
 	monthWiseFeedbacks : ['name', 'cogo_id', 'rating', 'department', 'designation', 'view_form'],
 	logModal           : ['name', 'designation', 'manager', 'rating', 'employee_status', 'add_log_arrow'],
-	pipProbationList   : ['name', 'designation', 'manager', 'rating', 'employee_status', 'is_pip', 'action'],
+	pipProbationList   : ['name', 'designation', 'manager', 'rating', 'employee_status', 'is_pip',
+		'start_date', 'end_date', 'logs', 'action'],
 };
 
 export default feedbackDataColumns;
