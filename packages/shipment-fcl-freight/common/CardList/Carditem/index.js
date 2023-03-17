@@ -5,8 +5,6 @@ import getValue from '../../../utils/getValue';
 
 import styles from './styles.module.css';
 
-// const { Col } = Grid;
-
 function Item({
 	item = {},
 	isTotalRow = false,
@@ -36,10 +34,6 @@ function Item({
 
 				return (
 					<div
-						// xs={6}
-						// sm={6}
-						// md={singleItem.span}
-						// lg={singleItem.span}
 						style={singleItem.hasStyle ? singleItem.styles : stylesCol}
 						key={singleItem?.key}
 						className="card-body-col"

@@ -1,19 +1,18 @@
 import { toast } from '@cogoport/components';
 import useForm from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
 import controls from './controls';
 import STAKE_HOLDER_SPECIFIC_PROPS from './stakeHolderCongifs';
 import useGetContainerDetails from './useGetContainerDetails';
 
-const getWhoIsAddingRate = ({ isSeller, scope, item, status }) => {
+const getWhoIsAddingRate = ({ isSeller, item, status }) => {
 	let who_is_adding_rate = 'customer';
-	if (scope === 'partner' && !isSeller && (!item?.buy_price || !item?.id)) {
+	if (!isSeller && (!item?.buy_price || !item?.id)) {
 		who_is_adding_rate = 'okam_create';
 	}
-	if (scope === 'partner' && !isSeller && item?.buy_price && item?.id) {
+	if (!isSeller && item?.buy_price && item?.id) {
 		who_is_adding_rate = 'okam_update';
 	}
 	if (isSeller && !item.buy_price) {
@@ -43,11 +42,8 @@ const useAddRate = ({
 	onCancel = () => {},
 	filters,
 }) => {
-	const scope = useSelector(({ general }) => general?.scope);
-
 	const who_is_adding_rate = getWhoIsAddingRate({
 		isSeller,
-		scope,
 		item,
 		status,
 	});
@@ -70,7 +66,7 @@ const useAddRate = ({
 		)
 		.map((ctrl) => ({
 			...ctrl,
-			disabled: scope === 'app' ? true : ctrl.disabled && preProps.buy_disabled,
+			disabled: ctrl.disabled && preProps.buy_disabled,
 		}));
 
 	const mappedCtrls = newControls.map((ctrl) => ({
@@ -103,13 +99,10 @@ const useAddRate = ({
 		try {
 			const payload =				preProps.api === '/create_shipment_additional_service'
 				? {
-					name        : item?.name,
-					code        : item.code,
-					shipment_id : item.shipment_id,
-					service_type:
-								item?.service_type === 'trailer_freight_service'
-									? 'haulage_freight_service'
-									: item?.service_type,
+					name                  : item?.name,
+					code                  : item.code,
+					shipment_id           : item.shipment_id,
+					service_type          : item?.service_type,
 					service_id            : addedService?.id,
 					is_rate_available     : true,
 					state                 : preProps.state,

@@ -1,4 +1,4 @@
-import Pill from '@cogoport/components';
+import { Pill, Placeholder } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
@@ -59,11 +59,11 @@ function ChooseService({
 
 			{loading ? (
 				<div className={styles.loading_container}>
-					{Array(5)
-						.fill('')
-						.map(() => (
-							<div className={styles.custom_skeleton} />
-						))}
+					<Placeholder height="40px" width="100%" />
+					<Placeholder height="40px" width="100%" margin="8px 0px" />
+					<Placeholder height="40px" width="100%" margin="8px 0px" />
+					<Placeholder height="40px" width="100%" margin="8px 0px" />
+					<Placeholder height="40px" width="100%" />
 				</div>
 			) : (
 				<ServicesList fields={fields} data={list} loading={loading} />

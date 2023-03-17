@@ -13,8 +13,6 @@ function ServiceDetails({
 	serviceData = {},
 	serviceList = [],
 	shipmentData = {},
-	isSeller = false,
-	isMain = false,
 	cancelUpsellFor = '',
 	refetchServices = () => {},
 	primary_service = {},
@@ -46,7 +44,6 @@ function ServiceDetails({
 	};
 
 	const canUpsell = source !== 'consol'
-		&& shipment_type !== 'domestic_air_freight'
 		&& !shipmentData?.is_job_closed
 		&& routeLeg.service_types[0] !== cancelUpsellFor
 		&& isHaulageAvailable
@@ -65,7 +62,6 @@ function ServiceDetails({
 				service_supply_agent={service_supply_agent}
 				serviceList={serviceList}
 				shipmentData={shipmentData}
-				isSeller={isSeller}
 				service_provider={service_provider}
 				refetchServices={refetchServices}
 			/>
@@ -87,10 +83,6 @@ function ServiceDetails({
 			shipmentData={shipmentData}
 		/>
 	) : null;
-
-	if (isMain) {
-		return id ? addedServiceComponent : null;
-	}
 
 	return state ? addedServiceComponent : createNew;
 }

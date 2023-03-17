@@ -47,9 +47,21 @@
 	margin-right: 40px;
 }
 
-.Row{
+.info_container{
 	display: flex;
-	align-items: center;
+    align-items: center;
+	margin-top: 8px;
+
+	:global {
+		.tippy-box {
+			max-width: 6100px !important;
+			width: fit-content;
+
+			.tippy-content {
+				width: 100%;
+			}
+		}
+	}
 }
 
 .heading{

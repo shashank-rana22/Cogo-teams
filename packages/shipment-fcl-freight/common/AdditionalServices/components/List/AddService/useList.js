@@ -1,21 +1,16 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 const useList = ({ shipment_id, services, isSeller = false, show }) => {
-	const scope = useSelector(({ general }) => general.scope);
-
 	const [filters, setFilters] = useState({
 		name         : undefined,
 		service_type : undefined,
 	});
 
-	const [{ data, loading },
-		trigger] = useRequest({
+	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_shipment_additional_service_codes',
 		method : 'GET',
-		scope,
 	});
 
 	useEffect(() => {

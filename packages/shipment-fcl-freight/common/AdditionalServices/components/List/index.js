@@ -1,10 +1,10 @@
-// import useGetPermission from '@cogoport/business-modules/hooks/useGetPermission';
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
+import useGetPermission from '../../../../hooks/useGetPermission';
 import AddRate from '../AddRate';
 
 import AddService from './AddService';
@@ -13,7 +13,7 @@ import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
-// import useAddedList from './useAddedList';
+import useListAdditionalServices from './useListAdditionalServices';
 
 function List({
 	services = [],
@@ -21,33 +21,26 @@ function List({
 	activeTab = '',
 	refetchServices = () => { },
 }) {
-	console.log('servicesservicesservices', services);
-	// const { isConditionMatches } = useGetPermission();
-	const { scope, isShipper, isMobile } = useSelector(({ general }) => ({
+	const { isConditionMatches } = useGetPermission();
+	const { isShipper } = useSelector(({ general }) => ({
 		isShipper : general.query.account_type === 'importer_exporter',
-		scope     : general.scope,
 		isMobile  : general.isMobile,
 	}));
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const isSops = shipment_data?.stakeholder_types?.some((ele) => ['service_ops1', 'service_ops2', 'service_ops3']
-		.includes(ele));
-
-	const [addRate, setAddRate] = useState(null);
+	const [addRate, setAddRate] = useState(false);
 	const [show, setShow] = useState(false);
 	const [showIp, setShowIp] = useState(false);
 
-	// const { list: listAdded, refetch } = useAddedList({
-	// 	shipment_id: shipment_data?.id,
-	// 	shipment_data,
-	// });
+	const { list: additionalServiceList, refetch } = useListAdditionalServices({
+		shipment_data,
+	});
 
 	const handleRefetch = () => {
 		refetchServices();
 		refetch();
 	};
 
-	const listAdded = [];
 	return (
 		<div className={styles.container}>
 			<div className={styles.not_added}>
@@ -61,9 +54,9 @@ function List({
 				</Button>
 			</div>
 
-			{!isEmpty(listAdded) ? (
+			{!isEmpty(additionalServiceList) ? (
 				<div className={styles.added_services}>
-					{listAdded?.map((item) => {
+					{additionalServiceList?.map((item) => {
 						const status = getStaus({ item });
 
 						return (
@@ -76,7 +69,6 @@ function List({
 									status,
 									item,
 									setAddRate,
-									scope,
 									isShipper,
 									isConditionMatches,
 									setShowIp,
@@ -91,18 +83,12 @@ function List({
 				</div>
 			) : null}
 
-			{listAdded?.length ? (
-				<div>
+			{additionalServiceList?.length ? (
+				<div className={styles.info_container}>
 					<div className={styles.circle} />
 					<div className={styles.service_name}>Incidental Services</div>
-
-					{!isSops ? (
-						<>
-							<div className={cl` ${styles.circle} ${styles.upsell}`} />
-							<div className={styles.service_name}>Upselling Services</div>
-						</>
-					) : null}
-
+					<div className={cl` ${styles.circle} ${styles.upsell}`} />
+					<div className={styles.service_name}>Upselling Services</div>
 					<Info />
 				</div>
 			) : null}
@@ -110,21 +96,25 @@ function List({
 			{/* {addRate && showIp ? (} */}
 			{addRate ? (
 				<Modal
+					size="xl"
 					show={addRate}
 					onClose={() => setAddRate(null)}
-					className="primary lg"
 					closable={false}
+					placement="top"
 					onOuterClick={() => setAddRate(null)}
 				>
-					<AddRate
-						item={addRate?.item || addRate}
-						shipment_data={shipment_data}
-						status={addRate?.status}
-						setAddRate={setAddRate}
-						// refetch={refetch}
-						showIp={showIp}
-						setShowIp={setShowIp}
-					/>
+					<Modal.Header title="ADD INVOICING PARTY" />
+					<Modal.Body>
+						<AddRate
+							item={addRate?.item || addRate}
+							shipment_data={shipment_data}
+							status={addRate?.status}
+							setAddRate={setAddRate}
+							refetch={refetch}
+							showIp={showIp}
+							setShowIp={setShowIp}
+						/>
+					</Modal.Body>
 				</Modal>
 			) : null}
 
@@ -142,7 +132,7 @@ function List({
 							shipment_id={shipment_data?.id}
 							services={services}
 							isSeller={isSeller}
-						// refetch={refetch}
+							refetch={refetch}
 							show={show}
 							setShow={setShow}
 						/>

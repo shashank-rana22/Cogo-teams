@@ -2,11 +2,11 @@ import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import AddedServiceComponent from './AddedServiceComponent';
 import CreateNew from '../ServiceDetails/CreateNew';
 import Header from '../ServiceDetails/Header';
 import Status from '../ServiceDetails/Status';
 
-import AddedServiceComponent from './AddedServiceComponent';
 import styles from './styles.module.css';
 
 function MutipleSimilarServices({
@@ -34,15 +34,11 @@ function MutipleSimilarServices({
 		return !dontPush?.length ? toBeDisplayed.push(obj) : null;
 	});
 
-	const heading =	similarServices?.services?.[0]?.service_type === 'haulage_freight_service'
-		&& similarServices?.services?.[0]?.display_service_type === 'trailer_freight_service'
-		? 'Haulage Freight (Trailer)'
-		: similarServices?.routeLeg?.display;
-
 	if (similarServices?.services?.[0]?.service_type === 'ltl_freight_service') {
 		toBeDisplayed.splice(-2);
 	}
 
+	console.log('toBeDisplayedtoBeDisplayed', toBeDisplayed);
 	const addedServiceComponent = () => (
 		<div className={cl`${styles.container} ${state}`}>
 			<Header
@@ -52,7 +48,7 @@ function MutipleSimilarServices({
 				refetchList={refetchList}
 				serviceData={similarServices?.services}
 				state={state}
-				heading={heading}
+				heading={similarServices?.routeLeg?.display}
 				service_supply_agent={service_supply_agent}
 				serviceList={serviceList}
 				shipmentData={shipmentData}

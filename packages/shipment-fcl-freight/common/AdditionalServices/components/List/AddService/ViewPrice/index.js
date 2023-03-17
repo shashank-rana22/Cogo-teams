@@ -9,7 +9,6 @@ import useRequestRates from './useRequestRates';
 import fields from './viewPriceFields';
 
 function ViewPrice({ showPrice, setAddRate, setShowPrice }) {
-	console.log('showPrice', showPrice);
 	const { data, loading } = useRequestRates({
 		item: showPrice?.item,
 	});

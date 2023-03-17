@@ -41,12 +41,6 @@
 	}
 }
 
-.custom_skeleton{
-	width: 100%;
-	height: 70px;
-	margin: 10px 0px;
-}
-
 .loading_container{
 	display: flex;
 	justify-content: center;

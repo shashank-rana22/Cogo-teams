@@ -12,7 +12,7 @@ function BillToCustomer({ updateDatas, onCancel, onBillToCustomer }) {
 	];
 	return (
 		<div className={styles.container}>
-			<Heading>Review Services</Heading>
+			<div className={styles.heading}>Review Services</div>
 			<RadioWrapper>
 				<RadioGroup
 					className="primary lg"

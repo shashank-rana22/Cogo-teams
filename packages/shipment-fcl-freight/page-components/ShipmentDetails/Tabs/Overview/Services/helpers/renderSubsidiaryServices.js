@@ -14,7 +14,7 @@ const renderSubsidiaryServices = (serviceObj = {}, serviceList = []) => {
 
 			subsidiary_services?.forEach((subService) => {
 				// eslint-disable-next-line no-param-reassign
-				singleService[snakeCase(subService?.service_name)] = subService?.preferred_rate_quantity;
+				singleService[snakeCase(subService?.service_type)] = subService?.preferred_rate_quantity;
 			});
 		});
 	});

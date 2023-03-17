@@ -1,7 +1,6 @@
 import { cl } from '@cogoport/components';
 
-import MultiServiceDetails from '../MultiServiceDetails';
-
+import MultiServiceDetailsPopover from './MultiServiceDetailsPopover';
 import RenderCargoPills from './RenderCargoPills';
 import styles from './styles.module.css';
 
@@ -14,12 +13,12 @@ function CargoDetails({ primary_service }) {
 					<CargoDetails
 						detail={{ ...primary_service, ...primary_service?.cargo_details?.[0] } || {}}
 					/>
-					<MultiServiceDetails mainServices={primary_service?.cargo_details}>
+					<MultiServiceDetailsPopover mainServices={primary_service?.cargo_details}>
 						+
 						{(primary_service?.cargo_details?.length || 1) - 1}
-						{ ' '}
+						&nbsp;
 						Details
-					</MultiServiceDetails>
+					</MultiServiceDetailsPopover>
 				</div>
 			) : (
 				<RenderCargoPills

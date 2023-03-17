@@ -1,11 +1,11 @@
-.HeaderText{
+.header_text{
 	font-weight: 500;
 	font-size: 18px;
 	text-transform: capitalize;
 	color: #393f70;
 }
 
-.Container{
+.container{
 	background: #ffffff;
 }
 
@@ -27,7 +27,7 @@
 	margin-right: 12px;
 }
 
-.CustomTag{
+.custom_tag{
 	margin-right: 20px;
 	padding-left: 10px;
 	&.core-ui-tag-root {
@@ -35,17 +35,8 @@
 	}
 }
 
-.Row{
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	margin-bottom: 40px;
-	.core-ui-select__control {
-		margin-left: 20px;
-		width: 90px;
-	}
-}
-.ButtonContainer{
+
+.button_container{
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
@@ -54,7 +45,7 @@
 	margin-top: 20px;
 }
 
-.Content{
+.content{
 	padding: 0px 16px 24px 16px;
 	.core-ui-select__control {
 		width: 100% !important;

@@ -11,9 +11,7 @@ import MutipleSimilarServices from './MutipleSimilarServices';
 import ServiceDetails from './ServiceDetails';
 import styles from './styles.module.css';
 
-function Services({
-	isSeller = false,
-}) {
+function Services() {
 	const {
 		shipment_data,
 		primary_service,
@@ -23,7 +21,7 @@ function Services({
 		servicesLoading,
 	} = useContext(ShipmentDetailContext);
 
-	const mainServiceName = primary_service?.service_name;
+	const mainServiceName = primary_service?.service_type;
 	const possibleFullRoute = possibleFullRouteConfigs?.[mainServiceName];
 
 	const { renderItem } = helperFuncs(servicesList);
@@ -53,8 +51,6 @@ function Services({
 								serviceData={service}
 								serviceList={servicesList}
 								shipmentData={shipment_data}
-								isSeller={isSeller}
-								isMain={service?.isMain}
 								refetchServices={refetchServices}
 								primary_service={primary_service}
 							/>
@@ -66,11 +62,11 @@ function Services({
 							<MutipleSimilarServices
 								serviceList={servicesList}
 								shipmentData={shipment_data}
-								isSeller={isSeller}
 								isMain
 								similarServices={service}
 								primary_service={primary_service}
 							/>
+
 						))}
 					</div>
 
@@ -81,7 +77,6 @@ function Services({
 								serviceData={service}
 								serviceList={servicesList}
 								shipmentData={shipment_data}
-								isSeller={isSeller}
 								refetchServices={refetchServices}
 								primary_service={primary_service}
 							/>

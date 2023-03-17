@@ -13,7 +13,7 @@ function OverviewManageServices() {
 		ShipmentDetailContext,
 	);
 
-	const mainServiceName = primary_service?.service_name;
+	const mainServiceName = primary_service?.service_type;
 	const possibleFullRoute = possibleFullRouteConfigs?.[mainServiceName];
 
 	const getTitle = (

@@ -26,8 +26,6 @@ function AddService({
 		isSeller,
 	});
 
-	console.log('servicesservices', services);
-
 	if (!list?.length && !loading) {
 		<EmptyState />;
 	}

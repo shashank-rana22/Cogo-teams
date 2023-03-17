@@ -12,13 +12,13 @@ function Price({
 	refetch = () => {},
 	setShowPrice,
 }) {
-	const { requestRate, scope, loading } = useRequestRate({ setShow, refetch });
+	const { requestRate, loading } = useRequestRate({ setShow, refetch });
 
 	return item?.rates ? (
 		<p>$ 0</p>
 	) : (
 		<div className={styles.price_div}>
-			{!isSeller && scope === 'partner' ? (
+			{!isSeller ? (
 				<Button
 					themeType="secondary"
 					onClick={(e) => {
