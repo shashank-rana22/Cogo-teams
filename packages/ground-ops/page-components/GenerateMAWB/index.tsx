@@ -90,6 +90,14 @@ function GenerateMAWB({
 		(+taskItem.volume * 166.67),
 	) || 0.0).toFixed(2));
 
+	const handleDocumentList = (type) => {
+		(packingData?.list || []).forEach((itm) => {
+			if (itm.documentType === type) {
+				window.open(itm.documentUrl, '_blank');
+			}
+		});
+	};
+
 	useEffect(() => {
 		chargeableWeight = Number((Math.max(
 			+formValues.weight,
@@ -194,7 +202,25 @@ function GenerateMAWB({
 							/>
 						)}
 					</div>
+					<div className={styles.flex}>
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={() => handleDocumentList('packing_list')}
+							className={styles.packing_button}
+						>
+							Refer Packing List
+						</Button>
 
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={() => handleDocumentList('shipping_instruction')}
+							className={styles.packing_button}
+						>
+							Refer Shipping Instruction
+						</Button>
+					</div>
 					{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} />
 						: (
 							<>
@@ -228,14 +254,6 @@ function GenerateMAWB({
 								{activeKey === 'package'
 								&& (
 									<>
-										<Button
-											size="md"
-											themeType="primary"
-											onClick={() => window.open(packingData?.list?.[0]?.documentUrl, '_blank')}
-											className={styles.packing_button}
-										>
-											Refer Packing List
-										</Button>
 										<Layout fields={fields?.package} control={control} errors={errors} />
 										<div className={styles.button_container}>
 											{!back ? (
