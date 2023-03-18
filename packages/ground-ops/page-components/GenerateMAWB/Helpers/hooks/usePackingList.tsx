@@ -3,7 +3,7 @@ import { useRequestAir } from '@cogoport/request';
 const usePackingList = () => {
 	const [{ data = {} }, trigger] = useRequestAir(
 		{
-			url     : '/air-coe/document/list',
+			url     : '/air-coe/documents/list',
 			method  : 'get',
 			authKey : 'get_air_coe_documents_list',
 		},
@@ -15,7 +15,7 @@ const usePackingList = () => {
 			await trigger({
 				params: {
 					shipmentId   : item?.shipmentId,
-					documentType : 'packing_list',
+					documentType : ['packing_list', 'shipping_instruction'],
 				},
 			});
 		} catch (err) {
