@@ -95,6 +95,7 @@ function EditModal({
 			<Modal.Footer>
 				<div className={styles.update_buttons}>
 					<Button
+						type="button"
 						themeType="secondary"
 						size="md"
 						onClick={() => setShowEditModal(null)}
@@ -103,6 +104,7 @@ function EditModal({
 						Cancel
 					</Button>
 					<Button
+						button="type"
 						themeType="primary"
 						size="md"
 						onClick={handleSubmit(editFunction)}

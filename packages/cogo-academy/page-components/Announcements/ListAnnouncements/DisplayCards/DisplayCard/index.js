@@ -106,7 +106,7 @@ function DisplayCard({
 				>
 					<Accordion
 						type="card"
-						title="Display Details"
+						title="Details"
 						className={styles.accordian}
 					>
 						<div className={styles.titles}>Embedded Media :</div>

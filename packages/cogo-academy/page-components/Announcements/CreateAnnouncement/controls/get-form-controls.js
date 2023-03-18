@@ -40,10 +40,11 @@ const getFormControls = () => [
 		placeholder : 'Description about the post',
 	},
 	{
-		name     : 'videos',
-		label    : 'Input Video URL',
-		type     : 'field-array',
-		controls : [
+		name          : 'videos',
+		label         : 'Input Video URL',
+		type          : 'field-array',
+		showLabelOnce : true,
+		controls      : [
 			{
 				name  : 'video_item',
 				label : 'Input Video URL',

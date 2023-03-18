@@ -1,11 +1,9 @@
 .contain {
-	display: grid;
-	grid-template-columns: 33% 33% 33%;
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
 
-	@media (max-width: 1125px) {
-		grid-template-columns: 50% 50%;
-	}
-	@media (max-width: 755px) {
-		grid-template-columns: 100%;
+	@media (max-width: 768px) {
+		flex-direction: column;
 	}
 }

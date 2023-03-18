@@ -14,18 +14,14 @@
 }
 
 .slabs {
-	display: grid;
-	grid-template-columns: repeat(5, 20%);
+	display: flex;
+	flex-wrap: wrap;
 	margin-bottom: 10px;
 
-	@media (max-width: 1045px) {
-		grid-template-columns: repeat(4, 25%);
-	}
-	@media (max-width: 885px) {
-		grid-template-columns: repeat(2, 50%);
-	}
-	@media (max-width: 450px) {
-		grid-template-columns: repeat(1, 1fr);
+	@media (max-width: 870px) {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 }
 
@@ -33,9 +29,12 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 20%;
 	padding: 10px 10px 0;
 
-	@media (max-width: 785px) {
+	@media (max-width: 870px) {
+		flex-direction: column;
+		width: 100%;
 		padding: 10px 10px 0;
 		margin: 10px 0;
 	}
