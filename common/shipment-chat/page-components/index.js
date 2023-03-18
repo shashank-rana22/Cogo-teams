@@ -66,7 +66,7 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 				<img
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipment-chat-icon.svg"
 					alt="chat"
-					style={{ width: 60, height: 60 }}
+					style={{ width: 50, height: 50, margin: '0px 20px 8px 0px' }}
 				/>
 			</div>
 
