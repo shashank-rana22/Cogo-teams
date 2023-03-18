@@ -1,14 +1,9 @@
 import { useState } from "react";
-import {
-  cl,
-  Popover,
-  Button,
-  Select,
-  Modal,
-  Textarea,
-} from "@cogoport/components";
+import { cl, Popover, Button, Select, Modal } from "@cogoport/components";
 import RaiseQuery from "./RaiseQuery";
+import { SelectController, TextAreaController } from "@cogoport/forms";
 import useCreateRaiseQuery from "../hooks/useCreateRaiseQuery";
+import controls from "./controls";
 import styles from "./styles.module.css";
 
 function Header({
@@ -20,50 +15,51 @@ function Header({
   shipmentType = "fcl_freight",
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [queryType, setQueryType] = useState("");
-  const [remarks, setRemarks] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  const { loading, handleFormSubmit, reset } =
-		useCreateRaiseQuery({
-			setShowModal,
-			setIsOpen,
-			shipmentId,
-      queryType,
-      remarks,
-		});
+  const { query_type, remarks } = controls;
+
+  const { loading, handleFormSubmit, handleSubmit, reset, errors, control } =
+    useCreateRaiseQuery({
+      setShowModal,
+      setIsOpen,
+      shipmentId,
+    });
 
   const content = (
-    <div className={styles.content}>
-      <Select
-        size="sm"
-        style={{ width: "250px", paddingBottom: "20px" }}
-        name="query_type"
-        label="Issue Related to"
-        placeholder="Select"
-        value={queryType}
-        onChange={(e) => setQueryType(e)}
-        options={[
-          {
-            label: "Inaccurate data",
-            value: "inaccurate_data",
+    <form className={styles.content}>
+      <div className={styles.label}>Issue Related to</div>
+      <SelectController
+        className={styles.select}
+        control={control}
+        {...query_type}
+        rules={{
+          required: {
+            value: true,
           },
-          {
-            label: "Shipment Rollover",
-            value: "shipment_rollover",
-          },
-          {
-            label: "Map View is not available",
-            value: "map_view_not_available",
-          },
-          {
-            label: "Other",
-            value: "other",
-          },
-        ]}
+        }}
       />
+      {errors?.query_type && (
+        <div className={styles.error_text}>Query type is required</div>
+      )}
 
-      <Textarea name="remarks" size="lg" placeholder="Please type here" onChange={(e) => setRemarks(e)} value={remarks}/>
+      <div className={styles.text_area_container}>
+        <div className={styles.label}>Remarks</div>
+        <TextAreaController
+          control={control}
+          {...remarks}
+          rules={{
+            required: {
+              value: true,
+            },
+          }}
+          rows={4}
+        />
+        {errors?.remarks && (
+          <div className={styles.error_text}>Remarks is required</div>
+        )}
+      </div>
+
       <div className={styles.button_div}>
         <Button
           onClick={() => {
@@ -79,15 +75,14 @@ function Header({
         </Button>
         <Button
           disabled={loading}
-          onClick={handleFormSubmit}
+          onClick={handleSubmit(handleFormSubmit)}
           size="md"
           themeType="accent"
         >
           Submit
         </Button>
-        hii
       </div>
-    </div>
+    </form>
   );
 
   return (

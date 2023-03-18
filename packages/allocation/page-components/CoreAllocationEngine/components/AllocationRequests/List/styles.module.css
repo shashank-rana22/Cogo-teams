@@ -20,9 +20,7 @@
 }
 
 .table_container {
-	@media (max-width: 768px) {
-		overflow-x: scroll;
-	}
+	overflow-x: scroll;
 }
 
 .table {

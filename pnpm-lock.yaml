@@ -9,6 +9,7 @@ importers:
       '@sentry/nextjs': ^7.40.0
       '@svgr/webpack': ^6.5.1
       accept-language: ^3.0.18
+      axios-hooks: ^4.0.0
       eslint: ^8.35.0
       fs-extra: ^11.1.0
       git-precommit-checks: ^3.1.0
@@ -26,6 +27,7 @@ importers:
     dependencies:
       '@sentry/nextjs': 7.42.0
       accept-language: 3.0.18
+      axios-hooks: 4.0.0
       i18next: 22.4.10
       next-i18next: 13.2.2_johky4hpydmc34raojpzuxlpqy
       react-dom: 18.2.0
@@ -220,6 +222,34 @@ importers:
       dotenv-expand: 10.0.0
       qs: 6.11.0
       react: 18.2.0
+
+  common/shipment-chat:
+    specifiers:
+      '@cogoport/components': ^1.0.377
+      '@cogoport/context': workspace:^0.1.0
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.60
+      '@cogoport/next': workspace:^0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      firebase: ^9.17.2
+      react: 18.2.0
+      react-infinite-scroller: ^1.2.4
+    dependencies:
+      '@cogoport/components': 1.0.377_aydyy3gkshtlrnyh7fafj36que
+      '@cogoport/context': link:../context
+      '@cogoport/forms': link:../forms
+      '@cogoport/globalization': link:../globalization
+      '@cogoport/icons-react': 1.0.60_react@18.2.0
+      '@cogoport/next': link:../next
+      '@cogoport/request': link:../request
+      '@cogoport/store': link:../store
+      '@cogoport/utils': 1.2.6
+      firebase: 9.17.2
+      react: 18.2.0
+      react-infinite-scroller: 1.2.6_react@18.2.0
 
   common/store:
     specifiers:
@@ -622,8 +652,10 @@ importers:
       '@cogoport/icons-react': ^1.0.60
       '@cogoport/maps': ^1.0.2
       '@cogoport/request': workspace:^0.1.0
+      '@cogoport/shipment-chat': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.6
+      file-saver: ^2.0.5
       prop-types: ^15.8.1
       react: 18.2.0
     dependencies:
@@ -635,8 +667,10 @@ importers:
       '@cogoport/icons-react': 1.0.60_react@18.2.0
       '@cogoport/maps': 1.0.3_aydyy3gkshtlrnyh7fafj36que
       '@cogoport/request': link:../../common/request
+      '@cogoport/shipment-chat': link:../../common/shipment-chat
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.6
+      file-saver: 2.0.5
       prop-types: 15.8.1
       react: 18.2.0
 
@@ -2071,6 +2105,40 @@ packages:
 
   /@cogoport/components/1.0.372_aydyy3gkshtlrnyh7fafj36que:
     resolution: {integrity: sha512-KbwhoGEDy9gXAu63u/MUTdwRilQzJ0pDAUJ9LZjrT7Xe2ODsQfyPXQsXdlp1/6hWZbR0GCR9kWScotCNFSwwpQ==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.60_react@18.2.0
+      '@tippyjs/react': 4.2.6_react@18.2.0
+      '@types/quill': 2.0.10
+      '@types/react-rte': 0.16.5
+      axios: 1.3.4
+      axios-hooks: 4.0.0_axios@1.3.4+react@18.2.0
+      date-fns: 2.29.3
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
+      react-hook-form: 7.43.5_react@18.2.0
+      react-quill: 2.0.0_react@18.2.0
+      react-rte: 0.16.5_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1_react@18.2.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components/1.0.377_aydyy3gkshtlrnyh7fafj36que:
+    resolution: {integrity: sha512-mbNO9uWqMuUCShr6K7BwAuWhWWWWSPMdmsz49A2k5zYTl4+UJqZ8+zx4R98LAmVyUszSQ7EZehdWtfFGLldfgQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
@@ -4968,6 +5036,17 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /axios-hooks/4.0.0:
+    resolution: {integrity: sha512-IYpVCh/3I99KA826+Qtms581EegvlUVzDkhljglo21Ugc6P9lQQVG6q22seZy0ieYuepjS3kvCtzUG7jAX7BTA==}
+    peerDependencies:
+      axios: '>=0.24.0'
+      react: ^16.8.0-0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.19.0
+      dequal: 2.0.3
+      lru-cache: 7.14.1
+    dev: false
+
   /axios-hooks/4.0.0_axios@1.3.4+react@18.2.0:
     resolution: {integrity: sha512-IYpVCh/3I99KA826+Qtms581EegvlUVzDkhljglo21Ugc6P9lQQVG6q22seZy0ieYuepjS3kvCtzUG7jAX7BTA==}
     peerDependencies:
@@ -5696,7 +5775,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5707,7 +5786,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5718,7 +5797,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -5730,7 +5809,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5741,7 +5820,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -5753,7 +5832,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       immutable: 3.8.2
     dev: false
 
