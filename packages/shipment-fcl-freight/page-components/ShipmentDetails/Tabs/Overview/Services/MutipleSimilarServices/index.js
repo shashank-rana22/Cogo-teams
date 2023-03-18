@@ -2,11 +2,11 @@ import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import AddedServiceComponent from './AddedServiceComponent';
 import CreateNew from '../ServiceDetails/CreateNew';
 import Header from '../ServiceDetails/Header';
 import Status from '../ServiceDetails/Status';
 
+import AddedServiceComponent from './AddedServiceComponent';
 import styles from './styles.module.css';
 
 function MutipleSimilarServices({
@@ -38,7 +38,6 @@ function MutipleSimilarServices({
 		toBeDisplayed.splice(-2);
 	}
 
-	console.log('toBeDisplayedtoBeDisplayed', toBeDisplayed);
 	const addedServiceComponent = () => (
 		<div className={cl`${styles.container} ${state}`}>
 			<Header

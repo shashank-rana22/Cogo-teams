@@ -7,9 +7,6 @@
 	display: flex;
 	justify-content: flex-end;
 
-	.core-ui-button-root {
-		text-transform: capitalize;
-	}
 	@media (max-width: 768px) {
 		justify-content: center;
 	}
@@ -25,6 +22,7 @@
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
+	margin-top: 12px;
 }
 
 .circle{
@@ -93,5 +91,13 @@
 		.ui_modal_body_container {
 			max-height: 400px;
 	}
+	}
+}
+
+.ip_modal_container {
+	:global {
+		.ui_modal_body_container {
+			max-height: 500px;
+		}
 	}
 }

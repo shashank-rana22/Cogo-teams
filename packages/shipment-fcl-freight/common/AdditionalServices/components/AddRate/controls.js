@@ -119,7 +119,7 @@ const controls = (options, item, containerList) => [
 				rules       : { required: { value: true, message: 'This is required' } },
 				options     : containerList,
 			},
-		  ]
+		]
 		: []),
 ];
 

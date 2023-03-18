@@ -1288,12 +1288,7 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
-		api          : 'list_services',
-		access_type  : 'private',
-		service_name : 'bookings',
-	},
-	{
-		api          : 'get_service_timeline',
+		api          : 'list_additional_services',
 		access_type  : 'private',
 		service_name : 'bookings',
 	},

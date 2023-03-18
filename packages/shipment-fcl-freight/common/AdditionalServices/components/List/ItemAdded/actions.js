@@ -8,20 +8,17 @@ const actions = ({
 	status,
 	activeTab,
 	setAddRate,
-	item,
+	serviceListItem,
 	isConditionMatches,
 	isShipper,
 	addRate,
 	setShowIp = () => {},
-	shipment_data = {},
+	setItem = () => {},
 }) => {
-	const isSameItem = item.id === addRate?.item?.id;
+	const isSameItem = serviceListItem.id === addRate?.item?.id;
+
 	const onClick = () => {
-		if (addRate) {
-			setAddRate(null);
-		} else {
-			setAddRate({ item, status });
-		}
+		setItem({ serviceListItem, status });
 	};
 	if (
 		status.status === 'quoted_by_service_provider'
@@ -30,8 +27,8 @@ const actions = ({
 		return (
 			<Button
 				themeType="secondary"
-				style={{ marginLeft: 10 }}
-				onClick={() => setAddRate({ item, status })}
+				style={{ marginLeft: 10, height: '24px' }}
+				onClick={() => setAddRate({ serviceListItem, status })}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'ADD SELL PRICE'}
 			</Button>
@@ -39,13 +36,13 @@ const actions = ({
 	}
 	if (
 		status.status === 'charges_incurred'
-		&& item.add_to_sell_quotation === null
+		&& serviceListItem.add_to_sell_quotation === null
 	) {
 		return (
 			<Button
 				themeType="secondary"
-				style={{ marginLeft: 10 }}
-				onClick={() => setAddRate({ item, status })}
+				style={{ marginLeft: 10, height: '24px' }}
+				onClick={() => setAddRate({ serviceListItem, status })}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
 			</Button>
@@ -55,7 +52,7 @@ const actions = ({
 		return (
 			<Button
 				themeType="secondary"
-				style={{ marginLeft: 10 }}
+				style={{ marginLeft: 10, height: '24px' }}
 				onClick={onClick}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
@@ -68,8 +65,8 @@ const actions = ({
 		return (
 			<Button
 				themeType="secondary"
-				style={{ marginLeft: 10 }}
-				onClick={() => setAddRate({ item, status, setAddRate })}
+				style={{ marginLeft: 10, height: '24px' }}
+				onClick={() => setAddRate({ serviceListItem, status, setAddRate })}
 			>
 				REALLOCATE
 			</Button>
@@ -82,8 +79,8 @@ const actions = ({
 		return (
 			<Button
 				themeType="secondary"
-				style={{ marginLeft: 10 }}
-				onClick={() => setAddRate({ item, status })}
+				style={{ marginLeft: 10, height: '24px' }}
+				onClick={() => setAddRate({ serviceListItem, status })}
 			>
 				REVIEW COMMENTS
 			</Button>
@@ -91,20 +88,20 @@ const actions = ({
 	}
 
 	if (
-		(!IP_STATE_CONDITONS.find((state) => state === item.state)
-			|| !item.invoice_preference)
+		(!IP_STATE_CONDITONS.find((state) => state === serviceListItem.state)
+			|| !serviceListItem.invoice_preference)
 		&& activeTab !== 'purchase_invoice'
 	) {
 		return (
 			<Button
 				themeType="secondary"
-				style={{ marginLeft: 10 }}
+				style={{ marginLeft: 10, height: '24px' }}
 				onClick={() => {
 					onClick();
 					setShowIp(true);
 				}}
 			>
-				{addRate && isSameItem ? 'CLOSE' : 'ADD IP'}
+				{ isSameItem ? 'CLOSE' : 'ADD IP'}
 			</Button>
 		);
 	}

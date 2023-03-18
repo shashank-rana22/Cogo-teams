@@ -1,4 +1,4 @@
-import COUNTRIES from '@cogoport/build-scripts/temp/constants/countries.json';
+// import COUNTRIES from '@cogoport/build-scripts/temp/constants/countries.json';
 
 const countriesHash = COUNTRIES.reduce(
 	(pv, acc) => ({ ...pv, [acc.id]: acc }),

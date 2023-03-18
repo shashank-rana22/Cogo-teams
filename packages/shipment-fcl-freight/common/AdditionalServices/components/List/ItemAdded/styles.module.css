@@ -7,6 +7,8 @@
 	margin: 0px 12px 12px 0px;
 	min-width: 215px;
 	border-radius: 4px;
+	flex: 0 0 24%;
+	height: 65px;
 }
 
 .heading{
@@ -15,6 +17,9 @@
 	font-size: 10px;
 	line-height: 16px;
 	color: #4f4f4f;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .tag{
@@ -28,31 +33,31 @@
 	align-items: center;
 	text-align: center;
 	color: #393f70;
+}
 
-	&.approved {
-		background: #e6fbe9;
-		color: #393f70;
-	}
+.approved {
+	background: #e6fbe9;
+	color: #393f70;
+}
 
-	&.price_recieved,
-	&.customer_confirmation_pending {
-		background: #fcedbf;
-	}
+.price_recieved,
+.customer_confirmation_pending {
+	background: #fcedbf;
+}
 
-	&.charges_incurred {
-		background: #fbe6e6;
-	}
+.charges_incurred {
+	background: #fbe6e6;
+}
 
-	&.cancelled_by_supplier,
-	&.cancelled_by_customer {
-		background: #4f4f4f;
-		color: #fff;
-	}
+.cancelled_by_supplier,
+.cancelled_by_customer {
+	background: #4f4f4f;
+	color: #fff;
+}
 
-	&.disputed {
+.disputed {
 		background: #bdbdbd;
 		color: #fff;
-	}
 }
 
 .name_type{
@@ -74,9 +79,6 @@
 	border-radius: 50%;
 	margin-right: 6px;
 
-	&.upsell {
-		background: #d9eafd;
-	}
 }
 
 .button_text{
@@ -100,9 +102,7 @@
 
 .additional_service_item_row{
 	display: flex;
-    -webkit-box-align: center;
     align-items: center;
-    -webkit-box-pack: justify;
     justify-content: space-between;
     margin-bottom: 4px;
 }

@@ -19,8 +19,6 @@ function AddedServiceComponent({
 }) {
 	const [show, setShow] = useState(allSimilar === 1);
 
-	console.log('AddedServiceComponent', serviceData, allSimilar);
-
 	const {
 		id,
 		service_type,
@@ -29,6 +27,8 @@ function AddedServiceComponent({
 		shipping_line,
 		commodity,
 	} = serviceData || {};
+
+	console.log('serviceData', serviceData);
 
 	const service_items_key = getConfigs(service_type).details || {};
 

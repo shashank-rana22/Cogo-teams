@@ -23,6 +23,7 @@ function useListShipmentServices({ shipment_data }) {
 						filters: {
 							shipment_id: shipment_data?.id,
 						},
+						additional_methods: ['service_objects', 'stakeholder'],
 					},
 				});
 				if (!res.hasError) {

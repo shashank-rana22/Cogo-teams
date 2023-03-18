@@ -3,15 +3,11 @@ import { Flex, Accordion } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import ManageServices from '../../../commons/ManageServices';
-
-import ActionsToShow from './ActionToShow';
-import AddIp from './AddIp';
+// import ActionsToShow from './ActionToShow';
 import BillToCustomer from './BillToCustomer';
 import SecondStep from './SecondStep';
 import styles from './styles.module.css';
-import useAddRate from './useAddRate';
-import useServiceUpdate from './useServiceUpdate';
+// import useAddRate from './useAddRate';
 
 const showRemarksStatus = [
 	'amendment_requested_by_importer_exporter',
@@ -31,8 +27,6 @@ function AddRate({
 	showLabel = true,
 	shipment_data,
 	onCancel = () => {},
-	showIp,
-	setShowIp = () => {},
 	filters,
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(undefined);
@@ -48,15 +42,6 @@ function AddRate({
 	// 	billToCustomer,
 	// 	onCancel,
 	// 	filters,
-	// });
-
-	// const updateDatas = useServiceUpdate({
-	// 	item,
-	// 	setAddRate,
-	// 	refetch,
-	// 	showIp,
-	// 	onCancel,
-	// 	setShowIp,
 	// });
 
 	if (showSecondStep) {
@@ -84,18 +69,10 @@ function AddRate({
 			/>
 		);
 	}
-
-	if (showIp) {
-		return (
-			<AddIp
-				shipment_data={shipment_data}
-				// handleInvoicingParty={updateDatas?.handleInvoicingParty}
-			/>
-		);
-	}
 	return (
 		<div>
 			<div className={styles.container}>
+				hi
 				<Accordion
 					title={(
 						<Flex alignItems="center">
@@ -128,7 +105,7 @@ function AddRate({
 				</Accordion>
 			</div>
 
-			<ActionsToShow
+			{/* <ActionsToShow
 				setAddRate={setAddRate}
 				addRate={addRate}
 				handleSubmit={handleSubmit}
@@ -137,7 +114,7 @@ function AddRate({
 				updateDatas={updateDatas}
 				loading={loading || updateDatas.loading}
 				onCancel={() => onCancel()}
-			/>
+			/> */}
 		</div>
 	);
 }

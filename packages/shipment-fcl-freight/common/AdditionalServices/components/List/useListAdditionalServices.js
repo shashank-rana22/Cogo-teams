@@ -3,7 +3,7 @@ import { useEffect, useCallback } from 'react';
 
 const useListAdditionalServices = ({ shipment_data, filters = {} }) => {
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/list_shipment_additional_services',
+		url    : 'fcl_freight/list_additional_services',
 		method : 'GET',
 	}, { manual: true });
 	const { importer_exporter_id, id } = shipment_data || {};

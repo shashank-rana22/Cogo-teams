@@ -1,4 +1,4 @@
-import { ToolTip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -53,12 +53,12 @@ function Field({
 		>
 			<div className={styles.card_title}>
 				{field.tooltip ? (
-					<ToolTip theme="light" content={field.tooltip} placement="top">
+					<Tooltip theme="light" content={field.tooltip} placement="top">
 						<span>
 							{field.label}
 							<IcMInfo />
 						</span>
-					</ToolTip>
+					</Tooltip>
 				) : (
 					renderHeaderText()
 				)}
