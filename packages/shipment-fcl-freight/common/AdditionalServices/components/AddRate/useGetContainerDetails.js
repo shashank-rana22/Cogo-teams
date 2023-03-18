@@ -1,11 +1,12 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 function useGetContainerDetails(item = {}) {
-	const scope = useSelector(({ general }) => general?.scope);
-
-	const { trigger: containerDetailTrigger, data: containerDetails } =		useRequest('get', false, scope)('/list_shipment_container_details');
+	const [{ data: containerDetails },
+		containerDetailTrigger] = useRequest({
+		url    : '/list_shipment_container_details',
+		method : 'GET',
+	});
 
 	const getDetails = async () => {
 		try {

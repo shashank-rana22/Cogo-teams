@@ -1,4 +1,33 @@
-.container{
+.container {
+    display: flex;
+    width: 100%;
+    border-radius: 4px;
     background-color: #fff;
-    margin-top: 12px;
+    align-items: center;
+    margin-top: 16px;
+
+    :global {
+        .tippy-box {
+            padding: 0;
+            min-height: initial;
+            min-width: initial;
+        }
+        .tippy-content {
+            padding: 0;
+        }
+    }
+}
+
+.three_dot_icon {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.list_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 65px;
+    padding: 0 44px 24px;
+    flex: 1;
 }

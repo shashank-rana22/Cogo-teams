@@ -1,6 +1,7 @@
-// import getValue from '@cogoport/smart-components/utils/getValue';
-import { Placeholder, Grid } from '@cogoport/components';
+import { cl, Placeholder } from '@cogoport/components';
 import React from 'react';
+
+import getValue from '../../../../../../../../utils/getValue';
 
 import styles from './styles.module.css';
 
@@ -19,37 +20,38 @@ function Item({ item, fields, handleClick, loading = false }) {
 	};
 
 	return (
-		<Row
+		<div
 			style={stylesRow}
 			onClick={handleClick}
 			tabIndex="0"
-			className={` ${item.expired ? 'expired' : ''}`}
+			className={cl` ${item.expired ? 'expired' : ''} ${styles.row}`}
 			onKeyDown={(e) => {
 				if (e.key === 'Enter') {
 					handleClick();
 				}
 			}}
+			role="button"
 		>
 			{fields.map((singleItem) => (
-				<Col
-					xs={6}
-					sm={6}
-					md={singleItem.span}
-					lg={singleItem.span}
+				<div
+					// xs={6}
+					// sm={6}
+					// md={singleItem.span}
+					// lg={singleItem.span}
 					style={singleItem.hasStyle ? singleItem.styles : stylesCol}
 					key={singleItem?.key}
 				>
 					{loading && <Placeholder width="100%" height="20px" />}
-					<Label>{singleItem.label}</Label>
+					<div className={styles.label}>{singleItem.label}</div>
 					{singleItem.render && !loading ? singleItem.render(item) : null}
 					{!loading && !singleItem.render ? (
-						<TitleBlack>
+						<div className={styles.title_black}>
 							{getValue(item, singleItem, false, {}) || '-'}
-						</TitleBlack>
+						</div>
 					) : null}
-				</Col>
+				</div>
 			))}
-		</Row>
+		</div>
 	);
 }
 

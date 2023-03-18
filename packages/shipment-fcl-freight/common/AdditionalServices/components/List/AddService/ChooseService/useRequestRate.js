@@ -1,15 +1,11 @@
-import { toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 const useRequestRate = ({ setShow = () => {}, refetch = () => {} }) => {
-	const { scope } = useSelector(({ general }) => ({ scope: general?.scope }));
-
-	const { trigger, loading } = useRequest(
-		'post',
-		false,
-		scope,
-	)('/create_shipment_additional_service');
+	const [{ loading }, trigger] = useRequest({
+		url    : '/create_shipment_additional_service',
+		method : 'POST',
+	});
 
 	const requestRate = async (item) => {
 		try {
@@ -29,7 +25,7 @@ const useRequestRate = ({ setShow = () => {}, refetch = () => {} }) => {
 					add_to_sell_quotation : true,
 				},
 			});
-			toast.success('Rate Requested successfully');
+			Toast.success('Rate Requested successfully');
 			setShow(false);
 			refetch();
 		} catch (err) {
@@ -40,7 +36,6 @@ const useRequestRate = ({ setShow = () => {}, refetch = () => {} }) => {
 	return {
 		loading,
 		requestRate,
-		scope,
 	};
 };
 export default useRequestRate;

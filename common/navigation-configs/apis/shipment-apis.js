@@ -1297,6 +1297,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
+	{
+		api          : 'get_timeline',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
 ];
 
 export default apis;

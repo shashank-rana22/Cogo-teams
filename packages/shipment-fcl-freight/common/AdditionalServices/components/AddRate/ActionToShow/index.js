@@ -1,8 +1,8 @@
-// import CC from '@cogoport/bookings/ShipmentDetails/utils/condition-constants';
-// import useGetPermission from '@cogoport/business-modules/hooks/useGetPermission';
 import { Button } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
 import React from 'react';
+
+import useGetPermission from '../../../../../hooks/useGetPermission';
+import CC from '../../../../../utils/condition-constants';
 
 import styles from './styles.module.css';
 
@@ -23,11 +23,7 @@ function ActionsToShow({
 		requestRateFromTechops,
 	} = updateDatas;
 
-	const { scope } = useSelector(({ general }) => ({
-		scope: general.scope,
-	}));
-
-	// const { isConditionMatches } = useGetPermission();
+	const { isConditionMatches } = useGetPermission();
 
 	if (status?.status === 'customer_confirmation_pending') {
 		return (
@@ -48,9 +44,7 @@ function ActionsToShow({
 	}
 
 	if (
-		status?.status === 'amendment_requested_by_importer_exporter'
-		&& scope === 'partner'
-		&& isConditionMatches(CC.BOOKING_AGENT_VIEW, 'or')
+		status?.status === 'amendment_requested_by_importer_exporter' && isConditionMatches(CC.BOOKING_AGENT_VIEW, 'or')
 	) {
 		return (
 			<div className={styles.button_container}>
@@ -81,9 +75,7 @@ function ActionsToShow({
 	}
 
 	if (
-		status?.status === 'cancelled_by_supplier'
-		&& scope === 'partner'
-		&& isConditionMatches(CC.SERVICE_OPS_VIEW)
+		status?.status === 'cancelled_by_supplier' && isConditionMatches(CC.SERVICE_OPS_VIEW)
 	) {
 		return (
 			<div className={styles.button_container}>

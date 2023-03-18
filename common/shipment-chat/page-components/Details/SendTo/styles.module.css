@@ -1,0 +1,50 @@
+.send_to_container {
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	background: #f6f5fe;
+	border-bottom: 1px solid black;
+}
+
+.container {
+	background: #ffffff;
+	cursor: pointer;
+	border-radius: 5px;
+	background: linear-gradient(0deg, #ffffff, #ffffff), #ffffff;
+	box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
+	width: 30%;
+	position: absolute;
+	left: 40%;
+	bottom: 18%;
+
+	& > div:hover {
+		box-shadow: 0px 0px 5px rgb(0 0 0 / 15%);
+	}
+}
+
+.options {
+	border-bottom: 1px solid #cbcff5;
+	.text-option {
+		padding: 10px 0px;
+		text-align: center;
+	}
+}
+
+.send_input {
+	:global {
+		.ui_input_container.ui_ps_size_md {
+			height: 20px;
+		}
+
+		.ui_input_container.ui_ps_size_md .ui_input_control {
+			font-size: 12px;
+		}
+	}
+}
+
+.send_text {
+	font-weight: 600;
+	font-size: 12px;
+	color: #000000;
+	margin-right: 4px;
+}

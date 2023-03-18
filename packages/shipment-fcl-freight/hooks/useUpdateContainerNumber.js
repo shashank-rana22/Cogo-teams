@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 const useUpdateContainerNumber = (
@@ -10,13 +9,10 @@ const useUpdateContainerNumber = (
 	shipment_data = {},
 	refetch = () => {},
 ) => {
-	const { scope } = useSelector(({ general }) => ({ scope: general?.scope }));
-
 	const [{ data: containerDetails },
 		containerDetailTrigger] = useRequest({
 		url    : '/list_shipment_container_details',
 		method : 'GET',
-		scope,
 	});
 
 	useEffect(() => {
@@ -33,7 +29,6 @@ const useUpdateContainerNumber = (
 		updateShipmentContainerTrigger] = useRequest({
 		url    : '/update_shipment_container_details',
 		method : 'POST',
-		scope,
 	});
 
 	useEffect(() => {

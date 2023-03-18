@@ -13,19 +13,6 @@
 	color: #000000;
 	margin-left: 18px;
 }
-
-.Row{
-	display: flex;
-	align-items: center;
-	padding: 10px 16px;
-	border-bottom: 1px solid #f2f2f2;
-	white-space: nowrap;
-
-	&:last-child {
-		border-bottom: none;
-	}
-}
-
 .tag{
 	background: #fbd69f;
 	border-radius: 4px;
@@ -36,6 +23,7 @@
 	align-items: center;
 	text-align: center;
 	color: #393f70;
+	white-space: nowrap;
 
 	&.approved {
 		background: #e6fbe9;
@@ -43,7 +31,7 @@
 	}
 
 	&.price_recieved,
-	&.customer_confirmation_pending {
+	.customer_confirmation_pending {
 		background: #fcedbf;
 	}
 
@@ -66,4 +54,15 @@
 .content_div{
 	width: 100%;
 	background: #fff;
+}
+
+.upselling_service_info_container{
+	display: flex;
+	align-items: center;
+	margin-bottom: 4px;
+	padding: 8px 12px;
+
+	&:not(:last-child){
+		border-bottom: 1px solid rgb(242, 242, 242);;
+	}
 }

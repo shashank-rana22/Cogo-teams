@@ -1,0 +1,146 @@
+.container{
+    display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+	width: 100%;
+	padding: 15px 0;
+
+	.core-ui-select-root {
+		margin-right: 16px;
+		min-width: 140px;
+	}
+
+	.core-ui-select__control {
+		border-color: #cbcff5 !important;
+
+		&:hover {
+			border-color: #cbcff5 !important;
+		}
+
+		&:focus-within {
+			border-color: #cbcff5 !important;
+			box-shadow: 0 0 0 1px #cbcff5 !important;
+		}
+	}
+
+	.core-ui-select__placeholder {
+		font-size: 12px;
+		color: #cbcff5 !important;
+	}
+
+	.core-ui-select__option {
+		font-size: 12px !important;
+		padding: 10px !important;
+		width: 50px !important;
+	}
+
+	.core-ui-select__option {
+		font-size: 12px !important;
+		padding: 10px !important;
+		width: 400px !important;
+	}
+
+	.custom {
+		.core-ui-select__option {
+			font-size: 12px !important;
+		}
+		.core-ui-select__menu {
+			min-width: initial !important;
+		}
+	}
+}
+
+.row_container{
+    display: flex;
+	justify-content: space-between;
+	width: 50%;
+}
+
+.text{
+    display: flex;
+	align-items: center;
+	font-weight: 400;
+	font-size: 16px;
+
+	&.heading {
+		font-size: 12px;
+	}
+
+	&.airway_bill_no_head {
+		font-size: 12px;
+		font-weight: 400;
+	}
+
+	&.airway_bill_no {
+		font-size: 14px;
+		font-weight: 500;
+		margin-left: 5px;
+	}
+}
+
+.content{
+    display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: 10px;
+	margin: 10px;
+
+	.form-item-label {
+		color: #393f70;
+		font-weight: 500;
+		margin-top: 5px !important;
+	}
+
+	.form-layout-root-col {
+		width: 100% !important;
+		max-width: 100% !important;
+		flex: auto !important;
+	}
+
+	.core-ui-select__menu {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	.core-ui-select__single-value {
+		font-size: 12px !important;
+	}
+
+	.ui-textarea {
+		font-size: 12px;
+		padding: 10px;
+	}
+
+	.form-item-container {
+		margin-bottom: 10px;
+	}
+
+	.core-ui-select__indicators {
+		height: initial;
+	}
+
+	.core-ui-select__value-container {
+		padding: 0px 10px;
+	}
+}
+
+.button_div{
+    display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 15px;
+}
+
+.modal_styles {
+	width: 600px !important;
+
+	:global {
+		.ui_modal_body_container {
+			min-height: 300px;
+			border-top: none !important;
+			border-bottom: none !important;
+		}
+	}
+}

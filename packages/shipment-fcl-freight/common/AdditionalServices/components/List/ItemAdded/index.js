@@ -1,8 +1,8 @@
 // import { stakeholderCheck } from '@cogoport/bookings/commons/helpers/stakeholderCheck';
-import { Popover } from '@cogoport/components';
+import { cl, Popover } from '@cogoport/components';
 // import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import startCase from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 // import SupplierReallocation from '../../../../ShipmentDetails/commons/EditCancelService/SupplierReallocation';
@@ -25,6 +25,7 @@ function Item({
 	services = [],
 	isSeller,
 }) {
+	console.log('item', item);
 	const [show, setShow] = useState(false);
 	const [showCancel, setShowCancel] = useState(false);
 	const [showEdit, setShowEdit] = useState(false);
@@ -44,26 +45,24 @@ function Item({
 	const showEditBtn = status?.status === 'approved';
 
 	const serviceData = services?.filter(
-		(service) => service?.service_name === item?.name,
+		(service) => service?.service_type === item?.name,
 	);
 	const price = isSeller ? item?.buy_price : item?.price;
 
 	return (
-		<Container className="additional-service-item-container">
-			<Row className="additional-service-item-row">
-				<NameType>
-					<>
-						<Circle />
-						<Heading className="additional-service-item-heading">
-							{startCase(item?.name)}
-						</Heading>
-					</>
+		<div className={cl`${styles.container} ${styles.additional_service_item_container}`}>
+			<div className={styles.additional_service_item_row}>
+				<div className={styles.name_type}>
+					<div className={styles.circle} />
+					<div className={`${styles.additional_service_item_heading} ${styles.heading}`}>
+						{startCase(item?.name)}
+					</div>
 					{price ? (
-						<Label>
-							<Circle />
-							<Heading>
+						<div className={styles.label}>
+							<div className={styles.circle} />
+							<div className={styles.heading}>
 								Price:
-								{' '}
+								&nbsp;
 								{/* {formatAmount({
 									amount   : price,
 									currency : item?.currency,
@@ -73,10 +72,10 @@ function Item({
 										maximumFractionDigits : 2,
 									},
 								})} */}
-							</Heading>
-						</Label>
+							</div>
+						</div>
 					) : null}
-				</NameType>
+				</div>
 
 				{showCancelInfo || showEditBtn ? (
 					<Popover
@@ -85,25 +84,31 @@ function Item({
 						content={(
 							<div>
 								{showCancelInfo ? (
-									<ButtonText
+									<div
+										className={styles.button_text}
 										onClick={() => {
 											setShow(false);
 											setShowCancel(true);
 										}}
+										role="button"
+										tabIndex={0}
 									>
 										Cancel
-									</ButtonText>
+									</div>
 								) : null}
 
 								{showEditBtn ? (
-									<ButtonText
+									<div
+										className={styles.button_text}
 										onClick={() => {
 											setShow(false);
 											setShowEdit(true);
 										}}
+										role="button"
+										tabIndex={0}
 									>
 										Edit
-									</ButtonText>
+									</div>
 								) : null}
 							</div>
 						)}
@@ -117,12 +122,12 @@ function Item({
 						</div>
 					</Popover>
 				) : null}
-			</Row>
+			</div>
 
-			<Row className="status">
-				<Tag className={status?.status}>{status?.statusName}</Tag>
+			<div className={styles.status}>
+				<div className={cl`${styles.tag}`}>{status?.statusName}</div>
 				{actionButton}
-			</Row>
+			</div>
 
 			{showCancel ? (
 				<CancelAdditionalService
@@ -142,7 +147,8 @@ function Item({
 					isAdditional
 				/>
 			) : null} */}
-		</Container>
+
+		</div>
 	);
 }
 

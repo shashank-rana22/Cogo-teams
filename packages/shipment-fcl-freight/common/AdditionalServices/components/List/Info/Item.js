@@ -1,13 +1,14 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function Info({ title = '', status = '', statusName = '' }) {
 	return (
-		<iv>
-			<Tag className={status}>{statusName}</Tag>
+		<div className={styles.upselling_service_info_container}>
+			<div className={cl`${styles[status]} ${styles.tag}`}>{statusName}</div>
 			<div className={styles.item_name}>{title}</div>
-		</iv>
+		</div>
 	);
 }
 

@@ -13,15 +13,12 @@ const useServiceUpdate = ({
 	setShowIp,
 }) => {
 	// const geo = getGeoConstants();
-	const scope = useSelector(({ general }) => general?.scope);
-
 	const [remarks, setRemarks] = useState(null);
 
-	const addRateApi = useRequest(
-		'post',
-		false,
-		scope,
-	)('/update_shipment_additional_service');
+	const [{ loading }, trigger] = useRequest({
+		url    : '/update_shipment_additional_service',
+		method : 'POST',
+	});
 
 	const handleSubmit = async (data) => {
 		try {

@@ -24,8 +24,9 @@ function useListShipmentServices({ shipment_data }) {
 							shipment_id: shipment_data?.id,
 						},
 					},
-				}); if (!res.hasError) {
-					Toast.error('dsfghj');
+				});
+				if (!res.hasError) {
+					Toast.success('Service List Fetched Successfully');
 				}
 			} catch (err) {
 				console.log(err);
@@ -36,8 +37,6 @@ function useListShipmentServices({ shipment_data }) {
 	useEffect(() => {
 		if (shipment_data?.id) { listServices(); }
 	}, [listServices, shipment_data?.id]);
-
-	console.log({ data });
 
 	return {
 		servicesGet: {
