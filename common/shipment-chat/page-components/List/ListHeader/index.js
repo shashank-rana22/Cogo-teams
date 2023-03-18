@@ -1,7 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { IcMPlusInCircle } from '@cogoport/icons-react';
 import React from 'react';
 
-import AddUser from './ic-add-user.svg';
 import styles from './styles.module.css';
 
 function ListHeader({ status = '', setStatus = () => {} }) {
@@ -15,7 +15,7 @@ function ListHeader({ status = '', setStatus = () => {} }) {
 			</div>
 
 			<div className={styles.add_user}>
-				<AddUser />
+				<IcMPlusInCircle />
 				<div style={{ marginLeft: '4px' }}>User</div>
 			</div>
 		</div>
