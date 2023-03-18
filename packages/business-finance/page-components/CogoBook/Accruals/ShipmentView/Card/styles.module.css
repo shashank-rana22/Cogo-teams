@@ -1,0 +1,83 @@
+.container {
+  margin-top: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 32px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.period {
+  font-weight: 600;
+  display: flex;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  margin-right: 5px;
+  width: fit-content;
+}
+.hr_period {
+  border: 1px solid #ee3425;
+  width: 25%;
+}
+.hr {
+  border: 1px solid #ee3425;
+  width: 36%;
+}
+.info_icon_container {
+  padding: 2px 0px 0px 4px;
+}
+
+.select_container {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  width: fit-content;
+}
+.chips {
+  :global {
+    .ui_chip_container {
+      min-width: 0px !important;
+    }
+  }
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f8d468;
+}
+.date_range {
+  margin-top: 16px;
+  width: fit-content;
+  :global {
+    .react-datepicker__input-container {
+      .react-datepicker__close-icon::after {
+        background: none !important;
+      }
+
+      .react-datepicker__close-icon {
+        border: none;
+      }
+    }
+  }
+}
+.hr_filter {
+  border: 1px solid #ee3425;
+  width: 15%;
+}
+.select_popover {
+  :global {
+    .ui_select_options_container {
+      display: none !important;
+    }
+  }
+}
+
+.content_container {
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+.more_filter {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 40px;
+}
