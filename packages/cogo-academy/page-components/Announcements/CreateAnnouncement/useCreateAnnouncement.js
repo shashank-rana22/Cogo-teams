@@ -30,28 +30,28 @@ const useCreateAnnouncements = ({
 	const getDateValue = (date) => format(date, 'dd MMM yyyy hh:mm a').split(' ')[0];
 
 	useEffect(() => {
-		if (actionType === 'edit') {
-			const {
-				validity_start = '',
-				validity_end = '',
-				faq_audiences = [],
-				hot_duration,
-				is_important = false,
-			} = defaultValues;
-			const validity = {
-				endDate   : new Date(format(validity_end, 'dd MMM yyyy hh:mm a')),
-				startDate : new Date(format(validity_start, 'dd MMM yyyy hh:mm a')),
-			};
-			const audience_ids = [...faq_audiences.map((item) => item.id)];
-			setValue('title', defaultValues?.title);
-			setValue('content', defaultValues?.content);
-			setValue('announcement_type', defaultValues?.announcement_type);
-			setValue('redirection_url', defaultValues?.redirection_url);
-			setValue('is_important', is_important);
-			setValue('audience_ids', audience_ids);
-			setValue('hot_duration', getDateValue(hot_duration) - getDateValue(validity_start));
-			setValue('validity', validity);
-		}
+		if (actionType !== 'edit') return;
+
+		const {
+			validity_start = '',
+			validity_end = '',
+			faq_audiences = [],
+			hot_duration,
+			is_important = false,
+		} = defaultValues;
+		const validity = {
+			endDate   : new Date(format(validity_end, 'dd MMM yyyy hh:mm a')),
+			startDate : new Date(format(validity_start, 'dd MMM yyyy hh:mm a')),
+		};
+		const audience_ids = [...faq_audiences.map((item) => item.id)];
+		setValue('title', defaultValues?.title);
+		setValue('content', defaultValues?.content);
+		setValue('announcement_type', defaultValues?.announcement_type);
+		setValue('redirection_url', defaultValues?.redirection_url);
+		setValue('is_important', is_important);
+		setValue('audience_ids', audience_ids);
+		setValue('hot_duration', getDateValue(hot_duration) - getDateValue(validity_start));
+		setValue('validity', validity);
 	}, [defaultValues, listAudienceLoading, actionType, setValue]);
 
 	const [{ error }, updateTrigger] = useRequest({ url: '/update_announcement', method: 'post' }, { manual: true });

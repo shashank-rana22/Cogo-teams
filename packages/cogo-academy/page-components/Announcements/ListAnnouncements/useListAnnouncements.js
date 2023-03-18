@@ -5,13 +5,13 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
 
 function useListAnnouncements() {
+	const { general = {}, profile = {} } = useSelector((state) => state);
 	const [searchInput, setSearchInput] = useState('');
 	const [currentAnnouncement, setCurrentAnnouncement] = useState(null);
 	const [activeList, setActiveList] = useState('active');
 	const [page, setPage] = useState(1);
 	const [paginationData, setPaginationData] = useState({});
 
-	const { general = {}, profile = {} } = useSelector((state) => state);
 	const { auth_role_data = {}, partner = {} } = profile;
 	const { role_functions = [], role_sub_functions = [] } = auth_role_data?.[0] || {};
 

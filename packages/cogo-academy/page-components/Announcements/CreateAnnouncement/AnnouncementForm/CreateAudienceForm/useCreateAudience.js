@@ -1,7 +1,17 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
+
+const handlePersona = ({ platform = '', personaValue = '' }) => {
+	const PERSONA_MAPPING = {
+		admin   : 'admin_user',
+		app     : 'importer_exporter',
+		all     : 'all',
+		partner : personaValue,
+
+	};
+	return PERSONA_MAPPING[platform];
+};
 
 function useCreateAudience({
 	fetchAudiences = () => {},
@@ -9,27 +19,10 @@ function useCreateAudience({
 }) {
 	const { control, handleSubmit, formState: { errors }, setValue, watch } = useForm();
 
-	const { general } = useSelector((state) => state);
-	const { id:audienceId } = general.query || {};
-
-	const apiName = audienceId ? '/update_faq_audience' : '/create_faq_audience';
-	const toastText = audienceId ? 'updated' : 'created';
-
 	const [{ loading }, trigger] = useRequest({
-		url    : apiName,
+		url    : '/create_faq_audience',
 		method : 'POST',
 	}, { manual: true });
-
-	const handlePersona = ({ platform = '', personaValue = '' }) => {
-		const PERSONA_MAPPING = {
-			admin   : 'admin_user',
-			app     : 'importer_exporter',
-			all     : 'all',
-			partner : personaValue,
-
-		};
-		return PERSONA_MAPPING[platform];
-	};
 
 	const createAudience = async (values) => {
 		const {
@@ -41,7 +34,6 @@ function useCreateAudience({
 		} = values || {};
 
 		const payload = {
-			id                : audienceId || undefined,
 			platform,
 			...rest,
 			auth_function,
@@ -59,7 +51,7 @@ function useCreateAudience({
 			setShowCreateAudience(false);
 
 			if (res?.data) {
-				Toast.success(`Audience ${toastText} sucessfully`);
+				Toast.success('Audience created sucessfully');
 			}
 		} catch (err) {
 			Toast.error('Something went wrong');

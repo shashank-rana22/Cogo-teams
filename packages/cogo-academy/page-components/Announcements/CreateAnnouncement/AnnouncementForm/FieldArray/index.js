@@ -38,12 +38,12 @@ function FieldArray({
 			});
 			return;
 		}
-		let flag = true;
+		let fieldIsNotEmpty = true;
 		const { videos } = formValues;
 		videos.forEach((video) => {
-			if (!video.video_item || video.video_item?.length === 0) flag = false;
+			if (!video.video_item || video.video_item?.length === 0) fieldIsNotEmpty = false;
 		});
-		if (flag) {
+		if (fieldIsNotEmpty) {
 			append(childEmptyValues);
 		}
 	};
@@ -78,7 +78,12 @@ function FieldArray({
 				))}
 			</div>
 			{showButtons && !disabled ? (
-				<Button themeType="secondary" className={styles.add_button} onClick={() => handleAppendChild()}>
+				<Button
+					type="add-child"
+					themeType="secondary"
+					className={styles.add_button}
+					onClick={() => handleAppendChild()}
+				>
 					+ADD
 				</Button>
 			) : null}

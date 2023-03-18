@@ -14,7 +14,6 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 		deleteAttachment,
 		editAttachment,
 		addAttachment,
-		openDocument,
 	} = useUpdateAnnouncement({ refetch, announcement_id });
 
 	const displayBoxes = (item) => (
@@ -28,7 +27,6 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 					deleteAttachment={deleteAttachment}
 					editAttachment={editAttachment}
 					addAttachment={addAttachment}
-					openDocument={openDocument}
 					name="image"
 				/>
 				<DisplayAttachment
@@ -39,7 +37,6 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 					deleteAttachment={deleteAttachment}
 					editAttachment={editAttachment}
 					addAttachment={addAttachment}
-					openDocument={openDocument}
 					name="pdf"
 				/>
 				<DisplayAttachment
@@ -50,7 +47,6 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 					deleteAttachment={deleteAttachment}
 					editAttachment={editAttachment}
 					addAttachment={addAttachment}
-					openDocument={openDocument}
 					name="video"
 				/>
 			</div>

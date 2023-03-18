@@ -20,7 +20,7 @@ function Announcements() {
 			<div className={styles.form_container}>
 				<div className={styles.heading}>
 					Manage Announcements
-					<Button themeType="primary" onClick={onClick}>Add Announcement</Button>
+					<Button type="create" themeType="primary" onClick={onClick}>Add Announcement</Button>
 				</div>
 
 				<ListAnnoucemnets />

@@ -21,6 +21,8 @@ function DisplayCard({
 	loadingSingleAnnouncement = false,
 
 }) {
+	const router = useRouter();
+
 	const [showModal, setShowModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -32,7 +34,6 @@ function DisplayCard({
 		{ label: 'Action', value: 1 },
 	];
 
-	const router = useRouter();
 	const handleView = (i) => {
 		handleAnnouncementDetails(i);
 		setShowModal(true);
@@ -56,12 +57,13 @@ function DisplayCard({
 			<div className={styles.upperrow}>
 				<div className={styles.slabs} style={{ width: '100%' }}>
 					{options.map((i) => (
-						<div className={styles.slab}>
+						<div className={styles.slab} key={i.label}>
 							<div className={styles.label}>{i.label}</div>
 							{ i.label === 'Action'
 								? (
 									<div className={styles.buttoncontainer}>
 										<Button
+											type="view"
 											themeType="primary"
 											size="sm"
 											style={{ marginRight: 8 }}
@@ -71,6 +73,7 @@ function DisplayCard({
 										</Button>
 										{activeTab === 'active' && isValid !== -1 && (
 											<Button
+												type="edit"
 												themeType="secondary"
 												size="sm"
 												style={{ marginRight: 8 }}
@@ -129,7 +132,7 @@ function DisplayCard({
 
 				>
 					<Modal.Header title={accordianData.title} />
-					<Modal.Body style={{ maxHeight: '90vh' }}>
+					<Modal.Body style={{ maxHeight: '80vh' }}>
 						<Preview
 							formValues={accordianData}
 							announcement_id={accordianData?.id}
@@ -150,6 +153,7 @@ function DisplayCard({
 					<Modal.Footer>
 						<div className={styles.delete_buttons}>
 							<Button
+								type="cancel"
 								themeType="secondary"
 								size="md"
 								onClick={() => setShowDeleteModal(false)}
@@ -157,6 +161,7 @@ function DisplayCard({
 								Cancel
 							</Button>
 							<Button
+								type="delete"
 								themeType="primary"
 								size="md"
 								onClick={() => deleteAnnouncement(data?.id)}

@@ -3,6 +3,8 @@ import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import openDocument from '../../../../../../../commons/OpenDocument';
+
 import AddModal from './AddModal';
 import DeleteModal from './DeleteModal';
 import EditModal from './EditModal';
@@ -16,7 +18,6 @@ function DisplayAttachment(
 		deleteAttachment = () => {},
 		editAttachment = () => {},
 		addAttachment = () => {},
-		openDocument = () => {},
 		announcement_id,
 		isValid,
 	},
@@ -34,7 +35,7 @@ function DisplayAttachment(
 				</div>
 
 				{isValid !== -1 && (
-					<Button size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
+					<Button type="add" size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
 						Add
 						{' '}
 						{name}
@@ -51,6 +52,7 @@ function DisplayAttachment(
 
 							<div className={styles.buttoncontainer}>
 								<Button
+									type="view"
 									themeType="primary"
 									size="sm"
 									style={{ marginRight: 8 }}
@@ -61,6 +63,7 @@ function DisplayAttachment(
 								{isValid !== -1 && (
 									<>
 										<Button
+											type="edit"
 											themeType="secondary"
 											size="sm"
 											style={{ marginRight: 8 }}

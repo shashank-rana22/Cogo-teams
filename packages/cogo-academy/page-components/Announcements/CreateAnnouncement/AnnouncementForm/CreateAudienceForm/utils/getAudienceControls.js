@@ -19,7 +19,7 @@ const PERSONA_OPTIONS = [
 	{ label: 'All', value: 'all' },
 ];
 
-const createQuestionControls = ({ watchFunctions, entity_options, countryOptions }) => {
+const getAudienceControls = ({ watchFunctions, entity_options, countryOptions }) => {
 	const controls = [
 		{
 			name        : 'name',
@@ -96,4 +96,4 @@ const createQuestionControls = ({ watchFunctions, entity_options, countryOptions
 	return { controls };
 };
 
-export default createQuestionControls;
+export default getAudienceControls;

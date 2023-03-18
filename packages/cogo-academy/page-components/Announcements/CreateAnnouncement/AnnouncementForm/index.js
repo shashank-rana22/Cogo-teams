@@ -38,6 +38,7 @@ function AnnouncementForm({
 	const renderAddButton = () => (
 		<div>
 			<Button
+				type="add"
 				themeType="secondary"
 				size="sm"
 				className={styles.add_audience_button}
@@ -67,7 +68,7 @@ function AnnouncementForm({
 
 					if (type === 'field-array') {
 						return (
-							<div className={styles.form_element}>
+							<div className={styles.form_element} key={controlItem.name}>
 								<FieldArray
 									formValues={formValues}
 									control={control}
@@ -78,7 +79,7 @@ function AnnouncementForm({
 					}
 
 					return (
-						<div className={styles.form_element} style={{ position: 'relative' }}>
+						<div className={styles.form_element} key={controlItem.name} style={{ position: 'relative' }}>
 							{controlItem.optionsListKey === 'audiences' && (
 								renderAddButton()
 							)}
@@ -100,9 +101,11 @@ function AnnouncementForm({
 				{!announcement_id && (
 					<div>
 						<Button
+							type="preview"
 							themeType="tertiary"
 							size="md"
 							onClick={() => setShowPreview(true)}
+							className={styles.preview_button}
 						>
 							Preview
 						</Button>
@@ -111,6 +114,7 @@ function AnnouncementForm({
 
 				<div>
 					<Button
+						type="submit"
 						loading={loading}
 						themeType="primary"
 						size="md"
@@ -130,7 +134,7 @@ function AnnouncementForm({
 				>
 					<Modal.Header title={formValues.title} />
 
-					<Modal.Body style={{ maxHeight: '90vh' }}>
+					<Modal.Body style={{ maxHeight: '80vh' }}>
 						<Preview formValues={formValues} />
 					</Modal.Body>
 				</Modal>
@@ -140,6 +144,7 @@ function AnnouncementForm({
 				<Modal
 					show={showCreateAudience}
 					size="lg"
+					placement="fullscreen"
 					onClose={() => setShowCreateAudience(false)}
 				>
 					<Modal.Header title="Add Audience" />

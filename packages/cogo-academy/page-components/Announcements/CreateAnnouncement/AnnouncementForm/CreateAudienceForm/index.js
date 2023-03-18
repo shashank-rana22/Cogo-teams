@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
 import useListCogoEntity from './useListCogoEntities';
-import createAudienceControls from './utils/createAudienceControls';
+import getAudienceControls from './utils/getAudienceControls';
 
 // eslint-disable-next-line import/no-unresolved
 import countries from '@/data-store/constants/countries.json';
@@ -56,7 +56,7 @@ function CreateAudienceForm(props) {
 	const watchFunctions = watch('auth_function');
 	const watchPlatform = watch('platform');
 
-	const { controls } = createAudienceControls({ entity_options, watchFunctions, countryOptions });
+	const { controls } = getAudienceControls({ entity_options, watchFunctions, countryOptions });
 
 	useEffect(() => {
 		setValue('auth_sub_function', null);
@@ -88,7 +88,7 @@ function CreateAudienceForm(props) {
 
 				if (showElements[name]) {
 					return (
-						<div>
+						<div key={name}>
 							<div className={styles.label}>
 								{label}
 							</div>
@@ -117,6 +117,7 @@ function CreateAudienceForm(props) {
 			<div className={styles.button_container}>
 
 				<Button
+					type="cancel"
 					themeType="tertiary"
 					className={styles.cancel_button}
 					onClick={onClickBackIcon}
@@ -127,6 +128,7 @@ function CreateAudienceForm(props) {
 				</Button>
 
 				<Button
+					type="submit"
 					size="md"
 					onClick={handleSubmit(createAudience)}
 					loading={createAudienceLoading}

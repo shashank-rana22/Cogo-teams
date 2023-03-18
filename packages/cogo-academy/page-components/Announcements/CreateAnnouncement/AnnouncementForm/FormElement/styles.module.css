@@ -42,16 +42,6 @@
 			font-size: 12px !important;
 		}
 
-		.ui_chips_container {
-			flex-wrap: wrap;
-			gap: 14px;
-			margin-top: 6px;
-		}
-
-		.ui_chip_container {
-			min-width: 40px;
-		}
-
 		.ui_upload_droparea_container {
 			background-color: #fff;
 		}

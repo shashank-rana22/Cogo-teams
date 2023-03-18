@@ -30,7 +30,7 @@ function Child({
 					if (!Element && !show) return null;
 
 					return (
-						<div className={styles.form_item} style={{ ...style }} key={index}>
+						<div className={styles.form_item} style={{ ...style }} key={`${controlName}_${index}`}>
 							{(showLabelOnce && index === 0 && controlItem.label)
 							|| (!showLabelOnce && controlItem.label) ? (
 								<div className={styles.heading}>{controlItem.label || lowerlabel}</div>
@@ -55,9 +55,8 @@ function Child({
 
 				{length >= 2 && !disabled ? (
 					<IcMDelete
-						className={`form-fieldArray-${name}-remove`}
+						className={styles.remove_icon}
 						onClick={() => remove(index, 1)}
-						style={{ width: '20px', height: '20px', cursor: 'pointer', marginLeft: '4px' }}
 					/>
 				) : null}
 			</div>

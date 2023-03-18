@@ -10,9 +10,9 @@ function useGetAudience() {
 		url    : '/get_faq_audience',
 	}, { manual: false });
 
-	const fetchAudience = async () => {
+	const fetchAudience = () => {
 		try {
-			await trigger({
+			trigger({
 				params: { id },
 			});
 		} catch (err) {

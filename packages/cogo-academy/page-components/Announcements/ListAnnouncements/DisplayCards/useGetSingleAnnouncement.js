@@ -18,35 +18,35 @@ const useGetSingleAnnouncement = ({
 	}, { manual: true });
 
 	const getDetails = useCallback(async (key) => {
-		if (currentAnnouncement?.id) {
-			try {
-				const res = await trigger({
-					params: { id: currentAnnouncement?.id },
-				});
+		if (!currentAnnouncement?.id) return;
+		try {
+			const res = await trigger({
+				params: { id: currentAnnouncement?.id },
+			});
 
-				setAnnouncementDetails((prev) => ({ ...prev, [key]: res?.data }));
-			} catch (err) {
-				console.log(err.data);
-			}
+			setAnnouncementDetails((prev) => ({ ...prev, [key]: res?.data }));
+		} catch (err) {
+			console.log(err.data);
 		}
 	}, [currentAnnouncement, trigger]);
 
-	useEffect(() => {
-		(async () => {
-			if (announcement_id) {
-				try {
-					const res = await trigger({
-						params: { id: announcement_id },
-					});
-					setDisabled(true);
+	const getSingleAnnouncement = useCallback(async () => {
+		if (!announcement_id) return;
+		try {
+			const res = await trigger({
+				params: { id: announcement_id },
+			});
+			setDisabled(true);
 
-					setDefaultValues(res?.data);
-				} catch (err) {
-					console.log(err?.message);
-				}
-			}
-		})();
+			setDefaultValues(res?.data);
+		} catch (err) {
+			console.log(err?.message);
+		}
 	}, [announcement_id, trigger]);
+
+	useEffect(() => {
+		getSingleAnnouncement();
+	}, [announcement_id, getSingleAnnouncement, trigger]);
 
 	useEffect(() => {
 		getDetails(index);

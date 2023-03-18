@@ -11,12 +11,12 @@ import {
 
 import styles from './styles.module.css';
 
+const required = ['title', 'validity', 'hot_duration', 'announcement_type', 'audience_ids'];
+
 function FormElement({ name, field, control, options, errors, value = false }) {
 	const finalFields = {
 		...field,
 	};
-
-	const required = ['title', 'validity', 'hot_duration', 'announcement_type', 'audience_ids'];
 
 	return (
 		<div className={styles.container}>

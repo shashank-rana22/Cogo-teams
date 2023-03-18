@@ -8,16 +8,15 @@ import AnnouncementForm from './AnnouncementForm';
 import styles from './styles.module.css';
 
 function CreateAnnouncement() {
-	const router = useRouter();
+	const { query, push } = useRouter();
 
 	const onClickBackIcon = () => {
-		router.push(
+		push(
 			'/announcements',
 			'/announcements',
 		);
 	};
 
-	const { query } = useRouter();
 	const { announcement_id = '' } = query;
 
 	const actionType = announcement_id ? 'edit' : 'create';

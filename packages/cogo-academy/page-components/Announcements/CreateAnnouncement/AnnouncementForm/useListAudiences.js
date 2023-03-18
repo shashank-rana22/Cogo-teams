@@ -8,6 +8,8 @@ import countries from '../../../../../../.data-store/constants/countries.json';
 
 import WORK_SCOPES_OPTIONS from './CreateAudienceForm/utils/workScopeMappings';
 
+const audienceOptions = [];
+
 const useListAudiences = () => {
 	const [{ data: audienceData, loading:listAudienceLoading }, triggerAudiences] = useRequest({
 		method : 'get',
@@ -18,9 +20,9 @@ const useListAudiences = () => {
 		},
 	}, { manual: false });
 
-	const fetchAudiences = useCallback(async () => {
+	const fetchAudiences = useCallback(() => {
 		try {
-			await triggerAudiences({
+			triggerAudiences({
 				params: {
 					page_limit               : 100000,
 					pagination_data_required : false,
@@ -36,8 +38,6 @@ const useListAudiences = () => {
 	}, [fetchAudiences]);
 
 	const { list: audienceList = [] } = audienceData || {};
-
-	const audienceOptions = [];
 
 	const getAudienceOption = (item) => {
 		const {
@@ -69,7 +69,7 @@ const useListAudiences = () => {
 				<div style={{ fontWeight: 600, paddingTop: '4px', paddingBottom: '6px' }}>{startCase(name)}</div>
 				{(pillsArray || []).map((ele) => (pillsObject[ele]
 					&& (
-						<Pill color="blue">
+						<Pill color="blue" key={pillsObject[ele]}>
 							{['all', 'All'].includes(pillsObject[ele])
 								? `${startCase(ele)} - ${startCase(pillsObject[ele])}`
 								: startCase(pillsObject[ele]) }
