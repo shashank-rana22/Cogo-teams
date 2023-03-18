@@ -1,17 +1,16 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMStar, IcCStar, IcMDocument } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
-// import formatDate from '@cogo/globalization/utils/formatDate';
-// import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
 import useUpdateMessage from '../../../hooks/useUpdateMessage';
 import MsgLoader from '../MsgLoader';
 
 import styles from './styles.module.css';
 
 function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
-	console.log(showImpMsg, 'showImpMsg');
 	const {
 		// user_name,
 		user_id,
@@ -28,8 +27,6 @@ function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
 			},
 		});
 	};
-
-	// let sortedMessageContentArr = [];
 
 	let sortedMessageContentArr = useMemo(
 		() => [
@@ -163,17 +160,17 @@ function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
 											<div className={styles.msg}>{`${getSplited(msg.content)}`}</div>
 										) : null}
 
-										{/* <div className={styles.time}>
-														{formatDate({
-															date: msg?.created_at,
-															dateFormat:
+										<div className={styles.time}>
+											{formatDate({
+												date: msg?.created_at,
+												dateFormat:
 																GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-															timeFormat:
+												timeFormat:
 																GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-															formatType: 'dateTime',
-															separator: ' | ',
-														})}
-													</div> */}
+												formatType : 'dateTime',
+												separator  : ' | ',
+											})}
+										</div>
 									</div>
 								</div>
 							) : null))}
