@@ -21,7 +21,7 @@ function ModalFooter({ setMode, setShowModal, setSelectedVersion, selectedVersio
 					className={styles.button}
 					onClick={() => {
 						setMode('');
-						setSelectedVersion(0);
+						setSelectedVersion('');
 					}}
 				>
 					Back
@@ -33,7 +33,6 @@ function ModalFooter({ setMode, setShowModal, setSelectedVersion, selectedVersio
 						setShowModal(false);
 						setMode('');
 						Toast.success('Version Selected');
-						setSelectedVersion('');
 					}}
 				>
 					Create

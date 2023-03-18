@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function NewVersion({ setMode, setShowModal }) {
+function NewVersion({ setMode, setShowModal, setSelectedVersion }) {
 	return (
 
 		<div className={styles.container}>
@@ -21,6 +21,7 @@ function NewVersion({ setMode, setShowModal }) {
 			<div className={styles.button_container}>
 				<Button themeType="teritiary" onClick={() => { setMode(''); }}>Back</Button>
 				<Button onClick={() => {
+					setSelectedVersion('new-version');
 					setShowModal(false);
 					setMode('');
 					Toast.success('New Draft Loaded');

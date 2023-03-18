@@ -65,7 +65,7 @@ function Header({ setSelectedVersion, selectedVersion }) {
 					onClose={() => {
 						setShowModal(false);
 						setMode('');
-						setSelectedVersion(0);
+						setSelectedVersion('');
 					}}
 					placement="top"
 				>
@@ -83,14 +83,27 @@ function Header({ setSelectedVersion, selectedVersion }) {
 									);
 								case 'saved-draft':
 									return (
-										<Draft setMode={setMode} setShowModal={setShowModal} />
+										<Draft
+											setMode={setMode}
+											setShowModal={setShowModal}
+											setSelectedVersion={setSelectedVersion}
+										/>
 									);
 								case 'new-version':
 									return (
-										<NewVersion setMode={setMode} setShowModal={setShowModal} />
+										<NewVersion
+											setMode={setMode}
+											setShowModal={setShowModal}
+											setSelectedVersion={setSelectedVersion}
+										/>
 									);
 								default:
-									return <CreateModal setMode={setMode} />;
+									return (
+										<CreateModal
+											setMode={setMode}
+											setSelectedVersion={setSelectedVersion}
+										/>
+									);
 							}
 						})()}
 					</Modal.Body>

@@ -1,5 +1,4 @@
-import { cl, ButtonIcon, Pill, Table } from '@cogoport/components';
-import { IcMPlus } from '@cogoport/icons-react';
+import { cl, Pill, Table } from '@cogoport/components';
 import React from 'react';
 // import { Modal} from '@cogoport/components';
 

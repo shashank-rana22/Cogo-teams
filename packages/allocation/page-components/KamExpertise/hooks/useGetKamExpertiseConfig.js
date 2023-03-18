@@ -11,7 +11,8 @@ const useGetKamExpertiseConfig = ({ selectedVersion }) => {
 				['Customer Expertise', 'Trade Expertise', 'Commodity Expertise', 'Misc Expertise'],
 				status: 'draft',
 			},
-			audit_data_required: true,
+			audit_data_required : true,
+			version_selected    : selectedVersion || undefined,
 
 		},
 	}, { manual: false });
