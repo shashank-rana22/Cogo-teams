@@ -24,7 +24,7 @@ function Header({
   const [remarks, setRemarks] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  const { loading, handleFormSubmit, reset } =
+  const { loading, handleFormSubmit,  } =
 		useCreateRaiseQuery({
 			setShowModal,
 			setIsOpen,
@@ -38,7 +38,6 @@ function Header({
       <Select
         size="sm"
         style={{ width: "250px", paddingBottom: "20px" }}
-        name="query_type"
         label="Issue Related to"
         placeholder="Select"
         value={queryType}
@@ -63,12 +62,11 @@ function Header({
         ]}
       />
 
-      <Textarea name="remarks" size="lg" placeholder="Please type here" onChange={(e) => setRemarks(e)} value={remarks}/>
+      <Textarea size="lg" placeholder="Please type here" onChange={(e) => setRemarks(e)} value={remarks}/>
       <div className={styles.button_div}>
         <Button
           onClick={() => {
             setIsOpen(false);
-            reset();
           }}
           size="md"
           themeType="tertiary"

@@ -2,7 +2,6 @@ import { useEffect, useCallback } from "react";
 import { useSelector } from "@cogoport/store";
 import { useRequest } from "@cogoport/request";
 import { Toast } from "@cogoport/components";
-import { useForm } from '@cogoport/forms';
 import getApiErrorString from "@cogoport/forms/utils/getApiError";
 
 function useCreateRaiseQuery({
@@ -16,13 +15,6 @@ function useCreateRaiseQuery({
 		scope: general?.scope,
 		userId: profile.id,
 	}));
-
-	const {
-		fields,
-		handleSubmit,
-		formState: { errors },
-		reset,
-	} = useForm();
 
 	const [{ loading, data }, trigger] = useRequest({
 		url: 'raise_query',
@@ -47,22 +39,16 @@ function useCreateRaiseQuery({
 			if (!res.hasError) {
 				setShowModal(true);
 				setIsOpen(false);
-				reset();
 			}
 		} catch (e) {
 			Toast.error(getApiErrorString(e?.data));
 		}
     })();
-	}, [trigger]);
+	}, [trigger, queryType, remarks]);
 
 	return {
 		loading,
-		data: data || [],
-		fields,
-		handleSubmit,
-		errors,
 		handleFormSubmit,
-		reset,
 	};
 }
 
