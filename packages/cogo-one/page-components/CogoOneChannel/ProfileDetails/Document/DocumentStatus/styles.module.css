@@ -1,0 +1,26 @@
+.in_progress {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.submitted_div {
+	display: flex;
+	align-items: center;
+}
+
+.in_submitted {
+	margin-left: 5px;
+	font-size: 12px;
+	color: #849e4c;
+}
+
+.not_submitted {
+	margin-left: 5px;
+	font-size: 12px;
+	color: #bf291e;
+}
+
+.failed {
+	font-size: 12px;
+	color: #bf291e;
+}
