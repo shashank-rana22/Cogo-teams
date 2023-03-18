@@ -125,7 +125,10 @@ importers:
     specifiers: {}
 
   common/context:
-    specifiers: {}
+    specifiers:
+      react: 18.2.0
+    dependencies:
+      react: 18.2.0
 
   common/core:
     specifiers:

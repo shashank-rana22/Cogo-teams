@@ -1,5 +1,5 @@
 import { Tooltip } from '@cogoport/components';
-// import { patterns } from '@cogoport/constants';
+import PATTERNS from '@cogoport/constants/patterns';
 import { IcMFileUploader, IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
@@ -79,8 +79,8 @@ const billingAddressControls = [
 		rules: {
 			required : true,
 			pattern  : {
-				// value   : patterns.GST_NUMBER,
-				message: 'GST is invalid',
+				value   : PATTERNS.GST_NUMBER,
+				message : 'GST is invalid',
 			},
 		},
 	},
@@ -138,8 +138,8 @@ const pocControls = [
 		rules : {
 			required : 'Please provide a valid email id',
 			pattern  : {
-				// value   : patterns.EMAIL,
-				message: 'Please provide us your valid email address',
+				value   : PATTERNS.EMAIL,
+				message : 'Please provide us your valid email address',
 			},
 		},
 	},
@@ -497,8 +497,8 @@ const docControls = {
 			rules : {
 				required : 'PAN is required',
 				pattern  : {
-					// value   : patterns.PAN_NUMBER,
-					message: 'PAN is invalid',
+					value   : PATTERNS.PAN_NUMBER,
+					message : 'PAN is invalid',
 				},
 			},
 		},

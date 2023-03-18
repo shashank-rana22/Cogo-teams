@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { controls } from '../configurations/get-container-controls';
 
-const useBlContainer = ({
+const useBlContainerMappings = ({
 	data = {},
 	shipment_data = {},
 	// setMappingModal = () => {},
@@ -125,4 +125,4 @@ const useBlContainer = ({
 	};
 };
 
-export default useBlContainer;
+export default useBlContainerMappings;

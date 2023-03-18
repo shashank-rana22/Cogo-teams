@@ -1,4 +1,4 @@
-import { toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 // import { useFormCogo } from '@cogoport/front/hooks';
 import { useMemo } from 'react';
 
@@ -66,7 +66,7 @@ const useBillingDetails = ({
 		const { poc_details = {} } = values;
 
 		if (poc_details.length === 0) {
-			toast.info('Please create atleast one POC before proceeding ');
+			Toast.info('Please create atleast one POC before proceeding ');
 			return;
 		}
 		setCurrentStep('bank_details');

@@ -30,7 +30,7 @@ function List({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const [addRate, setAddRate] = useState(false);
-	const [show, setShow] = useState(false);
+	const [showChargeCodes, setShowChargeCodes] = useState(false);
 	const [item, setItem] = useState(false);
 	const [showIp, setShowIp] = useState(false);
 
@@ -43,14 +43,11 @@ function List({
 		refetch();
 	};
 
-	console.log('showIp', showIp);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.not_added}>
 				<Button
-					className="primary sm additional_services_btn"
-					onClick={() => setShow(true)}
+					onClick={() => setShowChargeCodes(true)}
 					disabled={shipment_data?.is_job_closed}
 				>
 					<div className={styles.add_icon}>+</div>
@@ -141,11 +138,11 @@ function List({
 
 			) : null}
 
-			{show ? (
+			{showChargeCodes ? (
 				<Modal
 					size="xl"
-					show={show}
-					onClose={() => setShow(false)}
+					show={showChargeCodes}
+					onClose={() => setShowChargeCodes(false)}
 					placement="top"
 					className={styles.modal_container}
 				>
@@ -156,8 +153,8 @@ function List({
 							services={services}
 							isSeller={isSeller}
 							refetch={refetch}
-							show={show}
-							setShow={setShow}
+							show={showChargeCodes}
+							setShow={setShowChargeCodes}
 						/>
 					</Modal.Body>
 				</Modal>

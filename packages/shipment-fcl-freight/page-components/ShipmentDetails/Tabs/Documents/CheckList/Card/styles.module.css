@@ -31,7 +31,7 @@
 	font-size: 14px;
 	line-height: 16px;
 	letter-spacing: 0.04em;
-	/* border-left: 2px solid #F68B21; */
+	/* border-left: 2px solid var(--color-accent-orange-2); */
 	/* margin-top: 6px; */
 
 	/* & > div{

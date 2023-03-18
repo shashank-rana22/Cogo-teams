@@ -28,13 +28,13 @@
 .circle{
 	width: 12px;
 	height: 12px;
-	background: #f7cdcd;
+	background-color: #f7cdcd;
 	margin-right: 8px;
 	border-radius: 50%;
 }
 
 .upsell {
-	background: #d9eafd;
+	background-color: #d9eafd;
 }
 
 .service_name{

@@ -1,4 +1,4 @@
-import { toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import useForm from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
@@ -135,13 +135,13 @@ const useAddRate = ({
 				data: payload,
 			});
 
-			toast.success('Service Added successfully');
+			Toast.success('Service Added successfully');
 			setShow(false);
 			setAddRate(null);
 			onCancel();
 			refetch();
 		} catch (err) {
-			toast.error(err?.data);
+			Toast.error(err?.data);
 		}
 	};
 

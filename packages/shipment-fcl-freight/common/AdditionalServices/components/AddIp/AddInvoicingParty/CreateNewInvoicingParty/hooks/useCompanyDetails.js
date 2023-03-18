@@ -1,6 +1,6 @@
-// import { patterns } from '@cogoport/constants';
 // import { useFormCogo } from '@cogoport/front/hooks';
 import { Loader } from '@cogoport/components';
+import PATTERNS from '@cogoport/constants/patterns';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 
 import useGetBusiness from '../../hooks/useGetBusiness';
@@ -19,7 +19,7 @@ const useCompanyDetails = ({
 		values: company_details,
 	}) || [];
 
-	const additionalOrgControls =		getAdditionalOrgControls({ values: company_details }) || [];
+	const additionalOrgControls = getAdditionalOrgControls({ values: company_details }) || [];
 
 	const companyDetailsControls = [...orgControls, ...additionalOrgControls];
 
@@ -74,8 +74,8 @@ const useCompanyDetails = ({
 					pattern: {},
 					...(isCountryIndia && {
 						pattern: {
-							// value   : patterns.PAN_NUMBER,
-							message: 'PAN is invalid',
+							value   : PATTERNS.PAN_NUMBER,
+							message : 'PAN is invalid',
 						},
 					}),
 				},

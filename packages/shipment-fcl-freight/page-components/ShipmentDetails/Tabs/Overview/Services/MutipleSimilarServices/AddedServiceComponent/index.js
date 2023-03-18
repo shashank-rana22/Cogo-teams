@@ -28,8 +28,6 @@ function AddedServiceComponent({
 		commodity,
 	} = serviceData || {};
 
-	console.log('serviceData', serviceData);
-
 	const service_items_key = getConfigs(service_type).details || {};
 
 	const addedServiceComponent = () => (

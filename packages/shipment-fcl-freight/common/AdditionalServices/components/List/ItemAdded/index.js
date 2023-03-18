@@ -5,9 +5,8 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import SupplierReallocation from '../../../../ShipmentDetails/commons/EditCancelService/SupplierReallocation';
-
 import CancelAdditionalService from '../../CancelAdditionalService';
+import SupplierReallocation from '../../SupplierReallocation';
 
 import styles from './styles.module.css';
 
@@ -45,8 +44,9 @@ function Item({
 	const showEditBtn = status?.status === 'approved';
 
 	const serviceData = services?.filter(
-		(service) => service?.service_type === item?.name,
+		(service) => service?.service_name === item?.name,
 	);
+
 	const price = isSeller ? item?.buy_price : item?.price;
 
 	return (
@@ -108,7 +108,7 @@ function Item({
 										role="button"
 										tabIndex={0}
 									>
-										Edit---
+										Edit
 									</div>
 								) : null}
 							</div>
@@ -140,7 +140,7 @@ function Item({
 				/>
 			) : null}
 
-			{/* {showEdit ? (
+			{showEdit ? (
 				<SupplierReallocation
 					show={showEdit}
 					setShow={setShowEdit}
@@ -148,7 +148,7 @@ function Item({
 					refetchServices={refetch}
 					isAdditional
 				/>
-			) : null} */}
+			) : null}
 
 		</div>
 	);
