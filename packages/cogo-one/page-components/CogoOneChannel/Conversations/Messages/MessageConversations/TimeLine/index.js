@@ -23,7 +23,7 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 	});
 
 	return (
-		timelineText && (
+		timelineText ? (
 			<div className={styles.container} key={key}>
 				<div className={styles.break_the_chat} />
 				<div className={styles.timeline_text}>
@@ -35,7 +35,7 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 					</div>
 				</div>
 			</div>
-		)
+		) : null
 	);
 }
 

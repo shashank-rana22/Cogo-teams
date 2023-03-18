@@ -56,6 +56,10 @@
 .user_message {
 	font-size: 12px;
 	color: #4f4f4f;
+
+	span {
+		margin-left: 4px;
+	}
 }
 
 .user_avatar {

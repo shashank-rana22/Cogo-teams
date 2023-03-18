@@ -214,7 +214,6 @@ function MessageConversations({
 								role="presentation"
 								className={styles.file_name_container}
 								onClick={() => {
-									// eslint-disable-next-line no-undef
 									window.open(
 										finalUrl,
 										'_blank',

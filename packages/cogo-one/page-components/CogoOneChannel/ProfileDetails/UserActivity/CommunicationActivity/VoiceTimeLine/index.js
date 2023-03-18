@@ -35,7 +35,7 @@ function VoiceTimeLine({ item }) {
 				<div className={styles.card}>
 					<div className={styles.activity_div}>
 						<div className={styles.title}>
-							{startCase(name)}
+							{startCase(name) || 'User'}
 						</div>
 						<div
 							role="presentation"
@@ -44,7 +44,7 @@ function VoiceTimeLine({ item }) {
 							<img
 								src={voiceIconUrl}
 								className={styles.avatar}
-								alt=""
+								alt="call-icon"
 							/>
 						</div>
 					</div>
@@ -52,8 +52,8 @@ function VoiceTimeLine({ item }) {
 						<div className={styles.user_details}>
 							<div className={styles.user_message}>
 								Initiated by
-								{' '}
-								{startCase(initiated_by)}
+								<span>{startCase(initiated_by)}</span>
+
 							</div>
 							<div className={styles.user_message}>
 								{renderDuration(duration_of_call) || '0 sec'}
@@ -63,7 +63,7 @@ function VoiceTimeLine({ item }) {
 					<div className={styles.user_avatar}>
 						<Avatar
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
-							alt="img"
+							alt="agent-img"
 							disabled={false}
 							size="30px"
 						/>
