@@ -9,6 +9,7 @@ import ShipmentInfo from './ShipmentInfo';
 import Tab from './Tabs';
 import Timeline from './TimeLine';
 import TopBar from './TopBar';
+import { ShipmentChat } from '../../../../common/shipment-chat';
 
 function ShipmentDetails() {
 	const { get } = useGetShipment();
@@ -30,6 +31,7 @@ function ShipmentDetails() {
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
+			<ShipmentChat />
 			<ShipmentInfo />
 			<TopBar />
 			<Timeline timelineData={timelineData} loading={shipmentTimelineLoading} />
