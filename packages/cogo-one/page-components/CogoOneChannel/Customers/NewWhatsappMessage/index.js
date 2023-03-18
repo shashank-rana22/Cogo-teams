@@ -51,7 +51,6 @@ function NewWhatsappMessage({
 			onClose={closeModal}
 			onClickOutside={closeModal}
 			scroll
-			placement="top"
 			className={styles.styled_modal_class}
 		>
 			<Modal.Header
@@ -61,26 +60,15 @@ function NewWhatsappMessage({
 					</div>
 				)}
 			/>
-			<div className={styles.wrap_heading}>
-				<div>Enter mobile number</div>
-			</div>
-			<div className={styles.wrap_mobile_number}>
-
-				<SelectMobileNumber
-					value={dialNumber}
-					onChange={(val) => setDialNumber(val)}
-					inputType="number"
-					placeholder="Enter number"
-				/>
-			</div>
-
 			<Templates
 				data={data}
 				activeTab={activeTab}
 				openCreateReply={openCreateReply}
 				setOpenCreateReply={setOpenCreateReply}
 				setActiveTab={setActiveTab}
-				type="defaultOpen"
+				type="new_whatsapp_message"
+				setDialNumber={setDialNumber}
+				dialNumber={dialNumber}
 			/>
 		</Modal>
 	);
