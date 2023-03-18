@@ -1283,7 +1283,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_shipment_kam_customer_counts',
+		api          : 'get_kam_customer_shipment_insights',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
