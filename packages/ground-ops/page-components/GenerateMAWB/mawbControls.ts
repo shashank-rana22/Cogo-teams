@@ -418,7 +418,7 @@ const mawbControls = (disableClass) => ({
 			type      : 'textarea',
 			className : 'textarea',
 			label     : 'Accounting Information:',
-			value     : 'Freight PrePaid',
+			value     : 'FREIGHT PREPAID',
 			span      : 7,
 			rules     : {
 				required: 'Accounting Information is Required',
@@ -430,9 +430,6 @@ const mawbControls = (disableClass) => ({
 			className : 'primary lg',
 			label     : 'Declared Value for Carriage:',
 			span      : 5,
-			rules     : {
-				required: 'Carriage Value is Required',
-			},
 		},
 		{
 			name        : 'city',
@@ -463,9 +460,6 @@ const mawbControls = (disableClass) => ({
 			span         : 5,
 			placeholder  : 'Handling Information...*',
 			maxLength    : 100,
-			rules        : {
-				required: 'Handling Information is Required',
-			},
 		},
 		{
 			name        : 'commodity',
