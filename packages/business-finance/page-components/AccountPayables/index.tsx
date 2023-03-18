@@ -19,12 +19,9 @@ function AccountPayables() {
 		{ autoCancel: false },
 	);
 
-	console.log('api->', { data, loading, error });
-
 	useEffect(() => {
 		trigger();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [trigger]);
 
 	const handleChange = (tab) => {
 		setActiveTab(tab);
