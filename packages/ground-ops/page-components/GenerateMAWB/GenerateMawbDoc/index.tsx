@@ -137,12 +137,12 @@ function GenerateMawb({
 		if (taskItem.documentState === 'document_accepted') {
 			const a = footerValues.map((item) => async () => {
 				const newImage = await getImage(item);
-				saveAs(newImage, item);
+				saveAs(newImage, `${item}-${taskItem.awbNumber.substring(9, 13)}`);
 			});
 			await a.map((i) => i());
 		} else {
 			const newImage = await takeImageScreenShot(document.getElementById('mawb'));
-			saveAs(newImage, 'ORIGINAL 1 (FOR ISSUING CARRIER)');
+			saveAs(newImage, taskItem.awbNumber);
 		}
 		setSaveDocument(false);
 	};
