@@ -93,9 +93,14 @@ function ApprovalPending({
 						Amend
 					</Button>
 				) : (
-					<div>
-						Approval Pending
-					</div>
+					<Button
+						themeType="secondary"
+						style={{ border: '1px solid #333' }}
+						disabled={updateLoading}
+						onClick={() => { setShowApprove(singleItem); }}
+					>
+						Approve
+					</Button>
 				)
 		),
 	};
