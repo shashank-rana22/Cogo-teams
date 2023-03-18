@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.input_container {
+	margin-top: 15px;
+
+	&:first-child {
+		margin-top: 0;
+	}
+}
+
+.label {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.input_field {
+	margin-top: 2px;
+}
+
+.error_text {
+	font-size: 11px;
+	font-weight: 600;
+	color: #d22b2b;
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+}
+
+.last_button {
+	margin-left: 10px;
+}
