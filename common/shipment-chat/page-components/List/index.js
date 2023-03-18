@@ -1,10 +1,10 @@
-import { Input, cl } from '@cogoport/components';
-// import formatDate from '@cogo/globalization/utils/formatDate';
 // import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
+// import formatDate from '@cogo/globalization/utils/formatDate';
+import { Input, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMSearchlight, IcMUnread } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import EmptyState from '../../common/EmptyState';
@@ -35,14 +35,11 @@ function List({
 	const [status, setStatus] = useState('active');
 
 	const {
-		ListData, page, total_page,
-		filters, hookSetters, loading, refetch,
+		ListData, page, total_page, filters, setFilters,
+		loading, refetch,
 	} = useGetShipmentChatList({ status });
 
-	console.log(ListData, page, total_page, filters, hookSetters, 'jjjjjjjjj');
-
 	const defaultChannel = ListData?.find((obj) => obj?.source_id === shipment_data?.id);
-
 	const data = defaultChannel ? defaultChannel?.id : ListData[0]?.id;
 
 	const { onCreate, loading: seenLoading } = useUpdateSeen({ channel_id: id });
@@ -79,25 +76,28 @@ function List({
 		setShowUnreadChat(!showUnreadChat);
 	};
 
+	console.log(refOuter, 'refOuter');
+
 	const channelList = showUnreadChat ? unreadDataList : ListData;
-	console.log(channelList, 'channelList');
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
 			if (!loading) {
-				hookSetters.setFilters({ ...filters, page: page + 1 });
+				setFilters({ ...filters, page: page + 1 });
 			}
 		}, 200);
-	}, [loading, filters, hookSetters, page]);
+	}, [loading, filters, setFilters, page]);
+
+	console.log(filters, 'qqqqqqq');
 
 	const renderContent = () => {
 		if (loading && isEmpty(ListData)) {
 			return <ListLoader />;
 		}
 
-		// if (!loading && !channelList?.length) {
-		// 	return <EmptyState isMobile />;
-		// }
+		if (!loading && !channelList?.length) {
+			return <EmptyState isMobile />;
+		}
 
 		return channelList?.map((item) => (
 			<div
@@ -112,12 +112,12 @@ function List({
 
 					<div className={styles.updated_at}>
 						{/* {formatDate({
-								date: item?.updated_at,
-								dateFormat: GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-								timeFormat: GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-								formatType: 'dateTime',
-								separator: ' | ',
-							})} */}
+							date       : item?.updated_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType : 'dateTime',
+							separator  : ' | ',
+						})} */}
 						2 Mar, 03:23 PM
 					</div>
 				</div>
@@ -130,11 +130,10 @@ function List({
 		));
 	};
 
-	// const handleSelect = (currentStatus) => {
-	// 	refOuter.current.scrollTop = 0;
-	// 	hookSetters.setFilters({ page: 1 });
-	// 	setStatus(currentStatus);
-	// };
+	useEffect(() => {
+		setFilters({ page: 1 });
+		refOuter.current.scrollTop = 0;
+	}, [status, setFilters]);
 
 	return (
 		<div style={{ display: 'flex' }}>
@@ -150,9 +149,9 @@ function List({
 						<Input
 							value={filters?.q}
 							placeholder="Search"
-							onChange={(e) => hookSetters.setFilters({
+							onChange={(e) => setFilters({
 								...(filters || {}),
-								q: e.target?.value,
+								q: e,
 							})}
 							suffix={<IcMSearchlight />}
 						/>
@@ -171,7 +170,7 @@ function List({
 						<InfiniteScroll
 							pageStart={1}
 							initialLoad={false}
-							// loadMore={!showUnreadChat && loadMore}
+							loadMore={!showUnreadChat && loadMore}
 							hasMore={page < total_page}
 							useWindow={false}
 						>
