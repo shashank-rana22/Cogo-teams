@@ -51,6 +51,7 @@ function NewWhatsappMessage({
 			onClose={closeModal}
 			onClickOutside={closeModal}
 			scroll
+			placement="top"
 			className={styles.styled_modal_class}
 		>
 			<Modal.Header

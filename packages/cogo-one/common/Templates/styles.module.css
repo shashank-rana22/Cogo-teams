@@ -3,9 +3,13 @@
 }
 
 .message_container {
-	height: 350px;
+	height: 380px;
 	padding-top: 20px;
 	overflow-y: scroll;
+}
+
+.message_container::-webkit-scrollbar {
+	display: none;
 }
 
 .each_message {
