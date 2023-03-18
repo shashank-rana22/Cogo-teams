@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { SelectController, CheckboxGroupController, RadioGroupController } from '@cogoport/forms';
+import { SelectController, CheckboxGroupController, RadioGroupController, CheckboxController } from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -13,6 +13,8 @@ function getElementController(type = '') {
 			return CheckboxGroupController;
 		case 'select':
 			return SelectController;
+		case 'checkbox':
+			return CheckboxController;
 		default:
 			return null;
 	}

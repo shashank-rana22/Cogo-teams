@@ -87,18 +87,13 @@ const useGetControls = (isomniChannelAdmin) => {
 			...(listAgentsOptions || {}),
 		},
 		{
-			label        : 'Other Filters',
+			label        : 'Observer',
 			name         : 'observer',
-			type         : 'checkboxgroup',
+			type         : 'checkbox',
 			value        : '',
 			onlyForAdmin : false,
 			className    : 'escalation_field_controller',
-			options      : [
-				{
-					label : 'Observer',
-					value : 'observer',
-				},
-			],
+
 		},
 	];
 

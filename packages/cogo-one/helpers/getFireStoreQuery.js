@@ -69,7 +69,7 @@ function getFireStoreQuery({
 			orderBy('new_message_sent_at', 'desc'),
 		);
 	} else {
-		const extraFilters = appliedFilters?.observer?.[0] !== 'observer'
+		const extraFilters = !appliedFilters?.observer
 			? [where('support_agent_id', '==', userId)] : [];
 		firestoreQuery = query(
 			omniChannelCollection,
