@@ -3,34 +3,26 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
-import useShipmentView from '../../../hooks/useShipmentView';
+import { FilterInterface } from '../../interface';
 
 import { optionSelect, optionsMonth, optionsPills, optionsShipment, optionsYear } from './constant';
 import MoreFilter from './MoreFilter';
 import OptionSelect from './OptionSelect';
 import styles from './styles.module.css';
 
-function Card() {
-	const [filters, setFilters] = useState({
-		year          : '',
-		month         : '',
-		date          : '',
-		service       : '',
-		shipmentType  : '',
-		tradeType     : '',
-		range         : '',
-		profitAmount  : '',
-		jobState      : '',
-		profitPercent : '',
-		profitType    : 'amount',
-	});
+interface CardInterface {
+	refetch:()=>{ }
+	filters:FilterInterface
+	shipmentLoading?:boolean
+	setFilters: React.Dispatch<React.SetStateAction<FilterInterface>>
+}
+
+function Card({ refetch, filters, setFilters, shipmentLoading }:CardInterface) {
 	const [selectFilter, setSelectFilter] = useState(false);
 	const [moreFilter, setMoreFilter] = useState(false);
 	const [profitNumber, setProfitNumber] = useState('');
-	const { refetch, shipmentViewData, shipmentLoading } = useShipmentView({ filters });
-	console.log(shipmentViewData, 'shipmentViewData');
 
-	const handleSelectChange = (val) => {
+	const handleSelectChange = (val:string) => {
 		setFilters((prev) => ({ ...prev, service: val }));
 		setSelectFilter(false);
 	};
@@ -84,7 +76,7 @@ function Card() {
 				<div className={styles.select_container}>
 					<Select
 						value={filters?.year}
-						onChange={(val) => { setFilters((prev) => ({ ...prev, year: val })); }}
+						onChange={(val:string) => { setFilters((prev) => ({ ...prev, year: val })); }}
 						placeholder="Year"
 						options={optionsYear()}
 						isClearable
@@ -92,7 +84,7 @@ function Card() {
 					/>
 					<Select
 						value={filters?.month}
-						onChange={(val) => { setFilters((prev) => ({ ...prev, month: val })); }}
+						onChange={(val:string) => { setFilters((prev) => ({ ...prev, month: val })); }}
 						placeholder="Month"
 						options={optionsMonth}
 						isClearable
@@ -118,7 +110,7 @@ function Card() {
 						placeholder="Date"
 						dateFormat="MM/dd/yyyy"
 						name="date"
-						onChange={(val) => { setFilters((prev) => ({ ...prev, date: val })); }}
+						onChange={(val:string) => { setFilters((prev) => ({ ...prev, date: val })); }}
 						value={filters?.date}
 					/>
 				</div>
@@ -163,7 +155,7 @@ function Card() {
 
 					<Select
 						value={filters?.shipmentType}
-						onChange={(val) => { setFilters((prev) => ({ ...prev, shipmentType: val })); }}
+						onChange={(val:string) => { setFilters((prev) => ({ ...prev, shipmentType: val })); }}
 						placeholder="Shipment Type"
 						options={optionsShipment}
 						isClearable

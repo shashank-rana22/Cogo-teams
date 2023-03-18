@@ -1,0 +1,20 @@
+.flex {
+  display: flex;
+  align-items: center;
+
+  margin-top: 16px;
+  justify-content: space-between;
+}
+.card_small {
+  background-color: #ffffff;
+  padding: 8px 20px;
+  border-radius: 8px;
+}
+.sub_flex {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.input_container {
+  width: 400px;
+}

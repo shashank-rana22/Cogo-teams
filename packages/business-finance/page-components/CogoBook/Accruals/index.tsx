@@ -21,18 +21,13 @@ const tabsKeyComponentMapping = {
 	archive       : Archive,
 };
 
-function Accruals({ statsData }) {
+function Accruals() {
 	const { query, push } = useRouter();
-	const [filters, setFilters] = useState({});
+
 	const [subActiveTab, setSubActiveTab] = useState<string>(query.view || 'shipment_view');
 	const tabComponentProps = {
-		shipment_view: {
-			filters,
-			setFilters,
-			statsData,
-			subActiveTab,
-		},
-		archive: {},
+		shipment_view : {},
+		archive       : {},
 	};
 
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;

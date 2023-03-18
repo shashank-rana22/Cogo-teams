@@ -1,10 +1,16 @@
 import { useRequestBf } from '@cogoport/request';
 
-const useShipmentView = ({ filters }) => {
+import { FilterInterface } from '../Accruals/interface';
+
+interface ShipmentInterface {
+	filters?:FilterInterface
+}
+
+const useShipmentView = ({ filters }:ShipmentInterface) => {
 	const {
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
-		jobState = '',
+		jobState = '', query = '',
 	} = filters || {};
 
 	const rangeMapping = {
@@ -13,11 +19,7 @@ const useShipmentView = ({ filters }) => {
 		'<'  : 'lt',
 		'<=' : 'lte',
 	};
-	const dta = rangeMapping[range];
 
-	console.log({ filters, range, rangeMapping }, 'filters');
-
-	console.log('dta is : ', dta);
 	const [
 		{ data:shipmentViewData, loading:shipmentLoading },
 		shipmentTrigger,
@@ -31,9 +33,9 @@ const useShipmentView = ({ filters }) => {
 	);
 	const refetch = async () => {
 		try {
-			const resp = await shipmentTrigger({
+			await shipmentTrigger({
 				params: {
-					// query: filters?.query,
+					query                : query || undefined,
 					year                 : year || undefined,
 					month                : month || undefined,
 					serviceType          : service || undefined,
@@ -48,15 +50,6 @@ const useShipmentView = ({ filters }) => {
 					// page,
 					// sortType,
 				},
-			});
-			const data = { ...resp.data };
-			const dataList = data?.list;
-			(dataList || []).map((item, index) => {
-				dataList[index] = {
-					...item,
-					newProfitPercentage: item.profitPercentage,
-				};
-				return dataList[index];
 			});
 		} catch (error) {
 			// toast.error(error?.data?.message);
