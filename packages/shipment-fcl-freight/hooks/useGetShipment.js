@@ -21,7 +21,7 @@ function useGetShipment() {
 				const res = await trigger({
 					params: {
 						id                 : 'aa39341b-e4aa-4348-a4ba-75118b485192',
-						additional_methods : ['main_service', 'documents'],
+						additional_methods : ['main_service', 'documents', 'containers'],
 					},
 				}); if (!res.hasError) {
 					Toast.error('dsfghj');
