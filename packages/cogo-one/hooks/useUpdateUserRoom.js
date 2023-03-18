@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateUserRoom = () => {
-	const [{ loading }, trigger] = useRequest(
+	const [{ loading:updateRoomLoading }, trigger] = useRequest(
 		{
 			url    : 'update_user_room',
 			method : 'post',
@@ -25,7 +25,7 @@ const useUpdateUserRoom = () => {
 	};
 
 	return {
-		loading,
+		updateRoomLoading,
 		updateUserRoom,
 	};
 };

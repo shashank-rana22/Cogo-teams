@@ -102,7 +102,7 @@ function Messages({
 	});
 
 	const {
-		loading:updateRoomLoading,
+		updateRoomLoading,
 		updateUserRoom,
 	} = useUpdateUserRoom();
 
