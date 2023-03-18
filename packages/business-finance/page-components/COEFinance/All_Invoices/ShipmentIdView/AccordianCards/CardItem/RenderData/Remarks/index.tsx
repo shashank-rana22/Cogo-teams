@@ -1,6 +1,6 @@
 import { Popover } from '@cogoport/components';
 import { IcMProvision } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { formatDate } from '../../../../../../../commons/utils/formatDate';
@@ -26,7 +26,7 @@ function Remarks({ itemData }: PropsType) {
 	const remarkData = remarksTimeline;
 
 	function RemarksContent() {
-		if (!remarksTimeline) {
+		if (isEmpty(remarksTimeline)) {
 			return <div>No Remarks</div>;
 		}
 		return (remarkData || []).map((item:ItemProps, idx: number) => {

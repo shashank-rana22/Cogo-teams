@@ -43,11 +43,6 @@ function AllInvoices({ statsData }) {
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
 	const handleTabChange = (tab) => {
 		setSubActiveTab(tab.key);
-
-		push(
-			'/business-finance/coe-finance/[active_tab]/[view]',
-			`/business-finance/coe-finance/all_invoices/${tab.key}  `,
-		);
 	};
 
 	useEffect(() => {

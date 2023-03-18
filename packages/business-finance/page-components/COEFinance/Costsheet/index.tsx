@@ -93,7 +93,6 @@ function CostSheet() {
 					onClick={() => {
 						Router.push(
 							`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
-							// eslint-disable-next-line max-len
 							`/business-finance/coe-finance/all_invoices/shipment-view?jobNumber=${jobNumber}`,
 						);
 					}}

@@ -43,11 +43,6 @@ function Rejected({ statsData }) {
 
 	const handleTabChange = (tab) => {
 		setSubActiveTabReject(tab.key);
-
-		push(
-			'/business-finance/coe-finance/[active_tab]/[view]',
-			`/business-finance/coe-finance/rejected/${tab.key}  `,
-		);
 	};
 
 	useEffect(() => {
