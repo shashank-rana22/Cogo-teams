@@ -45,7 +45,7 @@ function DisplayAttachment(
 			<div className={styles.map_container}>
 				{data
 					? data.map((item) => (
-						<div className={styles.data_container}>
+						<div key={item.id} className={styles.data_container}>
 							<div className={styles.data_display}>
 								<span className={styles.name_data}>{item?.document_url}</span>
 							</div>

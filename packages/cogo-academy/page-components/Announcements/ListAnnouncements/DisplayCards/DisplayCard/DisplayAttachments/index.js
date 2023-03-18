@@ -5,6 +5,25 @@ import DisplayAttachment from './DisplayAttachment';
 import styles from './styles.module.css';
 import useUpdateAnnouncement from './useUpdateAttachment';
 
+const displayPlaceHolders = () => (
+	<div className={styles.contain}>
+		<Placeholder
+			height="100px"
+			width="31%"
+			margin="16px 0px 20px 0px"
+		/>
+		<Placeholder
+			height="100px"
+			width="31%"
+			margin="16px 0px 20px 0px"
+		/>
+		<Placeholder
+			height="100px"
+			width="31%"
+			margin="16px 0px 20px 0px"
+		/>
+	</div>
+);
 function DisplayAttachments({ data = [], index, refetch = () => {}, announcement_id = '', isValid }) {
 	const image = data?.announcement_attachments?.image || '';
 	const pdf = data?.announcement_attachments?.pdf || '';
@@ -16,8 +35,12 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 		addAttachment,
 	} = useUpdateAnnouncement({ refetch, announcement_id });
 
-	const displayBoxes = (item) => (
-		item ? (
+	const displayBoxes = (item) => {
+		if (!item) {
+			return null;
+		}
+
+		return (
 			<div className={styles.contain}>
 				<DisplayAttachment
 					data={image}
@@ -50,29 +73,8 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 					name="video"
 				/>
 			</div>
-		)
-			: null
-	);
-
-	const displayPlaceHolders = () => (
-		<div className={styles.contain}>
-			<Placeholder
-				height="100px"
-				width="90%"
-				margin="16px 0px 20px 0px"
-			/>
-			<Placeholder
-				height="100px"
-				width="90%"
-				margin="16px 0px 20px 0px"
-			/>
-			<Placeholder
-				height="100px"
-				width="90%"
-				margin="16px 0px 20px 0px"
-			/>
-		</div>
-	);
+		);
+	};
 
 	return (
 		data?.announcement_attachments ? displayBoxes(data?.announcement_attachments) : displayPlaceHolders()
