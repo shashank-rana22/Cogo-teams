@@ -1282,6 +1282,21 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
+	{
+		api          : 'list_documents',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_process',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_tasks',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
 ];
 
 export default apis;
