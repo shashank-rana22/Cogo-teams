@@ -1,5 +1,5 @@
 .card_container {
-	padding: 10px 12px;
+	padding: 10px 5px;
 	border-bottom: 1px solid #e0e0e0;
 }
 
@@ -72,7 +72,7 @@
 	white-space: nowrap;
 
 	@media (max-width: 1280px) {
-		max-width: 120px;
+		max-width: 100px;
 	}
 }
 
@@ -87,7 +87,7 @@
 }
 
 .list_container {
-	height: calc(100% - 155px);
+	height: 85%;
 	overflow-y: auto;
 
 	@media (max-width: 1280px) {
@@ -109,4 +109,11 @@
 	display: flex;
 	justify-content: flex-end;
 	margin-bottom: 8px;
+}
+
+.status_icons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 38px;
 }

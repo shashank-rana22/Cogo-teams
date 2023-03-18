@@ -1,9 +1,10 @@
-import { Button } from '@cogoport/components';
+import { Loader, Button } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React from 'react';
 
+import EmptyStateDocs from '../../../../../commons/EmptyStateDocs';
 import List from '../../../../../commons/List/index';
 import { formatDate } from '../../../../../commons/utils/formatDate';
 import config from '../../../../configurations/SHIPMENT_DOCUMENTS_CONFIG';
@@ -79,14 +80,30 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 		},
 	};
 
-	return (
-		<div className={styles.list}>
+	const getDocumentData = () => {
+		if (loading) {
+			return (
+				<div className={styles.loader_main}>
+					<Loader className={styles.loader} />
+				</div>
+			);
+		}
+		if (isEmpty(documentData)) {
+			return <EmptyStateDocs />;
+		}
+		return (
 			<List
 				config={config}
 				itemData={documentData}
 				functions={functions}
 				loading={loading}
 			/>
+		);
+	};
+
+	return (
+		<div className={styles.list}>
+			{getDocumentData()}
 		</div>
 	);
 }

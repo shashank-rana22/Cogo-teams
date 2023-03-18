@@ -1,10 +1,10 @@
-/* eslint-disable max-len */
 import { cl, Popover } from '@cogoport/components';
 import {
 	IcMHappy,
 	IcMAttach,
 	IcMSend,
 	IcMDelete,
+	IcMRefresh,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
@@ -38,9 +38,10 @@ function MessageConversations({
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
 	lastPage = false,
+
 }) {
 	const messageRef = useRef();
-	const { id = '', channel_type = '' } = activeMessageCard;
+	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
 
 	const {
 		emojisList = {},
@@ -70,8 +71,7 @@ function MessageConversations({
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
 			event.preventDefault();
-			sendChatMessage();
-			scrollToBottom();
+			sendChatMessage(scrollToBottom);
 		}
 	};
 
@@ -145,10 +145,24 @@ function MessageConversations({
 
 	);
 
+	const unreadIndex = new_user_message_count > messagesData.length
+		? 0 : messagesData.length - new_user_message_count;
+
 	const messageConversation = (
 		<>
-			{loadingPrevMessages && loader}
-			{(messagesData || []).map((eachMessage) => (
+			{loadingPrevMessages
+				? loader
+				: (
+					<div className={styles.load_prev_messages}>
+						{!lastPage && (
+							<IcMRefresh
+								className={styles.refresh_icon}
+								onClick={getNextData}
+							/>
+						)}
+					</div>
+				)}
+			{(messagesData || []).map((eachMessage, index) => (
 				eachMessage?.conversation_type !== 'received' ? (
 					<ReceiveDiv
 						key={eachMessage?.created_at}
@@ -160,6 +174,7 @@ function MessageConversations({
 						key={eachMessage?.created_at}
 						eachMessage={eachMessage}
 						activeMessageCard={activeMessageCard}
+						messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
 					/>
 				)
 			))}
@@ -356,8 +371,7 @@ function MessageConversations({
 							fill="#EE3425"
 							onClick={() => {
 								if (hasPermissionToEdit) {
-									sendChatMessage();
-									scrollToBottom();
+									sendChatMessage(scrollToBottom);
 								}
 							}}
 							style={{

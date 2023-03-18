@@ -1,8 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
-
-import usePurchaseViewStats from '../hook/getPurchaseViewStats';
 
 import CommonListData from './CommonListData';
 import styles from './styles.module.css';
@@ -23,10 +20,12 @@ const tabsKeyComponentMapping = {
 	coe_rejected     : CommonListData,
 };
 
-function Rejected() {
+function Rejected({ statsData }) {
 	const { push } = useRouter();
 	const [filters, setFilters] = useState({});
+	const { FINANCE_REJECTED = '', COE_REJECTED = '' } = statsData || {};
 	const [subActiveTab, setSubActiveTab] = useState<string>('finance_rejected');
+
 	const tabComponentProps = {
 		finance_rejected: {
 			filters,
@@ -47,11 +46,8 @@ function Rejected() {
 			'/business-finance/coe-finance/[active_tab]/[view]',
 			`/business-finance/coe-finance/rejected/${subActiveTab}`,
 		);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [subActiveTab]);
-
-	const { statsData }: any = usePurchaseViewStats();
-
-	const { FINANCE_REJECTED = '', COE_REJECTED = '' } = statsData || {};
 
 	return (
 		<div>

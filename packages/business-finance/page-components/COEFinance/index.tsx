@@ -1,15 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import AllInvoices from './All_Invoices/index';
 import Dashboard from './Dashboard';
+import usePurchaseViewStats from './hook/getPurchaseViewStats';
 import Rejected from './Rejected';
 import styles from './styles.module.css';
 
 function CoeFinance() {
 	const { query, push } = useRouter();
+	const { statsData } = usePurchaseViewStats();
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 	const handleTabChange = (tab:string) => {
 		setActiveTab(tab);
@@ -39,14 +40,14 @@ function CoeFinance() {
 						name="dashboard"
 						title="Dashboard"
 					>
-						<Dashboard />
+						<Dashboard statsData={statsData} />
 					</TabPanel>
 					<TabPanel name="all_invoices" title="All Invoices">
-						<AllInvoices />
+						<AllInvoices statsData={statsData} />
 					</TabPanel>
 
 					<TabPanel name="rejected" title="Rejected">
-						<Rejected />
+						<Rejected statsData={statsData} />
 					</TabPanel>
 				</Tabs>
 			</div>

@@ -8,7 +8,6 @@ import SegmentedControl from '../../../../commons/SegmentedControl/index';
 import FilterModal from '../../../Components/FilterModal/index';
 import filtersData from '../../../constants/purchase-list-filters';
 import filtersUrgentData from '../../../constants/purchase-list-segments';
-import usePurchaseViewStats from '../../../hook/getPurchaseViewStats';
 
 import controls from './controls';
 import styled from './styles.module.css';
@@ -17,6 +16,7 @@ interface SegmentFilterProps {
 	setSearchValue: any;
 	searchValue: string;
 	currentTab: string;
+	statsData?:object
 	tab:string;
 	setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
 	setTab: React.Dispatch<React.SetStateAction<string>>;
@@ -27,6 +27,7 @@ interface SegmentFilterProps {
 function SegmentedFilters({
 	setCurrentTab,
 	currentTab,
+	statsData,
 	tab,
 	setTab,
 	setSearchValue,
@@ -34,8 +35,6 @@ function SegmentedFilters({
 	filters,
 	setFilters,
 }: SegmentFilterProps) {
-	const { statsData } = usePurchaseViewStats();
-
 	return (
 		<div className={styled.main}>
 			<div className={styled.segment}>
