@@ -18,9 +18,6 @@ function KamLevel({ selectedVersion }) {
 	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
 
-	console.log('selected', selectedVersion);
-	console.log('the type', typeof selectedVersion);
-
 	const audit_data = kamConfigDetails?.audit_data || {};
 	const kamConfigLevelDetails = kamConfigDetails?.data || [];
 
