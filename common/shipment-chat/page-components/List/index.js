@@ -143,6 +143,7 @@ function List({
 				<ListHeader
 					status={status}
 					setStatus={setStatus}
+					setShow={setShow}
 				/>
 
 				<div className={styles.sub_container}>

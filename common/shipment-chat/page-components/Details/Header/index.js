@@ -1,5 +1,5 @@
 import { Popover, Button, Toggle } from '@cogoport/components';
-import { IcMProfile } from '@cogoport/icons-react';
+import { IcMProfile, IcMCross } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -61,6 +61,15 @@ function Header({
 					primary_service={primary_service}
 					isShow={false}
 				/>
+
+				<div
+					className={styles.close_icon}
+					role="button"
+					tabIndex={0}
+					onClick={() => setShow(false)}
+				>
+					<IcMCross />
+				</div>
 			</div>
 			<div className={styles.sub_container}>
 				<div className={styles.filter_box}>
