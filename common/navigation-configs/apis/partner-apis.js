@@ -10680,6 +10680,31 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
+			api          : 'list_omnichannel_documents',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_omnichannel_document',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'submit_organization_kyc',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_omnichannel_document_details',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_organization_document',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'send_user_whatsapp_template',
 			access_type  : 'private',
 			service_name : 'communication',
