@@ -27,7 +27,6 @@ const useOceanRoute = ({ setMapPoints = () => {}, list = {} }) => {
           },
         ],
       };
-      console.log(request_data , " :request_data : ", list);
       const res = await trigger({ data: request_data });
       if (res.data?.length) {
         container_no?.forEach((c) => {

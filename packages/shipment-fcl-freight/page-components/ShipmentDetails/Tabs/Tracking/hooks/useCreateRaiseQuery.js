@@ -1,7 +1,8 @@
-import { useEffect, useCallback } from "react";
+import { useCallback } from "react";
 import { useSelector } from "@cogoport/store";
 import { useRequest } from "@cogoport/request";
 import { Toast } from "@cogoport/components";
+import { useForm } from '@cogoport/forms';
 import getApiErrorString from "@cogoport/forms/utils/getApiError";
 
 function useCreateRaiseQuery({
@@ -16,7 +17,15 @@ function useCreateRaiseQuery({
 		userId: profile.id,
 	}));
 
-	const [{ loading, data }, trigger] = useRequest({
+	const {
+		control,
+		reset,
+		formState: { errors },
+		handleSubmit,
+	  } = useForm({});
+
+
+	const [{ loading }, trigger] = useRequest({
 		url: 'raise_query',
 		method: "POST",
 		scope,
@@ -31,14 +40,17 @@ function useCreateRaiseQuery({
 			service: 'shipment',
 			service_id: shipmentId || '3534d9b2-7a8c-47a0-a3d1-93cfb7bf9f69',
 		};
+		console.log({payload})
 
 		try {
 			const res = await trigger({
 				data: payload,
 			});
+
 			if (!res.hasError) {
 				setShowModal(true);
 				setIsOpen(false);
+				reset();
 			}
 		} catch (e) {
 			Toast.error(getApiErrorString(e?.data));
@@ -49,6 +61,10 @@ function useCreateRaiseQuery({
 	return {
 		loading,
 		handleFormSubmit,
+		handleSubmit,
+		reset,
+		errors,
+		control,
 	};
 }
 
