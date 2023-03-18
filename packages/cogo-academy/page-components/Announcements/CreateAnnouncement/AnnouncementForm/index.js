@@ -72,6 +72,7 @@ function AnnouncementForm({
 								<FieldArray
 									formValues={formValues}
 									control={control}
+									showLabelOnce
 									{...controlItem}
 								/>
 							</div>
@@ -134,7 +135,7 @@ function AnnouncementForm({
 				>
 					<Modal.Header title={formValues.title} />
 
-					<Modal.Body style={{ maxHeight: '80vh' }}>
+					<Modal.Body className={styles.preview_modal_body}>
 						<Preview formValues={formValues} />
 					</Modal.Body>
 				</Modal>

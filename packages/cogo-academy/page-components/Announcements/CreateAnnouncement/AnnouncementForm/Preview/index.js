@@ -14,12 +14,12 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 
 	useEffect(() => {
 		if (announcement_id) {
-			const { announcement_attachments } = formValues;
-			const { image, pdf, video } = announcement_attachments;
+			const { announcement_attachments = {} } = formValues;
+			const { image = [], pdf = [], video = [] } = announcement_attachments;
 
-			setImages(image?.map((item) => item.document_url));
-			setVideos(video?.map((item) => item.document_url));
-			setFiles(pdf?.map((item) => item.document_url));
+			setImages(image.map((item) => item.document_url));
+			setVideos(video.map((item) => item.document_url));
+			setFiles(pdf.map((item) => item.document_url));
 		} else {
 			setVideos(formValues?.videos?.filter((item) => item.video_item)?.map((item) => item.video_item));
 			setFiles(formValues?.files);

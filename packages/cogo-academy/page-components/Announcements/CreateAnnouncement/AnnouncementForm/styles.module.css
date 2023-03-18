@@ -21,6 +21,15 @@
 	}
 }
 
+.preview_modal_body {
+	max-height: 80vh !important;
+
+	@media (max-width: 768px) {
+		width: 100vw;
+		min-height: 100vh;
+	}
+}
+
 .add_audience_button {
 	position: absolute;
 	right: 0;

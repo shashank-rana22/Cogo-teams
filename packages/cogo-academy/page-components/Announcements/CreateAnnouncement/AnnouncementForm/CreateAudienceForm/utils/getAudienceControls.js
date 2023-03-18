@@ -1,23 +1,6 @@
+import { PLATFORM_OPTIONS, AUTH_FUNCTION_OPTIONS, PERSONA_OPTIONS } from './otherAudienceControls';
 import SUB_FUNCTION_MAPPING from './subFunctionMappings';
 import WORK_SCOPES_OPTIONS from './workScopeMappings';
-
-const PLATFORM_OPTIONS = [{ label: 'Admin', value: 'admin' },
-	{ label: 'App', value: 'app' },
-	{ label: 'Partner', value: 'partner' },
-	{ label: 'All', value: 'all' }];
-
-const AUTH_FUNCTION_OPTIONS = [{ label: 'Sales', value: 'sales' },
-	{ label: 'Supply', value: 'supply' },
-	{ label: 'Operations', value: 'operations' },
-	{ label: 'Finance', value: 'finance' },
-	{ label: 'All', value: 'all' },
-];
-
-const PERSONA_OPTIONS = [
-	{ label: 'Channel Partner', value: 'channel_partner' },
-	{ label: 'Service Provider', value: 'service_provider' },
-	{ label: 'All', value: 'all' },
-];
 
 const getAudienceControls = ({ watchFunctions, entity_options, countryOptions }) => {
 	const controls = [

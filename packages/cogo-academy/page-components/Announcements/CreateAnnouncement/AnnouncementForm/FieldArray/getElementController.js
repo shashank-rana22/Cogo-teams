@@ -1,17 +1,11 @@
 import { InputController, MultiselectController, SelectController } from '@cogoport/forms';
 
-export const getElementController = (type = 'text') => {
-	switch (type) {
-		case 'text':
-			return InputController;
-
-		case 'select':
-			return SelectController;
-
-		case 'multiSelect':
-			return MultiselectController;
-
-		default:
-			return null;
-	}
+const CONTROL_MAPPING = {
+	text        : InputController,
+	select      : SelectController,
+	multiSelect : MultiselectController,
 };
+
+export const getElementController = (type = 'text') => (
+	CONTROL_MAPPING[type]
+);

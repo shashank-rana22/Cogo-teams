@@ -6,9 +6,7 @@ import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
 import useListCogoEntity from './useListCogoEntities';
 import getAudienceControls from './utils/getAudienceControls';
-
-// eslint-disable-next-line import/no-unresolved
-import countries from '@/data-store/constants/countries.json';
+import getCountryOptions from './utils/getCountryOptions';
 
 function CreateAudienceForm(props) {
 	const {
@@ -33,25 +31,12 @@ function CreateAudienceForm(props) {
 		entity_data,
 	} = useListCogoEntity();
 
+	const countryOptions = getCountryOptions();
+
 	const entity_options = entity_data.map((entityData) => ({
 		label : entityData.business_name,
 		value : entityData.id,
 	}));
-
-	const indiaOption = countries.find((country) => country.country_code === 'IN');
-
-	const countryOptions = [{
-		label : indiaOption?.name,
-		value : indiaOption?.id,
-	}];
-
-	countries.filter((country) => country.country_code !== 'IN').map((country) => {
-		const option = { label: country.name, value: country.id };
-
-		countryOptions.push(option);
-
-		return countryOptions;
-	});
 
 	const watchFunctions = watch('auth_function');
 	const watchPlatform = watch('platform');
@@ -85,22 +70,22 @@ function CreateAudienceForm(props) {
 				const { name = '', label = '' } = controls[controlItem] || {};
 
 				const DynamicController = name === 'name' ? InputController : SelectController;
+				if (!showElements[name]) return null;
 
-				if (showElements[name]) {
-					return (
-						<div key={name}>
-							<div className={styles.label}>
-								{label}
-							</div>
-							<div className={styles.controller_wrapper}>
-								<DynamicController
-									{...controls[controlItem]}
-									control={control}
-									name={name}
-								/>
-							</div>
+				return (
+					<div key={name}>
+						<div className={styles.label}>
+							{label}
+						</div>
+						<div className={styles.controller_wrapper}>
+							<DynamicController
+								{...controls[controlItem]}
+								control={control}
+								name={name}
+							/>
+						</div>
 
-							{errors[name]
+						{errors[name]
 							&& (
 								<div className={styles.error_message}>
 									{' '}
@@ -108,10 +93,8 @@ function CreateAudienceForm(props) {
 								</div>
 							)}
 
-						</div>
-					);
-				}
-				return null;
+					</div>
+				);
 			})}
 
 			<div className={styles.button_container}>

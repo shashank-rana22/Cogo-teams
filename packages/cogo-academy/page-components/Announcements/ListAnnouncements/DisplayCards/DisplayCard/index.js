@@ -132,7 +132,7 @@ function DisplayCard({
 
 				>
 					<Modal.Header title={accordianData.title} />
-					<Modal.Body style={{ maxHeight: '80vh' }}>
+					<Modal.Body className={styles.modal_body}>
 						<Preview
 							formValues={accordianData}
 							announcement_id={accordianData?.id}
