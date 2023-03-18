@@ -1,5 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import useListVendors from '../hooks/useListVendors';
 import Timeline from '../Timeline';
@@ -11,28 +11,28 @@ import styles from './styles.module.css';
 interface Props {
 	setShowModal:any,
 	showModal?: boolean,
-	createExpenseType?: string
+	createExpenseType?: string,
+	getList?:(p:any)=>void,
 }
 
 function CreateExpenseModal({
 	setShowModal,
 	showModal = false,
 	createExpenseType = '',
+	getList = () => {},
 }:Props) {
 	const [mailModal, setMailModal] = useState(false);
 	const [recurringData, setRecurringData] = useState({
 		repeatEvery: 'week',
 	});
-
-	const [nonRecurringData, setNonRecurringData] = useState({
-	});
-	const timeline = ['Expense Details', 'Upload Invoice', 'Final Confirmation'];
+	const [timeline, setTimeline] = useState(['Expense Details', 'Upload Invoice', 'Final Confirmation']);
+	const [nonRecurringData, setNonRecurringData] = useState({});
 	const [active, setActive] = useState('Expense Details');
 
 	const { listVendorApi, loading } = useListVendors();
 
 	const handleClick = () => {
-		if (active === 'Expense Details' && createExpenseType !== 'recurring') {
+		if (active === 'Expense Details' && createExpenseType === 'nonRecurring') {
 			listVendorApi({ checkCombination: true, nonRecurringData, timeline, active, setActive });
 		} else {
 			const current = timeline.indexOf(active);
@@ -44,15 +44,46 @@ function CreateExpenseModal({
 		setActive(timeline[current - 1]);
 	};
 
-	const headerTitle = createExpenseType === 'recurring' ? 'Recurring' : 'Non Recurring';
+	let headerTitle:string;
+	if (createExpenseType === 'recurring') {
+		headerTitle = 'RECORD - Recurring';
+	} else if (createExpenseType === 'nonRecurring') {
+		headerTitle = ' - Non Recurring';
+	}
+
+	let mailData:object;
+	let setMailData:(p:any)=>void;
+
+	if (createExpenseType === 'recurring') {
+		mailData = recurringData;
+		setMailData = setRecurringData;
+	} else if (createExpenseType === 'nonRecurring') {
+		mailData = nonRecurringData;
+		setMailData = setNonRecurringData;
+	}
+
+	useEffect(() => {
+		if (createExpenseType === 'recurring') {
+			setTimeline(['Expense Details', 'Final Confirmation']);
+		} else {
+			setTimeline(['Expense Details', 'Upload Invoice', 'Final Confirmation']);
+		}
+	}, [createExpenseType]);
 
 	return (
-		<Modal size="fullscreen" show={showModal} onClose={() => setShowModal(false)} placement="center">
-			<Modal.Header title={`CREATE EXPENSE - ${headerTitle}`} />
+		<Modal
+			size={createExpenseType === 'nonRecurring' ? 'fullscreen' : 'xl'}
+			show={showModal}
+			onClose={() => setShowModal(false)}
+			placement="center"
+		>
+			<Modal.Header title={`CREATE EXPENSE ${headerTitle}`} />
 			<Modal.Body className={styles.modal_data}>
-				<div>
-					<Timeline active={active} timeline={timeline} />
-				</div>
+				{createExpenseType === 'nonRecurring' && (
+					<div>
+						<Timeline active={active} timeline={timeline} />
+					</div>
+				)}
 				<div style={{ marginTop: '20px' }}>
 					<CreateExpenseForm
 						active={active}
@@ -87,8 +118,11 @@ function CreateExpenseModal({
 					<Modal.Header title="Request Email Preview" />
 					<Modal.Body className={styles.modal_body}>
 						<MailTemplate
-							nonRecurringData={nonRecurringData}
-							setNonRecurringData={setNonRecurringData}
+							mailData={mailData}
+							setMailData={setMailData}
+							setShowModal={setShowModal}
+							getList={getList}
+							createExpenseType={createExpenseType}
 						/>
 					</Modal.Body>
 				</Modal>

@@ -26,7 +26,7 @@ function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 	let uploadControls;
 	if (createExpenseType === 'recurring') {
 		uploadControls = recurringUploadInvoice;
-	} else {
+	} else if (createExpenseType === 'nonRecurring') {
 		uploadControls = nonRecurringUploadInvoice;
 	}
 

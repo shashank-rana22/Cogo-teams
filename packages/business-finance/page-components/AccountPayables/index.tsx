@@ -37,7 +37,6 @@ function AccountPayables() {
 	return (
 		<div>
 			<h1 className={styles.header}>Account Payables</h1>
-			<div className={styles.underline} />
 
 			<div className={styles.tabs}>
 				<Tabs

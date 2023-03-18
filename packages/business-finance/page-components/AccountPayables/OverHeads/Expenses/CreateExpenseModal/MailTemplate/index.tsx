@@ -3,18 +3,38 @@ import { IcMFileUploader } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import useCreateExpense from '../../hooks/useCreateExpense';
+import useCreateExpenseConfig from '../../hooks/useCreateExpenseConfig';
 
 import Details from './Details';
 import styles from './styles.module.css';
 
-function MailTemplate({ nonRecurringData, setNonRecurringData }) {
-	const { uploadedInvoice, vendorName = '-', expenseCategory = '-' } = nonRecurringData || {};
-	const { submitData } = useCreateExpense(nonRecurringData);
+interface Data {
+	uploadedInvoice?:any,
+	vendorName?:string,
+	expenseCategory?:string,
+	stakeholderEmail?:string,
+}
 
-	const handleSubmit = () => {
-		submitData();
+interface Props {
+	mailData?:Data,
+	setMailData?:any,
+	setShowModal?:boolean,
+	getList?:(p:any)=>void,
+	createExpenseType?:string,
+}
+
+function MailTemplate({ mailData, setMailData, setShowModal, getList, createExpenseType }:Props) {
+	const { uploadedInvoice, vendorName = '-', expenseCategory = '-', stakeholderEmail } = mailData || {};
+	const { submitData, loading } = useCreateExpense(mailData, setShowModal, getList, createExpenseType);
+	const { createRecurring, recurringLoading } = useCreateExpenseConfig({ mailData, setShowModal });
+
+	const handleClick = () => {
+		if (createExpenseType === 'recurring') {
+			createRecurring();
+		} else if (createExpenseType === 'nonRecurring') {
+			submitData();
+		}
 	};
-	const { stakeholderEmail } = nonRecurringData;
 
 	return (
 		<div className={styles.container}>
@@ -48,8 +68,8 @@ function MailTemplate({ nonRecurringData, setNonRecurringData }) {
 			<div className={styles.subject}>
 				<Details
 					isBody
-					nonRecurringData={nonRecurringData}
-					setNonRecurringData={setNonRecurringData}
+					mailData={mailData}
+					setMailData={setMailData}
 				/>
 			</div>
 
@@ -61,7 +81,12 @@ function MailTemplate({ nonRecurringData, setNonRecurringData }) {
 					</a>
 				</div>
 			)}
-			<div className={styles.button}><Button onClick={handleSubmit}>Send</Button></div>
+			<div className={styles.button}>
+				<Button onClick={() => handleClick()} disabled={loading || recurringLoading}>
+					{loading || recurringLoading ? 'Sending...' : 'Send'}
+				</Button>
+
+			</div>
 		</div>
 	);
 }

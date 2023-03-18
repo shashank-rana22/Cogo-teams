@@ -34,10 +34,10 @@ function ExpenseDetailsForm({ formData, setFormData, createExpenseType }:Props) 
 
 	const { entityList } = useListCogoEntities();
 
-	let expenseControls;
+	let expenseControls:any;
 	if (createExpenseType === 'recurring') {
 		expenseControls = recurringExpenseDetails;
-	} else {
+	} else if (createExpenseType === 'nonRecurring') {
 		expenseControls = nonRecurringExpenseDetails;
 	}
 

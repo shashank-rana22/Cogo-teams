@@ -12,26 +12,24 @@ const usePostListItemTaxes = () => {
 		{ autoCancel: false },
 	);
 
-	const api = async () => {
-		try {
-			await trigger(
-				{
-					data: {
-						serviceName : 'overhead',
-						tradeType   : 'LOCAL',
-						countryCode : 'IN',
-					},
-				},
-			);
-		} catch (err) {
-			Toast.error('Something went wrong');
-		}
-	};
-
 	useEffect(() => {
+		const api = async () => {
+			try {
+				await trigger(
+					{
+						data: {
+							serviceName : 'overhead',
+							tradeType   : 'LOCAL',
+							countryCode : 'IN',
+						},
+					},
+				);
+			} catch (err) {
+				Toast.error('Something went wrong');
+			}
+		};
 		api();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [trigger]);
 
 	return {
 		loading,

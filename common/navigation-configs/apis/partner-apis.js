@@ -7181,6 +7181,20 @@ const partner = {
 			module      : 'overheads',
 			feature     : 'overheads',
 		},
+		{
+			api          : 'get_expense_list',
+			access_type  : 'private',
+			module       : 'overheads',
+			feature      : 'overheads',
+			service_name : 'expense',
+		},
+		{
+			api          : 'purchase_expense_expense_configuration',
+			access_type  : 'private',
+			module       : 'overheads',
+			feature      : 'overheads',
+			service_name : 'expense',
+		},
 	],
 	my_incident: [
 		{

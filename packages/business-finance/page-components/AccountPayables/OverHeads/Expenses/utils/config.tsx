@@ -5,8 +5,10 @@ import React from 'react';
 const headerStyle = {
 	marginBottom : '16px',
 	paddingLeft  : '10px',
-	borderRadius : '8px',
-	background   : '#333',
+	borderRadius : '8px 8px 0px 0px',
+	borderBottom : '2px solid #F68B21',
+	background   : 'white',
+	color        : 'black',
 	marginTop    : '20px',
 	fontSize     : '14px',
 	fontStyle    : 'normal',
@@ -41,11 +43,11 @@ export const expenseRecurringConfig = () => {
 		fields       : [
 			{
 				label : 'Name',
-				key   : 'name',
+				key   : 'sellerDetails.organizationName',
 				span  : 2,
 			},
 			{
-				label : 'Invoice Number',
+				label : 'Agreement',
 				key   : 'invoiceNumber',
 				span  : 2,
 			},
@@ -93,12 +95,12 @@ export const expenseNonRecurringConfig = () => ({
 	fields       : [
 		{
 			label : 'Name',
-			key   : 'name',
+			key   : 'sellerDetails.organizationName',
 			span  : 1.2,
 		},
 		{
 			label : 'Invoice Number',
-			key   : 'invoiceNumber',
+			key   : 'billNumber',
 			span  : 1.5,
 		},
 		{
@@ -108,7 +110,7 @@ export const expenseNonRecurringConfig = () => ({
 		},
 		{
 			label : 'Invoice Amount',
-			key   : 'invoiceAmount',
+			key   : 'grandTotal',
 			span  : 1.5,
 
 		},
@@ -120,22 +122,22 @@ export const expenseNonRecurringConfig = () => ({
 		},
 		{
 			label : 'Payable',
-			key   : 'payable',
 			span  : 1.5,
+			func  : 'getPayable',
 		},
 		{
 			label : 'Paid',
-			key   : 'paid',
+			key   : 'paidAmount',
 			span  : 1,
 		},
 		{
 			label : 'Invoice Dates',
-			key   : 'invoiceDates',
+			func  : 'getInvoiceDates',
 			span  : 1.25,
 		},
 		{
 			label : 'Approved By',
-			key   : 'approvedBy',
+			func  : 'getApprovedBy',
 			span  : 1.25,
 		},
 	],

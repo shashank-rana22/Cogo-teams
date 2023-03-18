@@ -16,16 +16,15 @@ interface Data {
 interface Props {
 	text?:string,
 	isBody?:boolean,
-	nonRecurringData?:Data,
-	setNonRecurringData?:(p:object)=>void,
+	mailData?:Data,
+	setMailData?:(p:object)=>void,
 }
 
 function Details({
 	text = '',
 	isBody = false,
-	nonRecurringData = {},
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	setNonRecurringData = (p:object) => {},
+	mailData = {},
+	setMailData = () => {},
 }:Props) {
 	const {
 		vendorName = '',
@@ -33,7 +32,7 @@ function Details({
 		totalPayable,
 		invoiceDate,
 		stakeholderName,
-	} = nonRecurringData || {};
+	} = mailData || {};
 
 	const profileData = useSelector(({ profile }) => profile);
 	const userName = profileData?.user.name;
@@ -57,8 +56,8 @@ function Details({
 					name="bodyText"
 					size="md"
 					placeholder="Type here..."
-					onChange={(e:string) => setNonRecurringData({
-						...nonRecurringData,
+					onChange={(e:string) => setMailData({
+						...mailData,
 						mailText: e,
 					})}
 				/>

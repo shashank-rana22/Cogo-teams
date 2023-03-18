@@ -91,3 +91,9 @@
 		background: #fffaeb;
 	}
 }
+
+.styled_div{
+	padding: 20px;
+	background: white;
+	margin-top: 16px;
+}

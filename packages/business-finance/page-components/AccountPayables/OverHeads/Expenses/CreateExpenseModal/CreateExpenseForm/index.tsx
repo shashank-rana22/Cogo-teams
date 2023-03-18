@@ -22,29 +22,45 @@ function CreateExpenseForm({
 	nonRecurringData,
 	setNonRecurringData,
 }:Props) {
+	let formData:any;
+	let setFormData:any;
+	if (createExpenseType === 'recurring') {
+		formData = recurringData;
+		setFormData = setRecurringData;
+	} else if (createExpenseType === 'nonRecurring') {
+		formData = nonRecurringData;
+		setFormData = setNonRecurringData;
+	}
+
 	return (
 		<div>
 			{active === 'Expense Details'
 			&& (
 				<ExpenseDetailsForm
-					formData={createExpenseType === 'recurring' ? recurringData : nonRecurringData}
-					setFormData={createExpenseType === 'recurring' ? setRecurringData : setNonRecurringData}
+					formData={formData}
+					setFormData={setFormData}
 					createExpenseType={createExpenseType}
 				/>
 			)}
-			{active === 'Upload Invoice' && (
+			{active === 'Upload Invoice' && createExpenseType === 'nonRecurring' && (
 				<UploadInvoiceForm
-					formData={createExpenseType === 'recurring' ? recurringData : nonRecurringData}
-					setFormData={createExpenseType === 'recurring' ? setRecurringData : setNonRecurringData}
+					formData={formData}
+					setFormData={setFormData}
 					createExpenseType={createExpenseType}
 				/>
 			)}
 			{ active === 'Final Confirmation' && (
 				<div>
-					{createExpenseType === 'recurring' ? <RecurringSummary /> : (
+					{createExpenseType === 'nonRecurring' && (
 						<NonRecurringSummary
 							nonRecurringData={nonRecurringData}
 							setNonRecurringData={setNonRecurringData}
+						/>
+					)}
+					{createExpenseType === 'recurring' && (
+						<RecurringSummary
+							recurringData={recurringData}
+							setRecurringData={setRecurringData}
 						/>
 					)}
 				</div>
