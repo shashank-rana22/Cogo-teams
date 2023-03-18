@@ -1,21 +1,10 @@
-import { Input, Popover, cl } from '@cogoport/components';
+import { Input, cl } from '@cogoport/components';
 // import formatDate from '@cogo/globalization/utils/formatDate';
 // import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
 import { ShipmentDetailContext } from '@cogoport/context';
-import {
-	IcMArrowDown,
-	IcMSearchlight,
-	IcMArrowBack,
-	IcMUnread,
-} from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
-import React, {
-	useState,
-	useEffect,
-	useContext,
-	useCallback,
-	useRef,
-} from 'react';
+import { IcMSearchlight, IcMUnread } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import EmptyState from '../../common/EmptyState';
@@ -197,16 +186,6 @@ function List({
 						)}
 					</div>
 
-					{isMobile ? (
-						<div className={styles.menu_close_btn}>
-							<IcMArrowBack
-								width={21}
-								height={21}
-								onClick={() => setShowMenu(false)}
-							/>
-						</div>
-					) : null}
-
 					{/* <CreateChannel refetch={refetch} /> */}
 				</div>
 			</div>
@@ -232,7 +211,7 @@ function List({
 						activeId={id}
 						sourceId={item?.source_id}
 						source={item?.source}
-						// onSeen={onCreate}
+						onSeen={onCreate}
 						setShowMenu={setShowMenu}
 						isMobile={isMobile}
 						get={get}
