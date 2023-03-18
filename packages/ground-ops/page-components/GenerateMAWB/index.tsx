@@ -121,6 +121,7 @@ function GenerateMAWB({
 			setValue(c.name, taskItem[c.name]);
 		});
 		if (!viewDoc) {
+			setValue('executedDate', new Date());
 			setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
 			setValue('city', 'NEW DELHI');
 			setValue('place', 'NEW DELHI');

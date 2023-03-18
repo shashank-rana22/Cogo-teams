@@ -481,6 +481,15 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
+			name        : 'shipperSignature',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Signature of Shipper or his Agent',
+			span        : 5,
+			placeholder : 'Shipper Signature',
+			rules       : { required: 'Shipper Signature is Required' },
+		},
+		{
 			name        : 'place',
 			type        : 'text',
 			className   : 'primary lg',
@@ -492,14 +501,18 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
-			name        : 'shipperSignature',
-			type        : 'text',
+			name        : 'executedDate',
+			type        : 'date_picker',
 			className   : 'primary lg',
-			label       : 'Signature of Shipper or his Agent',
+			label       : 'Executed Date',
 			span        : 5,
-			placeholder : 'Shipper Signature',
-			rules       : { required: 'Shipper Signature is Required' },
+			placeholder : 'Date',
+			value       : new Date(),
+			rules       : {
+				required: 'Date is Required',
+			},
 		},
+
 	],
 });
 
