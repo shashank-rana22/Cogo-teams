@@ -1,7 +1,7 @@
-// import GLOBAL_CONSTANTS from '@cogo/globalization/constants/globals.json';
-// import formatDate from '@cogo/globalization/utils/formatDate';
 import { Input, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMSearchlight, IcMUnread } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
@@ -34,6 +34,8 @@ function List({
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
 	const [status, setStatus] = useState('active');
 
+	console.log(GLOBAL_CONSTANTS, 'GLOBAL_CONSTANTS');
+
 	const {
 		ListData, page, total_page, filters, setFilters,
 		loading, refetch,
@@ -55,7 +57,7 @@ function List({
 			onCreate(id);
 		} else if (showUnreadChat && count === 0) {
 			setCount(1);
-			useStoreId(id);
+			// useStoreId(id);
 		} else {
 			setCount(0);
 			onCreate(storeId);
@@ -111,14 +113,13 @@ function List({
 					<div className={styles.serial_id}>{item?.channel_name}</div>
 
 					<div className={styles.updated_at}>
-						{/* {formatDate({
+						{formatDate({
 							date       : item?.updated_at,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 							formatType : 'dateTime',
 							separator  : ' | ',
-						})} */}
-						2 Mar, 03:23 PM
+						})}
 					</div>
 				</div>
 
