@@ -1,38 +1,37 @@
 import { Modal, cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-
-import FormSearch from '../../../../../../../common/Route/Form';
 import React, { useState } from 'react';
 
-import { shipment_data } from '../../../dummy_data';
+import FormSearch from '../../../../../../../common/Route/Form';
+
 import styles from './styles.module.css';
 
 function CreateNew({
 	routeLeg,
-	// serviceList,
-	// shipment_data = {},
-	// isIE = false,
+	serviceList,
+	shipmentData = {},
+	isIE = false,
 }) {
-	const isMobile = useSelector((state) => (state.general || {}).isMobile);
+	const { general: { isMobile = false } } = useSelector((state) => state);
 
 	const [form, setShowForm] = useState({
-		service: null,
-		isAdditional: false,
+		service      : null,
+		isAdditional : false,
 	});
 	const [upsellModal, setUpsellModal] = useState(false);
 
-	const user_id = shipment_data?.importer_exporter_id;
+	const user_id = shipmentData?.importer_exporter_id;
 
 	const handleClick = () => {
 		setShowForm({
 			service: {
-				service: routeLeg?.service_types?.[0].replace('_service', ''),
-				service_type: routeLeg?.service_types?.[0].replace('_service', ''),
-				type: routeLeg?.trade_type === 'export' ? 'origin' : 'destination',
+				service      : routeLeg?.service_types?.[0].replace('_service', ''),
+				service_type : routeLeg?.service_types?.[0].replace('_service', ''),
+				type         : routeLeg?.trade_type === 'export' ? 'origin' : 'destination',
 			},
-			show: true,
-			additionalShow: true,
+			show           : true,
+			additionalShow : true,
 		});
 		setUpsellModal(true);
 	};
@@ -72,14 +71,14 @@ function CreateNew({
 					extraParams={{
 						importer_exporter_id: user_id,
 						importer_exporter_branch_id:
-							shipment_data?.importer_exporter_branch_id,
-						user_id: shipment_data?.user_id,
+							shipmentData?.importer_exporter_branch_id,
+						user_id: shipmentData?.user_id,
 					}}
 					service={form.service}
 					onClose={handleClose}
-					shipment_data={shipment_data}
-					// services={serviceList}
-					// isIE={isIE}
+					shipmentData={shipmentData}
+					services={serviceList}
+					isIE={isIE}
 				/>
 			</Modal>
 		</>

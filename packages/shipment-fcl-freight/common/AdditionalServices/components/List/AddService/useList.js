@@ -1,31 +1,27 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 const useList = ({ shipment_id, services, isSeller = false, show }) => {
-	const { scope } = useSelector(({ general }) => ({ scope: general?.scope }));
-
 	const [filters, setFilters] = useState({
 		name         : undefined,
 		service_type : undefined,
 	});
 
-	const { trigger, loading, data } = useRequest(
-		'get',
-		false,
-		scope,
-	)('/get_shipment_additional_service_codes');
+	const [{ data, loading }, trigger] = useRequest({
+		url    : '/get_shipment_additional_service_codes',
+		method : 'GET',
+	});
 
-	const getListApi = async () => {
-		await trigger({
-			params: {
-				filters: {
-					shipment_id,
-				},
-			},
-		});
-	};
+	useEffect(() => {
+		(async () => {
+			if (shipment_id) {
+				await trigger({
+					params: { filters: { shipment_id } },
+				});
+			}
+		})();
+	}, [trigger, shipment_id]);
 
 	let intialList = (data?.list || []).map((item) => ({
 		...item,
@@ -47,11 +43,6 @@ const useList = ({ shipment_id, services, isSeller = false, show }) => {
 			return item.service_type === filters?.service_type;
 		});
 	}
-	useEffect(() => {
-		if (shipment_id) {
-			getListApi();
-		}
-	}, [shipment_id, show]);
 
 	return {
 		loading,

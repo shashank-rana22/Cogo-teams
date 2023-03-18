@@ -12,12 +12,12 @@
 		justify-content: center;
 	}
 }
-/* 
-.Caret{
+
+.caret{
 	margin-left: 5px;
 	width: 12px;
-	transform: ${({ sortType }) =>
-		sortType === true ? 'rotate(180deg)' : 'rotate(0)'};
-	transition: transform 0.3s ease-in-out;
+	/* transform: ${({ sortType }) =>
+		sortType === true ? 'rotate(180deg)' : 'rotate(0)'}; */
+	/* transition: transform 0.3s ease-in-out; */
 	cursor: pointer;
-} */
+}

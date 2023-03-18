@@ -24,3 +24,11 @@
 		width: 100%;
 	}
 }
+
+.last {
+	margin-bottom: 0px;
+}
+
+.other {
+	margin-bottom: 4px;
+}

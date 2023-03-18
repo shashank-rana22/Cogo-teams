@@ -1,12 +1,16 @@
+import { ShipmentDetailContext } from '@cogoport/context';
+import { useContext } from 'react';
+
 import Assured from './Assured';
 import BLDetails from './BLDetails';
-import { shipment_data } from './dummy_data';
 import OverviewManageServices from './OverviewManageServices';
 import Services from './Services';
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
 function Overview() {
+	const { shipment_data } = useContext(ShipmentDetailContext);
+
 	return (
 		<div className={styles.container}>
 			<OverviewManageServices />

@@ -12,7 +12,7 @@ const serviceCustomNames = {
 	destination_haulage : 'Port to ICD Haulage',
 };
 
-function Form({ extraParams, service, onClose, shipment_data, services }) {
+function Form({ extraParams, service, onClose, shipmentData, services }) {
 	// const {
 	// 	controls,
 	// 	showElements,

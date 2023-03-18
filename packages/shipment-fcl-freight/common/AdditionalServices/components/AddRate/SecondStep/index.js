@@ -23,7 +23,7 @@ function SecondStep({ item, status, setSecondStep, updateDatas }) {
 		<div className={styles.container}>
 			<ContainerHeader>
 				{item.name}
-				{' '}
+				&nbsp;
 				(
 				{startCase(item.service_type)}
 				)

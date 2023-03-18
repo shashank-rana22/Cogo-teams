@@ -15,7 +15,7 @@
 	text-align: left;
 }
 
-.Row{
+.row{
 	transition: 0.3s;
 
 	cursor: pointer;
@@ -54,7 +54,7 @@
 	}
 }
 
-.Label {
+.label{
 	font-size: 8px;
 	line-height: 12px;
 	text-transform: capitalize;
@@ -71,19 +71,12 @@
 	flex-direction: column;
 }
 
-.StyledButton{
-	background: #ffffff;
-	border-radius: 4px;
-	border: 1px solid #2c3e50;
-	color: #2c3e50;
-}
-
 .button_div{
 	display: flex;
 	align-items: center;
 }
 
-.Pill{
+.pill{
 	margin: 0px;
 	font-weight: normal;
 	font-size: 12px;
