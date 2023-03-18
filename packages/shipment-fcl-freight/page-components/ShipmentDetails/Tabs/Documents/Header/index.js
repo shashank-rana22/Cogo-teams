@@ -22,7 +22,7 @@ function Header({
 					suffix={<IcMSearchlight style={{ fontSize: '1rem' }} />}
 					style={{ padding: '6px', marginRight: '6px' }}
 					onChange={(e) => {
-						setSearchTasksVal(e.target.value);
+						setSearchTasksVal(e?.target?.value);
 					}}
 				/>
 
