@@ -53,6 +53,13 @@ function Body({ item }) {
 					{`${commodity}`}
 				</div>
 			)}
+			{item?.service_type === 'fcl_freight' ? (
+				<div>
+					Cargo Weight per Container:
+					{' '}
+					{item?.cargo_weight_per_container}
+				</div>
+			) : null}
 
 		</div>
 
