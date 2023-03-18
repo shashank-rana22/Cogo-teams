@@ -1,13 +1,26 @@
 .container {
-    width: 90%; 
- background: #FFFFFF;
-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
-border-radius: 4px; 
-padding: 10px 24px; 
-display: flex;
-}  
-
-.po_number {
-    white-space: nowrap;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 10px 24px;
 }
 
+.po_number {
+  white-space: nowrap;
+}
+
+.customer {
+  border-right: 1px solid #e0e0e0;
+  width: 18%;
+}
+
+.port_details {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  border-right: 1px solid #e0e0e0;
+  margin-right: 30px;
+}
