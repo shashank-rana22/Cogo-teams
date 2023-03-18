@@ -9,7 +9,7 @@ const useUpdateSeen = ({ refetch = () => { }, channel_id }) => {
 	}, { manual: true });
 
 	const onCreate = useCallback(() => {
-		(async () => {
+		(async (id) => {
 			try {
 				await trigger({
 					data: {

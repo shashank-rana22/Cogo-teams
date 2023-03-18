@@ -1,0 +1,141 @@
+.container {
+	display: flex;
+	flex-direction: column;
+
+	&.right {
+		align-items: flex-end;
+		height: fit-content;
+	}
+
+	&.left {
+		align-items: flex-start;
+		height: fit-content;
+	}
+}
+
+.send_msg {
+	min-width: 300px;
+	max-width: 300px;
+	flex-wrap: wrap;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.2);
+	border-radius: 2px;
+	padding: 4px;
+	margin: 6px 20px;
+	background: #ffffff;
+
+	&.right {
+		background: rgba(251, 209, 166, 0.15);
+	}
+}
+
+.msg {
+	display: flex;
+	flex-wrap: wrap;
+	font-weight: 400;
+	font-size: 12px;
+	color: #100f0f;
+	padding: 4px 12px 8px 12px;
+	/* white-space: pre-line; */
+}
+
+.details {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: 400;
+	font-size: 10px;
+	color: #828282;
+	padding: 4px; 
+}
+
+.flex_row {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	margin: 0;
+	background: #ffffff;
+	border-radius: 4px;
+	height: calc(100vh - 150px);
+	overflow: auto;
+	max-width: 450px;
+}
+
+.file_name {
+	display: flex;
+	align-items: center;
+	padding: 4px;
+	color: #5936f0;
+	cursor: pointer;
+	background: #f9f9f9;
+	border-radius: 0px 0px 3px 3px;
+}
+
+.dialog_box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.text {
+	font-weight: 400;
+	font-size: 12px;
+	padding: 2px;
+	color: #828282;
+	cursor: pointer;
+
+	&.hide {
+		display: none;
+	}
+	&:hover {
+		color: #356efd;
+	}
+}
+
+.icon_wrap {
+	cursor: pointer;
+
+	&.left {
+		display: none;
+	}
+}
+
+.time {
+	display: flex;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 400;
+	color: #918c8c;
+}
+
+.imp_sign {
+	display: flex;
+	justify-content: flex-end;
+	cursor: pointer;
+
+	&.left {
+		cursor: not-allowed;
+	}
+}
+
+.filter_box {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	background: #f2f2f2;
+	padding: 6px;
+	color: #393f70;
+	font-size: 10px;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.stakeholder {
+	color: #F68B21;
+	font-size: 12px;
+	font-weight: 600;
+}
