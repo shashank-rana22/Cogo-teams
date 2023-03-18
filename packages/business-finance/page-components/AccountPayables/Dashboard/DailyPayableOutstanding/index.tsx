@@ -34,7 +34,7 @@ function DailyPayableOutstanding() {
 					/>
 				</div>
 			</div>
-			{isQuarterView
+			{!isQuarterView
 				? (
 					<div className={styles.sub_container}>
 						<div className={styles.month_container}>

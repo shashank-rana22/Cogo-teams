@@ -1,10 +1,8 @@
 .container{
     background: #FFFFFF;
     border-radius: 8px;
-    padding: 36px;
+    padding: 16px;
     margin-top: 16px;
-    height: 100%;
-
 }
 .header{
     display: flex;
@@ -13,14 +11,14 @@
 }
 .heading_text{
     font-weight: 500;
-    font-size: 16px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     color: #333333;
 }
 .info_icon{
     margin-left: 8px;
-    margin-top: 6px;
+    margin-top: 4px;
 }
 .text{
     display: flex;
@@ -29,35 +27,13 @@
 .hr{
     background: #ED3726;
     border-radius: 40px;
-    width: 50%;
+    width: 60%;
     height: 2px;
     margin-left: 2px;
 }
-.toggle{
+.filter{
     display: flex;
 }
-.month_box{
-    padding: 16px;
-}
-.month_container{
-    padding: 36px;
-}
-.label{
-    font-weight: 500;
-    font-size: 16px;
-    color: #333333;
-}
-.value{
-    font-weight: 500;
-    font-size: 36px;
-    color: #F68B21;
-}
-.sub_container{
-    display: flex;
-}
-.quarter_text{
-    color: #ED3726;
-    font-weight: 500;
-    font-size: 16px;
-    margin-right: 2px;
+.segmented_filter{
+    margin-top: 8px;
 }

@@ -1,4 +1,5 @@
 import {
+	DateRangepicker,
 	Input,
 	Modal,
 	Pill,
@@ -195,6 +196,15 @@ function Element({
 			case 'singleDateRange':
 				return (
 					<SingleDateRange
+						name="date"
+						value={value as SelectedProp}
+						style={style as CSSProperties}
+						{...rest}
+					/>
+				);
+			case 'dateRangepicker':
+				return (
+					<DateRangepicker
 						name="date"
 						value={value as SelectedProp}
 						style={style as CSSProperties}
