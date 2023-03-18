@@ -1,5 +1,4 @@
 import { Toast, Modal } from '@cogoport/components';
-import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
 import React, { useState } from 'react';
 
 import Templates from '../../../../common/Templates';
