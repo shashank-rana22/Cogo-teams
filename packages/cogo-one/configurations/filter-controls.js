@@ -5,7 +5,7 @@ const useGetControls = (isomniChannelAdmin) => {
 	const listAgentsOptions = useGetAsyncOptions(
 		asyncFieldsListAgents(),
 	);
-	const HIDE_CONTROLS_ADMIN = ['assigned_to_me'];
+	const HIDE_CONTROLS_ADMIN = ['observer'];
 	let controls = [
 		{
 			label     : '',
@@ -87,18 +87,20 @@ const useGetControls = (isomniChannelAdmin) => {
 			...(listAgentsOptions || {}),
 		},
 		{
-			label        : 'Assigned To',
-			name         : 'assigned_to_me',
-			type         : 'radio',
+			label        : 'Other Filters',
+			name         : 'observer',
+			type         : 'checkboxgroup',
 			value        : '',
 			onlyForAdmin : false,
+			multiple     : false,
 			className    : 'escalation_field_controller',
 			options      : [
 				{
-					label : 'Me',
-					value : 'me',
+					label : 'Observer',
+					value : 'observer',
 				},
 			],
+
 		},
 	];
 
