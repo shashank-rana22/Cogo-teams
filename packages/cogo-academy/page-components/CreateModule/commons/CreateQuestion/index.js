@@ -6,6 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useCreateTestQuestion from '../../hooks/useCreateTestQuestion';
+import useUpdateCaseStudy from '../../hooks/useUpdateCaseStudy';
 import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
 import SingleQuestionComponent from '../SingleQuestionComponent';
 
@@ -38,11 +39,14 @@ function CreateQuestion({
 		register,
 	} = useForm();
 
-	console.log('getTestQuestionTest', getTestQuestionTest);
-
 	const { createTestQuestion, loading } = useCreateTestQuestion();
 
 	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion();
+
+	const {
+		loading: updateCaseStudyLoading,
+		updateCaseStudy,
+	} = useUpdateCaseStudy();
 
 	const onsubmit = (values) => {
 		if (!isNewQuestion && editDetails?.question_type !== 'case_study') {
@@ -76,14 +80,21 @@ function CreateQuestion({
 	};
 
 	const handleDeleteStandAloneQuestion = async () => {
-		await updateStandAloneTestQuestion({
-			testQuestionId : editDetails?.id,
+		const apiMapping = {
+			true  : updateCaseStudy,
+			false : updateStandAloneTestQuestion,
+		};
+		const apiToUse = apiMapping[editDetails?.question_type === 'case_study'];
+
+		await apiToUse({
+			id             : editDetails?.id,
 			action         : 'delete',
 			getTestQuestionTest,
 			questionSetId,
 			setEditDetails,
 			setAllKeysSaved,
 			reset,
+			testQuestionId : editDetails?.id,
 		});
 
 		getTestQuestionTest({ questionSetId });
@@ -115,6 +126,7 @@ function CreateQuestion({
 					setValue(`case_questions.${ind}.difficulty_level`, difficulty_level);
 					setValue(`case_questions.${ind}.question_type`, indQuestionType);
 					setValue(`case_questions.${ind}.question_text`, indQuestionText);
+					setValue(`case_questions.${ind}.audience_ids`, []);
 
 					answers.forEach((item2, ind2) => {
 						const { answer_text, is_correct } = item2 || {};
@@ -173,6 +185,11 @@ function CreateQuestion({
 							register={register}
 							name="question"
 							isNewQuestion={isNewQuestion}
+							questionSetId={questionSetId}
+							getTestQuestionTest={getTestQuestionTest}
+							reset={reset}
+							setEditDetails={setEditDetails}
+							setAllKeysSaved={setAllKeysSaved}
 						/>
 					) : (
 						<CaseStudyForm
@@ -183,34 +200,39 @@ function CreateQuestion({
 							control={control}
 							register={register}
 							isNewQuestion={isNewQuestion}
+							editDetails={editDetails}
+							getValues={getValues}
+							questionSetId={questionSetId}
+							getTestQuestionTest={getTestQuestionTest}
+							reset={reset}
+							setEditDetails={setEditDetails}
+							setAllKeysSaved={setAllKeysSaved}
 						/>
 					)}
 				</div>
 
-				{!(!isNewQuestion && editDetails?.question_type === 'case_study') ? (
-					<div className={styles.button_container}>
-						{!isNewQuestion
-								&& editDetails?.question_type !== 'case_study' ? (
-									<Button
-										themeType="accent"
-										loading={loading}
-										onClick={() => handleDeleteStandAloneQuestion()}
-										type="button"
-									>
-										Delete Question
-
-									</Button>
-							) : null}
-
+				<div className={styles.button_container}>
+					{!isNewQuestion ? (
 						<Button
-							loading={loading}
+							themeType="accent"
+							loading={loading || updateCaseStudyLoading}
+							onClick={() => handleDeleteStandAloneQuestion()}
+							type="button"
+						>
+							Delete Question
+						</Button>
+					) : null}
+
+					{!(!isNewQuestion && editDetails?.question_type === 'case_study') ? (
+						<Button
+							loading={loading || updateCaseStudyLoading}
 							type="submit"
 							themeType="primary"
 						>
 							{isNewQuestion ? 'Save Question' : 'Update Question'}
 						</Button>
-					</div>
-				) : null}
+					) : null}
+				</div>
 
 				<div className={styles.delete_icon}>
 					<IcMCrossInCircle onClick={() => deleteQuestion()} width={20} height={20} />

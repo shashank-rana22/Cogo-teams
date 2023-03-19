@@ -80,3 +80,8 @@
 .back_icon {
 	cursor: pointer;
 }
+
+.btn {
+	float: right;
+	margin: 20px 0;
+}

@@ -23,11 +23,7 @@
 	flex-wrap: wrap;
 	gap: 24px;
 	justify-content: space-between;
-	padding: 20px 60px;
-
-	@media (max-width: 768px) {
-		padding: 24px;
-	}
+	padding: 20px;
 }
 
 .control_container {

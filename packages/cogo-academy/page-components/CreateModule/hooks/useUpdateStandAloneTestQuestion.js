@@ -12,7 +12,7 @@ function useUpdateStandAloneTestQuestion() {
 		values,
 		questionSetId,
 		getTestQuestionTest,
-		reset,
+		reset = () => {},
 		testQuestionId,
 		action,
 		setEditDetails,
@@ -32,7 +32,10 @@ function useUpdateStandAloneTestQuestion() {
 							}),
 			});
 
-			getTestQuestionTest({ questionSetId });
+			getTestQuestionTest({
+				questionSetId,
+				...(action === 'update' ? { questionToShow: testQuestionId } : null),
+			});
 			setAllKeysSaved(true);
 			setEditDetails({});
 			reset();

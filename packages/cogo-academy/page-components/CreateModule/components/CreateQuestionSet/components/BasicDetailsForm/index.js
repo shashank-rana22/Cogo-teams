@@ -44,6 +44,10 @@ function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questio
 		setShowForm(true);
 	};
 
+	const handleDeleteQuestionSet = () => {
+		createQuestionSet({ questionSetId, type: 'delete' });
+	};
+
 	if (!isEmpty(questionSetId) && !showForm) {
 		return (
 			<div className={`${styles.container} ${styles.flex_row}`}>
@@ -57,7 +61,7 @@ function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questio
 				<div className={styles.button_container}>
 					<IcMEdit className={styles.button} onClick={() => editForm()} />
 					<div className={styles.vertical_line} />
-					<IcMDelete className={styles.button} />
+					<IcMDelete className={styles.button} onClick={() => handleDeleteQuestionSet()} />
 				</div>
 			</div>
 		);

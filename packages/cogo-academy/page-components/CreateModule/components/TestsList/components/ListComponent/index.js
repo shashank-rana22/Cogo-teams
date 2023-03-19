@@ -68,9 +68,9 @@ function ListComponent({ data, loading, fetchList:refetchListServiceBundle, setP
 		{
 			Header   : 'PASS %',
 			id       : 'e',
-			accessor : ({ total_marks = '', cut_off_marks = '' }) => (
+			accessor : ({ cut_off_marks = '' }) => (
 				<section>
-					{Math.ceil((cut_off_marks / total_marks) * 100) || '-'}
+					{cut_off_marks || '-'}
 				</section>
 			),
 		},
