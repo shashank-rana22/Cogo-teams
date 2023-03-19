@@ -157,7 +157,7 @@ function Details({
 							className={styles.send}
 							role="button"
 							tabIndex={0}
-							onClick={() => onCreate()}
+							onClick={!loading ? onCreate : null}
 						>
 							<IcMSend style={{ width: '2em', height: '2em', fill: '#303b67' }} />
 						</div>

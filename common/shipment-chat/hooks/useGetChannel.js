@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -16,7 +17,7 @@ const useGetChannel = ({ channel_id }) => {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				Toast.error(err);
 			}
 		})();
 	}, [trigger, channel_id]);

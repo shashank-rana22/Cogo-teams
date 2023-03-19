@@ -2,7 +2,7 @@ import { RadioGroup, Pill, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
 
-import AddressSvg from '../../assets/ic-address.svg';
+// import AddressSvg from '../../assets/ic-address.svg';
 
 import styles from './styles.module.css';
 
@@ -37,7 +37,7 @@ function InvoicingPartyItem({
 				<div className={styles.label_container} key={id} id={`checkout_invoicing_party_${index}`}>
 					<div className={styles.address_align}>
 						<div className={styles.icon_wrapper}>
-							<AddressSvg />
+							{/* <AddressSvg /> */}
 						</div>
 						<div className={styles.address_text}>{address}</div>
 					</div>
