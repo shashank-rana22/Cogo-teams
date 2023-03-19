@@ -1,8 +1,8 @@
 import { Button, Checkbox } from '@cogoport/components';
-import { saveAs } from 'file-saver';
 import * as htmlToImage from 'html-to-image';
+import html2canvas from 'html2canvas';
+import { jsPDF as JsPDF } from 'jspdf';
 import React, { createRef, useState, ReactFragment } from 'react';
-import { useScreenshot } from 'use-react-screenshot';
 
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
@@ -36,6 +36,21 @@ const downloadButton = {
 	document_uploaded            : 'Download',
 	document_amendment_requested : 'Download',
 };
+
+const footerImages = [
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/9bf65ee5f87f383fd612574809c21b85/original_1.png',
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/55426b1530eb9c0d272e491af27f16da/original_2.png',
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/f650b721142c5de616a36381e7723014/original_3.png',
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/cf352e6c9dcf0a0eed8a58e7a55fb0bd/copy_4.png',
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/0069e2c6d0daa0ed87814689b4a8673f/copy_5.png',
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/636788e34c112b953e029cea9806d5b9/copy_6.png',
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/c899bf071ae1c48a23264dd8d5052bfc/copy_7.png',
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/0d9c8b964599995b33c5356d2428710c/copy_8.png',
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/64981914a969cd4fe6080f7a7c5436b6/copy_9.png',
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/a3edb2c53a522535daf635828404fcd2/copy_10.png',
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/3b928e4b64bef2ad32d016126d601441/copy_11.png',
+	'https://cogoport-testing.sgp1.digitaloceanspaces.com/392325f9bce20900c697414a06a8c2b1/copy_12.png',
+];
 
 function GenerateMawb({
 	taskItem = {},
@@ -73,8 +88,6 @@ function GenerateMawb({
 			setBack(!back);
 		}
 	};
-
-	const [, takeScreenShot] = useScreenshot();
 
 	const takeImageScreenShot = async (node) => {
 		const dataURI = await htmlToImage.toJpeg(node);
@@ -128,21 +141,41 @@ function GenerateMawb({
 		setSaveDocument(false);
 	};
 
-	const getImage = (item) => {
-		document.getElementById('footer').innerHTML = `${item}`;
-		return takeScreenShot(document.getElementById('mawb'));
-	};
-
 	const handleView = async () => {
 		if (taskItem.documentState === 'document_accepted') {
-			const a = footerValues.map((item) => async () => {
-				const newImage = await getImage(item);
-				saveAs(newImage, `${item}-${taskItem.awbNumber.substring(9, 13)}`);
+			html2canvas(document.getElementById('mawb')).then((canvas) => {
+				const imgData = canvas.toDataURL('image/png');
+				const pdf = new JsPDF('portrait', 'px', 'a4');
+				const imgProps = pdf.getImageProperties(canvas);
+				const pdfWidth = pdf.internal.pageSize.getWidth();
+				const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+				footerImages.forEach((item, i) => {
+					pdf.addImage(imgData, 'PNG', 0, -10, pdfWidth, pdfHeight);
+					pdf.addImage(
+						item,
+						'PNG',
+						0,
+						pdfHeight - 40,
+						pdfWidth,
+						10,
+					);
+					if (i < 11) {
+						pdf.addPage();
+					}
+				});
+				pdf.save(taskItem.awbNumber);
 			});
-			await a.map((i) => i());
 		} else {
-			const newImage = await takeImageScreenShot(document.getElementById('mawb'));
-			saveAs(newImage, taskItem.awbNumber);
+			html2canvas(document.getElementById('mawb')).then((canvas) => {
+				const imgData = canvas.toDataURL('image/png');
+				const pdf = new JsPDF();
+				const imgProps = pdf.getImageProperties(canvas);
+				const pdfWidth = pdf.internal.pageSize.getWidth();
+				const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+				pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+				pdf.addPage();
+				pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+			});
 		}
 		setSaveDocument(false);
 	};
