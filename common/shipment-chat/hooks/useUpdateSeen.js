@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useUpdateSeen = ({ channel_id }) => {
+const useUpdateSeen = ({ channel_id, showUnreadChat }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_chat_channel_seen',
 		method : 'POST',
@@ -23,10 +23,10 @@ const useUpdateSeen = ({ channel_id }) => {
 	}, [trigger, channel_id]);
 
 	useEffect(() => {
-		if (channel_id) {
+		if (channel_id && !showUnreadChat) {
 			onCreate();
 		}
-	}, [channel_id, onCreate]);
+	}, [channel_id, onCreate, showUnreadChat]);
 
 	return {
 		onCreate,

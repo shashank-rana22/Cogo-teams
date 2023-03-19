@@ -20,17 +20,13 @@ import styles from './styles.module.css';
 
 function List({
 	setShow = () => { },
-	isMobile,
 	MessageContentArr = [],
 	user_id = '',
 	setSeenLoading = () => { },
 }) {
 	const refOuter = useRef(null);
 	const { shipment_data } = useContext(ShipmentDetailContext);
-	const [count, setCount] = useState(0);
-	// const [storeId, useStoreId] = useState();
 	const [id, setId] = useState();
-	const [showMenu, setShowMenu] = useState(false);
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
 	const [status, setStatus] = useState('active');
 
@@ -42,26 +38,12 @@ function List({
 	const defaultChannel = ListData?.find((obj) => obj?.source_id === shipment_data?.id);
 	const data = defaultChannel ? defaultChannel?.id : ListData[0]?.id;
 
-	const { loading: seenLoading } = useUpdateSeen({ channel_id: id });
+	const { loading: seenLoading } = useUpdateSeen({ channel_id: id, showUnreadChat });
 	const { get, personal_data } = useGetChannel({ channel_id: id });
 
 	useEffect(() => {
 		setSeenLoading(seenLoading);
 	}, [seenLoading, setSeenLoading]);
-
-	// useEffect(() => {
-	// 	if (id && !showUnreadChat) {
-	// 		onCreate(id);
-	// 	} else if (showUnreadChat && count === 0) {
-	// 		setCount(1);
-	// 		// useStoreId(id);
-	// 	} else {
-	// 		setCount(0);
-	// 		// onCreate(storeId);
-	// 	}
-	// }, [id, showUnreadChat, count, onCreate]);
-
-	console.log(showUnreadChat, 'showUnreadChat');
 
 	useEffect(() => {
 		setId(data);
@@ -96,7 +78,7 @@ function List({
 		}
 
 		if (!loading && !channelList?.length) {
-			return <EmptyState />;
+			return <EmptyState isMobile />;
 		}
 
 		return channelList?.map((item) => (
@@ -136,7 +118,7 @@ function List({
 
 	return (
 		<div style={{ display: 'flex' }}>
-			<div className={cl`${styles.container} ${showMenu ? styles.show_menu : ''}`}>
+			<div className={styles.container}>
 
 				<ListHeader
 					status={status}
@@ -210,9 +192,6 @@ function List({
 						activeId={id}
 						sourceId={item?.source_id}
 						source={item?.source}
-						// onSeen={onCreate}
-						setShowMenu={setShowMenu}
-						isMobile={isMobile}
 						get={get}
 						personal_data={personal_data}
 					/>

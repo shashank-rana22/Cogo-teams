@@ -1,20 +1,21 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
-import styles from './styles.module.css';
-// import { Container, Heading, Content, Wrapper } from './styles';
 
-const EmptyState = ({
+import styles from './styles.module.css';
+
+function EmptyState({
 	isMobile = false,
 	showContent = {
-		heading: 'No Results Found!',
-		description: 'Looks like you do not have any records for this section',
+		heading     : 'No Results Found!',
+		description : 'Looks like you do not have any records for this section',
 	},
-}) => {
+}) {
 	return (
 		<div className={styles.container}>
 			<div>
 				<div className={styles.heading}>{showContent.heading}</div>
 
-				<div className={styles.heading} className="content">{showContent.description}</div>
+				<div className={cl` ${styles.heading} ${styles.content}`}>{showContent.description}</div>
 			</div>
 
 			{!isMobile ? (
@@ -31,6 +32,6 @@ const EmptyState = ({
 			) : null}
 		</div>
 	);
-};
+}
 
 export default EmptyState;
