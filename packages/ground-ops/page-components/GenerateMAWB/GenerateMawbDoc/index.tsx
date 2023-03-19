@@ -150,14 +150,16 @@ function GenerateMawb({
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 				footerImages.forEach((item, i) => {
 					pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-					pdf.addImage(
-						item,
-						'PNG',
-						0,
-						pdfHeight - 14,
-						pdfWidth,
-						4.5,
-					);
+					if (!whiteout) {
+						pdf.addImage(
+							item,
+							'PNG',
+							0,
+							pdfHeight - 14,
+							pdfWidth,
+							4.5,
+						);
+					}
 					if (i < 11) {
 						pdf.addPage();
 					}
