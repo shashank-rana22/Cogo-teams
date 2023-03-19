@@ -97,18 +97,16 @@
 
 	&.filled {
 		background: #EE3425;
-		/* svg {
-			path {
-				stroke: #ffffff;
-			}
-		} */
+		svg {
+			fill: white;
+		}
 	}
 }
 
 .list_container{
 	overflow: auto;
 	background: #ffffff;
-	height: 350px;
+	height: 367px;
 
 	.colored {
 		background: #F8F2E7;
@@ -126,19 +124,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-.menu_close_btn{
-	border-radius: 50%;
-	position: absolute;
-	top: 15px;
-	right: 5px;
-	fill: #fff;
-	cursor: pointer;
-
-	.core-ui-button-root {
-		padding: 8px 0;
-	}
+	color: #ff0000;
 }
 
 .initial{

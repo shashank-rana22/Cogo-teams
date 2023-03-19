@@ -69,9 +69,6 @@ function List({
 		}, 200);
 	}, [loading, filters, setFilters, page]);
 
-	console.log(MessageContentArr, 'MessageContentArr');
-	console.log(user_id, 'userrr');
-
 	const renderContent = () => {
 		if (loading && isEmpty(ListData)) {
 			return <ListLoader />;
@@ -157,9 +154,6 @@ function List({
 						>
 							{renderContent()}
 						</InfiniteScroll>
-						<div>
-							{renderContent()}
-						</div>
 
 						{loading && !isEmpty(ListData) && !showUnreadChat && (
 							<div className={styles.custom_loader}>Loading...</div>
