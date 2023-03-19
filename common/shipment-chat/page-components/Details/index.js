@@ -115,7 +115,7 @@ function Details({
 						<SendTo
 							ref={sendToRef}
 							data={data}
-						// setStakeHolderView={setStakeHolderView}
+							setStakeHolderView={setStakeHolderView}
 							isStakeholder={isStakeholder}
 						/>
 					) : (

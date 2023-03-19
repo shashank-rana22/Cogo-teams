@@ -67,15 +67,15 @@ function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
 		}
 	};
 
-	useMemo(() => {
-		const lastIndex = sortedMessageContentArr.length - 1;
+	// useMemo(() => {
+	// 	const lastIndex = sortedMessageContentArr.length - 1;
 
-		handleScroll(`shipment_chat_message_container${lastIndex}`);
-	}, [sortedMessageContentArr]);
+	// 	handleScroll(`shipment_chat_message_container${lastIndex}`);
+	// }, [sortedMessageContentArr]);
 
 	handleScroll('shipment_chat_message_container');
 
-	const allMessage = () => (
+	return (
 		<div className={styles.main_container}>
 			{isGettingShipment ? (
 				<MsgLoader />
@@ -92,12 +92,6 @@ function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
 				</>
 			)}
 		</div>
-	);
-
-	return (
-		<>
-			{allMessage()}
-		</>
 	);
 }
 

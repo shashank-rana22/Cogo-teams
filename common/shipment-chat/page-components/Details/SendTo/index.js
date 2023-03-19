@@ -123,10 +123,11 @@ function Sendto(
 			<div>{renderSuggestions()}</div>
 			<div className={styles.send_to_container}>
 				<div className={styles.send_text}>Sending to -</div>
+
 				<div className={styles.send_input}>
 					<Input
 						value={text}
-						onChange={(e) => handleMentions(e.target.value)}
+						onChange={(e) => handleMentions(e)}
 						placeholder="Type @"
 					/>
 				</div>
