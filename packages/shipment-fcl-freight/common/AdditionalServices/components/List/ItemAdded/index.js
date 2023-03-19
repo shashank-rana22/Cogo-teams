@@ -1,12 +1,12 @@
 // import { stakeholderCheck } from '@cogoport/bookings/commons/helpers/stakeholderCheck';
 import { cl, Popover } from '@cogoport/components';
-// import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import SupplierReallocation from '../../../../ShipmentDetails/commons/EditCancelService/SupplierReallocation';
 import CancelAdditionalService from '../../CancelAdditionalService';
+import SupplierReallocation from '../../SupplierReallocation';
 
 import styles from './styles.module.css';
 
@@ -25,7 +25,6 @@ function Item({
 	services = [],
 	isSeller,
 }) {
-	console.log('item', item);
 	const [show, setShow] = useState(false);
 	const [showCancel, setShowCancel] = useState(false);
 	const [showEdit, setShowEdit] = useState(false);
@@ -38,15 +37,16 @@ function Item({
 	// TEMPORARY
 	const role = 'SUPERADMIN';
 
-	const showCancelInfo =		serviceCancelAllowedBy.includes(item?.state)
+	const showCancelInfo = serviceCancelAllowedBy.includes(item?.state)
 		|| (!roleForCancel.includes(role)
 			&& item?.state === 'quoted_by_service_provider');
 
 	const showEditBtn = status?.status === 'approved';
 
 	const serviceData = services?.filter(
-		(service) => service?.service_type === item?.name,
+		(service) => service?.service_name === item?.name,
 	);
+
 	const price = isSeller ? item?.buy_price : item?.price;
 
 	return (
@@ -63,7 +63,7 @@ function Item({
 							<div className={styles.heading}>
 								Price:
 								&nbsp;
-								{/* {formatAmount({
+								{formatAmount({
 									amount   : price,
 									currency : item?.currency,
 									options  : {
@@ -71,7 +71,7 @@ function Item({
 										currencyDisplay       : 'code',
 										maximumFractionDigits : 2,
 									},
-								})} */}
+								})}
 							</div>
 						</div>
 					) : null}
@@ -80,7 +80,8 @@ function Item({
 				{showCancelInfo || showEditBtn ? (
 					<Popover
 						show={show}
-						theme="light-border"
+						placement="top"
+						render="top"
 						content={(
 							<div>
 								{showCancelInfo ? (
@@ -112,7 +113,6 @@ function Item({
 								) : null}
 							</div>
 						)}
-						interactive
 					>
 						<div>
 							<IcMOverflowDot
@@ -125,7 +125,9 @@ function Item({
 			</div>
 
 			<div className={styles.status}>
-				<div className={cl`${styles.tag}`}>{status?.statusName}</div>
+				<div className={cl`${styles.tag} ${styles[status.status]}`}>
+					{status?.statusName}
+				</div>
 				{actionButton}
 			</div>
 
@@ -137,7 +139,7 @@ function Item({
 					setShow={setShow}
 				/>
 			) : null}
-			{/*
+
 			{showEdit ? (
 				<SupplierReallocation
 					show={showEdit}
@@ -146,7 +148,7 @@ function Item({
 					refetchServices={refetch}
 					isAdditional
 				/>
-			) : null} */}
+			) : null}
 
 		</div>
 	);

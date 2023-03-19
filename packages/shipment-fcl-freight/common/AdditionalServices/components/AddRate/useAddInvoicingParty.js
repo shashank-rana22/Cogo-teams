@@ -1,16 +1,15 @@
 // import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-const useServiceUpdate = ({
-	item,
-	setAddRate,
-	refetch,
-	onCancel,
-	showIp,
-	setShowIp,
+const useAddInvoicingParty = ({
+	item = {},
+	setAddRate = () => {},
+	refetch = () => {},
+	onCancel = () => {},
+	showIp = false,
+	setShowIp = () => {},
 }) => {
 	// const geo = getGeoConstants();
 	const [remarks, setRemarks] = useState(null);
@@ -22,23 +21,28 @@ const useServiceUpdate = ({
 
 	const handleSubmit = async (data) => {
 		try {
-			await addRateApi.trigger({
+			const res = await trigger({
 				data: {
 					...data,
 					pending_task_id: showIp ? undefined : item?.pending_task_id,
 				},
 			});
-			setRemarks(null);
-			setAddRate(null);
-			if (setShowIp) {
-				setShowIp(false);
-			}
-			onCancel();
 
-			toast.success('Service Updated successfully');
-			refetch();
+			if (res.status === 200) {
+				Toast.success('Service Updated successfully');
+
+				if (showIp) {
+					setShowIp(false);
+				}
+				setRemarks(null);
+				setAddRate(null);
+
+				onCancel();
+
+				refetch();
+			}
 		} catch (err) {
-			toast.error(err?.data);
+			Toast.error(err?.data);
 		}
 	};
 
@@ -52,7 +56,7 @@ const useServiceUpdate = ({
 
 	const handleShipperRevision = () => {
 		if (!remarks) {
-			toast.error('Please provide revison remarks');
+			Toast.error('Please provide revison remarks');
 			return;
 		}
 		const payload = {
@@ -73,7 +77,7 @@ const useServiceUpdate = ({
 
 	const handleShipperSideCancel = () => {
 		if (!remarks) {
-			toast.error('Please provide cancellation remarks');
+			Toast.error('Please provide cancellation remarks');
 		}
 		const payload = {
 			id      : item.id,
@@ -85,7 +89,7 @@ const useServiceUpdate = ({
 
 	const handleSupplierCancel = () => {
 		if (!remarks) {
-			toast.error('Please provide cancellation remarks');
+			Toast.error('Please provide cancellation remarks');
 		}
 		const payload = {
 			id      : item.id,
@@ -114,7 +118,7 @@ const useServiceUpdate = ({
 
 	const handleInvoicingParty = (ba) => {
 		if (!ba) {
-			toast.error('Please select invoicing party');
+			Toast.error('Please select invoicing party');
 			return;
 		}
 
@@ -131,11 +135,13 @@ const useServiceUpdate = ({
 					is_sez                      : ba.is_sez,
 					business_name               : ba.business_name,
 					address                     : ba.address,
-					invoice_currency            : ba.invoice_currency || geo.country.currency.code,
+					invoice_currency            : ba.invoice_currency || 'INR',
+					// invoice_currency            : ba.invoice_currency || geo.country.currency.code,
 					organization_trade_party_id : ba.organization_trade_party_id,
 					registration_number         : ba.registration_number,
 				},
-				invoice_currency: ba.invoice_currency || geo.country.currency.code,
+				// invoice_currency: ba.invoice_currency || geo.country.currency.code,
+				invoice_currency: ba.invoice_currency || 'INR',
 			},
 		};
 
@@ -155,7 +161,7 @@ const useServiceUpdate = ({
 				onComplete();
 			}
 		} catch (err) {
-			toast.error(err?.data);
+			Toast.error(err?.data);
 		}
 	};
 
@@ -171,8 +177,8 @@ const useServiceUpdate = ({
 		updateBillingInfo,
 		remarks,
 		setRemarks,
-		loading: addRateApi.loading,
+		loading,
 	};
 };
 
-export default useServiceUpdate;
+export default useAddInvoicingParty;

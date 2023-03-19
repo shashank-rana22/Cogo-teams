@@ -2,9 +2,9 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-import { controls } from '../configurations/get-container-controls';
+import controls from '../configurations/get-container-controls';
 
-const useBlContainer = ({
+const useBlContainerMappings = ({
 	data = {},
 	shipment_data = {},
 	// setMappingModal = () => {},
@@ -73,10 +73,14 @@ const useBlContainer = ({
 
 	useEffect(() => {
 		(async () => {
-			if (shipment_data?.id) {
-				await containerDetailTrigger({
-					params: { filters: { shipment_id: shipment_data?.id } },
-				});
+			try {
+				if (shipment_data?.id) {
+					await containerDetailTrigger({
+						params: { filters: { shipment_id: shipment_data?.id } },
+					});
+				}
+			} catch (err) {
+				console.log(err);
 			}
 		})();
 	}, [containerDetailTrigger, shipment_data?.id]);
@@ -125,4 +129,4 @@ const useBlContainer = ({
 	};
 };
 
-export default useBlContainer;
+export default useBlContainerMappings;

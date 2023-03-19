@@ -15,7 +15,7 @@
 		margin: 22px 0px 0px 0px;
 	}
 	:hover {
-		border: 1px solid #5936f0;
+		border: 1px solid var(--color-accent-orange-2);
 	}
 }
 

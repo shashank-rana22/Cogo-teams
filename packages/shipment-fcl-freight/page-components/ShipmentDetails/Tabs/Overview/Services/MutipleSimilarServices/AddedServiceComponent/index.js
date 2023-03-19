@@ -19,8 +19,6 @@ function AddedServiceComponent({
 }) {
 	const [show, setShow] = useState(allSimilar === 1);
 
-	console.log('AddedServiceComponent', serviceData, allSimilar);
-
 	const {
 		id,
 		service_type,

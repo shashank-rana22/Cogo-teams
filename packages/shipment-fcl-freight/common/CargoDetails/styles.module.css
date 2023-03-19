@@ -10,15 +10,6 @@
 	height: fit-content;
 }
 
-.core-ui-button-root {
-	letter-spacing: 0px;
-	white-space: nowrap;
-}
-
-.core-ui-button-root:hover {
-	box-shadow: none;
-}
-
 .shipment_cargo_details_root {
 	justify-content: center;
 } 
@@ -28,4 +19,8 @@
 	flex-wrap: wrap;
 	white-space: nowrap;
 	overflow-x: auto;
+}
+
+.more_details_popover_text{
+	color: #F68B21;
 }

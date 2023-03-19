@@ -15,7 +15,7 @@
 	&.msg {
 		font-weight: 400;
 		font-size: 16px;
-		color: #f68b21;
+		color: var(--color-accent-orange-2);
 		text-align: center;
 		margin-bottom: 20px;
 	}

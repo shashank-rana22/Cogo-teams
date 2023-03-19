@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import useGetPermission from '../../../../hooks/useGetPermission';
+import AddIp from '../AddIp';
 import AddRate from '../AddRate';
 
 import AddService from './AddService';
@@ -29,7 +30,8 @@ function List({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const [addRate, setAddRate] = useState(false);
-	const [show, setShow] = useState(false);
+	const [showChargeCodes, setShowChargeCodes] = useState(false);
+	const [item, setItem] = useState(false);
 	const [showIp, setShowIp] = useState(false);
 
 	const { list: additionalServiceList, refetch } = useListAdditionalServices({
@@ -45,8 +47,7 @@ function List({
 		<div className={styles.container}>
 			<div className={styles.not_added}>
 				<Button
-					className="primary sm additional_services_btn"
-					onClick={() => setShow(true)}
+					onClick={() => setShowChargeCodes(true)}
 					disabled={shipment_data?.is_job_closed}
 				>
 					<div className={styles.add_icon}>+</div>
@@ -56,22 +57,23 @@ function List({
 
 			{!isEmpty(additionalServiceList) ? (
 				<div className={styles.added_services}>
-					{additionalServiceList?.map((item) => {
-						const status = getStaus({ item });
+					{additionalServiceList?.map((serviceListItem) => {
+						const status = getStaus({ serviceListItem });
 
 						return (
 							<ItemAdded
-								item={item}
+								item={serviceListItem}
 								status={status}
 								showIp={showIp}
 								actionButton={actions({
 									activeTab,
 									status,
-									item,
+									serviceListItem,
+									setShowIp,
 									setAddRate,
 									isShipper,
+									setItem,
 									isConditionMatches,
-									setShowIp,
 									shipment_data,
 								})}
 								refetch={handleRefetch}
@@ -93,7 +95,6 @@ function List({
 				</div>
 			) : null}
 
-			{/* {addRate && showIp ? (} */}
 			{addRate ? (
 				<Modal
 					size="xl"
@@ -103,26 +104,45 @@ function List({
 					placement="top"
 					onOuterClick={() => setAddRate(null)}
 				>
-					<Modal.Header title="ADD INVOICING PARTY" />
 					<Modal.Body>
 						<AddRate
-							item={addRate?.item || addRate}
+							item={item?.item || addRate}
 							shipment_data={shipment_data}
 							status={addRate?.status}
 							setAddRate={setAddRate}
-							refetch={refetch}
-							showIp={showIp}
-							setShowIp={setShowIp}
 						/>
 					</Modal.Body>
 				</Modal>
 			) : null}
 
-			{show ? (
+			{showIp ? (
 				<Modal
 					size="xl"
-					show={show}
-					onClose={() => setShow(false)}
+					show={showIp}
+					className={styles.ip_modal_container}
+					onClose={() => setShowIp(null)}
+					closable={false}
+					placement="top"
+					onOuterClick={() => setShowIp(null)}
+				>
+					<Modal.Header title="ADD INVOICING PARTY" />
+					<Modal.Body>
+						<AddIp
+							shipment_data={shipment_data}
+							setShowIp={setShowIp}
+							showIp={showIp}
+							item={item?.serviceListItem}
+						/>
+					</Modal.Body>
+				</Modal>
+
+			) : null}
+
+			{showChargeCodes ? (
+				<Modal
+					size="xl"
+					show={showChargeCodes}
+					onClose={() => setShowChargeCodes(false)}
 					placement="top"
 					className={styles.modal_container}
 				>
@@ -133,8 +153,8 @@ function List({
 							services={services}
 							isSeller={isSeller}
 							refetch={refetch}
-							show={show}
-							setShow={setShow}
+							show={showChargeCodes}
+							setShow={setShowChargeCodes}
 						/>
 					</Modal.Body>
 				</Modal>

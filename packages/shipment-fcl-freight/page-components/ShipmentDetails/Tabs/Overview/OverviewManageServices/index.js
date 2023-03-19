@@ -31,7 +31,6 @@ function OverviewManageServices() {
 			) : null}
 
 			<div className={styles.line} />
-
 			<AdditionalServiceList
 				services={servicesList}
 				refetchServices={refetchServices}

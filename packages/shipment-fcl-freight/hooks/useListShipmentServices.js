@@ -24,6 +24,7 @@ function useListShipmentServices({ shipment_data }) {
 							shipment_id        : shipment_data?.id,
 							additional_methods : ['booking_requirement', 'stakeholder', 'service_objects'],
 						},
+						additional_methods: ['service_objects', 'stakeholder'],
 					},
 				});
 				if (!res.hasError) {
