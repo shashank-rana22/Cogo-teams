@@ -52,6 +52,8 @@ const footerImages = [
 	'https://cogoport-testing.sgp1.digitaloceanspaces.com/392325f9bce20900c697414a06a8c2b1/copy_12.png',
 ];
 
+const backPage = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/3655f8ae312e5307f166cbf187069cde/back.jpg';
+
 function GenerateMawb({
 	taskItem = {},
 	formData = {},
@@ -141,7 +143,7 @@ function GenerateMawb({
 		setSaveDocument(false);
 	};
 
-	const handleView = async () => {
+	const handleView = (download24) => {
 		if (taskItem.documentState === 'document_accepted') {
 			html2canvas(document.getElementById('mawb')).then((canvas) => {
 				const imgData = canvas.toDataURL('image/png');
@@ -158,6 +160,18 @@ function GenerateMawb({
 							pdfHeight - 14,
 							pdfWidth,
 							4.5,
+						);
+					}
+
+					if (download24) {
+						pdf.addPage();
+						pdf.addImage(
+							backPage,
+							'PNG',
+							0,
+							0,
+							pdfWidth,
+							pdfHeight,
 						);
 					}
 					if (i < 11) {
@@ -206,17 +220,29 @@ function GenerateMawb({
 				>
 					<div style={{ marginRight: '36px', display: 'flex', alignItems: 'center' }}>
 						{taskItem.documentState === 'document_accepted' && (
-							<Checkbox
-								label="Whiteout"
-								value={whiteout}
-								onChange={() => setWhiteout((p) => !p)}
-							/>
+							<div className={styles.flex} style={{ alignItems: 'center', margin: '0 8px' }}>
+								<Checkbox
+									label="Whiteout"
+									value={whiteout}
+									onChange={() => setWhiteout((p) => !p)}
+								/>
+								<Button
+									className="primary md"
+									onClick={() => {
+										setSaveDocument(true);
+										handleView(true);
+									}}
+									disabled={saveDocument || whiteout}
+								>
+									Download 24 Copies
+								</Button>
+							</div>
 						)}
 						<Button
 							className="primary md"
 							onClick={() => {
 								setSaveDocument(true);
-								handleView();
+								handleView(false);
 							}}
 							disabled={saveDocument}
 						>
