@@ -235,5 +235,5 @@ export const DOCUMENT_FILTERS_MAPPING = [
 
 export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/prod_cogo_one.apk';
 
-export const PAGE_LIMIT = 40;
+export const PAGE_LIMIT = 50;
 export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
