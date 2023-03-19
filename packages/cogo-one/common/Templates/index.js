@@ -1,5 +1,6 @@
 import { cl, Input, Button, Placeholder, Pill } from '@cogoport/components';
 import { useForm, TextAreaController, InputController } from '@cogoport/forms';
+import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -19,6 +20,8 @@ function Templates({
 	setOpenCreateReply = () => {},
 	data = {},
 	type = '',
+	dialNumber = '',
+	setDialNumber = () => {},
 }) {
 	const {
 		sendCommunicationTemplate = () => {},
@@ -32,7 +35,7 @@ function Templates({
 	const { userRoleIds } = useSelector(({ profile }) => ({
 		userRoleIds: profile.partner?.user_role_ids || [],
 	}));
-	const isDefaultOpen = type === 'defaultOpen';
+	const isDefaultOpen = type === 'new_whatsapp_message';
 
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole))
         || false;
@@ -111,9 +114,22 @@ function Templates({
 			<div className={styles.messages_container}>
 				<div>
 					{isDefaultOpen && (
-						<div className={styles.template_heading}>
-							<div>Select a template</div>
-						</div>
+						<>
+							<div className={styles.wrap_heading}>
+								<div>Enter mobile number</div>
+							</div>
+							<div className={styles.wrap_mobile_number}>
+								<SelectMobileNumber
+									value={dialNumber}
+									onChange={(val) => setDialNumber(val)}
+									inputType="number"
+									placeholder="Enter number"
+								/>
+							</div>
+							<div className={styles.template_heading}>
+								<div>Select a template</div>
+							</div>
+						</>
 					)}
 					<div className={styles.container}>
 						<Input
