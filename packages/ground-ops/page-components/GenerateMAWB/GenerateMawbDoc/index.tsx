@@ -234,7 +234,7 @@ function GenerateMawb({
 									}}
 									disabled={saveDocument || whiteout}
 								>
-									Download 24 Copies
+									Download 12 Copies with T&C
 								</Button>
 							</div>
 						)}
