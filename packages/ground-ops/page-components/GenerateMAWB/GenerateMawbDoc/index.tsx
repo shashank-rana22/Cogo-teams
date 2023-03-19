@@ -38,21 +38,21 @@ const downloadButton = {
 };
 
 const footerImages = [
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/9bf65ee5f87f383fd612574809c21b85/original_1.png',
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/55426b1530eb9c0d272e491af27f16da/original_2.png',
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/f650b721142c5de616a36381e7723014/original_3.png',
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/cf352e6c9dcf0a0eed8a58e7a55fb0bd/copy_4.png',
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/0069e2c6d0daa0ed87814689b4a8673f/copy_5.png',
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/636788e34c112b953e029cea9806d5b9/copy_6.png',
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/c899bf071ae1c48a23264dd8d5052bfc/copy_7.png',
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/0d9c8b964599995b33c5356d2428710c/copy_8.png',
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/64981914a969cd4fe6080f7a7c5436b6/copy_9.png',
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/a3edb2c53a522535daf635828404fcd2/copy_10.png',
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/3b928e4b64bef2ad32d016126d601441/copy_11.png',
-	'https://cogoport-testing.sgp1.digitaloceanspaces.com/392325f9bce20900c697414a06a8c2b1/copy_12.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/30186a4d8094f78fffba0aeac1847cd0/original_1.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/34f4ab91d2f08e432f5e99cec869e07b/original_2.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/1fcd0257b396ea304a7aebfeaceaee76/original_3.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/1c5be0fc713882e9b85303b62d3f1ac8/copy_4.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/3a65756e817610ddf75769c89145eb84/copy_5.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/84eaddd1db3e444b25d1ce0066f19581/copy_6.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/ca3a74c08dd2aabcba392de64cd04ed6/copy_7.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/c56cba1039292819dd6d700d5d8f5d07/copy_8.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/5b6c3ea3e1a28d1c3060f835ad206e99/copy_9.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/94fec99404e921d7a1de47c30a4e5afa/copy_10.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/daabebf1b3ade5afb890dbc79ce3b9eb/copy_11.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/7c2328f811865365b3c50d0fc23849fc/copy_12.png',
 ];
 
-const backPage = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/3655f8ae312e5307f166cbf187069cde/back.jpg';
+const backPage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/6cb104f946c85403b742cc07fd6e63b1/back.jpg';
 
 function GenerateMawb({
 	taskItem = {},
@@ -153,26 +153,12 @@ function GenerateMawb({
 				footerImages.forEach((item, i) => {
 					pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					if (!whiteout) {
-						pdf.addImage(
-							item,
-							'jpeg',
-							0,
-							pdfHeight - 14,
-							pdfWidth,
-							4.5,
-						);
+						pdf.addImage(item, 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
 					}
 
 					if (download24) {
 						pdf.addPage();
-						pdf.addImage(
-							backPage,
-							'jpeg',
-							0,
-							0,
-							pdfWidth,
-							pdfHeight,
-						);
+						pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					}
 					if (i < 11) {
 						pdf.addPage();
@@ -184,10 +170,9 @@ function GenerateMawb({
 			html2canvas(document.getElementById('mawb')).then((canvas) => {
 				const imgData = canvas.toDataURL('image/jpeg');
 				const pdf = new JsPDF();
-				const imgProps = pdf.getImageProperties(canvas);
 				const pdfWidth = pdf.internal.pageSize.getWidth();
-				const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-				pdf.addImage(imgData, 'jpeg', 0, -5, pdfWidth, pdfHeight);
+				const pdfHeight = pdf.internal.pageSize.getHeight();
+				pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 				pdf.save(taskItem.awbNumber);
 			});
 		}
