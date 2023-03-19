@@ -20,11 +20,7 @@ const useCreateMessage = ({
 		method : 'POST',
 	}, { manual: true });
 
-	console.log(stakeHolderView, 'stakeeee');
-
 	const sh = stakeHolderView.split(' ');
-
-	console.log(sh, 'sh');
 	const sh_arr = (sh || []).map((item) => item.replace('@', ''));
 	const condition_arr = sh_arr.length && sh_arr[0] !== '' ? [...sh_arr] : [];
 	const filtered_arr = (condition_arr || []).map((item) => {

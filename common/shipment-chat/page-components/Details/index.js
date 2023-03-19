@@ -1,4 +1,4 @@
-import { Textarea, Upload, Popover } from '@cogoport/components';
+import { Textarea, Popover } from '@cogoport/components';
 import { IcMSend, IcMAttach, IcMDocument } from '@cogoport/icons-react';
 import React, { useRef, useState } from 'react';
 

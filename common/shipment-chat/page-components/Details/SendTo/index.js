@@ -5,7 +5,6 @@ import React, {
 	useEffect,
 	forwardRef,
 	useImperativeHandle,
-	useCallback,
 } from 'react';
 
 import stakeholderMappings from './stakeholder-mappings';
@@ -15,14 +14,15 @@ function Sendto(
 	{ data, setStakeHolderView = () => { }, isStakeholder = true },
 	ref,
 ) {
-	const stakeholder_type = isStakeholder
-		? data?.shipment_data?.stakeholder_types?.[0]
-		: 'default';
-	const stakeholders = stakeholderMappings[stakeholder_type];
 	const [suggestions, setSuggestions] = useState([]);
 	const [isTypingName, setIsTypingName] = useState(false);
 	const [userName, setUserName] = useState({});
 	const [text, setText] = useState('');
+
+	const stakeholder_type = isStakeholder
+		? data?.shipment_data?.stakeholder_types?.[0] : 'default';
+
+	const stakeholders = stakeholderMappings[stakeholder_type];
 
 	const cond = (stakeholders || []).filter((item) => {
 		if (text.includes(item)) {
@@ -31,34 +31,9 @@ function Sendto(
 		return item;
 	});
 
-	// const showSuggestions = () => {
-	// 	let suggestion = [];
-
-	// 	if (userName.length > 0) {
-	// 		const updatedUserName = userName.replace(/\\/g, '\\\\');
-	// 		const regex = new RegExp(`^${updatedUserName}`, 'i');
-	// 		suggestion = cond.sort().filter((v) => regex.test(v));
-	// 		setSuggestions(suggestion);
-	// 	} else {
-	// 		setSuggestions([]);
-	// 	}
-	// };
-
-	const showSuggestions = useCallback(() => {
-		let suggestion = [];
-
-		if (userName.length > 0) {
-			const updatedUserName = userName.replace(/\\/g, '\\\\');
-			const regex = new RegExp(`^${updatedUserName}`, 'i');
-			suggestion = cond.sort().filter((v) => regex.test(v));
-			setSuggestions(suggestion);
-		} else {
-			setSuggestions([]);
-		}
-	}, [userName, cond]);
-
 	const handleMentions = (value) => {
 		const lastChar = value.split('')[value.length - 1];
+
 		if (lastChar === ' ' || value === '') {
 			setSuggestions([]);
 			setIsTypingName(false);
@@ -77,6 +52,24 @@ function Sendto(
 
 		setText(value);
 	};
+
+	useEffect(() => {
+		if (userName.length > 0) {
+			const updatedUserName = userName.replace(/\\/g, '\\\\');
+			const regex = new RegExp(`^${updatedUserName}`, 'i');
+			const suggestion = cond.sort().filter((v) => regex.test(v));
+			setSuggestions(suggestion);
+		}
+	}, [userName, cond]);
+
+	useEffect(() => {
+		setStakeHolderView(text);
+	}, [text, setStakeHolderView]);
+
+	useImperativeHandle(ref, () => ({
+		setText,
+		stakeholders,
+	}));
 
 	const selectedText = (value) => {
 		setSuggestions([]);
@@ -104,19 +97,6 @@ function Sendto(
 			</div>
 		);
 	};
-
-	// useEffect(() => {
-	// 	showSuggestions();
-	// }, [userName, showSuggestions]);
-
-	useEffect(() => {
-		setStakeHolderView(text);
-	}, [text, setStakeHolderView]);
-
-	useImperativeHandle(ref, () => ({
-		setText,
-		stakeholders,
-	}));
 
 	return (
 		<>
