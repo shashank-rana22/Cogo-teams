@@ -1,3 +1,4 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import {
 	collectionGroup,
@@ -5,7 +6,7 @@ import {
 	updateDoc,
 	doc,
 	query,
-	limit, where, getDocs,
+	limit, where, getDocs, orderBy,
 } from 'firebase/firestore';
 import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 
@@ -18,7 +19,10 @@ const useListChats = ({
 	userId,
 	isomniChannelAdmin,
 	showBotMessages = false,
+	searchValue = '',
 }) => {
+	const { query:searchQuery, debounceQuery } = useDebounceQuery();
+
 	const {
 		query: { assigned_chat = '' },
 	} = useRouter();
@@ -43,7 +47,9 @@ const useListChats = ({
 			snapshotListener.current = null;
 		}
 	};
-
+	useEffect(() => {
+		debounceQuery(searchValue);
+	}, [debounceQuery, searchValue]);
 	useEffect(() => {
 		if (assigned_chat) {
 			setActiveCardId(assigned_chat);
@@ -88,11 +94,16 @@ const useListChats = ({
 	);
 
 	const mountSnapShot = useCallback(() => {
+		const queryForSearch = searchQuery
+			? [where('user_name', '>=', searchQuery),
+				where('user_name', '<=', `${searchQuery}\\uf8ff`), orderBy('user_name', 'asc')] : [];
+
 		setLoading(true);
 		setListData({});
 		snapshotCleaner();
 		const newChatsQuery = query(
 			omniChannelCollection,
+			...queryForSearch,
 			...omniChannelQuery,
 			limit(PAGE_LIMIT),
 		);
@@ -116,7 +127,7 @@ const useListChats = ({
 		return () => {
 			snapshotCleaner();
 		};
-	}, [omniChannelCollection, omniChannelQuery]);
+	}, [omniChannelCollection, omniChannelQuery, searchQuery]);
 
 	const getPrevChats = useCallback(async () => {
 		const prevChatsQuery = query(

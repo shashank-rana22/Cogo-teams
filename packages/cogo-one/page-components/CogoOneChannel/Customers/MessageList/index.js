@@ -32,14 +32,14 @@ function MessageList({
 }) {
 	const [modalType, setModalType] = useState(false);
 
-	function getShowChat({ user_name }) {
-		if (searchValue) {
-			const searchName = user_name?.toLowerCase();
-			return searchName?.includes(searchValue?.toLowerCase());
-		}
+	// function getShowChat({ user_name }) {
+	// 	if (searchValue) {
+	// 		const searchName = user_name?.toLowerCase();
+	// 		return searchName?.includes(searchValue?.toLowerCase());
+	// 	}
 
-		return true;
-	}
+	// 	return true;
+	// }
 
 	function lastMessagePreview(previewData = '') {
 		return (
@@ -124,77 +124,77 @@ function MessageList({
 							return startCase(organization_name);
 						};
 
-						const show = getShowChat({ user_name, item, appliedFilters, searchValue });
+						// const show = getShowChat({ user_name, item, appliedFilters, searchValue });
 
 						return (
-							show && (
-								<div
-									key={item?.id}
-									role="presentation"
-									className={cl`
+						// show && (
+							<div
+								key={item?.id}
+								role="presentation"
+								className={cl`
 												${styles.card_container} 
 												${checkActiveCard ? styles.active_card : ''} 
 												`}
-									onClick={() => setActiveMessage(item)}
-								>
-									<div className={styles.card}>
-										<div className={styles.user_information}>
-											<div className={styles.avatar_container}>
-												<UserAvatar
-													type={item.channel_type}
-													imageSource={item.image}
-												/>
-												<div className={styles.user_details}>
-													<Tooltip content={startCase(user_name) || 'User'} placement="top">
-														<div className={styles.user_name}>
-															{startCase(user_name) || 'User'}
-														</div>
-													</Tooltip>
-
-													<div className={styles.organisation}>
-														{showOrganization()}
+								onClick={() => setActiveMessage(item)}
+							>
+								<div className={styles.card}>
+									<div className={styles.user_information}>
+										<div className={styles.avatar_container}>
+											<UserAvatar
+												type={item.channel_type}
+												imageSource={item.image}
+											/>
+											<div className={styles.user_details}>
+												<Tooltip content={startCase(user_name) || 'User'} placement="top">
+													<div className={styles.user_name}>
+														{startCase(user_name) || 'User'}
 													</div>
+												</Tooltip>
+
+												<div className={styles.organisation}>
+													{showOrganization()}
 												</div>
 											</div>
+										</div>
 
-											<div className={styles.user_activity}>
-												<div className={styles.tags_conatiner}>
-													{!isEmpty(chat_status) && (
-														<div
-															className={cl`
+										<div className={styles.user_activity}>
+											<div className={styles.tags_conatiner}>
+												{!isEmpty(chat_status) && (
+													<div
+														className={cl`
 																${styles.tags}
 																${chat_status === 'warning' ? styles.warning : ''}
 																${chat_status === 'escalated' ? styles.escalated : ''}
 															`}
-														>
-															{startCase(chat_status)}
-														</div>
-													)}
-												</div>
+													>
+														{startCase(chat_status)}
+													</div>
+												)}
+											</div>
 
-												<div className={styles.activity_duration}>
-													{dateTimeConverter(
-														Date.now() - Number(lastActive),
-														Number(lastActive),
-													)?.renderTime}
-												</div>
+											<div className={styles.activity_duration}>
+												{dateTimeConverter(
+													Date.now() - Number(lastActive),
+													Number(lastActive),
+												)?.renderTime}
 											</div>
 										</div>
+									</div>
 
-										<div className={styles.content_div}>
-											{lastMessagePreview(item?.last_message || '')}
-											{item.new_message_count > 0 && (
-												<div className={styles.new_message_count}>
-													{item.new_message_count > 100 ? '99+' : (
-														item.new_message_count
-													)}
-												</div>
-											)}
-										</div>
+									<div className={styles.content_div}>
+										{lastMessagePreview(item?.last_message || '')}
+										{item.new_message_count > 0 && (
+											<div className={styles.new_message_count}>
+												{item.new_message_count > 100 ? '99+' : (
+													item.new_message_count
+												)}
+											</div>
+										)}
 									</div>
 								</div>
-							)
+							</div>
 						);
+						// );
 					})}
 					{messagesLoading && <LoadingState />}
 				</div>

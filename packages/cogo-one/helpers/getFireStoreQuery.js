@@ -1,7 +1,6 @@
 import { orderBy, where } from 'firebase/firestore';
 
 function getFireStoreQuery({
-
 	userId,
 	appliedFilters,
 	isomniChannelAdmin = false,

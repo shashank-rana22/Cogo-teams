@@ -71,6 +71,7 @@ function CogoOne() {
 		userId,
 		isomniChannelAdmin,
 		showBotMessages,
+		searchValue,
 	});
 	const { messagesList = [], unReadChatsCount } = listData;
 
