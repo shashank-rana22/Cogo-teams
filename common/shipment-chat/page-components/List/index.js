@@ -1,8 +1,7 @@
-import { Input, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMSearchlight, IcMUnread } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -25,7 +24,6 @@ function List({
 	setSeenLoading = () => { },
 }) {
 	const refOuter = useRef(null);
-	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [id, setId] = useState();
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
 	const [status, setStatus] = useState('active');
@@ -35,31 +33,35 @@ function List({
 		loading, refetch,
 	} = useGetShipmentChatList({ status });
 
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	const defaultChannel = ListData?.find((obj) => obj?.source_id === shipment_data?.id);
 	const data = defaultChannel ? defaultChannel?.id : ListData[0]?.id;
 
 	const { loading: seenLoading } = useUpdateSeen({ channel_id: id, showUnreadChat });
 	const { get, personal_data } = useGetChannel({ channel_id: id });
 
-	useEffect(() => {
-		setSeenLoading(seenLoading);
-	}, [seenLoading, setSeenLoading]);
-
-	useEffect(() => {
-		setId(data);
-	}, [data]);
-
 	let unSeenMsg = [];
 	unSeenMsg = MessageContentArr.filter((item) => item[user_id]);
-
 	const unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
+	const channelList = showUnreadChat ? unreadDataList : ListData;
 
 	const handleClick = () => {
 		refOuter.current.scrollTop = 0;
 		setShowUnreadChat(!showUnreadChat);
 	};
 
-	const channelList = showUnreadChat ? unreadDataList : ListData;
+	useEffect(() => {
+		setId(data);
+	}, [data]);
+
+	useEffect(() => {
+		setSeenLoading(seenLoading);
+	}, [seenLoading, setSeenLoading]);
+
+	useEffect(() => {
+		refOuter.current.scrollTop = 0;
+		setFilters({ page: 1 });
+	}, [status, setFilters]);
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
@@ -108,11 +110,6 @@ function List({
 		));
 	};
 
-	useEffect(() => {
-		setFilters({ page: 1 });
-		refOuter.current.scrollTop = 0;
-	}, [status, setFilters]);
-
 	return (
 		<div style={{ display: 'flex' }}>
 			<div className={styles.container}>
@@ -121,51 +118,33 @@ function List({
 					status={status}
 					setStatus={setStatus}
 					setShow={setShow}
+					filters={filters}
+					setFilters={setFilters}
+					showUnreadChat={showUnreadChat}
+					handleClick={handleClick}
 				/>
 
-				<div className={styles.sub_container}>
-					<div className={styles.search}>
-						<Input
-							value={filters?.q}
-							placeholder="Search"
-							onChange={(e) => setFilters({
-								...(filters || {}),
-								q: e,
-							})}
-							suffix={<IcMSearchlight />}
-						/>
-						<div
-							className={cl` ${styles.filter_box} ${showUnreadChat ? styles.filled : ''}`}
-							role="button"
-							tabIndex={0}
-							onClick={() => handleClick()}
-						>
-							<IcMUnread />
-						</div>
-					</div>
+				<div className={styles.list_container} ref={refOuter}>
+					<InfiniteScroll
+						pageStart={1}
+						initialLoad={false}
+						loadMore={!showUnreadChat && loadMore}
+						hasMore={page < total_page}
+						useWindow={false}
+					>
+						{renderContent()}
+					</InfiniteScroll>
 
-					<div className={styles.list_container} ref={refOuter}>
-						<InfiniteScroll
-							pageStart={1}
-							initialLoad={false}
-							loadMore={!showUnreadChat && loadMore}
-							hasMore={page < total_page}
-							useWindow={false}
-						>
-							{renderContent()}
-						</InfiniteScroll>
-
-						{loading && !isEmpty(ListData) && !showUnreadChat && (
-							<div className={styles.custom_loader}>Loading...</div>
-						)}
-					</div>
-
-					{/* <CreateChannel refetch={refetch} /> */}
+					{loading && !isEmpty(ListData) && !showUnreadChat && (
+						<div className={styles.custom_loader}>Loading...</div>
+					)}
 				</div>
+
+				{/* <CreateChannel refetch={refetch} /> */}
 			</div>
 
 			{!id ? (
-				<div className={styles.initial}>
+				<div className={styles.initial_state}>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg"
 						alt="empty"
