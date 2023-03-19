@@ -138,10 +138,9 @@ function List({
 							suffix={<IcMSearchlight />}
 						/>
 						<div
-							className={styles.filter_box}
+							className={cl` ${styles.filter_box} ${showUnreadChat ? styles.filled : ''}`}
 							role="button"
 							tabIndex={0}
-							// className={showUnreadChat ? 'filled' : ' '}
 							onClick={() => handleClick()}
 						>
 							<IcMUnread />

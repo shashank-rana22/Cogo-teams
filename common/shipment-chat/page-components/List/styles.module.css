@@ -90,16 +90,18 @@
 	justify-content: center;
 	padding: 7px;
 	cursor: pointer;
+
 	&:hover {
-		box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+		box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.2);
 	}
+
 	&.filled {
-		background: #393f70;
-		svg {
+		background: #EE3425;
+		/* svg {
 			path {
 				stroke: #ffffff;
 			}
-		}
+		} */
 	}
 }
 
