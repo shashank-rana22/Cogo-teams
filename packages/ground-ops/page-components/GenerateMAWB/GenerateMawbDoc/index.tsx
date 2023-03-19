@@ -145,19 +145,18 @@ function GenerateMawb({
 		if (taskItem.documentState === 'document_accepted') {
 			html2canvas(document.getElementById('mawb')).then((canvas) => {
 				const imgData = canvas.toDataURL('image/png');
-				const pdf = new JsPDF({ orientation: 'portrait', unit: 'pt' });
-				const imgProps = pdf.getImageProperties(canvas);
+				const pdf = new JsPDF();
 				const pdfWidth = pdf.internal.pageSize.getWidth();
-				const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+				const pdfHeight = pdf.internal.pageSize.getHeight();
 				footerImages.forEach((item, i) => {
 					pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
 					pdf.addImage(
 						item,
 						'PNG',
 						0,
-						pdfHeight - 25,
+						pdfHeight - 14,
 						pdfWidth,
-						13,
+						4.5,
 					);
 					if (i < 11) {
 						pdf.addPage();
@@ -196,7 +195,7 @@ function GenerateMawb({
 	};
 
 	return (
-		<div className={styles.flex_col} style={{ marginTop: '20px' }}>
+		<div className={styles.flex_col}>
 
 			{viewDoc
 			&& (
@@ -232,7 +231,8 @@ function GenerateMawb({
 				style={{
 					flex       : '1',
 					width      : '100%',
-					padding    : '20px 40px',
+					height     : '100%',
+					padding    : '40px 40px',
 					opacity    : 1,
 					background : '#fff',
 				}}
