@@ -42,25 +42,26 @@ function List({
 	const defaultChannel = ListData?.find((obj) => obj?.source_id === shipment_data?.id);
 	const data = defaultChannel ? defaultChannel?.id : ListData[0]?.id;
 
-	const { onCreate, loading: seenLoading } = useUpdateSeen({ channel_id: id });
-
+	const { loading: seenLoading } = useUpdateSeen({ channel_id: id });
 	const { get, personal_data } = useGetChannel({ channel_id: id });
 
 	useEffect(() => {
 		setSeenLoading(seenLoading);
 	}, [seenLoading, setSeenLoading]);
 
-	useEffect(() => {
-		if (id && !showUnreadChat) {
-			onCreate(id);
-		} else if (showUnreadChat && count === 0) {
-			setCount(1);
-			// useStoreId(id);
-		} else {
-			setCount(0);
-			// onCreate(storeId);
-		}
-	}, [id, showUnreadChat, count, onCreate]);
+	// useEffect(() => {
+	// 	if (id && !showUnreadChat) {
+	// 		onCreate(id);
+	// 	} else if (showUnreadChat && count === 0) {
+	// 		setCount(1);
+	// 		// useStoreId(id);
+	// 	} else {
+	// 		setCount(0);
+	// 		// onCreate(storeId);
+	// 	}
+	// }, [id, showUnreadChat, count, onCreate]);
+
+	console.log(showUnreadChat, 'showUnreadChat');
 
 	useEffect(() => {
 		setId(data);
@@ -86,13 +87,16 @@ function List({
 		}, 200);
 	}, [loading, filters, setFilters, page]);
 
+	console.log(MessageContentArr, 'MessageContentArr');
+	console.log(user_id, 'userrr');
+
 	const renderContent = () => {
 		if (loading && isEmpty(ListData)) {
 			return <ListLoader />;
 		}
 
 		if (!loading && !channelList?.length) {
-			return <EmptyState isMobile />;
+			return <EmptyState />;
 		}
 
 		return channelList?.map((item) => (
@@ -206,7 +210,7 @@ function List({
 						activeId={id}
 						sourceId={item?.source_id}
 						source={item?.source}
-						onSeen={onCreate}
+						// onSeen={onCreate}
 						setShowMenu={setShowMenu}
 						isMobile={isMobile}
 						get={get}

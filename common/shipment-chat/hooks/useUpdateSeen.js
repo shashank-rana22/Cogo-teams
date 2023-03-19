@@ -1,19 +1,19 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
-const useUpdateSeen = ({ refetch = () => { }, channel_id }) => {
-	const [trigger] = useRequest({
+const useUpdateSeen = ({ channel_id }) => {
+	const [{ loading }, trigger] = useRequest({
 		url    : 'update_chat_channel_seen',
 		method : 'POST',
 	}, { manual: true });
 
 	const onCreate = useCallback(() => {
-		(async (id) => {
+		(async () => {
 			try {
 				await trigger({
 					data: {
-						id: id.length ? id : channel_id,
+						id: channel_id,
 					},
 				});
 			} catch (err) {
@@ -22,9 +22,15 @@ const useUpdateSeen = ({ refetch = () => { }, channel_id }) => {
 		})();
 	}, [trigger, channel_id]);
 
+	useEffect(() => {
+		if (channel_id) {
+			onCreate();
+		}
+	}, [channel_id, onCreate]);
+
 	return {
 		onCreate,
-		// loading: updateShipmentAPI.loading,
+		loading,
 	};
 };
 

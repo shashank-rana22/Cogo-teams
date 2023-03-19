@@ -183,17 +183,17 @@
 }
 
 .circle {
-	border-radius: 50%;
 	width: 20px;
-	height: 20px;
-	background: #f06d6d;
+	height: 18px;
+	background: #EE3425;
+	border-radius: 5px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: #fff;
-	font-weight: 600;
+	color: #FEF3E9;
+	font-weight: 700;
 	font-size: 12px;
-	padding: 4px;
+	padding: 0 2px;
 }
 
 .channels_type {
