@@ -28,13 +28,11 @@ function List({
 	const refOuter = useRef(null);
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [count, setCount] = useState(0);
-	const [storeId, useStoreId] = useState();
+	// const [storeId, useStoreId] = useState();
 	const [id, setId] = useState();
 	const [showMenu, setShowMenu] = useState(false);
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
 	const [status, setStatus] = useState('active');
-
-	console.log(GLOBAL_CONSTANTS, 'GLOBAL_CONSTANTS');
 
 	const {
 		ListData, page, total_page, filters, setFilters,
@@ -60,9 +58,9 @@ function List({
 			// useStoreId(id);
 		} else {
 			setCount(0);
-			onCreate(storeId);
+			// onCreate(storeId);
 		}
-	}, [id, showUnreadChat, count, storeId, onCreate]);
+	}, [id, showUnreadChat, count, onCreate]);
 
 	useEffect(() => {
 		setId(data);
@@ -78,8 +76,6 @@ function List({
 		setShowUnreadChat(!showUnreadChat);
 	};
 
-	console.log(refOuter, 'refOuter');
-
 	const channelList = showUnreadChat ? unreadDataList : ListData;
 
 	const loadMore = useCallback(() => {
@@ -89,8 +85,6 @@ function List({
 			}
 		}, 200);
 	}, [loading, filters, setFilters, page]);
-
-	console.log(filters, 'qqqqqqq');
 
 	const renderContent = () => {
 		if (loading && isEmpty(ListData)) {
