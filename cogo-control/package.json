@@ -31,6 +31,7 @@
     "@cogoport/navigation-configs": "workspace:0.1.0",
     "@cogoport/next": "workspace:0.1.0",
     "@cogoport/request": "workspace:0.1.0",
+    "@cogoport/globalization" : "workspace:^0.0.1",
     "@cogoport/store": "workspace:0.1.0",
     "@cogoport/supply-dashboards": "workspace:0.1.0",
     "@cogoport/translate": "workspace:0.1.0",
