@@ -146,16 +146,16 @@ function GenerateMawb({
 	const handleView = (download24) => {
 		if (taskItem.documentState === 'document_accepted') {
 			html2canvas(document.getElementById('mawb')).then((canvas) => {
-				const imgData = canvas.toDataURL('image/png');
+				const imgData = canvas.toDataURL('image/jpeg');
 				const pdf = new JsPDF();
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 				footerImages.forEach((item, i) => {
-					pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+					pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					if (!whiteout) {
 						pdf.addImage(
 							item,
-							'PNG',
+							'jpeg',
 							0,
 							pdfHeight - 14,
 							pdfWidth,
@@ -167,7 +167,7 @@ function GenerateMawb({
 						pdf.addPage();
 						pdf.addImage(
 							backPage,
-							'PNG',
+							'jpeg',
 							0,
 							0,
 							pdfWidth,
@@ -182,12 +182,12 @@ function GenerateMawb({
 			});
 		} else {
 			html2canvas(document.getElementById('mawb')).then((canvas) => {
-				const imgData = canvas.toDataURL('image/png');
+				const imgData = canvas.toDataURL('image/jpeg');
 				const pdf = new JsPDF();
 				const imgProps = pdf.getImageProperties(canvas);
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-				pdf.addImage(imgData, 'PNG', 0, -5, pdfWidth, pdfHeight);
+				pdf.addImage(imgData, 'jpeg', 0, -5, pdfWidth, pdfHeight);
 				pdf.save(taskItem.awbNumber);
 			});
 		}
