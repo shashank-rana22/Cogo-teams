@@ -1,10 +1,10 @@
-.Container{
+.container{
 	.ui-textarea {
 		padding: 20px;
 	}
 }
 
-.ButtonRow{
+.button_container{
 	margin: 12px 0px 0px 0px;
 	display: flex;
 	justify-content: flex-end;

@@ -1,8 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
-const useList = ({ shipment_id, services, isSeller = false, show }) => {
+const useListServiceChargeCodes = ({ shipment_id, services, isSeller = false, show }) => {
 	const [filters, setFilters] = useState({
 		name         : undefined,
 		service_type : undefined,
@@ -15,10 +15,14 @@ const useList = ({ shipment_id, services, isSeller = false, show }) => {
 
 	useEffect(() => {
 		(async () => {
-			if (shipment_id) {
-				await trigger({
-					params: { filters: { shipment_id } },
-				});
+			try {
+				if (shipment_id) {
+					await trigger({
+						params: { filters: { shipment_id } },
+					});
+				}
+			} catch (err) {
+				console.log(err);
 			}
 		})();
 	}, [trigger, shipment_id]);
@@ -53,4 +57,4 @@ const useList = ({ shipment_id, services, isSeller = false, show }) => {
 		setFilters        : (values) => setFilters({ ...filters, ...values }),
 	};
 };
-export default useList;
+export default useListServiceChargeCodes;

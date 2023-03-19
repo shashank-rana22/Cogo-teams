@@ -14,10 +14,12 @@ function CargoDetails({ primary_service }) {
 						detail={{ ...primary_service, ...primary_service?.cargo_details?.[0] } || {}}
 					/>
 					<MultiServiceDetailsPopover mainServices={primary_service?.cargo_details}>
-						+
-						{(primary_service?.cargo_details?.length || 1) - 1}
-						&nbsp;
-						Details
+						<div className={styles.more_details_popover_text}>
+							+
+							{(primary_service?.cargo_details?.length || 1) - 1}
+							&nbsp;
+							Details
+						</div>
 					</MultiServiceDetailsPopover>
 				</div>
 			) : (

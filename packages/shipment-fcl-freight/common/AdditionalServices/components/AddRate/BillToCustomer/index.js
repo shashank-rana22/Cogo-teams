@@ -13,34 +13,30 @@ function BillToCustomer({ updateDatas, onCancel, onBillToCustomer }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Review Services</div>
-			<RadioWrapper>
-				<RadioGroup
-					className="primary lg"
-					options={options || []}
-					value={modeOfReview || ''}
-					onChange={(item) => setModeOfReview(item)}
-				/>
-			</RadioWrapper>
-			<ButtonDiv>
-				<Button
-					onClick={onCancel}
-					className="secondary md"
-					style={{ marginRight: 10 }}
-				>
-					Cancel
-				</Button>
-				<Button
-					onClick={() => {
-						if (modeOfReview === 'bill') {
-							onBillToCustomer(true);
-						} else {
-							updateBillingInfo(modeOfReview);
-						}
-					}}
-				>
-					{modeOfReview === 'bill' ? 'Add Sell Price' : 'Submit'}
-				</Button>
-			</ButtonDiv>
+			<RadioGroup
+				className="primary lg"
+				options={options || []}
+				value={modeOfReview || ''}
+				onChange={(item) => setModeOfReview(item)}
+			/>
+			<Button
+				onClick={onCancel}
+				className="secondary md"
+				style={{ marginRight: 10 }}
+			>
+				Cancel
+			</Button>
+			<Button
+				onClick={() => {
+					if (modeOfReview === 'bill') {
+						onBillToCustomer(true);
+					} else {
+						updateBillingInfo(modeOfReview);
+					}
+				}}
+			>
+				{modeOfReview === 'bill' ? 'Add Sell Price' : 'Submit'}
+			</Button>
 		</div>
 	);
 }

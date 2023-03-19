@@ -8,21 +8,17 @@ function useGetContainerDetails(item = {}) {
 		method : 'GET',
 	});
 
-	const getDetails = async () => {
-		try {
-			containerDetailTrigger({
-				params: { filters: { shipment_id: item?.shipment_id } },
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
 	useEffect(() => {
-		if (item?.shipment_id) {
-			getDetails();
-		}
-	}, [item?.shipment_id]);
+		(async () => {
+			try {
+				containerDetailTrigger({
+					params: { filters: { shipment_id: item?.shipment_id } },
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		})();
+	}, [item?.shipment_id, containerDetailTrigger]);
 
 	const containerList = [];
 
@@ -30,7 +26,7 @@ function useGetContainerDetails(item = {}) {
 		? containerList.push({
 			label : value.container_number,
 			value : value.container_number,
-			  })
+		})
 		: null));
 
 	return {

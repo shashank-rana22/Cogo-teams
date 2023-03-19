@@ -24,10 +24,10 @@
 
 .service_info_container{
 	padding: 12px;
-	border: 1px solid #5936f0;
+	border: 1px solid #F68B21;
 	border-bottom: none;
 	border-radius: 4px 4px 0px 0px;
-	background: #f6f5ff;
+	background: rgba(251, 209, 166, 0.2);
 
 	@media (max-width: 768px) {
 		height: 50%;
@@ -77,7 +77,7 @@
 
 .more_info_container{
 	padding: 8px;
-	border: 1px solid #5936f0;
+	border: 1px solid #F68B21;
 	border-top: none;
 	border-radius: 0px 0px 4px 4px;
 	display: flex;
