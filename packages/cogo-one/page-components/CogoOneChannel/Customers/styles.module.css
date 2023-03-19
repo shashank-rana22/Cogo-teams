@@ -120,7 +120,7 @@
 .wrapper {
 	position: absolute;
 	right: 65px;
-	bottom: 65px;
+	bottom: 100px;
 	z-index: 99;
 	cursor: pointer;
 
