@@ -1,4 +1,4 @@
-import { Polyline } from '@cogoport/utils';
+import { Polyline } from '@cogoport/maps';
 
 function Route({ positions, map, pathOptions }) {
 	return (
