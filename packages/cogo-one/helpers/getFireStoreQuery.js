@@ -55,25 +55,23 @@ function getFireStoreQuery({
 				...queryFilters,
 				where('spectators_ids', 'array-contains', filterId),
 			];
-		} else if (item === 'assigned_to_me' && appliedFilters?.[item] === 'me' && !isomniChannelAdmin) {
-			queryFilters = [
-				...queryFilters,
-				where('support_agent_id', '==', userId),
-			];
 		}
 	});
 
 	if (isomniChannelAdmin) {
 		firestoreQuery = [
-
 			...queryFilters,
 			where('session_type', '==', 'admin'),
 			orderBy('new_message_sent_at', 'desc'),
 		];
 	} else {
+		const extraFilters = appliedFilters?.observer?.[0] !== 'observer'
+			? [where('support_agent_id', '==', userId)] : [];
+
 		firestoreQuery = [
 			...queryFilters,
 			where('session_type', '==', 'admin'),
+			...extraFilters,
 			where('spectators_ids', 'array-contains', userId),
 			orderBy('new_message_sent_at', 'desc'),
 		];
