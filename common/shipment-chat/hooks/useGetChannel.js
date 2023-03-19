@@ -25,7 +25,9 @@ const useGetChannel = ({ channel_id }) => {
 	const shipment_data = shipment?.summary || {};
 
 	useEffect(() => {
-		getChannel();
+		if (channel_id) {
+			getChannel();
+		}
 	}, [channel_id, getChannel]);
 
 	return {

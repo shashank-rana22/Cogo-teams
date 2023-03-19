@@ -18,95 +18,10 @@
 	}
 }
 
-.popover_container {
-	display: flex;
-	align-items: center;
-	background: #393f70;
-	border-right: 1px solid #ffffff;
-	border-radius: 8px 0px 0px 0px;
-
-	.tippy-box {
-		margin-top: -20px !important;
-		width: 140px;
-	}
-}
-
-.header {
-	display: flex;
-	align-items: center;
-	cursor: pointer;
-
-	svg {
-		color: #ffffff;
-	}
-}
-
-.heading {
-	font-weight: 500;
-	color: #ffffff;
-	padding: 16px 4px 17px 24px;
-}
-
-.sub_container {
-
-	@media (max-width: 768px) {
-		height: calc(100% - 53px);
-	}
-}
-
-.search {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 8px 12px 12px 20px;
-
-	:global {
-		.ui_input_container {
-			height: 32px;
-			width: 200px;
-			border-color: #000000;	
-		}
-
-		.ui_input_container.ui_ps_size_md .ui_input_control {
-			font-size: 14px;
-			color: #ff0000;
-		}
-
-		.ui_input_suffix {
-			margin-right: 4px;
-		}
-	}
-
-	@media (max-width: 768px) {
-		padding-left: 10px;
-	}
-}
-
-.filter_box {
-	border: 0.5px solid #f2f2f2;
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 7px;
-	cursor: pointer;
-	&:hover {
-		box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-	}
-	&.filled {
-		background: #393f70;
-		svg {
-			path {
-				stroke: #ffffff;
-			}
-		}
-	}
-}
-
 .list_container{
 	overflow: auto;
 	background: #ffffff;
-	height: 350px;
+	height: 367px;
 
 	.colored {
 		background: #F8F2E7;
@@ -124,22 +39,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	color: #ff0000;
 }
 
-.menu_close_btn{
-	border-radius: 50%;
-	position: absolute;
-	top: 15px;
-	right: 5px;
-	fill: #fff;
-	cursor: pointer;
-
-	.core-ui-button-root {
-		padding: 8px 0;
-	}
-}
-
-.initial{
+.initial_state{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -183,40 +86,17 @@
 }
 
 .circle {
-	border-radius: 50%;
 	width: 20px;
-	height: 20px;
-	background: #f06d6d;
+	height: 18px;
+	background: #EE3425;
+	border-radius: 5px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: #fff;
-	font-weight: 600;
+	color: #FEF3E9;
+	font-weight: 700;
 	font-size: 12px;
-	padding: 4px;
-}
-
-.channels_type {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.text {
-	box-sizing: border-box;
-	cursor: pointer;
-	color: #828282;
-	margin-right: 12px;
-
-	:hover {
-		color: #393f70;
-		font-weight: 500;
-	}
-}
-
-.line {
-	width: 100%;
-	border: 0.5px solid #393f70;
+	padding: 0 2px;
 }
 
 .input_styles {

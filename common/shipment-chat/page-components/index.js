@@ -9,13 +9,10 @@ import List from './List';
 import styles from './styles.module.css';
 
 function ShipmentChat({ setMessagesCount = () => { } }) {
+	const { user_id } = useSelector((s) => ({ user_id: s?.profile?.user.id }));
+
 	const [show, setShow] = useState(false);
 	const [seenLoading, setSeenLoading] = useState(false);
-
-	const { isMobile, user_id } = useSelector(({ general, profile }) => ({
-		isMobile : general?.isMobile,
-		user_id  : profile?.id,
-	}));
 
 	// let audio = null;
 	// if (typeof window !== 'undefined') {
@@ -46,9 +43,9 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 	const count = totalCount?.reduce((a, b) => a + b, inititalValue);
 
 	useEffect(() => {
-		if (count > 0 && !show) {
-			audio.play();
-		}
+		// if (count > 0 && !show) {
+		// 	audio.play();
+		// }
 
 		setMessagesCount((pv) => ({ ...pv, shipment_chat: count }));
 	}, [count, setMessagesCount, show]);
@@ -82,7 +79,6 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 					<Modal.Body>
 						<List
 							setShow={setShow}
-							isMobile={isMobile}
 							MessageContentArr={MessageContentArr}
 							user_id={user_id}
 							setSeenLoading={setSeenLoading}
