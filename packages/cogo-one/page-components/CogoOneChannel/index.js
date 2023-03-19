@@ -65,6 +65,7 @@ function CogoOne() {
 		activeCardId,
 		firstLoading,
 		updateLeaduser,
+		handleScroll,
 	} = useListChats({
 		firestore,
 		userId,
@@ -150,6 +151,7 @@ function CogoOne() {
 				setShowBotMessages={setShowBotMessages}
 				showBotMessages={showBotMessages}
 				setShowDialModal={setShowDialModal}
+				handleScroll={handleScroll}
 			/>
 
 			<div className={styles.chat_details_continer}>

@@ -33,6 +33,7 @@ function Customers({
 	showBotMessages = false,
 	setShowBotMessages,
 	setShowDialModal = () => {},
+	handleScroll = () => {},
 
 }) {
 	const onChangeToggle = () => {
@@ -103,6 +104,7 @@ function Customers({
 					setActiveCardId={setActiveCardId}
 					showBotMessages={showBotMessages}
 					setShowBotMessages={setShowBotMessages}
+					handleScroll={handleScroll}
 				/>
 			)}
 

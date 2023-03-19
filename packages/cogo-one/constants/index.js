@@ -206,3 +206,5 @@ export const ACCOUNT_TYPE_MAPPING = {
 };
 
 export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/prod_cogo_one.apk';
+
+export const PAGE_LIMIT = 40;

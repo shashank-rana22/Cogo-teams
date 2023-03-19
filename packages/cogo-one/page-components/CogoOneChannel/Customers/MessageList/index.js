@@ -28,8 +28,10 @@ function MessageList({
 	showBotMessages = false,
 	setShowBotMessages = () => {},
 	isomniChannelAdmin = false,
+	handleScroll = () => {},
 }) {
 	const [modalType, setModalType] = useState(false);
+
 	function getShowChat({ user_name }) {
 		if (searchValue) {
 			const searchName = user_name?.toLowerCase();
@@ -37,10 +39,6 @@ function MessageList({
 		}
 
 		return true;
-	}
-
-	if (messagesLoading) {
-		return <LoadingState />;
 	}
 
 	function lastMessagePreview(previewData = '') {
@@ -99,14 +97,14 @@ function MessageList({
 				</div>
 			</div>
 
-			{ isEmpty(messagesList) ? (
+			{ isEmpty(messagesList) && !messagesLoading ? (
 				<div className={styles.list_container}>
 					<div className={styles.empty_state}>
 						No Messages Yet..
 					</div>
 				</div>
 			) : (
-				<div className={styles.list_container}>
+				<div className={styles.list_container} onScroll={handleScroll}>
 					{(messagesList || []).map((item) => {
 						const { chat_status = '' } = item || {};
 						const userData = getActiveCardDetails(item);
@@ -198,6 +196,7 @@ function MessageList({
 							)
 						);
 					})}
+					{messagesLoading && <LoadingState />}
 				</div>
 			)}
 			{!disabled && (
