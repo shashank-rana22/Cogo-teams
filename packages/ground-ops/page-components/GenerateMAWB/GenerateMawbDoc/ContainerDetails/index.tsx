@@ -140,7 +140,7 @@ function ContainerDetails({
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
-											{`${chargeableWeight} Kgs(Cms)`}
+											{`${formData.volumetricWeight} Kgs(Cms)`}
 										</p>
 									</div>
 								</div>
