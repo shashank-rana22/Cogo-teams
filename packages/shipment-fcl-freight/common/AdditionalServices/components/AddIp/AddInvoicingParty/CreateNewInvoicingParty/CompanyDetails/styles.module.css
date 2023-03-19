@@ -1,6 +1,6 @@
 
 
-export const BtnGrp = styled.div`
+.btn_grp{
 	display: flex;
 	justify-content: flex-end;
 	background: #ffffff;
@@ -13,30 +13,17 @@ export const BtnGrp = styled.div`
 		right: 0;
 		bottom: 0;
 	}
-`;
+}
 
-export const Container = styled.div`
+.container{
 	display: flex;
 	flex-direction: column;
+}
 
-	& .form-item-label {
-		color: #393f70;
-		font-size: 12px !important;
-		font-weight: 400 !important;
-		margin: 16px 4px 4px !important;
-	}
-
-	& .core-ui-input-control.uppercase {
-		text-transform: uppercase;
-	}
-`;
-
-export const LayoutContainer = styled.div``;
-
-export const Title = styled.div`
+.title{
 	color: #393f70;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 16px;
 	margin: 16px 0px 0px;
-`;
+}

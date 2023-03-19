@@ -13,8 +13,8 @@ const useBankAccount = ({
 		general: { scope },
 	} = useSelector((reduxState) => reduxState);
 
-	const bankAccountControls =		getBankAccountControls({ values: filledDetails.bank_details }) || [];
-	const bankAccountFormProps = useFormCogo(bankAccountControls);
+	const bankAccountControls =	getBankAccountControls({ values: filledDetails.bank_details }) || [];
+	const bankAccountFormProps = useForm(bankAccountControls);
 
 	const { setValues } = bankAccountFormProps;
 

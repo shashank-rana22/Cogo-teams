@@ -4,7 +4,7 @@ import { Button, Loader } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import EmptyState from '../../../../../EmptyState';
 // import CreateNewBillingAddress from '../CreateNewBillingAddress';
@@ -42,7 +42,7 @@ function InvoicingParties({
 		{},
 	);
 
-	const params = {
+	const params = useMemo(() => ({
 		filters: {
 			organization_id  : organizationId,
 			status           : 'active',
@@ -52,7 +52,7 @@ function InvoicingParties({
 		billing_addresses_data_required : true,
 		documents_data_required         : true,
 		other_addresses_data_required   : true,
-	};
+	}), [organizationId, bookingType]);
 
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_organization_invoicing_parties',
@@ -60,14 +60,19 @@ function InvoicingParties({
 	});
 
 	useEffect(() => {
-		(async () => {
-			await trigger({
-				params,
-			});
-		})();
-	}, [trigger, JSON.stringify(params), bookingType]);
+		try {
+			(async () => {
+				await trigger({
+					params,
+				});
+			})();
+		} catch (err) {
+			console.log(err);
+		}
+	}, [trigger, params, bookingType]);
 
-	const invoicingPartiesList = (data || {}).list || [];
+	// const invoicingPartiesList = (data || {}).list || [];
+	const invoicingPartiesList = useMemo(() => (data || {}).list || [], [data]);
 
 	const address_to_use = is_tax_applicable ? 'billing_addresses' : 'other_addresses';
 

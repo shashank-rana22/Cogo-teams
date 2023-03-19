@@ -51,7 +51,7 @@ function InvoicingPartyItem({
 			),
 			value: id,
 		};
-	}), []);
+	}), [billing_addresses, other_addresses, is_tax_applicable]);
 
 	const onClickAddAddress = () => {
 		setShowComponent('create_billing_address');

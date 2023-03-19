@@ -184,18 +184,18 @@ function CreateNewInvoicingParty({
 	}
 
 	return (
-		<Container>
-			<StepperContainer>
+		<div className={styles.container}>
+			<div className={styles.stepper_container}>
 				<ProgressStrip
 					progressSteps={Object.values(
 						stepperContent[tradePartyType.value] || [],
 					)}
 					currentStep={currentStep}
 				/>
-			</StepperContainer>
+			</div>
 
 			{renderCurrentStepControls}
-		</Container>
+		</div>
 	);
 }
 

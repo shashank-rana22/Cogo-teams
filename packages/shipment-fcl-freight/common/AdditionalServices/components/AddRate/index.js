@@ -1,13 +1,16 @@
 // import Layout from '@cogoport/bookings/commons/Layout';
-import { Flex, Accordion } from '@cogoport/components';
+import { Accordion } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import RenderAddRateForm from './RenderAddRateForm';
+
 // import ActionsToShow from './ActionToShow';
-import BillToCustomer from './BillToCustomer';
-import SecondStep from './SecondStep';
+// import BillToCustomer from './BillToCustomer';
+// import SecondStep from './SecondStep';
+
 import styles from './styles.module.css';
-// import useAddRate from './useAddRate';
+import useAddRate from './useAddRate';
 
 const showRemarksStatus = [
 	'amendment_requested_by_importer_exporter',
@@ -32,27 +35,32 @@ function AddRate({
 	const [billToCustomer, setBillToCustomer] = useState(undefined);
 	const [showSecondStep, setSecondStep] = useState(false);
 
-	// const { addRate, fields, controls, handleSubmit, loading, errors } = useAddRate({
-	// 	item,
-	// 	isSeller,
-	// 	status,
-	// 	setShow,
-	// 	refetch,
-	// 	setAddRate,
-	// 	billToCustomer,
-	// 	onCancel,
-	// 	filters,
-	// });
+	const {
+		onAddRate, register, handleSubmit, loading, errors, control,
+	} = useAddRate({
+		item,
+		isSeller,
+		status,
+		setShow,
+		refetch,
+		setAddRate,
+		billToCustomer,
+		onCancel,
+		filters,
+	});
 
 	if (showSecondStep) {
 		return (
-			<SecondStep
-				item={item}
-				status={status}
-				isSeller={isSeller}
-				setSecondStep={setSecondStep}
-				// updateDatas={updateDatas}
-			/>
+			// <SecondStep
+			// 	item={item}
+			// 	status={status}
+			// 	isSeller={isSeller}
+			// 	setSecondStep={setSecondStep}
+			// 	// updateDatas={updateDatas}
+			// />
+			<div>
+				SecondStep
+			</div>
 		);
 	}
 
@@ -62,47 +70,33 @@ function AddRate({
 		&& item.add_to_sell_quotation === null
 	) {
 		return (
-			<BillToCustomer
-				// updateDatas={updateDatas}
-				onCancel={() => setAddRate(null)}
-				onBillToCustomer={() => setBillToCustomer(true)}
-			/>
+			// <BillToCustomer
+			// 	// updateDatas={updateDatas}
+			// 	onCancel={() => setAddRate(null)}
+			// 	onBillToCustomer={() => setBillToCustomer(true)}
+			// />
+			<div>
+				BillToCustomer
+			</div>
 		);
 	}
+
 	return (
 		<div>
 			<div className={styles.container}>
-				hi
-				<Accordion
-					title={(
-						<Flex alignItems="center">
-							<div className={styles.container_header}>
-								{startCase(item.name)}
-								&nbsp;
-								(
-								{startCase(item.service_type)}
-								)
-							</div>
-
-							{showLabel && item?.tags ? (
-								<div className={styles.custom_tag}>{startCase(item?.tags?.[0])}</div>
-							) : null}
-						</Flex>
-					)}
-					showLabel={showLabel}
-					defaultOpen
-				>
-					<div className={styles.content}>
-						{showRemarksStatus.includes(status?.status) ? (
-							<p>
-								Comments:
-								{item.remarks[0]}
-							</p>
-						) : null}
-
-						{/* <Layout fields={fields} controls={controls} errors={errors} /> */}
-					</div>
-				</Accordion>
+				{showRemarksStatus.includes(status?.status) ? (
+					<p>
+						Comments:
+						{item.remarks[0]}
+					</p>
+				) : null}
+				<RenderAddRateForm
+					handleSubmit={handleSubmit}
+					onSubmit={onAddRate}
+					control={control}
+					errors={errors}
+					register={register}
+				/>
 			</div>
 
 			{/* <ActionsToShow

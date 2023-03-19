@@ -5,7 +5,7 @@ import AddRate from '../../AddRate';
 
 import ChooseService from './ChooseService';
 import styles from './styles.module.css';
-import useList from './useList';
+import useListServiceChargeCodes from './useListServiceChargeCodes';
 import ViewPrice from './ViewPrice';
 
 function AddService({
@@ -19,7 +19,7 @@ function AddService({
 	const [showAddRate, setAddRate] = useState(null);
 	const [showPrice, setShowPrice] = useState(null);
 
-	const { list, loading, setFilters, filters, serviceCountTotal } = useList({
+	const { list, loading, setFilters, filters, serviceCountTotal } = useListServiceChargeCodes({
 		shipment_id,
 		services,
 		show,

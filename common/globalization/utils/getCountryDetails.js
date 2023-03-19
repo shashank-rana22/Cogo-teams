@@ -1,6 +1,7 @@
-// import COUNTRIES from '@cogoport/build-scripts/temp/constants/countries.json';
+// eslint-disable-next-line import/no-relative-packages
+import countries from '../../../.data-store/constants/countries.json';
 
-const countriesHash = COUNTRIES.reduce(
+const countriesHash = countries.reduce(
 	(pv, acc) => ({ ...pv, [acc.id]: acc }),
 	{},
 );

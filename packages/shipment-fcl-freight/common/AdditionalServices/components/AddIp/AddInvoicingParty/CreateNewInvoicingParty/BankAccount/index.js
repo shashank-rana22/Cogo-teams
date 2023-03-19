@@ -55,18 +55,18 @@ function BankAccount({
 	};
 
 	return (
-		<Container>
-			<Title>Bank Details</Title>
+		<div className={styles.container}>
+			<div className={styles.title}>Bank Details</div>
 
-			<LayoutContainer>
+			<div>
 				{/* <Layout
 					controls={bankAccountControls}
 					fields={newFields}
 					errors={errors}
 				/> */}
-			</LayoutContainer>
+			</div>
 
-			<BtnGrp>
+			<div className={styles.btn_grp}>
 				<Button
 					className="secondary md"
 					onClick={() => onClickBack()}
@@ -78,8 +78,8 @@ function BankAccount({
 				<Button className="primary md" onClick={handleSubmit(onSubmit)}>
 					Proceed
 				</Button>
-			</BtnGrp>
-		</Container>
+			</div>
+		</div>
 	);
 }
 

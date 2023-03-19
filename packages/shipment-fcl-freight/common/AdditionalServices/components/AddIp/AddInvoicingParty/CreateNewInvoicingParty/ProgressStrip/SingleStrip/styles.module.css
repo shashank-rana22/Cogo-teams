@@ -1,6 +1,4 @@
-
-
-export const Count = styled.div`
+.count{
 	font-weight: bold;
 	font-size: 14px;
 	line-height: 140%;
@@ -24,9 +22,9 @@ export const Count = styled.div`
 
 	&:inactive {
 	}
-`;
+}
 
-export const Title = styled.span`
+.title{
 	font-weight: normal;
 	font-size: 14px;
 	line-height: 140%;
@@ -41,10 +39,10 @@ export const Title = styled.span`
 		font-size: 9px;
 		min-width: auto;
 	}
-`;
+}
 
-export const Line = styled.div`
+.line{
 	border: 1px solid #828282;
 	height: 2px;
 	display: flex;
-`;
+}

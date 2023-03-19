@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 
 const controls = (options, item, containerList) => [
 	{

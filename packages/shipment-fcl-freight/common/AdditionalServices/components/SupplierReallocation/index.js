@@ -105,11 +105,8 @@ function SupplierReallocation({
 					!(isEmpty(documents) && !isAdditional)
 						? (
 							<div className={styles.form_wrapper}>
-
 								{serviceProviderController}
-
 								<div>
-
 									<div className={styles.label}>
 										BL Count
 									</div>
