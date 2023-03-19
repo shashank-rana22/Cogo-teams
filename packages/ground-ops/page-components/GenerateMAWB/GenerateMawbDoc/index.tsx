@@ -172,9 +172,8 @@ function GenerateMawb({
 				const imgProps = pdf.getImageProperties(canvas);
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-				pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-				pdf.addPage();
-				pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+				pdf.addImage(imgData, 'PNG', 0, -5, pdfWidth, pdfHeight);
+				pdf.save(taskItem.awbNumber);
 			});
 		}
 		setSaveDocument(false);
