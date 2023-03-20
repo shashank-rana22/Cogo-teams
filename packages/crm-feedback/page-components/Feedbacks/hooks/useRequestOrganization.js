@@ -147,6 +147,7 @@ const useRequestOrganization = ({ organization_id = '' }) => {
 	return {
 		data: list,
 		loading,
+		router,
 		setParams,
 		paginationData,
 		onChangeParams,
