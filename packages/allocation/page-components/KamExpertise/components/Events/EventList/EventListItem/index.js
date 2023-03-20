@@ -84,7 +84,7 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 								{COMPLETION_MAPPING[data?.event_state_on]}
 							</Pill>
 						</span>
-							having attribute
+						having attribute
 						<div style={{ marginRight: '4px' }} />
 						<span style={{ marginRight: '4px' }}>
 							<Pill
@@ -96,7 +96,7 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 							</Pill>
 						</span>
 						<span style={{ marginRight: '4px' }}>
-							 and parameter of:
+							and parameter of:
 						</span>
 
 						{' '}

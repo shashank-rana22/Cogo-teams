@@ -5,10 +5,10 @@ import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
 
 function BadgeListItem(props) {
-	const { data, index, setToggleScreen, setBadgeListData, listRefetch } = props;
+	const { data, index, setToggleScreen, setBadgeItemData, listRefetch } = props;
 	const { badge_details = [] } = data;
 	const handleEdit = () => {
-		setBadgeListData(data);
+		setBadgeItemData(data);
 		setToggleScreen('create_badge');
 	};
 
@@ -67,7 +67,7 @@ function BadgeListItem(props) {
 								<BadgeCard
 									data={badge}
 									medal={startCase(badge.medal || '')}
-									badgeListData={data}
+									badgeItemData={data}
 									isLast={i === badge_details.length - 1}
 									listRefetch={listRefetch}
 								/>
