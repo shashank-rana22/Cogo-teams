@@ -1,6 +1,7 @@
-import React from 'react';
-import { cl, Button } from "@cogoport/components";
+import { cl, Button } from '@cogoport/components';
 import { IcCFtick } from '@cogoport/icons-react';
+import React from 'react';
+
 import styles from './styles.module.css';
 
 function RaiseQuery({ setShowModal = () => {} }) {
@@ -14,8 +15,7 @@ function RaiseQuery({ setShowModal = () => {} }) {
 			</div>
 			<Button
 				onClick={() => setShowModal(false)}
-				size="md" 
-				themeType="accent" 
+				themeType="secondary"
 				style={{ marginRight: 10, border: 'none' }}
 			>
 				Okay

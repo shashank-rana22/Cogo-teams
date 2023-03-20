@@ -12,15 +12,21 @@ function SingleStrip({
 
 	return (
 		<div style={{ width: '100%' }}>
-			<Count className={status}>{count}</Count>
+			<div className={`${styles.count} ${styles.status}`}>{count}</div>
 
-			{/* {status === 'success' && (
-				<Count style={{ padding: '5px 5px', border: '1px solid  #2C3E50' }}>
-					<Tick size={1.4} />
-				</Count>
-			)} */}
+			{status === 'success' && (
+				<div className={styles.count} style={{ padding: '5px 5px', border: '1px solid  #2C3E50' }}>
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick.svg"
+						alt="tick"
+						width={20}
+						height={20}
+					/>
+				</div>
+			)}
 
-			<Title
+			<div
+				className={styles.title}
 				style={{
 					color      : status === 'active' ? '#333333' : '#828282',
 					cursor     : count < 1 ? 'pointer' : 'default',
@@ -28,8 +34,8 @@ function SingleStrip({
 				}}
 			>
 				{item?.label}
-			</Title>
-			{count < progressSteps.length ? <Line /> : null}
+			</div>
+			{count < progressSteps.length ? <div className={styles.line} /> : null}
 		</div>
 	);
 }

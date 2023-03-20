@@ -3,8 +3,6 @@ import PATTERNS from '@cogoport/constants/patterns';
 import { IcMFileUploader, IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import UploadIconSvg from '../assets/doc-attach-icon.svg';
-
 import { getPanHolderStatusOptions } from './getPanHolderStatus';
 
 function TradePartyInstructions() {
@@ -117,8 +115,15 @@ const billingAddressControls = [
 		span       : 12,
 		uploadType : 'aws',
 		height     : 45,
-		uploadIcon : () => <UploadIconSvg size={2} />,
-		rules      : { required: true },
+		uploadIcon : () => {
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/doc-attach-icon.svg"
+				alt="doc attach icon"
+				width="20"
+				height="20"
+			/>;
+		},
+		rules: { required: true },
 	},
 ];
 
