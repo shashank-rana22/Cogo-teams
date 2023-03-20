@@ -45,6 +45,7 @@ function useListFaqSearchHistories({
 					pie_chart_data_required  : true,
 					pagination_data_required : false,
 					graph_data_required      : true,
+					get_data_required        : false,
 				},
 			});
 		} catch (error) {

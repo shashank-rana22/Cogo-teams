@@ -74,15 +74,18 @@ function AllQuestions(props) {
 	const columns = addedQuestionsColumns();
 	return (
 		<div className={styles.container}>
-			<StyledTable columns={columns} layoutType="table" data={listdata} />
-			<Pagination
-				style={{ float: 'right' }}
-				type="table"
-				currentPage={page}
-				totalItems={total_count}
-				pageSize={page_limit}
-				onPageChange={setPage}
-			/>
+			<div style={{ backgroundColor: 'white' }}>
+				<StyledTable columns={columns} layoutType="table" data={listdata} />
+				<Pagination
+					style={{ float: 'right' }}
+					type="table"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={setPage}
+				/>
+
+			</div>
 		</div>
 	);
 }
