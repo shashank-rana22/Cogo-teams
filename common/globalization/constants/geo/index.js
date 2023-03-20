@@ -14,15 +14,14 @@ const MAPPING = {
 };
 
 const getGeoConstants = () => {
-	if (typeof window === undefined) {
-		return null;
+	try {
+		const parent_entity_id = typeof window !== 'undefined' ? getCookie('parent_entity_id') : country_entity_ids.IN;
+		return MAPPING[parent_entity_id in MAPPING ? parent_entity_id : country_entity_ids.IN];
+	} catch (error) {
+		console.log('error');
 	}
 
-	const parent_entity_id = getCookie('parent_entity_id');
-
-	return MAPPING[
-		parent_entity_id in MAPPING ? parent_entity_id : country_entity_ids.IN
-	];
+	return false;
 };
 
 export default getGeoConstants;
