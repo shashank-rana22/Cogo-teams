@@ -65,10 +65,6 @@ function CreateQuestion({
 		}
 	};
 
-	const onError = (err) => {
-		console.log('err', err);
-	};
-
 	const deleteQuestion = () => {
 		if (!isEmpty(editDetails)) {
 			setEditDetails({});
@@ -156,7 +152,7 @@ function CreateQuestion({
 	}, [JSON.stringify(editDetails)]);
 
 	return (
-		<form key={JSON.stringify(getValues())} onSubmit={handleSubmit(onsubmit, onError)} className={styles.container}>
+		<form key={JSON.stringify(getValues())} onSubmit={handleSubmit(onsubmit)} className={styles.container}>
 			<div className={styles.question_label}>{`Question ${index + 1}`}</div>
 
 			<div className={styles.form_component}>

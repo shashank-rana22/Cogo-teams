@@ -77,10 +77,15 @@ function FormComponent({
 		<div className={`${styles.container} ${!isNewQuestion ? styles.flex_row : null}`}>
 			<div className={styles.upper_form}>
 				{controls.map((controlItem) => {
-					const { type, label, name } = controlItem || {};
+					const { type, label, name, options = [] } = controlItem || {};
 
 					if (name === 'question_text') {
 						return null;
+					}
+					let newOptions = options;
+
+					if (name === 'question_type' && !isNewQuestion) {
+						newOptions = options.map((item) => ({ ...item, disabled: true }));
 					}
 
 					const Element = getElementController(type);
@@ -92,7 +97,11 @@ function FormComponent({
 							</div>
 
 							<div className={styles.control}>
-								<Element control={control} {...controlItem} />
+								<Element
+									control={control}
+									{...controlItem}
+									{...(name === 'question_type' ? { options: newOptions } : null)}
+								/>
 								{errors[name] && <div className={styles.error_msg}>This is required</div>}
 							</div>
 						</div>
