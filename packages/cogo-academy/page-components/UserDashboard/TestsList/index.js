@@ -12,7 +12,7 @@ function TestsList() {
 		method : 'GET',
 		url    : '/list_tests',
 		params : {
-			page_limit: 150,
+			page_limit: 5,
 		},
 	}, { manual: false });
 

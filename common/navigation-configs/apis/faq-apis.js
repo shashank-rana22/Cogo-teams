@@ -210,12 +210,17 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'list_question_wise_analysis',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'get_admin_question_wise_test_result',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'get_admin_student_wise_test_result',
+			api          : 'get_passed_test_data_per_user',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
