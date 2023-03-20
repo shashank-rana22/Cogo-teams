@@ -18,6 +18,8 @@ function KamLevel({ selectedVersion }) {
 	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
 
+	console.log('version in  tab', selectedVersion);
+
 	const audit_data = kamConfigDetails?.audit_data || {};
 	const kamConfigLevelDetails = kamConfigDetails?.data || [];
 
@@ -59,7 +61,7 @@ function KamLevel({ selectedVersion }) {
 			{!levelLoading ? (
 				<>
 					<Collapse
-						panel={options}
+						panels={options}
 						activeKey={activeCard}
 						setActive={setActiveCard}
 						type="text"

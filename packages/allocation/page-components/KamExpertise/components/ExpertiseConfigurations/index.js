@@ -1,7 +1,7 @@
 import { Button, TabPanel, Tabs } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 import CurrentConfigurations from './CurrentConfigurations';
 import styles from './styles.module.css';
@@ -30,12 +30,6 @@ function ViewAllConfigs() {
 		router.push('/allocation/kam-expertise');
 	};
 
-	const scrollToRef = useRef(null);
-
-	const handleClick = () => {
-		scrollToRef.current?.scrollIntoView({ behavior: 'smooth' });
-	};
-
 	return (
 		<section className={styles.main_container}>
 			<div className={styles.back_container} role="presentation" onClick={onClickBack}>
@@ -53,12 +47,11 @@ function ViewAllConfigs() {
 				</div>
 
 				<CurrentConfigurations
-					handleClick={handleClick}
 					selectedVersion={selectedVersion}
 					setSelectedVersion={setSelectedVersion}
 				/>
 
-				<div className={styles.tab_list} ref={scrollToRef}>
+				<div className={styles.tab_list}>
 					<Tabs activeTab={activeConfigTab} themeType="secondary" onChange={setActiveConfigTab}>
 						{Object.values(TAB_PANEL_MAPPING).map((item) => {
 							const { name = '', title = '', Component } = item;

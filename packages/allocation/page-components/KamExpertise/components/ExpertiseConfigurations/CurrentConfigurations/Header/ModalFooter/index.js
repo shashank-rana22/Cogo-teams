@@ -32,7 +32,7 @@ function ModalFooter({ setMode, setShowModal, setSelectedVersion, selectedVersio
 					onClick={() => {
 						setShowModal(false);
 						setMode('');
-						Toast.success('Version Selected');
+						Toast.success(`Version ${selectedVersion} Selected`);
 					}}
 				>
 					Create

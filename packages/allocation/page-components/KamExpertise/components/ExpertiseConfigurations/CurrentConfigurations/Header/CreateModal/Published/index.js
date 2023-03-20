@@ -5,18 +5,41 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function Published({ setSelectedVersion = () => {} }) {
+	const data = [
+		{
+			version_number : 3,
+			id             : 3,
+			status         : 'live',
+			last_updated   : '22-sep-2023',
+		},
+		{
+			version_number : 2,
+			id             : 2,
+			status         : 'draft',
+			last_updated   : '22 - sep - 2023',
+		},
+
+	];
+
 	const columns = [
 		{
 			Header   : 'VERSION NAME',
-			key      : 'versionName',
-			id       : 'versionName',
-			accessor : 'versionName',
+			key      : 'version_number',
+			id       : 'version_number',
+			accessor : 'version_number',
+			Cell     : ({ value }) => (
+				<section>
+					Version
+					{' '}
+					{value || '__'}
+				</section>
+			),
 		},
 		{
 			Header   : 'STATUS',
 			accessor : 'status',
 			Cell     : ({ value }) => {
-				const colors = value === 'Live' ? 'green' : 'red';
+				const colors = value === 'live' ? 'green' : 'red';
 				return (
 					<span>
 						<Pill className={styles.pill} color={colors}>{value}</Pill>
@@ -28,58 +51,6 @@ function Published({ setSelectedVersion = () => {} }) {
 		{
 			Header   : 'LAST UPDATED',
 			accessor : 'last_updated',
-		},
-
-	];
-	const data = [
-		{
-			id           : '6',
-			versionName  : 'Version 6',
-			last_updated : '22-Sep-2023',
-			status       : 'Live',
-
-		},
-		{
-			id           : '5',
-			versionName  : 'Version 5',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
-		},
-		{
-			id           : '4',
-			versionName  : 'Version 4',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
-		},
-		{
-			id           : '3',
-			versionName  : 'Version 3',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
-		},
-		{
-			id           : '2',
-			versionName  : 'Version 3',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
-		},
-		{
-			id           : '1',
-			versionName  : 'Version 3',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
-		},
-		{
-			id           : '19',
-			versionName  : 'Version 3',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
 		},
 
 	];
