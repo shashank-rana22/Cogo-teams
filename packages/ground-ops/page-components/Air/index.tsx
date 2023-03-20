@@ -52,8 +52,7 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 	}, [JSON.stringify(filters)]);
 
 	useEffect(() => {
-		if (searchValue === '') { listAPi({ filter: filters }); }
-		setSearchValue('');
+		listAPi({ filter: filters });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 	return (
