@@ -18,22 +18,21 @@ const useListSalesOverallData = (salesCompInViewport) => {
 		scope,
 	}, { manual: true });
 
-	const fetchSalesOverallData = async () => {
-		try {
-			await trigger({
-				params: filters,
-			});
-		} catch (err) {
-			console.log(err, 'err');
-		}
-	};
-
 	useEffect(() => {
+		const fetchSalesOverallData = async () => {
+			try {
+				await trigger({
+					params: filters,
+				});
+			} catch (err) {
+				console.log(err, 'err');
+			}
+		};
+
 		if (Object.keys(filters).length > 0 && salesCompInViewport) {
 			fetchSalesOverallData();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters, salesCompInViewport]);
+	}, [filters, salesCompInViewport, trigger]);
 
 	return {
 		loading,

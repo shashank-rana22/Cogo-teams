@@ -126,6 +126,16 @@ function SalesFunnel({ headerFilters }) {
 					)}
 				</div>
 				<div className={styles.mobile}>
+					<div className={styles.tab_container}>
+						<Tabs
+							activeTab={showZone}
+							themeType="primary"
+							onChange={(e) => handleTabs(e)}
+						>
+							<TabPanel name={false} title="ORG" />
+							<TabPanel name title="ZONE" />
+						</Tabs>
+					</div>
 					{loading ? (
 						<LoadingPage />
 					) : (

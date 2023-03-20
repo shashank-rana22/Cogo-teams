@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const useGetOrganizationCohort = ({
 	isComponentInViewport,
@@ -19,7 +19,7 @@ const useGetOrganizationCohort = ({
 		scope,
 	}, { manual: false });
 
-	const getOrganizationCohort = async () => {
+	const getOrganizationCohort = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -32,14 +32,13 @@ const useGetOrganizationCohort = ({
 		} catch (err) {
 			console.log(err, 'err');
 		}
-	};
+	}, [page, byEtd, entity_code, trigger]);
 
 	useEffect(() => {
 		if (isComponentInViewport) {
 			getOrganizationCohort();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, isComponentInViewport, byEtd, JSON.stringify(entity_code)]);
+	}, [isComponentInViewport, getOrganizationCohort]);
 
 	return {
 		loading,

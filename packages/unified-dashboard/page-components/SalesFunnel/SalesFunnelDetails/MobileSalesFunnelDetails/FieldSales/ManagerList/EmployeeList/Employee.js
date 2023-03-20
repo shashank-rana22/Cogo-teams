@@ -2,11 +2,11 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
+import Shipment from '../../../../../../../common/SaleShipmentTable';
+import AfterHeader from '../../../../../../../common/SaleShipmentTable/AfterHeader';
 import useListShipments from '../../../../../../../hooks/useListShipments';
 import NoData from '../NoData';
 
-import AfterHeader from './AfterHeader';
-import Shipment from './Shipment';
 import styles from './styles.module.css';
 
 function Employee({ val = {}, currency, filters, employeePad = 30 }) {
@@ -199,12 +199,12 @@ function Employee({ val = {}, currency, filters, employeePad = 30 }) {
 				<NoData showGrid={showGrid} entity="Employees" />
 			)}
 			{showShipments && shipments?.list?.length > 0 ? (
-				<>
+				<div className={styles.shipment_table}>
 					<AfterHeader showGrid={showShipments} />
 					{shipments?.list?.map((shipment) => (
 						<Shipment itemData={shipment} />
 					))}
-				</>
+				</div>
 			) : (
 				<div>
 					{!loading && <NoData showGrid={showShipments} />}

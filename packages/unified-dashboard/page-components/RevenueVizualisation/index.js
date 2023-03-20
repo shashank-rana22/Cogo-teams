@@ -33,6 +33,8 @@ function RevenueVisualization({ headerFilters }) {
 
 	const isDataSelected = selectedBarData !== undefined;
 
+	console.log(isDataSelected, 'isdataSelected');
+
 	useEffect(() => {
 		setSelectedBarData();
 		setSelectedPieData();
@@ -56,7 +58,6 @@ function RevenueVisualization({ headerFilters }) {
 		if (!isComponentInViewport) {
 			setisComponentInViewport(inViewportBarChart);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [inViewportBarChart]);
 
 	return (
@@ -67,6 +68,7 @@ function RevenueVisualization({ headerFilters }) {
 					<Select
 						className={styles.dropdown}
 						placeholder="By Shipment Date"
+						isDataSelected={isDataSelected}
 						value={byEtd}
 						onChange={(e) => handleDateType(e)}
 						options={selectOptions}

@@ -1,8 +1,130 @@
 .card_wrapper {
-	padding: 5px 0;
-	background: #f5fafe;
-	border: 1px solid #efefef;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	max-width: 100%;
+	padding: 10px 0 0;
+	margin-top: 20px;
+	background: #fff;
+	border-radius: 4px;
 	box-shadow: none;
+}
+
+.sales_filter_btn {
+	position: relative;
+	padding: 4px 14px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 16px;
+	text-align: center;
+	letter-spacing: 0.04em;
+	cursor: pointer;
+	border: 1px solid #2c3e50;
+	border-radius: 1px;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex_btn {
+	display: flex;
+	align-items: center;
+	margin-left: 0;
+}
+
+.fixed_header {
+	top: 3rem;
+	z-index: 1;
+}
+
+@media (max-width: 768px) {
+	.fixed_header {
+		top: 3rem;
+		z-index: 1;
+		width: max-content;
+	}
+}
+
+.sales_row {
+	display: flex;
+	margin-right: 0;
+	margin-left: 0;
+	font-size: 13px;
+	font-weight: 500;
+	background: #f1f1f1;
+}
+
+.revenue_col {
+	position: relative;
+	display: flex;
+	flex: 25%;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	border-right: none;
+}
+
+.row_2 {
+	display: flex;
+	margin-right: 0;
+	margin-left: 0;
+	font-size: 11px;
+	font-weight: 400;
+	background: #f9f9f9;
+}
+
+.revenue_col_2 {
+	position: relative;
+	display: flex;
+	flex: 33%;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	background: #f1f1f1;
+	border-right: none;
+}
+
+.revenue_col_3 {
+	position: relative;
+	display: flex;
+	flex: 50%;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	background: #f1f1f1;
+	border-right: none;
+}
+
+.revenue_gap {
+	display: flex;
+	flex: 25%;
+}
+
+.nodata {
+	height: 300px;
+	margin-top: 30px;
+}
+
+.revenue_arrow {
+	position: relative;
+	display: flex;
+	flex: 25%;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 14px 0;
+	cursor: pointer;
+	border-right: none;
+}
+
+.text_tag {
+	padding-left: 10px;
+	font-size: 15px;
+	font-weight: 500;
 }
 
 .colllapse_icon_active {
@@ -23,56 +145,16 @@
 	transform: rotate(270deg);
 }
 
-.row {
-	display: flex;
-	font-size: 14px;
-	font-weight: 400;
+.section {
+	margin: 10px 2px;
 }
 
-.head_name {
-	align-self: center;
-	font-size: 12px;
-}
-
-.revenue_arrow {
-	position: relative;
-	display: flex;
-	flex: 25%;
-	flex-direction: row;
-	align-items: center;
-	padding: 14px;
-	cursor: pointer;
-	border-right: none;
-}
-
-.text_tag {
-	padding-left: 10px;
-	font-size: 15px;
-	font-weight: 500;
-}
-
-.rev {
-	position: relative;
+.container {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	padding-left: 50px;
-	border-right: none;
-}
-
-.revenue_col {
-	position: relative;
-	display: flex;
-	flex: 33%;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin: 4px 0;
+	padding: 10px;
+	margin: 8px 0;
 	text-align: center;
-	border-right: none;
-}
-
-.revenue_gap {
-	display: flex;
-	flex: 25%;
+	background-color: aliceblue;
+	border-radius: 5px;
 }

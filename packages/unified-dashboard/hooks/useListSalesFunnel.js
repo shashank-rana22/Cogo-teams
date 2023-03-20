@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { getDefaultFilters } from '../utils/startDateOfMonth';
 
@@ -18,7 +18,7 @@ const useListSalesFunnelData = (salesFunnelInViewport) => {
 		scope,
 	}, { manual: false });
 
-	const fetchSalesFunnelData = async () => {
+	const fetchSalesFunnelData = useCallback(async () => {
 		try {
 			await trigger({
 				params: filters,
@@ -26,14 +26,13 @@ const useListSalesFunnelData = (salesFunnelInViewport) => {
 		} catch (err) {
 			console.log(err, 'err');
 		}
-	};
+	}, [filters, trigger]);
 
 	useEffect(() => {
 		if (Object.keys(filters).length > 0 && salesFunnelInViewport) {
 			fetchSalesFunnelData();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters, salesFunnelInViewport]);
+	}, [fetchSalesFunnelData, salesFunnelInViewport, filters]);
 
 	return {
 		loading,

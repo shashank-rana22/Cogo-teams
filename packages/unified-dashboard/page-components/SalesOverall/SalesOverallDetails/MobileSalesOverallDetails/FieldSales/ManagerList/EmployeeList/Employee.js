@@ -2,14 +2,14 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
+import Shipment from '../../../../../../../common/SaleShipmentTable';
+import AfterHeader from '../../../../../../../common/SaleShipmentTable/AfterHeader';
 import useListShipments from '../../../../../../../hooks/useListShipments';
 import NoData from '../NoData';
 
-import AfterHeader from './AfterHeader';
-import Shipment from './Shipment';
 import styles from './styles.module.css';
 
-function Employee({ val = {}, currency, filters, employeePad = 30 }) {
+function Employee({ val = {}, currency, filters, employeePad = 20 }) {
 	const [showGrid, setShowGrid] = useState(false);
 	const [showShipments, setShowShipments] = useState(false);
 	const { shipments, setFilters, loading } = useListShipments();
@@ -30,6 +30,7 @@ function Employee({ val = {}, currency, filters, employeePad = 30 }) {
 			<div className={styles.card_wrapper}>
 				<div
 					className={styles.view_btn}
+					style={{ left: `${20 + employeePad}` }}
 					onClick={() => {
 						setShowShipments(!showShipments);
 						setShowGrid(false);
@@ -177,7 +178,7 @@ function Employee({ val = {}, currency, filters, employeePad = 30 }) {
 					{val?.user_name?.toLowerCase() !== 'others' && (
 						<Employee
 							val={{
-								user_name  : 'Self',
+								name       : 'Self',
 								manager_id : val.manager_id,
 								...val.self,
 							}}
@@ -199,12 +200,12 @@ function Employee({ val = {}, currency, filters, employeePad = 30 }) {
 				<NoData showGrid={showGrid} entity="Employees" />
 			)}
 			{showShipments && shipments?.list?.length > 0 ? (
-				<>
+				<div className={styles.shipment_container}>
 					<AfterHeader showGrid={showShipments} />
 					{shipments?.list?.map((shipment) => (
 						<Shipment itemData={shipment} />
 					))}
-				</>
+				</div>
 			) : (
 				<div>
 					{!loading && <NoData showGrid={showShipments} />}

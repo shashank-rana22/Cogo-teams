@@ -33,6 +33,12 @@
 			padding: 0;
 			border: none;
 		}
+		.styles_data__0qSbV{
+			padding: 20px 0px;
+		}
+		.ui_table_body_cell{
+			padding: 0px;
+		}
 	}
 }
 
@@ -81,9 +87,11 @@
 		flex-direction: column;
 		justify-content: space-between;
 		height: 100%;
-		overflow: auto;
 	}
 
+	.table{
+		overflow: auto;
+	}
 	.tag {
 		display: none;
 	}

@@ -1,19 +1,22 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetAccountWiseFunnel = (byEtd, headerFilters) => {
 	const scope = useSelector(({ general }) => general.scope);
 
 	const { entity_code = [] } = headerFilters;
 
-	const [{ loading, data, error }, trigger] = useRequest({
-		url    : 'get_account_wise_organization_funnel',
-		method : 'GET',
-		scope,
-	}, { manual: false });
+	const [{ loading, data, error }, trigger] = useRequest(
+		{
+			url    : 'get_account_wise_organization_funnel',
+			method : 'GET',
+			scope,
+		},
+		{ manual: false },
+	);
 
-	const getAccountWiseFunnel = async () => {
+	const getAccountWiseFunnel = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -24,12 +27,11 @@ const useGetAccountWiseFunnel = (byEtd, headerFilters) => {
 		} catch (err) {
 			console.log(err, 'error');
 		}
-	};
+	}, [byEtd, entity_code, trigger]);
 
 	useEffect(() => {
 		getAccountWiseFunnel();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [byEtd, JSON.stringify(entity_code)]);
+	}, [getAccountWiseFunnel]);
 
 	return {
 		loading,

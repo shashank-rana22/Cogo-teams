@@ -17,8 +17,6 @@ function Months({
 }) {
 	const isClickable = isNextArrowAllowed(selectedFilterTab, data, maxEtd);
 
-	// data.splice(0, 1);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_arrow}>

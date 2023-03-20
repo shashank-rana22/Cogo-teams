@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const useGetMonthlyRevenue = ({
 	apiKey,
@@ -17,13 +17,16 @@ const useGetMonthlyRevenue = ({
 
 	const scope = useSelector(({ general }) => general.scope);
 
-	const [{ loading, data, error }, trigger] = useRequest({
-		url    : `/list_monthly_${apiKey}`,
-		method : 'GET',
-		scope,
-	}, { manual: false });
+	const [{ loading, data, error }, trigger] = useRequest(
+		{
+			url    : `/list_monthly_${apiKey}`,
+			method : 'GET',
+			scope,
+		},
+		{ manual: false },
+	);
 
-	const getMonthlyRevenue = async (page) => {
+	const getMonthlyRevenue = useCallback(async (page) => {
 		try {
 			await trigger({
 				params: {
@@ -35,12 +38,11 @@ const useGetMonthlyRevenue = ({
 		} catch (err) {
 			console.log(err, 'err');
 		}
-	};
+	}, [byEtd, entity_code, filters.page, trigger]);
 
 	useEffect(() => {
 		if (!isDataSelected && inViewport) getMonthlyRevenue();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters, inViewport, JSON.stringify(entity_code)]);
+	}, [getMonthlyRevenue, inViewport, isDataSelected]);
 
 	return {
 		loading,

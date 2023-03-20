@@ -33,3 +33,46 @@
 	justify-content: space-between;
 	width: 100px;
 }
+
+@media (max-width: 768px) {
+  
+	.card_wrapper {
+		margin: 0 10px;
+		background: #fefefe;
+		border-bottom: 1px solid #e5e3e3;
+		box-shadow: none;
+		width: fit-content;
+	}
+	
+	.revenue_col {
+		position: relative;
+		display: flex;
+		min-width: 100px;
+		flex: 0%;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin: 0px;
+		border-right: none;
+	}
+	
+	.row {
+		display: flex;
+		align-items: center;
+		padding: 0px;
+		font-size: 10px;
+		font-weight: 400;
+		text-align: center;
+		cursor: pointer;
+	}
+	
+	
+	.arrange {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100px;
+	}
+	
+	
+  }

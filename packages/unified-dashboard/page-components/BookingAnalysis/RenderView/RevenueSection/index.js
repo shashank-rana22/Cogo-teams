@@ -33,9 +33,8 @@ function RevenueSection({ data = {}, currency, selectedFilterTab, showRevenue, s
 			name            : 'Prior Period Impact (delta)',
 			data            : delta_revenue,
 			borderLeftColor : '#CDF7D4',
-			toolTipContent:
-				// eslint-disable-next-line max-len
-				'Sum of SI in the month - Sum of PI/SO/Quotation for corresponding shipment | Applicable where ETD is not in the month',
+			toolTipContent  : `Sum of SI in the month - Sum of PI/SO/Quotation for 
+				 corresponding shipment | Applicable where ETD is not in the month`,
 		},
 	];
 

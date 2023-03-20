@@ -11,8 +11,6 @@ function ProfitabilityTable({ loading, data, setFilters }) {
 
 	const column = columns();
 
-	// console.log('column ::', column, list);
-
 	if (list.length === 0 && !loading) {
 		return <Empty />;
 	}

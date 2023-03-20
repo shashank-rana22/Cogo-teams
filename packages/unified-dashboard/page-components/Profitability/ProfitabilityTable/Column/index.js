@@ -32,16 +32,12 @@ function columns() {
 				</div>
 			),
 			accessor: (item) => (
-				<>
-					{/* {console.log('item', item)} */}
-					<div className={styles.head}>
-						<div className={styles.serial_id}>{item.serial_id}</div>
-						<div className={styles.created_at}>
-							{format(item.created_at, 'dd MMM yyyy')}
-						</div>
+				<div className={styles.head}>
+					<div className={styles.serial_id}>{item.serial_id}</div>
+					<div className={styles.created_at}>
+						{format(item.created_at, 'dd MMM yyyy')}
 					</div>
-
-				</>
+				</div>
 			),
 			id: 'serial_id',
 		},
