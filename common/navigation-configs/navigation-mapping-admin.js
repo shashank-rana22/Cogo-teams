@@ -1744,13 +1744,14 @@ const navigationMappingAdmin = {
 
 	},
 	all_badges: {
-		key         : 'all_badges',
-		title       : 'All Badges',
-		href        : '/badges',
-		as          : '/badges',
-		main_apis   : apis.all_badges,
-		module_type : 'dashboards',
-		showInNav   : false,
+		key           : 'all_badges',
+		title         : 'All Badges',
+		href          : '/badges',
+		as            : '/badges',
+		main_apis     : [],
+		module_type   : 'dashboards',
+		possible_apis : apis.all_badges,
+		showInNav     : false,
 
 	},
 	allocations: {

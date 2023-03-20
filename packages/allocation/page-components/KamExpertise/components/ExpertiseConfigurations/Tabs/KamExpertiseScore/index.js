@@ -98,7 +98,7 @@ function KamExpertiseScoreConfig({ selectedVersion }) {
 	return (
 		<>
 			<div className={styles.container}>
-				<Header auditData={auditData} />
+				<Header auditData={auditData} loading={loading} />
 			</div>
 
 			{isEmpty(list) && !loading ? <EmptyState /> : null}
