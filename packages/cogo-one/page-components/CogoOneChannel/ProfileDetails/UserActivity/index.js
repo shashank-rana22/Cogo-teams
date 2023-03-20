@@ -101,8 +101,8 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		setFilters(null);
 	}, [activeSubTab, setFilters]);
 
-	const emptyList = activeSubTab !== 'channels' ? timeLineList : list;
-	const emptyCheck = (!user_id && !lead_user_id) || isEmpty(emptyList);
+	const emptyCheck = activeSubTab !== 'channels'
+		? isEmpty(timeLineList) : (!user_id && !lead_user_id) || isEmpty(list);
 
 	function ShowData() {
 		return emptyCheck ? (

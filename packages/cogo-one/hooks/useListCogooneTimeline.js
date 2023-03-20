@@ -81,10 +81,10 @@ const useListCogooneTimeline = ({
 	}, [id, pagination, setMessagesState, trigger, type]);
 
 	useEffect(() => {
-		if (activeSubTab === 'agent' && (user_id || lead_user_id)) {
+		if (activeSubTab === 'agent' && (user_id || lead_user_id || id)) {
 			getCogooneTimeline({});
 		}
-	}, [activeSubTab, getCogooneTimeline, lead_user_id, user_id]);
+	}, [activeSubTab, getCogooneTimeline, lead_user_id, user_id, id]);
 
 	return {
 		timeLineData    : data || {},
