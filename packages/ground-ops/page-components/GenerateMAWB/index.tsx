@@ -171,7 +171,7 @@ function GenerateMAWB({
 					<Breadcrumb>
 						<Breadcrumb.Item label={(
 							<div
-								onClick={() => setGenerate(false)}
+								onClick={() => { setGenerate(false); if (edit) { setEdit(false); } }}
 								role="link"
 								tabIndex={0}
 							>
@@ -236,7 +236,10 @@ function GenerateMAWB({
 											{!back ? (
 												<div className={styles.button_div}>
 													<Button
-														onClick={() => setGenerate(false)}
+														onClick={() => {
+															setGenerate(false);
+															if (edit) { setEdit(false); }
+														}}
 														themeType="secondary"
 														style={{ border: '1px solid #333' }}
 													>
