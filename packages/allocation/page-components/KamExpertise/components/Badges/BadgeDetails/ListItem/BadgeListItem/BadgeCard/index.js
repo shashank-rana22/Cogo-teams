@@ -43,18 +43,15 @@ function BadgeCard({ data, badgeItemData = {}, medal = '', isLast = {}, listRefe
 			{' '}
 			<div className={isLast ? styles.badge_card_right : styles.badge_card_left}>
 				<div className={styles.badge_header}>
-					<span>
-						{medal}
-						{' '}
-						:
-						<b>
-							{' '}
-							{score}
-							{' '}
-							Score
-						</b>
-					</span>
-					<span style={{ cursor: 'pointer' }}>
+					<div className={styles.header_score}>
+						<div>
+							{`${medal} : `}
+						</div>
+						<div className={styles.score}>
+							{`${score} Score`}
+						</div>
+					</div>
+					<span style={{ cursor: 'pointer', marginLeft: '4px' }}>
 						<IcMEdit onClick={onClose} />
 					</span>
 				</div>

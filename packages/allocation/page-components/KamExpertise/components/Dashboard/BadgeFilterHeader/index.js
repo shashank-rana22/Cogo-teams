@@ -6,7 +6,7 @@ import SearchInput from '../../../../../common/SearchInput';
 import styles from './styles.module.css';
 
 function BadgeFilterHeader(props) {
-	const { searchKAM, setSearchKAM, debounceQuery } = props;
+	const { leaderboardLoading, searchKAM, setSearchKAM, debounceQuery } = props;
 	const options = [
 		{ label: 'Gold', value: 300 },
 		{ label: 'Silver', value: 200 },
@@ -26,6 +26,7 @@ function BadgeFilterHeader(props) {
 						size="sm"
 					// value={value}
 					// onChange={setValue(value)}
+						disabled={leaderboardLoading}
 						placeholder="Select Badge"
 						options={options}
 					/>
@@ -36,6 +37,7 @@ function BadgeFilterHeader(props) {
 						size="sm"
 						placeholder="Search KAM"
 						value={searchKAM}
+						disabled={leaderboardLoading}
 						setGlobalSearch={setSearchKAM}
 						debounceQuery={debounceQuery}
 					/>

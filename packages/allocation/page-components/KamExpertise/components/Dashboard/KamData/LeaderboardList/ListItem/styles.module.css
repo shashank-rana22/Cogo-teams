@@ -6,9 +6,9 @@
     margin-bottom: 8px;
     background: #fff;
     border-radius: 8px;
-    height: 92px;
+    min-height: 92px;
+
     @media (max-width: 576px) {
-        /* width: 450px; */
         overflow-x: scroll;
     }
 }
@@ -23,7 +23,8 @@
 .card_description_left {
     display: flex;
     align-items: center;
-    width: 20%;
+    flex-basis: 20%;
+
     @media (max-width: 576px) {
         width: 250px;
         margin-right: 50px;
@@ -47,12 +48,13 @@
 }
 
 .badge_container {
-    width: 24%;
+    display: flex;
+    flex-basis: 24%;
+
     @media (max-width: 576px) {
         width: 250px;
         margin-right: 20px;
     }
-    display: flex;
 }
 
 .badges {
@@ -64,6 +66,7 @@
 
 .badge_item {
     margin-bottom: 4px;
+
     @media (max-width: 576px) {
         padding: 0 10px;
     }
@@ -78,13 +81,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 50%;
+    flex-basis: 50%;
+    margin-right: 40px;
+
     @media (max-width: 576px) {
         width: 650px;
         margin-left: 20px;
         padding-right: 20px;
     }
-    margin-right: 40px;
 }
 
 .link {
@@ -104,6 +108,7 @@
 
 .exp {
     flex-basis: auto;
+
     @media (max-width: 576px) {
         padding: 0 20px;
     }
