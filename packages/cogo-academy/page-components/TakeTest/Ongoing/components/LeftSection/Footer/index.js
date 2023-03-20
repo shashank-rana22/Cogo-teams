@@ -45,11 +45,12 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 		<div className={styles.container}>
 			<div className={styles.button_container}>
 
-				<Button themeType="secondary" onClick={() => setLeaveTest(true)}>Leave Test</Button>
+				<Button loading={loading} themeType="secondary" onClick={() => setLeaveTest(true)}>Leave Test</Button>
 
 				<div className={styles.right_button_container}>
 					<Button
 						themeType="secondary"
+						loading={loading}
 						style={{ marginRight: 12 }}
 						onClick={() => markAsReview()}
 					>
@@ -58,7 +59,8 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 					</Button>
 
 					<Button
-						disabled={currentQuestion >= total_question}
+						loading={loading}
+						disabled={currentQuestion > total_question}
 						onClick={() => sendAnswer()}
 					>
 						Next
