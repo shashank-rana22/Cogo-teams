@@ -1,4 +1,4 @@
-import { Toggle, Input, Select } from '@cogoport/components';
+import { Toggle, Input, Select, Tabs, TabPanel } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -13,6 +13,8 @@ function Header({
 	data = {},
 	filters = {},
 	setFilters = () => {},
+	activeWallet = '',
+	setActiveWallet = () => {},
 }) {
 	const SourceOptions = Array.isArray(data)
 		? (data || [])?.map((e) => ({ label: e?.business_name, value: e?.id }))
@@ -64,6 +66,18 @@ function Header({
 						</div> */}
 					</div>
 				) : null}
+				{activeToggle ? (
+					<Tabs
+						activeTab={activeWallet}
+						onChange={setActiveWallet}
+						className={styles.tabs}
+						themeType="primary"
+					>
+						<TabPanel name="trade_documents" title="Trade Documents" />
+
+						<TabPanel name="organization_documents" title="Organization Documents" />
+					</Tabs>
+				) : null}
 			</div>
 
 			<Toggle
@@ -73,7 +87,7 @@ function Header({
 				onLabel="Wallet"
 				value={activeToggle}
 				className={styles.custom_toggle}
-				onChange={() => setActiveToggle(!activeToggle)}
+				onChange={() => setActiveToggle((p) => !p)}
 			/>
 			{/* <div className={styles.line} style={{ width: '100%' }} /> */}
 		</div>

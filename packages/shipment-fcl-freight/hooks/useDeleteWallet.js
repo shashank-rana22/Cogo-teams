@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useCallback } from 'react';
 
 const useDeleteDocument = ({ refetch }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -8,21 +7,19 @@ const useDeleteDocument = ({ refetch }) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const deleteDocument = useCallback(() => {
-		(async (item) => {
-			try {
-				const res = await trigger({
-					data: { id: item?.id, status: 'inactive' },
-				});
-				if (!res.hasError) {
-					Toast.success('Document Deleted Successfully');
-				}
-				refetch();
-			} catch (err) {
-				Toast.error(err?.data);
+	const deleteDocument = async ({ id }) => {
+		try {
+			const res = await trigger({
+				data: { id, status: 'inactive' },
+			});
+			if (!res.hasError) {
+				Toast.success('Document Deleted Successfully');
 			}
-		})();
-	}, [refetch, trigger]);
+			refetch();
+		} catch (err) {
+			Toast.error(err?.response?.data?.document);
+		}
+	};
 
 	return {
 		deleteDocument,

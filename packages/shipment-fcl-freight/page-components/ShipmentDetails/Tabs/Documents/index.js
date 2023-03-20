@@ -17,6 +17,7 @@ import Wallet from './Wallet';
 
 function Documents() {
 	const [activeToggle, setActiveToggle] = useState(false);
+	const [activeWallet, setActiveWallet] = useState('trade_documents');
 	const [show, setShow] = useState(null);
 	const [showConfirmed, setShowConfirmed] = useState(false);
 	const [addToWallet, setAddToWallet] = useState(true);
@@ -68,20 +69,19 @@ function Documents() {
 				data={completedDocs?.organizations}
 				filters={filters}
 				setFilters={setFilters}
+				activeWallet={activeWallet}
+				setActiveWallet={setActiveWallet}
 			/>
 			{!activeToggle ? (
-
 				<CheckList
 					data={taskList}
 					setShow={setShow}
 					setShowConfirmed={setShowConfirmed}
-					// loading={loading}
+				// loading={loading}
 					emailDocs={emailDocs}
 					completedDocs={completedDocs?.list}
-					// shipmentDocumentsRefetch={refetch}
-					// addDocument={addDocument}
 				/>
-			) : <Wallet />}
+			) : <Wallet activeWallet={activeWallet} />}
 			{/* <Modal
 				show={show}
 				onClose={() => setShow(null)}

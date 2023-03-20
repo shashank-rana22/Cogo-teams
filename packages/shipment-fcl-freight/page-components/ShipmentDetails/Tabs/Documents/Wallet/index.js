@@ -1,8 +1,8 @@
-import { Popover, Tabs, TabPanel, Button } from '@cogoport/components';
+import { Popover, Button } from '@cogoport/components';
 import { IcMPdf, IcMOverflowDot, IcMImage } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
-import React, { useState } from 'react';
+import React from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
 import useDeleteDocument from '../../../../../hooks/useDeleteWallet';
@@ -11,8 +11,7 @@ import useListWallet from '../../../../../hooks/useListWallet';
 import Loader from './Loader';
 import styles from './styles.module.css';
 
-function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs }) {
-	const [activeWallet, setActiveWallet] = useState('trade_documents');
+function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs, activeWallet = '' }) {
 	const { data, refetch, loading } = useListWallet({
 		activeWallet,
 	});
@@ -35,7 +34,7 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs })
 			tabIndex="0"
 			className={styles.action}
 			onClick={() => {
-				deleteDocument({ item: doc });
+				deleteDocument({ id: doc?.id });
 			}}
 		>
 			Delete Document
@@ -111,16 +110,6 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs })
 
 	return (
 		<div className={styles.container}>
-			<Tabs
-				activeTab={activeWallet}
-				themeType="primary"
-				onChange={setActiveWallet}
-				className={styles.tabs}
-			>
-				<TabPanel name="trade_documents" title="Trade Documents" />
-
-				<TabPanel name="organization_documents" title="Organization Documents" />
-			</Tabs>
 			<div className={styles.wrapper}>{contentToShow()}</div>
 		</div>
 	);
