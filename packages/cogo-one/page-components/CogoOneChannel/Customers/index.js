@@ -36,9 +36,9 @@ function Customers({
 	setShowBotMessages,
 	setShowDialModal = () => {},
 	handleScroll = () => {},
-
+	setModalType = () => {},
+	modalType = {},
 }) {
-	const [modalType, setModalType] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
 	const onChangeToggle = () => {
 		if (toggleStatus) {
@@ -113,6 +113,8 @@ function Customers({
 					showBotMessages={showBotMessages}
 					setShowBotMessages={setShowBotMessages}
 					handleScroll={handleScroll}
+					setModalType={setModalType}
+					modalType={modalType}
 				/>
 			)}
 
@@ -156,7 +158,7 @@ function Customers({
 							</div>
 							<div className={`${styles.action} ${styles.whatsapp_icon}`}>
 								<img
-									onClick={() => setModalType(true)}
+									onClick={() => setModalType({ type: 'whatsapp_new_message_modal', data: {} })}
 									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg"
 									alt="whatsapp icon"
 									role="presentation"
@@ -167,7 +169,7 @@ function Customers({
 					</div>
 				</div>
 			</div>
-			{modalType && (
+			{modalType?.type && (
 				<NewWhatsappMessage
 					setModalType={setModalType}
 					modalType={modalType}
