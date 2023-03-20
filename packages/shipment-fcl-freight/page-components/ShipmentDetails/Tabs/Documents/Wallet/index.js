@@ -67,9 +67,9 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs })
 							</Popover>
 						)}
 						{doc.type === 'pdf' ? (
-							<IcMPdf fontSize="2rem" />
+							<IcMPdf fontSize="32px" />
 						) : (
-							<IcMImage fontSize="2rem" />
+							<IcMImage fontSize="32px" />
 						)}
 						<div className={styles.main}>
 							<div className={styles.heading} style={{ fontSize: '14px' }}>

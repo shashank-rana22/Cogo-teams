@@ -3,15 +3,14 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function VerticleLine({ checked, isLast, zIndex }) {
+function VerticleLine({ checked, isLast }) {
 	return (
 		<div className={styles.container}>
-			<div className={` ${checked ? styles.checked_circle : styles.circle}`} style={{ zIndex }}>
+			<div className={`${checked ? styles.checked_circle : styles.circle}`}>
 				{checked ? <IcMTick /> : null}
 			</div>
 			{!isLast && (
 				<div
-					style={{ zIndex }}
 					className={`${checked ? styles.checked_line : styles.line}`}
 				/>
 			)}

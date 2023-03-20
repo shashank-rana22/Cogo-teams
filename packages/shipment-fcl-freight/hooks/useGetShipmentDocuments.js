@@ -17,7 +17,7 @@ function useGetListDocuments({ shipment_data }) {
 				const res = await trigger({
 					params: {
 						filters            : { shipment_id: id },
-						additional_methods : ['pagination'],
+						additional_methods : ['pagination', 'organizations'],
 						page               : 1,
 						page_limit         : 10,
 						sort_by            : 'created_at',
