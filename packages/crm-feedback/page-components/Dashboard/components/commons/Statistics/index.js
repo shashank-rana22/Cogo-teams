@@ -3,7 +3,7 @@ import { startCase } from '@cogoport/utils';
 
 import useChartStats from '../../../hooks/useChartStats';
 
-import getStatsData from './configurations/get-stats-data';
+import getStatsData from './get-stats-data';
 import styles from './styles.module.css';
 
 function Statistics({ activeTab = '' }) {
@@ -15,7 +15,7 @@ function Statistics({ activeTab = '' }) {
 	if (isEmpty && !loading) {
 		return (
 			<section className={styles.empty_container}>
-				<div className={styles.empty_text}>Pie Statistics Not Found !!!</div>
+				<div className={styles.empty_text}>Statistics are not available.</div>
 			</section>
 		);
 	}

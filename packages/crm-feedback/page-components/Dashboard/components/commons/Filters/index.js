@@ -5,8 +5,8 @@ import {
 	asyncFieldsPartnerUsers,
 } from '@cogoport/forms/utils/getAsyncFields';
 
+import { controlsFeedbacks, controlsRequests } from './controls';
 import styles from './styles.module.css';
-import { controlsFeedbacks, controlsRequests } from './utils/controls';
 
 function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' }) {
 	const organizationOptions = useGetAsyncOptions({

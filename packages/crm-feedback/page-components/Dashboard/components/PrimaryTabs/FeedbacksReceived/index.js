@@ -6,11 +6,11 @@ import Filters from '../../commons/Filters';
 import Statistics from '../../commons/Statistics';
 import EnrichmentRequest from '../../EnrichmentRequest';
 
+import { FEEDBACK_COLUMNS } from './get-feedback-columns';
 import styles from './styles.module.css';
 
 function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 	const {
-		columns = [],
 		data = {},
 		loading = false,
 		filters = {},
@@ -18,9 +18,19 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 		onChangeParams = () => {},
 		paginationData = {},
 		checkedRowsId = [],
+		selectAll = false,
+		onChangeTableHeadCheckbox = () => {},
+		onChangeBodyCheckbox = () => {},
 	} = useFeedbackTableData();
 
 	const { page, page_limit, total_count } = paginationData;
+
+	const columns = FEEDBACK_COLUMNS({
+		selectAll,
+		onChangeTableHeadCheckbox,
+		checkedRowsId,
+		onChangeBodyCheckbox,
+	});
 
 	return (
 		<div className={styles.container}>

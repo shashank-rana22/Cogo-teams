@@ -5,13 +5,14 @@ import CrmTable from '../../commons/CrmTable';
 import Filters from '../../commons/Filters';
 import Statistics from '../../commons/Statistics';
 
+import { REQUEST_COLUMNS } from './get-request-columns';
 import styles from './styles.module.css';
 
 function RequestsSent({ activeTab = '' }) {
 	const {
-		columns = [],
 		data = {},
 		loading = false,
+		router,
 		filters = {},
 		onChangeFilters = () => {},
 		onChangeParams = () => {},
@@ -19,6 +20,10 @@ function RequestsSent({ activeTab = '' }) {
 	} = useRequestTableData();
 
 	const { page, page_limit, total_count } = paginationData;
+
+	const columns = REQUEST_COLUMNS({
+		router,
+	});
 
 	return (
 		<div className={styles.container}>

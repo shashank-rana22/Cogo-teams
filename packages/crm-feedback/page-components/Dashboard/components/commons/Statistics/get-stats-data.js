@@ -25,7 +25,7 @@ function getStatsData(activeTab, stats) {
 						{
 							id    : 'email',
 							label : 'Email',
-							value : 5,
+							value : stats.email,
 						},
 						{
 							id    : 'mobile_number',
