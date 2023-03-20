@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 
 function ViewAllConfigurations() {
 	const router = useRouter();
+
 	const VERSION_CARDS = [
 		{
 			version       : 4,
@@ -29,9 +30,11 @@ function ViewAllConfigurations() {
 			status        : 'expired',
 		},
 	];
+
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise/configurations');
 	};
+
 	return (
 		<>
 			<div className={styles.back_container} role="presentation" onClick={onClickBack}>
