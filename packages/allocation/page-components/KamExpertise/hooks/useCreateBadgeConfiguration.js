@@ -78,7 +78,7 @@ function useCreateBadgeConfiguration(props) {
 					],
 				};
 
-				if (Object.keys(badgeItemData).length > 0) {
+				if (!isEmpty(badgeItemData)) {
 					payload.id = badgeItemData.id;
 					payload.badge_details[0].badge_detail_id = badgeDetails?.[0]?.id;
 					payload.badge_details[1].badge_detail_id = badgeDetails?.[1]?.id;
@@ -96,7 +96,7 @@ function useCreateBadgeConfiguration(props) {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
 		} else {
-			Toast.error('Provide Scores in proper order: Bronze < Silver <Gold');
+			Toast.error('Provide Scores in proper order: Bronze < Silver < Gold');
 		}
 	};
 

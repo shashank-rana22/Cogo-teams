@@ -1,15 +1,13 @@
 import { Tooltip } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
-import EDIT_CONFIG_CONTROLS_MAPPING from '../../../../../../constants/edit-config-controls-mapping';
 
 import styles from './styles.module.css';
 
-function CardItem({ item, editMode, control}) {
-	const { expertise_type = '', data = [], group_name = '' } = item;
+function CardItem({ item, editMode, control }) {
+	const { data = [], group_name = '' } = item;
 	const isDoubleLevel = data.length > 1;
 
 	const conditionName = data[0].condition_name;
@@ -17,7 +15,7 @@ function CardItem({ item, editMode, control}) {
 	return (
 		<div className={styles.card_item}>
 			<div className={styles.name_container}>
-				<div className={styles.parameter_name}>{startCase(data.length === 1 ? conditionName: group_name)}</div>
+				<div className={styles.parameter_name}>{startCase(data.length === 1 ? conditionName : group_name)}</div>
 				<div className={styles.icon_container}>
 					<Tooltip content="Lorem ipsum dolor sit amet, consectetur adipiscing elit" placement="top">
 						<div><IcMInfo width={14} height={14} /></div>
@@ -28,7 +26,6 @@ function CardItem({ item, editMode, control}) {
 
 			{data.map((childItem) => {
 				const { condition_name = '', attributes: controls = [], id = '' } = childItem;
-
 
 				return (
 					<>
@@ -43,15 +40,18 @@ function CardItem({ item, editMode, control}) {
 						<div className={styles.controls_container}>
 
 							{controls.map((singleField) => {
-								const { name: controlName = '', score, type, label, placeholder, options = [] } = singleField;
+								const {
+									name: controlName = '', score, type,
+									label, placeholder, options = [],
+								} = singleField;
 
 								const controlsObject = {
-									name: controlName,
-									type: type,
-									label: label,
-									placeholder: placeholder,
-									options: options || [],
-								}
+									name    : controlName,
+									type,
+									label,
+									placeholder,
+									options : options || [],
+								};
 
 								const Element = getFieldController(controlsObject.type) || null;
 
@@ -73,7 +73,9 @@ function CardItem({ item, editMode, control}) {
 												/>
 
 												<div className={styles.lower_current_value}>
-													Current value: {startCase(score)}
+													Current value:
+													{' '}
+													{startCase(score)}
 												</div>
 											</>
 

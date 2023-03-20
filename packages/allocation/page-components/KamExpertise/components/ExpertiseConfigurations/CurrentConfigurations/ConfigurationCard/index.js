@@ -56,10 +56,16 @@ function ConfigurationCard(props) {
 						Last Edit by&nbsp;:&nbsp;
 						<strong>{last_edit_by ?? '--'}</strong>
 					</div>
+					<div className={styles.last_modified}>
+						<div style={{ marginRight: '28px' }}>
+							Last Edit by&nbsp;:&nbsp;
+							<strong>{last_edit_by}</strong>
+						</div>
 
-					<div>
-						Last Modified&nbsp;:&nbsp;
-						<strong>{format(last_modified, 'dd-MM-yyyy')}</strong>
+						<div>
+							Last Modified&nbsp;:&nbsp;
+							<strong>{format(last_modified, 'dd-MM-yyyy')}</strong>
+						</div>
 					</div>
 				</div>
 

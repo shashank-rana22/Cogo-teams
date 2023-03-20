@@ -25,6 +25,7 @@ function ViewAllConfigs() {
 	const router = useRouter();
 	const [activeConfigTab, setActiveConfigTab] = useState('kam-expertise-score-config');
 	const [selectedVersion, setSelectedVersion] = useState('');
+	const [mainLoading, setMainLoading] = useState();
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise');
@@ -58,7 +59,7 @@ function ViewAllConfigs() {
 
 							return Component ? (
 								<TabPanel key={name} name={name} title={title}>
-									<Component selectedVersion={selectedVersion} />
+									<Component setMainLoading={setMainLoading} selectedVersion={selectedVersion} />
 								</TabPanel>
 							) : null;
 						})}
@@ -66,6 +67,7 @@ function ViewAllConfigs() {
 					<Button
 						themeType="primary"
 						className={styles.pub_button}
+						disabled={mainLoading}
 					>
 						Publish
 
