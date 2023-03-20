@@ -10,7 +10,7 @@ function CreateMastery(props) {
 	const {
 		setToggleScreen,
 		badgeList = {},
-		masteryListData = {},
+		masteryItemData = {},
 		listRefetch,
 	} = props;
 
@@ -23,10 +23,10 @@ function CreateMastery(props) {
 		getAddMasteryControls,
 		loading = false,
 		onSave,
-	} = useCreateMasterConfiguration({ masteryListData, onClose, listRefetch });
+	} = useCreateMasterConfiguration({ masteryItemData, onClose, listRefetch });
 
 	const UploadController = getFieldController('fileUpload');
-	const InputDesc = getFieldController('textarea');
+	const InputController = getFieldController('textarea');
 
 	const {
 		control,
@@ -35,7 +35,8 @@ function CreateMastery(props) {
 		formState: { errors },
 	} = formProps;
 
-	const badge_options = []; // for multi-select badges
+	// ! To be removed when we get api
+	const badge_options = [];
 	(badgeList || {}).forEach((badge_data) => {
 		if (badge_data.expertise_configuration_type === 'event_configuration') {
 			badge_options.push({
@@ -50,7 +51,7 @@ function CreateMastery(props) {
 			<form onSubmit={handleSubmit(onSave)}>
 				<section className={styles.container}>
 					<div>
-						{isEmpty(masteryListData) ? null : (
+						{isEmpty(masteryItemData) ? null : (
 							<div className={styles.fields_container}>
 								<p
 									className={styles.text_styles}
@@ -58,10 +59,10 @@ function CreateMastery(props) {
 								>
 									Last Modified :
 									{' '}
-									{format(masteryListData.updated_at, 'yyyy-MMM-dd')}
+									{format(masteryItemData.updated_at, 'yyyy-MMM-dd')}
 								</p>
 
-								{/* //! needs changes */}
+								{/* //! needs from backend */}
 								{/* <p className={styles.text_styles}>Last Modified By :</p> */}
 							</div>
 						)}
@@ -88,8 +89,11 @@ function CreateMastery(props) {
 										key={ele.name}
 										id={`${ele.name}_input`}
 										style={ele.styles}
-										disabled={!isEmpty(masteryListData) && ele.name === 'badges'}
-										options={badgeList.length > 0 ? badge_options : ele.options}
+										disabled={
+											(!isEmpty(masteryItemData) && ele.name === 'badges')
+											|| (loading)
+										}
+										options={!isEmpty(badgeList) ? badge_options : ele.options}
 									/>
 
 									<div className={styles.error_message}>
@@ -107,7 +111,8 @@ function CreateMastery(props) {
 										name="image_input"
 										control={control}
 										accept=".png, .jpeg"
-										rules={isEmpty(masteryListData)
+										disabled={loading}
+										rules={isEmpty(masteryItemData)
 											? {
 												required: 'Image is required',
 											}
@@ -123,10 +128,10 @@ function CreateMastery(props) {
 											<img src={watch('image_input')} alt="preview_image" />
 										</div>
 									) : null}
-									{!isEmpty(masteryListData) && !watch('image_input') ? (
+									{!isEmpty(masteryItemData) && !watch('image_input') ? (
 										<div className={styles.preview}>
 											<img
-												src={masteryListData.badge_details[0].image_url}
+												src={masteryItemData.badge_details[0].image_url}
 												alt="Modal img preview"
 											/>
 										</div>
@@ -135,17 +140,18 @@ function CreateMastery(props) {
 							</div>
 							<div className={styles.text_area_container}>
 								<p style={{ color: '#4f4f4f' }}>Description</p>
-								<InputDesc
+								<InputController
 									name="description_input"
 									className={styles.text_area}
 									multiline
+									disabled={loading}
 									placeholder="Multimodal maestro is awarded
                                 				to users who complete gold 3 in all of these badges"
 									control={control}
 									rules={{ required: 'Description is required' }}
 								/>
 								<div className={styles.error_message}>
-									{isEmpty(masteryListData) && errors?.description_input?.message}
+									{isEmpty(masteryItemData) && errors?.description_input?.message}
 								</div>
 							</div>
 						</div>
@@ -165,7 +171,7 @@ function CreateMastery(props) {
 							themeType="primary"
 							type="submit"
 							id="save_button"
-							disabled={loading}
+							loading={loading}
 						>
 							Save
 						</Button>

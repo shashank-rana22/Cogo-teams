@@ -1,45 +1,122 @@
+import { Placeholder } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ auditData }) {
+function Header({ auditData, loading }) {
 	const { name, updated_at } = auditData;
-	return (
-		<div className={styles.container}>
-			<div className={styles.config_basic_details}>
-				<div className={styles.draft_name}>
-					Currently Editing :
-					{' '}
-				&nbsp;
-					<b>Saved Draft</b>
-				</div>
 
-				<div className={styles.lower_details}>
-					<div>
-						Last Modified:
-						{' '}
-						{format(updated_at, 'dd-MM-YYYY')}
+	if (loading) {
+		return (
+			<div className={styles.main_container}>
+				<div className={styles.config_basic_detail}>
+					<div className={styles.draft_name}>
+						<div style={{ marginRight: '8px' }}>
+							Currently Editing :
+							{' '}
+						</div>
+						<Placeholder height="20px" width="120px" />
+
+					</div>
+					<div className={styles.lower_details}>
+						<div className={styles.lower_info} style={{ marginRight: '8px' }}>
+
+							<div>
+								Last Modified
+								{' '}
+								:
+							</div>
+
+							<span>
+								<Placeholder height="20px" width="120px" />
+							</span>
+						</div>
+
+						<div className={styles.lower_info} style={{ marginLeft: '36px' }}>
+							<div style={{ marginRight: '8px' }}>
+								Last Edit By
+								{' '}
+								:
+								{' '}
+							</div>
+							<Placeholder height="20px" width="120px" />
+						</div>
 					</div>
 
-					<div>
-						Last Edit By:
+				</div>
+			</div>
+		);
+	}
+	return (
+	// <div className={styles.container}>
+	// 	<div className={styles.config_basic_details}>
+	// 		<div className={styles.draft_name}>
+	// 			Currently Editing :
+	// 			{' '}
+	// 		&nbsp;
+	// 			<b>Saved Draft</b>
+	// 		</div>
+
+	// 		<div className={styles.lower_details}>
+	// 			<div>
+	// 				Last Modified:
+	// 				{' '}
+	// 				{format(updated_at, 'dd-MM-YYYY')}
+	// 			</div>
+
+	// 			<div>
+	// 				Last Edit By:
+	// 				{' '}
+	// 				<b>{startCase(name)}</b>
+	// 			</div>
+	// 		</div>
+	// 	</div>
+
+	// 	{/* <div className={styles.button_container}>
+	// 		<Button themeType="secondary">
+	// 			Save As Draft
+	// 		</Button>
+
+	// 		<Button themeType="primary" style={{ marginLeft: '8px' }}>
+	// 			Publish
+	// 		</Button>
+	// 	</div> */}
+
+		// </div>
+		<div className={styles.main_container}>
+			<div className={styles.config_basic_detail}>
+				<div className={styles.draft_name}>
+					<div style={{ marginRight: '8px' }}>
+						Currently Editing :
 						{' '}
-						<b>{startCase(name)}</b>
+					</div>
+					<b>Saved Draft</b>
+				</div>
+				<div className={styles.lower_details}>
+					<div className={styles.lower_info}>
+						<div>
+							Last Modified
+							{' '}
+							:&nbsp;
+						</div>
+						<span>
+							{ (format(updated_at, 'dd-MM-YYYY') || '--')}
+						</span>
+
+					</div>
+					<div className={styles.lower_info} style={{ marginLeft: '36px' }}>
+						<div>
+							Last Edit By
+							{' '}
+							:
+							{' '}
+						</div>
+
+						<b>{startCase(name || '----')}</b>
 					</div>
 				</div>
 			</div>
-
-			{/* <div className={styles.button_container}>
-				<Button themeType="secondary">
-					Save As Draft
-				</Button>
-
-				<Button themeType="primary" style={{ marginLeft: '8px' }}>
-					Publish
-				</Button>
-			</div> */}
-
 		</div>
 	);
 }

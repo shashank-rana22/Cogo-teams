@@ -1,7 +1,7 @@
 import { Button, TabPanel, Tabs } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 import CurrentConfigurations from './CurrentConfigurations';
 import styles from './styles.module.css';
@@ -25,15 +25,10 @@ function ViewAllConfigs() {
 	const router = useRouter();
 	const [activeConfigTab, setActiveConfigTab] = useState('kam-expertise-score-config');
 	const [selectedVersion, setSelectedVersion] = useState('');
+	const [mainLoading, setMainLoading] = useState();
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise');
-	};
-
-	const scrollToRef = useRef(null);
-
-	const handleClick = () => {
-		scrollToRef.current?.scrollIntoView({ behavior: 'smooth' });
 	};
 
 	return (
@@ -53,19 +48,18 @@ function ViewAllConfigs() {
 				</div>
 
 				<CurrentConfigurations
-					handleClick={handleClick}
 					selectedVersion={selectedVersion}
 					setSelectedVersion={setSelectedVersion}
 				/>
 
-				<div className={styles.tab_list} ref={scrollToRef}>
+				<div className={styles.tab_list}>
 					<Tabs activeTab={activeConfigTab} themeType="secondary" onChange={setActiveConfigTab}>
 						{Object.values(TAB_PANEL_MAPPING).map((item) => {
 							const { name = '', title = '', Component } = item;
 
 							return Component ? (
 								<TabPanel key={name} name={name} title={title}>
-									<Component selectedVersion={selectedVersion} />
+									<Component setMainLoading={setMainLoading} selectedVersion={selectedVersion} />
 								</TabPanel>
 							) : null;
 						})}
@@ -73,6 +67,7 @@ function ViewAllConfigs() {
 					<Button
 						themeType="primary"
 						className={styles.pub_button}
+						disabled={mainLoading}
 					>
 						Publish
 

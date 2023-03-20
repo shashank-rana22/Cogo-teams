@@ -9,11 +9,11 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function ExpertiseParameters(props) {
-	const { onClickAddCondition, activeCollapse = '', loading } = props;
+	const { onClickAddCondition, activeCollapse = '' } = props;
 
 	const [editMode, setEditMode] = useState(false);
 
-	const { data, refetch } = useGetExpertiseParameters({ activeCollapse });
+	const { data, refetch, loading } = useGetExpertiseParameters({ activeCollapse });
 	const { list = [] } = data || {};
 
 	const {

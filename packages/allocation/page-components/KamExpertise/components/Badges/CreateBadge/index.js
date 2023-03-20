@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
-import GetCard from '../BadgeUpdateCard';
+import BadgeUpdateCard from '../BadgeUpdateCard';
 
 import styles from './styles.module.css';
 
@@ -21,14 +21,16 @@ const MEDALS_MAPPING = [
 	},
 ];
 
-function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
+function CreateBadge(props) {
+	const { setToggleScreen, badgeItemData = {}, listRefetch } = props;
+
 	const onClose = () => {
 		setToggleScreen('badge_details');
 	};
 
 	const {
 		onSave, getFieldController, loading = false, getAddBadgesControls, formProps,
-	} = useCreateBadgeConfiguration({ onClose, badgeListData, listRefetch });
+	} = useCreateBadgeConfiguration({ onClose, badgeItemData, listRefetch });
 
 	const {
 		control, watch, handleSubmit, formState: { errors },
@@ -37,18 +39,18 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 	return (
 		<div>
 			<section className={styles.container}>
-				{!isEmpty(badgeListData)
+				{!isEmpty(badgeItemData)
 				&& (
 					<div className={styles.fields_container}>
 						<p className={styles.text_styles}>
 							Last Modified :
 							{' '}
-							{format(badgeListData.updated_at, 'yyyy-MMM-dd')}
+							{badgeItemData.updated_at ? format(badgeItemData.updated_at, 'yyyy-MMM-dd') : '___'}
 						</p>
 
 						{/* <p className={styles.text_styles}>
 							Last Modified By :
-							{` ${badgeListData.lstModifiedBy}`}
+							{` ${badgeItemData.lstModifiedBy}`}
 						</p> */}
 					</div>
 				)}
@@ -56,8 +58,8 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 					{index}
 				</p> */}
 
-				<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>
-					{isEmpty(badgeListData) ? 'Add Badge' : 'Update Badge'}
+				<h2 style={{ color: '#4f4f4f' }}>
+					{isEmpty(badgeItemData) ? 'Add Badge' : 'Update Badge'}
 				</h2>
 				<p className={styles.text_styles2}>
 					Select the conditions and number of completions necessary to obtain
@@ -82,7 +84,10 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 											key={el.name}
 											control={control}
 											id={`${el.name}_input`}
-											disabled={!isEmpty(badgeListData) && el.name === 'condition'}
+											disabled={
+												(!isEmpty(badgeItemData) && el.name === 'condition')
+												|| (loading)
+											}
 										/>
 									</div>
 
@@ -97,10 +102,11 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 						<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
 						<div className={styles.display_flex}>
 							{MEDALS_MAPPING.map((data, index) => (
-								<GetCard
+								<BadgeUpdateCard
 									data={data}
-									badgeListData={badgeListData}
+									badgeItemData={badgeItemData}
 									control={control}
+									loading={loading}
 									errors={errors}
 									watch={watch}
 									isLastItem={index === MEDALS_MAPPING.length - 1}
@@ -127,7 +133,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 							type="submit"
 							themeType="primary"
 							id="save_request_btn"
-							disabled={loading}
+							loading={loading}
 						>
 							Save
 						</Button>

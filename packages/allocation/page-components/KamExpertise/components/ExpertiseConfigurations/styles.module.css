@@ -22,7 +22,7 @@
 }
 
 .back_text {
-	margin-bottom: 4px;
+	margin: 4px 0;
 	font-size: 16px;
 	cursor: pointer;
 }
@@ -50,7 +50,7 @@
 }
 .pub_button{
 	position: absolute;
-	top: 0;
+	top: 36px;
 	right: 0;
-	width: 91px;
+	width: 92px;
 }

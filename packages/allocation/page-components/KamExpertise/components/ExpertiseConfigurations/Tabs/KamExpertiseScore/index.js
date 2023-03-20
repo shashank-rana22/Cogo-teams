@@ -1,7 +1,7 @@
 import { Collapse, Button, Modal } from '@cogoport/components';
 import { IcMAgentManagement } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
 import FieldArray from '../../../../../../common/Form/FieldArray';
@@ -10,7 +10,7 @@ import getControls from '../../../../configurations/get-add-conditions-controls'
 import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mapping';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
 import useCreateAllocationKamExpertiseEventScoring from '../../../../hooks/useCreateAllocationKamExpertiseEventScoring';
-import useGetKamExpertiseScore from '../../../../hooks/useGetKamExpertiseScore';
+import useGetExpertiseParameters from '../../../../hooks/useGetExpertiseParameters';
 import LoadingState from '../LoadingState';
 
 import ExpertiseParameters from './ExpertiseParameters';
@@ -52,7 +52,7 @@ const titleSection = (expertiseItem = {}) => (
 	</div>
 );
 
-function KamExpertiseScoreConfig({ selectedVersion }) {
+function KamExpertiseScoreConfig({ setMainLoading,selectedVersion }) {
 	const [addConditionModal, setAddConditionModal] = useState({});
 
 	const [activeCollapse, setActiveCollapse] = useState('');
@@ -63,8 +63,11 @@ function KamExpertiseScoreConfig({ selectedVersion }) {
 		setAddConditionModal({});
 	};
 
-	const { data, loading, refetch } = useGetKamExpertiseScore({ selectedVersion });
+	const { data, loading, refetch } = useGetExpertiseParameters({ selectedVersion });
 
+	useEffect(() => {
+		setMainLoading(loading);
+	}, [loading, setMainLoading]);
 	const { list = [], audit_data: auditData = {} } = data || {};
 
 	const {
@@ -98,7 +101,7 @@ function KamExpertiseScoreConfig({ selectedVersion }) {
 	return (
 		<>
 			<div className={styles.container}>
-				<Header auditData={auditData} />
+				<Header auditData={auditData} loading={loading} />
 			</div>
 
 			{isEmpty(list) && !loading ? <EmptyState /> : null}

@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -6,16 +6,18 @@ import { getFieldController } from '../../../../../common/Form/getFieldControlle
 
 import styles from './styles.module.css';
 
-function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', watch, isLastItem }) {
+function BadgeUpdateCard(props) {
+	const { data = {}, badgeItemData = {}, control, errors = '', watch, isLastItem, loading = false } = props;
 	const { medalType, score = '', inputPlaceHolder = '' } = data;
+	const { badge_details = [] } = badgeItemData;
 
-	const InputElement = getFieldController('number');
-	const UploadControler = getFieldController('fileUpload');
+	const InputController = getFieldController('number');
+	const UploadController = getFieldController('fileUpload');
 
 	const MEDAL_IMAGE_MAPPING = {
-		Bronze : badgeListData?.badge_details?.[0]?.image_url,
-		Silver : badgeListData?.badge_details?.[1]?.image_url,
-		Gold   : badgeListData?.badge_details?.[2]?.image_url,
+		Bronze : badge_details?.[0]?.image_url,
+		Silver : badge_details?.[1]?.image_url,
+		Gold   : badge_details?.[2]?.image_url,
 	};
 
 	return (
@@ -32,7 +34,7 @@ function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', 
 				<div>
 					<p style={{ color: '#4f4f4f' }}>Score</p>
 
-					<InputElement
+					<InputController
 						name={`${medalType}_value`}
 						value={score || ''}
 						id={`${medalType}_value_input`}
@@ -42,6 +44,7 @@ function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', 
 						rules={{
 							required: 'Score is required',
 						}}
+						disabled={loading}
 					/>
 
 					<div className={styles.error_message}>
@@ -53,16 +56,23 @@ function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', 
 
 			<div className={styles.lower_subheader2}>
 				{`${medalType} Medal`}
-				<IcMInfo className={styles.icm_info} />
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<Tooltip content="Lorem ipsum dolor sit amet, consectetur adipiscing elit" placement="top">
+						<div style={{ display: 'flex' }}>
+							<IcMInfo className={styles.icm_info} />
+						</div>
+					</Tooltip>
+				</div>
 			</div>
 
 			<div className={styles.file_select_style}>
 				<div className={styles.uploader}>
-					<UploadControler
+					<UploadController
 						name={`${medalType}_img_value`}
 						control={control}
+						disabled={loading}
 						accept=".png, .jpeg"
-						rules={isEmpty(badgeListData) ? {
+						rules={isEmpty(badgeItemData) ? {
 							required: 'Image is required',
 						} : {}}
 					/>
@@ -82,7 +92,7 @@ function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', 
 						: null}
 
 					{
-					!isEmpty(data && badgeListData) && !watch(`${medalType}_img_value`)
+					!isEmpty(data && badgeItemData) && !watch(`${medalType}_img_value`)
 						? (
 							<div className={styles.preview}>
 								<img

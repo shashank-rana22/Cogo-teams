@@ -18,7 +18,6 @@ const HEADER_DATA = {
 function Header({ setSelectedVersion, selectedVersion }) {
 	const [mode, setMode] = useState('');
 	const [showModal, setShowModal] = useState(false);
-	// const [selectedVersion, setSelectedVersion] = useState(0);
 
 	return (
 		<div className={styles.container}>
@@ -78,6 +77,8 @@ function Header({ setSelectedVersion, selectedVersion }) {
 										<Published
 											selectedVersion={selectedVersion}
 											setSelectedVersion={setSelectedVersion}
+											
+
 										/>
 
 									);
