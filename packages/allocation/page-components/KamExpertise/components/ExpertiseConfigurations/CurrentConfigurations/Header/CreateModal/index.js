@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function CreateModal({ setMode }) {
+function CreateModal({ setMode, setSelectedVersion }) {
 	return (
 		<div className={styles.modal_container}>
 			<div className={styles.head_text}>
@@ -17,7 +17,10 @@ function CreateModal({ setMode }) {
 
 				</button>
 				<button
-					onClick={() => { setMode('published-version'); }}
+					onClick={() => {
+						setMode('published-version');
+						setSelectedVersion('');
+					}}
 					className={styles.button}
 				>
 					b. Choose from published versions

@@ -33,7 +33,7 @@ function useUpdateKamScores(props) {
 
 	const formProps = useForm();
 
-	const [{ loading }, trigger] = useAllocationRequest({
+	const [{ loading:updateLoading }, trigger] = useAllocationRequest({
 		method  : 'POST',
 		url     : 'kam_expertise_configuration_attributes',
 		authkey : 'post_allocation_kam_expertise_configuration_attributes',
@@ -66,7 +66,7 @@ function useUpdateKamScores(props) {
 		}
 	};
 	return {
-		loading,
+		updateLoading,
 		onSave,
 		formProps,
 	};

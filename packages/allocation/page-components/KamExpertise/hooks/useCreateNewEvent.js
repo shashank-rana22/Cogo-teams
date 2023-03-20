@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-// import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
@@ -58,7 +57,7 @@ function useCreateNewEvent(props) {
 					data: payload,
 				});
 
-				Toast.success('Sucessfully Created!');
+				Toast.success('Event Successfully Created!');
 				listRefetch();
 				setToggleEvent('eventList');
 			} catch (error) {

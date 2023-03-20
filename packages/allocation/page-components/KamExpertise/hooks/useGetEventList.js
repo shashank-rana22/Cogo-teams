@@ -24,7 +24,6 @@ function useGetEventList() {
 	}, { manual: false });
 
 	useEffect(() => {
-		console.log('expertise::', expertise);
 		setParams((previousParams) => ({
 			...previousParams,
 			filters: {

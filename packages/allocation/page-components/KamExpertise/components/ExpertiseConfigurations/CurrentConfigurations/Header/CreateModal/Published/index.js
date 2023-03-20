@@ -1,5 +1,4 @@
-import { cl, ButtonIcon, Pill, Table } from '@cogoport/components';
-import { IcMPlus } from '@cogoport/icons-react';
+import { cl, Pill, Table } from '@cogoport/components';
 import React from 'react';
 // import { Modal} from '@cogoport/components';
 
@@ -29,22 +28,6 @@ function Published({ setSelectedVersion = () => {} }) {
 		{
 			Header   : 'LAST UPDATED',
 			accessor : 'last_updated',
-		},
-		{
-			Header   : 'Action',
-			accessor : ({ id = '' }) => (
-				<section>
-					<ButtonIcon
-						size="lg"
-						icon={(
-							<IcMPlus />
-						)}
-						onClick={() => {
-							setSelectedVersion(id);
-						}}
-					/>
-				</section>
-			),
 		},
 
 	];
@@ -92,7 +75,7 @@ function Published({ setSelectedVersion = () => {} }) {
 
 		},
 		{
-			id           : '0',
+			id           : '19',
 			versionName  : 'Version 3',
 			last_updated : '22-Sep-2023',
 			status       : 'Expired',

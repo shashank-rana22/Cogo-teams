@@ -62,3 +62,9 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.delete_btn_visibility{
+  opacity: 0.4;
+  pointer-events: none ;
+  cursor: not-allowed;
+}

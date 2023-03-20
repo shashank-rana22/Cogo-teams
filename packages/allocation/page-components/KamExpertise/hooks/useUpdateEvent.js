@@ -74,7 +74,7 @@ function useUpdateEvent(props) {
 				});
 
 				setToggleEvent('eventList');
-				Toast.success('Sucessfully Updated!');
+				Toast.success('Sucessfully Updated Event!');
 				listRefetch();
 			} catch (error) {
 				Toast.error(
