@@ -1,5 +1,9 @@
 .form_container {
 	padding: 20px;
+
+	@media (max-width: 580px) {
+		padding-top: 50px;
+	}
 }
 
 .heading {
