@@ -46,23 +46,24 @@ function ShipmentHeader() {
 
 	return (
 		<div className={styles.container}>
-			<div>
+			<div className={styles.customer}>
 				<Tooltip
 					theme="light"
 					placement="right"
+					maxWidth="none"
 					content={(
 						<div style={{ fontSize: '10px' }}>
 							{importer_exporter?.business_name}
 						</div>
 					)}
 				>
-					<div className={styles.customer}>{importer_exporter?.business_name}</div>
+					<div>{importer_exporter?.business_name}</div>
 				</Tooltip>
 				<div>
 					{handlePoNo()}
 				</div>
 			</div>
-			<div style={{ width: '60%', justifyContent: 'center' }}>
+			<div className={styles.port_details}>
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
 			<CargoDetails
