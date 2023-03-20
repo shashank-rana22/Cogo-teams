@@ -25,6 +25,7 @@ function AddedQuestions(props) {
 		questionListLoading,
 		sortType,
 		setSortType,
+		requestedQuestionCount,
 	} = props;
 
 	const router = useRouter();
@@ -100,6 +101,7 @@ function AddedQuestions(props) {
 				setActiveList={setActiveList}
 				sortType={sortType}
 				setSortType={setSortType}
+				requestedQuestionCount={requestedQuestionCount}
 			/>
 
 			{renderTable()}
