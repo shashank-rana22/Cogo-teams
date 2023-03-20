@@ -25,7 +25,6 @@ function useCreateTest({ setTestId, setActiveStepper }) {
 			router.push(href, as);
 			setActiveStepper('review_and_criteria');
 			Toast.success('Created Successfully');
-			console.log('done:: ', res);
 		} catch (err) {
 			Toast.error(err?.message || 'Something went wrong');
 		}
