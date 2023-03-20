@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { IcMUserAllocations } from '@cogoport/icons-react';
+import { IcMUserAllocations, IcMEyeclose } from '@cogoport/icons-react';
 
 import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
 import whatsappTextFormatting from '../../helpers/whatsappTextFormatting';
@@ -62,7 +62,7 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 		return (
 			<>
 				<div
-					className={styles.clickable_object}
+					className={cl`${styles.clickable_object} ${profanity_check === 'nudity' ? styles.reduce_blur : ''}`}
 					role="presentation"
 					onClick={() => {
 						// eslint-disable-next-line no-undef
@@ -73,6 +73,10 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 						);
 					}}
 				>
+					<div className={styles.sensitive_content}>
+						<IcMEyeclose fill="#828282" />
+						<div className={styles.sensitive_text}>Sensitive Content</div>
+					</div>
 					{LoadMedia(message_type)}
 				</div>
 
