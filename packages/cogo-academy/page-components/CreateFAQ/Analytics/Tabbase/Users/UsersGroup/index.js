@@ -7,8 +7,7 @@ function UsersGroup({ date = '', setDate = () => {} }) {
 	const props = useAllAudience({ date, setDate });
 	const { data, page = 1, setPage = () => {} } = props;
 	const { page_limit = 0, total = 0, total_count = 0 } = props;
-	console.log(props.data);
-	console.log(page, page_limit, total, total_count, 'pp');
+
 	return (
 		<div>
 			{data?.list.map((items) => (<AllUsers props={items} />))}
