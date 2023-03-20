@@ -1819,6 +1819,7 @@ const navigationMappingAdmin = {
 		key           : 'page_builder',
 		title         : 'Page Builder',
 		href          : '/v2/page-builder',
+		icon          :  IcMDashboard,
 		as            : '/v2/page-builder',
 		main_apis     : [],
 		possible_apis : [],
