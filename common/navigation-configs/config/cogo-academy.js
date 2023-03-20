@@ -33,7 +33,7 @@ const cogoAcademy = {
 	'/[partner_id]/learning/tests/dashboard': {
 		navigation: 'cogo_academy-tests',
 	},
-	'/[partner_id]/learning/tests/results/[test_id]': {
+	'/[partner_id]/learning/tests/dashboard/[test_id]': {
 		navigation: 'cogo_academy-tests',
 	},
 	'/[partner_id]/learning/tests/[test_id]': {
