@@ -46,6 +46,18 @@ const getCreateConfigurationsControls = ({
 			isClearable : true,
 		},
 		{
+			name        : 'exclusion_user_ids',
+			label       : 'Excluded Users',
+			placeholder : 'Select Users',
+			type        : 'asyncSelect',
+			multiple    : true,
+			asyncKey    : 'partner_users',
+			initialCall : false,
+			disabled    : true,
+			valueKey    : 'user_id',
+			isClearable : true,
+		},
+		{
 			name        : 'stakeholder_type',
 			label       : 'Stakeholder Type',
 			placeholder : 'Select stakeholder type',
