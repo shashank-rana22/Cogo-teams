@@ -12,7 +12,6 @@ function Filters({ setDateRange, dateRange }) {
 				}}
 				>
 					Date
-
 				</div>
 
 				<DateRangepicker
@@ -23,8 +22,8 @@ function Filters({ setDateRange, dateRange }) {
 					isPreviousDaysAllowed
 					maxDate={new Date()}
 				/>
-
 			</div>
+
 			<div className={styles.select_container}>
 				<div style={{
 					margin      : '0.5rem',
@@ -34,7 +33,6 @@ function Filters({ setDateRange, dateRange }) {
 				}}
 				>
 					User Group
-
 				</div>
 				<Select
 					placeholder="All"
@@ -44,29 +42,7 @@ function Filters({ setDateRange, dateRange }) {
 					isClearable
 				/>
 			</div>
-
-			<div className={styles.select_container}>
-				<div style={{
-					margin      : '0.5rem',
-					marginLeft  : '1rem',
-					marginRight : '1rem',
-
-				}}
-				>
-					Topics
-
-				</div>
-				<Select
-					placeholder="All"
-					id="group_by"
-					labelKey="display_name"
-					valueKey="group_by"
-					isClearable
-				/>
-			</div>
-
 		</div>
-
 	);
 }
 
