@@ -1815,6 +1815,17 @@ const navigationMappingAdmin = {
 		module_type   : 'dashboards',
 	},
 
+	page_builder: {
+		key           : 'page_builder',
+		title         : 'Page Builder',
+		href          : '/v2/page-builder',
+		as            : '/v2/page-builder',
+		main_apis     : [],
+		possible_apis : [],
+		module_type   : 'dashboards',
+
+	},
+
 	document_wallet: {
 		key           : 'document_wallet',
 		title         : 'Document Wallet',
