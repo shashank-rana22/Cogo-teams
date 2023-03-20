@@ -53,6 +53,7 @@ function Details({
 	const reset = () => {
 		setTextContent('');
 	};
+
 	const { onCreate, loading } = useCreateMessage({
 		shipment_data,
 		formValues,
@@ -143,6 +144,7 @@ function Details({
 								<IcMAttach width={21} height={21} />
 							</div>
 						</Popover>
+
 						<div className={styles.attached_container}>
 							{(formValues?.file || []).map((url) => (
 								<div className={styles.attached_doc}>

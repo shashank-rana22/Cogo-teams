@@ -73,16 +73,14 @@ function MessageContent({ msg, user_id, index, handleClick = () => {} }) {
 						</div>
 
 						{(msg?.attachment_urls || []).map((url) => (
-							<div className={styles.file_name}>
-								<div
-									role="button"
-									tabIndex={0}
-									className={styles.flex_row}
-									onClick={() => window.open(url, '_blank')}
-								>
-									<IcMDocument style={{ marginRight: '6px' }} />
-									{url?.split('/').pop()}
-								</div>
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.flex_row}
+								onClick={() => window.open(url, '_blank')}
+							>
+								<IcMDocument style={{ width: '1.5em', height: '1.5em', marginRight: '6px' }} />
+								{url?.split('/').pop()}
 							</div>
 						))}
 
