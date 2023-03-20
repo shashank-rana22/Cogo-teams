@@ -3,6 +3,8 @@ import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import AnalyticsLoader from '../../../../../../../commons/AnalyticsLoader';
+
 import QuestionsList from './QuestionList';
 // import Scroll from './Scroll';
 import styles from './styles.module.css';
@@ -26,6 +28,7 @@ function AllTopic({ props = {} }) {
 		most_disliked_questions = [],
 		most_liked_questions = [],
 		id = '',
+		loading,
 	} = props;
 	const [showQuestions, setShowQuestions] = useState(false);
 
@@ -37,6 +40,8 @@ function AllTopic({ props = {} }) {
 		'No of Likes'     : total_likes,
 		'No of Dislikes'  : total_dislikes,
 	};
+
+	if (loading) return <AnalyticsLoader />;
 
 	return (
 		<div style={{ marginTop: '1rem', overflow: 'hidden' }}>

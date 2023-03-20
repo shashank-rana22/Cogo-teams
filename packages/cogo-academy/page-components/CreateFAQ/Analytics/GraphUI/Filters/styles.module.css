@@ -36,9 +36,11 @@
       margin-top: 2%;
       border-radius: 6px;
     }
+
     .ui_select_options_container {
       z-index: 1000;
     }
+
     .react-datepicker__input-container {
       input {
         font-family: Poppins, sans-serif;

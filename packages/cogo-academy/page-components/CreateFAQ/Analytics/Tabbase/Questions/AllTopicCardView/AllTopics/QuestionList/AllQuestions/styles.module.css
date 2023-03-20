@@ -32,6 +32,7 @@
 .question {
 	font-weight: 1000;
 }
+
 .tags {
 	display: flex;
 	flex-wrap: wrap;
