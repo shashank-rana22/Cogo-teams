@@ -28,7 +28,8 @@ const getActiveCardDetails = (data = {}) => {
 			mobile_no,
 			user_type,
 			sender,
-			email: user_email,
+			email            : user_email,
+			search_user_name : user_name,
 
 		};
 	}
