@@ -7,7 +7,6 @@ function useListFaqStats({
 	topicId = undefined,
 	tagId = [],
 	date = '',
-	setDate = () => {},
 
 }) {
 	const [activeTab, setActiveTab] = useState('');

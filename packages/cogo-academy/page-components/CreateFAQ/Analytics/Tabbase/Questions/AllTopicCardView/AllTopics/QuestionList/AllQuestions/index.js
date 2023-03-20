@@ -1,4 +1,4 @@
-import { Pill, Tooltip } from '@cogoport/components';
+import { Pill, Tooltip, Pagination } from '@cogoport/components';
 // eslint-disable-next-line import/no-unresolved
 import startCase from '@cogoport/utils/src/utilities/startCase';
 import React from 'react';
@@ -13,6 +13,9 @@ function AllQuestions({ id = '' }) {
 
 	const topicId = id;
 	const props = useListFaqQuestions({ topicId });
+	console.log(props, 'props');
+	const { paginationData, page, setPage } = props;
+	const { page_limit, total_count } = paginationData;
 
 	const listdata = props.data?.list || [];
 
@@ -66,10 +69,18 @@ function AllQuestions({ id = '' }) {
 	];
 	const columns = addedQuestionsColumns();
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
 			<StyledTable columns={columns} layoutType="table" data={listdata} />
+			<Pagination
+				style={{ float: 'right' }}
+				type="table"
+				currentPage={page}
+				totalItems={total_count}
+				pageSize={page_limit}
+				onPageChange={setPage}
+			/>
 
-		</div>
+		</section>
 	);
 }
 

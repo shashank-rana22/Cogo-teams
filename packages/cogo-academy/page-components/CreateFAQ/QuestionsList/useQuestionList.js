@@ -221,12 +221,13 @@ const useQuestionList = () => {
 						q: query || undefined,
 					},
 					page,
-					is_admin_view            : true,
-					sort_by                  : SORT_MODE,
-					sort_type                : SORT_TYPE,
-					faq_tags_data_required   : true,
-					faq_topics_data_required : true,
-					author_data_required     : true,
+					is_admin_view                     : true,
+					sort_by                           : SORT_MODE,
+					sort_type                         : SORT_TYPE,
+					faq_tags_data_required            : true,
+					faq_topics_data_required          : true,
+					author_data_required              : true,
+					requested_question_count_required : true,
 
 				},
 			});
@@ -283,7 +284,7 @@ const useQuestionList = () => {
 		})
 		: requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
 
-	const { list: data = [], ...paginationData } = questionList || {};
+	const { list: data = [], requested_question_count = 0, ...paginationData } = questionList || {};
 
 	return {
 		page,
@@ -297,10 +298,11 @@ const useQuestionList = () => {
 		setSearchInput,
 		activeList,
 		setActiveList,
-		questionListLoading: loading,
+		questionListLoading    : loading,
 		onClickViewButton,
 		sortType,
 		setSortType,
+		requestedQuestionCount : requested_question_count,
 	};
 };
 

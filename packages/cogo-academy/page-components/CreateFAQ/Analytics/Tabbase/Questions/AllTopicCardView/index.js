@@ -11,7 +11,6 @@ function AllTopicCardView({ date = '', setDate = () => {} }) {
 		total_count,
 		setPage = () => {},
 	} = props;
-	console.log(total_count);
 	return (
 		<div>
 			{data?.list?.map((items) => (<AllTopic props={items} />))}

@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 function QuestionsList() {
 	const props = useListFaqQuestions({});
+
 	return (
 		<div className={styles.container}>
 			<AllQuestions {...props} />

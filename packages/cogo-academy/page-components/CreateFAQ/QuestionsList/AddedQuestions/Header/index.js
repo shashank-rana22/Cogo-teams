@@ -16,6 +16,7 @@ function Header({
 	setActiveList,
 	sortType,
 	setSortType,
+	requestedQuestionCount,
 }) {
 	return (
 		<div>
@@ -59,7 +60,7 @@ function Header({
 					<TabPanel name="published" title="Published" />
 					<TabPanel name="draft" title="Draft" />
 					<TabPanel name="inactive" title="Inactive" />
-					<TabPanel name="requested" title="New Requests" />
+					<TabPanel name="requested" title="New Requests" badge={requestedQuestionCount || ''} />
 				</Tabs>
 			</div>
 		</div>

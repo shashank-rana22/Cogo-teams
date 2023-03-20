@@ -2,11 +2,10 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-function useAllTopicCardView({ date = '', setDate = () => {} }) {
+function useAllTopicCardView({ date = '' }) {
 	const { general = {} } = useSelector((state) => state);
 	const { startDate, endDate } = date;
 	const { query } = general;
-	// console.log(startDate, endDate);
 	const { topicId = '' } = query || {};
 	const [activeTab, setActiveTab] = useState(topicId || 'All Topics');
 	const [page, setPage] = useState(1);
@@ -46,7 +45,6 @@ function useAllTopicCardView({ date = '', setDate = () => {} }) {
 	useEffect(() => { fetchFaqTopic(); }, [fetchFaqTopic, date, page]);
 
 	const { page_limit, total, total_count } = data || {};
-	console.log(data);
 	return {
 		refetchTopic: fetchFaqTopic,
 		data,

@@ -1,6 +1,6 @@
 import { Pill, Button } from '@cogoport/components';
-import { IcMArrowDown, IcMArrowUp, IcMArrowDoubleRight } from '@cogoport/icons-react';
-import { useState, forwardRef } from 'react';
+import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import QuestionsList from './QuestionList';
 import Scroll from './Scroll';
@@ -8,10 +8,10 @@ import styles from './styles.module.css';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
 
-const scrollHorizontal = (scrollOffset, ref) => {
-	const tableRootElement = ref.current.querySelector('.ui-table-root');
-	tableRootElement.scrollLeft += scrollOffset;
-};
+// const scrollHorizontal = (scrollOffset, ref) => {
+// 	const tableRootElement = ref.current.querySelector('.ui-table-root');
+// 	tableRootElement.scrollLeft += scrollOffset;
+// };
 
 function AllQuestionCardView({ props = {} }) {
 	const {
@@ -19,15 +19,8 @@ function AllQuestionCardView({ props = {} }) {
 		most_viewed_questions = [],
 		popular_questions = [],
 		question_stats = '',
-		topic_wise_questions,
-		trending_tags,
 		trending_topics,
-		unpopular_questions,
 	} = props;
-		// const{
-	// 	topic_wise_disliked_questions=[],
-
-	// } = topic_wise_questions
 	const {
 		no_of_questions = '',
 		no_of_likes = '',

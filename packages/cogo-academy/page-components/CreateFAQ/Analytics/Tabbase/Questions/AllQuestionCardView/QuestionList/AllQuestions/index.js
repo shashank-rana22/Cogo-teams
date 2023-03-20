@@ -1,4 +1,4 @@
-import { Pill, Tooltip } from '@cogoport/components';
+import { Pill, Tooltip, Pagination } from '@cogoport/components';
 // eslint-disable-next-line import/no-unresolved
 import startCase from '@cogoport/utils/src/utilities/startCase';
 import React from 'react';
@@ -8,7 +8,8 @@ import StyledTable from '../../../../../../../../commons/StyledTable';
 import styles from './styles.module.css';
 
 function AllQuestions(props) {
-	const { data } = props;
+	const { data, paginationData, page, setPage = () => {} } = props;
+	const { total_count, page_limit } = paginationData;
 	const listdata = data?.list;
 	const truncate = (str) => (str?.length > 38 ? `${str.substring(0, 36)}...` : str);
 	const addedQuestionsColumns = () => [
@@ -73,7 +74,18 @@ function AllQuestions(props) {
 	const columns = addedQuestionsColumns();
 	return (
 		<div className={styles.container}>
-			<StyledTable columns={columns} layoutType="table" data={listdata} />
+			<div style={{ backgroundColor: 'white' }}>
+				<StyledTable columns={columns} layoutType="table" data={listdata} />
+				<Pagination
+					style={{ float: 'right' }}
+					type="table"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={setPage}
+				/>
+
+			</div>
 		</div>
 	);
 }

@@ -12,11 +12,11 @@ function CreateFAQ() {
 	}
 
 	return (
-		<div>
+		<>
 			<Header setSwitchDashboard={setSwitchDashboard} />
 
 			<QuestionsList />
-		</div>
+		</>
 	);
 }
 
