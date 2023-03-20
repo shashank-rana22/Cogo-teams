@@ -59,7 +59,11 @@ function ViewAllConfigs() {
 				/>
 
 				<div className={styles.tab_list} ref={scrollToRef}>
-					<Tabs activeTab={activeConfigTab} themeType="secondary" onChange={setActiveConfigTab}>
+					<Tabs
+						activeTab={activeConfigTab}
+						themeType="secondary"
+						onChange={setActiveConfigTab}
+					>
 						{Object.values(TAB_PANEL_MAPPING).map((item) => {
 							const { name = '', title = '', Component } = item;
 

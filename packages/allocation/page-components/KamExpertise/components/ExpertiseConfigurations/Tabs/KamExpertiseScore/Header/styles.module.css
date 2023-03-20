@@ -1,4 +1,4 @@
-.container {
+/* .container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -23,4 +23,37 @@
 	justify-content: space-between;
 	margin-top: 8px;
 	font-size: 12px;
+} */
+
+.main_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin: -32px 0 20px 0;
 }
+  
+.button_container {
+	display: flex;
+}
+  
+.config_basic_detail {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+  
+.lower_details {
+	display: flex;
+	margin-top: 8px;
+	font-weight: 400;
+	font-size: 14px;
+}
+.draft_name {
+	font-weight: 400;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+}
+  
+
