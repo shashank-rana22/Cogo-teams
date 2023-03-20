@@ -37,8 +37,8 @@ function useListShipmentServices({ shipment_data }) {
 	}, [trigger, shipment_data?.id]);
 
 	useEffect(() => {
-		if (shipment_data?.id) { listServices(); }
-	}, [listServices, shipment_data?.id]);
+		if (shipment_data?.id) { if (shipment_data?.id) { listServices(); } }
+	}, [listServices, shipment_data?.id, shipment_data?.id]);
 
 	return {
 		servicesGet: {

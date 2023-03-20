@@ -1,10 +1,8 @@
-import { Button, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMOverflowDot } from '@cogoport/icons-react';
-import { useState, useContext } from 'react';
+import { IcMEdit } from '@cogoport/icons-react';
+import { useState, useContext, useEffect } from 'react';
 
 import EditSchedule from './EditSchedule';
-import useGetShipmentTimeLine from './hooks/useGetShipmentTimeline';
 import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
@@ -23,20 +21,19 @@ const editScheduleStates = [
 	'flight_arrived',
 ];
 
-function Timeline() {
-	const { loading, timelineData } = useGetShipmentTimeLine();
-	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+function Timeline({ loading = false, timelineData = [] }) {
+	const { shipment_data, primary_service, getShipmentTimeline } = useContext(ShipmentDetailContext);
 
-	const [showThreeDotPopover, setShowThreeDotPopover] = useState(false);
+	useEffect(() => {
+		if (shipment_data?.id) {
+			getShipmentTimeline();
+		}
+	}, [getShipmentTimeline, shipment_data?.id]);
+
 	const [showEditSchedule, setShowEditSchedule] = useState(false);
 
-	const showEditSchedulePopover = editScheduleStates.includes(primary_service?.state);
-	// const showEditSchedulePopover = true;
-
-	const handleEditClick = () => {
-		setShowEditSchedule((p) => !p);
-		setShowThreeDotPopover((p) => !p);
-	};
+	// const showEditScheduleIcon = editScheduleStates.includes(primary_service?.state);
+	const showEditScheduleIcon = true;
 
 	const filteredTimelineData = timelineData.filter(
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
@@ -71,23 +68,8 @@ function Timeline() {
 				})}
 			</div>
 
-			{showEditSchedulePopover ? (
-				<Popover
-					interactive
-					placement="left"
-					render={(
-						<Button themeType="linkUi" onClick={handleEditClick}>
-							Edit
-						</Button>
-					)}
-					visible={showThreeDotPopover && !showEditSchedule}
-					onClickOutside={() => setShowThreeDotPopover(false)}
-				>
-					<IcMOverflowDot
-						onClick={() => setShowThreeDotPopover((p) => !p)}
-						className={styles.three_dot_icon}
-					/>
-				</Popover>
+			{showEditScheduleIcon ? (
+				<IcMEdit onClick={() => setShowEditSchedule((p) => !p)} className={styles.edit_icon} />
 			) : null}
 
 			{showEditSchedule ? (
