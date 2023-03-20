@@ -21,7 +21,7 @@ function useAllAudience() {
 				await trigger({
 					params: {
 						page_limit                       : 100000,
-						pagination_data_required         : false,
+						pagination_data_required         : true,
 						most_viewed_questions_required   : true,
 						audience_wise_questions_required : true,
 						audience_wise_stats_required     : true,
