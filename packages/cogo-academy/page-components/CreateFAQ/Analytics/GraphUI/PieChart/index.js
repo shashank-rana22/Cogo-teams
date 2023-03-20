@@ -8,24 +8,18 @@ function PieChart({ pie_data, pie_outer_data, view_count_data }) {
 	const CarouselData = [{
 		key    : 'combined_pie_chart',
 		render : () => (
-			<div style={{ width: '100%', height: '100%' }}>
-				<CombinedPieChart
-					pie_data={pie_data}
-					pie_outer_data={pie_outer_data}
-				/>
-			</div>
-
+			<CombinedPieChart
+				pie_data={pie_data}
+				pie_outer_data={pie_outer_data}
+			/>
 		),
 	},
 	{
 		key    : 'view_count_pieChart',
 		render : () => (
-			<div style={{ width: '100%', height: '100%' }}>
-				<ViewCountPieChart
-					view_count_data={view_count_data}
-				/>
-			</div>
-
+			<ViewCountPieChart
+				view_count_data={view_count_data}
+			/>
 		),
 	}];
 

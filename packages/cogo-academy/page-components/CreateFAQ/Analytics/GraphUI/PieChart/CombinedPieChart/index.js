@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 function CombinedPieChart({ pie_outer_data, pie_data }) {
 	return (
-		<div style={{ width: '100%', height: '100%' }}>
+		<div style={{ width: '80%', height: '80%', position: 'relative' }}>
 			<div className={styles.inner_pie}>
 				<ResponsivePie
 					data={pie_data}
@@ -134,10 +134,10 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 						bottom : 80,
 						left   : 40,
 					}}
-					innerRadius={0.8}
+					innerRadius={0.9}
 					padAngle={0}
 					cornerRadius={0}
-					activeOuterRadiusOffset={8}
+					activeOuterRadiusOffset={12}
 					borderWidth={0}
 					borderColor={{
 						from      : 'color',
