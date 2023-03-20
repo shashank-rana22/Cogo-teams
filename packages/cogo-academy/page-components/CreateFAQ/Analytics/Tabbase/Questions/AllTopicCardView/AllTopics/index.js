@@ -4,29 +4,30 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import QuestionsList from './QuestionList';
-// import Scroll from './Scroll';
 import styles from './styles.module.css';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
 
-// const scrollHorizontal = (scrollOffset, ref) => {
-// 	const tableRootElement = ref.current.querySelector('.ui-table-root');
-// 	tableRootElement.scrollLeft += scrollOffset;
-// };
-
-function AllTopic({ props = {} }) {
+function AllTopic(props) {
 	const {
-		audiences = [],
+		current_topic_data = [],
 		display_name = '',
 		question_count = 0,
 		view_count = 0,
-		faq_questions = [],
-		total_likes = 0,
-		total_dislikes = 0,
-		most_disliked_questions = [],
-		most_liked_questions = [],
 		id = '',
 	} = props;
+
+	const {
+		most_disliked_questions = [],
+		most_liked_questions = [],
+		most_viewed_questions = [],
+		topic_stats = [],
+		topic_wise_audiences = [],
+
+	} = current_topic_data;
+	const { total_likes = 0, total_dislikes = 0 } = topic_stats[0];
+
+	console.log(props, 'faq');
 	const [showQuestions, setShowQuestions] = useState(false);
 	const truncate = (str) => (str?.length > 40 ? `${str.substring(0, 38)}...` : str);
 
@@ -73,13 +74,13 @@ function AllTopic({ props = {} }) {
 				<div style={{ display: 'flex' }}>
 					<ViewCards
 						cardHeading="User group that viewed the Most Questions "
-						subHeading={audiences}
+						subHeading={topic_wise_audiences}
 					/>
 
 					<ViewCardsList
 						state="Viewed_Question"
 						cardHeading="Top Viewed Questions"
-						contentQuestion={faq_questions}
+						contentQuestion={most_viewed_questions}
 					/>
 
 					<ViewCardsList

@@ -25,14 +25,11 @@ function useAllTopicCardView({ date = '' }) {
 							created_at_less_than    : endDate,
 
 						},
-						page_limit                     : 10,
+						page_limit                  : 10,
 						page,
-						pagination_data_required       : true,
-						most_viewed_questions_required : true,
-						topic_wise_questions_required  : true,
-						topic_wise_stats_required      : true,
-						topic_wise_audience_required   : true,
-						sort_by                        : 'view_count',
+						pagination_data_required    : true,
+						current_topic_data_required : true,
+						sort_by                     : 'view_count',
 					},
 				});
 			} catch (error) {
@@ -43,7 +40,7 @@ function useAllTopicCardView({ date = '' }) {
 	);
 
 	useEffect(() => { fetchFaqTopic(); }, [fetchFaqTopic, date, page]);
-
+	
 	const { page_limit, total, total_count } = data || {};
 	return {
 		refetchTopic: fetchFaqTopic,
