@@ -41,7 +41,7 @@ function FilterContent({
 	};
 
 	return (
-		<div className={styles.filterContainer}>
+		<div className={styles.filter_container}>
 			<div className={styles.filter_heading}>Filters</div>
 			<div className={styles.filter_controls}>
 				<div className={styles.filter_block}>
@@ -82,7 +82,7 @@ function FilterContent({
 						<div className={styles.filter_bottomborder} />
 
 						<div className={styles.filter_block}>
-							<div className={styles.filter_labelHeading}>Origin</div>
+							<div className={styles.filter_label_heading}>Origin</div>
 							{(controls || []).map((control) => {
 								const Element = getField(control.type);
 								return (
@@ -103,7 +103,7 @@ function FilterContent({
 							})}
 
 							<div className={styles.line} />
-							<div className={styles.filter_labelHeading}>Destination</div>
+							<div className={styles.filter_label_heading}>Destination</div>
 							{(controls || []).map((control) => {
 								const Element = getField(control.type);
 								return (

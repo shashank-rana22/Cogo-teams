@@ -27,7 +27,7 @@
 
 /* Filter Content */
 
-.filterContainer {
+.filter_container {
 	.custom_select_input_select_value {
 		font-size: 12px;
 		line-height: 20px;
@@ -39,30 +39,6 @@
 		cursor: text;
 		border: solid 1px #e0e0e0;
 		box-shadow: none;
-
-		:focus {
-			border: 1px solid black;
-			box-shadow: none;
-		}
-
-		:focus-within {
-			border: 1px solid black;
-			box-shadow: none;
-		}
-
-		:hover {
-			border: 1px solid black;
-			box-shadow: none;
-		}
-
-		.size-md {
-			height: 26px !important;
-		}
-
-		.core_ui_input_root {
-			padding: 0;
-			border: none;
-		}
 	}
 
 	.custom_select_input_chip {
@@ -117,7 +93,7 @@
 	letter-spacing: 0.02em;
 }
 
-.filter_labelHeading {
+.filter_label_heading {
 	margin-top: 10px;
 	margin-bottom: -4px;
 	font-size: 18px;
@@ -130,20 +106,6 @@
 }
 
 .filter_box {
-	.tippy-content {
-		box-sizing: border-box;
-		width: 760px;
-		height: fit-content;
-		padding: 0;
-		background: #fff;
-		border: 1px solid #bdbdbd;
-		border-radius: 10px;
-
-		@media (max-width: 760px) {
-			width: 100%;
-		}
-	}
-
 	.tippy_box {
 		border-radius: 10px;
 	}

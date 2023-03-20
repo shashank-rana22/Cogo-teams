@@ -33,11 +33,13 @@
 			padding: 0;
 			border: none;
 		}
-		.styles_data__0qSbV{
-			padding: 20px 0px;
+
+		.styles_data__0qSbV {
+			padding: 20px 0;
 		}
-		.ui_table_body_cell{
-			padding: 0px;
+
+		.ui_table_body_cell {
+			padding: 0;
 		}
 	}
 }
@@ -89,9 +91,10 @@
 		height: 100%;
 	}
 
-	.table{
+	.table {
 		overflow: auto;
 	}
+
 	.tag {
 		display: none;
 	}

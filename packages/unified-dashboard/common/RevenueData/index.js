@@ -33,7 +33,7 @@ function RevenueData({ data = [], currency, heading = '' }) {
 			{data.map((val, index) => (
 				<div className={styles.revenue_row_data}>
 					<div className={styles.pie_data}>
-						<div className={styles.shipmentType_dot} style={{ background: colors[index] }} />
+						<div className={styles.shipment_type_dot} style={{ background: colors[index] }} />
 						<div className={styles.shipment_text}>
 							{startCase(val?.shipment_type)}
 						</div>
