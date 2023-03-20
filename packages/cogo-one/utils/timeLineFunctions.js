@@ -26,9 +26,12 @@ function timeLineFunctions() {
 		return time;
 	};
 
-	const renderStatement = ({ type, present, previous }) => {
+	const renderStatement = ({ type = '', present = '', previous = '', startAt = null }) => {
 		switch (type) {
 			case 'assigned':
+				if (startAt === null) {
+					return `${previous} assigned this chat as spectator to ${present}`;
+				}
 				return `${previous} assigned this chat to ${present}`;
 			case 'escalate':
 				return `This chat has been escalated to ${present}`;

@@ -64,16 +64,16 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
-	const { list: timeLineList = [], total: count } = timeLineData || {};
+	const { list: timeLineList = [], total_count: agent_total_count } = timeLineData || {};
 
 	let list = [];
-	let total_count;
+	let channel_total_count;
 	if (activityTab === 'communication' || activityTab === 'transactional') {
 		list = data?.[activityTab]?.list || [];
-		total_count = data?.[activityTab]?.total || '0';
+		channel_total_count = data?.[activityTab]?.total_count || '0';
 	} else {
 		list = data?.[activityTab]?.spot_searches?.list || [];
-		total_count = data?.[activityTab]?.spot_searches?.total || '0';
+		channel_total_count = data?.[activityTab]?.spot_searches?.total_count || '0';
 	}
 
 	useEffect(() => {
@@ -205,7 +205,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 					<Pagination
 						type="page"
 						currentPage={pagination}
-						totalItems={activeSubTab === 'agent' ? count : total_count}
+						totalItems={activeSubTab === 'agent' ? agent_total_count : channel_total_count}
 						pageSize={10}
 						onPageChange={(val) => setPagination(val)}
 					/>

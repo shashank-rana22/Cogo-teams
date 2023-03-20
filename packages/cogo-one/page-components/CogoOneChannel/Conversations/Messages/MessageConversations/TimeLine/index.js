@@ -11,6 +11,7 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 		agent_data = {},
 		performed_by_data = {},
 		created_at,
+		conversation_started_at,
 	} = eachMessage;
 	const { name : presentAgent } = agent_data || {};
 	const { name : previousAgent } = performed_by_data || {};
@@ -20,6 +21,7 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 		type     : conversation_type,
 		present  : presentAgent,
 		previous : previousAgent,
+		startAt  : conversation_started_at,
 	});
 
 	return (
