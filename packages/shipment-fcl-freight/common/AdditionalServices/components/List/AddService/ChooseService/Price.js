@@ -10,8 +10,10 @@ function Price({
 	setAddRate,
 	setShow = () => {},
 	refetch = () => {},
+	setItem = () => {},
 	setShowPrice,
 }) {
+	console.log('hello', item);
 	const { requestRate, loading } = useRequestRate({ setShow, refetch });
 
 	return item?.rates ? (

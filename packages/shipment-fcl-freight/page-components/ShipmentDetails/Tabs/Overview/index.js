@@ -10,7 +10,7 @@ function Overview(shipment_data = {}) {
 
 	return (
 		<div className={styles.container}>
-			<OverviewManageServices />
+			<OverviewManageServices container={styles.container} />
 			<BLDetails />
 			<Services />
 			<div className={styles.extra_details}>

@@ -1,24 +1,26 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 
-function useGetContainerDetails(item = {}) {
+function useGetContainerDetails() {
 	const [{ data: containerDetails },
 		containerDetailTrigger] = useRequest({
 		url    : '/list_shipment_container_details',
 		method : 'GET',
 	});
 
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	useEffect(() => {
 		(async () => {
 			try {
 				containerDetailTrigger({
-					params: { filters: { shipment_id: item?.shipment_id } },
+					params: { filters: { shipment_id: shipment_data?.id } },
 				});
 			} catch (err) {
 				// console.log(err);
 			}
 		})();
-	}, [item?.shipment_id, containerDetailTrigger]);
+	}, [shipment_data?.id, containerDetailTrigger]);
 
 	const containerList = [];
 

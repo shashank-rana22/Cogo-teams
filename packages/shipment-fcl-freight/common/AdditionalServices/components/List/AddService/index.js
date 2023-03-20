@@ -1,3 +1,4 @@
+import { Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../../EmptyState';
@@ -15,6 +16,8 @@ function AddService({
 	refetch = () => {},
 	show = false,
 	setShow = () => {},
+	showChargeCodes = false,
+	setShowChargeCodes = () => {},
 }) {
 	const [showAddRate, setAddRate] = useState(null);
 	const [showPrice, setShowPrice] = useState(null);
@@ -30,41 +33,54 @@ function AddService({
 		<EmptyState />;
 	}
 
+	console.log('showAddRate', showAddRate);
 	return (
-		<div className={styles.container}>
-			{!showAddRate && !showPrice ? (
-				<ChooseService
-					setAddRate={setAddRate}
-					isSeller={isSeller}
-					list={list}
-					loading={loading}
-					setFilters={setFilters}
-					filters={filters}
-					setShow={setShow}
-					setShowPrice={setShowPrice}
-					serviceCountTotal={serviceCountTotal}
-					services={services}
-					refetch={refetch}
-				/>
-			) : null}
-			{showAddRate ? (
-				<AddRate
-					isSeller={isSeller}
-					item={showAddRate}
-					setAddRate={setAddRate}
-					setShow={setShow}
-					refetch={refetch}
-					filters={filters}
-				/>
-			) : null}
-			{!showAddRate && showPrice ? (
-				<ViewPrice
-					showPrice={showPrice}
-					setAddRate={setAddRate}
-					setShowPrice={setShowPrice}
-				/>
-			) : null}
-		</div>
+		<Modal
+			size="xl"
+			show={showChargeCodes}
+			onClose={() => setShowChargeCodes(false)}
+			placement="top"
+			className={styles.modal_container}
+		>
+			<Modal.Header title="ADD NEW SERVICE" />
+			<Modal.Body>
+				<div className={styles.container}>
+					{!showAddRate && !showPrice ? (
+						<ChooseService
+							setAddRate={setAddRate}
+							isSeller={isSeller}
+							list={list}
+							loading={loading}
+							setFilters={setFilters}
+							filters={filters}
+							setShow={setShow}
+							setShowPrice={setShowPrice}
+							serviceCountTotal={serviceCountTotal}
+							services={services}
+							refetch={refetch}
+						/>
+					) : null}
+					{showAddRate ? (
+						<AddRate
+							isSeller={isSeller}
+							item={showAddRate}
+							setAddRate={setAddRate}
+							setShow={setShow}
+							refetch={refetch}
+							filters={filters}
+						/>
+					) : null}
+					{!showAddRate && showPrice ? (
+						<ViewPrice
+							showPrice={showPrice}
+							setAddRate={setAddRate}
+							setShowPrice={setShowPrice}
+
+						/>
+					) : null}
+				</div>
+			</Modal.Body>
+		</Modal>
 	);
 }
 

@@ -3,18 +3,18 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
-import controls from './controls';
+// import controls from './controls';
 import useGetContainerDetails from './useGetContainerDetails';
 
 const useAddRate = ({
 	item,
 	isSeller = false,
 	status,
-	setShow = () => {},
 	refetch = () => {},
 	setAddRate = () => {},
 	billToCustomer = undefined,
 	onCancel = () => {},
+	setAddSellPrice = () => {},
 	filters,
 }) => {
 	const options = [];
@@ -24,14 +24,14 @@ const useAddRate = ({
 		});
 	} else options.push({ label: startCase(item?.unit), value: item?.unit });
 
-	const { containerList } = useGetContainerDetails(item);
+	// const { containerList } = useGetContainerDetails();
 
-	const initialControls = controls(options, item, containerList);
+	// const initialControls = controls(options, item, containerList);
 
-	const mappedCtrls = initialControls.map((ctrl) => ({
-		...ctrl,
-		value: item[ctrl.name],
-	}));
+	// const mappedCtrls = initialControls.map((ctrl) => ({
+	// 	...ctrl,
+	// 	value: item[ctrl.name],
+	// }));
 
 	const {
 		fields,
@@ -80,8 +80,8 @@ const useAddRate = ({
 			});
 
 			Toast.success('Service Added successfully');
-			setShow(false);
-			setonAddRate(null);
+			setAddRate(false);
+			setAddSellPrice(false);
 			onCancel();
 			refetch();
 		} catch (err) {
@@ -91,7 +91,7 @@ const useAddRate = ({
 
 	return {
 		fields,
-		controls: mappedCtrls,
+		// controls: mappedCtrls,
 		onAddRate,
 		control,
 		handleSubmit,

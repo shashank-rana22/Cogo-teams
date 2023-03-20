@@ -102,7 +102,7 @@ function SupplierReallocation({
 				/>
 
 				{
-					!(isEmpty(documents) && !isAdditional)
+					(isEmpty(documents) && !isAdditional)
 						? (
 							<div className={styles.form_wrapper}>
 								{serviceProviderController}

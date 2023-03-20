@@ -1,13 +1,16 @@
-import React from 'react';
+import { ShipmentDetailContext } from '@cogoport/context';
+import React, { useContext } from 'react';
 
 import styles from './styles.module.css';
 
 function ShipmentInfo() {
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	return (
 		<div className={styles.container}>
 			Shipments
 			/
-			Shipment ID #149125
+			Shipment ID #
+			{shipment_data.serial_id}
 		</div>
 	);
 }

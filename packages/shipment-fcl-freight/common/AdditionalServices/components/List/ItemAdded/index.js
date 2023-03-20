@@ -60,7 +60,7 @@ function Item({
 					{price ? (
 						<div className={styles.label}>
 							<div className={styles.circle} />
-							<div className={styles.heading}>
+							<div className={styles.price}>
 								Price:
 								&nbsp;
 								{formatAmount({
