@@ -1,0 +1,68 @@
+.toptext{
+    font-size: 30px;
+    font: poppins;
+}
+.table{
+    display: block;
+    width: 100%;
+    /* overflow-x: auto;
+    white-space: nowrap; */
+    margin-top: 50px;
+     background-color: white;
+    box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+    height: 120%;
+   
+    @media (max-width: 768px) {
+        overflow-x: scroll;
+    }
+}
+.leftcontainer{
+    display: block;
+    width: 180px;
+    text-align: center;
+}
+.wholecontainer{
+    overflow-y: scroll;
+    height: 500px;
+    margin-top: 18px;
+    background-color: white;
+    width: 200px;
+    scrollbar-color: red;
+}
+.secondtrend{
+    display: flex;
+    background-color: white;
+    margin-top: 25px;
+}
+.trendingovertime{
+    font-size: 20px;
+    font-weight: bold;
+}
+.valueofgoods{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.table2{
+    display: block;
+    width: 100%;
+    /* overflow-x: auto;
+    white-space: nowrap; */
+    margin-top: 30px;
+     background-color: white;
+    box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+    height: 120%;
+    overflow-x: scroll;
+   
+    @media (max-width: 768px) {
+        overflow-x: scroll;
+    }
+
+}
+.topglobalsuppliers{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 50px;
+}
+

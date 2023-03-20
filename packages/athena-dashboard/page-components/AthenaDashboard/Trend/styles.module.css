@@ -33,7 +33,9 @@
 }
 .textrect{
     padding-top: 90px;
-    margin-left: 330px;
+    margin-left: 300px;
+    height: 10px;
+    margin-left: 300px;
 }
 .checkbox{
     width: 150px;
@@ -53,7 +55,44 @@
     display:flex;
 }
 .buildreportbutton{
-    margin-top: 140px;
-    margin-left: 50px;
+    margin-top: 20px;
     display: none;
+}
+.clearall{
+    margin-top: 25px;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    display: none;
+}
+.selectedtext{
+    margin-top: 20px;
+    display: none;
+    text-align: left;
+}
+.buttons{
+    display: flex;
+}
+
+.buttongroup{
+    display: flex;
+}
+.displayrect{
+    display: block;
+    margin-left: 50px;
+}
+.displayselectedcode{
+    display: flex;
+    margin-top: 20px;
+}
+.individual{
+    margin-right: 15px;
+    width: 100px;
+    height: 40px;
+    background-color: #E0E0E0;
+    border-radius: 6px;
+    text-align: center;
+}
+.individualtext{
+    margin-top: 10px;
 }

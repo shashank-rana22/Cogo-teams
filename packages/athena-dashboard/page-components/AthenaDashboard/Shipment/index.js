@@ -1,5 +1,4 @@
 // import SearchInput from '@cogoport/../../../allocation/common/SearchInput';
-
 import {
 	Pagination,
 	Input, Tabs, TabPanel, MultiSelect, Button, Table, IcMProfile, DateRangepicker,
@@ -10,12 +9,13 @@ import { useAthenaRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import SearchInput from '../../common/SearchInput/index';
+import SearchInput from '../../../common/SearchInput';
 import useSearch from '../hooks/useSearch';
 
 import controls from './controls';
 import useGetCountrylist from './countrylist';
 import useGetCountrylistdest from './countrylistdest';
+import EmptyState from './EmptyState';
 import useGetports from './portlist';
 import useGetportsdest from './portlistdest';
 // import { IcMProfile } from '@cogoport/icons-react';
@@ -378,8 +378,8 @@ function Shipment() {
 					/>
 				</div>
 				{/* very very important--- async select
-				we do not have the lead source data from any country that is not India, which is why I'm commenting the async select and replacing it with just a dropdown having India as the only option. But if we get more data/ data from other countries in the future. Just remove the comment and async select should work fine.
-				{
+				we do not have the lead source data from any country that is not India, which is why I'm commenting the async select and replacing it with just a dropdown having India as the only option. But if we get more data/ data from other countries in the future. Just remove the comment and async select should work fine. */}
+				{/* {
 					controls.map((controlItem) => {
 						const el = { ...controlItem };
 
@@ -487,20 +487,39 @@ function Shipment() {
 							</select>
 						</div>
 					</div>
-					<div>
-						<Table
-							className={styles.table}
-							columns={columns}
-							data={data}
+					{data.length !== 0 ? (
+						<div>
+							<Table
+								className={styles.table}
+								columns={columns}
+								data={data}
+							/>
+							<Pagination
+								type="number"
+								currentPage={responseData.page}
+								totalItems={responseData.total}
+								pageSize={100}
+								onPageChange={onPageChange}
+							/>
+						</div>
+					) : (
+						<EmptyState
+							height={350}
+							width={875}
+							emptyText="Search for records above"
+							textSize="24px"
+							flexDirection="column"
 						/>
-					</div>
-					<Pagination
-						type="number"
-						currentPage={responseData.page}
-						totalItems={responseData.total}
-						pageSize={100}
-						onPageChange={onPageChange}
-					/>
+					)}
+					{/* {data && (
+						<Pagination
+							type="number"
+							currentPage={responseData.page}
+							totalItems={responseData.total}
+							pageSize={100}
+							onPageChange={onPageChange}
+						/>
+					)} */}
 				</div>
 
 				{/* <div className={styles.list_container}>
