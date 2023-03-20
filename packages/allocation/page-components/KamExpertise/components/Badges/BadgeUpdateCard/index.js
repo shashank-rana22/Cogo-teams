@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -53,7 +53,13 @@ function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', 
 
 			<div className={styles.lower_subheader2}>
 				{`${medalType} Medal`}
-				<IcMInfo className={styles.icm_info} />
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<Tooltip content="Lorem ipsum dolor sit amet, consectetur adipiscing elit" placement="top">
+						<div style={{ display: 'flex' }}>
+							<IcMInfo className={styles.icm_info} />
+						</div>
+					</Tooltip>
+				</div>
 			</div>
 
 			<div className={styles.file_select_style}>
