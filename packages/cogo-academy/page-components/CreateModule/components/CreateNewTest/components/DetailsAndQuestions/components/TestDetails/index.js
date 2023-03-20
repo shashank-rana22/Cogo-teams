@@ -32,16 +32,21 @@ function CreateNewTest({ control, errors }) {
 								</div>
 								<div className={styles.control_type}>
 
-									{use.map((inp) => (
-										<div className={styles.input_wrapper}>
-											<Element
-												control={control}
-												{...inp}
-												className={styles[`element_${inp.name}}`]}
-											/>
-											{errors[name] && <div className={styles.error_msg}>This is required</div>}
-										</div>
-									))}
+									{use.map((inp) => {
+										const ElementToUse = getElementController(inp.type);
+
+										return (
+											<div className={styles.input_wrapper}>
+												<ElementToUse
+													control={control}
+													{...inp}
+													className={styles[`element_${inp.name}}`]}
+												/>
+												{errors[name]
+													? <div className={styles.error_msg}>This is required</div> : null}
+											</div>
+										);
+									})}
 								</div>
 
 							</div>
