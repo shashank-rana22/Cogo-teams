@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 // import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-function useGetListDocuments({ shipment_data }) {
+function useGetListDocuments({ shipment_data, filters = {} }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_freight/list_documents',
 		method : 'GET',
@@ -16,7 +16,7 @@ function useGetListDocuments({ shipment_data }) {
 			try {
 				const res = await trigger({
 					params: {
-						filters            : { shipment_id: id },
+						filters            : { shipment_id: id, service_type: filters?.service, uploaded_by_org_id: filters?.source, q: filters?.q },
 						additional_methods : ['pagination', 'organizations'],
 						page               : 1,
 						page_limit         : 10,
@@ -30,16 +30,16 @@ function useGetListDocuments({ shipment_data }) {
 				console.log(err);
 			}
 		})();
-	}, [trigger, id]);
+	}, [trigger, id, filters]);
 
 	useEffect(() => {
 		listDocuments();
-	}, [listDocuments]);
+	}, [listDocuments, filters]);
 
 	return {
 		loading,
 		refetch : listDocuments,
-		list    : data?.list,
+		list    : data,
 	};
 }
 

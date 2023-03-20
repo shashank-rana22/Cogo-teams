@@ -1,45 +1,64 @@
-import { Toggle, Input, Select } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { useState } from "react";
+import { Toggle, Input, Select } from "@cogoport/components";
+import { IcMSearchlight } from "@cogoport/icons-react";
+import { startCase } from "@cogoport/utils";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 function Header({
-	activeToggle,
-	setActiveToggle,
-	searchTasksVal,
-	setSearchTasksVal,
-	// shipmentDocumentsHookSetters,
-	// shipmentFilters,
-	shipment_data,
+  activeToggle,
+  setActiveToggle,
+  // shipmentDocumentsHookSetters,
+  // shipmentFilters,
+  shipment_data,
+  data = {},
+  filters = {},
+  setFilters = () => {},
 }) {
-	return (
-		<div className={styles.heading}>
-			<div className={styles.sub_heading}>
-				<Input
-					value={searchTasksVal}
-					size="md"
-					placeholder="Search..."
-					suffix={<IcMSearchlight style={{ fontSize: '16px' }} />}
-					style={{ padding: '6px', marginRight: '6px' }}
-					onChange={(e) => {
-						setSearchTasksVal(e?.target?.value);
-					}}
-				/>
+  const SourceOptions = Array.isArray(data)
+    ? (data || [])?.map((e) => {
+        return { label: e?.business_name, value: e?.id };
+      })
+    : [];
 
-				{!activeToggle ? (
-					<div className={styles.sub_heading}>
-						<Select
-							placeholder="Select Source"
-							width="200px"
-							style={{ padding: '6px', marginRight: '6px' }}
-						/>
-						<Select
-							placeholder="Select Service"
-							width="200px"
-							style={{ padding: '6px', marginRight: '6px' }}
-						/>
+  const serviceOptions = shipment_data?.services?.map((service) => {
+    return { label: startCase(service), value: service };
+  });
 
-						{/* <div style={{ marginTop: '10px' }}>
+  console.log(data, " :data");
+  return (
+    <div className={styles.heading}>
+      <div className={styles.sub_heading}>
+        {!activeToggle ? (
+          <div className={styles.sub_heading}>
+            <Input
+              value={filters?.q}
+              size="sm"
+              placeholder="Search..."
+              suffix={<IcMSearchlight style={{ fontSize: "16px" }} />}
+              style={{ padding: "6px", marginRight: "6px" }}
+              onChange={(e) => setFilters({ ...filters, q: e?.target?.value })}
+            />
+            <Select
+              size="sm"
+              placeholder="Select Source"
+              style={{ padding: "6px", marginRight: "6px", width: "200px" }}
+              value={filters?.source}
+              options={SourceOptions || []}
+              onChange={(e) => setFilters({ ...filters, source: e })}
+              isClearable
+            />
+            <Select
+              size="sm"
+              placeholder="Select Service"
+              style={{ padding: "6px", marginRight: "6px", width: "200px" }}
+              value={filters?.service}
+              onChange={(e) => setFilters({ ...filters, service: e })}
+              options={serviceOptions || {}}
+              isClearable
+            />
+
+            {/* <div style={{ marginTop: '10px' }}>
 							<Select
 								placeholder="Select Date"
 								options={dates.map((item) => ({ label: item, value: item }))}
@@ -48,22 +67,21 @@ function Header({
 								{...rest}
 							/>
 						</div> */}
-					</div>
-				) : null}
+          </div>
+        ) : null}
+      </div>
 
-			</div>
-
-			<Toggle
-				name="myTransilates"
-				size="md"
-				offLabel="Check List"
-				onLabel="Wallet"
-				value={activeToggle}
-				onChange={() => setActiveToggle(!activeToggle)}
-			/>
-			{/* <div className={styles.line} style={{ width: '100%' }} /> */}
-		</div>
-	);
+      <Toggle
+        name="myTransilates"
+        size="md"
+        offLabel="Check List"
+        onLabel="Wallet"
+        value={activeToggle}
+        onChange={() => setActiveToggle(!activeToggle)}
+      />
+      {/* <div className={styles.line} style={{ width: '100%' }} /> */}
+    </div>
+  );
 }
 
 export default Header;

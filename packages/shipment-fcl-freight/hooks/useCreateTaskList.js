@@ -9,13 +9,14 @@ import useGetShipmentProcess from './useGetShipmentProcess';
 
 const docTasks = ['upload_document', 'approve_document', 'amend_document'];
 
-const useCreateTaskList = ({ primary_service, shipment_data }) => {
+const useCreateTaskList = ({ primary_service, shipment_data }) => { 
+	const [filters, setFilters ] = useState({q: '', source: '', service: ''});
 	const [taskList, setTaskList] = useState([]);
 	const [docTypes, setDocTypes] = useState([]);
 	const { data } = useGetShipmentProcess();
 	const {
 		list : shipmentDocuments,
-	} = useGetListDocuments({ shipment_data });
+	} = useGetListDocuments({ shipment_data, filters });
 
 	const { data : pendingTasks } = useGetPendingTasks({ shipment_data });
 
@@ -32,7 +33,7 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 
 	const neededDoc = realData.map((t) => getDocType(t?.task));
 
-	const shipmentDocTypes = (shipmentDocuments || []).map(
+	const shipmentDocTypes = (shipmentDocuments?.list || []).map(
 		(doc) => doc?.document_type,
 	);
 	const pendingTask = (pendingTasks || []).map(
@@ -41,7 +42,7 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 
 	useEffect(() => {
 		if ((data || []).length) {
-			let extras = (shipmentDocuments || []).forEach((doc) => {
+			let extras = (shipmentDocuments?.list || []).forEach((doc) => {
 				if (
 					!neededDoc.includes(doc?.document_type)
 					&& !pushedItems.includes(doc?.document_type)
@@ -86,17 +87,19 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 		}
 	}, [JSON.stringify(data),
 
-		JSON.stringify(shipmentDocuments),
+		JSON.stringify(shipmentDocuments?.list),
 
 		JSON.stringify(data),
 
-		JSON.stringify(shipmentDocuments),
+		JSON.stringify(shipmentDocuments?.list),
 
 	]);
 
 	console.log(pushedItems, 'fguyfguygr yefeuyfr yewuy efyuewdtu');
 
 	return {
+		filters,
+		setFilters,
 		taskList,
 		completedDocs: shipmentDocuments,
 		docTypes,

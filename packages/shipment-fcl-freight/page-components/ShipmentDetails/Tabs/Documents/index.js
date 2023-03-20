@@ -16,11 +16,10 @@ import Wallet from './Wallet';
 // import UploadForm from './UploadForm';
 
 function Documents() {
-	const [searchTasksVal, setSearchTasksVal] = useState('');
 	const [activeToggle, setActiveToggle] = useState(false);
 	const [show, setShow] = useState(null);
 	const [showConfirmed, setShowConfirmed] = useState(false);
-	const [addToWallet, setAddToWallet] = useState(true);
+	const [addToWallet, setAddToWallet] = useState(true); 
 
 	// const { addDocument } = useAddDocument();
 
@@ -45,6 +44,8 @@ function Documents() {
 		taskList,
 		completedDocs,
 		docTypes,
+		filters,
+		setFilters,
 		// shipmentDocumentsHookSetters,
 		// shipmentFilters,
 		// refetch,
@@ -61,11 +62,12 @@ function Documents() {
 			<HeaderComponent
 				activeToggle={activeToggle}
 				setActiveToggle={setActiveToggle}
-				searchTasksVal={searchTasksVal}
-				setSearchTasksVal={setSearchTasksVal}
 				// shipmentDocumentsHookSetters={shipmentDocumentsHookSetters}
 				// shipmentFilters={shipmentFilters}
 				shipment_data={shipment_data}
+				data={completedDocs?.organizations}
+				filters={filters}
+				setFilters={setFilters}
 			/>
 			{!activeToggle ? (
 
@@ -75,7 +77,7 @@ function Documents() {
 					setShowConfirmed={setShowConfirmed}
 					// loading={loading}
 					emailDocs={emailDocs}
-					completedDocs={completedDocs}
+					completedDocs={completedDocs?.list}
 					// shipmentDocumentsRefetch={refetch}
 					// addDocument={addDocument}
 				/>
