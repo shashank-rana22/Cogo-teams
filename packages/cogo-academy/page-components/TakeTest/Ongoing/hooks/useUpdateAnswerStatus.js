@@ -1,6 +1,5 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
 
 const useUpdateAnswerQuestion = () => {
 	const {
@@ -14,7 +13,7 @@ const useUpdateAnswerQuestion = () => {
 
 	const test_id = '2b605b28-3cc1-47a7-b73e-52b8a2cb9f76';
 
-	const updateAnswerList = async (id, answer, answer_state) => {
+	const updateAnswerList = async ({ id, answer, answer_state }) => {
 		try {
 			const payload = {
 				test_id,
@@ -32,10 +31,6 @@ const useUpdateAnswerQuestion = () => {
 			console.log('error', err);
 		}
 	};
-
-	useEffect(() => {
-		updateAnswerList();
-	}, []);
 
 	return {
 		loading,

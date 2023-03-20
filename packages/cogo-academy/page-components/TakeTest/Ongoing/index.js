@@ -1,4 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import LeftSection from './components/LeftSection';
@@ -11,7 +10,6 @@ function Ongoing() {
 
 	const { loading, data = [] } = useFetchQuestionsList({ currentQuestion });
 
-	// console.log('asdfghjfghj::::', data);
 	return ((
 		<div className={styles.main_container}>
 			<div className={styles.left_container}>
@@ -22,6 +20,7 @@ function Ongoing() {
 					setCurrentQuestion={setCurrentQuestion}
 				/>
 			</div>
+
 			<div className={styles.right_container}>
 				<RightSection
 					data={data}
