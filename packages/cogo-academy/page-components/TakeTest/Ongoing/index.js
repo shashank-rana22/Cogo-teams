@@ -25,7 +25,7 @@ function Ongoing() {
 				<RightSection
 					data={data}
 					loading={loading}
-					currentQuestion={currentQuestion - 1}
+					currentQuestion={currentQuestion}
 					setCurrentQuestion={setCurrentQuestion}
 				/>
 			</div>
