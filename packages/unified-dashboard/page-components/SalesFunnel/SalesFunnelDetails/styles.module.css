@@ -34,7 +34,6 @@
 
 .fixed_header {
 	top: 3rem;
-	z-index: 1;
 }
 
 @media (max-width: 768px) {
