@@ -6,7 +6,7 @@ import AddQuestionsForm from '../../../../../CreateQuestionSet/components/AddQue
 
 import styles from './styles.module.css';
 
-function NewQuestion({ setShowNewQuestion }) {
+function NewQuestion({ setAllKeysSaved, allKeysSaved }) {
 	const [savedQuestionDetails, setSavedQuestionDetails] = useState([{ id: new Date().getTime(), isNew: true }]);
 
 	// const columns = [
@@ -126,7 +126,7 @@ function NewQuestion({ setShowNewQuestion }) {
 		<div>
 			<Breadcrumb>
 				<Breadcrumb.Item
-					onClick={() => setShowNewQuestion(false)}
+					onClick={() => setAllKeysSaved(true)}
 					label="Add Questions to test"
 					className={styles.breadcrumb_item}
 				/>
@@ -135,7 +135,8 @@ function NewQuestion({ setShowNewQuestion }) {
 
 			<AddQuestionsForm
 				savedQuestionDetails={savedQuestionDetails}
-				allKeysSaved
+				allKeysSaved={allKeysSaved}
+				setAllKeysSaved={setAllKeysSaved}
 				loading={false}
 				from="test"
 				questionSetId="06ab4075-09d8-4e24-8b93-d19a8b8088ec"

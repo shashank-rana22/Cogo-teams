@@ -17,6 +17,7 @@ function useUpdateTest() {
 				// eslint-disable-next-line no-param-reassign
 				delete values[item];
 			});
+
 			const testDetailsObj = {
 				test_duration  : test_duration_min,
 				cut_off_marks,
@@ -25,6 +26,7 @@ function useUpdateTest() {
 				validity_start : test_validity.startDate,
 				validity_end   : test_validity.endDate,
 			};
+
 			const set_wise_distribution = [];
 			Object.entries(values).forEach(([key, value]) => {
 				const question_type = key.slice(-1) === 'q' ? 'stand_alone' : 'case_study';
@@ -37,7 +39,8 @@ function useUpdateTest() {
 					question_type,
 				});
 			});
-			const res = await trigger({
+
+			await trigger({
 				data: {
 					id     : test_id,
 					...testDetailsObj,
@@ -46,6 +49,7 @@ function useUpdateTest() {
 
 				},
 			});
+
 			router.push('/learning/faq/create/test-module');
 			Toast.success('Updated Successfully');
 		} catch (err) {

@@ -1,6 +1,4 @@
 import { Pagination, Table } from '@cogoport/components';
-// import { useRouter } from '@cogoport/next';
-// import { format, startCase, isEmpty } from '@cogoport/utils';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
@@ -8,8 +6,6 @@ import useCreateQuestionSet from '../../../../hooks/useCreateQuestionSet';
 
 import styles from './styles.module.css';
 import { questionSetColumns, testSetColumns } from './utils/getColumns';
-
-// import useUpdateServiceBundle from './useUpdateServiceBundle';
 
 function ListComponent({ data, loading, setParams, activeTab, params, fetchList }) {
 	const router = useRouter();

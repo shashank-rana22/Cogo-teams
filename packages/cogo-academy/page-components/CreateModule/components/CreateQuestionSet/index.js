@@ -22,6 +22,8 @@ function CreateQuestionSet() {
 		getTestQuestionTest,
 		questionSetId,
 		setQuestionSetId,
+		setFilters,
+		filters,
 	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails });
 
 	return (
@@ -56,6 +58,8 @@ function CreateQuestionSet() {
 				setAllKeysSaved={setAllKeysSaved}
 				editDetails={editDetails}
 				setEditDetails={setEditDetails}
+				setFilters={setFilters}
+				filters={filters}
 			/>
 		</div>
 	);

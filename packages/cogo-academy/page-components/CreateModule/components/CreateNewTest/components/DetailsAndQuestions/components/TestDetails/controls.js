@@ -1,12 +1,3 @@
-// import
-// const {
-// 	data,
-// 	get,
-// } = useGetEntityT();
-// useEffect(() => {
-// 	getEntityTypes();
-// }, []);
-
 const getControls = () => [
 	{
 		name        : 'name',
@@ -16,9 +7,9 @@ const getControls = () => [
 		rules       : { required: 'This is required' },
 	},
 	{
-		name  : 'select_entity_usergroups',
-		label : 'Select Entity & User Groups',
-		use   : [{
+		name        : 'select_entity_usergroups',
+		label       : 'Select Entity & User Groups',
+		subControls : [{
 			name     : 'cogo_entity_id',
 			label    : 'Select Cogo Entity:',
 			type     : 'async-select',
@@ -41,7 +32,7 @@ const getControls = () => [
 			// rules       : { required: 'This is required' },
 		},
 		],
-		type: 'select_entity_usergroups',
+		type: 'select-entity-usergroups',
 	},
 ];
 

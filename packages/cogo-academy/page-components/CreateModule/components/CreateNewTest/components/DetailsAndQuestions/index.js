@@ -4,14 +4,14 @@ import { useState } from 'react';
 
 import useCreateTest from '../../../../hooks/useCreateTest';
 
-import NewQuestion from './components/NewQuestion';
+// import NewQuestion from './components/NewQuestion';
 import QuestionSet from './components/QuestionSet';
 import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
 function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
-	const [showNewQuestion, setShowNewQuestion] = useState(false);
+	// const [allKeysSaved, setAllKeysSaved] = useState(false);
 	const [idArray, setIdArray] = useState([]);
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
@@ -33,23 +33,24 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 						From Existing Question Set
 					</Button>
 				) : null}
-				{!showNewQuestion ? (
+
+				{/* {allKeysSaved ? (
 					<Button
-						onClick={() => setShowNewQuestion(true)}
+						onClick={() => setAllKeysSaved(false)}
 						size="md"
 						themeType="accent"
 					>
 						+ Add New Question
 					</Button>
-				) : null}
+				) : null} */}
 
 			</div>
 
 			{showQuestionSet && <QuestionSet setIdArray={setIdArray} setShowQuestionSet={setShowQuestionSet} />}
 
-			{showNewQuestion && <NewQuestion setShowNewQuestion={setShowNewQuestion} />}
+			{/* {!allKeysSaved && <NewQuestion allKeysSaved={allKeysSaved} setAllKeysSaved={setAllKeysSaved} />} */}
 
-			{(showQuestionSet || showNewQuestion) && (
+			{showQuestionSet && (
 				<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 					<Button
 						loading={loading}
@@ -63,6 +64,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 					>
 						Save As Draft
 					</Button>
+
 					<Button
 						size="md"
 						themeType="primary"
