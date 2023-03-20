@@ -3,11 +3,11 @@ import Footer from './Footer';
 import Header from './Header';
 import styles from './styles.module.css';
 
-function RightSection() {
+function RightSection({ data = [], loading }) {
 	return (
 		<div className={styles.container}>
 			<Header />
-			<Body />
+			<Body data={data} loading={loading} />
 			<Footer />
 		</div>
 	);

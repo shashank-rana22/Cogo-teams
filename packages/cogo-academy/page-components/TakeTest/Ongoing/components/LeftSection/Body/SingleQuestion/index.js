@@ -1,19 +1,25 @@
 import { CheckboxGroup, RadioGroup } from '@cogoport/components';
-import { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function SingleQuestion({ question }) {
-	const { question: description, options, isMulti, id } = question;
+function SingleQuestion({ question = [], currentQuestion, total_question, loading, answer, setAnswer }) {
+	const { question_text, options, question_type } = question;
 
-	const [answer, setAnswer] = useState('');
+	// console.log('question', question);
 
-	const answerOptions = options.map((answer_option) => ({
-		label : answer_option.answer,
-		value : answer_option.answer,
+	// console.log('answer', answer);
+
+	const answerOptions = options?.map((answer_option) => ({
+		label : answer_option?.answer_text,
+		value : answer_option?.id,
 	}));
 
-	const Element = isMulti ? CheckboxGroup : RadioGroup;
+	const Element = question_type === 'multi_correct' ? CheckboxGroup : RadioGroup;
+
+	if (loading || isEmpty(question)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.main_container}>
@@ -21,18 +27,18 @@ function SingleQuestion({ question }) {
 				<div className={styles.question_count}>
 					Question
 					{' '}
-					{id}
+					{currentQuestion}
 					{' '}
 					of
 					{' '}
-					25
+					{total_question}
 				</div>
 				<p className={styles.question_type}>Single Answer Correct</p>
 			</div>
 			<div className={styles.question}>
 				Q
 				{' '}
-				{description}
+				{question_text}
 			</div>
 			<Element
 				options={answerOptions}
