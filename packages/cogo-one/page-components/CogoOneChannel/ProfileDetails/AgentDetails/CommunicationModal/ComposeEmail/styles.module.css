@@ -10,7 +10,7 @@
 .styled_editor {
 	:global {
 		.notranslate {
-			min-height: 300px;
+			min-height: 250px;
 		}
 	}
 }
@@ -25,7 +25,7 @@
 
 .rte_container {
 	position: relative;
-	height: 460px;
+	height: 380px;
 	overflow-y: auto;
 }
 
