@@ -29,9 +29,9 @@ const iataCodeMapping = {
 	'2f6f6dbc-c10b-4d1d-b9fd-e89298fb487c' : '14-3-4526/0053',
 };
 
-const agentOtherChargesCode = [{ code: 'AWB', price: '' }, { code: 'PCA', price: '' }];
-const carrierOtherChargesCode = [{ code: 'XRAY', price: '' }, { code: 'AWC', price: '' },
-	{ code: 'AMS', price: '' }, { code: 'CGC', price: '' }];
+const agentOtherChargesCode = [{ code: 'AWB', price: '150' }, { code: 'PCA', price: '250' }];
+const carrierOtherChargesCode = [{ code: 'AMS', price: '' }, { code: 'AWC', price: '' },
+	{ code: 'XRAY', price: '' }, { code: 'CGC', price: '' }];
 
 interface NestedObj {
 	[key: string]: NestedObj | React.FC ;
