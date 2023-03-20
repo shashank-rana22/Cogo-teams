@@ -8,6 +8,7 @@
 	background-color: #fff;
 	border-radius: 8px;
 }
+
 .primary_right {
 	display: flex;
 	flex: 2.5;
@@ -36,9 +37,9 @@
 .sub_heading {
 	display: flex;
 	justify-content: space-between;
+	margin-top: 12px;
 	font-size: 12px;
 	font-weight: 600;
-  margin-top: 12px;
 	color: #6fa5ab;
 }
 

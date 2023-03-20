@@ -7,7 +7,6 @@ function useGraphData() {
 
 	const { pie_chart_data:pie_chart = 0, graph_data } = data || {};
 
-
 	const {
 		total_dislike_percentage = 0,
 		total_like_percentage = 0,

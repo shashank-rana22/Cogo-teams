@@ -1,7 +1,7 @@
 .container {
 	align-items: center;
 	justify-content: space-between;
-	padding: 1rem;
+	padding: 12px 0;
 	font-size: 20px;
 	font-weight: 500;
 	background-color: #fff;
@@ -11,6 +11,7 @@
 .pills_container {
 	display: flex;
 	justify-content: space-between;
+	margin: 0 12px;
 }
 
 .button_container {

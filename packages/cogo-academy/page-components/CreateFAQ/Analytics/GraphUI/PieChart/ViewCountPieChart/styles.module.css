@@ -1,9 +1,8 @@
 .inner_pie {
-    position: absolute;
-    bottom: 24px;
-    width: 85%;
-    height: 85%;
-    right: 38px;
-    margin-top: 50px;
+	position: absolute;
+	right: 38px;
+	bottom: 24px;
+	width: 85%;
+	height: 85%;
+	margin-top: 50px;
 }
-
