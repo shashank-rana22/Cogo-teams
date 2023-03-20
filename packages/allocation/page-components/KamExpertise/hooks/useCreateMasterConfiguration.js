@@ -51,7 +51,7 @@ function useCreateMasterConfiguration(props) {
 				],
 			};
 
-			if (Object.keys(masteryItemData).length > 0) {
+			if (!isEmpty(masteryItemData)) {
 				payload.id = masteryItemData.id;
 				payload.badge_details[0].badge_detail_id = masteryItemData?.badge_details?.[0]?.id;
 			}

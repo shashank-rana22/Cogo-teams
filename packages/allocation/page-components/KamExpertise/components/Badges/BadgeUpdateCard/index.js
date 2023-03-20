@@ -6,7 +6,8 @@ import { getFieldController } from '../../../../../common/Form/getFieldControlle
 
 import styles from './styles.module.css';
 
-function BadgeUpdateCard({ data = {}, badgeItemData = {}, control, errors = '', watch, isLastItem }) {
+function BadgeUpdateCard(props) {
+	const { data = {}, badgeItemData = {}, control, errors = '', watch, isLastItem, loading = false } = props;
 	const { medalType, score = '', inputPlaceHolder = '' } = data;
 	const { badge_details = [] } = badgeItemData;
 
@@ -43,6 +44,7 @@ function BadgeUpdateCard({ data = {}, badgeItemData = {}, control, errors = '', 
 						rules={{
 							required: 'Score is required',
 						}}
+						disabled={loading}
 					/>
 
 					<div className={styles.error_message}>
@@ -68,6 +70,7 @@ function BadgeUpdateCard({ data = {}, badgeItemData = {}, control, errors = '', 
 					<UploadController
 						name={`${medalType}_img_value`}
 						control={control}
+						disabled={loading}
 						accept=".png, .jpeg"
 						rules={isEmpty(badgeItemData) ? {
 							required: 'Image is required',

@@ -3,7 +3,7 @@ import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useUpdateSingleBadge from '../../../../../../hooks/useBadgeConfigurationAttributes';
-import GetCard from '../../../../BadgeUpdateCard';
+import BadgeUpdateCard from '../../../../BadgeUpdateCard';
 
 import styles from './styles.module.css';
 
@@ -74,7 +74,7 @@ function BadgeCard({ data, badgeItemData = {}, medal = '', isLast = {}, listRefe
 					<form onSubmit={handleSubmit(onSave)}>
 						<Modal.Body className={styles.modal_body}>
 							<div style={{ padding: '10px', margin: '10px' }}>
-								<GetCard
+								<BadgeUpdateCard
 									data={badgeData}
 									badgeItemData={badgeItemData}
 									watch={watch}
