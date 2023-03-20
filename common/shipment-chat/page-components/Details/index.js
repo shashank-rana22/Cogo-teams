@@ -1,4 +1,5 @@
 import { Textarea, Popover } from '@cogoport/components';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMSend, IcMAttach, IcMDocument } from '@cogoport/icons-react';
 import React, { useRef, useState } from 'react';
 
@@ -34,6 +35,7 @@ function Details({
 	const [rows, setRows] = useState(1);
 	const [textContent, setTextContent] = useState('');
 	const [showImpMsg, setShowImpMsg] = useState(false);
+	const [selectedFile, setSelectedFile] = useState([]);
 
 	const { data, isGettingShipment } = get;
 	const { shipment_data, primary_service } = data || {};
@@ -44,7 +46,8 @@ function Details({
 	);
 
 	const formValues = {
-		message: textContent,
+		message : textContent,
+		file    : selectedFile,
 	};
 
 	const reset = () => {
@@ -126,19 +129,27 @@ function Details({
 						<Popover
 							theme="light"
 							interactive
-							content="aaa"
+							content={(
+								<FileUploader
+									value={selectedFile}
+									onChange={setSelectedFile}
+									showProgress
+									draggable
+									multiple
+								/>
+							)}
 						>
 							<div className={styles.icon_wrap}>
 								<IcMAttach width={21} height={21} />
 							</div>
 						</Popover>
 						<div className={styles.attached_container}>
-							{/* {(formValues?.file || []).map((url) => (
-							<div className={styles.attached_doc}>
-								<IcMDocument style={{ marginRight: '4px' }} />
-								{url.name}
-							</div>
-						))} */}
+							{(formValues?.file || []).map((url) => (
+								<div className={styles.attached_doc}>
+									<IcMDocument style={{ marginRight: '4px' }} />
+									{url?.split('/').pop()}
+								</div>
+							))}
 						</div>
 
 						<Textarea

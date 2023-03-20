@@ -33,8 +33,6 @@ const useCreateMessage = ({
 		return item?.toLowerCase();
 	});
 
-	const url = (formValues?.file || []).map((obj) => obj.url);
-
 	const PersonalChannel = {
 		visible_to_user_ids: personal_data?.subscribed_user_ids,
 	};
@@ -60,7 +58,10 @@ const useCreateMessage = ({
 		try {
 			const res = await trigger({
 				data: {
-					content: formValues?.message || '', attachment_urls: url || [], channel_id: id, ...payload,
+					content         : formValues?.message || '',
+					attachment_urls : formValues?.file || '',
+					channel_id      : id,
+					...payload,
 				},
 			});
 
