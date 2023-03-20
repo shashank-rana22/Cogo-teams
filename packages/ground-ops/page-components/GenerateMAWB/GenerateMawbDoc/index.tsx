@@ -83,9 +83,6 @@ function GenerateMawb({
 	const [whiteout, setWhiteout] = useState(false);
 
 	const handleClick = () => {
-		if (edit) {
-			setEdit(false);
-		}
 		if (back) {
 			setBack(!back);
 		}
