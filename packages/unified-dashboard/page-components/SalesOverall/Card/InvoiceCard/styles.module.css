@@ -81,11 +81,8 @@
 }
 
 .text_tag {
+	width: 100%;
 	font-weight: 500;
-
-	&.text-width {
-		width: 100%;
-	}
 }
 
 .stat {

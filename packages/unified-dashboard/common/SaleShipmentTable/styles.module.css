@@ -34,50 +34,46 @@
 	width: 100px;
 }
 
-.arrow{
-	margin: 0px 4px;
+.arrow {
 	min-width: 16px;
+	margin: 0 4px;
 }
 
 @media (max-width: 768px) {
-  
 	.card_wrapper {
+		width: fit-content;
 		margin: 0 10px;
 		background: #fefefe;
 		border-bottom: 1px solid #e5e3e3;
 		box-shadow: none;
-		width: fit-content;
 	}
-	
+
 	.revenue_col {
 		position: relative;
 		display: flex;
-		min-width: 100px;
 		flex: 0%;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		margin: 0px;
+		min-width: 100px;
+		margin: 0;
 		border-right: none;
 	}
-	
+
 	.row {
 		display: flex;
 		align-items: center;
-		padding: 0px;
+		padding: 0;
 		font-size: 10px;
 		font-weight: 400;
 		text-align: center;
 		cursor: pointer;
 	}
-	
-	
+
 	.arrange {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		width: 100px;
 	}
-	
-	
-  }
+}

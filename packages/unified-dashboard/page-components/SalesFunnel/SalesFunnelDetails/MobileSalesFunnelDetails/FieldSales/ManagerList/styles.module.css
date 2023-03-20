@@ -1,8 +1,5 @@
 .card_wrapper {
-	padding-top: 0;
-	padding-right: 0;
-	padding-bottom: 0;
-	padding-left: 0;
+	padding: 0;
 	background: #fff;
 	border: 1px solid #efefef;
 	box-shadow: none;
@@ -49,8 +46,7 @@
 	position: relative;
 	display: flex;
 	flex: 25%;
-	flex-direction: row;
-	flex-wrap: wrap;
+	flex-flow: row wrap;
 	align-items: center;
 	justify-content: center;
 	padding: 14px 0;

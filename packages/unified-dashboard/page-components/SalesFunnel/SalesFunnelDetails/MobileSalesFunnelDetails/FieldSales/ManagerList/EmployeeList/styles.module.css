@@ -37,18 +37,6 @@
 	fill: #000;
 }
 
-.revenue_col {
-	position: relative;
-	display: flex;
-	flex: 33%;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin: 4px 0;
-	text-align: center;
-	border-right: none;
-}
-
 .role_name {
 	align-self: center;
 	font-size: 12px;
@@ -79,8 +67,7 @@
 .revenue_arrow {
 	position: relative;
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	flex-flow: row wrap;
 	align-items: center;
 	justify-content: center;
 	padding: 14px 0;
@@ -108,8 +95,9 @@
 	flex: 25%;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 4px;
-	margin-bottom: 4px;
+	justify-content: center;
+	margin: 4px 0;
+	text-align: center;
 	border-right: none;
 }
 
@@ -137,11 +125,6 @@
 	border-right: none;
 }
 
-.revenue_gap {
-	display: flex;
-	flex: 25%;
-}
-
-.shipment_table{
+.shipment_table {
 	overflow: auto;
 }

@@ -99,7 +99,7 @@ function PortPair({ item = {}, field }) {
 					<>
 						{origin}
 						{' '}
-						<IcMPortArrow className={styles.arrow}/>
+						<IcMPortArrow className={styles.arrow} />
 					</>
 				)}
 				{destination}

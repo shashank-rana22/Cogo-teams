@@ -33,7 +33,7 @@ function DateFilter({ setFilters, range = 'current_month', setRange }) {
 				setRange={setRange}
 			>
 				<div
-					className={styles.dateFilterWrap}
+					className={styles.date_filter_wrap}
 					role="button"
 					tabIndex="0"
 					onClick={() => setOpenCalendar(!openCalendar)}
