@@ -46,10 +46,13 @@ function DisplayCard({
 		);
 	};
 
-	const displayValues = (label, values) => (
-		label === 'Announcement Type' ? <Pill color="green">{values}</Pill>
-			: <div className={styles.value}>{values}</div>
-	);
+	const displayValues = (label, values) => {
+		if (label === 'Announcement Type') {
+			return <Pill color="green">{values}</Pill>;
+		}
+
+		return <div className={styles.value}>{values}</div>;
+	};
 
 	return (
 		<div className={styles.container}>

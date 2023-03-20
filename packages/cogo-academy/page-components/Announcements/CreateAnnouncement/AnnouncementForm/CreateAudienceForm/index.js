@@ -1,10 +1,10 @@
 import { Button } from '@cogoport/components';
 import { SelectController, InputController } from '@cogoport/forms';
+import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
-import useListCogoEntity from './useListCogoEntities';
 import getAudienceControls from './utils/getAudienceControls';
 import getCountryOptions from './utils/getCountryOptions';
 
@@ -14,6 +14,20 @@ function CreateAudienceForm(props) {
 		fetchAudiences = () => {},
 	} = props;
 
+	const [{ data }] = useRequest({
+		method : 'get',
+		url    : '/list_cogo_entities',
+		params : {
+			filters: {
+				status: 'active',
+			},
+			page_limit : 100,
+			page       : 1,
+		},
+	}, { manual: false });
+
+	const entity_data = data?.list || [];
+
 	const {
 		createAudience,
 		control,
@@ -21,15 +35,11 @@ function CreateAudienceForm(props) {
 		errors,
 		setValue,
 		watch,
-		loading:createAudienceLoading,
+		loading: createAudienceLoading,
 	} = useCreateAudience({
 		fetchAudiences,
 		setShowCreateAudience,
 	});
-
-	const {
-		entity_data,
-	} = useListCogoEntity();
 
 	const countryOptions = getCountryOptions();
 
@@ -63,13 +73,16 @@ function CreateAudienceForm(props) {
 
 		return { ...pv, [name]: !hiddenElements[name] };
 	}, {});
+	const CONTROLS_MAPPING = {
+		text   : InputController,
+		select : SelectController,
+	};
 
 	return (
 		<div className={styles.container}>
 			{(Object.keys(controls) || []).map((controlItem) => {
-				const { name = '', label = '' } = controls[controlItem] || {};
-
-				const DynamicController = name === 'name' ? InputController : SelectController;
+				const { name = '', label = '', type = '' } = controls[controlItem] || {};
+				const DynamicController = CONTROLS_MAPPING[type];
 				if (!showElements[name]) return null;
 
 				return (

@@ -9,12 +9,10 @@ const getCountryOptions = () => {
 		value : indiaOption?.id,
 	}];
 
-	countries.filter((country) => country.country_code !== 'IN').map((country) => {
+	countries.filter((country) => country.country_code !== 'IN').forEach((country) => {
 		const option = { label: country.name, value: country.id };
 
 		countryOptions.push(option);
-
-		return countryOptions;
 	});
 
 	return countryOptions;

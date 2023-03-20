@@ -10,7 +10,6 @@ function Child({
 	index,
 	name,
 	remove,
-	showElements = {},
 	disabled = false,
 	showLabelOnce = false,
 	lowerlabel = '',
@@ -23,11 +22,7 @@ function Child({
 				{controls.map((controlItem) => {
 					const { style, type, name: controlName } = controlItem;
 
-					const show = !(controlItem.name in showElements)
-						|| showElements[controlItem.name];
-
 					const Element = getElementController(type);
-					if (!Element && !show) return null;
 
 					return (
 						<div className={styles.form_item} style={{ ...style }} key={`${controlName}_${index}`}>

@@ -38,8 +38,12 @@ function PreviewVideos({ videos = [] }) {
 
 						<div className={styles.contents}>
 
-							{videos.map((video) => (
-								<div key={video} className={styles.content_item}>
+							{videos.map((video, index) => (
+								<div
+									key={video}
+									className={styles.content_item}
+									style={{ marginLeft: `${index === 0 ? '' : '20px'}` }}
+								>
 									<iframe
 										width="366"
 										height="200"

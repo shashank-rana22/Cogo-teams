@@ -7,5 +7,5 @@ const CONTROL_MAPPING = {
 };
 
 export const getElementController = (type = 'text') => (
-	CONTROL_MAPPING[type]
+	CONTROL_MAPPING[type] || SelectController
 );

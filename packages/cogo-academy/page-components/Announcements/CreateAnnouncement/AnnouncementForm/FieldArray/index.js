@@ -12,7 +12,6 @@ function FieldArray({
 	formValues,
 	controls,
 	error,
-	showElements,
 	showButtons = true,
 	showLabelOnce = false,
 	disabled = false,
@@ -68,7 +67,6 @@ function FieldArray({
 							lowerlabel={field.label}
 							remove={remove}
 							error={error?.[index]}
-							showElements={showElements?.[index]}
 							disabled={disabled}
 							length={fields.length}
 							showLabelOnce={showLabelOnce}

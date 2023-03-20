@@ -32,8 +32,12 @@ function PreviewImages({ images = [] }) {
 					<div className={styles.content_inner_container} ref={scrollRefImages}>
 
 						<div className={styles.contents}>
-							{images.map((i) => (
-								<div key={i} className={styles.content_item}>
+							{images.map((i, index) => (
+								<div
+									key={i}
+									className={styles.content_item}
+									style={{ marginLeft: `${index === 0 ? '' : '20px'}` }}
+								>
 									<img src={i} alt="img" width={366} />
 								</div>
 							))}

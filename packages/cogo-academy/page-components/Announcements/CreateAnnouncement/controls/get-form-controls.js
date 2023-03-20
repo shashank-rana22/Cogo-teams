@@ -68,7 +68,7 @@ const getFormControls = () => [
 	},
 	{
 		name           : 'audience_ids',
-		type           : 'multi-select',
+		type           : 'multiselect',
 		optionsListKey : 'audiences',
 		isClearable    : true,
 		label          : 'Select Audience',
@@ -89,7 +89,7 @@ const getFormControls = () => [
 	{
 		name            : 'validity',
 		label           : 'Validity',
-		type            : 'datepicker',
+		type            : 'daterangepicker',
 		dateFormat      : 'dd MMM yyyy hh:mm a',
 		use12hourformat : true,
 		rules           : { required: 'Required' },

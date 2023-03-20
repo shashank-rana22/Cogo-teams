@@ -31,7 +31,6 @@
 
 .contents {
 	display: flex;
-	gap: 20px;
 	align-items: center;
 	width: 100%;
 	margin-bottom: 12px;

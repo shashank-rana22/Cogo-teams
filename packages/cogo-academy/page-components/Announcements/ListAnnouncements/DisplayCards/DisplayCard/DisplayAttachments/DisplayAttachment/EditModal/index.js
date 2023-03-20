@@ -37,45 +37,26 @@ function EditModal({
 
 	const renderEditModal = (value) => {
 		const Element = getElementController(value?.document_type);
+
+		if (!Element) return null;
 		return (
 			<div>
-				{value?.document_type === 'video'
-					? (
-						<>
-							<Element
-								key={value?.id}
-								name={value?.document_type}
-								control={control}
-								value={value?.document_url}
-								placeholder="Enter Video URL"
-								rules={{ required: 'Input Value Required' }}
-							/>
-							{URL_ERROR_MAPPING[value?.document_type] && (
-								<div className={styles.errors}>
-									{URL_ERROR_MAPPING[value?.document_type]}
-									<span>*</span>
-								</div>
-							)}
-						</>
-					)
-					:	(
-						<>
-							<Element
-								key={value?.id}
-								name={value?.document_type}
-								control={control}
-								defaultValues={value?.document_url}
-								accept={value?.document_type === 'image' ? '.png, .jpeg' : '.pdf'}
-								rules={{ required: 'Input Value Required' }}
-							/>
-							{URL_ERROR_MAPPING[value?.document_type] && (
-								<div className={styles.errors}>
-									{URL_ERROR_MAPPING[value?.document_type]}
-									<span>*</span>
-								</div>
-							)}
-						</>
-					)}
+				<Element
+					key={value?.id}
+					name={value?.document_type}
+					control={control}
+					value={value?.document_type === 'video' ? value?.document_url : null}
+					defaultValues={value?.document_type !== 'video' ? value?.document_url : null}
+					accept={value?.document_type === 'image' ? '.png, .jpeg' : '.pdf'}
+					placeholder="Enter Video URL"
+					rules={{ required: 'Input Value Required' }}
+				/>
+				{URL_ERROR_MAPPING[value?.document_type] && (
+					<div className={styles.errors}>
+						{URL_ERROR_MAPPING[value?.document_type]}
+						<span>*</span>
+					</div>
+				)}
 			</div>
 		);
 	};

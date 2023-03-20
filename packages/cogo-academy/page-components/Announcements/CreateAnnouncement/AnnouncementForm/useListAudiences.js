@@ -3,10 +3,10 @@ import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-// eslint-disable-next-line import/no-relative-packages
-import countries from '../../../../../../.data-store/constants/countries.json';
-
 import WORK_SCOPES_OPTIONS from './CreateAudienceForm/utils/workScopeMappings';
+
+// eslint-disable-next-line import/no-unresolved
+import countries from '@/data-store/constants/countries.json';
 
 const audienceOptions = [];
 
