@@ -21,7 +21,7 @@ function Customers({
 	setActiveTab = () => {},
 	toggleStatus,
 	messagesList = [],
-	unReadChatsCount,
+	unReadChatsCount = '',
 	setAppliedFilters = () => {},
 	appliedFilters = {},
 	fetchworkPrefernce = () => {},
@@ -51,6 +51,7 @@ function Customers({
 	const handleOpenOptions = () => {
 		setIsChecked(!isChecked);
 	};
+	const unReadChatsCountDisplay = Number(unReadChatsCount || 0) > 49 ? '49+' : unReadChatsCount;
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
@@ -91,7 +92,7 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
+					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCountDisplay} />
 					<TabPanel name="voice" title="Voice" />
 				</Tabs>
 			</div>
