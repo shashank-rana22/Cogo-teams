@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-function useAllTopicCardView({ date = ''}) {
+function useAllTopicCardView({ date = '' }) {
 	const { general = {} } = useSelector((state) => state);
 	const { startDate, endDate } = date;
 	const { query } = general;

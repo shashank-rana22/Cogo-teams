@@ -7,8 +7,6 @@ function useListFaqSearchHistories({
 	searchState = undefined,
 	topicId = undefined,
 	tagId = [],
-	// limit = undefined,
-	// sort = undefined,
 }) {
 	const [dateRange, setDateRange] = useState({});
 

@@ -3,8 +3,6 @@ import { Select, DateRangepicker } from '@cogoport/components';
 import styles from './styles.module.css';
 
 function Filters({ setDateRange, dateRange }) {
-	// const locationOptions = ['All Questions', 'Cogoport'];
-
 	return (
 		<div className={styles.top_content}>
 			<div className={styles.date_range_container}>
@@ -40,10 +38,7 @@ function Filters({ setDateRange, dateRange }) {
 
 				</div>
 				<Select
-						// value={country?.mobile_country_code}
-						// onChange={}
 					placeholder="All"
-						// options={locationOptions}
 					id="group_by"
 					labelKey="display_name"
 					valueKey="group_by"
@@ -63,10 +58,7 @@ function Filters({ setDateRange, dateRange }) {
 
 				</div>
 				<Select
-						// value={country?.mobile_country_code}
-						// onChange={}
 					placeholder="All"
-						// options={locationOptions}
 					id="group_by"
 					labelKey="display_name"
 					valueKey="group_by"
