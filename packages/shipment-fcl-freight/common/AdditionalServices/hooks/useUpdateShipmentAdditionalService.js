@@ -3,7 +3,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useAddInvoicingParty = ({
+const useUpdateShipmentAdditionalService = ({
 	item = {},
 	setAddRate = () => {},
 	refetch = () => {},
@@ -48,7 +48,7 @@ const useAddInvoicingParty = ({
 
 	const handleShipperConfirm = () => {
 		const payload = {
-			id    : item.id,
+			id    : item.serviceListItem.id,
 			state : 'accepted_by_importer_exporter',
 		};
 		handleSubmit(payload);
@@ -60,7 +60,7 @@ const useAddInvoicingParty = ({
 			return;
 		}
 		const payload = {
-			id      : item.id,
+			id      : item.serviceListItem.id,
 			state   : 'amendment_requested_by_importer_exporter',
 			remarks : [remarks],
 		};
@@ -69,7 +69,7 @@ const useAddInvoicingParty = ({
 
 	const handleBuyPriceReRequest = () => {
 		const payload = {
-			id    : item.id,
+			id    : item.serviceListItem.id,
 			state : 'requested_for_service_provider',
 		};
 		handleSubmit(payload);
@@ -80,7 +80,7 @@ const useAddInvoicingParty = ({
 			Toast.error('Please provide cancellation remarks');
 		}
 		const payload = {
-			id      : item.id,
+			id      : item.serviceListItem.id,
 			state   : 'cancelled',
 			remarks : [remarks],
 		};
@@ -92,7 +92,7 @@ const useAddInvoicingParty = ({
 			Toast.error('Please provide cancellation remarks');
 		}
 		const payload = {
-			id      : item.id,
+			id      : item.serviceListItem.id,
 			state   : 'cancelled_by_supplier',
 			remarks : [remarks],
 		};
@@ -101,7 +101,7 @@ const useAddInvoicingParty = ({
 
 	const handleAddInvoicingParty = () => {
 		const payload = {
-			id                 : item.id,
+			id                 : item.serviceListItem.id,
 			invoice_preference : {},
 		};
 		handleSubmit(payload);
@@ -109,7 +109,7 @@ const useAddInvoicingParty = ({
 
 	const requestRateFromTechops = () => {
 		const payload = {
-			id                : item.id,
+			id                : item.serviceListItem.id,
 			is_rate_available : false,
 			state             : 'requested_for_importer_exporter',
 		};
@@ -123,7 +123,7 @@ const useAddInvoicingParty = ({
 		}
 
 		const payload = {
-			id                 : item.id,
+			id                 : item.serviceListItem.id,
 			invoice_preference : {
 				billing_address: {
 					tax_number                  : ba.tax_number,
@@ -154,7 +154,7 @@ const useAddInvoicingParty = ({
 				add_to_sell_quotation: value === 'bill',
 				state:
 					value === 'not_bill' ? 'accepted_by_importer_exporter' : undefined,
-				id: item.id,
+				id: item.serviceListItem.id,
 			};
 			await handleSubmit(payload);
 			if (onComplete) {
@@ -181,4 +181,4 @@ const useAddInvoicingParty = ({
 	};
 };
 
-export default useAddInvoicingParty;
+export default useUpdateShipmentAdditionalService;

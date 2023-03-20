@@ -1,6 +1,7 @@
+import { Modal } from '@cogoport/components';
 import React from 'react';
 
-import useAddInvoicingParty from '../AddRate/useAddInvoicingParty';
+import useUpdateShipmentAdditionalService from '../../hooks/useUpdateShipmentAdditionalService';
 
 import AddInvoicingParty from './AddInvoicingParty';
 import styles from './styles.module.css';
@@ -11,6 +12,7 @@ function AddIp({
 	item,
 	setShowIp = () => {},
 	refetch,
+	updateInvoicingParty = () => {},
 }) {
 	const organizationDetails = {
 		id         : shipment_data?.importer_exporter?.id || undefined,
@@ -22,20 +24,31 @@ function AddIp({
 		organizationDetails.is_tax_applicable =	shipment_data?.importer_exporter?.is_tax_applicable;
 	}
 
-	const update_response = useAddInvoicingParty({
-		item,
-		setShowIp,
-		refetch,
-		showIp,
-	});
+	// const updateResponse = useUpdateShipmentAdditionalService({
+	// 	item,
+	// 	setShowIp,
+	// 	refetch,
+	// 	showIp,
+	// });
 
 	return (
-		<div className={styles.container}>
-			<AddInvoicingParty
-				organizationDetails={organizationDetails}
-				updateInvoicingParty={(ip) => update_response.handleInvoicingParty(ip)}
-			/>
-		</div>
+		<Modal
+			size="xl"
+			show={showIp}
+			className={styles.ip_modal_container}
+			onClose={() => setShowIp(null)}
+			closable={false}
+			placement="top"
+			onOuterClick={() => setShowIp(null)}
+		>
+			<Modal.Header title="ADD INVOICING PARTY" />
+			<Modal.Body>
+				<AddInvoicingParty
+					organizationDetails={organizationDetails}
+					updateInvoicingParty={updateInvoicingParty}
+				/>
+			</Modal.Body>
+		</Modal>
 	);
 }
 

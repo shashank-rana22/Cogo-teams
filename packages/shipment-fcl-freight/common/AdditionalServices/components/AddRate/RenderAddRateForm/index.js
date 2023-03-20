@@ -1,10 +1,17 @@
-import { asyncFieldsOrganization, SelectController, useForm, useGetAsyncOptions } from '@cogoport/forms';
+import { Button } from '@cogoport/components';
+import { asyncFieldsOrganization, SelectController, useGetAsyncOptions } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { merge } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function RenderAddRateForm({ handleSubmit = () => {}, onSubmit = () => {}, control, errors, register }) {
+function RenderAddRateForm({
+	handleSubmit = () => {},
+	onSubmit = () => {},
+	control,
+	errors,
+	register,
+}) {
 	const options = [
 		GLOBAL_CONSTANTS.currency_code.INR,
 		GLOBAL_CONSTANTS.currency_code.USD,
@@ -61,9 +68,9 @@ function RenderAddRateForm({ handleSubmit = () => {}, onSubmit = () => {}, contr
 	);
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit(onSubmit)} className={styles.form_container}>
 			<div className={styles.flex}>
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="currency">Currency</label>
 					<select id="currency" {...register('currency')}>
 						<option value="">Select</option>
@@ -72,24 +79,26 @@ function RenderAddRateForm({ handleSubmit = () => {}, onSubmit = () => {}, contr
 						))}
 					</select>
 				</div>
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="buy_price">Buy price</label>
 					<input id="buy_price" type="number" {...register('buy_price')} placeholder="Enter Buy Price" />
 				</div>
 			</div>
 
 			<div className={styles.flex}>
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="unit">Unit</label>
 					<select id="unit" {...register('unit')} placeholder="Unit">
 						<option value="">Select</option>
-						{options.map((option) => (
+						<option value="per_bl">Per Bl</option>
+						<option value="per_container">Per Container</option>
+						{/* {options.map((option) => (
 							<option key={option.value} value={option.value}>{option.label}</option>
-						))}
+						))} */}
 					</select>
 				</div>
 
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="quantity">Quantity</label>
 					<input
 						id="quantity"
@@ -103,7 +112,7 @@ function RenderAddRateForm({ handleSubmit = () => {}, onSubmit = () => {}, contr
 			</div>
 
 			<div className={styles.flex}>
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="price">Price</label>
 					<input
 						id="price"
@@ -115,7 +124,7 @@ function RenderAddRateForm({ handleSubmit = () => {}, onSubmit = () => {}, contr
 					{errors.price && <span>This field is required</span>}
 				</div>
 
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="sell_price">Sell Price</label>
 					<input
 						id="sell_price"
@@ -131,7 +140,7 @@ function RenderAddRateForm({ handleSubmit = () => {}, onSubmit = () => {}, contr
 			<div className={styles.flex}>
 				{serviceProviderController}
 
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="alias">Alias (Optional)</label>
 					<input
 						id="alias"
@@ -142,8 +151,6 @@ function RenderAddRateForm({ handleSubmit = () => {}, onSubmit = () => {}, contr
 					{errors.alias && <span>Minimum length is 3 characters</span>}
 				</div>
 			</div>
-
-			<button type="submit">Submit</button>
 		</form>
 	);
 }
