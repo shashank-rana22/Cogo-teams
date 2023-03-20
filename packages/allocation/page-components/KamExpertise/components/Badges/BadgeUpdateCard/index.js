@@ -53,6 +53,7 @@ function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', 
 
 			<div className={styles.lower_subheader2}>
 				{`${medalType} Medal`}
+
 				<IcMInfo className={styles.icm_info} />
 			</div>
 

@@ -5,6 +5,9 @@ import { useState, useEffect } from 'react';
 function useGetBadgeList() {
 	const [searchValue, setSearchValue] = useState();
 	const [expertise, setExpertise] = useState([]);
+	const [toggleScreen, setToggleScreen] = useState('badge_details');
+	const [badgeListData, setBadgeListData] = useState({});
+	const [masteryListData, setMasteryListData] = useState({});
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
@@ -55,6 +58,12 @@ function useGetBadgeList() {
 		paginationData,
 		getNextPage,
 		listRefetch: refetch,
+		toggleScreen,
+		setToggleScreen,
+		badgeListData,
+		setBadgeListData,
+		masteryListData,
+		setMasteryListData,
 	};
 }
 export default useGetBadgeList;
