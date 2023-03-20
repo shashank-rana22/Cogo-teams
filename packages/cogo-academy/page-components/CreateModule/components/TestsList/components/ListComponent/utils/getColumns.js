@@ -210,7 +210,7 @@ export const testSetColumns = () => [
 		id       : 'results',
 		accessor : ({ id = '' }) => (
 			<div>
-				<Link href={`/enrichment?id=${id}`}>Results</Link>
+				<Link href={`/learning/tests/results/admin/${id}`}>Results</Link>
 			</div>
 		),
 	},
