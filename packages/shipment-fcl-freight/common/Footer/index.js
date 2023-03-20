@@ -1,34 +1,37 @@
-import React from 'react';
 import { Button, cl } from '@cogoport/components';
+import React from 'react';
+
 import styles from './styles.module.css';
 
-const Footer = ({
+function Footer({
 	onClose = () => {},
 	isLoading = false,
 	showSubmit = true,
-}) => (
-	<div className={styles.container}>
-		<Button
-			className="secondary md"
-			onClick={onClose}
-			disabled={isLoading}
-			id="shipment_form_header_cancel"
-		>
-			Cancel
-		</Button>
-
-		{showSubmit ? (
+}) {
+	return (
+		<div className={styles.container}>
 			<Button
-				type="submit"
-				className="primary md"
+				className="secondary md"
+				onClick={onClose}
 				disabled={isLoading}
-				style={{ marginLeft: 16 }}
-				id="shipment_form_header_submit"
+				id="shipment_form_header_cancel"
 			>
-				{isLoading ? 'Adding Service...' : 'Submit'}
+				Cancel
 			</Button>
-		) : null}
-	</div>
-);
+
+			{showSubmit ? (
+				<Button
+					type="submit"
+					className="primary md"
+					disabled={isLoading}
+					style={{ marginLeft: 16 }}
+					id="shipment_form_header_submit"
+				>
+					{isLoading ? 'Adding Service...' : 'Submit'}
+				</Button>
+			) : null}
+		</div>
+	);
+}
 
 export default Footer;

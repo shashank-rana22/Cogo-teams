@@ -1,12 +1,12 @@
 // import { stakeholderCheck } from '@cogoport/bookings/commons/helpers/stakeholderCheck';
-import { Popover } from '@cogoport/components';
-// import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { cl, Popover } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import startCase from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import SupplierReallocation from '../../../../ShipmentDetails/commons/EditCancelService/SupplierReallocation';
 import CancelAdditionalService from '../../CancelAdditionalService';
+import SupplierReallocation from '../../SupplierReallocation';
 
 import styles from './styles.module.css';
 
@@ -37,7 +37,7 @@ function Item({
 	// TEMPORARY
 	const role = 'SUPERADMIN';
 
-	const showCancelInfo =		serviceCancelAllowedBy.includes(item?.state)
+	const showCancelInfo = serviceCancelAllowedBy.includes(item?.state)
 		|| (!roleForCancel.includes(role)
 			&& item?.state === 'quoted_by_service_provider');
 
@@ -46,25 +46,24 @@ function Item({
 	const serviceData = services?.filter(
 		(service) => service?.service_name === item?.name,
 	);
+
 	const price = isSeller ? item?.buy_price : item?.price;
 
 	return (
-		<Container className="additional-service-item-container">
-			<Row className="additional-service-item-row">
-				<NameType>
-					<>
-						<Circle />
-						<Heading className="additional-service-item-heading">
-							{startCase(item?.name)}
-						</Heading>
-					</>
+		<div className={cl`${styles.container} ${styles.additional_service_item_container}`}>
+			<div className={styles.additional_service_item_row}>
+				<div className={styles.name_type}>
+					<div className={styles.circle} />
+					<div className={`${styles.additional_service_item_heading} ${styles.heading}`}>
+						{startCase(item?.name)}
+					</div>
 					{price ? (
-						<Label>
-							<Circle />
-							<Heading>
+						<div className={styles.label}>
+							<div className={styles.circle} />
+							<div className={styles.heading}>
 								Price:
-								{' '}
-								{/* {formatAmount({
+								&nbsp;
+								{formatAmount({
 									amount   : price,
 									currency : item?.currency,
 									options  : {
@@ -72,42 +71,48 @@ function Item({
 										currencyDisplay       : 'code',
 										maximumFractionDigits : 2,
 									},
-								})} */}
-							</Heading>
-						</Label>
+								})}
+							</div>
+						</div>
 					) : null}
-				</NameType>
+				</div>
 
 				{showCancelInfo || showEditBtn ? (
 					<Popover
 						show={show}
-						theme="light-border"
+						placement="top"
+						render="top"
 						content={(
 							<div>
 								{showCancelInfo ? (
-									<ButtonText
+									<div
+										className={styles.button_text}
 										onClick={() => {
 											setShow(false);
 											setShowCancel(true);
 										}}
+										role="button"
+										tabIndex={0}
 									>
 										Cancel
-									</ButtonText>
+									</div>
 								) : null}
 
 								{showEditBtn ? (
-									<ButtonText
+									<div
+										className={styles.button_text}
 										onClick={() => {
 											setShow(false);
 											setShowEdit(true);
 										}}
+										role="button"
+										tabIndex={0}
 									>
 										Edit
-									</ButtonText>
+									</div>
 								) : null}
 							</div>
 						)}
-						interactive
 					>
 						<div>
 							<IcMOverflowDot
@@ -117,12 +122,14 @@ function Item({
 						</div>
 					</Popover>
 				) : null}
-			</Row>
+			</div>
 
-			<Row className="status">
-				<Tag className={status?.status}>{status?.statusName}</Tag>
+			<div className={styles.status}>
+				<div className={cl`${styles.tag} ${styles[status.status]}`}>
+					{status?.statusName}
+				</div>
 				{actionButton}
-			</Row>
+			</div>
 
 			{showCancel ? (
 				<CancelAdditionalService
@@ -132,7 +139,7 @@ function Item({
 					setShow={setShow}
 				/>
 			) : null}
-			{/*
+
 			{showEdit ? (
 				<SupplierReallocation
 					show={showEdit}
@@ -141,8 +148,9 @@ function Item({
 					refetchServices={refetch}
 					isAdditional
 				/>
-			) : null} */}
-		</Container>
+			) : null}
+
+		</div>
 	);
 }
 

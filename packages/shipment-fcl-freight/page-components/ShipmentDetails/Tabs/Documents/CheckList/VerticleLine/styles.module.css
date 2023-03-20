@@ -1,0 +1,57 @@
+.container {
+	height: 100%;
+	width: 1.25rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* background-color: var(--color-accent-orange-2); */
+	/* border-radius: 50%; */
+	margin-right: 4px;
+}
+
+.circle {
+	width: 1.25rem;
+	height: 1.25rem;
+	position: absolute;
+	top: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;  
+	background: #dfe1ef;
+
+	> svg {
+		color: #ffffff;
+		font-size: 1rem;
+	}
+} 
+
+.checked_circle { 
+	width: 1.25rem;
+	height: 1.25rem;
+	position: absolute;
+	top: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%; 
+	background: #5936f0; 
+	background: var(--color-accent-orange-2);
+
+} 
+
+
+.line {
+	height: 50px;
+	transform: translateY(22px); 
+	border: 1px dashed #dfe1ef;
+} 
+
+.checked_line { 
+	height: 45px;
+	transform: translateY(22px);
+	border: 1px solid var(--color-accent-orange-2); 
+
+} 
+
+

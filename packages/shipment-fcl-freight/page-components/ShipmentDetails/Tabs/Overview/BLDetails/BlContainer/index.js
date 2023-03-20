@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 
-import useBlContainer from '../../../../../../hooks/useBlContainer';
+import useBlContainerMappings from '../../../../../../hooks/useBlContainerMappings';
 
 import styles from './styles.module.css';
 
@@ -20,14 +20,12 @@ function BlContainer({
 		control,
 		// fields,
 		// showElements,
-	} = useBlContainer({
+	} = useBlContainerMappings({
 		data,
 		shipment_data,
 		setMappingModal,
 		refetch,
 	});
-
-	console.log(controls, control, errors);
 
 	return (
 		<div className={styles.container}>

@@ -1,7 +1,7 @@
-import { TextArea, Button } from '@cogoport/components';
+import { Textarea, Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
-// import updateAdditionalService from '../../hooks/useCancelAdditionalService';
+import useCancelAdditionalService from '../../hooks/useCancelAdditionalService';
 
 import styles from './styles.module.css';
 
@@ -16,16 +16,15 @@ function CancelService({
 	const onOuterClick = () => {
 		setShowCancel(false);
 	};
-	// const { updateServiceList, loading } = updateAdditionalService({
-	// 	id,
-	// 	remarkValues,
-	// 	refetch,
-	// 	setShowCancel,
-	// });
+	const { updateServiceList, loading } = useCancelAdditionalService({
+		id,
+		remarkValues,
+		refetch,
+		setShowCancel,
+	});
 
 	return showCancel ? (
-		<StyledModal
-			className="prinary md"
+		<Modal
 			show={showCancel}
 			onClose={() => {
 				setShowCancel(false);
@@ -33,31 +32,33 @@ function CancelService({
 			closable={false}
 			onOuterClick={onOuterClick}
 		>
-			<div className={styles.container}>
-				<div style={{ height: '48vh' }}>
-					<TextArea
-						style={{ resize: 'none' }}
-						value={remarkValues}
-						onChange={(e) => setRemarkValues(e?.target?.value)}
-						placeholder="State reason for cancellation"
-					/>
+			<Modal.Header title="Cancel Service" />
+			<Modal.Body>
+				<div className={styles.container}>
+					<div style={{ height: '48vh' }}>
+						<Textarea
+							value={remarkValues}
+							onChange={(e) => setRemarkValues(e)}
+							placeholder="State reason for cancellation"
+						/>
+					</div>
+					<div className={styles.button_container}>
+						<Button
+							themeType="secondary"
+							style={{ marginRight: '6px' }}
+							onClick={() => {
+								setShowCancel(false);
+							}}
+						>
+							Cancel
+						</Button>
+						<Button onClick={updateServiceList} disabled={loading} themeType="secondary">
+							Submit
+						</Button>
+					</div>
 				</div>
-				<ButtonRow>
-					<Button
-						className="secondary sm"
-						style={{ marginRight: '6px' }}
-						onClick={() => {
-							setShowCancel(false);
-						}}
-					>
-						Cancel
-					</Button>
-					<Button onClick={updateServiceList} disabled={loading}>
-						Submit
-					</Button>
-				</ButtonRow>
-			</div>
-		</StyledModal>
+			</Modal.Body>
+		</Modal>
 	) : null;
 }
 

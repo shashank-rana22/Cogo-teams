@@ -7,9 +7,6 @@
 	display: flex;
 	justify-content: flex-end;
 
-	.core-ui-button-root {
-		text-transform: capitalize;
-	}
 	@media (max-width: 768px) {
 		justify-content: center;
 	}
@@ -25,18 +22,19 @@
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
+	margin-top: 12px;
 }
 
 .circle{
 	width: 12px;
 	height: 12px;
-	background: #f7cdcd;
+	background-color: #f7cdcd;
 	margin-right: 8px;
 	border-radius: 50%;
+}
 
-	&.upsell {
-		background: #d9eafd;
-	}
+.upsell {
+	background-color: #d9eafd;
 }
 
 .service_name{
@@ -47,9 +45,21 @@
 	margin-right: 40px;
 }
 
-.Row{
+.info_container{
 	display: flex;
-	align-items: center;
+    align-items: center;
+	margin-top: 8px;
+
+	:global {
+		.tippy-box {
+			max-width: 6100px !important;
+			width: fit-content;
+
+			.tippy-content {
+				width: 100%;
+			}
+		}
+	}
 }
 
 .heading{
@@ -76,3 +86,18 @@
 	width: 100%;
 }
 
+.modal_container {
+	:global {
+		.ui_modal_body_container {
+			max-height: 400px;
+	}
+	}
+}
+
+.ip_modal_container {
+	:global {
+		.ui_modal_body_container {
+			max-height: 500px;
+		}
+	}
+}

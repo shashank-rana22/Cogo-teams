@@ -25,7 +25,7 @@ function MutipleSimilarServices({
 		service_type = '',
 		service_supply_agent,
 		payment_term,
-	} = similarServices?.services[0];
+	} = similarServices.services[0];
 
 	const toBeDisplayed = [];
 
@@ -33,13 +33,6 @@ function MutipleSimilarServices({
 		const dontPush = (toBeDisplayed || []).filter((ele) => ele?.id === obj?.id);
 		return !dontPush?.length ? toBeDisplayed.push(obj) : null;
 	});
-
-	const heading =		similarServices?.services?.[0]?.service_type
-			=== 'haulage_freight_service'
-		&& similarServices?.services?.[0]?.display_service_type
-			=== 'trailer_freight_service'
-		? 'Haulage Freight (Trailer)'
-		: similarServices?.routeLeg?.display;
 
 	if (similarServices?.services?.[0]?.service_type === 'ltl_freight_service') {
 		toBeDisplayed.splice(-2);
@@ -54,7 +47,7 @@ function MutipleSimilarServices({
 				refetchList={refetchList}
 				serviceData={similarServices?.services}
 				state={state}
-				heading={heading}
+				heading={similarServices?.routeLeg?.display}
 				service_supply_agent={service_supply_agent}
 				serviceList={serviceList}
 				shipmentData={shipmentData}
@@ -66,9 +59,7 @@ function MutipleSimilarServices({
 
 			{(toBeDisplayed || []).map((service, index) => (
 				<div
-					className={cl`${styles.services_details_container} 
-					${similarServices?.length === index + 1 ? 'last' : 'other'}`}
-
+					className={cl`${similarServices?.length === index + 1 ? styles.last : styles.other}`}
 				>
 					<AddedServiceComponent
 						allSimilar={toBeDisplayed?.length}

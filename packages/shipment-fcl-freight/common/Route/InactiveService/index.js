@@ -1,6 +1,7 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import FormSearch from '../Form';
@@ -8,6 +9,11 @@ import Icon from '../Icons/Icon';
 import icons from '../Icons/icons';
 
 import styles from './styles.module.css';
+
+const serviceCustomNames = {
+	origin_haulage      : 'ICD to Port Haulage',
+	destination_haulage : 'Port to ICD Haulage',
+};
 
 function InactiveService({
 	routeLeg = {},
@@ -43,6 +49,15 @@ function InactiveService({
 		setShowForm({ service: null, show: false, isAdditional: false });
 		setUpsellModal(false);
 	};
+
+	const renderModalTitle = (
+		<div className={styles.heading}>
+			{`Add ${startCase(form.service?.type)} ${
+				serviceCustomNames[form.service?.service_type]
+							|| startCase(form.service?.service_type)
+			}`}
+		</div>
+	);
 
 	return (
 		<>
@@ -88,23 +103,26 @@ function InactiveService({
 
 			{upsellModal ? (
 				<Modal
+					size="lg"
 					show={upsellModal}
 					onClose={() => setUpsellModal(false)}
-					className="primary lg"
 					styles={{ dialog: { width: isMobile ? 360 : 700 } }}
 				>
-					<FormSearch
-						extraParams={{
-							importer_exporter_id: shipment_data?.importer_exporter_id,
-							importer_exporter_branch_id:
+					<Modal.Header title={renderModalTitle} />
+					<Modal.Body>
+						<FormSearch
+							extraParams={{
+								importer_exporter_id: shipment_data?.importer_exporter_id,
+								importer_exporter_branch_id:
 								shipment_data?.importer_exporter_branch_id,
-							user_id: shipment_data?.user_id,
-						}}
-						service={form.service}
-						onClose={handleClose}
-						shipment_data={shipment_data}
-						services={services}
-					/>
+								user_id: shipment_data?.user_id,
+							}}
+							service={form.service}
+							onClose={handleClose}
+							shipment_data={shipment_data}
+							services={services}
+						/>
+					</Modal.Body>
 				</Modal>
 			) : null}
 		</>

@@ -21,11 +21,14 @@ function useListShipmentServices({ shipment_data }) {
 				const res = await trigger({
 					params: {
 						filters: {
-							shipment_id: shipment_data?.id,
+							shipment_id        : shipment_data?.id,
+							additional_methods : ['booking_requirement', 'stakeholder', 'service_objects'],
 						},
+						additional_methods: ['service_objects', 'stakeholder'],
 					},
-				}); if (!res.hasError) {
-					Toast.error('dsfghj');
+				});
+				if (!res.hasError) {
+					Toast.success('Service List Fetched Successfully');
 				}
 			} catch (err) {
 				console.log(err);
@@ -34,10 +37,8 @@ function useListShipmentServices({ shipment_data }) {
 	}, [trigger, shipment_data?.id]);
 
 	useEffect(() => {
-		if (shipment_data?.id) { listServices(); }
-	}, [listServices, shipment_data?.id]);
-
-	console.log({ data });
+		if (shipment_data?.id) { if (shipment_data?.id) { listServices(); } }
+	}, [listServices, shipment_data?.id, shipment_data?.id]);
 
 	return {
 		servicesGet: {

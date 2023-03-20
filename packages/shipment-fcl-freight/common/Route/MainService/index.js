@@ -51,8 +51,6 @@ function MainService({
 		className = '';
 	}
 
-	console.log(primary_service, allServices, shipment_data, 'routeLeg', routeLeg, filteredServices);
-
 	return (
 		<div className={cl`${styles.container} ${className}`}>
 			<div className={styles.service_info_container}>

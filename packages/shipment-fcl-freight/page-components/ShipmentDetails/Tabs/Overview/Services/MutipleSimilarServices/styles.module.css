@@ -79,12 +79,3 @@
 	padding: 4px 0px;
 	cursor: pointer;
 }
-
-.services_details_container{
-	&.last {
-		margin-bottom: 0px;
-	}
-	&.other {
-		margin-bottom: 4px;
-	}
-}

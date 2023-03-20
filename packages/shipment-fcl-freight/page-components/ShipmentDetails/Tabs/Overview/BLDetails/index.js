@@ -78,9 +78,6 @@ function BLDetails() {
 						onClose={() => {
 							setMappingModal(false);
 						}}
-						// position={isMobile ? 'bottom' : ''}
-						// fullscreen={isMobile}
-						className="primary lg"
 					>
 						<BlContainer
 							shipment_data={shipment_data}
@@ -124,7 +121,7 @@ function BLDetails() {
 	return (
 		<Accordion title={renderBlCount} style={{ width: '100%' }}>
 			{!loading && !data?.list?.length ? (
-				<EmptyState isMobile={isMobile} showContent={emptyStateContent} />
+				<EmptyState showContent={emptyStateContent} />
 			) : (
 				<div className={styles.manage_services_div}>
 					{data?.list?.map((item) => (

@@ -1278,29 +1278,34 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_service_timeline',
-		access_type  : 'private',
-		service_name : 'bookings',
-	},
-	{
-		api          : 'update_shipment_service',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'list_services',
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
 	{
-		api          : 'get_service_timeline',
+		api          : 'list_documents',
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
 	{
-		api          : 'update_shipment_service',
+		api          : 'list_additional_services',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_process',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_tasks',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_timeline',
+		access_type  : 'private',
+		service_name : 'bookings',
 	},
 ];
 

@@ -8,21 +8,17 @@ const actions = ({
 	status,
 	activeTab,
 	setAddRate,
-	item,
+	serviceListItem,
 	isConditionMatches,
 	isShipper,
-	scope,
 	addRate,
 	setShowIp = () => {},
-	shipment_data = {},
+	setItem = () => {},
 }) => {
-	const isSameItem = item.id === addRate?.item?.id;
+	const isSameItem = serviceListItem.id === addRate?.item?.id;
+
 	const onClick = () => {
-		if (addRate) {
-			setAddRate(null);
-		} else {
-			setAddRate({ item, status });
-		}
+		setItem({ serviceListItem, status });
 	};
 	if (
 		status.status === 'quoted_by_service_provider'
@@ -30,9 +26,9 @@ const actions = ({
 	) {
 		return (
 			<Button
-				className="secondary sm"
-				style={{ marginLeft: 10 }}
-				onClick={() => setAddRate({ item, status })}
+				themeType="secondary"
+				style={{ marginLeft: 10, height: '24px' }}
+				onClick={() => setAddRate({ serviceListItem, status })}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'ADD SELL PRICE'}
 			</Button>
@@ -40,13 +36,13 @@ const actions = ({
 	}
 	if (
 		status.status === 'charges_incurred'
-		&& item.add_to_sell_quotation === null
+		&& serviceListItem.add_to_sell_quotation === null
 	) {
 		return (
 			<Button
-				className="secondary sm"
-				style={{ marginLeft: 10 }}
-				onClick={() => setAddRate({ item, status })}
+				themeType="secondary"
+				style={{ marginLeft: 10, height: '24px' }}
+				onClick={() => setAddRate({ serviceListItem, status })}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
 			</Button>
@@ -55,8 +51,8 @@ const actions = ({
 	if (status.status === 'customer_confirmation_pending' && isShipper) {
 		return (
 			<Button
-				className="secondary sm"
-				style={{ marginLeft: 10 }}
+				themeType="secondary"
+				style={{ marginLeft: 10, height: '24px' }}
 				onClick={onClick}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
@@ -64,32 +60,13 @@ const actions = ({
 		);
 	}
 	if (
-		status.status === 'requested_for_service_provider'
-		&& scope === 'app'
-		&& !isShipper
+		status.status === 'cancelled_by_supplier' && isConditionMatches(CC.SERVICE_OPS_VIEW)
 	) {
 		return (
 			<Button
-				className="secondary sm"
-				style={{ marginLeft: 10 }}
-				onClick={() => {
-					setAddRate({ item, status });
-				}}
-			>
-				EDIT PRICE
-			</Button>
-		);
-	}
-	if (
-		status.status === 'cancelled_by_supplier'
-		&& scope === 'partner'
-		&& isConditionMatches(CC.SERVICE_OPS_VIEW)
-	) {
-		return (
-			<Button
-				className="secondary sm"
-				style={{ marginLeft: 10 }}
-				onClick={() => setAddRate({ item, status, setAddRate })}
+				themeType="secondary"
+				style={{ marginLeft: 10, height: '24px' }}
+				onClick={() => setAddRate({ serviceListItem, status, setAddRate })}
 			>
 				REALLOCATE
 			</Button>
@@ -97,15 +74,13 @@ const actions = ({
 	}
 
 	if (
-		status.status === 'amendment_requested_by_importer_exporter'
-		&& scope === 'partner'
-		&& isConditionMatches(CC.BOOKING_AGENT_VIEW, 'or')
+		status.status === 'amendment_requested_by_importer_exporter' && isConditionMatches(CC.BOOKING_AGENT_VIEW, 'or')
 	) {
 		return (
 			<Button
-				className="secondary sm"
-				style={{ marginLeft: 10 }}
-				onClick={() => setAddRate({ item, status })}
+				themeType="secondary"
+				style={{ marginLeft: 10, height: '24px' }}
+				onClick={() => setAddRate({ serviceListItem, status })}
 			>
 				REVIEW COMMENTS
 			</Button>
@@ -113,21 +88,20 @@ const actions = ({
 	}
 
 	if (
-		(!IP_STATE_CONDITONS.find((state) => state === item.state)
-			|| !item.invoice_preference)
+		(!IP_STATE_CONDITONS.find((state) => state === serviceListItem.state)
+			|| !serviceListItem.invoice_preference)
 		&& activeTab !== 'purchase_invoice'
-		&& shipment_data?.shipment_type !== 'air_freight'
 	) {
 		return (
 			<Button
-				className="secondary sm"
-				style={{ marginLeft: 10 }}
+				themeType="secondary"
+				style={{ marginLeft: 10, height: '24px' }}
 				onClick={() => {
 					onClick();
 					setShowIp(true);
 				}}
 			>
-				{addRate && isSameItem ? 'CLOSE' : 'ADD IP'}
+				{ isSameItem ? 'CLOSE' : 'ADD IP'}
 			</Button>
 		);
 	}

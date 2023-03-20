@@ -1,0 +1,10 @@
+.main_container {
+	width: 100%;
+	overflow: auto;
+	height: 34vh;
+	overflow: auto;
+
+	@media (max-width: 768px) {
+		height: 42vh;
+	}
+}

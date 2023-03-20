@@ -7,18 +7,21 @@ function FilterService({ setFilters, filters, uniqueServices }) {
 	return (
 		<div className={styles.container}>
 			<Select
-				className="primary sm"
+				className={styles.select_input}
 				value={filters?.service_type}
 				onChange={(e) => setFilters({ service_type: e })}
 				placeholder="Choose service"
 				isClearable
+				size='sm'
 				options={uniqueServices || []}
 			/>
+
 			<Input
-				className="primary sm"
+				size='sm'
+				className={styles.search_input}
 				value={filters.name}
 				placeholder="Search service by name"
-				onChange={(e) => setFilters({ name: e.target.value })}
+				onChange={(e) => setFilters({ name: e })}
 			/>
 		</div>
 	);

@@ -1,17 +1,16 @@
 // import Layout from '@cogoport/bookings/commons/Layout';
-import { Flex, Accordion } from '@cogoport/components';
+import { Accordion } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import ManageServices from '../../../commons/ManageServices';
+import RenderAddRateForm from './RenderAddRateForm';
 
-import ActionsToShow from './ActionToShow';
-import AddIp from './AddIp';
-import BillToCustomer from './BillToCustomer';
-import SecondStep from './SecondStep';
+// import ActionsToShow from './ActionToShow';
+// import BillToCustomer from './BillToCustomer';
+// import SecondStep from './SecondStep';
+
 import styles from './styles.module.css';
 import useAddRate from './useAddRate';
-import useServiceUpdate from './useServiceUpdate';
 
 const showRemarksStatus = [
 	'amendment_requested_by_importer_exporter',
@@ -31,14 +30,14 @@ function AddRate({
 	showLabel = true,
 	shipment_data,
 	onCancel = () => {},
-	showIp,
-	setShowIp = () => {},
 	filters,
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(undefined);
 	const [showSecondStep, setSecondStep] = useState(false);
 
-	const { addRate, fields, controls, handleSubmit, loading, errors } =		useAddRate({
+	const {
+		onAddRate, register, handleSubmit, loading, errors, control,
+	} = useAddRate({
 		item,
 		isSeller,
 		status,
@@ -50,24 +49,18 @@ function AddRate({
 		filters,
 	});
 
-	const updateDatas = useServiceUpdate({
-		item,
-		setAddRate,
-		refetch,
-		showIp,
-		onCancel,
-		setShowIp,
-	});
-
 	if (showSecondStep) {
 		return (
-			<SecondStep
-				item={item}
-				status={status}
-				isSeller={isSeller}
-				setSecondStep={setSecondStep}
-				updateDatas={updateDatas}
-			/>
+			// <SecondStep
+			// 	item={item}
+			// 	status={status}
+			// 	isSeller={isSeller}
+			// 	setSecondStep={setSecondStep}
+			// 	// updateDatas={updateDatas}
+			// />
+			<div>
+				SecondStep
+			</div>
 		);
 	}
 
@@ -77,58 +70,36 @@ function AddRate({
 		&& item.add_to_sell_quotation === null
 	) {
 		return (
-			<BillToCustomer
-				updateDatas={updateDatas}
-				onCancel={() => setAddRate(null)}
-				onBillToCustomer={() => setBillToCustomer(true)}
-			/>
+			// <BillToCustomer
+			// 	// updateDatas={updateDatas}
+			// 	onCancel={() => setAddRate(null)}
+			// 	onBillToCustomer={() => setBillToCustomer(true)}
+			// />
+			<div>
+				BillToCustomer
+			</div>
 		);
 	}
 
-	if (showIp) {
-		return (
-			<AddIp
-				shipment_data={shipment_data}
-				handleInvoicingParty={updateDatas?.handleInvoicingParty}
-			/>
-		);
-	}
 	return (
-		<MainContainer>
+		<div>
 			<div className={styles.container}>
-				<Accordion
-					title={(
-						<Flex alignItems="center">
-							<ContainerHeader>
-								{startCase(item.name)}
-								{' '}
-								(
-								{startCase(item.service_type)}
-								)
-							</ContainerHeader>
-
-							{showLabel && item?.tags ? (
-								<CustomTag>{startCase(item?.tags?.[0])}</CustomTag>
-							) : null}
-						</Flex>
-					)}
-					showLabel={showLabel}
-					defaultOpen
-				>
-					<Content>
-						{showRemarksStatus.includes(status?.status) ? (
-							<p>
-								Comments:
-								{item.remarks[0]}
-							</p>
-						) : null}
-
-						{/* <Layout fields={fields} controls={controls} errors={errors} /> */}
-					</Content>
-				</Accordion>
+				{showRemarksStatus.includes(status?.status) ? (
+					<p>
+						Comments:
+						{item.remarks[0]}
+					</p>
+				) : null}
+				<RenderAddRateForm
+					handleSubmit={handleSubmit}
+					onSubmit={onAddRate}
+					control={control}
+					errors={errors}
+					register={register}
+				/>
 			</div>
 
-			<ActionsToShow
+			{/* <ActionsToShow
 				setAddRate={setAddRate}
 				addRate={addRate}
 				handleSubmit={handleSubmit}
@@ -137,8 +108,8 @@ function AddRate({
 				updateDatas={updateDatas}
 				loading={loading || updateDatas.loading}
 				onCancel={() => onCancel()}
-			/>
-		</MainContainer>
+			/> */}
+		</div>
 	);
 }
 

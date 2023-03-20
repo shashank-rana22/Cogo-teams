@@ -1701,8 +1701,19 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'get_allocation_requests',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
 	],
 	supply_crm: [
+		{
+			feature      : 'supply_crm',
+			api          : 'list_organization_service_expertises',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 		{
 			api          : 'get_bank_details',
 			access_type  : 'private',
@@ -4148,10 +4159,22 @@ const partner = {
 			defaultparameter : 'supply_dashboard:allowed',
 		},
 		{
+			api          : 'list_location_expert_service_providers',
+			access_type  : 'private',
+			feature      : 'disliked_rates',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_fcl_cfs_rate',
 			access_type  : 'private',
 			service_name : 'fcl_cfs_rate',
 			feature      : 'rfq',
+		},
+		{
+			api          : 'get_contract_previous_service_providers',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+			feature      : 'live_booking',
 		},
 	],
 	operations_dashboard: [
@@ -4729,6 +4752,11 @@ const partner = {
 		},
 		{
 			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_service_expertises',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -7452,6 +7480,12 @@ const partner = {
 			api         : 'post_translation_translate',
 			access_type : 'private',
 		},
+
+		{
+			api         : 'post_translation_translate_bulk',
+			access_type : 'private',
+		},
+
 	],
 	reports: [
 		{
@@ -7504,6 +7538,22 @@ const partner = {
 		},
 		{
 			api         : 'get_muneem_reports_finance_ap_dashboard_on_finance_accepted',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_bill_payment_status_mismatch',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_bills_account_utilization_mismatch',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_invoice_account_utilization_amount_mismatch',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_invoice_payment_status_mismatch',
 			access_type : 'private',
 		},
 	],
@@ -10357,6 +10407,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_air_coe_documents_list',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_locations',
 			access_type  : 'private',
 			service_name : 'location',
@@ -10625,6 +10679,37 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'list_omnichannel_documents',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_omnichannel_document',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'submit_organization_kyc',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_omnichannel_document_details',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_organization_document',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'send_user_whatsapp_template',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+
 	],
 	analytics_dashboard: [
 		{

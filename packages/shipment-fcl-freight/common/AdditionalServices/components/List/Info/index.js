@@ -1,4 +1,4 @@
-import { ToolTip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -14,16 +14,15 @@ function Info() {
 
 	return (
 		<div className={styles.container}>
-			<ToolTip
-				theme="light"
-				content={<ContentDiv>{items}</ContentDiv>}
-				animation="scale"
+			<Tooltip
+				placement="bottom"
+				content={<div className={styles.content_div}>{items}</div>}
 				interactive
 			>
-				<InfoDiv>
+				<div className={styles.info_div}>
 					<IcMInfo />
-				</InfoDiv>
-			</ToolTip>
+				</div>
+			</Tooltip>
 		</div>
 	);
 }

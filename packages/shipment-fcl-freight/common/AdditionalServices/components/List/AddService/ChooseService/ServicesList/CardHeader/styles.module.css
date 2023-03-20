@@ -12,10 +12,10 @@
 	font-weight: 600;
 	font-size: 14px;
 	line-height: 16px;
-
 	color: #000000;
-	&.icon {
-		width: 100%;
-		justify-content: center;
-	}
+}
+
+.icon {
+	width: 100%;
+	justify-content: center;
 }

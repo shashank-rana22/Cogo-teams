@@ -12,7 +12,7 @@ const serviceCustomNames = {
 	destination_haulage : 'Port to ICD Haulage',
 };
 
-function Form({ extraParams, service, onClose, shipment_data, services }) {
+function Form({ extraParams, service, onClose, shipmentData, services }) {
 	// const {
 	// 	controls,
 	// 	showElements,
@@ -42,29 +42,26 @@ function Form({ extraParams, service, onClose, shipment_data, services }) {
 
 	// if (!controls.length) {
 	// 	renderForm = (
-	// 		<Text>{`Are you sure you want to add ${startCase(
-	// 			`${service?.type} ${service?.service}`,
-	// 		)} service?`}</Text>
+	// 		<Text>
+	// 			{`Are you sure you want to add ${startCase(
+	// 				`${service?.type} ${service?.service}`,
+	// 			)} service?`}
+
+	// 		</Text>
 	// 	);
 	// }
 
-	// onSubmit={handleSubmit(addService, onError)}
-	// isLoading={loading}
 	return (
 		<div className={styles.container}>
+			{/* <form onSubmit={handleSubmit(addService, onError)}> */}
 			<form>
 				<div className={styles.form}>
-					<div className={styles.heading}>
-						{`Add ${startCase(service?.type)} ${
-							serviceCustomNames[service?.service_type]
-							|| startCase(service?.service_type)
-						}`}
-					</div>
-
+					FORM
 					{/* {renderForm} */}
 				</div>
 
 				<Footer onClose={onClose} />
+				{/* <Footer onClose={onClose} isLoading={loading} /> */}
 			</form>
 		</div>
 	);

@@ -1,9 +1,10 @@
 import { Button, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 
 import EditSchedule from './EditSchedule';
+import useGetShipmentTimeLine from './hooks/useGetShipmentTimeline';
 import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
@@ -22,18 +23,9 @@ const editScheduleStates = [
 	'flight_arrived',
 ];
 
-function Timeline({ timelineData = [], loading = false }) {
-	const {
-		shipment_data, primary_service,
-		isGettingShipment,
-		getShipmentTimeline,
-	} = useContext(ShipmentDetailContext);
-
-	useEffect(() => {
-		if (shipment_data?.id) {
-			getShipmentTimeline();
-		}
-	}, [getShipmentTimeline, shipment_data]);
+function Timeline() {
+	const { loading, timelineData } = useGetShipmentTimeLine();
+	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const [showThreeDotPopover, setShowThreeDotPopover] = useState(false);
 	const [showEditSchedule, setShowEditSchedule] = useState(false);
@@ -53,7 +45,7 @@ function Timeline({ timelineData = [], loading = false }) {
 	const totalItems = (timelineData || []).length;
 	let consecutivelyCompleted = true;
 
-	if (loading || isGettingShipment) {
+	if (loading) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.list_container}>

@@ -1,10 +1,11 @@
-// import useGetPermission from '@cogoport/business-modules/hooks/useGetPermission';
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
+import useGetPermission from '../../../../hooks/useGetPermission';
+import AddIp from '../AddIp';
 import AddRate from '../AddRate';
 
 import AddService from './AddService';
@@ -13,7 +14,7 @@ import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
-// import useAddedList from './useAddedList';
+import useListAdditionalServices from './useListAdditionalServices';
 
 function List({
 	services = [],
@@ -21,38 +22,32 @@ function List({
 	activeTab = '',
 	refetchServices = () => { },
 }) {
-	// const { isConditionMatches } = useGetPermission();
-	const { scope, isShipper, isMobile } = useSelector(({ general }) => ({
+	const { isConditionMatches } = useGetPermission();
+	const { isShipper } = useSelector(({ general }) => ({
 		isShipper : general.query.account_type === 'importer_exporter',
-		scope     : general.scope,
 		isMobile  : general.isMobile,
 	}));
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const isSops = shipment_data?.stakeholder_types?.some((ele) => ['service_ops1', 'service_ops2', 'service_ops3']
-		.includes(ele));
-
-	const [addRate, setAddRate] = useState(null);
-	const [show, setShow] = useState(false);
+	const [addRate, setAddRate] = useState(false);
+	const [showChargeCodes, setShowChargeCodes] = useState(false);
+	const [item, setItem] = useState(false);
 	const [showIp, setShowIp] = useState(false);
 
-	// const { list: listAdded, refetch } = useAddedList({
-	// 	shipment_id: shipment_data?.id,
-	// 	shipment_data,
-	// });
+	const { list: additionalServiceList, refetch } = useListAdditionalServices({
+		shipment_data,
+	});
 
 	const handleRefetch = () => {
 		refetchServices();
 		refetch();
 	};
 
-	const listAdded = [];
 	return (
 		<div className={styles.container}>
 			<div className={styles.not_added}>
 				<Button
-					className="primary sm additional_services_btn"
-					onClick={() => setShow(true)}
+					onClick={() => setShowChargeCodes(true)}
 					disabled={shipment_data?.is_job_closed}
 				>
 					<div className={styles.add_icon}>+</div>
@@ -60,25 +55,25 @@ function List({
 				</Button>
 			</div>
 
-			{!isEmpty(listAdded) ? (
-				<AddedServices>
-					{listAdded?.map((item) => {
-						const status = getStaus({ item });
+			{!isEmpty(additionalServiceList) ? (
+				<div className={styles.added_services}>
+					{additionalServiceList?.map((serviceListItem) => {
+						const status = getStaus({ serviceListItem });
 
 						return (
 							<ItemAdded
-								item={item}
+								item={serviceListItem}
 								status={status}
 								showIp={showIp}
 								actionButton={actions({
 									activeTab,
 									status,
-									item,
-									setAddRate,
-									scope,
-									isShipper,
-									isConditionMatches,
+									serviceListItem,
 									setShowIp,
+									setAddRate,
+									isShipper,
+									setItem,
+									isConditionMatches,
 									shipment_data,
 								})}
 								refetch={handleRefetch}
@@ -87,61 +82,81 @@ function List({
 							/>
 						);
 					})}
-				</AddedServices>
+				</div>
 			) : null}
 
-			{listAdded?.length ? (
-				<Row>
-					<Circle />
-					<ServiceName>Incidental Services</ServiceName>
-
-					{!isSops ? (
-						<>
-							<Circle className="upsell" />
-							<ServiceName>Upselling Services</ServiceName>
-						</>
-					) : null}
-
+			{additionalServiceList?.length ? (
+				<div className={styles.info_container}>
+					<div className={styles.circle} />
+					<div className={styles.service_name}>Incidental Services</div>
+					<div className={cl` ${styles.circle} ${styles.upsell}`} />
+					<div className={styles.service_name}>Upselling Services</div>
 					<Info />
-				</Row>
+				</div>
 			) : null}
 
-			{/* {addRate && showIp ? (} */}
 			{addRate ? (
 				<Modal
+					size="xl"
 					show={addRate}
 					onClose={() => setAddRate(null)}
-					className="primary lg"
 					closable={false}
+					placement="top"
 					onOuterClick={() => setAddRate(null)}
 				>
-					<AddRate
-						item={addRate?.item || addRate}
-						shipment_data={shipment_data}
-						status={addRate?.status}
-						setAddRate={setAddRate}
-						// refetch={refetch}
-						showIp={showIp}
-						setShowIp={setShowIp}
-					/>
+					<Modal.Body>
+						<AddRate
+							item={item?.item || addRate}
+							shipment_data={shipment_data}
+							status={addRate?.status}
+							setAddRate={setAddRate}
+						/>
+					</Modal.Body>
 				</Modal>
 			) : null}
 
-			{show ? (
+			{showIp ? (
 				<Modal
-					className="primary lg"
-					styles={{ dialog: { width: isMobile ? 360 : 900 } }}
-					onClose={() => setShow(false)}
-					show={show}
+					size="xl"
+					show={showIp}
+					className={styles.ip_modal_container}
+					onClose={() => setShowIp(null)}
+					closable={false}
+					placement="top"
+					onOuterClick={() => setShowIp(null)}
 				>
-					<AddService
-						shipment_id={shipment_data?.id}
-						services={services}
-						isSeller={isSeller}
-						// refetch={refetch}
-						show={show}
-						setShow={setShow}
-					/>
+					<Modal.Header title="ADD INVOICING PARTY" />
+					<Modal.Body>
+						<AddIp
+							shipment_data={shipment_data}
+							setShowIp={setShowIp}
+							showIp={showIp}
+							item={item?.serviceListItem}
+						/>
+					</Modal.Body>
+				</Modal>
+
+			) : null}
+
+			{showChargeCodes ? (
+				<Modal
+					size="xl"
+					show={showChargeCodes}
+					onClose={() => setShowChargeCodes(false)}
+					placement="top"
+					className={styles.modal_container}
+				>
+					<Modal.Header title="ADD NEW SERVICE" />
+					<Modal.Body>
+						<AddService
+							shipment_id={shipment_data?.id}
+							services={services}
+							isSeller={isSeller}
+							refetch={refetch}
+							show={showChargeCodes}
+							setShow={setShowChargeCodes}
+						/>
+					</Modal.Body>
 				</Modal>
 			) : null}
 		</div>
