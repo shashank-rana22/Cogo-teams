@@ -29,7 +29,7 @@ function QuestionStats({ data = [] }) {
 			{Object.values(STATS_MAPPING).map((stats) => {
 				const { label, color, key } = stats;
 
-				const count = data.data.filter((item) => item.answer_state === key).length;
+				const count = data?.data?.filter((item) => item.answer_state === key).length;
 
 				return (
 					<div className={styles.stats_container}>

@@ -19,7 +19,7 @@ function SingleQuestion({ question = {}, currentQuestion, total_question, loadin
 		if (question_type !== 'multi_correct') {
 			setAnswer(test_question_answer_ids?.[0] || '');
 		} else {
-			setAnswer(test_question_answer_ids);
+			setAnswer(test_question_answer_ids || []);
 		}
 	}, [JSON.stringify(question)]);
 

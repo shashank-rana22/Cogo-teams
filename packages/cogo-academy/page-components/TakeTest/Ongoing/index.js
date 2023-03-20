@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 function Ongoing() {
 	const [currentQuestion, setCurrentQuestion] = useState(1);
 
-	const { loading, data = [] } = useFetchQuestionsList({ currentQuestion });
+	const { loading, data = {} } = useFetchQuestionsList({ currentQuestion });
 
 	return ((
 		<div className={styles.main_container}>
@@ -21,7 +21,7 @@ function Ongoing() {
 				/>
 			</div>
 
-			<div className={styles.right_container}>
+			<div key={data?.data} className={styles.right_container}>
 				<RightSection
 					data={data}
 					loading={loading}

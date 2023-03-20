@@ -7,6 +7,7 @@ function RightSection({ data = [], loading, setCurrentQuestion, currentQuestion 
 	return (
 		<div className={styles.container}>
 			<Header />
+
 			<Body
 				data={data}
 				loading={loading}
