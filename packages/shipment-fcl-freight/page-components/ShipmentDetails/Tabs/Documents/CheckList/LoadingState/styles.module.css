@@ -20,7 +20,7 @@
 }
 
  .single_item {
-	gap: 1rem;
+	gap: 16px;
 	padding: 4x 16px  6px;
 	align-items: center;
 	position: relative;

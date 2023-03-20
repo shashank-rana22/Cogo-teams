@@ -1,12 +1,11 @@
 
 .single_item{
-	gap: 1rem;
-	padding: 4x 12px !important;
+	display: flex;
+	justify-content: space-between;
+	gap: 16px;
 	align-items: center;
 	position: relative; 
-	display: flex; 
-	justify-content: space-between;
-	position: relative;
+	padding: 4px 16px 6px;
 }
 
 .styled_text{
@@ -19,7 +18,7 @@
 .message_text{
 	font-weight: 400;
 	font-size: 10px;
-	line-height: 1rem;
+	line-height: 16px;
 	gap: 4px;
 	color: #cb6464;
 }
@@ -31,12 +30,10 @@
 	font-size: 14px;
 	line-height: 16px;
 	letter-spacing: 0.04em;
-	/* border-left: 2px solid var(--color-accent-orange-2); */
-	/* margin-top: 6px; */
 
-	/* & > div{
+	& > div{
 		margin: 0px 8px 0px 12px;
-	} */
+	}
 }
 
 .upload_info{
@@ -44,9 +41,9 @@
 	font-size: 11px;
 	line-height: 14px;
 	letter-spacing: 0.02em;
-
 	color: #bdbdbd;
 }
+
 .gap{
 	display: flex;
 	flex-direction: column;

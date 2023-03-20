@@ -37,11 +37,10 @@ function Content({
 	const tradeType = primary_service?.trade_type;
 
 	return (
-		<div className={styles.single_item} style={{ padding: '4px 16px 6px' }}>
+		<div className={styles.single_item}>
 			<div className={styles.single_item_child}>
 				<VerticleLine
 					checked={isChecked}
-					zIndex={idx}
 					isLast={data.length === idx + 1}
 				/>
 				<div className={styles.main}>
@@ -142,10 +141,10 @@ function Content({
 							docType,
 						})}
 					>
-						<div className={styles.dots} style={{ top: '1.2rem', right: '1rem' }}>
+						<div className={styles.dots} style={{ top: '16px', right: '16px' }}>
 							{!item?.extra
 							&& optionsList.organization_documents.includes(docType) ? (
-								<IcMOverflowDot fontSize="1.1rem" />
+								<IcMOverflowDot fontSize="16px" />
 								) : null}
 						</div>
 					</Popover>

@@ -17,9 +17,9 @@ function Header({
 			<div className={styles.sub_heading}>
 				<Input
 					value={searchTasksVal}
-					width="200px"
+					size="md"
 					placeholder="Search..."
-					suffix={<IcMSearchlight style={{ fontSize: '1rem' }} />}
+					suffix={<IcMSearchlight style={{ fontSize: '16px' }} />}
 					style={{ padding: '6px', marginRight: '6px' }}
 					onChange={(e) => {
 						setSearchTasksVal(e?.target?.value);
