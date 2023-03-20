@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 
 function ListItem(props) {
 	const {
-		setBadgeListData,
-		setMasteryListData,
+		setBadgeItemData,
+		setMasteryItemData,
 		setToggleScreen,
 		loading,
 		listRefetch,
@@ -87,14 +87,14 @@ function ListItem(props) {
 						data={data}
 						index={index}
 						setToggleScreen={setToggleScreen}
-						setMasteryListData={setMasteryListData}
+						setMasteryItemData={setMasteryItemData}
 					/>
 				) : (
 					<BadgeListItem
 						data={data}
 						index={index}
 						setToggleScreen={setToggleScreen}
-						setBadgeListData={setBadgeListData}
+						setBadgeItemData={setBadgeItemData}
 						listRefetch={listRefetch}
 					/>
 				)),

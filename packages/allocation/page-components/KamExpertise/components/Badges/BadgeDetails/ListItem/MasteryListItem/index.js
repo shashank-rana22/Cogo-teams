@@ -3,9 +3,9 @@ import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryListData }) {
+function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData }) {
 	const handleEdit = () => {
-		setMasteryListData(data);
+		setMasteryItemData(data);
 		setToggleScreen('create_mastery');
 	};
 	return (

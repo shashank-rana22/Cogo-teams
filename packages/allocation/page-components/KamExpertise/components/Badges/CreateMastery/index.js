@@ -10,7 +10,7 @@ function CreateMastery(props) {
 	const {
 		setToggleScreen,
 		badgeList = {},
-		masteryListData = {},
+		masteryItemData = {},
 		listRefetch,
 	} = props;
 
@@ -23,7 +23,7 @@ function CreateMastery(props) {
 		getAddMasteryControls,
 		loading = false,
 		onSave,
-	} = useCreateMasterConfiguration({ masteryListData, onClose, listRefetch });
+	} = useCreateMasterConfiguration({ masteryItemData, onClose, listRefetch });
 
 	const UploadController = getFieldController('fileUpload');
 	const InputDesc = getFieldController('textarea');
@@ -50,7 +50,7 @@ function CreateMastery(props) {
 			<form onSubmit={handleSubmit(onSave)}>
 				<section className={styles.container}>
 					<div>
-						{isEmpty(masteryListData) ? null : (
+						{isEmpty(masteryItemData) ? null : (
 							<div className={styles.fields_container}>
 								<p
 									className={styles.text_styles}
@@ -58,7 +58,7 @@ function CreateMastery(props) {
 								>
 									Last Modified :
 									{' '}
-									{format(masteryListData.updated_at, 'yyyy-MMM-dd')}
+									{format(masteryItemData.updated_at, 'yyyy-MMM-dd')}
 								</p>
 
 								{/* //! needs changes */}
@@ -88,7 +88,7 @@ function CreateMastery(props) {
 										key={ele.name}
 										id={`${ele.name}_input`}
 										style={ele.styles}
-										disabled={!isEmpty(masteryListData) && ele.name === 'badges'}
+										disabled={!isEmpty(masteryItemData) && ele.name === 'badges'}
 										options={badgeList.length > 0 ? badge_options : ele.options}
 									/>
 
@@ -107,7 +107,7 @@ function CreateMastery(props) {
 										name="image_input"
 										control={control}
 										accept=".png, .jpeg"
-										rules={isEmpty(masteryListData)
+										rules={isEmpty(masteryItemData)
 											? {
 												required: 'Image is required',
 											}
@@ -123,10 +123,10 @@ function CreateMastery(props) {
 											<img src={watch('image_input')} alt="preview_image" />
 										</div>
 									) : null}
-									{!isEmpty(masteryListData) && !watch('image_input') ? (
+									{!isEmpty(masteryItemData) && !watch('image_input') ? (
 										<div className={styles.preview}>
 											<img
-												src={masteryListData.badge_details[0].image_url}
+												src={masteryItemData.badge_details[0].image_url}
 												alt="Modal img preview"
 											/>
 										</div>
@@ -145,7 +145,7 @@ function CreateMastery(props) {
 									rules={{ required: 'Description is required' }}
 								/>
 								<div className={styles.error_message}>
-									{isEmpty(masteryListData) && errors?.description_input?.message}
+									{isEmpty(masteryItemData) && errors?.description_input?.message}
 								</div>
 							</div>
 						</div>

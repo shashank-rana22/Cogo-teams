@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function BadgeDetails(props) {
 	const {
 		badgeList, setToggleScreen, searchValue, setSearchValue,
-		debounceQuery, setMasteryListData, setBadgeListData, expertise, setExpertise,
+		debounceQuery, setMasteryItemData, setBadgeItemData, expertise, setExpertise,
 		loading, listRefetch, getNextPage, paginationData,
 	} = props;
 
@@ -20,8 +20,8 @@ function BadgeDetails(props) {
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
 				debounceQuery={debounceQuery}
-				setMasteryListData={setMasteryListData}
-				setBadgeListData={setBadgeListData}
+				setMasteryItemData={setMasteryItemData}
+				setBadgeItemData={setBadgeItemData}
 				expertise={expertise}
 				setExpertise={setExpertise}
 				loading={loading}
@@ -29,8 +29,8 @@ function BadgeDetails(props) {
 
 			<ListItem
 				setToggleScreen={setToggleScreen}
-				setBadgeListData={setBadgeListData}
-				setMasteryListData={setMasteryListData}
+				setBadgeItemData={setBadgeItemData}
+				setMasteryItemData={setMasteryItemData}
 				loading={loading}
 				badgeList={badgeList}
 				listRefetch={listRefetch}

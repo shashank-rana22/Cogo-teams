@@ -14,8 +14,8 @@ function Header(props) {
 		expertise,
 		setExpertise = () => {},
 		debounceQuery,
-		setMasteryListData = () => {},
-		setBadgeListData,
+		setMasteryItemData = () => {},
+		setBadgeItemData,
 		loading,
 	} = props;
 
@@ -53,7 +53,7 @@ function Header(props) {
 					className={styles.button_mastery}
 					disabled={loading}
 					onClick={() => {
-						setMasteryListData({});
+						setMasteryItemData({});
 						setToggleScreen('create_mastery');
 					}}
 				>
@@ -65,7 +65,7 @@ function Header(props) {
 					size="md"
 					className={styles.button_badge}
 					onClick={() => {
-						setBadgeListData({});
+						setBadgeItemData({});
 						setToggleScreen('create_badge');
 					}}
 				>

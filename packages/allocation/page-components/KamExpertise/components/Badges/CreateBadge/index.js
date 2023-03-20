@@ -22,7 +22,7 @@ const MEDALS_MAPPING = [
 ];
 
 function CreateBadge(props) {
-	const { setToggleScreen, badgeListData = {}, listRefetch } = props;
+	const { setToggleScreen, badgeItemData = {}, listRefetch } = props;
 
 	const onClose = () => {
 		setToggleScreen('badge_details');
@@ -30,7 +30,7 @@ function CreateBadge(props) {
 
 	const {
 		onSave, getFieldController, loading = false, getAddBadgesControls, formProps,
-	} = useCreateBadgeConfiguration({ onClose, badgeListData, listRefetch });
+	} = useCreateBadgeConfiguration({ onClose, badgeItemData, listRefetch });
 
 	const {
 		control, watch, handleSubmit, formState: { errors },
@@ -39,18 +39,18 @@ function CreateBadge(props) {
 	return (
 		<div>
 			<section className={styles.container}>
-				{!isEmpty(badgeListData)
+				{!isEmpty(badgeItemData)
 				&& (
 					<div className={styles.fields_container}>
 						<p className={styles.text_styles}>
 							Last Modified :
 							{' '}
-							{badgeListData.updated_at ? format(badgeListData.updated_at, 'yyyy-MMM-dd') : '___'}
+							{badgeItemData.updated_at ? format(badgeItemData.updated_at, 'yyyy-MMM-dd') : '___'}
 						</p>
 
 						{/* <p className={styles.text_styles}>
 							Last Modified By :
-							{` ${badgeListData.lstModifiedBy}`}
+							{` ${badgeItemData.lstModifiedBy}`}
 						</p> */}
 					</div>
 				)}
@@ -59,7 +59,7 @@ function CreateBadge(props) {
 				</p> */}
 
 				<h2 style={{ color: '#4f4f4f' }}>
-					{isEmpty(badgeListData) ? 'Add Badge' : 'Update Badge'}
+					{isEmpty(badgeItemData) ? 'Add Badge' : 'Update Badge'}
 				</h2>
 				<p className={styles.text_styles2}>
 					Select the conditions and number of completions necessary to obtain
@@ -84,7 +84,7 @@ function CreateBadge(props) {
 											key={el.name}
 											control={control}
 											id={`${el.name}_input`}
-											disabled={!isEmpty(badgeListData) && el.name === 'condition'}
+											disabled={!isEmpty(badgeItemData) && el.name === 'condition'}
 										/>
 									</div>
 
@@ -101,7 +101,7 @@ function CreateBadge(props) {
 							{MEDALS_MAPPING.map((data, index) => (
 								<GetCard
 									data={data}
-									badgeListData={badgeListData}
+									badgeItemData={badgeItemData}
 									control={control}
 									errors={errors}
 									watch={watch}

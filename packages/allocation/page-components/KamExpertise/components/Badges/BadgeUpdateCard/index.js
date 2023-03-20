@@ -6,16 +6,17 @@ import { getFieldController } from '../../../../../common/Form/getFieldControlle
 
 import styles from './styles.module.css';
 
-function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', watch, isLastItem }) {
+function BadgeUpdateCard({ data = {}, badgeItemData = {}, control, errors = '', watch, isLastItem }) {
 	const { medalType, score = '', inputPlaceHolder = '' } = data;
+	const { badge_details = [] } = badgeItemData;
 
 	const InputController = getFieldController('number');
 	const UploadController = getFieldController('fileUpload');
 
 	const MEDAL_IMAGE_MAPPING = {
-		Bronze : badgeListData?.badge_details?.[0]?.image_url,
-		Silver : badgeListData?.badge_details?.[1]?.image_url,
-		Gold   : badgeListData?.badge_details?.[2]?.image_url,
+		Bronze : badge_details?.[0]?.image_url,
+		Silver : badge_details?.[1]?.image_url,
+		Gold   : badge_details?.[2]?.image_url,
 	};
 
 	return (
@@ -68,7 +69,7 @@ function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', 
 						name={`${medalType}_img_value`}
 						control={control}
 						accept=".png, .jpeg"
-						rules={isEmpty(badgeListData) ? {
+						rules={isEmpty(badgeItemData) ? {
 							required: 'Image is required',
 						} : {}}
 					/>
@@ -88,7 +89,7 @@ function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', 
 						: null}
 
 					{
-					!isEmpty(data && badgeListData) && !watch(`${medalType}_img_value`)
+					!isEmpty(data && badgeItemData) && !watch(`${medalType}_img_value`)
 						? (
 							<div className={styles.preview}>
 								<img

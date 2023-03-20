@@ -32,20 +32,20 @@ function Badges() {
 	const {
 		list: badgeList = [],
 		toggleScreen,
-		badgeListData,
+		badgeItemData,
 		setToggleScreen,
 		searchValue,
 		setSearchValue,
 		debounceQuery,
-		setMasteryListData,
-		setBadgeListData,
+		setMasteryItemData,
+		setBadgeItemData,
 		expertise,
 		setExpertise,
 		loading,
 		listRefetch,
 		getNextPage,
 		paginationData,
-		masteryListData,
+		masteryItemData,
 	} = useGetBadgeList();
 
 	const componentProps = {
@@ -55,8 +55,8 @@ function Badges() {
 			searchValue,
 			setSearchValue,
 			debounceQuery,
-			setMasteryListData,
-			setBadgeListData,
+			setMasteryItemData,
+			setBadgeItemData,
 			expertise,
 			setExpertise,
 			loading,
@@ -67,12 +67,12 @@ function Badges() {
 		[CREATE_MASTERY]: {
 			badgeList,
 			setToggleScreen,
-			masteryListData,
+			masteryItemData,
 			listRefetch,
 		},
 		[CREATE_BADGE]: {
 			setToggleScreen,
-			badgeListData,
+			badgeItemData,
 			listRefetch,
 		},
 	};
