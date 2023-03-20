@@ -1,5 +1,6 @@
 import { Pill, Button, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot, IcMDelete, IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
+import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -10,7 +11,7 @@ export const questionSetColumns = ({ loading, updateApi, fetchList, router }) =>
 	};
 
 	const handleEditQuestionSet = (id) => {
-		router.push(`/learning/faq/create/test-module/create-question?id=${id}`);
+		router.push(`/learning/test-module/create-question?id=${id}`);
 	};
 
 	return [
@@ -133,12 +134,13 @@ export const questionSetColumns = ({ loading, updateApi, fetchList, router }) =>
 	];
 };
 
-export const testSetColumns = ({ loading, updateApi, fetchList, router }) => {
+export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 	const handleDeleteTest = (id) => {
-		updateApi({ test_id: id, values: {}, fetchList, type: 'delete' });
+		updateApi({ questionSetId: id, getTestQuestionTest: fetchList, type: 'delete', from: 'test' });
 	};
+
 	const handleEditTest = (id) => {
-		router.push(`/learning/faq/create/test-module/create-test?id=${id}`);
+		router.push(`/learning/test-module/create-test?id=${id}`);
 	};
 	return ([
 		{
@@ -151,18 +153,18 @@ export const testSetColumns = ({ loading, updateApi, fetchList, router }) => {
 		{
 			Header   : 'TOPICS',
 			id       : 'c',
-			accessor : ({ topics = [] }) => (
+			accessor : ({ topic = [] }) => (
 				<section>
-					{topics.map((topic) => (
+					{topic.map((topicItem) => (
 						<Pill
-							key={topic}
+							key={topicItem}
 							size="sm"
 							color="blue"
 						>
-							{startCase(topic)}
+							{startCase(topicItem)}
 						</Pill>
 					))}
-					{topics.length === 0 && '-'}
+					{topic.length === 0 && '-'}
 				</section>
 			),
 		},
@@ -209,6 +211,15 @@ export const testSetColumns = ({ loading, updateApi, fetchList, router }) => {
 			id       : 'tags',
 			accessor : ({ status = '' }) => (
 				<section>{status}</section>
+			),
+		},
+		{
+			Header   : '',
+			id       : 'results',
+			accessor : ({ id = '' }) => (
+				<div>
+					<Link href={`/learning/tests/results/admin/${id}`}>Results</Link>
+				</div>
 			),
 		},
 		{
@@ -281,11 +292,9 @@ export const testSetColumns = ({ loading, updateApi, fetchList, router }) => {
 								<IcMOverflowDot style={{ cursor: 'pointer' }} />
 							</Tooltip>
 						</div>
-
 					</div>
 				</section>
 			),
-
 		},
 	]);
 };

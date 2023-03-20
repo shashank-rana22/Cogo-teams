@@ -18,6 +18,7 @@ function useUpdateTest() {
 				// eslint-disable-next-line no-param-reassign
 					delete values[item];
 				});
+
 				const testDetailsObj = {
 					test_duration  : test_duration_min,
 					cut_off_marks,
@@ -26,6 +27,7 @@ function useUpdateTest() {
 					validity_start : test_validity.startDate,
 					validity_end   : test_validity.endDate,
 				};
+
 				const set_wise_distribution = [];
 				Object.entries(values).forEach(([key, value]) => {
 					const question_type = key.slice(-1) === 'q' ? 'stand_alone' : 'case_study';
@@ -38,6 +40,7 @@ function useUpdateTest() {
 						question_type,
 					});
 				});
+
 				await trigger({
 					data: {
 						id     : test_id,
@@ -47,7 +50,8 @@ function useUpdateTest() {
 
 					},
 				});
-				router.push('/learning/faq/create/test-module');
+
+				router.push('/learning/test-module');
 				Toast.success('Updated Successfully');
 			} catch (err) {
 				Toast.error(err?.message || 'Something went wrong');
@@ -56,15 +60,15 @@ function useUpdateTest() {
 			try {
 				await trigger({
 					data: {
-						id                    : test_id,
-						status                : 'inactive',
-						set_wise_distribution : [],
+						id     : test_id,
+						status : 'inactive',
+
 					},
 				});
 				fetchList();
 				Toast.success('Test Deleted Successfully');
-			} catch (err) {
-				Toast.error(err?.message || 'Something went wrong');
+			} catch (error) {
+				Toast.error(error?.message);
 			}
 		}
 	};

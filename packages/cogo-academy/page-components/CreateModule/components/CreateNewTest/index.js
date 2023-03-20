@@ -12,6 +12,7 @@ function CreateTest() {
 	const [activeStepper, setActiveStepper] = useState(router.query?.id ? 'review_and_criteria'
 		: 'details_and_questions');
 	const [testId, setTestId] = useState(null);
+
 	const COMPONENT_MAPPING = {
 		details_and_questions: {
 			component : DetailsAndQuestions,
@@ -27,9 +28,7 @@ function CreateTest() {
 		},
 	};
 
-	const ActiveComponent = COMPONENT_MAPPING[activeStepper].component;
-
-	const activeComponentProps = COMPONENT_MAPPING[activeStepper].props;
+	const { component: ActiveComponent, props:activeComponentProps } = COMPONENT_MAPPING[activeStepper];
 
 	return (
 		<div>

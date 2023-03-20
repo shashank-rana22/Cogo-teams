@@ -21,11 +21,11 @@ function useCreateTest({ setTestId, setActiveStepper }) {
 			});
 			setTestId(res?.data?.id);
 			if (next === 'draft') {
-				router.push('/learning/faq/create/test-module');
+				router.push('/learning/test-module/create');
 				Toast.success('Draft Saved Successfully');
 			} else {
-				const as = `/learning/faq/create/test-module/create-test?id=${res?.data?.id}`;
-				const href = `/learning/faq/create/test-module/create-test?id=${res?.data?.id}`;
+				const as = `/learning/test-module/create-test?id=${res?.data?.id}`;
+				const href = `/learning/test-module/create-test?id=${res?.data?.id}`;
 				router.push(href, as);
 				setActiveStepper('review_and_criteria');
 				Toast.success('Created Successfully');

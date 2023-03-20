@@ -66,7 +66,13 @@ function ApprovedAWB({
 				loading={loading}
 				functions={functions}
 			/>
-			<UploadModal showUpload={showUpload} setShowUpload={setShowUpload} listAPi={listAPi} />
+			<UploadModal
+				showUpload={showUpload}
+				setShowUpload={setShowUpload}
+				listAPi={listAPi}
+				edit={false}
+				setEdit={setEdit}
+			/>
 		</>
 	);
 }

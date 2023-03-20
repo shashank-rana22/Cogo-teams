@@ -5,16 +5,30 @@ import Footer from './Footer';
 import Header from './Header';
 import styles from './styles.module.css';
 
-function LeftSection() {
-	const [currentQuestion, setCurrentQuestion] = useState(0);
+function LeftSection({ data = [], currentQuestion, setCurrentQuestion, loading }) {
+	const [answer, setAnswer] = useState('');
 
 	return (
 		<div className={styles.container}>
 			<Header />
 
-			<Body currentQuestion={currentQuestion} setCurrentQuestion={setCurrentQuestion} />
+			<Body
+				data={data?.data?.[currentQuestion - 1]}
+				loading={loading}
+				currentQuestion={currentQuestion}
+				setCurrentQuestion={setCurrentQuestion}
+				total_question={data?.data?.length}
+				answer={answer}
+				setAnswer={setAnswer}
+			/>
 
-			<Footer currentQuestion={currentQuestion} setCurrentQuestion={setCurrentQuestion} />
+			<Footer
+				data={data?.data?.[currentQuestion - 1]}
+				currentQuestion={currentQuestion}
+				setCurrentQuestion={setCurrentQuestion}
+				total_question={data?.data?.length}
+				answer={answer}
+			/>
 		</div>
 	);
 }

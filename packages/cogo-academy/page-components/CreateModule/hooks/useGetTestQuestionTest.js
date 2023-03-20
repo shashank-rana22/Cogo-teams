@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -9,6 +10,7 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setE
 	const { id } = query || {};
 
 	const [questionSetId, setQuestionSetId] = useState(id);
+	const [filters, setFilters] = useState({});
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
@@ -18,7 +20,7 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setE
 	const getTestQuestionTest = async ({ questionToShow, questionSetId:setId }) => {
 		try {
 			const res = await trigger({
-				params: { id: setId },
+				params: { id: setId, filters },
 			});
 
 			if (!res?.data?.question_count) {
@@ -41,8 +43,11 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setE
 		if (!isEmpty(id)) {
 			getTestQuestionTest({ questionSetId: id });
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		getTestQuestionTest({ questionSetId });
+	}, [filters]);
 
 	return {
 		loading,
@@ -50,6 +55,8 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setE
 		getTestQuestionTest,
 		questionSetId,
 		setQuestionSetId,
+		setFilters,
+		filters,
 	};
 }
 

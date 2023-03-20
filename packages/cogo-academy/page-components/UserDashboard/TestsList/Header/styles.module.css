@@ -1,0 +1,19 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.input_container {
+	margin: 24px 0;
+}
+
+.icon_container {
+	display: flex;
+	margin-right: 8px;
+}

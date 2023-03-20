@@ -1,20 +1,34 @@
-import { useState } from 'react';
-
+// import { useState } from 'react';
 import CaseStudy from './CaseStudy';
-import quizData from './dummydata';
+// import quizData from './dummydata';
 import SingleQuestion from './SingleQuestion';
 
-function Body({ currentQuestion, setCurrentQuestion }) {
-	const question = quizData[currentQuestion];
-
-	const { type } = question;
+function Body({ data = [], currentQuestion, setCurrentQuestion, total_question, answer = '', setAnswer }) {
+	console.log('answe11r', answer);
 
 	return (
 		<div>
-			{type !== 'case_study'
-				? <SingleQuestion question={question} />
-				: <CaseStudy question={question} /> }
-			{/* {QUESTION_COMPONENT_MAPPING.single_correct.component} */}
+			{!data?.primary_question_type
+				? (
+					<SingleQuestion
+						question={data}
+						currentQuestion={currentQuestion}
+						setCurrentQuestion={setCurrentQuestion}
+						total_question={total_question}
+						answer={answer}
+						setAnswer={setAnswer}
+					/>
+				)
+				: (
+					<CaseStudy
+						question={data}
+						currentQuestion={currentQuestion}
+						setCurrentQuestion={setCurrentQuestion}
+						total_question={total_question}
+						answer={answer}
+						setAnswer={setAnswer}
+					/>
+				) }
 		</div>
 	);
 }

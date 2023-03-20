@@ -50,7 +50,7 @@ function useCreateQuestionSet() {
 			Toast.success(`Question set ${actionNameMapping[type]} successfully`);
 
 			if (type === 'delete' && from !== 'test') {
-				router.push('/learning/faq/create/test-module');
+				router.push('/learning/test-module');
 			}
 
 			if (from === 'test') {

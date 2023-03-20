@@ -14,13 +14,13 @@ const cogoAcademy = {
 		navigation : 'cogo_academy-create_faq',
 		isMainNav  : false,
 	},
-	'/[partner_id]/learning/faq/create/test-module': {
+	'/[partner_id]/learning/test-module': {
 		navigation: 'cogo_academy-create_faq',
 	},
-	'/[partner_id]/learning/faq/create/test-module/create-question': {
+	'/[partner_id]/learning/test-module/create-question': {
 		navigation: 'cogo_academy-create_faq',
 	},
-	'/[partner_id]/learning/faq/create/test-module/create-test': {
+	'/[partner_id]/learning/test-module/create-test': {
 		navigation: 'cogo_academy-create_faq',
 	},
 	'/[partner_id]/learning/faq': {
@@ -30,13 +30,16 @@ const cogoAcademy = {
 	'/[partner_id]/learning/faq/answer': {
 		navigation: 'cogo_academy-faq',
 	},
-	'/[partner_id]/learning/tests/results': {
+	'/[partner_id]/learning/tests/dashboard': {
 		navigation: 'cogo_academy-tests',
 	},
-	'/[partner_id]/learning/tests/results/[test_id]': {
+	'/[partner_id]/learning/tests/dashboard/[test_id]': {
 		navigation: 'cogo_academy-tests',
 	},
 	'/[partner_id]/learning/tests/[test_id]': {
+		navigation: 'cogo_academy-tests',
+	},
+	'/[partner_id]/learning/tests/results/admin/[test_id]': {
 		navigation: 'cogo_academy-tests',
 	},
 };

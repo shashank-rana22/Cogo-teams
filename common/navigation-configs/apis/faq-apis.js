@@ -204,6 +204,43 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 	],
+	tests: [
+		{
+			api          : 'list_tests',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_user_performance',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_question_wise_analysis',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_admin_question_wise_test_result',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_passed_test_data_per_user',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_test_question',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_test_user_question_answer',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+	],
 };
 
 export default faq;

@@ -22,6 +22,8 @@ function CreateQuestionSet() {
 		getTestQuestionTest,
 		questionSetId,
 		setQuestionSetId,
+		setFilters,
+		filters,
 	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails });
 
 	return (
@@ -31,7 +33,7 @@ function CreateQuestionSet() {
 					style={{ cursor: 'pointer' }}
 					width={20}
 					height={20}
-					onClick={() => router.push('/learning/faq/create/test-module')}
+					onClick={() => router.push('/learning/test-module')}
 				/>
 
 				<div className={styles.title}>New Question Set</div>
@@ -56,6 +58,8 @@ function CreateQuestionSet() {
 				setAllKeysSaved={setAllKeysSaved}
 				editDetails={editDetails}
 				setEditDetails={setEditDetails}
+				setFilters={setFilters}
+				filters={filters}
 			/>
 		</div>
 	);

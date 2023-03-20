@@ -48,19 +48,19 @@ function TestsList() {
 				params    : questionListParams,
 			},
 		},
-		all_questions: {
-			key            : 'all_questions',
-			title          : 'All Questions',
-			component      : ListComponent,
-			componentProps : {
-				data,
-				loading,
-				fetchList,
-				setParams,
-				activeTab,
-				params,
-			},
-		},
+		// all_questions: {
+		// 	key            : 'all_questions',
+		// 	title          : 'All Questions',
+		// 	component      : ListComponent,
+		// 	componentProps : {
+		// 		data,
+		// 		loading,
+		// 		fetchList,
+		// 		setParams,
+		// 		activeTab,
+		// 		params,
+		// 	},
+		// },
 	};
 
 	const handleChangeTab = (val) => {
