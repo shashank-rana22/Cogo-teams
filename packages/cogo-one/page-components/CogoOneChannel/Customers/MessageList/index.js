@@ -1,5 +1,5 @@
 import { cl, Input, Popover, Tooltip } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight, IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../common/UserAvatar';
@@ -51,10 +51,6 @@ function MessageList({
 			/>
 		);
 	}
-
-	const openModelForNewContact = () => {
-		setModalType(true);
-	};
 
 	return (
 		<>
