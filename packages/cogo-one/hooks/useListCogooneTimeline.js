@@ -25,6 +25,7 @@ const useListCogooneTimeline = ({
 		lastDocumentTimeStamp = '',
 		islastPage = '',
 	}) => {
+		let res = {};
 		try {
 			let payload = {};
 			if (type === 'messages') {
@@ -45,12 +46,15 @@ const useListCogooneTimeline = ({
 					pagination,
 				};
 			}
-			const res = await trigger({
+			res = await trigger({
 				params: payload,
 			});
+		} catch (error) {
+			// console.log(error);
+		} finally {
 			if (type === 'messages') {
 				let formatTimeLineData = { ...prevMessageData };
-				(res.data.list || []).forEach((itm) => {
+				(res?.data?.list || []).forEach((itm) => {
 					if (!isEmpty(itm) && (itm?.created_at_epoch)) {
 						formatTimeLineData = {
 							...formatTimeLineData,
@@ -75,8 +79,6 @@ const useListCogooneTimeline = ({
 					},
 				}));
 			}
-		} catch (error) {
-			// console.log(error);
 		}
 	}, [id, pagination, setMessagesState, trigger, type]);
 
