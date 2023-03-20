@@ -9,7 +9,6 @@ function Filters({ setDateRange, dateRange }) {
 				<div style={{
 					margin      : '0.3rem',
 					marginRight : '1.2rem',
-
 				}}
 				>
 					Date
@@ -18,13 +17,7 @@ function Filters({ setDateRange, dateRange }) {
 
 				<DateRangepicker
 					name="date"
-					onChange={(val) => {
-						console.log('val', val);
-						setDateRange(((prev) => ({
-							endDate   : val?.endDate || prev?.endDate,
-							startDate : val?.startDate || prev?.startDate,
-						})));
-					}}
+					onChange={setDateRange}
 					value={dateRange}
 					dateFormat="MMM dd, yyyy"
 					isPreviousDaysAllowed
