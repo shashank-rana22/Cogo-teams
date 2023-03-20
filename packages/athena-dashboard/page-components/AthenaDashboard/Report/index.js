@@ -26,7 +26,7 @@ function Report() {
 		url    : 'athena/commodity_trend_report',
 		method : 'post',
 		data   : {
-			filters: { hs_code: general.query.hscodes.split(','), shipment_type: general.query.shipment_type },
+			filters: { hs_code: general.query.hscodes !== undefined ? general.query.hscodes.split(',') : '', shipment_type: general.query.shipment_type !== undefined ? general.query.shipment_type : '' },
 		},
 	}, { manual: false });
 
@@ -163,7 +163,7 @@ function Report() {
 			]}
 			/>
 
-            </div>,
+		</div>,
 		january   : (info[item].January !== undefined) ? info[item].January.toLocaleString('en-IN') : 0,
 		february  : (info[item].February !== undefined) ? info[item].February.toLocaleString('en-IN') : 0,
 		march     : (info[item].March !== undefined) ? info[item].March.toLocaleString('en-IN') : 0,
