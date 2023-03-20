@@ -1,4 +1,4 @@
-import { Button, Input, ButtonIcon, Table, Checkbox, Tooltip, Breadcrumb } from '@cogoport/components';
+import { Button, Input, ButtonIcon, Table, Tooltip, Breadcrumb } from '@cogoport/components';
 import { IcMSearchlight, IcMArrowRotateDown, IcMOverflowDot } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
@@ -138,7 +138,7 @@ function NewQuestion() {
 			</div>
 			<Table
 				className={styles.table_container}
-				data={[1, 2]}
+				data={list || [1, 2]}
 				columns={columns}
 			/>
 		</div>

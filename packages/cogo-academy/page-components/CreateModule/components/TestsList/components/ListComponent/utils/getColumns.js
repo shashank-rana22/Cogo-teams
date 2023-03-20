@@ -133,146 +133,155 @@ export const questionSetColumns = ({ loading, updateApi, fetchList, router }) =>
 	];
 };
 
-export const testSetColumns = () => [
-	{
-		Header   : 'NAME',
-		id       : 'a',
-		accessor : ({ name = '' }) => (
-			<section>{name}</section>
-		),
-	},
-	{
-		Header   : 'TOPICS',
-		id       : 'c',
-		accessor : ({ topic = [] }) => (
-			<section>
-				{topic.map((topicItem) => (
-					<Pill
-						key={topicItem}
-						size="sm"
-						color="blue"
-					>
-						{startCase(topicItem)}
-					</Pill>
-				))}
-				{topic.length === 0 && '-'}
-			</section>
-		),
-	},
-	{
-		Header   : 'TOTAL QUESTIONS/CASES',
-		id       : 'd',
-		accessor : ({ case_study_questions = 0, stand_alone_questions = 0 }) => (
-			<section>
-				{stand_alone_questions || 0}
-				{' '}
-				Q +
-				{' '}
-				{case_study_questions || 0}
-				{' '}
-				Cases
-			</section>
-		),
-	},
-	{
-		Header   : 'ALLOWED ATTEMPTS',
-		id       : 'ss',
-		accessor : ({ maximum_attempts = 0 }) => (
-			<section>{maximum_attempts || '-'}</section>
-		),
-	},
-	{
-		Header   : 'PASS %',
-		id       : 'e',
-		accessor : ({ cut_off_marks = '' }) => (
-			<section>
-				{cut_off_marks || '-'}
-			</section>
-		),
-	},
-	{
-		Header   : 'ATTEMPTED BY',
-		id       : 'ik',
-		accessor : ({ audience_ids = [] }) => (
-			<section>{audience_ids.length}</section>
-		),
-	},
-	{
-		Header   : 'STATUS',
-		id       : 'tags',
-		accessor : ({ status = '' }) => (
-			<section>{status}</section>
-		),
-	},
-	{
-		Header   : 'LAST UPDATED',
-		id       : 'updatedAt',
-		accessor : ({ updated_at = '' }) => (
-			<section>
-				{format(updated_at, 'dd MMM yyyy')}
-			</section>
-		),
-	},
-	{
-		Header   : '',
-		id       : 'options',
-		accessor : () => (
-
-			<section>
-				<div
-					role="presentation"
-				>
-					<div style={{
-						width  : 'fit-content',
-						cursor : 'default',
-					}}
-					>
-						<Tooltip
-							className={styles.tooltip_pad}
-							content={(
-								<div className={styles.options}>
-									<Button
-										themeType="secondary"
-										className={styles.btn}
-									>
-										<IcMEdit />
-										<div style={{ marginLeft: '8px' }}>
-											Edit
-										</div>
-									</Button>
-									<Button
-										themeType="secondary"
-										className={styles.btn}
-									>
-
-										<IcMEyeopen />
-										<div style={{ marginLeft: '8px' }}>
-											View
-										</div>
-									</Button>
-									<Button
-										themeType="secondary"
-										className={styles.btn}
-									>
-										<IcMDelete />
-										<div style={{ marginLeft: '8px' }}>
-											Delete
-										</div>
-									</Button>
-
-								</div>
-							)}
-							trigger="click"
-							placement="left"
-							interactive="true"
+export const testSetColumns = ({ loading, updateApi, fetchList, router }) => {
+	const handleDeleteTest = (id) => {
+		updateApi({ test_id: id, values: {}, fetchList, type: 'delete' });
+	};
+	return ([
+		{
+			Header   : 'NAME',
+			id       : 'a',
+			accessor : ({ name = '' }) => (
+				<section>{name}</section>
+			),
+		},
+		{
+			Header   : 'TOPICS',
+			id       : 'c',
+			accessor : ({ topics = [] }) => (
+				<section>
+					{topics.map((topic) => (
+						<Pill
+							key={topic}
+							size="sm"
+							color="blue"
 						>
-							<IcMOverflowDot style={{ cursor: 'pointer' }} />
-						</Tooltip>
+							{startCase(topic)}
+						</Pill>
+					))}
+					{topics.length === 0 && '-'}
+				</section>
+			),
+		},
+		{
+			Header   : 'TOTAL QUESTIONS/CASES',
+			id       : 'd',
+			accessor : ({ case_study_questions = 0, stand_alone_questions = 0 }) => (
+				<section>
+					{stand_alone_questions || 0}
+					{' '}
+					Q +
+					{' '}
+					{case_study_questions || 0}
+					{' '}
+					Cases
+				</section>
+			),
+		},
+		{
+			Header   : 'ALLOWED ATTEMPTS',
+			id       : 'ss',
+			accessor : ({ maximum_attempts = 0 }) => (
+				<section>{maximum_attempts || '-'}</section>
+			),
+		},
+		{
+			Header   : 'PASS %',
+			id       : 'e',
+			accessor : ({ cut_off_marks = '' }) => (
+				<section>
+					{cut_off_marks || '-'}
+				</section>
+			),
+		},
+		{
+			Header   : 'ATTEMPTED BY',
+			id       : 'ik',
+			accessor : ({ audience_ids = [] }) => (
+				<section>{audience_ids.length}</section>
+			),
+		},
+		{
+			Header   : 'STATUS',
+			id       : 'tags',
+			accessor : ({ status = '' }) => (
+				<section>{status}</section>
+			),
+		},
+		{
+			Header   : 'LAST UPDATED',
+			id       : 'updatedAt',
+			accessor : ({ updated_at = '' }) => (
+				<section>
+					{format(updated_at, 'dd MMM yyyy')}
+				</section>
+			),
+		},
+		{
+			Header   : '',
+			id       : 'options',
+			accessor : ({ id = '' }) => (
+
+				<section>
+					<div
+						role="presentation"
+					>
+						<div style={{
+							width  : 'fit-content',
+							cursor : 'default',
+						}}
+						>
+							<Tooltip
+								className={styles.tooltip_pad}
+								content={(
+									<div className={styles.options}>
+										<Button
+											loading={loading}
+											themeType="secondary"
+											className={styles.btn}
+										>
+											<IcMEdit />
+											<div style={{ marginLeft: '8px' }}>
+												Edit
+											</div>
+										</Button>
+										<Button
+											loading={loading}
+											themeType="secondary"
+											className={styles.btn}
+										>
+
+											<IcMEyeopen />
+											<div style={{ marginLeft: '8px' }}>
+												View
+											</div>
+										</Button>
+										<Button
+											loading={loading}
+											themeType="secondary"
+											className={styles.btn}
+											onClick={() => handleDeleteTest(id)}
+										>
+											<IcMDelete />
+											<div style={{ marginLeft: '8px' }}>
+												Delete
+											</div>
+										</Button>
+
+									</div>
+								)}
+								trigger="click"
+								placement="left"
+								interactive="true"
+							>
+								<IcMOverflowDot style={{ cursor: 'pointer' }} />
+							</Tooltip>
+						</div>
+
 					</div>
+				</section>
+			),
 
-				</div>
-			</section>
-		),
-
-	},
-];
+		},
+	]);
+};

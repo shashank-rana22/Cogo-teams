@@ -31,8 +31,8 @@ function QuestionSet({ setIdArray, setShowQuestionSet }) {
 			id       : 'check',
 			accessor : ({ id = '' }) => (
 				<Checkbox
-					key="hello"
-					name="hello"
+					key="question_set"
+					name="question_set"
 					className={styles.checkbox}
 					value={id}
 					onChange={(event) => { handleChange({ event, id }); }}

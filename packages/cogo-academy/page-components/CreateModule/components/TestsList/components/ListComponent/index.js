@@ -1,15 +1,13 @@
 import { Pagination, Table } from '@cogoport/components';
-// import { useRouter } from '@cogoport/next';
 // import { format, startCase, isEmpty } from '@cogoport/utils';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import useCreateQuestionSet from '../../../../hooks/useCreateQuestionSet';
+import useUpdateTest from '../../../../hooks/useUpdateTest';
 
 import styles from './styles.module.css';
 import { questionSetColumns, testSetColumns } from './utils/getColumns';
-
-// import useUpdateServiceBundle from './useUpdateServiceBundle';
 
 function ListComponent({ data, loading, setParams, activeTab, params, fetchList }) {
 	const router = useRouter();
@@ -27,8 +25,10 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 		createQuestionSet,
 	} = useCreateQuestionSet();
 
+	const { loading:updateTestLoading, updateTest } = useUpdateTest();
+
 	const propsMapping = {
-		tests         : {},
+		tests         : { loading: updateTestLoading, updateApi: updateTest, fetchList, router },
 		question_set  : { loading: updateLoading, updateApi: createQuestionSet, fetchList, router },
 		all_questions : {},
 	};

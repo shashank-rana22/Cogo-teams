@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
@@ -10,7 +11,7 @@ function useGetTestList() {
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			status: 'active',
+			status: ['active', 'draft'],
 		},
 	});
 
@@ -20,7 +21,7 @@ function useGetTestList() {
 				params,
 			});
 		} catch (error) {
-			console.log(error);
+			Toast.error(error?.message || 'Something went wrong');
 		}
 	};
 	useEffect(() => {
