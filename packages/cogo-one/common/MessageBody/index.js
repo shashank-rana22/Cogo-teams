@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 
 function MessageBody({ response = {}, message_type = 'text' }) {
 	const { message = '', media_url = '', profanity_check = '' } = response;
+	const hasProfanity = profanity_check === 'nudity';
 	const fileExtension = media_url?.split('.').pop();
 	const { renderURLText, renderBoldText } = whatsappTextFormatting();
 
@@ -32,7 +33,7 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 						src={media_url}
 						alt={message_type}
 						className={cl`${styles.object_styles}
-						 ${profanity_check === 'nudity' ? styles.profanity_blur : ''}`}
+						 ${hasProfanity ? styles.profanity_blur : ''}`}
 					/>
 				);
 			case 'audio':
@@ -62,21 +63,24 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 		return (
 			<>
 				<div
-					className={cl`${styles.clickable_object} ${profanity_check === 'nudity' ? styles.reduce_blur : ''}`}
+					className={cl`${styles.clickable_object} ${hasProfanity ? styles.reduce_blur : ''}`}
 					role="presentation"
 					onClick={() => {
-						// eslint-disable-next-line no-undef
-						window.open(
-							media_url,
-							'_blank',
-							'noreferrer',
-						);
+						if (!hasProfanity) {
+							window.open(
+								media_url,
+								'_blank',
+								'noreferrer',
+							);
+						}
 					}}
 				>
-					<div className={styles.sensitive_content}>
-						<IcMEyeclose fill="#828282" />
-						<div className={styles.sensitive_text}>Sensitive Content</div>
-					</div>
+					{hasProfanity && (
+						<div className={styles.sensitive_content}>
+							<IcMEyeclose fill="#828282" />
+							<div className={styles.sensitive_text}>Sensitive Content</div>
+						</div>
+					)}
 					{LoadMedia(message_type)}
 				</div>
 

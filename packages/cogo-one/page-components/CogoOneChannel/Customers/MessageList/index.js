@@ -28,8 +28,9 @@ function MessageList({
 	showBotMessages = false,
 	setShowBotMessages = () => {},
 	isomniChannelAdmin = false,
+	setModalType = () => {},
+	modalType = '',
 }) {
-	const [modalType, setModalType] = useState(false);
 	function getShowChat({ user_name }) {
 		if (searchValue) {
 			const searchName = user_name?.toLowerCase();
@@ -207,9 +208,10 @@ function MessageList({
 					<IcMPlusInCircle onClick={openModelForNewContact} fill="red" width={50} height={50} />
 				</div>
 			)}
-			{modalType && (
+			{modalType?.type && (
 				<NewWhatsappMessage
 					setModalType={setModalType}
+					modalType={modalType}
 				/>
 			)}
 		</>
