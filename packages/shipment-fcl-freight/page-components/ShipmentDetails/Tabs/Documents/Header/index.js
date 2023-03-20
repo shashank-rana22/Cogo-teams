@@ -5,11 +5,11 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function Header({
-	activeToggle,
-	setActiveToggle,
+	activeToggle = false,
+	setActiveToggle = () => {},
 	// shipmentDocumentsHookSetters,
 	// shipmentFilters,
-	shipment_data,
+	shipment_data = {},
 	data = {},
 	filters = {},
 	setFilters = () => {},

@@ -29,5 +29,9 @@
 		background-color: var(--color-accent-orange-2) !important;
 		content: "";
 	}
+	& > div:nth-child(2) > label > span::before{
+		background-color: var(--color-accent-orange-2) !important;
+		content: "";
+	}
 	
 }

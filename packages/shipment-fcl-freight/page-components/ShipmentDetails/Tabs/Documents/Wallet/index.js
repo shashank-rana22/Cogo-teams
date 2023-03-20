@@ -41,20 +41,15 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs })
 			Delete Document
 		</div>
 	);
-
 	const contentToShow = () => {
-		console.log("hii ");
-		// if (loading) {
-		// console.log("hii 1");
-		// 	return [...Array(forModal ? 3 : 2)].map(() => (
-		// 		<Loader forModal={forModal} />
-		// 	));
-		// }
-		// if (!loading && data?.list?.length === 0) {
-		// 	console.log('in empty');
-		// 	return <EmptyState />;
-		// }
-		console.log("hii 2");
+		if (loading) {
+			return [...Array(forModal ? 3 : 2)].map(() => (
+				<Loader forModal={forModal} />
+			));
+		}
+		if (!loading && data?.list?.length === 0) {
+			return <EmptyState />;
+		}
 		return (
 			<>
 				{(data?.list || []).map((doc) => (
@@ -125,7 +120,7 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs })
 
 				<TabPanel name="organization_documents" title="Organization Documents" />
 			</Tabs>
-			<div className={styles.wrapper}>{contentToShow}</div>
+			<div className={styles.wrapper}>{contentToShow()}</div>
 		</div>
 	);
 }

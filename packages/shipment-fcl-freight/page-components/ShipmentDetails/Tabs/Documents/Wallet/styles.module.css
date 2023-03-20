@@ -6,6 +6,7 @@
 	width: 100%;
 	flex-wrap: wrap;
 }
+
 .single_doc {
 	flex: 1 1 0;
 	min-width: 40%;
@@ -22,6 +23,7 @@
 		color: #393f70;
 	}
 }
+
 .main {
 	display: flex;
 	color: #393f70;
@@ -39,7 +41,6 @@
 	color: #bdbdbd;
 } 
 
-
 .button_wrapper{ 
 	display: flex;  
 
@@ -47,8 +48,6 @@
 		margin-right: 6px;
 	}
 }  
-
-
 
 .gap {
 	display: flex;
