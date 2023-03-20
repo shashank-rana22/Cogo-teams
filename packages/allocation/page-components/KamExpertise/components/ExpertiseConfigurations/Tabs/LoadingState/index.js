@@ -13,7 +13,7 @@ function LoadingState({ columnsToLoad }) {
 
 	return (
 		<Collapse
-			panel={options}
+			panels={options}
 			activeKey={value}
 			setActive={onChange}
 			type="text"

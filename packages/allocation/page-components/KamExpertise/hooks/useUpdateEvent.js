@@ -2,17 +2,17 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import getAddRuleControls from '../configurations/get-add-rule-controls';
 
+const ATTRIBUTE_MAPPING = {
+	account  : 'account_attribute',
+	shipment : 'shipment_attribute',
+	misc     : 'misc_attribute',
+};
+
 function useUpdateEvent(props) {
-	const ATTRIBUTE_MAPPING = {
-
-		account  : 'account_attribute',
-		shipment : 'shipment_attribute',
-		misc     : 'misc_attribute',
-	};
-
 	const {
 		updateEventListData = {}, listRefetch = () => {}, attributeList = [], setToggleEvent = () => {},
 	} = props;
@@ -32,8 +32,6 @@ function useUpdateEvent(props) {
 		rule_mapping_id : ruleMappingId,
 		rules,
 	} = updateEventListData;
-
-	console.log('updateEventListData', updateEventListData);
 
 	const formProps = useForm({
 		defaultValues: {
@@ -60,7 +58,8 @@ function useUpdateEvent(props) {
 				}
 			});
 		});
-		if (payloadAttribute.length === 0) {
+
+		if (isEmpty(payloadAttribute)) {
 			Toast.error('Enter Attribute Value');
 		} else {
 			try {
@@ -74,7 +73,7 @@ function useUpdateEvent(props) {
 				});
 
 				setToggleEvent('eventList');
-				Toast.success('Sucessfully Updated!');
+				Toast.success('Sucessfully Updated Event!');
 				listRefetch();
 			} catch (error) {
 				Toast.error(

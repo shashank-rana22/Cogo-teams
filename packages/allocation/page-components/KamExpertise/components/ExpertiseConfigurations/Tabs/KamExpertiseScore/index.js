@@ -98,14 +98,14 @@ function KamExpertiseScoreConfig({ selectedVersion }) {
 	return (
 		<>
 			<div className={styles.container}>
-				<Header auditData={auditData} />
+				<Header auditData={auditData} loading={loading} />
 			</div>
 
 			{isEmpty(list) && !loading ? <EmptyState /> : null}
 
 			{!loading ? (
 				<div className={styles.expertise_cards_container}>
-					<Collapse panel={options} activeKey={activeCollapse} setActive={setActiveCollapse} type="text" />
+					<Collapse panels={options} activeKey={activeCollapse} setActive={setActiveCollapse} type="text" />
 				</div>
 			) : <LoadingState columnsToLoad={2} />}
 

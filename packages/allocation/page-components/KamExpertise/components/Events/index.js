@@ -34,6 +34,7 @@ function Events() {
 
 	const [toggleEvent, setToggleEvent] = useState('eventList');
 	const [eventListData, setEventListData] = useState({});
+
 	return (
 		<section className={styles.main}>
 			<div className={styles.back_container} role="presentation" onClick={onClickBack}>

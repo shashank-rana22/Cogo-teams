@@ -12,6 +12,15 @@ function ListItem(props) {
 
 	const router = useRouter();
 
+	const handleClick = (id) => {
+		if (id) {
+			router.push(
+				'/badges/[user_id]/?path=/allocation/kam-expertise',
+				`/badges/${id}/?path=/allocation/kam-expertise`,
+			);
+		}
+	};
+
 	return (
 		<div
 			key={data?.id}
@@ -49,12 +58,14 @@ function ListItem(props) {
 						}
 					</div>
 					<span className={styles.link}>
-						{data?.milestone_mappings?.length > 2
+						{badge_details.length > 0
 							? (
 								<span
 									role="presentation"
 									style={{ cursor: 'pointer' }}
-									onClick={() => router.push('/badges')}
+									onClick={() => {
+										handleClick(data.partner_user_id);
+									}}
 								>
 									View More
 								</span>

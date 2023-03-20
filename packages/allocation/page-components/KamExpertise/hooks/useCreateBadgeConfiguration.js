@@ -8,14 +8,14 @@ import { getFieldController } from '../../../common/Form/getFieldController';
 import getAddBadgesControls from '../configurations/get-add-badges-control';
 
 function useCreateBadgeConfiguration(props) {
-	const { onClose, listRefetch, badgeListData = {} } = props;
+	const { onClose, listRefetch, badgeItemData = {} } = props;
 
 	const {
 		badge_name,
 		description: badge_description,
 		badge_details:badgeDetails,
 		expertise_configuration_detail_ids:event_ids,
-	} = badgeListData;
+	} = badgeItemData;
 
 	const formProps = useForm({
 		defaultValues: {
@@ -78,8 +78,8 @@ function useCreateBadgeConfiguration(props) {
 					],
 				};
 
-				if (Object.keys(badgeListData).length > 0) {
-					payload.id = badgeListData.id;
+				if (Object.keys(badgeItemData).length > 0) {
+					payload.id = badgeItemData.id;
 					payload.badge_details[0].badge_detail_id = badgeDetails?.[0]?.id;
 					payload.badge_details[1].badge_detail_id = badgeDetails?.[1]?.id;
 					payload.badge_details[2].badge_detail_id = badgeDetails?.[2]?.id;
@@ -89,7 +89,7 @@ function useCreateBadgeConfiguration(props) {
 
 				onClose();
 
-				Toast.success(isEmpty(badgeListData) ? 'Event Created !' : 'Event Updated !');
+				Toast.success(isEmpty(badgeItemData) ? 'Event Created !' : 'Event Updated !');
 
 				listRefetch();
 			} catch (error) {

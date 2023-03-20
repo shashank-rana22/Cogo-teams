@@ -1,6 +1,5 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
 
 import useGetBadgeList from '../../hooks/useGetBadgeList';
 
@@ -9,6 +8,20 @@ import CreateBadge from './CreateBadge';
 import CreateMastery from './CreateMastery';
 import styles from './styles.module.css';
 
+const CONSTANT_KEYS = {
+	BADGE_DETAILS  : 'badge_details',
+	CREATE_MASTERY : 'create_mastery',
+	CREATE_BADGE   : 'create_badge',
+};
+
+const { BADGE_DETAILS, CREATE_MASTERY, CREATE_BADGE } = CONSTANT_KEYS;
+
+const BADGES_COMPONENTS_MAPPING = {
+	[BADGE_DETAILS]  : BadgeDetails,
+	[CREATE_MASTERY] : CreateMastery,
+	[CREATE_BADGE]   : CreateBadge,
+};
+
 function Badges() {
 	const router = useRouter();
 
@@ -16,53 +29,55 @@ function Badges() {
 		router.push('/allocation/kam-expertise');
 	};
 
-	const [toggleScreen, setToggleScreen] = useState('badge_details');
-	const [badgeListData, setBadgeListData] = useState({});
-	const [masteryListData, setMasteryListData] = useState({});
-
 	const {
-		loading,
-		list: badgeList = {},
+		list: badgeList = [],
+		toggleScreen,
+		badgeItemData,
+		setToggleScreen,
 		searchValue,
-		setSearchValue = () => {},
-		expertise,
-		setExpertise = () => {},
+		setSearchValue,
 		debounceQuery,
-		paginationData,
-		getNextPage = () => {},
+		setMasteryItemData,
+		setBadgeItemData,
+		expertise,
+		setExpertise,
+		loading,
 		listRefetch,
+		getNextPage,
+		paginationData,
+		masteryItemData,
 	} = useGetBadgeList();
 
-	const BADGES_COMPONENTS_MAPPING = {
-		badge_details: <BadgeDetails
-			badgeList={badgeList}
-			setToggleScreen={setToggleScreen}
-			expertise={expertise}
-			setExpertise={setExpertise}
-			searchValue={searchValue}
-			setSearchValue={setSearchValue}
-			debounceQuery={debounceQuery}
-			setMasteryListData={setMasteryListData}
-			setBadgeListData={setBadgeListData}
-			loading={loading}
-			listRefetch={listRefetch}
-			paginationData={paginationData}
-			getNextPage={getNextPage}
-		/>,
-
-		mastery: <CreateMastery
-			setToggleScreen={setToggleScreen}
-			badgeList={badgeList}
-			masteryListData={masteryListData}
-			listRefetch={listRefetch}
-		/>,
-
-		create_badge: <CreateBadge
-			setToggleScreen={setToggleScreen}
-			badgeListData={badgeListData}
-			listRefetch={listRefetch}
-		/>,
+	const componentProps = {
+		[BADGE_DETAILS]: {
+			badgeList,
+			setToggleScreen,
+			searchValue,
+			setSearchValue,
+			debounceQuery,
+			setMasteryItemData,
+			setBadgeItemData,
+			expertise,
+			setExpertise,
+			loading,
+			listRefetch,
+			getNextPage,
+			paginationData,
+		},
+		[CREATE_MASTERY]: {
+			badgeList,
+			setToggleScreen,
+			masteryItemData,
+			listRefetch,
+		},
+		[CREATE_BADGE]: {
+			setToggleScreen,
+			badgeItemData,
+			listRefetch,
+		},
 	};
+
+	const Component = BADGES_COMPONENTS_MAPPING[toggleScreen] || null;
 
 	return (
 		<section className={styles.main_container}>
@@ -82,9 +97,12 @@ function Badges() {
 				<div className={styles.heading_container}>Badges</div>
 			</section>
 
-			<div>
-				{BADGES_COMPONENTS_MAPPING[toggleScreen] || ''}
-			</div>
+			{Component && (
+				<Component
+					key={toggleScreen}
+					{...(componentProps[toggleScreen] || {})}
+				/>
+			)}
 
 		</section>
 	);

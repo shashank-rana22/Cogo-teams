@@ -1,5 +1,4 @@
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -14,22 +13,20 @@ import styles from './styles.module.css';
 function AllBadges() {
 	const [modalDetail, setModalDetail] = useState();
 
-	const {
-		profile: { partner = {} },
-	} = useSelector((state) => state);
-
-	const { partner_user_id = '' } = partner || {};
-
 	const router = useRouter();
 
+	const { query } = router;
+
+	const { user_id = '', path: returnPath = '' } = query;
+
 	const showProfile = () => {
-		router.push('/my-profile');
+		router.push(returnPath);
 	};
 
 	const {
 		listLoading,
 		badgeList,
-	} = useGetAllocationKamExpertiseProfile(partner_user_id);
+	} = useGetAllocationKamExpertiseProfile(user_id);
 
 	const {
 		badgeDetail, badgeDetailloading, setBadgeParams,
@@ -43,7 +40,7 @@ function AllBadges() {
 		setModalDetail(badge.id);
 
 		setBadgeParams({
-			partner_user_id,
+			partner_user_id : user_id,
 			badge_detail_id : badge.id,
 			badge_id        : badge.badge_configuration_id,
 		});
@@ -56,6 +53,7 @@ function AllBadges() {
 				modalDetail={modalDetail}
 				showProfile={showProfile}
 				showAllBadges={showAllBadges}
+				returnPath={returnPath}
 			/>
 
 			{

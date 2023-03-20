@@ -4,14 +4,16 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function Header(props) {
-	const { modalDetail, showProfile, showAllBadges } = props;
+	const { modalDetail, showProfile, showAllBadges, returnPath } = props;
 	return (
 		<div className={styles.greeting_container}>
 			<div className={styles.main_heading} role="presentation" onClick={showProfile}>
 				<div className={styles.icon_container}>
 					<IcMArrowLeft width={24} height={24} />
 				</div>
-				<span className={styles.span}>My Profile</span>
+				<span className={styles.span}>
+					{ returnPath === '/my-profile' ? 'My Profile' : 'Dashboard'}
+				</span>
 			</div>
 			{ !isEmpty(modalDetail)
 					&& (

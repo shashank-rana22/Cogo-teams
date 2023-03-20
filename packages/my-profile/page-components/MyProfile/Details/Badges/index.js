@@ -1,11 +1,18 @@
 import { Modal, Button, Select, Tooltip } from '@cogoport/components';
 import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function Badges({ badgeList = {} }) {
+	const {
+		profile: { partner = {} },
+	} = useSelector((state) => state);
+
+	const { partner_user_id = '' } = partner || {};
+
 	const router = useRouter();
 
 	const { badges_got = [], badges_not_got = [] } = badgeList || {};
@@ -15,6 +22,15 @@ function Badges({ badgeList = {} }) {
 	const [show, setShow] = useState(false);
 
 	const onClose = () => setShow(false);
+
+	const handleClick = () => {
+		if (partner_user_id) {
+			router.push(
+				'/badges/[user_id]/?path=/my-profile',
+				`/badges/${partner_user_id}/?path=/my-profile`,
+			);
+		}
+	};
 
 	return (
 		<div className={styles.container}>
@@ -78,9 +94,7 @@ function Badges({ badgeList = {} }) {
 				</div>
 				<div
 					role="presentation"
-					onClick={() => {
-						router.push('/badges');
-					}}
+					onClick={handleClick}
 					className={styles.view_more}
 				>
 					View More
