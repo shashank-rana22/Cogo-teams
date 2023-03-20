@@ -1,6 +1,6 @@
 import useListFaqSearchHistories from './ListFaqSearchHistories';
 
-function GraphData() {
+function useGraphData() {
 	const props = useListFaqSearchHistories({});
 
 	const { data, dateRange, setDateRange } = props || {};
@@ -18,7 +18,6 @@ function GraphData() {
 	const LIKE = (total_search_result_available_percentage / 100) * total_like_percentage;
 	const DISLIKE = (total_search_result_available_percentage / 100) * total_dislike_percentage;
 	const VIEWED = (total_search_result_available_percentage / 100) * total_viewed_only_questions_percentage;
-	const AVAILABLE_REMAINING = total_search_result_available_percentage - (LIKE + DISLIKE + VIEWED);
 	const REQUESTED = (total_search_result_not_available_percentage / 100) * total_requested_questions_percentage;
 	const pie_data = [
 		{
@@ -55,12 +54,6 @@ function GraphData() {
 			color : 'hsl(202, 0%, 50%)',
 		},
 		{
-			id    : 'No Action',
-			label : 'No Action',
-			value : Math.round(AVAILABLE_REMAINING * 100) / 100,
-			color : 'hsl(255, 100%, 100%)',
-		},
-		{
 			id    : 'Not Requested',
 			label : 'Not Requested',
 			value : Math.round((total_search_result_not_available_percentage - REQUESTED) * 100) / 100,
@@ -75,7 +68,9 @@ function GraphData() {
 		},
 	];
 
+	console.log('pie_outer_data :: ', pie_outer_data);
+
 	return { pie_data, pie_outer_data, graph_data, dateRange, setDateRange };
 }
 
-export default GraphData;
+export default useGraphData;

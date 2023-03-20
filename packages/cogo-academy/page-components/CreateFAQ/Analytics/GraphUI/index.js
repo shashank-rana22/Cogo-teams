@@ -2,14 +2,14 @@ import { ResponsiveLine } from '@cogoport/charts/line';
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { format } from '@cogoport/utils';
 
-import GraphData from '../hooks/useGraphData';
+import useGraphData from '../hooks/useGraphData';
 
 import Filters from './Filters';
 import styles from './styles.module.css';
 import useGetFormattedGraphData from './useGetFormattedGraphData';
 
 function GraphUI() {
-	const { pie_data, pie_outer_data, graph_data, dateRange, setDateRange } = GraphData();
+	const { pie_data, pie_outer_data, graph_data, dateRange, setDateRange } = useGraphData();
 
 	const { graphData = [] } = useGetFormattedGraphData({ graph_data });
 	return (
