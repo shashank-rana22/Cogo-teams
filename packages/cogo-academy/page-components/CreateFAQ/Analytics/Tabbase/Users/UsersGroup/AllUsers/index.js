@@ -26,7 +26,6 @@ function AllUsers({ props = '' }) {
 		most_liked_questions = [],
 		topics = [],
 	} = props;
-
 	const [showQuestions, setShowQuestions] = useState(false);
 
 	const truncate = (str) => (str?.length > 40 ? `${str.substring(0, 38)}...` : str);
@@ -106,7 +105,7 @@ function AllUsers({ props = '' }) {
 				</div>
 			</div>
 
-			{showQuestions ? <UsersQuestionList props={most_viewed_questions} /> : null}
+			{showQuestions ? <UsersQuestionList props={most_liked_questions} /> : null}
 		</div>
 
 	);
