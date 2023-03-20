@@ -24,13 +24,14 @@ const options = [
 
 const iataCodeMapping = {
 	'7391cac2-e8db-467f-a59b-574d01dd7e7c' : '14-3-4526/0020',
-	'aa0e7e59-cbb9-43b2-98ce-1f992ae7ab19' : '14-3-4525/0006',
+	'aa0e7e59-cbb9-43b2-98ce-1f992ae7ab19' : '14-3-4526/0005',
 	'bdef6da0-8353-4b9a-b422-550ebe9c2474' : '14-3-4526/0042',
+	'2f6f6dbc-c10b-4d1d-b9fd-e89298fb487c' : '14-3-4526/0053',
 };
 
-const agentOtherChargesCode = [{ code: 'AWB', price: '' }, { code: 'PCA', price: '' }];
-const carrierOtherChargesCode = [{ code: 'XRAY', price: '' }, { code: 'AWC', price: '' },
-	{ code: 'AMS', price: '' }, { code: 'CGC', price: '' }];
+const agentOtherChargesCode = [{ code: 'AWB', price: '150' }, { code: 'PCA', price: '250' }];
+const carrierOtherChargesCode = [{ code: 'AMS', price: '' }, { code: 'AWC', price: '' },
+	{ code: 'XRAY', price: '' }, { code: 'CGC', price: '' }];
 
 interface NestedObj {
 	[key: string]: NestedObj | React.FC ;
@@ -99,12 +100,8 @@ function GenerateMAWB({
 	};
 
 	useEffect(() => {
-		setChargeableWeight(Number((Math.max(
-			+formValues.weight,
-			+formValues.volumetricWeight,
-		) || 0.0).toFixed(2)));
-		setValue('chargeableWeight', (+chargeableWeight || 0.0).toFixed(2));
-	}, [formValues.volumetricWeight, formValues.weight, formValues.chargeableWeight]);
+		setChargeableWeight(formValues.chargeableWeight);
+	}, [formValues.chargeableWeight]);
 
 	useEffect(() => {
 		setValue('amount', ((chargeableWeight * formValues.ratePerKg) || 0.0).toFixed(2));
@@ -157,7 +154,8 @@ function GenerateMAWB({
 			}
 			totalPackage += Number(dimensionObj.packages_count);
 		});
-		setValue('volumetricWeight', Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
+		setValue('volumetricWeight', viewDoc ? taskItem.volumetricWeight
+			: Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
 		setValue('totalPackagesCount', totalPackage || taskItem.totalPackagesCount);
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 
@@ -170,7 +168,7 @@ function GenerateMAWB({
 					<Breadcrumb>
 						<Breadcrumb.Item label={(
 							<div
-								onClick={() => setGenerate(false)}
+								onClick={() => { setGenerate(false); if (edit) { setEdit(false); } }}
 								role="link"
 								tabIndex={0}
 							>
@@ -235,7 +233,10 @@ function GenerateMAWB({
 											{!back ? (
 												<div className={styles.button_div}>
 													<Button
-														onClick={() => setGenerate(false)}
+														onClick={() => {
+															setGenerate(false);
+															if (edit) { setEdit(false); }
+														}}
 														themeType="secondary"
 														style={{ border: '1px solid #333' }}
 													>
