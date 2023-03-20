@@ -15,10 +15,10 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setE
 		url    : '/get_test_question_set',
 	}, { manual: true });
 
-	const getTestQuestionTest = async ({ questionToShow }) => {
+	const getTestQuestionTest = async ({ questionToShow, questionSetId:setId }) => {
 		try {
 			const res = await trigger({
-				params: { id: questionSetId },
+				params: { id: setId },
 			});
 
 			if (!res?.data?.question_count) {

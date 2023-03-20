@@ -234,11 +234,9 @@ function CreateQuestion({
 					) : null}
 				</div>
 
-				{isNewQuestion ? (
-					<div className={styles.delete_icon}>
-						<IcMCrossInCircle onClick={() => deleteQuestion()} width={20} height={20} />
-					</div>
-				) : null}
+				<div className={styles.delete_icon}>
+					<IcMCrossInCircle onClick={() => deleteQuestion()} width={20} height={20} />
+				</div>
 			</div>
 		</form>
 	);
