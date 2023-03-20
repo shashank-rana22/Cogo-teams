@@ -9,9 +9,9 @@ const apis = [
 		service_name : 'spot_search',
 	},
 	{
-		api          : 'create_checkout_service',
+		api          : 'create_spot_search',
 		access_type  : 'private',
-		service_name : 'checkout',
+		service_name : 'spot_search',
 	},
 	{
 		api          : 'get_insurance_country_supported',
