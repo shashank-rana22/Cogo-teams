@@ -48,6 +48,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'saas',
 	},
+	{
+		api          : 'get_insurance_list_countries',
+		access_type  : 'private',
+		service_name : 'saas',
+	},
 ];
 
 export default apis;
