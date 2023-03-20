@@ -5,8 +5,7 @@ import useGetSaasContainerSubscription from '../Tracking/hooks/useGetSaasContain
 import styles from "./styles.module.css";
 
 function Tracking({ shipment_data = {} }) {
-  const shipmentType = 'fcl_freight';
-  //shipment_data?.shipment_type || 
+  const shipmentType = shipment_data?.shipment_type || 'fcl_freight';
   const [containerNo, setContainerNo] = useState("");
 
   const { loading, data: list } = useGetSaasContainerSubscription({
@@ -39,7 +38,7 @@ function Tracking({ shipment_data = {} }) {
         shipmentId={shipment_data?.id}
         airwayBillNo={list?.airway_bill_no}
       />
-      <Body list={dataToRender} loading={loading} />
+      <Body list={dataToRender} loading={loading} shipmentType={shipmentType}/>
     </div>
   );
 }
