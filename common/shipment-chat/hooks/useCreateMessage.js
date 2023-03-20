@@ -14,6 +14,7 @@ const useCreateMessage = ({
 	subscribedUsers = [],
 	isStakeholder = true,
 	shipmentChatStakeholders = [],
+	setSelectedFile = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'create_chat_message',
@@ -68,6 +69,7 @@ const useCreateMessage = ({
 			if (!res.hasError) {
 				reset();
 				sendToRef?.current?.setText('');
+				setSelectedFile([]);
 			}
 		} catch (err) {
 			Toast.error(

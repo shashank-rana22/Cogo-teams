@@ -67,6 +67,7 @@ function Details({
 		subscribedUsers,
 		isStakeholder,
 		shipmentChatStakeholders,
+		setSelectedFile,
 	});
 
 	const contentData = formValues?.message?.split('\n').length;
