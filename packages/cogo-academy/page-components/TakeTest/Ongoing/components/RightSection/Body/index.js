@@ -1,13 +1,18 @@
+import { isEmpty } from '@cogoport/utils';
+
 import QuestionsCount from './QuestionsCount';
 import QuestionStats from './QuestionStats';
 import styles from './styles.module.css';
 
-function Body() {
+function Body({ data = [], loading }) {
+	if (loading || isEmpty(data)) {
+		return null;
+	}
 	return (
 		<div className={styles.container}>
-			<QuestionStats />
+			<QuestionStats data={data} />
 
-			<QuestionsCount />
+			<QuestionsCount data={data} loading={loading} />
 		</div>
 	);
 }

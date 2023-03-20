@@ -1,17 +1,37 @@
+import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
+
 import LeftSection from './components/LeftSection';
-// import RightSection from './components/RightSection';
+import RightSection from './components/RightSection';
+import useFetchQuestionsList from './hooks/useFetchQuestionList';
 import styles from './styles.module.css';
 
 function Ongoing() {
-	return (
+	const [currentQuestion, setCurrentQuestion] = useState(1);
+
+	const { loading, data = [] } = useFetchQuestionsList({ currentQuestion });
+
+	// console.log('asdfghjfghj::::', data);
+	return ((
 		<div className={styles.main_container}>
 			<div className={styles.left_container}>
-				<LeftSection />
+				<LeftSection
+					data={data}
+					loading={loading}
+					currentQuestion={currentQuestion}
+					setCurrentQuestion={setCurrentQuestion}
+				/>
 			</div>
 			<div className={styles.right_container}>
-				{/* <RightSection /> */}
+				<RightSection
+					data={data}
+					loading={loading}
+					currentQuestion={currentQuestion - 1}
+					setCurrentQuestion={setCurrentQuestion}
+				/>
 			</div>
 		</div>
+	)
 	);
 }
 
