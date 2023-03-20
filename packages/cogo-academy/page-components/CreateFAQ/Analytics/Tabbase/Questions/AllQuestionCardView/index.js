@@ -32,56 +32,48 @@ function AllQuestionCardView({ props = {} }) {
 	if (loading) return <AnalyticsLoader />;
 
 	return (
-		<div>
-			<div style={{ marginTop: '12px' }}>
-				<div className={styles.container}>
-					<div className={styles.pills_container}>
-						<Pill
-							size="xl"
-							color="#CFEAED"
-							style={{ fontWeight: '600' }}
-						>
-							All Questions
-						</Pill>
-
-						<div>
-							{Object.keys(PILL_MAPPING).map((key) => (
-								<Pill
-									key={key}
-									size="lg"
-									color="#F3FAFA"
-									style={{ fontWeight: '600' }}
-								>
-									{key}
-									:
-									{' '}
-									{PILL_MAPPING[key]}
-								</Pill>
-							))}
-						</div>
-					</div>
+		<div style={{ marginTop: '12px' }}>
+			<div className={styles.container}>
+				<div className={styles.pills_container}>
+					<Pill
+						size="xl"
+						color="#CFEAED"
+						style={{ fontWeight: '600' }}
+					>
+						All Questions
+					</Pill>
 
 					<div>
-
-						<Scroll props={props} />
-
-					</div>
-
-					<div className={styles.button_container}>
-						<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
-							ALL QUESTIONS
-							{!showQuestions
-								? <IcMArrowDown style={{ marginLeft: 4 }} />
-								: <IcMArrowUp style={{ marginLeft: 4, marginBottom: 2 }} />}
-						</Button>
+						{Object.keys(PILL_MAPPING).map((key) => (
+							<Pill
+								key={key}
+								size="lg"
+								color="#F3FAFA"
+								style={{ fontWeight: '600' }}
+							>
+								{key}
+								:
+								{' '}
+								{PILL_MAPPING[key]}
+							</Pill>
+						))}
 					</div>
 				</div>
 
-				{showQuestions ? <QuestionsList /> : null}
+				<Scroll props={props} />
+
+				<div className={styles.button_container}>
+					<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
+						ALL QUESTIONS
+						{!showQuestions
+							? <IcMArrowDown style={{ marginLeft: 4 }} />
+							: <IcMArrowUp style={{ marginLeft: 4, marginBottom: 2 }} />}
+					</Button>
+				</div>
 			</div>
 
+			{showQuestions ? <QuestionsList /> : null}
 		</div>
-
 	);
 }
 

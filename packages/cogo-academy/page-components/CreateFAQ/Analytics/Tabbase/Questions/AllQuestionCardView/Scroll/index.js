@@ -11,6 +11,7 @@ function ScrollBar({ props = {} }) {
 		trending_topics = [],
 		trending_tags = [],
 	} = props;
+
 	const CAROUSELDATA = [
 		{
 			key    : 'item1',
@@ -142,17 +143,15 @@ function ScrollBar({ props = {} }) {
 		},
 
 	];
+
 	return (
-		<div style={{ alignItems: 'center' }}>
-			<Carousel
-				size="lg"
-				slides={CAROUSELDATA}
-				showDots={false}
-				showArrow
-				isInfinite
-				style={{ maxWidth: '100%' }}
-			/>
-		</div>
+		<Carousel
+			size="lg"
+			slides={CAROUSELDATA}
+			showDots={false}
+			showArrow
+			isInfinite
+		/>
 	);
 }
 
