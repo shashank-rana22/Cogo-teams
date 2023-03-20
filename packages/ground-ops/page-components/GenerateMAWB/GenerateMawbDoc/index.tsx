@@ -257,7 +257,6 @@ function GenerateMawb({
 					/>
 					<ShipmentDetails
 						formData={filteredData}
-						taskItem={taskItem}
 						whiteout={whiteout}
 					/>
 					<ContainerDetails

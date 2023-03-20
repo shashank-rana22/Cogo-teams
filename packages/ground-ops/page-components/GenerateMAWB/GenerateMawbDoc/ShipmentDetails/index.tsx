@@ -9,11 +9,10 @@ interface NestedObj {
 
 interface Props {
 	formData?: NestedObj;
-	taskItem?: NestedObj;
 	whiteout?:boolean;
 }
 
-function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Props) {
+function ShipmentDetails({ formData = {}, whiteout = false }:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';
