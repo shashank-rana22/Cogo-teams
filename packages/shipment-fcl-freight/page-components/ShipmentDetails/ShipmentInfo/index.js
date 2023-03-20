@@ -10,7 +10,7 @@ function ShipmentInfo() {
 			Shipments
 			/
 			Shipment ID #
-			{shipment_data.serial_id}
+			{shipment_data?.serial_id}
 		</div>
 	);
 }
