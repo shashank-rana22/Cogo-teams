@@ -1,6 +1,3 @@
-import { ShipmentDetailContext } from '@cogoport/context';
-import { useContext } from 'react';
-
 import Assured from './Assured';
 import BLDetails from './BLDetails';
 import OverviewManageServices from './OverviewManageServices';
@@ -8,8 +5,8 @@ import Services from './Services';
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
-function Overview() {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+function Overview(shipment_data = {}) {
+	
 
 	return (
 		<div className={styles.container}>
