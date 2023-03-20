@@ -4,22 +4,17 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Published({ setSelectedVersion = () => {} }) {
-	const data = [
-		{
-			version_number : 3,
-			id             : 3,
-			status         : 'live',
-			last_updated   : '22-sep-2023',
-		},
-		{
-			version_number : 2,
-			id             : 2,
-			status         : 'draft',
-			last_updated   : '22 - sep - 2023',
-		},
-
-	];
+function Published({ setSelectedVersion = () => {}, version_details }) {
+	const data = [];
+	Object.keys(version_details).forEach((key) => {
+		if (key !== '') {
+			data.push({
+				version_number : key,
+				status         : ` ${version_details[key].status}`,
+				updated_at     : `${version_details[key].updated_at}`,
+			});
+		}
+	});
 
 	const columns = [
 		{
@@ -50,7 +45,7 @@ function Published({ setSelectedVersion = () => {} }) {
 		},
 		{
 			Header   : 'LAST UPDATED',
-			accessor : 'last_updated',
+			accessor : 'updated_at',
 		},
 
 	];
@@ -71,7 +66,7 @@ function Published({ setSelectedVersion = () => {} }) {
 				columns={columns}
 				data={data}
 				selectType="single"
-				onRowClick={(row) => { setSelectedVersion(row.id); }}
+				onRowClick={(row) => { setSelectedVersion(row.version_number); }}
 			/>
 
 		</div>

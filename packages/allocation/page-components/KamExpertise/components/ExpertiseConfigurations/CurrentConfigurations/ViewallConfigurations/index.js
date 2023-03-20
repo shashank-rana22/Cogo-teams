@@ -9,73 +9,9 @@ import styles from './styles.module.css';
 
 function ViewAllConfigurations() {
 	const router = useRouter();
-	const VERSION_CARDS = [
-		{
-			version_number : 4,
-			last_edit_by   : 'CogoParth',
-			last_modified  : new Date(),
-			status_value   : 'draft',
-			list           : [{
-				expertise_type      : 'customer_expertise',
-				items               : 9,
-				min_score_value     : 800,
-				high_priority_count : 20,
-			},
-			{
-				expertise_type      : 'customer_expertise',
-				items               : 9,
-				min_score_value     : 800,
-				high_priority_count : 20,
-			},
-			{
-				expertise_type      : 'customer_expertise',
-				items               : 9,
-				min_score_value     : 800,
-				high_priority_count : 20,
-			},
-			{
-				expertise_type      : 'customer_expertise',
-				items               : 9,
-				min_score_value     : 800,
-				high_priority_count : 20,
-			}],
-		},
-		{
-			version_number : 3,
-			last_edit_by   : 'CogoParth',
-			last_modified  : new Date(),
-			status_value   : 'live',
-			list           : [{
-				expertise_type      : 'customer_expertise',
-				items               : 9,
-				min_score_value     : 800,
-				high_priority_count : 20,
-			},
-			{
-				expertise_type      : 'customer_expertise',
-				items               : 9,
-				min_score_value     : 800,
-				high_priority_count : 20,
-			},
-			{
-				expertise_type      : 'customer_expertise',
-				items               : 9,
-				min_score_value     : 800,
-				high_priority_count : 20,
-			},
-			{
-				expertise_type      : 'customer_expertise',
-				items               : 9,
-				min_score_value     : 800,
-				high_priority_count : 20,
-			}],
-		},
-
-	];
 
 	const { listKamExpertiseCurrentConfigs = {} } = useGetKamExpertiseCurrentConfig();
-
-	console.log('list ', listKamExpertiseCurrentConfigs);
+	const VERSION_CARDS = listKamExpertiseCurrentConfigs?.list || [];
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise/configurations');

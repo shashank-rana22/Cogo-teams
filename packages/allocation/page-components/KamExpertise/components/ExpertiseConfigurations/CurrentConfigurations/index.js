@@ -11,15 +11,22 @@ function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
 
 	const { listKamExpertiseCurrentConfigs } = useGetKamExpertiseCurrentConfig();
 
-	console.log('lis', listKamExpertiseCurrentConfigs);
+	const data = listKamExpertiseCurrentConfigs?.list || [];
 
-	const VERSION_CARDS = listKamExpertiseCurrentConfigs?.list || [];
+	const listArray = data.filter((item) => item.status_value === 'draft' || item.status_value === 'live');
+	const VERSION_CARDS = listArray.reverse();
+
+	const audit_data = listKamExpertiseCurrentConfigs?.audit_data || {};
+
+	const version_details = listKamExpertiseCurrentConfigs?.version_list_details || {};
 
 	return (
 		<div>
 			<Header
 				selectedVersion={selectedVersion}
 				setSelectedVersion={setSelectedVersion}
+				audit_data={audit_data}
+				version_details={version_details}
 
 			/>
 
