@@ -1,0 +1,33 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	background: #fff;
+	border-radius: 6px;
+}
+
+.heading {
+	padding: 14px 0;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	color: #4f4f4f;
+}
+
+.tabs_container {
+	width: 100%;
+	height: 50vh;
+
+	:global .ui_tab_list_container {
+		border-top: 1px solid #e0e0e0 !important;
+		border-radius: 0 !important;
+		box-shadow: none !important;
+	}
+
+	:global .ui_tab_container {
+		border-right: 1px solid #e0e0e0 !important;
+	}
+}

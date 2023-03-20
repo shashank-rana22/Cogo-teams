@@ -19,15 +19,17 @@ const STATS_MAPPING = {
 		label : 'Marked for Review',
 		color : '#CED1ED',
 	},
-	not_visited: {
-		key   : 'not_visited',
+	not_viewed: {
+		key   : 'not_viewed',
 		count : 24,
-		label : 'Not Visited',
+		label : 'Not Viewed',
 		color : '#FDFBF6',
 	},
 };
 
-function QuestionStats() {
+function QuestionStats({ data = [] }) {
+	// console.log('asdfghj', data);
+
 	return (
 		<div className={styles.container}>
 			{Object.values(STATS_MAPPING).map((stats) => {
