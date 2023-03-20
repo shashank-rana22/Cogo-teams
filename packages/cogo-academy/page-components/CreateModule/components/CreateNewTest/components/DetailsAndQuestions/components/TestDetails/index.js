@@ -47,7 +47,7 @@ function CreateNewTest({ control, errors }) {
 													className={styles[`element_${item.name}}`]}
 												/>
 
-												{errors[name]
+												{errors[item?.name]
 													? <div className={styles.error_msg}>This is required</div> : null}
 											</div>
 										);

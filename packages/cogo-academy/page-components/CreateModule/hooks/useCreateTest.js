@@ -8,7 +8,7 @@ function useCreateTest({ setTestId, setActiveStepper }) {
 		url    : 'create_test',
 		method : 'POST',
 	}, { manual: true });
-	const createTest = async ({ data, idArray }) => {
+	const createTest = async ({ data, idArray, next }) => {
 		try {
 			const res = await trigger({
 				data: {
@@ -16,15 +16,19 @@ function useCreateTest({ setTestId, setActiveStepper }) {
 					set_wise_distribution : [
 						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'case_study' })),
 						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'stand_alone' }))],
-					test_duration: '1hr',
 				},
 			});
 			setTestId(res?.data?.id);
-			const as = `/learning/faq/create/test-module/create-test?id=${res?.data?.id}`;
-			const href = `/learning/faq/create/test-module/create-test?id=${res?.data?.id}`;
-			router.push(href, as);
-			setActiveStepper('review_and_criteria');
-			Toast.success('Created Successfully');
+			if (next === 'draft') {
+				router.push('/learning/faq/create/test-module');
+				Toast.success('Draft Saved Successfully');
+			} else {
+				const as = `/learning/faq/create/test-module/create-test?id=${res?.data?.id}`;
+				const href = `/learning/faq/create/test-module/create-test?id=${res?.data?.id}`;
+				router.push(href, as);
+				setActiveStepper('review_and_criteria');
+				Toast.success('Created Successfully');
+			}
 		} catch (err) {
 			Toast.error(err?.message || 'Something went wrong');
 		}
