@@ -431,6 +431,7 @@ function Shipment() {
 					style={{ width: '200px' }}
 					size="sm"
 				/>
+
 				<MultiSelect
 					value={value4}
 					onChange={setValue4}
@@ -550,6 +551,21 @@ function Shipment() {
 							/>
 						</div>
 					</div>
+					{/* {
+					controls.map((controlItem) => {
+						const el = { ...controlItem };
+
+						return (
+							<AsyncSelectController
+								{...el}
+								key={el.name}
+								control={control}
+								id={`${el.name}_input`}
+								className={styles.asynccontroller}
+							/>
+						);
+					})
+				} */}
 					<div className={styles.leftpadding}>
 						<div className={styles.microfilternames}> Origin country</div>
 						<ul className={styles.ul}>

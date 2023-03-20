@@ -19,6 +19,7 @@ function Report() {
 	// const [firstRender, setFirstRender] = useState(false);
 	// console.log(general.query.hscodes.split(','));
 	console.log(info);
+	// info.sort((a, b) => b.share - a.share);
 
 	// setHscodearr(general.query.hscodes.split(','));
 
@@ -163,7 +164,7 @@ function Report() {
 			]}
 			/>
 
-		</div>,
+            </div>,
 		january   : (info[item].January !== undefined) ? info[item].January.toLocaleString('en-IN') : 0,
 		february  : (info[item].February !== undefined) ? info[item].February.toLocaleString('en-IN') : 0,
 		march     : (info[item].March !== undefined) ? info[item].March.toLocaleString('en-IN') : 0,
@@ -203,7 +204,7 @@ function Report() {
 				<div className={styles.trendingovertime}>
 					Trending Over Time:
 				</div>
-				<div style={{ height: '400px' }}>
+				<div style={{ height: '400px', border: '2px solid black', marginTop: '30px', marginBottom: '40px' }}>
 					<ResponsiveLine
 						data={linedata}
 						margin={{ top: 50, right: 110, bottom: 50, left: 100 }}

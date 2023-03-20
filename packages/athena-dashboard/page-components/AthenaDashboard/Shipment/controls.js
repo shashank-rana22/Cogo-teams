@@ -6,7 +6,7 @@ const controls = [
 		asyncKey    : 'countries',
 		valueKey    : 'name',
 		initialCall : true,
-		multiple    : false,
+		multiple    : true,
 		params      : {
 			filters: {
 				type: ['country'],
