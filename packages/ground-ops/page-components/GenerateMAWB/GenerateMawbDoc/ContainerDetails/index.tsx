@@ -10,14 +10,12 @@ interface NestedObj {
 
 interface Props {
 	formData?: NestedObj;
-	taskItem?: NestedObj;
 	chargeableWeight?: number;
 	whiteout?:boolean;
 }
 
 function ContainerDetails({
 	formData = {},
-	taskItem = {},
 	chargeableWeight,
 	whiteout = false,
 }:Props) {
@@ -117,7 +115,7 @@ function ContainerDetails({
 								${styles.block_a_container_top_package}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{taskItem?.totalPackagesCount}</p>
+								<p style={{ fontSize: 13 }}>{formData?.totalPackagesCount}</p>
 							</div>
 							<div className={cl`
 								${styles.flex} 
@@ -187,7 +185,7 @@ function ContainerDetails({
 							${styles.block_a_container_bottom_package}
 						`}
 						>
-							<p className={styles.font_style} style={{ fontSize: 13 }}>{taskItem?.totalPackagesCount}</p>
+							<p className={styles.font_style} style={{ fontSize: 13 }}>{formData?.totalPackagesCount}</p>
 						</div>
 					</div>
 
@@ -231,7 +229,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								<p className={styles.font_style} style={{ fontSize: 13 }}>{taskItem?.weight}</p>
+								<p className={styles.font_style} style={{ fontSize: 13 }}>{formData?.weight}</p>
 							</div>
 						</div>
 						<div className={cl`
@@ -246,7 +244,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								<p className={styles.font_style} style={{ fontSize: 13 }}>{taskItem?.weight}</p>
+								<p className={styles.font_style} style={{ fontSize: 13 }}>{formData?.weight}</p>
 							</div>
 						</div>
 					</div>

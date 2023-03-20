@@ -265,7 +265,6 @@ function GenerateMawb({
 					/>
 					<ContainerDetails
 						formData={filteredData}
-						taskItem={taskItem}
 						chargeableWeight={chargeableWeight}
 						whiteout={whiteout}
 					/>
