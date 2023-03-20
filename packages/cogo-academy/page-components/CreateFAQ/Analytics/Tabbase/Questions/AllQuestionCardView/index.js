@@ -8,7 +8,6 @@ import QuestionsList from './QuestionList';
 import Scroll from './Scroll';
 import styles from './styles.module.css';
 
-
 function AllQuestionCardView({ props = {} }) {
 	const {
 		question_stats = '',
@@ -62,11 +61,11 @@ function AllQuestionCardView({ props = {} }) {
 						</div>
 					</div>
 
-				<div style={{ display: 'flex' }}>
+					<div>
 
-					<Scroll props={props} />
+						<Scroll props={props} />
 
-				</div>
+					</div>
 
 					<div className={styles.button_container}>
 						<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>

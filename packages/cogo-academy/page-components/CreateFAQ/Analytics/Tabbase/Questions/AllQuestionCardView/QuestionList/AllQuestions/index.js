@@ -77,7 +77,7 @@ function AllQuestions(props) {
 			<div style={{ backgroundColor: 'white' }}>
 				<StyledTable columns={columns} layoutType="table" data={listdata} />
 				<Pagination
-					style={{ float: 'right' }}
+					style={{ display: 'flex', justifyContent: 'flex-end' }}
 					type="table"
 					currentPage={page}
 					totalItems={total_count}

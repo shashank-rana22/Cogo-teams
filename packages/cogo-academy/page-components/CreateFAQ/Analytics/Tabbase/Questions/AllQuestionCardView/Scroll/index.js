@@ -8,8 +8,10 @@ function ScrollBar({ props = {} }) {
 		active_audiences = [],
 		most_viewed_questions = [],
 		popular_questions = [],
-		trending_topics,
+		trending_topics = [],
+		trending_tags = [],
 	} = props;
+	console.log(props);
 	const CAROUSELDATA = [
 		{
 			key    : 'item1',
@@ -56,7 +58,7 @@ function ScrollBar({ props = {} }) {
 					/>
 					<ViewCards
 						cardHeading="Trending Tags"
-						subHeading={trending_topics}
+						subHeading={trending_tags}
 					/>
 				</div>
 			),
@@ -77,7 +79,7 @@ function ScrollBar({ props = {} }) {
 					/>
 					<ViewCards
 						cardHeading="Trending Tags"
-						subHeading={trending_topics}
+						subHeading={trending_tags}
 					/>
 					<ViewCards
 						cardHeading="Topic from which Most
@@ -98,7 +100,7 @@ function ScrollBar({ props = {} }) {
 					/>
 					<ViewCards
 						cardHeading="Trending Tags"
-						subHeading={trending_topics}
+						subHeading={trending_tags}
 					/>
 					<ViewCards
 						cardHeading="Topic from which Most
@@ -119,7 +121,7 @@ function ScrollBar({ props = {} }) {
 				<div style={{ display: 'flex' }}>
 					<ViewCards
 						cardHeading="Trending Tags"
-						subHeading={trending_topics}
+						subHeading={trending_tags}
 					/>
 					<ViewCards
 						cardHeading="Topic from which Most
@@ -142,8 +144,15 @@ function ScrollBar({ props = {} }) {
 
 	];
 	return (
-		<div>
-			<Carousel size="lg" slides={CAROUSELDATA} showDots={false} showArrow />
+		<div style={{ alignItems: 'center' }}>
+			<Carousel
+				size="lg"
+				slides={CAROUSELDATA}
+				showDots={false}
+				showArrow
+				isInfinite
+				style={{ maxWidth: '100%' }}
+			/>
 		</div>
 	);
 }

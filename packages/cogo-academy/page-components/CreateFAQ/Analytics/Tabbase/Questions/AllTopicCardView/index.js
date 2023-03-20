@@ -20,7 +20,7 @@ function AllTopicCardView({ date = '', setDate = () => {} }) {
 	return (
 		<div>
 			{(data?.list || []).map((items) => (<AllTopic key={items.id} {...items} />))}
-			<div style={{ float: 'right' }}>
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 				<Pagination
 					type="table"
 					currentPage={page}
