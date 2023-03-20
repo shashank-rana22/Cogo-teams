@@ -52,7 +52,7 @@ const footerImages = [
 	'https://cogoport-production.sgp1.digitaloceanspaces.com/7c2328f811865365b3c50d0fc23849fc/copy_12.png',
 ];
 
-const backPage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/6cb104f946c85403b742cc07fd6e63b1/back.jpg';
+const backPage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg';
 
 function GenerateMawb({
 	taskItem = {},
