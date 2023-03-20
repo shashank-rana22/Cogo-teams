@@ -132,6 +132,7 @@ function GenerateMAWB({
 				: carrierOtherChargesCode);
 			setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 			setValue('shipperSignature', taskItem.customer_name);
+			setValue('amountOfInsurance', 'NIL');
 		}
 	}, []);
 

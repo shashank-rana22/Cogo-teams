@@ -357,7 +357,7 @@ function ContainerDetails({
 							`}
 								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
-								<p style={{ fontSize: 13 }}>Q</p>
+								<p style={{ fontSize: 13, textTransform: 'uppercase' }}>{formData.class}</p>
 							</div>
 							<div className={cl`
 								${styles.flex} 

@@ -306,7 +306,7 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					`}
 									>
 										<p style={{ fontSize: 13 }}>
-											{taskItem?.destinationPortCode}
+											{formData?.destinationPortCode}
 										</p>
 									</div>
 								</p>
@@ -853,7 +853,7 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					${styles.amount_of_insurance_bottom}
 				`}
 						>
-							<p style={{ fontSize: 15 }}>NIL</p>
+							<p style={{ fontSize: 15 }}>{formData.amountOfInsurance}</p>
 						</div>
 					</div>
 					<div
