@@ -4,16 +4,16 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
+import { getPrefillValue, getDateForPayload } from '../../../../common/utils/dateFormatter';
 import controls from '../EditSchedule/controls';
-import { getDateDefaultValue } from '../utils/formatters';
 
 export default function useEditServiceSchedule({
 	setShow = () => {},
 	timelineData = [],
 }) {
-	const { shipment_data, primary_service, refetch: shipmentRefetch } = useContext(ShipmentDetailContext);
+	const { servicesList, primary_service, refetch: shipmentRefetch } = useContext(ShipmentDetailContext);
 
-	const [departureDate, setDepartureDate] = useState(getDateDefaultValue(primary_service?.schedule_departure));
+	const [departureDate, setDepartureDate] = useState(getPrefillValue(primary_service?.schedule_departure));
 
 	const [{ loading }, updateShipmentService] = useRequest({
 		url    : 'update_shipment_service',
@@ -28,8 +28,8 @@ export default function useEditServiceSchedule({
 
 	useEffect(() => {
 		const { schedule_departure } = formValues || {};
-		console.log(schedule_departure, departureDate);
-		if (schedule_departure.toDateString() !== departureDate.toDateString()) {
+
+		if (schedule_departure?.toDateString() !== departureDate?.toDateString()) {
 			setDepartureDate(schedule_departure);
 
 			const newDefaultValues = {};
@@ -37,16 +37,19 @@ export default function useEditServiceSchedule({
 				newDefaultValues[name] = (name === 'schedule_arrival'
 					? formValues[name] < schedule_departure
 					: formValues[name] > schedule_departure)
-					? '' : formValues[name];
+					? null : formValues[name];
 			});
 			reset(newDefaultValues);
 		}
 	}, [formValues, departureDate, reset, finalControls]);
 
 	const updateData = async (values) => {
-		const mainServiceIds = shipment_data?.all_services
-			?.filter((item) => item?.service_type === primary_service?.service_name)
-			?.map((service) => service?.id);
+		const timezonedValues = {};
+		(Object.entries(values).forEach(([key, val]) => { timezonedValues[key] = getDateForPayload(val); }));
+
+		const mainServiceIds = (servicesList || [])
+			.filter((item) => item?.service_type === primary_service?.service_type)
+			.map((service) => service?.id);
 
 		const payloadForUpdateShipment = {
 			ids                 : mainServiceIds,
@@ -54,9 +57,9 @@ export default function useEditServiceSchedule({
 			data                : ['vessel_arrived'].includes(
 				primary_service?.state,
 			)
-				? { schedule_arrival: values?.schedule_arrival }
-				: { ...values },
-			service_type: primary_service?.service_name,
+				? { schedule_arrival: timezonedValues?.schedule_arrival }
+				: { ...timezonedValues },
+			service_type: primary_service?.service_type,
 		};
 
 		try {

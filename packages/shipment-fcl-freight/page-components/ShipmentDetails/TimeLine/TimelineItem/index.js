@@ -4,7 +4,7 @@ import { IcMTick } from '@cogoport/icons-react';
 import { getDate } from '../utils/formatters';
 
 import {
-	container, connecting_line, circle, small, big,
+	container, connecting_line, circle, small, big, deviated,
 	display_milestone, completed, ellipsis, tooltip_content, label, value,
 } from './styles.module.css';
 
@@ -31,7 +31,7 @@ export default function TimelineItem({ item, isLast = false, consecutivelyComple
 
 			{actual_completed_on ? (
 				<>
-					<div className={label}>Actual Completed On</div>
+					<div className={`${label} ${deviated}`}>Actual Completed On</div>
 					<div className={value}>{getDate(actual_completed_on)}</div>
 				</>
 			) : null}
