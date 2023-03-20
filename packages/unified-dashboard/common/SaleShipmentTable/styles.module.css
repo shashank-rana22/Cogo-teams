@@ -34,6 +34,11 @@
 	width: 100px;
 }
 
+.arrow{
+	margin: 0px 4px;
+	min-width: 16px;
+}
+
 @media (max-width: 768px) {
   
 	.card_wrapper {
