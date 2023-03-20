@@ -21,6 +21,8 @@ function useGetAsyncOptions({
 	}, { manual: !(initialCall || query) });
 	const options = data?.list || [];
 
+	const optionValues = options.map((item) => item[valueKey]);
+
 	const [{ loading: loadingSingle }, triggerSingle] = useRequest({
 		url    : endpoint,
 		method : 'GET',
@@ -29,7 +31,7 @@ function useGetAsyncOptions({
 		storeoptions.push(...options);
 		setstoreoptions(storeoptions);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [options]);
+	}, [JSON.stringify(optionValues)]);
 
 	const onSearch = (inputValue) => {
 		debounceQuery(inputValue);

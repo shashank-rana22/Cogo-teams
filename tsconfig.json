@@ -29,5 +29,10 @@
 , "packages/unified-dashboard/common/FilterContentComponents"  ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "off"
+  }
 }
+

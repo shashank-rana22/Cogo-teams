@@ -1,0 +1,49 @@
+.feed_content {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.feed_head {
+	margin: 6px 0;
+	font-size: 12px;
+}
+
+.pill_div {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	min-width: 500px;
+}
+
+.pills {
+	display: flex;
+	padding: 2px 5px;
+	margin: 0 8px 5px 0;
+	cursor: pointer;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+
+	&:hover {
+		background: #cfeaed;
+		border: 1px solid #acdadf;
+	}
+}
+
+.active_pill {
+	background: #cfeaed;
+	border: 1px solid #acdadf;
+	border-radius: 4px;
+}
+
+.feed_text_area {
+	display: flex;
+	width: 100%;
+	margin: 6px 0;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 8px;
+}

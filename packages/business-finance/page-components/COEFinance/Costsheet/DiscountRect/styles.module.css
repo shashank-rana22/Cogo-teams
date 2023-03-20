@@ -1,0 +1,22 @@
+.discountcontainer {
+	display: flex;
+	width: var(--width);
+	padding: var(--padding);
+	margin-top: var(--margin-top);
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.label {
+	min-width: var(--headingwidth);
+	padding-left: 10px;
+	font-size: 14px;
+	font-weight: 500;
+	border-right: 2px solid #f68b21;
+}
+
+.stat {
+	margin: 0 25px;
+	font-size: 14px;
+	font-weight: 500;
+}

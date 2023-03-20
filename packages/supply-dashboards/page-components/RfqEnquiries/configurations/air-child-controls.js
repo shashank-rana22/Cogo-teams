@@ -25,7 +25,7 @@ const childControls = ({ heading = '', charge_code_name = '' }) => 	{
 			},
 		],
 		buttonText         : 'Add Line Items',
-		noDeleteButtonTill : 1,
+		noDeleteButtonTill : 0,
 		controls           : [
 			{
 				name        : 'code',
@@ -57,7 +57,7 @@ const childControls = ({ heading = '', charge_code_name = '' }) => 	{
 			{
 				name        : 'price',
 				span        : 2,
-				type        : 'text',
+				type        : 'number',
 				label       : 'Price',
 				placeholder : 'Amount',
 				rules       : { required: 'This is required', min: 0 },
@@ -65,7 +65,7 @@ const childControls = ({ heading = '', charge_code_name = '' }) => 	{
 			{
 				name        : 'min_price',
 				label       : 'Minimum Price',
-				type        : 'text',
+				type        : 'number',
 				span        : 2,
 				min         : 0,
 				placeholder : 'minimum price',

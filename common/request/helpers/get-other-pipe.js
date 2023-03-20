@@ -37,6 +37,7 @@ const getOtherApiPipe = (url, authorizationparameters, getStoreState) => {
 					}
 				});
 			}
+
 			if (navigation && defaultScope) {
 				if (defaultView) {
 					return {
