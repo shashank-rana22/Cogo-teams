@@ -48,7 +48,7 @@ const useListChats = ({
 		}
 	};
 	useEffect(() => {
-		debounceQuery(searchValue);
+		debounceQuery(searchValue?.toUpperCase());
 	}, [debounceQuery, searchValue]);
 	useEffect(() => {
 		if (assigned_chat) {

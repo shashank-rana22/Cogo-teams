@@ -63,7 +63,7 @@ function MessageList({
 						prefix={<IcMSearchlight width={18} height={18} />}
 						placeholder="Search here..."
 						value={searchValue}
-						onChange={(val) => setSearchValue(val)}
+						onChange={(val) => setSearchValue(val?.trim())}
 					/>
 				</div>
 				<div className={styles.filter_icon}>
@@ -112,6 +112,7 @@ function MessageList({
 							user_name = '',
 							organization_name = '',
 							user_type = '',
+							search_user_name = '',
 						} = userData || {};
 
 						const lastActive = new Date(item.new_message_sent_at);
@@ -145,9 +146,12 @@ function MessageList({
 												imageSource={item.image}
 											/>
 											<div className={styles.user_details}>
-												<Tooltip content={startCase(user_name) || 'User'} placement="top">
+												<Tooltip
+													content={startCase(search_user_name) || 'User'}
+													placement="top"
+												>
 													<div className={styles.user_name}>
-														{startCase(user_name) || 'User'}
+														{startCase(search_user_name) || 'User'}
 													</div>
 												</Tooltip>
 

@@ -35,11 +35,16 @@ function Header({
 	disableButton = '',
 }) {
 	const [isVisible, setIsVisible] = useState(false);
-	const {
-		chat_tags = [],
-	} = activeMessageCard || {};
+	const { chat_tags = [] } = activeMessageCard || {};
 
-	const { user_name = '', business_name = '', mobile_no = '', channel_type, user_type } = formattedData || {};
+	const {
+		user_name = '',
+		business_name = '',
+		mobile_no = '',
+		channel_type,
+		user_type,
+		search_user_name = '',
+	} = formattedData || {};
 
 	const getLowerLabel = () => {
 		if (user_name?.includes('anonymous')) {
@@ -77,20 +82,32 @@ function Header({
 			<Button
 				themeType="secondary"
 				size="md"
-				disabled={disableAssignButton || disableButton === 'auto_assign'}
+				disabled={
+                    disableAssignButton || disableButton === 'auto_assign'
+                }
 				className={styles.styled_buttons}
 				onClick={() => assignButtonAction('stop_and_assign')}
-				loading={showBotMessages && assignLoading && disableButton === 'stop_and_assign'}
+				loading={
+                    showBotMessages
+                    && assignLoading
+                    && disableButton === 'stop_and_assign'
+                }
 			>
 				Assign to me
 			</Button>
 			<Button
 				themeType="secondary"
 				size="md"
-				disabled={disableAssignButton || disableButton === 'stop_and_assign'}
+				disabled={
+                    disableAssignButton || disableButton === 'stop_and_assign'
+                }
 				className={styles.styled_buttons}
 				onClick={() => assignButtonAction('auto_assign')}
-				loading={showBotMessages && assignLoading && disableButton === 'auto_assign'}
+				loading={
+                    showBotMessages
+                    && assignLoading
+                    && disableButton === 'auto_assign'
+                }
 			>
 				Auto Assign
 			</Button>
@@ -118,8 +135,14 @@ function Header({
 						hasPermissionToEdit={hasPermissionToEdit}
 					/>
 				</div>
-				<div className={cl`${styles.flex} ${disableAssignButton ? styles.disabled_button : ''}`}>
-					{!isEmpty(filteredSpectators) && <Assignes filteredSpectators={filteredSpectators} />}
+				<div
+					className={cl`${styles.flex} ${
+						disableAssignButton ? styles.disabled_button : ''
+					}`}
+				>
+					{!isEmpty(filteredSpectators) && (
+						<Assignes filteredSpectators={filteredSpectators} />
+					)}
 					{activeAgentName && (
 						<div className={styles.active_agent}>
 							<AssigneeAvatar
@@ -161,7 +184,14 @@ function Header({
 				<div className={styles.flex}>
 					<UserAvatar type={channel_type} />
 					<div>
-						<div className={styles.name}>{startCase(user_name) || 'User'}</div>
+						<div className={styles.name}>
+							{startCase(user_name) || 'User'}
+							<span className={styles.span_whatsapp_name}>
+								(
+								{search_user_name || 'User'}
+								)
+							</span>
+						</div>
 						<div className={styles.phone_number}>
 							{getLowerLabel()}
 						</div>

@@ -38,9 +38,10 @@ const getActiveCardDetails = (data = {}) => {
 			user_name,
 			mobile_no,
 			lead_user_id,
-			user_id: null,
+			user_id          : null,
 			channel_type,
 			user_type,
+			search_user_name : user_name,
 		};
 	}
 
@@ -63,6 +64,7 @@ const getActiveCardDetails = (data = {}) => {
 		channel_type,
 		email,
 		user_type,
+		search_user_name  : user_name,
 	};
 };
 export default getActiveCardDetails;
