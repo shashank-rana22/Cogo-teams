@@ -1,6 +1,7 @@
 import { TabPanel, Tabs } from '@cogoport/components';
-import React, { useState } from 'react';
-import { useContext } from 'react';
+import { ShipmentDetailContext } from '@cogoport/context';
+import React, { useState, useContext } from 'react';
+
 import Documents from './Documents';
 import Emails from './Emails';
 import PurchaseInvoice from './Invoicing/PurchaseInvoice';
@@ -8,7 +9,6 @@ import SalesInvoice from './Invoicing/SalesInvoice';
 import Overview from './Overview';
 import TimelineAndTask from './TimelineAndTasks';
 import Tracking from './Tracking';
-import { ShipmentDetailContext } from '@cogoport/context';
 
 function Tab() {
 	const [activeTab, setActiveTab] = useState('overview');
@@ -24,7 +24,7 @@ function Tab() {
 				onChange={setActiveTab}
 			>
 				<TabPanel name="overview" title="Overview">
-					<Overview shipment_data={shipment_data}/>
+					<Overview shipment_data={shipment_data} />
 				</TabPanel>
 				<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 					<TimelineAndTask />
@@ -42,7 +42,7 @@ function Tab() {
 					<Emails />
 				</TabPanel>
 				<TabPanel name="tracking" title="Tracking">
-					<Tracking shipment_data={shipment_data}/>
+					<Tracking shipment_data={shipment_data} />
 				</TabPanel>
 			</Tabs>
 		</div>

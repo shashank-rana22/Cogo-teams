@@ -19,10 +19,7 @@ function ShipmentHeader() {
 		if (po_number) {
 			return (
 				<div className={styles.po_number}>
-					PO Number
-					<span style={{ fontWeight: '700', marginLeft: '4px' }}>
-						{po_number}
-					</span>
+					PO Number : {po_number}
 				</div>
 			);
 		}

@@ -62,8 +62,9 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs })
 						{!showWalletDocs && (
 							<Popover
 								interactive
-								placement="bottom-end"
+								placement="bottom"
 								theme="light"
+								trigger="click"
 								content={content(doc)}
 							>
 								<div className={styles.dots}>

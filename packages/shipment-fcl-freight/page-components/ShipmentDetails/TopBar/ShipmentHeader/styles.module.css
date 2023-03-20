@@ -10,6 +10,9 @@
 
 .po_number {
   white-space: nowrap;
+  color: #979797;
+  font-weight: 400;
+  font-size: 12px;
 }
 
 .customer {
