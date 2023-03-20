@@ -36,7 +36,7 @@ function ReviewAndCriteria() {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<IcMArrowBack width={20} height={20} onClick={navigate} />
-				<div className={styles.title}> Review and Set Criteria </div>
+				<div className={styles.title}>New Test</div>
 			</div>
 
 			<div className={styles.subcontainer}>
