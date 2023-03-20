@@ -335,7 +335,7 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 												`}
 											>
 												<p style={{ fontSize: 12 }}>
-													{taskItem.airlineIataCode}
+													{formData.airlineIataCode}
 												</p>
 											</div>
 										</p>
