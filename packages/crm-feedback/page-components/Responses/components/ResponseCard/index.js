@@ -31,10 +31,8 @@ function ResponseCard({
 					<div className={styles.card_item_address}>
 						<div className={styles.item_label}>Full Address</div>
 						<div className={styles.item_value}>
-							Some Value which is very very very big
+							{user?.address || '___'}
 						</div>
-
-						{/* {user.work_scopes ? <Workscopes work_scopes={user.work_scopes} /> : '-'} */}
 					</div>
 				)}
 
@@ -44,19 +42,15 @@ function ResponseCard({
 					return (
 						<div className={activeTab === 'address' ? (styles.address_card_item) : (styles.card_item)}>
 							<div className={styles.item_label}>{item[key]}</div>
-							{/* <div className={styles.item_value}>
-								Some Value
-							</div> */}
-
 							{['mobile_number', 'whatsapp_number', 'alternate_mobile_number'].includes(key) ? (
 								<div className={styles.item_value}>
 									{user[MOBILE_NUMBERS_MAPPING[key]]}
 									-
-									{user?.[key] || '-'}
+									{user?.[key] || '___'}
 								</div>
 							) : (
 								<div className={styles.item_value}>
-									{user?.[key] || '-'}
+									{user?.[key] || '___'}
 								</div>
 							)}
 						</div>
@@ -67,7 +61,7 @@ function ResponseCard({
 					<div className={styles.card_item}>
 						<div className={styles.item_label}>Workscopes</div>
 
-						{user.work_scopes ? <Workscopes work_scopes={user.work_scopes} /> : '-'}
+						{user.work_scopes ? <Workscopes work_scopes={user.work_scopes} /> : '___'}
 					</div>
 				)}
 			</div>

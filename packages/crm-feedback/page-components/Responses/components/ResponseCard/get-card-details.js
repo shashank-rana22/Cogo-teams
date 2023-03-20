@@ -22,7 +22,6 @@ export const CARD_LABELS_MAPPING = {
 
 	},
 	address: {
-		// address    : 'Full Address',
 		city       : 'City',
 		state      : 'State',
 		country    : 'Country',

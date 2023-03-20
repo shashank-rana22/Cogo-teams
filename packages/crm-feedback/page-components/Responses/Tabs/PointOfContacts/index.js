@@ -1,29 +1,22 @@
+import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
 import ResponseCard from '../../components/ResponseCard';
 import LoadingState from '../../components/ResponseCard/LoadingState';
+import useResponsesList from '../../hooks/useResponsesList';
 
 import styles from './styles.module.css';
 
 function PointOfContacts({ activeTab = '' }) {
-	const list = [
-		{
-			id                            : '1',
-			name                          : 'Anmol Bansal',
-			email                         : 'anmol.bansal@cogoport.com',
-			alternate_email               : 'abanmolbansal5@gmail.com',
-			mobile_number                 : '9899909357',
-			alternate_mobile_number       : '9818999507',
-			whatsapp_number               : '9899909357',
-			mobile_country_code           : '+91',
-			whatsapp_country_code         : '+91',
-			alternate_mobile_country_code : '+91',
-			work_scopes                   : ['Frontend Developer', 'UI Designer', 'UX Designer', 'Product Manager'],
-		},
-	];
+	const {
+		data = [],
+		loading = false,
+		getNextPage = () => {},
+		paginationData = {},
+	} = useResponsesList({ activeTab });
 
-	const loading = false;
+	const { page, page_limit, total_count } = paginationData;
 
 	if (loading) {
 		return (
@@ -31,7 +24,7 @@ function PointOfContacts({ activeTab = '' }) {
 		);
 	}
 
-	if (isEmpty(list) && !loading) {
+	if (isEmpty(data) && !loading) {
 		return (
 			<div className={styles.empty}>
 				<EmptyState height="280px" width="auto" flexDirection="column" textSize="20px" />
@@ -41,17 +34,30 @@ function PointOfContacts({ activeTab = '' }) {
 	}
 
 	return (
-		<div className={styles.container}>
-			{(list).map((user, index) => (
-				<ResponseCard
-					key={user.id}
-					user={user}
-					index={index}
+		<>
+			<div className={styles.container}>
+				{(data).map((user, index) => (
+					<ResponseCard
+						key={user.id}
+						user={user}
+						index={index}
 					// loading={loading}
-					activeTab={activeTab}
+						activeTab={activeTab}
+					/>
+				))}
+			</div>
+
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={(val) => getNextPage({ page: val })}
 				/>
-			))}
-		</div>
+			</div>
+		</>
+
 	);
 }
 

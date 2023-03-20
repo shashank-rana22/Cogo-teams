@@ -1,23 +1,24 @@
+import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
 import ResponseCard from '../../components/ResponseCard';
 import LoadingState from '../../components/ResponseCard/LoadingState';
+import useResponsesList from '../../hooks/useResponsesList';
 
 import styles from './styles.module.css';
 
 function Address({ activeTab = '' }) {
-	const loading = false;
-	const list = [
-		{
-			address    : 'House No 3121, Sector 23, Gurugram, Haryana',
-			city       : 'Gurugram',
-			state      : 'Haryana',
-			country    : 'India',
-			pincode    : '122017',
-			tax_number : 'ABPKJ345F',
-		},
-	];
+	const {
+		data = [],
+		loading = false,
+		getNextPage = () => {},
+		paginationData = {},
+	} = useResponsesList({ activeTab });
+
+	console.log('data::', data);
+
+	const { page, page_limit, total_count } = paginationData;
 
 	if (loading) {
 		return (
@@ -25,7 +26,7 @@ function Address({ activeTab = '' }) {
 		);
 	}
 
-	if (isEmpty(list) && !loading) {
+	if (isEmpty(data) && !loading) {
 		return (
 			<div className={styles.empty}>
 				<EmptyState height="280px" width="auto" flexDirection="column" textSize="20px" />
@@ -35,18 +36,29 @@ function Address({ activeTab = '' }) {
 	}
 
 	return (
-		<div className={styles.container}>
-			{/* {(list).map((user, index) => (
-				<ResponseCard
-					key={user.id}
-					user={user}
-					index={index}
+		<>
+			<div className={styles.container}>
+				{(data).map((user, index) => (
+					<ResponseCard
+						key={user.id}
+						user={user}
+						index={index}
 					// loading={loading}
-					activeTab={activeTab}
+						activeTab={activeTab}
+					/>
+				))}
+			</div>
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={(val) => getNextPage({ page: val })}
 				/>
-			))} */}
-			<ResponseCard activeTab={activeTab} />
-		</div>
+			</div>
+		</>
+
 	);
 }
 
