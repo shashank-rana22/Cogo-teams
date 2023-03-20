@@ -86,8 +86,6 @@ function SavedQuestionDetails({
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
 				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
-
-				{/* <IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} /> */}
 			</div>
 
 			{item.id === caseToShow
@@ -102,8 +100,6 @@ function SavedQuestionDetails({
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
 				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
-
-				{/* <IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} /> */}
 			</div>
 
 			{item.id === caseToShow
@@ -160,11 +156,16 @@ function SavedQuestionDetails({
 			Header   : 'Question/Case',
 			id       : 'question_text',
 			accessor : (item) => (
-				<section>
-					{item?.question_type !== 'case_study'
-						? item?.question_text
-						: getCaseQuestion(item)}
-				</section>
+				<Tooltip content={item?.question_type !== 'case_study'
+					? item?.question_text
+					: getCaseQuestion(item)}
+				>
+					<div className={styles.question_div}>
+						{item?.question_type !== 'case_study'
+							? item?.question_text
+							: getCaseQuestion(item)}
+					</div>
+				</Tooltip>
 			),
 		},
 		{

@@ -11,7 +11,6 @@ import styles from './styles.module.css';
 function CreateQuestionSet() {
 	const router = useRouter();
 
-	const [questionSetId, setQuestionSetId] = useState('');
 	const [savedQuestionDetails, setSavedQuestionDetails] = useState([]);
 	const [editDetails, setEditDetails] = useState({});
 
@@ -21,10 +20,12 @@ function CreateQuestionSet() {
 		loading,
 		data,
 		getTestQuestionTest,
+		questionSetId,
+		setQuestionSetId,
 	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails });
 
 	return (
-		<div className={styles.container}>
+		<div key={loading} className={styles.container}>
 			<div className={styles.header}>
 				<IcMArrowBack
 					style={{ cursor: 'pointer' }}

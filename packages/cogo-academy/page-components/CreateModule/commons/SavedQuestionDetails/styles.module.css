@@ -87,6 +87,13 @@
 	flex-direction: column;
 }
 
+.question_div {
+	max-width: 600px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .options > div:hover {
 	background-color: #fffce6;
 }

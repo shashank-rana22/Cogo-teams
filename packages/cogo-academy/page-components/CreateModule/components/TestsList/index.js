@@ -1,8 +1,8 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-// eslint-disable-next-line import/no-named-as-default
-import useGetTestList from '../../hooks/useGetList';
+import useGetTestList from '../../hooks/useGetTestList';
+import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
 
 import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
@@ -10,7 +10,15 @@ import styles from './styles.module.css';
 function TestsList() {
 	const [activeTab, setActiveTab] = useState('tests');
 
-	const { data, loading, fetchList, setParams } = useGetTestList({ activeTab });
+	const { data, loading, fetchList, setParams, params } = useGetTestList();
+
+	const {
+		data: questionData,
+		loading:questionListLoading,
+		fetchList: questionListRefetch,
+		setParams: setQuestionListParams,
+		params: questionListParams,
+	} = useGetTestQuestionSets();
 
 	const componentMapping = {
 		tests: {
@@ -22,21 +30,25 @@ function TestsList() {
 				loading,
 				fetchList,
 				setParams,
+				activeTab,
+				params,
 
 			},
 		},
-		draft: {
-			key            : 'question_sets',
+		question_set: {
+			key            : 'question_set',
 			title          : 'Question Set',
 			component      : ListComponent,
 			componentProps : {
-				data,
-				loading,
-				fetchList,
-				setParams,
+				data      : questionData,
+				loading   : questionListLoading,
+				fetchList : questionListRefetch,
+				setParams : setQuestionListParams,
+				activeTab,
+				params    : questionListParams,
 			},
 		},
-		inactive: {
+		all_questions: {
 			key            : 'all_questions',
 			title          : 'All Questions',
 			component      : ListComponent,
@@ -45,8 +57,16 @@ function TestsList() {
 				loading,
 				fetchList,
 				setParams,
+				activeTab,
+				params,
 			},
 		},
+	};
+
+	const handleChangeTab = (val) => {
+		componentMapping[val].componentProps.fetchList();
+
+		setActiveTab(val);
 	};
 
 	return (
@@ -57,7 +77,7 @@ function TestsList() {
 					activeTab={activeTab}
 					fullWidth
 					themeType="primary"
-					onChange={setActiveTab}
+					onChange={handleChangeTab}
 					className={styles.tabs}
 
 				>

@@ -1,26 +1,24 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useGetList({ activeTab }) {
-	const [{ loading = false }, trigger] = useRequest({
-		url    : `list_${activeTab}`,
+function useGetTestList() {
+	const [{ loading = false, data = {} }, trigger] = useRequest({
+		url    : 'list_tests',
 		method : 'GET',
 	}, { manual: true });
 
-	const [listData, setListData] = useState('');
 	const [params, setParams] = useState({
-		page: 1,
+		page    : 1,
+		filters : {
+			status: 'active',
+		},
 	});
 
-	const fetchList = async () => {
+	const fetchList = () => {
 		try {
-			const res = await trigger({
-				params: {
-					...params,
-				},
-
+			trigger({
+				params,
 			});
-			setListData(res.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -28,14 +26,15 @@ function useGetList({ activeTab }) {
 	useEffect(() => {
 		fetchList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [params, activeTab]);
+	}, [params]);
 
 	return {
-		data: listData || {},
+		data,
 		loading,
 		fetchList,
+		params,
 		setParams,
 	};
 }
 
-export default useGetList;
+export default useGetTestList;

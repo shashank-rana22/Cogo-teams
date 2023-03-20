@@ -35,6 +35,7 @@ function useCreateQuestionSet() {
 		questionSetId,
 		setEditDetails,
 		setShowForm,
+		from,
 	}) => {
 		const triggerToUse = triggerMapping?.[type];
 
@@ -48,14 +49,18 @@ function useCreateQuestionSet() {
 
 			Toast.success(`Question set ${actionNameMapping[type]} successfully`);
 
-			if (type === 'delete') {
+			if (type === 'delete' && from !== 'test') {
 				router.push('/learning/faq/create/test-module');
 			}
 
-			setShowForm(false);
-			setEditDetails({});
-			getTestQuestionTest({ questionSetId: res?.data?.id });
-			setQuestionSetId(res?.data?.id);
+			if (from === 'test') {
+				getTestQuestionTest();
+			} else {
+				setShowForm(false);
+				setEditDetails({});
+				getTestQuestionTest({ questionSetId: res?.data?.id });
+				setQuestionSetId(res?.data?.id);
+			}
 		} catch (err) {
 			console.log(err);
 		}
