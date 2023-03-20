@@ -47,7 +47,6 @@ const useAddRate = ({
 	}, { manual: true });
 
 	const onAddRate = async (data) => {
-		console.log('onAddRate', data);
 		const addedService = (item.services || []).find((service) => {
 			if (filters?.service_type?.includes('?')) {
 				return service.id === filters?.service_type?.split('?')?.[1];

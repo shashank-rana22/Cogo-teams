@@ -4,6 +4,7 @@ import { startCase, format } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React, { useState } from 'react';
 
+import EmptyState from '../../../../../common/EmptyState';
 import useDeleteDocument from '../../../../../hooks/useDeleteWallet';
 import useListWallet from '../../../../../hooks/useListWallet';
 
@@ -41,11 +42,20 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs })
 		</div>
 	);
 
-	let contentToShow = [...Array(forModal ? 3 : 2)].map(() => (
-		<Loader forModal={forModal} />
-	));
-	if (!loading && (data?.list || []).length) {
-		contentToShow = (
+	const contentToShow = () => {
+		console.log("hii ");
+		// if (loading) {
+		// console.log("hii 1");
+		// 	return [...Array(forModal ? 3 : 2)].map(() => (
+		// 		<Loader forModal={forModal} />
+		// 	));
+		// }
+		// if (!loading && data?.list?.length === 0) {
+		// 	console.log('in empty');
+		// 	return <EmptyState />;
+		// }
+		console.log("hii 2");
+		return (
 			<>
 				{(data?.list || []).map((doc) => (
 					<div
@@ -101,15 +111,15 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs })
 				))}
 			</>
 		);
-	}
+	};
 
 	return (
 		<div className={styles.container}>
 			<Tabs
 				activeTab={activeWallet}
-				fullWidth
 				themeType="primary"
 				onChange={setActiveWallet}
+				className={styles.tabs}
 			>
 				<TabPanel name="trade_documents" title="Trade Documents" />
 

@@ -42,7 +42,6 @@ const Card = ({
 		return allExtraItem.map((extraItem) => {
 			const isChecked = extraItem?.document_type === docType;
 			const receivedViaEmail = !isChecked && extraItem?.entity_type === docType;
-			console.log(isChecked, 'checkkk', item?.pendingItem);
 			const showUploadButton = item?.pendingItem ? 'Upload' : '';
 
 			return (

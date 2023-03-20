@@ -67,7 +67,7 @@ function InvoicingParties({
 				});
 			})();
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	}, [trigger, params, bookingType]);
 

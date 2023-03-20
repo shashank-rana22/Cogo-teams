@@ -15,7 +15,7 @@ function useGetContainerDetails(item = {}) {
 					params: { filters: { shipment_id: item?.shipment_id } },
 				});
 			} catch (err) {
-				console.log(err);
+				// console.log(err);
 			}
 		})();
 	}, [item?.shipment_id, containerDetailTrigger]);

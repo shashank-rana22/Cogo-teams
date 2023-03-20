@@ -72,6 +72,7 @@ function Header({
 				offLabel="Check List"
 				onLabel="Wallet"
 				value={activeToggle}
+				className={styles.custom_toggle}
 				onChange={() => setActiveToggle(!activeToggle)}
 			/>
 			{/* <div className={styles.line} style={{ width: '100%' }} /> */}

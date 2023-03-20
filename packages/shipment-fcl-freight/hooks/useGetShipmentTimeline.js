@@ -147,8 +147,6 @@ function useGetShipmentTimeLine() {
 		}
 	}), [shipment_id, trigger]);
 
-	console.log({ loading });
-
 	return {
 		loading,
 		// timelineData: data || [],

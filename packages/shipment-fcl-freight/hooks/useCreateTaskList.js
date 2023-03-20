@@ -50,8 +50,6 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 				}
 			});
 
-			console.log(pushedItems, 'pushed items 1');
-
 			extras = (extras || []).map((child) => ({
 				...child,
 				task       : `upload_${child.document_type}`,
@@ -64,11 +62,8 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 			const uploadedList = [];
 			(realData || []).forEach((child) => {
 				const doc_type = getDocType(child?.task);
-				console.log(doc_type, 'doc_type pushed items 1', pushedItems);
 				if (!pushedItems.includes(doc_type)) {
 					pushedItems.push(doc_type);
-					console.log(doc_type, 'doc_type');
-
 					if (shipmentDocTypes.includes(doc_type)) {
 						uploadedList.push(child);
 					} else if (pendingTask.includes(doc_type)) {
@@ -93,8 +88,6 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 		JSON.stringify(shipmentDocuments?.list),
 
 	]);
-
-	console.log(pushedItems, 'fguyfguygr yefeuyfr yewuy efyuewdtu');
 
 	return {
 		filters,
