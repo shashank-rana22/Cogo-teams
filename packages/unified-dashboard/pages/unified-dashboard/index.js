@@ -1,1 +1,3 @@
-export { default } from '@cogoport/unified-dashboard/page-components';
+import UnifiedDashboard from '../../page-components';
+
+export default UnifiedDashboard;

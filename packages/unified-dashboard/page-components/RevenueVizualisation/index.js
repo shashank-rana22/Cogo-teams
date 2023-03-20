@@ -33,8 +33,6 @@ function RevenueVisualization({ headerFilters }) {
 
 	const isDataSelected = selectedBarData !== undefined;
 
-	console.log(isDataSelected, 'isdataSelected');
-
 	useEffect(() => {
 		setSelectedBarData();
 		setSelectedPieData();
