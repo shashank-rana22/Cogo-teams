@@ -88,7 +88,6 @@ function ReviewAndCriteria() {
 					onClick={() => {
 						const values = watch();
 						updateTest({ test_id, values });
-						console.log('values::', values);
 					}}
 				>
 					Publish Test

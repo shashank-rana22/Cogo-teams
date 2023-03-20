@@ -9,7 +9,7 @@ function useGetTestQuestionSets() {
 
 	const [listData, setListData] = useState('');
 	const [params, setParams] = useState({
-
+		page: 1,
 	});
 
 	const fetchList = async () => {
