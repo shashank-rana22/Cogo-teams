@@ -131,13 +131,15 @@ function Details({
 							theme="light"
 							interactive
 							content={(
-								<FileUploader
-									value={selectedFile}
-									onChange={setSelectedFile}
-									showProgress
-									draggable
-									multiple
-								/>
+								<div className={styles.uploader}>
+									<FileUploader
+										value={selectedFile}
+										onChange={setSelectedFile}
+										showProgress
+										draggable
+										multiple
+									/>
+								</div>
 							)}
 						>
 							<div className={styles.icon_wrap}>
