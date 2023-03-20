@@ -30,7 +30,7 @@ const cogoAcademy = {
 	'/[partner_id]/learning/faq/answer': {
 		navigation: 'cogo_academy-faq',
 	},
-	'/[partner_id]/learning/tests/results': {
+	'/[partner_id]/learning/tests/dashboard': {
 		navigation: 'cogo_academy-tests',
 	},
 	'/[partner_id]/learning/tests/results/[test_id]': {

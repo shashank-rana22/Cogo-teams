@@ -208,6 +208,18 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 	],
+	tests: [
+		{
+			api          : 'list_tests',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_user_performance',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+	],
 };
 
 export default faq;

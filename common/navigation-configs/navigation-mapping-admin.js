@@ -2019,7 +2019,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/learning/test-results',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.faq,
+				possible_apis : apis.tests,
 			},
 		],
 		module_type: 'crm',

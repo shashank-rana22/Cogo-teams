@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Router } from '@cogoport/next';
 
@@ -17,7 +18,7 @@ function CreateNewTest({ control, errors }) {
 		<div>
 			<div className={styles.header}>
 				<IcMArrowBack className={styles.back_icon} onClick={() => onClickBack()} width={20} height={20} />
-				<div className={styles.title}>New Test</div>
+				<div className={styles.title} onClick={() => onClickBack()}>New Test</div>
 			</div>
 
 			<div className={styles.container}>
@@ -26,7 +27,7 @@ function CreateNewTest({ control, errors }) {
 
 					const Element = getElementController(type);
 
-					if (name === 'select-entity-usergroups') {
+					if (name === 'select_entity_usergroups') {
 						return (
 							<div className={styles.control_container}>
 								<div className={`${styles.label}`}>

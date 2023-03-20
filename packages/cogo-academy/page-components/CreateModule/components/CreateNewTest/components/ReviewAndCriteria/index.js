@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Pill, Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
@@ -12,7 +13,7 @@ import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
-function ReviewAndCriteria() {
+function ReviewAndCriteria({ setActiveStepper }) {
 	const { control, formState:{ errors }, handleSubmit } = useForm();
 	const { updateTest } = useUpdateTest();
 	const router = useRouter();
@@ -24,8 +25,9 @@ function ReviewAndCriteria() {
 	} = useGetTest();
 
 	const navigate = () => {
-		const href = '/learning/faq/create/';
+		const href = '/learning/test-module/create-test';
 		router.push(href, href);
+		setActiveStepper('details_and_questions');
 	};
 
 	useEffect(() => {
@@ -36,7 +38,7 @@ function ReviewAndCriteria() {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<IcMArrowBack width={20} height={20} onClick={navigate} />
-				<div className={styles.title}>New Test</div>
+				<div className={styles.title} onClick={navigate}>New Test</div>
 			</div>
 
 			<div className={styles.subcontainer}>
