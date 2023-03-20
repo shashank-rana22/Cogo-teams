@@ -1,12 +1,3 @@
-// import
-// const {
-// 	data,
-// 	get,
-// } = useGetEntityT();
-// useEffect(() => {
-// 	getEntityTypes();
-// }, []);
-
 const getControls = () => [
 	{
 		name        : 'name',

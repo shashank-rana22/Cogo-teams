@@ -42,8 +42,8 @@ function CreateNewTest({ control, errors }) {
 													{...inp}
 													className={styles[`element_${inp.name}}`]}
 												/>
-												{errors[name]
-													? <div className={styles.error_msg}>This is required</div> : null}
+												{errors[inp.name]
+												&& <div className={styles.error_msg}>This is required</div>}
 											</div>
 										);
 									})}

@@ -1,17 +1,21 @@
-const getControls = (id, value) => [
+const getControls = (id, val) => [
 	{
-		name         : `${id}q`,
-		type         : 'input',
-		placeholder  : 'Questions',
-		defaultValue : '0',
-		rules        : { required: 'This is required', max: value },
+		name        : `${id}q`,
+		type        : 'number',
+		placeholder : 'Questions',
+		rules       : {
+			required : { value: true, message: 'This is required' },
+			validate : (value) => (value > val ? 'must be <= available questions' : true),
+		},
 	},
 	{
-		name         : `${id}c`,
-		type         : 'input',
-		defaultValue : '0',
-		placeholder  : 'Cases',
-		rules        : { required: 'This is required', max: value },
+		name        : `${id}c`,
+		type        : 'number',
+		placeholder : 'Cases',
+		rules       : {
+			required : { value: true, message: 'This is required' },
+			validate : (value) => (value > val ? 'must be <= available cases' : true),
+		},
 	},
 
 ];

@@ -1,5 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Toast, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useCreateTest from '../../../../hooks/useCreateTest';
@@ -16,11 +17,11 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
 
-	const { control, formState:{ errors }, watch } = useForm();
+	const { control, formState:{ errors }, handleSubmit } = useForm();
 
 	return (
 		<div className={styles.container}>
-			<TestDetails control={control} watch={watch} errors={errors} />
+			<TestDetails control={control} errors={errors} />
 
 			<div className={styles.btn_container}>
 				{!showQuestionSet ? (
@@ -56,20 +57,25 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 						size="md"
 						themeType="tertiary"
 						style={{ marginRight: '10px' }}
-						onClick={() => {
-							const data = watch();
-							createTest({ data, idArray });
-						}}
+						onClick={
+							handleSubmit((values) => {
+								if (!isEmpty(errors)) Toast.error('Fill all required fields');
+								createTest({ data: values, idArray, next: 'draft' });
+							})
+						}
 					>
 						Save As Draft
 					</Button>
 					<Button
+						loading={loading}
 						size="md"
 						themeType="primary"
-						onClick={() => {
-							const data = watch();
-							createTest({ data, idArray });
-						}}
+						onClick={
+							handleSubmit((values) => {
+								if (!isEmpty(errors)) Toast.error('Fill all required fields');
+								createTest({ data: values, idArray, next: 'criteria' });
+							})
+						}
 					>
 						Review And Set Validity
 					</Button>
