@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import { isSameDay } from '@cogoport/utils';
+import dynamic from 'next/dynamic';
+import React, { useState, useEffect } from 'react';
+
 import styles from './styles.module.css';
 
 const CogoMaps = dynamic(() => import('./map'), { ssr: false });
@@ -36,18 +37,16 @@ function TrackingMap({
 				x1 = parseFloat(inputPoints[0].lat);
 				x3 = parseFloat(inputPoints[1].lat);
 				x2 = Math.max(x1, x3) + 20;
-				const lat_x =
-					(1 - t) * ((1 - t) * x1 + t * x2) + t * ((1 - t) * x2 + t * x3);
+				const lat_x =					(1 - t) * ((1 - t) * x1 + t * x2) + t * ((1 - t) * x2 + t * x3);
 
 				x1 = parseFloat(inputPoints[0].lng);
 				x3 = parseFloat(inputPoints[1].lng);
 				x2 = (x1 + x3) / 2;
-				const lng_x =
-					(1 - t) * ((1 - t) * x1 + t * x2) + t * ((1 - t) * x2 + t * x3);
+				const lng_x =					(1 - t) * ((1 - t) * x1 + t * x2) + t * ((1 - t) * x2 + t * x3);
 
 				bezierPoints.push({
-					lat: lat_x,
-					lng: lng_x,
+					lat : lat_x,
+					lng : lng_x,
 				});
 			} catch (err) {
 				t = 1;
@@ -61,11 +60,12 @@ function TrackingMap({
 				...prevCompletedPoints,
 				...bezierPoints,
 			]);
-		} else
+		} else {
 			setRemainingPoints((prevRemainingPoints) => [
 				...prevRemainingPoints,
 				...bezierPoints,
 			]);
+		}
 	};
 
 	const isPastOrPresentDay = (inputDate) => {
@@ -86,8 +86,8 @@ function TrackingMap({
 							p?.arrival_long,
 							p?.departure_lat,
 							p?.departure_long,
-						].includes(null) &&
-						![
+						].includes(null)
+						&& ![
 							p.arrival_lat,
 							p.arrival_long,
 							p.departure_lat,
@@ -98,12 +98,12 @@ function TrackingMap({
 							p?.actual_arrival_time,
 						);
 						const source = {
-							lat: p?.departure_lat,
-							lng: p?.departure_long,
+							lat : p?.departure_lat,
+							lng : p?.departure_long,
 						};
 						const dest = {
-							lat: p?.arrival_lat,
-							lng: p?.arrival_long,
+							lat : p?.arrival_lat,
+							lng : p?.arrival_long,
 						};
 						if (isCurrentMilestonePastOrPresent) {
 							setCurrentMilestone(dest);
@@ -133,15 +133,15 @@ function TrackingMap({
 					setRemainingPoints((prevPoints) => [
 						...prevPoints,
 						{
-							lat: c?.[1],
-							lng: c?.[0],
+							lat : c?.[1],
+							lng : c?.[0],
 						},
 					]);
 					setCurvePoints((prevPoints) => [
 						...prevPoints,
 						{
-							lat: c?.[1],
-							lng: c?.[0],
+							lat : c?.[1],
+							lng : c?.[0],
 						},
 					]);
 					return true;
