@@ -34,6 +34,7 @@ function useAllAudience({ date = '' }) {
 						audience_wise_questions_required : true,
 						audience_wise_stats_required     : true,
 						audience_wise_topics_required    : true,
+						current_audience_data_required   : true,
 					},
 				});
 			} catch (error) {

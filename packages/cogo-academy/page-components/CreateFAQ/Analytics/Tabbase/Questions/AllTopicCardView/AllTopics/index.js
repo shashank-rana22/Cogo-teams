@@ -27,7 +27,6 @@ function AllTopic(props) {
 	} = current_topic_data;
 	const { total_likes = 0, total_dislikes = 0 } = topic_stats[0];
 
-	console.log(props, 'faq');
 	const [showQuestions, setShowQuestions] = useState(false);
 	const truncate = (str) => (str?.length > 40 ? `${str.substring(0, 38)}...` : str);
 

@@ -11,7 +11,6 @@ function ScrollBar({ props = {} }) {
 		trending_topics = [],
 		trending_tags = [],
 	} = props;
-	console.log(props);
 	const CAROUSELDATA = [
 		{
 			key    : 'item1',

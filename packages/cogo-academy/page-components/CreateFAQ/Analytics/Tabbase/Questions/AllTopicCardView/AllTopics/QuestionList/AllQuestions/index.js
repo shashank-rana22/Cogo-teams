@@ -13,7 +13,6 @@ function AllQuestions({ id = '' }) {
 
 	const topicId = id;
 	const props = useListFaqQuestions({ topicId });
-	console.log(props, 'props');
 	const { paginationData, page, setPage } = props;
 	const { page_limit, total_count } = paginationData;
 
