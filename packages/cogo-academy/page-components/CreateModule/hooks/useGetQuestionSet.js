@@ -19,7 +19,6 @@ function useGetTestList() {
 					...params,
 				},
 			});
-			console.log('resdata:: ', res.data);
 			setListData(res.data);
 		} catch (error) {
 			console.log(error);

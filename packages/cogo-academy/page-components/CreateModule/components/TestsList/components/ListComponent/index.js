@@ -9,13 +9,7 @@ import styles from './styles.module.css';
 // import useUpdateServiceBundle from './useUpdateServiceBundle';
 
 function ListComponent({ data, loading, fetchList:refetchListServiceBundle, setParams }) {
-	// const router = useRouter();
-
 	const { page = 0, page_limit: pageLimit = 0, total_count = 0, list } = data || {};
-
-	// const { onDelete } = useUpdateServiceBundle({ refetchListServiceBundle });
-
-	// const formatDate = (date) => format(date, 'dd MMM yyyy');
 
 	const columns = [
 		{
@@ -166,21 +160,6 @@ function ListComponent({ data, loading, fetchList:refetchListServiceBundle, setP
 		},
 	];
 
-	// if (currTab === 'draft') {
-	// 	columns.splice(1, 1);
-	// }
-
-	// if (data?.length === 0) {
-	// 	return (
-	// 		<div className={styles.container}>
-	// 			<div> You don&apos;t have any Bundles yet</div>
-	// 			<div className={styles.text}>Create one now!</div>
-	// 			<Button onClick={() => router.push('/service-bundling/create')} themeType="secondary">
-	// 				Create Bundle +
-	// 			</Button>
-	// 		</div>
-	// 	);
-	// }
 	return (
 		<div className={styles.table_container}>
 			<Table
@@ -190,7 +169,7 @@ function ListComponent({ data, loading, fetchList:refetchListServiceBundle, setP
 				loading={loading}
 			/>
 
-			{/* {total_count > 10 ? (
+			{total_count > 10 ? (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
@@ -200,7 +179,7 @@ function ListComponent({ data, loading, fetchList:refetchListServiceBundle, setP
 						onPageChange={(val) => setParams({ page: val })}
 					/>
 				</div>
-			) : null} */}
+			) : null}
 
 		</div>
 	);

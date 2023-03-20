@@ -68,7 +68,6 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 						themeType="primary"
 						onClick={() => {
 							const data = watch();
-							console.log('data:: ', data);
 							createTest({ data, idArray });
 						}}
 					>

@@ -31,9 +31,6 @@
 }
 
 .left_button_container {
-	display: flex;
-	gap: 8px;
-	justify-content: center;
 	width: 168px;
 	margin-left: 16px;
 
@@ -43,4 +40,11 @@
 			height: 24px;
 		}
 	}
+}
+
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
 }

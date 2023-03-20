@@ -10,7 +10,7 @@ const getControls = () => [
 		label       : 'Duration(in min)',
 		type        : 'number',
 		placeholder : '0',
-		rules       : { required: 'This is required', max: 60 },
+		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'maximum_attempts',

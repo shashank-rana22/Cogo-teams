@@ -2,7 +2,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import/no-named-as-default
-import useGetTestList from '../../hooks/useGetTestList';
+import useGetTestList from '../../hooks/useGetList';
 
 import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function TestsList() {
 	const [activeTab, setActiveTab] = useState('tests');
 
-	const { data, loading, fetchList, setParams } = useGetTestList();
+	const { data, loading, fetchList, setParams } = useGetTestList({ activeTab });
 
 	const componentMapping = {
 		tests: {
@@ -26,7 +26,7 @@ function TestsList() {
 			},
 		},
 		draft: {
-			key            : 'question_set',
+			key            : 'question_sets',
 			title          : 'Question Set',
 			component      : ListComponent,
 			componentProps : {
