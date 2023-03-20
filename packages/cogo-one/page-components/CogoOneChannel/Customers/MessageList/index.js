@@ -103,7 +103,7 @@ function MessageList({
 
 						const lastActive = new Date(item.new_message_sent_at);
 						const checkActiveCard = activeCardId === item?.id;
-
+						const searchName = search_user_name?.toLowerCase() || '';
 						const showOrganization = () => {
 							if ((user_name?.toLowerCase() || '').includes('anonymous')) {
 								return startCase(PLATFORM_MAPPING[user_type] || '');
@@ -131,11 +131,11 @@ function MessageList({
 											/>
 											<div className={styles.user_details}>
 												<Tooltip
-													content={startCase(search_user_name) || 'User'}
+													content={startCase(searchName) || 'User'}
 													placement="top"
 												>
 													<div className={styles.user_name}>
-														{startCase(search_user_name) || 'User'}
+														{startCase(searchName) || 'User'}
 													</div>
 												</Tooltip>
 
