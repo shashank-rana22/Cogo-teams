@@ -55,8 +55,8 @@
 }
 
 .bold {
+	margin: 0 8px;
 	font-weight: 600;
-	margin: 0px 8px;
 }
 
 .answer_key {
