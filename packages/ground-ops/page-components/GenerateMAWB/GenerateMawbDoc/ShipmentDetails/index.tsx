@@ -575,7 +575,9 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 12, color: tempColor }}>P</p>
+											<p style={{ fontSize: 12, color: tempColor }}>
+												{formData.paymentTerm === 'prepaid' && 'P'}
+											</p>
 										</div>
 									</div>
 									<div className={cl`
@@ -601,7 +603,9 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 8 }} />
+											<p style={{ fontSize: 12, color: tempColor }}>
+												{formData.paymentTerm === 'collect' && 'C'}
+											</p>
 										</div>
 									</div>
 								</div>
@@ -655,7 +659,9 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 12, color: tempColor }}>P</p>
+											<p style={{ fontSize: 12, color: tempColor }}>
+												{formData.paymentTerm === 'prepaid' && 'P'}
+											</p>
 										</div>
 									</div>
 									<div className={cl`
@@ -682,7 +688,9 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 8 }} />
+											<p style={{ fontSize: 12, color: tempColor }}>
+												{formData.paymentTerm === 'collect' && 'C'}
+											</p>
 										</div>
 									</div>
 								</div>
