@@ -10,7 +10,7 @@ import getControls from '../../../../configurations/get-add-conditions-controls'
 import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mapping';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
 import useCreateAllocationKamExpertiseEventScoring from '../../../../hooks/useCreateAllocationKamExpertiseEventScoring';
-import useGetKamExpertiseScore from '../../../../hooks/useGetKamExpertiseScore';
+import useGetExpertiseParameters from '../../../../hooks/useGetExpertiseParameters';
 import LoadingState from '../LoadingState';
 
 import ExpertiseParameters from './ExpertiseParameters';
@@ -63,7 +63,7 @@ function KamExpertiseScoreConfig({ selectedVersion }) {
 		setAddConditionModal({});
 	};
 
-	const { data, loading, refetch } = useGetKamExpertiseScore({ selectedVersion });
+	const { data, loading, refetch } = useGetExpertiseParameters({ selectedVersion });
 
 	const { list = [], audit_data: auditData = {} } = data || {};
 

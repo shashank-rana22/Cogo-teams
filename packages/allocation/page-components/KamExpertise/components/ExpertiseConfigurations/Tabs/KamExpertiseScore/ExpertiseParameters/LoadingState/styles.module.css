@@ -9,3 +9,13 @@
     flex-direction: column;
 }
 
+.single_control{
+    display: flex;
+    flex-direction: column;
+}
+
+.lower_container{
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+}
