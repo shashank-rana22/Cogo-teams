@@ -158,7 +158,8 @@ function GenerateMAWB({
 			}
 			totalPackage += Number(dimensionObj.packages_count);
 		});
-		setValue('volumetricWeight', Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
+		setValue('volumetricWeight', taskItem.volumetricWeight
+		|| Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
 		setValue('totalPackagesCount', totalPackage || taskItem.totalPackagesCount);
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 
