@@ -1,3 +1,5 @@
+import { cl } from '@cogoport/components';
+
 import MailConversation from './MailConversation';
 import Messages from './Messages';
 import styles from './styles.module.css';
@@ -15,7 +17,7 @@ function Conversations({
 	activeMail = {},
 }) {
 	return (
-		<div className={styles.container}>
+		<div className={cl`${activeTab === 'mail' ? styles.mail_div : styles.container}`}>
 			{activeTab === 'message' && (
 				<Messages
 					activeMessageCard={activeMessageCard}

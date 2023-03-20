@@ -8,7 +8,7 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function MailConversation({ activeMail }) {
-	const { data = {}, loading = false } = useListMailDetails({ activeMail });
+	const { data = {}, loading } = useListMailDetails({ activeMail });
 
 	const {
 		// bodyPreview = '',

@@ -2,7 +2,7 @@ import { usePublicRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 function useListMailDetails({ activeMail = {} }) {
-	const [{ data }, trigger] = usePublicRequest({
+	const [{ data, loading }, trigger] = usePublicRequest({
 		url    : 'https://lens.dev.cogoport.io/get_mail',
 		method : 'get',
 	}, { manual: true });
@@ -28,6 +28,7 @@ function useListMailDetails({ activeMail = {} }) {
 	return {
 		data,
 		getEmail,
+		loading,
 	};
 }
 
