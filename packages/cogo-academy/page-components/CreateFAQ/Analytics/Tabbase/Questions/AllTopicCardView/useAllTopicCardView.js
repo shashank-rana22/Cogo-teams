@@ -10,7 +10,7 @@ function useAllTopicCardView({ date = '' }) {
 	const [activeTab, setActiveTab] = useState(topicId || 'All Topics');
 	const [page, setPage] = useState(1);
 
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ data, loading = false }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_faq_topics',
 	}, { manual: true });

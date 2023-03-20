@@ -1,5 +1,7 @@
 import { Pagination } from '@cogoport/components';
 
+import AnalyticsLoader from '../../../../../../commons/AnalyticsLoader';
+
 import AllTopic from './AllTopics';
 import useAllTopicCardView from './useAllTopicCardView';
 
@@ -10,10 +12,14 @@ function AllTopicCardView({ date = '', setDate = () => {} }) {
 		page_limit,
 		total_count,
 		setPage = () => {},
+		loading,
 	} = props;
+
+	if (loading) return <AnalyticsLoader />;
+
 	return (
 		<div>
-			{data?.list?.map((items) => (<AllTopic props={items} />))}
+			{(data?.list || []).map((items) => (<AllTopic key={items.id} {...items} />))}
 			<div style={{ float: 'right' }}>
 				<Pagination
 					type="table"
