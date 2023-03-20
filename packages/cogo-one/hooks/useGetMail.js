@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 function useListMailDetails({ activeMail = {} }) {
 	const [{ data }, trigger] = usePublicRequest({
-		url    : 'https://lens.dev.cogoport.io/get_mail',
+		url    : `${process.env.MAIL_BASE_URL}/get_mail`,
 		method : 'get',
 	}, { manual: true });
 

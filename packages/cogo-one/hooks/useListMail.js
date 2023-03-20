@@ -5,7 +5,7 @@ function useListMail({ activeSelect }) {
 	const [pagination, setPagination] = useState(1);
 
 	const [{ data, loading }, trigger] = usePublicRequest({
-		url    : 'https://lens.dev.cogoport.io/list_mails',
+		url    : `${process.env.MAIL_BASE_URL}/list_mails`,
 		method : 'get',
 	}, { manual: true });
 
