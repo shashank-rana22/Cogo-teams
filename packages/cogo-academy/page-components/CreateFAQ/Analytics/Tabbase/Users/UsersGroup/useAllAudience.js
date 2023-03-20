@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-function useAllAudience({ date = '', setDate = () => {} }) {
+function useAllAudience({ date = '' }) {
 	const { general = {} } = useSelector((state) => state);
 	const [page, setPage] = useState(1);
 	const { startDate, endDate } = date;
