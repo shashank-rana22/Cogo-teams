@@ -2,9 +2,10 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-function useAllAudience() {
+function useAllAudience({ date = '', setDate = () => {} }) {
 	const { general = {} } = useSelector((state) => state);
 	const [page, setPage] = useState(1);
+	const { startDate, endDate } = date;
 
 	const { query } = general;
 
@@ -21,6 +22,11 @@ function useAllAudience() {
 			try {
 				await trigger({
 					params: {
+						filters: {
+							created_at_greater_than : startDate || undefined,
+							created_at_less_than    : endDate || undefined,
+
+						},
 						page,
 						page_limit                       : 10 || undefined,
 						pagination_data_required         : true,
@@ -34,10 +40,10 @@ function useAllAudience() {
 				console.log('error :: ', error);
 			}
 		},
-		[page, trigger],
+		[endDate, page, startDate, trigger],
 	);
 
-	useEffect(() => { fetchFaqTopic(); }, [page, fetchFaqTopic]);
+	useEffect(() => { fetchFaqTopic(); }, [page, fetchFaqTopic, startDate, endDate]);
 
 	return {
 		refetchTopic: fetchFaqTopic,

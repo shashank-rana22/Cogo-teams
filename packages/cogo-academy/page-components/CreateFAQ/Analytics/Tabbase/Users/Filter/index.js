@@ -1,10 +1,8 @@
 import { Select, DateRangepicker } from '@cogoport/components';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Filter({ selectedItem, setSelectedItem }) {
-	const [date, setDate] = useState('');
+function Filter({ selectedItem, setSelectedItem, date = '', setDate = () => {} }) {
 	const options = [
 		{ label: 'Users Groups', value: 'Users Group' },
 	];
@@ -54,6 +52,7 @@ function Filter({ selectedItem, setSelectedItem }) {
 						value={date}
 						dateFormat="MMM dd, yyyy"
 						maxDate={today}
+						isPreviousDaysAllowed
 						// disable={statsLoading || globeLoading || chatLoading}
 					/>
 

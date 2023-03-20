@@ -3,8 +3,8 @@ import { Pagination } from '@cogoport/components';
 import AllUsers from './AllUsers';
 import useAllAudience from './useAllAudience';
 
-function UsersGroup() {
-	const props = useAllAudience({});
+function UsersGroup({ date = '', setDate = () => {} }) {
+	const props = useAllAudience({ date, setDate });
 	const { data, page = 1, setPage = () => {} } = props;
 	const { page_limit = 0, total = 0, total_count = 0 } = props;
 	console.log(props.data);
