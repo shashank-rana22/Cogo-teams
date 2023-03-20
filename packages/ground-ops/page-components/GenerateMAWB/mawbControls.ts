@@ -165,8 +165,7 @@ const mawbControls = (disableClass) => ({
 					className   : 'primary lg',
 					span        : 1.25,
 					rules       : {
-						required : 'Length is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				},
 				{
@@ -177,8 +176,7 @@ const mawbControls = (disableClass) => ({
 					className   : 'primary lg',
 					span        : 1.25,
 					rules       : {
-						required : 'Width is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				},
 				{
@@ -189,8 +187,7 @@ const mawbControls = (disableClass) => ({
 					className   : 'primary lg',
 					span        : 1.5,
 					rules       : {
-						required : 'Height is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				},
 				{
@@ -201,8 +198,7 @@ const mawbControls = (disableClass) => ({
 					className   : 'primary lg',
 					span        : 2,
 					rules       : {
-						required : 'No of Packages is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				}, {
 					name        : 'unit',
@@ -281,7 +277,6 @@ const mawbControls = (disableClass) => ({
 				required : 'Chargable Weight is Required',
 				validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
 			},
-			disabled: true,
 		},
 		{
 			name         : 'ratePerKg',
@@ -291,10 +286,7 @@ const mawbControls = (disableClass) => ({
 			showOptional : false,
 			span         : 5,
 			placeholder  : 'Rate per Kg',
-			rules        : {
-				required: disableClass,
-			},
-			disabled: disableClass,
+			disabled     : disableClass,
 		},
 		{
 			name        : 'currency',
@@ -486,6 +478,15 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
+			name        : 'shipperSignature',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Signature of Shipper or his Agent',
+			span        : 5,
+			placeholder : 'Shipper Signature',
+			rules       : { required: 'Shipper Signature is Required' },
+		},
+		{
 			name        : 'place',
 			type        : 'text',
 			className   : 'primary lg',
@@ -497,14 +498,18 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
-			name        : 'shipperSignature',
-			type        : 'text',
+			name        : 'executedDate',
+			type        : 'date_picker',
 			className   : 'primary lg',
-			label       : 'Signature of Shipper or his Agent',
+			label       : 'Executed Date',
 			span        : 5,
-			placeholder : 'Shipper Signature',
-			rules       : { required: 'Shipper Signature is Required' },
+			placeholder : 'Date',
+			value       : new Date(),
+			rules       : {
+				required: 'Date is Required',
+			},
 		},
+
 	],
 });
 
