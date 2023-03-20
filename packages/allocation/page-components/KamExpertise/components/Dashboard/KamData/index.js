@@ -52,10 +52,10 @@ function KamData(props) {
 		setParams = () => {},
 		leaderboardLoading = false,
 		leaderboardList = [],
-		listRefetch = () => {},
+		// listRefetch = () => {},
 		searchKAM,
 		setSearchKAM,
-		setBadgeName,
+		// setBadgeName,
 		debounceQuery,
 		paginationData,
 		getNextPage,
@@ -132,6 +132,7 @@ function KamData(props) {
 					<div className={styles.leaderboard_container}>
 
 						<BadgeFilterHeader
+							leaderboardLoading={leaderboardLoading}
 							searchKAM={searchKAM}
 							setSearchKAM={setSearchKAM}
 							debounceQuery={debounceQuery}
