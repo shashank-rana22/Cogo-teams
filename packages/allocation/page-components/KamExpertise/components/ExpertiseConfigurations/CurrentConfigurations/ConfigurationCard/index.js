@@ -35,7 +35,7 @@ const HEADING_MAPPING = {
 };
 
 function ConfigurationCard(props) {
-	const { version_number, last_edit_by, last_modified, status_value, list } = props;
+	const { version_number, last_edit_by, last_modified, status_value, list = [] } = props;
 
 	return (
 		<div className={styles.card_container}>
@@ -48,13 +48,13 @@ function ConfigurationCard(props) {
 						color={STATUS_COLOR_MAPPING[status_value]}
 						style={{ marginRight: '28px' }}
 					>
-						{status_value}
+						{status_value ?? '--'}
 
 					</Pill>
 
 					<div style={{ marginRight: '28px' }}>
 						Last Edit by&nbsp;:&nbsp;
-						<strong>{last_edit_by}</strong>
+						<strong>{last_edit_by ?? '--'}</strong>
 					</div>
 
 					<div>
