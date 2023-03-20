@@ -32,15 +32,6 @@ function MessageList({
 }) {
 	const [modalType, setModalType] = useState(false);
 
-	// function getShowChat({ user_name }) {
-	// 	if (searchValue) {
-	// 		const searchName = user_name?.toLowerCase();
-	// 		return searchName?.includes(searchValue?.toLowerCase());
-	// 	}
-
-	// 	return true;
-	// }
-
 	function lastMessagePreview(previewData = '') {
 		return (
 			<div
@@ -125,10 +116,8 @@ function MessageList({
 							return startCase(organization_name);
 						};
 
-						// const show = getShowChat({ user_name, item, appliedFilters, searchValue });
-
 						return (
-						// show && (
+
 							<div
 								key={item?.id}
 								role="presentation"
@@ -198,7 +187,6 @@ function MessageList({
 								</div>
 							</div>
 						);
-						// );
 					})}
 					{messagesLoading && <LoadingState />}
 				</div>
