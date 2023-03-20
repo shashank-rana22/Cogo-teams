@@ -68,8 +68,6 @@ function useGraphData() {
 		},
 	];
 
-	console.log('pie_outer_data :: ', pie_outer_data);
-
 	return { pie_data, pie_outer_data, graph_data, dateRange, setDateRange };
 }
 
