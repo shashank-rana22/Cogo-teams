@@ -284,6 +284,19 @@ const allocation = {
 			feature      : 'kam_expertise',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'get_allocation_kam_expertise_badge_description',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_card_details',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+
 	],
 };
 
