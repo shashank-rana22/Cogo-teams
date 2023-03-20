@@ -33,7 +33,6 @@ export const REQUEST_COLUMNS = ({
 		<Checkbox
 			checked={selectAll}
 			onChange={(event) => onChangeTableHeadCheckbox(event)}
-			className={styles.select_all_checkbox}
 		/>
 	</div>,
 		accessor: ({ id = '' }) => (
