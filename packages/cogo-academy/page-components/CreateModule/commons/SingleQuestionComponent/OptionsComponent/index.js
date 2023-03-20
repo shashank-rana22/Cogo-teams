@@ -72,6 +72,10 @@ function OptionsComponent({ control, controls, register, name, errors }) {
 										...(controls[1].rules || {}),
 									})}
 								/>
+
+								{errors[index]?.[controls[1].name] ? (
+									<div className={styles.error_msg}>This is required</div>
+								) : null}
 							</div>
 						</div>
 					</div>

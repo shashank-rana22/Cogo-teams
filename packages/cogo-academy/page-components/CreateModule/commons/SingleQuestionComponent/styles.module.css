@@ -7,7 +7,7 @@
 .first_row {
 	display: flex;
 
-	.question_err {
+	.question_text_err {
 		border: 1px solid #cb6464;
 	}
 
