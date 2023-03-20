@@ -14,13 +14,13 @@ const cogoAcademy = {
 		navigation : 'cogo_academy-create_faq',
 		isMainNav  : false,
 	},
-	'/[partner_id]/learning/faq/create/test-module': {
+	'/[partner_id]/learning/test-module': {
 		navigation: 'cogo_academy-create_faq',
 	},
-	'/[partner_id]/learning/faq/create/test-module/create-question': {
+	'/[partner_id]/learning/test-module/create-question': {
 		navigation: 'cogo_academy-create_faq',
 	},
-	'/[partner_id]/learning/faq/create/test-module/create-test': {
+	'/[partner_id]/learning/test-module/create-test': {
 		navigation: 'cogo_academy-create_faq',
 	},
 	'/[partner_id]/learning/faq': {

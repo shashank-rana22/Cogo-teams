@@ -1,5 +1,6 @@
 import { Pill, Button, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot, IcMDelete, IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
+import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -10,7 +11,7 @@ export const questionSetColumns = ({ loading, updateApi, fetchList, router }) =>
 	};
 
 	const handleEditQuestionSet = (id) => {
-		router.push(`/learning/faq/create/test-module/create-question?id=${id}`);
+		router.push(`/learning/test-module/create-question?id=${id}`);
 	};
 
 	return [
@@ -202,6 +203,15 @@ export const testSetColumns = () => [
 		id       : 'tags',
 		accessor : ({ status = '' }) => (
 			<section>{status}</section>
+		),
+	},
+	{
+		Header   : '',
+		id       : 'results',
+		accessor : ({ id = '' }) => (
+			<div>
+				<Link href={`/enrichment?id=${id}`}>Results</Link>
+			</div>
 		),
 	},
 	{

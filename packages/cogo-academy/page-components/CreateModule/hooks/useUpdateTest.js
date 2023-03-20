@@ -50,7 +50,7 @@ function useUpdateTest() {
 				},
 			});
 
-			router.push('/learning/faq/create/test-module');
+			router.push('/learning/test-module');
 			Toast.success('Updated Successfully');
 		} catch (err) {
 			Toast.error(err?.message || 'Something went wrong');
