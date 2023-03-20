@@ -13,6 +13,7 @@ function useCreateTest({ setTestId, setActiveStepper }) {
 			const res = await trigger({
 				data: {
 					name                  : data?.name,
+					cogo_entity_id    		  : data?.cogo_entity_id,
 					set_wise_distribution : [
 						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'case_study' })),
 						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'stand_alone' }))],

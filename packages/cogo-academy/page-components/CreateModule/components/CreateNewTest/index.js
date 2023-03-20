@@ -1,4 +1,5 @@
 import { Stepper } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import DetailsAndQuestions from './components/DetailsAndQuestions';
@@ -7,7 +8,9 @@ import TABS_MAPPING from './configs/TABS_MAPPING';
 import styles from './styles.module.css';
 
 function CreateTest() {
-	const [activeStepper, setActiveStepper] = useState('details_and_questions');
+	const router = useRouter();
+	const [activeStepper, setActiveStepper] = useState(router.query?.id ? 'review_and_criteria'
+		: 'details_and_questions');
 	const [testId, setTestId] = useState(null);
 	const COMPONENT_MAPPING = {
 		details_and_questions: {

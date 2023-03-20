@@ -131,6 +131,15 @@ function QuestionSet({ setIdArray, setShowQuestionSet }) {
 					size="md"
 					suffix={<ButtonIcon size="md" icon={<IcMSearchlight />} disabled={false} themeType="primary" />}
 					placeholder="Search for Question/topic"
+					onChange={(value) => {
+						setParams((prev) => ({
+							...prev,
+							filters: {
+								...prev.filters,
+								q: value,
+							},
+						}));
+					}}
 					className={styles.input}
 				/>
 				<div className={styles.filter}>
@@ -153,7 +162,10 @@ function QuestionSet({ setIdArray, setShowQuestionSet }) {
 						currentPage={page}
 						totalItems={total_count}
 						pageSize={pageLimit}
-						onPageChange={(val) => setParams({ page: val })}
+						onPageChange={(val) => setParams((prev) => ({
+							...prev,
+							page: val,
+						}))}
 					/>
 				</div>
 			) : null}

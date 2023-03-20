@@ -13,7 +13,7 @@ import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
 function ReviewAndCriteria() {
-	const { control, formState:{ errors }, handleSubmit } = useForm();
+	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
 	const { updateTest } = useUpdateTest();
 	const router = useRouter();
 	const test_id = router.query?.id;
@@ -69,8 +69,9 @@ function ReviewAndCriteria() {
 					</div>
 				</div>
 			</div>
+			{console.log(data)}
 			<QuestionsAndDistribution control={control} errors={errors} loading={loading} data={data?.set_data} />
-			<DurationAndValidity control={control} errors={errors} loading={loading} />
+			<DurationAndValidity setValue={setValue} data={data} control={control} errors={errors} loading={loading} />
 			<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 				<Button
 					loading={loading}

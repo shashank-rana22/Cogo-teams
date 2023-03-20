@@ -137,6 +137,9 @@ export const testSetColumns = ({ loading, updateApi, fetchList, router }) => {
 	const handleDeleteTest = (id) => {
 		updateApi({ test_id: id, values: {}, fetchList, type: 'delete' });
 	};
+	const handleEditTest = (id) => {
+		router.push(`/learning/faq/create/test-module/create-test?id=${id}`);
+	};
 	return ([
 		{
 			Header   : 'NAME',
@@ -239,6 +242,7 @@ export const testSetColumns = ({ loading, updateApi, fetchList, router }) => {
 											loading={loading}
 											themeType="secondary"
 											className={styles.btn}
+											onClick={() => handleEditTest(id)}
 										>
 											<IcMEdit />
 											<div style={{ marginLeft: '8px' }}>
