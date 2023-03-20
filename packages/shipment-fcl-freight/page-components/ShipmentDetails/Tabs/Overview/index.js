@@ -6,8 +6,6 @@ import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
 function Overview(shipment_data = {}) {
-	
-
 	return (
 		<div className={styles.container}>
 			<OverviewManageServices />
