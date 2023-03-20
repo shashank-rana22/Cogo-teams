@@ -6,22 +6,21 @@ import useGetKamExpertiseCurrentConfig from '../../../hooks/useGetKamExpertiseCu
 import ConfigurationCard from './ConfigurationCard';
 import Header from './Header';
 
-
 function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
 	const router = useRouter();
 
-	const {listKamExpertiseCurrentConfigs} = useGetKamExpertiseCurrentConfig();   
+	const { listKamExpertiseCurrentConfigs } = useGetKamExpertiseCurrentConfig();
 
-	console.log("lis",listKamExpertiseCurrentConfigs);
-	
-	const VERSION_CARDS=listKamExpertiseCurrentConfigs?.list ||[];
-	
+	console.log('lis', listKamExpertiseCurrentConfigs);
+
+	const VERSION_CARDS = listKamExpertiseCurrentConfigs?.list || [];
+
 	return (
 		<div>
 			<Header
 				selectedVersion={selectedVersion}
 				setSelectedVersion={setSelectedVersion}
-				
+
 			/>
 
 			{VERSION_CARDS.map((item) => (

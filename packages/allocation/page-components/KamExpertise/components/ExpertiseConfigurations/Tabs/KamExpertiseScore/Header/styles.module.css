@@ -1,33 +1,3 @@
-/* .container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-	margin-top: 10px;
-	margin-bottom: 20px;
-
-}
-
-.button_container {
-	display: flex;
-}
-
-.config_basic_details {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-}
-
-.draft_name{
-	font-size: 18px;
-	display: flex;
-}
-
-.lower_details {
-	display: flex;
-	margin-top: 8px;
-	font-size: 12px;
-} */
 
 .main_container {
 	display: flex;
