@@ -25,14 +25,14 @@
 	}
 
 	.fixed_header {
-		top: 3rem;
+		top: 48px;
 		z-index: 1;
 		width: max-content;
 	}
 }
 
 .fixed_header {
-	top: 3rem;
+	top: 48px;
 	z-index: 1;
 }
 

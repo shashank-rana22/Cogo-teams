@@ -14,9 +14,9 @@ function SummaryCard({
 			<div>
 				<div>
 					<RevenueCardHeading
-						margin="1rem 0 .1rem 0"
+						margin="16px 0 1.6px 0"
 						title={title}
-						marginRight="0.5rem"
+						marginRight="8px"
 						showIcon={false}
 						toolTipContent="SalesFunnel"
 						enableFilter={false}

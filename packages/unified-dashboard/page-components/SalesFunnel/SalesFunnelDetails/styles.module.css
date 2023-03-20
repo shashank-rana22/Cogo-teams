@@ -33,12 +33,12 @@
 }
 
 .fixed_header {
-	top: 3rem;
+	top: 48px;
 }
 
 @media (max-width: 768px) {
 	.fixed_header {
-		top: 3rem;
+		top: 48px;
 		z-index: 1;
 		width: max-content;
 	}

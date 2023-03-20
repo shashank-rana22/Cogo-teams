@@ -3,7 +3,7 @@
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 1.3rem;
+	margin-bottom: 20.8px;
 }
 
 .heading {
@@ -13,7 +13,7 @@
 }
 
 .heading_text {
-	margin-right: "1.5rem";
+	margin-right: "24px";
 	font-size: 22px;
 	font-weight: bold;
 	color: #333;

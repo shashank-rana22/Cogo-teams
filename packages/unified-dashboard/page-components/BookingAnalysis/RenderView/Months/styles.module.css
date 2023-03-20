@@ -1,5 +1,5 @@
 .container {
-	margin-top: 1.3rem;
+	margin-top: 20px;
 }
 
 .btn_na {
@@ -20,7 +20,7 @@
 .flex_months {
 	display: flex;
 	justify-content: space-evenly;
-	margin: 0.5rem 1.5rem 1.5rem;
+	margin: 8px 24px 24px;
 	font-size: 14px;
 	font-weight: bold;
 }
@@ -43,7 +43,7 @@
 
 .stepper_dots_top {
 	position: absolute;
-	top: -1.25rem;
+	top: -20px;
 	width: 10px;
 	height: 10px;
 	background: #fff;
