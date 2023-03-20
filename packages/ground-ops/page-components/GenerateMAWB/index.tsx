@@ -100,14 +100,6 @@ function GenerateMAWB({
 	};
 
 	useEffect(() => {
-		setChargeableWeight(Number((Math.max(
-			+formValues.weight,
-			+formValues.volumetricWeight,
-		) || 0.0).toFixed(2)));
-		setValue('chargeableWeight', (+chargeableWeight || 0.0).toFixed(2));
-	}, [formValues.volumetricWeight, formValues.weight]);
-
-	useEffect(() => {
 		setChargeableWeight(formValues.chargeableWeight);
 	}, [formValues.chargeableWeight]);
 
