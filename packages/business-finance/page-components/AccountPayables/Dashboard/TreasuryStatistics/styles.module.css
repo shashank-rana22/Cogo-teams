@@ -78,35 +78,6 @@
     color: #333333;
     min-width: 76%;
 }
-/* .ui_tab_container.ui_tab_active 
-.ui_tabs_list_badge{
-background-color: #E0E0E0; 
-background: #E0E0E0;
-}
-
-.tabs_container {
-     margin-bottom: 16px;
-    button {
-        background: white;
-        border-right: 1px solid #e0e0e0;
-    }
-   
-}
-
-.tabsection{
-    /* border:2px solid green; 
-   
-        div{
-            background: none;
-        }
-}
-.icon{
-    margin-top: 10px;
-} */
 .tabs_container{
     margin-bottom: 16px;
-    .ui_tabs_list_badge{
-    background-color: #E0E0E0; 
-    background: #E0E0E0;
-    }
 }

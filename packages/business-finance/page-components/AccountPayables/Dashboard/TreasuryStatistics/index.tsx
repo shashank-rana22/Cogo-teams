@@ -1,9 +1,10 @@
 import { Tabs, TabPanel, Tooltip } from '@cogoport/components';
-import { IcCCountrySingapore, IcCCountryNetherland, IcCCountryIndia, IcMInfo } from '@cogoport/icons-react';
+import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
 
+import Entity from './Entity';
 import { monthControls } from './monthControls';
 import styles from './styles.module.css';
 
@@ -34,20 +35,20 @@ function TreasuryStatistics() {
 					themeType="primary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="ALL" title="ALL">
+					<TabPanel name="ALL" title={<Entity entityCode="all" />}>
 						{/* <div>This is local search</div> */}
 					</TabPanel>
 
-					<TabPanel name="101" title="Entity 101" badge={<IcCCountryIndia />}>
+					<TabPanel name="101" title={<Entity entityCode="101" />}>
 						{/* <div>This is suggested</div> */}
 					</TabPanel>
-					<TabPanel name="201" title="Entity 201" badge={<IcCCountryNetherland />}>
+					<TabPanel name="201" title={<Entity entityCode="201" />}>
 						{/* <div>This is suggested</div> */}
 					</TabPanel>
-					<TabPanel name="301" title="Entity 301" badge={<IcCCountryIndia />}>
+					<TabPanel name="301" title={<Entity entityCode="301" />}>
 						{/* <div>This is suggested</div> */}
 					</TabPanel>
-					<TabPanel name="401" title="Entity 401" badge={<IcCCountrySingapore />}>
+					<TabPanel name="401" title={<Entity entityCode="401" />}>
 						{/* <div>This is suggested</div> */}
 					</TabPanel>
 				</Tabs>

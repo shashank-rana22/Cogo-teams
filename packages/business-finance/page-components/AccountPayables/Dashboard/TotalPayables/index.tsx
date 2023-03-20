@@ -91,7 +91,11 @@ function TotalPayables({
 						Total Payables
 						<div className={styles.hr} />
 					</div>
-					<Tooltip placement="top" content="jaiprakash">
+					<Tooltip
+						placement="top"
+						content="Current and overdue amount
+						that you are yet to pay your vendor"
+					>
 						<div className={styles.info_icon}>
 							<IcMInfo width="16px" height="16px" />
 						</div>

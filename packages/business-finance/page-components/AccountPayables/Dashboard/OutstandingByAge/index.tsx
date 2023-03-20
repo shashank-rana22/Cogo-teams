@@ -2,6 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
+import BarChart from './BarChart';
 import styles from './styles.module.css';
 
 function OutstandingByAge() {
@@ -23,6 +24,7 @@ function OutstandingByAge() {
 
 			</div>
 			<div className={styles.vr} />
+			<BarChart />
 		</div>
 	);
 }

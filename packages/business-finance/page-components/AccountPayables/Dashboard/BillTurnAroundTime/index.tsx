@@ -17,7 +17,11 @@ function BillTurnAroundTime() {
 						Bill Turn Around Time
 						<div className={styles.hr} />
 					</div>
-					<Tooltip placement="top" content="jaiprakash">
+					<Tooltip
+						placement="top"
+						content="Turnaround time for Bill to move from one status to
+								another that involves human intervention"
+					>
 						<div className={styles.info_icon}>
 							<IcMInfo width="16px" height="16px" />
 						</div>

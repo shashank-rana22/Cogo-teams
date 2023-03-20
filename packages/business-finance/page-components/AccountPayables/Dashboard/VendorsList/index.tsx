@@ -98,7 +98,7 @@ function VendorsList({ showVendorsList, setShowVendorsList }:ItemProps) {
 						Top 10 Vendors
 						<div className={styles.hr} />
 					</div>
-					<Tooltip placement="top" content="jaiprakash">
+					<Tooltip placement="top" content="Top 10 outstanding payments of vendors ">
 						<div className={styles.info_icon}>
 							<IcMInfo width="16px" height="16px" />
 						</div>

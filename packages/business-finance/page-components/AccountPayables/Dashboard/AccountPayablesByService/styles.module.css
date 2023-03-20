@@ -3,6 +3,7 @@
     border-radius: 8px;
     padding: 18px;
     margin-top: 12px;
+	overflow: hidden;
 }
 .value{
     font-weight: 500;
@@ -37,6 +38,7 @@
 }
 .amount_container{
     display: flex;
+    margin-top: 16px;
 }
 .amount{
     display: flex;
@@ -65,4 +67,36 @@
 .down{
     margin-left: 4px;
     margin-bottom: -4px;
+}
+.imports_container{
+    display: flex;
+    background: #FFFFFF;
+    border: 1px solid #BDBDBD;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+}
+.ocean_value{
+    font-weight: 400;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    color: #333333;
+}
+.vr{
+    width: 1px;
+    background: #BDBDBD;
+    border-radius: 10px;
+    margin-right: 36px;
+}
+.sub_container{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+.ocean_text{
+    font-weight: 500;
+    font-size: 14px;
+    color: #ED3726;
+    padding: 12px 12px 12px 54px;
 }

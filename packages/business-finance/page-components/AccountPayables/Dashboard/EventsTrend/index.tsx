@@ -6,6 +6,7 @@ import Filter from '../../../commons/Filters';
 import SegmentedControl from '../../../commons/SegmentedControl';
 
 import { filterControls } from './filterControl';
+import LineCharts from './LineCharts';
 import styles from './styles.module.css';
 
 const OPTIONS = [
@@ -59,6 +60,7 @@ function EventsTrend({ showData, setShowData }:ItemProps) {
 					</div>
 				</div>
 			</div>
+			<LineCharts />
 		</div>
 	);
 }

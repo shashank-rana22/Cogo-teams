@@ -14,7 +14,11 @@ function DailyPayableOutstanding() {
 						Daily Payable Outstanding
 						<div className={styles.hr} />
 					</div>
-					<Tooltip placement="top" content="jaiprakash">
+					<Tooltip
+						placement="top"
+						content="Days payable outstanding (DPO) is a financial ratio that indicates
+						the average time (in days) that a company takes to pay its bills and invoices"
+					>
 						<div className={styles.info_icon}>
 							<IcMInfo width="16px" height="16px" />
 						</div>

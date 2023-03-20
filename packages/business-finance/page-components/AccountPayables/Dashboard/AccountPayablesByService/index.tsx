@@ -1,12 +1,22 @@
 import { IcMArrowDown } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function AccountPayablesByService() {
+	const [isAccordionActive, setIsAccordionActive] = useState(false);
+	const handleClick = () => {
+		setIsAccordionActive(!isAccordionActive);
+	};
 	return (
 		<div>
-			<div className={styles.container}>
+			<div
+				className={styles.container}
+				style={{
+					transition : 'max-height 0.3s ease-in-out',
+					maxHeight  : isAccordionActive ? '430px' : '100px',
+				}}
+			>
 				<div className={styles.heading}>
 					Account Payables By Service
 				</div>
@@ -53,15 +63,58 @@ function AccountPayablesByService() {
 						</div>
 					</div>
 				</div>
-
+				<div className={styles.imports_container}>
+					<div className={styles.sub_container}>
+						<div className={styles.ocean_text}>
+							Ocean
+						</div>
+					</div>
+					<div className={styles.vr} />
+					<div className={styles.sub_container}>
+						<div className={styles.label}>
+							FCL Imports
+						</div>
+						<div className={styles.ocean_value}>
+							INR 20,495,2457.00
+						</div>
+					</div>
+					<div className={styles.vr} />
+					<div className={styles.sub_container}>
+						<div className={styles.label}>
+							FCL Exports
+						</div>
+						<div className={styles.ocean_value}>
+							INR 20,495,2457.00
+						</div>
+					</div>
+					<div className={styles.vr} />
+					<div className={styles.sub_container}>
+						<div className={styles.label}>
+							LCL Imports
+						</div>
+						<div className={styles.ocean_value}>
+							INR 20,495,2457.00
+						</div>
+					</div>
+					<div className={styles.vr} />
+					<div className={styles.sub_container}>
+						<div className={styles.label}>
+							LCL Exports
+						</div>
+						<div className={styles.ocean_value}>
+							INR 20,495,2457.00
+						</div>
+					</div>
+				</div>
 			</div>
+
 			<div className={styles.footer}>
 				<div
 					className={styles.footer_text}
-					// onClick={() => handleClick()}
+					onClick={() => handleClick()}
 					role="presentation"
 				>
-					Show more
+					{isAccordionActive ? 'Show less' : 'Show more'}
 					<IcMArrowDown height={15} width={15} className={styles.down} />
 				</div>
 			</div>
