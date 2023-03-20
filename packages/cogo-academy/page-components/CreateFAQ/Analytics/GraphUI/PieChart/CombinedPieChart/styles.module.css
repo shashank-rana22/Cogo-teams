@@ -1,0 +1,14 @@
+.inner_pie {
+	position: absolute;
+	bottom: 50px;
+	width: 100%;
+	height: 80%;
+	margin-top: 50px;
+}
+
+.outer_pie {
+	position: absolute;
+	z-index: 9;
+	width: 100%;
+	height: 95%;
+}
