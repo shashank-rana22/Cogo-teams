@@ -79,10 +79,11 @@
 
 .account_attribute_text{
     font-weight: 600;
+    font-size: 18px;
 
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
 
     & svg{
         margin-left: 4px;

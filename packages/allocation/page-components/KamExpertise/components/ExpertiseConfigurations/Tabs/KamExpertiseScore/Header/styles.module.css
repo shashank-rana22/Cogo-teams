@@ -15,12 +15,16 @@
 .config_basic_details {
 	display: flex;
 	flex-direction: column;
-	width: 30%;
+	width: 100%;
+}
+
+.draft_name{
+	font-size: 18px;
+	display: flex;
 }
 
 .lower_details {
 	display: flex;
-	justify-content: space-between;
 	margin-top: 8px;
 	font-size: 12px;
 } */

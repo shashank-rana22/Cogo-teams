@@ -8,15 +8,14 @@ import styles from './styles.module.css';
 
 function Header(props) {
 	const {
-		badgeLength = 1,
 		setToggleScreen = () => {},
 		searchValue,
 		setSearchValue = () => {},
 		expertise,
 		setExpertise = () => {},
 		debounceQuery,
-		setMasteryListData = () => {},
-		setBadgeListData,
+		setMasteryItemData = () => {},
+		setBadgeItemData,
 		loading,
 	} = props;
 
@@ -54,8 +53,8 @@ function Header(props) {
 					className={styles.button_mastery}
 					disabled={loading}
 					onClick={() => {
-						setMasteryListData({});
-						setToggleScreen('mastery');
+						setMasteryItemData({});
+						setToggleScreen('create_mastery');
 					}}
 				>
 					Add Mastery
@@ -66,15 +65,11 @@ function Header(props) {
 					size="md"
 					className={styles.button_badge}
 					onClick={() => {
-						setBadgeListData({});
+						setBadgeItemData({});
 						setToggleScreen('create_badge');
 					}}
 				>
-					{
-						badgeLength
-							? 'Add New Badge'
-							: 'Create New Badge'
-					}
+					Add New Badge
 				</Button>
 			</div>
 		</div>
