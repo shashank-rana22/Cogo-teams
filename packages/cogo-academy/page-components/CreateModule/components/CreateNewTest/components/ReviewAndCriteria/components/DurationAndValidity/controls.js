@@ -15,14 +15,14 @@ const getControls = () => [
 	{
 		name        : 'maximum_attempts',
 		label       : 'Attempts Allowed',
-		type        : 'input',
+		type        : 'number',
 		placeholder : '0',
 		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'cut_off_marks',
 		label       : 'Minimum Pass %',
-		type        : 'input',
+		type        : 'number',
 		placeholder : 'type %',
 		rules       : { required: 'This is required' },
 	},
