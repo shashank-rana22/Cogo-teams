@@ -6,6 +6,7 @@ function NoData({ showGrid, entity = 'Shipments' }) {
 			{showGrid && (
 				<div className={styles.card_wrapper}>
 					No
+					{' '}
 					{entity}
 					{' '}
 					Found
