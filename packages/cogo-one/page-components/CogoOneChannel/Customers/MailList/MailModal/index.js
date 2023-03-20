@@ -11,8 +11,10 @@ import getFileAttributes from '../../../../../utils/getFileAttributes';
 import styles from './styles.module.css';
 
 function MailModal({
-	showMailModal, setShowMailModal, userData = {}, sendQuickCommuncation = () => {},
-	loading,
+	showMailModal, setShowMailModal,
+	createMail = () => {},
+	createLoading = false,
+	userId = '',
 }) {
 	const [showControl, setShowControl] = useState(false);
 	const [type, setType] = useState('');
@@ -37,17 +39,21 @@ function MailModal({
 	};
 
 	const handleSend = () => {
+		let payload;
 		const isEmptyMail = getFormatedEmailBody({ emailState });
 		if (isEmptyMail || !emailState?.subject) {
 			Toast.error('Both Subject and Body are Requied');
 		} else {
-			sendQuickCommuncation({
-				template_name         : 'send_email_template',
-				otherChannelRecipient : userData?.email,
-				variables             : { ...emailState },
-				type                  : 'email',
-				attachment_urls       : attachments || [],
-			});
+			payload = {
+				attachments,
+				ccrecipients : bccArray,
+				content      : emailState?.body,
+				sender       : 'dineshkumar.s@cogoport.com',
+				subject      : emailState?.subject,
+				toUserEmail  : recipientArray,
+				userId,
+			};
+			createMail(payload);
 		}
 	};
 
@@ -56,7 +62,7 @@ function MailModal({
 			<div className={styles.send_icon}>
 				<IcMSend
 					onClick={handleSend}
-					loading={loading}
+					loading={createLoading}
 				/>
 			</div>
 			<div className={styles.title}>New Message</div>

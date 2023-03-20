@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+// import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import MailDetails from '../../../../common/MailDetails';
@@ -6,13 +6,13 @@ import MailDetails from '../../../../common/MailDetails';
 import CogoportMail from './CogoportMail';
 import GmailOption from './GmailOptions';
 import MailOption from './MailBoxes';
-import MailModal from './MailModal';
+// import MailModal from './MailModal';
 import styles from './styles.module.css';
 
 function MailList({ setActiveMail = () => {}, activeMail }) {
 	const [activeSelect, setActiveSelect] = useState('');
 	const [showContent, setShowContent] = useState(false);
-	const [showMailModal, setShowMailModal] = useState(false);
+	// const [showMailModal, setShowMailModal] = useState(false);
 
 	const handleClick = (val) => {
 		setActiveSelect(val);
@@ -26,9 +26,9 @@ function MailList({ setActiveMail = () => {}, activeMail }) {
 					<MailOption handleClick={handleClick} activeSelect={activeSelect} showContent={showContent} />
 					<GmailOption handleClick={handleClick} activeSelect={activeSelect} showContent={showContent} />
 					<CogoportMail handleClick={handleClick} activeSelect={activeSelect} showContent={showContent} />
-					<div className={styles.button_div}>
+					{/* <div className={styles.button_div}>
 						<Button size="md" themeType="primary" onClick={() => setShowMailModal(true)}>+</Button>
-					</div>
+					</div> */}
 				</>
 			) : (
 				<MailDetails
@@ -37,13 +37,6 @@ function MailList({ setActiveMail = () => {}, activeMail }) {
 					setActiveSelect={setActiveSelect}
 					setActiveMail={setActiveMail}
 					activeMail={activeMail}
-				/>
-			)}
-
-			{showMailModal && (
-				<MailModal
-					showMailModal={showMailModal}
-					setShowMailModal={setShowMailModal}
 				/>
 			)}
 		</div>

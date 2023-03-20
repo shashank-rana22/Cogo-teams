@@ -157,6 +157,7 @@ function CogoOne() {
 				setShowDialModal={setShowDialModal}
 				activeMail={activeMail}
 				setActiveMail={setActiveMail}
+				userId={userId}
 			/>
 
 			<div className={styles.chat_details_continer}>

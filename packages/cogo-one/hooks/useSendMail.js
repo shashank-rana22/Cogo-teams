@@ -1,29 +1,23 @@
 import { usePublicRequest } from '@cogoport/request';
 // import { useEffect, useState } from 'react';
 
-function useSendMail() {
+function useSendMail({ setShowMailModal = () => {} }) {
 	const [{ loading }, trigger] = usePublicRequest({
-		url    : `${process.env.MAIL_BASE_URL}/send_mail`,
+		url    : 'https://lens.dev.cogoport.io/send_mail',
 		method : 'POST',
 
 	}, { manual: true });
 
-	const createMail = async () => {
+	const createMail = async (payload) => {
+		console.log('payload:', payload);
 		try {
 			await trigger({
-				data: {
-					sender       : '',
-					toUserEmail  : '',
-					ccrecipients : '',
-					subject      : '',
-					content      : '',
-					attachments  : '',
-					msgId        : '',
-					userId       : '',
-				},
+				data: payload,
 			});
 		} catch (error) {
 			// console.log(error)
+		} finally {
+			setShowMailModal(false);
 		}
 	};
 

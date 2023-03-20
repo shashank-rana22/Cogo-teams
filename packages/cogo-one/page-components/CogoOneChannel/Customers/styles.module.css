@@ -160,3 +160,11 @@
 	right: 40px;
 	user-select: none;
 }
+
+.mail_icon {
+	top: 33px;
+	right: -60px;
+	user-select: none;
+	background: white;
+	border-radius: 50%;
+}

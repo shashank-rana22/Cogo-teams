@@ -21,11 +21,17 @@
 	font-weight: 500;
 
 	span {
+		margin-left: 4px;
 		font-size: 12px;
 	}
 }
 
 .header_to {
+	display: flex;
+	align-items: center;
+}
+
+.header_cc {
 	display: flex;
 	align-items: center;
 }

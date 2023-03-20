@@ -1,9 +1,12 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
-import { IcMPlus } from '@cogoport/icons-react';
+import { IcMPlus, IcMEmail } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+
+import useSendMail from '../../../hooks/useSendMail';
 
 import InactiveModal from './InactiveModal';
 import MailList from './MailList';
+import MailModal from './MailList/MailModal';
 import MessageList from './MessageList';
 import NewWhatsappMessage from './NewWhatsappMessage';
 import styles from './styles.module.css';
@@ -38,10 +41,17 @@ function Customers({
 	setShowDialModal = () => {},
 	activeMail = {},
 	setActiveMail = () => {},
+	userId = '',
 
 }) {
 	const [modalType, setModalType] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
+	const [showMailModal, setShowMailModal] = useState(false);
+	const {
+		createMail = () => {},
+		createMailLoading = false,
+	} = useSendMail({ setShowMailModal });
+
 	const onChangeToggle = () => {
 		if (toggleStatus) {
 			setOpenModal(true);
@@ -169,6 +179,15 @@ function Customers({
 								/>
 
 							</div>
+							<div className={`${styles.action} ${styles.mail_icon}`}>
+								<IcMEmail
+									role="presentation"
+									fill="#f9dc5c"
+									width={25}
+									height={25}
+									onClick={() => setShowMailModal(true)}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -177,6 +196,16 @@ function Customers({
 				<NewWhatsappMessage
 					setModalType={setModalType}
 					modalType={modalType}
+				/>
+			)}
+
+			{showMailModal && (
+				<MailModal
+					showMailModal={showMailModal}
+					setShowMailModal={setShowMailModal}
+					createMail={createMail}
+					createMailLoading={createMailLoading}
+					userId={userId}
 				/>
 			)}
 		</div>
