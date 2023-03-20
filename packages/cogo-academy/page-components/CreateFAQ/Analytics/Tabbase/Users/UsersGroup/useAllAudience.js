@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 
 function useAllAudience() {
 	const { general = {} } = useSelector((state) => state);
+	const [page, setPage] = useState(1);
 
 	const { query } = general;
 
@@ -20,7 +21,8 @@ function useAllAudience() {
 			try {
 				await trigger({
 					params: {
-						page_limit                       : 100000,
+						page,
+						page_limit                       : 10 || undefined,
 						pagination_data_required         : true,
 						most_viewed_questions_required   : true,
 						audience_wise_questions_required : true,
@@ -32,13 +34,14 @@ function useAllAudience() {
 				console.log('error :: ', error);
 			}
 		},
-		[trigger],
+		[page, trigger],
 	);
 
-	useEffect(() => { fetchFaqTopic(); }, [fetchFaqTopic]);
+	useEffect(() => { fetchFaqTopic(); }, [page, fetchFaqTopic]);
 
 	return {
 		refetchTopic: fetchFaqTopic,
+		setPage,
 		data,
 		loading,
 		activeTab,

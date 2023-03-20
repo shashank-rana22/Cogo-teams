@@ -1,11 +1,28 @@
+import { Pagination } from '@cogoport/components';
+
 import AllUsers from './AllUsers';
 import useAllAudience from './useAllAudience';
 
 function UsersGroup() {
-	const props = useAllAudience();
-	const { data } = props;
+	const props = useAllAudience({});
+	const { data, page = 1, setPage = () => {} } = props;
+	const { page_limit = 0, total = 0, total_count = 0 } = props;
+	console.log(props.data);
+	console.log(page, page_limit, total, total_count, 'pp');
+	return (
+		<div>
+			{data?.list.map((items) => (<AllUsers props={items} />))}
+			<Pagination
+				style={{ justifyContent: 'flex-end' }}
+				type="table"
+				currentPage={page}
+				totalItems={total_count}
+				pageSize={page_limit}
+				onPageChange={setPage}
+			/>
 
-	return data?.list.map((items) => (<AllUsers props={items} />));
+		</div>
+	);
 }
 
 export default UsersGroup;

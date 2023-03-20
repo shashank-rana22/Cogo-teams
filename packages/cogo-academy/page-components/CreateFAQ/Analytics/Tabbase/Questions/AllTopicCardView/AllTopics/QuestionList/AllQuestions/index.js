@@ -68,19 +68,20 @@ function AllQuestions({ id = '' }) {
 
 	];
 	const columns = addedQuestionsColumns();
+
 	return (
-		<section className={styles.container}>
+		<div className={styles.container}>
 			<StyledTable columns={columns} layoutType="table" data={listdata} />
+
 			<Pagination
-				style={{ float: 'right' }}
-				type="table"
+				style={{ display: 'flex', justifyContent: 'flex-end' }}
+				type="page"
 				currentPage={page}
 				totalItems={total_count}
 				pageSize={page_limit}
 				onPageChange={setPage}
 			/>
-
-		</section>
+		</div>
 	);
 }
 

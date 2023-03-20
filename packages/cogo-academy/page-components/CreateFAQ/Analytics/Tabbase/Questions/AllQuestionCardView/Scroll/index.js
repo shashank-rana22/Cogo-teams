@@ -4,8 +4,9 @@ import { forwardRef } from 'react';
 
 function ScrollBar({ rightOffSet, leftOffSet }, ref) {
 	const scrollHorizontal = (scrollOffset, re) => {
+		console.log('fvrtwv');
 		const referance = re;
-		const tableRootElement =			referance.current.querySelector('.tableRootSelector');
+		const tableRootElement = referance?.current?.querySelector('.tableRootSelector');
 		tableRootElement.scrollLeft += scrollOffset;
 		referance.current.scrollLeft += scrollOffset;
 	};

@@ -54,7 +54,6 @@ function Filter({ selectedItem, setSelectedItem, date, setDate }) {
 						dateFormat="MMM dd, yyyy"
 						isPreviousDaysAllowed
 						maxDate={today}
-						// disable={statsLoading || globeLoading || chatLoading}
 					/>
 
 				</div>
