@@ -24,7 +24,7 @@ function useGetShipment() {
 						additional_methods : ['main_service', 'documents', 'containers'],
 					},
 				}); if (!res.hasError) {
-					Toast.error('dsfghj');
+					// Toast.error('dsfghj');
 				}
 			} catch (err) {
 				console.log(err);
