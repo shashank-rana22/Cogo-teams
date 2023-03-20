@@ -13,7 +13,8 @@ function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
 
 	const data = listKamExpertiseCurrentConfigs?.list || [];
 
-	const VERSION_CARDS = data.filter((item) => item.status_value === 'draft' || item.status_value === 'live');
+	const listArray = data.filter((item) => item.status_value === 'draft' || item.status_value === 'live');
+	const VERSION_CARDS = listArray.reverse();
 
 	const audit_data = listKamExpertiseCurrentConfigs?.audit_data || {};
 
