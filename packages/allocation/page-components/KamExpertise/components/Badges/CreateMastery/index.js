@@ -26,7 +26,7 @@ function CreateMastery(props) {
 	} = useCreateMasterConfiguration({ masteryItemData, onClose, listRefetch });
 
 	const UploadController = getFieldController('fileUpload');
-	const InputDesc = getFieldController('textarea');
+	const InputController = getFieldController('textarea');
 
 	const {
 		control,
@@ -35,7 +35,8 @@ function CreateMastery(props) {
 		formState: { errors },
 	} = formProps;
 
-	const badge_options = []; // for multi-select badges
+	// ! To be removed when we get api
+	const badge_options = [];
 	(badgeList || {}).forEach((badge_data) => {
 		if (badge_data.expertise_configuration_type === 'event_configuration') {
 			badge_options.push({
@@ -61,7 +62,7 @@ function CreateMastery(props) {
 									{format(masteryItemData.updated_at, 'yyyy-MMM-dd')}
 								</p>
 
-								{/* //! needs changes */}
+								{/* //! needs from backend */}
 								{/* <p className={styles.text_styles}>Last Modified By :</p> */}
 							</div>
 						)}
@@ -88,8 +89,11 @@ function CreateMastery(props) {
 										key={ele.name}
 										id={`${ele.name}_input`}
 										style={ele.styles}
-										disabled={!isEmpty(masteryItemData) && ele.name === 'badges'}
-										options={badgeList.length > 0 ? badge_options : ele.options}
+										disabled={
+											(!isEmpty(masteryItemData) && ele.name === 'badges')
+											|| (loading)
+										}
+										options={!isEmpty(badgeList) ? badge_options : ele.options}
 									/>
 
 									<div className={styles.error_message}>
@@ -107,6 +111,7 @@ function CreateMastery(props) {
 										name="image_input"
 										control={control}
 										accept=".png, .jpeg"
+										disabled={loading}
 										rules={isEmpty(masteryItemData)
 											? {
 												required: 'Image is required',
@@ -135,10 +140,11 @@ function CreateMastery(props) {
 							</div>
 							<div className={styles.text_area_container}>
 								<p style={{ color: '#4f4f4f' }}>Description</p>
-								<InputDesc
+								<InputController
 									name="description_input"
 									className={styles.text_area}
 									multiline
+									disabled={loading}
 									placeholder="Multimodal maestro is awarded
                                 				to users who complete gold 3 in all of these badges"
 									control={control}
@@ -165,7 +171,7 @@ function CreateMastery(props) {
 							themeType="primary"
 							type="submit"
 							id="save_button"
-							disabled={loading}
+							loading={loading}
 						>
 							Save
 						</Button>

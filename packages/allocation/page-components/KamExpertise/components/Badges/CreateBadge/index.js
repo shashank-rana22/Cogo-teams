@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 
 import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
-import GetCard from '../BadgeUpdateCard';
+import BadgeUpdateCard from '../BadgeUpdateCard';
 
 import styles from './styles.module.css';
 
@@ -84,7 +84,10 @@ function CreateBadge(props) {
 											key={el.name}
 											control={control}
 											id={`${el.name}_input`}
-											disabled={!isEmpty(badgeItemData) && el.name === 'condition'}
+											disabled={
+												(!isEmpty(badgeItemData) && el.name === 'condition')
+												|| (loading)
+											}
 										/>
 									</div>
 
@@ -99,10 +102,11 @@ function CreateBadge(props) {
 						<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
 						<div className={styles.display_flex}>
 							{MEDALS_MAPPING.map((data, index) => (
-								<GetCard
+								<BadgeUpdateCard
 									data={data}
 									badgeItemData={badgeItemData}
 									control={control}
+									loading={loading}
 									errors={errors}
 									watch={watch}
 									isLastItem={index === MEDALS_MAPPING.length - 1}
@@ -129,7 +133,7 @@ function CreateBadge(props) {
 							type="submit"
 							themeType="primary"
 							id="save_request_btn"
-							disabled={loading}
+							loading={loading}
 						>
 							Save
 						</Button>
