@@ -54,11 +54,13 @@
 		}
 	}
 }
+
 .select_container {
 	display: flex;
 	width: 225px;
 	padding: 5px 0 2px 16px;
 }
+
 .date_container {
 	display: flex;
 	align-items: center;

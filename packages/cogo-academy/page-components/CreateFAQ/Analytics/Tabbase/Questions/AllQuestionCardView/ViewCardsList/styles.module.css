@@ -1,82 +1,84 @@
 .container {
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  font-size: 20px;
-  font-weight: 500;
-  background-color: #fff;
-  border-radius: 8px;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1rem;
+	font-size: 20px;
+	font-weight: 500;
+	background-color: #fff;
+	border-radius: 8px;
 }
 
 .primary_stats {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 225px;
-  background: #f9f5ec;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 225px;
+	background: #f9f5ec;
 }
 
 .primary_stat_title {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: 18px;
-  font-weight: 600;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	font-size: 18px;
+	font-weight: 600;
 }
 
 .primary_stat_description {
-  display: flex;
-  align-items: center;
-  margin-top: 5px;
-  font-size: 14px;
-  color: #828282;
+	display: flex;
+	align-items: center;
+	margin-top: 5px;
+	font-size: 14px;
+	color: #828282;
 
-  span {
-    margin: 0 5px;
-  }
+	span {
+		margin: 0 5px;
+	}
 }
+
 .primary_right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1;
-  padding: 12px 18px;
-  margin: 12px 12px 12px 0;
-  text-align: center;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 12px 18px;
+	margin: 12px 12px 12px 0;
+	text-align: center;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
 }
 
 .right_stat_title {
-  margin-bottom: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
+	margin-bottom: 10px;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
 }
 
 .question_line {
-  display: flex;
+	display: flex;
 }
 
 .right_stat_content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 5px;
-  text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 5px;
+	text-align: center;
 }
 
 .right_stat_label {
-  font-size: 14px;
-  color: #828282;
+	font-size: 14px;
+	color: #828282;
 }
+
 .sub_heading {
-  flex-wrap: wrap;
-  justify-content: space-between;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: left;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	font-size: 12px;
+	font-weight: 600;
+	text-align: left;
 }
