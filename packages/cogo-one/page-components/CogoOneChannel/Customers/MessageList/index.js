@@ -1,7 +1,6 @@
 import { cl, Input, Popover, Tooltip } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight, IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
 
 import UserAvatar from '../../../../common/UserAvatar';
 import { PLATFORM_MAPPING } from '../../../../constants';
@@ -28,8 +27,9 @@ function MessageList({
 	showBotMessages = false,
 	setShowBotMessages = () => {},
 	isomniChannelAdmin = false,
+	setModalType = () => {},
+	modalType = '',
 }) {
-	const [modalType, setModalType] = useState(false);
 	function getShowChat({ user_name }) {
 		if (searchValue) {
 			const searchName = user_name?.toLowerCase();
@@ -52,10 +52,6 @@ function MessageList({
 		);
 	}
 
-	const openModelForNewContact = () => {
-		setModalType(true);
-	};
-	const disabled = true;
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -200,16 +196,11 @@ function MessageList({
 					})}
 				</div>
 			)}
-			{!disabled && (
-				<div
-					className={styles.plus_circle}
-				>
-					<IcMPlusInCircle onClick={openModelForNewContact} fill="red" width={50} height={50} />
-				</div>
-			)}
-			{modalType && (
+
+			{modalType?.type && (
 				<NewWhatsappMessage
 					setModalType={setModalType}
+					modalType={modalType}
 				/>
 			)}
 		</>
