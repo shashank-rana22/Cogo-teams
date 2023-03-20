@@ -8,7 +8,7 @@
 		.ui_stepper_container {
 			margin-top: 0;
 			margin-bottom: 20px;
-			background-color: #f8f2e7;
+			background-color: rgb(255 255 255 / 40%);
 		}
 	}
 }
