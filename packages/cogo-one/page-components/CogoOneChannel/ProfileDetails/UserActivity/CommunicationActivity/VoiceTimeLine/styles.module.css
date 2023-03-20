@@ -1,0 +1,85 @@
+.main_card {
+	padding: 8px;
+	margin: -5px 0 -5px 5px;
+	border-left: 1px solid #bdbdbd;
+}
+
+.main_card:last-child {
+	border-left: none;
+}
+
+.activity_date {
+	display: flex;
+	align-items: center;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	background: #bdbdbd;
+	border-radius: 50%;
+}
+
+.durations {
+	margin-left: 5px;
+	font-size: 10px;
+	color: #828282;
+}
+
+.card {
+	padding: 8px 6px;
+	margin: 5px 10px;
+	background: #fff;
+	border-left: 2px solid #6fa5ab;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.message_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 6px;
+}
+
+.title {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.user_details {
+	display: flex;
+	flex-direction: column;
+	width: 84%;
+}
+
+.user_message {
+	font-size: 12px;
+	color: #4f4f4f;
+
+	span {
+		margin-left: 4px;
+	}
+}
+
+.user_avatar {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: -10px;
+}
+
+.activity_div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.icon_type {
+	display: flex;
+	align-self: baseline;
+	padding-right: 8px;
+}
+
+.avatar {
+	width: 16px;
+	height: 16px;
+}
