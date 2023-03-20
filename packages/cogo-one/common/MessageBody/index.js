@@ -66,13 +66,11 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 					className={cl`${styles.clickable_object} ${hasProfanity ? styles.reduce_blur : ''}`}
 					role="presentation"
 					onClick={() => {
-						if (!hasProfanity) {
-							window.open(
-								media_url,
-								'_blank',
-								'noreferrer',
-							);
-						}
+						window.open(
+							media_url,
+							'_blank',
+							'noreferrer',
+						);
 					}}
 				>
 					{hasProfanity && (

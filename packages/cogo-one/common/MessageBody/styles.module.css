@@ -4,6 +4,7 @@
 }
 
 .profanity_blur {
+	pointer-events: none;
 	filter: blur(20px);
 }
 
