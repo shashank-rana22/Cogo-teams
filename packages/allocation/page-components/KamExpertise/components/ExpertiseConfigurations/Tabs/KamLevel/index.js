@@ -12,11 +12,15 @@ import KamLevelDropDown from './KamLevelDropDown';
 import ResponseCard from './ResponseCard';
 import styles from './styles.module.css';
 
-function KamLevel({ selectedVersion }) {
+function KamLevel({ setMainLoading, selectedVersion }) {
 	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig({ selectedVersion });
 
 	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
+
+	useEffect(() => {
+		setMainLoading(levelLoading);
+	}, [levelLoading, setMainLoading]);
 
 	console.log('version in  tab', selectedVersion);
 

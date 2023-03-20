@@ -34,7 +34,11 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	margin: -32px 0 20px 0;
+	margin: 12px 0 20px 0;
+
+	@media (max-width:576px){
+		margin: -32px 0 20px 0;
+	}
 }
   
 .button_container {
@@ -61,3 +65,10 @@
 }
   
 
+.lower_info {
+	display: flex;
+
+	@media(max-width: 576px) {
+		flex-direction: column;
+	}
+}

@@ -19,14 +19,22 @@ function Header(props) {
 						<Placeholder height="20px" width="120px" />
 
 					</div>
+
 					<div className={styles.lower_details}>
-						<div style={{ marginRight: '8px' }}>
-							Last Modified
-							{' '}
-							:
+						<div className={styles.lower_info} style={{ marginRight: '8px' }}>
+
+							<div>
+								Last Modified
+								{' '}
+								:
+							</div>
+
+							<span>
+								<Placeholder height="20px" width="120px" />
+							</span>
 						</div>
-						<Placeholder height="20px" width="120px" />
-						<div style={{ marginLeft: '36px', display: 'flex' }}>
+
+						<div className={styles.lower_info} style={{ marginLeft: '36px' }}>
 							<div style={{ marginRight: '8px' }}>
 								Last Edit By
 								{' '}
@@ -51,13 +59,20 @@ function Header(props) {
 					<b>Saved Draft</b>
 				</div>
 				<div className={styles.lower_details}>
-					<div style={{ marginRight: '8px' }}>
-						Last Modified
-						{' '}
-						:
+					<div className={styles.lower_info} style={{ marginRight: '8px' }}>
+
+						<div>
+							Last Modified
+							{' '}
+							:
+						</div>
+
+						<span>
+							{ (format(audit_data?.updated_at, 'dd-MM-YYYY') || '--')}
+						</span>
 					</div>
-					{ (format(audit_data?.updated_at, 'dd-MM-YYYY') || '--')}
-					<div style={{ marginLeft: '36px', display: 'flex' }}>
+
+					<div className={styles.lower_info} style={{ marginLeft: '36px' }}>
 						<div style={{ marginRight: '8px' }}>
 							Last Edit By
 							{' '}

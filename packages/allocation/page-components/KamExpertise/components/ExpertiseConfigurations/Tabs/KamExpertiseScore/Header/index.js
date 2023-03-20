@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 function Header({ auditData, loading }) {
 	const { name, updated_at } = auditData;
 
-	console.log('auditData::', auditData);
 	if (loading) {
 		return (
 			<div className={styles.main_container}>
@@ -21,13 +20,20 @@ function Header({ auditData, loading }) {
 
 					</div>
 					<div className={styles.lower_details}>
-						<div style={{ marginRight: '8px' }}>
-							Last Modified
-							{' '}
-							:
+						<div className={styles.lower_info} style={{ marginRight: '8px' }}>
+
+							<div>
+								Last Modified
+								{' '}
+								:
+							</div>
+
+							<span>
+								<Placeholder height="20px" width="120px" />
+							</span>
 						</div>
-						<Placeholder height="20px" width="120px" />
-						<div style={{ marginLeft: '36px', display: 'flex' }}>
+
+						<div className={styles.lower_info} style={{ marginLeft: '36px' }}>
 							<div style={{ marginRight: '8px' }}>
 								Last Edit By
 								{' '}
@@ -37,6 +43,7 @@ function Header({ auditData, loading }) {
 							<Placeholder height="20px" width="120px" />
 						</div>
 					</div>
+
 				</div>
 			</div>
 		);
@@ -87,18 +94,25 @@ function Header({ auditData, loading }) {
 					<b>Saved Draft</b>
 				</div>
 				<div className={styles.lower_details}>
-					<div>
-						Last Modified
-						{' '}
-						:
-					</div>
-					{ (format(updated_at, 'dd-MM-YYYY') || '--')}
-					<div style={{ marginLeft: '20px' }}>
+					<div className={styles.lower_info}>
+						<div>
+							Last Modified
+							{' '}
+							:&nbsp;
+						</div>
+						<span>
+							{ (format(updated_at, 'dd-MM-YYYY') || '--')}
+						</span>
 
-						Last Edit By
-						{' '}
-						:
-						{' '}
+					</div>
+					<div className={styles.lower_info} style={{ marginLeft: '36px' }}>
+						<div>
+							Last Edit By
+							{' '}
+							:
+							{' '}
+						</div>
+
 						<b>{startCase(name || '----')}</b>
 					</div>
 				</div>
