@@ -30,8 +30,8 @@ function Header() {
 
 	const onClickTestModule = () => {
 		router.push(
-			'/learning/faq/create/test-module',
-			'/learning/faq/create/test-module',
+			'/learning/test-module',
+			'/learning/test-module',
 		);
 	};
 

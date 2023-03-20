@@ -69,3 +69,8 @@
 	font-weight: 600;
 	color: #6fa5ab;
 }
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}

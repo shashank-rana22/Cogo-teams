@@ -11,7 +11,6 @@ import styles from './styles.module.css';
 function CreateQuestionSet() {
 	const router = useRouter();
 
-	const [questionSetId, setQuestionSetId] = useState('');
 	const [savedQuestionDetails, setSavedQuestionDetails] = useState([]);
 	const [editDetails, setEditDetails] = useState({});
 
@@ -21,16 +20,20 @@ function CreateQuestionSet() {
 		loading,
 		data,
 		getTestQuestionTest,
+		questionSetId,
+		setQuestionSetId,
+		setFilters,
+		filters,
 	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails });
 
 	return (
-		<div className={styles.container}>
+		<div key={loading} className={styles.container}>
 			<div className={styles.header}>
 				<IcMArrowBack
 					style={{ cursor: 'pointer' }}
 					width={20}
 					height={20}
-					onClick={() => router.push('/learning/faq/create/test-module')}
+					onClick={() => router.push('/learning/test-module')}
 				/>
 
 				<div className={styles.title}>New Question Set</div>
@@ -55,6 +58,8 @@ function CreateQuestionSet() {
 				setAllKeysSaved={setAllKeysSaved}
 				editDetails={editDetails}
 				setEditDetails={setEditDetails}
+				setFilters={setFilters}
+				filters={filters}
 			/>
 		</div>
 	);

@@ -19,6 +19,8 @@ function AddQuestionsForm({
 	editDetails,
 	setEditDetails,
 	from,
+	setFilters,
+	filters,
 }) {
 	const { test_questions } = data || {};
 
@@ -44,6 +46,8 @@ function AddQuestionsForm({
 					setAllKeysSaved={setAllKeysSaved}
 					questionSetId={questionSetId}
 					getTestQuestionTest={getTestQuestionTest}
+					setFilters={setFilters}
+					filters={filters}
 				/>
 			) : null}
 

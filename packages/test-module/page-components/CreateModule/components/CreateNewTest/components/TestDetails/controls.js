@@ -29,7 +29,7 @@ const getControls = () => [
 			placeholder : 'User group',
 			rules       : { required: 'This is required' },
 		}],
-		type: 'select_entity_usergroups',
+		type: 'select-entity-usergroups',
 	},
 	{
 		name        : 'test_duration',

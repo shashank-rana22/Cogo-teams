@@ -2,27 +2,23 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 function useGetTestList() {
-	const [{ loading = false }, trigger] = useRequest({
+	const [{ loading = false, data = {} }, trigger] = useRequest({
 		url    : 'list_tests',
 		method : 'GET',
 	}, { manual: true });
 
-	const [listData, setListData] = useState('');
 	const [params, setParams] = useState({
-
+		page    : 1,
+		filters : {
+			status: 'active',
+		},
 	});
 
-	const fetchList = async () => {
+	const fetchList = () => {
 		try {
-			const res = await trigger({
-				params: {
-					filters: {
-						status: 'active',
-					},
-				},
-
+			trigger({
+				params,
 			});
-			setListData(res.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -33,9 +29,10 @@ function useGetTestList() {
 	}, [params]);
 
 	return {
-		data: listData || {},
+		data,
 		loading,
 		fetchList,
+		params,
 		setParams,
 	};
 }

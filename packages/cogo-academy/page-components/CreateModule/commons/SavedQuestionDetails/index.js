@@ -1,5 +1,5 @@
-import { Tooltip, Button, Table, Pagination } from '@cogoport/components';
-import { IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
+import { Input, ButtonIcon, Tooltip, Button, Table, Pagination } from '@cogoport/components';
+import { IcMSearchlight, IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -30,6 +30,8 @@ function SavedQuestionDetails({
 	setAllKeysSaved,
 	getTestQuestionTest,
 	questionSetId,
+	setFilters,
+	filters,
 }) {
 	const [caseToShow, setCaseToShow] = useState('');
 
@@ -86,8 +88,6 @@ function SavedQuestionDetails({
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
 				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
-
-				{/* <IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} /> */}
 			</div>
 
 			{item.id === caseToShow
@@ -102,8 +102,6 @@ function SavedQuestionDetails({
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
 				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
-
-				{/* <IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} /> */}
 			</div>
 
 			{item.id === caseToShow
@@ -129,8 +127,6 @@ function SavedQuestionDetails({
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
 				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
-
-				{/* <IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} /> */}
 			</div>
 
 			{item.id === caseToShow
@@ -160,11 +156,16 @@ function SavedQuestionDetails({
 			Header   : 'Question/Case',
 			id       : 'question_text',
 			accessor : (item) => (
-				<section>
-					{item?.question_type !== 'case_study'
-						? item?.question_text
-						: getCaseQuestion(item)}
-				</section>
+				<Tooltip content={item?.question_type !== 'case_study'
+					? item?.question_text
+					: getCaseQuestion(item)}
+				>
+					<div className={styles.question_div}>
+						{item?.question_type !== 'case_study'
+							? item?.question_text
+							: getCaseQuestion(item)}
+					</div>
+				</Tooltip>
 			),
 		},
 		{
@@ -200,7 +201,6 @@ function SavedQuestionDetails({
 						)
 						: getCaseAnswerKey(item)}
 				</section>
-
 			),
 		},
 		{
@@ -273,6 +273,16 @@ function SavedQuestionDetails({
 
 	return (
 		<div className={styles.table_container}>
+			<div className={styles.input_container}>
+				<Input
+					size="md"
+					suffix={<ButtonIcon size="md" icon={<IcMSearchlight />} disabled={false} themeType="primary" />}
+					placeholder="Search for Question/topic"
+					onChange={(val) => setFilters((prev) => ({ ...prev, q: val }))}
+					value={filters?.q}
+				/>
+			</div>
+
 			<Table
 				className={styles.table_container}
 				data={test_questions.filter((item) => item.id !== editDetails?.id)}

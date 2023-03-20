@@ -1,4 +1,4 @@
-import { Pill, Button } from '@cogoport/components';
+import { Pill, Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -13,7 +13,7 @@ import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
 function ReviewAndCriteria() {
-	const { control, formState:{ errors }, watch } = useForm();
+	const { control, formState:{ errors }, handleSubmit } = useForm();
 	const { updateTest } = useUpdateTest();
 	const router = useRouter();
 	const test_id = router.query?.id;
@@ -36,7 +36,7 @@ function ReviewAndCriteria() {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<IcMArrowBack width={20} height={20} onClick={navigate} />
-				<div className={styles.title}> Review and Set Criteria </div>
+				<div className={styles.title}>New Test</div>
 			</div>
 
 			<div className={styles.subcontainer}>
@@ -77,22 +77,24 @@ function ReviewAndCriteria() {
 					size="md"
 					themeType="tertiary"
 					style={{ marginRight: '10px' }}
-					onClick={() => {
-					}}
+					// onClick={handleSubmit((values) => {
+					// 	// if (!isEmpty(errors)) Toast.error('Fill all required fields');
+					// 	// createTest({ data: values, idArray, next: 'draft' });
+					// })}
 				>
 					Save As Draft
 				</Button>
 				<Button
 					size="md"
 					themeType="primary"
-					onClick={() => {
-						const values = watch();
-						updateTest({ test_id, values });
-						console.log('values::', values);
-					}}
+					onClick={
+						handleSubmit((values) => {
+							if (!isEmpty(errors)) Toast.error('Fill all required fields');
+							updateTest({ test_id, values });
+						})
+					}
 				>
 					Publish Test
-
 				</Button>
 			</div>
 		</div>

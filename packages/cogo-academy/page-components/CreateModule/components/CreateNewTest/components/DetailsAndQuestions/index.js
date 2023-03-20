@@ -1,26 +1,27 @@
-import { Button } from '@cogoport/components';
+import { Toast, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useCreateTest from '../../../../hooks/useCreateTest';
 
-import NewQuestion from './components/NewQuestion';
+// import NewQuestion from './components/NewQuestion';
 import QuestionSet from './components/QuestionSet';
 import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
 function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
-	const [showNewQuestion, setShowNewQuestion] = useState(false);
+	// const [allKeysSaved, setAllKeysSaved] = useState(false);
 	const [idArray, setIdArray] = useState([]);
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
 
-	const { control, formState:{ errors }, watch } = useForm();
+	const { control, formState:{ errors }, handleSubmit } = useForm();
 
 	return (
 		<div className={styles.container}>
-			<TestDetails control={control} watch={watch} errors={errors} />
+			<TestDetails control={control} errors={errors} />
 
 			<div className={styles.btn_container}>
 				{!showQuestionSet ? (
@@ -33,44 +34,50 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 						From Existing Question Set
 					</Button>
 				) : null}
-				{!showNewQuestion ? (
+
+				{/* {allKeysSaved ? (
 					<Button
-						onClick={() => setShowNewQuestion(true)}
+						onClick={() => setAllKeysSaved(false)}
 						size="md"
 						themeType="accent"
 					>
 						+ Add New Question
 					</Button>
-				) : null}
+				) : null} */}
 
 			</div>
 
 			{showQuestionSet && <QuestionSet setIdArray={setIdArray} setShowQuestionSet={setShowQuestionSet} />}
 
-			{showNewQuestion && <NewQuestion setShowNewQuestion={setShowNewQuestion} />}
+			{/* {!allKeysSaved && <NewQuestion allKeysSaved={allKeysSaved} setAllKeysSaved={setAllKeysSaved} />} */}
 
-			{(showQuestionSet || showNewQuestion) && (
+			{showQuestionSet && (
 				<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 					<Button
 						loading={loading}
 						size="md"
 						themeType="tertiary"
 						style={{ marginRight: '10px' }}
-						onClick={() => {
-							const data = watch();
-							createTest({ data, idArray });
-						}}
+						onClick={
+							handleSubmit((values) => {
+								if (!isEmpty(errors)) Toast.error('Fill all required fields');
+								createTest({ data: values, idArray, next: 'draft' });
+							})
+						}
 					>
 						Save As Draft
 					</Button>
+
 					<Button
+						loading={loading}
 						size="md"
 						themeType="primary"
-						onClick={() => {
-							const data = watch();
-							console.log('data:: ', data);
-							createTest({ data, idArray });
-						}}
+						onClick={
+							handleSubmit((values) => {
+								if (!isEmpty(errors)) Toast.error('Fill all required fields');
+								createTest({ data: values, idArray, next: 'criteria' });
+							})
+						}
 					>
 						Review And Set Validity
 					</Button>

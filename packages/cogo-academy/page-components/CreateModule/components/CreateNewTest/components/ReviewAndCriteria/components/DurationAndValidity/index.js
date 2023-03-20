@@ -21,7 +21,7 @@ function DurationAndValidity({ control, errors }) {
 
 						<div className={styles.control}>
 							<Element control={control} {...controlItem} className={styles[`element_${name}`]} />
-							{errors[name] && <div className={styles.error_msg}>This is required</div>}
+							{errors[name] && <div className={styles.error_msg}>{errors[name]?.message}</div>}
 						</div>
 					</div>
 				);

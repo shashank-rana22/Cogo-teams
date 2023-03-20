@@ -1,4 +1,4 @@
-import { Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill } from '@cogoport/components';
+import { Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill, Pagination } from '@cogoport/components';
 import { IcMSearchlight, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
@@ -7,8 +7,10 @@ import useGetTestQuestionSets from '../../../../../../hooks/useGetTestQuestionSe
 import styles from './styles.module.css';
 
 function QuestionSet({ setIdArray, setShowQuestionSet }) {
-	const { data, loading } = useGetTestQuestionSets();
+	const { data, loading, setParams } = useGetTestQuestionSets();
 	// const [idArray, setIdArray] = useState([]);
+	const { page = 0, page_limit: pageLimit = 0, total_count = 0, list } = data || {};
+
 	const handleChange = ({ event, id }) => {
 		if (event.target.checked) {
 			setIdArray((prev) => [...prev, id]);
@@ -32,10 +34,8 @@ function QuestionSet({ setIdArray, setShowQuestionSet }) {
 					key="hello"
 					name="hello"
 					className={styles.checkbox}
-					// checked={value.includes(nestedOptionValue)}
 					value={id}
 					onChange={(event) => { handleChange({ event, id }); }}
-					// disabled={disabled}
 				/>
 			),
 		},
@@ -138,12 +138,25 @@ function QuestionSet({ setIdArray, setShowQuestionSet }) {
 					<span className={styles.span_text}>Sort By</span>
 				</div>
 			</div>
+
 			<Table
 				className={styles.table_container}
-				data={data?.list || []}
+				data={list || []}
 				columns={columns}
 				loading={loading}
 			/>
+
+			{total_count > 10 ? (
+				<div className={styles.pagination_container}>
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={pageLimit}
+						onPageChange={(val) => setParams({ page: val })}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }
