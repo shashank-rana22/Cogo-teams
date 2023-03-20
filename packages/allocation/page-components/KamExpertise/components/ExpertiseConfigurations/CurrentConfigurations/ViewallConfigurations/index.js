@@ -1,10 +1,9 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
+
 import useGetKamExpertiseCurrentConfig from '../../../../hooks/useGetKamExpertiseCurrentConfig';
-
 import ConfigurationCard from '../ConfigurationCard';
-
 
 import styles from './styles.module.css';
 
@@ -74,10 +73,9 @@ function ViewAllConfigurations() {
 
 	];
 
+	const { listKamExpertiseCurrentConfigs = {} } = useGetKamExpertiseCurrentConfig();
 
-	const {listKamExpertiseCurrentConfigs = {}} = useGetKamExpertiseCurrentConfig();   
-
-	console.log("list ",listKamExpertiseCurrentConfigs);
+	console.log('list ', listKamExpertiseCurrentConfigs);
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise/configurations');
