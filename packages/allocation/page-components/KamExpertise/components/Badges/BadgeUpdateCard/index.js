@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', watch, isLastItem }) {
 	const { medalType, score = '', inputPlaceHolder = '' } = data;
 
-	const InputElement = getFieldController('number');
-	const UploadControler = getFieldController('fileUpload');
+	const InputController = getFieldController('number');
+	const UploadController = getFieldController('fileUpload');
 
 	const MEDAL_IMAGE_MAPPING = {
 		Bronze : badgeListData?.badge_details?.[0]?.image_url,
@@ -32,7 +32,7 @@ function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', 
 				<div>
 					<p style={{ color: '#4f4f4f' }}>Score</p>
 
-					<InputElement
+					<InputController
 						name={`${medalType}_value`}
 						value={score || ''}
 						id={`${medalType}_value_input`}
@@ -59,7 +59,7 @@ function BadgeUpdateCard({ data = {}, badgeListData = {}, control, errors = '', 
 
 			<div className={styles.file_select_style}>
 				<div className={styles.uploader}>
-					<UploadControler
+					<UploadController
 						name={`${medalType}_img_value`}
 						control={control}
 						accept=".png, .jpeg"
