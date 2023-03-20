@@ -40,7 +40,6 @@ function useAllTopicCardView({ date = '' }) {
 	);
 
 	useEffect(() => { fetchFaqTopic(); }, [fetchFaqTopic, date, page]);
-	
 	const { page_limit, total, total_count } = data || {};
 	return {
 		refetchTopic: fetchFaqTopic,
