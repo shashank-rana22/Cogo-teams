@@ -33,6 +33,8 @@ function Header({
 	isomniChannelAdmin = false,
 	setDisableButton = () => {},
 	disableButton = '',
+	updateRoomLoading = false,
+	updateUserRoom = () => {},
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const { chat_tags = [] } = activeMessageCard || {};
@@ -43,8 +45,13 @@ function Header({
 		mobile_no = '',
 		channel_type,
 		user_type,
+		user_id = null,
+		lead_user_id = null,
+		sender = null,
 		search_user_name = '',
 	} = formattedData || {};
+
+	const userDetailsMissing = !(user_id || lead_user_id || sender);
 
 	const getLowerLabel = () => {
 		if (user_name?.includes('anonymous')) {
@@ -113,7 +120,51 @@ function Header({
 			</Button>
 		</div>
 	);
-
+	const renderRightButton = () => {
+		if (userDetailsMissing) {
+			return (
+				<Button
+					themeType="secondary"
+					size="md"
+					className={styles.styled_button}
+					onClick={() => updateUserRoom(mobile_no)}
+					loading={updateRoomLoading}
+				>
+					Update User
+				</Button>
+			);
+		}
+		return (
+			<div>
+				{showBotMessages && isomniChannelAdmin ? (
+					<Popover
+						placement="bottom"
+						trigger="click"
+						render={renderButtonOption()}
+					>
+						<Button
+							themeType="secondary"
+							size="md"
+							className={styles.styled_button}
+						>
+							Assign To
+						</Button>
+					</Popover>
+				) : (
+					<Button
+						themeType="secondary"
+						size="md"
+						disabled={disableAssignButton}
+						className={styles.styled_button}
+						onClick={() => assignButtonAction('assign')}
+						loading={showBotMessages && assignLoading}
+					>
+						Assign
+					</Button>
+				)}
+			</div>
+		);
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_space_between}>
@@ -152,32 +203,7 @@ function Header({
 							/>
 						</div>
 					)}
-					{showBotMessages && isomniChannelAdmin ? (
-						<Popover
-							placement="bottom"
-							trigger="click"
-							render={renderButtonOption()}
-						>
-							<Button
-								themeType="secondary"
-								size="md"
-								className={styles.styled_button}
-							>
-								Assign To
-							</Button>
-						</Popover>
-					) : (
-						<Button
-							themeType="secondary"
-							size="md"
-							disabled={disableAssignButton}
-							className={styles.styled_button}
-							onClick={() => assignButtonAction('assign')}
-							loading={showBotMessages && assignLoading}
-						>
-							Assign
-						</Button>
-					)}
+					{renderRightButton()}
 				</div>
 			</div>
 			<div className={styles.flex_space_between}>
