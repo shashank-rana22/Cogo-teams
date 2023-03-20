@@ -240,7 +240,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 							${styles.flex_left_padding} 
 						`}
 					>
-						<p style={{ fontSize: 9, color: tempColor }} className={styles.text}>
+						<p style={{ fontSize: 9, color: tempColor, lineHeight: '12px' }} className={styles.text}>
 							It is agreed that the goods declared herein are accepted in
 							apparent good order and condition (except as noted) for carriage
 							SUBJECT TO THE CONDITIONS OF CONTRACT ON THE REVERSE HEREOF. ALL
