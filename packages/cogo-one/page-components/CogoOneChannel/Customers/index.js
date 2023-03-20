@@ -1,8 +1,10 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
-import React from 'react';
+import { IcMPlus } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import InactiveModal from './InactiveModal';
 import MessageList from './MessageList';
+import NewWhatsappMessage from './NewWhatsappMessage';
 import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
@@ -35,12 +37,18 @@ function Customers({
 	setShowDialModal = () => {},
 
 }) {
+	const [modalType, setModalType] = useState(false);
+	const [isChecked, setIsChecked] = useState(false);
 	const onChangeToggle = () => {
 		if (toggleStatus) {
 			setOpenModal(true);
 		} else {
 			updateUserStatus({ status: 'active' });
 		}
+	};
+
+	const handleOpenOptions = () => {
+		setIsChecked(!isChecked);
 	};
 	return (
 		<div className={styles.container}>
@@ -122,6 +130,45 @@ function Customers({
 					loading={statusLoading}
 					updateUserStatus={updateUserStatus}
 
+				/>
+			)}
+			<div className={styles.wrapper}>
+
+				<input
+					id="plus_checkbox"
+					type="checkbox"
+					className={styles.checkbox}
+					checked={isChecked}
+				/>
+				<div htmlFor="plus_checkbox" className={styles.plus_circle}>
+					<div className={styles.wheel_box}>
+						<IcMPlus onClick={handleOpenOptions} fill="#ffffff" width={35} height={35} />
+						<div className={styles.wheel}>
+							<div className={`${styles.action} ${styles.call_icon}`}>
+								<img
+									onClick={() => setShowDialModal(true)}
+									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/call_light.svg"
+									alt="call icon"
+									role="presentation"
+								/>
+							</div>
+							<div className={`${styles.action} ${styles.whatsapp_icon}`}>
+								<img
+									onClick={() => setModalType(true)}
+									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg"
+									alt="whatsapp icon"
+									role="presentation"
+								/>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{modalType && (
+				<NewWhatsappMessage
+					setModalType={setModalType}
+					modalType={modalType}
 				/>
 			)}
 		</div>
