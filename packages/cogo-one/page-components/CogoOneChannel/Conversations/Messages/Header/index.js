@@ -214,7 +214,7 @@ function Header({
 							{startCase(user_name) || 'User'}
 							<span className={styles.span_whatsapp_name}>
 								(
-								{search_user_name || 'User'}
+								{startCase(search_user_name) || 'User'}
 								)
 							</span>
 						</div>
