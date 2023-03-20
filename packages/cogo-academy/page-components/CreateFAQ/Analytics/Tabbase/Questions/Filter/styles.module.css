@@ -27,16 +27,6 @@
 			font-weight: 600;
 		}
 
-		.react-datepicker-popper {
-			z-index: 1000;
-		}
-
-		.react-datepicker__input-container {
-			input {
-				font-family: Poppins, sans-serif;
-			}
-		}
-
 		.ui_select_input_placeholder {
 			font-weight: 600;
 			color: #828282;

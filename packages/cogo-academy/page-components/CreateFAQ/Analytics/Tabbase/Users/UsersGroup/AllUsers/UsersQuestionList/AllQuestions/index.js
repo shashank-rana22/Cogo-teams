@@ -11,7 +11,7 @@ function AllQuestions({ props = [] }) {
 	const truncate = (str) => (str?.length > 58 ? `${str.substring(0, 56)}...` : str);
 
 	const listdata = props || [];
-	console.log(listdata, 'ld');
+	console.log(listdata, 'list');
 	const addedQuestionsColumns = () => [
 		{
 			Header   : 'Questions',
@@ -46,7 +46,7 @@ function AllQuestions({ props = [] }) {
 			Header   : 'No.of Likes',
 			accessor : (items) => (
 				<div className={styles.question}>
-					{items?.answers[0]?.upvote_count}
+					{items?.answers?.[0]?.upvote_count}
 				</div>
 			),
 		},
@@ -54,7 +54,7 @@ function AllQuestions({ props = [] }) {
 			Header   : 'No.of Dislikes',
 			accessor : (items) => (
 				<div className={styles.question}>
-					{items?.answers[0]?.downvote_count}
+					{items?.answers?.[0]?.downvote_count}
 				</div>
 			),
 		},
