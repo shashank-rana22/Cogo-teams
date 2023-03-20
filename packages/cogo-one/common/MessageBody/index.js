@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMUserAllocations } from '@cogoport/icons-react';
 
 import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
@@ -7,7 +8,7 @@ import CustomFileDiv from './CustomFileDiv';
 import styles from './styles.module.css';
 
 function MessageBody({ response = {}, message_type = 'text' }) {
-	const { message = '', media_url = '' } = response;
+	const { message = '', media_url = '', profanity_check = '' } = response;
 	const fileExtension = media_url?.split('.').pop();
 	const { renderURLText, renderBoldText } = whatsappTextFormatting();
 
@@ -30,7 +31,8 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 					<img
 						src={media_url}
 						alt={message_type}
-						className={styles.object_styles}
+						className={cl`${styles.object_styles}
+						 ${profanity_check === 'nudity' ? styles.profanity_blur : ''}`}
 					/>
 				);
 			case 'audio':

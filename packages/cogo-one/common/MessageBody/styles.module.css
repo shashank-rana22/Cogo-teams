@@ -3,6 +3,10 @@
 	max-height: 250px;
 }
 
+.profanity_blur {
+	filter: blur(20px);
+}
+
 .clickable_object {
 	display: block;
 	cursor: pointer;
