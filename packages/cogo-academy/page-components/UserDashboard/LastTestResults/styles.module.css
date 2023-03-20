@@ -1,0 +1,28 @@
+.container {
+	padding: 24px;
+	margin-right: 40px;
+	background: #fff;
+	border-radius: 4px;
+}
+
+.message_container {
+	display: flex;
+}
+
+.message_content {
+	display: flex;
+	font-size: 18px;
+	font-weight: 600;
+	color: #849e4c;
+}
+
+.name {
+	margin-left: 4px;
+	color: #221f20;
+}
+
+.stats {
+	display: flex;
+
+	/* justify-content: space-between; */
+}
