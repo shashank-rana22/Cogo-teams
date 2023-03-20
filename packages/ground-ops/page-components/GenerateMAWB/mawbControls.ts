@@ -286,10 +286,7 @@ const mawbControls = (disableClass) => ({
 			showOptional : false,
 			span         : 5,
 			placeholder  : 'Rate per Kg',
-			rules        : {
-				required: disableClass,
-			},
-			disabled: disableClass,
+			disabled     : disableClass,
 		},
 		{
 			name        : 'currency',
