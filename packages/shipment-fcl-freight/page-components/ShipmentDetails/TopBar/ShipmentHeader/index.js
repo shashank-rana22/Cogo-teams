@@ -17,30 +17,30 @@ function ShipmentHeader() {
 
 	const { po_number, importer_exporter } = shipment_data || {};
 
-	const renderContent = () => {
-		// if (isIE && !isRequested) {
-			// return (
-			// 	<RequestCancellation
-			// 		showCancel={showCancel}
-			// 		setShowCancel={setShowCancel}
-			// 		onClose={() => setShow(false)}
-			// 		refetch={refetch}
-			// 	/>
-			// );
-		// }
+	// const renderContent = () => {
+	// 	// if (isIE && !isRequested) {
+	// 		// return (
+	// 		// 	<RequestCancellation
+	// 		// 		showCancel={showCancel}
+	// 		// 		setShowCancel={setShowCancel}
+	// 		// 		onClose={() => setShow(false)}
+	// 		// 		refetch={refetch}
+	// 		// 	/>
+	// 		// );
+	// 	// }
 
-		return (
-			<CancelShipment
-				id={shipment_data?.id}
-				showCancel={showCancel}
-				setShowCancel={setShowCancel}
-				onClose={() => setShow(false)}
-				setShow={setShow}
-				// isIE={isIE}
-				// showRequest={showRequest}
-			/>
-		);
-	};
+	// 	return (
+	// 		<CancelShipment
+	// 			id={shipment_data?.id}
+	// 			showCancel={showCancel}
+	// 			setShowCancel={setShowCancel}
+	// 			onClose={() => setShow(false)}
+	// 			setShow={setShow}
+	// 			// isIE={isIE}
+	// 			// showRequest={showRequest}
+	// 		/>
+	// 	);
+	// };
 
 	const handlePoNo = () => {
 		if (po_number) {
@@ -99,7 +99,7 @@ function ShipmentHeader() {
 								placement="bottom"
 								theme="light"
 								trigger="click"
-								content={renderContent()}
+								content='Cancel Shipment'
 							>
 								<div className={styles.dots}>
 									<IcMOverflowDot />
