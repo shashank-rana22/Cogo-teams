@@ -22,7 +22,7 @@ function FormItem({ finalControl = {}, control, errors }) {
 				) : null}
 			</div>
 			{lowerlabel ? <div className={styles.lower_label}>{lowerlabel}</div> : null}
-			<DatepickerController name={name} control={control} {...{ ...rest, showTimeSelect: true }} />
+			<DatepickerController name={name} control={control} {...rest} />
 		</div>
 	);
 }

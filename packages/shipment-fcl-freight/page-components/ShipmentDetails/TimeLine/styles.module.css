@@ -18,9 +18,11 @@
     }
 }
 
-.three_dot_icon {
+.edit_icon {
     cursor: pointer;
+    fill: var(--color-accent-orange-2);
     margin-right: 10px;
+    margin-bottom: 24px;
 }
 
 .list_container{
