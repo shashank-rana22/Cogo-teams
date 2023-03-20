@@ -2,7 +2,7 @@ import { useFieldArray, useForm } from '@cogoport/forms';
 import React, { useEffect, useState } from 'react';
 
 import StyledTable from '../../../../commons/StyledTable';
-import usePostListItemTaxes from '../hooks/usePostItemTaxes';
+import usePostListItemTaxes from '../hooks/useGetListItemTaxes';
 
 import lineItemColumns from './columns';
 import styles from './styles.module.css';

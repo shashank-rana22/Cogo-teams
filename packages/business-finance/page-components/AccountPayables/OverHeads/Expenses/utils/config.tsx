@@ -43,12 +43,12 @@ export const expenseRecurringConfig = () => {
 		fields       : [
 			{
 				label : 'Name',
-				key   : 'sellerDetails.organizationName',
+				key   : 'businessName',
 				span  : 2,
 			},
 			{
 				label : 'Agreement',
-				key   : 'invoiceNumber',
+				func  : 'showAgreement',
 				span  : 2,
 			},
 			{
@@ -58,13 +58,12 @@ export const expenseRecurringConfig = () => {
 			},
 			{
 				label : 'Created on',
-				key   : 'createdOn',
+				func  : 'getCreatedOn',
 				span  : 2,
 
 			},
 			{
 				label : renderExpensePeriod(),
-				key   : 'expensePeriod',
 				span  : 2.5,
 				func  : 'renderExpensePeriod',
 			},
@@ -76,7 +75,7 @@ export const expenseRecurringConfig = () => {
 			},
 			{
 				label : 'Approved By',
-				key   : 'approvedBy',
+				func  : 'getApprovedByRecurring',
 				span  : 1.5,
 			},
 			{

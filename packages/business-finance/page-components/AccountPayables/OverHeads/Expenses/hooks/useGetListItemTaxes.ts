@@ -2,10 +2,11 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const usePostListItemTaxes = () => {
+const useGetListItemTaxes = () => {
 	const [{ data, loading = false }, trigger] = useRequestBf(
 		{
 			url     : '/common/tax/list-item-taxes',
+			// url     : 'https://api.stage.cogoport.io/common/tax/list-item-taxes',
 			method  : 'post',
 			authKey : 'post_common_tax_list_item_taxes',
 		},
@@ -37,4 +38,4 @@ const usePostListItemTaxes = () => {
 	};
 };
 
-export default usePostListItemTaxes;
+export default useGetListItemTaxes;

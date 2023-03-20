@@ -68,7 +68,7 @@
 }
 
 .expense_period_data {
-	width: 64%;
+	width: 100%;
 }
 
 .recurring_amount_data {
@@ -96,4 +96,25 @@
 	padding: 20px;
 	background: white;
 	margin-top: 16px;
+}
+.proof{
+	color:#F68B21 !important;
+	text-decoration: underline !important;
+}
+.multiple_proof{
+	color: #F68B21 !important;
+	cursor: pointer;
+	text-decoration: underline !important;
+}
+
+.pending_approval{
+    font-size: 10px;
+    background: #ffe69b;
+    padding: 4px;
+    border-radius: 4px;
+}
+.link{
+	color: #F68B21 ;
+	text-decoration: underline ;
+	cursor: pointer;
 }

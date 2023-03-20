@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -9,7 +8,7 @@ const useGetStakeholders = (expenseCategory:string) => {
 			method  : 'get',
 			authKey : 'purchase_expense_stakeholder',
 		},
-		{ autoCancel: false },
+		{ manual: true },
 	);
 
 	useEffect(() => {
@@ -22,7 +21,7 @@ const useGetStakeholders = (expenseCategory:string) => {
 					},
 				});
 			} catch (err) {
-				Toast.error('Something went wrong');
+				console.log('error-', err);
 			}
 		};
 
