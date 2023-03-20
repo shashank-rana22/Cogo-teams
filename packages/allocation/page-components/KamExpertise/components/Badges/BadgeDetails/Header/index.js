@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 function Header(props) {
 	const {
-		badgeLength = 1,
 		setToggleScreen = () => {},
 		searchValue,
 		setSearchValue = () => {},
@@ -55,7 +54,7 @@ function Header(props) {
 					disabled={loading}
 					onClick={() => {
 						setMasteryListData({});
-						setToggleScreen('mastery');
+						setToggleScreen('create_mastery');
 					}}
 				>
 					Add Mastery
@@ -70,11 +69,7 @@ function Header(props) {
 						setToggleScreen('create_badge');
 					}}
 				>
-					{
-						badgeLength
-							? 'Add New Badge'
-							: 'Create New Badge'
-					}
+					Add New Badge
 				</Button>
 			</div>
 		</div>

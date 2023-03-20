@@ -16,7 +16,6 @@ function BadgeDetails(props) {
 	return (
 		<div>
 			<Header
-				badgeLength={badgeList.length}
 				setToggleScreen={setToggleScreen}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}

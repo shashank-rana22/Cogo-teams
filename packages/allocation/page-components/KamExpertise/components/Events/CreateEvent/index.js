@@ -1,5 +1,4 @@
 import { Placeholder, Button } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -141,9 +140,10 @@ function CreateEvent(props) {
 							: (
 								<div className={styles.account_attributes}>
 									<div className={styles.account_attribute_text}>
-										Account Attribute
+										{startCase(watchListener || '')}
+
 										{' '}
-										<IcMInfo />
+										{/* <IcMInfo /> */}
 									</div>
 
 									<section className={styles.row_container}>

@@ -21,7 +21,9 @@ const MEDALS_MAPPING = [
 	},
 ];
 
-function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
+function CreateBadge(props) {
+	const { setToggleScreen, badgeListData = {}, listRefetch } = props;
+
 	const onClose = () => {
 		setToggleScreen('badge_details');
 	};
@@ -43,7 +45,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 						<p className={styles.text_styles}>
 							Last Modified :
 							{' '}
-							{format(badgeListData.updated_at, 'yyyy-MMM-dd')}
+							{badgeListData.updated_at ? format(badgeListData.updated_at, 'yyyy-MMM-dd') : '___'}
 						</p>
 
 						{/* <p className={styles.text_styles}>
@@ -56,7 +58,7 @@ function CreateBadge({ setToggleScreen, badgeListData = {}, listRefetch }) {
 					{index}
 				</p> */}
 
-				<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>
+				<h2 style={{ color: '#4f4f4f' }}>
 					{isEmpty(badgeListData) ? 'Add Badge' : 'Update Badge'}
 				</h2>
 				<p className={styles.text_styles2}>

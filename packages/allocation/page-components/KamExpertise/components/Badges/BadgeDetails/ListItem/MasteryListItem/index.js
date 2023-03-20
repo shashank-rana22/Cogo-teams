@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryListData }) {
 	const handleEdit = () => {
 		setMasteryListData(data);
-		setToggleScreen('mastery');
+		setToggleScreen('create_mastery');
 	};
 	return (
 		<div className={styles.container}>
