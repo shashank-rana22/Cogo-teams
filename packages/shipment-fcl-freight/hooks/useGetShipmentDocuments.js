@@ -13,10 +13,18 @@ function useGetListDocuments({ shipment_data, filters = {} }) {
 
 	const listDocuments = useCallback(() => {
 		(async () => {
+			const filter = {
+				filters: {
+					q                  : filters?.q || undefined,
+					shipment_id        : id,
+					service_type       : filters?.service || undefined,
+					uploaded_by_org_id : filters?.source || undefined,
+				},
+			};
 			try {
 				const res = await trigger({
 					params: {
-						filters            : { shipment_id: id, service_type: filters?.service, uploaded_by_org_id: filters?.source, q: filters?.q },
+						...filter,
 						additional_methods : ['pagination', 'organizations'],
 						page               : 1,
 						page_limit         : 10,
@@ -24,7 +32,7 @@ function useGetListDocuments({ shipment_data, filters = {} }) {
 						sort_type          : 'desc',
 					},
 				}); if (!res.hasError) {
-					Toast.error('dsfghj');
+					// Toast.error('dsfghj');
 				}
 			} catch (err) {
 				console.log(err);

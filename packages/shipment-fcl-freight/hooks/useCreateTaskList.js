@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-
 import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -9,8 +8,8 @@ import useGetShipmentProcess from './useGetShipmentProcess';
 
 const docTasks = ['upload_document', 'approve_document', 'amend_document'];
 
-const useCreateTaskList = ({ primary_service, shipment_data }) => { 
-	const [filters, setFilters ] = useState({q: '', source: '', service: ''});
+const useCreateTaskList = ({ primary_service, shipment_data }) => {
+	const [filters, setFilters] = useState({ q: '', source: '', service: '' });
 	const [taskList, setTaskList] = useState([]);
 	const [docTypes, setDocTypes] = useState([]);
 	const { data } = useGetShipmentProcess();

@@ -19,7 +19,7 @@ function Documents() {
 	const [activeToggle, setActiveToggle] = useState(false);
 	const [show, setShow] = useState(null);
 	const [showConfirmed, setShowConfirmed] = useState(false);
-	const [addToWallet, setAddToWallet] = useState(true); 
+	const [addToWallet, setAddToWallet] = useState(true);
 
 	// const { addDocument } = useAddDocument();
 
