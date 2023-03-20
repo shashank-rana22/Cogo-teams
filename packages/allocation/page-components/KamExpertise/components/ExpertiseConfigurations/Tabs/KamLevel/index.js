@@ -59,7 +59,7 @@ function KamLevel({ selectedVersion }) {
 			{!levelLoading ? (
 				<>
 					<Collapse
-						panel={options}
+						panels={options}
 						activeKey={activeCard}
 						setActive={setActiveCard}
 						type="text"
