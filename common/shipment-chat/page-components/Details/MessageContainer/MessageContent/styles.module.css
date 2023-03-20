@@ -54,24 +54,15 @@
 
 .flex_row {
 	display: flex;
-	flex-direction: column;
-	flex: 1;
-	margin: 0;
-	background: #ffffff;
-	border-radius: 4px;
-	height: calc(100vh - 150px);
-	overflow: auto;
-	max-width: 450px;
-}
-
-.file_name {
-	display: flex;
 	align-items: center;
-	padding: 4px;
-	color: #5936f0;
+	padding: 4px 0px 4px 10px;
+	margin: 0;
+	border-radius: 4px;
 	cursor: pointer;
-	background: #f9f9f9;
-	border-radius: 0px 0px 3px 3px;
+	overflow: auto;
+	text-decoration: underline;
+	font-size: 12px;
+	font-weight: 500;
 }
 
 .dialog_box {

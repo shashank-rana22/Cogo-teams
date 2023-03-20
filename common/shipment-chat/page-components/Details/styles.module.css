@@ -133,15 +133,16 @@
 	background: #e0e0e0;
 	padding: 4px 8px;
 	border-radius: 4px;
+	margin-right: 4px;
+	font-size: 10px;
 	width: fit-content;
 	white-space: nowrap;
-	margin-right: 4px;
 }
 
 .attached_container {
 	display: flex;
-	max-width: 300px;
-	overflow-x: auto;
+	max-width: 250px;
+	/* overflow: auto; */
 }
 
 .name {
