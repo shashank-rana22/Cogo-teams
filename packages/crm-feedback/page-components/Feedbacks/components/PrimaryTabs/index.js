@@ -22,7 +22,7 @@ function PrimaryTabs({ organization_id = '' }) {
 				</TabPanel>
 
 				<TabPanel name="requests" title="Requests" badge={requestCount}>
-					<RequestTab organization_id={organization_id} />
+					<RequestTab organization_id={organization_id} setActiveTab={setActiveTab} />
 				</TabPanel>
 			</Tabs>
 		</div>

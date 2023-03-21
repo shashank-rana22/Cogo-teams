@@ -1,13 +1,11 @@
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
-import { useMemo, useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 const useRequestOrganization = ({ organization_id = '' }) => {
 	const router = useRouter();
 
-	const [selectAll, setSelectAll] = useState(false);
-	const [checkedRowsId, setCheckedRowsId] = useState([]);
+	const [checkedRow, setCheckedRow] = useState('');
 
 	const [params, setParams] = useState({
 		page_limit : 10,
@@ -78,70 +76,8 @@ const useRequestOrganization = ({ organization_id = '' }) => {
 
 	const list = dummyData;
 
-	const currentPageListIds = useMemo(() => list?.map(({ id }) => id), [list]);
-
-	const selectAllHelper = useCallback((listArgument = []) => {
-		const isRowsChecked = currentPageListIds.every((id) => listArgument.includes(id));
-
-		if (isRowsChecked !== selectAll) {
-			setSelectAll(isRowsChecked);
-		}
-	}, [currentPageListIds, selectAll]);
-
-	useEffect(() => {
-		if (isEmpty(currentPageListIds)) {
-			return;
-		}
-
-		selectAllHelper(checkedRowsId);
-	}, [currentPageListIds, checkedRowsId, selectAllHelper]);
-
 	const onChangeBodyCheckbox = (event, id) => {
-		setCheckedRowsId((previousIds) => {
-			let newCheckedIds = [];
-
-			if (event.target.checked) {
-				newCheckedIds = [...previousIds, id];
-			} else {
-				newCheckedIds = previousIds.filter((selectedId) => selectedId !== id);
-			}
-
-			selectAllHelper(newCheckedIds);
-
-			return newCheckedIds;
-		});
-	};
-
-	const onChangeTableHeadCheckbox = (event) => {
-		setCheckedRowsId((previousIds) => {
-			let newCheckedRowsIds = [...previousIds];
-
-			if (event.target.checked) {
-				newCheckedRowsIds = [...newCheckedRowsIds, ...currentPageListIds];
-			} else {
-				newCheckedRowsIds = previousIds.filter((id) => !currentPageListIds.includes(id));
-			}
-
-			setSelectAll(event.target.checked);
-
-			return [...new Set(newCheckedRowsIds)];
-		});
-	};
-
-	const deactivateRequest = () => {
-		alert('Deactivate Request');
-	};
-
-	const viewRequest = () => {
-		alert('View Response');
-	};
-
-	const handleButtonClick = ({ status }) => {
-		if (status === 'request_created') {
-			deactivateRequest();
-		} else if (status === 'response_received') {
-			viewRequest();
-		}
+		setCheckedRow(id);
 	};
 
 	return {
@@ -151,11 +87,8 @@ const useRequestOrganization = ({ organization_id = '' }) => {
 		setParams,
 		paginationData,
 		onChangeParams,
-		checkedRowsId,
-		selectAll,
-		onChangeTableHeadCheckbox,
+		checkedRow,
 		onChangeBodyCheckbox,
-		handleButtonClick,
 	};
 };
 

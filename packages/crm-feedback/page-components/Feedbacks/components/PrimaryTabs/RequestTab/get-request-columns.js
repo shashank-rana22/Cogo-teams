@@ -20,25 +20,17 @@ export const STATUS_MAPPING = {
 };
 
 export const REQUEST_COLUMNS = ({
-	selectAll = false,
-	onChangeTableHeadCheckbox = () => {},
-	checkedRowsId = [],
+	checkedRow = '',
 	onChangeBodyCheckbox = () => {},
 }) => [
 	{
-		id  : 'checkbox',
-		key : 'checkbox',
-		Header:
-	<div>
-		<Checkbox
-			checked={selectAll}
-			onChange={(event) => onChangeTableHeadCheckbox(event)}
-		/>
-	</div>,
-		accessor: ({ id = '' }) => (
+		id       : 'checkbox',
+		key      : 'checkbox',
+		Header   : ' ',
+		accessor : ({ id = '' }) => (
 			<div>
 				<Checkbox
-					checked={checkedRowsId.includes(id)}
+					checked={checkedRow === id}
 					onChange={(event) => onChangeBodyCheckbox(event, id)}
 				/>
 			</div>
