@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import CurrentConfigurations from './CurrentConfigurations';
+import PublishVersionModal from './PublishVersionModal';
 import styles from './styles.module.css';
 import KamExpertiseScoreConfig from './Tabs/KamExpertiseScore';
 import KamLevel from './Tabs/KamLevel';
@@ -26,6 +27,7 @@ function ViewAllConfigs() {
 	const [activeConfigTab, setActiveConfigTab] = useState('kam-expertise-score-config');
 	const [selectedVersion, setSelectedVersion] = useState('');
 	const [mainLoading, setMainLoading] = useState();
+	const [showPublishModal, setShowPublishModal] = useState(false);
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise');
@@ -64,14 +66,23 @@ function ViewAllConfigs() {
 							) : null;
 						})}
 					</Tabs>
+
 					<Button
 						themeType="primary"
 						className={styles.pub_button}
 						disabled={mainLoading}
+						onClick={() => setShowPublishModal(true)}
 					>
 						Publish
 
 					</Button>
+
+					{showPublishModal && (
+						<PublishVersionModal
+							setShowPublishModal={setShowPublishModal}
+							showPublishModal={showPublishModal}
+						/>
+					)}
 				</div>
 			</section>
 		</section>

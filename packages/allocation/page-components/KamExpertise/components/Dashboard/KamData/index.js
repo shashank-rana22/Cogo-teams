@@ -5,8 +5,8 @@ import React, { useState, useEffect } from 'react';
 import EmptyState from '../../../../../common/EmptyState';
 import useGetKamExpertiseDashboard from '../../../hooks/useGetKamExpertiseDashboard';
 import useGetKamExpertiseStatsList from '../../../hooks/useGetKamExpertiseStatsList';
-import BadgeFilterHeader from '../BadgeFilterHeader';
 
+import BadgeFilterHeader from './BadgeFilterHeader';
 import KamLevelScoreCard from './KamLevelScoreCard';
 import LeaderboardList from './LeaderboardList';
 import OverviewCard from './OverviewCard';
@@ -55,7 +55,8 @@ function KamData(props) {
 		// listRefetch = () => {},
 		searchKAM,
 		setSearchKAM,
-		// setBadgeName,
+		badgeName,
+		setBadgeName,
 		debounceQuery,
 		paginationData,
 		getNextPage,
@@ -136,6 +137,8 @@ function KamData(props) {
 							searchKAM={searchKAM}
 							setSearchKAM={setSearchKAM}
 							debounceQuery={debounceQuery}
+							badgeName={badgeName}
+							setBadgeName={setBadgeName}
 						/>
 
 						<LeaderboardList

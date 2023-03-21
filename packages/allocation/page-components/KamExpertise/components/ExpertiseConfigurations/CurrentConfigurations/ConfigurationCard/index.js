@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 const STATUS_COLOR_MAPPING = {
 	draft   : 'yellow',
-	live    : 'green',
+	active  : 'green',
 	expired : 'red',
 };
 
@@ -16,7 +16,7 @@ const HEADING_MAPPING = {
 			Saved Draft
 		</div>
 	),
-	live: (version) => (
+	active: (version) => (
 		<div className={styles.heading}>
 			Version
 			{' '}
@@ -48,7 +48,7 @@ function ConfigurationCard(props) {
 						color={STATUS_COLOR_MAPPING[status_value]}
 						style={{ marginRight: '28px' }}
 					>
-						{status_value ?? '--'}
+						{ status_value ?? status_value === 'active' ? 'Live' : status_value || '-'}
 
 					</Pill>
 
@@ -59,12 +59,12 @@ function ConfigurationCard(props) {
 					<div className={styles.last_modified}>
 						<div style={{ marginRight: '28px' }}>
 							Last Edit by&nbsp;:&nbsp;
-							<strong>{last_edit_by}</strong>
+							<strong>{last_edit_by ?? '--'}</strong>
 						</div>
 
 						<div>
 							Last Modified&nbsp;:&nbsp;
-							<strong>{format(last_modified, 'dd-MM-yyyy')}</strong>
+							<strong>{last_modified ? format(last_modified, 'dd-MM-yyyy') : '--'}</strong>
 						</div>
 					</div>
 				</div>

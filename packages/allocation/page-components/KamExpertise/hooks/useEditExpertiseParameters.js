@@ -4,45 +4,44 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
-const useEditExpertiseParameters = ({list=[], refetch = ()=> {}, setEditMode = ()=>{}}) => {
+const useEditExpertiseParameters = ({ list = [], refetch = () => {}, setEditMode = () => {} }) => {
 	const formProps = useForm();
 
 	const { handleSubmit, control, reset } = formProps;
 
-	const [{loading}, trigger] = useAllocationRequest({
-		url: '/kam_expertise_event_scoring_attribute',
-		method: 'POST',
-		authkey: 'post_allocation_kam_expertise_event_scoring_attribute',
-	}, {manual: true});
+	const [{ loading }, trigger] = useAllocationRequest({
+		url     : '/kam_expertise_event_scoring_attribute',
+		method  : 'POST',
+		authkey : 'post_allocation_kam_expertise_event_scoring_attribute',
+	}, { manual: true });
 
 	const onSave = async (formValues = {}) => {
 		try {
 			const attributes = [];
 
-			list.forEach((group)=>{
+			list.forEach((group) => {
 				const scores = {};
-				group.data.forEach((service)=>{
+				group.data.forEach((service) => {
 					scores.id = service.id;
-					const scoring_criteria ={};
+					const scoring_criteria = {};
 
-					Object.keys(formValues).forEach((formAttr)=>{
-						service.attributes.forEach((attr)=>{
-							if(attr.name === formAttr && formValues[formAttr]){
-								const attributeName = formAttr.substring(formAttr.indexOf('_')+1);
+					Object.keys(formValues).forEach((formAttr) => {
+						service.attributes.forEach((attr) => {
+							if (attr.name === formAttr && formValues[formAttr]) {
+								const attributeName = formAttr.substring(formAttr.indexOf('_') + 1);
 								scoring_criteria[attributeName] = formValues[formAttr];
 							}
-						})
-					})
-					scores.scoring_criteria = scoring_criteria ;
+						});
+					});
+					scores.scoring_criteria = scoring_criteria;
 
-					if(!isEmpty(scores.scoring_criteria)){
-						attributes.push(scores)
+					if (!isEmpty(scores.scoring_criteria)) {
+						attributes.push(scores);
 					}
-				})
-				
-			}) 
+				});
+			});
 
-			if(isEmpty(attributes)){
+			if (isEmpty(attributes)) {
 				Toast.error('No change in scores');
 				return;
 			}
@@ -59,7 +58,6 @@ const useEditExpertiseParameters = ({list=[], refetch = ()=> {}, setEditMode = (
 			reset();
 
 			Toast.success('Edited Successfully!');
-
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}

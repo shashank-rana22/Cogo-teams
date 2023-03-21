@@ -1,7 +1,7 @@
 import Greetings from '../GreetingsHeader';
 
 function Header({
-	badgeList,
+	userBadges,
 	detailsData,
 	setRefetch = () => {},
 	partner_user_id = '',
@@ -11,7 +11,7 @@ function Header({
 }) {
 	return (
 		<Greetings
-			badgeList={badgeList}
+			userBadges={userBadges}
 			detailsData={detailsData}
 			setRefetch={setRefetch}
 			partner_user_id={partner_user_id}

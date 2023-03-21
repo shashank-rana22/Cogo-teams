@@ -22,10 +22,8 @@ function KamLevel({ setMainLoading, selectedVersion }) {
 		setMainLoading(levelLoading);
 	}, [levelLoading, setMainLoading]);
 
-	console.log('version in  tab', selectedVersion);
-
 	const audit_data = kamConfigDetails?.audit_data || {};
-	const kamConfigLevelDetails = kamConfigDetails?.data || [];
+	const kamConfigLevelDetails = kamConfigDetails?.data || [{}];
 
 	const dataLength = kamConfigLevelDetails.length;
 	const options = kamConfigLevelDetails.map((data, id) => ({
@@ -50,9 +48,7 @@ function KamLevel({ setMainLoading, selectedVersion }) {
 		/>,
 
 	}));
-	useEffect(() => {
-		refetch();
-	}, [selectedVersion, refetch]);
+
 	return (
 		<div>
 			<Header

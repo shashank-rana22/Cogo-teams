@@ -1,4 +1,5 @@
 import { cl, Pill, Table } from '@cogoport/components';
+import { format } from '@cogoport/utils';
 import React from 'react';
 // import { Modal} from '@cogoport/components';
 
@@ -9,9 +10,12 @@ function Published({ setSelectedVersion = () => {}, version_details }) {
 	Object.keys(version_details).forEach((key) => {
 		if (key !== '') {
 			data.push({
-				version_number : key,
-				status         : ` ${version_details[key].status}`,
-				updated_at     : `${version_details[key].updated_at}`,
+				version_number: key,
+
+				status:
+				`${version_details[key].status}` === 'active' ? 'live' : `${version_details[key].status}`,
+
+				updated_at: `${version_details[key].updated_at}`,
 			});
 		}
 	});
@@ -46,6 +50,9 @@ function Published({ setSelectedVersion = () => {}, version_details }) {
 		{
 			Header   : 'LAST UPDATED',
 			accessor : 'updated_at',
+			Cell     : ({ value }) => (
+				<section>{format(value, 'dd-MM-YYYY')}</section>
+			),
 		},
 
 	];
