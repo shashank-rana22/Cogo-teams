@@ -9,9 +9,49 @@ import Published from './CreateModal/Published';
 import ModalFooter from './ModalFooter';
 import styles from './styles.module.css';
 
+const CONSTANT_KEYS = {
+	PUBLISHED_VERSION : 'published-version',
+	SAVED_DRAFT       : 'saved-draft',
+	NEW_VERSION       : 'new-version',
+	INITIAL_MODE      : 'initial-mode',
+};
+
+const { PUBLISHED_VERSION, SAVED_DRAFT, NEW_VERSION, INITIAL_MODE } = CONSTANT_KEYS;
+
+const CREATE_CONFIGURATION_MAPPING = {
+	[PUBLISHED_VERSION] : Published,
+	[SAVED_DRAFT]       : Draft,
+	[NEW_VERSION]       : NewVersion,
+	[INITIAL_MODE]      : CreateModal,
+};
+
 function Header({ setSelectedVersion, selectedVersion, audit_data, version_details }) {
-	const [mode, setMode] = useState('');
+	const [mode, setMode] = useState('initial-mode');
 	const [showModal, setShowModal] = useState(false);
+
+	const componentProps = {
+		[PUBLISHED_VERSION]: {
+			selectedVersion,
+			setSelectedVersion,
+			version_details,
+		},
+		[SAVED_DRAFT]: {
+			setMode,
+			setShowModal,
+			setSelectedVersion,
+		},
+		[NEW_VERSION]: {
+			setMode,
+			setShowModal,
+			setSelectedVersion,
+		},
+		[INITIAL_MODE]: {
+			setMode,
+			setSelectedVersion,
+		},
+	};
+
+	const Component = CREATE_CONFIGURATION_MAPPING[mode] || null;
 
 	return (
 		<div className={styles.container}>
@@ -57,49 +97,19 @@ function Header({ setSelectedVersion, selectedVersion, audit_data, version_detai
 					show={showModal}
 					onClose={() => {
 						setShowModal(false);
-						setMode('');
+						setMode('initial-mode');
 						setSelectedVersion('');
 					}}
 					placement="top"
 				>
 					<Modal.Header title="Create" />
 					<Modal.Body>
-						{(() => {
-							switch (mode) {
-								case 'published-version':
-									return (
-										<Published
-											selectedVersion={selectedVersion}
-											setSelectedVersion={setSelectedVersion}
-											version_details={version_details}
-										/>
-
-									);
-								case 'saved-draft':
-									return (
-										<Draft
-											setMode={setMode}
-											setShowModal={setShowModal}
-											setSelectedVersion={setSelectedVersion}
-										/>
-									);
-								case 'new-version':
-									return (
-										<NewVersion
-											setMode={setMode}
-											setShowModal={setShowModal}
-											setSelectedVersion={setSelectedVersion}
-										/>
-									);
-								default:
-									return (
-										<CreateModal
-											setMode={setMode}
-											setSelectedVersion={setSelectedVersion}
-										/>
-									);
-							}
-						})()}
+						{Component && (
+							<Component
+								key={mode}
+								{...(componentProps[mode] || {})}
+							/>
+						)}
 					</Modal.Body>
 
 					{mode === 'published-version' ? (
@@ -111,9 +121,8 @@ function Header({ setSelectedVersion, selectedVersion, audit_data, version_detai
 								selectedVersion={selectedVersion}
 							/>
 						</Modal.Footer>
-					) : (
-						null
-					)}
+					)
+						: null}
 				</Modal>
 			</div>
 
