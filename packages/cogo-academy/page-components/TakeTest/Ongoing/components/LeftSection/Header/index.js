@@ -13,7 +13,7 @@ function Header({ datas = {}, total_question, testData }) {
 			<div className={styles.heading}>{testData?.name}</div>
 
 			<div className={styles.progress}>
-				<ProgressBar progress={(number / total_question) * 100} uploadText=" " />
+				<ProgressBar progress={((number / total_question) * 100).toFixed(2)} uploadText=" " />
 				{number}
 				{' '}
 				/
