@@ -505,7 +505,7 @@ function Shipment() {
 						</div>
 					) : (
 						<EmptyState
-							height={350}
+							height={500}
 							width={875}
 							emptyText="Search for records above"
 							textSize="24px"

@@ -12,7 +12,7 @@ function Trends() {
 	const [searchValue, setSearchValue] = useState('');
 	const [answer, setAnswer] = useState([]);
 	const [hscodearr, setHscodearr] = useState([]);
-	const [shipmenttype, setShipmenttype] = useState([]);
+	const [shipmenttype, setShipmenttype] = useState(['import']);
 	console.log(hscodearr);
 	console.log(shipmenttype);
 
@@ -132,6 +132,7 @@ function Trends() {
 									setShipmenttype('import');
 								}
 							}}
+							checked
 						/>
 						<label htmlFor="import"> Import</label>
 						<input

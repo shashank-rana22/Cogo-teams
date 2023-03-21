@@ -33,7 +33,9 @@
     display: flex;
     background-color: white;
     margin-top: 25px;
-    border: 2px solid black;
+    border: 2px solid beige;
+    border-radius: 6px;
+    box-shadow: 10px 5px 5px rgb(239, 233, 233)
 }
 .trendingovertime{
     font-size: 20px;

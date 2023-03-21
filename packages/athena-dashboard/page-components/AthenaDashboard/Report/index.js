@@ -15,7 +15,7 @@ function Report() {
 	const [hsdesc, setHsdesc] = useState([]);
 	const [optn, setOptn] = useState([]);
 	const [optn2, setOptn2] = useState([]);
-	const [info, setInfo] = useState({});
+	const [info, setInfo] = useState([]);
 	// const [firstRender, setFirstRender] = useState(false);
 	// console.log(general.query.hscodes.split(','));
 	console.log(info);
@@ -61,18 +61,18 @@ function Report() {
 		{
 			id    : 'India',
 			color : 'hsl(1, 100%, 50%)',
-			data  : answer.map((Item) => ({
+			data  : (answer || []).map((Item) => ({
 				x : Item.month_name,
 				y : Item.total,
 			})),
 		},
 	];
-	const mapdata = optn.map((Item) => ({
+	const mapdata = (optn || []).map((Item) => ({
 		id    : Item.country_code,
 		value : Item.total,
 	}));
 
-	const mapdata2 = optn2.map((Item) => ({
+	const mapdata2 = (optn2 || []).map((Item) => ({
 		id    : Item.country_code,
 		value : Item.percent_share.toFixed(2),
 	}));
@@ -101,62 +101,62 @@ function Report() {
 		{ Header: 'Nov', accessor: 'november' },
 		{ Header: 'Dec', accessor: 'december' },
 	];
-	const data2 = (Object.keys(info)).map((item) => ({
-		country : info[item].country,
-		share   : `${info[item].percent_share.toFixed(2)}%`,
+	const data2 = (info || []).map((item) => ({
+		country : item.country,
+		share   : `${item.percent_share.toFixed(2)}%`,
 		trend   : <div style={{ height: '50px', width: '70px' }}>
 			{/* <ResponsiveLine data={linedata2} /> */}
 			<ResponsiveLine data={[
 				{
-					id   : info[item].country,
+					id   : item.country,
 					data : [
 						{
 							x : 'January',
-							y : info[item].January || 0,
+							y : item.January || 0,
 						},
 						{
 							x : 'February',
-							y : info[item].February || 0,
+							y : item.February || 0,
 						},
 						{
 							x : 'March',
-							y : info[item].March || 0,
+							y : item.March || 0,
 						},
 						{
 							x : 'April',
-							y : info[item].April || 0,
+							y : item.April || 0,
 						},
 						{
 							x : 'May',
-							y : info[item].May || 0,
+							y : item.May || 0,
 						},
 						{
 							x : 'June',
-							y : info[item].June || 0,
+							y : item.June || 0,
 						},
 						{
 							x : 'July',
-							y : info[item].July || 0,
+							y : item.July || 0,
 						},
 						{
 							x : 'August',
-							y : info[item].August || 0,
+							y : item.August || 0,
 						},
 						{
 							x : 'September',
-							y : info[item].September || 0,
+							y : item.September || 0,
 						},
 						{
 							x : 'October',
-							y : info[item].October || 0,
+							y : item.October || 0,
 						},
 						{
 							x : 'November',
-							y : info[item].November || 0,
+							y : item.November || 0,
 						},
 						{
 							x : 'December',
-							y : info[item].December || 0,
+							y : item.December || 0,
 						},
 
 					],
@@ -164,19 +164,19 @@ function Report() {
 			]}
 			/>
 
-            </div>,
-		january   : (info[item].January !== undefined) ? info[item].January.toLocaleString('en-IN') : 0,
-		february  : (info[item].February !== undefined) ? info[item].February.toLocaleString('en-IN') : 0,
-		march     : (info[item].March !== undefined) ? info[item].March.toLocaleString('en-IN') : 0,
-		april     : (info[item].April !== undefined) ? info[item].April.toLocaleString('en-IN') : 0,
-		may       : (info[item].May !== undefined) ? info[item].May.toLocaleString('en-IN') : 0,
-		june      : (info[item].June !== undefined) ? info[item].June.toLocaleString('en-IN') : 0,
-		july      : (info[item].July !== undefined) ? info[item].July.toLocaleString('en-IN') : 0,
-		august    : (info[item].August !== undefined) ? info[item].August.toLocaleString('en-IN') : 0,
-		september : (info[item].September !== undefined) ? info[item].September.toLocaleString('en-IN') : 0,
-		october   : (info[item].October !== undefined) ? info[item].October.toLocaleString('en-IN') : 0,
-		november  : (info[item].November !== undefined) ? info[item].November.toLocaleString('en-IN') : 0,
-		december  : (info[item].December !== undefined) ? info[item].December.toLocaleString('en-IN') : 0,
+		</div>,
+		january   : (item.January !== undefined) ? item.January.toLocaleString('en-IN') : 0,
+		february  : (item.February !== undefined) ? item.February.toLocaleString('en-IN') : 0,
+		march     : (item.March !== undefined) ? item.March.toLocaleString('en-IN') : 0,
+		april     : (item.April !== undefined) ? item.April.toLocaleString('en-IN') : 0,
+		may       : (item.May !== undefined) ? item.May.toLocaleString('en-IN') : 0,
+		june      : (item.June !== undefined) ? item.June.toLocaleString('en-IN') : 0,
+		july      : (item.July !== undefined) ? item.July.toLocaleString('en-IN') : 0,
+		august    : (item.August !== undefined) ? item.August.toLocaleString('en-IN') : 0,
+		september : (item.September !== undefined) ? item.September.toLocaleString('en-IN') : 0,
+		october   : (item.October !== undefined) ? item.October.toLocaleString('en-IN') : 0,
+		november  : (item.November !== undefined) ? item.November.toLocaleString('en-IN') : 0,
+		december  : (item.December !== undefined) ? item.December.toLocaleString('en-IN') : 0,
 	}));
 	console.log(data2);
 
@@ -204,7 +204,7 @@ function Report() {
 				<div className={styles.trendingovertime}>
 					Trending Over Time:
 				</div>
-				<div style={{ height: '400px', border: '2px solid black', marginTop: '30px', marginBottom: '40px' }}>
+				<div style={{ height: '400px', boxShadow: '10px 5px 5px rgb(239, 233, 233)' }}>
 					<ResponsiveLine
 						data={linedata}
 						margin={{ top: 50, right: 110, bottom: 50, left: 100 }}
@@ -278,7 +278,7 @@ function Report() {
 			<div className={styles.secondtrend}>
 				<div className={styles.wholecontainer}>
 					{
-				optn.map((Item) => (
+				(optn || []).map((Item) => (
 					<div className={styles.leftcontainer}>
 						<div>{Item.country}</div>
 						<div>
@@ -401,7 +401,7 @@ function Report() {
 			<div className={styles.secondtrend}>
 				<div className={styles.wholecontainer}>
 					{
-				optn2.map((Item) => (
+				(optn2 || []).map((Item) => (
 					<div className={styles.leftcontainer}>
 						<div>{Item.country}</div>
 						<div>
