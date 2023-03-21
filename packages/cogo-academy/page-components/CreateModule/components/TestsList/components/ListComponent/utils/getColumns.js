@@ -290,17 +290,6 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 											loading={loading}
 											themeType="secondary"
 											className={styles.btn}
-										>
-
-											<IcMEyeopen />
-											<div style={{ marginLeft: '8px' }}>
-												View
-											</div>
-										</Button>
-										<Button
-											loading={loading}
-											themeType="secondary"
-											className={styles.btn}
 											onClick={() => handleDeleteTest(id)}
 										>
 											<IcMDelete />

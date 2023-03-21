@@ -74,67 +74,6 @@ function TestsList({ activeTab, setActiveTab }) {
 	return (
 		<div className={styles.container}>
 			{/* <div className={styles.heading}>Service Bundles</div> */}
-			<div className={styles.filter}>
-				<div>
-					<Input
-						size="md"
-						suffix={<ButtonIcon size="md" icon={<IcMSearchlight />} disabled={false} themeType="primary" />}
-						placeholder={activeTab === 'tests' ? 'Search for Test/Topic' : 'Search for QuestionSets'}
-						onChange={(value) => {
-							if (activeTab === 'tests') {
-								setParams((prev) => ({
-									...prev,
-									filters: {
-										...prev.filters,
-										q: value,
-									},
-								}));
-							} else {
-								setQuestionListParams((prev) => ({
-									...prev,
-									filters: {
-										...prev.filters,
-										q: value,
-									},
-								}));
-							}
-						}}
-						className={styles.input}
-					/>
-				</div>
-				<div className={styles.sort}>
-					<IcMArrowRotateDown style={{ cursor: 'pointer' }} />
-					<span
-						className={styles.span_text}
-						onClick={() => {
-							setSort((prev) => !prev);
-							if (activeTab === 'tests') {
-								setParams((prev) => ({
-									...prev,
-									sort_type : sort ? 'asc' : 'desc',
-									filters   : {
-										...prev.filters,
-
-									},
-								}));
-							} else {
-								setQuestionListParams((prev) => ({
-									...prev,
-									sort_type : sort ? 'asc' : 'desc',
-									filters   : {
-										...prev.filters,
-
-									},
-								}));
-							}
-						}}
-					>
-						Sort By
-
-					</span>
-				</div>
-			</div>
-
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
@@ -155,13 +94,83 @@ function TestsList({ activeTab, setActiveTab }) {
 								title={title}
 								className={styles.tabItem}
 							>
+								<div className={styles.filter}>
+									<div>
+										<Input
+											size="md"
+											suffix={(
+												<ButtonIcon
+													size="md"
+													icon={<IcMSearchlight />}
+													disabled={false}
+													themeType="primary"
+												/>
+											)}
+											placeholder={activeTab
+									=== 'tests' ? 'Search for Test/Topic' : 'Search for Question set name'}
+											onChange={(value) => {
+												if (activeTab === 'tests') {
+													setParams((prev) => ({
+														...prev,
+														filters: {
+															...prev.filters,
+															q: value,
+														},
+													}));
+												} else {
+													setQuestionListParams((prev) => ({
+														...prev,
+														filters: {
+															...prev.filters,
+															q: value,
+														},
+													}));
+												}
+											}}
+											className={styles.input}
+										/>
+									</div>
+									<div className={styles.sort}>
+										<IcMArrowRotateDown style={{ cursor: 'pointer' }} />
+										<span
+											className={styles.span_text}
+											onClick={() => {
+												setSort((prev) => !prev);
+												if (activeTab === 'tests') {
+													setParams((prev) => ({
+														...prev,
+														sort_type : sort ? 'asc' : 'desc',
+														filters   : {
+															...prev.filters,
+
+														},
+													}));
+												} else {
+													setQuestionListParams((prev) => ({
+														...prev,
+														sort_type : sort ? 'asc' : 'desc',
+														filters   : {
+															...prev.filters,
+
+														},
+													}));
+												}
+											}}
+										>
+											Sort By
+
+										</span>
+									</div>
+								</div>
 								<ContainerComponent {...componentProps} />
 							</TabPanel>
+
 						);
 					})}
 				</Tabs>
 
 			</div>
+
 		</div>
 	);
 }

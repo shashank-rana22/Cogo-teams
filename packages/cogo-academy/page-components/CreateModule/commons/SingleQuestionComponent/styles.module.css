@@ -32,10 +32,10 @@
 .textarea_container {
 	position: relative;
 	justify-content: space-between;
-	background: rgb(255 255 255 / 70%);
-	border-radius: 6px;
 	margin-top: 24px;
 	margin-bottom: 12px;
+	background: rgb(255 255 255 / 70%);
+	border-radius: 6px;
 }
 
 .difficulty_level {

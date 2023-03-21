@@ -1,11 +1,10 @@
 .container {
 	height: 100%;
-	background: #fff;
+	background: #f9f5ec;
 	border-radius: 6px;
 }
 
 .heading {
-	padding: 14px 0;
 	padding: 14px 0;
 
 	/* font-family: Poppins; */
@@ -20,21 +19,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	background-color: #f9f5ec;
+	margin: 30px 0px 15px 0px;
 }
 
 .input {
-	margin-top: 10px;
-	margin-bottom: 10px;
-	margin-left: 10px;
+	width: 200%;
 }
 
 .sort {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
 }
 
 .sort:hover {

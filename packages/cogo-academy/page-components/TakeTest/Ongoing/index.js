@@ -9,6 +9,7 @@ function Ongoing({ testData }) {
 	const page = localStorage.getItem('currentQuestion');
 	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
 	const { loading, data } = useFetchQuestionsList({ currentQuestion });
+
 	return ((
 		<div className={styles.main_container}>
 			<div className={styles.left_container}>
