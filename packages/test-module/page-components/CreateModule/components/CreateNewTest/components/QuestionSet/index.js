@@ -88,7 +88,7 @@ function QuestionSet({ setShowNewQuestion }) {
 					className={styles.input}
 				/>
 				<div className={styles.filter}>
-					<IcMArrowRotateDown style={{ cursor: 'pointer' }} />
+					<IcMArrowRotateDown />
 					<span className={styles.span_text}>Sort By</span>
 				</div>
 			</div>

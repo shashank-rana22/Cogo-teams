@@ -1,4 +1,4 @@
-import { Pagination, Table, Button, Tooltip } from '@cogoport/components';
+import { Table, Button, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot, IcMDelete, IcMEdit, IcMEyeopen } from '@cogoport/icons-react';
 // import { useRouter } from '@cogoport/next';
 // import { format, startCase, isEmpty } from '@cogoport/utils';
@@ -8,13 +8,7 @@ import styles from './styles.module.css';
 // import useUpdateServiceBundle from './useUpdateServiceBundle';
 
 function ListComponent() {
-	// const router = useRouter();
-
-	const { page = 0, page_limit: pageLimit = 0, total_count = 0, list } = {} || {};
-
-	// const { onDelete } = useUpdateServiceBundle({ refetchListServiceBundle });
-
-	// const formatDate = (date) => format(date, 'dd MMM yyyy');
+	const { list } = {};
 
 	const columns = [
 		{
@@ -142,22 +136,6 @@ function ListComponent() {
 		},
 	];
 
-	// if (currTab === 'draft') {
-	// 	columns.splice(1, 1);
-	// }
-
-	// if (data?.length === 0) {
-	// 	return (
-	// 		<div className={styles.container}>
-	// 			<div> You don&apos;t have any Bundles yet</div>
-	// 			<div className={styles.text}>Create one now!</div>
-	// 			<Button onClick={() => router.push('/service-bundling/create')} themeType="secondary">
-	// 				Create Bundle +
-	// 			</Button>
-	// 		</div>
-	// 	);
-	// }
-
 	return (
 		<div className={styles.table_container}>
 			<Table
@@ -165,18 +143,6 @@ function ListComponent() {
 				data={list || [1]}
 				columns={columns}
 			/>
-
-			{/* {total_count > 10 ? (
-				<div className={styles.pagination_container}>
-					<Pagination
-						type="table"
-						currentPage={page}
-						totalItems={total_count}
-						pageSize={pageLimit}
-						onPageChange={(val) => setParams({ page: val })}
-					/>
-				</div>
-			) : null} */}
 
 		</div>
 	);

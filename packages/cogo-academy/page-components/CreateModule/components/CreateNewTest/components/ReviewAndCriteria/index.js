@@ -4,25 +4,23 @@ import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
 
-import useGetTest from '../../../../hooks/useGetTest';
 import useUpdateTest from '../../../../hooks/useUpdateTest';
 
 import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
-function ReviewAndCriteria({ setActiveStepper }) {
-	const { control, formState:{ errors }, handleSubmit } = useForm();
+function ReviewAndCriteria({
+	setActiveStepper,
+	loading,
+	data,
+	test_id,
+}) {
+	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
+
 	const { updateTest } = useUpdateTest();
 	const router = useRouter();
-	const test_id = router.query?.id;
-	const {
-		loading,
-		data,
-		getTest,
-	} = useGetTest();
 
 	const navigate = () => {
 		const href = '/learning/test-module/create-test';
@@ -30,10 +28,6 @@ function ReviewAndCriteria({ setActiveStepper }) {
 		setActiveStepper('details_and_questions');
 	};
 
-	useEffect(() => {
-		if (!isEmpty(test_id)) { getTest({ test_id }); }
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [test_id]);
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -56,7 +50,7 @@ function ReviewAndCriteria({ setActiveStepper }) {
 
 				<div className={styles.entity}>
 					<div className={styles.label_entity}>Cogo Entity </div>
-					<div className={styles.entity_name}>Cogo India</div>
+					<div className={styles.entity_name}>{data?.cogo_entity_id}</div>
 				</div>
 
 				<div className={styles.topic}>
@@ -71,8 +65,14 @@ function ReviewAndCriteria({ setActiveStepper }) {
 					</div>
 				</div>
 			</div>
-			<QuestionsAndDistribution control={control} errors={errors} loading={loading} data={data?.set_data} />
-			<DurationAndValidity control={control} errors={errors} loading={loading} />
+			<QuestionsAndDistribution
+				data={data}
+				control={control}
+				errors={errors}
+				loading={loading}
+				setValue={setValue}
+			/>
+			<DurationAndValidity setValue={setValue} data={data} control={control} errors={errors} loading={loading} />
 			<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 				<Button
 					loading={loading}

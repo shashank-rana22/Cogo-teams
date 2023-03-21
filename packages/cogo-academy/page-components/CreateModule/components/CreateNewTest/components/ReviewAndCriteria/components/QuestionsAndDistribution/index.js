@@ -1,11 +1,26 @@
 import { Pill, Table } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function QuestionsAndDistribution({ control, errors, data, loading }) {
+function QuestionsAndDistribution({ data, control, errors, loading, setValue }) {
+	useEffect(() => {
+		data?.test_set_distribution_data?.forEach((test_set_distribution) => {
+			if (test_set_distribution.question_type === 'stand_alone') {
+				setValue(`${test_set_distribution.test_question_set_id
+				}q`, test_set_distribution.distribution_count || '0');	// append with 'q' for stand alone questions
+			} else {
+				setValue(`${test_set_distribution.test_question_set_id
+				// eslint-disable-next-line radix
+				}c`, test_set_distribution.distribution_count || '0'); // append with 'c' for case study questions
+			}
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data, setValue]);
+
 	const columns = [
 		{
 			Header   : 'QUESTION SET NAME',
@@ -94,7 +109,7 @@ function QuestionsAndDistribution({ control, errors, data, loading }) {
 	return (
 		<Table
 			className={styles.table_container}
-			data={data || []}
+			data={data?.set_data || []}
 			loading={loading}
 			columns={columns}
 		/>

@@ -1,4 +1,5 @@
-import { Button } from '@cogoport/components';
+import { ButtonIcon, Input, Button } from '@cogoport/components';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import CreateQuestion from '../../../../commons/CreateQuestion';
@@ -28,28 +29,45 @@ function AddQuestionsForm({
 		return null;
 	}
 
-	if (loading) {
-		return <LoadingState />;
-	}
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.label}>Questions</div>
 
-			{(test_questions || []).filter((item) => item.id !== editDetails?.id).length > 0 ? (
-				<SavedQuestionDetails
-					savedQuestionDetails={savedQuestionDetails}
-					test_questions={test_questions}
-					editDetails={editDetails}
-					setEditDetails={setEditDetails}
-					allKeysSaved={allKeysSaved}
-					setAllKeysSaved={setAllKeysSaved}
-					questionSetId={questionSetId}
-					getTestQuestionTest={getTestQuestionTest}
-					setFilters={setFilters}
-					filters={filters}
-				/>
+			{!isEmpty((test_questions || []).filter((item) => item.id !== editDetails?.id)) ? (
+				<div className={styles.input_container}>
+					<Input
+						size="md"
+						suffix={(
+							<ButtonIcon
+								size="md"
+								icon={<IcMSearchlight />}
+								disabled={false}
+								themeType="primary"
+							/>
+						)}
+						placeholder="Search for Question/topic"
+						onChange={(val) => setFilters((prev) => ({ ...prev, q: val }))}
+						value={filters?.q}
+					/>
+				</div>
 			) : null}
+
+			{loading ? (
+				<LoadingState />
+			) : (
+				!isEmpty((test_questions || []).filter((item) => item.id !== editDetails?.id)) && (
+					<SavedQuestionDetails
+						savedQuestionDetails={savedQuestionDetails}
+						test_questions={test_questions}
+						editDetails={editDetails}
+						setEditDetails={setEditDetails}
+						allKeysSaved={allKeysSaved}
+						setAllKeysSaved={setAllKeysSaved}
+						questionSetId={questionSetId}
+						getTestQuestionTest={getTestQuestionTest}
+					/>
+				)
+			)}
 
 			{(savedQuestionDetails || []).map((item, index) => {
 				const { isNew } = item;

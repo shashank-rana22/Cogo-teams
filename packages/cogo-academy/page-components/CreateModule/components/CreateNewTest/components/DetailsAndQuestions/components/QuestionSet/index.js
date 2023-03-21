@@ -1,14 +1,15 @@
 import { Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill, Pagination } from '@cogoport/components';
 import { IcMSearchlight, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import useGetTestQuestionSets from '../../../../../../hooks/useGetTestQuestionSets';
 
 import styles from './styles.module.css';
 
-function QuestionSet({ setIdArray, setShowQuestionSet }) {
+function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray }) {
 	const { data, loading, setParams } = useGetTestQuestionSets();
-	// const [idArray, setIdArray] = useState([]);
+
 	const { page = 0, page_limit: pageLimit = 0, total_count = 0, list } = data || {};
 
 	const handleChange = ({ event, id }) => {
@@ -25,17 +26,26 @@ function QuestionSet({ setIdArray, setShowQuestionSet }) {
 			return temp;
 		});
 	};
+
+	const correctSetIds = set_data.map((item) => item.id);
+
+	useEffect(() => {
+		setIdArray(correctSetIds);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	const columns = [
 		{
 			Header   : '',
 			id       : 'check',
 			accessor : ({ id = '' }) => (
 				<Checkbox
-					key="hello"
-					name="hello"
+					key="question_set"
+					name="question_set"
 					className={styles.checkbox}
 					value={id}
-					onChange={(event) => { handleChange({ event, id }); }}
+					checked={idArray.includes(id)}
+					onChange={(event) => handleChange({ event, id })}
 				/>
 			),
 		},
@@ -131,6 +141,15 @@ function QuestionSet({ setIdArray, setShowQuestionSet }) {
 					size="md"
 					suffix={<ButtonIcon size="md" icon={<IcMSearchlight />} disabled={false} themeType="primary" />}
 					placeholder="Search for Question/topic"
+					onChange={(value) => {
+						setParams((prev) => ({
+							...prev,
+							filters: {
+								...prev.filters,
+								q: value,
+							},
+						}));
+					}}
 					className={styles.input}
 				/>
 				<div className={styles.filter}>
@@ -153,7 +172,10 @@ function QuestionSet({ setIdArray, setShowQuestionSet }) {
 						currentPage={page}
 						totalItems={total_count}
 						pageSize={pageLimit}
-						onPageChange={(val) => setParams({ page: val })}
+						onPageChange={(val) => setParams((prev) => ({
+							...prev,
+							page: val,
+						}))}
 					/>
 				</div>
 			) : null}

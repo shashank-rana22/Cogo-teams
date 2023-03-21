@@ -6,7 +6,6 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function LeftSection({ data = [], currentQuestion, setCurrentQuestion, loading }) {
-	// console.log('abc', data?.data?.[currentQuestion]);
 	const [answer, setAnswer] = useState('');
 
 	return (

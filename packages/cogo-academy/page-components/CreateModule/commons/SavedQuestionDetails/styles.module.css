@@ -70,11 +70,6 @@
 	max-width: fit-content;
 }
 
-.input_container {
-	width: 50%;
-	margin-top: 32px;
-}
-
 .btn {
 	display: flex;
 	align-items: center;

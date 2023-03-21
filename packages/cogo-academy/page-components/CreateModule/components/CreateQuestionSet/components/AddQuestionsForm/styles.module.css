@@ -19,3 +19,8 @@
 	display: flex;
 	margin-top: 12px;
 }
+
+.input_container {
+	width: 50%;
+	margin-top: 24px;
+}

@@ -19,6 +19,8 @@ function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questio
 
 	const controls = getControls();
 
+	const { cogo_entity_object } = data || {};
+
 	const {
 		loading,
 		createQuestionSet,
@@ -37,9 +39,11 @@ function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questio
 	};
 
 	const editForm = () => {
-		['name', 'topic', 'audience_ids', 'cogo_entity_id'].forEach((item) => {
+		['name', 'topic', 'audience_ids'].forEach((item) => {
 			setValue(item, data?.[item]);
 		});
+
+		setValue('cogo_entity_id', cogo_entity_object.id);
 
 		setShowForm(true);
 	};
@@ -54,7 +58,9 @@ function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questio
 				{constants.map((item) => (
 					<div className={styles.flex_container}>
 						<div className={styles.label}>{startCase(item)}</div>
-						<div className={styles.value}>{data?.[item]}</div>
+						<div className={styles.value}>
+							{item === 'cogo_entity_id' ? cogo_entity_object?.business_name : data?.[item]}
+						</div>
 					</div>
 				))}
 

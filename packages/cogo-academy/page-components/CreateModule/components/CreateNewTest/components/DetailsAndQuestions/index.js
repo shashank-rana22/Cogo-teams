@@ -1,7 +1,7 @@
 import { Toast, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useCreateTest from '../../../../hooks/useCreateTest';
 
@@ -10,18 +10,25 @@ import QuestionSet from './components/QuestionSet';
 import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
-function DetailsAndQuestions({ setTestId, setActiveStepper }) {
+function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLoading }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 	// const [allKeysSaved, setAllKeysSaved] = useState(false);
 	const [idArray, setIdArray] = useState([]);
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
 
-	const { control, formState:{ errors }, handleSubmit } = useForm();
+	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
+
+	useEffect(() => {
+		if (!isEmpty(data?.set_data || [])) {
+			setShowQuestionSet(true);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<div className={styles.container}>
-			<TestDetails control={control} errors={errors} />
+			<TestDetails control={control} errors={errors} data={data} setValue={setValue} />
 
 			<div className={styles.btn_container}>
 				{!showQuestionSet ? (
@@ -30,6 +37,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 						size="md"
 						themeType="primary"
 						style={{ marginRight: '20px' }}
+						loading={getLoading || loading}
 					>
 						From Existing Question Set
 					</Button>
@@ -47,14 +55,21 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 
 			</div>
 
-			{showQuestionSet && <QuestionSet setIdArray={setIdArray} setShowQuestionSet={setShowQuestionSet} />}
+			{showQuestionSet ? (
+				<QuestionSet
+					setIdArray={setIdArray}
+					setShowQuestionSet={setShowQuestionSet}
+					set_data={data?.set_data}
+					idArray={idArray}
+				/>
+			) : null}
 
 			{/* {!allKeysSaved && <NewQuestion allKeysSaved={allKeysSaved} setAllKeysSaved={setAllKeysSaved} />} */}
 
 			{showQuestionSet && (
 				<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 					<Button
-						loading={loading}
+						loading={loading || getLoading}
 						size="md"
 						themeType="tertiary"
 						style={{ marginRight: '10px' }}
@@ -69,7 +84,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper }) {
 					</Button>
 
 					<Button
-						loading={loading}
+						loading={loading || getLoading}
 						size="md"
 						themeType="primary"
 						onClick={
