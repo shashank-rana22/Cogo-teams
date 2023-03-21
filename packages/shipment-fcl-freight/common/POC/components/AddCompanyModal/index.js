@@ -54,7 +54,7 @@ function AddCompanyModal({
 	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
 
 	return (
-		<Modal show={!isEmpty(addCompany)} placement="top" size="xl" onClose={onClose}>
+		<Modal show={!isEmpty(addCompany)} placement="top" size="lg" onClose={onClose}>
 			<Modal.Header title="Add Company" />
 
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
@@ -70,7 +70,7 @@ function AddCompanyModal({
 						/>
 					</div>
 
-					<div>
+					<div className={styles.radio_container}>
 						<RadioGroup
 							options={options}
 							onChange={(val) => setCompanyType(val)}

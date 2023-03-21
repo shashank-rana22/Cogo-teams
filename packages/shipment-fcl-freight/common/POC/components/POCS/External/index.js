@@ -32,6 +32,17 @@ function External({ tradePartnersData = {}, setAddPoc = () => {} }) {
 				<div className={styles.row}>
 					<div>
 						<Button
+							onClick={() => {
+								setShowDetail({ ...showDetail, [trade]: !showDetail[trade] });
+							}}
+							themeType="linkUi"
+						>
+							{showDetail[trade] ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+						</Button>
+					</div>
+
+					<div>
+						<Button
 							size="sm"
 							onClick={() => {
 								setAddPoc({
@@ -44,17 +55,6 @@ function External({ tradePartnersData = {}, setAddPoc = () => {} }) {
 						>
 							+ ADD POC
 
-						</Button>
-					</div>
-
-					<div>
-						<Button
-							onClick={() => {
-								setShowDetail({ ...showDetail, [trade]: !showDetail[trade] });
-							}}
-							themeType="linkUi"
-						>
-							{showDetail[trade] ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 						</Button>
 					</div>
 				</div>

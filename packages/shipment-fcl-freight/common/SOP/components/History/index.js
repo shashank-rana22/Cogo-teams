@@ -4,10 +4,10 @@ import HistoryPagination from './HistoryPagination';
 import HistoryTable from './HistoryTable';
 import styles from './styles.module.css';
 
-function History() {
+function History({ shipment_id }) {
 	const { data, setFilters, filters, loading } = useListShipmentAudits({
 		defaultFilters: {
-			action_name: 'update_operating_instruction', shipment_id: '7da5d7dc-7526-49e7-8ebb-11607e3654ae',
+			action_name: 'update_operating_instruction', shipment_id,
 		},
 	});
 

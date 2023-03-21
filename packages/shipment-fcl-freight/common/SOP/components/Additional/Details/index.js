@@ -15,7 +15,7 @@ function Details({ data = [], setShowForm = () => {} }) {
 
 	function documentValue({ vals = [] }) {
 		return !isEmpty(vals) ? (
-			<Button onClick={() => window.open(vals?.[0]?.url, '_blank')} themeType="link">
+			<Button onClick={() => window.open(vals?.[0]?.url || vals, '_blank')} themeType="link">
 				{vals?.[0]?.name || 'Click to Preview'}
 			</Button>
 		) : null;
