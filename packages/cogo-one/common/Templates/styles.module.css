@@ -199,3 +199,21 @@
 	font-size: 16px;
 	border-right: 1px solid #e0e0e0;
 }
+
+.flex_div {
+	display: flex;
+	align-items: center;
+	margin: 0 0 10px 10px;
+}
+
+.mobile_number {
+	margin-left: 5px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.whatsapp_icon {
+	width: 22px;
+	height: 22px;
+	margin-left: 15px;
+}

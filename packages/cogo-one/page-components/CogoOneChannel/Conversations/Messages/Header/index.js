@@ -48,6 +48,7 @@ function Header({
 		user_id = null,
 		lead_user_id = null,
 		sender = null,
+		search_user_name = '',
 	} = formattedData || {};
 
 	const userDetailsMissing = !(user_id || lead_user_id || sender);
@@ -211,6 +212,13 @@ function Header({
 					<div>
 						<div className={styles.name}>
 							{startCase(user_name) || 'User'}
+							{channel_type === 'whatsapp' && (
+								<span className={styles.span_whatsapp_name}>
+									(
+									{startCase(search_user_name) || 'User'}
+									)
+								</span>
+							)}
 						</div>
 						<div className={styles.phone_number}>
 							{getLowerLabel()}

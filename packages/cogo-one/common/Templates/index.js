@@ -1,7 +1,7 @@
 import { cl, Input, Button, Placeholder, Pill } from '@cogoport/components';
 import { useForm, TextAreaController, InputController } from '@cogoport/forms';
 import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMSearchlight, IcCSendWhatsapp } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -11,6 +11,7 @@ import { statusMapping, statusColorMapping } from '../../constants';
 import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useCreateCommunicationTemplate from '../../hooks/useCreateCommunicationTemplate';
 import useListTemplate from '../../hooks/useListTemplates';
+import hideDetails from '../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
@@ -35,10 +36,15 @@ function Templates({
 	const { userRoleIds } = useSelector(({ profile }) => ({
 		userRoleIds: profile.partner?.user_role_ids || [],
 	}));
-	const isDefaultOpen = type === 'new_whatsapp_message';
+	const isDefaultOpen = type === 'whatsapp_new_message_modal';
+	const maskMobileNumber = type === 'voice_call_component';
+
+	const maskedMobileNumber = `${dialNumber?.country_code}
+	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
 
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole))
         || false;
+
 	const {
 		control,
 		handleSubmit,
@@ -131,6 +137,15 @@ function Templates({
 							</div>
 						</>
 					)}
+					{
+						maskMobileNumber && (
+							<div className={styles.flex_div}>
+								<div className={styles.mobile_number}>To</div>
+								<IcCSendWhatsapp className={styles.whatsapp_icon} />
+								<div className={styles.mobile_number}>{maskedMobileNumber}</div>
+							</div>
+						)
+					}
 					<div className={styles.container}>
 						<Input
 							value={qfilter}
