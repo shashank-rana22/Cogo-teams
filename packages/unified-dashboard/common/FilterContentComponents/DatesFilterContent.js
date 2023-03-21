@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, RadioGroup, DateRangepicker } from '@cogoport/components';
+import { Button, RadioGroup, SingleDateRange } from '@cogoport/components';
 import React, { useEffect } from 'react';
 
 import DateRanges from '../../constants/date-ranges-filter';
@@ -40,7 +40,7 @@ function DatesFilterContent({
 
 				{range === 'custom' ? (
 					<div>
-						<DateRangepicker
+						<SingleDateRange
 							value={date}
 							isPreviousDaysAllowed
 							onChange={(val) => setDate(val)}
