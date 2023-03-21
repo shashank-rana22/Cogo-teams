@@ -2,6 +2,7 @@ import useGetColumns from '../../../../../common/Columns';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
 
+import Statistics from './Statistics';
 import styles from './styles.module.css';
 
 function Dashboard({
@@ -58,7 +59,7 @@ function Dashboard({
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				Header
+				<Statistics />
 			</div>
 
 			<div>
