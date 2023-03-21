@@ -35,7 +35,6 @@ const useFetchQuestionsList = ({ currentQuestion }) => {
 		}
 	};
 
-	console.log('x', data);
 	useEffect(() => {
 		fetchQuestions();
 	}, [currentQuestion]);

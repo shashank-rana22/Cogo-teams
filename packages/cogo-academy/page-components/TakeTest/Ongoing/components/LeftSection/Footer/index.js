@@ -26,8 +26,9 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 			const str = 'answered';
 			updateAnswerList(data?.id, answer, str);
 		}
-
-		setCurrentQuestion((pv) => pv + 1);
+		const num = Number(currentQuestion);
+		localStorage.setItem('currentQuestion', num + 1);
+		setCurrentQuestion((pv) => Number(pv) + 1);
 	};
 
 	const markAsReview = () => {
@@ -42,7 +43,9 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 		} else {
 			updateAnswerList(data?.id, answer, str);
 		}
-		setCurrentQuestion((pv) => pv + 1);
+		const num = Number(currentQuestion);
+		localStorage.setItem('currentQuestion', num + 1);
+		setCurrentQuestion((pv) => Number(pv) + 1);
 	};
 
 	return (

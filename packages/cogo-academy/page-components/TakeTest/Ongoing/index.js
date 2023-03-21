@@ -6,8 +6,8 @@ import useFetchQuestionsList from './hooks/useFetchQuestionList';
 import styles from './styles.module.css';
 
 function Ongoing({ testData }) {
-	const [currentQuestion, setCurrentQuestion] = useState(1);
-
+	const page = localStorage.getItem('currentQuestion');
+	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
 	const { loading, data } = useFetchQuestionsList({ currentQuestion });
 	return ((
 		<div className={styles.main_container}>
