@@ -135,7 +135,7 @@ function Header() {
 					/>
 				</StyledModal>
 			) : null} */}
-			<SopAndPoc />
+
 		</div>
 	);
 }

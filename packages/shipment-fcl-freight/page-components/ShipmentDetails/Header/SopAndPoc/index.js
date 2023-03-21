@@ -10,7 +10,7 @@ function SopAndPoc() {
 	return (
 		<div>
 			<Button onClick={() => setShow(true)}>POC and SOP</Button>
-			<Modal show={false} placement="top-right" size="md" scroll={false}>
+			<Modal show={show} placement="top-right" size="md" scroll={false}>
 				<Modal.Body>
 					<Tabs activeTab={activeTab} onChange={setActiveTab}>
 						<TabPanel name="poc" title="POC">
