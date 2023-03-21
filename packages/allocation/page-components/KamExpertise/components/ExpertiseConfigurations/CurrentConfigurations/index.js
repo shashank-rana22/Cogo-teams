@@ -17,7 +17,8 @@ function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
 		version_list_details:version_details = {},
 	} = listKamExpertiseCurrentConfigs;
 
-	const VERSION_CARDS = data.filter((item) => item.status_value === 'draft' || item.status_value === 'live');
+	const listArray = data.filter((item) => item.status_value === 'draft' || item.status_value === 'live');
+	const VERSION_CARDS = listArray.reverse();
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise/configurations/viewall-configurations');
