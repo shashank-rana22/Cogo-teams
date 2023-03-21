@@ -1,4 +1,4 @@
-import { Button, Modal, cl, Loader } from '@cogoport/components';
+import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -80,7 +80,7 @@ function List({
 						);
 					})}
 				</div>
-			) : <Loader themeType="primary" />}
+			) : null}
 
 			<div className={styles.not_added}>
 				<Button
