@@ -1,0 +1,27 @@
+.form_item_container{
+    margin: 6px 0px;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.row>div{
+    width: 49%;
+}
+
+.pan_number{
+    margin: 6px 0px;
+    width: 49%;
+}
+
+.checkbox{
+    margin: 6px 0px;
+    display: flex;
+    align-items: center;
+}
+.errors{
+    color: red;
+    font-size: 12px;
+}

@@ -643,7 +643,7 @@ importers:
 
   packages/shipment-fcl-freight:
     specifiers:
-      '@cogoport/components': ^1.0.372
+      '@cogoport/components': ^1.0.385
       '@cogoport/constants': workspace:^0.1.0
       '@cogoport/context': workspace:^0.1.0
       '@cogoport/forms': workspace:^0.1.0
@@ -658,7 +658,7 @@ importers:
       prop-types: ^15.8.1
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.372_aydyy3gkshtlrnyh7fafj36que
+      '@cogoport/components': 1.0.385_aydyy3gkshtlrnyh7fafj36que
       '@cogoport/constants': link:../../common/constants
       '@cogoport/context': link:../../common/context
       '@cogoport/forms': link:../../common/forms
@@ -2102,8 +2102,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.372_aydyy3gkshtlrnyh7fafj36que:
-    resolution: {integrity: sha512-KbwhoGEDy9gXAu63u/MUTdwRilQzJ0pDAUJ9LZjrT7Xe2ODsQfyPXQsXdlp1/6hWZbR0GCR9kWScotCNFSwwpQ==}
+  /@cogoport/components/1.0.385_aydyy3gkshtlrnyh7fafj36que:
+    resolution: {integrity: sha512-K1D0vSZuC5D8yIdSK11AL2+2+2RDWykl/nF52kDRhNBr6S/TD8vPdtoP8d5RCTT8DTXYbDPioY1U6gOVUytzfQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
