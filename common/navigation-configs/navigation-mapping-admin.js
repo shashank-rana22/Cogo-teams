@@ -2015,8 +2015,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'cogo_academy-tests',
 				title         : 'Test Module',
-				href          : '/v2/learning/test-results',
-				as            : '/v2/learning/test-results',
+				href          : '/v2/learning/tests/dashboard',
+				as            : '/v2/learning/tests/dashboard',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.tests,
