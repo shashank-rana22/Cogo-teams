@@ -152,10 +152,13 @@ function GenerateMawb({
 					if (!whiteout) {
 						pdf.addImage(item, 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
 					}
-
 					if (download24) {
-						pdf.addPage();
-						pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+						if (i < 3) {
+							pdf.addPage();
+							pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+						} else {
+							pdf.addPage();
+						}
 					}
 					if (i < 11) {
 						pdf.addPage();

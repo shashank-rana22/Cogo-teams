@@ -104,7 +104,10 @@ function GenerateMAWB({
 	}, [formValues.chargeableWeight]);
 
 	useEffect(() => {
-		setValue('amount', ((chargeableWeight * formValues.ratePerKg) || 0.0).toFixed(2));
+		if (!viewDoc) {
+			setValue('amount', ((formValues.chargeableWeight * formValues.ratePerKg) || 0.0).toFixed(2));
+		}
+
 		if (formValues.class === 'a') {
 			setDisableClass(true);
 		} else {

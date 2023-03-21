@@ -44,17 +44,11 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 	const {
 		data, loading, page,
 		setPage, listAPi, searchValue, setSearchValue,
-	} = useListShipmentPendingTasks({ activeTab });
+	} = useListShipmentPendingTasks({ activeTab, filter: filters });
 
 	useEffect(() => {
-		listAPi({ filter: filters });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(filters)]);
-
-	useEffect(() => {
-		listAPi({ filter: filters });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab]);
+		listAPi();
+	}, [activeTab, listAPi]);
 	return (
 		<div>
 			<div className={styles.container}>
