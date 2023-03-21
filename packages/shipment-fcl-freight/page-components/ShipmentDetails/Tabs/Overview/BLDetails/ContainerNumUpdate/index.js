@@ -29,7 +29,6 @@ function ContainerNmUpdate({
 				{(containerDetails?.list || []).map((container) => (
 					<div className={styles.render_container}>
 						<div className={styles.container_num}>{container?.container_number}</div>
-
 						<Input
 							width="100%"
 							value={containerValue[container?.id]}
