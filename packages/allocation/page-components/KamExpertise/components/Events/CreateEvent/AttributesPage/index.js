@@ -86,9 +86,16 @@ function AttributePage(props) {
 							alignItems     : 'center',
 							height         : '480px',
 							width          : '100%',
+							flexDirection  : 'column',
 						}}
 						>
-							Select an attribute to proceed...
+							<img
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/grey_empty_state.svg"
+								height="300px"
+								width="300px"
+								alt=""
+							/>
+							Select an attribute to proceed
 
 						</div>
 					)
