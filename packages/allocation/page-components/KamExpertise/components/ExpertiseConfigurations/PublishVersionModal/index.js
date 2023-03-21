@@ -36,7 +36,7 @@ function PublishVersionModal({ setShowPublishModal = () => {} }) {
 				type="submit"
 				size="md"
 				themeType="primary"
-				// disabled={loading}
+				// sdisabled={loading}
 			>
 				Save
 			</Button>
