@@ -215,6 +215,17 @@ function asyncFieldsExpertiseConfigurations() {
 	};
 }
 
+function asyncFieldsExpertiseBadgeName() {
+	return {
+		labelKey     : 'badge_name',
+		valueKey     : 'id',
+		endpoint     : '/kam_expertise_badge_name',
+		authkey      : 'get_allocation_kam_expertise_badge_name',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -232,4 +243,5 @@ export {
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
 	asyncFieldsExpertiseConfigurations,
+	asyncFieldsExpertiseBadgeName,
 };

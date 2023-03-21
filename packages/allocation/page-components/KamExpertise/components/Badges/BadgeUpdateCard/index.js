@@ -6,7 +6,8 @@ import { getFieldController } from '../../../../../common/Form/getFieldControlle
 
 import styles from './styles.module.css';
 
-function BadgeUpdateCard({ data = {}, badgeItemData = {}, control, errors = '', watch, isLastItem }) {
+function BadgeUpdateCard(props) {
+	const { data = {}, badgeItemData = {}, control, errors = '', watch, isLastItem, loading = false } = props;
 	const { medalType, score = '', inputPlaceHolder = '' } = data;
 	const { badge_details = [] } = badgeItemData;
 
@@ -18,7 +19,7 @@ function BadgeUpdateCard({ data = {}, badgeItemData = {}, control, errors = '', 
 		Silver : badge_details?.[1]?.image_url,
 		Gold   : badge_details?.[2]?.image_url,
 	};
-
+	console.log('errors', errors);
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
 			<div className={styles.display_flex} style={{ justifyContent: score ? 'center' : 'flex-start' }}>
@@ -43,10 +44,11 @@ function BadgeUpdateCard({ data = {}, badgeItemData = {}, control, errors = '', 
 						rules={{
 							required: 'Score is required',
 						}}
+						disabled={loading}
 					/>
 
 					<div className={styles.error_message}>
-						{errors?.[`${medalType}_value_input`]?.message}
+						{errors?.[`${medalType}_value`]?.message}
 					</div>
 
 				</div>
@@ -68,6 +70,7 @@ function BadgeUpdateCard({ data = {}, badgeItemData = {}, control, errors = '', 
 					<UploadController
 						name={`${medalType}_img_value`}
 						control={control}
+						disabled={loading}
 						accept=".png, .jpeg"
 						rules={isEmpty(badgeItemData) ? {
 							required: 'Image is required',

@@ -82,10 +82,10 @@ function CardItem({ item, editMode, control }) {
 										) : (
 											<>
 												<div className={styles.view_label}>
-													{controlsObject.label}
+													{controlsObject.label || '___'}
 												</div>
 												<div className={styles.current_value}>
-													{startCase(score)}
+													{startCase(score) || '___'}
 												</div>
 											</>
 

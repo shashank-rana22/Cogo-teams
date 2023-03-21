@@ -23,7 +23,7 @@ const allocations = {
 		navigation : 'allocations-kam_expertise',
 		isMainNav  : false,
 	},
-	'[partner_id]/allocation/kam-expertise/configurations/viewall-configurations': {
+	'/[partner_id]/allocation/kam-expertise/configurations/viewall-configurations': {
 		navigation : 'allocations-kam_expertise',
 		isMainNav  : false,
 	},
