@@ -102,7 +102,11 @@ function ShipmentHeader() {
 				placement="bottom"
 				theme="light"
 				trigger="click"
+<<<<<<< Updated upstream
 				content={renderContent()}
+=======
+				content="Cancel Shipment"
+>>>>>>> Stashed changes
 			>
 				<div className={styles.dots}>
 					<IcMOverflowDot />

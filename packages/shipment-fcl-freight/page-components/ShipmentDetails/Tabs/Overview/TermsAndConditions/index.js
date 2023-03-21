@@ -3,7 +3,7 @@ import { Accordion } from '@cogoport/components';
 import styles from './styles.module.css';
 import TncItem from './TncItem';
 
-function TermsAndConditions({ shipment_data = {} }) {
+function TermsAndConditions({ shipmentData = {} }) {
 	const renderTitle = (
 		<div className={styles.title}>
 			Terms And Conditions
@@ -11,7 +11,7 @@ function TermsAndConditions({ shipment_data = {} }) {
 	);
 	return (
 		<Accordion title={renderTitle} style={{ width: '100%' }}>
-			<TncItem list={shipment_data?.terms_and_conditions} />
+			<TncItem list={shipmentData?.terms_and_conditions} />
 		</Accordion>
 	);
 }

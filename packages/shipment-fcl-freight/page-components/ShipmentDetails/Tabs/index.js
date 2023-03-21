@@ -21,7 +21,7 @@ function Tab({ shipment_data = {} }) {
 				onChange={setActiveTab}
 			>
 				<TabPanel name="overview" title="Overview">
-					<Overview shipment_data={shipment_data} />
+					<Overview shipmentData={shipment_data} />
 				</TabPanel>
 				<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 					<TimelineAndTask />
@@ -43,7 +43,7 @@ function Tab({ shipment_data = {} }) {
 					/>
 				</TabPanel>
 				<TabPanel name="tracking" title="Tracking">
-					<Tracking shipment_data={shipment_data} />
+					<Tracking shipmentData={shipment_data} />
 				</TabPanel>
 			</Tabs>
 		</div>

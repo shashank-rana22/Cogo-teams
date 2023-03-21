@@ -93,8 +93,8 @@ function BLDetails() {
 						onClose={() => {
 							setEditContainerNum(false);
 						}}
-						className="primary sm"
 					>
+						<Modal.Header title="Update Container Number" />
 						<ContainerNmUpdate
 							setEditContainerNum={setEditContainerNum}
 							shipment_data={shipment_data}
