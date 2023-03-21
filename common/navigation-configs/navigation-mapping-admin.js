@@ -263,6 +263,7 @@ const navigationMappingAdmin = {
 			...apis.contract_rates,
 			...apis.feedback,
 			...apis.checkout_promotions,
+			...apis.cargo_insurance,
 		],
 		main_apis: [
 			'list_organizations',
