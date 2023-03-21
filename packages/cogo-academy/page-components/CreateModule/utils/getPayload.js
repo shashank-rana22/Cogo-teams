@@ -17,7 +17,6 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 					...item,
 					is_correct      : is_correct === 'true',
 					status          : 'active',
-					explanation     : [],
 					sequence_number : index,
 				};
 			});
@@ -29,6 +28,7 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 				topic,
 				difficulty_level,
 				question_text,
+				explanation: [],
 				answers,
 			};
 		}
@@ -44,7 +44,6 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 						answer_text,
 						is_correct      : is_correct === 'true',
 						status          : 'active',
-						explanation     : [],
 						sequence_number : index,
 					};
 				});
@@ -55,6 +54,7 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 					question_type,
 					difficulty_level,
 					answers,
+					explanation: [],
 				};
 			}
 			const { audience_ids, question_text, case_questions = [], topic, question_type } = values || {};
@@ -74,13 +74,16 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 						answer_text,
 						is_correct      : is_correct === 'true',
 						status          : 'active',
-						explanation     : [],
 						sequence_number : index,
 					};
 				});
 
 				return {
-					question_type: indQuestionType, difficulty_level, question_text: indQuestionText, answers,
+					question_type : indQuestionType,
+					difficulty_level,
+					question_text : indQuestionText,
+					answers,
+					explanation   : [],
 				};
 			});
 
