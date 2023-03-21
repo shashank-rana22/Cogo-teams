@@ -78,8 +78,9 @@ function ShipmentHeader() {
 					theme="light"
 					placement="bottom"
 					maxWidth="none"
+					interactive
 					content={(
-						<div style={{ fontSize: '10px' }}>
+						<div className={styles.tooltip}>
 							{importer_exporter?.business_name}
 						</div>
 					)}
