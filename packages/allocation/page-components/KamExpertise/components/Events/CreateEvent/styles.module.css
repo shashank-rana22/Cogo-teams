@@ -32,6 +32,8 @@
 
 .add_rule_container{
     flex: 1;
+
+   
 }
 
 .account_attributes{
@@ -50,6 +52,7 @@
     margin: 16px 0px;
 
     color: #4f4f4f;
+   
 }
 
 .form_group:not(:first-child) { margin: 16px 0; }
@@ -62,6 +65,7 @@
     margin-bottom: 4px;
 
     color: #4F4F4F;
+
 }
 
 .error_message {
@@ -71,10 +75,18 @@
 
 .input_group{
     width: 250px;
+
+    @media(max-width: 768px){
+        width: 100%;
+    }
 }
 
 .rule_form_container{
    padding-right:  16px;
+
+   @media(max-width:768px){
+    justify-content: center;
+}
 }
 
 .account_attribute_text{

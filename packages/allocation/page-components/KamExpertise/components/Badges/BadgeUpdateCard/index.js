@@ -8,21 +8,23 @@ import styles from './styles.module.css';
 
 function BadgeUpdateCard(props) {
 	const { data = {}, badgeItemData = {}, control, errors = '', watch, isLastItem, loading = false } = props;
-	const { medalType, score = '', inputPlaceHolder = '' } = data;
-	const { badge_details = [] } = badgeItemData;
+	const { medalType, score = '', isSingleBadgeEdit = false, inputPlaceHolder = '' } = data;
+	const { bronze_details = {}, silver_details = {}, gold_details = {} } = badgeItemData;
 
 	const InputController = getFieldController('number');
 	const UploadController = getFieldController('fileUpload');
 
 	const MEDAL_IMAGE_MAPPING = {
-		Bronze : badge_details?.[0]?.image_url,
-		Silver : badge_details?.[1]?.image_url,
-		Gold   : badge_details?.[2]?.image_url,
+		Bronze : bronze_details?.image_url,
+		Silver : silver_details?.image_url,
+		Gold   : gold_details?.image_url,
 	};
-	console.log('errors', errors);
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
-			<div className={styles.display_flex} style={{ justifyContent: score ? 'center' : 'flex-start' }}>
+			<div
+				className={styles.display_flex}
+				style={{ justifyContent: isSingleBadgeEdit ? 'center' : 'flex-start' }}
+			>
 				<div>
 					<p style={{ color: '#4f4f4f', marginBottom: 16 }}>Medal</p>
 
@@ -106,7 +108,7 @@ function BadgeUpdateCard(props) {
 				</div>
 			</div>
 
-			{ score && (
+			{ isSingleBadgeEdit && (
 				<div className={styles.save_update}>
 					<Button
 						size="sm"

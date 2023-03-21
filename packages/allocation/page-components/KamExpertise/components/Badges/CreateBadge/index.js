@@ -48,10 +48,11 @@ function CreateBadge(props) {
 							{badgeItemData.updated_at ? format(badgeItemData.updated_at, 'yyyy-MMM-dd') : '___'}
 						</p>
 
-						{/* <p className={styles.text_styles}>
+						<p className={styles.text_styles}>
 							Last Modified By :
-							{` ${badgeItemData.lstModifiedBy}`}
-						</p> */}
+							{' '}
+							{badgeItemData.lstModifiedBy ? badgeItemData.lstModifiedBy : '___'}
+						</p>
 					</div>
 				)}
 				{/* <p className={styles.text_styles}>
