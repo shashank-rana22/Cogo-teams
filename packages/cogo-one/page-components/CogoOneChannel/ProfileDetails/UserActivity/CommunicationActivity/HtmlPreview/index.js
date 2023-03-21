@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-function HTMLPreview({ html = '' }) {
+function HTMLPreview({ html = '', type = '' }) {
 	const frameRef = useRef();
 
 	useEffect(() => {
@@ -12,7 +12,7 @@ function HTMLPreview({ html = '' }) {
 	return (
 		<iframe
 			width="100%"
-			height="400px"
+			height={type === 'email' ? '400px' : '150px'}
 			frameBorder="0"
 			title="Preview"
 			ref={frameRef}

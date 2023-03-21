@@ -1,0 +1,135 @@
+.form {
+	padding: 22px;
+	overflow: auto;
+	height: 70vh;
+
+	.core-ui-radio-root {
+		margin-bottom: 14px;
+		width: 48%;
+		@media (max-width: 768px) {
+			width: 100%;
+		}
+	}
+	.core-ui-radiogroup-container {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		flex-wrap: wrap;
+		margin-bottom: 16px;
+		justify-content: flex-start;
+	}
+	.core-ui-radio-label {
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 16px;
+		color: #393f70;
+		opacity: 1;
+		margin-left: 16px;
+	}
+	.core-ui-input-root {
+		margin-bottom: 16px;
+	}
+	.core-ui-tag-root {
+		padding: 8px 10px;
+	}
+	.core-ui-Pills-container {
+		margin-bottom: 16px;
+	}
+	.core-ui-select__menu {
+		width: 100%;
+	}
+}
+
+.button{
+	display: flex;
+	align-items: center;
+	margin: 22px;
+	justify-content: flex-end;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+		width: 140px;
+	}
+}
+
+.content{
+	font-size: 16px;
+	line-height: 24px;
+	color: #000000;
+}
+
+.heading{
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 1.5;
+	margin: 0 0 16px;
+}
+
+.title{
+	font-weight: 500;
+	font-size: 18px;
+	text-transform: uppercase;
+	color: #393f70;
+	margin-bottom: 16px;
+}
+
+.label{
+	font-weight: 500;
+	font-size: 14px;
+	color: #4f4f4f;
+}
+
+.radio{
+	display: flex;
+
+}
+
+.line {
+	border-bottom: 1px solid #bdaff9;
+	width: 100%;
+}
+
+.container{
+	margin: -16px;
+
+	.ui-modal-dialog.enter.primary.sm {
+		min-width: 1000px !important;
+	}
+
+	&.ie {
+		.core-ui-radio-radio-container.primary {
+			border: 1.5px solid black !important;
+		}
+
+		.core-ui-radio-radio-container.primary.checked {
+			border: 1.5px solid #034afd !important ;
+		}
+		.core-ui-radio-icon.primary.checked {
+			background: #034afd !important;
+		}
+
+		.core-ui-button-root.primary {
+			background: #2c3e50;
+			border-radius: 4px;
+			color: white;
+		}
+
+		.ie_title {
+			color: #2c3e50;
+		}
+
+		.core-ui-radio-label {
+			color: #2c3e50;
+		}
+
+		.core-ui-input-root.primary {
+			border: 1px solid black;
+		}
+
+		.core-ui-input-root.primary.lg {
+			:hover {
+				border: 1px solid black;
+			}
+		}
+	}
+}

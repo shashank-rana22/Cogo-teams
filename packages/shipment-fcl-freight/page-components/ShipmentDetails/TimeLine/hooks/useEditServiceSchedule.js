@@ -29,7 +29,7 @@ export default function useEditServiceSchedule({
 	useEffect(() => {
 		const { schedule_departure } = formValues || {};
 
-		if (schedule_departure?.toDateString() !== departureDate?.toDateString()) {
+		if (schedule_departure && schedule_departure?.toDateString() !== departureDate?.toDateString()) {
 			setDepartureDate(schedule_departure);
 
 			const newDefaultValues = {};

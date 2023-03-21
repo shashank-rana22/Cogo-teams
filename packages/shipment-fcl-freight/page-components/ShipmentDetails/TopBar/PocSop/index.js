@@ -1,6 +1,8 @@
+import SopAndPoc from '../../Header/SopAndPoc';
+
 function PocSop() {
 	return (
-		<div>POc Sop</div>
+		<div><SopAndPoc /></div>
 	);
 }
 

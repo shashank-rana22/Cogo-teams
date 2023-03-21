@@ -1,0 +1,15 @@
+.label{
+    font-weight: 600;
+    font-size: var(--font-size-md);
+}
+
+.value {
+    margin-bottom: 10px;
+    font-size: var(--font-size-md);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px  0;
+}
