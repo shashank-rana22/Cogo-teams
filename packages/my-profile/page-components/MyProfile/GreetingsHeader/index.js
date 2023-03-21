@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 import useUpdatePartnerUser from './useUpdatePartnerUser';
 
 function Greetings({
-	badgeList,
+	userBadges,
 	detailsData,
 	setRefetch = () => {},
 	partner_user_id = '',
@@ -40,7 +40,7 @@ function Greetings({
 		onClickCancel,
 	} = useUpdatePartnerUser({ picture, partner_user_id, setRefetch, detailsData });
 
-	const { badges_got = [] } = badgeList || {};
+	const { badges_got = [] } = userBadges || {};
 
 	const { name: locationName = '' } = lowest_geo_location || {};
 

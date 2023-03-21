@@ -19,13 +19,13 @@ function AllBadges() {
 
 	const { user_id = '', path: returnPath = '' } = query;
 
-	const showProfile = () => {
-		router.push(returnPath);
+	const goBack = () => {
+		router.back();
 	};
 
 	const {
 		listLoading,
-		badgeList,
+		userBadges,
 	} = useGetAllocationKamExpertiseProfile(user_id);
 
 	const {
@@ -51,9 +51,9 @@ function AllBadges() {
 
 			<Header
 				modalDetail={modalDetail}
-				showProfile={showProfile}
 				showAllBadges={showAllBadges}
 				returnPath={returnPath}
+				goBack={goBack}
 			/>
 
 			{
@@ -61,7 +61,7 @@ function AllBadges() {
 				&& (
 					<BadgeList
 						listLoading={listLoading}
-						badgeList={badgeList}
+						userBadges={userBadges}
 						showBadgeDetails={showBadgeDetails}
 					/>
 				)

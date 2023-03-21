@@ -4,10 +4,10 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function Header(props) {
-	const { modalDetail, showProfile, showAllBadges, returnPath } = props;
+	const { modalDetail, showAllBadges, returnPath, goBack } = props;
 	return (
 		<div className={styles.greeting_container}>
-			<div className={styles.main_heading} role="presentation" onClick={showProfile}>
+			<div className={styles.main_heading} role="presentation" onClick={goBack}>
 				<div className={styles.icon_container}>
 					<IcMArrowLeft width={24} height={24} />
 				</div>
