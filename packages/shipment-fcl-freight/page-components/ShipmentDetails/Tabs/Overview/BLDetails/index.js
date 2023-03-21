@@ -49,59 +49,61 @@ function BLDetails() {
 				Containers
 				)
 			</div>
+		</div>
+	);
 
-			<div className={styles.button_container}>
-				<Button
-					onClick={(e) => {
-						setMappingModal(true);
-						e.stopPropagation();
+	const buttons = () => (
+		<div className={styles.button_container}>
+			<Button
+				onClick={(e) => {
+					setMappingModal(true);
+					e.stopPropagation();
+				}}
+				className="sm"
+				style={{ marginLeft: '6px' }}
+			>
+				Bl Container Mapping
+			</Button>
+
+			<Button
+				onClick={(e) => {
+					setEditContainerNum(true);
+					e.stopPropagation();
+				}}
+				className="sm"
+			>
+				Update Container Number
+			</Button>
+
+			{mappingModal ? (
+				<Modal
+					show={mappingModal}
+					onClose={() => {
+						setMappingModal(false);
 					}}
-					className="sm"
-					style={{ marginLeft: '6px' }}
 				>
-					Bl Container Mapping
-				</Button>
+					<BlContainer
+						shipment_data={shipment_data}
+						data={data}
+						setMappingModal={setMappingModal}
+					/>
+				</Modal>
+			) : null}
 
-				<Button
-					onClick={(e) => {
-						setEditContainerNum(true);
-						e.stopPropagation();
+			{editContainerNum ? (
+				<Modal
+					show={editContainerNum}
+					onClose={() => {
+						setEditContainerNum(false);
 					}}
-					className="sm"
 				>
-					Update Container Number
-				</Button>
-
-				{mappingModal ? (
-					<Modal
-						show={mappingModal}
-						onClose={() => {
-							setMappingModal(false);
-						}}
-					>
-						<BlContainer
-							shipment_data={shipment_data}
-							data={data}
-							setMappingModal={setMappingModal}
-						/>
-					</Modal>
-				) : null}
-
-				{editContainerNum ? (
-					<Modal
-						show={editContainerNum}
-						onClose={() => {
-							setEditContainerNum(false);
-						}}
-					>
-						<Modal.Header title="Update Container Number" />
-						<ContainerNmUpdate
-							setEditContainerNum={setEditContainerNum}
-							shipment_data={shipment_data}
-						/>
-					</Modal>
-				) : null}
-			</div>
+					<Modal.Header title="Update Container Number" />
+					<ContainerNmUpdate
+						setEditContainerNum={setEditContainerNum}
+						shipment_data={shipment_data}
+					/>
+				</Modal>
+			) : null}
 		</div>
 	);
 
@@ -119,31 +121,34 @@ function BLDetails() {
 	};
 
 	return (
-		<Accordion title={renderBlCount} style={{ width: '100%' }}>
-			{!loading && !data?.list?.length ? (
-				<EmptyState showContent={emptyStateContent} />
-			) : (
-				<div className={styles.manage_services_div}>
-					{data?.list?.map((item) => (
-						<div className={styles.service_card}>
-							<TitleCard
-								item={item}
-								setOpen={setOpen}
-								open={open}
-								setActiveId={setActiveId}
-								activeId={activeId}
-								shipment_data={shipment_data}
-							/>
+		<div className={styles.container}>
+			<div className={styles.button_div}>{buttons()}</div>
+			<Accordion title={renderBlCount} style={{ width: '100%' }}>
+				{!loading && !data?.list?.length ? (
+					<EmptyState showContent={emptyStateContent} />
+				) : (
+					<div className={styles.manage_services_div}>
+						{data?.list?.map((item) => (
+							<div className={styles.service_card}>
+								<TitleCard
+									item={item}
+									setOpen={setOpen}
+									open={open}
+									setActiveId={setActiveId}
+									activeId={activeId}
+									shipment_data={shipment_data}
+								/>
 
-							{open
+								{open
 								&& activeId === item?.id ? (
 									<ContainerDetails containerDetails={item?.container_details} />
-								) : null}
-						</div>
-					))}
-				</div>
-			)}
-		</Accordion>
+									) : null}
+							</div>
+						))}
+					</div>
+				)}
+			</Accordion>
+		</div>
 	);
 }
 

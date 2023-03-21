@@ -1,4 +1,5 @@
-import { Button } from '@cogoport/components';
+import { Button, Input, Select } from '@cogoport/components';
+import { useState } from 'react';
 
 import useBlContainerMappings from '../../../../../../hooks/useBlContainerMappings';
 
@@ -8,7 +9,7 @@ function BlContainer({
 	data,
 	shipment_data,
 	setMappingModal = () => { },
-	refetch = () => { },
+	refetch = () => {},
 }) {
 	const {
 		// updateDetails,
@@ -16,7 +17,7 @@ function BlContainer({
 		errors,
 		// handleSubmit,
 		// containerLoading,
-		controls,
+		// controls,
 		control,
 		// fields,
 		// showElements,
@@ -26,19 +27,56 @@ function BlContainer({
 		setMappingModal,
 		refetch,
 	});
-
+	const [filters, setFilters] = useState({ blNo: '', containerNo: '' });
 	return (
-		<div className={styles.container}>
-			{/* <Layout fields={controls} errors={errors} control={control} /> */}
-			Hi!, under construction
-			<Button
-				// onClick={handleSubmit(updateDetails, onError)}
-				className="primary sg"
-				style={{ marginTop: '5px' }}
-			// disabled={containerLoading}
-			>
-				Update Details
-			</Button>
+		<div className={styles.content}>
+			<div className={styles.row_div}>
+				<div>
+					<div className={styles.text}>Bl Number</div>
+					<Input
+						size="sm"
+						className={styles.search_input}
+						value={filters.name}
+						placeholder="Enter Bl Number"
+						onChange={(e) => setFilters({ name: e })}
+					/>
+
+				</div>
+				<div>
+					<div className={styles.text}>Container Number</div>
+					<Select
+						className={styles.select_input}
+						value={filters?.service_type}
+				// onChange={(e) => setFilters({ service_type: e })}
+						placeholder="Choose Container Number"
+						isClearable
+						size="sm"
+					/>
+
+				</div>
+			</div>
+
+			<div className={styles.button_div}>
+				<Button
+					onClick={() => {
+						setMappingModal(false);
+						// reset();
+					}}
+					size="md"
+					themeType="primary"
+					style={{ marginRight: 10 }}
+				>
+					Cancel
+				</Button>
+				<Button
+						// disabled={loading}
+					// onClick={handleSubmit(handleFormSubmit)}
+					size="md"
+					themeType="primary"
+				>
+					Update Details
+				</Button>
+			</div>
 		</div>
 	);
 }
