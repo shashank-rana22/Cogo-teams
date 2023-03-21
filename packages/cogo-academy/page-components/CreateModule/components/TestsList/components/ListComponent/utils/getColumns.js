@@ -136,7 +136,7 @@ export const questionSetColumns = ({ loading, updateApi, fetchList, router }) =>
 
 export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 	const handleDeleteTest = (id) => {
-		updateApi({ questionSetId: id, getTestQuestionTest: fetchList, type: 'delete', from: 'test' });
+		updateApi({ test_id: id, fetchList, type: 'delete', from: 'test' });
 	};
 
 	const handleEditTest = (id) => {

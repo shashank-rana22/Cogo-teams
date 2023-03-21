@@ -57,7 +57,7 @@ function ReviewAndCriteria({ setActiveStepper }) {
 
 				<div className={styles.entity}>
 					<div className={styles.label_entity}>Cogo Entity </div>
-					<div className={styles.entity_name}>Cogo India</div>
+					<div className={styles.entity_name}>{data?.cogo_entity_id}</div>
 				</div>
 
 				<div className={styles.topic}>
@@ -72,7 +72,13 @@ function ReviewAndCriteria({ setActiveStepper }) {
 					</div>
 				</div>
 			</div>
-			<QuestionsAndDistribution control={control} errors={errors} loading={loading} data={data?.set_data} />
+			<QuestionsAndDistribution
+				data={data}
+				control={control}
+				errors={errors}
+				loading={loading}
+				setValue={setValue}
+			/>
 			<DurationAndValidity setValue={setValue} data={data} control={control} errors={errors} loading={loading} />
 			<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 				<Button

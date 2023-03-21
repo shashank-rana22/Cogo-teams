@@ -13,7 +13,7 @@ function useUpdateTest() {
 		if (type === 'edit') {
 			try {
 				const { test_duration_min, cut_off_marks, maximum_attempts, name, test_validity } = values;
-				const toRemove = ['test_duration_min', 'cut_off_marks', 'maximum_attempts', 'name', 'test_validity'];
+				const toRemove = ['test_duration', 'cut_off_marks', 'maximum_attempts', 'name', 'test_validity'];
 				toRemove.forEach((item) => {
 				// eslint-disable-next-line no-param-reassign
 					delete values[item];
@@ -60,8 +60,9 @@ function useUpdateTest() {
 			try {
 				await trigger({
 					data: {
-						id     : test_id,
-						status : 'inactive',
+						id                    : test_id,
+						status                : 'inactive',
+						set_wise_distribution : [],
 
 					},
 				});
