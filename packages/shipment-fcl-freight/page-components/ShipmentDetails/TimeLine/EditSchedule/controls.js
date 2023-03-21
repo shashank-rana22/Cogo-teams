@@ -23,8 +23,9 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		{
 			name       : 'schedule_departure',
 			label      : 'Actual time of departure',
+			lowerlabel : `Fluctuated time of departure: ${deviated_departure}`,
 			lowerlabel : deviated_departure ? `Fluctuated time of departure: ${deviated_departure}` : '',
-			maxDate    : 'none',
+			maxDate    : null,
 		},
 		{
 			name       : 'schedule_arrival',
@@ -32,7 +33,8 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 			lowerlabel : deviated_arrival && deviated_departure
 				&& new Date(deviated_arrival) > new Date(deviated_departure)
 				? `Fluctuated time of arrival: ${deviated_arrival}` : '',
-			maxDate : 'none',
+			maxDate : null,
+			minDate: departureDate,
 			disable : false,
 		},
 		{ name: 'vgm_cutoff', label: 'VGM cutoff date' },
@@ -46,11 +48,9 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 	const defaultValues = {};
 
 	finalControls.forEach((control, index) => {
-		// const { name, maxDate = departureDate, disable = disabledState } = control;
-		const { name, maxDate = departureDate } = control;
-		// finalControls[index].minDate = new Date();
-		// finalControls[index].maxDate = maxDate;
-		// finalControls[index].disable = true;
+		const { name, maxDate = departureDate, disable = disabledState } = control;
+		finalControls[index].maxDate = maxDate;
+		finalControls[index].disable = disable;
 		finalControls[index].dateFormat = 'MMM dd, yyyy, hh:mm:ss aaa';
 		finalControls[index].placeholder = 'Select Date';
 		finalControls[index].isPreviousDaysAllowed = true;
