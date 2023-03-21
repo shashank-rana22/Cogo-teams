@@ -3,7 +3,6 @@ import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import AudienceList from './AudienceList';
-import Scroll from './Scroll';
 import styles from './styles.module.css';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
@@ -150,11 +149,6 @@ function AllUsers({ props = '' }) {
 							cardHeading="Top Liked Questions"
 							contentQuestion={popular_questions}
 						/>
-						<Scroll />
-						{/* <ViewCards cardHeading="Topic from which Most Questions viewed" subHeading="ed" /> */}
-						{/* <ViewCards cardHeading="User group that viewed the Most Questions " subHeading="ecd" /> */}
-						{/* <ViewCardsList cardHeading="Top Viewed Quest" contentQuestion="What are Incoterms?" /> */}
-						{/* <ViewCardsList cardHeading="Top Liked Quest" contentQuestion="What are Incoterms?" /> */}
 					</div>
 				</div>
 				<div style={{ marginTop: '-25px', marginRight: '-10px', float: 'right' }}>
