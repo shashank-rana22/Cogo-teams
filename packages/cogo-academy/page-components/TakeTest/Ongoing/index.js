@@ -5,16 +5,16 @@ import RightSection from './components/RightSection';
 import useFetchQuestionsList from './hooks/useFetchQuestionList';
 import styles from './styles.module.css';
 
-function Ongoing() {
-	const [currentQuestion, setCurrentQuestion] = useState(1);
-
-	const { loading, data = {} } = useFetchQuestionsList({ currentQuestion });
-
+function Ongoing({ testData }) {
+	const page = localStorage.getItem('currentQuestion');
+	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
+	const { loading, data } = useFetchQuestionsList({ currentQuestion });
 	return ((
 		<div className={styles.main_container}>
 			<div className={styles.left_container}>
 				<LeftSection
 					data={data}
+					testData={testData}
 					loading={loading}
 					currentQuestion={currentQuestion}
 					setCurrentQuestion={setCurrentQuestion}

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { CheckboxGroup, RadioGroup } from '@cogoport/components';
+import { CheckboxGroup, RadioGroup, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -24,9 +24,8 @@ function SingleQuestion({ question = {}, currentQuestion, total_question, loadin
 	}, [JSON.stringify(question)]);
 
 	if (loading || isEmpty(question)) {
-		return null;
+		<Placeholder height="40px" width="100%" />;
 	}
-
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.container}>

@@ -13,11 +13,12 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 
 	const sendAnswer = () => {
 		if (isEmpty(answer)) {
-			Toast.error('Select Correct Answers');
-			return;
-		}
-
-		if (typeof answer === 'string') {
+			// Toast.error('Select Correct Answers');
+			// return;
+			const arr = [];
+			const str = 'not_answered';
+			updateAnswerList(data?.id, arr, str);
+		} else if (typeof answer === 'string') {
 			const arr = [answer];
 			const str = 'answered';
 			updateAnswerList(data?.id, arr, str);
@@ -25,20 +26,26 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 			const str = 'answered';
 			updateAnswerList(data?.id, answer, str);
 		}
-
-		setCurrentQuestion((pv) => pv + 1);
+		const num = Number(currentQuestion);
+		localStorage.setItem('currentQuestion', num + 1);
+		setCurrentQuestion((pv) => Number(pv) + 1);
 	};
 
 	const markAsReview = () => {
+		const str = 'marked_for_review';
+		if (isEmpty(answer)) {
+			const arr = [];
+			updateAnswerList(data?.id, arr, str);
+		}
 		if (typeof answer === 'string') {
 			const arr = [answer];
-			const str = 'answered';
 			updateAnswerList(data?.id, arr, str);
 		} else {
-			const str = 'answered';
 			updateAnswerList(data?.id, answer, str);
 		}
-		setCurrentQuestion((pv) => pv + 1);
+		const num = Number(currentQuestion);
+		localStorage.setItem('currentQuestion', num + 1);
+		setCurrentQuestion((pv) => Number(pv) + 1);
 	};
 
 	return (

@@ -3,9 +3,7 @@ import CaseStudy from './CaseStudy';
 // import quizData from './dummydata';
 import SingleQuestion from './SingleQuestion';
 
-function Body({ data = [], currentQuestion, setCurrentQuestion, total_question, answer = '', setAnswer }) {
-	console.log('answe11r', answer);
-
+function Body({ data = [], currentQuestion, setCurrentQuestion, total_question, answer = '', setAnswer, loading }) {
 	return (
 		<div>
 			{!data?.primary_question_type
@@ -17,6 +15,7 @@ function Body({ data = [], currentQuestion, setCurrentQuestion, total_question, 
 						total_question={total_question}
 						answer={answer}
 						setAnswer={setAnswer}
+						loading={loading}
 					/>
 				)
 				: (
@@ -27,6 +26,7 @@ function Body({ data = [], currentQuestion, setCurrentQuestion, total_question, 
 						total_question={total_question}
 						answer={answer}
 						setAnswer={setAnswer}
+						loading={loading}
 					/>
 				) }
 		</div>

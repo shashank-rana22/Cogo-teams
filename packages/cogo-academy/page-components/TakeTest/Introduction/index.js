@@ -3,29 +3,36 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const CONTENT_MAPPING = {
-	topics_covered: {
-		title : 'Topics Covered',
-		value : 'Enrichment, Shipments',
-		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/document-svg.svg',
-	},
-	number_of_questions: {
-		title : 'No. of questions',
-		value : '25',
+function Introduction({ setActiveState, loading, testData = {} }) {
+	const { set_data, case_study_questions, stand_alone_questions, test_duration, name } = testData || {};
 
-	},
-	duration: {
-		title : 'Duration',
-		value : '01:00 hr',
-		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg',
-	},
-};
+	const formatArrayValues = (items) => {
+		const formattedItem = items?.map((item) => item.topic);
+		return formattedItem?.join(',  ') || '';
+	};
 
-function Introduction({ setActiveState }) {
+	const CONTENT_MAPPING = {
+		topics_covered: {
+			title : 'Topics Covered',
+			value : formatArrayValues(set_data),
+			icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/document-svg.svg',
+		},
+		number_of_questions: {
+			title : 'No. of questions',
+			value : `${case_study_questions} Case Study Questions,
+					${stand_alone_questions} Standalone Questions`,
+		},
+		duration: {
+			title : 'Duration',
+			value : `${test_duration} min`,
+			icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg',
+		},
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
-				Shipment and Enrichment Test
+				{name}
 			</div>
 
 			<div className={styles.content}>
@@ -38,7 +45,6 @@ function Introduction({ setActiveState }) {
 
 							<div className={styles.content_text}>
 								<div className={styles.label}>{title}</div>
-
 								<div className={styles.value}>{value}</div>
 							</div>
 						</div>

@@ -23,6 +23,7 @@ function CreateQuestion({
 	setAllKeysSaved,
 	editDetails,
 	setEditDetails,
+	topic,
 }) {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
 
@@ -101,9 +102,14 @@ function CreateQuestion({
 	}, [watch('question_type')]);
 
 	useEffect(() => {
-		if (!isEmpty(editDetails)) {
-			const { topic, question_type } = editDetails || {};
+		if (!isEmpty(topic)) {
 			setValue('topic', topic);
+		}
+	}, []);
+
+	useEffect(() => {
+		if (!isEmpty(editDetails)) {
+			const { question_type } = editDetails || {};
 
 			if (question_type === 'case_study') {
 				const { question_text, sub_question = [] } = editDetails || {};
@@ -117,12 +123,14 @@ function CreateQuestion({
 						difficulty_level,
 						question_type: indQuestionType,
 						question_text: indQuestionText,
+						explanation = [],
 					} = item1 || {};
 
 					setValue(`case_questions.${ind}.difficulty_level`, difficulty_level);
 					setValue(`case_questions.${ind}.question_type`, indQuestionType);
 					setValue(`case_questions.${ind}.question_text`, indQuestionText);
 					setValue(`case_questions.${ind}.audience_ids`, []);
+					setValue(`case_questions.${ind}.explanation`, explanation?.[0]);
 
 					answers.forEach((item2, ind2) => {
 						const { answer_text, is_correct } = item2 || {};
@@ -133,12 +141,13 @@ function CreateQuestion({
 					});
 				});
 			} else {
-				const { answers = [], question_text, difficulty_level = '' } = editDetails || {};
+				const { answers = [], question_text, difficulty_level = '', explanation = [] } = editDetails || {};
 
 				setValue('question_type', 'stand_alone');
 				setValue('question.0.question_type', question_type);
 				setValue('question.0.difficulty_level', difficulty_level);
 				setValue('question.0.question_text', question_text);
+				setValue('question.0.explanation', explanation?.[0]);
 
 				answers.forEach((item1, ind) => {
 					const { answer_text, is_correct } = item1 || {};

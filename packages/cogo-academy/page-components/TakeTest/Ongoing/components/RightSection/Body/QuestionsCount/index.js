@@ -1,5 +1,3 @@
-import { Toast } from '@cogoport/components';
-
 import styles from './styles.module.css';
 
 function QuestionsCount({ data = {}, setCurrentQuestion }) {
@@ -12,9 +10,8 @@ function QuestionsCount({ data = {}, setCurrentQuestion }) {
 
 	const handleChangeQuestion = ({ index }) => {
 		if (index === 0 || data?.data?.[index - 1].answer_state !== 'not_viewed') {
+			localStorage.setItem('currentQuestion', index + 1);
 			setCurrentQuestion(index + 1);
-		} else {
-			Toast.error('please answer previous question');
 		}
 	};
 
@@ -27,10 +24,15 @@ function QuestionsCount({ data = {}, setCurrentQuestion }) {
 					<div
 						role="presentation"
 						onClick={() => handleChangeQuestion({ index })}
-						style={{ backgroundColor: STATS_MAPPING[answer_state] }}
+						style={{
+							backgroundColor : STATS_MAPPING[answer_state],
+							cursor          : `${(index === 0 || data?.data?.[index - 1].answer_state !== 'not_viewed')
+								? 'pointer' : 'not-allowed'}`,
+						}}
 						className={styles.question_count}
 					>
 						{index + 1}
+
 					</div>
 
 				);

@@ -3,6 +3,7 @@ const getControls = () => [
 		name        : 'topic',
 		label       : 'Topic',
 		type        : 'input',
+		disabled    : true,
 		placeholder : 'Question Topic',
 		rules       : { required: 'This is required' },
 	},

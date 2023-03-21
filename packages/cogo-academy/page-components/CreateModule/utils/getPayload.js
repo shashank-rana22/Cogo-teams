@@ -8,6 +8,7 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 				difficulty_level,
 				question_text,
 				options = [],
+				explanation,
 			} = question?.[0] || {};
 
 			const answers = options.map((item, index) => {
@@ -17,7 +18,6 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 					...item,
 					is_correct      : is_correct === 'true',
 					status          : 'active',
-					explanation     : [],
 					sequence_number : index,
 				};
 			});
@@ -29,13 +29,14 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 				topic,
 				difficulty_level,
 				question_text,
+				explanation: [explanation],
 				answers,
 			};
 		}
 
 		case 'case_study': {
 			if (editType === 'case_question') {
-				const { question_text, options = [], difficulty_level, question_type } = values || {};
+				const { question_text, options = [], difficulty_level, question_type, explanation } = values || {};
 
 				const answers = options.map((option, index) => {
 					const { is_correct, answer_text } = option || {};
@@ -44,7 +45,6 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 						answer_text,
 						is_correct      : is_correct === 'true',
 						status          : 'active',
-						explanation     : [],
 						sequence_number : index,
 					};
 				});
@@ -55,6 +55,7 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 					question_type,
 					difficulty_level,
 					answers,
+					explanation: [explanation],
 				};
 			}
 			const { audience_ids, question_text, case_questions = [], topic, question_type } = values || {};
@@ -65,6 +66,7 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 					difficulty_level,
 					question_text: indQuestionText,
 					options,
+					explanation,
 				} = item || {};
 
 				const answers = options.map((option, index) => {
@@ -74,13 +76,16 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 						answer_text,
 						is_correct      : is_correct === 'true',
 						status          : 'active',
-						explanation     : [],
 						sequence_number : index,
 					};
 				});
 
 				return {
-					question_type: indQuestionType, difficulty_level, question_text: indQuestionText, answers,
+					question_type : indQuestionType,
+					difficulty_level,
+					question_text : indQuestionText,
+					answers,
+					explanation   : [explanation],
 				};
 			});
 

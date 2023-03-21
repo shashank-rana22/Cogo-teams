@@ -51,6 +51,12 @@ const getControls = () => [
 					},
 				],
 			},
+			{
+				name        : 'explanation',
+				type        : 'textarea',
+				placeholder : 'Type Explanation...',
+				rows        : 4,
+			},
 		],
 	},
 ];

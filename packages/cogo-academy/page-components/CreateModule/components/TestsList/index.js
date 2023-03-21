@@ -1,4 +1,7 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import { Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
+import { IcMSearchlight, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import useGetTestList from '../../hooks/useGetTestList';
 import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
@@ -8,7 +11,7 @@ import styles from './styles.module.css';
 
 function TestsList({ activeTab, setActiveTab }) {
 	// const [activeTab, setActiveTab] = useState('tests');
-
+	const [sort, setSort] = useState(false);
 	const { data, loading, fetchList, setParams, params } = useGetTestList();
 
 	const {
@@ -71,6 +74,67 @@ function TestsList({ activeTab, setActiveTab }) {
 	return (
 		<div className={styles.container}>
 			{/* <div className={styles.heading}>Service Bundles</div> */}
+			<div className={styles.filter}>
+				<div>
+					<Input
+						size="md"
+						suffix={<ButtonIcon size="md" icon={<IcMSearchlight />} disabled={false} themeType="primary" />}
+						placeholder={activeTab === 'tests' ? 'Search for Test/Topic' : 'Search for QuestionSets'}
+						onChange={(value) => {
+							if (activeTab === 'tests') {
+								setParams((prev) => ({
+									...prev,
+									filters: {
+										...prev.filters,
+										q: value,
+									},
+								}));
+							} else {
+								setQuestionListParams((prev) => ({
+									...prev,
+									filters: {
+										...prev.filters,
+										q: value,
+									},
+								}));
+							}
+						}}
+						className={styles.input}
+					/>
+				</div>
+				<div className={styles.sort}>
+					<IcMArrowRotateDown style={{ cursor: 'pointer' }} />
+					<span
+						className={styles.span_text}
+						onClick={() => {
+							setSort((prev) => !prev);
+							if (activeTab === 'tests') {
+								setParams((prev) => ({
+									...prev,
+									sort_type : sort ? 'asc' : 'desc',
+									filters   : {
+										...prev.filters,
+
+									},
+								}));
+							} else {
+								setQuestionListParams((prev) => ({
+									...prev,
+									sort_type : sort ? 'asc' : 'desc',
+									filters   : {
+										...prev.filters,
+
+									},
+								}));
+							}
+						}}
+					>
+						Sort By
+
+					</span>
+				</div>
+			</div>
+
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}

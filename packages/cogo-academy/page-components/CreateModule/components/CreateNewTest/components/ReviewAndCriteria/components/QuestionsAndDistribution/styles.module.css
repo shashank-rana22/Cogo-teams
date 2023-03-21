@@ -5,13 +5,6 @@
 	margin-right: -100px;
 }
 
-.distribution {
-	display: flex;
-	gap: 10px;
-	align-items: center;
-	margin-right: -100px;
-}
-
 .input {
 	width: 100px;
 }
