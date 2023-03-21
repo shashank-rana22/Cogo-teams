@@ -77,16 +77,15 @@ function ShipmentHeader() {
 			<div className={styles.customer}>
 				<Tooltip
 					theme="light"
-					placement="right"
+					placement="bottom"
 					maxWidth="none"
-					interactive
 					content={(
 						<div className={styles.tooltip}>
 							{importer_exporter?.business_name}
 						</div>
 					)}
 				>
-					<div>{importer_exporter?.business_name}</div>
+					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
 				</Tooltip>
 				<div>
 					{handlePoNo()}
