@@ -21,10 +21,8 @@ function OverviewManageServices({ container }) {
 	);
 
 	useEffect(() => {
-		console.log(container);
 		const button = document.querySelector(`.${container} > div > button:first-child`);
 		// button.click();
-		console.log(button);
 	}, []);
 
 	return (
