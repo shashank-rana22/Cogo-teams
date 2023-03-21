@@ -17,7 +17,9 @@ function ReviewAndCriteria({
 	data,
 	test_id,
 }) {
-	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
+
+	const { name = '', set_data = [], cogo_entity_object = {} } = data || {};
 
 	const { updateTest } = useUpdateTest();
 	const router = useRouter();
@@ -36,13 +38,14 @@ function ReviewAndCriteria({
 			</div>
 
 			<div className={styles.subcontainer}>
-				<div className={styles.label}>{data?.name || '-'}</div>
+				<div className={styles.label}>{name || '-'}</div>
+
 				<div className={styles.topic}>
 					<div className={styles.subtopic}>Topics </div>
 					<div className={styles.topic_pill_container}>
-						{data?.set_data?.map((question_set) => (
+						{set_data.map((question_set) => (
 							<Pill size="md" color="blue" className={styles.names}>
-								<span className={styles.names}>{question_set?.topic}</span>
+								<span className={styles.names}>{question_set.topic}</span>
 							</Pill>
 						))}
 					</div>
@@ -50,7 +53,7 @@ function ReviewAndCriteria({
 
 				<div className={styles.entity}>
 					<div className={styles.label_entity}>Cogo Entity </div>
-					<div className={styles.entity_name}>{data?.cogo_entity_object?.business_name}</div>
+					<div className={styles.entity_name}>{cogo_entity_object.business_name}</div>
 				</div>
 
 				<div className={styles.topic}>
@@ -65,6 +68,7 @@ function ReviewAndCriteria({
 					</div>
 				</div>
 			</div>
+
 			<QuestionsAndDistribution
 				data={data}
 				control={control}
@@ -72,6 +76,7 @@ function ReviewAndCriteria({
 				loading={loading}
 				setValue={setValue}
 			/>
+
 			<DurationAndValidity setValue={setValue} data={data} control={control} errors={errors} loading={loading} />
 
 			{/* <Button
