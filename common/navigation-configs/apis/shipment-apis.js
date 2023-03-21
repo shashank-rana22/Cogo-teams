@@ -1307,6 +1307,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
+	{
+		api          : 'get_shipment_transaction_insights',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_air_movement_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

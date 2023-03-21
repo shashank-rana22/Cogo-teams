@@ -194,7 +194,7 @@
 }
 
 .list_container {
-	height: calc(100% - 155px);
+	height: 80%;
 	overflow-y: auto;
 
 	@media (max-width: 1280px) {
@@ -255,16 +255,4 @@
 
 .warning {
 	background: #fef199;
-}
-
-.plus_circle {
-	position: fixed;
-	bottom: 33px;
-	left: 350px;
-	cursor: pointer;
-}
-
-.plus_circle svg {
-	background-color: white;
-	border-radius: 100%;
 }
