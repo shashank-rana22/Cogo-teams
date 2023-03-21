@@ -2,9 +2,10 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase, format } from '@cogoport/utils';
 
+import QuestionWiseStats from '../../commons/QuestionWiseStats';
+
 import GoToDetails from './GoToDetails';
 import Percentile from './Percentile';
-import QuestionWiseStats from './QuestionWiseStats';
 import styles from './styles.module.css';
 import TopicWisePercentile from './TopicWisePercentile';
 
