@@ -33,22 +33,24 @@ function AddQuestionsForm({
 		<div className={styles.container}>
 			<div className={styles.label}>Questions</div>
 
-			<div className={styles.input_container}>
-				<Input
-					size="md"
-					suffix={(
-						<ButtonIcon
-							size="md"
-							icon={<IcMSearchlight />}
-							disabled={false}
-							themeType="primary"
-						/>
-					)}
-					placeholder="Search for Question/topic"
-					onChange={(val) => setFilters((prev) => ({ ...prev, q: val }))}
-					value={filters?.q}
-				/>
-			</div>
+			{!isEmpty((test_questions || []).filter((item) => item.id !== editDetails?.id)) ? (
+				<div className={styles.input_container}>
+					<Input
+						size="md"
+						suffix={(
+							<ButtonIcon
+								size="md"
+								icon={<IcMSearchlight />}
+								disabled={false}
+								themeType="primary"
+							/>
+						)}
+						placeholder="Search for Question/topic"
+						onChange={(val) => setFilters((prev) => ({ ...prev, q: val }))}
+						value={filters?.q}
+					/>
+				</div>
+			) : null}
 
 			{loading ? (
 				<LoadingState />
