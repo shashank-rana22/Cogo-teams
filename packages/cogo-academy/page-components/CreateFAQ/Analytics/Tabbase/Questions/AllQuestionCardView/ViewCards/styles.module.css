@@ -20,6 +20,11 @@
 	background: #fff;
 	border-radius: 8px;
 	box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
+  &:hover {
+		box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+	
+		}
 }
 
 .right_stat_content {
@@ -41,9 +46,11 @@
 	font-size: 12px;
 	font-weight: 600;
 	color: #6fa5ab;
+
 }
 
 .sub_heading_context {
 	font-size: 14px;
 	color: "#6FA5AB";
+  text-align: center;
 }

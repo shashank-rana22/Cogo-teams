@@ -150,7 +150,6 @@ function ScrollBar({ props = {} }) {
 			slides={CAROUSELDATA}
 			showDots={false}
 			showArrow
-			isInfinite
 		/>
 	);
 }

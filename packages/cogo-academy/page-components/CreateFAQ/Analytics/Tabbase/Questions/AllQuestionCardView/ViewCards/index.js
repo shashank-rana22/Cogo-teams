@@ -1,9 +1,10 @@
 import { Tooltip } from '@cogoport/components';
+import startCase from '@cogoport/utils/src/utilities/startCase';
 
 import styles from './styles.module.css';
 
 function ViewCards({ cardHeading = '', subHeading = [] }) {
-	const truncate = (str) => (str?.length > 14 ? `${str.substring(0, 12)}...` : str);
+	const truncate = (str) => (str?.length > 14 ? `${startCase(str.substring(0, 12))}...` : startCase(str));
 
 	return (
 		<div className={styles.primary_right}>
@@ -15,7 +16,7 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 				<div className={styles.sub_heading} style={{ color: '#6FA5AB' }}>
 					<div>
 						<div className={styles.sub_heading_context}>
-							<Tooltip content={subHeading[0]?.name} placement="right">
+							<Tooltip content={subHeading[0]?.display_name || subHeading[0]?.name} placement="right">
 								<div>{truncate(subHeading[0]?.display_name || subHeading[0]?.name)}</div>
 							</Tooltip>
 						</div>
@@ -29,8 +30,10 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 
 					<div>
 						<div className={styles.sub_heading_context}>
-							<Tooltip content={subHeading[1]?.name} placement="right">
-								<div>{truncate(subHeading[1]?.display_name || subHeading[1]?.name)}</div>
+							<Tooltip content={subHeading[1]?.display_name || subHeading[1]?.name} placement="right">
+
+								{truncate(subHeading[1]?.display_name || subHeading[1]?.name)}
+
 							</Tooltip>
 						</div>
 						{subHeading[1]?.view_count ? subHeading[1]?.view_count || 0 : subHeading[1]?.views || 0}

@@ -116,7 +116,10 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 								{
 									on    : 'hover',
 									style : {
-										itemTextColor: '#000',
+										itemTextColor : '#000',
+										symbolSize    : 26,
+										transition    : 'all 0.3s ease',
+
 									},
 								},
 							],
@@ -199,7 +202,9 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 								{
 									on    : 'hover',
 									style : {
-										itemTextColor: '#000',
+										itemTextColor : '#000',
+										symbolSize    : 26,
+										transition    : 'all 0.3s ease',
 									},
 								},
 							],

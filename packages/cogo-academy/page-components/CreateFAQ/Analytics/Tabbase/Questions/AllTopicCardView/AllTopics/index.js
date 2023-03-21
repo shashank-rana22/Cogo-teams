@@ -105,7 +105,7 @@ function AllTopic(props) {
 				</div>
 			</div>
 
-			{showQuestions ? <QuestionsList id={id} /> : null}
+			{showQuestions ? <div className={styles.dropdown}><QuestionsList id={id} /></div> : null}
 		</div>
 
 	);
