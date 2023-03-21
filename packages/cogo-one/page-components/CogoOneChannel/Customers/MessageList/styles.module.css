@@ -196,10 +196,6 @@
 .list_container {
 	height: 80%;
 	overflow-y: auto;
-
-	@media (max-width: 1280px) {
-		height: calc(100% - 130px);
-	}
 }
 
 .list_container::-webkit-scrollbar {
