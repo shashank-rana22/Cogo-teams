@@ -39,6 +39,17 @@
 	}
 }
 
+.business_name {
+	max-width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tooltip_text {
+	word-break: break-word;
+}
+
 .email_id {
 	color: #888fd1;
 }
