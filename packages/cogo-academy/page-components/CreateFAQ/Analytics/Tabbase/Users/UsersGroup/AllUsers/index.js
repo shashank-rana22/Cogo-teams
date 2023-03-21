@@ -9,24 +9,24 @@ import UsersQuestionList from './UsersQuestionList';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
 
-// const scrollHorizontal = (scrollOffset, ref) => {
-// 	const tableRootElement = ref.current.querySelector('.ui-table-root');
-// 	tableRootElement.scrollLeft += scrollOffset;
-// };
-
 function AllUsers({ props = '' }) {
 	const {
 		name = '',
+		current_audience_data = [],
 		total_questions = 0,
 		total_views = 0,
-		most_viewed_questions = [],
-		total_likes = 0,
-		total_dislikes = 0,
+		id = '',
+	} = props;
+	const {
+		audience_wise_topics = [],
 		most_disliked_questions = [],
 		most_liked_questions = [],
-		topics = [],
-	} = props;
-	console.log('props', props);
+		most_viewed_questions = [],
+		topic_stats = [],
+	} = current_audience_data;
+
+	const { total_likes = 0, total_dislikes = 0 } = topic_stats[0] || {};
+
 	const [showQuestions, setShowQuestions] = useState(false);
 
 	const truncate = (str) => (str?.length > 40 ? `${str.substring(0, 38)}...` : str);
@@ -74,7 +74,7 @@ function AllUsers({ props = '' }) {
 				<div style={{ display: 'flex' }}>
 					<ViewCards
 						cardHeading="Topics that viewed the Most Questions "
-						subHeading={topics}
+						subHeading={audience_wise_topics}
 					/>
 
 					<ViewCardsList
@@ -106,7 +106,7 @@ function AllUsers({ props = '' }) {
 				</div>
 			</div>
 
-			{showQuestions ? <UsersQuestionList props={most_liked_questions} /> : null}
+			{showQuestions ? <UsersQuestionList id={id} /> : null}
 		</div>
 
 	);

@@ -28,13 +28,9 @@ function useAllAudience({ date = '' }) {
 
 						},
 						page,
-						page_limit                       : 10 || undefined,
-						pagination_data_required         : true,
-						most_viewed_questions_required   : true,
-						audience_wise_questions_required : true,
-						audience_wise_stats_required     : true,
-						audience_wise_topics_required    : true,
-						current_audience_data_required   : true,
+						page_limit                     : 10 || undefined,
+						pagination_data_required       : true,
+						current_audience_data_required : true,
 					},
 				});
 			} catch (error) {

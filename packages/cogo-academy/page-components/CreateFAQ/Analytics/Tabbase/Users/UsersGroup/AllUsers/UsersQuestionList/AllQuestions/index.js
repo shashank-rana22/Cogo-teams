@@ -45,7 +45,7 @@ function AllQuestions({ props = [] }) {
 			Header   : 'No.of Likes',
 			accessor : (items) => (
 				<div className={styles.question}>
-					{items?.upvote_count}
+					{items?.answers?.[0]?.upvote_count}
 				</div>
 			),
 		},
@@ -53,7 +53,7 @@ function AllQuestions({ props = [] }) {
 			Header   : 'No.of Dislikes',
 			accessor : (items) => (
 				<div className={styles.question}>
-					{items?.downvote_count}
+					{items?.answers?.[0]?.downvote_count}
 				</div>
 			),
 		},

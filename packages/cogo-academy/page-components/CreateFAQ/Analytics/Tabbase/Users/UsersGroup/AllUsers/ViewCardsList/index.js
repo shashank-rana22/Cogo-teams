@@ -4,15 +4,33 @@ import { IcMEyeopen, IcMLike, IcMDislike } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 
 function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] }) {
-	function Icon() {
+	function Icon(item) {
 		if (state === 'Viewed_Question') {
-			return <IcMEyeopen style={{ marginTop: '0.15rem' }} />;
+			return (
+				<div style={{ marginRight: '0.25rem' }}>
+					{item?.questions_views}
+					<IcMEyeopen style={{ marginTop: '0.15rem', marginLeft: '0.1rem' }} />
+
+				</div>
+
+			);
 		}
 		if (state === 'Liked_Question') {
-			return <IcMLike style={{ marginTop: '0.15rem' }} />;
+			return (
+				<div style={{ marginRight: '0.25rem' }}>
+					{item?.likes}
+					<IcMLike style={{ marginTop: '0.15rem', marginLeft: '0.1rem' }} />
+				</div>
+			);
 		}
 		if (state === 'Disliked_Question') {
-			return <IcMDislike style={{ marginTop: '0.15rem' }} />;
+			return (
+				<div style={{ marginRight: '0.25rem' }}>
+					{item?.dislikes}
+					<IcMDislike style={{ marginTop: '0.15rem', marginLeft: '0.1rem' }} />
+				</div>
+
+			);
 		}
 	}
 	const truncate = (str) => (str?.length > 28 ? `${str.substring(0, 26)}...` : str);
@@ -51,8 +69,7 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 							</div>
 
 							<div style={{ display: 'flex' }}>
-								<div style={{ marginRight: '0.25rem' }}>{item?.view_count}</div>
-								{Icon()}
+								{Icon(item)}
 							</div>
 						</div>
 					);

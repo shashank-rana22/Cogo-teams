@@ -3,6 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 function useListFaqQuestions({
+	id = undefined,
 	searchState = undefined,
 	topicId = undefined,
 	tagId = [],
@@ -30,13 +31,16 @@ function useListFaqQuestions({
 						state        : 'published',
 						status       : 'active',
 						faq_topic_id : topicId || undefined,
+						audience_id  : id || undefined,
 
 					},
 					page,
-					page_limit                   : 10 || undefined,
-					faq_tags_data_required       : true,
-					answers_data_required        : true,
-					get_pagination_data_required : true,
+					page_limit               : 10 || undefined,
+					faq_tags_data_required   : true,
+					answers_data_required    : true,
+					faq_topics_data_required : true,
+
+					get_pagination_data_required: true,
 				},
 			});
 		} catch (error) {
