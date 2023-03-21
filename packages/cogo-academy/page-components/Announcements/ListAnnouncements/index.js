@@ -22,6 +22,8 @@ function AddedAnnouncements() {
 		paginationData,
 	} = props;
 
+	const { total_count = 0, page_limit = 10 } = paginationData;
+
 	return (
 		<div className={styles.container}>
 			<Header
@@ -40,15 +42,18 @@ function AddedAnnouncements() {
 				/>
 			</div>
 
-			<div className={styles.pagination}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={paginationData?.total_count}
-					pageSize={paginationData?.page_limit}
-					onPageChange={setPage}
-				/>
-			</div>
+			{total_count === 0 ? null : (
+				<div className={styles.pagination}>
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={page_limit}
+						onPageChange={setPage}
+					/>
+				</div>
+			)}
+
 		</div>
 	);
 }

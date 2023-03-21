@@ -1,6 +1,8 @@
 import { Placeholder } from '@cogoport/components';
-import { compareAsc } from '@cogoport/utils';
+import { startCase, isEmpty, compareAsc } from '@cogoport/utils';
 import React from 'react';
+
+import EmptyState from '../../../../commons/EmpyState';
 
 import DisplayCard from './DisplayCard';
 import styles from './styles.module.css';
@@ -31,8 +33,16 @@ function DisplayCards({
 				/>
 			));
 		}
+
 		return Array.from(Array(6)).map(() => <Placeholder height="65px" width="100%" margin="16px 0px 20px 0px" />);
 	}
+
+	if (isEmpty(data)) {
+		return (
+			<EmptyState text={`There are no ${startCase(activeTab)} Announcements`} />
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			{data.map((item, index) => {
