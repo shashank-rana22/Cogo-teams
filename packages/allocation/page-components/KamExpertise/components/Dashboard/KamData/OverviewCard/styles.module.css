@@ -1,10 +1,16 @@
 .container {
+    display: flex;
     flex-basis: 24%;
     padding: 16px 24px 4px;
     background: #fff;
     border-radius: 8px;
     height: 132px;
     margin: 4px;
+
+    @media (max-width: 1000px) {
+        flex-basis: 48%;
+    }
+
     @media (max-width: 576px) {
         flex-basis: 100%;
     }
