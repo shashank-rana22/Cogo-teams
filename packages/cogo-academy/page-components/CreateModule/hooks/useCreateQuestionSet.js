@@ -1,11 +1,12 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
 const actionNameMapping = {
 	delete : 'deleted',
 	create : 'created',
-	update : 'updates',
+	update : 'updated',
 };
 
 function useCreateQuestionSet() {
@@ -62,7 +63,7 @@ function useCreateQuestionSet() {
 				setQuestionSetId(res?.data?.id);
 			}
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err.response?.data) || 'Something went wrong');
 		}
 	};
 
