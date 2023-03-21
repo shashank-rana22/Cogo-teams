@@ -68,12 +68,7 @@ function Statistics() {
 							padding={0.3}
 							groupMode="grouped"
 							valueScale={{
-								type  : 'linear',
-								// min   : minVal * 0.8,
-								// max   : maxVal * 1.2,
-								min   : 0,
-								max   : 100,
-								clamp : true,
+								type: 'linear',
 							}}
 							colors={['#CFEAED', '#C4DC91', '#F37166']}
 							axisTop={null}
@@ -89,7 +84,7 @@ function Statistics() {
 								tickRotation : 0,
 							}}
 							enableGridY={false}
-							gridYValues={20}
+							borderRadius="6px"
 							legends={[
 								{
 									dataFrom      : 'keys',
@@ -120,7 +115,70 @@ function Statistics() {
 
 				<div className={styles.chart}>
 					<div className={styles.chart_header}>Probation Statistics</div>
-					CHART WILL COME HERE
+					{!loading && isEmpty(barChartData) ? (
+						<EmptyState
+							height={140}
+							width={220}
+							emptyText="PIP Statistics Not Found"
+							textSize="12px"
+							flexDirection="column"
+						/>
+					) : (
+						<ResponsiveBar
+							data={barChartData}
+							keys={[
+								'employees_in_pip',
+								'confirmed',
+								'exit',
+							]}
+							indexBy="month"
+							margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+							padding={0.3}
+							groupMode="grouped"
+							valueScale={{
+								type: 'linear',
+							}}
+							colors={['#CFEAED', '#C4DC91', '#F37166']}
+							axisTop={null}
+							axisRight={null}
+							axisBottom={{
+								tickSize     : 5,
+								tickPadding  : 5,
+								tickRotation : 0,
+							}}
+							axisLeft={{
+								tickSize     : 5,
+								tickPadding  : 5,
+								tickRotation : 0,
+							}}
+							enableGridY={false}
+							borderRadius="6px"
+							legends={[
+								{
+									dataFrom      : 'keys',
+									anchor        : 'right',
+									direction     : 'column',
+									justify       : false,
+									translateX    : 120,
+									translateY    : 0,
+									itemsSpacing  : 2,
+									itemWidth     : 100,
+									itemHeight    : 20,
+									itemDirection : 'left-to-right',
+									itemOpacity   : 0.85,
+									symbolSize    : 10,
+									effects       : [
+										{
+											on    : 'hover',
+											style : {
+												itemOpacity: 1,
+											},
+										},
+									],
+								},
+							]}
+						/>
+					)}
 				</div>
 			</div>
 
