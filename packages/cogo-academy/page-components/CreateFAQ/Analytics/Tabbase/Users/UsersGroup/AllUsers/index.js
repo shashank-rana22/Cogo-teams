@@ -12,7 +12,7 @@ function AllUsers({ props = '' }) {
 	const {
 		name = '',
 		current_audience_data = [],
-		id = '',
+		// id = '',
 	} = props;
 	const {
 		audience_wise_topics = [],
