@@ -9,9 +9,9 @@ function useUpdateTest() {
 		method : 'POST',
 	}, { manual: true });
 
-	const updateTest = async ({ test_id, values = {}, fetchList, type = 'edit' }) => {
-		if (type === 'edit') {
-			try {
+	const updateTest = async ({ test_id, values = {}, fetchList, type = 'edit', status = '' }) => {
+		try {
+			if (type === 'edit') {
 				const { test_duration, cut_off_marks, maximum_attempts, name, test_validity } = values;
 
 				const testDetailsObj = {
@@ -51,18 +51,14 @@ function useUpdateTest() {
 						id     : test_id,
 						...testDetailsObj,
 						set_wise_distribution,
-						status : 'active',
+						status : (status === 'active') ? 'active' : 'draft',
 
 					},
 				});
 
 				router.push('/learning/test-module');
 				Toast.success('Updated Successfully');
-			} catch (err) {
-				Toast.error(err?.message || 'Something went wrong');
-			}
-		} else {
-			try {
+			} else {
 				await trigger({
 					data: {
 						id                    : test_id,
@@ -73,9 +69,9 @@ function useUpdateTest() {
 				});
 				fetchList();
 				Toast.success('Test Deleted Successfully');
-			} catch (error) {
-				Toast.error(error?.message);
 			}
+		} catch (err) {
+			Toast.error(err?.message || 'Something went wrong');
 		}
 	};
 	return {

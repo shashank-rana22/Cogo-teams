@@ -73,16 +73,56 @@ function ReviewAndCriteria({
 				setValue={setValue}
 			/>
 			<DurationAndValidity setValue={setValue} data={data} control={control} errors={errors} loading={loading} />
+
+			{/* <Button
+				className={styles.btn}
+				size="md"
+				themeType="accent"
+				onClick={() => setShow(true)}
+			>
+				Add Instructions
+			</Button> */}
+			{/* <Modal size="md" show={show} onClose={() => setShow(false)} placement="center">
+				<Modal.Header title="Add instructions" />
+				<Modal.Body>
+					{fields.map((field, index) => (
+						<div className={styles.instruction}>
+							<InputController
+								control={control}
+								key={field.id}
+								name={`guidelines.${index}.instruction`}
+							/>
+							<ButtonIcon
+								size="xl"
+								icon={<IcMDelete />}
+								themeType="primary"
+								onClick={() => remove(index)}
+							/>
+						</div>
+					))}
+				</Modal.Body>
+				<Modal.Footer align="right">
+					<Button onClick={() => {
+						append({ instruction: '' });
+					}}
+					>
+						Add New Instruction
+					</Button>
+				</Modal.Footer>
+			</Modal> */}
+
 			<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 				<Button
 					loading={loading}
 					size="md"
 					themeType="tertiary"
 					style={{ marginRight: '10px' }}
-					// onClick={handleSubmit((values) => {
-					// 	// if (!isEmpty(errors)) Toast.error('Fill all required fields');
-					// 	// createTest({ data: values, idArray, next: 'draft' });
-					// })}
+					onClick={
+						handleSubmit((values) => {
+							if (!isEmpty(errors)) Toast.error('Fill all required fields');
+							updateTest({ test_id, values, status: 'draft' });
+						})
+					}
 				>
 					Save As Draft
 				</Button>
@@ -92,7 +132,7 @@ function ReviewAndCriteria({
 					onClick={
 						handleSubmit((values) => {
 							if (!isEmpty(errors)) Toast.error('Fill all required fields');
-							updateTest({ test_id, values });
+							updateTest({ test_id, values, status: 'active' });
 						})
 					}
 				>

@@ -107,3 +107,11 @@
 .btn_cont_float {
 	justify-content: flex-end;
 }
+
+.btn{
+	width: fit-content;
+}
+
+.instruction{
+	display: flex;
+}

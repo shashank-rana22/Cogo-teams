@@ -1,5 +1,4 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { useState } from 'react';
 
 import useGetTestList from '../../hooks/useGetTestList';
 import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
