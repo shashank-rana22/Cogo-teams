@@ -73,7 +73,7 @@ function AllQuestions({ id = '' }) {
 			<StyledTable columns={columns} layoutType="table" data={listdata} />
 
 			<Pagination
-				style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '10px' }}
+				style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '20px', paddingBottom: '12px' }}
 				type="page"
 				currentPage={page}
 				totalItems={total_count}
