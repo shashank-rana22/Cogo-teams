@@ -93,17 +93,17 @@ function AllUsers({ props = '' }) {
 					/>
 				</div>
 
-				{/* <div className={styles.button_container}>
+				<div className={styles.button_container}>
 					<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
-						ALL QUESTIONS
+						All Users
 						{!showQuestions
 							? <IcMArrowDown style={{ marginLeft: 4, marginBottom: 2 }} />
 							: <IcMArrowUp style={{ marginLeft: 4, marginBottom: 2 }} />}
 					</Button>
-				</div> */}
+				</div>
 			</div>
 
-			{showQuestions ? <UsersQuestionList id={id} /> : null}
+			{showQuestions ? <UsersQuestionList /> : null}
 		</div>
 
 	);

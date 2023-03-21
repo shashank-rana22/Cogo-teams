@@ -1,15 +1,16 @@
 import React from 'react';
 
-import useListFaqQuestions from '../../../../../hooks/useListFaqQuestions';
+// import useListFaqQuestions from '../../../../../hooks/useListFaqQuestions';
 
-import AllQuestions from './AllQuestions';
+// import AllQuestions from './AllQuestions';
 import styles from './styles.module.css';
 
-function QuestionsList({ id }) {
-	const props = useListFaqQuestions({ id });
+function QuestionsList() {
+	// const props = useListFaqQuestions({ id });
 	return (
 		<div className={styles.container}>
-			<AllQuestions props={props?.data?.list} />
+			{/* <AllQuestions props={props?.data?.list} /> */}
+			No Data Available!!
 		</div>
 	);
 }
