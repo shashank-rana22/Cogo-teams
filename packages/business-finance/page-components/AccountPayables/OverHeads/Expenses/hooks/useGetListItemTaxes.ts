@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -10,7 +9,7 @@ const useGetListItemTaxes = () => {
 			method  : 'post',
 			authKey : 'post_common_tax_list_item_taxes',
 		},
-		{ autoCancel: false },
+		{ manual: true },
 	);
 
 	useEffect(() => {
@@ -26,7 +25,7 @@ const useGetListItemTaxes = () => {
 					},
 				);
 			} catch (err) {
-				Toast.error('Something went wrong');
+				console.log('error-', err);
 			}
 		};
 		api();

@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 
 import { formatDate } from '../../../../commons/utils/formatDate';
 
-const useCreateExpenseConfig = ({ mailData, setShowModal }) => {
+const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) => {
 	const {
 		expenseCategory,
 		expenseSubCategory,
@@ -24,6 +24,7 @@ const useCreateExpenseConfig = ({ mailData, setShowModal }) => {
 		agreementNumber,
 		tradeParty,
 	} = mailData || {};
+
 	const { branchId } = JSON.parse(branch || '{}');
 	const { registration_number:registrationNumber } = vendorData || {};
 	const { id:cogoEntityId } = entityObject || {};
@@ -74,6 +75,7 @@ const useCreateExpenseConfig = ({ mailData, setShowModal }) => {
 
 	if (data?.message === 'OK') {
 		Toast.success('Expense successfully created');
+		getRecurringList();
 		setShowModal(false);
 	}
 

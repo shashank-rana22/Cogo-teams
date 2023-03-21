@@ -13,6 +13,7 @@ interface Props {
 	showModal?: boolean,
 	createExpenseType?: string,
 	getList?:(p:any)=>void,
+	getRecurringList?:(p:any)=>void,
 }
 
 function CreateExpenseModal({
@@ -20,6 +21,7 @@ function CreateExpenseModal({
 	showModal = false,
 	createExpenseType = '',
 	getList = () => {},
+	getRecurringList = () => {},
 }:Props) {
 	const [mailModal, setMailModal] = useState(false);
 	const [recurringData, setRecurringData] = useState({
@@ -122,6 +124,7 @@ function CreateExpenseModal({
 							setMailData={setMailData}
 							setShowModal={setShowModal}
 							getList={getList}
+							getRecurringList={getRecurringList}
 							createExpenseType={createExpenseType}
 						/>
 					</Modal.Body>

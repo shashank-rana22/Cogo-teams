@@ -7,8 +7,9 @@ import SegmentedControl from '../../../commons/SegmentedControl/index';
 import showOverflowingNumbers from '../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../commons/utils/formatDate';
 import List from '../../commons/List';
-import nonRecurringFilters from '../Controls/nonRecurringFilters';
+import { nonRecurringFilters, recurringFilters } from '../Controls/nonRecurringFilters';
 
+import AddExpenseModal from './AddExpenseModal';
 import CreateExpenseModal from './CreateExpenseModal';
 import useListExpense from './hooks/useListExpense';
 import useListExpenseConfig from './hooks/useListExpenseConfig';
@@ -39,6 +40,8 @@ function ExpenseComponent() {
 	const [recurringState, setRecurringState] = useState('recurring');
 	const [createExpenseType, setCreateExpenseType] = useState('');
 	const [showModal, setShowModal] = useState(false);
+	const [showExpenseModal, setShowExpenseModal] = useState(false);
+	const [rowData, setRowData] = useState({});
 	const [expenseFilters, setExpenseFilters] = useState({
 		expenseType     : recurringState,
 		expenseCategory : null,
@@ -48,7 +51,7 @@ function ExpenseComponent() {
 	});
 
 	const { getList, listData, listLoading } = useListExpense(expenseFilters);
-	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig(expenseFilters);
+	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig();
 
 	useEffect(() => {
 		if (recurringState === 'nonRecurring') { getList(); }
@@ -73,6 +76,11 @@ function ExpenseComponent() {
 		}));
 	};
 
+	const addExpense = (itemData:object) => {
+		setShowExpenseModal(true);
+		setRowData(itemData);
+	};
+
 	const BUTTON_TEXT = {
 		recurring    : 'Create Expense Record',
 		nonRecurring : 'Create Expense',
@@ -84,7 +92,14 @@ function ExpenseComponent() {
 
 				{recurringState === 'nonRecurring' &&	(
 					<Filter
-						controls={nonRecurringFilters()}
+						controls={nonRecurringFilters}
+						filters={expenseFilters}
+						setFilters={setExpenseFilters}
+					/>
+				)}
+				{recurringState === 'recurring' &&	(
+					<Filter
+						controls={recurringFilters}
 						filters={expenseFilters}
 						setFilters={setExpenseFilters}
 					/>
@@ -121,6 +136,7 @@ function ExpenseComponent() {
 				disabled={!itemData?.approvedBy}
 				size="md"
 				style={{ border: '1px solid black' }}
+				onClick={() => addExpense(itemData)}
 			>
 				Add Expense
 			</Button>
@@ -178,7 +194,7 @@ function ExpenseComponent() {
 		getInvoiceDates: (itemData:ItemDataInterface) => {
 			const { dueDate, billDate, createdDate } = itemData || {};
 			return (
-				<div>
+				<div style={{ fontSize: '10px' }}>
 					{dueDate && billDate && createdDate && (
 						<div>
 							<div>
@@ -187,12 +203,12 @@ function ExpenseComponent() {
 								{formatDate(dueDate, 'dd MMM yyyy', {}, false) }
 							</div>
 							<div>
-								Invoice Date
+								Invoice Date:
 								{' '}
 								{ formatDate(billDate, 'dd MMM yyyy', {}, false) }
 							</div>
 							<div>
-								Upload Date
+								Upload Date:
 								{' '}
 								{formatDate(createdDate, 'dd MMM yyyy', {}, false) }
 							</div>
@@ -278,14 +294,6 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		getApprovedBy: (itemData:ItemDataInterface) => {
-			const { createdAt } = itemData || {};
-			return (
-				<div>
-					{ createdAt ? formatDate(createdAt, 'dd MMM yyyy', {}, false) : '-' }
-				</div>
-			);
-		},
 	};
 
 	const showDropDown = () => {
@@ -340,8 +348,18 @@ function ExpenseComponent() {
 					showModal={showModal}
 					createExpenseType={createExpenseType}
 					getList={getList}
+					getRecurringList={getRecurringList}
 				/>
 			)}
+
+			{ showExpenseModal && (
+				<AddExpenseModal
+					showExpenseModal={showExpenseModal}
+					setShowExpenseModal={setShowExpenseModal}
+					rowData={rowData}
+				/>
+			) }
+
 		</div>
 	);
 }

@@ -114,7 +114,7 @@ export const nonRecurringExpenseDetails = ({
 		});
 	};
 
-	const handleEntityChange = (e) => {
+	const handleEntityChange = (e:any) => {
 		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[0];
 		setFormData({
 			...formData,
@@ -132,7 +132,7 @@ export const nonRecurringExpenseDetails = ({
 					type           : 'asyncSelect',
 					asyncKey       : 'list_vendors',
 					value          : formData?.vendorName,
-					onChange       : (item, obj:object) => handleVendorChange(obj),
+					onChange       : (item:any, obj:object) => handleVendorChange(obj),
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Vendor name',

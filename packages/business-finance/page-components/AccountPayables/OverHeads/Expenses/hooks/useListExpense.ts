@@ -12,7 +12,7 @@ const useListExpense = (expenseFilters:Filter) => {
 			method  : 'get',
 			authKey : 'get_expense_list',
 		},
-		{ autoCancel: false },
+		{ manual: true },
 	);
 
 	const getList = useCallback(async () => {

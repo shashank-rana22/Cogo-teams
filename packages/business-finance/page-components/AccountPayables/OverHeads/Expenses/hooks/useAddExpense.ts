@@ -16,7 +16,9 @@ interface AddressInterface {
 	branchId?:number | string,
 }
 
-const useCreateExpense = ({ formData, setShowModal, getList }) => {
+const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
+	const { vendorId:vendorID, businessName:vendorName, id:expenseConfigurationId } = rowData || {};
+
 	const [addressData, setAddressData] = useState<AddressInterface>({});
 	const {
 		profile,
@@ -24,23 +26,20 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 
 	const {
 		stakeholderId,
-		vendorID,
-		vendorName,
-		vendorSerialId,
+		vendorData,
 		invoiceDate,
 		invoiceCurrency,
 		uploadedInvoice,
 		invoiceNumber,
 		entityObject,
-		vendorData,
 		expenseCategory,
 		expenseSubCategory,
 		branch,
 		lineItemsList,
 		tradeParty,
-	} = formData || {};
+	} = expenseData || {};
 
-	const branchId = JSON.parse(formData?.branch || '{}')?.branchId;
+	const { name:branchName, branchId } = branch || {};
 
 	const lineItemsData = lineItemsList?.map((lineItem:any) => {
 		if (lineItem?.tax) {
@@ -74,8 +73,6 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		}
 		return null;
 	});
-
-	const { name: branchName } = JSON.parse(branch || '{}') || {};
 
 	const {
 		entity_code:entityCode,
@@ -117,7 +114,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		serial_id: vendorSid,
 		business_name: vendorBusinessName,
 		cogo_entity_id: vendorCogoEntityId,
-		kyc_status:kycStatus,
+		serial_id:vendorSerialId,
 	} = vendorData || {};
 
 	const [{ data:responseData, loading }, trigger] = useRequestBf(
@@ -130,7 +127,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 	);
 
 	const payload = {
-		// expenseConfigurationId : 'example', only in case of recurring
+		expenseConfigurationId,
 		request: {
 			job: {
 				jobSource   : 'OVERHEAD',
@@ -172,8 +169,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					entityCodeId            : tradeParty?.cogo_entity_id,
 					organizationId          : tradeParty?.organization_id,
 					organizationSerialId    : tradeParty?.serial_id,
-					// isTaxApplicable         : tradeParty?.is_tax_applicable,
-					isTaxApplicable         : true, // hardcoded for now
+					isTaxApplicable         : tradeParty?.is_tax_applicable,
 					isSez                   : false,
 					organizationName        : 'JAMA TAXI SERVICE', // ???
 					pincode                 : '110062', // ??
@@ -251,8 +247,8 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		approvedBy  : stakeholderId,
 		expenseType : 'NON_RECURRING',
 		branchId    : addressData?.branchId,
-		kycStatus   : kycStatus?.toUpperCase(),
-		pan         : vendorRegistrationNumber,
+		// kycStatus   : kycStatus?.toUpperCase(),
+		// pan         : vendorRegistrationNumber,
 	};
 
 	const submitData = async () => {
@@ -277,4 +273,4 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 	};
 };
 
-export default useCreateExpense;
+export default useAddExpense;

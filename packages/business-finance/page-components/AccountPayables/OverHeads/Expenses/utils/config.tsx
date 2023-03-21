@@ -114,12 +114,6 @@ export const expenseNonRecurringConfig = () => ({
 
 		},
 		{
-			label : 'TDS',
-			key   : 'tds',
-			span  : 1.5,
-
-		},
-		{
 			label : 'Payable',
 			span  : 1.5,
 			func  : 'getPayable',
@@ -136,7 +130,7 @@ export const expenseNonRecurringConfig = () => ({
 		},
 		{
 			label : 'Approved By',
-			func  : 'getApprovedBy',
+			func  : 'getApprovedByRecurring',
 			span  : 1.25,
 		},
 	],

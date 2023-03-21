@@ -26,13 +26,13 @@ function ExpenseDetailsForm({ formData, setFormData, createExpenseType }:Props) 
 
 	useEffect(() => {
 		if (date) {
-			setFormData((prev) => ({ ...prev, periodOfTransaction: months[getMonth(date) + 1] }));
+			setFormData((prev:object) => ({ ...prev, periodOfTransaction: months[getMonth(date) + 1] }));
 		} else {
-			setFormData((prev) => ({ ...prev, periodOfTransaction: null }));
+			setFormData((prev:object) => ({ ...prev, periodOfTransaction: null }));
 		}
 	}, [date, setFormData]);
 
-	const { entityList } = useListCogoEntities();
+	const { entityList } = useListCogoEntities({});
 
 	let expenseControls:any;
 	if (createExpenseType === 'recurring') {

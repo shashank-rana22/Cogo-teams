@@ -1,26 +1,33 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useListCogoEntities = () => {
+interface Props {
+	cogoEntityId?:string | number,
+}
+
+const useListCogoEntities = ({ cogoEntityId }:Props) => {
 	const [{ data }, trigger] = useRequest(
 		{
 			url    : 'list_cogo_entities',
 			method : 'get',
 		},
-		{ autoCancel: false },
+		{ manual: true },
 	);
 
 	useEffect(() => {
 		const api = async () => {
 			try {
-				await trigger();
+				await trigger({
+					params: {
+						filters: { id: cogoEntityId || undefined },
+					},
+				});
 			} catch (err) {
-				Toast.error('Something went wrong');
+				console.log('error-', err);
 			}
 		};
 		api();
-	}, [trigger]);
+	}, [trigger, cogoEntityId]);
 
 	return {
 		entityList: data?.list,

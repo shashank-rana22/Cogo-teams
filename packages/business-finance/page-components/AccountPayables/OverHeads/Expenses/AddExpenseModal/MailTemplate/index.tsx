@@ -2,8 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMFileUploader } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import useCreateExpense from '../../hooks/useCreateExpense';
-import useCreateExpenseConfig from '../../hooks/useCreateExpenseConfig';
+import useAddExpense from '../../hooks/useAddExpense';
 
 import Details from './Details';
 import styles from './styles.module.css';
@@ -16,30 +15,16 @@ interface Data {
 }
 
 interface Props {
-	mailData?:Data,
-	setMailData?:any,
+	expenseData?:Data,
+	setExpenseData?:any,
 	setShowModal?:boolean,
 	getList?:(p:any)=>void,
-	getRecurringList?:(p:any)=>void,
-	createExpenseType?:string,
+	rowData?:any,
 }
 
-function MailTemplate({ mailData, setMailData, setShowModal, getList, getRecurringList, createExpenseType }:Props) {
-	const { uploadedInvoice, vendorName = '-', expenseCategory = '-', stakeholderEmail } = mailData || {};
-	const { submitData, loading } = useCreateExpense({
-		formData: mailData,
-		setShowModal,
-		getList,
-	});
-	const { createRecurring, recurringLoading } = useCreateExpenseConfig({ mailData, setShowModal, getRecurringList });
-
-	const handleClick = () => {
-		if (createExpenseType === 'recurring') {
-			createRecurring();
-		} else if (createExpenseType === 'nonRecurring') {
-			submitData();
-		}
-	};
+function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowData }:Props) {
+	const { uploadedInvoice, vendorName = '-', expenseCategory = '-', stakeholderEmail } = expenseData || {};
+	const { submitData } = useAddExpense({ expenseData, setShowModal, getList, rowData });
 
 	return (
 		<div className={styles.container}>
@@ -73,8 +58,8 @@ function MailTemplate({ mailData, setMailData, setShowModal, getList, getRecurri
 			<div className={styles.subject}>
 				<Details
 					isBody
-					mailData={mailData}
-					setMailData={setMailData}
+					mailData={expenseData}
+					setMailData={setExpenseData}
 				/>
 			</div>
 
@@ -87,8 +72,12 @@ function MailTemplate({ mailData, setMailData, setShowModal, getList, getRecurri
 				</div>
 			)}
 			<div className={styles.button}>
-				<Button onClick={() => handleClick()} disabled={loading || recurringLoading}>
-					{loading || recurringLoading ? 'Sending...' : 'Send'}
+				<Button
+					onClick={() => submitData()}
+					disabled={false}
+				>
+					{/* {loading || recurringLoading ? 'Sending...' : 'Send'} */}
+					Send
 				</Button>
 
 			</div>
