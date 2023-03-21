@@ -1,17 +1,11 @@
-import { Select } from '@cogoport/components';
-import React from 'react';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 
-import SearchInput from '../../../../../common/SearchInput';
+import SearchInput from '../../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
 function BadgeFilterHeader(props) {
-	const { leaderboardLoading, searchKAM, setSearchKAM, debounceQuery } = props;
-	const options = [
-		{ label: 'Gold', value: 300 },
-		{ label: 'Silver', value: 200 },
-		{ label: 'Bronze', value: 100 },
-	];
+	const { leaderboardLoading, searchKAM, setSearchKAM, debounceQuery, badgeName, setBadgeName } = props;
 
 	return (
 
@@ -22,13 +16,21 @@ function BadgeFilterHeader(props) {
 
 			<div className={styles.container}>
 				<div className={styles.select_container}>
-					<Select
+					<AsyncSelect
+						placeholder="Badge"
 						size="sm"
-					// value={value}
-					// onChange={setValue(value)}
+						value={badgeName}
+						onChange={(value) => setBadgeName(value)}
+						asyncKey="badge_name"
+						multiple
+						isClearable
 						disabled={leaderboardLoading}
-						placeholder="Select Badge"
-						options={options}
+						params={{
+							filters: {
+								status                       : 'active',
+								expertise_configuration_type : 'event_configuration',
+							},
+						}}
 					/>
 				</div>
 
