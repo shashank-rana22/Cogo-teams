@@ -14,6 +14,7 @@ function ProfileDetails({
 	activeVoiceCard,
 	updateLeaduser,
 	activeCardId,
+	setModalType = () => {},
 }) {
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
@@ -60,6 +61,7 @@ function ProfileDetails({
 						orgId={orgId}
 						disableQuickActions={disableQuickActions}
 						documents_count={documents_count}
+						setModalType={setModalType}
 					/>
 				)}
 			</div>

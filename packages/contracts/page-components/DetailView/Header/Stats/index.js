@@ -42,7 +42,6 @@ function Stats({
 							)}
 						</div>
 					</div>
-
 					<div className={styles.service_details}>
 						{data.services.map((service, index) => (
 							<>
