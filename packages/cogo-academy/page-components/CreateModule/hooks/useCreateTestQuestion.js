@@ -1,6 +1,13 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 import getPayload from '../utils/getPayload';
+
+const actionNameMapping = {
+	stand_alone : 'Stand Alone',
+	case_study  : 'Case Study',
+};
 
 function useCreateTestQuestion() {
 	const [{ loading: loadingCaseStudy }, triggerCaseStudy] = useRequest({
@@ -30,10 +37,12 @@ function useCreateTestQuestion() {
 				data: payload,
 			});
 
+			Toast.success(`${actionNameMapping[question_type]} question created successfully`);
+
 			reset();
 			getTestQuestionTest({ questionSetId });
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err.response?.data));
 		}
 	};
 

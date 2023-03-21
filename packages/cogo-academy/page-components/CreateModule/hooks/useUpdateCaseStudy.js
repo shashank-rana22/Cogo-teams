@@ -1,4 +1,11 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+
+const actionNameMapping = {
+	delete : 'deleted',
+	update : 'updated',
+};
 
 function useUpdateCaseStudy() {
 	const [{ loading }, trigger] = useRequest({
@@ -21,12 +28,14 @@ function useUpdateCaseStudy() {
 				data: action === 'delete' ? { id, status: 'inactive' } : { ...values, id },
 			});
 
+			Toast.success(`Case study question ${actionNameMapping[action]} successfully`);
+
 			getTestQuestionTest({ questionSetId, ...(action !== 'delete' ? { questionToShow: id } : null) });
 			setAllKeysSaved(true);
 			setEditDetails({});
 			reset();
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err.response?.data));
 		}
 	};
 
