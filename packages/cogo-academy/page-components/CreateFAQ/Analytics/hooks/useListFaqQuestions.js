@@ -12,12 +12,12 @@ function useListFaqQuestions({
 }) {
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ data, loading = false }, trigger] = useRequest({
 		method : 'get',
 		url    : 'list_faq_questions',
 	}, { manual: true });
 
-	const { query, debounceQuery } = useDebounceQuery();
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
 		debounceQuery(searchState);
