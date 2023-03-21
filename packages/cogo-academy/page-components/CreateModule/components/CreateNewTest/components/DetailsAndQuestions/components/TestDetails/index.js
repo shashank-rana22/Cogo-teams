@@ -15,8 +15,12 @@ function CreateNewTest({ control, errors, data, setValue }) {
 	const controls = getControls();
 
 	useEffect(() => {
-		setValue('name', data?.name);
-		setValue('cogo_entity_id', data?.cogo_entity_id);
+		const { cogo_entity_object = {}, name = '' } = data;
+
+		const { id } = cogo_entity_object || {};
+
+		setValue('name', name);
+		setValue('cogo_entity_id', id);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 

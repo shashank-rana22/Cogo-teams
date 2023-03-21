@@ -1,10 +1,11 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { format } from '@cogoport/utils';
+import { startCase, format } from '@cogoport/utils';
+
+import QuestionWiseStats from '../../commons/QuestionWiseStats';
 
 import GoToDetails from './GoToDetails';
 import Percentile from './Percentile';
-import QuestionWiseStats from './QuestionWiseStats';
 import styles from './styles.module.css';
 import TopicWisePercentile from './TopicWisePercentile';
 
@@ -27,7 +28,7 @@ function LastTestResults() {
 
 	const { date, status, test_name, topic_wise_percentile } = stats_data || {};
 
-	console.log(stats_data, 'datatdatfat');
+	const hasPassed = status === 'passed';
 
 	return (
 		<div className={styles.container}>
@@ -39,8 +40,8 @@ function LastTestResults() {
 				/>
 
 				<div className={styles.column}>
-					<div className={styles.message_content}>
-						Congratulations
+					<div className={styles.message_content} style={{ color: hasPassed ? '#849e4c' : '' }}>
+						{hasPassed ? 'Congratulations' : 'Alas!'}
 						<span className={styles.name}>
 							{name}
 							!
@@ -50,7 +51,7 @@ function LastTestResults() {
 					<div className={styles.sub_text}>
 						You have
 						{' '}
-						<b>{status}</b>
+						<b>{startCase(status)}</b>
 						{' '}
 						the
 						{' '}
