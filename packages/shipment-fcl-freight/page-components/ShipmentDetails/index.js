@@ -37,7 +37,7 @@ function ShipmentDetails() {
 
 			<TopBar />
 			<Timeline timelineData={timelineData} loading={shipmentTimelineLoading} />
-			<Tab />
+			<Tab shipment_data={shipment_data} />
 		</ShipmentDetailContext.Provider>
 	);
 }

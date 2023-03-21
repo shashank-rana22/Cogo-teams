@@ -1,19 +1,16 @@
 import { TabPanel, Tabs } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
-import React, { useState, useContext } from 'react';
+import { ShipmentMails } from '@cogoport/shipment-mails';
+import React, { useState } from 'react';
 
 import Documents from './Documents';
-import Emails from './Emails';
 import PurchaseInvoice from './Invoicing/PurchaseInvoice';
 import SalesInvoice from './Invoicing/SalesInvoice';
 import Overview from './Overview';
 import TimelineAndTask from './TimelineAndTasks';
 import Tracking from './Tracking';
 
-function Tab() {
+function Tab({ shipment_data = {} }) {
 	const [activeTab, setActiveTab] = useState('overview');
-
-	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	return (
 		<div style={{ marginTop: 20 }}>
@@ -39,7 +36,11 @@ function Tab() {
 					<Documents />
 				</TabPanel>
 				<TabPanel name="emails" title="Emails">
-					<Emails />
+					<ShipmentMails
+						source="cogo_rpa"
+						filters={{ q: shipment_data.serial_id }}
+						pre_subject_text={`${shipment_data.serial_id}`}
+					/>
 				</TabPanel>
 				<TabPanel name="tracking" title="Tracking">
 					<Tracking shipment_data={shipment_data} />

@@ -1,0 +1,9 @@
+ .container {
+	margin: 24px;
+	font-size: 20px;
+	line-height: 32px;
+	font-weight: bold;
+	&.done {
+		color: green;
+	}
+ }

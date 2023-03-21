@@ -1,0 +1,72 @@
+
+.container {
+	margin: 0px 7px 16px 7px;
+	display: flex;
+	padding-bottom: 22px;
+	border-bottom: 1px solid #cbcfeb;
+	cursor: pointer;
+	padding: 4px;
+	border-radius: 4px;
+	&:hover {
+		background: #e0e0e0;
+	}
+}
+
+.circle {
+	height: 18px;
+	width: 18px;
+	border-radius: 50%;
+	border: 1px solid #393f70;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.sender {
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 18px;
+
+	color: #393f70;
+	margin-bottom: 2px;
+	max-width: 136px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.content {
+	margin-left: 8px;
+	flex: 1;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 4px;
+}
+
+.subject {
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 16px;
+	max-width: 154px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	/* identical to box height, or 83% */
+
+	color: #5936f0;
+}
+
+.initial_body {
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 16px;
+	color: #333333;
+	max-width: 228px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
