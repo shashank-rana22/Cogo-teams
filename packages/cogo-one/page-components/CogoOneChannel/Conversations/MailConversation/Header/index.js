@@ -5,21 +5,28 @@ import { MAIL_REPLY_TYPE } from '../../../../../constants';
 
 import styles from './styles.module.css';
 
-function Header({ subject = '', loading }) {
+function Header({ subject = '', loading, handlClick = () => {} }) {
+	// const handlClick = (val) => {
+	// 	setButtonType(val);
+	// 	setShowMailModal(true);
+	// };
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.header_subject}>
 				{loading ? <Placeholder width="300px" height="24px" /> : subject}
-
 			</div>
 			<div className={styles.header_actions}>
-				{MAIL_REPLY_TYPE.map(({ label, icon }) => (
+				{MAIL_REPLY_TYPE.map(({ label, icon, value }) => (
 					<Tooltip
 						content={label}
 						placement="top"
 						caret={false}
 					>
-						<div className={styles.header_actions_reply}>
+						<div
+							role="presentation"
+							className={styles.header_actions_reply}
+							onClick={() => handlClick(value)}
+						>
 							{icon}
 						</div>
 					</Tooltip>

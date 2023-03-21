@@ -1,18 +1,18 @@
 import { usePublicRequest } from '@cogoport/request';
-// import { useEffect, useState } from 'react';
 
-function useSendMail({
+function useForwardMail({
 	setShowMailModal = () => {},
-	setEmailState = () => {},
-	setRecipientArray = () => {},
-	setBccArray = () => {},
+	setEmailState,
+	setRecipientArray,
+	setBccArray,
 }) {
 	const [{ loading }, trigger] = usePublicRequest({
-		url    : 'https://lens.dev.cogoport.io/send_mail',
+		url    : 'https://lens.dev.cogoport.io/forward_mail',
 		method : 'POST',
+
 	}, { manual: true });
 
-	const createMail = async (payload) => {
+	const forwardMailApi = async (payload) => {
 		try {
 			await trigger({
 				data: payload,
@@ -21,15 +21,16 @@ function useSendMail({
 			// console.log(error)
 		} finally {
 			setEmailState({});
-			setRecipientArray([]);
 			setBccArray([]);
+			setRecipientArray([]);
 			setShowMailModal(false);
 		}
 	};
 
 	return {
-		createMail,
-		createMailLoading: loading,
+		forwardMailApi,
+		forwardLoading: loading,
 	};
 }
-export default useSendMail;
+
+export default useForwardMail;

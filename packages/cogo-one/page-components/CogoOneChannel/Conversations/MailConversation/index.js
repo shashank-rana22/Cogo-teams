@@ -1,14 +1,27 @@
 import { Placeholder } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import { isEmpty, format } from '@cogoport/utils';
 
 import useListMailDetails from '../../../../hooks/useGetMail';
+import useGetMailAttachment from '../../../../hooks/useGetMailAttachment';
 
 import Emailbody from './Emailbody';
 import Header from './Header';
+import MailAttachments from './MailAttachment';
 import styles from './styles.module.css';
 
-function MailConversation({ activeMail }) {
+function MailConversation({
+	activeMail,
+	setButtonType = () => {},
+	buttonType = '',
+	setShowMailModal = () => {},
+	setBccArray = () => {},
+	setRecipientArray = () => {},
+	setEmailState = () => {},
+}) {
+	console.log('buttonType:', buttonType);
 	const { data = {}, loading } = useListMailDetails({ activeMail });
+	const { attachmentData = {}, attachmentLoading } = useGetMailAttachment({ activeMail });
+	const allAttachements = attachmentData?.data?.value || [];
 
 	const {
 		// bodyPreview = '',
@@ -21,10 +34,40 @@ function MailConversation({ activeMail }) {
 	} = data || {};
 	const { content = '' } = body || {};
 
+	const senderAddress = sender?.emailAddress?.address;
+	const recipientData = (toRecipients || []).map((item) => item?.emailAddress?.address);
+	const ccData = (ccRecipients || []).map((item) => item?.emailAddress?.address);
+
+	const emptyCcRecipient = isEmpty(ccRecipients || []);
+
+	const handlClick = (val) => {
+		console.log('rjbksdfviudbjvksdvbjdc', val);
+		setButtonType(val);
+		setBccArray(ccData);
+		setRecipientArray(senderAddress);
+		setEmailState({
+			subject,
+		});
+		setShowMailModal(true);
+	};
+
 	return (
 		<div className={styles.container}>
-			<Header subject={subject} loading={loading} />
-			<Emailbody sender={sender} toRecipients={toRecipients} ccRecipients={ccRecipients} loading={loading} />
+			<Header
+				subject={subject}
+				loading={loading}
+				setButtonType={setButtonType}
+				setShowMailModal={setShowMailModal}
+				handlClick={handlClick}
+			/>
+			<Emailbody
+				sender={sender}
+				recipientData={recipientData}
+				ccData={ccData}
+				emptyCcRecipient={emptyCcRecipient}
+				loading={loading}
+			/>
+			<MailAttachments allAttachements={allAttachements} loading={attachmentLoading} />
 			{loading ? (
 				<div className={styles.message_div}>
 					<div className={styles.time_stamp}>
@@ -39,7 +82,7 @@ function MailConversation({ activeMail }) {
 			) : (
 				<div className={styles.message_div}>
 					<div className={styles.time_stamp}>
-						{format(sentDateTime, 'HH:mm a dd MMM')}
+						{format(sentDateTime, 'EEEE, HH:mm a dd MMM yyy')}
 					</div>
 					<div
 						className={styles.receive_message_container}

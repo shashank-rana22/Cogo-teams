@@ -12,9 +12,22 @@ import styles from './styles.module.css';
 
 function MailModal({
 	showMailModal, setShowMailModal,
-	createMail = () => {},
-	createLoading = false,
+	// createMail = () => {},
+	// createLoading = false,
 	userId = '',
+	recipientArray = [],
+	setBccArray = () => {},
+	setRecipientArray = () => {},
+	bccArray = [],
+	emailState = {},
+	setEmailState = () => {},
+	buttonType = '',
+	formatApiType = () => {},
+	attachments = [],
+	setAttachments = () => {},
+	activeMail = {},
+	// setButtonType = () => {},
+	// buttonType = '',
 }) {
 	const [showControl, setShowControl] = useState(false);
 	const [type, setType] = useState('');
@@ -22,15 +35,19 @@ function MailModal({
 	const [ccBccValue, setCcBccValue] = useState('');
 	const [error, setError] = useState(false);
 	const [errorValue, setErrorValue] = useState('');
-	const [recipientArray, setRecipientArray] = useState([]);
-	const [bccArray, setBccArray] = useState([]);
+	// const [recipientArray, setRecipientArray] = useState([]);
+	// const [bccArray, setBccArray] = useState([]);
 	const [uploading, setUploading] = useState(false);
 
-	const [attachments, setAttachments] = useState([]);
-	const [emailState, setEmailState] = useState({
-		subject : '',
-		body    : '',
-	});
+	// const [attachments, setAttachments] = useState([]);
+	// const [emailState, setEmailState] = useState({
+	// 	subject : '',
+	// 	body    : '',
+	// });
+
+	const buttonOptions = ['reply', 'reply_all', 'forward'];
+
+	const checkType = buttonOptions.includes(buttonType);
 
 	const uploaderRef = useRef(null);
 
@@ -38,31 +55,50 @@ function MailModal({
 		setUploading(val);
 	};
 
+	const {
+		sendMailApi = () => {},
+		sendMailLoading,
+	} = formatApiType();
+
 	const handleSend = () => {
 		let payload;
 		const isEmptyMail = getFormatedEmailBody({ emailState });
 		if (isEmptyMail || !emailState?.subject) {
 			Toast.error('Both Subject and Body are Requied');
 		} else {
-			payload = {
-				attachments,
-				ccrecipients : bccArray,
-				content      : emailState?.body,
-				sender       : 'dineshkumar.s@cogoport.com',
-				subject      : emailState?.subject,
-				toUserEmail  : recipientArray,
-				userId,
-			};
-			createMail(payload);
+			if (checkType) {
+				payload = {
+					sender       : 'dineshkumar.s@cogoport.com',
+					toUserEmail  : recipientArray,
+					ccrecipients : bccArray,
+					subject      : emailState?.subject,
+					content      : emailState?.body,
+					attachments,
+					userId,
+					msgId        : activeMail?.id,
+
+				};
+			} else {
+				payload = {
+					attachments,
+					ccrecipients : bccArray,
+					content      : emailState?.body,
+					sender       : 'dineshkumar.s@cogoport.com',
+					subject      : emailState?.subject,
+					toUserEmail  : recipientArray,
+					userId,
+				};
+			}
+
+			sendMailApi(payload);
 		}
 	};
 
 	const renderHeader = () => (
 		<>
-			<div className={styles.send_icon}>
+			<div className={cl`${sendMailLoading ? styles.disabled_button : styles.send_icon}`}>
 				<IcMSend
 					onClick={handleSend}
-					loading={createLoading}
 				/>
 			</div>
 			<div className={styles.title}>New Message</div>
@@ -200,15 +236,24 @@ function MailModal({
 						{' '}
 					</div>
 					<div className={styles.tags_div}>
-						{
-							recipientArray.map((data) => (
-								<CustomInput
-									email={data}
-									handleDelete={handleDelete}
-									type="recipient"
-								/>
-							))
-						}
+						{checkType ? (
+							<CustomInput
+								email={recipientArray}
+								handleDelete={handleDelete}
+								type="recipient"
+							/>
+						) : (
+							<>
+								{(recipientArray || []).map((data) => (
+									<CustomInput
+										email={data}
+										handleDelete={handleDelete}
+										type="recipient"
+									/>
+								))}
+							</>
+						)}
+
 						{(showControl && type === 'recipient') && (
 							<div className={styles.tag_and_errorcontainer}>
 								<div className={styles.tag_container}>
@@ -248,15 +293,13 @@ function MailModal({
 						{' '}
 					</div>
 					<div className={styles.tags_div}>
-						{
-							bccArray.map((data) => (
-								<CustomInput
-									email={data}
-									handleDelete={handleDelete}
-									type="cc_bcc"
-								/>
-							))
-						}
+						{(bccArray || []).map((data) => (
+							<CustomInput
+								email={data}
+								handleDelete={handleDelete}
+								type="cc_bcc"
+							/>
+						))}
 						{(showControl && type === 'cc_bcc') && (
 							<div className={styles.tag_and_errorcontainer}>
 								<div className={styles.tag_container}>

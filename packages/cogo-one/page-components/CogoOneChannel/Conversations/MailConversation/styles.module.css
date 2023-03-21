@@ -1,8 +1,10 @@
 .time_stamp {
+	/* text-align: left; */
+	display: flex;
+	justify-content: flex-end;
 	padding-left: 4px;
 	font-size: 10px;
 	font-weight: 500;
-	text-align: left;
 }
 
 .container {

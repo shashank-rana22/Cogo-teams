@@ -1,18 +1,13 @@
 import { usePublicRequest } from '@cogoport/request';
-// import { useEffect, useState } from 'react';
 
-function useSendMail({
-	setShowMailModal = () => {},
-	setEmailState = () => {},
-	setRecipientArray = () => {},
-	setBccArray = () => {},
-}) {
+function useReplyMail({ setShowMailModal, setEmailState, setRecipientArray, setBccArray }) {
 	const [{ loading }, trigger] = usePublicRequest({
-		url    : 'https://lens.dev.cogoport.io/send_mail',
+		url    : 'https://lens.dev.cogoport.io/reply_mail',
 		method : 'POST',
+
 	}, { manual: true });
 
-	const createMail = async (payload) => {
+	const replyMailApi = async (payload) => {
 		try {
 			await trigger({
 				data: payload,
@@ -28,8 +23,9 @@ function useSendMail({
 	};
 
 	return {
-		createMail,
-		createMailLoading: loading,
+		replyMailApi,
+		replyLoading: loading,
 	};
 }
-export default useSendMail;
+
+export default useReplyMail;

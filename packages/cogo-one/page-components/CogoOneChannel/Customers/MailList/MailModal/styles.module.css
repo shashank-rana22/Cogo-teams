@@ -30,6 +30,7 @@
 	justify-content: center;
 	width: 40px;
 	height: 40px;
+	cursor: pointer;
 	border-radius: 50%;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 
@@ -39,6 +40,10 @@
 		fill: #ee3425;
 		transform: rotate(-30deg);
 	}
+}
+
+.disabled_button {
+	cursor: not-allowed;
 }
 
 .right_header {

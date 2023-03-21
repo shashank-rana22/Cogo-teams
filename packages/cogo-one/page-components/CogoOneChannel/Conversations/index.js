@@ -15,6 +15,12 @@ function Conversations({
 	isomniChannelAdmin = false,
 	showBotMessages = false,
 	activeMail = {},
+	setButtonType = () => {},
+	buttonType = '',
+	setShowMailModal = () => {},
+	setBccArray = () => {},
+	setRecipientArray = () => {},
+	setEmailState = () => {},
 }) {
 	return (
 		<div className={cl`${activeTab === 'mail' ? styles.mail_div : styles.container}`}>
@@ -29,7 +35,17 @@ function Conversations({
 				/>
 			)}
 			{activeTab === 'voice' && (<VoiceCall activeVoiceCard={activeVoiceCard} />)}
-			{activeTab === 'mail' && (<MailConversation activeMail={activeMail} />)}
+			{activeTab === 'mail' && (
+				<MailConversation
+					activeMail={activeMail}
+					setButtonType={setButtonType}
+					buttonType={buttonType}
+					setShowMailModal={setShowMailModal}
+					setBccArray={setBccArray}
+					setRecipientArray={setRecipientArray}
+					setEmailState={setEmailState}
+				/>
+			)}
 		</div>
 	);
 }

@@ -1,14 +1,15 @@
 import { usePublicRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useListMailDetails({ activeMail = {} }) {
+function useGetMailAttachment({ activeMail }) {
 	const [{ data, loading }, trigger] = usePublicRequest({
-		url    : 'https://lens.dev.cogoport.io/get_mail',
+		url    : 'https://lens.dev.cogoport.io/get_attachments',
 		method : 'get',
 	}, { manual: true });
 
 	const { id = '' } = activeMail || {};
-	const getEmail = async () => {
+
+	const emailAttachment = async () => {
 		try {
 			await trigger({
 				params: {
@@ -17,19 +18,18 @@ function useListMailDetails({ activeMail = {} }) {
 				},
 			});
 		} catch (err) {
-			// console.log(err);
+			console.log(err);
 		}
 	};
 
 	useEffect(() => {
-		getEmail();
+		emailAttachment();
 	}, [activeMail]);
 
 	return {
-		data,
-		getEmail,
-		loading,
+		attachmentData    : data,
+		attachmentLoading : loading,
 	};
 }
 
-export default useListMailDetails;
+export default useGetMailAttachment;

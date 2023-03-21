@@ -37,7 +37,16 @@ function CogoOne() {
 	const [openModal, setOpenModal] = useState(false);
 	const { suggestions = [] } = useListChatSuggestions();
 	const [showDialModal, setShowDialModal] = useState(false);
+
 	const [activeMail, setActiveMail] = useState({});
+	const [recipientArray, setRecipientArray] = useState([]);
+	const [bccArray, setBccArray] = useState([]);
+	const [buttonType, setButtonType] = useState('');
+	const [showMailModal, setShowMailModal] = useState(false);
+	const [emailState, setEmailState] = useState({
+		subject : '',
+		body    : '',
+	});
 
 	const [modalType, setModalType] = useState({ type: null, data: {} });
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
@@ -106,6 +115,14 @@ function CogoOne() {
 						isomniChannelAdmin={isomniChannelAdmin}
 						showBotMessages={showBotMessages}
 						activeMail={activeMail}
+						recipientArray={recipientArray}
+						setRecipientArray={setRecipientArray}
+						bccArray={bccArray}
+						setBccArray={setBccArray}
+						setButtonType={setButtonType}
+						buttonType={buttonType}
+						setShowMailModal={setShowMailModal}
+						setEmailState={setEmailState}
 					/>
 					{activeTab !== 'mail' && (
 						<ProfileDetails
@@ -164,6 +181,16 @@ function CogoOne() {
 				handleScroll={handleScroll}
 				setModalType={setModalType}
 				modalType={modalType}
+				recipientArray={recipientArray}
+				setRecipientArray={setRecipientArray}
+				bccArray={bccArray}
+				setBccArray={setBccArray}
+				setButtonType={setButtonType}
+				buttonType={buttonType}
+				showMailModal={showMailModal}
+				setShowMailModal={setShowMailModal}
+				emailState={emailState}
+				setEmailState={setEmailState}
 			/>
 
 			<div className={styles.chat_details_continer}>

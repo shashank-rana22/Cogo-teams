@@ -1,10 +1,15 @@
 import { Placeholder, Avatar, Tooltip } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function Emailbody({ sender = {}, toRecipients = [], ccRecipients = [], loading }) {
+function Emailbody({
+	sender = {},
+	recipientData,
+	ccData,
+	emptyCcRecipient,
+	loading,
+}) {
 	const { emailAddress = {} } = sender || {};
 	const { name = '', address = '' } = emailAddress || {};
 	const avatarName = name.split(' ').slice(0, 2).join(' ');
@@ -28,7 +33,7 @@ function Emailbody({ sender = {}, toRecipients = [], ccRecipients = [], loading 
 		<div className={styles.email_body}>
 			{loading ? renderLoader() : (
 				<div className={styles.body_header}>
-					<div className={styles.email_body_avatar}>
+					<div>
 						<Avatar personName={avatarName} size="46px" />
 					</div>
 					<div className={styles.header_details}>
@@ -39,12 +44,17 @@ function Emailbody({ sender = {}, toRecipients = [], ccRecipients = [], loading 
 								{address}
 								)
 							</span>
-
 						</div>
 						<div className={styles.header_to}>
 							To:
 							{' '}
-							{(toRecipients || []).map((recipient) => {
+							<Tooltip content={recipientData} interactive placement="top">
+								<div className={styles.name}>
+									{recipientData}
+									{recipientData.length === 1 ? '' : ','}
+								</div>
+							</Tooltip>
+							{/* {(toRecipients || []).map((recipient) => {
 								const { emailAddress: mail = {} } = recipient || {};
 								const { name : recipient_name = '', address: email = '' } = mail || {};
 								console.log('recipient_name:', recipient_name);
@@ -56,13 +66,17 @@ function Emailbody({ sender = {}, toRecipients = [], ccRecipients = [], loading 
 										</div>
 									</Tooltip>
 								);
-							})}
+							})} */}
 						</div>
-						{!isEmpty(ccRecipients || []) && (
+						{!emptyCcRecipient && (
 							<div className={styles.header_cc}>
 								CC:
 								{' '}
-								{(ccRecipients || []).map((item) => {
+								<div className={styles.name}>
+									{ccData}
+									{recipientData.length === 1 ? '' : ','}
+								</div>
+								{/* {(ccRecipients || []).map((item) => {
 									const { emailAddress: ccAddress = {} } = item || {};
 									const { address: ccMail = '' } = ccAddress || {};
 									return (
@@ -73,7 +87,7 @@ function Emailbody({ sender = {}, toRecipients = [], ccRecipients = [], loading 
 										</div>
 									// </Tooltip>
 									);
-								})}
+								})} */}
 
 							</div>
 						)}
