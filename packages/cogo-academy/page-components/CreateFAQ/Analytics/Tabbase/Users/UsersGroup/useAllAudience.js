@@ -40,11 +40,18 @@ function useAllAudience({ date = '' }) {
 		[endDate, page, startDate, trigger],
 	);
 
-	useEffect(() => { fetchFaqTopic(); }, [page, fetchFaqTopic, startDate, endDate]);
+	useEffect(() => {
+		fetchFaqTopic();
+	}, [page, fetchFaqTopic, startDate, endDate]);
+
+	const { page_limit = 0, total_count = 0 } = data || {};
 
 	return {
 		refetchTopic: fetchFaqTopic,
+		page,
 		setPage,
+		page_limit,
+		total_count,
 		data,
 		loading,
 		activeTab,

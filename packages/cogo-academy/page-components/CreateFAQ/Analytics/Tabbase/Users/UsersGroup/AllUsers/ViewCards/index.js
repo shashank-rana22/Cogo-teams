@@ -16,31 +16,29 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 			<div className={styles.sub_heading} style={{ color: '#6FA5AB' }}>
 				<div>
 					<div className={styles.sub_heading_context}>
-						<Tooltip content={subHeading[0]?.topic_name} placement="right">
-							<div>{truncate(subHeading[0]?.topic_name)}</div>
+						<Tooltip content={subHeading[0]?.topic_name || 'No Data Available'} placement="right">
+							<div>{truncate(subHeading[0]?.topic_name) || '-'}</div>
 						</Tooltip>
-
 					</div>
-					{subHeading[0]?.topic_views}
+					{subHeading[0]?.topic_views || 0}
 					{' '}
-					Views
-					,
-					{subHeading[0]?.view_percentage}
+					Views,
+					{' '}
+					{subHeading[0]?.view_percentage || 0}
 					%
 				</div>
 
 				<div>
 					<div className={styles.sub_heading_context}>
-						<Tooltip content={subHeading[1]?.topic_name} placement="right">
-							<div>{truncate(subHeading[1]?.topic_name)}</div>
+						<Tooltip content={subHeading[1]?.topic_name || 'No Data Available'} placement="right">
+							<div>{truncate(subHeading[1]?.topic_name) || '-'}</div>
 						</Tooltip>
-
 					</div>
-					{subHeading[1]?.topic_views}
+					{subHeading[1]?.topic_views || 0}
 					{' '}
-					Views
-					,
-					{subHeading[1]?.view_percentage}
+					Views,
+					{' '}
+					{subHeading[1]?.view_percentage || 0}
 					%
 				</div>
 			</div>

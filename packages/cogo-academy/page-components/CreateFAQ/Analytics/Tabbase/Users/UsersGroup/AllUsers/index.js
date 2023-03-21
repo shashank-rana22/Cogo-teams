@@ -12,7 +12,6 @@ function AllUsers({ props = '' }) {
 	const {
 		name = '',
 		current_audience_data = [],
-		// id = '',
 	} = props;
 	const {
 		audience_wise_topics = [],
@@ -22,9 +21,9 @@ function AllUsers({ props = '' }) {
 		audience_stats = [],
 	} = current_audience_data;
 
-	const { total_questions = 0, total_views = 0, total_likes = 0, total_dislikes = 0 } = audience_stats[0] || {};
-
 	const [showQuestions, setShowQuestions] = useState(false);
+
+	const { total_questions = 0, total_views = 0, total_likes = 0, total_dislikes = 0 } = audience_stats?.[0] || {};
 
 	const truncate = (str) => (str?.length > 40 ? `${str.substring(0, 38)}...` : str);
 

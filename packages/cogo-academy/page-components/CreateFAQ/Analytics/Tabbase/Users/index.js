@@ -15,7 +15,9 @@ function Users({ props, date = '', setDate = () => {} }) {
 				date={date}
 				setDate={setDate}
 			/>
-			{selectedItem === 'All_Users' ? <AllUsers props={props} />
+
+			{selectedItem === 'All_Users'
+				? <AllUsers props={props} />
 				: <UsersGroup date={date} setDate={setDate} />}
 		</div>
 	);
