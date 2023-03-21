@@ -1,4 +1,5 @@
-import { IcMUserAllocations } from '@cogoport/icons-react';
+import { cl } from '@cogoport/components';
+import { IcMUserAllocations, IcMEyeclose } from '@cogoport/icons-react';
 
 import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
 import whatsappTextFormatting from '../../helpers/whatsappTextFormatting';
@@ -7,7 +8,8 @@ import CustomFileDiv from './CustomFileDiv';
 import styles from './styles.module.css';
 
 function MessageBody({ response = {}, message_type = 'text' }) {
-	const { message = '', media_url = '' } = response;
+	const { message = '', media_url = '', profanity_check = '' } = response;
+	const hasProfanity = profanity_check === 'nudity';
 	const fileExtension = media_url?.split('.').pop();
 	const { renderURLText, renderBoldText } = whatsappTextFormatting();
 
@@ -30,7 +32,8 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 					<img
 						src={media_url}
 						alt={message_type}
-						className={styles.object_styles}
+						className={cl`${styles.object_styles}
+						 ${hasProfanity ? styles.profanity_blur : ''}`}
 					/>
 				);
 			case 'audio':
@@ -60,10 +63,9 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 		return (
 			<>
 				<div
-					className={styles.clickable_object}
+					className={cl`${styles.clickable_object} ${hasProfanity ? styles.reduce_blur : ''}`}
 					role="presentation"
 					onClick={() => {
-						// eslint-disable-next-line no-undef
 						window.open(
 							media_url,
 							'_blank',
@@ -71,6 +73,12 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 						);
 					}}
 				>
+					{hasProfanity && (
+						<div className={styles.sensitive_content}>
+							<IcMEyeclose fill="#828282" />
+							<div className={styles.sensitive_text}>Sensitive Content</div>
+						</div>
+					)}
 					{LoadMedia(message_type)}
 				</div>
 
