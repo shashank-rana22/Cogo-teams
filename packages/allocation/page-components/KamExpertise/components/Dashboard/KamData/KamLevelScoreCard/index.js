@@ -21,9 +21,9 @@ function KamLevelScoreCard(props) {
 			...pv,
 			filters: {
 				...pv.filters,
-				// created_at_greater_than : date_params.start_date,
-				// created_at_less_than    : date_params.end_date,
-				kam_expertise_level: index_lvl + 1,
+				created_at_greater_than : date_params.start_date,
+				created_at_less_than    : date_params.end_date,
+				kam_expertise_level     : index_lvl + 1,
 			},
 		}));
 	};
