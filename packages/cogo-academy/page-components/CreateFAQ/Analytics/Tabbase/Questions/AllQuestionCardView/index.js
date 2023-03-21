@@ -66,7 +66,7 @@ function AllQuestionCardView({ props = {} }) {
 					<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
 						ALL QUESTIONS
 						{!showQuestions
-							? <IcMArrowDown style={{ marginLeft: 4 }} />
+							? <IcMArrowDown style={{ marginLeft: 4, marginBottom: 2 }} />
 							: <IcMArrowUp style={{ marginLeft: 4, marginBottom: 2 }} />}
 					</Button>
 				</div>

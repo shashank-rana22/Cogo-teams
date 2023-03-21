@@ -16,7 +16,7 @@ function AllQuestions(props) {
 		{
 			Header   : 'Questions',
 			accessor : (items) => (
-				<div className={styles.question}>
+				<div style={{ fontWeight: 1000, paddingLeft: '20px' }}>
 					<Tooltip content={items?.question_abstract} placement="right">
 						<div>{truncate(items?.question_abstract)}</div>
 					</Tooltip>
@@ -56,7 +56,7 @@ function AllQuestions(props) {
 		{
 			Header   : 'No.of Likes',
 			accessor : (items) => (
-				<div className={styles.question}>
+				<div className={styles.likes}>
 					{items?.answers[0]?.upvote_count}
 				</div>
 			),
@@ -77,7 +77,7 @@ function AllQuestions(props) {
 			<div>
 				<StyledTable columns={columns} layoutType="table" data={listdata} />
 				<Pagination
-					style={{ display: 'flex', justifyContent: 'flex-end' }}
+					style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: '16px', paddingRight: '12px' }}
 					type="table"
 					currentPage={page}
 					totalItems={total_count}

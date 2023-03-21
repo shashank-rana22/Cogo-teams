@@ -21,8 +21,12 @@ function UsersGroup({ date = '', setDate = () => {} }) {
 	return (
 		<div>
 			{data?.list.map((items) => (<AllUsers props={items} />))}
+
 			<Pagination
-				style={{ justifyContent: 'flex-end' }}
+				style={{
+					justifyContent : 'flex-end',
+					marginTop      : 12,
+				}}
 				type="table"
 				currentPage={page}
 				totalItems={total_count}

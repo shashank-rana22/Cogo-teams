@@ -6,16 +6,15 @@
 	font-weight: 500;
 	background-color: #fff;
 	border-radius: 8px;
+
 	&:hover {
-		box-shadow: 10px 20px 16px rgba(0, 0, 0, 0.2);
-	
-		}
+		box-shadow: 10px 20px 16px rgb(0 0 0 / 20%);
+	}
 }
 
 .pill_container {
 	display: flex;
 	justify-content: space-between;
-	
 }
 
 .info_pills {
@@ -26,6 +25,7 @@
 	display: flex;
 	justify-content: flex-end;
 }
-.dropdown{
+
+.dropdown {
 	transition: all 0.3s ease;
 }

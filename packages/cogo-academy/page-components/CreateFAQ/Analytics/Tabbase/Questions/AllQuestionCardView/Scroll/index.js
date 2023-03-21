@@ -136,7 +136,7 @@ function ScrollBar({ props = {} }) {
 						subHeading={trending_topics}
 					/>
 					<ViewCardsList
-						state="Top Disliked Questions"
+						state="Disliked_Question"
 						cardHeading="Top Disliked Questions"
 						contentQuestion={popular_questions}
 					/>
