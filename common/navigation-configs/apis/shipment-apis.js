@@ -1292,6 +1292,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_shipment_cancellation_reasons',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
