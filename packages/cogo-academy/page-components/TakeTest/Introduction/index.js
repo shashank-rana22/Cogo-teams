@@ -3,8 +3,8 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Introduction({ setActiveState, loading, data = {} }) {
-	const { set_data } = data || {};
+function Introduction({ setActiveState, loading, testData = {} }) {
+	const { set_data, case_study_questions, stand_alone_questions, test_duration, name } = testData || {};
 
 	const formatArrayValues = (items) => {
 		const formattedItem = items?.map((item) => item.topic);
@@ -19,12 +19,12 @@ function Introduction({ setActiveState, loading, data = {} }) {
 		},
 		number_of_questions: {
 			title : 'No. of questions',
-			value : `${data?.case_study_questions} Case Study Questions,
-					${data?.stand_alone_questions} Standalone Questions`,
+			value : `${case_study_questions} Case Study Questions,
+					${stand_alone_questions} Standalone Questions`,
 		},
 		duration: {
 			title : 'Duration',
-			value : `${data?.test_duration} min`,
+			value : `${test_duration} min`,
 			icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg',
 		},
 	};
@@ -32,7 +32,7 @@ function Introduction({ setActiveState, loading, data = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
-				{data?.name}
+				{name}
 			</div>
 
 			<div className={styles.content}>

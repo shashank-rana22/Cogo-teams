@@ -5,7 +5,7 @@ import RightSection from './components/RightSection';
 import useFetchQuestionsList from './hooks/useFetchQuestionList';
 import styles from './styles.module.css';
 
-function Ongoing() {
+function Ongoing({ testData }) {
 	const [currentQuestion, setCurrentQuestion] = useState();
 
 	const { loading, data } = useFetchQuestionsList({ currentQuestion });
@@ -14,6 +14,7 @@ function Ongoing() {
 			<div className={styles.left_container}>
 				<LeftSection
 					data={data}
+					testData={testData}
 					loading={loading}
 					currentQuestion={currentQuestion}
 					setCurrentQuestion={setCurrentQuestion}

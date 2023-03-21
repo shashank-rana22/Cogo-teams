@@ -5,13 +5,14 @@ import Footer from './Footer';
 import Header from './Header';
 import styles from './styles.module.css';
 
-function LeftSection({ data = [], currentQuestion, setCurrentQuestion, loading }) {
+function LeftSection({ data = [], testData, currentQuestion, setCurrentQuestion, loading }) {
 	const [answer, setAnswer] = useState('');
 
 	return (
 		<div className={styles.container}>
 			<Header
 				datas={data}
+				testData={testData}
 				total_question={data?.total_questions}
 			/>
 

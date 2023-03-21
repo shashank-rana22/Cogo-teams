@@ -24,7 +24,7 @@ const COMPONENT_MAPPING = {
 function TakeTest() {
 	const { profile: { user: { id: user_id } }, general: { query: { test_id } } } = useSelector((state) => state);
 
-	const [{ data, loading }] = useRequest({
+	const [{ data: testData, loading }] = useRequest({
 		method : 'GET',
 		url    : '/get_test',
 		params : {
@@ -32,8 +32,7 @@ function TakeTest() {
 		},
 	}, { manual: false });
 
-
-	const { test_user_mapping_state } = data || {};
+	const { test_user_mapping_state } = testData || {};
 
 	const [activeState, setActiveState] = useState(COMPONENT_MAPPING[test_user_mapping_state] || 'introduction');
 
@@ -42,7 +41,7 @@ function TakeTest() {
 	return (
 	// <Introduction />
 		// <Completion />
-		<Component setActiveState={setActiveState} loading={loading} data={data} />
+		<Component setActiveState={setActiveState} loading={loading} testData={testData} />
 	);
 }
 
