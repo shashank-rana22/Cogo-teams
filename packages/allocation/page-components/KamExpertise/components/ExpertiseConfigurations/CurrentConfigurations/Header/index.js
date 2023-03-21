@@ -9,16 +9,9 @@ import Published from './CreateModal/Published';
 import ModalFooter from './ModalFooter';
 import styles from './styles.module.css';
 
-const HEADER_DATA = {
-	version        : '3',
-	published_date : new Date(),
-	published_by   : 'Cogoparth',
-};
-
-function Header({ setSelectedVersion, selectedVersion }) {
+function Header({ setSelectedVersion, selectedVersion, audit_data, version_details }) {
 	const [mode, setMode] = useState('');
 	const [showModal, setShowModal] = useState(false);
-	// const [selectedVersion, setSelectedVersion] = useState(0);
 
 	return (
 		<div className={styles.container}>
@@ -31,7 +24,7 @@ function Header({ setSelectedVersion, selectedVersion }) {
 					<strong>
 						Version
 						{' '}
-						{HEADER_DATA.version}
+						{audit_data?.version || '--'}
 					</strong>
 				</div>
 
@@ -41,7 +34,7 @@ function Header({ setSelectedVersion, selectedVersion }) {
 						{' '}
 						:
 						{' '}
-						<strong>{format(HEADER_DATA.published_date, 'dd MMM yyyy')}</strong>
+						<strong>{format(audit_data.published_date, 'dd MMM yyyy')}</strong>
 					</div>
 
 					<div>
@@ -49,7 +42,7 @@ function Header({ setSelectedVersion, selectedVersion }) {
 						{' '}
 						:
 						{' '}
-						<strong>{HEADER_DATA.published_by}</strong>
+						<strong>{audit_data?.published_by || '--'}</strong>
 					</div>
 				</div>
 			</div>
@@ -78,6 +71,7 @@ function Header({ setSelectedVersion, selectedVersion }) {
 										<Published
 											selectedVersion={selectedVersion}
 											setSelectedVersion={setSelectedVersion}
+											version_details={version_details}
 										/>
 
 									);

@@ -7,7 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import getAddMasteryControls from '../configurations/get-add-mastery-controls';
 
 function useCreateMasterConfiguration(props) {
-	const { masteryListData = {}, onClose, listRefetch } = props;
+	const { masteryItemData = {}, onClose, listRefetch } = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_badge_configuration',
@@ -17,9 +17,9 @@ function useCreateMasterConfiguration(props) {
 
 	const formProps = useForm({
 		defaultValues: {
-			mastery_name      : masteryListData.badge_name,
-			badges            : masteryListData.expertise_configuration_detail_ids,
-			description_input : masteryListData.description,
+			mastery_name      : masteryItemData.badge_name,
+			badges            : masteryItemData.expertise_configuration_detail_ids,
+			description_input : masteryItemData.description,
 			// ToDo : image url -> handle using previous data
 		},
 	});
@@ -51,16 +51,16 @@ function useCreateMasterConfiguration(props) {
 				],
 			};
 
-			if (Object.keys(masteryListData).length > 0) {
-				payload.id = masteryListData.id;
-				payload.badge_details[0].badge_detail_id = masteryListData?.badge_details?.[0]?.id;
+			if (!isEmpty(masteryItemData)) {
+				payload.id = masteryItemData.id;
+				payload.badge_details[0].badge_detail_id = masteryItemData?.badge_details?.[0]?.id;
 			}
 
 			await trigger({ data: payload });
 
 			onClose();
 
-			Toast.success(isEmpty(masteryListData) ? 'Master Badge Created !' : 'Master Badge Updated !');
+			Toast.success(isEmpty(masteryItemData) ? 'Master Badge Created !' : 'Master Badge Updated !');
 
 			listRefetch();
 		} catch (error) {

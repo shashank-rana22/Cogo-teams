@@ -1,37 +1,39 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
+import useGetKamExpertiseCurrentConfig from '../../../hooks/useGetKamExpertiseCurrentConfig';
+
 import ConfigurationCard from './ConfigurationCard';
 import Header from './Header';
 
-const VERSION_CARDS = [
-	{
-		version       : 4,
-		last_edit_by  : 'CogoParth',
-		last_modified : new Date(),
-		status        : 'draft',
-	},
-	{
-		version       : 3,
-		last_edit_by  : 'CogoParth',
-		last_modified : new Date(),
-		status        : 'live',
-	},
-];
-
-function CurrentConfigurations({ handleClick = () => {}, selectedVersion = '', setSelectedVersion }) {
+function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
 	const router = useRouter();
+
+	const { listKamExpertiseCurrentConfigs } = useGetKamExpertiseCurrentConfig();
+
+	const data = listKamExpertiseCurrentConfigs?.list || [];
+
+	const listArray = data.filter((item) => item.status_value === 'draft' || item.status_value === 'live');
+	const VERSION_CARDS = listArray.reverse();
+
+	const audit_data = listKamExpertiseCurrentConfigs?.audit_data || {};
+
+	const version_details = listKamExpertiseCurrentConfigs?.version_list_details || {};
+
 	return (
 		<div>
 			<Header
 				selectedVersion={selectedVersion}
 				setSelectedVersion={setSelectedVersion}
+				audit_data={audit_data}
+				version_details={version_details}
+
 			/>
 
 			{VERSION_CARDS.map((item) => (
 				<ConfigurationCard
 					{...item}
-					handleClick={handleClick}
+
 				/>
 			))}
 
@@ -40,7 +42,6 @@ function CurrentConfigurations({ handleClick = () => {}, selectedVersion = '', s
 				themeType="secondary"
 			>
 				View All Configurations
-
 			</Button>
 		</div>
 	);

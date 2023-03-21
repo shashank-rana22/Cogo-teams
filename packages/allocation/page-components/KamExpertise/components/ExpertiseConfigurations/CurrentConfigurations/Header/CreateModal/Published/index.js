@@ -4,19 +4,37 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Published({ setSelectedVersion = () => {} }) {
+function Published({ setSelectedVersion = () => {}, version_details }) {
+	const data = [];
+	Object.keys(version_details).forEach((key) => {
+		if (key !== '') {
+			data.push({
+				version_number : key,
+				status         : ` ${version_details[key].status}`,
+				updated_at     : `${version_details[key].updated_at}`,
+			});
+		}
+	});
+
 	const columns = [
 		{
 			Header   : 'VERSION NAME',
-			key      : 'versionName',
-			id       : 'versionName',
-			accessor : 'versionName',
+			key      : 'version_number',
+			id       : 'version_number',
+			accessor : 'version_number',
+			Cell     : ({ value }) => (
+				<section>
+					Version
+					{' '}
+					{value || '__'}
+				</section>
+			),
 		},
 		{
 			Header   : 'STATUS',
 			accessor : 'status',
 			Cell     : ({ value }) => {
-				const colors = value === 'Live' ? 'green' : 'red';
+				const colors = value === 'live' ? 'green' : 'red';
 				return (
 					<span>
 						<Pill className={styles.pill} color={colors}>{value}</Pill>
@@ -27,59 +45,7 @@ function Published({ setSelectedVersion = () => {} }) {
 		},
 		{
 			Header   : 'LAST UPDATED',
-			accessor : 'last_updated',
-		},
-
-	];
-	const data = [
-		{
-			id           : '6',
-			versionName  : 'Version 6',
-			last_updated : '22-Sep-2023',
-			status       : 'Live',
-
-		},
-		{
-			id           : '5',
-			versionName  : 'Version 5',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
-		},
-		{
-			id           : '4',
-			versionName  : 'Version 4',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
-		},
-		{
-			id           : '3',
-			versionName  : 'Version 3',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
-		},
-		{
-			id           : '2',
-			versionName  : 'Version 3',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
-		},
-		{
-			id           : '1',
-			versionName  : 'Version 3',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
-		},
-		{
-			id           : '19',
-			versionName  : 'Version 3',
-			last_updated : '22-Sep-2023',
-			status       : 'Expired',
-
+			accessor : 'updated_at',
 		},
 
 	];
@@ -100,7 +66,7 @@ function Published({ setSelectedVersion = () => {} }) {
 				columns={columns}
 				data={data}
 				selectType="single"
-				onRowClick={(row) => { setSelectedVersion(row.id); }}
+				onRowClick={(row) => { setSelectedVersion(row.version_number); }}
 			/>
 
 		</div>

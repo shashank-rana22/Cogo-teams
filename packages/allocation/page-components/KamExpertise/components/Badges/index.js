@@ -30,32 +30,33 @@ function Badges() {
 	};
 
 	const {
+		list: badgeList = [],
 		toggleScreen,
-		badgeListData,
+		badgeItemData,
 		setToggleScreen,
 		searchValue,
 		setSearchValue,
 		debounceQuery,
-		setMasteryListData,
-		setBadgeListData,
+		setMasteryItemData,
+		setBadgeItemData,
 		expertise,
 		setExpertise,
 		loading,
 		listRefetch,
 		getNextPage,
 		paginationData,
-		masteryListData,
+		masteryItemData,
 	} = useGetBadgeList();
 
 	const componentProps = {
 		[BADGE_DETAILS]: {
-			badgeListData,
+			badgeList,
 			setToggleScreen,
 			searchValue,
 			setSearchValue,
 			debounceQuery,
-			setMasteryListData,
-			setBadgeListData,
+			setMasteryItemData,
+			setBadgeItemData,
 			expertise,
 			setExpertise,
 			loading,
@@ -64,14 +65,14 @@ function Badges() {
 			paginationData,
 		},
 		[CREATE_MASTERY]: {
-			badgeListData,
+			badgeList,
 			setToggleScreen,
-			masteryListData,
+			masteryItemData,
 			listRefetch,
 		},
 		[CREATE_BADGE]: {
 			setToggleScreen,
-			badgeListData,
+			badgeItemData,
 			listRefetch,
 		},
 	};

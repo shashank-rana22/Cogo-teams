@@ -15,6 +15,15 @@
 .left_header {
 	display: flex;
 	align-items: center;
+
+	@media(max-width: 576px) {
+		flex-wrap: wrap;
+	}
+
+	@media(min-width: 576px) and (max-width: 768px) {
+		justify-content: space-between;
+		flex-basis: 100%;
+	}
 }
 
 .heading {
@@ -27,4 +36,16 @@
 .cards {
 	display: flex;
 	justify-content: space-between;
+
+	@media (max-width: 576px) {
+		flex-wrap: wrap;
+    }
+}
+
+.last_modified {
+	display: flex;
+
+	@media(min-width: 0) and (max-width: 768px) {
+		flex-direction: column;
+	}
 }
