@@ -1,13 +1,3 @@
-.container {
-	height: 75vh;
-	margin-top: 10px;
-	overflow-y: auto;
-}
-
-.container::-webkit-scrollbar {
-	display: none;
-}
-
 .main_card {
 	padding: 8px;
 	margin: -5px 0 -5px 5px;
@@ -37,9 +27,6 @@
 }
 
 .card {
-	position: relative;
-	display: flex;
-	flex-direction: column;
 	padding: 8px 6px;
 	margin: 5px 10px;
 	background: #fff;
@@ -48,32 +35,22 @@
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
-.activity_div {
-	display: flex;
-	width: 100%;
-}
-
 .message_details {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-top: 6px;
 }
 
 .title {
-	display: flex;
-	width: 80%;
-	min-height: 20px;
 	font-size: 14px;
 	font-weight: 500;
-	text-overflow: ellipsis;
 }
 
 .user_details {
 	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
+	flex-direction: column;
 	width: 84%;
-	min-height: 40px;
 }
 
 .user_message {
@@ -85,25 +62,24 @@
 	}
 }
 
-.icon_type {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	cursor: pointer;
-}
-
 .user_avatar {
 	display: flex;
 	justify-content: flex-end;
 	margin-top: -10px;
 }
 
-.styled_ui_modal_dialog {
-	border: none !important;
+.activity_div {
+	display: flex;
+	justify-content: space-between;
+}
 
-	:global {
-		.ui_modal_body_container {
-			border-bottom: none !important;
-		}
-	}
+.icon_type {
+	display: flex;
+	align-self: baseline;
+	padding-right: 8px;
+}
+
+.avatar {
+	width: 16px;
+	height: 16px;
 }
