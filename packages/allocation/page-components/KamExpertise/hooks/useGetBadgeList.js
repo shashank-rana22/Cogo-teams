@@ -12,8 +12,10 @@ function useGetBadgeList() {
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
-		page    : 1,
-		filters : {
+		page                        : 1,
+		badge_details_data_required : true,
+		performed_by_data_required  : true,
+		filters                     : {
 			status                      : 'active',
 			badge_name                  : searchQuery || undefined,
 			expertise_configuration_ids : expertise || undefined,

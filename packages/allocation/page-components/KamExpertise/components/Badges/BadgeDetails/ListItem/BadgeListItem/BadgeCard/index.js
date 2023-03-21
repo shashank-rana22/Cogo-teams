@@ -7,7 +7,7 @@ import BadgeUpdateCard from '../../../../BadgeUpdateCard';
 
 import styles from './styles.module.css';
 
-function BadgeCard({ data, badgeItemData = {}, medal = '', isLast = {}, listRefetch }) {
+function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, data }) {
 	const { score = '', image_url = '', id = '' } = data;
 
 	const [openModal, setOpenModal] = useState(false);
@@ -25,8 +25,9 @@ function BadgeCard({ data, badgeItemData = {}, medal = '', isLast = {}, listRefe
 	} = formProps;
 
 	const badgeData = {
-		medalType: medal,
+		medalType         : medal,
 		score,
+		isSingleBadgeEdit : true,
 	};
 	if (loading) {
 		return (

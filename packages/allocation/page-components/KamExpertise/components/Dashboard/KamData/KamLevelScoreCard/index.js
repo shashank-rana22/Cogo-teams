@@ -28,8 +28,6 @@ function KamLevelScoreCard(props) {
 		}));
 	};
 
-	// console.log('index', index_lvl.toString());
-
 	if (loading) {
 		return (
 			<Card className={styles.card_item}>
@@ -41,6 +39,7 @@ function KamLevelScoreCard(props) {
 				/>
 				<Card.Description className={styles.card_content}>
 					<Placeholder width="100px" height="60px" style={{ marginTop: '16px' }} />
+
 					<Placeholder width="100px" height="60px" style={{ marginTop: '16px' }} />
 				</Card.Description>
 			</Card>
@@ -67,6 +66,7 @@ function KamLevelScoreCard(props) {
 			/>
 			<Card.Description className={styles.card_content}>
 				<CardContent list_data={list_data} value="count" />
+
 				<CardContent list_data={list_data} value="average" />
 			</Card.Description>
 		</Card>
