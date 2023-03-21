@@ -7,7 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import EmptyState from '../../../../../EmptyState';
-// import CreateNewBillingAddress from '../CreateNewBillingAddress';
+import CreateNewBillingAddress from '../CreateNewBillingAddress';
 // import CreateNewInvoicingParty from '../CreateNewInvoicingParty';
 
 import InvoicingPartyItem from './InvoicingPartyItem';
@@ -239,16 +239,14 @@ function InvoicingParties({
 
 		if (showComponent === 'create_billing_address') {
 			return (
-				// <CreateNewBillingAddress
-				// 	organizationDetails={organization}
-				// 	setShowComponent={setShowComponent}
-				// 	refetch={getOrganizationInvoicingParties}
-				// 	invoiceToTradePartyDetails={invoiceToTradePartyDetails}
-				// 	setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
-				// />
-				<div>
-					CreateNewBillingAddress
-				</div>
+				<CreateNewBillingAddress
+					organizationDetails={organization}
+					setShowComponent={setShowComponent}
+					// refetch={getOrganizationInvoicingParties}
+					invoiceToTradePartyDetails={invoiceToTradePartyDetails}
+					setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
+				/>
+
 			);
 		}
 
