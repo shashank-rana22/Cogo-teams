@@ -69,3 +69,14 @@
 	margin: 30px 0 0 5px;
 	cursor: pointer;
 }
+
+.text_styles {
+	display: flex;
+}
+
+.icon_styles {
+	margin-right: 12px;
+	margin-left: -8px;
+	color: #34c759;
+	transform: translate(10px, 2px) rotate(-45deg);
+}
