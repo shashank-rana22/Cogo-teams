@@ -6,7 +6,7 @@ import useFetchQuestionsList from './hooks/useFetchQuestionList';
 import styles from './styles.module.css';
 
 function Ongoing() {
-	const [currentQuestion, setCurrentQuestion] = useState(1);
+	const [currentQuestion, setCurrentQuestion] = useState();
 
 	const { loading, data = {} } = useFetchQuestionsList({ currentQuestion });
 
