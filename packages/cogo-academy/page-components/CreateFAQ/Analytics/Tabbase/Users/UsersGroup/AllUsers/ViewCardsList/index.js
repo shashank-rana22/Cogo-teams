@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMEyeopen, IcMLike, IcMDislike } from '@cogoport/icons-react';
+import startCase from '@cogoport/utils/src/utilities/startCase';
 
 import styles from './styles.module.css';
 
@@ -9,7 +10,7 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 			return (
 				<div style={{ marginRight: '0.25rem' }}>
 					{item?.questions_views}
-					<IcMEyeopen style={{ marginTop: '0.15rem', marginLeft: '0.1rem' }} />
+					<IcMEyeopen style={{ marginTop: '0.15rem', marginLeft: '0.25rem', paddingTop: '1px' }} />
 
 				</div>
 
@@ -19,21 +20,22 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 			return (
 				<div style={{ marginRight: '0.25rem' }}>
 					{item?.likes}
-					<IcMLike style={{ marginTop: '0.15rem', marginLeft: '0.1rem' }} />
+					<IcMLike style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} />
 				</div>
+
 			);
 		}
 		if (state === 'Disliked_Question') {
 			return (
-				<div style={{ marginRight: '0.25rem' }}>
-					{item?.dislikes}
-					<IcMDislike style={{ marginTop: '0.15rem', marginLeft: '0.1rem' }} />
+				<div style={{ marginRight: '0.25rem', display: 'flex' }}>
+					{item?.dislikes || 0}
+					<div><IcMDislike style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} /></div>
 				</div>
 
 			);
 		}
 	}
-	const truncate = (str) => (str?.length > 28 ? `${str.substring(0, 26)}...` : str);
+	const truncate = (str) => (str?.length > 28 ? `${startCase(str.substring(0, 26))}...` : startCase(str));
 
 	if ((contentQuestion || []).length === 0) {
 		return (
