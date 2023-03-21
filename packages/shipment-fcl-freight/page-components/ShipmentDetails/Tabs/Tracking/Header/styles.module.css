@@ -18,6 +18,7 @@
 	align-items: center;
 	font-weight: 400;
 	font-size: 16px;
+	margin-left: 40px;
 
 	&.heading {
 		font-size: 12px;
