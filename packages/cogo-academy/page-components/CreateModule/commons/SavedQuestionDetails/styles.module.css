@@ -12,7 +12,6 @@
 	font-weight: 600;
 }
 
-
 .table_container {
 	padding: unset !important;
 
@@ -56,10 +55,10 @@
 }
 
 .bold {
-	margin: 0 8px;
-	font-weight: 600;
 	display: flex;
 	align-items: center;
+	margin: 0 8px;
+	font-weight: 600;
 }
 
 .answer_key {
