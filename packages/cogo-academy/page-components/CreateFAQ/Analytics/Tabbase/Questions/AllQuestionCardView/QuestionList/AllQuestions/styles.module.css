@@ -4,7 +4,7 @@
 
 	:global {
 		.ui_table_head_cell {
-			padding: 10px;
+			padding: 8px;
 			color: #4f4f4f;
 			background-color: rgb(255 255 255 / 80%);
 		}
@@ -13,11 +13,10 @@
 			width: 1239px;
 			height: 63px;
 			height: 32px;
-			padding: 4px 10px 4px 20px;
-			margin: 0;
+			padding: 0px 10px 4px 20px;
 			font-size: 14px;
 			font-weight: 400;
-			line-height: 300%;
+			line-height: 250%;
 			text-align: left;
 			border-bottom: 1px solid var(--color-tertiary-beige-4);
 		}
