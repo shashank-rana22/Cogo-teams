@@ -15,6 +15,7 @@ function ViewAllConfigurations() {
 		ConfigCardLoading,
 	} = useGetKamExpertiseCurrentConfig();
 
+	// const draft = listKamExpertiseCurrentConfigs?.list;
 	const VERSION_CARDS = listKamExpertiseCurrentConfigs?.list || [];
 
 	const onClickBack = () => {
@@ -33,6 +34,7 @@ function ViewAllConfigurations() {
 						Back to Configurations
 					</div>
 				</div>
+				{/* <ConfigurationCard {...draft} /> */}
 
 				{VERSION_CARDS.map((item) => (
 					<ConfigurationCard {...item} />
