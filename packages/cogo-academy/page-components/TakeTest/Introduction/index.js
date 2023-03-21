@@ -1,12 +1,9 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 
-import useFetchTest from './hooks/useFetchTest';
 import styles from './styles.module.css';
 
-function Introduction({ setActiveState }) {
-	const { loading, data = {} } = useFetchTest();
-
+function Introduction({ setActiveState, loading, data = {} }) {
 	const { set_data } = data || {};
 
 	const formatArrayValues = (items) => {

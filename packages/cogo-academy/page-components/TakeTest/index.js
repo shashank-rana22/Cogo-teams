@@ -32,7 +32,6 @@ function TakeTest() {
 		},
 	}, { manual: false });
 
-	console.log(data, 'data');
 
 	const { test_user_mapping_state } = data || {};
 
@@ -43,7 +42,7 @@ function TakeTest() {
 	return (
 	// <Introduction />
 		// <Completion />
-		<Component setActiveState={setActiveState} />
+		<Component setActiveState={setActiveState} loading={loading} data={data} />
 	);
 }
 
