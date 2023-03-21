@@ -11,7 +11,8 @@ function useGetTestList() {
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			status: ['active', 'draft'],
+			status : ['active', 'draft'],
+			q      : '',
 		},
 	});
 
