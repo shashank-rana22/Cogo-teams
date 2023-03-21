@@ -3,8 +3,6 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useState, useContext } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
-// import useListContainerDetails from '../../../hooks/useListContainerDetails';
-import { data } from '../dummy_data';
 
 import BlContainer from './BlContainer';
 import ContainerDetails from './ContainerDetails';
@@ -18,33 +16,18 @@ function BLDetails() {
 	const [mappingModal, setMappingModal] = useState(false);
 	const [editContainerNum, setEditContainerNum] = useState(false);
 
-	const { shipment_data, primary_service } = useContext(
+	const { shipment_data, documents, container_details } = useContext(
 		ShipmentDetailContext,
 	);
-
-	// const {
-	// 	list: { data },
-	// 	loading,
-	// 	isMobile,
-	// 	refetch,
-	// } = useListContainerDetails({
-	// 	shipment_id   : shipment_data?.id || undefined,
-	// 	shipment_type : shipment_data?.shipment_type,
-	// });
-
-	const loading = false;
-
-	const totalContainers = primary_service?.cargo_details
-		.reduce((acc, { containers_count }) => acc + containers_count, 0);
 
 	const renderBlCount = (
 		<div className={styles.bl_count_container}>
 			BL and Container Details
 			<div className="bl-count">
 				(
-				{primary_service?.bls_count || 0}
-				BL’s, &nbsp;
-				{totalContainers || 0}
+				{documents?.length || 0}
+				&nbsp;BL & &nbsp;
+				{container_details?.length || 0}
 				&nbsp;
 				Containers
 				)
@@ -97,7 +80,7 @@ function BLDetails() {
 						<Modal.Header title="Update Container Number" />
 						<ContainerNmUpdate
 							setEditContainerNum={setEditContainerNum}
-							shipment_data={shipment_data}
+							shipmentData={shipment_data}
 						/>
 					</Modal>
 				) : null}
@@ -120,25 +103,32 @@ function BLDetails() {
 
 	return (
 		<Accordion title={renderBlCount} style={{ width: '100%' }}>
-			{!loading && !data?.list?.length ? (
+			{!container_details?.length ? (
 				<EmptyState showContent={emptyStateContent} />
 			) : (
 				<div className={styles.manage_services_div}>
-					{data?.list?.map((item) => (
+					{container_details?.map((item) => (
 						<div className={styles.service_card}>
-							<TitleCard
-								item={item}
-								setOpen={setOpen}
-								open={open}
-								setActiveId={setActiveId}
-								activeId={activeId}
-								shipment_data={shipment_data}
-							/>
 
-							{open
+							<Accordion title={(
+								<TitleCard
+									item={item}
+									setOpen={setOpen}
+									open={open}
+									setActiveId={setActiveId}
+									activeId={activeId}
+									shipmentData={shipment_data}
+									containersCount={container_details?.length}
+								/>
+							)}
+							>
+								<ContainerDetails containerDetails={item?.container_details} />
+							</Accordion>
+
+							{/* {open
 								&& activeId === item?.id ? (
-									<ContainerDetails containerDetails={item?.container_details} />
-								) : null}
+
+								) : null} */}
 						</div>
 					))}
 				</div>
