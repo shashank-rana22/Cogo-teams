@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { SelectController, InputController, ChipsController } from '@cogoport/forms';
+import { TextAreaController, SelectController, InputController, ChipsController } from '@cogoport/forms';
 
 import useUpdateCaseStudyQuestion from '../../hooks/useUpdateCaseStudyQuestion';
 
@@ -109,6 +109,10 @@ function SingleQuestionComponent({
 				</div>
 			</div>
 
+			<div className={styles.textarea_container}>
+				<TextAreaController control={control} {...controls[4]} name={`${name}.${index}.${controls[4].name}`} />
+			</div>
+
 			{type === 'case_study' && !isNewQuestion ? (
 				<div className={styles.button_container}>
 					<Button loading={loading} onClick={() => handleDelete()} themeType="accent" size="sm" type="button">
@@ -119,7 +123,6 @@ function SingleQuestionComponent({
 						{field.isNew ? 'Save' : 'Edit'}
 					</Button>
 				</div>
-
 			) : null}
 		</div>
 	);

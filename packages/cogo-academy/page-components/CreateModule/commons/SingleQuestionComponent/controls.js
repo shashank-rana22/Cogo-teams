@@ -60,6 +60,12 @@ const getControls = () => [
 		rules    : { required: 'Required' },
 		multiple : false,
 	},
+	{
+		name        : 'explanation',
+		type        : 'textarea',
+		placeholder : 'Type Explanation...',
+		rows        : 4,
+	},
 ];
 
 export default getControls;
