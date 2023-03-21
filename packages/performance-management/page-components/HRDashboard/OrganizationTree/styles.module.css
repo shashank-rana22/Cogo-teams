@@ -1,0 +1,64 @@
+.header {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.redirect {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header_text {
+    margin-left: 8px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.base_level {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 16px;
+}
+
+.organization_tree {
+    display: flex;
+    flex-direction: column;
+}
+
+.manager_level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+.line {
+    width: 0;
+    height: 50px;
+    border: 1px solid #bdbdbd;
+    align-self: center;
+}
+
+.user_level {
+    align-self: center;
+}
+
+.reportee_level {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #bdbdbd;
+
+    .user_level:nth-child(1) {
+        padding-top: 16px;
+    }
+}
+
+.all_reportees {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}

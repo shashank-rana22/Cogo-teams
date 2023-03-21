@@ -31,7 +31,12 @@
 
 .performance_chart {
 	flex: 6;
+	display: flex;
 	margin-top: 16px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .user_profile {

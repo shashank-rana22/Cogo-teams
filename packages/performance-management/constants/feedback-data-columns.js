@@ -12,6 +12,7 @@ const feedbackDataColumns = {
 		'update', 'upload_type', 'action'],
 	pipProbationList: ['name', 'designation', 'manager', 'rating', 'is_pip',
 		'start_date', 'end_date', 'progress', 'logs', 'action'],
+	reAssignModal      : ['name', 'designation', 'manager'],
 };
 
 export default feedbackDataColumns;
