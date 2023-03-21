@@ -1,7 +1,6 @@
 import { Pill } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 import WORK_SCOPES_OPTIONS from '../../ConfigurationEngine/CreateAudienceForm/utils/workScopeMappings';
 /* eslint-disable */
@@ -15,7 +14,7 @@ const useGetTopicTagList = () => {
 			page_limit               : 100000,
 			pagination_data_required : false,
 		},
-	}, { manual: false });
+	}, { manual: true });
 
 	const [{ data: tagsData ,loading:listTagsLoading}, triggerTags] = useRequest({
 		method : 'get',
@@ -24,7 +23,7 @@ const useGetTopicTagList = () => {
 			page_limit               : 100000,
 			pagination_data_required : false,
 		},
-	}, { manual: false });
+	}, { manual: true });
 
 	const [{ data: audienceData, loading:listAudienceLoading }, triggerAudiences] = useRequest({
 		method : 'get',
@@ -33,7 +32,7 @@ const useGetTopicTagList = () => {
 			page_limit               : 100000,
 			pagination_data_required : false,
 		},
-	}, { manual: false });
+	}, { manual: true });
 
 	const fetchTopics = async () => {
 		try {
@@ -74,12 +73,7 @@ const useGetTopicTagList = () => {
 		}
 	};
 
-	useEffect(() => {
-		fetchTopics();
-		fetchTags();
-		fetchAudiences();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	
 
 	const { list: topicList = [] } = topicsData || {};
 	const { list : tagList = [] } = tagsData || {};

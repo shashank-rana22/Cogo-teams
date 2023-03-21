@@ -123,6 +123,16 @@ function CreateFAQ() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [listTopicsLoading, listTagsLoading, listAudienceLoading, JSON.stringify(data)]);
 
+	useEffect(() => {
+		if (questionPreview !== 'preview') {
+			fetchTopics();
+			fetchTags();
+			fetchAudiences();
+		}
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	const onClickBackIcon = () => {
 		router.back();
 	};

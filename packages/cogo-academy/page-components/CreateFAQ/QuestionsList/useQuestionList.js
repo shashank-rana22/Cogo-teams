@@ -196,6 +196,7 @@ const useQuestionList = () => {
 
 	const SORT_TYPE = (sortType) ? 'desc' : 'asc';
 	const SORT_MODE = (activeList === 'requested') ? 'created_at' : 'updated_at';
+
 	const [{ data: questionList, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_faq_questions',
@@ -221,12 +222,16 @@ const useQuestionList = () => {
 						q: query || undefined,
 					},
 					page,
-					is_admin_view                     : true,
-					sort_by                           : SORT_MODE,
-					sort_type                         : SORT_TYPE,
-					faq_tags_data_required            : true,
-					faq_topics_data_required          : true,
-					author_data_required              : true,
+					is_admin_view          : true,
+					sort_by                : SORT_MODE,
+					sort_type              : SORT_TYPE,
+					faq_tags_data_required : ['published', 'draft']
+						.includes(FILTER_MAPPING[activeList].state),
+
+					faq_topics_data_required: ['published', 'draft']
+						.includes(FILTER_MAPPING[activeList].state),
+
+					author_data_required              : FILTER_MAPPING[activeList].state === 'requested',
 					requested_question_count_required : true,
 
 				},
