@@ -1,5 +1,9 @@
+/* eslint-disable no-unsafe-optional-chaining */
+import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+
+import useGetPayablesByService from '../hooks/useGetPayablesByService';
 
 import styles from './styles.module.css';
 
@@ -8,6 +12,11 @@ function AccountPayablesByService() {
 	const handleClick = () => {
 		setIsAccordionActive(!isAccordionActive);
 	};
+	const { data = [] } = useGetPayablesByService();
+	const oceanAmount = data?.[0]?.amount + data?.[1]?.amount;
+	const airAmount = data?.[2]?.amount + data?.[3]?.amount;
+	const surfaceAmount = data?.[4]?.amount + data?.[5]?.amount;
+
 	return (
 		<div>
 			<div
@@ -27,7 +36,7 @@ function AccountPayablesByService() {
 							Ocean
 						</div>
 						<div className={styles.value}>
-							INR 44000K
+							{getFormattedPrice(oceanAmount, 'INR')}
 						</div>
 					</div>
 					<div className={styles.amount}>
@@ -35,7 +44,7 @@ function AccountPayablesByService() {
 							Air
 						</div>
 						<div className={styles.value}>
-							INR 2100K
+							{getFormattedPrice(airAmount, 'INR')}
 						</div>
 					</div>
 					<div className={styles.amount}>
@@ -43,7 +52,7 @@ function AccountPayablesByService() {
 							Surface
 						</div>
 						<div className={styles.value}>
-							INR 2350K
+							{getFormattedPrice(surfaceAmount, 'INR')}
 						</div>
 					</div>
 					<div className={styles.amount}>
@@ -51,7 +60,7 @@ function AccountPayablesByService() {
 							Overseas
 						</div>
 						<div className={styles.value}>
-							INR 1200K
+							{getFormattedPrice(0, 'INR')}
 						</div>
 					</div>
 					<div className={styles.amount}>
@@ -59,7 +68,7 @@ function AccountPayablesByService() {
 							Overheads
 						</div>
 						<div className={styles.value}>
-							INR 600K
+							{getFormattedPrice(0, 'INR')}
 						</div>
 					</div>
 				</div>

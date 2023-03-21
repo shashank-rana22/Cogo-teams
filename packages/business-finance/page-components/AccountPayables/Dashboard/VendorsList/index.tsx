@@ -4,6 +4,7 @@ import React from 'react';
 
 import SegmentedControl from '../../../commons/SegmentedControl';
 import StyledTable from '../commons/StyledTable';
+import useGetBySupplier from '../hooks/useGetBySupplier';
 
 import styles from './styles.module.css';
 import VendorsColumn from './vendorsColumn';
@@ -31,58 +32,58 @@ const OPTIONS = [
 	},
 ];
 
-const list = [
-	{
-		vendorName    : 'jaiprakash',
-		amount        : 'INR 30,00,000',
-		invoicesCount : '8',
-	},
-	{
-		vendorName    : 'jaiprakash',
-		amount        : 'INR 30,00,000',
-		invoicesCount : '8',
-	},
-	{
-		vendorName    : 'jaiprakash',
-		amount        : 'INR 30,00,000',
-		invoicesCount : '8',
-	},
-	{
-		vendorName    : 'jaiprakash',
-		amount        : 'INR 30,00,000',
-		invoicesCount : '8',
-	},
-	{
-		vendorName    : 'jaiprakash',
-		amount        : 'INR 30,00,000',
-		invoicesCount : '8',
-	},
-	{
-		vendorName    : 'jaiprakash',
-		amount        : 'INR 30,00,000',
-		invoicesCount : '8',
-	},
-	{
-		vendorName    : 'jaiprakash',
-		amount        : 'INR 30,00,000',
-		invoicesCount : '8',
-	},
-	{
-		vendorName    : 'jaiprakash',
-		amount        : 'INR 30,00,000',
-		invoicesCount : '8',
-	},
-	{
-		vendorName    : 'jaiprakash',
-		amount        : 'INR 30,00,000',
-		invoicesCount : '8',
-	},
-	{
-		vendorName    : 'jaiprakash',
-		amount        : 'INR 30,00,000',
-		invoicesCount : '8',
-	},
-];
+// const list1 = [
+// 	{
+// 		vendorName    : 'jaiprakash',
+// 		amount        : 'INR 30,00,000',
+// 		invoicesCount : '8',
+// 	},
+// 	{
+// 		vendorName    : 'jaiprakash',
+// 		amount        : 'INR 30,00,000',
+// 		invoicesCount : '8',
+// 	},
+// 	{
+// 		vendorName    : 'jaiprakash',
+// 		amount        : 'INR 30,00,000',
+// 		invoicesCount : '8',
+// 	},
+// 	{
+// 		vendorName    : 'jaiprakash',
+// 		amount        : 'INR 30,00,000',
+// 		invoicesCount : '8',
+// 	},
+// 	{
+// 		vendorName    : 'jaiprakash',
+// 		amount        : 'INR 30,00,000',
+// 		invoicesCount : '8',
+// 	},
+// 	{
+// 		vendorName    : 'jaiprakash',
+// 		amount        : 'INR 30,00,000',
+// 		invoicesCount : '8',
+// 	},
+// 	{
+// 		vendorName    : 'jaiprakash',
+// 		amount        : 'INR 30,00,000',
+// 		invoicesCount : '8',
+// 	},
+// 	{
+// 		vendorName    : 'jaiprakash',
+// 		amount        : 'INR 30,00,000',
+// 		invoicesCount : '8',
+// 	},
+// 	{
+// 		vendorName    : 'jaiprakash',
+// 		amount        : 'INR 30,00,000',
+// 		invoicesCount : '8',
+// 	},
+// 	{
+// 		vendorName    : 'jaiprakash',
+// 		amount        : 'INR 30,00,000',
+// 		invoicesCount : '8',
+// 	},
+// ];
 
 interface ItemProps {
 	showVendorsList:string;
@@ -90,6 +91,9 @@ interface ItemProps {
 }
 
 function VendorsList({ showVendorsList, setShowVendorsList }:ItemProps) {
+	const { data } = useGetBySupplier();
+	const { list = [] } = data || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>

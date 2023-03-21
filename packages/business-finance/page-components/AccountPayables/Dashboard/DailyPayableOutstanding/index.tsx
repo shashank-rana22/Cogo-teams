@@ -1,11 +1,16 @@
 import { Toggle, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { format } from '@cogoport/utils';
 import React, { useState } from 'react';
+
+import useGetDailyPayableOutstanding from '../hooks/useGetDailyPayableOutstanding';
 
 import styles from './styles.module.css';
 
 function DailyPayableOutstanding() {
 	const [isQuarterView, setIsQuarterView] = useState(false);
+	const { data } = useGetDailyPayableOutstanding({ isQuarterView });
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -43,26 +48,28 @@ function DailyPayableOutstanding() {
 					<div className={styles.sub_container}>
 						<div className={styles.month_container}>
 							<div className={styles.value}>
-								25.20
+								{data?.[2]?.dpo}
+								{/* ?.toFixed(2) */}
 							</div>
 							<div className={styles.label}>
-								current month - march 2022
+								{format(data?.[2]?.yearMonth, ' MMM yyyy')}
+								{/* current month - march 2022 */}
 							</div>
 						</div>
 						<div className={styles.month_container}>
 							<div className={styles.value}>
-								20.12
+								{data?.[1]?.dpo}
 							</div>
 							<div className={styles.label}>
-								February 2022
+								{format(data?.[1]?.yearMonth, ' MMM yyyy')}
 							</div>
 						</div>
 						<div className={styles.month_container}>
 							<div className={styles.value}>
-								24.90
+								{data?.[0]?.dpo}
 							</div>
 							<div className={styles.label}>
-								January 2022
+								{format(data?.[0]?.yearMonth, ' MMM yyyy')}
 							</div>
 						</div>
 					</div>
@@ -70,21 +77,23 @@ function DailyPayableOutstanding() {
 					<div className={styles.sub_container}>
 						<div className={styles.month_box}>
 							<div className={styles.value}>
-								25.20
+								{data?.[0]?.dpo}
 							</div>
 							<div className={styles.sub_container}>
 								<div className={styles.quarter_text}>
 									Q1
 								</div>
 								<div className={styles.label}>
-									-Jan-Feb-March
+									-
+									{format(data?.[0]?.yearMonth, 'MMM')}
+									-Feb-March
 								</div>
 							</div>
 
 						</div>
 						<div className={styles.month_box}>
 							<div className={styles.value}>
-								23.20
+								{data?.[1]?.dpo || 0}
 							</div>
 
 							<div className={styles.sub_container}>
@@ -99,7 +108,7 @@ function DailyPayableOutstanding() {
 						</div>
 						<div className={styles.month_box}>
 							<div className={styles.value}>
-								22.80
+								{data?.[2]?.dpo || 0}
 							</div>
 							<div className={styles.sub_container}>
 								<div className={styles.quarter_text}>
@@ -113,7 +122,7 @@ function DailyPayableOutstanding() {
 						</div>
 						<div className={styles.month_box}>
 							<div className={styles.value}>
-								26.70
+								{data?.[3]?.dpo || 0}
 							</div>
 							<div className={styles.sub_container}>
 								<div className={styles.quarter_text}>

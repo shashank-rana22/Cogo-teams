@@ -17,7 +17,7 @@ export const filterControls = [
 	},
 	{
 
-		name : 'serviceType',
+		name : 'service',
 		type : 'select',
 		size : 'sm',
 

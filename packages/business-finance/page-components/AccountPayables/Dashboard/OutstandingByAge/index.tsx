@@ -5,7 +5,7 @@ import React from 'react';
 import BarChart from './BarChart';
 import styles from './styles.module.css';
 
-function OutstandingByAge() {
+function OutstandingByAge({ data }) {
 	return (
 		<div className={styles.container}>
 
@@ -24,7 +24,7 @@ function OutstandingByAge() {
 
 			</div>
 			<div className={styles.vr} />
-			<BarChart />
+			<BarChart data={data} />
 		</div>
 	);
 }

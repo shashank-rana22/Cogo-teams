@@ -1,9 +1,27 @@
+import { Tooltip } from '@cogoport/components';
+import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
+
+import useGetInvoiceAmount from '../hooks/useGetInvoiceAmount';
+import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
 function AmountBoxes() {
+	const {
+		data,
+		// loading,
+		// getDahboardData,
+	} = useGetInvoiceAmount();
+	const {
+		accountPayables,
+		onAccountAmount,
+		openInvoicesAmount,
+		openInvoicesCount,
+		organizationsCount,
+	} = data || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
@@ -13,7 +31,14 @@ function AmountBoxes() {
 							INR
 						</div>
 						<div className={styles.value_text}>
-							50.12 Cr
+
+							<Tooltip
+								content={getFormattedPrice(accountPayables, 'INR') || ''}
+								placement="top"
+								interactive
+							>
+								{getAmountInLakhCrK(accountPayables)}
+							</Tooltip>
 						</div>
 						<div className={styles.vr} />
 						<div className={styles.account_payables}>
@@ -21,7 +46,13 @@ function AmountBoxes() {
 								Account Payables
 							</div>
 							<div className={styles.invoices_org}>
-								Open Invoices - 123 | Organizations - 180
+								Open Invoices -
+								{' '}
+								{openInvoicesCount}
+								{' '}
+								| Organizations -
+								{' '}
+								{organizationsCount}
 							</div>
 						</div>
 					</div>
@@ -33,7 +64,7 @@ function AmountBoxes() {
 							INR
 						</div>
 						<div className={styles.value_text}>
-							60.24 Cr
+							{getAmountInLakhCrK(openInvoicesAmount)}
 						</div>
 						<div className={styles.account_payables}>
 							<div className={styles.label_text}>
@@ -54,7 +85,7 @@ function AmountBoxes() {
 							INR
 						</div>
 						<div className={styles.value_text}>
-							10.12 Cr
+							{getAmountInLakhCrK(onAccountAmount)}
 						</div>
 						<div className={styles.account_payables}>
 							<div className={styles.label_text}>

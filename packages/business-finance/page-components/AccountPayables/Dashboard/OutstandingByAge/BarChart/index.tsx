@@ -1,41 +1,46 @@
 import { ResponsiveBar } from '@cogoport/charts/bar';
 import React from 'react';
 
+// import useGetAgePayable from '../../hooks/useGetAgePayable';
+
 import styles from './styles.module.css';
 
-const data = [
-	{
-		id: 'Not Due', value: 115,
-	},
-	{
-		id: '1-30', value: 150,
-	},
-	{
-		id: '31-60', value: 170,
-	},
-	{
-		id: '61-90', value: 120,
-	},
-	{
-		id: '91-180', value: 115,
-	},
-	{
-		id: '181-365', value: 115,
-	},
-	{
-		id: '>365', value: 115,
-	},
-];
+// const data1 = [
+// 	{
+// 		id: 'Not Due', value: 115,
+// 	},
+// 	{
+// 		id: '1-30', value: 150,
+// 	},
+// 	{
+// 		id: '31-60', value: 170,
+// 	},
+// 	{
+// 		id: '61-90', value: 120,
+// 	},
+// 	{
+// 		id: '91-180', value: 115,
+// 	},
+// 	{
+// 		id: '181-365', value: 115,
+// 	},
+// 	{
+// 		id: '>365', value: 115,
+// 	},
+// ];
 
-function BarChart() {
+function BarChart({ data }) {
+	// const { data } = useGetAgePayable();
+	const { ageingBucket = [] } = data || {};
+
 	return (
 		<div>
 
 			<div className={styles.bar}>
 				<ResponsiveBar
-					data={data}
-					indexBy="id"
-					keys={['value']}
+					data={ageingBucket}
+					indexBy="ageingDuration"
+					keys={['ledgerAmount']}
 					margin={{ top: 50, right: 30, bottom: 40, left: 0 }}
 					padding={0.6}
 					enableGridY={false}

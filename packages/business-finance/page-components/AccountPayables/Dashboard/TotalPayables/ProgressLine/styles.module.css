@@ -1,0 +1,28 @@
+.parent_div  {
+    height: height;
+    width: 100%;
+    /* backgroundColor: 'whitesmoke', */
+    background-color: #88CAD1;
+    ;
+    /* borderRadius: 40, */
+    border-radius: 40px;
+    margin: 8px;
+  }
+  
+.child_div  {
+    height: 100%;
+    /* width: `${progress}%`, */
+    /* backgroundColor: bgcolor, */
+   border-radius:40px;
+    /* textAlign: 'right' */
+    /* width: 40%; */
+    background-color: #F68B21;
+  }
+  
+.progress_text  {
+    padding: 10;
+    /* color: black, */
+    /* fontWeight: 900 */
+    color:black;
+    font-weight: 900;
+  }

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
 
+// import GaugeChart from './GaugeChart';
 import styles from './styles.module.css';
 import { timeFrameControls } from './timeFrameControls';
 
@@ -35,6 +36,7 @@ function BillTurnAroundTime() {
 				</div>
 				<Filter controls={timeFrameControls} filters={timeFrameFilter} setFilters={setTimeFrameFilter} />
 			</div>
+			{/* <GaugeChart /> */}
 		</div>
 	);
 }

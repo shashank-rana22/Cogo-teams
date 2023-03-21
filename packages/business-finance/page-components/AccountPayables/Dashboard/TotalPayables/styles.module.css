@@ -100,3 +100,6 @@
     display: flex;
     padding-bottom: 12px;
 }
+.progress_bar{
+    width: 40%;
+}
