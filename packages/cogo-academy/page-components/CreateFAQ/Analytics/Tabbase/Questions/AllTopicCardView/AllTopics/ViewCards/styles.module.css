@@ -24,6 +24,7 @@
 	margin-bottom: 1.3%;
 	font-size: 14px;
 	color: #828282;
+	text-align: center;
 }
 
 .sub_heading {
@@ -41,4 +42,5 @@
 .sub_heading_context {
 	font-size: 14px;
 	color: "#6FA5AB";
+	text-align: center;
 }
