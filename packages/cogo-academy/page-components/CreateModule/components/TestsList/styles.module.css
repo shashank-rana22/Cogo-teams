@@ -19,8 +19,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin: 30px 0 15px;
 	background-color: #f9f5ec;
-	margin: 30px 0px 15px 0px;
 }
 
 .input {

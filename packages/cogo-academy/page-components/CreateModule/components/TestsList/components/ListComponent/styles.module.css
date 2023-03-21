@@ -18,6 +18,7 @@
 	:global {
 		.ui_table_head_row {
 			background-color: white;
+
 			.ui_table_head_cell {
 				padding-top: 18px;
 				padding-bottom: 10px;
