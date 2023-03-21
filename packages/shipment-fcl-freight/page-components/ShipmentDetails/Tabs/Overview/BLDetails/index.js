@@ -65,6 +65,7 @@ function BLDetails() {
 						setMappingModal(false);
 					}}
 				>
+					<Modal.Header title="Bl Container Mapping" />
 					<BlContainer
 						shipment_data={shipment_data}
 						// data={data}
