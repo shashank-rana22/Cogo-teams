@@ -1,5 +1,5 @@
 .container {
-	margin-top: 20px;
+	margin: 20px;
 	background-color: rgb(255 255 255 / 80%);
 
 	:global {
@@ -13,13 +13,16 @@
 			width: 1239px;
 			height: 63px;
 			height: 32px;
-			padding: 4px 8px;
+			padding: 4px 10px 4px 20px;
 			margin: 0;
 			font-size: 14px;
 			font-weight: 400;
 			line-height: 300%;
 			text-align: left;
 			border-bottom: 1px solid var(--color-tertiary-beige-4);
+		}
+		.ui_table_body_cell{
+			padding-left: 0px;
 		}
 	}
 }
@@ -31,4 +34,20 @@
 
 .question {
 	font-weight: 1000;
+	text-align: left;
+	padding-left: 58px;
+}
+.likes {
+	font-weight: 1000;
+	text-align: left;
+	padding-left: 48px;
+}
+.tags{
+	display:flex;
+	flex-wrap: wrap;
+	padding-left: 10px;
+	align-items: right;
+}
+.topics{
+	padding-left: 10px;
 }

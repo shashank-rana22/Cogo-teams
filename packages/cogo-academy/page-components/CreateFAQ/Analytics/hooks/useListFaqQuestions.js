@@ -3,14 +3,15 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 function useListFaqQuestions({
-	id = undefined,
 	searchState = undefined,
 	topicId = undefined,
 	tagId = [],
+	limit = undefined,
+	sort = undefined,
+	query_name = undefined,
 }) {
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
-
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : 'list_faq_questions',
@@ -28,19 +29,16 @@ function useListFaqQuestions({
 			await trigger({
 				params: {
 					filters: {
-						state        : 'published',
-						status       : 'active',
 						faq_topic_id : topicId || undefined,
-						audience_id  : id || undefined,
+						faq_tag_id   : tagId || undefined,
 
 					},
+					sort_by                  : sort,
 					page,
-					page_limit               : 10 || undefined,
-					faq_tags_data_required   : true,
-					answers_data_required    : true,
-					faq_topics_data_required : true,
-
-					get_pagination_data_required: true,
+					page_limit               : limit || undefined,
+					faq_tags_data_required   : !query_name,
+					answers_data_required    : !query_name,
+					faq_topics_data_required : !query_name,
 				},
 			});
 		} catch (error) {

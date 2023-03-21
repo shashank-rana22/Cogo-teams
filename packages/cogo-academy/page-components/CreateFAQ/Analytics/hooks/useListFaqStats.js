@@ -30,7 +30,6 @@ function useListFaqStats({
 				params: {
 					filters: {
 
-						q                       : query || undefined,
 						faq_topic_id            : topicId || undefined,
 						faq_tag_id              : tagId || undefined,
 						created_at_greater_than : startDate,

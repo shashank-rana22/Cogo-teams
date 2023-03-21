@@ -8,6 +8,11 @@
 	background-color: #fff;
 	border-radius: 8px;
 }
+.active_users{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .primary_right {
 	display: flex;
