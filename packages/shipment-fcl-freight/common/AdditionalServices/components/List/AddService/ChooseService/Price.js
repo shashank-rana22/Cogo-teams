@@ -1,20 +1,20 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
+import useRequestRate from '../../../../../../hooks/useRequestRate';
+
 import styles from './styles.module.css';
-import useRequestRate from './useRequestRate';
 
 function Price({
 	item,
 	isSeller,
 	setAddRate,
-	setShow = () => {},
 	refetch = () => {},
 	setItem = () => {},
+	setShowChargeCodes = () => {},
 	setShowPrice,
 }) {
-	console.log('hello', item);
-	const { requestRate, loading } = useRequestRate({ setShow, refetch });
+	const { requestRate, loading } = useRequestRate({ refetch, setShowChargeCodes });
 
 	return item?.rates ? (
 		<p>$ 0</p>

@@ -15,7 +15,6 @@ function AddService({
 	isSeller,
 	refetch = () => {},
 	show = false,
-	setShow = () => {},
 	showChargeCodes = false,
 	setShowChargeCodes = () => {},
 }) {
@@ -33,7 +32,6 @@ function AddService({
 		<EmptyState />;
 	}
 
-	console.log('showAddRate', showAddRate);
 	return (
 		<Modal
 			size="xl"
@@ -53,11 +51,11 @@ function AddService({
 							loading={loading}
 							setFilters={setFilters}
 							filters={filters}
-							setShow={setShow}
 							setShowPrice={setShowPrice}
 							serviceCountTotal={serviceCountTotal}
 							services={services}
 							refetch={refetch}
+							setShowChargeCodes={setShowChargeCodes}
 						/>
 					) : null}
 					{showAddRate ? (

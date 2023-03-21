@@ -1,6 +1,7 @@
 import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowRotateLeft, IcMArrowRotateRight } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import POC from '../../../../common/POC';
 import SOP from '../../../../common/SOP';
@@ -8,6 +9,8 @@ import SOP from '../../../../common/SOP';
 import styles from './styles.module.css';
 
 function SopAndPoc() {
+	const { shipment_data } = useContext(ShipmentDetailContext);
+
 	const [activeTab, setActiveTab] = useState('poc');
 	const [show, setShow] = useState(false);
 
@@ -45,7 +48,7 @@ function SopAndPoc() {
 								/>
 							</Button>
 						</div>
-						<div className={styles.close_border} />
+						{activeTab === 'poc' && <div className={styles.close_border} />}
 					</div>
 					<Tabs
 						fullWidth
@@ -55,12 +58,12 @@ function SopAndPoc() {
 					>
 						<TabPanel name="poc" title="POC">
 							<div style={{ height: '80vh', overflow: 'scroll' }}>
-								<POC />
+								<POC shipment_data={shipment_data} />
 							</div>
 						</TabPanel>
 						<TabPanel name="sop" title="SOP">
 							<div style={{ height: '80vh', overflow: 'scroll' }}>
-								<SOP />
+								<SOP shipment_data={shipment_data} />
 							</div>
 						</TabPanel>
 					</Tabs>

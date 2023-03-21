@@ -6,7 +6,7 @@ import { asyncFieldsOrganization } from '@cogoport/forms/utils/getAsyncFields';
 import { merge, isEmpty } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-import useUpdateShipmentService from '../../hooks/useUpdateShipmentService';
+import useUpdateShipmentService from '../../../../hooks/useUpdateShipmentService';
 
 import styles from './styles.module.css';
 

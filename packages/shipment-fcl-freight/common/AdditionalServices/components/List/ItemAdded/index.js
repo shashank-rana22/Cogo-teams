@@ -80,8 +80,8 @@ function Item({
 				{showCancelInfo || showEditBtn ? (
 					<Popover
 						show={show}
-						placement="top"
-						render="top"
+						placement="right"
+						render="right"
 						content={(
 							<div>
 								{showCancelInfo ? (
