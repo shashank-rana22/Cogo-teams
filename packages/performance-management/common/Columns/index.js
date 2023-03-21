@@ -260,8 +260,8 @@ const useGetColumns = ({
 			<div className={styles.head_content}>
 				<Button
 					onClick={() => addLog(item)}
-					disabled={(item?.is_pip && source === 'hr_dashboard')
-					|| (item?.employee_status === 'probation' && source === 'manager_dashboard')}
+					disabled={!((item?.is_pip && source === 'hr_dashboard')
+					|| (item?.employee_status === 'probation' && source === 'manager_dashboard'))}
 				>
 					Update
 				</Button>

@@ -1,0 +1,13 @@
+.name_input {
+    :global {
+        .ui_select_display_container {
+            width: 200px;
+        }
+    }
+}
+
+.button_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}

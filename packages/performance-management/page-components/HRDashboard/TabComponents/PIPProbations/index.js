@@ -11,7 +11,7 @@ import UploadModalBody from '../../UploadModal';
 import LogModal from './LogModal';
 import styles from './styles.module.css';
 
-function PIPProbations() {
+function PIPProbations({ source = 'hr_dashboard' }) {
 	const [openUploadModal, setOpenUploadModal] = useState(false);
 	const [openUpdate, setOpenUpdate] = useState(false);
 	const [item, setItem] = useState({});
@@ -21,7 +21,7 @@ function PIPProbations() {
 	// useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	const columnsToShow = feedbackDataColumns.pipProbationList;
-	const columns = useGetColumns({ columnsToShow, setItem, source: 'hr_dashboard', setOpenUpdate });
+	const columns = useGetColumns({ columnsToShow, setItem, source, setOpenUpdate });
 
 	const dataList = {
 		1: [{

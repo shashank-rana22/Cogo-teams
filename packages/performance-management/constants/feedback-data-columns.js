@@ -8,6 +8,7 @@ const feedbackDataColumns = {
 	monthWiseFeedbacks : ['name', 'cogo_id', 'rating', 'department', 'designation', 'view_form'],
 	logModal           : ['name', 'designation', 'manager', 'rating', 'employee_status', 'add_log_arrow'],
 	pipProbationList   : ['name', 'designation', 'manager', 'rating', 'employee_status', 'is_pip', 'action'],
+	reAssignModal      : ['name', 'designation', 'manager'],
 };
 
 export default feedbackDataColumns;
