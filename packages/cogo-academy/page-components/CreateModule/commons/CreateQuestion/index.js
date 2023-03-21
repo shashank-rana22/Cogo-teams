@@ -23,6 +23,7 @@ function CreateQuestion({
 	setAllKeysSaved,
 	editDetails,
 	setEditDetails,
+	topic,
 }) {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
 
@@ -101,9 +102,14 @@ function CreateQuestion({
 	}, [watch('question_type')]);
 
 	useEffect(() => {
-		if (!isEmpty(editDetails)) {
-			const { topic, question_type } = editDetails || {};
+		if (!isEmpty(topic)) {
 			setValue('topic', topic);
+		}
+	}, []);
+
+	useEffect(() => {
+		if (!isEmpty(editDetails)) {
+			const { question_type } = editDetails || {};
 
 			if (question_type === 'case_study') {
 				const { question_text, sub_question = [] } = editDetails || {};

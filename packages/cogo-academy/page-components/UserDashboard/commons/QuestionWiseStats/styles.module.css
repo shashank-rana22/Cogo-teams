@@ -1,3 +1,5 @@
 .radial_bar_container {
+	width: 200px;
 	height: 200px;
+	margin: -24px 0;
 }

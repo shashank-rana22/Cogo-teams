@@ -55,6 +55,8 @@
 }
 
 .bold {
+	display: flex;
+	align-items: center;
 	margin: 0 8px;
 	font-weight: 600;
 }
@@ -68,6 +70,13 @@
 
 .answer {
 	max-width: fit-content;
+}
+
+.question_text {
+	max-width: 500px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .btn {
@@ -89,9 +98,6 @@
 
 .question_div {
 	max-width: 600px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
 }
 
 .options > div:hover {

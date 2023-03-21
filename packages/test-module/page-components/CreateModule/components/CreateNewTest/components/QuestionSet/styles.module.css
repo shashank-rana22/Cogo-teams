@@ -19,15 +19,15 @@
 	cursor: pointer;
 }
 
-.span_text:hover {
-	cursor: pointer;
-}
-
 .span_text {
 	margin-left: 2px;
 	font-size: 12px;
 	font-weight: 500;
 	color: #221f20;
+}
+
+.span_text:hover {
+	cursor: pointer;
 }
 
 .btn_cont_float {

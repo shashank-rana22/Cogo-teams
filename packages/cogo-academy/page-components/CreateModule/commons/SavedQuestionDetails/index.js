@@ -69,13 +69,32 @@ function SavedQuestionDetails({
 		}
 	};
 
-	const getCaseQuestion = (item) => (
+	const getCaseQuestion = (item, from) => (
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
-				{item?.question_text}
-				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
+				<div
+					style={
+						from === 'tooltip'
+							? { overflow: 'unset', textOverflow: 'unset', whiteSpace: 'unset' }
+							: null
+					}
+					className={styles.question_text}
+				>
+					{item?.question_text}
+				</div>
 
-				<IconComponent item={item} caseToShow={caseToShow} setCaseToShow={setCaseToShow} />
+				{from !== 'tooltip' ? (
+					<div className={styles.bold}>
+						{`+${item?.sub_question.length} More`}
+						{' '}
+						<IconComponent
+							style={{ marginTop: '8px' }}
+							item={item}
+							caseToShow={caseToShow}
+							setCaseToShow={setCaseToShow}
+						/>
+					</div>
+				) : null}
 			</div>
 
 			{item.id === caseToShow ? item?.sub_question.map((item1) => <div>{item1.question_text}</div>) : null}
@@ -154,14 +173,16 @@ function SavedQuestionDetails({
 			Header   : 'Question/Case',
 			id       : 'question_text',
 			accessor : (item) => (
-				<Tooltip content={item?.question_type !== 'case_study'
-					? item?.question_text
-					: getCaseQuestion(item)}
+				<Tooltip
+					interactive
+					content={item?.question_type !== 'case_study'
+						? item?.question_text
+						: getCaseQuestion(item, 'tooltip')}
 				>
 					<div className={styles.question_div}>
 						{item?.question_type !== 'case_study'
 							? item?.question_text
-							: getCaseQuestion(item)}
+							: getCaseQuestion(item, 'normal')}
 					</div>
 				</Tooltip>
 			),
@@ -191,6 +212,7 @@ function SavedQuestionDetails({
 									} || [])).map((item1) => <div className={styles.answer}>{item1}</div>)}
 								</div>
 							)}
+
 							>
 								<div className={styles.answer_key}>
 									{getCorrectAnswers({ answers: item?.answers })}

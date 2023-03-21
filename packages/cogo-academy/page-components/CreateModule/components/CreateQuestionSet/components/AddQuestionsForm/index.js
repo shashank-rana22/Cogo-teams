@@ -23,7 +23,7 @@ function AddQuestionsForm({
 	setFilters,
 	filters,
 }) {
-	const { test_questions } = data || {};
+	const { test_questions = [], topic = '' } = data || {};
 
 	if (isEmpty(questionSetId) && from !== 'test') {
 		return null;
@@ -83,6 +83,7 @@ function AddQuestionsForm({
 							setAllKeysSaved={setAllKeysSaved}
 							editDetails={editDetails}
 							setEditDetails={setEditDetails}
+							topic={topic}
 						/>
 					);
 				}
@@ -100,6 +101,7 @@ function AddQuestionsForm({
 					setSavedQuestionDetails={setSavedQuestionDetails}
 					setAllKeysSaved={setAllKeysSaved}
 					setEditDetails={setEditDetails}
+					topic={topic}
 				/>
 			) : null}
 
