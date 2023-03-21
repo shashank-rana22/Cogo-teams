@@ -99,7 +99,7 @@ export const expenseNonRecurringConfig = () => ({
 		},
 		{
 			label : 'Invoice Number',
-			key   : 'billNumber',
+			func  : 'getInvoiceNumber',
 			span  : 1.5,
 		},
 		{

@@ -68,7 +68,7 @@ function LineItemsForm({ formData, setFormData }) {
 					const amountAfterTax = beforeTax + (beforeTax * (taxPercent / 100));
 					setValue(`line_items.${index}.amount_after_tax`, +amountAfterTax);
 					const tds = +watch(`line_items.${index}.tds`);
-					if (tds >= 0) { setValue(`line_items.${index}.payable_amount`, +amountAfterTax + tds); }
+					if (tds >= 0) { setValue(`line_items.${index}.payable_amount`, +amountAfterTax - tds); }
 				}
 			}
 		});
@@ -99,14 +99,14 @@ function LineItemsForm({ formData, setFormData }) {
 	const totalAmountBeforeTax = getSum('amount_before_tax');
 	const totalTax = getTotalTax();
 	const totalAmountAfterTax = getSum('amount_after_tax');
-	const totalPayable = getSum('payable_amount');
+	const payableAmount = getSum('payable_amount');
 	const totalTds = getSum('tds');
 
 	useEffect(() => {
-		if (totalPayable) {
-			setFormData((prev:object) => ({ ...prev, totalPayable }));
+		if (payableAmount) {
+			setFormData((prev:object) => ({ ...prev, payableAmount }));
 		}
-	}, [totalPayable, setFormData]);
+	}, [payableAmount, setFormData]);
 
 	return (
 		<div className={styles.section}>
@@ -124,11 +124,11 @@ function LineItemsForm({ formData, setFormData }) {
 					totalAmountBeforeTax={totalAmountBeforeTax}
 					totalTax={totalTax}
 					totalAmountAfterTax={totalAmountAfterTax}
-					totalPayable={totalPayable}
+					payableAmount={payableAmount}
 					totalTds={totalTds}
 				/>
 				<TotalAfterTax
-					totalPayable={totalPayable}
+					payableAmount={payableAmount}
 					invoiceCurrency={invoiceCurrency}
 				/>
 			</form>

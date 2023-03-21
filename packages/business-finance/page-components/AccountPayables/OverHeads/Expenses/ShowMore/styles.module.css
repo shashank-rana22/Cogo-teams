@@ -8,6 +8,7 @@
 	align-items: center;
 	margin: 2px 0;
 	color: #f68b21;
+	background: rgb(254 248 228);
 	text-decoration: underline;
 	cursor: pointer;
 	border: none;
@@ -15,7 +16,9 @@
 
 .data_div {
 	display: flex;
-	margin-top: 8px;
+	border: 1px solid #c1e8ec;
+    margin: 8px;
+    border-radius: 8px;
 }
 
 .button_container {
@@ -27,6 +30,7 @@
 
 .section {
 	margin: 10px 36px 10px 16px;
+	width: 120px;
 }
 
 .element {
@@ -36,8 +40,8 @@
 
 .more_data_container {
 	width: 100%;
-	max-height: 88px;
-	overflow: hidden;
+	max-height: 228px;
+	/* overflow: hidden; */
 	background: white;
 	border-top: 1px solid #edd7a9;
 	transition: max-height 0.3s ease;
@@ -46,4 +50,15 @@
 .more_data_container_close {
 	width: 0;
 	max-height: 0;
+}
+
+.list_container{
+	max-height: 200px;
+	overflow: scroll;
+}
+
+.link{
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
 }

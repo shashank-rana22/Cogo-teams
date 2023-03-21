@@ -6,8 +6,8 @@ import useGetVendor from '../hooks/useGetVendor';
 import useListCogoEntities from '../hooks/useListCogoEntities';
 
 import MailTemplate from './MailTemplate';
+import Summary from './RecurringSummary';
 import styles from './styles.module.css';
-import Summary from './Summary';
 import UploadInvoice from './UploadInvoice';
 
 function AddExpenseModal({
@@ -21,13 +21,13 @@ function AddExpenseModal({
 
 	const { cogoEntityId, vendorId } = rowData;
 
-	const { entityList } = useListCogoEntities(cogoEntityId);
+	const { entityList } = useListCogoEntities({ cogoEntityId });
 	const { tradePartyData } = useGetTradePartyDetails(vendorId);
 
 	const { vendorList } = useGetVendor(vendorId);
 
 	useEffect(() => {
-		if (vendorList.length > 0) {
+		if (vendorList?.length > 0) {
 			setExpenseData((p) => ({ ...p, vendorData: vendorList[0] }));
 		}
 	}, [vendorList]);

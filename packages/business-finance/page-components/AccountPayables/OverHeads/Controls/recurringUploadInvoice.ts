@@ -9,7 +9,7 @@ export const recurringUploadInvoice = () => [
 				draggable     : true,
 				loading       : true,
 				dropareaProps : { heading: 'Upload your file here', subHeading: 'supports - jpeg, pdf, docx' },
-				style         : { width: '410px' },
+				style         : { width: '540px' },
 				span          : 12,
 			},
 		],

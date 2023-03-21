@@ -7,14 +7,17 @@ import { formatDate } from '../../../../../../commons/utils/formatDate';
 import styles from './styles.module.css';
 
 interface Data {
-	vendorName?:string,
 	expenseCategory?:string,
-	totalPayable?:number | string,
+	payableAmount?:number | string,
 	invoiceDate?: Date,
 	stakeholderName?:string,
+	invoiceCurrency?:string,
+	currency?:string,
 }
 interface Props {
 	text?:string,
+	vendorName?:string,
+	category?:string,
 	isBody?:boolean,
 	mailData?:Data,
 	setMailData?:(p:object)=>void,
@@ -25,13 +28,15 @@ function Details({
 	isBody = false,
 	mailData = {},
 	setMailData = () => {},
+	vendorName,
+	category,
 }:Props) {
 	const {
-		vendorName = '',
-		expenseCategory = '',
-		totalPayable,
+		payableAmount,
 		invoiceDate,
 		stakeholderName,
+		invoiceCurrency,
+		currency,
 	} = mailData || {};
 
 	const profileData = useSelector(({ profile }) => profile);
@@ -72,7 +77,7 @@ function Details({
 				<div>
 					Category:
 					{' '}
-					{startCase(expenseCategory)}
+					{startCase(category || '')}
 				</div>
 				<div>
 					Expense date:
@@ -83,7 +88,9 @@ function Details({
 				<div>
 					Payable Amount:
 					{' '}
-					{totalPayable || '-'}
+					{invoiceCurrency || currency || ''}
+					{' '}
+					{payableAmount || '-'}
 				</div>
 				<div>
 					Requested By:

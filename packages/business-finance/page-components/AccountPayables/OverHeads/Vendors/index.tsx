@@ -84,10 +84,10 @@ function VenderComponent() {
 		</div>
 	);
 
-	function RenderKYCStatus(item) {
+	function RenderKYCStatus(item:any) {
 		const { item: itemData = {} } = item;
 
-		const { kyc_status:kycStatus = '' } = itemData;
+		const { kycStatus = '' } = itemData;
 		return (
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				{kycStatus === 'verified' && 	(
@@ -133,10 +133,10 @@ function VenderComponent() {
 
 	function RenderPayments(item) {
 		const { item: itemData = {} } = item;
-		const { payments = '' } = itemData;
+		const { totalPaidAmount = 0 } = itemData;
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-				{payments}
+				{totalPaidAmount}
 				{' '}
 				<Tooltip content="Current Month: " placement="top">
 					<IcMInfo />

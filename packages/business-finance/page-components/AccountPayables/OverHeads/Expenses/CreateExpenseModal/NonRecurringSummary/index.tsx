@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-indent */
+import { Placeholder } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -28,6 +29,7 @@ interface Data {
 	stakeholderName?:string,
 	invoiceCurrency?:string,
 	vendorID?:number | string,
+	payableAmount?:number | string,
 }
 
 interface Props {
@@ -47,13 +49,13 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 		invoiceDate,
 		transactionDate,
 		uploadedInvoice,
-		totalPayable,
+		payableAmount,
 		stakeholderName,
 		invoiceCurrency,
 		vendorID,
 	} = nonRecurringData || {};
 
-	const { stakeholdersData, loading } = useGetStakeholders(expenseCategory);
+	const { stakeholdersData, loading:stakeholderLoading } = useGetStakeholders(expenseCategory);
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
 	useEffect(() => {
@@ -108,7 +110,7 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 			value : <div>
 {invoiceCurrency}
 {' '}
-{totalPayable || '-'}
+{payableAmount || '-'}
            </div>,
 		},
 		{
@@ -141,7 +143,8 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 	const summaryDataThird = [
 		{
 			title : 'To be Approved by',
-			value : loading ? '-' : startCase(stakeholderName || '') || '-',
+			value : stakeholderLoading ? <Placeholder height={20} width={150} />
+				: startCase(stakeholderName || '') || '-',
 		},
 		{
 			title : 'Uploaded Documents',

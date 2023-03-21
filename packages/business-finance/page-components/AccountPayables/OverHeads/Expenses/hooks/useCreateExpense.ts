@@ -24,6 +24,8 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 
 	const {
 		stakeholderId,
+		stakeholderEmail,
+		stakeholderName,
 		vendorID,
 		vendorName,
 		vendorSerialId,
@@ -246,9 +248,13 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 			createdBy           : profile?.user?.id,
 			performedByUserType : 'AGENT',
 		},
-		category    : expenseCategory?.toUpperCase(),
-		subCategory : expenseSubCategory?.toUpperCase(),
-		approvedBy  : stakeholderId,
+		category       : expenseCategory?.toUpperCase(),
+		subCategory    : expenseSubCategory?.toUpperCase(),
+		approvedByUser : {
+			email : stakeholderEmail,
+			id    : stakeholderId,
+			name  : stakeholderName,
+		},
 		expenseType : 'NON_RECURRING',
 		branchId    : addressData?.branchId,
 		kycStatus   : kycStatus?.toUpperCase(),

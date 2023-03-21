@@ -26,7 +26,7 @@ export interface Props {
 	handlePageChange?: (currentPage: number) => void;
 	pageSize?: number;
 	showPagination?: boolean;
-	renderDropdown?: (id:string | number) => JSX.Element | null ;
+	renderDropdown?: (p:any) => JSX.Element | null ;
 }
 
 function List({
@@ -81,7 +81,7 @@ function List({
 							functions={commonFunctions(functions)}
 							isMobile={isMobile}
 						/>
-						{renderDropdown(singleitem?.vendorSerialId)}
+						{renderDropdown(singleitem)}
 					</div>
 				))}
 			</div>

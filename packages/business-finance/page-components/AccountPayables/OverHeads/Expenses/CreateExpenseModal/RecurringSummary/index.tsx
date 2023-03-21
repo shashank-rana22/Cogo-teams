@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-indent */
+import { Placeholder } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -58,7 +59,7 @@ function RecurringSummary({ recurringData, setRecurringData }:Props) {
 		agreementNumber,
 	} = recurringData || {};
 
-	const { stakeholdersData, loading } = useGetStakeholders(expenseCategory);
+	const { stakeholdersData, loading:stakeholderLoading } = useGetStakeholders(expenseCategory);
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
 	useEffect(() => {
@@ -146,7 +147,8 @@ function RecurringSummary({ recurringData, setRecurringData }:Props) {
 		},
 		{
 			title : 'To be Approved by',
-			value : loading ? '-' : startCase(stakeholderName || '') || '-',
+			value : stakeholderLoading ? <Placeholder height={20} width={150} />
+				: startCase(stakeholderName || '') || '-',
 		},
 		{
 			title : 'Uploaded Documents',

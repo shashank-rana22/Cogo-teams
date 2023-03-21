@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterTax, totalPayable, totalTds }) {
+function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterTax, payableAmount, totalTds }) {
 	const getValue = (value) => {
 		if (Number.isNaN(value)) {
 			return '---';
@@ -48,7 +48,7 @@ function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterT
 				</div>
 				<div className={`${styles.col}`} style={{ width: '24%' }}>
 					Payable
-					<span>{ getValue(totalPayable)}</span>
+					<span>{ getValue(payableAmount)}</span>
 				</div>
 			</div>
 		</>

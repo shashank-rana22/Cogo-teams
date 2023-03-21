@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useListVendors = (filters) => {
@@ -6,10 +6,11 @@ const useListVendors = (filters) => {
 	const [
 		{ data, loading },
 		trigger,
-	] = useRequest(
+	] = useRequestBf(
 		{
-			url    : '/list_vendors',
-			method : 'get',
+			url     : '/purchase/expense/list-vendors',
+			method  : 'get',
+			authKey : 'list_vendors',
 		},
 		{ manual: true },
 	);

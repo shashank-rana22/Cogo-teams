@@ -53,7 +53,7 @@ function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 						<Input
 							name="invoiceNumber"
 							size="sm"
-							placeholder="Enter unique invoice no."
+							placeholder="Enter unique invoice no.*"
 							onChange={(e:string) => setFormData({ ...formData, invoiceNumber: e })}
 						/>
 

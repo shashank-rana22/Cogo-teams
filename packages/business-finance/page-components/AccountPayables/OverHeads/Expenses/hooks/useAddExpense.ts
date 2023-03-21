@@ -17,7 +17,11 @@ interface AddressInterface {
 }
 
 const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
-	const { vendorId:vendorID, businessName:vendorName, id:expenseConfigurationId } = rowData || {};
+	const {
+		vendorId:vendorID, businessName:vendorName, id:expenseConfigurationId,
+		category:expenseCategory,
+		subCategory:expenseSubCategory,
+	} = rowData || {};
 
 	const [addressData, setAddressData] = useState<AddressInterface>({});
 	const {
@@ -26,14 +30,14 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 
 	const {
 		stakeholderId,
+		stakeholderEmail,
+		stakeholderName,
 		vendorData,
 		invoiceDate,
 		invoiceCurrency,
 		uploadedInvoice,
 		invoiceNumber,
 		entityObject,
-		expenseCategory,
-		expenseSubCategory,
 		branch,
 		lineItemsList,
 		tradeParty,
@@ -115,6 +119,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		business_name: vendorBusinessName,
 		cogo_entity_id: vendorCogoEntityId,
 		serial_id:vendorSerialId,
+		kyc_status:kycStatus,
 	} = vendorData || {};
 
 	const [{ data:responseData, loading }, trigger] = useRequestBf(
@@ -169,7 +174,8 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 					entityCodeId            : tradeParty?.cogo_entity_id,
 					organizationId          : tradeParty?.organization_id,
 					organizationSerialId    : tradeParty?.serial_id,
-					isTaxApplicable         : tradeParty?.is_tax_applicable,
+					// isTaxApplicable         : tradeParty?.is_tax_applicable,
+					isTaxApplicable         : true, // for now
 					isSez                   : false,
 					organizationName        : 'JAMA TAXI SERVICE', // ???
 					pincode                 : '110062', // ??
@@ -242,13 +248,17 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 			createdBy           : profile?.user?.id,
 			performedByUserType : 'AGENT',
 		},
-		category    : expenseCategory?.toUpperCase(),
-		subCategory : expenseSubCategory?.toUpperCase(),
-		approvedBy  : stakeholderId,
-		expenseType : 'NON_RECURRING',
+		category       : expenseCategory?.toUpperCase(),
+		subCategory    : expenseSubCategory?.toUpperCase(),
+		approvedByUser : {
+			email : stakeholderEmail,
+			id    : stakeholderId,
+			name  : stakeholderName,
+		},
+		expenseType : 'RECURRING',
 		branchId    : addressData?.branchId,
-		// kycStatus   : kycStatus?.toUpperCase(),
-		// pan         : vendorRegistrationNumber,
+		kycStatus   : kycStatus?.toUpperCase(),
+		pan         : vendorRegistrationNumber,
 	};
 
 	const submitData = async () => {
@@ -262,7 +272,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 	};
 
 	if (responseData?.message === 'OK') {
-		Toast.success('Expense successfully created');
+		Toast.success('Expense successfully added');
 		setShowModal(false);
 		getList(); // refetching the list
 	}

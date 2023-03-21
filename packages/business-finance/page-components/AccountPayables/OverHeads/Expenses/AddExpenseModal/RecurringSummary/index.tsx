@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-indent */
+import { Placeholder } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -28,7 +29,7 @@ interface Data {
 	stakeholderName?:string,
 	invoiceCurrency?:string,
 	vendorID?:number | string,
-	totalPayable?: number | string,
+	payableAmount?: number | string,
 	startDate?: Date,
 	endDate?: Date,
 	repeatEvery?: string,
@@ -56,8 +57,9 @@ interface Props {
 }
 
 function Summary({ expenseData, setExpenseData, rowData }:Props) {
-	const { entityObject } = expenseData || {};
+	const { entityObject, branch } = expenseData || {};
 	const { entity_code:entityCode } = entityObject || {};
+	const { name:branchName } = branch || {};
 
 	const DURATION_MAPPING = {
 		WEEK      : 'Weekly',
@@ -76,11 +78,11 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 		uploadedInvoice,
 		stakeholderName,
 		vendorID,
-		totalPayable:payableAmount,
+		payableAmount,
 		invoiceCurrency:currency,
 	} = expenseData || {};
 
-	const { stakeholdersData, loading } = useGetStakeholders(category);
+	const { stakeholdersData, loading:stakeholdersLoading } = useGetStakeholders(category);
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
 	useEffect(() => {
@@ -140,7 +142,7 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 
 		{
 			title : 'Branch ',
-			value : '-',
+			value : branchName || '-',
 		},
 		{
 			title : 'Payable Amount',
@@ -178,7 +180,8 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 		},
 		{
 			title : 'To be Approved by',
-			value : loading ? '-' : startCase(stakeholderName || '') || '-',
+			value : stakeholdersLoading ? <Placeholder height={20} width={150} />
+				: (startCase(stakeholderName || '') || '-'),
 		},
 		{
 			title : 'Uploaded Documents',

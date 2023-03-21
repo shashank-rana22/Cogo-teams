@@ -1,8 +1,10 @@
 const headerStyle = {
 	marginBottom : '16px',
 	paddingLeft  : '10px',
-	borderRadius : '8px',
-	background   : '#333',
+	borderRadius : '8px 8px 0px 0px',
+	borderBottom : '2px solid #F68B21',
+	background   : 'none',
+	color        : 'black',
 	marginTop    : '20px',
 	fontSize     : '14px',
 	fontStyle    : 'normal',
@@ -25,18 +27,17 @@ const VENDOR_CONFIG = {
 	fields       : [
 		{
 			label : 'Vendor ID',
-			key   : 'vendorSerialId',
+			key   : 'referenceId',
 			span  : 1.2,
 		},
 		{
 			label : 'Kyc Status',
-			key   : 'kyc_status',
 			span  : 0.7,
 			func  : 'renderKYCStatus',
 		},
 		{
 			label : 'Name',
-			key   : 'name',
+			key   : 'organizationName',
 			span  : 1.2,
 		},
 		{
@@ -47,13 +48,12 @@ const VENDOR_CONFIG = {
 		},
 		{
 			label : 'Category',
-			key   : 'category',
+			key   : 'catagory',
 			span  : 1,
 
 		},
 		{
 			label   : 'Payments',
-			key     : 'payments',
 			span    : 1,
 			sorting : { name: 'payments' },
 			func    : 'renderPayments',
@@ -68,7 +68,7 @@ const VENDOR_CONFIG = {
 		},
 		{
 			label   : 'Created At',
-			key     : 'createdDate',
+			key     : 'createdAt',
 			span    : 1.25,
 			func    : 'rendeFormate',
 			sorting : { name: 'modifiedDateSortType' },

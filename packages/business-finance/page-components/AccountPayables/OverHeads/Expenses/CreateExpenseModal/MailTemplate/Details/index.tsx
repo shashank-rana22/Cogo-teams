@@ -9,7 +9,9 @@ import styles from './styles.module.css';
 interface Data {
 	vendorName?:string,
 	expenseCategory?:string,
-	totalPayable?:number | string,
+	payableAmount?:number | string,
+	currency?:string,
+	invoiceCurrency?:string,
 	invoiceDate?: Date,
 	stakeholderName?:string,
 }
@@ -29,7 +31,9 @@ function Details({
 	const {
 		vendorName = '',
 		expenseCategory = '',
-		totalPayable,
+		payableAmount,
+		currency,
+		invoiceCurrency,
 		invoiceDate,
 		stakeholderName,
 	} = mailData || {};
@@ -83,7 +87,9 @@ function Details({
 				<div>
 					Payable Amount:
 					{' '}
-					{totalPayable || '-'}
+					{currency || invoiceCurrency || ''}
+					{' '}
+					{payableAmount || '-'}
 				</div>
 				<div>
 					Requested By:

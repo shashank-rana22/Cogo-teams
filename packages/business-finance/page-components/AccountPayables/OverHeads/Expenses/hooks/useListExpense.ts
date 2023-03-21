@@ -1,11 +1,20 @@
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-interface Filter {
+interface Filters {
+	branch?:string | number,
 	expenseCategory?:string,
+	searchValue?:string,
+}
+interface Filter {
+	expenseFilters?:Filters,
+	id?:string,
+	expenseType?:string,
 }
 
-const useListExpense = (expenseFilters:Filter) => {
+const useListExpense = ({ expenseFilters, id, expenseType }:Filter) => {
+	const { branch, expenseCategory, searchValue } = expenseFilters || {};
+
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense/list',
@@ -19,14 +28,17 @@ const useListExpense = (expenseFilters:Filter) => {
 		try {
 			await trigger({
 				params: {
-					expenseType     : 'NON_RECURRING',
-					expenseCategory : expenseFilters?.expenseCategory || undefined,
+					expenseType            : expenseType || 'NON_RECURRING',
+					branchId               : branch || undefined,
+					category               : expenseCategory || undefined,
+					q                      : searchValue || undefined,
+					expenseConfigurationId : id || undefined,
 				},
 			});
 		} catch (err) {
 			console.log(err);
 		}
-	}, [trigger, expenseFilters?.expenseCategory]);
+	}, [trigger, expenseType, branch, expenseCategory, searchValue, id]);
 
 	return {
 		getList,

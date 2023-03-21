@@ -78,19 +78,20 @@ function MailTemplate({ mailData, setMailData, setShowModal, getList, getRecurri
 				/>
 			</div>
 
-			{uploadedInvoice && (
-				<div className={styles.file}>
-					<a href={uploadedInvoice} target="_blank" rel="noreferrer">
-						<IcMFileUploader />
-						Uploaded File
-					</a>
+			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				{uploadedInvoice && (
+					<div className={styles.file}>
+						<a href={uploadedInvoice} target="_blank" rel="noreferrer">
+							<IcMFileUploader />
+							Uploaded File
+						</a>
+					</div>
+				)}
+				<div className={styles.button}>
+					<Button onClick={() => handleClick()} disabled={loading || recurringLoading}>
+						{loading || recurringLoading ? 'Sending...' : 'Send Email'}
+					</Button>
 				</div>
-			)}
-			<div className={styles.button}>
-				<Button onClick={() => handleClick()} disabled={loading || recurringLoading}>
-					{loading || recurringLoading ? 'Sending...' : 'Send'}
-				</Button>
-
 			</div>
 		</div>
 	);

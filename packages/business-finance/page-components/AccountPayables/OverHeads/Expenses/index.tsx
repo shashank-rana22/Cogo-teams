@@ -26,7 +26,8 @@ interface ItemDataInterface {
 	billDate?: Date,
 	createdDate?:Date,
 	status?: string,
-	approvedBy?:string | number,
+	approvedByUser?:{ name?:string },
+	billNumber?:string | number,
 	startDate?:Date,
 	endDate?:Date,
 	maxPayoutAllowed?:number | string,
@@ -50,13 +51,23 @@ function ExpenseComponent() {
 		pageLimit       : 10,
 	});
 
-	const { getList, listData, listLoading } = useListExpense(expenseFilters);
-	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig();
+	const { getList, listData, listLoading } = useListExpense({ expenseFilters });
+	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig({ expenseFilters });
 
 	useEffect(() => {
 		if (recurringState === 'nonRecurring') { getList(); }
 		if (recurringState === 'recurring') { getRecurringList(); }
-	}, [getList, recurringState, expenseFilters.expenseCategory, getRecurringList]);
+	}, [getList, recurringState, expenseFilters, getRecurringList]);
+
+	useEffect(() => {
+		setExpenseFilters((p) => ({
+			...p,
+			expenseCategory : null,
+			branch          : null,
+			repeatsEvery    : null,
+			searchValue     : '',
+		}));
+	}, [recurringState]);
 
 	const OPTIONS = [
 		{
@@ -76,7 +87,7 @@ function ExpenseComponent() {
 		}));
 	};
 
-	const addExpense = (itemData:object) => {
+	const handleAddExpense = (itemData:object) => {
 		setShowExpenseModal(true);
 		setRowData(itemData);
 	};
@@ -121,7 +132,7 @@ function ExpenseComponent() {
 						setCreateExpenseType(recurringState);
 						setShowModal(true);
 					}}
-					style={{ border: '1px solid black', fontSize: '14px' }}
+					style={{ background: '#F68B21', color: 'white', fontSize: '14px' }}
 				>
 					{BUTTON_TEXT[recurringState]}
 				</Button>
@@ -133,10 +144,10 @@ function ExpenseComponent() {
 		addExpense: (itemData:ItemDataInterface) => (
 			<Button
 				themeType="secondary"
-				disabled={!itemData?.approvedBy}
+				disabled={itemData?.status !== 'ACCEPTED'}
 				size="md"
 				style={{ border: '1px solid black' }}
-				onClick={() => addExpense(itemData)}
+				onClick={() => handleAddExpense(itemData)}
 			>
 				Add Expense
 			</Button>
@@ -220,18 +231,21 @@ function ExpenseComponent() {
 			);
 		},
 		getApprovedByRecurring: (itemData:ItemDataInterface) => {
-			const { updatedAt, approvedBy = '' } = itemData || {};
+			const { updatedAt, approvedByUser, status } = itemData || {};
+			const { name = '' } = approvedByUser || {};
 			return (
 				<div>
-					{approvedBy ? (
+					{status === 'ACCEPTED' ? (
 						<>
-							<div>{approvedBy}</div>
+							<div>{name}</div>
 							<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) }</div>
 						</>
 					) : (
 						<>
 							<div className={styles.pending_approval}>Pending Approval</div>
-							<a href="#" className={styles.link}>Re-send Email</a>
+							<div className={styles.link}>
+								<a href="#">Re-send Email</a>
+							</div>
 						</>
 					)}
 				</div>
@@ -294,10 +308,25 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
+		getInvoiceNumber: (itemData:ItemDataInterface) => {
+			const { billNumber } = itemData || {};
+			return (
+				<div>
+					{ billNumber ? (
+						<div className={styles.link}>
+							{' '}
+							<a href="#">{billNumber}</a>
+						</div>
+					) : '-' }
+				</div>
+			);
+		},
 	};
 
-	const showDropDown = () => {
-		if (recurringState === 'recurring') return <ShowMore />;
+	const showDropDown = (singleItem:{ id?:string }) => {
+		const { id } = singleItem || {};
+
+		if (recurringState === 'recurring') return <ShowMore id={id} />;
 		return null;
 	};
 

@@ -12,6 +12,7 @@ interface Data {
 	vendorName?:string,
 	expenseCategory?:string,
 	stakeholderEmail?:string,
+	vendorData?:any,
 }
 
 interface Props {
@@ -23,8 +24,11 @@ interface Props {
 }
 
 function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowData }:Props) {
-	const { uploadedInvoice, vendorName = '-', expenseCategory = '-', stakeholderEmail } = expenseData || {};
-	const { submitData } = useAddExpense({ expenseData, setShowModal, getList, rowData });
+	const { uploadedInvoice, vendorData, stakeholderEmail } = expenseData || {};
+	const { category } = rowData || {};
+	const { business_name:vendorName } = vendorData || {};
+
+	const { submitData, loading } = useAddExpense({ expenseData, setShowModal, getList, rowData });
 
 	return (
 		<div className={styles.container}>
@@ -51,7 +55,7 @@ function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowD
 
 			<div className={styles.heading_subject}>Email subject</div>
 			<div className={styles.subject}>
-				<Details text={`${vendorName} | ${startCase(expenseCategory)} | Expense Approval Request`} />
+				<Details text={`${vendorName || '-'} | ${startCase(category || '')} | Expense Approval Request`} />
 			</div>
 
 			<div className={styles.heading_body}>Email body</div>
@@ -60,26 +64,25 @@ function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowD
 					isBody
 					mailData={expenseData}
 					setMailData={setExpenseData}
+					vendorName={vendorName}
+					category={category}
 				/>
 			</div>
 
-			{uploadedInvoice && (
-				<div className={styles.file}>
-					<a href={uploadedInvoice} target="_blank" rel="noreferrer">
-						<IcMFileUploader />
-						Uploaded File
-					</a>
+			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				{uploadedInvoice && (
+					<div className={styles.file}>
+						<a href={uploadedInvoice} target="_blank" rel="noreferrer">
+							<IcMFileUploader />
+							Uploaded File
+						</a>
+					</div>
+				)}
+				<div className={styles.button}>
+					<Button onClick={() => submitData()} disabled={loading}>
+						{loading ? 'Sending...' : 'Send Email'}
+					</Button>
 				</div>
-			)}
-			<div className={styles.button}>
-				<Button
-					onClick={() => submitData()}
-					disabled={false}
-				>
-					{/* {loading || recurringLoading ? 'Sending...' : 'Send'} */}
-					Send
-				</Button>
-
 			</div>
 		</div>
 	);
