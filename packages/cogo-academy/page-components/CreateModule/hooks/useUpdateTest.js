@@ -9,51 +9,68 @@ function useUpdateTest() {
 		method : 'POST',
 	}, { manual: true });
 
-	const updateTest = async ({ test_id, values }) => {
-		try {
-			const { test_duration_min, cut_off_marks, maximum_attempts, name, test_validity } = values;
-			const toRemove = ['test_duration_min', 'cut_off_marks', 'maximum_attempts', 'name', 'test_validity'];
-			toRemove.forEach((item) => {
+	const updateTest = async ({ test_id, values = {}, fetchList, type = 'edit' }) => {
+		if (type === 'edit') {
+			try {
+				const { test_duration_min, cut_off_marks, maximum_attempts, name, test_validity } = values;
+				const toRemove = ['test_duration', 'cut_off_marks', 'maximum_attempts', 'name', 'test_validity'];
+				toRemove.forEach((item) => {
 				// eslint-disable-next-line no-param-reassign
-				delete values[item];
-			});
-
-			const testDetailsObj = {
-				test_duration  : test_duration_min,
-				cut_off_marks,
-				maximum_attempts,
-				name,
-				validity_start : test_validity.startDate,
-				validity_end   : test_validity.endDate,
-			};
-
-			const set_wise_distribution = [];
-			Object.entries(values).forEach(([key, value]) => {
-				const question_type = key.slice(-1) === 'q' ? 'stand_alone' : 'case_study';
-				// eslint-disable-next-line radix
-				const distribution_count = parseInt(value);
-				const test_question_set_id = key.substring(0, key.length - 1);
-				set_wise_distribution.push({
-					distribution_count,
-					test_question_set_id,
-					question_type,
+					delete values[item];
 				});
-			});
 
-			await trigger({
-				data: {
-					id     : test_id,
-					...testDetailsObj,
-					set_wise_distribution,
-					status : 'active',
+				const testDetailsObj = {
+					test_duration  : test_duration_min,
+					cut_off_marks,
+					maximum_attempts,
+					name,
+					validity_start : test_validity.startDate,
+					validity_end   : test_validity.endDate,
+				};
 
-				},
-			});
+				const set_wise_distribution = [];
+				Object.entries(values).forEach(([key, value]) => {
+					const question_type = key.slice(-1) === 'q' ? 'stand_alone' : 'case_study';
+					// eslint-disable-next-line radix
+					const distribution_count = parseInt(value);
+					const test_question_set_id = key.substring(0, key.length - 1);
+					set_wise_distribution.push({
+						distribution_count,
+						test_question_set_id,
+						question_type,
+					});
+				});
 
-			router.push('/learning/test-module');
-			Toast.success('Updated Successfully');
-		} catch (err) {
-			Toast.error(err?.message || 'Something went wrong');
+				await trigger({
+					data: {
+						id     : test_id,
+						...testDetailsObj,
+						set_wise_distribution,
+						status : 'active',
+
+					},
+				});
+
+				router.push('/learning/test-module');
+				Toast.success('Updated Successfully');
+			} catch (err) {
+				Toast.error(err?.message || 'Something went wrong');
+			}
+		} else {
+			try {
+				await trigger({
+					data: {
+						id                    : test_id,
+						status                : 'inactive',
+						set_wise_distribution : [],
+
+					},
+				});
+				fetchList();
+				Toast.success('Test Deleted Successfully');
+			} catch (error) {
+				Toast.error(error?.message);
+			}
 		}
 	};
 	return {

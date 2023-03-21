@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 function useGetTest() {
@@ -14,7 +15,7 @@ function useGetTest() {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(err?.message);
 		}
 	};
 

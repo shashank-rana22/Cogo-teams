@@ -10,7 +10,8 @@ function useGetTestQuestionSets() {
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			status: 'active',
+			status : 'active',
+			q      : '',
 		},
 	});
 
