@@ -21,10 +21,9 @@ function UserStats({ source = '' }) {
 		general: {
 			query: { user_id = '', path = '' },
 		},
-		profile: { user = {} },
 	} = useSelector((state) => state);
 
-	const userId = user_id || user.id;
+	const userId = user_id;
 
 	const handleClick = () => {
 		router.push(`${path}`);

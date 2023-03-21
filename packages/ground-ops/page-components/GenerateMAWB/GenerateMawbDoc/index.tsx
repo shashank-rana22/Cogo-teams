@@ -1,6 +1,7 @@
-import { Button } from '@cogoport/components';
-import { saveAs } from 'file-saver';
+import { Button, Checkbox } from '@cogoport/components';
 import * as htmlToImage from 'html-to-image';
+import html2canvas from 'html2canvas';
+import { jsPDF as JsPDF } from 'jspdf';
 import React, { createRef, useState, ReactFragment } from 'react';
 
 import ChargeDetails from './ChargeDetails';
@@ -36,6 +37,23 @@ const downloadButton = {
 	document_amendment_requested : 'Download',
 };
 
+const footerImages = [
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/30186a4d8094f78fffba0aeac1847cd0/original_1.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/34f4ab91d2f08e432f5e99cec869e07b/original_2.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/1fcd0257b396ea304a7aebfeaceaee76/original_3.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/1c5be0fc713882e9b85303b62d3f1ac8/copy_4.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/3a65756e817610ddf75769c89145eb84/copy_5.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/84eaddd1db3e444b25d1ce0066f19581/copy_6.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/ca3a74c08dd2aabcba392de64cd04ed6/copy_7.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/c56cba1039292819dd6d700d5d8f5d07/copy_8.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/5b6c3ea3e1a28d1c3060f835ad206e99/copy_9.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/94fec99404e921d7a1de47c30a4e5afa/copy_10.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/daabebf1b3ade5afb890dbc79ce3b9eb/copy_11.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/7c2328f811865365b3c50d0fc23849fc/copy_12.png',
+];
+
+const backPage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/6cb104f946c85403b742cc07fd6e63b1/back.jpg';
+
 function GenerateMawb({
 	taskItem = {},
 	formData = {},
@@ -62,21 +80,20 @@ function GenerateMawb({
 
 	const [saveDocument, setSaveDocument] = useState(false);
 
+	const [whiteout, setWhiteout] = useState(false);
+
 	const handleClick = () => {
-		if (edit) {
-			setEdit(false);
-		}
 		if (back) {
 			setBack(!back);
 		}
 	};
 
-	const takeScreenShot = async (node) => {
+	const takeImageScreenShot = async (node) => {
 		const dataURI = await htmlToImage.toJpeg(node);
 		return dataURI;
 	};
 
-	const downloadScreenshot = () => takeScreenShot(document.getElementById('mawb'));
+	const downloadScreenshot = () => takeImageScreenShot(document.getElementById('mawb'));
 
 	const handleSave = async () => {
 		const newImage = await downloadScreenshot();
@@ -123,21 +140,38 @@ function GenerateMawb({
 		setSaveDocument(false);
 	};
 
-	const getImage = (item) => {
-		document.getElementById('footer').innerHTML = `${item}`;
-		return takeScreenShot(document.getElementById('mawb'));
-	};
-
-	const handleView = async () => {
+	const handleView = (download24) => {
 		if (taskItem.documentState === 'document_accepted') {
-			const a = footerValues.map((item) => async () => {
-				const newImage = await getImage(item);
-				saveAs(newImage, item);
+			html2canvas(document.getElementById('mawb')).then((canvas) => {
+				const imgData = canvas.toDataURL('image/jpeg');
+				const pdf = new JsPDF();
+				const pdfWidth = pdf.internal.pageSize.getWidth();
+				const pdfHeight = pdf.internal.pageSize.getHeight();
+				footerImages.forEach((item, i) => {
+					pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+					if (!whiteout) {
+						pdf.addImage(item, 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
+					}
+
+					if (download24) {
+						pdf.addPage();
+						pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+					}
+					if (i < 11) {
+						pdf.addPage();
+					}
+				});
+				pdf.save(taskItem.awbNumber);
 			});
-			await a.map((i) => i());
 		} else {
-			const newImage = await takeScreenShot(document.getElementById('mawb'));
-			saveAs(newImage, 'ORIGINAL 1 (FOR ISSUING CARRIER)');
+			html2canvas(document.getElementById('mawb')).then((canvas) => {
+				const imgData = canvas.toDataURL('image/jpeg');
+				const pdf = new JsPDF();
+				const pdfWidth = pdf.internal.pageSize.getWidth();
+				const pdfHeight = pdf.internal.pageSize.getHeight();
+				pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+				pdf.save(taskItem.awbNumber);
+			});
 		}
 		setSaveDocument(false);
 	};
@@ -166,12 +200,31 @@ function GenerateMawb({
 				<div
 					className={styles.download_button_div}
 				>
-					<div style={{ marginRight: '36px' }}>
+					<div style={{ marginRight: '36px', display: 'flex', alignItems: 'center' }}>
+						{taskItem.documentState === 'document_accepted' && (
+							<div className={styles.flex} style={{ alignItems: 'center', margin: '0 8px' }}>
+								<Checkbox
+									label="Whiteout"
+									value={whiteout}
+									onChange={() => setWhiteout((p) => !p)}
+								/>
+								<Button
+									className="primary md"
+									onClick={() => {
+										setSaveDocument(true);
+										handleView(true);
+									}}
+									disabled={saveDocument || whiteout}
+								>
+									Download 12 Copies with T&C
+								</Button>
+							</div>
+						)}
 						<Button
 							className="primary md"
 							onClick={() => {
 								setSaveDocument(true);
-								handleView();
+								handleView(false);
 							}}
 							disabled={saveDocument}
 						>
@@ -188,7 +241,8 @@ function GenerateMawb({
 				style={{
 					flex       : '1',
 					width      : '100%',
-					padding    : '40px 12px',
+					height     : '100%',
+					padding    : '40px 40px',
 					opacity    : 1,
 					background : '#fff',
 				}}
@@ -199,21 +253,24 @@ function GenerateMawb({
 					<ShipperConsigneeDetails
 						formData={filteredData}
 						taskItem={taskItem}
+						whiteout={whiteout}
 					/>
 					<ShipmentDetails
 						formData={filteredData}
 						taskItem={taskItem}
+						whiteout={whiteout}
 					/>
 					<ContainerDetails
 						formData={filteredData}
-						taskItem={taskItem}
 						chargeableWeight={chargeableWeight}
+						whiteout={whiteout}
 					/>
 					<ChargeDetails
 						taskItem={taskItem}
 						footerValues={footerValues}
 						formData={filteredData}
 						data={data}
+						whiteout={whiteout}
 					/>
 				</div>
 			</div>

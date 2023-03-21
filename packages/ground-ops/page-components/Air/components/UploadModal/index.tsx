@@ -5,6 +5,7 @@ import React from 'react';
 
 import Layout from '../../commons/Layout';
 import useCreateShipmentDocument from '../../hooks/useCreateShipmentDocument';
+import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
 
 import styles from './styles.module.css';
 
@@ -35,9 +36,10 @@ const controls = [
 		rules      : { required: true },
 	},
 ];
-function UploadModal({ showUpload, setShowUpload, listAPi }) {
+function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
 	const { control, handleSubmit, formState: { errors } } = useForm();
 	const { loading, createDocument } = useCreateShipmentDocument();
+	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();
 	const onSubmit = (formValues) => {
 		const fileArr = formValues.document.split('/');
 		const payload = {
@@ -75,7 +77,12 @@ function UploadModal({ showUpload, setShowUpload, listAPi }) {
 				},
 			],
 		};
-		createDocument(payload, listAPi);
+		if (edit) {
+			updateDocument(payload, listAPi);
+			setEdit(false);
+		} else {
+			createDocument(payload, listAPi);
+		}
 		setShowUpload(null);
 	};
 	return (
@@ -93,7 +100,7 @@ function UploadModal({ showUpload, setShowUpload, listAPi }) {
 					<Button
 						style={{ margin: '20px 0 0 auto' }}
 						onClick={handleSubmit(onSubmit)}
-						disabled={loading}
+						disabled={loading || updateLoading}
 						themeType="accent"
 					>
 						Upload

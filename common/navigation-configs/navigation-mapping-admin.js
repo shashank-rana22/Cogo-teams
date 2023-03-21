@@ -1785,9 +1785,9 @@ const navigationMappingAdmin = {
 	},
 	ground_ops: {
 		key           : 'ground_ops',
-		title         : 'Ground Ops Dashboard',
-		href          : '/ground-ops',
-		as            : '/ground-ops',
+		title         : 'SO2 - Docs Dashboard',
+		href          : '/v2/ground-ops',
+		as            : '/v2/ground-ops',
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
 		possible_apis : apis.ground_ops,
@@ -2042,7 +2042,7 @@ const navigationMappingAdmin = {
 		options     : [
 			{
 				key           : 'analytics_dashboard-management',
-				title         : 'Analytics Dashboard Management',
+				title         : 'Dashboard Management',
 				href          : '/analytics-dashboard-management',
 				as            : '/analytics-dashboard-management',
 				type          : 'link',
@@ -2051,7 +2051,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'analytics_dashboard-view',
-				title         : 'Analytics Dashboard',
+				title         : 'Dashboard',
 				href          : '/analytics-dashboard',
 				as            : '/analytics-dashboard',
 				type          : 'link',
