@@ -50,7 +50,6 @@ function List({
 		showIp,
 	});
 
-	console.log('item in List ', item);
 	return (
 		<div className={styles.container}>
 			<div className={styles.not_added}>
