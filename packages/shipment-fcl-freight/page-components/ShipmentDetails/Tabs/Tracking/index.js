@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
+import useGetSaasContainerSubscription from '../../../../hooks/useGetSaasContainerSubscription';
+
 import Body from './Body';
 import Header from './Header';
-import useGetSaasContainerSubscription from './hooks/useGetSaasContainerSubscription';
 import styles from './styles.module.css';
 
 function Tracking({ shipment_data = {} }) {

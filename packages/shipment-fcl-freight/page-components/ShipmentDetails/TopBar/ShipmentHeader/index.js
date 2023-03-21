@@ -2,12 +2,14 @@ import { Button, Tooltip, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import React, { useContext, useState } from 'react';
-import CancelShipment from './CancelShipment';
+
 import CargoDetails from '../../../../common/CargoDetails';
-import RequestCancellation from './RequestCancellation';
+
 import AddPoNumber from './AddPoNumber';
+import CancelShipment from './CancelShipment';
 import Loader from './Loader';
 import PortDetails from './PortDetails';
+import RequestCancellation from './RequestCancellation';
 import styles from './styles.module.css';
 
 function ShipmentHeader() {
@@ -17,30 +19,29 @@ function ShipmentHeader() {
 
 	const { po_number, importer_exporter } = shipment_data || {};
 
-	// const renderContent = () => {
-	// 	// if (isIE && !isRequested) {
-	// 		// return (
-	// 		// 	<RequestCancellation
-	// 		// 		showCancel={showCancel}
-	// 		// 		setShowCancel={setShowCancel}
-	// 		// 		onClose={() => setShow(false)}
-	// 		// 		refetch={refetch}
-	// 		// 	/>
-	// 		// );
-	// 	// }
+	const renderContent = () => {
+		// if (isIE && !isRequested) {
+		if (false) {
+			return (
+				<RequestCancellation
+					showCancel={showCancel}
+					setShowCancel={setShowCancel}
+					onClose={() => setShow(false)}
+					refetch={refetch}
+				/>
+			);
+		}
 
-	// 	return (
-	// 		<CancelShipment
-	// 			id={shipment_data?.id}
-	// 			showCancel={showCancel}
-	// 			setShowCancel={setShowCancel}
-	// 			onClose={() => setShow(false)}
-	// 			setShow={setShow}
-	// 			// isIE={isIE}
-	// 			// showRequest={showRequest}
-	// 		/>
-	// 	);
-	// };
+		return (
+			<CancelShipment
+				id={shipment_data?.id}
+				showCancel={showCancel}
+				setShowCancel={setShowCancel}
+				onClose={() => setShow(false)}
+				setShow={setShow}
+			/>
+		);
+	};
 
 	const handlePoNo = () => {
 		if (po_number) {
@@ -75,7 +76,7 @@ function ShipmentHeader() {
 			<div className={styles.customer}>
 				<Tooltip
 					theme="light"
-					placement="right"
+					placement="bottom"
 					maxWidth="none"
 					content={(
 						<div style={{ fontSize: '10px' }}>
@@ -83,7 +84,7 @@ function ShipmentHeader() {
 						</div>
 					)}
 				>
-					<div>{importer_exporter?.business_name}</div>
+					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
 				</Tooltip>
 				<div>
 					{handlePoNo()}
@@ -96,23 +97,22 @@ function ShipmentHeader() {
 				primary_service={primary_service}
 			/>
 
-<Popover
-								interactive
-								placement="bottom"
-								theme="light"
-								trigger="click"
-								content='Cancel Shipment'
-							>
-								<div className={styles.dots}>
-									<IcMOverflowDot />
-								</div>
-							</Popover>
+			<Popover
+				interactive
+				placement="bottom"
+				theme="light"
+				trigger="click"
+				content={renderContent()}
+			>
+				<div className={styles.dots}>
+					<IcMOverflowDot />
+				</div>
+			</Popover>
 
 			{/* <Cancellation /> */}
 			{show ? (
 				<AddPoNumber show={show} setShow={setShow} shipment_data={shipment_data} refetch={refetch} />
 			) : null}
-
 
 		</div>
 

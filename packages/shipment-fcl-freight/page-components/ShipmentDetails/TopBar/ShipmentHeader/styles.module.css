@@ -17,7 +17,7 @@
 
 .customer {
   border-right: 1px solid #e0e0e0;
-  width: 18%;
+  width: 25%;
 }
 
 .port_details {
@@ -26,6 +26,14 @@
   width: 60%;
   border-right: 1px solid #e0e0e0;
   margin-right: 30px;
+}
+
+.business_name{
+  width: fit-content;
+  max-width: 150px;
+  text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .dots{
