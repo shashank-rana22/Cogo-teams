@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 function CreateMastery(props) {
 	const {
 		setToggleScreen,
-		badgeList = {},
 		masteryItemData = {},
 		listRefetch,
 	} = props;
@@ -34,17 +33,6 @@ function CreateMastery(props) {
 		handleSubmit,
 		formState: { errors },
 	} = formProps;
-
-	// ! To be removed when we get api
-	const badge_options = [];
-	(badgeList || {}).forEach((badge_data) => {
-		if (badge_data.expertise_configuration_type === 'event_configuration') {
-			badge_options.push({
-				value : badge_data.id,
-				label : badge_data.badge_name,
-			});
-		}
-	});
 
 	return (
 		<div>
@@ -93,7 +81,6 @@ function CreateMastery(props) {
 											(!isEmpty(masteryItemData) && ele.name === 'badges')
 											|| (loading)
 										}
-										options={!isEmpty(badgeList) ? badge_options : ele.options}
 									/>
 
 									<div className={styles.error_message}>
