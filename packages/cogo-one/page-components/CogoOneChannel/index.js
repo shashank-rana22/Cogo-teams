@@ -39,6 +39,7 @@ function CogoOne() {
 	const [showDialModal, setShowDialModal] = useState(false);
 	const [activeMail, setActiveMail] = useState({});
 
+	const [modalType, setModalType] = useState({ type: null, data: {} });
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 	const firestore = getFirestore(app);
@@ -66,11 +67,13 @@ function CogoOne() {
 		activeCardId,
 		firstLoading,
 		updateLeaduser,
+		handleScroll,
 	} = useListChats({
 		firestore,
 		userId,
 		isomniChannelAdmin,
 		showBotMessages,
+		searchValue,
 	});
 	const { messagesList = [], unReadChatsCount } = listData;
 
@@ -158,6 +161,9 @@ function CogoOne() {
 				activeMail={activeMail}
 				setActiveMail={setActiveMail}
 				userId={userId}
+				handleScroll={handleScroll}
+				setModalType={setModalType}
+				modalType={modalType}
 			/>
 
 			<div className={styles.chat_details_continer}>
