@@ -11,4 +11,5 @@ export interface FilterInterface {
 	query?:string
 	date?:string
 	profitPercent?:string
+	page?:number,
 }

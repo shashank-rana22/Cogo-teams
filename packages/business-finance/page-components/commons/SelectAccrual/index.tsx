@@ -10,7 +10,7 @@ function SelectAccrual({ value, placeholder, setFilters }) {
 						<ButtonIcon
 							size="md"
 							icon={<IcMDelete />}
-							onClick={() => { setFilters({ value: '' }); }}
+							onClick={() => { setFilters((prev) => ({ ...prev, service: '', tradeType: '' })); }}
 							disabled={false}
 							themeType="primary"
 						/>

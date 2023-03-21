@@ -1,6 +1,6 @@
-import { Button, Chips, Popover, Datepicker, Select, Tooltip } from '@cogoport/components';
+import { SingleDateRange, Button, Chips, Popover, Select, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
 import { FilterInterface } from '../../interface';
@@ -15,10 +15,18 @@ interface CardInterface {
 	filters:FilterInterface
 	shipmentLoading?:boolean
 	setFilters: React.Dispatch<React.SetStateAction<FilterInterface>>
+	setViewSelected: React.Dispatch<React.SetStateAction<boolean>>
+	setShowBtn: React.Dispatch<React.SetStateAction<boolean>>
+	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
+	setPayload: React.Dispatch<React.SetStateAction<any[]>>
 }
 
-function Card({ refetch, filters, setFilters, shipmentLoading }:CardInterface) {
+function Card({
+	refetch, filters, setFilters, shipmentLoading, setViewSelected,
+	setShowBtn, setCheckedRows, setPayload,
+}:CardInterface) {
 	const [selectFilter, setSelectFilter] = useState(false);
+
 	const [moreFilter, setMoreFilter] = useState(false);
 	const [profitNumber, setProfitNumber] = useState('');
 
@@ -26,6 +34,27 @@ function Card({ refetch, filters, setFilters, shipmentLoading }:CardInterface) {
 		setFilters((prev) => ({ ...prev, service: val }));
 		setSelectFilter(false);
 	};
+
+	useEffect(() => {
+		let count = 0;
+		Object.values(filters).forEach((e) => {
+			if (e !== undefined) {
+				count += 1;
+			}
+		});
+
+		if (count > 2) {
+			setShowBtn(true);
+		} else {
+			setShowBtn(false);
+		}
+
+		Object.keys(filters).forEach((key) => {
+			if (key === 'month' && filters[key] === undefined) {
+				setViewSelected(true);
+			} else if (key === 'year' && filters[key] === undefined) { setViewSelected(true); }
+		});
+	}, [filters, setShowBtn, setViewSelected]);
 
 	const content = () => (
 		<div className={styles.content_container}>
@@ -56,6 +85,15 @@ function Card({ refetch, filters, setFilters, shipmentLoading }:CardInterface) {
 		/>
 	);
 	const rest = { onClickOutside: () => { setSelectFilter(false); } };
+
+	const onSubmit = () => {
+		setPayload([]);
+		setCheckedRows({});
+		setFilters((prev) => ({ ...prev, page: 1 }));
+		setViewSelected(false);
+
+		if (filters.page === 1) refetch();
+	};
 	return (
 		<div className={styles.container}>
 			<div>
@@ -106,11 +144,11 @@ function Card({ refetch, filters, setFilters, shipmentLoading }:CardInterface) {
 				</div>
 				<div className={styles.hr} />
 				<div className={styles.date_range}>
-					<Datepicker
+					<SingleDateRange
 						placeholder="Date"
 						dateFormat="MM/dd/yyyy"
 						name="date"
-						onChange={(val:string) => { setFilters((prev) => ({ ...prev, date: val })); }}
+						onChange={(val:any) => { setFilters((prev) => ({ ...prev, date: val })); }}
 						value={filters?.date}
 					/>
 				</div>
@@ -179,7 +217,7 @@ function Card({ refetch, filters, setFilters, shipmentLoading }:CardInterface) {
 
 					</Button>
 				</Popover>
-				<Button size="lg" onClick={() => { refetch(); }} loading={shipmentLoading}> Apply</Button>
+				<Button size="lg" onClick={() => { onSubmit(); }} loading={shipmentLoading}> Apply</Button>
 
 			</div>
 

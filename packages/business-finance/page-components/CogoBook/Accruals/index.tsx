@@ -33,11 +33,6 @@ function Accruals() {
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
 	const handleChange = (view:string) => {
 		setSubActiveTab(view);
-
-		push(
-			'/business-finance/cogo-book/[active_tab]/[view]',
-			`/business-finance/cogo-book/accruals/${view}`,
-		);
 	};
 	useEffect(() => {
 		push(

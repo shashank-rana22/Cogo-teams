@@ -81,3 +81,23 @@
   gap: 30px;
   margin-top: 40px;
 }
+.job_number {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+.job_number_data {
+  font-weight: 600;
+  text-decoration: underline;
+}
+.flex_jobs {
+  display: flex;
+  gap: 8px;
+}
+.purchase {
+  font-weight: 600;
+  font-size: 16px;
+}
+.header_checkbox {
+  padding-left: 4px;
+}
