@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import QnA from './QnA';
+
 function TestResult() {
 	const {
 		profile: { user: { id: user_id } },
@@ -16,8 +18,9 @@ function TestResult() {
 		},
 	}, { manual: false });
 
-	console.log(data, 'data');
-	return null;
+	return (
+		<QnA />
+	);
 }
 
 export default TestResult;
