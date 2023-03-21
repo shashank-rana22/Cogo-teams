@@ -194,8 +194,8 @@
 }
 
 .list_container {
-	max-height: 34rem;
-	overflow-y: scroll;
+	height: 80%;
+	overflow-y: auto;
 }
 
 .list_container::-webkit-scrollbar {
