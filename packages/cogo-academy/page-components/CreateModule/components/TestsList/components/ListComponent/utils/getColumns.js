@@ -1,5 +1,5 @@
 import { Pill, Button, Tooltip } from '@cogoport/components';
-import { IcMOverflowDot, IcMDelete, IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
+import { IcMShare, IcMOverflowDot, IcMDelete, IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
@@ -209,8 +209,34 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 		{
 			Header   : 'STATUS',
 			id       : 'tags',
-			accessor : ({ status = '' }) => (
-				<section>{status}</section>
+			accessor : ({ status = '', id = '' }) => (
+				status === 'active' ? (
+					<section>
+						<Pill size="sm" color="green">{startCase(status)}</Pill>
+						<Link href={`/learning/tests/${id}`}>
+							<Pill
+								key={status}
+								size="sm"
+								prefix={<IcMShare />}
+								color="#FEF3E9"
+								style={{ cursor: 'pointer' }}
+							>
+								Share Test Link
+							</Pill>
+						</Link>
+					</section>
+				)
+					: (
+						<section>
+							<Pill
+								key={status}
+								size="sm"
+								color="yellow"
+							>
+								{startCase(status)}
+							</Pill>
+						</section>
+					)
 			),
 		},
 		{

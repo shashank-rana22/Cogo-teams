@@ -25,13 +25,13 @@ function useUpdateTest() {
 
 				const set_wise_distribution = Object.entries(values)
 					.filter(
-						(item) => ![
+						([key]) => ![
 							'test_duration',
 							'cut_off_marks',
 							'maximum_attempts',
 							'name',
 							'test_validity',
-						].includes(item),
+						].includes(key),
 					)
 					.map(([key, value]) => {
 						const question_type = key.slice(-1) === 'q' ? 'stand_alone' : 'case_study';

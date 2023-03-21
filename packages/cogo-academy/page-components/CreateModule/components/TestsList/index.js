@@ -7,8 +7,8 @@ import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
 import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
 
-function TestsList() {
-	const [activeTab, setActiveTab] = useState('tests');
+function TestsList({ activeTab, setActiveTab }) {
+	// const [activeTab, setActiveTab] = useState('tests');
 
 	const { data, loading, fetchList, setParams, params } = useGetTestList();
 
