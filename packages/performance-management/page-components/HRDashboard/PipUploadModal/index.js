@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function PipUloadModal({ setOpenUploadModal = () => {} }) {
 	const [files, setFiles] = useState({});
-	const [type, setType] = useState('PIP');
+	const [type, setType] = useState('');
 
 	// const [{ loading : uploadLoading = false }, trigger] = useIrisRequest({
 	// 	url    : 'post_iris_approve_ratings',
@@ -101,7 +101,6 @@ function PipUloadModal({ setOpenUploadModal = () => {} }) {
 								style={{ width: '120px' }}
 							>
 								PIP
-
 							</Button>
 						</div>
 					</div>
