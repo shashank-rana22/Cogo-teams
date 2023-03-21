@@ -1,12 +1,13 @@
 .date_range_container {
+	z-index: 1000000;
 	display: flex;
 	width: fit-content;
 	padding: 5px 16px 2px 10rem;
-  z-index: 1000000;
+
 	input {
+		z-index: 1000000;
 		height: 32px !important;
 		border: solid 1px #e0e0e0 !important;
-    z-index: 1000000;
 	}
 }
 
@@ -32,11 +33,11 @@
 
 	:global {
 		.ui_select_display_container {
+			z-index: 1000000;
 			width: 15rem;
 			height: 30px !important;
 			margin-top: 2%;
 			border-radius: 6px;
-      z-index: 1000000;
 		}
 
 		.ui_select_options_container {
@@ -44,14 +45,14 @@
 		}
 
 		.ui_select_input_placeholder {
+			z-index: 1000000;
 			color: #828282;
-      z-index: 1000000;
 		}
 	}
 }
 
 .date_container {
+	z-index: 1000000;
 	display: flex;
 	align-items: center;
-  z-index: 1000000;
 }

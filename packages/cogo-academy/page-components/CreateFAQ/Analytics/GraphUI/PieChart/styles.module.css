@@ -9,7 +9,7 @@
 	cursor: pointer;
 }
 
-.Carousel_data_container {
+.carousel_data_container {
 	height: 100%;
 
 	:global {
