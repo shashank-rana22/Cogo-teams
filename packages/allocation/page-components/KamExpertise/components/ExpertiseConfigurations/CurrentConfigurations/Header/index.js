@@ -25,9 +25,7 @@ const CREATE_CONFIGURATION_MAPPING = {
 	[INITIAL_MODE]      : CreateModal,
 };
 
-function Header({ setSelectedVersion, selectedVersion, audit_data, version_details, data = [] }) {
-	console.log('data in header', audit_data);
-
+function Header({ setSelectedVersion, selectedVersion, audit_data = {}, LIVE_VERSION, data = [] }) {
 	const [mode, setMode] = useState('initial-mode');
 	const [showModal, setShowModal] = useState(false);
 
@@ -35,7 +33,6 @@ function Header({ setSelectedVersion, selectedVersion, audit_data, version_detai
 		[PUBLISHED_VERSION]: {
 			selectedVersion,
 			setSelectedVersion,
-			version_details,
 			data,
 		},
 		[SAVED_DRAFT]: {
@@ -67,7 +64,7 @@ function Header({ setSelectedVersion, selectedVersion, audit_data, version_detai
 					<strong>
 						Version
 						{' '}
-						{audit_data?.version || '--'}
+						{LIVE_VERSION || '--'}
 					</strong>
 				</div>
 
