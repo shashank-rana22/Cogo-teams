@@ -1,6 +1,6 @@
 import { IcMAgentManagement, IcMTradeparties, IcMBreakBulkCargoType, IcMMiscellaneous } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
 import useGetKamExpertiseDashboard from '../../../hooks/useGetKamExpertiseDashboard';
@@ -41,18 +41,17 @@ const overview_data = [
 
 function KamData(props) {
 	const { date_params = {} } = props;
-	const [kamLevel, setKamLevel] = useState();
+	const [kamLevel, setKamLevel] = useState(0);
 
 	const {
-		loading = false,
-		dashboardData = [],
+		loading,
+		dashboardData,
 	} = useGetKamExpertiseDashboard(date_params);
 
 	const {
 		setParams = () => {},
 		leaderboardLoading = false,
 		leaderboardList = [],
-		// listRefetch = () => {},
 		searchKAM,
 		setSearchKAM,
 		badgeName,
@@ -63,49 +62,43 @@ function KamData(props) {
 	} = useGetKamExpertiseStatsList();
 
 	useEffect(() => {
-		setKamLevel();
+		setKamLevel(0);
 	}, [date_params]);
 
-	const { list = [] } = dashboardData || {};
+	const { list } = dashboardData || {};
 
 	if (loading) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.cards}>
-					{
-							Array(4).fill('').map(() => (
-								<KamLevelScoreCard loading={loading} />
-							))
-						}
-				</div>
+			<div className={styles.cards}>
+				{[1, 2, 3, 4].map((item) => (
+					<KamLevelScoreCard key={item} loading={loading} />
+				))}
 			</div>
+
 		);
 	}
 
 	if (isEmpty(list)) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.empty_kam}>
-					<EmptyState
-						height={250}
-						width={450}
-						flexDirection="column"
-						textSize={20}
-					/>
-				</div>
+			<div className={styles.empty_kam}>
+				<EmptyState
+					height={250}
+					width={450}
+					flexDirection="column"
+					textSize={20}
+				/>
 			</div>
 		);
 	}
 
 	return (
-		<div className={styles.container}>
-
+		<div>
 			<div className={styles.cards}>
 				{
 					list.map((list_data, index_lvl) => (
 						<KamLevelScoreCard
 							index_lvl={index_lvl}
-							list_data={list_data}
+							list_data={list_data} // casing
 							setKamLevel={setKamLevel}
 							date_params={date_params}
 							setParams={setParams}
@@ -130,8 +123,8 @@ function KamData(props) {
 							}
 						</div>
 					</div>
-					<div className={styles.leaderboard_container}>
 
+					<div className={styles.leaderboard_container}>
 						<BadgeFilterHeader
 							leaderboardLoading={leaderboardLoading}
 							searchKAM={searchKAM}
@@ -147,7 +140,6 @@ function KamData(props) {
 							paginationData={paginationData}
 							getNextPage={getNextPage}
 						/>
-
 					</div>
 				</>
 			)}
