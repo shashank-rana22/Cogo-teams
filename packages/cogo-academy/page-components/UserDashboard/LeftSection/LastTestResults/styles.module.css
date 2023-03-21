@@ -29,8 +29,8 @@
 
 .stats {
 	display: flex;
-	justify-content: space-between;
 	align-items: flex-end;
+	justify-content: space-between;
 }
 
 .sub_text {
