@@ -9,6 +9,7 @@ function Ongoing({ testData }) {
 	const [currentQuestion, setCurrentQuestion] = useState(1);
 
 	const { loading, data } = useFetchQuestionsList({ currentQuestion });
+
 	return ((
 		<div className={styles.main_container}>
 			<div className={styles.left_container}>
