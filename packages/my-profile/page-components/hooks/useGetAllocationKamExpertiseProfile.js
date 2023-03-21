@@ -15,7 +15,7 @@ function useGetAllocationKamExpertiseProfile(partner_user_id) {
 
 	return {
 		listLoading : loading,
-		badgeList   : data,
+		userBadges  : data,
 	};
 }
 

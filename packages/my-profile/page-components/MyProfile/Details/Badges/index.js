@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Badges({ badgeList = {} }) {
+function Badges({ userBadges }) {
 	const {
 		profile: { partner = {} },
 	} = useSelector((state) => state);
@@ -15,7 +15,7 @@ function Badges({ badgeList = {} }) {
 
 	const router = useRouter();
 
-	const { badges_got = [], badges_not_got = [] } = badgeList || {};
+	const { badges_got = [], badges_not_got = [] } = userBadges || {};
 
 	let max_badges = 0;
 
@@ -26,6 +26,7 @@ function Badges({ badgeList = {} }) {
 	const handleClick = () => {
 		if (partner_user_id) {
 			router.push(
+			// '/badges',
 				'/badges/[user_id]/?path=/my-profile',
 				`/badges/${partner_user_id}/?path=/my-profile`,
 			);
@@ -44,6 +45,7 @@ function Badges({ badgeList = {} }) {
 					<b>Select Badges To Preview</b>
 				</Button>
 			</div>
+
 			<div className={styles.content}>
 
 				<div className={styles.badge_list}>

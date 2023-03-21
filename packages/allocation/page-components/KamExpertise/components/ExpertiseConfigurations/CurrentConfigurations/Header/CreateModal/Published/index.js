@@ -5,6 +5,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function Published({ setSelectedVersion = () => {}, version_details }) {
+	console.log('ver', version_details);
 	const data = [];
 	Object.keys(version_details).forEach((key) => {
 		if (key !== '') {
