@@ -6,6 +6,7 @@
 
 .heading {
 	padding: 14px 0;
+	padding: 14px 0;
 
 	/* font-family: Poppins; */
 	font-size: 14px;
@@ -28,9 +29,16 @@
 }
 
 .sort {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	margin-top: 10px;
 	margin-right: 10px;
 	margin-bottom: 10px;
+}
+
+.sort:hover {
+	cursor: pointer;
 }
 
 .tabs_container {

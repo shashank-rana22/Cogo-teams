@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Completion from './Completion';
 import Introduction from './Introduction';
@@ -22,7 +22,14 @@ const COMPONENT_MAPPING = {
 };
 
 function TakeTest() {
-	const { profile: { user: { id: user_id } }, general: { query: { test_id } } } = useSelector((state) => state);
+	const {
+		profile: {
+			user: { id: user_id },
+		},
+		general: {
+			query: { test_id },
+		},
+	} = useSelector((state) => state);
 
 	const [{ data: testData, loading }] = useRequest({
 		method : 'GET',
@@ -32,15 +39,21 @@ function TakeTest() {
 		},
 	}, { manual: false });
 
-	const { test_user_mapping_state } = testData || {};
+	const { test_user_mapping_state = 'introduction' } = testData || {};
 
-	const [activeState, setActiveState] = useState(COMPONENT_MAPPING[test_user_mapping_state] || 'introduction');
+	const [activeState, setActiveState] = useState('');
 
-	const Component = COMPONENT_MAPPING[activeState].component;
+	useEffect(() => {
+		setActiveState(test_user_mapping_state);
+	}, [setActiveState, test_user_mapping_state]);
+
+	const Component = COMPONENT_MAPPING[activeState]?.component;
+
+	if (loading) {
+		return 'loading';
+	}
 
 	return (
-	// <Introduction />
-		// <Completion />
 		<Component setActiveState={setActiveState} loading={loading} testData={testData} />
 	);
 }
