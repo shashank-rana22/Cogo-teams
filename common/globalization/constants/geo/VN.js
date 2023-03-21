@@ -9,8 +9,7 @@ export default {
 			code   : 'VND',
 			symbol : '₫',
 		},
-		mobile_country_code : '+84',
-		mobile_length       : 10,
+		mobile_country_code: '+84',
 	},
 	formats: {
 		amount: {
@@ -116,9 +115,6 @@ export default {
 			'95d62549-8ab6-4ee5-a655-9edd0ec46dac', // Purnendu Shekhar
 			'cd8dde11-678c-4467-85b2-2e2d6055bef4', // Amitabh Shankar
 		],
-		vietnam_business_heads: [
-			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8', // Rishi Agarwal
-		],
 		prod_kam_cp           : 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
 		prod_es_sales         : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 		entity_manager_id     : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
@@ -169,11 +165,8 @@ export default {
 			'2acd7cb8-a986-45f3-8e14-391075d50daf',
 			'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		],
-		prod_coe_finance_head  : '7b1fc916-6984-4179-aee5-c23f9871085d',
-		finance_head_id        : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
-		cogoverse_executive_id : 'f23810d3-c6c0-4937-bf2e-2ad301dd708d',
-		cogoverse_kam_id       : 'f041b303-3239-42c5-a386-03e787900bcd',
-		cogoverse_admin_id     : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
+		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
+		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 	},
 	options: {
 		registration_types: [
