@@ -48,7 +48,7 @@ const useListChats = ({
 		}
 	};
 	useEffect(() => {
-		debounceQuery(searchValue?.toUpperCase());
+		debounceQuery(searchValue?.trim()?.toUpperCase());
 	}, [debounceQuery, searchValue]);
 	useEffect(() => {
 		if (assigned_chat) {
@@ -176,7 +176,7 @@ const useListChats = ({
 	};
 
 	const handleScroll = (e) => {
-		const reachBottom = e.target.scrollHeight - (e.target.clientHeight + e.target.scrollTop) <= 0;
+		const reachBottom = e.target.scrollHeight - (e.target.clientHeight + e.target.scrollTop) <= 150;
 		if (reachBottom && !listData?.isLastPage && !loading) {
 			getPrevChats();
 		}
