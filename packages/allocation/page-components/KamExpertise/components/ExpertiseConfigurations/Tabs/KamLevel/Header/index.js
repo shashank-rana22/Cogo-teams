@@ -60,13 +60,11 @@ function Header(props) {
 				</div>
 				<div className={styles.lower_details}>
 					<div className={styles.lower_info} style={{ marginRight: '8px' }}>
-
 						<div>
 							Last Modified
 							{' '}
 							:
 						</div>
-
 						<span>
 							{ (format(audit_data?.updated_at, 'dd-MM-YYYY') || '--')}
 						</span>
