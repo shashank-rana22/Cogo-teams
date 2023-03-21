@@ -112,6 +112,17 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
+			name        : 'airlineIataCode',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Airline IATA Code',
+			placeholder : 'Enter Airline IATA Code',
+			span        : 5,
+			rules       : {
+				required: 'Airline IATA Code is Required',
+			},
+		},
+		{
 			name        : 'paymentTerm',
 			type        : 'select',
 			className   : 'primary lg',
