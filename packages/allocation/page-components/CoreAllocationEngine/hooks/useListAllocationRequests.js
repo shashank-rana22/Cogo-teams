@@ -171,9 +171,18 @@ const useListAllocationRequests = () => {
 				? <Badge color="blue" size="lg" text={service.serial_id} /> : '___'),
 		},
 		{
-			key      : 'service_type',
+			key      : 'organization',
 			Header   : 'Organization',
-			accessor : ({ service }) => service?.business_name || '___',
+			accessor : ({ service }) => (
+				<Tooltip content={(
+					<div className={styles.tooltip_text}>
+						{service.business_name || null}
+					</div>
+				)}
+				>
+					<div className={styles.business_name}>{service?.business_name || '___'}</div>
+				</Tooltip>
+			),
 		},
 		{
 			key      : 'service_user',
@@ -189,6 +198,17 @@ const useListAllocationRequests = () => {
 			key      : 'stakeholder_type',
 			Header   : 'Stakeholder Type',
 			accessor : ({ stakeholder_type }) => startCase(stakeholder_type || '___'),
+		},
+		{
+			key      : 'previous_agent',
+			Header   : 'Previous Agent',
+			accessor : ({ old_stakeholder }) => (
+				<div>
+					{old_stakeholder?.name || '___'}
+					{' '}
+					<div className={styles.email_id}>{old_stakeholder?.email || '___'}</div>
+				</div>
+			),
 		},
 		{
 			key      : 'requested_agent',
