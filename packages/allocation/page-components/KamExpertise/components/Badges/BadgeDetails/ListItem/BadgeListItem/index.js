@@ -5,11 +5,27 @@ import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
 
 function BadgeListItem(props) {
-	const { data, index, setToggleScreen, setBadgeItemData, listRefetch } = props;
-	const { badge_details = [] } = data;
+	const { data = {}, index, setToggleScreen, setBadgeItemData, listRefetch } = props;
+	const { bronze_details = {}, silver_details = {}, gold_details = {} } = data;
+
 	const handleEdit = () => {
 		setBadgeItemData(data);
 		setToggleScreen('create_badge');
+	};
+
+	const MEDAL_DETAILS_MAPPING = {
+		bronze: {
+			name      : 'bronze',
+			detailObj : bronze_details,
+		},
+		silver: {
+			name      : 'silver',
+			detailObj : silver_details,
+		},
+		gold: {
+			name      : 'gold',
+			detailObj : gold_details,
+		},
 	};
 
 	return (
@@ -51,11 +67,14 @@ function BadgeListItem(props) {
 						<div style={{ paddingRight: '4px' }}>
 							Last Modified :
 							{' '}
-							{format(data.updated_at, 'yyyy-MMM-dd')}
+							{data.updated_at ? format(data.updated_at, 'yyyy-MMM-dd') : '___'}
 						</div>
 
-						{/* //! need from backend */}
-						{/* <div>Last Modified By :</div> */}
+						<div>
+							Last Modified By :
+							{' '}
+							{data.modified_by ? data.modified_by : '___'}
+						</div>
 					</div>
 				</div>
 
@@ -63,15 +82,18 @@ function BadgeListItem(props) {
 					<h3 style={{ color: '#4f4f4f' }}>Scores</h3>
 					<div className={styles.score_badge}>
 						{
-							badge_details.map((badge, i) => (
-								<BadgeCard
-									data={badge}
-									medal={startCase(badge.medal || '')}
-									badgeItemData={data}
-									isLast={i === badge_details.length - 1}
-									listRefetch={listRefetch}
-								/>
-							))
+							Object.values(MEDAL_DETAILS_MAPPING).map((item) => {
+								const { name = '', detailObj = {} } = item;
+								return (
+									<BadgeCard
+										data={{ ...detailObj }}
+										medal={startCase(name)}
+										badgeItemData={data}
+										isLast={name === 'gold'}
+										listRefetch={listRefetch}
+									/>
+								);
+							})
 						}
 					</div>
 				</div>

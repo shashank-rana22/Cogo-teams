@@ -28,8 +28,6 @@ function KamLevelScoreCard(props) {
 		}));
 	};
 
-	// console.log('index', index_lvl.toString());
-
 	if (loading) {
 		return (
 			<Card className={styles.card_item}>

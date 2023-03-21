@@ -37,14 +37,13 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 						<div>
 							Last Modified :
 							{' '}
-							{format(data.created_at, 'yyyy-MMM-dd')}
+							{data.created_at ? format(data.created_at, 'yyyy-MMM-dd') : '___'}
 						</div>
-						{/* //! needs changes */}
-						{/* <div>
+						<div>
 							Last Modified By:
 							{' '}
-							{data.last_modified_by}
-						</div> */}
+							{data.last_modified_by ? data.last_modified_by : '___'}
+						</div>
 					</div>
 				</div>
 

@@ -4,8 +4,11 @@ import { useState, useEffect } from 'react';
 
 function useGetKamExpertiseStatsList() {
 	const [searchKAM, setSearchKAM] = useState('');
+
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
-	const [badgeName, setBadgeName] = useState('');
+
+	const [badgeName, setBadgeName] = useState([]);
+
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
@@ -13,7 +16,7 @@ function useGetKamExpertiseStatsList() {
 			created_at_less_than    : '',
 			kam_expertise_level     : '',
 			name                    : searchQuery || undefined,
-			// badge : badgeName || undefined,
+			badge                   : badgeName || undefined,
 		},
 	}, { manual: false });
 
@@ -44,8 +47,6 @@ function useGetKamExpertiseStatsList() {
 
 	const { list = [], ...paginationData } = data || {};
 
-	// console.log('leaderboardList', leaderboardList);
-
 	return {
 		setParams,
 		leaderboardLoading : loading,
@@ -53,6 +54,7 @@ function useGetKamExpertiseStatsList() {
 		listRefetch        : refetch,
 		searchKAM,
 		setSearchKAM,
+		badgeName,
 		setBadgeName,
 		debounceQuery,
 		paginationData,

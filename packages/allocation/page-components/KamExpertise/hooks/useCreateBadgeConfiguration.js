@@ -13,7 +13,9 @@ function useCreateBadgeConfiguration(props) {
 	const {
 		badge_name,
 		description: badge_description,
-		badge_details:badgeDetails,
+		bronze_details,
+		silver_details,
+		gold_details,
 		expertise_configuration_detail_ids:event_ids,
 	} = badgeItemData;
 
@@ -22,9 +24,9 @@ function useCreateBadgeConfiguration(props) {
 			badge        : badge_name,
 			description  : badge_description,
 			condition    : event_ids,
-			Bronze_value : badgeDetails?.[0]?.score,
-			Silver_value : badgeDetails?.[1]?.score,
-			Gold_value   : badgeDetails?.[2]?.score,
+			Bronze_value : bronze_details?.score,
+			Silver_value : silver_details?.score,
+			Gold_value   : gold_details?.score,
 			// ToDo : image url -> handle using previous data
 		},
 	});
@@ -62,17 +64,17 @@ function useCreateBadgeConfiguration(props) {
 					badge_details                      : [
 						{
 							score     : Bronze_value,
-							image_url : Bronze_img_value || badgeDetails?.[0]?.image_url,
+							image_url : Bronze_img_value || bronze_details?.image_url,
 							medal     : 'bronze',
 						},
 						{
 							score     : Silver_value,
-							image_url : Silver_img_value || badgeDetails?.[1]?.image_url,
+							image_url : Silver_img_value || silver_details?.image_url,
 							medal     : 'silver',
 						},
 						{
 							score     : Gold_value,
-							image_url : Gold_img_value || badgeDetails?.[2]?.image_url,
+							image_url : Gold_img_value || gold_details?.image_url,
 							medal     : 'gold',
 						},
 					],
@@ -80,9 +82,9 @@ function useCreateBadgeConfiguration(props) {
 
 				if (!isEmpty(badgeItemData)) {
 					payload.id = badgeItemData.id;
-					payload.badge_details[0].badge_detail_id = badgeDetails?.[0]?.id;
-					payload.badge_details[1].badge_detail_id = badgeDetails?.[1]?.id;
-					payload.badge_details[2].badge_detail_id = badgeDetails?.[2]?.id;
+					payload.badge_details[0].badge_detail_id = bronze_details?.id;
+					payload.badge_details[1].badge_detail_id = silver_details?.id;
+					payload.badge_details[2].badge_detail_id = gold_details?.id;
 				}
 
 				await trigger({ data: payload });
