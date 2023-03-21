@@ -1,14 +1,17 @@
 import useGetAsyncOptionsMicroservice from '@cogoport/forms/hooks/useGetAsyncOptionsMicroservice';
 import { asyncFieldsExpertiseConfigurations } from '@cogoport/forms/utils/getAsyncFields';
 
-const useGetControls = ({ modifiedControls = [] }) => {
+const useGetControls = ({ modifiedControls = [], typeFilter }) => {
 	// const conditions = useGetAsyncOptionsMicroservice(asyncFieldsExpertiseConfigurations() || {});
 
 	const asyncControl = useGetAsyncOptionsMicroservice({
-		labelKey     : 'condition_name',
-		valueKey     : 'rule_mapping_id',
-		endpoint     : '/kam_expertise_event_configuration_name',
-		authkey      : 'get_allocation_kam_expertise_event_configuration_name',
+		labelKey : 'condition_name',
+		valueKey : 'rule_mapping_id',
+		endpoint : '/kam_expertise_event_configuration_name',
+		authkey  : 'get_allocation_kam_expertise_event_configuration_name',
+		params   : {
+			filters: { expertise_type: typeFilter },
+		},
 		microService : 'allocation',
 		initialCall  : false,
 	});
