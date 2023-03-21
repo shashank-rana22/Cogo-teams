@@ -10,14 +10,17 @@ function LeftSection({ data = [], currentQuestion, setCurrentQuestion, loading }
 
 	return (
 		<div className={styles.container}>
-			<Header />
+			<Header
+				datas={data}
+				total_question={data?.total_questions}
+			/>
 
 			<Body
 				data={data?.data?.[currentQuestion - 1]}
 				loading={loading}
 				currentQuestion={currentQuestion}
 				setCurrentQuestion={setCurrentQuestion}
-				total_question={data?.data?.length}
+				total_question={data?.total_questions}
 				answer={answer}
 				setAnswer={setAnswer}
 			/>

@@ -1,31 +1,41 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 
+import useFetchTest from './hooks/useFetchTest';
 import styles from './styles.module.css';
 
-const CONTENT_MAPPING = {
-	topics_covered: {
-		title : 'Topics Covered',
-		value : 'Enrichment, Shipments',
-		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/document-svg.svg',
-	},
-	number_of_questions: {
-		title : 'No. of questions',
-		value : '25',
-
-	},
-	duration: {
-		title : 'Duration',
-		value : '01:00 hr',
-		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg',
-	},
-};
-
 function Introduction({ setActiveState }) {
+	const { loading, data = {} } = useFetchTest();
+
+	const { set_data } = data || {};
+
+	const formatArrayValues = (items) => {
+		const formattedItem = items?.map((item) => item.topic);
+		return formattedItem?.join(',  ') || '';
+	};
+
+	const CONTENT_MAPPING = {
+		topics_covered: {
+			title : 'Topics Covered',
+			value : formatArrayValues(set_data),
+			icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/document-svg.svg',
+		},
+		number_of_questions: {
+			title : 'No. of questions',
+			value : `${data?.case_study_questions} Case Study Questions,
+					${data?.stand_alone_questions} Standalone Questions`,
+		},
+		duration: {
+			title : 'Duration',
+			value : `${data?.test_duration} min`,
+			icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg',
+		},
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
-				Shipment and Enrichment Test
+				{data?.name}
 			</div>
 
 			<div className={styles.content}>
@@ -38,7 +48,6 @@ function Introduction({ setActiveState }) {
 
 							<div className={styles.content_text}>
 								<div className={styles.label}>{title}</div>
-
 								<div className={styles.value}>{value}</div>
 							</div>
 						</div>
