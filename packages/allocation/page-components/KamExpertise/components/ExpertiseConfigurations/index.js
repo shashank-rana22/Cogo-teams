@@ -76,7 +76,12 @@ function ViewAllConfigs() {
 
 					</Button>
 
-					{showPublishModal && <PublishVersionModal setShowPublishModal={setShowPublishModal} />}
+					{showPublishModal && (
+						<PublishVersionModal
+							setShowPublishModal={setShowPublishModal}
+							showPublishModal={showPublishModal}
+						/>
+					)}
 				</div>
 			</section>
 		</section>

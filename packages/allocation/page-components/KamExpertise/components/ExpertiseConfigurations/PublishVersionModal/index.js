@@ -1,48 +1,64 @@
 import { Button, Modal } from '@cogoport/components';
 import React from 'react';
 
+import usePublishDraft from '../../../hooks/usePublishDraft';
+
 import styles from './styles.module.css';
 
-function PublishVersionModal({ setShowPublishModal = () => {} }) {
-	<Modal size="md" placement="center" closeOnOuterClick>
+function PublishVersionModal({ setShowPublishModal = () => {}, showPublishModal }) {
+	const { onCreate, loading: publishLoading } = usePublishDraft({ setShowPublishModal });
 
-		<Modal.Header title="Publish" />
+	return (
+		<Modal
+			size="md"
+			placement="center"
+			show={showPublishModal}
+			closeOnOuterClick
+			onClose={() => setShowPublishModal(false)}
+		>
 
-		<Modal.Body>
+			<Modal.Header title="Publish Draft" />
 
-			<div className={styles.text}>
-				Are you sure you wish to publish
-				{' '}
-				<b>Version 1</b>
-				{' '}
-				?
-			</div>
+			<Modal.Body>
 
-			<div className={styles.cards_container} />
+				<div className={styles.text}>
+					Are you sure you wish to publish
+					{' '}
+					<b>Current Draft</b>
+					{' '}
+					?
+				</div>
 
-		</Modal.Body>
+				<div className={styles.cards_container} />
 
-		<Modal.Footer>
-			<Button
-				type="button"
-				size="md"
-				themeType="tertiary"
-				style={{ marginRight: '10px' }}
-				onClick={() => setShowPublishModal(false)}
-			>
-				Cancel
-			</Button>
-			<Button
-				type="submit"
-				size="md"
-				themeType="primary"
-				// disabled={loading}
-			>
-				Save
-			</Button>
-		</Modal.Footer>
+			</Modal.Body>
 
-	</Modal>;
+			<Modal.Footer>
+				<Button
+					type="button"
+					size="md"
+					themeType="tertiary"
+					style={{ marginRight: '10px' }}
+					disabled={publishLoading}
+					onClick={() => setShowPublishModal(false)}
+				>
+					Cancel
+				</Button>
+
+				<Button
+					type="submit"
+					size="md"
+					themeType="primary"
+					onClick={() => onCreate()}
+					loading={publishLoading}
+				>
+					Save
+				</Button>
+
+			</Modal.Footer>
+
+		</Modal>
+	);
 }
 
 export default PublishVersionModal;
