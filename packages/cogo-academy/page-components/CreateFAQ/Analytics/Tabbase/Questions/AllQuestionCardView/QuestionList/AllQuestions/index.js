@@ -74,7 +74,7 @@ function AllQuestions(props) {
 	const columns = addedQuestionsColumns();
 	return (
 		<div className={styles.container}>
-			<div style={{ backgroundColor: 'white' }}>
+			<div>
 				<StyledTable columns={columns} layoutType="table" data={listdata} />
 				<Pagination
 					style={{ display: 'flex', justifyContent: 'flex-end' }}

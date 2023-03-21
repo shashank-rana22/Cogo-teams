@@ -3,6 +3,8 @@ import { Carousel } from '@cogoport/components';
 import ViewCards from '../ViewCards';
 import ViewCardsList from '../ViewCardsList';
 
+import styles from './styles.module.css';
+
 function ScrollBar({ props = {} }) {
 	const {
 		active_audiences = [],
@@ -16,7 +18,7 @@ function ScrollBar({ props = {} }) {
 		{
 			key    : 'item1',
 			render : () => (
-				<div style={{ display: 'flex', margin: '0 28px 0 40px' }}>
+				<div className={styles.content}>
 					<ViewCards
 						cardHeading="Topic from which Most Questions viewed"
 						subHeading={trending_topics}
@@ -41,7 +43,7 @@ function ScrollBar({ props = {} }) {
 		{
 			key    : 'item2',
 			render : () => (
-				<div style={{ display: 'flex', margin: '0 28px 0 40px' }}>
+				<div className={styles.content}>
 					<ViewCards
 						cardHeading="User group that viewed the Most Questions "
 						subHeading={active_audiences}
@@ -66,7 +68,7 @@ function ScrollBar({ props = {} }) {
 		{
 			key    : 'item3',
 			render : () => (
-				<div style={{ display: 'flex', margin: '0 28px 0 40px' }}>
+				<div className={styles.content}>
 					<ViewCardsList
 						state="Viewed_Question"
 						cardHeading="Top Viewed Questions"
@@ -92,7 +94,7 @@ function ScrollBar({ props = {} }) {
 		{
 			key    : 'item4',
 			render : () => (
-				<div style={{ display: 'flex', margin: '0 28px 0 40px' }}>
+				<div className={styles.content}>
 					<ViewCardsList
 						state="Liked_Question"
 						cardHeading="Top Liked Questions"
@@ -118,7 +120,7 @@ function ScrollBar({ props = {} }) {
 		{
 			key    : 'item5',
 			render : () => (
-				<div style={{ display: 'flex', margin: '0 28px 0 40px' }}>
+				<div className={styles.content}>
 					<ViewCards
 						cardHeading="Trending Tags"
 						subHeading={trending_tags}

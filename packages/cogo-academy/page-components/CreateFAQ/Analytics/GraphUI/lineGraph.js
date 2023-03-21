@@ -16,7 +16,7 @@ function LineGraph({ graphData }) {
 				type    : 'linear',
 				min     : 'auto',
 				max     : 'auto',
-				stacked : true,
+				stacked : false,
 				reverse : false,
 			}}
 			colors={{ datum: 'color' }}

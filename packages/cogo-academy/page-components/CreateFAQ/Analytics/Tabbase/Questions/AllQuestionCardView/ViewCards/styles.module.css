@@ -28,12 +28,11 @@
 }
 
 .right_stat_content {
-	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
 	margin-top: 5px;
-	margin-bottom: 12px;
+	margin-bottom: 1px;
 	font-size: 14px;
 	color: #828282;
 	text-align: center;
@@ -42,15 +41,16 @@
 .sub_heading {
 	display: flex;
 	justify-content: space-between;
-	margin-top: 12px;
+	margin-top: 14px;
 	font-size: 12px;
 	font-weight: 600;
 	color: #6fa5ab;
+  text-align: center;
 
 }
 
 .sub_heading_context {
 	font-size: 14px;
 	color: "#6FA5AB";
-  text-align: center;
+  
 }
