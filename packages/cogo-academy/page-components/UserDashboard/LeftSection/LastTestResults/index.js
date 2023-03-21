@@ -3,6 +3,7 @@ import { useSelector } from '@cogoport/store';
 import { startCase, format } from '@cogoport/utils';
 
 import QuestionWiseStats from '../../commons/QuestionWiseStats';
+import TestResultMessage from '../../commons/TestResultMessage';
 
 import GoToDetails from './GoToDetails';
 import Percentile from './Percentile';
@@ -11,8 +12,7 @@ import TopicWisePercentile from './TopicWisePercentile';
 
 function LastTestResults() {
 	const {
-		profile: { user: { id: user_id, name } },
-
+		profile: { user: { id: user_id } },
 	} = useSelector((state) => state);
 
 	const [{ data, loading }] = useRequest({
@@ -26,48 +26,19 @@ function LastTestResults() {
 
 	const stats_data = data?.data || {};
 
-	const { date, status, test_name, topic_wise_percentile } = stats_data || {};
-
-	const hasPassed = status === 'passed';
+	const { topic_wise_percentile } = stats_data || {};
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.message_container}>
-				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti.svg"
-					alt="confetti"
-					style={{ marginRight: 20 }}
-				/>
-
-				<div className={styles.column}>
-					<div className={styles.message_content} style={{ color: hasPassed ? '#849e4c' : '' }}>
-						{hasPassed ? 'Congratulations' : 'Alas!'}
-						<span className={styles.name}>
-							{name}
-							!
-						</span>
-					</div>
-
-					<div className={styles.sub_text}>
-						You have
-						{' '}
-						<b>{startCase(status)}</b>
-						{' '}
-						the
-						{' '}
-						<b>{test_name}</b>
-						{' '}
-						taken on
-						{' '}
-						{format(date, 'd MMM\' yyyy')}
-					</div>
-				</div>
-			</div>
+			<TestResultMessage stats_data={stats_data} />
 
 			<div className={styles.stats}>
 				<Percentile stats_data={stats_data} />
+
 				<TopicWisePercentile topic_wise_percentile={topic_wise_percentile} />
+
 				<QuestionWiseStats stats_data={stats_data} />
+
 				<GoToDetails />
 			</div>
 		</div>

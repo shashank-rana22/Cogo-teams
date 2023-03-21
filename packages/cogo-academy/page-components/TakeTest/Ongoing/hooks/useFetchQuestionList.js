@@ -26,6 +26,7 @@ const useFetchQuestionsList = ({ currentQuestion }) => {
 				start_time,
 				end_time,
 			};
+
 			trigger({
 				params: payload,
 			});
