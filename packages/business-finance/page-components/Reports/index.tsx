@@ -79,6 +79,7 @@ function Reports() {
 								name="date"
 								onChange={(e:any) => setValue((p) => ({ ...p, dateRange: e }))}
 								value={value.dateRange}
+								isPreviousDaysAllowed
 							/>
 						</div>
 					</div>
