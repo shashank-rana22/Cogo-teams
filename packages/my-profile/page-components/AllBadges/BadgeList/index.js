@@ -18,9 +18,9 @@ function StarCollection() {
 }
 
 function BadgeList(props) {
-	const { listLoading = false, badgeList, showBadgeDetails } = props;
+	const { listLoading = false, userBadges, showBadgeDetails } = props;
 
-	const { badges_got = [], badges_not_got = [] } = badgeList || {};
+	const { badges_got = [], badges_not_got = [] } = userBadges || {};
 
 	if (listLoading) {
 		return (
@@ -50,7 +50,7 @@ function BadgeList(props) {
 		);
 	}
 
-	if (isEmpty(badgeList)) {
+	if (isEmpty(userBadges)) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState

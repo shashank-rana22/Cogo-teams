@@ -18,7 +18,8 @@
 }
 .tab_list {
     width: 50%;
-    @media (max-width: 576px) {
+
+    @media (max-width: 1000px) {
         width: 100%;
     }
 }

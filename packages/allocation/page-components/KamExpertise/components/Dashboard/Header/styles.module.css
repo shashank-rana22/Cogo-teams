@@ -1,6 +1,7 @@
 .container {
     display: flex;
     margin-bottom: 40px;
+
     @media (max-width: 576px) {
         flex-direction: column;
     }
@@ -16,6 +17,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
+
     @media (max-width: 576px) {
         padding-top: 30px;
     }
@@ -23,8 +25,4 @@
 
 .button {
     margin: 0 4px;
-    size: "lg";
-    @media (max-width: 576px) {
-        size: "md";
-    }
 }

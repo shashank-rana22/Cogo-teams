@@ -10,13 +10,13 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 		defaultValues: {
 			scoring_type : '', // Todo based on expertise
 			milestones   : [{
-				milestone : '',
-				score     : '',
+				percentage : '',
+				score      : '',
 			}],
 			tat: [{
-				lower_limit : '',
-				upper_limit : '',
-				score       : '',
+				lower : '',
+				upper : '',
+				score : '',
 			}],
 		},
 	});
@@ -30,14 +30,16 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
 
+		// Todo send the expertise type
+
 		const {
 			event_configuration_rule_mapping_id,
 			impact,
 			scoring_type,
 			milestones,
 			tat,
-			score_on_completion,
-			score_on_repetition,
+			first_completion,
+			second_completion,
 		} = formValues;
 
 		// Todo Format Values
@@ -50,12 +52,10 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 				scoring_criteria: (scoring_type === 'percentage' && milestones)
 				|| (scoring_type === 'tat' && tat)
 				|| (scoring_type === 'absolute' && [{
-					score_on_completion,
-					score_on_repetition,
+					first_completion,
+					second_completion,
 				}]) || [],
 			};
-
-			console.log('payload', payload);
 
 			await trigger({ data: payload });
 

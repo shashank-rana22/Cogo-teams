@@ -45,7 +45,7 @@ function MyProfile() {
 	});
 
 	const {
-		badgeList,
+		userBadges,
 	} = useGetAllocationKamExpertiseProfile(partner_user_id);
 
 	const { name = '' } = detailsData || {};
@@ -84,7 +84,7 @@ function MyProfile() {
 				<div className={styles.container}>
 					<div className={styles.header}>
 						<Header
-							badgeList={badgeList}
+							userBadges={userBadges}
 							detailsData={detailsData}
 							setRefetch={refetch}
 							partner_user_id={partner_user_id}
@@ -96,7 +96,7 @@ function MyProfile() {
 					<div className={styles.details}>
 						<Details
 							detailsData={detailsData}
-							badgeList={badgeList}
+							userBadges={userBadges}
 						/>
 
 					</div>

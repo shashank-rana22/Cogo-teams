@@ -15,6 +15,7 @@ import {
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
 	asyncFieldsExpertiseConfigurations,
+	asyncFieldsExpertiseBadgeName,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -48,6 +49,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_rate_charge_codes  : asyncFieldListRateChargeCodes,
 	allot_bank              : asyncAllotBanks,
 	expertise_configuration : asyncFieldsExpertiseConfigurations,
+	badge_name              : asyncFieldsExpertiseBadgeName,
 };
 
 function AsyncSelect(props) {
