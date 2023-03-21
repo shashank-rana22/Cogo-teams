@@ -10,7 +10,7 @@ import QuestionSet from './components/QuestionSet';
 import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
-function DetailsAndQuestions({ setTestId, setActiveStepper }) {
+function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLoading }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 	// const [allKeysSaved, setAllKeysSaved] = useState(false);
 	const [idArray, setIdArray] = useState([]);

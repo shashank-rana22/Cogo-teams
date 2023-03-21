@@ -18,6 +18,10 @@
 			}
 		}
 	}
+
+	.question_type {
+		width: 246px;
+	}
 }
 
 .question_type {

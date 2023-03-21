@@ -27,7 +27,7 @@ function CreateQuestionSet() {
 	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails });
 
 	return (
-		<div key={loading} className={styles.container}>
+		<div className={styles.container}>
 			<div className={styles.header}>
 				<IcMArrowBack
 					style={{ cursor: 'pointer' }}
