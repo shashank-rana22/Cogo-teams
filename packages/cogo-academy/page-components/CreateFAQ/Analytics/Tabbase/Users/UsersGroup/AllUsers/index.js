@@ -13,8 +13,6 @@ function AllUsers({ props = '' }) {
 	const {
 		name = '',
 		current_audience_data = [],
-		total_questions = 0,
-		total_views = 0,
 		id = '',
 	} = props;
 	const {
@@ -25,7 +23,7 @@ function AllUsers({ props = '' }) {
 		topic_stats = [],
 	} = current_audience_data;
 
-	const { total_likes = 0, total_dislikes = 0 } = topic_stats[0] || {};
+	const { total_questions = 0, total_views = 0, total_likes = 0, total_dislikes = 0 } = topic_stats[0] || {};
 
 	const [showQuestions, setShowQuestions] = useState(false);
 
@@ -96,14 +94,14 @@ function AllUsers({ props = '' }) {
 					/>
 				</div>
 
-				<div className={styles.button_container}>
+				{/* <div className={styles.button_container}>
 					<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
 						ALL QUESTIONS
 						{!showQuestions
 							? <IcMArrowDown style={{ marginLeft: 4, marginBottom: 2 }} />
 							: <IcMArrowUp style={{ marginLeft: 4, marginBottom: 2 }} />}
 					</Button>
-				</div>
+				</div> */}
 			</div>
 
 			{showQuestions ? <UsersQuestionList id={id} /> : null}
