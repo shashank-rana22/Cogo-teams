@@ -52,15 +52,6 @@ function List({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.not_added}>
-				<Button
-					onClick={() => setShowChargeCodes(true)}
-					disabled={shipment_data?.is_job_closed}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Additional Charges
-				</Button>
-			</div>
 
 			{!isEmpty(additionalServiceList) ? (
 				<div className={styles.added_services}>
@@ -91,6 +82,16 @@ function List({
 					})}
 				</div>
 			) : null}
+
+			<div className={styles.not_added}>
+				<Button
+					onClick={() => setShowChargeCodes(true)}
+					disabled={shipment_data?.is_job_closed}
+				>
+					<div className={styles.add_icon}>+</div>
+					Add Additional Charges
+				</Button>
+			</div>
 
 			{additionalServiceList?.length ? (
 				<div className={styles.info_container}>
@@ -146,6 +147,7 @@ function List({
 				/>
 
 			) : null}
+
 		</div>
 	);
 }

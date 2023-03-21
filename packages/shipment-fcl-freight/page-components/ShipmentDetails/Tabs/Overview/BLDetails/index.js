@@ -45,7 +45,7 @@ function BLDetails() {
 				className="sm"
 				style={{ marginLeft: '6px' }}
 			>
-				Bl Container Mapping
+				BL Container Mapping
 			</Button>
 
 			<Button
@@ -65,7 +65,7 @@ function BLDetails() {
 						setMappingModal(false);
 					}}
 				>
-					<Modal.Header title="Bl Container Mapping" />
+					<Modal.Header title="BL Container Mapping" />
 					<BlContainer
 						shipment_data={shipment_data}
 						// data={data}
