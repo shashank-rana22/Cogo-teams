@@ -8,7 +8,7 @@ import getExternalPocData from '../../../helpers/getExternalPocData';
 import Card from './Card';
 import styles from './styles.module.css';
 
-function External({ tradePartnersData = {} }) {
+function External({ tradePartnersData = {}, setAddPoc = () => {} }) {
 	const { external_poc_details: { poc_data = [] } = {} } = tradePartnersData || {};
 	const [showDetail, setShowDetail] = useState({});
 
@@ -18,6 +18,7 @@ function External({ tradePartnersData = {} }) {
 		import : externalData.import || [],
 		export : externalData.export || [],
 	};
+	const { organization_branch_name = '' } = poc_data[0] || {};
 
 	return ['import', 'export'].map((trade) => (
 		<div>
@@ -30,7 +31,20 @@ function External({ tradePartnersData = {} }) {
 
 				<div className={styles.row}>
 					<div>
-						<Button size="sm">+ ADD POC</Button>
+						<Button
+							size="sm"
+							onClick={() => {
+								setAddPoc({
+									poc_type   : 'external',
+									organization_branch_name,
+									trade_type : trade,
+								});
+							}}
+							themeType="accent"
+						>
+							+ ADD POC
+
+						</Button>
 					</div>
 
 					<div>

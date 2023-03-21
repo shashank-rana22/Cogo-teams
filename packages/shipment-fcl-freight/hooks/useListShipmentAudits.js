@@ -37,6 +37,10 @@ const useListShipmentAudits = ({ defaultFilters = {} }) => {
 		apiTrigger();
 	}, [filters]);
 
+	useEffect(() => {
+		apiTrigger();
+	}, []);
+
 	return {
 		apiTrigger,
 		setFilters,

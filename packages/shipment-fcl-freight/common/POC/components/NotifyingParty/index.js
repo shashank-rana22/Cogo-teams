@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Card from '../Card';
 
@@ -12,12 +12,14 @@ function NotifyingParty({ tradePartnersData = {} }) {
 
 	const [show, setShow] = useState(showCondition);
 
+	useEffect(() => {
+		setShow(showCondition);
+	}, [showCondition]);
+
 	return (
-		<Card title="Notifying Party" showEdit>
-			<div>
-				<div>Action</div>
-			</div>
-			{show ? <Detail /> : <CreateNotifyingPary tradePartnerList={tradePartnerList} />}
+		<Card title="Notifying Party" showEdit={showCondition}>
+			{show ? <Detail data={notify_parties_detail} />
+				: <CreateNotifyingPary tradePartnerList={tradePartnerList} />}
 
 		</Card>
 	);

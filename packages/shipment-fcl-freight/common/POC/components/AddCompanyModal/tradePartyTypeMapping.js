@@ -1,4 +1,4 @@
-export const tradePartyTypeMapping = (trade_party_type = '') => {
+const tradePartyTypeMapping = (trade_party_type = '') => {
 	const mapping = {
 		shipper: [
 			{
@@ -60,3 +60,5 @@ export const tradePartyTypeMapping = (trade_party_type = '') => {
 
 	return mapping[trade_party_type] || mapping.default;
 };
+
+export default tradePartyTypeMapping;

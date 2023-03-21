@@ -12,7 +12,7 @@ function Header({ setShowHistory = () => {}, showHistory = false }) {
 				</div>
 				<div>
 					<span className={label}>Last Updated By:</span>
-					<span className={value}>Rajat Uba</span>
+					<span className={value}>Testing</span>
 				</div>
 			</div>
 

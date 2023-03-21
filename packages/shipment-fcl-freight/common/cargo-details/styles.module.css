@@ -1,13 +1,13 @@
-.certificate_container{
+.certificate_container {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 
 	a {
-		font-weight: 400;
 		font-size: 14px;
-		color: #a8acce;
+		font-weight: 400;
 		display: flex;
+		color: #a8acce;
 		align-items: center;
 
 		svg {

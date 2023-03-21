@@ -1,8 +1,8 @@
-import { TRADE_PARTY_MAPPING } from '../../../../constants/TRADE_PARTY_MAPPING';
+import TRADE_PARTY_MAPPING from '../../../../constants/TRADE_PARTY_MAPPING';
 
 import TradeParty from './TradeParty';
 
-function AddedTradeParty({ tradePartnersData = {} }) {
+function AddedTradeParty({ tradePartnersData = {}, setAddCompany = () => {}, setAddPoc = () => {} }) {
 	const { list = [] } = tradePartnersData;
 
 	const addedTradeParty = list.map((i) => i.trade_party_type);
@@ -10,7 +10,14 @@ function AddedTradeParty({ tradePartnersData = {} }) {
 
 	return possible_trade_party.map((item) => {
 		const trade_party_data = list.find((i) => i.trade_party_type === item);
-		return <TradeParty data={trade_party_data} title={TRADE_PARTY_MAPPING[item]} />;
+		return (
+			<TradeParty
+				data={trade_party_data}
+				title={TRADE_PARTY_MAPPING[item]}
+				setAddCompany={setAddCompany}
+				setAddPoc={setAddPoc}
+			/>
+		);
 	});
 }
 export default AddedTradeParty;

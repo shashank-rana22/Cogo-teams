@@ -14,12 +14,12 @@
     display: flex;
 }
 .service{
-    color: #5c6186;
+    color: #333333;
     font-size: 14px;
     width: fit-content;
 }
 .service_names{
-    color: #5c6186;
+    color: #828282;
     font-size: 14px;
     font-weight: 600;
     padding-left: 4px;

@@ -3,9 +3,9 @@
     flex-direction: column;
 	padding: 10px 18px;
 	justify-content: space-between;
-	background: #f6f5fe;
 	border-radius: 4px;
 	margin-bottom: 8px;
+    border: 1px solid #F6F5FE;
 }
 
 .label_value_container{
@@ -14,7 +14,9 @@
 
 .label{
     color: #828282;
+    width: 20%;
 }
 .value{
     margin-left: 4px;
+    width: 80%;
 }

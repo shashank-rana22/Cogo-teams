@@ -6,7 +6,7 @@ import getInternalPocData from '../../../helpers/getInternalPocData';
 import Stakeholders from './Stakeholders';
 import styles from './styles.module.css';
 
-function Internal({ data = [] }) {
+function Internal({ data = [], setAddPoc = () => { } }) {
 	const internalData = getInternalPocData(data);
 
 	return (
@@ -14,14 +14,31 @@ function Internal({ data = [] }) {
 
 			<div className={styles.header}>
 				<div className={styles.heading}>Internal : Cogoport</div>
-				<div><Button size="sm">+ ADD POC</Button></div>
+				<div>
+					<Button
+						size="sm"
+						onClick={() => {
+							setAddPoc({ poc_type: 'internal' });
+						}}
+						themeType="accent"
+					>
+						+ ADD POC
+					</Button>
+
+				</div>
 			</div>
 
 			<div>
 				{Object.keys(internalData).map((key) => (
 					<div className={styles.service_container}>
 						<div className={styles.service_name}>{startCase(key)}</div>
-						<div><Stakeholders data={internalData[key]} /></div>
+						<div>
+							<Stakeholders
+								data={internalData[key]}
+								setAddPoc={setAddPoc}
+							/>
+
+						</div>
 					</div>
 				))}
 			</div>

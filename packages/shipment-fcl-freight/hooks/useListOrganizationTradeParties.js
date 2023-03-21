@@ -22,7 +22,6 @@ const useListOrganizationTradeParties = ({ defaultFilters = {}, organization_id 
 					page,
 					page_limit: 10,
 					...defaultParams,
-
 				},
 			});
 
@@ -34,10 +33,6 @@ const useListOrganizationTradeParties = ({ defaultFilters = {}, organization_id 
 			console.log(err);
 		}
 	};
-
-	useEffect(() => {
-		apiTrigger();
-	}, []);
 
 	useEffect(() => {
 		apiTrigger();

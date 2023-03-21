@@ -8,11 +8,12 @@ import External from './External';
 import Internal from './Internal';
 import styles from './styles.module.css';
 
-function POCS({ tradePartnersData = {} }) {
+function POCS({ tradePartnersData = {}, setAddPoc = () => {}, shipment_id = '' }) {
 	const [isInternal, setIsInternal] = useState(true);
 
 	const { data:shipmentStakeholderData = [] } = useListShipmentStakeholders({
 		defaultParams: { format_by_stakeholder_type_required: true },
+		shipment_id,
 	});
 
 	return (
@@ -30,8 +31,11 @@ function POCS({ tradePartnersData = {} }) {
 			</div>
 
 			{isInternal ? (
-				<Internal data={shipmentStakeholderData?.length ? shipmentStakeholderData : []} />
-			) : <External tradePartnersData={tradePartnersData} />}
+				<Internal
+					data={shipmentStakeholderData?.length ? shipmentStakeholderData : []}
+					setAddPoc={setAddPoc}
+				/>
+			) : <External tradePartnersData={tradePartnersData} setAddPoc={setAddPoc} />}
 		</Card>
 	);
 }

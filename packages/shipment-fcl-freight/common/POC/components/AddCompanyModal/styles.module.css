@@ -1,0 +1,13 @@
+.modal_body_container{
+    max-height: 600px;
+}
+.role_container{
+    width: 30%;
+}
+
+.actions{
+    display: flex;
+}
+.cancel{
+    margin-right:8px
+}

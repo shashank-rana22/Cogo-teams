@@ -1,10 +1,14 @@
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function Card({ children = null, label = 'Card' }) {
-	const [open, setOpen] = useState(false);
+function Card({ children = null, label = 'Card', defaultOpen = false }) {
+	const [open, setOpen] = useState(defaultOpen);
+
+	useEffect(() => {
+		setOpen(defaultOpen);
+	}, [defaultOpen]);
 
 	return (
 		<div className={styles.container}>

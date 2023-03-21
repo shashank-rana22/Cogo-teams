@@ -3,15 +3,18 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { POC_WORKSCOPE_MAPPING } from '../../../../../constants/POC_WORKSCOPE_MAPPING';
+import POC_WORKSCOPE_MAPPING from '../../../../../constants/POC_WORKSCOPE_MAPPING';
 import Card from '../../Card';
 
 import styles from './styles.module.css';
 
-function TradeParty({ data = {}, title = '' }) {
+function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc = () => {} }) {
 	const [show, setShow] = useState({});
 
-	const { trade_partner_details:{ business_name = '', poc_data = {} } = {}, address = [] } = data;
+	const {
+		trade_partner_details:{ business_name = '', poc_data = {} } = {}, address = [],
+		trade_party_type = '', trade_party_id = '',
+	} = data;
 	const { address:first_address = '' } = address[0] || {};
 
 	const mapping = {
@@ -35,14 +38,33 @@ function TradeParty({ data = {}, title = '' }) {
 		) : null;
 	}
 
+	const editAction = () => {
+		setAddCompany({ trade_party_type });
+	};
+
 	return (
-		<Card title={title} showEdit>
+		<Card title={title} showEdit editAction={editAction}>
 			<div>
 				<div className={styles.header}>
 					<div className={styles.business_name}>{business_name}</div>
 					<div>
 						{isEmpty(poc_data)
-							? <Button size="sm">+ ADD POC</Button>
+							? (
+								<Button
+									size="sm"
+									onClick={() => {
+										setAddPoc({
+											poc_type: 'tradeParty',
+											business_name,
+											trade_party_type,
+											trade_party_id,
+										});
+									}}
+									themeType="accent"
+								>
+									+ ADD POC
+								</Button>
+							)
 							: (
 								<Button
 									themeType="linkUi"

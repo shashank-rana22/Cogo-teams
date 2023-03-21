@@ -1,4 +1,4 @@
-export const TRADE_PARTY_MAPPING = {
+const TRADE_PARTY_MAPPING = {
 	self                    : 'Booking Party',
 	shipper                 : 'Shipper',
 	consignee               : 'Consignee',
@@ -8,3 +8,5 @@ export const TRADE_PARTY_MAPPING = {
 	origin_cha              : 'Origin CHA',
 	destination_cha         : 'Destination CHA',
 };
+
+export default TRADE_PARTY_MAPPING;

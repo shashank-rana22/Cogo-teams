@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
-
     border-bottom: 1px solid var(--color-secondary-2);
     margin-bottom: 10px;
 }
@@ -13,5 +12,5 @@
 }
 
 .last_update_details {
-    font-size: 10px;
+    font-size: 12px;
 }

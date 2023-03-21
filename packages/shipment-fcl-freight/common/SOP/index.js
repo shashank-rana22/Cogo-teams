@@ -9,7 +9,7 @@ import History from './components/History';
 function SOP() {
 	const [showHistory, setShowHistory] = useState(false);
 
-	const { data, filters, loading, apiTrigger } = useGetShipmentOperatingProcedure({});
+	const { data, loading, apiTrigger } = useGetShipmentOperatingProcedure({});
 
 	return (
 		<>

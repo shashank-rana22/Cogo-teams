@@ -1,3 +1,16 @@
+.heading{
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions{
+    display: flex;
+}
+
+.edit{
+    margin-right: 8px;
+}
+
 .label{
     font-weight: 600;
     font-size: var(--font-size-md);
@@ -10,4 +23,22 @@
 
 .container {
     display: flex;
+}
+.each_pref {
+    justify-content: space-between;
+    display: flex;
+    
+    &:not(:last-child) {
+        border-bottom: 1px solid black;
+    }
+
+    &:not(:first-child){
+        margin-top:10px;
+    }
+}
+
+.columns{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
 }

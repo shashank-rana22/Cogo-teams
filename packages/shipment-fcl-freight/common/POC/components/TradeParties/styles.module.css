@@ -1,8 +1,5 @@
 .container{
-    display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 16px 16px 16px 24px;
+	padding: 8px ;
 	border: 1px dashed #bdbdbd;
 	border-radius: 4px;
 	color: #bdbdbd;
@@ -23,6 +20,12 @@
     border-color: #393f70;
     color: #7e86c2;
     cursor: pointer;
+}
+
+.displayText{
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .add{
