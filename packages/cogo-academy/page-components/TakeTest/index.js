@@ -22,7 +22,14 @@ const COMPONENT_MAPPING = {
 };
 
 function TakeTest() {
-	const { profile: { user: { id: user_id } }, general: { query: { test_id } } } = useSelector((state) => state);
+	const {
+		profile: {
+			user: { id: user_id },
+		},
+		general: {
+			query: { test_id },
+		},
+	} = useSelector((state) => state);
 
 	const [{ data: testData, loading }] = useRequest({
 		method : 'GET',
