@@ -194,12 +194,8 @@
 }
 
 .list_container {
-	height: 80%;
-	overflow-y: auto;
-
-	@media (max-width: 1280px) {
-		height: calc(100% - 130px);
-	}
+	max-height: 68vh;
+	overflow-y: scroll;
 }
 
 .list_container::-webkit-scrollbar {
