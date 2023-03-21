@@ -17,6 +17,7 @@ function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray }) {
 			setIdArray((prev) => [...prev, id]);
 			return;
 		}
+
 		setIdArray((prev) => {
 			const temp = [...prev];
 			const index = temp.indexOf(id);
@@ -27,7 +28,7 @@ function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray }) {
 		});
 	};
 
-	const correctSetIds = set_data.map((item) => item.id);
+	const correctSetIds = (set_data || []).map((item) => item.id);
 
 	useEffect(() => {
 		setIdArray(correctSetIds);
@@ -44,7 +45,7 @@ function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray }) {
 					name="question_set"
 					className={styles.checkbox}
 					value={id}
-					checked={idArray.includes(id)}
+					checked={(idArray || []).includes(id)}
 					onChange={(event) => handleChange({ event, id })}
 				/>
 			),
