@@ -1,20 +1,14 @@
-import { Placeholder, Button } from '@cogoport/components';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import EmptyState from '../../../../../common/EmptyState';
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateNewEvent from '../../../hooks/useCreateNewEvent';
 import useGetAllocationKamExpertiseRules from '../../../hooks/useGetAllocationKamExpertiseRules';
 import useUpdateEvent from '../../../hooks/useUpdateEvent';
 
+import AttributePage from './AttributesPage';
 import styles from './styles.module.css';
-
-const CONTROL_TYPE_MAPPING = {
-	string  : 'text',
-	integer : 'number',
-	select  : 'select',
-};
 
 const FILTER_ATTRIBUTE_MAPPING = {
 	account_attribute  : 'account',
@@ -118,94 +112,12 @@ function CreateEvent(props) {
 						</section>
 					</div>
 
-					{
-						(isEmpty(attributeList) && !loading)
-							? (
-								<div
-									className={styles.account_attributes}
-									style={{
-										background : '#fff',
-										padding    : '80px 16px 0 16px',
-
-									}}
-								>
-									<EmptyState
-										height="320px"
-										width="500px"
-										flexDirection="column"
-
-									/>
-								</div>
-							)
-							: (
-								<div className={styles.account_attributes}>
-									<div className={styles.account_attribute_text}>
-										{startCase(watchListener || '')}
-
-										{' '}
-										{/* <IcMInfo /> */}
-									</div>
-
-									<section className={styles.row_container}>
-										{
-
-							loading
-								? [1, 2, 3, 4, 5].map(() => (
-									<div className={styles.attribute_form_group}>
-										<div
-											className={`${styles.input_group}
-													${styles.margin_bottom}`}
-										>
-											<Placeholder height="40px" style={{ margin: '8px 0 16px 0' }} />
-										</div>
-
-									</div>
-								))
-
-								:	attributeList.map((controlItem, index) => {
-									const { name = '', parameters } = controlItem;
-									const { params_type, options = [] } = parameters || {};
-
-									const type = CONTROL_TYPE_MAPPING[params_type || ''];
-
-									const el = {
-										name,
-										label: startCase(name),
-										type,
-										...(type === 'select' && { options, isClearable: true }),
-									};
-
-									const Element = getFieldController(el?.type);
-
-									if (!Element) return null;
-
-									return (
-										<div className={styles.attribute_form_group}>
-											<span className={styles.label}>{el.label}</span>
-
-											<div
-												className={`${styles.input_group}
-										${index < attributeList.length ? styles.margin_bottom : ''}`}
-											>
-												<Element
-													{...el}
-													key={el.name}
-													control={control}
-													id={`${el.name}_input`}
-												/>
-											</div>
-
-											<div className={styles.error_message}>
-												{errors?.[el.name]?.message}
-											</div>
-										</div>
-									);
-								})
-}
-									</section>
-								</div>
-							)
-					}
+					<AttributePage
+						loading={loading}
+						attributeList={attributeList}
+						watchListener={watchListener}
+						formProps={formProps}
+					/>
 
 				</div>
 
