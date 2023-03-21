@@ -194,7 +194,7 @@
 }
 
 .list_container {
-	max-height: 68vh;
+	max-height: 34rem;
 	overflow-y: scroll;
 }
 
