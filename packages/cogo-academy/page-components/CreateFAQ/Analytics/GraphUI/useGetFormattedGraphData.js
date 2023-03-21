@@ -7,14 +7,14 @@ const MAPPING = {
 };
 
 const useGetFormattedGraphData = ({ graph_data = {} }) => {
-	const { y_axis_parameter, ...restData } = graph_data || {};
+	const { abscissa, ...restData } = graph_data || {};
 
 	const graphData = [];
 
 	Object.keys(restData || {}).forEach((key) => {
 		const array = [];
 		Object.keys(restData[key] || {}).forEach((timeKey) => {
-			if (y_axis_parameter === 'hour') {
+			if (abscissa === 'hour') {
 				array.push({ x: timeKey, y: restData[key][timeKey] });
 			} else {
 				array.push({ x: format(timeKey, 'dd-MMM-yyyy'), y: restData[key][timeKey] });
