@@ -102,7 +102,6 @@
 
 		& > path{
 			fill: var(--color-accent-orange-2);
-				width: 64px;
 		}
 	}
 }

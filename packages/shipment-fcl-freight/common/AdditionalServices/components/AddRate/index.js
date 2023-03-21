@@ -1,6 +1,8 @@
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useAddRate from '../../../../hooks/useAddRate';
+
 import ActionsToShow from './ActionToShow';
 import BillToCustomer from './BillToCustomer';
 import RenderAddRateForm from './RenderAddRateForm';
@@ -8,7 +10,6 @@ import RenderAddRateForm from './RenderAddRateForm';
 // import SecondStep from './SecondStep';
 
 import styles from './styles.module.css';
-import useAddRate from './useAddRate';
 
 const showRemarksStatus = [
 	'amendment_requested_by_importer_exporter',

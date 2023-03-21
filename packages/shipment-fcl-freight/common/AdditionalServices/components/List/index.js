@@ -1,10 +1,11 @@
-import { Button, Modal, cl } from '@cogoport/components';
+import { Button, Modal, cl, Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
-import useUpdateShipmentAdditionalService from '../../hooks/useUpdateShipmentAdditionalService';
+import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
+import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 import AddIp from '../AddIp';
 import AddRate from '../AddRate';
 
@@ -14,7 +15,6 @@ import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
-import useListAdditionalServices from './useListAdditionalServices';
 
 function List({
 	services = [],
@@ -52,7 +52,6 @@ function List({
 
 	return (
 		<div className={styles.container}>
-
 			{!isEmpty(additionalServiceList) ? (
 				<div className={styles.added_services}>
 					{additionalServiceList?.map((serviceListItem) => {
@@ -81,7 +80,7 @@ function List({
 						);
 					})}
 				</div>
-			) : null}
+			) : <Loader themeType="primary" />}
 
 			<div className={styles.not_added}>
 				<Button
