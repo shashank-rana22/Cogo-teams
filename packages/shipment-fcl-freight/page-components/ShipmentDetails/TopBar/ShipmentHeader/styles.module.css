@@ -18,6 +18,14 @@
 .customer {
   border-right: 1px solid #e0e0e0;
   width: 25%;
+  padding-right: 15px;
+
+  .tippy-box {
+    max-width: fit-content !important;
+  }
+  .core-ui-tooltip-root {
+    text-align: start;
+  }
 }
 
 .port_details {
@@ -37,5 +45,17 @@
 }
 
 .dots{
-  margin-left: 30px;
+  margin-left: 5px;
+}
+
+.tooltip {
+  font-weight: 500;
+  max-width: 500px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: start;
+  font-size: 10px;
+  color: #828282;
+  width: fit-content;
 }

@@ -1,6 +1,8 @@
+import styles from './styles.module.css';
+
 function SalesInvoice() {
 	return (
-		<div>SalesInvoice</div>
+		<div className={styles.container}>SalesInvoice</div>
 	);
 }
 

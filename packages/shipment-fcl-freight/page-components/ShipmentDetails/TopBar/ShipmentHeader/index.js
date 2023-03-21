@@ -39,6 +39,8 @@ function ShipmentHeader() {
 				setShowCancel={setShowCancel}
 				onClose={() => setShow(false)}
 				setShow={setShow}
+				// isIE={isIE}
+				// showRequest={showRequest}
 			/>
 		);
 	};
@@ -79,7 +81,7 @@ function ShipmentHeader() {
 					placement="bottom"
 					maxWidth="none"
 					content={(
-						<div style={{ fontSize: '10px' }}>
+						<div className={styles.tooltip}>
 							{importer_exporter?.business_name}
 						</div>
 					)}

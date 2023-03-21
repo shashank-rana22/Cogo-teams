@@ -33,7 +33,6 @@ function AddRate({
 	filters,
 	updateResponse = () => {},
 }) {
-	console.log('showRemarksStatus', item, status);
 	const [billToCustomer, setBillToCustomer] = useState(false);
 	const [showSecondStep, setShowSecondStep] = useState(false);
 
@@ -66,7 +65,6 @@ function AddRate({
 		);
 	}
 
-	console.log(status, item);
 	if (
 		status?.status === 'charges_incurred'
 		&& !billToCustomer
@@ -103,8 +101,7 @@ function AddRate({
 				control={control}
 				errors={errors}
 				register={register}
-				setAddRate={setAddRate}
-				setAddSellPrice={setAddSellPrice}
+				item={item}
 			/>
 
 			<ActionsToShow

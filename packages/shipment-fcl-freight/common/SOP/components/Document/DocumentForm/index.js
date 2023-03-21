@@ -35,6 +35,7 @@ function DocumentForm({ sop_detail = {}, setShowForm = () => {} }) {
 	const { control, watch } = useForm({ defaultValues });
 	const watchModeOfExecution = watch('preferred_mode_of_document_execution');
 
+	console.log(convertObjectMappingToArray(BL_CATEGORY_MAPPING));
 	return (
 		<div className={styles.form_container}>
 			{!loading

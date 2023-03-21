@@ -6,6 +6,7 @@ import Documents from './Documents';
 import PurchaseInvoice from './Invoicing/PurchaseInvoice';
 import SalesInvoice from './Invoicing/SalesInvoice';
 import Overview from './Overview';
+import styles from './styles.module.css';
 import TimelineAndTask from './TimelineAndTasks';
 import Tracking from './Tracking';
 
@@ -13,7 +14,7 @@ function Tab({ shipment_data = {} }) {
 	const [activeTab, setActiveTab] = useState('overview');
 
 	return (
-		<div style={{ marginTop: 20 }}>
+		<div className={styles.container}>
 			<Tabs
 				activeTab={activeTab}
 				fullWidth
@@ -21,7 +22,7 @@ function Tab({ shipment_data = {} }) {
 				onChange={setActiveTab}
 			>
 				<TabPanel name="overview" title="Overview">
-					<Overview shipment_data={shipment_data} />
+					<Overview shipmentData={shipment_data} />
 				</TabPanel>
 				<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 					<TimelineAndTask />
@@ -43,7 +44,7 @@ function Tab({ shipment_data = {} }) {
 					/>
 				</TabPanel>
 				<TabPanel name="tracking" title="Tracking">
-					<Tracking shipment_data={shipment_data} />
+					<Tracking shipmentData={shipment_data} />
 				</TabPanel>
 			</Tabs>
 		</div>
