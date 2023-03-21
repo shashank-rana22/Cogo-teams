@@ -65,7 +65,6 @@ function Badges() {
 			paginationData,
 		},
 		[CREATE_MASTERY]: {
-			badgeList,
 			setToggleScreen,
 			masteryItemData,
 			listRefetch,

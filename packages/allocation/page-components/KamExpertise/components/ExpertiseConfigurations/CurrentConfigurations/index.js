@@ -11,14 +11,18 @@ function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
 
 	const { listKamExpertiseCurrentConfigs } = useGetKamExpertiseCurrentConfig();
 
-	const data = listKamExpertiseCurrentConfigs?.list || [];
+	const {
+		list:data = [],
+		audit_data = {},
+		version_list_details:version_details = {},
+	} = listKamExpertiseCurrentConfigs;
 
 	const listArray = data.filter((item) => item.status_value === 'draft' || item.status_value === 'live');
 	const VERSION_CARDS = listArray.reverse();
 
-	const audit_data = listKamExpertiseCurrentConfigs?.audit_data || {};
-
-	const version_details = listKamExpertiseCurrentConfigs?.version_list_details || {};
+	const onClickBack = () => {
+		router.push('/allocation/kam-expertise/configurations/viewall-configurations');
+	};
 
 	return (
 		<div>
@@ -33,12 +37,11 @@ function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
 			{VERSION_CARDS.map((item) => (
 				<ConfigurationCard
 					{...item}
-
 				/>
 			))}
 
 			<Button
-				onClick={() => { router.push('/allocation/kam-expertise/configurations/viewall-configurations'); }}
+				onClick={onClickBack}
 				themeType="secondary"
 			>
 				View All Configurations

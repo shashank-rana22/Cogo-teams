@@ -19,11 +19,11 @@ function NewVersion({ setMode, setShowModal, setSelectedVersion }) {
 				Do you wish to proceed?
 			</div>
 			<div className={styles.button_container}>
-				<Button themeType="teritiary" onClick={() => { setMode(''); }}>Back</Button>
+				<Button themeType="teritiary" onClick={() => { setMode('initial-mode'); }}>Back</Button>
 				<Button onClick={() => {
 					setSelectedVersion('new-version');
 					setShowModal(false);
-					setMode('');
+					setMode('initial-mode');
 					Toast.success('New Draft Loaded');
 				}}
 				>

@@ -20,7 +20,7 @@ function ModalFooter({ setMode, setShowModal, setSelectedVersion, selectedVersio
 					themeType="teritiary"
 					className={styles.button}
 					onClick={() => {
-						setMode('');
+						setMode('initial-mode');
 						setSelectedVersion('');
 					}}
 				>
@@ -31,7 +31,7 @@ function ModalFooter({ setMode, setShowModal, setSelectedVersion, selectedVersio
 					disabled={!selectedVersion}
 					onClick={() => {
 						setShowModal(false);
-						setMode('');
+						setMode('initial-mode');
 						Toast.success(`Version ${selectedVersion} Selected`);
 					}}
 				>

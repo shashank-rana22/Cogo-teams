@@ -13,13 +13,21 @@ const controls = [
 		name        : 'badges',
 		label       : 'Badges',
 		placeholder : 'Select',
-		type        : 'multiSelect',
-		options     : [],
-		rules       : {
+		type        : 'asyncSelect',
+		asyncKey    : 'badge_name',
+		multiple    : true,
+		initialCall : false,
+		isClearable : true,
+		params      : {
+			filters: {
+				status                       : 'active',
+				expertise_configuration_type : 'event_configuration',
+			},
+		},
+		rules: {
 			required: 'Select a Badge',
 		},
-		isClearable : false,
-		styles      : {
+		styles: {
 			width: '200px',
 		},
 	},

@@ -7,7 +7,7 @@ const CONTROL_MAPPING = {
 		noDeleteButtonTill : 1,
 		controls           : [
 			{
-				name        : 'milestone',
+				name        : 'percentage',
 				type        : 'number',
 				label       : 'Milestone',
 				placeholder : '0',
@@ -30,14 +30,14 @@ const CONTROL_MAPPING = {
 		noDeleteButtonTill : 1,
 		controls           : [
 			{
-				name        : 'lower_limit',
+				name        : 'lower',
 				type        : 'number',
 				label       : 'From',
 				placeholder : '0',
 				rules       : { required: 'From is required' },
 			},
 			{
-				name        : 'upper_limit',
+				name        : 'upper',
 				type        : 'number',
 				label       : 'To',
 				placeholder : '0',
@@ -53,14 +53,14 @@ const CONTROL_MAPPING = {
 		],
 	}],
 	absolute: [{
-		name        : 'score_on_completion',
+		name        : 'first_completion',
 		type        : 'number',
 		label       : 'Score on Completion',
 		placeholder : '0',
 		rules       : { required: 'Score on Completion is required' },
 	},
 	{
-		name        : 'score_on_repetition',
+		name        : 'second_completion',
 		type        : 'number',
 		label       : 'Score on Repetition',
 		placeholder : '0',

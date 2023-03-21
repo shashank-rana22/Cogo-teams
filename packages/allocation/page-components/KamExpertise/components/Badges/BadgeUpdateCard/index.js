@@ -19,7 +19,7 @@ function BadgeUpdateCard(props) {
 		Silver : badge_details?.[1]?.image_url,
 		Gold   : badge_details?.[2]?.image_url,
 	};
-
+	console.log('errors', errors);
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
 			<div className={styles.display_flex} style={{ justifyContent: score ? 'center' : 'flex-start' }}>
@@ -48,7 +48,7 @@ function BadgeUpdateCard(props) {
 					/>
 
 					<div className={styles.error_message}>
-						{errors?.[`${medalType}_value_input`]?.message}
+						{errors?.[`${medalType}_value`]?.message}
 					</div>
 
 				</div>

@@ -52,7 +52,7 @@ const titleSection = (expertiseItem = {}) => (
 	</div>
 );
 
-function KamExpertiseScoreConfig({ setMainLoading,selectedVersion }) {
+function KamExpertiseScoreConfig({ setMainLoading, selectedVersion }) {
 	const [addConditionModal, setAddConditionModal] = useState({});
 
 	const [activeCollapse, setActiveCollapse] = useState('');
@@ -68,6 +68,7 @@ function KamExpertiseScoreConfig({ setMainLoading,selectedVersion }) {
 	useEffect(() => {
 		setMainLoading(loading);
 	}, [loading, setMainLoading]);
+
 	const { list = [], audit_data: auditData = {} } = data || {};
 
 	const {
@@ -85,7 +86,10 @@ function KamExpertiseScoreConfig({ setMainLoading,selectedVersion }) {
 
 	const { scoring_type } = watch();
 
-	const controls = getControls({ modifiedControls: CONTROL_MAPPING[scoring_type] });
+	const controls = getControls({
+		modifiedControls : CONTROL_MAPPING[scoring_type],
+		typeFilter       : addConditionModal.type,
+	});
 
 	const options = list.map((value) => ({
 		key      : value.expertise_type,
