@@ -7,8 +7,9 @@ import styles from './styles.module.css';
 
 function EmailCard({ data, onClick }) {
 	const yesterday = subtractDays(new Date(), 1);
-	let received_time = addHours(data.received_time, 5);
-	received_time = addMinutes(received_time, 30);
+	let received_time = addHours(new Date(data.received_time), 5);
+	received_time = addMinutes(new Date(received_time), 30);
+
 	const diaplayDate =		new Date(received_time) > yesterday
 		? formatDistanceToNow(received_time)
 		: format(received_time, 'dd MMM yyyy');

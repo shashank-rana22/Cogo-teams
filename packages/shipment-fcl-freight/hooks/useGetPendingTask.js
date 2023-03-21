@@ -3,13 +3,13 @@ import { useRequest } from '@cogoport/request';
 // import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-function useGetPendingTasks({ shipment_data }) {
+function useGetPendingTasks({ shipment_data = {} }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_freight/list_tasks',
 		method : 'GET',
 	}, { manual: true });
 
-	const { id } = shipment_data;
+	const { id = '' } = shipment_data;
 
 	const getTasks = useCallback(() => {
 		(async () => {

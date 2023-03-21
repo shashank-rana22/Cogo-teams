@@ -44,18 +44,10 @@ const useGetRpaMails = (
 					}
 					await triggerGetMail({
 						params: {
-							includes: [
-								'id',
-								'subject',
-								'body_preview',
-								'sender',
-								'received_time',
-								'message_id',
-								'attachments_attachment_id',
-							],
 							page_no    : page,
 							page_limit : page_limit || 10,
-							filters    : JSON.stringify({ ...(filters || {}), q }),
+							// filters    : JSON.stringify({ ...(filters || {}), q: 165993 }),
+							// filters    : JSON.stringify({ q: 165993, foldername: 'Inbox' }),
 						},
 					});
 				} catch (err) {

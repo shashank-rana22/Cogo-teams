@@ -21,41 +21,42 @@ const useGetMail = (email_address, message_id, mail_id) => {
 		{ manual: true },
 	);
 
-	const getRpaMail = async () => {
-		try {
-			await triggerGetRpaMail({
-				params: {
-					mail_id,
-				},
-			});
-		} catch (err) {
-			console.log(err);
+	const getRpaMail = useCallback(() => {
+		(async () => {
+			try {
+				await triggerGetRpaMail({
+					params: {
+						mail_id,
+					},
+				});
+			} catch (err) {
+				console.log(err);
+			}
 		}
-	};
+		)();
+	}, [triggerGetRpaMail, mail_id]);
 
 	/**
 	 *
 	 * @param {String} id Id of mail
 	 */
 	const getEmail = useCallback(() => {
-		(
-			async () => {
-				try {
-					const res = await triggerGetMail({
-						params: {
-							email_address,
-							message_id,
-						},
-					});
-					if (res?.data?.error?.code === 'ErrorItemNotFound') {
-						getRpaMail();
-					}
-				} catch (err) {
-					console.log(err);
+		(async () => {
+			try {
+				const res = await triggerGetMail({
+					params: {
+						email_address,
+						message_id,
+					},
+				});
+				if (res?.data?.error?.code === 'ErrorItemNotFound') {
+					getRpaMail();
 				}
+			} catch (err) {
+				console.log(err);
 			}
-		)();
-	}, []);
+		})();
+	}, [email_address, message_id, triggerGetMail, getRpaMail]);
 
 	useEffect(() => {
 		if (message_id) {

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import Button from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import React from 'react';
 
 import Attachements from './Attachements';

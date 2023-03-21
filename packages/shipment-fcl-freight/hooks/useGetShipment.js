@@ -20,7 +20,7 @@ function useGetShipment() {
 			try {
 				const res = await trigger({
 					params: {
-						id                 : 'aa39341b-e4aa-4348-a4ba-75118b485192',
+						id                 : '15c87235-4242-44f9-b469-277fd22521d7',
 						additional_methods : ['main_service', 'documents', 'containers'],
 					},
 				}); if (!res.hasError) {
