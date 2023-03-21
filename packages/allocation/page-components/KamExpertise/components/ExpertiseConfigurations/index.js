@@ -66,6 +66,7 @@ function ViewAllConfigs() {
 							) : null;
 						})}
 					</Tabs>
+
 					<Button
 						themeType="primary"
 						className={styles.pub_button}
@@ -76,7 +77,12 @@ function ViewAllConfigs() {
 
 					</Button>
 
-					{showPublishModal && <PublishVersionModal setShowPublishModal={setShowPublishModal} />}
+					{showPublishModal && (
+						<PublishVersionModal
+							setShowPublishModal={setShowPublishModal}
+							showPublishModal={showPublishModal}
+						/>
+					)}
 				</div>
 			</section>
 		</section>

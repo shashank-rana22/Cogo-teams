@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 function LoadingState({ columnsToLoad }) {
 	const options = [1, 2, 3].map(() => ({
 		title: <LoaderCard columnsToLoad={columnsToLoad} />,
-
 	}));
 	const [value, onChange] = useState('');
 

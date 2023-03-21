@@ -50,9 +50,7 @@ function KamLevel({ setMainLoading, selectedVersion }) {
 		/>,
 
 	}));
-	useEffect(() => {
-		refetch();
-	}, [selectedVersion, refetch]);
+
 	return (
 		<div>
 			<Header
