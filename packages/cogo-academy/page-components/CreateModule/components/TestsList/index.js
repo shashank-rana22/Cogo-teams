@@ -1,4 +1,5 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
+import { IcMSearchlight, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useGetTestList from '../../hooks/useGetTestList';
@@ -7,8 +8,8 @@ import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
 import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
 
-function TestsList() {
-	const [activeTab, setActiveTab] = useState('tests');
+function TestsList({ activeTab, setActiveTab }) {
+	// const [activeTab, setActiveTab] = useState('tests');
 
 	const { data, loading, fetchList, setParams, params } = useGetTestList();
 
@@ -72,6 +73,30 @@ function TestsList() {
 	return (
 		<div className={styles.container}>
 			{/* <div className={styles.heading}>Service Bundles</div> */}
+			<div className={styles.filter}>
+				<div>
+					<Input
+						size="md"
+						suffix={<ButtonIcon size="md" icon={<IcMSearchlight />} disabled={false} themeType="primary" />}
+						placeholder="Search for Test/Topic"
+						onChange={(value) => {
+							setParams((prev) => ({
+								...prev,
+								filters: {
+									...prev.filters,
+									q: value,
+								},
+							}));
+						}}
+						className={styles.input}
+					/>
+				</div>
+				<div className={styles.sort}>
+					<IcMArrowRotateDown style={{ cursor: 'pointer' }} />
+					<span className={styles.span_text}>Sort By</span>
+				</div>
+			</div>
+
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}

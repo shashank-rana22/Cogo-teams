@@ -4,14 +4,13 @@ import { useSelector } from '@cogoport/store';
 const useUpdateAnswerQuestion = () => {
 	const {
 		profile: { user: { id:user_id = '' } },
+		general: { query: { test_id = '' } },
 	} = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_test_user_question_answer',
 	}, { manual: true });
-
-	const test_id = '2b605b28-3cc1-47a7-b73e-52b8a2cb9f76';
 
 	const updateAnswerList = async (id, answer, answer_state) => {
 		try {

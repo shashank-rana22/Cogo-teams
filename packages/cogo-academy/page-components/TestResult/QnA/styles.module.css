@@ -1,11 +1,11 @@
 .container {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .heading {
-    font-weight: 500;
-    font-size: 18px;
-    color: #221F20;
-    border-bottom: 2px solid #fff;
+	font-size: 18px;
+	font-weight: 500;
+	color: #221f20;
+	border-bottom: 2px solid #fff;
 }

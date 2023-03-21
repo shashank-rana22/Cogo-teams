@@ -7,7 +7,6 @@
 
 .message_container {
 	display: flex;
-	margin-bottom: 24px;
 }
 
 .message_content {
@@ -29,6 +28,7 @@
 
 .stats {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 }
 

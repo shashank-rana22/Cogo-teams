@@ -6,7 +6,7 @@ function QuestionWiseStats() {
 	const data = [
 
 		{
-			id   : 'inner_circle',
+			id   : 'Questions Answered',
 			data : [
 				{
 					x : 'Attempted',
@@ -18,16 +18,16 @@ function QuestionWiseStats() {
 				},
 				{
 					x : 'Incorrect',
-					y : 46,
+					y : 30,
 				},
 			],
 		},
 		{
-			id   : 'outer_circle',
+			id   : 'Questions Attempted',
 			data : [
 				{
 					x : 'Attempted',
-					y : 25,
+					y : 90,
 				},
 				{
 					x : 'Correct',
@@ -63,6 +63,7 @@ function QuestionWiseStats() {
 				radialAxisStart={null}
 				circularAxisOuter={null}
 				labelsSkipAngle={9}
+				maxValue={100}
 				legends={[
 					{
 						anchor        : 'right',

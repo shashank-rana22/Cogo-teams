@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 const useFetchQuestionsList = ({ currentQuestion }) => {
 	const {
 		profile: { user: { id:user_id = '' } },
+		general: { query: { test_id = '' } },
 	} = useSelector((state) => state);
 
 	const [{ data, loading }, trigger] = useRequest({
@@ -12,8 +13,7 @@ const useFetchQuestionsList = ({ currentQuestion }) => {
 		url    : '/get_test_question',
 	}, { manual: true });
 
-	const test_id = 'cec3db69-604d-48b7-a22d-cbab6c7572db';
-	// const question_number = currentQuestion || 2;
+	// const test_id = '2b605b28-3cc1-47a7-b73e-52b8a2cb9f76';
 	const start_time = new Date();
 	const end_time = new Date();
 
@@ -26,6 +26,7 @@ const useFetchQuestionsList = ({ currentQuestion }) => {
 				start_time,
 				end_time,
 			};
+
 			trigger({
 				params: payload,
 			});
@@ -34,6 +35,7 @@ const useFetchQuestionsList = ({ currentQuestion }) => {
 		}
 	};
 
+	console.log('x', data);
 	useEffect(() => {
 		fetchQuestions();
 	}, [currentQuestion]);

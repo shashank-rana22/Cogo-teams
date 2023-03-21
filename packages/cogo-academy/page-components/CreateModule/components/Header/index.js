@@ -11,22 +11,25 @@ const BUTTON_TEXT_MAPPING = {
 
 };
 
+const ROUTE_MAPPING = {
+	tests        : 'create-test',
+	question_set : 'create-question',
+};
+
 function Header(props) {
 	const { activeTab } = props;
 	const router = useRouter();
 	return (
 		<div className={styles.flex_div}>
+
 			<div className={styles.title}>Test Module</div>
-			<Button onClick={() => router.push('/learning/test-module/create-question')}>
-				+ Create New Question
+
+			<Button onClick={() => router.push(`/learning/test-module/${ROUTE_MAPPING[activeTab]}`)}>
+				+ Create New
 				{' '}
 				{BUTTON_TEXT_MAPPING[activeTab]}
 			</Button>
-			<Button onClick={() => router.push('/learning/test-module/create-test')}>
-				+ Create New Test
-				{' '}
-				{BUTTON_TEXT_MAPPING[activeTab]}
-			</Button>
+
 		</div>
 	);
 }
