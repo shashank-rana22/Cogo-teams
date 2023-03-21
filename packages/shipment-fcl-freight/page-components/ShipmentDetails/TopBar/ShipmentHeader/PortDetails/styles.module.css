@@ -44,12 +44,12 @@
 .port_code {
 	display: flex;
 	align-items: center;
-	line-height: 16px;
+	line-height: 10px;
 }
 
 .code {
 	font-weight: 400;
-	font-size: 16px;
+	font-size: 14px;
 	color: #F68B21;
 	margin: 0 4px 8px 0;
 }
