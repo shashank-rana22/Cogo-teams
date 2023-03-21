@@ -42,7 +42,7 @@ function BLDetails() {
 					setMappingModal(true);
 					e.stopPropagation();
 				}}
-				className="sm"
+				size="md"
 				style={{ marginLeft: '6px' }}
 			>
 				BL Container Mapping
@@ -53,7 +53,7 @@ function BLDetails() {
 					setEditContainerNum(true);
 					e.stopPropagation();
 				}}
-				className="sm"
+				size="md"
 			>
 				Update Container Number
 			</Button>

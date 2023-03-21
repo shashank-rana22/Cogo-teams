@@ -30,6 +30,7 @@ function ContainerNmUpdate({
 					<div className={styles.render_container}>
 						<div className={styles.container_num}>{container?.container_number}</div>
 						<Input
+							size="sm"
 							width="100%"
 							value={containerValue[container?.id]}
 							onChange={(e) => handleChange(e, container?.id)}
@@ -39,7 +40,7 @@ function ContainerNmUpdate({
 
 				<div className={styles.button_container}>
 					<Button
-						className="secondary md"
+						size="md"
 						onClick={() => setEditContainerNum(false)}
 						disabled={loading}
 					>
@@ -47,7 +48,7 @@ function ContainerNmUpdate({
 					</Button>
 
 					<Button
-						className="primary md"
+						size="md"
 						onClick={handleSubmit}
 						disabled={loading}
 					>
