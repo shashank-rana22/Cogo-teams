@@ -15,12 +15,13 @@ function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
 	const {
 		list:data = [],
 		audit_data = {},
-		version_list_details:version_details = {},
 	} = listKamExpertiseCurrentConfigs;
 
-	const listArray = data.filter((item) => item.status_value === 'draft' || item.status_value === 'active');
+	const LIVE_VERSION = data.filter((item) => item.status_value === 'active')[0]?.version_number;
 
-	const VERSION_CARDS = listArray.reverse();
+	const listLiveAndDraft = data.filter((item) => item.status_value === 'draft' || item.status_value === 'active');
+
+	const VERSION_CARDS = listLiveAndDraft.reverse();
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise/configurations/all-configurations');
@@ -33,8 +34,8 @@ function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
 					selectedVersion={selectedVersion}
 					setSelectedVersion={setSelectedVersion}
 					audit_data={audit_data}
-					version_details={version_details}
 					data={data}
+					LIVE_VERSION={LIVE_VERSION}
 				/>
 
 				{VERSION_CARDS.map((item) => (

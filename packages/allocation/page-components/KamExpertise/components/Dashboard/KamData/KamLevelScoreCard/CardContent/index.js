@@ -1,4 +1,4 @@
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { IcM0, IcMArrowBack } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -28,7 +28,7 @@ function CardContent({ list_data = {}, value }) {
 			<span style={{ color: '#4f4f4f' }}>{title}</span>
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<span style={{ fontSize: '24px', fontWeight: 'bold', paddingRight: '10px' }}>{val}</span>
-				{ percentage_change !== undefined
+				{ percentage_change !== 0
 					?				(
 						<span style={{ display: 'flex' }}>
 							<IcMArrowBack
@@ -47,7 +47,12 @@ function CardContent({ list_data = {}, value }) {
 							</span>
 						</span>
 					)
-					: ''}
+					: (
+						<span style={{ marginLeft: '4px' }}>
+							{percentage_change}
+							%
+						</span>
+					)}
 			</div>
 		</div>
 	);

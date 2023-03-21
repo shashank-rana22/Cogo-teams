@@ -1,22 +1,24 @@
 import { cl, Pill, Table } from '@cogoport/components';
+import { format } from '@cogoport/utils';
+// import { format } from '@cogoport/utils';
 import React from 'react';
 // import { Modal} from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function Published({ setSelectedVersion = () => {}, version_details }) {
-	console.log('ver', version_details);
-	const data = [];
-	Object.keys(version_details).forEach((key) => {
-		if (key !== '') {
-			data.push({
-				version_number : key,
-				status         : ` ${version_details[key].status}`,
-				updated_at     : `${version_details[key].updated_at}`,
+function Published({ setSelectedVersion = () => {}, data }) {
+	const table = [];
+
+	data.forEach((element) => {
+		if (element.version_number !== '0') {
+			table.push({
+				version_number : element?.version_number || '-',
+				status         : element?.status_value || '-',
+				updated_at     : element?.audit_data?.updated_at || '-',
+
 			});
 		}
 	});
-
 	const columns = [
 		{
 			Header   : 'VERSION NAME',
@@ -35,10 +37,10 @@ function Published({ setSelectedVersion = () => {}, version_details }) {
 			Header   : 'STATUS',
 			accessor : 'status',
 			Cell     : ({ value }) => {
-				const colors = value === 'live' ? 'green' : 'red';
+				const colors = value === 'active' ? 'green' : 'red';
 				return (
 					<span>
-						<Pill className={styles.pill} color={colors}>{value}</Pill>
+						<Pill className={styles.pill} color={colors}>{value === 'active' ? 'live' : value}</Pill>
 					</span>
 				);
 			},
@@ -47,6 +49,9 @@ function Published({ setSelectedVersion = () => {}, version_details }) {
 		{
 			Header   : 'LAST UPDATED',
 			accessor : 'updated_at',
+			Cell     : ({ value }) => (
+				<section>{ value ?? format(value, 'dd-MM-YYYY')}</section>
+			),
 		},
 
 	];
@@ -65,7 +70,7 @@ function Published({ setSelectedVersion = () => {}, version_details }) {
 					${styles.table}
 				`}
 				columns={columns}
-				data={data}
+				data={table}
 				selectType="single"
 				onRowClick={(row) => { setSelectedVersion(row.version_number); }}
 			/>

@@ -66,7 +66,7 @@ function Header(props) {
 							:
 						</div>
 						<span>
-							{ (format(audit_data?.updated_at, 'dd-MM-YYYY') || '--')}
+							{ (format(audit_data?.updated_at, 'dd-MM-YYYY') || '')}
 						</span>
 					</div>
 
@@ -77,7 +77,7 @@ function Header(props) {
 							:
 							{' '}
 						</div>
-						<b>{startCase(audit_data?.name || '----')}</b>
+						<b>{startCase(audit_data?.name || '')}</b>
 					</div>
 				</div>
 			</div>
