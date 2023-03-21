@@ -65,11 +65,13 @@ function CogoOne() {
 		activeCardId,
 		firstLoading,
 		updateLeaduser,
+		handleScroll,
 	} = useListChats({
 		firestore,
 		userId,
 		isomniChannelAdmin,
 		showBotMessages,
+		searchValue,
 	});
 	const { messagesList = [], unReadChatsCount } = listData;
 
@@ -151,6 +153,7 @@ function CogoOne() {
 				setShowBotMessages={setShowBotMessages}
 				showBotMessages={showBotMessages}
 				setShowDialModal={setShowDialModal}
+				handleScroll={handleScroll}
 				setModalType={setModalType}
 				modalType={modalType}
 			/>
