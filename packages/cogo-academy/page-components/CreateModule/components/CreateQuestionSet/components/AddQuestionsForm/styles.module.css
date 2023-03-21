@@ -24,3 +24,15 @@
 	width: 50%;
 	margin-top: 24px;
 }
+
+.add_container {
+	margin: auto;
+	text-align: center;
+	margin-top: 24px;
+}
+
+.upload_icon {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}

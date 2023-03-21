@@ -1,11 +1,13 @@
 import { ButtonIcon, Input, Button } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMSearchlight, IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
-import CreateQuestion from '../../../../commons/CreateQuestion';
 import LoadingState from '../../../../commons/LoadingState';
 import SavedQuestionDetails from '../../../../commons/SavedQuestionDetails';
 
+import BulkUpload from './BulkUpload';
+import ManualAddition from './ManualAddition';
 import styles from './styles.module.css';
 
 function AddQuestionsForm({
@@ -23,6 +25,8 @@ function AddQuestionsForm({
 	setFilters,
 	filters,
 }) {
+	const [showBulkUpload, setShowBulkUpload] = useState(false);
+
 	const { test_questions = [], topic = '' } = data || {};
 
 	if (isEmpty(questionSetId) && from !== 'test') {
@@ -69,55 +73,59 @@ function AddQuestionsForm({
 				)
 			)}
 
-			{(savedQuestionDetails || []).map((item, index) => {
-				const { isNew } = item;
-
-				if (isNew) {
-					return (
-						<CreateQuestion
-							index={index}
-							item={item}
-							questionSetId={questionSetId}
-							getTestQuestionTest={getTestQuestionTest}
-							setSavedQuestionDetails={setSavedQuestionDetails}
-							setAllKeysSaved={setAllKeysSaved}
-							editDetails={editDetails}
-							setEditDetails={setEditDetails}
-							topic={topic}
-						/>
-					);
-				}
-
-				return null;
-			})}
-
-			{!isEmpty(editDetails) ? (
-				<CreateQuestion
-					editDetails={editDetails}
-					index={test_questions.findIndex((item1) => item1?.id === editDetails?.id)}
-					type="edit"
+			{!allKeysSaved && !loading ? (
+				<ManualAddition
 					questionSetId={questionSetId}
+					test_questions={test_questions}
 					getTestQuestionTest={getTestQuestionTest}
 					setSavedQuestionDetails={setSavedQuestionDetails}
 					setAllKeysSaved={setAllKeysSaved}
+					editDetails={editDetails}
 					setEditDetails={setEditDetails}
 					topic={topic}
+					savedQuestionDetails={savedQuestionDetails}
+				/>
+			) : null}
+
+			{showBulkUpload && !loading ? (
+				<BulkUpload
+					questionSetId={questionSetId}
+					setShowBulkUpload={setShowBulkUpload}
 				/>
 			) : null}
 
 			{from !== 'test' ? (
-				<div className={styles.button_container}>
-					<Button
-						type="button"
-						disabled={!allKeysSaved}
-						themeType="secondary"
-						onClick={() => {
-							setSavedQuestionDetails((prev) => [...prev, { id: new Date().getTime(), isNew: true }]);
-							setAllKeysSaved(false);
-						}}
-					>
-						+ Add Another Question
-					</Button>
+				<div className={styles.add_container}>
+					<div>Add more Questions</div>
+
+					<div className={styles.button_container}>
+						<Button
+							type="button"
+							disabled={showBulkUpload}
+							loading={loading}
+							themeType="primary"
+							style={{ marginRight: '12px' }}
+							onClick={() => setShowBulkUpload(true)}
+						>
+							<div className={styles.upload_icon}>
+								<IcMUpload />
+								Bulk Upload
+							</div>
+						</Button>
+
+						<Button
+							type="button"
+							disabled={!allKeysSaved}
+							loading={loading}
+							themeType="secondary"
+							onClick={() => {
+								setSavedQuestionDetails((prev) => [...prev, { id: new Date().getTime(), isNew: true }]);
+								setAllKeysSaved(false);
+							}}
+						>
+							+ Manual Addition
+						</Button>
+					</div>
 				</div>
 			) : null}
 		</div>
