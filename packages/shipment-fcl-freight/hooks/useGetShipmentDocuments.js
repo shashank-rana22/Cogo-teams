@@ -1,28 +1,29 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 // import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-function useGetListDocuments({ shipment_data, filters = {} }) {
+function useGetListDocuments({ shipment_data = {}, filters = {} }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_freight/list_documents',
 		method : 'GET',
 	}, { manual: true });
 
-	const { id } = shipment_data;
+	const { id = '' } = shipment_data;
+
+	const { q, service, source } = filters;
 
 	const listDocuments = useCallback(() => {
 		(async () => {
 			const filter = {
 				filters: {
-					q                  : filters?.q || undefined,
+					q,
 					shipment_id        : id,
-					service_type       : filters?.service || undefined,
-					uploaded_by_org_id : filters?.source || undefined,
+					service_type       : service || undefined,
+					uploaded_by_org_id : source || undefined,
 				},
 			};
 			try {
-				const res = await trigger({
+				await trigger({
 					params: {
 						...filter,
 						additional_methods : ['pagination', 'organizations'],
@@ -31,18 +32,16 @@ function useGetListDocuments({ shipment_data, filters = {} }) {
 						sort_by            : 'created_at',
 						sort_type          : 'desc',
 					},
-				}); if (!res.hasError) {
-					// Toast.error('dsfghj');
-				}
+				});
 			} catch (err) {
 				console.log(err);
 			}
 		})();
-	}, [trigger, id, filters]);
+	}, [trigger, id, q, service, source]);
 
 	useEffect(() => {
 		listDocuments();
-	}, [listDocuments, filters]);
+	}, [listDocuments]);
 
 	return {
 		loading,

@@ -25,8 +25,6 @@ function ContainerNmUpdate({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>Update Container Number</div>
-
 			{(containerDetails?.list || []).map((container) => (
 				<div className={styles.render_container}>
 					<div className={styles.container_num}>{container?.container_number}</div>

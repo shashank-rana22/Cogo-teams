@@ -6,10 +6,10 @@ import React, { useContext, useState } from 'react';
 import CargoDetails from '../../../../common/CargoDetails';
 
 import AddPoNumber from './AddPoNumber';
-import CancelShipment from './CancelShipment';
+// import CancelShipment from './CancelShipment';
 import Loader from './Loader';
 import PortDetails from './PortDetails';
-import RequestCancellation from './RequestCancellation';
+// import RequestCancellation from './RequestCancellation';
 import styles from './styles.module.css';
 
 function ShipmentHeader() {
@@ -19,29 +19,30 @@ function ShipmentHeader() {
 
 	const { po_number, importer_exporter } = shipment_data || {};
 
-	const renderContent = () => {
-		// if (isIE && !isRequested) {
-		if (false) {
-			return (
-				<RequestCancellation
-					showCancel={showCancel}
-					setShowCancel={setShowCancel}
-					onClose={() => setShow(false)}
-					refetch={refetch}
-				/>
-			);
-		}
+	// const renderContent = () => {
+	// 	// if (isIE && !isRequested) {
+	// 		// return (
+	// 		// 	<RequestCancellation
+	// 		// 		showCancel={showCancel}
+	// 		// 		setShowCancel={setShowCancel}
+	// 		// 		onClose={() => setShow(false)}
+	// 		// 		refetch={refetch}
+	// 		// 	/>
+	// 		// );
+	// 	// }
 
-		return (
-			<CancelShipment
-				id={shipment_data?.id}
-				showCancel={showCancel}
-				setShowCancel={setShowCancel}
-				onClose={() => setShow(false)}
-				setShow={setShow}
-			/>
-		);
-	};
+	// 	return (
+	// 		<CancelShipment
+	// 			id={shipment_data?.id}
+	// 			showCancel={showCancel}
+	// 			setShowCancel={setShowCancel}
+	// 			onClose={() => setShow(false)}
+	// 			setShow={setShow}
+	// 			// isIE={isIE}
+	// 			// showRequest={showRequest}
+	// 		/>
+	// 	);
+	// };
 
 	const handlePoNo = () => {
 		if (po_number) {
@@ -76,7 +77,7 @@ function ShipmentHeader() {
 			<div className={styles.customer}>
 				<Tooltip
 					theme="light"
-					placement="bottom"
+					placement="right"
 					maxWidth="none"
 					interactive
 					content={(
@@ -85,7 +86,7 @@ function ShipmentHeader() {
 						</div>
 					)}
 				>
-					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
+					<div>{importer_exporter?.business_name}</div>
 				</Tooltip>
 				<div>
 					{handlePoNo()}
@@ -103,7 +104,7 @@ function ShipmentHeader() {
 				placement="bottom"
 				theme="light"
 				trigger="click"
-				content={renderContent()}
+				content="Cancel Shipment"
 			>
 				<div className={styles.dots}>
 					<IcMOverflowDot />
