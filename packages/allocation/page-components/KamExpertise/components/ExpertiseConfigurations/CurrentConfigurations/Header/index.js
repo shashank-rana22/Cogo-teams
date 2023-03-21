@@ -25,7 +25,9 @@ const CREATE_CONFIGURATION_MAPPING = {
 	[INITIAL_MODE]      : CreateModal,
 };
 
-function Header({ setSelectedVersion, selectedVersion, audit_data, version_details }) {
+function Header({ setSelectedVersion, selectedVersion, audit_data, version_details, data = [] }) {
+	console.log('data in header', audit_data);
+
 	const [mode, setMode] = useState('initial-mode');
 	const [showModal, setShowModal] = useState(false);
 
@@ -34,6 +36,7 @@ function Header({ setSelectedVersion, selectedVersion, audit_data, version_detai
 			selectedVersion,
 			setSelectedVersion,
 			version_details,
+			data,
 		},
 		[SAVED_DRAFT]: {
 			setMode,
@@ -74,7 +77,11 @@ function Header({ setSelectedVersion, selectedVersion, audit_data, version_detai
 						{' '}
 						:
 						{' '}
-						<strong>{format(audit_data.published_date, 'dd MMM yyyy')}</strong>
+						<strong>
+							{ audit_data.updated_at
+								? format(audit_data.updated_at, 'dd MMM yyyy') : '--'}
+
+						</strong>
 					</div>
 
 					<div>
@@ -82,7 +89,7 @@ function Header({ setSelectedVersion, selectedVersion, audit_data, version_detai
 						{' '}
 						:
 						{' '}
-						<strong>{audit_data?.published_by || '--'}</strong>
+						<strong>{audit_data?.name || '--'}</strong>
 					</div>
 				</div>
 			</div>

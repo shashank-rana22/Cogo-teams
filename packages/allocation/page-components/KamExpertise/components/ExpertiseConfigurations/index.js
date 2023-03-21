@@ -64,6 +64,7 @@ function ViewAllConfigs() {
 							) : null;
 						})}
 					</Tabs>
+
 					<Button
 						themeType="primary"
 						className={styles.pub_button}
