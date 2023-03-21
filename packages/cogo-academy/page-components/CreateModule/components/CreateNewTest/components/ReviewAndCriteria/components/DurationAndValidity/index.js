@@ -12,7 +12,15 @@ function DurationAndValidity({ setValue, data, control, errors }) {
 	useEffect(() => {
 		if (data) {
 			controls.forEach(({ name: controlName }) => {
-				setValue(controlName, data[controlName]);
+				const { validity_end, validity_start } = data || {};
+				if (controlName === 'test_validity') {
+					setValue(controlName, {
+						startDate : new Date(format(validity_start)),
+						endDate   : new Date(format(validity_end)),
+					});
+				} else {
+					setValue(controlName, data[controlName]);
+				}
 			});
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps

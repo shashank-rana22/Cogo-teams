@@ -12,15 +12,10 @@ function useUpdateTest() {
 	const updateTest = async ({ test_id, values = {}, fetchList, type = 'edit' }) => {
 		if (type === 'edit') {
 			try {
-				const { test_duration_min, cut_off_marks, maximum_attempts, name, test_validity } = values;
-				const toRemove = ['test_duration', 'cut_off_marks', 'maximum_attempts', 'name', 'test_validity'];
-				toRemove.forEach((item) => {
-				// eslint-disable-next-line no-param-reassign
-					delete values[item];
-				});
+				const { test_duration, cut_off_marks, maximum_attempts, name, test_validity } = values;
 
 				const testDetailsObj = {
-					test_duration  : test_duration_min,
+					test_duration,
 					cut_off_marks,
 					maximum_attempts,
 					name,
@@ -28,18 +23,28 @@ function useUpdateTest() {
 					validity_end   : test_validity.endDate,
 				};
 
-				const set_wise_distribution = [];
-				Object.entries(values).forEach(([key, value]) => {
-					const question_type = key.slice(-1) === 'q' ? 'stand_alone' : 'case_study';
-					// eslint-disable-next-line radix
-					const distribution_count = parseInt(value);
-					const test_question_set_id = key.substring(0, key.length - 1);
-					set_wise_distribution.push({
-						distribution_count,
-						test_question_set_id,
-						question_type,
+				const set_wise_distribution = Object.entries(values)
+					.filter(
+						(item) => ![
+							'test_duration',
+							'cut_off_marks',
+							'maximum_attempts',
+							'name',
+							'test_validity',
+						].includes(item),
+					)
+					.map(([key, value]) => {
+						const question_type = key.slice(-1) === 'q' ? 'stand_alone' : 'case_study';
+
+						const distribution_count = Number(value);
+						const test_question_set_id = key.substring(0, key.length - 1);
+
+						return {
+							distribution_count,
+							test_question_set_id,
+							question_type,
+						};
 					});
-				});
 
 				await trigger({
 					data: {
