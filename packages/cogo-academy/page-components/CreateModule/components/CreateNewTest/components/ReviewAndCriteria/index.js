@@ -50,7 +50,7 @@ function ReviewAndCriteria({
 
 				<div className={styles.entity}>
 					<div className={styles.label_entity}>Cogo Entity </div>
-					<div className={styles.entity_name}>{data?.cogo_entity_id}</div>
+					<div className={styles.entity_name}>{data?.cogo_entity_object?.business_name}</div>
 				</div>
 
 				<div className={styles.topic}>
