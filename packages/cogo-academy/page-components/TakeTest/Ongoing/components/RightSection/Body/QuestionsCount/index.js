@@ -8,9 +8,9 @@ function QuestionsCount({ data = {}, setCurrentQuestion }) {
 		not_viewed        : '#FDFBF6',
 	};
 
-	// console.log('asdfghjcxdfg:', data);
 	const handleChangeQuestion = ({ index }) => {
 		if (index === 0 || data?.data?.[index - 1].answer_state !== 'not_viewed') {
+			localStorage.setItem('currentQuestion', index + 1);
 			setCurrentQuestion(index + 1);
 		}
 	};

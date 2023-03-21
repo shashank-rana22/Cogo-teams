@@ -35,9 +35,6 @@
 .label {
 	width: 15%;
 	height: 48px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 70px;
 	font-size: 16px;
 	font-weight: 600;
 	color: #221f20;
@@ -96,4 +93,12 @@
 
 .btn_cont_float {
 	justify-content: flex-end;
+}
+
+.btn {
+	width: fit-content;
+}
+
+.instruction {
+	display: flex;
 }

@@ -13,8 +13,7 @@ import styles from './styles.module.css';
 function CreateTest() {
 	const router = useRouter();
 
-	const [activeStepper, setActiveStepper] = useState(router.query?.id ? 'review_and_criteria'
-		: 'details_and_questions');
+	const [activeStepper, setActiveStepper] = useState('details_and_questions');
 
 	const [testId, setTestId] = useState(null);
 

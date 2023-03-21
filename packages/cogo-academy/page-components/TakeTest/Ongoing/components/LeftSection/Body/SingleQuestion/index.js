@@ -26,7 +26,6 @@ function SingleQuestion({ question = {}, currentQuestion, total_question, loadin
 	if (loading || isEmpty(question)) {
 		<Placeholder height="40px" width="100%" />;
 	}
-
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.container}>

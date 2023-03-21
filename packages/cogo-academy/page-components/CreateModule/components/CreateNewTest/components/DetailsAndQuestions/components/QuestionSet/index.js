@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill, Pagination } from '@cogoport/components';
 import { IcMSearchlight, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import useGetTestQuestionSets from '../../../../../../hooks/useGetTestQuestionSets';
 
@@ -9,6 +10,7 @@ import styles from './styles.module.css';
 
 function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray }) {
 	const { data, loading, setParams } = useGetTestQuestionSets();
+	const [sort, setSort] = useState(false);
 
 	const { page = 0, page_limit: pageLimit = 0, total_count = 0, list } = data || {};
 
@@ -155,7 +157,22 @@ function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray }) {
 				/>
 				<div className={styles.filter}>
 					<IcMArrowRotateDown style={{ cursor: 'pointer' }} />
-					<span className={styles.span_text}>Sort By</span>
+					<span
+						className={styles.span_text}
+						onClick={() => {
+							setSort((prev) => !prev);
+							setParams((prev) => ({
+								...prev,
+								sort_type : sort ? 'asc' : 'desc',
+								filters   : {
+									...prev.filters,
+								},
+							}));
+						}}
+					>
+						Sort By
+
+					</span>
 				</div>
 			</div>
 

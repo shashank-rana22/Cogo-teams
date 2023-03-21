@@ -212,11 +212,11 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 			accessor : ({ status = '', id = '' }) => (
 				status === 'active' ? (
 					<section>
-						<Pill size="sm" color="green">{startCase(status)}</Pill>
+						<Pill size="md" color="green">{startCase(status)}</Pill>
 						<Link href={`/learning/tests/${id}`}>
 							<Pill
 								key={status}
-								size="sm"
+								size="md"
 								prefix={<IcMShare />}
 								color="#FEF3E9"
 								style={{ cursor: 'pointer' }}
@@ -230,7 +230,7 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 						<section>
 							<Pill
 								key={status}
-								size="sm"
+								size="md"
 								color="yellow"
 							>
 								{startCase(status)}

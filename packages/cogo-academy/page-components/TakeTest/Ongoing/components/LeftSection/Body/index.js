@@ -4,8 +4,6 @@ import CaseStudy from './CaseStudy';
 import SingleQuestion from './SingleQuestion';
 
 function Body({ data = [], currentQuestion, setCurrentQuestion, total_question, answer = '', setAnswer, loading }) {
-	console.log('answe11r', loading);
-
 	return (
 		<div>
 			{!data?.primary_question_type

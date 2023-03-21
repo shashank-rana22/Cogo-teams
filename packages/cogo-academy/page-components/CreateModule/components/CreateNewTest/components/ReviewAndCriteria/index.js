@@ -17,7 +17,9 @@ function ReviewAndCriteria({
 	data,
 	test_id,
 }) {
-	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
+
+	const { name = '', set_data = [], cogo_entity_object = {} } = data || {};
 
 	const { updateTest } = useUpdateTest();
 	const router = useRouter();
@@ -36,13 +38,14 @@ function ReviewAndCriteria({
 			</div>
 
 			<div className={styles.subcontainer}>
-				<div className={styles.label}>{data?.name || '-'}</div>
+				<div className={styles.label}>{name || '-'}</div>
+
 				<div className={styles.topic}>
 					<div className={styles.subtopic}>Topics </div>
 					<div className={styles.topic_pill_container}>
-						{data?.set_data?.map((question_set) => (
+						{set_data.map((question_set) => (
 							<Pill size="md" color="blue" className={styles.names}>
-								<span className={styles.names}>{question_set?.topic}</span>
+								<span className={styles.names}>{question_set.topic}</span>
 							</Pill>
 						))}
 					</div>
@@ -50,7 +53,7 @@ function ReviewAndCriteria({
 
 				<div className={styles.entity}>
 					<div className={styles.label_entity}>Cogo Entity </div>
-					<div className={styles.entity_name}>{data?.cogo_entity_object?.business_name}</div>
+					<div className={styles.entity_name}>{cogo_entity_object.business_name}</div>
 				</div>
 
 				<div className={styles.topic}>
@@ -65,6 +68,7 @@ function ReviewAndCriteria({
 					</div>
 				</div>
 			</div>
+
 			<QuestionsAndDistribution
 				data={data}
 				control={control}
@@ -72,17 +76,58 @@ function ReviewAndCriteria({
 				loading={loading}
 				setValue={setValue}
 			/>
+
 			<DurationAndValidity setValue={setValue} data={data} control={control} errors={errors} loading={loading} />
+
+			{/* <Button
+				className={styles.btn}
+				size="md"
+				themeType="accent"
+				onClick={() => setShow(true)}
+			>
+				Add Instructions
+			</Button> */}
+			{/* <Modal size="md" show={show} onClose={() => setShow(false)} placement="center">
+				<Modal.Header title="Add instructions" />
+				<Modal.Body>
+					{fields.map((field, index) => (
+						<div className={styles.instruction}>
+							<InputController
+								control={control}
+								key={field.id}
+								name={`guidelines.${index}.instruction`}
+							/>
+							<ButtonIcon
+								size="xl"
+								icon={<IcMDelete />}
+								themeType="primary"
+								onClick={() => remove(index)}
+							/>
+						</div>
+					))}
+				</Modal.Body>
+				<Modal.Footer align="right">
+					<Button onClick={() => {
+						append({ instruction: '' });
+					}}
+					>
+						Add New Instruction
+					</Button>
+				</Modal.Footer>
+			</Modal> */}
+
 			<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 				<Button
 					loading={loading}
 					size="md"
 					themeType="tertiary"
 					style={{ marginRight: '10px' }}
-					// onClick={handleSubmit((values) => {
-					// 	// if (!isEmpty(errors)) Toast.error('Fill all required fields');
-					// 	// createTest({ data: values, idArray, next: 'draft' });
-					// })}
+					onClick={
+						handleSubmit((values) => {
+							if (!isEmpty(errors)) Toast.error('Fill all required fields');
+							updateTest({ test_id, values, status: 'draft' });
+						})
+					}
 				>
 					Save As Draft
 				</Button>
@@ -92,7 +137,7 @@ function ReviewAndCriteria({
 					onClick={
 						handleSubmit((values) => {
 							if (!isEmpty(errors)) Toast.error('Fill all required fields');
-							updateTest({ test_id, values });
+							updateTest({ test_id, values, status: 'active' });
 						})
 					}
 				>
