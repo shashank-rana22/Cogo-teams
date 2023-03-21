@@ -3,35 +3,20 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
-// import controls from './controls';
-import useGetContainerDetails from './useGetContainerDetails';
-
 const useAddRate = ({
 	item,
-	isSeller = false,
-	status,
 	refetch = () => {},
 	setAddRate = () => {},
-	billToCustomer = undefined,
 	onCancel = () => {},
 	setAddSellPrice = () => {},
 	filters,
 }) => {
-	const options = [];
+	const unitOptions = [];
 	if (item?.units) {
 		item?.units?.forEach((unit) => {
-			options.push({ label: startCase(unit), value: unit });
+			unitOptions.push({ label: startCase(unit), value: unit });
 		});
-	} else options.push({ label: startCase(item?.unit), value: item?.unit });
-
-	// const { containerList } = useGetContainerDetails();
-
-	// const initialControls = controls(options, item, containerList);
-
-	// const mappedCtrls = initialControls.map((ctrl) => ({
-	// 	...ctrl,
-	// 	value: item[ctrl.name],
-	// }));
+	} else unitOptions.push({ label: startCase(item?.unit), value: item?.unit });
 
 	const {
 		fields,
@@ -47,7 +32,6 @@ const useAddRate = ({
 	}, { manual: true });
 
 	const onAddRate = async (data) => {
-		console.log('data', data);
 		const addedService = (item.services || []).find((service) => {
 			if (filters?.service_type?.includes('?')) {
 				return service.id === filters?.service_type?.split('?')?.[1];
@@ -92,13 +76,13 @@ const useAddRate = ({
 
 	return {
 		fields,
-		// controls: mappedCtrls,
 		onAddRate,
 		control,
 		handleSubmit,
 		register,
 		loading,
 		errors,
+		unitOptions,
 	};
 };
 

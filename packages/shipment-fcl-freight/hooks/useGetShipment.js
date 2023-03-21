@@ -40,9 +40,11 @@ function useGetShipment() {
 
 		get: {
 			isGettingShipment,
-			refetch         : getShipment,
-			primary_service : data?.primary_service,
-			shipment_data   : data?.summary,
+			refetch           : getShipment,
+			documents         : data?.documents,
+			primary_service   : data?.primary_service,
+			shipment_data     : data?.summary,
+			container_details : data?.container_details,
 		},
 	};
 }

@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function ContainerNmUpdate({
 	setEditContainerNum = () => { },
-	shipment_data = {},
+	shipmentData = {},
 	refetch = () => { },
 }) {
 	const [containerValue, setContainerValue] = useState({});
@@ -15,7 +15,7 @@ function ContainerNmUpdate({
 	const { handleSubmit, containerDetails, loading } = useUpdateContainerNumber(
 		containerValue,
 		setEditContainerNum,
-		shipment_data,
+		shipmentData,
 		refetch,
 	);
 

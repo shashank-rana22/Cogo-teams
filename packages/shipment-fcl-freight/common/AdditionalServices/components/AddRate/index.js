@@ -1,5 +1,3 @@
-// import Layout from '@cogoport/bookings/commons/Layout';
-import { Accordion } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -27,8 +25,6 @@ function AddRate({
 	status,
 	setAddSellPrice = () => {},
 	refetch,
-	showLabel = true,
-	shipment_data,
 	onCancel = () => {},
 	filters,
 	updateResponse = () => {},
@@ -37,7 +33,7 @@ function AddRate({
 	const [showSecondStep, setShowSecondStep] = useState(false);
 
 	const {
-		onAddRate, register, handleSubmit, loading, errors, control,
+		onAddRate, register, handleSubmit, loading, errors, control, unitOptions,
 	} = useAddRate({
 		item,
 		isSeller,
@@ -102,6 +98,7 @@ function AddRate({
 				errors={errors}
 				register={register}
 				item={item}
+				unitOptions={unitOptions}
 			/>
 
 			<ActionsToShow

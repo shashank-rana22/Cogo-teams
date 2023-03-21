@@ -3,8 +3,6 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useState, useContext } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
-// import useListContainerDetails from '../../../hooks/useListContainerDetails';
-import { data } from '../dummy_data';
 
 import BlContainer from './BlContainer';
 import ContainerDetails from './ContainerDetails';
@@ -18,33 +16,18 @@ function BLDetails() {
 	const [mappingModal, setMappingModal] = useState(false);
 	const [editContainerNum, setEditContainerNum] = useState(false);
 
-	const { shipment_data, primary_service } = useContext(
+	const { shipment_data, documents, container_details } = useContext(
 		ShipmentDetailContext,
 	);
-
-	// const {
-	// 	list: { data },
-	// 	loading,
-	// 	isMobile,
-	// 	refetch,
-	// } = useListContainerDetails({
-	// 	shipment_id   : shipment_data?.id || undefined,
-	// 	shipment_type : shipment_data?.shipment_type,
-	// });
-
-	const loading = false;
-
-	const totalContainers = primary_service?.cargo_details
-		.reduce((acc, { containers_count }) => acc + containers_count, 0);
 
 	const renderBlCount = (
 		<div className={styles.bl_count_container}>
 			BL and Container Details
 			<div className="bl-count">
 				(
-				{primary_service?.bls_count || 0}
-				BL’s, &nbsp;
-				{totalContainers || 0}
+				{documents?.length || 0}
+				&nbsp;BL & &nbsp;
+				{container_details?.length || 0}
 				&nbsp;
 				Containers
 				)
@@ -84,7 +67,7 @@ function BLDetails() {
 				>
 					<BlContainer
 						shipment_data={shipment_data}
-						data={data}
+						// data={data}
 						setMappingModal={setMappingModal}
 					/>
 				</Modal>

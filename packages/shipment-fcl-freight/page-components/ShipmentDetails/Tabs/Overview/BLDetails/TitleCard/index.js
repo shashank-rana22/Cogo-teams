@@ -11,7 +11,7 @@ function TitleCard({
 	open = false,
 	setActiveId = () => {},
 	activeId = '',
-	shipment_data = {},
+	containersCount = 0,
 }) {
 	const { doc_type } = documentType(item?.bl_document_type);
 
@@ -37,8 +37,8 @@ function TitleCard({
 						</div>
 
 						<div className={styles.ontrack}>
-							{`${startCase(item?.containers_count || 0)} ${
-								item?.containers_count === 1 ? 'Container' : 'Containers'
+							{`${startCase(containersCount || 0)} ${
+								containersCount === 1 ? 'Container' : 'Containers'
 							} on track`}
 						</div>
 

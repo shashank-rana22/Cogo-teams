@@ -62,6 +62,12 @@
 	margin-bottom: 16px;
 	border: 1px solid #ded7fc;
 	border-radius: 4px;
+
+	:global {
+		.ui_accordion_title {
+			width: 96% !important;
+		}
+	}
 }
 
 .button_div{
