@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import Compose from './Compose';
+import Compose from './Compose';
 import EmailView from './EmailView';
 import styles from './styles.module.css';
 
@@ -16,18 +16,18 @@ function Description({
 	subject_position,
 	showClassifyAction,
 }) {
-	// if (composingEmail) {
-	// 	return (
-	// 		<Compose
-	// 			composingEmail={composingEmail}
-	// 			setComposingEmail={setComposingEmail}
-	// 			COMPOSE_EMAIL={COMPOSE_EMAIL}
-	// 			action={action}
-	// 			pre_subject_text={pre_subject_text}
-	// 			subject_position={subject_position}
-	// 		/>
-	// 	);
-	// }
+	if (composingEmail) {
+		return (
+			<Compose
+				composingEmail={composingEmail}
+				setComposingEmail={setComposingEmail}
+				COMPOSE_EMAIL={COMPOSE_EMAIL}
+				action={action}
+				pre_subject_text={pre_subject_text}
+				subject_position={subject_position}
+			/>
+		);
+	}
 	if (activeMail) {
 		return (
 			<div className={styles.container}>

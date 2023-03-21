@@ -1,21 +1,19 @@
-import styled from '@cogoport/front/styled';
-
-export const Container = styled.div`
+.container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-`;
+}
 
-export const Wrapper = styled.div`
+.wrapper {
 	margin-top: 10px;
-`;
+}
 
-export const Row = styled.div`
+.row {
 	display: flex;
 	align-items: center;
-`;
+}
 
-export const AttachementItem = styled.div`
+.attachement_item {
 	margin-right: 10px;
 	display: flex;
 	align-items: center;
@@ -25,13 +23,12 @@ export const AttachementItem = styled.div`
 		background: #e0e0e0;
 		cursor: pointer;
 	}
-`;
+}
 
-export const Name = styled.p`
+.name{
 	max-width: 100px;
-	margin: 0px;
 	display: inline-block;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-`;
+}

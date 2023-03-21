@@ -1,22 +1,22 @@
-import SelectController from '@cogo/business-modules/form/components/Controlled/SelectController';
+import { SelectController } from '@cogoport/forms';
 import React from 'react';
 
-import { Container, Prefix, Row } from './styles';
+import styles from './styles.module.css';
 
 export function Select({ prefix, suffix = null, ...rest }) {
 	return (
-		<Container>
-			<Row>
-				<Prefix>{prefix}</Prefix>
+		<div className={styles.container}>
+			<div className={styles.row}>
+				<div className={styles.prefix}>{prefix}</div>
 				<SelectController
 					{...rest}
 					theme="admin"
 					className="primary md"
 					caret={false}
 				/>
-			</Row>
+			</div>
 			{suffix}
-		</Container>
+		</div>
 	);
 }
 
