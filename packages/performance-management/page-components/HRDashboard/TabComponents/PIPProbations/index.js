@@ -3,17 +3,18 @@ import { IcMEdit, IcMUpload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useGetColumns from '../../../../common/Columns';
-import UserTableData from '../../../../common/UserTableData';
-import feedbackDataColumns from '../../../../constants/feedback-data-columns';
 import useListEmployees from '../../../../hooks/useListEmployees';
 import DecisionModal from '../../DecisionModal';
 import PipUloadModal from '../../PipUploadModal';
-import UploadModalBody from '../../UploadModal';
+// import UploadModalBody from '../../UploadModal';
 
 import Dashboard from './Dashboard';
 import LogModal from './LogModal';
+import AllLogs from './LogModal/AllLogs';
+import NewLog from './LogModal/NewLog';
+import PendingReviews from './PendingReviews';
 import styles from './styles.module.css';
+import UploadedFiles from './UploadedFiles';
 
 // Todo put it inside constants
 const TAB_PANEL_COMPONENT_MAPPING = {
@@ -25,12 +26,12 @@ const TAB_PANEL_COMPONENT_MAPPING = {
 	pending_reviews: {
 		name      : 'pending_reviews',
 		title     : 'Pending Reviews',
-		Component : () => <div>bvnm,,,,</div>,
+		Component : PendingReviews,
 	},
 	uploaded_files: {
 		name      : 'uploaded_files',
 		title    	: 'Uploaded Files',
-		Component : () => <div>bvnm,,,,</div>,
+		Component : UploadedFiles,
 	},
 };
 
@@ -38,64 +39,21 @@ function PIPProbations() {
 	const [openUploadModal, setOpenUploadModal] = useState(false);
 	const [openUpdate, setOpenUpdate] = useState(false);
 	const [openLogModal, setOpenLogModal] = useState(false);
+	const [activeLogTab, setActiveLogTab] = useState('new');
 
 	const [type, setType] = useState('');
 	const [item, setItem] = useState({});
 	const [activeTab, setActiveTab] = useState('dashboard');
 	const [pipParams, setPipParams] = useState({
-		show       : false,
-		diableNext : true,
+		show        : false,
+		disableNext : false,
 	});
-	const { show, diableNext } = pipParams;
+	const { show, disableNext } = pipParams;
 
 	const { employeeData = {}, loading = false, params, setPage } = useListEmployees({});
 
-	// useEffect(() => debounceQuery(searchValue), [searchValue]);
-
-	const columnsToShow = feedbackDataColumns.pipProbationList;
-	const columns = useGetColumns({
-		columnsToShow,
-		setItem,
-		source: 'hr_dashboard',
-		setOpenUpdate,
-		setType,
-		setOpenLogModal,
-	});
-
-	const dataList = {
-		1: [{
-			name            : 'apple',
-			id              : '1',
-			designation     : 'fruit',
-			manager_name    : 'apple_tree',
-			employee_status : 'exited',
-			is_pip          : true,
-		},
-		{
-			name            : 'mango',
-			id              : '2',
-			designation     : 'fruit',
-			manager_name    : 'mango_tree',
-			employee_status : 'employed',
-			is_pip          : true,
-		}],
-		2: [{
-			name            : 'lemon',
-			id              : '3',
-			designation     : 'fruit',
-			manager_name    : 'lemon_tree',
-			employee_status : 'probation',
-			is_pip          : false,
-		},
-		{
-			name            : 'carrot',
-			id              : '5',
-			designation     : 'vegetable',
-			manager_name    : 'carrot_plant',
-			employee_status : 'probation',
-			is_pip          : true,
-		}],
-	};
+	// useEffect(() => debounceQuery(searchValue), [searchValue])
+	// useEffect(() => setPipParams({ show: false, disableNext: false }), []);
 
 	// update and create functions
 	const clickedNext = () => {
@@ -103,7 +61,7 @@ function PIPProbations() {
 			Toast.success('Update Sent to the Employee');
 			setOpenUpdate(false);
 		} else {
-			setPipParams({ ...pipParams, show: true, diableNext: true });
+			setPipParams({ ...pipParams, show: true, disableNext: true });
 		}
 	};
 
@@ -126,7 +84,15 @@ function PIPProbations() {
 								name={name}
 								title={title}
 							>
-								<Component />
+								<Component
+									activeTab={activeTab}
+									params={params}
+									setPage={setPage}
+									setItem={setItem}
+									setOpenUpdate={setOpenUpdate}
+									setOpenLogModal={setOpenLogModal}
+									setType={setType}
+								/>
 							</TabPanel>
 						);
 					})}
@@ -147,21 +113,12 @@ function PIPProbations() {
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => { setType('create'); console.log(type); setOpenUpdate(true); }}
+					onClick={() => { setType('create'); setOpenUpdate(true); }}
 				>
 					<IcMEdit style={{ marginRight: '4px' }} />
 					Update User Status
 				</Button>
 			</div>
-
-			<UserTableData
-				columns={columns}
-				list={dataList[params.Page]}
-				pagination={params.Page}
-				page_limit={2}
-				setPagination={setPage}
-				total_count={4}
-			/>
 
 			{openUploadModal
 				&& (
@@ -191,11 +148,25 @@ function PIPProbations() {
 						<Modal.Header title={startCase(type)} />
 						<div className={styles.upload_modal}>
 							<Modal.Body>
-								<DecisionModal
-									type={type}
-									params={pipParams}
-									setParams={setPipParams}
-								/>
+								{type === 'update' ? (
+									<DecisionModal
+										item={item}
+										setItem={setItem}
+										type={type}
+										params={pipParams}
+										setParams={setPipParams}
+									/>
+								)
+									: (
+										<LogModal
+											item={item}
+											type={type}
+											setType={setType}
+											setItem={setItem}
+											params={pipParams}
+											setParams={setPipParams}
+										/>
+									)}
 							</Modal.Body>
 						</div>
 						<Modal.Footer>
@@ -206,7 +177,7 @@ function PIPProbations() {
 									if (type === 'create') {
 										setOpenUpdate(false);
 									} else {
-										setPipParams({ ...pipParams, show: false, diableNext: false });
+										setPipParams({ ...pipParams, show: false, disableNext: false });
 									}
 								}}
 							>
@@ -218,7 +189,7 @@ function PIPProbations() {
 								size="md"
 								style={{ marginLeft: '8px' }}
 								onClick={clickedNext}
-								disabled={diableNext}
+								disabled={disableNext}
 							>
 								{(show || type === 'create') ? ('Submit And Notify') : ('Next')}
 
@@ -240,7 +211,19 @@ function PIPProbations() {
 						<Modal.Header title="Logs" />
 						<div className={styles.upload_modal}>
 							<Modal.Body>
-								<LogModal item={item} setItem={setItem} />
+								{/* <LogModal item={item} setItem={setItem} /> */}
+								<Tabs
+									activeTab={activeLogTab}
+									themeType="primary"
+									onChange={setActiveLogTab}
+								>
+									<TabPanel name="new" title="New Log">
+										<NewLog />
+									</TabPanel>
+									<TabPanel name="all" title="All Logs">
+										<AllLogs />
+									</TabPanel>
+								</Tabs>
 							</Modal.Body>
 						</div>
 						<Modal.Footer>

@@ -7,14 +7,15 @@ import useGetColumns from '../../../../../common/Columns';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
 import useListEmployees from '../../../../../hooks/useListEmployees';
+import DecisionModal from '../../../DecisionModal';
 
-import AllLogs from './AllLogs';
-import NewLog from './NewLog';
 import styles from './styles.module.css';
 
-function LogModal({ item = {}, setItem = () => {} }) {
+function LogModal({
+	item = {}, setItem = () => {}, setType = () => {},
+	pipParams, setPipParams = () => {}, type,
+}) {
 	const [searchValue, setSearchValue] = useState('');
-	const [activeTab, setActiveTab] = useState('new');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const { employeeData = {}, loading = false, params, setPage } = useListEmployees({ searchValue: query });
@@ -22,7 +23,7 @@ function LogModal({ item = {}, setItem = () => {} }) {
 	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
 
 	const columnsToShow = feedbackDataColumns.logModal;
-	const columns = useGetColumns({ columnsToShow, source: 'log_modal', setItem });
+	const columns = useGetColumns({ columnsToShow, source: 'log_modal', setItem, setType });
 
 	const dataList = {
 		1: [{
@@ -77,18 +78,13 @@ function LogModal({ item = {}, setItem = () => {} }) {
 					/>
 				</>
 			) : (
-				<Tabs
-					activeTab={activeTab}
-					themeType="primary"
-					onChange={setActiveTab}
-				>
-					<TabPanel name="new" title="New Log">
-						<NewLog />
-					</TabPanel>
-					<TabPanel name="all" title="All Logs">
-						<AllLogs />
-					</TabPanel>
-				</Tabs>
+				<DecisionModal
+					item={item}
+					setItem={setItem}
+					type={type}
+					params={pipParams}
+					setParams={setPipParams}
+				/>
 			)}
 
 		</div>

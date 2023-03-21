@@ -1,4 +1,4 @@
-import { ButtonIcon, Pill, Button, cl } from '@cogoport/components';
+import { Tooltip, ButtonIcon, Pill, Button, cl } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getYear, getMonth, format, startCase } from '@cogoport/utils';
@@ -16,10 +16,24 @@ const statusColorMapping = {
 	young     : 'yellow',
 };
 
+const updateColorMapping = {
+	cleared   : 'green',
+	exited    : 'red',
+	uploaded  : 'green',
+	error     : 'red',
+	uploading : 'yellow',
+};
+
+const actionTextMapping = {
+	dashboard       : 'Update',
+	pending_reviews : 'Review',
+	uploaded_files  : 'Download',
+};
+
 const useGetColumns = ({
 	getTeamFeedbackList = () => {}, source = 'hr_dashboard', columnsToShow = [],
 	setRefetchReportees = () => {}, setItem = () => {}, setOpenUpdate = () => {},
-	setType = () => {}, setOpenLogModal = () => {},
+	setType = () => {}, setOpenLogModal = () => {}, activeTab, setReviewModal = () => {},
 }) => {
 	const router = useRouter();
 	const handleClick = (user_id) => {
@@ -47,6 +61,10 @@ const useGetColumns = ({
 		if (source !== 'log_modal') {
 			setOpenUpdate(true);
 			setType('update');
+			setReviewModal(true);
+		}
+		if (source === 'log_modal') {
+			setType('create');
 		}
 	};
 
@@ -180,10 +198,10 @@ const useGetColumns = ({
 		key : 'view_form',
 	},
 	{
-		Header   : <div className={styles.head}>MANAGER</div>,
+		Header   : <div className={styles.head}>{activeTab === 'uploaded_files' ? ('Uploaded By') : ('MANAGER')}</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{item?.manager_name}</div>
+				<div>{item?.manager_name ? (item?.manager_name) : (item?.hr_manager_name)}</div>
 			</div>
 		),
 		id  : 'manager',
@@ -201,13 +219,30 @@ const useGetColumns = ({
 	},
 	{
 		Header  	: <div className={styles.head}>Progress</div>,
-		accessor : () => {
-			<div className={styles.had_content}>
-				<div className={styles.dot} />
-				<div className={styles.dot} />
-				<div className={styles.dot} />
-			</div>;
-		},
+		accessor : () => (
+			<div className={styles.head_content}>
+				<Tooltip
+					content="Email sent to Employee"
+					placement="bottom"
+				>
+					<div className={styles.dot} />
+				</Tooltip>
+
+				<Tooltip
+					content="Email sent to Manager"
+					placement="bottom"
+				>
+					<div className={styles.dot} />
+				</Tooltip>
+
+				<Tooltip
+					content="Final discussion held"
+					placement="bottom"
+				>
+					<div className={styles.dot} />
+				</Tooltip>
+			</div>
+		),
 		id  : 'progress',
 		key : 'progress',
 	},
@@ -243,8 +278,8 @@ const useGetColumns = ({
 				<ButtonIcon onClick={() => addLog(item)} icon={<IcMArrowRight />} />
 			</div>
 		),
-		id  : 'add_log_arrow',
-		key : 'add_log_arrow',
+		id  : 'add_create_arrow',
+		key : 'add_create_arrow',
 	},
 	{
 		Header   : <div className={styles.head} />,
@@ -261,12 +296,12 @@ const useGetColumns = ({
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<Button
-					themeType="secondary"
+					themeType={activeTab === 'dashboard' ? ('primary') : ('secondary')}
 					onClick={() => addLog(item)}
-					disabled={(item?.is_pip && source === 'hr_dashboard')
+					disabled={(item?.is_pip && activeTab === 'dashboard')
 					|| (item?.employee_status === 'probation' && source === 'manager_dashboard')}
 				>
-					Update
+					{actionTextMapping[activeTab]}
 				</Button>
 			</div>
 		),
@@ -290,9 +325,14 @@ const useGetColumns = ({
 	},
 	{
 		Header   : <div className={styles.head}>Start Date</div>,
-		accessor : () => (
+		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{format(new Date(), 'dd-MMM-yyyy')}</div>
+				<div>
+					{item?.upload_date
+						? format(item?.upload_date, 'dd-MMM-yyyy')
+						: format(item.start_date, 'dd-MMM-yyyy')}
+
+				</div>
 			</div>
 		),
 		id  : 'start_date',
@@ -308,6 +348,42 @@ const useGetColumns = ({
 		id  : 'end_date',
 		key : 'end_date',
 	},
+	{
+		Header   : <div className={styles.head}>Update</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<Pill
+					color={updateColorMapping[item?.update] ? (updateColorMapping[item?.update]) : 'blue'}
+				>
+					{startCase(item?.update)}
+
+				</Pill>
+			</div>
+		),
+		id  : 'update',
+		key : 'update',
+	},
+	{
+		Header   : <div className={styles.head}>Upload Status</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<div>{item?.is_pip ? ('PIP CSV') : ('Probation CSV')}</div>
+			</div>
+		),
+		id  : 'upload_type',
+		key : 'upload_type',
+	},
+	{
+		Header   : <div className={styles.head}>NUMBER OF EMPLOYEES</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				{item?.number_of_emplyees || '-'}
+			</div>
+		),
+		id  : 'number_of_employees',
+		key : 'number_of_employees',
+	},
+
 	];
 
 	const finalColumns = [];

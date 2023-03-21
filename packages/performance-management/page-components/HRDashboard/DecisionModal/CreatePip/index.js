@@ -1,4 +1,4 @@
-import { Textarea, Checkbox, Datepicker } from '@cogoport/components';
+import { Checkbox, Datepicker } from '@cogoport/components';
 import { toDate, getMonth } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -25,75 +25,68 @@ function CreatePip({ params, setParams = () => {} }) {
 		if (startDate && endDate) {
 			setParams({
 				...params,
-				diableNext: false,
+				disableNext: false,
 			});
 		} else {
 			setParams({
 				...params,
-				diableNext: true,
+				disableNext: true,
 			});
 		}
-	}, [startDate, endDate]);
+	}, [startDate, endDate, setParams, params]);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.dates_container}>
-				<div className={styles.dates}>
-					<div className={styles.lable}>PIP Start date</div>
-					<Datepicker
-						placeholder="Enter Date"
-						showTimeSelect
-						dateFormat="dd/MMM/yyyy"
-						name="startDate"
-						onChange={(val) => clickedStartDate(val)}
-						value={startDate}
-					/>
-					<Checkbox
-						className={styles.checkbox}
-						label="Today"
-						checked={startCheck}
-						onChange={() => {
-							if (startCheck) {
-								setStartDate(null);
-							} else {
-								setStartDate(date);
-							}
-							setstartCheck(!startCheck);
-						}}
-					/>
-				</div>
+			<div className={styles.dates}>
+				<div className={styles.lable}>PIP Start date</div>
+				<Datepicker
+					placeholder="Enter Date"
+					showTimeSelect
+					dateFormat="dd/MMM/yyyy"
+					name="startDate"
+					onChange={(val) => clickedStartDate(val)}
+					value={startDate}
+				/>
+				<Checkbox
+					className={styles.checkbox}
+					label="Today"
+					checked={startCheck}
+					onChange={() => {
+						if (startCheck) {
+							setStartDate(null);
+						} else {
+							setStartDate(date);
+						}
+						setstartCheck(!startCheck);
+					}}
+				/>
+			</div>
 
-				<div className={styles.dates}>
-					<div className={styles.lable}>PIP End date</div>
-					<Datepicker
-						placeholder="Enter Date"
-						showTimeSelect
-						dateFormat="dd/MMM/yyyy"
-						name="endDate"
-						onChange={(val) => clickedEndDate(val)}
-						value={endDate}
-					/>
-					<Checkbox
-						className={styles.checkbox}
-						label=" +1 Month"
+			<div className={styles.dates}>
+				<div className={styles.lable}>PIP End date</div>
+				<Datepicker
+					placeholder="Enter Date"
+					showTimeSelect
+					dateFormat="dd/MMM/yyyy"
+					name="endDate"
+					onChange={(val) => clickedEndDate(val)}
+					value={endDate}
+				/>
+				<Checkbox
+					className={styles.checkbox}
+					label=" +1 Month"
 							// isPreviousDaysAllowed
 							// minDate={differenceInDays(date, startDate) + date}
-						checked={endCheck}
-						onChange={() => {
-							if (endCheck) {
-								setEndDate(null);
-							} else {
-								setEndDate(toDate(date).setMonth(getMonth(date) + 1));
-							}
-							setEndCheck(!endCheck);
-						}}
-					/>
-				</div>
-			</div>
-			<div className={styles.sub_container}>
-				<div className={styles.lable}>Reason for Extention</div>
-
-				<Textarea size="lg" placeholder="Type here ..." />
+					checked={endCheck}
+					onChange={() => {
+						if (endCheck) {
+							setEndDate(null);
+						} else {
+							setEndDate(toDate(date).setMonth(getMonth(date) + 1));
+						}
+						setEndCheck(!endCheck);
+					}}
+				/>
 			</div>
 		</div>
 	);

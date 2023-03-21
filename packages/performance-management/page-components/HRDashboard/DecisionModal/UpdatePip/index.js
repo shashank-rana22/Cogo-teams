@@ -15,7 +15,7 @@ function UpdatePip({ params, setParams = () => {} }) {
 	const setDisabledNext = (temp) => {
 		setParams({
 			...params,
-			diableNext: temp,
+			disableNext: temp,
 		});
 	};
 
@@ -37,7 +37,9 @@ function UpdatePip({ params, setParams = () => {} }) {
 		{ name: 'R3', value: 'R3', label: 'PIP' },
 	];
 
-	useEffect(() => setDisabledNext(!endDate), [endDate]);
+	useEffect(() => {
+		setDisabledNext(!endDate);
+	}, [endDate]);
 
 	return (
 		<div className={styles.update_container}>
@@ -95,7 +97,7 @@ function UpdatePip({ params, setParams = () => {} }) {
 				<Checkbox
 					label="Check this box to confirm that Ankur Verma has cleared their probation."
 					value={decision}
-					onChange={() => { setDecision(!decision); setParams({ ...params, diableNext: decision }); }}
+					onChange={() => { setDecision(!decision); setParams({ ...params, disableNext: decision }); }}
 				/>
 			)}
 
@@ -103,16 +105,8 @@ function UpdatePip({ params, setParams = () => {} }) {
 				<Checkbox
 					label="Check this box to confirm that Ankur Verma requires a PIP"
 					value={decision}
-					onChange={() => { setDecision(!decision); setParams({ ...params, diableNext: decision }); }}
+					onChange={() => { setDecision(!decision); setParams({ ...params, disableNext: decision }); }}
 				/>
-			)}
-
-			{show && (
-				<div className={styles.sub_container}>
-					<div className={styles.lable}>Reason for Extention</div>
-
-					<Textarea size="lg" placeholder="Type here ..." />
-				</div>
 			)}
 		</div>
 	);
