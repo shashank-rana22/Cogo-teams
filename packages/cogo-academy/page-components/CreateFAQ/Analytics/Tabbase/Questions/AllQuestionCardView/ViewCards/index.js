@@ -13,7 +13,7 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 					{cardHeading}
 				</div>
 
-				<div className={styles.sub_heading} style={{ color: '#6FA5AB' }}>
+				<div className={styles.sub_heading}>
 					<div>
 						<div className={styles.sub_heading_context}>
 							<Tooltip content={subHeading[0]?.display_name || subHeading[0]?.name} placement="right">

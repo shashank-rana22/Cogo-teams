@@ -1,10 +1,11 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMLike, IcMDislike, IcMEyeopen } from '@cogoport/icons-react';
+import startCase from '@cogoport/utils/src/utilities/startCase';
 
 import styles from './styles.module.css';
 
 function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] }) {
-	const truncate = (str) => (str?.length > 28 ? `${str.substring(0, 26)}...` : str);
+	const truncate = (str) => (str?.length > 28 ? `${startCase(str.substring(0, 26))}...` : startCase(str));
 	function Icon(item) {
 		if (state === 'Viewed_Question') {
 			return (
