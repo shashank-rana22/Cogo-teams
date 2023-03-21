@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 import UsersQuestionList from './UsersQuestionList';
-// import Scroll from './Scroll';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
 
@@ -20,20 +19,20 @@ function AllUsers({ props = '' }) {
 		most_disliked_questions = [],
 		most_liked_questions = [],
 		most_viewed_questions = [],
-		topic_stats = [],
+		audience_stats = [],
 	} = current_audience_data;
 
-	const { total_questions = 0, total_views = 0, total_likes = 0, total_dislikes = 0 } = topic_stats[0] || {};
+	const { total_questions = 0, total_views = 0, total_likes = 0, total_dislikes = 0 } = audience_stats[0] || {};
 
 	const [showQuestions, setShowQuestions] = useState(false);
 
 	const truncate = (str) => (str?.length > 40 ? `${str.substring(0, 38)}...` : str);
 
 	const PILL_MAPPING = {
-		'No of Questions' : total_questions,
-		'No of Views'     : total_views,
-		'No of Likes'     : total_likes,
-		'No of Dislikes'  : total_dislikes,
+		'No of Questions' : total_questions || 0,
+		'No of Views'     : total_views || 0,
+		'No of Likes'     : total_likes || 0,
+		'No of Dislikes'  : total_dislikes || 0,
 	};
 
 	return (
