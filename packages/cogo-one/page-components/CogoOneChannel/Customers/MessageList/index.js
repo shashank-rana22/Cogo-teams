@@ -49,7 +49,7 @@ function MessageList({
 						prefix={<IcMSearchlight width={18} height={18} />}
 						placeholder="Search here..."
 						value={searchValue}
-						onChange={(val) => setSearchValue(val?.trim())}
+						onChange={(val) => setSearchValue(val)}
 					/>
 				</div>
 				<div className={styles.filter_icon}>
