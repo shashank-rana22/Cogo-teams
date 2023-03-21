@@ -19,6 +19,15 @@ function ServiceProvider({ tradePartnersData = {}, setAddPoc = () => {}, service
 				<div className={styles.header}>
 					<div className={styles.service_provider_name}>{serviceProviders[sp_key]}</div>
 					<div className={styles.row}>
+
+						<div>
+							<Button
+								themeType="linkUi"
+								onClick={() => { setShow({ ...show, [sp_key]: !show[sp_key] }); }}
+							>
+								{show[sp_key] ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+							</Button>
+						</div>
 						<div>
 							<Button
 								size="sm"
@@ -31,15 +40,6 @@ function ServiceProvider({ tradePartnersData = {}, setAddPoc = () => {}, service
 								themeType="accent"
 							>
 								+ ADD POC
-							</Button>
-						</div>
-
-						<div>
-							<Button
-								themeType="linkUi"
-								onClick={() => { setShow({ ...show, [sp_key]: !show[sp_key] }); }}
-							>
-								{show[sp_key] ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 							</Button>
 						</div>
 

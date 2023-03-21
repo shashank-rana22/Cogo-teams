@@ -1,14 +1,11 @@
 import { cl, Tooltip } from '@cogoport/components';
-import { IcMPortArrow } from '@cogoport/icons-react';
+import { IcMPortArrow, IcCFfcl } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-// import getLocations from '../helpers/locations-shipment';
-import { getServiceInfo } from '../utils/getServiceInfo';
-
 import styles from './styles.module.css';
 
-function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
+function PortDetails({ data = {}, primary_service = {} }) {
 	const { origin_main_port = '', destination_main_port = '' } = primary_service;
 
 	if (isEmpty(data)) {
@@ -16,8 +13,6 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 	}
 
 	const { origin_port : origin, destination_port : destination } = primary_service;
-
-	const { serviceIcon } = getServiceInfo({ service: data?.shipment_type });
 
 	const handleLocationDetails = (location, icdPortInfo) => (
 		<>
@@ -75,9 +70,11 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 	);
 
 	return (
-		<div className={cl`${styles.container} core_ui_port_conatiner`}>
-			{isShow ? <div className={styles.icons_and_service}>{serviceIcon}</div> : null}
-
+		<div className={styles.container}>
+			<div className={styles.icons_and_service}>
+				<IcCFfcl />
+				<span>FCL</span>
+			</div>
 			{renderLocation()}
 		</div>
 	);

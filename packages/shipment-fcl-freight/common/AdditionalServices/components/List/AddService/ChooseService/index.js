@@ -17,8 +17,8 @@ function ChooseService({
 	setFilters,
 	filters,
 	setShowPrice = () => { },
-	setShow = () => { },
 	refetch = () => { },
+	setShowChargeCodes = () => {},
 	serviceCountTotal,
 }) {
 	const tagDisplay = (item) => (
@@ -36,9 +36,9 @@ function ChooseService({
 			item={item}
 			setAddRate={setAddRate}
 			isSeller={isSeller}
-			setShow={setShow}
 			refetch={refetch}
 			setShowPrice={setShowPrice}
+			setShowChargeCodes={setShowChargeCodes}
 		/>
 	);
 

@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { asyncFieldsOrganization, SelectController, useGetAsyncOptions, InputController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { merge } from '@cogoport/utils';
@@ -10,6 +9,7 @@ function RenderAddRateForm({
 	onSubmit = () => {},
 	control,
 	errors,
+	unitOptions = [],
 }) {
 	const currencyOptions = [
 		GLOBAL_CONSTANTS.currency_code.INR,
@@ -20,17 +20,6 @@ function RenderAddRateForm({
 		label : currency,
 		value : currency,
 	}));
-
-	const unitOptions = [
-		{
-			label : 'Per BL',
-			value : 'per_bl',
-		},
-		{
-			label : 'Per Container',
-			value : 'per_container',
-		},
-	];
 
 	const serviceProviderInitalControl = {
 		name        : 'service_provider_id',

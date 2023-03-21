@@ -18,7 +18,7 @@ const useListAdditionalServices = ({ shipment_data, filters = {} }) => {
 							shipment_id: id,
 							...(filters || {}),
 						},
-						page_limit: 15,
+						page_limit: 8,
 					},
 				});
 			} catch (err) {

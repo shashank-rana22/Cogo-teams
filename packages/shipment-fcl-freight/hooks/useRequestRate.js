@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useRequestRate = ({ setShow = () => {}, refetch = () => {} }) => {
+const useRequestRate = ({ refetch = () => {}, setShowChargeCodes = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_additional_service',
 		method : 'POST',
@@ -26,7 +26,7 @@ const useRequestRate = ({ setShow = () => {}, refetch = () => {} }) => {
 				},
 			});
 			Toast.success('Rate Requested successfully');
-			setShow(false);
+			setShowChargeCodes(false);
 			refetch();
 		} catch (err) {
 			console.log(err);

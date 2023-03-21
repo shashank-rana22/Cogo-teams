@@ -36,8 +36,8 @@ function Header({
 				{...query_type}
 				rules={{
 					required: {
-        		value: true,
-        	},
+						value: true,
+					},
 				}}
 			/>
 			{errors?.query_type && (
@@ -50,9 +50,9 @@ function Header({
 					control={control}
 					{...remarks}
 					rules={{
-          	required: {
-          		value: true,
-          	},
+						required: {
+							value: true,
+						},
 					}}
 					rows={4}
 				/>
@@ -64,8 +64,8 @@ function Header({
 			<div className={styles.button_div}>
 				<Button
 					onClick={() => {
-          	setIsOpen(false);
-          	reset();
+						setIsOpen(false);
+						reset();
 					}}
 					size="md"
 					themeType="tertiary"

@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 const useUpdateContainerNumber = (
 	containerValue = {},
 	setEditContainerNum,
-	shipment_data = {},
+	shipmentData = {},
 	refetch = () => {},
 ) => {
 	const [{ data: containerDetails },
@@ -18,16 +18,16 @@ const useUpdateContainerNumber = (
 	useEffect(() => {
 		(async () => {
 			try {
-				if (shipment_data?.id) {
+				if (shipmentData?.id) {
 					await containerDetailTrigger({
-						params: { filters: { shipment_id: shipment_data?.id } },
+						params: { filters: { shipment_id: shipmentData?.id } },
 					});
 				}
 			} catch (err) {
 				console.log(err);
 			}
 		})();
-	}, [containerDetailTrigger, shipment_data?.id]);
+	}, [containerDetailTrigger, shipmentData?.id]);
 
 	const [{ loading: updateContainerLoading },
 		updateShipmentContainerTrigger] = useRequest({
@@ -38,16 +38,16 @@ const useUpdateContainerNumber = (
 	useEffect(() => {
 		(async () => {
 			try {
-				if (shipment_data?.id) {
+				if (shipmentData?.id) {
 					await updateShipmentContainerTrigger({
-						params: { filters: { shipment_id: shipment_data?.id } },
+						params: { filters: { shipment_id: shipmentData?.id } },
 					});
 				}
 			} catch (err) {
 				console.log(err);
 			}
 		})();
-	}, [shipment_data?.id, updateShipmentContainerTrigger]);
+	}, [shipmentData?.id, updateShipmentContainerTrigger]);
 
 	const handleSubmit = async () => {
 		const update_data = [];

@@ -1,38 +1,44 @@
-import { useState } from 'react';
-
 import getInstructionData from '../../helpers/getInstructionData';
 import Additional from '../Additional';
 import Card from '../Card';
 import Document from '../Document';
 import InvoicePref from '../InvoicePref';
 
-function Body({ data = {} }) {
-	const [organizationData, setOrganizationData] = useState({});
-
+function Body({ data = {}, shipment_id = '', organization_id = '', getProcedureTrigger = () => {}, services = [] }) {
+	const { operating_procedure:{ id:procedure_id = '' } = {} } = data;
 	const {
 		invoice_preference = [],
 		additional_preference = [],
 		document_handling_preference = [],
 	} = getInstructionData({ data });
 
+	const shipment_ids = { shipment_id, organization_id, procedure_id };
+
 	return (
 		<>
 			<Card label="Document Handling" defaultOpen={document_handling_preference.length}>
 				<Document
 					data={document_handling_preference}
-					organizationData={organizationData}
-					setOrganizationData={setOrganizationData}
+					shipment_ids={shipment_ids}
+					getProcedureTrigger={getProcedureTrigger}
 				/>
 			</Card>
+
 			<Card label="Invoice Preferences" defaultOpen={invoice_preference.length}>
 				<InvoicePref
 					data={invoice_preference}
-					organizationData={organizationData}
-					setOrganizationData={setOrganizationData}
+					shipment_ids={shipment_ids}
+					getProcedureTrigger={getProcedureTrigger}
+					services={services}
 				/>
 			</Card>
+
 			<Card label="Additional Information" defaultOpen={additional_preference.length}>
-				<Additional data={additional_preference} />
+				<Additional
+					data={additional_preference}
+					getProcedureTrigger={getProcedureTrigger}
+					shipment_ids={shipment_ids}
+				/>
 			</Card>
 		</>
 	);

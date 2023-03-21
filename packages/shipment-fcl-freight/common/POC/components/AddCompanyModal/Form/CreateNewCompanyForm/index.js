@@ -1,8 +1,10 @@
 import {
+	asyncFieldsLocations,
 	CheckboxController,
 	InputController, SelectController,
 	UploadController,
 	useForm,
+	useGetAsyncOptions,
 } from '@cogoport/forms';
 import { useImperativeHandle, forwardRef } from 'react';
 
@@ -19,13 +21,14 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 	function Error(key) {
 		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 	}
+	const originAsyncOptions = useGetAsyncOptions(asyncFieldsLocations());
 
 	return (
 		<div>
 			<form>
 				<div className={styles.row}>
 					<div className={styles.form_item_container}>
-						<label>Country of Registration</label>
+						<label className={styles.form_label}>Country of Registration</label>
 						<SelectController
 							name="country"
 							control={control}
@@ -36,7 +39,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 					</div>
 
 					<div className={styles.form_item_container}>
-						<label>Company Name</label>
+						<label className={styles.form_label}>Company Name</label>
 						<InputController
 							name="company_name"
 							control={control}
@@ -48,7 +51,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 				</div>
 
 				<div className={styles.pan_number}>
-					<label>
+					<label className={styles.form_label}>
 						{tradePartyType === 'collection_party'
 							? 'PAN Number' : 'PAN Number (Optional)'}
 					</label>
@@ -69,11 +72,11 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 
 				<div className={styles.checkbox}>
 					<CheckboxController name="not_reg_under_gst" control={control} />
-					<label>Not registered under GST</label>
+					<label className={styles.form_label}>Not registered under GST</label>
 				</div>
 				<div className={styles.row}>
 					<div>
-						<label>GST Number</label>
+						<label className={styles.form_label}>GST Number</label>
 						<InputController
 							size="sm"
 							name="tax_number"
@@ -92,9 +95,10 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						/>
 						{Error('tax_number')}
 					</div>
-					<div>
-						<label>GST Proof</label>
+					<div className={styles.upload_container}>
+						<label className={styles.form_label}>GST Proof</label>
 						<UploadController
+							className="tax_document"
 							name="tax_number_document_url"
 							disabled={formValues.not_reg_under_gst}
 							control={control}
@@ -110,7 +114,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 				</div>
 				<div className={styles.row}>
 					<div className={styles.form_item_container}>
-						<label>Address</label>
+						<label className={styles.form_label}>Address</label>
 						<InputController
 							size="sm"
 							control={control}
@@ -121,12 +125,13 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 					</div>
 
 					<div className={styles.form_item_container}>
-						<label>Pincode / Zip Code</label>
+						<label className={styles.form_label}>Pincode / Zip Code</label>
 						<SelectController
 							size="sm"
 							control={control}
 							name="pincode"
 							rules={{ required: { value: true, message: 'Pincode is required' } }}
+							{...originAsyncOptions}
 						/>
 						{Error('pincode')}
 					</div>
