@@ -24,13 +24,8 @@ function Tabbase() {
 				<TabPanel
 					name="By_Questions"
 					title="By Questions"
-					badge={(
-						<>
-							Total:
-							{' '}
-							{props?.data?.question_stats?.no_of_questions}
-						</>
-					)}
+					badge={props?.data?.question_stats?.no_of_questions}
+
 				>
 					<Questions props={props} date={date} setDate={setDate} />
 				</TabPanel>
@@ -38,13 +33,8 @@ function Tabbase() {
 				<TabPanel
 					name="By_Users"
 					title="By Users"
-					badge={(
-						<>
-							Total:
-							{' '}
-							{props?.data?.question_stats?.no_of_questions}
-						</>
-					)}
+					badge={props?.data?.question_stats?.no_of_questions}
+
 				>
 					<Users props={props} date={date} setDate={setDate} />
 				</TabPanel>

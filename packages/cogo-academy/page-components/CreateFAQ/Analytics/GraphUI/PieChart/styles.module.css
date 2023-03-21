@@ -12,9 +12,21 @@
 .carousel_data_container {
 	height: 100%;
 
-	:global {
-		.ui_carousel_container {
-			height: 100%;
-		}
-	}
+
+    :global{
+        .ui_carousel_container{
+            height:100%;
+            
+        } 
+        .ui_carousel_arrow{
+            fill:red;
+        }   
+        .ui_carousel_dots{
+            border: 1px solid red;
+        }
+        .ui_TSL-E{
+            background-color:red
+
+        }
+    }
 }

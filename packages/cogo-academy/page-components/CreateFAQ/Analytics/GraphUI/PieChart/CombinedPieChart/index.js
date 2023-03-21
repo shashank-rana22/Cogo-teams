@@ -9,10 +9,10 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 				<ResponsivePie
 					data={pie_data}
 					margin={{
-						top    : 50,
-						right  : 10,
-						bottom : 80,
-						left   : 40,
+						top    : 25,
+						right  : -15,
+						bottom : 60,
+						left   : 70,
 					}}
 					innerRadius={0}
 					padAngle={0}
@@ -47,63 +47,13 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 							spacing    : 10,
 						},
 					]}
-					fill={[
-						{
-							match: {
-								id: 'ruby',
-							},
-							id: 'dots',
-						},
-						{
-							match: {
-								id: 'c',
-							},
-							id: 'dots',
-						},
-						{
-							match: {
-								id: 'go',
-							},
-							id: 'dots',
-						},
-						{
-							match: {
-								id: 'python',
-							},
-							id: 'dots',
-						},
-						{
-							match: {
-								id: 'scala',
-							},
-							id: 'lines',
-						},
-						{
-							match: {
-								id: 'lisp',
-							},
-							id: 'lines',
-						},
-						{
-							match: {
-								id: 'elixir',
-							},
-							id: 'lines',
-						},
-						{
-							match: {
-								id: 'javascript',
-							},
-							id: 'lines',
-						},
-					]}
 					legends={[
 						{
 							anchor        : 'bottom',
 							direction     : 'column',
 							justify       : false,
-							translateX    : -150,
-							translateY    : 56,
+							translateX    : -170,
+							translateY    : 40,
 							itemsSpacing  : 10,
 							itemWidth     : 80,
 							itemHeight    : 18,
@@ -132,10 +82,10 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 				<ResponsivePie
 					data={pie_outer_data}
 					margin={{
-						top    : 50,
+						top    : 25,
 						right  : 10,
-						bottom : 80,
-						left   : 40,
+						bottom : 60,
+						left   : 70,
 					}}
 					innerRadius={0.9}
 					padAngle={0}
@@ -169,34 +119,20 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 							spacing    : 10,
 						},
 					]}
-					fill={[
-						{
-							match: {
-								id: 'N/A',
-							},
-							id: 'dots',
-						},
-						{
-							match: {
-								id: 'N/A2',
-							},
-							id: 'dots',
-						},
-					]}
 					legends={[
 						{
 							anchor        : 'bottom',
 							direction     : 'column',
 							justify       : false,
-							translateX    : 140,
-							translateY    : 76,
+							translateX    : 120,
+							translateY    : 10,
 							itemsSpacing  : 3,
 							itemWidth     : 80,
 							itemHeight    : 18,
 							itemTextColor : '#999',
 							itemDirection : 'left-to-right',
 							itemOpacity   : 1,
-							symbolSize    : 18,
+							symbolSize    : 20,
 							symbolShape   : 'circle',
 							effects       : [
 								{
