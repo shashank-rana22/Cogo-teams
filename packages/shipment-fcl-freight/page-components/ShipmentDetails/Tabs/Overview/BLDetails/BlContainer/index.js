@@ -32,12 +32,12 @@ function BlContainer({
 		<div className={styles.content}>
 			<div className={styles.row_div}>
 				<div>
-					<div className={styles.text}>Bl Number</div>
+					<div className={styles.text}>BL Number</div>
 					<Input
 						size="sm"
 						className={styles.search_input}
 						value={filters.name}
-						placeholder="Enter Bl Number"
+						placeholder="Enter BL Number"
 						onChange={(e) => setFilters({ name: e })}
 					/>
 
