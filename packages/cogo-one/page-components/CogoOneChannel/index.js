@@ -1,3 +1,4 @@
+import { IcMDownload } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -5,6 +6,7 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
+import { ANDRIOD_APK } from '../../constants';
 import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
@@ -13,6 +15,7 @@ import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 
 import Conversations from './Conversations';
 import Customers from './Customers';
+import DialCallModal from './DialCallModal';
 import EmptyChatPage from './EmptyChatPage';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
@@ -33,7 +36,8 @@ function CogoOne() {
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
 	const { suggestions = [] } = useListChatSuggestions();
-
+	const [showDialModal, setShowDialModal] = useState(false);
+	const [modalType, setModalType] = useState({ type: null, data: {} });
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 	const firestore = getFirestore(app);
@@ -61,11 +65,13 @@ function CogoOne() {
 		activeCardId,
 		firstLoading,
 		updateLeaduser,
+		handleScroll,
 	} = useListChats({
 		firestore,
 		userId,
 		isomniChannelAdmin,
 		showBotMessages,
+		searchValue,
 	});
 	const { messagesList = [], unReadChatsCount } = listData;
 
@@ -104,7 +110,7 @@ function CogoOne() {
 						firestore={firestore}
 						updateLeaduser={updateLeaduser}
 						activeCardId={activeCardId}
-
+						setModalType={setModalType}
 					/>
 				</>
 			);
@@ -146,11 +152,47 @@ function CogoOne() {
 				activeCardId={activeCardId}
 				setShowBotMessages={setShowBotMessages}
 				showBotMessages={showBotMessages}
+				setShowDialModal={setShowDialModal}
+				handleScroll={handleScroll}
+				setModalType={setModalType}
+				modalType={modalType}
 			/>
 
 			<div className={styles.chat_details_continer}>
 				{renderComponent()}
 			</div>
+			<div
+				className={styles.download_apk}
+			>
+				<div
+					role="presentation"
+					className={styles.download_div}
+					// eslint-disable-next-line no-undef
+					onClick={() => window.open(ANDRIOD_APK, '_blank')}
+				>
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg"
+						alt="bot"
+						className={styles.bot_icon_styles}
+					/>
+					<div className={styles.text_styles}>
+						<div className={styles.flex}>
+							<IcMDownload
+								fill="#EE3425"
+								className={styles.download_icon}
+							/>
+							<div>Get the</div>
+						</div>
+						app now
+					</div>
+				</div>
+			</div>
+			{showDialModal && (
+				<DialCallModal
+					setShowDialModal={setShowDialModal}
+					showDialModal={showDialModal}
+				/>
+			)}
 		</div>
 	);
 }

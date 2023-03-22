@@ -404,6 +404,11 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
+		{
+			api      			 : 'update_organization_credit_request_status',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
 	],
 	trade_parties: [
 		{
@@ -546,6 +551,11 @@ const common_apis = {
 		},
 		{
 			api          : 'add_buyer_poc',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'create_credit_comment',
 			access_type  : 'private',
 			service_name : 'credit',
 		},

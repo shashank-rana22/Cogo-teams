@@ -109,7 +109,7 @@
 }
 
 .user_name {
-	max-width: 140px;
+	max-width: 130px;
 	overflow: hidden;
 	font-size: 14px;
 	font-weight: 600;
@@ -158,12 +158,30 @@
 }
 
 .content {
-	max-width: 90%;
+	max-width: 80%;
+	height: 18px;
 	margin-top: 3px;
 	overflow: hidden;
 	font-size: 12px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	:global {
+		img {
+			display: none;
+		}
+
+		p {
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		div {
+			display: none;
+		}
+	}
 }
 
 .empty_state {
@@ -176,12 +194,8 @@
 }
 
 .list_container {
-	height: calc(100% - 155px);
+	height: 80%;
 	overflow-y: auto;
-
-	@media (max-width: 1280px) {
-		height: calc(100% - 130px);
-	}
 }
 
 .list_container::-webkit-scrollbar {

@@ -1,0 +1,45 @@
+.flex {
+	display: flex;
+}
+
+.container {
+	p {
+		margin-bottom: 0;
+	}
+}
+
+.block {
+	display: flex;
+	flex: 1;
+	min-height: 20px;
+	padding-left: 240px;
+	font-weight: bold;
+	letter-spacing: 0;
+	border: 1px var(--temp-color) solid;
+	border: 0;
+}
+
+.block_row {
+	display: flex;
+	border: 1px transparent solid;
+}
+
+.block_col {
+	display: flex;
+	flex-direction: column;
+	border: 1px transparent solid;
+}
+
+.flex_col {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex_row {
+	display: flex;
+
+	&.charge_container {
+		flex: 1;
+		min-height: 288px;
+	}
+}

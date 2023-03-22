@@ -6,14 +6,14 @@
   "main": "./index.js",
   "types": "./index.js",
   "dependencies": {
-    "@cogoport/components": "^1.0.330",
+    "@cogoport/components": "^1.0.359",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.58",
     "@cogoport/navigation-configs": "workspace:0.1.0",
     "@cogoport/next": "workspace:0.1.0",
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
-    "@cogoport/utils": "^1.2.3",
+    "@cogoport/utils": "^1.2.6",
     "cookies-next": "^2.1.1",
     "react": "18.2.0"
   }

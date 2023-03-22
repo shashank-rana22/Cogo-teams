@@ -1,10 +1,10 @@
 import { cl, Tooltip } from '@cogoport/components';
-import { IcMCall } from '@cogoport/icons-react';
 import { startCase, format, isEmpty } from '@cogoport/utils';
 
 import { VOICE_ICON_MAPPING } from '../../../../constants';
 import useGetVoiceCallList from '../../../../hooks/useGetVoiceCallList';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
+import EmptyCard from '../EmptyCard';
 import LoadingState from '../LoadingState';
 
 import styles from './styles.module.css';
@@ -39,30 +39,19 @@ function VoiceList({
 
 	if (isEmpty(list) && !loading) {
 		return (
-			<div className={styles.list_container}>
-				<div className={styles.empty_container}>
-					<div className={styles.empty_state}>
-						<div className={styles.call_icon}>
-							<IcMCall width={20} height={20} fill="#BDBDBD" />
-						</div>
-						Empty Call Log..
-					</div>
-				</div>
-			</div>
+			<EmptyCard />
 		);
 	}
 
 	return (
-
 		<div
 			className={styles.list_container}
 			onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
 		>
-
 			{(list || []).map((item) => {
 				const {
 					user_data = null, user_number = '', organization_data = null,
-					start_time_of_call = '',
+					start_time_of_call = '', initiated_by = '',
 				} = item || {};
 				const checkActiveCard = activeVoiceCard?.id === item?.id;
 				const checkUserData = !isEmpty(Object.keys(user_data || {}));
@@ -87,11 +76,20 @@ function VoiceList({
 						<div className={styles.card}>
 							<div className={styles.user_information}>
 								<div className={styles.avatar_container}>
-									<img
-										src={VOICE_ICON_MAPPING[callStatus(item)]}
-										className={styles.avatar}
-										alt=""
-									/>
+									<div className={styles.status_icons}>
+
+										<img
+											src={VOICE_ICON_MAPPING[callStatus(item)]}
+											className={styles.avatar}
+											alt="voice_icon"
+										/>
+										{callStatus(item) === 'missed' && (
+											<div className={styles.activity_duration}>
+												{initiated_by === 'user'
+													? 'by you' : 'by user'}
+											</div>
+										)}
+									</div>
 									<div className={styles.user_details}>
 										<Tooltip content={showUserData} placement="top">
 											<div className={styles.user_name}>
@@ -129,9 +127,9 @@ function VoiceList({
 					</div>
 				);
 			})}
-
 			{loading && <LoadingState />}
 		</div>
+
 	);
 }
 

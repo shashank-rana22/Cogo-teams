@@ -1,0 +1,38 @@
+.filled {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.dull {
+	width: 30px;
+	height: 30px;
+	margin: 4px;
+	background-color: #fff;
+	border: 2px solid #ed3726;
+	border-radius: 50%;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.line {
+	width: 40%;
+	height: 4px;
+	background-color: #ed3726;
+	border-radius: 2px;
+}
+
+.sub_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.text_container {
+	width: 43%;
+}
