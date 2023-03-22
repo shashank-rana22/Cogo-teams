@@ -100,11 +100,15 @@
     }
 }
 
-.badge_icon {
+.preview_badge {
     position: absolute;
     top: 65%;
     left: 70%;
     cursor: pointer;
+
+    img {
+        border-radius: 8px;
+    }
 }
 
 .avatar_container {
@@ -223,25 +227,4 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.badge_list {
-    display: flex;
-    justify-content: space-around;
-    width: 60%;
-}
-
-.badge_container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.badge {
-    height: 48px;
-    width: 48px;
-}
-
-.badge img {
-    height: 100%;
-    width: 100%;
 }

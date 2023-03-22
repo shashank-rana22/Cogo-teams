@@ -49,7 +49,7 @@ function ListItem(props) {
 								<div key={value.id} className={styles.badge_item}>
 									<img src={value.image_url} alt="badge" />
 									<div className={styles.star}>
-										{Array(3).fill('').map(() => (
+										{[1, 2, 3].fill('').map(() => (
 											<IcCStar width={10} stroke="#FFDF33" />
 										))}
 									</div>

@@ -8,9 +8,8 @@
     margin: 4px;
     margin-right: 8px;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 768px) {
         flex-basis: 48%;
-        margin-right: 0;
     }
 
     @media (max-width: 576px) {

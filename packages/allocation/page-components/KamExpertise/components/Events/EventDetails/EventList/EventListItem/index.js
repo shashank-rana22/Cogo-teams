@@ -10,7 +10,7 @@ const COMPLETION_MAPPING = {
 
 };
 
-function EventListItem({ data, index, setEventListData, setToggleEvent }) {
+function EventListItem({ data, index, setEventListData }) {
 	const {
 		condition_name: conditionName = '',
 		expertise_type: expertiseType = '',
@@ -19,8 +19,7 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 	} = data || {};
 
 	const handleEdit = () => {
-		setEventListData(data);
-		setToggleEvent('updateEvent');
+		setEventListData({ data, toggleEvent: 'updateEvent' });
 	};
 
 	return (
@@ -40,7 +39,7 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 				<p className={styles.info_tag}>
 					Event Name :
 					{' '}
-					<b style={{ marginLeft: 4 }}>{conditionName}</b>
+					<b style={{ marginLeft: 4 }}>{startCase(conditionName || '')}</b>
 				</p>
 				<p className={styles.info_tag}>
 					Description :
@@ -97,7 +96,7 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 						</span>
 
 						<span style={{ marginRight: '4px' }}>
-							and parameter of:
+							and parameter of
 						</span>
 
 						{' '}

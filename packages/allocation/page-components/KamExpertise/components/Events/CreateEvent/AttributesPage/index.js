@@ -36,7 +36,7 @@ function AttributePage(props) {
 								className={`${styles.input_group}
 													${styles.margin_bottom}`}
 							>
-								<Placeholder height="40px" style={{ margin: '8px 0 16px 0' }} />
+								<Placeholder height="40px" margin="8px 0 16px 0" />
 							</div>
 
 						</div>
@@ -54,7 +54,6 @@ function AttributePage(props) {
 				style={{
 					background : '#fff',
 					padding    : '80px 16px 0 16px',
-
 				}}
 			>
 				<EmptyState
@@ -80,14 +79,8 @@ function AttributePage(props) {
 				<section className={styles.row_container}>
 
 					{ (!watchListener) ? (
-						<div style={{
-							display        : 'flex',
-							justifyContent : 'center',
-							alignItems     : 'center',
-							height         : '480px',
-							width          : '100%',
-							flexDirection  : 'column',
-						}}
+						<div
+							className={styles.row_subcontainer}
 						>
 							<img
 								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/grey_empty_state.svg"
