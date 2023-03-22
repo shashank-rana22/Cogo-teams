@@ -53,8 +53,7 @@ function CurrentConfigurations({
 					View All Configurations
 				</Button>
 			</div>
-		) : (<LoadingState />))
-
+		) : <LoadingState />)
 	);
 }
 
