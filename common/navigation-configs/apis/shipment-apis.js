@@ -1317,6 +1317,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'get_cogoscore_tax_numbers',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 ];
 
 export default apis;

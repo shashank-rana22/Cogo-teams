@@ -59,11 +59,11 @@ function ChooseService({
 
 			{loading ? (
 				<div className={styles.loading_container}>
-					<Placeholder height="40px" width="100%" />
-					<Placeholder height="40px" width="100%" margin="8px 0px" />
-					<Placeholder height="40px" width="100%" margin="8px 0px" />
-					<Placeholder height="40px" width="100%" margin="8px 0px" />
-					<Placeholder height="40px" width="100%" />
+					<Placeholder height="50px" width="100%" />
+					<Placeholder height="50px" width="100%" margin="8px 0px" />
+					<Placeholder height="50px" width="100%" margin="8px 0px" />
+					<Placeholder height="50px" width="100%" margin="8px 0px" />
+					<Placeholder height="50px" width="100%" />
 				</div>
 			) : (
 				<ServicesList fields={fields} data={list} loading={loading} />
