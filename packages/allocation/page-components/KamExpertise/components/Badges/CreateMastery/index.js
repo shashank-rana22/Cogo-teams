@@ -47,11 +47,16 @@ function CreateMastery(props) {
 								>
 									Last Modified :
 									{' '}
-									{format(masteryItemData.updated_at, 'yyyy-MMM-dd')}
+									{masteryItemData.updated_at
+										? format(masteryItemData.updated_at, 'yyyy-MMM-dd') : '___'}
 								</p>
 
-								{/* //! needs from backend */}
-								{/* <p className={styles.text_styles}>Last Modified By :</p> */}
+								<p className={styles.text_styles}>
+									Last Modified By :
+									{' '}
+									{masteryItemData.modified_by
+										? masteryItemData.modified_by : '___'}
+								</p>
 							</div>
 						)}
 
