@@ -1,0 +1,40 @@
+.popover_container {
+    width: 320px;
+    height: 400px;
+}
+
+.popover_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.styled_text{
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.button_container{
+    display: flex;
+}
+
+.search_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 12px 0px;
+}
+
+.styled_search_text{
+    font-weight: 700;
+    font-size: 16px;
+}
+.reset_button{
+    margin-right: 4px;
+}
+
+.Margin{
+    margin-top: 8px;
+}

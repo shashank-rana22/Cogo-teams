@@ -1,0 +1,10 @@
+.Flex{
+    display: flex;
+    padding-top:10px;
+    padding-bottom: 10px;
+   }
+   .FlexColumn{
+       display: flex;
+       flex-direction: column;
+       margin-top:10px;
+   }

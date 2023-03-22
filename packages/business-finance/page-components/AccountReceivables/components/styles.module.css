@@ -1,0 +1,23 @@
+.tabs_container {
+	button {
+		background: white;
+		border-right: 1px solid #e0e0e0;
+	}
+}
+
+.header {
+	padding-bottom: 16px;
+}
+
+.header_style {
+	flex-direction: column;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.border {
+	width: 96px;
+	height: 4px;
+	background: #ed3726;
+	border-radius: 4px;
+}

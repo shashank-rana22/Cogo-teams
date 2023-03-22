@@ -1,0 +1,105 @@
+.InvoicesWrapper {
+	display: flex;
+    justify-content: space-evenly;
+	width: 100%;
+}
+
+
+.InvoicesCard {
+	display: flex;
+	align-items: center;
+	border-radius: 8px;
+	padding: 12px 10px 10px 10px;
+	margin: 12px 10px 14px 0;
+	background-color: #f9fbfe;
+	box-shadow: rgba(0, 0, 0, 0.1) 0.1px 0.1px 0.1px 0.1px;
+	&.align-space {
+		padding: 12px 10px 10px 10px;
+		margin: 0 10px 8px 0;
+	}
+}
+
+.LeftContainer {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	min-width: 25%;
+	padding: 0px 8px 10px 12px;
+}
+
+.StyledHeading {
+	display: flex;
+    align-items: center;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.InfoContent {
+	padding: 15px;
+}
+
+.Heading {
+	font-size: 14px;
+	font-weight: 600;
+	color: #2c3e50;
+}
+
+.Count{
+	margin-left: 5px;
+	color: #356efd;
+}
+
+.Icon{
+    padding: 4px 0px 0px 4px;
+	color: red;
+}
+
+
+.CN {
+	margin-top: 5px;
+}
+
+.RightContainer{
+	display: flex;
+	flex-wrap: wrap;
+	width: 84%;
+	padding: 8px;
+}
+
+.Flex{
+    display: flex;
+}
+
+.Label {
+    display: flex;
+	font-size: 12px;
+	font-weight: 600;
+}
+.Amount{
+	margin-top: 2px;
+	word-break: break-all;
+    display: flex;
+}
+
+.Container {
+	width: 100%;
+	display: flex;
+}
+
+.DueAgeing {
+	width: 25%;
+    margin-bottom: 8px;
+}
+
+.FlexColumn{
+    display: flex;
+    flex-direction: column;
+}
+
+.OutstandingCard{
+	display: flex;
+	border-radius: 8px;
+	margin: 12px 5px 14px 4px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0.1px 0.1px 0.1px 0.1px;
+	width: 25%;
+}

@@ -1,0 +1,14 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: max-content;
+	margin: 8px;
+}
+
+.div_container {
+	display: flex;
+}
+
+.styled_button {
+	margin-bottom: 8px;
+}
