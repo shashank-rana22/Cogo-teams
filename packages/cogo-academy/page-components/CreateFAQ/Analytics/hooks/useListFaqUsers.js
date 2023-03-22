@@ -42,7 +42,7 @@ function useListFaqUsers({
 					topic_wise_questions_data_required  : true,
 					active_audiences_data_required      : true,
 					question_stats_data_required        : true,
-					get_data_required                   : false,
+					data_required                       : false,
 					get_pagination_data_required        : false,
 				},
 			});
