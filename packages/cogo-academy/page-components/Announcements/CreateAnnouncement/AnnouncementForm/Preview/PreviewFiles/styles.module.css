@@ -19,6 +19,13 @@
 	}
 }
 
+.heading {
+	margin-bottom: 10px;
+	font-size: 14px;
+	font-weight: 700;
+	color: #000;
+}
+
 .file_item {
 	font-size: 14px;
 	font-style: normal;

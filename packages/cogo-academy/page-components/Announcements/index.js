@@ -17,7 +17,7 @@ function Announcements() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.form_container}>
+			<div className={styles.main_container}>
 				<div className={styles.heading}>
 					Manage Announcements
 					<Button type="create" themeType="primary" onClick={onClick}>Add Announcement</Button>

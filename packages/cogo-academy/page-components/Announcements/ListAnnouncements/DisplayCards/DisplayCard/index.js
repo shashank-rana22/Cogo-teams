@@ -9,6 +9,13 @@ import Preview from '../../../CreateAnnouncement/AnnouncementForm/Preview';
 import DisplayAttachments from './DisplayAttachments';
 import styles from './styles.module.css';
 
+const ANNOUNCEMENT_TYPE_MAPPING = {
+	general        : 'General',
+	product_update : 'Product Release / Update',
+	announcement   : 'Announcement',
+	tasks          : 'Tasks',
+};
+
 function DisplayCard({
 	activeTab = 'active',
 	accordianData = {},
@@ -30,7 +37,7 @@ function DisplayCard({
 		{ label: 'Title', value: startCase(data?.title) },
 		{ label: 'Validity Start', value: format(data?.validity_start, 'dd MMM yyyy hh:mm a') },
 		{ label: 'Validity End', value: format(data?.validity_end, 'dd MMM yyyy hh:mm a') },
-		{ label: 'Announcement Type', value: startCase(data?.announcement_type) },
+		{ label: 'Announcement Type', value: ANNOUNCEMENT_TYPE_MAPPING[data?.announcement_type] },
 		{ label: 'Action', value: 1 },
 	];
 

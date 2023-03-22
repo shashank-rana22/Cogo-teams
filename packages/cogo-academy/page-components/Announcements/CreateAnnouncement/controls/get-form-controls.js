@@ -22,7 +22,7 @@ const getFormControls = () => [
 				value : 'general',
 			},
 			{
-				label : 'Product Update',
+				label : 'Product Release / Update',
 				value : 'product_update',
 			},
 			{
