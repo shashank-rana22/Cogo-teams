@@ -254,6 +254,16 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'list_admin_student_wise_test_result',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_question_wise_analysis',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 };
 

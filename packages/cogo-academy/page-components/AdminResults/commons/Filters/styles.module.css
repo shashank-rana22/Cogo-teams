@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	width: 30%;
+	margin-bottom: 12px;
+}
+
+.icon_container {
+	display: flex;
+	margin: 0 8px;
+}
