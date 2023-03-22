@@ -3,7 +3,7 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Introduction({ setActiveState, loading, testData = {} }) {
+function Introduction({ setActiveState, loading, testData = {}, setStartTiming }) {
 	const { set_data, case_study_questions, stand_alone_questions, test_duration, name } = testData || {};
 
 	const formatArrayValues = (items) => {
@@ -28,6 +28,8 @@ function Introduction({ setActiveState, loading, testData = {} }) {
 			icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg',
 		},
 	};
+	const time = new Date();
+	setStartTiming(time);
 
 	return (
 		<div className={styles.container}>

@@ -3,14 +3,14 @@ import { useRef, useEffect } from 'react';
 import handleTimer from './handleTimer';
 import styles from './styles.module.css';
 
-function Timer({ test_start_time }) {
+function Timer({ test_start_time, duration }) {
 	const timerRef = useRef(null);
 	let time = null;
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			// eslint-disable-next-line react-hooks/exhaustive-deps
-			time = handleTimer(test_start_time);
+			time = handleTimer(test_start_time, duration);
 
 			if (time) {
 				timerRef.current.innerText = time;

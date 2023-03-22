@@ -1,4 +1,4 @@
-const handleTimer = (testStartedAt = '1678887248100', duration = 60) => {
+const handleTimer = (testStartedAt, duration) => {
 	const timeNow = new Date().getTime();
 	let difference = timeNow - testStartedAt;
 

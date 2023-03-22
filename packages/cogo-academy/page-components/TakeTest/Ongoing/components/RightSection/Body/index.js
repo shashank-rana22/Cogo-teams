@@ -4,7 +4,7 @@ import QuestionsCount from './QuestionsCount';
 import QuestionStats from './QuestionStats';
 import styles from './styles.module.css';
 
-function Body({ data = [], loading, setCurrentQuestion, currentQuestion }) {
+function Body({ data = [], loading, setCurrentQuestion, currentQuestion, fetchQuestions }) {
 	if (loading || isEmpty(data)) {
 		return null;
 	}
@@ -16,6 +16,7 @@ function Body({ data = [], loading, setCurrentQuestion, currentQuestion }) {
 
 			<QuestionsCount
 				data={data}
+				fetchQuestions={fetchQuestions}
 				loading={loading}
 				setCurrentQuestion={setCurrentQuestion}
 				currentQuestion={currentQuestion}

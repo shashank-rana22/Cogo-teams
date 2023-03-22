@@ -5,10 +5,12 @@ import RightSection from './components/RightSection';
 import useFetchQuestionsList from './hooks/useFetchQuestionList';
 import styles from './styles.module.css';
 
-function Ongoing({ testData }) {
+function Ongoing({ testData, startTiming }) {
 	const page = localStorage.getItem('currentQuestion');
 	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
-	const { loading, data } = useFetchQuestionsList({ currentQuestion });
+	// setCurrentQuestion(1);
+	const duration = testData?.test_duration;
+	const { loading, data, fetchQuestions } = useFetchQuestionsList({ currentQuestion, startTiming, duration });
 
 	return ((
 		<div className={styles.main_container}>
@@ -19,6 +21,8 @@ function Ongoing({ testData }) {
 					loading={loading}
 					currentQuestion={currentQuestion}
 					setCurrentQuestion={setCurrentQuestion}
+					startTiming={startTiming}
+					fetchQuestions={fetchQuestions}
 				/>
 			</div>
 
@@ -27,6 +31,7 @@ function Ongoing({ testData }) {
 					data={data}
 					loading={loading}
 					currentQuestion={currentQuestion}
+					fetchQuestions={fetchQuestions}
 					setCurrentQuestion={setCurrentQuestion}
 				/>
 			</div>

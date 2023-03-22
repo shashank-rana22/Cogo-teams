@@ -3,11 +3,10 @@ import { ProgressBar } from '@cogoport/components';
 import styles from './styles.module.css';
 import Timer from './Timer';
 
-function Header({ datas = {}, total_question, testData }) {
-	const currQuestion = datas?.data?.findIndex((item) => item?.answer_state === 'not_viewed');
+function Header({ data = {}, total_question, testData, startTiming }) {
+	const currQuestion = data?.data?.findIndex((item) => item?.answer_state === 'not_viewed');
 
-	const number = currQuestion > 0 ? currQuestion : datas?.data?.length;
-
+	const number = currQuestion > 0 ? currQuestion : data?.data?.length;
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.heading}>{testData?.name}</div>
@@ -20,7 +19,7 @@ function Header({ datas = {}, total_question, testData }) {
 				{' '}
 				{total_question}
 			</div>
-			<Timer />
+			<Timer test_start_time={startTiming} duration={testData?.test_duration} />
 		</div>
 
 	);

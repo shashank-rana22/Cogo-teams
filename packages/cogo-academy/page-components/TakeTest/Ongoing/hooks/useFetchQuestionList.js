@@ -1,8 +1,9 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { addMinutes } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-const useFetchQuestionsList = ({ currentQuestion }) => {
+const useFetchQuestionsList = ({ currentQuestion, startTiming, duration }) => {
 	const {
 		profile: { user: { id:user_id = '' } },
 		general: { query: { test_id = '' } },
@@ -14,15 +15,17 @@ const useFetchQuestionsList = ({ currentQuestion }) => {
 	}, { manual: true });
 
 	// const test_id = '2b605b28-3cc1-47a7-b73e-52b8a2cb9f76';
-	const start_time = new Date();
-	const end_time = new Date();
+	const start_time = startTiming;
+	// const end_time = new Date();
+	const end_time = addMinutes(start_time, duration);
+	const fetchQuestions = (props = {}) => {
+		const { currentQ = '' } = props || {};
 
-	const fetchQuestions = () => {
 		try {
 			const payload = {
 				test_id,
 				user_id,
-				question_number: currentQuestion,
+				question_number: currentQ || currentQuestion,
 				start_time,
 				end_time,
 			};
@@ -37,7 +40,7 @@ const useFetchQuestionsList = ({ currentQuestion }) => {
 
 	useEffect(() => {
 		fetchQuestions();
-	}, [currentQuestion]);
+	}, []);
 
 	return {
 		loading,

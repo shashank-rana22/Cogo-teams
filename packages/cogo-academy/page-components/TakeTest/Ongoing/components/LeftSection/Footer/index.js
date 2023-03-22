@@ -7,45 +7,61 @@ import useUpdateAnswerQuestion from '../../../hooks/useUpdateAnswerStatus';
 import LeaveTest from './LeaveTest';
 import styles from './styles.module.css';
 
-function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question, answer }) {
+function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question, answer, fetchQuestions }) {
 	const [leaveTest, setLeaveTest] = useState(false);
-	const { loading, updateAnswerList } = useUpdateAnswerQuestion();
+	const { loading, updateAnswerList } = useUpdateAnswerQuestion({ fetchQuestions });
 
-	const sendAnswer = () => {
+	const sendAnswer = async () => {
 		if (isEmpty(answer)) {
 			// Toast.error('Select Correct Answers');
 			// return;
 			const arr = [];
 			const str = 'not_answered';
-			updateAnswerList(data?.id, arr, str);
+			await updateAnswerList(data?.id, arr, str);
 		} else if (typeof answer === 'string') {
 			const arr = [answer];
 			const str = 'answered';
-			updateAnswerList(data?.id, arr, str);
+			await updateAnswerList(data?.id, arr, str);
 		} else {
 			const str = 'answered';
-			updateAnswerList(data?.id, answer, str);
+			await updateAnswerList(data?.id, answer, str);
 		}
 		const num = Number(currentQuestion);
 		localStorage.setItem('currentQuestion', num + 1);
-		setCurrentQuestion((pv) => Number(pv) + 1);
+
+		fetchQuestions({ currentQ: total_question !== currentQuestion ? Number(currentQuestion) + 1 : currentQuestion });
+
+		setCurrentQuestion((pv) => {
+			if (total_question !== pv) {
+				return Number(pv) + 1;
+			}
+			return pv;
+		});
 	};
 
-	const markAsReview = () => {
+	const markAsReview = async () => {
 		const str = 'marked_for_review';
 		if (isEmpty(answer)) {
 			const arr = [];
-			updateAnswerList(data?.id, arr, str);
+			await updateAnswerList(data?.id, arr, str);
 		}
 		if (typeof answer === 'string') {
 			const arr = [answer];
-			updateAnswerList(data?.id, arr, str);
+			await updateAnswerList(data?.id, arr, str);
 		} else {
-			updateAnswerList(data?.id, answer, str);
+			await updateAnswerList(data?.id, answer, str);
 		}
 		const num = Number(currentQuestion);
 		localStorage.setItem('currentQuestion', num + 1);
-		setCurrentQuestion((pv) => Number(pv) + 1);
+
+		fetchQuestions({ currentQ: total_question !== currentQuestion ? Number(currentQuestion) + 1 : currentQuestion });
+
+		setCurrentQuestion((pv) => {
+			if (total_question !== pv) {
+				return Number(pv) + 1;
+			}
+			return pv;
+		});
 	};
 
 	return (

@@ -22,7 +22,7 @@ const useUpdateAnswerQuestion = () => {
 				answer_state,
 			};
 
-			trigger({
+			await trigger({
 				data: payload,
 			});
 		} catch (err) {

@@ -39,9 +39,11 @@ function TakeTest() {
 		},
 	}, { manual: false });
 
-	const { test_user_mapping_state = 'introduction' } = testData || {};
+	const { test_user_mapping_state = 'introduction', timer } = testData || {};
 
 	const [activeState, setActiveState] = useState('');
+
+	const [startTiming, setStartTiming] = useState(timer);
 
 	useEffect(() => {
 		setActiveState(test_user_mapping_state);
@@ -54,7 +56,13 @@ function TakeTest() {
 	}
 
 	return (
-		<Component setActiveState={setActiveState} loading={loading} testData={testData} />
+		<Component
+			setActiveState={setActiveState}
+			loading={loading}
+			testData={testData}
+			startTiming={startTiming}
+			setStartTiming={setStartTiming}
+		/>
 	);
 }
 

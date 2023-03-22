@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function QuestionsCount({ data = {}, setCurrentQuestion }) {
+function QuestionsCount({ data = {}, setCurrentQuestion, fetchQuestions }) {
 	const STATS_MAPPING = {
 		answered          : '#DDEBC0',
 		not_answered      : '#F8AEA8',
@@ -13,8 +13,11 @@ function QuestionsCount({ data = {}, setCurrentQuestion }) {
 			localStorage.setItem('currentQuestion', index + 1);
 			setCurrentQuestion(index + 1);
 		}
+
+		fetchQuestions({ currentQ: index + 1 });
 	};
 
+	const len = (data.total_questions - data.data.length);
 	return (
 		<div className={styles.container}>
 			{data?.data?.map((question, index) => {
@@ -37,6 +40,16 @@ function QuestionsCount({ data = {}, setCurrentQuestion }) {
 
 				);
 			})}
+			{ len ? [...Array(len)].map((item, index) => (
+				<div
+					role="presentation"
+					style={{ backgroundColor: '#FDFBF6', cursor: 'not-allowed' }}
+					className={styles.question_count}
+				>
+					{data.data.length + index + 1}
+				</div>
+			)) : null}
+
 		</div>
 	);
 }
