@@ -1,0 +1,35 @@
+.breadcrumb_item {
+	font-size: 16px;
+	font-weight: 600;
+	color: #6fa5ab;
+}
+
+.breadcrumb_container {
+	margin-top: 20px;
+}
+
+.container {
+	position: relative;
+	padding: 24px;
+	padding-top: 40px;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}
+
+.delete_icon {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	cursor: pointer;
+}
+
+.button_container {
+	display: flex;
+	margin-top: 24px;
+}
+
+.upload_icon {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
