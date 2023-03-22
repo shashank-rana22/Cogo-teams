@@ -1,21 +1,22 @@
 import { useAllocationRequest } from '@cogoport/request';
 
 function useGetAllocationKamExpertiseProfile(partner_user_id) {
-	const [{ loading, data = {} }] = useAllocationRequest({
+	const [{ loading, data = {} }, refetch] = useAllocationRequest({
 		url     : '/kam_expertise_profile',
 		method  : 'GET',
 		authkey : 'get_allocation_kam_expertise_profile',
 		params  : {
 			filters: {
-				status: 'active',
+				status: ['active', 'profile'],
 			},
 			partner_user_id,
 		},
 	}, { manual: false });
 
 	return {
-		listLoading : loading,
-		userBadges  : data,
+		badgeListLoading    : loading,
+		userBadges          : data,
+		profileBadgeRefetch : refetch,
 	};
 }
 

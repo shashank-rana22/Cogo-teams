@@ -1,6 +1,7 @@
 import Greetings from '../GreetingsHeader';
 
 function Header({
+	badgeListLoading,
 	userBadges,
 	detailsData,
 	setRefetch = () => {},
@@ -11,6 +12,7 @@ function Header({
 }) {
 	return (
 		<Greetings
+			badgeListLoading={badgeListLoading}
 			userBadges={userBadges}
 			detailsData={detailsData}
 			setRefetch={setRefetch}
