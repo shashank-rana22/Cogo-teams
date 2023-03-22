@@ -39,7 +39,7 @@ function EventListItem({ data, index, setEventListData }) {
 				<p className={styles.info_tag}>
 					Event Name :
 					{' '}
-					<b style={{ marginLeft: 4 }}>{conditionName}</b>
+					<b style={{ marginLeft: 4 }}>{startCase(conditionName || '')}</b>
 				</p>
 				<p className={styles.info_tag}>
 					Description :
@@ -96,7 +96,7 @@ function EventListItem({ data, index, setEventListData }) {
 						</span>
 
 						<span style={{ marginRight: '4px' }}>
-							and parameter of:
+							and parameter of
 						</span>
 
 						{' '}

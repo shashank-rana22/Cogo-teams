@@ -19,7 +19,7 @@ const OPTIONS = [
 	},
 	{
 		label : 'Misc Expertise',
-		value : 'misc_expertise',
+		value : 'miscellaneous',
 	},
 ];
 

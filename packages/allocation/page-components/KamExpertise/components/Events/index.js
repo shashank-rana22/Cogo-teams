@@ -35,7 +35,6 @@ function Events() {
 		setEventListData,
 	} = useGetEventList();
 
-
 	const componentProps = {
 		[EVENT_LIST]: {
 			setEventListData,
