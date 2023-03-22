@@ -47,6 +47,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows }:ShipmentInterf
 	);
 
 	const [
+		{ data:selectedData, loading:selectedDataLoading },
 		addToSelectedTrigger,
 	] = useRequestBf(
 		{
@@ -141,7 +142,6 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows }:ShipmentInterf
 
 		return (
 			<Checkbox
-				themeType="white"
 				style={{ padding: '8px', left: '8px' }}
 				semiChecked={isSemiRowsChecked}
 				checked={isAllRowsChecked}
@@ -224,9 +224,11 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows }:ShipmentInterf
 		shipmentLoading,
 		getTableBodyCheckbox,
 		setPayload,
+		selectedData,
 		addSelect,
 		checkedRowsSerialId,
 		payload,
+		selectedDataLoading,
 		getTableHeaderCheckbox,
 		checkedData,
 	};

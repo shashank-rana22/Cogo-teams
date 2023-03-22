@@ -25,9 +25,10 @@ function Accruals() {
 	const { query, push } = useRouter();
 
 	const [subActiveTab, setSubActiveTab] = useState<string>(query.view || 'shipment_view');
+	const [showTab, setShowTab] = useState(true);
 	const tabComponentProps = {
 		shipment_view : {},
-		archive       : {},
+		archive       : { setShowTab },
 	};
 
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
@@ -43,35 +44,40 @@ function Accruals() {
 	}, [subActiveTab]);
 
 	return (
+
 		<div>
 
-			<div className={styles.container}>
+			{ showTab ? (
+				<div className={styles.container}>
 
-				<div className={styles.flex}>
+					<div className={styles.flex}>
 
-					{tabs.map((tab) => (
-						<div
-							key={tab.key}
-							onClick={() => {
-								handleChange(tab.key);
-							}}
-							role="presentation"
-						>
-							{' '}
-							<div className={tab.key === subActiveTab
-								? styles.sub_container_click : styles.sub_container}
+						{tabs.map((tab) => (
+							<div
+								key={tab.key}
+								onClick={() => {
+									handleChange(tab.key);
+								}}
+								role="presentation"
 							>
-								{tab.label}
+								{' '}
+
+								<div className={tab.key === subActiveTab
+									? styles.sub_container_click : styles.sub_container}
+								>
+									{tab.label }
+
+								</div>
 
 							</div>
+						))}
+					</div>
 
-						</div>
-					))}
 				</div>
-
-			</div>
+			) : ''}
 			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} {...tabComponentProps[subActiveTab]} />}
 		</div>
+
 	);
 }
 export default Accruals;

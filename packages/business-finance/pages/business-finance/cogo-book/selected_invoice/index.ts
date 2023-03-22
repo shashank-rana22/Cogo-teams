@@ -1,1 +1,1 @@
-export { default } from '@cogoport/business-finance/page-components/CogoBook';
+export { default } from '@cogoport/business-finance/page-components/CogoBook/Accruals/ViewSelectedInvoice';

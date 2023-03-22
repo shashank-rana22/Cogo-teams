@@ -40,9 +40,7 @@ function ShipmentView() {
 		addSelect,
 		checkedRowsSerialId,
 	} =	 useShipmentView({ filters, checkedRows, setCheckedRows });
-	console.log(checkedData, 'checkedData');
 
-	// console.log(shipmentViewData, 'shipmentViewData');
 	const { list = [], total = 0, pageSize = 10 } = shipmentViewData || {};
 
 	const { page } = filters || {};
@@ -102,6 +100,7 @@ function ShipmentView() {
 					checkedData={checkedData}
 					checkedRowsSerialId={checkedRowsSerialId}
 					payload={payload}
+					filters={filters}
 					viewSelected={viewSelected}
 					showBtn={showBtn}
 					shipmentLoading={shipmentLoading}

@@ -4,10 +4,28 @@ import { IcCError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
+import { FilterInterface } from '../../interface';
+
 import styles from './styles.module.css';
 
+interface FooterInterface {
+	actionConfirm?: (isBookedActive: any) => void
+	checkedData?: any[]
+	shipmentLoading?:boolean
+	checkedRowsSerialId?: any[]
+	isBookedActive?: boolean
+	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
+	addSelect?: (setOpenModal: any) => Promise<void>
+	payload?: any[]
+	filters?:FilterInterface
+	viewSelected?: boolean
+	showBtn?: boolean
+}
+
 function Footer({
-	checkedData, payload, viewSelected,
+	checkedData,
+	payload,
+	viewSelected,
 	showBtn,
 	addSelect,
 	actionConfirm = () => {},
@@ -15,17 +33,26 @@ function Footer({
 	setCheckedRows,
 	isBookedActive = false,
 	checkedRowsSerialId,
-}) {
+	filters,
+}:FooterInterface) {
 	const { push, query } = useRouter();
 	const { sub_active:subActive, active_tab:activeTab } = query;
 	const [openModal, setOpenModal] = useState(false);
 
+	const { year = '', date, month = '', tradeType = '', service = '', shipmentType = '' } = filters || {};
+
 	const onSubmit = () => {
 		push(
-			'/business-finance/cogo-book/selected_invoice',
-			'/business-finance/cogo-book/selected_invoice',
+			`/business-finance/cogo-book/selected_invoice?year=${year
+			}&startDate=${date ? date?.startDate : ''}&endDate=${date ? date?.endDate : ''}&month=${
+				month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}
+            `,
+			`/business-finance/cogo-book/selected_invoice?year=${year
+			}&startDate=${date ? date?.startDate : ''}&endDate=${date ? date?.endDate : ''}&month=${
+				month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}`,
 		);
 	};
+
 	const [show, setShow] = useState(false);
 	const currency = (payload || checkedData)[0]?.expenseCurrency;
 	const totalIExpense = (payload || checkedData)
@@ -124,7 +151,6 @@ function Footer({
 							<div
 								className={styles.flex_modal}
 							>
-								<IcCError size={2} />
 								{isBookedActive ? (
 									<div style={{ margin: '20px' }}>Are you sure you want to book?</div>
 								) : (
@@ -173,7 +199,7 @@ function Footer({
 									id="approve-modal-btn"
 									cthemeType="primary"
 									onClick={() => {
-										addSelect();
+										addSelect(setOpenModal);
 										setOpenModal(false);
 										setCheckedRows({});
 									}}

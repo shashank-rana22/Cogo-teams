@@ -39,7 +39,7 @@ function StyledTable({
 				{...rest}
 			/>
 
-			{data.length === 0 && <EmptyState />}
+			{data?.length === 0 && <EmptyState />}
 
 			<div className={styles.pagination_container}>
 				<Pagination
