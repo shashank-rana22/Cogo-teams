@@ -79,6 +79,28 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
+			name        : 'originPortCode',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Origin Port Code',
+			placeholder : 'Origin Port Code',
+			span        : 5,
+			rules       : {
+				required: 'Origin Port Code is Required',
+			},
+		},
+		{
+			name        : 'destinationPortCode',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Destination Port Code',
+			placeholder : 'Destination Port Code',
+			span        : 5,
+			rules       : {
+				required: 'Destination Port Code is Required',
+			},
+		},
+		{
 			name        : 'airline',
 			type        : 'text',
 			className   : 'primary lg',
@@ -87,6 +109,17 @@ const mawbControls = (disableClass) => ({
 			span        : 5,
 			rules       : {
 				required: 'Carrier is Required',
+			},
+		},
+		{
+			name        : 'airlineIataCode',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Airline IATA Code',
+			placeholder : 'Enter Airline IATA Code',
+			span        : 5,
+			rules       : {
+				required: 'Airline IATA Code is Required',
 			},
 		},
 		{
@@ -225,7 +258,13 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
+			name      : 'amountOfInsurance',
+			type      : 'text',
+			className : 'primary lg',
+			label     : 'Amount of Insurance',
+			span      : 5,
 		},
+		{},
 		{
 			name        : 'totalPackagesCount',
 			placeholder : 'Package Count',
@@ -286,10 +325,7 @@ const mawbControls = (disableClass) => ({
 			showOptional : false,
 			span         : 5,
 			placeholder  : 'Rate per Kg',
-			rules        : {
-				required: disableClass,
-			},
-			disabled: disableClass,
+			disabled     : disableClass,
 		},
 		{
 			name        : 'currency',

@@ -1,7 +1,6 @@
 import { cl, Input, Popover, Tooltip } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight, IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
 
 import UserAvatar from '../../../../common/UserAvatar';
 import { PLATFORM_MAPPING } from '../../../../constants';
@@ -28,21 +27,10 @@ function MessageList({
 	showBotMessages = false,
 	setShowBotMessages = () => {},
 	isomniChannelAdmin = false,
+	setModalType = () => {},
+	modalType = '',
+	handleScroll = () => {},
 }) {
-	const [modalType, setModalType] = useState(false);
-	function getShowChat({ user_name }) {
-		if (searchValue) {
-			const searchName = user_name?.toLowerCase();
-			return searchName?.includes(searchValue?.toLowerCase());
-		}
-
-		return true;
-	}
-
-	if (messagesLoading) {
-		return <LoadingState />;
-	}
-
 	function lastMessagePreview(previewData = '') {
 		return (
 			<div
@@ -52,10 +40,6 @@ function MessageList({
 		);
 	}
 
-	const openModelForNewContact = () => {
-		setModalType(true);
-	};
-	const disabled = true;
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -99,14 +83,14 @@ function MessageList({
 				</div>
 			</div>
 
-			{ isEmpty(messagesList) ? (
+			{ isEmpty(messagesList) && !messagesLoading ? (
 				<div className={styles.list_container}>
 					<div className={styles.empty_state}>
 						No Messages Yet..
 					</div>
 				</div>
 			) : (
-				<div className={styles.list_container}>
+				<div className={styles.list_container} onScroll={handleScroll}>
 					{(messagesList || []).map((item) => {
 						const { chat_status = '' } = item || {};
 						const userData = getActiveCardDetails(item);
@@ -114,11 +98,12 @@ function MessageList({
 							user_name = '',
 							organization_name = '',
 							user_type = '',
+							search_user_name = '',
 						} = userData || {};
 
 						const lastActive = new Date(item.new_message_sent_at);
 						const checkActiveCard = activeCardId === item?.id;
-
+						const searchName = search_user_name?.toLowerCase() || '';
 						const showOrganization = () => {
 							if ((user_name?.toLowerCase() || '').includes('anonymous')) {
 								return startCase(PLATFORM_MAPPING[user_type] || '');
@@ -126,90 +111,86 @@ function MessageList({
 							return startCase(organization_name);
 						};
 
-						const show = getShowChat({ user_name, item, appliedFilters, searchValue });
-
 						return (
-							show && (
-								<div
-									key={item?.id}
-									role="presentation"
-									className={cl`
+
+							<div
+								key={item?.id}
+								role="presentation"
+								className={cl`
 												${styles.card_container} 
 												${checkActiveCard ? styles.active_card : ''} 
 												`}
-									onClick={() => setActiveMessage(item)}
-								>
-									<div className={styles.card}>
-										<div className={styles.user_information}>
-											<div className={styles.avatar_container}>
-												<UserAvatar
-													type={item.channel_type}
-													imageSource={item.image}
-												/>
-												<div className={styles.user_details}>
-													<Tooltip content={startCase(user_name) || 'User'} placement="top">
-														<div className={styles.user_name}>
-															{startCase(user_name) || 'User'}
-														</div>
-													</Tooltip>
-
-													<div className={styles.organisation}>
-														{showOrganization()}
+								onClick={() => setActiveMessage(item)}
+							>
+								<div className={styles.card}>
+									<div className={styles.user_information}>
+										<div className={styles.avatar_container}>
+											<UserAvatar
+												type={item.channel_type}
+												imageSource={item.image}
+											/>
+											<div className={styles.user_details}>
+												<Tooltip
+													content={startCase(searchName) || 'User'}
+													placement="top"
+												>
+													<div className={styles.user_name}>
+														{startCase(searchName) || 'User'}
 													</div>
+												</Tooltip>
+
+												<div className={styles.organisation}>
+													{showOrganization()}
 												</div>
 											</div>
+										</div>
 
-											<div className={styles.user_activity}>
-												<div className={styles.tags_conatiner}>
-													{!isEmpty(chat_status) && (
-														<div
-															className={cl`
+										<div className={styles.user_activity}>
+											<div className={styles.tags_conatiner}>
+												{!isEmpty(chat_status) && (
+													<div
+														className={cl`
 																${styles.tags}
 																${chat_status === 'warning' ? styles.warning : ''}
 																${chat_status === 'escalated' ? styles.escalated : ''}
 															`}
-														>
-															{startCase(chat_status)}
-														</div>
-													)}
-												</div>
+													>
+														{startCase(chat_status)}
+													</div>
+												)}
+											</div>
 
-												<div className={styles.activity_duration}>
-													{dateTimeConverter(
-														Date.now() - Number(lastActive),
-														Number(lastActive),
-													)?.renderTime}
-												</div>
+											<div className={styles.activity_duration}>
+												{dateTimeConverter(
+													Date.now() - Number(lastActive),
+													Number(lastActive),
+												)?.renderTime}
 											</div>
 										</div>
+									</div>
 
-										<div className={styles.content_div}>
-											{lastMessagePreview(item?.last_message || '')}
-											{item.new_message_count > 0 && (
-												<div className={styles.new_message_count}>
-													{item.new_message_count > 100 ? '99+' : (
-														item.new_message_count
-													)}
-												</div>
-											)}
-										</div>
+									<div className={styles.content_div}>
+										{lastMessagePreview(item?.last_message || '')}
+										{item.new_message_count > 0 && (
+											<div className={styles.new_message_count}>
+												{item.new_message_count > 100 ? '99+' : (
+													item.new_message_count
+												)}
+											</div>
+										)}
 									</div>
 								</div>
-							)
+							</div>
 						);
 					})}
+					{messagesLoading && <LoadingState />}
 				</div>
 			)}
-			{!disabled && (
-				<div
-					className={styles.plus_circle}
-				>
-					<IcMPlusInCircle onClick={openModelForNewContact} fill="red" width={50} height={50} />
-				</div>
-			)}
-			{modalType && (
+
+			{modalType?.type && (
 				<NewWhatsappMessage
 					setModalType={setModalType}
+					modalType={modalType}
 				/>
 			)}
 		</>

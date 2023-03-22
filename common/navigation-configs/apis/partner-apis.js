@@ -10709,6 +10709,11 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
+			api          : 'list_cogoone_timeline',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_omnichannel_documents',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -10738,7 +10743,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
-
+		{
+			api          : 'update_user_room',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{

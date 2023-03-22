@@ -17,6 +17,18 @@ import EmojisBody from './EmojisBody';
 import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
+import TimeLine from './TimeLine';
+
+function MessageMapping({ conversation_type, ...restProps }) {
+	switch (conversation_type) {
+		case 'sent':
+			return <ReceiveDiv {...restProps} />;
+		case 'received':
+			return <SentDiv {...restProps} />;
+		default:
+			return <TimeLine {...restProps} />;
+	}
+}
 
 function MessageConversations({
 	messagesData = [],
@@ -163,20 +175,13 @@ function MessageConversations({
 					</div>
 				)}
 			{(messagesData || []).map((eachMessage, index) => (
-				eachMessage?.conversation_type !== 'received' ? (
-					<ReceiveDiv
-						key={eachMessage?.created_at}
-						eachMessage={eachMessage}
-						activeMessageCard={activeMessageCard}
-					/>
-				) : (
-					<SentDiv
-						key={eachMessage?.created_at}
-						eachMessage={eachMessage}
-						activeMessageCard={activeMessageCard}
-						messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
-					/>
-				)
+				<MessageMapping
+					key={eachMessage?.created_at}
+					conversation_type={eachMessage?.conversation_type || 'unknown'}
+					eachMessage={eachMessage}
+					activeMessageCard={activeMessageCard}
+					messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
+				/>
 			))}
 
 		</>
@@ -209,7 +214,6 @@ function MessageConversations({
 								role="presentation"
 								className={styles.file_name_container}
 								onClick={() => {
-									// eslint-disable-next-line no-undef
 									window.open(
 										finalUrl,
 										'_blank',
