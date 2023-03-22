@@ -24,6 +24,13 @@
 	border-radius: 0 4px 4px 0;
 }
 
+.disable_icon {
+	height: 22px;
+	padding: 2px 4px;
+	cursor: not-allowed;
+	border-radius: 0 4px 4px 0;
+}
+
 .plus_icon {
 	width: 20px;
 	height: 20px;

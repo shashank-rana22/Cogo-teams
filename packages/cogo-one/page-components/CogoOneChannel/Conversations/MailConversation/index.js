@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { cl, Placeholder } from '@cogoport/components';
 import { isEmpty, format } from '@cogoport/utils';
 
 import useListMailDetails from '../../../../hooks/useGetMail';
@@ -12,16 +12,17 @@ import styles from './styles.module.css';
 function MailConversation({
 	activeMail,
 	setButtonType = () => {},
-	buttonType = '',
+	// buttonType = '',
 	setShowMailModal = () => {},
 	setBccArray = () => {},
 	setRecipientArray = () => {},
 	setEmailState = () => {},
 }) {
-	console.log('buttonType:', buttonType);
 	const { data = {}, loading } = useListMailDetails({ activeMail });
 	const { attachmentData = {}, attachmentLoading } = useGetMailAttachment({ activeMail });
-	const allAttachements = attachmentData?.data?.value || [];
+	// console.log('attachmentData:', attachmentData);
+	const allAttachements = attachmentData?.value || [];
+	// console.log('allAttachements:', allAttachements);
 
 	const {
 		// bodyPreview = '',
@@ -31,7 +32,9 @@ function MailConversation({
 		toRecipients = [],
 		body = {},
 		ccRecipients = [],
+		hasAttachments,
 	} = data || {};
+	// console.log('hasAttachments:', hasAttachments);
 	const { content = '' } = body || {};
 
 	const senderAddress = sender?.emailAddress?.address;
@@ -41,12 +44,12 @@ function MailConversation({
 	const emptyCcRecipient = isEmpty(ccRecipients || []);
 
 	const handlClick = (val) => {
-		console.log('rjbksdfviudbjvksdvbjdc', val);
 		setButtonType(val);
 		setBccArray(ccData);
-		setRecipientArray(senderAddress);
+		setRecipientArray([senderAddress]);
 		setEmailState({
 			subject,
+			body: '',
 		});
 		setShowMailModal(true);
 	};
@@ -67,7 +70,7 @@ function MailConversation({
 				emptyCcRecipient={emptyCcRecipient}
 				loading={loading}
 			/>
-			<MailAttachments allAttachements={allAttachements} loading={attachmentLoading} />
+
 			{loading ? (
 				<div className={styles.message_div}>
 					<div className={styles.time_stamp}>
@@ -80,17 +83,24 @@ function MailConversation({
 					</div>
 				</div>
 			) : (
-				<div className={styles.message_div}>
-					<div className={styles.time_stamp}>
-						{format(sentDateTime, 'EEEE, HH:mm a dd MMM yyy')}
+				<div>
+					<div className={styles.message_div}>
+						<div className={styles.time_stamp}>
+							{format(sentDateTime, 'EEEE, HH:mm a dd MMM yyy')}
+						</div>
+						<div
+							role="presentation"
+							className={cl`
+						${hasAttachments ? styles.reveive_preview_div : styles.receive_message_container}`}
+							dangerouslySetInnerHTML={{ __html: content }}
+						/>
 					</div>
-					<div
-						className={styles.receive_message_container}
-						dangerouslySetInnerHTML={{ __html: content }}
-					/>
 				</div>
 			)}
-
+			<MailAttachments allAttachements={allAttachements} loading={attachmentLoading} />
+			{/* {(hasAttachments || attachmentLoading) && (
+				<MailAttachments allAttachements={allAttachements} loading={attachmentLoading} />
+			)} */}
 		</div>
 	);
 }

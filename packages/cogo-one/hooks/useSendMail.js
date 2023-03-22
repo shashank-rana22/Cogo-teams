@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { usePublicRequest } from '@cogoport/request';
 // import { useEffect, useState } from 'react';
 
@@ -17,6 +18,7 @@ function useSendMail({
 			await trigger({
 				data: payload,
 			});
+			Toast.success('Mail Sent Successfully.');
 		} catch (error) {
 			// console.log(error)
 		} finally {

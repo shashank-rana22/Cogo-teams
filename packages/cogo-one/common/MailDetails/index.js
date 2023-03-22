@@ -48,7 +48,7 @@ function MailDetails({
 						<IcMArrowLeft className={styles.arrow_left} onClick={handleClick} />
 						<div className={styles.title}>{startCase(activeSelect.replace('_', ' '))}</div>
 					</div>
-					<IcMFilter className={styles.filter_icon} />
+					{/* <IcMFilter className={styles.filter_icon} /> */}
 				</div>
 				{isEmpty(list || []) && !loading ? (
 					<div className={styles.empty_div}>

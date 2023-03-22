@@ -1,18 +1,16 @@
-// import { Button } from '@cogoport/components';
+/* eslint-disable max-len */
 import { useState } from 'react';
 
 import MailDetails from '../../../../common/MailDetails';
 
-import CogoportMail from './CogoportMail';
+// import CogoportMail from './CogoportMail';
 import GmailOption from './GmailOptions';
-import MailOption from './MailBoxes';
-// import MailModal from './MailModal';
+// import MailOption from './MailBoxes';
 import styles from './styles.module.css';
 
 function MailList({ setActiveMail = () => {}, activeMail }) {
 	const [activeSelect, setActiveSelect] = useState('');
 	const [showContent, setShowContent] = useState(false);
-	// const [showMailModal, setShowMailModal] = useState(false);
 
 	const handleClick = (val) => {
 		setActiveSelect(val);
@@ -23,12 +21,9 @@ function MailList({ setActiveMail = () => {}, activeMail }) {
 		<div className={styles.container}>
 			{!showContent ? (
 				<>
-					<MailOption handleClick={handleClick} activeSelect={activeSelect} showContent={showContent} />
+					{/* <MailOption handleClick={handleClick} activeSelect={activeSelect} showContent={showContent} /> */}
 					<GmailOption handleClick={handleClick} activeSelect={activeSelect} showContent={showContent} />
-					<CogoportMail handleClick={handleClick} activeSelect={activeSelect} showContent={showContent} />
-					{/* <div className={styles.button_div}>
-						<Button size="md" themeType="primary" onClick={() => setShowMailModal(true)}>+</Button>
-					</div> */}
+					{/* <CogoportMail handleClick={handleClick} activeSelect={activeSelect} showContent={showContent} /> */}
 				</>
 			) : (
 				<MailDetails

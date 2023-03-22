@@ -18,7 +18,7 @@ function useGetMailAttachment({ activeMail }) {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 

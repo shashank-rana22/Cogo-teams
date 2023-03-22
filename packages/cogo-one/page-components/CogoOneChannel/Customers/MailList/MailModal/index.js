@@ -11,9 +11,10 @@ import getFileAttributes from '../../../../../utils/getFileAttributes';
 import styles from './styles.module.css';
 
 function MailModal({
-	showMailModal, setShowMailModal,
-	// createMail = () => {},
-	// createLoading = false,
+	showMailModal,
+	setShowMailModal = () => {},
+	createMail = () => {},
+	createLoading = false,
 	userId = '',
 	recipientArray = [],
 	setBccArray = () => {},
@@ -22,10 +23,11 @@ function MailModal({
 	emailState = {},
 	setEmailState = () => {},
 	buttonType = '',
-	formatApiType = () => {},
 	attachments = [],
 	setAttachments = () => {},
 	activeMail = {},
+	replyMailApi = () => {},
+	replyLoading,
 	// setButtonType = () => {},
 	// buttonType = '',
 }) {
@@ -39,12 +41,6 @@ function MailModal({
 	// const [bccArray, setBccArray] = useState([]);
 	const [uploading, setUploading] = useState(false);
 
-	// const [attachments, setAttachments] = useState([]);
-	// const [emailState, setEmailState] = useState({
-	// 	subject : '',
-	// 	body    : '',
-	// });
-
 	const buttonOptions = ['reply', 'reply_all', 'forward'];
 
 	const checkType = buttonOptions.includes(buttonType);
@@ -55,48 +51,53 @@ function MailModal({
 		setUploading(val);
 	};
 
-	const {
-		sendMailApi = () => {},
-		sendMailLoading,
-	} = formatApiType();
-
 	const handleSend = () => {
 		let payload;
 		const isEmptyMail = getFormatedEmailBody({ emailState });
 		if (isEmptyMail || !emailState?.subject) {
 			Toast.error('Both Subject and Body are Requied');
-		} else {
-			if (checkType) {
-				payload = {
-					sender       : 'dineshkumar.s@cogoport.com',
-					toUserEmail  : recipientArray,
-					ccrecipients : bccArray,
-					subject      : emailState?.subject,
-					content      : emailState?.body,
-					attachments,
-					userId,
-					msgId        : activeMail?.id,
-
-				};
-			} else {
-				payload = {
-					attachments,
-					ccrecipients : bccArray,
-					content      : emailState?.body,
-					sender       : 'dineshkumar.s@cogoport.com',
-					subject      : emailState?.subject,
-					toUserEmail  : recipientArray,
-					userId,
-				};
-			}
-
-			sendMailApi(payload);
+			return;
 		}
+		if (checkType) {
+			payload = {
+				sender       : 'dineshkumar.s@cogoport.com',
+				toUserEmail  : recipientArray,
+				ccrecipients : bccArray,
+				subject      : emailState?.subject,
+				content      : emailState?.body,
+				attachments,
+				userId,
+				msgId        : activeMail?.id,
+
+			};
+			replyMailApi(payload);
+		} else {
+			payload = {
+				attachments,
+				ccrecipients : bccArray,
+				content      : emailState?.body,
+				sender       : 'dineshkumar.s@cogoport.com',
+				subject      : emailState?.subject,
+				toUserEmail  : recipientArray,
+				userId,
+			};
+			createMail(payload);
+		}
+	};
+
+	const handleClose = () => {
+		setAttachments([]);
+		setBccArray([]);
+		setEmailState({});
+		setRecipientArray([]);
+		setRecipientValue('');
+		setCcBccValue('');
+		setShowMailModal(false);
 	};
 
 	const renderHeader = () => (
 		<>
-			<div className={cl`${sendMailLoading ? styles.disabled_button : styles.send_icon}`}>
+			<div className={cl`${(createLoading || replyLoading) ? styles.disabled_button : styles.send_icon}`}>
 				<IcMSend
 					onClick={handleSend}
 				/>
@@ -128,7 +129,7 @@ function MailModal({
 						ref={uploaderRef}
 					/>
 				</div>
-				<Button size="md" themeType="link" onClick={() => setShowMailModal(false)}>Cancel</Button>
+				<Button size="md" themeType="link" onClick={handleClose}>Cancel</Button>
 			</div>
 		</>
 	);
@@ -193,10 +194,12 @@ function MailModal({
 	};
 
 	const handleDelete = (val, emailType) => {
-		if (emailType === 'recipient') {
-			setRecipientArray((p) => p.filter((data) => data !== val));
-		} else {
-			setBccArray((p) => p.filter((data) => data !== val));
+		if (!checkType) {
+			if (emailType === 'recipient') {
+				setRecipientArray((p) => p.filter((data) => data !== val));
+			} else {
+				setBccArray((p) => p.filter((data) => data !== val));
+			}
 		}
 	};
 
@@ -218,11 +221,12 @@ function MailModal({
 		const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
 		return { uploadedFileName, fileIcon };
 	};
+
 	return (
 		<Modal
 			show={showMailModal}
-			onClose={() => setShowMailModal(false)}
-			onOuterClick={() => setShowMailModal(false)}
+			onClose={handleClose}
+			onOuterClick={handleClose}
 			size="lg"
 			className={styles.styled_ui_modal_dialog}
 			placement="top"
@@ -236,23 +240,23 @@ function MailModal({
 						{' '}
 					</div>
 					<div className={styles.tags_div}>
-						{checkType ? (
+						{/* {checkType ? (
 							<CustomInput
 								email={recipientArray}
 								handleDelete={handleDelete}
 								type="recipient"
+								checkType={checkType}
 							/>
-						) : (
-							<>
-								{(recipientArray || []).map((data) => (
-									<CustomInput
-										email={data}
-										handleDelete={handleDelete}
-										type="recipient"
-									/>
-								))}
-							</>
-						)}
+						) : ( */}
+						{(recipientArray || []).map((data) => (
+							<CustomInput
+								email={data}
+								handleDelete={handleDelete}
+								type="recipient"
+								checkType={checkType}
+							/>
+						))}
+						{/* )} */}
 
 						{(showControl && type === 'recipient') && (
 							<div className={styles.tag_and_errorcontainer}>
@@ -298,6 +302,7 @@ function MailModal({
 								email={data}
 								handleDelete={handleDelete}
 								type="cc_bcc"
+								checkType={checkType}
 							/>
 						))}
 						{(showControl && type === 'cc_bcc') && (

@@ -6,10 +6,6 @@ import { MAIL_REPLY_TYPE } from '../../../../../constants';
 import styles from './styles.module.css';
 
 function Header({ subject = '', loading, handlClick = () => {} }) {
-	// const handlClick = (val) => {
-	// 	setButtonType(val);
-	// 	setShowMailModal(true);
-	// };
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.header_subject}>

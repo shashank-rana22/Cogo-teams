@@ -40,3 +40,7 @@
 	font-size: 12px;
 	text-align: center;
 }
+
+.name_div {
+	display: flex;
+}

@@ -2,8 +2,6 @@ import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { IcMPlus, IcMEmail } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import useForwardMail from '../../../hooks/useForwardMail';
-import useReplyAllMail from '../../../hooks/useReplyAllMail';
 import useReplyMail from '../../../hooks/useReplyMail';
 import useSendMail from '../../../hooks/useSendMail';
 
@@ -70,44 +68,7 @@ function Customers({
 	const {
 		replyMailApi = () => {},
 		replyLoading = false,
-	} = useReplyMail({ setShowMailModal, setEmailState, setRecipientArray, setBccArray });
-
-	const {
-		replyAlllMailApi = () => {},
-		replyAllLoading = false,
-	} = useReplyAllMail({ setShowMailModal, setEmailState, setRecipientArray, setBccArray });
-
-	const {
-		forwardMailApi = () => {},
-		forwardLoading = false,
-	} = useForwardMail({ setShowMailModal, setEmailState, setRecipientArray, setBccArray });
-
-	let sendMailApi;
-	let sendMailLoading;
-
-	const formatApiType = () => {
-		switch (buttonType) {
-			case 'reply':
-				sendMailApi = (payload) => replyMailApi(payload);
-				sendMailLoading = replyLoading;
-				break;
-			case 'reply_all':
-				sendMailApi = (payload) => replyAlllMailApi(payload);
-				sendMailLoading = replyAllLoading;
-				break;
-			case 'forward':
-				sendMailApi = (payload) => forwardMailApi(payload);
-				sendMailLoading = forwardLoading;
-				break;
-			default:
-				sendMailApi = (payload) => createMail(payload);
-				sendMailLoading = createMailLoading;
-		}
-		return (
-			sendMailApi(),
-			sendMailLoading
-		);
-	};
+	} = useReplyMail({ setShowMailModal, setEmailState, setRecipientArray, setBccArray, buttonType, setButtonType });
 
 	const onChangeToggle = () => {
 		if (toggleStatus) {
@@ -264,9 +225,9 @@ function Customers({
 				<MailModal
 					showMailModal={showMailModal}
 					setShowMailModal={setShowMailModal}
-					formatApiType={formatApiType}
-					// createMail={createMail}
-					// createMailLoading={createMailLoading}
+					// formatApiType={formatApiType}
+					createMail={createMail}
+					createMailLoading={createMailLoading}
 					userId={userId}
 					recipientArray={recipientArray}
 					setRecipientArray={setRecipientArray}
@@ -279,6 +240,8 @@ function Customers({
 					attachments={attachments}
 					setAttachments={setAttachments}
 					activeMail={activeMail}
+					replyMailApi={replyMailApi}
+					replyLoading={replyLoading}
 				/>
 			)}
 		</div>
