@@ -36,6 +36,7 @@
 .badge img {
     height: 100%;
     width: 100%;
+    border-radius: 8px;
 }
 
 .stars {
@@ -57,4 +58,8 @@
 .badges_empty {
     color: #848383;
     margin-top: 20px;
+}
+
+.modal_body {
+    height: 240px;
 }

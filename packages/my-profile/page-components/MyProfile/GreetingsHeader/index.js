@@ -1,8 +1,9 @@
-import { Button, Modal, Avatar, Tooltip } from '@cogoport/components';
+import { Placeholder, Button, Modal, Avatar, Tooltip } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
-import { IcMDelete, IcCCamera, IcMEdit, IcCStar } from '@cogoport/icons-react';
+import { IcMDelete, IcCCamera, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
+import BadgeGotList from './BadgeGotList';
 import PersonDetails from './PersonalDetails';
 import EditPersonalDetails from './PersonalDetails/EditPersonalDetails';
 import useEditPersonalDetails from './PersonalDetails/EditPersonalDetails/useEditPersonalDetails';
@@ -10,6 +11,7 @@ import styles from './styles.module.css';
 import useUpdatePartnerUser from './useUpdatePartnerUser';
 
 function Greetings({
+	badgeListLoading = false,
 	userBadges,
 	detailsData,
 	setRefetch = () => {},
@@ -40,12 +42,11 @@ function Greetings({
 		onClickCancel,
 	} = useUpdatePartnerUser({ picture, partner_user_id, setRefetch, detailsData });
 
-	const { badges_got = [], grouped_badges_got = {} } = userBadges || {};
+	const { badges_got : badgesGot = [], grouped_badges_got : groupedBadgesGot = {} } = userBadges || {};
 
-	// Todo: get the 'live' status medal from the grouped_badges_got
-	const { badge_configuration = [] } = grouped_badges_got;
+	const { badge_configuration = [] } = groupedBadgesGot || {};
 
-	const mastery_element = badge_configuration.filter((item) => item.medal === 'gold')[0];
+	const mastery_element = badge_configuration.filter((item) => item.status === 'profile')?.[0];
 
 	const { name: locationName = '' } = lowest_geo_location || {};
 
@@ -92,41 +93,29 @@ function Greetings({
 					/>
 				</div>
 
-				{/* //Todo: add mastry badge through the selectory modal */}
-				<div className={styles.badge_icon}>
-					<img
-						src={mastery_element?.image_url}
-						alt="current badge"
-						height="40px"
-					/>
-				</div>
+				{ badgeListLoading && (
+					<div className={styles.preview_badge}>
+						<Placeholder type="circle" radius="48px" />
+					</div>
+				)}
+
+				{ !isEmpty(mastery_element) && !badgeListLoading
+				&& (
+					<div className={styles.preview_badge}>
+						<img
+							src={mastery_element?.image_url}
+							alt="current badge"
+							height="40px"
+						/>
+					</div>
+				)}
 			</div>
 
 			<div className={styles.badges}>
-				<div className={styles.badge_list}>
-					{
-						!isEmpty(badges_got)
-							? badges_got.map((data, i) => (
-								(i < 3)
-									? (
-										<Tooltip content={data.medal}>
-											<div key={data.id} className={styles.badge_container}>
-												<div className={styles.badge}>
-													<img src={data.image_url} alt="badge" />
-												</div>
-												<div className={styles.stars}>
-													{Array(3).fill('').map(() => (
-														<IcCStar width={10} stroke="#FFDF33" />
-													))}
-												</div>
-											</div>
-										</Tooltip>
-									)
-									: null
-							))
-							: null
-					}
-				</div>
+				<BadgeGotList
+					badgesGot={badgesGot}
+					badgeListLoading={badgeListLoading}
+				/>
 			</div>
 
 			<div>
