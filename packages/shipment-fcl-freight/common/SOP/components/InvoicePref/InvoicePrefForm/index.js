@@ -1,4 +1,4 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button, Loader, Toast } from '@cogoport/components';
 import { SelectController, useFieldArray, useForm } from '@cogoport/forms';
 import { IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -26,6 +26,7 @@ const EMPTY_VALUES = {
 function InvoicePrefForm({
 	setShowForm = () => {}, data = [], showForm = '', shipment_ids = {},
 	getProcedureTrigger = () => {},
+	auditsTrigger = () => {},
 	services = [],
 }) {
 	const { shipment_id, organization_id, procedure_id } = shipment_ids;
@@ -40,6 +41,7 @@ function InvoicePrefForm({
 	const afterUpdateOrCreateRefetch = () => {
 		setShowForm(false);
 		getProcedureTrigger();
+		if (showForm === 'edit') auditsTrigger();
 	};
 
 	const { apiTrigger:createTrigger, loading:createLoading } =	 useCreateShipmentOperatingInstruction({
@@ -66,14 +68,13 @@ function InvoicePrefForm({
 		mobile_country_code          :countryCodeOptions,
 	} = getInvoicOptions(orgData?.organization_handling_preference || [], services);
 
-	const { sop_detail = {} } = data?.[0] || {};
-
 	const defaultValue = EMPTY_VALUES;
 	if (showForm === 'edit') {
+		const { sop_detail = {} } = data?.[0] || {};
 		Object.keys(defaultValue).forEach((key) => { defaultValue[key] = sop_detail[key] || ''; });
 	}
 
-	const { control, handleSubmit, formState:{ errors = {} } } = useForm({
+	const { control, handleSubmit, formState:{ errors = {} }, reset } = useForm({
 		defaultValues: {
 			invoice_pref: [defaultValue],
 		},
@@ -83,6 +84,11 @@ function InvoicePrefForm({
 		control,
 		name: 'invoice_pref',
 	});
+
+	const onCancel = () => {
+		reset({ invoice_pref: [EMPTY_VALUES] });
+		setShowForm(false);
+	};
 
 	const onSubmit = (formValues) => {
 		if (showForm === 'edit') {
@@ -114,7 +120,7 @@ function InvoicePrefForm({
 
 	return (
 		<div className={styles.form_container}>
-
+			{loading && <Loader />}
 			{!loading
 			&& (
 				<form>
@@ -245,7 +251,7 @@ function InvoicePrefForm({
 					<div className={styles.form_action}>
 						<div className={styles.cancel}>
 							<Button
-								onClick={() => setShowForm(false)}
+								onClick={onCancel}
 								size="sm"
 								themeType="secondary"
 							>

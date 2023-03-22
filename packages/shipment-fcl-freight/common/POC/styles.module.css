@@ -2,3 +2,8 @@
     overflow: 'scroll';
     padding: 10px 0px;    
 }
+
+.loader{
+    display: flex;
+    justify-content: center;
+}

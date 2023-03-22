@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { RadioGroupController, useForm } from '@cogoport/forms';
 import { useImperativeHandle, forwardRef, useEffect } from 'react';
 
@@ -11,7 +12,7 @@ function ExistingPOC({
 	trade_party_type = '',
 	trade_party_id = '',
 }, ref) {
-	const { data = [] } = useListExistingPoc({
+	const { data = [], loading } = useListExistingPoc({
 		organization_id: importer_exporter_id,
 		trade_party_type,
 		trade_party_id,
@@ -46,12 +47,20 @@ function ExistingPOC({
 		<div className={styles.container}>
 			{Error('existing_poc')}
 
-			<RadioGroupController
-				options={options}
-				control={control}
-				name="existing_poc"
-				rules={{ required: { value: true, message: 'POC is required' } }}
-			/>
+			{loading ? (
+				<div className={styles.loader}>
+					<Loader />
+				</div>
+			)
+
+				: (
+					<RadioGroupController
+						options={options}
+						control={control}
+						name="existing_poc"
+						rules={{ required: { value: true, message: 'POC is required' } }}
+					/>
+				)}
 		</div>
 	);
 }
