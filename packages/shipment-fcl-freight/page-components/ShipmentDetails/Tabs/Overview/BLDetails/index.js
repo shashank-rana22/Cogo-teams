@@ -16,18 +16,29 @@ function BLDetails() {
 	const [mappingModal, setMappingModal] = useState(false);
 	const [editContainerNum, setEditContainerNum] = useState(false);
 
-	const { shipment_data, documents, container_details } = useContext(
+	const { shipment_data, bl_container_mappings } = useContext(
 		ShipmentDetailContext,
 	);
+
+	const blCount = bl_container_mappings ? Object.keys(bl_container_mappings).length : 0;
+
+	let containersCount = 0;
+	if (bl_container_mappings) {
+		containersCount = Object.keys(bl_container_mappings).forEach((key) => (bl_container_mappings[key].length));
+	}
+
+	// Object.keys(x).forEach((key) => {
+	// 	console.log(`Length of array for key "${key}": ${x[key].length}`);
+	//   });
 
 	const renderBlCount = (
 		<div className={styles.bl_count_container}>
 			BL and Container Details
 			<div className="bl-count">
 				(
-				{documents?.length || 0}
+				{blCount || 0}
 				&nbsp;BL & &nbsp;
-				{container_details?.length || 0}
+				{/* {container_details?.length || 0} */}
 				&nbsp;
 				Containers
 				)
@@ -108,24 +119,24 @@ function BLDetails() {
 		<div className={styles.container}>
 			<div className={styles.button_div}>{buttons()}</div>
 			<Accordion title={renderBlCount} style={{ width: '100%' }}>
-				{!container_details?.length ? (
+				{!blCount ? (
 					<EmptyState showContent={emptyStateContent} />) : (
 						<div className={styles.manage_services_div}>
-							{container_details?.map((item) => (
+							{Object.keys(bl_container_mappings)?.map((key) => (
 								<div className={styles.service_card}>
 									<Accordion title={(
 										<TitleCard
-											item={item}
+											blNumber={key}
 											setOpen={setOpen}
 											open={open}
 											setActiveId={setActiveId}
 											activeId={activeId}
 											shipmentData={shipment_data}
-											containersCount={container_details?.length}
+											containerDetails={bl_container_mappings[key]}
 										/>
 									)}
 									>
-										<ContainerDetails containerDetails={item?.container_details} />
+										<ContainerDetails containerDetails={bl_container_mappings[key]} />
 									</Accordion>
 								</div>
 							))}

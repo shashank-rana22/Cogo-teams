@@ -17,7 +17,7 @@ function useGetShipment() {
 				await trigger({
 					params: {
 						id                 : shipment_id,
-						additional_methods : ['main_service', 'documents', 'containers'],
+						additional_methods : ['main_service', 'documents', 'bl_container_mapping'],
 					},
 				});
 			} catch (err) {
@@ -34,11 +34,11 @@ function useGetShipment() {
 
 		get: {
 			isGettingShipment,
-			refetch           : getShipment,
-			documents         : data?.documents,
-			primary_service   : data?.primary_service,
-			shipment_data     : data?.summary,
-			container_details : data?.container_details,
+			refetch               : getShipment,
+			documents             : data?.documents,
+			primary_service       : data?.primary_service,
+			shipment_data         : data?.summary,
+			bl_container_mappings : data?.bl_container_mappings,
 		},
 	};
 }
