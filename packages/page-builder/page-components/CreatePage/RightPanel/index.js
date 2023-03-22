@@ -1,11 +1,11 @@
 import { Button } from '@cogoport/components';
 
-import template from '../../../../configurations/sample';
-import ComponentBuilder from '../../../../utils/component-builder';
+import template from '../../../configurations/sample';
+import ComponentBuilder from '../../../utils/component-builder';
 
 import styles from './styles.module.css';
 
-function RightPanel() {
+function Editor() {
 	const { components = [] } = template;
 
 	return (
@@ -33,4 +33,4 @@ function RightPanel() {
 	);
 }
 
-export default RightPanel;
+export default Editor;

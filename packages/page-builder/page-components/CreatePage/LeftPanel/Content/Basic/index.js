@@ -1,6 +1,6 @@
 import { startCase } from '@cogoport/utils';
 
-import contents from '../../../../../../configurations/basic-contents';
+import contents from '../../../../../configurations/basic-contents';
 
 import styles from './styles.module.css';
 

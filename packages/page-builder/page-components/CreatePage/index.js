@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import LeftPanel from './components/LeftPanel';
-import RightPanel from './components/RightPanel';
+import LeftPanel from './LeftPanel';
+import RightPanel from './RightPanel';
 import styles from './styles.module.css';
 
 function CreatePage() {
