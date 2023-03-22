@@ -1,6 +1,6 @@
 import { Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import useListFaqQuestions from '../../../../../hooks/useListFaqQuestions';
 
@@ -8,7 +8,9 @@ import AllQuestions from './AllQuestions';
 import styles from './styles.module.css';
 
 function QuestionsList({ id }) {
-	const props = useListFaqQuestions({ topicId: id });
+	const [sortType, setSortType] = useState('desc');
+
+	const props = useListFaqQuestions({ topicId: id, sortType });
 
 	const { searchInput, setSearchInput } = props;
 
@@ -26,7 +28,11 @@ function QuestionsList({ id }) {
 			</div>
 
 			<div>
-				<AllQuestions {...props} />
+				<AllQuestions
+					sortType={sortType}
+					setSortType={setSortType}
+					{...props}
+				/>
 
 			</div>
 		</div>

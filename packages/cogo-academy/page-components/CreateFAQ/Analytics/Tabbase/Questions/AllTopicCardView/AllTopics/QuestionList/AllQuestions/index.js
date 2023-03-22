@@ -1,81 +1,23 @@
-import { Pill, Tooltip, Pagination } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { Pagination } from '@cogoport/components';
 import React from 'react';
 
 import StyledTable from '../../../../../../../../../commons/StyledTable';
 
 import styles from './styles.module.css';
+import useAllQuestions from './useAllQuestions';
 
 function AllQuestions(props) {
-	const truncate = (str) => (str?.length > 58 ? `${str.substring(0, 56)}...` : str);
-
-	const { paginationData, page, setPage, data } = props;
-
+	const { paginationData, page, setPage, data, sortType, setSortType } = props;
 	const { page_limit, total_count } = paginationData;
 
-	const { list:listdata = [] } = data || {};
-
-	const addedQuestionsColumns = () => [
-		{
-			Header   : 'Questions',
-			accessor : (items) => (
-				<div className={styles.question}>
-					<Tooltip content={items?.question_abstract} placement="right">
-						<div>{truncate(items?.question_abstract)}</div>
-					</Tooltip>
-				</div>
-			),
-		},
-		{
-			Header   : 'Tags',
-			accessor : (items) => (items?.faq_tags?.length > 0 ? (
-				<div className={styles.tags}>
-					{items.faq_tags.map((tag) => {
-						const { display_name } = tag || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-					})}
-				</div>
-			) : '-'),
-		},
-		{
-			Header   : 'No.Of Views',
-			accessor : (items) => (
-				<div className={styles.question}>
-					{items?.view_count}
-				</div>
-			),
-		},
-		{
-			Header   : 'No.of Likes',
-			accessor : (items) => (
-				<div className={styles.question}>
-					{items?.answers[0]?.upvote_count}
-				</div>
-			),
-		},
-		{
-			Header   : 'No.of Dislikes',
-			accessor : (items) => (
-				<div className={styles.question}>
-					{items?.answers[0]?.downvote_count}
-				</div>
-			),
-		},
-
-	];
-	const columns = addedQuestionsColumns();
+	const { columns, data: tableData } = useAllQuestions({ listdata: data?.list, sortType, setSortType });
 
 	return (
 		<div className={styles.container}>
-			<StyledTable columns={columns} layoutType="table" data={listdata} />
+			<StyledTable columns={columns} data={tableData} />
 
 			<Pagination
-				style={{
-					display        : 'flex',
-					justifyContent : 'flex-end',
-					paddingRight   : '20px',
-					paddingBottom  : '12px',
-				}}
+				style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: '16px', paddingRight: '12px' }}
 				type="page"
 				currentPage={page}
 				totalItems={total_count}
