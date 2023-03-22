@@ -1,5 +1,4 @@
 import { Pill, Tooltip, Pagination } from '@cogoport/components';
-// eslint-disable-next-line import/no-unresolved
 import startCase from '@cogoport/utils/src/utilities/startCase';
 import React from 'react';
 
@@ -71,13 +70,19 @@ function AllQuestions(props) {
 			<StyledTable columns={columns} layoutType="table" data={listdata} />
 
 			<Pagination
-				style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '20px', paddingBottom: '12px' }}
+				style={{
+					display        : 'flex',
+					justifyContent : 'flex-end',
+					paddingRight   : '20px',
+					paddingBottom  : '12px',
+				}}
 				type="page"
 				currentPage={page}
 				totalItems={total_count}
 				pageSize={page_limit}
 				onPageChange={setPage}
 			/>
+
 		</div>
 	);
 }

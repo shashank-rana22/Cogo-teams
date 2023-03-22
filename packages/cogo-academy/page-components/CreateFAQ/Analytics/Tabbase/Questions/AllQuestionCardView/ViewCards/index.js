@@ -14,9 +14,9 @@ const VIEW_CARD_MAPPING = {
 	disliked : 'total_dislikes',
 };
 const VIEW_CARD_TEXT_MAPPING = {
-	viewed   : 'Views ,',
-	liked    : 'Likes ,',
-	disliked : 'Dislikes ,',
+	viewed   : 'Views, ',
+	liked    : 'Likes, ',
+	disliked : 'Dislikes, ',
 };
 function ViewCards({ state = '', cardHeading = '', subHeading = [] }) {
 	const truncate = (str) => (str?.length > 10 ? `${startCase(str.substring(0, 11))}...` : startCase(str));
