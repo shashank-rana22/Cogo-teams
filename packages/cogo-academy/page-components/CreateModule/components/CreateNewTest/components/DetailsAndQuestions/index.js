@@ -4,7 +4,6 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useCreateTest from '../../../../hooks/useCreateTest';
-import useUpdateTest from '../../../../hooks/useUpdateTest';
 
 // import NewQuestion from './components/NewQuestion';
 import QuestionSet from './components/QuestionSet';
@@ -15,8 +14,6 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
-
-	const { updataTest } = useUpdateTest();
 
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 
@@ -31,7 +28,6 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	console.log('data:: ', data);
 
 	return (
 		<div className={styles.container}>
