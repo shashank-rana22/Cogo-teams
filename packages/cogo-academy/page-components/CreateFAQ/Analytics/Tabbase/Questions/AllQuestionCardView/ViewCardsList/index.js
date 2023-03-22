@@ -9,10 +9,11 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 	function Icon(item) {
 		if (state === 'Viewed_Question') {
 			return (
-				<div style={{ marginRight: '0.25rem' }}>
+				<div style={{ marginRight: '0.25rem',display:'flex' }}>
 					{item?.view_count || 0}
-					<IcMEyeopen style={{ marginTop: '0.15rem', marginLeft: '0.25rem', paddingTop: '1px' }} />
+					<div><IcMEyeopen style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} /></div>
 				</div>
+				
 			);
 		}
 		if (state === 'Liked_Question') {

@@ -3,8 +3,8 @@ import startCase from '@cogoport/utils/src/utilities/startCase';
 
 import styles from './styles.module.css';
 
-function ViewCards({ cardHeading = '', subHeading = [] }) {
-	const truncate = (str) => (str?.length > 10 ? `${startCase(str.substring(0, 11))}...` : startCase(str));
+function ViewCardsTags({ cardHeading = '', subHeading = [] }) {
+	const truncate = (str) => (str?.length > 11 ? `${startCase(str.substring(0, 12))}...` : startCase(str));
 
 	return (
 		<div className={styles.primary_right}>
@@ -60,4 +60,4 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 	);
 }
 
-export default ViewCards;
+export default ViewCardsTags;

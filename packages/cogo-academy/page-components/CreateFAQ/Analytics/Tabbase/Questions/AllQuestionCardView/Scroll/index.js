@@ -2,7 +2,7 @@ import { Carousel } from '@cogoport/components';
 
 import ViewCards from '../ViewCards';
 import ViewCardsList from '../ViewCardsList';
-
+import ViewCardsTags from '../ViewCardsTags';
 import styles from './styles.module.css';
 
 function ScrollBar({ props = {} }) {
@@ -13,8 +13,10 @@ function ScrollBar({ props = {} }) {
 		trending_topics = [],
 		trending_tags = [],
 		unpopular_questions = [],
+		topic_wise_questions=[]
 	} = props;
-
+	const {topic_wise_disliked_questions=[],topic_wise_liked_questions=[]}=topic_wise_questions
+console.log(topic_wise_liked_questions,'thy')
 	const CAROUSELDATA = [
 		{
 			key    : 'item1',
@@ -59,7 +61,7 @@ function ScrollBar({ props = {} }) {
 						cardHeading="Top Liked Questions"
 						contentQuestion={popular_questions}
 					/>
-					<ViewCards
+					<ViewCardsTags
 						cardHeading="Trending Tags"
 						subHeading={trending_tags}
 					/>
@@ -80,14 +82,14 @@ function ScrollBar({ props = {} }) {
 						cardHeading="Top Liked Questions"
 						contentQuestion={popular_questions}
 					/>
-					<ViewCards
+					<ViewCardsTags
 						cardHeading="Trending Tags"
 						subHeading={trending_tags}
 					/>
 					<ViewCards
 						cardHeading="Topic from which Most
 						Questions Disliked"
-						subHeading={trending_topics}
+						subHeading={topic_wise_disliked_questions}
 					/>
 				</div>
 			),
@@ -101,19 +103,19 @@ function ScrollBar({ props = {} }) {
 						cardHeading="Top Liked Questions"
 						contentQuestion={popular_questions}
 					/>
-					<ViewCards
+					<ViewCardsTags
 						cardHeading="Trending Tags"
 						subHeading={trending_tags}
 					/>
 					<ViewCards
 						cardHeading="Topic from which Most
 						Questions Disliked"
-						subHeading={trending_topics}
+						subHeading={topic_wise_disliked_questions}
 					/>
 					<ViewCards
 						cardHeading="Topic from which Most
 						Questions Liked"
-						subHeading={trending_topics}
+						subHeading={topic_wise_liked_questions}
 					/>
 				</div>
 			),
@@ -122,19 +124,19 @@ function ScrollBar({ props = {} }) {
 			key    : 'item5',
 			render : () => (
 				<div className={styles.content}>
-					<ViewCards
+					<ViewCardsTags
 						cardHeading="Trending Tags"
 						subHeading={trending_tags}
 					/>
 					<ViewCards
 						cardHeading="Topic from which Most
 						Questions Disliked"
-						subHeading={trending_topics}
+						subHeading={topic_wise_disliked_questions}
 					/>
 					<ViewCards
 						cardHeading="Topic from which Most
 						Questions Liked"
-						subHeading={trending_topics}
+						subHeading={topic_wise_liked_questions}
 					/>
 					<ViewCardsList
 						state="Disliked_Question"

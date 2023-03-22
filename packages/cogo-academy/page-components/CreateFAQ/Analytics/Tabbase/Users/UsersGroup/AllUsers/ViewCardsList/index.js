@@ -8,11 +8,10 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 	function Icon(item) {
 		if (state === 'Viewed_Question') {
 			return (
-				<div style={{ marginRight: '0.25rem' }}>
-					{item?.questions_views}
-					<IcMEyeopen style={{ marginTop: '0.15rem', marginLeft: '0.25rem', paddingTop: '1px' }} />
-
-				</div>
+				<div style={{ marginRight: '0.25rem',display:'flex' }}>
+				{item?.questions_views || 0}
+				<div><IcMEyeopen style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} /></div>
+			</div>
 
 			);
 		}
