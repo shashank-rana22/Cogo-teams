@@ -13,7 +13,6 @@ function BadgeUpdateCard(props) {
 
 	const InputController = getFieldController('number');
 	const UploadController = getFieldController('fileUpload');
-
 	const MEDAL_IMAGE_MAPPING = {
 		Bronze : bronze_details?.image_url,
 		Silver : silver_details?.image_url,

@@ -46,10 +46,15 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 				<div className={styles.badge_header}>
 					<div className={styles.header_score}>
 						<div>
-							{`${medal} : `}
+							{medal}
+							{' '}
+							:
+							{' '}
 						</div>
 						<div className={styles.score}>
-							{`${score} Score`}
+							{score || '___'}
+							{' '}
+							Score
 						</div>
 					</div>
 					<span style={{ cursor: 'pointer', marginLeft: '4px' }}>
@@ -85,7 +90,6 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 				</Modal>
 			)}
 		</>
-
 	);
 }
 
