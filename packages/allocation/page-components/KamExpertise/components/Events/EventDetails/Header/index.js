@@ -1,6 +1,6 @@
 import { Button, Select } from '@cogoport/components';
 
-import SearchInput from '../../../../../common/SearchInput';
+import SearchInput from '../../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
@@ -24,15 +24,21 @@ const OPTIONS = [
 ];
 
 function Header(props) {
-	// Todo take it from params like in case of search
 	const {
-		setToggleEvent = () => {},
+		setEventListData = () => {},
 		loading,
-		debounceQuery, setSearchValue = () => {}, searchValue, expertise, setExpertise = () => {},
+		debounceQuery,
+		setSearchValue = () => {},
+		searchValue,
+		expertise,
+		setExpertise = () => {},
 	} = props;
 
-	const onClose = () => {
-		setToggleEvent('createNew');
+	const onAdd = () => {
+		setEventListData({
+			data        : {},
+			toggleEvent : 'updateEvent',
+		});
 	};
 
 	return (
@@ -42,7 +48,7 @@ function Header(props) {
 			<div className={styles.header_container}>
 				<div className={styles.filter_container}>
 					<Select
-						size="md"
+						size="sm"
 						isClearable
 						placeholder="Expertise Type"
 						value={expertise}
@@ -55,7 +61,7 @@ function Header(props) {
 					/>
 
 					<SearchInput
-						size="md"
+						size="sm"
 						placeholder="Search"
 						setGlobalSearch={setSearchValue}
 						debounceQuery={debounceQuery}
@@ -68,7 +74,7 @@ function Header(props) {
 				<Button
 					themeType="primary"
 					size="md"
-					onClick={onClose}
+					onClick={onAdd}
 					disabled={loading}
 					className={styles.add_button}
 				>
