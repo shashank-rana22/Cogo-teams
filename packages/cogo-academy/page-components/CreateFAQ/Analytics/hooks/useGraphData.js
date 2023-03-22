@@ -1,7 +1,7 @@
 import useListFaqSearchHistories from './ListFaqSearchHistories';
 
 function useGraphData() {
-	const props = useListFaqSearchHistories({});
+	const props = useListFaqSearchHistories();
 
 	const { data, dateRange, setDateRange } = props || {};
 

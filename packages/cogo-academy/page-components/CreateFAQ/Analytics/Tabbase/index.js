@@ -10,7 +10,7 @@ import Users from './Users';
 function Tabbase() {
 	const [activeTab, setActiveTab] = useState('By_Questions');
 	const [date, setDate] = useState('');
-	const props = useListFaqStats({ date, setDate });
+	const props = useListFaqStats({ date });
 
 	return (
 		<div>

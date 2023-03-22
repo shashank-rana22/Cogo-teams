@@ -1,13 +1,8 @@
-import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 function useListFaqStats({
-	searchState = undefined,
-	topicId = undefined,
-	tagId = [],
 	date = '',
-
 }) {
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
@@ -18,21 +13,11 @@ function useListFaqStats({
 		url    : 'list_faq_stats',
 	}, { manual: true });
 
-	const { query, debounceQuery } = useDebounceQuery();
-
-	useEffect(() => {
-		debounceQuery(searchState);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchState]);
-
 	const fetchFaqStats = async () => {
 		try {
 			await trigger({
 				params: {
 					filters: {
-
-						faq_topic_id            : topicId || undefined,
-						faq_tag_id              : tagId || undefined,
 						created_at_greater_than : startDate,
 						created_at_less_than    : endDate,
 
@@ -58,7 +43,7 @@ function useListFaqStats({
 	useEffect(() => {
 		fetchFaqStats();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, query, topicId, JSON.stringify(tagId), date]);
+	}, [page, date]);
 
 	const { page_limit, total_count } = data || {};
 
@@ -73,7 +58,6 @@ function useListFaqStats({
 		loading,
 		activeTab,
 		setActiveTab,
-		topicId,
 	};
 }
 
