@@ -65,6 +65,12 @@ const apis = [
 		service_name : 'shipment',
 		feature      : 'inventory_management',
 	},
+	{
+		api          : 'list_organizations',
+		access_type  : 'private',
+		service_name : 'organization',
+		feature      : 'inventory_management',
+	},
 ];
 
 export default apis;
