@@ -75,8 +75,8 @@ function BadgeDescription(props) {
 						/>
 						{/* //Todo: stars arent available in the response */}
 						{/* <div className={styles.stars}>
-							{[1, 2, 3].map((i) => (
-								<div key={i}>
+							{[1, 2, 3].map((item) => (
+								<div key={item}>
 									<IcCStar width={10} stroke="#FFDF33" />
 								</div>
 							))}

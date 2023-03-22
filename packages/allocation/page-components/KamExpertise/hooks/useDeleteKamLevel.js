@@ -1,10 +1,9 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
-// import React from 'react';
 
 function useDeleteKamLevel(props) {
-	const { refetch, transition_level, selectedVersion } = props;
+	const { refetch, transition_level } = props;
 	const [{ loading:deleteLoading }, trigger] = useAllocationRequest({
 		method  : 'POST',
 		url     : 'kam_expertise_configuration_attributes',

@@ -25,7 +25,7 @@ function CardItem({ item, editMode, control }) {
 			</div>
 
 			{data.map((childItem) => {
-				const { condition_name = '', attributes: controls = [], id = '' } = childItem;
+				const { condition_name = '', attributes: controls = [] } = childItem;
 
 				return (
 					<>

@@ -1,0 +1,65 @@
+.level_card_container {
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+  padding: 0;
+}
+.row_level {
+  margin: 0 16px;
+  padding: 44px 0;
+  font-weight: 700;
+  font-size: 18px;
+  width: 20%;
+}
+.row_level_end {
+  margin: 0 16px;
+  padding: 44px 0;
+  font-weight: 700;
+}
+.row_level_end_options {
+  display: flex;
+  width: 100%;
+  margin: 28px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+.supporting_text {
+  font-weight: 500;
+  font-size: 14px;
+  align-items: center;
+  color: #4f4f4f;
+  margin: 10px 0 10px 0;
+}
+.border_class {
+  border: 1px solid #bdbdbd;
+  opacity: 0.4;
+  margin: 0 16px 0 16px;
+}
+.level_desc {
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 32px;
+  color: #221f20;
+  margin-left: 8px;
+  padding: 8px;
+}
+.arrow {
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+}
+.errors {
+  font-size: 12px;
+  color: #cb6464;
+}
+.cancel_button {
+  float: right;
+  display: flex;
+  gap: 12px;
+  margin-right: 12px;
+}
+
+.span_heading {
+  font-weight: 700;
+  font-size: 18px;
+}

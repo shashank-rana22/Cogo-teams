@@ -122,8 +122,8 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 													<img src={item.image_url} alt="badge icon" />
 												</div>
 												<div className={styles.stars}>
-													{[1, 2, 3].map((i) => (
-														<div key={i}>
+													{[1, 2, 3].map((itm) => (
+														<div key={itm}>
 															<IcCStar width={10} stroke="#FFDF33" />
 														</div>
 													))}
@@ -146,8 +146,8 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 													<img src={item.image_url} alt="badge icon" />
 												</div>
 												<div className={styles.stars}>
-													{[1, 2, 3].map((i) => (
-														<div key={i}>
+													{[1, 2, 3].map((itm) => (
+														<div key={itm}>
 															<IcCStar width={10} stroke="#FFDF33" />
 														</div>
 													))}

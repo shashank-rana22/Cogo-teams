@@ -15,8 +15,10 @@ function ViewAllConfigurations() {
 		ConfigCardLoading,
 	} = useGetKamExpertiseCurrentConfig();
 
-	// const draft = listKamExpertiseCurrentConfigs?.list;
-	const VERSION_CARDS = listKamExpertiseCurrentConfigs?.list || [];
+	const list = listKamExpertiseCurrentConfigs?.list || [];
+
+	const VERSION_CARDS = list.filter((item) => item.status_value !== 'draft');
+	const listDraft = list.filter((item) => item.status_value === 'draft');
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise/configurations');
@@ -34,7 +36,9 @@ function ViewAllConfigurations() {
 						Back to Configurations
 					</div>
 				</div>
-				{/* <ConfigurationCard {...draft} /> */}
+				{listDraft.map((item) => (
+					<ConfigurationCard {...item} />
+				))}
 
 				{VERSION_CARDS.map((item) => (
 					<ConfigurationCard {...item} />

@@ -1,9 +1,13 @@
 import { Toast, Button } from '@cogoport/components';
 import React from 'react';
 
+import useGetKamExpertiseVersionDetials from '../../../../../hooks/useGetKamExpertiseVersionDetials';
+
 import styles from './styles.module.css';
 
 function ModalFooter({ setMode, setShowModal, setSelectedVersion, selectedVersion }) {
+	const { getVersion } = useGetKamExpertiseVersionDetials();
+
 	return (
 		<div className={styles.modal_footer}>
 			{selectedVersion ? (
@@ -30,10 +34,11 @@ function ModalFooter({ setMode, setShowModal, setSelectedVersion, selectedVersio
 					className={styles.button}
 					disabled={!selectedVersion}
 					onClick={() => {
-						setShowModal(false);
 						setMode('initial-mode');
-						Toast.success(`Version ${selectedVersion} Selected`);
+						setShowModal(false);
+						// getVersion();
 					}}
+
 				>
 					Create
 				</Button>

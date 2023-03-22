@@ -6,19 +6,37 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Published({ setSelectedVersion = () => {}, data }) {
-	const table = [];
+function Published({ setSelectedVersion = () => {} }) {
+	const table = [
 
-	data.forEach((element) => {
-		if (element.version_number !== '0') {
-			table.push({
-				version_number : element?.version_number || '-',
-				status         : element?.status_value || '-',
-				updated_at     : element?.audit_data?.updated_at || '-',
+		{
+			version_number : 3,
+			status         : 'live',
+			updated_at     : '22-sep-20203',
+		},
+		{
+			version_number : 2,
+			status         : 'expired',
+			updated_at     : '22-sep-20203',
+		},
+		{
+			version_number : 1,
+			status         : 'expired',
+			updated_at     : '22-sep-20203',
+		},
+	];
+	// const table = [];
 
-			});
-		}
-	});
+	// data.forEach((element) => {
+	// 	if (element.version_number !== '0') {
+	// 		table.push({
+	// 			version_number : element?.version_number || '-',
+	// 			status         : element?.status_value || '-',
+	// 			updated_at     : element?.audit_data?.updated_at || '-',
+
+	// 		});
+	// 	}
+	// });
 	const columns = [
 		{
 			Header   : 'VERSION NAME',
@@ -37,7 +55,7 @@ function Published({ setSelectedVersion = () => {}, data }) {
 			Header   : 'STATUS',
 			accessor : 'status',
 			Cell     : ({ value }) => {
-				const colors = value === 'active' ? 'green' : 'red';
+				const colors = value === 'live' ? 'green' : 'red';
 				return (
 					<span>
 						<Pill className={styles.pill} color={colors}>{value === 'active' ? 'live' : value}</Pill>

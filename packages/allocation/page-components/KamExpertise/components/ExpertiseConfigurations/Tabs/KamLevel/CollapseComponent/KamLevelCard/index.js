@@ -3,7 +3,7 @@ import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useDeleteKamLevel from '../../../../../hooks/useDeleteKamLevel';
+import useDeleteKamLevel from '../../../../../../hooks/useDeleteKamLevel';
 
 import styles from './styles.module.css';
 
@@ -27,9 +27,8 @@ function KamLevelCard(props) {
 		activeCard = '',
 		data = {},
 		id = '',
-		dataLength,
 		refetch = () => {},
-		selectedVersion,
+		isLastCard = false,
 	} = props;
 	const [showModal, setShowModal] = useState(false);
 
@@ -38,7 +37,7 @@ function KamLevelCard(props) {
 		expertise_details = [],
 	} = data;
 
-	const { onDelete, deleteLoading } = useDeleteKamLevel({ refetch, transition_level, selectedVersion });
+	const { onDelete, deleteLoading } = useDeleteKamLevel({ refetch, transition_level });
 
 	const expertiseObject = expertise_details.map((item) => item);
 
@@ -61,18 +60,15 @@ function KamLevelCard(props) {
 							<div>
 								<ButtonIcon
 									size="lg"
-									onClick={(evnt) => {
-										evnt.stopPropagation();
-										if (dataLength === id + 1) {
-											setShowModal(true);
-										}
+									onClick={(event) => {
+										event.stopPropagation();
+										setShowModal(true);
 									}}
 									icon={(
 										<IcMDelete />
 									)}
-									disabled={(dataLength !== id + 1)}
+									disabled={!isLastCard}
 								/>
-
 							</div>
 
 						</div>

@@ -44,8 +44,8 @@ function BadgeGotList(props) {
 									<img src={data.image_url} alt="badge" />
 								</div>
 								<div className={styles.stars}>
-									{[1, 2, 3].map((i) => (
-										<div key={i}>
+									{[1, 2, 3].map((item) => (
+										<div key={item}>
 											<IcCStar width={10} stroke="#FFDF33" />
 										</div>
 									))}
