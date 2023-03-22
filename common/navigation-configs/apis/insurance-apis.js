@@ -29,7 +29,7 @@ const apis = [
 		service_name : 'saas',
 	},
 	{
-		api          : 'post_insurance',
+		api          : 'post_insurance_checkout_and_generate',
 		access_type  : 'private',
 		service_name : 'saas',
 	},
@@ -44,9 +44,9 @@ const apis = [
 		service_name : 'saas',
 	},
 	{
-		api          : 'post_insurance_checkout',
+		api          : 'send_shipment_cargo_insurance_email',
 		access_type  : 'private',
-		service_name : 'saas',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'get_insurance_rate',
