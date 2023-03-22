@@ -11,16 +11,18 @@
 		font-size: 24px;
 	}
 }
-.body{
-    display: flex;
-    height: 100vh;
-    
+
+.body {
+	display: flex;
+	height: 100vh;
 }
-.left_panel{
-    width: 30%;
-    padding: 12px;
+
+.left_panel {
+	width: 30%;
+	padding: 12px;
 }
-.right_panel{
-    background-color: #fff;
-    width: 70%;
+
+.right_panel {
+	width: 70%;
+	background-color: #fff;
 }
