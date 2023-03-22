@@ -39,6 +39,9 @@ const businessFinance = {
 		navigation : 'business_finance-overheads',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/overheads/[active_tab]/Expenses/Response': {
+		navigation: 'business_finance-overheads',
+	},
 };
 
 export default businessFinance;
