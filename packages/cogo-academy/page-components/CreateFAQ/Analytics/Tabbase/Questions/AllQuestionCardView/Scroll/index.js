@@ -13,8 +13,10 @@ function ScrollBar({ props = {} }) {
 		trending_topics = [],
 		trending_tags = [],
 		unpopular_questions = [],
+		topic_wise_questions=[]
 	} = props;
-
+	const {topic_wise_disliked_questions=[],topic_wise_liked_questions=[]}=topic_wise_questions
+console.log(topic_wise_liked_questions,'thy')
 	const CAROUSELDATA = [
 		{
 			key    : 'item1',
@@ -87,7 +89,7 @@ function ScrollBar({ props = {} }) {
 					<ViewCards
 						cardHeading="Topic from which Most
 						Questions Disliked"
-						subHeading={trending_topics}
+						subHeading={topic_wise_disliked_questions}
 					/>
 				</div>
 			),
@@ -108,12 +110,12 @@ function ScrollBar({ props = {} }) {
 					<ViewCards
 						cardHeading="Topic from which Most
 						Questions Disliked"
-						subHeading={trending_topics}
+						subHeading={topic_wise_disliked_questions}
 					/>
 					<ViewCards
 						cardHeading="Topic from which Most
 						Questions Liked"
-						subHeading={trending_topics}
+						subHeading={topic_wise_liked_questions}
 					/>
 				</div>
 			),
@@ -129,12 +131,12 @@ function ScrollBar({ props = {} }) {
 					<ViewCards
 						cardHeading="Topic from which Most
 						Questions Disliked"
-						subHeading={trending_topics}
+						subHeading={topic_wise_disliked_questions}
 					/>
 					<ViewCards
 						cardHeading="Topic from which Most
 						Questions Liked"
-						subHeading={trending_topics}
+						subHeading={topic_wise_liked_questions}
 					/>
 					<ViewCardsList
 						state="Disliked_Question"
