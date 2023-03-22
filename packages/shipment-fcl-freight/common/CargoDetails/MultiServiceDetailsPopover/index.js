@@ -20,12 +20,11 @@ function MultiServiceDetailsPopover({
 	}
 
 	const renderBody = () => (
-		mainServices?.map((item) => (
+		mainServices?.map((item, idx) => (idx !== 0 ? (
 			<div className={styles.container}>
 				<RenderCargoPills detail={item} className="details" />
 			</div>
-		))
-	);
+		) : null)));
 
 	return (
 		<Popover
