@@ -4,18 +4,18 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const COMPLETION_MAPPING = {
+	completed   : 'Shipment Completion',
+	in_progress : 'Shipment Creation',
+
+};
+
 function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 	const {
-		id, condition_name:conditionName = '', expertise_type:Type = '',
+		condition_name:conditionName = '', expertise_type:Type = '',
 		description = '',
 		rules = [],
-	} = data;
-
-	const COMPLETION_MAPPING = {
-		completed   : 'Shipment Completion',
-		in_progress : 'Shipment Creation',
-
-	};
+	} = data || {};
 
 	const handleEdit = () => {
 		setEventListData(data);
@@ -23,13 +23,14 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 	};
 
 	return (
-
-		<section key={id} className={styles.list_item_container}>
+		<section className={styles.list_item_container}>
 			<div className={styles.top_div}>
 				#
 				{index + 1}
+
 				<IcMEdit style={{ cursor: 'pointer' }} onClick={handleEdit} />
 			</div>
+
 			<div>
 				<p className={styles.info_tag}>
 					Expertise :
@@ -66,9 +67,7 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 								size="l"
 								color="blue"
 							>
-
 								{startCase(res?.name)}
-
 							</Pill>
 						</span>
 						<div style={{ marginRight: '4px' }}>
