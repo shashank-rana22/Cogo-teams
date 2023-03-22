@@ -104,11 +104,15 @@
 }
 
 .sub_heading {
-	flex-wrap: wrap;
 	align-items: left;
 	justify-content: space-between;
 	margin-top: 4px;
 	font-size: 12px;
 	font-weight: 600;
 	text-align: left;
+}
+
+.quest {
+	display: flex;
+	justify-content: space-between;
 }

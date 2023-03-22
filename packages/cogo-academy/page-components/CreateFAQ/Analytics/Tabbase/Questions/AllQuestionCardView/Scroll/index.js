@@ -3,6 +3,7 @@ import { Carousel } from '@cogoport/components';
 import ViewCards from '../ViewCards';
 import ViewCardsList from '../ViewCardsList';
 import ViewCardsTags from '../ViewCardsTags';
+
 import styles from './styles.module.css';
 
 function ScrollBar({ props = {} }) {
@@ -13,30 +14,31 @@ function ScrollBar({ props = {} }) {
 		trending_topics = [],
 		trending_tags = [],
 		unpopular_questions = [],
-		topic_wise_questions=[]
+		topic_wise_questions = [],
 	} = props;
-	const {topic_wise_disliked_questions=[],topic_wise_liked_questions=[]}=topic_wise_questions
-console.log(topic_wise_liked_questions,'thy')
+	const { topic_wise_disliked_questions = [], topic_wise_liked_questions = [] } = topic_wise_questions;
 	const CAROUSELDATA = [
 		{
 			key    : 'item1',
 			render : () => (
 				<div className={styles.content}>
 					<ViewCards
+						state="viewed"
 						cardHeading="Topic from which Most Questions viewed"
 						subHeading={trending_topics}
 					/>
 					<ViewCards
+						state="viewed"
 						cardHeading="User group that viewed the Most Questions "
 						subHeading={active_audiences}
 					/>
 					<ViewCardsList
-						state="Viewed_Question"
+						state="viewed_question"
 						cardHeading="Top Viewed Questions"
 						contentQuestion={most_viewed_questions}
 					/>
 					<ViewCardsList
-						state="Liked_Question"
+						state="liked_question"
 						cardHeading="Top Liked Questions"
 						contentQuestion={popular_questions}
 					/>
@@ -48,20 +50,22 @@ console.log(topic_wise_liked_questions,'thy')
 			render : () => (
 				<div className={styles.content}>
 					<ViewCards
+						state="viewed"
 						cardHeading="User group that viewed the Most Questions "
 						subHeading={active_audiences}
 					/>
 					<ViewCardsList
-						state="Viewed_Question"
+						state="viewed_question"
 						cardHeading="Top Viewed Questions"
 						contentQuestion={most_viewed_questions}
 					/>
 					<ViewCardsList
-						state="Liked_Question"
+						state="liked_question"
 						cardHeading="Top Liked Questions"
 						contentQuestion={popular_questions}
 					/>
 					<ViewCardsTags
+						state="viewed"
 						cardHeading="Trending Tags"
 						subHeading={trending_tags}
 					/>
@@ -73,12 +77,12 @@ console.log(topic_wise_liked_questions,'thy')
 			render : () => (
 				<div className={styles.content}>
 					<ViewCardsList
-						state="Viewed_Question"
+						state="viewed_question"
 						cardHeading="Top Viewed Questions"
 						contentQuestion={most_viewed_questions}
 					/>
 					<ViewCardsList
-						state="Liked_Question"
+						state="liked_question"
 						cardHeading="Top Liked Questions"
 						contentQuestion={popular_questions}
 					/>
@@ -87,6 +91,7 @@ console.log(topic_wise_liked_questions,'thy')
 						subHeading={trending_tags}
 					/>
 					<ViewCards
+						state="disliked"
 						cardHeading="Topic from which Most
 						Questions Disliked"
 						subHeading={topic_wise_disliked_questions}
@@ -99,7 +104,7 @@ console.log(topic_wise_liked_questions,'thy')
 			render : () => (
 				<div className={styles.content}>
 					<ViewCardsList
-						state="Liked_Question"
+						state="liked_question"
 						cardHeading="Top Liked Questions"
 						contentQuestion={popular_questions}
 					/>
@@ -108,11 +113,13 @@ console.log(topic_wise_liked_questions,'thy')
 						subHeading={trending_tags}
 					/>
 					<ViewCards
+						state="disliked"
 						cardHeading="Topic from which Most
 						Questions Disliked"
 						subHeading={topic_wise_disliked_questions}
 					/>
 					<ViewCards
+						state="liked"
 						cardHeading="Topic from which Most
 						Questions Liked"
 						subHeading={topic_wise_liked_questions}
@@ -129,17 +136,19 @@ console.log(topic_wise_liked_questions,'thy')
 						subHeading={trending_tags}
 					/>
 					<ViewCards
+						state="disliked"
 						cardHeading="Topic from which Most
 						Questions Disliked"
 						subHeading={topic_wise_disliked_questions}
 					/>
 					<ViewCards
+						state="liked"
 						cardHeading="Topic from which Most
 						Questions Liked"
 						subHeading={topic_wise_liked_questions}
 					/>
 					<ViewCardsList
-						state="Disliked_Question"
+						state="disliked_question"
 						cardHeading="Top Disliked Questions"
 						contentQuestion={unpopular_questions}
 					/>

@@ -77,19 +77,19 @@ function AllTopic(props) {
 					/>
 
 					<ViewCardsList
-						state="Viewed_Question"
+						state="viewed_question"
 						cardHeading="Top Viewed Questions"
 						contentQuestion={most_viewed_questions}
 					/>
 
 					<ViewCardsList
-						state="Liked_Question"
+						state="liked_question"
 						cardHeading="Top Liked Questions"
 						contentQuestion={most_liked_questions}
 					/>
 
 					<ViewCardsList
-						state="Disliked_Question"
+						state="disliked_question"
 						cardHeading="Top Disliked Questions"
 						contentQuestion={most_disliked_questions}
 					/>
