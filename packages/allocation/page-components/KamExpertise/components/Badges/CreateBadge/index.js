@@ -9,15 +9,15 @@ import styles from './styles.module.css';
 const MEDALS_MAPPING = [
 	{
 		medalType        : 'Bronze',
-		inputPlaceHolder : '2000',
+		inputPlaceHolder : '0000',
 	},
 	{
 		medalType        : 'Silver',
-		inputPlaceHolder : '5000',
+		inputPlaceHolder : '0000',
 	},
 	{
 		medalType        : 'Gold',
-		inputPlaceHolder : '9000',
+		inputPlaceHolder : '0000',
 	},
 ];
 
@@ -99,6 +99,7 @@ function CreateBadge(props) {
 							);
 						})}
 					</section>
+
 					<div className={styles.lower_background}>
 						<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
 						<div className={styles.display_flex}>

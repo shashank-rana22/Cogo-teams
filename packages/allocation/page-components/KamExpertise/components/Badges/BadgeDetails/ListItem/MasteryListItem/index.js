@@ -8,6 +8,7 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 		setMasteryItemData(data);
 		setToggleScreen('create_mastery');
 	};
+
 	return (
 		<div className={styles.container}>
 

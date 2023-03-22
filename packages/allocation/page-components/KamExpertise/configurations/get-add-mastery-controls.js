@@ -31,7 +31,6 @@ const controls = [
 			width: '200px',
 		},
 	},
-	// ToDo : add a control for the image to be uploaded
 ];
 
 export default controls;
