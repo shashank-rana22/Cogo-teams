@@ -5,7 +5,7 @@
 	border: 1px solid #e0e0e0;
 	border-radius: 6px;
 
-	@media(max-width: 768px) {
+	@media (max-width: 768px) {
 		flex-direction: column;
 	}
 }
@@ -21,7 +21,7 @@
 .form_component {
 	width: 70%;
 
-	@media(max-width: 768px) {
+	@media (max-width: 768px) {
 		width: 100%;
 	}
 }
