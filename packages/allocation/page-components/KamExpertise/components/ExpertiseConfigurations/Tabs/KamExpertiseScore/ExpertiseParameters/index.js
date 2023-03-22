@@ -27,7 +27,24 @@ function ExpertiseParameters(props) {
 	return (
 		<div>
 			<div className={styles.card_container}>
-				{!isEmpty(list) ? (
+
+				{isEmpty(list) && !loading ? (
+					<div className={styles.empty_card}>
+
+						There are no conditions currently active,
+						please add a score parameter to begin
+
+						<Button
+							themeType="secondary"
+							onClick={onClickAddCondition}
+							style={{ marginTop: '16px' }}
+						>
+							+ Condition
+
+						</Button>
+
+					</div>
+				) : (
 					<div className={styles.cards}>
 						<div className={styles.button_container}>
 
@@ -62,23 +79,9 @@ function ExpertiseParameters(props) {
 						{loading ? <LoadingState />
 							: list.map((item) => <CardItem editMode={editMode} item={item} control={control} />) }
 
-						<Button themeType="secondary" onClick={onClickAddCondition}>+ Condition</Button>
-
-					</div>
-				) : (
-					<div className={styles.empty_card}>
-
-						There are no conditions currently active,
-						please add a score parameter to begin
-
-						<Button
-							themeType="secondary"
-							onClick={onClickAddCondition}
-							style={{ marginTop: '16px' }}
-						>
-							+ Condition
-
-						</Button>
+						<div className={styles.condition_button_container}>
+							<Button themeType="secondary" onClick={onClickAddCondition}>+ Condition</Button>
+						</div>
 
 					</div>
 				) }

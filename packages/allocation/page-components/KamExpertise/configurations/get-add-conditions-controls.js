@@ -13,7 +13,7 @@ const useGetControls = ({ modifiedControls = [], typeFilter }) => {
 			filters: { expertise_type: typeFilter },
 		},
 		microService : 'allocation',
-		initialCall  : false,
+		initialCall  : true,
 	});
 
 	return [
