@@ -1,5 +1,5 @@
 .container {
 	display: flex;
-	margin-top: auto;
 	align-items: flex-end;
+	margin-top: auto;
 }

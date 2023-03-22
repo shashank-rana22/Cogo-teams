@@ -28,18 +28,18 @@ function Overview() {
 				<div className={styles.content}>
 					<div className={styles.text}>Tests Given</div>
 					<div className={styles.value}>
-						{response.total_passed_test_count}
+						{response.total_passed_test_count || 0}
 						/
-						{response.total_test_count}
+						{response.total_test_count || 0}
 					</div>
 				</div>
 
 				<div className={styles.content}>
 					<div className={styles.text}>Tests Cleared</div>
 					<div className={styles.value}>
-						{response.total_passed_test_count}
+						{response.total_passed_test_count || 0}
 						/
-						{response.total_test_count}
+						{response.total_test_count || 0}
 					</div>
 				</div>
 

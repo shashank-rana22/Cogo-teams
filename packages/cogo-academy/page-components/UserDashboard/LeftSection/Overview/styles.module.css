@@ -1,7 +1,7 @@
 .container {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 	margin: 40px 0;
 }
 
@@ -18,10 +18,10 @@
 }
 
 .text {
+	margin-right: 16px;
 	font-size: 12px;
 	font-weight: 600;
 	color: #221f20;
-	margin-right: 16px;
 }
 
 .value {
@@ -32,6 +32,6 @@
 
 .content_container {
 	display: flex;
-	width: 60%;
 	justify-content: space-between;
+	width: 60%;
 }
