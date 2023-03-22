@@ -1,31 +1,46 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { format } from '@cogoport/utils';
+
+import useGetKamExpertiseCurrentConfig from '../../../hooks/useGetKamExpertiseCurrentConfig';
 
 import styles from './styles.module.css';
 
 function Header() {
 	const router = useRouter();
 
-	// Todo make the hardcoded part dynamic
+	const { listKamExpertiseCurrentConfigs } = useGetKamExpertiseCurrentConfig();
+
+	const {
+		list:data = [],
+		audit_data = {},
+	} = listKamExpertiseCurrentConfigs;
+
+	const LIVE_VERSION = data.filter((item) => item.status_value === 'active')[0]?.version_number || '';
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_container}>
 				<div style={{ fontSize: '18px', marginBottom: '4px' }}>
-					Current Configuration :&nbsp;
-					<b>Version 2</b>
+					Current Configuration :
+					{' '}
+					<b>{LIVE_VERSION}</b>
 				</div>
 
 				<div className={styles.audits_data}>
 					<div style={{ marginRight: '16px' }}>
 						Published on :
 						{' '}
-						<b>31st January, 2023</b>
+						<b>
+							{ audit_data.updated_at
+								? format(audit_data.updated_at, 'dd MMM yyyy') : ''}
+						</b>
 					</div>
 
 					<div>
 						Published by :
 						{' '}
-						<b>CogoParth</b>
+						<b>{audit_data?.name || ''}</b>
 					</div>
 				</div>
 			</div>

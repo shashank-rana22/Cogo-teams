@@ -25,7 +25,7 @@ function KamExpertise() {
 	const startFullQuarter = new Date(year, quarter * 3 - 3, 1);
 
 	// year end
-	const yearEnd = new Date(year, 1, 1);
+	const yearEnd = new Date(year, 0, 1);
 
 	const TAB_PANEL_MAPPING = {
 		this_week: {

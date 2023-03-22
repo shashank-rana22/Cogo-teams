@@ -30,7 +30,7 @@ function BadgeDescription(props) {
 							</div>
 						</div>
 						{
-							Array(2).fill('').map(() => (
+							[1, 2].fill('').map(() => (
 								<div className={styles.lable_value}>
 									<Placeholder width="100%" height="32px" />
 									<Placeholder width="100%" height="32px" style={{ marginTop: '8px' }} />
