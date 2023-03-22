@@ -6,15 +6,30 @@ import styles from './styles.module.css';
 
 function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] }) {
 	const truncate = (str) => (str?.length > 28 ? `${startCase(str.substring(0, 26))}...` : startCase(str));
-	function Icon() {
+	function Icon(item) {
 		if (state === 'Viewed_Question') {
-			return <IcMEyeopen style={{ marginTop: '0.15rem' }} />;
+			return (
+				<div style={{ marginRight: '0.25rem' }}>
+					{item?.view_count || 0}
+					<IcMEyeopen style={{ marginTop: '0.15rem', marginLeft: '0.25rem', paddingTop: '1px' }} />
+				</div>
+			);
 		}
 		if (state === 'Liked_Question') {
-			return <IcMLike style={{ marginTop: '0.15rem' }} />;
+			return (
+				<div style={{ marginRight: '0.25rem' }}>
+					{item?.upvote_count || 0}
+					<IcMLike style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} />
+				</div>
+			);
 		}
 		if (state === 'Disliked_Question') {
-			return <IcMDislike style={{ marginTop: '0.15rem' }} />;
+			return (
+				<div style={{ marginRight: '0.25rem', display: 'flex' }}>
+					{item?.downvote_count || 0}
+					<div><IcMDislike style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} /></div>
+				</div>
+			);
 		}
 	}
 
@@ -36,14 +51,13 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 											{index + 1}
 											.
 										</div>
-										{truncate(item?.question_abstract)}
+										{truncate(item?.question_abstract || '-')}
 									</div>
 								</Tooltip>
 							</div>
 
 							<div style={{ display: 'flex' }}>
-								<div style={{ marginRight: '0.25rem' }}>{item?.view_count}</div>
-								{Icon()}
+								{Icon(item)}
 							</div>
 						</div>
 					);

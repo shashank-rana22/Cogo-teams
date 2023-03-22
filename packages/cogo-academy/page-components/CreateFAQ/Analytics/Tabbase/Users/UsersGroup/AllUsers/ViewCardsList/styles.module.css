@@ -12,6 +12,7 @@
 }
 
 .right_stat_label {
+	padding-bottom: 6px;
 	font-size: 14px;
 	color: #828282;
 }

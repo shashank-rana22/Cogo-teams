@@ -12,6 +12,7 @@ function ScrollBar({ props = {} }) {
 		popular_questions = [],
 		trending_topics = [],
 		trending_tags = [],
+		unpopular_questions = [],
 	} = props;
 
 	const CAROUSELDATA = [
@@ -138,7 +139,7 @@ function ScrollBar({ props = {} }) {
 					<ViewCardsList
 						state="Disliked_Question"
 						cardHeading="Top Disliked Questions"
-						contentQuestion={popular_questions}
+						contentQuestion={unpopular_questions}
 					/>
 				</div>
 			),

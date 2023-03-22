@@ -9,8 +9,8 @@
 
 .outer_pie {
 	position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 31px;
-    left: 64px;
+	top: 31px;
+	left: 64px;
+	width: 100%;
+	height: 100%;
 }

@@ -33,7 +33,7 @@ function Tabbase() {
 				<TabPanel
 					name="By_Users"
 					title="By Users"
-					badge={props?.data?.question_stats?.no_of_questions}
+					// badge={props?.data?.question_stats?.no_of_questions}
 
 				>
 					<Users props={props} date={date} setDate={setDate} />

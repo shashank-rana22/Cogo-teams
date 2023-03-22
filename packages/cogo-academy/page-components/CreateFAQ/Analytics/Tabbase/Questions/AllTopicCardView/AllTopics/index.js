@@ -25,7 +25,7 @@ function AllTopic(props) {
 		topic_wise_audiences = [],
 
 	} = current_topic_data;
-	const { total_likes = 0, total_dislikes = 0 } = topic_stats[0];
+	const { total_likes = 0, total_dislikes = 0 } = topic_stats || {};
 
 	const [showQuestions, setShowQuestions] = useState(false);
 	const truncate = (str) => (str?.length > 40 ? `${str.substring(0, 38)}...` : str);

@@ -1,9 +1,10 @@
 import { Tooltip } from '@cogoport/components';
+import startCase from '@cogoport/utils/src/utilities/startCase';
 
 import styles from './styles.module.css';
 
 function ViewCards({ cardHeading = '', subHeading = [] }) {
-	const truncate = (str) => (str?.length > 12 ? `${str.substring(0, 10)}...` : str);
+	const truncate = (str) => (str?.length > 12 ? `${startCase(str.substring(0, 10))}...` : startCase(str));
 
 	return (
 		<div className={styles.primary_right}>

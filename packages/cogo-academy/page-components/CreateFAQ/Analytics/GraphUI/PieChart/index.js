@@ -22,7 +22,6 @@ function PieChart({ pie_data, pie_outer_data, view_count_data }) {
 			/>
 		),
 	}];
-
 	return (
 		<div className={styles.carousel_data_container}>
 			<Carousel size="md" slides={CarouselData} />

@@ -70,9 +70,10 @@ function AllQuestionCardView({ props = {} }) {
 							: <IcMArrowUp style={{ marginLeft: 4, marginBottom: 2 }} />}
 					</Button>
 				</div>
-			</div>
 
+			</div>
 			{showQuestions ? <QuestionsList /> : null}
+
 		</div>
 	);
 }

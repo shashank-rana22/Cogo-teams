@@ -16,8 +16,13 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 				<div className={styles.sub_heading}>
 					<div>
 						<div className={styles.sub_heading_context}>
-							<Tooltip content={subHeading[0]?.display_name || subHeading[0]?.name} placement="right">
-								<div>{truncate(subHeading[0]?.display_name || subHeading[0]?.name)}</div>
+							<Tooltip
+								content={subHeading[0]?.display_name
+								|| subHeading[0]?.name
+								|| 'No Data Available'}
+								placement="right"
+							>
+								<div>{truncate(subHeading[0]?.display_name || subHeading[0]?.name || '-')}</div>
 							</Tooltip>
 						</div>
 						{subHeading[0]?.view_count ? subHeading[0]?.view_count || 0 : subHeading[0]?.views || 0}
@@ -30,9 +35,14 @@ function ViewCards({ cardHeading = '', subHeading = [] }) {
 
 					<div>
 						<div className={styles.sub_heading_context}>
-							<Tooltip content={subHeading[1]?.display_name || subHeading[1]?.name} placement="right">
+							<Tooltip
+								content={subHeading[1]?.display_name
+								|| subHeading[1]?.name
+								|| 'No Data Available'}
+								placement="right"
+							>
 
-								{truncate(subHeading[1]?.display_name || subHeading[1]?.name)}
+								{truncate(subHeading[1]?.display_name || subHeading[1]?.name || '-')}
 
 							</Tooltip>
 						</div>

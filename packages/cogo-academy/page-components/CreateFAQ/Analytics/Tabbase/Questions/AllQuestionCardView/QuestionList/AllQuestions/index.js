@@ -11,7 +11,7 @@ function AllQuestions(props) {
 	const { data, paginationData, page, setPage = () => {} } = props;
 	const { total_count, page_limit } = paginationData;
 	const listdata = data?.list;
-	const truncate = (str) => (str?.length > 38 ? `${str.substring(0, 36)}...` : str);
+	const truncate = (str) => (str?.length > 38 ? `${startCase(str.substring(0, 36))}...` : startCase(str));
 	const addedQuestionsColumns = () => [
 		{
 			Header   : 'Questions',
@@ -32,7 +32,7 @@ function AllQuestions(props) {
 						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
 					})}
 				</div>
-			) : '-'),
+			) : <div style={{ marginLeft: '32px' }}>-</div>),
 		},
 		{
 			Header   : 'Tags',
@@ -43,7 +43,7 @@ function AllQuestions(props) {
 						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
 					})}
 				</div>
-			) : '-'),
+			) : <div style={{ marginLeft: '32px' }}>-</div>),
 		},
 		{
 			Header   : 'No.Of Views',
@@ -57,7 +57,7 @@ function AllQuestions(props) {
 			Header   : 'No.of Likes',
 			accessor : (items) => (
 				<div className={styles.likes}>
-					{items?.answers[0]?.upvote_count}
+					{items?.answers?.[0]?.upvote_count}
 				</div>
 			),
 		},
@@ -65,7 +65,7 @@ function AllQuestions(props) {
 			Header   : 'No.of Dislikes',
 			accessor : (items) => (
 				<div className={styles.question}>
-					{items?.answers[0]?.downvote_count}
+					{items?.answers?.[0]?.downvote_count}
 				</div>
 			),
 		},

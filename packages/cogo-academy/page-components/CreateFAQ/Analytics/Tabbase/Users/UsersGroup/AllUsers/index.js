@@ -1,10 +1,8 @@
-import { Pill, Button, Tooltip } from '@cogoport/components';
-import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { Pill, Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 import styles from './styles.module.css';
-import UsersQuestionList from './UsersQuestionList';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
 
@@ -21,9 +19,9 @@ function AllUsers({ props = '' }) {
 		audience_stats = [],
 	} = current_audience_data;
 
-	const [showQuestions, setShowQuestions] = useState(false);
+	// const [showQuestions, setShowQuestions] = useState(false);
 
-	const { total_questions = 0, total_views = 0, total_likes = 0, total_dislikes = 0 } = audience_stats?.[0] || {};
+	const { total_questions = 0, total_views = 0, total_likes = 0, total_dislikes = 0 } = audience_stats || {};
 
 	const truncate = (str) => (str?.length > 40 ? `${str.substring(0, 38)}...` : str);
 
@@ -92,7 +90,7 @@ function AllUsers({ props = '' }) {
 					/>
 				</div>
 
-				<div className={styles.button_container}>
+				{/* <div className={styles.button_container}>
 					<Button size="md" themeType="tertiary" onClick={() => setShowQuestions((pv) => !pv)}>
 						All Users
 						{!showQuestions
@@ -102,7 +100,9 @@ function AllUsers({ props = '' }) {
 				</div>
 			</div>
 
-			{showQuestions ? <UsersQuestionList /> : null}
+			{showQuestions ? <UsersQuestionList /> : null} */}
+			</div>
+
 		</div>
 
 	);
