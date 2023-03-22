@@ -1,12 +1,14 @@
 import { Select, Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import Filter from '../../../common/Filter';
 
 import styles from './styles.module.css';
 
 function Header({ setFilters, range = 'current_month', setRange, filters, debounceQuery }) {
+	const [q, setQ] = useState('');
+
 	const handleApplyFilters = (key, val) => {
 		const dates = '01-01-2003';
 		setFilters((prevFilters) => ({
@@ -18,10 +20,7 @@ function Header({ setFilters, range = 'current_month', setRange, filters, deboun
 	};
 
 	const handleSearch = (val) => {
-		setFilters((prevFilters) => ({
-			...prevFilters,
-			q: val,
-		}));
+		setQ(val);
 		debounceQuery(val);
 	};
 
@@ -50,7 +49,7 @@ function Header({ setFilters, range = 'current_month', setRange, filters, deboun
 				<Input
 					size="sm"
 					prefix={<IcMSearchlight />}
-					value={filters.q || ''}
+					value={q || ''}
 					onChange={(e) => handleSearch(e)}
 					placeholder="Serial ID / Shipment ID"
 				/>

@@ -1,6 +1,6 @@
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { getDefaultFilters } from '../utils/startDateOfMonth';
 
@@ -18,33 +18,32 @@ const useGetProfitability = (isInViewport) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const { q: search, ...restData } = filters || {};
-
-	const { job_status, q, ...rest } = filters;
-
-	const getProfitabilityData = async () => {
-		try {
-			const resp = await trigger({
-				params: {
-					filters: {
-						job_status,
-						q: query,
-					},
-					...rest,
-				},
-			});
-			setShipmentData(resp.data);
-		} catch (e) {
-			console.log(e, 'err');
-		}
-	};
+	const getProfitability = useCallback(
+		async () => {
+			const { job_status, ...rest } = filters;
+			if (isInViewport) {
+				try {
+					const resp = await trigger({
+						params: {
+							filters: {
+								job_status,
+								q: query,
+							},
+							...rest,
+						},
+					});
+					setShipmentData(resp.data);
+				} catch (e) {
+					console.log(e, 'err');
+				}
+			}
+		},
+		[isInViewport, trigger, query, filters],
+	);
 
 	useEffect(() => {
-		if (isInViewport) {
-			getProfitabilityData();
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(restData), isInViewport, JSON.stringify(query)]);
+		getProfitability();
+	}, [getProfitability]);
 
 	return {
 		loading,

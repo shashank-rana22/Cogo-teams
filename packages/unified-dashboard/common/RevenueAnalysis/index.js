@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowLeft } from '@cogoport/icons-react';
@@ -41,7 +40,7 @@ function RevenueAnalysis({
 			end_date    : null,
 			period_type : selectedFilter,
 		}));
-	}, [selectedFilter]);
+	}, [selectedFilter, setParam]);
 
 	const isClickable = isNextRevenueAllowed(
 		selectedFilterTab,

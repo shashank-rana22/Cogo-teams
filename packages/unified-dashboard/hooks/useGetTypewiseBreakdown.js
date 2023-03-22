@@ -2,11 +2,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetTypewiseBreakdown = ({
 	apiKey,
-	isDataSelected,
+	isDataSelected = false,
 	selectedData,
 	byEtd,
 	headerFilters,
@@ -18,38 +18,68 @@ const useGetTypewiseBreakdown = ({
 		url    : `/get_${apiKey}_wise_financial_breakdown`,
 		method : 'GET',
 		scope,
-	}, { manual: false });
+	}, { manual: true });
 
-	const getTypewiseBreakdown = async () => {
-		const { indexValue, type, id } = selectedData || {};
+	// const getTypewiseBreakdown = async () => {
+	// 	const { indexValue, type, id } = selectedData || {};
 
-		const getDate = new Date(Date.parse(indexValue));
+	// 	const getDate = new Date(Date.parse(indexValue));
 
-		const formattedDate = formatDate({
-			date       : getDate,
-			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			formatType : 'date',
-		});
+	// 	const formattedDate = formatDate({
+	// 		date       : getDate,
+	// 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	// 		formatType : 'date',
+	// 	});
 
-		try {
-			await trigger({
-				params: {
-					as_on_date  : formattedDate,
-					type,
-					sub_type    : type === 'cost' ? undefined : id,
-					by_etd      : byEtd,
-					entity_code : entity_code.length > 0 ? entity_code : undefined,
-				},
+	// 	try {
+	// 		await trigger({
+	// 			params: {
+	// 				as_on_date  : formattedDate,
+	// 				type,
+	// 				sub_type    : type === 'cost' ? undefined : id,
+	// 				by_etd      : byEtd,
+	// 				entity_code : entity_code.length > 0 ? entity_code : undefined,
+	// 			},
+	// 		});
+	// 	} catch (err) {
+	// 		console.log(err, 'err');
+	// 	}
+	// };
+
+	const getTypewiseBreakdown = useCallback(
+		async () => {
+			const { indexValue, type, id } = selectedData || {};
+
+			const getDate = new Date(Date.parse(indexValue));
+
+			const formattedDate = formatDate({
+				date       : getDate,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				formatType : 'date',
 			});
-		} catch (err) {
-			console.log(err, 'err');
-		}
-	};
+
+			try {
+				await trigger({
+					params: {
+						as_on_date  : formattedDate,
+						type,
+						sub_type    : type === 'cost' ? undefined : id,
+						by_etd      : byEtd,
+						entity_code : entity_code.length > 0 ? entity_code : undefined,
+					},
+				});
+			} catch (err) {
+				console.log(err, 'err');
+			}
+		},
+		[byEtd, entity_code, selectedData, trigger],
+	);
 
 	useEffect(() => {
-		if (isDataSelected) getTypewiseBreakdown();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(selectedData), JSON.stringify(entity_code)]);
+		if (isDataSelected) {
+			getTypewiseBreakdown();
+		}
+	}, [getTypewiseBreakdown, isDataSelected]);
 
 	return {
 		loading,

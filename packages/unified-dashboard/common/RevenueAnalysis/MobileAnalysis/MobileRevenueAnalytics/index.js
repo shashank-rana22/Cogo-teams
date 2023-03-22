@@ -18,6 +18,17 @@ function MobileBookingAnalysis({
 		revenue_analysis,
 		etd,
 	);
+
+	const handleMonth = () => {
+		if (!isClickable) {
+			mobileGetNextData(
+				revenue_analysis[0],
+				param,
+				setParam,
+			);
+		}
+	};
+
 	return (
 		<div className={styles.row}>
 			<IcMArrowLeft
@@ -38,18 +49,8 @@ function MobileBookingAnalysis({
 
 			<IcMArrowRight
 				className={isClickable ? `${styles.btn_na}` : `${styles.btn_pointer}`}
-				onClick={
-					isClickable
-						? () => {}
-						: () => mobileGetNextData(
-							revenue_analysis[0],
-							param,
-							setParam,
-							// eslint-disable-next-line indent
-				)
-				}
+				onClick={handleMonth}
 			/>
-
 		</div>
 	);
 }
