@@ -22,8 +22,7 @@ function Employee({ val = {}, currency, filters, employeePad = 30 }) {
 				agent_id: val?.manager_id,
 			}));
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters, showShipments]);
+	}, [filters, showShipments, setFilters, val?.manager_id]);
 
 	return (
 		<>

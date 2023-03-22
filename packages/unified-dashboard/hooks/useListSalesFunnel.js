@@ -16,7 +16,7 @@ const useListSalesFunnelData = (salesFunnelInViewport) => {
 		url    : 'get_sales_funnel',
 		method : 'GET',
 		scope,
-	}, { manual: false });
+	}, { manual: true });
 
 	const fetchSalesFunnelData = useCallback(async () => {
 		try {

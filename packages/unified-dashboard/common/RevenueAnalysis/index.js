@@ -48,6 +48,17 @@ function RevenueAnalysis({
 		etd,
 	);
 
+	const handleNext = () => {
+		if (!isClickable) {
+			getNextData(
+				selectedFilterTab,
+				revenue_analysis,
+				param,
+				setParam,
+				'revenue',
+			);
+		}
+	};
 	const currentMonth = `${getMonthYear()?.getMonth}${getMonthYear()?.getYear}`;
 
 	if (loading) {
@@ -72,18 +83,7 @@ function RevenueAnalysis({
 					style={{
 						cursor: isClickable ? 'not-allowed' : 'pointer',
 					}}
-					onClick={
-						isClickable
-							? () => {}
-							: () => getNextData(
-								selectedFilterTab,
-								revenue_analysis,
-								param,
-								setParam,
-								'revenue',
-							// eslint-disable-next-line react/jsx-indent
-							)
-					}
+					onClick={handleNext}
 				/>
 				<div className={styles.stepper_line} />
 

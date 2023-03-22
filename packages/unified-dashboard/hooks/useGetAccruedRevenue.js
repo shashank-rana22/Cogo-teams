@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
@@ -12,24 +11,24 @@ const useGetAccruedRevenue = (headerFilters) => {
 		url    : 'get_accrual_revenue_breakdown',
 		method : 'GET',
 		scope,
-	}, { manual: false });
-
-	const fetchRevenueData = async () => {
-		try {
-			await trigger({
-				params: {
-					...params,
-					entity_code: entity_code.length > 0 ? entity_code : undefined,
-				},
-			});
-		} catch (err) {
-			console.log(err, 'err');
-		}
-	};
+	}, { manual: true });
 
 	useEffect(() => {
+		const fetchRevenueData = async () => {
+			try {
+				await trigger({
+					params: {
+						...params,
+						entity_code: entity_code.length > 0 ? entity_code : undefined,
+					},
+				});
+			} catch (err) {
+				console.log(err, 'err');
+			}
+		};
+
 		if (params) fetchRevenueData();
-	}, [params, JSON.stringify(entity_code)]);
+	}, [params, entity_code, trigger]);
 
 	return {
 		loading,

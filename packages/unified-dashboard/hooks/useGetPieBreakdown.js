@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-const useGetPieBreakdown = ({ selectedPieData, byEtd, headerFilters }) => {
+const useGetPieBreakdown = ({ selectedPieData, revenueFilter, headerFilters }) => {
 	const { entity_code = [] } = headerFilters;
 	const { apiKey } = selectedPieData || {};
 	const [page, setPage] = useState(1);
@@ -35,17 +35,17 @@ const useGetPieBreakdown = ({ selectedPieData, byEtd, headerFilters }) => {
 				params: {
 					type,
 					sub_type,
-					as_on_date  : formattedDate,
+					as_on_date   : formattedDate,
 					page,
-					page_size   : 10,
-					by_etd      : byEtd,
-					entity_code : entity_code.length > 0 ? entity_code : undefined,
+					page_size    : 10,
+					visualize_by : revenueFilter,
+					entity_code  : entity_code.length > 0 ? entity_code : undefined,
 				},
 			});
 		} catch (err) {
 			console.log(err, 'err');
 		}
-	}, [byEtd, entity_code, page, selectedPieData, trigger]);
+	}, [revenueFilter, entity_code, page, selectedPieData, trigger]);
 
 	useEffect(() => {
 		if (selectedPieData) getPieBreakdown();

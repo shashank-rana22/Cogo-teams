@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-const useGetAccountWiseFunnel = (byEtd, headerFilters) => {
+const useGetAccountWiseFunnel = (revenueFilter, headerFilters) => {
 	const scope = useSelector(({ general }) => general.scope);
 
 	const { entity_code = [] } = headerFilters;
@@ -11,15 +11,15 @@ const useGetAccountWiseFunnel = (byEtd, headerFilters) => {
 		url    : 'get_account_wise_organization_funnel',
 		method : 'GET',
 		scope,
-	}, { manual: false });
+	}, { manual: true });
 
 	useEffect(() => {
 		const getAccountWiseFunnel = async () => {
 			try {
 				await trigger({
 					params: {
-						by_etd      : byEtd,
-						entity_code : entity_code.length > 0 ? entity_code : undefined,
+						visualize_by : revenueFilter,
+						entity_code  : entity_code.length > 0 ? entity_code : undefined,
 					},
 				});
 			} catch (err) {
@@ -27,7 +27,7 @@ const useGetAccountWiseFunnel = (byEtd, headerFilters) => {
 			}
 		};
 		getAccountWiseFunnel();
-	}, [byEtd, entity_code, trigger]);
+	}, [revenueFilter, entity_code, trigger]);
 
 	return {
 		loading,

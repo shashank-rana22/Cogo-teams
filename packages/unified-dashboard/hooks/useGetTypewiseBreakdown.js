@@ -8,7 +8,7 @@ const useGetTypewiseBreakdown = ({
 	apiKey,
 	isDataSelected = false,
 	selectedData,
-	byEtd,
+	revenueFilter,
 	headerFilters,
 }) => {
 	const scope = useSelector(({ general }) => general.scope);
@@ -19,32 +19,6 @@ const useGetTypewiseBreakdown = ({
 		method : 'GET',
 		scope,
 	}, { manual: true });
-
-	// const getTypewiseBreakdown = async () => {
-	// 	const { indexValue, type, id } = selectedData || {};
-
-	// 	const getDate = new Date(Date.parse(indexValue));
-
-	// 	const formattedDate = formatDate({
-	// 		date       : getDate,
-	// 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-	// 		formatType : 'date',
-	// 	});
-
-	// 	try {
-	// 		await trigger({
-	// 			params: {
-	// 				as_on_date  : formattedDate,
-	// 				type,
-	// 				sub_type    : type === 'cost' ? undefined : id,
-	// 				by_etd      : byEtd,
-	// 				entity_code : entity_code.length > 0 ? entity_code : undefined,
-	// 			},
-	// 		});
-	// 	} catch (err) {
-	// 		console.log(err, 'err');
-	// 	}
-	// };
 
 	const getTypewiseBreakdown = useCallback(
 		async () => {
@@ -61,18 +35,18 @@ const useGetTypewiseBreakdown = ({
 			try {
 				await trigger({
 					params: {
-						as_on_date  : formattedDate,
+						as_on_date   : formattedDate,
 						type,
-						sub_type    : type === 'cost' ? undefined : id,
-						by_etd      : byEtd,
-						entity_code : entity_code.length > 0 ? entity_code : undefined,
+						sub_type     : type === 'cost' ? undefined : id,
+						visualize_by : revenueFilter,
+						entity_code  : entity_code.length > 0 ? entity_code : undefined,
 					},
 				});
 			} catch (err) {
 				console.log(err, 'err');
 			}
 		},
-		[byEtd, entity_code, selectedData, trigger],
+		[revenueFilter, entity_code, selectedData, trigger],
 	);
 
 	useEffect(() => {

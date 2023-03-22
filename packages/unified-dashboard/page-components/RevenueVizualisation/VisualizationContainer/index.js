@@ -1,6 +1,6 @@
 import { Pagination } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import EmptyState from '../../../common/Empty';
 import Loader from '../../../common/PopoverLoader';
@@ -20,7 +20,7 @@ function VisualizationContainer({
 	setSelectedPieData,
 	setPage,
 	inViewport,
-	byEtd,
+	revenueFilter,
 	headerFilters,
 }) {
 	const {
@@ -33,14 +33,9 @@ function VisualizationContainer({
 		apiKey: buckets.heading,
 		isDataSelected,
 		inViewport,
-		byEtd,
+		revenueFilter,
 		headerFilters,
 	});
-
-	useEffect(() => {
-		setFilters({ ...filters, page: 1 });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [byEtd]);
 
 	const {
 		data: breakdownData = [],
@@ -50,7 +45,7 @@ function VisualizationContainer({
 		apiKey: buckets.key,
 		isDataSelected,
 		selectedData,
-		byEtd,
+		revenueFilter,
 		headerFilters,
 	});
 

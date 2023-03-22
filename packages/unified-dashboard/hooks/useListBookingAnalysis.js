@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { serviceTypeArr, tradeTypeArr } from '../constants/checkbox-data';
 
@@ -21,24 +20,45 @@ const useGetBookingAnalysis = (headerFilters) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_booking_analysis',
 		method : 'GET',
-	}, { manual: false });
-
-	const fetchBookingAnalysisData = async () => {
-		try {
-			await trigger({
-				params: {
-					...params,
-					entity_code: entity_code.length > 0 ? entity_code : undefined,
-				},
-			});
-		} catch (err) {
-			console.log(err, 'err');
-		}
-	};
+	}, { manual: true });
 
 	useEffect(() => {
+		setParams((prev) => ({ ...prev, entity_code }));
+	}, [entity_code]);
+
+	// const fetchBookingAnalysisData = async () => {
+	// 	try {
+	// 		await trigger({
+	// 			params: {
+	// 				...params,
+	// 				entity_code: entity_code.length > 0 ? entity_code : undefined,
+	// 			},
+	// 		});
+	// 	} catch (err) {
+	// 		console.log(err, 'err');
+	// 	}
+	// };
+
+	const fetchBookingAnalysisData = useCallback(
+		async () => {
+			try {
+				await trigger({
+					params: {
+						...params,
+						entity_code: entity_code.length > 0 ? entity_code : undefined,
+					},
+				});
+			} catch (err) {
+				console.log(err, 'err');
+			}
+		},
+		[params, entity_code, trigger],
+	);
+
+	useEffect(() => {
+		console.log('im here');
 		fetchBookingAnalysisData();
-	}, [JSON.stringify(params), JSON.stringify(entity_code)]);
+	}, [fetchBookingAnalysisData]);
 
 	return {
 		loading,

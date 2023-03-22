@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, RadioGroup, SingleDateRange } from '@cogoport/components';
 import React, { useEffect } from 'react';
 
@@ -23,7 +22,7 @@ function DatesFilterContent({
 	useEffect(() => {
 		const min_max = datesMapping(range);
 		setDate({ ...min_max });
-	}, [range]);
+	}, [range, setDate]);
 
 	return (
 		<div>

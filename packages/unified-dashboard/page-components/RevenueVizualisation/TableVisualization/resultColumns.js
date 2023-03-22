@@ -51,8 +51,7 @@ function ResultColumns({ columns = [] }) {
 			key : column,
 			id  : `${column}${index}`,
 		})),
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[JSON.stringify(columns)],
+		[columns],
 	);
 }
 

@@ -6,7 +6,6 @@ function useIsInViewport(ref, rootMargin) {
 	const observer = useMemo(() => {
 		let observerBool = null;
 		if (typeof window !== 'undefined') {
-			// eslint-disable-next-line no-undef
 			observerBool = new IntersectionObserver(
 				([entry]) => {
 					setIsIntersecting(entry.isIntersecting);

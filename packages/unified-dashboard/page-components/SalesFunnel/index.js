@@ -31,8 +31,7 @@ function SalesFunnel({ headerFilters }) {
 		if (!salesFunnelInViewport) {
 			setsalesFunnelInViewport(inViewport);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [inViewport]);
+	}, [inViewport, salesFunnelInViewport]);
 
 	const {
 		salesFunnel, setFilters, filters,
@@ -44,8 +43,7 @@ function SalesFunnel({ headerFilters }) {
 			to_currency : currency,
 			entity_code : entity_code.length > 0 ? entity_code : undefined,
 		}));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [headerFilters]);
+	}, [headerFilters, currency, entity_code, setFilters]);
 
 	const { revenue_per_month } = salesFunnel?.summary || {};
 	const revenueMonth = (revenue_per_month || [])?.map((item) => ({

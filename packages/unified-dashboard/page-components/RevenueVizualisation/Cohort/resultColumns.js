@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import styles from './styles.module.css';
 
-function ResultColumns({ loading }) {
+function ResultColumns() {
 	const renderPercentage = (data) => (data === '-' ? '' : '%');
 
 	const renderColor = (num) => {
@@ -142,8 +142,7 @@ function ResultColumns({ loading }) {
 				id  : '4th_month',
 			},
 		],
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[loading],
+		[],
 	);
 }
 

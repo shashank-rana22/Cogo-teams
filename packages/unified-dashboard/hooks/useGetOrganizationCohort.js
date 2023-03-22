@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 
 const useGetOrganizationCohort = ({
 	isComponentInViewport,
-	byEtd,
+	revenueFilter,
 	headerFilters,
 }) => {
 	const [page, setPage] = useState(1);
@@ -17,22 +17,22 @@ const useGetOrganizationCohort = ({
 		url    : 'get_organization_cohort',
 		method : 'GET',
 		scope,
-	}, { manual: false });
+	}, { manual: true });
 
 	const getOrganizationCohort = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
 					page,
-					page_size   : 5,
-					by_etd      : byEtd,
-					entity_code : entity_code.length > 0 ? entity_code : undefined,
+					page_size    : 5,
+					visualize_by : revenueFilter,
+					entity_code  : entity_code.length > 0 ? entity_code : undefined,
 				},
 			});
 		} catch (err) {
 			console.log(err, 'err');
 		}
-	}, [page, byEtd, entity_code, trigger]);
+	}, [page, revenueFilter, entity_code, trigger]);
 
 	useEffect(() => {
 		if (isComponentInViewport) {

@@ -29,8 +29,7 @@ function SalesOverall({ headerFilters }) {
 		if (!salesCompInViewport) {
 			setsalesCompInViewport(inViewport);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [inViewport]);
+	}, [inViewport, salesCompInViewport]);
 
 	const {
 		salesOverall, setFilters, filters,
@@ -42,8 +41,7 @@ function SalesOverall({ headerFilters }) {
 			to_currency : currency,
 			entity_code : entity_code.length > 0 ? entity_code : undefined,
 		}));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [headerFilters]);
+	}, [headerFilters, currency, entity_code, setFilters]);
 	const { revenue_per_month } = salesOverall?.summary || {};
 	const revenueMonth = (revenue_per_month || [])?.map((item) => ({
 		id    : (item.invoice_month || '').trim(),
