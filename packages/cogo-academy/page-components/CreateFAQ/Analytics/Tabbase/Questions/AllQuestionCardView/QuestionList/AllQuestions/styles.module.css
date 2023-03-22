@@ -13,15 +13,16 @@
 			width: 1239px;
 			height: 63px;
 			height: 32px;
-			padding: 0px 10px 4px 20px;
+			padding: 0 10px 4px 20px;
 			font-size: 14px;
 			font-weight: 400;
 			line-height: 250%;
 			text-align: left;
 			border-bottom: 1px solid var(--color-tertiary-beige-4);
 		}
-		.ui_table_body_cell{
-			padding-left: 0px;
+
+		.ui_table_body_cell {
+			padding-left: 0;
 		}
 	}
 }
@@ -32,21 +33,24 @@
 }
 
 .question {
-	font-weight: 1000;
-	text-align: left;
 	padding-left: 58px;
-}
-.likes {
 	font-weight: 1000;
 	text-align: left;
+}
+
+.likes {
 	padding-left: 48px;
+	font-weight: 1000;
+	text-align: left;
 }
-.tags{
-	display:flex;
+
+.tags {
+	display: flex;
 	flex-wrap: wrap;
-	padding-left: 10px;
 	align-items: right;
+	padding-left: 10px;
 }
-.topics{
+
+.topics {
 	padding-left: 10px;
 }
