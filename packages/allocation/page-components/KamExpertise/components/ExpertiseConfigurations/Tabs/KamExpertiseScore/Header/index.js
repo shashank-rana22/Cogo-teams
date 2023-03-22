@@ -66,7 +66,7 @@ function Header({ auditData, loading }) {
 							:&nbsp;
 						</div>
 						<span>
-							{ (format(updated_at, 'dd-MM-YYYY') || '--')}
+							{ updated_at ? (format(updated_at, 'dd-MM-YYYY') || '--') : ''}
 						</span>
 
 					</div>
@@ -78,7 +78,7 @@ function Header({ auditData, loading }) {
 							{' '}
 						</div>
 
-						<b>{startCase(name || '----')}</b>
+						<b>{startCase(name || '')}</b>
 					</div>
 				</div>
 			</div>

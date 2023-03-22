@@ -20,8 +20,10 @@ function CreateEvent(props) {
 	const {
 		setToggleEvent = () => {},
 		listRefetch = () => {},
-		updateEventListData = {},
+		eventListData = {},
 	} = props;
+
+	console.log('eventlistdata', eventListData);
 
 	const onClose = () => {
 		setToggleEvent('eventList');
@@ -41,7 +43,7 @@ function CreateEvent(props) {
 	const {
 		onUpdate,
 		formProps,
-	} = useUpdateEvent({ updateEventListData, listRefetch, attributeList, setToggleEvent });
+	} = useUpdateEvent({ eventListData, listRefetch, attributeList, setToggleEvent });
 
 	const {
 		control,
@@ -59,7 +61,7 @@ function CreateEvent(props) {
 	return (
 		<div>
 			<div className={styles.create_new_event}>
-				{isEmpty(updateEventListData) ? (
+				{isEmpty(eventListData) ? (
 					<p>
 						Create New Event
 					</p>
@@ -98,7 +100,7 @@ function CreateEvent(props) {
 												key={el.name}
 												control={control}
 												id={`${el.name}_input`}
-												disabled={!isEmpty(updateEventListData)}
+												disabled={!isEmpty(eventListData)}
 											/>
 										</div>
 
@@ -135,7 +137,7 @@ function CreateEvent(props) {
 					<Button
 						size="md"
 						type="submit"
-						onClick={(isEmpty(updateEventListData)) ? handleSubmit(onSave) : handleSubmit(onUpdate)}
+						onClick={(isEmpty(eventListData)) ? handleSubmit(onSave) : handleSubmit(onUpdate)}
 					>
 						Save
 					</Button>

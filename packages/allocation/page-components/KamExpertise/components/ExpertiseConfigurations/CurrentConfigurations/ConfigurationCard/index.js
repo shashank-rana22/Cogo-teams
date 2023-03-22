@@ -35,7 +35,7 @@ const HEADING_MAPPING = {
 };
 
 function ConfigurationCard(props) {
-	const { version_number, last_edit_by, last_modified, status_value, list = [] } = props;
+	const { version_number, status_value = '', list = [], audit_data = {} } = props;
 
 	return (
 		<div className={styles.card_container}>
@@ -48,23 +48,32 @@ function ConfigurationCard(props) {
 						color={STATUS_COLOR_MAPPING[status_value]}
 						style={{ marginRight: '28px' }}
 					>
-						{ status_value ?? status_value === 'active' ? 'Live' : status_value || '-'}
+						{ status_value === 'active' ? 'Live' : status_value }
 
 					</Pill>
 
-					<div style={{ marginRight: '28px' }}>
-						Last Edit by&nbsp;:&nbsp;
-						<strong>{last_edit_by ?? '--'}</strong>
-					</div>
 					<div className={styles.last_modified}>
 						<div style={{ marginRight: '28px' }}>
 							Last Edit by&nbsp;:&nbsp;
-							<strong>{last_edit_by ?? '--'}</strong>
+							<strong>
+								{audit_data?.name || '--'}
+								{' '}
+
+							</strong>
 						</div>
 
 						<div>
-							Last Modified&nbsp;:&nbsp;
-							<strong>{last_modified ? format(last_modified, 'dd-MM-yyyy') : '--'}</strong>
+							Last Modified
+							{' '}
+							{' '}
+							:
+							{' '}
+
+							<strong>
+								{audit_data?.updated_at
+									? format(audit_data.updated_at, 'dd-MM-yyyy') : '--'}
+
+							</strong>
 						</div>
 					</div>
 				</div>
@@ -72,7 +81,7 @@ function ConfigurationCard(props) {
 			</div>
 
 			<div className={styles.cards}>
-				{list.map((item) => <CardItem key={item.event} {...item} />)}
+				{list.map((item) => <CardItem {...item} />)}
 			</div>
 		</div>
 	);

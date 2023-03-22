@@ -52,7 +52,7 @@ function PublishVersionModal({ setShowPublishModal = () => {}, showPublishModal 
 					onClick={() => onCreate()}
 					loading={publishLoading}
 				>
-					Save
+					Yes
 				</Button>
 
 			</Modal.Footer>

@@ -45,6 +45,9 @@
 			.ui_collapse_content{
 				padding: 12px;
 			}
+			.ui_collapse_icon{
+				margin-top: 38px;
+			}
 		}
 }
 

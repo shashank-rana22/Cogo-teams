@@ -72,15 +72,12 @@ function KamExpertise() {
 				KAM Expertise
 			</section>
 
-			<div>
-				<Header />
-			</div>
+			<Header />
 
 			<div className={styles.tab_list}>
 				<Tabs
 					activeTab={activeTab}
-					fullWidth
-					themeType="secondary"
+					themeType="tertiary"
 					onChange={setActiveTab}
 					className={styles.tabs}
 				>
