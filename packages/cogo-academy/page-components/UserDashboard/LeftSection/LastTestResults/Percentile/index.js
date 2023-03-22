@@ -6,7 +6,7 @@ function Percentile({ stats_data }) {
 			<div className={styles.container}>
 				Percentile
 				<div className={styles.percentile}>
-					{stats_data.user_percentile.toFixed(2)}
+					{stats_data.user_percentile?.toFixed(2)}
 					{' '}
 					%
 				</div>
