@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import useGetTestList from '../../hooks/useGetTestList';
 import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
+import EmptyState from '../EmptyState';
 
 import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
@@ -91,7 +92,7 @@ function TestsList({ activeTab, setActiveTab }) {
 								title={title}
 								className={styles.tabItem}
 							>
-								{!isEmpty(activeComponentData?.list) ? (
+								<>
 									<div className={styles.filter}>
 										<div>
 											<Input
@@ -175,9 +176,11 @@ function TestsList({ activeTab, setActiveTab }) {
 											</span>
 										</div>
 									</div>
-								) : null}
 
-								<ContainerComponent {...componentProps} />
+									{!isEmpty(activeComponentData?.list) ? (
+										<ContainerComponent {...componentProps} />
+									) : <EmptyState />}
+								</>
 							</TabPanel>
 
 						);
