@@ -77,7 +77,9 @@ const useFeedbackTableData = () => {
 
 	const { list = [], ...paginationData } = data || {};
 
-	const currentPageListIds = useMemo(() => list?.map(({ id }) => id), [list]);
+	const filteredList = list.filter((obj) => isEmpty(obj.lead_organization_id));
+
+	const currentPageListIds = useMemo(() => filteredList?.map(({ id }) => id), [filteredList]);
 
 	const selectAllHelper = useCallback((listArgument = []) => {
 		const isRowsChecked = currentPageListIds.every((id) => listArgument.includes(id));
@@ -128,7 +130,7 @@ const useFeedbackTableData = () => {
 	};
 
 	return {
-		data: list,
+		data: filteredList,
 		loading,
 		setParams,
 		paginationData,
