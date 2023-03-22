@@ -1,4 +1,4 @@
-import { Tooltip, Button, Table, Pagination } from '@cogoport/components';
+import { Tooltip, Button, Table } from '@cogoport/components';
 import { IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -22,7 +22,7 @@ const getCorrectAnswers = ({ answers = [] }) => {
 };
 
 function SavedQuestionDetails({
-	savedQuestionDetails,
+	// savedQuestionDetails,
 	test_questions,
 	setEditDetails,
 	editDetails,
@@ -299,7 +299,7 @@ function SavedQuestionDetails({
 				columns={columns}
 			/>
 
-			{savedQuestionDetails.length > 10 ? (
+			{/* {savedQuestionDetails.length > 10 ? (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
@@ -309,7 +309,7 @@ function SavedQuestionDetails({
 						// onPageChange={(val) => setParams({ page: val })}
 					/>
 				</div>
-			) : null}
+			) : null} */}
 
 		</div>
 	);

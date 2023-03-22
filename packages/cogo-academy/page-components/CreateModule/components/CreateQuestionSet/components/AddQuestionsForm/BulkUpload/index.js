@@ -29,13 +29,28 @@ function BulkUpload({
 
 	return (
 		<div>
-			<Breadcrumb className={styles.breadcrumb_container}>
-				<Breadcrumb.Item
-					label="Add Questions"
-					className={styles.breadcrumb_item}
-				/>
-				<Breadcrumb.Item style={{ color: '#ee3425' }} label="Bulk Upload" />
-			</Breadcrumb>
+			<div className={styles.breadcrumb_outer_container}>
+				<Breadcrumb className={styles.breadcrumb_container}>
+					<Breadcrumb.Item
+						label="Add Questions"
+						className={styles.breadcrumb_item}
+					/>
+					<Breadcrumb.Item style={{ color: '#ee3425' }} label="Bulk Upload" />
+				</Breadcrumb>
+
+				<div
+					className={styles.sample_div}
+					role="presentation"
+					onClick={() => window.open(
+						// eslint-disable-next-line max-len
+						'https://cogoport-production.sgp1.digitaloceanspaces.com/ea6f784b835820e9558b7098928cc2fd/cogo-assured-rate-sheet-sample.csv',
+						'_blank',
+					)}
+				>
+					<IcMUpload />
+					<div className={styles.sample_text}>Download Excel Format</div>
+				</div>
+			</div>
 
 			<div className={styles.container}>
 				<FileUploader
