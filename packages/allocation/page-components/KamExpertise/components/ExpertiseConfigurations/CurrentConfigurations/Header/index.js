@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -64,7 +64,7 @@ function Header({ setSelectedVersion, selectedVersion, audit_data = {}, LIVE_VER
 					<strong>
 						Version
 						{' '}
-						{LIVE_VERSION || ''}
+						{LIVE_VERSION || '___'}
 					</strong>
 				</div>
 
@@ -76,7 +76,7 @@ function Header({ setSelectedVersion, selectedVersion, audit_data = {}, LIVE_VER
 						{' '}
 						<strong>
 							{ audit_data.updated_at
-								? format(audit_data.updated_at, 'dd MMM yyyy') : ''}
+								? format(audit_data.updated_at, 'dd MMM yyyy') : '___'}
 
 						</strong>
 					</div>
@@ -86,7 +86,7 @@ function Header({ setSelectedVersion, selectedVersion, audit_data = {}, LIVE_VER
 						{' '}
 						:
 						{' '}
-						<strong>{audit_data?.name || ''}</strong>
+						<strong>{audit_data?.name || '___'}</strong>
 					</div>
 				</div>
 			</div>

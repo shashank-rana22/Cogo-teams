@@ -56,7 +56,7 @@ function ConfigurationCard(props) {
 						<div style={{ marginRight: '28px' }}>
 							Last Edit by&nbsp;:&nbsp;
 							<strong>
-								{audit_data?.name || '--'}
+								{audit_data?.name || '___'}
 								{' '}
 
 							</strong>
@@ -71,7 +71,7 @@ function ConfigurationCard(props) {
 
 							<strong>
 								{audit_data?.updated_at
-									? format(audit_data.updated_at, 'dd-MM-yyyy') : '--'}
+									? format(audit_data.updated_at, 'dd-MM-yyyy') : '___'}
 
 							</strong>
 						</div>

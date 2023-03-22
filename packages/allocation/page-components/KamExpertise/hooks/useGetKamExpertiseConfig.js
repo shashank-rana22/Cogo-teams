@@ -1,6 +1,6 @@
 import { useAllocationRequest } from '@cogoport/request';
 
-const useGetKamExpertiseConfig = ({ selectedVersion }) => {
+const useGetKamExpertiseConfig = () => {
 	const [{ data, loading:levelLoading }, refetch] = useAllocationRequest({
 		url     : '/kam_expertise_configuration_levels',
 		method  : 'GET',
@@ -11,8 +11,7 @@ const useGetKamExpertiseConfig = ({ selectedVersion }) => {
 				['Customer Expertise', 'Trade Expertise', 'Commodity Expertise', 'Misc Expertise'],
 				status: 'draft',
 			},
-			audit_data_required : true,
-			version_selected    : selectedVersion || undefined,
+			audit_data_required: true,
 
 		},
 	}, { manual: false });

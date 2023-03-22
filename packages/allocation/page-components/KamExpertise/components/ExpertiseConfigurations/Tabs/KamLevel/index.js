@@ -13,7 +13,7 @@ import ResponseCard from './ResponseCard';
 import styles from './styles.module.css';
 
 function KamLevel({ setMainLoading, selectedVersion }) {
-	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig({ selectedVersion });
+	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig();
 
 	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
@@ -21,6 +21,10 @@ function KamLevel({ setMainLoading, selectedVersion }) {
 	useEffect(() => {
 		setMainLoading(levelLoading);
 	}, [levelLoading, setMainLoading]);
+
+	useEffect(() => {
+		refetch();
+	}, [selectedVersion, refetch]);
 
 	const audit_data = kamConfigDetails?.audit_data || {};
 	const kamConfigLevelDetails = kamConfigDetails?.data || [{}];
@@ -37,14 +41,13 @@ function KamLevel({ setMainLoading, selectedVersion }) {
 			id={id}
 			dataLength={dataLength}
 			refetch={refetch}
-			selectedVersion={selectedVersion}
 
 		/>,
 
 		children: <KamLevelDropDown
 			refetch={refetch}
 			transition_level={data.transition_level}
-			selectedVersion={selectedVersion}
+
 		/>,
 
 	}));
@@ -76,7 +79,6 @@ function KamLevel({ setMainLoading, selectedVersion }) {
 								setCreateKam={setCreateKam}
 								dataLength={dataLength}
 								refetch={refetch}
-								selectedVersion={selectedVersion}
 							/>
 						</div>
 					) : (

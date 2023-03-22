@@ -1,7 +1,10 @@
 import { Button, TabPanel, Tabs } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
+
+import useGetKamExpertiseCurrentConfig from '../../hooks/useGetKamExpertiseCurrentConfig';
 
 import CurrentConfigurations from './CurrentConfigurations';
 import PublishVersionModal from './PublishVersionModal';
@@ -32,6 +35,7 @@ function ViewAllConfigs() {
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise');
 	};
+	const { listKamExpertiseCurrentConfigs, ConfigCardLoading } = useGetKamExpertiseCurrentConfig();
 
 	return (
 		<section className={styles.main_container}>
@@ -52,6 +56,8 @@ function ViewAllConfigs() {
 				<CurrentConfigurations
 					selectedVersion={selectedVersion}
 					setSelectedVersion={setSelectedVersion}
+					listKamExpertiseCurrentConfigs={listKamExpertiseCurrentConfigs}
+
 				/>
 
 				<div className={styles.tab_list}>
@@ -61,7 +67,10 @@ function ViewAllConfigs() {
 
 							return Component ? (
 								<TabPanel key={name} name={name} title={title}>
-									<Component setMainLoading={setMainLoading} selectedVersion={selectedVersion} />
+									<Component
+										setMainLoading={setMainLoading}
+										selectedVersion={selectedVersion}
+									/>
 								</TabPanel>
 							) : null;
 						})}
@@ -70,7 +79,7 @@ function ViewAllConfigs() {
 					<Button
 						themeType="primary"
 						className={styles.pub_button}
-						disabled={mainLoading}
+						disabled={mainLoading || ConfigCardLoading || isEmpty(listKamExpertiseCurrentConfigs)}
 						onClick={() => setShowPublishModal(true)}
 					>
 						Publish

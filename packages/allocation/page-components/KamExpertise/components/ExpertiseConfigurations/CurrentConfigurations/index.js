@@ -1,16 +1,18 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
-import useGetKamExpertiseCurrentConfig from '../../../hooks/useGetKamExpertiseCurrentConfig';
 import LoadingState from '../LoadingState';
 
 import ConfigurationCard from './ConfigurationCard';
 import Header from './Header';
 
-function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
+function CurrentConfigurations({
+	selectedVersion = '',
+	setSelectedVersion,
+	ConfigCardLoading,
+	listKamExpertiseCurrentConfigs,
+}) {
 	const router = useRouter();
-
-	const { listKamExpertiseCurrentConfigs, ConfigCardLoading } = useGetKamExpertiseCurrentConfig();
 
 	const {
 		list:data = [],

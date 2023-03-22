@@ -7,14 +7,14 @@ import KamLevelDetailsEdit from './KamLevelDetailsEdit';
 import KamLevelDetailsShow from './KamLevelDetailsShow';
 import styles from './styles.module.css';
 
-function KamLevelDropDown({ refetch, transition_level, selectedVersion }) {
+function KamLevelDropDown({ refetch, transition_level }) {
 	const [editMode, setEditMode] = useState(false);
 
 	const {
 		listkamLevelDetails,
 		listrefetch,
 		listLoading,
-	} = useGetKamExpertiseLevelConfig({ transition_level, selectedVersion });
+	} = useGetKamExpertiseLevelConfig({ transition_level });
 
 	const { formProps, onSave, updateLoading } = useUpdateKamScores({
 		transition_level,
