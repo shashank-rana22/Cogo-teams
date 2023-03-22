@@ -24,7 +24,6 @@ const OPTIONS = [
 ];
 
 function Header(props) {
-	// Todo take it from params like in case of search
 	const {
 		setEventListData = () => {},
 		setToggleEvent = () => {},

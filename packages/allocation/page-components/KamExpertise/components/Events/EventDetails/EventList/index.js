@@ -12,9 +12,8 @@ function EventList(props) {
 	if (loading) {
 		return (
 			<>
-				{[1, 2, 3].map(() => (
-
-					<section className={styles.list_item_container}>
+				{[1, 2, 3].map((item) => (
+					<section className={styles.list_item_container} key={item}>
 						<div className={styles.top_div}>
 							<Placeholder width="20px" style={{ marginBottom: '4px' }} />
 						</div>
@@ -37,9 +36,10 @@ function EventList(props) {
 							<p className={styles.rule_head}>
 								<Placeholder width="100px" height="20px" style={{ marginBottom: '4px' }} />
 							</p>
-							{[1, 2].map(() => (
+
+							{[11, 12].map(() => (
 								<div className={styles.rule_body}>
-									{[1, 2, 3, 4, 5].map(() => (
+									{[21, 22, 23, 24, 25].map(() => (
 										<Placeholder
 											width="120px"
 											style={{
@@ -71,6 +71,7 @@ function EventList(props) {
 		<div>
 			{list.map((data, index) => (
 				<EventListItem
+					key={data.id}
 					data={data}
 					index={index}
 					setEventListData={setEventListData}

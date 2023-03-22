@@ -14,7 +14,6 @@ function EventDetails(props) {
 
 	return (
 		<div>
-
 			<Header
 				setToggleEvent={setToggleEvent}
 				setEventListData={setEventListData}
