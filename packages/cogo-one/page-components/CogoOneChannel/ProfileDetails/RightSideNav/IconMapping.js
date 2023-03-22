@@ -27,7 +27,7 @@ const IconMapping = [
 		name    : 'user_activity',
 		content : 'User Activity',
 		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user actrivity.svg"
+			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user-actrivity.svg"
 			alt="activities"
 		/>,
 	},
@@ -64,7 +64,7 @@ const IconMapping = [
 		name    : 'customer_insights',
 		content : 'Customer Insights',
 		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer Insights.svg"
+			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer-insight.svg"
 			alt="insights"
 		/>,
 	},
