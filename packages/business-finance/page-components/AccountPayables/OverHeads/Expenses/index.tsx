@@ -244,7 +244,9 @@ function ExpenseComponent() {
 						<>
 							<div className={styles.pending_approval}>Pending Approval</div>
 							<div className={styles.link}>
-								<a href="#">Re-send Email</a>
+								<div style={{ fontSize: '12px', marginTop: '4px' }}>
+									<a href="#">Re-send Email</a>
+								</div>
 							</div>
 						</>
 					)}

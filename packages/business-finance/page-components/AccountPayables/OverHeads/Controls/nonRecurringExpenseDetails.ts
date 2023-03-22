@@ -1,14 +1,10 @@
-import { startCase } from '@cogoport/utils';
-
 import { MONTH_OPTIONS } from '../constants/MONTH_OPTIONS';
-import { officeLocations } from '../utils/officeLocations';
 
 interface FormDataInterface {
 	registrationNumber?: string,
 	entityObject?:{ id?:string },
 	periodOfTransaction?:string,
 	vendorName?:string,
-	expenseCategory?:string,
 }
 
 interface EntityInt {
@@ -29,91 +25,19 @@ interface Props {
 	entityList: EntityInt[],
 	entityOptions: object[],
 	setEntityOptions: (obj:any)=>void,
-}
-
-interface ObjInt {
-	category?:string,
-	sub_category?:string,
-	cogoport_office_id?:string | number,
-	cogo_entity_id?:string,
-}
-
-interface VendorObject {
-	services?: ObjInt[],
-	business_name?:string,
-	registration_number?:string | number,
-	id?:string | number,
-	serial_id?: number | string,
+	handleVendorChange?:(obj:any)=>void,
 }
 
 export const nonRecurringExpenseDetails = ({
 	formData,
 	setFormData,
 	categoryOptions,
-	setCategoryOptions,
 	subCategoryOptions,
-	setSubCategoryOptions,
 	branchOptions,
-	setBranchOptions,
 	entityList,
 	entityOptions,
-	setEntityOptions,
+	handleVendorChange = () => {},
 }:Props) => {
-	const handleVendorChange = (obj:VendorObject) => {
-		setCategoryOptions(obj?.services?.map((service) => (
-			{
-				label : startCase(service?.category)?.replaceAll('_', ' '),
-				value : service?.category,
-			}
-		)));
-		setSubCategoryOptions(obj?.services?.map((service) => ({
-			label : startCase(service?.sub_category)?.replaceAll('_', ' '),
-			value : service?.sub_category,
-		})));
-
-		const branchIds = obj?.services?.map((service) => service?.cogoport_office_id);
-
-		if (branchIds?.length > 0) {
-			const branches = [];
-
-			branchIds.forEach((id) => {
-				(officeLocations || []).forEach((location) => {
-					if (id === JSON.parse(location?.value)?.branchId) {
-						branches.push(location);
-					}
-				});
-			});
-			setBranchOptions([...branches]);
-		}
-
-		const fetchedEntities = obj?.services?.map((service) => service?.cogo_entity_id);
-
-		if (entityList?.length > 0) {
-			const entities = [];
-			(fetchedEntities || []).forEach((singleEntity) => {
-				(entityList || []).forEach((entity) => {
-					const { id, entity_code:entityCode, business_name:name } = entity || {};
-					if (singleEntity === id) {
-						entities.push({
-							label : `${entityCode}-${name}`,
-							value : id,
-						});
-					}
-				});
-			});
-			setEntityOptions([...entities]);
-		}
-
-		setFormData({
-			...formData,
-			vendorName         : obj?.business_name,
-			registrationNumber : obj?.registration_number,
-			vendorID           : obj?.id,
-			vendorSerialId     : obj?.serial_id,
-			vendorData         : obj,
-		});
-	};
-
 	const handleEntityChange = (e:any) => {
 		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[0];
 		setFormData({
@@ -187,7 +111,7 @@ export const nonRecurringExpenseDetails = ({
 					name        : 'registrationNumber',
 					label       : 'PAN',
 					type        : 'textarea',
-					value       : formData.registrationNumber || null,
+					value       : formData?.registrationNumber || null,
 					style       : { borderRadius: '4px' },
 					placeholder : 'Autofilled PAN',
 					span        : 2.4,
@@ -199,7 +123,6 @@ export const nonRecurringExpenseDetails = ({
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Category',
-					value          : formData?.expenseCategory,
 					span           : 2,
 					options        : categoryOptions,
 				},

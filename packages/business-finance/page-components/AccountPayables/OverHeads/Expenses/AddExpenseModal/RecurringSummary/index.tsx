@@ -110,7 +110,7 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 		if (branchId) {
 			// eslint-disable-next-line max-len
 			const branchData = officeLocations?.filter((location:any) => JSON.parse(location?.value)?.branchId === branchId);
-			if (branchData.length > 0) {
+			if (branchData?.length > 0) {
 				setExpenseData((p:object) => ({ ...p, branch: JSON.parse(branchData[0]?.value || '{}') }));
 			}
 		}

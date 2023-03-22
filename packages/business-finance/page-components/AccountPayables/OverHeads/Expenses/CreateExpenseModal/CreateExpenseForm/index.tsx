@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import ExpenseDetailsForm from '../ExpenseDetailsForm';
 import NonRecurringSummary from '../NonRecurringSummary';
@@ -22,6 +22,11 @@ function CreateExpenseForm({
 	nonRecurringData,
 	setNonRecurringData,
 }:Props) {
+	const [categoryOptions, setCategoryOptions] = useState([]);
+	const [subCategoryOptions, setSubCategoryOptions] = useState([]);
+	const [branchOptions, setBranchOptions] = useState([]);
+	const [entityOptions, setEntityOptions] = useState([]);
+
 	let formData:any;
 	let setFormData:any;
 	if (createExpenseType === 'recurring') {
@@ -40,6 +45,14 @@ function CreateExpenseForm({
 					formData={formData}
 					setFormData={setFormData}
 					createExpenseType={createExpenseType}
+					categoryOptions={categoryOptions}
+					setCategoryOptions={setCategoryOptions}
+					subCategoryOptions={subCategoryOptions}
+					setSubCategoryOptions={setSubCategoryOptions}
+					branchOptions={branchOptions}
+					setBranchOptions={setBranchOptions}
+					entityOptions={entityOptions}
+					setEntityOptions={setEntityOptions}
 				/>
 			)}
 			{active === 'Upload Invoice' && createExpenseType === 'nonRecurring' && (
