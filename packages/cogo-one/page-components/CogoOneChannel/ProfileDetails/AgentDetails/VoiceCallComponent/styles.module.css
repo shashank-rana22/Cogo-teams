@@ -1,26 +1,12 @@
-.wrapper {
-	display: flex;
-
-	:global {
-		.ui_modal_body_container {
-			border-top: none !important;
-			border-bottom: none !important;
-		}
-	}
-}
-
-.container {
-	display: flex;
-	width: 100%;
-}
-
 .number_div {
 	display: flex;
 	align-items: center;
-	width: 100%;
-	padding: 2px 3px;
+	justify-content: space-between;
+	width: 230px;
+	padding: 5px 10px;
 	margin-top: 16px;
 	background: #fff;
+	border: 0.5px solid #c4dc91;
 	border-radius: 6px;
 }
 
@@ -63,4 +49,11 @@
 	margin-right: 22px;
 	cursor: not-allowed;
 	fill: #abcd62;
+}
+
+.whatsapp_icon {
+	width: 35px;
+	height: 35px;
+	margin-left: 20px;
+	cursor: pointer;
 }

@@ -33,6 +33,7 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setE
 
 			if (!isEmpty(questionToShow)) {
 				setEditDetails((res?.data?.test_questions || []).find((item) => item.id === questionToShow) || {});
+				setAllKeysSaved(false);
 			}
 		} catch (err) {
 			setAllKeysSaved(true);

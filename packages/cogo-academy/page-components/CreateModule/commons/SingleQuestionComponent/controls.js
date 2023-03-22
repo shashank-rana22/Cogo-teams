@@ -43,6 +43,7 @@ const getControls = () => [
 					{ value: 'true', label: 'True' },
 					{ value: 'false', label: 'False' },
 				],
+				value    : 'false',
 				rules    : { required: 'Required' },
 				multiple : false,
 			},

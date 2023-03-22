@@ -21,7 +21,7 @@ function Customers({
 	setActiveTab = () => {},
 	toggleStatus,
 	messagesList = [],
-	unReadChatsCount,
+	unReadChatsCount = '',
 	setAppliedFilters = () => {},
 	appliedFilters = {},
 	fetchworkPrefernce = () => {},
@@ -35,9 +35,10 @@ function Customers({
 	showBotMessages = false,
 	setShowBotMessages,
 	setShowDialModal = () => {},
-
+	handleScroll = () => {},
+	setModalType = () => {},
+	modalType = {},
 }) {
-	const [modalType, setModalType] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
 	const onChangeToggle = () => {
 		if (toggleStatus) {
@@ -50,6 +51,7 @@ function Customers({
 	const handleOpenOptions = () => {
 		setIsChecked(!isChecked);
 	};
+	const unReadChatsCountDisplay = Number(unReadChatsCount || 0) > 49 ? '49+' : unReadChatsCount;
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
@@ -90,7 +92,7 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
+					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCountDisplay} />
 					<TabPanel name="voice" title="Voice" />
 				</Tabs>
 			</div>
@@ -111,6 +113,9 @@ function Customers({
 					setActiveCardId={setActiveCardId}
 					showBotMessages={showBotMessages}
 					setShowBotMessages={setShowBotMessages}
+					handleScroll={handleScroll}
+					setModalType={setModalType}
+					modalType={modalType}
 				/>
 			)}
 
@@ -154,7 +159,7 @@ function Customers({
 							</div>
 							<div className={`${styles.action} ${styles.whatsapp_icon}`}>
 								<img
-									onClick={() => setModalType(true)}
+									onClick={() => setModalType({ type: 'whatsapp_new_message_modal', data: {} })}
 									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg"
 									alt="whatsapp icon"
 									role="presentation"
@@ -165,7 +170,7 @@ function Customers({
 					</div>
 				</div>
 			</div>
-			{modalType && (
+			{modalType?.type && (
 				<NewWhatsappMessage
 					setModalType={setModalType}
 					modalType={modalType}
