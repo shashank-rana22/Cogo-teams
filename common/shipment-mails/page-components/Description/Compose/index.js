@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 import useGetEntityStakeholderMappings from '../../../hooks/useGetEntityStakeholderMappings';
 // import useResetErrors from '../../../hooks/useResetErrors';
 
-import rawControls from './controls';
 import Footer from './Footer';
 import InputParam from './Input';
 import SelectParam from './Select';
@@ -59,16 +58,14 @@ function Compose({
 	const [errors, setErrors] = useState({});
 	const [editorState, setEditorState] = useState();
 	const { options } = useGetEntityStakeholderMappings();
-	const controls = rawControls.map((ctrl) => ({
-		...ctrl,
-		value: defaultValues[ctrl.name],
-	}));
+
 	const {
 		// fields,
+		control,
 		handleSubmit,
 		// formState: { errors: errorVal },
-		// watch,
-	} = useForm({});
+		watch,
+	} = useForm({ defaultValues });
 
 	// console.log(controls, 'controlsss');
 
@@ -126,6 +123,7 @@ function Compose({
 					prefix="To:"
 					suffix={suffix}
 					name="toUserEmail"
+					control={control}
 					placeholder="put comma (,) seperated multiple emails"
 					rules={{ required: { value: true, message: 'Email is required' } }}
 				/>
@@ -141,6 +139,7 @@ function Compose({
 					<InputParam
 						prefix="Cc:"
 						name="ccrecipients"
+						control={control}
 						placeholder="put comma (,) seperated multiple emails"
 					/>
 				) : null}
@@ -152,11 +151,21 @@ function Compose({
 						)} */}
 					</div>
 				) : null}
-				{isBcc ? <InputController prefix="Bcc:" /> : null}
+				{isBcc
+					? (
+						<InputController
+							prefix="Bcc:"
+							control={control}
+							placeholder="put comma (,) seperated multiple emails"
+						/>
+					)
+					: null}
+
 				<InputParam
 					prefix="Subject:"
 					name="subject"
 					placeholder="Enter subject..."
+					control={control}
 					rules={{ required: { value: true, message: 'Subject is required' } }}
 				/>
 				{errors?.subject ? (
@@ -168,6 +177,7 @@ function Compose({
 					prefix="Mail Type:"
 					name="entity_type"
 					placeholder="Select Mail type..."
+					control={control}
 					options={options}
 					rules={{ required: { value: true, message: 'Entity Type is required' } }}
 				/>
@@ -194,12 +204,16 @@ function Compose({
 						)} */}
 					</div>
 				) : null}
-				<RTE
-					placeholder="Write here ...."
-					value={editorState}
-					// setEditorState={setEditorState}
-					onChange={setEditorState}
-				/>
+				<div className={styles.rich_text_editor}>
+
+					<RTE
+						placeholder="Write here ...."
+						value={editorState}
+						onChange={setEditorState}
+					/>
+
+				</div>
+
 				<Footer
 					content={editorState}
 					subject="Testing the flow wait"
