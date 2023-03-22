@@ -1,0 +1,11 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background-color: #FFFCE6;
+   
+}
+
+.button_container {
+    display: flex;
+}
