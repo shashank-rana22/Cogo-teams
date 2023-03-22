@@ -7236,6 +7236,12 @@ const partner = {
 	],
 	overheads: [
 		{
+			api         : 'expense_send_email',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
 			api         : 'list_cogo_entities',
 			access_type : 'private',
 		},

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Popover, Button, Input, Tooltip } from '@cogoport/components';
 import { IcMSearchlight, IcMInfo } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
@@ -13,6 +14,7 @@ import AddExpenseModal from './AddExpenseModal';
 import CreateExpenseModal from './CreateExpenseModal';
 import useListExpense from './hooks/useListExpense';
 import useListExpenseConfig from './hooks/useListExpenseConfig';
+import useSendEmail from './hooks/useSendEmail';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
 import { expenseRecurringConfig, expenseNonRecurringConfig } from './utils/config';
@@ -53,6 +55,7 @@ function ExpenseComponent() {
 
 	const { getList, listData, listLoading } = useListExpense({ expenseFilters });
 	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig({ expenseFilters });
+	const { sendMail, loading:mailLoading } = useSendEmail();
 
 	useEffect(() => {
 		if (recurringState === 'nonRecurring') { getList(); }
@@ -244,9 +247,18 @@ function ExpenseComponent() {
 						<>
 							<div className={styles.pending_approval}>Pending Approval</div>
 							<div className={styles.link}>
-								<div style={{ fontSize: '12px', marginTop: '4px' }}>
-									<a href="#">Re-send Email</a>
-								</div>
+								<Button
+									style={{
+										background : 'none',
+										color      : '#F68B21',
+										fontSize   : '11px',
+										padding    : '0px 4px',
+									}}
+									disabled={mailLoading}
+									onClick={() => { sendMail({ rowData }); }}
+								>
+									Re-send Email
+								</Button>
 							</div>
 						</>
 					)}

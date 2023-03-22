@@ -30,7 +30,7 @@
 
 .section {
 	margin: 10px 36px 10px 16px;
-	width: 120px;
+	width: 100px;
 }
 
 .element {
@@ -60,5 +60,18 @@
 .link{
 	color: #f68b21;
 	text-decoration: underline;
+	cursor: pointer;
+}
+
+.pending_approval{
+    font-size: 10px;
+    background: #ffe69b;
+    padding: 4px;
+    border-radius: 4px;
+	color: #f68b21;
+}
+.link{
+	color: #F68B21 ;
+	text-decoration: underline ;
 	cursor: pointer;
 }

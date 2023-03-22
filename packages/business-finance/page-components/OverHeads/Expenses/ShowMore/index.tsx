@@ -1,9 +1,11 @@
-import { Placeholder } from '@cogoport/components';
+/* eslint-disable max-len */
+import { Button, Placeholder } from '@cogoport/components';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import { formatDate } from '../../../commons/utils/formatDate';
 import useListExpense from '../hooks/useListExpense';
+import useSendEmail from '../hooks/useSendEmail';
 
 import styles from './styles.module.css';
 
@@ -15,12 +17,18 @@ interface BillInterface {
 	dueDate?:Date,
 	billDate?:Date,
 	createdDate?:Date,
+	status?:string,
+	approvedByUser?:any,
+	updatedAt?:any,
+	payableTds?:any,
 }
 
 function ShowMore({ id }) {
 	const [moreData, setMoreData] = useState(false);
 	const { getList, listData, listLoading } = useListExpense({ id, expenseType: 'RECURRING' });
 	const billList = listData?.list;
+
+	const { sendMail, loading:mailLoading } = useSendEmail();
 
 	useEffect(() => {
 		if (moreData) { getList(); }
@@ -57,24 +65,26 @@ function ShowMore({ id }) {
 								<div>
 									{billList?.map((bill:BillInterface) => {
 										const {
-											billNumber, paidTds = 0, grandTotal, paidAmount = 0,
-											dueDate, billDate, createdDate,
+											billNumber, grandTotal, paidAmount = 0, payableTds = 0,
+											dueDate, billDate, createdDate, status, approvedByUser, updatedAt,
 										} = bill || {};
+										const { name = '' } = approvedByUser || {};
+
 										return (
 											<div className={styles.data_div}>
 												<div className={styles.section}>
-													<div>Invoice Number</div>
+													<div>Invoice No.</div>
 													<div className={`${styles.element} ${styles.link}`}>
 														<a href="#">{billNumber || '-'}</a>
 													</div>
 												</div>
 												<div className={styles.section}>
 													<div>TDS</div>
-													<div className={styles.element}>{paidTds}</div>
+													<div className={styles.element}>{payableTds}</div>
 												</div>
 												<div className={styles.section}>
 													<div>Payable</div>
-													<div className={styles.element}>{grandTotal - paidTds}</div>
+													<div className={styles.element}>{grandTotal - payableTds}</div>
 												</div>
 												<div className={styles.section}>
 													<div>Paid</div>
@@ -116,6 +126,32 @@ function ShowMore({ id }) {
 															false,
 														) || '-'}
 
+													</div>
+												</div>
+												<div className={styles.section}>
+													<div>Approved By</div>
+													<div className={`${styles.element} `}>
+														<div>
+															{status === 'ACCEPTED' ? (
+																<>
+																	<div>{name}</div>
+																	<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) }</div>
+																</>
+															) : (
+																<>
+																	<div className={styles.pending_approval}>Pending Approval</div>
+																	<div className={styles.link}>
+																		<Button
+																			style={{ background: 'none', color: '#F68B21', fontSize: '12px', padding: '0px 4px' }}
+																			disabled={mailLoading}
+																			onClick={() => { sendMail({ rowData: bill }); }}
+																		>
+																			Re-send Email
+																		</Button>
+																	</div>
+																</>
+															)}
+														</div>
 													</div>
 												</div>
 											</div>

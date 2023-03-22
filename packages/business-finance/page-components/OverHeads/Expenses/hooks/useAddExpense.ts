@@ -120,6 +120,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		cogo_entity_id: vendorCogoEntityId,
 		serial_id:vendorSerialId,
 		kyc_status:kycStatus,
+		registration_type:registrationType,
 	} = vendorData || {};
 
 	const [{ data:responseData, loading }, trigger] = useRequestBf(
@@ -175,7 +176,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 					organizationId          : tradeParty?.organization_id,
 					organizationSerialId    : tradeParty?.serial_id,
 					// isTaxApplicable         : tradeParty?.is_tax_applicable,
-					isTaxApplicable         : true, // for now
+					isTaxApplicable         : registrationType !== 'pan',
 					isSez                   : false,
 					organizationName        : 'JAMA TAXI SERVICE', // ???
 					pincode                 : '110062', // ??
@@ -227,7 +228,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 				serviceProviderDetail: { // vendor
 					entityCode,
 					entityCodeId            : vendorCogoEntityId,
-					organizationId          : id,
+					organizationId          : tradeParty?.organization_id,
 					organizationSerialId    : vendorSid,
 					isSez                   : false,
 					organizationName        : vendorBusinessName,
@@ -259,6 +260,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		branchId    : addressData?.branchId,
 		kycStatus   : kycStatus?.toUpperCase(),
 		pan         : vendorRegistrationNumber,
+		createdBy   : profile?.user?.id,
 	};
 
 	const submitData = async () => {
@@ -267,7 +269,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 				data: payload,
 			});
 		} catch (err) {
-			Toast.error(err?.message || 'Something went wrong');
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
 	};
 

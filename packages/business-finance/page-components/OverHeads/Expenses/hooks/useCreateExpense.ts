@@ -120,6 +120,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		business_name: vendorBusinessName,
 		cogo_entity_id: vendorCogoEntityId,
 		kyc_status:kycStatus,
+		registration_type:registrationType,
 	} = vendorData || {};
 
 	const [{ data:responseData, loading }, trigger] = useRequestBf(
@@ -175,7 +176,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					organizationId          : tradeParty?.organization_id,
 					organizationSerialId    : tradeParty?.serial_id,
 					// isTaxApplicable         : tradeParty?.is_tax_applicable,
-					isTaxApplicable         : true, // hardcoded for now
+					isTaxApplicable         : registrationType !== 'pan',
 					isSez                   : false,
 					organizationName        : 'JAMA TAXI SERVICE', // ???
 					pincode                 : '110062', // ??
@@ -227,7 +228,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 				serviceProviderDetail: { // vendor
 					entityCode,
 					entityCodeId            : vendorCogoEntityId,
-					organizationId          : id,
+					organizationId          : tradeParty?.organization_id,
 					organizationSerialId    : vendorSid,
 					isSez                   : false,
 					organizationName        : vendorBusinessName,
@@ -259,6 +260,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		branchId    : addressData?.branchId,
 		kycStatus   : kycStatus?.toUpperCase(),
 		pan         : vendorRegistrationNumber,
+		createdBy   : profile?.user?.id,
 	};
 
 	const submitData = async () => {

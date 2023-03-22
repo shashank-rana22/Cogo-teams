@@ -8,7 +8,9 @@ import styles from './styles.module.css';
 import Vendors from './Vendors/index';
 
 function Overheads() {
-	const [activeTab, setActiveTab] = useState('vendors');
+	const { query } = useRouter();
+
+	const [activeTab, setActiveTab] = useState(query?.active_tab || 'vendors');
 	const { push } = useRouter();
 
 	const handleChange = (tab) => {
