@@ -19,7 +19,7 @@ function CreateModal({ setMode, setSelectedVersion }) {
 				<button
 					onClick={() => {
 						setMode('published-version');
-						setSelectedVersion('');
+						// setSelectedVersion('');
 					}}
 					className={styles.button}
 				>

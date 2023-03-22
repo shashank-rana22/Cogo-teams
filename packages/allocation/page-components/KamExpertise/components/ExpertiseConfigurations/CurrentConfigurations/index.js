@@ -1,16 +1,18 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
-import useGetKamExpertiseCurrentConfig from '../../../hooks/useGetKamExpertiseCurrentConfig';
 import LoadingState from '../LoadingState';
 
 import ConfigurationCard from './ConfigurationCard';
 import Header from './Header';
 
-function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
+function CurrentConfigurations({
+	selectedVersion = '',
+	setSelectedVersion,
+	ConfigCardLoading,
+	listKamExpertiseCurrentConfigs,
+}) {
 	const router = useRouter();
-
-	const { listKamExpertiseCurrentConfigs, ConfigCardLoading } = useGetKamExpertiseCurrentConfig();
 
 	const {
 		list:data = [],
@@ -19,7 +21,7 @@ function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
 
 	const LIVE_VERSION = data.filter((item) => item.status_value === 'active')[0]?.version_number;
 
-	const listLiveAndDraft = data.filter((item) => item.status_value === 'draft' || item.status_value === 'active');
+	const listLiveAndDraft = data.filter((item) => item.status_value === 'draft' || item.status_value === 'live');
 
 	const VERSION_CARDS = listLiveAndDraft.reverse();
 
@@ -51,8 +53,7 @@ function CurrentConfigurations({ selectedVersion = '', setSelectedVersion }) {
 					View All Configurations
 				</Button>
 			</div>
-		) : (<LoadingState />))
-
+		) : <LoadingState />)
 	);
 }
 

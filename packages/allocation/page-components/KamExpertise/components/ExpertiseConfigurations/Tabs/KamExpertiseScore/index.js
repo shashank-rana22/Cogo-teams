@@ -64,6 +64,9 @@ function KamExpertiseScoreConfig({ setMainLoading, selectedVersion }) {
 	};
 
 	const { data, loading, refetch } = useGetExpertiseParameters({ selectedVersion });
+	useEffect(() => {
+		refetch();
+	}, [selectedVersion, refetch]);
 
 	useEffect(() => {
 		setMainLoading(loading);
