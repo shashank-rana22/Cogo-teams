@@ -16,25 +16,27 @@ function EventList(props) {
 					<section className={styles.list_item_container} key={item}>
 						<div className={styles.top_div}>
 							<Placeholder width="20px" style={{ marginBottom: '4px' }} />
+
+							<Placeholder width="20px" style={{ marginBottom: '4px' }} />
 						</div>
 
 						<div>
 							<p className={styles.info_tag}>
-								<Placeholder width="160px" style={{ marginBottom: '4px' }} />
+								<Placeholder width="200px" style={{ marginBottom: '4px' }} />
 							</p>
 
 							<div className={styles.info_tag}>
-								<Placeholder width="120px" style={{ marginBottom: '12px' }} />
+								<Placeholder width="200px" style={{ marginBottom: '12px' }} />
 							</div>
 
 							<p className={styles.info_tag}>
-								<Placeholder width="360px" style={{ marginBottom: '4px' }} />
+								<Placeholder width="200px" style={{ marginBottom: '4px' }} />
 							</p>
 						</div>
 
 						<div className={styles.rule}>
 							<p className={styles.rule_head}>
-								<Placeholder width="100px" height="20px" style={{ marginBottom: '4px' }} />
+								<Placeholder width="200px" style={{ marginBottom: '12px' }} />
 							</p>
 
 							{[11, 12].map(() => (

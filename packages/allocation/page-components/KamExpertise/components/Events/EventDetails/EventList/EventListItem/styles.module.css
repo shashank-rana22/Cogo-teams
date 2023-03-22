@@ -1,40 +1,27 @@
-.list_item_container {
-	height: auto;
+.container {
 	background-color: #fff;
 	border-radius: 8px;
 	margin-bottom: 16px;
-	padding-bottom: 20px;
+	padding: 16px;
 }
 
 .top_div {
 	display: flex;
 	justify-content: space-between;
-	padding: 16px 16px 4px 16px;
 }
-
 
 .info_tag {
 	display: flex;
-	flex-direction: row;
-	width: 50%;
-	margin-left: 16px;
-}
-
-.rule {
-	width: 90%;
-	margin-left: 16px;
 }
 
 .rule_body {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	margin-top: 8px;
-	width: 100%;
+	margin-top: 2px;
 }
 
 .rule_head {
-	margin-top: 4px;
 	font-size: 16px;
 	font-weight: 600;
 }
