@@ -18,6 +18,7 @@ const useFetchQuestionsList = ({ currentQuestion, startTiming, duration }) => {
 	const start_time = startTiming;
 	// const end_time = new Date();
 	const end_time = addMinutes(start_time, duration);
+
 	const fetchQuestions = (props = {}) => {
 		const { currentQ = '' } = props || {};
 
@@ -27,8 +28,9 @@ const useFetchQuestionsList = ({ currentQuestion, startTiming, duration }) => {
 				user_id,
 				question_number: currentQ || currentQuestion,
 				start_time,
-				end_time,
 			};
+
+			console.log(payload, 'payload');
 
 			trigger({
 				params: payload,
