@@ -29,6 +29,7 @@ function AddRate({
 	onCancel = () => {},
 	filters,
 	updateResponse = () => {},
+	setShowChargeCodes = () => {},
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
 	const [showSecondStep, setShowSecondStep] = useState(false);
@@ -41,6 +42,7 @@ function AddRate({
 		status,
 		refetch,
 		setAddRate,
+		setShowChargeCodes,
 		billToCustomer,
 		setAddSellPrice,
 		onCancel,

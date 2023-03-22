@@ -1,5 +1,8 @@
 import { cl } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
+
+import { renderValue } from '../../../../../../common/CargoDetails/RenderCargoPills/renderValue';
 
 import styles from './styles.module.css';
 
@@ -24,8 +27,8 @@ function ConatinerDetails({ containerDetails = [] }) {
 								</div>
 								<div className={styles.container_number}>{item?.container_number}</div>
 								<div className={styles.tag_wrapper}>
-									<div>{item?.container_type}</div>
-									<div>{item?.container_size}</div>
+									<div>{startCase(item?.container_type)}</div>
+									<div>{renderValue('container_size', item)}</div>
 								</div>
 							</div>
 						</div>
