@@ -12,22 +12,18 @@ function PortDetails({ data = {}, primary_service = {} }) {
 		return null;
 	}
 
-	const { origin_port : origin, destination_port : destination } = primary_service;
+	const { origin_port, destination_port } = primary_service;
 
 	const handleLocationDetails = (location, icdPortInfo) => (
 		<>
 			<div className={styles.port_code}>
-				{location?.port_code || location?.postal_code ? (
-					<div className={` ${styles.code} core_ui_port_code`}>
-						(
-						{location?.port_code || location?.postal_code}
-						)
-					</div>
-				) : (
-					<div style={{ height: '16px' }} />
-				)}
+				<div className={` ${styles.code}`}>
+					(
+					{location?.port_code}
+					)
+				</div>
 
-				<div className={`${styles.country} core_ui_country_name`}>
+				<div className={`${styles.country}`}>
 					{location?.country?.name}
 				</div>
 			</div>
@@ -39,11 +35,11 @@ function PortDetails({ data = {}, primary_service = {} }) {
 					<div>
 						<div style={{ fontSize: '10px' }}>{location?.display_name}</div>
 
-						{icdPortInfo ? <div className={styles.icd}>{icdPortInfo?.name}</div> : null}
+						{!isEmpty(icdPortInfo) ? <div className={styles.icd}>{icdPortInfo?.name}</div> : null}
 					</div>
 				)}
 			>
-				<div className={cl`${styles.value} core_ui_loaction_name`}>{location?.name}</div>
+				<div className={cl`${styles.value}`}>{location?.name}</div>
 			</Tooltip>
 
 		</>
@@ -52,20 +48,16 @@ function PortDetails({ data = {}, primary_service = {} }) {
 	const renderLocation = () => (
 		<>
 			<div className={styles.flex_row_origin}>
-				{handleLocationDetails(origin, origin_main_port)}
+				{handleLocationDetails(origin_port, origin_main_port)}
 			</div>
 
-			{destination ? (
-				<div className={styles.icon_wrapper}>
-					<IcMPortArrow className="core_ui_icon" />
-				</div>
-			) : null}
+			<div className={styles.icon_wrapper}>
+				<IcMPortArrow className="core_ui_icon" />
+			</div>
 
-			{destination ? (
-				<div className={styles.flex_row_destination}>
-					{handleLocationDetails(destination, destination_main_port)}
-				</div>
-			) : null}
+			<div className={styles.flex_row_destination}>
+				{handleLocationDetails(destination_port, destination_main_port)}
+			</div>
 		</>
 	);
 

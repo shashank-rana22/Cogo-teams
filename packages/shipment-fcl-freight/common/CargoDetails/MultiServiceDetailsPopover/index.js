@@ -1,5 +1,5 @@
-import { Popover, Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import { Tooltip } from '@cogoport/components';
+import React from 'react';
 
 import RenderCargoPills from '../RenderCargoPills';
 
@@ -8,51 +8,40 @@ import styles from './styles.module.css';
 function MultiServiceDetailsPopover({
 	children,
 	mainServices,
-	renderBody: renderBodyProp = null,
-	showSingle = false,
-	placement = null,
-	withButton = true,
-}) {
-	const [show, setShow] = useState(false);
 
-	if (mainServices?.length <= 1 && !showSingle) {
+}) {
+	if (mainServices?.length <= 1) {
 		return null;
 	}
 
 	const renderBody = () => (
 		mainServices?.map((item, idx) => (idx !== 0 ? (
 			<div className={styles.container}>
-				<RenderCargoPills detail={item} className="details" />
+				<RenderCargoPills detail={item} />
 			</div>
 		) : null)));
 
 	return (
-		<Popover
+		<Tooltip
 			theme="light"
-			show={show}
-			placement={placement || 'bottom'}
+			placement="bottom"
 			interactive
-			onOuterClick={() => setShow(false)}
-			trigger="mouseenter"
-			content={renderBodyProp ? renderBodyProp() : renderBody()}
+			content={renderBody()}
 		>
-			{withButton ? (
-				<Button
-					style={{
-						background : 'none',
-						padding    : 2,
-						color      : '#366EFD',
-						border     : 'none',
-						height     : 'auto',
-					}}
-					onClick={() => setShow(false)}
-				>
-					{children}
-				</Button>
-			) : (
-				{ children }
-			)}
-		</Popover>
+			<div
+				style={{
+					background : 'none',
+					padding    : 0,
+					color      : '#366EFD',
+					border     : 'none',
+					height     : 'auto',
+					fontSize   : '12px',
+				}}
+			>
+				{children}
+			</div>
+
+		</Tooltip>
 	);
 }
 export default MultiServiceDetailsPopover;

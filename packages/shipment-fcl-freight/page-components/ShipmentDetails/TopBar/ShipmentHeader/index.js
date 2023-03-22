@@ -3,10 +3,10 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useContext, useState } from 'react';
 
 import CargoDetails from '../../../../common/CargoDetails';
+import PortDetails from '../../../../common/PortDetails';
 
 import AddPoNumber from './AddPoNumber';
 import Loader from './Loader';
-import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
 function ShipmentHeader() {
