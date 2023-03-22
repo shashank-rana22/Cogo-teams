@@ -16,7 +16,8 @@
 
 .multi_service {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: wrap; 
+	align-items: center;
 	white-space: nowrap;
 	overflow-x: auto;
 }

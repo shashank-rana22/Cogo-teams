@@ -7,12 +7,10 @@ import styles from './styles.module.css';
 function CargoDetails({ primary_service }) {
 	return (
 		<div className={cl`${styles.container} ${styles.shipment_cargo_details_root}`}>
-			<RenderCargoPills detail={primary_service || {}} />
+			<RenderCargoPills detail={{ ...primary_service, ...primary_service?.cargo_details?.[0] } || {}} />
 			{primary_service?.cargo_details?.length > 1 ? (
 				<div className={styles.multi_service}>
-					<CargoDetails
-						detail={{ ...primary_service, ...primary_service?.cargo_details?.[0] } || {}}
-					/>
+
 					<MultiServiceDetailsPopover mainServices={primary_service?.cargo_details}>
 						<div className={styles.more_details_popover_text}>
 							+

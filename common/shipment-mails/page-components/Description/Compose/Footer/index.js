@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import Button from '@cogoport/front/components/admin/Button';
+import { Button } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
-import { useSelector } from '@cogo/store';
-import { Container, Wrapper, Row, AttachementItem, Name } from './styles';
-import Attachement from './Attachment';
-import useSendEmail from '../../../hooks/useSendEmail';
-import useForwardEmail from '../../../hooks/useForwardEmail';
-import useReplyAllEmail from '../../../hooks/useReplyAllEmail';
-import useReplyEmail from '../../../hooks/useReplyEmail';
+import { useSelector } from '@cogoport/store';
+import React, { useState } from 'react';
 
-const Footer = ({
+import useForwardEmail from '../../../../hooks/useForwardEmail';
+import useReplyAllEmail from '../../../../hooks/useReplyAllEmail';
+import useReplyEmail from '../../../../hooks/useReplyEmail';
+import useSendEmail from '../../../../hooks/useSendEmail';
+
+import Attachement from './Attachment';
+import styles from './styles.module.css';
+
+function Footer({
 	content,
 	composingEmail = {},
 	COMPOSE_EMAIL,
@@ -17,7 +19,7 @@ const Footer = ({
 	onError,
 	action,
 	onCreate,
-}) => {
+}) {
 	const userId = useSelector(({ profile }) => profile?.id);
 	const { createEmail, mailApi } = useSendEmail();
 	const { forwardEmail, forwardMailApi } = useForwardEmail();
@@ -44,43 +46,43 @@ const Footer = ({
 			.split(',')
 			.map((email) => email.trim());
 		const payload = {
-			sender: COMPOSE_EMAIL,
+			sender       : COMPOSE_EMAIL,
 			toUserEmail,
-			ccrecipients: [],
-			subject: data?.subject,
+			ccrecipients : [],
+			subject      : data?.subject,
 			content,
-			attachments: attachments.map((item) => item.url),
-			msgId: composingEmail?.id || undefined,
+			attachments  : attachments.map((item) => item.url),
+			msgId        : composingEmail?.id || undefined,
 			userId,
 			onCreate,
 		};
 		await actionToPerform(payload);
 	};
-	const loading =
-		replyAllMailApi.loading ||
-		mailApi.loading ||
-		forwardMailApi.loading ||
-		replyMailApi.loading;
+	const loading =		replyAllMailApi.loading
+		|| mailApi.loading
+		|| forwardMailApi.loading
+		|| replyMailApi.loading;
 	return (
-		<Wrapper>
-			<Row>
+		<div className={styles.wrapper}>
+			<div className={styles.row}>
 				{attachments.map((attach) => (
-					<AttachementItem>
-						<Name>{attach.name} </Name>
+					<div className={styles.attachment_item}>
+						<div className={styles.name}>
+							{attach.name}
+							{' '}
+						</div>
 						<IcMCross
 							style={{ marginLeft: 4 }}
-							onClick={() =>
-								setAttachements([
-									...attachments.filter(
-										(newItem) => newItem.url !== attach.url,
-									),
-								])
-							}
+							onClick={() => setAttachements([
+								...attachments.filter(
+									(newItem) => newItem.url !== attach.url,
+								),
+							])}
 						/>
-					</AttachementItem>
+					</div>
 				))}
-			</Row>
-			<Container>
+			</div>
+			<div className={styles.container}>
 				<Attachement
 					onChange={(value) => {
 						if (value) {
@@ -95,9 +97,9 @@ const Footer = ({
 				>
 					{!loading ? buttonText : `${buttonText}...`}
 				</Button>
-			</Container>
-		</Wrapper>
+			</div>
+		</div>
 	);
-};
+}
 
 export default Footer;

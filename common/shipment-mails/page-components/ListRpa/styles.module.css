@@ -37,4 +37,12 @@
 	display: flex;
 	align-items: center;
 	margin: 10px 0px;
+} 
+
+.page_change {
+	cursor: pointer; 
+
+	&:hover {
+		color: #7c7c8b;
+	}
 }

@@ -1,12 +1,13 @@
-import React from 'react';
+// import AwsUplaoder from '@cogo/smart-components/components/AwsUploader';
 import { IcMAttach } from '@cogoport/icons-react';
-import AwsUplaoder from '@cogo/smart-components/components/AwsUploader';
-import { Container, AttachButton, Text } from './styles';
+import React from 'react';
 
-const Attachement = ({ onChange }) => {
+import styles from './styles.module.css';
+
+function Attachement({ onChange }) {
 	return (
-		<Container>
-			<AwsUplaoder
+		<div className={styles.container}>
+			{/* <AwsUplaoder
 				showProgress={false}
 				onChange={onChange}
 				multiple={false}
@@ -15,15 +16,15 @@ const Attachement = ({ onChange }) => {
 				value={null}
 				height={40}
 				showUploadIcon={false}
-				dragNDropText={
+				dragNDropText={(
 					<AttachButton>
 						<IcMAttach style={{ height: '24px', width: '24px' }} />
 						<Text>Attach A File</Text>
 					</AttachButton>
-				}
-			/>
-		</Container>
+				)}
+			/> */}
+		</div>
 	);
-};
+}
 
 export default Attachement;

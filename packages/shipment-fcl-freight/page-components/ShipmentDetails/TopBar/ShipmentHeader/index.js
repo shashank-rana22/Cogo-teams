@@ -1,49 +1,19 @@
-import { Button, Tooltip, Popover } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMOverflowDot } from '@cogoport/icons-react';
 import React, { useContext, useState } from 'react';
 
 import CargoDetails from '../../../../common/CargoDetails';
 
 import AddPoNumber from './AddPoNumber';
-import CancelShipment from './CancelShipment';
 import Loader from './Loader';
 import PortDetails from './PortDetails';
-import RequestCancellation from './RequestCancellation';
 import styles from './styles.module.css';
 
 function ShipmentHeader() {
 	const [show, setShow] = useState(false);
-	const [showCancel, setShowCancel] = useState(false);
 	const { shipment_data, primary_service, isGettingShipment, refetch } = useContext(ShipmentDetailContext);
 
 	const { po_number, importer_exporter } = shipment_data || {};
-
-	const renderContent = () => {
-		// if (isIE && !isRequested) {
-		if (false) {
-			return (
-				<RequestCancellation
-					showCancel={showCancel}
-					setShowCancel={setShowCancel}
-					onClose={() => setShow(false)}
-					refetch={refetch}
-				/>
-			);
-		}
-
-		return (
-			<CancelShipment
-				id={shipment_data?.id}
-				showCancel={showCancel}
-				setShowCancel={setShowCancel}
-				onClose={() => setShow(false)}
-				setShow={setShow}
-				// isIE={isIE}
-				// showRequest={showRequest}
-			/>
-		);
-	};
 
 	const handlePoNo = () => {
 		if (po_number) {
@@ -60,9 +30,14 @@ function ShipmentHeader() {
 			!po_number
 		) {
 			return (
-				<Button onClick={() => setShow(true)}>
+				<div
+					className={styles.button}
+					role="button"
+					tabIndex={0}
+					onClick={() => setShow(true)}
+				>
 					Add Po Number
-				</Button>
+				</div>
 			);
 		}
 
@@ -88,7 +63,7 @@ function ShipmentHeader() {
 				>
 					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
 				</Tooltip>
-				<div>
+				<div className={styles.po_number}>
 					{handlePoNo()}
 				</div>
 			</div>
@@ -99,25 +74,10 @@ function ShipmentHeader() {
 				primary_service={primary_service}
 			/>
 
-			<Popover
-				interactive
-				placement="bottom"
-				theme="light"
-				trigger="click"
-				content={renderContent()}
-			>
-				<div className={styles.dots}>
-					<IcMOverflowDot />
-				</div>
-			</Popover>
-
-			{/* <Cancellation /> */}
 			{show ? (
 				<AddPoNumber show={show} setShow={setShow} shipment_data={shipment_data} refetch={refetch} />
 			) : null}
-
 		</div>
-
 	);
 }
 

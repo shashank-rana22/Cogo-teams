@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 
-// import AddressForm from '../../AddressForm';
+import AddressForm from './AddressForm';
 
 const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_ids;
 
@@ -28,6 +28,8 @@ function CreateNewBillingAddress({
 
 	return (
 		<div>
+			{/* <AddressForm /> */}
+			Address Form
 			{/* <AddressForm
 				organizationId={id}
 				tradePartyId={tradePartyId}

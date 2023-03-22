@@ -1,17 +1,18 @@
+import { InputController } from '@cogoport/forms';
 import React from 'react';
-import InputCore from '@cogo/business-modules/form/components/Controlled/InputController';
-import { Container, Prefix, Row } from './styles';
 
-export const Input = ({ prefix, suffix = null, ...rest }) => {
+import styles from './styles.module.css';
+
+export function Input({ prefix, suffix = null, ...rest }) {
 	return (
-		<Container>
-			<Row>
-				<Prefix>{prefix}</Prefix>
-				<InputCore {...rest} />
-			</Row>
+		<div className={styles.container}>
+			<div className={styles.row}>
+				<div className={styles.prefix}>{prefix}</div>
+				<InputController {...rest} />
+			</div>
 			{suffix}
-		</Container>
+		</div>
 	);
-};
+}
 
 export default Input;
