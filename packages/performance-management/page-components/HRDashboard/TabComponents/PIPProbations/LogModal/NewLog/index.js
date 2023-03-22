@@ -1,44 +1,39 @@
-import { Textarea, Chips, Checkbox } from '@cogoport/components';
-import { useState } from 'react';
+import { Textarea, Checkbox } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function NewLog() {
-	const [multiSelected, setMultiSelected] = useState([]);
-	const [checkList, setCheckList] = useState([false, false, false]);
-
-	const chipList = [{
-		key      : 'Email',
-		children : 'Email',
-	},
-	{
-		key      : 'Performance',
-		children : 'Performance',
-	},
-	{
-		key      : 'Meeting',
-		children : 'Meeting',
-	},
-	{
-		key      : 'Manager',
-		children : 'Manager',
-	}];
+function NewLog({ checkList = [], comments, setCheckList = () => {}, setComments = () => {} }) {
+	// const chipList = [{
+	// 	key      : 'Email',
+	// 	children : 'Email',
+	// },
+	// {
+	// 	key      : 'Performance',
+	// 	children : 'Performance',
+	// },
+	// {
+	// 	key      : 'Meeting',
+	// 	children : 'Meeting',
+	// },
+	// {
+	// 	key      : 'Manager',
+	// 	children : 'Manager',
+	// }];
 
 	return (
 		<div>
 			<div className={styles.lable}>Select Tags</div>
 
-			<Chips
+			<div className={styles.lable}>Add Comment</div>
+
+			<Textarea
+				style={{ height: '120px' }}
+				name="comments"
 				size="lg"
-				enableMultiSelect
-				items={chipList}
-				selectedItems={multiSelected}
-				onItemChange={setMultiSelected}
+				placeholder="Text Area"
+				value={comments}
+				onChange={setComments}
 			/>
-
-			<div className={styles.lable}>Add Note</div>
-
-			<Textarea style={{ height: '120px' }} name="comments" size="lg" placeholder="Text Area" />
 			<Checkbox
 				className={styles.checkbox}
 				label="Email sent to Employee"

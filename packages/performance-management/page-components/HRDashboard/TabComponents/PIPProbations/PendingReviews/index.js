@@ -4,11 +4,12 @@ import { useState } from 'react';
 import useGetColumns from '../../../../../common/Columns';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
+import useListEmployees from '../../../../../hooks/useListEmployees';
 
 import styles from './styles.module.css';
 
 function PendingReviews({
-	params, setPage = () => {}, activeTab,
+	activeTab,
 	setItem = () => {}, setOpenLogModal = () => {},
 	setType = () => {},
 }) {
@@ -51,6 +52,16 @@ function PendingReviews({
 		}],
 	};
 
+	const {
+		employeeData,
+		loading,
+		// params,
+		// setParams,
+		setPage,
+	} = useListEmployees();
+	const { list = [], pagination_data = {} } = employeeData;
+	const { page_limit, page, total_count } = pagination_data;
+
 	const columnsToShow = feedbackDataColumns.pendingReviewsList;
 	const columns = useGetColumns({
 		columnsToShow,
@@ -65,12 +76,13 @@ function PendingReviews({
 	return (
 		<div className={styles.container}>
 			<UserTableData
+				loading={loading}
 				columns={columns}
-				list={dataList[params.Page]}
-				pagination={params.Page}
-				page_limit={2}
+				list={list}
+				pagination={page}
+				page_limit={page_limit}
 				setPagination={setPage}
-				total_count={4}
+				total_count={total_count}
 			/>
 			{reviewModal
 				&& (
@@ -80,7 +92,7 @@ function PendingReviews({
 							setReviewModal(false);
 							setItem({});
 						}}
-						size="md"
+						size="lg"
 					>
 						<Modal.Header title="Review" />
 						<div className={styles.upload_modal}>

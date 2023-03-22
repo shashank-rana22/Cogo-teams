@@ -9,7 +9,10 @@ import Create from './CreatePip';
 import styles from './styles.module.css';
 import Update from './UpdatePip';
 
-function DecisionModal({ item, setItem = () => { }, type, params, setParams = () => {} }) {
+function DecisionModal({
+	item, setItem = () => { }, setDisableNext = () => {},
+	type, show, setShow = () => {},
+}) {
 	const manager_name = 'Harshith';
 
 	// const {
@@ -102,17 +105,15 @@ function DecisionModal({ item, setItem = () => { }, type, params, setParams = ()
 
 				<div className={styles.sub_container}>
 					{type === 'create' ? (
-						<Create params={params} setParams={setParams} />
+						<Create
+							item={item}
+							setItem={setItem}
+							setDisableNext={setDisableNext}
+						/>
 					) : (
-						<Update params={params} setParams={setParams} />
+						<Update show={show} setShow={setShow} />
 					)}
 				</div>
-			</div>
-
-			<div>
-				<div className={styles.lable}>Reason for Extention</div>
-
-				<Textarea size="lg" placeholder="Type here ..." />
 			</div>
 		</>
 	);

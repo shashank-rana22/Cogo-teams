@@ -6,7 +6,7 @@ const useReassignManager = ({
 	setManagerId = () => {}, reset = () => {},
 }) => {
 	const [{ loading = false }, trigger] = useIrisRequest({
-		url    : 'post_user_reassign_manager',
+		url    : 'post_iris_update_partner_user_admin_mapping',
 		method : 'post',
 	}, { manual: true });
 

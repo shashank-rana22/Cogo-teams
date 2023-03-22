@@ -32,7 +32,11 @@ function KPIFeedbacks() {
 		<div>
 			<div className={styles.top_container}>
 				<div className={styles.filters}>
-					<Filters setParams={setParams} params={params} source="hr_dashboard" />
+					<Filters
+						setParams={setParams}
+						params={params}
+						source="hr_dashboard"
+					/>
 				</div>
 
 				<div className={styles.button_container}>

@@ -11,4 +11,13 @@
     top: 0;
     right: 0;
 }
+.pip_select{
+	display: flex;
+	justify-content: center;
+}
+
+.pip_select_btn{
+	border: solid 1px #88CAD1;
+	margin: 8px;
+}
 

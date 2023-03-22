@@ -8,7 +8,7 @@ function UpdatePip({ params, setParams = () => {} }) {
 	const { show } = params;
 	const date = new Date();
 	const [value, onChange] = useState('R1');
-	const [decision, setDecision] = useState(false);
+	const [decision, setDecision] = useState('');
 	const [endDate, setEndDate] = useState();
 	const [endCheck, setEndCheck] = useState(false);
 
@@ -22,7 +22,6 @@ function UpdatePip({ params, setParams = () => {} }) {
 	const clickedEndDate = (val) => {
 		if (val !== getMonth(date) + 1 && endCheck) { setEndCheck(!endCheck); }
 		setEndDate(val);
-		setDisabledNext(!val);
 	};
 
 	const status = {
@@ -34,7 +33,6 @@ function UpdatePip({ params, setParams = () => {} }) {
 	const radioList = [
 		{ name: 'R1', value: 'R1', label: 'Extend' },
 		{ name: 'R2', value: 'R2', label: 'Confirm' },
-		{ name: 'R3', value: 'R3', label: 'PIP' },
 	];
 
 	useEffect(() => {
@@ -91,21 +89,21 @@ function UpdatePip({ params, setParams = () => {} }) {
 							}
 						}}
 					/>
+
+					<div>
+						<div className={styles.lable}>Reason for Extention</div>
+
+						<Textarea size="lg" placeholder="Type here ..." />
+					</div>
 				</div>
 			)}
 			{show && value === 'R2' && (
 				<Checkbox
 					label="Check this box to confirm that Ankur Verma has cleared their probation."
 					value={decision}
-					onChange={() => { setDecision(!decision); setParams({ ...params, disableNext: decision }); }}
-				/>
-			)}
-
-			{show && value === 'R3' && (
-				<Checkbox
-					label="Check this box to confirm that Ankur Verma requires a PIP"
-					value={decision}
-					onChange={() => { setDecision(!decision); setParams({ ...params, disableNext: decision }); }}
+					onChange={() => {
+						if (decision) { setDecision('confirm'); } else { setDecision(''); }
+					}}
 				/>
 			)}
 		</div>

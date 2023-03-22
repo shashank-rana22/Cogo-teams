@@ -24,12 +24,6 @@ const updateColorMapping = {
 	uploading : 'yellow',
 };
 
-const actionTextMapping = {
-	dashboard       : 'Update',
-	pending_reviews : 'Review',
-	uploaded_files  : 'Download',
-};
-
 const useGetColumns = ({
 	getTeamFeedbackList = () => {}, source = 'hr_dashboard', columnsToShow = [],
 	setRefetchReportees = () => {}, setItem = () => {}, setOpenUpdate = () => {},
@@ -56,15 +50,17 @@ const useGetColumns = ({
 		return 'average';
 	};
 
-	const addLog = (item) => {
+	const addLog = (item, flag) => {
 		setItem(item);
-		if (source !== 'log_modal') {
-			setOpenUpdate(true);
-			setType('update');
-			setReviewModal(true);
-		}
 		if (source === 'log_modal') {
 			setType('create');
+		}
+		if (flag) {
+			console.log('clicked update');
+			setOpenUpdate(true);
+			setType('update');
+		} else {
+			setOpenLogModal(true);
 		}
 	};
 
@@ -295,18 +291,41 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>Action</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<Button
-					themeType={activeTab === 'dashboard' ? ('primary') : ('secondary')}
-					onClick={() => addLog(item)}
-					disabled={(item?.is_pip && activeTab === 'dashboard')
-					|| (item?.employee_status === 'probation' && source === 'manager_dashboard')}
-				>
-					{actionTextMapping[activeTab]}
-				</Button>
+				{(item?.log_type === 'probation' || activeTab === 'uploaded_files') ? (
+					<Button
+						themeType={activeTab === 'uploaded_files' ? ('secondary') : ('primary')}
+						onClick={() => addLog(item, true)}
+						disabled={(item?.employee_status === 'probation' && source === 'manager_dashboard')}
+					>
+						{activeTab !== 'uploaded_files' ? ('Update') : ('Download')}
+					</Button>
+				) : (
+					<Button
+						themeType="secondary"
+						onClick={() => addLog(item, false)}
+					>
+						Logs
+					</Button>
+				)}
 			</div>
 		),
 		id  : 'action',
 		key : 'action',
+	},
+	{
+		Header   : <div className={styles.head}>Status</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<Pill
+					color={item?.log_type === 'pip' ? 'yellow' : 'blue'}
+				>
+					{item?.log_type}
+
+				</Pill>
+			</div>
+		),
+		id  : 'status',
+		key : 'status',
 	},
 	{
 		Header   : <div className={styles.head}>LOGS</div>,
@@ -314,14 +333,14 @@ const useGetColumns = ({
 			<div className={styles.head_content}>
 				<Button
 					themeType="secondary"
-					onClick={() => setOpenLogModal(true)}
+					onClick={() => setReviewModal(true)}
 				>
-					Logs
+					Review
 				</Button>
 			</div>
 		),
-		id  : 'logs',
-		key : 'logs',
+		id  : 'review',
+		key : 'review',
 	},
 	{
 		Header   : <div className={styles.head}>Start Date</div>,
@@ -330,7 +349,7 @@ const useGetColumns = ({
 				<div>
 					{item?.upload_date
 						? format(item?.upload_date, 'dd-MMM-yyyy')
-						: format(item.start_date, 'dd-MMM-yyyy')}
+						: format(item?.start_date, 'dd-MMM-yyyy')}
 
 				</div>
 			</div>
@@ -340,9 +359,9 @@ const useGetColumns = ({
 	},
 	{
 		Header   : <div className={styles.head}>End Date</div>,
-		accessor : () => (
+		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{format(new Date(), 'dd-MMM-yyyy')}</div>
+				<div>{format(item?.end_date, 'dd-MMM-yyyy')}</div>
 			</div>
 		),
 		id  : 'end_date',

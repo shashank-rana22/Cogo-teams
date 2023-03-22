@@ -114,6 +114,31 @@ const performance_management = [
 		access_type  : 'private',
 		service_name : 'partner',
 	},
+	{
+		api          : 'get_iris_get_employees',
+		access_type  : 'private',
+		service_name : 'iris',
+	},
+	{
+		api          : 'post_iris_update_partner_user_admin_mapping',
+		access_type  : 'private',
+		service_name : 'iris',
+	},
+	{
+		api          : 'post_iris_create_log',
+		access_type  : 'private',
+		service_name : 'iris',
+	},
+	{
+		api          : 'get_iris_list_logs',
+		access_type  : 'private',
+		service_name : 'iris',
+	},
+	{
+		api          : 'post_iris_update_log',
+		access_type  : 'private',
+		service_name : 'iris',
+	},
 ];
 
 export default performance_management;

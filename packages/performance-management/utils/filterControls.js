@@ -1,5 +1,5 @@
-// const useGetControls = (filterArr) => {
-const useGetControls = ({ name = 'manager' }) => {
+const useGetControls = (filterArr) => {
+// const useGetControls = ({ name = 'manager' }) => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
 
@@ -8,7 +8,7 @@ const useGetControls = ({ name = 'manager' }) => {
 			label       : 'Manager Name',
 			name        : 'manager_name',
 			placeholder : 'Search Manager...',
-			type        : 'input',
+			type        : 'text',
 			isClearable : true,
 		},
 		{
@@ -60,16 +60,16 @@ const useGetControls = ({ name = 'manager' }) => {
 		},
 	];
 
-	return control.find((cntrl) => cntrl.name === name);
+	// return control.find((cntrl) => cntrl.name === name);
 
-	// const newControls = [];
+	const newControls = [];
 
-	// filterArr.forEach((name) => {
-	// 	const updatedControl = control.find((ctrl) => ctrl.name === name);
-	// 	newControls.push(updatedControl);
-	// });
+	filterArr.forEach((name) => {
+		const updatedControl = control.find((ctrl) => ctrl.name === name);
+		newControls.push(updatedControl);
+	});
 
-	// return newControls;
+	return newControls;
 };
 
 export default useGetControls;

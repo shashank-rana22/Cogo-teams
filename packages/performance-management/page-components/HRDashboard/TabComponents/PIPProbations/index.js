@@ -1,9 +1,10 @@
 import { Toast, Tabs, TabPanel, Modal, Button } from '@cogoport/components';
 import { IcMEdit, IcMUpload } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useListEmployees from '../../../../hooks/useListEmployees';
+import useCreateLog from '../../../../hooks/useCreateLog';
+import UseCreatePipOrProbation from '../../../../hooks/useCreatePipOrProbation';
 import DecisionModal from '../../DecisionModal';
 import PipUloadModal from '../../PipUploadModal';
 // import UploadModalBody from '../../UploadModal';
@@ -38,19 +39,28 @@ const TAB_PANEL_COMPONENT_MAPPING = {
 function PIPProbations() {
 	const [openUploadModal, setOpenUploadModal] = useState(false);
 	const [openUpdate, setOpenUpdate] = useState(false);
+	const [openCreate, setOpenCreate] = useState(false);
 	const [openLogModal, setOpenLogModal] = useState(false);
 	const [activeLogTab, setActiveLogTab] = useState('new');
+	const [tags, setTags] = useState([]);
+	const [checkList, setCheckList] = useState([false, false, false]);
+	const [comments, setComments] = useState('');
+	const [logItem, setLogItem] = useState({});
 
 	const [type, setType] = useState('');
+	const [status, setStatus] = useState('');
 	const [item, setItem] = useState({});
 	const [activeTab, setActiveTab] = useState('dashboard');
-	const [pipParams, setPipParams] = useState({
-		show        : false,
-		disableNext : false,
-	});
-	const { show, disableNext } = pipParams;
+	const [show, setShow] = useState(false);
+	const [disableNext, setDisableNext] = useState(true);
+	// const [pipParams, setPipParams] = useState({
+	// 	show        : false,
+	// 	disableNext : false,
+	// });
 
-	const { employeeData = {}, loading = false, params, setPage } = useListEmployees({});
+	const { onSubmitCreate = () => {} } = UseCreatePipOrProbation();
+
+	const { onCreateLog = () => {} } = useCreateLog();
 
 	// useEffect(() => debounceQuery(searchValue), [searchValue])
 	// useEffect(() => setPipParams({ show: false, disableNext: false }), []);
@@ -60,9 +70,44 @@ function PIPProbations() {
 		if (show) {
 			Toast.success('Update Sent to the Employee');
 			setOpenUpdate(false);
-		} else {
-			setPipParams({ ...pipParams, show: true, disableNext: true });
 		}
+		// else {
+		// 	setPipParams({ ...pipParams, show: true, disableNext: true });
+		// }
+	};
+
+	const clickedBack = () => {
+		if (status === '') { setOpenCreate(false); }
+		if (isEmpty(item)) {
+			setStatus('');
+		} else {
+			setItem({});
+		}
+	};
+
+	const setLogTags = () => {
+		if (checkList[0]) {
+			setTags([...tags, 'email sent to employyee']);
+		}
+		if (checkList[1]) {
+			setTags([...tags, 'email sent to manager']);
+		}
+		if (checkList[2]) {
+			setTags([...tags, 'final discussion held']);
+		}
+	};
+
+	const onSubmitLog = () => {
+		setLogTags();
+		setLogItem({
+			user_id  : item?.user_id,
+			log_id   : item?.id,
+			log_type : item?.log_type,
+			tags,
+			comment  : comments,
+		});
+		onCreateLog(logItem);
+		setOpenLogModal(false);
 	};
 
 	return (
@@ -86,8 +131,7 @@ function PIPProbations() {
 							>
 								<Component
 									activeTab={activeTab}
-									params={params}
-									setPage={setPage}
+									item={item}
 									setItem={setItem}
 									setOpenUpdate={setOpenUpdate}
 									setOpenLogModal={setOpenLogModal}
@@ -112,11 +156,14 @@ function PIPProbations() {
 
 				<Button
 					size="md"
-					themeType="secondary"
-					onClick={() => { setType('create'); setOpenUpdate(true); }}
+					themeType="primary"
+					onClick={() => {
+						setType('create');
+						setOpenCreate(true);
+					}}
 				>
 					<IcMEdit style={{ marginRight: '4px' }} />
-					Update User Status
+					Create
 				</Button>
 			</div>
 
@@ -148,52 +195,118 @@ function PIPProbations() {
 						<Modal.Header title={startCase(type)} />
 						<div className={styles.upload_modal}>
 							<Modal.Body>
-								{type === 'update' ? (
-									<DecisionModal
-										item={item}
-										setItem={setItem}
-										type={type}
-										params={pipParams}
-										setParams={setPipParams}
-									/>
-								)
-									: (
-										<LogModal
-											item={item}
-											type={type}
-											setType={setType}
-											setItem={setItem}
-											params={pipParams}
-											setParams={setPipParams}
-										/>
-									)}
+								<DecisionModal
+									item={item}
+									setItem={setItem}
+									// type={type}
+									type="update"
+									// params={pipParams}
+									// setParams={setPipParams}
+									show={show}
+									setShow={setShow}
+								/>
 							</Modal.Body>
 						</div>
 						<Modal.Footer>
 							<Button
 								size="md"
 								themeType="tertiary"
-								onClick={() => {
-									if (type === 'create') {
-										setOpenUpdate(false);
-									} else {
-										setPipParams({ ...pipParams, show: false, disableNext: false });
-									}
-								}}
+								onClick={setOpenUpdate(false)}
 							>
-								Back
+								{status ? 'Back' : 'Close'}
 
 							</Button>
 
+							{status && (
+								<Button
+									size="md"
+									style={{ marginLeft: '8px' }}
+									onClick={clickedNext}
+									disabled={disableNext}
+								>
+									{(show) ? ('Submit') : ('Next')}
+
+								</Button>
+							)}
+						</Modal.Footer>
+					</Modal>
+				)}
+
+			{openCreate
+				&& (
+					<Modal
+						show={openCreate}
+						onClose={() => {
+							setOpenCreate(false);
+							setItem({});
+						}}
+						size="lg"
+					>
+						<Modal.Header title="Create" />
+						<div className={styles.upload_modal}>
+							<Modal.Body>
+								{!status ? (
+									<div>
+										<p style={{ padding: '8px' }}>Do you wish to create new Probation or PIP</p>
+										<div className={styles.pip_select}>
+											<Button
+												size="xl"
+												className={styles.pip_select_btn}
+												themeType="secondary"
+												onClick={() => setStatus('probation')}
+												style={{ width: '120px' }}
+											>
+												Probations
+											</Button>
+
+											<Button
+												size="xl"
+												className={styles.pip_select_btn}
+												themeType="secondary"
+												onClick={() => setStatus('pip')}
+												style={{ width: '120px' }}
+											>
+												PIP
+											</Button>
+										</div>
+									</div>
+								) : (
+									<LogModal
+										item={item}
+										type={type}
+										setType={setType}
+										setItem={setItem}
+										show={show}
+										setShow={setShow}
+										setDisableNext={setDisableNext}
+									/>
+								)}
+							</Modal.Body>
+						</div>
+						<Modal.Footer>
 							<Button
 								size="md"
-								style={{ marginLeft: '8px' }}
-								onClick={clickedNext}
-								disabled={disableNext}
+								themeType="tertiary"
+								onClick={clickedBack}
 							>
-								{(show || type === 'create') ? ('Submit And Notify') : ('Next')}
+								{status ? 'Back' : 'Close'}
 
 							</Button>
+
+							{!isEmpty(item) && (
+								<Button
+									size="md"
+									style={{ marginLeft: '8px' }}
+									onClick={() => {
+										// console.log(item);
+										onSubmitCreate(item, status);
+										setOpenCreate(false);
+									}}
+									disabled={disableNext}
+								>
+									Submit
+								</Button>
+							)}
 						</Modal.Footer>
 					</Modal>
 				)}
@@ -211,14 +324,17 @@ function PIPProbations() {
 						<Modal.Header title="Logs" />
 						<div className={styles.upload_modal}>
 							<Modal.Body>
-								{/* <LogModal item={item} setItem={setItem} /> */}
 								<Tabs
 									activeTab={activeLogTab}
 									themeType="primary"
 									onChange={setActiveLogTab}
 								>
 									<TabPanel name="new" title="New Log">
-										<NewLog />
+										<NewLog
+											setComments={setComments}
+											checkList={checkList}
+											setCheckList={setCheckList}
+										/>
 									</TabPanel>
 									<TabPanel name="all" title="All Logs">
 										<AllLogs />
@@ -234,6 +350,14 @@ function PIPProbations() {
 							>
 								Back
 
+							</Button>
+
+							<Button
+								size="md"
+								themeType="primary"
+								onClick={onSubmitLog}
+							>
+								Submit
 							</Button>
 						</Modal.Footer>
 					</Modal>

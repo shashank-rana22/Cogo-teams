@@ -6,24 +6,25 @@ import { useEffect, useState } from 'react';
 import getDepartmentControls from '../../hooks/useGetDepartmentControls';
 import useGetControls from '../../utils/filterControls';
 import getMonthControls from '../../utils/monthControls';
+import { getFieldController } from '../Form/getFieldController';
 
 import styles from './styles.module.css';
 
 function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	const { Department = '', Designation = '' } = params;
-	const [managerName, setManagerName] = useState('');
+	// const [managerName, setManagerName] = useState('');
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const departmentDesignationControls = getDepartmentControls({ Department, Designation });
-	const managerControls = useGetControls({ name: 'manager_name' });
-	// const filterArr = ['manager_name'];
-	// const managerControls = useGetControls(filterArr);
+
+	// const managerControls = useGetControls({ name: 'manager_name' });
+	const managerControls = useGetControls(['manager_name']);
+
 	const monthControls = getMonthControls(params.Year, params.Month);
 
 	const { watch, control } = useForm();
-	const department = watch('department');
-	const designation = watch('designation');
+	const { department, designation, manager_name } = watch();
 
 	const setFilter = (val, type) => {
 		setParams({ ...params, [type]: val, Page: 1 });
@@ -40,8 +41,9 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query, department, designation]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => debounceQuery(managerName), [managerName]);
+	useEffect(() => {
+		debounceQuery(manager_name);
+	}, [debounceQuery, manager_name]);
 
 	return (
 
@@ -56,20 +58,27 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 			))}
 
 			{source === 'hr_dashboard' && (
-				<Input
-					{...managerControls}
-					onChange={setManagerName}
-					style={{ marginRight: '8px' }}
-				/>
-				// managerControls.map((cntrl) => (
-				// 	<Input
-				// 		{...cntrl}
-				// 		key={cntrl.name}
-				// 		type={cntrl.type}
-				// 		options={cntrl.options}
-				// 		placeholder={cntrl.placeholder}
-				// 	/>
-				// ))
+				// <Input
+				// 	{...managerControls}
+				// 	onChange={setManagerName}
+				// 	style={{ marginRight: '8px' }}
+				// />
+				managerControls.map((cntrl) => {
+					const Element = getFieldController(cntrl.type) || null;
+
+					if (!Element) return null;
+
+					return (
+
+						<Element
+							{...cntrl}
+							control={control}
+							key={cntrl.name}
+							id={`${cntrl.name}_input`}
+							style={{ marginRight: '8px' }}
+						/>
+					);
+				})
 			)}
 
 			{monthControls.map((cntrl) => {

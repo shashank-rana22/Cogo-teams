@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function CreatePip({ params, setParams = () => {} }) {
+function CreatePip({ item = {}, setItem = () => {}, setDisableNext = () => {} }) {
 	const date = new Date();
 	const [startDate, setStartDate] = useState();
 	const [endDate, setEndDate] = useState();
@@ -22,18 +22,15 @@ function CreatePip({ params, setParams = () => {} }) {
 	};
 
 	useEffect(() => {
+		setItem({
+			...item,
+			startDate,
+			endDate,
+		});
 		if (startDate && endDate) {
-			setParams({
-				...params,
-				disableNext: false,
-			});
-		} else {
-			setParams({
-				...params,
-				disableNext: true,
-			});
+			setDisableNext(false);
 		}
-	}, [startDate, endDate, setParams, params]);
+	}, [startDate, endDate]);
 
 	return (
 		<div className={styles.container}>
