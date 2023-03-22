@@ -43,7 +43,7 @@ function TakeTest() {
 
 	const [activeState, setActiveState] = useState('');
 
-	const [startTiming, setStartTiming] = useState(timer);
+	const [startTiming, setStartTiming] = useState();
 
 	useEffect(() => {
 		setActiveState(test_user_mapping_state);

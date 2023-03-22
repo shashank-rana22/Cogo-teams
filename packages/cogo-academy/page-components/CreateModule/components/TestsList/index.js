@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
-import { IcMSearchlight, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMArrowRotateUp, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -133,32 +132,55 @@ function TestsList({ activeTab, setActiveTab }) {
 											/>
 										</div>
 
-										<div className={styles.sort}>
-											<IcMArrowRotateDown style={{ cursor: 'pointer' }} />
+										<div
+											role="presentation"
+											onClick={() => {
+												setSort((prev) => !prev);
+												if (activeTab === 'tests') {
+													setParams((prev) => ({
+														...prev,
+														sort_type : sort ? 'asc' : 'desc',
+														filters   : {
+															...prev.filters,
+
+														},
+													}));
+												} else {
+													setQuestionListParams((prev) => ({
+														...prev,
+														sort_type : sort ? 'asc' : 'desc',
+														filters   : {
+															...prev.filters,
+
+														},
+													}));
+												}
+											}}
+											className={styles.sort}
+										>
+											{sort ? (
+												<IcMArrowRotateUp
+													width={16}
+													height={16}
+													fill="#393f70"
+													// eslint-disable-next-line max-len
+													style={{ marginRight: 4, transition: 'transform 0.5s', cursor: 'pointer', transform: 'rotate(180deg)' }}
+												/>
+											) : (
+												<IcMArrowRotateUp
+													width={16}
+													height={16}
+													fill="#393f70"
+													style={{
+														marginRight : 4,
+														cursor      : 'pointer',
+														transition  : 'transform 0.5s',
+													}}
+												/>
+											)}
+
 											<span
 												className={styles.span_text}
-												onClick={() => {
-													setSort((prev) => !prev);
-													if (activeTab === 'tests') {
-														setParams((prev) => ({
-															...prev,
-															sort_type : sort ? 'asc' : 'desc',
-															filters   : {
-																...prev.filters,
-
-															},
-														}));
-													} else {
-														setQuestionListParams((prev) => ({
-															...prev,
-															sort_type : sort ? 'asc' : 'desc',
-															filters   : {
-																...prev.filters,
-
-															},
-														}));
-													}
-												}}
 											>
 												Sort By
 											</span>

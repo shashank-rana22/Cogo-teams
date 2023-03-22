@@ -29,7 +29,7 @@ function Introduction({ setActiveState, loading, testData = {}, setStartTiming }
 		},
 	};
 	const time = new Date();
-	setStartTiming(time);
+	// setStartTiming(time);
 
 	return (
 		<div className={styles.container}>
