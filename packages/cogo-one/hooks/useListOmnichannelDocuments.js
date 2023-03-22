@@ -79,6 +79,9 @@ function useListOmnichannelDocuments({
 		orgId,
 		is_pan_uploaded,
 		is_gst_uploaded,
+		userId,
+		userMobile,
+		leadUserId,
 	};
 }
 

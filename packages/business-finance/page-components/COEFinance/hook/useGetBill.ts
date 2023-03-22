@@ -39,7 +39,7 @@ const useGetBill = (allParams = {}) => {
 				},
 			});
 		} catch (err) {
-			Toast.error(err);
+			Toast.error(err?.response?.data?.message);
 		}
 	};
 
@@ -50,7 +50,7 @@ const useGetBill = (allParams = {}) => {
 					params: { orgId: params?.orgId },
 				});
 			} catch (err) {
-				Toast.error(err);
+				Toast.error(err?.response?.data?.message);
 			}
 		};
 		handleAccPayments();
