@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function EventList(props) {
 	const { list, setEventListData, setToggleEvent, loading } = props;
 
-	if (true) {
+	if (loading) {
 		return (
 			<>
 				{[1, 2, 3].map((item) => (
@@ -35,6 +35,10 @@ function EventList(props) {
 						</div>
 
 						<div className={styles.rule}>
+							<p className={styles.rule_head}>
+								<Placeholder width="200px" style={{ marginBottom: '12px' }} />
+							</p>
+
 							{[11, 12].map(() => (
 								<div className={styles.rule_body}>
 									{[21, 22, 23, 24, 25].map(() => (
@@ -56,5 +60,27 @@ function EventList(props) {
 			</>
 		);
 	}
+
+	if (isEmpty(list)) {
+		return (
+			<div style={{ padding: '48px 0', backgroundColor: '#fff', marginBottom: '12px' }}>
+				<EmptyState height="400px" width="600px" flexDirection="column" />
+			</div>
+		);
+	}
+
+	return (
+		<div>
+			{list.map((data, index) => (
+				<EventListItem
+					key={data.id}
+					data={data}
+					index={index}
+					setEventListData={setEventListData}
+					setToggleEvent={setToggleEvent}
+				/>
+			))}
+		</div>
+	);
 }
 export default EventList;
