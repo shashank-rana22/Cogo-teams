@@ -9,14 +9,18 @@ const useFeedbackStats = (activeTab = '') => {
 	let data = {};
 	if (activeTab === 'feedbacks_received') {
 		data = {
-			type_address          : 30,
-			type_user_information : 70,
-			email                 : 5,
-			mobile_number         : 8,
-			work_scopes           : 10,
-			address               : 15,
-			gstin                 : 12,
-			others                : 20,
+			type: {
+				address          : 30,
+				user_information : 70,
+			},
+			sub_type: {
+				email         : 5,
+				mobile_number : 8,
+				work_scopes   : 10,
+				address       : 15,
+				gstin         : 12,
+				others        : 20,
+			},
 		};
 	} else if (activeTab === 'requests_sent') {
 		data = {
