@@ -12,7 +12,8 @@ const COMPLETION_MAPPING = {
 
 function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 	const {
-		condition_name:conditionName = '', expertise_type:Type = '',
+		condition_name: conditionName = '',
+		expertise_type: expertiseType = '',
 		description = '',
 		rules = [],
 	} = data || {};
@@ -23,11 +24,10 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 	};
 
 	return (
-		<section className={styles.list_item_container}>
+		<section className={styles.container}>
 			<div className={styles.top_div}>
 				#
 				{index + 1}
-
 				<IcMEdit style={{ cursor: 'pointer' }} onClick={handleEdit} />
 			</div>
 
@@ -35,31 +35,30 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 				<p className={styles.info_tag}>
 					Expertise :
 					{' '}
-					<b style={{ marginLeft: 4 }}>{startCase(Type)}</b>
+					<b style={{ marginLeft: 4 }}>{startCase(expertiseType || '')}</b>
 				</p>
-				<div className={styles.info_tag}>
+				<p className={styles.info_tag}>
 					Event Name :
 					{' '}
-					<h4 style={{ marginLeft: 4 }}>{conditionName}</h4>
-				</div>
+					<b style={{ marginLeft: 4 }}>{conditionName}</b>
+				</p>
 				<p className={styles.info_tag}>
 					Description :
 					{' '}
-					{description}
-
+					<i style={{ marginLeft: 4 }}>{description}</i>
 				</p>
 			</div>
 
-			<div className={styles.rule}>
-				<p className={styles.rule_head}>
+			<div>
+				<div className={styles.rule_head}>
 					Rule
-				</p>
+				</div>
+
 				{rules.map((res, i) => (
 					<div className={styles.rule_body}>
 						<div style={{ marginRight: '4px' }}>
 							Rule #
 							{i + 1}
-
 						</div>
 						<span style={{ marginRight: '4px' }}>
 							<Pill
@@ -67,9 +66,10 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 								size="l"
 								color="blue"
 							>
-								{startCase(res?.name)}
+								{startCase(res.name || '')}
 							</Pill>
 						</span>
+
 						<div style={{ marginRight: '4px' }}>
 							is triggered on
 						</div>
@@ -80,20 +80,22 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 								size="l"
 								color="#FEF3E9"
 							>
-								{COMPLETION_MAPPING[data?.event_state_on]}
+								{COMPLETION_MAPPING[data.event_state_on || '']}
 							</Pill>
 						</span>
+
 						having attribute
-						<div style={{ marginRight: '4px' }} />
+
 						<span style={{ marginRight: '4px' }}>
 							<Pill
 								key="Account"
 								size="l"
 								color="#FEF3E9"
 							>
-								{startCase(res?.rule_type)}
+								{startCase(res.rule_type || '')}
 							</Pill>
 						</span>
+
 						<span style={{ marginRight: '4px' }}>
 							and parameter of:
 						</span>
@@ -105,14 +107,11 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 								size="l"
 								color="#FEF3E9"
 							>
-								{startCase(res?.parameters)}
+								{startCase(res.parameters || '')}
 							</Pill>
 						</span>
-
 					</div>
-
 				))}
-
 			</div>
 
 		</section>
