@@ -1,7 +1,8 @@
 import { usePublicRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useListMail({ activeSelect }) {
+function useListMail({ activeSelect, senderMail }) {
+	console.log('senderMail:', senderMail);
 	const [pagination, setPagination] = useState(1);
 
 	const [{ data, loading }, trigger] = usePublicRequest({
@@ -31,6 +32,7 @@ function useListMail({ activeSelect }) {
 			await trigger({
 				params: {
 					email_address : 'dineshkumar.s@cogoport.com',
+					// email_address : senderMail,
 					foldername    : renderFolderName(),
 					page          : pagination,
 					// page_limit : page_limit || 10 Inbox,

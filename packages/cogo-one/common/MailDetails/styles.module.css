@@ -27,13 +27,13 @@
 .left_div {
 	display: flex;
 	justify-content: flex-start;
+	cursor: pointer;
 }
 
 .arrow_left {
 	width: 20px;
 	height: 20px;
 	margin-right: 8px;
-	cursor: pointer;
 	background: "#221F20";
 }
 

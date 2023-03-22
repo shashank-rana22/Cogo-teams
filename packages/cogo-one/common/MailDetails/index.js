@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { cl } from '@cogoport/components';
-import { IcMArrowLeft, IcMFilter, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 import { isEmpty, format, startCase } from '@cogoport/utils';
 
 import useListMail from '../../hooks/useListMail';
@@ -14,8 +14,9 @@ function MailDetails({
 	setActiveSelect = () => {},
 	setActiveMail = () => {},
 	activeMail,
+	senderMail,
 }) {
-	const { data = {}, loading } = useListMail({ activeSelect });
+	const { data = {}, loading } = useListMail({ activeSelect, senderMail });
 	const {
 		value: list = [],
 		handleScroll = () => {},
@@ -44,8 +45,8 @@ function MailDetails({
 		<div>
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<div className={styles.left_div}>
-						<IcMArrowLeft className={styles.arrow_left} onClick={handleClick} />
+					<div role="presentation" className={styles.left_div} onClick={handleClick}>
+						<IcMArrowLeft className={styles.arrow_left} />
 						<div className={styles.title}>{startCase(activeSelect.replace('_', ' '))}</div>
 					</div>
 					{/* <IcMFilter className={styles.filter_icon} /> */}
