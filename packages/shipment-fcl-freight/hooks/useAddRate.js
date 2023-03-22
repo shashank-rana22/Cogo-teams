@@ -8,6 +8,7 @@ const useAddRate = ({
 	refetch = () => {},
 	setAddRate = () => {},
 	onCancel = () => {},
+	setShowChargeCodes = () => {},
 	setAddSellPrice = () => {},
 	filters,
 }) => {
@@ -66,11 +67,12 @@ const useAddRate = ({
 
 			Toast.success('Service Added successfully');
 			setAddRate(false);
+			setShowChargeCodes(false);
 			setAddSellPrice(false);
 			onCancel();
 			refetch();
 		} catch (err) {
-			Toast.error(err?.data);
+			console.log(err);
 		}
 	};
 

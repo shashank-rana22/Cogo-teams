@@ -80,7 +80,6 @@ function DefaultForm({ companyType = '', tradePartyType = '', importer_exporter_
 							{!isEmpty(formValues?.address) && (
 								<div className={styles.form_item_container}>
 									<div>Pincode</div>
-									{/* <div>{formValues.address?.split('::')?.[1]}</div> */}
 									<Input disabled value={formValues.address?.split('::')?.[1]} size="sm" />
 								</div>
 							)}

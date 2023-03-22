@@ -1,10 +1,9 @@
 const control = [
 	{
-		name      : 'gst_list',
-		type      : 'select',
-		span      : 6,
-		className : 'primary md',
-		showIn    : [
+		name   : 'gst_list',
+		type   : 'select',
+		span   : 6,
+		showIn : [
 			'billingAddress',
 		],
 		rules: {

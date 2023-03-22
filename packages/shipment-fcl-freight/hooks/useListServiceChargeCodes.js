@@ -1,8 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 
-const useListServiceChargeCodes = ({ shipment_id, services, isSeller = false, show }) => {
+const useListServiceChargeCodes = ({ shipment_id, services, isSeller = false }) => {
 	const [filters, setFilters] = useState({
 		name         : undefined,
 		service_type : undefined,

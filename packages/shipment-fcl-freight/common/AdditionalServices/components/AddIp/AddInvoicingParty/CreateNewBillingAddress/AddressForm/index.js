@@ -3,17 +3,14 @@ import React from 'react';
 
 import control from './address_controls';
 
-function AddressForm() {
+function AddressForm({ isUnderGst }) {
 	const { register, handleSubmit, formState: { errors } } = useForm();
 
-	console.log(control, 'control');
-
-	const onSubmit = (data) => console.log(data);
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form>
 			{control.map((field, index) => (
 				<div key={index}>
-					{field.type === 'select' && (
+					{/* {field.type === 'select' && (
 						<select {...register(field.name, field.rules)}>
 							{field.options.map((option, index) => (
 								<option key={index} value={option.value}>
@@ -21,7 +18,7 @@ function AddressForm() {
 								</option>
 							))}
 						</select>
-					)}
+					)} */}
 
 					{field.type === 'text' && (
 						<input type="text" {...register(field.name, field.rules)} />
@@ -32,12 +29,12 @@ function AddressForm() {
 							{field.defaultOptions && (
 								<option value="">Select location</option>
 							)}
-							{field.optionsListKey
+							{/* {field.optionsListKey
 									&& locations[field.optionsListKey].map((option, index) => (
 										<option key={index} value={option[field.valueKey]}>
 											{option[field.labelKey]}
 										</option>
-									))}
+									))} */}
 						</select>
 					)}
 
@@ -69,6 +66,7 @@ function AddressForm() {
 					)}
 				</div>
 			))}
+
 			<button type="submit">Submit</button>
 		</form>
 	);

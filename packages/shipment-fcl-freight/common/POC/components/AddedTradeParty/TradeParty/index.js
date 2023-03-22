@@ -6,14 +6,20 @@ import { useState } from 'react';
 import POC_WORKSCOPE_MAPPING from '../../../../../constants/POC_WORKSCOPE_MAPPING';
 import Card from '../../Card';
 
+import LabelValue from './LabelValue';
 import styles from './styles.module.css';
 
 function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc = () => {} }) {
 	const [show, setShow] = useState({});
 
 	const {
-		trade_partner_details:{ business_name = '', poc_data = {} } = {}, address = [],
-		trade_party_type = '', trade_party_id = '',
+		trade_partner_details:{
+			business_name = '',
+			poc_data = {},
+		} = {},
+		address = [],
+		trade_party_type = '',
+		trade_party_id = '',
 	} = data;
 	const { address:first_address = '' } = address[0] || {};
 
@@ -24,19 +30,6 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 		Workscope    : (poc_data?.work_scopes || []).map((i) => POC_WORKSCOPE_MAPPING[i]).join(', '),
 
 	};
-
-	function LabelValue({ label, value }) {
-		return !isEmpty(value) ? (
-			<div className={styles.label_value_container}>
-				<div className={styles.label}>
-					{label}
-					{' '}
-					:
-				</div>
-				<div className={styles.value}>{value}</div>
-			</div>
-		) : null;
-	}
 
 	const editAction = () => {
 		setAddCompany({ trade_party_type });

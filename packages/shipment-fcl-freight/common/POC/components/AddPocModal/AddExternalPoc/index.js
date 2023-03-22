@@ -41,6 +41,7 @@ function AddExternalPoc({
 	const title = (
 		<div>
 			<div>{`ADD EXTERNAL ${upperCase(trade_type)} POC`}</div>
+
 			<div>
 				Company Name :
 				{' '}

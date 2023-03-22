@@ -1,10 +1,8 @@
-import { Tooltip, Grid } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from '../styles.module.css';
-
-// //const { Col } = Grid;
 
 function Field({ field }) {
 	const stylesCol = {
@@ -14,11 +12,7 @@ function Field({ field }) {
 	};
 
 	return (
-		<Col
-			xs={field.span}
-			sm={field.span}
-			md={field.span}
-			lg={field.span}
+		<div
 			style={field.hasStyle ? field.styles : stylesCol}
 			key={field?.key || field?.label}
 		>
@@ -34,7 +28,7 @@ function Field({ field }) {
 					field.label
 				)}
 			</div>
-		</Col>
+		</div>
 	);
 }
 export default Field;
