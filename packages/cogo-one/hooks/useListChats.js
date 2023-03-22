@@ -135,7 +135,7 @@ const useListChats = ({
 			...omniChannelQuery,
 			where(
 				'new_message_sent_at',
-				'<',
+				'<=',
 				Number(listData?.lastMessageTimeStamp),
 			),
 			limit(PAGE_LIMIT),
@@ -147,7 +147,7 @@ const useListChats = ({
 
 		const { resultList = {} } = dataFormatter(prevChats);
 
-		const lastMessageTimeStamp = prevChats[(prevChats.length || 0) - 1]?.data()?.created_at;
+		const lastMessageTimeStamp = prevChats[(prevChats.length || 0) - 1]?.data()?.new_message_sent_at;
 		const isLastPage = prevChats?.length < PAGE_LIMIT;
 
 		setListData((p) => ({
