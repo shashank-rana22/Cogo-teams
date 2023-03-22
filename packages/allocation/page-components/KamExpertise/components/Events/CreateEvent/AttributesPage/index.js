@@ -19,7 +19,7 @@ function AttributePage(props) {
 		formState: { errors },
 	} = formProps;
 
-	if (loading) {
+	if (loading && watchListener) {
 		return (
 			<div className={styles.account_attributes}>
 				<div className={styles.account_attribute_text}>
@@ -30,7 +30,7 @@ function AttributePage(props) {
 
 				<section className={styles.row_container}>
 
-					{[1, 2, 3, 4, 5].map(() => (
+					{[1, 2, 3, 4, 5, 6].map(() => (
 						<div className={styles.attribute_form_group}>
 							<div
 								className={`${styles.input_group}

@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { snakeCase } from '@cogoport/utils';
 
 const useUpdateSingleBadge = (props) => {
 	const { medal, id, image_url:previous_image_url, score:previous_score, onClose, listRefetch } = props;
@@ -47,7 +48,7 @@ const useUpdateSingleBadge = (props) => {
 				performed_by_type : 'user',
 				status            : 'active',
 				id,
-				medal,
+				medal             : snakeCase(medal),
 				image_url         : image_url || previous_image_url,
 				score             : score || previous_score,
 			};
