@@ -83,7 +83,7 @@ function TestsList({ activeTab, setActiveTab }) {
 					{Object.values(componentMapping).map((tab) => {
 						const { key, title, component:ContainerComponent = null, componentProps } = tab;
 
-						const { data: activeComponentData, loading: activeComponentLoading } = componentProps || {};
+						const { data: activeComponentData } = componentProps || {};
 
 						return (
 							<TabPanel
@@ -91,7 +91,7 @@ function TestsList({ activeTab, setActiveTab }) {
 								title={title}
 								className={styles.tabItem}
 							>
-								{!isEmpty(activeComponentData?.list) && !activeComponentLoading ? (
+								{!isEmpty(activeComponentData?.list) ? (
 									<div className={styles.filter}>
 										<div>
 											<Input
