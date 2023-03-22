@@ -147,7 +147,7 @@ const useListChats = ({
 
 		const { resultList = {} } = dataFormatter(prevChats);
 
-		const lastMessageTimeStamp = prevChats[(prevChats.length || 0) - 1]?.data()?.created_at;
+		const lastMessageTimeStamp = prevChats[(prevChats.length || 0) - 1]?.data()?.new_message_sent_at;
 		const isLastPage = prevChats?.length < PAGE_LIMIT;
 
 		setListData((p) => ({
