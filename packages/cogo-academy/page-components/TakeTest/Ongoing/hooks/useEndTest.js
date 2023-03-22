@@ -21,6 +21,8 @@ const useEndTest = () => {
 					user_id, test_id,
 				},
 			});
+
+			localStorage.removeItem('currentQuestion');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
