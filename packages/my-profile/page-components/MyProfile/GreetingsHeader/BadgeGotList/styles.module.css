@@ -1,0 +1,28 @@
+.badge_list {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+}
+
+.badge_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.badge {
+    height: 48px;
+    width: 48px;
+}
+
+.badge img {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.empty {
+    display: flex;
+    align-items: center;
+}

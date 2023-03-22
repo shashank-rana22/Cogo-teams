@@ -13,9 +13,10 @@ function useGetEventList() {
 	const [expertise, setExpertise] = useState();
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
-	// Todo use a single state
-	const [toggleEvent, setToggleEvent] = useState('eventList');
-	const [eventListData, setEventListData] = useState({});
+	const [eventListData, setEventListData] = useState({
+		data        : {},
+		toggleEvent : 'eventList',
+	});
 
 	const [params, setParams] = useState({
 		page    : 1,
@@ -64,8 +65,6 @@ function useGetEventList() {
 		setExpertise,
 		expertise,
 		onClickBack,
-		toggleEvent,
-		setToggleEvent,
 		eventListData,
 		setEventListData,
 	};

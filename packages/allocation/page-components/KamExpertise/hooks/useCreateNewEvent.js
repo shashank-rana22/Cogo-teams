@@ -8,7 +8,7 @@ function useCreateNewEvent(props) {
 	const {
 		attributeList = [],
 		listRefetch = () => {},
-		setToggleEvent = () => {},
+		setEventListData = () => {},
 	} = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -59,7 +59,10 @@ function useCreateNewEvent(props) {
 
 				Toast.success('Event Successfully Created!');
 				listRefetch();
-				setToggleEvent('eventList');
+				setEventListData({
+					data        : {},
+					toggleEvent : 'eventList',
+				});
 			} catch (error) {
 				Toast.error(
 					getApiErrorString(error?.response?.data)
