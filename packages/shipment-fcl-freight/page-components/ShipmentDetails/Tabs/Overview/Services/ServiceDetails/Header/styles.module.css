@@ -31,9 +31,9 @@
 
 .header_wrap{
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	
 	[data-tippy-root] {
 		z-index: 999 !important;
 	}
@@ -48,4 +48,9 @@
 	&.cancelled {
 		color: #bdbdbd;
 	}
+}
+
+.heading_wrap{
+	display: flex;
+	justify-content: space-between;
 }

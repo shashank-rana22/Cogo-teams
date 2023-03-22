@@ -81,7 +81,8 @@ function CancelShipment({
 						: 'Cancel Shipment'}
 					/>
 
-					<CancellationModal
+					<Modal.Body>
+						<CancellationModal
 						// formValues={formValues}
 						// isIE={isIE}
 						// handleSubmit={handleSubmit}
@@ -92,9 +93,11 @@ function CancelShipment({
 						// disabledButton={disabledButton}
 						// onErrors={onErrors}
 						// errors={errors}
-						showRequest={showRequest}
-						handleClose={handleClose}
-					/>
+							showRequest={showRequest}
+							handleClose={handleClose}
+						/>
+
+					</Modal.Body>
 					<Modal.Footer>
 						{!showRequest ? (
 							<Button

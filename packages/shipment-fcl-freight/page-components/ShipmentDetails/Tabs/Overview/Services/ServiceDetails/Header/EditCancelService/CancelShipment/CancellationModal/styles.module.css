@@ -110,14 +110,14 @@
 }
 
 .radio_container{
+	padding-bottom: 10px;
+	
     :global{
         .ui_radiogroup_container{
 			display: block;
+			padding-left: 10px;
         }
 
-        .ui_radio_container:first-of-type{
-            padding: 10px 0;
-        }
         .ui_radio_label{
             font-size: 12px;
             font-weight: 600;
@@ -126,5 +126,5 @@
 }
 
 .input{
-	margin-top: 10px;
+	margin-top: 20px;
 }

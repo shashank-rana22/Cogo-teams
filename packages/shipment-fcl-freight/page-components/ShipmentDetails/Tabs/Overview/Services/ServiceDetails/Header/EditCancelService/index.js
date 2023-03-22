@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import CancelShipment from './CancelShipment';
 import styles from './styles.module.css';
+import SupplierReallocation from './SupplierReallocation';
 
 const serviceCancellationStates = [
 	'init',
@@ -96,15 +97,15 @@ function EditCancelService({
 
 	const content = (
 		<div>
-			{editSupplier ? (
-				<div style={{ width: '100%' }}>
-					<div className={styles.text} onClick={() => setShow(true)}>Edit</div>
-					{canCancelService
+			{/* {editSupplier ? ( */}
+			<div style={{ width: '100%' }}>
+				<div className={styles.text} onClick={() => setShow(true)}>Edit</div>
+				{canCancelService
 					&& shipmentData?.shipment_type !== 'domestic_air_freight' ? (
 						<div className={styles.line} />
-						) : null}
-				</div>
-			) : null}
+					) : null}
+			</div>
+			{/* ) : null} */}
 			{/* {canCancelService
 			&& shipmentData?.shipment_type !== 'domestic_air_freight' ? ( */}
 			<CancelShipment
@@ -163,58 +164,61 @@ function EditCancelService({
 					/>
 				</div>
 			</Popover>
-			{/* {showParamEdit ? (
+			{showParamEdit ? (
 				<Modal
 					className="primary lg"
 					show={showParamEdit}
 					onClose={() => setShowParamEdit(false)}
 				>
-					<EditParameters
+					{/* <EditParameters
 						shipmentData={shipmentData}
 						boxesToShow={boxesToShow}
 						onCancel={() => setShowParamEdit(false)}
 						newFilteredControls={newFilteredControls}
 						services={serviceList}
 						refetchServices={refetchServices}
-					/>
+					/> */}
+					hii3
 				</Modal>
-			) : null} */}
-			{/* {showConsolEdit ? (
-				<StyledModal
+			) : null}
+			{showConsolEdit ? (
+				<Modal
 					className="primary lg"
 					show={showConsolEdit}
 					onClose={() => setShowConsolEdit(false)}
 				>
-					<EditConsolParameters
+					{/* <EditConsolParameters
 						shipmentData={shipmentData}
 						setShowConsolEdit={setShowConsolEdit}
 						refetchServices={refetchServices}
 						refetchList={refetchList}
-					/>
-				</StyledModal>
-			) : null} */}
-			{/* {showContainerEdit ? (
+					/> */}
+					hii2
+				</Modal>
+			) : null}
+			{showContainerEdit ? (
 				<Modal
 					className="primary xl"
 					show={showContainerEdit}
 					onClose={() => setShowContainerEdit(false)}
 				>
-					<EditContainerParameters
+					{/* <EditContainerParameters
 						shipmentData={shipmentData}
 						setShowContainerEdit={setShowContainerEdit}
 						refetchServices={refetchServices}
 						refetchList={refetchList}
-					/>
+					/> */}
+					hii
 				</Modal>
-			) : null} */}
-			{/* {show ? (
+			) : null}
+			{show ? (
 				<SupplierReallocation
 					serviceData={serviceData}
 					setShow={setShow}
 					show={show}
 					refetchServices={refetchServices}
 				/>
-			) : null} */}
+			) : null}
 		</div>
 	);
 }
