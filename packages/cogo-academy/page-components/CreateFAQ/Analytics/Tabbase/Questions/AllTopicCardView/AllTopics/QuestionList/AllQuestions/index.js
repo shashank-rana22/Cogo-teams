@@ -1,5 +1,5 @@
 import { Pill, Tooltip, Pagination } from '@cogoport/components';
-import startCase from '@cogoport/utils/src/utilities/startCase';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import StyledTable from '../../../../../../../../../commons/StyledTable';
