@@ -38,21 +38,21 @@ const downloadButton = {
 };
 
 const footerImages = [
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/30186a4d8094f78fffba0aeac1847cd0/original_1.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/34f4ab91d2f08e432f5e99cec869e07b/original_2.png',
 	'https://cogoport-production.sgp1.digitaloceanspaces.com/1fcd0257b396ea304a7aebfeaceaee76/original_3.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/34f4ab91d2f08e432f5e99cec869e07b/original_2.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/30186a4d8094f78fffba0aeac1847cd0/original_1.png',
+	'https://cogoport-production.sgp1.digitaloceanspaces.com/5b6c3ea3e1a28d1c3060f835ad206e99/copy_9.png',
 	'https://cogoport-production.sgp1.digitaloceanspaces.com/1c5be0fc713882e9b85303b62d3f1ac8/copy_4.png',
 	'https://cogoport-production.sgp1.digitaloceanspaces.com/3a65756e817610ddf75769c89145eb84/copy_5.png',
 	'https://cogoport-production.sgp1.digitaloceanspaces.com/84eaddd1db3e444b25d1ce0066f19581/copy_6.png',
 	'https://cogoport-production.sgp1.digitaloceanspaces.com/ca3a74c08dd2aabcba392de64cd04ed6/copy_7.png',
 	'https://cogoport-production.sgp1.digitaloceanspaces.com/c56cba1039292819dd6d700d5d8f5d07/copy_8.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/5b6c3ea3e1a28d1c3060f835ad206e99/copy_9.png',
 	'https://cogoport-production.sgp1.digitaloceanspaces.com/94fec99404e921d7a1de47c30a4e5afa/copy_10.png',
 	'https://cogoport-production.sgp1.digitaloceanspaces.com/daabebf1b3ade5afb890dbc79ce3b9eb/copy_11.png',
 	'https://cogoport-production.sgp1.digitaloceanspaces.com/7c2328f811865365b3c50d0fc23849fc/copy_12.png',
 ];
 
-const backPage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/6cb104f946c85403b742cc07fd6e63b1/back.jpg';
+const backPage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg';
 
 function GenerateMawb({
 	taskItem = {},
@@ -152,10 +152,13 @@ function GenerateMawb({
 					if (!whiteout) {
 						pdf.addImage(item, 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
 					}
-
 					if (download24) {
-						pdf.addPage();
-						pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+						if (i < 3) {
+							pdf.addPage();
+							pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+						} else {
+							pdf.addPage();
+						}
 					}
 					if (i < 11) {
 						pdf.addPage();
@@ -257,7 +260,6 @@ function GenerateMawb({
 					/>
 					<ShipmentDetails
 						formData={filteredData}
-						taskItem={taskItem}
 						whiteout={whiteout}
 					/>
 					<ContainerDetails
