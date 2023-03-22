@@ -13,8 +13,7 @@ function Questions({ props = {}, date = '', setDate = () => {} }) {
 		if (selectedItem === 'All_Questions') {
 			refetchStats();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedItem]);
+	}, [refetchStats, selectedItem]);
 
 	return (
 		<div>

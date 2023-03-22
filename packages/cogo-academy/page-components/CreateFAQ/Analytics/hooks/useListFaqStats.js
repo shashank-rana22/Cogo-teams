@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 function useListFaqStats({
 	date = '',
@@ -13,7 +13,7 @@ function useListFaqStats({
 		url    : 'list_faq_stats',
 	}, { manual: true });
 
-	const fetchFaqStats = async () => {
+	const fetchFaqStats = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -38,7 +38,7 @@ function useListFaqStats({
 		} catch (error) {
 			console.log('error :: ', error);
 		}
-	};
+	}, [endDate, startDate, trigger]);
 
 	useEffect(() => {
 		fetchFaqStats();
