@@ -7232,6 +7232,19 @@ const partner = {
 			module      : 'Overseas',
 			feature     : 'Overseas',
 		},
+
+	],
+	overheads: [
+		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'trade_party',
+		},
 		{
 			api          : 'list_vendors',
 			access_type  : 'private',
