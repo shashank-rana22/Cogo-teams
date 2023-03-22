@@ -21,7 +21,6 @@ function LeaveTest({ leaveTest, setLeaveTest }) {
 						themeType="secondary"
 					>
 						Yes, I want to leave
-
 					</Button>
 					<Button themeType="accent" onClick={() => setLeaveTest(false)}>Continue the test</Button>
 				</div>
