@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../../../common/EmptyState';
+import EmptyState from '../../../../../../common/EmptyState';
 
 import EventListItem from './EventListItem';
 import styles from './styles.module.css';

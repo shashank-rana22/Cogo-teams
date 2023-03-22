@@ -14,7 +14,7 @@ const ATTRIBUTE_MAPPING = {
 
 function useUpdateEvent(props) {
 	const {
-		updateEventListData = {}, listRefetch = () => {}, attributeList = [], setToggleEvent = () => {},
+		eventListData = {}, listRefetch = () => {}, attributeList = [], setToggleEvent = () => {},
 	} = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -31,7 +31,7 @@ function useUpdateEvent(props) {
 		description : eventDescription,
 		rule_mapping_id : ruleMappingId,
 		rules,
-	} = updateEventListData;
+	} = eventListData;
 
 	const formProps = useForm({
 		defaultValues: {
