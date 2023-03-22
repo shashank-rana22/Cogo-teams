@@ -7,7 +7,7 @@ import EventListItem from './EventListItem';
 import styles from './styles.module.css';
 
 function EventList(props) {
-	const { list, setEventListData, setToggleEvent, loading } = props;
+	const { list, setEventListData, loading } = props;
 
 	if (loading) {
 		return (
@@ -43,8 +43,7 @@ function EventList(props) {
 										<Placeholder
 											width="120px"
 											style={{
-												marginBottom : '4px',
-												marginRight  : '12px',
+												margin: '0 12px 4px 0',
 											}}
 										/>
 									))}
@@ -61,7 +60,13 @@ function EventList(props) {
 
 	if (isEmpty(list)) {
 		return (
-			<div style={{ padding: '48px 0', backgroundColor: '#fff', marginBottom: '12px' }}>
+			<div
+				style={{
+					padding    : '48px 0',
+					background : '#fff',
+					margin     : '0 0 60px 0',
+				}}
+			>
 				<EmptyState height="400px" width="600px" flexDirection="column" />
 			</div>
 		);
@@ -75,7 +80,6 @@ function EventList(props) {
 					data={data}
 					index={index}
 					setEventListData={setEventListData}
-					setToggleEvent={setToggleEvent}
 				/>
 			))}
 		</div>

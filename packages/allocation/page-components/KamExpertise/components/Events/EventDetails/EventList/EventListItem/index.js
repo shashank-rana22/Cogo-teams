@@ -10,7 +10,7 @@ const COMPLETION_MAPPING = {
 
 };
 
-function EventListItem({ data, index, setEventListData, setToggleEvent }) {
+function EventListItem({ data, index, setEventListData }) {
 	const {
 		id, condition_name:conditionName = '', expertise_type:Type = '',
 		description = '',
@@ -18,8 +18,7 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 	} = data || {};
 
 	const handleEdit = () => {
-		setEventListData(data);
-		setToggleEvent('updateEvent');
+		setEventListData({ data, toggleEvent: 'updateEvent' });
 	};
 
 	return (

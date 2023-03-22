@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function EventDetails(props) {
 	const {
-		setToggleEvent, setEventListData, debounceQuery, loading, setSearchValue, searchValue, expertise, setExpertise,
+		setEventListData, debounceQuery, loading, setSearchValue, searchValue, expertise, setExpertise,
 		list = [], paginationData, getNextPage,
 	} = props;
 
@@ -15,7 +15,6 @@ function EventDetails(props) {
 	return (
 		<div>
 			<Header
-				setToggleEvent={setToggleEvent}
 				setEventListData={setEventListData}
 				debounceQuery={debounceQuery}
 				loading={loading}
@@ -29,7 +28,6 @@ function EventDetails(props) {
 				<EventList
 					list={list}
 					setEventListData={setEventListData}
-					setToggleEvent={setToggleEvent}
 					loading={loading}
 				/>
 
