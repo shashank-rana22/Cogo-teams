@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import React from 'react';
 
 import AddInvoicingParty from './AddInvoicingParty';

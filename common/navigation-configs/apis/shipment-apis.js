@@ -1323,9 +1323,15 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
+<<<<<<< Updated upstream
 		api          : 'list_stakeholders',
 		access_type  : 'private',
 		service_name : 'bookings',
+=======
+		api          : 'get_business',
+		access_type  : 'private',
+		service_name : 'business',
+>>>>>>> Stashed changes
 	},
 ];
 
