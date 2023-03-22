@@ -41,8 +41,6 @@ function SingleQuestion({ question = {}, currentQuestion, total_question, loadin
 				<p className={styles.question_type}>Single Answer Correct</p>
 			</div>
 			<div className={styles.question}>
-				Q
-				{' '}
 				{question_text}
 			</div>
 

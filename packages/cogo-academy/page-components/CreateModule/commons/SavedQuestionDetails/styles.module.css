@@ -13,8 +13,8 @@
 }
 
 .table_container {
-	padding: unset !important;
 	max-width: 100%;
+	padding: unset !important;
 	overflow: scroll;
 
 	:global {

@@ -83,7 +83,7 @@ function TestsList({ activeTab, setActiveTab }) {
 					{Object.values(componentMapping).map((tab) => {
 						const { key, title, component:ContainerComponent = null, componentProps } = tab;
 
-						const { data: activeComponentData, loading: activeComponentLoading } = componentProps || {};
+						const { data: activeComponentData } = componentProps || {};
 
 						return (
 							<TabPanel
@@ -91,7 +91,7 @@ function TestsList({ activeTab, setActiveTab }) {
 								title={title}
 								className={styles.tabItem}
 							>
-								{!isEmpty(activeComponentData?.list) && !activeComponentLoading ? (
+								{!isEmpty(activeComponentData?.list) ? (
 									<div className={styles.filter}>
 										<div>
 											<Input
@@ -160,22 +160,11 @@ function TestsList({ activeTab, setActiveTab }) {
 										>
 											{sort ? (
 												<IcMArrowRotateUp
-													width={16}
-													height={16}
-													fill="#393f70"
-													// eslint-disable-next-line max-len
-													style={{ marginRight: 4, transition: 'transform 0.5s', cursor: 'pointer', transform: 'rotate(180deg)' }}
+													className={`${styles.styled_icon} ${styles.rotate}`}
 												/>
 											) : (
 												<IcMArrowRotateUp
-													width={16}
-													height={16}
-													fill="#393f70"
-													style={{
-														marginRight : 4,
-														cursor      : 'pointer',
-														transition  : 'transform 0.5s',
-													}}
+													className={styles.styled_icon}
 												/>
 											)}
 
