@@ -20,6 +20,8 @@ export {
 	CountrywiseTaxNumberSelectController,
 } from './page-components/Controlled/CountrywiseTaxNumberSelectController';
 export { default as TextAreaController } from './page-components/Controlled/TextAreaController';
+export { default as CheckboxController } from './page-components/Controlled/CheckboxController';
+export { default as CountrySelectController } from './page-components/Controlled/CountrySelectController';
 
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';

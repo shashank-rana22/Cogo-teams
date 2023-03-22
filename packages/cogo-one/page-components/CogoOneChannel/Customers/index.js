@@ -1,8 +1,10 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
-import React from 'react';
+import { IcMPlus } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import InactiveModal from './InactiveModal';
 import MessageList from './MessageList';
+import NewWhatsappMessage from './NewWhatsappMessage';
 import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
@@ -19,7 +21,7 @@ function Customers({
 	setActiveTab = () => {},
 	toggleStatus,
 	messagesList = [],
-	unReadChatsCount,
+	unReadChatsCount = '',
 	setAppliedFilters = () => {},
 	appliedFilters = {},
 	fetchworkPrefernce = () => {},
@@ -33,7 +35,11 @@ function Customers({
 	showBotMessages = false,
 	setShowBotMessages,
 	setShowDialModal = () => {},
+	handleScroll = () => {},
+	setModalType = () => {},
+	modalType = {},
 }) {
+	const [isChecked, setIsChecked] = useState(false);
 	const onChangeToggle = () => {
 		if (toggleStatus) {
 			setOpenModal(true);
@@ -41,6 +47,11 @@ function Customers({
 			updateUserStatus({ status: 'active' });
 		}
 	};
+
+	const handleOpenOptions = () => {
+		setIsChecked(!isChecked);
+	};
+	const unReadChatsCountDisplay = Number(unReadChatsCount || 0) > 49 ? '49+' : unReadChatsCount;
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
@@ -63,18 +74,15 @@ function Customers({
 
 					</div>
 				) : (
-					activeTab === 'message' && (
-						<div className={styles.bot_messages}>
-							<div>Only Bot Messages</div>
-							<Toggle
-								name="bot messages"
-								size="sm"
-								showOnOff
-								onChange={() => setShowBotMessages((p) => !p)}
-								checked={showBotMessages}
-							/>
-						</div>
-					)
+					<div className={styles.bot_messages}>
+						<div>Bot Messages</div>
+						<Toggle
+							name="online"
+							size="sm"
+							onChange={() => setShowBotMessages((p) => !p)}
+							checked={showBotMessages}
+						/>
+					</div>
 				)}
 			</div>
 			<div className={styles.tabs}>
@@ -84,13 +92,14 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
+					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCountDisplay} />
 					<TabPanel name="voice" title="Voice" />
 				</Tabs>
 			</div>
 
 			{activeTab === 'message' && (
 				<MessageList
+					isomniChannelAdmin={isomniChannelAdmin}
 					messagesList={messagesList}
 					setActiveMessage={setActiveMessage}
 					setSearchValue={setSearchValue}
@@ -103,6 +112,10 @@ function Customers({
 					activeCardId={activeCardId}
 					setActiveCardId={setActiveCardId}
 					showBotMessages={showBotMessages}
+					setShowBotMessages={setShowBotMessages}
+					handleScroll={handleScroll}
+					setModalType={setModalType}
+					modalType={modalType}
 				/>
 			)}
 
@@ -122,6 +135,45 @@ function Customers({
 					loading={statusLoading}
 					updateUserStatus={updateUserStatus}
 
+				/>
+			)}
+			<div className={styles.wrapper}>
+
+				<input
+					id="plus_checkbox"
+					type="checkbox"
+					className={styles.checkbox}
+					checked={isChecked}
+				/>
+				<div htmlFor="plus_checkbox" className={styles.plus_circle}>
+					<div className={styles.wheel_box}>
+						<IcMPlus onClick={handleOpenOptions} fill="#ffffff" width={35} height={35} />
+						<div className={styles.wheel}>
+							<div className={`${styles.action} ${styles.call_icon}`}>
+								<img
+									onClick={() => setShowDialModal(true)}
+									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/call_light.svg"
+									alt="call icon"
+									role="presentation"
+								/>
+							</div>
+							<div className={`${styles.action} ${styles.whatsapp_icon}`}>
+								<img
+									onClick={() => setModalType({ type: 'whatsapp_new_message_modal', data: {} })}
+									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg"
+									alt="whatsapp icon"
+									role="presentation"
+								/>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{modalType?.type && (
+				<NewWhatsappMessage
+					setModalType={setModalType}
+					modalType={modalType}
 				/>
 			)}
 		</div>

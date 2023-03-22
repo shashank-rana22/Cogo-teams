@@ -1,4 +1,5 @@
-import { Avatar, Pill, Placeholder } from '@cogoport/components';
+/* eslint-disable no-undef, max-len */
+import { Avatar, Pill, Placeholder, Toast } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -6,6 +7,7 @@ import { useState } from 'react';
 import EmptyState from '../../../../common/EmptyState';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetUser from '../../../../hooks/useGetUser';
+import hideDetails from '../../../../utils/hideDetails';
 
 import ConversationContainer from './ConversationContainer';
 import styles from './styles.module.css';
@@ -18,8 +20,9 @@ function AgentDetails({
 	formattedMessageData = {},
 	customerId = '',
 	updateLeaduser = () => {},
+	setModalType = () => {},
 }) {
-	const { user_details = null, user_type } = activeMessageCard || {};
+	const { user_details = null, user_type, id = '' } = activeMessageCard || {};
 	const {
 		user_id,
 		lead_user_id,
@@ -98,7 +101,12 @@ function AgentDetails({
 		}
 	};
 
-	return (isEmpty(userId) && isEmpty(leadUserId)) && isEmpty(mobile_no) ? (
+	const handleClick = () => {
+		navigator.clipboard.writeText(`https://admin.cogoport.com/v2/6fd98605-9d5d-479d-9fac-cf905d292b88/cogo-one/omni-channel?assigned_chat=${id}`);
+		Toast.success('Copied!!!');
+	};
+
+	return (isEmpty(userId) && isEmpty(leadUserId) && isEmpty(mobile_no)) ? (
 		<>
 			<div className={styles.title}>Profile</div>
 			<EmptyState
@@ -116,9 +124,19 @@ function AgentDetails({
 		</>
 	) : (
 		<>
-			<div className={styles.title}>Profile</div>
+			<div className={styles.top_div}>
+				<div className={styles.title}>Profile</div>
+				{activeTab === 'message' && (
+					<div
+						role="presentation"
+						className={styles.copy_link}
+						onClick={handleClick}
+					>
+						Share
+					</div>
+				)}
+			</div>
 			<div className={styles.content}>
-
 				<Avatar
 					src="https://www.w3schools.com/howto/img_avatar.png"
 					alt="img"
@@ -145,30 +163,42 @@ function AgentDetails({
 							<div className={styles.name}>
 								{name || 'unknown user'}
 							</div>
-							<div className={styles.email}>{userEmail || '-'}</div>
+							<div className={styles.email}>
+								{userEmail ? hideDetails({ data: userEmail, type: 'mail' }) : ''}
+							</div>
 						</>
 					)}
 				</div>
 			</div>
-			<div className={styles.verification_pills}>
-				{VERIFICATION_STATUS.map((item, index) => {
-					const itemKey = `${snakeCase(item.label)}_${index}`;
-					return (
-						<div key={itemKey}>
-							<Pill
-								key={item.label}
-								prefix={item.prefixIcon}
-								size="md"
-								color={item.color}
-							>
-								<div className={styles.pill_name}>
-									{item.label}
-								</div>
-							</Pill>
-						</div>
-					);
-				})}
-			</div>
+			{(leadUserId || userId) && (
+				<div className={styles.verification_pills}>
+					{VERIFICATION_STATUS.map((item, index) => {
+						const itemKey = `${snakeCase(item.label)}_${index}`;
+						return (
+							<div key={itemKey}>
+								{loading ? (
+									<Placeholder
+										height="20px"
+										width="120px"
+										margin="10px 0px 10px 0px"
+									/>
+								) : (
+									<Pill
+										key={item.label}
+										prefix={item.prefixIcon}
+										size="md"
+										color={item.color}
+									>
+										<div className={styles.pill_name}>
+											{item.label}
+										</div>
+									</Pill>
+								)}
+							</div>
+						);
+					})}
+				</div>
+			)}
 			{loading ? (
 				<Placeholder
 					height="13px"
@@ -183,12 +213,18 @@ function AgentDetails({
 					userName={name}
 					emptyState={emptyState}
 					activeTab={activeTab}
+					setModalType={setModalType}
 				/>
 			)}
 			{(mobile_no || user_number) && (
 				<>
 					<div className={styles.conversation_title}>Other Channels</div>
-					<ConversationContainer userData={userData} noData={!leadUserId && !userId} loading={loading} />
+					<ConversationContainer
+						userData={userData}
+						noData={!leadUserId && !userId}
+						loading={loading}
+						activeCardData={DATA_MAPPING[activeTab] || {}}
+					/>
 				</>
 			)}
 		</>

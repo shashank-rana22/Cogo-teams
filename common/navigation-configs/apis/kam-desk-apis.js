@@ -616,6 +616,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'air_tracking',
 	},
+	{
+		api          : 'get_container_sea_route',
+		access_type  : 'public',
+		service_name : 'saas_traceability',
+	},
 
 ];
 

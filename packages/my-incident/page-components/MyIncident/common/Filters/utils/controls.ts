@@ -5,7 +5,6 @@ export const filterControls = (activeTab) => {
 				{
 					name        : 'request_type',
 					placeholder : 'Category',
-					size        : 'lg',
 					type        : 'select',
 					caret       : true,
 					isClearable : true,
@@ -21,7 +20,6 @@ export const filterControls = (activeTab) => {
 				{
 					name        : 'urgency',
 					placeholder : 'Urgency',
-					size        : 'lg',
 					type        : 'select',
 					caret       : true,
 					isClearable : true,
@@ -45,7 +43,6 @@ export const filterControls = (activeTab) => {
 				{
 					name        : 'request_type',
 					placeholder : 'Category',
-					size        : 'lg',
 					type        : 'select',
 					caret       : true,
 					isClearable : true,
@@ -61,7 +58,6 @@ export const filterControls = (activeTab) => {
 				{
 					name        : 'rejectedStatus',
 					placeholder : 'Status',
-					size        : 'lg',
 					type        : 'select',
 					caret       : true,
 					isClearable : true,
@@ -85,7 +81,6 @@ export const filterControls = (activeTab) => {
 				{
 					name        : 'request_type',
 					placeholder : 'Category',
-					size        : 'lg',
 					type        : 'select',
 					caret       : true,
 					isClearable : true,

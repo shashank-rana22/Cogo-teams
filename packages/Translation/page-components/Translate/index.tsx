@@ -11,7 +11,7 @@ import StatusComponent from '../StatusComponent';
 import styles from './styles.module.css';
 
 function Translate() {
-	const [myTranslates, setMyTranslates] = useState<string>('true');
+	const [myTranslates, setMyTranslates] = useState<string>('false');
 	// const { query, push } = useRouter();
 	// const { activeTab } = query;
 	// const [receivables, setReceivables] = useState<string>(activeTab || 'Requested');

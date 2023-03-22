@@ -1,10 +1,10 @@
-/* eslint-disable max-len */
 import { cl, Popover } from '@cogoport/components';
 import {
 	IcMHappy,
 	IcMAttach,
 	IcMSend,
 	IcMDelete,
+	IcMRefresh,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
@@ -17,6 +17,18 @@ import EmojisBody from './EmojisBody';
 import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
+import TimeLine from './TimeLine';
+
+function MessageMapping({ conversation_type, ...restProps }) {
+	switch (conversation_type) {
+		case 'sent':
+			return <ReceiveDiv {...restProps} />;
+		case 'received':
+			return <SentDiv {...restProps} />;
+		default:
+			return <TimeLine {...restProps} />;
+	}
+}
 
 function MessageConversations({
 	messagesData = [],
@@ -32,15 +44,16 @@ function MessageConversations({
 	uploading,
 	setUploading,
 	hasPermissionToEdit = false,
-	loadingMessages,
+	firstLoadingMessages,
 	loadingPrevMessages,
 	sentQuickSuggestions = () => {},
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
 	lastPage = false,
+
 }) {
 	const messageRef = useRef();
-	const { id = '', channel_type = '' } = activeMessageCard;
+	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
 
 	const {
 		emojisList = {},
@@ -65,13 +78,12 @@ function MessageConversations({
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [loadingMessages, id]);
+	}, [firstLoadingMessages, id]);
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
 			event.preventDefault();
-			sendChatMessage();
-			scrollToBottom();
+			sendChatMessage(scrollToBottom);
 		}
 	};
 
@@ -133,6 +145,47 @@ function MessageConversations({
 		</div>
 	);
 
+	const firstLoadingDiv = (
+		<div className={styles.flex_div}>
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif"
+				type="video/gif"
+				alt="loading"
+				className={styles.object_styles}
+			/>
+		</div>
+
+	);
+
+	const unreadIndex = new_user_message_count > messagesData.length
+		? 0 : messagesData.length - new_user_message_count;
+
+	const messageConversation = (
+		<>
+			{loadingPrevMessages
+				? loader
+				: (
+					<div className={styles.load_prev_messages}>
+						{!lastPage && (
+							<IcMRefresh
+								className={styles.refresh_icon}
+								onClick={getNextData}
+							/>
+						)}
+					</div>
+				)}
+			{(messagesData || []).map((eachMessage, index) => (
+				<MessageMapping
+					key={eachMessage?.created_at}
+					conversation_type={eachMessage?.conversation_type || 'unknown'}
+					eachMessage={eachMessage}
+					activeMessageCard={activeMessageCard}
+					messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
+				/>
+			))}
+
+		</>
+	);
 	return (
 		<div className={styles.styled_div}>
 			<div
@@ -141,22 +194,7 @@ function MessageConversations({
 				onScroll={handleScroll}
 				ref={messageRef}
 			>
-				{loadingPrevMessages && loader}
-				{(messagesData || []).map((eachMessage) => (
-					eachMessage?.conversation_type !== 'received' ? (
-						<ReceiveDiv
-							key={eachMessage?.created_at}
-							eachMessage={eachMessage}
-							activeMessageCard={activeMessageCard}
-						/>
-					) : (
-						<SentDiv
-							key={eachMessage?.created_at}
-							eachMessage={eachMessage}
-							activeMessageCard={activeMessageCard}
-						/>
-					)
-				))}
+				{firstLoadingMessages ? firstLoadingDiv : messageConversation }
 			</div>
 
 			<div
@@ -176,7 +214,6 @@ function MessageConversations({
 								role="presentation"
 								className={styles.file_name_container}
 								onClick={() => {
-									// eslint-disable-next-line no-undef
 									window.open(
 										finalUrl,
 										'_blank',
@@ -338,8 +375,7 @@ function MessageConversations({
 							fill="#EE3425"
 							onClick={() => {
 								if (hasPermissionToEdit) {
-									sendChatMessage();
-									scrollToBottom();
+									sendChatMessage(scrollToBottom);
 								}
 							}}
 							style={{
