@@ -4,7 +4,7 @@ import startCase from '@cogoport/utils/src/utilities/startCase';
 import styles from './styles.module.css';
 
 function ViewCardsTags({ cardHeading = '', subHeading = [] }) {
-	const truncate = (str) => (str?.length > 14 ? `${startCase(str.substring(0, 12))}...` : startCase(str));
+	const truncate = (str) => (str?.length > 11 ? `${startCase(str.substring(0, 12))}...` : startCase(str));
 
 	return (
 		<div className={styles.primary_right}>
