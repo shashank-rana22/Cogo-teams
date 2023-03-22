@@ -52,3 +52,7 @@
 .topics {
 	padding-left: 10px;
 }
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+}
