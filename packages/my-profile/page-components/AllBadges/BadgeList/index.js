@@ -10,8 +10,10 @@ import styles from './styles.module.css';
 function StarCollection() {
 	return (
 		<div className={styles.stars_container}>
-			{[1, 2, 3].fill('').map(() => (
-				<IcCStar width={24} stroke="#FFDF33" />
+			{[1, 2, 3].map((i) => (
+				<div key={i}>
+					<IcCStar width={10} stroke="#FFDF33" />
+				</div>
 			))}
 		</div>
 	);
