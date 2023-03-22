@@ -30,6 +30,7 @@ function FAQs() {
 					onDrag={(ev) => onDragHandler(ev)}
 					ref={ballRef}
 					onClick={() => { setShow(!show); }}
+					onDragOver={(e) => e.preventDefault()}
 				>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg"
