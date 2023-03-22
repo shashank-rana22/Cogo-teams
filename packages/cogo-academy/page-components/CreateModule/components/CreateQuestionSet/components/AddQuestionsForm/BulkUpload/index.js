@@ -1,16 +1,31 @@
-import { Button, Breadcrumb } from '@cogoport/components';
+import { Toast, Button, Breadcrumb } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMCrossInCircle, IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useBulkCreateStandAloneQuestion from '../../../../../hooks/useBulkCreateStandAloneQuestion';
+
 import styles from './styles.module.css';
 
 function BulkUpload({
-	// questionSetId,
+	questionSetId,
 	setShowBulkUpload,
 }) {
 	const [uploadDocument, setUploadDocument] = useState();
+
+	const {
+		loading,
+		bulkCreateStandAloneQuestion,
+	} = useBulkCreateStandAloneQuestion();
+
+	const onSubmit = () => {
+		if (isEmpty(uploadDocument)) {
+			Toast.error('Submit excel sheet');
+		} else {
+			bulkCreateStandAloneQuestion({ questionSetId, uploadDocument });
+		}
+	};
 
 	return (
 		<div>
@@ -19,7 +34,7 @@ function BulkUpload({
 					label="Add Questions"
 					className={styles.breadcrumb_item}
 				/>
-				<Breadcrumb.Item label="Bulk Upload" />
+				<Breadcrumb.Item style={{ color: '#ee3425' }} label="Bulk Upload" />
 			</Breadcrumb>
 
 			<div className={styles.container}>
@@ -31,8 +46,9 @@ function BulkUpload({
 					showProgress
 					draggable
 					uploadDesc="Upload Document"
+					loading={loading}
 					uploadIcon={<IcMUpload height={40} width={40} />}
-					// accept=".csv"
+					accept=".csv"
 				/>
 
 				<div className={styles.delete_icon}>
@@ -41,12 +57,14 @@ function BulkUpload({
 
 				{!isEmpty(uploadDocument) ? (
 					<div className={styles.button_container}>
-						<Button type="button">
+						<Button
+							type="button"
+							onClick={onSubmit}
+						>
 							<div className={styles.upload_icon}>
 								<IcMUpload />
 								Upload
 							</div>
-
 						</Button>
 
 						<Button

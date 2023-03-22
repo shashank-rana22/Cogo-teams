@@ -1,9 +1,11 @@
 import { Pagination, Table } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useCreateQuestionSet from '../../../../hooks/useCreateQuestionSet';
 import useUpdateTest from '../../../../hooks/useUpdateTest';
+import EmptyState from '../../../EmptyState';
 
 import styles from './styles.module.css';
 import { questionSetColumns, testSetColumns } from './utils/getColumns';
@@ -33,6 +35,10 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 	};
 
 	const columns = columnsMapping[activeTab]({ ...propsMapping[activeTab] });
+
+	if (!loading && isEmpty(data?.list)) {
+		return <EmptyState />;
+	}
 
 	return (
 		<div className={styles.table_container}>

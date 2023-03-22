@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
 import { IcMSearchlight, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetTestList from '../../hooks/useGetTestList';
@@ -10,7 +11,6 @@ import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
 
 function TestsList({ activeTab, setActiveTab }) {
-	// const [activeTab, setActiveTab] = useState('tests');
 	const [sort, setSort] = useState(false);
 	const { data, loading, fetchList, setParams, params } = useGetTestList();
 
@@ -73,7 +73,6 @@ function TestsList({ activeTab, setActiveTab }) {
 
 	return (
 		<div className={styles.container}>
-			{/* <div className={styles.heading}>Service Bundles</div> */}
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
@@ -81,12 +80,11 @@ function TestsList({ activeTab, setActiveTab }) {
 					themeType="primary"
 					onChange={handleChangeTab}
 					className={styles.tabs}
-
 				>
 					{Object.values(componentMapping).map((tab) => {
 						const { key, title, component:ContainerComponent = null, componentProps } = tab;
 
-						if (!componentMapping) return null;
+						const { data: activeComponentData, loading: activeComponentLoading } = componentProps || {};
 
 						return (
 							<TabPanel
@@ -94,74 +92,80 @@ function TestsList({ activeTab, setActiveTab }) {
 								title={title}
 								className={styles.tabItem}
 							>
-								<div className={styles.filter}>
-									<div>
-										<Input
-											size="md"
-											suffix={(
-												<ButtonIcon
-													size="md"
-													icon={<IcMSearchlight />}
-													disabled={false}
-													themeType="primary"
-												/>
-											)}
-											placeholder={activeTab
-									=== 'tests' ? 'Search for Test/Topic' : 'Search for Question set name'}
-											onChange={(value) => {
-												if (activeTab === 'tests') {
-													setParams((prev) => ({
-														...prev,
-														filters: {
-															...prev.filters,
-															q: value,
-														},
-													}));
-												} else {
-													setQuestionListParams((prev) => ({
-														...prev,
-														filters: {
-															...prev.filters,
-															q: value,
-														},
-													}));
-												}
-											}}
-											className={styles.input}
-										/>
+								{!isEmpty(activeComponentData?.list) && !activeComponentLoading ? (
+									<div className={styles.filter}>
+										<div>
+											<Input
+												size="md"
+												suffix={(
+													<ButtonIcon
+														size="md"
+														icon={<IcMSearchlight />}
+														disabled={false}
+														themeType="primary"
+													/>
+												)}
+												placeholder={
+												activeTab === 'tests'
+													? 'Search for Test/Topic'
+													: 'Search for Question set name'
+											}
+												onChange={(value) => {
+													if (activeTab === 'tests') {
+														setParams((prev) => ({
+															...prev,
+															filters: {
+																...prev.filters,
+																q: value,
+															},
+														}));
+													} else {
+														setQuestionListParams((prev) => ({
+															...prev,
+															filters: {
+																...prev.filters,
+																q: value,
+															},
+														}));
+													}
+												}}
+												className={styles.input}
+											/>
+										</div>
+
+										<div className={styles.sort}>
+											<IcMArrowRotateDown style={{ cursor: 'pointer' }} />
+											<span
+												className={styles.span_text}
+												onClick={() => {
+													setSort((prev) => !prev);
+													if (activeTab === 'tests') {
+														setParams((prev) => ({
+															...prev,
+															sort_type : sort ? 'asc' : 'desc',
+															filters   : {
+																...prev.filters,
+
+															},
+														}));
+													} else {
+														setQuestionListParams((prev) => ({
+															...prev,
+															sort_type : sort ? 'asc' : 'desc',
+															filters   : {
+																...prev.filters,
+
+															},
+														}));
+													}
+												}}
+											>
+												Sort By
+											</span>
+										</div>
 									</div>
-									<div className={styles.sort}>
-										<IcMArrowRotateDown style={{ cursor: 'pointer' }} />
-										<span
-											className={styles.span_text}
-											onClick={() => {
-												setSort((prev) => !prev);
-												if (activeTab === 'tests') {
-													setParams((prev) => ({
-														...prev,
-														sort_type : sort ? 'asc' : 'desc',
-														filters   : {
-															...prev.filters,
+								) : null}
 
-														},
-													}));
-												} else {
-													setQuestionListParams((prev) => ({
-														...prev,
-														sort_type : sort ? 'asc' : 'desc',
-														filters   : {
-															...prev.filters,
-
-														},
-													}));
-												}
-											}}
-										>
-											Sort By
-
-										</span>
-									</div>
-								</div>
 								<ContainerComponent {...componentProps} />
 							</TabPanel>
 

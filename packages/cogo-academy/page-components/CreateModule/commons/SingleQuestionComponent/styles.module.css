@@ -13,13 +13,13 @@
 	display: flex;
 
 	.question_text_err {
-		border: 1px solid #cb6464;
+		border: 1px solid #ee3425;
 	}
 
 	.question_type_err {
 		:global {
 			.ui_select_display_container {
-				border: 1px solid #cb6464;
+				border: 1px solid #ee3425;
 			}
 		}
 	}

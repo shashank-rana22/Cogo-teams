@@ -23,7 +23,7 @@ function ManualAddition({
 					label={`${isEmpty(editDetails) ? 'Add' : 'Edit'} Questions`}
 					className={styles.breadcrumb_item}
 				/>
-				<Breadcrumb.Item label="Manual Addition" />
+				<Breadcrumb.Item style={{ color: '#ee3425' }} label="Manual Addition" />
 			</Breadcrumb>
 
 			{(savedQuestionDetails || []).map((item, index) => {

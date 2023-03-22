@@ -42,7 +42,7 @@ function useCreateTestQuestion() {
 			reset();
 			getTestQuestionTest({ questionSetId });
 		} catch (err) {
-			Toast.error(getApiErrorString(err.response?.data || 'something went wrong'));
+			Toast.error(getApiErrorString(err.response?.data) || 'something went wrong');
 		}
 	};
 

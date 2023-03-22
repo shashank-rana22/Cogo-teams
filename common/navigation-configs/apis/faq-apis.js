@@ -165,7 +165,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
-
+		{
+			api          : 'bulk_create_stand_alone_question',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	faq: [
 		{
