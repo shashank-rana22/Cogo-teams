@@ -19,7 +19,7 @@ function LastTestResults() {
 		method : 'GET',
 		url    : 'get_user_performance',
 		params : {
-			test_id: '2b605b28-3cc1-47a7-b73e-52b8a2cb9f76',
+			test_id: 'c864325c-d27e-4d10-9045-d19f8a4f259a',
 			user_id,
 		},
 	}, { manual: false });
