@@ -8,15 +8,13 @@ import TestCard from './TestCard';
 function TestsList() {
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ data = {}, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/list_tests',
 		params : {
 			page_limit: 5,
 		},
 	}, { manual: false });
-
-	console.log(data?.list?.[0], 'data');
 
 	if (loading) {
 		return 'loading';
@@ -26,8 +24,8 @@ function TestsList() {
 		<div className={styles.container}>
 			<Header debounceQuery={debounceQuery} />
 
-			{data.list.map((test_card) => (
-				<TestCard test_card={test_card} />
+			{(data.list || []).map((test_card) => (
+				<TestCard key={test_card} test_card={test_card} />
 			))}
 		</div>
 	);
