@@ -23,8 +23,6 @@ function CreateEvent(props) {
 		setEventListData = () => {},
 	} = props;
 
-	// console.log('eventlistdata', eventListData);
-
 	const onClose = () => {
 		setEventListData({
 			data        : {},
