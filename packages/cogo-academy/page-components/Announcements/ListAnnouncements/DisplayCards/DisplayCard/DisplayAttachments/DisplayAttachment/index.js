@@ -46,7 +46,7 @@ function DisplayAttachment(
 				{data
 					? data.map((item) => (
 						<div key={item.id} className={styles.data_container}>
-							<div className={styles.data_display}>
+							<div style={{ width: `${isValid !== -1 ? '50%' : '80%'}` }} className={styles.data_display}>
 								<span className={styles.name_data}>{item?.document_url}</span>
 							</div>
 

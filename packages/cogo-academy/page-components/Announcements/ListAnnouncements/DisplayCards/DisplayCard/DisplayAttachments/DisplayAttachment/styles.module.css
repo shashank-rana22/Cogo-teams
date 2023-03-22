@@ -47,7 +47,6 @@
 
 .data_display {
 	display: flex;
-	width: 40%;
 
 	@media (max-width: 884px) {
 		width: 100%;
