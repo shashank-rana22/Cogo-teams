@@ -3,15 +3,12 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 function useListFaqQuestions({
-	searchState = undefined,
 	topicId = undefined,
-	tagId = [],
-	limit = undefined,
-	sort = undefined,
-	query_name = undefined,
 }) {
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
+	const [searchInput, setSearchInput] = useState('');
+
 	const [{ data, loading = false }, trigger] = useRequest({
 		method : 'get',
 		url    : 'list_faq_questions',
@@ -20,9 +17,9 @@ function useListFaqQuestions({
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
-		debounceQuery(searchState);
+		debounceQuery(searchInput);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchState]);
+	}, [searchInput]);
 
 	const fetchFaqQuestions = async () => {
 		try {
@@ -30,15 +27,15 @@ function useListFaqQuestions({
 				params: {
 					filters: {
 						faq_topic_id : topicId || undefined,
-						faq_tag_id   : tagId || undefined,
+						q            : query || undefined,
 
 					},
-					sort_by                  : sort,
+					sort_by                  : 'view_count',
 					page,
-					page_limit               : limit || undefined,
-					faq_tags_data_required   : !query_name,
-					answers_data_required    : !query_name,
-					faq_topics_data_required : !query_name,
+					page_limit               : 10 || undefined,
+					faq_tags_data_required   : true,
+					answers_data_required    : true,
+					faq_topics_data_required : true,
 				},
 			});
 		} catch (error) {
@@ -49,7 +46,7 @@ function useListFaqQuestions({
 	useEffect(() => {
 		fetchFaqQuestions();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, query, topicId, JSON.stringify(tagId)]);
+	}, [page, query, topicId]);
 
 	const { page_limit, total_count } = data || {};
 
@@ -65,6 +62,8 @@ function useListFaqQuestions({
 		activeTab,
 		setActiveTab,
 		topicId,
+		searchInput,
+		setSearchInput,
 	};
 }
 

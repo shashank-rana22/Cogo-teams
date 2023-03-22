@@ -1,4 +1,9 @@
 .container {
 	width: 100%;
-	padding-top: 6px;
+	margin-top: 16px;
+}
+
+.search{
+	padding-bottom: 12px;
+
 }
