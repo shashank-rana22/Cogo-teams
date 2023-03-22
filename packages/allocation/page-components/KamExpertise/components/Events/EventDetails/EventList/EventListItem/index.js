@@ -12,7 +12,7 @@ const COMPLETION_MAPPING = {
 
 function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 	const {
-		id, condition_name:conditionName = '', expertise_type:Type = '',
+		condition_name:conditionName = '', expertise_type:Type = '',
 		description = '',
 		rules = [],
 	} = data || {};
@@ -23,8 +23,7 @@ function EventListItem({ data, index, setEventListData, setToggleEvent }) {
 	};
 
 	return (
-
-		<section key={id} className={styles.list_item_container}>
+		<section className={styles.list_item_container}>
 			<div className={styles.top_div}>
 				#
 				{index + 1}
