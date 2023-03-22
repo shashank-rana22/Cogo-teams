@@ -1,6 +1,5 @@
 import { Card, Placeholder, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -10,7 +9,6 @@ function OverviewCard(props) {
 	if (leaderboardLoading) {
 		return (
 			<Card
-				key={data.title}
 				themetype="primary"
 				disabled={false}
 				className={styles.container}
@@ -25,6 +23,7 @@ function OverviewCard(props) {
 					{Array(2).fill('').map(() => (
 						<div className={styles.display_flex_loading}>
 							<Placeholder width="100px" />
+
 							<Placeholder style={{ marginTop: '8px' }} width="100px" />
 						</div>
 					))}
@@ -34,9 +33,7 @@ function OverviewCard(props) {
 	}
 
 	return (
-
 		<Card
-			key={data.title}
 			themetype="primary"
 			disabled={false}
 			className={styles.container}
@@ -44,7 +41,9 @@ function OverviewCard(props) {
 			<Card.Title title={(
 				<div className={styles.title}>
 					<span>{data.icon}</span>
+
 					<span style={{ padding: '0 10px' }}><h3>{data.title}</h3></span>
+
 					<span style={{ paddingTop: '4px', width: '40px', height: '40px' }}>
 						<Tooltip
 							content={data.title}
@@ -62,7 +61,7 @@ function OverviewCard(props) {
 			<Card.Description className={styles.content}>
 				<div className={styles.display_flex}>
 					<span style={{ fontSize: '12px' }}>
-						Avg Score
+						Avg. Score
 					</span>
 					<span style={{ display: 'flex', fontWeight: 'bold' }}>
 						{data.avg_score}

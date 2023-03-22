@@ -118,7 +118,11 @@ function KamData(props) {
 							{/* //!using dummy data for now */}
 							{
 								overview_data.map((data) => (
-									<OverviewCard data={data} leaderboardLoading={leaderboardLoading} />
+									<OverviewCard
+										key={data.title}
+										data={data}
+										leaderboardLoading={leaderboardLoading}
+									/>
 								))
 							}
 						</div>
