@@ -55,13 +55,13 @@ function useGraphData() {
 		{
 			id    : 'like',
 			label : 'Like',
-			value : total_dislike,
+			value : total_likes,
 			color : 'hsla(39, 55%, 94%, 1)',
 		},
 		{
 			id    : 'dislike',
 			label : 'Dislike',
-			value : total_likes,
+			value : total_dislike,
 			color : 'hsla(41, 64%, 86%, 1)',
 		},
 		{
