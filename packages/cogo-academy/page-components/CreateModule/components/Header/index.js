@@ -20,6 +20,7 @@ const ROUTE_MAPPING = {
 function Header(props) {
 	const { activeTab } = props;
 	const router = useRouter();
+
 	return (
 		<div className={styles.flex_div}>
 
