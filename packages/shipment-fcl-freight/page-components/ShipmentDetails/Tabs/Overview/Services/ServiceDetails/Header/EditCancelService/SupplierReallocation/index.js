@@ -56,7 +56,7 @@ function SupplierReallocation({
 
 	return (
 		<Modal
-			className="primary md"
+			className={styles.styled_modal}
 			show={show}
 			onClose={() => setShow(false)}
 			styles={{ dialog: { width: isMobile ? 360 : 700 } }}
