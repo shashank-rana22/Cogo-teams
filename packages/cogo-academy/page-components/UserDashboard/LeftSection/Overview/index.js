@@ -26,7 +26,7 @@ function Overview() {
 
 			<div className={styles.content_container}>
 				<div className={styles.content}>
-					<div className={styles.text}>Tests Cleared</div>
+					<div className={styles.text}>Tests Given</div>
 					<div className={styles.value}>
 						{response.total_passed_test_count}
 						/
@@ -34,7 +34,14 @@ function Overview() {
 					</div>
 				</div>
 
-				<div className={styles.vertical_line} />
+				<div className={styles.content}>
+					<div className={styles.text}>Tests Cleared</div>
+					<div className={styles.value}>
+						{response.total_passed_test_count}
+						/
+						{response.total_test_count}
+					</div>
+				</div>
 
 				<div className={styles.content}>
 					<div className={styles.text}>Avg Percentile</div>

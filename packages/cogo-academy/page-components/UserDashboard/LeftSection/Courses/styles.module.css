@@ -1,0 +1,11 @@
+.container {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    padding: 24px;
+}
+
+.heading {
+    font-weight: 600;
+    font-size: 14px;
+    color: #221F20;
+}

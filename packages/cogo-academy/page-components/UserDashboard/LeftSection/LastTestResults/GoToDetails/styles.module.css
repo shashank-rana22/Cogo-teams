@@ -1,6 +1,5 @@
 .container {
 	display: flex;
+	margin-top: auto;
 	align-items: flex-end;
-
-	/* height: 100%; */
 }
