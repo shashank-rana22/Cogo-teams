@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
@@ -22,7 +23,10 @@ function Header(props) {
 	return (
 		<div className={styles.flex_div}>
 
-			<div className={styles.title}>Test Module</div>
+			<div className={styles.title}>
+				<IcMArrowBack className={styles.styled_icon} onClick={() => router.back()} />
+				Test Module
+			</div>
 
 			<Button onClick={() => router.push(`/learning/test-module/${ROUTE_MAPPING[activeTab]}`)}>
 				+ Create New
