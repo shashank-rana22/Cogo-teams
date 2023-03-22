@@ -1,6 +1,6 @@
 import { Toast, Button, Breadcrumb } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
-import { IcMCrossInCircle, IcMUpload } from '@cogoport/icons-react';
+import { IcMCrossInCircle, IcMUpload, IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -47,7 +47,7 @@ function BulkUpload({
 						'_blank',
 					)}
 				>
-					<IcMUpload />
+					<IcMDownload />
 					<div className={styles.sample_text}>Download Excel Format</div>
 				</div>
 			</div>

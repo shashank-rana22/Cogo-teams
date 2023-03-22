@@ -1,5 +1,5 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { Router } from '@cogoport/next';
+import { useRouter } from '@cogoport/next';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
@@ -7,12 +7,15 @@ import getElementController from '../../../../../../../../configs/getElementCont
 import getControls from './controls';
 import styles from './styles.module.css';
 
-const onClickBack = () => {
-	Router.back();
-};
-
 function CreateNewTest({ control, errors, data, setValue }) {
 	const controls = getControls();
+
+	const router = useRouter();
+
+	const onClickBack = () => {
+		const href = '/learning/test-module';
+		router.push(href, href);
+	};
 
 	useEffect(() => {
 		const { cogo_entity_object = {}, name = '' } = data;

@@ -13,6 +13,10 @@
 			color: #221f20;
 		}
 	}
+
+	@media(max-width:768px) {
+		margin-top: 48px;
+	}
 }
 
 .header {
@@ -24,4 +28,8 @@
 .title {
 	font-size: 20px;
 	font-weight: 600;
+
+	@media(max-width:768px) {
+		font-size: 18px;
+	}
 }
