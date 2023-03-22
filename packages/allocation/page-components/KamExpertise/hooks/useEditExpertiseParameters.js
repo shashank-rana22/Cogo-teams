@@ -20,9 +20,8 @@ const useEditExpertiseParameters = ({ list = [], refetch = () => {}, setEditMode
 			const attributes = [];
 
 			list.forEach((group) => {
-				const scores = {};
 				group.data.forEach((service) => {
-					scores.id = service.id;
+					const scores = { id: service.id };
 					const scoring_criteria = {};
 
 					Object.keys(formValues).forEach((formAttr) => {
@@ -33,6 +32,7 @@ const useEditExpertiseParameters = ({ list = [], refetch = () => {}, setEditMode
 							}
 						});
 					});
+
 					scores.scoring_criteria = scoring_criteria;
 
 					if (!isEmpty(scores.scoring_criteria)) {
