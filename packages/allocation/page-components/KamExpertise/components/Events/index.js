@@ -31,15 +31,12 @@ function Events() {
 		setExpertise,
 		listRefetch,
 		onClickBack,
-		toggleEvent,
-		setToggleEvent,
 		eventListData,
 		setEventListData,
 	} = useGetEventList();
 
 	const componentProps = {
 		[EVENT_LIST]: {
-			setToggleEvent,
 			setEventListData,
 			debounceQuery,
 			loading,
@@ -52,13 +49,13 @@ function Events() {
 			getNextPage,
 		},
 		[POST_EVENT]: {
-			setToggleEvent,
 			eventListData,
 			listRefetch,
+			setEventListData,
 		},
 	};
 
-	const Component = EVENTS_COMPONENTS_MAPPING[toggleEvent] || null;
+	const Component = EVENTS_COMPONENTS_MAPPING[eventListData?.toggleEvent] || null;
 
 	return (
 		<section className={styles.main}>
@@ -73,8 +70,8 @@ function Events() {
 
 			{Component && (
 				<Component
-					key={toggleEvent}
-					{...(componentProps[toggleEvent] || {})}
+					key={eventListData?.toggleEvent}
+					{...(componentProps[eventListData?.toggleEvent] || {})}
 				/>
 			)}
 

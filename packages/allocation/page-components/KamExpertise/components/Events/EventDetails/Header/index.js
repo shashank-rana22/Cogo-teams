@@ -19,14 +19,13 @@ const OPTIONS = [
 	},
 	{
 		label : 'Misc Expertise',
-		value : 'misc_expertise',
+		value : 'miscellaneous',
 	},
 ];
 
 function Header(props) {
 	const {
 		setEventListData = () => {},
-		setToggleEvent = () => {},
 		loading,
 		debounceQuery,
 		setSearchValue = () => {},
@@ -36,8 +35,10 @@ function Header(props) {
 	} = props;
 
 	const onAdd = () => {
-		setEventListData({});
-		setToggleEvent('updateEvent');
+		setEventListData({
+			data        : {},
+			toggleEvent : 'updateEvent',
+		});
 	};
 
 	return (

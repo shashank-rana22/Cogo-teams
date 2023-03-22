@@ -24,9 +24,6 @@ function CreateMastery(props) {
 		onSave,
 	} = useCreateMasterConfiguration({ masteryItemData, onClose, listRefetch });
 
-	const UploadController = getFieldController('fileUpload');
-	const InputController = getFieldController('textarea');
-
 	const {
 		control,
 		watch,
@@ -34,12 +31,15 @@ function CreateMastery(props) {
 		formState: { errors },
 	} = formProps;
 
+	const UploadController = getFieldController('fileUpload');
+	const InputController = getFieldController('textarea');
+
 	return (
 		<div>
 			<form onSubmit={handleSubmit(onSave)}>
 				<section className={styles.container}>
 					<div>
-						{isEmpty(masteryItemData) ? null : (
+						{!isEmpty(masteryItemData) ? (
 							<div className={styles.fields_container}>
 								<p
 									className={styles.text_styles}
@@ -58,7 +58,7 @@ function CreateMastery(props) {
 										? masteryItemData.modified_by : '___'}
 								</p>
 							</div>
-						)}
+						) : null}
 
 						<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>Add Mastery</h2>
 						<p className={styles.text_styles2}>
@@ -98,6 +98,7 @@ function CreateMastery(props) {
 						<div className={styles.lower_background}>
 							<div style={{ flexBasis: '29%' }}>
 								<p style={{ color: '#4f4f4f' }}>Badge PNG</p>
+
 								<div className={styles.uploader}>
 									<UploadController
 										name="image_input"
@@ -114,6 +115,8 @@ function CreateMastery(props) {
 										{errors?.image_input?.message}
 									</div>
 								</div>
+
+								{/* Optimize if possible */}
 								<div>
 									{watch('image_input') ? (
 										<div className={styles.preview}>
@@ -129,6 +132,7 @@ function CreateMastery(props) {
 										</div>
 									) : null}
 								</div>
+
 							</div>
 							<div className={styles.text_area_container}>
 								<p style={{ color: '#4f4f4f' }}>Description</p>

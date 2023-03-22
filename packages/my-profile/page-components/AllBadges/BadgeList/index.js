@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function StarCollection() {
 	return (
 		<div className={styles.stars_container}>
-			{Array(3).fill('').map(() => (
+			{[1, 2, 3].fill('').map(() => (
 				<IcCStar width={24} stroke="#FFDF33" />
 			))}
 		</div>
@@ -54,8 +54,8 @@ function BadgeList(props) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
-					height={250}
-					width={450}
+					height={220}
+					width={380}
 					flexDirection="column"
 					emptyText="Badges not found"
 				/>

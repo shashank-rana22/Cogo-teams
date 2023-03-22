@@ -26,8 +26,8 @@ function LeaderboardList(props) {
 		return (
 			<div className={styles.empty_state}>
 				<EmptyState
-					width={450}
-					height={250}
+					height={220}
+					width={380}
 					flexDirection="column"
 					textSize="20px"
 				/>
