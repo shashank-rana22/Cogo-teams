@@ -14,9 +14,10 @@ function ScrollBar({ props = {} }) {
 		trending_topics = [],
 		trending_tags = [],
 		unpopular_questions = [],
-		topic_wise_questions = [],
+		topic_wise_questions = {},
 	} = props;
-	const { topic_wise_disliked_questions = [], topic_wise_liked_questions = [] } = topic_wise_questions;
+	const { topic_wise_disliked_questions = [], topic_wise_liked_questions = [] } = topic_wise_questions || {};
+
 	const CAROUSELDATA = [
 		{
 			key    : 'item1',
