@@ -1,4 +1,4 @@
-import { Toast, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -27,9 +27,14 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 			await updateAnswerList(data?.id, answer, str);
 		}
 		const num = Number(currentQuestion);
-		localStorage.setItem('currentQuestion', num + 1);
+		localStorage.setItem('currentQuestion', total_question > currentQuestion ? num + 1 : num);
 
-		fetchQuestions({ currentQ: total_question !== currentQuestion ? Number(currentQuestion) + 1 : currentQuestion });
+		fetchQuestions({
+			currentQ:
+				total_question !== currentQuestion
+					? Number(currentQuestion) + 1
+					: currentQuestion,
+		});
 
 		setCurrentQuestion((pv) => {
 			if (total_question !== pv) {
@@ -52,9 +57,14 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 			await updateAnswerList(data?.id, answer, str);
 		}
 		const num = Number(currentQuestion);
-		localStorage.setItem('currentQuestion', num + 1);
+		localStorage.setItem('currentQuestion', total_question > currentQuestion ? num + 1 : num);
 
-		fetchQuestions({ currentQ: total_question !== currentQuestion ? Number(currentQuestion) + 1 : currentQuestion });
+		fetchQuestions({
+			currentQ:
+				total_question !== currentQuestion
+					? Number(currentQuestion) + 1
+					: currentQuestion,
+		});
 
 		setCurrentQuestion((pv) => {
 			if (total_question !== pv) {
