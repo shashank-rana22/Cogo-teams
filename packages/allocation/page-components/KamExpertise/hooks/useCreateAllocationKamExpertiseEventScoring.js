@@ -60,7 +60,8 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 			await trigger({ data: payload });
 
 			onClose();
-
+			// await formProps.clearErrors();
+			formProps.reset();
 			Toast.success('Condition Added Successfully');
 
 			refetch();
