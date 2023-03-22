@@ -1,9 +1,10 @@
-import { Toast, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useCreateTest from '../../../../hooks/useCreateTest';
+import useUpdateTest from '../../../../hooks/useUpdateTest';
 
 // import NewQuestion from './components/NewQuestion';
 import QuestionSet from './components/QuestionSet';
@@ -11,13 +12,17 @@ import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
 function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLoading }) {
-	const [showQuestionSet, setShowQuestionSet] = useState(false);
-	// const [allKeysSaved, setAllKeysSaved] = useState(false);
-	const [idArray, setIdArray] = useState([]);
+	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
 
-	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
+	const { updataTest } = useUpdateTest();
+
+	const [showQuestionSet, setShowQuestionSet] = useState(false);
+
+	// const [allKeysSaved, setAllKeysSaved] = useState(false);
+
+	const [idArray, setIdArray] = useState([]);
 
 	useEffect(() => {
 		if (!isEmpty(data?.set_data || [])) {
@@ -25,6 +30,8 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	console.log('data:: ', data);
 
 	return (
 		<div className={styles.container}>
@@ -75,7 +82,6 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 						style={{ marginRight: '10px' }}
 						onClick={
 							handleSubmit((values) => {
-								if (!isEmpty(errors)) Toast.error('Fill all required fields');
 								createTest({ data: values, idArray, next: 'draft' });
 							})
 						}
@@ -89,7 +95,6 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 						themeType="primary"
 						onClick={
 							handleSubmit((values) => {
-								if (!isEmpty(errors)) Toast.error('Fill all required fields');
 								createTest({ data: values, idArray, next: 'criteria' });
 							})
 						}
