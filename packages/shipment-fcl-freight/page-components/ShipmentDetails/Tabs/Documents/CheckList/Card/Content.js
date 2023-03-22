@@ -49,13 +49,15 @@ function Content({
 					{isChecked ? (
 						<div className={styles.gap}>
 							<div className={styles.upload_info}>
-								Uploaded By -
+								Uploaded By :
+								{' '}
 								{extraItem?.uploaded_by_user?.name
 									|| extraItem?.uploaded_by_org?.business_name}
 
 							</div>
 							<div className={styles.upload_info}>
-								Uploaded on
+								Uploaded On :
+								{' '}
 								{format(extraItem?.created_at, 'dd MMM yyyy')}
 
 							</div>
@@ -63,15 +65,15 @@ function Content({
 							 ${['document_amendment_requested', 'document_rejected'].includes(extraItem?.state)
 								? styles.pending : styles.accepted}`}
 							>
-								Document Status -
 								{startCase(extraItem?.state?.split('_')?.[1])}
 							</div>
 						</div>
 					) : (
 						<div className={styles.gap}>
 							{item?.pendingItem ? (
-								<div className={styles.styled_text}>
-									Due on
+								<div className={styles.upload_info}>
+									Due On :
+									{' '}
 									{format(item?.pendingItem?.deadline, 'dd MMM yyyy')}
 
 								</div>
@@ -117,7 +119,7 @@ function Content({
 							? (
 								<>
 									<Button
-										themeType="secondary"
+										themeType="tertiary"
 										onClick={() => handleView(extraItem?.document_url)}
 									>
 										View

@@ -3,9 +3,10 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
+import SupplierReallocation from '../../../../../../../../common/AdditionalServices/components/SupplierReallocation';
+
 import CancelShipment from './CancelShipment';
 import styles from './styles.module.css';
-import SupplierReallocation from './SupplierReallocation';
 
 const serviceCancellationStates = [
 	'init',
@@ -97,35 +98,42 @@ function EditCancelService({
 
 	const content = (
 		<div>
-			{/* {editSupplier ? ( */}
-			<div style={{ width: '100%' }}>
-				<div className={styles.text} onClick={() => setShow(true)}>Edit</div>
-				{canCancelService
+			{true || editSupplier ? (
+				<div style={{ width: '100%' }}>
+					<div role="button" tabIndex="0" className={styles.text} onClick={() => setShow(true)}>Edit</div>
+					{canCancelService
 					&& shipmentData?.shipment_type !== 'domestic_air_freight' ? (
 						<div className={styles.line} />
-					) : null}
-			</div>
-			{/* ) : null} */}
-			{/* {canCancelService
-			&& shipmentData?.shipment_type !== 'domestic_air_freight' ? ( */}
-			<CancelShipment
-				id={id}
-				state={state}
-				setShowCancel={setCancelService}
-				showCancel={cancelService}
-				onClose={() => setCancelService(false)}
-				service_type={service_type}
-				isSeller={isSeller}
-				isService
-				trade_type={serviceData?.[0]?.trade_type}
-			/>
-			{/* ) : null} */}
+						) : null}
+				</div>
+			) : null}
+			{true || canCancelService
+			&& shipmentData?.shipment_type !== 'domestic_air_freight' ? (
+				<CancelShipment
+					id={id}
+					state={state}
+					setShowCancel={setCancelService}
+					showCancel={cancelService}
+					onClose={() => setCancelService(false)}
+					service_type={service_type}
+					isSeller={isSeller}
+					isService
+					trade_type={serviceData?.[0]?.trade_type}
+				/>
+				) : null}
 
 			{/* {showEditButton && showEditParams ? ( */}
 			<div style={{ width: '100%' }}>
 				{canCancelService || editSupplier ? <div className={styles.line} /> : null}
 
-				<div className={styles.text} onClick={() => setShowParamEdit(true)}>Edit Params</div>
+				<div
+					role="button"
+					tabIndex="0"
+					className={styles.text}
+					onClick={() => setShowParamEdit(true)}
+				>
+					Edit Params
+				</div>
 			</div>
 			{/* ): null} */}
 			{/* {showConsolEditButton ? ( */}
@@ -133,18 +141,26 @@ function EditCancelService({
 			<div style={{ width: '100%' }}>
 				{canCancelService || editSupplier ? <div className={styles.line} /> : null}
 
-				<div className={styles.text} onClick={() => setShowConsolEdit(true)}>Edit Params</div>
-			</div>
-			 {/* ) : null} */}
-			{/* {showEditContainerButton ? ( */}
-			<div style={{ width: '100%' }}>
-				{canCancelService || editSupplier ? <div className={styles.line} /> : null}
+				<div
+					role="button"
+					tabIndex="0"
+					className={styles.text}
+					onClick={() => setShowConsolEdit(true)}
+				>
+					Edit Params
 
-				<div className={styles.text} onClick={() => setShowContainerEdit(true)}>
-					Edit Container Details
 				</div>
 			</div>
-			{/* ) : null} */}
+			 {/* ) : null} */}
+			{showEditContainerButton ? (
+				<div style={{ width: '100%' }}>
+					{canCancelService || editSupplier ? <div className={styles.line} /> : null}
+
+					<div role="button" tabIndex="0" className={styles.text} onClick={() => setShowContainerEdit(true)}>
+						Edit Container Details
+					</div>
+				</div>
+			) : null}
 		</div>
 	);
 
@@ -216,6 +232,7 @@ function EditCancelService({
 					serviceData={serviceData}
 					setShow={setShow}
 					show={show}
+					isAdditional
 					refetchServices={refetchServices}
 				/>
 			) : null}

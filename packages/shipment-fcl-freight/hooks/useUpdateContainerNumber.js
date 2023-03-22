@@ -4,10 +4,10 @@ import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useUpdateContainerNumber = (
-	containerValue = {},
 	setEditContainerNum,
 	shipmentData = {},
 	refetch = () => {},
+	containerValue = {},
 ) => {
 	const [{ data: containerDetails },
 		containerDetailTrigger] = useRequest({

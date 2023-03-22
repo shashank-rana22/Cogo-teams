@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import useOceanRoute from '../../../../../hooks/useOceanRoute';
 import getAirPoints from '../helper/getAirPoints';
 
+import EmptyState from './EmptyState';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 import TrackingData from './TrackingData';
@@ -43,10 +44,14 @@ function Body({ list = [], loading = false, shipmentType = '' }) {
 
 	return (
 		<div className={styles.tracking_info}>
-			<TrackingData
-				data={listToRender}
-				shippingLine={list?.[0]?.shipping_line}
-			/>
+			{!loading && !listToRender?.length ? (
+				<EmptyState />
+			) : (
+				<TrackingData
+					data={listToRender}
+					shippingLine={list?.[0]?.shipping_line}
+				/>
+			)}
 			<TrackingMap
 				routesLoading={listLoading}
 				points={points}

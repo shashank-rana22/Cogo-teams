@@ -3,14 +3,6 @@
 	display: flex;
 	align-items: center;
 	position: relative; 
-	
-}
-
-.styled_text {
-	font-weight: 400;
-	font-size: 11px;
-	line-height: 14px;
-	color: #333333;
 }
 
 .message_text {
@@ -103,10 +95,9 @@
 	display: flex;  
 	justify-content: space-between;
 	align-items: center;
-	padding: 4px 16px; 
+	padding: 10px 16px; 
 	border: 1px solid #ececec; 
 	border-radius: 4px;  
 	width: 100%; 
 	margin-bottom: 16px;
-	/* box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2); */
 }
