@@ -21,7 +21,7 @@ function CurrentConfigurations({
 
 	const LIVE_VERSION = data.filter((item) => item.status_value === 'active')[0]?.version_number;
 
-	const listLiveAndDraft = data.filter((item) => item.status_value === 'draft' || item.status_value === 'active');
+	const listLiveAndDraft = data.filter((item) => item.status_value === 'draft' || item.status_value === 'live');
 
 	const VERSION_CARDS = listLiveAndDraft.reverse();
 

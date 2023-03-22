@@ -29,11 +29,14 @@
   align-items: center;
 }
 
-
 .lower_info {
-	display: flex;
+  display: flex;
+  margin-right: 44px;
 
-	@media(max-width: 576px) {
-		flex-direction: column;
-	}
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+}
+.audit_label{
+  margin-right: 8px;
 }

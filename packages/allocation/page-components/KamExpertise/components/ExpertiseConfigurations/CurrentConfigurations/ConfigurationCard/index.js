@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 const STATUS_COLOR_MAPPING = {
 	draft   : 'yellow',
-	active  : 'green',
+	live    : 'green',
 	expired : 'red',
 };
 
@@ -16,20 +16,20 @@ const HEADING_MAPPING = {
 			Saved Draft
 		</div>
 	),
-	active: (version) => (
+	live: (version_number) => (
 		<div className={styles.heading}>
 			Version
 			{' '}
 			{' '}
-			{version}
+			{version_number}
 		</div>
 	),
-	expired: (version) => (
+	expired: (version_number) => (
 		<div className={styles.heading}>
 			Version
 			{' '}
 			{' '}
-			{version}
+			{version_number}
 		</div>
 	),
 };
@@ -60,6 +60,11 @@ function ConfigurationCard(props) {
 								{' '}
 
 							</strong>
+						</div>
+						<div style={{ marginRight: '28px' }}>
+							Total Levels:
+							{' '}
+							<strong>___</strong>
 						</div>
 
 						<div>
