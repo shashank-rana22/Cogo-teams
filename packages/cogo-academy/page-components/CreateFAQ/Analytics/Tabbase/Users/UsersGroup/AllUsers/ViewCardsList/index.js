@@ -1,6 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMEyeopen, IcMLike, IcMDislike } from '@cogoport/icons-react';
-import startCase from '@cogoport/utils/src/utilities/startCase';
+import { startCase } from '@cogoport/utils/src/utilities/startCase';
 
 import styles from './styles.module.css';
 
