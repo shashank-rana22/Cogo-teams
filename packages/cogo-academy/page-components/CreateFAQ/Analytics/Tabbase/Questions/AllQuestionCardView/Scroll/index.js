@@ -2,7 +2,7 @@ import { Carousel } from '@cogoport/components';
 
 import ViewCards from '../ViewCards';
 import ViewCardsList from '../ViewCardsList';
-
+import ViewCardsTags from '../ViewCardsTags';
 import styles from './styles.module.css';
 
 function ScrollBar({ props = {} }) {
@@ -61,7 +61,7 @@ console.log(topic_wise_liked_questions,'thy')
 						cardHeading="Top Liked Questions"
 						contentQuestion={popular_questions}
 					/>
-					<ViewCards
+					<ViewCardsTags
 						cardHeading="Trending Tags"
 						subHeading={trending_tags}
 					/>
@@ -82,7 +82,7 @@ console.log(topic_wise_liked_questions,'thy')
 						cardHeading="Top Liked Questions"
 						contentQuestion={popular_questions}
 					/>
-					<ViewCards
+					<ViewCardsTags
 						cardHeading="Trending Tags"
 						subHeading={trending_tags}
 					/>
@@ -103,7 +103,7 @@ console.log(topic_wise_liked_questions,'thy')
 						cardHeading="Top Liked Questions"
 						contentQuestion={popular_questions}
 					/>
-					<ViewCards
+					<ViewCardsTags
 						cardHeading="Trending Tags"
 						subHeading={trending_tags}
 					/>
@@ -124,7 +124,7 @@ console.log(topic_wise_liked_questions,'thy')
 			key    : 'item5',
 			render : () => (
 				<div className={styles.content}>
-					<ViewCards
+					<ViewCardsTags
 						cardHeading="Trending Tags"
 						subHeading={trending_tags}
 					/>
