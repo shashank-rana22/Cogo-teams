@@ -4,7 +4,7 @@ import LeftPanel from './components/LeftPanel';
 import RightPanel from './components/RightPanel';
 import styles from './styles.module.css';
 
-function CustomisePage() {
+function CreatePage() {
 	const [activeTab, setActiveTab] = useState('content');
 	return (
 		<div>
@@ -25,4 +25,4 @@ function CustomisePage() {
 	);
 }
 
-export default CustomisePage;
+export default CreatePage;
