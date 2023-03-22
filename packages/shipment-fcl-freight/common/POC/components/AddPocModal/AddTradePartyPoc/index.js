@@ -95,6 +95,9 @@ function AddTradePartyPoc({
 								ref={formRef}
 								setExistingPocData={setExistingPocData}
 								importer_exporter_id={importer_exporter_id}
+								service_provider_id={service_provider_id}
+								trade_party_type={trade_party_type}
+								trade_party_id={trade_party_id}
 							/>
 						)
 						: <CreateNewPOC ref={formRef} />}

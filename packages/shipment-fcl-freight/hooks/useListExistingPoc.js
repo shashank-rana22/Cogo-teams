@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useListExistingPoc = ({ organization_id = '', trade_party_type = '' }) => {
+const useListExistingPoc = ({ organization_id = '', trade_party_type = '', trade_party_id = '' }) => {
 	const [apiList, setApiList] = useState([]);
 	const [loading, setLoading] = useState(false);
 
@@ -35,9 +35,9 @@ const useListExistingPoc = ({ organization_id = '', trade_party_type = '' }) => 
 
 			const pocsRes = await pocsTrigger({
 				params: {
-					trade_party_id : '03574a5a-fbdb-4948-9a88-80bc971261ae',
-					object_type    : 'shipper',
-					status         : 'active',
+					trade_party_id,
+					object_type : trade_party_type,
+					status      : 'active',
 				},
 				page_limit: 20,
 			});

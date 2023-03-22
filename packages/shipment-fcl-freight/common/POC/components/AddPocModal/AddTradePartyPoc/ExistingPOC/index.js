@@ -5,8 +5,17 @@ import useListExistingPoc from '../../../../../../hooks/useListExistingPoc';
 
 import styles from './styles.module.css';
 
-function ExistingPOC({ setExistingPocData = () => {}, importer_exporter_id = '' }, ref) {
-	const { data = [] } = useListExistingPoc({ organization_id: importer_exporter_id });
+function ExistingPOC({
+	setExistingPocData = () => {},
+	importer_exporter_id = '',
+	trade_party_type = '',
+	trade_party_id = '',
+}, ref) {
+	const { data = [] } = useListExistingPoc({
+		organization_id: importer_exporter_id,
+		trade_party_type,
+		trade_party_id,
+	});
 
 	useEffect(() => { setExistingPocData(data); }, [data]);
 
