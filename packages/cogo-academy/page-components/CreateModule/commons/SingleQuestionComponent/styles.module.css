@@ -7,10 +7,20 @@
 
 .question_type {
 	margin-left: 20px;
+
+	@media (max-width: 768px) {
+		margin-left: unset;
+	}
 }
 
 .first_row {
 	display: flex;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		gap: 12px;
+		align-items: center;
+	}
 
 	.question_text_err {
 		border: 1px solid #ee3425;
@@ -41,6 +51,17 @@
 .difficulty_level {
 	display: flex;
 	margin-top: 32px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		gap: 4px;
+
+		:global {
+			.ui_chip_container {
+				min-width: 80px;
+			}
+		}
+	}
 }
 
 .label {
