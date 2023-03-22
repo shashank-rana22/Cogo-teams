@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import React from 'react';
 
 import CancellationModal from './CancellationModal';
@@ -76,6 +76,11 @@ function CancelShipment({
 					closable={!showRequest}
 					onClose={handleClose}
 				>
+					<Modal.Header title={showRequest
+						? 'Cancellation Requested by customer'
+						: 'Cancel Shipment'}
+					/>
+
 					<CancellationModal
 						// formValues={formValues}
 						// isIE={isIE}
@@ -90,6 +95,27 @@ function CancelShipment({
 						showRequest={showRequest}
 						handleClose={handleClose}
 					/>
+					<Modal.Footer>
+						{!showRequest ? (
+							<Button
+								className="secondary md"
+								onClick={handleClose}
+								// disabled={loading || disabledButton}
+								style={{ marginRight: '8px' }}
+							>
+								Cancel
+							</Button>
+						) : null}
+
+						<Button
+							className="primary md"
+							// disabled={loading || disabledButton}
+							// onClick={handleSubmit(onSubmit, onErrors)}
+						>
+							Confirm Cancellation
+							{/* {!loading ? 'Confirm Cancellation' : 'Confirming...'} */}
+						</Button>
+					</Modal.Footer>
 				</Modal>
 			) : null}
 		</div>

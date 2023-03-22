@@ -1,5 +1,6 @@
-import { Button } from '@cogoport/components';
-import React from 'react';
+import { Button, RadioGroup, Input } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 // import Layout from '../../Layout';
 // import getShowElements from '../helpers/getShowElements';
@@ -21,47 +22,31 @@ function CancellationModal({
 	handleClose = () => {},
 }) {
 	// const showElements = getShowElements(formValues);
+	const [value, onChange] = useState('');
+
+	const options = [
+		{ name: 'R1', value: 'R1', label: 'Got a better offer' },
+		{ name: 'R2', value: 'R2', label: 'Have not received a confirmation for this service yet' },
+		{ name: 'R3', value: 'R3', label: 'I have changed by mind' },
+		{ name: 'R4', value: 'R4', label: 'Other issues' },
+	];
 
 	return (
 		// <div className={isIE ? 'ie' : ''}>
 		<div className={styles.container}>
 			<div className={styles.form}>
-				<div className={styles.title}>
-					{showRequest
-						? 'Cancellation Requested by customer'
-						: 'Cancel Shipment'}
+				<div>Please select a reason for cancelling the shipment</div>
+				<div className={styles.radio_container}>
+					<RadioGroup options={options} onChange={onChange} value={value} />
 				</div>
-
-				{/* <Layout
-					fields={fields}
-					controls={modifiedControls}
-					errors={errors}
-					themeType="admin"
-					showElements={showElements}
-				/> */}
-			</div>
-
-			<div className={styles.line} />
-
-			<div className={styles.button_div}>
-				{!showRequest ? (
-					<Button
-						className="secondary md"
-						onClick={handleClose}
-						disabled={loading || disabledButton}
-						style={{ marginRight: '8px' }}
-					>
-						Cancel
-					</Button>
+				{!isEmpty(value) ? (
+					<div>
+						<div>
+							Could you share with us the cost difference? (We&apos;ll try to get a better rate next time)
+						</div>
+						<Input className={styles.input} size="sm" />
+					</div>
 				) : null}
-
-				<Button
-					className="primary md"
-					disabled={loading || disabledButton}
-					onClick={handleSubmit(onSubmit, onErrors)}
-				>
-					{!loading ? 'Confirm Cancellation' : 'Confirming...'}
-				</Button>
 			</div>
 		</div>
 	);
