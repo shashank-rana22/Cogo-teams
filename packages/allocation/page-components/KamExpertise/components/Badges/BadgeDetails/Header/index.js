@@ -24,7 +24,7 @@ function Header(props) {
 			<div className={styles.filter_container}>
 
 				<AsyncSelect
-					placeholder="Expertise"
+					placeholder="Condition"
 					size="sm"
 					value={expertise}
 					onChange={(value) => setExpertise(value)}
