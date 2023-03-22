@@ -36,7 +36,7 @@ function Profitabillity({ searchValue, setSearchValue }) {
 					<div className={styles.flex}>
 						{tab.map((item) => (
 							<div
-								key={item.key}
+								key={item?.key}
 								onClick={() => {
                                         	setTabs(item.key);
 								}}

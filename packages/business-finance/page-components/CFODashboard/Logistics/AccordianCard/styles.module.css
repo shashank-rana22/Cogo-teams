@@ -24,6 +24,12 @@
 	width: 10%;
 }
 
+.main_stats {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
 .amounts {
 	width: 100%;
 }
@@ -67,10 +73,7 @@
 }
 
 .border_bottom {
-	/* width: 100%; */
 	height: 1px;
-	margin: 2px;
-	margin: 20px;
 	background: #e3e3e3;
 	border-radius: 30px;
 }
@@ -78,25 +81,32 @@
 .data_style {
 	display: flex;
 	flex-wrap: wrap;
-
-	/* width: 75%; */
-	padding: 12px 8px 8px;
 }
 
-.border_left_side {
+.border_left_top {
 	height: 76px;
-	margin: 0 5%;
+	margin: 12px 0;
+	border-left: 2px solid #cfcfcf;
+}
+
+.border_left_buttom {
+	height: 76px;
+	margin: 12px 0 12px 20px;
 	border-left: 2px solid #cfcfcf;
 }
 
 .due_ageing {
 	align-items: center;
 	width: 120px;
-
-	/* margin: 10px 0 2px 20px; */
 }
 
 .label {
+	font-size: 13px;
+	font-weight: 450;
+}
+
+.labels {
+	padding: 2px;
 	font-size: 13px;
 	font-weight: 450;
 }
@@ -105,21 +115,13 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-
-	/* width: 75%; */
 	padding: 12px 8px 8px;
 	margin-left: 20px;
 	font-size: 14px;
-
-	/* .space-bottom {
-		margin-bottom: 12px;
-	} */
-
 	font-weight: 600;
 }
 
 .border_all {
-	/* height: 76px; */
 	margin: 20px 1%;
 	border: 1px solid #cfcfcf;
 }
@@ -127,7 +129,7 @@
 .border_overall {
 	align-items: center;
 	width: 33%;
-	padding: 24px;
+	padding-top: 24px;
 	margin: 12px 12px 0 14px;
 	margin-top: 16px;
 	color: #ed3726;
@@ -136,11 +138,19 @@
 	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
 }
 
-.text_amount_styles {
+.sub_border_overall {
 	align-items: center;
-	margin: 10px 10px 2px 20px;
-	font-size: 18px;
-	font-style: normal;
+	width: 33%;
+	padding: 10px;
+	margin: 12px 12px 0 14px;
+	margin-top: 16px;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
+}
+
+.text_amount_styles {
+	margin: 28px 26px 0 40px;
+	font-size: 16px;
 	font-weight: 500;
 }
 
@@ -152,4 +162,25 @@
 
 .stats_styles {
 	display: flex;
+}
+
+.import_export_style {
+	display: flex;
+	align-items: center;
+}
+
+.stats_border_left {
+	height: 45px;
+	border-left: 2px solid #cfcfcf;
+}
+
+.stats_overall_import_export {
+	margin-right: 14px;
+}
+
+.stats_text {
+	align-items: center;
+	margin-left: 20px;
+	font-size: 12px;
+	font-weight: 400;
 }
