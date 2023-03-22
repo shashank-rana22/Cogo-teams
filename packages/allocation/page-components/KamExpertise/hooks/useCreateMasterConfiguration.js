@@ -20,7 +20,6 @@ function useCreateMasterConfiguration(props) {
 			mastery_name      : masteryItemData.badge_name,
 			badges            : masteryItemData.expertise_configuration_detail_ids,
 			description_input : masteryItemData.description,
-			// ToDo : image url -> handle using previous data
 		},
 	});
 
@@ -44,7 +43,7 @@ function useCreateMasterConfiguration(props) {
 				status                             : 'active',
 				badge_details                      : [
 					{
-						image_url : image_input,
+						image_url : image_input || masteryItemData?.badge_details?.[0]?.image_url,
 						medal     : mastery_name,
 					},
 

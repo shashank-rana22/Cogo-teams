@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { snakeCase } from '@cogoport/utils';
 
 import getAddRuleControls from '../configurations/get-add-rule-controls';
 
@@ -8,7 +9,7 @@ function useCreateNewEvent(props) {
 	const {
 		attributeList = [],
 		listRefetch = () => {},
-		setToggleEvent = () => {},
+		setEventListData = () => {},
 	} = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -25,6 +26,7 @@ function useCreateNewEvent(props) {
 		const {
 			expertise_type, group_name, condition_name, event_state_on, description, attribute,
 		} = formValues;
+
 		const payloadAttribute = [];
 		attributeList.forEach((res) => {
 			Object.keys(formValues).forEach((response) => {
@@ -42,16 +44,18 @@ function useCreateNewEvent(props) {
 		} else {
 			try {
 				const payload = {
-					expertise_type,
-					group_name,
-					condition_name,
+					expertise_type : snakeCase(expertise_type || ''),
+					group_name     : snakeCase(group_name || ''),
+					condition_name : snakeCase(condition_name || ''),
 					event_state_on,
-					attributes : payloadAttribute,
-					status     : 'draft',
+					attributes     : payloadAttribute,
+					status         : 'draft',
 					description,
 					attribute,
 
 				};
+
+				console.log('create payload::', payload);
 
 				await trigger({
 					data: payload,
@@ -59,7 +63,10 @@ function useCreateNewEvent(props) {
 
 				Toast.success('Event Successfully Created!');
 				listRefetch();
-				setToggleEvent('eventList');
+				setEventListData({
+					data        : {},
+					toggleEvent : 'eventList',
+				});
 			} catch (error) {
 				Toast.error(
 					getApiErrorString(error?.response?.data)

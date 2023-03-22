@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useEditExpertiseParameters from '../../../../../hooks/useEditExpertiseParameters';
@@ -26,44 +27,67 @@ function ExpertiseParameters(props) {
 	return (
 		<div>
 			<div className={styles.card_container}>
-				<div className={styles.cards}>
-					<div className={styles.button_container}>
 
-						{editMode ? (
-							<>
-								<Button
-									themeType="secondary"
-									onClick={() => setEditMode(false)}
-									disabled={editLoading}
-								>
-									Cancel
+				{isEmpty(list) && !loading ? (
+					<div className={styles.empty_card}>
 
-								</Button>
-								<Button
-									themeType="primary"
-									type="submit"
-									size="md"
-									style={{ marginLeft: '8px' }}
-									onClick={handleSubmit(onSave)}
-									disabled={editLoading}
-								>
-									Save
+						There are no conditions currently active,
+						please add a score parameter to begin
 
-								</Button>
+						<Button
+							themeType="secondary"
+							onClick={onClickAddCondition}
+							style={{ marginTop: '16px' }}
+						>
+							+ Condition
 
-							</>
+						</Button>
 
-						)
-							: <Button themeType="secondary" onClick={() => setEditMode(!editMode)}>Edit</Button>}
 					</div>
+				) : (
+					<div className={styles.cards}>
+						<div className={styles.button_container}>
 
-					{loading ? <LoadingState />
-						: list.map((item) => <CardItem editMode={editMode} item={item} control={control} />) }
+							{editMode ? (
+								<>
+									<Button
+										themeType="secondary"
+										onClick={() => setEditMode(false)}
+										disabled={editLoading}
+									>
+										Cancel
 
-				</div>
+									</Button>
+									<Button
+										themeType="primary"
+										type="submit"
+										size="md"
+										style={{ marginLeft: '8px' }}
+										onClick={handleSubmit(onSave)}
+										disabled={editLoading}
+									>
+										Save
+
+									</Button>
+
+								</>
+
+							)
+								: <Button themeType="secondary" onClick={() => setEditMode(!editMode)}>Edit</Button>}
+						</div>
+
+						{loading ? <LoadingState />
+							: list.map((item) => <CardItem editMode={editMode} item={item} control={control} />) }
+
+						<div className={styles.condition_button_container}>
+							<Button themeType="secondary" onClick={onClickAddCondition}>+ Condition</Button>
+						</div>
+
+					</div>
+				) }
+
 			</div>
 
-			<Button themeType="secondary" onClick={onClickAddCondition}>+ Condition</Button>
 		</div>
 	);
 }

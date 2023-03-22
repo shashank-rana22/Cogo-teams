@@ -25,7 +25,7 @@ function KamExpertise() {
 	const startFullQuarter = new Date(year, quarter * 3 - 3, 1);
 
 	// year end
-	const yearEnd = new Date(year, 1, 1);
+	const yearEnd = new Date(year, 0, 1);
 
 	const TAB_PANEL_MAPPING = {
 		this_week: {
@@ -74,12 +74,11 @@ function KamExpertise() {
 
 			<Header />
 
-			<div className={styles.tab_list}>
+			<div>
 				<Tabs
 					activeTab={activeTab}
 					themeType="tertiary"
 					onChange={setActiveTab}
-					className={styles.tabs}
 				>
 					{Object.values(TAB_PANEL_MAPPING).map((item) => {
 						const { name = '', title = '', Component, params = {} } = item;

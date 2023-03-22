@@ -14,7 +14,8 @@ const ATTRIBUTE_MAPPING = {
 
 function useUpdateEvent(props) {
 	const {
-		updateEventListData = {}, listRefetch = () => {}, attributeList = [], setToggleEvent = () => {},
+		eventListData = {}, listRefetch = () => {}, attributeList = [],
+		setEventListData = () => {},
 	} = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -23,6 +24,7 @@ function useUpdateEvent(props) {
 		authkey : 'post_allocation_kam_expertise_event_rule_mapping',
 	}, { manual: true });
 
+	const { data : eventData } = eventListData;
 	const {
 		expertise_type : expertiseType,
 		group_name : groupName,
@@ -31,7 +33,7 @@ function useUpdateEvent(props) {
 		description : eventDescription,
 		rule_mapping_id : ruleMappingId,
 		rules,
-	} = updateEventListData;
+	} = eventData;
 
 	const formProps = useForm({
 		defaultValues: {
@@ -72,7 +74,10 @@ function useUpdateEvent(props) {
 					data: payload,
 				});
 
-				setToggleEvent('eventList');
+				setEventListData({
+					data        : {},
+					toggleEvent : 'eventList',
+				});
 				Toast.success('Sucessfully Updated Event!');
 				listRefetch();
 			} catch (error) {

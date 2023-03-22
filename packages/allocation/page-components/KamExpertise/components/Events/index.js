@@ -1,22 +1,24 @@
-import { Pagination } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
 
 import useGetEventList from '../../hooks/useGetEventList';
 
 import CreateEvent from './CreateEvent';
-import EventList from './EventList';
-import Header from './Header';
+import EventDetails from './EventDetails';
 import styles from './styles.module.css';
 
+const CONSTANT_KEYS = {
+	EVENT_LIST : 'eventList',
+	POST_EVENT : 'updateEvent',
+};
+
+const { EVENT_LIST, POST_EVENT } = CONSTANT_KEYS;
+
+const EVENTS_COMPONENTS_MAPPING = {
+	[EVENT_LIST] : EventDetails,
+	[POST_EVENT] : CreateEvent,
+};
+
 function Events() {
-	const router = useRouter();
-
-	const onClickBack = () => {
-		router.push('/allocation/kam-expertise');
-	};
-
 	const {
 		list = [],
 		loading,
@@ -28,12 +30,32 @@ function Events() {
 		expertise,
 		setExpertise,
 		listRefetch,
+		onClickBack,
+		eventListData,
+		setEventListData,
 	} = useGetEventList();
 
-	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
+	const componentProps = {
+		[EVENT_LIST]: {
+			setEventListData,
+			debounceQuery,
+			loading,
+			setSearchValue,
+			searchValue,
+			expertise,
+			setExpertise,
+			list,
+			paginationData,
+			getNextPage,
+		},
+		[POST_EVENT]: {
+			eventListData,
+			listRefetch,
+			setEventListData,
+		},
+	};
 
-	const [toggleEvent, setToggleEvent] = useState('eventList');
-	const [eventListData, setEventListData] = useState({});
+	const Component = EVENTS_COMPONENTS_MAPPING[eventListData?.toggleEvent] || null;
 
 	return (
 		<section className={styles.main}>
@@ -46,54 +68,10 @@ function Events() {
 				</div>
 			</div>
 
-			{
-			(toggleEvent === 'eventList') && (
-				<>
-					<Header
-						setToggleEvent={setToggleEvent}
-						debounceQuery={debounceQuery}
-						loading={loading}
-						setSearchValue={setSearchValue}
-						searchValue={searchValue}
-						expertise={expertise}
-						setExpertise={setExpertise}
-					/>
-					<div>
-						<EventList
-							list={list}
-							setEventListData={setEventListData}
-							setToggleEvent={setToggleEvent}
-							loading={loading}
-						/>
-						<div className={styles.pagination_container}>
-							<Pagination
-								type="table"
-								currentPage={page}
-								totalItems={total_count}
-								pageSize={page_limit}
-								onPageChange={getNextPage}
-							/>
-						</div>
-					</div>
-				</>
-
-			)
-}
-
-			{(toggleEvent === 'createNew') && (
-				<CreateEvent
-					setToggleEvent={setToggleEvent}
-					listRefetch={listRefetch}
-
-				/>
-			)}
-
-			{(toggleEvent === 'updateEvent') && (
-				<CreateEvent
-					setToggleEvent={setToggleEvent}
-					updateEventListData={eventListData}
-					listRefetch={listRefetch}
-
+			{Component && (
+				<Component
+					key={eventListData?.toggleEvent}
+					{...(componentProps[eventListData?.toggleEvent] || {})}
 				/>
 			)}
 

@@ -82,8 +82,8 @@ function KamData(props) {
 		return (
 			<div className={styles.empty_kam}>
 				<EmptyState
-					height={250}
-					width={450}
+					height={220}
+					width={380}
 					flexDirection="column"
 					textSize={20}
 				/>

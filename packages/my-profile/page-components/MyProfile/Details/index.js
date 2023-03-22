@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 import TaggedAgent from './TaggedAgents';
 
 function Details({
-	detailsData, userBadges,
+	detailsData, badgeListLoading, userBadges, profileBadgeRefetch,
 }) {
 	return (
 
@@ -25,7 +25,11 @@ function Details({
 			</div>
 
 			<div className={styles.badge_details}>
-				<Badges userBadges={userBadges} />
+				<Badges
+					badgeListLoading={badgeListLoading}
+					userBadges={userBadges}
+					profileBadgeRefetch={profileBadgeRefetch}
+				/>
 			</div>
 		</div>
 

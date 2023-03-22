@@ -29,7 +29,9 @@ function AllBadges() {
 	} = useGetAllocationKamExpertiseProfile(user_id);
 
 	const {
-		badgeDetail, badgeDetailloading, setBadgeParams,
+		badgeDetail = {},
+		badgeDetailloading = false,
+		setBadgeParams = () => {},
 	} = useGetBadgeDescription();
 
 	const showAllBadges = () => {

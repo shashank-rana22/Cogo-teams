@@ -30,7 +30,7 @@ function BadgeDescription(props) {
 							</div>
 						</div>
 						{
-							Array(2).fill('').map(() => (
+							[1, 2].fill('').map(() => (
 								<div className={styles.lable_value}>
 									<Placeholder width="100%" height="32px" />
 									<Placeholder width="100%" height="32px" style={{ marginTop: '8px' }} />
@@ -51,8 +51,8 @@ function BadgeDescription(props) {
 		return (
 			<div style={{ background: '#fff', padding: '20px 0', borderRadius: '8px' }}>
 				<EmptyState
-					height={250}
-					width={450}
+					height={220}
+					width={380}
 					flexDirection="column"
 					emptyText="Badge Details not found"
 				/>
@@ -75,7 +75,7 @@ function BadgeDescription(props) {
 						/>
 						{/* //Todo: stars arent available in the response */}
 						{/* <div className={styles.stars}>
-							{Array(3).fill('').map(() => (
+							{[1, 2, 3].fill('').map(() => (
 								<IcCStar width={40} height={40} stroke="#FFDF33" />
 							))}
 						</div> */}

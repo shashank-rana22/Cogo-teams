@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function StarCollection() {
 	return (
 		<div className={styles.stars_container}>
-			{Array(3).fill('').map(() => (
+			{[1, 2, 3].fill('').map(() => (
 				<IcCStar width={24} stroke="#FFDF33" />
 			))}
 		</div>
@@ -20,7 +20,20 @@ function StarCollection() {
 function BadgeList(props) {
 	const { listLoading = false, userBadges, showBadgeDetails } = props;
 
-	const { badges_got = [], badges_not_got = [] } = userBadges || {};
+	const { badges_got: badgesGot = [], badges_not_got : badgesNotGot = [] } = userBadges || {};
+
+	if (isEmpty(userBadges)) {
+		return (
+			<div className={styles.empty_container}>
+				<EmptyState
+					height={220}
+					width={380}
+					flexDirection="column"
+					emptyText="Badges not found"
+				/>
+			</div>
+		);
+	}
 
 	if (listLoading) {
 		return (
@@ -28,7 +41,7 @@ function BadgeList(props) {
 				<p className={styles.heading}>Badges List</p>
 				<div className={styles.badges_container}>
 					{
-                        badges_got?.map((item) => (
+                        badgesGot?.map((item) => (
 	<div key={item.id} className={styles.container}>
 		<div className={styles.image_container}>
 			<Placeholder height={64} width={64} />
@@ -37,7 +50,7 @@ function BadgeList(props) {
                         ))
                     }
 					{
-                        badges_not_got?.map((item) => (
+                        badgesNotGot?.map((item) => (
 	<div key={item.id} className={styles.container}>
 		<div className={styles.image_container}>
 			<Placeholder height={64} width={64} />
@@ -50,25 +63,12 @@ function BadgeList(props) {
 		);
 	}
 
-	if (isEmpty(userBadges)) {
-		return (
-			<div className={styles.empty_container}>
-				<EmptyState
-					height={250}
-					width={450}
-					flexDirection="column"
-					emptyText="Badges not found"
-				/>
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.badge_list_container}>
 			<p className={styles.heading}>Badges List</p>
 			<div className={styles.badges_container}>
 				{
-                    badges_got?.map((item) => (
+                    badgesGot?.map((item) => (
 	<Tooltip content={item.medal}>
 		<div
 			key={item.id}
@@ -86,7 +86,7 @@ function BadgeList(props) {
                     ))
                 }
 				{
-                    badges_not_got?.map((item) => (
+                    badgesNotGot?.map((item) => (
 	<Tooltip content={item.medal}>
 		<div
 			key={item.id}

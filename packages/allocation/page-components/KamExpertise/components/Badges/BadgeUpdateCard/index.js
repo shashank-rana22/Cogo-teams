@@ -11,14 +11,15 @@ function BadgeUpdateCard(props) {
 	const { medalType, score = '', isSingleBadgeEdit = false, inputPlaceHolder = '' } = data;
 	const { bronze_details = {}, silver_details = {}, gold_details = {} } = badgeItemData;
 
-	const InputController = getFieldController('number');
-	const UploadController = getFieldController('fileUpload');
-
 	const MEDAL_IMAGE_MAPPING = {
 		Bronze : bronze_details?.image_url,
 		Silver : silver_details?.image_url,
 		Gold   : gold_details?.image_url,
 	};
+
+	const InputController = getFieldController('number');
+	const UploadController = getFieldController('fileUpload');
+
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
 			<div
@@ -27,7 +28,6 @@ function BadgeUpdateCard(props) {
 			>
 				<div>
 					<p style={{ color: '#4f4f4f', marginBottom: 16 }}>Medal</p>
-
 					<p>{medalType}</p>
 				</div>
 
@@ -57,7 +57,10 @@ function BadgeUpdateCard(props) {
 			</div>
 
 			<div className={styles.lower_subheader2}>
-				{`${medalType} Medal`}
+				{medalType}
+				{' '}
+				Medal
+
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<Tooltip content="Lorem ipsum dolor sit amet, consectetur adipiscing elit" placement="top">
 						<div style={{ display: 'flex' }}>
@@ -85,7 +88,7 @@ function BadgeUpdateCard(props) {
 				</div>
 
 				<div>
-					{ watch(`${medalType}_img_value`)
+					{watch(`${medalType}_img_value`)
 						? (
 							<div className={styles.preview}>
 								<img src={watch(`${medalType}_img_value`)} alt="preview_image" />
@@ -93,8 +96,7 @@ function BadgeUpdateCard(props) {
 						)
 						: null}
 
-					{
-					!isEmpty(data && badgeItemData) && !watch(`${medalType}_img_value`)
+					{!isEmpty(badgeItemData) && !watch(`${medalType}_img_value`)
 						? (
 							<div className={styles.preview}>
 								<img
@@ -103,8 +105,8 @@ function BadgeUpdateCard(props) {
 								/>
 							</div>
 						)
-						: null
-					}
+						: null}
+
 				</div>
 			</div>
 
