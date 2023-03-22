@@ -4,7 +4,6 @@
 	color: #6fa5ab;
 }
 
-
 .container {
 	position: relative;
 	padding: 24px;
@@ -27,14 +26,14 @@
 
 .sample_div {
 	display: flex;
-	white-space: nowrap ;
 	align-items: center;
+	white-space: nowrap;
 }
 
 .sample_text {
-	text-decoration: underline;
 	margin-left: 4px;
 	font-size: 12px;
+	text-decoration: underline;
 }
 
 .upload_icon {
@@ -45,7 +44,7 @@
 
 .breadcrumb_outer_container {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
-	margin: 20px 0px 4px 0px;
+	justify-content: space-between;
+	margin: 20px 0 4px;
 }

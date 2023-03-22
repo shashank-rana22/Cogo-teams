@@ -49,3 +49,16 @@
 		border-right: 1px solid #e0e0e0 !important;
 	}
 }
+
+.rotate {
+	transform: rotate(180deg);
+}
+
+.styled_icon {
+	width: 16px;
+	height: 16px;
+	margin-right: 4px;
+	cursor: pointer;
+	fill: #393f70;
+	transition: transform 0.5s;
+}
