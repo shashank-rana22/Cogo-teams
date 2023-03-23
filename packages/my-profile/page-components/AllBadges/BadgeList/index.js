@@ -12,7 +12,7 @@ function StarCollection() {
 		<div className={styles.stars_container}>
 			{[1, 2, 3].map((itm) => (
 				<div key={itm}>
-					<IcCStar width={10} stroke="#FFDF33" />
+					<IcCStar width={12} stroke="#FFDF33" />
 				</div>
 			))}
 		</div>

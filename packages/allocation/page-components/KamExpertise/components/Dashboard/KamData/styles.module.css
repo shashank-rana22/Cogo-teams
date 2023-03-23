@@ -40,3 +40,10 @@
     background: #fff;
     margin: 20px 0;
 }
+
+.level_zero {
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    margin-top: 4px;
+}

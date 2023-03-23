@@ -1,6 +1,6 @@
 import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -61,7 +61,7 @@ function ListItem(props) {
 						}
 					</div>
 					<span className={styles.link}>
-						{!isEmpty(badge_details)
+						{ badge_details?.length > 3
 						&& (
 							<span
 								role="presentation"
@@ -82,7 +82,7 @@ function ListItem(props) {
 	<div className={styles.exp} key={expertise.expertise_type}>
 		<div className={styles.expertise}>
 			{startCase(expertise.expertise_type || '')}
-			<b>{expertise.score}</b>
+			<div><b>{expertise.score}</b></div>
 		</div>
 	</div>
                         ))

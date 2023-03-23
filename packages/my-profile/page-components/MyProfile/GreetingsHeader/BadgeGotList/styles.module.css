@@ -26,3 +26,9 @@
     display: flex;
     align-items: center;
 }
+
+.stars {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+}
