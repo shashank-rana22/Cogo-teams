@@ -25,7 +25,7 @@ const useEndTest = () => {
 				},
 			});
 
-			localStorage.removeItem('currentQuestion');
+			localStorage.removeItem(`current_question_${test_id}_${user_id}`);
 			localStorage.removeItem('visibilityChangeCount');
 
 			router.push('/learning?activeTab=test_module');

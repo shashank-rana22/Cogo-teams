@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
@@ -15,6 +16,15 @@ function Footer({
 	fetchQuestions,
 	setShowLeaveTestModal,
 }) {
+	const {
+		profile: {
+			user: { id: user_id },
+		},
+		general: {
+			query: { test_id },
+		},
+	} = useSelector((state) => state);
+
 	const { loading, updateAnswerList } = useUpdateAnswerQuestion({ fetchQuestions });
 
 	const sendAnswer = async () => {
@@ -33,7 +43,10 @@ function Footer({
 			await updateAnswerList(data?.id, answer, str);
 		}
 		const num = Number(currentQuestion);
-		localStorage.setItem('currentQuestion', total_question > currentQuestion ? num + 1 : num);
+		localStorage.setItem(
+			`current_question_${test_id}_${user_id}`,
+			total_question > currentQuestion ? num + 1 : num,
+		);
 
 		fetchQuestions({
 			currentQ:
@@ -63,7 +76,10 @@ function Footer({
 			await updateAnswerList(data?.id, answer, str);
 		}
 		const num = Number(currentQuestion);
-		localStorage.setItem('currentQuestion', total_question > currentQuestion ? num + 1 : num);
+		localStorage.setItem(
+			`current_question_${test_id}_${user_id}`,
+			total_question > currentQuestion ? num + 1 : num,
+		);
 
 		fetchQuestions({
 			currentQ:
