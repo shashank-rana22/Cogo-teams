@@ -5,10 +5,11 @@ function HistoryPagination({ data = {}, filters = {}, setFilters = () => {} }) {
 	const onPageChange = (val) => {
 		setFilters({ ...filters, page: val });
 	};
+
 	return (
 		<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 			<Pagination
-				currentPage={page}
+				currentPage={total_count > 0 ? page : 0}
 				pageSize={page_limit}
 				totalItems={total_count}
 				onPageChange={onPageChange}

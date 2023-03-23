@@ -26,7 +26,7 @@ const useGetEntityStakeholderMappings = () => {
 				console.log(err);
 			}
 		})();
-	}, []);
+	}, [triggerGetEntityStakeholder]);
 
 	useEffect(() => {
 		getEntityStakeholder();

@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Loader } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
 
 import { BL_CATEGORY_MAPPING, BL_PREFERENCE_MAPPING } from '../../../../../constants/BL_MAPPING';
@@ -19,13 +19,14 @@ const DOCUMENT_FORM_FIELDS = ['bl_category', 'bl_preference', 'preferred_mode_of
 function DocumentForm({
 	sop_detail = {},
 	setShowForm = () => {}, shipment_ids = {}, showForm = '', instruction_id = '',
-	getProcedureTrigger = () => {},
+	getProcedureTrigger = () => {}, auditsTrigger = () => {},
 }) {
 	const { shipment_id, organization_id, procedure_id } = shipment_ids;
 
 	const afterUpdateOrCreateRefetch = () => {
 		setShowForm(false);
 		getProcedureTrigger();
+		if (showForm === 'edit') auditsTrigger();
 	};
 
 	const { data: orgData, loading } = useGetShipmentOperatingProcedure({
@@ -80,6 +81,7 @@ function DocumentForm({
 
 	return (
 		<div className={styles.form_container}>
+			{loading && <Loader />}
 			{!loading
 				? (
 					<form>

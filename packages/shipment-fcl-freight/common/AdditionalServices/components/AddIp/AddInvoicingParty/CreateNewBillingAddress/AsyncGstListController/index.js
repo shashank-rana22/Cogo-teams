@@ -1,11 +1,11 @@
 import { Select } from '@cogoport/components';
 import React from 'react';
 
+import styles from './styles.module.css';
 import useGetGstList from './useGetGstList';
 
-function AsyncGstListController({ gstNumber, setGstNumber = () => {} }) {
-	const registration_number = 'AAACV2809D';
-	const { data } = useGetGstList({ registration_number });
+function AsyncGstListController({ gstNumber, setGstNumber = () => {}, registrationNumber = '' }) {
+	const { data } = useGetGstList({ registrationNumber });
 
 	const options = (data?.data?.gsts || []).map((item) => ({ label: item, value: item }));
 
@@ -18,6 +18,7 @@ function AsyncGstListController({ gstNumber, setGstNumber = () => {} }) {
 				value={gstNumber}
 				onChange={(e) => setGstNumber(e)}
 				options={options}
+				className={styles.gst_select}
 			/>
 		</div>
 	);

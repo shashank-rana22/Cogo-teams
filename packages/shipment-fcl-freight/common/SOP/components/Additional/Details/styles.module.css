@@ -1,8 +1,10 @@
 .container{
     display: flex;
+    justify-content: space-between;
 }
 .add{
     width: 20%;
+    margin-bottom: 10px;
 }
 .addtional_container{
     width: 80%;
@@ -19,6 +21,12 @@
         width: 100%;
         margin-top: 6px;
     }
+}
+
+.no_data{
+    font-weight: 600;
+    font-size: 12px;
+    padding: 8px 0;
 }
 
 .addtional_data{

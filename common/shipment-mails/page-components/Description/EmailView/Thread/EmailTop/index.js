@@ -5,8 +5,6 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function EmailTop({ data = {} }) {
-	// confirm key when deploying it is recieved_time or mentioned one
-
 	const displayDate = !isEmpty(data) ? format(
 		(addHours(new Date(data?.receivedDateTime), 5.5)).toString(),
 		' dd MMM, yyyy',

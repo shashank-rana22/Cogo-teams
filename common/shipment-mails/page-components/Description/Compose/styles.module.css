@@ -71,4 +71,12 @@
 
 		color: #333333;
 	}
+} 
+
+.rich_text_editor {
+
+	&.RichTextEditor__editor{
+		height: 300px;
+	}
+
 }

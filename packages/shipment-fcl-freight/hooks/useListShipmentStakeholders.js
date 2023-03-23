@@ -1,12 +1,12 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useListShipmentStakeholders = ({ defaultParams = {}, shipment_id = '' }) => {
+const useListStakeholders = ({ defaultParams = {}, shipment_id = '' }) => {
 	const [apiData, setApiData] = useState({});
 	const [loading, setLoading] = useState(false);
 	const [filters, setFilters] = useState({});
 
-	const [{ loading:apiLoading }, trigger] = useRequest('list_shipment_stakeholders', { manual: true });
+	const [{ loading:apiLoading }, trigger] = useRequest('fcl_freight/list_stakeholders', { manual: true });
 
 	const apiTrigger = async () => {
 		setLoading(true);
@@ -42,4 +42,4 @@ const useListShipmentStakeholders = ({ defaultParams = {}, shipment_id = '' }) =
 	};
 };
 
-export default useListShipmentStakeholders;
+export default useListStakeholders;

@@ -1,5 +1,5 @@
 import { Table } from '@cogoport/components';
-import { format, isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 const getFieldName = (key) => {
 	if (key === 'preferred_mode_of_document_execution') {
@@ -11,6 +11,11 @@ const getFieldName = (key) => {
 	}
 
 	return startCase(key);
+};
+
+const formatDate = (value) => {
+	const findIndex = value.indexOf('T');
+	return value.substring(0, findIndex);
 };
 
 function HistoryTable({ data = {}, loading = false }) {
@@ -26,7 +31,7 @@ function HistoryTable({ data = {}, loading = false }) {
 					old_value         : startCase(eachAudit?.data?.[key]?.old_value || ''),
 					new_value         : startCase(eachAudit?.data?.[key]?.new_value || ''),
 					performed_by_user : eachAudit?.performed_by_user?.name || '',
-					updated_at        : format(eachAudit?.updated_at),
+					updated_at        : formatDate(eachAudit?.updated_at),
 				};
 				formatData.push(temp);
 			});

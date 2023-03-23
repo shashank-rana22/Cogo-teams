@@ -3,7 +3,7 @@ import { useEffect, useCallback } from 'react';
 
 function useListShipmentServices({ shipment_data }) {
 	const [{ loading : servicesLoading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/list_services',
+		url    : 'fcl_freight/get_service',
 		method : 'GET',
 	}, { manual: true });
 
@@ -12,11 +12,9 @@ function useListShipmentServices({ shipment_data }) {
 			try {
 				await trigger({
 					params: {
-						filters: {
-							shipment_id        : shipment_data?.id,
-							additional_methods : ['booking_requirement', 'stakeholder', 'service_objects'],
-						},
-						additional_methods: ['service_objects', 'stakeholder'],
+
+						shipment_id        : shipment_data?.id,
+						additional_methods : ['service_objects', 'stakeholder', 'booking_requirements'],
 					},
 				});
 			} catch (err) {
@@ -26,14 +24,14 @@ function useListShipmentServices({ shipment_data }) {
 	}, [trigger, shipment_data?.id]);
 
 	useEffect(() => {
-		if (shipment_data?.id) { if (shipment_data?.id) { listServices(); } }
+		if (shipment_data?.id) { listServices(); }
 	}, [listServices, shipment_data?.id]);
 
 	return {
 		servicesGet: {
 			servicesLoading,
 			refetchServices : listServices,
-			servicesList    : data?.list || [],
+			servicesList    : data?.summary || [],
 		},
 
 	};

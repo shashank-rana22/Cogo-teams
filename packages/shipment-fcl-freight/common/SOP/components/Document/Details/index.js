@@ -26,7 +26,7 @@ function Details({ sop_detail = {}, setShowForm = () => {} }) {
 
 	return (
 		<div className={styles.container}>
-			{isEmpty(sop_detail) ? <div>No Data Available</div>
+			{isEmpty(sop_detail) ? <div className={styles.no_data}>No Data Available</div>
 				: (
 					<div>
 						{Object.keys(mapping).map((key) => <LabelValue label={key} value={mapping[key]} />)}

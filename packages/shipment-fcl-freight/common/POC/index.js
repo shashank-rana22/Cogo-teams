@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -16,7 +17,7 @@ import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
 function POC({ shipment_data = {} }) {
-	const { id:shipment_id, importer_exporter_id } = shipment_data || {};
+	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
 	const [addPoc, setAddPoc] = useState(null);
@@ -24,6 +25,7 @@ function POC({ shipment_data = {} }) {
 	const {
 		data,
 		apiTrigger:tradePartnerTrigger,
+		loading,
 	} = useListShipmentTradePartners({ shipment_id });
 
 	const { data:servicesData } = usePocServiceList({
@@ -38,62 +40,68 @@ function POC({ shipment_data = {} }) {
 	const serviceProviders = getServiceProviderData(servicesData);
 
 	return (
-		<div className={styles.container}>
-			<TradeParties
-				tradePartnersData={data}
-				setAddCompany={setAddCompany}
-				serviceProviders={serviceProviders}
-			/>
+		<div>
+			{loading
+				? <div className={styles.loader}><Loader /></div>
 
-			<POCS
-				tradePartnersData={data}
-				setAddPoc={setAddPoc}
-				shipment_id={shipment_id}
-			/>
+				: (
+					<div className={styles.container}>
+						<TradeParties
+							tradePartnersData={data}
+							setAddCompany={setAddCompany}
+							serviceProviders={serviceProviders}
+						/>
 
-			<AddedTradeParty
-				tradePartnersData={data}
-				setAddCompany={setAddCompany}
-				setAddPoc={setAddPoc}
-			/>
+						<POCS
+							tradePartnersData={data}
+							setAddPoc={setAddPoc}
+							shipment_id={shipment_id}
+						/>
 
-			<NotifyingParty
-				tradePartnersData={data}
-				shipment_id={shipment_id}
-				tradePartnerTrigger={tradePartnerTrigger}
-			/>
+						<AddedTradeParty
+							tradePartnersData={data}
+							setAddCompany={setAddCompany}
+							setAddPoc={setAddPoc}
+						/>
 
-			<InvoicingParty
-				tradePartnersData={data}
-			/>
-			<ServiceProvider
-				tradePartnersData={data}
-				setAddPoc={setAddPoc}
-				serviceProviders={serviceProviders}
-			/>
+						<NotifyingParty
+							tradePartnersData={data}
+							shipment_id={shipment_id}
+							tradePartnerTrigger={tradePartnerTrigger}
+						/>
 
-			{!isEmpty(addCompany)
-			&& (
-				<AddCompanyModal
-					tradePartnersData={data}
-					addCompany={addCompany}
-					setAddCompany={setAddCompany}
-					tradePartnerTrigger={tradePartnerTrigger}
-					shipment_id={shipment_id}
-					importer_exporter_id={importer_exporter_id}
-				/>
-			)}
+						<InvoicingParty
+							tradePartnersData={data}
+						/>
+						<ServiceProvider
+							tradePartnersData={data}
+							setAddPoc={setAddPoc}
+							serviceProviders={serviceProviders}
+						/>
 
-			{!isEmpty(addPoc) && (
-				<AddPocModal
-					setAddPoc={setAddPoc}
-					addPoc={addPoc}
-					tradePartnerTrigger={tradePartnerTrigger}
-					importer_exporter_id={importer_exporter_id}
-					shipment_id={shipment_id}
-				/>
-			)}
+						{!isEmpty(addCompany) && (
+							<AddCompanyModal
+								tradePartnersData={data}
+								addCompany={addCompany}
+								setAddCompany={setAddCompany}
+								tradePartnerTrigger={tradePartnerTrigger}
+								shipment_id={shipment_id}
+								importer_exporter_id={importer_exporter_id}
+							/>
+						)}
 
+						{!isEmpty(addPoc) && (
+							<AddPocModal
+								setAddPoc={setAddPoc}
+								addPoc={addPoc}
+								tradePartnerTrigger={tradePartnerTrigger}
+								importer_exporter_id={importer_exporter_id}
+								shipment_id={shipment_id}
+								services={services}
+							/>
+						)}
+					</div>
+				)}
 		</div>
 	);
 }
