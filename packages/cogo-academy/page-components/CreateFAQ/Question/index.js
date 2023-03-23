@@ -91,8 +91,7 @@ function CreateFAQ() {
 		if (query?.id) {
 			fetchQuestion();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query?.id]);
+	}, [fetchQuestion, query?.id]);
 
 	const filterTags = [];
 	(faq_tags || []).forEach((item) => {
