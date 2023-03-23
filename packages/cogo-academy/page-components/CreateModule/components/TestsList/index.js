@@ -135,6 +135,7 @@ function TestsList({ activeTab, setActiveTab }) {
 
 						return (
 							<TabPanel
+								key={key}
 								name={key}
 								title={title}
 								className={styles.tabItem}
