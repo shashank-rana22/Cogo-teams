@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import Header from '../Header';
 import TestsList from '../TestsList';
 
 function HomePage() {
@@ -8,7 +7,6 @@ function HomePage() {
 
 	return (
 		<div>
-			<Header activeTab={activeTab} />
 			<TestsList activeTab={activeTab} setActiveTab={setActiveTab} />
 		</div>
 	);

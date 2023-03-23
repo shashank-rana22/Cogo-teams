@@ -62,7 +62,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	};
 
 	const onClickBackButton = () => {
-		const href = '/learning/faq/create';
+		const href = '/learning';
 		router.push(href, href);
 	};
 

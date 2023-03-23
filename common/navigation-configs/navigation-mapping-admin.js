@@ -1997,8 +1997,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'cogo_academy-create_faq',
 				title         : 'Creator Management System',
-				href          : '/v2/learning/faq/create',
-				as            : '/v2/learning/faq/create',
+				href          : '/v2/learning',
+				as            : '/v2/learning',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.create_faq,
