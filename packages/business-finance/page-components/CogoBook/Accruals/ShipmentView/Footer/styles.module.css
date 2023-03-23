@@ -85,3 +85,9 @@
   display: flex;
   justify-content: flex-end;
 }
+.margin {
+  margin: 20px;
+}
+.margin_not {
+  margin: 20px 20px 0px 20px;
+}

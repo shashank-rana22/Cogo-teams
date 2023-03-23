@@ -57,7 +57,6 @@
       }
     }
   }
-  cursor: pointer;
 }
 .hr_filter {
   border: 1px solid #ee3425;
@@ -125,11 +124,13 @@
       .react-datepicker__close-icon::after {
         background: none !important;
       }
+      input {
+        cursor: not-allowed !important;
+      }
 
       .react-datepicker__close-icon {
         border: none;
       }
     }
   }
-  cursor: not-allowed;
 }

@@ -191,7 +191,9 @@ function Footer({
 				<Modal show={openModal} onClose={() => setOpenModal(false)} size="sm">
 					<Modal.Body>
 						<div className={styles.flex_modal}>
-							<div style={{ margin: '20px 20px 0px 20px' }}>Please Choose The Selection Mode </div>
+							<div className={!value ? styles.margin : styles.margin_not}>
+								{!value ? 'Are you sure you want to select this?' : 'Please Choose The Selection Mode' }
+							</div>
 							{value && (
 								<div>
 									<RadioGroup

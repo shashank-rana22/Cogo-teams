@@ -191,6 +191,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 				],
 			});
 			setPayload([...payload, item]);
+			setBulkSection(() => ({ value: false }));
 		} else {
 			setCheckedRows({
 				...checkedRows,
