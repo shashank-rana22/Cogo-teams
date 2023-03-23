@@ -19,6 +19,10 @@ function CohortTable({ isComponentInViewport, revenueFilter, headerFilters }) {
 
 	const newColumns = ResultColumns({ loading });
 
+	const handlePagination = (p) => {
+		setPage(p);
+	};
+
 	return (
 		<div className={styles.container_table}>
 			<div className={styles.heading}>Cohort</div>
@@ -43,17 +47,36 @@ function CohortTable({ isComponentInViewport, revenueFilter, headerFilters }) {
 
 			</div>
 
-			<div className={styles.pagination_container}>
-				{page && (
-					<Pagination
-						className={styles.pagination}
-						type="page"
-						currentPage={page}
-						pageSize={page_size}
-						onPageChange={(val) => setPage(val)}
-						totalItems={1000}
-					/>
-				)}
+			<div className={styles.pagination}>
+				<div>
+					{page !== 1 && (
+						<div
+							style={{
+								cursor : loading ? 'not-allowed' : 'pointer',
+								color  : 'red',
+							}}
+							onClick={loading ? () => {} : () => handlePagination(1)}
+							role="button"
+							tabIndex="0"
+						>
+							Go to page 1
+						</div>
+					)}
+				</div>
+				<div>
+					{page && (
+						<div className={styles.pagination_container}>
+							<Pagination
+								className={styles.pagination}
+								type="page"
+								currentPage={page}
+								pageSize={page_size}
+								onPageChange={(val) => setPage(val)}
+								totalItems={1000}
+							/>
+						</div>
+					)}
+				</div>
 
 			</div>
 

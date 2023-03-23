@@ -8,7 +8,7 @@ import ProfitabilityTable from './ProfitabilityTable';
 import styles from './styles.module.css';
 
 function Profitability({ headerFilters }) {
-	const { currency: selectedCurrency, entity_code = [] } = headerFilters;
+	const { currency: selectedCurrency, entity_code } = headerFilters;
 	const currency = selectedCurrency ? 'INR' : 'USD';
 	const [isInViewport, setIsInViewport] = useState(false);
 	const ref = useRef(null);
@@ -28,7 +28,7 @@ function Profitability({ headerFilters }) {
 		setFilters((prevFilters) => ({
 			...prevFilters,
 			to_currency : memoizedHeaderFilters.currency,
-			entity_code : memoizedHeaderFilters.entity_code.length > 0 ? memoizedHeaderFilters.entity_code : undefined,
+			entity_code : memoizedHeaderFilters.entity_code?.length > 0 ? memoizedHeaderFilters.entity_code : undefined,
 		}));
 	}, [memoizedHeaderFilters, setFilters]);
 

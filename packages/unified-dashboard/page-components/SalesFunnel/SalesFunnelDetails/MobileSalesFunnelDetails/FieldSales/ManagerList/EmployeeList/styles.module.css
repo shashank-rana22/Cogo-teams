@@ -1,6 +1,6 @@
 .card_wrapper {
 	position: relative;
-	padding-top: 14px;
+	padding-bottom: 4px;
 	background: #fafafa;
 	border: 1px solid #efefef;
 	box-shadow: none;
@@ -40,6 +40,7 @@
 .role_name {
 	align-self: center;
 	font-size: 12px;
+	margin-left: 6px;
 }
 
 .revenue_gap {
@@ -48,7 +49,7 @@
 }
 
 .view_btn {
-	bottom: 3px;
+	bottom: 8px;
 	left: 80px;
 	font-size: 10px;
 	font-weight: 300;

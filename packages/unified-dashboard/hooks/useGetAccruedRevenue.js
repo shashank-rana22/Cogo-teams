@@ -2,8 +2,10 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
+const INITIAL_ARRAY = [];
+
 const useGetAccruedRevenue = (headerFilters) => {
-	const { entity_code = [] } = headerFilters || {};
+	const { entity_code = INITIAL_ARRAY } = headerFilters || {};
 	const scope = useSelector(({ general }) => general.scope);
 	const [params, setParams] = useState();
 
@@ -19,7 +21,7 @@ const useGetAccruedRevenue = (headerFilters) => {
 				await trigger({
 					params: {
 						...params,
-						entity_code: entity_code.length > 0 ? entity_code : undefined,
+						entity_code: entity_code?.length > 0 ? entity_code : undefined,
 					},
 				});
 			} catch (err) {

@@ -53,6 +53,7 @@
 .role_name {
 	align-self: center;
 	font-size: 12px;
+	margin-left: 6px;
 }
 
 .view_button {
@@ -65,7 +66,7 @@
 .row {
 	position: relative;
 	display: flex;
-	padding-top: 15px;
+	padding: 8px 0 2px 0;
 	margin-bottom: 0;
 	font-size: 13px;
 	font-weight: 400;

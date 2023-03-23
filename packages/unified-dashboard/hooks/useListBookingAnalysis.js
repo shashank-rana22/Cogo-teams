@@ -5,8 +5,10 @@ import { serviceTypeArr, tradeTypeArr } from '../constants/checkbox-data';
 
 const getCheckBoxValues = (arr) => arr.map((val) => val.value);
 
+const INITIAL_ARRAY = [];
+
 const useGetBookingAnalysis = (headerFilters) => {
-	const { entity_code = [] } = headerFilters;
+	const { entity_code = INITIAL_ARRAY } = headerFilters;
 
 	const [selectedFilterTab, setSelectedFilterTab] = useState('month');
 
@@ -22,41 +24,23 @@ const useGetBookingAnalysis = (headerFilters) => {
 		method : 'GET',
 	}, { manual: true });
 
-	useEffect(() => {
-		setParams((prev) => ({ ...prev, entity_code }));
-	}, [entity_code]);
-
-	// const fetchBookingAnalysisData = async () => {
-	// 	try {
-	// 		await trigger({
-	// 			params: {
-	// 				...params,
-	// 				entity_code: entity_code.length > 0 ? entity_code : undefined,
-	// 			},
-	// 		});
-	// 	} catch (err) {
-	// 		console.log(err, 'err');
-	// 	}
-	// };
-
 	const fetchBookingAnalysisData = useCallback(
 		async () => {
 			try {
 				await trigger({
 					params: {
 						...params,
-						entity_code: entity_code.length > 0 ? entity_code : undefined,
+						entity_code: entity_code?.length > 0 ? entity_code : undefined,
 					},
 				});
 			} catch (err) {
 				console.log(err, 'err');
 			}
 		},
-		[params, entity_code, trigger],
+		[entity_code, params, trigger],
 	);
 
 	useEffect(() => {
-		console.log('im here');
 		fetchBookingAnalysisData();
 	}, [fetchBookingAnalysisData]);
 

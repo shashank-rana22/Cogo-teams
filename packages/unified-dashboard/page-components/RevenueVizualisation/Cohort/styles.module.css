@@ -79,8 +79,11 @@
 
 .pagination {
 	display: flex;
-	justify-content: end;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 10px;
 }
+
 
 @media (max-width: 767px) {
 	.container_table {

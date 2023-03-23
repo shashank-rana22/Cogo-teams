@@ -15,7 +15,7 @@ import SalesOverallHeading from './SalesOverallHeading';
 import styles from './styles.module.css';
 
 function SalesOverall({ headerFilters }) {
-	const { currency: selectedCurrency, entity_code = [] } = headerFilters;
+	const { currency: selectedCurrency, entity_code } = headerFilters;
 
 	const currency = selectedCurrency
 		? GLOBAL_CONSTANTS.currency_code.INR
@@ -39,7 +39,7 @@ function SalesOverall({ headerFilters }) {
 		setFilters((prevFilters) => ({
 			...prevFilters,
 			to_currency : currency,
-			entity_code : entity_code.length > 0 ? entity_code : undefined,
+			entity_code : entity_code?.length > 0 ? entity_code : undefined,
 		}));
 	}, [headerFilters, currency, entity_code, setFilters]);
 	const { revenue_per_month } = salesOverall?.summary || {};

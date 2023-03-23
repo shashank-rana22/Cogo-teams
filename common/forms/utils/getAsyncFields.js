@@ -206,7 +206,7 @@ function asyncAllotBanks() {
 function asyncFieldsCogoEntities() {
 	return {
 		labelKey    : 'entity_code',
-		valueKey    : 'id',
+		valueKey    : 'entity_code',
 		endpoint    : 'list_cogo_entities',
 		initialCall : true,
 		params      : {

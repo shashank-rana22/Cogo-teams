@@ -2,6 +2,8 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
+const INITIAL_ARRAY = [];
+
 const useGetOrganizationCohort = ({
 	isComponentInViewport,
 	revenueFilter,
@@ -9,7 +11,7 @@ const useGetOrganizationCohort = ({
 }) => {
 	const [page, setPage] = useState(1);
 
-	const { entity_code = [] } = headerFilters;
+	const { entity_code = INITIAL_ARRAY } = headerFilters;
 
 	const scope = useSelector(({ general }) => general.scope);
 
@@ -26,7 +28,7 @@ const useGetOrganizationCohort = ({
 					page,
 					page_size    : 5,
 					visualize_by : revenueFilter,
-					entity_code  : entity_code.length > 0 ? entity_code : undefined,
+					entity_code  : entity_code?.length > 0 ? entity_code : undefined,
 				},
 			});
 		} catch (err) {

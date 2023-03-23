@@ -18,7 +18,7 @@ const flagMapping = {
 function Header({ headerFilters, setHeaderFilters }) {
 	const entityOptions = useGetAsyncOptions(merge(asyncFieldsCogoEntities()));
 
-	const { currency, entity_code } = headerFilters;
+	const { currency, entity_code = [] } = headerFilters;
 
 	const handleFilters = (key, val) => {
 		setHeaderFilters({
@@ -27,22 +27,22 @@ function Header({ headerFilters, setHeaderFilters }) {
 		});
 	};
 
-	const formatedEntityOptions = entityOptions.options.map((val) => {
-		const { entity_code : entity, business_name, ledger_currency } = val;
-		return {
-			label:
-	<div>
-		{entity}
-		{' '}
-		{flagMapping[entity]}
-		{' '}
-		{business_name}
-		{' '}
-		{ledger_currency}
-	</div>,
-			value: entity,
-		};
-	});
+	const formatedEntityOptions = (option) => {
+		const { entity_code : entity, business_name, ledger_currency } = option;
+		return (
+			<div>
+				{entity}
+				{' '}
+				{flagMapping[entity]}
+				{' '}
+				{business_name}
+				{' '}
+				(
+				{ledger_currency}
+				)
+			</div>
+		);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -53,11 +53,11 @@ function Header({ headerFilters, setHeaderFilters }) {
 				<MultiSelect
 					className={styles.dropdown}
 					placeholder="Search by Cogo entity"
-					defaultOptions
 					isClearable
 					onChange={(e) => handleFilters('entity_code', e)}
 					value={entity_code}
-					options={formatedEntityOptions}
+					{...entityOptions}
+					renderLabel={(option) => formatedEntityOptions(option)}
 				/>
 			</div>
 			<div>

@@ -20,6 +20,7 @@ const useListSalesFunnelData = (salesFunnelInViewport) => {
 
 	const fetchSalesFunnelData = useCallback(async () => {
 		try {
+			console.log(filters, 'filter');
 			await trigger({
 				params: filters,
 			});
@@ -29,7 +30,7 @@ const useListSalesFunnelData = (salesFunnelInViewport) => {
 	}, [filters, trigger]);
 
 	useEffect(() => {
-		if (Object.keys(filters).length > 0 && salesFunnelInViewport) {
+		if (Object.keys(filters)?.length > 0 && salesFunnelInViewport) {
 			fetchSalesFunnelData();
 		}
 	}, [fetchSalesFunnelData, salesFunnelInViewport, filters]);

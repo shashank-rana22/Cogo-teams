@@ -16,7 +16,7 @@ import SalesFunnelHeading from './SalesFunnelHeading';
 import styles from './styles.module.css';
 
 function SalesFunnel({ headerFilters }) {
-	const { currency: selectedCurrency, entity_code = [] } = headerFilters;
+	const { currency: selectedCurrency, entity_code } = headerFilters;
 	const [showZone, setShowZone] = useState(false);
 
 	const currency = selectedCurrency
@@ -41,7 +41,7 @@ function SalesFunnel({ headerFilters }) {
 		setFilters((prevFilters) => ({
 			...prevFilters,
 			to_currency : currency,
-			entity_code : entity_code.length > 0 ? entity_code : undefined,
+			entity_code : entity_code?.length > 0 ? entity_code : undefined,
 		}));
 	}, [headerFilters, currency, entity_code, setFilters]);
 

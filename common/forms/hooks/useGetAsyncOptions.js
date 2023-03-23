@@ -63,6 +63,8 @@ function useGetAsyncOptions({
 				return singleHydratedValue;
 			});
 
+			// console.log(hydratedValue, 'hydratedValue');
+
 			return hydratedValue;
 		}
 

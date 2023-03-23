@@ -29,7 +29,7 @@ const useListSalesOverallData = (salesCompInViewport) => {
 			}
 		};
 
-		if (Object.keys(filters).length > 0 && salesCompInViewport) {
+		if (Object.keys(filters)?.length > 0 && salesCompInViewport) {
 			fetchSalesOverallData();
 		}
 	}, [filters, salesCompInViewport, trigger]);

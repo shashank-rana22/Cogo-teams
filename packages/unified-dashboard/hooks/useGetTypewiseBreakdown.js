@@ -4,6 +4,8 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
+const INITIAL_ARRAY = [];
+
 const useGetTypewiseBreakdown = ({
 	apiKey,
 	isDataSelected = false,
@@ -12,7 +14,7 @@ const useGetTypewiseBreakdown = ({
 	headerFilters,
 }) => {
 	const scope = useSelector(({ general }) => general.scope);
-	const { entity_code = [] } = headerFilters;
+	const { entity_code = INITIAL_ARRAY } = headerFilters;
 
 	const [{ loading, data, error }, trigger] = useRequest({
 		url    : `/get_${apiKey}_wise_financial_breakdown`,
@@ -39,7 +41,7 @@ const useGetTypewiseBreakdown = ({
 						type,
 						sub_type     : type === 'cost' ? undefined : id,
 						visualize_by : revenueFilter,
-						entity_code  : entity_code.length > 0 ? entity_code : undefined,
+						entity_code  : entity_code?.length > 0 ? entity_code : undefined,
 					},
 				});
 			} catch (err) {
