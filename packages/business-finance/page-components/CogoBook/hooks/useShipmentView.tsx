@@ -1,7 +1,7 @@
 import { Toast, Checkbox } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
+import { format, isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import { FilterInterface } from '../Accruals/interface';
@@ -29,7 +29,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 	const {
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
-		jobState = '', query = '', page,
+		jobState = '', query = '', page, date,
 	} = filters || {};
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
 
@@ -78,6 +78,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 					jobState             : jobState || undefined,
 					profitAmount         : profitAmount || undefined,
 					profitType           : profitType || undefined,
+					startDate            : format(date?.startDate, 'yyy-MM-dd') || undefined,
+					endDate              : format(date?.endDate, 'yyy-MM-dd') || undefined,
 					page                 : page || undefined,
 					pageLimit            : 10,
 					// sortType,

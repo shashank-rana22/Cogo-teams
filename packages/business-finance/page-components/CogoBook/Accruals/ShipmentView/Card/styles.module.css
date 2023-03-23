@@ -54,6 +54,7 @@
 
       .react-datepicker__close-icon {
         border: none;
+        right: -9px;
       }
     }
   }
@@ -130,7 +131,14 @@
 
       .react-datepicker__close-icon {
         border: none;
+        right: -9px;
       }
     }
   }
+}
+.profit_data {
+  color: #67c676;
+}
+.profit_color {
+  color: #ee3425;
 }

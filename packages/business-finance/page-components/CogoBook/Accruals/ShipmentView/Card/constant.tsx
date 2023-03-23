@@ -255,6 +255,23 @@ export const accrualColumn = (
 		id       : 'profit',
 		Cell     : ({ row: { original } }) => {
 			const { profit = '', expenseCurrency = '' } = original || {};
+			function checkNumber(number) {
+				if (number > 0) {
+					return 'positive';
+				} if (number < 0) {
+					return 'negative';
+				}
+				return 'zero';
+			}
+			function renderClassName() {
+				if (checkNumber(profit) === 'positive') {
+					return styles.profit_data;
+				}
+				if (checkNumber(profit) === 'positive') {
+					return styles.profit_color;
+				}
+				return null;
+			}
 			return (
 				<>
 					<div>
@@ -268,7 +285,10 @@ export const accrualColumn = (
 							onTickProfit={tickProfitHandler}
 						/>
 					</div>
-					<span>{getFormattedPrice(profit, expenseCurrency) || '-' }</span>
+					<span className={renderClassName()}>
+						{getFormattedPrice(profit, expenseCurrency) || '-' }
+
+					</span>
 				</>
 			);
 		},
