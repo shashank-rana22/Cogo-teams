@@ -14,7 +14,7 @@
 	border-radius: 12px;
 }
 
-.CustomTag {
+.custom_tag {
 	display: flex;
 	padding: 4px 8px;
 	font-size: 10px;
@@ -33,26 +33,26 @@
 	border-radius: 4px;
 }
 
-.OrgNameConatiner {
+.org_name_conatiner {
 	display: flex;
 	justify-content: space-between;
 	padding: 2px 8px;
 	margin-top: 12px;
 }
 
-.SubOrgNameConatiner {
+.sub_org_name_conatiner {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 }
 
-.styledName {
+.styled_name {
 	font-size: 14px;
 	font-weight: 600;
 	color: rgb(51 51 51);
 }
 
-.StyledTag {
+.styled_tag {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -64,43 +64,43 @@
 	border-radius: 4px;
 }
 
-.Heading {
+.heading {
 	margin-bottom: 6px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #2c3e50;
 }
 
-.Hr {
+.hr {
 	height: 1px;
 	margin-bottom: 6px;
 	background: #2c3e50;
 }
 
-.FlexColumn {
+.flex_column {
 	display: flex;
 	flex-direction: column;
 }
 
-.TagText {
+.tag_text {
 	font-size: 10px;
 	font-weight: 600;
 	color: #333;
 }
 
-.TagTextLeft {
+.tag_text_left {
 	margin-left: 8px;
 	font-size: 10px;
 	font-weight: 600;
 	color: #333;
 }
 
-.CategoryContainer {
+.category_container {
 	display: flex;
 	height: 24px;
 }
 
-.subCategoryContainer {
+.sub_category_container {
 	display: flex;
 	align-items: center;
 	padding: 0 6px;
@@ -109,16 +109,13 @@
 	border-radius: 4px;
 }
 
-.OrgList{
-}
-
-.Value {
+.value {
 	margin-left: 4px;
 	font-size: 10px;
 	font-weight: 500;
 }
 
-.LegalBusinessName {
+.legal_business_name {
 	font-size: 10px;
 	font-weight: 500;
 	line-height: 11px;

@@ -60,12 +60,12 @@ function OutstandingList({ item }) {
 
 	const content = (types, head) => (
 		<div style={{ padding: '15px' }}>
-			<div className={styles.Heading}>{head}</div>
-			<div className={styles.Hr} />
-			<div className={styles.FlexColumn}>
+			<div className={styles.heading}>{head}</div>
+			<div className={styles.hr} />
+			<div className={styles.flex_column}>
 				{types?.map((party) => (
 					<span style={{ marginTop: '5px' }}>
-						<div className={styles.StyledTag}>{party}</div>
+						<div className={styles.styled_tag}>{party}</div>
 					</span>
 				))}
 
@@ -82,7 +82,7 @@ function OutstandingList({ item }) {
 		>
 			<div className={styles.serial_card}>
 				<div className={styles.serial_id_card}>
-					<div className={styles.CustomTag}>
+					<div className={styles.custom_tag}>
 						<div>
 							Serial Id -
 							{' '}
@@ -99,12 +99,12 @@ function OutstandingList({ item }) {
 					</div>
 				</div>
 				<div className={styles.serial_id_card}>
-					<div className={styles.CustomTag}>
+					<div className={styles.custom_tag}>
 						<div>
 							Last Updated At :
 							{' '}
 						</div>
-						<div className={styles.Value}>
+						<div className={styles.value}>
 							{' '}
 							{format(
 								updatedAt,
@@ -128,10 +128,10 @@ function OutstandingList({ item }) {
 			</div>
 			<div style={{ padding: '2px 16px' }}>
 
-				<div className={styles.OrgNameConatiner}>
-					<div className={styles.SubOrgNameConatiner}>
+				<div className={styles.org_name_conatiner}>
+					<div className={styles.sub_org_name_conatiner}>
 						<div style={{ display: 'flex' }}>
-							<div className={styles.styledName}>
+							<div className={styles.styled_name}>
 								OM CARGO LOGISTICS
 							</div>
 							{' '}
@@ -144,7 +144,7 @@ function OutstandingList({ item }) {
 									)}
 									placement="right"
 								>
-									<div className={styles.StyledTag}>
+									<div className={styles.styled_tag}>
 										{`${startCase(collectionPartyType[0])}  +${
 											collectionPartyType.length - 1
 										}` || '-'}
@@ -152,7 +152,7 @@ function OutstandingList({ item }) {
 
 								</Tooltip>
 							) : (
-								<div className={styles.StyledTag}>
+								<div className={styles.styled_tag}>
 									{startCase(collectionPartyType[0]) || '-'}
 								</div>
 							)}
@@ -160,18 +160,18 @@ function OutstandingList({ item }) {
 						{' '}
 
 						{selfOrganizationName && (
-							<div className={styles.LegalBusinessName}>{selfOrganizationName}</div>
+							<div className={styles.legal_business_name}>{selfOrganizationName}</div>
 						)}
 
 					</div>
-					<div className={styles.CategoryContainer}>
+					<div className={styles.category_container}>
 						{CARD_DETAILS.map((it) => (
-							<div className={styles.subCategoryContainer}>
-								<div className={styles.TagText}>
+							<div className={styles.sub_category_container}>
+								<div className={styles.tag_text}>
 									{it.label}
 									:
 								</div>
-								<div className={styles.TagTextLeft}>
+								<div className={styles.tag_text_left}>
 									{it.valueKey === 'registrationNumber'
 										? item[it.valueKey]
 										: startCase(item[it.valueKey]?.name || item[it.valueKey])
@@ -182,7 +182,7 @@ function OutstandingList({ item }) {
 					</div>
 				</div>
 
-				<div className={styles.OrgList}>
+				<div className={styles.org_list}>
 					<StatsOutstanding item={item} />
 				</div>
 
