@@ -5,7 +5,12 @@ import usePublishDraft from '../../../hooks/usePublishDraft';
 
 import styles from './styles.module.css';
 
-function PublishVersionModal({ setShowPublishModal = () => {}, showPublishModal }) {
+function PublishVersionModal({
+	setShowPublishModal = () => {},
+	showPublishModal,
+	publish,
+	setPublish,
+}) {
 	const { onCreate, loading: publishLoading } = usePublishDraft({ setShowPublishModal });
 
 	return (
@@ -14,7 +19,10 @@ function PublishVersionModal({ setShowPublishModal = () => {}, showPublishModal 
 			placement="center"
 			show={showPublishModal}
 			closeOnOuterClick
-			onClose={() => setShowPublishModal(false)}
+			onClose={() => {
+				setShowPublishModal(false);
+				setPublish(false);
+			}}
 		>
 
 			<Modal.Header title="Publish Draft" />
@@ -49,8 +57,11 @@ function PublishVersionModal({ setShowPublishModal = () => {}, showPublishModal 
 					type="submit"
 					size="md"
 					themeType="primary"
-					onClick={() => onCreate()}
-					loading={publishLoading}
+					onClick={() => {
+						onCreate();
+						setPublish(true);
+					}}
+					loading={publishLoading && !publish}
 				>
 					Yes
 				</Button>

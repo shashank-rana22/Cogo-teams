@@ -1,8 +1,6 @@
 import { Button, Collapse } from '@cogoport/components';
-// import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-// import EmptyState from '../../../../../../../common/EmptyState';
 import LoadingState from '../../LoadingState';
 import styles from '../styles.module.css';
 
@@ -22,7 +20,7 @@ function CollapseComponent({
 		return <LoadingState columnsToLoad={4} />;
 	}
 
-	// if (isEmpty(options) && createKam) {
+	// if (isEmpty(options) && !createKam) {
 	// 	return <EmptyState />;
 	// }
 

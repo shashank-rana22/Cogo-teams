@@ -7,9 +7,11 @@
   opacity: 0.7;
   margin-bottom: 16px;
 }
+
 .table {
   border: none;
 }
+
 .pill{
   width: 65px;
   align-items: center;

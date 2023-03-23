@@ -56,7 +56,7 @@ function ConfigurationCard(props) {
 						<div style={{ marginRight: '28px' }}>
 							Last Edit by&nbsp;:&nbsp;
 							<strong>
-								{audit_data?.name || '___'}
+								{audit_data?.name || ''}
 								{' '}
 
 							</strong>
@@ -64,7 +64,7 @@ function ConfigurationCard(props) {
 						<div style={{ marginRight: '28px' }}>
 							Total Levels:
 							{' '}
-							<strong>___</strong>
+							<strong> </strong>
 						</div>
 
 						<div>
@@ -76,7 +76,7 @@ function ConfigurationCard(props) {
 
 							<strong>
 								{audit_data?.updated_at
-									? format(audit_data.updated_at, 'dd-MM-yyyy') : '___'}
+									? format(audit_data.updated_at, 'dd-MM-yyyy') : ''}
 
 							</strong>
 						</div>

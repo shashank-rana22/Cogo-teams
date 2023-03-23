@@ -2,41 +2,22 @@
   border-radius: 8px;
   background-color: #fff;
   width: 100%;
+  padding: 24px;
 }
-.row_level {
-  margin: 0 16px;
-  padding: 36px 0;
-  font-weight: 700;
-  font-size: 18px;
-  width: 20%;
-}
-.row_level_end {
-  margin: 0 16px;
-  font-weight: 700;
-}
-.row_level_end_options {
-  display: flex;
-  width: 100%;
-  margin: 28px 0 0 0;
-}
-.supporting_text {
-  font-weight: 500;
-  font-size: 14px;
-  align-items: center;
-  color: #4f4f4f;
-  margin:10px 0 10px 0;
-}
-.border_class {
-  border: 1px solid #bdbdbd;
-  opacity: 0.4;
-  margin :0 16px 0 16px;
-}
-.current_value {
-  font-weight: 400;
-  font-size: 12px;
-  margin:10px 0 0 5px;
-}
-.delete_button{
+.delete_button {
   float: right;
-  margin: 10px 32px 10px 10px ;
- }
+  margin: 10px 32px 10px 10px;
+}
+.bottom_form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom_supporting_txt {
+  font-weight: 700;
+  display: flex;
+
+  margin-bottom: 12px;
+  margin-top: 12px;
+  font-size: 18px;
+}
