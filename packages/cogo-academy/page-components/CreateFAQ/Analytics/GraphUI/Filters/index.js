@@ -1,4 +1,4 @@
-import { Select, DateRangepicker } from '@cogoport/components';
+import { DateRangepicker } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
@@ -24,7 +24,7 @@ function Filters({ setDateRange, dateRange }) {
 				/>
 			</div>
 
-			<div className={styles.select_container}>
+			{/* <div className={styles.select_container}>
 				<div style={{
 					margin      : '0.5rem',
 					marginLeft  : '1rem',
@@ -41,7 +41,7 @@ function Filters({ setDateRange, dateRange }) {
 					valueKey="group_by"
 					isClearable
 				/>
-			</div>
+			</div> */}
 		</div>
 	);
 }

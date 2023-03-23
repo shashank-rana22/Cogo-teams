@@ -23,13 +23,12 @@ function QuestionsList() {
 					placeholder="Search a question here"
 				/>
 			</div>
-			<div>
-				<AllQuestions
-					sortType={sortType}
-					setSortType={setSortType}
-					{...props}
-				/>
-			</div>
+
+			<AllQuestions
+				sortType={sortType}
+				setSortType={setSortType}
+				{...props}
+			/>
 		</div>
 
 	);
