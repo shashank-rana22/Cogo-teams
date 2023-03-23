@@ -1,19 +1,31 @@
 .btn {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	width: 100%;
-	padding: 6px 12px;
-	margin: 6px 0;
-	font-size: 12px;
-	font-weight: 600;
-	cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 6px 12px;
+  margin: 6px 0;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .options > div:hover {
-	background-color: #fffce6;
+  background-color: #fffce6;
 }
 
 .tooltip_pad {
-	padding: 0;
+  padding: 0;
+}
+
+.time {
+  display: flex;
+  flex-direction: column;
+  color: #828282;
+  font-weight: 400;
+}
+
+.questionsettime {
+	font-weight: 400;
+	color: #828282;
 }

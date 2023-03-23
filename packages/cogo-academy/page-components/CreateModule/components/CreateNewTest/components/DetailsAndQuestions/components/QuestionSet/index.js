@@ -122,7 +122,12 @@ function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray }) {
 			id       : 'g',
 			accessor : ({ updated_at = '' }) => (
 				<section>
-					{format(updated_at, 'dd MMM yyyy')}
+					<span className={styles.questionsettime}>
+						{format(updated_at, 'dd MMM\'yy ')}
+					</span>
+					<span className={styles.questionsettime}>
+						{format(updated_at, 'h:mm a')}
+					</span>
 				</section>
 			),
 		},
