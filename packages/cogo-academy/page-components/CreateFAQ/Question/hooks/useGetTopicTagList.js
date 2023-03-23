@@ -1,13 +1,15 @@
 import { Pill } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
+import { useCallback } from 'react';
 
-import WORK_SCOPES_OPTIONS from '../../ConfigurationEngine/CreateAudienceForm/utils/workScopeMappings';
 /* eslint-disable */
 import countries from '../../../../../../.data-store/constants/countries.json';
 
+import WORK_SCOPES_OPTIONS from '../../ConfigurationEngine/CreateAudienceForm/utils/workScopeMappings';
+
 const useGetTopicTagList = () => {
-	const [{ data: topicsData , loading:listTopicsLoading }, triggerTopics] = useRequest({
+	const [{ data: topicsData, loading:listTopicsLoading }, triggerTopics] = useRequest({
 		method : 'get',
 		url    : '/list_faq_topics',
 		params : {
@@ -16,7 +18,7 @@ const useGetTopicTagList = () => {
 		},
 	}, { manual: true });
 
-	const [{ data: tagsData ,loading:listTagsLoading}, triggerTags] = useRequest({
+	const [{ data: tagsData, loading:listTagsLoading }, triggerTags] = useRequest({
 		method : 'get',
 		url    : '/list_faq_tags',
 		params : {
@@ -33,8 +35,8 @@ const useGetTopicTagList = () => {
 			pagination_data_required : false,
 		},
 	}, { manual: true });
-	
-	const fetchTopics = async () => {
+
+	const fetchTopics = useCallback(async () => {
 		try {
 			await triggerTopics({
 				params: {
@@ -45,9 +47,9 @@ const useGetTopicTagList = () => {
 		} catch (error) {
 			console.log('error :: ', error);
 		}
-	};
+	}, [triggerTopics]);
 
-	const fetchTags = async () => {
+	const fetchTags = useCallback(async () => {
 		try {
 			await triggerTags({
 				params: {
@@ -58,9 +60,9 @@ const useGetTopicTagList = () => {
 		} catch (error) {
 			console.log('error :: ', error);
 		}
-	};
+	}, [triggerTags]);
 
-	const fetchAudiences = async () => {
+	const fetchAudiences = useCallback(async () => {
 		try {
 			await triggerAudiences({
 				params: {
@@ -71,7 +73,7 @@ const useGetTopicTagList = () => {
 		} catch (error) {
 			console.log('error :: ', error);
 		}
-	};
+	}, [triggerAudiences]);
 
 	const { list: topicList = [] } = topicsData || {};
 	const { list : tagList = [] } = tagsData || {};
@@ -80,7 +82,6 @@ const useGetTopicTagList = () => {
 	const topicOptions = [];
 	const tagOptions = [];
 	const audienceOptions = [];
-
 
 	const getAudienceOption = (item) => {
 		const {
@@ -94,36 +95,36 @@ const useGetTopicTagList = () => {
 		} = item || {};
 
 		const workScopeLabel = (WORK_SCOPES_OPTIONS || []).find((workScope) => workScope.value === work_scope);
-		const selectedCountry = countries.find((country)=> country.id===country_id);
+		const selectedCountry = countries.find((country) => country.id === country_id);
 
-		const pillsObject= {
-			'work_scope':workScopeLabel?.label,
-			'function':auth_function||'all',
-			'sub_function':startCase(auth_sub_function)||'all',
-			'cogo_entity_name':cogo_entity_name,
-			'platform':startCase(platform),
-			'country':selectedCountry?.name
+		const pillsObject = {
+			work_scope   : workScopeLabel?.label,
+			function     : auth_function || 'all',
+			sub_function : startCase(auth_sub_function) || 'all',
+			cogo_entity_name,
+			platform     : startCase(platform),
+			country      : selectedCountry?.name,
 		};
 
 		const pillsArray = Object.keys(pillsObject);
 
 		const label = (
 			<div>
-				<div style={{ fontWeight: 600, paddingTop:'4px', paddingBottom:'6px' }}>{startCase(name)}</div>
-				{(pillsArray || []).map((ele) => {
-					return (pillsObject[ele] && 
-					<Pill color='blue'>
-						{['all','All']. includes(pillsObject[ele])?
-						`${startCase(ele)} - ${startCase(pillsObject[ele])}`
-						: startCase(pillsObject[ele]) }
-					</Pill>)
-	})}
+				<div style={{ fontWeight: 600, paddingTop: '4px', paddingBottom: '6px' }}>{startCase(name)}</div>
+				{(pillsArray || []).map((ele) => (pillsObject[ele]
+					&& (
+						<Pill color="blue">
+							{['all', 'All'].includes(pillsObject[ele])
+								? `${startCase(ele)} - ${startCase(pillsObject[ele])}`
+								: startCase(pillsObject[ele]) }
+						</Pill>
+					)))}
 			</div>
 		);
 		const q = `${item.name || ''}-${pillsArray.join('-')}`;
 		const value = item.id;
 
-		return {label, q, value}
+		return { label, q, value };
 	};
 
 	(topicList || []).forEach((item) => {
@@ -147,7 +148,7 @@ const useGetTopicTagList = () => {
 		fetchAudiences,
 		listTopicsLoading,
 		listTagsLoading,
-		listAudienceLoading
+		listAudienceLoading,
 	};
 };
 

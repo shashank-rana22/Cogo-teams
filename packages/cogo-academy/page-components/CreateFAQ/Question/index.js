@@ -2,7 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 import Spinner from '../../../commons/Spinner';
 import CreateUserForm from '../ConfigurationEngine/CreateAudienceForm';
@@ -33,7 +33,7 @@ function CreateFAQ() {
 	const router = useRouter();
 	const [editorError, setEditorError] = useState(false);
 
-	const { fetchQuestion, query, data, loading } = useGetQuestion();
+	const { fetchQuestion, query, data = {}, loading } = useGetQuestion();
 
 	const {
 		editorValue,
@@ -93,20 +93,9 @@ function CreateFAQ() {
 		}
 	}, [fetchQuestion, query?.id]);
 
-	const filterTags = [];
-	(faq_tags || []).forEach((item) => {
-		filterTags.push(item?.id);
-	});
-
-	const filterTopics = [];
-	(faq_topics || []).forEach((item) => {
-		filterTopics.push(item?.id);
-	});
-
-	const filterAudiences = [];
-	(faq_audiences || []).forEach((item) => {
-		filterAudiences.push(item?.id);
-	});
+	const filterTags = useMemo(() => faq_tags?.map((item) => item.id) || [], [faq_tags]);
+	const filterTopics = useMemo(() => faq_topics?.map((item) => item.id) || [], [faq_topics]);
+	const filterAudiences = useMemo(() => faq_audiences?.map((item) => item.id) || [], [faq_audiences]);
 
 	useEffect(() => {
 		if (!loading) {
@@ -116,9 +105,18 @@ function CreateFAQ() {
 			setQuestionValue('audience_ids', filterAudiences);
 			setEditorValue(RichTextEditor?.createValueFromString((answers?.[0]?.answer || ''), 'html'));
 		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [listTopicsLoading, listTagsLoading, listAudienceLoading, JSON.stringify(data)]);
+	}, [listTopicsLoading,
+		listTagsLoading,
+		listAudienceLoading,
+		loading,
+		setQuestionValue,
+		question_abstract,
+		filterTags,
+		filterTopics,
+		filterAudiences,
+		setEditorValue,
+		RichTextEditor,
+		answers]);
 
 	useEffect(() => {
 		if (questionPreview !== 'preview') {
