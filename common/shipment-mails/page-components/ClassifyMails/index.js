@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function ClassifyMails({ activeMail, onClassify = () => {} }) {
 	const [show, setShow] = useState(false);
-	const { classifyMail, handleSubmit, fields, controls, classifyMailApi } =		useClassifyMail({
+	const { classifyMail, handleSubmit, fields, controls, classifyMailApi } = useClassifyMail({
 		onClassify: () => {
 			setShow(false);
 			onClassify();
