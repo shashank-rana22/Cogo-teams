@@ -5,14 +5,13 @@ import { useEffect, useCallback } from 'react';
 
 const useGetSaasContainerSubscription = ({
 	shipmentId = '',
-	endPoint = '',
 }) => {
 	const { scope } = useSelector(({ general }) => ({
 		scope: general?.scope,
 	}));
 
 	const [{ loading, data }, trigger] = useRequest({
-		url    : `get_saas_${endPoint}_subscription`,
+		url    : 'get_saas_container_subscription',
 		method : 'GET',
 		scope,
 	}, { manual: true });
@@ -31,30 +30,13 @@ const useGetSaasContainerSubscription = ({
 		})();
 	}, [shipmentId, trigger]);
 
-	let apiData;
-	if (endPoint === 'container') {
-		apiData = data;
-	} else {
-		const trackerData = data ?? {};
-		const trackingContainersData = [
-			{
-				airway_bill_no : trackerData?.airway_bill_no,
-				tracking_data  : trackerData?.data,
-			},
-		];
-		apiData = {
-			...trackerData,
-			data: trackingContainersData,
-		};
-	}
-
 	useEffect(() => {
 		listShipments();
 	}, [listShipments]);
 
 	return {
 		loading,
-		data: apiData,
+		data,
 	};
 };
 

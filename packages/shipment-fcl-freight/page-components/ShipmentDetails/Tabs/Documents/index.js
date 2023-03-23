@@ -41,7 +41,7 @@ function Documents() {
 	// };
 
 	const {
-		// loading,
+		loading,
 		taskList,
 		completedDocs,
 		docTypes,
@@ -77,7 +77,7 @@ function Documents() {
 					data={taskList}
 					setShow={setShow}
 					setShowConfirmed={setShowConfirmed}
-				// loading={loading}
+					loading={loading}
 					emailDocs={emailDocs}
 					completedDocs={completedDocs?.list}
 				/>

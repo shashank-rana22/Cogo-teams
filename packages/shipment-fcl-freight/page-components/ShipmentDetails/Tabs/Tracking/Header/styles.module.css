@@ -24,16 +24,6 @@
 		font-size: 12px;
 	}
 
-	&.airway_bill_no_head {
-		font-size: 12px;
-		font-weight: 400;
-	}
-
-	&.airway_bill_no {
-		font-size: 14px;
-		font-weight: 500;
-		margin-left: 5px;
-	}
 }
 
 .content{

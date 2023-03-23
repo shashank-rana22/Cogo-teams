@@ -7,12 +7,10 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function Tracking({ shipmentData = {} }) {
-	const shipmentType = shipmentData?.shipment_type || 'fcl_freight';
 	const [containerNo, setContainerNo] = useState('');
 
 	const { loading, data: list } = useGetSaasContainerSubscription({
-		shipmentId : '3534d9b2-7a8c-47a0-a3d1-93cfb7bf9f69' || shipmentData?.id,
-		endPoint   : shipmentType === 'fcl_freight' ? 'container' : 'air',
+		shipmentId: shipmentData?.id,
 	});
 
 	const ContainerOptions = Array.isArray(list)
@@ -27,8 +25,6 @@ function Tracking({ shipmentData = {} }) {
 		)
 		: [];
 
-	const dataToRender = shipmentType === 'fcl_freight' ? trackingData : list;
-
 	return (
 		<div className={styles.container}>
 			<Header
@@ -36,9 +32,8 @@ function Tracking({ shipmentData = {} }) {
 				setContainerNo={setContainerNo}
 				containerNo={containerNo || ContainerOptions?.[0]?.value}
 				shipmentId={shipmentData?.id}
-				airwayBillNo={list?.airway_bill_no}
 			/>
-			<Body list={dataToRender} loading={loading} shipmentType={shipmentType} />
+			<Body list={trackingData} loading={loading} />
 		</div>
 	);
 }

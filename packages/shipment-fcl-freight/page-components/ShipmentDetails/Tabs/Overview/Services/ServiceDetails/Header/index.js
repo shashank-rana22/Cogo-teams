@@ -1,8 +1,7 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
 
-// import EditCancelService from '../../../../EditCancelService';
-
+import EditCancelService from './EditCancelService';
 import styles from './styles.module.css';
 
 function Header({
@@ -29,7 +28,7 @@ function Header({
 					</div>
 				</div>
 
-				{/* <EditCancelService
+				<EditCancelService
 					service_type={service_type}
 					id={id}
 					state={state}
@@ -38,7 +37,8 @@ function Header({
 					serviceList={serviceList}
 					refetchServices={refetchServices}
 					refetchList={refetchList}
-				/> */}
+					shipmentData={shipmentData}
+				/>
 			</div>
 
 			{service_supply_agent ? (
