@@ -126,7 +126,8 @@ function CreateFAQ() {
 			fetchTags();
 			fetchAudiences();
 		}
-	}, [fetchAudiences, fetchTags, fetchTopics, questionPreview]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const onClickBackIcon = () => {
 		router.back();

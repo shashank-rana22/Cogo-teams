@@ -33,7 +33,7 @@ const useGetTopicTagList = () => {
 			pagination_data_required : false,
 		},
 	}, { manual: true });
-
+	
 	const fetchTopics = async () => {
 		try {
 			await triggerTopics({
@@ -72,8 +72,6 @@ const useGetTopicTagList = () => {
 			console.log('error :: ', error);
 		}
 	};
-
-	
 
 	const { list: topicList = [] } = topicsData || {};
 	const { list : tagList = [] } = tagsData || {};
