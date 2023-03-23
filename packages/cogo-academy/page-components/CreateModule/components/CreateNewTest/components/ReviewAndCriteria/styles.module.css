@@ -103,3 +103,24 @@
 .instruction {
 	display: flex;
 }
+
+.modal_title{
+	color: #6FA5AB;
+	font-weight: 600;
+	font-size: 16px;
+}
+.test_name{
+	font-weight: 600;
+	font-size: 16px;
+	color: #221F20;
+	margin-bottom: 0px;
+}
+
+.modal_body span{
+	font-size: 14px;
+}
+
+.modal_body h5{
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
