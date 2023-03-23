@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 const useArchive = ({ toggleValue = '', setShowTab }) => {
 	const { query = undefined, debounceQuery } = useDebounceQuery();
 	const [particularMonth, setParticularMonth] = useState(false);
-	const [apiData, setApiData] = useState({ list: [] });
-	const [drillData, setDrillData] = useState({ list: [] });
+	const [apiData, setApiData] = useState({ list: [], totalRecords: 0 });
+	const [drillData, setDrillData] = useState({ list: [], totalRecords: 0 });
 	const [monthData, setMonthData] = useState({});
 	const [globalFilters, setGlobalFilters] = useState({
 		page           : 1,

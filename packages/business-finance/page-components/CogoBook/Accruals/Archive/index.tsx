@@ -36,8 +36,11 @@ function Archive({ setShowTab }) {
 		getDrillDownArchive,
 	} = useArchive({ toggleValue, setShowTab });
 
-	const drillDataList = drillData?.list || [];
-	const apiDataList = apiData?.list || [];
+	const { totalRecords, list } = apiData || {};
+
+	const { list:drillDataList, totalRecords:TotalRecords } = drillData || {};
+
+	const { page } = globalFilters || {};
 
 	return (
 		<div>
@@ -146,10 +149,10 @@ function Archive({ setShowTab }) {
 						{toggleValue === 'declared' ? (
 							<div className={styles.table_container}>
 								<StyledTable
-								// page={page}
-								// total={total}
-								// pageSize={pageSize}
-									data={particularMonth ? drillDataList : apiDataList}
+									page={page}
+									total={totalRecords || TotalRecords}
+									pageSize={10}
+									data={particularMonth ? drillDataList : list}
 									columns={particularMonth ? ARCHIVE_MONTH_CONFIG : ARCHIVE_DECLARED(
 										setMonthData,
 										particularMonth,

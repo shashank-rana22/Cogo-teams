@@ -44,34 +44,33 @@ function Accruals() {
 
 		<div>
 
-			<div className={styles.container}>
+			{showTab ? (
+				<div className={styles.container}>
 
-				<div className={styles.flex}>
+					<div className={styles.flex}>
 
-					{tabs.map((tab) => (
-						<div
-							key={tab.key}
-							onClick={() => {
-								handleChange(tab.key);
-							}}
-							role="presentation"
-						>
-							{showTab
-								? (
-									<div className={tab.key === subActiveTab
-										? styles.sub_container_click : styles.sub_container}
-									>
-										{tab.label }
+						{tabs.map((tab) => (
+							<div
+								key={tab.key}
+								onClick={() => {
+									handleChange(tab.key);
+								}}
+								role="presentation"
+							>
 
-									</div>
-								)
-								: ''}
+								<div className={tab.key === subActiveTab
+									? styles.sub_container_click : styles.sub_container}
+								>
+									{tab.label }
 
-						</div>
-					))}
+								</div>
+
+							</div>
+						))}
+					</div>
+
 				</div>
-
-			</div>
+			) : ''}
 			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} {...tabComponentProps[subActiveTab]} />}
 		</div>
 
