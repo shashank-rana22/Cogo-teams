@@ -13,6 +13,13 @@ import Preview from './Preview';
 import styles from './styles.module.css';
 import useListAudiences from './useListAudiences';
 
+const ANNOUNCEMENT_TYPE_MAPPING = {
+	general        : 'General',
+	product_update : 'Product Release / Update',
+	announcement   : 'Announcement',
+	tasks          : 'Tasks',
+};
+
 function AnnouncementForm({
 	defaultValues = {},
 	disabled = false,
@@ -60,7 +67,7 @@ function AnnouncementForm({
 		}
 	};
 
-	const { validity = {} } = formValues;
+	const { validity = {}, announcement_type = '', title = '' } = formValues;
 
 	const { startDate = '' } = validity;
 
@@ -76,6 +83,13 @@ function AnnouncementForm({
 			</div>
 		);
 	};
+
+	const getPreviewModalHeader = () => (
+		<div className={styles.modal_header_container}>
+			<div className={styles.type_tag}>{ANNOUNCEMENT_TYPE_MAPPING[announcement_type]}</div>
+			<div className={styles.title}>{title}</div>
+		</div>
+	);
 
 	if (listAudienceLoading || loadingForm) {
 		return (
@@ -175,7 +189,7 @@ function AnnouncementForm({
 					placement="center"
 					onClose={() => setShowPreview(false)}
 				>
-					<Modal.Header title={formValues.title} />
+					<Modal.Header title={getPreviewModalHeader()} style={{ paddingTop: 0, paddingLeft: 0 }} />
 
 					<Modal.Body className={styles.preview_modal_body}>
 						<Preview

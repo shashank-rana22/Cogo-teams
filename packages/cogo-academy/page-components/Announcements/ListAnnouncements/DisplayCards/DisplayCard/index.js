@@ -63,10 +63,10 @@ function DisplayCard({
 		return <div className={styles.value}>{values}</div>;
 	};
 
-	const getPreviewTitle = () => (
-		<div className={styles.preview_title_container}>
-			<div>{accordianData.title}</div>
-			<Pill color="yellow">{ANNOUNCEMENT_TYPE_MAPPING[data?.announcement_type]}</Pill>
+	const getPreviewModalHeader = () => (
+		<div className={styles.modal_header_container}>
+			<div className={styles.type_tag}>{ANNOUNCEMENT_TYPE_MAPPING[data?.announcement_type]}</div>
+			<div className={styles.title}>{data?.title}</div>
 		</div>
 	);
 
@@ -150,7 +150,7 @@ function DisplayCard({
 					onClose={() => setShowModal(false)}
 
 				>
-					<Modal.Header title={getPreviewTitle()} />
+					<Modal.Header title={getPreviewModalHeader()} style={{ paddingTop: 0, paddingLeft: 0 }} />
 					<Modal.Body className={styles.modal_body}>
 						<Preview
 							formValues={accordianData}
