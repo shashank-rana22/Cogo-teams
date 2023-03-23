@@ -10,7 +10,7 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 				<ResponsivePie
 					data={pie_data}
 					margin={{
-						top    : 25,
+						top    : 20,
 						right  : -15,
 						bottom : 60,
 						left   : 70,
@@ -54,7 +54,7 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 							direction     : 'column',
 							justify       : false,
 							translateX    : -170,
-							translateY    : 50,
+							translateY    : 58,
 							itemsSpacing  : 10,
 							itemWidth     : 80,
 							itemHeight    : 18,
@@ -83,7 +83,7 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 				<ResponsivePie
 					data={pie_outer_data}
 					margin={{
-						top    : 25,
+						top    : 20,
 						right  : 10,
 						bottom : 60,
 						left   : 70,
@@ -127,9 +127,9 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 							anchor        : 'bottom',
 							direction     : 'column',
 							justify       : false,
-							translateX    : 50,
-							translateY    : 40,
-							itemsSpacing  : 3,
+							translateX    : 65,
+							translateY    : 55,
+							itemsSpacing  : 5,
 							itemWidth     : 80,
 							itemHeight    : 18,
 							itemTextColor : '#999',
