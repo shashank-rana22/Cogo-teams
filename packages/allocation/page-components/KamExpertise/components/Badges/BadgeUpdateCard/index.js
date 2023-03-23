@@ -20,6 +20,8 @@ function BadgeUpdateCard(props) {
 	const InputController = getFieldController('number');
 	const UploadController = getFieldController('fileUpload');
 
+	const watch_image_value = watch(`${medalType}_img_value`);
+
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
 			<div
@@ -87,19 +89,16 @@ function BadgeUpdateCard(props) {
 					{errors?.[`${medalType}_img_value`]?.message}
 				</div>
 
-				{/* watch_image_value = watch(`${medalType}_img_value`) and use t
-				his and explore if single condition can be used */}
-
 				<div>
-					{watch(`${medalType}_img_value`)
+					{watch_image_value
 						? (
 							<div className={styles.preview}>
-								<img src={watch(`${medalType}_img_value`)} alt="preview_image" />
+								<img src={watch_image_value} alt="preview_image" />
 							</div>
 						)
 						: null}
 
-					{!isEmpty(badgeItemData) && !watch(`${medalType}_img_value`)
+					{!isEmpty(badgeItemData) && !watch_image_value
 						? (
 							<div className={styles.preview}>
 								<img

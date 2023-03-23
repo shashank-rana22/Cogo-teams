@@ -54,7 +54,6 @@ function useCreateBadgeConfiguration(props) {
 		if (Number(Bronze_value) < Number(Silver_value) && Number(Silver_value) < Number(Gold_value)) {
 			try {
 				const payload = {
-					version_id                         : '1',
 					badge_name                         : badge,
 					description,
 					expertise_configuration_detail_ids : condition,
