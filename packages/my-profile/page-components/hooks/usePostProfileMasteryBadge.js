@@ -23,7 +23,9 @@ function usePostProfileMasteryBadge(profileBadgeRefetch) {
 
 			Toast.success('Mastery Badge Updated');
 		} catch (error) {
-			Toast.error(error?.message || 'Something went wrong');
+			Toast.error((error?.code) === 'ERR_BAD_REQUEST'
+				? "Don't have the mastery for the badge or it's already added"
+				: (error?.message || 'Something went wrong'));
 		}
 	};
 

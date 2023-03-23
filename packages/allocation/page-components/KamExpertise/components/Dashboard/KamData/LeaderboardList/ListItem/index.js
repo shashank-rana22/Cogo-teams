@@ -1,6 +1,6 @@
 import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -42,34 +42,37 @@ function ListItem(props) {
 				<div className={styles.badge_container}>
 					<div className={styles.badges}>
 						{
-							badge_details.map((value) => (
-								<div key={value.id} className={styles.badge_item}>
-									<img src={value.image_url} alt="badge" />
-
-									<div className={styles.star}>
-										{[1, 2, 3].map((item) => (
-											<div key={item}>
-												<IcCStar width={10} stroke="#FFDF33" />
+							badge_details.map((value, i) => (
+								i < 3
+									? (
+										<div key={value.id} className={styles.badge_item}>
+											<img src={value.image_url} alt="badge" />
+											<div className={styles.star}>
+												{[1, 2, 3].map((i) => (
+													<div key={i}>
+														<IcCStar width={10} stroke="#FFDF33" />
+													</div>
+												))}
 											</div>
-										))}
-									</div>
-								</div>
+										</div>
+									)
+									: null
 							))
 						}
 					</div>
 					<span className={styles.link}>
-						{badge_details.length > 0
-							? (
-								<span
-									role="presentation"
-									style={{ cursor: 'pointer' }}
-									onClick={() => {
-										handleClick(data.partner_user_id);
-									}}
-								>
-									View More
-								</span>
-							) : null}
+						{!isEmpty(badge_details)
+						&& (
+							<span
+								role="presentation"
+								style={{ cursor: 'pointer' }}
+								onClick={() => {
+									handleClick(data.partner_user_id);
+								}}
+							>
+								View More
+							</span>
+						)}
 					</span>
 				</div>
 

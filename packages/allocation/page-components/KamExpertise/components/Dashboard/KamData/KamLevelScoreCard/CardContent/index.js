@@ -4,6 +4,13 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function CardContent({ list_data = {}, value }) {
+	// Todo deal with only a single object rather than using 3 different object
+	// Todo percentage change can be string -> dal with it in the frontend
+	const TITLE_MAPPING = {
+		count   : 'Count',
+		average : 'Avg. Score',
+	};
+
 	const VALUE_MAPPING = {
 		count   : list_data.count,
 		average : list_data.average_score,
@@ -15,6 +22,7 @@ function CardContent({ list_data = {}, value }) {
 	};
 
 	const title = (value === 'count' ? 'Count' : 'Avg. Score');
+	// const title = (value === 'count' ? TITLE_MAPPING.count : TITLE_MAPPING.average);
 	const val = (value === 'count' ? VALUE_MAPPING.count : VALUE_MAPPING.average);
 	const percentage_change = (value === 'count' ? PERCENTAGE_MAPPING.count : PERCENTAGE_MAPPING.average);
 
