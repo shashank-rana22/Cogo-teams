@@ -64,9 +64,9 @@ function OutstandingList({ item }) {
 			<div className={styles.hr} />
 			<div className={styles.flex_column}>
 				{types?.map((party) => (
-					<span style={{ marginTop: '5px' }}>
-						<div className={styles.styled_tag}>{party}</div>
-					</span>
+					<div style={{ marginTop: '5px' }}>
+						<div className={styles.styled_tag}>{startCase(party)}</div>
+					</div>
 				))}
 
 			</div>

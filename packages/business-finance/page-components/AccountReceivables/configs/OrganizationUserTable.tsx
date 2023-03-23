@@ -47,7 +47,7 @@ const OrganizationColumn = () => [
 		Header   : 'Work Scopes',
 		accessor : (row) => (
 			<div>
-				{ row.work_scopes.length > 0 ? (
+				{ row?.work_scopes?.length > 0 ? (
 					<div>
 						{(getByKey(row, 'work_scopes') as []).map((val) => <div>{startCase(val)}</div>)}
 					</div>

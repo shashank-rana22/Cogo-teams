@@ -7346,12 +7346,6 @@ const partner = {
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
 		},
-		{
-			api         : 'get_partner_user_rm_mapping',
-			access_type : 'private',
-			module      : 'Outstanding',
-			feature     : 'Outstanding',
-		},
 
 		{
 			api         : 'get_sales_outstanding',
@@ -7453,8 +7447,21 @@ const partner = {
 		{
 			api         : 'list_organization_users',
 			access_type : 'private',
-			module      : 'Outstanding',
-			feature     : 'Outstanding',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'outstanding',
+			feature      : 'outstanding',
+
+		},
+		{
+			api         : 'get_partner_user_rm_mapping',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 	],
 	incident_controller: [

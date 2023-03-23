@@ -2,7 +2,7 @@ import { Select, Input, Popover } from '@cogoport/components';
 import { IcMArrowRotateUp, IcMArrowRotateDown, IcMCross, IcMSearchdark } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { SEARCH_OPTIONS, SORTBY_OPTION } from '../../../constants/index';
+import { ENTITY_TYPE, SEARCH_OPTIONS, SORTBY_OPTION } from '../../../constants/index';
 import useListCogoEntity from '../../../hooks/useListCogoEntity';
 
 import FilterpopOver from './FilterpopOver';
@@ -29,10 +29,6 @@ function Filters({
 
 	const sortStyleDesc = orderBy.order === 'Desc' ? '#303B67' : '#BDBDBD';
 
-	const {
-		list,
-	} = useListCogoEntity();
-
 	const onChange = (val:string, name:string) => {
 		setParams((p) => ({ ...p, [name]: val }));
 	};
@@ -55,9 +51,8 @@ function Filters({
 				<Select
 					value={params.entityCode}
 					onChange={(val:string) => onChange(val, 'entityCode')}
-					isClearable
 					placeholder="Select Entity Type"
-					options={list}
+					options={ENTITY_TYPE}
 					size="sm"
 				/>
 				{' '}

@@ -1,9 +1,9 @@
-import { CheckboxGroup, Select, Button, Popover } from '@cogoport/components';
+import { Select, Button, Popover } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { companyType, DUE_IN, SALES_AGENT } from '../../../../constants/index';
+import { companyType } from '../../../../constants/index';
 
 import styles from './styles.module.css';
 
@@ -49,6 +49,11 @@ function FilterpopOver({
 				</div>
 			</div>
 			<div className={styles.popover_content}>
+				<div className={styles.Margin} />
+				<div className={styles.Margin} />
+
+				<div> Sales Agent</div>
+
 				<AsyncSelect
 					name="user_id"
 					asyncKey="partner_users"
@@ -60,28 +65,20 @@ function FilterpopOver({
 					size="sm"
 				/>
 				<div className={styles.Margin} />
+				<div> Credit Controller Agent</div>
+
 				<AsyncSelect
 					name="credit_controller_id"
-					asyncKey="list_locations"
+					asyncKey="partner_users"
 					valueKey="user_id"
 					initialCall={false}
 					onChange={(userId) => onChange(userId, 'creditControllerId')}
-					value={filters.salesAgentId}
+					value={filters.creditControllerId}
 					placeholder="Select Credit Controller User"
 					size="sm"
 				/>
 				<div className={styles.Margin} />
-
-				<Select
-					value={filters.dueIn}
-					onChange={(val:string) => onChange(val, 'ageingKey')}
-					placeholder="Select Due In"
-					options={DUE_IN}
-					isClearable
-					size="sm"
-				/>
-				<div className={styles.Margin} />
-
+				<div>Company Type</div>
 				<Select
 					value={filters.companyType}
 					onChange={(val:string) => onChange(val, 'companyType')}
@@ -89,14 +86,6 @@ function FilterpopOver({
 					placeholder="Select Company Type"
 					options={companyType}
 					size="sm"
-				/>
-				<div className={styles.Margin} />
-
-				<CheckboxGroup
-					style={{ flexDirection: 'column', width: '100%' }}
-					options={SALES_AGENT}
-					onChange={(val:string) => onChange(val, 'checkBox')}
-					value={filters.checkBox}
 				/>
 			</div>
 		</div>

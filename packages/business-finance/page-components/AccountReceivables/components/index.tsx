@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function AccountReceivables() {
 	const { push } = useRouter();
-	const [receivables, setReceivables] = useState<string>('dashboard');
+	const [receivables, setReceivables] = useState<string>('outstanding');
 
 	const handleChange = (val:string) => {
 		setReceivables(val);

@@ -1,6 +1,6 @@
 .popover_container {
     width: 320px;
-    height: 400px;
+    height: 300px;
 }
 
 .popover_content{
@@ -36,5 +36,5 @@
 }
 
 .Margin{
-    margin-top: 8px;
+    margin-top: 12px;
 }

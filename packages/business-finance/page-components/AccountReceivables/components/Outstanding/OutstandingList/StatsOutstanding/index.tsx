@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 function StatsOutstanding({ item }) {
 	const {
 		openInvoice = {},
-		onAccountPayment = [],
-		totalOutstanding = [],
+		onAccountPayment = {},
+		totalOutstanding = {},
 		openInvoiceCount = 0,
 		onAccountPaymentInvoiceLedgerAmount = 0,
 		onAccountPaymentInvoiceCount = 0,
@@ -33,7 +33,7 @@ function StatsOutstanding({ item }) {
 		return ageingBucket[key].ledgerCurrency;
 	};
 	return (
-		<div className={styles.Container}>
+		<div className={styles.container}>
 			<div className={styles.invoices_wrapper}>
 				<div className={styles.invoices_card}>
 					<div className={styles.left_container}>
@@ -96,12 +96,12 @@ function StatsOutstanding({ item }) {
 						</div>
 						<div style={{ marginTop: '5px' }}>
 							{invoiceBucket.map((openInvoiceAmount) => (
-								<div>
+								<div className={styles.flex}>
 									{openInvoiceAmount.amount !== 0
 
 									&& (
 										<div
-											className={styles.Amount}
+											className={styles.amount}
 											style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
 										>
 											{getFormattedPrice(
@@ -113,7 +113,7 @@ function StatsOutstanding({ item }) {
 													maximumFractionDigits : 0,
 												},
 											)}
-											<div className={styles.Count}>
+											<div className={styles.count}>
 												(
 												{openInvoiceAmount?.invoiceCount}
 												)
@@ -153,7 +153,7 @@ function StatsOutstanding({ item }) {
 
 										&& 											(
 											<div
-												className={styles.Amount}
+												className={styles.amount}
 												style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
 											>
 												{getFormattedPrice(
@@ -165,7 +165,7 @@ function StatsOutstanding({ item }) {
 														maximumFractionDigits : 0,
 													},
 												)}
-												<div className={styles.Count}>
+												<div className={styles.count}>
 													(
 													{CreditNoteAmount?.invoiceCount}
 													)
@@ -215,7 +215,7 @@ function StatsOutstanding({ item }) {
 
 										&& 											(
 											<div
-												className={styles.Amount}
+												className={styles.amount}
 												style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
 											>
 												{getFormattedPrice(
@@ -227,7 +227,7 @@ function StatsOutstanding({ item }) {
 														maximumFractionDigits : 0,
 													},
 												)}
-												<div className={styles.Count}>
+												<div className={styles.count}>
 													(
 													{CreditNoteAmount?.invoiceCount}
 													)
@@ -256,8 +256,8 @@ function StatsOutstanding({ item }) {
 						}}
 					>
 						{getFormattedPrice(
-							totalOutstandingInvoiceLedgerAmount || 0,
-							'INR',
+							totalOutstanding.ledgerAmount || 0,
+							totalOutstanding.ledgerCurrency,
 							{
 								style                 : 'currency',
 								currencyDisplay       : 'code',
@@ -266,31 +266,38 @@ function StatsOutstanding({ item }) {
 						)}
 						<div className={styles.count}>
 							(
-							{totalOutstandingInvoiceCount}
+							{totalOutstanding.ledgerCount}
 							)
 						</div>
 					</div>
 					<div style={{ marginTop: '5px' }}>
 						{totalOutstanding?.invoiceBucket?.map((outstanding) => (
-							<div
-								className={styles.amount}
-								style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
-							>
-								{getFormattedPrice(
-									outstanding?.amount || 0,
-									outstanding?.currency,
-									{
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 0,
-									},
-								)}
-								<div className={styles.count}>
-									(
-									{outstanding?.invoiceCount}
-									)
-								</div>
+							<div>
+								{outstanding.amount !== 0
+
+									&& 							(
+										<div
+											className={styles.amount}
+											style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
+										>
+											{getFormattedPrice(
+												outstanding?.amount || 0,
+												outstanding?.currency,
+												{
+													style                 : 'currency',
+													currencyDisplay       : 'code',
+													maximumFractionDigits : 0,
+												},
+											)}
+											<div className={styles.count}>
+												(
+												{outstanding?.invoiceCount}
+												)
+											</div>
+										</div>
+									)}
 							</div>
+
 						))}
 					</div>
 				</div>
@@ -307,8 +314,8 @@ function StatsOutstanding({ item }) {
 						}}
 					>
 						{getFormattedPrice(
-							onAccountPaymentInvoiceLedgerAmount || 0,
-							'INR',
+							onAccountPayment.ledgerAmount || 0,
+							onAccountPayment.ledgerCurrency,
 							{
 								style                 : 'currency',
 								currencyDisplay       : 'code',
@@ -317,34 +324,42 @@ function StatsOutstanding({ item }) {
 						)}
 						<div className={styles.count}>
 							(
-							{onAccountPaymentInvoiceCount}
+							{onAccountPayment.ledgerCount}
 							)
 						</div>
 					</div>
 					<div style={{ marginTop: '5px' }}>
 						{onAccountPayment?.invoiceBucket.map((onAccount) => (
-							<div
-								className={styles.amount}
-								style={{
-									color      : 'rgb(103, 198, 118)',
-									fontWeight : '600',
-									fontSize   : '11px',
-								}}
-							>
-								{getFormattedPrice(
-									onAccount?.amount || 0,
-									onAccount?.currency,
-									{
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 0,
-									},
-								)}
-								<div className={styles.count}>
-									(
-									{onAccount?.invoiceCount}
-									)
-								</div>
+
+							<div>
+								{onAccount.amount !== 0
+
+	&& 								(
+		<div
+			className={styles.amount}
+			style={{
+				color      : 'rgb(103, 198, 118)',
+				fontWeight : '600',
+				fontSize   : '11px',
+			}}
+		>
+			{getFormattedPrice(
+				onAccount?.amount || 0,
+				onAccount?.currency,
+				{
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 0,
+				},
+			)}
+			<div className={styles.count}>
+				(
+				{onAccount?.invoiceCount}
+				)
+			</div>
+		</div>
+	)}
+
 							</div>
 						))}
 					</div>

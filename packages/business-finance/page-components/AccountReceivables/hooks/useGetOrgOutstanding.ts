@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react';
 
 const useGetOrgOutstanding = ({ formFilters }) => {
 	const [outStandingFilters, setoutStandingFilters] = useState({
-		page      : 1,
-		pageLimit : 10,
+		page       : 1,
+		pageLimit  : 10,
+		entityCode : '301',
 	});
 
 	const resetQuery = {
@@ -49,7 +50,7 @@ const useGetOrgOutstanding = ({ formFilters }) => {
 				params: {
 					...rest,
 					...formFilters || undefined,
-					sortBy             : 'totalOutstandingLedgerAmount',
+					sortBy             : orderBy.key,
 					sortType           : order,
 					page               : p || rest?.page,
 					ageingKey          : ageingKey || undefined,
