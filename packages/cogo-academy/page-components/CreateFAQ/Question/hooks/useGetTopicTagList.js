@@ -3,10 +3,10 @@ import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useCallback } from 'react';
 
-/* eslint-disable */
-import countries from '../../../../../../.data-store/constants/countries.json';
-
 import WORK_SCOPES_OPTIONS from '../../ConfigurationEngine/CreateAudienceForm/utils/workScopeMappings';
+
+// eslint-disable-next-line import/no-unresolved
+import countries from '@/data-store/constants/countries.json';
 
 const useGetTopicTagList = () => {
 	const [{ data: topicsData, loading:listTopicsLoading }, triggerTopics] = useRequest({
