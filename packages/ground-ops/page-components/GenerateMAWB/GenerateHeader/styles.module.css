@@ -1,0 +1,39 @@
+.heading {
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 30px;
+}
+
+.flex {
+	display: flex;
+	flex-flow: row wrap;
+	background: #F1F1F1;
+	height: 48px;
+	border-radius: 8px 8px 0px 0px;
+	margin-top: 20px;
+	padding-left: 40px;
+}
+
+.category_container_click {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px 40px;
+	margin-right: 16px;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	border-bottom: 4px solid #333;
+}
+
+.category_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px 40px;
+	margin-right: 16px;
+	margin-bottom: 16px;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+}

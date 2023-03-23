@@ -1,26 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Modal, Stepper, Breadcrumb, RadioGroup } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
 
-import Layout from '../Air/commons/Layout';
-
+import FormContainer from './FormContainer';
+import GenerateHeader from './GenerateHeader';
 import GenerateMawbDoc from './GenerateMawbDoc';
 import usePackingList from './Helpers/hooks/usePackingList';
 import mawbControls from './mawbControls';
 import styles from './styles.module.css';
-import UploadMAWB from './UploadMAWB';
-
-const items = [
-	{ title: 'Basic Details', key: 'basic' },
-	{ title: 'Package & Charges Detail', key: 'package' },
-	{ title: 'Handling Details', key: 'handling' },
-];
-
-const options = [
-	{ name: 'Add Manually', value: 'manual', label: 'Add Manually' },
-	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
-];
 
 const iataCodeMapping = {
 	'7391cac2-e8db-467f-a59b-574d01dd7e7c' : '14-3-4526/0020',
@@ -57,19 +45,12 @@ function GenerateMAWB({
 	const [back, setBack] = useState(false);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
-	const [activeKey, setActiveKey] = useState('basic');
-
-	const [value, onChange] = useState('manual');
-
 	const [disableClass, setDisableClass] = useState(false);
+	const [activeCategory, setActiveCategory] = useState('hawb');
 
 	const fields = mawbControls(disableClass);
 
 	const { packingData, packingList } = usePackingList();
-
-	const onSubmit = () => {
-		setBack(true);
-	};
 
 	const formValues = watch();
 
@@ -90,14 +71,6 @@ function GenerateMAWB({
 		+formValues.weight,
 		(+taskItem.volume * 166.67),
 	) || 0.0).toFixed(2)));
-
-	const handleDocumentList = (type) => {
-		(packingData?.list || []).forEach((itm) => {
-			if (itm.documentType === type) {
-				window.open(itm.documentUrl, '_blank');
-			}
-		});
-	};
 
 	useEffect(() => {
 		setChargeableWeight(formValues.chargeableWeight);
@@ -165,153 +138,30 @@ function GenerateMAWB({
 
 	return (
 		<div className={styles.container}>
-			{!viewDoc
-			&& (
-				<>
-					<div className={styles.heading}>Add Export Details</div>
-					<Breadcrumb>
-						<Breadcrumb.Item label={(
-							<div
-								onClick={() => { setGenerate(false); if (edit) { setEdit(false); } }}
-								role="link"
-								tabIndex={0}
-							>
-								SO2 - Docs Dashboard
-							</div>
-						)}
-						/>
-						<Breadcrumb.Item label="Add Export Details" />
-					</Breadcrumb>
-				</>
+			{!viewDoc && (
+				<GenerateHeader
+					setGenerate={setGenerate}
+					edit={edit}
+					setEdit={setEdit}
+					activeCategory={activeCategory}
+					setActiveCategory={setActiveCategory}
+				/>
 			)}
-			{!viewDoc
-			&& (
-				<div className={styles.form_container}>
-					<div className={styles.header_flex}>
-						{value === 'manual' && (
-							<Stepper
-								active={activeKey}
-								setActive={setActiveKey}
-								items={items}
-							/>
-						)}
 
-						{!edit
-						&& (
-							<RadioGroup
-								options={options}
-								onChange={onChange}
-								value={value}
-								style={{ marginLeft: 'auto' }}
-							/>
-						)}
-					</div>
-					<div className={styles.flex}>
-						<Button
-							size="md"
-							themeType="primary"
-							onClick={() => handleDocumentList('packing_list')}
-							className={styles.packing_button}
-						>
-							Refer Packing List
-						</Button>
-
-						<Button
-							size="md"
-							themeType="primary"
-							onClick={() => handleDocumentList('shipping_instruction')}
-							className={styles.packing_button}
-						>
-							Refer Shipping Instruction
-						</Button>
-					</div>
-					{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} />
-						: (
-							<>
-								{activeKey === 'basic'
-								&& (
-									<>
-										<Layout fields={fields?.basic} control={control} errors={errors} />
-										<div className={styles.button_container}>
-
-											{!back ? (
-												<div className={styles.button_div}>
-													<Button
-														onClick={() => {
-															setGenerate(false);
-															if (edit) { setEdit(false); }
-														}}
-														themeType="secondary"
-														style={{ border: '1px solid #333' }}
-													>
-														CANCEL
-													</Button>
-													<Button
-														onClick={handleSubmit(() => setActiveKey('package'))}
-														themeType="accent"
-													>
-														NEXT
-													</Button>
-												</div>
-											) : null}
-										</div>
-									</>
-								)}
-
-								{activeKey === 'package'
-								&& (
-									<>
-										<Layout fields={fields?.package} control={control} errors={errors} />
-										<div className={styles.button_container}>
-											{!back ? (
-												<div className={styles.button_div}>
-													<Button
-														onClick={() => setActiveKey('basic')}
-														themeType="secondary"
-														style={{ border: '1px solid #333' }}
-													>
-														BACK
-													</Button>
-													<Button
-														onClick={handleSubmit(() => setActiveKey('handling'))}
-														themeType="accent"
-													>
-														Next
-													</Button>
-												</div>
-											) : null}
-										</div>
-									</>
-								)}
-
-								{activeKey === 'handling'
-								&& (
-									<>
-										<Layout fields={fields?.handling} control={control} errors={errors} />
-										<div className={styles.button_container}>
-											{!back ? (
-												<div className={styles.button_div}>
-													<Button
-														onClick={() => setActiveKey('package')}
-														themeType="secondary"
-														style={{ border: '1px solid #333' }}
-													>
-														BACK
-													</Button>
-													<Button
-														onClick={handleSubmit(onSubmit)}
-														themeType="accent"
-													>
-														Generate Master Airway Bill
-													</Button>
-												</div>
-											) : null}
-										</div>
-									</>
-								)}
-							</>
-						)}
-				</div>
+			{!viewDoc && (
+				<FormContainer
+					back={back}
+					setBack={setBack}
+					edit={edit}
+					setEdit={setEdit}
+					packingData={packingData}
+					fields={fields}
+					control={control}
+					errors={errors}
+					item={item}
+					setGenerate={setGenerate}
+					handleSubmit={handleSubmit}
+				/>
 			)}
 
 			<div className={styles.file_container}>
