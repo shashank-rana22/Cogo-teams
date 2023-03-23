@@ -7,7 +7,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function MessageContent({ msg, user_id, index, handleClick = () => {} }) {
+function MessageContent({ msg, user_id, handleClick = () => {} }) {
 	const getSplited = (str) => {
 		const all = str.split('\\n');
 		let res = '';
@@ -21,7 +21,6 @@ function MessageContent({ msg, user_id, index, handleClick = () => {} }) {
 		<div
 			className={cl` ${styles.container} ${msg?.created_by_user_id === user_id
 				? styles.right : styles.left} `}
-			id={`shipment_chat_message_container${index}`}
 		>
 			{(msg?.visible_to_user_ids || []).map((item) => (
 				item === user_id ? (

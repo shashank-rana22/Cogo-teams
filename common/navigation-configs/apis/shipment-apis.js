@@ -1283,7 +1283,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_services',
+		api          : 'get_service',
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
