@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails }) {
+function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query: inpQuery }) {
 	const { general: { query } } = useSelector((state) => state);
 
 	const { id } = query || {};
@@ -48,7 +48,7 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setE
 
 	useEffect(() => {
 		getTestQuestionTest({ questionSetId });
-	}, [filters]);
+	}, [inpQuery]);
 
 	return {
 		loading,
