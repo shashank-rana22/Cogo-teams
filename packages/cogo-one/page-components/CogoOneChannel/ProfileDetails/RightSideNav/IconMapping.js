@@ -1,4 +1,8 @@
-import { IcMSearchdark, IcMFaq } from '@cogoport/icons-react';
+import {
+	IcMSearchdark,
+	IcMDocument,
+	IcMHelpInCircle,
+} from '@cogoport/icons-react';
 
 const IconMapping = [
 	{
@@ -23,7 +27,7 @@ const IconMapping = [
 		name    : 'user_activity',
 		content : 'User Activity',
 		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user actrivity.svg"
+			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user-actrivity.svg"
 			alt="activities"
 		/>,
 	},
@@ -60,14 +64,20 @@ const IconMapping = [
 		name    : 'customer_insights',
 		content : 'Customer Insights',
 		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer Insights.svg"
+			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer-insight.svg"
 			alt="insights"
 		/>,
 	},
 	{
+		name    : 'documents',
+		content : 'Documents',
+		icon    : <IcMDocument width={18} height={18} />,
+	},
+	{
 		name    : 'help_desk',
 		content : 'Help Desk',
-		icon    : <IcMFaq width={18} height={18} />,
+		icon    : <IcMHelpInCircle width={18} height={18} />,
 	},
 ];
+
 export default IconMapping;

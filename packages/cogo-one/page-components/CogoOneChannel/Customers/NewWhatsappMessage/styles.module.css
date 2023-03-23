@@ -1,0 +1,12 @@
+.header {
+	font-weight: 600;
+	color: #6b6767;
+}
+
+.styled_modal_class {
+	:global {
+		.ui_modal_header_container {
+			padding: 16px 10px !important;
+		}
+	}
+}
