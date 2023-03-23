@@ -72,8 +72,8 @@ function AllQuestionCardView({ props = {} }) {
 				</div>
 
 			</div>
-			{showQuestions ? <QuestionsList /> : null}
 
+			{showQuestions ? <QuestionsList /> : null}
 		</div>
 	);
 }

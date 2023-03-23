@@ -8,18 +8,22 @@ const VIEW_CARD__PERCENT_MAPPING = {
 	liked    : 'like_percentage',
 	disliked : 'dislike_percentage',
 };
+
 const VIEW_CARD_MAPPING = {
 	viewed   : 'view_count',
 	liked    : 'total_likes',
 	disliked : 'total_dislikes',
 };
+
 const VIEW_CARD_TEXT_MAPPING = {
 	viewed   : 'Views, ',
 	liked    : 'Likes, ',
 	disliked : 'Dislikes, ',
 };
+
 function ViewCards({ state = '', cardHeading = '', subHeading = [] }) {
 	const truncate = (str) => (str?.length > 10 ? `${startCase(str.substring(0, 11))}...` : startCase(str));
+
 	function sidetext(value, item) {
 		const key = VIEW_CARD__PERCENT_MAPPING[value];
 		const token = VIEW_CARD_MAPPING[value];
@@ -31,10 +35,10 @@ function ViewCards({ state = '', cardHeading = '', subHeading = [] }) {
 				{' '}
 				{item?.[key] || 0}
 				%
-
 			</div>
 		);
 	}
+
 	return (
 		<div className={styles.primary_right}>
 			<div className={styles.active_users}>
@@ -76,7 +80,6 @@ function ViewCards({ state = '', cardHeading = '', subHeading = [] }) {
 							</Tooltip>
 
 							{sidetext(state, subHeading[1])}
-
 						</div>
 					</div>
 				</div>
