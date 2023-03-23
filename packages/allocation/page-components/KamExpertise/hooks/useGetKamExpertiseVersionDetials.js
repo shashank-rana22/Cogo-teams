@@ -9,7 +9,7 @@ const useGetKamExpertiseVersionDetials = () => {
 		},
 	};
 
-	const [{ data, loading }, trigger] = useAllocationRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_version_configurations',
 		method  : 'GET',
 		authkey : 'get_allocation_kam_expertise_version_configurations',
@@ -22,14 +22,11 @@ const useGetKamExpertiseVersionDetials = () => {
 
 			if (!res.hasError) {
 				Toast.success('Version Selected');
-				console.log(res);
 			}
 		} catch (error) {
 			Toast.error(error);
 		}
 	};
-
-	console.log('data::', data);
 
 	return {
 		loading,

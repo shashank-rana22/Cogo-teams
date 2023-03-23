@@ -153,7 +153,11 @@ function KamExpertiseScoreConfig({ setMainLoading, selectedVersion }) {
 												<div className={styles.field_array_container}>
 													<span className={styles.label}>{el.label}</span>
 
-													<FieldArray {...el} control={control} />
+													<FieldArray
+														{...el}
+														control={control}
+														error={errors?.[el.name]}
+													/>
 												</div>
 											);
 										}
@@ -172,6 +176,7 @@ function KamExpertiseScoreConfig({ setMainLoading, selectedVersion }) {
 														key={el.name}
 														control={control}
 														id={`${el.name}_input`}
+														disabled={createConditionloading}
 													/>
 												</div>
 
@@ -187,20 +192,12 @@ function KamExpertiseScoreConfig({ setMainLoading, selectedVersion }) {
 						</Modal.Body>
 
 						<Modal.Footer>
-							{/* <Button
-							size="md"
-							type="button"
-							themeType="tertiary"
-							style={{ marginRight: '10px' }}
-						>
-							Cancel
-						</Button> */}
 
 							<Button
 								size="md"
 								type="submit"
 								themeType="primary"
-							// loading={loadingOnSave}
+								loading={createConditionloading}
 								id="add_condition_btn"
 							>
 								Add

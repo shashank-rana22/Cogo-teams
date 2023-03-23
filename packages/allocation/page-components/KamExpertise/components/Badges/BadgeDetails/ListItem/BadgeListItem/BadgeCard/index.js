@@ -52,7 +52,7 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 							{' '}
 						</div>
 						<div className={styles.score}>
-							{score || '___'}
+							{score || '_'}
 							{' '}
 							Score
 						</div>
