@@ -47,9 +47,13 @@
 }
 
 .text_area {
-    min-height: 126px;
     color: #221f20;
     font-size: 8px;
+
+    :global(.ui_text_area_control){
+        min-height: 140px;
+    }
+
     @media (max-width: 576px) {
         min-height: 142px;
     }
