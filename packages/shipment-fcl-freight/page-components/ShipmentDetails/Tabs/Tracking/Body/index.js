@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 import TrackingData from './TrackingData';
 import TrackingMap from './TrackingMap';
 
-function Body({ list = [], loading = false, shipmentType = '' }) {
+function Body({ list = [], loading = false }) {
 	const [oceanPoints, setOceanPoints] = useState([]);
 	const [mapPoints, setMapPoints] = useState([]);
 
