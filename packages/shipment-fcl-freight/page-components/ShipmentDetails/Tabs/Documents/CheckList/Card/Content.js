@@ -42,7 +42,7 @@ function Content({
 				checked={isChecked}
 				isLast={data.length === idx + 1}
 			/>
-			<div className={styles.single_item_child}>
+			<div className={isChecked ? styles.single_item_child : styles.upload_item}>
 
 				<div className={styles.main}>
 					<div className={styles.heading}>{item?.label.split('Upload').slice(-1)[0]}</div>
@@ -119,13 +119,13 @@ function Content({
 							? (
 								<>
 									<Button
-										themeType="tertiary"
+										themeType="link"
 										onClick={() => handleView(extraItem?.document_url)}
 									>
 										View
 									</Button>
 									<Button
-										themeType="secondary"
+										themeType="link"
 										onClick={() => handleSave(extraItem?.document_url)}
 									>
 										Download

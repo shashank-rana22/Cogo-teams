@@ -5,15 +5,15 @@ import VerticleLine from '../VerticleLine';
 
 import styles from './styles.module.css';
 
-const LoadingState = () => [...Array(4)].map((v, idx) => (
+const LoadingState = () => [...Array(6)].map((v, idx) => (
 	<div className={styles.single_item}>
-		<VerticleLine zIndex={idx} isLast={idx === 3} />
+		<VerticleLine zIndex={idx} isLast={idx === 5} />
 		<div className={styles.main}>
 			<div className={styles.heading}>
-				<Placeholder width="120px" height="32px" />
+				<Placeholder width="240px" height="32px" />
 			</div>
 			<div className={styles.gap}>
-				<Placeholder height="40px" />
+				<Placeholder height="50px" />
 			</div>
 		</div>
 		<div style={{ marginTop: '20px', marginLeft: 'auto' }}>

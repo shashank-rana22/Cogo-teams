@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 
 import Actions from './Actions';
 import Card from './Card';
+import LoadingState from './LoadingState';
 // import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
@@ -10,7 +11,7 @@ function CheckList({
 	data,
 	setShow,
 	setShowConfirmed,
-	// loading,
+	loading = false,
 	emailDocs,
 	completedDocs,
 	// shipmentDocumentsRefetch,
@@ -48,20 +49,23 @@ function CheckList({
 
 	return (
 		<div className={styles.wrapper}>
-
-			<Card
-				data={data}
-				completedDocs={completedDocs}
-				emailDocs={emailDocs}
-				content={content}
-				setShowHbl={setShowHbl}
-				setUpdateFreightCertificate={setUpdateFreightCertificate}
-				setShowConfirmed={setShowConfirmed}
-				setShow={setShow}
-				shipment_data={shipment_data}
-				primary_service={primary_service}
-				setDocumentDetails={setDocumentDetails}
-			/>
+			{loading ? (
+				<LoadingState />
+			) : (
+				<Card
+					data={data}
+					completedDocs={completedDocs}
+					emailDocs={emailDocs}
+					content={content}
+					setShowHbl={setShowHbl}
+					setUpdateFreightCertificate={setUpdateFreightCertificate}
+					setShowConfirmed={setShowConfirmed}
+					setShow={setShow}
+					shipment_data={shipment_data}
+					primary_service={primary_service}
+					setDocumentDetails={setDocumentDetails}
+				/>
+			)}
 
 			<Actions
 				shipment_data={shipment_data}

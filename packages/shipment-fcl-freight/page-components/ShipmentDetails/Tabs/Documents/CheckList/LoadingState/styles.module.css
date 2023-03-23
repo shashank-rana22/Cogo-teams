@@ -20,8 +20,9 @@
 }
 
  .single_item {
+	display: flex;
 	gap: 16px;
-	padding: 4x 16px  6px;
+	padding: 4x 16px 6px;
 	align-items: center;
 	position: relative;
 }
