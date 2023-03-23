@@ -102,14 +102,29 @@ function KamData(props) {
 
 						<div className={styles.overview_cards}>
 							{
-								overviewList.map((data) => (
-									<OverviewCard
-										key={data.title}
-										data={data}
-										overviewLoading={overviewLoading}
-									/>
-								))
+								isEmpty(overviewList)
+								&& (
+									<div className={styles.empty_state}>
+										<EmptyState
+											height={108}
+											width={180}
+											textSize="16px"
+											emptyText="Overview Data Not Found"
+										/>
+									</div>
+								)
 							}
+
+							{!isEmpty(overviewList)
+								&& (
+									overviewList.map((data) => (
+										<OverviewCard
+											key={data.title}
+											data={data}
+											overviewLoading={overviewLoading}
+										/>
+									))
+								)}
 						</div>
 					</div>
 
