@@ -18,7 +18,7 @@ function ReviewAndCriteria({
 	data,
 	test_id,
 }) {
-	const { control, formState: { errors }, handleSubmit, setValue, watch } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
 
 	const { fields, append, remove } = useFieldArray({
 		control,

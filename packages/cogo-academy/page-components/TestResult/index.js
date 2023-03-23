@@ -1,7 +1,9 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import Header from './Header';
 import QnA from './QnA';
+import Summary from './Summary';
 
 function TestResult() {
 	const {
@@ -18,8 +20,14 @@ function TestResult() {
 		},
 	}, { manual: false });
 
+	const { data:summaryData } = data || {};
+
 	return (
-		<QnA />
+		<div>
+			<Header />
+			<Summary summaryData={summaryData} loading={loading} />
+			<QnA />
+		</div>
 	);
 }
 
