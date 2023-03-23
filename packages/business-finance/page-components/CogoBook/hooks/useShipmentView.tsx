@@ -13,9 +13,10 @@ interface ShipmentInterface {
 	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
 	setBulkSection: React.Dispatch<React.SetStateAction<{}>>
 	checkedRows?:object
+	bulkAction?:string
 }
 
-const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection }:ShipmentInterface) => {
+const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection, bulkAction }:ShipmentInterface) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
@@ -29,7 +30,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 	const {
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
-		jobState = '', query = '', page, date,
+		jobState = '', query = '', page, date, profitPercent = '',
 	} = filters || {};
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
 
@@ -76,10 +77,10 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 					jobType              : shipmentType || undefined,
 					profitComparisonType : rangeMapping[range] || undefined,
 					jobState             : jobState || undefined,
-					profitAmount         : profitAmount || undefined,
+					lowerProfitMargin    : profitAmount || profitPercent || undefined,
 					profitType           : profitType || undefined,
-					startDate            : format(date?.startDate, 'yyy-MM-dd') || undefined,
-					endDate              : format(date?.endDate, 'yyy-MM-dd') || undefined,
+					startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
+					endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
 					page                 : page || undefined,
 					pageLimit            : 10,
 					// sortType,
@@ -226,8 +227,24 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 		try {
 			const res = await addToSelectedTrigger({
 				data: {
-					shipmentList : newPayload,
-					performedBy  : userId,
+					shipmentList   : newPayload,
+					performedBy    : userId,
+					selectionMode  : bulkAction,
+					jobListRequest : {
+						query                : query || undefined,
+						year                 : year || undefined,
+						month                : month || undefined,
+						serviceType          : service || undefined,
+						tradeType            : tradeType || undefined,
+						jobType              : shipmentType || undefined,
+						profitComparisonType : rangeMapping[range] || undefined,
+						jobState             : jobState || undefined,
+						lowerProfitMargin    : profitAmount || profitPercent || undefined,
+						profitType           : profitType || undefined,
+						startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
+						endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
+						pageLimit            : apiData?.totalRecords,
+					},
 				},
 			});
 			if (res.data) {

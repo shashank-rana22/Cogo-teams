@@ -33,6 +33,8 @@ function ShipmentView() {
 		pageLimit     : 10,
 	});
 
+	const { bulkAction } = bulkSection;
+
 	const {
 		refetch,
 		shipmentLoading,
@@ -50,7 +52,7 @@ function ShipmentView() {
 		crossProfitHandler,
 		tickProfitHandler,
 		profit:profitData,
-	} =	 useShipmentView({ filters, checkedRows, setBulkSection, setCheckedRows });
+	} =	 useShipmentView({ filters, checkedRows, setBulkSection, bulkAction, setCheckedRows });
 
 	const {
 		totalRecords = 0,

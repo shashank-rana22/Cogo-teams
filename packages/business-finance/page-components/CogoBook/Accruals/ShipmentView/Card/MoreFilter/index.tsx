@@ -92,6 +92,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 							profitAmount  : '',
 							profitPercent : '',
 							profitType    : '',
+							jobState      : '',
 						}));
 						setProfitNumber('');
 					}}

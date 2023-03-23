@@ -88,12 +88,12 @@ export const optionsJobData = [
 		value : 'OPEN',
 	},
 	{
-		label : ' Operations Closed',
-		value : 'operations_closed',
+		label : ' Operationally Closed ',
+		value : 'OPERATIONALLY_CLOSED',
 	},
 	{
-		label : 'Finance Closed',
-		value : 'finance_closed',
+		label : 'Financially Closed',
+		value : 'FINANCIALLY_CLOSED',
 	},
 ];
 const content = (purchaseInvoicesCount, salesInvoicesCount) => {
