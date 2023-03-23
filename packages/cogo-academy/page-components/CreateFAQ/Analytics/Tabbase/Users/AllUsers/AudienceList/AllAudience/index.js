@@ -1,5 +1,4 @@
 import { Tooltip } from '@cogoport/components';
-// eslint-disable-next-line import/no-unresolved
 import React from 'react';
 
 import StyledTable from '../../../../../../../../commons/StyledTable';

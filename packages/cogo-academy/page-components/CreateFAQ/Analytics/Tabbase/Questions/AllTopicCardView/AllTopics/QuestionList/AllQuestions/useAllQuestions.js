@@ -36,38 +36,44 @@ const useAllQuestions = ({ listdata = [], sortType, setSortType }) => {
 		accessor: column,
 	}));
 
-	const data = (listdata || []).map((item) => ({
-		questions: (
-			<div className={styles.question}>
-				<Tooltip content={item?.question_abstract} placement="right">
-					<div>{truncate(item?.question_abstract)}</div>
-				</Tooltip>
-			</div>
-		),
-		tags: (item?.faq_tags?.length > 0 ? (
-			<div className={styles.tags}>
-				{item.faq_tags.map((tag) => {
-					const { display_name } = tag || {};
-					return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-				})}
-			</div>
-		) : '-'),
-		views: (
-			<div className={styles.likes}>
-				{item?.view_count}
-			</div>
-		),
-		likes: (
-			<div className={styles.likes}>
-				{item?.answers[0]?.upvote_count}
-			</div>
-		),
-		dislikes: (
-			<div className={styles.likes}>
-				{item?.answers[0]?.downvote_count}
-			</div>
-		),
-	}));
+	const data = (listdata || []).map((item) => {
+		const { question_abstract = '', faq_tags = [], view_count, answers = [] } = item || {};
+		const { upvote_count = 0, downvote_count = 0 } = answers?.[0] || {};
+
+		const tableData = {
+			questions: (
+				<div className={styles.question}>
+					<Tooltip content={question_abstract} placement="right">
+						<div>{truncate(question_abstract)}</div>
+					</Tooltip>
+				</div>
+			),
+			tags: (faq_tags?.length > 0 ? (
+				<div className={styles.tags}>
+					{(faq_tags || []).map((tag) => {
+						const { display_name } = tag || {};
+						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+					})}
+				</div>
+			) : '-'),
+			views: (
+				<div className={styles.likes}>
+					{view_count}
+				</div>
+			),
+			likes: (
+				<div className={styles.likes}>
+					{upvote_count}
+				</div>
+			),
+			dislikes: (
+				<div className={styles.likes}>
+					{downvote_count}
+				</div>
+			),
+		};
+		return tableData;
+	});
 
 	return {
 		columns,

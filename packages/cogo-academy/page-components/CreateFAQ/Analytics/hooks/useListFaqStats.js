@@ -42,8 +42,7 @@ function useListFaqStats({
 
 	useEffect(() => {
 		fetchFaqStats();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, date]);
+	}, [page, date, fetchFaqStats]);
 
 	const { page_limit, total_count } = data || {};
 

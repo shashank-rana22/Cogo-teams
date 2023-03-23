@@ -1,6 +1,5 @@
 import { Pill, Tooltip } from '@cogoport/components';
-// eslint-disable-next-line import/no-unresolved
-import startCase from '@cogoport/utils/src/utilities/startCase';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import StyledTable from '../../../../../../../../../commons/StyledTable';

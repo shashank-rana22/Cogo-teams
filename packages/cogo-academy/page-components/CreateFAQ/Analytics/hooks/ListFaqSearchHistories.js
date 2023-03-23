@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { addMinutes, addHours } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 function useListFaqSearchHistories() {
 	const [dateRange, setDateRange] = useState({});
@@ -13,7 +13,7 @@ function useListFaqSearchHistories() {
 	const formatStartDate = dateRange?.startDate ? addMinutes(addHours(dateRange?.startDate, 5), 30) : undefined;
 	const formatEndDate = dateRange?.endDate ? addMinutes(addHours(dateRange?.endDate, 5), 30) : undefined;
 
-	const fetchFaqSearchHistories = async () => {
+	const fetchFaqSearchHistories = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -33,12 +33,11 @@ function useListFaqSearchHistories() {
 		} catch (error) {
 			console.log('error ::: ', error);
 		}
-	};
+	}, [formatEndDate, formatStartDate, trigger]);
 
 	useEffect(() => {
 		fetchFaqSearchHistories();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dateRange]);
+	}, [dateRange, fetchFaqSearchHistories]);
 
 	return {
 		refetchSearchHistories: fetchFaqSearchHistories,
