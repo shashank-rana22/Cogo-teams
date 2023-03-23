@@ -10,7 +10,8 @@ import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
 function Header({
-	isStakeholder, shipment_data = {},
+	isStakeholder,
+	shipment_data = {},
 	primary_service = {},
 	setShow = () => {},
 	showImpMsg,
