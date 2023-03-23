@@ -1,4 +1,4 @@
-import { Select, DateRangepicker } from '@cogoport/components';
+import { DateRangepicker } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
