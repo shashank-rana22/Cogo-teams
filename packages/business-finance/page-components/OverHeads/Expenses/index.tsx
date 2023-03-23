@@ -57,9 +57,17 @@ function ExpenseComponent() {
 		pageIndex       : 1,
 		pageLimit       : 10,
 	});
+	const [sort, setSort] = useState({
+		invoiceAmountSortType : null,
+		tdsSortType           : null,
+		payableSortType       : null,
+		paidAmountSortType    : null,
+		createdDateSortBy     : null,
+		amountSortBy          : null,
+	});
 
-	const { getList, listData, listLoading } = useListExpense({ expenseFilters });
-	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig({ expenseFilters });
+	const { getList, listData, listLoading } = useListExpense({ expenseFilters, sort });
+	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig({ expenseFilters, sort });
 	const { sendMail, loading:mailLoading } = useSendEmail();
 
 	useEffect(() => {
@@ -390,6 +398,8 @@ function ExpenseComponent() {
 					itemData={listItemData}
 					loading={loading || recurringListLoading}
 					functions={functions}
+					sort={sort}
+					setSort={setSort}
 					page={expenseFilters.pageIndex || 1}
 					handlePageChange={(pageValue:number) => {
 						setExpenseFilters((p) => ({ ...p, pageIndex: pageValue }));

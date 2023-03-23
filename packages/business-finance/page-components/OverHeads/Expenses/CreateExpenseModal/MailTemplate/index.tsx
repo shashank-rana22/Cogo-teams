@@ -26,6 +26,10 @@ interface Props {
 
 function MailTemplate({ mailData, setMailData, setShowModal, getList, getRecurringList, createExpenseType }:Props) {
 	const { uploadedInvoice, vendorName = '-', expenseCategory = '-', stakeholderEmail } = mailData || {};
+
+	const splitArray = uploadedInvoice?.split('/') || [];
+	const filename = splitArray[splitArray.length - 1];
+
 	const { submitData, loading } = useCreateExpense({
 		formData: mailData,
 		setShowModal,
@@ -83,7 +87,7 @@ function MailTemplate({ mailData, setMailData, setShowModal, getList, getRecurri
 					<div className={styles.file}>
 						<a href={uploadedInvoice} target="_blank" rel="noreferrer">
 							<IcMFileUploader />
-							Uploaded File
+							{filename}
 						</a>
 					</div>
 				)}

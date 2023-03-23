@@ -1,7 +1,8 @@
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useListExpenseConfig = ({ expenseFilters }) => {
+const useListExpenseConfig = ({ expenseFilters, sort }) => {
+	const { createdDateSortBy, amountSortBy } = sort || {};
 	const { branch, expenseCategory, repeatsEvery, searchValue } = expenseFilters || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -17,16 +18,18 @@ const useListExpenseConfig = ({ expenseFilters }) => {
 		try {
 			await trigger({
 				params: {
-					repeatFrequency : repeatsEvery || undefined,
-					branchId        : branch || undefined,
-					category        : expenseCategory || undefined,
-					q               : searchValue || undefined,
+					repeatFrequency   : repeatsEvery || undefined,
+					branchId          : branch || undefined,
+					category          : expenseCategory || undefined,
+					q                 : searchValue || undefined,
+					createdDateSortBy : createdDateSortBy || undefined,
+					amountSortBy      : amountSortBy || undefined,
 				},
 			});
 		} catch (err) {
 			console.log(err);
 		}
-	}, [trigger, repeatsEvery, branch, expenseCategory, searchValue]);
+	}, [trigger, repeatsEvery, branch, expenseCategory, searchValue, createdDateSortBy, amountSortBy]);
 
 	return {
 		getRecurringList,

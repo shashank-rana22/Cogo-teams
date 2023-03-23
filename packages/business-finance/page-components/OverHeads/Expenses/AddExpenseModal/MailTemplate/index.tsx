@@ -28,6 +28,9 @@ function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowD
 	const { category } = rowData || {};
 	const { business_name:vendorName } = vendorData || {};
 
+	const splitArray = uploadedInvoice?.split('/') || [];
+	const filename = splitArray[splitArray.length - 1];
+
 	const { submitData, loading } = useAddExpense({ expenseData, setShowModal, getList, rowData });
 
 	return (
@@ -67,8 +70,8 @@ function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowD
 				{uploadedInvoice && (
 					<div className={styles.file}>
 						<a href={uploadedInvoice} target="_blank" rel="noreferrer">
-							<IcMFileUploader />
-							Uploaded File
+							<IcMFileUploader style={{ marginRight: '4px' }} />
+							{filename}
 						</a>
 					</div>
 				)}

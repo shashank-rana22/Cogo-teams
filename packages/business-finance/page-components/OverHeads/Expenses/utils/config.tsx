@@ -57,9 +57,10 @@ export const expenseRecurringConfig = () => {
 				span  : 1.2,
 			},
 			{
-				label : 'Created on',
-				func  : 'getCreatedOn',
-				span  : 2,
+				label   : 'Created on',
+				func    : 'getCreatedOn',
+				span    : 2,
+				sorting : { name: 'createdDateSortBy' },
 
 			},
 			{
@@ -68,10 +69,11 @@ export const expenseRecurringConfig = () => {
 				func  : 'renderExpensePeriod',
 			},
 			{
-				label : 'Recurring Amount',
-				key   : 'recurringAmount',
-				span  : 2,
-				func  : 'renderRecurringAmount',
+				label   : 'Recurring Amount',
+				key     : 'recurringAmount',
+				span    : 2,
+				func    : 'renderRecurringAmount',
+				sorting : { name: 'amountSortBy' },
 			},
 			{
 				label : 'Approved By',
@@ -108,25 +110,29 @@ export const expenseNonRecurringConfig = () => ({
 			span  : 1.2,
 		},
 		{
-			label : 'Invoice Amount',
-			key   : 'grandTotal',
-			span  : 1.5,
+			label   : 'Invoice Amount',
+			key     : 'grandTotal',
+			span    : 1.5,
+			sorting : { name: 'invoiceAmountSortType' },
 
 		},
 		{
-			label : 'TDS',
-			key   : 'payableTds',
-			span  : 1,
+			label   : 'TDS',
+			key     : 'payableTds',
+			span    : 1,
+			sorting : { name: 'tdsSortType' },
 		},
 		{
-			label : 'Payable',
-			span  : 1.5,
-			func  : 'getPayable',
+			label   : 'Payable',
+			span    : 1.5,
+			func    : 'getPayable',
+			sorting : { name: 'payableSortType' },
 		},
 		{
-			label : 'Paid',
-			key   : 'paidAmount',
-			span  : 0.8,
+			label   : 'Paid',
+			key     : 'paidAmount',
+			span    : 0.8,
+			sorting : { name: 'paidAmountSortType' },
 		},
 		{
 			label : 'Invoice Dates',

@@ -6,14 +6,23 @@ interface Filters {
 	expenseCategory?:string,
 	searchValue?:string,
 }
+
+interface Sort {
+	invoiceAmountSortType?:string,
+	tdsSortType?:string,
+	payableSortType?:string,
+	paidAmountSortType?:string,
+}
 interface Filter {
 	expenseFilters?:Filters,
 	id?:string,
 	expenseType?:string,
+	sort?:Sort,
 }
 
-const useListExpense = ({ expenseFilters, id, expenseType }:Filter) => {
+const useListExpense = ({ expenseFilters, id, expenseType, sort }:Filter) => {
 	const { branch, expenseCategory, searchValue } = expenseFilters || {};
+	const { invoiceAmountSortType, tdsSortType, payableSortType, paidAmountSortType } = sort || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -33,12 +42,25 @@ const useListExpense = ({ expenseFilters, id, expenseType }:Filter) => {
 					category               : expenseCategory || undefined,
 					q                      : searchValue || undefined,
 					expenseConfigurationId : id || undefined,
+					invoiceAmountSortType  : invoiceAmountSortType || undefined,
+					paidAmountSortType     : paidAmountSortType || undefined,
+					payableSortType        : payableSortType || undefined,
+					tdsSortType            : tdsSortType || undefined,
 				},
 			});
 		} catch (err) {
 			console.log(err);
 		}
-	}, [trigger, expenseType, branch, expenseCategory, searchValue, id]);
+	}, [trigger,
+		expenseType,
+		branch,
+		expenseCategory,
+		searchValue,
+		id,
+		invoiceAmountSortType,
+		tdsSortType,
+		payableSortType,
+		paidAmountSortType]);
 
 	return {
 		getList,
