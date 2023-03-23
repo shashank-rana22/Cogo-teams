@@ -68,6 +68,7 @@ function AddedQuestions(props) {
 				/>
 			);
 		}
+
 		return (
 			<>
 				<div className={styles.table}>

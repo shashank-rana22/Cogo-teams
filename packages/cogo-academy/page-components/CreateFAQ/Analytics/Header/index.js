@@ -8,7 +8,7 @@ function Header({ setSwitchDashboard = () => {} }) {
 			<div className={styles.header}>FAQs Analytics Dashboard</div>
 
 			<div className={styles.button_container}>
-				<Button type="button" themeType="primary" onClick={() => { setSwitchDashboard(true); }}>
+				<Button type="button" themeType="primary" onClick={() => setSwitchDashboard(true)}>
 					Creator Management Dashboard
 				</Button>
 			</div>
