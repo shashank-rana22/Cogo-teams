@@ -4,7 +4,7 @@ import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import PopOverContent from '../../../commons/PopoverContent';
 
@@ -209,10 +209,9 @@ const useQuestionList = () => {
 
 	useEffect(() => {
 		debounceQuery(searchInput);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchInput]);
+	}, [debounceQuery, searchInput]);
 
-	const getQuestionsList = async () => {
+	const getQuestionsList = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -239,12 +238,11 @@ const useQuestionList = () => {
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [SORT_MODE, SORT_TYPE, activeList, filters, page, query, trigger]);
 
 	useEffect(() => {
 		getQuestionsList();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, filters, query, activeList, SORT_TYPE]);
+	}, [page, filters, query, activeList, SORT_TYPE, getQuestionsList]);
 
 	const deactivateQuestion = async (id) => {
 		try {
@@ -257,7 +255,6 @@ const useQuestionList = () => {
 
 				},
 			);
-			// eslint-disable-next-line no-use-before-define
 			getQuestionsList();
 		} catch {
 			console.log('Error', error);

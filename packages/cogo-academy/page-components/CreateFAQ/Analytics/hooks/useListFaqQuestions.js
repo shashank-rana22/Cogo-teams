@@ -19,8 +19,7 @@ function useListFaqQuestions({
 
 	useEffect(() => {
 		debounceQuery(searchInput);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchInput]);
+	}, [debounceQuery, searchInput]);
 
 	const fetchFaqQuestions = useCallback(
 		async () => {

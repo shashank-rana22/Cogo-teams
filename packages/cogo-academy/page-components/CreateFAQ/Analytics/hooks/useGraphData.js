@@ -27,9 +27,9 @@ function useGraphData() {
 	const pie_data = [
 		{
 			id    : 'Search Available',
-			label : `Search Available(${total_search_result_available}) 
+			label : `Search Available(${Math.round(total_search_result_available)}) 
 			${total_search_result_available_percentage}%`,
-			value : total_search_result_available_percentage,
+			value : Math.round(total_search_result_available_percentage * 100) / 100,
 			color : 'hsla(80, 52%, 84%, 1)',
 		},
 		{
@@ -62,20 +62,20 @@ function useGraphData() {
 	const view_count_data =	[
 		{
 			id    : 'like',
-			label : `Likes(${total_likes}) ${LIKES_PERCENTAGE}%`,
-			value : LIKES_PERCENTAGE,
+			label : `Likes(${total_likes}) ${Math.round(LIKES_PERCENTAGE * 100) / 100}%`,
+			value : Math.round(LIKES_PERCENTAGE * 100) / 100,
 			color : 'hsla(39, 55%, 94%, 1)',
 		},
 		{
 			id    : 'dislike',
-			label : `Dislike(${total_dislike}) ${DISLIKES_PERCENTAGE}%`,
-			value : DISLIKES_PERCENTAGE,
+			label : `Dislike(${total_dislike}) ${Math.round(DISLIKES_PERCENTAGE * 100) / 100}%`,
+			value : Math.round(DISLIKES_PERCENTAGE * 100) / 100,
 			color : 'hsla(41, 64%, 86%, 1)',
 		},
 		{
 			id    : 'view_only',
-			label : `View Only(${VIEW_COUNT}) ${VIEW_COUNT_PERCENTAGE}%`,
-			value : VIEW_COUNT_PERCENTAGE,
+			label : `View Only(${VIEW_COUNT}) ${Math.round(VIEW_COUNT_PERCENTAGE * 100) / 100}%`,
+			value : Math.round(VIEW_COUNT_PERCENTAGE * 100) / 100,
 			color : 'hsla(80, 52%, 84%, 1)',
 		},
 	];
