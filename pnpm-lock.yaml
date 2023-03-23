@@ -62,6 +62,7 @@ importers:
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/ground-ops': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
+      '@cogoport/ingestion': 0.1.0
       '@cogoport/locations': workspace:0.1.0
       '@cogoport/my-incident': workspace:0.1.0
       '@cogoport/my-profile': workspace:0.1.0
@@ -97,6 +98,7 @@ importers:
       '@cogoport/globalization': link:../common/globalization
       '@cogoport/ground-ops': link:../packages/ground-ops
       '@cogoport/icons-react': 1.0.58_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/ingestion': link:../packages/ingestion
       '@cogoport/locations': link:../packages/locations
       '@cogoport/my-incident': link:../packages/my-incident
       '@cogoport/my-profile': link:../packages/my-profile
@@ -521,6 +523,9 @@ importers:
       html2canvas: 1.4.1
       jspdf: 2.5.1
       react: 18.2.0
+
+  packages/ingestion:
+    specifiers: {}
 
   packages/locations:
     specifiers:

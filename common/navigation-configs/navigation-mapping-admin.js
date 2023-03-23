@@ -52,6 +52,7 @@ import {
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
 	IcMFaq,
+	IcMActivePlans,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -2090,6 +2091,17 @@ const navigationMappingAdmin = {
 				possible_apis : apis.performance_management,
 			},
 		],
+	},
+	ingestion: {
+		key           : 'ingestion',
+		title         : 'Ingestion',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : [],
+		href          : '/ingestion',
+		as            : '/ingestion',
+		possible_apis : apis.ingestion,
+		icon          : IcMActivePlans,
 	},
 };
 

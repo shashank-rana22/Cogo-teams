@@ -6,6 +6,7 @@ import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import enrichment from './config/enrichment';
 import groundOps from './config/ground-ops';
+import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
 import kamMonitoring from './config/kam-monitoring';
 import myIncident from './config/my-incident';
@@ -31,6 +32,7 @@ const routeConfig = {
 	...inventory_management,
 	...kamMonitoring,
 	...performanceManagement,
+	...ingestion,
 };
 
 export default routeConfig;
