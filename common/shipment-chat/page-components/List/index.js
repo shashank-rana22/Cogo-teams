@@ -93,7 +93,7 @@ function List({
 
 					<div className={styles.updated_at}>
 						{formatDate({
-							date       : item?.updated_at,
+							date       : item?.updatedAt,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 							formatType : 'dateTime',
