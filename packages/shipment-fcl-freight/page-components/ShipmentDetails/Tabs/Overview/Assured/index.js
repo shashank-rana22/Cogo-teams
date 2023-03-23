@@ -3,7 +3,7 @@ import { IcCFtick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Assured({ shipment_data = {} }) {
+function Assured({ shipmentData = {} }) {
 	return (
 		<div className={cl`${styles.container} cogo-assured`}>
 			<div className={styles.text}>
@@ -17,7 +17,7 @@ function Assured({ shipment_data = {} }) {
 			</div>
 
 			<div className={styles.assured_details}>
-				{shipment_data?.cogo_assured_value_props?.map((element) => (
+				{shipmentData?.cogo_assured_value_props?.map((element) => (
 					<div style={{ marginBottom: '14px' }}>
 						<div className={styles.heading}>
 							<div className={styles.icon_wrapper}>

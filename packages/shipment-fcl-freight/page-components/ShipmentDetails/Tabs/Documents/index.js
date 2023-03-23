@@ -16,8 +16,8 @@ import Wallet from './Wallet';
 // import UploadForm from './UploadForm';
 
 function Documents() {
-	const [searchTasksVal, setSearchTasksVal] = useState('');
 	const [activeToggle, setActiveToggle] = useState(false);
+	const [activeWallet, setActiveWallet] = useState('trade_documents');
 	const [show, setShow] = useState(null);
 	const [showConfirmed, setShowConfirmed] = useState(false);
 	const [addToWallet, setAddToWallet] = useState(true);
@@ -45,6 +45,8 @@ function Documents() {
 		taskList,
 		completedDocs,
 		docTypes,
+		filters,
+		setFilters,
 		// shipmentDocumentsHookSetters,
 		// shipmentFilters,
 		// refetch,
@@ -61,25 +63,25 @@ function Documents() {
 			<HeaderComponent
 				activeToggle={activeToggle}
 				setActiveToggle={setActiveToggle}
-				searchTasksVal={searchTasksVal}
-				setSearchTasksVal={setSearchTasksVal}
 				// shipmentDocumentsHookSetters={shipmentDocumentsHookSetters}
 				// shipmentFilters={shipmentFilters}
 				shipment_data={shipment_data}
+				data={completedDocs?.organizations}
+				filters={filters}
+				setFilters={setFilters}
+				activeWallet={activeWallet}
+				setActiveWallet={setActiveWallet}
 			/>
 			{!activeToggle ? (
-
 				<CheckList
 					data={taskList}
 					setShow={setShow}
 					setShowConfirmed={setShowConfirmed}
-					// loading={loading}
+				// loading={loading}
 					emailDocs={emailDocs}
-					completedDocs={completedDocs}
-					// shipmentDocumentsRefetch={refetch}
-					// addDocument={addDocument}
+					completedDocs={completedDocs?.list}
 				/>
-			) : <Wallet />}
+			) : <Wallet activeWallet={activeWallet} />}
 			{/* <Modal
 				show={show}
 				onClose={() => setShow(null)}

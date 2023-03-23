@@ -1,16 +1,15 @@
-// import Layout from '@cogoport/bookings/commons/Layout';
-import { Accordion } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useAddRate from '../../../../hooks/useAddRate';
+
+import ActionsToShow from './ActionToShow';
+import BillToCustomer from './BillToCustomer';
 import RenderAddRateForm from './RenderAddRateForm';
 
-// import ActionsToShow from './ActionToShow';
-// import BillToCustomer from './BillToCustomer';
 // import SecondStep from './SecondStep';
 
 import styles from './styles.module.css';
-import useAddRate from './useAddRate';
 
 const showRemarksStatus = [
 	'amendment_requested_by_importer_exporter',
@@ -25,26 +24,27 @@ function AddRate({
 	isSeller = false,
 	setAddRate,
 	status,
-	setShow,
+	setAddSellPrice = () => {},
 	refetch,
-	showLabel = true,
-	shipment_data,
 	onCancel = () => {},
 	filters,
+	updateResponse = () => {},
+	setShowChargeCodes = () => {},
 }) {
-	const [billToCustomer, setBillToCustomer] = useState(undefined);
-	const [showSecondStep, setSecondStep] = useState(false);
+	const [billToCustomer, setBillToCustomer] = useState(false);
+	const [showSecondStep, setShowSecondStep] = useState(false);
 
 	const {
-		onAddRate, register, handleSubmit, loading, errors, control,
+		onAddRate, register, handleSubmit, loading, errors, control, unitOptions,
 	} = useAddRate({
 		item,
 		isSeller,
 		status,
-		setShow,
 		refetch,
 		setAddRate,
+		setShowChargeCodes,
 		billToCustomer,
+		setAddSellPrice,
 		onCancel,
 		filters,
 	});
@@ -55,8 +55,8 @@ function AddRate({
 			// 	item={item}
 			// 	status={status}
 			// 	isSeller={isSeller}
-			// 	setSecondStep={setSecondStep}
-			// 	// updateDatas={updateDatas}
+			// 	setShowSecondStep={setShowSecondStep}
+			// 	// updateResponse={updateResponse}
 			// />
 			<div>
 				SecondStep
@@ -70,45 +70,51 @@ function AddRate({
 		&& item.add_to_sell_quotation === null
 	) {
 		return (
-			// <BillToCustomer
-			// 	// updateDatas={updateDatas}
-			// 	onCancel={() => setAddRate(null)}
-			// 	onBillToCustomer={() => setBillToCustomer(true)}
-			// />
-			<div>
-				BillToCustomer
-			</div>
+			<BillToCustomer
+				updateResponse={updateResponse}
+				onCancel={() => setAddSellPrice(false)}
+				onBillToCustomer={() => setBillToCustomer(true)}
+			/>
+
 		);
 	}
 
 	return (
 		<div>
-			<div className={styles.container}>
-				{showRemarksStatus.includes(status?.status) ? (
-					<p>
-						Comments:
-						{item.remarks[0]}
-					</p>
-				) : null}
-				<RenderAddRateForm
-					handleSubmit={handleSubmit}
-					onSubmit={onAddRate}
-					control={control}
-					errors={errors}
-					register={register}
-				/>
+			<div className={styles.heading}>
+				{startCase(item?.name)}
+				dd
+				(
+				{startCase(item?.service_type || item.service_type)}
+				)
 			</div>
+			{showRemarksStatus.includes(status?.status) ? (
+				<p>
+					Comments:
+					{item.remarks[0]}
+				</p>
+			) : null}
+			<RenderAddRateForm
+				handleSubmit={handleSubmit}
+				onSubmit={onAddRate}
+				control={control}
+				errors={errors}
+				register={register}
+				item={item}
+				unitOptions={unitOptions}
+			/>
 
-			{/* <ActionsToShow
+			<ActionsToShow
 				setAddRate={setAddRate}
-				addRate={addRate}
+				onAddRate={onAddRate}
 				handleSubmit={handleSubmit}
 				status={status}
-				setSecondStep={setSecondStep}
-				updateDatas={updateDatas}
-				loading={loading || updateDatas.loading}
+				setShowSecondStep={setShowSecondStep}
+				updateResponse={updateResponse}
+				loading={loading || updateResponse.loading}
 				onCancel={() => onCancel()}
-			/> */}
+				setAddSellPrice={setAddSellPrice}
+			/>
 		</div>
 	);
 }

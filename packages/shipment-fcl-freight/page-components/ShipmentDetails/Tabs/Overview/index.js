@@ -5,21 +5,19 @@ import Services from './Services';
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
-function Overview(shipment_data = {}) {
-	
-
+function Overview({ shipmentData = {} }) {
 	return (
 		<div className={styles.container}>
-			<OverviewManageServices />
+			<OverviewManageServices container={styles.container} />
 			<BLDetails />
 			<Services />
 			<div className={styles.extra_details}>
-				{shipment_data?.is_cogo_assured ? (
-					<Assured shipment_data={shipment_data} />
+				{shipmentData?.is_cogo_assured ? (
+					<Assured shipmentData={shipmentData} />
 				) : null}
 
-				{shipment_data?.terms_and_conditions?.length ? (
-					<TermsAndConditions shipment_data={shipment_data} />
+				{shipmentData?.terms_and_conditions?.length ? (
+					<TermsAndConditions shipmentData={shipmentData} />
 				) : null}
 			</div>
 		</div>

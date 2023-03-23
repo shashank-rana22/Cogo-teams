@@ -6,6 +6,7 @@
 	width: 100%;
 	flex-wrap: wrap;
 }
+
 .single_doc {
 	flex: 1 1 0;
 	min-width: 40%;
@@ -17,28 +18,34 @@
 	padding: 16px;
 	border-radius: 8px;
 	gap: 8px;
+
+	:global(.tippy-content) {
+		padding: 0;
+	}
 	
 	& > svg {
 		color: #393f70;
 	}
 }
+
 .main {
 	display: flex;
+	flex-direction: column;
 	color: #393f70;
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
 	letter-spacing: 0.04em;
 }
+
 .upload_info {
 	font-weight: 400;
-	font-size: 11px;
+	font-size: 10px;
 	line-height: 14px;
 	letter-spacing: 0.02em;
-
 	color: #bdbdbd;
+	padding-top: 5px;
 } 
-
 
 .button_wrapper{ 
 	display: flex;  
@@ -47,8 +54,6 @@
 		margin-right: 6px;
 	}
 }  
-
-
 
 .gap {
 	display: flex;
@@ -79,10 +84,12 @@
 	margin: -5px -9px;
 	padding: 4px;
 }
+
 .dots {
 	position: absolute;
 	top: 14px;
 	right: 12px;
+
 	&:hover {
 		cursor: pointer;
 	}
@@ -94,4 +101,6 @@
 	}
 }
 
-.container {}
+.container {
+	margin-top: 15px;
+}

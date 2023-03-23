@@ -1,11 +1,17 @@
-import { asyncFieldsOrganization, SelectController, useForm, useGetAsyncOptions } from '@cogoport/forms';
+import { asyncFieldsOrganization, SelectController, useGetAsyncOptions, InputController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { merge } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function RenderAddRateForm({ handleSubmit = () => {}, onSubmit = () => {}, control, errors, register }) {
-	const options = [
+function RenderAddRateForm({
+	handleSubmit = () => {},
+	onSubmit = () => {},
+	control,
+	errors,
+	unitOptions = [],
+}) {
+	const currencyOptions = [
 		GLOBAL_CONSTANTS.currency_code.INR,
 		GLOBAL_CONSTANTS.currency_code.USD,
 		GLOBAL_CONSTANTS.currency_code.EUR,
@@ -53,7 +59,7 @@ function RenderAddRateForm({ handleSubmit = () => {}, onSubmit = () => {}, contr
 				errors={errors}
 			/>
 			{errors.service_provider_id && (
-				<span className={styles.errors}>
+				<span>
 					{errors.service_provider_id.message}
 				</span>
 			)}
@@ -61,68 +67,78 @@ function RenderAddRateForm({ handleSubmit = () => {}, onSubmit = () => {}, contr
 	);
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit(onSubmit)} className={styles.form_container}>
 			<div className={styles.flex}>
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="currency">Currency</label>
-					<select id="currency" {...register('currency')}>
-						<option value="">Select</option>
-						{options.map((option) => (
-							<option key={option.value} value={option.value}>{option.label}</option>
-						))}
-					</select>
+					<SelectController
+						name="currency"
+						control={control}
+						size="sm"
+						options={currencyOptions}
+						rules={{ required: { value: true, message: 'Currency is required' } }}
+					/>
+					{errors.currency && <span>This field is required</span>}
 				</div>
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="buy_price">Buy price</label>
-					<input id="buy_price" type="number" {...register('buy_price')} placeholder="Enter Buy Price" />
+					<InputController
+						name="buy_price"
+						control={control}
+						size="sm"
+						rules={{ required: { value: true, message: 'Buy Price is required' } }}
+					/>
+					{errors.buy_price && <span>This field is required</span>}
 				</div>
 			</div>
 
 			<div className={styles.flex}>
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="unit">Unit</label>
-					<select id="unit" {...register('unit')} placeholder="Unit">
-						<option value="">Select</option>
-						{options.map((option) => (
-							<option key={option.value} value={option.value}>{option.label}</option>
-						))}
-					</select>
+					<SelectController
+						name="unit"
+						control={control}
+						size="sm"
+						options={unitOptions}
+						rules={{ required: { value: true, message: 'Unit is required' } }}
+					/>
+					{errors.unit && <span>This field is required</span>}
 				</div>
 
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="quantity">Quantity</label>
-					<input
-						id="quantity"
-						type="number"
-						{...register('quantity', { required: true })}
-						className="primary sm"
-						placeholder="Enter Quantity"
+					<InputController
+						name="quantity"
+						control={control}
+						size="sm"
+						placeholder="Enter quantity here"
+						rules={{ required: { value: true, message: 'Buy Price is required' } }}
 					/>
 					{errors.quantity && <span>This field is required</span>}
 				</div>
 			</div>
 
 			<div className={styles.flex}>
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="price">Price</label>
-					<input
-						id="price"
-						type="text"
-						{...register('price', { required: true })}
-						className="primary sm"
-						placeholder="Enter Price"
+					<InputController
+						name="price"
+						control={control}
+						size="sm"
+						placeholder="Enter price here"
+						rules={{ required: { value: true, message: 'Price is required' } }}
 					/>
 					{errors.price && <span>This field is required</span>}
 				</div>
 
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="sell_price">Sell Price</label>
-					<input
-						id="sell_price"
-						type="text"
-						{...register('sell_price', { required: true })}
-						className="primary sm"
+					<InputController
+						name="sell_price"
+						control={control}
+						size="sm"
 						placeholder="Enter Sell Price"
+						rules={{ required: { value: true, message: 'Price is required' } }}
 					/>
 					{errors.sell_price && <span>This field is required</span>}
 				</div>
@@ -130,20 +146,16 @@ function RenderAddRateForm({ handleSubmit = () => {}, onSubmit = () => {}, contr
 
 			<div className={styles.flex}>
 				{serviceProviderController}
-
-				<div>
+				<div className={styles.input_container}>
 					<label htmlFor="alias">Alias (Optional)</label>
-					<input
-						id="alias"
-						type="text"
-						{...register('alias', { minLength: 3 })}
+					<InputController
+						name="alias"
+						control={control}
+						size="sm"
 						placeholder="Enter Alias (Only if required)"
 					/>
-					{errors.alias && <span>Minimum length is 3 characters</span>}
 				</div>
 			</div>
-
-			<button type="submit">Submit</button>
 		</form>
 	);
 }

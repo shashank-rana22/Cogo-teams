@@ -22,7 +22,7 @@ function FormItem({ finalControl = {}, control, errors }) {
 				) : null}
 			</div>
 			{lowerlabel ? <div className={styles.lower_label}>{lowerlabel}</div> : null}
-			<DatepickerController name={name} control={control} {...{ ...rest, showTimeSelect: true }} />
+			<DatepickerController name={name} control={control} {...rest} />
 		</div>
 	);
 }
@@ -33,8 +33,8 @@ export default function EditSchedule({ show = false, setShow = () => {}, timelin
 	} = useEditServiceSchedule({ setShow, timelineData });
 
 	return (
-		<Modal size="md" show={show} onClose={() => setShow(false)} placement="top">
-			<Modal.Header title="Edit ETD/ETA" />
+		<Modal size="md" show={show} onClose={() => setShow(false)} placement="top" closeOnOuterClick={false} >
+			<Modal.Header title="Edit Timeline" />
 			<Modal.Body>
 				<form className={styles.form_container}>
 					{finalControls.map((finalControl) => (

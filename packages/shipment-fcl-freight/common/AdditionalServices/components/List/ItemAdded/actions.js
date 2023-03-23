@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import CC from '../../../../../utils/condition-constants';
 import IP_STATE_CONDITONS from '../../../constants/IP_STATE_CONDITIONS';
 
 const actions = ({
@@ -9,11 +8,11 @@ const actions = ({
 	activeTab,
 	setAddRate,
 	serviceListItem,
-	isConditionMatches,
 	isShipper,
 	addRate,
 	setShowIp = () => {},
 	setItem = () => {},
+	setAddSellPrice = () => {},
 }) => {
 	const isSameItem = serviceListItem.id === addRate?.item?.id;
 
@@ -28,9 +27,10 @@ const actions = ({
 			<Button
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
-				onClick={() => setAddRate({ serviceListItem, status })}
+				onClick={() => setAddSellPrice(true)}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'ADD SELL PRICE'}
+				- 3
 			</Button>
 		);
 	}
@@ -42,7 +42,10 @@ const actions = ({
 			<Button
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
-				onClick={() => setAddRate({ serviceListItem, status })}
+				onClick={() => {
+					onClick();
+					setAddSellPrice(true);
+				}}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
 			</Button>
@@ -60,7 +63,7 @@ const actions = ({
 		);
 	}
 	if (
-		status.status === 'cancelled_by_supplier' && isConditionMatches(CC.SERVICE_OPS_VIEW)
+		status.status === 'cancelled_by_supplier'
 	) {
 		return (
 			<Button
@@ -74,7 +77,7 @@ const actions = ({
 	}
 
 	if (
-		status.status === 'amendment_requested_by_importer_exporter' && isConditionMatches(CC.BOOKING_AGENT_VIEW, 'or')
+		status.status === 'amendment_requested_by_importer_exporter'
 	) {
 		return (
 			<Button

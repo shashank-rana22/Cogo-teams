@@ -1,12 +1,12 @@
-import { Button, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useContext, useState } from 'react';
 
 import CargoDetails from '../../../../common/CargoDetails';
+import PortDetails from '../../../../common/PortDetails';
 
 import AddPoNumber from './AddPoNumber';
 import Loader from './Loader';
-import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
 function ShipmentHeader() {
@@ -19,10 +19,9 @@ function ShipmentHeader() {
 		if (po_number) {
 			return (
 				<div className={styles.po_number}>
-					PO Number
-					<span style={{ fontWeight: '700', marginLeft: '4px' }}>
-						{po_number}
-					</span>
+					PO Number :
+					{' '}
+					{po_number}
 				</div>
 			);
 		}
@@ -31,9 +30,14 @@ function ShipmentHeader() {
 			!po_number
 		) {
 			return (
-				<Button onClick={() => setShow(true)}>
+				<div
+					className={styles.button}
+					role="button"
+					tabIndex={0}
+					onClick={() => setShow(true)}
+				>
 					Add Po Number
-				</Button>
+				</div>
 			);
 		}
 
@@ -49,17 +53,17 @@ function ShipmentHeader() {
 			<div className={styles.customer}>
 				<Tooltip
 					theme="light"
-					placement="right"
+					placement="bottom"
 					maxWidth="none"
 					content={(
-						<div style={{ fontSize: '10px' }}>
+						<div className={styles.tooltip}>
 							{importer_exporter?.business_name}
 						</div>
 					)}
 				>
-					<div>{importer_exporter?.business_name}</div>
+					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
 				</Tooltip>
-				<div>
+				<div className={styles.po_number}>
 					{handlePoNo()}
 				</div>
 			</div>
@@ -70,12 +74,10 @@ function ShipmentHeader() {
 				primary_service={primary_service}
 			/>
 
-			{/* <Cancellation /> */}
 			{show ? (
 				<AddPoNumber show={show} setShow={setShow} shipment_data={shipment_data} refetch={refetch} />
 			) : null}
 		</div>
-
 	);
 }
 

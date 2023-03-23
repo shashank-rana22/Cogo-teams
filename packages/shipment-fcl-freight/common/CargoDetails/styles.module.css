@@ -11,12 +11,13 @@
 }
 
 .shipment_cargo_details_root {
-	justify-content: center;
+	justify-content: start;
 } 
 
 .multi_service {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: wrap; 
+	align-items: center;
 	white-space: nowrap;
 	overflow-x: auto;
 }

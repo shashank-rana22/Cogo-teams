@@ -1,3 +1,5 @@
+// import { getCookie } from '@cogoport/utils';
+
 import GLOBAL_CONSTANTS from '../globals.json';
 
 import IN from './IN';

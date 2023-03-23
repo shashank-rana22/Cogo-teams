@@ -1,4 +1,5 @@
-import { getDate, getDateDefaultValue } from '../utils/formatters';
+import { getPrefillValue } from '../../../../common/utils/dateFormatter';
+import { getDate } from '../utils/formatters';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 	const disabledState = ['vessel_arrived'].includes(
@@ -19,11 +20,18 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 	});
 
 	const finalControls = [
+		{ name: 'bn_expiry', label: 'BN expiry date' },
+		{ name: 'tr_cutoff', label: 'TR cutoff date' },
+		{ name: 'vgm_cutoff', label: 'VGM cutoff date' },
+		{ name: 'si_cutoff', label: 'SI cutoff date' },
+		{ name: 'gate_in_cutoff', label: 'Gate-in cutoff date' },
+		{ name: 'document_cutoff', label: 'Document cutoff date' },
 		{
 			name       : 'schedule_departure',
 			label      : 'Actual time of departure',
+			lowerlabel : `Fluctuated time of departure: ${deviated_departure}`,
 			lowerlabel : deviated_departure ? `Fluctuated time of departure: ${deviated_departure}` : '',
-			maxDate    : 'none',
+			maxDate    : null,
 		},
 		{
 			name       : 'schedule_arrival',
@@ -31,29 +39,23 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 			lowerlabel : deviated_arrival && deviated_departure
 				&& new Date(deviated_arrival) > new Date(deviated_departure)
 				? `Fluctuated time of arrival: ${deviated_arrival}` : '',
-			maxDate : 'none',
+			maxDate : null,
+			minDate: departureDate,
 			disable : false,
 		},
-		{ name: 'vgm_cutoff', label: 'VGM cutoff date' },
-		{ name: 'si_cutoff', label: 'SI cutoff date' },
-		{ name: 'document_cutoff', label: 'Document cutoff date' },
-		{ name: 'gate_in_cutoff', label: 'Gate-in cutoff date' },
-		{ name: 'bn_expiry', label: 'BN expiry date' },
-		{ name: 'tr_cutoff', label: 'TR cutoff date' },
 	];
 
-	const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 	const defaultValues = {};
 
 	finalControls.forEach((control, index) => {
 		const { name, maxDate = departureDate, disable = disabledState } = control;
-		// finalControls[index].minDate = new Date();
 		finalControls[index].maxDate = maxDate;
 		finalControls[index].disable = disable;
 		finalControls[index].dateFormat = 'MMM dd, yyyy, hh:mm:ss aaa';
-		finalControls[index].isPreviousDaysAllowed = true;
 		finalControls[index].placeholder = 'Select Date';
-		defaultValues[name] = getDateDefaultValue(primary_service?.[name], timezoneOffset);
+		finalControls[index].isPreviousDaysAllowed = true;
+		finalControls[index].showTimeSelect = true;
+		defaultValues[name] = getPrefillValue(primary_service?.[name]);
 	});
 
 	return { finalControls, defaultValues };

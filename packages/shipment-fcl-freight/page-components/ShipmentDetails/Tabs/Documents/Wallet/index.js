@@ -1,17 +1,17 @@
-import { Popover, Tabs, TabPanel, Button } from '@cogoport/components';
+import { Popover, Button } from '@cogoport/components';
 import { IcMPdf, IcMOverflowDot, IcMImage } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
-import React, { useState } from 'react';
+import React from 'react';
 
+import EmptyState from '../../../../../common/EmptyState';
 import useDeleteDocument from '../../../../../hooks/useDeleteWallet';
 import useListWallet from '../../../../../hooks/useListWallet';
 
 import Loader from './Loader';
 import styles from './styles.module.css';
 
-function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs }) {
-	const [activeWallet, setActiveWallet] = useState('trade_documents');
+function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs, activeWallet = '' }) {
 	const { data, refetch, loading } = useListWallet({
 		activeWallet,
 	});
@@ -34,18 +34,22 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs })
 			tabIndex="0"
 			className={styles.action}
 			onClick={() => {
-				deleteDocument({ item: doc });
+				deleteDocument({ id: doc?.id });
 			}}
 		>
 			Delete Document
 		</div>
 	);
-
-	let contentToShow = [...Array(forModal ? 3 : 2)].map(() => (
-		<Loader forModal={forModal} />
-	));
-	if (!loading && (data?.list || []).length) {
-		contentToShow = (
+	const contentToShow = () => {
+		if (loading) {
+			return [...Array(forModal ? 3 : 2)].map(() => (
+				<Loader forModal={forModal} />
+			));
+		}
+		if (!loading && data?.list?.length === 0) {
+			return <EmptyState />;
+		}
+		return (
 			<>
 				{(data?.list || []).map((doc) => (
 					<div
@@ -57,8 +61,9 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs })
 						{!showWalletDocs && (
 							<Popover
 								interactive
-								placement="bottom-end"
+								placement="bottom"
 								theme="light"
+								trigger="click"
 								content={content(doc)}
 							>
 								<div className={styles.dots}>
@@ -101,21 +106,11 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs })
 				))}
 			</>
 		);
-	}
+	};
 
 	return (
 		<div className={styles.container}>
-			<Tabs
-				activeTab={activeWallet}
-				fullWidth
-				themeType="primary"
-				onChange={setActiveWallet}
-			>
-				<TabPanel name="trade_documents" title="Trade Documents" />
-
-				<TabPanel name="organization_documents" title="Organization Documents" />
-			</Tabs>
-			<div className={styles.wrapper}>{contentToShow}</div>
+			<div className={styles.wrapper}>{contentToShow()}</div>
 		</div>
 	);
 }

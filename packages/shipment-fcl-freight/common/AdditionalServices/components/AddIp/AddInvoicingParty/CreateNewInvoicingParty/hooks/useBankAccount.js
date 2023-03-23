@@ -43,7 +43,7 @@ const useBankAccount = ({
 				branch_name : bankData.branch || '',
 			});
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 

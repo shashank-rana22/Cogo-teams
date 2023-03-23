@@ -1,60 +1,59 @@
-import React, { useState, useEffect } from "react";
-import useOceanRoute from "../hooks/useOceanRoute";
-import getAirPoints from "../helper/getAirPoints";
-import TrackingData from "./TrackingData";
-import TrackingMap from "./TrackingMap";
-import LoadingState from "./LoadingState";
-import styles from "./styles.module.css";
+import React, { useState, useEffect } from 'react';
 
-function Body({ list = [], loading = false, shipmentType = "" }) {
-  const [oceanPoints, setOceanPoints] = useState([]);
-  const [mapPoints, setMapPoints] = useState([]);
+import useOceanRoute from '../../../../../hooks/useOceanRoute';
+import getAirPoints from '../helper/getAirPoints';
 
-  const listToRender =
-    shipmentType === "fcl_freight"
-      ? list?.[0]?.data?.[0]?.tracking_data
-      : list?.data?.[0]?.tracking_data;
-      
-  const { routesLoading } = useOceanRoute({
-    setMapPoints,
-    list: list?.[0],
-  });
+import LoadingState from './LoadingState';
+import styles from './styles.module.css';
+import TrackingData from './TrackingData';
+import TrackingMap from './TrackingMap';
 
-  const { airPoints, airLoading } = getAirPoints({ airTrackerDetails: list });
+function Body({ list = [], loading = false, shipmentType = '' }) {
+	const [oceanPoints, setOceanPoints] = useState([]);
+	const [mapPoints, setMapPoints] = useState([]);
 
-  useEffect(() => {
-    if (mapPoints?.length) {
-      setOceanPoints(
-        mapPoints.find((x) => x.container_no === list?.[0]?.input)?.route
-      );
-    }
-  }, [list, mapPoints]);
+	const listToRender = shipmentType === 'fcl_freight' ? list?.[0]?.data?.[0]?.tracking_data
+		: list?.data?.[0]?.tracking_data;
 
-  const points = shipmentType === "fcl_freight" ? oceanPoints : airPoints;
-  const listLoading =
-    shipmentType === "fcl_freight" ? routesLoading : airLoading;
+	const { routesLoading } = useOceanRoute({
+		setMapPoints,
+		list: list?.[0],
+	});
 
-  if (loading) {
-    return (
-      <div className={styles.container}>
-        <LoadingState />
-      </div>
-    );
-  }
+	const { airPoints, airLoading } = getAirPoints({ airTrackerDetails: list });
 
-  return (
-    <div className={styles.tracking_info}>
-      <TrackingData
-        data={listToRender}
-        shippingLine={list?.[0]?.shipping_line}
-      />
-      <TrackingMap
-        routesLoading={listLoading}
-        points={points}
-        shipmentType={shipmentType}
-      />
-    </div>
-  );
+	useEffect(() => {
+		if (mapPoints?.length) {
+			setOceanPoints(
+				mapPoints.find((x) => x.container_no === list?.[0]?.input)?.route,
+			);
+		}
+	}, [list, mapPoints]);
+
+	const points = shipmentType === 'fcl_freight' ? oceanPoints : airPoints;
+	const listLoading = shipmentType === 'fcl_freight' ? routesLoading : airLoading;
+
+	if (loading) {
+		return (
+			<div className={styles.container}>
+				<LoadingState />
+			</div>
+		);
+	}
+
+	return (
+		<div className={styles.tracking_info}>
+			<TrackingData
+				data={listToRender}
+				shippingLine={list?.[0]?.shipping_line}
+			/>
+			<TrackingMap
+				routesLoading={listLoading}
+				points={points}
+				shipmentType={shipmentType}
+			/>
+		</div>
+	);
 }
 
 export default Body;

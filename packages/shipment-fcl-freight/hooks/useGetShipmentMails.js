@@ -28,7 +28,7 @@ const useShipmentEmails = ({ cogo_shipment_id, document_type, page }) => {
 					},
 				});
 			} catch (err) {
-				console.log(err, 'faill');
+				// console.log(err, 'faill');
 			}
 		})();
 	}, [cogo_shipment_id, document_type, page, triggerRecentClassifiedShipment]);

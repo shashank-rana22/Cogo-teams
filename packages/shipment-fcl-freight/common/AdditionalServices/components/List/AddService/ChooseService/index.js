@@ -17,8 +17,8 @@ function ChooseService({
 	setFilters,
 	filters,
 	setShowPrice = () => { },
-	setShow = () => { },
 	refetch = () => { },
+	setShowChargeCodes = () => {},
 	serviceCountTotal,
 }) {
 	const tagDisplay = (item) => (
@@ -36,9 +36,9 @@ function ChooseService({
 			item={item}
 			setAddRate={setAddRate}
 			isSeller={isSeller}
-			setShow={setShow}
 			refetch={refetch}
 			setShowPrice={setShowPrice}
+			setShowChargeCodes={setShowChargeCodes}
 		/>
 	);
 
@@ -59,11 +59,11 @@ function ChooseService({
 
 			{loading ? (
 				<div className={styles.loading_container}>
-					<Placeholder height="40px" width="100%" />
-					<Placeholder height="40px" width="100%" margin="8px 0px" />
-					<Placeholder height="40px" width="100%" margin="8px 0px" />
-					<Placeholder height="40px" width="100%" margin="8px 0px" />
-					<Placeholder height="40px" width="100%" />
+					<Placeholder height="50px" width="100%" />
+					<Placeholder height="50px" width="100%" margin="8px 0px" />
+					<Placeholder height="50px" width="100%" margin="8px 0px" />
+					<Placeholder height="50px" width="100%" margin="8px 0px" />
+					<Placeholder height="50px" width="100%" />
 				</div>
 			) : (
 				<ServicesList fields={fields} data={list} loading={loading} />

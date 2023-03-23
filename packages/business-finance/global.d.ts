@@ -2,7 +2,7 @@
 // declare module '@cogoport/store';
 // declare module '@cogoport/next';
 // declare module '@cogoport/components';
-// // declare module '@cogoport/utils';
+// declare module '@cogoport/utils';
 // declare module '@cogoport/layout';
 // declare module '@cogoport/components';
 // declare module '@cogoport/next';

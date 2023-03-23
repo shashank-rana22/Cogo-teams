@@ -7,17 +7,17 @@ const useDeleteDocument = ({ refetch }) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const deleteDocument = async ({ item }) => {
+	const deleteDocument = async ({ id }) => {
 		try {
 			const res = await trigger({
-				data: { id: item?.id, status: 'inactive' },
+				data: { id, status: 'inactive' },
 			});
 			if (!res.hasError) {
 				Toast.success('Document Deleted Successfully');
 			}
 			refetch();
 		} catch (err) {
-			Toast.error(err?.data);
+			Toast.error(err?.response?.data?.document);
 		}
 	};
 

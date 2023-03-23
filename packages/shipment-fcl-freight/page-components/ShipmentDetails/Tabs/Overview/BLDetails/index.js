@@ -3,8 +3,6 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useState, useContext } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
-// import useListContainerDetails from '../../../hooks/useListContainerDetails';
-import { data } from '../dummy_data';
 
 import BlContainer from './BlContainer';
 import ContainerDetails from './ContainerDetails';
@@ -18,90 +16,89 @@ function BLDetails() {
 	const [mappingModal, setMappingModal] = useState(false);
 	const [editContainerNum, setEditContainerNum] = useState(false);
 
-	const { shipment_data, primary_service } = useContext(
+	const { shipment_data, bl_container_mappings } = useContext(
 		ShipmentDetailContext,
 	);
 
-	// const {
-	// 	list: { data },
-	// 	loading,
-	// 	isMobile,
-	// 	refetch,
-	// } = useListContainerDetails({
-	// 	shipment_id   : shipment_data?.id || undefined,
-	// 	shipment_type : shipment_data?.shipment_type,
-	// });
+	const blCount = bl_container_mappings ? Object.keys(bl_container_mappings).length : 0;
 
-	const loading = false;
+	let containersCount = 0;
+	if (bl_container_mappings) {
+		containersCount = Object.keys(bl_container_mappings).forEach((key) => (bl_container_mappings[key].length));
+	}
 
-	const totalContainers = primary_service?.cargo_details
-		.reduce((acc, { containers_count }) => acc + containers_count, 0);
+	// Object.keys(x).forEach((key) => {
+	// 	console.log(`Length of array for key "${key}": ${x[key].length}`);
+	//   });
 
 	const renderBlCount = (
 		<div className={styles.bl_count_container}>
 			BL and Container Details
 			<div className="bl-count">
 				(
-				{primary_service?.bls_count || 0}
-				BL’s, &nbsp;
-				{totalContainers || 0}
+				{blCount || 0}
+				&nbsp;BL & &nbsp;
+				{/* {container_details?.length || 0} */}
 				&nbsp;
 				Containers
 				)
 			</div>
+		</div>
+	);
 
-			<div className={styles.button_container}>
-				<Button
-					onClick={(e) => {
-						setMappingModal(true);
-						e.stopPropagation();
+	const buttons = () => (
+		<div className={styles.button_container}>
+			<Button
+				onClick={(e) => {
+					setMappingModal(true);
+					e.stopPropagation();
+				}}
+				size="md"
+				style={{ marginLeft: '6px' }}
+			>
+				BL Container Mapping
+			</Button>
+
+			<Button
+				onClick={(e) => {
+					setEditContainerNum(true);
+					e.stopPropagation();
+				}}
+				size="md"
+			>
+				Update Container Number
+			</Button>
+
+			{mappingModal ? (
+				<Modal
+					show={mappingModal}
+					onClose={() => {
+						setMappingModal(false);
 					}}
-					className="primary sm"
-					style={{ marginLeft: '6px' }}
 				>
-					Bl Container Mapping
-				</Button>
+					<Modal.Header title="BL Container Mapping" />
+					<BlContainer
+						shipment_data={shipment_data}
+						// data={data}
+						setMappingModal={setMappingModal}
+					/>
+				</Modal>
+			) : null}
 
-				<Button
-					onClick={(e) => {
-						setEditContainerNum(true);
-						e.stopPropagation();
+			{editContainerNum ? (
+				<Modal
+					show={editContainerNum}
+					onClose={() => {
+						setEditContainerNum(false);
 					}}
-					className="primary sm"
 				>
-					Update Container Number
-				</Button>
-
-				{mappingModal ? (
-					<Modal
-						show={mappingModal}
-						onClose={() => {
-							setMappingModal(false);
-						}}
-					>
-						<BlContainer
-							shipment_data={shipment_data}
-							data={data}
-							setMappingModal={setMappingModal}
-						/>
-					</Modal>
-				) : null}
-
-				{editContainerNum ? (
-					<Modal
-						show={editContainerNum}
-						onClose={() => {
-							setEditContainerNum(false);
-						}}
-						className="primary sm"
-					>
-						<ContainerNmUpdate
-							setEditContainerNum={setEditContainerNum}
-							shipment_data={shipment_data}
-						/>
-					</Modal>
-				) : null}
-			</div>
+					<Modal.Header title="Update Container Number" />
+					<ContainerNmUpdate
+						setEditContainerNum={setEditContainerNum}
+						shipmentData={shipment_data}
+					/>
+				</Modal>
+			) : null}
 		</div>
 	);
 
@@ -119,31 +116,34 @@ function BLDetails() {
 	};
 
 	return (
-		<Accordion title={renderBlCount} style={{ width: '100%' }}>
-			{!loading && !data?.list?.length ? (
-				<EmptyState showContent={emptyStateContent} />
-			) : (
-				<div className={styles.manage_services_div}>
-					{data?.list?.map((item) => (
-						<div className={styles.service_card}>
-							<TitleCard
-								item={item}
-								setOpen={setOpen}
-								open={open}
-								setActiveId={setActiveId}
-								activeId={activeId}
-								shipment_data={shipment_data}
-							/>
-
-							{open
-								&& activeId === item?.id ? (
-									<ContainerDetails containerDetails={item?.container_details} />
-								) : null}
+		<div className={styles.container}>
+			<div className={styles.button_div}>{buttons()}</div>
+			<Accordion title={renderBlCount} style={{ width: '100%' }}>
+				{!blCount ? (
+					<EmptyState showContent={emptyStateContent} />) : (
+						<div className={styles.manage_services_div}>
+							{Object.keys(bl_container_mappings)?.map((key) => (
+								<div className={styles.service_card}>
+									<Accordion title={(
+										<TitleCard
+											blNumber={key}
+											setOpen={setOpen}
+											open={open}
+											setActiveId={setActiveId}
+											activeId={activeId}
+											shipmentData={shipment_data}
+											containerDetails={bl_container_mappings[key]}
+										/>
+									)}
+									>
+										<ContainerDetails containerDetails={bl_container_mappings[key]} />
+									</Accordion>
+								</div>
+							))}
 						</div>
-					))}
-				</div>
-			)}
-		</Accordion>
+				)}
+			</Accordion>
+		</div>
 	);
 }
 

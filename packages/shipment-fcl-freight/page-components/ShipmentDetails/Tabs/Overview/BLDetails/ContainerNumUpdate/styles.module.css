@@ -35,3 +35,9 @@
 .icon_wrapper{
 	cursor: pointer;
 }
+
+.loader{
+	display: flex;
+	justify-content: center;
+	padding-bottom: 20px;
+}

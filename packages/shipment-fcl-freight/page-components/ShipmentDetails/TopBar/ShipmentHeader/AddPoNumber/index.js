@@ -22,33 +22,38 @@ function AddPoNumber({
 
 	return (
 		<div className={styles.container}>
-
 			<Modal
 				show={show}
-				position="basic"
 				onClose={() => setShow(false)}
 				onOuterClick={() => setShow(false)}
 			>
-				<Modal.Header title={(<h2>Add PO Number </h2>)} />
-				<Modal.Body>
+				<div className={styles.modal_container}>
+					<div className={styles.title}>Add PO Number</div>
 					<Input
-						className="primary md"
+						className="md"
 						value={shipment_data?.po_number}
 						placeholder="Add PO Number"
 						onChange={(val) => setPoNumber(val)}
 					/>
+					<div className={styles.button}>
+						<Button
+							className="md"
+							onClick={() => setShow(false)}
+							disabled={loading}
+							style={{ marginRight: '8px' }}
+						>
+							Cancel
+						</Button>
 
-				</Modal.Body>
-				<Modal.Footer>
-					<Button
-						size="md"
-						disabled={loading}
-						onClick={() => setShow(false)}
-					>
-						Cancel
-					</Button>
-					<Button size="md" disabled={loading} onClick={() => onCreate()}> Submit </Button>
-				</Modal.Footer>
+						<Button
+							className="primary md"
+							disabled={loading}
+							onClick={() => onCreate()}
+						>
+							Submit
+						</Button>
+					</div>
+				</div>
 			</Modal>
 		</div>
 	);

@@ -1,4 +1,4 @@
-import { Input, Button } from '@cogoport/components';
+import { Input, Button, Loader } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import useUpdateContainerNumber from '../../../../../../hooks/useUpdateContainerNumber';
@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function ContainerNmUpdate({
 	setEditContainerNum = () => { },
-	shipment_data = {},
+	shipmentData = {},
 	refetch = () => { },
 }) {
 	const [containerValue, setContainerValue] = useState({});
@@ -15,7 +15,7 @@ function ContainerNmUpdate({
 	const { handleSubmit, containerDetails, loading } = useUpdateContainerNumber(
 		containerValue,
 		setEditContainerNum,
-		shipment_data,
+		shipmentData,
 		refetch,
 	);
 
@@ -24,39 +24,39 @@ function ContainerNmUpdate({
 	};
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.heading}>Update Container Number</div>
+		loading ? <div className={styles.loader}><Loader themeType="primary" /></div> : (
+			<div className={styles.container}>
+				{(containerDetails?.list || []).map((container) => (
+					<div className={styles.render_container}>
+						<div className={styles.container_num}>{container?.container_number}</div>
+						<Input
+							size="sm"
+							width="100%"
+							value={containerValue[container?.id]}
+							onChange={(e) => handleChange(e, container?.id)}
+						/>
+					</div>
+				))}
 
-			{(containerDetails?.list || []).map((container) => (
-				<div className={styles.render_container}>
-					<div className={styles.container_num}>{container?.container_number}</div>
+				<div className={styles.button_container}>
+					<Button
+						size="md"
+						onClick={() => setEditContainerNum(false)}
+						disabled={loading}
+					>
+						Cancel
+					</Button>
 
-					<Input
-						width="100%"
-						value={containerValue[container?.id]}
-						onChange={(e) => handleChange(e, container?.id)}
-					/>
+					<Button
+						size="md"
+						onClick={handleSubmit}
+						disabled={loading}
+					>
+						Submit
+					</Button>
 				</div>
-			))}
-
-			<div className={styles.button_container}>
-				<Button
-					className="secondary md"
-					onClick={() => setEditContainerNum(false)}
-					disabled={loading}
-				>
-					Cancel
-				</Button>
-
-				<Button
-					className="primary md"
-					onClick={handleSubmit}
-					disabled={loading}
-				>
-					Submit
-				</Button>
 			</div>
-		</div>
+		)
 	);
 }
 

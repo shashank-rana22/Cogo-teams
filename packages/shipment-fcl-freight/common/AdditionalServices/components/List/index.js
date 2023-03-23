@@ -4,7 +4,8 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
-import useGetPermission from '../../../../hooks/useGetPermission';
+import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
+import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 import AddIp from '../AddIp';
 import AddRate from '../AddRate';
 
@@ -14,7 +15,6 @@ import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
-import useListAdditionalServices from './useListAdditionalServices';
 
 function List({
 	services = [],
@@ -22,7 +22,6 @@ function List({
 	activeTab = '',
 	refetchServices = () => { },
 }) {
-	const { isConditionMatches } = useGetPermission();
 	const { isShipper } = useSelector(({ general }) => ({
 		isShipper : general.query.account_type === 'importer_exporter',
 		isMobile  : general.isMobile,
@@ -30,8 +29,9 @@ function List({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const [addRate, setAddRate] = useState(false);
+	const [addSellPrice, setAddSellPrice] = useState(false);
 	const [showChargeCodes, setShowChargeCodes] = useState(false);
-	const [item, setItem] = useState(false);
+	const [item, setItem] = useState({});
 	const [showIp, setShowIp] = useState(false);
 
 	const { list: additionalServiceList, refetch } = useListAdditionalServices({
@@ -43,18 +43,15 @@ function List({
 		refetch();
 	};
 
+	const updateResponse = useUpdateShipmentAdditionalService({
+		item,
+		setShowIp,
+		refetch,
+		showIp,
+	});
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.not_added}>
-				<Button
-					onClick={() => setShowChargeCodes(true)}
-					disabled={shipment_data?.is_job_closed}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Additional Charges
-				</Button>
-			</div>
-
 			{!isEmpty(additionalServiceList) ? (
 				<div className={styles.added_services}>
 					{additionalServiceList?.map((serviceListItem) => {
@@ -70,10 +67,10 @@ function List({
 									status,
 									serviceListItem,
 									setShowIp,
+									setAddSellPrice,
 									setAddRate,
 									isShipper,
 									setItem,
-									isConditionMatches,
 									shipment_data,
 								})}
 								refetch={handleRefetch}
@@ -85,6 +82,16 @@ function List({
 				</div>
 			) : null}
 
+			<div className={styles.not_added}>
+				<Button
+					onClick={() => setShowChargeCodes(true)}
+					disabled={shipment_data?.is_job_closed}
+				>
+					<div className={styles.add_icon}>+</div>
+					Add Additional Charges
+				</Button>
+			</div>
+
 			{additionalServiceList?.length ? (
 				<div className={styles.info_container}>
 					<div className={styles.circle} />
@@ -95,70 +102,51 @@ function List({
 				</div>
 			) : null}
 
-			{addRate ? (
+			{addSellPrice ? (
 				<Modal
-					size="xl"
-					show={addRate}
-					onClose={() => setAddRate(null)}
+					size="lg"
+					show={addSellPrice}
+					onClose={() => setAddSellPrice(null)}
 					closable={false}
 					placement="top"
-					onOuterClick={() => setAddRate(null)}
+					onOuterClick={() => setAddSellPrice(null)}
 				>
 					<Modal.Body>
 						<AddRate
-							item={item?.item || addRate}
+							item={item?.serviceListItem}
 							shipment_data={shipment_data}
-							status={addRate?.status}
-							setAddRate={setAddRate}
+							status={item?.status}
+							setAddSellPrice={setAddSellPrice}
+							updateResponse={updateResponse}
 						/>
 					</Modal.Body>
 				</Modal>
 			) : null}
 
 			{showIp ? (
-				<Modal
-					size="xl"
-					show={showIp}
-					className={styles.ip_modal_container}
-					onClose={() => setShowIp(null)}
-					closable={false}
-					placement="top"
-					onOuterClick={() => setShowIp(null)}
-				>
-					<Modal.Header title="ADD INVOICING PARTY" />
-					<Modal.Body>
-						<AddIp
-							shipment_data={shipment_data}
-							setShowIp={setShowIp}
-							showIp={showIp}
-							item={item?.serviceListItem}
-						/>
-					</Modal.Body>
-				</Modal>
+				<AddIp
+					shipment_data={shipment_data}
+					setShowIp={setShowIp}
+					showIp={showIp}
+					item={item?.serviceListItem}
+					updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
+				/>
 
 			) : null}
 
 			{showChargeCodes ? (
-				<Modal
-					size="xl"
-					show={showChargeCodes}
-					onClose={() => setShowChargeCodes(false)}
-					placement="top"
-					className={styles.modal_container}
-				>
-					<Modal.Header title="ADD NEW SERVICE" />
-					<Modal.Body>
-						<AddService
-							shipment_id={shipment_data?.id}
-							services={services}
-							isSeller={isSeller}
-							refetch={refetch}
-							show={showChargeCodes}
-							setShow={setShowChargeCodes}
-						/>
-					</Modal.Body>
-				</Modal>
+				<AddService
+					shipment_id={shipment_data?.id}
+					services={services}
+					isSeller={isSeller}
+					refetch={refetch}
+					setItem={setItem}
+					showChargeCodes={showChargeCodes}
+					setShowChargeCodes={setShowChargeCodes}
+				/>
+
 			) : null}
+
 		</div>
 	);
 }

@@ -1,0 +1,20 @@
+.container {
+
+ }
+
+.subject {
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 150%;
+	color: #000000;
+	margin-bottom: 18px;
+	max-width: 80%;
+	word-break: break-all;
+}
+
+.row {
+		display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

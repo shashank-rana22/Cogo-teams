@@ -1,0 +1,42 @@
+
+.container {
+	width: 172px; 
+	padding: 8px;
+
+}
+
+.item {
+	padding: 8px 16px;
+	&.active {
+		border-left: 1px solid #a06222; 
+	}
+	&:hover {
+		background:#fbeee0;
+		cursor: pointer;
+	}
+}
+
+.items {
+	margin-top: 16px;
+}
+
+.actions {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+.item_name {
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 20px;
+	opacity: 0.6;
+
+	color: #373f6f;
+	&.active {
+		font-weight: 700;
+		opacity: unset;
+	}
+}

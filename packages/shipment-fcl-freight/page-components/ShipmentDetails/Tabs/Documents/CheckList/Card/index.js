@@ -32,7 +32,7 @@ const Card = ({
 	return (data || []).map((item, idx) => {
 		const docType =	item?.document_type || item?.task.split('upload_').slice(-1)[0];
 
-		let allExtraItem =	completedDocs.filter((doc) => doc.document_type === docType)
+		let allExtraItem =	(completedDocs || []).filter((doc) => doc.document_type === docType)
 			|| emailDocs.filter((doc) => doc?.entity_type === docType);
 
 		if (allExtraItem.length === 0) {
@@ -42,7 +42,6 @@ const Card = ({
 		return allExtraItem.map((extraItem) => {
 			const isChecked = extraItem?.document_type === docType;
 			const receivedViaEmail = !isChecked && extraItem?.entity_type === docType;
-			console.log(isChecked, 'checkkk', item?.pendingItem);
 			const showUploadButton = item?.pendingItem ? 'Upload' : '';
 
 			return (

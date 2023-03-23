@@ -173,7 +173,7 @@ const useCreateOrgTradeParty = ({
 				data: payload,
 			});
 
-			toast.success('Trade Party Created Successfully!!');
+			Toast.success('Trade Party Created Successfully!!');
 
 			if (fetchOrganizationTradeParties) {
 				setShowComponent('view_billing_addresses');
@@ -181,7 +181,7 @@ const useCreateOrgTradeParty = ({
 				setShowModal(false);
 			}
 		} catch (err) {
-			Toast(err?.error);
+			console.log(err);
 		}
 	};
 

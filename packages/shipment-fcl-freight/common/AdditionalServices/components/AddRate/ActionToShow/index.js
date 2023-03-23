@@ -1,18 +1,16 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import useGetPermission from '../../../../../hooks/useGetPermission';
-import CC from '../../../../../utils/condition-constants';
-
 import styles from './styles.module.css';
 
 function ActionsToShow({
 	status,
-	setAddRate,
-	addRate,
+	setAddRate = () => {},
+	onAddRate,
 	handleSubmit,
 	setSecondStep,
-	updateDatas,
+	setAddSellPrice = () => {},
+	updateResponse,
 	loading,
 	onCancel = () => {},
 }) {
@@ -21,9 +19,7 @@ function ActionsToShow({
 		handleShipperSideCancel,
 		handleBuyPriceReRequest,
 		requestRateFromTechops,
-	} = updateDatas;
-
-	const { isConditionMatches } = useGetPermission();
+	} = updateResponse;
 
 	if (status?.status === 'customer_confirmation_pending') {
 		return (
@@ -31,7 +27,7 @@ function ActionsToShow({
 				<Button
 					onClick={() => setSecondStep(true)}
 					disabled={loading}
-					className="secondary md"
+					themeType="primary"
 				>
 					Request Changes
 				</Button>
@@ -44,27 +40,27 @@ function ActionsToShow({
 	}
 
 	if (
-		status?.status === 'amendment_requested_by_importer_exporter' && isConditionMatches(CC.BOOKING_AGENT_VIEW, 'or')
+		status?.status === 'amendment_requested_by_importer_exporter'
 	) {
 		return (
 			<div className={styles.button_container}>
 				<Button
 					onClick={handleShipperSideCancel}
 					disabled={loading}
-					className="secondary md"
+					themeType="primary"
 				>
 					Cancel Service
 				</Button>
 				<Button
 					onClick={handleBuyPriceReRequest}
 					disabled={loading}
-					className="secondary md"
+					themeType="primary"
 				>
 					RE-REQUEST BUY PRICE
 				</Button>
 				<Button
 					onClick={() => {
-						handleSubmit(addRate)();
+						handleSubmit(onAddRate)();
 					}}
 					disabled={loading}
 				>
@@ -75,28 +71,28 @@ function ActionsToShow({
 	}
 
 	if (
-		status?.status === 'cancelled_by_supplier' && isConditionMatches(CC.SERVICE_OPS_VIEW)
+		status?.status === 'cancelled_by_supplier'
 	) {
 		return (
 			<div className={styles.button_container}>
 				<Button
 					onClick={() => {
 						onCancel();
-						setAddRate(null);
+						setShowAddRate(false);
 					}}
 					disabled={loading}
-					className="secondary md"
+					themeType="primary"
 				>
 					Cancel
 				</Button>
 				<Button
 					onClick={requestRateFromTechops}
 					disabled={loading}
-					className="secondary md"
+					themeType="primary"
 				>
 					Request From techops
 				</Button>
-				<Button disabled={loading} onClick={handleSubmit(addRate)}>
+				<Button disabled={loading} onClick={handleSubmit(onAddRate)}>
 					Add New Rate
 				</Button>
 			</div>
@@ -108,19 +104,19 @@ function ActionsToShow({
 			<Button
 				onClick={() => {
 					onCancel();
-					setAddRate(null);
+					setAddRate(false);
+					setAddSellPrice(false);
 				}}
-				className="secondary md"
+				themeType="primary"
 				disabled={loading}
 			>
 				Cancel
 			</Button>
 
 			<Button
-				onClick={() => {
-					handleSubmit(addRate)();
-				}}
+				onClick={handleSubmit(onAddRate)}
 				disabled={loading}
+				themeType="primary"
 			>
 				Submit
 			</Button>
