@@ -28,7 +28,7 @@ function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowD
 	const { category } = rowData || {};
 	const { business_name:vendorName } = vendorData || {};
 
-	const splitArray = uploadedInvoice?.split('/') || [];
+	const splitArray = (uploadedInvoice || '').split('/') || [];
 	const filename = splitArray[splitArray.length - 1];
 
 	const { submitData, loading } = useAddExpense({ expenseData, setShowModal, getList, rowData });
