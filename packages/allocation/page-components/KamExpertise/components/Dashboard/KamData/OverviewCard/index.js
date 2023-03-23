@@ -3,6 +3,7 @@ import {
 	IcMInfo, IcMAgentManagement, IcMTradeparties,
 	IcMBreakBulkCargoType, IcMMiscellaneous,
 } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -52,11 +53,11 @@ function OverviewCard(props) {
 				<div className={styles.title}>
 					<span>{Icon_Mapping[data.expertise_type]}</span>
 
-					<span style={{ padding: '0 10px' }}><h3>{data.expertise_type}</h3></span>
+					<span className={styles.title_text}>{startCase(data.expertise_type)}</span>
 
 					<span style={{ paddingTop: '4px', width: '40px', height: '40px' }}>
 						<Tooltip
-							content={data.title}
+							content={startCase(data.expertise_type)}
 							placement="top"
 						>
 							<IcMInfo
