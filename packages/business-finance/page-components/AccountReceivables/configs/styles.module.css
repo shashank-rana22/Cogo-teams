@@ -37,15 +37,15 @@
 	width: 14px;
 }
 
-.flex{
-display: flex;
+.flex {
+	display: flex;
 }
 
-.IconDiv {
+.icon_div {
 	display: flex;
-	width: 15px;
 	flex-direction: column;
 	align-items: center;
+	width: 15px;
 	margin-left: 8px;
 	cursor: pointer;
 }

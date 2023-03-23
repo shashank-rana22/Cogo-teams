@@ -7,7 +7,7 @@ function SortHeader({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleDe
 	return (
 		<div
 			role="presentation"
-			className={styles.IconDiv}
+			className={styles.icon_div}
 			onClick={() => {
 				setOrderBy((prev) => ({
 					sortType : prev.sortType === 'Asc' ? 'Desc' : 'Asc',

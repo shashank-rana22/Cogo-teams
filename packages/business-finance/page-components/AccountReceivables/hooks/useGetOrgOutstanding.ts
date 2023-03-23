@@ -65,12 +65,8 @@ const useGetOrgOutstanding = ({ formFilters }) => {
 		} catch (e) {
 			Toast.error(e?.message);
 		}
-	}, [ageingKey, checkBox, companyType, creditControllerId, formFilters,
-		orderBy,
-		rest,
-		salesAgentId,
-		trigger,
-	]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	const stringifiedRest = JSON.stringify(rest);
 	const stringifiedOrderBy = JSON.stringify(orderBy);
 	const stringifiedFormFilters = JSON.stringify(formFilters);
