@@ -225,7 +225,7 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'list_question_wise_analysis',
+			api          : 'get_questions_analysis',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
