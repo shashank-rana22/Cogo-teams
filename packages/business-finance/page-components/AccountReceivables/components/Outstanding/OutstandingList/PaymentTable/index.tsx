@@ -2,7 +2,6 @@ import { Pagination, Input, MultiSelect } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React from 'react';
 
-import Filters from '../../../../../commons/Filters';
 import StyledTable from '../../../../commons/styledTable';
 import PaymentList from '../../../../configs/Payment_Table';
 import { UTILIZATION_STATUS } from '../../../../constants';
@@ -16,7 +15,6 @@ function PaymentTable({ data }) {
 	const {
 		paymentList,
 		paymentLoading,
-		refetch,
 		paymentFilters,
 		setPaymentFilters,
 		orderBy,
@@ -25,8 +23,6 @@ function PaymentTable({ data }) {
 
 	const { list = [], pageNo, totalRecords } = paymentList || {};
 
-	console.log('paymentList', paymentList);
-
 	const onChange = (val:string, name:string) => {
 		setPaymentFilters((p) => ({ ...p, [name]: val }));
 	};
@@ -34,8 +30,6 @@ function PaymentTable({ data }) {
 	const sortStyleAsc = orderBy.sortType === 'Asc' ? '#303B67' : '#BDBDBD';
 
 	const sortStyleDesc = orderBy.sortType === 'Desc' ? '#303B67' : '#BDBDBD';
-
-	console.log('paymentFilters', paymentFilters);
 
 	return (
 		<div>

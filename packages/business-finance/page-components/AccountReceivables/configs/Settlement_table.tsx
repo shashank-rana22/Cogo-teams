@@ -2,14 +2,8 @@ import { Button } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { format, getByKey } from '@cogoport/utils';
 
-import styles from './styles.module.css';
-
 const SettlementList = ({
-	settlementFilters,
-	setSettlementFilters,
-	setOrderBy,
-	sortStyleAsc,
-	sortStyleDesc,
+
 	setActive,
 	getHistoryChild,
 

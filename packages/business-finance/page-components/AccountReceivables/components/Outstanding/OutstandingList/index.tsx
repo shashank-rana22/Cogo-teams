@@ -30,15 +30,11 @@ function OutstandingList({ item }) {
 	};
 
 	const {
-		organizationId,
-		organizationName,
 		businessName,
 		collectionPartyType = [],
 		serialId,
 		countryCode,
-		category = [],
 		organizationSerialId,
-		selfOrganizationId,
 		updatedAt,
 		selfOrganizationName,
 	} = item || {};

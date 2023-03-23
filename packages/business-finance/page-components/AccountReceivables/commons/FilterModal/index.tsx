@@ -3,7 +3,7 @@ import { IcMFilter } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../commons/Filters';
-import { INVOICE_LIST_FILTERS, INVOICE_MORE_FILTERS } from '../../Utils/invoicelistFilter';
+import { INVOICE_MORE_FILTERS } from '../../Utils/invoicelistFilter';
 import { GenericObject } from '../Interfaces/index';
 
 import styles from './styles.module.css';

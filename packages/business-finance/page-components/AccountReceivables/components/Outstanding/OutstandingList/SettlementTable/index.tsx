@@ -25,7 +25,6 @@ function SettlementTable({ data }) {
 	const {
 		settlementList,
 		loading,
-		refetch,
 		settlementFilters,
 		setSettlementFilters,
 		orderBy,

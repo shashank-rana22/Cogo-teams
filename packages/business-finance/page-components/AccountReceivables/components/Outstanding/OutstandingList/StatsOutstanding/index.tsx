@@ -16,8 +16,8 @@ function StatsOutstanding({ item }) {
 		onAccountPaymentInvoiceCount = 0,
 		totalOutstandingInvoiceLedgerAmount = 0,
 		totalOutstandingInvoiceCount = 0,
-		totalCreditNoteAmount = 0,
-		creditNoteCount = 0,
+		// totalCreditNoteAmount = 0,
+		// creditNoteCount = 0,
 		ageingBucket = {},
 	} = item || {};
 

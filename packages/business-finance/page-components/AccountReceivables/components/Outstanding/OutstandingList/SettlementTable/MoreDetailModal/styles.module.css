@@ -6,6 +6,7 @@
 		position: absolute;
 	}
 }
+
 .button_flex {
 	display: flex;
 	justify-content: flex-end;
