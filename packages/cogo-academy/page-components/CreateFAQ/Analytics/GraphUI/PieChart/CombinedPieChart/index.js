@@ -127,7 +127,7 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 							anchor        : 'bottom',
 							direction     : 'column',
 							justify       : false,
-							translateX    : 60,
+							translateX    : 50,
 							translateY    : 40,
 							itemsSpacing  : 3,
 							itemWidth     : 80,
