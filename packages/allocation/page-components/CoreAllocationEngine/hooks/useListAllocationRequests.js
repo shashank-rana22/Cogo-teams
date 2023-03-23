@@ -6,7 +6,7 @@ import { format, isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import Actions from '../components/AllocationRequests/List/Actions';
-import styles from '../styles.module.css';
+import styles from '../components/AllocationRequests/List/styles.module.css';
 
 const useListAllocationRequests = () => {
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
@@ -153,7 +153,7 @@ const useListAllocationRequests = () => {
 			Header : <Checkbox
 				checked={selectAll}
 				onChange={(event) => onChangeTableHeadCheckbox(event)}
-				className={styles.select_all_checkbox}
+				// className={styles.select_all_checkbox}
 				disabled={loading}
 			/>,
 			accessor: ({ id = '' }) => (
@@ -180,7 +180,7 @@ const useListAllocationRequests = () => {
 					</div>
 				)}
 				>
-					<div className={styles.value_container}>{service?.business_name || '___'}</div>
+					<div className={styles.business_name}>{service?.business_name || '___'}</div>
 				</Tooltip>
 			),
 		},
@@ -253,7 +253,7 @@ const useListAllocationRequests = () => {
 			key      : 'reason',
 			Header   : 'Reason',
 			accessor : ({ reason }) => (
-				<Tooltip content={<div style={{ wordBreak: 'break-word' }}>{reason}</div>} placement="top">
+				<Tooltip content={<div className={styles.tooltip_text}>{reason}</div>} placement="top">
 					<div className={styles.reason}>
 						{reason || '___'}
 					</div>
