@@ -153,7 +153,6 @@ const useListAllocationRequests = () => {
 			Header : <Checkbox
 				checked={selectAll}
 				onChange={(event) => onChangeTableHeadCheckbox(event)}
-				// className={styles.select_all_checkbox}
 				disabled={loading}
 			/>,
 			accessor: ({ id = '' }) => (
