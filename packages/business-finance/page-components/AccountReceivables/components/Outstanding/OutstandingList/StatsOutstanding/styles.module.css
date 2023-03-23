@@ -1,105 +1,105 @@
-.InvoicesWrapper {
+.invoices_wrapper {
 	display: flex;
-    justify-content: space-evenly;
+	justify-content: space-evenly;
 	width: 100%;
 }
 
-
-.InvoicesCard {
+.invoices_card {
 	display: flex;
 	align-items: center;
-	border-radius: 8px;
-	padding: 12px 10px 10px 10px;
+	padding: 12px 10px 10px;
 	margin: 12px 10px 14px 0;
 	background-color: #f9fbfe;
-	box-shadow: rgba(0, 0, 0, 0.1) 0.1px 0.1px 0.1px 0.1px;
-	&.align-space {
-		padding: 12px 10px 10px 10px;
+	border-radius: 8px;
+	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
+
+	/* &.align-space {
+		padding: 12px 10px 10px;
 		margin: 0 10px 8px 0;
-	}
+	} */
 }
 
-.LeftContainer {
+.left_container {
 	display: flex;
-	justify-content: center;
 	flex-direction: column;
+	justify-content: center;
 	min-width: 25%;
-	padding: 0px 8px 10px 12px;
+	padding: 0 8px 10px 12px;
 }
 
-.StyledHeading {
+.styled_heading {
 	display: flex;
-    align-items: center;
+	align-items: center;
 	font-size: 13px;
 	font-weight: 600;
 }
 
-.InfoContent {
+.info_content {
 	padding: 15px;
 }
 
-.Heading {
+.heading {
 	font-size: 14px;
 	font-weight: 600;
 	color: #2c3e50;
 }
 
-.Count{
+.count {
 	margin-left: 5px;
 	color: #356efd;
 }
 
-.Icon{
-    padding: 4px 0px 0px 4px;
+.icon {
+	padding: 4px 0 0 4px;
 	color: red;
 }
 
-
-.CN {
+.cn {
 	margin-top: 5px;
 }
 
-.RightContainer{
+.right_container {
 	display: flex;
 	flex-wrap: wrap;
 	width: 84%;
 	padding: 8px;
 }
 
-.Flex{
-    display: flex;
+.flex {
+	display: flex;
 }
 
-.Label {
-    display: flex;
+.label {
+	display: flex;
 	font-size: 12px;
 	font-weight: 600;
 }
-.Amount{
+
+.amount {
+	display: flex;
 	margin-top: 2px;
 	word-break: break-all;
-    display: flex;
 }
 
-.Container {
+.container {
+	display: flex;
 	width: 100%;
-	display: flex;
 }
 
-.DueAgeing {
+.due_ageing {
 	width: 25%;
-    margin-bottom: 8px;
+	margin-bottom: 8px;
 }
 
-.FlexColumn{
-    display: flex;
-    flex-direction: column;
-}
-
-.OutstandingCard{
+.flex_column {
 	display: flex;
-	border-radius: 8px;
+	flex-direction: column;
+}
+
+.outstanding_card {
+	display: flex;
+	width: 25%;
 	margin: 12px 5px 14px 4px;
-	box-shadow: rgba(0, 0, 0, 0.1) 0.1px 0.1px 0.1px 0.1px;
-	width: 25%;
+	border-radius: 8px;
+	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
 }

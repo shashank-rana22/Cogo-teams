@@ -49,7 +49,7 @@ const useGetOrgOutstanding = ({ formFilters }) => {
 				params: {
 					...rest,
 					...formFilters || undefined,
-					sortBy             : key,
+					sortBy             : 'totalOutstandingLedgerAmount',
 					sortType           : order,
 					page               : p || rest?.page,
 					ageingKey          : ageingKey || undefined,
@@ -57,7 +57,8 @@ const useGetOrgOutstanding = ({ formFilters }) => {
 					salesAgentId       : salesAgentId || undefined,
 					creditControllerId : creditControllerId || undefined,
 					companyType        : companyType || undefined,
-					entityCode         : entityCode || undefined,
+					// entityCode         : entityCode || undefined,
+					entityCode         : '301',
 
 				},
 			});

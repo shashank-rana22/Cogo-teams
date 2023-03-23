@@ -34,22 +34,22 @@ function StatsOutstanding({ item }) {
 	};
 	return (
 		<div className={styles.Container}>
-			<div className={styles.InvoicesWrapper}>
-				<div className={styles.InvoicesCard}>
-					<div className={styles.LeftContainer}>
-						<div className={styles.StyledHeading}>
+			<div className={styles.invoices_wrapper}>
+				<div className={styles.invoices_card}>
+					<div className={styles.left_container}>
+						<div className={styles.styled_heading}>
 							OPEN INVOICES
 							{' '}
 							<Tooltip
 								theme="light"
 								content={(
-									<div className={styles.InfoContent}>
-										<div className={styles.Heading}>Open Invoices</div>
+									<div className={styles.info_content}>
+										<div className={styles.heading}>Open Invoices</div>
 										<div className={styles.HR} />
 										<div style={{ marginTop: '5px' }}>
 											{openInvoice?.invoiceBucket.map((invoice) => (
 												<div
-													className={styles.Amount}
+													className={styles.amount}
 													style={{ fontWeight: 600, fontSize: '11px' }}
 												>
 													{getFormattedPrice(
@@ -61,7 +61,7 @@ function StatsOutstanding({ item }) {
 															maximumFractionDigits : 0,
 														},
 													)}
-													<div className={styles.Count}>
+													<div className={styles.count}>
 														(
 														{invoice?.invoiceCount}
 														)
@@ -73,12 +73,12 @@ function StatsOutstanding({ item }) {
 								)}
 								placement="right"
 							>
-								<div className={styles.Icon}>
+								<div className={styles.icon}>
 									<IcMInfo />
 								</div>
 							</Tooltip>
 						</div>
-						<div className={styles.Amount} style={{ fontWeight: 500, fontSize: '12px' }}>
+						<div className={styles.amount} style={{ fontWeight: 500, fontSize: '12px' }}>
 							{getFormattedPrice(
 								openInvoice.ledgerAmount || 0,
 								openInvoice.ledgerCurrency,
@@ -88,7 +88,7 @@ function StatsOutstanding({ item }) {
 									maximumFractionDigits : 0,
 								},
 							)}
-							<div className={styles.Count}>
+							<div className={styles.count}>
 								(
 								{openInvoiceCount}
 								)
@@ -127,7 +127,7 @@ function StatsOutstanding({ item }) {
 							<div className={styles.StyledHeading}>
 								Credit Notes
 							</div>
-							<div className={styles.Amount} style={{ fontWeight: 500, fontSize: '12px' }}>
+							<div className={styles.amount} style={{ fontWeight: 500, fontSize: '12px' }}>
 								{getFormattedPrice(
 									creditNote.ledgerAmount || 0,
 									creditNote.ledgerCurrency,
@@ -137,7 +137,7 @@ function StatsOutstanding({ item }) {
 										maximumFractionDigits : 0,
 									},
 								)}
-								<div className={styles.Count}>
+								<div className={styles.count}>
 									(
 									{creditNote.ledgerCount}
 									)
@@ -177,19 +177,19 @@ function StatsOutstanding({ item }) {
 							))}
 						</div>
 					</div>
-					<div className={styles.RightContainer}>
+					<div className={styles.right_container}>
 						{(StatsKeyMapping || []).map((val) => (
-							<div className={styles.DueAgeing}>
-								<div className={styles.Label}>
+							<div className={styles.due_ageing}>
+								<div className={styles.label}>
 									{val.label}
-									<div className={styles.Count}>
+									<div className={styles.count}>
 										(
 										{getAmount(val.valueKey, 'Count') || 0}
 										)
 									</div>
 								</div>
 								<div
-									className={styles.Amount}
+									className={styles.amount}
 									style={{
 										color      : val.textColor,
 										fontWeight : 600,
@@ -244,11 +244,11 @@ function StatsOutstanding({ item }) {
 					</div>
 				</div>
 			</div>
-			<div className={styles.OutstandingCard} style={{ background: '#FEF9FE', padding: customPadding }}>
-				<div className={styles.FlexColumn}>
-					<div className={styles.Label}>Total Outstanding</div>
+			<div className={styles.outstanding_card} style={{ background: '#FEF9FE', padding: customPadding }}>
+				<div className={styles.flex_column}>
+					<div className={styles.label}>Total Outstanding</div>
 					<div
-						className={styles.Amount}
+						className={styles.amount}
 						style={{
 							color      : '#cb6464',
 							fontWeight : '600',
@@ -264,7 +264,7 @@ function StatsOutstanding({ item }) {
 								maximumFractionDigits : 0,
 							},
 						)}
-						<div className={styles.Count}>
+						<div className={styles.count}>
 							(
 							{totalOutstandingInvoiceCount}
 							)
@@ -273,7 +273,7 @@ function StatsOutstanding({ item }) {
 					<div style={{ marginTop: '5px' }}>
 						{totalOutstanding?.invoiceBucket?.map((outstanding) => (
 							<div
-								className={styles.Amount}
+								className={styles.amount}
 								style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
 							>
 								{getFormattedPrice(
@@ -285,7 +285,7 @@ function StatsOutstanding({ item }) {
 										maximumFractionDigits : 0,
 									},
 								)}
-								<div className={styles.Count}>
+								<div className={styles.count}>
 									(
 									{outstanding?.invoiceCount}
 									)
@@ -295,11 +295,11 @@ function StatsOutstanding({ item }) {
 					</div>
 				</div>
 			</div>
-			<div className={styles.OutstandingCard} style={{ background: '#f9fef9', padding: customPadding }}>
-				<div className={styles.FlexColumn}>
-					<div className={styles.Label}>ON ACCOUNTS PAYMENTS</div>
+			<div className={styles.outstanding_card} style={{ background: '#f9fef9', padding: customPadding }}>
+				<div className={styles.flex_column}>
+					<div className={styles.label}>ON ACCOUNTS PAYMENTS</div>
 					<div
-						className={styles.Amount}
+						className={styles.amount}
 						style={{
 							color      : 'rgb(103, 198, 118)',
 							fontWeight : '600',
@@ -315,7 +315,7 @@ function StatsOutstanding({ item }) {
 								maximumFractionDigits : 0,
 							},
 						)}
-						<div className={styles.Count}>
+						<div className={styles.count}>
 							(
 							{onAccountPaymentInvoiceCount}
 							)
@@ -324,7 +324,7 @@ function StatsOutstanding({ item }) {
 					<div style={{ marginTop: '5px' }}>
 						{onAccountPayment?.invoiceBucket.map((onAccount) => (
 							<div
-								className={styles.Amount}
+								className={styles.amount}
 								style={{
 									color      : 'rgb(103, 198, 118)',
 									fontWeight : '600',
@@ -340,7 +340,7 @@ function StatsOutstanding({ item }) {
 										maximumFractionDigits : 0,
 									},
 								)}
-								<div className={styles.Count}>
+								<div className={styles.count}>
 									(
 									{onAccount?.invoiceCount}
 									)

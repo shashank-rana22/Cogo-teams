@@ -7346,6 +7346,12 @@ const partner = {
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
 		},
+		{
+			api         : 'get_partner_user_rm_mapping',
+			access_type : 'private',
+			module      : 'Outstanding',
+			feature     : 'Outstanding',
+		},
 
 		{
 			api         : 'get_sales_outstanding',

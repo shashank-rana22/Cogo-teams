@@ -49,7 +49,6 @@ function Filters({
 	}
 	const { search } = params || {};
 
-	console.log('formFilters', formFilters);
 	return (
 		<div className={styles.Container}>
 			<div className={styles.entityCode}>

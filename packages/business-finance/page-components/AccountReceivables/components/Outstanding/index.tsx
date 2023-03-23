@@ -52,8 +52,6 @@ function Outstanding() {
 		setoutStandingFilters({ ...outStandingFilters, search: '' });
 	};
 
-	console.log('list', list);
-
 	return (
 		<>
 			<OutstandingFilter
