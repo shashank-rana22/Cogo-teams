@@ -109,6 +109,9 @@ export const PLATFORM_MAPPING = {
 // eslint-disable-next-line max-len
 export const URL_MATCH_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
+export const ENDS_WITH_STAR_SPACE = /\* /;
+export const ENDS_WITH_STAR_CHAR = /\*[^0-9a-zA-Z]/;
+
 export const DEFAULT_PILLS_ITEMS = [
 	{
 		label : 'Introductory',
@@ -201,3 +204,36 @@ export const ACCOUNT_TYPE_MAPPING = {
 	importer_exporter : 'twin_importer_exporter_id',
 	service_provider  : 'twin_service_provider_id',
 };
+
+export const DOCUMENT_FILTERS_MAPPING = [
+	{
+		label : 'KYC Document',
+		value : 'kyc_document',
+	},
+	{
+		label : 'Shipment Document',
+		value : 'shipment_document',
+	},
+	{
+		label : 'Wrong Document',
+		value : 'wrong_document',
+	},
+	{
+		label : 'Document Uploaded',
+		value : 'document_uploaded',
+	},
+	{
+		label : 'Document Accepted',
+		value : 'document_accepted',
+	},
+	{
+		label : 'Document Rejected',
+		value : 'document_rejected',
+	},
+
+];
+
+export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/cogoOne_prod.apk';
+
+export const PAGE_LIMIT = 50;
+export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';

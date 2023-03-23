@@ -2,11 +2,11 @@ import { Upload, Toast } from '@cogoport/components';
 import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
 import styles from './styles.module.css';
 
-function CustomFileUploader(props) {
+function CustomFileUploader(props, ref) {
 	const {
 		onChange,
 		showProgress = true,
@@ -133,7 +133,13 @@ function CustomFileUploader(props) {
 		const newUrls = urlStore.filter((item) => files.includes(item.fileName));
 		setUrlStore(newUrls);
 	};
+	const externalHandleDelete = (val) => {
+		setUrlStore(val);
+	};
 
+	useImperativeHandle(ref, () => ({
+		externalHandleDelete,
+	}));
 	return (
 		<>
 			<Upload
@@ -170,4 +176,4 @@ function CustomFileUploader(props) {
 	);
 }
 
-export default CustomFileUploader;
+export default forwardRef(CustomFileUploader);
