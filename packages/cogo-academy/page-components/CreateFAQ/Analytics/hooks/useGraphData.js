@@ -8,7 +8,6 @@ function useGraphData() {
 	const { pie_chart_data:pie_chart = 0, graph_data } = data || {};
 
 	const {
-
 		total_requested_questions_percentage = 0,
 		total_search_result_available_percentage = 0,
 		total_search_result_not_available_percentage = 0,
@@ -18,7 +17,6 @@ function useGraphData() {
 		total_requested_questions = 0,
 		total_search_result_not_available = 0,
 		total_search_result_available = 0,
-
 	} = pie_chart;
 	const LIKES_PERCENTAGE = (total_likes / total_view_count) * 100;
 	const DISLIKES_PERCENTAGE = (total_dislike / total_view_count) * 100;
@@ -56,7 +54,6 @@ function useGraphData() {
 			value : 100 - total_requested_questions_percentage,
 			color : 'hsl(255, 100%, 100%)',
 		},
-
 	];
 
 	const view_count_data =	[
