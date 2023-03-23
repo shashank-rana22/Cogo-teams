@@ -59,7 +59,7 @@ function FilterpopOver({
 					placeholder="Select Sales Agent User"
 					size="sm"
 				/>
-				<div className={styles.Margin} />
+				<div className={styles.margin} />
 				<AsyncSelect
 					name="credit_controller_id"
 					asyncKey="list_locations"
@@ -70,7 +70,7 @@ function FilterpopOver({
 					placeholder="Select Credit Controller User"
 					size="sm"
 				/>
-				<div className={styles.Margin} />
+				<div className={styles.margin} />
 
 				<Select
 					value={filters.dueIn}
@@ -80,7 +80,7 @@ function FilterpopOver({
 					isClearable
 					size="sm"
 				/>
-				<div className={styles.Margin} />
+				<div className={styles.margin} />
 
 				<Select
 					value={filters.companyType}
@@ -90,7 +90,7 @@ function FilterpopOver({
 					options={companyType}
 					size="sm"
 				/>
-				<div className={styles.Margin} />
+				<div className={styles.margin} />
 
 				<CheckboxGroup
 					style={{ flexDirection: 'column', width: '100%' }}

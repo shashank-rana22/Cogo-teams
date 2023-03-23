@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 function Row() {
 	return (
-		<div className={styles.Flex}>
+		<div className={styles.flex}>
 			<Placeholder width="150px" height="16px" />
 		</div>
 	);
@@ -12,7 +12,7 @@ function Row() {
 
 function Loader() {
 	return (
-		<div className={styles.FlexColumn}>
+		<div className={styles.flex_column}>
 			<Row />
 			<Row />
 		</div>

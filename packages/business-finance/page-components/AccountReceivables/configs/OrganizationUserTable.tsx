@@ -1,10 +1,6 @@
-import { Pill } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
-import { isEmpty, format, startCase, getByKey } from '@cogoport/utils';
+import { startCase, getByKey } from '@cogoport/utils';
 
 import HandleCall from './HandleCall';
-import SortHeader from './SortHeader';
-import styles from './styles.module.css';
 
 const OrganizationColumn = () => [
 	{
