@@ -1,13 +1,12 @@
 .container {
-  padding: 16px;
-  background-color: #fff;
-  border-radius: 16px;
-  margin-bottom: 16px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 16px;
+    margin-bottom: 16px;
 
-  @media (max-width: 576px) {
-    padding-top: 50px;
-  }
-  
+    @media (max-width: 576px) {
+        padding-top: 50px;
+    }
 }
 
 .header {
@@ -16,41 +15,41 @@
 }
 
 .content {
-  display: flex;
-  justify-content: space-between;
-  
-  @media (max-width: 576px) {
-    flex-direction: column;
-  }
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 576px) {
+        flex-direction: column;
+    }
 }
 
 .details {
-  flex-basis: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .modified {
-  display: flex;
-  font-weight: 500;
-  justify-content: space-between;
+    display: flex;
+    font-weight: 500;
+    justify-content: space-between;
 
-  @media (max-width: 576px) {
-    margin-top: 20px;
-  }
+    @media (max-width: 576px) {
+        margin-top: 20px;
+    }
 }
 
 .rules {
-  display: flex;
-  flex-basis: 25%;
-  margin-left: 10%;
-  flex-direction: column;
-  flex-wrap: wrap;
+    display: flex;
+    flex-basis: 25%;
+    margin-left: 10%;
+    flex-direction: column;
+    flex-wrap: wrap;
 
-  @media (max-width: 576px) {
-    margin: 0;
-  }
+    @media (max-width: 576px) {
+        margin: 0;
+    }
 }
 
 .rule_heading {
@@ -60,11 +59,12 @@
 }
 
 .pill {
+    padding-bottom: 2px;
+    width: 100%;
+
     :global(.ui_QjoiV) {
         margin: 0;
     }
-    padding-bottom: 2px;
-    width: 100%;
 }
 
 .badge {

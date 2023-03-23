@@ -32,15 +32,17 @@
     width: 75%;
     flex-basis: 70%;
 
-    :global(.ui_HZPDt) {
-        border-radius: 8px;
-        padding: 5px;
-        background: none;
-    }
-    :global(.ui_x-NGo) {
+    :global(.ui_text_area_container) {
         border: 1px solid #9c9a9a91;
         border-radius: 8px;
         padding: 5px;
+        height: 70%;
+    }
+
+    :global(.ui_text_area_control) {
+        border-radius: 8px;
+        padding: 5px;
+        background: none;
     }
 }
 
@@ -56,14 +58,13 @@
 .file_select_style {
     margin: 20px 10px 0 0;
     width: "70%";
+
     :global(.ui_upload_droparea_container) {
         border-radius: 8px;
     }
-    :global(.ui_3hLO-) {
+
+    :global(.ui_upload_droparea_container) {
         margin-bottom: 0px;
-    }
-    :global(.ui_lqy5Q) {
-        margin: 8px 0 0 0;
     }
 }
 
@@ -71,10 +72,12 @@
     :global(.styles_progress_container__cQeyN) {
         width: 100%;
     }
+
     :global(.styles_progress_bar__2P_k1) {
         display: none;
     }
-    :global(.ui_3hLO-) {
+
+    :global(.ui_upload_droparea_container) {
         margin-bottom: 0;
     }
 }

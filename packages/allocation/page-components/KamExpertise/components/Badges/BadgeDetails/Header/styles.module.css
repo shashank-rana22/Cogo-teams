@@ -23,7 +23,7 @@
     margin-right: 16px;
     width: 300px;
 
-    :global(.ui_4WsFV) {
+    :global(.ui_multiselect_container) {
         height: 32px;
     }
 
@@ -59,7 +59,7 @@
 .button_container {
     display: flex;
 
-    :global(.ui_button_container.ui_ps_themeType_secondary:disabled) {
+    :global(.ui_button_container) {
         border: none;
     }
 
