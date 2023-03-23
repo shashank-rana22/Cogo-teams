@@ -26,7 +26,6 @@ function LeaveTest({ leaveTest, setLeaveTest }) {
 				</div>
 			</Modal.Body>
 		</Modal>
-
 	);
 }
 
