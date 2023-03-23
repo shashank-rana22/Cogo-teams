@@ -44,17 +44,15 @@ function Footer({
 	const { sub_active:subActive, active_tab:activeTab } = query;
 	const [openModal, setOpenModal] = useState(false);
 
-	const { year = '', date, month = '', tradeType = '', service = '', shipmentType = '' } = filters || {};
+	const { year = '', month = '', tradeType = '', service = '', shipmentType = '' } = filters || {};
 
 	const onSubmit = () => {
 		push(
 			`/business-finance/cogo-book/selected_invoice?year=${year
-			}&startDate=${date ? date?.startDate : ''}&endDate=${date ? date?.endDate : ''}&month=${
-				month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}
+			}&month=${month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}
             `,
 			`/business-finance/cogo-book/selected_invoice?year=${year
-			}&startDate=${date ? date?.startDate : ''}&endDate=${date ? date?.endDate : ''}&month=${
-				month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}`,
+			}&month=${month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}`,
 		);
 	};
 

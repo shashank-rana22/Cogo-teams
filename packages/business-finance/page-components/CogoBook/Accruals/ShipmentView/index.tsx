@@ -17,20 +17,22 @@ function ShipmentView() {
 	const [showBtn, setShowBtn] = useState(false);
 	const [bulkSection, setBulkSection] = useState({ value: false, bulkAction: '' });
 	const [filters, setFilters] = useState({
-		year          : '',
-		month         : '',
-		date          : '',
-		service       : '',
-		shipmentType  : '',
-		tradeType     : '',
-		range         : '',
-		profitAmount  : '',
-		jobState      : '',
-		profitPercent : '',
-		query         : '',
-		profitType    : 'amount',
-		page          : 1,
-		pageLimit     : 10,
+		year               : '',
+		month              : '',
+		date               : '',
+		service            : '',
+		shipmentType       : '',
+		tradeType          : '',
+		range              : '',
+		profitAmount       : '',
+		jobState           : '',
+		profitPercent      : '',
+		profitPercentUpper : '',
+		profitAmountUpper  : '',
+		query              : '',
+		profitType         : 'amount',
+		page               : 1,
+		pageLimit          : 10,
 	});
 
 	const { bulkAction } = bulkSection;

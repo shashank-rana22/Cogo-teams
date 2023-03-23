@@ -35,6 +35,31 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 				/>
 			</div>
 
+			{filters?.range === '<=x=<' &&			(
+				<div className={styles.input_container}>
+					<Input
+						className="primary md"
+						placeholder={filters?.profitType === 'amount' ? 'From Amount' : 'From Percentage'}
+						value={filters?.profitAmountUpper || filters?.profitPercentUpper || ''}
+						onChange={(e:string) => {
+							if (filters?.profitType === 'amount') {
+								setFilters((prev) => ({
+									...prev,
+									profitAmountUpper  : e,
+									profitPercentUpper : '',
+								}));
+							} else {
+								setFilters((prev) => ({
+									...prev,
+									profitPercentUpper : e,
+									profitAmountUpper  : '',
+								}));
+							}
+						}}
+					/>
+				</div>
+			)}
+
 			<div className={styles.input_container}>
 				<Input
 					className="primary md"
@@ -58,10 +83,12 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 					}}
 				/>
 			</div>
+
 		</div>
 	);
 
 	const getAmount = filters?.profitAmount || filters?.profitPercent;
+	const getUpperAmount = filters?.profitAmountUpper || filters?.profitPercentUpper;
 
 	return (
 		<div>
@@ -69,7 +96,10 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 				placement="bottom"
 				render={content()}
 			>
-				<Input placeholder="Profit" value={filters.range + getAmount} />
+				<Input
+					placeholder="Profit"
+					value={(filters?.range === '<=x=<' ? getUpperAmount : '') + filters.range + getAmount}
+				/>
 			</Popover>
 			<div className={styles.select_container}>
 				<Select

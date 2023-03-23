@@ -9,6 +9,8 @@ export interface FilterInterface {
 	range?:string
 	jobState?:string
 	query?:string
+	profitAmountUpper?:string
+	profitPercentUpper?:string
 	date?:any
 	profitPercent?:string
 	page?:number,

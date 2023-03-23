@@ -15,10 +15,6 @@ const useViewSelect = (filters, query) => {
 	const {
 		search,
 		archivedStatus,
-		date,
-		range,
-		jobType,
-		profit,
 	} = filters || {};
 
 	const { service = '', shipmentType = '' } = query || {};
@@ -53,10 +49,6 @@ const useViewSelect = (filters, query) => {
 			const resp = await viewSelectedSidTrigger({
 				params: {
 					...query,
-					date           : date || undefined,
-					jobType        : jobType || undefined,
-					profit         : profit || undefined,
-					range          : range || undefined,
 					archivedStatus : archivedStatus || 'BOOKED' || undefined,
 					serviceType    : service !== '' ? service : undefined,
 					shipment       : shipmentType !== '' ? shipmentType : undefined,

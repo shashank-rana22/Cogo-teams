@@ -73,6 +73,10 @@ export const optionsData = [
 		value : '>=',
 	},
 	{
+		label : '<=x=< Between',
+		value : '<=x=<',
+	},
+	{
 		label : '< less than ',
 		value : '<',
 	},

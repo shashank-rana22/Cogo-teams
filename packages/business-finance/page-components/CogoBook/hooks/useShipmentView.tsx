@@ -30,7 +30,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 	const {
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
-		jobState = '', query = '', page, date, profitPercent = '',
+		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
 	} = filters || {};
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
 
@@ -79,11 +79,11 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					jobState             : jobState || undefined,
 					lowerProfitMargin    : profitAmount || profitPercent || undefined,
 					profitType           : profitType || undefined,
+					upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
 					startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
 					endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
 					page                 : page || undefined,
 					pageLimit            : 10,
-					// sortType,
 				},
 			});
 			const data = { ...resp.data };
@@ -240,10 +240,12 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 						profitComparisonType : rangeMapping[range] || undefined,
 						jobState             : jobState || undefined,
 						lowerProfitMargin    : profitAmount || profitPercent || undefined,
+						upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
 						profitType           : profitType || undefined,
 						startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
 						endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
 						pageLimit            : apiData?.totalRecords,
+						page                 : 1,
 					},
 				},
 			});
