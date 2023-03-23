@@ -7,7 +7,7 @@ import { getFieldController } from '../../../../../../../../common/Form/getField
 import styles from './styles.module.css';
 
 function CardItem({ item, editMode, control }) {
-	const { data = [], group_name = '' } = item;
+	const { data = [], group_name = '', description = '' } = item;
 	const isDoubleLevel = data.length > 1;
 
 	const conditionName = data[0].condition_name;
@@ -17,7 +17,7 @@ function CardItem({ item, editMode, control }) {
 			<div className={styles.name_container}>
 				<div className={styles.parameter_name}>{startCase(data.length === 1 ? conditionName : group_name)}</div>
 				<div className={styles.icon_container}>
-					<Tooltip content="Lorem ipsum dolor sit amet, consectetur adipiscing elit" placement="top">
+					<Tooltip content={description} placement="top">
 						<div><IcMInfo width={14} height={14} /></div>
 					</Tooltip>
 
@@ -25,7 +25,7 @@ function CardItem({ item, editMode, control }) {
 			</div>
 
 			{data.map((childItem) => {
-				const { condition_name = '', attributes: controls = [], id = '' } = childItem;
+				const { condition_name = '', attributes: controls = [] } = childItem;
 
 				return (
 					<>

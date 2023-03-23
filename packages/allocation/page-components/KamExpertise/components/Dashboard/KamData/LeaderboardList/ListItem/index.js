@@ -6,9 +6,9 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function ListItem(props) {
-	const { data = {}, index } = props;
+	const { data, index } = props;
 
-	const { badge_details = [], expertise_score = [] } = data || undefined;
+	const { badge_details = [], expertise_score = [] } = data || {};
 
 	const router = useRouter();
 
@@ -22,10 +22,7 @@ function ListItem(props) {
 	};
 
 	return (
-		<div
-			key={data?.id}
-			className={styles.card}
-		>
+		<div className={styles.card}>
 			<div className={styles.card_description}>
 				<div className={styles.card_description_left}>
 					<div className={styles.index}>
@@ -45,40 +42,48 @@ function ListItem(props) {
 				<div className={styles.badge_container}>
 					<div className={styles.badges}>
 						{
-							badge_details.map((value) => (
-								<div key={value.id} className={styles.badge_item}>
-									<img src={value.image_url} alt="badge" />
-									<div className={styles.star}>
-										{[1, 2, 3].fill('').map(() => (
-											<IcCStar width={10} stroke="#FFDF33" />
-										))}
-									</div>
-								</div>
+							badge_details.map((value, i) => (
+								i < 3
+									? (
+										<div key={value.id} className={styles.badge_item}>
+											<img src={value.image_url} alt="badge" />
+											<div className={styles.star}>
+												{[1, 2, 3].map((i) => (
+													<div key={i}>
+														<IcCStar width={10} stroke="#FFDF33" />
+													</div>
+												))}
+											</div>
+										</div>
+									)
+									: null
 							))
 						}
 					</div>
 					<span className={styles.link}>
-						{badge_details.length > 0
-							? (
-								<span
-									role="presentation"
-									style={{ cursor: 'pointer' }}
-									onClick={() => {
-										handleClick(data.partner_user_id);
-									}}
-								>
-									View More
-								</span>
-							) : null}
+						{ badge_details?.length > 3
+						&& (
+							<span
+								role="presentation"
+								style={{ cursor: 'pointer' }}
+								onClick={() => {
+									handleClick(data.partner_user_id);
+								}}
+							>
+								View More
+							</span>
+						)}
 					</span>
 				</div>
 
 				<div className={styles.card_description_right}>
 					{
                         expertise_score.map((expertise) => (
-	<div className={styles.exp}>
-		<div className={styles.expertise}>{startCase(expertise.expertise_type)}</div>
-		<div><b>{expertise.score}</b></div>
+	<div className={styles.exp} key={expertise.expertise_type}>
+		<div className={styles.expertise}>
+			{startCase(expertise.expertise_type || '')}
+			<div><b>{expertise.score}</b></div>
+		</div>
 	</div>
                         ))
                     }

@@ -40,7 +40,6 @@
 
 .stars_container {
     display: flex;
-    width: 50px;
     margin-top: 8px;
     align-items: center;
 }

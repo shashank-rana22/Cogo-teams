@@ -37,9 +37,8 @@ function LeaderboardList(props) {
 
 	return (
 		<div className={styles.container}>
-
 			{leaderboardList.map((data, index) => (
-				<ListItem data={data} index={index} />
+				<ListItem key={data?.id} data={data} index={index} />
 			))}
 
 			<div className={styles.pagination_container}>

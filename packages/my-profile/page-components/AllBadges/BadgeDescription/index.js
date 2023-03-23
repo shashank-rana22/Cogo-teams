@@ -1,6 +1,6 @@
 import { ProgressBar, Placeholder } from '@cogoport/components';
 // import { IcCStar } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase, format } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
 
@@ -59,24 +59,27 @@ function BadgeDescription(props) {
 			</div>
 		);
 	}
+
 	return (
 
 		<section>
 			<div className={styles.container}>
 				<p className={styles.heading}>
-					{badge_details[0]?.badge_name}
+					{badge_details?.[0]?.badge_name}
 				</p>
 				<div className={styles.display_flex}>
 					<div className={styles.badge_container}>
 						<img
 							className={styles.main_badge}
-							src={badge_details.at(-1)?.image_url}
-							alt=""
+							src={badgeDetail.url}
+							alt="Main Badge"
 						/>
 						{/* //Todo: stars arent available in the response */}
 						{/* <div className={styles.stars}>
-							{[1, 2, 3].fill('').map(() => (
-								<IcCStar width={40} height={40} stroke="#FFDF33" />
+							{[1, 2, 3].map((item) => (
+								<div key={item}>
+									<IcCStar width={10} stroke="#FFDF33" />
+								</div>
 							))}
 						</div> */}
 					</div>
@@ -86,7 +89,9 @@ function BadgeDescription(props) {
 							<div className={styles.lable_value}>
 								<p className={styles.lable}>Achievement Date</p>
 								<p className={styles.value}>
-									{badgeDetail.achievement_date ? badgeDetail.achievement_date : 'Not achieved yet'}
+									{badgeDetail.achievement_date
+										? format(badgeDetail?.achievement_date, 'dd MMM YYYY')
+										: 'Not achieved yet'}
 								</p>
 							</div>
 							{ !isEmpty(next_badge) && (
@@ -120,7 +125,7 @@ function BadgeDescription(props) {
 						</div>
 						<div className={styles.description_container}>
 							<p className={styles.lable}>Description</p>
-							<p className={styles.value}>{badge_details[0]?.description}</p>
+							<p className={styles.value}>{badge_details?.[0]?.description}</p>
 						</div>
 
 					</div>
@@ -128,14 +133,18 @@ function BadgeDescription(props) {
 
 				<div className={styles.progressbar_container}>
 					{
-						badge_details.map((item) => {
+						badge_details.map((item, i) => {
 							const progress = (100 - item.percentage_score_required);
 							return (
-								<ProgressBar
-									className={styles.progressbar}
-									progress={progress > 0 ? progress : 0}
-									uploadText={item.medal}
-								/>
+								i < 3
+									? (
+										<ProgressBar
+											className={styles.progressbar}
+											progress={progress > 0 ? progress : 0}
+											uploadText={startCase(item?.medal || '')}
+										/>
+									)
+									: null
 							);
 						})
 					}

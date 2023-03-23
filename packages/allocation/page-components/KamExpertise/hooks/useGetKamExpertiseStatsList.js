@@ -15,7 +15,7 @@ function useGetKamExpertiseStatsList() {
 			created_at_greater_than : '',
 			created_at_less_than    : '',
 			kam_expertise_level     : '',
-			name                    : searchQuery || undefined,
+			q                       : searchQuery || undefined,
 			badge                   : badgeName || undefined,
 		},
 	}, { manual: false });
@@ -25,7 +25,7 @@ function useGetKamExpertiseStatsList() {
 			...pv,
 			filters: {
 				...pv.filters,
-				name: searchQuery || undefined,
+				q: searchQuery || undefined,
 				// badge : badgeName || undefined,
 			},
 		}));

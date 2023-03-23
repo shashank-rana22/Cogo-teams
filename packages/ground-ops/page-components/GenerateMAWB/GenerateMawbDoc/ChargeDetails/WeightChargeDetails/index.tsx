@@ -98,22 +98,43 @@ function WeightChargeDetails({ data = {}, formData = {}, whiteout = false }:Prop
 					${styles.total_price_block}
 				`}
 				>
-					<div
-						className={cl`
+					{formData.paymentTerm === 'prepaid'
+						? (
+							<div
+								className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.total_price_sub_block}
 						${styles.common_flex}
 						${styles.common_border_right}
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
-					>
-						<p className={styles.font_style} style={{ fontSize: 13 }}>
-							{formData?.class === 'a' ? 'AS AGREED' : (data?.totalCharge || 0.0).toFixed(2)}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
+							>
+								<p className={styles.font_style} style={{ fontSize: 13 }}>
+									{formData?.class === 'a' ? 'AS AGREED' : (data?.totalCharge || 0.0).toFixed(2)}
 
-						</p>
-					</div>
-					<div style={{ flex: 1 }} />
+								</p>
+							</div>
+						) :		<div style={{ flex: 1 }} /> }
+
+					{formData.paymentTerm === 'collect'
+						? (
+							<div
+								className={cl`
+						${styles.flex} 
+						${styles.common_justify_center}
+						${styles.total_price_sub_block}
+						${styles.common_flex}
+						${styles.common_border_left}
+					`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
+							>
+								<p className={styles.font_style} style={{ fontSize: 13 }}>
+									{formData?.class === 'a' ? 'AS AGREED' : (data?.totalCharge || 0.0).toFixed(2)}
+
+								</p>
+							</div>
+						) : <div style={{ flex: 1 }} /> }
 				</div>
 			</div>
 			<div
@@ -268,26 +289,56 @@ function WeightChargeDetails({ data = {}, formData = {}, whiteout = false }:Prop
 					${styles.total_price_block}
 				`}
 				>
-					<div
-						className={cl`
+					{formData.paymentTerm === 'prepaid'
+						? (
+							<div
+								className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.total_other_charge_text_value_block}
 						${styles.common_flex}
 						${styles.common_border_right}
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
-					>
-						<p className={styles.font_style} style={{ fontSize: 13 }}>
-							{formData?.class === 'a' ? 'AS AGREED' : (data?.agentCharge || 0.0).toFixed(2)}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
+							>
+								<p className={styles.font_style} style={{ fontSize: 13 }}>
+									{formData?.class === 'a' ? 'AS AGREED' : (data?.agentCharge || 0.0).toFixed(2)}
 
-						</p>
-					</div>
-					<div className={cl`
+								</p>
+							</div>
+						)
+						: (
+							<div className={cl`
 						${styles.flex} 
 						${styles.common_flex}
 					`}
-					/>
+							/>
+						) }
+					{formData.paymentTerm === 'collect'
+						? (
+							<div
+								className={cl`
+						${styles.flex} 
+						${styles.common_justify_center}
+						${styles.total_other_charge_text_value_block}
+						${styles.common_flex}
+						${styles.common_border_left}
+					`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
+							>
+								<p className={styles.font_style} style={{ fontSize: 13 }}>
+									{formData?.class === 'a' ? 'AS AGREED' : (data?.agentCharge || 0.0).toFixed(2)}
+
+								</p>
+							</div>
+						)
+						: (
+							<div className={cl`
+						${styles.flex} 
+						${styles.common_flex}
+					`}
+							/>
+						) }
 				</div>
 			</div>
 			<div
@@ -332,26 +383,56 @@ function WeightChargeDetails({ data = {}, formData = {}, whiteout = false }:Prop
 					${styles.total_price_block}
 				`}
 				>
-					<div
-						className={cl`
+					{formData.paymentTerm === 'prepaid'
+						? (
+							<div
+								className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.carrier_final_sub_block}
 						${styles.common_flex}
 						${styles.common_border_right}
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
-					>
-						<p className={styles.font_style} style={{ fontSize: 13 }}>
-							{formData?.class === 'a' ? 'AS AGREED' : (data?.carrierCharge || 0.0).toFixed(2)}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
+							>
+								<p className={styles.font_style} style={{ fontSize: 13 }}>
+									{formData?.class === 'a' ? 'AS AGREED' : (data?.carrierCharge || 0.0).toFixed(2)}
 
-						</p>
-					</div>
-					<div className={cl`
+								</p>
+							</div>
+						)
+						: (
+							<div className={cl`
 						${styles.flex} 
 						${styles.common_flex}
 					`}
-					/>
+							/>
+						)}
+					{formData.paymentTerm === 'collect'
+						? (
+							<div
+								className={cl`
+						${styles.flex} 
+						${styles.common_justify_center}
+						${styles.carrier_final_sub_block}
+						${styles.common_flex}
+						${styles.common_border_left}
+					`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
+							>
+								<p className={styles.font_style} style={{ fontSize: 13 }}>
+									{formData?.class === 'a' ? 'AS AGREED' : (data?.carrierCharge || 0.0).toFixed(2)}
+
+								</p>
+							</div>
+						)
+						: (
+							<div className={cl`
+						${styles.flex} 
+						${styles.common_flex}
+					`}
+							/>
+						)}
 				</div>
 			</div>
 			<div
@@ -415,17 +496,20 @@ function WeightChargeDetails({ data = {}, formData = {}, whiteout = false }:Prop
 						`}
 						/>
 					</div>
-					<div className={cl`
+					{formData.paymentTerm === 'prepaid'
+					&& (
+						<div className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.prepaid_total_value}
 					`}
-					>
-						<p className={styles.font_style} style={{ fontSize: 13 }}>
-							{formData?.class === 'a' ? 'AS AGREED' : (data?.finalCharge || 0.0).toFixed(2)}
+						>
+							<p className={styles.font_style} style={{ fontSize: 13 }}>
+								{formData?.class === 'a' ? 'AS AGREED' : (data?.finalCharge || 0.0).toFixed(2)}
 
-						</p>
-					</div>
+							</p>
+						</div>
+					)}
 				</div>
 
 				<div className={cl`
@@ -460,11 +544,20 @@ function WeightChargeDetails({ data = {}, formData = {}, whiteout = false }:Prop
 						`}
 						/>
 					</div>
-					<div className={cl`
-							${styles.flex} 
-							${styles.collect_prepaid_end}
-						`}
-					/>
+					{formData.paymentTerm === 'collect'
+					&& (
+						<div className={cl`
+						${styles.flex} 
+						${styles.common_justify_center}
+						${styles.prepaid_total_value}
+					`}
+						>
+							<p className={styles.font_style} style={{ fontSize: 13 }}>
+								{formData?.class === 'a' ? 'AS AGREED' : (data?.finalCharge || 0.0).toFixed(2)}
+
+							</p>
+						</div>
+					)}
 
 				</div>
 			</div>

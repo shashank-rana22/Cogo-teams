@@ -74,7 +74,7 @@ function KamExpertise() {
 
 			<Header />
 
-			<div>
+			<div className={styles.tab_list}>
 				<Tabs
 					activeTab={activeTab}
 					themeType="tertiary"

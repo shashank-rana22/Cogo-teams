@@ -46,6 +46,11 @@ function Body({ item }) {
 					{`${item?.containers_count || 1}
 					 Container x ${item?.container_size} x ${startCase(item?.container_type)},
                 ${commodity}`}
+					<div>
+						Cargo Weight per Container:
+						{' '}
+						{item?.cargo_weight_per_container}
+					</div>
 				</div>
 			)}
 			{['lcl_freight', 'air_freight'].includes(item?.service_type) && (

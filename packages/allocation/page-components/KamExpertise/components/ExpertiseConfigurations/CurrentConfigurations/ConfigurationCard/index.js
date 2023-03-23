@@ -41,14 +41,14 @@ function ConfigurationCard(props) {
 		<div className={styles.card_container}>
 			<div className={styles.card_header}>
 				<div className={styles.left_header}>
-					{HEADING_MAPPING[status_value](version_number)}
+					{HEADING_MAPPING[status_value || ''](version_number || '')}
 
 					<Pill
 						size="lg"
 						color={STATUS_COLOR_MAPPING[status_value]}
 						style={{ marginRight: '28px' }}
 					>
-						{ status_value === 'active' ? 'Live' : status_value }
+						{status_value === 'active' ? 'Live' : status_value}
 
 					</Pill>
 
@@ -72,8 +72,6 @@ function ConfigurationCard(props) {
 							{' '}
 							{' '}
 							:
-							{' '}
-
 							<strong>
 								{audit_data?.updated_at
 									? format(audit_data.updated_at, 'dd-MM-yyyy') : ''}
@@ -82,11 +80,10 @@ function ConfigurationCard(props) {
 						</div>
 					</div>
 				</div>
-
 			</div>
 
 			<div className={styles.cards}>
-				{list.map((item) => <CardItem {...item} />)}
+				{list.map((item) => <CardItem key={item.id} {...item} />)}
 			</div>
 		</div>
 	);

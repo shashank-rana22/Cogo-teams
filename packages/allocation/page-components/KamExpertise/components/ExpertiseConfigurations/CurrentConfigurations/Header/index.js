@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { format } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import CreateModal from './CreateModal';
 import Draft from './CreateModal/Draft';
@@ -62,9 +62,7 @@ function Header({ setSelectedVersion, selectedVersion, audit_data = {}, LIVE_VER
 					:
 					{' '}
 					<strong>
-						Version
-						{' '}
-						{LIVE_VERSION || ''}
+						{LIVE_VERSION ? `Version ${LIVE_VERSION}` : 'NA'}
 					</strong>
 				</div>
 

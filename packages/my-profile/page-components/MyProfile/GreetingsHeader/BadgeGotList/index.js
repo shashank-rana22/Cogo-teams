@@ -28,7 +28,6 @@ function BadgeGotList(props) {
 				<span>
 					You don&apos;t have any badges!
 				</span>
-				<IcCSad height={20} width={20} style={{ marginLeft: '8px' }} />
 			</div>
 		);
 	}
@@ -45,8 +44,10 @@ function BadgeGotList(props) {
 									<img src={data.image_url} alt="badge" />
 								</div>
 								<div className={styles.stars}>
-									{[1, 2, 3].fill('').map(() => (
-										<IcCStar width={10} stroke="#FFDF33" />
+									{[1, 2, 3].map((item) => (
+										<div key={item}>
+											<IcCStar width={10} stroke="#FFDF33" />
+										</div>
 									))}
 								</div>
 							</div>
