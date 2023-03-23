@@ -20,7 +20,6 @@ function useGraphData() {
 		total_search_result_available = 0,
 
 	} = pie_chart;
-	console.log(pie_chart);
 	const LIKES_PERCENTAGE = (total_likes / total_view_count) * 100;
 	const DISLIKES_PERCENTAGE = (total_dislike / total_view_count) * 100;
 	const VIEW_COUNT = total_view_count - (total_dislike + total_likes);
