@@ -12,8 +12,8 @@ function useListMailDetails({ activeMail = {}, emailAddress = '' }) {
 		try {
 			await trigger({
 				params: {
-					// email_address : emailAddress,
-					email_address : 'dineshkumar.s@cogoport.com',
+					email_address : emailAddress,
+					// email_address : 'dineshkumar.s@cogoport.com',
 					message_id    : id,
 				},
 			});

@@ -71,7 +71,7 @@ function MailModal({
 		setShowControl,
 		setBccArray,
 		setCcBccValue,
-		checkType,
+		// checkType,
 		setAttachments,
 		setEmailState,
 		setShowMailModal,
@@ -88,8 +88,8 @@ function MailModal({
 		}
 		if (checkType) {
 			payload = {
-				sender       : 'dineshkumar.s@cogoport.com',
-				// sender       : emailAddress,
+				// sender       : 'dineshkumar.s@cogoport.com',
+				sender       : emailAddress,
 				toUserEmail  : recipientArray,
 				ccrecipients : bccArray,
 				subject      : emailState?.subject,
@@ -105,8 +105,8 @@ function MailModal({
 				attachments,
 				ccrecipients : bccArray,
 				content      : emailState?.body,
-				// sender       : emailAddress,
-				sender       : 'dineshkumar.s@cogoport.com',
+				sender       : emailAddress,
+				// sender       : 'dineshkumar.s@cogoport.com',
 				subject      : emailState?.subject,
 				toUserEmail  : recipientArray,
 				userId,
@@ -145,23 +145,14 @@ function MailModal({
 						{' '}
 					</div>
 					<div className={styles.tags_div}>
-						{/* {checkType ? (
-							<CustomInput
-								email={recipientArray}
-								handleDelete={handleDelete}
-								type="recipient"
-								checkType={checkType}
-							/>
-						) : ( */}
 						{(recipientArray || []).map((data) => (
 							<CustomInput
 								email={data}
 								handleDelete={handleDelete}
 								type="recipient"
-								checkType={checkType}
+								// checkType={checkType}
 							/>
 						))}
-						{/* )} */}
 
 						{(showControl && type === 'recipient') && (
 							<div className={styles.tag_and_errorcontainer}>
@@ -207,7 +198,7 @@ function MailModal({
 								email={data}
 								handleDelete={handleDelete}
 								type="cc_bcc"
-								checkType={checkType}
+								// checkType={checkType}
 							/>
 						))}
 						{(showControl && type === 'cc_bcc') && (

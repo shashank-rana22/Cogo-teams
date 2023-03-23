@@ -6,8 +6,9 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 
 function MailAttachments({ allAttachements, loading }) {
-	const [showPreview, setShowPreview] = useState(false);
-	const [showPopover, setShowPopover] = useState(false);
+	const [showPreview, setShowPreview] = useState(null);
+	// console.log('showPreview:', showPreview);
+	// const [showPopover, setShowPopover] = useState(false);
 	// console.log('allAttachements:', allAttachements);
 	const externalAttachements = allAttachements.filter((att) => !att.isInline);
 	// console.log('externalAttachements:', externalAttachements);
@@ -30,46 +31,6 @@ function MailAttachments({ allAttachements, loading }) {
 								<IcMDocument />
 								<div className={styles.name}>{item.name}</div>
 							</div>
-							<Popover
-								theme="light"
-								interactive
-								visible={showPopover}
-								content={(
-									<div>
-										<div
-											role="presentation"
-											className={styles.preview_container}
-											onClick={() => {
-												setShowPreview(item);
-												setShowPopover(false);
-											}}
-										>
-											Preview
-										</div>
-										{/* <div
-											role="presentation"
-											className={styles.preview_container}
-										>
-											Download
-
-										</div> */}
-									</div>
-								)}
-								placement="bottom"
-								animation="shift-away"
-								onClickOutside={() => setShowPopover(false)}
-							>
-								<div
-									role="presentation"
-									className={styles.content_icon}
-								// className="icon"
-									onClick={() => setShowPopover(true)}
-								>
-									<div>
-										<IcMArrowDown />
-									</div>
-								</div>
-							</Popover>
 						</div>
 					))}
 				</div>
@@ -79,14 +40,17 @@ function MailAttachments({ allAttachements, loading }) {
 				<Modal
 					show={showPreview}
 					onClose={() => setShowPreview(null)}
-					className="primary lg"
+					size="md"
+					placement="top"
 					onOuterClick={() => setShowPreview(null)}
-					closable={false}
+					showCloseIcon
+					className={styles.styled_ui_modal_dialog}
 				>
+					<Modal.Header title="Preview" />
 					<Modal.Body>
 						<object
-							height="700px"
-							width="800px"
+							height="450"
+							width="550"
 							aria-label="Doc Preview"
 							data={`data:${externalAttachements[0].contentType};base64,${externalAttachements[0].contentBytes}`}
 						/>

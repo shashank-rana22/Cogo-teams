@@ -46,8 +46,8 @@ function MailConversation({
 
 	const handlClick = (val) => {
 		setButtonType(val);
-		setBccArray(ccData);
-		setRecipientArray([senderAddress]);
+		setBccArray(val !== 'forward' ? ccData : []);
+		setRecipientArray(val !== 'forward' ? [senderAddress] : []);
 		setEmailState({
 			subject,
 			body: '',
@@ -99,9 +99,6 @@ function MailConversation({
 				</div>
 			)}
 			<MailAttachments allAttachements={allAttachements} loading={attachmentLoading} />
-			{/* {(hasAttachments || attachmentLoading) && (
-				<MailAttachments allAttachements={allAttachements} loading={attachmentLoading} />
-			)} */}
 		</div>
 	);
 }

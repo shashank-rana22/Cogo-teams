@@ -60,3 +60,12 @@
 .content_icon:hover {
 	background: #e0e0e0;
 }
+
+.styled_ui_modal_dialog {
+	:global {
+		.ui_modal_body_container {
+			border-top: none !important;
+			border-bottom: none !important;
+		}
+	}
+}

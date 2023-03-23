@@ -1,6 +1,6 @@
 import getFileAttributes from '../utils/getFileAttributes';
 
-export const isInList = (email, data) => data.includes(email);
+export const isInList = (email, data) => data?.includes(email);
 
 export const validateEmail = (emailInput) => {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
