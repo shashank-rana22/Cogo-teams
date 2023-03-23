@@ -13,10 +13,9 @@ function useListShipmentServices({ shipment_data }) {
 				await trigger({
 					params: {
 						filters: {
-							shipment_id        : shipment_data?.id,
-							additional_methods : ['booking_requirement', 'stakeholder', 'service_objects'],
+							shipment_id: shipment_data?.id,
 						},
-						additional_methods: ['service_objects', 'stakeholder'],
+						additional_methods: ['service_objects', 'stakeholder', 'booking_requirement'],
 					},
 				});
 			} catch (err) {

@@ -1,11 +1,11 @@
 import { RTE } from '@cogoport/components';
-import { useForm, getFormError, InputController } from '@cogoport/forms';
+import { useForm, handleError, InputController } from '@cogoport/forms';
 // import useEditorState from '@cogoport/front/rich-text/useEditorState';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useGetEntityStakeholderMappings from '../../../hooks/useGetEntityStakeholderMappings';
-// import useResetErrors from '../../../hooks/useResetErrors';
+import useResetErrors from '../../../hooks/useResetErrors';
 
 import Footer from './Footer';
 import InputParam from './Input';
@@ -60,21 +60,22 @@ function Compose({
 	const { options } = useGetEntityStakeholderMappings();
 
 	const {
-		// fields,
 		control,
 		handleSubmit,
-		// formState: { errors: errorVal },
+		formState: { errors: errorVal },
 		watch,
 	} = useForm({ defaultValues });
 
-	// console.log(controls, 'controlsss');
+	let actualSubject = watch('subject');
+	const entity_type = watch('entity_type');
 
-	// useResetErrors({ errors, setErrors, currentStateErrors: errorVal });
+	if (pre_subject_text && subject_position === 'prefix') {
+		actualSubject = `${pre_subject_text} / ${entity_type} / ${actualSubject}`;
+	} else {
+		actualSubject = `${actualSubject} / ${pre_subject_text} / ${entity_type}`;
+	}
 
-	// const { editorState, setEditorState, HTMLState } = useEditorState();
-	// useEffect(() => () => {
-	// 	setComposingEmail(null);
-	// }, []);
+	useResetErrors({ errors, setErrors, currentStateErrors: errorVal });
 
 	const suffix = (
 		<div className={styles.row}>
@@ -96,18 +97,6 @@ function Compose({
 			</div>
 		</div>
 	);
-	// const handleChange = (state) => {
-	// 	setEditorState(state);
-	// };
-
-	// let actualSubject = watch('subject');
-	// const entity_type = watch('entity_type');
-
-	// if (pre_subject_text && subject_position === 'prefix') {
-	// 	actualSubject = `${pre_subject_text} / ${entity_type} / ${actualSubject}`;
-	// } else {
-	// 	actualSubject = `${actualSubject} / ${pre_subject_text} / ${entity_type}`;
-	// }
 
 	return (
 		<div className={styles.container}>
@@ -129,10 +118,10 @@ function Compose({
 				/>
 				{errors?.toUserEmail ? (
 					<div className={styles.error}>
-						{/* {getFormError(
-							{ ...fields?.toUserEmail, error: errors?.toUserEmail },
+						{handleError(
+							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
 							true,
-						)} */}
+						)}
 					</div>
 				) : null}
 				{isCC ? (
@@ -145,16 +134,17 @@ function Compose({
 				) : null}
 				{errors?.ccrecipients ? (
 					<div className={styles.error}>
-						{/* {getFormError(
-							{ ...fields?.ccrecipients, error: errors?.ccrecipients },
+						{handleError(
+							{ rules: { required: 'Emails are required' }, error: errors?.ccrecipients },
 							true,
-						)} */}
+						)}
 					</div>
 				) : null}
 				{isBcc
 					? (
 						<InputController
 							prefix="Bcc:"
+							name="bccrecipients"
 							control={control}
 							placeholder="put comma (,) seperated multiple emails"
 						/>
@@ -166,11 +156,13 @@ function Compose({
 					name="subject"
 					placeholder="Enter subject..."
 					control={control}
-					rules={{ required: { value: true, message: 'Subject is required' } }}
 				/>
 				{errors?.subject ? (
 					<div className={styles.error}>
-						{/* {getFormError({ ...fields?.subject, error: errors?.subject }, true)} */}
+						{handleError(
+							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
+							true,
+						)}
 					</div>
 				) : null}
 				<SelectParam
@@ -183,25 +175,25 @@ function Compose({
 				/>
 				{errors?.entity_type ? (
 					<div className={styles.error}>
-						{/* {getFormError(
-							{ ...fields?.entity_type, error: errors?.entity_type },
+						{handleError(
+							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
 							true,
-						)} */}
+						)}
 					</div>
 				) : null}
 				<div className={styles.subject_preview}>
 					<div className={styles.preview}>Subject Preview :</div>
 					<div className={styles.preview}>
-						{/* {actualSubject} */}
+						{actualSubject}
 					</div>
 				</div>
 
 				{errors?.subject ? (
 					<div className={styles.error}>
-						{/* {getFormError(
-							{ ...fields?.entity_type, error: errors?.entity_type },
+						{handleError(
+							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
 							true,
-						)} */}
+						)}
 					</div>
 				) : null}
 				<div className={styles.rich_text_editor}>
