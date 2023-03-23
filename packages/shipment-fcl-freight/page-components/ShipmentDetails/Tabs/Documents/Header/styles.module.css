@@ -19,6 +19,16 @@
 }
 
 .custom_toggle{
+	:global {
+		.ui_toggle_onlabel{
+			font-weight: 700;
+		}
+	
+		.ui_toggle_offlabel{
+			font-weight: 700;
+		}
+	}
+	
 	/* :global {
 		.ui_inner::after {
 			background-color: var(--color-accent-orange-2) !important;

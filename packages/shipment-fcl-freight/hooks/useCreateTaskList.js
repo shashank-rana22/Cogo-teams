@@ -14,6 +14,7 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 	const [docTypes, setDocTypes] = useState([]);
 	const { data } = useGetShipmentProcess();
 	const {
+		loading,
 		list : shipmentDocuments,
 	} = useGetListDocuments({ shipment_data, filters });
 
@@ -95,7 +96,7 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 		taskList,
 		completedDocs: shipmentDocuments,
 		docTypes,
-
+		loading,
 	};
 };
 
