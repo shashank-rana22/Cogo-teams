@@ -1,20 +1,21 @@
-import { Toast, cl, Modal, Button, RTE, Input } from '@cogoport/components';
-import { IcMSend, IcMAttach, IcMCross } from '@cogoport/icons-react';
+import { Toast, cl, Modal, RTE, Input } from '@cogoport/components';
+import { IcMCross } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
-import CustomFileUploader from '../../../../../common/CustomFileUploader';
 import CustomInput from '../../../../../common/EmailCustomTag/index';
 import { TOOLBARCONFIG } from '../../../../../constants';
+import { decode, buttonOptions } from '../../../../../constants/MAIL_CONSTANT';
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
-import getFileAttributes from '../../../../../utils/getFileAttributes';
+import mailFunction from '../../../../../utils/mailFunctions';
 
+import RenderHeader from './Header';
 import styles from './styles.module.css';
 
 function MailModal({
 	showMailModal,
 	setShowMailModal = () => {},
 	createMail = () => {},
-	createLoading = false,
+	createMailLoading = false,
 	userId = '',
 	recipientArray = [],
 	setBccArray = () => {},
@@ -28,6 +29,9 @@ function MailModal({
 	activeMail = {},
 	replyMailApi = () => {},
 	replyLoading,
+	emailAddress = '',
+	// mailValue = '',
+	// setMailValue = () => {},
 	// setButtonType = () => {},
 	// buttonType = '',
 }) {
@@ -41,15 +45,39 @@ function MailModal({
 	// const [bccArray, setBccArray] = useState([]);
 	const [uploading, setUploading] = useState(false);
 
-	const buttonOptions = ['reply', 'reply_all', 'forward'];
-
 	const checkType = buttonOptions.includes(buttonType);
 
 	const uploaderRef = useRef(null);
 
-	const handleProgress = (val) => {
-		setUploading(val);
-	};
+	const {
+		handleKeyPress = () => {},
+		handleEdit = () => {},
+		handleChange = () => {},
+		handleDelete = () => {},
+		handleError = () => {},
+		handleClose = () => {},
+		handleAttachmentDelete = () => {},
+	} = mailFunction({
+		type,
+		setErrorValue,
+		recipientValue,
+		ccBccValue,
+		setError,
+		recipientArray,
+		bccArray,
+		setRecipientArray,
+		setRecipientValue,
+		setType,
+		setShowControl,
+		setBccArray,
+		setCcBccValue,
+		checkType,
+		setAttachments,
+		setEmailState,
+		setShowMailModal,
+		attachments,
+		uploaderRef,
+	});
 
 	const handleSend = () => {
 		let payload;
@@ -61,6 +89,7 @@ function MailModal({
 		if (checkType) {
 			payload = {
 				sender       : 'dineshkumar.s@cogoport.com',
+				// sender       : emailAddress,
 				toUserEmail  : recipientArray,
 				ccrecipients : bccArray,
 				subject      : emailState?.subject,
@@ -76,6 +105,7 @@ function MailModal({
 				attachments,
 				ccrecipients : bccArray,
 				content      : emailState?.body,
+				// sender       : emailAddress,
 				sender       : 'dineshkumar.s@cogoport.com',
 				subject      : emailState?.subject,
 				toUserEmail  : recipientArray,
@@ -83,143 +113,6 @@ function MailModal({
 			};
 			createMail(payload);
 		}
-	};
-
-	const handleClose = () => {
-		setAttachments([]);
-		setBccArray([]);
-		setEmailState({});
-		setRecipientArray([]);
-		setRecipientValue('');
-		setCcBccValue('');
-		setShowMailModal(false);
-	};
-
-	const renderHeader = () => (
-		<>
-			<div className={cl`${(createLoading || replyLoading) ? styles.disabled_button : styles.send_icon}`}>
-				<IcMSend
-					onClick={handleSend}
-				/>
-			</div>
-			<div className={styles.title}>New Message</div>
-			<div className={styles.right_header}>
-				<div className={styles.file_uploader_div}>
-					<CustomFileUploader
-						disabled={uploading}
-						handleProgress={handleProgress}
-						className="file_uploader"
-						accept=".png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx"
-						multiple
-						uploadIcon={(
-							<IcMAttach
-								className={styles.upload_icon}
-								fill="#000000"
-								style={{
-									cursor: uploading
-										? 'not-allowed'
-										: 'pointer',
-								}}
-							/>
-						)}
-						onChange={(val) => {
-							setAttachments(val);
-						}}
-						showProgress={false}
-						ref={uploaderRef}
-					/>
-				</div>
-				<Button size="md" themeType="link" onClick={handleClose}>Cancel</Button>
-			</div>
-		</>
-	);
-
-	const handleEdit = (val) => {
-		setType(val);
-		setShowControl(true);
-		setError(false);
-		setErrorValue(null);
-		if (type === 'recipient') {
-			setCcBccValue('');
-		} else {
-			setRecipientValue('');
-		}
-	};
-
-	const handleChange = (item) => {
-		if (type === 'recipient') {
-			setRecipientValue(item.target?.value);
-		} else {
-			setCcBccValue(item.target?.value);
-		}
-	};
-
-	const validateEmail = (emailInput) => {
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return emailRegex.test(emailInput);
-	};
-
-	const isInList = (email, data) => data.includes(email);
-
-	const handleKeyPress = (event) => {
-		if (event.key === 'Enter') {
-			event.preventDefault();
-			if ((type === 'recipient' && !validateEmail(recipientValue))
-			|| (type === 'cc_bcc' && !validateEmail(ccBccValue))) {
-				setErrorValue('Enter valid id');
-				setError(true);
-				return;
-			}
-			if ((type === 'recipient' && isInList(recipientValue, recipientArray))
-			|| (type === 'cc_bcc' && isInList(ccBccValue, bccArray))) {
-				setErrorValue('Email already present');
-				setError(true);
-				return;
-			}
-
-			setError(false);
-			setErrorValue(null);
-			if (type === 'recipient') {
-				setRecipientArray((prev) => [...prev, recipientValue]);
-				setRecipientValue('');
-				setType('');
-				setShowControl(false);
-			} else {
-				setBccArray((prev) => [...prev, ccBccValue]);
-				setCcBccValue('');
-				setType('');
-				setShowControl(false);
-			}
-		}
-	};
-
-	const handleDelete = (val, emailType) => {
-		if (!checkType) {
-			if (emailType === 'recipient') {
-				setRecipientArray((p) => p.filter((data) => data !== val));
-			} else {
-				setBccArray((p) => p.filter((data) => data !== val));
-			}
-		}
-	};
-
-	const handleAttachmentDelete = (url) => {
-		const filteredAttachments = attachments.filter((data) => data !== url);
-		setAttachments(filteredAttachments);
-		uploaderRef?.current?.externalHandleDelete(filteredAttachments);
-	};
-
-	const handleError = (s) => {
-		setError(false);
-		if (s === 'receipient') { setRecipientValue(''); } else { setCcBccValue(''); }
-		setShowControl(false);
-	};
-
-	const decode = (data = '') => {
-		const val = decodeURI(data).split('/');
-		const fileName = val[val.length - 1];
-		const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
-		return { uploadedFileName, fileIcon };
 	};
 
 	return (
@@ -232,7 +125,19 @@ function MailModal({
 			placement="top"
 			scroll
 		>
-			<Modal.Header title={renderHeader()} />
+			<Modal.Header title={(
+				<RenderHeader
+					createLoading={createMailLoading}
+					replyLoading={replyLoading}
+					handleSend={handleSend}
+					setUploading={setUploading}
+					uploading={uploading}
+					setAttachments={setAttachments}
+					handleClose={handleClose}
+					uploaderRef={uploaderRef}
+				/>
+			)}
+			/>
 			<Modal.Body>
 				<div className={styles.type_to}>
 					<div className={styles.sub_text}>

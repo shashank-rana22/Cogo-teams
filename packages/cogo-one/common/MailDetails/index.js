@@ -14,7 +14,7 @@ function MailDetails({
 	setActiveSelect = () => {},
 	setActiveMail = () => {},
 	activeMail,
-	senderMail,
+	senderMail = '',
 }) {
 	const { data = {}, loading } = useListMail({ activeSelect, senderMail });
 	const {

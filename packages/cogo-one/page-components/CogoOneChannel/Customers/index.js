@@ -56,10 +56,14 @@ function Customers({
 	setShowMailModal = () => {},
 	emailState = {},
 	setEmailState = () => {},
+	emailAddress = '',
+	// mailValue = '',
+	// setMailValue = () => {},
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [attachments, setAttachments] = useState([]);
 	// const [showMailModal, setShowMailModal] = useState(false);
+
 	const {
 		createMail = () => {},
 		createMailLoading = false,
@@ -68,7 +72,14 @@ function Customers({
 	const {
 		replyMailApi = () => {},
 		replyLoading = false,
-	} = useReplyMail({ setShowMailModal, setEmailState, setRecipientArray, setBccArray, buttonType, setButtonType });
+	} = useReplyMail({
+		setShowMailModal,
+		setEmailState,
+		setRecipientArray,
+		setBccArray,
+		buttonType,
+		setButtonType,
+	});
 
 	const onChangeToggle = () => {
 		if (toggleStatus) {
@@ -160,7 +171,13 @@ function Customers({
 			)}
 
 			{activeTab === 'mail' && (
-				<MailList activeMail={activeMail} setActiveMail={setActiveMail} />
+				<MailList
+					activeMail={activeMail}
+					setActiveMail={setActiveMail}
+					emailAddress={emailAddress}
+					// mailValue={mailValue}
+					// setMailValue={setMailValue}
+				/>
 			)}
 
 			{openModal && (
@@ -242,6 +259,9 @@ function Customers({
 					activeMail={activeMail}
 					replyMailApi={replyMailApi}
 					replyLoading={replyLoading}
+					emailAddress={emailAddress}
+					// mailValue={mailValue}
+					// setMailValue={setMailValue}
 				/>
 			)}
 		</div>

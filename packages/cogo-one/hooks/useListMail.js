@@ -2,11 +2,10 @@ import { usePublicRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 function useListMail({ activeSelect, senderMail }) {
-	console.log('senderMail:', senderMail);
 	const [pagination, setPagination] = useState(1);
 
 	const [{ data, loading }, trigger] = usePublicRequest({
-		url    : 'https://lens.dev.cogoport.io/list_mails',
+		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/list_mails`,
 		method : 'get',
 	}, { manual: true });
 

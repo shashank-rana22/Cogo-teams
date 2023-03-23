@@ -9,7 +9,7 @@ function useSendMail({
 	setBccArray = () => {},
 }) {
 	const [{ loading }, trigger] = usePublicRequest({
-		url    : 'https://lens.dev.cogoport.io/send_mail',
+		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/send_mail`,
 		method : 'POST',
 	}, { manual: true });
 
@@ -22,7 +22,10 @@ function useSendMail({
 		} catch (error) {
 			// console.log(error)
 		} finally {
-			setEmailState({});
+			setEmailState({
+				body    : '',
+				subject : '',
+			});
 			setRecipientArray([]);
 			setBccArray([]);
 			setShowMailModal(false);

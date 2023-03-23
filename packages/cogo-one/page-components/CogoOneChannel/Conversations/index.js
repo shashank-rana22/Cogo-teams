@@ -21,6 +21,9 @@ function Conversations({
 	setBccArray = () => {},
 	setRecipientArray = () => {},
 	setEmailState = () => {},
+	emailAddress = '',
+	// mailValue = '',
+	// setMailValue = () => { },
 }) {
 	return (
 		<div className={cl`${activeTab === 'mail' ? styles.mail_div : styles.container}`}>
@@ -44,6 +47,9 @@ function Conversations({
 					setBccArray={setBccArray}
 					setRecipientArray={setRecipientArray}
 					setEmailState={setEmailState}
+					emailAddress={emailAddress}
+					// mailValue={mailValue}
+					// setMailValue={setMailValue}
 				/>
 			)}
 		</div>

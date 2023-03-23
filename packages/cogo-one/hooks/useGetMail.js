@@ -1,9 +1,9 @@
 import { usePublicRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useListMailDetails({ activeMail = {} }) {
+function useListMailDetails({ activeMail = {}, emailAddress = '' }) {
 	const [{ data, loading }, trigger] = usePublicRequest({
-		url    : 'https://lens.dev.cogoport.io/get_mail',
+		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/get_mail`,
 		method : 'get',
 	}, { manual: true });
 
@@ -12,6 +12,7 @@ function useListMailDetails({ activeMail = {} }) {
 		try {
 			await trigger({
 				params: {
+					// email_address : emailAddress,
 					email_address : 'dineshkumar.s@cogoport.com',
 					message_id    : id,
 				},

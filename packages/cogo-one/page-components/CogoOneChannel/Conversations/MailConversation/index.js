@@ -17,9 +17,10 @@ function MailConversation({
 	setBccArray = () => {},
 	setRecipientArray = () => {},
 	setEmailState = () => {},
+	emailAddress = '',
 }) {
-	const { data = {}, loading } = useListMailDetails({ activeMail });
-	const { attachmentData = {}, attachmentLoading } = useGetMailAttachment({ activeMail });
+	const { data = {}, loading } = useListMailDetails({ activeMail, emailAddress });
+	const { attachmentData = {}, attachmentLoading } = useGetMailAttachment({ activeMail, emailAddress });
 	// console.log('attachmentData:', attachmentData);
 	const allAttachements = attachmentData?.value || [];
 	// console.log('allAttachements:', allAttachements);

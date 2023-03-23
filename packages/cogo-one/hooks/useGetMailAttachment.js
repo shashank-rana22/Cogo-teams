@@ -1,9 +1,9 @@
 import { usePublicRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useGetMailAttachment({ activeMail }) {
+function useGetMailAttachment({ activeMail = {}, emailAddress = '' }) {
 	const [{ data, loading }, trigger] = usePublicRequest({
-		url    : 'https://lens.dev.cogoport.io/get_attachments',
+		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/get_attachments`,
 		method : 'get',
 	}, { manual: true });
 
@@ -13,6 +13,7 @@ function useGetMailAttachment({ activeMail }) {
 		try {
 			await trigger({
 				params: {
+					// email_address : emailAddress,
 					email_address : 'dineshkumar.s@cogoport.com',
 					message_id    : id,
 				},

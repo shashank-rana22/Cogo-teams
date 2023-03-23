@@ -1,41 +1,38 @@
-/* eslint-disable max-len */
+// import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import MailDetails from '../../../../common/MailDetails';
 
-// import CogoportMail from './CogoportMail';
 import GmailOption from './GmailOptions';
-// import MailOption from './MailBoxes';
 import styles from './styles.module.css';
 
-function MailList({ setActiveMail = () => {}, activeMail }) {
+function MailList({ setActiveMail = () => {}, activeMail, emailAddress }) {
+	// const { emailAddress } = useSelector(({ profile }) => ({
+	// 	emailAddress: profile?.user?.email,
+	// }));
+
 	const [activeSelect, setActiveSelect] = useState('');
 	const [showContent, setShowContent] = useState(false);
-	const [mailValue, setMailValue] = useState('');
+	// const [mailValue, setMailValue] = useState('');
 
-	const handleClick = (val, email) => {
+	const handleClick = (val) => {
 		setActiveSelect(val);
-		setMailValue(email);
+		// setMailValue(email);
 		setShowContent(true);
 	};
 
-	// const MAIL_MAPPING = {
-
-	// }
-	const email = ['dinesh@c.com', 'rh@c.com'];
 	return (
 		<div className={styles.container}>
 			{!showContent ? (
-				<>
-					{email.map((item) => (
-						<GmailOption
-							handleClick={handleClick}
-							activeSelect={activeSelect}
-							showContent={showContent}
-							email={item}
-						/>
-					))}
-				</>
+			// <>
+			// 	{email.map((item) => (
+				<GmailOption
+					handleClick={handleClick}
+					activeSelect={activeSelect}
+					showContent={showContent}
+				/>
+			// 	))}
+			// </>
 			) : (
 				<MailDetails
 					activeSelect={activeSelect}
@@ -43,7 +40,7 @@ function MailList({ setActiveMail = () => {}, activeMail }) {
 					setActiveSelect={setActiveSelect}
 					setActiveMail={setActiveMail}
 					activeMail={activeMail}
-					senderMail={mailValue}
+					senderMail={emailAddress}
 				/>
 			)}
 		</div>

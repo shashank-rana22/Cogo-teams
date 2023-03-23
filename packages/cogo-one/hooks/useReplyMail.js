@@ -15,7 +15,7 @@ function useReplyMail({
 		forward   : 'forward_mail',
 	};
 	const [{ loading }, trigger] = usePublicRequest({
-		url    : `https://lens.dev.cogoport.io/${apiName[buttonType]}`,
+		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/${apiName[buttonType]}`,
 		method : 'POST',
 
 	}, { manual: true });
@@ -29,7 +29,10 @@ function useReplyMail({
 		} catch (error) {
 			// console.log(error)
 		} finally {
-			setEmailState({});
+			setEmailState({
+				body    : '',
+				subject : '',
+			});
 			setRecipientArray([]);
 			setBccArray([]);
 			setButtonType('');

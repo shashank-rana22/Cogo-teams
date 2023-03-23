@@ -43,6 +43,7 @@ function CogoOne() {
 	const [bccArray, setBccArray] = useState([]);
 	const [buttonType, setButtonType] = useState('');
 	const [showMailModal, setShowMailModal] = useState(false);
+	// const [mailValue, setMailValue] = useState('');
 	const [emailState, setEmailState] = useState({
 		subject : '',
 		body    : '',
@@ -53,9 +54,10 @@ function CogoOne() {
 
 	const firestore = getFirestore(app);
 
-	const { userRoleIds, userId } = useSelector(({ profile }) => ({
-		userRoleIds : profile.partner?.user_role_ids || [],
-		userId      : profile?.user?.id,
+	const { userRoleIds, userId, emailAddress } = useSelector(({ profile }) => ({
+		userRoleIds  : profile.partner?.user_role_ids || [],
+		userId       : profile?.user?.id,
+		emailAddress : profile?.user?.email,
 	}));
 
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
@@ -123,6 +125,7 @@ function CogoOne() {
 						buttonType={buttonType}
 						setShowMailModal={setShowMailModal}
 						setEmailState={setEmailState}
+						emailAddress={emailAddress}
 					/>
 					{activeTab !== 'mail' && (
 						<ProfileDetails
@@ -191,6 +194,7 @@ function CogoOne() {
 				setShowMailModal={setShowMailModal}
 				emailState={emailState}
 				setEmailState={setEmailState}
+				emailAddress={emailAddress}
 			/>
 
 			<div className={styles.chat_details_continer}>
