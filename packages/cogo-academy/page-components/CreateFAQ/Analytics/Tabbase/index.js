@@ -11,8 +11,6 @@ function Tabbase() {
 	const [activeTab, setActiveTab] = useState('By_Questions');
 	const props = useListFaqStats();
 
-	const { date, setDate } = props || {};
-
 	return (
 		<div>
 			<Tabs
@@ -28,14 +26,14 @@ function Tabbase() {
 					badge={props?.data?.question_stats?.no_of_questions}
 
 				>
-					<Questions props={props} date={date} setDate={setDate} />
+					<Questions {...props} />
 				</TabPanel>
 
 				<TabPanel
 					name="By_Users"
 					title="By Users"
 				>
-					<Users props={props} date={date} setDate={setDate} />
+					<Users {...props} />
 				</TabPanel>
 			</Tabs>
 		</div>

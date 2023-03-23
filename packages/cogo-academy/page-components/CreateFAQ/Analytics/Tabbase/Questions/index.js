@@ -4,10 +4,10 @@ import AllQuestionCardView from './AllQuestionCardView';
 import AllTopicCardView from './AllTopicCardView';
 import Filter from './Filter';
 
-function Questions({ props = {}, date = '', setDate = () => {} }) {
+function Questions(props) {
 	const [selectedItem, setSelectedItem] = useState('All_Questions');
 
-	const { refetchStats = () => {} } = props || {};
+	const { refetchStats = () => {}, date = {}, setDate = () => {} } = props || {};
 
 	useEffect(() => {
 		if (selectedItem === 'All_Questions') {

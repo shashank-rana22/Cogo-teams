@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 import ViewCards from './ViewCards';
 import ViewCardsList from './ViewCardsList';
 
-function AllUsers({ props = '' }) {
+function AllUsers(props) {
 	const {
 		active_audiences = [],
 		most_viewed_questions = [],
@@ -21,8 +21,8 @@ function AllUsers({ props = '' }) {
 		no_of_views = '',
 		answers_requested = '',
 		no_of_searches = '',
-
 	} = question_stats;
+
 	const [showQuestions, setShowQuestions] = useState(false);
 	return (
 		<div style={{ marginTop: '1rem', overflow: 'hidden' }}>
