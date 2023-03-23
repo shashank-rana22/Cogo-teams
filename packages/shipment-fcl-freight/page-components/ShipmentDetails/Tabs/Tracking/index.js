@@ -7,7 +7,7 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function Tracking({ shipmentData = {} }) {
-	const shipmentType = shipmentData?.shipment_type || 'fcl_freight';
+	const shipmentType = shipmentData?.shipment_type;
 	const [containerNo, setContainerNo] = useState('');
 
 	const { loading, data: list } = useGetSaasContainerSubscription({
