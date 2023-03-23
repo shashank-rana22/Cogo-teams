@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useGetGstList({ registration_number }) {
+function useGetGstList({ registrationNumber }) {
 	const [{ data }, trigger] = useRequest({
 		url    : '/get_cogoscore_tax_numbers',
 		method : 'GET',
@@ -12,14 +12,14 @@ function useGetGstList({ registration_number }) {
 			try {
 				await trigger({
 					params: {
-						registration_number,
+						registration_number: registrationNumber,
 					},
 				});
 			} catch (err) {
 				console.log(err);
 			}
 		})();
-	}, [trigger, registration_number]);
+	}, [trigger, registrationNumber]);
 
 	return {
 		data,

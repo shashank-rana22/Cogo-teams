@@ -24,23 +24,27 @@ function Details({ data = [], setShowForm = () => {} }) {
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.addtional_container}>
-				{data.map((item) => {
-					const { sop_detail : { category, remarks, document = [] } } = item || {};
-					return (
-						<div className={styles.addtional_data}>
-							<LabelValue label="Category" value={startCase(category)} />
-							<LabelValue label="Comment" value={remarks} />
+			{!data?.length ? <div className={styles.no_data}>No data available</div>
 
-							<LabelValue
-								label="Document"
-								customClass={styles.document_value}
-								value={documentValue({ vals: document })}
-							/>
-						</div>
-					);
-				})}
-			</div>
+				: (
+					<div className={styles.addtional_container}>
+						{data.map((item) => {
+							const { sop_detail : { category, remarks, document = [] } } = item || {};
+							return (
+								<div className={styles.addtional_data}>
+									<LabelValue label="Category" value={startCase(category)} />
+									<LabelValue label="Comment" value={remarks} />
+
+									<LabelValue
+										label="Document"
+										customClass={styles.document_value}
+										value={documentValue({ vals: document })}
+									/>
+								</div>
+							);
+						})}
+					</div>
+				)}
 			<div className={styles.add}>
 				<Button onClick={() => setShowForm(true)} size="sm" themeType="accent">Add Comments</Button>
 			</div>

@@ -59,7 +59,7 @@ function RenderAddRateForm({
 				errors={errors}
 			/>
 			{errors.service_provider_id && (
-				<span className={styles.errors}>
+				<span>
 					{errors.service_provider_id.message}
 				</span>
 			)}
@@ -78,6 +78,7 @@ function RenderAddRateForm({
 						options={currencyOptions}
 						rules={{ required: { value: true, message: 'Currency is required' } }}
 					/>
+					{errors.currency && <span>This field is required</span>}
 				</div>
 				<div className={styles.input_container}>
 					<label htmlFor="buy_price">Buy price</label>
@@ -87,6 +88,7 @@ function RenderAddRateForm({
 						size="sm"
 						rules={{ required: { value: true, message: 'Buy Price is required' } }}
 					/>
+					{errors.buy_price && <span>This field is required</span>}
 				</div>
 			</div>
 
@@ -100,6 +102,7 @@ function RenderAddRateForm({
 						options={unitOptions}
 						rules={{ required: { value: true, message: 'Unit is required' } }}
 					/>
+					{errors.unit && <span>This field is required</span>}
 				</div>
 
 				<div className={styles.input_container}>

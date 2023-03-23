@@ -1,46 +1,51 @@
 import { Checkbox } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { useForm, useFieldArray } from '@cogoport/forms';
 // import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { useState } from 'react';
 
+import useGetBusiness from '../hooks/useGetBusiness';
+
 import AddressForm from './AddressForm';
 import AsyncGstListController from './AsyncGstListController';
+import styles from './styles.module.css';
 
 // const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_ids;
 
 function CreateNewBillingAddress({
-	// setShowComponent = () => {},
-	// organizationDetails = {},
-	// refetch = () => {},
-	// invoiceToTradePartyDetails,
-	// setInvoiceToTradePartyDetails,
+	setShowComponent = () => {},
+	organizationDetails = {},
+	refetch = () => {},
+	invoiceToTradePartyDetails,
+	setInvoiceToTradePartyDetails,
 }) {
 	const [isUnderGst, setIsUnderGst] = useState(false);
 	const [gstNumber, setGstNumber] = useState('');
-	// const {
-	// 	id = '',
-	// 	registration_number: organizationRegistrationNumber = '',
-	// 	country_id: organizationCountryId = '',
-	// } = organizationDetails;
-
-	// const {
-	// 	registrationNumber = '',
-	// 	countryId = '',
-	// 	tradePartyId = '',
-	// } = invoiceToTradePartyDetails;
-
-	// const countryIdForAddressForm = countryId || organizationCountryId;
+	const {
+		id = '',
+		registration_number: organizationRegistrationNumber = '',
+		country_id: organizationCountryId = '',
+	} = organizationDetails;
 
 	const {
-		fields,
+		registrationNumber = '',
+		countryId = '',
+		tradePartyId = '',
+	} = invoiceToTradePartyDetails;
+
+	const countryIdForAddressForm = countryId || organizationCountryId;
+
+	const {
 		handleSubmit,
 		control,
 		register,
+		setValue,
 		formState: { errors },
 	} = useForm();
 
+	const { data } = useGetBusiness({ gstNumber, setValue });
+
 	return (
-		<div>
+		<div className={styles.container}>
 			<Checkbox
 				label="Not Registered Under GST Law"
 				value="isAddressRegisteredUnderGst"
@@ -48,20 +53,47 @@ function CreateNewBillingAddress({
 				onChange={() => setIsUnderGst(!isUnderGst)}
 			/>
 
+			{isUnderGst && (
+				<div className={styles.text}>
+					Addresses not registered under GST will be added in
+					&quot;Other Addresses&quot; for the organisation and&nbsp;
+					<b>will not be available for GST Invoicing</b>
+					.
+				</div>
+			)}
+
 			{isUnderGst ? (
-				<AddressForm isUnderGst={isUnderGst} />
+				<AddressForm
+					isUnderGst={isUnderGst}
+					control={control}
+					useFieldArray={useFieldArray}
+					register={register}
+					handleSubmit={handleSubmit}
+					errors={errors}
+				/>
 			)
 				: (
-					<div>
-						<label>Billing Address</label>
+					<>
+						<h3>Billing Address</h3>
 
 						<AsyncGstListController
 							gstNumber={gstNumber}
 							setGstNumber={setGstNumber}
+							registrationNumber={registrationNumber}
 						/>
 
-						<AddressForm isUnderGst={isUnderGst} />
-					</div>
+						{gstNumber ? (
+							<AddressForm
+								isUnderGst={isUnderGst}
+								control={control}
+								useFieldArray={useFieldArray}
+								register={register}
+								handleSubmit={handleSubmit}
+								errors={errors}
+							/>
+						) : null}
+
+					</>
 				)}
 
 			{/* <AddressForm

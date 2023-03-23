@@ -59,24 +59,25 @@ function Details({ data = [], setShowForm = () => {} }) {
 			</div>
 
 			<div>
-				{data.map((item) => {
-					const mapping_data = mapping(item?.sop_detail || {});
+				{!data?.length ? <div className={styles.no_data}>No data available</div>
+					: data.map((item) => {
+						const mapping_data = mapping(item?.sop_detail || {});
 
-					return (
-						<div className={styles.each_pref}>
-							{INVOICE_COLUMNS.map((col) => (
-								<div className={styles.columns}>
-									{col.map((key) => (
-										<LabelValue
-											label={key}
-											value={mapping_data[key]}
-										/>
-									))}
-								</div>
-							))}
-						</div>
-					);
-				})}
+						return (
+							<div className={styles.each_pref}>
+								{INVOICE_COLUMNS.map((col) => (
+									<div className={styles.columns}>
+										{col.map((key) => (
+											<LabelValue
+												label={key}
+												value={mapping_data[key]}
+											/>
+										))}
+									</div>
+								))}
+							</div>
+						);
+					})}
 			</div>
 
 		</div>

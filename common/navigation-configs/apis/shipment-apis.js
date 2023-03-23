@@ -1322,6 +1322,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
+	{
+		api          : 'list_stakeholders',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_business',
+		access_type  : 'private',
+		service_name : 'business',
+	},
 ];
 
 export default apis;
