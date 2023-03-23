@@ -13,9 +13,9 @@ const VIEW_CARD_MAPPING = {
 function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] }) {
 	const truncate = (str) => (str?.length > 28 ? `${startCase(str.substring(0, 26))}...` : startCase(str));
 	const VIEW_CARD_ICON_MAPPING = {
-		viewed_question   : <IcMEyeopen style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} />,
-		liked_question    : <IcMLike style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} />,
-		disliked_question : <IcMDislike style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} />,
+		viewed_question   : <IcMEyeopen className={styles.icon} />,
+		liked_question    : <IcMLike className={styles.icon} />,
+		disliked_question : <IcMDislike className={styles.icon} />,
 	};
 	function icon(value, item) {
 		const key = VIEW_CARD_MAPPING[value];
