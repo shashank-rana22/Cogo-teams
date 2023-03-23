@@ -4,6 +4,9 @@ import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import SupplierReallocation from '../../../../../../../../common/AdditionalServices/components/SupplierReallocation';
+import EditParameters from '../../../../../../../../common/EditParameters';
+import useGetEditParams from '../../../../../../../../hooks/useGetEditParams';
+import controls from '../controls.json';
 
 import CancelShipment from './CancelShipment';
 import styles from './styles.module.css';
@@ -44,7 +47,8 @@ function EditCancelService({
 	const [showConsolEdit, setShowConsolEdit] = useState(false);
 	const [showContainerEdit, setShowContainerEdit] = useState(false);
 	const [showParamEdit, setShowParamEdit] = useState(false);
-	// const { showEditButton, newFilteredControls, boxesToShow, isRoleAllowed } = useGetEditParams({ services: serviceList, controls, serviceData });
+
+	const { showEditButton, newFilteredControls, boxesToShow } = useGetEditParams({ services: serviceList, controls, serviceData });
 
 	// const [{ shipmentData = {} }] = useContext(ShipmentDetailContext);
 
@@ -57,9 +61,9 @@ function EditCancelService({
 		user_data: profile || {},
 	}));
 
-	const showEditParams = !(
-		shipmentData?.shipment_type === 'air_freight'
-		&& service_type !== 'air_freight_service'
+	const showEditParams = (
+		shipmentData?.shipment_type === 'fcl_freight'
+		&& service_type === 'fcl_freight_service'
 	);
 
 	const showEditContainerButton =		shipmentData?.shipment_type === 'rail_domestic_freight'
@@ -122,23 +126,23 @@ function EditCancelService({
 				/>
 				) : null}
 
-			{/* {showEditButton && showEditParams ? ( */}
-			<div style={{ width: '100%' }}>
-				{canCancelService || editSupplier ? <div className={styles.line} /> : null}
+			{!showEditButton && showEditParams ? (
+				<div style={{ width: '100%' }}>
+					{canCancelService || editSupplier ? <div className={styles.line} /> : null}
 
-				<div
-					role="button"
-					tabIndex="0"
-					className={styles.text}
-					onClick={() => setShowParamEdit(true)}
-				>
-					Edit Params
+					<div
+						role="button"
+						tabIndex="0"
+						className={styles.text}
+						onClick={() => setShowParamEdit(true)}
+					>
+						Edit Params
+					</div>
 				</div>
-			</div>
-			{/* ): null} */}
+			) : null}
 			{/* {showConsolEditButton ? ( */}
 
-			<div style={{ width: '100%' }}>
+			{/* <div style={{ width: '100%' }}>
 				{canCancelService || editSupplier ? <div className={styles.line} /> : null}
 
 				<div
@@ -150,8 +154,8 @@ function EditCancelService({
 					Edit Params
 
 				</div>
-			</div>
-			 {/* ) : null} */}
+			</div> */}
+			{/* ) : null} */}
 			{showEditContainerButton ? (
 				<div style={{ width: '100%' }}>
 					{canCancelService || editSupplier ? <div className={styles.line} /> : null}
@@ -186,15 +190,14 @@ function EditCancelService({
 					show={showParamEdit}
 					onClose={() => setShowParamEdit(false)}
 				>
-					{/* <EditParameters
+					<EditParameters
 						shipmentData={shipmentData}
 						boxesToShow={boxesToShow}
 						onCancel={() => setShowParamEdit(false)}
 						newFilteredControls={newFilteredControls}
 						services={serviceList}
 						refetchServices={refetchServices}
-					/> */}
-					hii3
+					/>
 				</Modal>
 			) : null}
 			{showConsolEdit ? (
