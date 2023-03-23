@@ -81,3 +81,9 @@
 		min-height: 100vh;
 	}
 }
+
+.preview_title_container {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}

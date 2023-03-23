@@ -161,6 +161,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'update_announcement',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'get_announcement',
 			access_type  : 'private',
 			service_name : 'cogo_academy',

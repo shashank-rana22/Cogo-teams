@@ -7,7 +7,12 @@ import PreviewImages from './PreviewImages';
 import PreviewVideos from './PreviewVideos';
 import styles from './styles.module.css';
 
-function Preview({ formValues = {}, announcement_id = '', previewLoading = false }) {
+function Preview({
+	formValues = {},
+	announcement_id = '',
+	previewLoading = false,
+	editorValue = '',
+}) {
 	const [videos, setVideos] = useState([]);
 	const [files, setFiles] = useState([]);
 	const [images, setImages] = useState([]);
@@ -35,12 +40,12 @@ function Preview({ formValues = {}, announcement_id = '', previewLoading = false
 		);
 	}
 
-	const { content } = formValues;
-
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.description}>{content}</div>
+			<div className={styles.description}>
+				<div dangerouslySetInnerHTML={{ __html: editorValue }} />
+			</div>
 			<PreviewVideos videos={videos} />
 			<PreviewImages images={images} />
 			<PreviewFiles files={files} />

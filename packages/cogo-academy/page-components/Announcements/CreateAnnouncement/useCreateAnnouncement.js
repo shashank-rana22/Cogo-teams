@@ -7,12 +7,21 @@ import { useState, useEffect } from 'react';
 
 import getFormControls from './controls/get-form-controls';
 
+let RichTextEditor;
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require, import/no-unresolved
+	RichTextEditor = require('react-rte').default;
+}
+
 const useCreateAnnouncements = ({
 	defaultValues = {},
 	announcement_id = '',
 	actionType,
 	listAudienceLoading = false,
+	setShowSubmitModal = () => {},
 }) => {
+	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
+
 	const router = useRouter();
 	const prev_audiences = defaultValues?.faq_audiences?.map((item) => item.id);
 
@@ -37,6 +46,7 @@ const useCreateAnnouncements = ({
 			validity_end = '',
 			faq_audiences = [],
 			hot_duration,
+			content,
 			is_important = false,
 		} = defaultValues;
 		const validity = {
@@ -45,7 +55,7 @@ const useCreateAnnouncements = ({
 		};
 		const audience_ids = [...faq_audiences.map((item) => item.id)];
 		setValue('title', defaultValues?.title);
-		setValue('content', defaultValues?.content);
+		setEditorValue(RichTextEditor?.createValueFromString((content || ''), 'html'));
 		setValue('announcement_type', defaultValues?.announcement_type);
 		setValue('redirection_url', defaultValues?.redirection_url);
 		setValue('is_important', is_important);
@@ -61,7 +71,6 @@ const useCreateAnnouncements = ({
 		const {
 			title,
 			announcement_type,
-			content,
 			validity,
 			redirection_url,
 			is_important,
@@ -76,13 +85,13 @@ const useCreateAnnouncements = ({
 			const payload = {
 				title,
 				announcement_type,
-				content,
+				content      : editorValue.toString('html'),
 				validity_start,
 				validity_end,
 				hot_duration,
 				redirection_url,
 				is_important,
-				audience_ids: new_audiences,
+				audience_ids : new_audiences,
 				inactive_audience_ids,
 			};
 			const response = await updateTrigger(
@@ -93,6 +102,8 @@ const useCreateAnnouncements = ({
 				return;
 			}
 
+			setShowSubmitModal(false);
+
 			Toast.success('Announcement updated successfully...');
 			router.back();
 		} catch (err) {
@@ -102,14 +113,11 @@ const useCreateAnnouncements = ({
 	};
 
 	const onSubmit = async (values) => {
-		if (!values) return;
-
 		const videos = values.videos?.filter((item) => item.video_item).map((item) => item.video_item);
 
 		const {
 			title,
 			announcement_type,
-			content,
 			validity,
 			redirection_url,
 			is_important,
@@ -142,7 +150,7 @@ const useCreateAnnouncements = ({
 			const payload = {
 				title,
 				announcement_type,
-				content,
+				content: editorValue.toString('html'),
 				validity_start,
 				validity_end,
 				hot_duration,
@@ -153,12 +161,16 @@ const useCreateAnnouncements = ({
 			};
 
 			const response = await trigger({ data: payload });
+
 			if (response.hasError) {
 				Toast.error(response?.message || 'Something went wrong');
 				return;
 			}
 
+			setShowSubmitModal(false);
+
 			Toast.success('Announcement created successfully...');
+
 			router.back();
 		} catch (err) {
 			Toast.error(err?.message || 'Something went wrong');
@@ -178,6 +190,9 @@ const useCreateAnnouncements = ({
 		setShowPreview,
 		loading,
 		setValue,
+		editorValue,
+		setEditorValue,
+		RichTextEditor,
 	};
 };
 

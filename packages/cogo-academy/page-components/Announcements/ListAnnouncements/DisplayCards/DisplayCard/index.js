@@ -30,6 +30,8 @@ function DisplayCard({
 }) {
 	const router = useRouter();
 
+	const { content } = accordianData;
+
 	const [showModal, setShowModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -55,11 +57,18 @@ function DisplayCard({
 
 	const displayValues = (label, values) => {
 		if (label === 'Announcement Type') {
-			return <Pill color="green">{values}</Pill>;
+			return <Pill color="yellow">{values}</Pill>;
 		}
 
 		return <div className={styles.value}>{values}</div>;
 	};
+
+	const getPreviewTitle = () => (
+		<div className={styles.preview_title_container}>
+			<div>{accordianData.title}</div>
+			<Pill color="yellow">{ANNOUNCEMENT_TYPE_MAPPING[data?.announcement_type]}</Pill>
+		</div>
+	);
 
 	return (
 		<div className={styles.container}>
@@ -141,12 +150,13 @@ function DisplayCard({
 					onClose={() => setShowModal(false)}
 
 				>
-					<Modal.Header title={accordianData.title} />
+					<Modal.Header title={getPreviewTitle()} />
 					<Modal.Body className={styles.modal_body}>
 						<Preview
 							formValues={accordianData}
 							announcement_id={accordianData?.id}
 							previewLoading={loadingSingleAnnouncement}
+							editorValue={content}
 						/>
 					</Modal.Body>
 				</Modal>

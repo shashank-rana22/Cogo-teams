@@ -10,7 +10,7 @@ import {
 
 import styles from './styles.module.css';
 
-const required = ['title', 'validity', 'hot_duration', 'announcement_type', 'audience_ids'];
+const required = ['title', 'validity', 'announcement_type', 'audience_ids'];
 
 function FormElement({ name, field, control, options, errors, value = false }) {
 	const finalFields = {
@@ -61,7 +61,7 @@ function FormElement({ name, field, control, options, errors, value = false }) {
 				</div>
 			)}
 
-			<div>
+			<div className={finalFields.type === 'checkbox' ? styles.checkbox : ''}>
 				<Element {...props} />
 			</div>
 

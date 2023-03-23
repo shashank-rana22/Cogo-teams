@@ -33,11 +33,10 @@ const getFormControls = () => [
 		rules: { required: 'Required' },
 	},
 	{
-		name        : 'content',
-		label       : 'Description',
-		type        : 'textarea',
-		size        : 'sm',
-		placeholder : 'Description about the post',
+		name  : 'content',
+		label : 'Description',
+		type  : 'textarea',
+
 	},
 	{
 		name          : 'videos',
@@ -95,6 +94,11 @@ const getFormControls = () => [
 		rules           : { required: 'Required' },
 	},
 	{
+		name  : 'is_important',
+		label : 'Is It Important?',
+		type  : 'checkbox',
+	},
+	{
 		name        : 'hot_duration',
 		label       : 'Hot Duration',
 		type        : 'select',
@@ -114,12 +118,6 @@ const getFormControls = () => [
 				value : 7,
 			},
 		],
-		rules: { required: 'Required' },
-	},
-	{
-		name  : 'is_important',
-		label : 'Is It Important?',
-		type  : 'checkbox',
 	},
 ];
 
