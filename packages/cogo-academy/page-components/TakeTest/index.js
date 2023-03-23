@@ -46,8 +46,6 @@ function TakeTest() {
 
 	const [activeState, setActiveState] = useState('');
 
-	const [startTiming, setStartTiming] = useState();
-
 	useEffect(() => {
 		setActiveState(test_user_mapping_state);
 	}, [setActiveState, test_user_mapping_state]);
@@ -82,8 +80,6 @@ function TakeTest() {
 				setActiveState={setActiveState}
 				loading={loading}
 				testData={testData}
-				startTiming={startTiming}
-				setStartTiming={setStartTiming}
 				page={page}
 			/>
 		</div>

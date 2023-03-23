@@ -7,13 +7,12 @@ import RightSection from './components/RightSection';
 import useFetchQuestionsList from './hooks/useFetchQuestionList';
 import styles from './styles.module.css';
 
-function Ongoing({ testData, startTiming, page }) {
+function Ongoing({ testData, page }) {
 	const router = useRouter();
 
 	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
 
-	const duration = testData?.test_duration;
-	const { loading, data, fetchQuestions } = useFetchQuestionsList({ currentQuestion, startTiming, duration });
+	const { loading, data, fetchQuestions } = useFetchQuestionsList({ currentQuestion });
 
 	const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -118,6 +117,7 @@ function Ongoing({ testData, startTiming, page }) {
 		);
 	}
 
+	// console.log('data', new Date());
 	return ((
 		<div className={styles.main_container}>
 			<div className={styles.left_container}>
@@ -127,7 +127,6 @@ function Ongoing({ testData, startTiming, page }) {
 					loading={loading}
 					currentQuestion={currentQuestion}
 					setCurrentQuestion={setCurrentQuestion}
-					startTiming={startTiming}
 					fetchQuestions={fetchQuestions}
 				/>
 			</div>
