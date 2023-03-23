@@ -15,13 +15,7 @@ function GraphUI() {
 		<>
 			<Filters dateRange={dateRange} setDateRange={setDateRange} />
 			<div
-				style={{
-					display         : 'flex',
-					margin          : '-12px 0 20px 0',
-					borderRadius    : '10px',
-					height          : '400px',
-					backgroundColor : '#FFF',
-				}}
+				className={styles.date}
 			>
 				<div className={styles.line_chart}>
 					<LineGraph graphData={graphData} />
