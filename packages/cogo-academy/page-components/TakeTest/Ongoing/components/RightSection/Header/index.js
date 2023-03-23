@@ -1,24 +1,14 @@
 import { IcMExpand } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 
+import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
+
 import styles from './styles.module.css';
 
 function Header() {
 	const { profile: { user } } = useSelector((state) => state);
 
 	const { name } = user;
-
-	const handleMinimizeTest = () => {
-		if (document.fullscreen) {
-			if (document?.exitFullscreen) {
-				document?.exitFullscreen();
-			} else if (document?.webkitExitFullscreen) { /* Safari */
-				document?.webkitExitFullscreen();
-			} else if (document?.msExitFullscreen) { /* IE11 */
-				document?.msExitFullscreen();
-			}
-		}
-	};
 
 	return (
 		<div className={styles.main_container}>
