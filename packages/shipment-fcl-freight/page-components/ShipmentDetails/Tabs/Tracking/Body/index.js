@@ -48,7 +48,6 @@ function Body({ list = [], loading = false }) {
 			<TrackingMap
 				routesLoading={routesLoading}
 				points={oceanPoints}
-				shipmentType={shipmentType}
 			/>
 		</div>
 	);
