@@ -107,7 +107,13 @@ function KamData(props) {
 				}
 			</div>
 
-			{kamLevel && (
+			{
+				kamLevel === 0 && (
+					<div className={styles.level_zero}>Click on KAM level card to view leaderboard overview</div>
+				)
+			}
+
+			{kamLevel !== 0 && (
 				<>
 					<div className={styles.overview_container}>
 						<div className={styles.overview_header}>
@@ -118,7 +124,11 @@ function KamData(props) {
 							{/* //!using dummy data for now */}
 							{
 								overview_data.map((data) => (
-									<OverviewCard data={data} leaderboardLoading={leaderboardLoading} />
+									<OverviewCard
+										key={data.title}
+										data={data}
+										leaderboardLoading={leaderboardLoading}
+									/>
 								))
 							}
 						</div>

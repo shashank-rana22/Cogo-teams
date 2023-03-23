@@ -1,5 +1,7 @@
 import { Tooltip, cl } from '@cogoport/components';
-import { snakeCase } from '@cogoport/utils';
+import { isEmpty, snakeCase } from '@cogoport/utils';
+
+import FormatData from '../../../../utils/formatData';
 
 import IconMapping from './IconMapping';
 import styles from './styles.module.css';
@@ -10,6 +12,10 @@ function RightSideNav({
 	openNewTab,
 	loading,
 	disableQuickActions = false,
+	documents_count = {},
+	activeMessageCard,
+	activeVoiceCard,
+	activeTab,
 }) {
 	const handleClick = (val) => {
 		if (val === 'spot_search') {
@@ -23,10 +29,22 @@ function RightSideNav({
 
 	const disabledSpotSearch = loading || disableQuickActions;
 
+	const { userId = '', userMobile = '', leadUserId = '' } = FormatData({
+		activeMessageCard,
+		activeVoiceCard,
+		activeTab,
+	});
+
+	const checkConditions = isEmpty(userId) && isEmpty(userMobile) && isEmpty(leadUserId);
+
 	return (
 		<div className={styles.right_container}>
 			{IconMapping.map((item) => {
 				const { icon, name, content } = item;
+
+				const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
+				&& documents_count > 0 && !checkConditions;
+
 				return (
 					<div
 						key={snakeCase(name)}
@@ -42,7 +60,16 @@ function RightSideNav({
 						onClick={() => handleClick(name)}
 					>
 						<Tooltip content={content} placement="left">
-							<div>{icon}</div>
+							{showDocumentCount && (
+								<div className={styles.count}>
+									{documents_count > 100 ? '99+' : (
+										documents_count
+									)}
+								</div>
+							)}
+							<div>
+								{icon}
+							</div>
 						</Tooltip>
 					</div>
 				);
@@ -50,4 +77,5 @@ function RightSideNav({
 		</div>
 	);
 }
+
 export default RightSideNav;

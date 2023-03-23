@@ -3,6 +3,7 @@ import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import usePostProfileMasteryBadge from '../../../hooks/usePostProfileMasteryBadge';
@@ -56,7 +57,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<p className={styles.heading}>Badges List</p>
+					<p className={styles.heading}>Badges</p>
 					<Button
 						size="md"
 						themeType="secondary"
@@ -73,11 +74,11 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 		);
 	}
 
-	if (!badgesGot && !badgesNotGot) {
+	if (isEmpty(badgesGot) && isEmpty(badgesNotGot)) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<p className={styles.heading}>Badges List</p>
+					<p className={styles.heading}>Badges</p>
 					<Button
 						size="md"
 						themeType="secondary"
@@ -97,7 +98,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<p className={styles.heading}>Badges List</p>
+				<p className={styles.heading}>Badges</p>
 				<Button
 					size="md"
 					themeType="secondary"
@@ -122,8 +123,10 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 													<img src={item.image_url} alt="badge icon" />
 												</div>
 												<div className={styles.stars}>
-													{[1, 2, 3].fill('').map(() => (
-														<IcCStar width={10} stroke="#FFDF33" />
+													{[1, 2, 3].map((itm) => (
+														<div key={itm}>
+															<IcCStar width={10} stroke="#FFDF33" />
+														</div>
 													))}
 												</div>
 											</Tooltip>
@@ -144,8 +147,10 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 													<img src={item.image_url} alt="badge icon" />
 												</div>
 												<div className={styles.stars}>
-													{[1, 2, 3].fill('').map(() => (
-														<IcCStar width={10} stroke="#FFDF33" />
+													{[1, 2, 3].map((itm) => (
+														<div key={itm}>
+															<IcCStar width={10} stroke="#FFDF33" />
+														</div>
 													))}
 												</div>
 											</Tooltip>

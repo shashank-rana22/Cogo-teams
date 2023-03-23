@@ -1331,7 +1331,7 @@ const navigationMappingAdmin = {
 				as            : '/bl_do-collection-release',
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
-				possible_apis : apis.bl_do_collection_release,
+				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
 
 			},
 			{
@@ -2060,7 +2060,7 @@ const navigationMappingAdmin = {
 		options     : [
 			{
 				key           : 'analytics_dashboard-management',
-				title         : 'Analytics Dashboard Management',
+				title         : 'Dashboard Management',
 				href          : '/analytics-dashboard-management',
 				as            : '/analytics-dashboard-management',
 				type          : 'link',
@@ -2069,7 +2069,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'analytics_dashboard-view',
-				title         : 'Analytics Dashboard',
+				title         : 'Dashboard',
 				href          : '/analytics-dashboard',
 				as            : '/analytics-dashboard',
 				type          : 'link',
