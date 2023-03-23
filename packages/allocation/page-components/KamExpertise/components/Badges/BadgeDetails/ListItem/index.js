@@ -40,6 +40,7 @@ function ListItem(props) {
 	return (
 		<div>
 			{badgeList.map(
+				// todo: what if data.expertise_configuration_type is or null? do null handling
 				(data, index) => (data.expertise_configuration_type === 'badge_configuration' ? (
 					<MasteryListItem
 						data={data}

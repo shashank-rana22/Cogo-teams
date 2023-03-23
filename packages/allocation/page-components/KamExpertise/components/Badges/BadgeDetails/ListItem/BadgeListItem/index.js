@@ -13,6 +13,7 @@ function BadgeListItem(props) {
 		setToggleScreen('create_badge');
 	};
 
+	// todo: destructure
 	const MEDAL_DETAILS_MAPPING = {
 		bronze: {
 			name      : 'bronze',
@@ -67,13 +68,13 @@ function BadgeListItem(props) {
 						<div style={{ paddingRight: '4px' }}>
 							Last Modified :
 							{' '}
-							{data.updated_at ? format(data.updated_at, 'yyyy-MMM-dd') : '___'}
+							{data.updated_at ? format(data.updated_at, 'dd MMMM yyyy') : '_'}
 						</div>
 
 						<div>
 							Last Modified By :
 							{' '}
-							{data.modified_by ? data.modified_by : '___'}
+							{data.modified_by ? data.modified_by : '_'}
 						</div>
 					</div>
 				</div>

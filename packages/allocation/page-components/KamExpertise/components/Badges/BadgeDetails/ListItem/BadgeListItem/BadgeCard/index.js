@@ -12,6 +12,7 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 
 	const [openModal, setOpenModal] = useState(false);
 
+	// todo: move openModal state and onClose function inside hook
 	const onClose = () => {
 		setOpenModal((pv) => !pv);
 	};
@@ -52,7 +53,7 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 							{' '}
 						</div>
 						<div className={styles.score}>
-							{score || '___'}
+							{score || '_'}
 							{' '}
 							Score
 						</div>

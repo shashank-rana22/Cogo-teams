@@ -14,8 +14,8 @@ function Child(props) {
 		showDeleteButton = true,
 		noDeleteButtonTill = 0,
 		disabled = false,
+		error = '',
 	} = props;
-
 	return (
 		<div className={styles.content}>
 			{controls.map((controlItem) => {
@@ -35,7 +35,9 @@ function Child(props) {
 							name={`${name}.${index}.${controlItem.name}`}
 						/>
 
-						{/* // Todo errors */}
+						<div className={styles.error_message}>
+							{error?.[controlItem?.name]?.message}
+						</div>
 					</div>
 				);
 			})}

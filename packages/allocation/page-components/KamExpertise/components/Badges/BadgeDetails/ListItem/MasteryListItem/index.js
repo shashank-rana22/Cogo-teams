@@ -9,14 +9,17 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 		setToggleScreen('create_mastery');
 	};
 
+	// todo: fix lint, destructure data
+
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.header}>
-				<p>
-					#
-					{index + 1}
-				</p>
+				{/* todo: why used p tag?? */}
+				{/* <p> */}
+				#
+				{index + 1}
+				{/* </p> */}
 				<Button themeType="secondary" onClick={handleEdit}>Edit</Button>
 			</div>
 
@@ -38,12 +41,12 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 						<div>
 							Last Modified :
 							{' '}
-							{data.created_at ? format(data.created_at, 'yyyy-MMM-dd') : '___'}
+							{data.created_at ? format(data.created_at, 'dd MMMM yy') : '_'}
 						</div>
 						<div>
 							Last Modified By:
 							{' '}
-							{data.last_modified_by ? data.last_modified_by : '___'}
+							{data.last_modified_by ? data.last_modified_by : '_'}
 						</div>
 					</div>
 				</div>
@@ -53,14 +56,12 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 					<div className={styles.rules}>
 						<div className={styles.rule_heading}>Rules</div>
 						<span>Mastery in</span>
-						{
-                        data.mastery_in?.map((item) => (
-	<span className={styles.pill}>
-		<Pill color="#edd7a9">{item}</Pill>
+						{data.mastery_in?.map((item) => (
+							<span className={styles.pill}>
+								<Pill color="#edd7a9">{item}</Pill>
 
-	</span>
-                        ))
-                    }
+							</span>
+						))}
 					</div>
 
 					<div className={styles.badge}>

@@ -36,6 +36,8 @@ function CreateBadge(props) {
 		control, watch, handleSubmit, formState: { errors },
 	} = formProps;
 
+	// Bad spacing use font size instead of h2
+
 	return (
 		<div>
 			<section className={styles.container}>

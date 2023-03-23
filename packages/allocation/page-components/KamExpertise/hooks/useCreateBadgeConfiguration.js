@@ -27,7 +27,6 @@ function useCreateBadgeConfiguration(props) {
 			Bronze_value : bronze_details?.score,
 			Silver_value : silver_details?.score,
 			Gold_value   : gold_details?.score,
-			// ToDo : image url -> handle using previous data
 		},
 	});
 
@@ -95,7 +94,7 @@ function useCreateBadgeConfiguration(props) {
 
 				listRefetch();
 			} catch (error) {
-				Toast.error(getApiErrorString(error.response?.data));
+				Toast.error(getApiErrorString(error?.response?.data));
 			}
 		} else {
 			Toast.error('Provide Scores in proper order: Bronze < Silver < Gold');
