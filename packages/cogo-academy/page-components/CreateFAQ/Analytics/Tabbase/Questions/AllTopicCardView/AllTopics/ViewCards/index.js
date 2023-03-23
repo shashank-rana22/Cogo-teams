@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
