@@ -36,17 +36,17 @@ function useGraphData() {
 
 	const pie_outer_data = [
 		{
-			// id    : 'Not Requested',
-			// label : 'Not Requested',
-			value : Math.round((total_search_result_not_available_percentage - REQUESTED) * 100) / 100,
-			color : 'hsl(255, 100%, 100%)',
-		},
-		{
 			id    : 'Requested',
 			label : 'Requested',
-			value : Math.round((total_search_result_not_available_percentage / 100)
-					* total_requested_questions_percentage * 100) / 100,
-			color: 'hsla(234, 46%, 87%, 1)',
+			value : total_requested_questions_percentage,
+			color : 'hsla(234, 46%, 87%, 1)',
+		},
+
+		{
+			id    : 'Not Requested',
+			label : 'Not Requested',
+			value : 100 - total_requested_questions_percentage,
+			color : 'hsl(255, 100%, 100%)',
 		},
 
 	];

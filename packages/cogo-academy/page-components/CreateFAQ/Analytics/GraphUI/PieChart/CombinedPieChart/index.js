@@ -3,6 +3,7 @@ import { ResponsivePie } from '@cogoport/charts/pie';
 import styles from './styles.module.css';
 
 function CombinedPieChart({ pie_outer_data, pie_data }) {
+	const RESPECTED_ANGLE = (pie_data?.[1]?.value || 0) * 3.6 || 0;
 	return (
 		<div style={{ width: '80%', height: '80%', position: 'relative' }}>
 			<div className={styles.inner_pie}>
@@ -89,6 +90,8 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 					}}
 					innerRadius={0.9}
 					padAngle={0}
+					startAngle={360}
+					endAngle={360 - RESPECTED_ANGLE}
 					cornerRadius={0}
 					activeOuterRadiusOffset={12}
 					borderWidth={0}

@@ -2,7 +2,6 @@
 	z-index: 1000000;
 	display: flex;
 	width: fit-content;
-	padding: 5px 16px 2px 10rem;
 
 	input {
 		z-index: 1000000;
@@ -20,12 +19,12 @@
 		border: solid 1px #e0e0e0 !important;
 	}
 
-	padding-right: 1%;
+	padding-right: 12px;
 }
 
 .top_content {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	padding-top: 12px;
 	margin-top: 16px;
 	background: #fff;
