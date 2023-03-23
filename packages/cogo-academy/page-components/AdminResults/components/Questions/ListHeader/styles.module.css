@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 12px 24px;
+	font-weight: 600;
+	background: #fff;
+	border-bottom: 1px solid #f8f2e7;
+}
+
+.small_section {
+	width: 15%;
+	margin-right: 16px;
+	text-align: center;
+}
+
+.section {
+	width: inherit;
+}
+
+.icon {
+	width: 2%;
+}
