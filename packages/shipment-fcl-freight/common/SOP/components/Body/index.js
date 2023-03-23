@@ -1,10 +1,17 @@
+import { Loader } from '@cogoport/components';
+
 import getInstructionData from '../../helpers/getInstructionData';
 import Additional from '../Additional';
 import Card from '../Card';
 import Document from '../Document';
 import InvoicePref from '../InvoicePref';
 
-function Body({ data = {}, shipment_id = '', organization_id = '', getProcedureTrigger = () => {}, services = [] }) {
+import styles from './styles.module.css';
+
+function Body({
+	data = {}, shipment_id = '', organization_id = '', getProcedureTrigger = () => {},
+	auditsTrigger = () => {}, services = [], loading = false,
+}) {
 	const { operating_procedure:{ id:procedure_id = '' } = {} } = data;
 	const {
 		invoice_preference = [],
@@ -16,30 +23,39 @@ function Body({ data = {}, shipment_id = '', organization_id = '', getProcedureT
 
 	return (
 		<>
-			<Card label="Document Handling" defaultOpen={document_handling_preference.length}>
-				<Document
-					data={document_handling_preference}
-					shipment_ids={shipment_ids}
-					getProcedureTrigger={getProcedureTrigger}
-				/>
-			</Card>
+			{loading && <div className={styles.loader}><Loader /></div>}
 
-			<Card label="Invoice Preferences" defaultOpen={invoice_preference.length}>
-				<InvoicePref
-					data={invoice_preference}
-					shipment_ids={shipment_ids}
-					getProcedureTrigger={getProcedureTrigger}
-					services={services}
-				/>
-			</Card>
+			{!loading
+		&& (
+			<>
+				<Card label="Document Handling" defaultOpen={document_handling_preference.length}>
+					<Document
+						data={document_handling_preference}
+						shipment_ids={shipment_ids}
+						getProcedureTrigger={getProcedureTrigger}
+						auditsTrigger={auditsTrigger}
+					/>
+				</Card>
 
-			<Card label="Additional Information" defaultOpen={additional_preference.length}>
-				<Additional
-					data={additional_preference}
-					getProcedureTrigger={getProcedureTrigger}
-					shipment_ids={shipment_ids}
-				/>
-			</Card>
+				<Card label="Invoice Preferences" defaultOpen={invoice_preference.length}>
+					<InvoicePref
+						data={invoice_preference}
+						shipment_ids={shipment_ids}
+						getProcedureTrigger={getProcedureTrigger}
+						services={services}
+						auditsTrigger={auditsTrigger}
+					/>
+				</Card>
+
+				<Card label="Additional Information" defaultOpen={additional_preference.length}>
+					<Additional
+						data={additional_preference}
+						getProcedureTrigger={getProcedureTrigger}
+						shipment_ids={shipment_ids}
+					/>
+				</Card>
+			</>
+		)}
 		</>
 	);
 }

@@ -962,20 +962,23 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api         : 'create_chat_message',
-		access_type : 'private',
+		api          : 'create_chat_message',
+		access_type  : 'private',
+		service_name : 'chat',
 	},
 	{
-		api         : 'list_chat_channels',
-		access_type : 'private',
+		api          : 'list_chat_channels',
+		access_type  : 'private',
+		service_name : 'chat',
 	},
 	{
 		api         : 'delete_chat_message',
 		access_type : 'private',
 	},
 	{
-		api         : 'update_chat_message',
-		access_type : 'private',
+		api          : 'update_chat_message',
+		access_type  : 'private',
+		service_name : 'chat',
 	},
 	{
 		api         : 'get_chat_channel',
@@ -986,8 +989,10 @@ const apis = [
 		access_type : 'private',
 	},
 	{
-		api         : 'update_chat_channel_seen',
-		access_type : 'private',
+		api          : 'update_chat_channel_seen',
+		access_type  : 'private',
+		service_name : 'chat',
+
 	},
 	{
 		api          : 'get_all_exchange_rates',
@@ -1321,6 +1326,16 @@ const apis = [
 		api          : 'get_cogoscore_tax_numbers',
 		access_type  : 'private',
 		service_name : 'organization',
+	},
+	{
+		api          : 'list_stakeholders',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_business',
+		access_type  : 'private',
+		service_name : 'business',
 	},
 ];
 
