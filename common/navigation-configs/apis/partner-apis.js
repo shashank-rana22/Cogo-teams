@@ -7438,6 +7438,18 @@ const partner = {
 			module      : 'Bpr',
 			feature     : 'Bpr',
 		},
+		{
+			api         : 'get_payments_settlement',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'list_organization_users',
+			access_type : 'private',
+			module      : 'Outstanding',
+			feature     : 'Outstanding',
+		},
 	],
 	incident_controller: [
 		{

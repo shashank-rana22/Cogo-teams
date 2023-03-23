@@ -56,7 +56,22 @@ const useGetOutstandingCard = (organizationId) => {
 		{ manual: true },
 	);
 
-	const { date, search, orgId, ...restFilters } = invoiceFilters || {};
+	const [{ data, loading }, downloadApi] = useRequestBf(
+		{
+			url     : '/sales/report/download/outstanding/list',
+			method  : 'get',
+			authKey : 'get_sales_report_download_outstanding_list',
+		},
+		{ manual: true },
+	);
+
+	const { date, search, dueDate, invoiceDate, orgId, ...restFilters } = invoiceFilters || {};
+
+	const dueDateStart = dueDate && format(dueDate?.startDate, 'yyyy-MM-dd', {}, false);
+	const dueDateEnd = dueDate && format(dueDate?.endDate, 'yyyy-MM-dd', {}, false);
+
+	const invoiceDateStart = invoiceDate && format(invoiceDate?.startDate, 'yyyy-MM-dd', {}, false);
+	const invoiceDateEnd = invoiceDate && format(invoiceDate?.endDate, 'yyyy-MM-dd', {}, false);
 
 	useEffect(() => {
 		debounceQuery(search);
@@ -67,29 +82,38 @@ const useGetOutstandingCard = (organizationId) => {
 			await listApi({
 				params: {
 					...(restFilters || {}),
-					startDate:
-						date
-						&& format(
-							date?.startDate,
-							'yyyy-MM-dd 00:00:00',
-							{},
-							false,
-						),
-					endDate:
-						date
-						&& format(
-							date?.endDate,
-							'yyyy-MM-dd 00:00:00',
-							{},
-							false,
-						),
 					query : query !== '' ? query : undefined,
 					role  : userData.id,
 					orgId,
+					dueDateStart,
+					dueDateEnd,
+					invoiceDateStart,
+					invoiceDateEnd,
 				},
 			});
 		} catch (e) {
 			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed'); }
+		}
+	};
+
+	const sendReport = async () => {
+		console.log('hello');
+
+		try {
+			await downloadApi({
+				params: {
+					...(restFilters || {}),
+					dueDateStart,
+					dueDateEnd,
+					invoiceDateStart,
+					invoiceDateEnd,
+					query       : query !== '' ? query : undefined,
+					performedBy : userData.id,
+				},
+			});
+			Toast.success('Report Sent Successfully');
+		} catch (e) {
+			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed to Send Report'); }
 		}
 	};
 
@@ -98,23 +122,27 @@ const useGetOutstandingCard = (organizationId) => {
 	}, [
 		JSON.stringify(restFilters),
 		query,
-		date,
+		dueDate,
+		invoiceDate,
 	]);
 
 	const clearInvoiceFilters = () => {
 		setinvoiceFilters((prev) => ({
 			...prev,
-			page          : 1,
-			cogoEntity    : undefined,
-			invoiceNumber : undefined,
-			zone          : undefined,
-			date          : undefined,
-			invoiceStatus : undefined,
-			search        : undefined,
-			status        : undefined,
-			services      : undefined,
-			migrated      : undefined,
-			shipmentType  : undefined,
+			page             : 1,
+			invoiceNumber    : undefined,
+			invoiceStatus    : undefined,
+			search           : undefined,
+			status           : undefined,
+			services         : undefined,
+			migrated         : undefined,
+			shipmentType     : undefined,
+			dueDateStart     : undefined,
+			dueDateEnd       : undefined,
+			invoiceDateStart : undefined,
+			invoiceDateEnd   : undefined,
+			invoiceDate      : undefined,
+			dueDate          : undefined,
 		}));
 	};
 
@@ -125,6 +153,7 @@ const useGetOutstandingCard = (organizationId) => {
 		getOrganizationInvoices,
 		invoiceLoading: listLoading,
 		clearInvoiceFilters,
+		sendReport,
 	};
 };
 

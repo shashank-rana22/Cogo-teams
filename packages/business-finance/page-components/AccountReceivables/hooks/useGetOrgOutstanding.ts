@@ -17,7 +17,7 @@ const useGetOrgOutstanding = ({ formFilters }) => {
 	};
 	const [queryKey, setQueryKey] = useState('q');
 	const [orderBy, setOrderBy] = useState({
-		key   : 'totalOutstandingInvoiceLedgerAmount',
+		key   : 'totalOutstandingLedgerAmount',
 		order : 'Desc',
 		label : 'Total Outstanding Amount',
 	});

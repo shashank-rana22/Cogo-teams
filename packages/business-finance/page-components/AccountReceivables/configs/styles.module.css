@@ -36,3 +36,16 @@
 .width {
 	width: 14px;
 }
+
+.flex{
+display: flex;
+}
+
+.IconDiv {
+	display: flex;
+	width: 15px;
+	flex-direction: column;
+	align-items: center;
+	margin-left: 8px;
+	cursor: pointer;
+}

@@ -90,40 +90,48 @@ export const SEARCH_OPTIONS = [
 export const SORTBY_OPTION = [
 	{
 		label : 'Not Due',
-		value : 'amount_not_due',
+		value : 'notDueLedgerAmount',
+	},
+	{
+		label : 'Today',
+		value : 'todayLedgerAmount',
 	},
 	{
 		label : '1-30 Days',
-		value : 'amount_1_30',
+		value : 'thirtyLedgerAmount',
 	},
 	{
 		label : '31-60 Days',
-		value : 'amount_31_60',
+		value : 'sixtyLedgerAmount',
 	},
 	{
 		label : '61-90 Days',
-		value : 'amount_61_90',
+		value : 'ninetyLedgerAmount',
 	},
 	{
 		label : '91-180 Days',
-		value : 'amount_91_180',
+		value : 'oneEightyLedgerAmount',
 	},
 	{
 		label : '181-365 Days',
-		value : 'amount_181_365',
+		value : 'threeSixtyFiveLedgerAmount',
 	},
-	{ label: '365+ Days', value: 'amount_365' },
+	{ label: '365+ Days', value: 'threeSixtyFivePlusLedgerAmount' },
 	{
 		label : 'Total Outstanding Amount',
-		value : 'total_outstanding_amount',
+		value : 'totalOutstandingLedgerAmount',
 	},
 	{
-		label : 'Open Invoice Amount',
-		value : 'open_invoice_amount',
+		label : 'Credit Note',
+		value : 'creditNoteLedgerAmount',
+	},
+	{
+		label : 'Debit Note',
+		value : 'debitNoteLedgerAmount',
 	},
 	{
 		label : 'On Account Amount',
-		value : 'on_account_amount',
+		value : 'onAccountPaymentLedgerAmount',
 	},
 ];
 
@@ -212,4 +220,17 @@ export const StatsKeyMapping = [
 		valueKey  : 'threeSixtyFivePlus',
 		textColor : '#cb6464',
 	},
+];
+
+export const UTILIZATION_STATUS = [
+	{ label: 'UTILIZED', value: 'UTILIZED' },
+	{ label: 'UNUTILIZED', value: 'UNUTILIZED' },
+	{ label: 'PARTIALLY UTILIZED', value: 'PARTIAL_UTILIZED' },
+];
+
+export const ACCOUNT_TYPE = [
+	{ label: 'All', value: 'All' },
+	{ label: 'On Account Payment', value: 'REC' },
+	{ label: 'Credit Note', value: 'PCN' },
+	{ label: 'Invoice', value: 'SINV' },
 ];

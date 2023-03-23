@@ -21,11 +21,10 @@ function InvoiceTable({ data }) {
 		invoiceLoading,
 		setinvoiceFilters,
 		getOrganizationInvoices,
+		sendReport,
 	} = useGetOutstandingCard(organizationId);
 
 	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
-
-	console.log('invoiceData', listData);
 
 	const columns = completedColumn(getOrganizationInvoices);
 	return (
@@ -53,7 +52,7 @@ function InvoiceTable({ data }) {
 						<Button
 							size="sm"
 							style={{ marginRight: '8px' }}
-							// onClick={sendReport}
+							onClick={() => { sendReport(); }}
 						>
 							send Report
 

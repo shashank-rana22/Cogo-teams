@@ -35,7 +35,7 @@ const invoiceStatus = {
 
 const completedColumn = (refetch) => [
 	{
-		Header   : <div className={styles.name}>Name</div>,
+		Header   : 'Name',
 		id       : 'name',
 		accessor : (row) => (
 

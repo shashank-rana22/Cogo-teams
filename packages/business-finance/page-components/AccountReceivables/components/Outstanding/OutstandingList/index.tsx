@@ -121,7 +121,7 @@ function OutstandingList({ item }) {
 					<div className={styles.SubOrgNameConatiner}>
 						<div style={{ display: 'flex' }}>
 							<div className={styles.styledName}>
-								OM CARGO LOGISTICS
+								{businessName}
 							</div>
 							{' '}
 							{collectionPartyType.length > 1 ? (

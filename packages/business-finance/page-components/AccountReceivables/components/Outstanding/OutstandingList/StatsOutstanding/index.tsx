@@ -8,23 +8,30 @@ import styles from './styles.module.css';
 
 function StatsOutstanding({ item }) {
 	const {
-		openInvoice = [],
+		openInvoice = {},
 		onAccountPayment = [],
 		totalOutstanding = [],
 		openInvoiceCount = 0,
-		openInvoiceLedgerAmount = 0,
 		onAccountPaymentInvoiceLedgerAmount = 0,
 		onAccountPaymentInvoiceCount = 0,
 		totalOutstandingInvoiceLedgerAmount = 0,
 		totalOutstandingInvoiceCount = 0,
 		totalCreditNoteAmount = 0,
 		creditNoteCount = 0,
+		ageingBucket = {},
 	} = item || {};
 
 	const customPadding = openInvoice.length > 2 ? '8px 10px' : '10px';
 
-	const getAmount = (key, value = 'Amount') => item[`${key}${value}`];
+	const { invoiceBucket = [] } = openInvoice;
 
+	const { creditNote = {} } = ageingBucket;
+
+	const getAmount = (key, value) => {
+		if (value === 'Amount') return ageingBucket[key].ledgerAmount;
+		if (value === 'Count') return ageingBucket[key].ledgerCount;
+		return ageingBucket[key].ledgerCurrency;
+	};
 	return (
 		<div className={styles.Container}>
 			<div className={styles.InvoicesWrapper}>
@@ -40,7 +47,7 @@ function StatsOutstanding({ item }) {
 										<div className={styles.Heading}>Open Invoices</div>
 										<div className={styles.HR} />
 										<div style={{ marginTop: '5px' }}>
-											{openInvoice.map((invoice) => (
+											{openInvoice?.invoiceBucket.map((invoice) => (
 												<div
 													className={styles.Amount}
 													style={{ fontWeight: 600, fontSize: '11px' }}
@@ -73,8 +80,8 @@ function StatsOutstanding({ item }) {
 						</div>
 						<div className={styles.Amount} style={{ fontWeight: 500, fontSize: '12px' }}>
 							{getFormattedPrice(
-								openInvoiceLedgerAmount || 0,
-								'INR',
+								openInvoice.ledgerAmount || 0,
+								openInvoice.ledgerCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
@@ -87,14 +94,43 @@ function StatsOutstanding({ item }) {
 								)
 							</div>
 						</div>
+						<div style={{ marginTop: '5px' }}>
+							{invoiceBucket.map((openInvoiceAmount) => (
+								<div>
+									{openInvoiceAmount.amount !== 0
+
+									&& (
+										<div
+											className={styles.Amount}
+											style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
+										>
+											{getFormattedPrice(
+												openInvoiceAmount?.amount || 0,
+												openInvoiceAmount?.currency,
+												{
+													style                 : 'currency',
+													currencyDisplay       : 'code',
+													maximumFractionDigits : 0,
+												},
+											)}
+											<div className={styles.Count}>
+												(
+												{openInvoiceAmount?.invoiceCount}
+												)
+											</div>
+										</div>
+									)}
+								</div>
+							))}
+						</div>
 						<div className={styles.CN}>
 							<div className={styles.StyledHeading}>
 								Credit Notes
 							</div>
 							<div className={styles.Amount} style={{ fontWeight: 500, fontSize: '12px' }}>
 								{getFormattedPrice(
-									totalCreditNoteAmount || 0,
-									'INR',
+									creditNote.ledgerAmount || 0,
+									creditNote.ledgerCurrency,
 									{
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -103,10 +139,42 @@ function StatsOutstanding({ item }) {
 								)}
 								<div className={styles.Count}>
 									(
-									{creditNoteCount}
+									{creditNote.ledgerCount}
 									)
 								</div>
 							</div>
+						</div>
+						<div style={{ marginTop: '5px' }}>
+							{creditNote?.invoiceBucket.map((CreditNoteAmount) => (
+
+								<div>
+
+									{CreditNoteAmount.amount !== 0
+
+										&& 											(
+											<div
+												className={styles.Amount}
+												style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
+											>
+												{getFormattedPrice(
+													CreditNoteAmount?.amount || 0,
+													CreditNoteAmount?.currency,
+													{
+														style                 : 'currency',
+														currencyDisplay       : 'code',
+														maximumFractionDigits : 0,
+													},
+												)}
+												<div className={styles.Count}>
+													(
+													{CreditNoteAmount?.invoiceCount}
+													)
+												</div>
+											</div>
+										)}
+								</div>
+
+							))}
 						</div>
 					</div>
 					<div className={styles.RightContainer}>
@@ -129,8 +197,8 @@ function StatsOutstanding({ item }) {
 									}}
 								>
 									{getFormattedPrice(
-										getAmount(val.valueKey) || 0,
-										'INR',
+										getAmount(val.valueKey, 'Amount') || 0,
+										getAmount(val.valueKey, 'Currency'),
 										{
 											style                 : 'currency',
 											currencyDisplay       : 'code',
@@ -138,6 +206,39 @@ function StatsOutstanding({ item }) {
 										},
 									)}
 								</div>
+								<div style={{ marginTop: '5px' }}>
+									{ageingBucket[val.valueKey]?.invoiceBucket.map((CreditNoteAmount) => (
+
+										<div>
+
+											{CreditNoteAmount.amount !== 0
+
+										&& 											(
+											<div
+												className={styles.Amount}
+												style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
+											>
+												{getFormattedPrice(
+													CreditNoteAmount?.amount || 0,
+													CreditNoteAmount?.currency,
+													{
+														style                 : 'currency',
+														currencyDisplay       : 'code',
+														maximumFractionDigits : 0,
+													},
+												)}
+												<div className={styles.Count}>
+													(
+													{CreditNoteAmount?.invoiceCount}
+													)
+												</div>
+											</div>
+										)}
+										</div>
+
+									))}
+								</div>
+
 							</div>
 						))}
 					</div>
@@ -170,7 +271,7 @@ function StatsOutstanding({ item }) {
 						</div>
 					</div>
 					<div style={{ marginTop: '5px' }}>
-						{totalOutstanding.map((outstanding) => (
+						{totalOutstanding?.invoiceBucket?.map((outstanding) => (
 							<div
 								className={styles.Amount}
 								style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
@@ -221,7 +322,7 @@ function StatsOutstanding({ item }) {
 						</div>
 					</div>
 					<div style={{ marginTop: '5px' }}>
-						{onAccountPayment.map((onAccount) => (
+						{onAccountPayment?.invoiceBucket.map((onAccount) => (
 							<div
 								className={styles.Amount}
 								style={{
@@ -229,7 +330,6 @@ function StatsOutstanding({ item }) {
 									fontWeight : '600',
 									fontSize   : '11px',
 								}}
-
 							>
 								{getFormattedPrice(
 									onAccount?.amount || 0,

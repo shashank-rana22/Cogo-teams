@@ -1,7 +1,7 @@
 import { Table } from '@cogoport/components';
 import React from 'react';
 
-import EmptyState from '../../../commons/StyledTable/EmptyState';
+import EmptyState from '../../../commons/EmptyStateDocs';
 import { TableProps } from '../Interfaces/index';
 
 import styles from './styles.module.css';

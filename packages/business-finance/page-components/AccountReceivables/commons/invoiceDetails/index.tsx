@@ -110,43 +110,43 @@ function InvoiceDetails({ item }) {
 											<div className={styles.supplier_data_body}>
 												Invoice Amount -
 												<span style={{ marginLeft: '4px' }}>
-													{getFormattedPrice({
-														amount   : data?.summary?.grandTotal,
-														currency : 'INR',
-														options  : {
+													{getFormattedPrice(
+														data?.summary?.grandTotal,
+														'INR',
+														{
 															style                 : 'currency',
 															currencyDisplay       : 'code',
 															maximumFractionDigits : 0,
 														},
-													})}
+													)}
 												</span>
 											</div>
 											<div className={styles.supplier_data_body}>
 												Ledger Amount -
 												<span style={{ marginLeft: '4px' }}>
-													{getFormattedPrice({
-														amount   : data?.summary?.ledgerTotal,
-														currency : 'INR',
-														options  : {
+													{getFormattedPrice(
+														data?.summary?.ledgerTotal,
+														'INR',
+														{
 															style                 : 'currency',
 															currencyDisplay       : 'code',
 															maximumFractionDigits : 0,
 														},
-													})}
+													)}
 												</span>
 											</div>
 											<div className={styles.supplier_data_body}>
 												Balance Amount -
 												<span style={{ marginLeft: '4px' }}>
-													{getFormattedPrice({
-														amount   : data?.summary?.balanceAmount,
-														currency : 'INR',
-														options  : {
+													{getFormattedPrice(
+														data?.summary?.balanceAmount,
+														'INR',
+														{
 															style                 : 'currency',
 															currencyDisplay       : 'code',
 															maximumFractionDigits : 0,
 														},
-													})}
+													)}
 												</span>
 											</div>
 										</div>
