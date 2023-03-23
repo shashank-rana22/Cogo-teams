@@ -21,6 +21,7 @@ interface BillInterface {
 	approvedByUser?:any,
 	updatedAt?:any,
 	payableTds?:any,
+	billDocumentUrl?:string,
 }
 
 function ShowMore({ id }) {
@@ -67,6 +68,7 @@ function ShowMore({ id }) {
 										const {
 											billNumber, grandTotal, paidAmount = 0, payableTds = 0,
 											dueDate, billDate, createdDate, status, approvedByUser, updatedAt,
+											billDocumentUrl = '',
 										} = bill || {};
 										const { name = '' } = approvedByUser || {};
 
@@ -75,7 +77,15 @@ function ShowMore({ id }) {
 												<div className={styles.section}>
 													<div>Invoice No.</div>
 													<div className={`${styles.element} ${styles.link}`}>
-														<a href="#">{billNumber || '-'}</a>
+														<a
+															href={billDocumentUrl}
+															style={{ color: '#f68b21' }}
+															target="_blank"
+															rel="noreferrer"
+														>
+															{billNumber || '-'}
+
+														</a>
 													</div>
 												</div>
 												<div className={styles.section}>

@@ -30,6 +30,7 @@ interface ItemDataInterface {
 	status?: string,
 	approvedByUser?:{ name?:string },
 	billNumber?:string | number,
+	billDocumentUrl?:string,
 	startDate?:Date,
 	endDate?:Date,
 	maxPayoutAllowed?:number | string,
@@ -323,13 +324,20 @@ function ExpenseComponent() {
 			);
 		},
 		getInvoiceNumber: (itemData:ItemDataInterface) => {
-			const { billNumber } = itemData || {};
+			const { billNumber, billDocumentUrl = '' } = itemData || {};
 			return (
 				<div>
 					{ billNumber ? (
 						<div className={styles.link}>
-							{' '}
-							<a href="#">{billNumber}</a>
+							<a
+								href={billDocumentUrl}
+								target="_blank"
+								rel="noreferrer"
+								style={{ color: '#F68B21' }}
+							>
+								{billNumber}
+
+							</a>
 						</div>
 					) : '-' }
 				</div>

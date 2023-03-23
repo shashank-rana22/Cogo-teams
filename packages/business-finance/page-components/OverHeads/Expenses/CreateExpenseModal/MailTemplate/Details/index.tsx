@@ -55,7 +55,7 @@ function Details({
 			</div>
 
 			<div className={styles.textarea}>
-				<Textarea
+				{/* <Textarea
 					className={styles.text}
 					name="bodyText"
 					size="md"
@@ -64,7 +64,9 @@ function Details({
 						...mailData,
 						mailText: e,
 					})}
-				/>
+				/> */}
+				A new expense approval request has been placed for your response.
+				Please find the attached invoice for the same.
 			</div>
 
 			<div>

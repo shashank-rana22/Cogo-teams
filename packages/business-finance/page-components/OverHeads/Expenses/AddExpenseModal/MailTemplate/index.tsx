@@ -46,12 +46,6 @@ function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowD
 					<Details text={stakeholderEmail || 'N/A'} />
 				</div>
 			</div>
-			<div className={styles.section}>
-				<div className={styles.keys}>CC :</div>
-				<div className={styles.recipient_values}>
-					<Details text="e.g.Arjun Dhupe, Mayur Chamaria" />
-				</div>
-			</div>
 
 			<div className={styles.heading_subject}>Email subject</div>
 			<div className={styles.subject}>
