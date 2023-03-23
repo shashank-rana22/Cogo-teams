@@ -11,6 +11,10 @@ function FAQs() {
 
 	const ballRef = useRef();
 
+	function handleIconDragStart(event) {
+		event.stopPropagation();
+	}
+
 	function onDragHandler(ev) {
 		const shiftX = ev.clientX;
 
@@ -38,6 +42,7 @@ function FAQs() {
 						alt="faq-icon"
 						draggable="false"
 						className={styles.FAQimage}
+						onDragStart={handleIconDragStart}
 					/>
 				</div>
 			</div>
