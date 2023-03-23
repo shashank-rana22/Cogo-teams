@@ -1,4 +1,4 @@
-import { Pagination } from '@cogoport/components';
+import { Button, Pagination } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -26,6 +26,20 @@ function AddedQuestions(props) {
 	} = props;
 
 	const router = useRouter();
+
+	const onClickUpload = () => {
+		router.push(
+			'/learning/faq/create/upload?type=questions',
+			'/learning/faq/create/upload?type=questions',
+		);
+	};
+
+	const onClickQuestion = () => {
+		router.push(
+			'/learning/faq/create/question',
+			'/learning/faq/create/question',
+		);
+	};
 
 	const renderTable = () => {
 		const onClick = () => {
@@ -97,6 +111,22 @@ function AddedQuestions(props) {
 				activeList={activeList}
 				setActiveList={setActiveList}
 			/>
+
+			<div className={styles.button_container}>
+
+				<Button type="button" style={{ marginLeft: 8 }} onClick={onClickUpload}>
+					Upload in Bulk
+				</Button>
+
+				<Button
+					type="button"
+					style={{ marginLeft: 8 }}
+					onClick={onClickQuestion}
+					themeType="secondary"
+				>
+					Add Question
+				</Button>
+			</div>
 
 			{renderTable()}
 		</div>

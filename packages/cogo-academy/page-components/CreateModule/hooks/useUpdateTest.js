@@ -56,7 +56,7 @@ function useUpdateTest() {
 					},
 				});
 
-				router.push('/learning/test-module');
+				router.push('/learning?activeTab=test_module');
 				Toast.success('Updated Successfully');
 			} else {
 				await trigger({
