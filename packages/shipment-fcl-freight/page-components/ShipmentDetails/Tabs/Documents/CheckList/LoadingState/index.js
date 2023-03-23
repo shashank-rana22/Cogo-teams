@@ -10,7 +10,7 @@ const LoadingState = () => [...Array(6)].map((v, idx) => (
 		<VerticleLine zIndex={idx} isLast={idx === 5} />
 		<div className={styles.main}>
 			<div className={styles.heading}>
-				<Placeholder width="240px" height="32px" />
+				<Placeholder width="1200px" height="40px" />
 			</div>
 			<div className={styles.gap}>
 				<Placeholder height="50px" />
