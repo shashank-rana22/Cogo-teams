@@ -9,7 +9,7 @@ function BadgeListItem(props) {
 
 	const {
 		bronze_details = {}, silver_details = {},
-		gold_details = {}, badge_name = '_', description = '_', updated_at, modified_by = '_',
+		gold_details = {}, badge_name = '_', description = '_', updated_at, created_by = {},
 	} = data;
 
 	const handleEdit = () => {
@@ -76,7 +76,7 @@ function BadgeListItem(props) {
 						<div>
 							Last Modified By :
 							{' '}
-							{modified_by}
+							{created_by?.name}
 						</div>
 					</div>
 				</div>

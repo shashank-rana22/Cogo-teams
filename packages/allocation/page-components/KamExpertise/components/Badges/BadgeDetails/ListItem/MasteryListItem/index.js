@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData }) {
 	const {
 		badge_name = '_', description = '_',
-		created_at, last_modified_by = '_',
+		created_at, created_by = {},
 		mastery_in, badge_details = [],
 	} = data;
 
@@ -55,7 +55,7 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 						<div>
 							Last Modified By:
 							{' '}
-							{last_modified_by}
+							{created_by?.name}
 						</div>
 					</div>
 				</div>

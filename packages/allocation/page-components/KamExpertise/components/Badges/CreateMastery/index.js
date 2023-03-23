@@ -13,6 +13,7 @@ function CreateMastery(props) {
 		listRefetch,
 	} = props;
 
+	const { updated_at, created_by = {} } = masteryItemData;
 	const {
 		formProps,
 		getAddMasteryControls,
@@ -45,15 +46,13 @@ function CreateMastery(props) {
 								>
 									Last Modified :
 									{' '}
-									{masteryItemData.updated_at
-										? format(masteryItemData.updated_at, 'dd MMMM yyyy') : '_'}
+									{updated_at ? format(updated_at, 'dd MMMM yyyy') : '_'}
 								</p>
 
 								<p className={styles.text_styles}>
 									Last Modified By :
 									{' '}
-									{masteryItemData.modified_by
-										? masteryItemData.modified_by : '_'}
+									{created_by?.name}
 								</p>
 
 							</div>
