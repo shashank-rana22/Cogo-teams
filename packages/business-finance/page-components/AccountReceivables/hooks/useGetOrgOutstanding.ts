@@ -3,8 +3,14 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
+interface Outstanding {
+	page?:number,
+	pageLimit?:number,
+	search?:string,
+}
+
 const useGetOrgOutstanding = ({ formFilters }) => {
-	const [outStandingFilters, setoutStandingFilters] = useState({
+	const [outStandingFilters, setoutStandingFilters] = useState<Outstanding>({
 		page      : 1,
 		pageLimit : 10,
 	});
@@ -42,7 +48,7 @@ const useGetOrgOutstanding = ({ formFilters }) => {
 		debounceQuery(search);
 	}, [search]);
 
-	const refetch = (p) => {
+	const refetch = (p:any) => {
 		const { key, order } = orderBy || {};
 		try {
 			trigger({
