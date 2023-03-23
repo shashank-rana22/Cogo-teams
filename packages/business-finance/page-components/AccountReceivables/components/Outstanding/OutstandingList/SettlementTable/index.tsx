@@ -65,11 +65,6 @@ function SettlementTable({ data }) {
 			<StyledTable
 				data={list}
 				columns={SettlementList({
-					settlementFilters,
-					setSettlementFilters,
-					setOrderBy,
-					sortStyleAsc,
-					sortStyleDesc,
 					setActive,
 					getHistoryChild,
 				})}

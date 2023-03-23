@@ -41,7 +41,6 @@ function StatsOutstanding({ item }) {
 							OPEN INVOICES
 							{' '}
 							<Tooltip
-								theme="light"
 								content={(
 									<div className={styles.info_content}>
 										<div className={styles.heading}>Open Invoices</div>

@@ -27,14 +27,11 @@ function PopoverTags({
 			<div className={styles.main_div}>
 				<Popover
 					placement="left"
-					animation="scale"
-					interactive
 					render={content}
 					className={styles.filters_popover}
 				>
 					<div className={styles.icon_wrapper}>
 						<IcMLcl
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hiearchy.svg"
 							onClick={() => handleClick(salesAgent?.id)}
 						/>
 					</div>
@@ -54,14 +51,11 @@ function PopoverTags({
 			<div className={styles.main_div}>
 				<Popover
 					placement="left"
-					animation="scale"
-					interactive
 					render={content}
 					className={styles.filters_popover}
 				>
 					<div className={styles.icon_wrapper}>
 						<IcMLcl
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hiearchy.svg"
 							onClick={() => handleClick(salesAgent?.id)}
 						/>
 					</div>
@@ -80,15 +74,11 @@ function PopoverTags({
 
 			<div className={styles.main_div}>
 				<Popover
-					theme="light"
 					render={content}
 					placement="left"
-					animation="scale"
-					interactive
 				>
 					<div className={styles.icon_wrapper}>
 						<IcMLcl
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hiearchy.svg"
 							onClick={() => handleClick(creditController?.id)}
 						/>
 					</div>
