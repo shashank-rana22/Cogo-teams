@@ -65,14 +65,14 @@ function QuestionsAndDistribution({ data, control, errors, loading, setValue }) 
 			),
 		},
 		{
-			Header   : 'APPLICABLE QUESTIONS',
+			Header   : 'AVAILABLE QUESTIONS',
 			id       : 'd',
 			accessor : ({ non_case_study_question_count = 0 }) => (
 				<section>{non_case_study_question_count}</section>
 			),
 		},
 		{
-			Header   : 'APPLICABLE CASES',
+			Header   : 'AVAILABLE CASES',
 			id       : 'e',
 			accessor : ({
 				case_study_question_count

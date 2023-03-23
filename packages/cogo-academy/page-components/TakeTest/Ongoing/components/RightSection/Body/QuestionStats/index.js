@@ -24,12 +24,16 @@ const STATS_MAPPING = {
 };
 
 function QuestionStats({ data = [] }) {
+	let total_count = 0;
 	return (
 		<div className={styles.container}>
 			{Object.values(STATS_MAPPING).map((stats) => {
 				const { label, color, key } = stats;
+				const count = key === 'not_viewed'
+					? data.total_questions - total_count
+					: data?.data?.filter((item) => item.answer_state === key).length;
 
-				const count = data?.data?.filter((item) => item.answer_state === key).length;
+				total_count += Number(count);
 
 				return (
 					<div className={styles.stats_container}>

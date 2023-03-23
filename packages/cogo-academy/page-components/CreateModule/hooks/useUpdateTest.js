@@ -12,7 +12,7 @@ function useUpdateTest() {
 	const updateTest = async ({ test_id, values = {}, fetchList, type = 'edit', status = '' }) => {
 		try {
 			if (type === 'edit') {
-				const { test_duration, cut_off_marks, maximum_attempts, name, test_validity } = values;
+				const { test_duration, cut_off_marks, maximum_attempts, name, test_validity, guidelines } = values;
 
 				const testDetailsObj = {
 					test_duration,
@@ -21,6 +21,7 @@ function useUpdateTest() {
 					name,
 					validity_start : test_validity.startDate,
 					validity_end   : test_validity.endDate,
+					guidelines     : guidelines.map((obj) => obj.instruction),
 				};
 
 				const set_wise_distribution = Object.entries(values)
@@ -31,6 +32,7 @@ function useUpdateTest() {
 							'maximum_attempts',
 							'name',
 							'test_validity',
+							'guidelines',
 						].includes(key),
 					)
 					.map(([key, value]) => {
