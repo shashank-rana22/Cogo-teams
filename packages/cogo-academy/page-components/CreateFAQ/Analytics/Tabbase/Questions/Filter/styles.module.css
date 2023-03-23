@@ -12,6 +12,7 @@
 .top_content {
 	display: flex;
 	justify-content: flex-start;
+	margin-top: 12px;
 	background: #f9f5ec;
 
 	:global {

@@ -1,5 +1,3 @@
-/* stylelint-disable selector-class-pattern */
-
 .date_range_container {
 	display: flex;
 	width: fit-content;
@@ -14,6 +12,7 @@
 .top_content {
 	display: flex;
 	justify-content: flex-start;
+	margin-top: 12px;
 	background: #f9f5ec;
 
 	:global {
@@ -27,16 +26,6 @@
 		.ui_select_options_container {
 			z-index: 1000;
 			font-weight: 600;
-		}
-
-		.react-datepicker-popper {
-			z-index: 1000;
-		}
-
-		.react-datepicker__input-container {
-			input {
-				font-family: Poppins, sans-serif;
-			}
 		}
 
 		.ui_select_input_placeholder {
