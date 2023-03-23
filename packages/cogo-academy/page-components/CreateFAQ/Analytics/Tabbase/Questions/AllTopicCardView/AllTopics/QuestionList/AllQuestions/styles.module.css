@@ -8,10 +8,10 @@
 }
 
 .question {
+	width: 400px;
 	padding-left: 20px;
 	font-weight: 1000;
 	text-align: left;
-	width: 400px;
 }
 
 .likes {
@@ -24,8 +24,8 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: right;
-	padding-left: 2px;
 	width: 400px;
+	padding-left: 2px;
 }
 
 .sort_arrow {
