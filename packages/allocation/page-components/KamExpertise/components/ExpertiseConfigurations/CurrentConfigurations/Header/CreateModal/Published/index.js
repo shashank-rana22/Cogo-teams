@@ -79,9 +79,11 @@ function Published({ setSelectedVersion = () => {} }) {
 			<div className={styles.head_text}>
 				b. Please select the version you prefer to use when creating a new draft:
 			</div>
+
 			<div className={styles.supporting_text}>
-				*Creating a new draft will overwrite the existing saved draft.*
+				Creating a new draft will overwrite the existing saved draft.
 			</div>
+
 			<Table
 				// className={styles.table}
 				className={cl`

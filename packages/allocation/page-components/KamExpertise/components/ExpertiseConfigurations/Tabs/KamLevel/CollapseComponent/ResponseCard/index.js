@@ -1,9 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
-// import { isValid } from '@cogoport/utils';
 import React from 'react';
 
-// import Form from '../../../../../../../../common/Form';
 import useCreateKamLevel from '../../../../../../hooks/useCreateKamLevel';
 import FormComponent from '../../FormComponent';
 import { controls, controlsBottom } from '../../getControls';
@@ -21,7 +19,7 @@ function addValidationRulesToControls(item) {
 
 function ResponseCard({
 	setCreateKam = () => { },
-	dataLength,
+	dataLength = '',
 	refetch,
 }) {
 	const {
@@ -41,10 +39,10 @@ function ResponseCard({
 				<b>
 					KAM
 					{' '}
-					{dataLength + 1}
+					{ dataLength ? dataLength + 1 : 1}
 					<IcMArrowNext className={styles.arrow} />
 					{' '}
-					{dataLength + 2}
+					{ dataLength ? dataLength + 2 : 2}
 				</b>
 			</div>
 
@@ -64,16 +62,22 @@ function ResponseCard({
 					Save
 				</Button>
 			</div>
-			<div style={{ width: '20%' }} />
+			<FormComponent
+				formProps={formProps}
+				controls={controlsWithValidations}
+				createLoading={createLoading}
+				isTop
+			/>
+			<div className={styles.bottom_supporting_txt}>Transacting Accounts</div>
 
-			<FormComponent formProps={formProps} controls={controlsWithValidations} />
-
-			<div className={styles.row_level_end}>
-				<span className={styles.span_heading}>Transacting Accounts</span>
-				<div className={styles.row_level_end_options}>
-					<FormComponent formProps={formProps} controls={controlsBottomWithValidations} />
-				</div>
+			<div className={styles.bottom_form}>
+				<FormComponent
+					formProps={formProps}
+					controls={controlsBottomWithValidations}
+					createLoading={createLoading}
+				/>
 			</div>
+
 		</div>
 	);
 }

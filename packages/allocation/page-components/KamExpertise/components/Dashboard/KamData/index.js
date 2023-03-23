@@ -62,7 +62,7 @@ function KamData(props) {
 	} = useGetKamExpertiseStatsList();
 
 	useEffect(() => {
-		setKamLevel(0);
+		setKamLevel();
 	}, [date_params]);
 
 	const { list } = dashboardData || {};
