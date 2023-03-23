@@ -165,7 +165,7 @@ function CreateFAQ() {
 
 	return (
 		<div>
-			<div className={styles.back_div} onClick={onClickBackIcon}>
+			<div role="presentation" className={styles.back_div} onClick={onClickBackIcon}>
 				<IcMArrowBack width={20} height={20} />
 				<div className={styles.back}>Back to Dashboard</div>
 			</div>
@@ -207,6 +207,7 @@ function CreateFAQ() {
 								Select Tags or
 							</div>
 							<div
+								role="presentation"
 								className={styles.create_tag_label}
 								onClick={handleCreateTag}
 							>
@@ -235,6 +236,7 @@ function CreateFAQ() {
 								Select Topics or
 							</div>
 							<div
+								role="presentation"
 								className={styles.create_tag_label}
 								onClick={handleCreateTopic}
 							>
@@ -265,6 +267,7 @@ function CreateFAQ() {
 							Select Audience or
 						</div>
 						<div
+							role="presentation"
 							className={styles.create_tag_label}
 							onClick={() => setShowCreateAudienceModal(true)}
 						>
