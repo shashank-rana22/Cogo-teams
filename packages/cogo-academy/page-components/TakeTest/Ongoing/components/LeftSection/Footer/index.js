@@ -96,7 +96,7 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 						disabled={currentQuestion > total_question}
 						onClick={() => sendAnswer()}
 					>
-						Next
+						{currentQuestion === total_question ? <>Save</> : <>Save & Next</>}
 					</Button>
 				</div>
 

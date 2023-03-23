@@ -1,5 +1,5 @@
 const cogoAcademy = {
-	'/[partner_id]/learning/faq/create': {
+	'/[partner_id]/learning': {
 		navigation : 'cogo_academy-create_faq',
 		isMainNav  : true,
 	},
@@ -13,9 +13,6 @@ const cogoAcademy = {
 	'/[partner_id]/learning/faq/create/question': {
 		navigation : 'cogo_academy-create_faq',
 		isMainNav  : false,
-	},
-	'/[partner_id]/learning/test-module': {
-		navigation: 'cogo_academy-create_faq',
 	},
 	'/[partner_id]/learning/test-module/create-question': {
 		navigation: 'cogo_academy-create_faq',

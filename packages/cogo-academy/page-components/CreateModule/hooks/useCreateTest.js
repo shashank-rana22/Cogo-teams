@@ -21,7 +21,7 @@ function useCreateTest({ setTestId, setActiveStepper }) {
 			});
 			setTestId(res?.data?.id);
 			if (next === 'draft') {
-				router.push('/learning/test-module/');
+				router.push('/learning/test-module?activeTab=test_module');
 				Toast.success('Draft Saved Successfully');
 			} else {
 				const as = `/learning/test-module/create-test?id=${res?.data?.id}`;

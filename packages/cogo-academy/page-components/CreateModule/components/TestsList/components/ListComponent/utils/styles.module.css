@@ -17,3 +17,15 @@
 .tooltip_pad {
 	padding: 0;
 }
+
+.time {
+	display: flex;
+	flex-direction: column;
+	font-weight: 400;
+	color: #828282;
+}
+
+.questionsettime {
+	font-weight: 400;
+	color: #828282;
+}

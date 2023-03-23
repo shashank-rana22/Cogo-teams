@@ -11,7 +11,6 @@ function LeftSection({
 	currentQuestion,
 	setCurrentQuestion,
 	loading,
-	startTiming,
 	fetchQuestions,
 }) {
 	const [answer, setAnswer] = useState('');
@@ -22,7 +21,6 @@ function LeftSection({
 				data={data}
 				testData={testData}
 				total_question={data?.total_questions}
-				startTiming={startTiming}
 			/>
 
 			<Body

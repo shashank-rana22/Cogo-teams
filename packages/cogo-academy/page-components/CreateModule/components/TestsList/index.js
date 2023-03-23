@@ -1,7 +1,7 @@
-import { Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
-import { IcMArrowRotateUp, IcMSearchlight } from '@cogoport/icons-react';
+import { Button, Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
+import { IcMSearchlight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import useGetTestList from '../../hooks/useGetTestList';
 import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
@@ -10,8 +10,20 @@ import EmptyState from '../EmptyState';
 import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
 
+const BUTTON_TEXT_MAPPING = {
+	tests        : ' Test',
+	question_set : 'Question Set',
+
+};
+
+const ROUTE_MAPPING = {
+	tests        : 'create-test',
+	question_set : 'create-question',
+};
+
 function TestsList({ activeTab, setActiveTab }) {
-	const [sort, setSort] = useState(false);
+	const router = useRouter();
+
 	const { data, loading, fetchList, setParams, params } = useGetTestList();
 
 	const {
@@ -50,19 +62,6 @@ function TestsList({ activeTab, setActiveTab }) {
 				params    : questionListParams,
 			},
 		},
-		// all_questions: {
-		// 	key            : 'all_questions',
-		// 	title          : 'All Questions',
-		// 	component      : ListComponent,
-		// 	componentProps : {
-		// 		data,
-		// 		loading,
-		// 		fetchList,
-		// 		setParams,
-		// 		activeTab,
-		// 		params,
-		// 	},
-		// },
 	};
 
 	const handleChangeTab = (val) => {
@@ -74,9 +73,57 @@ function TestsList({ activeTab, setActiveTab }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.tabs_container}>
+				<div className={styles.filter}>
+					<Input
+						size="md"
+						suffix={(
+							<ButtonIcon
+								size="md"
+								icon={<IcMSearchlight />}
+								disabled={false}
+								themeType="primary"
+							/>
+						)}
+						placeholder={
+								activeTab === 'tests'
+									? 'Search for Test/Topic'
+									: 'Search for Question set name'
+											}
+						onChange={(value) => {
+							if (activeTab === 'tests') {
+								setParams((prev) => ({
+									...prev,
+									filters: {
+										...prev.filters,
+										q: value,
+									},
+								}));
+							} else {
+								setQuestionListParams((prev) => ({
+									...prev,
+									filters: {
+										...prev.filters,
+										q: value,
+									},
+								}));
+							}
+						}}
+						className={styles.input}
+					/>
+
+					<Button
+						themeType="accent"
+						type="button"
+						onClick={() => router.push(`/learning/test-module/${ROUTE_MAPPING[activeTab]}`)}
+					>
+						+ Create New
+						{' '}
+						{BUTTON_TEXT_MAPPING[activeTab]}
+					</Button>
+				</div>
+
 				<Tabs
 					activeTab={activeTab}
-					fullWidth
 					themeType="primary"
 					onChange={handleChangeTab}
 					className={styles.tabs}
@@ -92,101 +139,15 @@ function TestsList({ activeTab, setActiveTab }) {
 								title={title}
 								className={styles.tabItem}
 							>
-								<>
-									<div className={styles.filter}>
-										<div>
-											<Input
-												size="md"
-												suffix={(
-													<ButtonIcon
-														size="md"
-														icon={<IcMSearchlight />}
-														disabled={false}
-														themeType="primary"
-													/>
-												)}
-												placeholder={
-												activeTab === 'tests'
-													? 'Search for Test/Topic'
-													: 'Search for Question set name'
-											}
-												onChange={(value) => {
-													if (activeTab === 'tests') {
-														setParams((prev) => ({
-															...prev,
-															filters: {
-																...prev.filters,
-																q: value,
-															},
-														}));
-													} else {
-														setQuestionListParams((prev) => ({
-															...prev,
-															filters: {
-																...prev.filters,
-																q: value,
-															},
-														}));
-													}
-												}}
-												className={styles.input}
-											/>
-										</div>
-
-										<div
-											role="presentation"
-											onClick={() => {
-												setSort((prev) => !prev);
-												if (activeTab === 'tests') {
-													setParams((prev) => ({
-														...prev,
-														sort_type : sort ? 'asc' : 'desc',
-														filters   : {
-															...prev.filters,
-
-														},
-													}));
-												} else {
-													setQuestionListParams((prev) => ({
-														...prev,
-														sort_type : sort ? 'asc' : 'desc',
-														filters   : {
-															...prev.filters,
-
-														},
-													}));
-												}
-											}}
-											className={styles.sort}
-										>
-											{sort ? (
-												<IcMArrowRotateUp
-													className={`${styles.styled_icon} ${styles.rotate}`}
-												/>
-											) : (
-												<IcMArrowRotateUp
-													className={styles.styled_icon}
-												/>
-											)}
-
-											<span
-												className={styles.span_text}
-											>
-												Sort By
-											</span>
-										</div>
-									</div>
-
+								<div>
 									{!isEmpty(activeComponentData?.list) ? (
 										<ContainerComponent {...componentProps} />
 									) : <EmptyState />}
-								</>
+								</div>
 							</TabPanel>
-
 						);
 					})}
 				</Tabs>
-
 			</div>
 
 		</div>

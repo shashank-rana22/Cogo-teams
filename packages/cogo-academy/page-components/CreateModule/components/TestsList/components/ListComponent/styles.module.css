@@ -102,3 +102,17 @@
 	float: right;
 	margin-top: 20px;
 }
+
+.sort {
+	float: right;
+	margin: 0px 12px;
+	margin-bottom: 4px;
+	align-items: center;
+	display: flex;
+	gap: 4px;
+	cursor: pointer;
+}
+
+.rotate {
+	transform: rotate(180deg);
+}

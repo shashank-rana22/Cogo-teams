@@ -33,7 +33,7 @@ function CreateQuestionSet() {
 					style={{ cursor: 'pointer' }}
 					width={20}
 					height={20}
-					onClick={() => router.push('/learning/test-module')}
+					onClick={() => router.push('/learning?activeTab=test_module')}
 				/>
 
 				<div className={styles.title}>New Question Set</div>

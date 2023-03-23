@@ -2,11 +2,16 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	font-size: 20px;
-	font-weight: 500;
+	width: 100%;
+	padding: 14px;
+	border-radius: 6px;
 }
 
-.button_container {
+.content {
 	display: flex;
 	align-items: center;
+}
+
+.margin_right {
+	margin-right: 4px;
 }

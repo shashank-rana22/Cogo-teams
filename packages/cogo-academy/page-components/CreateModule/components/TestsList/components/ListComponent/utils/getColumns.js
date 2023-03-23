@@ -69,8 +69,8 @@ export const questionSetColumns = ({ loading, updateApi, fetchList, router }) =>
 			id       : 'updatedAt',
 			accessor : ({ updated_at = '' }) => (
 				<section>
-					{/* {format(updated_at, 'dd MMM yyyy')} */}
-					{format(updated_at, 'dd MMM yyyy, h:mm a')}
+					<span className={styles.questionsettime}>{format(updated_at, 'dd MMM\'yy ')}</span>
+					<span className={styles.questionsettime}>{format(updated_at, 'h:mm a')}</span>
 				</section>
 			),
 		},
@@ -228,8 +228,8 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 							</Link>
 						</section>
 						<section>
-							{format(validity_start, 'dd MMM yyyy, h:mm a - ')}
-							{format(validity_end, 'dd MMM yyyy, h:mm a')}
+							{format(validity_start, 'dd/MM/yyyy - ')}
+							{format(validity_end, 'dd/MM/yyyy')}
 						</section>
 					</section>
 				)
@@ -259,8 +259,9 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 			Header   : 'LAST UPDATED',
 			id       : 'updatedAt',
 			accessor : ({ updated_at = '' }) => (
-				<section>
-					{format(updated_at, 'dd MMM yyyy, h:mm a')}
+				<section className={styles.time}>
+					<span>{format(updated_at, 'dd MMM\'yy')}</span>
+					<span>{format(updated_at, 'h:mm a')}</span>
 				</section>
 			),
 		},

@@ -87,3 +87,8 @@
 	display: flex;
 	justify-content: flex-end;
 }
+
+.questionsettime {
+	font-weight: 400;
+	color: #828282;
+}

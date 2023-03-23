@@ -111,6 +111,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'get_admin_question_wise_test_result',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'update_test_question_set',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
@@ -225,11 +230,6 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'get_admin_question_wise_test_result',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
 			api          : 'get_passed_test_data_per_user',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
@@ -246,6 +246,11 @@ const faq = {
 		},
 		{
 			api          : 'get_test',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_test_user_mapping',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},

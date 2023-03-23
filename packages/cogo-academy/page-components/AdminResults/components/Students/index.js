@@ -16,13 +16,11 @@ function StudentsComponent({ test_id }) {
 		method : 'GET',
 		url    : 'list_admin_student_wise_test_result',
 		params : {
-			test_id: '56c13524-54d0-4bf0-bdce-abb9ce43a86a',
+			test_id,
 		},
 	}, { manual: false });
 
 	const { page_limit = 0, total_count = 0, list } = data || {};
-
-	console.log(list, 'data');
 
 	const columns = [
 		{
