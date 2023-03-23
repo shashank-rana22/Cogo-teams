@@ -43,7 +43,7 @@ function ViewCards({ state = '', cardHeading = '', subHeading = [] }) {
 
 	return (
 		<div className={styles.primary_right}>
-			<div className={styles.active_users}>
+			<div>
 				<div className={styles.right_stat_content}>
 					{cardHeading}
 				</div>

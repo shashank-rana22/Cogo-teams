@@ -57,9 +57,9 @@
 }
 
 .date {
-		display         : flex;
-		margin          : -12px 0 20px 0;
-		border-radius    : 10px;
-		height          : 400px;
-		background-color : #FFF;
+	display: flex;
+	height: 400px;
+	margin: -12px 0 20px;
+	background-color: #fff;
+	border-radius: 10px;
 }
