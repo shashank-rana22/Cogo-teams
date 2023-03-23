@@ -2,9 +2,9 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-import QuestionsComponent from './components/QuestionsComponent';
-import StudentsComponent from './components/StudentsComponent';
-import useGetAdminTestResult from './hooks/useGetAdminTestResult';
+import Questions from './components/Questions';
+import Students from './components/Students';
+// import useGetAdminTestResult from './hooks/useGetAdminTestResult';
 import styles from './styles.module.css';
 
 function AdminResults() {
@@ -16,27 +16,25 @@ function AdminResults() {
 
 	const { test_id = '' } = query || {};
 
-	const {
-		// loading,
-		data,
-		// getAdminTestResult,
-		// setFilters,
-		// filters,
-	} = useGetAdminTestResult({ activeTab, test_id });
-
-	console.log('data', data);
+	// const {
+	// 	// loading,
+	// 	data,
+	// 	// getAdminTestResult,
+	// 	// setFilters,
+	// 	// filters,
+	// } = useGetAdminTestResult({ activeTab, test_id });
 
 	const componentMapping = {
 		tests: {
 			key            : 'students',
 			title          : 'Students',
-			component      : StudentsComponent,
+			component      : Students,
 			componentProps : { test_id },
 		},
 		question_set: {
 			key            : 'questions',
 			title          : 'Questions',
-			component      : QuestionsComponent,
+			component      : Questions,
 			componentProps : { test_id },
 		},
 	};

@@ -129,15 +129,17 @@ function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray }) {
 	];
 	return (
 		<div className={styles.container}>
-			<Breadcrumb>
+			<Breadcrumb className={styles.bcitems}>
 				<Breadcrumb.Item
 					onClick={() => setShowQuestionSet(false)}
 					label="Add Questions to test"
 					className={styles.breadcrumb_item}
 				/>
-				<Breadcrumb.Item label="From Question Set" />
+				<Breadcrumb.Item label="From Question Set" className={styles.breadcrumb_item_two} />
 			</Breadcrumb>
-			<p>Select from applicable Question Sets made earlier to get probable questions for the Test</p>
+			<p className={styles.content}>
+				Select from applicable Question Sets made earlier to get probable questions for the Test
+			</p>
 			<div className={styles.filter}>
 				<Input
 					size="md"
