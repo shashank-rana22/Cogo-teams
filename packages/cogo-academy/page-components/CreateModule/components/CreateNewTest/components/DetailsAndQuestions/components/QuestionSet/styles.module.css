@@ -18,6 +18,15 @@
 	cursor: pointer;
 }
 
+.content {
+	margin-top: 16px;
+	margin-bottom: 19px;
+}
+
+.breadcrumb_item_two {
+	font-weight: 700;
+}
+
 .span_text {
 	margin-left: 2px;
 	font-size: 12px;
