@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { addMinutes, addHours } from '@cogoport/utils';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 
 function useListFaqSearchHistories() {
 	const [dateRange, setDateRange] = useState({});
@@ -10,8 +10,15 @@ function useListFaqSearchHistories() {
 		url    : 'list_faq_search_histories',
 	}, { manual: true });
 
-	const formatStartDate = dateRange?.startDate ? addMinutes(addHours(dateRange?.startDate, 5), 30) : undefined;
-	const formatEndDate = dateRange?.endDate ? addMinutes(addHours(dateRange?.endDate, 5), 30) : undefined;
+	const formatStartDate = useMemo(
+		() => (dateRange?.startDate ? addMinutes(addHours(dateRange?.startDate, 5), 30) : undefined),
+		[dateRange?.startDate],
+	);
+
+	const formatEndDate = useMemo(
+		() => (dateRange?.endDate ? addMinutes(addHours(dateRange?.endDate, 5), 30) : undefined),
+		[dateRange?.endDate],
+	);
 
 	const fetchFaqSearchHistories = useCallback(async () => {
 		try {
