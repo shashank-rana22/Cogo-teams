@@ -1,9 +1,12 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
+import InfoBanner from './components/InfoBanner';
 import Questions from './components/Questions';
 import Students from './components/Students';
+import TestResults from './components/TestResults';
 // import useGetAdminTestResult from './hooks/useGetAdminTestResult';
 import styles from './styles.module.css';
 
@@ -16,13 +19,13 @@ function AdminResults() {
 
 	const { test_id = '' } = query || {};
 
-	// const {
-	// 	// loading,
-	// 	data,
-	// 	// getAdminTestResult,
-	// 	// setFilters,
-	// 	// filters,
-	// } = useGetAdminTestResult({ activeTab, test_id });
+	const [{ data: testData, loading }, refetch] = useRequest({
+		method : 'GET',
+		url    : 'get_test',
+		params : { id: test_id },
+	}, { manual: false });
+
+	const { status } = testData || {};
 
 	const componentMapping = {
 		tests: {
@@ -41,6 +44,10 @@ function AdminResults() {
 
 	return (
 		<div className={styles.container}>
+			<TestResults />
+
+			<InfoBanner test_status={status} test_id={test_id} refetchTest={refetch} />
+
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
