@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface Outstanding {
 	page?:number,
@@ -15,12 +15,6 @@ const useGetOrgOutstanding = ({ formFilters }) => {
 		pageLimit : 10,
 	});
 
-	const resetQuery = {
-		sageId               : undefined,
-		q                    : undefined,
-		organizationSerialId : undefined,
-		tradePartySerialId   : undefined,
-	};
 	const [queryKey, setQueryKey] = useState('q');
 	const [orderBy, setOrderBy] = useState({
 		key   : 'totalOutstandingLedgerAmount',
@@ -46,10 +40,10 @@ const useGetOrgOutstanding = ({ formFilters }) => {
 	const { query, debounceQuery } = useDebounceQuery();
 	useEffect(() => {
 		debounceQuery(search);
-	}, [search]);
+	}, [search, debounceQuery]);
 
-	const refetch = (p:any) => {
-		const { key, order } = orderBy || {};
+	const refetch = useCallback((p?:any) => {
+		const { order } = orderBy || {};
 		try {
 			trigger({
 				params: {
@@ -71,30 +65,45 @@ const useGetOrgOutstanding = ({ formFilters }) => {
 		} catch (e) {
 			Toast.error(e?.message);
 		}
-	};
+	}, [ageingKey, checkBox, companyType, creditControllerId, formFilters,
+		orderBy,
+		rest,
+		salesAgentId,
+		trigger,
+	]);
+	const stringifiedRest = JSON.stringify(rest);
+	const stringifiedOrderBy = JSON.stringify(orderBy);
+	const stringifiedFormFilters = JSON.stringify(formFilters);
 
 	useEffect(() => {
 		refetch();
 	}, [
-		JSON.stringify(rest),
-		JSON.stringify(orderBy),
-		JSON.stringify(formFilters),
+		stringifiedRest,
+		refetch,
+		stringifiedOrderBy,
+		stringifiedFormFilters,
 	]);
 
 	useEffect(() => {
+		const resetQuery = {
+			sageId               : undefined,
+			q                    : undefined,
+			organizationSerialId : undefined,
+			tradePartySerialId   : undefined,
+		};
 		if (query) {
-			setoutStandingFilters({
-				...outStandingFilters,
+			setoutStandingFilters((p) => ({
+				...p,
 				...resetQuery,
 				[queryKey] : query?.toUpperCase() || undefined,
 				page       : 1,
-			});
+			}));
 		} else {
-			setoutStandingFilters({
-				...outStandingFilters,
+			setoutStandingFilters((p) => ({
+				...p,
 				...resetQuery,
 				page: 1,
-			});
+			}));
 		}
 	}, [query, queryKey]);
 
