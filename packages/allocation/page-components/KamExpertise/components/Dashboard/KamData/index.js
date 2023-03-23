@@ -1,9 +1,9 @@
-import { IcMAgentManagement, IcMTradeparties, IcMBreakBulkCargoType, IcMMiscellaneous } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
 import useGetKamExpertiseDashboard from '../../../hooks/useGetKamExpertiseDashboard';
+import useGetKamExpertiseLevelOverview from '../../../hooks/useGetKamExpertiseLevelOverview';
 import useGetKamExpertiseStatsList from '../../../hooks/useGetKamExpertiseStatsList';
 
 import BadgeFilterHeader from './BadgeFilterHeader';
@@ -11,33 +11,6 @@ import KamLevelScoreCard from './KamLevelScoreCard';
 import LeaderboardList from './LeaderboardList';
 import OverviewCard from './OverviewCard';
 import styles from './styles.module.css';
-
-const overview_data = [
-	{
-		title     : 'Customer Expertise',
-		avg_score : 2300,
-		points_in : 'Re-activation',
-		icon      : <IcMAgentManagement height={24} width={24} />,
-	},
-	{
-		title     : 'Trade Expertise',
-		avg_score : 2300,
-		points_in : 'Re-activation',
-		icon      : <IcMTradeparties height={24} width={24} />,
-	},
-	{
-		title     : 'Commodity Expertise',
-		avg_score : 2300,
-		points_in : 'Re-activation',
-		icon      : <IcMBreakBulkCargoType height={24} width={24} />,
-	},
-	{
-		title     : 'Misc  Expertise',
-		avg_score : 2300,
-		points_in : 'Re-activation',
-		icon      : <IcMMiscellaneous height={24} width={24} />,
-	},
-];
 
 function KamData(props) {
 	const { date_params = {} } = props;
@@ -49,12 +22,18 @@ function KamData(props) {
 	} = useGetKamExpertiseDashboard(date_params);
 
 	const {
+		setOverviewParams = () => {},
+		overviewLoading = false,
+		overviewList = [],
+	} = useGetKamExpertiseLevelOverview();
+
+	const {
 		setParams = () => {},
 		leaderboardLoading = false,
 		leaderboardList = [],
-		searchKAM,
+		searchKAM = '',
 		setSearchKAM,
-		badgeName,
+		badgeName = '',
 		setBadgeName,
 		debounceQuery,
 		paginationData,
@@ -95,25 +74,26 @@ function KamData(props) {
 		<div>
 			<div className={styles.cards}>
 				{
-					list.map((list_data, index_lvl) => (
+					list.map((listData, index_lvl) => (
 						<KamLevelScoreCard
 							index_lvl={index_lvl}
-							list_data={list_data} // casing
+							listData={listData}
 							setKamLevel={setKamLevel}
 							date_params={date_params}
 							setParams={setParams}
+							setOverviewParams={setOverviewParams}
 						/>
 					))
 				}
 			</div>
 
 			{
-				kamLevel === 0 && (
+				isEmpty(kamLevel) && (
 					<div className={styles.level_zero}>Click on KAM level card to view leaderboard overview</div>
 				)
 			}
 
-			{kamLevel !== 0 && (
+			{kamLevel && (
 				<>
 					<div className={styles.overview_container}>
 						<div className={styles.overview_header}>
@@ -121,13 +101,12 @@ function KamData(props) {
 						</div>
 
 						<div className={styles.overview_cards}>
-							{/* //!using dummy data for now */}
 							{
-								overview_data.map((data) => (
+								overviewList.map((data) => (
 									<OverviewCard
 										key={data.title}
 										data={data}
-										leaderboardLoading={leaderboardLoading}
+										overviewLoading={overviewLoading}
 									/>
 								))
 							}
