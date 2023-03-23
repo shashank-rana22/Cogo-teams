@@ -9,14 +9,17 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 		setToggleScreen('create_mastery');
 	};
 
+	// todo: fix lint, destructure data
+
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.header}>
-				<p>
-					#
-					{index + 1}
-				</p>
+				{/* todo: why used p tag?? */}
+				{/* <p> */}
+				#
+				{index + 1}
+				{/* </p> */}
 				<Button themeType="secondary" onClick={handleEdit}>Edit</Button>
 			</div>
 

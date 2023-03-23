@@ -67,6 +67,7 @@ function CreateMastery(props) {
 						</p>
 					</div>
 					<div className={styles.content_container}>
+						{/* make common for badges */}
 						{
 						getAddMasteryControls.map((controlItem) => {
 							const ele = { ...controlItem };
@@ -153,6 +154,7 @@ function CreateMastery(props) {
 						</div>
 					</div>
 					<div className={styles.btncls}>
+						{/* fix button */}
 						<Button
 							size="md"
 							themeType="secondary"

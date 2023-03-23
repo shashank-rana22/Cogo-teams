@@ -62,7 +62,7 @@ function KamData(props) {
 	} = useGetKamExpertiseStatsList();
 
 	useEffect(() => {
-		setKamLevel(0);
+		setKamLevel();
 	}, [date_params]);
 
 	const { list } = dashboardData || {};
@@ -107,7 +107,13 @@ function KamData(props) {
 				}
 			</div>
 
-			{kamLevel && (
+			{
+				kamLevel === 0 && (
+					<div className={styles.level_zero}>Click on KAM level card to view leaderboard overview</div>
+				)
+			}
+
+			{kamLevel !== 0 && (
 				<>
 					<div className={styles.overview_container}>
 						<div className={styles.overview_header}>

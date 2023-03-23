@@ -29,6 +29,7 @@ function ViewAllConfigs() {
 	const router = useRouter();
 	const [activeConfigTab, setActiveConfigTab] = useState('kam-expertise-score-config');
 	const [selectedVersion, setSelectedVersion] = useState('');
+	const [publish, setPublish] = useState(false);
 	const [mainLoading, setMainLoading] = useState();
 	const [showPublishModal, setShowPublishModal] = useState(false);
 
@@ -70,6 +71,7 @@ function ViewAllConfigs() {
 									<Component
 										setMainLoading={setMainLoading}
 										selectedVersion={selectedVersion}
+
 									/>
 								</TabPanel>
 							) : null;
@@ -90,6 +92,8 @@ function ViewAllConfigs() {
 						<PublishVersionModal
 							setShowPublishModal={setShowPublishModal}
 							showPublishModal={showPublishModal}
+							publish={publish}
+							setPublish={setPublish}
 						/>
 					)}
 				</div>

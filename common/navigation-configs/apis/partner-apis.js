@@ -594,6 +594,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
+		{
+			api          : 'post_allocation_feedback',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -7540,6 +7545,22 @@ const partner = {
 			api         : 'get_muneem_reports_finance_ap_dashboard_on_finance_accepted',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_muneem_reports_bill_payment_status_mismatch',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_bills_account_utilization_mismatch',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_invoice_account_utilization_amount_mismatch',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_invoice_payment_status_mismatch',
+			access_type : 'private',
+		},
 	],
 	settlement: [
 		{
@@ -10684,6 +10705,46 @@ const partner = {
 			api          : 'list_partners',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'list_cogoone_timeline',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_omnichannel_documents',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_omnichannel_document',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'submit_organization_kyc',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_omnichannel_document_details',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_organization_document',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'send_user_whatsapp_template',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_user_room',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 	analytics_dashboard: [

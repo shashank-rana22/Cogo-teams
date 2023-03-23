@@ -87,6 +87,9 @@ function BadgeUpdateCard(props) {
 					{errors?.[`${medalType}_img_value`]?.message}
 				</div>
 
+				{/* watch_image_value = watch(`${medalType}_img_value`) and use t
+				his and explore if single condition can be used */}
+
 				<div>
 					{watch(`${medalType}_img_value`)
 						? (

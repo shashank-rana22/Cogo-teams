@@ -13,6 +13,7 @@ function BadgeListItem(props) {
 		setToggleScreen('create_badge');
 	};
 
+	// todo: destructure
 	const MEDAL_DETAILS_MAPPING = {
 		bronze: {
 			name      : 'bronze',

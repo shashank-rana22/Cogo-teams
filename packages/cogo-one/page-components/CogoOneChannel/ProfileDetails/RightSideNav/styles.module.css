@@ -24,8 +24,28 @@
 	padding: 8px;
 	margin-bottom: 20px;
 	cursor: pointer;
+	transition: 0.3s ease-in-out;
+
+	&:hover {
+		transition: 0.3s ease-in-out;
+		transform: scale(1.2);
+	}
 }
 
 .icon_div_load {
 	cursor: not-allowed;
+}
+
+.count {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 16px;
+	height: 16px;
+	margin: -8px 0 0 -6px;
+	font-size: 8px;
+	color: white;
+	background: red;
+	border-radius: 50%;
 }

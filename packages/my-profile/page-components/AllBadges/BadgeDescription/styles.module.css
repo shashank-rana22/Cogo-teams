@@ -19,9 +19,10 @@
 }
 
 .main_badge {
-    padding-top: 20px;
+    margin-top: 16px;
     width: 100%;
     height: auto;
+    border-radius: 8px;
 }
 
 .star {

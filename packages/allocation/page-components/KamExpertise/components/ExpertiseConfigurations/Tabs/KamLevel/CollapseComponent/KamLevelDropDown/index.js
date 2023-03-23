@@ -36,6 +36,7 @@ function KamLevelDropDown({ refetch, transition_level }) {
 						onSave={onSave}
 						setEditMode={setEditMode}
 						updateLoading={updateLoading}
+						formProps={formProps}
 					/>
 				)
 				: (

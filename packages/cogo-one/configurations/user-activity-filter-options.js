@@ -26,6 +26,10 @@ function filterOptions() {
 			label : 'Mail',
 			value : 'email',
 		},
+		{
+			label : 'Voice Call',
+			value : 'voice_call',
+		},
 	];
 
 	const FILTERS_MAPPING = {

@@ -12,6 +12,7 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 
 	const [openModal, setOpenModal] = useState(false);
 
+	// todo: move openModal state and onClose function inside hook
 	const onClose = () => {
 		setOpenModal((pv) => !pv);
 	};

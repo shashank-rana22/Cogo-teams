@@ -8,6 +8,7 @@ import useGetBadgeDescription from '../hooks/useGetBadgeDescription';
 import BadgeDescription from './BadgeDescription';
 import BadgeList from './BadgeList';
 import Header from './Header';
+import MasteryDescription from './MasteryDescription';
 import styles from './styles.module.css';
 
 function AllBadges() {
@@ -70,10 +71,14 @@ function AllBadges() {
 			}
 
 			{
-                !isEmpty(modalDetail)
-                && <BadgeDescription badgeDetailloading={badgeDetailloading} badgeDetail={badgeDetail} />
+                  !isEmpty(modalDetail) && badgeDetail?.badge_type === 'mastery'
+				&& <MasteryDescription badgeDetailloading={badgeDetailloading} badgeDetail={badgeDetail} />
             }
 
+			{
+                  !isEmpty(modalDetail) && badgeDetail?.badge_type === 'badge'
+				&& <BadgeDescription badgeDetailloading={badgeDetailloading} badgeDetail={badgeDetail} />
+            }
 		</div>
 	);
 }

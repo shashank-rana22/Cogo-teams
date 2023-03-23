@@ -1,8 +1,9 @@
-import { Placeholder, Modal, Button, Tooltip } from '@cogoport/components';
+import { Toast, Placeholder, Modal, Button, Tooltip } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import usePostProfileMasteryBadge from '../../../hooks/usePostProfileMasteryBadge';
@@ -56,7 +57,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<p className={styles.heading}>Badges List</p>
+					<p className={styles.heading}>Badges</p>
 					<Button
 						size="md"
 						themeType="secondary"
@@ -73,15 +74,15 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 		);
 	}
 
-	if (!badgesGot && !badgesNotGot) {
+	if (isEmpty(badgesGot) && isEmpty(badgesNotGot)) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<p className={styles.heading}>Badges List</p>
+					<p className={styles.heading}>Badges</p>
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => 	setShow(true)}
+						onClick={() => Toast.default('You dont have any mastery!')}
 					>
 						<b>Select Badges To Preview</b>
 					</Button>
@@ -97,7 +98,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<p className={styles.heading}>Badges List</p>
+				<p className={styles.heading}>Badges</p>
 				<Button
 					size="md"
 					themeType="secondary"

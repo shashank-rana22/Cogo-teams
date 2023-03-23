@@ -25,4 +25,11 @@
 .empty {
     display: flex;
     align-items: center;
+    color: #4f4f4f;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
 }

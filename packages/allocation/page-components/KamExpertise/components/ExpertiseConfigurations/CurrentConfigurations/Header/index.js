@@ -74,7 +74,7 @@ function Header({ setSelectedVersion, selectedVersion, audit_data = {}, LIVE_VER
 						{' '}
 						<strong>
 							{ audit_data.updated_at
-								? format(audit_data.updated_at, 'dd MMM yyyy') : '___'}
+								? format(audit_data.updated_at, 'dd MMM yyyy') : ''}
 
 						</strong>
 					</div>
@@ -84,7 +84,7 @@ function Header({ setSelectedVersion, selectedVersion, audit_data = {}, LIVE_VER
 						{' '}
 						:
 						{' '}
-						<strong>{audit_data?.name || '___'}</strong>
+						<strong>{audit_data?.name || ''}</strong>
 					</div>
 				</div>
 			</div>
