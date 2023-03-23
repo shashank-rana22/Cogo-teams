@@ -46,7 +46,6 @@ function useGraphData() {
 			value : total_requested_questions_percentage,
 			color : 'hsla(234, 46%, 87%, 1)',
 		},
-
 		{
 			id    : 'Not Requested',
 			label : `Not Requested(${total_search_result_not_available - total_requested_questions})
