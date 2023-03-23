@@ -78,9 +78,6 @@ function UserCard({ userData = {}, type = '' }:Props) {
 			placement="right"
 			render={renderUserDetails()}
 			trigger="mouseenter"
-			theme="light"
-			interactive
-			animation="shift-away"
 		>
 
 			<div
@@ -112,7 +109,7 @@ function UserCard({ userData = {}, type = '' }:Props) {
 
 				{type === 'active' && (
 					<div className={styles.icon_container}>
-						<IcCTick size={0.8} />
+						<IcCTick />
 					</div>
 				)}
 

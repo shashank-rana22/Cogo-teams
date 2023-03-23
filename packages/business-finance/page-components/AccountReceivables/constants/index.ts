@@ -2,26 +2,32 @@ export const companyType = [
 	{
 		label : 'Private Limited',
 		value : 'private_limited',
+		name  : 'private_limited',
 	},
 	{
 		label : 'Public Limited',
 		value : 'public_limited',
+		name  : 'public_limited',
 	},
 	{
 		label : 'Limited Liability Partnership',
 		value : 'limited_liability_partnership',
+		name  : 'limited_liability_partnership',
 	},
 	{
 		label : 'Partnership',
 		value : 'partnership',
+		name  : 'partnership',
 	},
 	{
 		label : 'Proprietorship',
 		value : 'proprietorship',
+		name  : 'proprietorship',
 	},
 	{
 		label : 'Other',
 		value : 'other',
+		name  : 'other',
 	},
 ];
 
@@ -29,42 +35,54 @@ export const DUE_IN = [
 	{
 		label : 'Not Due',
 		value : 'amount_not_due',
+		name  : 'amount_not_due',
 	},
 	{
 		label : '1-30 Days',
 		value : 'amount_1_30',
+		name  : 'amount_1_30',
 	},
 	{
 		label : '31-60 Days',
 		value : 'amount_31_60',
+		name  : 'amount_31_60',
 	},
 	{
 		label : '61-90 Days',
 		value : 'amount_61_90',
+		name  : 'amount_61_90',
 	},
 	{
 		label : '91-180 Days',
 		value : 'amount_91_180',
+		name  : 'amount_91_180',
 	},
 	{
 		label : '181-365 Days',
 		value : 'amount_181_365',
+		name  : 'amount_181_365',
 	},
-	{ label: '365+ Days', value: 'amount_365' },
-];
+	{
+		label : '365+ Days',
+		value : 'amount_365',
+		name  : 'amount_365',
+	}];
 
 export const SALES_AGENT = [
 	{
 		label : 'Total Outstanding Amount',
 		value : 'total_outstanding_amount',
+		name  : 'total_outstanding_amount',
 	},
 	{
 		label : 'Open Invoice Amount',
 		value : 'open_invoice_amount',
+		name  : 'open_invoice_amount',
 	},
 	{
 		label : 'On Account Amount',
 		value : 'on_account_amount',
+		name  : 'on_account_amount',
 	},
 ];
 
@@ -72,18 +90,22 @@ export const SEARCH_OPTIONS = [
 	{
 		label : 'Trade Party Serial Id',
 		value : 'tradePartySerialId',
+		name  : 'tradePartySerialId',
 	},
 	{
 		label : 'Sage ID',
 		value : 'sageId',
+		name  : 'sageId',
 	},
 	{
 		label : 'Serial Id',
 		value : 'organizationSerialId',
+		name  : 'organizationSerialId',
 	},
 	{
 		label : 'Business Name/Pan Number',
 		value : 'q',
+		name  : 'q',
 	},
 ];
 
@@ -91,47 +113,62 @@ export const SORTBY_OPTION = [
 	{
 		label : 'Not Due',
 		value : 'notDueLedgerAmount',
+		name  : 'notDueLedgerAmount',
 	},
 	{
 		label : 'Today',
 		value : 'todayLedgerAmount',
+		name  : 'todayLedgerAmount',
 	},
 	{
 		label : '1-30 Days',
 		value : 'thirtyLedgerAmount',
+		name  : 'thirtyLedgerAmount',
 	},
 	{
 		label : '31-60 Days',
 		value : 'sixtyLedgerAmount',
+		name  : 'sixtyLedgerAmount',
 	},
 	{
 		label : '61-90 Days',
 		value : 'ninetyLedgerAmount',
+		name  : 'ninetyLedgerAmount',
 	},
 	{
 		label : '91-180 Days',
 		value : 'oneEightyLedgerAmount',
+		name  : 'oneEightyLedgerAmount',
 	},
 	{
 		label : '181-365 Days',
 		value : 'threeSixtyFiveLedgerAmount',
+		name  : 'threeSixtyFiveLedgerAmount',
 	},
-	{ label: '365+ Days', value: 'threeSixtyFivePlusLedgerAmount' },
+	{
+		label : '365+ Days',
+		value : 'threeSixtyFivePlusLedgerAmount',
+		name  : 'threeSixtyFivePlusLedgerAmount',
+	},
 	{
 		label : 'Total Outstanding Amount',
 		value : 'totalOutstandingLedgerAmount',
+		name  : 'totalOutstandingLedgerAmount',
 	},
 	{
 		label : 'Credit Note',
 		value : 'creditNoteLedgerAmount',
+		name  : 'creditNoteLedgerAmount',
 	},
 	{
 		label : 'Debit Note',
 		value : 'debitNoteLedgerAmount',
+		name  : 'debitNoteLedgerAmount',
 	},
 	{
 		label : 'On Account Amount',
 		value : 'onAccountPaymentLedgerAmount',
+		name  : 'onAccountPaymentLedgerAmount',
 	},
 ];
 

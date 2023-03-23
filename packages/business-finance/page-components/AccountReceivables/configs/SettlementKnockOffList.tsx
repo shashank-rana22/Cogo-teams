@@ -1,4 +1,4 @@
-import { Pill, Button } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { startCase, format, getByKey } from '@cogoport/utils';
 

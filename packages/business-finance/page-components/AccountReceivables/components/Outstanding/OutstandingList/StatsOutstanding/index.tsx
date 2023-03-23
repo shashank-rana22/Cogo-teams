@@ -16,8 +16,8 @@ function StatsOutstanding({ item }) {
 		onAccountPaymentInvoiceCount = 0,
 		totalOutstandingInvoiceLedgerAmount = 0,
 		totalOutstandingInvoiceCount = 0,
-		totalCreditNoteAmount = 0,
-		creditNoteCount = 0,
+		// totalCreditNoteAmount = 0,
+		// creditNoteCount = 0,
 		ageingBucket = {},
 	} = item || {};
 
@@ -41,7 +41,6 @@ function StatsOutstanding({ item }) {
 							OPEN INVOICES
 							{' '}
 							<Tooltip
-								theme="light"
 								content={(
 									<div className={styles.info_content}>
 										<div className={styles.heading}>Open Invoices</div>

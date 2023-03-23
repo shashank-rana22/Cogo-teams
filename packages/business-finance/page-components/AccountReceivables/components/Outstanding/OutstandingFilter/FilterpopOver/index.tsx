@@ -13,8 +13,8 @@ function FilterpopOver({
 	clearFilter,
 }) {
 	const [show, setShow] = useState(false);
-	const onChange = (val:string, name:string) => {
-		setFilters((p) => ({ ...p, [name]: val }));
+	const onChange = (val:any | string, name:string) => {
+		setFilters((p:object) => ({ ...p, [name]: val }));
 	};
 
 	const content = (
@@ -59,7 +59,7 @@ function FilterpopOver({
 					asyncKey="partner_users"
 					valueKey="user_id"
 					initialCall={false}
-					onChange={(userId) => onChange(userId, 'salesAgentId')}
+					onChange={(userId:any) => onChange(userId, 'salesAgentId')}
 					value={filters.salesAgentId}
 					placeholder="Select Sales Agent User"
 					size="sm"
@@ -81,7 +81,7 @@ function FilterpopOver({
 				<div>Company Type</div>
 				<Select
 					value={filters.companyType}
-					onChange={(val:string) => onChange(val, 'companyType')}
+					onChange={(val?:any) => onChange(val, 'companyType')}
 					isClearable
 					placeholder="Select Company Type"
 					options={companyType}
@@ -96,7 +96,6 @@ function FilterpopOver({
 				visible={show}
 				placement="bottom"
 				render={content}
-				interactive
 				className={styles.popover_container}
 			>
 				<Button

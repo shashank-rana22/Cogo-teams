@@ -30,15 +30,11 @@ function OutstandingList({ item }) {
 	};
 
 	const {
-		organizationId,
-		organizationName,
 		businessName,
 		collectionPartyType = [],
 		serialId,
 		countryCode,
-		category = [],
 		organizationSerialId,
-		selfOrganizationId,
 		updatedAt,
 		selfOrganizationName,
 	} = item || {};
@@ -137,7 +133,6 @@ function OutstandingList({ item }) {
 							{' '}
 							{collectionPartyType.length > 1 ? (
 								<Tooltip
-									theme="light"
 									content={content(
 										collectionPartyType,
 										'Collection Party Types',

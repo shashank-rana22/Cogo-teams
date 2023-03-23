@@ -25,7 +25,6 @@ function SettlementTable({ data }) {
 	const {
 		settlementList,
 		loading,
-		refetch,
 		settlementFilters,
 		setSettlementFilters,
 		orderBy,
@@ -59,18 +58,13 @@ function SettlementTable({ data }) {
 					placeholder="Search by Document Number"
 					value={settlementFilters.query}
 					onChange={(val) => onChange(val, 'query')}
-					prefix={<IcMSearchdark size={1.3} />}
+					prefix={<IcMSearchdark />}
 					style={{ width: 300 }}
 				/>
 			</div>
 			<StyledTable
 				data={list}
 				columns={SettlementList({
-					settlementFilters,
-					setSettlementFilters,
-					setOrderBy,
-					sortStyleAsc,
-					sortStyleDesc,
 					setActive,
 					getHistoryChild,
 				})}

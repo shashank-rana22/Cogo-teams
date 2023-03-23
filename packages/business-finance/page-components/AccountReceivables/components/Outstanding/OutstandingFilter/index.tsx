@@ -46,8 +46,8 @@ function Filters({
 	const { search } = params || {};
 
 	return (
-		<div className={styles.Container}>
-			<div className={styles.entityCode}>
+		<div className={styles.container}>
+			<div className={styles.entity_code}>
 				<Select
 					value={params.entityCode}
 					onChange={(val:string) => onChange(val, 'entityCode')}
@@ -58,20 +58,17 @@ function Filters({
 				{' '}
 
 			</div>
-			<div className={styles.FilterContainer}>
+			<div className={styles.filter_container}>
 				<div className={styles.sort_container}>
 
 					<Popover
-						theme="light"
 						placement="bottom"
-						interactive
 						visible={showSortPopover}
-						onClickOutside={() => setShowSortPopover(false)}
-						content={(
-							<div className={styles.StyledRow}>
+						render={(
+							<div className={styles.styled_row}>
 								{SORTBY_OPTION.map((item) => (
 									<div
-										className={styles.StyledCol}
+										className={styles.styled_col}
 										onClick={() => {
 											setOrderBy({
 												key   : item.value,
@@ -83,7 +80,7 @@ function Filters({
 										}}
 										role="presentation"
 									>
-										<div className={styles.TileHeading}>{item.label}</div>
+										<div className={styles.tile_heading}>{item.label}</div>
 									</div>
 								))}
 							</div>
@@ -96,7 +93,7 @@ function Filters({
 						>
 							Sort By:
 							{' '}
-							<div className={styles.FilterValue}>
+							<div className={styles.filter_value}>
 								{orderBy.label}
 								{' '}
 							</div>
@@ -104,7 +101,7 @@ function Filters({
 					</Popover>
 					<div
 						role="presentation"
-						className={styles.IconDiv}
+						className={styles.icon_div}
 						onClick={() => {
 							setOrderBy((prev) => ({
 								key   : prev.key,
@@ -120,19 +117,17 @@ function Filters({
 					</div>
 
 				</div>
-				<div className={styles.FlexWrap}>
+				<div className={styles.flex_wrap}>
 					<div className={styles.sort_container}>
 						<Popover
-							theme="light"
 							placement="bottom"
-							interactive
 							visible={showSearchPopover}
-							onClickOutside={() => setShowSearchPopover(false)}
-							content={(
-								<div className={styles.StyledRow}>
+							// onClickOutside={() => setShowSearchPopover(false)}
+							render={(
+								<div className={styles.styled_row}>
 									{SEARCH_OPTIONS.map((item) => (
 										<div
-											className={styles.StyledCol}
+											className={styles.styled_col}
 											onClick={() => {
 												setQueryKey(item?.value || 'q');
 												setShowSearchPopover(false);
@@ -140,7 +135,7 @@ function Filters({
 											}}
 											role="presentation"
 										>
-											<div className={styles.TileHeading}>{item.label}</div>
+											<div className={styles.tile_heading}>{item.label}</div>
 										</div>
 									))}
 								</div>
@@ -153,14 +148,14 @@ function Filters({
 							>
 								Searched By:
 								{' '}
-								<div className={styles.FilterValue}>
+								<div className={styles.filter_value}>
 									{placeholder?.replace('Search By ', '')}
 									{' '}
 								</div>
 							</div>
 						</Popover>
 					</div>
-					<div className={styles.FlexWrap}>
+					<div className={styles.flex_wrap}>
 						<Input
 							className="primary md"
 							placeholder={placeholder}
@@ -169,11 +164,13 @@ function Filters({
 							suffix={(
 								<IcMCross
 									onClick={handleInputReset}
-									size={1.3}
+									// size={1.3}
 									cursor="pointer"
 								/>
 							)}
-							prefix={<IcMSearchdark size={1.3} />}
+							prefix={(
+								<IcMSearchdark />
+							)}
 							style={{ width: 300 }}
 						/>
 					</div>

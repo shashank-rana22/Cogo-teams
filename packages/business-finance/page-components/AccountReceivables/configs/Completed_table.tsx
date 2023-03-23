@@ -41,7 +41,6 @@ const completedColumn = (refetch) => [
 
 			(getByKey(row, 'organizationName') as string).length > 10 ? (
 				<Tooltip
-					interactive
 					placement="top"
 					content={getByKey(row, 'organizationName') as string}
 				>
