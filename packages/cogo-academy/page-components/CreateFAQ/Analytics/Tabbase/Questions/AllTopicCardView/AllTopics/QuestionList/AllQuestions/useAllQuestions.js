@@ -44,7 +44,6 @@ const useAllQuestions = ({ listdata = [], sortType, setSortType }) => {
 				</Tooltip>
 			</div>
 		),
-
 		tags: (item?.faq_tags?.length > 0 ? (
 			<div className={styles.tags}>
 				{item.faq_tags.map((tag) => {
@@ -53,25 +52,23 @@ const useAllQuestions = ({ listdata = [], sortType, setSortType }) => {
 				})}
 			</div>
 		) : '-'),
-
 		views: (
 			<div className={styles.likes}>
 				{item?.view_count}
 			</div>
 		),
-
 		likes: (
 			<div className={styles.likes}>
 				{item?.answers[0]?.upvote_count}
 			</div>
 		),
-
 		dislikes: (
 			<div className={styles.likes}>
 				{item?.answers[0]?.downvote_count}
 			</div>
 		),
 	}));
+
 	return {
 		columns,
 		data,
