@@ -69,7 +69,8 @@ export const questionSetColumns = ({ loading, updateApi, fetchList, router }) =>
 			id       : 'updatedAt',
 			accessor : ({ updated_at = '' }) => (
 				<section>
-					{format(updated_at, 'dd MMM yyyy')}
+					{/* {format(updated_at, 'dd MMM yyyy')} */}
+					{format(updated_at, 'dd MMM yyyy, h:mm a')}
 				</section>
 			),
 		},
@@ -209,21 +210,27 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 		{
 			Header   : 'STATUS',
 			id       : 'tags',
-			accessor : ({ status = '', id = '' }) => (
+			accessor : ({ status = '', id = '', validity_start = '', validity_end = '' }) => (
 				status === 'active' ? (
-					<section>
-						<Pill size="md" color="green">{startCase(status)}</Pill>
-						<Link href={`/learning/tests/${id}`}>
-							<Pill
-								key={status}
-								size="md"
-								prefix={<IcMShare />}
-								color="#FEF3E9"
-								style={{ cursor: 'pointer' }}
-							>
-								Share Test Link
-							</Pill>
-						</Link>
+					<section className={styles.details}>
+						<section className={styles.status}>
+							<Pill size="md" color="green">{startCase(status)}</Pill>
+							<Link href={`/learning/tests/${id}`}>
+								<Pill
+									key={status}
+									size="md"
+									prefix={<IcMShare />}
+									color="#FEF3E9"
+									style={{ cursor: 'pointer' }}
+								>
+									Share Test Link
+								</Pill>
+							</Link>
+						</section>
+						<section>
+							{format(validity_start, 'dd MMM yyyy, h:mm a - ')}
+							{format(validity_end, 'dd MMM yyyy, h:mm a')}
+						</section>
 					</section>
 				)
 					: (
@@ -253,7 +260,7 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 			id       : 'updatedAt',
 			accessor : ({ updated_at = '' }) => (
 				<section>
-					{format(updated_at, 'dd MMM yyyy')}
+					{format(updated_at, 'dd MMM yyyy, h:mm a')}
 				</section>
 			),
 		},
