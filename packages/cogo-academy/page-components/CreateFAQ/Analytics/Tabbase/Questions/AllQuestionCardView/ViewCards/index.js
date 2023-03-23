@@ -19,6 +19,8 @@ const VIEW_CARD_TEXT_MAPPING = {
 	disliked : 'Dislikes, ',
 };
 function ViewCards({ state = '', cardHeading = '', subHeading = [] }) {
+	const MAPPING = [subHeading?.[0], subHeading?.[1]];
+
 	const truncate = (str) => (str?.length > 10 ? `${startCase(str.substring(0, 11))}...` : startCase(str));
 	function sidetext(value, item) {
 		const key = VIEW_CARD__PERCENT_MAPPING[value];
@@ -35,6 +37,7 @@ function ViewCards({ state = '', cardHeading = '', subHeading = [] }) {
 			</div>
 		);
 	}
+
 	return (
 		<div className={styles.primary_right}>
 			<div className={styles.active_users}>
@@ -43,42 +46,31 @@ function ViewCards({ state = '', cardHeading = '', subHeading = [] }) {
 				</div>
 
 				<div className={styles.sub_heading}>
-					<div>
-						<div className={styles.sub_heading_context}>
-							<Tooltip
-								content={subHeading[0]?.display_name
-								|| subHeading[0]?.name || subHeading[0]?.topic_name
-								|| 'No Data Available'}
-								placement="right"
-							>
+					{
+						MAPPING.map((element) => {
+							const { display_name = '', name = '', topic_name } = element || {};
+							const tooltipContent = display_name || name || topic_name || 'No Data Available';
+
+							return (
 								<div>
-									{truncate(subHeading[0]?.display_name
-									|| subHeading[0]?.name || subHeading[0]?.topic_name || '-')}
+									<div className={styles.sub_heading_context}>
+										<Tooltip
+											content={tooltipContent}
+											placement="right"
+										>
+											<div>
 
+												{truncate(display_name || name || topic_name || '-')}
+
+											</div>
+										</Tooltip>
+										{sidetext(state, element)}
+									</div>
 								</div>
-							</Tooltip>
-							{sidetext(state, subHeading[0])}
-						</div>
-					</div>
+							);
+						})
+					}
 
-					<div>
-						<div className={styles.sub_heading_context}>
-							<Tooltip
-								content={subHeading[1]?.display_name
-								|| subHeading[1]?.name || subHeading[1]?.topic_name
-								|| 'No Data Available'}
-								placement="right"
-							>
-
-								{truncate(subHeading[1]?.display_name
-									|| subHeading[1]?.name || subHeading[1]?.topic_name || '-')}
-
-							</Tooltip>
-
-							{sidetext(state, subHeading[1])}
-
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>

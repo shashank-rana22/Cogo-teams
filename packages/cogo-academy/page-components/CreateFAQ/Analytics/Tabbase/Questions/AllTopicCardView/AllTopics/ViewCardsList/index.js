@@ -13,9 +13,9 @@ const VIEW_CARD_MAPPING = {
 function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] }) {
 	const truncate = (str) => (str?.length > 28 ? `${startCase(str.substring(0, 26))}...` : startCase(str));
 	const VIEW_CARD_ICON_MAPPING = {
-		viewed_question   : <IcMEyeopen style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} />,
-		liked_question    : <IcMLike style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} />,
-		disliked_question : <IcMDislike style={{ marginTop: '0.15rem', marginLeft: '0.2rem' }} />,
+		viewed_question   : <IcMEyeopen className={styles.icon_container} />,
+		liked_question    : <IcMLike className={styles.icon_container} />,
+		disliked_question : <IcMDislike className={styles.icon_container} />,
 	};
 
 	function icon(value, item) {
@@ -50,16 +50,17 @@ function ViewCardsList({ state = '', cardHeading = '', contentQuestion = [{}] })
 			<div>
 				{(contentQuestion || []).map((item, index) => {
 					if (index > 3 || item?.[key] === 0) return null;
+					const { question_abstract = '' } = item || {};
 					return (
 						<div className={styles.quest}>
 							<div className={styles.margin}>
-								<Tooltip content={item?.question_abstract} placement="right">
+								<Tooltip content={question_abstract} placement="right">
 									<div className={styles.question_line}>
 										<div style={{ width: 12 }}>
 											{index + 1}
 											.
 										</div>
-										{truncate(item?.question_abstract || '-')}
+										{truncate(question_abstract || '-')}
 									</div>
 								</Tooltip>
 							</div>
