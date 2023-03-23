@@ -60,7 +60,7 @@ const useUpdateSingleBadge = (props) => {
 
 			Toast.success('Badge Updated!');
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 	return {

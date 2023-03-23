@@ -41,12 +41,13 @@ function useCreateMasterConfiguration(props) {
 				expertise_configuration_detail_ids : badges,
 				expertise_configuration_type       : 'badge_configuration',
 				status                             : 'active',
+				// performed_by_id                    : '1234',
+				// performed_by_type                  : 'user',
 				badge_details                      : [
 					{
 						image_url : image_input || masteryItemData?.badge_details?.[0]?.image_url,
-						medal     : mastery_name,
+						medal     : 'mastery',
 					},
-
 				],
 			};
 
@@ -63,7 +64,7 @@ function useCreateMasterConfiguration(props) {
 
 			listRefetch();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response.data));
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 
