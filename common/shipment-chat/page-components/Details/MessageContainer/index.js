@@ -1,5 +1,5 @@
 import { useSelector } from '@cogoport/store';
-import React, { useMemo } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import useUpdateMessage from '../../../hooks/useUpdateMessage';
 import MsgLoader from '../MsgLoader';
@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
 	const { user_id } = useSelector((s) => ({ user_id: s?.profile?.user.id }));
 	const { onCreate } = useUpdateMessage();
+	const containerRef = useRef(null);
 
 	const handleClick = (msg) => {
 		onCreate({
@@ -19,21 +20,7 @@ function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
 		});
 	};
 
-	// let sortedMessageContentArr = useMemo(
-	// 	() => [
-	// 		Object.keys(msgContent || {}).forEach((key) => {
-	// 			const newObj = {
-	// 				...msgContent[key],
-	// 				mainKey: key,
-	// 			};
-	// 			sortedMessageContentArr.push(newObj);
-	// 		}),
-	// 	],
-	// 	[msgContent],
-	// );
-
 	let sortedMessageContentArr = [];
-
 	Object.keys(msgContent || {}).forEach((key) => {
 		const newObj = {
 			...msgContent[key],
@@ -54,38 +41,21 @@ function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
 
 	const totalMessages = showImpMsg ? importantMessage : sortedMessageContentArr;
 
-	const handleScroll = (id) => {
-		if (id) {
-			const docs = document.getElementById(id);
-
-			if (docs) {
-				docs.scrollIntoView({
-					block: 'end', inline: 'nearest',
-				});
-				docs.focus();
-			}
-		}
-	};
-
-	// useMemo(() => {
-	// 	const lastIndex = sortedMessageContentArr.length - 1;
-
-	// 	handleScroll(`shipment_chat_message_container${lastIndex}`);
-	// }, [sortedMessageContentArr]);
-
-	handleScroll('shipment_chat_message_container');
+	useEffect(() => {
+		const container = containerRef.current;
+		container.scrollTop = container.scrollHeight;
+	}, [totalMessages]);
 
 	return (
-		<div className={styles.main_container}>
+		<div className={styles.main_container} ref={containerRef}>
 			{isGettingShipment ? (
 				<MsgLoader />
 			) : (
 				<>
-					{(totalMessages || []).map((msg, index) => (
+					{(totalMessages || []).map((msg) => (
 						<MessageContent
 							msg={msg}
 							user_id={user_id}
-							index={index}
 							handleClick={handleClick}
 						/>
 					))}
