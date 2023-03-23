@@ -268,7 +268,7 @@ function ExpenseComponent() {
 										padding    : '0px 4px',
 									}}
 									disabled={mailLoading}
-									onClick={() => { sendMail({ rowData }); }}
+									onClick={() => { sendMail({ rowData: itemData }); }}
 								>
 									Re-send Email
 								</Button>

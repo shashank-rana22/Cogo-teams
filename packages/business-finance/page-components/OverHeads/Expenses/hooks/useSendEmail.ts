@@ -1,6 +1,9 @@
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const useSendEmail = () => {
+	const { profile	} = useSelector((state:any) => state);
+
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense/send-email',
@@ -11,11 +14,14 @@ const useSendEmail = () => {
 	);
 
 	const sendMail = async ({ rowData }) => {
+		console.log('rowData-', rowData);
+
+		const {} = rowData || {};
 		try {
 			await trigger({
 				data: {
 					stakeholderId : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
-					userId        : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
+					userId        : profile?.user?.id,
 					approveLink   : 'sda.com',
 					rejectLink    : 'as.co',
 					vendorName    : 'Hello',
