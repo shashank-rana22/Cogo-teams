@@ -67,12 +67,9 @@ function Filters({
 				<div className={styles.sort_container}>
 
 					<Popover
-						theme="light"
 						placement="bottom"
-						interactive
 						visible={showSortPopover}
-						onClickOutside={() => setShowSortPopover(false)}
-						content={(
+						render={(
 							<div className={styles.styled_row}>
 								{SORTBY_OPTION.map((item) => (
 									<div
@@ -128,12 +125,10 @@ function Filters({
 				<div className={styles.flex_wrap}>
 					<div className={styles.sort_container}>
 						<Popover
-							theme="light"
 							placement="bottom"
-							interactive
 							visible={showSearchPopover}
-							onClickOutside={() => setShowSearchPopover(false)}
-							content={(
+							// onClickOutside={() => setShowSearchPopover(false)}
+							render={(
 								<div className={styles.styled_row}>
 									{SEARCH_OPTIONS.map((item) => (
 										<div
@@ -174,11 +169,13 @@ function Filters({
 							suffix={(
 								<IcMCross
 									onClick={handleInputReset}
-									size={1.3}
+									// size={1.3}
 									cursor="pointer"
 								/>
 							)}
-							prefix={<IcMSearchdark size={1.3} />}
+							prefix={(
+								<IcMSearchdark />
+							)}
 							style={{ width: 300 }}
 						/>
 					</div>

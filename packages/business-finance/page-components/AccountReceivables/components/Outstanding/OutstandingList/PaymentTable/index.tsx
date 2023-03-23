@@ -37,7 +37,7 @@ function PaymentTable({ data }) {
 				<MultiSelect
 					placeholder="Select Status"
 					value={paymentFilters.statusList}
-					onChange={(val:string) => onChange(val, 'statusList')}
+					onChange={(val?:any) => onChange(val, 'statusList')}
 					options={UTILIZATION_STATUS}
 					style={{ width: 200, marginRight: '16px' }}
 				/>
@@ -46,7 +46,9 @@ function PaymentTable({ data }) {
 					placeholder="Search by Payment Number"
 					value={paymentFilters.query}
 					onChange={(val) => onChange(val, 'query')}
-					prefix={<IcMSearchdark size={1.3} />}
+					prefix={(
+						<IcMSearchdark />
+					)}
 					style={{ width: 300 }}
 				/>
 			</div>

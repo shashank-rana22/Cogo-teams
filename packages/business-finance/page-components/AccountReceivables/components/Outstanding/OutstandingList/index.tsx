@@ -133,7 +133,6 @@ function OutstandingList({ item }) {
 							{' '}
 							{collectionPartyType.length > 1 ? (
 								<Tooltip
-									theme="light"
 									content={content(
 										collectionPartyType,
 										'Collection Party Types',

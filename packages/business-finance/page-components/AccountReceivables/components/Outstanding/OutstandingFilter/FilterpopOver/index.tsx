@@ -13,8 +13,8 @@ function FilterpopOver({
 	clearFilter,
 }) {
 	const [show, setShow] = useState(false);
-	const onChange = (val:string, name:string) => {
-		setFilters((p) => ({ ...p, [name]: val }));
+	const onChange = (val:any | string, name:string) => {
+		setFilters((p:object) => ({ ...p, [name]: val }));
 	};
 
 	const content = (
@@ -54,7 +54,7 @@ function FilterpopOver({
 					asyncKey="partner_users"
 					valueKey="user_id"
 					initialCall={false}
-					onChange={(userId) => onChange(userId, 'salesAgentId')}
+					onChange={(userId:any) => onChange(userId, 'salesAgentId')}
 					value={filters.salesAgentId}
 					placeholder="Select Sales Agent User"
 					size="sm"
@@ -65,7 +65,7 @@ function FilterpopOver({
 					asyncKey="list_locations"
 					valueKey="user_id"
 					initialCall={false}
-					onChange={(userId) => onChange(userId, 'creditControllerId')}
+					onChange={(userId:any) => onChange(userId, 'creditControllerId')}
 					value={filters.salesAgentId}
 					placeholder="Select Credit Controller User"
 					size="sm"
@@ -74,7 +74,7 @@ function FilterpopOver({
 
 				<Select
 					value={filters.dueIn}
-					onChange={(val:string) => onChange(val, 'ageingKey')}
+					onChange={(val?:any) => onChange(val, 'ageingKey')}
 					placeholder="Select Due In"
 					options={DUE_IN}
 					isClearable
@@ -84,7 +84,7 @@ function FilterpopOver({
 
 				<Select
 					value={filters.companyType}
-					onChange={(val:string) => onChange(val, 'companyType')}
+					onChange={(val?:any) => onChange(val, 'companyType')}
 					isClearable
 					placeholder="Select Company Type"
 					options={companyType}
@@ -95,7 +95,7 @@ function FilterpopOver({
 				<CheckboxGroup
 					style={{ flexDirection: 'column', width: '100%' }}
 					options={SALES_AGENT}
-					onChange={(val:string) => onChange(val, 'checkBox')}
+					onChange={(val?:any) => onChange(val, 'checkBox')}
 					value={filters.checkBox}
 				/>
 			</div>
@@ -107,7 +107,6 @@ function FilterpopOver({
 				visible={show}
 				placement="bottom"
 				render={content}
-				interactive
 				className={styles.popover_container}
 			>
 				<Button
