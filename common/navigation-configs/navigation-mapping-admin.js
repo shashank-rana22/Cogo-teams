@@ -263,6 +263,7 @@ const navigationMappingAdmin = {
 			...apis.contract_rates,
 			...apis.feedback,
 			...apis.checkout_promotions,
+			...apis.cargo_insurance,
 		],
 		main_apis: [
 			'list_organizations',
@@ -1109,7 +1110,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback],
+				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.cargo_insurance],
 			},
 			{
 				key           : 'coe-bn_salvage',
@@ -1341,7 +1342,7 @@ const navigationMappingAdmin = {
 				as            : '/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
+				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens, ...apis.cargo_insurance],
 			},
 			{
 				key           : 'coe-document_desk',
