@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable max-len */
 import { Modal, Button } from '@cogoport/components';
 import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
@@ -167,7 +165,6 @@ function CreateFAQ() {
 
 	return (
 		<div>
-
 			<div className={styles.back_div} onClick={onClickBackIcon}>
 				<IcMArrowBack width={20} height={20} />
 				<div className={styles.back}>Back to Dashboard</div>
