@@ -17,8 +17,6 @@ function FilterpopOver({
 		setFilters((p) => ({ ...p, [name]: val }));
 	};
 
-	console.log('filters', filters);
-
 	const content = (
 		<div>
 			<div className={styles.search_container}>

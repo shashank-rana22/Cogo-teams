@@ -1,81 +1,80 @@
-.serial_card{
-    display: flex;
-    justify-content: space-between;
+.serial_card {
+	display: flex;
+	justify-content: space-between;
 }
 
-.serial_id_card{
-display: flex;
+.serial_id_card {
+	display: flex;
 }
 
-.card{
-    background-color: white;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    padding-bottom: 12px;
+.card {
+	padding-bottom: 12px;
+	margin-bottom: 12px;
+	background-color: white;
+	border-radius: 12px;
 }
 
-.CustomTag{
-    display: flex;
-    background-color: rgb(230, 251, 233);
-    padding: 4px 8px;
-    font-size: 10px;
-    font-weight: 500;
-    border-radius: 4px;
-
+.CustomTag {
+	display: flex;
+	padding: 4px 8px;
+	font-size: 10px;
+	font-weight: 500;
+	background-color: rgb(230 251 233);
+	border-radius: 4px;
 }
 
-.custom_tag_margin{
-    display: flex;
-    background-color: rgb(230, 251, 233);
-    padding: 4px 8px;
-    margin-left: 12px;
-    font-size: 10px;
-    font-weight: 500;
-    border-radius: 4px;
-
+.custom_tag_margin {
+	display: flex;
+	padding: 4px 8px;
+	margin-left: 12px;
+	font-size: 10px;
+	font-weight: 500;
+	background-color: rgb(230 251 233);
+	border-radius: 4px;
 }
 
 .OrgNameConatiner {
-display: flex;
-justify-content: space-between;
-margin-top: 12px;
-padding: 2px 8px;
+	display: flex;
+	justify-content: space-between;
+	padding: 2px 8px;
+	margin-top: 12px;
 }
 
-.SubOrgNameConatiner{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.SubOrgNameConatiner {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
-.styledName{
-    font-size: 14px;
-    font-weight: 600;
-    color: rgb(51, 51, 51)
-}
-.StyledTag{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(222, 215, 252);
-    font-size: 12px;
-    padding: 0px 6px;
-    font-weight: 500;
-    border-radius: 4px;
-    margin-left: 8px;
+.styledName {
+	font-size: 14px;
+	font-weight: 600;
+	color: rgb(51 51 51);
 }
 
-.Heading{
+.StyledTag {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 6px;
+	margin-left: 8px;
+	font-size: 12px;
+	font-weight: 500;
+	background-color: rgb(222 215 252);
+	border-radius: 4px;
+}
+
+.Heading {
+	margin-bottom: 6px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #2c3e50;
-	margin-bottom: 6px;
 }
 
-.Hr{
-	background: #2c3e50;
+.Hr {
 	height: 1px;
 	margin-bottom: 6px;
+	background: #2c3e50;
 }
 
 .FlexColumn {
@@ -83,45 +82,52 @@ padding: 2px 8px;
 	flex-direction: column;
 }
 
-.TagText{
+.TagText {
 	font-size: 10px;
 	font-weight: 600;
 	color: #333;
 }
 
-.TagTextLeft{
-    font-size: 10px;
+.TagTextLeft {
+	margin-left: 8px;
+	font-size: 10px;
 	font-weight: 600;
 	color: #333;
-    margin-left: 8px;
 }
 
-.CategoryContainer{
-    display: flex;
-    height: 24px;
+.CategoryContainer {
+	display: flex;
+	height: 24px;
 }
 
-.subCategoryContainer{
-    display: flex;
-    align-items: center;
-    background-color: rgb(242, 242, 242);
-    padding: 0px 6px;
-    margin-left: 12px;
-    border-radius: 4px;
+.subCategoryContainer {
+	display: flex;
+	align-items: center;
+	padding: 0 6px;
+	margin-left: 12px;
+	background-color: rgb(242 242 242);
+	border-radius: 4px;
 }
 
 .OrgList{
 }
 
-.Value{
-	font-weight: 500;
+.Value {
+	margin-left: 4px;
 	font-size: 10px;
-    margin-left: 4px;
+	font-weight: 500;
 }
 
-.LegalBusinessName{
+.LegalBusinessName {
 	font-size: 10px;
 	font-weight: 500;
-	color: #616161;
 	line-height: 11px;
+	color: #616161;
+}
+
+.popover_wrapper {
+	display: flex;
+	justify-content: end;
+	width: 75%;
+	margin-top: -22px;
 }

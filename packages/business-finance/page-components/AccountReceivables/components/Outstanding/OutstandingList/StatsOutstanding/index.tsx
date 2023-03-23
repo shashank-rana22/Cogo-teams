@@ -39,8 +39,8 @@ function StatsOutstanding({ item }) {
 									<div className={styles.InfoContent}>
 										<div className={styles.Heading}>Open Invoices</div>
 										<div className={styles.HR} />
-										<div style={{ marginTop: '5px' }}>
-											{openInvoice.map((invoice) => (
+										{/* <div style={{ marginTop: '5px' }}>
+											{openInvoice?.map((invoice) => (
 												<div
 													className={styles.Amount}
 													style={{ fontWeight: 600, fontSize: '11px' }}
@@ -61,7 +61,7 @@ function StatsOutstanding({ item }) {
 													</div>
 												</div>
 											))}
-										</div>
+										</div> */}
 									</div>
 								)}
 								placement="right"
@@ -170,7 +170,7 @@ function StatsOutstanding({ item }) {
 						</div>
 					</div>
 					<div style={{ marginTop: '5px' }}>
-						{totalOutstanding.map((outstanding) => (
+						{/* {totalOutstanding?.map((outstanding) => (
 							<div
 								className={styles.Amount}
 								style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
@@ -190,7 +190,7 @@ function StatsOutstanding({ item }) {
 									)
 								</div>
 							</div>
-						))}
+						))} */}
 					</div>
 				</div>
 			</div>
@@ -221,7 +221,7 @@ function StatsOutstanding({ item }) {
 						</div>
 					</div>
 					<div style={{ marginTop: '5px' }}>
-						{onAccountPayment.map((onAccount) => (
+						{/* {onAccountPayment.map((onAccount) => (
 							<div
 								className={styles.Amount}
 								style={{
@@ -246,7 +246,7 @@ function StatsOutstanding({ item }) {
 									)
 								</div>
 							</div>
-						))}
+						))} */}
 					</div>
 				</div>
 			</div>

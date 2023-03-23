@@ -3,7 +3,9 @@ import { startCase, format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { CARD_DETAILS } from '../../../constants/index';
+import useGetPartnerRmMapping from '../../../hooks/useGetPartnerRmMapping';
 
+import PopoverTags from './PopoverTags';
 import StatsOutstanding from './StatsOutstanding';
 import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
@@ -12,6 +14,10 @@ function OutstandingList({ item }) {
 	const [activeTab, setActiveTab] = useState('');
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
+	const { data, getPartnerMappingData, loading } = useGetPartnerRmMapping();
+	const handleClick = (val) => {
+		getPartnerMappingData(val);
+	};
 
 	const handleActiveTabs = (val) => {
 		if (val === activeTab) {
@@ -22,8 +28,6 @@ function OutstandingList({ item }) {
 			setIsAccordionActive(true);
 		}
 	};
-
-	console.log('item', item);
 
 	const {
 		organizationId,
@@ -114,7 +118,14 @@ function OutstandingList({ item }) {
 					</div>
 				</div>
 			</div>
-
+			<div className={styles.popover_wrapper}>
+				<PopoverTags
+					data={data}
+					loading={loading}
+					handleClick={handleClick}
+					item={item}
+				/>
+			</div>
 			<div style={{ padding: '2px 16px' }}>
 
 				<div className={styles.OrgNameConatiner}>
