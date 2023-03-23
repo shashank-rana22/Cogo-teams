@@ -33,7 +33,7 @@ function CreateFAQ() {
 	const router = useRouter();
 	const [editorError, setEditorError] = useState(false);
 
-	const { fetchQuestion, query = '', data, loading } = useGetQuestion();
+	const { fetchQuestion, query, data, loading } = useGetQuestion();
 
 	const {
 		editorValue,
@@ -126,8 +126,7 @@ function CreateFAQ() {
 			fetchTags();
 			fetchAudiences();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [fetchAudiences, fetchTags, fetchTopics, questionPreview]);
 
 	const onClickBackIcon = () => {
 		router.back();
