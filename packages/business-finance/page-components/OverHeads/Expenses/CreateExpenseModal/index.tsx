@@ -74,7 +74,7 @@ function CreateExpenseModal({
 
 	return (
 		<Modal
-			size={createExpenseType === 'nonRecurring' ? 'fullscreen' : 'xl'}
+			size="xl"
 			show={showModal}
 			onClose={() => setShowModal(false)}
 			placement="center"

@@ -129,7 +129,7 @@ function ExpenseDetailsForm({
 	};
 
 	return (
-		<div>
+		<div style={{ marginTop: '-30px' }}>
 			<Filter
 				controls={expenseControls({
 					formData,

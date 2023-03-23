@@ -30,75 +30,86 @@ function UploadInvoice({ formData, setFormData }:Props) {
 	];
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.upload_invoice}>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+		<div>
+			<div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+				<div className={styles.select}>
 					<Select
 						value={formData?.invoiceCurrency}
 						onChange={(val:string) => setFormData({ ...formData, invoiceCurrency: val })}
-						placeholder="Select Invoice Currency*"
+						placeholder="Currency*"
 						options={currencyOptions}
 						size="sm"
-						className={styles.select}
+
 					/>
-					<div className={styles.input}>
-						<Input
-							name="invoiceNumber"
-							size="sm"
-							placeholder="Enter unique invoice no."
-							onChange={(e:string) => setFormData({ ...formData, invoiceNumber: e })}
+
+				</div>
+				<div className={styles.input}>
+					<Input
+						name="invoiceNumber"
+						size="sm"
+						placeholder="Unique invoice no."
+						onChange={(e:string) => setFormData({ ...formData, invoiceNumber: e })}
+					/>
+
+				</div>
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<div>
+						<Datepicker
+							placeholder="Enter Invoice Date"
+							dateFormat="yyyy-MM-dd"
+							name="date"
+							onChange={(e:any) => setFormData((p) => ({ ...p, invoiceDate: e }))}
+							value={formData?.invoiceDate}
+							style={{ marginBottom: '-10px' }}
 						/>
 
 					</div>
-				</div>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<Datepicker
-						placeholder="Enter Invoice Date"
-						dateFormat="yyyy-MM-dd"
-						name="date"
-						onChange={(e:any) => setFormData((p) => ({ ...p, invoiceDate: e }))}
-						value={formData?.invoiceDate}
-						style={{ margin: '8px' }}
-					/>
 
 				</div>
-				{!isUploadConfirm ? (
-					<>
-						<Filter
-							controls={recurringUploadInvoice()}
-							filters={formData}
-							setFilters={setFormData}
-						/>
-						{uploadUrl &&	(
-							<div className={styles.confirm}>
-								<Button
-									onClick={() => setIsUploadConfirm(true)}
-								>
-									Confirm
-								</Button>
+			</div>
 
+			<div className={styles.container}>
+				<div className={styles.upload_invoice}>
+					{!isUploadConfirm ? (
+						<>
+							<Filter
+								controls={recurringUploadInvoice()}
+								filters={formData}
+								setFilters={setFormData}
+							/>
+							{uploadUrl &&	(
+								<div className={styles.confirm}>
+									<Button
+										onClick={() => setIsUploadConfirm(true)}
+									>
+										Confirm
+									</Button>
+
+								</div>
+							)}
+						</>
+					)
+						: (
+							<div>
+								<div style={{ margin: '4px 20px 8px 20px' }}>
+									<object
+										data={formData?.uploadedInvoice}
+										type="application/pdf"
+										height="400px"
+										width="100%"
+										aria-label="Document"
+									/>
+								</div>
 							</div>
 						)}
-					</>
-				)
-					: (
-						<div>
-							<div style={{ margin: '64px 20px 0px 20px' }}>
-								<object
-									data={formData?.uploadedInvoice}
-									type="application/pdf"
-									height="850px"
-									width="100%"
-									aria-label="Document"
-								/>
-							</div>
-						</div>
-					)}
 
+				</div>
+
+				<div className={`${styles.upload_invoice} ${styles.line_item}`}>
+					<LineItemsForm setFormData={setFormData} formData={formData} />
+				</div>
 			</div>
-			<div className={`${styles.upload_invoice} ${styles.line_item}`}>
-				<LineItemsForm setFormData={setFormData} formData={formData} />
-			</div>
+
 		</div>
 
 	);

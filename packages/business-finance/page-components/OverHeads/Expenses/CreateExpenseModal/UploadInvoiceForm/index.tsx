@@ -38,63 +38,69 @@ function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 	];
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.upload_invoice}>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+		<div>
+			<div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+				<div className={styles.select}>
 					<Select
 						value={formData?.invoiceCurrency}
 						onChange={(val:string) => setFormData({ ...formData, invoiceCurrency: val })}
-						placeholder="Select Invoice Currency*"
+						placeholder="Currency*"
 						options={currencyOptions}
 						size="sm"
-						className={styles.select}
+
 					/>
-					<div className={styles.input}>
-						<Input
-							name="invoiceNumber"
-							size="sm"
-							placeholder="Enter unique invoice no.*"
-							onChange={(e:string) => setFormData({ ...formData, invoiceNumber: e })}
-						/>
 
-					</div>
 				</div>
-				{!isUploadConfirm ? (
-					<>
-						<Filter
-							controls={uploadControls()}
-							filters={formData}
-							setFilters={setFormData}
-						/>
-						{uploadUrl &&	(
-							<div className={styles.confirm}>
-								<Button
-									onClick={() => setIsUploadConfirm(true)}
-								>
-									Confirm
-								</Button>
+				<div className={styles.input}>
+					<Input
+						name="invoiceNumber"
+						size="sm"
+						placeholder="Unique invoice no."
+						onChange={(e:string) => setFormData({ ...formData, invoiceNumber: e })}
+					/>
 
+				</div>
+			</div>
+
+			<div className={styles.container}>
+				<div className={styles.upload_invoice}>
+					{!isUploadConfirm ? (
+						<>
+							<Filter
+								controls={uploadControls()}
+								filters={formData}
+								setFilters={setFormData}
+							/>
+							{uploadUrl &&	(
+								<div className={styles.confirm}>
+									<Button
+										onClick={() => setIsUploadConfirm(true)}
+									>
+										Confirm
+									</Button>
+
+								</div>
+							)}
+						</>
+					)
+						: (
+							<div>
+								<div style={{ margin: '4px 20px 0px 20px' }}>
+									<object
+										data={formData?.uploadedInvoice}
+										type="application/pdf"
+										height="450px"
+										width="100%"
+										aria-label="Document"
+									/>
+								</div>
 							</div>
 						)}
-					</>
-				)
-					: (
-						<div>
-							<div style={{ margin: '64px 20px 0px 20px' }}>
-								<object
-									data={formData?.uploadedInvoice}
-									type="application/pdf"
-									height="850px"
-									width="100%"
-									aria-label="Document"
-								/>
-							</div>
-						</div>
-					)}
 
-			</div>
-			<div className={`${styles.upload_invoice} ${styles.line_item}`}>
-				<LineItemsForm setFormData={setFormData} formData={formData} />
+				</div>
+				<div className={`${styles.upload_invoice} ${styles.line_item}`}>
+					<LineItemsForm setFormData={setFormData} formData={formData} />
+				</div>
 			</div>
 		</div>
 

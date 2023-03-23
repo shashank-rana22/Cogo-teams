@@ -51,7 +51,7 @@ function AddExpenseModal({
 
 	return (
 		<Modal
-			size="fullscreen"
+			size="xl"
 			show={showExpenseModal}
 			onClose={() => setShowExpenseModal(false)}
 			placement="center"

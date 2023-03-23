@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMFileUploader } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+// import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import useCreateExpense from '../../hooks/useCreateExpense';
 import useCreateExpenseConfig from '../../hooks/useCreateExpenseConfig';
 
@@ -27,8 +28,8 @@ interface Props {
 function MailTemplate({ mailData, setMailData, setShowModal, getList, getRecurringList, createExpenseType }:Props) {
 	const { uploadedInvoice, vendorName = '-', expenseCategory = '-', stakeholderEmail } = mailData || {};
 
-	const splitArray = (uploadedInvoice || '').split('/') || [];
-	const filename = splitArray[splitArray.length - 1];
+	// const splitArray = (String(uploadedInvoice) || '').split('/') || [];
+	// const filename = splitArray[splitArray.length - 1];
 
 	const { submitData, loading } = useCreateExpense({
 		formData: mailData,
@@ -87,7 +88,8 @@ function MailTemplate({ mailData, setMailData, setShowModal, getList, getRecurri
 					<div className={styles.file}>
 						<a href={uploadedInvoice} target="_blank" rel="noreferrer">
 							<IcMFileUploader />
-							{filename}
+							{/* {showOverflowingNumber(filename, 10)} */}
+							Uploaded file
 						</a>
 					</div>
 				)}

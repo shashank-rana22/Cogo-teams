@@ -62,7 +62,7 @@ export const nonRecurringExpenseDetails = ({
 					placeholder    : 'Vendor name',
 					span           : 2.5,
 					initialCall    : false,
-					style          : { width: '220px' },
+					style          : { width: '180px' },
 				},
 				{
 					name                  : 'invoiceDate',
@@ -89,6 +89,7 @@ export const nonRecurringExpenseDetails = ({
 					value          : formData?.periodOfTransaction,
 					onChange       : (month:string) => setFormData({ ...formData, periodOfTransaction: month }),
 					options        : MONTH_OPTIONS,
+					style          : { width: '170px' },
 				},
 				{
 					name           : 'cogoEntity',
@@ -101,6 +102,7 @@ export const nonRecurringExpenseDetails = ({
 					options        : entityOptions,
 					value          : formData?.entityObject?.id,
 					onChange       : (e:any) => handleEntityChange(e),
+					style          : { width: '170px' },
 				},
 			],
 		},
@@ -112,7 +114,7 @@ export const nonRecurringExpenseDetails = ({
 					label       : 'PAN',
 					type        : 'textarea',
 					value       : formData?.registrationNumber || null,
-					style       : { borderRadius: '4px' },
+					style       : { borderRadius: '4px', height: '40px', width: '180px' },
 					placeholder : 'Autofilled PAN',
 					span        : 2.4,
 				},
@@ -124,6 +126,7 @@ export const nonRecurringExpenseDetails = ({
 					defaultOptions : false,
 					placeholder    : 'Category',
 					span           : 2,
+					style          : { width: '170px' },
 					options        : categoryOptions,
 				},
 				{
@@ -134,6 +137,7 @@ export const nonRecurringExpenseDetails = ({
 					defaultOptions : false,
 					placeholder    : 'Sub-Category',
 					span           : 2,
+					style          : { width: '170px' },
 					options        : subCategoryOptions,
 				},
 				{
@@ -144,6 +148,7 @@ export const nonRecurringExpenseDetails = ({
 					multiple       : false,
 					defaultOptions : false,
 					span           : 2,
+					style          : { width: '170px' },
 					options        : branchOptions,
 				},
 				{
@@ -153,6 +158,7 @@ export const nonRecurringExpenseDetails = ({
 					clearable      : true,
 					multiple       : false,
 					defaultOptions : false,
+					style          : { width: '140px' },
 					span           : 2,
 					options        : [
 						{ label: 'Pay Run', value: 'payrun' },

@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMFileUploader } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+// import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import useAddExpense from '../../hooks/useAddExpense';
 
 import Details from './Details';
@@ -28,8 +29,8 @@ function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowD
 	const { category } = rowData || {};
 	const { business_name:vendorName } = vendorData || {};
 
-	const splitArray = (uploadedInvoice || '').split('/') || [];
-	const filename = splitArray[splitArray.length - 1];
+	// const splitArray = (String(uploadedInvoice) || '').split('/') || [];
+	// const filename = splitArray[splitArray.length - 1];
 
 	const { submitData, loading } = useAddExpense({ expenseData, setShowModal, getList, rowData });
 
@@ -71,7 +72,8 @@ function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowD
 					<div className={styles.file}>
 						<a href={uploadedInvoice} target="_blank" rel="noreferrer">
 							<IcMFileUploader style={{ marginRight: '4px' }} />
-							{filename}
+							{/* {showOverflowingNumber(filename, 10)} */}
+							Uploaded file
 						</a>
 					</div>
 				)}
