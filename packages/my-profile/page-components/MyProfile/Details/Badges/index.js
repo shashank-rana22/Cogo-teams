@@ -1,4 +1,4 @@
-import { Placeholder, Modal, Button, Tooltip } from '@cogoport/components';
+import { Toast, Placeholder, Modal, Button, Tooltip } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -82,7 +82,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => 	setShow(true)}
+						onClick={() => Toast.default('You dont have any mastery!')}
 					>
 						<b>Select Badges To Preview</b>
 					</Button>

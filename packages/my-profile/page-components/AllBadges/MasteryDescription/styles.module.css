@@ -127,3 +127,39 @@
         width: 192px;
     }
 }
+
+.badges {
+    margin-top: 24px;
+}
+
+.unlocked_badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &:after {
+        content: "";
+        flex: auto;
+    }
+}
+
+.badge_image {
+    height: 100px;
+    width: 100px;
+
+    img {
+        height: 100%;
+        width: 100%;
+        border-radius: 8px;
+    }
+}
+
+.stars_container {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.unlocked_item {
+    margin: 16px 8px 0 8px;
+}
