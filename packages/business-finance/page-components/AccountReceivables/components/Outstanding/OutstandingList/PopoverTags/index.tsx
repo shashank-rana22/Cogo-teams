@@ -44,7 +44,7 @@ function PopoverTags({
 					<div className={styles.tag_texts}>
 						KAM Owner :
 						<div className={styles.tag_text}>
-							{salesAgent.name || '-'}
+							{salesAgent?.name || '-'}
 						</div>
 					</div>
 					<div className={styles.tag_text}>{salesAgent.email || '-'}</div>
@@ -71,7 +71,7 @@ function PopoverTags({
 					<div className={styles.tag_texts}>
 						AGENT :
 						<div className={styles.tag_text}>
-							{salesAgent.name || '-'}
+							{salesAgent?.name || '-'}
 						</div>
 					</div>
 					<div className={styles.tag_text}>{salesAgent.email || '-'}</div>
