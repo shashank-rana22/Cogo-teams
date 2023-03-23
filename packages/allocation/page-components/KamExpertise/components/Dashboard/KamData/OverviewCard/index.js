@@ -1,12 +1,23 @@
 import { Card, Placeholder, Tooltip } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
+import {
+	IcMInfo, IcMAgentManagement, IcMTradeparties,
+	IcMBreakBulkCargoType, IcMMiscellaneous,
+} from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function OverviewCard(props) {
-	const { data = {}, leaderboardLoading = false } = props;
+const Icon_Mapping = {
+	customer_expertise  : <IcMAgentManagement height={24} width={24} />,
+	trade_expertise     : <IcMTradeparties height={24} width={24} />,
+	commodity_expertise : <IcMBreakBulkCargoType height={24} width={24} />,
+	miscellaneous       : <IcMMiscellaneous height={24} width={24} />,
+};
 
-	if (leaderboardLoading) {
+function OverviewCard(props) {
+	const { data = {}, overviewLoading = false } = props;
+
+	if (overviewLoading) {
 		return (
 			<Card
 				themetype="primary"
@@ -20,8 +31,8 @@ function OverviewCard(props) {
 				)}
 				/>
 				<Card.Description className={styles.content}>
-					{Array(2).fill('').map(() => (
-						<div className={styles.display_flex_loading}>
+					{[1, 2].map((item) => (
+						<div key={item} className={styles.display_flex_loading}>
 							<Placeholder width="100px" />
 
 							<Placeholder style={{ marginTop: '8px' }} width="100px" />
@@ -40,13 +51,13 @@ function OverviewCard(props) {
 		>
 			<Card.Title title={(
 				<div className={styles.title}>
-					<span>{data.icon}</span>
+					<span>{Icon_Mapping[data.expertise_type]}</span>
 
-					<span style={{ padding: '0 10px' }}><h3>{data.title}</h3></span>
+					<span className={styles.title_text}>{startCase(data.expertise_type)}</span>
 
 					<span style={{ paddingTop: '4px', width: '40px', height: '40px' }}>
 						<Tooltip
-							content={data.title}
+							content={startCase(data.expertise_type)}
 							placement="top"
 						>
 							<IcMInfo
@@ -72,7 +83,7 @@ function OverviewCard(props) {
 						Most Points in
 					</span>
 					<span style={{ display: 'flex', fontWeight: 'bold' }}>
-						{data.points_in}
+						{data.max_condition}
 					</span>
 				</div>
 			</Card.Description>

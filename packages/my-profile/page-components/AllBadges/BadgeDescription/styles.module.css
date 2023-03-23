@@ -16,6 +16,10 @@
     display: flex;
     padding: 8px 8px 8px 0;
     justify-content: space-between;
+
+    @media (max-width: 576px) {
+        flex-direction: column;
+    }
 }
 
 .main_badge {
@@ -53,10 +57,18 @@
 .details_header {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 576px) {
+        flex-direction: column;
+    }
 }
 
 .lable_value {
     margin: 8px 8px 0 0;
+
+    @media (max-width: 576px) {
+        margin: 16px 8px 0 0;
+    }
 }
 
 .small_badge {
@@ -120,10 +132,17 @@
     margin-top: 12px;
     display: flex;
     flex-direction: row;
-    :global(.ui_I2xfq) {
+
+    :global(.ui_progressbar_container) {
+        width: 100%;
+    }
+
+    :global(.ui_progressbar_filename) {
         font-weight: 400;
     }
-    :global(.ui_1trfb) {
-        width: 192px;
+
+    :global(.ui_progressbar_bar) {
+        max-width: 192px;
+        width: 100%;
     }
 }

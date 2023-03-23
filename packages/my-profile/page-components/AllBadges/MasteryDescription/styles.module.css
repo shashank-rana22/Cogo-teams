@@ -120,11 +120,18 @@
     margin-top: 12px;
     display: flex;
     flex-direction: row;
-    :global(.ui_I2xfq) {
+
+    :global(.ui_progressbar_container) {
+        width: 100%;
+    }
+
+    :global(.ui_progressbar_filename) {
         font-weight: 400;
     }
-    :global(.ui_1trfb) {
-        width: 192px;
+
+    :global(.ui_progressbar_bar) {
+        max-width: 192px;
+        width: 100%;
     }
 }
 

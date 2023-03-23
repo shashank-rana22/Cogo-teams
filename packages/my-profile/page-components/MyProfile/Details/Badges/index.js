@@ -58,6 +58,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 			<div className={styles.container}>
 				<div className={styles.header}>
 					<p className={styles.heading}>Badges</p>
+
 					<Button
 						size="md"
 						themeType="secondary"
@@ -79,6 +80,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 			<div className={styles.container}>
 				<div className={styles.header}>
 					<p className={styles.heading}>Badges</p>
+
 					<Button
 						size="md"
 						themeType="secondary"
@@ -99,6 +101,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<p className={styles.heading}>Badges</p>
+
 				<Button
 					size="md"
 					themeType="secondary"
@@ -122,6 +125,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 												<div className={styles.badge}>
 													<img src={item.image_url} alt="badge icon" />
 												</div>
+
 												<div className={styles.stars}>
 													{[1, 2, 3].map((itm) => (
 														<div key={itm}>
@@ -135,6 +139,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 							);
 						})
 					}
+
 					{
 						badgesNotGot?.map((item, index) => {
 							max_badges += 1;
@@ -146,6 +151,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 												<div className={styles.badge}>
 													<img src={item.image_url} alt="badge icon" />
 												</div>
+
 												<div className={styles.stars}>
 													{[1, 2, 3].map((itm) => (
 														<div key={itm}>
@@ -160,6 +166,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 						})
 					}
 				</div>
+
 				<div
 					role="presentation"
 					onClick={handleClick}
@@ -178,6 +185,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 				closeOnOuterClick
 			>
 				<Modal.Header title="Preview Badges" />
+
 				<Modal.Body className={styles.modal_body}>
 					<p className={styles.lable}>
 						Select the mastery badge to preview on your profile
@@ -200,10 +208,12 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 						}}
 					/>
 				</Modal.Body>
+
 				<Modal.Footer>
 					<Button themeType="tertiary" onClick={onClose}>
 						Cancel
 					</Button>
+
 					<Button onClick={handleSave}>Save</Button>
 				</Modal.Footer>
 			</Modal>

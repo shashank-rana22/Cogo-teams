@@ -45,11 +45,11 @@ function ListItem(props) {
 							badge_details.map((value, i) => (
 								i < 3
 									? (
-										<div key={value.id} className={styles.badge_item}>
-											<img src={value.image_url} alt="badge" />
+										<div key={value?.id} className={styles.badge_item}>
+											<img src={value?.image_url} alt="badge" />
 											<div className={styles.star}>
-												{[1, 2, 3].map((i) => (
-													<div key={i}>
+												{[1, 2, 3].map((it) => (
+													<div key={it}>
 														<IcCStar width={10} stroke="#FFDF33" />
 													</div>
 												))}

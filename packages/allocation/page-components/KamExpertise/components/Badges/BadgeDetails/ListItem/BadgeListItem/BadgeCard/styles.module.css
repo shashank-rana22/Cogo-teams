@@ -45,7 +45,7 @@
 }
 
 .modal_class {
-    :global(.ui_wqLD8) {
+    :global(.ui_modal_body_container) {
         padding: 16px 0;
     }
 }
