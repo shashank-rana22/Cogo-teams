@@ -11,6 +11,7 @@ import ActionsStatus from './ActionsStatus';
 import styles from './styles.module.css';
 
 function ListData({
+	userId = '', userMobile = '', leadUserId = '',
 	list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {},
 	isGstUploaded, isPanUploaded,
 }) {
@@ -30,9 +31,11 @@ function ListData({
 		return finalStatus;
 	};
 
+	const emptyCheck = (!userId && !userMobile && !leadUserId) || isEmpty(list);
+
 	return (
 		<div>
-			{isEmpty(list) ? (
+			{emptyCheck ? (
 				<div className={styles.empty}>
 					<EmptyState type="documents" />
 				</div>

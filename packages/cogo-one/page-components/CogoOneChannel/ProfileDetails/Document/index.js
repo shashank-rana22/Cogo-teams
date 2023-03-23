@@ -34,6 +34,9 @@ function Documents({
 		loading = false,
 		documentsList = () => {},
 		orgId = '',
+		userId = '',
+		userMobile = '',
+		leadUserId = '',
 		is_pan_uploaded = false,
 		is_gst_uploaded = false,
 	} = useListOmnichannelDocuments({
@@ -101,6 +104,9 @@ function Documents({
 					setSingleItem={setSingleItem}
 					isPanUploaded={is_pan_uploaded}
 					isGstUploaded={is_gst_uploaded}
+					userId={userId}
+					userMobile={userMobile}
+					leadUserId={leadUserId}
 				/>
 
 			)}
