@@ -39,8 +39,6 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 
 	const columns = columnsMapping[activeTab]({ ...propsMapping[activeTab] });
 
-	console.log('loading', loading);
-
 	if (!loading && isEmpty(data?.list)) {
 		return <EmptyState />;
 	}
