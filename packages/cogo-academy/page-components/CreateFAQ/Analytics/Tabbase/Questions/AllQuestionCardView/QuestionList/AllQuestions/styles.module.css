@@ -43,3 +43,10 @@
 	align-items: center;
 	cursor: pointer;
 }
+
+.pagination_wrapper{
+	display: flex;
+	padding-bottom: 16px;
+	padding-right: 12px;
+	justify-content: flex-end;
+}

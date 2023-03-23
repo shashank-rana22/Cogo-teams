@@ -36,50 +36,56 @@ const useAllQuestions = ({ listdata = [], sortType, setSortType }) => {
 		accessor: column,
 	}));
 
-	const data = (listdata || []).map((item) => ({
-		questions: (
-			<div style={{ fontWeight: 1000, paddingLeft: '20px' }}>
-				<Tooltip content={item?.question_abstract} placement="right">
-					<div>{truncate(item?.question_abstract)}</div>
-				</Tooltip>
-			</div>
-		),
-		topics: (
-			item?.faq_topics?.length > 0 ? (
-				<div className={styles.topics}>
-					{item.faq_topics.map((topic) => {
-						const { display_name } = topic || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-					})}
+	const data = (listdata || []).map((item) => {
+		const { question_abstract = '', faq_topics = [], faq_tags = [], view_count, answers = [] } = item || {};
+		const { upvote_count = 0, downvote_count = 0 } = answers?.[0] || {};
+
+		const tabledata = {
+			questions: (
+				<div style={{ fontWeight: 1000, paddingLeft: '20px' }}>
+					<Tooltip content={question_abstract} placement="right">
+						<div>{truncate(question_abstract)}</div>
+					</Tooltip>
 				</div>
-			) : <div style={{ marginLeft: '32px' }}>-</div>
-		),
-		tags: (
-			item?.faq_tags?.length > 0 ? (
-				<div className={styles.tags}>
-					{item.faq_tags.map((tag) => {
-						const { display_name } = tag || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-					})}
+			),
+			topics: (
+				item?.faq_topics?.length > 0 ? (
+					<div className={styles.topics}>
+						{(faq_topics || []).map((topic) => {
+							const { display_name } = topic || {};
+							return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+						})}
+					</div>
+				) : <div style={{ marginLeft: '32px' }}>-</div>
+			),
+			tags: (
+				item?.faq_tags?.length > 0 ? (
+					<div className={styles.tags}>
+						{(faq_tags || []).map((tag) => {
+							const { display_name } = tag || {};
+							return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+						})}
+					</div>
+				) : <div style={{ marginLeft: '32px' }}>-</div>
+			),
+			views: (
+				<div className={styles.question}>
+					{view_count}
 				</div>
-			) : <div style={{ marginLeft: '32px' }}>-</div>
-		),
-		views: (
-			<div className={styles.question}>
-				{item?.view_count}
-			</div>
-		),
-		likes: (
-			<div className={styles.likes}>
-				{item?.answers?.[0]?.upvote_count}
-			</div>
-		),
-		dislikes: (
-			<div className={styles.question}>
-				{item?.answers?.[0]?.downvote_count}
-			</div>
-		),
-	}));
+			),
+			likes: (
+				<div className={styles.likes}>
+					{upvote_count}
+				</div>
+			),
+			dislikes: (
+				<div className={styles.question}>
+					{downvote_count}
+				</div>
+			),
+		};
+		return tabledata;
+	});
 
 	return {
 		columns,
