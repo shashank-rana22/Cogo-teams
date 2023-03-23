@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable max-len */
 import { Popover, Button, Input, Tooltip } from '@cogoport/components';
 import { IcMSearchlight, IcMInfo } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
@@ -18,6 +18,10 @@ import useSendEmail from './hooks/useSendEmail';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
 import { expenseRecurringConfig, expenseNonRecurringConfig } from './utils/config';
+
+interface ListInterface {
+	list?:{ length?:number }
+}
 
 interface ItemDataInterface {
 	expensePeriod?:string,
@@ -353,7 +357,7 @@ function ExpenseComponent() {
 	};
 
 	let listConfig:any;
-	let listItemData:any;
+	let listItemData:ListInterface;
 	let loading:boolean;
 
 	if (recurringState === 'recurring') {
@@ -365,6 +369,8 @@ function ExpenseComponent() {
 		listItemData = listData;
 		loading = listLoading;
 	}
+
+	const isListEmpty = listItemData?.list?.length === 0;
 
 	return (
 		<div className={styles.expense_container}>
@@ -391,6 +397,19 @@ function ExpenseComponent() {
 					showPagination
 					renderDropdown={showDropDown}
 				/>
+				<div>
+					{isListEmpty
+					&& (
+						<div className={styles.no_data}>
+							<img
+								style={{ width: '26%' }}
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg"
+								alt="no data"
+							/>
+						</div>
+					)}
+				</div>
+
 			</div>
 
 			{showModal && (

@@ -123,3 +123,7 @@
 	text-decoration: underline ;
 	cursor: pointer;
 }
+.no_data{
+	display: flex;
+	justify-content: center;
+}

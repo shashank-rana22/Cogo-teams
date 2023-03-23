@@ -57,6 +57,8 @@ function List({
 		general: { isMobile = false },
 	}:any = useSelector((state: object) => state);
 
+	const { totalRecords = 0 } = itemData?.totalRecords || {};
+
 	return (
 		<section>
 			{showHeader && !isMobile && (
@@ -87,7 +89,7 @@ function List({
 			</div>
 			{showPagination && (
 				<div>
-					{itemData?.totalRecords && (
+					{totalRecords ? (
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"
@@ -97,7 +99,7 @@ function List({
 								onPageChange={handlePageChange}
 							/>
 						</div>
-					)}
+					) : null}
 				</div>
 			)}
 		</section>
