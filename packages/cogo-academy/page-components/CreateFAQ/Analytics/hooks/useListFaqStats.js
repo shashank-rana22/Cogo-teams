@@ -1,12 +1,23 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState, useCallback } from 'react';
+import { addHours, addMinutes } from '@cogoport/utils';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 
-function useListFaqStats({
-	date = '',
-}) {
+function useListFaqStats() {
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
+	const [date, setDate] = useState({});
+
 	const { startDate, endDate } = date;
+
+	const formatStartDate = useMemo(
+		() => (startDate ? addMinutes(addHours(startDate, 5), 30) : undefined),
+		[startDate],
+	);
+
+	const formatEndDate = useMemo(
+		() => (endDate ? addMinutes(addHours(endDate, 5), 30) : undefined),
+		[endDate],
+	);
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
@@ -18,8 +29,8 @@ function useListFaqStats({
 			await trigger({
 				params: {
 					filters: {
-						created_at_greater_than : startDate,
-						created_at_less_than    : endDate,
+						created_at_greater_than : formatStartDate || undefined,
+						created_at_less_than    : formatEndDate || undefined,
 
 					},
 					page_limit                          : 1000 || undefined,
@@ -38,7 +49,7 @@ function useListFaqStats({
 		} catch (error) {
 			console.log('error :: ', error);
 		}
-	}, [endDate, startDate, trigger]);
+	}, [formatStartDate, formatEndDate, trigger]);
 
 	useEffect(() => {
 		fetchFaqStats();
@@ -57,6 +68,8 @@ function useListFaqStats({
 		loading,
 		activeTab,
 		setActiveTab,
+		date,
+		setDate,
 	};
 }
 

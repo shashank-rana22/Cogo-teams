@@ -7,7 +7,6 @@ function Filter({ selectedItem, setSelectedItem, date = '', setDate = () => {} }
 		{ label: 'Users Groups', value: 'Users Group' },
 	];
 	const today = new Date();
-	today.setDate(today.getDate() + 1);
 
 	return (
 		<div className={styles.top_content}>

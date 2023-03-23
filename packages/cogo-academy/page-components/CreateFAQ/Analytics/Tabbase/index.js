@@ -9,8 +9,9 @@ import Users from './Users';
 
 function Tabbase() {
 	const [activeTab, setActiveTab] = useState('By_Questions');
-	const [date, setDate] = useState('');
-	const props = useListFaqStats({ date });
+	const props = useListFaqStats();
+
+	const { date, setDate } = props || {};
 
 	return (
 		<div>
@@ -33,8 +34,6 @@ function Tabbase() {
 				<TabPanel
 					name="By_Users"
 					title="By Users"
-					// badge={props?.data?.question_stats?.no_of_questions}
-
 				>
 					<Users props={props} date={date} setDate={setDate} />
 				</TabPanel>
