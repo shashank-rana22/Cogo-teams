@@ -47,12 +47,12 @@
 	text-overflow: ellipsis;
 	cursor: pointer;
 	background: #fff;
-	border: 1px solid #eaeaea;
 	border-radius: 4px;
+	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 	transition: 0.3s ease-in-out;
 
 	&:hover {
-		border: 1px solid #73be73;
 		transition: 0.3 ease-in-out;
 		transform: scale(1.05);
 	}

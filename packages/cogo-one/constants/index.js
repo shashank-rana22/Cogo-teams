@@ -237,3 +237,11 @@ export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/co
 
 export const PAGE_LIMIT = 50;
 export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
+
+export const GENERAL_ICON = (
+	<img
+		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg"
+		alt="logo cogoport"
+		style={{ width: 40, height: 40 }}
+	/>
+);

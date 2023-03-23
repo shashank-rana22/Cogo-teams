@@ -1,8 +1,9 @@
 import { Input, Pagination, Tooltip, Loader } from '@cogoport/components';
-import { IcMCross, IcMSearchlight, IcMFolder } from '@cogoport/icons-react';
+import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import { GENERAL_ICON } from '../../../../constants';
 import IconMapping from '../../../../constants/HELP_DESK_ICON_MAPPING';
 import useTopicList from '../../../../hooks/useTopicList';
 
@@ -46,16 +47,11 @@ function HelpDesk() {
 				}
 			});
 
-			const DisplayIcon = IconMapping[includesKey]?.icon || IcMFolder;
-			const style = IconMapping[includesKey]?.style;
-
-			if (IconMapping[includesKey]?.isSvg) {
-				return <div className={style.icon}>{DisplayIcon}</div>;
-			}
+			const DisplayIcon = IconMapping[includesKey]?.icon || GENERAL_ICON;
 
 			return (
 				<div className={styles.icon}>
-					<DisplayIcon style={{ color: style || '#1b842c' }} />
+					{DisplayIcon}
 				</div>
 			);
 		};
