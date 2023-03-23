@@ -68,7 +68,7 @@ function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowD
 			</div>
 
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-				{uploadedInvoice && (
+				{uploadedInvoice?.length > 0 && (
 					<div className={styles.file}>
 						<a href={uploadedInvoice} target="_blank" rel="noreferrer">
 							<IcMFileUploader style={{ marginRight: '4px' }} />
