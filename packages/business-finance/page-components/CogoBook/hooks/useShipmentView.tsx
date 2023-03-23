@@ -6,26 +6,32 @@ import { useEffect, useState } from 'react';
 
 import { FilterInterface } from '../Accruals/interface';
 
+import calculateAccrue from './calculateAccrue';
+
 interface ShipmentInterface {
 	filters?:FilterInterface
 	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
+	setBulkSection: React.Dispatch<React.SetStateAction<{}>>
 	checkedRows?:object
 }
 
-const useShipmentView = ({ filters, checkedRows, setCheckedRows }:ShipmentInterface) => {
+const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection }:ShipmentInterface) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
 	const [checkedRowsSerialId, setCheckedRowsSerialId] = useState([]);
 	const [tempCheckedData, setTempCheckedData] = useState([]);
 	const [payload, setPayload] = useState([]);
+	const [profitValue, setProfitValue] = useState(0);
 	const [checkedData, setCheckedData] = useState([]);
+	const [profit, setProfit] = useState([]);
 	const [apiData, setApiData] = useState({ pageNo: 0, totalPages: 0, total: 0, totalRecords: 0, list: [] });
 	const {
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
-		jobState = '', query = '',
+		jobState = '', query = '', page,
 	} = filters || {};
+	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
 
 	const rangeMapping = {
 		'>'  : 'gt',
@@ -72,18 +78,35 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows }:ShipmentInterf
 					jobState             : jobState || undefined,
 					profitAmount         : profitAmount || undefined,
 					profitType           : profitType || undefined,
-					page                 : 1,
+					page                 : page || undefined,
 					pageLimit            : 10,
-					// page,
 					// sortType,
 				},
+			});
+			const data = { ...resp.data };
+			const dataList = data?.list;
+			(dataList || []).map((item, index) => {
+				dataList[index] = {
+					...item,
+					newProfitPercentage: item.profitPercentage,
+				};
+				return dataList[index];
 			});
 			setApiData(resp.data);
 		} catch (error) {
 			setApiData({ pageNo: 0, totalPages: 0, total: 0, totalRecords: 0, list: [] });
-			// toast.error(error?.data?.message);
 		}
 	};
+
+	useEffect(() => {
+		if (year && month && query) {
+			refetch();
+		}
+	}, [query]);
+
+	useEffect(() => {
+		refetch();
+	}, [page]);
 
 	const {
 		pageNo: pageNos = 0,
@@ -108,6 +131,12 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows }:ShipmentInterf
 	}, [checkedRowsSerialId, apiData, list]);
 
 	useEffect(() => {
+		if (tempCheckedData) {
+			setCheckedData(tempCheckedData);
+		}
+	}, [tempCheckedData]);
+
+	useEffect(() => {
 		setCheckedRowsSerialId([
 			...Object.keys(checkedRows).reduce(
 				(previousSerialIds, currentSerialId) => [
@@ -130,6 +159,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows }:ShipmentInterf
 
 		if (event?.target?.checked) {
 			setPayload([...list]);
+			setBulkSection(() => ({ value: true }));
 		} else {
 			setPayload([]);
 		}
@@ -150,15 +180,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows }:ShipmentInterf
 		);
 	};
 
-	useEffect(() => {
-		if (tempCheckedData) {
-			setCheckedData(tempCheckedData);
-		}
-	}, [tempCheckedData]);
-
 	const onChangeTableBodyCheckbox = (event, item) => {
 		const { page: pages = 0 } = paginationData;
-		console.log(checkedRows, 'checkedRows');
 		if (event?.target?.checked) {
 			setCheckedRows({
 				...checkedRows,
@@ -196,8 +219,6 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows }:ShipmentInterf
 	const addSelect = async (setOpenModal) => {
 		const newPayload = payload.map((item) => ({
 			...item,
-			// expenseCurrency : geo.country.currency.code,
-			// incomeCurrency  : geo.country.currency.code,
 		}));
 		try {
 			const res = await addToSelectedTrigger({
@@ -212,20 +233,119 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows }:ShipmentInterf
 				setPayload([]);
 				setOpenModal(false);
 			}
-			// setCheckedData([]);
 		} catch (error) {
 			Toast.error(error?.data?.message);
 		}
+	};
+
+	const editProfitHandler = (itemData, editable = true) => {
+		setApiData((prev) => {
+			const data = { ...prev };
+			const dataList = data?.list;
+			const index = dataList?.findIndex(
+				(item) => item?.jobId === itemData.jobId,
+			);
+			if (index !== -1) {
+				dataList[index] = {
+					...itemData,
+					editProfit: editable,
+				};
+			}
+			return { ...data, list: dataList };
+		});
+	};
+	const changeProfitHandler = (value) => {
+		setProfitValue(value);
+	};
+	const crossProfitHandler = (itemData) => {
+		const { incomeBooked = 0, expenseBooked = 0 } = itemData || {};
+		const totalProfit = +incomeBooked - +expenseBooked;
+		setApiData((prev) => {
+			const data = { ...prev };
+			const dataList = data?.list;
+			const index = dataList?.findIndex(
+				(item) => item?.jobId === itemData.jobId,
+			);
+			if (index !== -1) {
+				dataList[index] = {
+					...itemData,
+					newProfitPercentage : itemData.profitPercentage,
+					expenseAccrued      : 0,
+					incomeAccrued       : 0,
+					profit              : totalProfit,
+					editProfit          : false,
+				};
+			}
+			return { ...data, list: dataList };
+		});
+		setProfit((p) => ({ ...p, [itemData.jobId]: undefined }));
+	};
+
+	const tickProfitHandler = (itemData) => {
+		let incomeAccruedValue = '0';
+		let expenseAccruedValue = '0';
+		if (+profitValue - +itemData.profitPercentage === 0) {
+			incomeAccruedValue = '0';
+			expenseAccruedValue = '0';
+		} else if (+profitValue - +itemData.profitPercentage > 0) {
+			incomeAccruedValue = calAccrueSale(itemData, profitValue);
+		} else {
+			expenseAccruedValue = calAccruePurchase(itemData, profitValue);
+		}
+		const { incomeBooked = 0, expenseBooked = 0 } = itemData || {};
+		const totalSales = +incomeBooked + +incomeAccruedValue;
+		const totalPurchase = +expenseBooked + +expenseAccruedValue;
+		const totalProfit = totalSales - totalPurchase;
+		setApiData((prev) => {
+			const data = { ...prev };
+			const dataList = data?.list;
+			const index = dataList?.findIndex(
+				(item) => item?.jobId === itemData.jobId,
+			);
+			if (index !== -1) {
+				dataList[index] = {
+					...itemData,
+					newProfitPercentage : profitValue,
+					incomeAccrued       : incomeAccruedValue,
+					expenseAccrued      : expenseAccruedValue,
+					profit              : totalProfit.toFixed(4),
+					editProfit          : false,
+				};
+			}
+			return { ...data, list: dataList };
+		});
+		const { page: pages = 0 } = paginationData;
+		if (checkedRows[`page-${pages}`]?.includes(itemData?.jobId)) {
+			const newPayload = payload.map((i) => {
+				const newElement = i;
+				if (itemData.jobId === i.jobId) {
+					newElement.newProfitPercentage = profitValue;
+					newElement.expenseAccrued = expenseAccruedValue;
+					newElement.incomeAccrued = incomeAccruedValue;
+				}
+				return newElement;
+			});
+			setPayload([...newPayload]);
+		}
+		setProfit({ ...profit, [itemData.jobId]: profitValue });
+		setProfitValue(0);
 	};
 
 	return {
 		refetch,
 		shipmentViewData,
 		shipmentLoading,
+		changeProfitHandler,
+		crossProfitHandler,
+		tickProfitHandler,
 		getTableBodyCheckbox,
 		setPayload,
 		selectedData,
+		editProfitHandler,
+		profitValue,
+		profit,
 		addSelect,
+		apiData,
 		checkedRowsSerialId,
 		payload,
 		selectedDataLoading,

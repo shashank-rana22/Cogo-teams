@@ -22,9 +22,9 @@ const tabsKeyComponentMapping = {
 };
 
 function Accruals() {
-	const { query, push } = useRouter();
+	const { push } = useRouter();
 
-	const [subActiveTab, setSubActiveTab] = useState<string>(query.view || 'shipment_view');
+	const [subActiveTab, setSubActiveTab] = useState<string>('shipment_view');
 	const [showTab, setShowTab] = useState(true);
 	const tabComponentProps = {
 		shipment_view : {},

@@ -86,7 +86,13 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 					size="sm"
 					themeType="secondary"
 					onClick={() => {
-						setFilters({ range: '', profitAmount: '', profitPercent: '', profitType: '' });
+						setFilters((prev) => ({
+							...prev,
+							range         : '',
+							profitAmount  : '',
+							profitPercent : '',
+							profitType    : '',
+						}));
 						setProfitNumber('');
 					}}
 				>

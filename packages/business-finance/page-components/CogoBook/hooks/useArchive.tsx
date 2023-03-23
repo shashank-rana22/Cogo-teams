@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
+import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 const useArchive = ({ toggleValue = '', setShowTab }) => {
@@ -18,7 +19,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		archivedStatus : '',
 		search         : '',
 		Range          : '',
-		date           : '',
+		date           : { startDate: '', endDate: '' },
 	});
 
 	const {
@@ -37,7 +38,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 	}, [search]);
 
 	const [
-		{ data:declaredTriggerData, loading:declaredTriggerLoading },
+		{ loading:declaredTriggerLoading },
 		declaredTrigger,
 	] = useRequestBf(
 		{
@@ -49,7 +50,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 	);
 
 	const [
-		{ data:actualTriggerData, loading:actualTriggerLoading },
+		{ loading:actualTriggerLoading },
 		actualTrigger,
 	] = useRequestBf(
 		{
@@ -72,12 +73,12 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 			});
 			setApiData(res.data);
 		} catch {
-			setApiData({});
+			setApiData({ list: [] });
 		}
 	};
 
 	const [
-		{ data:drillDownArchiveData, loading:drillDownArchiveLoading },
+		{ loading:drillDownArchiveLoading },
 		drillDownArchiveTrigger,
 	] = useRequestBf(
 		{
@@ -93,8 +94,8 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 			const res = await drillDownArchiveTrigger({
 				params: {
 					period         : month.period || undefined,
-					startDate      : date?.startDate || undefined,
-					endDate        : date?.endDate || undefined,
+					startDate      : format(date?.startDate, 'yyyy MM dd') || undefined,
+					endDate        : format(date?.endDate, 'yyyy MM dd') || undefined,
 					archivedStatus : archivedStatus || 'BOOKED' || undefined,
 					serviceType    : serviceType || undefined,
 					query,

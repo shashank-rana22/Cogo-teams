@@ -1,0 +1,82 @@
+.container {
+  background: white;
+  border-radius: 8px;
+  padding: 36px;
+  margin-top: 20px;
+}
+.filter_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.filter_select {
+  display: flex;
+  gap: 8px;
+}
+.date_range {
+  width: fit-content;
+  :global {
+    .react-datepicker__input-container {
+      input {
+        height: 32px;
+      }
+      .react-datepicker-ignore-onclickoutside {
+        height: 32px;
+      }
+
+      .react-datepicker__close-icon::after {
+        background: none !important;
+      }
+
+      .react-datepicker__close-icon {
+        border: none;
+      }
+    }
+  }
+}
+.input_container {
+  width: 300px;
+  :global {
+    .ui_input_container {
+      height: 32px;
+    }
+  }
+}
+.select_container {
+  :global {
+    .ui_select_container {
+      width: 130px !important;
+      .ui_select_display_container {
+        height: 32px;
+      }
+    }
+  }
+}
+.sub_container {
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 26px 36px;
+  margin: 25px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.basis {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.basis_sub {
+  background: #c4dc91;
+  border-radius: 6px;
+  padding: 4px;
+  font-size: 12px;
+}
+.date {
+  color: #828282;
+}
+.uploaded {
+  display: flex;
+  gap: 4px;
+}

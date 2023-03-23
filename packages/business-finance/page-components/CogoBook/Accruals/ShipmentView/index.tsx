@@ -15,6 +15,7 @@ function ShipmentView() {
 	const [checkedRows, setCheckedRows] = useState({});
 	const [viewSelected, setViewSelected] = useState(true);
 	const [showBtn, setShowBtn] = useState(false);
+	const [bulkSection, setBulkSection] = useState({ value: false, bulkAction: '' });
 	const [filters, setFilters] = useState({
 		year          : '',
 		month         : '',
@@ -31,19 +32,33 @@ function ShipmentView() {
 		page          : 1,
 		pageLimit     : 10,
 	});
+
 	const {
 		refetch,
-		shipmentViewData, shipmentLoading, getTableBodyCheckbox,
-		checkedData, getTableHeaderCheckbox,
+		shipmentLoading,
+		getTableBodyCheckbox,
+		checkedData,
+		getTableHeaderCheckbox,
 		payload,
 		setPayload,
 		addSelect,
 		checkedRowsSerialId,
-	} =	 useShipmentView({ filters, checkedRows, setCheckedRows });
+		apiData,
+		editProfitHandler,
+		profitValue,
+		changeProfitHandler,
+		crossProfitHandler,
+		tickProfitHandler,
+		profit:profitData,
+	} =	 useShipmentView({ filters, checkedRows, setBulkSection, setCheckedRows });
 
-	const { list = [], total = 0, pageSize = 10 } = shipmentViewData || {};
+	const {
+		totalRecords = 0,
+		list = [],
+	} = apiData || {};
 
 	const { page } = filters || {};
+
 	return (
 		<div>
 			<Card
@@ -77,6 +92,7 @@ function ShipmentView() {
 						value={filters?.query}
 						onChange={(val) => { setFilters((prev) => ({ ...prev, query: val })); }}
 						placeholder="Search by SID"
+						disabled={!filters.year && !filters.month}
 						suffix={<IcMSearchlight height="20px" width="20px" style={{ marginRight: '8px' }} />}
 					/>
 				</div>
@@ -85,10 +101,19 @@ function ShipmentView() {
 			<div className={styles.table_data}>
 				<StyledTable
 					page={page}
-					total={total}
-					pageSize={pageSize}
+					total={totalRecords}
+					pageSize={10}
 					data={list}
-					columns={accrualColumn(getTableBodyCheckbox, getTableHeaderCheckbox)}
+					columns={accrualColumn(
+						getTableBodyCheckbox,
+						getTableHeaderCheckbox,
+						editProfitHandler,
+						changeProfitHandler,
+						crossProfitHandler,
+						tickProfitHandler,
+						profitValue,
+						profitData,
+					)}
 					loading={shipmentLoading}
 					setFilters={setFilters}
 					filters={filters}
@@ -101,8 +126,10 @@ function ShipmentView() {
 					checkedRowsSerialId={checkedRowsSerialId}
 					payload={payload}
 					filters={filters}
+					bulkSection={bulkSection}
 					viewSelected={viewSelected}
 					showBtn={showBtn}
+					setBulkSection={setBulkSection}
 					shipmentLoading={shipmentLoading}
 					setCheckedRows={setCheckedRows}
 				/>

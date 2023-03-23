@@ -2,6 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { format, startCase } from '@cogoport/utils';
 
+import EditIcon from './EditIcon';
 import styles from './styles.module.css';
 
 const currentYear = new Date().getFullYear();
@@ -143,7 +144,16 @@ const content = (purchaseInvoicesCount, salesInvoicesCount) => {
 
 	);
 };
-export const accrualColumn = (getTableBodyCheckbox, getTableHeaderCheckbox) => [
+export const accrualColumn = (
+	getTableBodyCheckbox,
+	getTableHeaderCheckbox,
+	editProfitHandler,
+	changeProfitHandler,
+	crossProfitHandler,
+	tickProfitHandler,
+	profitValue,
+	profitData,
+) => [
 	{
 		Header   : <div className={styles.header_checkbox}>{getTableHeaderCheckbox()}</div>,
 		accessor : '',
@@ -155,7 +165,6 @@ export const accrualColumn = (getTableBodyCheckbox, getTableHeaderCheckbox) => [
 		accessor : 'sid',
 		id       : 'sid',
 		Cell     : ({ row: { original } }) => {
-			// console.log(original, 'original');
 			const { jobNumber = '', serviceType = '', purchaseInvoicesCount, salesInvoicesCount		} = original || {};
 			return (
 				<Tooltip
@@ -188,26 +197,16 @@ export const accrualColumn = (getTableBodyCheckbox, getTableHeaderCheckbox) => [
 		Cell     : ({ row: { original } }) => {
 			const {
 				expenseBooked = '',
-				expenseCurrency = '',
-				incomeBooked = '', incomeCurrency = '', expenseIncludesProforma = '', incomeIncludesProforma = '',
+				expenseCurrency = '', expenseIncludesProforma = '',
 			} = original || {};
 			return (
 				<>
 					<span>
-						{
-				expenseBooked
-					? getFormattedPrice(expenseBooked, expenseCurrency)
-					: getFormattedPrice(incomeBooked, incomeCurrency)
-}
+						{getFormattedPrice(expenseBooked, expenseCurrency)}
 					</span>
 					<span>
-						{expenseBooked
-							? expenseIncludesProforma && (
-								<div style={{ color: '#F06D6D' }}>Quotation</div>
-							)
-							: incomeIncludesProforma && (
-								<div style={{ color: '#F06D6D' }}>Quotation</div>
-							)}
+						{expenseIncludesProforma && (
+							<div style={{ color: '#F06D6D' }}>Quotation</div>)}
 
 					</span>
 				</>
@@ -228,8 +227,17 @@ export const accrualColumn = (getTableBodyCheckbox, getTableHeaderCheckbox) => [
 		accessor : 'sales_invoice_amount',
 		id       : 'sales_invoice_amount',
 		Cell     : ({ row: { original } }) => {
-			const { actualIncome = {} } = original || {};
-			return <span>{ getFormattedPrice(actualIncome, 'INR') || '-' }</span>;
+			const { actualIncome = '', incomeCurrency = '', incomeIncludesProforma } = original || {};
+			return (
+				<>
+					<span>{getFormattedPrice(actualIncome, incomeCurrency) || '-' }</span>
+					{incomeIncludesProforma && (
+						<span>
+							<div style={{ color: '#F06D6D' }}>Quotation</div>
+						</span>
+					)}
+				</>
+			);
 		},
 	},
 	{
@@ -246,8 +254,23 @@ export const accrualColumn = (getTableBodyCheckbox, getTableHeaderCheckbox) => [
 		accessor : 'profit',
 		id       : 'profit',
 		Cell     : ({ row: { original } }) => {
-			const { referenceId = {} } = original || {};
-			// return <span className={styles.incident_id}>{ referenceId || '-' }</span>;
+			const { profit = '', expenseCurrency = '' } = original || {};
+			return (
+				<>
+					<div>
+						<EditIcon
+							profit={profitData}
+							itemData={original}
+							profitValue={profitValue}
+							onEditProfit={editProfitHandler}
+							changeProfitHandler={changeProfitHandler}
+							onCrossProfit={crossProfitHandler}
+							onTickProfit={tickProfitHandler}
+						/>
+					</div>
+					<span>{getFormattedPrice(profit, expenseCurrency) || '-' }</span>
+				</>
+			);
 		},
 	},
 	{
@@ -255,8 +278,12 @@ export const accrualColumn = (getTableBodyCheckbox, getTableHeaderCheckbox) => [
 		accessor : 'mile',
 		id       : 'mile',
 		Cell     : ({ row: { original } }) => {
-			const { referenceId = {} } = original || {};
-			// return <span className={styles.incident_id}>{ referenceId || '-' }</span>;
+			const { milestone = '' } = original || {};
+			return (
+				<span>
+					{ startCase(milestone)	|| '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -264,8 +291,16 @@ export const accrualColumn = (getTableBodyCheckbox, getTableHeaderCheckbox) => [
 		accessor : 'status',
 		id       : 'status',
 		Cell     : ({ row: { original } }) => {
-			const { referenceId = {} } = original || {};
-			// return <span className={styles.incident_id}>{ referenceId || '-' }</span>;
+			const { jobStatus = '' } = original || {};
+			return (
+				<>
+					{jobStatus === 'OPEN' && <span className={styles.status}>{ startCase(jobStatus)	|| '-' }</span>}
+					{jobStatus === 'FINANCIALLY_CLOSED' && <span className={styles.status_fin}> Fin. Closed </span>}
+					{jobStatus === 'OPERATIONALLY_CLOSED' && <span className={styles.status_op}> Op. Closed </span>}
+
+				</>
+
+			);
 		},
 	},
 

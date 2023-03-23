@@ -1,6 +1,6 @@
 export interface FilterInterface {
-	year?:string
-	month?:string
+	year?:any
+	month?:any
 	shipmentType?:string
 	profitAmount?:string
 	profitType?:string

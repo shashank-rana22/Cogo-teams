@@ -279,3 +279,8 @@ export const serviceTypeOptions = [
 	{ label: 'LCL-Customs-Freight', value: 'LCL_CUSTOMS_FREIGHT' },
 	{ label: 'AIR-Customs-Freight', value: 'AIR_CUSTOMS_FREIGHT' },
 ];
+
+export const optionsRadio = [
+	{ name: 'r1', value: 'BULK', label: 'ALL' },
+	{ name: 'r2', value: 'PAGE', label: 'CURRENT' },
+];

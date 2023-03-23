@@ -57,6 +57,7 @@
       }
     }
   }
+  cursor: pointer;
 }
 .hr_filter {
   border: 1px solid #ee3425;
@@ -100,4 +101,35 @@
 }
 .header_checkbox {
   padding-left: 4px;
+}
+.status {
+  background: #fef1df;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+.status_fin {
+  background: #ddebc0;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+.status_op {
+  background: #ddebc0;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+.date_range_not {
+  margin-top: 16px;
+  width: fit-content;
+  :global {
+    .react-datepicker__input-container {
+      .react-datepicker__close-icon::after {
+        background: none !important;
+      }
+
+      .react-datepicker__close-icon {
+        border: none;
+      }
+    }
+  }
+  cursor: not-allowed;
 }

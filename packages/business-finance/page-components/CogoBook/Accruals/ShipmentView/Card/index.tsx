@@ -94,6 +94,11 @@ function Card({
 
 		if (filters.page === 1) refetch();
 	};
+	const monthYear = [filters?.year, filters?.month];
+	const isDateRangeEnabled =	monthYear[0]?.length > 0 && typeof monthYear[1] === 'string';
+	const maxDate = new Date(monthYear[0], monthYear[1], 10);
+	const minDate = new Date(monthYear[0], monthYear[1] - 1, 1);
+
 	return (
 		<div className={styles.container}>
 			<div>
@@ -143,11 +148,15 @@ function Card({
 					</Tooltip>
 				</div>
 				<div className={styles.hr} />
-				<div className={styles.date_range}>
+				<div className={isDateRangeEnabled ? styles.date_range : styles.date_range_not}>
 					<SingleDateRange
 						placeholder="Date"
+						maxDate={maxDate}
+						minDate={minDate}
+						isPreviousDaysAllowed
 						dateFormat="MM/dd/yyyy"
 						name="date"
+						disable={!isDateRangeEnabled}
 						onChange={(val:any) => { setFilters((prev) => ({ ...prev, date: val })); }}
 						value={filters?.date}
 					/>
@@ -217,7 +226,14 @@ function Card({
 
 					</Button>
 				</Popover>
-				<Button size="lg" onClick={() => { onSubmit(); }} loading={shipmentLoading}> Apply</Button>
+				<Button
+					size="lg"
+					onClick={() => { onSubmit(); }}
+					disabled={!filters.year && !filters.month}
+					loading={shipmentLoading}
+				>
+					Apply
+				</Button>
 
 			</div>
 

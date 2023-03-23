@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+.section {
+  display: flex;
+  flex-direction: column;
+}
+.flex {
+  display: flex;
+  align-items: center;
+}
+.rest_icon {
+  cursor: pointer;
+  margin: 0 4px;
+}
+.tick {
+  opacity: "100%";
+  cursor: pointer;
+}
+.tick_not {
+  opacity: "30%";
+  cursor: not-allowed;
+}
+.info_container {
+  color: red;
+  display: flex;
+}
+.editIcon {
+  cursor: pointer;
+  margin-left: 4px;
+}
+.img_height {
+  height: 15px;
+  width: 15px;
+}

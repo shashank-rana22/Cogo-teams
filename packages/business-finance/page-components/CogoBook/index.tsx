@@ -29,8 +29,8 @@ const tabsKeyComponentMapping = {
 };
 
 function CogoBook() {
-	const { query, push } = useRouter();
-	const [activeTab, setActiveTab] = useState<string>(query.activeTab || 'accruals');
+	const { push } = useRouter();
+	const [activeTab, setActiveTab] = useState<string>('accruals');
 
 	const tabComponentProps = {
 		accruals: {

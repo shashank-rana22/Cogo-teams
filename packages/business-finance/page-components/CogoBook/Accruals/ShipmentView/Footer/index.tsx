@@ -1,9 +1,10 @@
-import { Modal, Button, Tooltip } from '@cogoport/components';
+import { RadioGroup, Modal, Button, Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcCError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
+import { optionsRadio } from '../../constant';
 import { FilterInterface } from '../../interface';
 
 import styles from './styles.module.css';
@@ -20,6 +21,8 @@ interface FooterInterface {
 	filters?:FilterInterface
 	viewSelected?: boolean
 	showBtn?: boolean
+	bulkSection?:{ value?:boolean, bulkAction?:string }
+	setBulkSection: React.Dispatch<React.SetStateAction<{}>>
 }
 
 function Footer({
@@ -31,7 +34,9 @@ function Footer({
 	actionConfirm = () => {},
 	shipmentLoading,
 	setCheckedRows,
+	setBulkSection,
 	isBookedActive = false,
+	bulkSection,
 	checkedRowsSerialId,
 	filters,
 }:FooterInterface) {
@@ -60,7 +65,8 @@ function Footer({
 	const totalIncome = (payload || checkedData)
 		?.reduce((acc, obj) => +acc + +obj.incomeBooked + +obj.incomeAccrued, 0);
 
-	console.log(totalIExpense, 'totalIExpense');
+	const { bulkAction, value } = bulkSection || {};
+
 	return (
 		<div className={styles.div_footer}>
 			<div className={styles.container}>
@@ -182,10 +188,24 @@ function Footer({
 				)}
 			</div>
 			{openModal && (
-				<Modal show={openModal} onClose={() => setOpenModal(false)} width={500}>
+				<Modal show={openModal} onClose={() => setOpenModal(false)} size="sm">
 					<Modal.Body>
 						<div className={styles.flex_modal}>
-							<div style={{ margin: '20px' }}>Are you sure you want to select this?</div>
+							<div style={{ margin: '20px 20px 0px 20px' }}>Please Choose The Selection Mode </div>
+							{value && (
+								<div>
+									<RadioGroup
+										options={optionsRadio}
+										value={bulkAction}
+										onChange={(val) => {
+											setBulkSection((prev) => ({
+												...prev,
+												bulkAction: val,
+											}));
+										}}
+									/>
+								</div>
+							)}
 							<div className={styles.flex}>
 								<Button
 									id="cancel-modal-btn"

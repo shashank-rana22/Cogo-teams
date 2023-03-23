@@ -106,10 +106,6 @@ const useViewSelect = (filters, query) => {
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (rest && Object.keys(filterData).length > 0) viewSelected();
-	// }, [JSON.stringify(rest), filterData, query]);
-
 	const [
 		{ data:deleteSelectedInvoiceData, loading:deleteSelectedInvoiceLoading },
 		deleteSelectedInvoiceTrigger,
