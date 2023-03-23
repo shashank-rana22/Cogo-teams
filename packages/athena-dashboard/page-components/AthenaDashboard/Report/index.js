@@ -24,7 +24,7 @@ function Report() {
 	// setHscodearr(general.query.hscodes.split(','));
 
 	const [{ loading = false, data: responseData = {} }, trigger] = useAthenaRequest({
-		url    : 'athena/commodity_trend_report',
+		url    : 'commodity_trend_report',
 		method : 'post',
 		data   : {
 			filters: { hs_code: general.query.hscodes !== undefined ? general.query.hscodes.split(',') : '', shipment_type: general.query.shipment_type !== undefined ? general.query.shipment_type : '' },
@@ -163,8 +163,7 @@ function Report() {
 				},
 			]}
 			/>
-
-		</div>,
+            </div>,
 		january   : (item.January !== undefined) ? item.January.toLocaleString('en-IN') : 0,
 		february  : (item.February !== undefined) ? item.February.toLocaleString('en-IN') : 0,
 		march     : (item.March !== undefined) ? item.March.toLocaleString('en-IN') : 0,
@@ -282,7 +281,7 @@ function Report() {
 					<div className={styles.leftcontainer}>
 						<div>{Item.country}</div>
 						<div>
-							₹
+							Rs.
 							{' '}
 							{Item.total.toLocaleString('en-IN')}
 							{' '}
@@ -303,7 +302,7 @@ function Report() {
 						features={countries.features}
 						margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
 						colors="nivo"
-						domain={[0, 1000000]}
+						domain={[0, 100000000]}
 						unknownColor="white"
 						label="properties.name"
 						valueFormat=".2s"
@@ -424,7 +423,7 @@ function Report() {
 						features={countries.features}
 						margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
 						colors="nivo"
-						domain={[0, 50]}
+						domain={[-50, 50]}
 						unknownColor="silver"
 						label="properties.name"
 						valueFormat=".2s"

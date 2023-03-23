@@ -12,6 +12,12 @@ const athena_dashboard = {
 			feature      : 'athena_dashboard',
 			service_name : 'athena',
 		},
+		{
+			api          : 'commodity_trend_report',
+			access_type  : 'private',
+			feature      : 'athena_dashboard',
+			service_name : 'athena',
+		},
 	],
 };
 
