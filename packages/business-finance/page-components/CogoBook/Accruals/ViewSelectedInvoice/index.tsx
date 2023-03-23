@@ -38,7 +38,7 @@ function ViewSelectedInvoice() {
 			'/business-finance/cogo-book/accruals/shipment_view',
 		);
 	};
-	const { list = [], total = 0, pageSize = 10 } = viewSelectedSidData || {};
+	const { list = [], totalRecords = 0, pageSize = 10 } = viewSelectedSidData || {};
 
 	const { page } = filters || {};
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -65,11 +65,11 @@ function ViewSelectedInvoice() {
 						<Button
 							type="submit"
 							onClick={goBack}
-							// disabled={loading}
+							disabled={loading}
 							themeType="secondary"
 						>
 							<IcMArrowBack
-								// disabled={loading}
+								disabled={loading}
 								height={20}
 								width={20}
 							/>
@@ -153,7 +153,7 @@ function ViewSelectedInvoice() {
 			<div className={styles.table_data}>
 				<StyledTable
 					page={page}
-					total={total}
+					total={totalRecords}
 					pageSize={pageSize}
 					data={list}
 					columns={column(

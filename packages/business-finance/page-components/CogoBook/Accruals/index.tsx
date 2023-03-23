@@ -1,5 +1,5 @@
 import { useRouter } from '@cogoport/next';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Archive from './Archive';
 import ShipmentView from './ShipmentView';
@@ -34,47 +34,44 @@ function Accruals() {
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
 	const handleChange = (view:string) => {
 		setSubActiveTab(view);
-	};
-	useEffect(() => {
 		push(
 			'/business-finance/cogo-book/[active_tab]/[view]',
-			`/business-finance/cogo-book/accruals/${subActiveTab}`,
+			`/business-finance/cogo-book/accruals/${view}`,
 		);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [subActiveTab]);
+	};
 
 	return (
 
 		<div>
 
-			{ showTab ? (
-				<div className={styles.container}>
+			<div className={styles.container}>
 
-					<div className={styles.flex}>
+				<div className={styles.flex}>
 
-						{tabs.map((tab) => (
-							<div
-								key={tab.key}
-								onClick={() => {
-									handleChange(tab.key);
-								}}
-								role="presentation"
-							>
-								{' '}
+					{tabs.map((tab) => (
+						<div
+							key={tab.key}
+							onClick={() => {
+								handleChange(tab.key);
+							}}
+							role="presentation"
+						>
+							{showTab
+								? (
+									<div className={tab.key === subActiveTab
+										? styles.sub_container_click : styles.sub_container}
+									>
+										{tab.label }
 
-								<div className={tab.key === subActiveTab
-									? styles.sub_container_click : styles.sub_container}
-								>
-									{tab.label }
+									</div>
+								)
+								: ''}
 
-								</div>
-
-							</div>
-						))}
-					</div>
-
+						</div>
+					))}
 				</div>
-			) : ''}
+
+			</div>
 			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} {...tabComponentProps[subActiveTab]} />}
 		</div>
 

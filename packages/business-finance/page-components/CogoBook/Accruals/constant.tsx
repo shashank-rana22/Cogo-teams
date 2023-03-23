@@ -1,8 +1,7 @@
 import { Button, Modal, Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { IcCError, IcMDelete } from '@cogoport/icons-react';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
-import { useState } from 'react';
 
 import { ColumnInterface } from './interface';
 import styles from './styles.module.css';
@@ -186,8 +185,42 @@ export const column = (
 			accessor : 'profit',
 			id       : 'profit',
 			Cell     : ({ row: { original } }) => {
-				const { referenceId = {} } = original || {};
-				// return <span className={styles.incident_id}>{ referenceId || '-' }</span>;
+				const {
+					profit = '', expenseCurrency = '',
+					profitPercentage = '',
+				} = original || {};
+				function checkNumber(number) {
+					if (number > 0) {
+						return 'positive';
+					} if (number < 0) {
+						return 'negative';
+					}
+					return 'zero';
+				}
+				function renderClassName() {
+					if (checkNumber(profit) === 'positive') {
+						return styles.profit_data;
+					}
+					if (checkNumber(profit) === 'negative') {
+						return styles.profit_color;
+					}
+					return null;
+				}
+
+				return (
+					<>
+						<div>
+							{profitPercentage
+								? `${profitPercentage?.toFixed(2)}%`
+								: '---'}
+						</div>
+
+						<span className={renderClassName()}>
+							{getFormattedPrice(profit, expenseCurrency) || '-' }
+
+						</span>
+					</>
+				);
 			},
 		},
 		{
@@ -195,8 +228,12 @@ export const column = (
 			accessor : 'mile',
 			id       : 'mile',
 			Cell     : ({ row: { original } }) => {
-				const { referenceId = {} } = original || {};
-				// return <span className={styles.incident_id}>{ referenceId || '-' }</span>;
+				const { milestone = '' } = original || {};
+				return (
+					<span>
+						{ startCase(milestone)	|| '-' }
+					</span>
+				);
 			},
 		},
 		{
@@ -204,8 +241,16 @@ export const column = (
 			accessor : 'status',
 			id       : 'status',
 			Cell     : ({ row: { original } }) => {
-				const { referenceId = {} } = original || {};
-				// return <span className={styles.incident_id}>{ referenceId || '-' }</span>;
+				const { status = '' } = original || {};
+				return (
+					<>
+						{status === 'OPEN' && <span className={styles.status}>{ startCase(status)	|| '-' }</span>}
+						{status === 'FINANCIALLY_CLOSED' && <span className={styles.status_fin}> Fin. Closed </span>}
+						{status === 'OPERATIONALLY_CLOSED' && <span className={styles.status_op}> Op. Closed </span>}
+
+					</>
+
+				);
 			},
 		},
 		{
@@ -222,7 +267,7 @@ export const column = (
 							style={{ cursor: 'pointer' }}
 						/>
 						{openDeleteModal && (
-							<Modal show={openDeleteModal} onClose={handleCloseModal} width={400}>
+							<Modal show={openDeleteModal} onClose={handleCloseModal}>
 								<Modal.Body>
 									<div
 										className={styles.flex_modal}

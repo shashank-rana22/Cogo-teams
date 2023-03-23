@@ -267,11 +267,12 @@ export const accrualColumn = (
 				if (checkNumber(profit) === 'positive') {
 					return styles.profit_data;
 				}
-				if (checkNumber(profit) === 'positive') {
+				if (checkNumber(profit) === 'negative') {
 					return styles.profit_color;
 				}
 				return null;
 			}
+
 			return (
 				<>
 					<div>

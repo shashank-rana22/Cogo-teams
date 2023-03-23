@@ -76,3 +76,24 @@
   align-items: center;
   justify-content: center;
 }
+.status {
+  background: #fef1df;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+.status_fin {
+  background: #ddebc0;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+.status_op {
+  background: #ddebc0;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+.profit_data {
+  color: #67c676;
+}
+.profit_color {
+  color: #ee3425;
+}

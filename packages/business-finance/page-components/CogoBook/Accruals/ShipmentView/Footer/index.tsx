@@ -22,7 +22,7 @@ interface FooterInterface {
 	viewSelected?: boolean
 	showBtn?: boolean
 	bulkSection?:{ value?:boolean, bulkAction?:string }
-	setBulkSection: React.Dispatch<React.SetStateAction<{}>>
+	setBulkSection?: React.Dispatch<React.SetStateAction<{}>>
 }
 
 function Footer({

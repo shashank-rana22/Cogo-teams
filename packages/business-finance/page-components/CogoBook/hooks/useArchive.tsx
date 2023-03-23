@@ -116,7 +116,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		} else {
 			getDrillDownArchive(monthData);
 		}
-	}, [toggleValue, serviceType, archivedStatus, query, particularMonth, refetch, monthData]);
+	}, [toggleValue, serviceType, archivedStatus, query, particularMonth, monthData]);
 
 	const clickHandler = () => {
 		setParticularMonth(!particularMonth);
