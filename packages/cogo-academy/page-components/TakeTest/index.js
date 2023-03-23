@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Completion from './Completion';
 import Introduction from './Introduction';
 import Ongoing from './Ongoing';
+import styles from './styles.module.css';
 
 const COMPONENT_MAPPING = {
 	introduction: {
@@ -31,6 +32,8 @@ function TakeTest() {
 		},
 	} = useSelector((state) => state);
 
+	const page = localStorage.getItem('currentQuestion');
+
 	const [{ data: testData, loading }] = useRequest({
 		method : 'GET',
 		url    : '/get_test',
@@ -39,7 +42,7 @@ function TakeTest() {
 		},
 	}, { manual: false });
 
-	const { test_user_mapping_state = 'introduction', timer } = testData || {};
+	const { test_user_mapping_state = 'introduction' } = testData || {};
 
 	const [activeState, setActiveState] = useState('');
 
@@ -49,6 +52,24 @@ function TakeTest() {
 		setActiveState(test_user_mapping_state);
 	}, [setActiveState, test_user_mapping_state]);
 
+	useEffect(() => {
+		if (localStorage.getItem('currentQuestion')) {
+			setActiveState('ongoing');
+
+			const elem = document.getElementById('maincontainer');
+
+			if (elem?.requestFullscreen) {
+				elem?.requestFullscreen();
+			} else if (elem?.webkitRequestFullscreen) { /* Safari */
+				elem?.webkitRequestFullscreen();
+			} else if (elem?.msRequestFullscreen) { /* IE11 */
+				elem?.msRequestFullscreen();
+			}
+		}
+
+		localStorage.setItem('visibilityChangeCount', 1);
+	}, []);
+
 	const Component = COMPONENT_MAPPING[activeState]?.component;
 
 	if (loading) {
@@ -56,13 +77,16 @@ function TakeTest() {
 	}
 
 	return (
-		<Component
-			setActiveState={setActiveState}
-			loading={loading}
-			testData={testData}
-			startTiming={startTiming}
-			setStartTiming={setStartTiming}
-		/>
+		<div id="maincontainer" className={styles.container}>
+			<Component
+				setActiveState={setActiveState}
+				loading={loading}
+				testData={testData}
+				startTiming={startTiming}
+				setStartTiming={setStartTiming}
+				page={page}
+			/>
+		</div>
 	);
 }
 

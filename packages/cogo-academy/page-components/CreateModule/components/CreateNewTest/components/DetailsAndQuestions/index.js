@@ -28,7 +28,6 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-
 	return (
 		<div className={styles.container}>
 			<TestDetails control={control} errors={errors} data={data} setValue={setValue} />

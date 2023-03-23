@@ -10,3 +10,7 @@
 	text-decoration-line: underline;
 	cursor: pointer;
 }
+
+.expand_icon {
+	cursor: pointer;
+}

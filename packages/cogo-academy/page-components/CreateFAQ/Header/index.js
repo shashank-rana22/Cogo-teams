@@ -44,7 +44,7 @@ function Header() {
 					Test Module
 				</Button>
 
-				<Button themeType="secondary" onClick={onClickConfiguration}>
+				<Button style={{ marginLeft: 8 }} themeType="secondary" onClick={onClickConfiguration}>
 					Configuration
 				</Button>
 
