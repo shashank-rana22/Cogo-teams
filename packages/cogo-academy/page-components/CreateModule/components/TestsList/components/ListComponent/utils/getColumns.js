@@ -228,8 +228,8 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 							</Link>
 						</section>
 						<section>
-							{format(validity_start, 'dd MMM yyyy - ')}
-							{format(validity_end, 'dd MMM yyyy')}
+							{format(validity_start, 'dd MMM yyyy, h:mm a - ')}
+							{format(validity_end, 'dd MMM yyyy, h:mm a')}
 						</section>
 					</section>
 				)
