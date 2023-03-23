@@ -11,7 +11,7 @@ import DownloadModal from './DownloadModal';
 import styles from './styles.module.css';
 
 function ApprovalPending({
-	data, loading, page, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi,
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPi,
 }) {
 	const { fields } = ApprovalPendingFields;
 	const [showApprove, setShowApprove] = useState(null);
@@ -75,7 +75,7 @@ function ApprovalPending({
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
 				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { setShowUpload(singleItem); }
+					? () => { setShowUpload(singleItem); setEdit('edit'); }
 					: () => { handleEditMAWB(singleItem, 'edit'); }}
 			>
 				<IcMEdit fill="#8B8B8B" />
@@ -93,9 +93,14 @@ function ApprovalPending({
 						Amend
 					</Button>
 				) : (
-					<div>
-						Approval Pending
-					</div>
+					<Button
+						themeType="secondary"
+						style={{ border: '1px solid #333' }}
+						disabled={updateLoading}
+						onClick={() => { setShowApprove(singleItem); }}
+					>
+						Approve
+					</Button>
 				)
 		),
 	};
@@ -145,8 +150,13 @@ function ApprovalPending({
 					</Modal.Footer>
 				</Modal>
 			)}
-			<UploadModal showUpload={showUpload} setShowUpload={setShowUpload} listAPi={listAPi} />
-			;
+			<UploadModal
+				showUpload={showUpload}
+				setShowUpload={setShowUpload}
+				edit={edit}
+				setEdit={setEdit}
+				listAPi={listAPi}
+			/>
 		</>
 	);
 }

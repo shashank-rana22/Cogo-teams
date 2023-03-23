@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Pagination } from '@cogoport/components';
 
 import useGetRates from '../../../../hooks/useListRates';
 import CardList from '../../../../List/CardList';
@@ -10,7 +10,8 @@ function RateModal({
 	service, setShowModal, setSelectedRate, selectedRate, handleOnClose,
 }) {
 	const {
-		systemData, revertedData, loadingRevertedRates, loadingSystemRates,
+		systemData, revertedData, loadingRevertedRates, loadingSystemRates, systemPage, revertedPage,
+		setRevertedPage, setSystemPage,
 	} = useGetRates({ service });
 	return (
 		<div>
@@ -25,6 +26,16 @@ function RateModal({
 					setSelectedRate={setSelectedRate}
 					selectedRate={selectedRate}
 				/>
+				{!loadingRevertedRates && (
+					<Pagination
+						type="page"
+						currentPage={revertedPage}
+						totalItems={revertedData?.total_count}
+						pageSize={5}
+						onPageChange={(val) => { setRevertedPage(val); }}
+					/>
+				)}
+
 				<div className={styles.heading}>System Rates</div>
 				<CardList
 					fields={fields}
@@ -35,6 +46,17 @@ function RateModal({
 					setSelectedRate={setSelectedRate}
 					selectedRate={selectedRate}
 				/>
+				{!loadingSystemRates && (
+					<Pagination
+						type="page"
+						currentPage={systemPage}
+						totalItems={systemData?.total_count || systemData?.list.length === 5
+							? systemPage * 5 + 1 : systemPage * 5}
+						pageSize={5}
+						onPageChange={(val) => { setSystemPage(val); }}
+					/>
+				)}
+
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.button}>

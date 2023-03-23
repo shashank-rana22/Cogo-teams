@@ -1,12 +1,12 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useGetRates = ({ service }) => {
 	const apiMapping = {
 		lcl_freight     : '/list_lcl_freight_rates',
 		fcl_freight     : '/list_fcl_freight_rates',
 		air_freight     : '/list_air_freight_rates',
-		trailer_freight : './list_trailer_freight_rates',
+		trailer_freight : './list_haulage_freight_rates',
 		haulage_freight : './list_haulage_freight_rates',
 		ltl_freight     : './list_ltl_freight_rates',
 		ftl_freight     : './list_ftl_freight_rates',
@@ -17,6 +17,9 @@ const useGetRates = ({ service }) => {
 	};
 
 	const api = apiMapping[service?.service];
+
+	const [systemPage, setSystemPage] = useState(1);
+	const [revertedPage, setRevertedPage] = useState(1);
 
 	const [{ data:systemData, loading: loadingSystemRates }, triggerSystemData] = useRequest({
 		method : 'get',
@@ -46,7 +49,9 @@ const useGetRates = ({ service }) => {
 						destination_location_id : service?.data?.destination_location_id,
 						location_id             : service?.data?.location_id || service?.data?.port_id,
 					},
-					page_limit: 5,
+					page_limit               : 5,
+					pagination_data_required : true,
+					page                     : systemPage,
 				},
 			});
 		} catch (err) {
@@ -61,7 +66,8 @@ const useGetRates = ({ service }) => {
 					filters             : {
 						past_similar_negotiation_reverts_for_negotiation_id: service?.id,
 					},
-					page_limit: 5,
+					page_limit : 5,
+					page       : revertedPage,
 				},
 			});
 		} catch (err) {
@@ -71,15 +77,23 @@ const useGetRates = ({ service }) => {
 
 	useEffect(() => {
 		fetchSystemData();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [systemPage]);
+
+	useEffect(() => {
 		fetchRevertedData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [revertedPage]);
 
 	return {
 		systemData,
 		revertedData,
 		loadingSystemRates,
 		loadingRevertedRates,
+		systemPage,
+		revertedPage,
+		setRevertedPage,
+		setSystemPage,
 	};
 };
 export default useGetRates;

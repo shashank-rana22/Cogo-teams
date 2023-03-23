@@ -1,12 +1,12 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
 
-const useGetControls = () => {
+const useGetControls = (isomniChannelAdmin) => {
 	const listAgentsOptions = useGetAsyncOptions(
 		asyncFieldsListAgents(),
 	);
-
-	const controls = [
+	const HIDE_CONTROLS_ADMIN = ['observer'];
+	let controls = [
 		{
 			label     : '',
 			name      : 'status',
@@ -86,7 +86,28 @@ const useGetControls = () => {
 			},
 			...(listAgentsOptions || {}),
 		},
+		{
+			label        : 'Other Filters',
+			name         : 'observer',
+			type         : 'checkboxgroup',
+			value        : '',
+			onlyForAdmin : false,
+			multiple     : false,
+			className    : 'escalation_field_controller',
+			options      : [
+				{
+					label : 'Observer',
+					value : 'observer',
+				},
+			],
+
+		},
 	];
+
+	if (isomniChannelAdmin) {
+		controls = controls.filter((item) => !HIDE_CONTROLS_ADMIN.includes(item?.name));
+	}
+
 	return controls;
 };
 

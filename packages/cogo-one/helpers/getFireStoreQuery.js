@@ -1,7 +1,6 @@
-import { query, orderBy, where } from 'firebase/firestore';
+import { orderBy, where } from 'firebase/firestore';
 
 function getFireStoreQuery({
-	omniChannelCollection,
 	userId,
 	appliedFilters,
 	isomniChannelAdmin = false,
@@ -11,18 +10,15 @@ function getFireStoreQuery({
 	let queryFilters = [];
 	if (showBotMessages) {
 		if (isomniChannelAdmin) {
-			return query(
-				omniChannelCollection,
+			return [
 				where('session_type', '==', 'bot'),
-				orderBy('new_message_sent_at', 'desc'),
-			);
+				orderBy('new_message_sent_at', 'desc')];
 		}
-		return query(
-			omniChannelCollection,
+		return [
 			where('session_type', '==', 'bot'),
 			where('spectators_ids', 'array-contains', userId),
 			orderBy('new_message_sent_at', 'desc'),
-		);
+		];
 	}
 
 	Object.keys(appliedFilters).forEach((item) => {
@@ -62,20 +58,22 @@ function getFireStoreQuery({
 	});
 
 	if (isomniChannelAdmin) {
-		firestoreQuery = query(
-			omniChannelCollection,
+		firestoreQuery = [
 			...queryFilters,
 			where('session_type', '==', 'admin'),
 			orderBy('new_message_sent_at', 'desc'),
-		);
+		];
 	} else {
-		firestoreQuery = query(
-			omniChannelCollection,
+		const extraFilters = appliedFilters?.observer?.[0] !== 'observer'
+			? [where('support_agent_id', '==', userId)] : [];
+
+		firestoreQuery = [
 			...queryFilters,
 			where('session_type', '==', 'admin'),
+			...extraFilters,
 			where('spectators_ids', 'array-contains', userId),
 			orderBy('new_message_sent_at', 'desc'),
-		);
+		];
 	}
 
 	return firestoreQuery;
