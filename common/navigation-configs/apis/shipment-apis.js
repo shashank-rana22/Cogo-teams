@@ -1278,6 +1278,21 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'send_rail_domestic_indent_email',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_transaction_insights',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_air_movement_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'send_whatsapp_booking_note_delayed',
 		access_type  : 'private',
 		service_name : 'shipment',
