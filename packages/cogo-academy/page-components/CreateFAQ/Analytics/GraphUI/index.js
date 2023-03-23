@@ -10,8 +10,7 @@ function GraphUI() {
 	const { pie_data, pie_outer_data, graph_data, dateRange, setDateRange, view_count_data } = useGraphData();
 
 	const { graphData = [] } = useGetFormattedGraphData({ graph_data });
-	console.log(pie_data);
-	console.log(pie_outer_data);
+
 	return (
 		<>
 			<Filters dateRange={dateRange} setDateRange={setDateRange} />
@@ -34,11 +33,10 @@ function GraphUI() {
 						pie_outer_data={pie_outer_data}
 						view_count_data={view_count_data}
 					/>
-
 				</div>
-
 			</div>
 		</>
 	);
 }
+
 export default GraphUI;

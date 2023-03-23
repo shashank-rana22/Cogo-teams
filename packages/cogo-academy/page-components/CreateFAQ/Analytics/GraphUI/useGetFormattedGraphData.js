@@ -13,12 +13,10 @@ const useGetFormattedGraphData = ({ graph_data = {} }) => {
 
 	Object.keys(restData || {}).forEach((key) => {
 		const array = [];
+
 		Object.keys(restData[key] || {}).forEach((timeKey) => {
-			if (abscissa === 'hour') {
-				array.push({ x: timeKey, y: restData[key][timeKey] });
-			} else {
-				array.push({ x: format(timeKey, 'dd-MMM-yyyy'), y: restData[key][timeKey] });
-			}
+			const x = abscissa === 'hour' ? timeKey : format(timeKey, 'dd-MMM-yyyy');
+			array.push({ x, y: restData[key][timeKey] });
 		});
 
 		array.sort((a, b) => new Date(a.x) - new Date(b.x));
