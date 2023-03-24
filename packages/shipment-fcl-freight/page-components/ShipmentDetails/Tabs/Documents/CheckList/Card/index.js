@@ -7,11 +7,6 @@ const Card = ({
 	data,
 	completedDocs,
 	emailDocs,
-	content,
-	setShowHbl,
-	setUpdateFreightCertificate,
-	setShowConfirmed,
-	setShow,
 	shipment_data,
 	primary_service,
 }) => {
@@ -52,11 +47,6 @@ const Card = ({
 					idx={idx}
 					data={data}
 					isChecked={isChecked}
-					content={content}
-					setShowHbl={setShowHbl}
-					setUpdateFreightCertificate={setUpdateFreightCertificate}
-					setShowConfirmed={setShowConfirmed}
-					setShow={setShow}
 					shipment_data={shipment_data}
 					item={item}
 					docType={docType}

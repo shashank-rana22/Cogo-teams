@@ -3,7 +3,6 @@ import { ShipmentMails } from '@cogoport/shipment-mails';
 import React, { useState } from 'react';
 
 import Documents from './Documents';
-import PurchaseInvoice from './Invoicing/PurchaseInvoice';
 import SalesInvoice from './Invoicing/SalesInvoice';
 import Overview from './Overview';
 import styles from './styles.module.css';
@@ -29,9 +28,6 @@ function Tab({ shipment_data = {} }) {
 				</TabPanel>
 				<TabPanel name="sales_live_invoice" title="Sales Live Invoice">
 					<SalesInvoice />
-				</TabPanel>
-				<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-					<PurchaseInvoice />
 				</TabPanel>
 				<TabPanel name="documents" title="Documents">
 					<Documents />
