@@ -13,7 +13,6 @@ import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
 function ReviewAndCriteria({
-	setActiveStepper,
 	loading,
 	data,
 	test_id,
@@ -34,9 +33,8 @@ function ReviewAndCriteria({
 	const [showModal, setShowModal] = useState(false);
 
 	const navigate = () => {
-		const href = '/learning/test-module/create-test';
+		const href = '/learning?activeTab=test_module';
 		router.push(href, href);
-		setActiveStepper('details_and_questions');
 	};
 
 	return (
