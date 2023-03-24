@@ -38,7 +38,6 @@
 	font-size: 12px;
 	color: #100f0f;
 	padding: 4px 12px 8px 12px;
-	/* white-space: pre-line; */
 }
 
 .details {
@@ -65,13 +64,6 @@
 	font-weight: 500;
 }
 
-.dialog_box {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-
 .text {
 	font-weight: 400;
 	font-size: 12px;
@@ -84,14 +76,6 @@
 	}
 	&:hover {
 		color: #356efd;
-	}
-}
-
-.icon_wrap {
-	cursor: pointer;
-
-	&.left {
-		display: none;
 	}
 }
 

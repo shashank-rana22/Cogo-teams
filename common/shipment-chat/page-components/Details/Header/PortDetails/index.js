@@ -3,7 +3,6 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-// import getLocations from '../helpers/locations-shipment';
 import { getServiceInfo } from '../../../../utils/getServiceInfo';
 
 import styles from './styles.module.css';

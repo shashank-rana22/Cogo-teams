@@ -714,7 +714,7 @@ importers:
   packages/supply-dashboards:
     specifiers:
       '@cogoport/charts': ^1.0.1
-      '@cogoport/components': ^1.0.385
+      '@cogoport/components': ^1.0.366
       '@cogoport/constants': workspace:0.1.0
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.58

@@ -61,21 +61,6 @@
 	overflow: hidden;
 }
 
-.service_name {
-	margin: 0;
-	font-weight: 400;
-	font-size: 12px;
-	color: #5936f0;
-	margin-top: 4px;
-}
-
-.icon_and_service {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-right: 20px;
-}
-
 .icd {
 	font-size: 10px;
 	font-weight: 700;
