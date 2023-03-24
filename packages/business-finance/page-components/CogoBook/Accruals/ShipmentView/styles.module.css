@@ -21,3 +21,7 @@
 .table_data {
   margin-top: 16px;
 }
+.flex_sort {
+  display: flex;
+  align-items: center;
+}

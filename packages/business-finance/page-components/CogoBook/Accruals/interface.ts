@@ -13,7 +13,9 @@ export interface FilterInterface {
 	profitPercentUpper?:string
 	date?:any
 	profitPercent?:string
+	sortBy?:string
 	page?:number,
+	sortType?:string
 }
 
 export interface ColumnInterface {

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import SelectAccrual from '../../../../commons/SelectAccrual';
 import { FilterInterface } from '../../interface';
 
-import { optionSelect, optionsMonth, optionsPills, optionsShipment, optionsYear } from './constant';
+import { optionSelect, optionsMonth, optionsPills, optionsShipment, optionsYear } from '../constant';
 import MoreFilter from './MoreFilter';
 import OptionSelect from './OptionSelect';
 import styles from './styles.module.css';

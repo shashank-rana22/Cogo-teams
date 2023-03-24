@@ -1,7 +1,7 @@
 import { Button, Select, RadioGroup, Popover, Input } from '@cogoport/components';
 
 import { FilterInterface } from '../../../interface';
-import { optionsData, optionsJobData, optionsRadio } from '../constant';
+import { optionsData, optionsJobData, optionsRadio } from '../../constant';
 
 import styles from './styles.module.css';
 

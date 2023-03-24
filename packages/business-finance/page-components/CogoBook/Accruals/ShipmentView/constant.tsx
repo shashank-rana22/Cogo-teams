@@ -2,7 +2,9 @@ import { Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { format, startCase } from '@cogoport/utils';
 
-import EditIcon from './EditIcon';
+import SortIcon from '../../common/SortIcon';
+
+import EditIcon from './Card/EditIcon';
 import styles from './styles.module.css';
 
 const currentYear = new Date().getFullYear();
@@ -157,15 +159,26 @@ export const accrualColumn = (
 	tickProfitHandler,
 	profitValue,
 	profitData,
+	filters,
+	setFilters,
 ) => [
 	{
 		Header   : <div className={styles.header_checkbox}>{getTableHeaderCheckbox()}</div>,
-		accessor : '',
+		accessor : 'getCheckbox',
 		id       : 'getCheckbox',
 		Cell     : ({ row: { original } }) => getTableBodyCheckbox(original),
 	},
 	{
-		Header   : 'SID',
+		Header: () => (
+			<div className={styles.flex_sort}>
+				SID
+				<SortIcon
+					setFilters={setFilters}
+					sortingKey="jobNumber"
+					filters={filters}
+				/>
+			</div>
+		),
 		accessor : 'sid',
 		id       : 'sid',
 		Cell     : ({ row: { original } }) => {
@@ -174,6 +187,7 @@ export const accrualColumn = (
 				<Tooltip
 					content={content(purchaseInvoicesCount, salesInvoicesCount)}
 					placement="top"
+					trigger="mouseenter"
 					interactive
 				>
 					<div className={styles.job_number}>
@@ -186,7 +200,16 @@ export const accrualColumn = (
 		},
 	},
 	{
-		Header   : 'Transaction Date',
+		Header: () => (
+			<div className={styles.flex_sort}>
+				Transaction Date
+				<SortIcon
+					setFilters={setFilters}
+					sortingKey="TRANSACTIONDATE"
+					filters={filters}
+				/>
+			</div>
+		),
 		accessor : 'etd',
 		id       : 'etd',
 		Cell     : ({ row: { original } }) => {
@@ -195,7 +218,16 @@ export const accrualColumn = (
 		},
 	},
 	{
-		Header   : 'Purchase Invoice Amount',
+		Header: () => (
+			<div className={styles.flex_sort}>
+				Purchase Invoice Amount
+				<SortIcon
+					setFilters={setFilters}
+					sortingKey="EXPENSE"
+					filters={filters}
+				/>
+			</div>
+		),
 		accessor : 'purchase_invoice_amount',
 		id       : 'purchase_invoice_amount',
 		Cell     : ({ row: { original } }) => {
@@ -227,7 +259,16 @@ export const accrualColumn = (
 		},
 	},
 	{
-		Header   : 'Sales Invoice Amount',
+		Header: () => (
+			<div className={styles.flex_sort}>
+				Sales Invoice Amount
+				<SortIcon
+					setFilters={setFilters}
+					sortingKey="INCOME"
+					filters={filters}
+				/>
+			</div>
+		),
 		accessor : 'sales_invoice_amount',
 		id       : 'sales_invoice_amount',
 		Cell     : ({ row: { original } }) => {
@@ -254,7 +295,16 @@ export const accrualColumn = (
 		},
 	},
 	{
-		Header   : 'Profit',
+		Header: () => (
+			<div className={styles.flex_sort}>
+				Profit
+				<SortIcon
+					setFilters={setFilters}
+					sortingKey="PROFIT"
+					filters={filters}
+				/>
+			</div>
+		),
 		accessor : 'profit',
 		id       : 'profit',
 		Cell     : ({ row: { original } }) => {

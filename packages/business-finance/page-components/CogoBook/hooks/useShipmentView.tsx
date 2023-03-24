@@ -31,14 +31,16 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
 		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
+		sortType = '', sortBy = '',
 	} = filters || {};
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
 
 	const rangeMapping = {
-		'>'  : 'gt',
-		'>=' : 'gte',
-		'<'  : 'lt',
-		'<=' : 'lte',
+		'>'     : 'gt',
+		'>='    : 'gte',
+		'<'     : 'lt',
+		'<='    : 'lte',
+		'<=x=<' : 'btw',
 	};
 
 	const [
@@ -79,6 +81,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					jobState             : jobState || undefined,
 					lowerProfitMargin    : profitAmount || profitPercent || undefined,
 					profitType           : profitType || undefined,
+					sortType             : sortType || undefined,
+					sortBy               : sortBy || undefined,
 					upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
 					startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
 					endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
@@ -109,7 +113,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 
 	useEffect(() => {
 		refetch();
-	}, [page]);
+	}, [page, sortType, sortBy]);
 
 	const {
 		pageNo: pageNos = 0,
