@@ -3,7 +3,6 @@
 	gap: 4px;
 	align-items: center;
 	margin-right: -95px;
-	gap: 4px;
 }
 
 .input {
@@ -56,17 +55,15 @@
 	color: #cb6464;
 }
 
-.distribution_heading{
+.distribution_heading {
 	margin-right: -95px;
 }
 
-.distribution_heading h6{
-	color: #4F4F4F;
+.distribution_heading h6 {
+	width: fit-content;
+	margin-top: 0;
+	font-size: 14px;
 	font-style: normal;
 	font-weight: 400;
-	font-size: 14px;
-	margin-top: 0px;
-	width: fit-content;
+	color: #4f4f4f;
 }
-
-

@@ -251,7 +251,7 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 			id       : 'results',
 			accessor : ({ id = '' }) => (
 				<div>
-					<Link href={`/learning/tests/results/admin/${id}`}>Results</Link>
+					<Link href={`/learning/tests/dashboard/admin/${id}`}>Results</Link>
 				</div>
 			),
 		},
