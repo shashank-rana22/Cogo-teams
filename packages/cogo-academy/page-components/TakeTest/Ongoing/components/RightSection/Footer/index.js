@@ -4,8 +4,8 @@ import useEndTest from '../../../hooks/useEndTest';
 
 import styles from './styles.module.css';
 
-function Footer() {
-	const { endTest } = useEndTest();
+function Footer({ setActiveState }) {
+	const { endTest } = useEndTest({ setActiveState });
 
 	return (
 		<div className={styles.container}>

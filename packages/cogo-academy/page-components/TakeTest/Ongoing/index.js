@@ -6,15 +6,21 @@ import LeftSection from './components/LeftSection';
 import LeaveTest from './components/LeftSection/Footer/LeaveTest';
 import WarningModal from './components/LeftSection/WarningModal';
 import RightSection from './components/RightSection';
+import InstructionsModal from './components/RightSection/InstructionsModal';
 import useFetchQuestionsList from './hooks/useFetchQuestionList';
 import styles from './styles.module.css';
 
-function Ongoing({ testData, page }) {
+function Ongoing({ testData, page, setActiveState }) {
 	const router = useRouter();
+
+	const { guidelines = [] } = testData || {};
 
 	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
 	const [isFullscreen, setIsFullscreen] = useState(false);
 	const [showLeaveTestModal, setShowLeaveTestModal] = useState(false);
+	const [showInstructionsModal, setShowInstructionsModal] = useState(false);
+
+	console.log('testData', testData);
 
 	const { loading, data, fetchQuestions } = useFetchQuestionsList({ currentQuestion });
 
@@ -70,6 +76,17 @@ function Ongoing({ testData, page }) {
 			<LeaveTest
 				showLeaveTestModal={showLeaveTestModal}
 				setShowLeaveTestModal={setShowLeaveTestModal}
+				setActiveState={setActiveState}
+			/>
+		);
+	}
+
+	if (showInstructionsModal) {
+		return (
+			<InstructionsModal
+				guidelines={guidelines}
+				loading={loading}
+				setShowInstructionsModal={setShowInstructionsModal}
 			/>
 		);
 	}
@@ -91,6 +108,7 @@ function Ongoing({ testData, page }) {
 					setCurrentQuestion={setCurrentQuestion}
 					fetchQuestions={fetchQuestions}
 					setShowLeaveTestModal={setShowLeaveTestModal}
+					setActiveState={setActiveState}
 				/>
 			</div>
 
@@ -101,6 +119,8 @@ function Ongoing({ testData, page }) {
 					currentQuestion={currentQuestion}
 					fetchQuestions={fetchQuestions}
 					setCurrentQuestion={setCurrentQuestion}
+					setShowInstructionsModal={setShowInstructionsModal}
+					setActiveState={setActiveState}
 				/>
 			</div>
 		</div>

@@ -154,9 +154,9 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 		{
 			Header   : 'TOPICS',
 			id       : 'c',
-			accessor : ({ topic = [] }) => (
-				<section>
-					{topic.map((topicItem) => (
+			accessor : ({ topics = [] }) => (
+				<section style={{ display: 'flex', flexWrap: 'wrap' }}>
+					{topics.map((topicItem) => (
 						<Pill
 							key={topicItem}
 							size="sm"
@@ -165,7 +165,7 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 							{startCase(topicItem)}
 						</Pill>
 					))}
-					{topic.length === 0 && '-'}
+					{topics.length === 0 && '-'}
 				</section>
 			),
 		},

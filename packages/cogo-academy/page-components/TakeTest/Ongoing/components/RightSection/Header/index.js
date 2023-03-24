@@ -5,14 +5,25 @@ import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ setShowInstructionsModal }) {
 	const { profile: { user } } = useSelector((state) => state);
+
+	const handleShowInstruction = () => {
+		handleMinimizeTest();
+		setShowInstructionsModal(true);
+	};
 
 	const { name } = user;
 
 	return (
 		<div className={styles.main_container}>
-			<div className={styles.instructions}>Test Instructions</div>
+			<div
+				role="presentation"
+				onClick={handleShowInstruction}
+				className={styles.instructions}
+			>
+				Test Instructions
+			</div>
 			<div className={styles.greeting}>
 				Hi,
 				{' '}

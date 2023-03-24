@@ -5,8 +5,8 @@ import useEndTest from '../../../../hooks/useEndTest';
 
 import styles from './styles.module.css';
 
-function LeaveTest({ showLeaveTestModal, setShowLeaveTestModal }) {
-	const { endTest } = useEndTest();
+function LeaveTest({ showLeaveTestModal, setShowLeaveTestModal, setActiveState }) {
+	const { endTest } = useEndTest({ setActiveState });
 
 	const handleContinueTest = () => {
 		handleEnterFullScreen();
