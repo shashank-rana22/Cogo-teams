@@ -1,8 +1,11 @@
 import { Toast } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 function useGetTestList() {
+	const { query, debounceQuery } = useDebounceQuery();
+
 	const [{ loading = false, data = {} }, trigger] = useRequest({
 		url    : 'list_tests',
 		method : 'GET',
@@ -19,7 +22,7 @@ function useGetTestList() {
 	const fetchList = () => {
 		try {
 			trigger({
-				params,
+				params: { ...params, filters: { ...params.filters, q: query } },
 			});
 		} catch (error) {
 			Toast.error(error?.message || 'Something went wrong');
@@ -28,7 +31,7 @@ function useGetTestList() {
 	useEffect(() => {
 		fetchList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [params]);
+	}, [query]);
 
 	return {
 		data,
@@ -36,6 +39,7 @@ function useGetTestList() {
 		fetchList,
 		params,
 		setParams,
+		debounceQuery,
 	};
 }
 

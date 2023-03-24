@@ -24,7 +24,7 @@ const ROUTE_MAPPING = {
 function TestsList({ activeTab, setActiveTab }) {
 	const router = useRouter();
 
-	const { data, loading, fetchList, setParams, params } = useGetTestList();
+	const { data, loading, fetchList, setParams, params, debounceQuery } = useGetTestList();
 
 	const {
 		data: questionData,
@@ -32,6 +32,7 @@ function TestsList({ activeTab, setActiveTab }) {
 		fetchList: questionListRefetch,
 		setParams: setQuestionListParams,
 		params: questionListParams,
+		debounceQuery: questionListDebounceQuery,
 	} = useGetTestQuestionSets();
 
 	const componentMapping = {
@@ -84,6 +85,7 @@ function TestsList({ activeTab, setActiveTab }) {
 								themeType="primary"
 							/>
 						)}
+						value={activeTab === 'tests' ? params.filters?.q : questionListParams.filters?.q}
 						placeholder={
 								activeTab === 'tests'
 									? 'Search for Test/Topic'
@@ -98,6 +100,7 @@ function TestsList({ activeTab, setActiveTab }) {
 										q: value,
 									},
 								}));
+								debounceQuery(value);
 							} else {
 								setQuestionListParams((prev) => ({
 									...prev,
@@ -106,6 +109,7 @@ function TestsList({ activeTab, setActiveTab }) {
 										q: value,
 									},
 								}));
+								questionListDebounceQuery(value);
 							}
 						}}
 						className={styles.input}
