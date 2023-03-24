@@ -5,18 +5,18 @@ import { useEffect, useState } from 'react';
 function useGetTestQuestionSets() {
 	const { query, debounceQuery } = useDebounceQuery();
 
+	const [params, setParams] = useState({
+		page    : 1,
+		filters : {
+			status: 'active',
+		},
+	});
+	const [input, setInput] = useState('');
+
 	const [{ data = {}, loading }, trigger] = useRequest({
 		url    : 'list_test_question_sets',
 		method : 'GET',
 	}, { manual: true });
-
-	const [params, setParams] = useState({
-		page    : 1,
-		filters : {
-			status : 'active',
-			q      : '',
-		},
-	});
 
 	const fetchList = () => {
 		try {
@@ -30,13 +30,15 @@ function useGetTestQuestionSets() {
 	useEffect(() => {
 		fetchList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query]);
+	}, [query, params]);
 
 	return {
 		data,
 		loading,
 		fetchList,
 		setParams,
+		input,
+		setInput,
 		params,
 		debounceQuery,
 	};

@@ -8,7 +8,7 @@ import useGetTestQuestionSets from '../../../../../../hooks/useGetTestQuestionSe
 import styles from './styles.module.css';
 
 function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray }) {
-	const { data, loading, setParams } = useGetTestQuestionSets();
+	const { data, loading, setParams, debounceQuery, input, setInput } = useGetTestQuestionSets();
 	const [sort, setSort] = useState(false);
 
 	const { page = 0, page_limit: pageLimit = 0, total_count = 0, list } = data || {};
@@ -142,25 +142,24 @@ function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray }) {
 				/>
 				<Breadcrumb.Item label="From Question Set" className={styles.breadcrumb_item_two} />
 			</Breadcrumb>
+
 			<p className={styles.content}>
 				Select from applicable Question Sets made earlier to get probable questions for the Test
 			</p>
+
 			<div className={styles.filter}>
 				<Input
 					size="md"
 					suffix={<ButtonIcon size="md" icon={<IcMSearchlight />} disabled={false} themeType="primary" />}
 					placeholder="Search for Question/topic"
 					onChange={(value) => {
-						setParams((prev) => ({
-							...prev,
-							filters: {
-								...prev.filters,
-								q: value,
-							},
-						}));
+						setInput(value);
+						debounceQuery(value);
 					}}
+					value={input}
 					className={styles.input}
 				/>
+
 				<div
 					role="presentation"
 					onClick={() => {
