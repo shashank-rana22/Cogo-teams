@@ -41,20 +41,20 @@ function AccountReceivables() {
 					fullWidth
 					themeType="primary"
 				>
-					<TabPanel name="dashboard" title="Dashboard" id="dashboard-tab">
+					<TabPanel name="dashboard" title="Dashboard">
 						--
 					</TabPanel>
-					<TabPanel name="invoices" title="Invoices" id="invoices-tab">
+					<TabPanel name="invoices" title="Invoices">
 						--
 					</TabPanel>
 					<TabPanel name="outstanding" title="OUTSTANDING">
 						<Outstanding />
 					</TabPanel>
 
-					<TabPanel name="defaulters" title="Defaulters" id="defaulters-tab">
+					<TabPanel name="defaulters" title="Defaulters">
 						--
 					</TabPanel>
-					<TabPanel name="manageBpr" title="Manage BPR" id="manageBpr-tab">
+					<TabPanel name="manageBpr" title="Manage BPR">
 						--
 					</TabPanel>
 				</Tabs>

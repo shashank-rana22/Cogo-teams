@@ -7,7 +7,7 @@ function useGetSettlementTable(organizationId) {
 	const [settlementFilters, setSettlementFilters] = useState({
 		page        : 1,
 		pageLimit   : 10,
-		orgId       : 'b8099de7-8bae-4cf0-9db2-3a75171b11de',
+		orgId       : organizationId,
 		query       : '',
 		accountType : 'All',
 	});

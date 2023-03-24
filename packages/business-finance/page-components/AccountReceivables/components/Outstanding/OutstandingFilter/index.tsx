@@ -32,8 +32,6 @@ function Filters({
 		setParams((p) => ({ ...p, [name]: val }));
 	};
 
-	console.log('params', params);
-
 	let placeholder;
 	if (queryKey === 'q') {
 		placeholder = 'Search By Business Name/Pan Number';

@@ -49,9 +49,17 @@ function FilterpopOver({
 				</div>
 			</div>
 			<div className={styles.popover_content}>
-				<div className={styles.margin} />
+				<div style={{ marginTop: '12px' }} />
 
-				<div className={styles.styled_text}> Sales Agent</div>
+				<div style={{
+					fontSize   : '14px',
+					fontWeight : 600,
+				}}
+				>
+					{' '}
+					Sales Agent
+
+				</div>
 				<AsyncSelect
 					name="user_id"
 					asyncKey="partner_users"
@@ -62,8 +70,16 @@ function FilterpopOver({
 					placeholder="Select Sales Agent User"
 					size="sm"
 				/>
-				<div className={styles.margin} />
-				<div className={styles.styled_text}> Credit Controller Agent</div>
+				<div style={{ marginTop: '12px' }} />
+				<div style={{
+					fontSize   : '14px',
+					fontWeight : 600,
+				}}
+				>
+					{' '}
+					Credit Controller Agent
+
+				</div>
 
 				<AsyncSelect
 					name="credit_controller_id"
@@ -75,8 +91,15 @@ function FilterpopOver({
 					placeholder="Select Credit Controller User"
 					size="sm"
 				/>
-				<div className={styles.margin} />
-				<div className={styles.styled_text}>Company Type</div>
+				<div style={{ marginTop: '12px' }} />
+				<div style={{
+					fontSize   : '14px',
+					fontWeight : 600,
+				}}
+				>
+					Company Type
+
+				</div>
 				<Select
 					value={filters.companyType}
 					onChange={(val?:any) => onChange(val, 'companyType')}
@@ -94,7 +117,7 @@ function FilterpopOver({
 				visible={show}
 				placement="bottom"
 				render={content}
-				className={styles.popover_container}
+				className={styles.popOverStyle}
 			>
 				<Button
 					themeType="secondary"

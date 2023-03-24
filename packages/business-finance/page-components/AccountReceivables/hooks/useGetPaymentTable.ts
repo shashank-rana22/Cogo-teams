@@ -7,7 +7,7 @@ function useGetPaymentTable(organizationId) {
 	const [paymentFilters, setPaymentFilters] = useState({
 		page       : 1,
 		pageLimit  : 10,
-		orgId      : '23a8a7f2-177b-4ef8-bc31-55548240a2d7',
+		orgId      : organizationId,
 		statusList : [],
 		query      : '',
 	});

@@ -1,8 +1,3 @@
-.popover_container {
-    width: 320px;
-    height: 340px;
-}
-
 .popover_content {
 	display: flex;
 	flex-direction: column;
@@ -36,11 +31,7 @@
 	margin-right: 4px;
 }
 
-.margin {
-    margin-top: 12px;
-}
-
-.styled_text{
-    font-weight: 600;
-    font-size: 14px;
+.popOverStyle{
+	width: 320px;
+	height: 340px;
 }
