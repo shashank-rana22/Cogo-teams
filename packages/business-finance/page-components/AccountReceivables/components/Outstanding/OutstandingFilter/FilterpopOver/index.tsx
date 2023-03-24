@@ -117,7 +117,7 @@ function FilterpopOver({
 				visible={show}
 				placement="bottom"
 				render={content}
-				className={styles.popOverStyle}
+				className={styles.pop_over_style}
 			>
 				<Button
 					themeType="secondary"
