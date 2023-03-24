@@ -20,15 +20,11 @@ const options = [
 
 function FormContainer({
 	back, setBack, edit, setEdit, packingData, fields,
-	control, errors, item, setGenerate, handleSubmit,
+	control, errors, item, setGenerate, handleSubmit, activeCategory, hawbDetails, setHawbDetails,
 }) {
 	const [activeKey, setActiveKey] = useState('basic');
 
 	const [value, onChange] = useState('manual');
-
-	const [hawbDetails, setHawbDetails] = useState([
-		{ id: new Date().getTime(), isNew: true },
-	]);
 
 	const [activeHawb, setActiveHawb] = useState(hawbDetails[0].id);
 
@@ -44,41 +40,66 @@ function FormContainer({
 		setBack(true);
 	};
 
+	function RemoveHawb() {
+		return (
+			<Button
+				onClick={() => {
+					setHawbDetails(hawbDetails.filter((itm) => itm.id !== activeHawb));
+					setActiveHawb(hawbDetails[0].id);
+				}}
+				themeType="secondary"
+				style={{ border: '1px solid #333', marginLeft: '8%' }}
+				disabled={hawbDetails.length === 1}
+			>
+				REMOVE
+			</Button>
+		);
+	}
+
 	return (
 		<div className={styles.form_container}>
 			<div className={styles.header_flex}>
-				<div className={styles.buttonwrap}>
-					{hawbDetails.map((hawbItem:any) => (
-						<div
-							key={hawbItem.id}
-							onClick={() => {
-								setActiveHawb(hawbItem.id);
-							}}
-							role="presentation"
-						>
-							{' '}
+				{activeCategory === 'hawb' && (
+					<div className={styles.buttonwrap}>
+						{hawbDetails.map((hawbItem:any) => (
 							<div
-								className={hawbItem.id
-                                === activeHawb ? styles.hawb_container_click : styles.hawb_container}
+								key={hawbItem.id}
+								onClick={() => {
+									setActiveHawb(hawbItem.id);
+								}}
+								role="presentation"
 							>
-								HAWB -
 								{' '}
-								{hawbItem.id}
+								<div
+									className={hawbItem.id
+                                === activeHawb ? styles.hawb_container_click : styles.hawb_container}
+								>
+									HAWB -
+									{' '}
+									{hawbItem.id}
+								</div>
 							</div>
-						</div>
-					))}
+						))}
 
-					<Button
-						onClick={() => setHawbDetails([
-							...hawbDetails,
-							{ id: new Date().getTime(), isNew: true },
-						])}
-						themeType="secondary"
-					>
-						<IcMPlus />
-					</Button>
+						<Button
+							onClick={() => setHawbDetails([
+								...hawbDetails,
+								{ id: new Date().getTime(), isNew: true },
+							])}
+							themeType="secondary"
+						>
+							<IcMPlus />
+						</Button>
 
-				</div>
+					</div>
+				)}
+				{value === 'manual' && activeCategory === 'mawb' && (
+					<Stepper
+						active={activeKey}
+						setActive={setActiveKey}
+						items={items}
+					/>
+				)}
 				{!edit && (
 					<RadioGroup
 						options={options}
@@ -88,7 +109,7 @@ function FormContainer({
 					/>
 				)}
 			</div>
-			{value === 'manual' && (
+			{value === 'manual' && activeCategory === 'hawb' && (
 				<Stepper
 					active={activeKey}
 					setActive={setActiveKey}
@@ -121,18 +142,9 @@ function FormContainer({
 							<>
 								<Layout fields={fields?.basic} control={control} errors={errors} />
 								<div className={styles.button_container}>
-
-									<Button
-										onClick={() => {
-											setHawbDetails(hawbDetails.filter((itm) => itm.id !== activeHawb));
-											setActiveHawb(hawbDetails[0].id);
-										}}
-										themeType="secondary"
-										style={{ border: '1px solid #333', marginLeft: '8%' }}
-									>
-										REMOVE
-									</Button>
-
+									{activeCategory === 'hawb' && (
+										<RemoveHawb />
+									)}
 									{!back ? (
 										<div className={styles.button_div}>
 											<Button
@@ -161,16 +173,9 @@ function FormContainer({
 							<>
 								<Layout fields={fields?.package} control={control} errors={errors} />
 								<div className={styles.button_container}>
-									<Button
-										onClick={() => {
-											setHawbDetails(hawbDetails.filter((itm) => itm.id !== activeHawb));
-											setActiveHawb(hawbDetails[0].id);
-										}}
-										themeType="secondary"
-										style={{ border: '1px solid #333', marginLeft: '8%' }}
-									>
-										REMOVE
-									</Button>
+									{activeCategory === 'hawb' && (
+										<RemoveHawb />
+									)}
 									{!back ? (
 										<div className={styles.button_div}>
 											<Button
@@ -196,16 +201,9 @@ function FormContainer({
 							<>
 								<Layout fields={fields?.handling} control={control} errors={errors} />
 								<div className={styles.button_container}>
-									<Button
-										onClick={() => {
-											setHawbDetails(hawbDetails.filter((itm) => itm.id !== activeHawb));
-											setActiveHawb(hawbDetails[0].id);
-										}}
-										themeType="secondary"
-										style={{ border: '1px solid #333', marginLeft: '8%' }}
-									>
-										REMOVE
-									</Button>
+									{activeCategory === 'hawb' && (
+										<RemoveHawb />
+									)}
 									{!back ? (
 										<div className={styles.button_div}>
 											<Button

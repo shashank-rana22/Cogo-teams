@@ -29,6 +29,8 @@ interface Props {
 	viewDoc?: boolean;
 	chargeableWeight?:number;
 	setGenerate?:Function;
+	activeCategory?: String;
+	setHawbDetails?:Function;
 }
 
 const downloadButton = {
@@ -64,6 +66,8 @@ function GenerateMawb({
 	viewDoc = false,
 	chargeableWeight,
 	setGenerate = () => {},
+	activeCategory = '',
+	setHawbDetails = () => {},
 }:Props) {
 	const filteredData = { ...formData };
 
@@ -74,6 +78,8 @@ function GenerateMawb({
 		edit,
 		setGenerate,
 		setEdit,
+		activeCategory,
+		setHawbDetails,
 	});
 
 	const ref = createRef(null);
@@ -103,7 +109,7 @@ function GenerateMawb({
 			shipment_id         : taskItem?.shipmentId,
 			uploaded_by_org_id  : taskItem?.serviceProviderId,
 			performed_by_org_id : taskItem?.serviceProviderId,
-			document_type       : 'draft_airway_bill',
+			document_type       : activeCategory === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
 			id                  : taskItem?.documentId,
 			service_id          : taskItem?.serviceId,
 			service_type        : 'air_freight_service',

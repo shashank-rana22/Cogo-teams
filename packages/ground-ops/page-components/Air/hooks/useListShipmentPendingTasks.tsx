@@ -22,7 +22,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {} }) => 
 				new_awb: {
 					assignedStakeholder : 'service_ops2_docs',
 					status              : 'pending',
-					task                : ['upload_mawb_freight_certificate'],
+					task                : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
 				},
 				approval_pending: {
 					assignedStakeholder : 'service_ops2_docs',

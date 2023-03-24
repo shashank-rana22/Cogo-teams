@@ -46,7 +46,9 @@ function GenerateMAWB({
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
 	const [disableClass, setDisableClass] = useState(false);
-	const [activeCategory, setActiveCategory] = useState('hawb');
+	const [hawbDetails, setHawbDetails] = useState([
+		{ id: new Date().getTime(), isNew: true },
+	]);
 
 	const fields = mawbControls(disableClass);
 
@@ -60,6 +62,8 @@ function GenerateMAWB({
 	};
 
 	const taskItem = { ...item, ...item.documentData };
+
+	const [activeCategory, setActiveCategory] = useState(taskItem.blCategory);
 
 	const finalFields = [
 		...fields.basic,
@@ -161,6 +165,9 @@ function GenerateMAWB({
 					item={item}
 					setGenerate={setGenerate}
 					handleSubmit={handleSubmit}
+					activeCategory={activeCategory}
+					hawbDetails={hawbDetails}
+					setHawbDetails={setHawbDetails}
 				/>
 			)}
 
@@ -184,6 +191,8 @@ function GenerateMAWB({
 								viewDoc={viewDoc}
 								chargeableWeight={chargeableWeight}
 								setGenerate={setGenerate}
+								activeCategory={activeCategory}
+								setHawbDetails={setHawbDetails}
 							/>
 						</Modal.Body>
 

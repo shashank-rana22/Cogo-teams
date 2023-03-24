@@ -30,27 +30,29 @@ function GenerateHeader({ setGenerate, edit, setEdit, activeCategory, setActiveC
 				/>
 				<Breadcrumb.Item label="Add Export Details" />
 			</Breadcrumb>
-			<div className={styles.flex}>
-				{tabs.map((tab) => (
-					<div
-						key={tab.key}
-						onClick={() => {
-							setActiveCategory(tab.key);
-						}}
-						role="presentation"
-					>
-						{' '}
+			{activeCategory === 'hawb' && (
+				<div className={styles.flex}>
+					{tabs.map((tab) => (
 						<div
-							className={tab.key
-										=== activeCategory
-								? styles.category_container_click : styles.category_container}
+							key={tab.key}
+							onClick={() => {
+								setActiveCategory(tab.key);
+							}}
+							role="presentation"
 						>
-							{tab.label}
-						</div>
+							{' '}
+							<div
+								className={tab.key
+										=== activeCategory
+									? styles.category_container_click : styles.category_container}
+							>
+								{tab.label}
+							</div>
 
-					</div>
-				))}
-			</div>
+						</div>
+					))}
+				</div>
+			)}
 		</div>
 	);
 }
