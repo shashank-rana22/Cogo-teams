@@ -107,7 +107,9 @@
 .upload_item{
 	display: flex;  
 	justify-content: space-between;
-	align-items: center;
+	align-items: center; 
+	border: 1px solid #ececec; 
+	border-radius: 4px;  
 	padding: 10px 16px; 
 	width: 100%; 
 	margin-bottom: 16px;
