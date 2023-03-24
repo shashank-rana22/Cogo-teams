@@ -1,6 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState, useCallback } from 'react';
+import { addHours, addMinutes } from '@cogoport/utils';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 
 function useAllAudience({ date = '' }) {
 	const { general = {} } = useSelector((state) => state);
@@ -17,14 +18,24 @@ function useAllAudience({ date = '' }) {
 		url    : '/list_faq_audiences',
 	}, { manual: true });
 
+	const formatStartDate = useMemo(
+		() => (startDate ? addMinutes(addHours(startDate, 5), 30) : undefined),
+		[startDate],
+	);
+
+	const formatEndDate = useMemo(
+		() => (endDate ? addMinutes(addHours(endDate, 5), 30) : undefined),
+		[endDate],
+	);
+
 	const fetchFaqTopic = useCallback(
 		async () => {
 			try {
 				await trigger({
 					params: {
 						filters: {
-							created_at_greater_than : startDate || undefined,
-							created_at_less_than    : endDate || undefined,
+							created_at_greater_than : formatStartDate || undefined,
+							created_at_less_than    : formatEndDate || undefined,
 
 						},
 						page,
@@ -37,12 +48,12 @@ function useAllAudience({ date = '' }) {
 				console.log('error :: ', error);
 			}
 		},
-		[endDate, page, startDate, trigger],
+		[formatStartDate, formatEndDate, page, trigger],
 	);
 
 	useEffect(() => {
 		fetchFaqTopic();
-	}, [page, fetchFaqTopic, startDate, endDate]);
+	}, [page, fetchFaqTopic, formatStartDate, formatEndDate]);
 
 	const { page_limit = 0, total_count = 0 } = data || {};
 

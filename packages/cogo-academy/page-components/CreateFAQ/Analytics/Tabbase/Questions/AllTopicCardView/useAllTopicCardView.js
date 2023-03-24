@@ -1,6 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState, useCallback } from 'react';
+import { addHours, addMinutes } from '@cogoport/utils';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 
 function useAllTopicCardView({ date = '' }) {
 	const { general = {} } = useSelector((state) => state);
@@ -15,14 +16,24 @@ function useAllTopicCardView({ date = '' }) {
 		url    : '/list_faq_topics',
 	}, { manual: true });
 
+	const formatStartDate = useMemo(
+		() => (startDate ? addMinutes(addHours(startDate, 5), 30) : undefined),
+		[startDate],
+	);
+
+	const formatEndDate = useMemo(
+		() => (endDate ? addMinutes(addHours(endDate, 5), 30) : undefined),
+		[endDate],
+	);
+
 	const fetchFaqTopic = useCallback(
 		async () => {
 			try {
 				await trigger({
 					params: {
 						filters: {
-							created_at_greater_than : startDate,
-							created_at_less_than    : endDate,
+							created_at_greater_than : formatStartDate || undefined,
+							created_at_less_than    : formatEndDate || undefined,
 
 						},
 						page_limit                  : 10,
@@ -36,7 +47,7 @@ function useAllTopicCardView({ date = '' }) {
 				console.log('error :: ', error);
 			}
 		},
-		[endDate, page, startDate, trigger],
+		[formatStartDate, formatEndDate, page, trigger],
 	);
 
 	useEffect(() => { fetchFaqTopic(); }, [fetchFaqTopic, date, page]);
