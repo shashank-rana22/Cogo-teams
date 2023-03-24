@@ -3,6 +3,15 @@ import { isEmpty, startCase, upperCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+function LabelValue({ label, value }) {
+	return !isEmpty(value) ? (
+		<>
+			<div className={styles.label}>{label}</div>
+			<div className={styles.value}>{value}</div>
+		</>
+	) : null;
+}
+
 function Details({ sop_detail = {}, setShowForm = () => {} }) {
 	const mapping = {
 		'BL Category'      : upperCase(sop_detail?.bl_category || ''),
@@ -13,18 +22,11 @@ function Details({ sop_detail = {}, setShowForm = () => {} }) {
 		Address            : sop_detail?.address,
 	};
 
-	function LabelValue({ label, value }) {
-		return !isEmpty(value) ? (
-			<>
-				<div className={styles.label}>{label}</div>
-				<div className={styles.value}>{value}</div>
-			</>
-		) : null;
-	}
+	const isAddOrEdit = isEmpty(sop_detail) ? 'add' : 'edit';
 
 	return (
 		<div className={styles.container}>
-			{isEmpty(sop_detail) ? <div>No Data Available</div>
+			{isEmpty(sop_detail) ? <div className={styles.no_data}>No Data Available</div>
 				: (
 					<div>
 						{Object.keys(mapping).map((key) => <LabelValue label={key} value={mapping[key]} />)}
@@ -35,9 +37,9 @@ function Details({ sop_detail = {}, setShowForm = () => {} }) {
 				<Button
 					themeType="accent"
 					size="sm"
-					onClick={() => setShowForm(true)}
+					onClick={() => setShowForm(isAddOrEdit)}
 				>
-					{isEmpty(sop_detail) ? 'Add' : 'Edit'}
+					{startCase(isAddOrEdit)}
 
 				</Button>
 			</div>

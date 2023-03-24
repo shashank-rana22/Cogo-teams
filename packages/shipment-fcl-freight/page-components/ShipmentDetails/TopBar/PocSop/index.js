@@ -1,6 +1,7 @@
 import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowRotateLeft, IcMArrowRotateRight } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import POC from '../../../../common/POC';
 import SOP from '../../../../common/SOP';
@@ -8,6 +9,8 @@ import SOP from '../../../../common/SOP';
 import styles from './styles.module.css';
 
 function SopAndPoc() {
+	const { shipment_data } = useContext(ShipmentDetailContext);
+
 	const [activeTab, setActiveTab] = useState('poc');
 	const [show, setShow] = useState(false);
 
@@ -25,48 +28,51 @@ function SopAndPoc() {
 				</div>
 				<div className={styles.poc_sop_text}>POC and SOP</div>
 			</div>
-			<Modal
-				show={show}
-				placement="top-right"
-				size="md"
-				scroll={false}
-				onClose={() => setShow(false)}
-				closeOnOuterClick={false}
-			>
-				<Modal.Body>
-					<div className={styles.close}>
-						<div className={styles.close_icon_container}>
-							<Button
-								onClick={onClose}
-								themeType="tertiary"
-							>
-								<IcMArrowRotateRight
-									fill="white"
-								/>
-							</Button>
-						</div>
-						<div className={styles.close_border} />
-					</div>
-					<Tabs
-						fullWidth
-						activeTab={activeTab}
-						onChange={setActiveTab}
 
+			{show
+				&& (
+					<Modal
+						show={show}
+						placement="top-right"
+						size="md"
+						scroll={false}
+						onClose={() => setShow(false)}
+						closeOnOuterClick={false}
 					>
-						<TabPanel name="poc" title="POC">
-							<div style={{ height: '80vh', overflow: 'scroll' }}>
-								<POC />
+						<Modal.Body>
+							<div className={styles.close}>
+								<div className={styles.close_icon_container}>
+									<Button
+										onClick={onClose}
+										themeType="tertiary"
+									>
+										<IcMArrowRotateRight
+											fill="white"
+										/>
+									</Button>
+								</div>
+								{activeTab === 'poc' && <div className={styles.close_border} />}
 							</div>
-						</TabPanel>
-						<TabPanel name="sop" title="SOP">
-							<div style={{ height: '80vh', overflow: 'scroll' }}>
-								<SOP />
-							</div>
-						</TabPanel>
-					</Tabs>
+							<Tabs
+								fullWidth
+								activeTab={activeTab}
+								onChange={setActiveTab}
+							>
+								<TabPanel name="poc" title="POC">
+									<div style={{ height: '80vh', overflow: 'scroll' }}>
+										<POC shipment_data={shipment_data} />
+									</div>
+								</TabPanel>
+								<TabPanel name="sop" title="SOP">
+									<div style={{ height: '80vh', overflow: 'scroll' }}>
+										<SOP shipment_data={shipment_data} />
+									</div>
+								</TabPanel>
+							</Tabs>
 
-				</Modal.Body>
-			</Modal>
+						</Modal.Body>
+					</Modal>
+				)}
 		</div>
 	);
 }

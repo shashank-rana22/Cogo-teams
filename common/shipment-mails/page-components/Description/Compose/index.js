@@ -1,31 +1,16 @@
-import getFormError from '@cogo/business-modules/helpers/get-form-error';
-import useFormCogo from '@cogoport/front/hooks/useFormCogo';
-import useEditorState from '@cogoport/front/rich-text/useEditorState';
+import { RTE } from '@cogoport/components';
+import { useForm, handleError, InputController } from '@cogoport/forms';
+// import useEditorState from '@cogoport/front/rich-text/useEditorState';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { dynamic } from '@cogoport/next';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import useGetEntityStakeholderMappings from '../../../hooks/useGetEntityStakeholderMappings';
 import useResetErrors from '../../../hooks/useResetErrors';
 
-import rawControls from './controls';
 import Footer from './Footer';
 import InputParam from './Input';
 import SelectParam from './Select';
-import {
-	Container,
-	Heading,
-	ComposeContiner,
-	Row,
-	SuffixButton,
-	Error,
-	SubjectPreview,
-	Preview,
-} from './styles';
-
-const Rte = dynamic(() => import('@cogoport/front/rich-text/RTE'), {
-	ssr: false,
-});
+import styles from './styles.module.css';
 
 const getFormattedValues = (emailData, action) => {
 	const sender = emailData?.sender?.emailAddress?.address;
@@ -71,32 +56,15 @@ function Compose({
 	const [isCC, setIsCC] = useState(defaultCC);
 	const [isBcc, setIsBcc] = useState(false);
 	const [errors, setErrors] = useState({});
+	const [editorState, setEditorState] = useState();
 	const { options } = useGetEntityStakeholderMappings();
-	const controls = rawControls.map((ctrl) => ({
-		...ctrl,
-		value: defaultValues[ctrl.name],
-	}));
+
 	const {
-		fields,
+		control,
 		handleSubmit,
 		formState: { errors: errorVal },
 		watch,
-	} = useFormCogo(controls);
-	useResetErrors({ errors, setErrors, currentStateErrors: errorVal });
-
-	const { editorState, setEditorState, HTMLState } = useEditorState();
-	useEffect(() => () => {
-		setComposingEmail(null);
-	}, []);
-	const suffix = (
-		<Row>
-			<SuffixButton onClick={() => setIsCC(!isCC)}>cc</SuffixButton>
-			<SuffixButton onClick={() => setIsBcc(!isBcc)}>bcc</SuffixButton>
-		</Row>
-	);
-	const handleChange = (state) => {
-		setEditorState(state);
-	};
+	} = useForm({ defaultValues });
 
 	let actualSubject = watch('subject');
 	const entity_type = watch('entity_type');
@@ -107,81 +75,146 @@ function Compose({
 		actualSubject = `${actualSubject} / ${pre_subject_text} / ${entity_type}`;
 	}
 
+	useResetErrors({ errors, setErrors, currentStateErrors: errorVal });
+
+	const suffix = (
+		<div className={styles.row}>
+			<div
+				className={styles.suffix_button}
+				role="button"
+				tabIndex={0}
+				onClick={() => setIsCC(!isCC)}
+			>
+				cc
+			</div>
+			<div
+				className={styles.suffix_button}
+				role="button"
+				tabIndex={0}
+				onClick={() => setIsBcc(!isBcc)}
+			>
+				bcc
+			</div>
+		</div>
+	);
+
 	return (
-		<Container>
-			<Heading>
-				{' '}
+		<div className={styles.container}>
+			<div className={styles.heading}>
 				<IcMArrowBack
 					style={{ marginRight: 10, cursor: 'pointer' }}
 					onClick={() => setComposingEmail(null)}
 				/>
 				New Email
-			</Heading>
-			<ComposeContiner>
-				<InputParam prefix="To:" suffix={suffix} {...fields.toUserEmail} />
-				{errors?.toUserEmail ? (
-					<Error>
-						{getFormError(
-							{ ...fields?.toUserEmail, error: errors?.toUserEmail },
-							true,
-						)}
-					</Error>
+			</div>
+
+			<div className={styles.compose_container}>
+
+				<div className={styles.user_email}>
+					<InputParam
+						prefix="To:"
+						suffix={suffix}
+						name="toUserEmail"
+						control={control}
+						placeholder="put comma (,) seperated multiple emails"
+						rules={{ required: { value: true, message: 'Email is required' } }}
+					/>
+					{errors?.toUserEmail ? (
+						<div className={styles.error}>
+							{handleError(
+								{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
+								true,
+							)}
+						</div>
+					) : null}
+				</div>
+
+				{isCC ? (
+					<InputParam
+						prefix="Cc:"
+						name="ccrecipients"
+						control={control}
+						placeholder="put comma (,) seperated multiple emails"
+					/>
 				) : null}
-				{isCC ? <InputParam prefix="Cc:" {...fields.ccrecipients} /> : null}
 				{errors?.ccrecipients ? (
-					<Error>
-						{getFormError(
-							{ ...fields?.ccrecipients, error: errors?.ccrecipients },
+					<div className={styles.error}>
+						{handleError(
+							{ rules: { required: 'Emails are required' }, error: errors?.ccrecipients },
 							true,
 						)}
-					</Error>
+					</div>
 				) : null}
-				{isBcc ? <InputParam prefix="Bcc:" /> : null}
-				<InputParam prefix="Subject:" {...fields.subject} />
+				{isBcc
+					? (
+						<InputController
+							prefix="Bcc:"
+							name="bccrecipients"
+							control={control}
+							placeholder="put comma (,) seperated multiple emails"
+						/>
+					)
+					: null}
+
+				<InputParam
+					prefix="Subject:"
+					name="subject"
+					placeholder="Enter subject..."
+					control={control}
+				/>
 				{errors?.subject ? (
-					<Error>
-						{getFormError({ ...fields?.subject, error: errors?.subject }, true)}
-					</Error>
+					<div className={styles.error}>
+						{handleError(
+							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
+							true,
+						)}
+					</div>
 				) : null}
 				<SelectParam
 					prefix="Mail Type:"
-					{...fields.entity_type}
+					name="entity_type"
+					placeholder="Select Mail type..."
+					control={control}
 					options={options}
+					rules={{ required: { value: true, message: 'Entity Type is required' } }}
 				/>
 				{errors?.entity_type ? (
-					<Error>
-						{getFormError(
-							{ ...fields?.entity_type, error: errors?.entity_type },
+					<div className={styles.error}>
+						{handleError(
+							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
 							true,
 						)}
-					</Error>
+					</div>
 				) : null}
-				<SubjectPreview>
-					{' '}
-					<Preview className="label">Subject Preview :</Preview>
-					{' '}
-					<Preview>
+				<div className={styles.subject_preview}>
+					<div className={styles.preview}>Subject Preview :</div>
+					<div className={styles.preview}>
 						{actualSubject}
-						{' '}
-					</Preview>
-				</SubjectPreview>
+					</div>
+				</div>
 
 				{errors?.subject ? (
-					<Error>
-						{getFormError(
-							{ ...fields?.entity_type, error: errors?.entity_type },
+					<div className={styles.error}>
+						{handleError(
+							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
 							true,
 						)}
-					</Error>
+					</div>
 				) : null}
-				<Rte
-					placeholder="Write here ...."
-					editorState={editorState}
-					setEditorState={setEditorState}
-					onChange={handleChange}
-				/>
+
+				<div className={styles.rich_text_editor}>
+
+					<RTE
+						className={styles.styled_editor}
+						placeholder="Write Your mail here...."
+						value={editorState}
+						onChange={setEditorState}
+					/>
+
+				</div>
+
 				<Footer
-					content={HTMLState}
+					content={editorState}
 					subject="Testing the flow wait"
 					COMPOSE_EMAIL={COMPOSE_EMAIL}
 					handleSubmit={handleSubmit}
@@ -190,8 +223,8 @@ function Compose({
 					composingEmail={composingEmail}
 					onCreate={() => setComposingEmail(null)}
 				/>
-			</ComposeContiner>
-		</Container>
+			</div>
+		</div>
 	);
 }
 

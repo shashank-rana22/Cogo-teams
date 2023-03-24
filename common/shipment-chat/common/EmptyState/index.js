@@ -1,4 +1,3 @@
-import { cl } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -15,7 +14,7 @@ function EmptyState({
 			<div>
 				<div className={styles.heading}>{showContent.heading}</div>
 
-				<div className={cl` ${styles.heading} ${styles.content}`}>{showContent.description}</div>
+				<div className={styles.content}>{showContent.description}</div>
 			</div>
 
 			{!isMobile ? (

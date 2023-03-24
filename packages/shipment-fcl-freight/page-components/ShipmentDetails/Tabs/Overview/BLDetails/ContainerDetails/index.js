@@ -1,13 +1,14 @@
-import { Tag, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
+
+import { renderValue } from '../../../../../../common/CargoDetails/RenderCargoPills/renderValue';
 
 import styles from './styles.module.css';
 
-// const { Row, Col } = Grid;
-
 function ConatinerDetails({ containerDetails = [] }) {
 	let even = false;
-	if (containerDetails?.length / 2 === 0) {
+	if ((containerDetails || []).length / 2 === 0) {
 		even = true;
 	}
 
@@ -16,20 +17,18 @@ function ConatinerDetails({ containerDetails = [] }) {
 	return (
 		<div>
 			<div className={styles.container}>
-				{containerDetails?.map((item, index) => (
-					<div md={6} className={cl`${className} random`}>
+				{(containerDetails || [])?.map((item, index) => (
+					<div className={cl`${className} random`}>
 						<div className={styles.container_item}>
 							<div className={styles.container_description}>
-								<div className={styles.serial_number}>{index + 1}</div>
-
-								<div className={styles.container_number}>{item?.container_number}</div>
-
-								<div className={styles.tag_wrapper}>
-									<Tag>{item?.container_type}</Tag>
+								<div className={styles.serial_number}>
+									{index + 1}
+									:
 								</div>
-
+								<div className={styles.container_number}>{item?.container_number}</div>
 								<div className={styles.tag_wrapper}>
-									<Tag>{item?.container_size}</Tag>
+									<div>{startCase(item?.container_type)}</div>
+									<div>{renderValue('container_size', item)}</div>
 								</div>
 							</div>
 						</div>

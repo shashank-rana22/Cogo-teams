@@ -1,3 +1,4 @@
+import { Input } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
@@ -46,7 +47,7 @@ function DefaultForm({ companyType = '', tradePartyType = '', importer_exporter_
 					? (
 						<>
 							<div className={styles.form_item_container}>
-								<label>Select Company</label>
+								<label className={styles.form_label}>Select Company</label>
 								<SelectController
 									style={{ maxWidth: '350px', minWidth: '300px' }}
 									size="sm"
@@ -62,7 +63,7 @@ function DefaultForm({ companyType = '', tradePartyType = '', importer_exporter_
 
 							{!isEmpty(formValues?.trade_party_id) && (
 								<div className={styles.form_item_container}>
-									<label>Select Address</label>
+									<label className={styles.form_label}>Select Address</label>
 									<SelectController
 										style={{ maxWidth: '350px', minWidth: '300px' }}
 										size="sm"
@@ -79,7 +80,7 @@ function DefaultForm({ companyType = '', tradePartyType = '', importer_exporter_
 							{!isEmpty(formValues?.address) && (
 								<div className={styles.form_item_container}>
 									<div>Pincode</div>
-									<div>{formValues.address?.split('::')?.[1]}</div>
+									<Input disabled value={formValues.address?.split('::')?.[1]} size="sm" />
 								</div>
 							)}
 						</>

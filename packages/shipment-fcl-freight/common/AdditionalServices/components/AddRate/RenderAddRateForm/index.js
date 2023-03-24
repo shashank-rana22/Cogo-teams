@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { asyncFieldsOrganization, SelectController, useGetAsyncOptions, InputController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { merge } from '@cogoport/utils';
@@ -10,6 +9,7 @@ function RenderAddRateForm({
 	onSubmit = () => {},
 	control,
 	errors,
+	unitOptions = [],
 }) {
 	const currencyOptions = [
 		GLOBAL_CONSTANTS.currency_code.INR,
@@ -20,17 +20,6 @@ function RenderAddRateForm({
 		label : currency,
 		value : currency,
 	}));
-
-	const unitOptions = [
-		{
-			label : 'Per BL',
-			value : 'per_bl',
-		},
-		{
-			label : 'Per Container',
-			value : 'per_container',
-		},
-	];
 
 	const serviceProviderInitalControl = {
 		name        : 'service_provider_id',
@@ -70,7 +59,7 @@ function RenderAddRateForm({
 				errors={errors}
 			/>
 			{errors.service_provider_id && (
-				<span className={styles.errors}>
+				<span>
 					{errors.service_provider_id.message}
 				</span>
 			)}
@@ -89,6 +78,7 @@ function RenderAddRateForm({
 						options={currencyOptions}
 						rules={{ required: { value: true, message: 'Currency is required' } }}
 					/>
+					{errors.currency && <span>This field is required</span>}
 				</div>
 				<div className={styles.input_container}>
 					<label htmlFor="buy_price">Buy price</label>
@@ -98,6 +88,7 @@ function RenderAddRateForm({
 						size="sm"
 						rules={{ required: { value: true, message: 'Buy Price is required' } }}
 					/>
+					{errors.buy_price && <span>This field is required</span>}
 				</div>
 			</div>
 
@@ -111,6 +102,7 @@ function RenderAddRateForm({
 						options={unitOptions}
 						rules={{ required: { value: true, message: 'Unit is required' } }}
 					/>
+					{errors.unit && <span>This field is required</span>}
 				</div>
 
 				<div className={styles.input_container}>

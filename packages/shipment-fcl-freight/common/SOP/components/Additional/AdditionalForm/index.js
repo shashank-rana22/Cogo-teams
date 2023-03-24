@@ -2,6 +2,9 @@ import { Button } from '@cogoport/components';
 import { InputController, SelectController, UploadController, useFieldArray, useForm } from '@cogoport/forms';
 import { IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
 
+import useCreateShipmentOperatingInstruction from '../../../../../hooks/useCreateShipmentOperatingInstruction';
+import getCreateInstructionParams from '../helpers/getCreateInstructionParams';
+
 import categoryOptions from './categoryOptions';
 import styles from './styles.module.css';
 
@@ -10,17 +13,43 @@ const EMPTY_VALUES = {
 	remarks  : '',
 	document : '',
 };
-function AdditionalForm({ setShowForm = () => {} }) {
-	const { control } = useForm({
+function AdditionalForm({ setShowForm = () => {}, shipment_ids = {}, getProcedureTrigger = () => {} }) {
+	const { shipment_id, organization_id, procedure_id } = shipment_ids;
+
+	const afterUpdateOrCreateRefetch = () => {
+		setShowForm(false);
+		getProcedureTrigger();
+	};
+
+	const { apiTrigger:createTrigger, loading:createLoading } =	 useCreateShipmentOperatingInstruction({
+		shipment_id,
+		organization_id,
+		procedure_id,
+		refetch: afterUpdateOrCreateRefetch,
+	});
+
+	const { control, handleSubmit, formState:{ errors = {} } } = useForm({
 		defaultValues: {
-			addtional: [EMPTY_VALUES],
+			additional: [EMPTY_VALUES],
 		},
 	});
 
 	const { fields, append, remove } = useFieldArray({
 		control,
-		name: 'addtional',
+		name: 'additional',
 	});
+
+	const onSubmit = (formValues) => {
+		const params = getCreateInstructionParams({ formValues });
+		createTrigger(params);
+	};
+
+	function Error(key) {
+		const [object, index, keyName] = (key || '').split('.');
+
+		return errors?.[object]?.[index]?.[keyName]
+			? <div className={styles.errors}>{errors?.[object]?.[index]?.[keyName]?.message}</div> : null;
+	}
 
 	return (
 		<div className={styles.form_container}>
@@ -29,44 +58,50 @@ function AdditionalForm({ setShowForm = () => {} }) {
 					<div key={item.id} className={styles.field_array_container}>
 						<div className={styles.row}>
 							<div className={styles.form_item_container}>
-								<label>Category</label>
+								<label className={styles.form_label}>Category</label>
 								<SelectController
 									size="sm"
-									name={`addition.${index}.category`}
+									name={`additional.${index}.category`}
 									control={control}
 									options={categoryOptions}
+									rules={{ required: { value: true, message: 'Category is required' } }}
 								/>
+								{Error(`additional.${index}.category`)}
 							</div>
 							<div className={styles.form_item_container}>
-								<label>Comment</label>
+								<label className={styles.form_label}>Comment</label>
 								<InputController
 									size="sm"
-									name={`addition.${index}.remarks`}
+									name={`additional.${index}.remarks`}
 									control={control}
+									rules={{ required: { value: true, message: 'Comment is required' } }}
 								/>
+								{Error(`additional.${index}.remarks`)}
 							</div>
 						</div>
 
 						<div className={styles.form_item_container}>
-							<label>Document</label>
+							<label className={styles.form_label}>Document</label>
 							<UploadController
-								name={`addition.${index}.document`}
+								name={`additional.${index}.document`}
 								control={control}
 							/>
 						</div>
-						<div>
-							<Button
-								type="button"
-								onClick={() => remove(index)}
-								themeType="tertiary"
-							>
-								<span className={styles.delete_content}>
-									<IcMDelete />
-									Delete
-								</span>
-							</Button>
+						{index !== 0 && (
+							<div>
+								<Button
+									type="button"
+									onClick={() => remove(index)}
+									themeType="tertiary"
+								>
+									<span className={styles.delete_content}>
+										<IcMDelete />
+										Delete
+									</span>
+								</Button>
 
-						</div>
+							</div>
+						)}
 					</div>
 				))}
 
@@ -98,6 +133,8 @@ function AdditionalForm({ setShowForm = () => {} }) {
 						<Button
 							size="sm"
 							themeType="accent"
+							onClick={handleSubmit(onSubmit)}
+							disabled={createLoading}
 						>
 							Submit
 

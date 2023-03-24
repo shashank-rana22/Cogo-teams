@@ -4,7 +4,7 @@ import {
 	IcAShipAmber,
 	IcASurfaceFttRail,
 } from '@cogoport/icons-react';
-import { format, isEmpty } from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 import VerticleLine from './VerticleLine';
@@ -63,34 +63,6 @@ function TrackingData({ data = [], shippingLine = {} }) {
 										tooltip  : false,
 									}]}
 								/>
-							)}
-
-							{item?.flight_number && (
-								<div className={styles.info}>
-									{item?.piece ? (
-										<div className={cl`${styles.info} ${styles.piece}`}>
-											{item?.piece.split(':')?.[1] ?? item?.piece}
-											{' '}
-											Pieces •
-										</div>
-									) : null}
-									{' '}
-
-									<div className={styles.info}>
-										Flight no -
-										{item?.flight_number}
-									</div>
-
-									{!isEmpty(item?.weight) ? (
-										<div className={cl`${styles.info} ${styles.weight}`}>
-											•
-											{' '}
-											{`${item?.weight.split(':')?.[1]}g` ?? item?.weight}
-											{' '}
-											Weight
-										</div>
-									) : null}
-								</div>
 							)}
 
 							<div className={cl`${styles.info} ${styles.date}`}>

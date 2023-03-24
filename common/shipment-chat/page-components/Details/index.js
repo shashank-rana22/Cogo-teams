@@ -32,7 +32,6 @@ function Details({
 }) {
 	const sendToRef = useRef(null);
 	const [stakeHolderView, setStakeHolderView] = useState('');
-	const [rows, setRows] = useState(1);
 	const [textContent, setTextContent] = useState('');
 	const [showImpMsg, setShowImpMsg] = useState(false);
 	const [selectedFile, setSelectedFile] = useState([]);
@@ -69,25 +68,6 @@ function Details({
 		shipmentChatStakeholders,
 		setSelectedFile,
 	});
-
-	const contentData = formValues?.message?.split('\n').length;
-	const handleKeyPress = (e) => {
-		if (e.key === 'Enter' && e.shiftKey && rows < 5) {
-			setRows(contentData + 1);
-		}
-
-		if (e.key === 'Enter' && !e.shiftKey) {
-			onCreate();
-			reset();
-			setRows(1);
-		}
-	};
-
-	const handleDelete = (e) => {
-		if (contentData > 1 && (e.keyCode === 8 || e.keyCode === 46)) {
-			setRows(contentData - 1);
-		}
-	};
 
 	if (activeId !== id) {
 		return null;
@@ -161,9 +141,6 @@ function Details({
 							className={styles.text_area}
 							placeholder="Type your message here...."
 							value={textContent}
-							rows
-							onKeyPress={(e) => handleKeyPress(e)}
-							onKeyDown={(e) => handleDelete(e)}
 							onChange={(val) => {
 								setTextContent(val);
 							}}

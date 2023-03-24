@@ -1,11 +1,10 @@
-import { Modal, Popover } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
 import { IcMDocument, IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function Attachements({ externalAttachements }) {
-	const [showPreview, setPreview] = useState(null);
 	const [showPopover, setShowPopover] = useState(false);
 	function base64ToArrayBuffer(base64) {
 		const binaryString = window.atob(base64);
@@ -53,7 +52,6 @@ function Attachements({ externalAttachements }) {
 										tabIndex={0}
 										className={styles.action}
 										onClick={() => {
-											setPreview(item);
 											setShowPopover(false);
 										}}
 									>
@@ -88,23 +86,7 @@ function Attachements({ externalAttachements }) {
 					</div>
 				))}
 			</div>
-			{/* {showPreview ? (
-				<Modal
-					show={showPreview}
-					onClose={() => setPreview(null)}
-					className="primary lg"
-					onOuterClick={() => setPreview(null)}
-					closable={false}
-				>
-					<object
-						height="700px"
-						width="800px"
-						aria-label="Doc Preview"
-						data={`data:${externalAttachements[0].contentType};
-						base64,${externalAttachements[0].contentBytes}`}
-					/>
-				</Modal>
-			) : null} */}
+
 		</div>
 	);
 }

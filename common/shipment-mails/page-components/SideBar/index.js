@@ -10,11 +10,11 @@ function SideBar({
 	composingEmail,
 	activeBox,
 	setActiveBox,
-	source,
 }) {
-	const SIDE_BAR_ITEMS = sideBarConfigs[source];
+	const SIDE_BAR_ITEMS = sideBarConfigs;
 	return (
 		<div className={styles.container}>
+
 			<div className={styles.actions}>
 				<Button
 					onClick={onCompose}
@@ -24,16 +24,17 @@ function SideBar({
 					+ Compose New
 				</Button>
 			</div>
+
 			<div className={styles.items}>
 				{SIDE_BAR_ITEMS.map((item) => (
 					<div
 						role="button"
 						tabIndex={0}
 						key={item.name}
-						className={` ${styles.item} ${activeBox === item.name ? 'active' : ''}`}
+						className={cl`${styles.item} ${activeBox === item.name ? styles.active : ''}`}
 						onClick={() => setActiveBox(item.name)}
 					>
-						<div className={cl`${styles.item_name} ${activeBox === item.name ? 'active' : ''}`}>
+						<div className={cl`${styles.item_name} ${activeBox === item.name ? styles.active : ''}`}>
 							{item.label}
 						</div>
 					</div>

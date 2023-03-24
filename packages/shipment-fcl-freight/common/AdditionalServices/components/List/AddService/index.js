@@ -1,12 +1,12 @@
-import { Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import useListServiceChargeCodes from '../../../../../hooks/useListServiceChargeCodes';
 import EmptyState from '../../../../EmptyState';
 import AddRate from '../../AddRate';
 
 import ChooseService from './ChooseService';
 import styles from './styles.module.css';
-import useListServiceChargeCodes from './useListServiceChargeCodes';
 import ViewPrice from './ViewPrice';
 
 function AddService({
@@ -15,7 +15,6 @@ function AddService({
 	isSeller,
 	refetch = () => {},
 	show = false,
-	setShow = () => {},
 	showChargeCodes = false,
 	setShowChargeCodes = () => {},
 }) {
@@ -33,7 +32,6 @@ function AddService({
 		<EmptyState />;
 	}
 
-	console.log('showAddRate', showAddRate);
 	return (
 		<Modal
 			size="xl"
@@ -53,11 +51,11 @@ function AddService({
 							loading={loading}
 							setFilters={setFilters}
 							filters={filters}
-							setShow={setShow}
 							setShowPrice={setShowPrice}
 							serviceCountTotal={serviceCountTotal}
 							services={services}
 							refetch={refetch}
+							setShowChargeCodes={setShowChargeCodes}
 						/>
 					) : null}
 					{showAddRate ? (
@@ -65,7 +63,7 @@ function AddService({
 							isSeller={isSeller}
 							item={showAddRate}
 							setAddRate={setAddRate}
-							setShow={setShow}
+							setShowChargeCodes={setShowChargeCodes}
 							refetch={refetch}
 							filters={filters}
 						/>
@@ -80,6 +78,9 @@ function AddService({
 					) : null}
 				</div>
 			</Modal.Body>
+			<Modal.Footer>
+				<Button onClick={() => setShowChargeCodes(false)}>OK</Button>
+			</Modal.Footer>
 		</Modal>
 	);
 }

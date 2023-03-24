@@ -27,7 +27,7 @@ function ActionsToShow({
 				<Button
 					onClick={() => setSecondStep(true)}
 					disabled={loading}
-					themeType="secondary"
+					themeType="primary"
 				>
 					Request Changes
 				</Button>
@@ -47,14 +47,14 @@ function ActionsToShow({
 				<Button
 					onClick={handleShipperSideCancel}
 					disabled={loading}
-					themeType="secondary"
+					themeType="primary"
 				>
 					Cancel Service
 				</Button>
 				<Button
 					onClick={handleBuyPriceReRequest}
 					disabled={loading}
-					themeType="secondary"
+					themeType="primary"
 				>
 					RE-REQUEST BUY PRICE
 				</Button>
@@ -81,14 +81,14 @@ function ActionsToShow({
 						setShowAddRate(false);
 					}}
 					disabled={loading}
-					themeType="secondary"
+					themeType="primary"
 				>
 					Cancel
 				</Button>
 				<Button
 					onClick={requestRateFromTechops}
 					disabled={loading}
-					themeType="secondary"
+					themeType="primary"
 				>
 					Request From techops
 				</Button>
@@ -107,7 +107,7 @@ function ActionsToShow({
 					setAddRate(false);
 					setAddSellPrice(false);
 				}}
-				themeType="secondary"
+				themeType="primary"
 				disabled={loading}
 			>
 				Cancel
@@ -116,7 +116,7 @@ function ActionsToShow({
 			<Button
 				onClick={handleSubmit(onAddRate)}
 				disabled={loading}
-				themeType="secondary"
+				themeType="primary"
 			>
 				Submit
 			</Button>

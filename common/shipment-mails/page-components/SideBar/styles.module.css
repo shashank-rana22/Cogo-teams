@@ -1,15 +1,17 @@
 
 .container {
-	width: 172px;
+	width: 172px; 
+	padding: 8px;
+
 }
 
 .item {
-	padding: 12px 24px;
+	padding: 8px 16px;
 	&.active {
-		background: #dce0f7;
+		border-left: 1px solid #a06222; 
 	}
 	&:hover {
-		background: #dce0f7;
+		background:#fbeee0;
 		cursor: pointer;
 	}
 }

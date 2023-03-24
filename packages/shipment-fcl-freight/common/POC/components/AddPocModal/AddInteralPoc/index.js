@@ -1,5 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
-import { SelectController, useForm } from '@cogoport/forms';
+import { SelectController, useForm, useGetAsyncOptions, asyncFieldsPartnerUsers } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -14,7 +14,7 @@ const showServiceForStakeholder = (stakeholder_type) => !['booking_agent',
 	'portfolio_manager',
 	'lastmile_ops'].includes(stakeholder_type);
 
-function AddInternalPoc({ addPoc = {}, setAddPoc = () => {} }) {
+function AddInternalPoc({ addPoc = {}, setAddPoc = () => {}, services = [] }) {
 	const { stakeholder_type = '' } = addPoc;
 
 	const { control, watch, resetField, handleSubmit, formState:{ errors = {} } } = useForm();
@@ -33,7 +33,12 @@ function AddInternalPoc({ addPoc = {}, setAddPoc = () => {} }) {
 		resetField('stakeholder_id');
 	}, [formValues?.stakeholder_type]);
 
+	console.log({ services });
+
 	const stakeholderTypeOptions = convertObjectMappingToArray(STAKEHOLDER_MAPPING);
+	const serviceOptions = (services || []).map((s) => ({ label: startCase(s), value: s }));
+	const stakeholderOptions = useGetAsyncOptions(asyncFieldsPartnerUsers());
+	// const stakeholderOptions = [];
 
 	function Error(key) {
 		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
@@ -72,7 +77,7 @@ function AddInternalPoc({ addPoc = {}, setAddPoc = () => {} }) {
 										size="sm"
 										control={control}
 										name="service_id"
-										options={[]}
+										options={serviceOptions}
 										rules={{ required: { value: true, message: 'Service is required' } }}
 									/>
 									{Error('service_id')}
@@ -89,6 +94,7 @@ function AddInternalPoc({ addPoc = {}, setAddPoc = () => {} }) {
 									control={control}
 									name="stakeholder_id"
 									rules={{ required: { value: true, message: 'Stakeholder Name is required' } }}
+									{...stakeholderOptions}
 								/>
 								{Error('stakeholder_id')}
 							</div>

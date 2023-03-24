@@ -5,8 +5,6 @@ import getValue from '../../../../../../../../utils/getValue';
 
 import styles from './styles.module.css';
 
-// const { Col } = Grid;
-
 function Item({ item, fields, handleClick, loading = false }) {
 	const stylesCol = { padding: '0px 4px' };
 
@@ -24,7 +22,7 @@ function Item({ item, fields, handleClick, loading = false }) {
 			style={stylesRow}
 			onClick={handleClick}
 			tabIndex="0"
-			className={cl` ${item.expired ? 'expired' : ''} ${styles.row}`}
+			className={cl` ${item.expired ? styles.expired : ''} ${styles.row}`}
 			onKeyDown={(e) => {
 				if (e.key === 'Enter') {
 					handleClick();
@@ -34,10 +32,6 @@ function Item({ item, fields, handleClick, loading = false }) {
 		>
 			{fields.map((singleItem) => (
 				<div
-					// xs={6}
-					// sm={6}
-					// md={singleItem.span}
-					// lg={singleItem.span}
 					style={singleItem.hasStyle ? singleItem.styles : stylesCol}
 					key={singleItem?.key}
 				>

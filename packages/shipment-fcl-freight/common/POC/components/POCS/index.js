@@ -1,7 +1,7 @@
 import { Toggle } from '@cogoport/components';
 import { useState } from 'react';
 
-import useListShipmentStakeholders from '../../../../hooks/useListShipmentStakeholders';
+import useListStakeholders from '../../../../hooks/useListShipmentStakeholders';
 import Card from '../Card';
 
 import External from './External';
@@ -11,10 +11,11 @@ import styles from './styles.module.css';
 function POCS({ tradePartnersData = {}, setAddPoc = () => {}, shipment_id = '' }) {
 	const [isInternal, setIsInternal] = useState(true);
 
-	const { data:shipmentStakeholderData = [] } = useListShipmentStakeholders({
-		defaultParams: { format_by_stakeholder_type_required: true },
+	const { data:{ list:shipmentStakeholderData = [] } = {}, loading:stakeHolderLoading } = useListStakeholders({
+
 		shipment_id,
 	});
+
 
 	return (
 		<Card title="POCs">
@@ -34,6 +35,7 @@ function POCS({ tradePartnersData = {}, setAddPoc = () => {}, shipment_id = '' }
 				<Internal
 					data={shipmentStakeholderData?.length ? shipmentStakeholderData : []}
 					setAddPoc={setAddPoc}
+					loading={stakeHolderLoading}
 				/>
 			) : <External tradePartnersData={tradePartnersData} setAddPoc={setAddPoc} />}
 		</Card>

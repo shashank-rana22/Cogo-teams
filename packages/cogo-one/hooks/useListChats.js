@@ -48,7 +48,7 @@ const useListChats = ({
 		}
 	};
 	useEffect(() => {
-		debounceQuery(searchValue?.toUpperCase());
+		debounceQuery(searchValue?.trim()?.toUpperCase());
 	}, [debounceQuery, searchValue]);
 	useEffect(() => {
 		if (assigned_chat) {
@@ -135,7 +135,7 @@ const useListChats = ({
 			...omniChannelQuery,
 			where(
 				'new_message_sent_at',
-				'<',
+				'<=',
 				Number(listData?.lastMessageTimeStamp),
 			),
 			limit(PAGE_LIMIT),
@@ -147,7 +147,7 @@ const useListChats = ({
 
 		const { resultList = {} } = dataFormatter(prevChats);
 
-		const lastMessageTimeStamp = prevChats[(prevChats.length || 0) - 1]?.data()?.created_at;
+		const lastMessageTimeStamp = prevChats[(prevChats.length || 0) - 1]?.data()?.new_message_sent_at;
 		const isLastPage = prevChats?.length < PAGE_LIMIT;
 
 		setListData((p) => ({
@@ -176,7 +176,7 @@ const useListChats = ({
 	};
 
 	const handleScroll = (e) => {
-		const reachBottom = e.target.scrollHeight - (e.target.clientHeight + e.target.scrollTop) <= 0;
+		const reachBottom = e.target.scrollHeight - (e.target.clientHeight + e.target.scrollTop) <= 150;
 		if (reachBottom && !listData?.isLastPage && !loading) {
 			getPrevChats();
 		}

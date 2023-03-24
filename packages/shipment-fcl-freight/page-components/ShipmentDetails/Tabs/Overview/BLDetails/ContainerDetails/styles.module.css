@@ -1,7 +1,5 @@
-
-
 .serial_number{
-	font-weight: 500;
+	font-weight: 700;
 	font-size: 12px;
 	line-height: 16px;
 	color: #000000;
@@ -10,7 +8,7 @@
 
 .container_number{
 	font-weight: 500;
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 14px;
 	color: #333333;
 	text-transform: uppercase;
@@ -22,14 +20,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	padding: 8px;
-
-	&.no-border {
-		border: none;
-
-		.random:nth-child(2n + 1) {
-			border-right: 1px solid #ded7fc;
-		}
-	}
+	justify-content: space-between;
 }
 
 .container_description{
@@ -46,13 +37,12 @@
 }
 
 .tag_wrapper{
-	margin-right: 8px;
+	display: flex;
 
-	.core-ui-tag-root.sm {
-		padding: 1px 4px;
-	}
-
-	.core-ui-tag-text {
-		text-transform: capitalize;
+	& > div{
+		background-color: #e7d8af;
+		margin-right: 8px;
+		padding: 0px 8px;
+    	border-radius: 4px;
 	}
 }

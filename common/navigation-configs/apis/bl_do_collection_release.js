@@ -47,6 +47,40 @@ const apis = [
 		feature      : 'bl_do_collection_release',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_shipment_services',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_pending_tasks',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_document_inventory',
+		access_type  : 'private',
+		service_name : 'organization',
+		feature      : 'inventory_management',
+	},
+	{
+		api          : 'create_organization_document_inventory',
+		access_type  : 'private',
+		service_name : 'organization',
+		feature      : 'inventory_management',
+	},
+	{
+		api          : 'list_shipment_bl_inventory',
+		access_type  : 'private',
+		service_name : 'shipment',
+		feature      : 'inventory_management',
+	},
+	{
+		api          : 'list_organizations',
+		access_type  : 'private',
+		service_name : 'organization',
+		feature      : 'inventory_management',
+	},
 ];
 
 export default apis;

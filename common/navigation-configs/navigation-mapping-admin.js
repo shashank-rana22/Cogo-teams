@@ -1331,7 +1331,7 @@ const navigationMappingAdmin = {
 				as            : '/bl_do-collection-release',
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
-				possible_apis : apis.bl_do_collection_release,
+				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
 
 			},
 			{

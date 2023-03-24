@@ -15,7 +15,7 @@ function RaiseQuery({ setShowModal = () => {} }) {
 			</div>
 			<Button
 				onClick={() => setShowModal(false)}
-				themeType="secondary"
+				themeType="accent"
 				style={{ marginRight: 10, border: 'none' }}
 			>
 				Okay

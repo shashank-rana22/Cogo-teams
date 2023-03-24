@@ -1,16 +1,8 @@
-import useListShipmentAudits from '../../../../hooks/useListShipmentAudits';
-
 import HistoryPagination from './HistoryPagination';
 import HistoryTable from './HistoryTable';
 import styles from './styles.module.css';
 
-function History() {
-	const { data, setFilters, filters, loading } = useListShipmentAudits({
-		defaultFilters: {
-			action_name: 'update_operating_instruction', shipment_id: '7da5d7dc-7526-49e7-8ebb-11607e3654ae',
-		},
-	});
-
+function History({ data = {}, setFilters = () => {}, filters = {}, loading = false }) {
 	return (
 		<>
 			<div className={styles.heading}>History (Booking Party)</div>

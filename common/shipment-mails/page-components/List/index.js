@@ -1,4 +1,4 @@
-import { Input, Button } from '@cogoport/components';
+import { Input } from '@cogoport/components';
 import { IcMSearchlight, IcMRefresh } from '@cogoport/icons-react';
 import { React } from 'react';
 
@@ -45,14 +45,14 @@ function Emails({ activeBox, RECIEVE_EMAIL, onMailClick, source, filters }) {
 					style={{ marginRight: 10, cursor: 'pointer' }}
 					onClick={handleRefresh}
 				/>
-				<Button
+				<div
 					className={page > 1 ? 'primary  sm text' : 'secondary  sm text'}
 					onClick={page > 1 ? () => setPage(page - 1) : null}
 					disabled={page === 1}
 				>
 					&lt;&lt; Prev
-				</Button>
-				<Button
+				</div>
+				<div
 					className={
 						mails.length >= 10 ? 'primary  sm text' : 'secondary  sm text'
 					}
@@ -61,7 +61,7 @@ function Emails({ activeBox, RECIEVE_EMAIL, onMailClick, source, filters }) {
 					disabled={mails.length < 10}
 				>
 					Next &gt;&gt;
-				</Button>
+				</div>
 			</div>
 			<div className={styles.card_container}>
 				{loading ? (

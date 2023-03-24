@@ -20,12 +20,10 @@ function OverviewManageServices({ container }) {
 		<div className={styles.title}>Manage Services</div>
 	);
 
-	useEffect(() => {
-		console.log(container);
-		const button = document.querySelector(`.${container} > div > button:first-child`);
-		// button.click();
-		console.log(button);
-	}, []);
+	// useEffect(() => {
+	// 	const button = document.querySelector(`.${container} > div > button:first-child`);
+	// 	// button.click();
+	// }, []);
 
 	return (
 		<Accordion title={getTitle}>

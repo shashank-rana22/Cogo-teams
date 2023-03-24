@@ -4,7 +4,8 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
-import useUpdateShipmentAdditionalService from '../../hooks/useUpdateShipmentAdditionalService';
+import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
+import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 import AddIp from '../AddIp';
 import AddRate from '../AddRate';
 
@@ -14,7 +15,6 @@ import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
-import useListAdditionalServices from './useListAdditionalServices';
 
 function List({
 	services = [],
@@ -52,16 +52,6 @@ function List({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.not_added}>
-				<Button
-					onClick={() => setShowChargeCodes(true)}
-					disabled={shipment_data?.is_job_closed}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Additional Charges
-				</Button>
-			</div>
-
 			{!isEmpty(additionalServiceList) ? (
 				<div className={styles.added_services}>
 					{additionalServiceList?.map((serviceListItem) => {
@@ -91,6 +81,16 @@ function List({
 					})}
 				</div>
 			) : null}
+
+			<div className={styles.not_added}>
+				<Button
+					onClick={() => setShowChargeCodes(true)}
+					disabled={shipment_data?.is_job_closed}
+				>
+					<div className={styles.add_icon}>+</div>
+					Add Additional Charges
+				</Button>
+			</div>
 
 			{additionalServiceList?.length ? (
 				<div className={styles.info_container}>
@@ -146,6 +146,7 @@ function List({
 				/>
 
 			) : null}
+
 		</div>
 	);
 }

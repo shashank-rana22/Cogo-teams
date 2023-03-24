@@ -357,7 +357,7 @@ function ContainerDetails({
 							`}
 								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
-								<p style={{ fontSize: 13 }}>Q</p>
+								<p style={{ fontSize: 13, textTransform: 'uppercase' }}>{formData.class}</p>
 							</div>
 							<div className={cl`
 								${styles.flex} 
@@ -536,7 +536,7 @@ function ContainerDetails({
 							`}
 							>
 								<p style={{ fontSize: 13 }}>
-									{formData?.class === 'a' ? 'AS AGREED' : ((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
+									{formData?.class === 'a' ? 'AS AGREED' : formData.amount}
 								</p>
 							</div>
 						</div>
@@ -553,7 +553,7 @@ function ContainerDetails({
 								${styles.font_style}
 							`}
 							>
-								{formData?.class === 'a' ? 'AS AGREED' : ((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
+								{formData?.class === 'a' ? 'AS AGREED' : formData.amount}
 							</div>
 						</div>
 					</div>

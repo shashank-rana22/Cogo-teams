@@ -1,23 +1,23 @@
 // import { trackEvent } from '@cogo/commons/analytics';
 // import { APP_EVENT, PARTNER_EVENT } from '@cogo/commons/analytics/constants';
 import { Button, Loader } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
+import useListOrganizationInvoicingParties from '../../../../../../hooks/useListOrganizationInvoicingParties';
 import EmptyState from '../../../../../EmptyState';
-// import CreateNewBillingAddress from '../CreateNewBillingAddress';
+import CreateNewBillingAddress from '../CreateNewBillingAddress';
 // import CreateNewInvoicingParty from '../CreateNewInvoicingParty';
 
 import InvoicingPartyItem from './InvoicingPartyItem';
 import styles from './styles.module.css';
 
-const tradePartyType = {
-	key   : 'paying_party',
-	label : 'PAYING PARTY',
-	value : 'paying_party',
-};
+// const tradePartyType = {
+// 	key   : 'paying_party',
+// 	label : 'PAYING PARTY',
+// 	value : 'paying_party',
+// };
 
 function InvoicingParties({
 	organization = {},
@@ -54,24 +54,8 @@ function InvoicingParties({
 		other_addresses_data_required   : true,
 	}), [organizationId, bookingType]);
 
-	const [{ data, loading }, trigger] = useRequest({
-		url    : '/list_organization_invoicing_parties',
-		method : 'GET',
-	});
+	const { data, loading } = useListOrganizationInvoicingParties({ params, bookingType });
 
-	useEffect(() => {
-		try {
-			(async () => {
-				await trigger({
-					params,
-				});
-			})();
-		} catch (err) {
-			// console.log(err);
-		}
-	}, [trigger, params, bookingType]);
-
-	// const invoicingPartiesList = (data || {}).list || [];
 	const invoicingPartiesList = useMemo(() => (data || {}).list || [], [data]);
 
 	const address_to_use = is_tax_applicable ? 'billing_addresses' : 'other_addresses';
@@ -239,16 +223,14 @@ function InvoicingParties({
 
 		if (showComponent === 'create_billing_address') {
 			return (
-				// <CreateNewBillingAddress
-				// 	organizationDetails={organization}
-				// 	setShowComponent={setShowComponent}
-				// 	refetch={getOrganizationInvoicingParties}
-				// 	invoiceToTradePartyDetails={invoiceToTradePartyDetails}
-				// 	setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
-				// />
-				<div>
-					CreateNewBillingAddress
-				</div>
+				<CreateNewBillingAddress
+					organizationDetails={organization}
+					setShowComponent={setShowComponent}
+					// refetch={getOrganizationInvoicingParties}
+					invoiceToTradePartyDetails={invoiceToTradePartyDetails}
+					setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
+				/>
+
 			);
 		}
 

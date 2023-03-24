@@ -2,7 +2,6 @@ import React from 'react';
 
 import useGetAttachements from '../../../hooks/useGetAttachements';
 import useGetMail from '../../../hooks/useGetMail';
-import ClassifyMails from '../../ClassifyMails';
 
 import styles from './styles.module.css';
 import Thread from './Thread';
@@ -11,7 +10,6 @@ function EmailView({
 	RECIEVE_EMAIL,
 	activeMail,
 	onAction,
-	showClassifyAction,
 }) {
 	const email = RECIEVE_EMAIL;
 	const message_id = activeMail?.message_id || activeMail?.id;
@@ -28,18 +26,9 @@ function EmailView({
 	if (loading) {
 		return <div>Loading full mail......</div>;
 	}
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.row}>
-				<div className={styles.subject}>{emailData?.subject}</div>
-				{showClassifyAction ? (
-					<ClassifyMails
-						activeMail={activeMail}
-						onClassify={() => onAction(null, null)}
-					/>
-				) : null}
-			</div>
-
 			<Thread
 				content={content}
 				allAttachements={allAttachements}
