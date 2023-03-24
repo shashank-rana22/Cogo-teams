@@ -74,6 +74,53 @@ function Customers({
 		setIsChecked(!isChecked);
 	};
 	const unReadChatsCountDisplay = Number(unReadChatsCount || 0) > 49 ? '49+' : unReadChatsCount;
+
+	const COMPONENT_MAPPING = {
+		message : MessageList,
+		voice   : VoiceList,
+		mail    : MailList,
+	};
+	const Component = COMPONENT_MAPPING[activeTab] || null;
+
+	const messageProps = {
+		isomniChannelAdmin,
+		messagesList,
+		setActiveMessage,
+		setSearchValue,
+		searchValue,
+		filterVisible,
+		setFilterVisible,
+		setAppliedFilters,
+		appliedFilters,
+		messagesLoading,
+		activeCardId,
+		setActiveCardId,
+		showBotMessages,
+		setShowBotMessages,
+		handleScroll,
+		setModalType,
+		modalType,
+	};
+
+	const voiceProps = {
+		setActiveVoiceCard,
+		activeVoiceCard,
+		activeTab,
+		setShowDialModal,
+	};
+
+	const emailprops = {
+		activeMail,
+		setActiveMail,
+		emailAddress,
+	};
+
+	const componentProps = {
+		message : { ...messageProps },
+		voice   : { ...voiceProps },
+		mail    : { ...emailprops },
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
@@ -119,44 +166,8 @@ function Customers({
 					<TabPanel name="mail" title="Mail" />
 				</Tabs>
 			</div>
-
-			{activeTab === 'message' && (
-				<MessageList
-					isomniChannelAdmin={isomniChannelAdmin}
-					messagesList={messagesList}
-					setActiveMessage={setActiveMessage}
-					setSearchValue={setSearchValue}
-					searchValue={searchValue}
-					filterVisible={filterVisible}
-					setFilterVisible={setFilterVisible}
-					setAppliedFilters={setAppliedFilters}
-					appliedFilters={appliedFilters}
-					messagesLoading={messagesLoading}
-					activeCardId={activeCardId}
-					setActiveCardId={setActiveCardId}
-					showBotMessages={showBotMessages}
-					setShowBotMessages={setShowBotMessages}
-					handleScroll={handleScroll}
-					setModalType={setModalType}
-					modalType={modalType}
-				/>
-			)}
-
-			{activeTab === 'voice' && (
-				<VoiceList
-					setActiveVoiceCard={setActiveVoiceCard}
-					activeVoiceCard={activeVoiceCard}
-					activeTab={activeTab}
-					setShowDialModal={setShowDialModal}
-				/>
-			)}
-
-			{activeTab === 'mail' && (
-				<MailList
-					activeMail={activeMail}
-					setActiveMail={setActiveMail}
-					emailAddress={emailAddress}
-				/>
+			{Component && (
+				<Component key={activeTab} {...(componentProps[activeTab] || {})} />
 			)}
 
 			{openModal && (
