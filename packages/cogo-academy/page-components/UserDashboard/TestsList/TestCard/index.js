@@ -8,7 +8,9 @@ function TestCard({ test_card }) {
 
 	console.log(format(validity_start, 'dd MMM\' yy'), 'test_card');
 
-	const handleGoToTest = () 
+	const handleGoToTest = () => {
+
+	};
 
 	return (
 		<div className={styles.main_container}>

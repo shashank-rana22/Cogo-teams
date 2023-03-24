@@ -1,4 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -14,6 +16,8 @@ function AdminResults() {
 	const {
 		general: { query = {} },
 	} = useSelector((state) => state);
+
+	const { push } = useRouter();
 
 	const [activeTab, setActiveTab] = useState('students');
 
@@ -42,9 +46,19 @@ function AdminResults() {
 		},
 	};
 
+	const handleGoBack = () => {
+		push('/learning?activeTab=test-module', '/learning?activeTab=test-module');
+	};
+
 	return (
 		<div className={styles.container}>
-			<TestResults />
+			<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
+				<IcMArrowBack />
+
+				<p className={styles.go_back_text}>Dashboard</p>
+			</div>
+
+			<TestResults test_id={test_id} />
 
 			<InfoBanner test_status={status} test_id={test_id} refetchTest={refetch} />
 
