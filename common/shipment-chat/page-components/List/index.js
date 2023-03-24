@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 
 function List({
 	setShow = () => { },
-	MessageContentArr = [],
+	messageContentArr = [],
 	user_id = '',
 	setSeenLoading = () => { },
 }) {
@@ -27,19 +27,19 @@ function List({
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
 	const [status, setStatus] = useState('active');
 
-	const { ListData, page, total_page, filters, setFilters, loading } = useGetShipmentChatList({ status });
+	const { listData, page, total_page, filters, setFilters, loading } = useGetShipmentChatList({ status });
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
-	const defaultChannel = ListData?.find((obj) => obj?.source_id === shipment_data?.id);
-	const data = defaultChannel ? defaultChannel?.id : ListData[0]?.id;
+	const defaultChannel = listData?.find((obj) => obj?.source_id === shipment_data?.id);
+	const channelId = defaultChannel ? defaultChannel?.id : listData[0]?.id;
 
 	const { loading: seenLoading } = useUpdateSeen({ channel_id: id, showUnreadChat });
 	const { get, personal_data } = useGetChannel({ channel_id: id });
 
 	let unSeenMsg = [];
-	unSeenMsg = MessageContentArr.filter((item) => item[user_id]);
+	unSeenMsg = messageContentArr.filter((item) => item[user_id]);
 	const unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
-	const channelList = showUnreadChat ? unreadDataList : ListData;
+	const channelList = showUnreadChat ? unreadDataList : listData;
 
 	const handleClick = () => {
 		refOuter.current.scrollTop = 0;
@@ -47,8 +47,8 @@ function List({
 	};
 
 	useEffect(() => {
-		setId(data);
-	}, [data]);
+		setId(channelId);
+	}, [channelId]);
 
 	useEffect(() => {
 		setSeenLoading(seenLoading);
@@ -68,7 +68,7 @@ function List({
 	}, [loading, filters, setFilters, page]);
 
 	const renderContent = () => {
-		if (loading && isEmpty(ListData)) {
+		if (loading && isEmpty(listData)) {
 			return <ListLoader />;
 		}
 
@@ -98,7 +98,7 @@ function List({
 					</div>
 				</div>
 
-				{(MessageContentArr || []).map((obj) => (
+				{(messageContentArr || []).map((obj) => (
 					obj?.mainKey === item?.id && obj[user_id] > 0 && id !== item?.id ? (
 						<div className={styles.circle}>{obj[user_id]}</div>
 					) : null))}
@@ -131,7 +131,7 @@ function List({
 						{renderContent()}
 					</InfiniteScroll>
 
-					{loading && !isEmpty(ListData) && !showUnreadChat && (
+					{loading && !isEmpty(listData) && !showUnreadChat && (
 						<div className={styles.custom_loader}>Loading...</div>
 					)}
 				</div>

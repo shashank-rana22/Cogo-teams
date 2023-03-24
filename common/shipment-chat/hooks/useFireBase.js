@@ -12,9 +12,8 @@ const useFireBase = ({ id }) => {
 		const db = getDatabase(app);
 		const hit = ref(db, `Channels/${id}`);
 
-		const unSubscribe = onValue(hit, (snapshot) => {
-			const data = snapshot.val();
-			setMsgContent(data);
+		const unSubscribe = onValue(hit, (item) => {
+			setMsgContent(item.val());
 		});
 
 		return () => unSubscribe();

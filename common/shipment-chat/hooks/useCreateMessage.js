@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useCreateMessage = ({
-	shipment_data = {},
+	shipmentData = {},
 	formValues,
 	reset = () => { },
 	id,
@@ -10,7 +10,7 @@ const useCreateMessage = ({
 	source,
 	stakeHolderView,
 	sendToRef,
-	personal_data,
+	personalData,
 	subscribedUsers = [],
 	isStakeholder = true,
 	shipmentChatStakeholders = [],
@@ -22,9 +22,9 @@ const useCreateMessage = ({
 	}, { manual: true });
 
 	const sh = stakeHolderView.split(' ');
-	const sh_arr = (sh || []).map((item) => item.replace('@', ''));
-	const condition_arr = sh_arr.length && sh_arr[0] !== '' ? [...sh_arr] : [];
-	const filtered_arr = (condition_arr || []).map((item) => {
+	const shArr = (sh || []).map((item) => item.replace('@', ''));
+	const conditionArr = shArr.length && shArr[0] !== '' ? [...shArr] : [];
+	const filteredArr = (conditionArr || []).map((item) => {
 		if (item === '') {
 			return null;
 		}
@@ -35,20 +35,20 @@ const useCreateMessage = ({
 	});
 
 	const PersonalChannel = {
-		visible_to_user_ids: personal_data?.subscribed_user_ids,
+		visible_to_user_ids: personalData?.subscribed_user_ids,
 	};
 
 	let visible_to_stakeholders = isStakeholder
-		? [...filtered_arr, shipment_data?.stakeholder_types?.[0]]
-		: [...filtered_arr];
+		? [...filteredArr, shipmentData?.stakeholder_types?.[0]]
+		: [...filteredArr];
 
 	visible_to_stakeholders = visible_to_stakeholders?.filter((item) => shipmentChatStakeholders.includes(item));
-	const GroupChannel = filtered_arr.length
+	const GroupChannel = filteredArr.length
 		? {
-			created_by_stakeholder: shipment_data?.stakeholder_types?.[0], source_id: sourceId, visible_to_stakeholders,
+			created_by_stakeholder: shipmentData?.stakeholder_types?.[0], source_id: sourceId, visible_to_stakeholders,
 		}
 		: {
-			created_by_stakeholder : shipment_data?.stakeholder_types?.[0],
+			created_by_stakeholder : shipmentData?.stakeholder_types?.[0],
 			source_id              : sourceId,
 			visible_to_user_ids    : subscribedUsers,
 		};
@@ -60,7 +60,7 @@ const useCreateMessage = ({
 			const res = await trigger({
 				data: {
 					content         : formValues?.message || '',
-					attachment_urls : formValues?.file || '',
+					attachment_urls : formValues?.file || [],
 					channel_id      : id,
 					...payload,
 				},
