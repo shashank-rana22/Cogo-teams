@@ -49,11 +49,9 @@ function FilterpopOver({
 				</div>
 			</div>
 			<div className={styles.popover_content}>
-				<div className={styles.Margin} />
-				<div className={styles.Margin} />
+				<div className={styles.margin} />
 
-				<div> Sales Agent</div>
-
+				<div className={styles.styled_text}> Sales Agent</div>
 				<AsyncSelect
 					name="user_id"
 					asyncKey="partner_users"
@@ -64,8 +62,8 @@ function FilterpopOver({
 					placeholder="Select Sales Agent User"
 					size="sm"
 				/>
-				<div className={styles.Margin} />
-				<div> Credit Controller Agent</div>
+				<div className={styles.margin} />
+				<div className={styles.styled_text}> Credit Controller Agent</div>
 
 				<AsyncSelect
 					name="credit_controller_id"
@@ -77,8 +75,8 @@ function FilterpopOver({
 					placeholder="Select Credit Controller User"
 					size="sm"
 				/>
-				<div className={styles.Margin} />
-				<div>Company Type</div>
+				<div className={styles.margin} />
+				<div className={styles.styled_text}>Company Type</div>
 				<Select
 					value={filters.companyType}
 					onChange={(val?:any) => onChange(val, 'companyType')}

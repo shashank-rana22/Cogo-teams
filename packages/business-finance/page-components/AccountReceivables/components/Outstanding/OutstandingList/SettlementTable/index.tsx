@@ -27,8 +27,6 @@ function SettlementTable({ data }) {
 		loading,
 		settlementFilters,
 		setSettlementFilters,
-		orderBy,
-		setOrderBy,
 	} = useGetSettlementTable(organizationId);
 
 	const [active, setActive] = useState(false);
@@ -38,10 +36,6 @@ function SettlementTable({ data }) {
 	const onChange = (val:string, name:string) => {
 		setSettlementFilters((p) => ({ ...p, [name]: val }));
 	};
-
-	const sortStyleAsc = orderBy.sortType === 'Asc' ? '#303B67' : '#BDBDBD';
-
-	const sortStyleDesc = orderBy.sortType === 'Desc' ? '#303B67' : '#BDBDBD';
 
 	return (
 		<div>

@@ -16,19 +16,18 @@ const useGetOrganizationUsers = ({ selfOrganizationId }) => {
 		{ manual: true },
 	);
 
-	const fetchListDataApi = async () => {
-		await trigger({
-			params: {
-				filters: {
-					organization_id: selfOrganizationId,
-				},
-			},
-		});
-	};
-
 	useEffect(() => {
+		const fetchListDataApi = async () => {
+			await trigger({
+				params: {
+					filters: {
+						organization_id: selfOrganizationId,
+					},
+				},
+			});
+		};
 		fetchListDataApi();
-	}, [param.page]);
+	}, [param.page, trigger, selfOrganizationId]);
 
 	return {
 		organizationData: data,

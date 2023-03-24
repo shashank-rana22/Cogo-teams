@@ -3,7 +3,6 @@ import { IcMArrowRotateUp, IcMArrowRotateDown, IcMCross, IcMSearchdark } from '@
 import { useState } from 'react';
 
 import { ENTITY_TYPE, SEARCH_OPTIONS, SORTBY_OPTION } from '../../../constants/index';
-import useListCogoEntity from '../../../hooks/useListCogoEntity';
 
 import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
@@ -32,6 +31,8 @@ function Filters({
 	const onChange = (val:string, name:string) => {
 		setParams((p) => ({ ...p, [name]: val }));
 	};
+
+	console.log('params', params);
 
 	let placeholder;
 	if (queryKey === 'q') {
@@ -63,7 +64,6 @@ function Filters({
 
 					<Popover
 						placement="bottom"
-						visible={showSortPopover}
 						render={(
 							<div className={styles.styled_row}>
 								{SORTBY_OPTION.map((item) => (
@@ -75,7 +75,7 @@ function Filters({
 												order : 'Desc',
 												label : item.label,
 											});
-											setShowSortPopover(false);
+											setShowSortPopover(!showSortPopover);
 											setParams({ ...params, page: 1 });
 										}}
 										role="presentation"
@@ -121,8 +121,6 @@ function Filters({
 					<div className={styles.sort_container}>
 						<Popover
 							placement="bottom"
-							visible={showSearchPopover}
-							// onClickOutside={() => setShowSearchPopover(false)}
 							render={(
 								<div className={styles.styled_row}>
 									{SEARCH_OPTIONS.map((item) => (
@@ -130,7 +128,7 @@ function Filters({
 											className={styles.styled_col}
 											onClick={() => {
 												setQueryKey(item?.value || 'q');
-												setShowSearchPopover(false);
+												setShowSearchPopover(!showSearchPopover);
 												setParams({ ...params, page: 1 });
 											}}
 											role="presentation"
@@ -164,7 +162,6 @@ function Filters({
 							suffix={(
 								<IcMCross
 									onClick={handleInputReset}
-									// size={1.3}
 									cursor="pointer"
 								/>
 							)}

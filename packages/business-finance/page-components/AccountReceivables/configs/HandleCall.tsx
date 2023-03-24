@@ -9,11 +9,7 @@ function HandleCall({ row }) {
 	}));
 	const dispatch = useDispatch();
 
-	console.log('profileData', profileData);
-
 	const handleVoiceCall = (item) => {
-		console.log('item', item);
-
 		dispatch(
 			setProfileState({
 				...profileData,

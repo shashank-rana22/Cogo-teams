@@ -2,7 +2,6 @@ import { Popover, Button } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 
 import useGetIrnGeneration from '../../hooks/useGetIrnGeneration';
-// import CC from '../../../utils/condition-constants';
 
 type Itemdata = {
 	id?: string
@@ -17,10 +16,6 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		id: itemData.id,
 		refetch,
 	});
-
-	// const { isConditionMatches } = useGetPermission();
-
-	// const isIRNAllowed = isConditionMatches(CC.SEE_IRN_GENERATION);
 
 	const content = () => (
 		<div

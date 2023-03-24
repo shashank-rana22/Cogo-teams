@@ -12,20 +12,13 @@ function useGetSettlementTable(organizationId) {
 		accountType : 'All',
 	});
 
-	const [orderBy, setOrderBy] = useState({
-		sortType : 'Desc',
-		sortBy   : 'transactionDate',
-	});
-
-	const { query, ...rest } = settlementFilters || {};
+	const { query, accountType, pageLimit, page, orgId } = settlementFilters || {};
 
 	const { debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
 		debounceQuery(query);
-	}, [query]);
-
-	console.log('orderBy', orderBy);
+	}, [debounceQuery, query]);
 
 	const [
 		{ data: settlementList, loading },
@@ -39,35 +32,33 @@ function useGetSettlementTable(organizationId) {
 		{ manual: true },
 	);
 
-	const refetch = () => {
-		try {
-			trigger({
-				params: {
-					...rest,
-					...orderBy,
-					query: query || undefined,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.message);
-		}
-	};
-
 	useEffect(
 		() => {
+			const refetch = () => {
+				try {
+					trigger({
+						params: {
+							page,
+							pageLimit,
+							orgId       : orgId || undefined,
+							accountType : accountType || undefined,
+							query       : query || undefined,
+						},
+					});
+				} catch (e) {
+					Toast.error(e?.message);
+				}
+			};
 			refetch();
 		},
-		[JSON.stringify(settlementFilters)],
+		[accountType, orgId, page, pageLimit, query, trigger],
 	);
 
 	return {
 		settlementList,
 		loading,
-		refetch,
 		settlementFilters,
 		setSettlementFilters,
-		orderBy,
-		setOrderBy,
 	};
 }
 

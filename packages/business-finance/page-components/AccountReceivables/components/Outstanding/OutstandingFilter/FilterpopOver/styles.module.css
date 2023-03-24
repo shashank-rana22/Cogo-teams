@@ -1,6 +1,6 @@
 .popover_container {
     width: 320px;
-    height: 300px;
+    height: 340px;
 }
 
 .popover_content {
@@ -38,4 +38,9 @@
 
 .margin {
     margin-top: 12px;
+}
+
+.styled_text{
+    font-weight: 600;
+    font-size: 14px;
 }

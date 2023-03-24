@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
@@ -56,7 +57,7 @@ const useGetOutstandingCard = (organizationId) => {
 		{ manual: true },
 	);
 
-	const [{ data, loading }, downloadApi] = useRequestBf(
+	const [, downloadApi] = useRequestBf(
 		{
 			url     : '/sales/report/download/outstanding/list',
 			method  : 'get',
@@ -75,7 +76,7 @@ const useGetOutstandingCard = (organizationId) => {
 
 	useEffect(() => {
 		debounceQuery(search);
-	}, [search]);
+	}, [search, debounceQuery]);
 
 	const getOrganizationInvoices = async () => {
 		try {
@@ -97,8 +98,6 @@ const useGetOutstandingCard = (organizationId) => {
 	};
 
 	const sendReport = async () => {
-		console.log('hello');
-
 		try {
 			await downloadApi({
 				params: {
@@ -129,20 +128,16 @@ const useGetOutstandingCard = (organizationId) => {
 	const clearInvoiceFilters = () => {
 		setinvoiceFilters((prev) => ({
 			...prev,
-			page             : 1,
-			invoiceNumber    : undefined,
-			invoiceStatus    : undefined,
-			search           : undefined,
-			status           : undefined,
-			services         : undefined,
-			migrated         : undefined,
-			shipmentType     : undefined,
-			dueDateStart     : undefined,
-			dueDateEnd       : undefined,
-			invoiceDateStart : undefined,
-			invoiceDateEnd   : undefined,
-			invoiceDate      : undefined,
-			dueDate          : undefined,
+			page          : 1,
+			invoiceNumber : undefined,
+			invoiceStatus : undefined,
+			search        : undefined,
+			status        : undefined,
+			services      : undefined,
+			migrated      : undefined,
+			shipmentType  : undefined,
+			invoiceDate   : undefined,
+			dueDate       : undefined,
 		}));
 	};
 

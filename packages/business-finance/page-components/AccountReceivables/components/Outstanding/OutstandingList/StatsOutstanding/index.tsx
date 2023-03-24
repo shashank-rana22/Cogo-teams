@@ -12,12 +12,6 @@ function StatsOutstanding({ item }) {
 		onAccountPayment = {},
 		totalOutstanding = {},
 		openInvoiceCount = 0,
-		onAccountPaymentInvoiceLedgerAmount = 0,
-		onAccountPaymentInvoiceCount = 0,
-		totalOutstandingInvoiceLedgerAmount = 0,
-		totalOutstandingInvoiceCount = 0,
-		// totalCreditNoteAmount = 0,
-		// creditNoteCount = 0,
 		ageingBucket = {},
 	} = item || {};
 
@@ -49,7 +43,7 @@ function StatsOutstanding({ item }) {
 											{openInvoice?.invoiceBucket.map((invoice) => (
 												<div
 													className={styles.amount}
-													style={{ fontWeight: 600, fontSize: '11px' }}
+													style={{ fontWeight: 500, fontSize: '11px' }}
 												>
 													{getFormattedPrice(
 														invoice?.amount || 0,
@@ -101,7 +95,7 @@ function StatsOutstanding({ item }) {
 									&& (
 										<div
 											className={styles.amount}
-											style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
+											style={{ color: '#cb6464', fontWeight: 500, fontSize: '11px' }}
 										>
 											{getFormattedPrice(
 												openInvoiceAmount?.amount || 0,
@@ -153,7 +147,7 @@ function StatsOutstanding({ item }) {
 										&& 											(
 											<div
 												className={styles.amount}
-												style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
+												style={{ color: '#cb6464', fontWeight: 500, fontSize: '11px' }}
 											>
 												{getFormattedPrice(
 													CreditNoteAmount?.amount || 0,
@@ -191,7 +185,7 @@ function StatsOutstanding({ item }) {
 									className={styles.amount}
 									style={{
 										color      : val.textColor,
-										fontWeight : 600,
+										fontWeight : 500,
 										fontSize   : '12px',
 									}}
 								>
@@ -215,7 +209,7 @@ function StatsOutstanding({ item }) {
 										&& 											(
 											<div
 												className={styles.amount}
-												style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
+												style={{ color: '#cb6464', fontWeight: 500, fontSize: '11px' }}
 											>
 												{getFormattedPrice(
 													CreditNoteAmount?.amount || 0,
@@ -250,7 +244,7 @@ function StatsOutstanding({ item }) {
 						className={styles.amount}
 						style={{
 							color      : '#cb6464',
-							fontWeight : '600',
+							fontWeight : 500,
 							fontSize   : '12px',
 						}}
 					>
@@ -277,7 +271,7 @@ function StatsOutstanding({ item }) {
 									&& 							(
 										<div
 											className={styles.amount}
-											style={{ color: '#cb6464', fontWeight: 600, fontSize: '11px' }}
+											style={{ color: '#cb6464', fontWeight: 500, fontSize: '11px' }}
 										>
 											{getFormattedPrice(
 												outstanding?.amount || 0,
@@ -308,7 +302,7 @@ function StatsOutstanding({ item }) {
 						className={styles.amount}
 						style={{
 							color      : 'rgb(103, 198, 118)',
-							fontWeight : '600',
+							fontWeight : 500,
 							fontSize   : '12px',
 						}}
 					>
@@ -338,7 +332,7 @@ function StatsOutstanding({ item }) {
 			className={styles.amount}
 			style={{
 				color      : 'rgb(103, 198, 118)',
-				fontWeight : '600',
+				fontWeight : 500,
 				fontSize   : '11px',
 			}}
 		>

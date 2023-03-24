@@ -11,12 +11,9 @@ import styles from './styles.module.css';
 
 function Outstanding() {
 	const [formFilters, setFormFilters] = useState({
-		ageingKey          : '',
-		checkBox           : [],
 		salesAgentId       : '',
 		creditControllerId : '',
 		companyType        : '',
-		entityCode         : '',
 	});
 
 	const {
@@ -39,12 +36,9 @@ function Outstanding() {
 
 	const clearFilter = () => {
 		setFormFilters({
-			ageingKey          : '',
-			checkBox           : [],
 			salesAgentId       : '',
 			creditControllerId : '',
 			companyType        : '',
-			entityCode         : '',
 		});
 	};
 

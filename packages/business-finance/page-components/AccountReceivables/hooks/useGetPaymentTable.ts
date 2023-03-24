@@ -17,15 +17,13 @@ function useGetPaymentTable(organizationId) {
 		sortBy   : 'transactionDate',
 	});
 
-	const { query, ...rest } = paymentFilters || {};
+	const { query, pageLimit, page, orgId, statusList } = paymentFilters || {};
 
 	const { debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
 		debounceQuery(query);
-	}, [query]);
-
-	console.log('orderBy', orderBy);
+	}, [query, debounceQuery]);
 
 	const [
 		{ data: paymentList, loading: paymentLoading },
@@ -39,31 +37,33 @@ function useGetPaymentTable(organizationId) {
 		{ manual: true },
 	);
 
-	const refetch = () => {
-		try {
-			paymentApi({
-				params: {
-					...rest,
-					...orderBy,
-					query: query || undefined,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.message);
-		}
-	};
-
 	useEffect(
 		() => {
+			const refetch = () => {
+				try {
+					paymentApi({
+						params: {
+							query      : query || undefined,
+							orgId      : orgId || undefined,
+							page       : page || undefined,
+							pageLimit  : pageLimit || undefined,
+							sortType   : orderBy.sortType,
+							sortBy     : orderBy.sortBy,
+							statusList : statusList || undefined,
+						},
+					});
+				} catch (e) {
+					Toast.error(e?.message);
+				}
+			};
 			refetch();
 		},
-		[JSON.stringify(paymentFilters), JSON.stringify(orderBy)],
+		[orderBy.sortBy, orderBy.sortType, orgId, page, pageLimit, paymentApi, query, statusList],
 	);
 
 	return {
 		paymentList,
 		paymentLoading,
-		refetch,
 		paymentFilters,
 		setPaymentFilters,
 		orderBy,
