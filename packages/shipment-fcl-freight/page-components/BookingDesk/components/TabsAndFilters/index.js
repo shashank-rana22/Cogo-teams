@@ -1,5 +1,5 @@
 import { Select, TabPanel, Tabs, Toggle } from "@cogoport/components";
-import tabs from '../configs/tabs.json';
+import tabs from '../../configs/tabs.json';
 
 import styles from './styles.module.css';
 import ScopeAndFilter from "../ScopeAndFilter";

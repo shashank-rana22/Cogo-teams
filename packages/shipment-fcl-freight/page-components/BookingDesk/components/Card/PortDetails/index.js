@@ -2,7 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import React from 'react';
 import { format } from '@cogoport/utils';
-import { getServiceIcon } from '../../utils/getServiceIcon';
+import { getServiceIcon } from '../../../utils/getServiceIcon';
 
 import styles from './styles.module.css';
 

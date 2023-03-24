@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useListShipments from "./hooks/useListShipments";
-import List from "./List";
-import TabsAndFilters from './TabsAndFilters';
+import List from "./components/List";
+import TabsAndFilters from './components/TabsAndFilters';
 
 export default function BookingDesk(){
     const [filters, setFilters] = useState({ page: 1 });

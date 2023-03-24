@@ -19,8 +19,8 @@ export default function useListShipments({ filters, activeTab }){
     const [data, setData] = useState(nullData);
 
     const [{loading}, trigger] = useRequest({
-      url: '/list_booking_note_desk_shipments',
-      method: 'GET',
+		url: '/list_booking_note_desk_shipments',
+		method: 'GET',
     }, { manual: true });
 
     const listShipments = useCallback(async () => {
@@ -29,37 +29,37 @@ export default function useListShipments({ filters, activeTab }){
         try {
           const res = await trigger({
             params: {
-              filters: {
-                state: shipmentStates[activeTab] || shipmentStates.in_progress,
-                ...tabSpecificPayload[activeTab],
-                ...restFilters,
-              },
-              page,
-              additional_methods: ['pagination'],
-              sort_by: 'created_at',
-              sort_type: 'desc',
+				filters: {
+					state: shipmentStates[activeTab] || shipmentStates.in_progress,
+					...tabSpecificPayload[activeTab],
+					...restFilters,
+				},
+				page,
+				additional_methods: ['pagination'],
+				sort_by: 'created_at',
+				sort_type: 'desc',
             }
           });
 
           if(res.status === 200){ 
-            setData(res.data || {});
+				setData(res.data || {});
           }
         } catch (e) {
-          Toast.error(e?.response?.data?.message || e.message || 'Something went wrong !!');
-          setData(nullData);
+			Toast.error(e?.response?.data?.message || e.message || 'Something went wrong !!');
+			setData(nullData);
         }
       }, [filters, activeTab])
     
 
     useEffect(() => {
-      listShipments();
+		listShipments();
     }, [listShipments])
 
     return {
         data: {
-          list: data.list || [],
-          total: data.total_count || 0,
-          total_page: data.total || 0,
+			list: data.list || [],
+			total: data.total_count || 0,
+			total_page: data.total || 0,
         },
         loading,
         refetch: listShipments,
