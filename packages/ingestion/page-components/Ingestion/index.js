@@ -1,6 +1,14 @@
+import Header from './Header';
+import TableSection from './TableSection';
+
 function Ingestion() {
-	console.log('hello');
-	return (<div>Ingestion works now</div>);
+	return (
+		<>
+			<Header />
+			<TableSection />
+		</>
+
+	);
 }
 
 export default Ingestion;

@@ -1,0 +1,15 @@
+.filter_container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    align-items: center;
+}
+
+.search {
+    width: 20%;
+}
+
+.filter {
+    width: 80%; 
+    display: flex;   
+}

@@ -1,0 +1,26 @@
+.name {
+    max-width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.created_date {
+	display: flex;
+	font-size: 12px;
+}
+
+.created_time {
+	align-self: center;
+	margin-left: 4px;
+	font-size: 10px;
+	color: #828282;
+}
+
+.type {
+    max-width: 240px;
+}
+
+.number_of_org {
+    max-width: 40px;
+}
