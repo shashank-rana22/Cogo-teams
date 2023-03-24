@@ -7,6 +7,7 @@ import React, { useState, useEffect, useContext, useRef, useCallback } from 'rea
 import InfiniteScroll from 'react-infinite-scroller';
 
 import EmptyState from '../../common/EmptyState';
+// import CreateChannel from './CreateChannel';
 import useGetChannel from '../../hooks/useGetChannel';
 import useGetShipmentChatList from '../../hooks/useGetShipmentChatList';
 import useUpdateSeen from '../../hooks/useUpdateSeen';
@@ -29,7 +30,7 @@ function List({
 
 	const {
 		ListData, page, total_page, filters, setFilters,
-		loading,
+		loading, refetch,
 	} = useGetShipmentChatList({ status });
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
@@ -139,6 +140,7 @@ function List({
 					)}
 				</div>
 
+				{/* <CreateChannel refetch={refetch} /> */}
 			</div>
 
 			{!id ? (

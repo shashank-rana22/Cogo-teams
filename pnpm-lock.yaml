@@ -261,10 +261,8 @@ importers:
       '@cogoport/context': workspace:^0.1.0
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.60
-      '@cogoport/maps': ^1.0.2
       '@cogoport/next': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
-      '@cogoport/shipment-chat': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.6
       date-fns: ^2.29.3
@@ -277,10 +275,8 @@ importers:
       '@cogoport/context': link:../context
       '@cogoport/forms': link:../forms
       '@cogoport/icons-react': 1.0.60_react@18.2.0
-      '@cogoport/maps': 1.0.3_aydyy3gkshtlrnyh7fafj36que
       '@cogoport/next': link:../next
       '@cogoport/request': link:../request
-      '@cogoport/shipment-chat': link:../shipment-chat
       '@cogoport/store': link:../store
       '@cogoport/utils': 1.2.6
       date-fns: 2.29.3
