@@ -77,7 +77,6 @@ function KamExpertiseScoreConfig({
 
 	const {
 		createConditionloading,
-		createConditionloading,
 		formProps,
 		onSave,
 
@@ -181,7 +180,7 @@ function KamExpertiseScoreConfig({
 														key={el.name}
 														control={control}
 														id={`${el.name}_input`}
-														// disabled={createConditionloading}
+														disabled={createConditionloading}
 													/>
 												</div>
 
@@ -202,7 +201,7 @@ function KamExpertiseScoreConfig({
 								size="md"
 								type="submit"
 								themeType="primary"
-								// loading={createConditionloading}
+								loading={createConditionloading}
 								id="add_condition_btn"
 							>
 								Add
