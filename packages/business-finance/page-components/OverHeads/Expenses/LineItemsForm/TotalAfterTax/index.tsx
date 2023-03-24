@@ -23,11 +23,13 @@ function TotalAfterTax({ payableAmount, invoiceCurrency }) {
 					{getValue(payableAmount)}
 				</span>
 			</div>
-			{payableAmount > 0 ? (
+			{payableAmount > 0 && invoiceCurrency ? (
 				<div className={styles.words}>
 					{startCase(converter.toWords(payableAmount))}
 					{' '}
-					Rupees Only
+					{invoiceCurrency}
+					{' '}
+					Only
 				</div>
 			) : null}
 		</div>

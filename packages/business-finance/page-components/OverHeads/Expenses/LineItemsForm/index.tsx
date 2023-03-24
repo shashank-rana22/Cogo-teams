@@ -1,5 +1,5 @@
 import { useFieldArray, useForm } from '@cogoport/forms';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import StyledTable from '../../../commons/StyledTable';
 import usePostListItemTaxes from '../hooks/useGetListItemTaxes';
@@ -9,14 +9,14 @@ import styles from './styles.module.css';
 import TotalAfterTax from './TotalAfterTax';
 import TotalColumn from './TotalColumn';
 
-function LineItemsForm({ formData, setFormData }) {
-	const { invoiceCurrency = '' } = formData || {};
+function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
+	const { invoiceCurrency = '', lineItemsList:lineItemsListData = [] } = formData || {};
+	const { lineItemsList } = usePostListItemTaxes();
 
-	const [taxOptions, setTaxOptions] = useState([]);
 	const { control, watch, setValue } = useForm(
 		{
 			defaultValues: {
-				line_items: [
+				line_items: lineItemsListData.length > 0 ? lineItemsListData : [
 					{ new: true, price: 0, quantity: 0 },
 				],
 			},
@@ -27,8 +27,6 @@ function LineItemsForm({ formData, setFormData }) {
 		control,
 		name: 'line_items',
 	});
-
-	const { lineItemsList } = usePostListItemTaxes();
 
 	useEffect(() => {
 		const taxList = [];
@@ -41,10 +39,10 @@ function LineItemsForm({ formData, setFormData }) {
 			});
 			setTaxOptions([...taxList]);
 		}
-	}, [lineItemsList]);
+	}, [lineItemsList, setTaxOptions]);
 
 	const watchFieldArray = watch('line_items');
-	const controlledFields = fields.map((field, index) => ({
+	const controlledFields = fields.map((field:any, index:number) => ({
 		...field,
 		...watchFieldArray[index],
 	}));
@@ -113,7 +111,7 @@ function LineItemsForm({ formData, setFormData }) {
 			<form className={styles.container}>
 				<StyledTable
 					columns={lineItemColumns({
-						remove, control, taxOptions,
+						remove, control, taxOptions, formData,
 					})}
 					data={controlledFields}
 					style={{ margin: '0px' }}

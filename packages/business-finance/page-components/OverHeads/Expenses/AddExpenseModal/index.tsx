@@ -27,6 +27,8 @@ function AddExpenseModal({
 	const [mailModal, setMailModal] = useState(false);
 	const [expenseData, setExpenseData] = useState({});
 	const [modalView, setModalView] = useState('upload');
+	const [taxOptions, setTaxOptions] = useState([]);
+	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
 
 	const { cogoEntityId, vendorId } = rowData;
 
@@ -71,6 +73,10 @@ function AddExpenseModal({
 					<UploadInvoice
 						formData={expenseData}
 						setFormData={setExpenseData}
+						taxOptions={taxOptions}
+						setTaxOptions={setTaxOptions}
+						isUploadConfirm={isUploadConfirm}
+						setIsUploadConfirm={setIsUploadConfirm}
 					/>
 				) : (
 					<Summary

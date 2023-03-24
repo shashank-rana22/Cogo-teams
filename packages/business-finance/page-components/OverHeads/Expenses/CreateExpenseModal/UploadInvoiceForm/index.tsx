@@ -1,5 +1,5 @@
 import { Input, Select, Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import Filter from '../../../../commons/Filters';
 import { nonRecurringUploadInvoice } from '../../../Controls/nonRecurringUploadInvoice';
@@ -12,18 +12,30 @@ interface FilterInterface {
 	uploadedInvoice?:string,
 	repeatEvery?:string,
 	invoiceCurrency?:string,
+	invoiceNumber?:number,
 }
 interface Props {
 	formData:FilterInterface,
 	setFormData:(p:object) => void,
-	createExpenseType:string
+	createExpenseType:string,
+	isUploadConfirm?:boolean,
+	setIsUploadConfirm?:(p:any)=>void,
+	taxOptions?:object[],
+	setTaxOptions?:(p:any)=>void,
 }
 
-function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
-	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
+function UploadInvoiceForm({
+	formData,
+	setFormData,
+	createExpenseType,
+	isUploadConfirm,
+	setIsUploadConfirm,
+	taxOptions,
+	setTaxOptions,
+}:Props) {
 	const uploadUrl = formData?.uploadedInvoice;
 
-	let uploadControls;
+	let uploadControls:any;
 	if (createExpenseType === 'recurring') {
 		uploadControls = recurringUploadInvoice;
 	} else if (createExpenseType === 'nonRecurring') {
@@ -47,7 +59,6 @@ function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 						placeholder="Currency*"
 						options={currencyOptions}
 						size="sm"
-
 					/>
 
 				</div>
@@ -56,9 +67,9 @@ function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 						name="invoiceNumber"
 						size="sm"
 						placeholder="Unique invoice no."
+						value={formData?.invoiceNumber}
 						onChange={(e:string) => setFormData({ ...formData, invoiceNumber: e })}
 					/>
-
 				</div>
 			</div>
 
@@ -67,7 +78,7 @@ function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 					{!isUploadConfirm ? (
 						<>
 							<Filter
-								controls={uploadControls()}
+								controls={uploadControls({ formData })}
 								filters={formData}
 								setFilters={setFormData}
 							/>
@@ -99,7 +110,12 @@ function UploadInvoiceForm({ formData, setFormData, createExpenseType }:Props) {
 
 				</div>
 				<div className={`${styles.upload_invoice} ${styles.line_item}`}>
-					<LineItemsForm setFormData={setFormData} formData={formData} />
+					<LineItemsForm
+						setFormData={setFormData}
+						formData={formData}
+						taxOptions={taxOptions}
+						setTaxOptions={setTaxOptions}
+					/>
 				</div>
 			</div>
 		</div>

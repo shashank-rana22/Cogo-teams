@@ -1,5 +1,5 @@
 import { Datepicker, Input, Select, Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import Filter from '../../../../commons/Filters';
 import { recurringUploadInvoice } from '../../../Controls/recurringUploadInvoice';
@@ -12,14 +12,21 @@ interface FilterInterface {
 	repeatEvery?:string,
 	invoiceCurrency?:string,
 	invoiceDate?:Date,
+	invoiceNumber?:number,
 }
 interface Props {
 	formData:FilterInterface,
 	setFormData:(p:object) => void,
+	taxOptions?:object[],
+	setTaxOptions?:(p:object)=>void,
+	setIsUploadConfirm?:(p:any)=>void,
+	isUploadConfirm?:boolean,
 }
 
-function UploadInvoice({ formData, setFormData }:Props) {
-	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
+function UploadInvoice({
+	formData, setFormData, setTaxOptions, taxOptions,
+	isUploadConfirm, setIsUploadConfirm,
+}:Props) {
 	const uploadUrl = formData?.uploadedInvoice;
 
 	const currencyOptions = [
@@ -48,6 +55,7 @@ function UploadInvoice({ formData, setFormData }:Props) {
 						name="invoiceNumber"
 						size="sm"
 						placeholder="Unique invoice no."
+						value={formData?.invoiceNumber}
 						onChange={(e:string) => setFormData({ ...formData, invoiceNumber: e })}
 					/>
 
@@ -106,7 +114,12 @@ function UploadInvoice({ formData, setFormData }:Props) {
 				</div>
 
 				<div className={`${styles.upload_invoice} ${styles.line_item}`}>
-					<LineItemsForm setFormData={setFormData} formData={formData} />
+					<LineItemsForm
+						setFormData={setFormData}
+						formData={formData}
+						taxOptions={taxOptions}
+						setTaxOptions={setTaxOptions}
+					/>
 				</div>
 			</div>
 

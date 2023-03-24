@@ -24,8 +24,10 @@ function CreateExpenseForm({
 }:Props) {
 	const [categoryOptions, setCategoryOptions] = useState([]);
 	const [subCategoryOptions, setSubCategoryOptions] = useState([]);
+	const [taxOptions, setTaxOptions] = useState([]);
 	const [branchOptions, setBranchOptions] = useState([]);
 	const [entityOptions, setEntityOptions] = useState([]);
+	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
 
 	let formData:any;
 	let setFormData:any;
@@ -60,6 +62,10 @@ function CreateExpenseForm({
 					formData={formData}
 					setFormData={setFormData}
 					createExpenseType={createExpenseType}
+					isUploadConfirm={isUploadConfirm}
+					setIsUploadConfirm={setIsUploadConfirm}
+					taxOptions={taxOptions}
+					setTaxOptions={setTaxOptions}
 				/>
 			)}
 			{ active === 'Final Confirmation' && (
