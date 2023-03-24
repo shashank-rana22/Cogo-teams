@@ -12,7 +12,7 @@ function CardItem(props) {
 			<div className={styles.header}>
 				<div className={styles.heading}>{startCase(expertise_type ?? '--')}</div>
 				<div className={styles.items}>
-					{items ? `${items} Items` : '' }
+					{items ? `${items} Items` : '___' }
 
 				</div>
 			</div>

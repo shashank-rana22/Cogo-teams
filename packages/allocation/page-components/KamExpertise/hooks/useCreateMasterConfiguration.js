@@ -7,7 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import getAddMasteryControls from '../configurations/get-add-mastery-controls';
 
 function useCreateMasterConfiguration(props) {
-	const { masteryItemData = {}, onClose, listRefetch } = props;
+	const { masteryItemData = {}, listRefetch, setToggleScreen } = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_badge_configuration',
@@ -23,6 +23,10 @@ function useCreateMasterConfiguration(props) {
 		},
 	});
 
+	const onClose = () => {
+		setToggleScreen('badge_details');
+	};
+
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
 
@@ -32,17 +36,14 @@ function useCreateMasterConfiguration(props) {
 			image_input,
 			description_input,
 		} = formValues || {};
-
+		//! status shuld not be hardcoded
 		try {
 			const payload = {
-				version_id                         : '1',
 				badge_name                         : mastery_name,
 				description                        : description_input,
 				expertise_configuration_detail_ids : badges,
 				expertise_configuration_type       : 'badge_configuration',
 				status                             : 'active',
-				// performed_by_id                    : '1234',
-				// performed_by_type                  : 'user',
 				badge_details                      : [
 					{
 						image_url : image_input || masteryItemData?.badge_details?.[0]?.image_url,
@@ -73,6 +74,7 @@ function useCreateMasterConfiguration(props) {
 		getAddMasteryControls,
 		loading,
 		onSave,
+		onClose,
 	};
 }
 

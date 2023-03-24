@@ -35,7 +35,7 @@ const HEADING_MAPPING = {
 };
 
 function ConfigurationCard(props) {
-	const { version_number, status_value = '', list = [], audit_data = {} } = props;
+	const { version_number, status_value = '', list = [], audit_data = {}, total_levels } = props;
 
 	return (
 		<div className={styles.card_container}>
@@ -51,6 +51,14 @@ function ConfigurationCard(props) {
 						{status_value === 'active' ? 'Live' : status_value}
 
 					</Pill>
+					<div style={{ marginRight: '28px' }}>
+						Total Levels:
+						{' '}
+						<strong>
+							{total_levels || '-'}
+							{' '}
+						</strong>
+					</div>
 
 					<div className={styles.last_modified}>
 						<div style={{ marginRight: '28px' }}>
@@ -60,11 +68,6 @@ function ConfigurationCard(props) {
 								{' '}
 
 							</strong>
-						</div>
-						<div style={{ marginRight: '28px' }}>
-							Total Levels:
-							{' '}
-							<strong> </strong>
 						</div>
 
 						<div>

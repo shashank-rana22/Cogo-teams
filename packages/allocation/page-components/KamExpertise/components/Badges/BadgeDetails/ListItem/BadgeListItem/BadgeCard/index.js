@@ -1,6 +1,6 @@
 import { Modal, Placeholder } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import useUpdateSingleBadge from '../../../../../../hooks/useBadgeConfigurationAttributes';
 import BadgeUpdateCard from '../../../../BadgeUpdateCard';
@@ -10,26 +10,20 @@ import styles from './styles.module.css';
 function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, data }) {
 	const { score = '', image_url = '', id = '' } = data;
 
-	const [openModal, setOpenModal] = useState(false);
-
-	// todo: move openModal state and onClose function inside hook
-	const onClose = () => {
-		setOpenModal((pv) => !pv);
-	};
-
 	const {
-		onSave, loading, formProps,
-	} = useUpdateSingleBadge({ medal, id, image_url, score, onClose, listRefetch });
+		onSave, loading, formProps, openModal, onClose,
+	} = useUpdateSingleBadge({ medal, id, image_url, score, listRefetch });
 
 	const {
 		control, handleSubmit, watch,
 	} = formProps;
 
-	const badgeData = {
+	const BADGE_DATA = {
 		medalType         : medal,
 		score,
 		isSingleBadgeEdit : true,
 	};
+
 	if (loading) {
 		return (
 			<Placeholder
@@ -76,10 +70,11 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 					className={styles.modal_class}
 				>
 					<form onSubmit={handleSubmit(onSave)}>
+
 						<Modal.Body className={styles.modal_body}>
 							<div style={{ padding: '10px', margin: '10px' }}>
 								<BadgeUpdateCard
-									data={badgeData}
+									data={BADGE_DATA}
 									badgeItemData={badgeItemData}
 									watch={watch}
 									control={control}
@@ -87,6 +82,7 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 								/>
 							</div>
 						</Modal.Body>
+
 					</form>
 				</Modal>
 			)}
