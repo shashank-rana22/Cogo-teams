@@ -14,6 +14,8 @@ import {
 	asyncFieldsListOperators,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncFieldsExpertiseConfigurations,
+	asyncFieldsExpertiseBadgeName,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -36,16 +38,18 @@ import {
  */
 
 const keyAsyncFieldsParamsMapping = {
-	organizations          : asyncFieldsOrganizations,
-	organization_users     : asyncFieldsOrganizationUser,
-	partners               : asyncFieldsPartner,
-	partner_users          : asyncFieldsPartnerUsers,
-	partner_roles          : asyncFieldsPartnerRoles,
-	segments               : asyncFieldsCampaignSegments,
-	list_locations         : asyncFieldsLocations,
-	list_operators         : asyncFieldsListOperators,
-	list_rate_charge_codes : asyncFieldListRateChargeCodes,
-	allot_bank             : asyncAllotBanks,
+	organizations           : asyncFieldsOrganizations,
+	organization_users      : asyncFieldsOrganizationUser,
+	partners                : asyncFieldsPartner,
+	partner_users           : asyncFieldsPartnerUsers,
+	partner_roles           : asyncFieldsPartnerRoles,
+	segments                : asyncFieldsCampaignSegments,
+	list_locations          : asyncFieldsLocations,
+	list_operators          : asyncFieldsListOperators,
+	list_rate_charge_codes  : asyncFieldListRateChargeCodes,
+	allot_bank              : asyncAllotBanks,
+	expertise_configuration : asyncFieldsExpertiseConfigurations,
+	badge_name              : asyncFieldsExpertiseBadgeName,
 };
 
 function AsyncSelect(props) {

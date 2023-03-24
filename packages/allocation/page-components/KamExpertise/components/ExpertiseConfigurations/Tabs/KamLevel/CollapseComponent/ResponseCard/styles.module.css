@@ -1,0 +1,39 @@
+.level_card_container {
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+  padding: 0;
+  padding: 24px 24px;
+}
+
+.level_desc {
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 32px;
+  color: #221f20;
+}
+.arrow {
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+}
+
+.cancel_button {
+  float: right;
+  display: flex;
+  gap: 12px;
+  margin-right: 12px;
+}
+
+.bottom_form {
+  display: flex;
+  justify-content: space-between;
+}
+.bottom_supporting_txt {
+  font-weight: 700;
+  display: flex;
+
+  margin-bottom: 12px;
+  margin-top: 12px;
+  font-size: 18px;
+}

@@ -1,0 +1,51 @@
+.badge_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.badge_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 16px;
+}
+
+.badge {
+    height: 48px;
+    width: 48px;
+}
+
+.badge img {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.empty {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-basis: 60%;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+.empty_boxes {
+    height: 48px;
+    width: 48px;
+    border: 1px dashed #e0e0e0;
+    background: #e0e0e04e;
+    border-radius: 8px;
+}
+
+.empty_text {
+    font-size: 12px;
+    color: #7f7f7f;
+    margin-top: 8px;
+}

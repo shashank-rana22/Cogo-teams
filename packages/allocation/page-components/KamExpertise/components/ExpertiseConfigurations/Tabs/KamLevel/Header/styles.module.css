@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 16px 0 24px 0;
+}
+
+.button_container {
+  display: flex;
+}
+
+.config_basic_details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.lower_details {
+  display: flex;
+  margin-top: 8px;
+  font-weight: 400;
+  font-size: 14px;
+}
+.draft_name {
+  font-weight: 400;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.lower_info {
+  display: flex;
+  margin-right: 44px;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+}
+.audit_label{
+  margin-right: 8px;
+}

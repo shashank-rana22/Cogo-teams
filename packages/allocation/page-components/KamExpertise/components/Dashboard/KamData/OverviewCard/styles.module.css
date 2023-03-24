@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    flex-basis: 24%;
+    padding: 16px 24px 4px;
+    background: #fff;
+    border-radius: 8px;
+    height: 132px;
+    margin: 4px;
+
+    @media (max-width: 1000px) {
+        flex-basis: 48%;
+    }
+
+    @media (max-width: 576px) {
+        flex-basis: 100%;
+    }
+}
+
+.title {
+    display: flex;
+}
+
+.title_text {
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.display_flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.display_flex_loading {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}

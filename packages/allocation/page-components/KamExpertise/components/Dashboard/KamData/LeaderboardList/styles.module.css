@@ -1,0 +1,14 @@
+.container {
+    width: 100%;
+}
+
+.pagination_container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.empty_state {
+    background: #fff;
+    padding: 20px 0;
+    border-radius: 8px;
+}

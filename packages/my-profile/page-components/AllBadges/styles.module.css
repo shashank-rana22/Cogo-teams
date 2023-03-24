@@ -1,0 +1,6 @@
+.main_container_wrapper {
+    @media (max-width: 768px) {
+        margin-top: 50px;
+    }
+    margin: none;
+}

@@ -1,0 +1,28 @@
+.container {
+	background-color: #fff;
+	border-radius: 8px;
+	margin-bottom: 16px;
+	padding: 16px;
+}
+
+.top_div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.info_tag {
+	display: flex;
+}
+
+.rule_body {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-top: 2px;
+}
+
+.rule_head {
+	font-size: 16px;
+	font-weight: 600;
+}
+

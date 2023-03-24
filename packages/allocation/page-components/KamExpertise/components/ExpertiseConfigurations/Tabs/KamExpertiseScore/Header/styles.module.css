@@ -1,0 +1,44 @@
+
+.main_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin: 16px 0px;
+
+	@media (max-width:576px){
+		margin: -32px 0 20px 0;
+	}
+}
+  
+.button_container {
+	display: flex;
+}
+  
+.config_basic_detail {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+  
+.lower_details {
+	display: flex;
+	margin-top: 8px;
+	font-weight: 400;
+	font-size: 14px;
+}
+.draft_name {
+	font-weight: 400;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+}
+  
+
+.lower_info {
+	display: flex;
+
+	@media(max-width: 576px) {
+		flex-direction: column;
+	}
+}

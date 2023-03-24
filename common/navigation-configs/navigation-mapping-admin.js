@@ -1743,6 +1743,17 @@ const navigationMappingAdmin = {
 		showInNav     : false,
 
 	},
+	all_badges: {
+		key           : 'all_badges',
+		title         : 'All Badges',
+		href          : '/badges',
+		as            : '/badges',
+		main_apis     : [],
+		module_type   : 'dashboards',
+		possible_apis : apis.all_badges,
+		showInNav     : false,
+
+	},
 	allocations: {
 		key         : 'allocations',
 		title       : 'Allocations',
@@ -1762,6 +1773,13 @@ const navigationMappingAdmin = {
 				href          : '/v2/allocation/core-engine',
 				as            : '/v2/allocation/core-engine',
 				possible_apis : apis.allocation_engine,
+			},
+			{
+				key           : 'allocations-kam_expertise',
+				title         : 'Kam Expertise',
+				href          : '/v2/allocation/kam-expertise',
+				as            : '/v2/allocation/kam-expertise',
+				possible_apis : apis.kam_expertise,
 			},
 		],
 	},

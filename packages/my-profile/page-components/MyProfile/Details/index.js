@@ -1,10 +1,11 @@
+import Badges from './Badges';
 import Partners from './Partners';
 import Services from './Services';
 import styles from './styles.module.css';
 import TaggedAgent from './TaggedAgents';
 
 function Details({
-	detailsData,
+	detailsData, badgeListLoading, userBadges, profileBadgeRefetch,
 }) {
 	return (
 
@@ -14,7 +15,6 @@ function Details({
 			</div>
 
 			<div className={styles.detail_container}>
-
 				<div className={styles.card_details}>
 					<Services detailsData={detailsData} />
 				</div>
@@ -22,7 +22,14 @@ function Details({
 				<div className={styles.tagged_card_details}>
 					<TaggedAgent detailsData={detailsData} />
 				</div>
+			</div>
 
+			<div className={styles.badge_details}>
+				<Badges
+					badgeListLoading={badgeListLoading}
+					userBadges={userBadges}
+					profileBadgeRefetch={profileBadgeRefetch}
+				/>
 			</div>
 		</div>
 

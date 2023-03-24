@@ -4,4 +4,5 @@ const myProfile = {
 		isMainNav  : false,
 	},
 };
+
 module.exports = myProfile;

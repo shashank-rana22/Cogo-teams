@@ -1,0 +1,23 @@
+.level_card_container {
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+  padding: 24px;
+}
+.delete_button {
+  float: right;
+  margin: 10px 32px 10px 10px;
+}
+.bottom_form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom_supporting_txt {
+  font-weight: 700;
+  display: flex;
+
+  margin-bottom: 12px;
+  margin-top: 12px;
+  font-size: 18px;
+}
