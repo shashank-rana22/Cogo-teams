@@ -48,8 +48,10 @@ function DailyPayableOutstanding() {
 					<div className={styles.sub_container}>
 						<div className={styles.month_container}>
 							<div className={styles.value}>
-								{data?.[2]?.dpo}
-								{/* ?.toFixed(2) */}
+								<Tooltip content={data?.[2]?.dpo} placement="top" interactive>
+									{data?.[2]?.dpo?.toFixed(2)}
+								</Tooltip>
+
 							</div>
 							<div className={styles.label}>
 								{format(data?.[2]?.yearMonth, ' MMM yyyy')}
@@ -58,7 +60,9 @@ function DailyPayableOutstanding() {
 						</div>
 						<div className={styles.month_container}>
 							<div className={styles.value}>
-								{data?.[1]?.dpo}
+								<Tooltip content={data?.[1]?.dpo} placement="top" interactive>
+									{data?.[1]?.dpo?.toFixed(2)}
+								</Tooltip>
 							</div>
 							<div className={styles.label}>
 								{format(data?.[1]?.yearMonth, ' MMM yyyy')}
@@ -66,7 +70,9 @@ function DailyPayableOutstanding() {
 						</div>
 						<div className={styles.month_container}>
 							<div className={styles.value}>
-								{data?.[0]?.dpo}
+								<Tooltip content={data?.[0]?.dpo} placement="top" interactive>
+									{data?.[0]?.dpo?.toFixed(2)}
+								</Tooltip>
 							</div>
 							<div className={styles.label}>
 								{format(data?.[0]?.yearMonth, ' MMM yyyy')}
@@ -77,7 +83,9 @@ function DailyPayableOutstanding() {
 					<div className={styles.sub_container}>
 						<div className={styles.month_box}>
 							<div className={styles.value}>
-								{data?.[0]?.dpo}
+								<Tooltip content={data?.[0]?.dpo} placement="top" interactive>
+									{data?.[0]?.dpo?.toFixed(2)}
+								</Tooltip>
 							</div>
 							<div className={styles.sub_container}>
 								<div className={styles.quarter_text}>
@@ -93,7 +101,9 @@ function DailyPayableOutstanding() {
 						</div>
 						<div className={styles.month_box}>
 							<div className={styles.value}>
-								{data?.[1]?.dpo || 0}
+								<Tooltip content={data?.[1]?.dpo} placement="top" interactive>
+									{data?.[1]?.dpo?.toFixed(2) || 0}
+								</Tooltip>
 							</div>
 
 							<div className={styles.sub_container}>
@@ -108,7 +118,9 @@ function DailyPayableOutstanding() {
 						</div>
 						<div className={styles.month_box}>
 							<div className={styles.value}>
-								{data?.[2]?.dpo || 0}
+								<Tooltip content={data?.[2]?.dpo} placement="top" interactive>
+									{data?.[2]?.dpo?.toFixed(2) || 0}
+								</Tooltip>
 							</div>
 							<div className={styles.sub_container}>
 								<div className={styles.quarter_text}>
@@ -122,7 +134,9 @@ function DailyPayableOutstanding() {
 						</div>
 						<div className={styles.month_box}>
 							<div className={styles.value}>
-								{data?.[3]?.dpo || 0}
+								<Tooltip content={data?.[3]?.dpo} placement="top" interactive>
+									{data?.[3]?.dpo || 0}
+								</Tooltip>
 							</div>
 							<div className={styles.sub_container}>
 								<div className={styles.quarter_text}>

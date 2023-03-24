@@ -33,6 +33,7 @@
 }
 .filter{
     display: flex;
+    padding-left: 56px;
 }
 .label{
     display: flex;
@@ -41,4 +42,11 @@
     color: #333333;
     align-items: center;
     margin-right: 4px;
+}
+.select_filter{
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    width: 16%;
+    padding-left: 16px;
 }

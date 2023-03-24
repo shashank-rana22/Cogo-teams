@@ -20,6 +20,8 @@ function AmountBoxes() {
 		openInvoicesAmount,
 		openInvoicesCount,
 		organizationsCount,
+		openInvoiceChange,
+		onAccountChange,
 	} = data || {};
 
 	return (
@@ -64,7 +66,13 @@ function AmountBoxes() {
 							INR
 						</div>
 						<div className={styles.value_text}>
-							{getAmountInLakhCrK(openInvoicesAmount)}
+							<Tooltip
+								content={getFormattedPrice(openInvoicesAmount, 'INR') || ''}
+								placement="top"
+								interactive
+							>
+								{getAmountInLakhCrK(openInvoicesAmount)}
+							</Tooltip>
 						</div>
 						<div className={styles.account_payables}>
 							<div className={styles.label_text}>
@@ -74,7 +82,10 @@ function AmountBoxes() {
 								<div className={styles.profit_icon}>
 									<IcMArrowNext height={20} width={20} />
 								</div>
-								+ 1.01% this week
+								+
+								{' '}
+								{openInvoiceChange?.toFixed(2)}
+								% this week
 							</div>
 						</div>
 					</div>
@@ -85,7 +96,13 @@ function AmountBoxes() {
 							INR
 						</div>
 						<div className={styles.value_text}>
-							{getAmountInLakhCrK(onAccountAmount)}
+							<Tooltip
+								content={getFormattedPrice(onAccountAmount, 'INR') || ''}
+								placement="top"
+								interactive
+							>
+								{getAmountInLakhCrK(onAccountAmount)}
+							</Tooltip>
 						</div>
 						<div className={styles.account_payables}>
 							<div className={styles.label_text}>
@@ -95,7 +112,40 @@ function AmountBoxes() {
 								<div className={styles.profit_icon}>
 									<IcMArrowNext height={20} width={20} />
 								</div>
-								+ 1.01% this week
+								+
+								{' '}
+								{onAccountChange?.toFixed(2)}
+								% this week
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className={styles.box}>
+					<div className={styles.sub_container}>
+						<div className={styles.label_text}>
+							INR
+						</div>
+						<div className={styles.value_text}>
+							<Tooltip
+								content={getFormattedPrice(onAccountAmount, 'INR') || ''}
+								placement="top"
+								interactive
+							>
+								{getAmountInLakhCrK(onAccountAmount)}
+							</Tooltip>
+						</div>
+						<div className={styles.account_payables}>
+							<div className={styles.label_text}>
+								Open Credit Notes
+							</div>
+							<div className={styles.percentage_text}>
+								<div className={styles.profit_icon}>
+									<IcMArrowNext height={20} width={20} />
+								</div>
+								+
+								{' '}
+								{onAccountChange?.toFixed(2)}
+								% this week
 							</div>
 						</div>
 					</div>

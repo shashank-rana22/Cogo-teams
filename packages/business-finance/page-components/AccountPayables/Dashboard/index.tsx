@@ -16,7 +16,7 @@ import VendorsList from './VendorsList';
 function Dashboard() {
 	const [payablesFilter, setPayablesFilter] = useState('overall');
 	const [showVendorsList, setShowVendorsList] = useState('OVERSEAS');
-	const [showData, setShowData] = useState('daily');
+	const [showData, setShowData] = useState('day');
 	const { data, filters, setFilters } = useGetAgePayable();
 	return (
 		<div className={styles.container}>
