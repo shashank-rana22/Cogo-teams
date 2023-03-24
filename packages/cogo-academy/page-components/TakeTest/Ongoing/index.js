@@ -1,8 +1,10 @@
-import { Toast, Button, Modal } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState, useEffect } from 'react';
 
 import LeftSection from './components/LeftSection';
+import LeaveTest from './components/LeftSection/Footer/LeaveTest';
+import WarningModal from './components/LeftSection/WarningModal';
 import RightSection from './components/RightSection';
 import useFetchQuestionsList from './hooks/useFetchQuestionList';
 import styles from './styles.module.css';
@@ -11,22 +13,10 @@ function Ongoing({ testData, page }) {
 	const router = useRouter();
 
 	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
+	const [isFullscreen, setIsFullscreen] = useState(false);
+	const [showLeaveTestModal, setShowLeaveTestModal] = useState(false);
 
 	const { loading, data, fetchQuestions } = useFetchQuestionsList({ currentQuestion });
-
-	const [isFullscreen, setIsFullscreen] = useState(false);
-
-	const handleEnterFullScreen = () => {
-		const elem = document.getElementById('maincontainer');
-
-		if (elem?.requestFullscreen) {
-			elem?.requestFullscreen();
-		} else if (elem?.webkitRequestFullscreen) { /* Safari */
-			elem?.webkitRequestFullscreen();
-		} else if (elem?.msRequestFullscreen) { /* IE11 */
-			elem?.msRequestFullscreen();
-		}
-	};
 
 	// Watch for fullscreenchange
 	useEffect(() => {
@@ -58,7 +48,7 @@ function Ongoing({ testData, page }) {
 				return;
 			}
 
-			if (document.fullscreen) {
+			if (document.fullscreenElement) {
 				if (document?.exitFullscreen) {
 					document?.exitFullscreen();
 				} else if (document?.webkitExitFullscreen) { /* Safari */
@@ -75,49 +65,21 @@ function Ongoing({ testData, page }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const items = ['Exam can be only taken in full screen',
-		'To continue test, please click on continue',
-		// eslint-disable-next-line max-len
-		'You will be redirected to dashboard if you switch tabs.If you switch tabs more than 2 times, your exam will be submitted automatically',
-		'To submit the test, please click on submit test button'];
-
-	if (!isFullscreen) {
+	if (showLeaveTestModal) {
 		return (
-			<Modal showCloseIcon={false} size="md" show className={styles.modal_container}>
-				<Modal.Header title="Are you sure?" />
-
-				<Modal.Body>
-					<ul className={styles.list}>
-						{items.map((item, index) => (
-							<li key={item} className={`${styles.list} ${styles[`list_${index}`]}`}>
-								{item}
-							</li>
-						))}
-					</ul>
-				</Modal.Body>
-
-				<Modal.Footer>
-					<Button
-						size="md"
-						style={{ marginRight: 10 }}
-						themeType="secondary"
-					>
-						Submit Test
-					</Button>
-
-					<Button
-						size="md"
-						onClick={handleEnterFullScreen}
-						loading={loading}
-					>
-						continue
-					</Button>
-				</Modal.Footer>
-			</Modal>
+			<LeaveTest
+				showLeaveTestModal={showLeaveTestModal}
+				setShowLeaveTestModal={setShowLeaveTestModal}
+			/>
 		);
 	}
 
-	// console.log('data', new Date());
+	if (!isFullscreen) {
+		return (
+			<WarningModal loading={loading} />
+		);
+	}
+
 	return ((
 		<div className={styles.main_container}>
 			<div className={styles.left_container}>
@@ -128,6 +90,7 @@ function Ongoing({ testData, page }) {
 					currentQuestion={currentQuestion}
 					setCurrentQuestion={setCurrentQuestion}
 					fetchQuestions={fetchQuestions}
+					setShowLeaveTestModal={setShowLeaveTestModal}
 				/>
 			</div>
 

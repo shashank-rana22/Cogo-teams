@@ -1,3 +1,4 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
@@ -10,6 +11,7 @@ import styles from './styles.module.css';
 
 function CreateQuestionSet() {
 	const router = useRouter();
+	const { query, debounceQuery } = useDebounceQuery();
 
 	const [savedQuestionDetails, setSavedQuestionDetails] = useState([]);
 	const [editDetails, setEditDetails] = useState({});
@@ -24,7 +26,7 @@ function CreateQuestionSet() {
 		setQuestionSetId,
 		setFilters,
 		filters,
-	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails });
+	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query });
 
 	return (
 		<div className={styles.container}>
@@ -60,6 +62,7 @@ function CreateQuestionSet() {
 				setEditDetails={setEditDetails}
 				setFilters={setFilters}
 				filters={filters}
+				debounceQuery={debounceQuery}
 			/>
 		</div>
 	);

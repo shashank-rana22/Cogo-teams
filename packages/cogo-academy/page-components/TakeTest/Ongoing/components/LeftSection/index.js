@@ -12,6 +12,7 @@ function LeftSection({
 	setCurrentQuestion,
 	loading,
 	fetchQuestions,
+	setShowLeaveTestModal,
 }) {
 	const [answer, setAnswer] = useState('');
 
@@ -40,6 +41,7 @@ function LeftSection({
 				total_question={data?.total_questions}
 				answer={answer}
 				fetchQuestions={fetchQuestions}
+				setShowLeaveTestModal={setShowLeaveTestModal}
 			/>
 		</div>
 	);
