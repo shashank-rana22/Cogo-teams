@@ -19,8 +19,10 @@ importers:
       postcss-flexbugs-fixes: ^5.0.2
       postcss-nested: ^6.0.1
       postcss-preset-env: ^8.0.1
+      quill: ^1.3.7
       react-dom: 18.2.0
       react-i18next: ^12.2.0
+      react-quill: ^2.0.0
       stylelint: ^14.16.1
       turbo: ^1.8.3
     dependencies:
@@ -28,8 +30,10 @@ importers:
       accept-language: 3.0.18
       i18next: 22.4.10
       next-i18next: 13.2.2_johky4hpydmc34raojpzuxlpqy
+      quill: 1.3.7
       react-dom: 18.2.0
       react-i18next: 12.2.0_pmu7klu5prsdg5sxir3ehgxr7y
+      react-quill: 2.0.0_react-dom@18.2.0
     devDependencies:
       '@cogoport/eslint-config': 1.1.0_eslint@8.35.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
@@ -594,8 +598,14 @@ importers:
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
+      quill: ^1.3.7
       react: 18.2.0
       react-beautiful-dnd: ^13.1.1
+      react-grid-layout: ^1.3.4
+      react-i18next: ^12.2.0
+      react-quill: ^2.0.0
+      react-resizable: ^3.0.5
+      uuid: ^9.0.0
     dependencies:
       '@cogoport/charts': 1.0.1_react@18.2.0
       '@cogoport/components': 1.0.366_4o7yor53awafeuvdjrs2cbhz3i
@@ -606,8 +616,14 @@ importers:
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.6
+      quill: 1.3.7
       react: 18.2.0
       react-beautiful-dnd: 13.1.1_react@18.2.0
+      react-grid-layout: 1.3.4_react@18.2.0
+      react-i18next: 12.2.0_react@18.2.0
+      react-quill: 2.0.0_react@18.2.0
+      react-resizable: 3.0.5_react@18.2.0
+      uuid: 9.0.0
 
   packages/performance-management:
     specifiers:
@@ -8346,7 +8362,7 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-draggable: 4.4.5_react@18.2.0
-      react-resizable: 3.0.4_react@18.2.0
+      react-resizable: 3.0.5_react@18.2.0
     dev: false
 
   /react-hook-form/7.43.5_react@18.2.0:
@@ -8375,6 +8391,24 @@ packages:
       html-parse-stringify: 3.0.1
       i18next: 22.4.10
       react-dom: 18.2.0
+    dev: false
+
+  /react-i18next/12.2.0_react@18.2.0:
+    resolution: {integrity: sha512-5XeVgSygaGfyFmDd2WcXvINRw2WEC1XviW1LXY/xLOEMzsCFRwKqfnHN+hUjla8ZipbVJR27GCMSuTr0BhBBBQ==}
+    peerDependencies:
+      i18next: '>= 19.0.0'
+      react: '>= 16.8.0'
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.21.0
+      html-parse-stringify: 3.0.1
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
@@ -8423,6 +8457,18 @@ packages:
       quill: 1.3.7
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react-quill/2.0.0_react-dom@18.2.0:
+    resolution: {integrity: sha512-4qQtv1FtCfLgoD3PXAur5RyxuUbPXQGOHgTlFie3jtxp43mXDtzCKaOgQ3mLyZfi1PUlyjycfivKelFhy13QUg==}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      '@types/quill': 1.3.10
+      lodash: 4.17.21
+      quill: 1.3.7
+      react-dom: 18.2.0
     dev: false
 
   /react-quill/2.0.0_react@18.2.0:
@@ -8521,8 +8567,8 @@ packages:
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
-  /react-resizable/3.0.4_react@18.2.0:
-    resolution: {integrity: sha512-StnwmiESiamNzdRHbSSvA65b0ZQJ7eVQpPusrSmcpyGKzC0gojhtO62xxH6YOBmepk9dQTBi9yxidL3W4s3EBA==}
+  /react-resizable/3.0.5_react@18.2.0:
+    resolution: {integrity: sha512-vKpeHhI5OZvYn82kXOs1bC8aOXktGU5AmKAgaZS4F5JPburCtbmDPqE7Pzp+1kN4+Wb81LlF33VpGwWwtXem+w==}
     peerDependencies:
       react: '>= 16.3'
     dependencies:

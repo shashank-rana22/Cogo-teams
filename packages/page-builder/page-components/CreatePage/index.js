@@ -6,6 +6,8 @@ import styles from './styles.module.css';
 
 function CreatePage() {
 	const [activeTab, setActiveTab] = useState('content');
+	const [components, setComponents] = useState([]);
+
 	return (
 		<div>
 			<section className={styles.heading_container}>
@@ -14,11 +16,19 @@ function CreatePage() {
 
 			<section className={styles.body}>
 				<div className={styles.left_panel}>
-					<LeftPanel activeTab={activeTab} setActiveTab={setActiveTab} />
+					<LeftPanel
+						activeTab={activeTab}
+						setActiveTab={setActiveTab}
+						components={components}
+						setComponents={setComponents}
+					/>
 				</div>
 
 				<div className={styles.right_panel}>
-					<RightPanel />
+					<RightPanel
+						components={components}
+						setComponents={setComponents}
+					/>
 				</div>
 			</section>
 		</div>

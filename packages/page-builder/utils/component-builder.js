@@ -11,7 +11,7 @@ function ComponentBuilder({ components }) {
 		const COMPONENT_MAPPING = {
 			container: (
 				<div style={{ ...properties.styles }}>
-					{children?.map((child) => buildComponent(child))}
+					{(children || []).map((child) => buildComponent(child))}
 				</div>
 			),
 
@@ -42,7 +42,7 @@ function ComponentBuilder({ components }) {
 
 	return (
 		<div style={{ padding: '20px' }}>
-			{components.map((component) => buildComponent(component))}
+			{(components || []).map((component) => buildComponent(component))}
 		</div>
 	);
 }

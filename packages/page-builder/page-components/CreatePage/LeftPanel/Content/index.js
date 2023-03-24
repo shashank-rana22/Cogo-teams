@@ -4,9 +4,10 @@ import { useState } from 'react';
 import Basic from './Basic';
 import styles from './styles.module.css';
 
-function Content() {
+function Content(props) {
+	const { components, setComponents } = props;
 	const [secondaryTab, setSecondaryTab] = useState('basic');
-	const [activeTool, setActiveTool] = useState();
+
 	return (
 		<div className={styles.container}>
 
@@ -18,11 +19,7 @@ function Content() {
 			>
 
 				<TabPanel name="basic" title="Basic">
-
-					<Basic
-						activeTool={activeTool}
-						setActiveTool={setActiveTool}
-					/>
+					<Basic components={components} setComponents={setComponents} />
 				</TabPanel>
 
 				<TabPanel name="premade" title="Premade">

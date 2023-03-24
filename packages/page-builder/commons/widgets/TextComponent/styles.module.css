@@ -1,0 +1,17 @@
+/* Customize the tooltip styles for the bubble theme */
+.ql-bubble .ql-tooltip {
+    background-color: #fff; /* Set the background color */
+    border: none; /* Remove the border */
+    color: white; /* Set the text color */
+    padding: 8px; /* Set the padding */
+  }
+  
+  .ql-bubble .ql-tooltip a {
+    color: white; /* Set the link color */
+    text-decoration: none; /* Remove the underline */
+  }
+  
+  .ql-bubble .ql-tooltip a:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }
+  
