@@ -30,6 +30,7 @@ function OverviewCard(props) {
 					</div>
 				)}
 				/>
+
 				<Card.Description className={styles.content}>
 					{[1, 2].map((item) => (
 						<div key={item} className={styles.display_flex_loading}>
@@ -69,19 +70,19 @@ function OverviewCard(props) {
 				</div>
 			)}
 			/>
+
 			<Card.Description className={styles.content}>
 				<div className={styles.display_flex}>
-					<span style={{ fontSize: '12px' }}>
-						Avg. Score
-					</span>
+					<span>Avg. Score</span>
+
 					<span style={{ display: 'flex', fontWeight: 'bold' }}>
 						{data.avg_score}
 					</span>
 				</div>
+
 				<div className={styles.display_flex}>
-					<span style={{ fontSize: '12px' }}>
-						Most Points in
-					</span>
+					<span> Most Points in </span>
+
 					<span style={{ display: 'flex', fontWeight: 'bold' }}>
 						{data.max_condition}
 					</span>

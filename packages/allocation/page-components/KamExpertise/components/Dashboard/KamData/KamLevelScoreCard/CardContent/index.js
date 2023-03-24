@@ -28,6 +28,7 @@ function CardContent({ listData = {}, value }) {
 							style={{
 								color: `${percentage_change > 0
 									? '#34C759' : '#ED3726'}`,
+
 								transform: `${percentage_change > 0
 									? 'rotate(135deg)' : 'rotate(-45deg)'}`,
 							}}

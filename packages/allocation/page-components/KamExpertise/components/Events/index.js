@@ -1,4 +1,4 @@
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { Breadcrumb } from '@cogoport/components';
 
 import useGetEventList from '../../hooks/useGetEventList';
 
@@ -30,9 +30,10 @@ function Events() {
 		expertise,
 		setExpertise,
 		listRefetch,
-		onClickBack,
 		eventListData,
 		setEventListData,
+		locale,
+		partner_id,
 	} = useGetEventList();
 
 	const componentProps = {
@@ -59,14 +60,26 @@ function Events() {
 
 	return (
 		<section className={styles.main}>
-			<div className={styles.back_container} role="presentation" onClick={onClickBack}>
-				<div className={styles.icon_container}>
-					<IcMArrowBack width={16} height={16} />
-				</div>
-				<div className={styles.back_text}>
-					Back to Dashboard
-				</div>
-			</div>
+			<Breadcrumb className={styles.breadcrumb}>
+				<Breadcrumb.Item
+					label={<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/`}>Dashboard</a>}
+				/>
+
+				{ (eventListData.toggleEvent === 'eventList') && <Breadcrumb.Item label={(<b>All Events</b>)} /> }
+
+				{ (eventListData.toggleEvent === 'updateEvent')
+					&& (
+						<Breadcrumb.Item
+							label={(
+								<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/events`}>
+									All Events
+								</a>
+							)}
+						/>
+					)}
+
+				{ (eventListData.toggleEvent === 'updateEvent') && <Breadcrumb.Item label={(<b>Add Event</b>)} />}
+			</Breadcrumb>
 
 			{Component && (
 				<Component

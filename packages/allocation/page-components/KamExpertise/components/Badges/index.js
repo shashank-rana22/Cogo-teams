@@ -1,5 +1,4 @@
-import { IcMArrowBack } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Breadcrumb } from '@cogoport/components';
 
 import useGetBadgeList from '../../hooks/useGetBadgeList';
 
@@ -23,12 +22,6 @@ const BADGES_COMPONENTS_MAPPING = {
 };
 
 function Badges() {
-	const router = useRouter();
-
-	const onClickBack = () => {
-		router.push('/allocation/kam-expertise');
-	};
-
 	const {
 		list: badgeList = [],
 		toggleScreen,
@@ -46,6 +39,8 @@ function Badges() {
 		getNextPage,
 		paginationData,
 		masteryItemData,
+		locale,
+		partner_id,
 	} = useGetBadgeList();
 
 	const componentProps = {
@@ -80,17 +75,30 @@ function Badges() {
 
 	return (
 		<section className={styles.main_container}>
-			<div
-				className={styles.back_container}
-				role="presentation"
-				onClick={onClickBack}
-			>
-				<div className={styles.icon_container}>
-					<IcMArrowBack width={16} height={16} />
-				</div>
+			<Breadcrumb className={styles.breadcrumb}>
+				<Breadcrumb.Item
+					label={<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/`}>Dashboard</a>}
+				/>
 
-				<div className={styles.back_text}>Back to Dashboard</div>
-			</div>
+				{ (toggleScreen === 'badge_details') && <Breadcrumb.Item label={(<b>All Badges</b>)} />}
+
+				{ (toggleScreen !== 'badge_details')
+					&& (
+						<Breadcrumb.Item
+							label={(
+								<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/view-badges`}>
+									All Badges
+								</a>
+							)}
+						/>
+					)}
+
+				{ (toggleScreen === 'create_badge')
+					&& <Breadcrumb.Item label={(<b>Add Badge</b>)} />}
+
+				{ (toggleScreen === 'create_mastery')
+					&& <Breadcrumb.Item label={(<b>Add Mastery</b>)} />}
+			</Breadcrumb>
 
 			<section className={styles.container}>
 				<div className={styles.heading_container}>Badges</div>

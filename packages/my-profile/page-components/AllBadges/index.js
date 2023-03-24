@@ -16,7 +16,7 @@ function AllBadges() {
 
 	const router = useRouter();
 
-	const { query } = router;
+	const { query = {} } = router;
 
 	const { user_id = '', path: returnPath = '' } = query;
 
