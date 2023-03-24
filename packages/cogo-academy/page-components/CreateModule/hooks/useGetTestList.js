@@ -7,8 +7,9 @@ function useGetTestList() {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
-		page    : 1,
-		filters : {
+		page       : 1,
+		page_limit : 10,
+		filters    : {
 			status: ['active', 'draft'],
 		},
 	});

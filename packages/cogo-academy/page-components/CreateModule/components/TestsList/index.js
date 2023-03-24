@@ -1,11 +1,9 @@
 import { Button, Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
 
 import useGetTestList from '../../hooks/useGetTestList';
 import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
-import EmptyState from '../EmptyState';
 
 import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
@@ -75,8 +73,6 @@ function TestsList({ activeTab, setActiveTab }) {
 		setActiveTab(val);
 	};
 
-	console.log('input', input, questionListInput);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.tabs_container}>
@@ -129,8 +125,6 @@ function TestsList({ activeTab, setActiveTab }) {
 					{Object.values(componentMapping).map((tab) => {
 						const { key, title, component:ContainerComponent = null, componentProps } = tab;
 
-						const { data: activeComponentData } = componentProps || {};
-
 						return (
 							<TabPanel
 								key={key}
@@ -139,9 +133,7 @@ function TestsList({ activeTab, setActiveTab }) {
 								className={styles.tabItem}
 							>
 								<div>
-									{!isEmpty(activeComponentData?.list) ? (
-										<ContainerComponent {...componentProps} />
-									) : <EmptyState />}
+									<ContainerComponent {...componentProps} />
 								</div>
 							</TabPanel>
 						);
