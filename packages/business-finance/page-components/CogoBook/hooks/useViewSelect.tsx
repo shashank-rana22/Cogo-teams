@@ -15,6 +15,8 @@ const useViewSelect = (filters, query) => {
 	const {
 		search,
 		archivedStatus,
+		sortType,
+		sortBy,
 	} = filters || {};
 
 	const { service = '', shipmentType = '' } = query || {};
@@ -53,6 +55,8 @@ const useViewSelect = (filters, query) => {
 					serviceType    : service !== '' ? service : undefined,
 					shipment       : shipmentType !== '' ? shipmentType : undefined,
 					search         : search || undefined,
+					sortType       : sortType || undefined,
+					sortBy         : sortBy || undefined,
 				},
 			});
 			if (resp.data) localStorage.setItem('viewKey', resp.data);
@@ -60,13 +64,12 @@ const useViewSelect = (filters, query) => {
 			setCheckedRows({});
 		} catch (error) {
 			setViewData({ pageNo: 0, totalPages: 0, total: 0, totalRecords: 0, list: [] });
-			// toast.error(error?.data?.message);
 		}
 	};
 
 	useEffect(() => {
 		viewSelected();
-	}, [archivedStatus]);
+	}, [archivedStatus, sortType, sortBy]);
 
 	const [
 		{ data:actionConfirmedData, loading:actionConfirmedLoading },
@@ -80,7 +83,7 @@ const useViewSelect = (filters, query) => {
 		{ manual: true },
 	);
 
-	const actionConfirm = async (isBookedActive) => {
+	const actionConfirm = async ({ isBookedActive, setShow }) => {
 		const actionStatus = isBookedActive ? 'BOOK' : 'ACCRUE';
 		try {
 			const rep = await actionConfirmedTrigger({
@@ -93,6 +96,7 @@ const useViewSelect = (filters, query) => {
 			if (rep) {
 				viewSelected();
 			}
+			setShow(false);
 		} catch (error) {
 			Toast.error(error?.data?.message);
 		}

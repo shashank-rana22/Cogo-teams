@@ -23,6 +23,8 @@ interface FooterInterface {
 	showBtn?: boolean
 	bulkSection?:{ value?:boolean, bulkAction?:string }
 	setBulkSection?: React.Dispatch<React.SetStateAction<{}>>
+	selectedDataLoading?:boolean
+	actionConfirmedLoading?:boolean
 }
 
 function Footer({
@@ -34,7 +36,9 @@ function Footer({
 	actionConfirm = () => {},
 	shipmentLoading,
 	setCheckedRows,
+	actionConfirmedLoading,
 	setBulkSection,
+	selectedDataLoading,
 	isBookedActive = false,
 	bulkSection,
 	checkedRowsSerialId,
@@ -172,9 +176,9 @@ function Footer({
 									<Button
 										id="approve-modal-btn"
 										themeType="primary"
+										loading={actionConfirmedLoading}
 										onClick={() => {
-											actionConfirm(isBookedActive);
-											setShow(false);
+											actionConfirm({ isBookedActive, setShow });
 										}}
 									>
 										Confirm
@@ -217,10 +221,10 @@ function Footer({
 								</Button>
 								<Button
 									id="approve-modal-btn"
-									cthemeType="primary"
+									themeType="primary"
+									loading={selectedDataLoading}
 									onClick={() => {
 										addSelect(setOpenModal);
-										setOpenModal(false);
 										setCheckedRows({});
 									}}
 								>

@@ -18,6 +18,8 @@ function ViewSelectedInvoice() {
 		archivedStatus : '',
 		page           : 1,
 		pageLimit      : 10,
+		sortBy         : '',
+		sortType       : 'ASC',
 	});
 	const {
 		getTableHeaderCheckbox,
@@ -27,6 +29,7 @@ function ViewSelectedInvoice() {
 		checkedRowsSerialId,
 		checkedData,
 		viewSelectedSidData,
+		actionConfirmedLoading,
 		loading,
 		viewSelected,
 		setCheckedRows,
@@ -163,6 +166,8 @@ function ViewSelectedInvoice() {
 							deleteSelected,
 							openDeleteModal,
 							setOpenDeleteModal,
+							filters,
+							setFilters,
 						},
 					)}
 					loading={loading}
@@ -173,6 +178,7 @@ function ViewSelectedInvoice() {
 			<Footer
 				actionConfirm={actionConfirm}
 				checkedData={checkedData}
+				actionConfirmedLoading={actionConfirmedLoading}
 				shipmentLoading={loading}
 				checkedRowsSerialId={checkedRowsSerialId}
 				isBookedActive={isBookedActive}

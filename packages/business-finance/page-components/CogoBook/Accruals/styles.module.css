@@ -97,3 +97,7 @@
 .profit_color {
   color: #ee3425;
 }
+.flex_sort {
+  display: flex;
+  align-items: center;
+}

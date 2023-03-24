@@ -24,4 +24,20 @@ export interface ColumnInterface {
 	openDeleteModal?: boolean
 	deleteSelected?: (id: any, handleModal: any) => Promise<void>
 	getTableBodyCheckbox?: (item: any) => JSX.Element
+	filters?: {
+		search: string;
+		archivedStatus: string;
+		page: number;
+		pageLimit: number;
+		sortType?: string;
+		sortBy?: string;
+	}
+	setFilters?: React.Dispatch<React.SetStateAction<{
+		search: string;
+		archivedStatus: string;
+		page: number;
+		pageLimit: number;
+		sortType?: string;
+		sortBy?: string;
+	}>>
 }

@@ -3,6 +3,8 @@ import { getFormattedPrice } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
+import SortIcon from '../common/SortIcon';
+
 import { ColumnInterface } from './interface';
 import styles from './styles.module.css';
 
@@ -77,6 +79,8 @@ export const column = (
 		deleteSelected,
 		openDeleteModal,
 		setOpenDeleteModal,
+		filters,
+		setFilters,
 	}:ColumnInterface,
 ) => {
 	const handleCloseModal = () => {
@@ -91,7 +95,16 @@ export const column = (
 			Cell     : ({ row: { original } }) => getTableBodyCheckbox(original),
 		},
 		{
-			Header   : 'SID',
+			Header: () => (
+				<div className={styles.flex_sort}>
+					SID
+					<SortIcon
+						setFilters={setFilters}
+						sortingKey="JOBNumber"
+						filters={filters}
+					/>
+				</div>
+			),
 			accessor : 'sid',
 			id       : 'sid',
 			Cell     : ({ row: { original } }) => {
@@ -112,7 +125,16 @@ export const column = (
 			},
 		},
 		{
-			Header   : 'Transaction Date',
+			Header: () => (
+				<div className={styles.flex_sort}>
+					Transaction Date
+					<SortIcon
+						setFilters={setFilters}
+						sortingKey="TRANSACTIONDATE"
+						filters={filters}
+					/>
+				</div>
+			),
 			accessor : 'etd',
 			id       : 'etd',
 			Cell     : ({ row: { original } }) => {
@@ -121,7 +143,16 @@ export const column = (
 			},
 		},
 		{
-			Header   : 'Purchase Invoice Amount',
+			Header: () => (
+				<div className={styles.flex_sort}>
+					Purchase Invoice Amount
+					<SortIcon
+						setFilters={setFilters}
+						sortingKey="EXPENSE"
+						filters={filters}
+					/>
+				</div>
+			),
 			accessor : 'purchase_invoice_amount',
 			id       : 'purchase_invoice_amount',
 			Cell     : ({ row: { original } }) => {
@@ -163,7 +194,16 @@ export const column = (
 			},
 		},
 		{
-			Header   : 'Sales Invoice Amount',
+			Header: () => (
+				<div className={styles.flex_sort}>
+					Sales Invoice Amount
+					<SortIcon
+						setFilters={setFilters}
+						sortingKey="INCOME"
+						filters={filters}
+					/>
+				</div>
+			),
 			accessor : 'sales_invoice_amount',
 			id       : 'sales_invoice_amount',
 			Cell     : ({ row: { original } }) => {
@@ -181,7 +221,16 @@ export const column = (
 			},
 		},
 		{
-			Header   : 'Profit',
+			Header: () => (
+				<div className={styles.flex_sort}>
+					Profit
+					<SortIcon
+						setFilters={setFilters}
+						sortingKey="PROFIT"
+						filters={filters}
+					/>
+				</div>
+			),
 			accessor : 'profit',
 			id       : 'profit',
 			Cell     : ({ row: { original } }) => {

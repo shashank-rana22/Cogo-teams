@@ -32,7 +32,7 @@ function ShipmentView() {
 		query              : '',
 		profitType         : 'amount',
 		sortBy             : '',
-		sortType           : '',
+		sortType           : 'ASC',
 		page               : 1,
 		pageLimit          : 10,
 	});
@@ -53,6 +53,7 @@ function ShipmentView() {
 		editProfitHandler,
 		profitValue,
 		changeProfitHandler,
+		selectedDataLoading,
 		crossProfitHandler,
 		tickProfitHandler,
 		profit:profitData,
@@ -136,6 +137,7 @@ function ShipmentView() {
 					filters={filters}
 					bulkSection={bulkSection}
 					viewSelected={viewSelected}
+					selectedDataLoading={selectedDataLoading}
 					showBtn={showBtn}
 					setBulkSection={setBulkSection}
 					shipmentLoading={shipmentLoading}

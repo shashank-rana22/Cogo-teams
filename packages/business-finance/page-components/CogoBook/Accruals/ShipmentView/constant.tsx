@@ -174,7 +174,7 @@ export const accrualColumn = (
 				SID
 				<SortIcon
 					setFilters={setFilters}
-					sortingKey="jobNumber"
+					sortingKey="JOBNumber"
 					filters={filters}
 				/>
 			</div>
