@@ -9,53 +9,6 @@ import styles from './styles.module.css';
 
 const colorArray = ['hsla(232, 44%, 96%, 1)', 'hsla(234, 46%, 87%, 1)', 'hsla(234, 46%, 87%, 1)'];
 
-const radialChartData = (question_stats) => {
-	const data = [];
-	const questionAnswered = {
-		id   : 'Questions Answered',
-		data : [
-			{
-				x     : 'Attempted',
-				y     : 0,
-				color : 'hsla(41, 64%, 86%, 1)',
-			},
-			{
-				x     : 'Correct',
-				y     : question_stats.correct_questions,
-				color : 'hsla(79, 52%, 72%, 1)',
-			},
-			{
-				x     : 'Incorrect',
-				y     : question_stats.incorrect_questions,
-				color : 'hsla(5, 85%, 82%, 1)',
-			},
-		],
-	};
-	const totalAnswered = {
-		id   : 'Questions Attempted',
-		data : [
-			{
-				x     : 'Attempted',
-				y     : question_stats.question_attempted,
-				color : 'hsla(41, 64%, 86%, 1)',
-			},
-			{
-				x     : 'Correct',
-				y     : 0,
-				color : 'hsla(79, 52%, 72%, 1)',
-			},
-			{
-				x     : 'Incorrect',
-				y     : 0,
-				color : 'hsla(5, 85%, 82%, 1)',
-			},
-		],
-	};
-	data.push(totalAnswered);
-	data.push(questionAnswered);
-	return data;
-};
-
 function Summary({ summaryData = {}, loading = false }) {
 	const {
 		topics_covered = {},
@@ -68,19 +21,22 @@ function Summary({ summaryData = {}, loading = false }) {
 
 	const getDifficultyData = () => {
 		const data = [];
+
 		Object.keys(difficulty_wise_stats).forEach((key, index) => {
 			const obj = {
-				label : startCase(key.split('_')[0]),
-				// percentile : difficulty_wise_stats[key]?.toFixed(2),
-				color : colorArray[index],
+				label      : startCase(key.split('_')[0]),
+				percentile : difficulty_wise_stats[key]?.toFixed(2),
+				color      : colorArray[index],
 			};
 			data.push(obj);
 		});
+
 		return data;
 	};
 
 	const getTopicWiseData = () => {
 		const data = [];
+
 		Object.keys(topic_wise_percentile).forEach((key, index) => {
 			const obj = {
 				label      : startCase(key),
@@ -89,6 +45,7 @@ function Summary({ summaryData = {}, loading = false }) {
 			};
 			data.push(obj);
 		});
+
 		return data;
 	};
 
@@ -100,13 +57,11 @@ function Summary({ summaryData = {}, loading = false }) {
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.overview}>
 				<Overview topics_covered={topics_covered} time_taken={time_taken} />
 			</div>
 
 			<div className={styles.radial_charts}>
-
 				<div className={styles.percentile_chart_item}>
 					<div className={styles.percentile_heading}>Percentile</div>
 
@@ -118,30 +73,29 @@ function Summary({ summaryData = {}, loading = false }) {
 				</div>
 
 				<div className={styles.radial_chart_item}>
-					<QuestionWiseStats height="250px" width="250px" />
+					<QuestionWiseStats
+						height="250px"
+						width="250px"
+						question_stats={question_stats}
+					/>
 				</div>
-
 			</div>
 
 			<div className={styles.bar_charts}>
 				<div className={styles.bar_chart_item}>
-
 					<div className={styles.bar_chart_heading}>Topic Wise Percentile</div>
 
 					<div className={styles.bar_chart}>
 						<BarChart chart_data={getTopicWiseData()} />
 					</div>
-
 				</div>
 
 				<div className={styles.bar_chart_item}>
-
 					<div className={styles.bar_chart_heading}>Level of Difficulty</div>
 
 					<div className={styles.bar_chart}>
 						<BarChart chart_data={getDifficultyData()} />
 					</div>
-
 				</div>
 
 			</div>
