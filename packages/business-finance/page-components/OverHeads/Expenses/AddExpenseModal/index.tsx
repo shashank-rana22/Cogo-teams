@@ -1,6 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import React, { useEffect, useState } from 'react';
 
+import { SummaryInterface } from '../../commons/Interfaces';
 import useGetTradePartyDetails from '../hooks/useGetTradePartyDetails';
 import useGetVendor from '../hooks/useGetVendor';
 import useListCogoEntities from '../hooks/useListCogoEntities';
@@ -10,11 +11,19 @@ import Summary from './RecurringSummary';
 import styles from './styles.module.css';
 import UploadInvoice from './UploadInvoice';
 
+interface Props {
+	showExpenseModal?:boolean,
+	setShowExpenseModal?:(p:any)=>void,
+	setShowWarning?:(p:any)=>void,
+	rowData?:SummaryInterface,
+}
+
 function AddExpenseModal({
 	showExpenseModal,
 	setShowExpenseModal,
 	rowData,
-}) {
+	setShowWarning = () => {},
+}:Props) {
 	const [mailModal, setMailModal] = useState(false);
 	const [expenseData, setExpenseData] = useState({});
 	const [modalView, setModalView] = useState('upload');
@@ -53,7 +62,7 @@ function AddExpenseModal({
 		<Modal
 			size="xl"
 			show={showExpenseModal}
-			onClose={() => setShowExpenseModal(false)}
+			onClose={() => setShowWarning(true)}
 			placement="center"
 		>
 			<Modal.Header title="ADD EXPENSE" />

@@ -14,6 +14,7 @@ interface Props {
 	createExpenseType?: string,
 	getList?:(p:any)=>void,
 	getRecurringList?:(p:any)=>void,
+	setShowWarning?:(p:any)=>void,
 }
 
 function CreateExpenseModal({
@@ -22,6 +23,7 @@ function CreateExpenseModal({
 	createExpenseType = '',
 	getList = () => {},
 	getRecurringList = () => {},
+	setShowWarning = () => {},
 }:Props) {
 	const [mailModal, setMailModal] = useState(false);
 	const [recurringData, setRecurringData] = useState({
@@ -76,7 +78,7 @@ function CreateExpenseModal({
 		<Modal
 			size="xl"
 			show={showModal}
-			onClose={() => setShowModal(false)}
+			onClose={() => setShowWarning(true)}
 			placement="center"
 		>
 			<Modal.Header title={`CREATE EXPENSE ${headerTitle}`} />

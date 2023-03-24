@@ -1,0 +1,21 @@
+.container{
+    padding: 12px;
+    align-content: center;
+}
+.text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 600;
+}
+.buttons{
+    display: flex;
+    width: 160px;
+    justify-content: space-evenly;
+    margin: 24px 0px 0px 180px;
+}
+.warning{
+    color: red;
+    transform: rotate(180deg);
+    width: 100%;
+}

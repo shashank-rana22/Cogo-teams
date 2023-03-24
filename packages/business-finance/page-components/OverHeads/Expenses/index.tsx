@@ -18,6 +18,7 @@ import useSendEmail from './hooks/useSendEmail';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
 import { expenseRecurringConfig, expenseNonRecurringConfig } from './utils/config';
+import WarningModal from './WarningModal';
 
 interface ListInterface {
 	list?:{ length?:number }
@@ -48,6 +49,7 @@ function ExpenseComponent() {
 	const [recurringState, setRecurringState] = useState('recurring');
 	const [createExpenseType, setCreateExpenseType] = useState('');
 	const [showModal, setShowModal] = useState(false);
+	const [showWarning, setShowWarning] = useState(false);
 	const [showExpenseModal, setShowExpenseModal] = useState(false);
 	const [rowData, setRowData] = useState({});
 	const [expenseFilters, setExpenseFilters] = useState({
@@ -263,12 +265,12 @@ function ExpenseComponent() {
 								<Button
 									style={{
 										background : 'none',
-										color      : '#F68B21',
+										color      : mailLoading ? '#b0b0b0' : '#F68B21',
 										fontSize   : '11px',
 										padding    : '0px 4px',
 									}}
 									disabled={mailLoading}
-									onClick={() => { sendMail({ rowData: itemData }); }}
+									onClick={() => { sendMail({ rowData: itemData, recurringState }); }}
 								>
 									Re-send Email
 								</Button>
@@ -429,6 +431,7 @@ function ExpenseComponent() {
 					createExpenseType={createExpenseType}
 					getList={getList}
 					getRecurringList={getRecurringList}
+					setShowWarning={setShowWarning}
 				/>
 			)}
 
@@ -437,8 +440,18 @@ function ExpenseComponent() {
 					showExpenseModal={showExpenseModal}
 					setShowExpenseModal={setShowExpenseModal}
 					rowData={rowData}
+					setShowWarning={setShowWarning}
 				/>
 			) }
+
+			{showWarning && (
+				<WarningModal
+					setShowModal={setShowModal}
+					setShowExpenseModal={setShowExpenseModal}
+					showWarning={showWarning}
+					setShowWarning={setShowWarning}
+				/>
+			)}
 
 		</div>
 	);

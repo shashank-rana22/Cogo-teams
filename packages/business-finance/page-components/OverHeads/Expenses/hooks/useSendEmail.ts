@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -13,10 +14,17 @@ const useSendEmail = () => {
 		{ manual: true },
 	);
 
-	const sendMail = async ({ rowData }) => {
-		console.log('rowData-', rowData);
+	const sendMail = async ({ rowData, recurringState }) => {
+		const { sellerDetails, category, billDate:expenseDate } = rowData || {};
+		const { organizationName:vendorName } = sellerDetails || {};
 
-		const {} = rowData || {};
+		let payableAmount:number | string;
+		if (recurringState === 'recurring') {
+			payableAmount = rowData?.maxPayoutAllowed;
+		} else if (recurringState === 'nonRecurring') {
+			payableAmount = rowData?.grandTotal;
+		}
+
 		try {
 			await trigger({
 				data: {
@@ -24,14 +32,20 @@ const useSendEmail = () => {
 					userId        : profile?.user?.id,
 					approveLink   : 'sda.com',
 					rejectLink    : 'as.co',
-					vendorName    : 'Hello',
-					category      : 'RENT',
-					expenseDate   : '2022-09-28 07:57:47', // billdate
-					payableAmount : '123', // maxPayoutallowed(recurring record) && grandtotal(nonRecurr)
+					vendorName,
+					category,
+					expenseDate,
+					payableAmount, // maxPayoutallowed(for recurring record) and grandtotal(for nonRecurr)
 				},
 			});
 		} catch (err) {
 			console.log(err);
+		}
+
+		if (data?.message === 'OK') {
+			Toast.success('Email sent successfully');
+		} else {
+			Toast.error('Something went wrong');
 		}
 	};
 

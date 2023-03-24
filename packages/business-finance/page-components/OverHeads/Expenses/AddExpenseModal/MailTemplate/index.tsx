@@ -18,8 +18,8 @@ interface Data {
 
 interface Props {
 	expenseData?:Data,
-	setExpenseData?:any,
-	setShowModal?:boolean,
+	setExpenseData?:(p:any)=>void,
+	setShowModal?:(p:any)=>void,
 	getList?:(p:any)=>void,
 	rowData?:any,
 }

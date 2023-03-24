@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../commons/utils/formatDate';
+import { SummaryInterface } from '../../../commons/Interfaces';
 import { officeLocations } from '../../../utils/officeLocations';
 import useGetStakeholders from '../../hooks/useGetStakeholders';
 import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
@@ -37,23 +38,10 @@ interface Data {
 	currency?:string,
 }
 
-interface SummaryInterface {
-	category?:string,
-	subCategory?:string,
-	startDate?:Date,
-	endDate?:Date,
-	repeatFrequency?:string,
-	agreementNumber?:number | string,
-	businessName?:string,
-	entityCode?:number | string,
-	branchName?:string,
-	branchId?:number | string,
-}
-
 interface Props {
 	expenseData?: Data,
 	setExpenseData?:(p:any)=>void,
-	rowData?:SummaryInterface
+	rowData?:SummaryInterface,
 }
 
 function Summary({ expenseData, setExpenseData, rowData }:Props) {
@@ -206,7 +194,7 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 			<div>Confirm Expense Details</div>
 			<div className={styles.header} />
 			<div style={{ display: 'flex' }}>
-				{summaryDataFirst.map((item) => (
+				{summaryDataFirst?.map((item) => (
 					<div key={item.title} className={styles.section}>
 						<div className={styles.title}>{item.title}</div>
 						<div className={styles.value}>{item.value}</div>
@@ -214,7 +202,7 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 				))}
 			</div>
 			<div style={{ display: 'flex' }}>
-				{summaryDataSecond.map((item) => (
+				{summaryDataSecond?.map((item) => (
 					<div key={item.title} className={styles.section}>
 						<div className={styles.title}>{item.title}</div>
 						<div className={styles.value}><div>{item.value}</div></div>
@@ -222,7 +210,7 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 				))}
 			</div>
 			<div style={{ display: 'flex' }}>
-				{summaryDataThird.map((item) => (
+				{summaryDataThird?.map((item) => (
 					<div key={item.title} className={styles.section}>
 						<div className={styles.title}>{item.title}</div>
 						<div className={styles.value}>{item.value}</div>
