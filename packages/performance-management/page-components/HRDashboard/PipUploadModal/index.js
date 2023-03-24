@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function PipUloadModal({ setOpenUploadModal = () => {} }) {
+function PipUloadModal({ setModal = () => {} }) {
 	const [files, setFiles] = useState({});
 	const [type, setType] = useState('');
 
@@ -34,7 +34,7 @@ function PipUloadModal({ setOpenUploadModal = () => {} }) {
 
 			Toast.success('File sent for processing. Please check after some time...');
 			setFiles({});
-			setOpenUploadModal(false);
+			setModal('');
 		} catch (e) {
 			Toast.error(e.response?.data.error?.toString());
 		}
@@ -129,7 +129,7 @@ function PipUloadModal({ setOpenUploadModal = () => {} }) {
 
 						<Button
 							themeType="secondary"
-							onClick={() => setOpenUploadModal(false)}
+							onClick={() => setModal('')}
 							style={{ marginRight: '8px' }}
 						>
 							Close

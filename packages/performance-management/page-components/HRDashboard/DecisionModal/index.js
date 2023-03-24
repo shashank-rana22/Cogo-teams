@@ -1,5 +1,4 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
@@ -10,11 +9,11 @@ import styles from './styles.module.css';
 import Update from './UpdatePip';
 
 function DecisionModal({
-	item, setItem = () => { }, setDisableNext = () => {},
-	type, show, setShow = () => {},
+	item,
+	setItem = () => { },
+	setDisableNext = () => {},
+	type,
 }) {
-	const manager_name = 'Harshith';
-
 	// const {
 	// 	performanceStatsList = [],
 	// } = useGetFeedbackPerformanceStats({ userId, params });
@@ -33,7 +32,7 @@ function DecisionModal({
 				<div className={styles.lable}>
 					Reports to :
 					{' '}
-					<b>{manager_name}</b>
+					<b>{item?.manager_name}</b>
 				</div>
 			</div>
 
@@ -111,7 +110,11 @@ function DecisionModal({
 							setDisableNext={setDisableNext}
 						/>
 					) : (
-						<Update show={show} setShow={setShow} />
+						<Update
+							item={item}
+							setItem={setItem}
+							setDisableNext={setDisableNext}
+						/>
 					)}
 				</div>
 			</div>

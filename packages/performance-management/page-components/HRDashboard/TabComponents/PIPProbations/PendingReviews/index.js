@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function PendingReviews({
 	activeTab,
-	setItem = () => {}, setOpenLogModal = () => {},
+	setItem = () => {}, setModal = () => {},
 	setType = () => {},
 }) {
 	const [reviewModal, setReviewModal] = useState(false);
@@ -69,7 +69,7 @@ function PendingReviews({
 		source: 'hr_dashboard',
 		activeTab,
 		setType,
-		setOpenLogModal,
+		setModal,
 		setReviewModal,
 	});
 

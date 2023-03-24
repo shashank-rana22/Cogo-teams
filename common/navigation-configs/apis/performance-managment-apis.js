@@ -139,6 +139,11 @@ const performance_management = [
 		access_type  : 'private',
 		service_name : 'iris',
 	},
+	{
+		api          : 'get_iris_get_comments',
+		access_type  : 'private',
+		service_name : 'iris',
+	},
 ];
 
 export default performance_management;

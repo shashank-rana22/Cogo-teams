@@ -1,5 +1,4 @@
 import { Checkbox, Datepicker } from '@cogoport/components';
-import { toDate, getMonth } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -9,12 +8,6 @@ function CreatePip({ item = {}, setItem = () => {}, setDisableNext = () => {} })
 	const [startDate, setStartDate] = useState();
 	const [endDate, setEndDate] = useState();
 	const [startCheck, setstartCheck] = useState(false);
-	const [endCheck, setEndCheck] = useState(false);
-
-	const clickedEndDate = (val) => {
-		if (val !== getMonth(date) + 1 && endCheck) { setEndCheck(!endCheck); }
-		setEndDate(val);
-	};
 
 	const clickedStartDate = (val) => {
 		if (val !== date && startCheck) { setstartCheck(!startCheck); }
@@ -29,7 +22,7 @@ function CreatePip({ item = {}, setItem = () => {}, setDisableNext = () => {} })
 		});
 		if (startDate && endDate) {
 			setDisableNext(false);
-		}
+		} else { setDisableNext(true); }
 	}, [startDate, endDate]);
 
 	return (
@@ -66,10 +59,10 @@ function CreatePip({ item = {}, setItem = () => {}, setDisableNext = () => {} })
 					showTimeSelect
 					dateFormat="dd/MMM/yyyy"
 					name="endDate"
-					onChange={(val) => clickedEndDate(val)}
+					onChange={setEndDate}
 					value={endDate}
 				/>
-				<Checkbox
+				{/* <Checkbox
 					className={styles.checkbox}
 					label=" +1 Month"
 							// isPreviousDaysAllowed
@@ -83,7 +76,7 @@ function CreatePip({ item = {}, setItem = () => {}, setDisableNext = () => {} })
 						}
 						setEndCheck(!endCheck);
 					}}
-				/>
+				/> */}
 			</div>
 		</div>
 	);

@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function Dashboard({
 	activeTab, setItem = () => {}, setOpenLogModal = () => {},
-	setType = () => {}, setOpenUpdate = () => {},
+	setModal = () => {},
 }) {
 	// const dataList = {
 	// 	1: [{
@@ -53,7 +53,6 @@ function Dashboard({
 		setPage,
 	} = useListEmployees();
 
-	console.log('data::', employeeData);
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;
 
@@ -63,8 +62,7 @@ function Dashboard({
 		activeTab,
 		setItem,
 		source: 'hr_dashboard',
-		setOpenUpdate,
-		setType,
+		setModal,
 		setOpenLogModal,
 	});
 

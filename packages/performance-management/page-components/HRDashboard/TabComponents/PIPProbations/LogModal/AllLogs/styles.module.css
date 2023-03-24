@@ -1,6 +1,10 @@
 .main_cotainer{
 }
 
+.empty{
+    margin: 40px;
+}
+
 .sub_container{
     padding: 16px 0px;
 }
@@ -33,13 +37,6 @@
     }
 }
 
-.dates_container{
-    display: flex;
-    div{
-        margin-right: 32px;
-    }
-}
-
-.checkbox{
-    margin-left: -12px;
+.lable{
+    color: #828282;
 }

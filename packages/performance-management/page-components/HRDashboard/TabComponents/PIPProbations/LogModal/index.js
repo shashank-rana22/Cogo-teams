@@ -12,13 +12,13 @@ import DecisionModal from '../../../DecisionModal';
 import styles from './styles.module.css';
 
 function LogModal({
-	item = {}, setItem = () => {}, setType = () => {},
-	show, setShow = () => {}, setDisableNext = () => {},
+	item = {},
+	source = 'log_modal',
+	setItem = () => {},
+	setDisableNext = () => {},
 }) {
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
-
-	// const { employeeData = {}, loading = false, params, setPage } = useListReportees({ searchValue: query });
 	const {
 		params,
 		feedbackData,
@@ -29,17 +29,21 @@ function LogModal({
 	});
 	const { list: newTeamList = [], pagination_data = {} } = feedbackData;
 	const { total_count = '' } = pagination_data;
-	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
 
-	const columnsToShow = feedbackDataColumns.logModal;
-	const columns = useGetColumns({ columnsToShow, source: 'log_modal', setItem, setType });
+	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
+	useEffect(() => setItem({}), []);
+
+	const columnsToShow = [
+		...(source === 'log_modal' ? feedbackDataColumns.logModal : feedbackDataColumns.manualFeedbacks)];
+	const columns = useGetColumns({ columnsToShow, source, setItem });
 
 	return (
 		<div>
 			{isEmpty(item) ? (
 				<>
 					<div className={styles.name_input}>
-						<Input placeholder="Search by Name..." value={searchValue} onChange={setSearchValue} />
+						<div>Search by Name/COGO-ID...</div>
+						<Input placeholder="Type Here..." value={searchValue} onChange={setSearchValue} />
 					</div>
 
 					<UserTableData
@@ -56,12 +60,7 @@ function LogModal({
 				<DecisionModal
 					item={item}
 					setItem={setItem}
-					// type={type}
-					type="cerate"
-					// params={pipParams}
-					// setParams={setPipParams}
-					show={show}
-					setShow={setShow}
+					type="create"
 					setDisableNext={setDisableNext}
 				/>
 			)}

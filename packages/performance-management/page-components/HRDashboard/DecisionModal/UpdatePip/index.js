@@ -1,43 +1,35 @@
-import { RadioGroup, Textarea, Checkbox, Datepicker } from '@cogoport/components';
-import { format, getMonth } from '@cogoport/utils';
+import { RadioGroup, Textarea } from '@cogoport/components';
+import { isEmpty, format } from '@cogoport/utils';
+// import { format, getMonth } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function UpdatePip({ params, setParams = () => {} }) {
-	const { show } = params;
-	const date = new Date();
-	const [value, onChange] = useState('R1');
-	const [decision, setDecision] = useState('');
-	const [endDate, setEndDate] = useState();
-	const [endCheck, setEndCheck] = useState(false);
-
-	const setDisabledNext = (temp) => {
-		setParams({
-			...params,
-			disableNext: temp,
-		});
-	};
-
-	const clickedEndDate = (val) => {
-		if (val !== getMonth(date) + 1 && endCheck) { setEndCheck(!endCheck); }
-		setEndDate(val);
-	};
-
-	const status = {
-		name       : 'PIP Extended',
-		start_date : format(date, 'dd-MMM-yyyy'),
-		end_date   : format(date, 'dd-MMM-yyyy'),
-	};
+function UpdatePip({
+	item,
+	setDisableNext = () => {},
+	setItem = () => {},
+}) {
+	const [comments, setComments] = useState('');
+	const [value, onChange] = useState('extend');
 
 	const radioList = [
-		{ name: 'R1', value: 'R1', label: 'Extend' },
-		{ name: 'R2', value: 'R2', label: 'Confirm' },
+		{ name: 'R1', value: 'extend', label: 'Extend' },
+		{ name: 'R2', value: 'confirm', label: 'Confirm' },
 	];
 
 	useEffect(() => {
-		setDisabledNext(!endDate);
-	}, [endDate]);
+		if (value === 'confirm' || !isEmpty(comments)) {
+			setDisableNext(false);
+		} else {
+			setDisableNext(true);
+		}
+		setItem({
+			...item,
+			comments       : comments || undefined,
+			final_decision : value || undefined,
+		});
+	}, [comments, value]);
 
 	return (
 		<div className={styles.update_container}>
@@ -45,28 +37,25 @@ function UpdatePip({ params, setParams = () => {} }) {
 				<div className={styles.update_dates}>
 					<div className={styles.lable}>Start Date</div>
 
-					<div style={{ fontWeight: 'bold' }}>{status?.start_date}</div>
+					<div style={{ fontWeight: 'bold' }}>{format(item?.start_date, 'dd-MMM-yyyy')}</div>
 				</div>
 
 				<div className={styles.update_dates}>
 					<div className={styles.lable}>End Date</div>
 
-					<div style={{ fontWeight: 'bold' }}>{status?.end_date}</div>
+					<div style={{ fontWeight: 'bold' }}>{format(item?.end_date, 'dd-MMM-yyyy')}</div>
 				</div>
 			</div>
+			<RadioGroup
+				className={styles.radio_btns}
+				options={radioList}
+				value={value}
+				onChange={onChange}
+			/>
 
-			{!show && (
-				<RadioGroup
-					className={styles.radio_btns}
-					options={radioList}
-					value={value}
-					onChange={onChange}
-				/>
-			)}
-
-			{(show && value === 'R1') && (
+			{(value === 'extend') && (
 				<div className={styles.dates}>
-					<div className={styles.lable}>Extend End date</div>
+					{/* <div className={styles.lable}>Extend End date</div>
 					<Datepicker
 						placeholder="Enter Date"
 						showTimeSelect
@@ -88,16 +77,18 @@ function UpdatePip({ params, setParams = () => {} }) {
 								setEndDate(date.setMonth(getMonth(date) + 1));
 							}
 						}}
+					/> */}
+					<div className={styles.lable}>Reason for Extention</div>
+
+					<Textarea
+						size="lg"
+						value={comments}
+						onChange={(val) => setComments(val)}
+						placeholder="Type here ..."
 					/>
-
-					<div>
-						<div className={styles.lable}>Reason for Extention</div>
-
-						<Textarea size="lg" placeholder="Type here ..." />
-					</div>
 				</div>
 			)}
-			{show && value === 'R2' && (
+			{/* {show && value === 'R2' && (
 				<Checkbox
 					label="Check this box to confirm that Ankur Verma has cleared their probation."
 					value={decision}
@@ -105,7 +96,7 @@ function UpdatePip({ params, setParams = () => {} }) {
 						if (decision) { setDecision('confirm'); } else { setDecision(''); }
 					}}
 				/>
-			)}
+			)} */}
 		</div>
 	);
 }

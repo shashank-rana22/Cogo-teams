@@ -1,8 +1,9 @@
-import { Textarea, Checkbox } from '@cogoport/components';
+import { CheckboxGroup, Textarea } from '@cogoport/components';
+import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function NewLog({ checkList = [], comments, setCheckList = () => {}, setComments = () => {} }) {
+function NewLog({ item, setItem = () => {}, setDisableNext = () => {} }) {
 	// const chipList = [{
 	// 	key      : 'Email',
 	// 	children : 'Email',
@@ -19,12 +20,34 @@ function NewLog({ checkList = [], comments, setCheckList = () => {}, setComments
 	// 	key      : 'Manager',
 	// 	children : 'Manager',
 	// }];
+	// const { comments = '' } = logItem;
+
+	const [comments, setComments] = useState('');
+	const [value, onChange] = useState();
+	const options = [
+		{ name: 'R1', value: 'Email sent to Employee', label: 'Email sent to Employee' },
+		{ name: 'R2', value: 'Email sent to Manager', label: 'Email sent to Manager' },
+		{ name: 'R3', value: 'Final discusion held', label: 'Final discusion held' },
+	];
+
+	useEffect(() => {
+		if (value || comments) {
+			setDisableNext(false);
+		} else {
+			setDisableNext(true);
+		}
+		setItem({
+			...item,
+			comments : comments || undefined,
+			tags     : value || undefined,
+		});
+	}, [comments, value]);
 
 	return (
 		<div>
-			<div className={styles.lable}>Select Tags</div>
-
-			<div className={styles.lable}>Add Comment</div>
+			<div className={styles.lable}>
+				Add Comment
+			</div>
 
 			<Textarea
 				style={{ height: '120px' }}
@@ -34,23 +57,12 @@ function NewLog({ checkList = [], comments, setCheckList = () => {}, setComments
 				value={comments}
 				onChange={setComments}
 			/>
-			<Checkbox
+
+			<CheckboxGroup
 				className={styles.checkbox}
-				label="Email sent to Employee"
-				checked={checkList[0]}
-				onChange={() => setCheckList(!checkList[0])}
-			/>
-			<Checkbox
-				className={styles.checkbox}
-				label="Email sent to Manager"
-				checked={checkList[1]}
-				onChange={() => setCheckList(!checkList[1])}
-			/>
-			<Checkbox
-				className={styles.checkbox}
-				label="Final discussion held"
-				checked={checkList[2]}
-				onChange={() => setCheckList(!checkList[2])}
+				options={options}
+				value={value}
+				onChange={onChange}
 			/>
 		</div>
 	);

@@ -25,9 +25,14 @@ const updateColorMapping = {
 };
 
 const useGetColumns = ({
-	getTeamFeedbackList = () => {}, source = 'hr_dashboard', columnsToShow = [],
-	setRefetchReportees = () => {}, setItem = () => {}, setOpenUpdate = () => {},
-	setType = () => {}, setOpenLogModal = () => {}, activeTab, setReviewModal = () => {},
+	getTeamFeedbackList = () => {},
+	source = 'hr_dashboard',
+	columnsToShow = [],
+	setRefetchReportees = () => {},
+	setItem = () => {},
+	setModal = () => {},
+	activeTab,
+	setReviewModal = () => {},
 }) => {
 	const router = useRouter();
 	const handleClick = (user_id) => {
@@ -50,17 +55,12 @@ const useGetColumns = ({
 		return 'average';
 	};
 
-	const addLog = (item, flag) => {
+	const addLog = (item) => {
 		setItem(item);
-		if (source === 'log_modal') {
-			setType('create');
-		}
-		if (flag) {
-			console.log('clicked update');
-			setOpenUpdate(true);
-			setType('update');
+		if (item?.log_type === 'probation') {
+			setModal('update');
 		} else {
-			setOpenLogModal(true);
+			setModal('logs');
 		}
 	};
 
@@ -291,22 +291,15 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>Action</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				{(item?.log_type === 'probation' || activeTab === 'uploaded_files') ? (
-					<Button
-						themeType={activeTab === 'uploaded_files' ? ('secondary') : ('primary')}
-						onClick={() => addLog(item, true)}
-						disabled={(item?.employee_status === 'probation' && source === 'manager_dashboard')}
-					>
-						{activeTab !== 'uploaded_files' ? ('Update') : ('Download')}
-					</Button>
-				) : (
-					<Button
-						themeType="secondary"
-						onClick={() => addLog(item, false)}
-					>
-						Logs
-					</Button>
-				)}
+				<Button
+					themeType={
+						(item?.log_type === 'pip') ? ('secondary') : ('primary')
+					}
+					onClick={() => addLog(item)}
+					disabled={(item?.employee_status === 'probation' && source === 'manager_dashboard')}
+				>
+					{item?.log_type === 'probation' ? 'Update' : 'Log'}
+				</Button>
 			</div>
 		),
 		id  : 'action',

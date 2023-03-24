@@ -6,9 +6,11 @@ import { useState } from 'react';
 import Filters from '../../../../common/Filters';
 import PerformanceChart from '../../../../common/PerformanceChart';
 import useListManagers from '../../../../hooks/useListManagers';
+import FeedbackManagement from '../../../ManagerDashboard/FeedbackManagement';
 import NotifyModal from '../../NotifyModal';
 import TeamMembersList from '../../TeamMembersList';
 import UploadModalBody from '../../UploadModal';
+import LogModal from '../PIPProbations/LogModal';
 
 import styles from './styles.module.css';
 
@@ -16,6 +18,7 @@ function KPIFeedbacks() {
 	const router = useRouter();
 
 	const [openUploadModal, setOpenUploadModal] = useState(false);
+	const [manualFeedbackModal, setManualFeedbackModal] = useState(false);
 	const [notifyModal, setNotifyModal] = useState(false);
 
 	const { params, setParams, feedbackData, loading = false, setPage } = useListManagers({});
@@ -41,7 +44,15 @@ function KPIFeedbacks() {
 
 				<div className={styles.button_container}>
 					<Button
-						size="lg"
+						size="md"
+						themeType="secondary"
+						style={{ marginRight: '16px' }}
+						onClick={() => setManualFeedbackModal(true)}
+					>
+						Manual Feedback
+					</Button>
+					<Button
+						size="md"
 						themeType="tertiary"
 						style={{ marginRight: '16px' }}
 						onClick={() => setNotifyModal(true)}
@@ -50,7 +61,7 @@ function KPIFeedbacks() {
 						Send Notification
 					</Button>
 					<Button
-						size="lg"
+						size="md"
 						themeType="tertiary"
 						onClick={() => setOpenUploadModal(true)}
 					>
@@ -122,6 +133,32 @@ function KPIFeedbacks() {
 								<NotifyModal setNotifyModal={setNotifyModal} />
 							</Modal.Body>
 						</div>
+					</Modal>
+				)}
+
+				{manualFeedbackModal
+				&& (
+					<Modal
+						show={manualFeedbackModal}
+						onClose={() => setManualFeedbackModal(false)}
+						onClickOutside={() => setManualFeedbackModal(false)}
+						size="xl"
+					>
+						<Modal.Header title="Manual Feedback" />
+						<Modal.Body>
+							<LogModal
+								source="manual_feedback"
+							/>
+						</Modal.Body>
+						<Modal.Footer>
+							<Button
+								size="md"
+								themeType="secondary"
+								onClick={() => setManualFeedbackModal(false)}
+							>
+								Close
+							</Button>
+						</Modal.Footer>
 					</Modal>
 				)}
 			</div>
