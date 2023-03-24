@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -42,7 +43,7 @@ const useGetShipmentChatList = ({ status }) => {
 					total_page : res?.data?.total,
 				}));
 			} catch (err) {
-				console.log(err);
+				Toast.error(err);
 			}
 		})();
 	}, [trigger, status, user_id, page, q]);
@@ -54,7 +55,7 @@ const useGetShipmentChatList = ({ status }) => {
 	return {
 		filters,
 		setFilters,
-		ListData   : list?.data,
+		listData   : list?.data,
 		loading    : apiLoading,
 		page,
 		total_page : list?.total_page,
