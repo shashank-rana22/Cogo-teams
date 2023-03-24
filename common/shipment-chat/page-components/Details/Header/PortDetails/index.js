@@ -75,7 +75,11 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 
 	return (
 		<div className={styles.container}>
-			{isShow ? <div className={styles.icons_and_service}>{serviceIcon}</div> : null}
+			{isShow ? (
+				<div className={styles.icons_and_service}>
+					{serviceIcon}
+				</div>
+			) : null}
 
 			{renderLocation()}
 		</div>
