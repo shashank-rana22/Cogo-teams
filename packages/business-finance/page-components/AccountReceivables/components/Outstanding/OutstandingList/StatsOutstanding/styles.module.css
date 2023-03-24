@@ -1,29 +1,27 @@
 .invoices_wrapper {
 	display: flex;
-	justify-content: space-evenly;
+	flex-direction: column;
 	width: 100%;
+	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
+	
 }
 
 .invoices_card {
 	display: flex;
 	align-items: center;
 	padding: 12px 10px 10px;
-	margin: 12px 10px 14px 0;
+	margin-top: 8px;
 	background-color: #f9fbfe;
 	border-radius: 8px;
 	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
-
-	/* &.align-space {
-		padding: 12px 10px 10px;
-		margin: 0 10px 8px 0;
-	} */
+	width: 100%;
 }
 
 .left_container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	min-width: 25%;
+	min-width: 14%;
 	padding: 0 8px 10px 12px;
 }
 
@@ -60,9 +58,8 @@
 
 .right_container {
 	display: flex;
-	flex-wrap: wrap;
-	width: 84%;
-	padding: 8px;
+	width: 100%;
+	justify-content: space-around;
 }
 
 .flex {
@@ -87,8 +84,6 @@
 }
 
 .due_ageing {
-	width: 25%;
-	margin-bottom: 8px;
 }
 
 .flex_column {
@@ -98,8 +93,8 @@
 
 .outstanding_card {
 	display: flex;
-	width: 25%;
-	margin: 12px 5px 14px 4px;
+	width: 14%;
+	margin: 8px 4px 0px 12px;
 	border-radius: 8px;
 	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
 }

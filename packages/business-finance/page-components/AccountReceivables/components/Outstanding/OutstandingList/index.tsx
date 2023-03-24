@@ -127,7 +127,7 @@ function OutstandingList({ item }) {
 				<div className={styles.org_name_conatiner}>
 					<div className={styles.sub_org_name_conatiner}>
 						<div style={{ display: 'flex' }}>
-							<div className={styles.styledName}>
+							<div className={styles.styled_name}>
 								{businessName}
 							</div>
 							{' '}

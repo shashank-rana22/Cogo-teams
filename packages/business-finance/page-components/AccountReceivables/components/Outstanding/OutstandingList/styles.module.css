@@ -12,6 +12,7 @@
 	margin-bottom: 12px;
 	background-color: white;
 	border-radius: 12px;
+	box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .custom_tag {
@@ -127,4 +128,8 @@
 	justify-content: end;
 	width: 75%;
 	margin-top: -22px;
+}
+
+.org_list{
+	margin-bottom: 16px;
 }
