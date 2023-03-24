@@ -1,7 +1,7 @@
 import { Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useShipmentView from '../../hooks/useShipmentView';
@@ -58,20 +58,6 @@ function ShipmentView() {
 		profit:profitData,
 	} =	 useShipmentView({ filters, checkedRows, setBulkSection, bulkAction, setCheckedRows });
 
-	const listControls = useMemo(() => accrualColumn(
-		getTableBodyCheckbox,
-		getTableHeaderCheckbox,
-		editProfitHandler,
-		changeProfitHandler,
-		crossProfitHandler,
-		tickProfitHandler,
-		profitValue,
-		profitData,
-		filters,
-		setFilters,
-	), [changeProfitHandler, crossProfitHandler, editProfitHandler,
-		getTableBodyCheckbox, getTableHeaderCheckbox, profitData, profitValue, tickProfitHandler, filters]);
-
 	const {
 		totalRecords = 0,
 		list = [],
@@ -124,7 +110,18 @@ function ShipmentView() {
 					total={totalRecords}
 					pageSize={10}
 					data={list}
-					columns={listControls}
+					columns={accrualColumn(
+						getTableBodyCheckbox,
+						getTableHeaderCheckbox,
+						editProfitHandler,
+						changeProfitHandler,
+						crossProfitHandler,
+						tickProfitHandler,
+						profitValue,
+						profitData,
+						filters,
+						setFilters,
+					)}
 					loading={shipmentLoading}
 					setFilters={setFilters}
 					filters={filters}
