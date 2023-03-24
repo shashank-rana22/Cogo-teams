@@ -2,8 +2,8 @@ import { Pagination } from "@cogoport/components";
 import Card from "../Card";
 import styles from './styles.module.css';
 
-export default function List({ data, loading, filters, setFilters }){
-
+export default function List({ data, loading, stateProps }){
+    const { filters, setFilters } = stateProps;
     const {list, total} = data;
 
     if(loading){

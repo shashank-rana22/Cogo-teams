@@ -13,6 +13,7 @@ import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import shipmentFclFreight from './config/shipment-fcl-freight';
+import bookingDesk from './config/booking-desk';
 import supplyDashboard from './config/supply-dashboards';
 
 const routeConfig = {
@@ -33,6 +34,7 @@ const routeConfig = {
 	...kamMonitoring,
 	...performanceManagement,
 	...shipmentFclFreight,
+	...bookingDesk,
 };
 
 export default routeConfig;

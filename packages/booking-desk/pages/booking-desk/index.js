@@ -1,1 +1,8 @@
-export { default } from '@cogoport/booking-desk/page-components/BookingDesk';
+// export { default } from "../../page-components";
+import BookingDeskk from "../../page-components";
+
+const BookingDesk = () => <div>Booking desk
+    <BookingDeskk />
+</div>
+
+export default BookingDesk;

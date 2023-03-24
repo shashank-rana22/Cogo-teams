@@ -1,7 +1,7 @@
 import { Toast } from "@cogoport/components";
 import { useRequest } from "@cogoport/request";
 import { useState, useEffect, useCallback } from 'react';
-import tabSpecificPayload from '../configs/tabSpecificPayload.json';
+import tabSpecificPayload from '../../BookingDesk/fcl/configs/tabSpecificPayload.json';
 
 const nullData = { list: [], total: 0, total_page: 0 };
 
@@ -15,7 +15,8 @@ const shipmentStates = {
 }
 shipmentStates.completed = [...shipmentStates.in_progress, 'completed'];
   
-export default function useListShipments({ filters, activeTab }){
+export default function useListShipments({ stateProps }){
+	const { filters, activeTab } = stateProps;
     const [data, setData] = useState(nullData);
 
     const [{loading}, trigger] = useRequest({
@@ -24,31 +25,31 @@ export default function useListShipments({ filters, activeTab }){
     }, { manual: true });
 
     const listShipments = useCallback(async () => {
-      const {page, ...restFilters } = filters;
+		const {page, ...restFilters } = filters;
 
         try {
-          const res = await trigger({
-            params: {
-				filters: {
-					state: shipmentStates[activeTab] || shipmentStates.in_progress,
-					...tabSpecificPayload[activeTab],
-					...restFilters,
-				},
-				page,
-				additional_methods: ['pagination'],
-				sort_by: 'created_at',
-				sort_type: 'desc',
-            }
-          });
+			const res = await trigger({
+					params: {
+						filters: {
+							state: shipmentStates[activeTab] || shipmentStates.in_progress,
+							...tabSpecificPayload[activeTab],
+							...restFilters,
+						},
+						page,
+						additional_methods: ['pagination'],
+						sort_by: 'created_at',
+						sort_type: 'desc',
+					}
+			});
 
-          if(res.status === 200){ 
-				setData(res.data || {});
-          }
+			if(res.status === 200){ 
+					setData(res.data || {});
+			}
         } catch (e) {
 			Toast.error(e?.response?.data?.message || e.message || 'Something went wrong !!');
 			setData(nullData);
         }
-      }, [filters, activeTab])
+	}, [filters, activeTab])
     
 
     useEffect(() => {

@@ -1,5 +1,5 @@
 import { Select, TabPanel, Tabs, Toggle } from "@cogoport/components";
-import tabs from '../../configs/tabs.json';
+import tabs from '../../../BookingDesk/fcl/configs/tabs.json';
 
 import styles from './styles.module.css';
 import ScopeAndFilter from "../ScopeAndFilter";
@@ -10,7 +10,8 @@ const importExportParams = {
     options: [{label: 'Export', value:'export'},{label:'Import', value:'import'}],
 }
 
-export default function TabsAndFilters({activeTab, setActiveTab, filters, setFilters}){
+export default function TabsAndFilters({ stateProps }){
+    const { activeTab, setActiveTab, filters, setFilters } = stateProps;
     importExportParams.onChange = (val) => {
         if(val && val !== filters.trade_type){
             setFilters({...filters, trade_type: val})
