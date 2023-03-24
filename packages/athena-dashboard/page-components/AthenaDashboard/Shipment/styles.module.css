@@ -171,6 +171,7 @@
     width: 348px;
     margin-top: 5px;
     margin-left: 3px;
+    float: left;
 }
 .leftpadding{
     padding-left: 15px;
@@ -181,11 +182,13 @@
     flex-direction: row-reverse;
     margin-top: 10px;
     background-color: white;
+    width: 100%;
 }
 .tableandtabs{
     display: block;
     margin-left: 30px;
     overflow-x: auto;
+    float: left;
 }
 .tablower{
   margin: 20px;

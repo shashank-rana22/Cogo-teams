@@ -26,7 +26,7 @@
     margin-top: 20px;
 }
 .rectdiv{
-    height: 208px;
+    min-height: 208px;
     background-color: #f9f9f9;
     text-align: center;
     display: flex;
@@ -84,6 +84,7 @@
 .displayselectedcode{
     display: flex;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 .individual{
     margin-right: 15px;
@@ -92,6 +93,7 @@
     background-color: #E0E0E0;
     border-radius: 6px;
     text-align: center;
+    margin-top: 4px;
 }
 .individualtext{
     margin-top: 10px;

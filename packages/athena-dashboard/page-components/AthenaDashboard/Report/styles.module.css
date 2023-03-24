@@ -68,4 +68,9 @@
     font-weight: bold;
     margin-top: 50px;
 }
+.loader{
+    width: 18px;
+	height: 18px;
+	margin: 0;
+}
 

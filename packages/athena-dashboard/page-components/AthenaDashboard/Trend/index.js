@@ -175,6 +175,7 @@ function Trends() {
 						handleClick();
 						reRender();
 					}}
+					disabled={loading}
 				>
 					{' '}
 					Search

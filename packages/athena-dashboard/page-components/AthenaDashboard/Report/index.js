@@ -1,5 +1,5 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
-import { Table } from '@cogoport/components';
+import { Loader, Table } from '@cogoport/components';
 import { useAthenaRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -163,7 +163,7 @@ function Report() {
 				},
 			]}
 			/>
-            </div>,
+		</div>,
 		january   : (item.January !== undefined) ? item.January.toLocaleString('en-IN') : 0,
 		february  : (item.February !== undefined) ? item.February.toLocaleString('en-IN') : 0,
 		march     : (item.March !== undefined) ? item.March.toLocaleString('en-IN') : 0,
@@ -183,100 +183,101 @@ function Report() {
 		hscode      : item.hs_code,
 		description : item.category,
 	}));
-
 	return (
-		<div>
-			{/* {arr.map((Item) => (
+		(!responseData) ? <Loader className={styles.loader} />
+			: (
+				<div>
+					{/* {arr.map((Item) => (
 				<div>
 					<h1>{Item}</h1>
 				</div>
 			))} */}
-			{/* {callAPI()} */}
-			<div className={styles.toptext}>
-				Trend Report
-			</div>
-			<div>
-				{hsdesc
+					{/* {callAPI()} */}
+					<div className={styles.toptext}>
+						Trend Report
+					</div>
+					<div>
+						{hsdesc
 				&& <Table className={styles.table} columns={columns} data={data} />}
-			</div>
-			<div>
-				<div className={styles.trendingovertime}>
-					Trending Over Time:
-				</div>
-				<div style={{ height: '400px', boxShadow: '10px 5px 5px rgb(239, 233, 233)' }}>
-					<ResponsiveLine
-						data={linedata}
-						margin={{ top: 50, right: 110, bottom: 50, left: 100 }}
-						xScale={{ type: 'point' }}
-						yScale={{
-							type    : 'linear',
-							min     : 'auto',
-							max     : 'auto',
-							stacked : true,
-							reverse : false,
-						}}
-						yFormat=" >-.2f"
-						axisTop={null}
-						axisRight={null}
-						axisBottom={{
-							orient         : 'bottom',
-							tickSize       : 5,
-							tickPadding    : 5,
-							tickRotation   : 0,
-							legend         : 'Month',
-							legendOffset   : 36,
-							legendPosition : 'middle',
-						}}
-						axisLeft={{
-							orient         : 'left',
-							tickSize       : 5,
-							tickPadding    : 5,
-							tickRotation   : 0,
-							legend         : 'INR',
-							legendOffset   : -80,
-							legendPosition : 'middle',
-						}}
-						pointSize={10}
-						pointColor={{ theme: 'background' }}
-						pointBorderWidth={2}
-						pointBorderColor={{ from: 'serieColor' }}
-						pointLabelYOffset={-12}
-						useMesh
-						legends={[
-							{
-								anchor            : 'bottom-right',
-								direction         : 'column',
-								justify           : false,
-								translateX        : 100,
-								translateY        : 0,
-								itemsSpacing      : 0,
-								itemDirection     : 'left-to-right',
-								itemWidth         : 80,
-								itemHeight        : 20,
-								itemOpacity       : 0.75,
-								symbolSize        : 12,
-								symbolShape       : 'circle',
-								symbolBorderColor : 'rgba(0, 0, 0, .5)',
-								effects           : [
+					</div>
+					<div>
+						<div className={styles.trendingovertime}>
+							Trending Over Time:
+						</div>
+						<div style={{ height: '400px', boxShadow: '10px 5px 5px rgb(239, 233, 233)' }}>
+							<ResponsiveLine
+								data={linedata}
+								margin={{ top: 50, right: 110, bottom: 50, left: 100 }}
+								xScale={{ type: 'point' }}
+								yScale={{
+									type    : 'linear',
+									min     : 'auto',
+									max     : 'auto',
+									stacked : true,
+									reverse : false,
+								}}
+								yFormat=" >-.2f"
+								axisTop={null}
+								axisRight={null}
+								axisBottom={{
+									orient         : 'bottom',
+									tickSize       : 5,
+									tickPadding    : 5,
+									tickRotation   : 0,
+									legend         : 'Month',
+									legendOffset   : 36,
+									legendPosition : 'middle',
+								}}
+								axisLeft={{
+									orient         : 'left',
+									tickSize       : 5,
+									tickPadding    : 5,
+									tickRotation   : 0,
+									legend         : 'INR',
+									legendOffset   : -80,
+									legendPosition : 'middle',
+								}}
+								pointSize={10}
+								pointColor={{ theme: 'background' }}
+								pointBorderWidth={2}
+								pointBorderColor={{ from: 'serieColor' }}
+								pointLabelYOffset={-12}
+								useMesh
+								legends={[
 									{
-										on    : 'hover',
-										style : {
-											itemBackground : 'rgba(0, 0, 0, .03)',
-											itemOpacity    : 1,
-										},
+										anchor            : 'bottom-right',
+										direction         : 'column',
+										justify           : false,
+										translateX        : 100,
+										translateY        : 0,
+										itemsSpacing      : 0,
+										itemDirection     : 'left-to-right',
+										itemWidth         : 80,
+										itemHeight        : 20,
+										itemOpacity       : 0.75,
+										symbolSize        : 12,
+										symbolShape       : 'circle',
+										symbolBorderColor : 'rgba(0, 0, 0, .5)',
+										effects           : [
+											{
+												on    : 'hover',
+												style : {
+													itemBackground : 'rgba(0, 0, 0, .03)',
+													itemOpacity    : 1,
+												},
+											},
+										],
 									},
-								],
-							},
-						]}
-					/>
-				</div>
-			</div>
-			<div className={styles.valueofgoods}>
-				Value of Goods (INR) leaving India last year:
-			</div>
-			<div className={styles.secondtrend}>
-				<div className={styles.wholecontainer}>
-					{
+								]}
+							/>
+						</div>
+					</div>
+					<div className={styles.valueofgoods}>
+						{general.query.shipment_type === 'import' ? 'Value of Goods (INR) entering India last year:' : 'Value of Goods (INR) leaving India last year'}
+					</div>
+					<div className={styles.secondtrend}>
+						<div className={styles.wholecontainer}>
+							{
 				(optn || []).map((Item) => (
 					<div className={styles.leftcontainer}>
 						<div>{Item.country}</div>
@@ -294,112 +295,112 @@ function Report() {
 					</div>
 				))
 				}
-				</div>
+						</div>
 
-				<div style={{ height: '500px', width: '80%' }}>
-					<ResponsiveChoropleth
-						data={mapdata}
-						features={countries.features}
-						margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-						colors="nivo"
-						domain={[0, 100000000]}
-						unknownColor="white"
-						label="properties.name"
-						valueFormat=".2s"
-						projectionTranslation={[0.5, 0.5]}
-						projectionRotation={[0, 0, 0]}
-						enableGraticule
-						graticuleLineColor="#dddddd"
-						borderWidth={0.5}
-						borderColor="#152538"
-						defs={[
-							{
-								id         : 'dots',
-								type       : 'patternDots',
-								background : 'inherit',
-								color      : '#38bcb2',
-								size       : 4,
-								padding    : 1,
-								stagger    : true,
-							},
-							{
-								id         : 'lines',
-								type       : 'patternLines',
-								background : 'inherit',
-								color      : '#eed312',
-								rotation   : -45,
-								lineWidth  : 6,
-								spacing    : 10,
-							},
-							{
-								id     : 'gradient',
-								type   : 'linearGradient',
-								colors : [
+						<div style={{ height: '500px', width: '80%' }}>
+							<ResponsiveChoropleth
+								data={mapdata}
+								features={countries.features}
+								margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+								colors="nivo"
+								domain={[0, 100000000]}
+								unknownColor="white"
+								label="properties.name"
+								valueFormat=".2s"
+								projectionTranslation={[0.5, 0.5]}
+								projectionRotation={[0, 0, 0]}
+								enableGraticule
+								graticuleLineColor="#dddddd"
+								borderWidth={0.5}
+								borderColor="#152538"
+								defs={[
 									{
-										offset : 0,
-										color  : '#000',
+										id         : 'dots',
+										type       : 'patternDots',
+										background : 'inherit',
+										color      : '#38bcb2',
+										size       : 4,
+										padding    : 1,
+										stagger    : true,
 									},
 									{
-										offset : 100,
-										color  : 'inherit',
+										id         : 'lines',
+										type       : 'patternLines',
+										background : 'inherit',
+										color      : '#eed312',
+										rotation   : -45,
+										lineWidth  : 6,
+										spacing    : 10,
 									},
-								],
-							},
-						]}
-						fill={[
-							{
-								match: {
-									id: 'CA',
-								},
-								id: 'dots',
-							},
-							{
-								match: {
-									id: 'CN',
-								},
-								id: 'lines',
-							},
-							{
-								match: {
-									id: 'AQ',
-								},
-								id: 'gradient',
-							},
-						]}
-						legends={[
-							{
-								anchor        : 'bottom-left',
-								direction     : 'column',
-								justify       : true,
-								translateX    : 20,
-								translateY    : -100,
-								itemsSpacing  : 0,
-								itemWidth     : 94,
-								itemHeight    : 18,
-								itemDirection : 'left-to-right',
-								itemTextColor : '#444444',
-								itemOpacity   : 0.85,
-								symbolSize    : 18,
-								effects       : [
 									{
-										on    : 'hover',
-										style : {
-											itemTextColor : '#000000',
-											itemOpacity   : 1,
+										id     : 'gradient',
+										type   : 'linearGradient',
+										colors : [
+											{
+												offset : 0,
+												color  : '#000',
+											},
+											{
+												offset : 100,
+												color  : 'inherit',
+											},
+										],
+									},
+								]}
+								fill={[
+									{
+										match: {
+											id: 'CA',
 										},
+										id: 'dots',
 									},
-								],
-							},
-						]}
-					/>
-				</div>
-			</div>
-			<div className={styles.valueofgoods} style={{ 'margin-top': '50px' }}>
-				Change in market share last year:
-			</div>
-			<div className={styles.secondtrend}>
-				<div className={styles.wholecontainer}>
-					{
+									{
+										match: {
+											id: 'CN',
+										},
+										id: 'lines',
+									},
+									{
+										match: {
+											id: 'AQ',
+										},
+										id: 'gradient',
+									},
+								]}
+								legends={[
+									{
+										anchor        : 'bottom-left',
+										direction     : 'column',
+										justify       : true,
+										translateX    : 20,
+										translateY    : -100,
+										itemsSpacing  : 0,
+										itemWidth     : 94,
+										itemHeight    : 18,
+										itemDirection : 'left-to-right',
+										itemTextColor : '#444444',
+										itemOpacity   : 0.85,
+										symbolSize    : 18,
+										effects       : [
+											{
+												on    : 'hover',
+												style : {
+													itemTextColor : '#000000',
+													itemOpacity   : 1,
+												},
+											},
+										],
+									},
+								]}
+							/>
+						</div>
+					</div>
+					<div className={styles.valueofgoods} style={{ 'margin-top': '50px' }}>
+						Change in market share last year:
+					</div>
+					<div className={styles.secondtrend}>
+						<div className={styles.wholecontainer}>
+							{
 				(optn2 || []).map((Item) => (
 					<div className={styles.leftcontainer}>
 						<div>{Item.country}</div>
@@ -415,113 +416,114 @@ function Report() {
 					</div>
 				))
 				}
-				</div>
+						</div>
 
-				<div style={{ height: '500px', width: '80%' }}>
-					<ResponsiveChoropleth
-						data={mapdata2}
-						features={countries.features}
-						margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-						colors="nivo"
-						domain={[-50, 50]}
-						unknownColor="silver"
-						label="properties.name"
-						valueFormat=".2s"
-						projectionTranslation={[0.5, 0.5]}
-						projectionRotation={[0, 0, 0]}
-						enableGraticule
-						graticuleLineColor="#dddddd"
-						borderWidth={0.5}
-						borderColor="#152538"
-						defs={[
-							{
-								id         : 'dots',
-								type       : 'patternDots',
-								background : 'inherit',
-								color      : '#38bcb2',
-								size       : 4,
-								padding    : 1,
-								stagger    : true,
-							},
-							{
-								id         : 'lines',
-								type       : 'patternLines',
-								background : 'inherit',
-								color      : '#eed312',
-								rotation   : -45,
-								lineWidth  : 6,
-								spacing    : 10,
-							},
-							{
-								id     : 'gradient',
-								type   : 'linearGradient',
-								colors : [
+						<div style={{ height: '500px', width: '80%' }}>
+							<ResponsiveChoropleth
+								data={mapdata2}
+								features={countries.features}
+								margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+								colors="nivo"
+								domain={[-50, 50]}
+								unknownColor="silver"
+								label="properties.name"
+								valueFormat=".2s"
+								projectionTranslation={[0.5, 0.5]}
+								projectionRotation={[0, 0, 0]}
+								enableGraticule
+								graticuleLineColor="#dddddd"
+								borderWidth={0.5}
+								borderColor="#152538"
+								defs={[
 									{
-										offset : 0,
-										color  : '#000',
+										id         : 'dots',
+										type       : 'patternDots',
+										background : 'inherit',
+										color      : '#38bcb2',
+										size       : 4,
+										padding    : 1,
+										stagger    : true,
 									},
 									{
-										offset : 100,
-										color  : 'inherit',
+										id         : 'lines',
+										type       : 'patternLines',
+										background : 'inherit',
+										color      : '#eed312',
+										rotation   : -45,
+										lineWidth  : 6,
+										spacing    : 10,
 									},
-								],
-							},
-						]}
-						fill={[
-							{
-								match: {
-									id: 'CA',
-								},
-								id: 'dots',
-							},
-							{
-								match: {
-									id: 'CN',
-								},
-								id: 'lines',
-							},
-							{
-								match: {
-									id: 'AQ',
-								},
-								id: 'gradient',
-							},
-						]}
-						legends={[
-							{
-								anchor        : 'bottom-left',
-								direction     : 'column',
-								justify       : true,
-								translateX    : 20,
-								translateY    : -100,
-								itemsSpacing  : 0,
-								itemWidth     : 94,
-								itemHeight    : 18,
-								itemDirection : 'left-to-right',
-								itemTextColor : '#444444',
-								itemOpacity   : 0.85,
-								symbolSize    : 18,
-								effects       : [
 									{
-										on    : 'hover',
-										style : {
-											itemTextColor : '#000000',
-											itemOpacity   : 1,
+										id     : 'gradient',
+										type   : 'linearGradient',
+										colors : [
+											{
+												offset : 0,
+												color  : '#000',
+											},
+											{
+												offset : 100,
+												color  : 'inherit',
+											},
+										],
+									},
+								]}
+								fill={[
+									{
+										match: {
+											id: 'CA',
 										},
+										id: 'dots',
 									},
-								],
-							},
-						]}
-					/>
+									{
+										match: {
+											id: 'CN',
+										},
+										id: 'lines',
+									},
+									{
+										match: {
+											id: 'AQ',
+										},
+										id: 'gradient',
+									},
+								]}
+								legends={[
+									{
+										anchor        : 'bottom-left',
+										direction     : 'column',
+										justify       : true,
+										translateX    : 20,
+										translateY    : -100,
+										itemsSpacing  : 0,
+										itemWidth     : 94,
+										itemHeight    : 18,
+										itemDirection : 'left-to-right',
+										itemTextColor : '#444444',
+										itemOpacity   : 0.85,
+										symbolSize    : 18,
+										effects       : [
+											{
+												on    : 'hover',
+												style : {
+													itemTextColor : '#000000',
+													itemOpacity   : 1,
+												},
+											},
+										],
+									},
+								]}
+							/>
+						</div>
+					</div>
+					<div className={styles.topglobalsuppliers}>
+						Top Global Suppliers:
+					</div>
+					<div className={styles.tablecontainer}>
+						<Table className={styles.table2} columns={columnstable2} data={data2} />
+					</div>
 				</div>
-			</div>
-			<div className={styles.topglobalsuppliers}>
-				Top Global Suppliers:
-			</div>
-			<div className={styles.tablecontainer}>
-				<Table className={styles.table2} columns={columnstable2} data={data2} />
-			</div>
-		</div>
+			)
 	);
 }
 

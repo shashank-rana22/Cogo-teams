@@ -1,4 +1,5 @@
 // import SearchInput from '@cogoport/../../../allocation/common/SearchInput';
+import { Loader } from '@cogoport/components';
 import {
 	Pagination,
 	Input, Tabs, TabPanel, MultiSelect, Button, Table, IcMProfile, DateRangepicker,
@@ -50,7 +51,7 @@ function Shipment() {
 
 	const { control, watch } = formProps;
 
-	const [{ loading = false, data: responseData = {} }, trigger] = useAthenaRequest({
+	const [{ loading = true, data: responseData = {} }, trigger] = useAthenaRequest({
 		url    : 'shipments_by_hscode',
 		method : 'post',
 	}, { manual: true });
@@ -76,6 +77,12 @@ function Shipment() {
 	const options5 = [
 		{ label: 'INDIA', value: 'INDIA' },
 	];
+	const showloader = () => {
+		const l = document.getElementById('helloloader');
+		if (l !== null) {
+			l.style.display = 'block';
+		}
+	};
 
 	const handleClick = async (x) => {
 		await trigger({
@@ -448,7 +455,8 @@ function Shipment() {
 					<Button
 						size="md"
 						themeType="primary"
-						onClick={() => handleClick(1)}
+						onClick={() => { handleClick(1); showloader(); }}
+						disabled={loading}
 					>
 						Search
 					</Button>
@@ -490,7 +498,9 @@ function Shipment() {
 					</div>
 					{data.length !== 0 ? (
 						<div>
+							{/* <Loader id="helloloader2" style={{ display: 'None' }} /> */}
 							<Table
+								id="hellotable"
 								className={styles.table}
 								columns={columns}
 								data={data}
@@ -504,13 +514,18 @@ function Shipment() {
 							/>
 						</div>
 					) : (
-						<EmptyState
-							height={500}
-							width={875}
-							emptyText="Search for records above"
-							textSize="24px"
-							flexDirection="column"
-						/>
+						<div>
+							<Loader id="helloloader" style={{ display: 'None' }} />
+							<EmptyState
+								height={500}
+								width={875}
+								emptyText="Search for records above"
+								textSize="24px"
+								flexDirection="column"
+								style={{ display: 'block' }}
+							/>
+
+						</div>
 					)}
 					{/* {data && (
 						<Pagination
