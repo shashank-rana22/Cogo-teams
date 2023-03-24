@@ -15,8 +15,8 @@ function TestsList() {
 		method : 'GET',
 		url    : '/list_tests',
 		params : {
-			page_limit : 5,
-			filters    : {
+			// page_limit : 5,
+			filters: {
 				user_id,
 				status: 'active',
 			},

@@ -108,7 +108,7 @@ function Introduction({ setActiveState, testData = {} }) {
 							themeType="secondary"
 							onClick={() => setShowModal(false)}
 						>
-							cancel
+							Cancel
 						</Button>
 
 						<Button
