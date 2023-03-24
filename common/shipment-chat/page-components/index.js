@@ -15,17 +15,17 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 
 	const { msgSeen } = useSeen();
 
-	const MessageContentArr = [];
+	const messageContentArr = [];
 	Object.keys(msgSeen || {}).forEach((key) => {
 		const newObj = {
 			...msgSeen[key],
 			mainKey: key,
 		};
-		MessageContentArr.push(newObj);
+		messageContentArr.push(newObj);
 	});
 
 	let totalCount = [];
-	MessageContentArr?.map((count) => totalCount.push(count[user_id]));
+	messageContentArr?.map((count) => totalCount.push(count[user_id]));
 
 	totalCount = totalCount?.filter((item) => item !== undefined);
 
@@ -43,9 +43,8 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 				role="button"
 				tabIndex={0}
 				onClick={() => setShow(true)}
-				size={400}
 			>
-				{count > 0 && !show ? <div className={styles.circle}>{count || '5'}</div> : null}
+				{count > 0 && !show ? <div className={styles.circle}>{count}</div> : null}
 				<img
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipment-chat-icon.svg"
 					alt="chat"
@@ -65,7 +64,7 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 					<Modal.Body>
 						<List
 							setShow={setShow}
-							MessageContentArr={MessageContentArr}
+							messageContentArr={messageContentArr}
 							user_id={user_id}
 							setSeenLoading={setSeenLoading}
 						/>
