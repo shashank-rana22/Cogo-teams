@@ -25,6 +25,7 @@
     border: 1px solid #88CAD1;
     border-radius: 4px;
     cursor: pointer;
+    
 }
 .button:hover {
     background-color: #FEF199;

@@ -7,8 +7,8 @@ import ConfigurationCard from './ConfigurationCard';
 import Header from './Header';
 
 function CurrentConfigurations({
-	selectedVersion = '',
-	setSelectedVersion,
+	responseId,
+	setResponseId,
 	ConfigCardLoading,
 	listKamExpertiseCurrentConfigs,
 }) {
@@ -19,7 +19,7 @@ function CurrentConfigurations({
 		audit_data = {},
 	} = listKamExpertiseCurrentConfigs;
 
-	const LIVE_VERSION = data.filter((item) => item.status_value === 'active')[0]?.version_number;
+	const LIVE_VERSION = data.filter((item) => item.status_value === 'live')[0]?.version_number;
 
 	const listLiveAndDraft = data.filter((item) => item.status_value === 'draft' || item.status_value === 'live');
 
@@ -33,11 +33,11 @@ function CurrentConfigurations({
 		(!ConfigCardLoading ? (
 			<div>
 				<Header
-					selectedVersion={selectedVersion}
-					setSelectedVersion={setSelectedVersion}
 					audit_data={audit_data}
 					data={data}
 					LIVE_VERSION={LIVE_VERSION}
+					responseId={responseId}
+					setResponseId={setResponseId}
 				/>
 
 				{VERSION_CARDS.map((item) => (

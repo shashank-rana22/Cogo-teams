@@ -1,38 +1,42 @@
 import { Toast } from '@cogoport/components';
 import { useAllocationRequest } from '@cogoport/request';
 
-const useGetKamExpertiseVersionDetials = () => {
-	const params = {
-		filters: {
-			action_type    : 'choose_published_version',
-			version_number : 1,
-		},
-	};
-
-	const [{ data, loading }, trigger] = useAllocationRequest({
+const useGetKamExpertiseVersionDetials = ({
+	selectedVersion,
+	setMode,
+	setShowModal,
+	mode,
+	setResponseId,
+	setSelectedVersion,
+}) => {
+	const [{ loading = false }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_version_configurations',
-		method  : 'GET',
-		authkey : 'get_allocation_kam_expertise_version_configurations',
-		params,
+		method  : 'POST',
+		authkey : 'post_allocation_kam_expertise_version_configurations',
 	}, { manual: true });
 
 	const getVersion = async () => {
 		try {
-			const res = await trigger();
+			const payload = {
+				action_type    : mode,
+				version_number : selectedVersion || undefined,
+			};
+			const res = await trigger({ params: payload });
 
 			if (!res.hasError) {
-				Toast.success('Version Selected');
-				console.log(res);
+				setMode('initial-mode');
+				setShowModal(false);
+				setResponseId(res?.id);
+				setSelectedVersion('');
+				Toast.success('Version selected successfully');
 			}
-		} catch (error) {
-			Toast.error(error);
+		} catch (e) {
+			Toast.error(e?.response?.data?.error || 'Unable to Save, Please try again!!');
 		}
 	};
 
-	console.log('data::', data);
-
 	return {
-		loading,
+		CreateModalLoading: loading,
 		getVersion,
 	};
 };

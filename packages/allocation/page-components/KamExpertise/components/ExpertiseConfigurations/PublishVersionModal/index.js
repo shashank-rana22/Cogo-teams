@@ -8,8 +8,8 @@ import styles from './styles.module.css';
 function PublishVersionModal({
 	setShowPublishModal = () => {},
 	showPublishModal,
-	publish,
-	setPublish,
+	// publish,
+	// setPublish,
 }) {
 	const { onCreate, loading: publishLoading } = usePublishDraft({ setShowPublishModal });
 
@@ -21,7 +21,7 @@ function PublishVersionModal({
 			closeOnOuterClick
 			onClose={() => {
 				setShowPublishModal(false);
-				setPublish(false);
+				// setPublish(false);
 			}}
 		>
 
@@ -59,9 +59,9 @@ function PublishVersionModal({
 					themeType="primary"
 					onClick={() => {
 						onCreate();
-						setPublish(true);
+						// setPublish(true);
 					}}
-					loading={publishLoading && !publish}
+					loading={publishLoading}
 				>
 					Yes
 				</Button>

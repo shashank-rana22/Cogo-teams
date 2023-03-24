@@ -52,7 +52,7 @@ const titleSection = (expertiseItem = {}) => (
 	</div>
 );
 
-function KamExpertiseScoreConfig({ setMainLoading, selectedVersion }) {
+function KamExpertiseScoreConfig({ setMainLoading, responseId }) {
 	const [addConditionModal, setAddConditionModal] = useState({});
 
 	const [activeCollapse, setActiveCollapse] = useState('');
@@ -63,10 +63,7 @@ function KamExpertiseScoreConfig({ setMainLoading, selectedVersion }) {
 		setAddConditionModal({});
 	};
 
-	const { data, loading, refetch } = useGetExpertiseParameters({ selectedVersion });
-	useEffect(() => {
-		refetch();
-	}, [selectedVersion, refetch]);
+	const { data, loading, refetch } = useGetExpertiseParameters({ activeCollapse, responseId });
 
 	useEffect(() => {
 		setMainLoading(loading);
@@ -75,7 +72,7 @@ function KamExpertiseScoreConfig({ setMainLoading, selectedVersion }) {
 	const { list = [], audit_data: auditData = {} } = data || {};
 
 	const {
-		createConditionloading,
+		// createConditionloading,
 		formProps,
 		onSave,
 	} = useCreateAllocationKamExpertiseEventScoring({
