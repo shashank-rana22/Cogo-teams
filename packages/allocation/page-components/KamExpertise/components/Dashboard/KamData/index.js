@@ -8,8 +8,8 @@ import useGetKamExpertiseStatsList from '../../../hooks/useGetKamExpertiseStatsL
 
 import BadgeFilterHeader from './BadgeFilterHeader';
 import KamLevelScoreCard from './KamLevelScoreCard';
+import KamOverview from './KamOverview';
 import LeaderboardList from './LeaderboardList';
-import OverviewCard from './OverviewCard';
 import styles from './styles.module.css';
 
 function KamData(props) {
@@ -28,7 +28,7 @@ function KamData(props) {
 	} = useGetKamExpertiseLevelOverview();
 
 	const {
-		setParams = () => {},
+		setListParams = () => {},
 		leaderboardLoading = false,
 		leaderboardList = [],
 		searchKAM = '',
@@ -80,7 +80,7 @@ function KamData(props) {
 							listData={listData}
 							setKamLevel={setKamLevel}
 							date_params={date_params}
-							setParams={setParams}
+							setListParams={setListParams}
 							setOverviewParams={setOverviewParams}
 						/>
 					))
@@ -95,38 +95,11 @@ function KamData(props) {
 
 			{kamLevel && (
 				<>
-					<div className={styles.overview_container}>
-						<div className={styles.overview_header}>
-							{`KAM ${kamLevel} Overview`}
-						</div>
-
-						<div className={styles.overview_cards}>
-							{
-								isEmpty(overviewList)
-								&& (
-									<div className={styles.empty_state}>
-										<EmptyState
-											height={108}
-											width={180}
-											textSize="16px"
-											emptyText="Overview Data Not Found"
-										/>
-									</div>
-								)
-							}
-
-							{!isEmpty(overviewList)
-								&& (
-									overviewList.map((data) => (
-										<OverviewCard
-											key={data.title}
-											data={data}
-											overviewLoading={overviewLoading}
-										/>
-									))
-								)}
-						</div>
-					</div>
+					<KamOverview
+						kamLevel={kamLevel}
+						overviewList={overviewList}
+						overviewLoading={overviewLoading}
+					/>
 
 					<div className={styles.leaderboard_container}>
 						<BadgeFilterHeader

@@ -48,7 +48,7 @@ function useGetKamExpertiseStatsList() {
 	const { list = [], ...paginationData } = data || {};
 
 	return {
-		setParams,
+		setListParams      : setParams,
 		leaderboardLoading : loading,
 		leaderboardList    : list,
 		searchKAM,
