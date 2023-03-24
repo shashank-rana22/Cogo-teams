@@ -6,8 +6,8 @@ import StatsDisplay from '../../../utils/StatsDisplay';
 
 import styles from './styles.module.css';
 
-function SubmitTest({ showSubmitTestModal, setShowSubmitTestModal, data = {} }) {
-	const { endTest } = useEndTest();
+function SubmitTest({ showSubmitTestModal, setShowSubmitTestModal, data = {}, setActiveState }) {
+	const { endTest } = useEndTest({ setActiveState });
 
 	const handleContinueTest = () => {
 		handleEnterFullScreen();
