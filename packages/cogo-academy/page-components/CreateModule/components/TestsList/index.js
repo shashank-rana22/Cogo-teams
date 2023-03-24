@@ -24,7 +24,9 @@ const ROUTE_MAPPING = {
 function TestsList({ activeTab, setActiveTab }) {
 	const router = useRouter();
 
-	const { data, loading, fetchList, setParams, params, debounceQuery } = useGetTestList();
+	const {
+		data, loading, fetchList, setParams, params, debounceQuery, input, setInput,
+	} = useGetTestList();
 
 	const {
 		data: questionData,
@@ -33,6 +35,8 @@ function TestsList({ activeTab, setActiveTab }) {
 		setParams: setQuestionListParams,
 		params: questionListParams,
 		debounceQuery: questionListDebounceQuery,
+		input: questionListInput,
+		setInput: setquestionListInput,
 	} = useGetTestQuestionSets();
 
 	const componentMapping = {
@@ -71,6 +75,8 @@ function TestsList({ activeTab, setActiveTab }) {
 		setActiveTab(val);
 	};
 
+	console.log('input', input, questionListInput);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.tabs_container}>
@@ -85,7 +91,7 @@ function TestsList({ activeTab, setActiveTab }) {
 								themeType="primary"
 							/>
 						)}
-						value={activeTab === 'tests' ? params.filters?.q : questionListParams.filters?.q}
+						value={activeTab === 'tests' ? input : questionListInput}
 						placeholder={
 								activeTab === 'tests'
 									? 'Search for Test/Topic'
@@ -93,22 +99,10 @@ function TestsList({ activeTab, setActiveTab }) {
 											}
 						onChange={(value) => {
 							if (activeTab === 'tests') {
-								setParams((prev) => ({
-									...prev,
-									filters: {
-										...prev.filters,
-										q: value,
-									},
-								}));
+								setInput(value);
 								debounceQuery(value);
 							} else {
-								setQuestionListParams((prev) => ({
-									...prev,
-									filters: {
-										...prev.filters,
-										q: value,
-									},
-								}));
+								setquestionListInput(value);
 								questionListDebounceQuery(value);
 							}
 						}}

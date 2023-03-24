@@ -6,18 +6,18 @@ import { useEffect, useState } from 'react';
 function useGetTestList() {
 	const { query, debounceQuery } = useDebounceQuery();
 
+	const [params, setParams] = useState({
+		page    : 1,
+		filters : {
+			status: ['active', 'draft'],
+		},
+	});
+	const [input, setInput] = useState('');
+
 	const [{ loading = false, data = {} }, trigger] = useRequest({
 		url    : 'list_tests',
 		method : 'GET',
 	}, { manual: true });
-
-	const [params, setParams] = useState({
-		page    : 1,
-		filters : {
-			status : ['active', 'draft'],
-			q      : '',
-		},
-	});
 
 	const fetchList = () => {
 		try {
@@ -31,7 +31,7 @@ function useGetTestList() {
 	useEffect(() => {
 		fetchList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query]);
+	}, [query, params]);
 
 	return {
 		data,
@@ -40,6 +40,8 @@ function useGetTestList() {
 		params,
 		setParams,
 		debounceQuery,
+		input,
+		setInput,
 	};
 }
 
