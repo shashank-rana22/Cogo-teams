@@ -36,7 +36,7 @@ function ReassignManager({ userId, setOpenReassign }) {
 					Cancel
 
 				</Button>
-				<Button disabled={!managerId} onClick={() => onReassign()}>Reassign</Button>
+				<Button disabled={!managerId} onClick={() => onReassign(managerId)}>Reassign</Button>
 			</div>
 		</div>
 	);

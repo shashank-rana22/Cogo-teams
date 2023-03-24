@@ -1,11 +1,13 @@
-import { Button, Pill, Avatar } from '@cogoport/components';
-import { IcMEmail, IcMCall } from '@cogoport/icons-react';
+import { Tooltip, Avatar } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import EnlargedCard from './EnlargedCard';
 import styles from './styles.module.css';
 
-function UserCard({ user = {}, userId = '', setUserId = () => {}, clickable = false, enlarged = false }) {
+function UserCard({
+	user = {}, userId = '', setUserId = () => {}, clickable = false, enlarged = false,
+	setManagerIds = [],
+}) {
 	const getAvatarProps = (userInfo) => {
 		const avatarProps = {};
 
@@ -18,6 +20,22 @@ function UserCard({ user = {}, userId = '', setUserId = () => {}, clickable = fa
 		return avatarProps;
 	};
 
+	const setNewUser = (id) => {
+		if (id) {
+			setUserId(id);
+
+			setManagerIds((pv) => {
+				let newManagerList = [];
+				const sliceIndex = (pv || []).findIndex((managerId) => managerId === id);
+
+				newManagerList = sliceIndex >= 0
+					? pv.slice(0, sliceIndex + 1) : [...pv, id];
+
+				return newManagerList;
+			});
+		}
+	};
+
 	if (!enlarged) {
 		return (
 			<div className={styles.card_container}>
@@ -25,21 +43,22 @@ function UserCard({ user = {}, userId = '', setUserId = () => {}, clickable = fa
 					className={styles.name_card}
 					{...(clickable && {
 						className: `${styles.name_card} 
-                    ${user.id === userId ? styles.clicked_user : ''}`,
+                    ${user.user_id === userId ? styles.clicked_user : ''}`,
 						role     : 'button',
 						tabIndex : 0,
-						onClick  : () => setUserId(user.id.toString()),
+						onClick  : () => setNewUser(user.user_id.toString()),
 					})}
 				>
 					<Avatar {...getAvatarProps(user)} size="80px" />
 					<div className={styles.user_info}>
-						<div>{startCase(user?.name)}</div>
-						<div>
-							{startCase(user?.designation)}
-							{' '}
-							-
-							{' '}
-							{user?.employee_id}
+						<strong>{startCase(user?.name)}</strong>
+
+						<div className={styles.id_designation}>
+							<Tooltip placement="bottom" content={startCase(user?.designation)}>
+								<div className={styles.designation}>{startCase(user?.designation)}</div>
+							</Tooltip>
+
+							<div className={styles.id}>{user?.cogo_id}</div>
 						</div>
 					</div>
 				</div>

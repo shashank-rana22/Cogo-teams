@@ -2,9 +2,9 @@ import useGetCustomAsyncOptions from '../../../../../../hooks/useCustomAsyncOpti
 
 const useListReassignControls = () => {
 	const asyncManagerOptions = useGetCustomAsyncOptions({
-		endpoint    : 'get_iris_list_managers',
+		endpoint    : 'get_iris_list_reportees',
 		initialCall : false,
-		valueKey    : 'manager_id',
+		valueKey    : 'user_id',
 		labelKey    : 'name',
 		filterKey   : 'Q',
 	});

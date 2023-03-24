@@ -6,117 +6,26 @@ import styles from './styles.module.css';
 import useGetOrganizationTree from './useGetOrganizatioonTree';
 import UserCard from './UserCard';
 
-const firstData = {
-	baseLevel: [{
-		id           : 1,
-		name         : 'Shekhar Purnendu',
-		designation  : 'CEO',
-		employee_id  : 'COGO123',
-		manager_id   : 1,
-		manager_name : 'Shekhar Purnendu',
-		image_url:
-		'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF-ZtM3jmtMDfTPnP53l1MEFFITQIAenVyY1u5PT3o&s',
-	},
-
-	{
-		id           : 2,
-		name         : 'Amitabh Shankar',
-		designation  : 'CEO',
-		employee_id  : 'COGO124',
-		manager_id   : 2,
-		manager_name : 'Amitabh Shankar',
-	}],
-};
-
-const clickData = [{
-	id           : '1',
-	name         : 'Shekhar Purnendu',
-	designation  : 'CEO',
-	employee_id  : 'COGO123',
-	manager_id   : '1',
-	manager_name : 'Shekhar Purnendu',
-	image        : '',
-},
-{
-	id           : '2',
-	name         : 'Amitabh Shankar',
-	designation  : 'CEO',
-	employee_id  : 'COGO124',
-	manager_id   : '2',
-	manager_name : 'Amitabh Shankar',
-},
-{
-	id           : '3',
-	name         : 'Hrishikesh Kulkarni',
-	designation  : 'CEO',
-	employee_id  : 'COGO125',
-	manager_id   : '1',
-	manager_name : 'Shekhar Purnendu',
-},
-{
-	id           : '4',
-	name         : 'Ankur Varma',
-	designation  : 'CEO',
-	employee_id  : 'COGO126',
-	manager_id   : '1',
-	manager_name : 'Shekhar Purnendu',
-},
-{
-	id           : '5',
-	name         : 'Parth Samnani',
-	designation  : 'CEO',
-	employee_id  : 'COGO127',
-	manager_id   : '3',
-	manager_name : 'Hrishikesh Kulkarni',
-},
-{
-	id           : '6',
-	name         : 'Harshit Soni',
-	designation  : 'CEO',
-	employee_id  : 'COGO128',
-	manager_id   : '5',
-	manager_name : 'Parth Samnani',
-},
-{
-	id           : '7',
-	name         : 'Shridhar Kulkarni',
-	designation  : 'CEO',
-	employee_id  : 'COGO129',
-	manager_id   : '5',
-	manager_name : 'Parth Samnani',
-}];
-
 function OrganizationTree({ setOpenOrganizationTree }) {
 	const [users, setUsers] = useState({});
 	const [userId, setUserId] = useState('');
+	const [managerIds, setManagerIds] = useState([]);
 
-	const { treeData = {}, loading = false } = useGetOrganizationTree({ userId });
-
-	const getManagerLevel = (manager) => {
-		if (manager) {
-			let newManagerList = [];
-			const sliceIndex = (users.managerLevel || []).findIndex((item) => item.id === manager.id);
-			console.log('sliceIndex', sliceIndex);
-			newManagerList = sliceIndex >= 0
-				? users.managerLevel?.slice(0, sliceIndex + 1) : [...(users.managerLevel || []), manager];
-
-			return newManagerList;
-		}
-		return undefined;
-	};
+	const { treeData = {}, loading = false } = useGetOrganizationTree({ userId, managerIds });
 
 	useEffect(() => {
-		if (userId) {
-			const userLevel = clickData.find((user) => user.id === userId);
-			const reportees = clickData.filter((user) => user.manager_id === userId && user.manager_id !== user.id);
+		if (treeData) {
+			const { manager_data = [], reportees = [], user_data = {} } = treeData;
+
+			const baseLevel = !userId ? manager_data : [];
+			const userLevel = user_data;
 			const reporteeLevel = !isEmpty(reportees) ? reportees : users.reporteeLevel;
 			const selectedReportee = isEmpty(reportees) ? userLevel : {};
-			const manager = clickData.find((user) => userLevel.manager_id === user.id && userLevel.id !== user.id);
-			const managerLevel = getManagerLevel(manager);
+			const managerLevel = manager_data;
 
-			setUsers({ userLevel, reporteeLevel, managerLevel, selectedReportee });
+			setUsers({ baseLevel, userLevel, reporteeLevel, managerLevel, selectedReportee });
 		}
-	}, [userId]);
+	}, [treeData]);
 
 	return (
 		<div>
@@ -138,12 +47,13 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 
 				{!userId ? (
 					<div className={styles.base_level}>
-						{(firstData.baseLevel || []).map((user) => (
+						{(users.baseLevel || []).map((user) => (
 							<UserCard
 								user={user}
 								clickable
 								userId={userId}
 								setUserId={setUserId}
+								setManagerIds={setManagerIds}
 								key={user.id}
 							/>
 						))}
@@ -159,6 +69,7 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 											clickable
 											userId={userId}
 											setUserId={setUserId}
+											setManagerIds={setManagerIds}
 											key={user.id}
 										/>
 										<div className={styles.line} />
@@ -188,6 +99,7 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 											user={user}
 											clickable
 											userId={userId}
+											setManagerIds={setManagerIds}
 											setUserId={setUserId}
 											key={user.id}
 										/>

@@ -3,8 +3,13 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useIrisRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useGetOrganizationTree = ({ userId = '' }) => {
-	const [params, setParams] = useState({ UserID: userId || undefined });
+const useGetOrganizationTree = ({ userId = '', managerIds = [] }) => {
+	console.log('managerIds', managerIds);
+	const [params, setParams] = useState({
+		UserID     : userId || undefined,
+		Ceos       : userId ? undefined : true,
+		ManagerIDS : managerIds.join(',') || undefined,
+	});
 
 	const [{ data: treeData = {}, loading = false }, trigger] = useIrisRequest({
 		url    : 'get_iris_get_employees',
@@ -20,7 +25,11 @@ const useGetOrganizationTree = ({ userId = '' }) => {
 		}
 	};
 
-	useEffect(() => setParams({ UserID: userId || undefined, Ceos: true }), [userId]);
+	useEffect(() => setParams({
+		UserID     : userId || undefined,
+		Ceos       : userId ? undefined : true,
+		ManagerIDS : managerIds.join(',') || undefined,
+	}), [userId]);
 
 	return { treeData, loading, fetchTreeData };
 };

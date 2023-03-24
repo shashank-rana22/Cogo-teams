@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useIrisRequest } from '@cogoport/request';
 
 const useReassignManager = ({
-	userId, managerId, setOpenReassign = () => {},
+	userId, setOpenReassign = () => {},
 	setManagerId = () => {}, reset = () => {},
 }) => {
 	const [{ loading = false }, trigger] = useIrisRequest({
@@ -10,15 +10,17 @@ const useReassignManager = ({
 		method : 'post',
 	}, { manual: true });
 
-	const onReassign = async () => {
+	console.log('herer', userId);
+
+	const onReassign = async (managerId) => {
 		try {
-			await trigger({ UserID: userId || undefined, ManagerID: managerId || undefined });
+			await trigger({ data: { UserID: userId || undefined, ManagerID: managerId || undefined } });
 			Toast.success('Reassigned Successfully!!');
 			reset();
 			setManagerId('');
 			setOpenReassign(false);
 		} catch (e) {
-			Toast.error(e.response.data.error.toString());
+			Toast.error(e.response?.data.error?.toString());
 		}
 	};
 

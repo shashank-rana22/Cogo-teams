@@ -1,11 +1,12 @@
 
 .card_container {
     transition: all 300ms ease-in-out;
-    border: 0.996275px solid #88CAD1;
+    border: 1px solid #88CAD1;
     background: #ffffff;
     border-radius: 4px;
     cursor: pointer;
     overflow: hidden;
+    margin: 8px;
 }
 
 .card_container:hover {
@@ -27,4 +28,23 @@
     display: flex;
     flex-direction: column;
     margin: 0px 8px;
+}
+
+.id_designation {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+.designation {
+    padding-right: 8px;
+    border-right: 1px solid #bdbdbd;
+    width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.id {
+    margin-left: 8px;
+    font-weight: 600;
 }
