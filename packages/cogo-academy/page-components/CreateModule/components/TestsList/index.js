@@ -75,8 +75,6 @@ function TestsList({ activeTab, setActiveTab }) {
 		setActiveTab(val);
 	};
 
-	console.log('input', input, questionListInput);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.tabs_container}>

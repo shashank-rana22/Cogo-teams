@@ -3,7 +3,7 @@ import { Pill, Button, Modal, ButtonIcon } from '@cogoport/components';
 import { useForm, InputController, useFieldArray } from '@cogoport/forms';
 import { IcMArrowBack, IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useUpdateTest from '../../../../hooks/useUpdateTest';
@@ -17,7 +17,7 @@ function ReviewAndCriteria({
 	data,
 	test_id,
 }) {
-	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue, getValues } = useForm();
 
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -27,6 +27,10 @@ function ReviewAndCriteria({
 	const { name = '', set_data = [], cogo_entity_object = {} } = data || {};
 
 	const { updateTest } = useUpdateTest();
+
+	const [test_duration = '', maximum_attempts = '',
+		test_validity = {}, cut_off_percentage = '']	= getValues(['test_duration',
+		'maximum_attempts', 'test_validity', 'cut_off_percentage']);
 
 	const router = useRouter();
 
@@ -86,7 +90,7 @@ function ReviewAndCriteria({
 
 			<DurationAndValidity setValue={setValue} data={data} control={control} errors={errors} loading={loading} />
 
-			<Modal size="md" show={showModal} onClose={() => setShowModal(false)} placement="center">
+			<Modal size="sm" show={showModal} onClose={() => setShowModal(false)} placement="center">
 				<Modal.Header className={styles.modal_title} title="Publish Test" />
 				<Modal.Body className={styles.modal_body}>
 					<h4 className={styles.test_name}>{name}</h4>
@@ -100,6 +104,42 @@ function ReviewAndCriteria({
 							{startCase(question_set.topic)}
 						</Pill>
 					))}
+
+					<div className={styles.test_details}>
+						<div>
+							<div>
+								<h5>Duration</h5>
+								<p>
+									{test_duration}
+									{' '}
+									mins
+								</p>
+							</div>
+							<div>
+								<h5>Attempts</h5>
+								<p>{maximum_attempts}</p>
+							</div>
+						</div>
+						<div>
+							<div>
+								<h5>Validity</h5>
+								<p>
+									{format(test_validity?.startDate, 'dd/MM/yy')}
+									{' '}
+									-
+									{' '}
+									{format(test_validity?.endDate, 'dd/MM/yy')}
+
+								</p>
+							</div>
+							<div>
+								<h5>Pass %</h5>
+								<p>
+									{cut_off_percentage}
+								</p>
+							</div>
+						</div>
+					</div>
 
 					<h5>Add Instructions</h5>
 

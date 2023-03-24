@@ -155,7 +155,7 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 			Header   : 'TOPICS',
 			id       : 'c',
 			accessor : ({ topics = [] }) => (
-				<section style={{ display: 'flex', flexWrap: 'wrap' }}>
+				<section style={{ display: 'flex', flexWrap: 'wrap', width: '70%' }}>
 					{topics.map((topicItem) => (
 						<Pill
 							key={topicItem}
@@ -194,9 +194,9 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 		{
 			Header   : 'PASS %',
 			id       : 'e',
-			accessor : ({ cut_off_marks = '' }) => (
+			accessor : ({ cut_off_percentage = '' }) => (
 				<section>
-					{cut_off_marks || '-'}
+					{cut_off_percentage || '-'}
 				</section>
 			),
 		},
@@ -210,49 +210,66 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 		{
 			Header   : 'STATUS',
 			id       : 'tags',
-			accessor : ({ status = '', id = '', validity_start = '', validity_end = '' }) => (
-				status === 'active' ? (
-					<section className={styles.details}>
-						<section className={styles.status}>
-							<Pill size="md" color="green">{startCase(status)}</Pill>
-							<Link href={`/learning/tests/${id}`}>
-								<Pill
-									key={status}
-									size="md"
-									prefix={<IcMShare />}
-									color="#FEF3E9"
-									style={{ cursor: 'pointer' }}
-								>
-									Share Test Link
-								</Pill>
-							</Link>
+			accessor : ({ status = '', id = '', validity_start = '', validity_end = '' }) => {
+				if (status === 'active') {
+					return (
+						<section className={styles.details}>
+							<section className={styles.status}>
+								<Pill size="md" color="green">{startCase(status)}</Pill>
+								<Link href={`/learning/tests/${id}`}>
+									<Pill
+										key={status}
+										size="md"
+										prefix={<IcMShare />}
+										color="#FEF3E9"
+										style={{ cursor: 'pointer' }}
+									>
+										Share Test Link
+									</Pill>
+								</Link>
+							</section>
+							<section>
+								{format(validity_start, 'dd/MM/yyyy - ')}
+								{format(validity_end, 'dd/MM/yyyy')}
+							</section>
 						</section>
-						<section>
-							{format(validity_start, 'dd/MM/yyyy - ')}
-							{format(validity_end, 'dd/MM/yyyy')}
-						</section>
-					</section>
-				)
-					: (
+					);
+				} if (status === 'published') {
+					return (
 						<section>
 							<Pill
 								key={status}
 								size="md"
-								color="yellow"
+								color="orange"
 							>
 								{startCase(status)}
 							</Pill>
 						</section>
-					)
-			),
+					);
+				}
+				return (
+					<section>
+						<Pill
+							key={status}
+							size="md"
+							color="yellow"
+						>
+							{startCase(status)}
+						</Pill>
+					</section>
+				);
+			},
 		},
 		{
 			Header   : '',
 			id       : 'results',
-			accessor : ({ id = '' }) => (
-				<div>
-					<Link href={`/learning/tests/results/admin/${id}`}>Results</Link>
-				</div>
+			accessor : ({ id = '', status = '' }) => (
+				status === 'published' ? (
+					<div>
+						<Link href={`/learning/tests/results/admin/${id}`}>Results</Link>
+					</div>
+				) : <section>-</section>
+
 			),
 		},
 		{
