@@ -1,12 +1,10 @@
 import { IcMArrowRight } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
+import { startCase, format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function TestCard({ test_card }) {
 	const { name, topics, current_status, validity_start, validity_end, attempts_count, maximum_attempts } = test_card;
-
-	console.log(format(validity_start, 'dd MMM\' yy'), 'test_card');
 
 	const handleGoToTest = () => {
 
@@ -15,7 +13,7 @@ function TestCard({ test_card }) {
 	return (
 		<div className={styles.main_container}>
 			<div>
-				<div className={styles.status}>{current_status}</div>
+				<div className={styles.status}>{startCase(current_status)}</div>
 				<div className={styles.heading}>
 					{name}
 				</div>
