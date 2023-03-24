@@ -78,7 +78,7 @@ function useCreateFaqSet({
 			if (res?.data) {
 				Toast.success('questions Published sucessfully');
 
-				const href = '/learning/faq/create';
+				const href = '/learning';
 				router.push(href, href);
 			}
 		} catch (err) {

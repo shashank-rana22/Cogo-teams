@@ -1,14 +1,20 @@
 import { Button, Modal } from '@cogoport/components';
 
+import handleEnterFullScreen from '../../../../../utils/handleEnterFullScreen';
 import useEndTest from '../../../../hooks/useEndTest';
 
 import styles from './styles.module.css';
 
-function LeaveTest({ leaveTest, setLeaveTest }) {
+function LeaveTest({ showLeaveTestModal, setShowLeaveTestModal }) {
 	const { endTest } = useEndTest();
 
+	const handleContinueTest = () => {
+		handleEnterFullScreen();
+		setShowLeaveTestModal(false);
+	};
+
 	return (
-		<Modal size="sm" show={leaveTest} onClose={setLeaveTest}>
+		<Modal size="sm" show={showLeaveTestModal} onClose={setShowLeaveTestModal}>
 			<Modal.Body>
 				<b className={styles.heading}>Are you sure you want to leave the test?</b>
 
@@ -22,7 +28,7 @@ function LeaveTest({ leaveTest, setLeaveTest }) {
 					>
 						Yes, I want to leave
 					</Button>
-					<Button themeType="accent" onClick={() => setLeaveTest(false)}>Continue the test</Button>
+					<Button themeType="accent" onClick={() => handleContinueTest()}>Continue the test</Button>
 				</div>
 			</Modal.Body>
 		</Modal>

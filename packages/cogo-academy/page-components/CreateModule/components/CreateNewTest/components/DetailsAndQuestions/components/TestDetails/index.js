@@ -13,7 +13,7 @@ function CreateNewTest({ control, errors, data, setValue }) {
 	const router = useRouter();
 
 	const onClickBack = () => {
-		const href = '/learning/test-module';
+		const href = '/learning?activeTab=test_module';
 		router.push(href, href);
 	};
 

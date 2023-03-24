@@ -38,7 +38,10 @@ function SingleQuestion({ question = {}, currentQuestion, total_question, loadin
 					{' '}
 					{total_question}
 				</div>
-				<p className={styles.question_type}>Single Answer Correct</p>
+				<p className={styles.question_type}>
+					{' '}
+					{question_type === 'multi_correct' ? <>Multiple Answers Correct </> : <>Single Answer Correct</> }
+				</p>
 			</div>
 			<div className={styles.question}>
 				{question_text}

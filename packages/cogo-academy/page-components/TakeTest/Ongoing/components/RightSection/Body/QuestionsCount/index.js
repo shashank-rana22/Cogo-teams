@@ -1,6 +1,16 @@
+import { useSelector } from '@cogoport/store';
+
 import styles from './styles.module.css';
 
 function QuestionsCount({ data = {}, setCurrentQuestion, fetchQuestions }) {
+	const {
+		profile: {
+			user: { id: user_id },
+		},
+		general: {
+			query: { test_id },
+		},
+	} = useSelector((state) => state);
 	const STATS_MAPPING = {
 		answered          : '#DDEBC0',
 		not_answered      : '#F8AEA8',
@@ -10,7 +20,7 @@ function QuestionsCount({ data = {}, setCurrentQuestion, fetchQuestions }) {
 
 	const handleChangeQuestion = ({ index }) => {
 		if (index === 0 || data?.data?.[index - 1].answer_state !== 'not_viewed') {
-			localStorage.setItem('currentQuestion', index + 1);
+			localStorage.setItem(`current_question_${test_id}_${user_id}`, index + 1);
 			setCurrentQuestion(index + 1);
 		}
 

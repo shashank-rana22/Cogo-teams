@@ -32,7 +32,7 @@ function TakeTest() {
 		},
 	} = useSelector((state) => state);
 
-	const page = localStorage.getItem('currentQuestion');
+	const page = localStorage.getItem(`current_question_${test_id}_${user_id}`);
 
 	const [{ data: testData, loading }] = useRequest({
 		method : 'GET',
@@ -46,14 +46,12 @@ function TakeTest() {
 
 	const [activeState, setActiveState] = useState('');
 
-	const [startTiming, setStartTiming] = useState();
-
 	useEffect(() => {
 		setActiveState(test_user_mapping_state);
 	}, [setActiveState, test_user_mapping_state]);
 
 	useEffect(() => {
-		if (localStorage.getItem('currentQuestion')) {
+		if (localStorage.getItem(`current_question_${test_id}_${user_id}`)) {
 			setActiveState('ongoing');
 
 			const elem = document.getElementById('maincontainer');
@@ -68,6 +66,7 @@ function TakeTest() {
 		}
 
 		localStorage.setItem('visibilityChangeCount', 1);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const Component = COMPONENT_MAPPING[activeState]?.component;
@@ -82,8 +81,6 @@ function TakeTest() {
 				setActiveState={setActiveState}
 				loading={loading}
 				testData={testData}
-				startTiming={startTiming}
-				setStartTiming={setStartTiming}
 				page={page}
 			/>
 		</div>

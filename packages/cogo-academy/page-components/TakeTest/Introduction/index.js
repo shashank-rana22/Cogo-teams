@@ -3,9 +3,11 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
+import useCreateTestUserMapping from './useCreateTestUserMapping';
 
 function Introduction({ setActiveState, testData = {} }) {
 	const { set_data, case_study_questions, stand_alone_questions, test_duration, name } = testData || {};
+	const { passStartTime } = useCreateTestUserMapping();
 
 	const [showModal, setShowModal] = useState(false);
 
@@ -34,7 +36,9 @@ function Introduction({ setActiveState, testData = {} }) {
 	// const time = new Date();
 	// setStartTiming(time);
 
-	const handleStartExam = () => {
+	const handleStartExam = async () => {
+		await passStartTime();
+
 		setActiveState('ongoing');
 		localStorage.setItem('visibilityChangeCount', 1);
 

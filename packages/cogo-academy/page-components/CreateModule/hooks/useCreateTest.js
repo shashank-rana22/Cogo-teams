@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
-function useCreateTest({ setTestId, setActiveStepper }) {
+function useCreateTest({ setActiveStepper }) {
 	const router = useRouter();
 	const [{ loading = false }, trigger] = useRequest({
 		url    : 'create_test',
@@ -19,9 +19,9 @@ function useCreateTest({ setTestId, setActiveStepper }) {
 						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'stand_alone' }))],
 				},
 			});
-			setTestId(res?.data?.id);
+
 			if (next === 'draft') {
-				router.push('/learning/test-module/');
+				router.push('/learning/test-module?activeTab=test_module');
 				Toast.success('Draft Saved Successfully');
 			} else {
 				const as = `/learning/test-module/create-test?id=${res?.data?.id}`;

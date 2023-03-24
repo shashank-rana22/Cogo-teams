@@ -1,14 +1,30 @@
 import { Button } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
+import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
 import useUpdateAnswerQuestion from '../../../hooks/useUpdateAnswerStatus';
 
-import LeaveTest from './LeaveTest';
 import styles from './styles.module.css';
 
-function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question, answer, fetchQuestions }) {
-	const [leaveTest, setLeaveTest] = useState(false);
+function Footer({
+	data = [],
+	currentQuestion,
+	setCurrentQuestion,
+	total_question,
+	answer,
+	fetchQuestions,
+	setShowLeaveTestModal,
+}) {
+	const {
+		profile: {
+			user: { id: user_id },
+		},
+		general: {
+			query: { test_id },
+		},
+	} = useSelector((state) => state);
+
 	const { loading, updateAnswerList } = useUpdateAnswerQuestion({ fetchQuestions });
 
 	const sendAnswer = async () => {
@@ -27,7 +43,10 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 			await updateAnswerList(data?.id, answer, str);
 		}
 		const num = Number(currentQuestion);
-		localStorage.setItem('currentQuestion', total_question > currentQuestion ? num + 1 : num);
+		localStorage.setItem(
+			`current_question_${test_id}_${user_id}`,
+			total_question > currentQuestion ? num + 1 : num,
+		);
 
 		fetchQuestions({
 			currentQ:
@@ -57,7 +76,10 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 			await updateAnswerList(data?.id, answer, str);
 		}
 		const num = Number(currentQuestion);
-		localStorage.setItem('currentQuestion', total_question > currentQuestion ? num + 1 : num);
+		localStorage.setItem(
+			`current_question_${test_id}_${user_id}`,
+			total_question > currentQuestion ? num + 1 : num,
+		);
 
 		fetchQuestions({
 			currentQ:
@@ -74,11 +96,23 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 		});
 	};
 
+	const handleLeaveTest = () => {
+		handleMinimizeTest();
+		setShowLeaveTestModal(true);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_container}>
 
-				<Button loading={loading} themeType="secondary" onClick={() => setLeaveTest(true)}>Leave Test</Button>
+				<Button
+					type="button"
+					loading={loading}
+					themeType="secondary"
+					onClick={handleLeaveTest}
+				>
+					Leave Test
+				</Button>
 
 				<div className={styles.right_button_container}>
 					<Button
@@ -88,7 +122,6 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 						onClick={() => markAsReview()}
 					>
 						Mark for Review
-
 					</Button>
 
 					<Button
@@ -96,12 +129,10 @@ function Footer({ data = [], currentQuestion, setCurrentQuestion, total_question
 						disabled={currentQuestion > total_question}
 						onClick={() => sendAnswer()}
 					>
-						Next
+						{currentQuestion === total_question ? <>Save</> : <>Save & Next</>}
 					</Button>
 				</div>
-
 			</div>
-			{leaveTest ? <LeaveTest leaveTest={leaveTest} setLeaveTest={setLeaveTest} /> : null}
 		</div>
 	);
 }

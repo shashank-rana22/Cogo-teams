@@ -1,7 +1,8 @@
 import { Pagination, Table } from '@cogoport/components';
+import { IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import { useState } from 'react';
 
 import useCreateQuestionSet from '../../../../hooks/useCreateQuestionSet';
 import useUpdateTest from '../../../../hooks/useUpdateTest';
@@ -12,6 +13,8 @@ import { questionSetColumns, testSetColumns } from './utils/getColumns';
 
 function ListComponent({ data, loading, setParams, activeTab, params, fetchList }) {
 	const router = useRouter();
+
+	const [sort, setSort] = useState(false);
 
 	const { page_limit: pageLimit = 0, total_count = 0, list } = data || {};
 
@@ -42,6 +45,39 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 
 	return (
 		<div className={styles.table_container}>
+			<div
+				role="presentation"
+				onClick={() => {
+					setSort((prev) => !prev);
+
+					setParams((prev) => ({
+						...prev,
+						sort_type : sort ? 'asc' : 'desc',
+						filters   : {
+							...prev.filters,
+
+						},
+					}));
+				}}
+				className={styles.sort}
+			>
+				{sort ? (
+					<IcMArrowRotateUp
+						className={`${styles.styled_icon} ${styles.rotate}`}
+					/>
+				) : (
+					<IcMArrowRotateUp
+						className={styles.styled_icon}
+					/>
+				)}
+
+				<span
+					className={styles.span_text}
+				>
+					Sort By
+				</span>
+			</div>
+
 			<Table
 				className={styles.table_container}
 				data={list || []}

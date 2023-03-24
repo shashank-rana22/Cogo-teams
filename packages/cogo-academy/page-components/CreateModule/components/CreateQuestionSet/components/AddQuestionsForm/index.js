@@ -23,6 +23,7 @@ function AddQuestionsForm({
 	setEditDetails,
 	from,
 	setFilters,
+	debounceQuery,
 	filters,
 }) {
 	const [showBulkUpload, setShowBulkUpload] = useState(false);
@@ -50,7 +51,10 @@ function AddQuestionsForm({
 							/>
 						)}
 						placeholder="Search for Question/topic"
-						onChange={(val) => setFilters((prev) => ({ ...prev, q: val }))}
+						onChange={(val) => {
+							debounceQuery(val);
+							setFilters((prev) => ({ ...prev, q: val }));
+						}}
 						value={filters?.q}
 					/>
 				</div>

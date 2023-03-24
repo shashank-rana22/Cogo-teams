@@ -11,8 +11,8 @@ function LeftSection({
 	currentQuestion,
 	setCurrentQuestion,
 	loading,
-	startTiming,
 	fetchQuestions,
+	setShowLeaveTestModal,
 }) {
 	const [answer, setAnswer] = useState('');
 
@@ -22,7 +22,6 @@ function LeftSection({
 				data={data}
 				testData={testData}
 				total_question={data?.total_questions}
-				startTiming={startTiming}
 			/>
 
 			<Body
@@ -42,6 +41,7 @@ function LeftSection({
 				total_question={data?.total_questions}
 				answer={answer}
 				fetchQuestions={fetchQuestions}
+				setShowLeaveTestModal={setShowLeaveTestModal}
 			/>
 		</div>
 	);
