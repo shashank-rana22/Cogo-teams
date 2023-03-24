@@ -35,9 +35,10 @@ function ViewSelectedInvoice() {
 		setCheckedRows,
 	} = useViewSelect(filters, query);
 	const [isBookedActive, setIsBookActive] = useState(true);
+
 	const goBack = () => {
 		push(
-			'/business-finance/cogo-book/[active_tab]/[sub_active]',
+			'/business-finance/cogo-book/accruals/shipment_view',
 			'/business-finance/cogo-book/accruals/shipment_view',
 		);
 	};
@@ -66,7 +67,6 @@ function ViewSelectedInvoice() {
 				<div className={styles.div_left}>
 					<Tooltip placement="top" content="Go Back">
 						<Button
-							type="submit"
 							onClick={goBack}
 							disabled={loading}
 							themeType="secondary"

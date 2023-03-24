@@ -113,7 +113,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 
 	useEffect(() => {
 		refetch();
-	}, [page, sortType, sortBy]);
+	}, [page, sortType, sortBy, query]);
 
 	const {
 		pageNo: pageNos = 0,
