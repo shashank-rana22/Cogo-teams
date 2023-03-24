@@ -59,10 +59,6 @@ function KamExpertiseScoreConfig({ setMainLoading, selectedVersion }) {
 
 	const showModal = !isEmpty(addConditionModal);
 
-	const onClose = () => {
-		setAddConditionModal({});
-	};
-
 	const { data, loading, refetch } = useGetExpertiseParameters({ selectedVersion });
 	useEffect(() => {
 		refetch();
@@ -78,8 +74,9 @@ function KamExpertiseScoreConfig({ setMainLoading, selectedVersion }) {
 		createConditionloading,
 		formProps,
 		onSave,
-	} = useCreateAllocationKamExpertiseEventScoring({
 		onClose,
+	} = useCreateAllocationKamExpertiseEventScoring({
+		setAddConditionModal,
 		refetch,
 	});
 

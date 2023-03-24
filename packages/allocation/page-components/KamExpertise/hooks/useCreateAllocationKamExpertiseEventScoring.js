@@ -4,7 +4,11 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
 function useCreateAllocationKamExpertiseEventScoring(props) {
-	const { onClose, refetch } = props;
+	const { setAddConditionModal, refetch } = props;
+
+	const onClose = () => {
+		setAddConditionModal({});
+	};
 
 	const formProps = useForm({
 		defaultValues: {
@@ -20,6 +24,8 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 			}],
 		},
 	});
+
+	const { reset, clearErrors } = formProps;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_event_scoring',
@@ -53,14 +59,14 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 				}]) || [],
 			};
 
-			await trigger({ data: payload });
+			await Promise.all([trigger({ data: payload }), reset()]);
+			clearErrors();
 
 			onClose();
-			// await formProps.clearErrors();
-			formProps.reset();
-			Toast.success('Condition Added Successfully');
 
 			refetch();
+
+			Toast.success('Condition Added Successfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
@@ -70,6 +76,7 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 		createConditionloading: loading,
 		formProps,
 		onSave,
+		onClose,
 	};
 }
 
