@@ -5,21 +5,18 @@ import { useState, useEffect } from 'react';
 
 import useCreateTest from '../../../../hooks/useCreateTest';
 
-// import NewQuestion from './components/NewQuestion';
 import QuestionSet from './components/QuestionSet';
 import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
 function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLoading }) {
+	const [showQuestionSet, setShowQuestionSet] = useState(false);
+
+	const [idArray, setIdArray] = useState([]);
+
 	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
-
-	const [showQuestionSet, setShowQuestionSet] = useState(false);
-
-	// const [allKeysSaved, setAllKeysSaved] = useState(false);
-
-	const [idArray, setIdArray] = useState([]);
 
 	useEffect(() => {
 		if (!isEmpty(data?.set_data || [])) {
@@ -35,6 +32,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 			<div className={styles.btn_container}>
 				{!showQuestionSet ? (
 					<Button
+						type="button"
 						onClick={() => setShowQuestionSet(true)}
 						size="md"
 						themeType="primary"
@@ -44,16 +42,6 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 						From Existing Question Set
 					</Button>
 				) : null}
-
-				{/* {allKeysSaved ? (
-					<Button
-						onClick={() => setAllKeysSaved(false)}
-						size="md"
-						themeType="accent"
-					>
-						+ Add New Question
-					</Button>
-				) : null} */}
 
 			</div>
 
@@ -66,11 +54,10 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 				/>
 			) : null}
 
-			{/* {!allKeysSaved && <NewQuestion allKeysSaved={allKeysSaved} setAllKeysSaved={setAllKeysSaved} />} */}
-
 			{showQuestionSet && (
 				<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 					<Button
+						type="button"
 						loading={loading || getLoading}
 						size="md"
 						themeType="tertiary"
@@ -85,6 +72,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 					</Button>
 
 					<Button
+						type="button"
 						loading={loading || getLoading}
 						size="md"
 						themeType="primary"
