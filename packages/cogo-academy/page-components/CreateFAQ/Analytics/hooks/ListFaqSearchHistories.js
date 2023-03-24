@@ -7,7 +7,7 @@ function useListFaqSearchHistories() {
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list_faq_search_histories',
+		url    : 'list_faq_search_history_stats',
 	}, { manual: true });
 
 	const formatStartDate = useMemo(
@@ -30,11 +30,6 @@ function useListFaqSearchHistories() {
 
 					},
 
-					page_limit               : 100000000 || undefined,
-					pie_chart_data_required  : true,
-					pagination_data_required : false,
-					graph_data_required      : true,
-					data_required            : false,
 				},
 			});
 		} catch (error) {

@@ -5,18 +5,18 @@ function useGraphData() {
 
 	const { data, dateRange, setDateRange } = props || {};
 
-	const { pie_chart_data:pie_chart = 0, graph_data } = data || {};
+	const { pie_chart_data:pie_chart = {}, graph_data } = data || {};
 
 	const {
 		total_requested_questions_percentage = 0,
-		total_search_result_available_percentage = 0,
-		total_search_result_not_available_percentage = 0,
+		available_search_count_percentage = 0,
+		not_available_search_count_percentage = 0,
 		total_dislike = 0,
 		total_likes = 0,
 		total_view_count = 0,
 		total_requested_questions = 0,
-		total_search_result_not_available = 0,
-		total_search_result_available = 0,
+		not_available_search_count = 0,
+		available_search_count = 0,
 	} = pie_chart;
 	const LIKES_PERCENTAGE = (total_likes / total_view_count) * 100;
 	const DISLIKES_PERCENTAGE = (total_dislike / total_view_count) * 100;
@@ -25,16 +25,16 @@ function useGraphData() {
 	const pie_data = [
 		{
 			id    : 'Search Available',
-			label : `Search Available(${Math.round(total_search_result_available)}) 
-			${total_search_result_available_percentage}%`,
-			value : Math.round(total_search_result_available_percentage * 100) / 100,
+			label : `Search Available(${Math.round(available_search_count)}) 
+			${available_search_count_percentage}%`,
+			value : Math.round(available_search_count_percentage * 100) / 100,
 			color : 'hsla(80, 52%, 84%, 1)',
 		},
 		{
 			id    : 'Search not Available',
-			label : `Search not Available(${total_search_result_not_available}) 
-			${total_search_result_not_available_percentage}%`,
-			value : total_search_result_not_available_percentage,
+			label : `Search not Available(${not_available_search_count}) 
+			${not_available_search_count_percentage}%`,
+			value : not_available_search_count_percentage,
 			color : 'hsla(232, 44%, 96%, 1)',
 		},
 	];
@@ -48,7 +48,7 @@ function useGraphData() {
 		},
 		{
 			id    : 'Not Requested',
-			label : `Not Requested(${total_search_result_not_available - total_requested_questions})
+			label : `Not Requested(${not_available_search_count - total_requested_questions})
 			 ${100 - total_requested_questions_percentage}%`,
 			value : 100 - total_requested_questions_percentage,
 			color : 'hsl(255, 100%, 100%)',
