@@ -11,7 +11,7 @@ const apis = [
 	{
 		api          : 'get_checkout_cargo_insurance_rate',
 		access_type  : 'private',
-		service_name : 'spot_search',
+		service_name : 'checkout',
 	},
 	{
 		api          : 'create_spot_search',
