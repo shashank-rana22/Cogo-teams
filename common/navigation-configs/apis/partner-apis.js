@@ -7433,6 +7433,12 @@ const partner = {
 			access_type : 'private',
 		},
 	],
+	cfo_dashboard: [
+		{
+			api         : 'get_payments_dashboard_bf_profitability_shipment',
+			access_type : 'private',
+		},
+	],
 	translate: [
 		{
 			api         : 'get_translation_translate_list',
