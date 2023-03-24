@@ -30,8 +30,8 @@ const useSendEmail = () => {
 				data: {
 					stakeholderId : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
 					userId        : profile?.user?.id,
-					approveLink   : 'sda.com',
-					rejectLink    : 'as.co',
+					approveLink   : '/business-finance/overheads/expenses/response',
+					rejectLink    : '/business-finance/overheads/expenses/response',
 					vendorName,
 					category,
 					expenseDate,
