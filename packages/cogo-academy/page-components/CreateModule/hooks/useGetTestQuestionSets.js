@@ -1,7 +1,10 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 function useGetTestQuestionSets() {
+	const { query, debounceQuery } = useDebounceQuery();
+
 	const [{ data = {}, loading }, trigger] = useRequest({
 		url    : 'list_test_question_sets',
 		method : 'GET',
@@ -18,7 +21,7 @@ function useGetTestQuestionSets() {
 	const fetchList = () => {
 		try {
 			trigger({
-				params,
+				params: { ...params, filters: { ...params.filters, q: query } },
 			});
 		} catch (error) {
 			console.log(error);
@@ -27,7 +30,7 @@ function useGetTestQuestionSets() {
 	useEffect(() => {
 		fetchList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [params]);
+	}, [query]);
 
 	return {
 		data,
@@ -35,6 +38,7 @@ function useGetTestQuestionSets() {
 		fetchList,
 		setParams,
 		params,
+		debounceQuery,
 	};
 }
 
