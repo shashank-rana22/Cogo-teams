@@ -10,7 +10,7 @@ function Overview() {
 		method : 'GET',
 		url    : '/get_passed_test_data_per_user',
 		params : {
-			id: '042009dc-6d67-408b-93ce-2437a46ed7da',
+			id,
 		},
 	}, { manual: false });
 

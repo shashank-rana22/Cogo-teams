@@ -18,6 +18,7 @@ function TestsList() {
 			page_limit : 5,
 			filters    : {
 				user_id,
+				status: 'active',
 			},
 		},
 	}, { manual: false });
