@@ -3,38 +3,16 @@ import { IcMDownload, IcMEdit, IcMUpload } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import tabPanelComponentMapping from '../../../../constants/tab-pannel-component-mapping';
 import useCreateLog from '../../../../hooks/useCreateLog';
 import UseCreatePipOrProbation from '../../../../hooks/useCreatePipOrProbation';
 import DecisionModal from '../../DecisionModal';
 import PipUloadModal from '../../PipUploadModal';
-// import UploadModalBody from '../../UploadModal';
 
-import Dashboard from './Dashboard';
 import LogModal from './LogModal';
 import AllLogs from './LogModal/AllLogs';
 import NewLog from './LogModal/NewLog';
-import PendingReviews from './PendingReviews';
 import styles from './styles.module.css';
-import UploadedFiles from './UploadedFiles';
-
-// Todo put it inside constants
-const TAB_PANEL_COMPONENT_MAPPING = {
-	dashboard: {
-		name      : 'dashboard',
-		title     : 'Dashboard',
-		Component : Dashboard,
-	},
-	pending_reviews: {
-		name      : 'pending_reviews',
-		title     : 'Pending Reviews',
-		Component : PendingReviews,
-	},
-	uploaded_files: {
-		name      : 'uploaded_files',
-		title    	: 'Uploaded Files',
-		Component : UploadedFiles,
-	},
-};
 
 function PIPProbations() {
 	const [activeLogTab, setActiveLogTab] = useState('new'); // logTabs new Log or ALl Logs
@@ -82,7 +60,7 @@ function PIPProbations() {
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					{Object.values(TAB_PANEL_COMPONENT_MAPPING).map((tabPanelItem) => {
+					{Object.values(tabPanelComponentMapping).map((tabPanelItem) => {
 						const { name = '', title = '', Component } = tabPanelItem;
 
 						if (!Component) return null;
