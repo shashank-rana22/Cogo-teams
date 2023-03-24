@@ -1,4 +1,3 @@
-// import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import MailDetails from '../../../../common/MailDetails';

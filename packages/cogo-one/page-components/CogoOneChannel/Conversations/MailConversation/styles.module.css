@@ -1,5 +1,4 @@
 .time_stamp {
-	/* text-align: left; */
 	display: flex;
 	justify-content: flex-end;
 	padding-left: 4px;

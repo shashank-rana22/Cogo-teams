@@ -1,4 +1,3 @@
-// import { cl } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 
 import EMAIL_TAGS_COLOR from '../../constants/EMAILS_TAGS_COLOR';

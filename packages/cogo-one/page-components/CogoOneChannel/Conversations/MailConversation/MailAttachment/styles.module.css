@@ -1,17 +1,20 @@
 .container {
 	display: flex;
+	flex-wrap: wrap;
 	width: 100%;
 	padding: 10px  0  0 18px;
 }
 
 .content {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 }
 
 .preview_wrapper {
 	display: flex;
 	align-items: center;
+	margin: 0 4px 8px 0;
 	border: 1px solid #cbcfeb;
 	border-radius: 4px;
 
