@@ -53,31 +53,31 @@ function ResponsiveBarChart({ barData }) {
             	],
 			}}
 
-			legends={[
-            	{
-            		dataFrom      : 'keys',
-            		anchor        : 'bottom-right',
-            		direction     : 'row',
-            		justify       : false,
-            		translateX    : 20,
-            		translateY    : -280,
-            		itemsSpacing  : 50,
-            		itemWidth     : 100,
-            		itemHeight    : 20,
-            		itemDirection : 'left-to-right',
-            		itemOpacity   : 0.85,
-            		symbolShape   : 'circle',
-            		symbolSize    : 20,
-            		effects       : [
-            			{
-            				on    : 'hover',
-            				style : {
-            					itemOpacity: 0.7,
-            				},
-            			},
-            		],
-            	},
-			]}
+			// legends={[
+            // 	{
+            // 		dataFrom: 'keys',
+            		// anchor        : 'bottom-right',
+            		// direction     : 'row',
+            		// justify      : false,
+            		// translateX    : 20,
+            		// translateY    : -280,
+            		// itemsSpacing : 50,
+            		// itemWidth     : 100,
+            		// itemHeight   : 20,
+            		// itemDirection : 'left-to-right',
+            		// itemOpacity  : 0.85,
+            		// symbolShape  : 'circle',
+            		// symbolSize   : 20,
+            		// effects      : [
+            		// 	{
+            		// 		on    : 'hover',
+            		// 		style : {
+            		// 			itemOpacity: 0.7,
+            		// 		},
+            		// 	},
+            		// ],
+            // 	},
+			// ]}
 			role="application"
 			animate
 		/>

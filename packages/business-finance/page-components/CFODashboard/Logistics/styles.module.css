@@ -9,6 +9,13 @@
 	display: flex;
 }
 
+.label {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 30px;
+	letter-spacing: 0.4px;
+}
+
 .main {
 	display: flex;
 	justify-content: space-between;

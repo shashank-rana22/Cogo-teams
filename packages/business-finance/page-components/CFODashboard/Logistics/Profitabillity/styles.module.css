@@ -29,13 +29,13 @@
 	background: #fffaeb;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
 
-	/* &:hover {
-		width: 94%;
-		height: 46px;
-		box-shadow: 0 0 8px rgb(44 62 80 / 30%);
-		transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
-	} */
+.sub_container_click:hover {
+	width: 94%;
+	height: 46px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 30%);
+	transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
 }
 
 .sub_container {
@@ -51,13 +51,13 @@
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
 
-	/* &:hover {
-		width: 94%;
-		height: 46px;
-		box-shadow: 0 0 8px rgb(44 62 80 / 30%);
-		transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
-	} */
+.sub_container:hover {
+	width: 94%;
+	height: 46px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 30%);
+	transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
 }
 
 .filter_button {

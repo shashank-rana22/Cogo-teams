@@ -5,10 +5,18 @@
 	border-radius: 8px;
 }
 
+.main_div {
+	display: flex;
+	justify-content: space-between;
+	margin: 12px 0 0 20px;
+	margin-bottom: -54px;
+}
+
 .responsive {
 	min-width: 35%;
-	height: 420px;
-	margin-left: -10px;
+	height: 330px;
+	margin-top: 20px;
+	margin-left: 10px;
 	background: #fff;
 	border-radius: 8px;
 }
@@ -19,13 +27,13 @@
 }
 
 .text_style {
-	margin: 24px 0 0 20px;
+	margin: 12px 0 0 20px;
 	font-size: 18px;
 	color: #333;
 }
 
 .icon {
-	margin: 30px 0 0 5px;
+	margin: 19px 0 0 5px;
 	cursor: pointer;
 }
 

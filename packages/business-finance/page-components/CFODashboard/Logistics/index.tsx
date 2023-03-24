@@ -36,10 +36,10 @@ function Logistics({ filters, setFilters }) {
 				setRecievablesTab={setRecievablesTab}
 			/>
 			<Statistics />
-			<TreasuryStatistics filters={filters} setFilters={setFilters} />
 			<IncomeExpense />
-			<Profitabillity searchValue={searchValue} setSearchValue={setSearchValue} />
 			<AccordianCards />
+			<Profitabillity searchValue={searchValue} setSearchValue={setSearchValue} />
+			<TreasuryStatistics filters={filters} setFilters={setFilters} />
 		</div>
 	);
 }
