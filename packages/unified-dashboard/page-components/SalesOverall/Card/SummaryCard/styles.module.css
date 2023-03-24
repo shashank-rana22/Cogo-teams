@@ -8,6 +8,10 @@
 	box-shadow: none;
 }
 
+.card_container {
+	width: 100%;
+}
+
 .summary_p {
 	display: flex;
 	flex-direction: column;

@@ -62,30 +62,42 @@ function SalesOverall({ headerFilters }) {
 			<div className={styles.card_wrapper}>
 				<div className={styles.row}>
 					<div className={styles.col}>
-						<BookingsDone
-							salesFunnel={salesOverall}
-							currency={currency}
-							loading={loading}
-						/>
-						<QuotationCard
-							salesFunnel={salesOverall}
-							currency={currency}
-							loading={loading}
-						/>
+						<div className={styles.card}>
+							<BookingsDone
+								salesFunnel={salesOverall}
+								currency={currency}
+								loading={loading}
+							/>
+						</div>
+
+						<div className={styles.card}>
+							<QuotationCard
+								salesFunnel={salesOverall}
+								currency={currency}
+								loading={loading}
+							/>
+						</div>
+
 					</div>
 
 					<div className={styles.col}>
-						<InvoiceCard
-							salesFunnel={salesOverall}
-							currency={currency}
-							revenueMonth={revenueMonth}
-							loading={loading}
-						/>
-						<BookingConfirmed
-							salesFunnel={salesOverall}
-							currency={currency}
-							loading={loading}
-						/>
+						<div className={styles.card}>
+							<InvoiceCard
+								salesFunnel={salesOverall}
+								currency={currency}
+								revenueMonth={revenueMonth}
+								loading={loading}
+							/>
+						</div>
+
+						<div className={styles.card}>
+							<BookingConfirmed
+								salesFunnel={salesOverall}
+								currency={currency}
+								loading={loading}
+							/>
+						</div>
+
 					</div>
 				</div>
 				<div className={styles.desktop}>

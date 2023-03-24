@@ -11,7 +11,7 @@ function SummaryCard({
 }) {
 	return (
 		<>
-			<div>
+			<div className={styles.card_container}>
 				<div>
 					<RevenueCardHeading
 						margin="16px 0 1.6px 0"
