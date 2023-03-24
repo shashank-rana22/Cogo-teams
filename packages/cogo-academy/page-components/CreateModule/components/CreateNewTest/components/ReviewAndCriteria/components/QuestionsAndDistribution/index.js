@@ -11,11 +11,12 @@ function QuestionsAndDistribution({ data, control, errors, loading, setValue }) 
 		data?.test_set_distribution_data?.forEach((test_set_distribution) => {
 			if (test_set_distribution.question_type === 'stand_alone') {
 				setValue(`${test_set_distribution.test_question_set_id
-				}q`, test_set_distribution.distribution_count || '0');	// append with 'q' for stand alone questions
+				}q`, (test_set_distribution.distribution_count === null) ? ''
+					: test_set_distribution.distribution_count);	// append with 'q' for stand alone questions
 			} else {
 				setValue(`${test_set_distribution.test_question_set_id
-				// eslint-disable-next-line radix
-				}c`, test_set_distribution.distribution_count || '0'); // append with 'c' for case study questions
+				}c`, (test_set_distribution.distribution_count === null) ? ''
+					: test_set_distribution.distribution_count); // append with 'c' for case study questions
 			}
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,11 +83,15 @@ function QuestionsAndDistribution({ data, control, errors, loading, setValue }) 
 			),
 		},
 		{
-			Header   : 'DISTRIBUTION',
+			Header: (
+				<div className={styles.distribution_heading}>
+					<h4>DISTRIBUTION</h4>
+					<h6>Questions and cases from each Set</h6>
+				</div>),
 			id       : 'f',
 			accessor : ({ non_case_study_question_count = 0, case_study_question_count = 0, id = '' }) => {
-				const controlItem1 = getControls(id, non_case_study_question_count || 0)[0];
-				const controlItem2 = getControls(id, case_study_question_count || 0)[1];
+				const controlItem1 = getControls(id, non_case_study_question_count)[0];
+				const controlItem2 = getControls(id, case_study_question_count)[1];
 
 				return (
 					<section className={styles.distribution}>
