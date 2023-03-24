@@ -19,7 +19,7 @@ function PortDetails({ data = {}, primary_service = {} }) {
 			<div className={styles.port_code}>
 				<div className={` ${styles.code}`}>
 					(
-					{location?.port_code}
+					{location?.port_code || location?.postal_code}
 					)
 				</div>
 

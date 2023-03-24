@@ -4,7 +4,7 @@ import { useContext, useEffect } from 'react';
 
 import { AdditionalServiceList } from '../../../../../common/AdditionalServices';
 import Route from '../../../../../common/Route';
-import possibleFullRouteConfigs from '../../../../../common/Route/possible-full-route.json';
+import possibleFullRouteConfigs from '../../../../../common/Route/possible-full-route';
 
 import styles from './styles.module.css';
 

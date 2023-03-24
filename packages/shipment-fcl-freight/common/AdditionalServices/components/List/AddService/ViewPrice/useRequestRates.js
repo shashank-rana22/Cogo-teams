@@ -2,8 +2,6 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-import { incoTermTradeType } from '../../../../../../configurations/inco-terms';
-
 const useRequestRate = ({ item }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_subsidiary_service_rate_cards',
@@ -17,7 +15,9 @@ const useRequestRate = ({ item }) => {
 				const addedService = (item.services || []).find(
 					(service) => service.service_type === item.service_type,
 				);
-				const trade_type = incoTermTradeType[addedService?.inco_term] || '';
+
+				/* code to be fixed */
+				// const trade_type = incoTermTradeType[addedService?.inco_term] || '';
 				const date = new Date();
 				await trigger({
 					params: {
@@ -45,7 +45,7 @@ const useRequestRate = ({ item }) => {
 						service_provider_id:
 						addedService?.service_provider_id
 						|| addedService?.service_provider?.id,
-						trade_type,
+						// trade_type,
 					},
 				});
 			} catch (err) {

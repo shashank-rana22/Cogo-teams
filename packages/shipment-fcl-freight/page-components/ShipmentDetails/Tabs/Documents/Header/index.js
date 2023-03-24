@@ -35,7 +35,6 @@ function Header({
 							suffix={<IcMSearchlight style={{ fontSize: '16px' }} />}
 							style={{ padding: '6px', marginRight: '6px', width: '250px' }}
 							onChange={(e) => setFilters({ ...filters, q: e })}
-							isClearable
 						/>
 						<Select
 							className={styles.select}
