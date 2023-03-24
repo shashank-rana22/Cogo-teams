@@ -31,7 +31,7 @@ function useGetTestList() {
 	useEffect(() => {
 		fetchList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query, input]);
+	}, [query, params]);
 
 	return {
 		data,
