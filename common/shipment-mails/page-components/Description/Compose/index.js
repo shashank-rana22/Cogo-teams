@@ -107,23 +107,28 @@ function Compose({
 				/>
 				New Email
 			</div>
+
 			<div className={styles.compose_container}>
-				<InputParam
-					prefix="To:"
-					suffix={suffix}
-					name="toUserEmail"
-					control={control}
-					placeholder="put comma (,) seperated multiple emails"
-					rules={{ required: { value: true, message: 'Email is required' } }}
-				/>
-				{errors?.toUserEmail ? (
-					<div className={styles.error}>
-						{handleError(
-							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
-							true,
-						)}
-					</div>
-				) : null}
+
+				<div className={styles.user_email}>
+					<InputParam
+						prefix="To:"
+						suffix={suffix}
+						name="toUserEmail"
+						control={control}
+						placeholder="put comma (,) seperated multiple emails"
+						rules={{ required: { value: true, message: 'Email is required' } }}
+					/>
+					{errors?.toUserEmail ? (
+						<div className={styles.error}>
+							{handleError(
+								{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
+								true,
+							)}
+						</div>
+					) : null}
+				</div>
+
 				{isCC ? (
 					<InputParam
 						prefix="Cc:"
@@ -196,10 +201,12 @@ function Compose({
 						)}
 					</div>
 				) : null}
+
 				<div className={styles.rich_text_editor}>
 
 					<RTE
-						placeholder="Write here ...."
+						className={styles.styled_editor}
+						placeholder="Write Your mail here...."
 						value={editorState}
 						onChange={setEditorState}
 					/>
