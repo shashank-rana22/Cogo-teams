@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+
+    :global {
+        .ui_tab_list_container {
+            border-radius: 6px 6px 0 0 !important;
+        }
+
+        .ui_toggle_container .ui_toggle_offlabel {
+            color: var(--color-secondary-greyscale-2);
+        }
+    }
+}
+
+.filter_container {
+    display: flex;
+    align-items: center;
+
+    * {
+        font-size: var(--font-size-md) !important;
+    }
+
+    :global {
+        .ui_select_display_container {
+            width: 120px;
+            height: initial !important;
+        }
+        .ui_select_toggle_button {
+            padding: 4px 8px;
+        }
+        .ui_toggle_container {
+            align-items: center;
+            padding: 0 10px;
+        }
+    }
+}

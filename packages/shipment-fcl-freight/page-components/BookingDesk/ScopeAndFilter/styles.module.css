@@ -1,0 +1,14 @@
+.container {
+    
+    :global {
+        .ui_input_container {
+            height: initial !important;
+            width: 140px;
+            margin: 0 10px;
+
+            .ui_input_control {
+                font-size: var(--font-size-md)
+            }
+        }
+    }
+}

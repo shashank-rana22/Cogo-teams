@@ -39,6 +39,7 @@ import sop from './sop-apis';
 import tech_ops from './tech-ops-apis';
 import techops_dashboard from './techops_dashboard';
 import tools from './tools';
+import booking_desk from './booking-desk-apis';
 
 const apis = {
 	search: search.map((api) => ({
@@ -120,6 +121,7 @@ const apis = {
 	enrichment,
 	...faq,
 	performance_management,
+	booking_desk,
 };
 
 export default apis;

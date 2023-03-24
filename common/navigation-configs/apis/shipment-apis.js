@@ -1316,7 +1316,7 @@ const apis = [
 		api          : 'get_shipment_air_movement_details',
 		access_type  : 'private',
 		service_name : 'shipment',
-	},
+	}
 ];
 
 export default apis;
