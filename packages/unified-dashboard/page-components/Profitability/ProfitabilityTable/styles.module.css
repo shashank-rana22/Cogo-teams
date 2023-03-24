@@ -11,11 +11,13 @@
 	:global {
 		.ui_table_head_cell {
 			margin: 4px 14px 8px;
+			line-height: 18px;
 			border-bottom: 2px solid red;
 		}
 
 		.ui_table_head_cell div {
-			padding: 4px 8px;
+			padding: 4px;
+			white-space: normal;
 		}
 	}
 }
