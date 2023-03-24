@@ -21,7 +21,7 @@ function SubmitTest({ showSubmitTestModal, setShowSubmitTestModal, data = {}, se
 
 				<p>
 					You still have time left, check before submitting.
-					You cannot come back to the test nce submitted.
+					You cannot come back to the test once submitted.
 
 				</p>
 
