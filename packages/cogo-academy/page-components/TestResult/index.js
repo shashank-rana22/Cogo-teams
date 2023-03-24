@@ -29,7 +29,7 @@ function TestResult() {
 	const { data: summaryData } = data || {};
 
 	const handleGoBack = () => {
-		push('/learning/tests/dashboard', '/learning/tests/dashboard');
+		push('/learning/tests/dashboard');
 	};
 
 	return (

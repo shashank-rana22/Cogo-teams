@@ -6,17 +6,17 @@
 	flex-direction: column;
 	width: fit-content;
 	width: 90%;
-	margin-left: 40px;
-	background-color: #fff;
-	transform: translate(-50%, -50%);
-	border-radius: 4px;
 	max-height: 90vh;
+	margin-left: 40px;
 	overflow: scroll;
+	background-color: #fff;
+	border-radius: 4px;
+	transform: translate(-50%, -50%);
 }
 
 .top_container {
-	border-bottom: 1px solid #e0e0e0;
 	width: 100%;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .modal_container {
@@ -30,31 +30,31 @@
 .instructions_container {
 	display: flex;
 	flex-direction: column;
-	padding: 32px;
 	max-height: 52vh;
+	padding: 32px;
 	overflow: scroll;
 }
 
 .title {
-	font-weight: 600;
-	font-size: 20px;
 	margin-bottom: 8px;
+	font-size: 20px;
+	font-weight: 600;
 }
 
 .heading {
+	width: 100%;
 	padding: 20px 36px;
 	font-size: 24px;
 	font-weight: 600;
 	color: #221f20;
 	text-align: start;
-	background: #F9F9F9;
-	width: 100%;
+	background: #f9f9f9;
 }
 
 .content_container {
 	display: flex;
-	margin: 16px 16px 16px 0;
 	align-items: center;
+	margin: 16px 16px 16px 0;
 }
 
 .content_text {
@@ -75,15 +75,15 @@
 
 .content {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
-	padding: 0px 40px;
+	justify-content: space-between;
+	padding: 0 40px;
 }
 
 .right_content {
 	display: flex;
-	align-items: center;
 	gap: 32px;
+	align-items: center;
 }
 
 .button_container {
