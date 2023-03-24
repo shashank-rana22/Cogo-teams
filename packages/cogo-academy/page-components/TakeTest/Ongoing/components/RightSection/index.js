@@ -24,7 +24,7 @@ function RightSection({
 				fetchQuestions={fetchQuestions}
 				currentQuestion={currentQuestion}
 			/>
-			<Footer setActiveState={setActiveState} setShowTimeOverModal={setShowSubmitTestModal} />
+			<Footer setActiveState={setActiveState} setShowSubmitTestModal={setShowSubmitTestModal} />
 		</div>
 	);
 }
