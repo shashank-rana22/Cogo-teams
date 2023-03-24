@@ -1,14 +1,10 @@
-/* eslint-disable react/no-danger */
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import Attachements from './Attachements';
-import AttachementsUrl from './AttachementsUrl';
 import EmailTop from './EmailTop';
 import styles from './styles.module.css';
 
-function Thread({ content, allAttachements, emailData, onAction }) {
-	const externalAttachements = allAttachements.filter((att) => !att.isInline);
+function Thread({ content, emailData, onAction }) {
 	const cc = emailData?.ccRecipients || [];
 	const to = emailData?.toRecipients || [];
 	const isFromRpa = emailData?.isFromRpa;
@@ -19,11 +15,7 @@ function Thread({ content, allAttachements, emailData, onAction }) {
 	return (
 		<div className={styles.container}>
 			<EmailTop data={emailData || {}} />
-			{isFromRpa ? (
-				<AttachementsUrl externalAttachements={emailData?.file_url || []} />
-			) : (
-				<Attachements externalAttachements={externalAttachements} />
-			)}
+
 			<div
 				className={styles.email_container}
 				dangerouslySetInnerHTML={{ __html: content }}

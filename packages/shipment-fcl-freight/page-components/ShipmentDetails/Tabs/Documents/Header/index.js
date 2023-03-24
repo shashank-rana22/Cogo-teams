@@ -30,10 +30,12 @@ function Header({
 						<Input
 							value={filters?.q || ''}
 							size="sm"
+							type="search"
 							placeholder="Search..."
 							suffix={<IcMSearchlight style={{ fontSize: '16px' }} />}
 							style={{ padding: '6px', marginRight: '6px', width: '250px' }}
 							onChange={(e) => setFilters({ ...filters, q: e })}
+							isClearable
 						/>
 						<Select
 							className={styles.select}
@@ -55,15 +57,6 @@ function Header({
 							isClearable
 						/>
 
-						{/* <div style={{ marginTop: '10px' }}>
-							<Select
-								placeholder="Select Date"
-								options={dates.map((item) => ({ label: item, value: item }))}
-								onChange={(item) => onDateChange(item)}
-								value={value.dates_of_month}
-								{...rest}
-							/>
-						</div> */}
 					</div>
 				) : null}
 				{activeToggle ? (
@@ -89,7 +82,6 @@ function Header({
 				className={styles.custom_toggle}
 				onChange={() => setActiveToggle((p) => !p)}
 			/>
-			{/* <div className={styles.line} style={{ width: '100%' }} /> */}
 		</div>
 	);
 }

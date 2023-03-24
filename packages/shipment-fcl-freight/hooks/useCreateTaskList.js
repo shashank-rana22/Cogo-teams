@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -81,11 +80,8 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 			setTaskList([...extras, ...uploadedList, ...pendingList, ...restList]);
 		}
 	}, [JSON.stringify(data),
-
 		JSON.stringify(shipmentDocuments?.list),
-
 		JSON.stringify(data),
-
 		JSON.stringify(shipmentDocuments?.list),
 
 	]);

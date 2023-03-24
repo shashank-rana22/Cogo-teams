@@ -1,6 +1,5 @@
 import { RTE } from '@cogoport/components';
 import { useForm, handleError, InputController } from '@cogoport/forms';
-// import useEditorState from '@cogoport/front/rich-text/useEditorState';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
