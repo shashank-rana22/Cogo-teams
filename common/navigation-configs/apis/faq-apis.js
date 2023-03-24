@@ -90,7 +90,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
-
+		{
+			api          : 'list_faq_stats',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	faq: [
 		{
@@ -125,11 +129,6 @@ const faq = {
 		},
 		{
 			api          : 'update_faq_feedback',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'list_faq_stats',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
