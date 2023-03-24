@@ -13,6 +13,8 @@ function LeftSection({
 	loading,
 	fetchQuestions,
 	setShowLeaveTestModal,
+	setShowTimeOverModal,
+	showTimeOverModal,
 }) {
 	const [answer, setAnswer] = useState('');
 
@@ -22,6 +24,8 @@ function LeftSection({
 				data={data}
 				testData={testData}
 				total_question={data?.total_questions}
+				setShowTimeOverModal={setShowTimeOverModal}
+				showTimeOverModal={showTimeOverModal}
 			/>
 
 			<Body

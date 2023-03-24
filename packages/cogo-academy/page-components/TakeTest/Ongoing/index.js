@@ -4,8 +4,10 @@ import { useState, useEffect } from 'react';
 
 import LeftSection from './components/LeftSection';
 import LeaveTest from './components/LeftSection/Footer/LeaveTest';
+import EndTimer from './components/LeftSection/Header/Timer/EndTimer';
 import WarningModal from './components/LeftSection/WarningModal';
 import RightSection from './components/RightSection';
+import SubmitTest from './components/RightSection/Footer/SubmitTest';
 import InstructionsModal from './components/RightSection/InstructionsModal';
 import useFetchQuestionsList from './hooks/useFetchQuestionList';
 import styles from './styles.module.css';
@@ -19,8 +21,8 @@ function Ongoing({ testData, page, setActiveState }) {
 	const [isFullscreen, setIsFullscreen] = useState(false);
 	const [showLeaveTestModal, setShowLeaveTestModal] = useState(false);
 	const [showInstructionsModal, setShowInstructionsModal] = useState(false);
-
-	console.log('testData', testData);
+	const [showTimeOverModal, setShowTimeOverModal] = useState(false);
+	const [showSubmitTestModal, setShowSubmitTestModal] = useState(false);
 
 	const { loading, data, fetchQuestions } = useFetchQuestionsList({ currentQuestion });
 
@@ -77,6 +79,28 @@ function Ongoing({ testData, page, setActiveState }) {
 				showLeaveTestModal={showLeaveTestModal}
 				setShowLeaveTestModal={setShowLeaveTestModal}
 				setActiveState={setActiveState}
+				data={data}
+			/>
+		);
+	}
+
+	if (showTimeOverModal) {
+		return (
+			<EndTimer
+				showTimeOverModal={showTimeOverModal}
+				setShowTimeOverModal={setShowTimeOverModal}
+				data={data}
+			/>
+		);
+	}
+
+	if (showSubmitTestModal) {
+		return (
+			<SubmitTest
+				showSubmitTestModal={showSubmitTestModal}
+				setShowSubmitTestModal={setShowSubmitTestModal}
+				data={data}
+				setActiveState={setActiveState}
 			/>
 		);
 	}
@@ -108,6 +132,8 @@ function Ongoing({ testData, page, setActiveState }) {
 					setCurrentQuestion={setCurrentQuestion}
 					fetchQuestions={fetchQuestions}
 					setShowLeaveTestModal={setShowLeaveTestModal}
+					showTimeOverModal={showTimeOverModal}
+					setShowTimeOverModal={setShowTimeOverModal}
 					setActiveState={setActiveState}
 				/>
 			</div>
@@ -119,6 +145,7 @@ function Ongoing({ testData, page, setActiveState }) {
 					currentQuestion={currentQuestion}
 					fetchQuestions={fetchQuestions}
 					setCurrentQuestion={setCurrentQuestion}
+					setShowSubmitTestModal={setShowSubmitTestModal}
 					setShowInstructionsModal={setShowInstructionsModal}
 					setActiveState={setActiveState}
 				/>

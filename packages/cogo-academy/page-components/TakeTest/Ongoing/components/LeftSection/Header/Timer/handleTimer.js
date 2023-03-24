@@ -1,9 +1,18 @@
-const handleTimer = (testStartedAt, duration) => {
+import handleMinimizeTest from '../../../../../utils/handleMinimizeTest';
+
+const handleTimer = (test_start_time, duration, setShowTimeOverModal) => {
 	const timeNow = new Date().getTime();
-	let difference = timeNow - testStartedAt;
+	// console.log(timeNow);
+	let difference = timeNow - test_start_time;
 
 	if (difference < duration * 60000) {
 		difference = duration * 60000 - difference;
+	}
+
+	const check = difference < 1000 || difference > duration * 60000;
+	if (check) 	{
+		handleMinimizeTest();
+		setShowTimeOverModal(true);
 	}
 
 	let hours = Math.floor(
