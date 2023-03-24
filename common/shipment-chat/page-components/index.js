@@ -8,7 +8,7 @@ import List from './List';
 import styles from './styles.module.css';
 
 function ShipmentChat({ setMessagesCount = () => { } }) {
-	const { user_id } = useSelector((s) => ({ user_id: s?.profile?.user.id }));
+	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 
 	const [show, setShow] = useState(false);
 	const [seenLoading, setSeenLoading] = useState(false);

@@ -8,7 +8,7 @@ import MessageContent from './MessageContent';
 import styles from './styles.module.css';
 
 function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
-	const { user_id } = useSelector((s) => ({ user_id: s?.profile?.user.id }));
+	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 	const { onCreate } = useUpdateMessage();
 	const containerRef = useRef(null);
 

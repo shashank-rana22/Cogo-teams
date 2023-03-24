@@ -27,10 +27,7 @@ function List({
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
 	const [status, setStatus] = useState('active');
 
-	const {
-		ListData, page, total_page, filters, setFilters,
-		loading,
-	} = useGetShipmentChatList({ status });
+	const { ListData, page, total_page, filters, setFilters, loading } = useGetShipmentChatList({ status });
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const defaultChannel = ListData?.find((obj) => obj?.source_id === shipment_data?.id);
