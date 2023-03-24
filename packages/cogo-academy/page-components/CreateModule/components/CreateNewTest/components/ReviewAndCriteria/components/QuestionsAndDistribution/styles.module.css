@@ -1,8 +1,8 @@
 .distribution {
 	display: flex;
+	gap: 4px;
 	align-items: center;
 	margin-right: -100px;
-	gap: 4px;
 }
 
 .input {

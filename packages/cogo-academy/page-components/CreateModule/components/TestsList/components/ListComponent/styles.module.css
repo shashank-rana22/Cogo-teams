@@ -104,12 +104,12 @@
 }
 
 .sort {
-	float: right;
-	margin: 0px 12px;
-	margin-bottom: 4px;
-	align-items: center;
 	display: flex;
 	gap: 4px;
+	align-items: center;
+	float: right;
+	margin: 0 12px;
+	margin-bottom: 4px;
 	cursor: pointer;
 }
 

@@ -1,8 +1,12 @@
+import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import Header from './Header';
+import TestResultMessage from '../../commons/TestResultMessage';
+
 import QnA from './QnA';
+import styles from './styles.module.css';
 import Summary from './Summary';
 
 function TestResult() {
@@ -10,6 +14,8 @@ function TestResult() {
 		profile: { user: { id: user_id } },
 		general: { query: { test_id } },
 	} = useSelector((state) => state);
+
+	const { push } = useRouter();
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
@@ -20,11 +26,21 @@ function TestResult() {
 		},
 	}, { manual: false });
 
-	const { data:summaryData } = data || {};
+	const { data: summaryData } = data || {};
+
+	const handleGoBack = () => {
+		push('/learning/tests/dashboard', '/learning/tests/dashboard');
+	};
 
 	return (
 		<div>
-			<Header />
+			<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
+				<IcMArrowBack />
+
+				<p className={styles.go_back_text}>Dashboard</p>
+			</div>
+
+			<TestResultMessage stats_data={summaryData} />
 			<Summary summaryData={summaryData} loading={loading} />
 			<QnA />
 		</div>

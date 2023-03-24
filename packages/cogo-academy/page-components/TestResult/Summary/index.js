@@ -70,9 +70,9 @@ function Summary({ summaryData = {}, loading = false }) {
 		const data = [];
 		Object.keys(difficulty_wise_stats).forEach((key, index) => {
 			const obj = {
-				label      : startCase(key.split('_')[0]),
-				percentile : difficulty_wise_stats[key].toFixed(2),
-				color      : colorArray[index],
+				label : startCase(key.split('_')[0]),
+				// percentile : difficulty_wise_stats[key]?.toFixed(2),
+				color : colorArray[index],
 			};
 			data.push(obj);
 		});

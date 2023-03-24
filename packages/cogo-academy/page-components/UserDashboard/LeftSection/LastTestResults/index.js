@@ -2,8 +2,8 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase, format } from '@cogoport/utils';
 
+import TestResultMessage from '../../../../commons/TestResultMessage';
 import QuestionWiseStats from '../../commons/QuestionWiseStats';
-import TestResultMessage from '../../commons/TestResultMessage';
 
 import GoToDetails from './GoToDetails';
 import Percentile from './Percentile';
