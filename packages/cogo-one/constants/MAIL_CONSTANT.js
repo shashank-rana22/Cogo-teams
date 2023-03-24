@@ -15,3 +15,10 @@ export const decode = (data = '') => {
 };
 
 export const buttonOptions = ['reply', 'reply_all', 'forward'];
+
+export const renderFolderName = {
+	inbox : 'Inbox',
+	draft : 'Drafts',
+	sent  : 'Sent Items',
+	spam  : 'Junk Email',
+};

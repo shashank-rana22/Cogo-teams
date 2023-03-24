@@ -43,7 +43,6 @@ function CogoOne() {
 	const [bccArray, setBccArray] = useState([]);
 	const [buttonType, setButtonType] = useState('');
 	const [showMailModal, setShowMailModal] = useState(false);
-	// const [mailValue, setMailValue] = useState('');
 	const [emailState, setEmailState] = useState({
 		subject : '',
 		body    : '',
@@ -66,6 +65,22 @@ function CogoOne() {
 		loading:statusLoading,
 		updateUserStatus = () => {},
 	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
+
+	const mailProps = {
+		activeMail,
+		setActiveMail,
+		recipientArray,
+		setRecipientArray,
+		bccArray,
+		setBccArray,
+		buttonType,
+		setButtonType,
+		showMailModal,
+		setShowMailModal,
+		emailState,
+		setEmailState,
+		emailAddress,
+	};
 
 	const {
 		listData = {},
@@ -116,16 +131,7 @@ function CogoOne() {
 						userId={userId}
 						isomniChannelAdmin={isomniChannelAdmin}
 						showBotMessages={showBotMessages}
-						activeMail={activeMail}
-						recipientArray={recipientArray}
-						setRecipientArray={setRecipientArray}
-						bccArray={bccArray}
-						setBccArray={setBccArray}
-						setButtonType={setButtonType}
-						buttonType={buttonType}
-						setShowMailModal={setShowMailModal}
-						setEmailState={setEmailState}
-						emailAddress={emailAddress}
+						mailProps={mailProps}
 					/>
 					{activeTab !== 'mail' && (
 						<ProfileDetails
@@ -184,17 +190,7 @@ function CogoOne() {
 				handleScroll={handleScroll}
 				setModalType={setModalType}
 				modalType={modalType}
-				recipientArray={recipientArray}
-				setRecipientArray={setRecipientArray}
-				bccArray={bccArray}
-				setBccArray={setBccArray}
-				setButtonType={setButtonType}
-				buttonType={buttonType}
-				showMailModal={showMailModal}
-				setShowMailModal={setShowMailModal}
-				emailState={emailState}
-				setEmailState={setEmailState}
-				emailAddress={emailAddress}
+				mailProps={mailProps}
 			/>
 
 			<div className={styles.chat_details_continer}>

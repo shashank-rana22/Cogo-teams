@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 function MailLoading() {
 	return (
-		[...Array(8)].map(() => (
+		[...Array(1)].map(() => (
 			<div className={styles.content}>
 				<div className={styles.recipient_div}>
 					<div className={styles.recipient_left}>

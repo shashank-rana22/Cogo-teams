@@ -1,17 +1,12 @@
-/* eslint-disable max-len */
-import { Placeholder, Popover, Modal } from '@cogoport/components';
-import { IcMArrowDown, IcMDocument } from '@cogoport/icons-react';
+import { Placeholder, Modal } from '@cogoport/components';
+import { IcMDocument } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function MailAttachments({ allAttachements, loading }) {
 	const [showPreview, setShowPreview] = useState(null);
-	// console.log('showPreview:', showPreview);
-	// const [showPopover, setShowPopover] = useState(false);
-	// console.log('allAttachements:', allAttachements);
 	const externalAttachements = allAttachements.filter((att) => !att.isInline);
-	// console.log('externalAttachements:', externalAttachements);
 
 	return (
 		<div className={styles.container}>
@@ -29,7 +24,7 @@ function MailAttachments({ allAttachements, loading }) {
 								onClick={() => setShowPreview(item)}
 							>
 								<IcMDocument />
-								<div className={styles.name}>{item.name}</div>
+								<div className={styles.name}>{decodeURI(item.name)}</div>
 							</div>
 						</div>
 					))}
@@ -52,6 +47,7 @@ function MailAttachments({ allAttachements, loading }) {
 							height="450"
 							width="550"
 							aria-label="Doc Preview"
+							// eslint-disable-next-line max-len
 							data={`data:${externalAttachements[0].contentType};base64,${externalAttachements[0].contentBytes}`}
 						/>
 					</Modal.Body>

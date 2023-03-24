@@ -52,26 +52,11 @@ function Emailbody({
 								<div className={styles.name_div}>
 									{recipientData.map((item) => (
 										<div className={styles.name}>
-											{/* {console.log('recipientData', recipientData)} */}
 											{item}
-											{/* {recipientData.length === 1 ? '' : ','} */}
 										</div>
 									))}
 								</div>
 							</Tooltip>
-							{/* {(toRecipients || []).map((recipient) => {
-								const { emailAddress: mail = {} } = recipient || {};
-								const { name : recipient_name = '', address: email = '' } = mail || {};
-								console.log('recipient_name:', recipient_name);
-								return (
-									<Tooltip content={email} interactive placement="top">
-										<div className={styles.name}>
-											{email}
-											{(toRecipients || []).length === 1 ? '' : ','}
-										</div>
-									</Tooltip>
-								);
-							})} */}
 						</div>
 						{!emptyCcRecipient && (
 							<div className={styles.header_cc}>
@@ -79,21 +64,6 @@ function Emailbody({
 								{ccData.map((item) => (
 									<div className={styles.name}>{item}</div>
 								))}
-								{/* {ccData.length === 1 ? ',' : ''} */}
-
-								{/* {(ccRecipients || []).map((item) => {
-									const { emailAddress: ccAddress = {} } = item || {};
-									const { address: ccMail = '' } = ccAddress || {};
-									return (
-									// <Tooltip content={ccMail} interactive placement="top">
-										<div className={styles.name}>
-											{ccMail}
-											,
-										</div>
-									// </Tooltip>
-									);
-								})} */}
-
 							</div>
 						)}
 					</div>

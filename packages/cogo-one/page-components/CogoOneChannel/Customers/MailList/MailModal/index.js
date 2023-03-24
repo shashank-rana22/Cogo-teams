@@ -12,37 +12,35 @@ import RenderHeader from './Header';
 import styles from './styles.module.css';
 
 function MailModal({
-	showMailModal,
-	setShowMailModal = () => {},
+	mailProps,
 	createMail = () => {},
 	createMailLoading = false,
 	userId = '',
-	recipientArray = [],
-	setBccArray = () => {},
-	setRecipientArray = () => {},
-	bccArray = [],
-	emailState = {},
-	setEmailState = () => {},
-	buttonType = '',
 	attachments = [],
 	setAttachments = () => {},
 	activeMail = {},
 	replyMailApi = () => {},
 	replyLoading,
-	emailAddress = '',
-	// mailValue = '',
-	// setMailValue = () => {},
-	// setButtonType = () => {},
-	// buttonType = '',
 }) {
+	const {
+		showMailModal,
+		buttonType,
+		emailAddress,
+		recipientArray,
+		emailState,
+		bccArray,
+		setEmailState,
+		setRecipientArray,
+		setShowMailModal,
+		setBccArray,
+	} = mailProps;
+
 	const [showControl, setShowControl] = useState(false);
 	const [type, setType] = useState('');
 	const [recipientValue, setRecipientValue] = useState('');
 	const [ccBccValue, setCcBccValue] = useState('');
 	const [error, setError] = useState(false);
 	const [errorValue, setErrorValue] = useState('');
-	// const [recipientArray, setRecipientArray] = useState([]);
-	// const [bccArray, setBccArray] = useState([]);
 	const [uploading, setUploading] = useState(false);
 
 	const checkType = buttonOptions.includes(buttonType);
@@ -71,7 +69,6 @@ function MailModal({
 		setShowControl,
 		setBccArray,
 		setCcBccValue,
-		// checkType,
 		setAttachments,
 		setEmailState,
 		setShowMailModal,
@@ -88,7 +85,6 @@ function MailModal({
 		}
 		if (checkType) {
 			payload = {
-				// sender       : 'dineshkumar.s@cogoport.com',
 				sender       : emailAddress,
 				toUserEmail  : recipientArray,
 				ccrecipients : bccArray,
@@ -106,7 +102,6 @@ function MailModal({
 				ccrecipients : bccArray,
 				content      : emailState?.body,
 				sender       : emailAddress,
-				// sender       : 'dineshkumar.s@cogoport.com',
 				subject      : emailState?.subject,
 				toUserEmail  : recipientArray,
 				userId,
@@ -150,7 +145,6 @@ function MailModal({
 								email={data}
 								handleDelete={handleDelete}
 								type="recipient"
-								// checkType={checkType}
 							/>
 						))}
 
@@ -198,7 +192,6 @@ function MailModal({
 								email={data}
 								handleDelete={handleDelete}
 								type="cc_bcc"
-								// checkType={checkType}
 							/>
 						))}
 						{(showControl && type === 'cc_bcc') && (

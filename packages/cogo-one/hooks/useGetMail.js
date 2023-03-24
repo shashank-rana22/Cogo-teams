@@ -1,5 +1,5 @@
 import { usePublicRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 function useListMailDetails({ activeMail = {}, emailAddress = '' }) {
 	const [{ data, loading }, trigger] = usePublicRequest({
@@ -8,23 +8,22 @@ function useListMailDetails({ activeMail = {}, emailAddress = '' }) {
 	}, { manual: true });
 
 	const { id = '' } = activeMail || {};
-	const getEmail = async () => {
+	const getEmail = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
 					email_address : emailAddress,
-					// email_address : 'dineshkumar.s@cogoport.com',
 					message_id    : id,
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	};
+	}, [emailAddress, id, trigger]);
 
 	useEffect(() => {
 		getEmail();
-	}, [activeMail]);
+	}, [getEmail]);
 
 	return {
 		data,

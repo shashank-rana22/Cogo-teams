@@ -1,6 +1,5 @@
-/* eslint-disable max-len */
 import { cl } from '@cogoport/components';
-import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowLeft, IcMArrowRight, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty, format, startCase } from '@cogoport/utils';
 
 import useListMail from '../../hooks/useListMail';
@@ -10,22 +9,27 @@ import styles from './styles.module.css';
 
 function MailDetails({
 	activeSelect = '',
-	setShowContent = () => {},
 	setActiveSelect = () => {},
 	setActiveMail = () => {},
 	activeMail,
 	senderMail = '',
 }) {
-	const { data = {}, loading } = useListMail({ activeSelect, senderMail });
+	const {
+		listData = {},
+		loading,
+		getEmails = () => {},
+		handleScroll = () => {},
+		setPagination = () => {},
+		setListData = () => {},
+	} = useListMail({ activeSelect, senderMail });
+
 	const {
 		value: list = [],
-		handleScroll = () => {},
-	} = data || {};
+	} = listData || {};
 
 	const handleClick = () => {
 		setActiveMail({});
-		setActiveSelect('');
-		setShowContent(false);
+		setActiveSelect(null);
 	};
 
 	function lastMessagePreview(previewData = '') {
@@ -37,9 +41,11 @@ function MailDetails({
 		);
 	}
 
-	if (loading) {
-		return <MailLoading />;
-	}
+	const handleRefresh = () => {
+		setListData({ value: [], isLastPage: false });
+		getEmails();
+		setPagination(1);
+	};
 
 	return (
 		<div>
@@ -49,7 +55,7 @@ function MailDetails({
 						<IcMArrowLeft className={styles.arrow_left} />
 						<div className={styles.title}>{startCase(activeSelect.replace('_', ' '))}</div>
 					</div>
-					{/* <IcMFilter className={styles.filter_icon} /> */}
+					<IcMRefresh className={styles.filter_icon} onClick={handleRefresh} />
 				</div>
 				{isEmpty(list || []) && !loading ? (
 					<div className={styles.empty_div}>
@@ -58,21 +64,29 @@ function MailDetails({
 				) : (
 					<div
 						className={styles.list_container}
-						onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
+						onScroll={(e) => {
+							handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight);
+						}}
 					>
 						{(list || []).map((itm) => {
-							const { subject = '', sentDateTime = '', sender, bodyPreview = '', id = '' } = itm || {};
+							const {
+								subject = '',
+								sentDateTime = '', sender, bodyPreview = '', id = '',
+							} = itm || {};
 							const { emailAddress } = sender || {};
 							const { name = '' } = emailAddress || {};
 							return (
 								<div
 									role="presentation"
-									className={cl`${activeMail?.id === id ? styles.active_content : ''} ${styles.content}`}
+									className={cl`
+									${activeMail?.id === id ? styles.active_content : ''} ${styles.content}`}
 									onClick={() => setActiveMail(itm)}
+									key={id}
 								>
 									<div className={styles.recipient_div}>
 										<div className={styles.recipient_left}>
 											<img
+												// eslint-disable-next-line max-len
 												src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/share_reply.svg"
 												alt="reply"
 												className={styles.reply_back}
@@ -92,7 +106,9 @@ function MailDetails({
 
 							);
 						})}
+						{loading && <MailLoading />}
 					</div>
+
 				)}
 			</div>
 		</div>

@@ -1,13 +1,14 @@
 import { Toast } from '@cogoport/components';
 import { usePublicRequest } from '@cogoport/request';
-// import { useEffect, useState } from 'react';
 
-function useSendMail({
-	setShowMailModal = () => {},
-	setEmailState = () => {},
-	setRecipientArray = () => {},
-	setBccArray = () => {},
-}) {
+function useSendMail(mailProps) {
+	const {
+		setShowMailModal = () => {},
+		setEmailState = () => {},
+		setRecipientArray = () => {},
+		setBccArray = () => {},
+	} = mailProps;
+
 	const [{ loading }, trigger] = usePublicRequest({
 		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/send_mail`,
 		method : 'POST',

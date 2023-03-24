@@ -1,66 +1,57 @@
 import { usePublicRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+
+import { renderFolderName } from '../constants/MAIL_CONSTANT';
 
 function useListMail({ activeSelect, senderMail }) {
-	const [pagination, setPagination] = useState(1);
+	const [listData, setListData] = useState({ value: [], isLastPage: false });
 
-	const [{ data, loading }, trigger] = usePublicRequest({
+	const [pagination, setPagination] = useState(1);
+	const PAGE_LIMIT = 10;
+	const [{ loading }, trigger] = usePublicRequest({
 		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/list_mails`,
 		method : 'get',
 	}, { manual: true });
 
-	const renderFolderName = () => {
-		let folderType = '';
-		if (activeSelect === 'inbox') {
-			folderType = 'Inbox';
-		}
-		if (activeSelect === 'draft') {
-			folderType = 'Drafts';
-		}
-		if (activeSelect === 'sent') {
-			folderType = 'Sent Items';
-		}
-		if (activeSelect === 'spam') {
-			folderType = 'Junk Email';
-		}
-		return folderType;
-	};
-
-	const getEmails = async () => {
+	const getEmails = useCallback(async () => {
 		try {
-			await trigger({
+			const res = await trigger({
 				params: {
-					// email_address : 'dineshkumar.s@cogoport.com',
 					email_address : senderMail,
-					foldername    : renderFolderName(),
+					foldername    : renderFolderName[activeSelect],
 					page          : pagination,
-					// page_limit : page_limit || 10 Inbox,
-					// search,
-					// filters    : JSON.stringify(filters),
+					page_limit    : PAGE_LIMIT,
 				},
 			});
+
+			if (res.data) {
+				const { value = [] } = res?.data || {};
+				const isLastPage = (value.length || 0) < PAGE_LIMIT;
+				setListData((p) => ({ value: [...(p.value || []), ...(value || [])], isLastPage }));
+			}
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
-	};
+	}, [activeSelect, trigger, pagination, senderMail]);
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
-		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 0;
-		const hasMoreData = pagination < data?.total;
-
-		if (reachBottom && hasMoreData && !loading) {
+		const reachBottom = scrollTop + clientHeight >= scrollHeight;
+		if (reachBottom && !loading && !listData?.isLastPage) {
 			setPagination((p) => p + 1);
 		}
 	};
 
 	useEffect(() => {
 		getEmails();
-	}, [pagination]);
+	}, [getEmails]);
 
 	return {
-		data,
+		listData,
 		handleScroll,
 		loading,
+		getEmails,
+		setPagination,
+		setListData,
 	};
 }
 

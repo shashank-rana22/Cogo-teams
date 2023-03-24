@@ -1,5 +1,5 @@
 import { usePublicRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 function useGetMailAttachment({ activeMail = {}, emailAddress = '' }) {
 	const [{ data, loading }, trigger] = usePublicRequest({
@@ -9,23 +9,22 @@ function useGetMailAttachment({ activeMail = {}, emailAddress = '' }) {
 
 	const { id = '' } = activeMail || {};
 
-	const emailAttachment = async () => {
+	const emailAttachment = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
 					email_address : emailAddress,
-					// email_address : 'dineshkumar.s@cogoport.com',
 					message_id    : id,
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	};
+	}, [emailAddress, id, trigger]);
 
 	useEffect(() => {
 		emailAttachment();
-	}, [activeMail]);
+	}, [emailAttachment]);
 
 	return {
 		attachmentData    : data,

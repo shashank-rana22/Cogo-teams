@@ -9,24 +9,22 @@ import Header from './Header';
 import MailAttachments from './MailAttachment';
 import styles from './styles.module.css';
 
-function MailConversation({
-	activeMail,
-	setButtonType = () => {},
-	// buttonType = '',
-	setShowMailModal = () => {},
-	setBccArray = () => {},
-	setRecipientArray = () => {},
-	setEmailState = () => {},
-	emailAddress = '',
-}) {
+function MailConversation({ mailProps }) {
+	const {
+		activeMail,
+		setButtonType = () => {},
+		setShowMailModal = () => {},
+		setBccArray = () => {},
+		setRecipientArray = () => {},
+		setEmailState = () => {},
+		emailAddress = '',
+	} = mailProps;
+
 	const { data = {}, loading } = useListMailDetails({ activeMail, emailAddress });
 	const { attachmentData = {}, attachmentLoading } = useGetMailAttachment({ activeMail, emailAddress });
-	// console.log('attachmentData:', attachmentData);
 	const allAttachements = attachmentData?.value || [];
-	// console.log('allAttachements:', allAttachements);
 
 	const {
-		// bodyPreview = '',
 		sentDateTime = '',
 		subject = '',
 		sender = {},
@@ -35,7 +33,6 @@ function MailConversation({
 		ccRecipients = [],
 		hasAttachments,
 	} = data || {};
-	// console.log('hasAttachments:', hasAttachments);
 	const { content = '' } = body || {};
 
 	const senderAddress = sender?.emailAddress?.address;

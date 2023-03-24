@@ -1,5 +1,5 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
-import { IcMPlus, IcMEmail } from '@cogoport/icons-react';
+import { IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useReplyMail from '../../../hooks/useReplyMail';
@@ -46,40 +46,21 @@ function Customers({
 	handleScroll = () => {},
 	setModalType = () => {},
 	modalType = {},
-	recipientArray = [],
-	setBccArray = () => {},
-	setRecipientArray = () => {},
-	bccArray = [],
-	buttonType = '',
-	setButtonType = () => {},
-	showMailModal = false,
-	setShowMailModal = () => {},
-	emailState = {},
-	setEmailState = () => {},
-	emailAddress = '',
-	// mailValue = '',
-	// setMailValue = () => {},
+	mailProps = {},
 }) {
+	const { emailAddress, showMailModal, setShowMailModal } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
 	const [attachments, setAttachments] = useState([]);
-	// const [showMailModal, setShowMailModal] = useState(false);
 
 	const {
 		createMail = () => {},
 		createMailLoading = false,
-	} = useSendMail({ setShowMailModal, setEmailState, setRecipientArray, setBccArray });
+	} = useSendMail(mailProps);
 
 	const {
 		replyMailApi = () => {},
 		replyLoading = false,
-	} = useReplyMail({
-		setShowMailModal,
-		setEmailState,
-		setRecipientArray,
-		setBccArray,
-		buttonType,
-		setButtonType,
-	});
+	} = useReplyMail(mailProps);
 
 	const onChangeToggle = () => {
 		if (toggleStatus) {
@@ -175,8 +156,6 @@ function Customers({
 					activeMail={activeMail}
 					setActiveMail={setActiveMail}
 					emailAddress={emailAddress}
-					// mailValue={mailValue}
-					// setMailValue={setMailValue}
 				/>
 			)}
 
@@ -190,7 +169,6 @@ function Customers({
 				/>
 			)}
 			<div className={styles.wrapper}>
-
 				<input
 					id="plus_checkbox"
 					type="checkbox"
@@ -218,13 +196,13 @@ function Customers({
 								/>
 
 							</div>
+
 							<div className={`${styles.action} ${styles.mail_icon}`}>
-								<IcMEmail
-									role="presentation"
-									fill="#f9dc5c"
-									width={25}
-									height={25}
+								<img
 									onClick={() => setShowMailModal(true)}
+									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_speedial.svg"
+									alt="gmail icon"
+									role="presentation"
 								/>
 							</div>
 						</div>
@@ -240,28 +218,15 @@ function Customers({
 
 			{showMailModal && (
 				<MailModal
-					showMailModal={showMailModal}
-					setShowMailModal={setShowMailModal}
-					// formatApiType={formatApiType}
+					mailProps={mailProps}
 					createMail={createMail}
 					createMailLoading={createMailLoading}
 					userId={userId}
-					recipientArray={recipientArray}
-					setRecipientArray={setRecipientArray}
-					bccArray={bccArray}
-					setBccArray={setBccArray}
-					setButtonType={setButtonType}
-					buttonType={buttonType}
-					emailState={emailState}
-					setEmailState={setEmailState}
 					attachments={attachments}
 					setAttachments={setAttachments}
 					activeMail={activeMail}
 					replyMailApi={replyMailApi}
 					replyLoading={replyLoading}
-					emailAddress={emailAddress}
-					// mailValue={mailValue}
-					// setMailValue={setMailValue}
 				/>
 			)}
 		</div>

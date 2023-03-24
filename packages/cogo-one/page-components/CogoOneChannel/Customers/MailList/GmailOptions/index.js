@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function GmailOption({ handleClick = () => {} }) {
 	return (
 		<>
-			<div className={styles.title}>Gmail</div>
+			<div className={styles.title}>Outlook</div>
 			<div className={styles.gmail_container}>
 				{Gmailoptions.map(({ label, icon, value }) => (
 					<div className={styles.content} onClick={() => handleClick(value)} role="presentation">

@@ -32,7 +32,7 @@
 }
 
 .name {
-	max-width: 130px;
+	max-width: 430px;
 	margin-right: 4px;
 	overflow: hidden;
 	text-overflow: ellipsis;

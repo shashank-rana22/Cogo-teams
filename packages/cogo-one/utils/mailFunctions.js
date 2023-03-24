@@ -14,7 +14,6 @@ function mailFunction({
 	setShowControl = () => {},
 	setBccArray = () => {},
 	setCcBccValue = () => {},
-	checkType,
 	setAttachments = () => {},
 	setEmailState = () => {},
 	setShowMailModal = () => {},
@@ -74,12 +73,10 @@ function mailFunction({
 	};
 
 	const handleDelete = (val, emailType) => {
-		if (!checkType) {
-			if (emailType === 'recipient') {
-				setRecipientArray((p) => p.filter((data) => data !== val));
-			} else {
-				setBccArray((p) => p.filter((data) => data !== val));
-			}
+		if (emailType === 'recipient') {
+			setRecipientArray((p) => p.filter((data) => data !== val));
+		} else {
+			setBccArray((p) => p.filter((data) => data !== val));
 		}
 	};
 

@@ -1,14 +1,16 @@
 import { Toast } from '@cogoport/components';
 import { usePublicRequest } from '@cogoport/request';
 
-function useReplyMail({
-	setShowMailModal = () => {},
-	setEmailState = () => {},
-	setRecipientArray = () => {},
-	setBccArray = () => {},
-	buttonType = '',
-	setButtonType = () => {},
-}) {
+function useReplyMail(mailProps) {
+	const {
+		setShowMailModal = () => {},
+		setEmailState = () => {},
+		setRecipientArray = () => {},
+		setBccArray = () => {},
+		buttonType = '',
+		setButtonType = () => {},
+	} = mailProps;
+
 	const apiName = {
 		reply     : 'reply_mail',
 		reply_all : 'reply_all',
