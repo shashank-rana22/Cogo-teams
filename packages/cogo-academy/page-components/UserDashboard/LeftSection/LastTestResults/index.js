@@ -1,5 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 import TestResultMessage from '../../../../commons/TestResultMessage';
 import QuestionWiseStats from '../../commons/QuestionWiseStats';
@@ -27,6 +28,10 @@ function LastTestResults() {
 	const { topic_wise_percentile, question_stats, status } = stats_data || {};
 
 	const hasPassed = status === 'passed';
+
+	if (isEmpty(stats_data)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
