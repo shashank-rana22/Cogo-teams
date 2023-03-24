@@ -2,8 +2,8 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase, format } from '@cogoport/utils';
 
+import TestResultMessage from '../../../../commons/TestResultMessage';
 import QuestionWiseStats from '../../commons/QuestionWiseStats';
-import TestResultMessage from '../../commons/TestResultMessage';
 
 import GoToDetails from './GoToDetails';
 import Percentile from './Percentile';
@@ -25,7 +25,7 @@ function LastTestResults() {
 
 	const stats_data = data?.data || {};
 
-	const { topic_wise_percentile } = stats_data || {};
+	const { topic_wise_percentile, question_stats } = stats_data || {};
 
 	return (
 		<div className={styles.container}>
@@ -36,7 +36,7 @@ function LastTestResults() {
 
 				<TopicWisePercentile topic_wise_percentile={topic_wise_percentile} />
 
-				<QuestionWiseStats stats_data={stats_data} />
+				<QuestionWiseStats question_stats={question_stats} />
 
 				<GoToDetails />
 			</div>

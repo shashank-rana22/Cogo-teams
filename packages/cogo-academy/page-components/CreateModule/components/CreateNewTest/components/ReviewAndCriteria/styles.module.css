@@ -101,23 +101,24 @@
 	display: flex;
 }
 
-.modal_title{
-	color: #6FA5AB;
-	font-weight: 600;
+.modal_title {
 	font-size: 16px;
-}
-.test_name{
 	font-weight: 600;
-	font-size: 16px;
-	color: #221F20;
-	margin-bottom: 0px;
+	color: #6fa5ab;
 }
 
-.modal_body span{
+.test_name {
+	margin-bottom: 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.modal_body span {
 	font-size: 14px;
 }
 
-.modal_body h5{
+.modal_body h5 {
 	margin-top: 15px;
 	margin-bottom: 5px;
 }

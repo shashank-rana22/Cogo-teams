@@ -27,8 +27,8 @@
 }
 
 .go_back_text {
-	font-weight: 600;
-	font-size: 20px;
-	color: #221F20;
 	margin: 0 0 0 8px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #221f20;
 }

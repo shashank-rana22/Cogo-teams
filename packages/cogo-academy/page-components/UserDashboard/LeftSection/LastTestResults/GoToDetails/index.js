@@ -10,7 +10,7 @@ function GoToDetails() {
 	const handleGoToTestDetails = () => {
 		push(
 			'/learning/tests/dashboard/[test_id]',
-			'/learning/tests/dashboard/2b605b28-3cc1-47a7-b73e-52b8a2cb9f76',
+			'/learning/tests/dashboard/c864325c-d27e-4d10-9045-d19f8a4f259a',
 		);
 	};
 
