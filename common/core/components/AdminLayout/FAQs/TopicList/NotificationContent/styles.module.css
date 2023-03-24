@@ -1,10 +1,5 @@
 .container{
-	margin-bottom: 20px;
-    margin: 0px 16px 20px 16px;
-
-}
-
-.question_division{
+    margin: 10px 16px 20px 16px;
 
 }
 
@@ -19,9 +14,11 @@
 .question_container{
     display: flex;
 	background: #fdfbf6;
-	margin-bottom: 4px;
 	line-height: 150%;
 	padding: 8px;
+	border-radius: 6px;
+    margin-bottom: 6px;
+
 	&:hover {
 		box-shadow: 0 0 8px #627fac33;
 		background: #f8f2e7;

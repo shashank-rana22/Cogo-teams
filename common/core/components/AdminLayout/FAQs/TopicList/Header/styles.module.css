@@ -3,10 +3,12 @@
 	justify-content: space-between;
 	align-items: center;
 	margin: 12px;
+	padding-left: 6px;
+
 }
 
 .popular_topics{
-    font-weight: 600;
+    font-weight: 700;
 	font-size: 15px;
 	line-height: 21px;
 	color: #221f20;
@@ -19,4 +21,6 @@
 .text_wrapper{
     text-decoration: underline;
 	cursor: pointer;
+	padding-right: 22px;
+	font-weight: 600;
 }
