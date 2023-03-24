@@ -11,16 +11,19 @@ function Header(props) {
 				<div className={styles.icon_container}>
 					<IcMArrowLeft width={24} height={24} />
 				</div>
+
 				<span className={styles.span}>
 					{ returnPath === '/my-profile' ? 'My Profile' : 'Dashboard'}
 				</span>
 			</div>
+
 			{ !isEmpty(modalDetail)
 					&& (
 						<div className={styles.main_heading} role="presentation" onClick={showAllBadges}>
 							<div className={styles.icon_container}>
 								<IcMArrowLeft width={24} height={24} />
 							</div>
+
 							<span className={styles.span}>All Badges</span>
 						</div>
 					)}

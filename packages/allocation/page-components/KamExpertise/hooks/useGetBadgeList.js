@@ -1,12 +1,23 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 function useGetBadgeList() {
+	const {
+		general: { query = {}, locale = '' },
+	} = useSelector((reduxState) => reduxState);
+
+	const { partner_id = '' } = query;
+
 	const [searchValue, setSearchValue] = useState();
+
 	const [expertise, setExpertise] = useState([]);
+
 	const [toggleScreen, setToggleScreen] = useState('badge_details');
+
 	const [badgeItemData, setBadgeItemData] = useState({});
+
 	const [masteryItemData, setMasteryItemData] = useState({});
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
@@ -66,6 +77,8 @@ function useGetBadgeList() {
 		setBadgeItemData,
 		masteryItemData,
 		setMasteryItemData,
+		locale,
+		partner_id,
 	};
 }
 export default useGetBadgeList;

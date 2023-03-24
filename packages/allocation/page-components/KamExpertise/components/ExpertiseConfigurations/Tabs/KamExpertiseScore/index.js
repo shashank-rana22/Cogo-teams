@@ -77,6 +77,7 @@ function KamExpertiseScoreConfig({
 
 	const {
 		createConditionloading,
+		createConditionloading,
 		formProps,
 		onSave,
 

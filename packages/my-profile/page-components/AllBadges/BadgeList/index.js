@@ -83,7 +83,7 @@ function BadgeList(props) {
 			onClick={() => showBadgeDetails(item)}
 		>
 			<div className={styles.image_container}>
-				<img className={styles.badge} src={item.image_url} alt="" />
+				<img className={styles.badge} src={item?.image_url} alt="" />
 			</div>
 
 			<StarCollection />
@@ -103,7 +103,7 @@ function BadgeList(props) {
 			onClick={() => showBadgeDetails(item)}
 		>
 			<div className={styles.image_container}>
-				<img className={styles.badge} src={item.image_url} alt="" />
+				<img className={styles.badge} src={item?.image_url} alt="" />
 			</div>
 
 			<StarCollection />

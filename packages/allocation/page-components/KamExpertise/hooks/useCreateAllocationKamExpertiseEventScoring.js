@@ -21,6 +21,8 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 		},
 	});
 
+	const { reset, clearErrors } = formProps;
+
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_event_scoring',
 		method  : 'POST',
@@ -53,11 +55,13 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 				}]) || [],
 			};
 
-			await trigger({ data: payload });
+			await Promise.all([trigger({ data: payload }), reset()]);
+			clearErrors();
 
 			onClose();
-			// await formProps.clearErrors();
-			formProps.reset();
+
+			refetch();
+
 			Toast.success('Condition Added Successfully');
 
 			expertiseRefetch();
@@ -71,6 +75,7 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 		createConditionloading: loading,
 		formProps,
 		onSave,
+		onClose,
 	};
 }
 

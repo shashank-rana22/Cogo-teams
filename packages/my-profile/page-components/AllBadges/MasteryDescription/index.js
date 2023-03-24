@@ -130,7 +130,7 @@ function MasteryDescription(props) {
 							<div className={styles.unlocked_item}>
 								<div className={styles.badge_image}>
 									<img
-										src={item.image_url}
+										src={item?.image_url}
 										alt=""
 									/>
 								</div>

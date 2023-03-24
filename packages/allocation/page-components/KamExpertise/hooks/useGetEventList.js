@@ -1,14 +1,15 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 function useGetEventList() {
-	const router = useRouter();
+	const {
+		general: { query = {}, locale = '' },
+	} = useSelector((reduxState) => reduxState);
 
-	const onClickBack = () => {
-		router.push('/allocation/kam-expertise');
-	};
+	const { partner_id = '' } = query;
+
 	const [searchValue, setSearchValue] = useState();
 	const [expertise, setExpertise] = useState();
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
@@ -64,9 +65,10 @@ function useGetEventList() {
 		setSearchValue,
 		setExpertise,
 		expertise,
-		onClickBack,
 		eventListData,
 		setEventListData,
+		locale,
+		partner_id,
 	};
 }
 
