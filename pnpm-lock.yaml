@@ -389,6 +389,22 @@ importers:
       cookies-next: 2.1.1
       react: 18.2.0
 
+  packages/booking-desk:
+    specifiers:
+      '@cogoport/components': ^1.0.390
+      '@cogoport/icons-react': ^1.0.61
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.390_fhd5xbcvb3o2q6l75wedrb5njy
+      '@cogoport/icons-react': 1.0.61_react@18.2.0
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.6
+      react: 18.2.0
+
   packages/business-finance:
     specifiers:
       '@cogoport/charts': ^1.0.1
@@ -2132,6 +2148,40 @@ packages:
       - sass
     dev: false
 
+  /@cogoport/components/1.0.390_fhd5xbcvb3o2q6l75wedrb5njy:
+    resolution: {integrity: sha512-Pm5L5+SzJtJv0Jz56Uy3pqIuNG2gcFkwDdoeM5pbM3HzqnnT9jmUyV+Wl/Bg9Yk+5roQq0myXgnPIhfaJ/qA0A==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.61_react@18.2.0
+      '@tippyjs/react': 4.2.6_react@18.2.0
+      '@types/quill': 2.0.10
+      '@types/react-rte': 0.16.5
+      axios: 1.3.4
+      axios-hooks: 4.0.0_axios@1.3.4+react@18.2.0
+      date-fns: 2.29.3
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
+      react-hook-form: 7.43.7_react@18.2.0
+      react-quill: 2.0.0_react@18.2.0
+      react-rte: 0.16.5_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1_react@18.2.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
   /@cogoport/eslint-config/1.1.0_eslint@8.36.0:
     resolution: {integrity: sha512-Nor3Hc4gRnMuKjbCM547z5FRxWaHV0a4a82Fkx9H7T8GWf+A1xw4r710BMsd/VxQ8SquSC1O+cjo8LePIXBjcg==}
     peerDependencies:
@@ -2179,8 +2229,22 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@cogoport/icons-react/1.0.61_react@18.2.0:
+    resolution: {integrity: sha512-AGwqVtpxSFzYkeiw8Edv0+s5CfjAQ/CFCV9BX3YF/yHNoiw1/UYX8eHvRL9LaXNhbxfNGlVPMwEvxI7YNs/Z/w==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.61
+      react: 18.2.0
+    dev: false
+
   /@cogoport/icons/1.0.60:
     resolution: {integrity: sha512-NIqS22UssbCvX9oYx37TCDW8ezfOZmp6x1ZRXApcherj6A/C+tlxx9/FZL9AArMNTGjcqLQJH0189xWMWfLAHg==}
+    dev: false
+
+  /@cogoport/icons/1.0.61:
+    resolution: {integrity: sha512-hcfwAofQ69hnHei4h+LgSDbIl1QyU3XbHMPm11JGjgUXOmi7cx9ooiiVpq9r31CkzIzVn9ExMggJmHb20+xsdg==}
     dev: false
 
   /@cogoport/maps/1.0.3_aydyy3gkshtlrnyh7fafj36que:
@@ -5890,7 +5954,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5901,7 +5965,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5912,7 +5976,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -5924,7 +5988,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -5935,7 +5999,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -5947,7 +6011,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       immutable: 3.8.2
     dev: false
 
