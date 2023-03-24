@@ -36,7 +36,7 @@
 .right_stat_content {
 	align-items: center;
 	width: 100%;
-	margin-top: 5px;
+	margin-top: 4px;
 	margin-bottom: 34px;
 	font-size: 14px;
 	color: #828282;
@@ -45,8 +45,8 @@
 .sub_heading {
 	display: flex;
 	justify-content: space-between;
-	margin-top: 14px;
-	font-size: 12px;
+	margin-top: 8px;
+	font-size: 14px;
 	font-weight: 600;
 	color: #6fa5ab;
 	text-align: center;

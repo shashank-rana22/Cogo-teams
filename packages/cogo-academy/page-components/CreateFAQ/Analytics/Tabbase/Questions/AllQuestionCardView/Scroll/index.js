@@ -119,7 +119,7 @@ function ScrollBar({ props = {} }) {
 						Questions Disliked"
 						subHeading={topic_wise_disliked_questions}
 					/>
-					<ViewCards
+					<ViewCardsTags
 						state="liked"
 						cardHeading="Topic from which Most
 						Questions Liked"
@@ -142,7 +142,7 @@ function ScrollBar({ props = {} }) {
 						Questions Disliked"
 						subHeading={topic_wise_disliked_questions}
 					/>
-					<ViewCards
+					<ViewCardsTags
 						state="liked"
 						cardHeading="Topic from which Most
 						Questions Liked"

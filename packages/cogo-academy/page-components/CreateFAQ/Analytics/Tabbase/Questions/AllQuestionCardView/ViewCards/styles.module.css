@@ -35,7 +35,7 @@
 	justify-content: space-between;
 	width: 100%;
 	margin-top: 5px;
-	margin-bottom: 4px;
+	margin-bottom: 2px;
 	font-size: 14px;
 	color: #828282;
 	text-align: center;
@@ -43,6 +43,7 @@
 
 .sub_heading {
 	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
 	margin-top: 14px;
 	font-size: 12px;
