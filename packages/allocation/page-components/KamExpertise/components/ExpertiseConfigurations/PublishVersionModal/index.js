@@ -1,18 +1,16 @@
 import { Button, Modal } from '@cogoport/components';
 import React from 'react';
 
-import usePublishDraft from '../../../hooks/usePublishDraft';
-
 import styles from './styles.module.css';
 
 function PublishVersionModal({
 	setShowPublishModal = () => {},
 	showPublishModal,
+	onCreate,
+	publishLoading,
 	// publish,
 	// setPublish,
 }) {
-	const { onCreate, loading: publishLoading } = usePublishDraft({ setShowPublishModal });
-
 	return (
 		<Modal
 			size="md"

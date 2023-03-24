@@ -11,6 +11,11 @@ function CurrentConfigurations({
 	setResponseId,
 	ConfigCardLoading,
 	listKamExpertiseCurrentConfigs,
+	refetch,
+	expertiseRefetch,
+	cardRefetch,
+	onPublish,
+	setOnPublish,
 }) {
 	const router = useRouter();
 
@@ -38,6 +43,11 @@ function CurrentConfigurations({
 					LIVE_VERSION={LIVE_VERSION}
 					responseId={responseId}
 					setResponseId={setResponseId}
+					refetch={refetch}
+					expertiseRefetch={expertiseRefetch}
+					cardRefetch={cardRefetch}
+					setOnPublish={setOnPublish}
+					onPublish={onPublish}
 				/>
 
 				{VERSION_CARDS.map((item) => (

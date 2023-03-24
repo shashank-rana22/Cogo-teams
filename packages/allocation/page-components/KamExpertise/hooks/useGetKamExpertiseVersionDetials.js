@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useAllocationRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
 const useGetKamExpertiseVersionDetials = ({
 	selectedVersion,
@@ -8,6 +9,12 @@ const useGetKamExpertiseVersionDetials = ({
 	mode,
 	setResponseId,
 	setSelectedVersion,
+	refetch,
+	expertiseRefetch,
+	cardRefetch,
+	responseId,
+	onPublish = '',
+	setOnPublish,
 }) => {
 	const [{ loading = false }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_version_configurations',
@@ -26,14 +33,24 @@ const useGetKamExpertiseVersionDetials = ({
 			if (!res.hasError) {
 				setMode('initial-mode');
 				setShowModal(false);
-				setResponseId(res?.id);
+				setResponseId(res);
 				setSelectedVersion('');
 				Toast.success('Version selected successfully');
 			}
 		} catch (e) {
-			Toast.error(e?.response?.data?.error || 'Unable to Save, Please try again!!');
+			console.log('erroe', e);
 		}
 	};
+
+	useEffect(() => {
+		if (responseId || onPublish) {
+			refetch();
+			expertiseRefetch();
+			cardRefetch();
+			setResponseId('');
+			setOnPublish('');
+		}
+	}, [cardRefetch, expertiseRefetch, refetch, responseId, onPublish, setOnPublish, setResponseId]);
 
 	return {
 		CreateModalLoading: loading,

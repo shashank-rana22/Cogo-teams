@@ -10,7 +10,6 @@ import getControls from '../../../../configurations/get-add-conditions-controls'
 import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mapping';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
 import useCreateAllocationKamExpertiseEventScoring from '../../../../hooks/useCreateAllocationKamExpertiseEventScoring';
-import useGetExpertiseParameters from '../../../../hooks/useGetExpertiseParameters';
 import LoadingState from '../LoadingState';
 
 import ExpertiseParameters from './ExpertiseParameters';
@@ -52,7 +51,14 @@ const titleSection = (expertiseItem = {}) => (
 	</div>
 );
 
-function KamExpertiseScoreConfig({ setMainLoading, responseId }) {
+function KamExpertiseScoreConfig({
+	setMainLoading,
+	// responseId,
+	listExpertiseParams,
+	expertiseLoading,
+	expertiseRefetch,
+	cardRefetch,
+}) {
 	const [addConditionModal, setAddConditionModal] = useState({});
 
 	const [activeCollapse, setActiveCollapse] = useState('');
@@ -63,21 +69,21 @@ function KamExpertiseScoreConfig({ setMainLoading, responseId }) {
 		setAddConditionModal({});
 	};
 
-	const { data, loading, refetch } = useGetExpertiseParameters({ activeCollapse, responseId });
-
 	useEffect(() => {
-		setMainLoading(loading);
-	}, [loading, setMainLoading]);
+		setMainLoading(expertiseLoading);
+	}, [expertiseLoading, setMainLoading]);
 
-	const { list = [], audit_data: auditData = {} } = data || {};
+	const { list = [], audit_data: auditData = {} } = listExpertiseParams || {};
 
 	const {
-		// createConditionloading,
+		createConditionloading,
 		formProps,
 		onSave,
+
 	} = useCreateAllocationKamExpertiseEventScoring({
 		onClose,
-		refetch,
+		cardRefetch,
+		expertiseRefetch,
 	});
 
 	const { control, formState:{ errors = {} }, watch, handleSubmit } = formProps;
@@ -97,7 +103,8 @@ function KamExpertiseScoreConfig({ setMainLoading, responseId }) {
 		children : <ExpertiseParameters
 			activeCollapse={activeCollapse}
 			onClickAddCondition={() => setAddConditionModal({ type: value?.expertise_type })}
-			loading={loading}
+			loading={expertiseLoading}
+			cardRefetch={cardRefetch}
 		/>,
 
 	}));
@@ -105,12 +112,12 @@ function KamExpertiseScoreConfig({ setMainLoading, responseId }) {
 	return (
 		<>
 			<div className={styles.container}>
-				<Header auditData={auditData} loading={loading} />
+				<Header auditData={auditData} loading={expertiseLoading} />
 			</div>
 
-			{isEmpty(list) && !loading ? <EmptyState /> : null}
+			{isEmpty(list) && !expertiseLoading ? <EmptyState /> : null}
 
-			{!loading ? (
+			{!expertiseLoading ? (
 				<div className={styles.expertise_cards_container}>
 					<Collapse panels={options} activeKey={activeCollapse} setActive={setActiveCollapse} type="text" />
 				</div>
@@ -173,7 +180,7 @@ function KamExpertiseScoreConfig({ setMainLoading, responseId }) {
 														key={el.name}
 														control={control}
 														id={`${el.name}_input`}
-														disabled={createConditionloading}
+														// disabled={createConditionloading}
 													/>
 												</div>
 
@@ -194,7 +201,7 @@ function KamExpertiseScoreConfig({ setMainLoading, responseId }) {
 								size="md"
 								type="submit"
 								themeType="primary"
-								loading={createConditionloading}
+								// loading={createConditionloading}
 								id="add_condition_btn"
 							>
 								Add

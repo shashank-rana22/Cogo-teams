@@ -27,16 +27,37 @@ const CREATE_CONFIGURATION_MAPPING = {
 	[INITIAL_MODE]      : CreateModal,
 };
 
-function Header({ audit_data = {}, LIVE_VERSION, data = [], setResponseId }) {
+function Header({
+	audit_data = {},
+	LIVE_VERSION,
+	data = [],
+	setResponseId,
+	responseId,
+	refetch,
+	expertiseRefetch,
+	cardRefetch,
+	onPublish,
+	setOnPublish,
+}) {
 	const [selectedVersion, setSelectedVersion] = useState('');
+
 	const [mode, setMode] = useState('initial-mode');
+
 	const [showModal, setShowModal] = useState(false);
+
 	const { getVersion, CreateModalLoading } = useGetKamExpertiseVersionDetials({
 		selectedVersion,
 		setMode,
 		setShowModal,
 		mode,
 		setResponseId,
+		setSelectedVersion,
+		refetch,
+		expertiseRefetch,
+		cardRefetch,
+		responseId,
+		onPublish,
+		setOnPublish,
 	});
 
 	const componentProps = {

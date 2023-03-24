@@ -29,6 +29,7 @@ function KamLevelCard(props) {
 		id = '',
 		refetch = () => {},
 		isLastCard = false,
+		cardRefetch,
 	} = props;
 	const [showModal, setShowModal] = useState(false);
 
@@ -37,7 +38,7 @@ function KamLevelCard(props) {
 		expertise_details = [],
 	} = data;
 
-	const { onDelete, deleteLoading } = useDeleteKamLevel({ refetch, transition_level });
+	const { onDelete, deleteLoading } = useDeleteKamLevel({ refetch, transition_level, cardRefetch });
 
 	const expertiseObject = expertise_details.map((item) => item);
 

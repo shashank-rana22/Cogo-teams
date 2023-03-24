@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
 function useDeleteKamLevel(props) {
-	const { refetch, transition_level } = props;
+	const { refetch, transition_level, cardRefetch } = props;
 	const [{ loading:deleteLoading }, trigger] = useAllocationRequest({
 		method  : 'POST',
 		url     : 'kam_expertise_configuration_attributes',
@@ -20,6 +20,7 @@ function useDeleteKamLevel(props) {
 				data: payload,
 			});
 			refetch();
+			cardRefetch();
 			Toast.success('Level Deleted');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));

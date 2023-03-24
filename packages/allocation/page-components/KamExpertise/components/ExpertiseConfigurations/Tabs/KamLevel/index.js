@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-import useGetKamExpertiseConfig from '../../../../hooks/useGetKamExpertiseConfig';
-
 import CollapseComponent from './CollapseComponent';
 import KamLevelCard from './CollapseComponent/KamLevelCard';
 import KamLevelDropDown from './CollapseComponent/KamLevelDropDown';
 import Header from './Header';
 
-function KamLevel({ setMainLoading, responseId }) {
-	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig({ responseId });
-
+function KamLevel({ setMainLoading, levelLoading, kamConfigDetails, refetch, cardRefetch }) {
 	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
 
@@ -31,6 +27,7 @@ function KamLevel({ setMainLoading, responseId }) {
 				id={data.transition_level}
 				refetch={refetch}
 				isLastCard={dataLength === index + 1}
+				cardRefetch={cardRefetch}
 			/>,
 			children: <KamLevelDropDown
 				refetch={refetch}

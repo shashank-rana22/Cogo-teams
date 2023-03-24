@@ -10,25 +10,25 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function ExpertiseParameters(props) {
-	const { onClickAddCondition, activeCollapse = '' } = props;
+	const { onClickAddCondition, activeCollapse = '', cardRefetch } = props;
 
 	const [editMode, setEditMode] = useState(false);
 
-	const { data, refetch, loading } = useGetExpertiseParameters({ activeCollapse });
-	const { list = [] } = data || {};
+	const { listExpertiseParams, expertiseRefetch, expertiseLoading } = useGetExpertiseParameters(activeCollapse);
+	const { list = [] } = listExpertiseParams || {};
 
 	const {
 		onSave,
 		handleSubmit,
 		control,
 		loading: editLoading,
-	} = useEditExpertiseParameters({ list, refetch, setEditMode });
+	} = useEditExpertiseParameters({ list, expertiseRefetch, setEditMode, cardRefetch });
 
 	return (
 		<div>
 			<div className={styles.card_container}>
 
-				{isEmpty(list) && !loading ? (
+				{isEmpty(list) && !expertiseLoading ? (
 					<div className={styles.empty_card}>
 
 						There are no conditions currently active,
@@ -76,7 +76,7 @@ function ExpertiseParameters(props) {
 								: <Button themeType="secondary" onClick={() => setEditMode(!editMode)}>Edit</Button>}
 						</div>
 
-						{loading ? <LoadingState />
+						{expertiseLoading ? <LoadingState />
 							: list.map((item) => <CardItem editMode={editMode} item={item} control={control} />) }
 
 						<div className={styles.condition_button_container}>

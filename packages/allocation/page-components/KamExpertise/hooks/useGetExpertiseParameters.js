@@ -1,7 +1,6 @@
 import { useAllocationRequest } from '@cogoport/request';
-import { useEffect } from 'react';
 
-const useGetExpertiseParameters = ({ activeCollapse = '', responseId }) => {
+const useGetExpertiseParameters = (activeCollapse = '') => {
 	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : '/kam_expertise_event_configuration',
 		method  : 'GET',
@@ -12,20 +11,21 @@ const useGetExpertiseParameters = ({ activeCollapse = '', responseId }) => {
 			for_configuration_details : activeCollapse ? true : undefined,
 			audit_data_required       : true,
 			filters                   : {
-				expertise_type       : activeCollapse || undefined,
+				expertise_type       : activeCollapse || '',
 				event_scoring_status : 'draft',
 			},
+
 		},
 	}, { manual: false });
 
-	useEffect(() => {
-		refetch();
-	}, [responseId, refetch]);
+	// useEffect(() => {
+	// 	refetch();
+	// }, [responseId, refetch]);
 
 	return {
-		data,
-		loading,
-		refetch,
+		listExpertiseParams : data,
+		expertiseLoading    : loading,
+		expertiseRefetch    : refetch,
 	};
 };
 

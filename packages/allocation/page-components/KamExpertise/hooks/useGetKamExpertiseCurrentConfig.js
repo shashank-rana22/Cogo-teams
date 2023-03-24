@@ -11,9 +11,9 @@ const useGetKamExpertiseCurrentConfig = () => {
 	}, { manual: false });
 
 	return {
-		listKamExpertiseCurrentConfigs: data,
+		listKamExpertiseCurrentConfigs : data,
 		ConfigCardLoading,
-		refetch,
+		cardRefetch                    : refetch,
 	};
 };
 export default useGetKamExpertiseCurrentConfig;

@@ -4,7 +4,12 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
-const useEditExpertiseParameters = ({ list = [], refetch = () => {}, setEditMode = () => {} }) => {
+const useEditExpertiseParameters = ({
+	list = [],
+	expertiseRefetch = () => {},
+	setEditMode = () => {},
+	cardRefetch,
+}) => {
 	const formProps = useForm();
 
 	const { handleSubmit, control, reset } = formProps;
@@ -51,12 +56,13 @@ const useEditExpertiseParameters = ({ list = [], refetch = () => {}, setEditMode
 				data: payload,
 			});
 
-			refetch();
+			expertiseRefetch();
 
 			setEditMode(false);
 
 			reset();
 
+			cardRefetch();
 			Toast.success('Edited Successfully!');
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
