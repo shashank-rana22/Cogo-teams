@@ -22,6 +22,8 @@
 }
 
 .preview_modal_body {
+	display: flex;
+	flex-direction: column;
 	max-height: 80vh !important;
 
 	@media (max-width: 768px) {
@@ -105,5 +107,11 @@
 
 .title {
 	padding: 16px 0 0 16px;
+	font-weight: 600;
+}
+
+.title_on_submit {
+	margin-bottom: 12px;
+	font-size: 18px;
 	font-weight: 600;
 }

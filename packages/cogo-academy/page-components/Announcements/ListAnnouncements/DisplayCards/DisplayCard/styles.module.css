@@ -29,7 +29,22 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 20%;
+	width: 18%;
+	padding: 10px 10px 0;
+
+	@media (max-width: 870px) {
+		flex-direction: column;
+		width: 100%;
+		padding: 10px 10px 0;
+		margin: 10px 0;
+	}
+}
+
+.popover {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 10%;
 	padding: 10px 10px 0;
 
 	@media (max-width: 870px) {
@@ -58,9 +73,12 @@
 	opacity: 0.9;
 }
 
-.buttoncontainer {
+.buttons_container {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
+	gap: 8px;
+	align-items: center;
+	justify-content: center;
 }
 
 .delete_buttons {
@@ -105,4 +123,8 @@
 .title {
 	padding: 16px 0 0 16px;
 	font-weight: 600;
+}
+
+.button_icon {
+	margin-right: 12px;
 }

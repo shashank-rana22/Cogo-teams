@@ -1,5 +1,5 @@
-import { Accordion, Button, Modal, Pill } from '@cogoport/components';
-import { IcMDelete } from '@cogoport/icons-react';
+import { Popover, Accordion, Button, Modal, Pill } from '@cogoport/components';
+import { IcMAnnouncement, IcMEyeopen, IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -14,6 +14,17 @@ const ANNOUNCEMENT_TYPE_MAPPING = {
 	product_update : 'Product Release / Update',
 	announcement   : 'Announcement',
 	tasks          : 'Tasks',
+};
+
+const STATUS_MAPPING = {
+	draft: {
+		label : 'Draft',
+		color : 'orange',
+	},
+	active: {
+		label : 'Live',
+		color : 'green',
+	},
 };
 
 function DisplayCard({
@@ -31,7 +42,7 @@ function DisplayCard({
 	const router = useRouter();
 
 	const { content } = accordianData;
-
+	const [popoverVisible, setPopoverVisible] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -39,8 +50,9 @@ function DisplayCard({
 		{ label: 'Title', value: startCase(data?.title) },
 		{ label: 'Validity Start', value: format(data?.validity_start, 'dd MMM yyyy hh:mm a') },
 		{ label: 'Validity End', value: format(data?.validity_end, 'dd MMM yyyy hh:mm a') },
-		{ label: 'Announcement Type', value: ANNOUNCEMENT_TYPE_MAPPING[data?.announcement_type] },
-		{ label: 'Action', value: 1 },
+		{ label: 'Type', value: ANNOUNCEMENT_TYPE_MAPPING[data?.announcement_type] },
+		{ label: 'Status', value: isValid === -1 ? 'active' : 'draft' },
+		{ label: 'Actions', value: 1 },
 	];
 
 	const handleView = (i) => {
@@ -55,12 +67,62 @@ function DisplayCard({
 		);
 	};
 
-	const displayValues = (label, values) => {
-		if (label === 'Announcement Type') {
-			return <Pill color="yellow">{values}</Pill>;
+	const renderPopover = () => (
+		<div className={styles.buttons_container}>
+			<Button
+				type="view"
+				themeType="primary"
+				size="md"
+				// onClick={() => handleView(index)}
+			>
+				<IcMAnnouncement height={20} width={20} className={styles.button_icon} />
+				Go Live
+			</Button>
+			<Button
+				type="view"
+				themeType="secondary"
+				size="md"
+				onClick={() => handleView(index)}
+			>
+				<IcMEyeopen className={styles.button_icon} />
+				View
+			</Button>
+			{activeTab === 'active' && isValid !== -1 && (
+				<Button
+					type="edit"
+					themeType="secondary"
+					size="md"
+					onClick={() => editDetails()}
+				>
+					<IcMEdit className={styles.button_icon} />
+					Edit
+				</Button>
+			)}
+			{activeTab === 'active' && isValid !== -1 && (
+
+				<Button
+					type="edit"
+					themeType="secondary"
+					size="md"
+					onClick={() => setShowDeleteModal(true)}
+				>
+					<IcMDelete className={styles.button_icon} />
+					Delete
+				</Button>
+			)}
+
+		</div>
+	);
+
+	const displayValues = (label, value) => {
+		if (label === 'Type') {
+			return <Pill color="yellow">{value}</Pill>;
+		}
+		if (label === 'Status') {
+			return <Pill color={STATUS_MAPPING[value].color}>{STATUS_MAPPING[value].label}</Pill>;
 		}
 
-		return <div className={styles.value}>{values}</div>;
+		return <div className={styles.value}>{value}</div>;
 	};
 
 	const getPreviewModalHeader = () => (
@@ -76,41 +138,18 @@ function DisplayCard({
 			<div className={styles.upperrow}>
 				<div className={styles.slabs} style={{ width: '100%' }}>
 					{options.map((i) => (
-						<div className={styles.slab} key={i.label}>
+						<div className={i.label !== 'Actions' ? styles.slab : styles.popover} key={i.label}>
 							<div className={styles.label}>{i.label}</div>
-							{ i.label === 'Action'
+							{ i.label === 'Actions'
 								? (
-									<div className={styles.buttoncontainer}>
-										<Button
-											type="view"
-											themeType="primary"
-											size="sm"
-											style={{ marginRight: 8 }}
-											onClick={() => handleView(index)}
-										>
-											View
-										</Button>
-										{activeTab === 'active' && isValid !== -1 && (
-											<Button
-												type="edit"
-												themeType="secondary"
-												size="sm"
-												style={{ marginRight: 8 }}
-												onClick={() => editDetails()}
-											>
-												Edit
-											</Button>
-										)}
-										{activeTab === 'active' && isValid !== -1 && (
-											<IcMDelete
-												height={20}
-												width={20}
-												style={{ cursor: 'pointer' }}
-												onClick={() => setShowDeleteModal(true)}
-											/>
-										)}
+									<Popover
+										placement="left"
+										trigger="mouseenter"
+										render={renderPopover()}
+									>
+										<Button onClick={() => setPopoverVisible(!popoverVisible)}>Hover</Button>
+									</Popover>
 
-									</div>
 								)
 								: displayValues(i.label, i.value)}
 						</div>

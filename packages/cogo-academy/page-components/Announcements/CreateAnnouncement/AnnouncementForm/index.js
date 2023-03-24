@@ -78,7 +78,8 @@ function AnnouncementForm({
 				This Announcement will go live on
 				{' '}
 				<span className={styles.live_date}>{start_date}</span>
-				.
+				{' '}
+				after being approved.
 				Once it goes live it cannot be edited. Are you sure you want to Submit ?
 			</div>
 		);
@@ -227,6 +228,7 @@ function AnnouncementForm({
 					<Modal.Header title={getSubmitModalHeader()} />
 
 					<Modal.Body className={styles.preview_modal_body}>
+						<div className={styles.title_on_submit}>{title}</div>
 						<Preview
 							formValues={formValues}
 							editorValue={editorValue.toString('html')}
