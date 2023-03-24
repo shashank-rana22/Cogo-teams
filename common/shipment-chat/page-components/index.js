@@ -2,7 +2,6 @@ import { Modal } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
 
-// import getStaticPath from '@cogo/static';
 import useSeen from '../hooks/useSeen';
 
 import List from './List';
@@ -13,15 +12,6 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 
 	const [show, setShow] = useState(false);
 	const [seenLoading, setSeenLoading] = useState(false);
-
-	// let audio = null;
-	// if (typeof window !== 'undefined') {
-	// 	audio = new Audio(getStaticPath('/mp3/chat-notification.mp3'));
-	// }
-
-	const handleShow = () => {
-		setShow(true);
-	};
 
 	const { msgSeen } = useSeen();
 
@@ -43,10 +33,6 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 	const count = totalCount?.reduce((a, b) => a + b, inititalValue);
 
 	useEffect(() => {
-		// if (count > 0 && !show) {
-		// 	audio.play();
-		// }
-
 		setMessagesCount((pv) => ({ ...pv, shipment_chat: count }));
 	}, [count, setMessagesCount, show]);
 
@@ -56,7 +42,7 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 				className={styles.chat_icon}
 				role="button"
 				tabIndex={0}
-				onClick={() => handleShow()}
+				onClick={() => setShow(true)}
 				size={400}
 			>
 				{count > 0 && !show ? <div className={styles.circle}>{count || '5'}</div> : null}
