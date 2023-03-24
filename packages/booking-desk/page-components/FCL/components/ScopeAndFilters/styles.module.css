@@ -1,0 +1,22 @@
+.container {
+    .ui_select_display_container {
+        width: 120px;
+        height: initial !important;
+    }
+    .ui_select_toggle_button {
+        padding: 4px 8px;
+    }
+}
+
+.filter_text {
+    display: flex;
+    align-items: center;
+    background: var(--color-primary-error-red-4);
+    font-size: var(--font-size-md);
+    padding: 4px;
+    border-radius: 4px;
+
+    svg {
+        margin-right: 6px;
+    }
+}

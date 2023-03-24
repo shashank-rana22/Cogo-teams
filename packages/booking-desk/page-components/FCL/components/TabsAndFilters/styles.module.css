@@ -22,16 +22,17 @@
     }
 
     :global {
-        .ui_select_display_container {
-            width: 120px;
-            height: initial !important;
-        }
-        .ui_select_toggle_button {
-            padding: 4px 8px;
-        }
         .ui_toggle_container {
             align-items: center;
             padding: 0 10px;
+        }
+        .ui_input_container {
+            height: initial !important;
+            width: 140px;
+
+            .ui_input_control {
+                font-size: var(--font-size-md)
+            }
         }
     }
 }
