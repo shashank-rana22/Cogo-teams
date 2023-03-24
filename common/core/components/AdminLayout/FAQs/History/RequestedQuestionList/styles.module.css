@@ -1,0 +1,42 @@
+.header{
+    color: #4f4f4f;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 150%;
+	padding: 4px 10px;
+}
+
+.question_time_container{
+    display: flex;
+	justify-content: space-between;
+	padding: 10px 10px;
+	border-radius: 4px;
+	/* background: ${(props) => props.background}; */
+	/* cursor: ${(props) => props.cursor}; */
+	margin-bottom: 4px;
+
+	&:hover {
+		box-shadow: 0 0 8px #627fac33;
+		background: #f8f2e7;
+	}
+}
+
+.pills_question_wrapper{
+    display: flex;
+}
+
+.question_wrapper{
+    color: #4f4f4f;
+	font-size: 13px;
+	line-height: 150%;
+	padding-left: 16px;
+	max-width: 250px;
+	opacity: 0.8;
+}
+
+.time_wrapper{
+    color: #828282;
+	font-size: 12px;
+	line-height: 150%;
+	padding: 0px 12px;
+}

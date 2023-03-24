@@ -1,0 +1,15 @@
+.container{
+    padding-top: 10px;
+	width: 100%;
+}
+
+.input_container{
+	margin-top: 4px;
+
+}
+
+.empty_state_wrapper{
+    font-size: 14px;
+	text-align: center;
+	padding-top: 10px;
+}
