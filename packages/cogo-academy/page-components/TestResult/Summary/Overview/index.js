@@ -24,7 +24,7 @@ function Overview({ time_taken, topics_covered }) {
 							{Object.keys(topics_covered).map((key, index) => (
 								<div className={styles.item_text}>
 
-									{startCase(key)}
+									{startCase(topics_covered[key])}
 									{index !== Object.keys(topics_covered).length - 1 && ',' }
 								</div>
 							))}
