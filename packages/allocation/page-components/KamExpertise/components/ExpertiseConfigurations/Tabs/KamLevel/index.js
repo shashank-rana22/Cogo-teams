@@ -7,8 +7,8 @@ import KamLevelCard from './CollapseComponent/KamLevelCard';
 import KamLevelDropDown from './CollapseComponent/KamLevelDropDown';
 import Header from './Header';
 
-function KamLevel({ setMainLoading, selectedVersion }) {
-	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig();
+function KamLevel({ setMainLoading, responseId }) {
+	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig({ responseId });
 
 	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
@@ -16,10 +16,6 @@ function KamLevel({ setMainLoading, selectedVersion }) {
 	useEffect(() => {
 		setMainLoading(levelLoading);
 	}, [levelLoading, setMainLoading]);
-
-	useEffect(() => {
-		refetch();
-	}, [selectedVersion, refetch]);
 
 	const auditData = kamConfigDetails?.audit_data || {};
 	const kamConfigLevelDetails = kamConfigDetails?.data || [];

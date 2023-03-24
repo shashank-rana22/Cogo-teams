@@ -1,10 +1,10 @@
-import { Toast, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { IcMAlert } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function NewVersion({ setMode, setShowModal, setSelectedVersion }) {
+function NewVersion({ setMode, setSelectedVersion, getVersion, CreateModalLoading }) {
 	return (
 
 		<div className={styles.container}>
@@ -19,13 +19,20 @@ function NewVersion({ setMode, setShowModal, setSelectedVersion }) {
 				Do you wish to proceed?
 			</div>
 			<div className={styles.button_container}>
-				<Button themeType="teritiary" onClick={() => { setMode('initial-mode'); }}>Back</Button>
-				<Button onClick={() => {
-					setSelectedVersion('new-version');
-					setShowModal(false);
-					setMode('initial-mode');
-					Toast.success('New Draft Loaded');
-				}}
+				<Button
+					themeType="teritiary"
+					disabled={CreateModalLoading}
+					onClick={() => { setMode('initial-mode'); }}
+				>
+					Back
+
+				</Button>
+				<Button
+					loading={CreateModalLoading}
+					onClick={() => {
+						setSelectedVersion('new');
+						getVersion();
+					}}
 				>
 					Proceed
 

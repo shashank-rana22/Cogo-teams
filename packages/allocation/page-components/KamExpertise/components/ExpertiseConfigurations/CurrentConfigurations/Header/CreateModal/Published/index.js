@@ -1,4 +1,4 @@
-import { cl, Pill, Table } from '@cogoport/components';
+import { Pill, Table } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 // import { format } from '@cogoport/utils';
 import React from 'react';
@@ -6,37 +6,19 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Published({ setSelectedVersion = () => {} }) {
-	const table = [
+function Published({ setSelectedVersion = () => {}, data }) {
+	const table = [];
 
-		{
-			version_number : 3,
-			status         : 'live',
-			updated_at     : '22-sep-20203',
-		},
-		{
-			version_number : 2,
-			status         : 'expired',
-			updated_at     : '22-sep-20203',
-		},
-		{
-			version_number : 1,
-			status         : 'expired',
-			updated_at     : '22-sep-20203',
-		},
-	];
-	// const table = [];
+	data.forEach((element) => {
+		if (element.status_value !== 'draft') {
+			table.push({
+				version_number : element?.version_number || '',
+				status         : element?.status_value || '',
+				updated_at     : element?.audit_data?.updated_at || '',
 
-	// data.forEach((element) => {
-	// 	if (element.version_number !== '0') {
-	// 		table.push({
-	// 			version_number : element?.version_number || '-',
-	// 			status         : element?.status_value || '-',
-	// 			updated_at     : element?.audit_data?.updated_at || '-',
-
-	// 		});
-	// 	}
-	// });
+			});
+		}
+	});
 	const columns = [
 		{
 			Header   : 'VERSION NAME',
@@ -47,7 +29,7 @@ function Published({ setSelectedVersion = () => {} }) {
 				<section>
 					Version
 					{' '}
-					{value || '__'}
+					{value || ''}
 				</section>
 			),
 		},
@@ -68,7 +50,7 @@ function Published({ setSelectedVersion = () => {} }) {
 			Header   : 'LAST UPDATED',
 			accessor : 'updated_at',
 			Cell     : ({ value }) => (
-				<section>{ value ?? format(value, 'dd-MM-YYYY')}</section>
+				<section>{value ? format(value, 'dd-MM-YYYY') : ''}</section>
 			),
 		},
 
@@ -85,14 +67,11 @@ function Published({ setSelectedVersion = () => {} }) {
 			</div>
 
 			<Table
-				// className={styles.table}
-				className={cl`
-					${styles.table}
-				`}
+				className={styles.table}
 				columns={columns}
 				data={table}
 				selectType="single"
-				onRowClick={(row) => { setSelectedVersion(row.version_number); }}
+				onRowClick={(row) => setSelectedVersion(row.version_number)}
 			/>
 
 		</div>

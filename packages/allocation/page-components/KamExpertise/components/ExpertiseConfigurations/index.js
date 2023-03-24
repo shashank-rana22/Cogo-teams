@@ -28,8 +28,8 @@ const TAB_PANEL_MAPPING = {
 function ViewAllConfigs() {
 	const router = useRouter();
 	const [activeConfigTab, setActiveConfigTab] = useState('kam-expertise-score-config');
-	const [selectedVersion, setSelectedVersion] = useState('');
-	const [publish, setPublish] = useState(false);
+	// const [publish, setPublish] = useState(false);
+	const [responseId, setResponseId] = useState('');
 	const [mainLoading, setMainLoading] = useState();
 	const [showPublishModal, setShowPublishModal] = useState(false);
 
@@ -37,6 +37,8 @@ function ViewAllConfigs() {
 		router.push('/allocation/kam-expertise');
 	};
 	const { listKamExpertiseCurrentConfigs, ConfigCardLoading } = useGetKamExpertiseCurrentConfig();
+
+	// const { onCreate, loading: publishLoading } = usePublishDraft({ setShowPublishModal });
 
 	return (
 		<section className={styles.main_container}>
@@ -55,9 +57,10 @@ function ViewAllConfigs() {
 				</div>
 
 				<CurrentConfigurations
-					selectedVersion={selectedVersion}
-					setSelectedVersion={setSelectedVersion}
 					listKamExpertiseCurrentConfigs={listKamExpertiseCurrentConfigs}
+					ConfigCardLoading={ConfigCardLoading}
+					responseId={responseId}
+					setResponseId={setResponseId}
 
 				/>
 
@@ -70,8 +73,7 @@ function ViewAllConfigs() {
 								<TabPanel key={name} name={name} title={title}>
 									<Component
 										setMainLoading={setMainLoading}
-										selectedVersion={selectedVersion}
-
+										responseId={responseId}
 									/>
 								</TabPanel>
 							) : null;
@@ -92,8 +94,8 @@ function ViewAllConfigs() {
 						<PublishVersionModal
 							setShowPublishModal={setShowPublishModal}
 							showPublishModal={showPublishModal}
-							publish={publish}
-							setPublish={setPublish}
+							// publish={publish}
+							// setPublish={setPublish}
 						/>
 					)}
 				</div>

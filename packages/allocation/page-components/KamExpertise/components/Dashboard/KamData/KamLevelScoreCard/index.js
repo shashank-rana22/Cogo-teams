@@ -12,7 +12,7 @@ function KamLevelScoreCard(props) {
 		setKamLevel,
 		loading = false,
 		date_params,
-		setParams,
+		setListParams,
 		setOverviewParams,
 	} = props;
 
@@ -27,7 +27,7 @@ function KamLevelScoreCard(props) {
 			},
 		});
 
-		setParams((pv) => ({
+		setListParams((pv) => ({
 			...pv,
 			filters: {
 				...pv.filters,
@@ -77,7 +77,7 @@ function KamLevelScoreCard(props) {
 			<Card.Description className={styles.card_content}>
 				<CardContent listData={listData} value="count" />
 
-				<CardContent listData={listData} value="average" />
+				<CardContent listData={listData} value="average_score" />
 			</Card.Description>
 		</Card>
 	);

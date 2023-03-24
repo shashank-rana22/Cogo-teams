@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import { IcCStar } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
@@ -45,16 +46,18 @@ function ListItem(props) {
 							badge_details.map((value, i) => (
 								i < 3
 									? (
-										<div key={value?.id} className={styles.badge_item}>
-											<img src={value?.image_url} alt="badge" />
-											<div className={styles.star}>
-												{[1, 2, 3].map((it) => (
-													<div key={it}>
-														<IcCStar width={10} stroke="#FFDF33" />
-													</div>
-												))}
+										<Tooltip key={value?.id} content={data.badge_name}>
+											<div className={styles.badge_item}>
+												<img src={value?.image_url} alt="badge" />
+												<div className={styles.star}>
+													{[1, 2, 3].map((it) => (
+														<div key={it}>
+															<IcCStar width={10} stroke="#FFDF33" />
+														</div>
+													))}
+												</div>
 											</div>
-										</div>
+										</Tooltip>
 									)
 									: null
 							))

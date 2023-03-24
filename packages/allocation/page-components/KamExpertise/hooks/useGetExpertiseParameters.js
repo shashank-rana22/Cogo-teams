@@ -1,6 +1,7 @@
 import { useAllocationRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
-const useGetExpertiseParameters = ({ activeCollapse = '' }) => {
+const useGetExpertiseParameters = ({ activeCollapse = '', responseId }) => {
 	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : '/kam_expertise_event_configuration',
 		method  : 'GET',
@@ -16,6 +17,10 @@ const useGetExpertiseParameters = ({ activeCollapse = '' }) => {
 			},
 		},
 	}, { manual: false });
+
+	useEffect(() => {
+		refetch();
+	}, [responseId, refetch]);
 
 	return {
 		data,

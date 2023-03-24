@@ -1,6 +1,7 @@
 import { useAllocationRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
-const useGetKamExpertiseConfig = () => {
+const useGetKamExpertiseConfig = ({ responseId }) => {
 	const [{ data, loading }, refetch] = useAllocationRequest({
 		url     : '/kam_expertise_configuration_levels',
 		method  : 'GET',
@@ -14,6 +15,10 @@ const useGetKamExpertiseConfig = () => {
 			audit_data_required: true,
 		},
 	}, { manual: false });
+
+	useEffect(() => {
+		refetch();
+	}, [responseId, refetch]);
 
 	return {
 		kamConfigDetails : data,

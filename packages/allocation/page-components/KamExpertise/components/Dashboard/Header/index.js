@@ -9,14 +9,14 @@ import styles from './styles.module.css';
 function Header() {
 	const router = useRouter();
 
-	const { listKamExpertiseCurrentConfigs } = useGetKamExpertiseCurrentConfig();
+	const { listKamExpertiseCurrentConfigs = {} } = useGetKamExpertiseCurrentConfig();
 
 	const {
-		list:data = [],
+		list : data = [],
 		audit_data = {},
 	} = listKamExpertiseCurrentConfigs;
 
-	const LIVE_VERSION = data.filter((item) => item.status_value === 'active')[0]?.version_number || '';
+	const LIVE_VERSION = data.filter((item) => item.status_value === 'active')?.[0]?.version_number || '';
 
 	return (
 		<div className={styles.container}>
@@ -33,7 +33,7 @@ function Header() {
 						{' '}
 						<b>
 							{ audit_data.updated_at
-								? format(audit_data.updated_at, 'dd MMM yyyy') : ''}
+								? format(audit_data?.updated_at, 'dd MMM yyyy') : ''}
 						</b>
 					</div>
 

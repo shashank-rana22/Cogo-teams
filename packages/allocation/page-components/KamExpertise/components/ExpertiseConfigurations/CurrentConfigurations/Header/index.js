@@ -2,6 +2,8 @@ import { Button, Modal } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useGetKamExpertiseVersionDetials from '../../../../hooks/useGetKamExpertiseVersionDetials';
+
 import CreateModal from './CreateModal';
 import Draft from './CreateModal/Draft';
 import NewVersion from './CreateModal/NewVersion';
@@ -10,9 +12,9 @@ import ModalFooter from './ModalFooter';
 import styles from './styles.module.css';
 
 const CONSTANT_KEYS = {
-	PUBLISHED_VERSION : 'published-version',
+	PUBLISHED_VERSION : 'choose_published_version',
 	SAVED_DRAFT       : 'saved-draft',
-	NEW_VERSION       : 'new-version',
+	NEW_VERSION       : 'new',
 	INITIAL_MODE      : 'initial-mode',
 };
 
@@ -25,9 +27,17 @@ const CREATE_CONFIGURATION_MAPPING = {
 	[INITIAL_MODE]      : CreateModal,
 };
 
-function Header({ setSelectedVersion, selectedVersion, audit_data = {}, LIVE_VERSION, data = [] }) {
+function Header({ audit_data = {}, LIVE_VERSION, data = [], setResponseId }) {
+	const [selectedVersion, setSelectedVersion] = useState('');
 	const [mode, setMode] = useState('initial-mode');
 	const [showModal, setShowModal] = useState(false);
+	const { getVersion, CreateModalLoading } = useGetKamExpertiseVersionDetials({
+		selectedVersion,
+		setMode,
+		setShowModal,
+		mode,
+		setResponseId,
+	});
 
 	const componentProps = {
 		[PUBLISHED_VERSION]: {
@@ -44,10 +54,13 @@ function Header({ setSelectedVersion, selectedVersion, audit_data = {}, LIVE_VER
 			setMode,
 			setShowModal,
 			setSelectedVersion,
+			getVersion,
+			CreateModalLoading,
 		},
 		[INITIAL_MODE]: {
 			setMode,
 			setSelectedVersion,
+			data,
 		},
 	};
 
@@ -90,42 +103,48 @@ function Header({ setSelectedVersion, selectedVersion, audit_data = {}, LIVE_VER
 			</div>
 
 			<div>
-				<Button onClick={() => { setShowModal(true); }}>
+				<Button onClick={() => setShowModal(true)}>
 					Create
 				</Button>
 
-				<Modal
-					size="md"
-					show={showModal}
-					onClose={() => {
-						setShowModal(false);
-						setMode('initial-mode');
-						setSelectedVersion('');
-					}}
-					placement="top"
-				>
-					<Modal.Header title="Create" />
-					<Modal.Body>
-						{Component && (
-							<Component
-								key={mode}
-								{...(componentProps[mode] || {})}
-							/>
-						)}
-					</Modal.Body>
+				{showModal && (
+					<Modal
+						size="md"
+						show={showModal}
+						onClose={() => {
+							setShowModal(false);
+							setMode('initial-mode');
+							setSelectedVersion('');
+						}}
+						placement="top"
+					>
+						<Modal.Header title="Create" />
 
-					{mode === 'published-version' ? (
-						<Modal.Footer className={styles.test}>
-							<ModalFooter
-								setMode={setMode}
-								setSelectedVersion={setSelectedVersion}
-								setShowModal={setShowModal}
-								selectedVersion={selectedVersion}
-							/>
-						</Modal.Footer>
-					)
-						: null}
-				</Modal>
+						<Modal.Body>
+							{Component && (
+								<Component
+									key={mode}
+									{...(componentProps[mode] || {})}
+								/>
+							)}
+						</Modal.Body>
+
+						{mode === 'choose_published_version' ? (
+							<Modal.Footer className={styles.test}>
+								<ModalFooter
+									setMode={setMode}
+									setSelectedVersion={setSelectedVersion}
+									setShowModal={setShowModal}
+									selectedVersion={selectedVersion}
+									mode={mode}
+									getVersion={getVersion}
+									CreateModalLoading={CreateModalLoading}
+								/>
+							</Modal.Footer>
+						)
+							: null}
+					</Modal>
+				)}
 			</div>
 
 		</div>

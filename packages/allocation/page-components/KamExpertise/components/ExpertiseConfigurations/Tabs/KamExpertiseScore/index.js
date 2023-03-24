@@ -52,17 +52,14 @@ const titleSection = (expertiseItem = {}) => (
 	</div>
 );
 
-function KamExpertiseScoreConfig({ setMainLoading, selectedVersion }) {
+function KamExpertiseScoreConfig({ setMainLoading, responseId }) {
 	const [addConditionModal, setAddConditionModal] = useState({});
 
 	const [activeCollapse, setActiveCollapse] = useState('');
 
 	const showModal = !isEmpty(addConditionModal);
 
-	const { data, loading, refetch } = useGetExpertiseParameters({ selectedVersion });
-	useEffect(() => {
-		refetch();
-	}, [selectedVersion, refetch]);
+	const { data, loading, refetch } = useGetExpertiseParameters({ activeCollapse, responseId });
 
 	useEffect(() => {
 		setMainLoading(loading);
