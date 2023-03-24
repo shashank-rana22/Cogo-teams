@@ -59,10 +59,6 @@ function KamExpertiseScoreConfig({ setMainLoading, responseId }) {
 
 	const showModal = !isEmpty(addConditionModal);
 
-	const onClose = () => {
-		setAddConditionModal({});
-	};
-
 	const { data, loading, refetch } = useGetExpertiseParameters({ activeCollapse, responseId });
 
 	useEffect(() => {
@@ -72,11 +68,12 @@ function KamExpertiseScoreConfig({ setMainLoading, responseId }) {
 	const { list = [], audit_data: auditData = {} } = data || {};
 
 	const {
-		// createConditionloading,
+		createConditionloading,
 		formProps,
 		onSave,
-	} = useCreateAllocationKamExpertiseEventScoring({
 		onClose,
+	} = useCreateAllocationKamExpertiseEventScoring({
+		setAddConditionModal,
 		refetch,
 	});
 

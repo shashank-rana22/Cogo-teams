@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { isEmpty, format } from '@cogoport/utils';
 
+// import Form from '../../../../../common/Form';
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateMasterConfiguration from '../../../hooks/useCreateMasterConfiguration';
 
@@ -14,6 +15,7 @@ function CreateMastery(props) {
 	} = props;
 
 	const { updated_at, created_by = {} } = masteryItemData;
+
 	const {
 		formProps,
 		getAddMasteryControls,
@@ -95,6 +97,7 @@ function CreateMastery(props) {
 								</div>
 							);
 						})}
+						{/* <Form formProps={formProps} controls={getAddMasteryControls} /> */}
 
 						<div className={styles.lower_background}>
 							<div style={{ flexBasis: '29%' }}>

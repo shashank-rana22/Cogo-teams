@@ -24,6 +24,8 @@ const MEDALS_MAPPING = [
 function CreateBadge(props) {
 	const { setToggleScreen, badgeItemData = {}, listRefetch } = props;
 
+	const { updated_at, created_by = {} } = badgeItemData;
+
 	const onClose = () => {
 		setToggleScreen('badge_details');
 	};
@@ -46,13 +48,13 @@ function CreateBadge(props) {
 						<p className={styles.text_styles}>
 							Last Modified :
 							{' '}
-							{badgeItemData.updated_at ? format(badgeItemData.updated_at, 'dd MMMM yyyy') : '_'}
+							{updated_at ? format(updated_at, 'dd MMMM yyyy') : '_'}
 						</p>
 
 						<p className={styles.text_styles}>
 							Last Modified By :
 							{' '}
-							{badgeItemData.lstModifiedBy ? badgeItemData.lstModifiedBy : '_'}
+							{created_by?.name}
 						</p>
 					</div>
 				)}
