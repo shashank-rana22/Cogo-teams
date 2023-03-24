@@ -1292,6 +1292,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'update_shipment_rail_domestic_freight_invoice_type',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
