@@ -64,7 +64,7 @@ function RevenueAnalysis({
 	if (loading) {
 		return (
 			<div className={styles.container}>
-				<RevenueLoader />
+				<RevenueLoader count={4} />
 			</div>
 		);
 	}
