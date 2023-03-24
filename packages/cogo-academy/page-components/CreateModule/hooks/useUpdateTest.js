@@ -12,11 +12,11 @@ function useUpdateTest() {
 	const updateTest = async ({ test_id, values = {}, fetchList, type = 'edit', status = '' }) => {
 		try {
 			if (type === 'edit') {
-				const { test_duration, cut_off_marks, maximum_attempts, name, test_validity, guidelines } = values;
+				const { test_duration, cut_off_percentage, maximum_attempts, name, test_validity, guidelines } = values;
 
 				const testDetailsObj = {
 					test_duration,
-					cut_off_marks,
+					cut_off_percentage,
 					maximum_attempts,
 					name,
 					validity_start : test_validity.startDate,
@@ -28,7 +28,7 @@ function useUpdateTest() {
 					.filter(
 						([key]) => ![
 							'test_duration',
-							'cut_off_marks',
+							'cut_off_percentage',
 							'maximum_attempts',
 							'name',
 							'test_validity',

@@ -10,7 +10,7 @@ function useGetTestList() {
 		page       : 1,
 		page_limit : 10,
 		filters    : {
-			status: ['active', 'draft'],
+			status: ['active', 'draft', 'published'],
 		},
 	});
 	const [input, setInput] = useState('');

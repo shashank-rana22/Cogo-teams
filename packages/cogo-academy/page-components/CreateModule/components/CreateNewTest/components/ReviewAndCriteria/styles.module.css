@@ -122,3 +122,33 @@
 	margin-top: 15px;
 	margin-bottom: 5px;
 }
+
+.test_details{
+	border: 1px solid #E0E0E0;
+	border-radius: 6px;
+	padding: 20px 40px;
+	margin-top: 20px;
+}
+
+.test_details{
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.test_details h5{
+	color: #4F4F4F;
+	font-weight: 400;
+	line-height: 10px;
+	font-size: 14px;
+}
+
+.test_details p{
+	color: #4F4F4F;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.test_details div{
+	margin: 20px 0px;
+}
