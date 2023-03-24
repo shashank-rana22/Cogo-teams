@@ -74,14 +74,15 @@ function SalesFunnel({ headerFilters }) {
 				<div className={styles.row}>
 					<div className={styles.col}>
 						<div className={styles.card}>
-							<BookingsDone
+							<QuotationCard
 								salesFunnel={salesFunnel}
 								currency={currency}
 								loading={loading}
 							/>
+
 						</div>
 						<div className={styles.card}>
-							<QuotationCard
+							<BookingsDone
 								salesFunnel={salesFunnel}
 								currency={currency}
 								loading={loading}
@@ -91,17 +92,18 @@ function SalesFunnel({ headerFilters }) {
 
 					<div className={styles.col}>
 						<div className={styles.card}>
+							<BookingConfirmed
+								salesFunnel={salesFunnel}
+								currency={currency}
+								loading={loading}
+							/>
+
+						</div>
+						<div className={styles.card}>
 							<InvoiceCard
 								salesFunnel={salesFunnel}
 								currency={currency}
 								revenueMonth={revenueMonth}
-								loading={loading}
-							/>
-						</div>
-						<div className={styles.card}>
-							<BookingConfirmed
-								salesFunnel={salesFunnel}
-								currency={currency}
 								loading={loading}
 							/>
 						</div>

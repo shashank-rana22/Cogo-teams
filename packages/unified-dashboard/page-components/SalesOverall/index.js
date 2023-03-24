@@ -63,15 +63,16 @@ function SalesOverall({ headerFilters }) {
 				<div className={styles.row}>
 					<div className={styles.col}>
 						<div className={styles.card}>
-							<BookingsDone
+							<QuotationCard
 								salesFunnel={salesOverall}
 								currency={currency}
 								loading={loading}
 							/>
+
 						</div>
 
 						<div className={styles.card}>
-							<QuotationCard
+							<BookingsDone
 								salesFunnel={salesOverall}
 								currency={currency}
 								loading={loading}
@@ -82,18 +83,19 @@ function SalesOverall({ headerFilters }) {
 
 					<div className={styles.col}>
 						<div className={styles.card}>
+							<BookingConfirmed
+								salesFunnel={salesOverall}
+								currency={currency}
+								loading={loading}
+							/>
+
+						</div>
+
+						<div className={styles.card}>
 							<InvoiceCard
 								salesFunnel={salesOverall}
 								currency={currency}
 								revenueMonth={revenueMonth}
-								loading={loading}
-							/>
-						</div>
-
-						<div className={styles.card}>
-							<BookingConfirmed
-								salesFunnel={salesOverall}
-								currency={currency}
 								loading={loading}
 							/>
 						</div>
