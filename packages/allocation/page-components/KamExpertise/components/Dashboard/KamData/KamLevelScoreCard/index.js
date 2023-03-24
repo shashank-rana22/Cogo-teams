@@ -8,15 +8,25 @@ import styles from './styles.module.css';
 function KamLevelScoreCard(props) {
 	const {
 		index_lvl,
-		list_data,
+		listData,
 		setKamLevel,
 		loading = false,
 		date_params,
 		setParams,
+		setOverviewParams,
 	} = props;
 
 	const KamChange = () => {
 		setKamLevel(index_lvl + 1);
+
+		setOverviewParams({
+			kam_expertise_level : index_lvl + 1,
+			filters             : {
+				created_at_greater_than : date_params.start_date,
+				created_at_less_than    : date_params.end_date,
+			},
+		});
+
 		setParams((pv) => ({
 			...pv,
 			filters: {
@@ -65,9 +75,9 @@ function KamLevelScoreCard(props) {
 			)}
 			/>
 			<Card.Description className={styles.card_content}>
-				<CardContent list_data={list_data} value="count" />
+				<CardContent listData={listData} value="count" />
 
-				<CardContent list_data={list_data} value="average" />
+				<CardContent listData={listData} value="average" />
 			</Card.Description>
 		</Card>
 	);

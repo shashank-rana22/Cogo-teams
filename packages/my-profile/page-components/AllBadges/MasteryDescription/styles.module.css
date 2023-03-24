@@ -16,10 +16,6 @@
     display: flex;
     padding: 8px 8px 8px 0;
     justify-content: space-between;
-
-    @media (max-width: 576px) {
-        flex-direction: column;
-    }
 }
 
 .main_badge {
@@ -57,18 +53,10 @@
 .details_header {
     display: flex;
     justify-content: space-between;
-
-    @media (max-width: 576px) {
-        flex-direction: column;
-    }
 }
 
 .lable_value {
     margin: 8px 8px 0 0;
-
-    @media (max-width: 576px) {
-        margin: 16px 8px 0 0;
-    }
 }
 
 .small_badge {
@@ -145,4 +133,40 @@
         max-width: 192px;
         width: 100%;
     }
+}
+
+.badges {
+    margin-top: 24px;
+}
+
+.unlocked_badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &:after {
+        content: "";
+        flex: auto;
+    }
+}
+
+.badge_image {
+    height: 100px;
+    width: 100px;
+
+    img {
+        height: 100%;
+        width: 100%;
+        border-radius: 8px;
+    }
+}
+
+.stars_container {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.unlocked_item {
+    margin: 16px 8px 0 8px;
 }

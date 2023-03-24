@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
+// import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
@@ -27,7 +27,6 @@ function useCreateBadgeConfiguration(props) {
 			Bronze_value : bronze_details?.score,
 			Silver_value : silver_details?.score,
 			Gold_value   : gold_details?.score,
-			// ToDo : image url -> handle using previous data
 		},
 	});
 
@@ -52,10 +51,10 @@ function useCreateBadgeConfiguration(props) {
 			Gold_img_value,
 		} = formValues || {};
 
-		if (Number(Bronze_value) < Number(Silver_value) && Number(Silver_value) < Number(Gold_value)) {
+		if ((Number(Bronze_value) < Number(Silver_value) && Number(Silver_value) < Number(Gold_value))
+		&& (Number(Bronze_value) > 0)) {
 			try {
 				const payload = {
-					version_id                         : '1',
 					badge_name                         : badge,
 					description,
 					expertise_configuration_detail_ids : condition,
@@ -95,8 +94,10 @@ function useCreateBadgeConfiguration(props) {
 
 				listRefetch();
 			} catch (error) {
-				Toast.error(getApiErrorString(error.response?.data));
+				Toast.error(error?.response?.data?.error || 'Something went wrong');
 			}
+		} else if (Number(Bronze_value) <= 0) {
+			Toast.error('Score schould be a positive value');
 		} else {
 			Toast.error('Provide Scores in proper order: Bronze < Silver < Gold');
 		}

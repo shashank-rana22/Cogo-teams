@@ -31,7 +31,7 @@ function useGetKamExpertiseStatsList() {
 		}));
 	}, [searchQuery, badgeName]);
 
-	const [{ loading, data }, refetch] = useAllocationRequest({
+	const [{ loading, data }] = useAllocationRequest({
 		url     : '/kam_expertise_stats_list',
 		method  : 'GET',
 		authkey : 'get_allocation_kam_expertise_stats_list',
@@ -51,7 +51,6 @@ function useGetKamExpertiseStatsList() {
 		setParams,
 		leaderboardLoading : loading,
 		leaderboardList    : list,
-		listRefetch        : refetch,
 		searchKAM,
 		setSearchKAM,
 		badgeName,

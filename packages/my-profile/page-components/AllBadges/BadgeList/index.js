@@ -40,7 +40,8 @@ function BadgeList(props) {
 	if (listLoading) {
 		return (
 			<div className={styles.badge_list_container}>
-				<p className={styles.heading}>Badges List</p>
+				<p className={styles.heading}>Badge List</p>
+
 				<div className={styles.badges_container}>
 					{
                         badgesGot?.map((item) => (
@@ -51,6 +52,7 @@ function BadgeList(props) {
 	</div>
                         ))
                     }
+
 					{
                         badgesNotGot?.map((item) => (
 	<div key={item.id} className={styles.container}>
@@ -67,7 +69,8 @@ function BadgeList(props) {
 
 	return (
 		<div className={styles.badge_list_container}>
-			<p className={styles.heading}>Badges List</p>
+			<p className={styles.heading}>Badge List</p>
+
 			<div className={styles.badges_container}>
 				{
                     badgesGot?.map((item) => (
@@ -82,11 +85,13 @@ function BadgeList(props) {
 			<div className={styles.image_container}>
 				<img className={styles.badge} src={item.image_url} alt="" />
 			</div>
+
 			<StarCollection />
 		</div>
 	</Tooltip>
                     ))
                 }
+
 				{
                     badgesNotGot?.map((item) => (
 	<Tooltip content={item.medal}>
@@ -100,6 +105,7 @@ function BadgeList(props) {
 			<div className={styles.image_container}>
 				<img className={styles.badge} src={item.image_url} alt="" />
 			</div>
+
 			<StarCollection />
 		</div>
 	</Tooltip>

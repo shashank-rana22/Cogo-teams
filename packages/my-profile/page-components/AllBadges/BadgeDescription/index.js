@@ -17,6 +17,7 @@ function BadgeDescription(props) {
 				<p className={styles.heading}>
 					<Placeholder width="100%" height="24px" style={{ marginTop: '8px' }} />
 				</p>
+
 				<div className={styles.display_flex}>
 					<Placeholder width="180px" height="180px" style={{ marginTop: '8px' }} />
 
@@ -25,10 +26,12 @@ function BadgeDescription(props) {
 							<div className={styles.next_unlock}>
 								<Placeholder width="160px" height="80px" />
 							</div>
+
 							<div className={styles.lable_value}>
 								<Placeholder width="160px" height="80px" />
 							</div>
 						</div>
+
 						{
 							[1, 2].fill('').map(() => (
 								<div className={styles.lable_value}>
@@ -39,9 +42,9 @@ function BadgeDescription(props) {
 						}
 					</div>
 				</div>
-				<div>
-					<Placeholder width="100%" height="20px" style={{ marginTop: '16px', marginBottom: '16px' }} />
 
+				<div>
+					<Placeholder width="100%" height="40px" style={{ margin: '16px 0' }} />
 				</div>
 			</div>
 		);
@@ -67,6 +70,7 @@ function BadgeDescription(props) {
 				<p className={styles.heading}>
 					{badge_details?.[0]?.badge_name}
 				</p>
+
 				<div className={styles.display_flex}>
 					<div className={styles.badge_container}>
 						<img
@@ -74,6 +78,7 @@ function BadgeDescription(props) {
 							src={badgeDetail.url}
 							alt="Main Badge"
 						/>
+
 						{/* //Todo: stars arent available in the response */}
 						{/* <div className={styles.stars}>
 							{[1, 2, 3].map((item) => (
@@ -88,21 +93,25 @@ function BadgeDescription(props) {
 						<div className={styles.details_header}>
 							<div className={styles.lable_value}>
 								<p className={styles.lable}>Achievement Date</p>
+
 								<p className={styles.value}>
 									{badgeDetail.achievement_date
 										? format(badgeDetail?.achievement_date, 'dd MMM YYYY')
 										: 'Not achieved yet'}
 								</p>
 							</div>
+
 							{ !isEmpty(next_badge) && (
 								<div className={styles.next_unlock}>
 									<p className={styles.lable}>Next unlock</p>
+
 									<div className={styles.next_badge}>
 										<img
 											className={styles.small_badge}
 											src={next_badge.image_url}
 											alt=""
 										/>
+
 										<p className={styles.value}>
 											{next_badge.badge_name}
 											{/* //Todo: stars arent available in the response */}
@@ -111,20 +120,25 @@ function BadgeDescription(props) {
 								</div>
 							)}
 						</div>
+
 						<div className={styles.lable_value}>
 							<p className={styles.lable}>Number of KAMs with badge</p>
+
 							<p className={styles.value}>{badgeDetail.kam_badge_count}</p>
 						</div>
 
 						<div className={styles.lable_value}>
 							<p className={styles.lable}>Rarity</p>
+
 							<p className={styles.value}>
 								{badgeDetail.rarity}
 								%
 							</p>
 						</div>
+
 						<div className={styles.description_container}>
 							<p className={styles.lable}>Description</p>
+
 							<p className={styles.value}>{badge_details?.[0]?.description}</p>
 						</div>
 

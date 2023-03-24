@@ -13,16 +13,14 @@ function CreateMastery(props) {
 		listRefetch,
 	} = props;
 
-	const onClose = () => {
-		setToggleScreen('badge_details');
-	};
-
+	const { updated_at, created_by = {} } = masteryItemData;
 	const {
 		formProps,
 		getAddMasteryControls,
 		loading = false,
 		onSave,
-	} = useCreateMasterConfiguration({ masteryItemData, onClose, listRefetch });
+		onClose,
+	} = useCreateMasterConfiguration({ masteryItemData, setToggleScreen, listRefetch });
 
 	const {
 		control,
@@ -33,6 +31,7 @@ function CreateMastery(props) {
 
 	const UploadController = getFieldController('fileUpload');
 	const InputController = getFieldController('textarea');
+	const watch_image_input = watch('image_input');
 
 	return (
 		<div>
@@ -47,28 +46,29 @@ function CreateMastery(props) {
 								>
 									Last Modified :
 									{' '}
-									{masteryItemData.updated_at
-										? format(masteryItemData.updated_at, 'yyyy-MMM-dd') : '___'}
+									{updated_at ? format(updated_at, 'dd MMMM yyyy') : '_'}
 								</p>
 
 								<p className={styles.text_styles}>
 									Last Modified By :
 									{' '}
-									{masteryItemData.modified_by
-										? masteryItemData.modified_by : '___'}
+									{created_by?.name}
 								</p>
+
 							</div>
 						) : null}
 
 						<h2 style={{ color: '#4f4f4f', marginTop: 28 }}>Add Mastery</h2>
+
 						<p className={styles.text_styles2}>
 							Select the conditions and number of completions necessary to
 							obtain the badge.
 						</p>
 					</div>
+
 					<div className={styles.content_container}>
-						{
-						getAddMasteryControls.map((controlItem) => {
+
+						{getAddMasteryControls.map((controlItem) => {
 							const ele = { ...controlItem };
 							const Element = getFieldController(ele.type);
 							if (!Element) return null;
@@ -76,6 +76,7 @@ function CreateMastery(props) {
 							return (
 								<div className={styles.form_container}>
 									<div>{ele.label}</div>
+
 									<Element
 										{...ele}
 										control={control}
@@ -93,8 +94,8 @@ function CreateMastery(props) {
 									</div>
 								</div>
 							);
-						})
-						}
+						})}
+
 						<div className={styles.lower_background}>
 							<div style={{ flexBasis: '29%' }}>
 								<p style={{ color: '#4f4f4f' }}>Badge PNG</p>
@@ -118,12 +119,13 @@ function CreateMastery(props) {
 
 								{/* Optimize if possible */}
 								<div>
-									{watch('image_input') ? (
+									{watch_image_input ? (
 										<div className={styles.preview}>
-											<img src={watch('image_input')} alt="preview_image" />
+											<img src={watch_image_input} alt="preview_image" />
 										</div>
 									) : null}
-									{!isEmpty(masteryItemData) && !watch('image_input') ? (
+
+									{!isEmpty(masteryItemData) && !watch_image_input ? (
 										<div className={styles.preview}>
 											<img
 												src={masteryItemData.badge_details[0].image_url}
@@ -134,8 +136,10 @@ function CreateMastery(props) {
 								</div>
 
 							</div>
+
 							<div className={styles.text_area_container}>
 								<p style={{ color: '#4f4f4f' }}>Description</p>
+
 								<InputController
 									name="description_input"
 									className={styles.text_area}
@@ -146,22 +150,25 @@ function CreateMastery(props) {
 									control={control}
 									rules={{ required: 'Description is required' }}
 								/>
+
 								<div className={styles.error_message}>
 									{isEmpty(masteryItemData) && errors?.description_input?.message}
 								</div>
 							</div>
 						</div>
 					</div>
+
 					<div className={styles.btncls}>
 						<Button
 							size="md"
-							themeType="secondary"
-							style={{ marginRight: 10, borderWidth: 0 }}
+							themeType="tertiary"
+							style={{ marginRight: 10 }}
 							onClick={onClose}
 							disabled={loading}
 						>
 							Cancel
 						</Button>
+
 						<Button
 							size="md"
 							themeType="primary"

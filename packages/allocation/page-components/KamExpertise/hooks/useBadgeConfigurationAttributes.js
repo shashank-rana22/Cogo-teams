@@ -3,11 +3,17 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { snakeCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 const useUpdateSingleBadge = (props) => {
-	const { medal, id, image_url:previous_image_url, score:previous_score, onClose, listRefetch } = props;
+	const { medal, id, image_url:previous_image_url, score:previous_score, listRefetch } = props;
+	const [openModal, setOpenModal] = useState(false);
 
 	const formProps = useForm();
+
+	const onClose = () => {
+		setOpenModal((pv) => !pv);
+	};
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_badge_configuration_detail_attributes',
@@ -44,13 +50,11 @@ const useUpdateSingleBadge = (props) => {
 
 		try {
 			const payload = {
-				performed_by_id   : '1234',
-				performed_by_type : 'user',
-				status            : 'active',
+				status    : 'active',
 				id,
-				medal             : snakeCase(medal),
-				image_url         : image_url || previous_image_url,
-				score             : score || previous_score,
+				medal     : snakeCase(medal),
+				image_url : image_url || previous_image_url,
+				score     : score || previous_score,
 			};
 
 			await trigger({ data: payload });
@@ -60,13 +64,15 @@ const useUpdateSingleBadge = (props) => {
 
 			Toast.success('Badge Updated!');
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 	return {
 		loading,
 		onSave,
+		onClose,
 		formProps,
+		openModal,
 	};
 };
 

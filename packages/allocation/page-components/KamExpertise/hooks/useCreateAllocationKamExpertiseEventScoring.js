@@ -8,7 +8,7 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 
 	const formProps = useForm({
 		defaultValues: {
-			scoring_type : '', // Todo based on expertise
+			scoring_type : '',
 			milestones   : [{
 				percentage : '',
 				score      : '',
@@ -30,8 +30,6 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
 
-		// Todo send the expertise type
-
 		const {
 			event_configuration_rule_mapping_id,
 			impact,
@@ -41,8 +39,6 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 			first_completion,
 			second_completion,
 		} = formValues;
-
-		// Todo Format Values
 
 		try {
 			const payload = {

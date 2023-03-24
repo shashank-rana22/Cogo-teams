@@ -1,6 +1,4 @@
-// import { useSelector } from '@cogoport/store';
 import { useAllocationRequest } from '@cogoport/request';
-// import { useEffect } from 'react';
 
 const useGetKamExpertiseLevelConfig = ({ transition_level }) => {
 	const [{ data = [], loading:listLoading }, listrefetch] = useAllocationRequest({

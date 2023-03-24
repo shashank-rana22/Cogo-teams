@@ -39,22 +39,24 @@ function CreateBadge(props) {
 	return (
 		<div>
 			<section className={styles.container}>
+
 				{!isEmpty(badgeItemData)
 				&& (
 					<div className={styles.fields_container}>
 						<p className={styles.text_styles}>
 							Last Modified :
 							{' '}
-							{badgeItemData.updated_at ? format(badgeItemData.updated_at, 'yyyy-MMM-dd') : '___'}
+							{badgeItemData.updated_at ? format(badgeItemData.updated_at, 'dd MMMM yyyy') : '_'}
 						</p>
 
 						<p className={styles.text_styles}>
 							Last Modified By :
 							{' '}
-							{badgeItemData.lstModifiedBy ? badgeItemData.lstModifiedBy : '___'}
+							{badgeItemData.lstModifiedBy ? badgeItemData.lstModifiedBy : '_'}
 						</p>
 					</div>
 				)}
+
 				{/* <p className={styles.text_styles}>
 					{index}
 				</p> */}
@@ -62,17 +64,19 @@ function CreateBadge(props) {
 				<h2 style={{ color: '#4f4f4f' }}>
 					{isEmpty(badgeItemData) ? 'Add Badge' : 'Update Badge'}
 				</h2>
+
 				<p className={styles.text_styles2}>
 					Select the conditions and number of completions necessary to obtain
 					the badge.
 				</p>
+
 				<form onSubmit={handleSubmit(onSave)}>
+
 					<section className={styles.badge_form_container}>
+
 						{getAddBadgesControls.map((controlItem) => {
 							const el = { ...controlItem };
-
 							const Element = getFieldController(el.type);
-
 							if (!Element) return null;
 
 							return (
@@ -101,7 +105,9 @@ function CreateBadge(props) {
 					</section>
 
 					<div className={styles.lower_background}>
+
 						<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
+
 						<div className={styles.display_flex}>
 							{MEDALS_MAPPING.map((data, index) => (
 								<BadgeUpdateCard
@@ -115,15 +121,15 @@ function CreateBadge(props) {
 								/>
 							))}
 						</div>
+
 					</div>
 
 					<div className={styles.btncls}>
 						<Button
 							size="md"
-							type="button"
-							themeType="secondary"
+							themeType="tertiary"
 							id="cancel_request_btn"
-							style={{ marginRight: 10, borderWidth: 0 }}
+							style={{ marginRight: 10 }}
 							disabled={loading}
 							onClick={onClose}
 						>

@@ -1,5 +1,5 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
-import { IcCStar, IcCSad } from '@cogoport/icons-react';
+import { IcCStar } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -24,10 +24,16 @@ function BadgeGotList(props) {
 
 	if (isEmpty(badgesGot)) {
 		return (
-			<div className={styles.empty}>
-				<span>
-					You don&apos;t have any badges!
-				</span>
+			<div>
+				<div className={styles.empty}>
+					{
+					[1, 2, 3].map((item) => (
+						<div key={item} className={styles.empty_boxes} />
+					))
+				}
+				</div>
+
+				<div className={styles.empty_text}>Sorry, you dont have any badges.</div>
 			</div>
 		);
 	}
@@ -43,6 +49,7 @@ function BadgeGotList(props) {
 								<div className={styles.badge}>
 									<img src={data.image_url} alt="badge" />
 								</div>
+
 								<div className={styles.stars}>
 									{[1, 2, 3].map((item) => (
 										<div key={item}>

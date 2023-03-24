@@ -40,7 +40,7 @@ function ListItem(props) {
 	return (
 		<div>
 			{badgeList.map(
-				(data, index) => (data.expertise_configuration_type === 'badge_configuration' ? (
+				(data, index) => (data?.expertise_configuration_type === 'badge_configuration' ? (
 					<MasteryListItem
 						data={data}
 						index={index}

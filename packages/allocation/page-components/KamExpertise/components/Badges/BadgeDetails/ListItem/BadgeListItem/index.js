@@ -6,7 +6,11 @@ import styles from './styles.module.css';
 
 function BadgeListItem(props) {
 	const { data = {}, index, setToggleScreen, setBadgeItemData, listRefetch } = props;
-	const { bronze_details = {}, silver_details = {}, gold_details = {} } = data;
+
+	const {
+		bronze_details = {}, silver_details = {},
+		gold_details = {}, badge_name = '_', description = '_', updated_at, created_by = {},
+	} = data;
 
 	const handleEdit = () => {
 		setBadgeItemData(data);
@@ -31,10 +35,9 @@ function BadgeListItem(props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.number_tag}>
-				<p>
-					#
-					{index + 1}
-				</p>
+				#
+				{' '}
+				{index + 1}
 				<Button themeType="secondary" onClick={handleEdit}>Edit</Button>
 			</div>
 
@@ -49,7 +52,7 @@ function BadgeListItem(props) {
 								:
 								{'  '}
 								<b>
-									{data.badge_name}
+									{badge_name}
 								</b>
 							</p>
 						</div>
@@ -58,7 +61,7 @@ function BadgeListItem(props) {
 							<p>
 								Description :
 								{' '}
-								{data.description}
+								{description}
 							</p>
 						</div>
 					</div>
@@ -67,13 +70,13 @@ function BadgeListItem(props) {
 						<div style={{ paddingRight: '4px' }}>
 							Last Modified :
 							{' '}
-							{data.updated_at ? format(data.updated_at, 'yyyy-MMM-dd') : '___'}
+							{updated_at ? format(updated_at, 'dd MMMM yyyy') : '_'}
 						</div>
 
 						<div>
 							Last Modified By :
 							{' '}
-							{data.modified_by ? data.modified_by : '___'}
+							{created_by?.name}
 						</div>
 					</div>
 				</div>
