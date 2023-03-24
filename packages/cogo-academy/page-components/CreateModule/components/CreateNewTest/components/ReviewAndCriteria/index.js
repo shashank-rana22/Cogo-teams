@@ -106,7 +106,7 @@ function ReviewAndCriteria({
 					<h5>Add Instructions</h5>
 
 					{fields.map((field, index) => (
-						<div className={styles.instruction}>
+						<div className={styles.instruction} key={field.id}>
 							<InputController
 								control={control}
 								key={field.id}
