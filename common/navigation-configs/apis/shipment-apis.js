@@ -1293,6 +1293,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'update_shipment_rail_domestic_freight_invoice_type',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'list_shipment_cancellation_reasons',
 		access_type  : 'private',
 		service_name : 'shipment',
