@@ -11,6 +11,7 @@ function RightSection({
 	fetchQuestions,
 	setShowInstructionsModal,
 	setActiveState,
+	setShowSubmitTestModal,
 }) {
 	return (
 		<div className={styles.container}>
@@ -23,7 +24,7 @@ function RightSection({
 				fetchQuestions={fetchQuestions}
 				currentQuestion={currentQuestion}
 			/>
-			<Footer setActiveState={setActiveState} />
+			<Footer setActiveState={setActiveState} setShowTimeOverModal={setShowSubmitTestModal} />
 		</div>
 	);
 }

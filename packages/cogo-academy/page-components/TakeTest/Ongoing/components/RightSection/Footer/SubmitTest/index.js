@@ -6,16 +6,16 @@ import StatsDisplay from '../../../utils/StatsDisplay';
 
 import styles from './styles.module.css';
 
-function LeaveTest({ showLeaveTestModal, setShowLeaveTestModal, setActiveState, data = {} }) {
-	const { endTest } = useEndTest({ setActiveState });
+function SubmitTest({ showSubmitTestModal, setShowSubmitTestModal, data = {} }) {
+	const { endTest } = useEndTest();
 
 	const handleContinueTest = () => {
 		handleEnterFullScreen();
-		setShowLeaveTestModal(false);
+		setShowSubmitTestModal(false);
 	};
 
 	return (
-		<Modal size="md" show={showLeaveTestModal} onClose={setShowLeaveTestModal}>
+		<Modal size="md" show={showSubmitTestModal} onClose={setShowSubmitTestModal}>
 			<Modal.Body>
 				<b className={styles.heading}>Are you sure you want to leave the test?</b>
 
@@ -25,17 +25,17 @@ function LeaveTest({ showLeaveTestModal, setShowLeaveTestModal, setActiveState, 
 
 				<div className={styles.button_container}>
 					<Button
-						onClick={endTest}
+						onClick={() => handleContinueTest()}
 						style={{ marginRight: 12 }}
 						themeType="secondary"
 					>
-						Yes, I want to leave
+						Cancel
 					</Button>
-					<Button themeType="accent" onClick={() => handleContinueTest()}>Continue the test</Button>
+					<Button themeType="accent" onClick={endTest}>Submit Test</Button>
 				</div>
 			</Modal.Body>
 		</Modal>
 	);
 }
 
-export default LeaveTest;
+export default SubmitTest;
