@@ -13,6 +13,8 @@ const useTopicList = () => {
 	const [topic, setTopic] = useState('');
 	const [page, setPage] = useState(1);
 	const [question, setQuestion] = useState(null);
+	const [showHistory, setShowHistory] = useState(false);
+	const [showNotificationContent, setShowNotificationContent] = useState(false);
 
 	const { role_functions = [], role_sub_functions = [] } = auth_role_data || {};
 
@@ -63,6 +65,10 @@ const useTopicList = () => {
 		setTopic,
 		question,
 		setQuestion,
+		showHistory,
+		setShowHistory,
+		setShowNotificationContent,
+		showNotificationContent,
 	};
 };
 

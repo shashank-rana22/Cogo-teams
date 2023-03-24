@@ -5,7 +5,9 @@ import React from 'react';
 
 import AdminLayout from '../AdminLayout';
 
-const ChatFAQs = dynamic(() => import('../AdminLayout/FAQs'), { ssr: false });
+import useGetFaqNotifications from './useGetFaqNotifications';
+
+const ChatFAQs = dynamic(() => import('../AdminLayout/FAQs'), { ssr: true });
 
 function Layout({ children, layout }) {
 	const hideLayout = layout === 'hidden';
@@ -15,6 +17,13 @@ function Layout({ children, layout }) {
 	const { auth_role_data = [] } = profile;
 
 	const { role_functions = [] } = auth_role_data || {};
+
+	const {
+		faqNotificationApiLoading,
+		fetchFaqNotification,
+		faqNotificationApi,
+		faqData,
+	} = useGetFaqNotifications();
 
 	if (hideLayout) {
 		return <div>{children}</div>;
@@ -27,7 +36,14 @@ function Layout({ children, layout }) {
 			navbar={navigationMappingAdmin}
 		>
 			<div style={{ margin: 0, padding: '24px 20px' }}>
-				{role_functions.includes('sales') && <ChatFAQs />}
+				{role_functions.includes('sales') && (
+					<ChatFAQs
+						faqNotificationData={faqData}
+						faqNotificationApiLoading={faqNotificationApiLoading}
+						fetchFaqNotification={fetchFaqNotification}
+						faqNotificationApi={faqNotificationApi}
+					/>
+				)}
 				{children}
 			</div>
 		</AdminLayout>

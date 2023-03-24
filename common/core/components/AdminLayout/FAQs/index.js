@@ -5,7 +5,12 @@ import React, { useState, useRef } from 'react';
 import styles from './styles.module.css';
 import TopicList from './TopicList';
 
-function FAQs() {
+function FAQs({
+	faqNotificationApiLoading,
+	fetchFaqNotification,
+	faqNotificationApi,
+	faqNotificationData,
+}) {
 	const [show, setShow] = useState(false);
 	const { general:{ isMobile = false } } = useSelector((state) => state);
 
@@ -57,7 +62,12 @@ function FAQs() {
 					style={{ left: '99.5%' }}
 				>
 					<div className={styles.topiclist_container}>
-						<TopicList />
+						<TopicList
+							faqNotificationData={faqNotificationData}
+							faqNotificationApiLoading={faqNotificationApiLoading}
+							fetchFaqNotification={fetchFaqNotification}
+							faqNotificationApi={faqNotificationApi}
+						/>
 					</div>
 				</Modal>
 			) : null}
