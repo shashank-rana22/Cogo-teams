@@ -10,9 +10,8 @@ function SideBar({
 	composingEmail,
 	activeBox,
 	setActiveBox,
-	source,
 }) {
-	const SIDE_BAR_ITEMS = sideBarConfigs[source];
+	const SIDE_BAR_ITEMS = sideBarConfigs;
 	return (
 		<div className={styles.container}>
 

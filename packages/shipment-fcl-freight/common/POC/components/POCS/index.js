@@ -10,14 +10,12 @@ import styles from './styles.module.css';
 
 function POCS({ tradePartnersData = {}, setAddPoc = () => {}, shipment_id = '' }) {
 	const [isInternal, setIsInternal] = useState(true);
-	console.log({ shipment_id });
 
 	const { data:{ list:shipmentStakeholderData = [] } = {}, loading:stakeHolderLoading } = useListStakeholders({
 
 		shipment_id,
 	});
 
-	console.log({ shipmentStakeholderData });
 
 	return (
 		<Card title="POCs">

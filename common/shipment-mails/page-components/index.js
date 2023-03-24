@@ -4,7 +4,6 @@ import RPA from '../constants/RPA';
 
 import Description from './Description';
 import List from './List';
-import ListRpa from './ListRpa';
 import SideBar from './SideBar';
 import styles from './styles.module.css';
 
@@ -25,13 +24,11 @@ function ShipmentMails({
 	filters = {},
 	pre_subject_text = '',
 	subject_position = 'prefix',
-	showClassifyAction = false,
 }) {
 	const [composingEmail, setComposingEmail] = useState(null);
 	const [action, setAction] = useState('send');
 	const [activeMail, setActiveMail] = useState(null);
 	const [activeBox, setActiveBox] = useState('Inbox');
-	const [isClassified, setIsClassififed] = useState(false);
 	const handleMailClick = (item) => {
 		setComposingEmail(false);
 		setActiveMail(item);
@@ -41,7 +38,6 @@ function ShipmentMails({
 		setComposingEmail(emailItem);
 		if (!emailItem) {
 			setActiveMail(null);
-			setIsClassififed(!isClassified);
 		}
 	};
 
@@ -70,26 +66,15 @@ function ShipmentMails({
 				composingEmail={false}
 				activeBox={activeBox}
 				setActiveBox={setActiveBox}
-				source={source}
 			/>
-			{source === 'outlook' ? (
-				<List
-					RECIEVE_EMAIL={RECIEVE_EMAIL}
-					activeBox={activeBox}
-					onMailClick={handleMailClick}
-					source={source}
-					filters={filters}
-				/>
-			) : (
-				<ListRpa
-					RECIEVE_EMAIL={RECIEVE_EMAIL}
-					activeBox={activeBox}
-					onMailClick={handleMailClick}
-					source={source}
-					filters={filters}
-					isClassified={isClassified}
-				/>
-			)}
+			<List
+				RECIEVE_EMAIL={RECIEVE_EMAIL}
+				activeBox={activeBox}
+				onMailClick={handleMailClick}
+				source={source}
+				filters={filters}
+			/>
+
 			<Description
 				composingEmail={composingEmail}
 				activeMail={activeMail}
@@ -101,7 +86,6 @@ function ShipmentMails({
 				action={action}
 				pre_subject_text={pre_subject_text}
 				subject_position={subject_position}
-				showClassifyAction={showClassifyAction}
 			/>
 		</div>
 	);

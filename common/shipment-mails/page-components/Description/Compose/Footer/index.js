@@ -8,7 +8,6 @@ import useReplyAllEmail from '../../../../hooks/useReplyAllEmail';
 import useReplyEmail from '../../../../hooks/useReplyEmail';
 import useSendEmail from '../../../../hooks/useSendEmail';
 
-import Attachement from './Attachment';
 import styles from './styles.module.css';
 
 function Footer({
@@ -83,13 +82,6 @@ function Footer({
 				))}
 			</div>
 			<div className={styles.container}>
-				<Attachement
-					onChange={(value) => {
-						if (value) {
-							setAttachements([...attachments, value]);
-						}
-					}}
-				/>
 				<Button
 					className="primary lg"
 					onClick={handleSubmit(sendMail, onError)}
