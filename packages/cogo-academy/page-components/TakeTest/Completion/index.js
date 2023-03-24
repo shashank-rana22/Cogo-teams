@@ -1,32 +1,62 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
+import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 import styles from './styles.module.css';
 
-const STATS_MAPPING = {
-	answered: {
-		title     : 'Answered',
-		value     : 20,
-		max_value : 25,
-	},
-	not_answered: {
-		title     : 'Not Answered',
-		value     : 3,
-		max_value : 25,
-	},
-	marked_for_review: {
-		title     : 'Marked for review',
-		value     : 4,
-		max_value : 25,
-	},
-	not_visited: {
-		title     : 'Not Visited',
-		value     : 2,
-		max_value : 25,
-	},
-};
-
 function Completion() {
+	const { profile: { user: { id: user_id } }, general: { query: { test_id } } } = useSelector((state) => state);
+
+	const [{ data, loading }] = useRequest({
+		method : 'GET',
+		url    : '/get_user_submission_stats',
+		params : {
+			user_id, test_id,
+		},
+	}, { manual: false });
+
+	const { push } = useRouter();
+
+	const {
+		answered,
+		marked_for_review,
+		not_answered,
+		not_visited,
+		time_taken,
+		total_questions,
+	} = data?.data || {};
+
+	const hours = Math.floor(parseInt(time_taken, 10) / 60);
+
+	const remainingMinutes = parseInt(time_taken, 10) % 60;
+
+	const formattedTime = `${hours.toString().padStart(2, '0')} : ${remainingMinutes.toString().padStart(2, '0')} hr`;
+
+	const STATS_MAPPING = {
+		answered: {
+			title : 'Answered',
+			value : answered,
+		},
+		not_answered: {
+			title : 'Not Answered',
+			value : not_answered,
+		},
+		marked_for_review: {
+			title : 'Marked for review',
+			value : marked_for_review,
+		},
+		not_visited: {
+			title : 'Not Visited',
+			value : not_visited,
+		},
+	};
+
+	const handleGoToDashboard = () => {
+		push('/learning/tests/dashboard', '/learning/tests/dashboard', '_blank');
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -43,7 +73,7 @@ function Completion() {
 
 				<div className={styles.stats}>
 					{Object.values(STATS_MAPPING).map((stats_data) => {
-						const { title, max_value, value } = stats_data;
+						const { title, value } = stats_data;
 
 						return (
 							<div className={styles.content}>
@@ -55,7 +85,7 @@ function Completion() {
 									{' '}
 									{value}
 									/
-									{max_value}
+									{total_questions}
 								</div>
 							</div>
 						);
@@ -68,7 +98,9 @@ function Completion() {
 							Time Taken
 						</div>
 						<div className={styles.value}>
-							: 59:45 min
+							:
+							{' '}
+							{formattedTime}
 						</div>
 					</div>
 				</div>
@@ -78,7 +110,7 @@ function Completion() {
 			<div className={styles.bottom_text}>Dashboard will be updated as soon as Results have been Published!</div>
 
 			<div className={styles.button_container}>
-				<Button type="button">
+				<Button type="button" onClick={handleGoToDashboard}>
 					<IcMArrowBack style={{ marginRight: 4 }} />
 					Dashboard
 				</Button>

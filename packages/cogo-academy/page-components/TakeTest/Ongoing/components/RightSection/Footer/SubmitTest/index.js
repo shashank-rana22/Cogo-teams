@@ -6,36 +6,40 @@ import StatsDisplay from '../../../utils/StatsDisplay';
 
 import styles from './styles.module.css';
 
-function LeaveTest({ showLeaveTestModal, setShowLeaveTestModal, setActiveState, data = {} }) {
+function SubmitTest({ showSubmitTestModal, setShowSubmitTestModal, data = {}, setActiveState }) {
 	const { endTest } = useEndTest({ setActiveState });
 
 	const handleContinueTest = () => {
 		handleEnterFullScreen();
-		setShowLeaveTestModal(false);
+		setShowSubmitTestModal(false);
 	};
 
 	return (
-		<Modal size="md" show={showLeaveTestModal} onClose={setShowLeaveTestModal}>
+		<Modal size="md" show={showSubmitTestModal} onClose={setShowSubmitTestModal}>
 			<Modal.Body>
-				<b className={styles.heading}>Are you sure you want to leave the test?</b>
+				<b className={styles.heading}>Are you sure you want to Submit the test?</b>
 
-				<p>Doing so will result in a waste attempt</p>
+				<p>
+					You still have time left, check before submitting.
+					You cannot come back to the test once submitted.
+
+				</p>
 
 				<StatsDisplay data={data} />
 
 				<div className={styles.button_container}>
 					<Button
-						onClick={endTest}
+						onClick={() => handleContinueTest()}
 						style={{ marginRight: 12 }}
 						themeType="secondary"
 					>
-						Yes, I want to leave
+						Go Back To Test
 					</Button>
-					<Button themeType="accent" onClick={() => handleContinueTest()}>Continue the test</Button>
+					<Button themeType="accent" onClick={endTest}>Submit Test</Button>
 				</div>
 			</Modal.Body>
 		</Modal>
 	);
 }
 
-export default LeaveTest;
+export default SubmitTest;

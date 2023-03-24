@@ -1,13 +1,21 @@
 import { IcMArrowRight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function TestCard({ test_card }) {
-	const { name, topics, current_status, validity_start, validity_end, attempts_count, maximum_attempts } = test_card;
+	const {
+		name, topics, current_status, validity_start, validity_end, attempts_count, maximum_attempts, id,
+	} = test_card;
 
-	const handleGoToTest = () => {
+	const { push } = useRouter();
 
+	const handleGoToTest = (test_id) => {
+		const href = '/learning/tests/[test_id]';
+		const as = `/learning/tests/${test_id}`;
+
+		push(href, as);
 	};
 
 	return (
@@ -33,9 +41,10 @@ function TestCard({ test_card }) {
 					</span>
 				</div>
 			</div>
-			{current_status === 'active' || (current_status === 'ongoing' && attempts_count < maximum_attempts)
-				? 			(
-					<div role="presentation" onClick={handleGoToTest} className={styles.arrow}>
+
+			{current_status === 'active_test' || (current_status === 'completed' && attempts_count < maximum_attempts)
+				? (
+					<div role="presentation" onClick={() => handleGoToTest(id)} className={styles.arrow}>
 						<IcMArrowRight style={{ height: 40, width: 30 }} />
 					</div>
 				)

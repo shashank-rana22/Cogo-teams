@@ -1,15 +1,28 @@
 import { Button } from '@cogoport/components';
 
-import useEndTest from '../../../hooks/useEndTest';
+import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
 
 import styles from './styles.module.css';
 
-function Footer() {
-	const { endTest } = useEndTest();
+function Footer({
+	setShowSubmitTestModal,
+}) {
+	const handleSubmitTest = () => {
+		setShowSubmitTestModal(true);
+		handleMinimizeTest();
+	};
 
 	return (
 		<div className={styles.container}>
-			<Button onClick={endTest} themeType="accent">Submit Test</Button>
+			<Button
+				type="button"
+				size="md"
+				onClick={() => handleSubmitTest()}
+				themeType="accent"
+			>
+				Submit Test
+
+			</Button>
 		</div>
 	);
 }

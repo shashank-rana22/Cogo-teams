@@ -1,19 +1,18 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { format, isEmpty } from '@cogoport/utils';
 
+import BasicDetails from './BasicDetails';
+import DifficultyAndTopicDistribution from './DifficultyAndTopicDistribution';
+import PercentagePassed from './PercentagePassed';
 import styles from './styles.module.css';
 
 function TestResults({ test_id }) {
-	const {
-		profile: { user: { id: user_id } },
-	} = useSelector((state) => state);
-
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
 		url    : 'get_user_performance',
 		params : {
 			test_id,
-			user_id,
 		},
 	}, { manual: false });
 
@@ -21,11 +20,19 @@ function TestResults({ test_id }) {
 
 	console.log(stats_data, 'stats_data');
 
-	const { test_name } = stats_data;
+	// if (isEmpty(stats_data)) {
+	// 	return null;
+	// }
+
+	if (loading) {
+		return 'loading';
+	}
 
 	return (
 		<div className={styles.container}>
-			<div>{test_name}</div>
+			<BasicDetails />
+			<PercentagePassed stats_data={stats_data} />
+			<DifficultyAndTopicDistribution />
 		</div>
 	);
 }

@@ -1,0 +1,19 @@
+.container {
+	width: 50%;
+}
+
+.heading {
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.validity_label {
+	font-size: 14px;
+	color: #828282;
+}
+
+.validity {
+	font-size: 14px;
+	color: #221f20;
+}

@@ -1,16 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-param-reassign */
 import { useRef, useEffect } from 'react';
 
 import handleTimer from './handleTimer';
 import styles from './styles.module.css';
 
-function Timer({ test_start_time, duration }) {
+function Timer({ test_start_time, duration,	setShowTimeOverModal }) {
 	const timerRef = useRef(null);
 	let time = null;
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			// eslint-disable-next-line react-hooks/exhaustive-deps
-			time = handleTimer(test_start_time, duration);
+			time = handleTimer(
+				test_start_time,
+				duration,
+				setShowTimeOverModal,
+			);
 
 			if (time) {
 				timerRef.current.innerText = time;

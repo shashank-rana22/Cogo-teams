@@ -1,6 +1,5 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { format } from '@cogoport/utils';
 
 const useCreateTestUserMapping = () => {
 	const {
@@ -15,15 +14,12 @@ const useCreateTestUserMapping = () => {
 
 	const passStartTime = async () => {
 		const start_time = new Date();
-		console.log('data', start_time);
 		try {
 			const payload = {
 				test_id,
 				user_id,
-				start_time: format(start_time),
+				start_time,
 			};
-
-			console.log(payload, 'payload');
 
 			await trigger({
 				data: payload,

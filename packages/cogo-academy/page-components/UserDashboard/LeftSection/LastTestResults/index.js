@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { startCase, format } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
 import TestResultMessage from '../../../../commons/TestResultMessage';
 import QuestionWiseStats from '../../commons/QuestionWiseStats';
@@ -25,14 +25,20 @@ function LastTestResults() {
 
 	const stats_data = data?.data || {};
 
-	const { topic_wise_percentile, question_stats } = stats_data || {};
+	const { topic_wise_percentile, question_stats, status } = stats_data || {};
+
+	const hasPassed = status === 'passed';
+
+	if (isEmpty(stats_data)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
 			<TestResultMessage stats_data={stats_data} />
 
 			<div className={styles.stats}>
-				<Percentile stats_data={stats_data} />
+				<Percentile stats_data={stats_data} hasPassed={hasPassed} />
 
 				<TopicWisePercentile topic_wise_percentile={topic_wise_percentile} />
 
