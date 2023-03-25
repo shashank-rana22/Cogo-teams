@@ -13,8 +13,6 @@
 	justify-content: space-between;
 	padding: 10px 10px;
 	border-radius: 4px;
-	/* background: ${(props) => props.background}; */
-	/* cursor: ${(props) => props.cursor}; */
 	margin-bottom: 4px;
 
 	&:hover {
@@ -47,6 +45,5 @@
     border-radius: 8px;
 	padding: 1px 4px;
 	font-size: 12px;
-	/* background: ${(props) => props.background}; */
 	height: 20px;
 }

@@ -50,6 +50,7 @@ function RequestedQuestionList({
 	const sortedDates = Object.keys(filteredObject || {})
 		.map((item) => item)
 		.sort((a, b) => new Date(b) - new Date(a));
+
 	function handleBackgroundColor({ state, is_viewed }) {
 		if (state !== 'published') {
 			return '#FEF199';
@@ -94,9 +95,10 @@ function RequestedQuestionList({
 							>
 								<div
 									className={styles.question_time_container}
-									style={{ backgroundColor: !is_viewed ? '#fdfbf6' : '#ffffff' }}
-									// background={!is_viewed ? '#fdfbf6' : '#ffffff'}
-									cursor="not-allowed"
+									style={{
+										backgroundColor : !is_viewed ? '#fdfbf6' : '#ffffff',
+										cursor          : 'not-allowed',
+									}}
 								>
 									<div
 										className={styles.pills_question_wrapper}
@@ -119,9 +121,7 @@ function RequestedQuestionList({
 							<div
 								role="presentation"
 								className={styles.question_time_container}
-								style={{ backgroundColor: !is_viewed ? '#fdfbf6' : '#ffffff' }}
-								// background={!is_viewed ? '#fdfbf6' : '#ffffff'}
-								cursor="pointer"
+								style={{ backgroundColor: !is_viewed ? '#fdfbf6' : '#ffffff', cursor: 'pointer' }}
 								onClick={() => setQuestion(selectedQuestion)}
 							>
 								<div className={styles.pills_question_wrapper}>
