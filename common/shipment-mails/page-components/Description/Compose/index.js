@@ -54,6 +54,7 @@ function Compose({
 	const defaultCC = defaultValues.ccrecipients.length > 0;
 	const [isCC, setIsCC] = useState(defaultCC);
 	const [isBcc, setIsBcc] = useState(false);
+	const [userEmailArray, setUserEmailArray] = useState([]);
 	const [errors, setErrors] = useState({});
 	const [editorState, setEditorState] = useState();
 	const { options } = useGetEntityStakeholderMappings();
@@ -67,6 +68,7 @@ function Compose({
 
 	let actualSubject = watch('subject');
 	const entity_type = watch('entity_type');
+	const userEmail = watch('toUserEmail');
 
 	if (pre_subject_text && subject_position === 'prefix') {
 		actualSubject = `${pre_subject_text} / ${entity_type} / ${actualSubject}`;
@@ -78,6 +80,7 @@ function Compose({
 
 	const suffix = (
 		<div className={styles.row}>
+			<div className={styles.text}> Add : </div>
 			<div
 				className={styles.suffix_button}
 				role="button"
@@ -97,6 +100,15 @@ function Compose({
 		</div>
 	);
 
+	const handleClick = (e) => {
+		if (e.keyCode === 13) {
+			setUserEmailArray([
+				...userEmailArray,
+				userEmail,
+			]);
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -111,11 +123,13 @@ function Compose({
 
 				<div className={styles.user_email}>
 					<InputParam
-						prefix="To:"
+						prefix="To :"
 						suffix={suffix}
 						name="toUserEmail"
+						onKeyDown={(e) => handleClick(e)}
+						value={userEmailArray}
 						control={control}
-						placeholder="put comma (,) seperated multiple emails"
+						placeholder="type here..."
 						rules={{ required: { value: true, message: 'Email is required' } }}
 					/>
 					{errors?.toUserEmail ? (
@@ -130,7 +144,7 @@ function Compose({
 
 				{isCC ? (
 					<InputParam
-						prefix="Cc:"
+						prefix="Cc :"
 						name="ccrecipients"
 						control={control}
 						placeholder="put comma (,) seperated multiple emails"
@@ -147,7 +161,7 @@ function Compose({
 				{isBcc
 					? (
 						<InputController
-							prefix="Bcc:"
+							prefix="Bcc :"
 							name="bccrecipients"
 							control={control}
 							placeholder="put comma (,) seperated multiple emails"
@@ -156,7 +170,7 @@ function Compose({
 					: null}
 
 				<InputParam
-					prefix="Subject:"
+					prefix="Subject :"
 					name="subject"
 					placeholder="Enter subject..."
 					control={control}
@@ -169,24 +183,28 @@ function Compose({
 						)}
 					</div>
 				) : null}
-				<SelectParam
-					prefix="Mail Type:"
-					name="entity_type"
-					placeholder="Select Mail type..."
-					control={control}
-					options={options}
-					rules={{ required: { value: true, message: 'Entity Type is required' } }}
-				/>
-				{errors?.entity_type ? (
-					<div className={styles.error}>
-						{handleError(
-							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
-							true,
-						)}
-					</div>
-				) : null}
+
+				<div className={styles.mail_type}>
+					<SelectParam
+						prefix="Mail Type :"
+						name="entity_type"
+						placeholder="Select Mail type..."
+						control={control}
+						options={options}
+						rules={{ required: { value: true, message: 'Entity Type is required' } }}
+					/>
+					{errors?.entity_type ? (
+						<div className={styles.error}>
+							{handleError(
+								{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
+								true,
+							)}
+						</div>
+					) : null}
+				</div>
+
 				<div className={styles.subject_preview}>
-					<div className={styles.preview}>Subject Preview :</div>
+					<div className={styles.subject_label}>Subject Preview:</div>
 					<div className={styles.preview}>
 						{actualSubject}
 					</div>
