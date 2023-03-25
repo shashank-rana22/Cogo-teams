@@ -159,21 +159,22 @@ function AnnouncementForm({
 
 			<div className={styles.button_container}>
 				<div>
-					<Button
-						type="preview"
-						themeType="tertiary"
-						size="md"
-						onClick={() => setShowPreview(true)}
-						className={styles.preview_button}
-					>
-						Preview
-					</Button>
+					{actionType === 'create' ? (
+						<Button
+							type="preview"
+							themeType="tertiary"
+							size="md"
+							onClick={() => setShowPreview(true)}
+							className={styles.preview_button}
+						>
+							Preview
+						</Button>
+					) : null}
 				</div>
 
 				<div>
 					<Button
 						type="submit"
-						loading={loading}
 						themeType="primary"
 						size="md"
 						onClick={handleSubmit(submitFunction)}
@@ -227,28 +228,32 @@ function AnnouncementForm({
 				>
 					<Modal.Header title={getSubmitModalHeader()} />
 
-					<Modal.Body className={styles.preview_modal_body}>
-						<div className={styles.title_on_submit}>{title}</div>
-						<Preview
-							formValues={formValues}
-							editorValue={editorValue.toString('html')}
-						/>
-					</Modal.Body>
+					{actionType === 'create' ? (
+						<Modal.Body className={styles.preview_modal_body}>
+							<div className={styles.title_on_submit}>{title}</div>
+							<Preview
+								formValues={formValues}
+								editorValue={editorValue.toString('html')}
+							/>
+						</Modal.Body>
+					) : null}
 					<Modal.Footer>
 						<div className={styles.submit_buttons}>
 							<Button
-								type="button"
+								type="cancel-submit"
 								themeType="secondary"
 								size="md"
+								disabled={loading}
 								onClick={() => setShowSubmitModal(false)}
 								style={{ marginRight: '20px' }}
 							>
 								Cancel
 							</Button>
 							<Button
-								button="type"
+								type="submit"
 								themeType="primary"
 								size="md"
+								loading={loading}
 								onClick={announcement_id ? handleSubmit(editAnnouncementDetails)
 									: handleSubmit(onSubmit)}
 							>

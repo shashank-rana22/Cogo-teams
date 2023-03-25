@@ -19,6 +19,7 @@ const useCreateAnnouncements = ({
 	actionType,
 	listAudienceLoading = false,
 	setShowSubmitModal = () => {},
+	refetchList = () => {},
 }) => {
 	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
 
@@ -64,7 +65,10 @@ const useCreateAnnouncements = ({
 		setValue('validity', validity);
 	}, [defaultValues, listAudienceLoading, actionType, setValue]);
 
-	const [{ error }, updateTrigger] = useRequest({ url: '/update_announcement', method: 'post' }, { manual: true });
+	const [{ loading:loadingEditAndGoLive }, updateTrigger] = useRequest({
+		url    : '/update_announcement',
+		method : 'post',
+	}, { manual: true });
 
 	const editAnnouncementDetails = async (values) => {
 		if (!values) return;
@@ -108,7 +112,6 @@ const useCreateAnnouncements = ({
 			router.back();
 		} catch (err) {
 			Toast.error(err?.message);
-			console.log('Error', error);
 		}
 	};
 
@@ -148,9 +151,10 @@ const useCreateAnnouncements = ({
 
 		try {
 			const payload = {
+				status  : 'draft',
 				title,
 				announcement_type,
-				content: editorValue.toString('html'),
+				content : editorValue.toString('html'),
 				validity_start,
 				validity_end,
 				hot_duration,
@@ -177,6 +181,28 @@ const useCreateAnnouncements = ({
 		}
 	};
 
+	const goLive = async (id) => {
+		try {
+			const response = await updateTrigger(
+				{
+					data: {
+						id,
+						status: 'active',
+					},
+				},
+			);
+			if (response?.hasError) {
+				Toast.error(response?.message || 'Something went wrong');
+				return;
+			}
+
+			Toast.success('This Announcement is Live Now !');
+			refetchList();
+		} catch (err) {
+			Toast.error(err?.message);
+		}
+	};
+
 	return {
 		controls,
 		control,
@@ -189,6 +215,8 @@ const useCreateAnnouncements = ({
 		editAnnouncementDetails,
 		setShowPreview,
 		loading,
+		loadingEditAndGoLive,
+		goLive,
 		setValue,
 		editorValue,
 		setEditorValue,

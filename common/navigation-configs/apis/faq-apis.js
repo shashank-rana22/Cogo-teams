@@ -190,6 +190,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'get_unread_announcements',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 };
 

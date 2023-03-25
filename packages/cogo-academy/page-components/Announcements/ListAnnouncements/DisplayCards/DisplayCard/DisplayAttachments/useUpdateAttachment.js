@@ -6,12 +6,12 @@ const useUpdateAnnouncement = ({
 	refetch = () => {},
 
 }) => {
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading:loadingUpdateAttachment }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_announcement_attachment',
 	}, { manual: true });
 
-	const [{ loadingAdd }, triggerAdd] = useRequest({
+	const [{ loading:loadingAddAttachment }, triggerAdd] = useRequest({
 		method : 'post',
 		url    : '/create_announcement_attachment',
 	}, { manual: true });
@@ -86,11 +86,11 @@ const useUpdateAnnouncement = ({
 	};
 
 	return {
-		loadingAdd,
+		loadingUpdateAttachment,
 		deleteAttachment,
 		editAttachment,
 		addAttachment,
-		loading,
+		loadingAddAttachment,
 	};
 };
 

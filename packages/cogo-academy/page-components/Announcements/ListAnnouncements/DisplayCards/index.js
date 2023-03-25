@@ -1,5 +1,6 @@
 import { Placeholder } from '@cogoport/components';
-import { startCase, isEmpty, compareAsc } from '@cogoport/utils';
+import { useSelector } from '@cogoport/store';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../commons/EmpyState';
@@ -12,10 +13,22 @@ function DisplayCards({
 	activeTab = 'active',
 	data = [],
 	loading = false,
+	loadingUpdate = false,
+	loadingEditAndGoLive = false,
 	setCurrentAnnouncement = () => {},
 	currentAnnouncement = null,
 	deleteAnnouncement = () => {},
+	goLive = () => {},
 }) {
+	const {
+		user_data,
+	} = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+
+	const {
+		user: { id: user_id = '' },
+	} = user_data;
 	const {
 		handleAnnouncementDetails = () => {},
 		refetch = () => {},
@@ -45,24 +58,23 @@ function DisplayCards({
 
 	return (
 		<div className={styles.container}>
-			{data.map((item, index) => {
-				const isValid = compareAsc(new Date(item?.validity_start), new Date());
-
-				return (
-					<DisplayCard
-						key={item.id}
-						activeTab={activeTab}
-						refetch={refetch}
-						loadingSingleAnnouncement={loadingSingleAnnouncement}
-						data={item}
-						isValid={isValid}
-						index={index}
-						accordianData={announcementDetails?.[index]}
-						handleAnnouncementDetails={handleAnnouncementDetails}
-						deleteAnnouncement={deleteAnnouncement}
-					/>
-				);
-			})}
+			{data.map((item, index) => (
+				<DisplayCard
+					key={item.id}
+					activeTab={activeTab}
+					refetch={refetch}
+					loadingUpdate={loadingUpdate}
+					loadingSingleAnnouncement={loadingSingleAnnouncement}
+					loadingEditAndGoLive={loadingEditAndGoLive}
+					data={item}
+					user_id={user_id}
+					index={index}
+					accordianData={announcementDetails?.[index]}
+					handleAnnouncementDetails={handleAnnouncementDetails}
+					deleteAnnouncement={deleteAnnouncement}
+					goLive={goLive}
+				/>
+			))}
 		</div>
 	);
 }

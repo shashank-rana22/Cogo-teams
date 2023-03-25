@@ -24,15 +24,19 @@ const displayPlaceHolders = () => (
 		/>
 	</div>
 );
-function DisplayAttachments({ data = [], index, refetch = () => {}, announcement_id = '', isValid }) {
+function DisplayAttachments({ data = {}, index, refetch = () => {}, announcement_id = '' }) {
 	const image = data?.announcement_attachments?.image || '';
 	const pdf = data?.announcement_attachments?.pdf || '';
 	const video = data?.announcement_attachments?.video || '';
+
+	const { status = '' } = data;
 
 	const {
 		deleteAttachment,
 		editAttachment,
 		addAttachment,
+		loadingUpdateAttachment,
+		loadingAddAttachment,
 	} = useUpdateAnnouncement({ refetch, announcement_id });
 
 	const displayBoxes = (item) => {
@@ -46,7 +50,9 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 					data={image}
 					announcement_id={data?.id}
 					index={index}
-					isValid={isValid}
+					status={status}
+					loadingUpdateAttachment={loadingUpdateAttachment}
+					loadingAddAttachment={loadingAddAttachment}
 					deleteAttachment={deleteAttachment}
 					editAttachment={editAttachment}
 					addAttachment={addAttachment}
@@ -56,7 +62,9 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 					data={pdf}
 					announcement_id={data?.id}
 					index={index}
-					isValid={isValid}
+					status={status}
+					loadingUpdateAttachment={loadingUpdateAttachment}
+					loadingAddAttachment={loadingAddAttachment}
 					deleteAttachment={deleteAttachment}
 					editAttachment={editAttachment}
 					addAttachment={addAttachment}
@@ -66,7 +74,9 @@ function DisplayAttachments({ data = [], index, refetch = () => {}, announcement
 					data={video}
 					announcement_id={data?.id}
 					index={index}
-					isValid={isValid}
+					status={status}
+					loadingUpdateAttachment={loadingUpdateAttachment}
+					loadingAddAttachment={loadingAddAttachment}
 					deleteAttachment={deleteAttachment}
 					editAttachment={editAttachment}
 					addAttachment={addAttachment}

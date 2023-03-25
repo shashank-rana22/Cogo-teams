@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 function EditModal({
 	setShowEditModal,
 	showEditModal,
+	loading = false,
 	editAttachment = () => {},
 	name,
 	index,
@@ -69,7 +70,7 @@ function EditModal({
 			placement="center"
 			onClose={() => setShowEditModal(null)}
 		>
-			<Modal.Header title="Are you sure you want to Edit this announcement" />
+			<Modal.Header title="Are you sure you want to Edit this attachment" />
 			<Modal.Body>
 				{renderEditModal(showEditModal)}
 			</Modal.Body>
@@ -79,6 +80,7 @@ function EditModal({
 						type="button"
 						themeType="secondary"
 						size="md"
+						disabled={loading}
 						onClick={() => setShowEditModal(null)}
 						style={{ marginRight: '20px' }}
 					>
@@ -88,6 +90,7 @@ function EditModal({
 						button="type"
 						themeType="primary"
 						size="md"
+						loading={loading}
 						onClick={handleSubmit(editFunction)}
 					>
 						Update

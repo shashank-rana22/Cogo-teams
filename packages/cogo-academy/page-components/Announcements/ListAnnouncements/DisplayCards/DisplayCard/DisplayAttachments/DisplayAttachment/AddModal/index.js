@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 function AddModal({
 	setShowAddModal,
 	showAddModal,
+	loading = false,
 	addAttachment = () => {},
 	name,
 	index,
@@ -63,7 +64,7 @@ function AddModal({
 			placement="center"
 			onClose={() => setShowAddModal(null)}
 		>
-			<Modal.Header title="Are you sure you want to Add this announcement" />
+			<Modal.Header title="Are you sure you want to Add this attachment" />
 			<Modal.Body>
 				{renderAddModal(showAddModal)}
 			</Modal.Body>
@@ -73,6 +74,7 @@ function AddModal({
 						type="button"
 						themeType="secondary"
 						size="md"
+						disabled={loading}
 						onClick={() => setShowAddModal(null)}
 						style={{ marginRight: '20px' }}
 					>
@@ -82,6 +84,7 @@ function AddModal({
 						type="button"
 						themeType="primary"
 						size="md"
+						loading={loading}
 						onClick={handleSubmit(addFunction)}
 					>
 						Add

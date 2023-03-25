@@ -14,12 +14,14 @@ function DisplayAttachment(
 	{
 		data = {},
 		name,
+		status = '',
 		index,
 		deleteAttachment = () => {},
+		loadingUpdateAttachment = false,
+		loadingAddAttachment = false,
 		editAttachment = () => {},
 		addAttachment = () => {},
 		announcement_id,
-		isValid,
 	},
 ) {
 	const [showDeleteModal, setShowDeleteModal] = useState(null);
@@ -34,7 +36,7 @@ function DisplayAttachment(
 					{name}
 				</div>
 
-				{isValid !== -1 && (
+				{status === 'draft' && (
 					<Button type="add" size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
 						Add
 						{' '}
@@ -46,7 +48,10 @@ function DisplayAttachment(
 				{data
 					? data.map((item) => (
 						<div key={item.id} className={styles.data_container}>
-							<div style={{ width: `${isValid !== -1 ? '50%' : '80%'}` }} className={styles.data_display}>
+							<div
+								style={{ width: `${status === 'draft' ? '50%' : '80%'}` }}
+								className={styles.data_display}
+							>
 								<span className={styles.name_data}>{item?.document_url}</span>
 							</div>
 
@@ -60,7 +65,7 @@ function DisplayAttachment(
 								>
 									View
 								</Button>
-								{isValid !== -1 && (
+								{status === 'draft' && (
 									<>
 										<Button
 											type="edit"
@@ -89,6 +94,7 @@ function DisplayAttachment(
 					<DeleteModal
 						setShowDeleteModal={setShowDeleteModal}
 						showDeleteModal={showDeleteModal}
+						loading={loadingUpdateAttachment}
 						deleteAttachment={deleteAttachment}
 						index={index}
 					/>
@@ -99,6 +105,7 @@ function DisplayAttachment(
 						setShowEditModal={setShowEditModal}
 						showEditModal={showEditModal}
 						name={name}
+						loading={loadingUpdateAttachment}
 						index={index}
 						editAttachment={editAttachment}
 					/>
@@ -110,6 +117,7 @@ function DisplayAttachment(
 						showAddModal={showAddModal}
 						addAttachment={addAttachment}
 						name={name}
+						loading={loadingAddAttachment}
 						index={index}
 						announcement_id={announcement_id}
 					/>

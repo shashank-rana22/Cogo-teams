@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 function DeleteModal({
 	setShowDeleteModal,
 	showDeleteModal,
+	loading = false,
 	deleteAttachment = () => {},
 	index,
 }) {
@@ -22,13 +23,14 @@ function DeleteModal({
 			placement="center"
 			onClose={() => setShowDeleteModal(null)}
 		>
-			<Modal.Header title="Are you sure you want to Delete this announcement" />
+			<Modal.Header title="Are you sure you want to Delete this attachment" />
 			<Modal.Footer>
 				<div className={styles.delete_buttons}>
 					<Button
 						type="button"
 						themeType="secondary"
 						size="md"
+						disabled={loading}
 						onClick={() => setShowDeleteModal(null)}
 						style={{ marginRight: '20px' }}
 					>
@@ -38,6 +40,7 @@ function DeleteModal({
 						type="button"
 						themeType="primary"
 						size="md"
+						loading={loading}
 						onClick={() => deleteFunction(showDeleteModal?.id)}
 					>
 						Delete

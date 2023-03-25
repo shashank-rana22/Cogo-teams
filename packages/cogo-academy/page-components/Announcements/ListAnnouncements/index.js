@@ -1,6 +1,8 @@
 import { Pagination } from '@cogoport/components';
 import React from 'react';
 
+import useCreateAnnouncements from '../CreateAnnouncement/useCreateAnnouncement';
+
 import DisplayCards from './DisplayCards';
 import Header from './Header';
 import styles from './styles.module.css';
@@ -14,7 +16,9 @@ function AddedAnnouncements() {
 		currentAnnouncement,
 		setCurrentAnnouncement,
 		loading,
+		loadingUpdate,
 		deleteAnnouncement,
+		getAnnouncementList,
 		activeList,
 		setActiveList,
 		page,
@@ -22,6 +26,10 @@ function AddedAnnouncements() {
 		paginationData,
 	} = props;
 
+	const {
+		goLive = () => {},
+		loadingEditAndGoLive = false,
+	} = useCreateAnnouncements({ refetchList: getAnnouncementList });
 	const { total_count = 0, page_limit = 10 } = paginationData;
 
 	return (
@@ -36,9 +44,12 @@ function AddedAnnouncements() {
 					data={data?.list}
 					activeTab={activeList}
 					loading={loading}
+					loadingUpdate={loadingUpdate}
+					loadingEditAndGoLive={loadingEditAndGoLive}
 					currentAnnouncement={currentAnnouncement}
 					setCurrentAnnouncement={setCurrentAnnouncement}
 					deleteAnnouncement={deleteAnnouncement}
+					goLive={goLive}
 				/>
 			</div>
 

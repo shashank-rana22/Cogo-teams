@@ -1,5 +1,5 @@
 import { Popover, Accordion, Button, Modal, Pill } from '@cogoport/components';
-import { IcMAnnouncement, IcMEyeopen, IcMEdit, IcMDelete } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMAnnouncement, IcMEyeopen, IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -8,6 +8,8 @@ import Preview from '../../../CreateAnnouncement/AnnouncementForm/Preview';
 
 import DisplayAttachments from './DisplayAttachments';
 import styles from './styles.module.css';
+
+const ADMIN_IDS = ['7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44'];
 
 const ANNOUNCEMENT_TYPE_MAPPING = {
 	general        : 'General',
@@ -32,10 +34,13 @@ function DisplayCard({
 	accordianData = {},
 	data = {},
 	index,
-	isValid,
+	user_id = '',
+	loadingUpdate = false,
+	loadingEditAndGoLive = false,
 	handleAnnouncementDetails = () => {},
 	refetch = () => {},
 	deleteAnnouncement = () => {},
+	goLive = () => {},
 	loadingSingleAnnouncement = false,
 
 }) {
@@ -45,13 +50,14 @@ function DisplayCard({
 	const [popoverVisible, setPopoverVisible] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [showGoLiveModal, setShowGoLiveModal] = useState(false);
 
 	const options = [
 		{ label: 'Title', value: startCase(data?.title) },
 		{ label: 'Validity Start', value: format(data?.validity_start, 'dd MMM yyyy hh:mm a') },
 		{ label: 'Validity End', value: format(data?.validity_end, 'dd MMM yyyy hh:mm a') },
 		{ label: 'Type', value: ANNOUNCEMENT_TYPE_MAPPING[data?.announcement_type] },
-		{ label: 'Status', value: isValid === -1 ? 'active' : 'draft' },
+		{ label: 'Status', value: data?.status },
 		{ label: 'Actions', value: 1 },
 	];
 
@@ -69,15 +75,17 @@ function DisplayCard({
 
 	const renderPopover = () => (
 		<div className={styles.buttons_container}>
-			<Button
-				type="view"
-				themeType="primary"
-				size="md"
-				// onClick={() => handleView(index)}
-			>
-				<IcMAnnouncement height={20} width={20} className={styles.button_icon} />
-				Go Live
-			</Button>
+			{data.status === 'draft' && ADMIN_IDS.includes(user_id) ? (
+				<Button
+					type="view"
+					themeType="primary"
+					size="md"
+					onClick={() => setShowGoLiveModal(true)}
+				>
+					<IcMAnnouncement height={20} width={20} className={styles.button_icon} />
+					Go Live
+				</Button>
+			) : null}
 			<Button
 				type="view"
 				themeType="secondary"
@@ -87,7 +95,7 @@ function DisplayCard({
 				<IcMEyeopen className={styles.button_icon} />
 				View
 			</Button>
-			{activeTab === 'active' && isValid !== -1 && (
+			{activeTab === 'active' && data?.status === 'draft' && (
 				<Button
 					type="edit"
 					themeType="secondary"
@@ -98,7 +106,7 @@ function DisplayCard({
 					Edit
 				</Button>
 			)}
-			{activeTab === 'active' && isValid !== -1 && (
+			{activeTab === 'active' && data?.status === 'draft' && (
 
 				<Button
 					type="edit"
@@ -110,6 +118,41 @@ function DisplayCard({
 					Delete
 				</Button>
 			)}
+
+			{showGoLiveModal ? (
+				<Modal
+					show={showGoLiveModal}
+					scroll={false}
+					size="md"
+					placement="center"
+					onClose={() => setShowGoLiveModal(false)}
+				>
+					<Modal.Header title="Once it goes live, it cannot be Edited. Are you still want to continue ? " />
+
+					<Modal.Footer>
+						<div className={styles.delete_buttons}>
+							<Button
+								type="button"
+								themeType="secondary"
+								size="md"
+								disabled={loadingEditAndGoLive}
+								onClick={() => setShowGoLiveModal(false)}
+							>
+								Cancel
+							</Button>
+							<Button
+								type="button"
+								themeType="primary"
+								size="md"
+								loading={loadingEditAndGoLive}
+								onClick={() => goLive(data?.id)}
+							>
+								Go Live
+							</Button>
+						</div>
+					</Modal.Footer>
+				</Modal>
+			) : null}
 
 		</div>
 	);
@@ -147,7 +190,12 @@ function DisplayCard({
 										trigger="mouseenter"
 										render={renderPopover()}
 									>
-										<Button onClick={() => setPopoverVisible(!popoverVisible)}>Hover</Button>
+										<IcMOverflowDot
+											width={16}
+											height={16}
+											cursor="pointer"
+											onClick={() => setPopoverVisible(!popoverVisible)}
+										/>
 									</Popover>
 
 								)
@@ -171,7 +219,6 @@ function DisplayCard({
 						<div className={styles.document_container}>
 							<DisplayAttachments
 								data={accordianData}
-								isValid={isValid}
 								index={index}
 								refetch={refetch}
 								announcement_id={data?.id}
@@ -215,6 +262,7 @@ function DisplayCard({
 								type="cancel"
 								themeType="secondary"
 								size="md"
+								disabled={loadingUpdate}
 								onClick={() => setShowDeleteModal(false)}
 							>
 								Cancel
@@ -223,6 +271,7 @@ function DisplayCard({
 								type="delete"
 								themeType="primary"
 								size="md"
+								loading={loadingUpdate}
 								onClick={() => deleteAnnouncement(data?.id)}
 							>
 								Delete

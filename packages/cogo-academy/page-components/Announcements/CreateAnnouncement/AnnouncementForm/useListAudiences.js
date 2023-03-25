@@ -83,9 +83,11 @@ const useListAudiences = () => {
 		return { label, q, value };
 	};
 
-	(audienceList || []).forEach((item) => {
-		audienceOptions.push(getAudienceOption(item));
-	});
+	useEffect(() => {
+		(audienceList || []).forEach((item) => {
+			audienceOptions.push(getAudienceOption(item));
+		});
+	}, [audienceList]);
 
 	return {
 		audienceOptions,
