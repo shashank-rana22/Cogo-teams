@@ -68,7 +68,7 @@ function AddQuestionsForm({
 			) : null}
 
 			{loading ? (
-				<LoadingState />
+				<LoadingState rowsCount={5} />
 			) : (
 				!isEmpty((test_questions || []).filter((item) => item.id !== editDetails?.id)) && (
 					<SavedQuestionDetails

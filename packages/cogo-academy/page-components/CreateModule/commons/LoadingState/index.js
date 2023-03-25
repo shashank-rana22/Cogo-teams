@@ -2,10 +2,10 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function LoadingState() {
+function LoadingState({ rowsCount = 5 }) {
 	return (
 		<div className={styles.list_container}>
-			{[...Array(5)].map(() => (
+			{[...Array(rowsCount)].map(() => (
 				<div className={styles.card_container}>
 					<div className={styles.card}>
 

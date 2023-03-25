@@ -57,6 +57,7 @@ function CreateQuestionSet() {
 				data={data}
 				questionSetId={questionSetId}
 				setEditDetails={setEditDetails}
+				loading={loading}
 			/>
 
 			<AddQuestionsForm
