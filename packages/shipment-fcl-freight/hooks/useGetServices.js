@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 function useGetServices({ shipment_data, additional_methods = [] }) {
 	const [{ loading : servicesLoading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/get_service',
+		url    : 'fcl_freight/get_services',
 		method : 'GET',
 	}, { manual: true });
 
@@ -21,7 +21,7 @@ function useGetServices({ shipment_data, additional_methods = [] }) {
 				Toast.error(err);
 			}
 		})();
-	}, [trigger, shipment_data?.id]);
+	}, [trigger, shipment_data?.id, additional_methods]);
 
 	useEffect(() => {
 		if (shipment_data?.id) { listServices(); }
