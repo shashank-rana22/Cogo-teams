@@ -1,41 +1,40 @@
-import { Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { IcMInfo } from '@cogoport/icons-react';
 
-import { StatsKeyMapping } from '../../../../constants/index';
+import { StatsKeyMapping, StatsKeyMappingPayment } from '../../../../constants/index';
 
 import styles from './styles.module.css';
 
 function StatsOutstanding({ item }) {
 	const {
 		openInvoice = {},
-		onAccountPayment = {},
 		totalOutstanding = {},
-		openInvoiceCount = 0,
-		ageingBucket = {},
+		creditNote = {},
+		openInvoiceAgeingBucket = {},
+		creditNoteAgeingBucket = {},
+		onAccount = {},
+		onAccountAgeingBucket = {},
 	} = item || {};
 
 	const customPadding = openInvoice.length > 2 ? '8px 10px' : '10px';
 
-	const { invoiceBucket = [] } = openInvoice;
-
-	const { creditNote = {} } = ageingBucket;
-
-	const getAmount = (key, value) => {
-		if (value === 'Amount') return ageingBucket[key]?.ledgerAmount;
-		if (value === 'Count') return ageingBucket[key]?.ledgerCount;
-		return ageingBucket[key]?.ledgerCurrency;
-	};
-
 	const invoiceContainer = [{
-		name: 'OPEN INVOICES',
+		name         : 'OPEN INVOICES',
+		LedgerAmount : openInvoice,
+		ageingBucket : openInvoiceAgeingBucket,
+		statsKey     : StatsKeyMapping,
 	},
 	{
-		name: 'ON ACCOUNT PAYMENTS',
+		name         : 'ON ACCOUNT PAYMENTS',
+		LedgerAmount : onAccount,
+		ageingBucket : onAccountAgeingBucket,
+		statsKey     : StatsKeyMappingPayment,
 
 	},
 	{
-		name: 'CREDIT NOTES',
+		name         : 'CREDIT NOTES',
+		LedgerAmount : creditNote,
+		ageingBucket : creditNoteAgeingBucket,
+		statsKey     : StatsKeyMapping,
 
 	},
 
@@ -53,8 +52,8 @@ function StatsOutstanding({ item }) {
 							</div>
 							<div className={styles.amount} style={{ fontWeight: 500, fontSize: '12px' }}>
 								{getFormattedPrice(
-									openInvoice.ledgerAmount || 0,
-									openInvoice.ledgerCurrency,
+									invoiceObject.LedgerAmount?.ledgerAmount || 0,
+									invoiceObject.LedgerAmount?.ledgerCurrency,
 									{
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -63,19 +62,19 @@ function StatsOutstanding({ item }) {
 								)}
 								<div className={styles.count}>
 									(
-									{openInvoiceCount}
+									{invoiceObject.LedgerAmount?.ledgerCount}
 									)
 								</div>
 							</div>
 						</div>
 						<div className={styles.right_container}>
-							{(StatsKeyMapping || []).map((val) => (
+							{(invoiceObject.statsKey || []).map((val) => (
 								<div className={styles.due_ageing}>
 									<div className={styles.label}>
 										{val.label}
 										<div className={styles.count}>
 											(
-											{getAmount(val.valueKey, 'Count') || 0}
+											{invoiceObject.ageingBucket[val.valueKey]?.ledgerCount || 0}
 											)
 										</div>
 									</div>
@@ -88,8 +87,8 @@ function StatsOutstanding({ item }) {
 										}}
 									>
 										{getFormattedPrice(
-											getAmount(val.valueKey, 'Amount') || 0,
-											getAmount(val.valueKey, 'Currency'),
+											invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount || 0,
+											invoiceObject.ageingBucket[val.valueKey]?.ledgerCurrency,
 											{
 												style                 : 'currency',
 												currencyDisplay       : 'code',

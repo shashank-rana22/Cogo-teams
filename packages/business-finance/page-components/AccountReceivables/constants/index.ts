@@ -112,43 +112,38 @@ export const SEARCH_OPTIONS = [
 export const SORTBY_OPTION = [
 	{
 		label : 'Not Due',
-		value : 'notDueLedgerAmount',
-		name  : 'notDueLedgerAmount',
-	},
-	{
-		label : 'Today',
-		value : 'todayLedgerAmount',
-		name  : 'todayLedgerAmount',
+		value : 'openInvoiceNotDueLedgerAmount',
+		name  : 'openInvoiceNotDueLedgerAmount',
 	},
 	{
 		label : '1-30 Days',
-		value : 'thirtyLedgerAmount',
-		name  : 'thirtyLedgerAmount',
+		value : 'openInvoiceThirtyLedgerAmount',
+		name  : 'openInvoiceThirtyLedgerAmount',
+	},
+	{
+		label : '31-45 Days',
+		value : 'openInvoiceFortyFiveLedgerAmount',
+		name  : 'openInvoiceFortyFiveLedgerAmount',
 	},
 	{
 		label : '31-60 Days',
-		value : 'sixtyLedgerAmount',
-		name  : 'sixtyLedgerAmount',
+		value : 'openInvoiceSixtyLedgerAmount',
+		name  : 'openInvoiceSixtyLedgerAmount',
 	},
 	{
 		label : '61-90 Days',
-		value : 'ninetyLedgerAmount',
-		name  : 'ninetyLedgerAmount',
+		value : 'openInvoiceNinetyLedgerAmount',
+		name  : 'openInvoiceNinetyLedgerAmount',
 	},
 	{
 		label : '91-180 Days',
-		value : 'oneEightyLedgerAmount',
-		name  : 'oneEightyLedgerAmount',
+		value : 'openInvoiceOneEightyLedgerAmount',
+		name  : 'openInvoiceOneEightyLedgerAmount',
 	},
 	{
-		label : '181-365 Days',
-		value : 'threeSixtyFiveLedgerAmount',
-		name  : 'threeSixtyFiveLedgerAmount',
-	},
-	{
-		label : '365+ Days',
-		value : 'threeSixtyFivePlusLedgerAmount',
-		name  : 'threeSixtyFivePlusLedgerAmount',
+		label : '181+ Days',
+		value : 'openInvoiceOneEightyPlusLedgerAmount',
+		name  : 'openInvoiceOneEightyPlusLedgerAmount',
 	},
 	{
 		label : 'Total Outstanding Amount',
@@ -159,11 +154,6 @@ export const SORTBY_OPTION = [
 		label : 'Credit Note',
 		value : 'creditNoteLedgerAmount',
 		name  : 'creditNoteLedgerAmount',
-	},
-	{
-		label : 'Debit Note',
-		value : 'debitNoteLedgerAmount',
-		name  : 'debitNoteLedgerAmount',
 	},
 	{
 		label : 'On Account Amount',
@@ -220,6 +210,44 @@ export const StatsKeyMapping = [
 	{
 		label     : 'NOT DUE',
 		valueKey  : 'notDue',
+		textColor : '#cb6464',
+	},
+	{
+		label     : '1-30 DAYS',
+		valueKey  : 'thirty',
+		textColor : '#cb6464',
+	},
+	{
+		label     : '31-45 DAYS',
+		valueKey  : 'fortyFive',
+		textColor : '#cb6464',
+	},
+	{
+		label     : '46-60 DAYS',
+		valueKey  : 'sixty',
+		textColor : '#cb6464',
+	},
+	{
+		label     : '61-90 DAYS',
+		valueKey  : 'ninety',
+		textColor : '#cb6464',
+	},
+	{
+		label     : '91-180 DAYS',
+		valueKey  : 'oneEighty',
+		textColor : '#cb6464',
+	},
+	{
+		label     : '180+ DAYS',
+		valueKey  : 'oneEightyPlus',
+		textColor : '#cb6464',
+	},
+];
+
+export const StatsKeyMappingPayment = [
+	{
+		label     : 'Today',
+		valueKey  : 'today',
 		textColor : '#cb6464',
 	},
 	{
