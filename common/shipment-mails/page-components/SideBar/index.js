@@ -19,9 +19,9 @@ function SideBar({
 				<Button
 					onClick={onCompose}
 					disabled={composingEmail}
-					style={{ width: '90%' }}
+					style={{ width: '70%' }}
 				>
-					+ Compose New
+					+ Compose
 				</Button>
 			</div>
 

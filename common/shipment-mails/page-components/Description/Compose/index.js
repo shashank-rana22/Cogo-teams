@@ -63,6 +63,7 @@ function Compose({
 		control,
 		handleSubmit,
 		formState: { errors: errorVal },
+		setValue,
 		watch,
 	} = useForm({ defaultValues });
 
@@ -106,8 +107,34 @@ function Compose({
 				...userEmailArray,
 				userEmail,
 			]);
+			setValue('toUserEmail', '');
 		}
 	};
+
+	const handleDelete = (item) => {
+		const tempUserEmailArray = userEmailArray;
+		tempUserEmailArray.forEach((ele, idx) => {
+			if (ele === item) {
+				userEmailArray.splice(idx, 1);
+			}
+		});
+		setValue('toUserEmail', '');
+		setUserEmailArray(tempUserEmailArray);
+	};
+
+	const renderValue = () => userEmailArray.map((item) => (
+		<div style={{ display: 'flex' }}>
+			<div className={styles.value}>{item}</div>
+			<div
+				className={styles.cancel}
+				role="button"
+				tabIndex={0}
+				onClick={() => handleDelete(item)}
+			>
+				x
+			</div>
+		</div>
+	));
 
 	return (
 		<div className={styles.container}>
@@ -127,9 +154,10 @@ function Compose({
 						suffix={suffix}
 						name="toUserEmail"
 						onKeyDown={(e) => handleClick(e)}
-						value={userEmailArray}
+						renderValue={renderValue}
 						control={control}
 						placeholder="type here..."
+						key={JSON.stringify(userEmailArray)}
 						rules={{ required: { value: true, message: 'Email is required' } }}
 					/>
 					{errors?.toUserEmail ? (
