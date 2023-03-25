@@ -2,6 +2,7 @@ import { cl } from '@cogoport/components';
 import { IcMArrowLeft, IcMArrowRight, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty, format, startCase } from '@cogoport/utils';
 
+import { replySvg } from '../../constants/MAIL_CONSTANT';
 import useListMail from '../../hooks/useListMail';
 
 import MailLoading from './MailLoading';
@@ -11,7 +12,7 @@ function MailDetails({
 	activeSelect = '',
 	setActiveSelect = () => {},
 	setActiveMail = () => {},
-	activeMail,
+	activeMail = {},
 	senderMail = '',
 }) {
 	const {
@@ -34,17 +35,14 @@ function MailDetails({
 
 	function lastMessagePreview(previewData = '') {
 		return (
-			<div
-				role="presentation"
-				dangerouslySetInnerHTML={{ __html: previewData }}
-			/>
+			<div dangerouslySetInnerHTML={{ __html: previewData }} />
 		);
 	}
 
 	const handleRefresh = () => {
 		setListData({ value: [], isLastPage: false });
-		getEmails();
 		setPagination(1);
+		getEmails();
 	};
 
 	return (
@@ -86,8 +84,7 @@ function MailDetails({
 									<div className={styles.recipient_div}>
 										<div className={styles.recipient_left}>
 											<img
-												// eslint-disable-next-line max-len
-												src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/share_reply.svg"
+												src={replySvg}
 												alt="reply"
 												className={styles.reply_back}
 											/>

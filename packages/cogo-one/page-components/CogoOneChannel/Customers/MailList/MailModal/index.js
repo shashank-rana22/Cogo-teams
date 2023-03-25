@@ -250,23 +250,26 @@ function MailModal({
 
 					<div className={styles.attachments_scroll}>
 						{uploading && <div className={styles.uploading}>{uploading && 'Uploading...'}</div>}
-						{(attachments || []).map((data) => (
-							<div className={styles.uploaded_files}>
-								<div className={styles.uploaded_files_content}>
-									{decode(data)?.fileIcon}
-									<div className={styles.content_div}>
-										{decode(data)?.uploadedFileName}
+						{(attachments || []).map((data) => {
+							const { fileIcon = {}, uploadedFileName = '' } = decode(data) || {};
+							return (
+								<div className={styles.uploaded_files}>
+									<div className={styles.uploaded_files_content}>
+										{fileIcon}
+										<div className={styles.content_div}>
+											{uploadedFileName}
+										</div>
 									</div>
+									<IcMCross
+										className={styles.cross_svg}
+										onClick={(e) => {
+											e.stopPropagation();
+											handleAttachmentDelete(data);
+										}}
+									/>
 								</div>
-								<IcMCross
-									className={styles.cross_svg}
-									onClick={(e) => {
-										e.stopPropagation();
-										handleAttachmentDelete(data);
-									}}
-								/>
-							</div>
-						))}
+							);
+						})}
 					</div>
 
 				</div>

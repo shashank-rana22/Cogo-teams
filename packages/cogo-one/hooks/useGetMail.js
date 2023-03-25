@@ -1,7 +1,7 @@
 import { usePublicRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-function useListMailDetails({ activeMail = {}, emailAddress = '' }) {
+function useGetMail({ activeMail = {}, emailAddress = '' }) {
 	const [{ data, loading }, trigger] = usePublicRequest({
 		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/get_mail`,
 		method : 'get',
@@ -32,4 +32,4 @@ function useListMailDetails({ activeMail = {}, emailAddress = '' }) {
 	};
 }
 
-export default useListMailDetails;
+export default useGetMail;

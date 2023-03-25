@@ -2,12 +2,12 @@ const EMAIL_TAGS_COLOR = {
 	recipient: {
 		mainDiv  : '#FEF199',
 		subDiv   : '#FFFCE6',
-		crossDiv : 'yellow',
+		crossDiv : '#FEF199',
 	},
 	cc_bcc: {
 		mainDiv  : '#CFEAED',
 		subDiv   : '#F3FAFA',
-		crossDiv : 'green',
+		crossDiv : '#CFEAED',
 	},
 };
 export default EMAIL_TAGS_COLOR;

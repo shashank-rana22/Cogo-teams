@@ -5,10 +5,10 @@ import styles from './styles.module.css';
 
 function Emailbody({
 	sender = {},
-	recipientData,
-	ccData,
-	emptyCcRecipient,
-	loading,
+	recipientData = [],
+	ccData = [],
+	emptyCcRecipient = false,
+	loading = false,
 }) {
 	const { emailAddress = {} } = sender || {};
 	const { name = '', address = '' } = emailAddress || {};
@@ -45,7 +45,7 @@ function Emailbody({
 								)
 							</span>
 						</div>
-						<div className={styles.header_to}>
+						<div className={styles.header_to_cc}>
 							To:
 							{' '}
 							<Tooltip content={recipientData} interactive placement="top">
@@ -59,7 +59,7 @@ function Emailbody({
 							</Tooltip>
 						</div>
 						{!emptyCcRecipient && (
-							<div className={styles.header_cc}>
+							<div className={styles.header_to_cc}>
 								CC:
 								{ccData.map((item) => (
 									<div className={styles.name}>{item}</div>

@@ -4,10 +4,11 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function MailAttachments({ allAttachements, loading }) {
+function MailAttachments({ allAttachements = [], loading = false }) {
 	const [showPreview, setShowPreview] = useState(null);
 	const externalAttachements = allAttachements.filter((att) => !att.isInline);
 
+	const data = `data:${showPreview?.contentType};base64,${showPreview?.contentBytes}`;
 	return (
 		<div className={styles.container}>
 			{loading ? (
@@ -47,8 +48,7 @@ function MailAttachments({ allAttachements, loading }) {
 							height="450"
 							width="550"
 							aria-label="Doc Preview"
-							// eslint-disable-next-line max-len
-							data={`data:${externalAttachements[0].contentType};base64,${externalAttachements[0].contentBytes}`}
+							data={data}
 						/>
 					</Modal.Body>
 

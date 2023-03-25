@@ -4,7 +4,7 @@ import EMAIL_TAGS_COLOR from '../../constants/EMAILS_TAGS_COLOR';
 
 import styles from './styles.module.css';
 
-function CustomInput({ email = '', handleDelete = () => {}, type }) {
+function CustomInput({ email = '', handleDelete = () => {}, type = '' }) {
 	const {
 		mainDiv,
 		subDiv,

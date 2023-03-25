@@ -2,7 +2,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;
-	padding: 10px  0  0 18px;
+	padding: 10px 0 0 18px;
 }
 
 .content {
@@ -46,11 +46,11 @@
 	padding: 6px 4px;
 	margin: 0;
 	border-radius: 4px;
-}
 
-.preview_container:hover {
-	cursor: pointer;
-	background: #e0e0e0;
+	&:hover {
+		cursor: pointer;
+		background: #e0e0e0;
+	}
 }
 
 .content_icon {
@@ -58,10 +58,10 @@
 	align-items: center;
 	padding: 6px 4px;
 	border-radius: 0 4px 4px 0;
-}
 
-.content_icon:hover {
-	background: #e0e0e0;
+	&:hover {
+		background: #e0e0e0;
+	}
 }
 
 .styled_ui_modal_dialog {

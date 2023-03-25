@@ -11,9 +11,9 @@ import styles from './styles.module.css';
 
 function VoiceList(voiceProps) {
 	const {
-		setActiveVoiceCard = () => { },
-		activeVoiceCard,
-		activeTab,
+		setActiveVoiceCard = () => {},
+		activeVoiceCard = {},
+		activeTab = '',
 	} = voiceProps;
 
 	const {
