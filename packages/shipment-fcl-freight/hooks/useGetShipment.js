@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 function useGetShipment() {
 	const router = useRouter();
-	const shipment_id = router.query.freight_id;
+	const { shipment_id } = router.query;
 
 	const [{ loading : isGettingShipment, data }, trigger] = useRequest({
 		url    : 'fcl_freight/get_shipment',

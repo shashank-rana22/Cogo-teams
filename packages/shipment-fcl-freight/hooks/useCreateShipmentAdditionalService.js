@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
-const useAddRate = ({
+const useCreateShipmentAdditionalService = ({
 	item,
 	refetch = () => {},
 	setAddRate = () => {},
@@ -72,7 +72,7 @@ const useAddRate = ({
 			onCancel();
 			refetch();
 		} catch (err) {
-			console.log(err);
+			Toast.error(err);
 		}
 	};
 
@@ -88,4 +88,4 @@ const useAddRate = ({
 	};
 };
 
-export default useAddRate;
+export default useCreateShipmentAdditionalService;
