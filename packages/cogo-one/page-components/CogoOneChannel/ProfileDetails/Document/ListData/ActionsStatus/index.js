@@ -42,7 +42,7 @@ function ActionsStatus({
 
 	return (
 		<div>
-			{!isEmpty(orgId) && documentTypeMapping(document_type) !== 'Shipment' && (
+			{!isEmpty(orgId) && (
 				<div className={styles.upload_container}>
 					<div className={styles.document_name}>
 						{!checkDocumentType && (
@@ -59,7 +59,7 @@ function ActionsStatus({
 						</div>
 					) : (
 						<div className={styles.upload}>
-							{document_type !== 'undefined' && (
+							{(document_type !== 'undefined' && documentTypeMapping(document_type) !== 'Shipment') && (
 								<>
 									<IcCFtick width={15} height={15} className={styles.ic_tick} />
 									Uploaded
