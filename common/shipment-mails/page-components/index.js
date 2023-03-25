@@ -73,6 +73,7 @@ function ShipmentMails({
 				onMailClick={handleMailClick}
 				source={source}
 				filters={filters}
+				activeMail={activeMail}
 			/>
 
 			<Description

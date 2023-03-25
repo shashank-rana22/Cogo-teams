@@ -116,3 +116,25 @@
 		}
 	}
 }
+
+.value {
+	margin-left: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #FFFCE6;
+	font-size: 10px;
+	font-weight: 500;
+	color: #221F20;
+	border-radius: 8px 0px 0px 8px;
+	padding: 2px 8px;
+}
+
+.cancel {
+	background: #FEF199;
+	border-radius: 0px 4px 4px 0px;
+	padding: 2px 8px;
+	cursor: pointer;
+	font-size: 10px;
+	font-weight: 600;
+}
