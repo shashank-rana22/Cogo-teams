@@ -1,0 +1,117 @@
+.form {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.button_container {
+	display: flex;
+}
+
+.preview_button {
+	margin-right: 20px;
+}
+
+.audience_modal {
+	min-height: 70vh;
+
+	@media (max-width: 768px) {
+		width: 100vw;
+	}
+}
+
+.preview_modal_body {
+	display: flex;
+	flex-direction: column;
+	max-height: 80vh !important;
+
+	@media (max-width: 768px) {
+		width: 100vw;
+		min-height: 100vh;
+	}
+}
+
+.add_audience_button {
+	position: absolute;
+	right: 0;
+	margin-top: -6px;
+}
+
+.spinner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 300px;
+}
+
+.form_element {
+	flex-basis: 48%;
+
+	@media (max-width: 768px) {
+		flex-basis: 100%;
+	}
+}
+
+.text_editor_container {
+	display: flex;
+	flex-basis: 48%;
+	flex-direction: column;
+	margin-bottom: 20px;
+
+	@media (max-width: 768px) {
+		flex-basis: 100%;
+	}
+}
+
+.label {
+	margin-bottom: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 14px;
+	color: #4f4f4f;
+}
+
+.submit_modal_header {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.live_date {
+	color: #ee3425;
+}
+
+.submit_buttons {
+	display: flex;
+}
+
+.modal_header_container {
+	position: relative;
+}
+
+.type_tag {
+	position: sticky;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: fit-content;
+	padding: 6px 16px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #000;
+	text-align: center;
+	text-transform: uppercase;
+	background: #fde74d;
+	border-radius: 0 0 10px;
+}
+
+.title {
+	padding: 16px 0 0 16px;
+	font-weight: 600;
+}
+
+.title_on_submit {
+	margin-bottom: 12px;
+	font-size: 18px;
+	font-weight: 600;
+}
