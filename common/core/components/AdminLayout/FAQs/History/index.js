@@ -49,10 +49,10 @@ function History({
 		<div className={styles.container}>
 			<Tabs
 				activeTab={activeTab}
-				fullWidth
 				themeType="secondary"
 				onChange={setActiveTab}
 				className={styles.tab_panel}
+				fullWidth
 			>
 				<TabPanel
 					name="requested_question"
