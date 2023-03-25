@@ -149,8 +149,8 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 			id       : 'a',
 			accessor : ({ name = '', test_duration = '' }) => (
 				<div>
-					<section>{name}</section>
-					<section>
+					<section className={styles.name}>{name}</section>
+					<section className={styles.duration}>
 						{test_duration}
 						{' '}
 						mins
