@@ -1,4 +1,4 @@
-import { Input, Tooltip, Button, Breadcrumb } from '@cogoport/components';
+import { Modal, Input, Tooltip, Button, Breadcrumb } from '@cogoport/components';
 import { IcMSearchlight, IcMArrowBack } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -13,6 +13,7 @@ import styles from './styles.module.css';
 
 function ViewSelectedInvoice() {
 	const { push, query } = useRouter();
+	const [bulkSection, setBulkSection] = useState({ value: false, bulkAction: '' });
 	const [filters, setFilters] = useState({
 		search         : '',
 		archivedStatus : '',
@@ -21,6 +22,10 @@ function ViewSelectedInvoice() {
 		sortBy         : '',
 		sortType       : 'ASC',
 	});
+	const [bulkModal, setBulkModal] = useState(false);
+
+	const { bulkAction } = bulkSection;
+
 	const {
 		getTableHeaderCheckbox,
 		getTableBodyCheckbox,
@@ -33,7 +38,7 @@ function ViewSelectedInvoice() {
 		loading,
 		viewSelected,
 		setCheckedRows,
-	} = useViewSelect(filters, query);
+	} = useViewSelect(filters, query, setBulkSection, bulkAction);
 	const [isBookedActive, setIsBookActive] = useState(true);
 
 	const goBack = () => {
@@ -45,7 +50,7 @@ function ViewSelectedInvoice() {
 	const { list = [], totalRecords = 0, pageSize = 10 } = viewSelectedSidData || {};
 
 	const { page } = filters || {};
-	const [openDeleteModal, setOpenDeleteModal] = useState(false);
+	const [openDeleteModal, setOpenDeleteModal] = useState({});
 
 	const { year = '', startDate, endDate, month = '', tradeType = '', service = '', shipmentType = '' } = query || {};
 	return (
@@ -122,6 +127,42 @@ function ViewSelectedInvoice() {
 					/>
 				</div>
 			</div>
+
+			<div className={styles.booked_flex}>
+				<Button themeType="secondary" onClick={() => { setBulkModal(true); }}>Bulk Delete</Button>
+			</div>
+
+			{bulkModal &&		(
+				<Modal show={bulkModal} onClose={() => { setBulkModal(false); }}>
+					<Modal.Body>
+						<div
+							className={styles.flex_modal}
+						>
+							<div style={{ margin: '20px' }}>Are you sure you want to bulk delete ?</div>
+
+							<div className={styles.flex}>
+								<Button
+									id="cancel-modal-btn"
+									style={{ marginRight: 10 }}
+									themeType="secondary"
+									onClick={() => { setBulkModal(false); }}
+								>
+									Cancel
+								</Button>
+								<Button
+									id="approve-modal-btn"
+									themeType="primary"
+									onClick={() => { deleteSelected({ bulkData: 'BULK', setBulkModal }); }}
+								>
+									Yes
+								</Button>
+							</div>
+						</div>
+					</Modal.Body>
+
+				</Modal>
+			)}
+
 			<div className={styles.button_container}>
 				<div
 					className={isBookedActive ? styles.selected : styles.button_tab}
@@ -153,6 +194,7 @@ function ViewSelectedInvoice() {
 					Accrued
 				</div>
 			</div>
+
 			<div className={styles.table_data}>
 				<StyledTable
 					page={page}
@@ -180,6 +222,8 @@ function ViewSelectedInvoice() {
 				checkedData={checkedData}
 				actionConfirmedLoading={actionConfirmedLoading}
 				shipmentLoading={loading}
+				bulkSection={bulkSection}
+				setBulkSection={setBulkSection}
 				checkedRowsSerialId={checkedRowsSerialId}
 				isBookedActive={isBookedActive}
 				setCheckedRows={setCheckedRows}

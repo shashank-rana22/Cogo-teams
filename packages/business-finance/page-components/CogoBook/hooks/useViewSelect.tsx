@@ -5,7 +5,14 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-const useViewSelect = (filters, query) => {
+interface DeleteInterface {
+	id?:string
+	bulkData?:string
+	handleModal?:Function
+	setBulkModal?: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 	const { debounceQuery } = useDebounceQuery();
 	const [checkedRowsSerialId, setCheckedRowsSerialId] = useState([]);
 	const [checkedRows, setCheckedRows] = useState({});
@@ -91,6 +98,14 @@ const useViewSelect = (filters, query) => {
 					archiveShipmentIds : checkedRowsSerialId,
 					performedBy        : userId,
 					actionStatus,
+					selectionMode      : bulkAction || 'SINGLE',
+					viewListRequest    : {
+						month          : query?.month,
+						year           : query?.year,
+						pageLimit      : 500,
+						archivedStatus : archivedStatus || 'BOOKED' || undefined,
+						serviceType    : service !== '' ? service : undefined,
+					},
 				},
 			});
 			if (rep) {
@@ -98,7 +113,7 @@ const useViewSelect = (filters, query) => {
 			}
 			setShow(false);
 		} catch (error) {
-			Toast.error(error?.data?.message);
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 
@@ -107,23 +122,37 @@ const useViewSelect = (filters, query) => {
 		deleteSelectedInvoiceTrigger,
 	] = useRequestBf(
 		{
-			url     : 'pnl/accrual/archive',
-			method  : 'delete',
+			url     : 'pnl/accrual/archiveDelete',
+			method  : 'post',
 			authKey : 'delete_pnl_accrual_archive',
 		},
 		{ manual: true },
 	);
 
-	const deleteSelected = async (id, handleModal) => {
+	const deleteSelected = async ({ id, bulkData, handleModal, setBulkModal }:DeleteInterface) => {
 		try {
 			await deleteSelectedInvoiceTrigger({
-				params: { ids: id },
+				data: {
+					archiveShipmentIds : checkedRowsSerialId,
+					ids                : id,
+					performedBy        : userId,
+					// actionStatus,
+					selectionMode      : bulkData || 'SINGLE',
+					viewListRequest    : {
+						month          : query?.month,
+						year           : query?.year,
+						pageLimit      : 500,
+						archivedStatus : archivedStatus || 'BOOKED' || undefined,
+						serviceType    : service !== '' ? service : undefined,
+					},
+				},
 			});
 			handleModal(false);
+			setBulkModal(false);
 			viewSelected();
 			Toast.success('Deleted successfully');
 		} catch (error) {
-			Toast.error(error?.data?.message);
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 
@@ -172,6 +201,8 @@ const useViewSelect = (filters, query) => {
 				? (groupListData || [])?.map(({ id }) => `${id || ''}`)
 				: [],
 		});
+
+		setBulkSection(() => ({ value: true }));
 	};
 
 	const getTableHeaderCheckbox = () => {

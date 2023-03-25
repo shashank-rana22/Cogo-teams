@@ -68,7 +68,7 @@
   padding: 12px;
   box-shadow: 0px 0px 8px rgb(44 62 80 / 20%);
   border-radius: 4px;
-  margin: 24px 12px 0px 0px;
+  margin: 0px 12px 0px 0px;
   color: #ed3726;
   background: #fdebe9;
   cursor: pointer;
@@ -80,10 +80,25 @@
   padding: 12px;
   box-shadow: 0px 0px 8px rgb(44 62 80 / 20%);
   border-radius: 4px;
-  margin: 24px 12px 0px 0px;
+  margin: 0px 12px 0px 0px;
   background: white;
   cursor: pointer;
 }
 .table_data {
   margin-top: 16px;
+}
+.booked_flex {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+}
+.flex_modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.flex {
+  display: flex;
 }

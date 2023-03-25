@@ -1,4 +1,4 @@
-import { Button, Modal, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
@@ -7,6 +7,7 @@ import SortIcon from '../common/SortIcon';
 
 import { ColumnInterface } from './interface';
 import styles from './styles.module.css';
+import DeleteModal from './ViewSelectedInvoice/DeleteModal';
 
 export const monthData = {
 	1  : 'January',
@@ -85,6 +86,12 @@ export const column = (
 ) => {
 	const handleCloseModal = () => {
 		setOpenDeleteModal(false);
+	};
+	const handleDelete = (key = '') => {
+		setOpenDeleteModal((previousActions) => ({
+			...previousActions,
+			[key]: !previousActions[key],
+		}));
 	};
 
 	return [
@@ -320,38 +327,17 @@ export const column = (
 						<IcMDelete
 							height={15}
 							width={15}
-							onClick={() => setOpenDeleteModal(true)}
+							onClick={() => handleDelete(id)}
 							style={{ cursor: 'pointer' }}
 						/>
-						{openDeleteModal && (
-							<Modal show={openDeleteModal} onClose={handleCloseModal}>
-								<Modal.Body>
-									<div
-										className={styles.flex_modal}
-									>
-										<div style={{ margin: '20px' }}>Are you sure you want to delete this?</div>
-
-										<div className={styles.flex}>
-											<Button
-												id="cancel-modal-btn"
-												style={{ marginRight: 10 }}
-												themeType="secondary"
-												onClick={() => { setOpenDeleteModal(false); }}
-											>
-												Cancel
-											</Button>
-											<Button
-												id="approve-modal-btn"
-												themeType="primary"
-												onClick={() => { deleteSelected(id, handleCloseModal); }}
-											>
-												Yes
-											</Button>
-										</div>
-									</div>
-								</Modal.Body>
-
-							</Modal>
+						{openDeleteModal[id] && (
+							<DeleteModal
+								openDeleteModal={openDeleteModal}
+								handleCloseModal={handleCloseModal}
+								setOpenDeleteModal={setOpenDeleteModal}
+								deleteSelected={deleteSelected}
+								id={id}
+							/>
 						)}
 					</>
 				);

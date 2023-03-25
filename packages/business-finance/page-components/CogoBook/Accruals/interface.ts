@@ -20,8 +20,8 @@ export interface FilterInterface {
 
 export interface ColumnInterface {
 	getTableHeaderCheckbox?: () => JSX.Element
-	setOpenDeleteModal?: React.Dispatch<React.SetStateAction<boolean>>
-	openDeleteModal?: boolean
+	setOpenDeleteModal?: React.Dispatch<React.SetStateAction<{}>>
+	openDeleteModal?: {}
 	deleteSelected?: (id: any, handleModal: any) => Promise<void>
 	getTableBodyCheckbox?: (item: any) => JSX.Element
 	filters?: {

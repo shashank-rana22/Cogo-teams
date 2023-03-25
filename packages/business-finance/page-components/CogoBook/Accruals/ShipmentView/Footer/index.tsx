@@ -160,9 +160,32 @@ function Footer({
 								className={styles.flex_modal}
 							>
 								{isBookedActive ? (
-									<div style={{ margin: '20px' }}>Are you sure you want to book?</div>
+									<div className={!value ? styles.margin : styles.margin_not}>
+
+										{!value ? 'Are you sure you want to book?'
+											: 'Please Choose The Selection Mode' }
+
+									</div>
 								) : (
-									<div style={{ margin: '20px' }}>Are you sure you want to accrue?</div>
+									<div className={!value ? styles.margin : styles.margin_not}>
+										{!value ? 'Are you sure you want to accrue?'
+											: 'Please Choose The Selection Mode' }
+
+									</div>
+								)}
+								{value && (
+									<div>
+										<RadioGroup
+											options={optionsRadio}
+											value={bulkAction}
+											onChange={(val) => {
+												setBulkSection((prev) => ({
+													...prev,
+													bulkAction: val,
+												}));
+											}}
+										/>
+									</div>
 								)}
 								<div className={styles.flex}>
 									<Button
