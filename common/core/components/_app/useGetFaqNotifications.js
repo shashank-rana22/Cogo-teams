@@ -20,7 +20,7 @@ const useGetFaqNotifications = () => {
 	return {
 		faqNotificationApiLoading,
 		fetchFaqNotification,
-		// faqNotificationApi,
+		trigger,
 		faqData,
 	};
 };

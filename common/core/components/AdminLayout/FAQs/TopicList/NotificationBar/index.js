@@ -1,4 +1,5 @@
 import { IcMArrowUp } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import NotificationContent from '../NotificationContent';
 
@@ -15,39 +16,42 @@ function NotificationBar({
 }) {
 	return (
 		<div>
-			<div
-				className={styles.container}
-				role="presentation"
-				onClick={() => {
-					setShowNotificationContent(!showNotificationContent);
-				}}
-			>
-				<div className={styles.update_container}>
-					<div className={styles.update_count}>
-						{' '}
-						{(faqNotificationData || []).length}
+			{!isEmpty(faqNotificationData) && isEmpty(question) && (
+				<div
+					className={styles.container}
+					role="presentation"
+					onClick={() => {
+						setShowNotificationContent(!showNotificationContent);
+					}}
+				>
+					<div className={styles.update_container}>
+						<div className={styles.update_count}>
+							{' '}
+							{(faqNotificationData || []).length}
+						</div>
+
+						<div className={styles.text_wrapper}>
+							You have
+							{' '}
+							<span className={styles.span}>New Updates!</span>
+
+						</div>
+
 					</div>
 
-					<div className={styles.text_wrapper}>
-						You have
-						{' '}
-						<span className={styles.span}>New Updates!</span>
-
+					<div className={styles.arrow_container}>
+						<IcMArrowUp
+							style={{
+								transition : '0.3s',
+								transform  : showNotificationContent
+									? 'rotate(0deg)'
+									: 'rotate(180deg)',
+							}}
+						/>
 					</div>
-
 				</div>
 
-				<div className={styles.arrow_container}>
-					<IcMArrowUp
-						style={{
-							transition : '0.3s',
-							transform  : showNotificationContent
-								? 'rotate(0deg)'
-								: 'rotate(180deg)',
-						}}
-					/>
-				</div>
-			</div>
+			)}
 
 			{showNotificationContent ? (
 				<NotificationContent

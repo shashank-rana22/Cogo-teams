@@ -24,8 +24,8 @@ const generalIcon = (
 function TopicList({
 	faqNotificationApiLoading,
 	fetchFaqNotification,
-	// faqNotificationApi,
 	faqNotificationData,
+	refetch,
 }) {
 	const {
 		search,
@@ -181,12 +181,13 @@ function TopicList({
 				topic={topic}
 				setTopic={setTopic}
 				question={question}
+				showHistory={showHistory}
 				setQuestion={setQuestion}
 				setShowHistory={setShowHistory}
 				setShowNotificationContent={setShowNotificationContent}
 				showNotificationContent={showNotificationContent}
 				fetchFaqNotification={fetchFaqNotification}
-				// faqNotificationApi={faqNotificationApi}
+				refetch={refetch}
 			/>
 
 			{renderQuestionList()}

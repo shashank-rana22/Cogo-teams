@@ -23,6 +23,7 @@ function Layout({ children, layout }) {
 		fetchFaqNotification,
 		faqNotificationApi,
 		faqData,
+		trigger,
 	} = useGetFaqNotifications();
 
 	if (hideLayout) {
@@ -42,6 +43,7 @@ function Layout({ children, layout }) {
 						faqNotificationApiLoading={faqNotificationApiLoading}
 						fetchFaqNotification={fetchFaqNotification}
 						faqNotificationApi={faqNotificationApi}
+						refetch={trigger}
 					/>
 				)}
 				{children}

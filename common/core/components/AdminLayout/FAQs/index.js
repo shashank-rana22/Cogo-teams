@@ -8,8 +8,8 @@ import TopicList from './TopicList';
 function FAQs({
 	faqNotificationApiLoading,
 	fetchFaqNotification,
-	faqNotificationApi,
 	faqNotificationData,
+	refetch,
 }) {
 	const [show, setShow] = useState(false);
 	const { general:{ isMobile = false } } = useSelector((state) => state);
@@ -66,7 +66,7 @@ function FAQs({
 							faqNotificationData={faqNotificationData}
 							faqNotificationApiLoading={faqNotificationApiLoading}
 							fetchFaqNotification={fetchFaqNotification}
-							faqNotificationApi={faqNotificationApi}
+							refetch={refetch}
 						/>
 					</div>
 				</Modal>
