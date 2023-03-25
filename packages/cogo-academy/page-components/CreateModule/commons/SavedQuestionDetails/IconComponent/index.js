@@ -1,18 +1,9 @@
 import { IcMArrowRotateUp } from '@cogoport/icons-react';
 
-function IconComponent({ item, caseToShow, setCaseToShow }) {
-	const handleShowCaseDetails = () => {
-		if (item.id === caseToShow) {
-			setCaseToShow('');
-		} else {
-			setCaseToShow(item.id);
-		}
-	};
-
+function IconComponent({ item, caseToShow }) {
 	if (caseToShow === item?.id) {
 		return (
 			<IcMArrowRotateUp
-				onClick={() => handleShowCaseDetails(item)}
 				width={12}
 				height={12}
 				fill="#393f70"
@@ -23,7 +14,6 @@ function IconComponent({ item, caseToShow, setCaseToShow }) {
 
 	return (
 		<IcMArrowRotateUp
-			onClick={() => handleShowCaseDetails(item)}
 			width={12}
 			height={12}
 			fill="#393f70"

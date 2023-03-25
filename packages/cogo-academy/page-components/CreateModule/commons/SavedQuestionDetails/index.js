@@ -1,4 +1,4 @@
-import { Tooltip, Button, Table } from '@cogoport/components';
+import { Pagination, Tooltip, Button, Table } from '@cogoport/components';
 import { IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -22,7 +22,6 @@ const getCorrectAnswers = ({ answers = [] }) => {
 };
 
 function SavedQuestionDetails({
-	// savedQuestionDetails,
 	test_questions,
 	setEditDetails,
 	editDetails,
@@ -30,6 +29,10 @@ function SavedQuestionDetails({
 	setAllKeysSaved,
 	getTestQuestionTest,
 	questionSetId,
+	loading:listLoading,
+	total_count,
+	setPage,
+	page,
 }) {
 	const [caseToShow, setCaseToShow] = useState('');
 
@@ -91,7 +94,6 @@ function SavedQuestionDetails({
 							style={{ marginTop: '8px' }}
 							item={item}
 							caseToShow={caseToShow}
-							setCaseToShow={setCaseToShow}
 						/>
 					</div>
 				) : null}
@@ -104,7 +106,7 @@ function SavedQuestionDetails({
 	const getCaseAnswerType = (item) => (
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
-				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
+				<div className={styles.bold}>{`+${item?.sub_question.length} Sub Questions`}</div>
 			</div>
 
 			{item.id === caseToShow
@@ -118,7 +120,7 @@ function SavedQuestionDetails({
 	const getCaseAnswerKey = (item) => (
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
-				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
+				<div className={styles.bold}>{`+${item?.sub_question.length} Sub Questions`}</div>
 			</div>
 
 			{item.id === caseToShow
@@ -143,7 +145,7 @@ function SavedQuestionDetails({
 	const getDifficultyLevel = (item) => (
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
-				<div className={styles.bold}>{`+${item?.sub_question.length} More`}</div>
+				<div className={styles.bold}>{`+${item?.sub_question.length} Sub Questions`}</div>
 			</div>
 
 			{item.id === caseToShow
@@ -179,7 +181,17 @@ function SavedQuestionDetails({
 						? item?.question_text
 						: getCaseQuestion(item, 'tooltip')}
 				>
-					<div className={styles.question_div}>
+					<div
+						role="presentation"
+						className={styles.question_div}
+						onClick={() => {
+							if (item.id === caseToShow) {
+								setCaseToShow('');
+							} else {
+								setCaseToShow(item.id);
+							}
+						}}
+					>
 						{item?.question_type !== 'case_study'
 							? item?.question_text
 							: getCaseQuestion(item, 'normal')}
@@ -297,20 +309,20 @@ function SavedQuestionDetails({
 				className={styles.table_container}
 				data={test_questions.filter((item) => item.id !== editDetails?.id)}
 				columns={columns}
+				loading={listLoading}
 			/>
 
-			{/* {savedQuestionDetails.length > 10 ? (
+			{total_count > 10 ? (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
-						// currentPage={page}
-						// totalItems={total_count}
-						// pageSize={pageLimit}
-						// onPageChange={(val) => setParams({ page: val })}
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={10}
+						onPageChange={setPage}
 					/>
 				</div>
-			) : null} */}
-
+			) : null}
 		</div>
 	);
 }

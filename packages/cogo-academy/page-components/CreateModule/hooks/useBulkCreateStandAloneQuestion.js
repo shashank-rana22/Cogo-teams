@@ -11,6 +11,7 @@ function useBulkCreateStandAloneQuestion() {
 	const bulkCreateStandAloneQuestion = async ({
 		questionSetId,
 		uploadDocument,
+		listSetQuestions,
 	}) => {
 		try {
 			await trigger({
@@ -22,6 +23,8 @@ function useBulkCreateStandAloneQuestion() {
 							: uploadDocument?.[0]?.finalUrl,
 				},
 			});
+
+			listSetQuestions({ questionToShow: '' });
 
 			Toast.success('Bulk question set uploaded successfully');
 		} catch (err) {

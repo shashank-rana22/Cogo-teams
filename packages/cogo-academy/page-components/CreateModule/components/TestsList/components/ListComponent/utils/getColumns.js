@@ -147,8 +147,15 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 		{
 			Header   : 'NAME',
 			id       : 'a',
-			accessor : ({ name = '' }) => (
-				<section>{name}</section>
+			accessor : ({ name = '', test_duration = '' }) => (
+				<div>
+					<section className={styles.name}>{name}</section>
+					<section className={styles.duration}>
+						{test_duration}
+						{' '}
+						mins
+					</section>
+				</div>
 			),
 		},
 		{
@@ -285,7 +292,7 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 		{
 			Header   : '',
 			id       : 'options',
-			accessor : ({ id = '' }) => (
+			accessor : ({ id = '', validity_start = '' }) => (
 
 				<section>
 					<div
@@ -300,17 +307,23 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 								className={styles.tooltip_pad}
 								content={(
 									<div className={styles.options}>
-										<Button
-											loading={loading}
-											themeType="secondary"
-											className={styles.btn}
-											onClick={() => handleEditTest(id)}
-										>
-											<IcMEdit />
-											<div style={{ marginLeft: '8px' }}>
-												Edit
-											</div>
-										</Button>
+										{(validity_start && new Date().getTime()
+										>= new Date(validity_start).getTime()) ? (
+												null
+											) : (
+												<Button
+													loading={loading}
+													themeType="secondary"
+													className={styles.btn}
+													onClick={() => handleEditTest(id)}
+												>
+													<IcMEdit />
+													<div style={{ marginLeft: '8px' }}>
+														Edit
+													</div>
+												</Button>
+											)}
+
 										<Button
 											loading={loading}
 											themeType="secondary"

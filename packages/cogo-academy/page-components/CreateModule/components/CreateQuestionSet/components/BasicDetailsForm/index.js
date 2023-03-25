@@ -5,6 +5,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import getElementController from '../../../../../../configs/getElementController';
+import LoadingState from '../../../../commons/LoadingState';
 import useCreateQuestionSet from '../../../../hooks/useCreateQuestionSet';
 
 import getControls from './controls';
@@ -12,7 +13,14 @@ import styles from './styles.module.css';
 
 const constants = ['name', 'topic', 'question_count', 'cogo_entity_id'];
 
-function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questionSetId, setEditDetails }) {
+function BasicDetailsForm({
+	setQuestionSetId,
+	getTestQuestionTest,
+	data,
+	questionSetId,
+	setEditDetails,
+	loading:listLoading,
+}) {
 	const [showForm, setShowForm] = useState(false);
 
 	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
@@ -51,6 +59,12 @@ function BasicDetailsForm({ setQuestionSetId, getTestQuestionTest, data, questio
 	const handleDeleteQuestionSet = () => {
 		createQuestionSet({ questionSetId, type: 'delete' });
 	};
+
+	if (listLoading) {
+		return (
+			<LoadingState rowsCount={1} />
+		);
+	}
 
 	if (!isEmpty(questionSetId) && !showForm) {
 		return (

@@ -61,6 +61,7 @@
 	align-items: center;
 	margin: 0 8px;
 	font-weight: 600;
+	cursor: pointer;
 }
 
 .answer_key {
@@ -140,4 +141,10 @@
 .tooltip {
 	padding: 0;
 	margin: 0;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	margin: 24px;
 }
