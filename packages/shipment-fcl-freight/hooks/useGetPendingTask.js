@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -23,7 +24,7 @@ function useGetPendingTasks({ shipment_data = {}, task_type = '' }) {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				Toast.error(err);
 			}
 		})();
 	}, [trigger, id, task_type]);

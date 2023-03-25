@@ -1,53 +1,48 @@
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const useListShipmentTradePartners = ({ shipment_id = '' }) => {
 	const [apiData, setApiData] = useState({});
-	const [loading, setLoading] = useState(false);
 	const [filters, setFilters] = useState({});
 
-	const [{ loading:apiLoading }, trigger] = useRequest('list_shipment_trade_partners', { manual: true });
+	const [{ loading }, trigger] = useRequest('list_shipment_trade_partners', { manual: true });
 
 	const { designation, origin_location_id } = filters;
 
-	const apiTrigger = async () => {
-		setLoading(true);
+	const apiTrigger = useCallback(() => {
+		(
+			async () => {
+				try {
+					const res = await trigger({
+						params: {
+							filters: {
+								shipment_id,
+							},
+							poc_filters: {
+								work_scopes : designation || undefined,
+								location_id : origin_location_id || undefined,
+							},
+						},
+					});
 
-		try {
-			const res = await trigger({
-				params: {
-					filters: {
-						shipment_id,
-					},
-					poc_filters: {
-						work_scopes : designation || undefined,
-						location_id : origin_location_id || undefined,
-					},
-				},
-			});
-
-			setLoading(false);
-			setApiData(res.data || {});
-		} catch (err) {
-			setLoading(false);
-			setApiData({});
-			console.log(err);
-		}
-	};
-
-	useEffect(() => {
-		apiTrigger();
-	}, []);
+					setApiData(res.data || {});
+				} catch (err) {
+					setApiData({});
+					console.log(err);
+				}
+			}
+		)();
+	}, [shipment_id, designation, origin_location_id, trigger]);
 
 	useEffect(() => {
 		apiTrigger();
-	}, [filters]);
+	}, [apiTrigger]);
 
 	return {
-		loading : apiLoading || loading,
+		loading,
 		setFilters,
 		filters,
-		data    : apiData,
+		data: apiData,
 		apiTrigger,
 	};
 };

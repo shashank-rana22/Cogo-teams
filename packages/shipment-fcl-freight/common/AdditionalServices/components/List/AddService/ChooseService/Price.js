@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import useRequestRate from '../../../../../../hooks/useRequestRate';
+import useCreateShipmentAdditionalService from '../../../../../../hooks/useCreateShipmentAdditionalService';
 
 import styles from './styles.module.css';
 
@@ -14,7 +14,7 @@ function Price({
 	setShowChargeCodes = () => {},
 	setShowPrice,
 }) {
-	const { requestRate, loading } = useRequestRate({ refetch, setShowChargeCodes });
+	const { requestRate, loading } = useCreateShipmentAdditionalService({ refetch, setShowChargeCodes });
 
 	return item?.rates ? (
 		<p>$ 0</p>

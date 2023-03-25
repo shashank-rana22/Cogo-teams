@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
 
-function useGetShipmentTimeLine({ shipment_data = {} }) {
+function useGetTimeLine({ shipment_data = {} }) {
 	const [data, setData] = useState([]);
 
 	const { id: shipment_id } = shipment_data;
@@ -33,4 +33,4 @@ function useGetShipmentTimeLine({ shipment_data = {} }) {
 	};
 }
 
-export default useGetShipmentTimeLine;
+export default useGetTimeLine;

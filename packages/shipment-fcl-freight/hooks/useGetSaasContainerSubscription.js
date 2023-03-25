@@ -1,19 +1,13 @@
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 const useGetSaasContainerSubscription = ({
 	shipmentId = '',
 }) => {
-	const { scope } = useSelector(({ general }) => ({
-		scope: general?.scope,
-	}));
-
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'get_saas_container_subscription',
 		method : 'GET',
-		scope,
 	}, { manual: true });
 
 	const listShipments = useCallback(() => {
@@ -41,4 +35,3 @@ const useGetSaasContainerSubscription = ({
 };
 
 export default useGetSaasContainerSubscription;
-// TODO

@@ -2,8 +2,8 @@ import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useGetPendingTasks from './useGetPendingTask';
-import useGetListDocuments from './useGetShipmentDocuments';
-import useGetShipmentProcess from './useGetShipmentProcess';
+import useGetProcess from './useGetProcess';
+import useGetListDocuments from './useListDocuments';
 
 const docTasks = ['upload_document', 'approve_document', 'amend_document'];
 
@@ -11,7 +11,7 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 	const [filters, setFilters] = useState({ q: '', source: '', service: '' });
 	const [taskList, setTaskList] = useState([]);
 	const [docTypes, setDocTypes] = useState([]);
-	const { data } = useGetShipmentProcess();
+	const { data } = useGetProcess();
 	const {
 		loading,
 		list : shipmentDocuments,

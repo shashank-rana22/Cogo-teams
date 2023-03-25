@@ -5,8 +5,8 @@ import { saveAs } from 'file-saver';
 import React from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
-import useDeleteDocument from '../../../../../hooks/useDeleteWallet';
 import useListWallet from '../../../../../hooks/useListWallet';
+import useDeleteDocument from '../../../../../hooks/useUpdateOrganizationDocument';
 
 import Loader from './Loader';
 import styles from './styles.module.css';

@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -7,18 +8,18 @@ function useGetListDocuments({ shipment_data = {}, filters = {} }) {
 		method : 'GET',
 	}, { manual: true });
 
-	const { id = '' } = shipment_data;
+	const { id : shipment_id = '' } = shipment_data;
 
-	const { q, service, uploaded_by_org_id } = filters;
+	const { q, service_type, uploaded_by_org_id } = filters;
 
 	const listDocuments = useCallback(() => {
 		(async () => {
 			const filter = {
 				filters: {
 					q,
-					shipment_id        : id,
-					service_type       : service || undefined,
-					uploaded_by_org_id : uploaded_by_org_id || undefined,
+					shipment_id,
+					service_type,
+					uploaded_by_org_id,
 				},
 			};
 			try {
@@ -33,10 +34,10 @@ function useGetListDocuments({ shipment_data = {}, filters = {} }) {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				Toast.error(err);
 			}
 		})();
-	}, [trigger, id, q, service, uploaded_by_org_id]);
+	}, [trigger, shipment_id, service_type, q, uploaded_by_org_id]);
 
 	useEffect(() => {
 		listDocuments();

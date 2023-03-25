@@ -11,7 +11,6 @@ const useUpdateShipmentAdditionalService = ({
 	showIp = false,
 	setShowIp = () => {},
 }) => {
-	// const geo = getGeoConstants();
 	const [remarks, setRemarks] = useState(null);
 
 	const [{ loading }, trigger] = useRequest({

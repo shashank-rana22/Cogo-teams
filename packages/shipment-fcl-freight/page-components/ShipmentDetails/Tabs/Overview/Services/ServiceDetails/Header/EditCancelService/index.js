@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import SupplierReallocation from '../../../../../../../../common/AdditionalServices/components/SupplierReallocation';
 import EditParameters from '../../../../../../../../common/EditParameters';
-import useGetEditParams from '../../../../../../../../hooks/useGetEditParams';
+// import useGetEditParams from '../../../../../../../../hooks/useGetEditParams';
 import controls from '../controls.json';
 
 import CancelShipment from './CancelShipment';
@@ -48,7 +48,7 @@ function EditCancelService({
 	const [showContainerEdit, setShowContainerEdit] = useState(false);
 	const [showParamEdit, setShowParamEdit] = useState(false);
 
-	const { showEditButton, newFilteredControls, boxesToShow } = useGetEditParams({ services: serviceList, controls, serviceData });
+	// const { showEditButton, newFilteredControls, boxesToShow } = useGetEditParams({ services: serviceList, controls, serviceData });
 
 	// const [{ shipmentData = {} }] = useContext(ShipmentDetailContext);
 
@@ -126,7 +126,7 @@ function EditCancelService({
 				/>
 				) : null}
 
-			{!showEditButton && showEditParams ? (
+			{/* {!showEditButton && showEditParams ? (
 				<div style={{ width: '100%' }}>
 					{canCancelService || editSupplier ? <div className={styles.line} /> : null}
 
@@ -139,7 +139,7 @@ function EditCancelService({
 						Edit Params
 					</div>
 				</div>
-			) : null}
+			) : null} */}
 			{/* {showConsolEditButton ? ( */}
 
 			{/* <div style={{ width: '100%' }}>
@@ -190,14 +190,14 @@ function EditCancelService({
 					show={showParamEdit}
 					onClose={() => setShowParamEdit(false)}
 				>
-					<EditParameters
+					{/* <EditParameters
 						shipmentData={shipmentData}
 						boxesToShow={boxesToShow}
 						onCancel={() => setShowParamEdit(false)}
 						newFilteredControls={newFilteredControls}
 						services={serviceList}
 						refetchServices={refetchServices}
-					/>
+					/> */}
 				</Modal>
 			) : null}
 			{showConsolEdit ? (

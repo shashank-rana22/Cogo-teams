@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
@@ -21,7 +22,7 @@ function useGetShipment() {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				Toast.error(err);
 			}
 		})();
 	}, [trigger, shipment_id]);

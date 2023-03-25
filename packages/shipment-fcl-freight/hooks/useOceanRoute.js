@@ -1,17 +1,11 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 const useOceanRoute = ({ setMapPoints = () => {}, list = {} }) => {
-	const { scope } = useSelector(({ general }) => ({
-		scope: general?.scope,
-	}));
-
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_container_sea_route',
 		method : 'POST',
-		scope,
 	}, { manual: true });
 
 	const getAllOceanRoutes = useCallback(() => {
@@ -47,7 +41,6 @@ const useOceanRoute = ({ setMapPoints = () => {}, list = {} }) => {
 				}
 				return res.data;
 			} catch (err) {
-				console.log(err);
 				return [];
 			}
 		})();

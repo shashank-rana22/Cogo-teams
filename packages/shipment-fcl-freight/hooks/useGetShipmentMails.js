@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import useAxios from 'axios-hooks';
 import { useEffect, useCallback } from 'react';
 
@@ -5,7 +6,7 @@ const keyMappings = {
 	shipping_instruction: 'si',
 };
 
-const useShipmentEmails = ({ cogo_shipment_id, document_type, page }) => {
+const useShipmentEmails = ({ cogo_shipment_id, document_type = [], page }) => {
 	const [recentClassifiedShipmentApi, triggerRecentClassifiedShipment] =		useAxios(
 		{
 			url    : `${process.env.COGO_LENS_URL}/list_rpa_mails`,
@@ -28,7 +29,7 @@ const useShipmentEmails = ({ cogo_shipment_id, document_type, page }) => {
 					},
 				});
 			} catch (err) {
-				// console.log(err, 'faill');
+				Toast.error(err);
 			}
 		})();
 	}, [cogo_shipment_id, document_type, page, triggerRecentClassifiedShipment]);
@@ -48,8 +49,11 @@ const useShipmentEmails = ({ cogo_shipment_id, document_type, page }) => {
 	}
 
 	useEffect(() => {
-		if ((document_type || []).length || page) getShipmentEmails();
-	}, [JSON.stringify(document_type)]);
+		if ((document_type || []).length || page) {
+			getShipmentEmails();
+		}
+	}, [JSON.stringify(document_type), page, getShipmentEmails]);
+
 	return {
 		emailList : newEmailData,
 		loading   : recentClassifiedShipmentApi?.loading,

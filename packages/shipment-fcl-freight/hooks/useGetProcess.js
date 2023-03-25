@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 function useGetShipmentProcess() {
 	const [{ loading, data }, trigger] = useRequest({
@@ -8,23 +8,25 @@ function useGetShipmentProcess() {
 		method : 'GET',
 	}, { manual: true });
 
-	const getProcessConfigs = async () => {
-		try {
-			const res = await trigger({
-				params: {
-					status: 'active',
-				},
-			}); if (!res.hasError) {
-				// Toast.error('dsfghj');
+	const getProcessConfigs = useCallback(() => {
+		(
+			async () => {
+				try {
+					await trigger({
+						params: {
+							status: 'active',
+						},
+					});
+				} catch (err) {
+					Toast.error(err);
+				}
 			}
-		} catch (err) {
-			console.log(err);
-		}
-	};
+		)();
+	}, [trigger]);
 
 	useEffect(() => {
 		getProcessConfigs();
-	}, []);
+	}, [getProcessConfigs]);
 
 	return {
 		loading,
@@ -33,4 +35,3 @@ function useGetShipmentProcess() {
 }
 
 export default useGetShipmentProcess;
-// TODO

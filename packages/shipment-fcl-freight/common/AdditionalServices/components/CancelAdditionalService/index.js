@@ -1,7 +1,7 @@
 import { Textarea, Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useCancelAdditionalService from '../../../../hooks/useCancelAdditionalService';
+import useUpdateAdditionalService from '../../../../hooks/useUpdateAdditionalService';
 
 import styles from './styles.module.css';
 
@@ -16,7 +16,7 @@ function CancelService({
 	const onOuterClick = () => {
 		setShowCancel(false);
 	};
-	const { updateServiceList, loading } = useCancelAdditionalService({
+	const { updateServiceList, loading } = useUpdateAdditionalService({
 		id,
 		remarkValues,
 		refetch,

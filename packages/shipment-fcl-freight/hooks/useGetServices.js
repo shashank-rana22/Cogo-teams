@@ -1,9 +1,10 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-function useListShipmentServices({ shipment_data, additional_methods = [] }) {
+function useGetServices({ shipment_data, additional_methods = [] }) {
 	const [{ loading : servicesLoading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/get_services',
+		url    : 'fcl_freight/get_service',
 		method : 'GET',
 	}, { manual: true });
 
@@ -17,10 +18,10 @@ function useListShipmentServices({ shipment_data, additional_methods = [] }) {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				Toast.error(err);
 			}
 		})();
-	}, [trigger, shipment_data?.id, additional_methods]);
+	}, [trigger, shipment_data?.id]);
 
 	useEffect(() => {
 		if (shipment_data?.id) { listServices(); }
@@ -36,4 +37,4 @@ function useListShipmentServices({ shipment_data, additional_methods = [] }) {
 	};
 }
 
-export default useListShipmentServices;
+export default useGetServices;
