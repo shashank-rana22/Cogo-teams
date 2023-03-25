@@ -1,5 +1,5 @@
 const shipmentFclFreight = {
-	'/[partner_id]/booking/fcl/[freight_id]': {
+	'/[partner_id]/booking/fcl/[shipment_id]': {
 		navigation: 'coe-shipments',
 	},
 };

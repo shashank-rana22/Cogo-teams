@@ -24,7 +24,7 @@ const useCreateOrganizationPoc = ({
 			}
 		} catch (err) {
 			setLoading(false);
-			console.log({ err });
+			Toast.error(err);
 		}
 	};
 

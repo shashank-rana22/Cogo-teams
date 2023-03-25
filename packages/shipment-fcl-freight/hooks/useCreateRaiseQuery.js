@@ -12,9 +12,8 @@ function useCreateRaiseQuery({
 	queryType = '',
 	remarks = '',
 }) {
-	const { scope, userId } = useSelector(({ general, profile }) => ({
-		scope  : general?.scope,
-		userId : profile.id,
+	const { scope, userId } = useSelector(({ profile }) => ({
+		userId: profile.id,
 	}));
 
 	const {
@@ -37,7 +36,7 @@ function useCreateRaiseQuery({
 				remarks,
 				performed_by_id : userId,
 				service         : 'shipment',
-				service_id      : shipmentId || '3534d9b2-7a8c-47a0-a3d1-93cfb7bf9f69',
+				service_id      : shipmentId,
 			};
 			try {
 				const res = await trigger({

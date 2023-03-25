@@ -3,8 +3,6 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
-/* change name */
-
 const useCreateShipmentAdditionalService = ({
 	item,
 	refetch = () => {},
@@ -74,7 +72,7 @@ const useCreateShipmentAdditionalService = ({
 			onCancel();
 			refetch();
 		} catch (err) {
-			console.log(err);
+			Toast.error(err);
 		}
 	};
 
