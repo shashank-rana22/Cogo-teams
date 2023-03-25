@@ -1,3 +1,4 @@
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import { GenericObject } from '../../../commons/Interfaces/index';
@@ -45,6 +46,9 @@ interface Props {
 }
 
 function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props) {
+	const { query } = useRouter();
+	const { jobNumber } = query || {};
+
 	const [sort, setSort] = useState({});
 
 	const {
@@ -56,7 +60,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 		tab,
 		setTab,
 		setCurrentTab,
-	} = useGetPurchaseViewList({ filters, setFilters, sort });
+	} = useGetPurchaseViewList({ filters, setFilters, sort, jobNumber });
 
 	const functions = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,

@@ -90,10 +90,12 @@ function CostSheet() {
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => Router.push(
-						'/business-finance/coe-finance/[active_tab]/[view]',
-						'/business-finance/coe-finance/all_invoices/shipment-view' as never as null,
-					)}
+					onClick={() => {
+						Router.push(
+							`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
+							`/business-finance/coe-finance/all_invoices/shipment-view?jobNumber=${jobNumber}`,
+						);
+					}}
 				>
 					Go Back
 				</Button>
@@ -204,6 +206,18 @@ function CostSheet() {
 		<div className={styles.tags_container}>
 			{getPills()}
 		</div>
+
+		<div className={styles.sid}>
+			{' '}
+			SID
+			{' '}
+			<div className={styles.job}>
+				#
+				{jobNumber}
+			</div>
+
+		</div>
+
 	</span>
         ) as unknown as string
         }
@@ -218,6 +232,7 @@ function CostSheet() {
 					dataList={shipmentData?.list?.[0]}
 					shipmentId={shipmentId}
 				/>
+
 			</Accordion>
 			<div className={styles.heading}>Cost Sheet</div>
 			<Line width="60px" color="#F68B21" margin="5px 0px 0px 0px" />
