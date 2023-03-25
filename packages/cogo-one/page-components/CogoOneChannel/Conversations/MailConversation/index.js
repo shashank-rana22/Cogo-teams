@@ -88,8 +88,8 @@ function MailConversation({ mailProps }) {
 						</div>
 						<div
 							role="presentation"
-							className={cl`
-						${hasAttachments ? styles.reveive_preview_div : styles.receive_message_container}`}
+							className={cl`${hasAttachments ? styles.reveive_preview_div : ''} 
+								${styles.receive_message_container}`}
 							dangerouslySetInnerHTML={{ __html: content }}
 						/>
 					</div>

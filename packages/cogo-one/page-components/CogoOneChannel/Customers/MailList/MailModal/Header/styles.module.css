@@ -18,21 +18,7 @@
 }
 
 .disabled_button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 40px;
-	height: 40px;
 	cursor: not-allowed;
-	border-radius: 50%;
-	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
-
-	svg {
-		width: 22px;
-		height: 22px;
-		fill: #ee3425;
-		transform: rotate(-30deg);
-	}
 }
 
 .title {

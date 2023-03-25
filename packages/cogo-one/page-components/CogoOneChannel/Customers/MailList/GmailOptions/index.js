@@ -10,7 +10,12 @@ function GmailOption({ handleClick = () => {} }) {
 			<div className={styles.title}>Outlook</div>
 			<div className={styles.gmail_container}>
 				{Gmailoptions.map(({ label, icon, value }) => (
-					<div className={styles.content} onClick={() => handleClick(value)} role="presentation">
+					<div
+						className={styles.content}
+						onClick={() => handleClick(value)}
+						role="button"
+						tabIndex={0}
+					>
 						<div className={styles.left_div}>
 							<div className={styles.icon_div}>{icon}</div>
 							<div className={styles.name}>{label}</div>

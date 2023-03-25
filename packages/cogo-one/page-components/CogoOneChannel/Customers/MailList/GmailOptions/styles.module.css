@@ -16,10 +16,10 @@
 	&:last-child {
 		border-bottom: none;
 	}
-}
 
-.content:hover {
-	background-color: #fdfbf6;
+	&:hover {
+		background-color: #fdfbf6;
+	}
 }
 
 .left_div {

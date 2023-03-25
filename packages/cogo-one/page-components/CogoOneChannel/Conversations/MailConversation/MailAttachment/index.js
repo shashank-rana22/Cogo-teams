@@ -20,7 +20,8 @@ function MailAttachments({ allAttachements = [], loading = false }) {
 					{externalAttachements.map((item) => (
 						<div className={styles.preview_wrapper} key={item.id}>
 							<div
-								role="presentation"
+								role="button"
+								tabIndex={0}
 								className={styles.doc_content}
 								onClick={() => setShowPreview(item)}
 							>

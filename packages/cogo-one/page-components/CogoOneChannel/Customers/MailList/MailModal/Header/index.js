@@ -49,7 +49,9 @@ function RenderHeader({
 						/>
 					</div>
 				</div>
-				<div className={cl`${(createLoading || replyLoading) ? styles.disabled_button : styles.send_icon}`}>
+				<div
+					className={cl`${(createLoading || replyLoading) ? styles.disabled_button : ''} ${styles.send_icon}`}
+				>
 					<IcMSend
 						onClick={handleSend}
 					/>

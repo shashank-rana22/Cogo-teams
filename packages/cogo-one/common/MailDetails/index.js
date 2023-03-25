@@ -49,7 +49,12 @@ function MailDetails({
 		<div>
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<div role="presentation" className={styles.left_div} onClick={handleClick}>
+					<div
+						role="button"
+						tabIndex={0}
+						className={styles.left_div}
+						onClick={handleClick}
+					>
 						<IcMArrowLeft className={styles.arrow_left} />
 						<div className={styles.title}>{startCase(activeSelect.replace('_', ' '))}</div>
 					</div>
@@ -75,7 +80,8 @@ function MailDetails({
 							const { name = '' } = emailAddress || {};
 							return (
 								<div
-									role="presentation"
+									role="button"
+									tabIndex={0}
 									className={cl`
 									${activeMail?.id === id ? styles.active_content : ''} ${styles.content}`}
 									onClick={() => setActiveMail(itm)}

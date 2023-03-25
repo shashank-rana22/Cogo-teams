@@ -19,7 +19,8 @@ function Header({ subject = '', loading, handlClick = () => {} }) {
 						caret={false}
 					>
 						<div
-							role="presentation"
+							role="button"
+							tabIndex={0}
 							className={styles.header_actions_reply}
 							onClick={() => handlClick(value)}
 						>
