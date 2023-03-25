@@ -180,6 +180,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'list_set_questions',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	faq: [
 		{

@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 function BulkUpload({
 	questionSetId,
 	setShowBulkUpload,
+	listSetQuestions,
 }) {
 	const [uploadDocument, setUploadDocument] = useState();
 
@@ -23,7 +24,7 @@ function BulkUpload({
 		if (isEmpty(uploadDocument)) {
 			Toast.error('Submit excel sheet');
 		} else {
-			bulkCreateStandAloneQuestion({ questionSetId, uploadDocument });
+			bulkCreateStandAloneQuestion({ questionSetId, uploadDocument, listSetQuestions });
 		}
 	};
 

@@ -30,7 +30,11 @@ function useUpdateCaseStudy() {
 
 			Toast.success(`Case study question ${actionNameMapping[action]} successfully`);
 
-			getTestQuestionTest({ questionSetId, ...(action !== 'delete' ? { questionToShow: id } : null) });
+			getTestQuestionTest({
+				questionSetId,
+				...(action !== 'delete' ? { questionToShow: id } : { pageToShow: 1 }),
+			});
+
 			setAllKeysSaved(true);
 			setEditDetails({});
 			reset();

@@ -34,7 +34,7 @@ function useUpdateStandAloneTestQuestion() {
 
 			getTestQuestionTest({
 				questionSetId,
-				...(action === 'update' ? { questionToShow: testQuestionId } : null),
+				...(action === 'delete' ? { pageToShow: 1 } : null),
 			});
 			setAllKeysSaved(true);
 			setEditDetails({});
