@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { usePublicRequest } from '@cogoport/request';
 
 function useSendMail(mailProps) {
@@ -21,7 +22,7 @@ function useSendMail(mailProps) {
 			});
 			Toast.success('Mail Sent Successfully.');
 		} catch (error) {
-			// console.log(error)
+			Toast.error(getApiErrorString(error?.data));
 		} finally {
 			setEmailState({
 				body    : '',

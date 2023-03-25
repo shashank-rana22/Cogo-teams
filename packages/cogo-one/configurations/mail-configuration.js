@@ -24,7 +24,7 @@ export const Gmailoptions = [
 		value : 'spam',
 		icon  : <img
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam.svg"
-			alt="inbox"
+			alt="spam"
 		/>,
 	},
 ];

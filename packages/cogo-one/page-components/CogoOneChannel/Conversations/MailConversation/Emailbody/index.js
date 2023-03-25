@@ -47,10 +47,9 @@ function Emailbody({
 						</div>
 						<div className={styles.header_to_cc}>
 							To:
-							{' '}
 							<Tooltip content={recipientData} interactive placement="top">
 								<div className={styles.name_div}>
-									{recipientData.map((item) => (
+									{(recipientData || []).map((item) => (
 										<div className={styles.name}>
 											{item}
 										</div>
@@ -61,7 +60,7 @@ function Emailbody({
 						{!emptyCcRecipient && (
 							<div className={styles.header_to_cc}>
 								CC:
-								{ccData.map((item) => (
+								{(ccData || []).map((item) => (
 									<div className={styles.name}>{item}</div>
 								))}
 							</div>
