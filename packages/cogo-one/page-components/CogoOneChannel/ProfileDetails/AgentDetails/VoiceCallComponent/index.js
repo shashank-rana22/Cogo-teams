@@ -9,7 +9,7 @@ import hideDetails from '../../../../../utils/hideDetails';
 import styles from './styles.module.css';
 
 function VoiceCallComponent({
-	userMobile,
+	userMobile = '',
 	orgId,
 	userId,
 	userName,
@@ -69,32 +69,32 @@ function VoiceCallComponent({
 
 	return (
 		<div className={styles.number_div}>
-			<div className={styles.dialer_icon_div}>
-				<IcMCall
-					className={cl`${
-						(isEmpty(userMobile)) ? styles.disable : styles.call_icon}`}
-					onClick={handleCall}
-				/>
-			</div>
-			{!isEmpty(userMobile) ? (
+			{userMobile ? (
 				<>
-					<div className={styles.call_on_div}>
-						<div className={styles.call_on}>Call on</div>
-						<div className={styles.show_number}>
-							+
-							{code}
-							{' '}
-							{hideDetails({
-								data : number,
-								type : 'number',
-							})}
+					<div className={styles.flex_div}>
+						<div className={styles.dialer_icon_div}>
+							<IcMCall
+								className={cl`${
+									(isEmpty(userMobile)) ? styles.disable : styles.call_icon}`}
+								onClick={handleCall}
+							/>
+						</div>
+						<div className={styles.call_on_div}>
+							<div className={styles.call_on}>Contact on</div>
+							<div className={styles.show_number}>
+								+
+								{code}
+								{' '}
+								{hideDetails({
+									data : number,
+									type : 'number',
+								})}
+							</div>
 						</div>
 					</div>
 					<IcCWhatsapp className={styles.whatsapp_icon} onClick={handleWhatsappModal} />
 				</>
-			) : (
-				<div className={styles.show_number}>Number not found</div>
-			)}
+			) : <div className={styles.show_number}>Number not found</div>}
 		</div>
 	);
 }

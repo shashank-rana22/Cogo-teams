@@ -1,12 +1,12 @@
-import { Checkbox, Popover, Tooltip, Badge } from '@cogoport/components';
+import { Button, Checkbox, Popover, Tooltip, Badge } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useAllocationRequest } from '@cogoport/request';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { format, isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import Actions from '../components/AllocationRequests/List/Actions';
-import styles from '../styles.module.css';
+import styles from '../components/AllocationRequests/List/styles.module.css';
 
 const useListAllocationRequests = () => {
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
@@ -153,7 +153,6 @@ const useListAllocationRequests = () => {
 			Header : <Checkbox
 				checked={selectAll}
 				onChange={(event) => onChangeTableHeadCheckbox(event)}
-				className={styles.select_all_checkbox}
 				disabled={loading}
 			/>,
 			accessor: ({ id = '' }) => (
@@ -188,7 +187,7 @@ const useListAllocationRequests = () => {
 			key      : 'service_user',
 			Header   : 'User',
 			accessor : ({ service_user }) => (
-				<div>
+				<div className={styles.value_container}>
 					{startCase(service_user?.name || '___')}
 					<div className={styles.email_id}>{service_user?.email || '___'}</div>
 				</div>
@@ -197,15 +196,18 @@ const useListAllocationRequests = () => {
 		{
 			key      : 'stakeholder_type',
 			Header   : 'Stakeholder Type',
-			accessor : ({ stakeholder_type }) => startCase(stakeholder_type || '___'),
+			accessor : ({ stakeholder_type }) => (
+				<div className={styles.value_container}>
+					{startCase(stakeholder_type || '___')}
+				</div>
+			),
 		},
 		{
 			key      : 'previous_agent',
 			Header   : 'Previous Agent',
 			accessor : ({ old_stakeholder }) => (
-				<div>
+				<div className={styles.value_container}>
 					{old_stakeholder?.name || '___'}
-					{' '}
 					<div className={styles.email_id}>{old_stakeholder?.email || '___'}</div>
 				</div>
 			),
@@ -214,9 +216,8 @@ const useListAllocationRequests = () => {
 			key      : 'requested_agent',
 			Header   : 'Requested Agent',
 			accessor : ({ user }) => (
-				<div>
+				<div className={styles.value_container}>
 					{user?.name || '___'}
-					{' '}
 					<div className={styles.email_id}>{user?.email || '___'}</div>
 				</div>
 			),
@@ -224,17 +225,57 @@ const useListAllocationRequests = () => {
 		{
 			key      : 'created_by',
 			Header   : 'Requested By',
-			accessor : ({ created_by }) => startCase(created_by?.name || '___'),
+			accessor : ({ created_by }) => (
+				<div className={styles.value_container}>
+					{startCase(created_by?.name || '___')}
+				</div>
+			),
+		},
+		{
+			key      : 'created_at',
+			Header   : 'Requested At',
+			accessor : ({ created_at }) => (
+				<div>
+					{created_at	 ? (
+						<div className={styles.created_date}>
+							{format(created_at, 'dd MMM yyyy') || '___'}
+
+							<div className={styles.created_time}>
+								{format(created_at, 'hh:mm aaa') || '___'}
+							</div>
+						</div>
+					) : '___'}
+				</div>
+			),
 		},
 		{
 			key      : 'reason',
 			Header   : 'Reason',
 			accessor : ({ reason }) => (
-				<Tooltip content={reason} placement="top">
-					<span className={styles.reason}>
+				<Tooltip content={<div className={styles.tooltip_text}>{reason}</div>} placement="top">
+					<div className={styles.reason}>
 						{reason || '___'}
-					</span>
+					</div>
 				</Tooltip>
+			),
+		},
+		{
+			key      : 'booking_confirmation_proof',
+			Header   : 'Booking Confirmation Proof',
+			accessor : ({ booking_confirmation_proof }) => (
+				<div className={styles.value_container}>
+					{booking_confirmation_proof
+						? (
+							<Button
+								size="md"
+								themeType="link"
+								onClick={() => window.open(booking_confirmation_proof, '_blank')}
+							>
+								View Proof
+							</Button>
+						)
+						: '___'}
+				</div>
 			),
 		},
 		{
