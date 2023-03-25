@@ -25,8 +25,8 @@ function useListFaqSearchHistories() {
 			await trigger({
 				params: {
 					filters: {
-						created_at_greater_than : formatStartDate || undefined,
-						created_at_less_than    : formatEndDate || undefined,
+						start_date : formatStartDate || undefined,
+						end_date   : formatEndDate || undefined,
 
 					},
 
