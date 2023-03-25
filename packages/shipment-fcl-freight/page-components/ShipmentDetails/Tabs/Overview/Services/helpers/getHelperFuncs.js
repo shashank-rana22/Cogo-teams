@@ -1,79 +1,110 @@
-/* eslint-disable no-param-reassign */
-export const helperFuncs = (serviceList) => {
-	let check = false;
-	let serviceAvailable = {};
-	const renderItem = (routeService, serviceObj) => {
-		serviceAvailable = (serviceList || []).find(
-			(element) => routeService?.service_types?.[0] === element?.service_type
-				&& element?.trade_type === routeService.trade_type,
-		);
+const helperFuncs = (servicesList, possibleServices) => {
+	const serviceObj = {
+		originServices      : [],
+		mainServices        : [],
+		destinationServices : [],
+	};
 
-		serviceAvailable = {
-			...(serviceAvailable || {}),
-			routeLeg: routeService,
-		};
-
-		if (routeService?.trade_type === 'export') {
-			check = false;
-			(serviceObj?.origin || []).forEach((obj) => {
-				if (obj?.routeLeg?.display === serviceAvailable?.routeLeg?.display) {
-					check = true;
+	const checkIfServiceAlreadyPresent = (servicesArray, service) => {
+		let canPushService = true;
+		if (servicesArray[service.service_type]?.length) {
+			(servicesArray[service?.service_type] || []).forEach((obj) => {
+				if (obj.id === service.id) {
+					canPushService = false;
 				}
 			});
-
-			if (check === false) {
-				serviceObj.origin.push(serviceAvailable);
-			}
 		}
-		if (routeService?.trade_type === 'import') {
-			check = false;
-			(serviceObj?.destination || []).forEach((obj) => {
-				if (obj?.routeLeg?.display === serviceAvailable?.routeLeg?.display) {
-					check = true;
-				}
-			});
-			if (check === false) {
-				serviceObj.destination.push(serviceAvailable);
-			}
-		}
+		return canPushService;
+	};
 
-		if ('mainServices' in routeService) {
-			routeService?.mainServices?.forEach((data) => {
-				serviceAvailable = serviceList?.find(
-					(element) => element?.display_service_type === data.service_types[0]
-						&& element?.trade_type === data?.trade_type,
-				);
+	const classifyTradeTypeBasedService = (serviceToIterate) => {
+		let isServiceAlreadyAdded = false;
 
-				serviceAvailable = {
-					...serviceAvailable,
-					routeLeg: data,
-				};
+		(servicesList || []).forEach((service) => {
+			if (service?.service_type === serviceToIterate.service_type) {
+				isServiceAlreadyAdded = true;
+				if (service?.trade_type === 'export') {
+					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.originServices, service);
 
-				const all_similar_services = serviceList?.filter(
-					(element) => element?.trade_type === data?.trade_type
-						&& element?.service_type === data.service_types[0],
-				);
-
-				if (all_similar_services?.length) {
-					serviceObj.multipleMainService.push({
-						services : all_similar_services,
-						routeLeg : data,
-					});
-				}
-
-				(serviceObj.mainService || []).forEach((obj) => {
-					if (obj === serviceAvailable) {
-						check = true;
+					if (canPushService) {
+						if (Object.keys(serviceObj.originServices).includes(service?.service_type)) {
+							(serviceObj.originServices[service?.service_type]).push({
+								...(serviceObj.originServices[service?.service_type]),
+								display_name: serviceToIterate.display_name,
+							});
+						} else {
+							(serviceObj.originServices)[service?.service_type] = [{
+								...service,
+								display_name: serviceToIterate.display_name,
+							}];
+						}
 					}
-				});
-				if (!check) {
-					serviceObj.mainService.push(serviceAvailable);
+				} else 	if (service?.trade_type === 'import') {
+					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.destinationServices, service);
+
+					if (canPushService) {
+						if (Object.keys(serviceObj.originServices).includes(service?.service_type)) {
+							(serviceObj.destinationServices[service?.service_type]).push({
+								...(serviceObj.destinationServices[service?.service_type]),
+								display_name: serviceToIterate.display_name,
+							});
+						} else {
+							(serviceObj.destinationServices)[service?.service_type] = [{
+								...service,
+								display_name: serviceToIterate.display_name,
+							}];
+						}
+					}
+				} else {
+					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.destinationServices, service);
+
+					if (canPushService) {
+						if (Object.keys(serviceObj.mainServices).includes(service?.service_type)) {
+							(serviceObj.mainServices[service?.service_type]).push({
+								...(serviceObj.mainServices[service?.service_type]),
+								display_name: serviceToIterate.display_name,
+							});
+						} else {
+							(serviceObj.mainServices)[service?.service_type] = [{
+								...service,
+								display_name: serviceToIterate.display_name,
+							}];
+						}
+					}
 				}
-			});
+			}
+		});
+
+		if (!isServiceAlreadyAdded) {
+			if (serviceToIterate.trade_type === 'export') {
+				(serviceObj.originServices)[serviceToIterate.service_type] = [{
+					display_name: serviceToIterate.display_name,
+				}];
+			} else if (serviceToIterate.trade_type === 'import') {
+				(serviceObj.destinationServices)[serviceToIterate.service_type] = [{
+					display_name: serviceToIterate.display_name,
+				}];
+			} else {
+				(serviceObj.mainServices)[serviceToIterate.service_type] = [{
+					display_name: serviceToIterate.display_name,
+				}];
+			}
 		}
 	};
+
+	possibleServices.forEach((service) => {
+		if ('mainServices' in service) {
+			(service.mainServices).forEach((singleService) => {
+				classifyTradeTypeBasedService(singleService);
+			});
+		} else {
+			classifyTradeTypeBasedService(service);
+		}
+	});
 
 	return {
-		renderItem,
+		serviceObj,
 	};
 };
+
+export default helperFuncs;

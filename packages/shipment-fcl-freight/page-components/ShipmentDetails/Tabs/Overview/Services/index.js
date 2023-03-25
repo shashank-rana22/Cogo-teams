@@ -1,9 +1,9 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
-import possibleFullRouteConfigs from '../../../../../common/Route/possible-full-route.json';
+import { possibleServices } from '../../../../../common/Route/possible-full-route';
 
-import { helperFuncs } from './helpers/getHelperFuncs';
+import helperFuncs from './helpers/getHelperFuncs';
 import renderSubsidiaryServices from './helpers/renderSubsidiaryServices';
 import upsellTransportation from './helpers/upsellTransportation';
 import Loader from './Loader';
@@ -21,30 +21,23 @@ function Services() {
 		servicesLoading,
 	} = useContext(ShipmentDetailContext);
 
-	const mainServiceName = primary_service?.service_type;
-	const possibleFullRoute = possibleFullRouteConfigs?.[mainServiceName];
+	// const mainServiceName = primary_service?.service_type;
+	// const possibleFullRoute = possibleFullRouteConfigs?.[mainServiceName];
 
-	const { renderItem } = helperFuncs(servicesList);
+	const { serviceObj } =	helperFuncs(servicesList, possibleServices);
 
-	const serviceObj = {
-		origin              : [],
-		mainService         : [],
-		destination         : [],
-		multipleMainService : [],
-	};
+	console.log(serviceObj, 'newSweervicweee');
 
-	(possibleFullRoute || []).map((routeService) => renderItem(routeService, serviceObj));
+	// const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj, primary_service);
 
-	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj, primary_service);
-
-	renderSubsidiaryServices(serviceObj, servicesList, primary_service);
+	// renderSubsidiaryServices(serviceObj, servicesList, primary_service);
 
 	return (
 		<div className={styles.container}>
 			{!servicesLoading || !isGettingShipment ? (
 				<div className={styles.service_container}>
 					<div className={styles.card_block}>
-						{(serviceObj?.origin || []).map((service) => (
+						{/* {(serviceObj?.origin || []).map((service) => (
 							<ServiceDetails
 								className={styles.service_details}
 								cancelUpsellFor={cancelUpsellOriginFor}
@@ -54,11 +47,11 @@ function Services() {
 								refetchServices={refetchServices}
 								primary_service={primary_service}
 							/>
-						))}
+						))} */}
 					</div>
 
 					<div className={styles.card_block}>
-						{(serviceObj?.multipleMainService || []).map((service) => (
+						{/* {(serviceObj?.multipleMainService || []).map((service) => (
 							<MutipleSimilarServices
 								serviceList={servicesList}
 								shipmentData={shipment_data}
@@ -68,11 +61,11 @@ function Services() {
 								refetchServices={refetchServices}
 							/>
 
-						))}
+						))} */}
 					</div>
 
 					<div className={styles.card_block}>
-						{(serviceObj?.destination || []).map((service) => (
+						{/* {(serviceObj?.destination || []).map((service) => (
 							<ServiceDetails
 								cancelUpsellFor={cancelUpsellDestinationFor}
 								serviceData={service}
@@ -81,7 +74,7 @@ function Services() {
 								refetchServices={refetchServices}
 								primary_service={primary_service}
 							/>
-						))}
+						))} */}
 					</div>
 				</div>
 			) : (

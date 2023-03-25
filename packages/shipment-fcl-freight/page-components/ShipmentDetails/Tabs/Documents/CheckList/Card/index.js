@@ -10,10 +10,6 @@ const Card = ({
 	shipment_data,
 	primary_service,
 }) => {
-	const containsFreightCertificate = completedDocs?.some(
-		(item) => item?.document_type === 'freight_certificate',
-	);
-
 	const handleView = (url) => {
 		window.open(url, '_blank');
 	};
@@ -50,7 +46,6 @@ const Card = ({
 					shipment_data={shipment_data}
 					item={item}
 					docType={docType}
-					containsFreightCertificate={containsFreightCertificate}
 					handleView={handleView}
 					handleSave={handleSave}
 					primary_service={primary_service}

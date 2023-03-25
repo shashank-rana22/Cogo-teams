@@ -13,7 +13,7 @@ function ShipmentInfo() {
 
 	const text = showFeature
 		? `${shipment_data?.shipment_type} ID #${shipment_data?.serial_id}`
-		: `Shipment ID #${shipment_data?.serial_id}`;
+		: `Shipment ID  #${shipment_data?.serial_id}`;
 
 	const sourceText =		shipment_data?.source === 'direct'
 		? 'Sell Without Buy'

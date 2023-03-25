@@ -2,7 +2,14 @@
 	padding-bottom: 10px;
 	font-size: 10px;
     margin-bottom: -10px;
+	 
+} 
 
-
-	
+.tooltop_customise {
+	background : none;
+	padding    : 0px;
+	color      : #366EFD;
+	border     : none;
+	height     : auto;
+	font-size   : 12px;
 }

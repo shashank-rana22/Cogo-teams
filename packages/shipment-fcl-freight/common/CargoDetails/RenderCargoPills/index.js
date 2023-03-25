@@ -38,10 +38,11 @@ function RenderCargoPills({ detail }) {
 	return (
 		<>
 			{labels.map((label) => {
-				if (detail?.[label] && renderValue(label, detail)) {
+				const value = renderValue(label, detail);
+				if (detail?.[label] && value) {
 					return (
 						<div className={cl` ${styles.box} `} key={label}>
-							{renderValue(label, detail)}
+							{value}
 						</div>
 					);
 				}

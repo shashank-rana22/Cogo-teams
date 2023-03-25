@@ -16,9 +16,9 @@ const useUpdateMessage = () => {
 			});
 
 			if (params?.important === true) {
-				Toast.success('Marked');
+				Toast.success('Message marked as important');
 			} else {
-				Toast.success('UnMarked');
+				Toast.success('Message unMarked as important');
 			}
 		} catch (err) {
 			Toast.error(err?.data?.message);

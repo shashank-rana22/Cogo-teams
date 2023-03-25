@@ -6,7 +6,7 @@ import ActiveService from './ActiveService';
 import InactiveService from './InactiveService';
 import Loader from './Loader';
 import MainService from './MainService';
-import possibleFullRouteConfigs from './possible-full-route.json';
+import possibleFullRouteConfigs from './possible-full-route';
 import styles from './styles.module.css';
 
 const trasportationServices = [
