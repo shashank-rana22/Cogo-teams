@@ -8,13 +8,11 @@ const useGetShipmentOperatingProcedure = ({
 	defaultFilters = {},
 }) => {
 	const [apiData, setApiData] = useState({});
-	const [loading, setLoading] = useState(false);
 	const [filters, setFilters] = useState({});
 
-	const [{ loading:apiLoading }, trigger] = useRequest('get_shipment_operating_procedure', { manual: true });
+	const [{ loading }, trigger] = useRequest('get_shipment_operating_procedure', { manual: true });
 
 	const apiTrigger = async () => {
-		setLoading(true);
 		try {
 			const res = await trigger({
 				params: {
@@ -31,10 +29,8 @@ const useGetShipmentOperatingProcedure = ({
 				},
 			});
 
-			setLoading(false);
 			setApiData(res.data || {});
 		} catch (err) {
-			setLoading(false);
 			setApiData({});
 			console.log({ err });
 		}
@@ -45,7 +41,7 @@ const useGetShipmentOperatingProcedure = ({
 	}, []);
 
 	return {
-		loading : apiLoading || loading,
+		loading,
 		data    : apiData,
 		filters,
 		setFilters,
@@ -53,3 +49,4 @@ const useGetShipmentOperatingProcedure = ({
 	};
 };
 export default useGetShipmentOperatingProcedure;
+// TODO

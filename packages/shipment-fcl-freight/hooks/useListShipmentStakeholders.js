@@ -3,13 +3,11 @@ import { useState, useEffect } from 'react';
 
 const useListStakeholders = ({ defaultParams = {}, shipment_id = '' }) => {
 	const [apiData, setApiData] = useState({});
-	const [loading, setLoading] = useState(false);
 	const [filters, setFilters] = useState({});
 
-	const [{ loading:apiLoading }, trigger] = useRequest('fcl_freight/list_stakeholders', { manual: true });
+	const [{ loading }, trigger] = useRequest('fcl_freight/list_stakeholders', { manual: true });
 
 	const apiTrigger = async () => {
-		setLoading(true);
 		try {
 			const res = await trigger({
 				params: {
@@ -20,11 +18,9 @@ const useListStakeholders = ({ defaultParams = {}, shipment_id = '' }) => {
 				},
 			});
 
-			setLoading(false);
 			setApiData(res.data || {});
 		} catch (err) {
 			setApiData({});
-			setLoading(false);
 			console.log(err);
 		}
 	};
@@ -34,7 +30,7 @@ const useListStakeholders = ({ defaultParams = {}, shipment_id = '' }) => {
 	}, []);
 
 	return {
-		loading : apiLoading || loading,
+		loading,
 		data    : apiData,
 		filters,
 		apiTrigger,
@@ -43,3 +39,4 @@ const useListStakeholders = ({ defaultParams = {}, shipment_id = '' }) => {
 };
 
 export default useListStakeholders;
+// TODO

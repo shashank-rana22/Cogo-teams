@@ -24,7 +24,7 @@ const useAddPoNumber = ({
 			refetch();
 			Toast.success('Purchase Order Number Added!');
 		} catch (err) {
-			console.log(err);
+			Toast.error(err);
 		}
 	};
 
