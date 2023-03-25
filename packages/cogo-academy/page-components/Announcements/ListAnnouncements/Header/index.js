@@ -37,13 +37,24 @@ function Header({
 			announcement_type: '',
 		}));
 		setVisible(false);
+		setFiltersApplied(false);
 	};
 
 	const handleApply = () => {
-		setFilters((prev) => ({
-			...prev,
-			...formValues,
-		}));
+		let flag = false;
+
+		Object.keys(formValues).forEach((key) => {
+			if (formValues[key]?.length > 0) flag = true;
+		});
+
+		if (flag) {
+			setFiltersApplied(true);
+			setFilters((prev) => ({
+				...prev,
+				...formValues,
+			}));
+		}
+
 		setVisible(false);
 	};
 
@@ -57,17 +68,6 @@ function Header({
 			q: query,
 		}));
 	}, [query, setFilters]);
-
-	useEffect(() => {
-		let flag = false;
-
-		Object.keys(formValues).forEach((key) => {
-			if (formValues[key]?.length > 0) flag = true;
-		});
-
-		if (flag) setFiltersApplied(true);
-		else setFiltersApplied(false);
-	}, [formValues]);
 
 	const renderFilters = () => (
 		<div className={styles.container}>
