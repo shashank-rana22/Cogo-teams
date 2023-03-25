@@ -73,7 +73,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 			});
 			setApiData(res.data);
 		} catch {
-			setApiData({ list: [] });
+			setApiData({ list: [], totalRecords: 0 });
 		}
 	};
 

@@ -1,93 +1,109 @@
 .container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
 }
+
 .title {
-  font-weight: 600;
-  font-size: 22px;
-  padding-right: 8px;
+	padding-right: 8px;
+	font-size: 22px;
+	font-weight: 600;
 }
+
 .div_footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  width: 95%;
-  height: 78px;
-  margin-left: -20px;
-  padding: 16px 24px 16px 20px;
-  bottom: 0;
-  background: #ffffff;
-  box-shadow: rgb(0 0 0 / 15%) 1px -5px 14.6px;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 95%;
+	height: 78px;
+	padding: 16px 24px 16px 20px;
+	margin-left: -20px;
+	background: #fff;
+	box-shadow: rgb(0 0 0 / 15%) 1px -5px 14.6px;
 }
+
 .div_currency {
-  display: flex;
-  padding: 0 10px;
-  align-items: center;
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
 }
+
 .currency {
-  font-size: 14px;
-  font-weight: 600;
-  padding-right: 5px;
+	padding-right: 5px;
+	font-size: 14px;
+	font-weight: 600;
 }
 
 .currency_value {
-  font-size: 24px;
-  font-weight: 600;
-  color: #80839e;
+	font-size: 24px;
+	font-weight: 600;
+	color: #80839e;
 }
+
 .div_sid {
-  font-weight: 600;
-  font-size: 24px;
-  color: #80839e;
+	font-size: 24px;
+	font-weight: 600;
+	color: #80839e;
 }
+
 .button_div {
-  display: flex;
-  align-items: center;
-  margin-left: 75px;
+	display: flex;
+	align-items: center;
+	margin-left: 75px;
 }
+
 .alert_icon_div {
-  margin-top: 5px;
-  @keyframes blinker {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
+	margin-top: 5px;
+
+	@keyframes blinker {
+		from {
+			opacity: 1;
+		}
+
+		to {
+			opacity: 0;
+		}
+	}
 }
+
 .alert_icon {
-  text-decoration: blink;
-  animation-name: blinker;
-  animation-duration: 0.6s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-  animation-direction: alternate;
+	text-decoration: blink;
+	animation-name: blinker;
+	animation-duration: 0.6s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
 }
-.alert-icon:hover {
-  animation: none;
+
+.alert_icon:hover {
+	animation: none;
 }
+
 .button_container {
-  display: flex;
-  margin-left: 20px;
+	display: flex;
+	margin-left: 20px;
 }
 
 .add_to_select {
-  margin-right: 22px;
+	margin-right: 22px;
 }
+
 .flex_modal {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
+
 .flex {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
+
 .margin {
-  margin: 20px;
+	margin: 20px;
 }
+
 .margin_not {
-  margin: 20px 20px 0px 20px;
+	margin: 20px 20px 0;
 }

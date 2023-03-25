@@ -1,36 +1,44 @@
 .container {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
+
 .section {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
+
 .flex {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
+
 .rest_icon {
-  cursor: pointer;
-  margin: 0 4px;
+	margin: 0 4px;
+	cursor: pointer;
 }
+
 .tick {
-  opacity: "100%";
-  cursor: pointer;
+	cursor: pointer;
+	opacity: "100%";
 }
+
 .tick_not {
-  opacity: "30%";
-  cursor: not-allowed;
+	cursor: not-allowed;
+	opacity: "30%";
 }
+
 .info_container {
-  color: red;
-  display: flex;
+	display: flex;
+	color: red;
 }
-.editIcon {
-  cursor: pointer;
-  margin-left: 4px;
+
+.edit_icon {
+	margin-left: 4px;
+	cursor: pointer;
 }
+
 .img_height {
-  height: 15px;
-  width: 15px;
+	width: 15px;
+	height: 15px;
 }

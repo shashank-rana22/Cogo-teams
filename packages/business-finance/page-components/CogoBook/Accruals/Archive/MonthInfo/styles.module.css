@@ -1,57 +1,65 @@
 .button_container {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
+
 .secondary_button {
-  background-color: #ffffff;
-  border-radius: 4px;
-  border: 1px solid #2c3e50;
-  color: #2c3e50;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 8px 16px;
-  text-transform: none;
-  letter-spacing: 0.04em;
-  text-align: center;
-  height: 35px;
+	height: 35px;
+	padding: 8px 16px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #2c3e50;
+	text-align: center;
+	text-transform: none;
+	letter-spacing: 0.04em;
+	background-color: #fff;
+	border: 1px solid #2c3e50;
+	border-radius: 4px;
 }
+
 .secondary_button:hover {
-  box-shadow: none;
-  transform: scale(1.05);
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 8px;
+	box-shadow: none;
+	box-shadow: rgb(0 0 0 / 35%) 0 2px 8px;
+	transform: scale(1.05);
 }
+
 .secondary_button:focus {
-  transform: scale(1.05);
-  box-shadow: 1px 2px 17px 1px rgba(0, 0, 0, 0.24);
-  background-color: #fff;
+	background-color: #fff;
+	box-shadow: 1px 2px 17px 1px rgb(0 0 0 / 24%);
+	transform: scale(1.05);
 }
+
 .container {
-  margin: 12px 0 20px 0px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-  background-color: #fff;
-  border-radius: 8px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px;
+	margin: 12px 0 20px;
+	background-color: #fff;
+	border-radius: 8px;
 }
+
 .info_container {
-  display: flex;
-  width: 336px;
-  justify-content: space-evenly;
-  align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 336px;
 }
+
 .para {
-  font-size: 12px;
-  font-weight: 600;
+	font-size: 12px;
+	font-weight: 600;
 }
+
 .para_data {
-  font-size: 12px;
+	font-size: 12px;
 }
+
 .info_container_border {
-  display: flex;
-  width: 336px;
-  justify-content: space-evenly;
-  align-items: center;
-  border-left: 2px solid #f68b21;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 336px;
+	border-left: 2px solid #f68b21;
 }
