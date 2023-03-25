@@ -10,6 +10,8 @@ import ServiceDetail from './ServiceDetail';
 import styles from './styles.module.css';
 
 function Card({ item, filters }) {
+	const { importer_exporter = {} } = item || {};
+
 	const router = useRouter();
 	const formattedData = formatPortPair({ item });
 	const newFormattedData = [];
@@ -53,7 +55,7 @@ function Card({ item, filters }) {
 							{format(
 								filters?.status === 'active'
 									? item?.approved_at
-									: item?.updated_at,
+									: item?.requested_at,
 								'dd MMM YYYY',
 							)}
 						</div>

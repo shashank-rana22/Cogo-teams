@@ -32,7 +32,7 @@ function ServiceDetail({ item, service, formattedData }) {
 			{
 				item.source && (
 					<div className={styles.quantity}>
-						{item.source}
+						{startCase(item.source)}
 					</div>
 				)
 			}
