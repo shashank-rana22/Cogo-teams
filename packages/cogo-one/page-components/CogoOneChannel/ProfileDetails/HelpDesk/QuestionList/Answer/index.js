@@ -86,10 +86,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 				</div>
 
 				<div className={styles.no_of_people_like_it}>
-					{data?.answers?.[0]?.upvote_count
-						? data?.answers?.[0]?.upvote_count
-						: '0'}
-					{' '}
+					{data?.answers?.[0]?.upvote_count || '0'}
 					{' '}
 					people liked this answer
 				</div>

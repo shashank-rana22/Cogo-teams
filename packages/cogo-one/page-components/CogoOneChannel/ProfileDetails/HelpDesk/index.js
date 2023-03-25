@@ -25,6 +25,14 @@ function HelpDesk() {
 		setQuestion = () => {},
 	} = useTopicList();
 
+	const generalIcon = (
+		<img
+			src={GENERAL_ICON}
+			alt="logo cogoport"
+			style={{ width: 40, height: 40 }}
+		/>
+	);
+
 	const render = () => {
 		if (!isEmpty(topic)) {
 			return (
@@ -47,7 +55,7 @@ function HelpDesk() {
 				}
 			});
 
-			const DisplayIcon = IconMapping[includesKey]?.icon || GENERAL_ICON;
+			const DisplayIcon = IconMapping[includesKey]?.icon || generalIcon;
 
 			return (
 				<div className={styles.icon}>

@@ -2,7 +2,7 @@ const IconMapping = {
 	value_added_services: {
 		icon: (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Value Added Services.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/value_added_services.svg"
 				alt="logo cogoport"
 				style={{ width: 40, height: 40 }}
 			/>
@@ -32,7 +32,7 @@ const IconMapping = {
 	bookings_or_transaction_flow: {
 		icon: (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Booking & Transaction Flow.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/bookings_transactions.svg"
 				alt="logo cogoport"
 				style={{ width: 40, height: 40 }}
 			/>
@@ -42,7 +42,7 @@ const IconMapping = {
 	operations_and_shipment_execution: {
 		icon: (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Operations & Shipment Execution.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/operations_shipment_execution.svg"
 				alt="logo cogoport"
 				style={{ width: 40, height: 40 }}
 			/>
@@ -52,7 +52,7 @@ const IconMapping = {
 	platform_help: {
 		icon: (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Platform Help.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platform_help.svg"
 				alt="logo cogoport"
 				style={{ width: 40, height: 40 }}
 			/>
@@ -62,7 +62,7 @@ const IconMapping = {
 	saas_tools: {
 		icon: (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/SAAS Tools.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/saas_tools.svg"
 				alt="logo cogoport"
 				style={{ width: 40, height: 40 }}
 			/>
