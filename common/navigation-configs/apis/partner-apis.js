@@ -10367,6 +10367,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
+		{
+			api          : 'get_exchange_rate_source_wise_revenue',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'update_source_exchange_rates',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
 
 	],
 	contracts: [
