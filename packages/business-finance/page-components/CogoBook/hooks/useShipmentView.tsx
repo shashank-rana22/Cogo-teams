@@ -21,6 +21,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		user_id: profile?.user?.id,
 	}));
 	const [checkedRowsSerialId, setCheckedRowsSerialId] = useState([]);
+	const [stateData, setStateData] = useState(true);
 	const [tempCheckedData, setTempCheckedData] = useState([]);
 	const [payload, setPayload] = useState([]);
 	const [profitValue, setProfitValue] = useState(0);
@@ -224,41 +225,52 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			/>
 		);
 	};
+
+	useEffect(() => {
+		payload.map(
+			(item) => setStateData(item?.profitPercentage === item?.newProfitPercentage),
+		);
+	}, [payload]);
+	console.log(stateData, 'stateData');
+
 	const addSelect = async (setOpenModal) => {
 		const newPayload = payload.map((item) => ({
 			...item,
 		}));
+
 		try {
-			const res = await addToSelectedTrigger({
-				data: {
-					shipmentList   : newPayload,
-					performedBy    : userId,
-					selectionMode  : bulkAction,
-					jobListRequest : {
-						query                : query || undefined,
-						year                 : year || undefined,
-						month                : month || undefined,
-						serviceType          : service || undefined,
-						tradeType            : tradeType || undefined,
-						jobType              : shipmentType || undefined,
-						profitComparisonType : rangeMapping[range] || undefined,
-						jobState             : jobState || undefined,
-						lowerProfitMargin    : profitAmount || profitPercent || undefined,
-						upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
-						profitType           : profitType || undefined,
-						startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
-						endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
-						pageLimit            : apiData?.totalRecords,
-						page                 : 1,
+			if (stateData || bulkAction === 'PAGE') {
+				const res = await addToSelectedTrigger({
+					data: {
+						shipmentList   : newPayload,
+						performedBy    : userId,
+						selectionMode  : bulkAction || 'SINGLE',
+						jobListRequest : {
+							query                : query || undefined,
+							year                 : year || undefined,
+							month                : month || undefined,
+							serviceType          : service || undefined,
+							tradeType            : tradeType || undefined,
+							jobType              : shipmentType || undefined,
+							profitComparisonType : rangeMapping[range] || undefined,
+							jobState             : jobState || undefined,
+							lowerProfitMargin    : profitAmount || profitPercent || undefined,
+							upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
+							profitType           : profitType || undefined,
+							startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
+							endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
+							pageLimit            : apiData?.totalRecords,
+							page                 : 1,
+						},
 					},
-				},
-			});
-			if (res.data) {
-				refetch();
-				Toast.success(res.data);
-				setPayload([]);
-				setOpenModal(false);
-			}
+				});
+				if (res.data) {
+					refetch();
+					Toast.success(res.data);
+					setPayload([]);
+					setOpenModal(false);
+				}
+			} else { Toast.error('Bulk Upload Is Not Applicable For Accrued Shipment'); }
 		} catch (error) {
 			Toast.error(error?.data?.message);
 		}

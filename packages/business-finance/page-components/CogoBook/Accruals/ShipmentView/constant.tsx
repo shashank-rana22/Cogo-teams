@@ -353,10 +353,18 @@ export const accrualColumn = (
 		accessor : 'mile',
 		id       : 'mile',
 		Cell     : ({ row: { original } }) => {
-			const { milestone = '' } = original || {};
+			const { shipmentMilestone = '' } = original || {};
 			return (
 				<span>
-					{ startCase(milestone)	|| '-' }
+					{shipmentMilestone?.length > 10
+						? (
+							<Tooltip
+								content={startCase(shipmentMilestone)	|| '-'}
+								placement="top"
+							>
+								<div className={styles.wrapper}>{startCase(shipmentMilestone)	|| '-' }</div>
+							</Tooltip>
+						) : startCase(shipmentMilestone)	|| '-' }
 				</span>
 			);
 		},

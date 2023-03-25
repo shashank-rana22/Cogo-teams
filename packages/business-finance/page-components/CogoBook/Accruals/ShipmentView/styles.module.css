@@ -47,3 +47,8 @@
 .profit_color {
   color: #ee3425;
 }
+.wrapper {
+  width: 96px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
