@@ -1,14 +1,11 @@
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useAddRate from '../../../../hooks/useAddRate';
+import useCreateShipmentAdditionalService from '../../../../hooks/useCreateShipmentAdditionalService';
 
 import ActionsToShow from './ActionToShow';
 import BillToCustomer from './BillToCustomer';
 import RenderAddRateForm from './RenderAddRateForm';
-
-// import SecondStep from './SecondStep';
-
 import styles from './styles.module.css';
 
 const showRemarksStatus = [
@@ -36,7 +33,7 @@ function AddRate({
 
 	const {
 		onAddRate, register, handleSubmit, loading, errors, control, unitOptions,
-	} = useAddRate({
+	} = useCreateShipmentAdditionalService({
 		item,
 		isSeller,
 		status,

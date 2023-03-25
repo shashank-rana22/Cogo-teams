@@ -3,7 +3,9 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
-const useAddRate = ({
+/* change name */
+
+const useCreateShipmentAdditionalService = ({
 	item,
 	refetch = () => {},
 	setAddRate = () => {},
@@ -88,4 +90,4 @@ const useAddRate = ({
 	};
 };
 
-export default useAddRate;
+export default useCreateShipmentAdditionalService;
