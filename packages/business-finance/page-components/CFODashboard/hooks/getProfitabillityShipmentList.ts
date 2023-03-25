@@ -2,24 +2,35 @@
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-const useGetProfitabillityShipmentList = () => {
+const useGetProfitabillityShipmentList = ({ tabs }) => {
+	console.log(tabs, 'tabs');
+
 	const [shipmentFilters, setShipmentFilters] = useState({
 		page        : 1,
-		pageLimit   : 10,
+		pageLimit   : 5,
 		searchQuery : '',
 	});
 	const { search, ...rest } = shipmentFilters || {};
+
+	const apiUrl = {
+		shipment : '/payments/dashboard/bf-profitability-shipment',
+		customer : '/payments/dashboard/bf-profitability-customer',
+	};
+	const apiAuthKey = {
+		shipment : 'get_payments_dashboard_bf_profitability_shipment',
+		customer : 'get_payments_dashboard_bf_profitability_customer',
+	};
+
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : '/payments/dashboard/bf-profitability-shipment',
+			url     : `${apiUrl[tabs]}`,
 			method  : 'get',
-			authKey : 'get_payments_dashboard_bf_profitability_shipment',
+			authKey : `${apiAuthKey[tabs]}`,
 		},
 		{ manual: true },
 	);
-
 	console.log(data, 'data');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -35,7 +46,8 @@ const useGetProfitabillityShipmentList = () => {
 					jobStatus : undefined,
 					sortType  : 'Desc',
 					sortBy    : 'createdAt',
-					page      : shipmentFilters?.page,
+					pageIndex : shipmentFilters?.page,
+					pageSize  : 5,
 
 				},
 			});
@@ -46,7 +58,7 @@ const useGetProfitabillityShipmentList = () => {
 
 	useEffect(() => {
 		refetch();
-	}, [JSON.stringify(rest)]);
+	}, [JSON.stringify(rest), tabs]);
 
 	useEffect(() => {
 		setShipmentFilters({

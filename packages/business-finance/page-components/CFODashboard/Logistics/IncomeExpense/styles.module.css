@@ -6,6 +6,8 @@
 }
 
 .main_div {
+	position: relative;
+	z-index: 10;
 	display: flex;
 	justify-content: space-between;
 	margin: 12px 0 0 20px;
@@ -42,5 +44,20 @@
 	height: 2px;
 	margin: 4px 0 0 2px;
 	background: #ed3726;
+	border-radius: 4px;
+}
+
+.data_styles {
+	padding: 6px;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.borders {
+	width: 100px;
+	height: 2px;
+	margin: 4px 0 0 2px;
+	cursor: pointer;
+	background: #edd7a9;
 	border-radius: 4px;
 }

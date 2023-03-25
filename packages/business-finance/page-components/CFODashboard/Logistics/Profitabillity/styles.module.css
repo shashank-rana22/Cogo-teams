@@ -88,10 +88,10 @@
 	}
 }
 
-.table_data {
+/* .table_data {
 	height: 45vh;
 	overflow: scroll;
-}
+} */
 
 .text_filters_gap {
 	display: flex;

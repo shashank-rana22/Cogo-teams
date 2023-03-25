@@ -1,4 +1,4 @@
-import { Toggle } from '@cogoport/components';
+import { Popover, Input, Toggle } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -103,6 +103,18 @@ function IncomeExpense() {
 		},
 		  ];
 
+	const yearData = () => (
+		<div>hy</div>
+	);
+
+	const content = () => (
+		<Popover placement="right" caret={false} render={yearData()}>
+			<div className={styles.data_styles}>Calendar Year</div>
+			<div className={styles.borders} />
+			<div className={styles.data_styles}>Financial Year</div>
+		</Popover>
+	);
+
 	return (
 		<div>
 			<div className={styles.card}>
@@ -115,6 +127,13 @@ function IncomeExpense() {
 						<div className={styles.icon}>
 							<IcMInfo />
 						</div>
+					</div>
+					<div>
+						<Popover content={content()} caret={false}>
+							<div style={{ width: '150px' }}>
+								<Input />
+							</div>
+						</Popover>
 					</div>
 					<div style={{ display: 'flex', gap: '8px' }}>
 						<Toggle name="a4" size="md" disabled={false} onLabel="Post Tax" offLabel="Pre Tax" />

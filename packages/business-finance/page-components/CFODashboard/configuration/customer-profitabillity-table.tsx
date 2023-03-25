@@ -6,16 +6,8 @@ import getFormattedPrice from '../../commons/utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
-const profitabillityColumn = [
-	{
-		Header   : 'SID',
-		id       : 'jobNumber',
-		accessor : (row) => (
-			<div style={{ color: '#F68B21', textDecorationLine: 'underline' }}>
-				{row?.jobNumber}
-			</div>
-		),
-	},
+const customerProfitabillityColumn = [
+
 	{
 		Header   : 'Name',
 		id       : 'businessName',
@@ -38,6 +30,15 @@ const profitabillityColumn = [
 		id       : 'entity',
 		accessor : 'entity',
 
+	},
+	{
+		Header: 'SID Count',
+		// id       : 'jobNumber',
+		// accessor : (row) => (
+		// 	<div style={{ color: '#F68B21', textDecorationLine: 'underline' }}>
+		// 		{row?.jobNumber}
+		// 	</div>
+		// ),
 	},
 	{
 		Header   : 'Booked Income',
@@ -76,39 +77,7 @@ const profitabillityColumn = [
 		),
 
 	},
-	{
-		Header   : 'Shipment Status',
-		id       : 'jobStatus',
-		accessor : (row) => (
-			<div>
-				<Pill
-					style={{ borderRadius: '6px' }}
-					size="md"
-					color="#CFEAED"
-				>
-					{startCase(row?.jobStatus)}
-				</Pill>
 
-			</div>
-		),
-	},
-	{
-		Header   : 'Milestone',
-		id       : 'shipmentMilestone',
-		accessor : (row) => (
-			<div>
-				<Pill
-					style={{ borderRadius: '6px' }}
-					size="md"
-					color="#CFEAED"
-				>
-					{startCase(row?.shipmentMilestone)}
-				</Pill>
-
-			</div>
-
-		),
-	},
 ];
 
-export default profitabillityColumn;
+export default customerProfitabillityColumn;

@@ -19,17 +19,22 @@ function Profitabillity({ searchValue, setSearchValue }) {
 			label : 'Customer : 7.39%',
 		},
 	];
+	const [tabs, setTabs] = useState('shipment');
 	const {
 		profitabillityData,
 		profitabillityLoading,
 		shipmentFilters,
 		setShipmentFilters,
-	} = useGetProfitabillityShipmentList();
-	console.log(profitabillityData, 'profitabillityData');
-	const { pageIndex = 0, pageSize = 0, totalRecord, shipmentList = [] } = profitabillityData || {};
+	} = useGetProfitabillityShipmentList({ tabs });
 
-	const [tabs, setTabs] = useState('shipment');
-	const columns = getProfitabillityColumn();
+	console.log(shipmentFilters, 'shipmentFilters');
+
+	const { pageIndex = 0, pageSize = 0, totalRecord, shipmentList = [], customerList = [] } = profitabillityData || {};
+
+	const rest = { loading: profitabillityLoading };
+
+	const columns = getProfitabillityColumn(tabs);
+
 	return (
 
 		<div className={styles.card}>
@@ -47,9 +52,8 @@ function Profitabillity({ searchValue, setSearchValue }) {
 					{tab.map((item) => (
 						<div
 							key={item?.key}
-							onClick={() => {
-                                        	setTabs(item.key);
-							}}
+							onClick={() => { setTabs(item.key); }}
+							role="presentation"
 						>
 							<div className={item.key === tabs ? styles.sub_container_click : styles.sub_container}>
 								{item.label}
@@ -72,13 +76,14 @@ function Profitabillity({ searchValue, setSearchValue }) {
 					/>
 				</div>
 			</div>
-			<div className={styles.table_data}>
+			<div>
 				<StyledTable
-					data={shipmentList || []}
+					data={tabs === 'shipment' ? shipmentList : customerList || []}
 					columns={columns}
 					imageFind="cfoDashboard"
+					{...rest}
 				/>
-				<div>
+				<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 					<Pagination
 						type="table"
 						currentPage={pageIndex}

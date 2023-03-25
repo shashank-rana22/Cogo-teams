@@ -7438,6 +7438,10 @@ const partner = {
 			api         : 'get_payments_dashboard_bf_profitability_shipment',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_payments_dashboard_bf_profitability_customer',
+			access_type : 'private',
+		},
 	],
 	translate: [
 		{
