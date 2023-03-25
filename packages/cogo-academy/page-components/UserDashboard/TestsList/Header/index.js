@@ -39,7 +39,7 @@ function Header({ debounceQuery, testCategory, setTestCategory }) {
 			<div className={styles.input_container}>
 				<Input
 					size="sm"
-					placeholder="Search for Test Name/Topic"
+					placeholder="Search Name/Topic"
 					value={searchInput}
 					suffix={<div className={styles.icon_container}><IcMSearchlight /></div>}
 					onChange={handleSearchQuery}

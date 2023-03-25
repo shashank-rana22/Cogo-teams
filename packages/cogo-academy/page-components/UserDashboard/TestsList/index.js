@@ -1,3 +1,4 @@
+import { Pagination } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -20,11 +21,17 @@ function TestsList() {
 
 	const [testCategory, setTestCategory] = useState('active_test');
 
+	const [page, setPage] = useState(1);
+
+	const total_count = data?.total_count;
+
 	useEffect(() => {
 		try {
 			trigger({
 				params: {
-					filters: {
+					page_limit : 4,
+					page,
+					filters    : {
 						q              : searchQuery,
 						user_id,
 						status         : 'active',
@@ -35,7 +42,7 @@ function TestsList() {
 		} catch (err) {
 			console.log(err, 'err');
 		}
-	}, [searchQuery, trigger, user_id, testCategory]);
+	}, [searchQuery, trigger, user_id, testCategory, page]);
 
 	return (
 		<div className={styles.container}>
@@ -44,6 +51,16 @@ function TestsList() {
 			{loading ? <LoadingState /> : (data.list || []).map((test_card) => (
 				<TestCard key={test_card} test_card={test_card} />
 			))}
+
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={4}
+					onPageChange={setPage}
+				/>
+			</div>
 		</div>
 	);
 }
