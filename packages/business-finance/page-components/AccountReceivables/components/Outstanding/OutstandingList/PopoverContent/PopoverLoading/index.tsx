@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 interface Props {
-	containerHeight: string,
+	containerHeight?: string,
 }
 function PopoverLoader({ containerHeight = '' }: Props) {
 	return (
