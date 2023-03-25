@@ -1,15 +1,16 @@
-.container{
-    display: flex;
-    justify-content: center;
+.container {
+	display: flex;
+	justify-content: center;
 }
 
-.success{
-    height: 200px;
-    width: 400px;
-    margin:auto;
+.success {
+	width: 400px;
+	height: 200px;
+	margin: auto;
 }
-.reject{
-    height: 200px;
-    width: 400px;
-    margin:auto;
+
+.reject {
+	width: 400px;
+	height: 200px;
+	margin: auto;
 }

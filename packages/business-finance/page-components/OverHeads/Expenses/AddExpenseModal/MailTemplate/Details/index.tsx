@@ -1,4 +1,3 @@
-import { Textarea } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
@@ -20,14 +19,12 @@ interface Props {
 	category?:string,
 	isBody?:boolean,
 	mailData?:Data,
-	setMailData?:(p:object)=>void,
 }
 
 function Details({
 	text = '',
 	isBody = false,
 	mailData = {},
-	setMailData = () => {},
 	vendorName,
 	category,
 }:Props) {

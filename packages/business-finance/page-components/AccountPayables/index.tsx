@@ -9,6 +9,7 @@ function AccountPayables() {
 	const { query, push } = useRouter();
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [{ data, loading, error }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payable-bill/list',

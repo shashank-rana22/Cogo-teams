@@ -18,10 +18,10 @@
 	font-weight: 600;
 	color: #f68b21;
 }
-.words{
+
+.words {
 	display: flex;
-    flex-direction: row-reverse;
-    margin: -16px 12px 12px 0px;
+	flex-direction: row-reverse;
+	margin: -16px 12px 12px 0;
 	color: #f68b21;
 }
-

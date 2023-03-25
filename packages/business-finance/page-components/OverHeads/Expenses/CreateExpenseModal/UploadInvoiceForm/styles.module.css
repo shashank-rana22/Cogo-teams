@@ -13,8 +13,8 @@
 
 .line_item {
 	width: 58%;
+	padding: 8px;
 	border: 0.5px solid black;
-	padding:8px;
 }
 
 .confirm {
@@ -22,13 +22,13 @@
 	justify-content: end;
 	margin: 64px 20px 0 0;
 }
-.select{
-    width: 15%;
-    margin: 12px 0px 0px 8px;
+
+.select {
+	width: 15%;
+	margin: 12px 0 0 8px;
 }
 
-
-.input{
-	margin: 12px 0px 0px 8px;
+.input {
 	width: 18%;
+	margin: 12px 0 0 8px;
 }

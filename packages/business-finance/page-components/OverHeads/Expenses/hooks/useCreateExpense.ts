@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 import { formatDate } from '../../../commons/utils/formatDate';
-import getPayload from '../utils/getPayload';
+// import getPayload from '../utils/getPayload';
 
 interface AddressInterface {
 	pincode?:number | string,
@@ -195,9 +195,9 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					isSez                : false,
 					organizationName     : vendorBusinessName,
 					// pincode                 : null,
-					// address                 : 'D-296,JJ COLONY KHANPUR,DR AMBEDKAR NAGAR SOUTH DELHI-110062', // ??
+					// address                 : 'D-296,JJ, // ??
 					// cityName                : '', // ??
-					// supplyAgent             : 'Ajit Kumar', // ??
+					// supplyAgent             : 'Ajit', // ??
 					// zone                    : 'NORTH', // ??
 					// countryName             : tradeParty?.country?.display_name,
 					// countryCode             : tradeParty?.country?.country_code,
@@ -211,7 +211,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					bankDetail           : { // ??
 						bankName,
 						// branchCode        : 'SBIN0017891',
-						// beneficiaryName   : 'STATE BANK OF INDIA',
+						// beneficiaryName   : 'STATE',
 						ifscCode,
 						accountNumber,
 						// swiftCode         : '',

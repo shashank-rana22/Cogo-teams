@@ -1,11 +1,10 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useSendEmail = () => {
 	const { profile	} = useSelector((state:any) => state);
 
-	const [{ data, loading }, trigger] = useRequestBf(
+	const [{ loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense/send-email',
 			method  : 'post',
@@ -15,7 +14,7 @@ const useSendEmail = () => {
 	);
 
 	const sendMail = async ({ rowData, recurringState }) => {
-		const { sellerDetails, category, billDate:expenseDate, approvedBy } = rowData || {};
+		const { sellerDetails, category, billDate:expenseDate } = rowData || {};
 		const { organizationName:vendorName } = sellerDetails || {};
 
 		let payableAmount:number | string;

@@ -1,5 +1,5 @@
-.expense_container{
-	margin-top:20px;
+.expense_container {
+	margin-top: 20px;
 }
 
 .header_container {
@@ -96,34 +96,38 @@
 	}
 }
 
-.styled_div{
+.styled_div {
 	padding: 20px;
-	background: white;
 	margin-top: 16px;
+	background: white;
 }
-.proof{
-	color:#F68B21 !important;
-	text-decoration: underline !important;
-}
-.multiple_proof{
-	color: #F68B21 !important;
-	cursor: pointer;
+
+.proof {
+	color: #f68b21 !important;
 	text-decoration: underline !important;
 }
 
-.pending_approval{
-    font-size: 10px;
-    background: #ffe69b;
-    padding: 4px;
-	color: #000 ;
-    border-radius: 4px;
-}
-.link{
-	color: #F68B21 ;
-	text-decoration: underline ;
+.multiple_proof {
+	color: #f68b21 !important;
+	text-decoration: underline !important;
 	cursor: pointer;
 }
-.no_data{
+
+.pending_approval {
+	padding: 4px;
+	font-size: 10px;
+	color: #000;
+	background: #ffe69b;
+	border-radius: 4px;
+}
+
+.link {
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.no_data {
 	display: flex;
 	justify-content: center;
 }

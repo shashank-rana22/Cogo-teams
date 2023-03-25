@@ -15,23 +15,25 @@
 			padding: 0;
 		}
 
-		.ui_table_head_row {
-			.ui_table_head_cell{
-              text-align: center;
-			}
-		}
-
 		.ui_table_head_cell {
-			padding: 12px 0px;
+			padding: 12px 0;
 			font-size: 10px;
 			color: white;
 			background-color: #000 !important;
 			border-right: none;
 		}
 
+		.ui_table_head_row {
+			.ui_table_head_cell {
+				text-align: center;
+			}
+		}
+
 		.ui_table_body_cell {
 			width: 100px;
 		}
+
+
 
 		.ui_table_body_cell:first-child {
 			width: 100px;

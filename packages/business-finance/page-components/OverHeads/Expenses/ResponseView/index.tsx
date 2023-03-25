@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 function ResponseView() {
 	const { query } = useRouter();
-	const { type, action, id } = query || {};
+	const { type, action } = query || {};
 
 	return (
 		<div>

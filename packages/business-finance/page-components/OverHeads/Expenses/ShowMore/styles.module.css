@@ -8,17 +8,17 @@
 	align-items: center;
 	margin: 2px 0;
 	color: #f68b21;
-	background: rgb(254 248 228);
 	text-decoration: underline;
 	cursor: pointer;
+	background: rgb(254 248 228);
 	border: none;
 }
 
 .data_div {
 	display: flex;
+	margin: 8px;
 	border: 1px solid #c1e8ec;
-    margin: 8px;
-    border-radius: 8px;
+	border-radius: 8px;
 }
 
 .button_container {
@@ -29,8 +29,8 @@
 }
 
 .section {
-	margin: 10px 36px 10px 16px;
 	width: 100px;
+	margin: 10px 36px 10px 16px;
 }
 
 .element {
@@ -41,6 +41,7 @@
 .more_data_container {
 	width: 100%;
 	max-height: 228px;
+
 	/* overflow: hidden; */
 	background: white;
 	border-top: 1px solid #edd7a9;
@@ -52,26 +53,21 @@
 	max-height: 0;
 }
 
-.list_container{
+.list_container {
 	max-height: 200px;
 	overflow: scroll;
 }
 
-.link{
+.link {
 	color: #f68b21;
 	text-decoration: underline;
 	cursor: pointer;
 }
 
-.pending_approval{
-    font-size: 10px;
-    background: #ffe69b;
-    padding: 4px;
-    border-radius: 4px;
+.pending_approval {
+	padding: 4px;
+	font-size: 10px;
 	color: #f68b21;
-}
-.link{
-	color: #F68B21 ;
-	text-decoration: underline ;
-	cursor: pointer;
+	background: #ffe69b;
+	border-radius: 4px;
 }
