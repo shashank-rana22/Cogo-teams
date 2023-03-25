@@ -79,7 +79,6 @@ function MailTemplate({ mailData, setMailData, setShowModal, getList, getRecurri
 				<Details
 					isBody
 					mailData={mailData}
-					setMailData={setMailData}
 				/>
 			</div>
 

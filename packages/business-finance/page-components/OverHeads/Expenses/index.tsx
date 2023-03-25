@@ -3,6 +3,7 @@ import { Popover, Button, Input, Tooltip } from '@cogoport/components';
 import { IcMSearchlight, IcMInfo } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
+import { ListDataProps } from '../../AccountPayables/commons/Interfaces';
 import Filter from '../../commons/Filters';
 import SegmentedControl from '../../commons/SegmentedControl';
 import showOverflowingNumbers from '../../commons/showOverflowingNumber';
@@ -20,9 +21,9 @@ import styles from './styles.module.css';
 import { expenseRecurringConfig, expenseNonRecurringConfig } from './utils/config';
 import WarningModal from './WarningModal';
 
-interface ListInterface {
-	list?:{ length?:number }
-}
+// interface ListInterface {
+// 	list?:{ length?:number }
+// }
 
 interface ItemDataInterface {
 	expensePeriod?:string,
@@ -366,7 +367,7 @@ function ExpenseComponent() {
 	};
 
 	let listConfig:any;
-	let listItemData:ListInterface;
+	let listItemData:ListDataProps;
 	let loading:boolean;
 
 	if (recurringState === 'recurring') {

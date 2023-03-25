@@ -55,7 +55,9 @@ interface BillInterface {
 	billCurrency: string;
 	grandTotal: any;
 	subTotal: string | number;
+	recurringState?:string,
 }
+
 interface JobInterface {
 	jobNumber: string;
 }

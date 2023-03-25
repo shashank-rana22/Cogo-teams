@@ -143,7 +143,7 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 	const summaryDataThird = [
 		{
 			title : 'To be Approved by',
-			value : stakeholderLoading ? <Placeholder height={20} width={150} />
+			value : stakeholderLoading ? <Placeholder height="20px" width="150px" />
 				: startCase(stakeholderName || '') || '-',
 		},
 		{

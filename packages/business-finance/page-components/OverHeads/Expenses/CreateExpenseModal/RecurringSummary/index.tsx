@@ -147,7 +147,7 @@ function RecurringSummary({ recurringData, setRecurringData }:Props) {
 		},
 		{
 			title : 'To be Approved by',
-			value : stakeholderLoading ? <Placeholder height={20} width={150} />
+			value : stakeholderLoading ? <Placeholder height="20px" width="150px" />
 				: startCase(stakeholderName || '') || '-',
 		},
 		{

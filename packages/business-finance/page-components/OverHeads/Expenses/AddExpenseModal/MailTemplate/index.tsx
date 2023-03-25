@@ -61,7 +61,6 @@ function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowD
 				<Details
 					isBody
 					mailData={expenseData}
-					setMailData={setExpenseData}
 					vendorName={vendorName}
 					category={category}
 				/>

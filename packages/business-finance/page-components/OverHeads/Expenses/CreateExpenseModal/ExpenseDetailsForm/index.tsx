@@ -24,7 +24,7 @@ interface VendorObject {
 }
 
 interface FormData {
-	transactionDate?:string | Date,
+	transactionDate?: Date | number,
 	vendorData?:any,
 }
 interface Props {

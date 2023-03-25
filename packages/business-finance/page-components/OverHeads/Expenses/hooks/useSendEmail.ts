@@ -1,6 +1,22 @@
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+interface SellerDetails {
+	organizationName?:string,
+}
+interface Row {
+	sellerDetails?:SellerDetails,
+	category?:string,
+	billDate?:Date | number,
+	maxPayoutAllowed?:number | string,
+	grandTotal?:number,
+}
+
+interface Props {
+	rowData?:Row,
+	recurringState?:string,
+}
+
 const useSendEmail = () => {
 	const { profile	} = useSelector((state:any) => state);
 
@@ -13,7 +29,7 @@ const useSendEmail = () => {
 		{ manual: true },
 	);
 
-	const sendMail = async ({ rowData, recurringState }) => {
+	const sendMail = async ({ rowData, recurringState }:Props) => {
 		const { sellerDetails, category, billDate:expenseDate } = rowData || {};
 		const { organizationName:vendorName } = sellerDetails || {};
 

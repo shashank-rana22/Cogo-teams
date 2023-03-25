@@ -15,6 +15,7 @@ interface BillInterFace {
 	grandTotal: number;
 	billCurrency: string;
 	id?: string;
+	recurringState?:string,
 }
 interface BillAdditionalObject {
 	collectionPartyId?: string;

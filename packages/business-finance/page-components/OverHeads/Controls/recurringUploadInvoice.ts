@@ -1,4 +1,4 @@
-export const recurringUploadInvoice = () => [
+export const recurringUploadInvoice: any = () => [
 	{
 		span    : 12,
 		groupBy : [

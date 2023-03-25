@@ -1,5 +1,4 @@
 import {
-	CheckboxGroup,
 	Textarea,
 	Input,
 	Modal,
@@ -238,15 +237,6 @@ function Element({
 						value={value as string}
 						style={style as CSSProperties}
 						className={className}
-						{...rest}
-					/>
-				);
-			case 'checkboxGroup':
-				return (
-					<CheckboxGroup
-						className={className}
-						value={value}
-						style={style as CSSProperties}
 						{...rest}
 					/>
 				);

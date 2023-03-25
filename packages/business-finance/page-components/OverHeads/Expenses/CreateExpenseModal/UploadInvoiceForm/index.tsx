@@ -12,7 +12,7 @@ interface FilterInterface {
 	uploadedInvoice?:string,
 	repeatEvery?:string,
 	invoiceCurrency?:string,
-	invoiceNumber?:number,
+	invoiceNumber?:string,
 }
 interface Props {
 	formData:FilterInterface,

@@ -168,7 +168,7 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 		},
 		{
 			title : 'To be Approved by',
-			value : stakeholdersLoading ? <Placeholder height={20} width={150} />
+			value : stakeholdersLoading ? <Placeholder height="20px" width="150px" />
 				: (startCase(stakeholderName || '') || '-'),
 		},
 		{
