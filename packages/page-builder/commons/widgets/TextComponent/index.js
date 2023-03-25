@@ -36,14 +36,6 @@ function TextComponent(props) {
 		]);
 	};
 
-	const handleFocus = () => {
-		setIsFocused(true);
-	};
-
-	const handleBlur = () => {
-		setIsFocused(false);
-	};
-
 	const editorStyle = {
 		border  : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
 		padding : '10px',
@@ -82,8 +74,8 @@ function TextComponent(props) {
 				modules={modules}
 				style={styles}
 				onChange={handleEditorChange}
-				onFocus={handleFocus}
-				onBlur={handleBlur}
+				onFocus={() => setIsFocused(true)}
+				onBlur={() => setIsFocused(false)}
 			/>
 
 		</div>
