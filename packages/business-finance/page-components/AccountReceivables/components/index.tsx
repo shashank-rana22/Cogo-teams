@@ -11,8 +11,8 @@ function AccountReceivables() {
 	const [receivables, setReceivables] = useState<string>('outstanding');
 
 	const profile = useSelector((state) => state);
-	const { profile:{ user } } = profile || {};
-	const { id: partnerId } = user || {};
+	const { profile:{ partner } } = profile || {};
+	const { id: partnerId } = partner || {};
 
 	const handleChange = (val:string) => {
 		if (['dashboard', 'invoices', 'defaulters', 'manageBpr'].includes(val)) {
