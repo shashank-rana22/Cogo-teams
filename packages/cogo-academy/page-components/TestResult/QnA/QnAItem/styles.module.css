@@ -1,12 +1,12 @@
 .container {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 	margin-top: 32px;
 }
 
 .question_card {
-	width: 62%;
+	width: 50%;
 	margin-right: 8%;
 }
 

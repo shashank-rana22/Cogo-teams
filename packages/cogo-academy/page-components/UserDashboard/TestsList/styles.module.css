@@ -5,3 +5,8 @@
 	padding: 24px;
 	background: #fff;
 }
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}

@@ -35,6 +35,7 @@ function QuestionCard({ question = '', answers = [], index = 0, question_type = 
 			</div>
 		);
 	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.card_header}>

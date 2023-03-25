@@ -2,7 +2,8 @@ import { Placeholder } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import QnAItem from './QnAItem/index.';
+import CaseStudy from './CaseStudy';
+import QnAItem from './QnAItem';
 import styles from './styles.module.css';
 
 function QnA() {
@@ -16,7 +17,7 @@ function QnA() {
 		},
 	}, { manual: false });
 
-	const { stand_alone_questions:standAlone, case_study_questions:caseStudy } = data || {};
+	const { stand_alone_questions = [], case_study_questions = [] } = data || {};
 
 	if (loading) {
 		return (
@@ -29,13 +30,21 @@ function QnA() {
 			<div className={styles.heading}>
 				Questions wise analysis
 			</div>
-			<div className={styles.question_cards_container}>
-				{(standAlone || []).map((item, index) => (
-					<div className={styles.question_card}>
-						<QnAItem data={item} index={index} />
-					</div>
-				))}
 
+			<div className={styles.question_cards_container}>
+				{([...stand_alone_questions, ...case_study_questions] || []).map((item, index) => {
+					if (!('questions' in item)) {
+						return (
+							<div className={styles.question_card}>
+								<QnAItem data={item} index={index} />
+							</div>
+						);
+					}
+
+					return (
+						<CaseStudy case_study={item} index={index} />
+					);
+				})}
 			</div>
 		</div>
 	);

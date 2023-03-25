@@ -33,8 +33,6 @@ function AddQuestionsForm({
 }) {
 	const [showBulkUpload, setShowBulkUpload] = useState(false);
 
-	console.log('savedQuestionDetails', savedQuestionDetails);
-
 	const { test_questions = [], topic = '' } = data || {};
 
 	if (isEmpty(questionSetId) && from !== 'test') {
@@ -68,7 +66,7 @@ function AddQuestionsForm({
 			) : null}
 
 			{loading ? (
-				<LoadingState />
+				<LoadingState rowsCount={5} />
 			) : (
 				!isEmpty((test_questions || []).filter((item) => item.id !== editDetails?.id)) && (
 					<SavedQuestionDetails

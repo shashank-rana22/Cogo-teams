@@ -1,4 +1,5 @@
-import { format } from '@cogoport/utils';
+import { Placeholder } from '@cogoport/components';
+import { isEmpty, format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
@@ -6,7 +7,7 @@ import getElementController from '../../../../../../../../configs/getElementCont
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function DurationAndValidity({ setValue, data, control, errors }) {
+function DurationAndValidity({ setValue, data, control, errors, loading }) {
 	const controls = getControls();
 
 	useEffect(() => {
@@ -25,6 +26,10 @@ function DurationAndValidity({ setValue, data, control, errors }) {
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
+
+	if (isEmpty(data) || loading) {
+		return <Placeholder height="130px" width="100%" margin="0px 0px 20px 0px" />;
+	}
 
 	return (
 		<div className={styles.container}>
