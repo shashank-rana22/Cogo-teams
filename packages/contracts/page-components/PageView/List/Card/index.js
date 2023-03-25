@@ -33,9 +33,7 @@ function Card({ item, filters }) {
 			Requested By
 			{' '}
 			{startCase(requested_by)}
-			{' '}
 			:
-			Requester Name
 			{' '}
 			{startCase(requester_name)}
 		</div>
