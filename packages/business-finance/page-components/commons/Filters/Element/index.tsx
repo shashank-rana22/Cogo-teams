@@ -33,7 +33,7 @@ interface ElementProps {
 	url?: string;
 	href?: string;
 	key?: string;
-	name: string;
+	name?: string;
 	onChange?: (val: any) => void;
 	options?: Options[];
 	setFilters: (p: object) => void;
@@ -245,7 +245,6 @@ function Element({
 				return (
 					<CheckboxGroup
 						className={className}
-						name={name}
 						value={value}
 						style={style as CSSProperties}
 						{...rest}

@@ -61,6 +61,7 @@ export interface ListDataProps {
 export interface Options {
 	label: string;
 	value: string;
+	name?:string;
 }
 
 interface GroupByProps {
@@ -98,7 +99,7 @@ interface PortInterface {
 	display_name?:string
 	postal_code?:string,
 	country:{ name:string },
-	name:string
+	name?:string
 	port_code:string
 }
 
@@ -109,7 +110,7 @@ interface PickupDropInt {
 	postal_code?:string,
 	country:{ name:string },
 	display_name:string,
-	name:string
+	name?:string
 }
 interface PortDetailsInt {
 	port_code?:string | number,

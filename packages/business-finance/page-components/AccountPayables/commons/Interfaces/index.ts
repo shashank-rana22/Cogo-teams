@@ -61,6 +61,7 @@ export interface ListDataProps {
 export interface Options {
 	label: string;
 	value: string;
+	name?:string;
 }
 
 export interface ControlProps {
