@@ -10,6 +10,7 @@ function useListFaqQuestions({
 	tagId = [],
 	limit = undefined,
 	sort = undefined,
+	query_name = undefined,
 }) {
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
@@ -44,7 +45,7 @@ function useListFaqQuestions({
 					filters: {
 						state             : 'published',
 						status            : 'active',
-						q                 : query || undefined,
+						q                 : query || query_name || undefined,
 						faq_topic_id      : topicId || undefined,
 						faq_tag_id        : tagId || undefined,
 						auth_function     : scope === 'partner' ? roleFunction : undefined,
@@ -57,7 +58,8 @@ function useListFaqQuestions({
 					sort_by                : sort,
 					page,
 					page_limit             : limit || undefined,
-					faq_tags_data_required : true,
+					faq_tags_data_required : !query_name,
+					answers_data_required  : !query_name,
 				},
 			});
 		} catch (error) {
