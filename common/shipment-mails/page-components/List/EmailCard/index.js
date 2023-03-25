@@ -7,12 +7,12 @@ import styles from './styles.module.css';
 
 function EmailCard({ data, onClick }) {
 	const yesterday = subtractDays(new Date(), 1);
-	const displayDate =		new Date(data.receivedDateTime) > yesterday
-		? formatDistanceToNow(data.receivedDateTime)
-		: format(
-			data.receivedDateTime,
-			' dd MMM, yyyy',
-		);
+	// const displayDate =		new Date(data.receivedDateTime) > yesterday
+	// 	? formatDistanceToNow(data.receivedDateTime)
+	// 	: format(
+	// 		data.receivedDateTime,
+	// 		' dd MMM, yyyy',
+	// 	);
 	return (
 		<div
 			className={styles.container}
@@ -32,10 +32,10 @@ function EmailCard({ data, onClick }) {
 				</div>
 				<div className={styles.row}>
 					<div className={styles.subject}>{data.subject}</div>
-					<div className={styles.subject}>
+					{/* <div className={styles.subject}>
 						{displayDate}
 						.
-					</div>
+					</div> */}
 				</div>
 				<div className={styles.initial_body}>{data.bodyPreview}</div>
 			</div>

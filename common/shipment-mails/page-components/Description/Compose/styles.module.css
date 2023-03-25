@@ -39,22 +39,33 @@
 	}
 }
 
+.text {
+	font-size: 12px;
+	font-weight: 600;
+	margin-right: 8px;
+}
+
 .row {
 	display: flex;
 	align-items: center;
+	/* background-color: antiquewhite; */
+	border-radius: 8px;
+	padding: 4px 8px;
 }
 
 .suffix_button {
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 12px;
-	line-height: 150%;
 	border: none;
 	outline: none;
 	padding: 0px;
-	color: #333333;
-	margin-right: 24px;
+	color: #FFFFFF;
+	margin-right: 12px;
 	background: none;
 	cursor: pointer;
+	background-color: red;
+	border-radius: 4px;
+	padding: 4px 8px;
 }
 
 .error {
@@ -68,22 +79,25 @@
 .subject_preview {
 	display: flex;
 	align-items: center;
+	padding: 4px 0px 12px 0px;
 	margin: 8px 0px;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+.subject_label {
+	font-weight: 600;
 }
 
 .preview {
 	font-weight: 500;
 	font-size: 12px;
-	line-height: 16px;
 	color: #000000;
-	&.label {
-		margin: 0px;
-		font-weight: 700;
-		font-size: 14px;
-		line-height: 150%;
+	margin-left: 4px;
+}
 
-		color: #333333;
-	}
+.mail_type {
+	padding: 8px 0px;
+	border-bottom: 1px solid #E0E0E0;
 }
 
 .styled_editor {
@@ -94,7 +108,7 @@
 		}
 
 		.DraftEditor-editorContainer {
-			border: 1px solid black;
+			/* border: 1px solid black; */
 		}
 
 		.public-DraftEditorPlaceholder-root {
