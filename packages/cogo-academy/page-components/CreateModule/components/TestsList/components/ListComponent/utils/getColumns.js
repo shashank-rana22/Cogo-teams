@@ -147,8 +147,15 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 		{
 			Header   : 'NAME',
 			id       : 'a',
-			accessor : ({ name = '' }) => (
-				<section>{name}</section>
+			accessor : ({ name = '', test_duration = '' }) => (
+				<div>
+					<section>{name}</section>
+					<section>
+						{test_duration}
+						{' '}
+						mins
+					</section>
+				</div>
 			),
 		},
 		{
