@@ -73,6 +73,24 @@
 	line-height: 18px;
 }
 
+.requested_details {
+	width: 300px;
+	padding: 0 5px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	background: #fffce6;
+	border: 1px solid #828282;
+	border-radius: 4px;
+}
+
+.business_name {
+	margin: 2px 0;
+	font-weight: 500;
+}
+
 .content {
 	display: flex;
 	gap: 4px;

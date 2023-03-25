@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 
@@ -10,7 +10,7 @@ import ServiceDetail from './ServiceDetail';
 import styles from './styles.module.css';
 
 function Card({ item, filters }) {
-	const { importer_exporter = {} } = item || {};
+	const { importer_exporter = {}, requested_by = '', requester_name = '' } = item || {};
 
 	const router = useRouter();
 	const formattedData = formatPortPair({ item });
@@ -27,6 +27,19 @@ function Card({ item, filters }) {
 	item.services.forEach((service) => {
 		services[`${service}_services`] = (item[`${service}_services`] || []).length;
 	});
+
+	const requestedDetails = ({ type = '' }) => (
+		<div className={type ? styles.requested_details : ''}>
+			Requested By
+			{' '}
+			{startCase(requested_by)}
+			{' '}
+			:
+			Requester Name
+			{' '}
+			{startCase(requester_name)}
+		</div>
+	);
 
 	return (
 		<div className={styles.card}>
@@ -46,6 +59,13 @@ function Card({ item, filters }) {
 				</div>
 
 				<div className={styles.details}>
+					<Tooltip
+						content={requestedDetails({ type: '' })}
+						placement="bottom"
+					>
+						{requestedDetails({ type: 'fixed_width' })}
+					</Tooltip>
+
 					<div className={styles.pair}>
 						<div>
 							{filters?.status === 'active' ? 'Updated Date' : 'Requested Date '}
@@ -70,6 +90,11 @@ function Card({ item, filters }) {
 						</div>
 					) : null}
 				</div>
+			</div>
+			<div className={styles.business_name}>
+				Business Name :
+				{' '}
+				{startCase(importer_exporter?.business_name)}
 			</div>
 			<div className={styles.service_details}>
 				{item.services.map((service, index) => (
