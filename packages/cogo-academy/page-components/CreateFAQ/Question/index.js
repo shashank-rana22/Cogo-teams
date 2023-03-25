@@ -1,10 +1,8 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable max-len */
 import { Modal, Button } from '@cogoport/components';
 import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 import Spinner from '../../../commons/Spinner';
 import CreateUserForm from '../ConfigurationEngine/CreateAudienceForm';
@@ -35,7 +33,7 @@ function CreateFAQ() {
 	const router = useRouter();
 	const [editorError, setEditorError] = useState(false);
 
-	const { fetchQuestion, query, data, loading } = useGetQuestion();
+	const { fetchQuestion, query, data = {}, loading } = useGetQuestion();
 
 	const {
 		editorValue,
@@ -93,23 +91,11 @@ function CreateFAQ() {
 		if (query?.id) {
 			fetchQuestion();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query?.id]);
+	}, [fetchQuestion, query?.id]);
 
-	const filterTags = [];
-	(faq_tags || []).forEach((item) => {
-		filterTags.push(item?.id);
-	});
-
-	const filterTopics = [];
-	(faq_topics || []).forEach((item) => {
-		filterTopics.push(item?.id);
-	});
-
-	const filterAudiences = [];
-	(faq_audiences || []).forEach((item) => {
-		filterAudiences.push(item?.id);
-	});
+	const filterTags = useMemo(() => faq_tags?.map((item) => item.id) || [], [faq_tags]);
+	const filterTopics = useMemo(() => faq_topics?.map((item) => item.id) || [], [faq_topics]);
+	const filterAudiences = useMemo(() => faq_audiences?.map((item) => item.id) || [], [faq_audiences]);
 
 	useEffect(() => {
 		if (!loading) {
@@ -119,9 +105,26 @@ function CreateFAQ() {
 			setQuestionValue('audience_ids', filterAudiences);
 			setEditorValue(RichTextEditor?.createValueFromString((answers?.[0]?.answer || ''), 'html'));
 		}
+	}, [listTopicsLoading,
+		listTagsLoading,
+		listAudienceLoading,
+		loading,
+		setQuestionValue,
+		question_abstract,
+		filterTags,
+		filterTopics,
+		filterAudiences,
+		setEditorValue,
+		RichTextEditor,
+		answers]);
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [listTopicsLoading, listTagsLoading, listAudienceLoading, JSON.stringify(data)]);
+	useEffect(() => {
+		if (questionPreview !== 'preview') {
+			fetchTopics();
+			fetchTags();
+			fetchAudiences();
+		}
+	}, [fetchAudiences, fetchTags, fetchTopics, questionPreview]);
 
 	const onClickBackIcon = () => {
 		router.back();
@@ -147,7 +150,7 @@ function CreateFAQ() {
 				<Spinner
 					height={60}
 					width={60}
-					borderWidth="7px"
+					borderWidth="6px"
 					outerBorderColor="#FBD69F"
 					spinBorderColor="red"
 				/>
@@ -157,8 +160,7 @@ function CreateFAQ() {
 
 	return (
 		<div>
-
-			<div className={styles.back_div} onClick={onClickBackIcon}>
+			<div role="presentation" className={styles.back_div} onClick={onClickBackIcon}>
 				<IcMArrowBack width={20} height={20} />
 				<div className={styles.back}>Back to Dashboard</div>
 			</div>
@@ -200,6 +202,7 @@ function CreateFAQ() {
 								Select Tags or
 							</div>
 							<div
+								role="presentation"
 								className={styles.create_tag_label}
 								onClick={handleCreateTag}
 							>
@@ -228,6 +231,7 @@ function CreateFAQ() {
 								Select Topics or
 							</div>
 							<div
+								role="presentation"
 								className={styles.create_tag_label}
 								onClick={handleCreateTopic}
 							>
@@ -258,6 +262,7 @@ function CreateFAQ() {
 							Select Audience or
 						</div>
 						<div
+							role="presentation"
 							className={styles.create_tag_label}
 							onClick={() => setShowCreateAudienceModal(true)}
 						>
@@ -342,6 +347,7 @@ function CreateFAQ() {
 
 				<Modal.Footer>
 					<Button
+						type="button"
 						themeType="secondary"
 						style={{ marginRight: 8 }}
 						onClick={onClickCancelButton}
@@ -349,7 +355,7 @@ function CreateFAQ() {
 						CANCEL
 					</Button>
 
-					<Button onClick={handleCreate(createFaqComponent)}>
+					<Button type="button" onClick={handleCreate(createFaqComponent)}>
 						SUBMIT
 					</Button>
 				</Modal.Footer>
@@ -372,6 +378,7 @@ function CreateFAQ() {
 
 				<Modal.Footer>
 					<Button
+						type="button"
 						themeType="tertiary"
 						style={{ marginRight: 8 }}
 						onClick={() => setShowModalOnCancel(false)}
@@ -380,6 +387,7 @@ function CreateFAQ() {
 					</Button>
 
 					<Button
+						type="button"
 						onClick={onClickYesButton}
 					>
 						Yes
