@@ -11,6 +11,7 @@
 }
 
 .back {
+	color: #828282;
 	cursor: pointer;
 	transition: 0.3s ease;
 
@@ -23,12 +24,13 @@
 .go_back {
 	margin-left: 4px;
 	font-size: 13px;
+	color: #828282;
 }
 
 .module_text {
 	margin: 8px 0;
 	font-size: 11px;
-	color: #221f20;
+	color: #828282;
 	opacity: 0.6;
 }
 
@@ -36,7 +38,7 @@
 	width: 100%;
 	font-size: 17px;
 	font-weight: 500;
-	color: #221f20;
+	color: #828282;
 }
 
 .no_of_people_like_it {
