@@ -246,6 +246,11 @@ export const StatsKeyMapping = [
 
 export const StatsKeyMappingPayment = [
 	{
+		label     : 'NOT DUE',
+		valueKey  : 'notDue',
+		textColor : '#cb6464',
+	},
+	{
 		label     : '0-30 DAYS',
 		valueKey  : 'thirty',
 		textColor : '#cb6464',
