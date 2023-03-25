@@ -49,3 +49,7 @@
 	font-size: 10px;
 	color: #393f70;
 }
+
+.filters_popover {
+	min-height: 700px !important;
+}
