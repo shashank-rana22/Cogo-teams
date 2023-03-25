@@ -15,7 +15,7 @@ const useListCogooneTimeline = ({
 }) => {
 	const [firstLoading, setFirstLoading] = useState(true);
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/list_cogoone_timeline',
+		url    : '/list_cogoone_timelines',
 		method : 'get',
 	}, { manual: true, autoCancel: false });
 

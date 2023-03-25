@@ -10690,7 +10690,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_cogoone_timeline',
+			api          : 'list_cogoone_timelines',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
