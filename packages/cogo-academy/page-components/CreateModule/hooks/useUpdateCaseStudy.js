@@ -35,9 +35,11 @@ function useUpdateCaseStudy() {
 				...(action !== 'delete' ? { questionToShow: id } : { pageToShow: 1 }),
 			});
 
-			setAllKeysSaved(true);
-			setEditDetails({});
-			reset();
+			if (action === 'delete') {
+				setAllKeysSaved(true);
+				setEditDetails({});
+				reset();
+			}
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}

@@ -36,7 +36,7 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 
 		case 'case_study': {
 			if (editType === 'case_question') {
-				const { question_text, options = [], difficulty_level, question_type, explanation } = values || {};
+				const { question_text, options = [], question_type, explanation } = values || {};
 
 				const answers = options.map((option, index) => {
 					const { is_correct, answer_text } = option || {};
@@ -53,17 +53,22 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 					...(action === 'update' ? { id: caseStudyQuestionId } : { test_question_id: testQuestionId }),
 					question_text,
 					question_type,
-					difficulty_level,
 					answers,
 					explanation: [explanation],
 				};
 			}
-			const { audience_ids, question_text, case_questions = [], topic, question_type } = values || {};
+			const {
+				audience_ids,
+				question_text,
+				case_questions = [],
+				topic,
+				question_type,
+				difficulty_level,
+			} = values || {};
 
 			const questions = case_questions.map((item) => {
 				const {
 					question_type: indQuestionType,
-					difficulty_level,
 					question_text: indQuestionText,
 					options,
 					explanation,
@@ -82,7 +87,6 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 
 				return {
 					question_type : indQuestionType,
-					difficulty_level,
 					question_text : indQuestionText,
 					answers,
 					explanation   : [explanation],
@@ -95,6 +99,7 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 				question_text,
 				topic,
 				question_type,
+				difficulty_level,
 				questions,
 			};
 		}

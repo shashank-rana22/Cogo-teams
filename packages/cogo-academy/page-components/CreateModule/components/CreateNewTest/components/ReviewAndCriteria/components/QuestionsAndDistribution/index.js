@@ -11,12 +11,14 @@ function QuestionsAndDistribution({ data, control, errors, loading, setValue }) 
 		data?.test_set_distribution_data?.forEach((test_set_distribution) => {
 			if (test_set_distribution.question_type === 'stand_alone') {
 				setValue(`${test_set_distribution.test_question_set_id
-				}q`, (test_set_distribution.distribution_count === null) ? ''
-					: test_set_distribution.distribution_count);	// append with 'q' for stand alone questions
+				}q`, (!(test_set_distribution.distribution_count || test_set_distribution.distribution_count === 0))
+					? ''
+					: test_set_distribution.distribution_count || '0');	// append with 'q' for stand alone questions
 			} else {
 				setValue(`${test_set_distribution.test_question_set_id
-				}c`, (test_set_distribution.distribution_count === null) ? ''
-					: test_set_distribution.distribution_count); // append with 'c' for case study questions
+				}c`, (!(test_set_distribution.distribution_count || test_set_distribution.distribution_count === 0))
+					? ''
+					: test_set_distribution.distribution_count || '0'); // append with 'c' for case study questions
 			}
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
