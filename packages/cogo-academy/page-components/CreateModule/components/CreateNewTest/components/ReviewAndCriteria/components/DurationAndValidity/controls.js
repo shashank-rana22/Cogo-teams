@@ -32,7 +32,7 @@ const getControls = () => [
 		},
 	},
 	{
-		name        : 'cut_off_marks',
+		name        : 'cut_off_percentage',
 		label       : 'Minimum Pass %',
 		type        : 'number',
 		placeholder : 'type %',

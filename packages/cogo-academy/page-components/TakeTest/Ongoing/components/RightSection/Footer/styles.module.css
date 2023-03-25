@@ -1,5 +1,7 @@
 .container {
-	display: flex;
-	justify-content: flex-end;
-	padding: 32px;
+	display: block;
+	position: absolute;
+	bottom: 28px;
+	right: 15px;
+	/* padding: 32px; */
 }

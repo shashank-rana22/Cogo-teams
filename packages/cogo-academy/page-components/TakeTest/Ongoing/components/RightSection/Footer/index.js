@@ -5,10 +5,10 @@ import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
 import styles from './styles.module.css';
 
 function Footer({
-	setShowTimeOverModal,
+	setShowSubmitTestModal,
 }) {
 	const handleSubmitTest = () => {
-		setShowTimeOverModal(true);
+		setShowSubmitTestModal(true);
 		handleMinimizeTest();
 	};
 
@@ -16,6 +16,7 @@ function Footer({
 		<div className={styles.container}>
 			<Button
 				type="button"
+				size="md"
 				onClick={() => handleSubmitTest()}
 				themeType="accent"
 			>

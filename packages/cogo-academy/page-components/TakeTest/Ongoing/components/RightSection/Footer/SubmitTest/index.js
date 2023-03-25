@@ -6,8 +6,8 @@ import StatsDisplay from '../../../utils/StatsDisplay';
 
 import styles from './styles.module.css';
 
-function SubmitTest({ showSubmitTestModal, setShowSubmitTestModal, data = {} }) {
-	const { endTest } = useEndTest();
+function SubmitTest({ showSubmitTestModal, setShowSubmitTestModal, data = {}, setActiveState }) {
+	const { endTest } = useEndTest({ setActiveState });
 
 	const handleContinueTest = () => {
 		handleEnterFullScreen();
@@ -17,9 +17,13 @@ function SubmitTest({ showSubmitTestModal, setShowSubmitTestModal, data = {} }) 
 	return (
 		<Modal size="md" show={showSubmitTestModal} onClose={setShowSubmitTestModal}>
 			<Modal.Body>
-				<b className={styles.heading}>Are you sure you want to leave the test?</b>
+				<b className={styles.heading}>Are you sure you want to Submit the test?</b>
 
-				<p>Doing so will result in a waste attempt</p>
+				<p>
+					You still have time left, check before submitting.
+					You cannot come back to the test once submitted.
+
+				</p>
 
 				<StatsDisplay data={data} />
 
@@ -29,7 +33,7 @@ function SubmitTest({ showSubmitTestModal, setShowSubmitTestModal, data = {} }) 
 						style={{ marginRight: 12 }}
 						themeType="secondary"
 					>
-						Cancel
+						Go Back To Test
 					</Button>
 					<Button themeType="accent" onClick={endTest}>Submit Test</Button>
 				</div>

@@ -52,7 +52,7 @@ function StatsDisplay({ data = {} }) {
 				})}
 			</div>
 
-			<div className={styles.stats}>
+			{/* <div className={styles.stats}>
 				<div className={styles.content}>
 					<div className={styles.label}>
 						Time Taken
@@ -61,7 +61,7 @@ function StatsDisplay({ data = {} }) {
 						: 59:45 min
 					</div>
 				</div>
-			</div>
+			</div> */}
 
 		</div>
 
