@@ -19,7 +19,15 @@
 
 	&:hover {
 		box-shadow: 0 0 8px #627fac33;
-		background: #f8f2e7;
+		background-color:  #986f24;
+	}
+	:global{
+		.css-rzuqqd:hover {
+			box-shadow: 0 0 8px #627fac33;
+			background: #f8f2e7;
+		}
+		
+		
 	}
 }
 

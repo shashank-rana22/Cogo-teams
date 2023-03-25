@@ -93,9 +93,8 @@ function RequestedQuestionList({
 								interactive
 							>
 								<div
-									className={styles.question_time_container}
 									style={{ backgroundColor: !is_viewed ? '#fdfbf6' : '#ffffff' }}
-									// background={!is_viewed ? '#fdfbf6' : '#ffffff'}
+									className={styles.question_time_container}
 									cursor="not-allowed"
 								>
 									<div
