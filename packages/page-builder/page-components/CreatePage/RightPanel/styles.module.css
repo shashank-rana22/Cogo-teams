@@ -1,10 +1,14 @@
+.container{
+	background-color: #fff;
+	height: 100vh;
+}
 .header {
 	display: flex;
 	justify-content: space-between;
 	padding: 12px;
-	background-color: #fffce6;
 }
 
 .button_container {
 	display: flex;
 }
+

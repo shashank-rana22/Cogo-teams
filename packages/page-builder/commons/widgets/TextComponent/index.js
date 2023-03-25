@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
@@ -8,35 +9,46 @@ const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 
 function TextComponent(props) {
 	const { text, components, setComponents, elementId } = props;
+
 	const [editorValue, setEditorValue] = useState(text);
 	const [isFocused, setIsFocused] = useState(false);
-	const [isLoaded, setIsLoaded] = useState(false);
-
-	// const handleFocus = () => setIsFocused(true);
-
-	// const handleBlur = () => setIsFocused(true);
 
 	const handleEditorChange = (value) => {
 		setEditorValue(value);
 
 		// eslint-disable-next-line max-len, max-len, max-len
-		const selectedComponentIndex = (components || []).map((component, index) => (component.id === elementId ? index : null));
+		const selectedComponentIndex = (components || []).findIndex((component) => (component.id === elementId));
 
 		const updatedComponent = {
 			...components[selectedComponentIndex],
-			content: value,
+			properties: {
+				...components[selectedComponentIndex].properties,
+				content: value,
+			},
+
 		};
 
-		console.log('updatedComponents ::', updatedComponent);
+		// use map instead slice
+		setComponents((prevComponents) => [
+			...prevComponents.slice(0, selectedComponentIndex),
+			updatedComponent,
+			...prevComponents.slice(selectedComponentIndex + 1),
+		]);
+	};
 
-		// setComponents((prev) => {
-		// 	(prev || []).map((component, index) => {
-		// 		if (index === selectedComponentIndex) {
-		// 			return updatedComponent;
-		// 		}
-		// 		return component;
-		// 	});
-		// });
+	const handleFocus = () => {
+		setIsFocused(true);
+	};
+
+	const handleBlur = () => {
+		setIsFocused(false);
+	};
+
+	const editorStyle = {
+		border  : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
+		padding : '10px',
+		margin  : '20px',
+
 	};
 
 	const modules = {
@@ -61,7 +73,7 @@ function TextComponent(props) {
 	};
 
 	return (
-		<div>
+		<div style={editorStyle}>
 
 			<ReactQuill
 				theme="bubble"
@@ -70,6 +82,8 @@ function TextComponent(props) {
 				modules={modules}
 				style={styles}
 				onChange={handleEditorChange}
+				onFocus={handleFocus}
+				onBlur={handleBlur}
 			/>
 
 		</div>

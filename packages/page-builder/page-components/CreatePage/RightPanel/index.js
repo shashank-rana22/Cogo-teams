@@ -10,8 +10,6 @@ import styles from './styles.module.css';
 function RightPanel(props) {
 	const { components, setComponents } = props;
 
-	console.log('components ::', components);
-
 	return (
 		<div className={styles.container}>
 
@@ -39,7 +37,6 @@ function RightPanel(props) {
 										<TextComponent
 											key={elementId}
 											text={component.properties.content}
-											// styles={component.properties.styles}
 											components={components}
 											setComponents={setComponents}
 											elementId={elementId}
@@ -52,6 +49,9 @@ function RightPanel(props) {
 											src={component.properties.content}
 											alt={component.properties.alt}
 											styles={component.properties.styles}
+											components={components}
+											setComponents={setComponents}
+											elementId={elementId}
 										/>
 									);
 								case 'button':

@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 const CONTENT_MAPPING = {
 	text: {
 		// eslint-disable-next-line max-len
-		content    : '<div style = "display: flex; justify-content: center"><h2 style = "color: #333; font-size: 24px;">Hey, please start typing here...</h2></div>',
+		content    : '<p>start typing here...</p>',
 		// styles  : {
 		// 	fontSize       : '24px',
 		// 	color          : '#333',
@@ -49,8 +49,7 @@ function Basic(props) {
 	const { components, setComponents } = props;
 
 	const handleClick = (content = {}) => {
-		console.log('components :: ', components);
-		// setComponents([...components, { type: content.type, id: uuid(), properties: CONTENT_MAPPING[content.type] }]);
+		setComponents([...components, { type: content.type, id: uuid(), properties: CONTENT_MAPPING[content.type] }]);
 	};
 
 	return (
