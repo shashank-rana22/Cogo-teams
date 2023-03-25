@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query: inpQuery }) {
+function useGetTestQuestionTest({ setAllKeysSaved }) {
 	const { general: { query } } = useSelector((state) => state);
 
 	const { id } = query || {};
@@ -17,24 +17,11 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setE
 		url    : '/get_test_question_set',
 	}, { manual: true });
 
-	const getTestQuestionTest = async ({ questionToShow, questionSetId:setId }) => {
+	const getTestQuestionTest = async ({ questionSetId:setId }) => {
 		try {
-			const res = await trigger({
+			await trigger({
 				params: { id: setId, filters },
 			});
-
-			if (!res?.data?.question_count) {
-				setSavedQuestionDetails([{ id: new Date().getTime(), isNew: true }]);
-				setAllKeysSaved(false);
-			} else {
-				setAllKeysSaved(true);
-				setSavedQuestionDetails(res?.data?.test_questions);
-			}
-
-			if (!isEmpty(questionToShow)) {
-				setEditDetails((res?.data?.test_questions || []).find((item) => item.id === questionToShow) || {});
-				setAllKeysSaved(false);
-			}
 		} catch (err) {
 			setAllKeysSaved(true);
 		}
@@ -45,10 +32,6 @@ function useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setE
 			getTestQuestionTest({ questionSetId: id });
 		}
 	}, []);
-
-	useEffect(() => {
-		getTestQuestionTest({ questionSetId });
-	}, [inpQuery]);
 
 	return {
 		loading,

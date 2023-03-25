@@ -29,3 +29,12 @@
 	font-weight: 400;
 	color: #828282;
 }
+
+.name {
+	font-size: 14px;
+	color: #221f20;
+}
+
+.duration {
+	color: #4f4f4f;
+}

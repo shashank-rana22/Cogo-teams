@@ -6,7 +6,7 @@ import { useRequest } from '@cogoport/request';
 const actionNameMapping = {
 	delete : 'deleted',
 	create : 'created',
-	update : 'updated',
+	edit   : 'updated',
 };
 
 function useCreateQuestionSet() {

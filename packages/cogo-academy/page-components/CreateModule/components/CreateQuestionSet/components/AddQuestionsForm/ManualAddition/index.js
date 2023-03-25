@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 
 function ManualAddition({
 	questionSetId,
-	getTestQuestionTest,
 	setSavedQuestionDetails,
 	setAllKeysSaved,
 	editDetails,
@@ -15,6 +14,7 @@ function ManualAddition({
 	topic,
 	savedQuestionDetails,
 	test_questions,
+	listSetQuestions,
 }) {
 	return (
 		<div>
@@ -35,7 +35,7 @@ function ManualAddition({
 							index={index}
 							item={item}
 							questionSetId={questionSetId}
-							getTestQuestionTest={getTestQuestionTest}
+							getTestQuestionTest={listSetQuestions}
 							setSavedQuestionDetails={setSavedQuestionDetails}
 							setAllKeysSaved={setAllKeysSaved}
 							editDetails={editDetails}
@@ -56,7 +56,7 @@ function ManualAddition({
 					)}
 					type="edit"
 					questionSetId={questionSetId}
-					getTestQuestionTest={getTestQuestionTest}
+					getTestQuestionTest={listSetQuestions}
 					setSavedQuestionDetails={setSavedQuestionDetails}
 					setAllKeysSaved={setAllKeysSaved}
 					setEditDetails={setEditDetails}

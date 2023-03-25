@@ -16,7 +16,6 @@ function AddQuestionsForm({
 	allKeysSaved,
 	data,
 	loading,
-	getTestQuestionTest,
 	setSavedQuestionDetails,
 	setAllKeysSaved,
 	editDetails,
@@ -25,8 +24,16 @@ function AddQuestionsForm({
 	setFilters,
 	debounceQuery,
 	filters,
+	listSetQuestions,
+	listLoading,
+	listData,
+	total_count,
+	page,
+	setPage,
 }) {
 	const [showBulkUpload, setShowBulkUpload] = useState(false);
+
+	console.log('savedQuestionDetails', savedQuestionDetails);
 
 	const { test_questions = [], topic = '' } = data || {};
 
@@ -61,18 +68,21 @@ function AddQuestionsForm({
 			) : null}
 
 			{loading ? (
-				<LoadingState />
+				<LoadingState rowsCount={5} />
 			) : (
 				!isEmpty((test_questions || []).filter((item) => item.id !== editDetails?.id)) && (
 					<SavedQuestionDetails
-						savedQuestionDetails={savedQuestionDetails}
-						test_questions={test_questions}
+						test_questions={listData}
 						editDetails={editDetails}
 						setEditDetails={setEditDetails}
 						allKeysSaved={allKeysSaved}
 						setAllKeysSaved={setAllKeysSaved}
 						questionSetId={questionSetId}
-						getTestQuestionTest={getTestQuestionTest}
+						getTestQuestionTest={listSetQuestions}
+						loading={listLoading}
+						total_count={total_count}
+						page={page}
+						setPage={setPage}
 					/>
 				)
 			)}
@@ -81,13 +91,13 @@ function AddQuestionsForm({
 				<ManualAddition
 					questionSetId={questionSetId}
 					test_questions={test_questions}
-					getTestQuestionTest={getTestQuestionTest}
 					setSavedQuestionDetails={setSavedQuestionDetails}
 					setAllKeysSaved={setAllKeysSaved}
 					editDetails={editDetails}
 					setEditDetails={setEditDetails}
 					topic={topic}
 					savedQuestionDetails={savedQuestionDetails}
+					listSetQuestions={listSetQuestions}
 				/>
 			) : null}
 
@@ -95,6 +105,7 @@ function AddQuestionsForm({
 				<BulkUpload
 					questionSetId={questionSetId}
 					setShowBulkUpload={setShowBulkUpload}
+					listSetQuestions={listSetQuestions}
 				/>
 			) : null}
 

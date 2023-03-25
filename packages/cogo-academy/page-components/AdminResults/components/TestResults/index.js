@@ -1,6 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-import { format, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
 import BasicDetails from './BasicDetails';
 import DifficultyAndTopicDistribution from './DifficultyAndTopicDistribution';
@@ -18,14 +17,12 @@ function TestResults({ test_id }) {
 
 	const stats_data = data?.data || {};
 
-	console.log(stats_data, 'stats_data');
-
-	// if (isEmpty(stats_data)) {
-	// 	return null;
-	// }
-
 	if (loading) {
 		return 'loading';
+	}
+
+	if (isEmpty(stats_data)) {
+		return null;
 	}
 
 	return (
