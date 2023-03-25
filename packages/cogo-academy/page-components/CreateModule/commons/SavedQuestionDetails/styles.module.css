@@ -59,7 +59,6 @@
 .bold {
 	display: flex;
 	align-items: center;
-	margin: 0 8px;
 	font-weight: 600;
 	cursor: pointer;
 }

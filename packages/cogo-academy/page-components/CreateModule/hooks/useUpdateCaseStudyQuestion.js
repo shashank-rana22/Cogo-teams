@@ -1,6 +1,14 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 import getPayload from '../utils/getPayload';
+
+const actionNameMapping = {
+	delete : 'deleted',
+	update : 'updated',
+	create : 'added',
+};
 
 function useUpdateCaseStudyQuestion() {
 	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
@@ -48,12 +56,16 @@ function useUpdateCaseStudyQuestion() {
 							}),
 			});
 
+			Toast.success(`Case study question ${actionNameMapping[action]} successfully`);
+
 			getTestQuestionTest({ questionSetId, questionToShow: testQuestionId });
 			setAllKeysSaved(true);
 			setEditDetails({});
 			reset();
 		} catch (err) {
-			console.log(err);
+			if (err.response?.data) {
+				Toast.error(getApiErrorString(err.response?.data));
+			}
 		}
 	};
 

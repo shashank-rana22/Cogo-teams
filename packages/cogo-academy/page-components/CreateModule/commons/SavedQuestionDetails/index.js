@@ -87,7 +87,7 @@ function SavedQuestionDetails({
 				</div>
 
 				{from !== 'tooltip' ? (
-					<div className={styles.bold}>
+					<div style={{ marginLeft: '8px' }} className={styles.bold}>
 						{`+${item?.sub_question.length} More`}
 						{' '}
 						<IconComponent
@@ -138,20 +138,6 @@ function SavedQuestionDetails({
 						</Tooltip>
 					))
 				)
-				: null}
-		</div>
-	);
-
-	const getDifficultyLevel = (item) => (
-		<div className={styles.flex_column}>
-			<div className={styles.flex_row}>
-				<div className={styles.bold}>{`+${item?.sub_question.length} Sub Questions`}</div>
-			</div>
-
-			{item.id === caseToShow
-				? item?.sub_question.map((item1) => (
-					<div>{startCase(item1.difficulty_level)}</div>
-				))
 				: null}
 		</div>
 	);
@@ -238,11 +224,9 @@ function SavedQuestionDetails({
 		{
 			Header   : 'Difficulty Level',
 			id       : 'difficulty_level',
-			accessor : (item) => (
+			accessor : ({ difficulty_level }) => (
 				<section>
-					{item?.question_type !== 'case_study'
-						? startCase(item?.difficulty_level)
-						: getDifficultyLevel(item)}
+					{startCase(difficulty_level)}
 				</section>
 			),
 		},
