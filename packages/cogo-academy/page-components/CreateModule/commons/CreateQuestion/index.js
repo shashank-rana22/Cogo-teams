@@ -109,24 +109,23 @@ function CreateQuestion({
 
 	useEffect(() => {
 		if (!isEmpty(editDetails)) {
-			const { question_type } = editDetails || {};
+			const { question_type, difficulty_level = '' } = editDetails || {};
 
 			if (question_type === 'case_study') {
 				const { question_text, sub_question = [] } = editDetails || {};
 
 				setValue('question_type', question_type);
 				setValue('question_text', question_text);
+				setValue('difficulty_level', difficulty_level);
 
 				sub_question.forEach((item1, ind) => {
 					const {
 						answers,
-						difficulty_level,
 						question_type: indQuestionType,
 						question_text: indQuestionText,
 						explanation = [],
 					} = item1 || {};
 
-					setValue(`case_questions.${ind}.difficulty_level`, difficulty_level);
 					setValue(`case_questions.${ind}.question_type`, indQuestionType);
 					setValue(`case_questions.${ind}.question_text`, indQuestionText);
 					setValue(`case_questions.${ind}.audience_ids`, []);
@@ -141,7 +140,7 @@ function CreateQuestion({
 					});
 				});
 			} else {
-				const { answers = [], question_text, difficulty_level = '', explanation = [] } = editDetails || {};
+				const { answers = [], question_text, explanation = [] } = editDetails || {};
 
 				setValue('question_type', 'stand_alone');
 				setValue('question.0.question_type', question_type);

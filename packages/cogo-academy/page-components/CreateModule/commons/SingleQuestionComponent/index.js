@@ -100,14 +100,20 @@ function SingleQuestionComponent({
 				editAnswerDetails={editAnswerDetails}
 			/>
 
-			<div className={styles.difficulty_level}>
-				<div className={styles.label}>Set Difficulty level</div>
+			{type !== 'case_study' ? (
+				<div className={styles.difficulty_level}>
+					<div className={styles.label}>Set Difficulty level</div>
 
-				<div className={styles.control}>
-					<ChipsController control={control} {...controls[3]} name={`${name}.${index}.${controls[3].name}`} />
-					{errors?.[controls[3].name] && <div className={styles.error_msg}>This is required</div>}
+					<div className={styles.control}>
+						<ChipsController
+							control={control}
+							{...controls[3]}
+							name={`${name}.${index}.${controls[3].name}`}
+						/>
+						{errors?.[controls[3].name] && <div className={styles.error_msg}>This is required</div>}
+					</div>
 				</div>
-			</div>
+			) : null}
 
 			<div className={styles.textarea_container}>
 				<TextAreaController control={control} {...controls[4]} name={`${name}.${index}.${controls[4].name}`} />

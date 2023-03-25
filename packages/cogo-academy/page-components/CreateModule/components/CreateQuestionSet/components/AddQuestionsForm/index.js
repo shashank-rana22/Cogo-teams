@@ -33,8 +33,6 @@ function AddQuestionsForm({
 }) {
 	const [showBulkUpload, setShowBulkUpload] = useState(false);
 
-	console.log('savedQuestionDetails', savedQuestionDetails);
-
 	const { test_questions = [], topic = '' } = data || {};
 
 	if (isEmpty(questionSetId) && from !== 'test') {
