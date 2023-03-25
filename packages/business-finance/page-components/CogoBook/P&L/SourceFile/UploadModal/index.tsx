@@ -1,5 +1,6 @@
 import { Select, Button, Modal } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import { optionMonth } from '../utils';
@@ -8,6 +9,15 @@ import styles from './styles.module.css';
 
 function UploadModal({ uploadModal, setUploadModal }) {
 	const [modalData, setModalData] = useState({ month: '', uploaderTrailBalance: '', uploaderSalaryBalance: '' });
+	const { push } = useRouter();
+
+	const handleClick = () => {
+		push(
+			`/business-finance/cogo-book/[active_tab]/[view]/upload-report?month=${modalData?.month}`,
+			`/business-finance/cogo-book/pl_statement/source_file/upload-report?month=${modalData?.month}`,
+		);
+		setUploadModal(false);
+	};
 
 	return (
 		<div>
@@ -42,7 +52,7 @@ function UploadModal({ uploadModal, setUploadModal }) {
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
-						onClick={() => { setUploadModal(false); }}
+						onClick={() => { handleClick(); }}
 						disabled={!modalData.uploaderTrailBalance && !modalData.uploaderTrailBalance}
 					>
 						Confirm

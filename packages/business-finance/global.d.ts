@@ -15,3 +15,4 @@ declare module '@cogoport/business-finance/page-components/COEFinance/All_Invoic
 declare module '@cogoport/business-finance/page-components/Reports';
 declare module '@cogoport/business-finance/page-components/CogoBook'
 declare module '@cogoport/business-finance/page-components/CogoBook/Accruals/ViewSelectedInvoice'
+declare module '@cogoport/business-finance/page-components/CogoBook/P&L/SourceFile/UploadReport'

@@ -1,0 +1,61 @@
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 32px;
+  margin-top: 60px;
+}
+.flex_card_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 600;
+}
+.flex_card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.hr {
+  border: 1px solid #ed3726;
+  width: 27%;
+}
+.icon {
+  margin-top: 4px;
+}
+.stepper {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 110px;
+  right: 380px;
+  filter: drop-shadow(0px 0px 8px rgba(98, 127, 172, 0.2));
+  border-radius: 4px;
+}
+.month {
+  background: #cfeaed;
+  border: 1px solid #88cad1;
+  border-radius: 4px;
+  padding: 6px 24px;
+  font-size: 12px;
+}
+.main_icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 12px;
+}
+.title {
+  font-size: 18px;
+  text-decoration: underline;
+  font-weight: 700;
+}
+.back_icon {
+  margin-top: 4px;
+}
+.title_item {
+  text-decoration: underline;
+}
