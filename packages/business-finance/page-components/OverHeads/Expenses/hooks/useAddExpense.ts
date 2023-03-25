@@ -21,6 +21,9 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		vendorId:vendorID, businessName:vendorName, id:expenseConfigurationId,
 		category:expenseCategory,
 		subCategory:expenseSubCategory,
+		id:vendorId,
+		tds_deduction_rate:vendorTds,
+		bank_details:bankDetails = [],
 	} = rowData || {};
 
 	const [addressData, setAddressData] = useState<AddressInterface>({});
@@ -40,7 +43,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		entityObject,
 		branch,
 		lineItemsList,
-		tradeParty,
+		// tradeParty,
 	} = expenseData || {};
 
 	const { name:branchName, branchId } = branch || {};
@@ -132,6 +135,13 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		{ manual: true },
 	);
 
+	const {
+		bank_name:bankName, ifsc_code:ifscCode,
+		account_number:accountNumber,
+		id:bankId,
+		vendor_id:collectionPartyId,
+	} = bankDetails[0];
+
 	const payload = {
 		expenseConfigurationId,
 		request: {
@@ -170,40 +180,40 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 					billNumber         : invoiceNumber,
 				},
 				sellerDetail: { // tradeParty
-					tradePartyMappingId     : '4ff54f88-0024-4de9-8ebd-2c72c80aeaa3', // ???
-					entityCode              : tradeParty?.entity_code,
-					entityCodeId            : tradeParty?.cogo_entity_id,
-					organizationId          : tradeParty?.organization_id,
-					organizationSerialId    : tradeParty?.serial_id,
+					// tradePartyMappingId     : '4ff54f88-0024-4de9-8ebd-2c72c80aeaa3', // ???
+					entityCode,
+					entityCodeId         : vendorCogoEntityId,
+					organizationId       : vendorId,
+					organizationSerialId : vendorSid,
 					// isTaxApplicable         : tradeParty?.is_tax_applicable,
-					isTaxApplicable         : registrationType !== 'pan',
-					isSez                   : false,
-					organizationName        : 'JAMA TAXI SERVICE', // ???
-					pincode                 : '110062', // ??
-					address                 : 'D-296,JJ COLONY KHANPUR,DR AMBEDKAR NAGAR SOUTH DELHI-110062', // ??
-					cityName                : '', // ??
-					supplyAgent             : 'Ajit Kumar', // ??
-					zone                    : 'NORTH', // ??
-					countryName             : tradeParty?.country?.display_name,
-					countryCode             : tradeParty?.country?.country_code,
-					countryId               : tradeParty?.country?.id,
-					registrationNumber      : tradeParty?.registration_number,
-					taxNumber               : '', // ??
-					corporateIdentityNumber : '', // ??
-					tdsRate                 : tradeParty?.tds_deduction_rate || 0,
-					logoUrl                 : '', // ??
-					signatureUrl            : '', // ??
-					bankDetail              : { // ??
-						bankName          : 'STATE BANK OF INDIA',
-						branchCode        : 'SBIN0017891',
-						beneficiaryName   : 'STATE BANK OF INDIA',
-						ifscCode          : 'SBIN0017891',
-						accountNumber     : '65009402357',
-						swiftCode         : '',
-						bankId            : '9000895a-fabb-4adf-8a6c-7d006da1c6aa',
-						currency          : 'GBP',
-						collectionPartyId : '',
-						imageUrl          : 'url',
+					isTaxApplicable      : true,
+					isSez                : false,
+					organizationName     : vendorBusinessName,
+					// pincode                 : null,
+					// address                 : 'D-296,JJ COLONY KHANPUR,DR AMBEDKAR NAGAR SOUTH DELHI-110062', // ??
+					// cityName                : '', // ??
+					// supplyAgent             : 'Ajit Kumar', // ??
+					// zone                    : 'NORTH', // ??
+					// countryName             : tradeParty?.country?.display_name,
+					// countryCode             : tradeParty?.country?.country_code,
+					countryId            : vendorCountryId,
+					registrationNumber   : registrationType === 'pan' ? vendorRegistrationNumber : null,
+					taxNumber            : registrationType === 'tax' ? vendorRegistrationNumber : null,
+					// corporateIdentityNumber : '', // ??
+					tdsRate              : vendorTds || 0,
+					// logoUrl              : '', // ??
+					// signatureUrl         : '', // ??
+					bankDetail           : { // ??
+						bankName,
+						// branchCode        : 'SBIN0017891',
+						// beneficiaryName   : 'STATE BANK OF INDIA',
+						ifscCode,
+						accountNumber,
+						// swiftCode         : '',
+						bankId,
+						// currency          : 'GBP',
+						collectionPartyId,
+						// imageUrl: 'url',
 					},
 				},
 				buyerDetails: { // cogo entity
@@ -228,7 +238,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 				serviceProviderDetail: { // vendor
 					entityCode,
 					entityCodeId            : vendorCogoEntityId,
-					organizationId          : tradeParty?.organization_id,
+					organizationId          : vendorId,
 					organizationSerialId    : vendorSid,
 					isSez                   : false,
 					organizationName        : vendorBusinessName,
