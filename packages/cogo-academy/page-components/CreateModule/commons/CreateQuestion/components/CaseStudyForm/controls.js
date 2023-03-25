@@ -38,7 +38,8 @@ const getControls = () => [
 				buttonText  : 'Add another option',
 				value       : [
 					{
-						option: '',
+						answer_text : '',
+						is_correct  : 'false',
 					},
 				],
 				controls: [
@@ -48,6 +49,17 @@ const getControls = () => [
 						placeholder : 'type option',
 						rules       : { required: 'Required' },
 
+					},
+					{
+						name    : 'is_correct',
+						type    : 'chips',
+						options : [
+							{ value: 'true', label: 'True' },
+							{ value: 'false', label: 'False' },
+						],
+						value    : 'false',
+						rules    : { required: 'Required' },
+						multiple : false,
 					},
 				],
 			},

@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import useGetTestQuestionTest from '../../hooks/useGetTestQuestionTest';
+import useListSetQuestions from '../../hooks/useListSetQuestions';
 
 import AddQuestionsForm from './components/AddQuestionsForm';
 import BasicDetailsForm from './components/BasicDetailsForm';
@@ -26,7 +27,16 @@ function CreateQuestionSet() {
 		setQuestionSetId,
 		setFilters,
 		filters,
-	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query });
+	} = useGetTestQuestionTest({ setSavedQuestionDetails, setAllKeysSaved, setEditDetails });
+
+	const {
+		loading:listLoading,
+		listSetQuestions,
+		listData,
+		total_count,
+		page,
+		setPage,
+	} = useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query });
 
 	return (
 		<div className={styles.container}>
@@ -63,6 +73,12 @@ function CreateQuestionSet() {
 				setFilters={setFilters}
 				filters={filters}
 				debounceQuery={debounceQuery}
+				listData={listData}
+				listLoading={listLoading}
+				listSetQuestions={listSetQuestions}
+				total_count={total_count}
+				page={page}
+				setPage={setPage}
 			/>
 		</div>
 	);

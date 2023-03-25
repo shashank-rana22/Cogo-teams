@@ -25,7 +25,7 @@ const getControls = () => [
 		value       : [
 			{
 				answer_text : '',
-				is_correct  : '',
+				is_correct  : 'false',
 			},
 		],
 		controls: [
