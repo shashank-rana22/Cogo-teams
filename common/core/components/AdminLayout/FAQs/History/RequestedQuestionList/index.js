@@ -99,6 +99,7 @@ function RequestedQuestionList({
 										backgroundColor : !is_viewed ? '#fdfbf6' : '#ffffff',
 										cursor          : 'not-allowed',
 									}}
+
 								>
 									<div
 										className={styles.pills_question_wrapper}

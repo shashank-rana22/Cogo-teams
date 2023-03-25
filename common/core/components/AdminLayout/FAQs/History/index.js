@@ -52,6 +52,7 @@ function History({
 				fullWidth
 				themeType="secondary"
 				onChange={setActiveTab}
+				className={styles.tab_panel}
 			>
 				<TabPanel
 					name="requested_question"
@@ -67,7 +68,12 @@ function History({
 					/>
 				</TabPanel>
 
-				<TabPanel name="search_history" title="Search History">
+				<TabPanel
+					name="search_history"
+					title="Search History"
+
+					// badge={(newQuestions || []).length > 0 ? newQuestionCount : null}
+				>
 
 					{!isEmpty(searchHistoryList) ? (
 						<>
