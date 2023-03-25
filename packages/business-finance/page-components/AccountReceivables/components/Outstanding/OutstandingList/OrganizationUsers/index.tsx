@@ -7,9 +7,11 @@ import useGetOrganizationUsers from '../../../../hooks/useGetOrganizationUsers';
 
 import styles from './styles.module.css';
 
-function Users({ data }) {
-	const { selfOrganizationId = '' } = data || {};
+interface Props {
+	selfOrganizationId: string,
+}
 
+function Users({ selfOrganizationId }: Props) {
 	const { organizationData, param, setParam, loading } =	useGetOrganizationUsers({
 		selfOrganizationId,
 	});

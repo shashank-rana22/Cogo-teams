@@ -3,6 +3,8 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
+import { GenericObject } from '../commons/Interfaces';
+
 interface Outstanding {
 	page?:number,
 	pageLimit?:number,
@@ -14,7 +16,11 @@ interface Outstanding {
 	tradePartySerialId?:string
 }
 
-const useGetOrgOutstanding = ({ formFilters }) => {
+interface GetOrgOutstanding {
+	formFilters?: GenericObject
+}
+
+const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
 	const [outStandingFilters, setoutStandingFilters] = useState<Outstanding>({
 		page       : 1,
 		pageLimit  : 10,

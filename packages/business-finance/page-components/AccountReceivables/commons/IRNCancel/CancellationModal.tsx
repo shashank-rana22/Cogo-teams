@@ -22,15 +22,15 @@ function CancellationModal({
 
 	return (
 		<Modal show={showCancellationModal} onClose={() => setShowCancellationModal(false)} size="md">
-			<div style={{ display: 'flex', flexDirection: 'column', padding: '10px 5px' }}>
-				<div style={{ display: 'flex', flexDirection: 'column', marginBottom: '12px' }}>
-					<div style={{ fontWeight: 'bold', fontSize: '20px', marginBottom: '12px' }}>
+			<div className={styles.cancel_modal}>
+				<div className={styles.sub_cancel_modal}>
+					<div className={styles.cancel_invoice}>
 						Cancel IRN Of Invoice Number
 						{' '}
 						{itemData?.invoiceNumber}
 					</div>
 					<div className={styles.Radiodiv}>
-						<div style={{ margin: '12px 0px 6px 0px', fontSize: '16px' }}>
+						<div className={styles.styled_reason}>
 							Reason
 						</div>
 
@@ -43,7 +43,7 @@ function CancellationModal({
 						/>
 					</div>
 					<div>
-						<div style={{ margin: '12px 0px 6px 0px', fontSize: '16px' }}>
+						<div className={styles.styled_remarks}>
 							Remarks
 						</div>
 						<Textarea
@@ -55,7 +55,7 @@ function CancellationModal({
 						/>
 					</div>
 				</div>
-				<div style={{ display: 'flex', marginTop: '12px' }}>
+				<div className={styles.confirm_button}>
 					<Button
 						onClick={() => {
 							cancelIrn(response);

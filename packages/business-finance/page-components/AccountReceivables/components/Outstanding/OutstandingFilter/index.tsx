@@ -2,10 +2,31 @@ import { Select, Input, Popover } from '@cogoport/components';
 import { IcMArrowRotateUp, IcMArrowRotateDown, IcMCross, IcMSearchdark } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import { GenericObject } from '../../../commons/Interfaces';
 import { ENTITY_TYPE, SEARCH_OPTIONS, SORTBY_OPTION } from '../../../constants/index';
 
 import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
+
+interface OrderBy {
+	key: string
+	order: string,
+	label: string
+}
+
+interface OutstandingFilterProps {
+	handleChange: (p:string) => void,
+	handleInputReset: () => void,
+	setOrderBy: Function,
+	orderBy: OrderBy,
+	setParams: (p: object) => void;
+	params: GenericObject,
+	formFilters: GenericObject,
+	setFormFilters: (p: object) => void;
+	clearFilter: () => void;
+	queryKey: string,
+	setQueryKey: (p:string) => void,
+}
 
 function Filters({
 	handleChange,
@@ -19,7 +40,7 @@ function Filters({
 	clearFilter,
 	queryKey,
 	setQueryKey,
-}) {
+}: OutstandingFilterProps) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
 
 	const [showSearchPopover, setShowSearchPopover] = useState(false);

@@ -29,7 +29,7 @@ function FilterModal({ filters, setFilters, clearFilter }: Props) {
 	};
 
 	return (
-		<div className={styles.modal_container}>
+		<div>
 			<Modal
 				size="md"
 				placement="center"

@@ -3,17 +3,24 @@ import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import { GenericObject } from '../../../../commons/Interfaces';
 import { companyType } from '../../../../constants/index';
 
 import styles from './styles.module.css';
+
+interface Props {
+	filters: GenericObject;
+	setFilters: (p: object) => void;
+	clearFilter: () => void;
+}
 
 function FilterpopOver({
 	filters,
 	setFilters,
 	clearFilter,
-}) {
+}: Props) {
 	const [show, setShow] = useState(false);
-	const onChange = (val:any | string, name:string) => {
+	const onChange = (val:string, name:string) => {
 		setFilters((p:object) => ({ ...p, [name]: val }));
 	};
 

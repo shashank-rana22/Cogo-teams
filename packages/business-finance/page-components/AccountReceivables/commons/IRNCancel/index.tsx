@@ -8,10 +8,10 @@ import CancellationModal from './CancellationModal';
 import styles from './styles.module.css';
 
 function IRNCancel({ itemData }) {
-	const { invoiceStatus, id } = itemData;
-
 	const [showCancellationModal, setShowCancellationModal] = useState(false);
 	const [show, setShow] = useState(false);
+
+	const { invoiceStatus, id } = itemData;
 
 	const isAfterADay =		itemData?.irnGeneratedAt !== null
 		? itemData.irnGeneratedAt + 86400000 >= Date.now()
@@ -33,7 +33,7 @@ function IRNCancel({ itemData }) {
 					Cancel IRN
 				</Button>
 			)}
-			{(invoiceStatus === 'IRN_GENERATED' || invoiceStatus === 'FAILED') && (
+			{(['IRN_GENERATED', 'FAILED'].includes(invoiceStatus)) && (
 				<Button
 					disabled={loading}
 					className="secondary sm"
@@ -47,8 +47,7 @@ function IRNCancel({ itemData }) {
 
 	if (
 		(isAfterADay)
-		|| invoiceStatus === 'IRN_GENERATED'
-		|| invoiceStatus === 'FAILED'
+		|| (['IRN_GENERATED', 'FAILED'].includes(invoiceStatus))
 	) {
 		return (
 			<div className={styles.div_container}>

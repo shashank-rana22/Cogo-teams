@@ -11,9 +11,11 @@ import useHistorySingleDataList from '../../../../hooks/useHistorySingleDataList
 import MoreDetailsModal from './MoreDetailModal';
 import styles from './styles.module.css';
 
-function SettlementTable({ data }) {
-	const { organizationId = '' } = data || {};
+interface Props {
+	organizationId: string,
+}
 
+function SettlementTable({ organizationId }: Props) {
 	const {
 		singleData,
 		getHistoryChild,

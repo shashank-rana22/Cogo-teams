@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import React from 'react';
 
-function HandleCall({ row }) {
+interface HandleCallProps {
+	row?: object
+}
+
+function HandleCall({ row }: HandleCallProps) {
 	const { profileData } = useSelector(({ profile }) => ({
 		profileData: profile,
 	}));

@@ -32,3 +32,10 @@
 	align-items: center;
 	width: 20%;
 }
+
+.completed_line {
+	width: 3px;
+	height: 12vh;
+	margin-top: 4px;
+	background-image : linear-gradient(#e0e0e0, #67c676);
+}

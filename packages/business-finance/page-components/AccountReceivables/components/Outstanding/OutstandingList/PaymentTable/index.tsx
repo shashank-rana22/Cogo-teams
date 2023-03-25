@@ -9,9 +9,11 @@ import useGetPaymentTable from '../../../../hooks/useGetPaymentTable';
 
 import styles from './styles.module.css';
 
-function PaymentTable({ data }) {
-	const { organizationId = '' } = data || {};
+interface Props {
+	organizationId: string,
+}
 
+function PaymentTable({ organizationId }: Props) {
 	const {
 		paymentList,
 		paymentLoading,

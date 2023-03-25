@@ -88,7 +88,6 @@ function Timeline({ data, loading }) {
 								marginTop       : '4px',
 								backgroundImage : 'linear-gradient(#e0e0e0, #67c676)',
 							}}
-							className={completeLine ? 'complete' : 'pending'}
 						/>
 					</div>
 				) : null}

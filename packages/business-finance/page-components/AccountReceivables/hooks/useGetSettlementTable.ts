@@ -3,7 +3,7 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useGetSettlementTable(organizationId) {
+function useGetSettlementTable(organizationId:string) {
 	const [settlementFilters, setSettlementFilters] = useState({
 		page        : 1,
 		pageLimit   : 10,

@@ -30,13 +30,12 @@
 	color: #393f70;
 	cursor: pointer;
 	background: #fff;
-	border-bottom: 1.5px solid #dfeaff;
-	transition: background 0.3s ease-out;
+	border-bottom: 1.5px solid #ee3425;
+}
 
-	/* &:hover {
-		background: rgb(208 230 255);
-		border-bottom: 1.5px solid #9ab7fe;
-	} */
+.styled_col:hover {
+	background: #fdebe9;
+	border-bottom: 1.5px solid #ee3425;
 }
 
 .tile_heading {
@@ -51,7 +50,7 @@
 	margin-left: 4px;
 	font-size: 14px;
 	font-weight: 600;
-	color: #2c3e50;
+	color: #f68b21;
 }
 
 .icon_div {

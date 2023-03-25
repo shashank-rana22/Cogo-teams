@@ -6,7 +6,28 @@ import SettlementKnockOffList from '../../../../../configs/SettlementKnockOffLis
 
 import styles from './styles.module.css';
 
-function MoreDetailsModal({ active, setActive, singleData, singleListLoading, globalFilters, setGlobalFilters }) {
+interface SingleObject {
+	list?: object[],
+	pageNo?: number,
+	totalRecords?: number,
+}
+
+interface GlobalFilter {
+	pageLimit?: number,
+}
+interface MoreDetail {
+	active?: boolean,
+	setActive?: (p: boolean) => void,
+	singleData?: SingleObject,
+	singleListLoading?: boolean,
+	globalFilters?: GlobalFilter,
+	setGlobalFilters?: (p:object)=> void,
+}
+
+function MoreDetailsModal({
+	active, setActive, singleData,
+	singleListLoading, globalFilters, setGlobalFilters,
+}: MoreDetail) {
 	const { list: singleList = [], pageNo, totalRecords } = singleData || {};
 
 	return (

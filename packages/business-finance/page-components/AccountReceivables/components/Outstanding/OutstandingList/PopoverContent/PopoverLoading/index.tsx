@@ -1,6 +1,9 @@
 import styles from './styles.module.css';
 
-function PopoverLoader({ containerHeight = '' }) {
+interface Props {
+	containerHeight: string,
+}
+function PopoverLoader({ containerHeight = '' }: Props) {
 	return (
 		<div className={styles.container} style={{ '--container-height': containerHeight } as React.CSSProperties}>
 			<div className={styles.loading_text}>Fetching... 🚀</div>

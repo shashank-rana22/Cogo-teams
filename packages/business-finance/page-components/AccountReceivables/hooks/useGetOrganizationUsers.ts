@@ -1,7 +1,11 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useGetOrganizationUsers = ({ selfOrganizationId }) => {
+interface Props {
+	selfOrganizationId?:string
+}
+
+const useGetOrganizationUsers = ({ selfOrganizationId }: Props) => {
 	const [param, setParam] = useState({ page: 1, page_limit: 10 });
 
 	const [

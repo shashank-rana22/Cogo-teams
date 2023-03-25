@@ -1,7 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-const useGetIrnGeneration = ({ id, refetch }) => {
+interface IrnGenerationProps {
+	id?: string,
+	refetch?: Function
+}
+
+const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
 	const [
 		{ data, loading },
 		generateIrnTrigger,

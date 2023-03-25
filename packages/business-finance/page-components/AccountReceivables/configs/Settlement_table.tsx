@@ -2,18 +2,21 @@ import { Button } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { format, getByKey } from '@cogoport/utils';
 
-const SettlementList = ({
+interface SettlementProps {
+	setActive?: (p: boolean)=> void,
+	getHistoryChild?: Function
+}
 
+const SettlementList = ({
 	setActive,
 	getHistoryChild,
-
-}) => [
+}: SettlementProps) => [
 	{
 		Header   : 'Reference Number',
 		id       : 'name',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'documentValue') as string}
+				{getByKey(row, 'documentValue')}
 			</div>
 		),
 
@@ -26,8 +29,8 @@ const SettlementList = ({
 			<div>
 				<div>
 					{getFormattedPrice(
-						getByKey(row, 'documentAmount') as number,
-						getByKey(row, 'currency') as string,
+						getByKey(row, 'documentAmount'),
+						getByKey(row, 'currency'),
 					)}
 
 				</div>
@@ -42,8 +45,8 @@ const SettlementList = ({
 			<div>
 				<div>
 					{getFormattedPrice(
-						getByKey(row, 'settledAmount') as number,
-						getByKey(row, 'currency') as string,
+						getByKey(row, 'settledAmount'),
+						getByKey(row, 'currency'),
 					)}
 
 				</div>
@@ -58,8 +61,8 @@ const SettlementList = ({
 			<div>
 				<div>
 					{getFormattedPrice(
-						getByKey(row, 'balanceAmount') as number,
-						getByKey(row, 'currency') as string,
+						getByKey(row, 'balanceAmount'),
+						getByKey(row, 'currency'),
 					)}
 
 				</div>
@@ -72,7 +75,7 @@ const SettlementList = ({
 		Header   : 'Transaction Date',
 		accessor : (row) => (
 			<div>
-				<div>{format(getByKey(row, 'transactionDate') as Date, 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'transactionDate'), 'dd MMM yy', {}, false)}</div>
 			</div>
 		),
 	},
@@ -80,7 +83,7 @@ const SettlementList = ({
 		Header   : 'Last Edited On',
 		accessor : (row) => (
 			<div>
-				<div>{format(getByKey(row, 'lastEditedDate') as Date, 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'lastEditedDate'), 'dd MMM yy', {}, false)}</div>
 			</div>
 		),
 	},

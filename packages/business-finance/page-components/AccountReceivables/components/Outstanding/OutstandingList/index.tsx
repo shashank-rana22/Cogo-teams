@@ -10,7 +10,35 @@ import StatsOutstanding from './StatsOutstanding';
 import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
 
-function OutstandingList({ item }) {
+interface CreditController {
+	id?: string,
+	name?: string,
+	email?: string
+}
+
+interface SalesAgent {
+	id?: string,
+	name?: string,
+	email?: string
+}
+interface ItemProps {
+	creditController?: CreditController,
+	salesAgent?: SalesAgent,
+	businessName?: string,
+	collectionPartyType?: string[],
+	serialId?: string,
+	countryCode?: string,
+	organizationSerialId?: string,
+	updatedAt?: string,
+	selfOrganizationName?: string,
+	organizationId?: string,
+	selfOrganizationId?: string
+}
+interface OutstandingListProps {
+	item?: ItemProps
+}
+
+function OutstandingList({ item }: OutstandingListProps) {
 	const [activeTab, setActiveTab] = useState('');
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
@@ -37,20 +65,22 @@ function OutstandingList({ item }) {
 		organizationSerialId,
 		updatedAt,
 		selfOrganizationName,
+		organizationId = '',
+		selfOrganizationId = '',
 	} = item || {};
 
 	const propsData = {
 		invoice_details: {
-			data: item,
+			organizationId,
 		},
 		payments_list: {
-			data: item,
+			organizationId,
 		},
 		settlement_list: {
-			data: item,
+			organizationId,
 		},
 		organization_users: {
-			data: item,
+			selfOrganizationId,
 		},
 	};
 

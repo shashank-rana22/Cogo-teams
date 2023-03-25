@@ -18,19 +18,10 @@
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 20px;
-	margin-right: 40px;
 }
 
 .clear {
 	margin-right: 10px;
-}
-
-.modal_container {
-	:global {
-		.ui_modal_dialog {
-			width: 600px !important;
-		}
-	}
 }
 
 .icon {

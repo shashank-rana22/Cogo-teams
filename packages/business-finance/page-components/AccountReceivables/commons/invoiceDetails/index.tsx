@@ -69,7 +69,6 @@ function InvoiceDetails({ item }) {
 									className={styles.icon_container}
 									onClick={() => {
 										setShowDetailsCard(false);
-										document.body.style.overflow = 'auto';
 									}}
 									role="presentation"
 								>

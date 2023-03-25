@@ -11,9 +11,11 @@ import { INVOICE_LIST_FILTERS } from '../../../../Utils/invoicelistFilter';
 
 import styles from './styles.module.css';
 
-function InvoiceTable({ data }) {
-	const { organizationId = '' } = data || {};
+interface Props {
+	organizationId: string,
+}
 
+function InvoiceTable({ organizationId }: Props) {
 	const {
 		listData,
 		clearInvoiceFilters,

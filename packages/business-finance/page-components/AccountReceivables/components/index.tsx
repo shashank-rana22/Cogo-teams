@@ -15,7 +15,7 @@ function AccountReceivables() {
 	const { id: partnerId } = user || {};
 
 	const handleChange = (val:string) => {
-		if (val === 'dashboard' || val === 'invoices' || val === 'defaulters' || val === 'manageBpr') {
+		if (['dashboard', 'invoices', 'defaulters', 'manageBpr'].includes(val)) {
 			window.location.href = `/${partnerId}/business-finance/account-receivables`;
 		}
 		setReceivables(val);

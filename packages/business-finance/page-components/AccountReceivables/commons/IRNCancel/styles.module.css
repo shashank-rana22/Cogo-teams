@@ -12,3 +12,36 @@
 .styled_button {
 	margin-bottom: 8px;
 }
+
+.cancel_modal {
+	display: flex;
+	flex-direction: column;
+	padding: 10px 5px; 
+}
+
+.sub_cancel_modal {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 12px;
+}
+
+.cancel_invoice {
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 12px; 
+}
+
+.styled_reason {
+	margin: 12px 0px 6px 0px;
+	font-Size: 16px;
+}
+
+.styled_remarks {
+	margin: 12px 0px 6px 0px;
+	font-Size: 16px; 
+}
+
+.confirm_button {
+	display: flex;
+	margin-Top: 12px;
+}

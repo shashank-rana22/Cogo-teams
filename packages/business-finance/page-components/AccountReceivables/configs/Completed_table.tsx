@@ -33,19 +33,19 @@ const invoiceStatus = {
 	FINANCE_REJECTED : '#f9ac98',
 };
 
-const completedColumn = (refetch) => [
+const completedColumn = (refetch: Function) => [
 	{
 		Header   : 'Name',
 		id       : 'name',
 		accessor : (row) => (
 
-			(getByKey(row, 'organizationName') as string).length > 10 ? (
+			(getByKey(row, 'organizationName')).length > 10 ? (
 				<Tooltip
 					placement="top"
-					content={getByKey(row, 'organizationName') as string}
+					content={getByKey(row, 'organizationName')}
 				>
 					<text>
-						{`${(getByKey(row, 'organizationName') as string).substring(
+						{`${(getByKey(row, 'organizationName')).substring(
 							0,
 							20,
 						)}...`}
@@ -55,7 +55,7 @@ const completedColumn = (refetch) => [
 
 				: (
 					<div>
-						{getByKey(row, 'organizationName') as string}
+						{getByKey(row, 'organizationName')}
 					</div>
 				)
 		),
@@ -67,15 +67,15 @@ const completedColumn = (refetch) => [
 			<div className={styles.fieldPair}>
 				<div
 					className={styles.link}
-					onClick={() => window.open(getByKey(row, 'invoiceNumber') as string, '_blank')}
+					onClick={() => window.open(getByKey(row, 'invoiceNumber'), '_blank')}
 					role="presentation"
 				>
 					{getDocumentNumber({ itemData: row })}
 
 				</div>
 				<div>
-					<Pill size="md" color={invoiceType[(getByKey(row, 'invoiceType') as string)]}>
-						{startCase(getByKey(row, 'invoiceType') as string)}
+					<Pill size="md" color={invoiceType[(getByKey(row, 'invoiceType'))]}>
+						{startCase(getByKey(row, 'invoiceType'))}
 					</Pill>
 				</div>
 			</div>
@@ -88,10 +88,10 @@ const completedColumn = (refetch) => [
 				<div
 					className={styles.sid}
 				>
-					{getByKey(row, 'sidNo') as string}
+					{getByKey(row, 'sidNo')}
 
 				</div>
-				<div className={styles.service}>{startCase(getByKey(row, 'serviceType') as string)}</div>
+				<div className={styles.service}>{startCase(getByKey(row, 'serviceType'))}</div>
 			</div>
 		),
 	},
@@ -99,7 +99,7 @@ const completedColumn = (refetch) => [
 		Header   : 'Entity Type',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'entityCode') as string}
+				{getByKey(row, 'entityCode')}
 			</div>
 		),
 	},
@@ -111,15 +111,15 @@ const completedColumn = (refetch) => [
 				<div className={styles.amount}>
 					<div>
 						{getPrice(
-							getByKey(row, 'invoiceAmount') as number,
-							getByKey(row, 'ledgerCurrency') as string,
+							getByKey(row, 'invoiceAmount'),
+							getByKey(row, 'ledgerCurrency'),
 						)}
 
 					</div>
 				</div>
 				<div>
-					<Pill size="md" color={status[(getByKey(row, 'status') as string)]}>
-						{startCase(getByKey(row, 'status') as string)}
+					<Pill size="md" color={status[(getByKey(row, 'status'))]}>
+						{startCase(getByKey(row, 'status'))}
 					</Pill>
 				</div>
 			</div>
@@ -131,8 +131,8 @@ const completedColumn = (refetch) => [
 			<div className={styles.amount}>
 				<div>
 					{getPrice(
-						getByKey(row, 'ledgerAmount') as number,
-						getByKey(row, 'ledgerCurrency') as string,
+						getByKey(row, 'ledgerAmount'),
+						getByKey(row, 'ledgerCurrency'),
 					)}
 
 				</div>
@@ -145,8 +145,8 @@ const completedColumn = (refetch) => [
 			<div className={styles.amount}>
 				<div>
 					{getPrice(
-						getByKey(row, 'balanceAmount') as number,
-						getByKey(row, 'ledgerCurrency') as string,
+						getByKey(row, 'balanceAmount'),
+						getByKey(row, 'ledgerCurrency'),
 					)}
 
 				</div>
@@ -157,7 +157,7 @@ const completedColumn = (refetch) => [
 		Header   : 'Invoice Date',
 		accessor : (row) => (
 			<div className={styles.amount}>
-				<div>{format(getByKey(row, 'invoiceDate') as Date, 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'invoiceDate'), 'dd MMM yy', {}, false)}</div>
 			</div>
 		),
 	},
@@ -165,7 +165,7 @@ const completedColumn = (refetch) => [
 		Header   : 'Due Date',
 		accessor : (row) => (
 			<div className={styles.amount}>
-				<div>{format(getByKey(row, 'dueDate') as Date, 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'dueDate'), 'dd MMM yy', {}, false)}</div>
 			</div>
 		),
 	},
@@ -174,7 +174,7 @@ const completedColumn = (refetch) => [
 		Header   : 'OverDue Days',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'overDueDays') as number}
+				{getByKey(row, 'overDueDays')}
 			</div>
 		),
 	},
@@ -184,8 +184,8 @@ const completedColumn = (refetch) => [
 		accessor : (row) => (
 
 			<div>
-				<Pill size="md" color={invoiceStatus[(getByKey(row, 'invoiceStatus') as string)]}>
-					{startCase(getByKey(row, 'invoiceStatus') as string)}
+				<Pill size="md" color={invoiceStatus[(getByKey(row, 'invoiceStatus'))]}>
+					{startCase(getByKey(row, 'invoiceStatus'))}
 				</Pill>
 
 			</div>

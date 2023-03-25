@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 function UtrNumber({ eventData }) {
-	const { knockOffData } = eventData || [];
+	const { knockOffData } = eventData || {};
 
 	if (knockOffData === undefined) {
 		return <div>UTR Does Not Exist</div>;

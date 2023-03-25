@@ -3,6 +3,8 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 
 import useGetIrnGeneration from '../../hooks/useGetIrnGeneration';
 
+import styles from './styles.module.css';
+
 type Itemdata = {
 	id?: string
 };
@@ -19,12 +21,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 
 	const content = () => (
 		<div
-			style={{
-				display       : 'flex',
-				flexDirection : 'column',
-				margin        : '8px',
-				width         : 'maxContent',
-			}}
+			className={styles.styled_button}
 		>
 			<Button
 				className="secondary sm"

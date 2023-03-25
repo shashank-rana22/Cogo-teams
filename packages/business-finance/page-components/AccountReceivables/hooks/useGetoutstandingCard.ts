@@ -32,7 +32,7 @@ interface InvoiceFilterProps {
 	orgId?: string
 }
 
-const useGetOutstandingCard = (organizationId) => {
+const useGetOutstandingCard = (organizationId: string) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [invoiceFilters, setinvoiceFilters] = useState<InvoiceFilterProps>({
