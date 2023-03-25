@@ -6,7 +6,6 @@ import { useState } from 'react';
 import Filters from '../../../../common/Filters';
 import PerformanceChart from '../../../../common/PerformanceChart';
 import useListManagers from '../../../../hooks/useListManagers';
-import FeedbackManagement from '../../../ManagerDashboard/FeedbackManagement';
 import NotifyModal from '../../NotifyModal';
 import TeamMembersList from '../../TeamMembersList';
 import UploadModalBody from '../../UploadModal';

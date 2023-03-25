@@ -1,7 +1,7 @@
 import { Tooltip, ButtonIcon, Pill, Button, cl } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { getYear, getMonth, format, startCase } from '@cogoport/utils';
+import { isEmpty, getYear, getMonth, format, startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import redirectPathSourceMapping from '../../constants/redirect-source-mapping';
@@ -32,7 +32,6 @@ const useGetColumns = ({
 	setItem = () => {},
 	setModal = () => {},
 	activeTab,
-	setReviewModal = () => {},
 }) => {
 	const router = useRouter();
 	const handleClick = (user_id) => {
@@ -215,30 +214,36 @@ const useGetColumns = ({
 	},
 	{
 		Header  	: <div className={styles.head}>Progress</div>,
-		accessor : () => (
-			<div className={styles.head_content}>
-				<Tooltip
-					content="Email sent to Employee"
-					placement="bottom"
-				>
-					<div className={styles.dot} />
-				</Tooltip>
+		accessor : (item) => {
+			const { tags } = item;
+			const len = 3 - (tags || []).length;
+			console.log('tags', tags);
 
-				<Tooltip
-					content="Email sent to Manager"
-					placement="bottom"
-				>
-					<div className={styles.dot} />
-				</Tooltip>
+			console.log('len', len);
 
-				<Tooltip
-					content="Final discussion held"
-					placement="bottom"
-				>
-					<div className={styles.dot} />
-				</Tooltip>
-			</div>
-		),
+			return (
+				<div className={styles.head_content}>
+					{tags?.map((val) => (
+						<Tooltip
+							content={val}
+							placement="bottom"
+						>
+							<div className={styles.green_dot} />
+						</Tooltip>
+					))}
+
+					{Array(len).fill('').map(() => (
+						// <Tooltip
+						// 	content="Email sent to Employee"
+						// 	placement="bottom"
+						// >
+						<div className={styles.dot} />
+						// </Tooltip>
+					))}
+
+				</div>
+			);
+		},
 		id  : 'progress',
 		key : 'progress',
 	},
@@ -322,11 +327,14 @@ const useGetColumns = ({
 	},
 	{
 		Header   : <div className={styles.head}>LOGS</div>,
-		accessor : () => (
+		accessor : (item) => (
 			<div className={styles.head_content}>
 				<Button
 					themeType="secondary"
-					onClick={() => setReviewModal(true)}
+					onClick={() => {
+						setItem(item);
+						setModal('review');
+					}}
 				>
 					Review
 				</Button>
