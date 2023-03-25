@@ -6,7 +6,7 @@ import StatsDisplay from '../../../../utils/StatsDisplay';
 import styles from './styles.module.css';
 
 function EndTimer({ data = {}, showTimeOverModal }) {
-	const { endTest } = useEndTest();
+	const { endTest } = useEndTest({});
 
 	return (
 		<Modal size="md" show={showTimeOverModal}>

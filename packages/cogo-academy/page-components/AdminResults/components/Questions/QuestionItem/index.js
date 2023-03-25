@@ -1,26 +1,26 @@
-import { Pill } from '@cogoport/components';
+import { Accordion, Pill } from '@cogoport/components';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import QuestionCard from '../../../../TestResult/QnA/QnAItem/QuestionCard';
+
 import styles from './styles.module.css';
 
-function QuestionItem({ question_item }) {
+function QuestionItem({ question_item, index = 0 }) {
 	const {
 		appeared_percent,
 		correct_percentage,
 		difficulty,
 		question,
+		answers,
 		question_type,
 		students_appeared,
 		topic,
+		case_study,
 	} = question_item || {};
 
-	const handleOpenQuestion = () => {
-
-	};
-
-	return (
-		<div role="presentation" onClick={handleOpenQuestion} className={styles.container}>
+	const renderTitle = () => (
+		<div role="presentation" className={styles.container}>
 			<div className={styles.small_section}>
 				<Pill size="md" color="#F3FAFA">{topic}</Pill>
 			</div>
@@ -51,10 +51,26 @@ function QuestionItem({ question_item }) {
 				%
 			</div>
 
-			<div className={styles.icon}>
+			{/* <div className={styles.icon}>
 				<IcMArrowRotateDown styles={{ width: 8, height: 6 }} />
-			</div>
+			</div> */}
 		</div>
+	);
+
+	return (
+		<div className={styles.outer_container}>
+			<Accordion type="text" title={renderTitle()} key={index} style={{ width: '100%' }}>
+				<QuestionCard
+					answers={answers}
+					question={question}
+					index={index}
+					question_type={question_type}
+					case_study={case_study}
+				/>
+
+			</Accordion>
+		</div>
+
 	);
 }
 

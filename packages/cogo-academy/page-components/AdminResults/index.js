@@ -57,9 +57,7 @@ function AdminResults() {
 
 				<p className={styles.go_back_text}>Dashboard</p>
 			</div>
-
-			<TestResults test_id={test_id} />
-
+			<div><TestResults test_id={test_id} /></div>
 			<InfoBanner test_status={status} test_id={test_id} refetchTest={refetch} />
 
 			<div className={styles.tabs_container}>

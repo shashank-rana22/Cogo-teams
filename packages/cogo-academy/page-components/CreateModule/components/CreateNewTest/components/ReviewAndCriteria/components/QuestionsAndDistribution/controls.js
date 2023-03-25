@@ -5,7 +5,7 @@ const getControls = (id, val) => [
 		placeholder : 'Questions',
 		rules       : {
 			required : { value: true, message: 'This is required' },
-			validate : (value) => (value > val ? 'Invalid' : true),
+			validate : (value) => ((value > val || value < 0) ? 'Invalid' : true),
 		},
 	},
 	{
@@ -14,7 +14,7 @@ const getControls = (id, val) => [
 		placeholder : 'Cases',
 		rules       : {
 			required : { value: true, message: 'This is required' },
-			validate : (value) => (value > val ? 'Invalid' : true),
+			validate : (value) => ((value > val || value < 0) ? 'Invalid' : true),
 		},
 	},
 

@@ -1,28 +1,38 @@
-import { Pill, Table } from '@cogoport/components';
+import { Pill, Table, Placeholder } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function QuestionsAndDistribution({ data, control, errors, loading, setValue }) {
+function QuestionsAndDistribution(props) {
+	const { data, control, errors, loading, setValue, watch } = props;
+
 	useEffect(() => {
-		data?.test_set_distribution_data?.forEach((test_set_distribution) => {
-			if (test_set_distribution.question_type === 'stand_alone') {
-				setValue(`${test_set_distribution.test_question_set_id
-				}q`, (!(test_set_distribution.distribution_count || test_set_distribution.distribution_count === 0))
+		data?.test_set_distribution_data?.forEach(({
+			question_type = '',
+			test_question_set_id = '',
+			distribution_count = 0,
+		}) => {
+			if (question_type === 'stand_alone') {
+				setValue(`${test_question_set_id}q`, (!(distribution_count || distribution_count === 0))
 					? ''
-					: test_set_distribution.distribution_count || '0');	// append with 'q' for stand alone questions
+					: distribution_count || '0');	// append with 'q' for stand alone questions
 			} else {
-				setValue(`${test_set_distribution.test_question_set_id
-				}c`, (!(test_set_distribution.distribution_count || test_set_distribution.distribution_count === 0))
+				setValue(`${test_question_set_id}c`, (!(distribution_count || distribution_count === 0))
 					? ''
-					: test_set_distribution.distribution_count || '0'); // append with 'c' for case study questions
+					: distribution_count || '0'); // append with 'c' for case study questions
 			}
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, setValue]);
+
+	const { set_data = '' } = data || {};
+
+	const standAloneQuestions = watch((set_data || []).map(({ id }) => (`${id}q`)));
+
+	const caseStudyQuestions = watch((set_data || []).map(({ id }) => (`${id}c`)));
 
 	const columns = [
 		{
@@ -96,13 +106,16 @@ function QuestionsAndDistribution({ data, control, errors, loading, setValue }) 
 				const controlItem2 = getControls(id, case_study_question_count)[1];
 
 				return (
+
 					<section className={styles.distribution}>
+
 						<span>No. of</span>
+
 						<div>
 							<InputController control={control} {...controlItem1} className={styles.input} />
 							{errors[`${id}q`] && <div className={styles.error_msg}>{errors[`${id}q`]?.message}</div>}
-
 						</div>
+
 						<div>
 							<InputController control={control} {...controlItem2} className={styles.input} />
 							{errors[`${id}c`] && <div className={styles.error_msg}>{errors[`${id}c`]?.message}</div>}
@@ -113,13 +126,41 @@ function QuestionsAndDistribution({ data, control, errors, loading, setValue }) 
 			},
 		},
 	];
+
+	const questionsCount = (standAloneQuestions || []).reduce(
+		(total, currValue) => total + (Number(currValue) || 0),
+		0,
+	);
+
+	const casesCount = (caseStudyQuestions || []).reduce(
+		(total, currValue) => total + (Number(currValue) || 0),
+		0,
+	);
+
 	return (
-		<Table
-			className={styles.table_container}
-			data={data?.set_data || []}
-			loading={loading}
-			columns={columns}
-		/>
+		<>
+			<Table
+				className={styles.table_container}
+				data={data?.set_data || []}
+				loading={loading}
+				columns={columns}
+			/>
+			{(isEmpty(data) || loading) ? <Placeholder height="30px" width="100%" margin="0px 0px 20px 0px" /> : (
+				<div className={styles.total_questions}>
+					<h4 className={styles.total_heading}>
+						Total Questions:
+						{' '}
+						{questionsCount}
+					</h4>
+					<h4 className={styles.total_heading}>
+						Total Cases:
+						{' '}
+						{casesCount}
+					</h4>
+				</div>
+			)}
+
+		</>
 	);
 }
 

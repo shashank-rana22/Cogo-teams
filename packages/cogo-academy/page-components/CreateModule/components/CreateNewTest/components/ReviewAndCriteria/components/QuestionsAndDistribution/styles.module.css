@@ -11,8 +11,8 @@
 
 .table_container {
 	padding: unset !important;
-	margin-top: 25px;
-	margin-bottom: 25px;
+	margin-top: 24px;
+	margin-bottom: 2px;
 
 	:global {
 		.ui_table_head_row {
@@ -66,4 +66,16 @@
 	font-style: normal;
 	font-weight: 400;
 	color: #4f4f4f;
+}
+
+.total_questions {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 10px;
+}
+
+.total_heading {
+	margin-right: 18px;
+	font-weight: 600;
+	text-align: right;
 }

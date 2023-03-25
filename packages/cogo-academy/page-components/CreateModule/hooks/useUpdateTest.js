@@ -21,7 +21,7 @@ function useUpdateTest() {
 					name,
 					validity_start : test_validity.startDate,
 					validity_end   : test_validity.endDate,
-					guidelines     : guidelines.map((obj) => obj.instruction),
+					guidelines     : guidelines?.map((obj) => obj.instruction),
 				};
 
 				const set_wise_distribution = Object.entries(values)

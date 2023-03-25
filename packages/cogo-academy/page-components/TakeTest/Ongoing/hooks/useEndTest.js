@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useEndTest = ({ setActiveState }) => {
+const useEndTest = ({ setActiveState = () => {} }) => {
 	const {
 		general: { query: { test_id } },
 		profile: { user: { id: user_id } },

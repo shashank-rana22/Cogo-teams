@@ -1,19 +1,32 @@
-.container {
-	width: 50%;
+.svg {
+  margin-right: 16px;
+  font-size: 24px;
 }
-
-.heading {
-	font-size: 18px;
-	font-weight: 600;
-	color: #221f20;
+.general {
+  display: flex;
+  margin-bottom: 38px;
 }
-
-.validity_label {
-	font-size: 14px;
-	color: #828282;
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin-top: 24px;
 }
-
-.validity {
-	font-size: 14px;
-	color: #221f20;
+.vertical_line {
+  height: 120px;
+  width: 0px;
+  border: 1px solid #e0e0e0;
+}
+.text_top {
+  font-weight: 400;
+  font-size: 14px;
+  color: #828282;
+}
+.text_bottom {
+  font-weight: 400;
+  font-size: 14px;
+  color: #4f4f4f;
+}
+.general_bottom {
+  display: flex;
 }
