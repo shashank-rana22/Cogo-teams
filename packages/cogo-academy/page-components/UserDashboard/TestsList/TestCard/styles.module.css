@@ -5,7 +5,6 @@
 	justify-content: space-between;
 	padding: 16px;
 	margin-bottom: 32px;
-	cursor: pointer;
 	background: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
@@ -19,6 +18,7 @@
 	font-size: 14px;
 	font-weight: 600;
 	color: #221f20;
+	margin-bottom: 2px;
 }
 
 .topics {
@@ -58,4 +58,18 @@
 .test_date {
 	margin-left: 4px;
 	color: #c26d1a;
+}
+
+.check_results {
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	text-decoration-line: underline;
+	margin-top: 4px;
+	color: #221F20;
+	cursor: pointer;
+}
+
+.icon {
+	display: flex;
 }
