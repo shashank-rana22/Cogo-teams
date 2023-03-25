@@ -15,10 +15,10 @@
 }
 
 .heading {
+	margin-bottom: 2px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #221f20;
-	margin-bottom: 2px;
 }
 
 .topics {
@@ -61,12 +61,12 @@
 }
 
 .check_results {
-	font-size: 12px;
 	display: flex;
 	align-items: center;
-	text-decoration-line: underline;
 	margin-top: 4px;
-	color: #221F20;
+	font-size: 12px;
+	color: #221f20;
+	text-decoration-line: underline;
 	cursor: pointer;
 }
 
