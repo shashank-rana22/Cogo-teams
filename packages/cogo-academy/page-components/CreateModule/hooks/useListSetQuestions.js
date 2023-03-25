@@ -34,7 +34,7 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 			}
 
 			if (!isEmpty(questionToShow)) {
-				setEditDetails((res?.data?.test_questions || []).find((item) => item.id === questionToShow) || {});
+				setEditDetails((res?.data?.list || []).find((item) => item.id === questionToShow) || {});
 				setAllKeysSaved(false);
 			}
 		} catch (err) {

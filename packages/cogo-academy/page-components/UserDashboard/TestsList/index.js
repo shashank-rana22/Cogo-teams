@@ -52,15 +52,17 @@ function TestsList() {
 				<TestCard key={test_card} test_card={test_card} />
 			))}
 
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={4}
-					onPageChange={setPage}
-				/>
-			</div>
+			{total_count > 4 ? (
+				<div className={styles.pagination_container}>
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={4}
+						onPageChange={setPage}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }

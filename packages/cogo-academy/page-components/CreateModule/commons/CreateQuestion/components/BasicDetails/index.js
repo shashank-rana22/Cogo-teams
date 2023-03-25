@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { TextAreaController } from '@cogoport/forms';
+import { ChipsController, TextAreaController } from '@cogoport/forms';
 import { IcMCrossInCircle, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -10,7 +10,7 @@ import useUpdateCaseStudy from '../../../../hooks/useUpdateCaseStudy';
 import getControls from './controls';
 import styles from './styles.module.css';
 
-const constants = ['topic', 'audience_ids', 'question_type'];
+const constants = ['topic', 'audience_ids', 'question_type', 'difficulty_level'];
 
 const getQuestionType = (question_type) => {
 	if (question_type === 'case_study') {
@@ -79,7 +79,7 @@ function FormComponent({
 				{controls.map((controlItem) => {
 					const { type, label, name, options = [] } = controlItem || {};
 
-					if (name === 'question_text') {
+					if (['question_text', 'difficulty_level'].includes(name)) {
 						return null;
 					}
 					let newOptions = options;
@@ -110,13 +110,27 @@ function FormComponent({
 			</div>
 
 			{questionTypeWatch === 'case_study' ? (
-				<div className={!isNewQuestion ? styles.bottom : null}>
-					<TextAreaController
-						control={control}
-						{...controls[3]}
-					/>
-					{errors?.question_text ? <div className={styles.error_msg}>This is required</div> : null}
-				</div>
+				<>
+					<div className={styles.difficulty_level}>
+						<div className={styles.difficulty_level_label}>Set Difficulty level</div>
+
+						<div className={styles.control}>
+							<ChipsController
+								control={control}
+								{...controls[3]}
+							/>
+							{errors?.[controls[3].name] && <div className={styles.error_msg}>This is required</div>}
+						</div>
+					</div>
+
+					<div className={!isNewQuestion ? styles.bottom : null}>
+						<TextAreaController
+							control={control}
+							{...controls[4]}
+						/>
+						{errors?.question_text ? <div className={styles.error_msg}>This is required</div> : null}
+					</div>
+				</>
 			) : null}
 
 			{!isNewQuestion && editDetails?.question_type === 'case_study' ? (
@@ -169,7 +183,7 @@ function BasicDetails({
 
 	const handleUpdateCaseStudy = () => {
 		const formValues = getValues();
-		const { audience_ids, topic, question_text, question_type } = formValues || {};
+		const { audience_ids, topic, question_text, question_type, difficulty_level } = formValues || {};
 
 		updateCaseStudy({
 			values: {
@@ -177,13 +191,15 @@ function BasicDetails({
 				topic,
 				question_text,
 				question_type,
+				difficulty_level,
 			},
-			id: editDetails?.id,
+			id     : editDetails?.id,
 			setEditDetails,
 			setAllKeysSaved,
 			reset,
 			getTestQuestionTest,
 			questionSetId,
+			action : 'update',
 		});
 	};
 

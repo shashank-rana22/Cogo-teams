@@ -5,7 +5,6 @@
 	justify-content: space-between;
 	padding: 16px;
 	margin-bottom: 32px;
-	cursor: pointer;
 	background: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
@@ -16,6 +15,7 @@
 }
 
 .heading {
+	margin-bottom: 2px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #221f20;
@@ -58,4 +58,22 @@
 .test_date {
 	margin-left: 4px;
 	color: #c26d1a;
+}
+
+.check_results {
+	display: flex;
+	align-items: center;
+	margin-top: 4px;
+	font-size: 12px;
+	color: #221f20;
+	text-decoration-line: underline;
+	cursor: pointer;
+}
+
+.icon {
+	display: flex;
+}
+
+.arrow {
+	cursor: pointer;
 }

@@ -16,7 +16,7 @@ function QnA() {
 		},
 	}, { manual: false });
 
-	const { stand_alone_questions:standAlone, case_study_questions:caseStudy } = data || {};
+	const { stand_alone_questions = [], case_study_questions = [] } = data || {};
 
 	if (loading) {
 		return (
@@ -29,13 +29,13 @@ function QnA() {
 			<div className={styles.heading}>
 				Questions wise analysis
 			</div>
+
 			<div className={styles.question_cards_container}>
-				{(standAlone || []).map((item, index) => (
+				{([...stand_alone_questions, ...case_study_questions] || []).map((item, index) => (
 					<div className={styles.question_card}>
 						<QnAItem data={item} index={index} />
 					</div>
 				))}
-
 			</div>
 		</div>
 	);

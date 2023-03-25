@@ -41,7 +41,9 @@ function TestResult() {
 			</div>
 
 			<TestResultMessage stats_data={summaryData} />
+
 			<Summary summaryData={summaryData} loading={loading} />
+
 			<QnA />
 		</div>
 	);
