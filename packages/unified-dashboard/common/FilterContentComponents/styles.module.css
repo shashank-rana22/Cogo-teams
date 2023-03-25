@@ -25,37 +25,6 @@
 	background: #000;
 }
 
-/* Filter Content */
-
-.filter_container {
-	.custom_select_input_select_value {
-		font-size: 12px;
-		line-height: 20px;
-		color: #000;
-	}
-
-	.custom_select_input_subcontainer {
-		height: 30px;
-		cursor: text;
-		border: solid 1px #e0e0e0;
-		box-shadow: none;
-	}
-
-	.custom_select_input_chip {
-		padding: 0 6px;
-	}
-
-	.custom_select_input_chip_button {
-		width: 20px;
-		height: 20px;
-	}
-
-	.custom_select_input_chip_icon {
-		width: 20px;
-		height: 20px;
-	}
-}
-
 .filter_heading {
 	padding: 16px 0 12px 24px;
 	margin: 0;
@@ -103,20 +72,6 @@
 .line {
 	margin-top: 12px;
 	border-bottom: 1px solid #e0e0e0;
-}
-
-.filter_box {
-	.tippy_box {
-		border-radius: 10px;
-	}
-
-	&.scroll .tippy_content {
-		overflow-y: auto;
-	}
-
-	&.date .tippy_content {
-		width: 500px;
-	}
 }
 
 .radio_container {
