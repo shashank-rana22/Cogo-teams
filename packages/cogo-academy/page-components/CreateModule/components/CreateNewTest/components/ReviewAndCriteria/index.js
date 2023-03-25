@@ -1,34 +1,34 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { Pill, Button, Modal, ButtonIcon, Placeholder } from '@cogoport/components';
-import { useForm, InputController, useFieldArray } from '@cogoport/forms';
-import { IcMArrowBack, IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
+import { Pill, Button, Placeholder } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
+import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase, format, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useUpdateTest from '../../../../hooks/useUpdateTest';
 
 import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
+import TestDetailsModal from './components/TestDetailsModal';
 import styles from './styles.module.css';
 
 function ReviewAndCriteria(props) {
 	const { loading, data, test_id } = props;
 
-	const { control, formState: { errors }, handleSubmit, setValue, getValues } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue, getValues, watch } = useForm();
 
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name: 'guidelines',
-	});
+	// const { fields, append, remove } = useFieldArray({
+	// 	control,
+	// 	name  : 'guidelines',
+	// 	rules : {
+	// 		required: true,
+	// 	},
+	// });
 
 	const { name = '', set_data = [], cogo_entity_object = {} } = data || {};
 
 	const { updateTest } = useUpdateTest();
-
-	const [test_duration = '', maximum_attempts = '',
-		test_validity = {}, cut_off_percentage = '']	= getValues(['test_duration',
-		'maximum_attempts', 'test_validity', 'cut_off_percentage']);
 
 	const router = useRouter();
 
@@ -85,101 +85,48 @@ function ReviewAndCriteria(props) {
 				errors={errors}
 				loading={loading}
 				setValue={setValue}
+				watch={watch}
 			/>
 
-			<DurationAndValidity setValue={setValue} data={data} control={control} errors={errors} loading={loading} />
+			<DurationAndValidity
+				setValue={setValue}
+				data={data}
+				control={control}
+				errors={errors}
+				loading={loading}
+			/>
 
-			<Modal size="sm" show={showModal} onClose={() => setShowModal(false)} placement="center">
-				<Modal.Header className={styles.modal_title} title="Publish Test" />
-				<Modal.Body className={styles.modal_body}>
-					<h4 className={styles.test_name}>{name}</h4>
+			<TestDetailsModal
+				getValues={getValues}
+				handleSubmit={handleSubmit}
+				{...props}
+				showModal={showModal}
+				setShowModal={setShowModal}
+			/>
 
-					{set_data?.map((question_set) => (
-						<Pill
-							key={question_set.id}
-							size="sm"
-							color="blue"
-						>
-							{startCase(question_set.topic)}
-						</Pill>
-					))}
-
-					<div className={styles.test_details}>
-						<div>
-							<div>
-								<h5>Duration</h5>
-								<p>
-									{test_duration}
-									{' '}
-									mins
-								</p>
-							</div>
-							<div>
-								<h5>Attempts</h5>
-								<p>{maximum_attempts}</p>
-							</div>
-						</div>
-						<div>
-							<div>
-								<h5>Validity</h5>
-								<p>
-									{format(test_validity?.startDate, 'dd/MM/yy')}
-									{' '}
-									-
-									{' '}
-									{format(test_validity?.endDate, 'dd/MM/yy')}
-
-								</p>
-							</div>
-							<div>
-								<h5>Pass %</h5>
-								<p>
-									{cut_off_percentage}
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<h5>Add Instructions</h5>
-
-					{fields.map((field, index) => (
-						<div className={styles.instruction} key={field.id}>
-							<InputController
-								control={control}
-								key={field.id}
-								name={`guidelines.${index}.instruction`}
-							/>
-							<ButtonIcon
-								size="xl"
-								icon={<IcMDelete />}
-								themeType="primary"
-								onClick={() => remove(index)}
-							/>
-						</div>
-					))}
-
-					<ButtonIcon
-						size="xl"
-						icon={<IcMPlusInCircle />}
-						themeType="primary"
-						onClick={() => append({ instruction: '' })}
+			{/* <h3>Add Instructions</h3>
+			{ fields.map((field, index) => (
+				<div className={styles.instruction} key={field.id}>
+					<InputController
+						control={control}
+						key={field.id}
+						name={`guidelines.${index}.instruction`}
+						rules={{ required: 'Required' }}
 					/>
-				</Modal.Body>
-				<Modal.Footer align="right">
-					<Button
-						loading={loading}
-						size="md"
+					<ButtonIcon
+						class={styles.btn_icons}
+						style={{ color: 'red' }}
+						size="xl"
+						icon={<IcMDelete />}
 						themeType="primary"
-						onClick={
-						handleSubmit((values) => {
-							updateTest({ test_id, values, status: 'active' });
-						})
-					}
-					>
-						Publish Test
-					</Button>
-				</Modal.Footer>
-			</Modal>
+						onClick={() => remove(index)}
+					/>
+				</div>
+			))}
+			<div role="presentation" className={styles.add_icon} onClick={() => append({ instruction: '' })}>
+				<IcMPlusInCircle height={30} width={30} />
+
+			</div> */}
 
 			<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 				<Button
@@ -209,6 +156,7 @@ function ReviewAndCriteria(props) {
 					Publish Test
 				</Button>
 			</div>
+
 		</div>
 	);
 }
