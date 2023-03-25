@@ -1,6 +1,6 @@
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase, format } from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -25,7 +25,14 @@ const CURRENT_STATUS_MAPPING = {
 
 function TestCard({ test_card }) {
 	const {
-		name, topics, current_status, validity_start, validity_end, attempts_count, maximum_attempts, id, status,
+		name, topics,
+		current_status,
+		validity_start,
+		validity_end,
+		attempts_count,
+		maximum_attempts,
+		id,
+		status,
 	} = test_card;
 
 	const { push } = useRouter();
@@ -68,16 +75,21 @@ function TestCard({ test_card }) {
 						<span className={styles.icon}><IcMArrowRight /></span>
 					</span>
 				) : (
-					<div className={styles.availability}>
-						Available:
-						<span className={styles.test_date}>
-							{format(validity_start, 'dd MMM\' yy')}
-							{' '}
-							-
-							{' '}
-							{format(validity_end, 'dd MMM\' yy')}
-						</span>
-					</div>
+					<>
+						<div className={styles.availability}>
+							Available:
+							<span className={styles.test_date}>
+								{format(validity_start, 'dd MMM\' yy')}
+								{' '}
+								-
+								{' '}
+								{format(validity_end, 'dd MMM\' yy')}
+							</span>
+						</div>
+						<div>
+							{}
+						</div>
+					</>
 				)}
 			</div>
 

@@ -73,3 +73,7 @@
 .icon {
 	display: flex;
 }
+
+.arrow {
+	cursor: pointer;
+}
