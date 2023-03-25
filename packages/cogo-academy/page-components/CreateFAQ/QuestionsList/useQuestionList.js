@@ -1,10 +1,12 @@
-import { Pill, Button } from '@cogoport/components';
+import { Pill, Button, Popover } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+
+import PopOverContent from '../../../commons/PopoverContent';
 
 import styles from './styles.module.css';
 
@@ -21,6 +23,9 @@ const addedQuestionsColumns = ({
 	onClickEditButton,
 	deactivateQuestion,
 	onClickViewButton = () => {},
+
+	deleteitem,
+	setDeleteitem = () => {},
 }) => [
 	{
 		Header   : 'QUESTIONS',
@@ -70,6 +75,7 @@ const addedQuestionsColumns = ({
 				{!['inactive', 'draft'].includes(activeList)
 					? (
 						<Button
+							type="button"
 							themeType="primary"
 							size="sm"
 							style={{ marginRight: 8 }}
@@ -80,6 +86,7 @@ const addedQuestionsColumns = ({
 					)
 					: null}
 				<Button
+					type="button"
 					themeType="secondary"
 					size="sm"
 					style={{ marginRight: 8 }}
@@ -88,19 +95,32 @@ const addedQuestionsColumns = ({
 					EDIT
 				</Button>
 				{activeList !== 'inactive' ? (
-					<IcMDelete
-						height={20}
-						width={20}
-						style={{ cursor: 'pointer' }}
-						onClick={() => deactivateQuestion(items?.id)}
-					/>
+					<Popover
+						content={(
+							<PopOverContent
+								source="question"
+								onCLickYesButton={() => deactivateQuestion(deleteitem.id)}
+							/>
+						)}
+					>
+						<IcMDelete
+							height={20}
+							width={20}
+							style={{ cursor: 'pointer' }}
+							onClick={() => { setDeleteitem(items); }}
+						/>
+					</Popover>
+
 				) : null}
+
 			</div>
 		),
 	},
 ];
 
-const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) => [
+const requestedQuestionsColumns = ({
+	deactivateQuestion, onClickEditButton,
+}) => [
 	{
 		Header   : 'QUESTIONS',
 		accessor : (items) => (
@@ -133,6 +153,7 @@ const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) =>
 		accessor : (items) => (
 			<div className={styles.button_container}>
 				<Button
+					type="button"
 					themeType="primary"
 					size="sm"
 					style={{ marginRight: 8 }}
@@ -140,12 +161,21 @@ const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) =>
 				>
 					ADD ANSWER
 				</Button>
-				<IcMDelete
-					height={20}
-					width={20}
-					style={{ marginRight: 8 }}
-					onClick={() => deactivateQuestion(items?.id)}
-				/>
+				<Popover
+					content={(
+						<PopOverContent
+							source="question"
+							onCLickYesButton={() => deactivateQuestion(items.id)}
+						/>
+					)}
+				>
+					<IcMDelete
+						height={20}
+						width={20}
+						style={{ cursor: 'pointer' }}
+
+					/>
+				</Popover>
 
 			</div>
 		),
@@ -153,12 +183,19 @@ const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) =>
 ];
 
 const useQuestionList = () => {
-	const { query, debounceQuery } = useDebounceQuery();
+	const router = useRouter();
+
+	const [sortType, setSortType] = useState(true);
 	const [searchInput, setSearchInput] = useState('');
 	const [activeList, setActiveList] = useState('published');
+	const [deleteitem, setDeleteitem] = useState('');
 	const [filters, setFilters] = useState({});
 	const [page, setPage] = useState(1);
-	const router = useRouter();
+
+	const { query, debounceQuery } = useDebounceQuery();
+
+	const SORT_TYPE = (sortType) ? 'desc' : 'asc';
+	const SORT_MODE = (activeList === 'requested') ? 'created_at' : 'updated_at';
 
 	const [{ data: questionList, loading }, trigger] = useRequest({
 		method : 'get',
@@ -172,10 +209,9 @@ const useQuestionList = () => {
 
 	useEffect(() => {
 		debounceQuery(searchInput);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchInput]);
+	}, [debounceQuery, searchInput]);
 
-	const getQuestionsList = async () => {
+	const getQuestionsList = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -183,25 +219,30 @@ const useQuestionList = () => {
 						...filters,
 						...FILTER_MAPPING[activeList],
 						q: query || undefined,
-
 					},
 					page,
-					is_admin_view            : true,
-					faq_tags_data_required   : true,
-					faq_topics_data_required : true,
-					author_data_required     : true,
+					is_admin_view          : true,
+					sort_by                : SORT_MODE,
+					sort_type              : SORT_TYPE,
+					faq_tags_data_required : ['published', 'draft']
+						.includes(FILTER_MAPPING[activeList].state),
+
+					faq_topics_data_required: ['published', 'draft']
+						.includes(FILTER_MAPPING[activeList].state),
+
+					author_data_required              : FILTER_MAPPING[activeList].state === 'requested',
+					requested_question_count_required : true,
 
 				},
 			});
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [SORT_MODE, SORT_TYPE, activeList, filters, page, query, trigger]);
 
 	useEffect(() => {
 		getQuestionsList();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, filters, query, activeList]);
+	}, [page, filters, query, activeList, SORT_TYPE, getQuestionsList]);
 
 	const deactivateQuestion = async (id) => {
 		try {
@@ -210,12 +251,10 @@ const useQuestionList = () => {
 					data: {
 						id,
 						status: 'inactive',
-
 					},
 
 				},
 			);
-
 			getQuestionsList();
 		} catch {
 			console.log('Error', error);
@@ -242,10 +281,12 @@ const useQuestionList = () => {
 			onClickEditButton,
 			deactivateQuestion,
 			onClickViewButton,
+			deleteitem,
+			setDeleteitem,
 		})
 		: requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
 
-	const { list: data = [], ...paginationData } = questionList || {};
+	const { list: data = [], requested_question_count = 0, ...paginationData } = questionList || {};
 
 	return {
 		page,
@@ -259,8 +300,11 @@ const useQuestionList = () => {
 		setSearchInput,
 		activeList,
 		setActiveList,
-		questionListLoading: loading,
+		questionListLoading    : loading,
 		onClickViewButton,
+		sortType,
+		setSortType,
+		requestedQuestionCount : requested_question_count,
 	};
 };
 

@@ -34,7 +34,7 @@ const useUpdateTag = ({
 				onClose();
 			} catch (err) {
 				setLoading(false);
-				Toast.error(err.message);
+				Toast.error(err?.response?.data?.message);
 			}
 			setLoading(false);
 		}
