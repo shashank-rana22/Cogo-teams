@@ -8511,7 +8511,7 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api          : 'get_communication_whatsapp_template_status',
+			api          : 'update_communication_whatsapp_template_status',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
