@@ -27,18 +27,18 @@ const VENDOR_CONFIG = {
 	fields       : [
 		{
 			label : 'Vendor ID',
-			key   : 'referenceId',
-			span  : 1.2,
+			key   : 'vendorSerialId',
+			span  : 1,
 		},
 		{
 			label : 'Kyc Status',
-			span  : 0.7,
+			span  : 1,
 			func  : 'renderKYCStatus',
 		},
 		{
 			label : 'Name',
-			key   : 'organizationName',
-			span  : 1.2,
+			span  : 1,
+			func  : 'renderName',
 		},
 		{
 			label : 'PAN',
@@ -48,35 +48,33 @@ const VENDOR_CONFIG = {
 		},
 		{
 			label : 'Category',
-			key   : 'catagory',
+			key   : 'category',
 			span  : 1,
 
 		},
 		{
 			label   : 'Payments',
 			span    : 1,
-			sorting : { name: 'payments' },
 			func    : 'renderPayments',
-
+			sorting : { name: 'paymentSortType' },
 		},
 		{
 			label   : 'Open Invoices',
 			key     : 'openInvoices',
-			span    : 1.5,
-			sorting : { name: 'invoicesCount' },
+			span    : 1,
+			sorting : { name: 'openInvoiceSortType' },
 			func    : 'renderInvoice',
 		},
 		{
 			label   : 'Created At',
-			key     : 'createdAt',
-			span    : 1.25,
-			func    : 'rendeFormate',
-			sorting : { name: 'modifiedDateSortType' },
+			span    : 1,
+			func    : 'rendeDate',
+			sorting : { name: 'createdAtSortType' },
 		},
 		{
 			label : '',
 			key   : 'viewMoreButton',
-			span  : 1.25,
+			span  : 1,
 			func  : 'renderViewMoreButton',
 		},
 	],

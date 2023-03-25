@@ -118,7 +118,6 @@ function ExpenseComponent() {
 	const renderHeaders = () => (
 		<div className={styles.header_container}>
 			<div className={styles.left_container}>
-
 				{recurringState === 'nonRecurring' &&	(
 					<Filter
 						controls={nonRecurringFilters}
@@ -140,7 +139,7 @@ function ExpenseComponent() {
 					placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID"
 					suffix={<IcMSearchlight />}
 					value={expenseFilters.searchValue}
-					onChange={(e) => handleChange(e)}
+					onChange={(e:any) => handleChange(e)}
 					className={styles.search}
 				/>
 				<Button
@@ -414,7 +413,7 @@ function ExpenseComponent() {
 					&& (
 						<div className={styles.no_data}>
 							<img
-								style={{ width: '26%' }}
+								style={{ width: '26%', margin: '10%' }}
 								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg"
 								alt="no data"
 							/>

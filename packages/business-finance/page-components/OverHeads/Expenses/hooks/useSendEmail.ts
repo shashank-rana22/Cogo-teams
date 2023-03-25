@@ -15,7 +15,7 @@ const useSendEmail = () => {
 	);
 
 	const sendMail = async ({ rowData, recurringState }) => {
-		const { sellerDetails, category, billDate:expenseDate } = rowData || {};
+		const { sellerDetails, category, billDate:expenseDate, approvedBy } = rowData || {};
 		const { organizationName:vendorName } = sellerDetails || {};
 
 		let payableAmount:number | string;
@@ -28,7 +28,7 @@ const useSendEmail = () => {
 		try {
 			await trigger({
 				data: {
-					stakeholderId : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
+					stakeholderId : approvedBy,
 					userId        : profile?.user?.id,
 					approveLink   : '/business-finance/overheads/expenses/response',
 					rejectLink    : '/business-finance/overheads/expenses/response',

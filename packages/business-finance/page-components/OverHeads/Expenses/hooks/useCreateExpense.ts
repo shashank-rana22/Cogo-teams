@@ -4,6 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 import { formatDate } from '../../../commons/utils/formatDate';
+import getPayload from '../utils/getPayload';
 
 interface AddressInterface {
 	pincode?:number | string,
@@ -131,6 +132,10 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		},
 		{ manual: true },
 	);
+
+	// const payload = getPayload({
+
+	// });
 
 	const payload = {
 		// expenseConfigurationId : 'example', only in case of recurring

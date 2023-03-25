@@ -3,6 +3,8 @@ import { Select, Button, Input, Tooltip } from '@cogoport/components';
 import { IcMSearchlight, IcMFtick, IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import showOverflowingNumber from '../../commons/showOverflowingNumber';
+import { formatDate } from '../../commons/utils/formatDate';
 import List from '../commons/List';
 
 import CreateVendorModal from './CreateVendorModal';
@@ -12,14 +14,16 @@ import VENDOR_CONFIG from './utils/config';
 import Controls from './utils/controls';
 
 interface ItemProps {
-	createdDate:String,
-	venderSerialId: Number,
-	kycStatus: String,
-	name: String,
-	pan: String,
-	category: String,
-	payments: Number,
-	openInvoices: Number,
+	createdDate?:String,
+	venderSerialId?: Number,
+	kycStatus?: String,
+	name?: String,
+	pan?: String,
+	category?: String,
+	payments?: Number,
+	openInvoices?: Number,
+	organizationName?:string,
+	createdAt?:Date,
 }
 
 function VenderComponent() {
@@ -31,12 +35,16 @@ function VenderComponent() {
 		pageLimit   : 10,
 	});
 
-	const [sort, setSort] = useState({});
+	const [sort, setSort] = useState({
+		paymentSortType     : null,
+		openInvoiceSortType : null,
+		createdAtSortType   : null,
+	});
 	const [showModal, setShowModal] = useState(false);
 	const [dropdownId, setDropdownId] = useState(null);
-	const { listData } = useListVendors(filters);
+	const { listData, loading } = useListVendors({ filters, sort });
 
-	const handleChange = (e, value) => {
+	const handleChange = (e:any, value:string | number) => {
 		setFilters((previousState) => ({
 			...previousState,
 			...{ [value]: e },
@@ -69,7 +77,7 @@ function VenderComponent() {
 					placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID"
 					suffix={<IcMSearchlight />}
 					value={filters.searchValue}
-					onChange={(e) => handleChange(e, 'searchValue')}
+					onChange={(e:any) => handleChange(e, 'searchValue')}
 					className={styles.search}
 				/>
 				<Button
@@ -89,8 +97,8 @@ function VenderComponent() {
 
 		const { kycStatus = '' } = itemData;
 		return (
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-				{kycStatus === 'verified' && 	(
+			<div style={{ display: 'flex', alignItems: 'center', width: '120px' }}>
+				{kycStatus === 'VERIFIED' && 	(
 					<div className={styles.verified}>
 						<div>
 							<IcMFtick color="#67C676" />
@@ -99,7 +107,7 @@ function VenderComponent() {
 					</div>
 				)}
 				{
-                kycStatus === 'rejected'
+                kycStatus === 'REJECTED'
 				&& (
 					<div className={styles.pending}>
 						<div className={styles.icm_info}>
@@ -114,7 +122,7 @@ function VenderComponent() {
 					</div>
 				)
 				}
-				{ kycStatus !== 'verified' && kycStatus !== 'rejected' && (
+				{ kycStatus !== 'VERIFIED' && kycStatus !== 'REJECTED' && (
 					<div className={styles.pending}>
 						<div className={styles.icm_info}>
 							<IcMInfo
@@ -133,12 +141,12 @@ function VenderComponent() {
 
 	function RenderPayments(item) {
 		const { item: itemData = {} } = item;
-		const { totalPaidAmount = 0 } = itemData;
+		const { totalPaidAmount = 0, currentMonthPaidAmount = 0 } = itemData;
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
 				{totalPaidAmount}
 				{' '}
-				<Tooltip content="Current Month: " placement="top">
+				<Tooltip content={`Current Month: ${currentMonthPaidAmount}`} placement="top">
 					<IcMInfo />
 				</Tooltip>
 			</div>
@@ -146,13 +154,18 @@ function VenderComponent() {
 	}
 
 	function RenderInvoice({ item }) {
-		const { item: itemData = {} } = item;
-		const { openInvoices = '' } = itemData;
+		const { openInvoices = 0, openInvoiceAmount = 0 } = item;
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
 				{openInvoices}
 				{' '}
-				<div> (INR 12000) </div>
+				<div>
+					{' '}
+					(
+					{openInvoiceAmount}
+					)
+					{' '}
+				</div>
 			</div>
 		);
 	}
@@ -192,6 +205,20 @@ function VenderComponent() {
 		renderViewMoreButton: (itemData:ItemProps) => (
 			<RenderViewMoreButton item={itemData} />
 		),
+		renderName: (itemData:ItemProps) => {
+			const { organizationName = '' } = itemData || {};
+			return (
+				<div>{showOverflowingNumber(organizationName, 15)}</div>
+			);
+		},
+		rendeDate: (itemData:ItemProps) => {
+			const { createdAt } = itemData || {};
+			return (
+				<div>
+					{formatDate(createdAt, 'dd MMM yyyy', {}, false) || ''}
+				</div>
+			);
+		},
 	};
 
 	return (
@@ -201,11 +228,10 @@ function VenderComponent() {
 			<List
 				config={VENDOR_CONFIG}
 				itemData={listData}
-				loading={false}
+				loading={loading}
 				sort={sort}
 				setSort={setSort}
 				functions={functions}
-				// page={page || 1}
 				handlePageChange={(pageValue:number) => {
 					setFilters((p) => ({ ...p, page: pageValue }));
 				}}

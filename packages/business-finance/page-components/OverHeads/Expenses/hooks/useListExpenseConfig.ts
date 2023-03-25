@@ -24,6 +24,7 @@ const useListExpenseConfig = ({ expenseFilters, sort }) => {
 					q                 : searchValue || undefined,
 					createdDateSortBy : createdDateSortBy || undefined,
 					amountSortBy      : amountSortBy || undefined,
+					cogoEntityId      : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
 				},
 			});
 		} catch (err) {
