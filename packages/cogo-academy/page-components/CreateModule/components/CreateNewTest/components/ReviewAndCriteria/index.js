@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { Pill, Button, Modal, ButtonIcon } from '@cogoport/components';
+import { Pill, Button, Modal, ButtonIcon, Placeholder } from '@cogoport/components';
 import { useForm, InputController, useFieldArray } from '@cogoport/forms';
 import { IcMArrowBack, IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase, format } from '@cogoport/utils';
+import { startCase, format, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useUpdateTest from '../../../../hooks/useUpdateTest';
@@ -12,11 +12,9 @@ import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import styles from './styles.module.css';
 
-function ReviewAndCriteria({
-	loading,
-	data,
-	test_id,
-}) {
+function ReviewAndCriteria(props) {
+	const { loading, data, test_id } = props;
+
 	const { control, formState: { errors }, handleSubmit, setValue, getValues } = useForm();
 
 	const { fields, append, remove } = useFieldArray({
@@ -47,38 +45,39 @@ function ReviewAndCriteria({
 				<IcMArrowBack width={20} height={20} onClick={navigate} />
 				<div className={styles.title} onClick={navigate}>New Test</div>
 			</div>
+			{(isEmpty(data) || loading) ? <Placeholder height="100px" width="100%" margin="0px 0px 20px 0px" /> : (
+				<div className={styles.subcontainer}>
+					<div className={styles.label}>{name || '-'}</div>
 
-			<div className={styles.subcontainer}>
-				<div className={styles.label}>{name || '-'}</div>
+					<div className={styles.topic}>
+						<div className={styles.subtopic}>Topics </div>
+						<div className={styles.topic_pill_container}>
+							{set_data.map((question_set) => (
+								<Pill size="md" color="blue" className={styles.names}>
+									<span className={styles.names}>{question_set.topic}</span>
+								</Pill>
+							))}
+						</div>
+					</div>
 
-				<div className={styles.topic}>
-					<div className={styles.subtopic}>Topics </div>
-					<div className={styles.topic_pill_container}>
-						{set_data.map((question_set) => (
-							<Pill size="md" color="blue" className={styles.names}>
-								<span className={styles.names}>{question_set.topic}</span>
+					<div className={styles.entity}>
+						<div className={styles.label_entity}>Cogo Entity </div>
+						<div className={styles.entity_name}>{cogo_entity_object.business_name}</div>
+					</div>
+
+					<div className={styles.topic}>
+						<div className={styles.subtopic}> Users </div>
+						<div>
+							<Pill size="md" color="#FEF3E9" className={styles.names}>
+								<span className={styles.names}>KAM 1</span>
 							</Pill>
-						))}
+							<Pill size="md" color="#FEF3E9">
+								<span className={styles.names}>KAM 2</span>
+							</Pill>
+						</div>
 					</div>
 				</div>
-
-				<div className={styles.entity}>
-					<div className={styles.label_entity}>Cogo Entity </div>
-					<div className={styles.entity_name}>{cogo_entity_object.business_name}</div>
-				</div>
-
-				<div className={styles.topic}>
-					<div className={styles.subtopic}> Users </div>
-					<div>
-						<Pill size="md" color="#FEF3E9" className={styles.names}>
-							<span className={styles.names}>KAM 1</span>
-						</Pill>
-						<Pill size="md" color="#FEF3E9">
-							<span className={styles.names}>KAM 2</span>
-						</Pill>
-					</div>
-				</div>
-			</div>
+			)}
 
 			<QuestionsAndDistribution
 				data={data}
@@ -168,6 +167,7 @@ function ReviewAndCriteria({
 				</Modal.Body>
 				<Modal.Footer align="right">
 					<Button
+						loading={loading}
 						size="md"
 						themeType="primary"
 						onClick={
@@ -196,6 +196,7 @@ function ReviewAndCriteria({
 					Save As Draft
 				</Button>
 				<Button
+					loading={loading}
 					size="md"
 					themeType="primary"
 					type="button"
