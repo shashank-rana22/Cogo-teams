@@ -63,7 +63,7 @@ function Statistics() {
 							<div>
 								{' '}
 								{cashFlowDiffFromYesterday}
-								% more than yesterday
+								% more thans yesterday
 							</div>
 						</div>
 
