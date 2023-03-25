@@ -17,11 +17,11 @@ const statusColorMapping = {
 };
 
 const updateColorMapping = {
-	cleared   : 'green',
+	confirmed : 'green',
 	exited    : 'red',
 	uploaded  : 'green',
 	error     : 'red',
-	uploading : 'yellow',
+	extended  : 'yellow',
 };
 
 const useGetColumns = ({
@@ -317,7 +317,8 @@ const useGetColumns = ({
 				<Pill
 					color={item?.log_type === 'pip' ? 'yellow' : 'blue'}
 				>
-					{item?.log_type}
+					{isEmpty(item?.final_decision)
+						? (`in ${item?.log_type}`) : (`${item?.log_type} ${item?.final_decision}`)}
 
 				</Pill>
 			</div>
@@ -330,7 +331,8 @@ const useGetColumns = ({
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<Button
-					themeType="secondary"
+					themeType="tertiary"
+					style={{ color: 'blue' }}
 					onClick={() => {
 						setItem(item);
 						setModal('review');
@@ -369,15 +371,17 @@ const useGetColumns = ({
 		key : 'end_date',
 	},
 	{
-		Header   : <div className={styles.head}>Update</div>,
+		Header   : <div className={styles.head}>Decision</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<Pill
-					color={updateColorMapping[item?.update] ? (updateColorMapping[item?.update]) : 'blue'}
-				>
-					{startCase(item?.update)}
+				{item?.final_decision && (
+					<Pill
+						color={updateColorMapping[item?.final_decision] ? (updateColorMapping[item?.update]) : 'blue'}
+					>
+						{startCase(item?.final_decision)}
 
-				</Pill>
+					</Pill>
+				)}
 			</div>
 		),
 		id  : 'update',

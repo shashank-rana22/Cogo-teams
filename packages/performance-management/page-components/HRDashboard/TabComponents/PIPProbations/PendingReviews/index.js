@@ -55,7 +55,7 @@ function PendingReviews({
 		// params,
 		// setParams,
 		setPage,
-	} = useListEmployees();
+	} = useListEmployees(false);
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;
 

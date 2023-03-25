@@ -1,8 +1,8 @@
 import { useIrisRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useListEmployees = () => {
-	const [params, setParams] = useState({ page: 1, pageLimit: 10 });
+const useListEmployees = (is_reviewed) => {
+	const [params, setParams] = useState({ page: 1, pageLimit: 10, IsReviewed: is_reviewed });
 
 	const [{ data: employeeData = {}, loading = false }] = useIrisRequest({
 		url    : 'get_iris_list_logs',

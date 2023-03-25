@@ -31,17 +31,21 @@ function PIPProbations() {
 	// useEffect(() => setPipParams({ show: false, disableNext: false }), []);
 
 	const onSubmit = () => {
-		onCreateLog({
-			user_id        : item?.user_id,
-			log_id         : item?.id,
-			log_type       : item?.log_type,
-			comment        : item?.comments,
-			final_decision : item?.final_decision,
-			tags           : item?.tags,
-			is_reviewed    : item?.is_reviewed,
-		});
-		Toast.success('Updated Successfully');
-		setModal('');
+		if (item?.tags?.find((x) => x === 'Final discusion held') && isEmpty(item?.final_decision)) {
+			setModal('update');
+		} else {
+			onCreateLog({
+				user_id        : item?.user_id,
+				log_id         : item?.id,
+				log_type       : item?.log_type,
+				comment        : item?.comments,
+				final_decision : item?.final_decision,
+				tags           : item?.tags,
+				is_reviewed    : item?.is_reviewed || modal === 'review',
+			});
+			Toast.success('Updated Successfully');
+			setModal('');
+		}
 	};
 
 	const clickedBack = () => {
@@ -144,7 +148,7 @@ function PIPProbations() {
 						}}
 						size="lg"
 					>
-						<Modal.Header title="Update" />
+						<Modal.Header title={`update ${item?.log_type}`} />
 						<div className={styles.upload_modal}>
 							<Modal.Body>
 								<DecisionModal

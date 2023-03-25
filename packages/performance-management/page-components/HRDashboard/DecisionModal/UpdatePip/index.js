@@ -11,15 +11,15 @@ function UpdatePip({
 	setItem = () => {},
 }) {
 	const [comments, setComments] = useState('');
-	const [value, onChange] = useState('extend');
+	const [value, onChange] = useState('extended');
 
 	const radioList = [
-		{ name: 'R1', value: 'extend', label: 'Extend' },
-		{ name: 'R2', value: 'confirm', label: 'Confirm' },
+		{ name: 'R1', value: 'extended', label: 'Extend' },
+		{ name: 'R2', value: 'confirmed', label: 'Confirm' },
 	];
 
 	useEffect(() => {
-		if (value === 'confirm' || !isEmpty(comments)) {
+		if (value === 'confirmed' || !isEmpty(comments)) {
 			setDisableNext(false);
 		} else {
 			setDisableNext(true);
@@ -28,6 +28,7 @@ function UpdatePip({
 			...item,
 			comments       : comments || undefined,
 			final_decision : value || undefined,
+			is_reviewed    : false,
 		});
 	}, [comments, value]);
 
@@ -53,7 +54,7 @@ function UpdatePip({
 				onChange={onChange}
 			/>
 
-			{(value === 'extend') && (
+			{(value === 'extended') && (
 				<div className={styles.dates}>
 					{/* <div className={styles.lable}>Extend End date</div>
 					<Datepicker
