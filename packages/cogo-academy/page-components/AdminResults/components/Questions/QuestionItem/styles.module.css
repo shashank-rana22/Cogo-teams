@@ -1,22 +1,36 @@
 .container {
-	display: flex;
-	width: 100%;
-	padding: 12px 24px;
-	cursor: pointer;
-	background: #fff;
-	border-bottom: 1px solid #f8f2e7;
+  display: flex;
+  width: 100%;
+  padding: 12px 24px;
+  cursor: pointer;
+  background: #fff;
+  border-bottom: 1px solid #f8f2e7;
 }
 
 .small_section {
-	width: 15%;
-	margin-right: 16px;
-	text-align: center;
+  width: 15%;
+  margin-right: 16px;
+  text-align: center;
 }
 
 .section {
-	width: inherit;
+  width: inherit;
 }
 
 .icon {
-	width: 2%;
+  width: 2%;
+}
+.outer_container {
+  :global {
+    .ui_accordion_title {
+      width: 100% !important;
+    }
+    .ui_accordion_container {
+      box-shadow: none;
+      border-radius: 0;
+    }
+    .ui_accordion_header {
+      border-radius: 0;
+    }
+  }
 }

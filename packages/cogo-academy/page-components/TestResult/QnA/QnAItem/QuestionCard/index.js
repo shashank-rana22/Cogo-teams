@@ -1,10 +1,12 @@
-import { ProgressBar } from '@cogoport/components';
+import { Popover, ProgressBar } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function QuestionCard({ question = '', answers = [], index = 0 }) {
+function QuestionCard({ question = '', answers = [], index = 0, question_type = '', case_study = '' }) {
+	const [visible, setVisible] = useState(false);
+
 	const getAnswerItem = (answer) => {
 		const { answer_text = '', is_correct = false, peers = 0 } = answer;
 		return (
@@ -41,7 +43,24 @@ function QuestionCard({ question = '', answers = [], index = 0 }) {
 						Q
 						{index + 1}
 					</div>
-					<div className={styles.question_text}>{question}</div>
+					<div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+						<div className={styles.question_text}>{question}</div>
+						{question_type === 'case_study' ? (
+
+							<Popover placement="bottom" trigger="mouseenter" caret={false} render={case_study}>
+								<div
+									role="presentation"
+									className={styles.case_study}
+									onClick={() => setVisible(!visible)}
+								>
+									{' '}
+									view case study
+
+								</div>
+							</Popover>
+						)
+							: null}
+					</div>
 				</div>
 			</div>
 			<div className={styles.answers_container}>

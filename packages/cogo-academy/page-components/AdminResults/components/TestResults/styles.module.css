@@ -1,6 +1,11 @@
 .container {
-	display: flex;
-	padding: 24px;
-	background: #fff;
-	border-radius: 6px;
+  /* display: flex; */
+  padding: 24px;
+  background: #fff;
+  border-radius: 6px;
+  margin-bottom: 24px;
+}
+.info_row {
+  display: flex;
+  justify-content: space-between;
 }
