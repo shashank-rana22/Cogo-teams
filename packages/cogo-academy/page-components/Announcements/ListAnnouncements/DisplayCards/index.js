@@ -52,7 +52,7 @@ function DisplayCards({
 
 	if (isEmpty(data)) {
 		return (
-			<EmptyState text={`There are no ${startCase(activeTab)} Announcements`} />
+			<EmptyState text={`No ${startCase(activeTab)} Announcements`} />
 		);
 	}
 

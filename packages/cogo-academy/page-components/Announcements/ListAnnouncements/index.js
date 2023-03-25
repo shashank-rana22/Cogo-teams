@@ -22,6 +22,8 @@ function AddedAnnouncements() {
 		activeList,
 		setActiveList,
 		page,
+		filters,
+		setFilters,
 		setPage,
 		paginationData,
 	} = props;
@@ -37,6 +39,8 @@ function AddedAnnouncements() {
 			<Header
 				activeList={activeList}
 				setActiveList={setActiveList}
+				filters={filters}
+				setFilters={setFilters}
 			/>
 
 			<div className={styles.table}>

@@ -1,7 +1,7 @@
 import { Popover, Button, TabPanel, Tabs } from '@cogoport/components';
-import { useForm, SelectController, InputController } from '@cogoport/forms';
+import { useDebounceQuery, useForm, SelectController, InputController } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SearchInput from '../../../../commons/SearchInput';
 
@@ -16,9 +16,13 @@ const CONTROL_MAPPING = {
 function Header({
 	activeList,
 	setActiveList,
+	setFilters,
 }) {
-	const [searchState, setSearchState] = useState('');
 	const [visible, setVisible] = useState(false);
+	const [search, setSearch] = useState('');
+	const [filtersApplied, setFiltersApplied] = useState(false);
+
+	const { query, debounceQuery } = useDebounceQuery();
 
 	const { control, watch, setValue } = useForm();
 
@@ -28,13 +32,42 @@ function Header({
 
 	const handleReset = () => {
 		setValue('announcement_type', undefined);
-		setValue('status', undefined);
+		setFilters((prev) => ({
+			...prev,
+			announcement_type: '',
+		}));
 		setVisible(false);
 	};
 
 	const handleApply = () => {
+		setFilters((prev) => ({
+			...prev,
+			...formValues,
+		}));
 		setVisible(false);
 	};
+
+	useEffect(() => {
+		debounceQuery(search);
+	}, [debounceQuery, search]);
+
+	useEffect(() => {
+		setFilters((prev) => ({
+			...prev,
+			q: query,
+		}));
+	}, [query, setFilters]);
+
+	useEffect(() => {
+		let flag = false;
+
+		Object.keys(formValues).forEach((key) => {
+			if (formValues[key]?.length > 0) flag = true;
+		});
+
+		if (flag) setFiltersApplied(true);
+		else setFiltersApplied(false);
+	}, [formValues]);
 
 	const renderFilters = () => (
 		<div className={styles.container}>
@@ -49,7 +82,7 @@ function Header({
 			</div>
 			<div className={styles.all_filters}>
 				{controls.map((controlItem) => {
-					const { type = '' } = controlItem;
+					const { type } = controlItem;
 					const Component = CONTROL_MAPPING[type];
 					return (
 						<div className={styles.filter_item}>
@@ -71,11 +104,11 @@ function Header({
 
 	return (
 		<div className={styles.container}>
-			{/* <div className={styles.filters_container}>
+			<div className={styles.filters_container}>
 				<div className={styles.input_bar}>
 					<SearchInput
-						value={searchState}
-						onChange={(val) => setSearchState(val)}
+						value={search}
+						onChange={(val) => setSearch(val)}
 						size="md"
 						placeholder="Search for an announcement"
 					/>
@@ -90,11 +123,14 @@ function Header({
 					>
 						<Button size="lg" themeType="secondary" onClick={() => setVisible(true)}>
 							Filters
-							<IcMFilter style={{ marginLeft: '6px' }} />
+							<div className={styles.icon_container}>
+								<IcMFilter style={{ marginLeft: '6px' }} />
+								{filtersApplied ? <div className={styles.red_dot} /> : null}
+							</div>
 						</Button>
 					</Popover>
 				</div>
-			</div> */}
+			</div>
 			<div className={styles.tab_group}>
 				<Tabs
 					activeTab={activeList}

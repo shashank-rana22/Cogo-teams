@@ -9,16 +9,7 @@ const getFilterControls = () => {
 				{ label: 'General', value: 'general' },
 				{ label: 'Tasks', value: 'tasks' },
 				{ label: 'Announcement', value: 'announcement' },
-			],
-		},
-		{
-			name        : 'status',
-			label       : 'Sort by Status',
-			type        : 'select',
-			placeholder : 'Select status...',
-			options     : [
-				{ label: 'Live', value: 'active' },
-				{ label: 'Draft', value: 'draft' },
+				{ label: 'Product Release / Update', value: 'product_update' },
 			],
 		},
 	];

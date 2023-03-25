@@ -128,7 +128,7 @@ const useCreateAnnouncements = ({
 		} = values;
 		const { startDate:validity_start, endDate:validity_end } = validity;
 		const { images, files } = values;
-		const downloadables = [...videos.map((video) => (
+		const attachments = [...videos.map((video) => (
 			{
 				document_type : 'video',
 				document_name : 'video',
@@ -161,7 +161,7 @@ const useCreateAnnouncements = ({
 				redirection_url,
 				is_important,
 				audience_ids,
-				downloadables,
+				attachments,
 			};
 
 			const response = await trigger({ data: payload });

@@ -7,7 +7,10 @@ import { useEffect, useState, useCallback } from 'react';
 function useListAnnouncements() {
 	const { general = {}, profile = {} } = useSelector((state) => state);
 
-	const [searchInput, setSearchInput] = useState('');
+	const [filters, setFilters] = useState({
+		q                 : undefined,
+		announcement_type : undefined,
+	});
 	const [currentAnnouncement, setCurrentAnnouncement] = useState(null);
 	const [activeList, setActiveList] = useState('active');
 	const [page, setPage] = useState(1);
@@ -40,6 +43,7 @@ function useListAnnouncements() {
 			const res =	await trigger({
 				params: {
 					filters: {
+						...filters,
 						status            : activeList === 'active' ? 'draft' : 'inactive',
 						auth_function     : scope === 'partner' ? roleFunction : undefined,
 						auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
@@ -65,7 +69,7 @@ function useListAnnouncements() {
 		} catch (err) {
 			console.log(err);
 		}
-	}, [activeList, country_id, id, page, roleFunction, roleSubFunction, scope, trigger, user_id]);
+	}, [activeList, country_id, filters, id, page, roleFunction, roleSubFunction, scope, trigger, user_id]);
 
 	const deleteAnnouncement = async (announcement_id) => {
 		try {
@@ -90,8 +94,8 @@ function useListAnnouncements() {
 		setPage,
 		paginationData,
 		data,
-		searchInput,
-		setSearchInput,
+		filters,
+		setFilters,
 		activeList,
 		deleteAnnouncement,
 		currentAnnouncement,

@@ -12,7 +12,7 @@
 }
 
 .input_bar {
-	width: 85%;
+	width: 88%;
 }
 
 .filters {
@@ -64,4 +64,19 @@
 
 .footer {
 	align-self: flex-end;
+}
+
+.icon_container {
+	position: relative;
+	display: flex;
+}
+
+.red_dot {
+	position: absolute;
+	bottom: 10px;
+	left: 22px;
+	width: 8px;
+	height: 8px;
+	background-color: #ee3425;
+	border-radius: 50%;
 }
