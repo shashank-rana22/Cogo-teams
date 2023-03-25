@@ -58,10 +58,12 @@ export const optionsRadio = [
 	{
 		label : 'Amount',
 		value : 'amount',
+		name  : 'amount',
 	},
 	{
 		label : 'Percentage',
 		value : 'percentage',
+		name  : 'percentage',
 	},
 ];
 

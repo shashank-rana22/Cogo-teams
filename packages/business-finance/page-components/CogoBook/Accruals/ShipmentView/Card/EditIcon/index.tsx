@@ -71,8 +71,6 @@ function EditIcon({
 						<Tooltip
 							content="Profitability has been edited"
 							placement="top"
-							theme="light"
-							animation="shift-away"
 						>
 							<div className={styles.info_container}>
 								<IcMInfo height="12px" width="12px" />

@@ -77,7 +77,6 @@ function ViewSelectedInvoice() {
 							themeType="secondary"
 						>
 							<IcMArrowBack
-								disabled={loading}
 								height={20}
 								width={20}
 							/>

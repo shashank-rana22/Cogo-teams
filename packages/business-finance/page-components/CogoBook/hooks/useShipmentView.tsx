@@ -2,7 +2,7 @@ import { Toast, Checkbox } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format, isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { FilterInterface } from '../Accruals/interface';
 
@@ -35,14 +35,6 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 	} = filters || {};
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
 
-	const rangeMapping = {
-		'>'     : 'gt',
-		'>='    : 'gte',
-		'<'     : 'lt',
-		'<='    : 'lte',
-		'<=x=<' : 'btw',
-	};
-
 	const [
 		{ data:shipmentViewData, loading:shipmentLoading },
 		shipmentTrigger,
@@ -67,7 +59,15 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		{ manual: true },
 	);
 
-	const refetch = async () => {
+	const refetch = useCallback(async () => {
+		const rangeMapping = {
+			''      : '',
+			'>'     : 'gt',
+			'>='    : 'gte',
+			'<'     : 'lt',
+			'<='    : 'lte',
+			'<=x=<' : 'btw',
+		};
 		try {
 			const resp = await shipmentTrigger({
 				params: {
@@ -104,17 +104,32 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			Toast.error(error?.response?.data?.message);
 			setApiData({ pageNo: 0, totalPages: 0, total: 0, totalRecords: 0, list: [] });
 		}
-	};
+	}, [
+		date,
+		jobState,
+		month,
+		page,
+		profitAmount,
+		profitAmountUpper,
+		profitPercent,
+		profitPercentUpper,
+		profitType,
+		query,
+		range,
+		service,
+		shipmentTrigger,
+		shipmentType,
+		sortBy,
+		sortType,
+		tradeType,
+		year,
+	]);
 
 	useEffect(() => {
-		if (year && month && query) {
+		if (!year && !month) {
 			refetch();
 		}
-	}, [query]);
-
-	useEffect(() => {
-		refetch();
-	}, [page, sortType, sortBy, query]);
+	}, [refetch, query, year, month, page, sortType, sortBy]);
 
 	const {
 		pageNo: pageNos = 0,
@@ -176,12 +191,10 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		const { page: pages = 0 } = paginationData;
 		const isAllRowsChecked = !isEmpty(groupListData)
 		&& (checkedRows?.[`page-${pages}`] || []).length === (groupListData || []).length;
-		const isSemiRowsChecked = (checkedRows?.[`page-${pages}`] || []).length > 0;
 
 		return (
 			<Checkbox
-				style={{ padding: '8px', left: '8px' }}
-				semiChecked={isSemiRowsChecked}
+				style={{ padding: '8px' }}
 				checked={isAllRowsChecked}
 				onChange={onChangeTableHeaderCheckbox}
 			/>
@@ -231,6 +244,15 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			...item,
 		}));
 
+		const rangeMapping = {
+			''      : '',
+			'>'     : 'gt',
+			'>='    : 'gte',
+			'<'     : 'lt',
+			'<='    : 'lte',
+			'<=x=<' : 'btw',
+		};
+
 		try {
 			const res = await addToSelectedTrigger({
 				data: {
@@ -258,12 +280,12 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			});
 			if (res.data) {
 				refetch();
-				Toast.success(res.data);
+				Toast.success('SUCCESS');
 				setPayload([]);
 				setOpenModal(false);
 			}
 		} catch (error) {
-			Toast.error(error?.data?.message);
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 

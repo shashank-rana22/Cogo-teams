@@ -50,9 +50,11 @@ function Archive({ setShowTab }) {
 						className={styles.flex_container}
 					>
 						<Toggle
+							name="declare"
 							offLabel="Declared"
 							onLabel="Actual"
 							value={toggleValue}
+							size="md"
 							disabled
 							onChange={(e) => { setToggleValue(e?.target?.checked ? 'declared' : 'actual'); }}
 						/>

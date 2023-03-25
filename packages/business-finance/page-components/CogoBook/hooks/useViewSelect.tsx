@@ -3,7 +3,7 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 interface DeleteInterface {
 	id?:string
@@ -26,7 +26,7 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 		sortBy,
 	} = filters || {};
 
-	const { service = '', shipmentType = '' } = query || {};
+	const { service = '', shipmentType = '', year = '', month = '', tradeType = '' } = query || {};
 
 	useEffect(() => {
 		debounceQuery(search !== '' ? search : undefined);
@@ -53,11 +53,13 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 		{ manual: true },
 	);
 
-	const viewSelected = async () => {
+	const viewSelected = useCallback(async () => {
 		try {
 			const resp = await viewSelectedSidTrigger({
 				params: {
-					...query,
+					year           : year || undefined,
+					tradeType      : tradeType || undefined,
+					month          : month || undefined,
 					archivedStatus : archivedStatus || 'BOOKED' || undefined,
 					serviceType    : service !== '' ? service : undefined,
 					shipment       : shipmentType !== '' ? shipmentType : undefined,
@@ -72,11 +74,12 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 		} catch (error) {
 			setViewData({ pageNo: 0, totalPages: 0, total: 0, totalRecords: 0, list: [] });
 		}
-	};
+	}, [archivedStatus, month, search, service,
+		shipmentType, sortBy, sortType, tradeType, viewSelectedSidTrigger, year]);
 
 	useEffect(() => {
 		viewSelected();
-	}, [archivedStatus, sortType, sortBy]);
+	}, [archivedStatus, sortType, sortBy, viewSelected]);
 
 	const [
 		{ data:actionConfirmedData, loading:actionConfirmedLoading },
@@ -122,21 +125,20 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 		deleteSelectedInvoiceTrigger,
 	] = useRequestBf(
 		{
-			url     : 'pnl/accrual/archiveDelete',
+			url     : 'pnl/accrual/archive-delete',
 			method  : 'post',
 			authKey : 'delete_pnl_accrual_archive',
 		},
 		{ manual: true },
 	);
 
-	const deleteSelected = async ({ id, bulkData, handleModal, setBulkModal }:DeleteInterface) => {
+	const deleteSelected = async ({ id, bulkData, setBulkModal }:DeleteInterface) => {
 		try {
 			await deleteSelectedInvoiceTrigger({
 				data: {
-					archiveShipmentIds : checkedRowsSerialId,
-					ids                : id,
+					archiveShipmentIds : [id],
 					performedBy        : userId,
-					// actionStatus,
+					actionStatus       : 'DELETE',
 					selectionMode      : bulkData || 'SINGLE',
 					viewListRequest    : {
 						month          : query?.month,
@@ -147,7 +149,6 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 					},
 				},
 			});
-			handleModal(false);
 			setBulkModal(false);
 			viewSelected();
 			Toast.success('Deleted successfully');
@@ -176,7 +177,7 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 	useEffect(() => {
 		const itemData = (list || []).filter((item) => checkedRowsSerialId.find((x) => x === item.id));
 		setCheckedData(itemData);
-	}, [checkedRowsSerialId, viewData]);
+	}, [checkedRowsSerialId, list, viewData]);
 
 	useEffect(() => {
 		setCheckedRowsSerialId([
@@ -209,12 +210,10 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 		const { page: pages = 0 } = paginationData;
 		const isAllRowsChecked = !isEmpty(groupListData)
 		&& (checkedRows?.[`page-${pages}`] || []).length === (groupListData || []).length;
-		const isSemiRowsChecked = (checkedRows?.[`page-${pages}`] || []).length > 0;
 
 		return (
 			<Checkbox
-				style={{ padding: '8px', left: '8px' }}
-				semiChecked={isSemiRowsChecked}
+				style={{ padding: '8px' }}
 				checked={isAllRowsChecked}
 				onChange={onChangeTableHeaderCheckbox}
 			/>

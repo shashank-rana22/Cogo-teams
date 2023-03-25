@@ -183,7 +183,6 @@ function Card({
 						placement="bottom"
 						caret={false}
 						render={content()}
-						interactive
 						visible={selectFilter}
 						{...rest}
 					>
@@ -215,7 +214,6 @@ function Card({
 				<Popover
 					placement="bottom"
 					render={contentMoreFilter()}
-					interactive
 					visible={moreFilter}
 				>
 					<Button

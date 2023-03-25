@@ -112,7 +112,7 @@ function Footer({
 							content="Please ensure all the filters are selected and apply"
 						>
 							<div>
-								<IcCError className="alert_icon" size={1.5} />
+								<IcCError className="alert_icon" />
 							</div>
 						</Tooltip>
 					</div>
@@ -154,7 +154,7 @@ function Footer({
 					</Button>
 				)}
 				{show && (
-					<Modal show={show} onClose={() => setShow(false)} width={500}>
+					<Modal show={show} onClose={() => setShow(false)}>
 						<Modal.Body>
 							<div
 								className={styles.flex_modal}

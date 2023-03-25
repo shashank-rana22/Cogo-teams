@@ -2,7 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function DeleteModal({ openDeleteModal, handleCloseModal, setOpenDeleteModal, deleteSelected, id }) {
+function DeleteModal({ openDeleteModal, handleCloseModal, setOpenDeleteModal, deleteSelected, id:idData }) {
 	return (
 		<Modal show={openDeleteModal} onClose={handleCloseModal}>
 			<Modal.Body>
@@ -23,7 +23,7 @@ function DeleteModal({ openDeleteModal, handleCloseModal, setOpenDeleteModal, de
 						<Button
 							id="approve-modal-btn"
 							themeType="primary"
-							onClick={() => { deleteSelected(id, handleCloseModal); }}
+							onClick={() => { deleteSelected({ id: idData, handleCloseModal }); }}
 						>
 							Yes
 						</Button>

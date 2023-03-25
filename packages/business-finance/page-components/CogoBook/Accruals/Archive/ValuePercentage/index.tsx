@@ -26,7 +26,6 @@ function ValuePercentage({ data, keys, flag = false }) {
 					<Tooltip
 						placement="top"
 						content={`${amt} | ${data[percentage] || 0}%`}
-						theme="light"
 					>
 						<div
 							className={
