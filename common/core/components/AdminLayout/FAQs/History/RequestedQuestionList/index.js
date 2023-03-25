@@ -15,7 +15,6 @@ function RequestedQuestionList({
 	question,
 	list,
 	getUserFaqs,
-	// loading,
 }) {
 	useEffect(() => {
 		if (!question?.id) {
@@ -51,8 +50,7 @@ function RequestedQuestionList({
 	const sortedDates = Object.keys(filteredObject || {})
 		.map((item) => item)
 		.sort((a, b) => new Date(b) - new Date(a));
-
-	const handleBackgroundColor = ({ state, is_viewed }) => {
+	function handleBackgroundColor({ state, is_viewed }) {
 		if (state !== 'published') {
 			return '#FEF199';
 		}
@@ -62,12 +60,18 @@ function RequestedQuestionList({
 		}
 
 		return '#C4DC91';
-	};
+	}
 
 	const DAY_MAPPING = {
 		[formatToday]     : 'Today',
 		[formatYesterday] : 'Yesterday',
 	};
+
+	const renderText = () => (
+		<div style={{ color: '#000' }}>
+			Answer is not available
+		</div>
+	);
 
 	return (
 		<div className={styles.container}>
@@ -85,17 +89,21 @@ function RequestedQuestionList({
 						return state === 'requested' ? (
 							<Tooltip
 								theme="light-border"
-								content="Answer is not available"
+								content={renderText()}
 								interactive
 							>
 								<div
 									className={styles.question_time_container}
+									style={{ backgroundColor: !is_viewed ? '#fdfbf6' : '#ffffff' }}
 									// background={!is_viewed ? '#fdfbf6' : '#ffffff'}
 									cursor="not-allowed"
 								>
-									<div className={styles.pills_question_wrapper}>
+									<div
+										className={styles.pills_question_wrapper}
+
+									>
 										<Pill
-											background={() => handleBackgroundColor({ state, is_viewed })}
+											color={handleBackgroundColor({ state, is_viewed })}
 										>
 											{STATE_MAPPING[state]}
 										</Pill>
@@ -111,13 +119,14 @@ function RequestedQuestionList({
 							<div
 								role="presentation"
 								className={styles.question_time_container}
+								style={{ backgroundColor: !is_viewed ? '#fdfbf6' : '#ffffff' }}
 								// background={!is_viewed ? '#fdfbf6' : '#ffffff'}
 								cursor="pointer"
 								onClick={() => setQuestion(selectedQuestion)}
 							>
 								<div className={styles.pills_question_wrapper}>
 									<Pill
-										background={() => handleBackgroundColor({ state, is_viewed })}
+										color={handleBackgroundColor({ state, is_viewed })}
 									>
 										{STATE_MAPPING[state]}
 									</Pill>

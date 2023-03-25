@@ -43,10 +43,10 @@
 	padding: 0px 12px;
 }
 
-/* .pills_wrapper{
+.pills_wrapper{
     border-radius: 8px;
 	padding: 1px 4px;
 	font-size: 12px;
-	background: ${(props) => props.background};
+	/* background: ${(props) => props.background}; */
 	height: 20px;
-} */
+}
