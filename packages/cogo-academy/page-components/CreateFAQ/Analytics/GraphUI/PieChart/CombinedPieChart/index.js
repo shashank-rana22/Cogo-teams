@@ -79,7 +79,7 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 				/>
 			</div>
 
-			<div className={styles.outer_pie}>
+			{/* <div className={styles.outer_pie}>
 				<ResponsivePie
 					data={pie_outer_data}
 					margin={{
@@ -150,7 +150,7 @@ function CombinedPieChart({ pie_outer_data, pie_data }) {
 						},
 					]}
 				/>
-			</div>
+			</div> */}
 		</div>
 	);
 }
