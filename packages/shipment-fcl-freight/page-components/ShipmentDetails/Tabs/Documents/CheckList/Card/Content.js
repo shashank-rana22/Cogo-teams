@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 function Content({
 	extraItem,
-	receivedViaEmail,
 	idx,
 	data,
 	isChecked,
@@ -68,12 +67,6 @@ function Content({
 
 								</div>
 							) : null}
-							{receivedViaEmail && (
-								<div className={styles.message_text}>
-									<IcCError width={14} height={14} />
-									Document recieved - Please confirm
-								</div>
-							)}
 						</div>
 					)}
 				</div>
