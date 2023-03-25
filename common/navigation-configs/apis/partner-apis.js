@@ -6108,6 +6108,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
+		{
+			api          : 'update_bulk_outstanding_account_taggings',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
 	],
 	unified_dashboard: [
 		{
