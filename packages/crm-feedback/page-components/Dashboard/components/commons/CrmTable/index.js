@@ -5,7 +5,7 @@ import EmptyState from '../../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
-function CrmTable({ columns = [], data = [], loading = false }) {
+function CrmTable({ columns, data, loading }) {
 	if (isEmpty(data) && !loading) {
 		return (
 			<EmptyState

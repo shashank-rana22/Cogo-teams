@@ -1,5 +1,5 @@
 import { ButtonIcon, Tooltip, Checkbox } from '@cogoport/components';
-import { IcMView } from '@cogoport/icons-react';
+import { IcMEyeopen } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -109,7 +109,7 @@ export const FEEDBACK_COLUMNS = ({
 						<ButtonIcon
 							size="md"
 							themeType="primary"
-							icon={<IcMView />}
+							icon={<IcMEyeopen />}
 						/>
 					</a>
 				) : (
@@ -132,9 +132,11 @@ export const FEEDBACK_COLUMNS = ({
 					interactive
 					disabled={isEmpty(kam_response)}
 				>
-					<span className={styles.tooltip_text}>
-						{startCase(kam_response) || '__'}
-					</span>
+					<div>
+						<span className={styles.tooltip_text}>
+							{startCase(kam_response) || '__'}
+						</span>
+					</div>
 				</Tooltip>
 				{kam_response_reference_document_url
 					? (
@@ -142,7 +144,7 @@ export const FEEDBACK_COLUMNS = ({
 							<ButtonIcon
 								size="md"
 								themeType="primary"
-								icon={<IcMView />}
+								icon={<IcMEyeopen />}
 							/>
 						</a>
 					) : (

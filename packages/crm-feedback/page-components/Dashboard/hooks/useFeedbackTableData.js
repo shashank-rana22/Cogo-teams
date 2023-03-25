@@ -8,15 +8,12 @@ const useFeedbackTableData = () => {
 
 	const [filters, setFilters] = useState({});
 
+	console.log('filters::', filters);
+
 	const [params, setParams] = useState({
 		page_limit : 10,
 		page       : 1,
-		filters    : {
-			cogo_entity  : undefined,
-			kam          : undefined,
-			kam_manager  : undefined,
-			organization : undefined,
-		},
+		filters    : {},
 	});
 
 	const [{ data, loading }, trigger] = useAllocationRequest({
@@ -24,7 +21,7 @@ const useFeedbackTableData = () => {
 		method  : 'get',
 		authkey : 'get_allocation_feedbacks',
 		params,
-	}, { manual: true });
+	}, { manual: false });
 
 	// const onChangeParams = (values = {}) => {
 	// 	console.log('params are changed');
@@ -34,13 +31,15 @@ const useFeedbackTableData = () => {
 	// 	}));
 	// };
 
-	const onChangeParams = useCallback((values = {}) => {
-		console.log('params are changed');
+	console.log('params ::', params);
+
+	const onChangeParams = (values = {}) => {
+		console.log('onChangeParams');
 		setParams((previousState) => ({
 			...previousState,
 			...values,
 		}));
-	}, []);
+	};
 
 	// const onChangeFilters = (values) => {
 	// 	console.log('filters are changed');
@@ -59,27 +58,26 @@ const useFeedbackTableData = () => {
 				...previousState,
 				...values,
 			}));
+			console.log('filters::', filters);
 		},
 		[setFilters, filters],
 	);
 
-	useEffect(() => {
-		console.log('inside the 1st useffect, params::', params);
+	// useEffect(() => {
+	// 	console.log('inside the 1st useffect, params::', params);
 
-		trigger({
-			params: {
-				...params,
-				page    : 1,
-				filters : { ...params?.filters, ...filters },
-			},
-		});
-	}, [params, filters, trigger]);
+	// 	trigger({
+	// 		params: {
+	// 			...params,
+	// 			page    : 1,
+	// 			filters : { ...params?.filters, ...filters },
+	// 		},
+	// 	});
+	// }, [params, filters, trigger]);
 
 	const { list = [], ...paginationData } = data || {};
 
-	const filteredList = list.filter((obj) => isEmpty(obj.lead_organization_id));
-
-	const currentPageListIds = useMemo(() => filteredList?.map(({ id }) => id), [filteredList]);
+	const currentPageListIds = useMemo(() => list?.map(({ id }) => id), [list]);
 
 	const selectAllHelper = useCallback((listArgument = []) => {
 		const isRowsChecked = currentPageListIds.every((id) => listArgument.includes(id));
@@ -130,7 +128,7 @@ const useFeedbackTableData = () => {
 	};
 
 	return {
-		data: filteredList,
+		data: list,
 		loading,
 		setParams,
 		paginationData,
