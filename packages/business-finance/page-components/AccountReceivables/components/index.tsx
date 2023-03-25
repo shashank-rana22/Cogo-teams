@@ -17,6 +17,7 @@ function AccountReceivables() {
 	const handleChange = (val:string) => {
 		if (['dashboard', 'invoices', 'defaulters', 'manageBpr'].includes(val)) {
 			window.location.href = `/${partnerId}/business-finance/account-receivables`;
+			return;
 		}
 		setReceivables(val);
 		push(
