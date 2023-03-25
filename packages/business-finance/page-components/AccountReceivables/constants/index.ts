@@ -213,7 +213,7 @@ export const StatsKeyMapping = [
 		textColor : '#cb6464',
 	},
 	{
-		label     : '1-30 DAYS',
+		label     : '0-30 DAYS',
 		valueKey  : 'thirty',
 		textColor : '#cb6464',
 	},
@@ -246,12 +246,7 @@ export const StatsKeyMapping = [
 
 export const StatsKeyMappingPayment = [
 	{
-		label     : 'Today',
-		valueKey  : 'today',
-		textColor : '#cb6464',
-	},
-	{
-		label     : '1-30 DAYS',
+		label     : '0-30 DAYS',
 		valueKey  : 'thirty',
 		textColor : '#cb6464',
 	},

@@ -25,7 +25,7 @@ interface ItemProps {
 	serialId?: string,
 	countryCode?: string,
 	organizationSerialId?: string,
-	updatedAt?: string,
+	updatedAt?: Date,
 	selfOrganizationName?: string,
 	organizationId?: string,
 	selfOrganizationId?: string

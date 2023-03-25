@@ -69,7 +69,7 @@ function StatsOutstanding({ item }) {
 						</div>
 						<div className={styles.right_container}>
 							{(invoiceObject.statsKey || []).map((val) => (
-								<div className={styles.due_ageing}>
+								<div>
 									<div className={styles.label}>
 										{val.label}
 										<div className={styles.count}>

@@ -28,7 +28,7 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 		accessor : (row) => (
 
 			<div>
-				{getByKey(row, 'paymentNumber')}
+				{getByKey(row, 'paymentNumber') as string}
 			</div>
 
 		),
@@ -56,8 +56,8 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 			<div>
 				<div>
 					{getFormattedPrice(
-						getByKey(row, 'paymentAmount'),
-						getByKey(row, 'currency'),
+						getByKey(row, 'paymentAmount') as string,
+						getByKey(row, 'currency') as string,
 					)}
 
 				</div>
@@ -73,8 +73,8 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 			<div>
 				<div>
 					{getFormattedPrice(
-						getByKey(row, 'utilizedAmount'),
-						getByKey(row, 'currency'),
+						getByKey(row, 'utilizedAmount') as number,
+						getByKey(row, 'currency') as number,
 					)}
 
 				</div>
@@ -100,7 +100,7 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 		),
 		accessor: (row) => (
 			<div>
-				<div>{format(getByKey(row, 'transactionDate'), 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'transactionDate') as Date, 'dd MMM yy', {}, false)}</div>
 
 			</div>
 		),
@@ -112,8 +112,8 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 		Header   : 'Utilized status',
 		accessor : (row) => (
 			<div>
-				<Pill size="md" color={invoiceStatus[(getByKey(row, 'utilizationStatus'))]}>
-					{startCase(getByKey(row, 'utilizationStatus'))}
+				<Pill size="md" color={invoiceStatus[(getByKey(row, 'utilizationStatus') as string)]}>
+					{startCase(getByKey(row, 'utilizationStatus') as string)}
 				</Pill>
 			</div>
 		),

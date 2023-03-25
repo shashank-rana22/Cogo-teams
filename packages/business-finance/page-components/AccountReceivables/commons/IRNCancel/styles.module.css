@@ -16,7 +16,7 @@
 .cancel_modal {
 	display: flex;
 	flex-direction: column;
-	padding: 10px 5px; 
+	padding: 10px 5px;
 }
 
 .sub_cancel_modal {
@@ -26,22 +26,24 @@
 }
 
 .cancel_invoice {
-	font-weight: bold;
+	margin-bottom: 12px;
 	font-size: 20px;
-	margin-bottom: 12px; 
+	font-weight: bold;
 }
 
 .styled_reason {
-	margin: 12px 0px 6px 0px;
-	font-Size: 16px;
+	margin-top: 12px;
+	margin-bottom: 6px;
+	font-size: 16px;
 }
 
 .styled_remarks {
-	margin: 12px 0px 6px 0px;
-	font-Size: 16px; 
+	margin-top: 12px;
+	margin-bottom: 6px;
+	font-size: 16px;
 }
 
 .confirm_button {
 	display: flex;
-	margin-Top: 12px;
+	margin-top: 12px;
 }

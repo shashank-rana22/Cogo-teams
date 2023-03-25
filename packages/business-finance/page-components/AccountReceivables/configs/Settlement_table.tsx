@@ -16,7 +16,7 @@ const SettlementList = ({
 		id       : 'name',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'documentValue')}
+				{getByKey(row, 'documentValue') as string}
 			</div>
 		),
 
@@ -29,8 +29,8 @@ const SettlementList = ({
 			<div>
 				<div>
 					{getFormattedPrice(
-						getByKey(row, 'documentAmount'),
-						getByKey(row, 'currency'),
+						getByKey(row, 'documentAmount') as number,
+						getByKey(row, 'currency') as string,
 					)}
 
 				</div>
@@ -45,8 +45,8 @@ const SettlementList = ({
 			<div>
 				<div>
 					{getFormattedPrice(
-						getByKey(row, 'settledAmount'),
-						getByKey(row, 'currency'),
+						getByKey(row, 'settledAmount') as number,
+						getByKey(row, 'currency') as string,
 					)}
 
 				</div>
@@ -61,8 +61,8 @@ const SettlementList = ({
 			<div>
 				<div>
 					{getFormattedPrice(
-						getByKey(row, 'balanceAmount'),
-						getByKey(row, 'currency'),
+						getByKey(row, 'balanceAmount') as number,
+						getByKey(row, 'currency') as string,
 					)}
 
 				</div>
@@ -75,7 +75,7 @@ const SettlementList = ({
 		Header   : 'Transaction Date',
 		accessor : (row) => (
 			<div>
-				<div>{format(getByKey(row, 'transactionDate'), 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'transactionDate') as Date, 'dd MMM yy', {}, false)}</div>
 			</div>
 		),
 	},
@@ -83,7 +83,7 @@ const SettlementList = ({
 		Header   : 'Last Edited On',
 		accessor : (row) => (
 			<div>
-				<div>{format(getByKey(row, 'lastEditedDate'), 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'lastEditedDate') as Date, 'dd MMM yy', {}, false)}</div>
 			</div>
 		),
 	},
