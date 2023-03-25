@@ -2,7 +2,8 @@ import { Placeholder } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import QnAItem from './QnAItem/index.';
+import CaseStudy from './CaseStudy';
+import QnAItem from './QnAItem';
 import styles from './styles.module.css';
 
 function QnA() {
@@ -31,11 +32,19 @@ function QnA() {
 			</div>
 
 			<div className={styles.question_cards_container}>
-				{([...stand_alone_questions, ...case_study_questions] || []).map((item, index) => (
-					<div className={styles.question_card}>
-						<QnAItem data={item} index={index} />
-					</div>
-				))}
+				{([...stand_alone_questions, ...case_study_questions] || []).map((item, index) => {
+					if (!('questions' in item)) {
+						return (
+							<div className={styles.question_card}>
+								<QnAItem data={item} index={index} />
+							</div>
+						);
+					}
+
+					return (
+						<CaseStudy case_study={item} index={index} />
+					);
+				})}
 			</div>
 		</div>
 	);

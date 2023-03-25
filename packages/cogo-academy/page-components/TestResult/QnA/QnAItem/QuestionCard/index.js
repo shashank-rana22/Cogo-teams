@@ -4,7 +4,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function QuestionCard({ question = '', answers = [], index = 0 }) {
+function QuestionCard({ question = '', answers = [], index }) {
+	console.log(question, 'question');
 	const getAnswerItem = (answer) => {
 		const { answer_text = '', is_correct = false, peers = 0 } = answer;
 		return (
@@ -33,6 +34,7 @@ function QuestionCard({ question = '', answers = [], index = 0 }) {
 			</div>
 		);
 	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.card_header}>
