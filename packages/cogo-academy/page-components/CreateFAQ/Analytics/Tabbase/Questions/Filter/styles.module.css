@@ -1,0 +1,58 @@
+.date_range_container {
+	display: flex;
+	width: fit-content;
+	padding: 5px 16px 2px 10rem;
+
+	input {
+		height: 38px !important;
+		border: solid 1px #e0e0e0 !important;
+	}
+}
+
+.top_content {
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 12px;
+	background: #f9f5ec;
+
+	:global {
+		.ui_select_display_container {
+			width: 15rem;
+			height: 37px !important;
+			margin-right: 1rem;
+			border-radius: 6px;
+		}
+
+		.ui_select_options_container {
+			z-index: 1000;
+			font-weight: 600;
+		}
+
+		.ui_select_input_placeholder {
+			font-weight: 600;
+			color: #828282;
+		}
+
+		.ui_select_option_item {
+			font-weight: 600;
+			color: var(--color-secondary-greyscale-2);
+			color: rgb(5 5 5);
+			border-bottom: 1px solid var(--color-tertiary-beige-4);
+		}
+
+		.ui_select_input_control {
+			font-weight: 600;
+		}
+	}
+}
+
+.select_container {
+	display: flex;
+	width: 225px;
+	padding: 5px 0 2px 16px;
+}
+
+.date_container {
+	display: flex;
+	align-items: center;
+}

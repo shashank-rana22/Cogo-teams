@@ -90,7 +90,16 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
-
+		{
+			api          : 'list_faq_stats',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_faq_search_history_stats',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	faq: [
 		{
