@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
 const EmptyFunction = () => {};
 
@@ -13,6 +13,7 @@ const useListCogooneTimeline = ({
 	type = '',
 	pagination,
 }) => {
+	const [firstLoading, setFirstLoading] = useState(true);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_cogoone_timeline',
 		method : 'get',
@@ -78,6 +79,7 @@ const useListCogooneTimeline = ({
 						islastPage,
 					},
 				}));
+				setFirstLoading(false);
 			}
 		}
 	}, [id, pagination, setMessagesState, trigger, type]);
@@ -89,9 +91,10 @@ const useListCogooneTimeline = ({
 	}, [activeSubTab, getCogooneTimeline, lead_user_id, user_id, id]);
 
 	return {
-		timeLineData    : data || {},
+		timeLineData         : data || {},
 		getCogooneTimeline,
-		timeLineLoading : loading,
+		timeLineLoading      : loading,
+		firstTimeLineLoading : firstLoading,
 	};
 };
 
