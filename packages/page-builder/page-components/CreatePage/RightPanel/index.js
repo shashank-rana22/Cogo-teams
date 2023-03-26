@@ -30,10 +30,11 @@ function RightPanel(props) {
 
 					<div className="page-preview">
 						{(components || []).map((component) => {
-							const elementId = component.id;
-							switch (component.type) {
-								case 'text':
-									return (
+							const { id: elementId, type, layout } = component;
+
+							return (
+								<div key={elementId} data-grid={layout}>
+									{type === 'text' && (
 										<TextComponent
 											key={elementId}
 											text={component.properties.content}
@@ -41,34 +42,35 @@ function RightPanel(props) {
 											setComponents={setComponents}
 											elementId={elementId}
 										/>
-									);
-								case 'image':
-									return (
+									)}
+
+									{type === 'image' && (
 										<ImageComponent
 											key={elementId}
 											src={component.properties.content}
 											alt={component.properties.alt}
-											styles={component.properties.styles}
+											style={component.properties.styles}
 											components={components}
 											setComponents={setComponents}
 											elementId={elementId}
 										/>
-									);
-								case 'button':
-									return (
+									)}
+									{type === 'button' && (
 										<ButtonComponent
 											key={elementId}
 											label={component.properties.content}
 											themeType={component.properties.themeType}
 											size={component.properties.size}
 											type={component.properties.type}
-
+											components={components}
+											setComponents={setComponents}
+											elementId={elementId}
 										/>
-									);
-								default:
-									return null;
-							}
+									)}
+								</div>
+							);
 						})}
+
 					</div>
 				</div>
 

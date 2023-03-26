@@ -9,6 +9,7 @@ const CONTENT_MAPPING = {
 	text: {
 		// eslint-disable-next-line max-len
 		content    : '<p>start typing here...</p>',
+		layout     : {},
 		// styles  : {
 		// 	fontSize       : '24px',
 		// 	color          : '#333',
@@ -24,6 +25,7 @@ const CONTENT_MAPPING = {
 		// eslint-disable-next-line max-len
 		content : 'https://www.cogoport.com/_next/image/?url=https%3A%2F%2Fcdn.cogoport.io%2Fcms-prod%2Fcogo_public%2Fvault%2Foriginal%2Fchannel-partner-header-2.png&w=1920&q=75',
 		alt     : 'add-img-url',
+		layout  : {},
 		styles  : {
 			width  : '100%',
 			height : '300px',
@@ -37,6 +39,7 @@ const CONTENT_MAPPING = {
 		redirectUrl : 'https://www.cogoport.com/en-IN/company/careers/',
 		themeType   : 'primary',
 		size        : 'md',
+		layout      : {},
 		type        : 'button',
 		attributes  : {
 			onClick: 'handleSubmitClick',
