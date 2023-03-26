@@ -16,13 +16,13 @@ const statusColorMapping = {
 	young     : 'yellow',
 };
 
-const updateColorMapping = {
-	confirmed : 'green',
-	exited    : 'red',
-	uploaded  : 'green',
-	error     : 'red',
-	extended  : 'yellow',
-};
+// const updateColorMapping = {
+// 	confirmed : 'green',
+// 	exited    : 'red',
+// 	uploaded  : 'green',
+// 	error     : 'red',
+// 	extended  : 'yellow',
+// };
 
 const useGetColumns = ({
 	getTeamFeedbackList = () => {},
@@ -370,28 +370,28 @@ const useGetColumns = ({
 		id  : 'end_date',
 		key : 'end_date',
 	},
-	{
-		Header   : <div className={styles.head}>Decision</div>,
-		accessor : (item) => (
-			<div className={styles.head_content}>
-				{item?.final_decision && (
-					<Pill
-						color={updateColorMapping[item?.final_decision] ? (updateColorMapping[item?.update]) : 'blue'}
-					>
-						{startCase(item?.final_decision)}
+	// {
+	// 	Header   : <div className={styles.head}>Decision</div>,
+	// 	accessor : (item) => (
+	// 		<div className={styles.head_content}>
+	// 			{item?.final_decision && (
+	// 				<Pill
+	// 					color={updateColorMapping[item?.final_decision] ? (updateColorMapping[item?.update]) : 'blue'}
+	// 				>
+	// 					{startCase(item?.final_decision)}
 
-					</Pill>
-				)}
-			</div>
-		),
-		id  : 'update',
-		key : 'update',
-	},
+	// 				</Pill>
+	// 			)}
+	// 		</div>
+	// 	),
+	// 	id  : 'update',
+	// 	key : 'update',
+	// },
 	{
 		Header   : <div className={styles.head}>Upload Status</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{item?.is_pip ? ('PIP CSV') : ('Probation CSV')}</div>
+				<div>{`${item?.log_type} CSV`}</div>
 			</div>
 		),
 		id  : 'upload_type',

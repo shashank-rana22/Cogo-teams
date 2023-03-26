@@ -9,7 +9,7 @@ const feedbackDataColumns = {
 	monthWiseFeedbacks : ['name', 'cogo_id', 'rating', 'department', 'designation', 'view_form'],
 	logModal           : ['name', 'cogo_id', 'designation', 'manager', 'employee_status', 'add_create_arrow'],
 	pendingReviewsList : ['name', 'designation', 'manager', 'status', 'progress', 'action', 'review'],
-	uploadedFiles      : ['name', 'number_of_employees', 'manager', 'start_date', 'update', 'upload_type', 'action'],
+	uploadedFiles      : ['name', 'number_of_employees', 'manager', 'start_date', 'status', 'upload_type'],
 	pipProbationList   : ['name', 'designation', 'manager', 'status', 'start_date', 'end_date', 'action'],
 	reAssignModal      : ['name', 'designation', 'manager'],
 };
