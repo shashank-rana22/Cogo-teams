@@ -19,7 +19,7 @@ function Stats({
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.heading}>
-					<div>
+					<div className={styles.contract_details}>
 						{data?.contract_reference_id ? (
 							<div className={styles.contract_id}>
 								Contract ID #

@@ -21,6 +21,11 @@
 	margin-left: 8px;
 }
 
+.contract_details{
+	display: flex;
+	align-items: center;
+}
+
 .contract_id {
 	font-size: 16px;
 	font-weight: 600;
@@ -99,4 +104,5 @@
 	font-weight: 400;
 	line-height: 22px;
 	color: #393f70;
+	margin-left: 8px;
 }
