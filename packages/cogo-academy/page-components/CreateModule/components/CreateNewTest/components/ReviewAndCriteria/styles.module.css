@@ -100,10 +100,11 @@
 .instruction {
 	display: flex;
 }
-.btn_icons{
+
+.btn_icons {
 	color: red;
 }
 
-.add_icon{
+.add_icon {
 	cursor: pointer;
 }
