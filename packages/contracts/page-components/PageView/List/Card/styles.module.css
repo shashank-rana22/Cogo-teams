@@ -87,8 +87,14 @@
 }
 
 .business_name {
+	display: flex;
 	margin: 2px 0;
 	font-weight: 500;
+}
+
+.org_name{
+	font-weight: 600;
+	margin-left: 4px;
 }
 
 .content {

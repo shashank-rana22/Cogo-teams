@@ -29,16 +29,6 @@ function Card({ item, filters }) {
 		services[`${service}_services`] = (item[`${service}_services`] || []).length;
 	});
 
-	const requestedDetails = ({ type = '' }) => (
-		<div className={type ? styles.requested_details : ''}>
-			Requested By
-			{' '}
-			{startCase(requested_by)}
-			:
-			<div className={styles.requester_name}>{requester_name ? startCase(requester_name) : '--'}</div>
-		</div>
-	);
-
 	return (
 		<div className={styles.card}>
 			<div className={styles.header}>
@@ -57,7 +47,13 @@ function Card({ item, filters }) {
 				</div>
 
 				<div className={styles.details}>
-					{requestedDetails({ type: 'fixed_width' })}
+					<div className={styles.requested_details}>
+						Requested By
+						{' '}
+						{startCase(requested_by)}
+						:
+						<div className={styles.requester_name}>{requester_name ? startCase(requester_name) : '--'}</div>
+					</div>
 
 					<div className={styles.pair}>
 						<div>
@@ -86,8 +82,7 @@ function Card({ item, filters }) {
 			</div>
 			<div className={styles.business_name}>
 				Business Name:
-				{' '}
-				{business_name ? startCase(business_name) : '-'}
+				<div className={styles.org_name}>{business_name ? startCase(business_name) : '-'}</div>
 			</div>
 			<div className={styles.service_details}>
 				{item.services.map((service, index) => (
