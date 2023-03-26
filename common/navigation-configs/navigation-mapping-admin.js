@@ -1331,7 +1331,7 @@ const navigationMappingAdmin = {
 				as            : '/bl_do-collection-release',
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
-				possible_apis : apis.bl_do_collection_release,
+				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
 
 			},
 			{
@@ -2020,6 +2020,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.tests,
+			},
+			{
+				key           : 'cogo_academy-announcements',
+				title         : 'Announcements',
+				href          : '/v2/announcements',
+				as            : '/v2/announcements',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.announcements,
 			},
 		],
 		module_type: 'crm',

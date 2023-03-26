@@ -39,7 +39,7 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 
 	return (
 		<div>
-			<div style={{ margin: '5px 0', width: '100%', height: '487px' }} className={styles.scrollable}>
+			<div style={{ margin: '6px 0', width: '100%', height: '488px' }} className={styles.scrollable}>
 
 				{(data?.list || []).map((question) => (
 					<div className={styles.border}>

@@ -67,7 +67,7 @@ function Messages({
 		);
 	}
 
-	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions } = useSendChat({
+	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions, messageLoading } = useSendChat({
 		firestore,
 		channel_type,
 		id,
@@ -161,6 +161,7 @@ function Messages({
 						sendCommunicationTemplate={sendCommunicationTemplate}
 						communicationLoading={communicationLoading}
 						closeModal={closeModal}
+						messageLoading={messageLoading}
 					/>
 				</div>
 			</div>

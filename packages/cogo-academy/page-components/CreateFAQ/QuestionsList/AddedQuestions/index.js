@@ -23,6 +23,9 @@ function AddedQuestions(props) {
 		activeList,
 		setActiveList,
 		questionListLoading,
+		sortType,
+		setSortType,
+		requestedQuestionCount,
 	} = props;
 
 	const router = useRouter();
@@ -79,6 +82,7 @@ function AddedQuestions(props) {
 				/>
 			);
 		}
+
 		return (
 			<>
 				<div className={styles.table}>
@@ -110,6 +114,9 @@ function AddedQuestions(props) {
 				setSearchInput={setSearchInput}
 				activeList={activeList}
 				setActiveList={setActiveList}
+				sortType={sortType}
+				setSortType={setSortType}
+				requestedQuestionCount={requestedQuestionCount}
 			/>
 
 			<div className={styles.button_container}>
