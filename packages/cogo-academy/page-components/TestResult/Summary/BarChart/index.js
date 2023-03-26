@@ -2,7 +2,7 @@ import { ResponsiveBar } from '@cogoport/charts/bar';
 
 import styles from './styles.module.css';
 
-function BarChart({ chart_data = [] }) {
+function BarChart({ chart_data = [], yAxis = '' }) {
 	return (
 		<div className={styles.bar_chart}>
 			<ResponsiveBar
@@ -36,20 +36,20 @@ function BarChart({ chart_data = [] }) {
 						spacing    : 10,
 					},
 				]}
-				fill={[
-					{
-						match: {
-							id: 'fries',
-						},
-						id: 'dots',
-					},
-					{
-						match: {
-							id: 'sandwich',
-						},
-						id: 'lines',
-					},
-				]}
+				// fill={[
+				// 	{
+				// 		match: {
+				// 			id: 'fries',
+				// 		},
+				// 		id: 'dots',
+				// 	},
+				// 	{
+				// 		match: {
+				// 			id: 'sandwich',
+				// 		},
+				// 		id: 'lines',
+				// 	},
+				// ]}
 				borderRadius={0}
 				borderColor={{
 					from      : 'color',
@@ -76,7 +76,7 @@ function BarChart({ chart_data = [] }) {
 					tickPadding    : 5,
 					tickRotation   : 0,
 					borderColor    : 'red',
-					legend         : 'Percentile',
+					legend         : `${yAxis || 'Percentile'}`,
 					legendPosition : 'middle',
 					legendOffset   : -40,
 				}}

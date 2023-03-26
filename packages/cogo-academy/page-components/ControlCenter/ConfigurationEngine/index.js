@@ -1,7 +1,7 @@
 import AudienceComponent from './AudienceComponent';
 import CreateAudienceForm from './CreateAudienceForm';
 import CreateForm from './CreateComponent';
-import Header from './Header.js';
+import Header from './Header';
 import useCreateFaq from './hooks/useCreateFaq';
 import styles from './styles.module.css';
 import TagComponent from './TagComponent';
@@ -52,9 +52,7 @@ function ConfigurationEngine() {
 				setConfigurationPage={setConfigurationPage}
 				reset={reset}
 			/>
-
 		</div>
-
 	);
 }
 

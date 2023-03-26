@@ -1,25 +1,90 @@
-import { format } from '@cogoport/utils';
+import { IcMTimer, IcMActivePlans } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function BasicDetails({ stats_data }) {
-	const { test_name, validity_start, validity_end } = stats_data || {};
-
+function BasicDetails({ basic_info_data }) {
 	return (
-		<div className={styles.container}>
-			<div className={styles.heading}>
-				{test_name}
-				<p className={styles.validity_label}>
-					Valiidty:
-					{' '}
-					<span className={styles.validity}>
-						{format(validity_start, 'dd MMM\' yy')}
-						{' '}
-						-
-						{' '}
-						{format(validity_end, 'dd MMM\' yy')}
-					</span>
-				</p>
+		<div className={styles.row}>
+			<div className={styles.left_flex}>
+				<div className={styles.general}>
+					<div className={styles.svg}><IcMActivePlans /></div>
+					<div className={styles.text}>
+						<div className={styles.text_top}>
+							Topics Covered
+						</div>
+						<div className={styles.text_bottom}>
+							{basic_info_data.topics_covered.length > 0 ? (
+								<div>{basic_info_data.topics_covered.join(', ')}</div>
+							) : (null)}
+						</div>
+					</div>
+
+				</div>
+
+				<div className={styles.general_bottom}>
+					<div className={styles.svg}><IcMTimer /></div>
+					<div className={styles.text}>
+						<div className={styles.text_top}>
+							Time Taken
+						</div>
+						<div className={styles.text_bottom}>
+							{basic_info_data.time_taken || ' '}
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div className={styles.middle_flex}>
+				<div className={styles.general}>
+					<div className={styles.text}>
+						<div className={styles.text_top}>
+							Required pass %
+						</div>
+						<div className={styles.text_bottom}>
+							{basic_info_data.required_pass_percent || ' '}
+							{' '}
+							%
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div className={styles.vertical_line} />
+
+			<div className={styles.left_flex}>
+				<div className={styles.general}>
+					<div className={styles.text}>
+						<div className={styles.text_top}>
+							Students Appeared
+
+						</div>
+						<div className={styles.text_bottom} style={{ fontWeight: '600', color: '#221F20' }}>
+							{basic_info_data.total_students_appeared || ' '}
+						</div>
+					</div>
+
+				</div>
+				<div className={styles.general}>
+					<div className={styles.text}>
+						<div className={styles.text_top}>
+							Passed
+						</div>
+						<div className={styles.text_bottom} style={{ fontWeight: '600', color: '#221F20' }}>
+							{basic_info_data.failed_and_passed.total_passed || ' '}
+						</div>
+					</div>
+					<div className={styles.text} style={{ marginLeft: '16px' }}>
+						<div className={styles.text_top}>
+							Failed
+						</div>
+						<div className={styles.text_bottom} style={{ fontWeight: '600', color: '#221F20' }}>
+							{basic_info_data.failed_and_passed.total_failed || ' '}
+						</div>
+					</div>
+
+				</div>
 			</div>
 		</div>
 	);

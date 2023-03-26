@@ -19,7 +19,7 @@ function PercentagePassed({ stats_data }) {
 				Class Average :
 				{' '}
 				<span className={styles.bold}>
-					{class_average}
+					{class_average.toFixed(2)}
 
 					%
 				</span>

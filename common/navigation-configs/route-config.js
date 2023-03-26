@@ -13,7 +13,6 @@ import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import supplyDashboard from './config/supply-dashboards';
-import testModule from './config/test-module';
 
 const routeConfig = {
 	...rolesAndPermissions,
@@ -32,7 +31,6 @@ const routeConfig = {
 	...inventory_management,
 	...kamMonitoring,
 	...performanceManagement,
-	...testModule,
 };
 
 export default routeConfig;

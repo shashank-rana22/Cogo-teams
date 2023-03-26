@@ -25,7 +25,7 @@ function QuestionsComponent({ test_id }) {
 
 			<ListHeader />
 
-			{questionsList.map((question_item) => <QuestionItem question_item={question_item} />)}
+			{questionsList?.map((question_item, index) => <QuestionItem question_item={question_item} index={index} />)}
 		</>
 	);
 }
