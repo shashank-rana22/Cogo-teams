@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 
 function Card({ item, filters }) {
 	const { importer_exporter = {}, requested_by = '', requester_name = '' } = item || {};
+	const { business_name = '' } = importer_exporter;
 
 	const router = useRouter();
 	const formattedData = formatPortPair({ item });
@@ -34,7 +35,7 @@ function Card({ item, filters }) {
 			{' '}
 			{startCase(requested_by)}
 			:
-			<div className={styles.requester_name}>{startCase(requester_name)}</div>
+			<div className={styles.requester_name}>{requester_name ? startCase(requester_name) : '--'}</div>
 		</div>
 	);
 
@@ -72,7 +73,7 @@ function Card({ item, filters }) {
 							)}
 						</div>
 					</div>
-					{ filters?.status === 'active' ? (
+					{filters?.status === 'active' ? (
 						<div className={styles.pair}>
 							<div>Validity :</div>
 							<div className={styles.value}>
@@ -84,9 +85,9 @@ function Card({ item, filters }) {
 				</div>
 			</div>
 			<div className={styles.business_name}>
-				Business Name :
+				Business Name:
 				{' '}
-				{startCase(importer_exporter?.business_name)}
+				{business_name ? startCase(business_name) : '-'}
 			</div>
 			<div className={styles.service_details}>
 				{item.services.map((service, index) => (
