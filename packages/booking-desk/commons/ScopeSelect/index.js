@@ -1,5 +1,6 @@
 import { Button, Popover } from '@cogoport/components';
 import { routeConfig, navigationMappingsAdmin } from '@cogoport/navigation-configs';
+import { Router } from '@cogoport/next';
 import { useSelector, useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase } from '@cogoport/utils';
@@ -75,11 +76,17 @@ export default function ScopeSelect({ size = 'sm', defaultValues }) {
 		closePopover();
 	}, [profile, dispatch, navigation]);
 
+	const resetProfile = useCallback(() => {
+		const { authParams: _authParams, ...newProfile } = profile;
+		dispatch(setProfileState(newProfile));
+	}, [profile, dispatch]);
+
 	useEffect(() => {
 		if (!scope) {
 			handleApply({ scope: defaultScope, viewType: defaultView });
 		}
-	}, [scope, handleApply, defaultScope, defaultView]);
+		Router.events.on('routeChangeStart', resetProfile);
+	}, []);
 
 	return (
 		<Popover
