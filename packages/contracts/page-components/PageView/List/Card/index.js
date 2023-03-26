@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 
@@ -34,8 +34,7 @@ function Card({ item, filters }) {
 			{' '}
 			{startCase(requested_by)}
 			:
-			{' '}
-			{startCase(requester_name)}
+			<div className={styles.requester_name}>{startCase(requester_name)}</div>
 		</div>
 	);
 
@@ -57,12 +56,7 @@ function Card({ item, filters }) {
 				</div>
 
 				<div className={styles.details}>
-					<Tooltip
-						content={requestedDetails({ type: '' })}
-						placement="bottom"
-					>
-						{requestedDetails({ type: 'fixed_width' })}
-					</Tooltip>
+					{requestedDetails({ type: 'fixed_width' })}
 
 					<div className={styles.pair}>
 						<div>

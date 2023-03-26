@@ -1,107 +1,107 @@
 .card {
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-	padding: 16px;
-	margin: 8px;
-	background-color: #ffff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  margin: 8px;
+  background-color: #ffff;
 }
 
 .header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .heading {
-	display: flex;
-	gap: 32px;
-	align-items: center;
-	justify-content: space-evenly;
-	font-size: 16px;
-	font-weight: 600;
-	line-height: 24px;
-	color: #000;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #000;
 }
 
 .trade {
-	padding: 4px 11px;
-	background: #cfeaed;
-	border-radius: 4px;
+  padding: 4px 11px;
+  background: #cfeaed;
+  border-radius: 4px;
 }
 
 .details {
-	display: flex;
-	gap: 10px;
-	justify-content: flex-start;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
 }
 
 .body {
-	display: flex;
-	gap: 10px;
-	align-items: center;
-	justify-content: space-between;
-	margin-top: 2px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
 }
 
 .port_pair {
-	display: flex;
-	gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 
 .extra {
-	margin-right: 10px;
-	margin-left: 10px;
-	border-right: 2px;
-	border-radius: 4px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-right: 2px;
+  border-radius: 4px;
 }
 
 .sub_container {
-	display: flex;
-	gap: 32px;
-	align-items: center;
+  display: flex;
+  gap: 32px;
+  align-items: center;
 }
 
 .pair {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .value {
-	font-size: 14px;
-	font-weight: 600;
-	line-height: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
 }
 
 .requested_details {
-	width: 300px;
-	padding: 0 5px;
-	overflow: hidden;
-	font-size: 12px;
-	font-weight: 500;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	background: #fffce6;
-	border: 1px solid #828282;
-	border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 12px;
+  background: #fef3e9;
+  border-radius: 4px;
+  display: flex;
+}
+
+.requester_name {
+  font-weight: 600;
+  margin-left: 4px;
 }
 
 .business_name {
-	margin: 2px 0;
-	font-weight: 500;
+  margin: 2px 0;
+  font-weight: 500;
 }
 
 .content {
-	display: flex;
-	gap: 4px;
-	align-items: center;
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 .name {
-	font-weight: 400;
+  font-weight: 400;
 }
 
 .service_details {
-	display: flex;
-	gap: 12px;
+  display: flex;
+  gap: 12px;
 }
