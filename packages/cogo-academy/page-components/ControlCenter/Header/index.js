@@ -16,7 +16,7 @@ function Header({ setSwitchDashboard = () => {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>Manage FAQs</div>
+			<div className={styles.header}>Control Center</div>
 
 			<div className={styles.button_container}>
 				<Button
