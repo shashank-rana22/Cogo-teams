@@ -7,13 +7,12 @@ import { getDefaultFilters } from '../utils/startDateOfMonth';
 const useGetProfitability = (isInViewport) => {
 	const [range, setRange] = useState('current_month');
 	const { query = '', debounceQuery } = useDebounceQuery();
-	const [shipmentData, setShipmentData] = useState({});
 	const [filters, setFilters] = useState({
 		...getDefaultFilters(range),
 		page: 1,
 	});
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_shipment_profits',
 		method : 'GET',
 	}, { manual: true });
@@ -23,7 +22,7 @@ const useGetProfitability = (isInViewport) => {
 			const { job_status, ...rest } = filters;
 			if (isInViewport) {
 				try {
-					const resp = await trigger({
+					await trigger({
 						params: {
 							filters: {
 								job_status,
@@ -32,7 +31,6 @@ const useGetProfitability = (isInViewport) => {
 							...rest,
 						},
 					});
-					setShipmentData(resp.data);
 				} catch (e) {
 					console.log(e, 'err');
 				}
@@ -47,7 +45,7 @@ const useGetProfitability = (isInViewport) => {
 
 	return {
 		loading,
-		data: shipmentData,
+		data,
 		setFilters,
 		setRange,
 		range,
