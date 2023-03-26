@@ -1,4 +1,5 @@
 import allocations from './config/allocations';
+import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
 import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
@@ -13,7 +14,6 @@ import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import shipmentFclFreight from './config/shipment-fcl-freight';
-import bookingDesk from './config/booking-desk';
 import supplyDashboard from './config/supply-dashboards';
 
 const routeConfig = {

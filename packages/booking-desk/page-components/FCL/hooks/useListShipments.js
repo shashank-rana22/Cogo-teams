@@ -21,7 +21,7 @@ export default function useListShipments({ stateProps }) {
 	const [data, setData] = useState(nullData);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/list_booking_note_desk_shipments',
+		url    : 'fcl_freight/list_booking_desk_shipments',
 		method : 'GET',
 	}, { manual: true });
 
@@ -54,7 +54,10 @@ export default function useListShipments({ stateProps }) {
 
 	useEffect(() => {
 		listShipments();
-	}, [listShipments]);
+
+		const toBeStoredValue = JSON.stringify({ filters, activeTab });
+		localStorage.setItem('booking_desk_stored_values', toBeStoredValue);
+	}, [listShipments, activeTab, filters]);
 
 	return {
 		data: {

@@ -1146,7 +1146,7 @@ const navigationMappingAdmin = {
 				href          : '/booking-desk',
 				as            : '/booking-desk',
 				type          : 'link',
-				main_apis     : ['list_booking_note_desk_shipments'],
+				main_apis     : ['list_booking_desk_shipments'],
 				module_type   : 'link',
 				possible_apis : apis.booking_desk,
 			},

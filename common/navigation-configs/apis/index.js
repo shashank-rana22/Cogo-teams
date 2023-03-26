@@ -5,6 +5,7 @@ import app_settings from './app-settings';
 import bl_do from './bl-do-apis';
 import bl_do_collection_release from './bl_do_collection_release';
 import bn_salvage from './bn-salvage-apis';
+import booking_desk from './booking-desk-apis';
 import coe_finance from './coe-finance-apis';
 import cogoLens from './cogo-lens';
 import common_apis from './common-apis';
@@ -39,7 +40,6 @@ import sop from './sop-apis';
 import tech_ops from './tech-ops-apis';
 import techops_dashboard from './techops_dashboard';
 import tools from './tools';
-import booking_desk from './booking-desk-apis';
 
 const apis = {
 	search: search.map((api) => ({
