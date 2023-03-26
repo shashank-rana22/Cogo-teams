@@ -10911,7 +10911,6 @@ const partner = {
 			service_name : 'tickets',
 		},
 	],
-	test_module: [],
 };
 
 export default partner;
