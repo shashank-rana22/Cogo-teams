@@ -52,9 +52,7 @@ function ConfigurationEngine() {
 				setConfigurationPage={setConfigurationPage}
 				reset={reset}
 			/>
-
 		</div>
-
 	);
 }
 
