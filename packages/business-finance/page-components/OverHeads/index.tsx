@@ -13,7 +13,7 @@ function Overheads() {
 	const [activeTab, setActiveTab] = useState(query?.active_tab || 'vendors');
 	const { push } = useRouter();
 
-	const handleChange = (tab) => {
+	const handleChange = (tab:any) => {
 		setActiveTab(tab);
 		push(
 			'/business-finance/overheads/[active_tab]',
