@@ -104,8 +104,8 @@ function CreatePage() {
 							layout={layouts}
 							breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
 							preventCollision={false}
-							cols={{ lg: 8, md: 8, sm: 4, xs: 2, xxs: 2 }}
 							autoSize
+							cols={{ lg: 8, md: 8, sm: 4, xs: 2, xxs: 2 }}
 							margin={{
 								lg  : [20, 20],
 								md  : [20, 20],
@@ -124,14 +124,15 @@ function CreatePage() {
 										y           : widget?.y,
 										w           : widget?.w,
 										h           : widget?.h,
-										minW        : 2,
+										minW        : 0,
 										maxW        : Infinity,
-										minH        : 2,
+										minH        : 0,
 										maxH        : Infinity,
 										isDraggable : true,
 										isResizable : true,
 									}}
 								>
+
 									<button
 										className={styles.deleteButton}
 										onClick={() => handleDelete(widget.i)}

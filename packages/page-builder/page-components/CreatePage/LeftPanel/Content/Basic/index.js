@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 const CONTENT_MAPPING = {
 	text: {
 		// eslint-disable-next-line max-len
-		content    : '<p>start typing here...</p>',
+		content    : 'start typing here...',
 		layout     : {},
 		x          : 0,
 		y          : 0,
