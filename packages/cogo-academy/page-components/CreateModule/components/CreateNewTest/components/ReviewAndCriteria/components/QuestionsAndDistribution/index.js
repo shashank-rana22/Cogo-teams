@@ -95,11 +95,15 @@ function QuestionsAndDistribution(props) {
 			),
 		},
 		{
-			Header: (
-				<div className={styles.distribution_heading}>
-					<h4>DISTRIBUTION</h4>
-					<h6>Questions and cases from each Set</h6>
-				</div>),
+			Header:
+	<div className={styles.content}>
+		<div className={styles.subcontent}>
+			<span>DISTRIBUTION</span>
+			<span className={styles.matter}>
+				Questions and cases from each Set
+			</span>
+		</div>
+	</div>,
 			id       : 'f',
 			accessor : ({ non_case_study_question_count = 0, case_study_question_count = 0, id = '' }) => {
 				const controlItem1 = getControls(id, non_case_study_question_count)[0];
@@ -110,7 +114,6 @@ function QuestionsAndDistribution(props) {
 					<section className={styles.distribution}>
 
 						<span>No. of</span>
-
 						<div className="input_container">
 							<InputController control={control} {...controlItem1} className={styles.input} />
 							{errors[`${id}q`] && <div className={styles.error_msg}>{errors[`${id}q`]?.message}</div>}
@@ -120,7 +123,6 @@ function QuestionsAndDistribution(props) {
 							<InputController control={control} {...controlItem2} className={styles.input} />
 							{errors[`${id}c`] && <div className={styles.error_msg}>{errors[`${id}c`]?.message}</div>}
 						</div>
-
 					</section>
 				);
 			},
@@ -152,7 +154,7 @@ function QuestionsAndDistribution(props) {
 						{' '}
 						{questionsCount}
 					</h4>
-					<h4 className={styles.total_heading}>
+					<h4 className={styles.total_heading_two}>
 						Total Cases:
 						{' '}
 						{casesCount}

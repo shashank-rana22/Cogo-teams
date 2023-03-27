@@ -62,7 +62,7 @@ function ReviewAndCriteria(props) {
 
 					<div className={styles.entity}>
 						<div className={styles.label_entity}>Cogo Entity </div>
-						<div className={styles.entity_name}>{cogo_entity_object.business_name}</div>
+						<div className={styles.entity_name}>{cogo_entity_object?.business_name}</div>
 					</div>
 
 					<div className={styles.topic}>
