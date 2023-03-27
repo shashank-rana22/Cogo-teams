@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ setSwitchDashboard = () => {} }) {
 	const router = useRouter();
 
 	const onClickConfiguration = () => {
@@ -30,18 +30,26 @@ function Header() {
 
 	return (
 		<div className={styles.container}>
-			<div>Manage FAQs</div>
+			<div className={styles.header}>Manage FAQs</div>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={onClickConfiguration}>
+				<Button
+					type="button"
+					style={{ marginLeft: 8 }}
+					themeType="secondary"
+					onClick={() => setSwitchDashboard(false)}
+				>
+					Analytics
+				</Button>
+				<Button type="button" style={{ marginLeft: 8 }} themeType="secondary" onClick={onClickConfiguration}>
 					Configuration
 				</Button>
 
-				<Button style={{ marginLeft: 8 }} onClick={onClickUpload}>
+				<Button type="button" style={{ marginLeft: 8 }} onClick={onClickUpload}>
 					Upload in Bulk
 				</Button>
 
-				<Button style={{ marginLeft: 8 }} onClick={onClickQuestion}>
+				<Button type="button" style={{ marginLeft: 8 }} onClick={onClickQuestion}>
 					Add Question
 				</Button>
 			</div>
