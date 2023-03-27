@@ -80,17 +80,13 @@ function Answer({ topic = {}, question, setQuestion }) {
 			<div className={styles.like_dislike_container}>
 
 				<div className={styles.no_of_people_like_it}>
-					{data?.faq_topics?.[0]?.view_count
-						? data?.faq_topics?.[0]?.view_count
-						: '0'}
+					{data?.view_count || 0}
 					{' '}
 					people viewed this question
 				</div>
 
 				<div className={styles.no_of_people_like_it}>
-					{data?.faq_topics?.[0]?.view_count
-						? data?.faq_topics?.[0]?.view_count
-						: '0'}
+					{data?.answers?.[0]?.upvote_count || '0'}
 					{' '}
 					people liked this answer
 				</div>
@@ -135,7 +131,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 						className={styles.help_text}
 						onClick={() => GotoFAQ()}
 					>
-						<div>Open in help center</div>
+						<div>No, go to help center</div>
 						<IcMRedo />
 					</div>
 				</div>
