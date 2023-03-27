@@ -44,6 +44,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		branch,
 		lineItemsList,
 		// tradeParty,
+		transactionDate,
 	} = expenseData || {};
 
 	const { name:branchName, branchId } = branch || {};
@@ -140,16 +141,17 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		account_number:accountNumber,
 		id:bankId,
 		vendor_id:collectionPartyId,
-	} = bankDetails[0];
+	} = bankDetails?.[0] || {};
 
 	const payload = {
 		expenseConfigurationId,
 		request: {
 			job: {
-				jobSource   : 'OVERHEAD',
-				jobType     : 'EXPENSE',
-				referenceId : '',
-				jobDetails  : {
+				jobSource       : 'OVERHEAD',
+				jobType         : 'EXPENSE',
+				referenceId     : '',
+				transactionDate : formatDate(transactionDate, 'yyyy-MM-dd hh:mm:ss', {}, false),
+				jobDetails      : {
 					vendorDetails: {
 						organizationId       : vendorID,
 						organizationName     : vendorName,
@@ -206,7 +208,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 					bankDetail           : { // ??
 						bankName,
 						// branchCode        : 'SBIN0017891',
-						// beneficiaryName   : 'STATE',
+						beneficiaryName: bankName,
 						ifscCode,
 						accountNumber,
 						// swiftCode         : '',

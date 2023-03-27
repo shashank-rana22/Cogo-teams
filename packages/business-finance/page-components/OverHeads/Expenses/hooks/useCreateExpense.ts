@@ -41,6 +41,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		branch,
 		lineItemsList,
 		// tradeParty,
+		transactionDate,
 	} = formData || {};
 
 	const branchId = JSON.parse(formData?.branch || '{}')?.branchId;
@@ -95,10 +96,13 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		if (addresses?.length > 0) {
 			// picking single address from entity data that matches to branch address
 
-			addresses.forEach((address) => {
+			addresses.forEach((address:any) => {
 				const { city_id:cityId } = address || {};
 
+				console.log('address data =', { address, branchId });
 				if (cityId === branchId) {
+					console.log('condition matched...');
+
 					setAddressData({
 						pincode     : address?.pin_code,
 						address     : address?.address,
@@ -132,7 +136,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		account_number:accountNumber,
 		id:bankId,
 		vendor_id:collectionPartyId,
-	} = bankDetails[0];
+	} = bankDetails?.[0] || {};
 
 	const [{ data:responseData, loading }, trigger] = useRequestBf(
 		{
@@ -151,10 +155,11 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		// expenseConfigurationId : 'example', only in case of recurring
 		request: {
 			job: {
-				jobSource   : 'OVERHEAD',
-				jobType     : 'EXPENSE',
-				referenceId : '',
-				jobDetails  : {
+				jobSource       : 'OVERHEAD',
+				jobType         : 'EXPENSE',
+				transactionDate : formatDate(transactionDate, 'yyyy-MM-dd hh:mm:ss', {}, false),
+				referenceId     : '',
+				jobDetails      : {
 					vendorDetails: {
 						organizationId       : vendorID,
 						organizationName     : vendorName,
@@ -211,7 +216,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					bankDetail           : { // ??
 						bankName,
 						// branchCode        : 'SBIN0017891',
-						// beneficiaryName   : 'STATE',
+						beneficiaryName: bankName,
 						ifscCode,
 						accountNumber,
 						// swiftCode         : '',

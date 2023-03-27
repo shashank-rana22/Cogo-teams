@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMFileUploader } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-// import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
+import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import useCreateExpense from '../../hooks/useCreateExpense';
 import useCreateExpenseConfig from '../../hooks/useCreateExpenseConfig';
 
@@ -18,18 +18,17 @@ interface Data {
 
 interface Props {
 	mailData?:Data,
-	setMailData?:any,
 	setShowModal?:boolean,
 	getList?:(p:any)=>void,
 	getRecurringList?:(p:any)=>void,
 	createExpenseType?:string,
 }
 
-function MailTemplate({ mailData, setMailData, setShowModal, getList, getRecurringList, createExpenseType }:Props) {
+function MailTemplate({ mailData, setShowModal, getList, getRecurringList, createExpenseType }:Props) {
 	const { uploadedInvoice, vendorName = '-', expenseCategory = '-', stakeholderEmail } = mailData || {};
 
-	// const splitArray = (String(uploadedInvoice) || '').split('/') || [];
-	// const filename = splitArray[splitArray.length - 1];
+	const splitArray = (String(uploadedInvoice) || '').split('/') || [];
+	const filename = splitArray[splitArray.length - 1];
 
 	const { submitData, loading } = useCreateExpense({
 		formData: mailData,
@@ -86,9 +85,11 @@ function MailTemplate({ mailData, setMailData, setShowModal, getList, getRecurri
 				{uploadedInvoice?.length > 0 && (
 					<div className={styles.file}>
 						<a href={uploadedInvoice} target="_blank" rel="noreferrer">
-							<IcMFileUploader />
-							{/* {showOverflowingNumber(filename, 10)} */}
-							Uploaded file
+							<div style={{ display: 'flex' }}>
+								<div><IcMFileUploader /></div>
+								<div style={{ marginLeft: '4px' }}>{showOverflowingNumber(filename, 10)}</div>
+							</div>
+							{/* Uploaded file */}
 						</a>
 					</div>
 				)}
