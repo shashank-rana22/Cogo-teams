@@ -38,7 +38,7 @@ function DisplayCards({
 
 	if (loading) {
 		if (activeTab === 'active') {
-			return <LoadingState loadingCount={5} height="100px" itemHeight="36px" />;
+			return <LoadingState loadingCount={5} height="90px" itemHeight="32px" />;
 		}
 
 		return <LoadingState loadingCount={6} height="80px" itemHeight="28px" />;
