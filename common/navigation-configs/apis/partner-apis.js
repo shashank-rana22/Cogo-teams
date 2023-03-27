@@ -7442,6 +7442,30 @@ const partner = {
 			api         : 'get_payments_dashboard_bf_profitability_customer',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_payments_dashboard_bf_service_wise_rec_pay',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_bf_service_wise_overdue',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_bf_income_expense',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_bf_receivable',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_bf_today_stats',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_purchase_treasury_stats',
+			access_type : 'private',
+		},
 	],
 	translate: [
 		{
