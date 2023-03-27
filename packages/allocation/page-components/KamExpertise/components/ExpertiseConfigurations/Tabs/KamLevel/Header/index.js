@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 
 function Header(props) {
 	const { auditData, levelLoading } = props;
-	console.log('hihi', auditData);
 
 	return (
 		<div className={styles.container}>

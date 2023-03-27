@@ -2,19 +2,18 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
 
 const expertiseTypes = {
 	minimum_transacting_accounts: {
-		expertise_type       : 'Transacting Accounts',
+		expertise_type       : 'transacting_accounts',
 		threshold_score_type : 'Minimum Transacting Accounts',
 	},
 	retained_account_count: {
-		expertise_type       : 'Transacting Accounts',
+		expertise_type       : 'transacting_accounts',
 		threshold_score_type : 'Retained Account Count',
 	},
 	retained_account_min_duration: {
-		expertise_type       : 'Transacting Accounts',
+		expertise_type       : 'transacting_accounts',
 		threshold_score_type : 'Retained Account Min Duration',
 	},
 };
@@ -33,7 +32,7 @@ function useCreateKamLevel(props) {
 		const formResponse = [];
 
 		Object.keys(formValues).forEach((key) => {
-			let expertise_type = startCase(key);
+			let expertise_type = key;
 			const threshold_score = Number(formValues[key]);
 			let threshold_score_type = 'Score';
 

@@ -39,14 +39,15 @@
 }
 
 .tab_list {
-	margin: 16px 0;
 	position: relative;
+	margin: 16px 0;
 
 	@media (max-width: 768px) {
 		overflow-x: scroll;
 	}
 }
-.pub_button{
+
+.pub_button {
 	position: absolute;
 	top: 0;
 	right: 0;

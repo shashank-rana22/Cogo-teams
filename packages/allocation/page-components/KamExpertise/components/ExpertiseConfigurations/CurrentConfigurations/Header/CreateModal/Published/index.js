@@ -1,8 +1,6 @@
 import { Pill, Table } from '@cogoport/components';
 import { format } from '@cogoport/utils';
-// import { format } from '@cogoport/utils';
 import React from 'react';
-// import { Modal} from '@cogoport/components';
 
 import styles from './styles.module.css';
 

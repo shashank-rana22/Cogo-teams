@@ -9,17 +9,17 @@
 }
 
 .list {
-	margin-right : 8px;
-	width:  150px;
+	width: 150px;
+	margin-right: 8px;
 }
 
 .label {
+	display: flex;
 	flex: 1;
+	align-self: flex-start;
+	margin-bottom: 4px;
 	font-size: 12px;
-    display: flex;
-    align-self: flex-start;
-    margin-bottom: 4px;
-    color: #4F4F4F;
+	color: #4f4f4f;
 }
 
 .error_message {
