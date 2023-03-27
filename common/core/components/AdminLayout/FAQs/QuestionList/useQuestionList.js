@@ -43,16 +43,15 @@ const useQuestionList = ({
 				await trigger({
 					params: {
 						filters: {
-							status        : 'active',
-							state         : 'published',
-							faq_topic_id  : [topic?.id] || undefined,
-							auth_function : scope === 'partner' ? roleFunction : undefined,
-							auth_sub_function:
-							scope === 'partner' ? roleSubFunction : undefined,
+							status            : 'active',
+							state             : 'published',
+							faq_topic_id      : [topic?.id] || undefined,
+							auth_function     : scope === 'partner' ? roleFunction : undefined,
+							auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
 							country_id,
-							cogo_entity_id : id,
-							persona        : scope === 'partner' ? 'admin_user' : 'importer_exporter',
-							q              : query || undefined,
+							cogo_entity_id    : id,
+							persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
+							q                 : query || undefined,
 						},
 						sort_by                  : 'view_count',
 						page,
