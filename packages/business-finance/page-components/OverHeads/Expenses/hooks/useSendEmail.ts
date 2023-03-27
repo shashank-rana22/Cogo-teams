@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -10,6 +11,7 @@ interface Row {
 	billDate?:Date | number,
 	maxPayoutAllowed?:number | string,
 	grandTotal?:number,
+	approvedBy?:string | number,
 }
 
 interface Props {
@@ -30,7 +32,7 @@ const useSendEmail = () => {
 	);
 
 	const sendMail = async ({ rowData, recurringState }:Props) => {
-		const { sellerDetails, category, billDate:expenseDate } = rowData || {};
+		const { sellerDetails, category, billDate:expenseDate, approvedBy } = rowData || {};
 		const { organizationName:vendorName } = sellerDetails || {};
 
 		let payableAmount:number | string;
@@ -43,8 +45,7 @@ const useSendEmail = () => {
 		try {
 			const response = await trigger({
 				data: {
-					// stakeholderId : approvedBy,
-					stakeholderId : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
+					stakeholderId : approvedBy,
 					userId        : profile?.user?.id,
 					approveLink   : '/business-finance/overheads/expenses/response',
 					rejectLink    : '/business-finance/overheads/expenses/response',
@@ -54,16 +55,13 @@ const useSendEmail = () => {
 					payableAmount, // maxPayoutallowed(for recurring record) and grandtotal(for nonRecurr)
 				},
 			});
-			console.log('response->', response);
+			if (response?.data?.message === 'OK') {
+				Toast.success('Email sent successfully');
+			}
 		} catch (err) {
 			console.log(err);
+			Toast.error('Something went wrong');
 		}
-
-		// if (data?.message === 'OK') {
-		// 	Toast.success('Email sent successfully');
-		// } else {
-		// 	Toast.error('Something went wrong');
-		// }
 	};
 
 	return {

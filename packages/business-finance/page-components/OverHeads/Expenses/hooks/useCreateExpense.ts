@@ -205,7 +205,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					// supplyAgent             : 'Ajit', // ??
 					// zone                    : 'NORTH', // ??
 					// countryName             : tradeParty?.country?.display_name,
-					// countryCode             : tradeParty?.country?.country_code,
+					countryCode          : 'IN', /// need to change from trade party
 					countryId            : vendorCountryId,
 					registrationNumber   : registrationType === 'pan' ? vendorRegistrationNumber : null,
 					taxNumber            : registrationType === 'tax' ? vendorRegistrationNumber : null,
