@@ -73,6 +73,30 @@
 	line-height: 18px;
 }
 
+.requested_details {
+	display: flex;
+	padding: 2px 4px;
+	font-size: 12px;
+	background: #fef3e9;
+	border-radius: 4px;
+}
+
+.requester_name {
+	margin-left: 4px;
+	font-weight: 600;
+}
+
+.business_name {
+	display: flex;
+	margin: 2px 0;
+	font-weight: 500;
+}
+
+.org_name {
+	margin-left: 4px;
+	font-weight: 600;
+}
+
 .content {
 	display: flex;
 	gap: 4px;
