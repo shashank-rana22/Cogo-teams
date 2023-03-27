@@ -23,3 +23,23 @@
 	display: flex;
 	margin: 8px 0;
 }
+
+.modal_container {
+	background-color: none;
+
+	:global {
+		.ui_modal_backdrop {
+			background-color: rgb(251 251 252 / 0%);
+		}
+	}
+
+	@media (max-width: 768px) {
+		width: 300px !important;
+
+		:global {
+			.ui_modal_backdrop {
+				background-color: rgb(241 241 244 / 0%);
+			}
+		}
+	}
+}

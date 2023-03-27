@@ -1,5 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useCallback } from 'react';
 
 function useGetQuestion() {
 	const { general } = useSelector((state) => state);
@@ -11,15 +12,18 @@ function useGetQuestion() {
 		url    : '/get_question',
 	}, { manual: false });
 
-	const fetchQuestion = async () => {
-		try {
-			await trigger({
-				params: { id, is_admin_view: true },
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
+	const fetchQuestion = useCallback(
+		async () => {
+			try {
+				await trigger({
+					params: { id, is_admin_view: true },
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		},
+		[id, trigger],
+	);
 
 	return { fetchQuestion, query, data, loading };
 }
