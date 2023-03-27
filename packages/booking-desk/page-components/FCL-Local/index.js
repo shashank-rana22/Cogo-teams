@@ -1,10 +1,11 @@
+import List from '../../commons/List';
 import Loader from '../../commons/Loader';
 import ScopeAndFilters from '../../commons/ScopeAndFilters';
 import TabsAndFilters from '../../commons/TabsAndFilters';
 import { fcl_freight_local as tabs } from '../../config/TABS_CONFIG.json';
 import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments';
 
-import List from './List';
+import Card from './Card';
 import styles from './styles.module.css';
 
 export default function FCLLocalDesk({ stateProps = {} }) {
@@ -21,7 +22,7 @@ export default function FCLLocalDesk({ stateProps = {} }) {
 			<TabsAndFilters stateProps={stateProps} tabs={tabs} />
 
 			<div className={`${styles.list_container} ${loading ? styles.loading : ''}`}>
-				{loading ? <Loader /> : <List data={data} stateProps={stateProps} />}
+				{loading ? <Loader /> : <List data={data} stateProps={stateProps} Card={Card} />}
 			</div>
 		</div>
 	);
