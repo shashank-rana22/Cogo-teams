@@ -1,4 +1,5 @@
 import allocations from './config/allocations';
+import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
 import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
@@ -33,6 +34,7 @@ const routeConfig = {
 	...kamMonitoring,
 	...performanceManagement,
 	...shipmentFclFreight,
+	...bookingDesk,
 };
 
 export default routeConfig;
