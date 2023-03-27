@@ -1,5 +1,5 @@
 import useAxios from 'axios-hooks';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 /**
  * Single utility hook to get mail from Cogo RPA using id of email
@@ -18,24 +18,26 @@ const useGetAttachements = (email_address, message_id) => {
 	 *
 	 * @param {String} id Id of mail
 	 */
-	const getAttachements = async () => {
-		try {
-			await triggerGetMail({
-				params: {
-					email_address,
-					message_id,
-				},
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
+	const getAttachements = useCallback(() => {
+		(async () => {
+			try {
+				await triggerGetMail({
+					params: {
+						email_address,
+						message_id,
+					},
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		})();
+	}, [triggerGetMail, email_address, message_id]);
 
 	useEffect(() => {
 		if (message_id) {
 			getAttachements();
 		}
-	}, [message_id]);
+	}, [message_id, getAttachements]);
 
 	return {
 		getAttachementsApi,

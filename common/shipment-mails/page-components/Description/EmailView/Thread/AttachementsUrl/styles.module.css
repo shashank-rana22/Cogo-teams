@@ -5,6 +5,9 @@
 .row {
 	display: flex;
 	align-items: center;
+	padding-left: 12px;
+	flex-wrap: wrap;
+
 	&.doc {
 		padding: 6px 4px;
 		border-radius: 4px 0px 0px 4px;
@@ -26,6 +29,8 @@
 	align-items: center;
 	border: 1px solid #cbcfeb;
 	border-radius: 4px;
+	margin: 0 12px 8px 0;
+
 	&:hover {
 		cursor: pointer;
 	}
@@ -36,7 +41,8 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	margin-right: 4px;
+	margin: 0 4px;
+	font-size: 12px;
 }
 
 .action {

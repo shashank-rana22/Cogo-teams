@@ -16,6 +16,8 @@ function Thread({ content, emailData, onAction, allAttachements }) {
 	const showReply = !!from && !isFromRpa;
 	const showReplyAll = combinedLength > 1 && !isFromRpa;
 
+	console.log(isFromRpa, 'isFromRpa');
+
 	return (
 		<div className={styles.container}>
 

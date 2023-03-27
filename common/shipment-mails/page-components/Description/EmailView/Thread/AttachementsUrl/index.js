@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 
 function AttachementsUrl({ externalAttachements }) {
-	const [showPreview, setPreview] = useState(null);
+	const [showPreview, setShowPreview] = useState(null);
 	const [showPopover, setShowPopover] = useState(false);
 	const attachements = (externalAttachements || []).map((attachment) => {
 		const parts = attachment.split('/');
@@ -30,9 +30,9 @@ function AttachementsUrl({ externalAttachements }) {
 							className={cl`${styles.row} ${styles.doc}`}
 							role="button"
 							tabIndex={0}
-							onClick={() => setPreview(item)}
+							onClick={() => setShowPreview(item)}
 						>
-							<IcMDocument />
+							<IcMDocument style={{ width: '1.5em', height: '1.5em' }} />
 							<div
 								className={cl`${styles.item_name} ${styles.name}`}
 							>
@@ -51,7 +51,7 @@ function AttachementsUrl({ externalAttachements }) {
 										role="button"
 										tabIndex={0}
 										onClick={() => {
-											setPreview(item);
+											setShowPreview(item);
 											setShowPopover(false);
 										}}
 									>
@@ -88,9 +88,9 @@ function AttachementsUrl({ externalAttachements }) {
 			{showPreview ? (
 				<Modal
 					show={showPreview}
-					onClose={() => setPreview(null)}
+					onClose={() => setShowPreview(null)}
 					className="primary lg"
-					onOuterClick={() => setPreview(null)}
+					onOuterClick={() => setShowPreview(null)}
 					closable={false}
 				>
 					<object
