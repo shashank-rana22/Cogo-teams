@@ -7448,6 +7448,89 @@ const partner = {
 			module      : 'Bpr',
 			feature     : 'Bpr',
 		},
+		{
+			api         : 'get_payments_settlement',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'list_organization_users',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'outstanding',
+			feature      : 'outstanding',
+
+		},
+		{
+			api         : 'get_partner_user_rm_mapping',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_sales_invoice_timeline_by_id',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'post_sales_invoice_by_id_irn_cancel',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'post_sales_invoice_by_id_irn_generate',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_outstanding_by_customer',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_sales_outstanding_invoice_list',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_sales_report_download_outstanding_list',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+
+		{
+			api         : 'get_payments_outstanding_customer_payment',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+
+		{
+			api         : 'get_payments_settlement_history',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+
+		{
+			api         : 'post_sales_invoice_post_to_sage',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+
 	],
 	incident_controller: [
 		{
