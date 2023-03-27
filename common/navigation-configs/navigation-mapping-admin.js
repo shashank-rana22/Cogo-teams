@@ -820,8 +820,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-overheads',
 				title         : 'Overheads',
-				href          : 'v2/business-finance/overheads/[active_tab]',
-				as            : 'v2/business-finance/overheads/vendors',
+				href          : '/v2/business-finance/overheads/[active_tab]',
+				as            : '/v2/business-finance/overheads/vendors',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.overheads,
