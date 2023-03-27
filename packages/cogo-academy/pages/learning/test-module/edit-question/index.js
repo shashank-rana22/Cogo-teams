@@ -3,7 +3,7 @@ import CreateQuestionSet from '@cogoport/cogo-academy/page-components/CreateModu
 
 function EditQuestionSet() {
 	return (
-		<CreateQuestionSet mode="new" />
+		<CreateQuestionSet mode="edit" />
 	);
 }
 

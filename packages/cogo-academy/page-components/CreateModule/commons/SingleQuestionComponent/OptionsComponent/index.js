@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const alphabetMapping = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-function OptionsComponent({ control, controls, register, name, errors }) {
+function OptionsComponent({ control, controls, register, name, errors, mode }) {
 	const childEmptyValues = {};
 
 	controls.forEach((controlItem) => {
@@ -44,7 +44,7 @@ function OptionsComponent({ control, controls, register, name, errors }) {
 						/>
 
 						<div className={styles.right_button_container}>
-							{fields.length < 11 && index === fields.length - 1 ? (
+							{fields.length < 11 && index === fields.length - 1 && mode !== 'view' ? (
 								<Button
 									type="button"
 									themeType="secondary"
@@ -55,7 +55,7 @@ function OptionsComponent({ control, controls, register, name, errors }) {
 								</Button>
 							) : null}
 
-							{fields.length > 1 ? (
+							{fields.length > 1 && mode !== 'view' ? (
 								<IcMDelete
 									style={{ cursor: 'pointer' }}
 									width={20}

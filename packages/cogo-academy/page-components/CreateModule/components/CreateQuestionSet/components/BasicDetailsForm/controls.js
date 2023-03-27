@@ -1,9 +1,10 @@
-const getControls = () => [
+const getControls = ({ mode }) => [
 	{
 		name        : 'name',
 		label       : 'Name of Question Set:',
 		type        : 'input',
 		placeholder : 'Type name...',
+		disabled    : mode === 'view',
 		rules       : { required: 'This is required' },
 	},
 	{
@@ -11,6 +12,7 @@ const getControls = () => [
 		label    : 'Select Cogo Entity:',
 		type     : 'async-select',
 		asyncKey : 'partners',
+		disabled : mode === 'view',
 		params   : {
 			filters: {
 				entity_types : ['cogoport'],
@@ -25,6 +27,7 @@ const getControls = () => [
 		name        : 'topic',
 		label       : 'Select Set Topic:',
 		type        : 'input',
+		disabled    : mode === 'view',
 		placeholder : 'Select topic name',
 		rules       : { required: 'This is required' },
 	},
@@ -32,6 +35,7 @@ const getControls = () => [
 		name        : 'audience_ids',
 		label       : 'Select Set User Groups:',
 		type        : 'multi-select',
+		disabled    : mode === 'view',
 		options     : [],
 		placeholder : 'Select User Groups',
 	},

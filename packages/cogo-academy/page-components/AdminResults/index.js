@@ -47,7 +47,7 @@ function AdminResults() {
 	};
 
 	const handleGoBack = () => {
-		push('/learning?activeTab=test-module', '/learning?activeTab=test-module');
+		push('/learning?activeTab=test_module', '/learning?activeTab=test_module');
 	};
 
 	return (
