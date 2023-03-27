@@ -1,7 +1,7 @@
 .distribution {
 	display: flex;
 	gap: 4px;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: flex-end;
 }
 
@@ -93,4 +93,8 @@
 .total_heading_two {
 	font-weight: 600;
 	text-align: right;
+}
+
+.align_center{
+	align-self: center;
 }

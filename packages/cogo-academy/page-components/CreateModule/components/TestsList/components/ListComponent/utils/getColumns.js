@@ -296,7 +296,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 			accessor : ({ id = '', status = '' }) => (
 				status === 'published' ? (
 					<div>
-						<Link href={`/learning/tests/results/admin/${id}`}>Results</Link>
+						<Link href={`/learning/tests/results/admin/${id}`}>Details</Link>
 					</div>
 				) : <section>-</section>
 
