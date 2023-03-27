@@ -72,29 +72,6 @@
 	color: #849e4c;
 }
 
-.percentage_bar {
-	:global {
-		.ui_progressbar_container {
-			display: flex;
-			flex-direction: row-reverse;
-			align-items: center;
-			justify-content: flex-end;
-			padding: 0;
-		}
-
-		.ui_progressbar_bar {
-			margin-right: 16px;
-		}
-
-		.ui_progressbar_filename {
-			margin-bottom: 0;
-			font-size: 12px;
-			font-weight: 600;
-			color: #4f4f4f;
-		}
-	}
-}
-
 .case_study {
 	font-size: 12px;
 	font-weight: 400;
