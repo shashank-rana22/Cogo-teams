@@ -1,11 +1,12 @@
 .container {
-  /* display: flex; */
-  padding: 24px;
-  background: #fff;
-  border-radius: 6px;
-  margin-bottom: 24px;
+	/* display: flex; */
+	padding: 24px;
+	margin-bottom: 24px;
+	background: #fff;
+	border-radius: 6px;
 }
+
 .info_row {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
