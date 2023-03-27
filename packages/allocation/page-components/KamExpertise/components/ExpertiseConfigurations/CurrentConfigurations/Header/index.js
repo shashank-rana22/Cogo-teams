@@ -1,6 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
 import { format } from '@cogoport/utils';
-import { useState } from 'react';
 
 import useGetKamExpertiseVersionDetials from '../../../../hooks/useGetKamExpertiseVersionDetials';
 
@@ -27,31 +26,25 @@ const CREATE_CONFIGURATION_MAPPING = {
 	[INITIAL_MODE]      : CreateModal,
 };
 
-function Header({
-	audit_data = {},
-	LIVE_VERSION,
-	data = [],
-	setResponseId,
-	responseId,
-	refetch,
-	expertiseRefetch,
-	cardRefetch,
-	onPublish,
-	setOnPublish,
-}) {
-	const [selectedVersion, setSelectedVersion] = useState('');
-
-	const [mode, setMode] = useState('initial-mode');
-
-	const [showModal, setShowModal] = useState(false);
-
-	const { getVersion, CreateModalLoading } = useGetKamExpertiseVersionDetials({
-		selectedVersion,
-		setMode,
-		setShowModal,
-		mode,
+function Header(props) {
+	const {
+		audit_data = {},
+		LIVE_VERSION,
+		data = [],
 		setResponseId,
-		setSelectedVersion,
+		responseId,
+		refetch,
+		expertiseRefetch,
+		cardRefetch,
+		onPublish,
+		setOnPublish,
+	} = props;
+
+	const {
+		getVersion, CreateModalLoading, selectedVersion,
+		setSelectedVersion, mode, setMode, showModal, setShowModal,
+	} = useGetKamExpertiseVersionDetials({
+		setResponseId,
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
@@ -109,7 +102,6 @@ function Header({
 						<strong>
 							{ audit_data.updated_at
 								? format(audit_data.updated_at, 'dd MMM yyyy') : ''}
-
 						</strong>
 					</div>
 
@@ -162,12 +154,10 @@ function Header({
 									CreateModalLoading={CreateModalLoading}
 								/>
 							</Modal.Footer>
-						)
-							: null}
+						) : null}
 					</Modal>
 				)}
 			</div>
-
 		</div>
 	);
 }

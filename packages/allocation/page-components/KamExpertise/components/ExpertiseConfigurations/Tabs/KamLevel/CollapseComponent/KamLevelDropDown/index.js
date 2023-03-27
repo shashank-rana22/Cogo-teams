@@ -5,7 +5,6 @@ import useUpdateKamScores from '../../../../../../hooks/useUpdateKamScores';
 
 import KamLevelDetailsEdit from './KamLevelDetailsEdit';
 import KamLevelDetailsShow from './KamLevelDetailsShow';
-import styles from './styles.module.css';
 
 function KamLevelDropDown({ refetch, transition_level }) {
 	const [editMode, setEditMode] = useState(false);

@@ -32,13 +32,9 @@ function ViewAllConfigs() {
 	const router = useRouter();
 
 	const [activeConfigTab, setActiveConfigTab] = useState('kam-expertise-score-config');
-
 	const [responseId, setResponseId] = useState('');
-
 	const [mainLoading, setMainLoading] = useState();
-
 	const [showPublishModal, setShowPublishModal] = useState(false);
-
 	const [onPublish, setOnPublish] = useState('');
 
 	const onClickBack = () => {
@@ -46,11 +42,8 @@ function ViewAllConfigs() {
 	};
 
 	const { listKamExpertiseCurrentConfigs = {}, ConfigCardLoading, cardRefetch } = useGetKamExpertiseCurrentConfig();
-
 	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig({ responseId });
-
 	const { listExpertiseParams, expertiseLoading, expertiseRefetch } = useGetExpertiseParameters();
-
 	const { onCreate, loading: publishLoading } = usePublishDraft({ setShowPublishModal, setOnPublish });
 
 	const componentProps = {
