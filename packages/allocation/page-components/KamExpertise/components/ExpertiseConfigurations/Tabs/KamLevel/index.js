@@ -5,7 +5,13 @@ import KamLevelCard from './CollapseComponent/KamLevelCard';
 import KamLevelDropDown from './CollapseComponent/KamLevelDropDown';
 import Header from './Header';
 
-function KamLevel({ setMainLoading, levelLoading, kamConfigDetails, refetch, cardRefetch }) {
+function KamLevel({
+	setMainLoading,
+	levelLoading,
+	kamConfigDetails,
+	refetch,
+	cardRefetch,
+}) {
 	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
 

@@ -34,13 +34,17 @@ function ViewAllConfigs() {
 	const [activeConfigTab, setActiveConfigTab] = useState('kam-expertise-score-config');
 
 	const [responseId, setResponseId] = useState('');
+
 	const [mainLoading, setMainLoading] = useState();
+
 	const [showPublishModal, setShowPublishModal] = useState(false);
+
 	const [onPublish, setOnPublish] = useState('');
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise');
 	};
+
 	const { listKamExpertiseCurrentConfigs = {}, ConfigCardLoading, cardRefetch } = useGetKamExpertiseCurrentConfig();
 
 	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig({ responseId });
@@ -48,6 +52,23 @@ function ViewAllConfigs() {
 	const { listExpertiseParams, expertiseLoading, expertiseRefetch } = useGetExpertiseParameters();
 
 	const { onCreate, loading: publishLoading } = usePublishDraft({ setShowPublishModal, setOnPublish });
+
+	const componentProps = {
+		'kam-expertise-score-config': {
+			setMainLoading,
+			listExpertiseParams,
+			expertiseLoading,
+			expertiseRefetch,
+			cardRefetch,
+		},
+		'kam-level-config': {
+			setMainLoading,
+			levelLoading,
+			kamConfigDetails,
+			refetch,
+			cardRefetch,
+		},
+	};
 
 	return (
 		<section className={styles.main_container}>
@@ -85,15 +106,7 @@ function ViewAllConfigs() {
 							return Component ? (
 								<TabPanel key={name} name={name} title={title}>
 									<Component
-										setMainLoading={setMainLoading}
-										responseId={responseId}
-										kamConfigDetails={kamConfigDetails}
-										levelLoading={levelLoading}
-										refetch={refetch}
-										expertiseRefetch={expertiseRefetch}
-										expertiseLoading={expertiseLoading}
-										listExpertiseParams={listExpertiseParams}
-										cardRefetch={cardRefetch}
+										{...componentProps[name] || {}}
 									/>
 								</TabPanel>
 							) : null;
