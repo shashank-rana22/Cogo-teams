@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 function useGetQuestion() {
 	const { general } = useSelector((state) => state);
-	const { query } = general;
+	const { query = {} } = general;
 	const { id = '' } = query || {};
 	const { mode = '' } = query || {};
 
