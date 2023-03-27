@@ -75,6 +75,7 @@ function AdminResults() {
 
 						return (
 							<TabPanel
+								key={key}
 								name={key}
 								title={title}
 								className={styles.tabItem}

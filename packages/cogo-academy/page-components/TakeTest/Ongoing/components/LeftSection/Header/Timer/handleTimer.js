@@ -2,7 +2,7 @@ import handleMinimizeTest from '../../../../../utils/handleMinimizeTest';
 
 const handleTimer = (test_start_time, duration, setShowTimeOverModal) => {
 	const timeNow = new Date().getTime();
-	// console.log(timeNow);
+
 	let difference = timeNow - test_start_time;
 
 	if (difference < duration * 60000) {

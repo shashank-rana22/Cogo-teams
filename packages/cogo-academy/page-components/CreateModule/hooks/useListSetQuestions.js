@@ -25,7 +25,7 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 				},
 			});
 
-			if (!res?.data?.total_count) {
+			if (!res?.data?.total_count && isEmpty(query)) {
 				setSavedQuestionDetails([{ id: new Date().getTime(), isNew: true }]);
 				setAllKeysSaved(false);
 			} else {

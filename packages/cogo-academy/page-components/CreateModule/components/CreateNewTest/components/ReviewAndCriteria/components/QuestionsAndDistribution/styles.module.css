@@ -2,7 +2,7 @@
 	display: flex;
 	gap: 4px;
 	align-items: center;
-	margin-right: -95px;
+	justify-content: flex-end;
 }
 
 .input {
@@ -55,8 +55,18 @@
 	color: #cb6464;
 }
 
-.distribution_heading {
-	margin-right: -95px;
+.content {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.subcontent {
+	display: flex;
+	flex-direction: column;
+}
+
+.matter {
+	font-weight: 400;
 }
 
 .distribution_heading h6 {
@@ -75,7 +85,12 @@
 }
 
 .total_heading {
-	margin-right: 18px;
+	margin-right: 10px;
+	font-weight: 600;
+	text-align: right;
+}
+
+.total_heading_two {
 	font-weight: 600;
 	text-align: right;
 }

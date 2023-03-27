@@ -18,7 +18,7 @@ function BulkUpload({
 	const {
 		loading,
 		bulkCreateStandAloneQuestion,
-	} = useBulkCreateStandAloneQuestion();
+	} = useBulkCreateStandAloneQuestion({ setShowBulkUpload });
 
 	const onSubmit = () => {
 		if (isEmpty(uploadDocument)) {
@@ -44,7 +44,7 @@ function BulkUpload({
 					role="presentation"
 					onClick={() => window.open(
 						// eslint-disable-next-line max-len
-						'https://cogoport-production.sgp1.digitaloceanspaces.com/ea6f784b835820e9558b7098928cc2fd/cogo-assured-rate-sheet-sample.csv',
+						'https://cogoport-testing.sgp1.digitaloceanspaces.com/8b3de8aeee4620f0f863c681d28e7767/test-module-sample-set.csv',
 						'_blank',
 					)}
 				>
@@ -56,8 +56,6 @@ function BulkUpload({
 			<div className={styles.container}>
 				<FileUploader
 					value={uploadDocument}
-					multiple
-					disabled={!isEmpty(uploadDocument)}
 					onChange={setUploadDocument}
 					showProgress
 					draggable
@@ -87,6 +85,7 @@ function BulkUpload({
 							type="button"
 							style={{ marginLeft: '12px' }}
 							themeType="secondary"
+							onClick={() => setShowBulkUpload(false)}
 						>
 							Cancel
 						</Button>

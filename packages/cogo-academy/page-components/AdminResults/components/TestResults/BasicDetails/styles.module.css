@@ -1,32 +1,38 @@
 .svg {
-  margin-right: 16px;
-  font-size: 24px;
+	margin-right: 16px;
+	font-size: 24px;
 }
+
 .general {
-  display: flex;
-  margin-bottom: 38px;
+	display: flex;
+	margin-bottom: 38px;
 }
+
 .row {
-  display: flex;
-  justify-content: space-between;
-  width: 50%;
-  margin-top: 24px;
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+	margin-top: 24px;
 }
+
 .vertical_line {
-  height: 120px;
-  width: 0px;
-  border: 1px solid #e0e0e0;
+	width: 0;
+	height: 120px;
+	border: 1px solid #e0e0e0;
 }
+
 .text_top {
-  font-weight: 400;
-  font-size: 14px;
-  color: #828282;
+	font-size: 14px;
+	font-weight: 400;
+	color: #828282;
 }
+
 .text_bottom {
-  font-weight: 400;
-  font-size: 14px;
-  color: #4f4f4f;
+	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
 }
+
 .general_bottom {
-  display: flex;
+	display: flex;
 }

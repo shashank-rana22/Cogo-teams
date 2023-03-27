@@ -1,3 +1,7 @@
+import { isEmpty } from '@cogoport/utils';
+
+import checkErrors from './checkErrors';
+
 function getPayload({ values, type, questionSetId, action, testQuestionId, editType, caseStudyQuestionId }) {
 	switch (type) {
 		case 'stand_alone': {
@@ -10,6 +14,18 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 				options = [],
 				explanation,
 			} = question?.[0] || {};
+
+			const hasError = [];
+
+			const checkError = checkErrors({ options, question_type });
+
+			if (checkError !== 'noError') {
+				hasError.push(checkError);
+			}
+
+			if (!isEmpty(hasError) && action !== 'delete') {
+				return { hasError };
+			}
 
 			const answers = options.map((item, index) => {
 				const { is_correct } = item || {};
@@ -37,6 +53,18 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 		case 'case_study': {
 			if (editType === 'case_question') {
 				const { question_text, options = [], question_type, explanation } = values || {};
+
+				const hasError = [];
+
+				const checkError = checkErrors({ options, question_type });
+
+				if (checkError !== 'noError') {
+					hasError.push(checkError);
+				}
+
+				if (!isEmpty(hasError) && action !== 'delete') {
+					return { hasError };
+				}
 
 				const answers = options.map((option, index) => {
 					const { is_correct, answer_text } = option || {};
@@ -92,6 +120,21 @@ function getPayload({ values, type, questionSetId, action, testQuestionId, editT
 					explanation   : [explanation],
 				};
 			});
+
+			const hasError = [];
+
+			case_questions.forEach((item) => {
+				const { options, question_type:indQuestionType } = item || {};
+				const checkError = checkErrors({ options, question_type: indQuestionType });
+
+				if (checkError !== 'noError') {
+					hasError.push(checkError);
+				}
+			});
+
+			if (!isEmpty(hasError) && action !== 'delete') {
+				return { hasError };
+			}
 
 			return {
 				test_question_set_id: questionSetId,

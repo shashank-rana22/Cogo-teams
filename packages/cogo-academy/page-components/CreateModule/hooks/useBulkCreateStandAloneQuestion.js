@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-function useBulkCreateStandAloneQuestion() {
+function useBulkCreateStandAloneQuestion({ setShowBulkUpload }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/bulk_create_stand_alone_question',
@@ -16,14 +16,12 @@ function useBulkCreateStandAloneQuestion() {
 		try {
 			await trigger({
 				data: {
-					test_question_set_id: questionSetId,
-					file_url:
-						typeof uploadDocument?.[0] === 'string'
-							? uploadDocument?.[0]
-							: uploadDocument?.[0]?.finalUrl,
+					test_question_set_id : questionSetId,
+					file_url             : uploadDocument,
 				},
 			});
 
+			setShowBulkUpload(false);
 			listSetQuestions({ questionToShow: '' });
 
 			Toast.success('Bulk question set uploaded successfully');

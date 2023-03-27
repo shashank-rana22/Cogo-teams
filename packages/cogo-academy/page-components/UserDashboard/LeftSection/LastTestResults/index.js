@@ -25,11 +25,11 @@ function LastTestResults() {
 
 	const stats_data = data?.data || {};
 
-	const { topic_wise_percentile, question_stats, status } = stats_data || {};
+	const { topic_wise_percentile, question_stats, status, test_id } = stats_data || {};
 
 	const hasPassed = status === 'passed';
 
-	if (isEmpty(stats_data)) {
+	if (isEmpty(stats_data) || loading) {
 		return null;
 	}
 
@@ -44,7 +44,7 @@ function LastTestResults() {
 
 				<QuestionWiseStats question_stats={question_stats} />
 
-				<GoToDetails />
+				<GoToDetails test_id={test_id} />
 			</div>
 		</div>
 	);

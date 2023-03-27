@@ -33,7 +33,7 @@ function AddQuestionsForm({
 }) {
 	const [showBulkUpload, setShowBulkUpload] = useState(false);
 
-	const { test_questions = [], topic = '' } = data || {};
+	const { topic = '' } = data || {};
 
 	if (isEmpty(questionSetId) && from !== 'test') {
 		return null;
@@ -43,7 +43,7 @@ function AddQuestionsForm({
 		<div className={styles.container}>
 			<div className={styles.label}>Questions</div>
 
-			{!isEmpty((test_questions || []).filter((item) => item.id !== editDetails?.id)) ? (
+			{!isEmpty(questionSetId) ? (
 				<div className={styles.input_container}>
 					<Input
 						size="md"
@@ -68,7 +68,7 @@ function AddQuestionsForm({
 			{loading ? (
 				<LoadingState rowsCount={5} />
 			) : (
-				!isEmpty((test_questions || []).filter((item) => item.id !== editDetails?.id)) && (
+				!isEmpty(questionSetId) && (
 					<SavedQuestionDetails
 						test_questions={listData}
 						editDetails={editDetails}
@@ -88,7 +88,7 @@ function AddQuestionsForm({
 			{!allKeysSaved && !loading ? (
 				<ManualAddition
 					questionSetId={questionSetId}
-					test_questions={test_questions}
+					test_questions={listData}
 					setSavedQuestionDetails={setSavedQuestionDetails}
 					setAllKeysSaved={setAllKeysSaved}
 					editDetails={editDetails}

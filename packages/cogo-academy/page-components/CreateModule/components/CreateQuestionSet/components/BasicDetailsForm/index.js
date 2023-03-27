@@ -124,7 +124,7 @@ function BasicDetailsForm({
 				) : null}
 
 				<Button loading={loading} size="sm" type="submit">
-					{!isEmpty(questionSetId) ? 'Edit' : 'Create'}
+					{!isEmpty(questionSetId) ? 'Save' : 'Create'}
 				</Button>
 			</div>
 		</form>

@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import getPayload from '../utils/getPayload';
 
@@ -38,6 +39,23 @@ function useUpdateCaseStudyQuestion() {
 		caseStudyQuestionId,
 		testQuestionId,
 	}) => {
+		const { hasError, ...payload } = getPayload({
+			values,
+			editType : 'case_question',
+			type     : 'case_study',
+			questionSetId,
+			action,
+			caseStudyQuestionId,
+			testQuestionId,
+		});
+
+		if (!isEmpty(hasError)) {
+			hasError.forEach((item) => {
+				Toast.error(item);
+			});
+			return;
+		}
+
 		const triggerToUse = triggerMapping?.[action];
 
 		try {
@@ -45,15 +63,7 @@ function useUpdateCaseStudyQuestion() {
 				data:
 						action === 'delete'
 							? { id: caseStudyQuestionId, status: 'inactive', answers: [] }
-							: getPayload({
-								values,
-								editType : 'case_question',
-								type     : 'case_study',
-								questionSetId,
-								action,
-								caseStudyQuestionId,
-								testQuestionId,
-							}),
+							: payload,
 			});
 
 			Toast.success(`Case study question ${actionNameMapping[action]} successfully`);

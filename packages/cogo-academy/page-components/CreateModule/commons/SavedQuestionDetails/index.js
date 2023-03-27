@@ -1,10 +1,11 @@
 import { Pagination, Tooltip, Button, Table } from '@cogoport/components';
 import { IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useUpdateCaseStudy from '../../hooks/useUpdateCaseStudy';
 import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
+import EmptyState from '../EmptyState';
 
 import IconComponent from './IconComponent';
 import styles from './styles.module.css';
@@ -286,6 +287,16 @@ function SavedQuestionDetails({
 			),
 		},
 	];
+
+	if (isEmpty(test_questions)) {
+		return (
+			<EmptyState
+				emptyText="No questions found, please add questions below to reflect here"
+				height={180}
+				textSize="20px"
+			/>
+		);
+	}
 
 	return (
 		<div className={styles.table_container}>

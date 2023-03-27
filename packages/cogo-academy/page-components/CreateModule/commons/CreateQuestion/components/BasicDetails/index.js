@@ -10,7 +10,7 @@ import useUpdateCaseStudy from '../../../../hooks/useUpdateCaseStudy';
 import getControls from './controls';
 import styles from './styles.module.css';
 
-const constants = ['topic', 'audience_ids', 'question_type', 'difficulty_level'];
+const constants = ['topic', 'audience_ids', 'question_type', 'difficulty_level', 'questions'];
 
 const getQuestionType = (question_type) => {
 	if (question_type === 'case_study') {
@@ -20,17 +20,37 @@ const getQuestionType = (question_type) => {
 	return 'Stand Alone';
 };
 
+const getValue = ({ item, editDetails }) => {
+	const { sub_question = [], question_type = '' } = editDetails || {};
+
+	if (item === 'question_type') {
+		return getQuestionType(question_type);
+	}
+
+	if (item === 'audience_ids') {
+		return '--';
+	}
+
+	if (item === 'difficulty_level') {
+		return startCase(editDetails?.[item] || '--');
+	}
+
+	if (item !== 'questions') {
+		return editDetails?.[item] || '--';
+	}
+
+	return sub_question.length;
+};
+
 function ContentComponent({ editDetails, setShowForm }) {
 	return (
 		<div className={`${styles.container} ${styles.flex_row} ${styles.flex}`}>
 			{constants.map((item) => (
-				<div className={styles.flex_container}>
+				<div key={item} className={styles.flex_container}>
 					<div className={styles.label}>{startCase(item)}</div>
 
 					<div className={styles.value}>
-						{item === 'question_type'
-							? getQuestionType(editDetails?.question_type)
-							: editDetails?.[item] || '--'}
+						{getValue({ item, editDetails })}
 					</div>
 				</div>
 			))}
@@ -61,7 +81,10 @@ function FormComponent({
 	setValue,
 }) {
 	const closeForm = () => {
-		setValue('topic', editDetails?.topic);
+		const { topic = '', difficulty_level = '' } = editDetails || {};
+
+		setValue('topic', topic);
+		setValue('difficulty_level', difficulty_level);
 		setValue('audience_ids', []);
 
 		if (editDetails?.question_type === 'case_study') {

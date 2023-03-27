@@ -1,12 +1,20 @@
 import { Button, Modal } from '@cogoport/components';
+import { useEffect } from 'react';
 
 import useEndTest from '../../../../../hooks/useEndTest';
 import StatsDisplay from '../../../../utils/StatsDisplay';
 
 import styles from './styles.module.css';
 
-function EndTimer({ data = {}, showTimeOverModal }) {
-	const { endTest } = useEndTest({});
+function EndTimer({ data = {}, showTimeOverModal, setShowTimeOverModal, setActiveState }) {
+	const { endTest, endTestLoading } = useEndTest({ setShowTimeOverModal, setActiveState });
+
+	useEffect(() => {
+		setTimeout(() => {
+			endTest();
+		}, 5000);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Modal size="md" show={showTimeOverModal}>
@@ -19,17 +27,17 @@ function EndTimer({ data = {}, showTimeOverModal }) {
 
 				<p>
 					The test time has ended.
-					Your responses will be now be submitted.Thank You for ttempting the test.
-
+					Your responses will be now be submitted.Thank You for attempting the test.
 				</p>
 				<StatsDisplay data={data} />
 
 				<Button
 					onClick={endTest}
 					style={{ marginRight: 12 }}
-					themeType="secondary"
+					className={styles.submit_button}
+					loading={endTestLoading}
 				>
-					Submit
+					{endTestLoading ? 'Submitting' : 'Submit'}
 				</Button>
 			</Modal.Body>
 		</Modal>
