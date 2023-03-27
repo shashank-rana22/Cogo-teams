@@ -1,5 +1,5 @@
-import { Pill, Button, Tooltip, ButtonIcon } from '@cogoport/components';
-import { IcMShare, IcMOverflowDot, IcMDelete, IcMEdit, IcMArrowUp } from '@cogoport/icons-react';
+import { Pill, Button, Tooltip } from '@cogoport/components';
+import { IcMShare, IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
@@ -296,7 +296,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 			accessor : ({ id = '', status = '' }) => (
 				status === 'published' ? (
 					<div>
-						<Link href={`/learning/tests/results/admin/${id}`}>Details</Link>
+						<Link href={`/learning/tests/dashboard/admin/${id}`}>Details</Link>
 					</div>
 				) : <section>-</section>
 
