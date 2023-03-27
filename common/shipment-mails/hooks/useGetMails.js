@@ -21,11 +21,11 @@ const useGetMails = (
 	const [page, setPage] = useState(1);
 	const [search, setSearch] = useState(undefined);
 
-	const apis = APIS[source];
+	// const apis = APIS[source];
 
 	const [mailApi, triggerGetMail] = useAxios(
 		{
-			url    : `${process.env.COGO_LENS_URL}/${apis.list}`,
+			url    : `${process.env.COGO_LENS_URL}/list_mails`,
 			method : 'GET',
 		},
 		{ manual: true },

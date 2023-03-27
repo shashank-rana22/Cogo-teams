@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useGetAttachements from '../../../hooks/useGetAttachements';
 import useGetMail from '../../../hooks/useGetMail';
 
 import styles from './styles.module.css';
@@ -13,7 +14,16 @@ function EmailView({
 	const email = RECIEVE_EMAIL;
 	const message_id = activeMail?.message_id || activeMail?.id;
 	const { emailData, loading } = useGetMail(email, message_id, activeMail?.id);
-	const content = emailData?.body?.content || '';
+	const { getAttachementsApi } = useGetAttachements(email, message_id);
+	let content = emailData?.body?.content || '';
+
+	const allAttachements = getAttachementsApi?.data?.value || [];
+	allAttachements.forEach((attachment) => {
+		content = content.replaceAll(
+			`cid:${attachment.contentId}`,
+			`data:${attachment.contentType};base64,${attachment.contentBytes}`,
+		);
+	});
 
 	if (loading) {
 		return <div>Loading full mail......</div>;
@@ -23,6 +33,7 @@ function EmailView({
 		<div className={styles.container}>
 			<Thread
 				content={content}
+				allAttachements={allAttachements}
 				emailData={emailData}
 				onAction={onAction}
 			/>

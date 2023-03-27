@@ -72,9 +72,10 @@ function ShipmentMails({
 				composingEmail={false}
 				activeBox={activeBox}
 				setActiveBox={setActiveBox}
+				source={source}
 			/>
 
-			{source === 'outlook' ? (
+			{source !== 'outlook' ? (
 				<List
 					RECIEVE_EMAIL={RECIEVE_EMAIL}
 					activeBox={activeBox}

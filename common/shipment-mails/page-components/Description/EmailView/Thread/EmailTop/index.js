@@ -5,10 +5,10 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function EmailTop({ data = {} }) {
-	const displayDate = !isEmpty(data) ? format(
-		(addHours(new Date(data?.receivedDateTime), 5.5)).toString(),
-		' dd MMM, yyyy',
-	) : '';
+	// const displayDate = !isEmpty(data) ? format(
+	// 	(addHours(new Date(data?.receivedDateTime), 5.5)).toString(),
+	// 	' dd MMM, yyyy',
+	// ) : '';
 
 	return (
 		<div className={styles.container}>
@@ -24,7 +24,7 @@ function EmailTop({ data = {} }) {
 					)
 				</div>
 
-				<div className="">{displayDate}</div>
+				{/* <div className="">{displayDate}</div> */}
 
 				{data.toRecipients?.length ? (
 					<div className={styles.initial_body}>
