@@ -9306,6 +9306,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api          : 'list_shipment_ftl_freight_service_trackers',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api :          'get_shipment_ftl_freight_service_tracker',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 
 	ftl_freight: [
