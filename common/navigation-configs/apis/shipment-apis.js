@@ -959,7 +959,7 @@ const apis = [
 	{
 		api          : 'create_spot_search',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'spot_search',
 	},
 	{
 		api         : 'create_chat_message',
