@@ -72,8 +72,11 @@
 }
 
 .search {
+	display: flex;
+	gap: 20px;
+
 	:global {
-		width: 336px;
+		width: 35%;
 		margin-right: 20px;
 
 		.ui_input_container {

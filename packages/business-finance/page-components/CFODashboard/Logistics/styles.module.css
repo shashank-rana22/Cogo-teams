@@ -9,7 +9,19 @@
 	display: flex;
 }
 
+.receivables_data {
+	display: flex;
+}
+
 .label {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 30px;
+	letter-spacing: 0.4px;
+}
+
+.recei_label {
+	margin-right: 30px;
 	font-size: 12px;
 	font-weight: 400;
 	line-height: 30px;

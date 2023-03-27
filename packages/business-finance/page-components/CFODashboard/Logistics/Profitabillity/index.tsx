@@ -1,4 +1,4 @@
-import { Input, Pagination } from '@cogoport/components';
+import { Input, Pagination, Select } from '@cogoport/components';
 import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -6,28 +6,28 @@ import StyledTable from '../../../commons/StyledTable';
 import useGetProfitabillityShipmentList from '../../hooks/getProfitabillityShipmentList';
 import getProfitabillityColumn from '../../utils/getProfitabillityColumn';
 
+import { jobsOptions } from './options';
 import styles from './styles.module.css';
 
-function Profitabillity({ searchValue, setSearchValue }) {
+function Profitabillity({ filters, setFilters }) {
+	const [jobsFilters, setJobsFilters] = useState({ });
 	const tab = [
 		{
 			key   : 'shipment',
-			label : 'Shipment : 4.39%',
+			label : 'Shipment',
 		},
 		{
 			key   : 'customer',
-			label : 'Customer : 7.39%',
+			label : 'Customer',
 		},
 	];
 	const [tabs, setTabs] = useState('shipment');
 	const {
 		profitabillityData,
 		profitabillityLoading,
-		shipmentFilters,
-		setShipmentFilters,
-	} = useGetProfitabillityShipmentList({ tabs });
-
-	console.log(shipmentFilters, 'shipmentFilters');
+		searchValue,
+		setSearchValue,
+	} = useGetProfitabillityShipmentList({ tabs, filters, setFilters, jobsFilters });
 
 	const { pageIndex = 0, pageSize = 0, totalRecord, shipmentList = [], customerList = [] } = profitabillityData || {};
 
@@ -57,11 +57,22 @@ function Profitabillity({ searchValue, setSearchValue }) {
 						>
 							<div className={item.key === tabs ? styles.sub_container_click : styles.sub_container}>
 								{item.label}
+								{' '}
+								{profitabillityData?.averageProfit}
 							</div>
 						</div>
 					))}
 				</div>
+
 				<div className={styles.search}>
+					<Select
+						value={jobsFilters}
+						onChange={(e: any) => setJobsFilters(e)}
+						placeholder="Job Filters"
+						options={jobsOptions}
+						size="md"
+						style={{ width: '250px' }}
+					/>
 					<Input
 						name="q"
 						size="sm"
@@ -89,7 +100,10 @@ function Profitabillity({ searchValue, setSearchValue }) {
 						currentPage={pageIndex}
 						totalItems={totalRecord}
 						pageSize={pageSize}
-						onPageChange={(val) => setShipmentFilters({ ...shipmentFilters, page: val })}
+						onPageChange={(pageValue: number) => {
+							setFilters((p) => ({ ...p, pageIndex: pageValue }));
+						}}
+
 					/>
 				</div>
 			</div>

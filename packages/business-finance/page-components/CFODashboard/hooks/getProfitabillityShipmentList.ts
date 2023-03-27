@@ -2,17 +2,10 @@
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const useGetProfitabillityShipmentList = ({ tabs }) => {
-	console.log(tabs, 'tabs');
-
-	const [shipmentFilters, setShipmentFilters] = useState({
-		page        : 1,
-		pageLimit   : 5,
-		searchQuery : '',
-	});
-	const { search, ...rest } = shipmentFilters || {};
+const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilters }) => {
+	const [searchValue, setSearchValue] = useState('');
 
 	const apiUrl = {
 		shipment : '/payments/dashboard/bf-profitability-shipment',
@@ -31,24 +24,17 @@ const useGetProfitabillityShipmentList = ({ tabs }) => {
 		},
 		{ manual: true },
 	);
-	console.log(data, 'data');
-	const { query = '', debounceQuery } = useDebounceQuery();
-
-	useEffect(() => {
-		debounceQuery(search);
-	}, [search]);
+	const { query, debounceQuery } = useDebounceQuery();
 
 	const refetch = () => {
 		try {
 			trigger({
 				params: {
-					q         : query || undefined,
-					jobStatus : undefined,
+					...filters,
+					jobStatus : jobsFilters,
 					sortType  : 'Desc',
 					sortBy    : 'createdAt',
-					pageIndex : shipmentFilters?.page,
 					pageSize  : 5,
-
 				},
 			});
 		} catch (e) {
@@ -57,22 +43,30 @@ const useGetProfitabillityShipmentList = ({ tabs }) => {
 	};
 
 	useEffect(() => {
-		refetch();
-	}, [JSON.stringify(rest), tabs]);
+		debounceQuery(searchValue);
+	}, [searchValue]);
 
 	useEffect(() => {
-		setShipmentFilters({
-			...shipmentFilters,
-			searchQuery : query,
-			page        : 1,
-		});
+		setFilters((prev) => ({
+			...prev,
+			q         : query || undefined,
+			pageIndex : 1,
+			pageSize  : 5,
+			jobStatus : '',
+		}));
 	}, [query]);
+
+	useEffect(() => {
+		refetch();
+	}, [tabs, filters, jobsFilters]);
+
 	return {
 		profitabillityLoading : loading,
 		profitabillityData    : data,
 		refetch,
-		setShipmentFilters,
-		shipmentFilters,
+		setSearchValue,
+		searchValue,
+
 	};
 };
 

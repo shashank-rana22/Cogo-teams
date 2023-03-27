@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Filters from '../../commons/Filters';
-import useGetPurchaseViewList from '../hooks/getLogisticsData';
 
 import AccordianCards from './AccordianCard';
 import controls from './controls';
@@ -11,15 +10,9 @@ import Statistics from './Statistics';
 import TotalPayablesRecievables from './TotalPayablesRecievavles';
 import TreasuryStatistics from './TreasuryStatistics';
 
-function Logistics({ filters, setFilters }) {
-	const {
-		payablesTab,
-		setPayablesTab,
-		searchValue,
-		setSearchValue,
-		recievablesTab,
-		setRecievablesTab,
-	} = useGetPurchaseViewList();
+function Logistics() {
+	const [filters, setFilters] = useState({});
+
 	return (
 		<div>
 			<div>
@@ -29,17 +22,15 @@ function Logistics({ filters, setFilters }) {
 					setFilters={setFilters}
 				/>
 			</div>
-			<TotalPayablesRecievables
-				payablesTab={payablesTab}
-				setPayablesTab={setPayablesTab}
-				recievablesTab={recievablesTab}
-				setRecievablesTab={setRecievablesTab}
-			/>
+			<TotalPayablesRecievables />
 			<Statistics />
 			<IncomeExpense />
 			<AccordianCards />
-			<Profitabillity searchValue={searchValue} setSearchValue={setSearchValue} />
-			<TreasuryStatistics filters={filters} setFilters={setFilters} />
+			<Profitabillity
+				filters={filters}
+				setFilters={setFilters}
+			/>
+			<TreasuryStatistics />
 		</div>
 	);
 }

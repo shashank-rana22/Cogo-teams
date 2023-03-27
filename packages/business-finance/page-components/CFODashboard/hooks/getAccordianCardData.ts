@@ -1,14 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetIncomeExpense = () => {
+const useGetAccordianCardData = () => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : 'payments/dashboard/bf-income-expense',
+			url     : 'payments/dashboard/bf-service-wise-rec-pay',
 			method  : 'get',
-			authKey : 'get_payments_dashboard_bf_income_expense',
+			authKey : 'get_payments_dashboard_bf_service_wise_rec_pay',
 		},
 		{ manual: true },
 	);
@@ -17,7 +16,6 @@ const useGetIncomeExpense = () => {
 		try {
 			trigger({
 				params: {
-
 				},
 			});
 		} catch (e) {
@@ -30,11 +28,11 @@ const useGetIncomeExpense = () => {
 	}, []);
 
 	return {
-		incomeExpenseLoading : loading,
-		incomeExpenseData    : data,
+		accordianDataLoading : loading,
+		accordianDataData    : data,
 		refetch,
 
 	};
 };
 
-export default useGetIncomeExpense;
+export default useGetAccordianCardData;

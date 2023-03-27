@@ -14,13 +14,27 @@
 	margin-bottom: -54px;
 }
 
-.responsive {
+.responsive_bar_chart {
 	min-width: 35%;
-	height: 330px;
-	margin-top: 20px;
-	margin-left: 10px;
+	height: 420px;
+	margin-top: -20px;
+	margin-left: 40px;
 	background: #fff;
 	border-radius: 8px;
+}
+
+.responsive_line_chart {
+	min-width: 35%;
+	height: 330px;
+	margin-top: 50px;
+	margin-left: 40px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.years_styles {
+	margin-top: 150px;
+	margin-left: 20px;
 }
 
 .text_filters_gap {
@@ -56,6 +70,15 @@
 .borders {
 	width: 100px;
 	height: 2px;
+	margin: 4px 0 0 2px;
+	cursor: pointer;
+	background: #edd7a9;
+	border-radius: 4px;
+}
+
+.year_bottom_border {
+	width: 100px;
+	height: 1px;
 	margin: 4px 0 0 2px;
 	cursor: pointer;
 	background: #edd7a9;

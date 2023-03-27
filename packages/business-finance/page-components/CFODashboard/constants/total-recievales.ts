@@ -1,4 +1,4 @@
-function totalRecievablesStats () {
+function totalRecievablesStats() {
 	// const { INITIATED = '', FINANCE_ACCEPTED = '', ON_HOLD = '' } = statsData || {};
 
 	return [
@@ -18,8 +18,8 @@ function totalRecievablesStats () {
 			// badge : FINANCE_ACCEPTED,
 		},
 		{
-			label : 'Longtail',
-			value : 'longtail',
+			label : 'CP',
+			value : 'cp',
 			// badge : FINANCE_ACCEPTED,
 		},
 

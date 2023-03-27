@@ -12,11 +12,12 @@
 .filters_styles {
 	display: flex;
 	justify-content: space-between;
+	margin-right: 40px;
 }
 
 .border_left {
 	height: 76px;
-	margin: 0 5%;
+	margin: 0 2%;
 	border-left: 2px solid #cfcfcf;
 }
 
@@ -25,14 +26,18 @@
 	align-items: center;
 
 	/* justify-content: space-between; */
-	width: 70%;
+	width: 100%;
 
 	/* padding: 0 13px 0 11px; */
 	border: 1px solid#e0e0e0;
 }
 
 .text_styles {
-	margin-left: 70px;
+	margin-left: 10px;
+}
+
+.text_style_settled {
+	margin-right: 30px;
 }
 
 .text {
@@ -40,8 +45,8 @@
 }
 
 .amount_style {
-	font-size: 18px;
-	font-weight: 500;
+	font-size: 14px;
+	font-weight: 600;
 }
 
 .container {

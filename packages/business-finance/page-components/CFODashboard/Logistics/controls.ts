@@ -38,21 +38,12 @@ export default controls;
 
 export const treasuryControls = [
 	{
-		name           : 'days',
-		type           : 'select',
-		placeholder    : 'Days',
-		isClearable    : true,
-		span           : 1,
-		multiple       : true,
-		defaultOptions : false,
-		options        : [
-			{ value: 'today', label: 'Today' },
-			{ value: 'Last 3 Days', label: 'Last 3 Days' },
-			{ value: 'Last 7 Days', label: 'Last 7 Days' },
-			{ value: 'Last 14 Days', label: 'Last 14 Days' },
-			{ value: 'Last Month', label: 'Last Month' },
-			{ value: 'Last 3 Months', label: 'Last 3 Months' },
-			{ value: 'Last 6 Months', label: 'Last 6 Months' },
-		],
+		name                  : 'date',
+		placeholder           : 'Select Date',
+		type                  : 'singleDateRange',
+		isPreviousDaysAllowed : true,
+		caret                 : true,
+		isClearable           : true,
+		style                 : { width: '200px' },
 	},
 ];

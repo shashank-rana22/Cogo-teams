@@ -1,23 +1,22 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetIncomeExpense = () => {
+const useGetPayablesList = () => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : 'payments/dashboard/bf-income-expense',
+			url     : 'payments/dashboard/bf-receivable',
 			method  : 'get',
-			authKey : 'get_payments_dashboard_bf_income_expense',
+			authKey : 'get_payments_dashboard_bf_receivable',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const refetch = () => {
 		try {
 			trigger({
 				params: {
-
+					accountMode: 'AP',
 				},
 			});
 		} catch (e) {
@@ -30,11 +29,9 @@ const useGetIncomeExpense = () => {
 	}, []);
 
 	return {
-		incomeExpenseLoading : loading,
-		incomeExpenseData    : data,
-		refetch,
-
+		payablesData    : data,
+		payablesLoading : loading,
 	};
 };
 
-export default useGetIncomeExpense;
+export default useGetPayablesList;

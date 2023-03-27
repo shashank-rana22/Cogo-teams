@@ -1,16 +1,25 @@
 import { Pill, Button, Tooltip } from '@cogoport/components';
-import { IcMOceanSchedules, IcMAirport } from '@cogoport/icons-react';
+import { IcMOceanSchedules, IcMAirport, IcMTransport } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-// import OverallImportExportStats from '../../constants/overall-import-export-stats';
+import showOverflowingNumber from '../../../commons/showOverflowingNumber';
+import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import OverallImportExportStatsKeyMapping from '../../constants/overall-import-export-stats-key-mapping';
+import useGetAccordianCardData from '../../hooks/getAccordianCardData';
+import useGetAccordianStatsData from '../../hooks/getAccordianStatsCardData';
 
 import styles from './styles.module.css';
 
 function AccordianCards() {
+	const {
+		accordianDataData,
+	} = useGetAccordianCardData();
+	const { accordianStatsData } = useGetAccordianStatsData();
+
 	const iconMapping = {
-		air_freight : <IcMAirport height={20} width={20} />,
-		fcl_freight : <IcMOceanSchedules height={24} width={24} />,
+		Surface : <IcMTransport height={20} width={20} />,
+		Air     : <IcMAirport height={20} width={20} />,
+		Ocean   : <IcMOceanSchedules height={24} width={24} />,
 	};
 	const statsTabs = [
 		{
@@ -31,14 +40,18 @@ function AccordianCards() {
 	function activeViewButton() {
 		setViewButton(!viewButton);
 	}
+
 	return (
 		<div>
-			<div className={styles.container}>
-				<div className={styles.main_div}>
-					<div className={styles.icon_div}>
-						<div className={styles.icons}>{iconMapping.fcl_freight}</div>
-						<div className={styles.texts}>Ocean</div>
-						{!viewButton
+
+			{(accordianDataData || []).map((item) => (
+
+				<div className={styles.container}>
+					<div className={styles.main_div}>
+						<div className={styles.icon_div}>
+							<div className={styles.icons}>{iconMapping[item?.service]}</div>
+							<div className={styles.texts}>{item?.service}</div>
+							{!viewButton
 						&& (
 							<div className={styles.main_stats}>
 								<div className={styles.amount_div}>
@@ -48,24 +61,37 @@ function AccordianCards() {
 										caret={false}
 									>
 										<div className={styles.amounts}>
-											<Pill size="xl" color="green">INR 10,00,000</Pill>
+											<Pill size="xl" color="green">
+												{
+												getFormattedPrice(
+													item.accountRec - item.accountPay,
+													'INR',
+												)
+												}
 
+											</Pill>
 										</div>
 									</Tooltip>
 								</div>
 								<div className={styles.border} />
-								<div className={styles.ar_amount}>AR : INR 40,00,000</div>
-								<div className={styles.ar_amount}>AP : INR 30,00,000</div>
+								<div className={styles.ar_amount}>
+									<span style={{ marginRight: '10px' }}>AR :</span>
+									{showOverflowingNumber(getFormattedPrice(item?.accountRec, 'INR'), 15)}
+								</div>
+								<div className={styles.ar_amount}>
+									<span style={{ marginRight: '10px' }}>AP :</span>
+									{showOverflowingNumber(getFormattedPrice(item?.accountPay, 'INR'), 15)}
+								</div>
 							</div>
 						)}
+						</div>
+
+						<div className={styles.view_button}>
+							<Button size="md" themeType="secondary" onClick={activeViewButton}>View More</Button>
+						</div>
 					</div>
 
-					<div className={styles.view_button}>
-						<Button size="md" themeType="secondary" onClick={activeViewButton}>View More</Button>
-					</div>
-				</div>
-
-				{viewButton
+					{viewButton
 				&& (
 					<div>
 						<div className={styles.borders} />
@@ -137,7 +163,9 @@ function AccordianCards() {
 
 					</div>
 				)}
-			</div>
+				</div>
+			))}
+
 		</div>
 	);
 }

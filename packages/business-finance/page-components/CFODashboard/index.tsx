@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function CFODashboard() {
 	const { query, push } = useRouter();
-	const [filters, setFilters] = useState({});
+
 	const [activeTab, setActiveTab] = useState(query?.activeTab || 'logistics');
 	const handleTabChange = (tab:string) => {
 		setActiveTab(tab);
@@ -35,10 +35,7 @@ function CFODashboard() {
 						name="logistics"
 						title="Logistics"
 					>
-						<Logistics
-							filters={filters}
-							setFilters={setFilters}
-						/>
+						<Logistics />
 					</TabPanel>
 					<TabPanel name="overheads" title="Overheads">
 						<Overheads />

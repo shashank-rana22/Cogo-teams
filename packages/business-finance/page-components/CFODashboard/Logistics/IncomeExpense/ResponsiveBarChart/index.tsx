@@ -1,6 +1,8 @@
 import { ResponsiveBar } from '@cogoport/charts/bar/index';
 import React from 'react';
 
+import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
+
 // import styles from './styles.module.css';
 
 function ResponsiveBarChart({ barData }) {
@@ -8,7 +10,7 @@ function ResponsiveBarChart({ barData }) {
 		<ResponsiveBar
 			data={barData}
 			keys={['income', 'expense']}
-			indexBy="months"
+			indexBy="month"
 			margin={{ top: 100, right: 30, bottom: 80, left: 60 }}
 			padding={0.6}
 			valueScale={{ type: 'linear' }}
@@ -38,8 +40,9 @@ function ResponsiveBarChart({ barData }) {
 			}}
 			axisLeft={{
             	tickSize     : 0,
-            	tickPadding  : 8,
+            	tickPadding  : 4,
             	tickRotation : 0,
+				format       : (value) => `${getAmountInLakhCrK(value)}`,
 			}}
 			labelSkipWidth={36}
 			labelSkipHeight={12}
@@ -78,6 +81,35 @@ function ResponsiveBarChart({ barData }) {
             		// ],
             // 	},
 			// ]}
+			// layers={[
+			// 	 'grid',
+			// 	 'axes',
+			// 	 'bars',
+			// 	 'markers',
+			// 	 'legends',
+			// 	 ({ bars }) => (
+			// 		<g>
+			// 			{bars.map((bar) => (
+			// 				<text
+			// 					key={bar.data.id}
+			// 					x={bar.x + bar.width / 2}
+			// 					y={bar.y + bar.height / 2}
+			// 					textAnchor="start"
+			// 					// transform={`rotate(-90,${bar.x + bar.width / 2},${bar.y + bar.height / 2})`}/
+			// 					style={{
+			// 						 dominantBaseline : 'central',
+			// 						 fontWeight       : '600',
+			// 						 fontSize         : 12,
+			// 						 fill             : '#333',
+			// 					}}
+			// 				>
+			// 					{getAmountInLakhCrK(bar.data.value)}
+			// 				</text>
+			// 			))}
+			// 		</g>
+			// 	),
+			// ]}
+
 			role="application"
 			animate
 		/>

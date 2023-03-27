@@ -14,8 +14,6 @@ function Statistics() {
 	const { totalBills = 0, totalExpense = 0, totalPurchaseOrgs = 0 } = todayPurchaseStats || {};
 	const { totalInvoices = 0, totalRevenue = 0, totalSalesOrgs = 0 } = todaySalesStats || {};
 
-	console.log(todaySalesStats, 'todayStatsData');
-
 	return (
 		<div>
 			<div className={styles.card}>
@@ -63,7 +61,7 @@ function Statistics() {
 							<div>
 								{' '}
 								{cashFlowDiffFromYesterday}
-								% more thans yesterday
+								% more than yesterday
 							</div>
 						</div>
 

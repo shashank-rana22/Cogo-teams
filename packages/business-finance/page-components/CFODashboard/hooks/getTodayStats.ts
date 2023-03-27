@@ -13,8 +13,6 @@ const useGetTodayStats = () => {
 		{ manual: true },
 	);
 
-	console.log(data, 'data');
-
 	const refetch = () => {
 		try {
 			trigger({
