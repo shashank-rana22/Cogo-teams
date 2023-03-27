@@ -1,5 +1,5 @@
 import { RTE } from '@cogoport/components';
-import { useForm, handleError, InputController } from '@cogoport/forms';
+import { useForm, handleError } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -51,12 +51,10 @@ function Compose({
 	subject_position,
 }) {
 	const defaultValues = getFormattedValues(composingEmail, action);
-	const defaultCC = defaultValues.ccrecipients.length > 0;
-	const [isCC, setIsCC] = useState(defaultCC);
 	const [isBcc, setIsBcc] = useState(false);
 	const [userEmailArray, setUserEmailArray] = useState([]);
 	const [errors, setErrors] = useState({});
-	const [editorState, setEditorState] = useState();
+	const [editorState, setEditorState] = useState('');
 	const { options } = useGetEntityStakeholderMappings();
 
 	const {
@@ -74,7 +72,7 @@ function Compose({
 	if (pre_subject_text && subject_position === 'prefix') {
 		actualSubject = `${pre_subject_text} / ${entity_type} / ${actualSubject}`;
 	} else {
-		actualSubject = `${actualSubject} / ${pre_subject_text} / ${entity_type}`;
+		actualSubject = `${actualSubject} / ${pre_subject_text || ''} / ${entity_type}`;
 	}
 
 	useResetErrors({ errors, setErrors, currentStateErrors: errorVal });
@@ -134,6 +132,7 @@ function Compose({
 		<div className={styles.container}>
 			<div className={styles.heading}>
 				<IcMArrowBack
+					className={styles.back_icon}
 					style={{ marginRight: 10, cursor: 'pointer' }}
 					onClick={() => setComposingEmail(null)}
 				/>

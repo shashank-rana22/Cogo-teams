@@ -14,10 +14,12 @@
 
 		.ui_upload_droparea_heading{
 			font-size: 12px;
+            font-weight: 600;
 		}
 
 		.ui_upload_droparea_subheading {
 			font-size: 10px;
+            display: none;
 		}
 
 		.ui_upload_droparea_icon {

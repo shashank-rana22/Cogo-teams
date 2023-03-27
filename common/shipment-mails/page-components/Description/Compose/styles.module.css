@@ -6,13 +6,11 @@
 .heading {
 	font-style: normal;
 	font-weight: 600;
-	font-size: 16px;
-	line-height: 150%;
 	display: flex;
 	align-items: center;
 
 	color: #000000;
-	margin-bottom: 12px;
+	margin: 16px 0px 8px 0px;
 }
 
 .compose_container {
