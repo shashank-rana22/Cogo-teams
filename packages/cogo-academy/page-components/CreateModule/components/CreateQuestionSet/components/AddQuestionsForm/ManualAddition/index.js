@@ -15,6 +15,7 @@ function ManualAddition({
 	savedQuestionDetails,
 	test_questions,
 	listSetQuestions,
+	mode,
 }) {
 	return (
 		<div>
@@ -41,6 +42,7 @@ function ManualAddition({
 							editDetails={editDetails}
 							setEditDetails={setEditDetails}
 							topic={topic}
+							mode={mode}
 						/>
 					);
 				}
@@ -61,6 +63,7 @@ function ManualAddition({
 					setAllKeysSaved={setAllKeysSaved}
 					setEditDetails={setEditDetails}
 					topic={topic}
+					mode={mode}
 				/>
 			) : null}
 		</div>

@@ -7,7 +7,11 @@ import styles from './styles.module.css';
 
 export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId }) => {
 	const handleEditQuestionSet = (id) => {
-		router.push(`/learning/test-module/create-question?id=${id}`);
+		router.push(`/learning/test-module/edit-question?id=${id}`);
+	};
+
+	const handleViewQuestionSet = (id) => {
+		router.push(`/learning/test-module/view-question?id=${id}`);
 	};
 
 	return [
@@ -93,6 +97,18 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 											type="button"
 											themeType="secondary"
 											className={styles.btn}
+											onClick={() => handleViewQuestionSet(item.id)}
+										>
+											<IcMEdit />
+											<div style={{ marginLeft: '8px' }}>
+												View
+											</div>
+										</Button>
+										<Button
+											loading={loading}
+											type="button"
+											themeType="secondary"
+											className={styles.btn}
 											onClick={() => handleEditQuestionSet(item.id)}
 										>
 											<IcMEdit />
@@ -115,7 +131,6 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 												Delete
 											</div>
 										</Button>
-
 									</div>
 								)}
 								trigger="click"

@@ -34,6 +34,7 @@ function SavedQuestionDetails({
 	total_count,
 	setPage,
 	page,
+	mode,
 }) {
 	const [caseToShow, setCaseToShow] = useState('');
 
@@ -255,25 +256,27 @@ function SavedQuestionDetails({
 										loading={loading || caseStudyLoading}
 									>
 										<IcMEdit />
-										<div style={{ marginLeft: '8px' }}>Edit</div>
+										<div style={{ marginLeft: '8px' }}>{mode !== 'view' ? 'Edit' : 'View'}</div>
 									</Button>
 
-									<Button
-										type="button"
-										themeType="secondary"
-										className={styles.btn}
-										disabled={!allKeysSaved}
-										loading={loading || caseStudyLoading}
-									>
-										<IcMDelete />
-										<div
-											role="presentation"
-											onClick={() => handleDeleteQuestion({ item })}
-											style={{ marginLeft: '8px' }}
+									{mode !== 'view' ? (
+										<Button
+											type="button"
+											themeType="secondary"
+											className={styles.btn}
+											disabled={!allKeysSaved}
+											loading={loading || caseStudyLoading}
 										>
-											Delete
-										</div>
-									</Button>
+											<IcMDelete />
+											<div
+												role="presentation"
+												onClick={() => handleDeleteQuestion({ item })}
+												style={{ marginLeft: '8px' }}
+											>
+												Delete
+											</div>
+										</Button>
+									) : null}
 								</div>
 							)}
 							trigger="click"

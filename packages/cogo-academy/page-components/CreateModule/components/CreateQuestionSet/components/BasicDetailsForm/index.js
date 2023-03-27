@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
+import { IcMCrossInCircle, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -20,12 +20,13 @@ function BasicDetailsForm({
 	questionSetId,
 	setEditDetails,
 	loading:listLoading,
+	mode,
 }) {
 	const [showForm, setShowForm] = useState(false);
 
 	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
 
-	const controls = getControls();
+	const controls = getControls({ mode });
 
 	const { cogo_entity_object } = data || {};
 
@@ -110,23 +111,33 @@ function BasicDetailsForm({
 				})}
 			</div>
 
-			<div className={styles.button_container}>
-				{!isEmpty(questionSetId) ? (
-					<Button
-						disabled={loading}
-						size="sm"
-						type="button"
-						themeType="secondary"
-						onClick={() => setShowForm(false)}
-					>
-						Cancel
-					</Button>
-				) : null}
-
-				<Button loading={loading} size="sm" type="submit">
-					{!isEmpty(questionSetId) ? 'Save' : 'Create'}
-				</Button>
+			<div
+				role="presentation"
+				onClick={() => setShowForm(false)}
+				className={styles.cancel_button}
+			>
+				<IcMCrossInCircle width={16} height={16} />
 			</div>
+
+			{mode !== 'view' ? (
+				<div className={styles.button_container}>
+					{!isEmpty(questionSetId) ? (
+						<Button
+							disabled={loading}
+							size="sm"
+							type="button"
+							themeType="secondary"
+							onClick={() => setShowForm(false)}
+						>
+							Cancel
+						</Button>
+					) : null}
+
+					<Button loading={loading} size="sm" type="submit">
+						{!isEmpty(questionSetId) ? 'Save' : 'Create'}
+					</Button>
+				</div>
+			) : null}
 		</form>
 	);
 }

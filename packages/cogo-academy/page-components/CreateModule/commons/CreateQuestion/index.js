@@ -24,6 +24,7 @@ function CreateQuestion({
 	editDetails,
 	setEditDetails,
 	topic,
+	mode,
 }) {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
 
@@ -177,6 +178,7 @@ function CreateQuestion({
 					setAllKeysSaved={setAllKeysSaved}
 					getTestQuestionTest={getTestQuestionTest}
 					questionSetId={questionSetId}
+					mode={mode}
 				/>
 
 				<div className={styles.question_form}>
@@ -194,6 +196,7 @@ function CreateQuestion({
 							reset={reset}
 							setEditDetails={setEditDetails}
 							setAllKeysSaved={setAllKeysSaved}
+							mode={mode}
 						/>
 					) : (
 						<CaseStudyForm
@@ -211,32 +214,35 @@ function CreateQuestion({
 							reset={reset}
 							setEditDetails={setEditDetails}
 							setAllKeysSaved={setAllKeysSaved}
+							mode={mode}
 						/>
 					)}
 				</div>
 
-				<div className={styles.button_container}>
-					{!isNewQuestion ? (
-						<Button
-							themeType="accent"
-							loading={loading || updateCaseStudyLoading}
-							onClick={() => handleDeleteStandAloneQuestion()}
-							type="button"
-						>
-							Delete Question
-						</Button>
-					) : null}
+				{mode !== 'view' ? (
+					<div className={styles.button_container}>
+						{!isNewQuestion ? (
+							<Button
+								themeType="accent"
+								loading={loading || updateCaseStudyLoading}
+								onClick={() => handleDeleteStandAloneQuestion()}
+								type="button"
+							>
+								Delete Question
+							</Button>
+						) : null}
 
-					{!(!isNewQuestion && editDetails?.question_type === 'case_study') ? (
-						<Button
-							loading={loading || updateCaseStudyLoading}
-							type="submit"
-							themeType="primary"
-						>
-							{isNewQuestion ? 'Save Question' : 'Update Question'}
-						</Button>
-					) : null}
-				</div>
+						{!(!isNewQuestion && editDetails?.question_type === 'case_study') ? (
+							<Button
+								loading={loading || updateCaseStudyLoading}
+								type="submit"
+								themeType="primary"
+							>
+								{isNewQuestion ? 'Save Question' : 'Update Question'}
+							</Button>
+						) : null}
+					</div>
+				) : null}
 
 				<div className={styles.delete_icon}>
 					<IcMCrossInCircle onClick={() => deleteQuestion()} width={20} height={20} />

@@ -25,8 +25,9 @@ function SingleQuestionComponent({
 	reset,
 	setEditDetails,
 	setAllKeysSaved,
+	mode,
 }) {
-	const controls = getControls();
+	const controls = getControls({ mode });
 
 	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion();
 
@@ -98,6 +99,7 @@ function SingleQuestionComponent({
 				errors={errors?.options || {}}
 				name={`${name}.${index}.${controls[2].name}`}
 				editAnswerDetails={editAnswerDetails}
+				mode={mode}
 			/>
 
 			{type !== 'case_study' ? (
@@ -119,7 +121,7 @@ function SingleQuestionComponent({
 				<TextAreaController control={control} {...controls[4]} name={`${name}.${index}.${controls[4].name}`} />
 			</div>
 
-			{type === 'case_study' && !isNewQuestion ? (
+			{type === 'case_study' && !isNewQuestion && mode !== 'view' ? (
 				<div className={styles.button_container}>
 					<Button loading={loading} onClick={() => handleDelete()} themeType="accent" size="sm" type="button">
 						Delete

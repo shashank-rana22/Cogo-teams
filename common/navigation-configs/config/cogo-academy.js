@@ -17,6 +17,12 @@ const cogoAcademy = {
 	'/[partner_id]/learning/test-module/create-question': {
 		navigation: 'cogo_academy-create_faq',
 	},
+	'/[partner_id]/learning/test-module/edit-question': {
+		navigation: 'cogo_academy-create_faq',
+	},
+	'/[partner_id]/learning/test-module/view-question': {
+		navigation: 'cogo_academy-create_faq',
+	},
 	'/[partner_id]/learning/test-module/create-test': {
 		navigation: 'cogo_academy-create_faq',
 	},
@@ -42,6 +48,9 @@ const cogoAcademy = {
 		navigation: 'cogo_academy-tests',
 	},
 	'/[partner_id]/learning/tests/[test_id]': {
+		navigation: 'cogo_academy-tests',
+	},
+	'/[partner_id]/learning/tests/results/admin/[test_id]': {
 		navigation: 'cogo_academy-tests',
 	},
 	'/[partner_id]/learning/tests/dashboard/admin/[test_id]': {

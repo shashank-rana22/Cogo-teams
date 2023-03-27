@@ -79,6 +79,7 @@ function FormComponent({
 	loading,
 	setShowForm,
 	setValue,
+	mode,
 }) {
 	const closeForm = () => {
 		const { topic = '', difficulty_level = '' } = editDetails || {};
@@ -146,7 +147,7 @@ function FormComponent({
 						</div>
 					</div>
 
-					<div className={!isNewQuestion ? styles.bottom : null}>
+					<div style={{ marginBottom: mode === 'view' ? '16px' : '80px' }}>
 						<TextAreaController
 							control={control}
 							{...controls[4]}
@@ -156,7 +157,7 @@ function FormComponent({
 				</>
 			) : null}
 
-			{!isNewQuestion && editDetails?.question_type === 'case_study' ? (
+			{!isNewQuestion && editDetails?.question_type === 'case_study' && mode !== 'view' ? (
 				<Button
 					className={styles.edit_button}
 					size="sm"
@@ -194,10 +195,11 @@ function BasicDetails({
 	reset,
 	getTestQuestionTest,
 	questionSetId,
+	mode,
 }) {
 	const [showForm, setShowForm] = useState(false);
 
-	const controls = getControls();
+	const controls = getControls({ mode });
 
 	const {
 		loading,
@@ -244,6 +246,7 @@ function BasicDetails({
 						loading={loading}
 						setValue={setValue}
 						setShowForm={setShowForm}
+						mode={mode}
 					/>
 				)}
 		</div>

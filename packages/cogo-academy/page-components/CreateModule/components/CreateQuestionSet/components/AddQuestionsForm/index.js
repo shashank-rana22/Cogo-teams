@@ -30,6 +30,7 @@ function AddQuestionsForm({
 	total_count,
 	page,
 	setPage,
+	mode,
 }) {
 	const [showBulkUpload, setShowBulkUpload] = useState(false);
 
@@ -81,6 +82,7 @@ function AddQuestionsForm({
 						total_count={total_count}
 						page={page}
 						setPage={setPage}
+						mode={mode}
 					/>
 				)
 			)}
@@ -96,10 +98,11 @@ function AddQuestionsForm({
 					topic={topic}
 					savedQuestionDetails={savedQuestionDetails}
 					listSetQuestions={listSetQuestions}
+					mode={mode}
 				/>
 			) : null}
 
-			{showBulkUpload && !loading ? (
+			{showBulkUpload && !loading && mode !== 'view' ? (
 				<BulkUpload
 					questionSetId={questionSetId}
 					setShowBulkUpload={setShowBulkUpload}
@@ -107,7 +110,7 @@ function AddQuestionsForm({
 				/>
 			) : null}
 
-			{from !== 'test' ? (
+			{from !== 'test' && mode !== 'view' ? (
 				<div className={styles.add_container}>
 					<div>Add more Questions</div>
 

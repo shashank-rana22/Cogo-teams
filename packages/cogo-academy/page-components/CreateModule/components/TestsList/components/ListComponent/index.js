@@ -102,7 +102,6 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 						className={styles.styled_icon}
 					/>
 				)}
-
 				<span
 					className={styles.span_text}
 				>
@@ -142,7 +141,6 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 							}}
 						>
 							Delete
-
 						</Button>
 					</div>
 				</Modal.Body>
