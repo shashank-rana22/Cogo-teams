@@ -11,7 +11,7 @@ function CreatePage() {
 	return (
 		<div>
 			<section className={styles.heading_container}>
-				Customise Landing Pages
+				Customise Landing Pages V1
 			</section>
 
 			<section className={styles.body}>
