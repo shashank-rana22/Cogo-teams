@@ -27,6 +27,10 @@ const STATUS_MAPPING = {
 		label : 'Live',
 		color : 'green',
 	},
+	inactive: {
+		label : 'Inactive',
+		color : 'red',
+	},
 };
 
 function DisplayCard({

@@ -54,8 +54,8 @@ function useListAnnouncements() {
 					},
 					user_id,
 					page,
-					page_limit: 10,
-					// is_admin_view : true,
+					page_limit    : 10,
+					is_admin_view : true,
 				},
 
 			});

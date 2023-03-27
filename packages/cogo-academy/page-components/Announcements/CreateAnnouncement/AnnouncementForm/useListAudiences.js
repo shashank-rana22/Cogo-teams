@@ -1,14 +1,12 @@
 import { Pill } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 
 import WORK_SCOPES_OPTIONS from './CreateAudienceForm/utils/workScopeMappings';
 
 // eslint-disable-next-line import/no-unresolved
 import countries from '@/data-store/constants/countries.json';
-
-const audienceOptions = [];
 
 const useListAudiences = () => {
 	const [{ data: audienceData, loading:listAudienceLoading }, triggerAudiences] = useRequest({
@@ -33,11 +31,9 @@ const useListAudiences = () => {
 		}
 	}, [triggerAudiences]);
 
-	useEffect(() => {
-		fetchAudiences();
-	}, [fetchAudiences]);
-
 	const { list: audienceList = [] } = audienceData || {};
+
+	const audienceOptions = [];
 
 	const getAudienceOption = (item) => {
 		const {
@@ -83,11 +79,9 @@ const useListAudiences = () => {
 		return { label, q, value };
 	};
 
-	useEffect(() => {
-		(audienceList || []).forEach((item) => {
-			audienceOptions.push(getAudienceOption(item));
-		});
-	}, [audienceList]);
+	(audienceList || []).forEach((item) => {
+		audienceOptions.push(getAudienceOption(item));
+	});
 
 	return {
 		audienceOptions,
