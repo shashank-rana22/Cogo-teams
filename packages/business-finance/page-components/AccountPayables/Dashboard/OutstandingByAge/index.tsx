@@ -5,7 +5,15 @@ import LoadingState from '../LoadingState';
 import BarChart from './BarChart';
 import styles from './styles.module.css';
 
-function OutstandingByAge({ data, loading }) {
+interface ItemDataProps {
+	ageingBucket:[],
+}
+interface ItemProps {
+	data:ItemDataProps,
+	loading:boolean
+}
+
+function OutstandingByAge({ data, loading }:ItemProps) {
 	return (
 		<div>
 			<div className={styles.container}>

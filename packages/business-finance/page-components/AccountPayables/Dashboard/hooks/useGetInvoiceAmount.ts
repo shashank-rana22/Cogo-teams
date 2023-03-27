@@ -1,7 +1,11 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetInvoiceAmount = ({ activeTab }) => {
+interface FilterProps {
+	activeTab:string,
+}
+
+const useGetInvoiceAmount = ({ activeTab }:FilterProps) => {
 	const [
 		{ data, loading },
 		trigger,

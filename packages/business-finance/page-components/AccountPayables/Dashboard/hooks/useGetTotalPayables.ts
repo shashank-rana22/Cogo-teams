@@ -1,7 +1,16 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetTotalPayables = ({ filtersData, activeTab }) => {
+interface FilterProps {
+	currency:string,
+	service:string,
+}
+interface ItemProps {
+	filtersData:FilterProps;
+	activeTab:string
+}
+
+const useGetTotalPayables = ({ filtersData, activeTab }:ItemProps) => {
 	const {
 		service,
 		currency,

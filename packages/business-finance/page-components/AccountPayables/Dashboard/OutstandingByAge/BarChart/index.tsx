@@ -7,7 +7,14 @@ import { getAmountInLakhCrK } from '../../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
-function BarChart({ data }) {
+interface ItemDataProps {
+	ageingBucket:[],
+}
+interface ItemProps {
+	data:ItemDataProps,
+}
+
+function BarChart({ data }:ItemProps) {
 	const { ageingBucket = [] } = data || {};
 	const [isLinearView, setIsLinearView] = useState(true);
 

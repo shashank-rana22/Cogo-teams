@@ -5,7 +5,12 @@ import Entity from '../TreasuryStatistics/Entity';
 
 import styles from './styles.module.css';
 
-function EntityTab({ activeTab, setActiveTab }) {
+interface ItemProps {
+	activeTab:string,
+	setActiveTab:Function,
+}
+
+function EntityTab({ activeTab, setActiveTab }:ItemProps) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.tabs_container}>

@@ -1,7 +1,11 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetPayablesByService = ({ activeTab }) => {
+interface Filterprops {
+	activeTab:string,
+}
+
+const useGetPayablesByService = ({ activeTab }:Filterprops) => {
 	const [
 		{ data, loading },
 		trigger,

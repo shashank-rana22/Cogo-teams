@@ -7,7 +7,16 @@ import useGetDailyPayableOutstanding from '../hooks/useGetDailyPayableOutstandin
 
 import styles from './styles.module.css';
 
-function DailyPayableOutstanding({ filters, activeTab }) {
+interface FilterProps {
+	service:string,
+	currency:string,
+}
+interface ItemData {
+	filters:FilterProps,
+	activeTab:string,
+}
+
+function DailyPayableOutstanding({ filters, activeTab }:ItemData) {
 	const [isQuarterView, setIsQuarterView] = useState(false);
 	const { data, loading } = useGetDailyPayableOutstanding({ isQuarterView, filters, activeTab });
 	const formatedJan = format(data?.[0]?.yearMonth, 'MMM');

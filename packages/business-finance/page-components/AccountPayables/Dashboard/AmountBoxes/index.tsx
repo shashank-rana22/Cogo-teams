@@ -8,7 +8,11 @@ import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
-function AmountBoxes({ activeTab }) {
+interface ItemData {
+	activeTab:string,
+}
+
+function AmountBoxes({ activeTab }:ItemData) {
 	const {
 		data,
 		loading,

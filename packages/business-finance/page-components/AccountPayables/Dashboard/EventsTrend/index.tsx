@@ -37,9 +37,7 @@ interface ItemProps {
 }
 
 function EventsTrend({ showData, setShowData, filtersData, activeTab }:ItemProps) {
-	// const [showEventsData, setShowEventsData] = useState({ events: '' });
 	const [isCountView, setIsCountView] = useState(false);
-
 	const {
 		data,
 		loading,
@@ -96,7 +94,12 @@ function EventsTrend({ showData, setShowData, filtersData, activeTab }:ItemProps
 			</div>
 			{loading ? (
 				<div className={styles.loading}>
-					<div className={styles.loading}>
+					{[1, 2, 3, 4, 5].map(() => (
+						<div className={styles.loading}>
+							<Placeholder />
+						</div>
+					))}
+					{/* <div className={styles.loading}>
 						<Placeholder />
 					</div>
 					<div className={styles.loading}>
@@ -107,7 +110,7 @@ function EventsTrend({ showData, setShowData, filtersData, activeTab }:ItemProps
 					</div>
 					<div className={styles.loading}>
 						<Placeholder />
-					</div>
+					</div> */}
 				</div>
 			)
 				: <LineCharts data={data} isCountView={isCountView} showData={showData} />}

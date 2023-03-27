@@ -5,9 +5,12 @@ import Filter from '../../../commons/Filters';
 import { filterControls } from './filterControls';
 import styles from './styles.module.css';
 
-function SelectFilters({ filters, setFilters }) {
-	// const [filters, setFilters] = useState({ currency: '', service: '' });
+interface FilterProps {
+	filters:object,
+	setFilters: (p:object) => void,
+}
 
+function SelectFilters({ filters, setFilters }:FilterProps) {
 	return (
 		<div className={styles.container}>
 			<Filter

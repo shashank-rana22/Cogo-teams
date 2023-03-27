@@ -9,7 +9,11 @@ import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
-function AccountPayablesByService({ activeTab }) {
+interface ItemProps {
+	activeTab:string,
+}
+
+function AccountPayablesByService({ activeTab }:ItemProps) {
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const [activeBox, setActiveBox] = useState(null);
 	const handleClick = () => {

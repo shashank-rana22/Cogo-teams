@@ -1,7 +1,17 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useGetEventsTrend = ({ showData, filtersData, activeTab }) => {
+interface FilterProps {
+	service:string,
+	currency:string,
+}
+interface ItemProps {
+	showData:string;
+	filtersData:FilterProps;
+	activeTab:string;
+}
+
+const useGetEventsTrend = ({ showData, filtersData, activeTab }:ItemProps) => {
 	const [filters, setFilters] = useState({
 		events: 'so2UploadTrend',
 	});

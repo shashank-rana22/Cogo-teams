@@ -13,7 +13,7 @@ export const filterControls = [
 			{ value: 'invoiceApprovedTrend', label: 'Invoices Approved - SO3' },
 			{ value: 'utrUploadTrend', label: 'UTR Uploaded' },
 			{ value: 'paidBillTrend', label: 'Bills Paid' },
-			{ value: 'payruns_created', label: 'Payruns Created' },
+			{ value: 'payrunCreatedTrend', label: 'Payruns Created' },
 			{ value: 'urgent_bills_paid', label: 'Urgent Bills paid' },
 			{ value: 'paidProformaTrend', label: 'Proforma Paid' },
 

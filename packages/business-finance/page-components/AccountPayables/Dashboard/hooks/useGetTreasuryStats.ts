@@ -2,16 +2,16 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-const useGetTreasuryStats = ({ activeTab }) => {
+interface FilterProps {
+	activeTab:string,
+}
+
+const useGetTreasuryStats = ({ activeTab }:FilterProps) => {
 	const [filters, setFilters] = useState({
 		Date: undefined,
-		// entity: undefined,
-		// currency : undefined,
 	});
 
 	const {
-		// entity,
-		// currency,
 		Date,
 		...rest
 	} = filters || {};

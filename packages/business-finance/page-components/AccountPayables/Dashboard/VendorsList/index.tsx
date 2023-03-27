@@ -1,8 +1,7 @@
-import { Tooltip } from '@cogoport/components';
+import { Select, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
-import SegmentedControl from '../../../commons/SegmentedControl';
 import StyledTable from '../commons/StyledTable';
 import useGetBySupplier from '../hooks/useGetBySupplier';
 
@@ -11,87 +10,43 @@ import VendorsColumn from './vendorsColumn';
 
 const OPTIONS = [
 	{
-		label : 'Overseas',
-		value : 'OVERSEAS',
+		value : 'shipping_line',
+		label : 'Shipping Line',
 	},
 	{
+		value : 'airline',
+		label : 'Airline',
+	},
+	{
+		value : 'nvocc',
 		label : 'NVOCC',
-		value : 'NVOCC',
 	},
 	{
-		label : 'Ocean',
-		value : 'OCEAN',
+		value : 'iata',
+		label : 'IATA',
 	},
 	{
-		label : 'Air',
-		value : 'AIR',
+		value : 'customs_service_provider',
+		label : 'Customs',
 	},
 	{
-		label : 'Surface',
-		value : 'SURFACE',
+		value : 'transporter',
+		label : 'Transporter',
+	},
+	{
+		value : 'freight_forwarder',
+		label : 'Freight Forwarder',
+	},
+	{
+		value : 'other',
+		label : 'Other',
 	},
 ];
 
-// const list1 = [
-// 	{
-// 		vendorName    : 'jaiprakash',
-// 		amount        : 'INR 30,00,000',
-// 		invoicesCount : '8',
-// 	},
-// 	{
-// 		vendorName    : 'jaiprakash',
-// 		amount        : 'INR 30,00,000',
-// 		invoicesCount : '8',
-// 	},
-// 	{
-// 		vendorName    : 'jaiprakash',
-// 		amount        : 'INR 30,00,000',
-// 		invoicesCount : '8',
-// 	},
-// 	{
-// 		vendorName    : 'jaiprakash',
-// 		amount        : 'INR 30,00,000',
-// 		invoicesCount : '8',
-// 	},
-// 	{
-// 		vendorName    : 'jaiprakash',
-// 		amount        : 'INR 30,00,000',
-// 		invoicesCount : '8',
-// 	},
-// 	{
-// 		vendorName    : 'jaiprakash',
-// 		amount        : 'INR 30,00,000',
-// 		invoicesCount : '8',
-// 	},
-// 	{
-// 		vendorName    : 'jaiprakash',
-// 		amount        : 'INR 30,00,000',
-// 		invoicesCount : '8',
-// 	},
-// 	{
-// 		vendorName    : 'jaiprakash',
-// 		amount        : 'INR 30,00,000',
-// 		invoicesCount : '8',
-// 	},
-// 	{
-// 		vendorName    : 'jaiprakash',
-// 		amount        : 'INR 30,00,000',
-// 		invoicesCount : '8',
-// 	},
-// 	{
-// 		vendorName    : 'jaiprakash',
-// 		amount        : 'INR 30,00,000',
-// 		invoicesCount : '8',
-// 	},
-// ];
+function VendorsList() {
+	const [showVendorsList, setShowVendorsList] = useState(undefined);
 
-interface ItemProps {
-	showVendorsList:string;
-	setShowVendorsList:Function;
-}
-
-function VendorsList({ showVendorsList, setShowVendorsList }:ItemProps) {
-	const { data } = useGetBySupplier();
+	const { data, loading } = useGetBySupplier({ showVendorsList });
 	const { list = [] } = data || {};
 
 	return (
@@ -109,16 +64,18 @@ function VendorsList({ showVendorsList, setShowVendorsList }:ItemProps) {
 					</Tooltip>
 				</div>
 				<div className={styles.segmented_filter}>
-					<SegmentedControl
+					<Select
+						name="category"
+						value={showVendorsList}
+						onChange={setShowVendorsList}
 						options={OPTIONS}
-						activeTab={showVendorsList}
-						setActiveTab={setShowVendorsList}
-						color="#ED3726"
-						background="#FFFAEB"
+						size="sm"
+						isClearable
+						placeholder="Category"
 					/>
 				</div>
 			</div>
-			<StyledTable data={list} columns={VendorsColumn} />
+			<StyledTable data={list} columns={VendorsColumn} loading={loading} />
 		</div>
 	);
 }

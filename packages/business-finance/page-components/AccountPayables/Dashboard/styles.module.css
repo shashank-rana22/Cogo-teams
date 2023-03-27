@@ -1,7 +1,10 @@
 
 .sub_container{
     display: flex;
-    width: 100%;
+    max-width: 100%;
+    @media (max-width: 1158px) {
+		flex-direction: column;
+	}
 }
 .outstanding{
     display: flex;

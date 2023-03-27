@@ -4,6 +4,10 @@
     padding: 16px;
     margin-top: 10px;
     width: 50%;
+    overflow: scroll;
+    @media (max-width: 1158px) {
+		width: 100%;
+	}
 }
 .header{
     justify-content: space-between;

@@ -15,7 +15,6 @@ import TreasuryStatistics from './TreasuryStatistics';
 import VendorsList from './VendorsList';
 
 function Dashboard() {
-	const [showVendorsList, setShowVendorsList] = useState('OVERSEAS');
 	const [activeTab, setActiveTab] = useState('301');
 	const [showData, setShowData] = useState('day');
 	const { data, filters, setFilters, loading } = useGetAgePayable({ activeTab });
@@ -39,7 +38,7 @@ function Dashboard() {
 					/>
 					<DailyPayableOutstanding filters={filters} activeTab={activeTab} />
 				</div>
-				<VendorsList showVendorsList={showVendorsList} setShowVendorsList={setShowVendorsList} />
+				<VendorsList />
 			</div>
 		</div>
 	);

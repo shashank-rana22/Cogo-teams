@@ -1,7 +1,11 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetBySupplier = () => {
+interface FilterProps {
+	showVendorsList:string,
+}
+
+const useGetBySupplier = ({ showVendorsList }:FilterProps) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -18,8 +22,9 @@ const useGetBySupplier = () => {
 		try {
 			await trigger({
 				params: {
-					sortBy   : 'totalOutstandingInvoiceLedgerAmount',
+					sortBy   : 'openInvoiceLedgerAmount',
 					sortType : 'Desc',
+					category : showVendorsList || undefined,
 				},
 			});
 		} catch (err) {
@@ -30,7 +35,7 @@ const useGetBySupplier = () => {
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [showVendorsList]);
 
 	return {
 		data,
