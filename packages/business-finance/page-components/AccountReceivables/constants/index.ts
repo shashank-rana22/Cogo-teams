@@ -303,3 +303,13 @@ export const ENTITY_TYPE = [
 	{ label: '201 Cogoport Netherlands', value: '201' },
 	{ label: '101 Cogo Freight PVT Limited', value: '101' },
 ];
+
+export const INVOICE_STATUS = {
+	Unpaid               : '#FEF1DF',
+	Unutilized           : '#FEF1DF',
+	Utilized             : '#CDF7D4',
+	'Partially Paid'     : '#D9EAFD',
+	Paid                 : '#CDF7D4',
+	'Knocked Off'        : '#CDF7D4',
+	'Partially Utilized' : '#D9EAFD',
+};

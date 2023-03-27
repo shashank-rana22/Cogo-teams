@@ -1,10 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 type DueDate = {
 	startDate?: Date,
@@ -28,8 +27,11 @@ interface InvoiceFilterProps {
 	search?: string,
 	dueDate?: DueDate,
 	invoiceDate?: InvoiceDate,
-	ageingKey?: any,
-	orgId?: string
+	orgId?: string,
+	migrated?: string,
+	status?: string,
+	invoiceStatus?: string,
+	services?: string[],
 }
 
 const useGetOutstandingCard = (organizationId: string) => {
@@ -57,7 +59,7 @@ const useGetOutstandingCard = (organizationId: string) => {
 		{ manual: true },
 	);
 
-	const [, downloadApi] = useRequestBf(
+	const [apiState, downloadApi] = useRequestBf(
 		{
 			url     : '/sales/report/download/outstanding/list',
 			method  : 'get',
@@ -66,7 +68,10 @@ const useGetOutstandingCard = (organizationId: string) => {
 		{ manual: true },
 	);
 
-	const { date, search, dueDate, invoiceDate, orgId, ...restFilters } = invoiceFilters || {};
+	const {
+		page, pageLimit, migrated, status, invoiceStatus,
+		services, search, dueDate, invoiceDate, orgId,
+	} = invoiceFilters || {};
 
 	const dueDateStart = dueDate && format(dueDate?.startDate, 'yyyy-MM-dd', {}, false);
 	const dueDateEnd = dueDate && format(dueDate?.endDate, 'yyyy-MM-dd', {}, false);
@@ -78,13 +83,18 @@ const useGetOutstandingCard = (organizationId: string) => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
 
-	const getOrganizationInvoices = async () => {
+	const getOrganizationInvoices = useCallback(async () => {
 		try {
 			await listApi({
 				params: {
-					...(restFilters || {}),
-					query : query !== '' ? query : undefined,
-					role  : userData.id,
+					page,
+					pageLimit,
+					migrated      : migrated || undefined,
+					status        : status || undefined,
+					invoiceStatus : invoiceStatus || undefined,
+					services      : services || undefined,
+					query         : query !== '' ? query : undefined,
+					role          : userData.id,
 					orgId,
 					dueDateStart,
 					dueDateEnd,
@@ -95,19 +105,26 @@ const useGetOutstandingCard = (organizationId: string) => {
 		} catch (e) {
 			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed'); }
 		}
-	};
+	}, [dueDateEnd, dueDateStart, invoiceDateEnd, invoiceDateStart,
+		invoiceStatus, listApi, migrated, orgId, page, pageLimit, query, services, status, userData.id]);
 
 	const sendReport = async () => {
 		try {
 			await downloadApi({
 				params: {
-					...(restFilters || {}),
+					page,
+					pageLimit,
+					migrated      : migrated || undefined,
+					status        : status || undefined,
+					invoiceStatus : invoiceStatus || undefined,
+					services      : services || undefined,
+					orgId,
 					dueDateStart,
 					dueDateEnd,
 					invoiceDateStart,
 					invoiceDateEnd,
-					query       : query !== '' ? query : undefined,
-					performedBy : userData.id,
+					query         : query !== '' ? query : undefined,
+					performedBy   : userData.id,
 				},
 			});
 			Toast.success('Report Sent Successfully');
@@ -118,24 +135,17 @@ const useGetOutstandingCard = (organizationId: string) => {
 
 	useEffect(() => {
 		getOrganizationInvoices();
-	}, [
-		JSON.stringify(restFilters),
-		query,
-		dueDate,
-		invoiceDate,
-	]);
+	}, [query, dueDate, invoiceDate, getOrganizationInvoices]);
 
 	const clearInvoiceFilters = () => {
 		setinvoiceFilters((prev) => ({
 			...prev,
 			page          : 1,
-			invoiceNumber : undefined,
 			invoiceStatus : undefined,
 			search        : undefined,
 			status        : undefined,
 			services      : undefined,
 			migrated      : undefined,
-			shipmentType  : undefined,
 			invoiceDate   : undefined,
 			dueDate       : undefined,
 		}));
@@ -149,6 +159,7 @@ const useGetOutstandingCard = (organizationId: string) => {
 		invoiceLoading: listLoading,
 		clearInvoiceFilters,
 		sendReport,
+		apiState,
 	};
 };
 

@@ -72,7 +72,7 @@ function FilterpopOver({
 					asyncKey="partner_users"
 					valueKey="user_id"
 					initialCall={false}
-					onChange={(userId:any) => onChange(userId, 'salesAgentId')}
+					onChange={(userId:string) => onChange(userId, 'salesAgentId')}
 					value={filters.salesAgentId}
 					placeholder="Select Sales Agent User"
 					size="sm"
@@ -93,7 +93,7 @@ function FilterpopOver({
 					asyncKey="partner_users"
 					valueKey="user_id"
 					initialCall={false}
-					onChange={(userId) => onChange(userId, 'creditControllerId')}
+					onChange={(userId:string) => onChange(userId, 'creditControllerId')}
 					value={filters.creditControllerId}
 					placeholder="Select Credit Controller User"
 					size="sm"
@@ -109,7 +109,7 @@ function FilterpopOver({
 				</div>
 				<Select
 					value={filters.companyType}
-					onChange={(val?:any) => onChange(val, 'companyType')}
+					onChange={(val?:string) => onChange(val, 'companyType')}
 					isClearable
 					placeholder="Select Company Type"
 					options={companyType}

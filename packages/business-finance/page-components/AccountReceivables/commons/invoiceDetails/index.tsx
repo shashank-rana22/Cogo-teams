@@ -23,7 +23,7 @@ function InvoiceDetails({ item }) {
 
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
 
-	const [dropDownData, setDropDownData] = useState(false);
+	const [dropDownData, setDropDownData] = useState<object>({});
 
 	const handleShow = () => {
 		setShowDetailsCard(true);
@@ -32,7 +32,7 @@ function InvoiceDetails({ item }) {
 	};
 
 	const handleDropdown = (key = '') => {
-		setDropDownData((previousActions:any) => ({
+		setDropDownData((previousActions:object) => ({
 			...previousActions,
 			[key]: !previousActions[key],
 		}));

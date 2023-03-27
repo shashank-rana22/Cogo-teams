@@ -39,7 +39,7 @@ function PaymentTable({ organizationId }: Props) {
 				<MultiSelect
 					placeholder="Select Status"
 					value={paymentFilters.statusList}
-					onChange={(val?:any) => onChange(val, 'statusList')}
+					onChange={(val:string) => onChange(val, 'statusList')}
 					options={UTILIZATION_STATUS}
 					style={{ width: 200, marginRight: '16px' }}
 				/>
@@ -47,7 +47,7 @@ function PaymentTable({ organizationId }: Props) {
 					className="primary md"
 					placeholder="Search by Payment Number"
 					value={paymentFilters.query}
-					onChange={(val) => onChange(val, 'query')}
+					onChange={(val:string) => onChange(val, 'query')}
 					prefix={(
 						<IcMSearchdark />
 					)}

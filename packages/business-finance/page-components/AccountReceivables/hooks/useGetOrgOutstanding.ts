@@ -39,6 +39,8 @@ const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
 
 	const { salesAgentId, creditControllerId, companyType } = formFilters;
 
+	const { order, key } = orderBy || {};
+
 	const [
 		{ data, loading },
 		trigger,
@@ -56,17 +58,13 @@ const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
 
-	const stringifiedOrderBy = JSON.stringify(orderBy);
-	const stringifiedFormFilters = JSON.stringify(formFilters);
-
 	useEffect(() => {
 		const refetch = () => {
-			const { order } = orderBy || {};
 			try {
 				trigger({
 					params: {
-						sortBy               : orderBy.key,
-						sortType             : order,
+						sortBy               : key || undefined,
+						sortType             : order || undefined,
 						page,
 						pageLimit,
 						salesAgentId         : salesAgentId || undefined,
@@ -84,22 +82,8 @@ const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
 			}
 		};
 		refetch();
-	}, [
-		stringifiedOrderBy,
-		stringifiedFormFilters,
-		entityCode,
-		companyType,
-		creditControllerId,
-		orderBy,
-		salesAgentId,
-		trigger,
-		organizationSerialId,
-		page,
-		pageLimit,
-		sageId,
-		tradePartySerialId,
-		q,
-	]);
+	}, [entityCode, companyType, creditControllerId, orderBy, salesAgentId, trigger,
+		organizationSerialId, page, pageLimit, sageId, tradePartySerialId, q, key, order]);
 
 	useEffect(() => {
 		const resetQuery = {

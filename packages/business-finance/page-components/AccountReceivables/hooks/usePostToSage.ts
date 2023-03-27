@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-const usePostToSage = (id) => {
+const usePostToSage = (id: string) => {
 	const [
 		{ data, loading },
 		trigger,

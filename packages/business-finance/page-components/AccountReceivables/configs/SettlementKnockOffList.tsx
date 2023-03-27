@@ -2,17 +2,9 @@ import { Pill } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { startCase, format, getByKey } from '@cogoport/utils';
 
-import styles from './styles.module.css';
+import { INVOICE_STATUS } from '../constants';
 
-const invoiceStatus = {
-	Unpaid               : '#FEF1DF',
-	Unutilized           : '#FEF1DF',
-	Utilized             : '#CDF7D4',
-	'Partially Paid'     : '#D9EAFD',
-	Paid                 : '#CDF7D4',
-	'Knocked Off'        : '#CDF7D4',
-	'Partially Utilized' : '#D9EAFD',
-};
+import styles from './styles.module.css';
 
 const SettlementKnockOffList = () => [
 	{
@@ -139,7 +131,7 @@ const SettlementKnockOffList = () => [
 		Header   : 'Status',
 		accessor : (row) => (
 			<div>
-				<Pill size="md" color={invoiceStatus[(getByKey(row, 'status') as string)]}>
+				<Pill size="md" color={INVOICE_STATUS[(getByKey(row, 'status') as string)]}>
 					{startCase(getByKey(row, 'status') as string)}
 				</Pill>
 			</div>
