@@ -4,12 +4,12 @@
 }
 
 .search {
-	width: 80%;
+	width: 74%;
 	margin-right: 12px;
 }
 
 .filter_popover {
-	width: 20%;
+	width: 16%;
 
 	:global {
 		.ui_popover_container {

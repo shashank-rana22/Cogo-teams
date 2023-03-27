@@ -43,7 +43,7 @@ export const incomeConfig = {
 		},
 		{
 			label : 'Last Modified Date',
-			key   : 'createdDate',
+			key   : 'updatedAt',
 			func  : 'renderDates',
 			span  : 2.2,
 		},

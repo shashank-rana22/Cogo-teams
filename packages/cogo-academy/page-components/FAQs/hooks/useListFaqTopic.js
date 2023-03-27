@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 function useListFaqTopic() {
 	const { general = {}, profile = {} } = useSelector((state) => state);
 
-	const { auth_role_data = [], partner = {} } = profile;
-	const { role_functions = [], role_sub_functions = [] } = auth_role_data?.[0] || {};
+	const { auth_role_data = {}, partner = {} } = profile;
+	const { role_functions = [], role_sub_functions = [] } = auth_role_data || {};
 
 	const { scope = '', query } = general;
 	const { country_id = '', id = '' } = partner;
@@ -17,7 +17,7 @@ function useListFaqTopic() {
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'faq/list_faq_topics',
+		url    : '/list_faq_topics',
 	}, { manual: true });
 
 	const roleFunction = !isEmpty(role_functions) ? role_functions : undefined;

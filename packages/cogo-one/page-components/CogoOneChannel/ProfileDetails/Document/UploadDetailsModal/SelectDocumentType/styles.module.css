@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	:global {
+		.ui_button_container {
+			padding: 20px 40px;
+		}
+
+		.ui_button_childeren {
+			font-size: 14px;
+			font-weight: 600;
+		}
+	}
+}
+
+.first_button {
+	transition: 0.5s;
+
+	&:hover {
+		transition: 0.5s;
+		transform: scale(1.2);
+	}
+}
+
+.last_button {
+	margin-left: 20px;
+	transition: 0.5s;
+
+	&:hover {
+		transition: 0.5s;
+		transform: scale(1.2);
+	}
+}
