@@ -2,7 +2,7 @@ import { Toast, Checkbox } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format, isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { FilterInterface } from '../Accruals/interface';
 
@@ -13,9 +13,10 @@ interface ShipmentInterface {
 	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
 	setBulkSection: React.Dispatch<React.SetStateAction<{}>>
 	checkedRows?:object
+	bulkAction?:string
 }
 
-const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection }:ShipmentInterface) => {
+const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection, bulkAction }:ShipmentInterface) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
@@ -29,16 +30,10 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 	const {
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
-		jobState = '', query = '', page, date,
+		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
+		sortType = '', sortBy = '',
 	} = filters || {};
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
-
-	const rangeMapping = {
-		'>'  : 'gt',
-		'>=' : 'gte',
-		'<'  : 'lt',
-		'<=' : 'lte',
-	};
 
 	const [
 		{ data:shipmentViewData, loading:shipmentLoading },
@@ -64,7 +59,15 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 		{ manual: true },
 	);
 
-	const refetch = async () => {
+	const refetch = useCallback(async () => {
+		const rangeMapping = {
+			''      : '',
+			'>'     : 'gt',
+			'>='    : 'gte',
+			'<'     : 'lt',
+			'<='    : 'lte',
+			'<=x=<' : 'btw',
+		};
 		try {
 			const resp = await shipmentTrigger({
 				params: {
@@ -76,13 +79,15 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 					jobType              : shipmentType || undefined,
 					profitComparisonType : rangeMapping[range] || undefined,
 					jobState             : jobState || undefined,
-					profitAmount         : profitAmount || undefined,
+					lowerProfitMargin    : profitAmount || profitPercent || undefined,
 					profitType           : profitType || undefined,
-					startDate            : format(date?.startDate, 'yyy-MM-dd') || undefined,
-					endDate              : format(date?.endDate, 'yyy-MM-dd') || undefined,
+					sortType             : sortType || undefined,
+					sortBy               : sortBy || undefined,
+					upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
+					startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
+					endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
 					page                 : page || undefined,
 					pageLimit            : 10,
-					// sortType,
 				},
 			});
 			const data = { ...resp.data };
@@ -96,19 +101,35 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 			});
 			setApiData(resp.data);
 		} catch (error) {
+			Toast.error(error?.response?.data?.message);
 			setApiData({ pageNo: 0, totalPages: 0, total: 0, totalRecords: 0, list: [] });
 		}
-	};
+	}, [
+		date,
+		jobState,
+		month,
+		page,
+		profitAmount,
+		profitAmountUpper,
+		profitPercent,
+		profitPercentUpper,
+		profitType,
+		query,
+		range,
+		service,
+		shipmentTrigger,
+		shipmentType,
+		sortBy,
+		sortType,
+		tradeType,
+		year,
+	]);
 
 	useEffect(() => {
-		if (year && month && query) {
+		if (!year && !month) {
 			refetch();
 		}
-	}, [query]);
-
-	useEffect(() => {
-		refetch();
-	}, [page]);
+	}, [refetch, query, year, month, page, sortType, sortBy]);
 
 	const {
 		pageNo: pageNos = 0,
@@ -170,12 +191,10 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 		const { page: pages = 0 } = paginationData;
 		const isAllRowsChecked = !isEmpty(groupListData)
 		&& (checkedRows?.[`page-${pages}`] || []).length === (groupListData || []).length;
-		const isSemiRowsChecked = (checkedRows?.[`page-${pages}`] || []).length > 0;
 
 		return (
 			<Checkbox
-				style={{ padding: '8px', left: '8px' }}
-				semiChecked={isSemiRowsChecked}
+				style={{ padding: '8px' }}
 				checked={isAllRowsChecked}
 				onChange={onChangeTableHeaderCheckbox}
 			/>
@@ -219,25 +238,54 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 			/>
 		);
 	};
+
 	const addSelect = async (setOpenModal) => {
 		const newPayload = payload.map((item) => ({
 			...item,
 		}));
+
+		const rangeMapping = {
+			''      : '',
+			'>'     : 'gt',
+			'>='    : 'gte',
+			'<'     : 'lt',
+			'<='    : 'lte',
+			'<=x=<' : 'btw',
+		};
+
 		try {
 			const res = await addToSelectedTrigger({
 				data: {
-					shipmentList : newPayload,
-					performedBy  : userId,
+					shipmentList   : newPayload,
+					performedBy    : userId,
+					selectionMode  : bulkAction || 'SINGLE',
+					jobListRequest : {
+						query                : query || undefined,
+						year                 : year || undefined,
+						month                : month || undefined,
+						serviceType          : service || undefined,
+						tradeType            : tradeType || undefined,
+						jobType              : shipmentType || undefined,
+						profitComparisonType : rangeMapping[range] || undefined,
+						jobState             : jobState || undefined,
+						lowerProfitMargin    : profitAmount || profitPercent || undefined,
+						upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
+						profitType           : profitType || undefined,
+						startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
+						endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
+						pageLimit            : apiData?.totalRecords,
+						page                 : 1,
+					},
 				},
 			});
 			if (res.data) {
 				refetch();
-				Toast.success(res.data);
+				Toast.success('SUCCESS');
 				setPayload([]);
 				setOpenModal(false);
 			}
 		} catch (error) {
-			Toast.error(error?.data?.message);
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 

@@ -3,9 +3,16 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
-const useViewSelect = (filters, query) => {
+interface DeleteInterface {
+	id?:string
+	bulkData?:string
+	handleModal?:Function
+	setBulkModal?: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 	const { debounceQuery } = useDebounceQuery();
 	const [checkedRowsSerialId, setCheckedRowsSerialId] = useState([]);
 	const [checkedRows, setCheckedRows] = useState({});
@@ -15,13 +22,11 @@ const useViewSelect = (filters, query) => {
 	const {
 		search,
 		archivedStatus,
-		date,
-		range,
-		jobType,
-		profit,
+		sortType,
+		sortBy,
 	} = filters || {};
 
-	const { service = '', shipmentType = '' } = query || {};
+	const { service = '', shipmentType = '', year = '', month = '', tradeType = '' } = query || {};
 
 	useEffect(() => {
 		debounceQuery(search !== '' ? search : undefined);
@@ -48,19 +53,19 @@ const useViewSelect = (filters, query) => {
 		{ manual: true },
 	);
 
-	const viewSelected = async () => {
+	const viewSelected = useCallback(async () => {
 		try {
 			const resp = await viewSelectedSidTrigger({
 				params: {
-					...query,
-					date           : date || undefined,
-					jobType        : jobType || undefined,
-					profit         : profit || undefined,
-					range          : range || undefined,
+					year           : year || undefined,
+					tradeType      : tradeType || undefined,
+					month          : month || undefined,
 					archivedStatus : archivedStatus || 'BOOKED' || undefined,
 					serviceType    : service !== '' ? service : undefined,
 					shipment       : shipmentType !== '' ? shipmentType : undefined,
 					search         : search || undefined,
+					sortType       : sortType || undefined,
+					sortBy         : sortBy || undefined,
 				},
 			});
 			if (resp.data) localStorage.setItem('viewKey', resp.data);
@@ -68,13 +73,13 @@ const useViewSelect = (filters, query) => {
 			setCheckedRows({});
 		} catch (error) {
 			setViewData({ pageNo: 0, totalPages: 0, total: 0, totalRecords: 0, list: [] });
-			// toast.error(error?.data?.message);
 		}
-	};
+	}, [archivedStatus, month, search, service,
+		shipmentType, sortBy, sortType, tradeType, viewSelectedSidTrigger, year]);
 
 	useEffect(() => {
 		viewSelected();
-	}, [archivedStatus]);
+	}, [archivedStatus, sortType, sortBy, viewSelected]);
 
 	const [
 		{ data:actionConfirmedData, loading:actionConfirmedLoading },
@@ -88,7 +93,7 @@ const useViewSelect = (filters, query) => {
 		{ manual: true },
 	);
 
-	const actionConfirm = async (isBookedActive) => {
+	const actionConfirm = async ({ isBookedActive, setShow }) => {
 		const actionStatus = isBookedActive ? 'BOOK' : 'ACCRUE';
 		try {
 			const rep = await actionConfirmedTrigger({
@@ -96,13 +101,22 @@ const useViewSelect = (filters, query) => {
 					archiveShipmentIds : checkedRowsSerialId,
 					performedBy        : userId,
 					actionStatus,
+					selectionMode      : bulkAction || 'SINGLE',
+					viewListRequest    : {
+						month          : query?.month,
+						year           : query?.year,
+						pageLimit      : 500,
+						archivedStatus : archivedStatus || 'BOOKED' || undefined,
+						serviceType    : service !== '' ? service : undefined,
+					},
 				},
 			});
 			if (rep) {
 				viewSelected();
 			}
+			setShow(false);
 		} catch (error) {
-			Toast.error(error?.data?.message);
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 
@@ -111,23 +125,35 @@ const useViewSelect = (filters, query) => {
 		deleteSelectedInvoiceTrigger,
 	] = useRequestBf(
 		{
-			url     : 'pnl/accrual/archive',
-			method  : 'delete',
+			url     : 'pnl/accrual/archive-delete',
+			method  : 'post',
 			authKey : 'delete_pnl_accrual_archive',
 		},
 		{ manual: true },
 	);
 
-	const deleteSelected = async (id, handleModal) => {
+	const deleteSelected = async ({ id, bulkData, setBulkModal }:DeleteInterface) => {
 		try {
 			await deleteSelectedInvoiceTrigger({
-				params: { ids: id },
+				data: {
+					archiveShipmentIds : [id],
+					performedBy        : userId,
+					actionStatus       : 'DELETE',
+					selectionMode      : bulkData || 'SINGLE',
+					viewListRequest    : {
+						month          : query?.month,
+						year           : query?.year,
+						pageLimit      : 500,
+						archivedStatus : archivedStatus || 'BOOKED' || undefined,
+						serviceType    : service !== '' ? service : undefined,
+					},
+				},
 			});
-			handleModal(false);
+			setBulkModal(false);
 			viewSelected();
 			Toast.success('Deleted successfully');
 		} catch (error) {
-			Toast.error(error?.data?.message);
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 
@@ -151,7 +177,7 @@ const useViewSelect = (filters, query) => {
 	useEffect(() => {
 		const itemData = (list || []).filter((item) => checkedRowsSerialId.find((x) => x === item.id));
 		setCheckedData(itemData);
-	}, [checkedRowsSerialId, viewData]);
+	}, [checkedRowsSerialId, list, viewData]);
 
 	useEffect(() => {
 		setCheckedRowsSerialId([
@@ -176,18 +202,18 @@ const useViewSelect = (filters, query) => {
 				? (groupListData || [])?.map(({ id }) => `${id || ''}`)
 				: [],
 		});
+
+		setBulkSection(() => ({ value: true }));
 	};
 
 	const getTableHeaderCheckbox = () => {
 		const { page: pages = 0 } = paginationData;
 		const isAllRowsChecked = !isEmpty(groupListData)
 		&& (checkedRows?.[`page-${pages}`] || []).length === (groupListData || []).length;
-		const isSemiRowsChecked = (checkedRows?.[`page-${pages}`] || []).length > 0;
 
 		return (
 			<Checkbox
-				style={{ padding: '8px', left: '8px' }}
-				semiChecked={isSemiRowsChecked}
+				style={{ padding: '8px' }}
 				checked={isAllRowsChecked}
 				onChange={onChangeTableHeaderCheckbox}
 			/>

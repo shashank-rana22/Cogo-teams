@@ -7,7 +7,7 @@ import StyledTable from '../../common/StyledTable';
 import useShipmentView from '../../hooks/useShipmentView';
 
 import Card from './Card';
-import { accrualColumn } from './Card/constant';
+import { accrualColumn } from './constant';
 import Footer from './Footer';
 import styles from './styles.module.css';
 
@@ -17,21 +17,27 @@ function ShipmentView() {
 	const [showBtn, setShowBtn] = useState(false);
 	const [bulkSection, setBulkSection] = useState({ value: false, bulkAction: '' });
 	const [filters, setFilters] = useState({
-		year          : '',
-		month         : '',
-		date          : '',
-		service       : '',
-		shipmentType  : '',
-		tradeType     : '',
-		range         : '',
-		profitAmount  : '',
-		jobState      : '',
-		profitPercent : '',
-		query         : '',
-		profitType    : 'amount',
-		page          : 1,
-		pageLimit     : 10,
+		year               : '',
+		month              : '',
+		date               : '',
+		service            : '',
+		shipmentType       : '',
+		tradeType          : '',
+		range              : '',
+		profitAmount       : '',
+		jobState           : '',
+		profitPercent      : '',
+		profitPercentUpper : '',
+		profitAmountUpper  : '',
+		query              : '',
+		profitType         : 'amount',
+		sortBy             : '',
+		sortType           : 'ASC',
+		page               : 1,
+		pageLimit          : 10,
 	});
+
+	const { bulkAction } = bulkSection;
 
 	const {
 		refetch,
@@ -47,10 +53,11 @@ function ShipmentView() {
 		editProfitHandler,
 		profitValue,
 		changeProfitHandler,
+		selectedDataLoading,
 		crossProfitHandler,
 		tickProfitHandler,
 		profit:profitData,
-	} =	 useShipmentView({ filters, checkedRows, setBulkSection, setCheckedRows });
+	} =	 useShipmentView({ filters, checkedRows, setBulkSection, bulkAction, setCheckedRows });
 
 	const {
 		totalRecords = 0,
@@ -113,6 +120,8 @@ function ShipmentView() {
 						tickProfitHandler,
 						profitValue,
 						profitData,
+						filters,
+						setFilters,
 					)}
 					loading={shipmentLoading}
 					setFilters={setFilters}
@@ -128,6 +137,7 @@ function ShipmentView() {
 					filters={filters}
 					bulkSection={bulkSection}
 					viewSelected={viewSelected}
+					selectedDataLoading={selectedDataLoading}
 					showBtn={showBtn}
 					setBulkSection={setBulkSection}
 					shipmentLoading={shipmentLoading}

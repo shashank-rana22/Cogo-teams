@@ -1,8 +1,8 @@
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestAir } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
-const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
+const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {} }) => {
 	const [searchValue, setSearchValue] = useState('');
 	const [page, setPage] = useState(1);
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -16,49 +16,50 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 		{ manual: true },
 	);
 
-	const payload = {
-		new_awb: {
-			assignedStakeholder : 'ground_ops',
-			status              : 'pending',
-			task                : ['upload_mawb_freight_certificate'],
-		},
-		approval_pending: {
-			assignedStakeholder : 'ground_ops',
-			status              : 'pending',
-			task                : ['approve_draft_airway_bill', 'amend_draft_airway_bill'],
-			documentType        : 'draft_airway_bill',
-			isDocDataRequired   : true,
-		},
-		approved_awb: {
-			assignedStakeholder : 'ground_ops',
-			status              : 'completed',
-			task                : ['upload_mawb_freight_certificate'],
-			documentType        : 'draft_airway_bill',
-			documentState       : 'document_accepted',
-			isDocDataRequired   : true,
-		},
-	};
-
-	const listAPi = async ({ filter = {} }) => {
-		if (searchValue) {
-			setPage(1);
-		}
-
-		try {
-			await trigger({
-				params: {
-					q       : (query || '').trim() || undefined,
-					filters : {
-					},
-					...filter,
-					...payload[activeTab],
-					pageIndex: page,
+	const listAPi = useCallback(() => {
+		(async () => {
+			const payload = {
+				new_awb: {
+					assignedStakeholder : 'service_ops2_docs',
+					status              : 'pending',
+					task                : ['upload_mawb_freight_certificate'],
 				},
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
+				approval_pending: {
+					assignedStakeholder : 'service_ops2_docs',
+					status              : 'pending',
+					task                : ['approve_draft_airway_bill', 'amend_draft_airway_bill'],
+					documentType        : 'draft_airway_bill',
+					isDocDataRequired   : true,
+				},
+				approved_awb: {
+					assignedStakeholder : 'service_ops2_docs',
+					status              : 'completed',
+					task                : ['upload_mawb_freight_certificate'],
+					documentType        : 'draft_airway_bill',
+					documentState       : 'document_accepted',
+					isDocDataRequired   : true,
+				},
+			};
+			if (searchValue) {
+				setPage(1);
+			}
+
+			try {
+				await trigger({
+					params: {
+						q       : (query || '').trim() || undefined,
+						filters : {
+						},
+						...filter,
+						...payload[activeTab],
+						pageIndex: page,
+					},
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		})();
+	}, [activeTab, filter, page, query, searchValue, trigger]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
@@ -70,9 +71,8 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 	}, [activeTab]);
 
 	useEffect(() => {
-		listAPi({});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, query]);
+		listAPi();
+	}, [listAPi, page, query]);
 
 	return {
 		data,

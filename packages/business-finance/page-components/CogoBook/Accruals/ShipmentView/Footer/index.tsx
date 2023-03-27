@@ -22,7 +22,9 @@ interface FooterInterface {
 	viewSelected?: boolean
 	showBtn?: boolean
 	bulkSection?:{ value?:boolean, bulkAction?:string }
-	setBulkSection: React.Dispatch<React.SetStateAction<{}>>
+	setBulkSection?: React.Dispatch<React.SetStateAction<{}>>
+	selectedDataLoading?:boolean
+	actionConfirmedLoading?:boolean
 }
 
 function Footer({
@@ -34,7 +36,9 @@ function Footer({
 	actionConfirm = () => {},
 	shipmentLoading,
 	setCheckedRows,
+	actionConfirmedLoading,
 	setBulkSection,
+	selectedDataLoading,
 	isBookedActive = false,
 	bulkSection,
 	checkedRowsSerialId,
@@ -44,17 +48,15 @@ function Footer({
 	const { sub_active:subActive, active_tab:activeTab } = query;
 	const [openModal, setOpenModal] = useState(false);
 
-	const { year = '', date, month = '', tradeType = '', service = '', shipmentType = '' } = filters || {};
+	const { year = '', month = '', tradeType = '', service = '', shipmentType = '' } = filters || {};
 
 	const onSubmit = () => {
 		push(
 			`/business-finance/cogo-book/selected_invoice?year=${year
-			}&startDate=${date ? date?.startDate : ''}&endDate=${date ? date?.endDate : ''}&month=${
-				month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}
+			}&month=${month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}
             `,
 			`/business-finance/cogo-book/selected_invoice?year=${year
-			}&startDate=${date ? date?.startDate : ''}&endDate=${date ? date?.endDate : ''}&month=${
-				month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}`,
+			}&month=${month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}`,
 		);
 	};
 
@@ -110,7 +112,7 @@ function Footer({
 							content="Please ensure all the filters are selected and apply"
 						>
 							<div>
-								<IcCError className="alert_icon" size={1.5} />
+								<IcCError className="alert_icon" />
 							</div>
 						</Tooltip>
 					</div>
@@ -152,15 +154,38 @@ function Footer({
 					</Button>
 				)}
 				{show && (
-					<Modal show={show} onClose={() => setShow(false)} width={500}>
+					<Modal show={show} onClose={() => setShow(false)}>
 						<Modal.Body>
 							<div
 								className={styles.flex_modal}
 							>
 								{isBookedActive ? (
-									<div style={{ margin: '20px' }}>Are you sure you want to book?</div>
+									<div className={!value ? styles.margin : styles.margin_not}>
+
+										{!value ? 'Are you sure you want to book?'
+											: 'Please Choose The Selection Mode' }
+
+									</div>
 								) : (
-									<div style={{ margin: '20px' }}>Are you sure you want to accrue?</div>
+									<div className={!value ? styles.margin : styles.margin_not}>
+										{!value ? 'Are you sure you want to accrue?'
+											: 'Please Choose The Selection Mode' }
+
+									</div>
+								)}
+								{value && (
+									<div>
+										<RadioGroup
+											options={optionsRadio}
+											value={bulkAction}
+											onChange={(val) => {
+												setBulkSection((prev) => ({
+													...prev,
+													bulkAction: val,
+												}));
+											}}
+										/>
+									</div>
 								)}
 								<div className={styles.flex}>
 									<Button
@@ -174,9 +199,9 @@ function Footer({
 									<Button
 										id="approve-modal-btn"
 										themeType="primary"
+										loading={actionConfirmedLoading}
 										onClick={() => {
-											actionConfirm(isBookedActive);
-											setShow(false);
+											actionConfirm({ isBookedActive, setShow });
 										}}
 									>
 										Confirm
@@ -219,10 +244,10 @@ function Footer({
 								</Button>
 								<Button
 									id="approve-modal-btn"
-									cthemeType="primary"
+									themeType="primary"
+									loading={selectedDataLoading}
 									onClick={() => {
 										addSelect(setOpenModal);
-										setOpenModal(false);
 										setCheckedRows({});
 									}}
 								>

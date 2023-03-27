@@ -1,11 +1,12 @@
 import { SingleDateRange, Button, Chips, Popover, Select, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
 import { FilterInterface } from '../../interface';
+import { optionSelect, optionsMonth, optionsPills, optionsShipment, optionsYear } from '../constant';
 
-import { optionSelect, optionsMonth, optionsPills, optionsShipment, optionsYear } from './constant';
 import MoreFilter from './MoreFilter';
 import OptionSelect from './OptionSelect';
 import styles from './styles.module.css';
@@ -182,7 +183,6 @@ function Card({
 						placement="bottom"
 						caret={false}
 						render={content()}
-						interactive
 						visible={selectFilter}
 						{...rest}
 					>
@@ -192,7 +192,7 @@ function Card({
 							role="presentation"
 						>
 							<SelectAccrual
-								value={filters?.service}
+								value={startCase(filters?.service)}
 								placeholder="Service"
 								setFilters={setFilters}
 							/>
@@ -214,7 +214,6 @@ function Card({
 				<Popover
 					placement="bottom"
 					render={contentMoreFilter()}
-					interactive
 					visible={moreFilter}
 				>
 					<Button

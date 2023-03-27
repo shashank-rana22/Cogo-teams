@@ -50,7 +50,6 @@ function Freeze({ item, refetch }) {
 				<Modal
 					show={showConfirmationModal}
 					onClose={() => setShowConfirmationModal(false)}
-					width={500}
 				>
 					<Modal.Body>
 						<div>

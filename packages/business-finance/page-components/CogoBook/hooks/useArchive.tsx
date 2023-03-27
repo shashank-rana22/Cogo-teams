@@ -2,15 +2,27 @@ import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
+interface GlobalInterface {
+	page?:number
+	pageLimit?:number
+	serviceType?:string
+	Amount?:string
+	Percentage?:string
+	archivedStatus?:string
+	search?:string
+	Range?:string
+	date?:any
+
+}
 const useArchive = ({ toggleValue = '', setShowTab }) => {
 	const { query = undefined, debounceQuery } = useDebounceQuery();
 	const [particularMonth, setParticularMonth] = useState(false);
-	const [apiData, setApiData] = useState({ list: [] });
-	const [drillData, setDrillData] = useState({ list: [] });
+	const [apiData, setApiData] = useState({ list: [], totalRecords: 0 });
+	const [drillData, setDrillData] = useState({ list: [], totalRecords: 0 });
 	const [monthData, setMonthData] = useState({});
-	const [globalFilters, setGlobalFilters] = useState({
+	const [globalFilters, setGlobalFilters] = useState<GlobalInterface>({
 		page           : 1,
 		pageLimit      : 10,
 		serviceType    : '',
@@ -19,7 +31,6 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		archivedStatus : '',
 		search         : '',
 		Range          : '',
-		date           : { startDate: '', endDate: '' },
 	});
 
 	const {
@@ -30,12 +41,11 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		serviceType,
 		search,
 		Range,
-		...rest
 	} = globalFilters || {};
 
 	useEffect(() => {
 		debounceQuery(search !== '' ? search : undefined);
-	}, [search]);
+	}, [debounceQuery, search]);
 
 	const [
 		{ loading:declaredTriggerLoading },
@@ -63,19 +73,18 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 
 	const api = toggleValue === 'declared' ? declaredTrigger : actualTrigger;
 
-	const refetch = async () => {
+	const refetch = useCallback(async () => {
 		try {
 			const res = await api({
 				params: {
 					serviceType: serviceType || undefined,
-					...rest,
 				},
 			});
 			setApiData(res.data);
 		} catch {
-			setApiData({ list: [] });
+			setApiData({ list: [], totalRecords: 0 });
 		}
-	};
+	}, [api, serviceType]);
 
 	const [
 		{ loading:drillDownArchiveLoading },
@@ -89,13 +98,13 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		{ manual: true },
 	);
 
-	const getDrillDownArchive = async (month) => {
+	const getDrillDownArchive = useCallback(async (month) => {
 		try {
 			const res = await drillDownArchiveTrigger({
 				params: {
 					period         : month.period || undefined,
-					startDate      : format(date?.startDate, 'yyyy MM dd') || undefined,
-					endDate        : format(date?.endDate, 'yyyy MM dd') || undefined,
+					startDate      : format(date?.startDate, 'yyyy-MM-dd') || undefined,
+					endDate        : format(date?.endDate, 'yyyy-MM-dd') || undefined,
 					archivedStatus : archivedStatus || 'BOOKED' || undefined,
 					serviceType    : serviceType || undefined,
 					query,
@@ -106,9 +115,10 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 			});
 			setDrillData(res.data);
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error?.response?.data?.message);
 		}
-	};
+	}, [Amount, Percentage, Range,
+		archivedStatus, date?.endDate, date?.startDate, drillDownArchiveTrigger, query, serviceType]);
 
 	useEffect(() => {
 		if (!particularMonth) {
@@ -116,7 +126,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		} else {
 			getDrillDownArchive(monthData);
 		}
-	}, [toggleValue, serviceType, archivedStatus, query, particularMonth, refetch, monthData]);
+	}, [toggleValue, serviceType, archivedStatus, query, particularMonth, monthData, getDrillDownArchive, refetch]);
 
 	const clickHandler = () => {
 		setParticularMonth(!particularMonth);

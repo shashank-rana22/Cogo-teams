@@ -1,13 +1,13 @@
 .space_between {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  width: 100%;
-  cursor: pointer;
-
-  border-bottom: 1px solid #f9f5ec;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 10px;
+	cursor: pointer;
+	border-bottom: 1px solid #f9f5ec;
 }
+
 .space_between:hover {
-  background-color: #f9f5ec;
+	background-color: #f9f5ec;
 }

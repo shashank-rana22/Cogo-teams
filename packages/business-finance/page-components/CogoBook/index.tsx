@@ -3,8 +3,6 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import Accruals from './Accruals';
-import BalanceSheet from './BalanceSheet';
-import PLStatement from './P&L';
 import styles from './styles.module.css';
 
 const tabs = [
@@ -12,20 +10,10 @@ const tabs = [
 		key   : 'accruals',
 		label : 'Accruals',
 	},
-	{
-		key   : 'pl_statement',
-		label : 'P&L Statement',
-	},
-	{
-		key   : 'balance_sheet',
-		label : 'Balance Sheet',
-	},
 ];
 
 const tabsKeyComponentMapping = {
-	accruals      : Accruals,
-	pl_statement  : PLStatement,
-	balance_sheet : BalanceSheet,
+	accruals: Accruals,
 };
 
 function CogoBook() {

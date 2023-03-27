@@ -1,11 +1,13 @@
-import { Button, Modal, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { IcCError, IcMDelete } from '@cogoport/icons-react';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
-import { useState } from 'react';
+
+import SortIcon from '../common/SortIcon';
 
 import { ColumnInterface } from './interface';
 import styles from './styles.module.css';
+import DeleteModal from './ViewSelectedInvoice/DeleteModal';
 
 export const monthData = {
 	1  : 'January',
@@ -78,10 +80,18 @@ export const column = (
 		deleteSelected,
 		openDeleteModal,
 		setOpenDeleteModal,
+		filters,
+		setFilters,
 	}:ColumnInterface,
 ) => {
 	const handleCloseModal = () => {
 		setOpenDeleteModal(false);
+	};
+	const handleDelete = (key = '') => {
+		setOpenDeleteModal((previousActions) => ({
+			...previousActions,
+			[key]: !previousActions[key],
+		}));
 	};
 
 	return [
@@ -92,7 +102,16 @@ export const column = (
 			Cell     : ({ row: { original } }) => getTableBodyCheckbox(original),
 		},
 		{
-			Header   : 'SID',
+			Header: () => (
+				<div className={styles.flex_sort}>
+					SID
+					<SortIcon
+						setFilters={setFilters}
+						sortingKey="JOBNumber"
+						filters={filters}
+					/>
+				</div>
+			),
 			accessor : 'sid',
 			id       : 'sid',
 			Cell     : ({ row: { original } }) => {
@@ -113,7 +132,16 @@ export const column = (
 			},
 		},
 		{
-			Header   : 'Transaction Date',
+			Header: () => (
+				<div className={styles.flex_sort}>
+					Transaction Date
+					<SortIcon
+						setFilters={setFilters}
+						sortingKey="TRANSACTIONDATE"
+						filters={filters}
+					/>
+				</div>
+			),
 			accessor : 'etd',
 			id       : 'etd',
 			Cell     : ({ row: { original } }) => {
@@ -122,7 +150,16 @@ export const column = (
 			},
 		},
 		{
-			Header   : 'Purchase Invoice Amount',
+			Header: () => (
+				<div className={styles.flex_sort}>
+					Purchase Invoice Amount
+					<SortIcon
+						setFilters={setFilters}
+						sortingKey="EXPENSE"
+						filters={filters}
+					/>
+				</div>
+			),
 			accessor : 'purchase_invoice_amount',
 			id       : 'purchase_invoice_amount',
 			Cell     : ({ row: { original } }) => {
@@ -164,7 +201,16 @@ export const column = (
 			},
 		},
 		{
-			Header   : 'Sales Invoice Amount',
+			Header: () => (
+				<div className={styles.flex_sort}>
+					Sales Invoice Amount
+					<SortIcon
+						setFilters={setFilters}
+						sortingKey="INCOME"
+						filters={filters}
+					/>
+				</div>
+			),
 			accessor : 'sales_invoice_amount',
 			id       : 'sales_invoice_amount',
 			Cell     : ({ row: { original } }) => {
@@ -182,12 +228,55 @@ export const column = (
 			},
 		},
 		{
-			Header   : 'Profit',
+			Header: () => (
+				<div className={styles.flex_sort}>
+					Profit
+					<SortIcon
+						setFilters={setFilters}
+						sortingKey="PROFIT"
+						filters={filters}
+					/>
+				</div>
+			),
 			accessor : 'profit',
 			id       : 'profit',
 			Cell     : ({ row: { original } }) => {
-				const { referenceId = {} } = original || {};
-				// return <span className={styles.incident_id}>{ referenceId || '-' }</span>;
+				const {
+					profit = '', expenseCurrency = '',
+					profitPercentage = '',
+				} = original || {};
+				function checkNumber(number) {
+					if (number > 0) {
+						return 'positive';
+					} if (number < 0) {
+						return 'negative';
+					}
+					return 'zero';
+				}
+				function renderClassName() {
+					if (checkNumber(profit) === 'positive') {
+						return styles.profit_data;
+					}
+					if (checkNumber(profit) === 'negative') {
+						return styles.profit_color;
+					}
+					return null;
+				}
+
+				return (
+					<>
+						<div>
+							{profitPercentage
+								? `${profitPercentage?.toFixed(2)}%`
+								: '---'}
+						</div>
+
+						<span className={renderClassName()}>
+							{getFormattedPrice(profit, expenseCurrency) || '-' }
+
+						</span>
+					</>
+				);
 			},
 		},
 		{
@@ -195,8 +284,20 @@ export const column = (
 			accessor : 'mile',
 			id       : 'mile',
 			Cell     : ({ row: { original } }) => {
-				const { referenceId = {} } = original || {};
-				// return <span className={styles.incident_id}>{ referenceId || '-' }</span>;
+				const { shipmentMilestone = '' } = original || {};
+				return (
+					<span>
+						{shipmentMilestone?.length > 10
+							? (
+								<Tooltip
+									content={startCase(shipmentMilestone)	|| '-'}
+									placement="top"
+								>
+									<div className={styles.wrapper}>{startCase(shipmentMilestone)	|| '-' }</div>
+								</Tooltip>
+							) : startCase(shipmentMilestone)	|| '-' }
+					</span>
+				);
 			},
 		},
 		{
@@ -204,8 +305,16 @@ export const column = (
 			accessor : 'status',
 			id       : 'status',
 			Cell     : ({ row: { original } }) => {
-				const { referenceId = {} } = original || {};
-				// return <span className={styles.incident_id}>{ referenceId || '-' }</span>;
+				const { status = '' } = original || {};
+				return (
+					<>
+						{status === 'OPEN' && <span className={styles.status}>{ startCase(status)	|| '-' }</span>}
+						{status === 'FINANCIALLY_CLOSED' && <span className={styles.status_fin}> Fin. Closed </span>}
+						{status === 'OPERATIONALLY_CLOSED' && <span className={styles.status_op}> Op. Closed </span>}
+
+					</>
+
+				);
 			},
 		},
 		{
@@ -218,38 +327,17 @@ export const column = (
 						<IcMDelete
 							height={15}
 							width={15}
-							onClick={() => setOpenDeleteModal(true)}
+							onClick={() => handleDelete(id)}
 							style={{ cursor: 'pointer' }}
 						/>
-						{openDeleteModal && (
-							<Modal show={openDeleteModal} onClose={handleCloseModal} width={400}>
-								<Modal.Body>
-									<div
-										className={styles.flex_modal}
-									>
-										<div style={{ margin: '20px' }}>Are you sure you want to delete this?</div>
-
-										<div className={styles.flex}>
-											<Button
-												id="cancel-modal-btn"
-												style={{ marginRight: 10 }}
-												themeType="secondary"
-												onClick={() => { setOpenDeleteModal(false); }}
-											>
-												Cancel
-											</Button>
-											<Button
-												id="approve-modal-btn"
-												themeType="primary"
-												onClick={() => { deleteSelected(id, handleCloseModal); }}
-											>
-												Yes
-											</Button>
-										</div>
-									</div>
-								</Modal.Body>
-
-							</Modal>
+						{openDeleteModal[id] && (
+							<DeleteModal
+								openDeleteModal={openDeleteModal}
+								handleCloseModal={handleCloseModal}
+								setOpenDeleteModal={setOpenDeleteModal}
+								deleteSelected={deleteSelected}
+								id={id}
+							/>
 						)}
 					</>
 				);
