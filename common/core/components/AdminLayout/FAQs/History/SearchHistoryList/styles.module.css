@@ -42,3 +42,9 @@
 	padding: 8px 4px;
 	color: #4f4f4f;
 }
+
+.empty_state_wrapper{
+    font-size: 14px;
+	text-align: center;
+	padding-top: 10px;
+}

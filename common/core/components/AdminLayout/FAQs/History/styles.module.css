@@ -5,21 +5,16 @@
 
 .input_container{
 	margin-top: 20px;
-
 }
 
-.empty_state_wrapper{
-    font-size: 14px;
-	text-align: center;
-	padding-top: 10px;
-}
 .tab_panel{
-	.ui_qiX4D {
-		align-items: inherit;
-		border-bottom: 1px solid var(--color-secondary-greyscale-5);
-		display: flex;
-		overflow: clip;
-		width: -moz-fit-content;
-		width: fit-content;
+	:global{
+		.ui_tab_list_container{
+			align-items: inherit;
+		}
 	}
+}
+
+.icon_wrapper{
+	padding-right: 8px;
 }

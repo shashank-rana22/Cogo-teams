@@ -1,5 +1,7 @@
-import { format } from '@cogoport/utils';
+import { isEmpty, format } from '@cogoport/utils';
+import { useEffect } from 'react';
 
+import Loader from '../../Loader';
 import useUpdateFaqSearchHistory from '../hooks/useUpdateFaqSearchHistory';
 
 import styles from './styles.module.css';
@@ -7,13 +9,20 @@ import styles from './styles.module.css';
 function SearchHistoryList({
 	setShowHistory,
 	searchHistoryList,
-	// searchHistoryListLoading,
+	searchHistoryListLoading,
 	setSearch,
+	fetchFaqSearchHistory,
 }) {
 	const { onClickClearHistory = () => {} } = useUpdateFaqSearchHistory({
 		setShowHistory,
 	});
 	const filteredObject = {};
+
+	useEffect(() => {
+		fetchFaqSearchHistory();
+	}, [fetchFaqSearchHistory]);
+
+	if (searchHistoryListLoading) return <Loader />;
 
 	const today = new Date();
 	const formatToday = format(today, 'dd MMMM');
@@ -42,6 +51,10 @@ function SearchHistoryList({
 		[formatToday]     : 'Today',
 		[formatYesterday] : 'Yesterday',
 	};
+
+	if (isEmpty(searchHistoryList)) {
+		return <div className={styles.empty_state_wrapper}>No History Found</div>;
+	}
 
 	return (
 		<div className={styles.container}>

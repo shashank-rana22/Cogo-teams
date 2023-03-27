@@ -2,6 +2,7 @@ import { IcMDocument } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import Loader from '../../Loader';
 import Answer from '../../QuestionList/Answer';
 
 import styles from './styles.module.css';
@@ -12,7 +13,7 @@ function NotificationContent({
 	question,
 	setQuestion,
 	setShowNotificationContent,
-	// faqNotificationApiLoading,
+	faqNotificationApiLoading,
 	fetchFaqNotification,
 }) {
 	const { onClickClearNotifications = () => {} } = useClearFaqNotifications({
@@ -25,6 +26,8 @@ function NotificationContent({
 			fetchFaqNotification();
 		}
 	}, [fetchFaqNotification, question?.id]);
+
+	if (faqNotificationApiLoading) return <Loader />;
 
 	const filteredObject = {};
 

@@ -26,6 +26,7 @@ function History({
 		setSearchHistory,
 		list: searchHistoryList,
 		loading: searchHistoryListLoading,
+		fetchFaqSearchHistory,
 	} = useListFaqSearchHistory();
 
 	const newQuestions = (list || []).filter((listItem) => !listItem?.is_viewed);
@@ -33,12 +34,16 @@ function History({
 	const newQuestionCount = (newQuestions || []).length;
 
 	const suffix = !searchHistory ? (
-		<IcMSearchlight />
+		<div className={styles.icon_wrapper}>
+			<IcMSearchlight />
+		</div>
 	) : (
-		<IcMCross
-			onClick={() => setSearchHistory('')}
-			style={{ cursor: 'pointer', color: '#000000' }}
-		/>
+		<div className={styles.icon_wrapper}>
+			<IcMCross
+				onClick={() => setSearchHistory('')}
+				style={{ cursor: 'pointer', color: '#000000' }}
+			/>
+		</div>
 	);
 
 	if (question) {
@@ -72,30 +77,30 @@ function History({
 					name="search_history"
 					title="Search History"
 
-					// badge={(newQuestions || []).length > 0 ? newQuestionCount : null}
 				>
 
-					{!isEmpty(searchHistoryList) ? (
-						<>
-							<div className={styles.input_container}>
-								<Input
-									className="primary lg"
-									placeholder="Search within history"
-									value={searchHistory}
-									onChange={(e) => setSearchHistory(e.target.value)}
-									suffix={suffix}
-								/>
-							</div>
-							<SearchHistoryList
-								setShowHistory={setShowHistory}
-								searchHistoryList={searchHistoryList}
-								searchHistoryListLoading={searchHistoryListLoading}
-								setSearch={setSearch}
+					{!isEmpty(searchHistoryList)
+					&& (
+						<div className={styles.input_container}>
+
+							<Input
+								className="primary lg"
+								placeholder="Search within history"
+								value={searchHistory}
+								onChange={(e) => setSearchHistory(e)}
+								suffix={suffix}
 							/>
-						</>
-					) : (
-						<div className={styles.empty_state_wrapper}>No History Found</div>
+						</div>
 					)}
+
+					<SearchHistoryList
+						setShowHistory={setShowHistory}
+						searchHistoryList={searchHistoryList}
+						searchHistoryListLoading={searchHistoryListLoading}
+						setSearch={setSearch}
+						fetchFaqSearchHistory={fetchFaqSearchHistory}
+					/>
+
 				</TabPanel>
 			</Tabs>
 		</div>

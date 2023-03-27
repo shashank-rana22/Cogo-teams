@@ -2,6 +2,8 @@ import { Pill, Tooltip } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import Loader from '../../Loader';
+
 import styles from './styles.module.css';
 
 const STATE_MAPPING = {
@@ -15,12 +17,15 @@ function RequestedQuestionList({
 	question,
 	list,
 	getUserFaqs,
+	loading,
 }) {
 	useEffect(() => {
 		if (!question?.id) {
 			getUserFaqs();
 		}
 	}, [getUserFaqs, question?.id]);
+
+	if (loading) return <Loader />;
 
 	const filteredObject = {};
 

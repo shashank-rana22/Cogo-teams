@@ -2,10 +2,11 @@
 
 .header{
     color: #4f4f4f;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 14px;
 	line-height: 150%;
 	padding: 4px 10px;
+	margin-top: 16px;
 }
 
 .question_time_container{

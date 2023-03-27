@@ -1,7 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 
 const useListFaqSearchHistory = () => {
 	const [searchHistory, setSearchHistory] = useState('');
@@ -12,19 +13,27 @@ const useListFaqSearchHistory = () => {
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const params = {
+	const params = useMemo(() => ({
 		filters: {
 			user_id    : id,
 			is_cleared : false,
 			q          : query || undefined,
 		},
-	};
+	}), [id, query]);
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/list_faq_search_histories',
 		params,
-	}, { manual: false });
+	}, { manual: true });
+
+	const fetchFaqSearchHistory = useCallback(async () => {
+		try {
+			await trigger(params);
+		} catch (e) {
+			Toast.error(e);
+		}
+	}, [params, trigger]);
 
 	useEffect(() => {
 		debounceQuery(searchHistory);
@@ -39,6 +48,7 @@ const useListFaqSearchHistory = () => {
 		list,
 		loading,
 		trigger,
+		fetchFaqSearchHistory,
 	};
 };
 
