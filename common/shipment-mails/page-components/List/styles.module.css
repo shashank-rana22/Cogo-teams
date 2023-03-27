@@ -2,6 +2,7 @@
 	gap: 12px;
 	max-height: 75vh;
 	overflow: auto;
+	min-height: 50vh;
 }
 
 .main_container {

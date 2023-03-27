@@ -29,7 +29,7 @@ function EmailTop({ data = {} }) {
 					)
 				</div>
 
-				<div className="">{displayDate}</div>
+				<div className={styles.date}>{displayDate}</div>
 
 				{data.toRecipients?.length ? (
 					<div className={styles.initial_body}>
