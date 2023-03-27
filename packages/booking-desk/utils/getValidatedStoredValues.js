@@ -1,8 +1,9 @@
 import CONTROLS_CONFIG from '../config/CONTROLS_CONFIG.json';
 import TABS_CONFIG from '../config/TABS_CONFIG.json';
 
-export default function getValidatedStoredValues(storedValues, stringifiedScopeData) {
-	const scopeData = JSON.parse(stringifiedScopeData);
+export default function getValidatedStoredValues(scopeData) {
+	const storedValues = JSON.parse(localStorage.getItem('booking_desk_stored_values'));
+
 	const filters = storedValues?.filters || {};
 	let activeTab = storedValues?.activeTab;
 	const scopeFilters = storedValues?.scopeFilters || {};

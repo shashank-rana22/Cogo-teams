@@ -45,11 +45,6 @@
             "criticalVisible": true
         },
         {
-            "name": "upload_bn",
-            "title" : "Upload BN",
-            "criticalVisible": true
-        },
-        {
             "name": "completed",
             "title" : "Completed"
         },
