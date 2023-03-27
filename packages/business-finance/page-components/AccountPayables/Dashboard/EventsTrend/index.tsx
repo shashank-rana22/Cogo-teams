@@ -24,12 +24,19 @@ const OPTIONS = [
 		value : 'lastThreeMonths',
 	},
 ];
+
+interface FilterProps {
+	service:string,
+	currency:string,
+}
 interface ItemProps {
 	showData:string;
 	setShowData:Function;
+	filtersData:FilterProps;
+	activeTab:string;
 }
 
-function EventsTrend({ showData, setShowData }:ItemProps) {
+function EventsTrend({ showData, setShowData, filtersData, activeTab }:ItemProps) {
 	// const [showEventsData, setShowEventsData] = useState({ events: '' });
 	const [isCountView, setIsCountView] = useState(false);
 
@@ -38,7 +45,7 @@ function EventsTrend({ showData, setShowData }:ItemProps) {
 		loading,
 		filters,
 		setFilters,
-	} = useGetEventsTrend({ showData });
+	} = useGetEventsTrend({ showData, filtersData, activeTab });
 
 	return (
 		<div className={styles.container}>

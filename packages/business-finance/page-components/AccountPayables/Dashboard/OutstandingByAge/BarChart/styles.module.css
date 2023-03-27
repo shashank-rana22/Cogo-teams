@@ -1,6 +1,7 @@
 .bar{
     height: 250px;
     width: 600px;
+    margin-top:-16px;
 }
 .toggle{
     display: flex;
@@ -16,6 +17,8 @@
 }
 .label_bar{
     transform: rotate(180deg);
+    font-weight: 600;
+    color: #333333;
 }
 .tooltip_style{
     background: #FFFFFF;

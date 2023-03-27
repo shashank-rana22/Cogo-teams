@@ -9,7 +9,7 @@
 .box{
     border-radius: 8px;
     background: #FFFFFF;
-    padding: 32px 16px 4px 16px ;
+    padding: 28px 8px 0px 8px;
 }
 .label_text{
     font-weight: 600;
@@ -57,4 +57,9 @@
 	transform: translate(10px, 2px) rotate(-45deg);
     margin-right: 12px;
     margin-left: -8px;
+}
+.loss_icon {
+	color: #ed3726;
+	transform: translateX(10px) rotate(45deg);
+    margin-right: 12px;
 }

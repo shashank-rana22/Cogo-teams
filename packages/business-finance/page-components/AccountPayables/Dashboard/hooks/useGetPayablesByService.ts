@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetPayablesByService = () => {
+const useGetPayablesByService = ({ activeTab }) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -17,7 +17,9 @@ const useGetPayablesByService = () => {
 	const getDahboardData = async () => {
 		try {
 			await trigger({
-				params: {},
+				params: {
+					entity: activeTab,
+				},
 			});
 		} catch (err) {
 			console.log(err);
@@ -27,7 +29,7 @@ const useGetPayablesByService = () => {
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [activeTab]);
 
 	return {
 		data,

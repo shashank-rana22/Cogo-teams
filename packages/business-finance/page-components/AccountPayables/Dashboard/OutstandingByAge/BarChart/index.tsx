@@ -5,42 +5,14 @@ import React, { useState } from 'react';
 
 import { getAmountInLakhCrK } from '../../utils/getAmountInLakhCrK';
 
-// import useGetAgePayable from '../../hooks/useGetAgePayable';
-
 import styles from './styles.module.css';
 
-const data1 = [
-	{
-		id: 'Not Due', value: 1187875,
-	},
-	{
-		id: '1-30', value: 15876860,
-	},
-	{
-		id: '31-60', value: 1987987,
-	},
-	{
-		id: '61-90', value: 127660,
-	},
-	{
-		id: '91-180', value: 1189755,
-	},
-	{
-		id: '181-365', value: 165667815,
-	},
-	{
-		id: '>365', value: 16757515,
-	},
-];
-
 function BarChart({ data }) {
-	// const { data } = useGetAgePayable();
 	const { ageingBucket = [] } = data || {};
-	const xAxisValue = 20;
 	const [isLinearView, setIsLinearView] = useState(true);
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<div className={styles.toggle}>
 				<div className={styles.heading_text}>
 					Logarithmic View
@@ -59,9 +31,6 @@ function BarChart({ data }) {
 					data={ageingBucket}
 					indexBy="ageingDuration"
 					keys={['ledgerAmount']}
-					// data={data1}
-					// indexBy="id"
-					// keys={['value']}
 					margin={{ top: 50, right: 30, bottom: 40, left: 8 }}
 					padding={0.6}
 					enableGridY={false}
@@ -70,7 +39,7 @@ function BarChart({ data }) {
 					colors={['#FCEDBF']}
 					layout="vertical"
 					groupMode="grouped"
-					yFormat=" >-.2f"
+					borderRadius={4}
 					borderColor={{
 						from      : 'color',
 						modifiers : [
@@ -79,6 +48,17 @@ function BarChart({ data }) {
 								1.6,
 							],
 						],
+					}}
+					theme={{
+						axis: {
+							legend: {
+								text: {
+									fontWeight : 600,
+									fontSize   : 14,
+								},
+							},
+						},
+
 					}}
 					axisTop={null}
 					innerPadding={8}
@@ -98,26 +78,10 @@ function BarChart({ data }) {
 						tickRotation   : 0,
 						legend         : 'Amount',
 						legendPosition : 'middle',
-						// legendOffset   : -40,
 					}}
 					labelSkipWidth={12}
 					labelSkipHeight={12}
-					labelTextColor={{
-						from      : 'color',
-						modifiers : [
-							[
-								'darker',
-								1,
-							],
-						],
-					}}
-					label={(d) => (
-						<tspan x={xAxisValue}>
-							{getAmountInLakhCrK(
-								d.value,
-							)}
-						</tspan>
-					)}
+					label=""
 					tooltip={({ label, value }) => (
 						<strong className={styles.tooltip_style}>
 							{/* {label?.split('-')[0]} */}
@@ -157,11 +121,36 @@ function BarChart({ data }) {
 					]}
 					role="application"
 					animate
+					layers={[
+						'grid',
+						'axes',
+						'bars',
+						'markers',
+						'legends',
+						({ bars }) => (
+							<g>
+								{bars.map((bar) => (
+									<text
+										key={bar.data.id}
+										x={bar.x + bar.width / 2}
+										y={bar.y + bar.height / 2}
+										textAnchor="start"
+										transform={`rotate(-90,${bar.x + bar.width / 2},${bar.y + bar.height / 2})`}
+										style={{
+											dominantBaseline : 'central',
+											fontWeight       : '600',
+											fontSize         : 12,
+											fill             : '#333',
+										}}
+									>
+										{getAmountInLakhCrK(bar.data.value)}
+									</text>
+								))}
+							</g>
+						),
+					]}
 				/>
 			</div>
-			{/* <div className={styles.heading_text}>
-				Days
-			</div> */}
 		</div>
 	);
 }

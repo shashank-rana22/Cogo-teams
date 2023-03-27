@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetDailyPayableOutstanding = ({ isQuarterView }) => {
+const useGetDailyPayableOutstanding = ({ isQuarterView, filters, activeTab }) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -13,12 +13,19 @@ const useGetDailyPayableOutstanding = ({ isQuarterView }) => {
 		},
 		{ manual: true },
 	);
-
+	const {
+		service,
+		currency,
+		...rest
+	} = filters || {};
 	const getDahboardData = async () => {
 		try {
 			await trigger({
 				params: {
-					view: isQuarterView ? 'quarter' : 'month',
+					view     : isQuarterView ? 'quarter' : 'month',
+					service  : service || undefined,
+					currency : currency || undefined,
+					entity   : activeTab,
 				},
 			});
 		} catch (err) {
@@ -29,7 +36,7 @@ const useGetDailyPayableOutstanding = ({ isQuarterView }) => {
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isQuarterView]);
+	}, [JSON.stringify(rest), service, currency, isQuarterView, activeTab]);
 
 	return {
 		data,

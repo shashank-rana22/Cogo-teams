@@ -1,8 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
-// import React from 'react';
 
-const useGetAgePayable = () => {
+const useGetAgePayable = ({ activeTab }) => {
 	const [filters, setFilters] = useState({
 		service  : undefined,
 		currency : undefined,
@@ -31,6 +30,7 @@ const useGetAgePayable = () => {
 				params: {
 					service  : service || undefined,
 					currency : currency || undefined,
+					entity   : activeTab,
 				},
 			});
 		} catch (err) {
@@ -41,7 +41,7 @@ const useGetAgePayable = () => {
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), service, currency]);
+	}, [JSON.stringify(rest), service, currency, activeTab]);
 
 	return {
 		data,

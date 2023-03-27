@@ -1,5 +1,5 @@
 /* eslint-disable no-unsafe-optional-chaining */
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Placeholder } from '@cogoport/components';
 import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -9,13 +9,13 @@ import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
-function AccountPayablesByService() {
+function AccountPayablesByService({ activeTab }) {
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const [activeBox, setActiveBox] = useState(null);
 	const handleClick = () => {
 		setIsAccordionActive(true);
 	};
-	const { data = [] } = useGetPayablesByService();
+	const { data = [], loading } = useGetPayablesByService({ activeTab });
 	const oceanAmount = data?.[0]?.amount + data?.[1]?.amount;
 	const airAmount = data?.[2]?.amount + data?.[3]?.amount;
 	const surfaceAmount = data?.[4]?.amount + data?.[5]?.amount;
@@ -165,81 +165,96 @@ function AccountPayablesByService() {
 				</div>
 				<div className={styles.hr} />
 				<div className={styles.amount_container}>
-					<div
-						className={activeBox === 'ocean' ? styles.sub_container_click : styles.amount}
-						onClick={() => {
-							handleClick();
-							setActiveBox('ocean');
-						}}
-						role="presentation"
-					>
-						<div className={styles.label}>
-							Ocean
-						</div>
-						<div className={styles.value}>
-							{getFormattedPrice(oceanAmount, 'INR')}
-						</div>
-					</div>
-					<div
-						className={activeBox === 'air' ? styles.sub_container_click : styles.amount}
-						onClick={() => {
-							handleClick();
-							setActiveBox('air');
-						}}
-						role="presentation"
-					>
-						<div className={styles.label}>
-							Air
-						</div>
-						<div className={styles.value}>
-							{getFormattedPrice(airAmount, 'INR')}
-						</div>
-					</div>
-					<div
-						className={activeBox === 'surface' ? styles.sub_container_click : styles.amount}
-						onClick={() => {
-							handleClick();
-							setActiveBox('surface');
-						}}
-						role="presentation"
-					>
-						<div className={styles.label}>
-							Surface
-						</div>
-						<div className={styles.value}>
-							{getFormattedPrice(surfaceAmount, 'INR')}
-						</div>
-					</div>
-					<div
-						className={activeBox === 'overseas' ? styles.sub_container_click : styles.amount}
-						onClick={() => {
-							handleClick();
-							setActiveBox('overseas');
-						}}
-						role="presentation"
-					>
-						<div className={styles.label}>
-							Overseas
-						</div>
-						<div className={styles.value}>
-							{getFormattedPrice(0, 'INR')}
-						</div>
-					</div>
-					<div
-						className={activeBox === 'overheads' ? styles.sub_container_click : styles.amount}
-						onClick={() => {
-							handleClick();
-							setActiveBox('overheads');
-						}}
-						role="presentation"
-					>
-						<div className={styles.label}>
-							Overheads
-						</div>
-						<div className={styles.value}>
-							{getFormattedPrice(0, 'INR')}
-						</div>
-					</div>
+					{loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
+						: (
+							<div
+								className={activeBox === 'ocean' ? styles.sub_container_click : styles.amount}
+								onClick={() => {
+									handleClick();
+									setActiveBox('ocean');
+								}}
+								role="presentation"
+							>
+								<div className={styles.label}>
+									Ocean
+								</div>
+								<div className={styles.value}>
+									{getFormattedPrice(oceanAmount, 'INR')}
+								</div>
+							</div>
+						)}
+					{loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
+						: (
+							<div
+								className={activeBox === 'air' ? styles.sub_container_click : styles.amount}
+								onClick={() => {
+									handleClick();
+									setActiveBox('air');
+								}}
+								role="presentation"
+							>
+								<div className={styles.label}>
+									Air
+								</div>
+								<div className={styles.value}>
+									{getFormattedPrice(airAmount, 'INR')}
+								</div>
+							</div>
+						)}
+					{loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
+						: (
+							<div
+								className={activeBox === 'surface' ? styles.sub_container_click : styles.amount}
+								onClick={() => {
+									handleClick();
+									setActiveBox('surface');
+								}}
+								role="presentation"
+							>
+								<div className={styles.label}>
+									Surface
+								</div>
+								<div className={styles.value}>
+									{getFormattedPrice(surfaceAmount, 'INR')}
+								</div>
+							</div>
+						)}
+					{loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
+						: (
+							<div
+								className={activeBox === 'overseas' ? styles.sub_container_click : styles.amount}
+								onClick={() => {
+									handleClick();
+									setActiveBox('overseas');
+								}}
+								role="presentation"
+							>
+								<div className={styles.label}>
+									Overseas
+								</div>
+								<div className={styles.value}>
+									{getFormattedPrice(0, 'INR')}
+								</div>
+							</div>
+						)}
+					{loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
+						: (
+							<div
+								className={activeBox === 'overheads' ? styles.sub_container_click : styles.amount}
+								onClick={() => {
+									handleClick();
+									setActiveBox('overheads');
+								}}
+								role="presentation"
+							>
+								<div className={styles.label}>
+									Overheads
+								</div>
+								<div className={styles.value}>
+									{getFormattedPrice(0, 'INR')}
+								</div>
+							</div>
+						)}
 				</div>
 				<div>
 					{amountBoxData()}

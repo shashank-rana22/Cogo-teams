@@ -27,10 +27,12 @@
     background: #ED3726;
     border-radius: 40px;
     width: 2px;
-    /* height: 240px; */
     margin-left: 36px;
 }
 .heading{
     display: flex;
     
+}
+.loader{
+    transform: rotate(90deg);
 }

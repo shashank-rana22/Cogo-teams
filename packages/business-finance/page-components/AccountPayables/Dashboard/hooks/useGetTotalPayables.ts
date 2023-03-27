@@ -1,9 +1,12 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetTotalPayables = () => {
-	// const [filters, setFilters] = useState({});
-
+const useGetTotalPayables = ({ filtersData, activeTab }) => {
+	const {
+		service,
+		currency,
+		...rest
+	} = filtersData || {};
 	const [
 		{ data, loading },
 		trigger,
@@ -19,7 +22,11 @@ const useGetTotalPayables = () => {
 	const getDahboardData = async () => {
 		try {
 			await trigger({
-				params: {},
+				params: {
+					service  : service || undefined,
+					currency : currency || undefined,
+					entity   : activeTab,
+				},
 			});
 		} catch (err) {
 			console.log(err);
@@ -29,7 +36,7 @@ const useGetTotalPayables = () => {
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [JSON.stringify(rest), service, currency, activeTab]);
 
 	return {
 		data,

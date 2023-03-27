@@ -1,15 +1,13 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useGetEventsTrend = ({ showData }) => {
+const useGetEventsTrend = ({ showData, filtersData, activeTab }) => {
 	const [filters, setFilters] = useState({
 		events: 'so2UploadTrend',
-		// currency : undefined,
 	});
-
+	const { service, currency } = filtersData || {};
 	const {
 		events,
-		// currency,
 		...rest
 	} = filters || {};
 	const [
@@ -31,6 +29,9 @@ const useGetEventsTrend = ({ showData }) => {
 					event         : events,
 					view          : showData,
 					previousCount : showData === 'day' ? '30' : '12',
+					service       : service || undefined,
+					currency      : currency || undefined,
+					entity        : activeTab,
 				},
 			});
 		} catch (err) {
@@ -41,7 +42,7 @@ const useGetEventsTrend = ({ showData }) => {
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), events, showData]);
+	}, [JSON.stringify(rest), events, showData, service, currency, activeTab]);
 
 	return {
 		data,

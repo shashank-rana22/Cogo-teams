@@ -40,7 +40,8 @@
     padding: 16px;
 }
 .month_container{
-    padding: 36px;
+    padding: 16px;
+    min-width: 30%;
 }
 .label{
     font-weight: 500;

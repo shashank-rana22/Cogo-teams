@@ -1,17 +1,15 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetInvoiceAmount = () => {
-	// const [filters, setFilters] = useState({});
-
+const useGetInvoiceAmount = ({ activeTab }) => {
 	const [
 		{ data, loading },
 		trigger,
 	] = useRequestBf(
 		{
-			url     : '/purchase/payable/dashboard/paybles-info',
+			url     : '/payments/outstanding/paybles-info',
 			method  : 'get',
-			authKey : 'get_purchase_payable/dashboard/payables-info',
+			authKey : 'get_payments_outstanding_payables-info',
 		},
 		{ manual: true },
 	);
@@ -19,7 +17,9 @@ const useGetInvoiceAmount = () => {
 	const getDahboardData = async () => {
 		try {
 			await trigger({
-				params: {},
+				params: {
+					entity: activeTab,
+				},
 			});
 		} catch (err) {
 			console.log(err);
@@ -29,7 +29,7 @@ const useGetInvoiceAmount = () => {
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [activeTab]);
 
 	return {
 		data,

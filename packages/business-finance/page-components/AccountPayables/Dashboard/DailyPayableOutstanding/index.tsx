@@ -1,4 +1,4 @@
-import { Toggle, Tooltip } from '@cogoport/components';
+import { Placeholder, Toggle, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -7,10 +7,13 @@ import useGetDailyPayableOutstanding from '../hooks/useGetDailyPayableOutstandin
 
 import styles from './styles.module.css';
 
-function DailyPayableOutstanding() {
+function DailyPayableOutstanding({ filters, activeTab }) {
 	const [isQuarterView, setIsQuarterView] = useState(false);
-	const { data } = useGetDailyPayableOutstanding({ isQuarterView });
-
+	const { data, loading } = useGetDailyPayableOutstanding({ isQuarterView, filters, activeTab });
+	const formatedJan = format(data?.[0]?.yearMonth, 'MMM');
+	const formatedApr = format(data?.[1]?.yearMonth, 'MMM');
+	const formatedJul = format(data?.[2]?.yearMonth, 'MMM');
+	const formatedOct = format(data?.[3]?.yearMonth, 'MMM');
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -47,105 +50,158 @@ function DailyPayableOutstanding() {
 				? (
 					<div className={styles.sub_container}>
 						<div className={styles.month_container}>
-							<div className={styles.value}>
-								<Tooltip content={data?.[2]?.dpo} placement="top" interactive>
-									{data?.[2]?.dpo?.toFixed(2)}
-								</Tooltip>
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.value}>
+										<Tooltip content={data?.[2]?.dpo} placement="top" interactive>
+											{data?.[2]?.dpo?.toFixed(2)}
+										</Tooltip>
 
-							</div>
-							<div className={styles.label}>
-								{format(data?.[2]?.yearMonth, ' MMM yyyy')}
-								{/* current month - march 2022 */}
-							</div>
+									</div>
+								)}
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.label}>
+										{format(data?.[2]?.yearMonth, ' MMM yyyy')}
+									</div>
+								)}
 						</div>
 						<div className={styles.month_container}>
-							<div className={styles.value}>
-								<Tooltip content={data?.[1]?.dpo} placement="top" interactive>
-									{data?.[1]?.dpo?.toFixed(2)}
-								</Tooltip>
-							</div>
-							<div className={styles.label}>
-								{format(data?.[1]?.yearMonth, ' MMM yyyy')}
-							</div>
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.value}>
+										<Tooltip content={data?.[1]?.dpo} placement="top" interactive>
+											{data?.[1]?.dpo?.toFixed(2)}
+										</Tooltip>
+									</div>
+								)}
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.label}>
+										{format(data?.[1]?.yearMonth, ' MMM yyyy')}
+									</div>
+								)}
 						</div>
 						<div className={styles.month_container}>
-							<div className={styles.value}>
-								<Tooltip content={data?.[0]?.dpo} placement="top" interactive>
-									{data?.[0]?.dpo?.toFixed(2)}
-								</Tooltip>
-							</div>
-							<div className={styles.label}>
-								{format(data?.[0]?.yearMonth, ' MMM yyyy')}
-							</div>
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.value}>
+										<Tooltip content={data?.[0]?.dpo} placement="top" interactive>
+											{data?.[0]?.dpo?.toFixed(2)}
+										</Tooltip>
+									</div>
+								)}
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.label}>
+										{format(data?.[0]?.yearMonth, ' MMM yyyy')}
+									</div>
+								)}
 						</div>
 					</div>
 				) : (
 					<div className={styles.sub_container}>
 						<div className={styles.month_box}>
-							<div className={styles.value}>
-								<Tooltip content={data?.[0]?.dpo} placement="top" interactive>
-									{data?.[0]?.dpo?.toFixed(2)}
-								</Tooltip>
-							</div>
-							<div className={styles.sub_container}>
-								<div className={styles.quarter_text}>
-									Q1
-								</div>
-								<div className={styles.label}>
-									-
-									{format(data?.[0]?.yearMonth, 'MMM')}
-									-Feb-March
-								</div>
-							</div>
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.value}>
+										<Tooltip content={data?.[0]?.dpo} placement="top" interactive>
+											{data?.[0]?.dpo?.toFixed(2)}
+										</Tooltip>
+									</div>
+								)}
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.sub_container}>
+										<div className={styles.quarter_text}>
+											Q1
+										</div>
+										<div className={styles.label}>
+											-
+											{formatedJan === 'Jan'
+											&& 'Jan-Feb-March' }
+										</div>
+									</div>
+								)}
+						</div>
+						<div className={styles.month_box}>
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.value}>
+										{data?.[1]
+											? (
+												<Tooltip content={data?.[1]?.dpo} placement="top" interactive>
+													{data?.[1]?.dpo?.toFixed(2) || 0}
+												</Tooltip>
+											)
+											:										'--'}
+									</div>
+								)}
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.sub_container}>
+										<div className={styles.quarter_text}>
+											Q2
+										</div>
+										<div className={styles.label}>
+											{formatedApr === 'Apr'
+											&& '- Apr-May-Jun'}
+										</div>
+									</div>
+								)}
 
 						</div>
 						<div className={styles.month_box}>
-							<div className={styles.value}>
-								<Tooltip content={data?.[1]?.dpo} placement="top" interactive>
-									{data?.[1]?.dpo?.toFixed(2) || 0}
-								</Tooltip>
-							</div>
-
-							<div className={styles.sub_container}>
-								<div className={styles.quarter_text}>
-									Q2
-								</div>
-								<div className={styles.label}>
-									- Apr-May-Jun
-								</div>
-							</div>
-
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.value}>
+										{data?.[2]
+											? (
+												<Tooltip content={data?.[2]?.dpo} placement="top" interactive>
+													{data?.[2]?.dpo?.toFixed(2) || 0}
+												</Tooltip>
+											)
+											: '--'}
+									</div>
+								)}
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.sub_container}>
+										<div className={styles.quarter_text}>
+											Q3
+										</div>
+										<div className={styles.label}>
+											{formatedJul === 'Jul'
+											&& '- Jul-Aug-Sep'}
+										</div>
+									</div>
+								)}
 						</div>
 						<div className={styles.month_box}>
-							<div className={styles.value}>
-								<Tooltip content={data?.[2]?.dpo} placement="top" interactive>
-									{data?.[2]?.dpo?.toFixed(2) || 0}
-								</Tooltip>
-							</div>
-							<div className={styles.sub_container}>
-								<div className={styles.quarter_text}>
-									Q3
-								</div>
-								<div className={styles.label}>
-									- Jul-Aug-Sep
-								</div>
-							</div>
-
-						</div>
-						<div className={styles.month_box}>
-							<div className={styles.value}>
-								<Tooltip content={data?.[3]?.dpo} placement="top" interactive>
-									{data?.[3]?.dpo || 0}
-								</Tooltip>
-							</div>
-							<div className={styles.sub_container}>
-								<div className={styles.quarter_text}>
-									Q4
-								</div>
-								<div className={styles.label}>
-									- Oct-Nov-Dec
-								</div>
-							</div>
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.value}>
+										{data?.[3]
+											? (
+												<Tooltip content={data?.[3]?.dpo} placement="top" interactive>
+													{data?.[3]?.dpo || 0}
+												</Tooltip>
+											)
+											: '--'}
+									</div>
+								)}
+							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+								: (
+									<div className={styles.sub_container}>
+										<div className={styles.quarter_text}>
+											Q4
+										</div>
+										<div className={styles.label}>
+											{formatedOct === 'Oct'
+											&& '- Oct-Nov-Dec'}
+										</div>
+									</div>
+								)}
 						</div>
 					</div>
 				)}
