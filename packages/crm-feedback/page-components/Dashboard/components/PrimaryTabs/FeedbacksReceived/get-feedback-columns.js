@@ -33,7 +33,7 @@ export const FEEDBACK_COLUMNS = ({
 		Header   : <div>ORGANIZATION</div>,
 		key      : 'organization',
 		id       : 'organization',
-		accessor : ({ organization = '' }) => (
+		accessor : ({ organization = {} }) => (
 			<section className={styles.table_cell}>
 				{organization?.business_name || '__'}
 			</section>
@@ -43,9 +43,9 @@ export const FEEDBACK_COLUMNS = ({
 		Header   : <div>COGO-ENTITY</div>,
 		key      : 'cogo_entity',
 		id       : 'cogo_entity',
-		accessor : ({ cogo_entity = '' }) => (
+		accessor : ({ cogo_entity = {} }) => (
 			<section className={styles.table_cell}>
-				{cogo_entity || '__'}
+				{cogo_entity.business_name || '__'}
 			</section>
 		),
 	},
@@ -92,10 +92,10 @@ export const FEEDBACK_COLUMNS = ({
 		Header   : <div>FEEDBACK & PROOF</div>,
 		key      : 'feedback',
 		id       : 'feedback',
-		accessor : ({ feedback = '', feedback_reference_document_url = '' }) => (
+		accessor : ({ feedback = '', other_feedback = '', feedback_reference_document_url = '' }) => (
 			<section className={styles.feedback}>
 				<Tooltip
-					content={startCase(feedback)}
+					content={feedback === 'other' ? (startCase(other_feedback) || 'Other') : (startCase(feedback))}
 					placement="top"
 					interactive
 					disabled={isEmpty(feedback)}
@@ -167,9 +167,9 @@ export const FEEDBACK_COLUMNS = ({
 		Header   : <div>KAM Manager</div>,
 		key      : 'kam_manager',
 		id       : 'kam_manager',
-		accessor : ({ kam_manager }) => (
+		accessor : ({ manager = {} }) => (
 			<section className={styles.table_cell}>
-				{kam_manager || '__'}
+				{manager?.name || '__'}
 			</section>
 		),
 	},
@@ -177,9 +177,9 @@ export const FEEDBACK_COLUMNS = ({
 		Header   : <div>KAM</div>,
 		key      : 'kam',
 		id       : 'kam',
-		accessor : ({ kam }) => (
+		accessor : ({ created_by = {} }) => (
 			<section className={styles.table_cell}>
-				{kam || '__'}
+				{created_by?.name || '__'}
 			</section>
 		),
 	},

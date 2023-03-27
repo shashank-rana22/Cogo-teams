@@ -4,11 +4,14 @@ import {
 	asyncFieldsOrganizations,
 	asyncFieldsPartnerUsers,
 } from '@cogoport/forms/utils/getAsyncFields';
+import { useState } from 'react';
 
 import { controlsFeedbacks, controlsRequests } from './controls';
 import styles from './styles.module.css';
 
 function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' }) {
+	const [date, setDate] = useState();
+
 	const organizationOptions = useGetAsyncOptions({
 		...asyncFieldsOrganizations(),
 		initialCall : false,
@@ -83,9 +86,15 @@ function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' 
 
 			<DateRangepicker
 				className={styles.time}
-				value={pageFilters.date}
+				value={date}
 				isPreviousDaysAllowed
-				onChange={(val) => onChangeFilters({ date: val || undefined })}
+				onChange={(val) => {
+					onChangeFilters({
+						created_at_greater_than : val.startDate || undefined,
+						created_at_less_than    : val.endDate || undefined,
+					});
+					setDate(val);
+				}}
 			/>
 		</div>
 	);

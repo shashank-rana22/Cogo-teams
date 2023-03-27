@@ -1,6 +1,6 @@
 export const controlsFeedbacks = (organizationOptions, kamOptions, kamManagerOptions) => [
 	{
-		name        : 'cogo_entity',
+		name        : 'agent_partner_id',
 		placeholder : 'Cogo Entity',
 		type        : 'select',
 		isClearable : true,
@@ -22,7 +22,7 @@ export const controlsFeedbacks = (organizationOptions, kamOptions, kamManagerOpt
 	},
 	{
 		...organizationOptions,
-		name        : 'organization',
+		name        : 'organization_id',
 		placeholder : 'Organization',
 		type        : 'select',
 		isClearable : true,
@@ -30,7 +30,7 @@ export const controlsFeedbacks = (organizationOptions, kamOptions, kamManagerOpt
 	},
 	{
 		...kamManagerOptions,
-		name        : 'kam_manager',
+		name        : 'manager_id',
 		placeholder : 'KAM Manager',
 		type        : 'select',
 		isClearable : true,
@@ -38,7 +38,7 @@ export const controlsFeedbacks = (organizationOptions, kamOptions, kamManagerOpt
 	},
 	{
 		...kamOptions,
-		name        : 'kam',
+		name        : 'performed_by_id',
 		placeholder : 'KAM',
 		type        : 'select',
 		isClearable : true,
@@ -69,7 +69,7 @@ export const controlsRequests = (organizationOptions) => [
 	},
 	{
 		...organizationOptions,
-		name        : 'organization',
+		name        : 'organization_id',
 		placeholder : 'Organization',
 		type        : 'select',
 		isClearable : true,
