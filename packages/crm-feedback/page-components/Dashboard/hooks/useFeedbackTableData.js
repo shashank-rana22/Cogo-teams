@@ -5,10 +5,11 @@ import { useMemo, useState, useEffect, useCallback } from 'react';
 const useFeedbackTableData = () => {
 	const [selectAll, setSelectAll] = useState(false);
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
+	const [selectedBulkData, setSelectedBulkData] = useState([{}]);
 
 	const [filters, setFilters] = useState({});
 
-	console.log('filters::', filters);
+	// console.log('filters::', filters);
 
 	const [params, setParams] = useState({
 		page_limit : 10,
@@ -31,10 +32,10 @@ const useFeedbackTableData = () => {
 	// 	}));
 	// };
 
-	console.log('params ::', params);
+	// console.log('params ::', params);
 
 	const onChangeParams = (values = {}) => {
-		console.log('onChangeParams');
+		// console.log('onChangeParams');
 		setParams((previousState) => ({
 			...previousState,
 			...values,
@@ -50,17 +51,35 @@ const useFeedbackTableData = () => {
 	// 	}));
 	// };
 
+	// const onChangeFilters = useCallback(
+	// 	(values = {}) => {
+	// 		console.log('filters are changed');
+	// 		setFilters((previousState) => ({
+	// 			...filters,
+	// 			...previousState,
+	// 			...values,
+	// 		}));
+	// 		console.log('filters::', filters);
+	// 	},
+	// 	[setFilters, filters],
+	// );
+
 	const onChangeFilters = useCallback(
 		(values = {}) => {
-			console.log('filters are changed');
+			// console.log('filters are changed');
 			setFilters((previousState) => ({
-				...filters,
 				...previousState,
 				...values,
 			}));
-			console.log('filters::', filters);
+			setParams((previousState) => ({
+				...previousState,
+				filters: {
+					...previousState.filters,
+					...values,
+				},
+			}));
 		},
-		[setFilters, filters],
+		[setFilters, setParams],
 	);
 
 	// useEffect(() => {
@@ -127,6 +146,21 @@ const useFeedbackTableData = () => {
 		});
 	};
 
+	const onBulkDataPayload = () => {
+		const bulkData = list
+			.filter((item) => checkedRowsId.includes(item.id))
+			.map(({ source_id, source_type, organization_id, lead_organization_id, partner_id }) => ({
+				source_id,
+				source       : source_type,
+				organization_id,
+				lead_organization_id,
+				partner_id,
+				request_type : 'enrichment',
+			}));
+
+		setSelectedBulkData(bulkData);
+	};
+
 	return {
 		data: list,
 		loading,
@@ -139,6 +173,8 @@ const useFeedbackTableData = () => {
 		selectAll,
 		onChangeTableHeadCheckbox,
 		onChangeBodyCheckbox,
+		selectedBulkData,
+		onBulkDataPayload,
 	};
 };
 

@@ -5,17 +5,22 @@ import useCreateBulkEnrichment from '../../hooks/useCreateBulkEnrichment';
 
 import styles from './styles.module.css';
 
-function EnrichmentRequest({ checkedRowsId = [], setActiveTab = () => {} }) {
+function EnrichmentRequest({
+	checkedRowsId = [],
+	setActiveTab = () => {},
+	selectedBulkData = [],
+	onBulkDataPayload = () => {},
+}) {
 	const {
 		onEnrichmentRequest,
-		// loading,
+		loading,
 		isOpenModal = false,
 		setisOpenModal = () => {},
 		onCloseModal = () => {},
 		thirdParty = [],
 		setThirdParty = () => {},
 		thirdPartyOptions = [{}],
-	} = useCreateBulkEnrichment({ checkedRowsId, setActiveTab });
+	} = useCreateBulkEnrichment({ setActiveTab, selectedBulkData });
 
 	return (
 		<>
@@ -23,7 +28,10 @@ function EnrichmentRequest({ checkedRowsId = [], setActiveTab = () => {} }) {
 				size="lg"
 				themeType="primary"
 				className={styles.button}
-				onClick={() => setisOpenModal(true)}
+				onClick={() => {
+					setisOpenModal(true);
+					onBulkDataPayload();
+				}}
 				disabled={isEmpty(checkedRowsId)}
 			>
 				Create Enrichment Request
@@ -42,7 +50,6 @@ function EnrichmentRequest({ checkedRowsId = [], setActiveTab = () => {} }) {
 
 					<Modal.Body className={styles.modal_body}>
 						Please select the Data Enrichment Organisation(s) to send the enrichment request for the
-						following
 						{' '}
 						{checkedRowsId.length || 'these'}
 						{' '}
