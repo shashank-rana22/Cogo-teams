@@ -3,7 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useGetTestList() {
+function useGetTestList({ filters:cogoEntityFilter }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
@@ -23,7 +23,7 @@ function useGetTestList() {
 	const fetchList = () => {
 		try {
 			trigger({
-				params: { ...params, filters: { ...params.filters, q: query } },
+				params: { ...params, filters: { ...params.filters, q: query, ...cogoEntityFilter } },
 			});
 		} catch (error) {
 			Toast.error(error?.message || 'Something went wrong');
@@ -32,7 +32,7 @@ function useGetTestList() {
 	useEffect(() => {
 		fetchList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query, params]);
+	}, [query, params, cogoEntityFilter]);
 
 	return {
 		data,

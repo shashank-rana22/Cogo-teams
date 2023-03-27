@@ -53,3 +53,13 @@
 .tabs {
 	margin-top: 16px;
 }
+
+.filter_popover {
+	width: 16%;
+
+	:global {
+		.ui_popover_container {
+			margin-top: -8px;
+		}
+	}
+}

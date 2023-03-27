@@ -1,9 +1,11 @@
 import { Button, Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useState } from 'react';
 
 import useGetTestList from '../../hooks/useGetTestList';
 import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
+import FilterPopover from '../CreateNewTest/FilterPopover';
 
 import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
@@ -22,9 +24,13 @@ const ROUTE_MAPPING = {
 function TestsList({ activeTab, setActiveTab }) {
 	const router = useRouter();
 
+	const [filters, setFilters] = useState({});
+
+	const [sortBy, setSortBy] = useState('');
+
 	const {
 		data, loading, fetchList, setParams, params, debounceQuery, input, setInput,
-	} = useGetTestList();
+	} = useGetTestList({ filters });
 
 	const {
 		data: questionData,
@@ -49,6 +55,7 @@ function TestsList({ activeTab, setActiveTab }) {
 				setParams,
 				activeTab,
 				params,
+				setSortBy,
 
 			},
 		},
@@ -63,6 +70,7 @@ function TestsList({ activeTab, setActiveTab }) {
 				setParams : setQuestionListParams,
 				activeTab,
 				params    : questionListParams,
+				setSortBy,
 			},
 		},
 	};
@@ -104,6 +112,10 @@ function TestsList({ activeTab, setActiveTab }) {
 						}}
 						className={styles.input}
 					/>
+
+					<div className={styles.filter_popover}>
+						<FilterPopover filters={filters} setFilters={setFilters} />
+					</div>
 
 					<Button
 						themeType="accent"

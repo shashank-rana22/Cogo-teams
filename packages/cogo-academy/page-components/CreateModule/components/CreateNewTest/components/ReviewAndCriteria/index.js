@@ -20,10 +20,7 @@ function ReviewAndCriteria(props) {
 
 	const { fields, append, remove } = useFieldArray({
 		control,
-		name  : 'guidelines',
-		rules : {
-			required: true,
-		},
+		name: 'guidelines',
 	});
 
 	const { name = '', set_data = [], cogo_entity_object = {} } = data || {};

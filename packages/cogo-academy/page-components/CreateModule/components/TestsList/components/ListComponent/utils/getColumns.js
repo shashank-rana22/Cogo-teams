@@ -1,5 +1,5 @@
-import { Pill, Button, Tooltip } from '@cogoport/components';
-import { IcMShare, IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
+import { Pill, Button, Tooltip, ButtonIcon } from '@cogoport/components';
+import { IcMShare, IcMOverflowDot, IcMDelete, IcMEdit, IcMArrowUp } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
@@ -216,8 +216,10 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 		{
 			Header   : 'ATTEMPTED BY',
 			id       : 'ik',
-			accessor : ({ audience_ids = [] }) => (
-				<section>{audience_ids.length}</section>
+			accessor : ({ attempted_by = 0 }) => (
+				<section>
+					{attempted_by}
+				</section>
 			),
 		},
 		{

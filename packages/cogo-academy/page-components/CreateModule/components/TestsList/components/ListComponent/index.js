@@ -55,7 +55,7 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 		all_questions : {},
 	};
 
-	const columns = columnsMapping[activeTab]({ ...propsMapping[activeTab] });
+	const columns = columnsMapping[activeTab]({ ...propsMapping[activeTab], setSortBy });
 
 	if (!loading && isEmpty(data?.list)) {
 		return <EmptyState />;
