@@ -90,7 +90,7 @@ function Shipment() {
 				page       : x,
 				page_limit : 100,
 				sort_type  : 'desc',
-				sort_by    : 'shipment_record_id',
+				sort_by    : 'shipment_date',
 				filters    : {
 					hs_code             : searchValue || undefined,
 					// origin_country      : !isEmpty(countryName) ? countryName : undefined,
