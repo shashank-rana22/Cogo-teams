@@ -1,13 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateRfq = ({ item, reason, setShow, refetch }) => {
+const useCreateRfqSupplyAgentPreference = ({ item, reason, setShow, refetch }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_rfq',
+		url    : '/create_rfq_supply_agent_preference',
 		method : 'POST',
 	}, { manual: true });
 
-	const updateRfq = async () => {
+	const createRfqSupplyAgentPreference = async () => {
 		try {
 			await trigger({
 				data: {
@@ -24,8 +24,8 @@ const useUpdateRfq = ({ item, reason, setShow, refetch }) => {
 		}
 	};
 	return {
-		updateRfq,
+		createRfqSupplyAgentPreference,
 		loading,
 	};
 };
-export default useUpdateRfq;
+export default useCreateRfqSupplyAgentPreference;

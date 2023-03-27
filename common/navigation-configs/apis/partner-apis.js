@@ -4181,7 +4181,7 @@ const partner = {
 			feature      : 'rfq',
 		},
 		{
-			api          : 'update_rfq',
+			api          : 'create_rfq_supply_agent_preference',
 			access_type  : 'private',
 			service_name : 'rfq',
 			feature      : 'rfq',

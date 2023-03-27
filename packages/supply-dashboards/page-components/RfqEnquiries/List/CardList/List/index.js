@@ -2,7 +2,7 @@ import { Placeholder, Modal, Button, Checkbox } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import useUpdateRfq from '../../../hooks/useUpdateRfq';
+import useCreateRfqSupplyAgentPreference from '../../../hooks/useCreateRfqSupplyAgentPreference';
 
 import styles from './styles.module.css';
 
@@ -22,10 +22,10 @@ function List({
 		}
 	};
 
-	const { updateRfq } = useUpdateRfq({ item, reason, setShow, refetch });
+	const {createRfqSupplyAgentPreference } = useCreateRfqSupplyAgentPreference({ item, reason, setShow, refetch });
 
 	const handleCloseModal = () => {
-		updateRfq();
+		createRfqSupplyAgentPreference();
 	};
 
 	const handleOnChange = (val) => {
