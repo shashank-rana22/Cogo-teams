@@ -17,11 +17,7 @@ function ImageComponent(props) {
 
 			const updatedComponent = {
 				...components[selectedComponentIndex],
-				properties: {
-					...components[selectedComponentIndex].properties,
-					content: fileValue,
-				},
-
+				content: fileValue,
 			};
 
 			// use map instead slice

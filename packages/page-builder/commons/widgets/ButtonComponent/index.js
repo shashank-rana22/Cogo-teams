@@ -60,11 +60,7 @@ function ButtonComponent(props) {
 
 		const updatedComponent = {
 			...components[selectedComponentIndex],
-			properties: {
-				...components[selectedComponentIndex].properties,
-				content: value,
-			},
-
+			content: value,
 		};
 
 		// use map instead slice

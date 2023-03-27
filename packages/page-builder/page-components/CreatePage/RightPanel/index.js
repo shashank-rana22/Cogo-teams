@@ -1,83 +1,66 @@
-import { Button } from '@cogoport/components';
 import React from 'react';
 
 import ButtonComponent from '../../../commons/widgets/ButtonComponent';
 import ImageComponent from '../../../commons/widgets/ImageComponent';
 import TextComponent from '../../../commons/widgets/TextComponent';
 
-import styles from './styles.module.css';
-
 function RightPanel(props) {
-	const { components, setComponents } = props;
+	const { widget, components, setComponents } = props;
+
+	const { type, id: elementId } = widget;
 
 	return (
-		<div className={styles.container}>
 
-			<section className={styles.header}>
-				<div>
-					<Button type="button" size="md" themeType="secondary">Preview</Button>
-				</div>
+		<div
+			key={elementId}
+			data-grid={{
+				i           : widget?.i,
+				x           : widget?.x,
+				y           : widget?.y,
+				w           : widget?.w,
+				h           : widget?.h,
+				minW        : 2,
+				maxW        : Infinity,
+				minH        : 2,
+				maxH        : Infinity,
+				isDraggable : true,
+				isResizable : true,
+			}}
+		>
+			{type === 'text' && (
+				<TextComponent
+					key={elementId}
+					text={widget.content}
+					components={components}
+					setComponents={setComponents}
+					elementId={elementId}
+				/>
+			)}
 
-				<div className={styles.button_container}>
-					<Button style={{ marginRight: '8px' }} type="button" size="md" themeType="secondary">Save</Button>
-					<Button type="button" size="md">Save & Close</Button>
-				</div>
-			</section>
-
-			<section>
-
-				<div className="page-builder">
-
-					<div className="page-preview">
-						{(components || []).map((component) => {
-							const { id: elementId, type, layout } = component;
-
-							return (
-								<div key={elementId} data-grid={layout}>
-									{type === 'text' && (
-										<TextComponent
-											key={elementId}
-											text={component.properties.content}
-											components={components}
-											setComponents={setComponents}
-											elementId={elementId}
-										/>
-									)}
-
-									{type === 'image' && (
-										<ImageComponent
-											key={elementId}
-											src={component.properties.content}
-											alt={component.properties.alt}
-											style={component.properties.styles}
-											components={components}
-											setComponents={setComponents}
-											elementId={elementId}
-										/>
-									)}
-									{type === 'button' && (
-										<ButtonComponent
-											key={elementId}
-											label={component.properties.content}
-											themeType={component.properties.themeType}
-											size={component.properties.size}
-											type={component.properties.type}
-											components={components}
-											setComponents={setComponents}
-											elementId={elementId}
-										/>
-									)}
-								</div>
-							);
-						})}
-
-					</div>
-				</div>
-
-			</section>
-
+			{type === 'image' && (
+				<ImageComponent
+					key={elementId}
+					src={widget.content}
+					alt={widget.alt}
+					style={widget.styles}
+					components={components}
+					setComponents={setComponents}
+					elementId={elementId}
+				/>
+			)}
+			{type === 'button' && (
+				<ButtonComponent
+					key={elementId}
+					label={widget.content}
+					themeType={widget.themeType}
+					size={widget.size}
+					type={widget.type}
+					components={components}
+					setComponents={setComponents}
+					elementId={elementId}
+				/>
+			)}
 		</div>
-
 	);
 }
 
