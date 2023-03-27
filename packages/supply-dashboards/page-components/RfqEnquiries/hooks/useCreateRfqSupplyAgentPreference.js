@@ -11,9 +11,9 @@ const useCreateRfqSupplyAgentPreference = ({ item, reason, setShow, refetch }) =
 		try {
 			await trigger({
 				data: {
-					rfq_id: item?.id,
-					preference_type: 'close',
-					closing_remarks: [reason],
+					rfq_id          : item?.id,
+					preference_type : 'close',
+					closing_remarks : [reason],
 				},
 			});
 			setShow(false);
