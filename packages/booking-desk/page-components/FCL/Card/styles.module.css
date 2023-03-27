@@ -19,6 +19,21 @@
 	}
 }
 
+.card.animate_card {
+    background: linear-gradient(90deg, #ffffff, #ffb3b3, #ffffff);
+    background-size: 400% 400%;
+    animation: moveBg 5s ease-in-out infinite alternate;
+
+    @keyframes moveBg {
+		from {
+			background-position: 100% 0;
+		}
+		to {
+			background-position: 0 0;
+		}
+	}
+}
+
 .card_body {
     display: flex;
     justify-content: space-between;

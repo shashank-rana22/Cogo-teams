@@ -4,7 +4,7 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-export default function List({ data, stateProps, Card }) {
+export default function List({ data, stateProps, Card, isCardAnimatable = false }) {
 	const { filters, setFilters } = stateProps;
 	const { list = [], total } = data;
 
@@ -23,7 +23,15 @@ export default function List({ data, stateProps, Card }) {
 			<>
 				{renderPagination}
 
-				<div className={styles.list_container}>{list.map((item) => <Card item={item} />)}</div>
+				<div className={styles.list_container}>
+					{list.map((item) => (
+						<Card
+							item={item}
+							isCardAnimatable={isCardAnimatable}
+						/>
+					))}
+
+				</div>
 
 				{renderPagination}
 			</>

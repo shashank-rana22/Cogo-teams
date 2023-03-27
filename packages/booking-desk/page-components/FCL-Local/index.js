@@ -11,6 +11,8 @@ import styles from './styles.module.css';
 export default function FCLLocalDesk({ stateProps = {} }) {
 	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'fcl_local' });
 
+	const isCardAnimatable = !!tabs.find((tab) => tab.name === stateProps.activeTab).criticalVisible;
+
 	return (
 		<div>
 			<div className={styles.header}>
@@ -22,7 +24,14 @@ export default function FCLLocalDesk({ stateProps = {} }) {
 			<TabsAndFilters stateProps={stateProps} tabs={tabs} />
 
 			<div className={`${styles.list_container} ${loading ? styles.loading : ''}`}>
-				{loading ? <Loader /> : <List data={data} stateProps={stateProps} Card={Card} />}
+				{loading ? <Loader /> : (
+					<List
+						data={data}
+						stateProps={stateProps}
+						Card={Card}
+						isCardAnimatable={isCardAnimatable}
+					/>
+				)}
 			</div>
 		</div>
 	);

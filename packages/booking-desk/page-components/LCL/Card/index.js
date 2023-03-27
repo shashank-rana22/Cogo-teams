@@ -1,13 +1,14 @@
 import CardHeader from '../../../commons/Card/CardHeader';
 import PortDetails from '../../../commons/Card/PortDetails/DualLocation';
 import ShipmentInfo from '../../../commons/Card/ShipmentInfo';
+import shouldAnimateCard from '../../../helpers/shouldAnimateCard';
 
 import CargoDetails from './CargoDetails';
-import { card, card_body, card_footer, separator } from './styles.module.css';
+import { card, card_body, card_footer, separator, animate_card } from './styles.module.css';
 
-export default function Card({ item = {} }) {
+export default function Card({ item = {}, isCardAnimatable = false }) {
 	return (
-		<div className={card}>
+		<div className={`${card} ${isCardAnimatable && shouldAnimateCard({ item }) ? animate_card : ''}`}>
 			<CardHeader item={item} />
 
 			<div className={card_body}>
