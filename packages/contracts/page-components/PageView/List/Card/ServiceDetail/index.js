@@ -29,6 +29,14 @@ function ServiceDetail({ item, service, formattedData }) {
 			<div className={styles.quantity}>
 				{`${contentToShow} ${unit}`}
 			</div>
+			{
+				item.source && (
+					<div className={styles.quantity}>
+						{item.source === 'spot_search' ? 'Spot search - lock freight' : startCase(item.source)}
+					</div>
+				)
+			}
+
 		</div>
 	);
 }
