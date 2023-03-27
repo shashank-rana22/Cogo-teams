@@ -6,14 +6,15 @@ const useCreateRfqSupplyAgentPreference = ({ item, reason, setShow, refetch }) =
 		url    : '/create_rfq_supply_agent_preference',
 		method : 'POST',
 	}, { manual: true });
+	console.log(reason)
 
 	const createRfqSupplyAgentPreference = async () => {
 		try {
 			await trigger({
 				data: {
-					status : 'closed',
-					id     : item?.id,
-					reason,
+					rfq_id     : item?.id,
+					preference_type : 'close',
+					closing_remarks : [reason],
 				},
 			});
 			setShow(false);

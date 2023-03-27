@@ -22,7 +22,7 @@ function List({
 		}
 	};
 
-	const {createRfqSupplyAgentPreference } = useCreateRfqSupplyAgentPreference({ item, reason, setShow, refetch });
+	const { createRfqSupplyAgentPreference } = useCreateRfqSupplyAgentPreference({ item, reason, setShow, refetch });
 
 	const handleCloseModal = () => {
 		createRfqSupplyAgentPreference();
