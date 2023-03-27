@@ -55,8 +55,6 @@ function useCreateNewEvent(props) {
 
 				};
 
-				console.log('create payload::', payload);
-
 				await trigger({
 					data: payload,
 				});

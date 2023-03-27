@@ -36,7 +36,7 @@
 
 .account_attributes{
     flex: 4;
-
+    overflow-y: scroll;
     padding: 16px;
     background: rgb(226, 226, 226,0.2);
     opacity: 0.8;
