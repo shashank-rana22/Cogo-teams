@@ -1,3 +1,7 @@
+.container{
+	padding:0px 6px
+}
+
 .header{
 	color: #4f4f4f;
 	font-weight: 600;
@@ -23,8 +27,7 @@
 	cursor: pointer;
 	max-width: 310px;
 	font-size: 13px;
-	line-height: 150%;
-	opacity: 0.8;
+	line-height: 160%;
 }
 
 .time_wrapper{
