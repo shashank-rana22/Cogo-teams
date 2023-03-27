@@ -13,7 +13,7 @@ function EmptyState({
 				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man"
 				width={width}
 				height={height}
-				alt="empty-state-img"
+				alt="Empty-state"
 				style={{ margin: '10px' }}
 			/>
 
