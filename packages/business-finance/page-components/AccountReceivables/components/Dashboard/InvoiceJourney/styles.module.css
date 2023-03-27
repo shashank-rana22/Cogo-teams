@@ -1,0 +1,167 @@
+/* stylelint-disable selector-class-pattern */
+.container {
+	width: 50%;
+	height: 300px;
+	padding: 24px 36px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.journey {
+	display: flex;
+	gap: 4px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.icon {
+	font-size: 14px;
+}
+
+.border {
+	width: 50%;
+	margin-top: 4px;
+	border: 1.5px solid #ed3726;
+}
+
+.sub_container {
+	display: flex;
+	padding: 40px 10px;
+}
+
+.circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 93px;
+	height: 93px;
+	border: 1px solid #88cad1;
+	border-radius: 50%;
+}
+
+.number {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+}
+
+.tat_value {
+	padding-top: 6px;
+}
+
+.space_between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 16px;
+}
+
+.column_flex {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	align-items: center;
+	margin-right: 20px;
+}
+
+.tat_container {
+	width: 49%;
+	height: 300px;
+	padding: 24px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 130px;
+}
+
+.sub_tat_container {
+	display: flex;
+	flex-direction: column;
+	padding: 24px 10px;
+}
+
+.tat_data {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 24px;
+	margin-bottom: 8px;
+	background: #f3fafa;
+	border: 1px solid #88cad1;
+	border-radius: 6px;
+}
+
+.border_tat {
+	width: 2px;
+	margin-right: 60px;
+	border: 1px solid #88cad1;
+}
+
+.tat_flex {
+	display: flex;
+	width: 220px;
+}
+
+.color_tat {
+	margin-left: 4px;
+	color: #ed3726;
+}
+
+.date {
+	:global {
+		.react-datepicker__input-container {
+			.react-datepicker__close-icon::after {
+				background: none !important;
+			}
+
+			.react-datepicker-ignore-onclickoutside {
+				height: 40px;
+			}
+
+			.react-datepicker__close-icon {
+				right: -5px;
+				background: none !important;
+				border: none;
+			}
+		}
+	}
+}
+
+.invoice_journey_loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 40px;
+}
+
+.invoice_loader {
+	width: 100px;
+	height: 100px;
+	margin: 24px;
+	border-radius: 50%;
+}
+
+.invoice_tat_loader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.invoice_tat_placeholder {
+	width: 80%;
+	height: 30px;
+	margin: 16px;
+}
