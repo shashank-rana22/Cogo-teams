@@ -1,13 +1,11 @@
-.container{
+.container {
 	padding-top: 20px;
-}	
+}
 
-
-.loader_wrapper{
-	width: 100%;
+.loader_wrapper {
 	display: flex;
 	justify-content: space-between;
+	width: 100%;
 	margin-bottom: 20px;
 }
-	
-;
+

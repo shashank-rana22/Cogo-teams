@@ -1,50 +1,47 @@
-
-
-.header{
-    color: #4f4f4f;
-	font-weight: 600;
-	font-size: 14px;
-	line-height: 150%;
+.header {
 	padding: 4px 16px;
 	margin-top: 16px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 150%;
+	color: #4f4f4f;
 }
 
-.question_time_container{
-    display: flex;
+.question_time_container {
+	display: flex;
 	justify-content: space-between;
 	padding: 6px 10px;
-	border-radius: 4px;
 	margin-bottom: 4px;
+	border-radius: 4px;
 
 	&:hover {
+		background-color: #f8f2e7 !important;
 		box-shadow: 0 0 8px #627fac33;
-		background-color:  #f8f2e7 !important;
 	}
-	
 }
 
-.pills_question_wrapper{
-    display: flex;
+.pills_question_wrapper {
+	display: flex;
 }
 
-.question_wrapper{
-    color: #4f4f4f;
+.question_wrapper {
+	max-width: 250px;
+	padding-left: 16px;
 	font-size: 13px;
 	line-height: 150%;
-	padding-left: 16px;
-	max-width: 250px;
+	color: #4f4f4f;
 	opacity: 0.8;
 }
 
-.time_wrapper{
-    color: #828282;
+.time_wrapper {
 	font-size: 12px;
 	line-height: 150%;
+	color: #828282;
 }
 
-.pills_wrapper{
-    border-radius: 8px;
+.pills_wrapper {
+	height: 20px;
 	padding: 1px 4px;
 	font-size: 12px;
-	height: 20px;
+	border-radius: 8px;
 }
