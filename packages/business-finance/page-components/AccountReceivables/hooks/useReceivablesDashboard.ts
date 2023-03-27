@@ -1,16 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-import { format } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const useReceivablesDashboard = () => {
-	const { userData } = useSelector(({ profile }) => ({
-		userData: profile || {},
-	}));
-	const [asOnDateFilter, setAsOnDateFilter] = useState(null);
-
 	const [filterValue, setFilterValue] = useState({
 		entityCode  : '301',
 		serviceType : '',
@@ -31,7 +23,7 @@ const useReceivablesDashboard = () => {
 		{ manual: true },
 	);
 
-	const ageingBucketData = async () => {
+	const ageingBucketData = useCallback(async () => {
 		try {
 			listApiTrigger({
 				params: {
@@ -43,7 +35,7 @@ const useReceivablesDashboard = () => {
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Something went wrong');
 		}
-	};
+	}, [filterValue.companyType, filterValue?.entityCode, filterValue?.serviceType, listApiTrigger]);
 
 	const [
 		{ data: quaterlyData, loading: quaterlyLoading },
@@ -57,17 +49,19 @@ const useReceivablesDashboard = () => {
 		{ manual: true },
 	);
 
-	const quaterlyDataApi = async () => {
+	const quaterlyDataApi = useCallback(async () => {
 		try {
 			quaterlyDataTrigger({
 				params: {
-					role: userData.id,
+					entityCode  : filterValue?.entityCode || undefined,
+					serviceType : filterValue?.serviceType || undefined,
+					companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Something went wrong');
 		}
-	};
+	}, [filterValue.companyType, filterValue?.entityCode, filterValue?.serviceType, quaterlyDataTrigger]);
 
 	const [
 		{ data: kamOutstandingData, loading: kamOutstandingLoading },
@@ -81,7 +75,7 @@ const useReceivablesDashboard = () => {
 		{ manual: true },
 	);
 
-	const kamOutstandingApi = async () => {
+	const kamOutstandingApi = useCallback(async () => {
 		try {
 			kamOutstandingTrigger({
 				params: {
@@ -93,32 +87,7 @@ const useReceivablesDashboard = () => {
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Something went wrong');
 		}
-	};
-
-	const [
-		{ data: monthlyData, loading: monthlyLoading },
-		monthlyDataTrigger,
-	] = useRequestBf(
-		{
-			url     : '/payments/dashboard/monthly-outstanding',
-			method  : 'get',
-			authKey : 'get_payments_dashboard_monthly_outstanding',
-		},
-		{ manual: true },
-	);
-
-	const monthlyDataApi = async () => {
-		try {
-			monthlyDataTrigger({
-				params: {
-					role              : userData.id,
-					dashboardCurrency : 'INR',
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
-	};
+	}, [filterValue.companyType, filterValue?.entityCode, filterValue?.serviceType, kamOutstandingTrigger]);
 
 	const [
 		{ data: dailySalesOutstandingData, loading: dailySalesOutstandingApiLoading },
@@ -132,9 +101,9 @@ const useReceivablesDashboard = () => {
 		{ manual: true },
 	);
 
-	const dailySalesOutstandingApi = () => {
+	const dailySalesOutstandingApi = useCallback(async () => {
 		try {
-			dailySalesOutstandingTrigger({
+			await dailySalesOutstandingTrigger({
 				params: {
 					entityCode  : filterValue?.entityCode || undefined,
 					serviceType : filterValue?.serviceType || undefined,
@@ -144,7 +113,7 @@ const useReceivablesDashboard = () => {
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Something went wrong');
 		}
-	};
+	}, [dailySalesOutstandingTrigger, filterValue.companyType, filterValue?.entityCode, filterValue?.serviceType]);
 
 	const [
 		{ data: salesFunnelData, loading: salesFunnelLoading },
@@ -158,9 +127,9 @@ const useReceivablesDashboard = () => {
 		{ manual: true },
 	);
 
-	const salesFunnelApi = () => {
+	const salesFunnelApi = useCallback(async () => {
 		try {
-			salesFunnelTrigger({
+			await salesFunnelTrigger({
 				params: {
 					month       : salesFunnelMonth || undefined,
 					entityCode  : filterValue?.entityCode || undefined,
@@ -171,7 +140,8 @@ const useReceivablesDashboard = () => {
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Something went wrong');
 		}
-	};
+	}, [filterValue.companyType,
+		filterValue?.entityCode, filterValue?.serviceType, salesFunnelMonth, salesFunnelTrigger]);
 
 	const [
 		{ data: outstandingData, loading: outstandingLoading },
@@ -185,36 +155,34 @@ const useReceivablesDashboard = () => {
 		{ manual: true },
 	);
 
-	const outstandingApi = () => {
+	const outstandingApi = useCallback(async () => {
 		try {
-			outstandingTrigger({
+			await outstandingTrigger({
 				params: {
-					date: asOnDateFilter ? format(asOnDateFilter, 'YYYY-MM-dd ', {}, false) : undefined,
+					entityCode: filterValue?.entityCode || undefined,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Something went wrong');
 		}
-	};
+	}, [filterValue?.entityCode, outstandingTrigger]);
 
 	useEffect(() => {
 		dailySalesOutstandingApi();
-		monthlyDataApi();
 		ageingBucketData();
 		quaterlyDataApi();
 		kamOutstandingApi();
-	}, [filterValue]);
+	}, [ageingBucketData, dailySalesOutstandingApi, filterValue, kamOutstandingApi, quaterlyDataApi]);
 
-	useEffect(() => { outstandingApi(); }, [asOnDateFilter]);
+	useEffect(() => { outstandingApi(); }, [filterValue.entityCode, outstandingApi]);
 
 	useEffect(() => {
 		salesFunnelApi();
-	}, [filterValue, salesFunnelMonth]);
+	}, [filterValue, salesFunnelApi, salesFunnelMonth]);
 
 	const dashboard = {
 		outstandingAgeData        : ageingBucket,
 		quaterly                  : quaterlyData?.list,
-		monthly                   : monthlyData?.list,
 		dailySalesOutstandingData : dailySalesOutstandingData?.dsoResponse,
 		kamOutstandingData,
 		outstandingData,
@@ -223,7 +191,6 @@ const useReceivablesDashboard = () => {
 	const loading = {
 		outstandingAgeData : ageingBucketLoading,
 		quaterly           : quaterlyLoading,
-		monthly            : monthlyLoading,
 		dailySalesOutstandingApiLoading,
 		kamOutstandingLoading,
 		outstandingLoading,
@@ -232,8 +199,6 @@ const useReceivablesDashboard = () => {
 	return {
 		salesFunnelMonth,
 		setSalesFunnelMonth,
-		asOnDateFilter,
-		setAsOnDateFilter,
 		dashboard,
 		loading,
 		filterValue,

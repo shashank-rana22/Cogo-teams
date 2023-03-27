@@ -1,4 +1,4 @@
-import { Select, Datepicker } from '@cogoport/components';
+import { Select } from '@cogoport/components';
 
 import SegmentedControl from '../../../commons/SegmentedControl';
 import { ENTITY_TYPE, SERVICE_PROVIDER, SHIPMENT_TYPE_OPTIONS } from '../../constants';
@@ -16,8 +16,6 @@ import styles from './styles.module.css';
 
 function Dashboard() {
 	const {
-		asOnDateFilter,
-		setAsOnDateFilter,
 		dashboard,
 		loading,
 		filterValue,
@@ -29,7 +27,6 @@ function Dashboard() {
 	const {
 		outstandingAgeData = [],
 		dailySalesOutstandingData = {},
-		monthly = [],
 		quaterly = [],
 		kamOutstandingData = [],
 		outstandingData = {},
@@ -39,47 +36,35 @@ function Dashboard() {
 	const {
 		outstandingAgeData: outstandingAgeLoading,
 		dailySalesOutstandingApiLoading,
-		monthly: monthlyLoading,
 		quaterly: quaterlyLoading,
 		kamOutstandingLoading,
 		outstandingLoading,
 		salesFunnelLoading,
 	} = loading || {};
 
+	console.log('quaterly', quaterly);
+
 	const onChange = (val:string, name:string) => {
 		setFilterValue((p) => ({ ...p, [name]: val }));
 	};
-	const today = new Date();
 
 	return (
 		<div>
 			<div className={styles.date_container}>
 				<div className={styles.date_text}>As On Date</div>
-				<div className={styles.date}>
-					<Datepicker
-						placeholder="Enter Date"
-						name="date"
-						onChange={(e:Date) => setAsOnDateFilter(e)}
-						value={asOnDateFilter}
-						isPreviousDaysAllowed
-						maxDate={today}
+				<div className={styles.input}>
+					<Select
+						value={filterValue.entityCode}
+						onChange={(val:string) => onChange(val, 'entityCode')}
+						placeholder="Entity"
+						options={ENTITY_TYPE}
 					/>
 				</div>
 			</div>
 			<DateAndAccount outstandingData={outstandingData} outstandingLoading={outstandingLoading} />
 			<ServiceCard outstandingData={outstandingData} outstandingLoading={outstandingLoading} />
 			<div className={styles.filter_container}>
-				<div style={{ display: 'flex' }}>
-					<div className={styles.input}>
-						<Select
-							value={filterValue.entityCode}
-							onChange={(val:string) => onChange(val, 'entityCode')}
-							placeholder="Entity"
-							options={ENTITY_TYPE}
-							isClearable
-						/>
-					</div>
-
+				<div style={{ display: 'flex', marginBottom: '12px' }}>
 					<div className={styles.input}>
 						<Select
 							value={filterValue.serviceType}
@@ -127,9 +112,7 @@ function Dashboard() {
 			<InvoiceJourney filterValue={filterValue} />
 			<DailySales filterValue={filterValue} />
 			<DailySalesOutstanding
-				monthly={monthly}
 				dailySalesOutstandingData={dailySalesOutstandingData}
-				monthlyLoading={monthlyLoading}
 				dailySalesOutstandingApiLoading={dailySalesOutstandingApiLoading}
 				quaterly={quaterly}
 				quaterlyLoading={quaterlyLoading}

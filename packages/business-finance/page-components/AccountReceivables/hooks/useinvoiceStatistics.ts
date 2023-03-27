@@ -3,7 +3,7 @@ import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 interface FilterInterface {
-	entityType?:string
+	entityCode?:string
 	serviceType?:string
 	companyType?: string
 }
@@ -31,12 +31,12 @@ const useInvoiceStatistics = ({ filters, filterValue, subActiveTab }:ParamsInter
 			try {
 				await journeyTrigger({
 					params: {
-						cogoEntityId : filterValue?.entityType || undefined,
-						month        : filters?.month || undefined,
-						year         : filters?.year || undefined,
-						serviceType  : filterValue?.serviceType || undefined,
-						companyType  : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
-						asOnDate     : format(
+						entityCode  : filterValue?.entityCode || undefined,
+						month       : filters?.month || undefined,
+						year        : filters?.year || undefined,
+						serviceType : filterValue?.serviceType || undefined,
+						companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
+						asOnDate    : format(
 							filters?.date,
 							'yyyy-MM-dd 00:00:00',
 							{},
@@ -50,7 +50,6 @@ const useInvoiceStatistics = ({ filters, filterValue, subActiveTab }:ParamsInter
 			}
 		};
 		getJourneyData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [journeyTrigger, filters, filterValue, subActiveTab]);
 	return {
 		dailyStatsData,

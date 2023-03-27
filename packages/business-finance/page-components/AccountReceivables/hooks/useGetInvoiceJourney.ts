@@ -1,22 +1,18 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 interface FilterInterface {
-	entityType?:string
+	entityCode?:string
 	serviceType?:string
 	companyType?:string
 }
 interface ParamsInterface {
 	filterValue?:FilterInterface
-	date?:DateInterface
+	month?:string
 }
-interface DateInterface {
-	startDate?:Date
-	endDate?:Date
-}
-const useGetInvoiceJourney = ({ date, filterValue }:ParamsInterface) => {
+
+const useGetInvoiceJourney = ({ month, filterValue }:ParamsInterface) => {
 	const [{ data:journeyData, loading:journeyLoading }, journeyTrigger] = useRequestBf(
 		{
 			url     : '/payments/dashboard/invoice-tat-stats',
@@ -30,23 +26,10 @@ const useGetInvoiceJourney = ({ date, filterValue }:ParamsInterface) => {
 			try {
 				await journeyTrigger({
 					params: {
-						cogoEntityId : filterValue.entityType || undefined,
-						serviceType  : filterValue?.serviceType || undefined,
-						companyType  : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
-						startDate    : date?.startDate
-							? format(
-								date?.startDate,
-								'yyyy-MM-dd',
-								{},
-								false,
-							) : undefined,
-						endDate: date?.endDate
-							? format(
-								date?.endDate,
-								'yyyy-MM-dd',
-								{},
-								false,
-							) : undefined,
+						entityCode  : filterValue.entityCode || undefined,
+						serviceType : filterValue?.serviceType || undefined,
+						companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
+						month       : month || undefined,
 
 					},
 				});
@@ -55,8 +38,7 @@ const useGetInvoiceJourney = ({ date, filterValue }:ParamsInterface) => {
 			}
 		};
 		getJourneyData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [journeyTrigger, filterValue.entityType, date, filterValue.serviceType, filterValue.companyType]);
+	}, [journeyTrigger, filterValue.entityCode, filterValue?.serviceType, filterValue.companyType, month]);
 	return {
 		journeyData,
 		journeyLoading,

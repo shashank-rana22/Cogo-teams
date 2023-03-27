@@ -1,15 +1,16 @@
-import { Placeholder, SingleDateRange, Tooltip } from '@cogoport/components';
+import { Placeholder, Tooltip, Select } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import { SALES_FUNNEL_OPTIONS } from '../../../constants';
 import useGetInvoiceJourney from '../../../hooks/useGetInvoiceJourney';
 
 import styles from './styles.module.css';
 
 function InvoiceJourney({ filterValue }) {
-	const [date, setDate] = useState();
+	const [month, setMonth] = useState('');
 
-	const { journeyData, journeyLoading } = useGetInvoiceJourney({ date, filterValue });
+	const { journeyData, journeyLoading } = useGetInvoiceJourney({ month, filterValue });
 
 	const {
 		draftInvoicesCount, financeAcceptedInvoiceCount,
@@ -43,6 +44,10 @@ function InvoiceJourney({ filterValue }) {
 		},
 	];
 
+	const onChange = (val:string) => {
+		setMonth(val);
+	};
+
 	return (
 		<div className={styles.space_between}>
 			<div className={styles.container}>
@@ -59,10 +64,12 @@ function InvoiceJourney({ filterValue }) {
 					</div>
 
 					<div className={styles.date}>
-						<SingleDateRange
-							onChange={(e:any) => setDate(e)}
-							value={date}
-							isPreviousDaysAllowed
+						<Select
+							value={month}
+							onChange={(val:string) => onChange(val)}
+							placeholder="By Month"
+							isClearable
+							options={SALES_FUNNEL_OPTIONS}
 						/>
 					</div>
 
@@ -115,10 +122,12 @@ function InvoiceJourney({ filterValue }) {
 					</div>
 
 					<div className={styles.date}>
-						<SingleDateRange
-							onChange={(e:any) => setDate(e)}
-							value={date}
-							isPreviousDaysAllowed
+						<Select
+							value={month}
+							onChange={(val:string) => onChange(val)}
+							placeholder="By Month"
+							isClearable
+							options={SALES_FUNNEL_OPTIONS}
 						/>
 					</div>
 				</div>
