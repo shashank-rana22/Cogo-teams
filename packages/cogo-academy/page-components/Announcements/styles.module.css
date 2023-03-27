@@ -1,0 +1,13 @@
+.main_container {
+	@media (max-width: 768px) {
+		padding-top: 50px;
+	}
+}
+
+.heading {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 30px;
+	font-size: 20px;
+	font-weight: 600;
+}
