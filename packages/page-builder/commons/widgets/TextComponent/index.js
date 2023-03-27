@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
 import 'react-quill/dist/quill.bubble.css';
-import styles from './styles.module.css';
 
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 
@@ -12,6 +11,8 @@ function TextComponent(props) {
 
 	const [editorValue, setEditorValue] = useState(text);
 	const [isFocused, setIsFocused] = useState(false);
+
+	console.log('is f pi', isFocused);
 
 	const handleEditorChange = (value) => {
 		setEditorValue(value);
@@ -32,12 +33,12 @@ function TextComponent(props) {
 		]);
 	};
 
-	const editorStyle = {
-		border  : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
-		padding : '10px',
-		margin  : '20px',
+	// const editorStyle = {
+	// 	border  : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
+	// 	padding : '10px',
+	// 	margin  : '20px',
 
-	};
+	// };
 
 	const modules = {
 		toolbar: [
