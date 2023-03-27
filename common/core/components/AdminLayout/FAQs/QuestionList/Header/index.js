@@ -21,7 +21,7 @@ function Header({
 		<IcMSearchlight />
 	) : (
 		<IcMCross
-			onClick={() => setSearch('')}
+			onClick={() => { setSearch(''); setQuestion(null); }}
 			style={{ cursor: 'pointer', color: '#000000' }}
 		/>
 	);
@@ -30,6 +30,7 @@ function Header({
 		if (question && topic) {
 			setQuestion(null);
 		} else if (question && !topic) {
+			setQuestion(null);
 			try {
 				const res = await refetch();
 				if (isEmpty(res?.data?.notification_details || [])) {
@@ -38,10 +39,9 @@ function Header({
 			} catch (e) {
 				console.log(e);
 			}
-
-			setQuestion(null);
 		} else {
 			setTopic(null);
+			setQuestion(null);
 			setShowHistory(false);
 			setShowNotificationContent(false);
 		}
@@ -70,7 +70,7 @@ function Header({
 						className="primary lg"
 						placeholder="Search for a question or a topic"
 						value={search}
-						onChange={(e) => setSearch(e)}
+						onChange={(e) => { setSearch(e); setQuestion(null); }}
 						suffix={suffix}
 						style={{ padding: '0 10px' }}
 					/>

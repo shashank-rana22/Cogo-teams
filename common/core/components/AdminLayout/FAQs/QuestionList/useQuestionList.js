@@ -70,12 +70,6 @@ const useQuestionList = ({
 		fetch();
 	}, [fetch, page, query]);
 
-	useEffect(() => {
-		if (search && question) {
-			setQuestion(null);
-		}
-	}, [question, search, setQuestion]);
-
 	const { list = [], ...pageData } = data || {};
 
 	return {
