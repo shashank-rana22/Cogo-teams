@@ -155,11 +155,11 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		// expenseConfigurationId : 'example', only in case of recurring
 		request: {
 			job: {
-				jobSource       : 'OVERHEAD',
-				jobType         : 'EXPENSE',
-				transactionDate : formatDate(transactionDate, 'yyyy-MM-dd', {}, false),
-				referenceId     : '',
-				jobDetails      : {
+				jobSource   : 'OVERHEAD',
+				jobType     : 'EXPENSE',
+				// transactionDate : formatDate(transactionDate, 'yyyy-MM-dd', {}, false),
+				referenceId : '',
+				jobDetails  : {
 					vendorDetails: {
 						organizationId       : vendorID,
 						organizationName     : vendorName,

@@ -147,11 +147,12 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		expenseConfigurationId,
 		request: {
 			job: {
-				jobSource       : 'OVERHEAD',
-				jobType         : 'EXPENSE',
-				referenceId     : '',
-				transactionDate : formatDate(transactionDate, 'yyyy-MM-dd', {}, false),
-				jobDetails      : {
+				jobSource   : 'OVERHEAD',
+				jobType     : 'EXPENSE',
+				referenceId : '',
+				// transactionDate : formatDate(transactionDate, 'yyyy-MM-dd', {}, false),
+
+				jobDetails: {
 					vendorDetails: {
 						organizationId       : vendorID,
 						organizationName     : vendorName,
