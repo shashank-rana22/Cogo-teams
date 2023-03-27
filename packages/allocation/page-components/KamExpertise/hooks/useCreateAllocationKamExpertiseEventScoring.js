@@ -60,8 +60,6 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 
 			onClose();
 
-			refetch();
-
 			Toast.success('Condition Added Successfully');
 
 			expertiseRefetch();
