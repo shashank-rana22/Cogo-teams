@@ -29,6 +29,10 @@ function PaymentTable({ organizationId }: Props) {
 		setPaymentFilters((p) => ({ ...p, [name]: val }));
 	};
 
+	const onChangeStatus = (val:string[], name:string) => {
+		setPaymentFilters((p) => ({ ...p, [name]: val }));
+	};
+
 	const sortStyleAsc = orderBy.sortType === 'Asc' ? '#303B67' : '#BDBDBD';
 
 	const sortStyleDesc = orderBy.sortType === 'Desc' ? '#303B67' : '#BDBDBD';
@@ -39,7 +43,7 @@ function PaymentTable({ organizationId }: Props) {
 				<MultiSelect
 					placeholder="Select Status"
 					value={paymentFilters.statusList}
-					onChange={(val:string) => onChange(val, 'statusList')}
+					onChange={(val:string[]) => onChangeStatus(val, 'statusList')}
 					options={UTILIZATION_STATUS}
 					style={{ width: 200, marginRight: '16px' }}
 				/>
