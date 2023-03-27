@@ -1,5 +1,5 @@
-const useGetControls = (filterArr) => {
-// const useGetControls = ({ name = 'manager' }) => {
+// const useGetControls = (filterArr) => {
+const useGetControls = ({ name = 'manager' }) => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
 
@@ -58,18 +58,36 @@ const useGetControls = (filterArr) => {
 				{ label: `${year - 2}`, value: year - 2 },
 			],
 		},
+		{
+			name        : 'status',
+			lable       : 'Status',
+			placeholder : 'Decision',
+			type        : 'select',
+			isClearable : true,
+			style       : { marginLeft: '1px', marginRight: '1px' },
+			options     : [
+				{ label: 'PIP', value: 'pip' },
+				{ label: 'Probation', value: 'probation' },
+			],
+		},
+		{
+			name                  : 'date_range',
+			label                 : 'Select Date',
+			type                  : 'dateRangePicker',
+			isPreviousDaysAllowed : true,
+		},
 	];
 
-	// return control.find((cntrl) => cntrl.name === name);
+	return control.find((cntrl) => cntrl.name === name);
 
-	const newControls = [];
+	// const newControls = [];
 
-	filterArr.forEach((name) => {
-		const updatedControl = control.find((ctrl) => ctrl.name === name);
-		newControls.push(updatedControl);
-	});
+	// filterArr.forEach((name) => {
+	// 	const updatedControl = control.find((ctrl) => ctrl.name === name);
+	// 	newControls.push(updatedControl);
+	// });
 
-	return newControls;
+	// return newControls;
 };
 
 export default useGetControls;

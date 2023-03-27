@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import useGetColumns from '../../../../../common/Columns';
+import Filters from '../../../../../common/Filters';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
 import useListEmployeesLog from '../../../../../hooks/useListEmployeesLog';
@@ -50,14 +51,14 @@ function Dashboard({
 	const {
 		employeeData,
 		loading,
-		// params,
+		params,
 		setParams,
 		setPage,
 	} = useListEmployeesLog();
 
 	useEffect(() => {
 		setParams({ ...setParams, IsReviewed: true });
-	});
+	}, [setParams]);
 
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;
@@ -80,7 +81,14 @@ function Dashboard({
 
 			<div>
 				<div className={styles.heading}>PIP &amp; Probation List</div>
-				<div className={styles.filters}>Filters</div>
+				<div className={styles.filters}>
+					<Filters
+						params={params}
+						setParams={setParams}
+						source="hr_pip_dashboard"
+					/>
+
+				</div>
 				<UserTableData
 					columns={columns}
 					list={list}

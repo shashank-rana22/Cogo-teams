@@ -4,6 +4,7 @@ import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import getDepartmentControls from '../../hooks/useGetDepartmentControls';
+import useListReassignControls from '../../page-components/HRDashboard/OrganizationTree/UserCard/EnlargedCard/ReassignManager/list-reassign-manager-controls';
 import useGetControls from '../../utils/filterControls';
 import getMonthControls from '../../utils/monthControls';
 import { getFieldController } from '../Form/getFieldController';
@@ -12,19 +13,26 @@ import styles from './styles.module.css';
 
 function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	const { Department = '', Designation = '' } = params;
-	// const [managerName, setManagerName] = useState('');
+	const [managerName, setManagerName] = useState('');
+	const [managerId, setManagerId] = useState('');
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const departmentDesignationControls = getDepartmentControls({ Department, Designation });
 
-	// const managerControls = useGetControls({ name: 'manager_name' });
-	const managerControls = useGetControls(['manager_name']);
+	const managerControls = useGetControls({ name: 'manager_name' });
+	// const managerControls = useGetControls(array);
 
 	const monthControls = getMonthControls(params.Year, params.Month);
 
 	const { watch, control } = useForm();
-	const { department, designation, manager_name } = watch();
+	const { department, designation, manager_name, status } = watch();
+
+	const manager = watch('manager_id');
+
+	const cogoUsersControl = useListReassignControls();
+
+	useEffect(() => setManagerId(manager), [manager]);
 
 	const setFilter = (val, type) => {
 		setParams({ ...params, [type]: val, Page: 1 });
@@ -36,10 +44,13 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 			Q           : query || undefined,
 			Department  : department || undefined,
 			Designation : designation || undefined,
+			LogType     : status || undefined,
 			Page        : 1,
+			ManagerID   : managerId,
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query, department, designation]);
+	}, [query, department, designation, status, managerId]);
+
+	console.log('params:;', params);
 
 	useEffect(() => {
 		debounceQuery(manager_name);
@@ -57,31 +68,42 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 				/>
 			))}
 
-			{source === 'hr_dashboard' && (
-				// <Input
-				// 	{...managerControls}
-				// 	onChange={setManagerName}
-				// 	style={{ marginRight: '8px' }}
-				// />
-				managerControls.map((cntrl) => {
-					const Element = getFieldController(cntrl.type) || null;
-
-					if (!Element) return null;
-
-					return (
-
-						<Element
-							{...cntrl}
-							control={control}
-							key={cntrl.name}
-							id={`${cntrl.name}_input`}
-							style={{ marginRight: '8px' }}
-						/>
-					);
-				})
+			{source === 'hr_pip_dashboard' && (
+				<div className={styles.name_input}>
+					<SelectController
+						{...cogoUsersControl}
+						control={control}
+						isClearable
+					/>
+				</div>
 			)}
 
-			{monthControls.map((cntrl) => {
+			{source === 'hr_kpi_dashboard' && (
+				<Input
+					{...managerControls}
+					onChange={setManagerName}
+					style={{ marginRight: '8px' }}
+				/>
+				// managerControls.map((cntrl) => {
+				// 	const Element = getFieldController(cntrl.type) || null;
+				// 	const value = startCase(cntrl.name);
+
+			// 	if (!Element) return null;
+
+			// 	return (
+
+			// 		<Element
+			// 			{...cntrl}
+			// 			control={control}
+			// 			key={cntrl.name}
+			// 			id={`${cntrl.name}_input`}
+			// 			style={{ marginRight: '8px' }}
+			// 		/>
+			// 	);
+			// })
+			)}
+
+			{source !== 'hr_pip_dashboard' && monthControls.map((cntrl) => {
 				const value = startCase(cntrl.name);
 				if (['year', 'month'].includes(cntrl.name)) {
 					return (

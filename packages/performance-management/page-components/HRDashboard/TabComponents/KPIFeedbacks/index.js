@@ -37,7 +37,7 @@ function KPIFeedbacks() {
 					<Filters
 						setParams={setParams}
 						params={params}
-						source="hr_dashboard"
+						source="hr_kpi_dashboard"
 					/>
 				</div>
 
