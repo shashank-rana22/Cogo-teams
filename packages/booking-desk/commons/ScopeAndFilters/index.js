@@ -2,8 +2,8 @@ import { Popover, Select, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select';
 
-import CONTROLS from '../../../config/CONTROLS_CONFIG.json';
-import handleShipmentTypeChange from '../../../helpers/handleShipmentTypeChange';
+import CONTROLS from '../../config/CONTROLS_CONFIG.json';
+import handleShipmentTypeChange from '../../helpers/handleShipmentTypeChange';
 
 import styles from './styles.module.css';
 

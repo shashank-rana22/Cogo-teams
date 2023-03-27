@@ -1,13 +1,14 @@
 import Loader from '../../commons/Loader';
-import useListBookingDeskShipments from '../../hooks/FCL/useListBookingDeskShipments';
+import ScopeAndFilters from '../../commons/ScopeAndFilters';
+import TabsAndFilters from '../../commons/TabsAndFilters';
+import { fcl_freight as tabs } from '../../config/TABS_CONFIG.json';
+import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments';
 
 import List from './List';
-import ScopeAndFilters from './ScopeAndFilters';
 import styles from './styles.module.css';
-import TabsAndFilters from './TabsAndFilters';
 
 export default function FCLDesk({ stateProps = {} }) {
-	const { loading, data } = useListBookingDeskShipments({ stateProps });
+	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'fcl_freight' });
 
 	return (
 		<div>
@@ -17,7 +18,7 @@ export default function FCLDesk({ stateProps = {} }) {
 				<ScopeAndFilters stateProps={stateProps} />
 			</div>
 
-			<TabsAndFilters stateProps={stateProps} />
+			<TabsAndFilters stateProps={stateProps} tabs={tabs} />
 
 			<div className={`${styles.list_container} ${loading ? styles.loading : ''}`}>
 				{loading ? <Loader /> : <List data={data} stateProps={stateProps} />}

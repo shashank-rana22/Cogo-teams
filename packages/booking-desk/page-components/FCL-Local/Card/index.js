@@ -1,7 +1,8 @@
-import CardHeader from './CardHeader';
+import CardHeader from '../../../commons/Card/CardHeader';
+import PortDetails from '../../../commons/Card/PortDetails/SingleLocation';
+import ShipmentInfo from '../../../commons/Card/ShipmentInfo';
+
 import CargoDetails from './CargoDetails';
-import PortDetails from './PortDetails';
-import ShipmentInfo from './ShipmentInfo';
 import { card, card_body, card_footer, separator } from './styles.module.css';
 
 export default function Card({ item = {} }) {
