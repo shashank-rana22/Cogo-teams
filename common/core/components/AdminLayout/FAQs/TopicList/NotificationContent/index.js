@@ -27,7 +27,7 @@ function NotificationContent({
 		}
 	}, [fetchFaqNotification, question?.id]);
 
-	if (faqNotificationApiLoading) return <Loader />;
+	if (faqNotificationApiLoading) return <div className={styles.loader_wrapper}><Loader /></div>;
 
 	const filteredObject = {};
 

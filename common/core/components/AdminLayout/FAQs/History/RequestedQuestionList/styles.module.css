@@ -20,14 +20,13 @@
 		box-shadow: 0 0 8px #627fac33;
 		background-color:  #986f24;
 	}
-	:global{
+	/* :global{
 		.css-rzuqqd:hover {
 			box-shadow: 0 0 8px #627fac33;
 			background: #f8f2e7;
-		}
+		} */
 		
-		
-	}
+	
 }
 
 .pills_question_wrapper{
@@ -47,7 +46,6 @@
     color: #828282;
 	font-size: 12px;
 	line-height: 150%;
-	padding: 0px 12px;
 }
 
 .pills_wrapper{

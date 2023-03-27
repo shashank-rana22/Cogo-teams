@@ -1,9 +1,10 @@
 .header{
-    color: #4f4f4f;
-	font-weight: 500;
-	font-size: 15px;
+	color: #4f4f4f;
+	font-weight: 600;
+	font-size: 14px;
 	line-height: 150%;
-	padding: 20px 10px 10px 10px;
+	padding: 4px 10px;
+	margin-top: 16px;
 }
 
 .question_time_container{
@@ -19,17 +20,17 @@
 
 .question_wrapper{
     color: #4f4f4f;
-	font-size: 13px;
-	line-height: 150%;
 	cursor: pointer;
 	max-width: 310px;
+	font-size: 13px;
+	line-height: 150%;
+	opacity: 0.8;
 }
 
 .time_wrapper{
     color: #828282;
 	font-size: 11px;
 	line-height: 150%;
-	padding: 0px 12px;
 	display: flex;
 	align-items: center;
 }
@@ -46,5 +47,5 @@
 .empty_state_wrapper{
     font-size: 14px;
 	text-align: center;
-	padding-top: 10px;
+	padding-top: 16px;
 }
