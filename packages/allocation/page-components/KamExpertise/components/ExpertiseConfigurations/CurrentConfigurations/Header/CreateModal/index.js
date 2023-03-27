@@ -4,10 +4,11 @@ import styles from './styles.module.css';
 
 function CreateModal({ setMode, data }) {
 	const drafts = data.filter((item) => item.status_value === 'draft');
-	const isDraft = drafts.length;
+
 	return (
 		<div className={styles.modal_container}>
 			<div className={styles.head_text}>
+
 				Please choose your preferred method for creating a new verison:
 			</div>
 			<div className={styles.button_container} style={{ display: 'flex', justifyContent: 'center' }}>
@@ -18,19 +19,20 @@ function CreateModal({ setMode, data }) {
 				>
 					a. Start from scratch (empty version)
 				</div>
+				{data.length ? (
+					<div
+						role="presentation"
+						onClick={() => {
+							setMode('choose_published_version');
+						}}
+						className={styles.button}
+					>
+						b. Choose from published versions
 
-				<div
-					role="presentation"
-					onClick={() => {
-						setMode('choose_published_version');
-						// setSelectedVersion('');
-					}}
-					className={styles.button}
-				>
-					b. Choose from published versions
+					</div>
+				) : (null)}
 
-				</div>
-				{isDraft ? (
+				{drafts.length ? (
 					<div
 						role="presentation"
 						onClick={() => { setMode('saved-draft'); }}
