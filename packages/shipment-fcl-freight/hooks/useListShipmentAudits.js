@@ -41,7 +41,7 @@ const useListShipmentAudits = ({ defaultFilters = {} }) => {
 		apiTrigger,
 		setFilters,
 		loading,
-		data    : apiData,
+		data: apiData,
 	};
 };
 

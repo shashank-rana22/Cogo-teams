@@ -27,7 +27,7 @@ const useListStakeholders = ({ defaultParams = {}, shipment_id = '' }) => {
 				}
 			}
 		)();
-	}, [shipment_id, defaultParams, trigger]);
+	}, [shipment_id, JSON.stringify(defaultParams), trigger]);
 
 	useEffect(() => {
 		apiTrigger();
