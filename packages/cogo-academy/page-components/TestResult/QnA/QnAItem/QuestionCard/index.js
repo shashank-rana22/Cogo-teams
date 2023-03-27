@@ -1,4 +1,4 @@
-import { Popover, ProgressBar } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
