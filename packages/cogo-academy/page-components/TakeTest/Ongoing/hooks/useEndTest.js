@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useEndTest = ({ setActiveState = () => {} }) => {
+const useEndTest = ({ setActiveState = () => {}, setShowTimeOverModal }) => {
 	const {
 		general: { query: { test_id } },
 		profile: { user: { id: user_id } },
@@ -25,9 +25,12 @@ const useEndTest = ({ setActiveState = () => {} }) => {
 			localStorage.removeItem(`current_question_${test_id}_${user_id}`);
 			localStorage.removeItem('visibilityChangeCount');
 
+			setShowTimeOverModal(false);
 			setActiveState('completed');
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			if (error.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
 	};
 

@@ -90,6 +90,7 @@ function Ongoing({ testData, page, setActiveState }) {
 				showTimeOverModal={showTimeOverModal}
 				setShowTimeOverModal={setShowTimeOverModal}
 				data={data}
+				setActiveState={setActiveState}
 			/>
 		);
 	}

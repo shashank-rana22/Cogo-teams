@@ -18,7 +18,7 @@ function BulkUpload({
 	const {
 		loading,
 		bulkCreateStandAloneQuestion,
-	} = useBulkCreateStandAloneQuestion();
+	} = useBulkCreateStandAloneQuestion({ setShowBulkUpload });
 
 	const onSubmit = () => {
 		if (isEmpty(uploadDocument)) {
