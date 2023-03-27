@@ -4,6 +4,7 @@
 	justify-content: center;
 	width: 40px;
 	height: 40px;
+	padding: 0 0 6px 2px;
 	margin-left: 12px;
 	cursor: pointer;
 	border-radius: 50%;
@@ -19,6 +20,10 @@
 
 .disabled_button {
 	cursor: not-allowed;
+
+	svg {
+		fill: #f8aea8;
+	}
 }
 
 .title {

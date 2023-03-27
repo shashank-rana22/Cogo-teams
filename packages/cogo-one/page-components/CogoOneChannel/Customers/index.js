@@ -211,7 +211,7 @@ function Customers({
 							<div className={`${styles.action} ${styles.mail_icon}`}>
 								<img
 									onClick={() => setShowMailModal(true)}
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_speedial.svg"
+									src="https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg"
 									alt="gmail icon"
 									role="presentation"
 								/>
