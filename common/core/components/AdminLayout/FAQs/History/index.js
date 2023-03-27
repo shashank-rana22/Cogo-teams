@@ -1,6 +1,5 @@
 import { Input, Tabs, TabPanel } from '@cogoport/components';
 import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import Answer from '../QuestionList/Answer';
@@ -79,19 +78,16 @@ function History({
 
 				>
 
-					{!isEmpty(searchHistoryList)
-					&& (
-						<div className={styles.input_container}>
+					<div className={styles.input_container}>
 
-							<Input
-								className="primary lg"
-								placeholder="Search within history"
-								value={searchHistory}
-								onChange={(e) => setSearchHistory(e)}
-								suffix={suffix}
-							/>
-						</div>
-					)}
+						<Input
+							className="primary lg"
+							placeholder="Search within history"
+							value={searchHistory}
+							onChange={(e) => setSearchHistory(e)}
+							suffix={suffix}
+						/>
+					</div>
 
 					<SearchHistoryList
 						setShowHistory={setShowHistory}

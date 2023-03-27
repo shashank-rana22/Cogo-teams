@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useMemo } from 'react';
@@ -25,7 +24,7 @@ const useGetUserRequestedFaqs = () => {
 		try {
 			await trigger({ params });
 		} catch (e) {
-			Toast.error(e.message);
+			console.log(e);
 		}
 	}, [params, trigger]);
 

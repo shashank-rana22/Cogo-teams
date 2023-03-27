@@ -5,7 +5,7 @@
 	font-weight: 600;
 	font-size: 14px;
 	line-height: 150%;
-	padding: 4px 10px;
+	padding: 4px 16px;
 	margin-top: 16px;
 }
 
@@ -18,7 +18,7 @@
 
 	&:hover {
 		box-shadow: 0 0 8px #627fac33;
-		background-color:  #986f24;
+		background-color:  #f8f2e7 !important;
 	}
 	
 }
