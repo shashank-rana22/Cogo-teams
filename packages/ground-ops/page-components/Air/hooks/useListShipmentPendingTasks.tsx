@@ -27,9 +27,10 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {} }) => 
 				approval_pending: {
 					assignedStakeholder : 'service_ops2_docs',
 					status              : 'pending',
-					task                : ['approve_draft_airway_bill', 'amend_draft_airway_bill'],
-					documentType        : 'draft_airway_bill',
-					isDocDataRequired   : true,
+					task                : ['approve_draft_airway_bill', 'amend_draft_airway_bill',
+						'approve_draft_house_airway_bill', 'amend_draft_house_airway_bill'],
+					documentType      : ['draft_airway_bill', 'draft_house_airway_bill'],
+					isDocDataRequired : true,
 				},
 				approved_awb: {
 					assignedStakeholder : 'service_ops2_docs',

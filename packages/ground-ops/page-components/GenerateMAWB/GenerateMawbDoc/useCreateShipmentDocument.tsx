@@ -6,7 +6,9 @@ interface Props {
 	setGenerate?:Function;
 	setEdit?:Function;
 	activeCategory?: String;
+	hawbDetails?; any;
 	setHawbDetails?: Function;
+	setActiveHawb?: Function;
 }
 
 const useCreateShipmentDocument = ({
@@ -14,7 +16,9 @@ const useCreateShipmentDocument = ({
 	setGenerate = () => {},
 	setEdit = () => {},
 	activeCategory = '',
+	hawbDetails,
 	setHawbDetails = () => {},
+	setActiveHawb = () => {},
 }:Props) => {
 	let api = 'create_shipment_document';
 	if (edit) api = 'update_shipment_document';
@@ -34,7 +38,8 @@ const useCreateShipmentDocument = ({
 					setGenerate(false);
 					setEdit(false);
 				} else {
-					setHawbDetails({ id: new Date().getTime(), isNew: true });
+					setHawbDetails([...hawbDetails, { id: new Date().getTime(), isNew: true }]);
+					setActiveHawb(hawbDetails[hawbDetails.length - 1].id);
 				}
 			});
 		} catch (error) {

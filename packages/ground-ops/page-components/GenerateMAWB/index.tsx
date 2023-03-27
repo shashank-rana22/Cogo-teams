@@ -50,6 +50,8 @@ function GenerateMAWB({
 		{ id: new Date().getTime(), isNew: true },
 	]);
 
+	const [activeHawb, setActiveHawb] = useState(hawbDetails[0].id);
+
 	const fields = mawbControls(disableClass);
 
 	const { packingData, packingList } = usePackingList();
@@ -98,7 +100,7 @@ function GenerateMAWB({
 			setValue(c.name, taskItem[c.name]);
 		});
 		if (!viewDoc) {
-			setValue('executedDate', new Date());
+			setValue('executedDate', edit ? taskItem.executedDate : new Date());
 			setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
 			setValue('city', 'NEW DELHI');
 			setValue('place', 'NEW DELHI');
@@ -168,6 +170,8 @@ function GenerateMAWB({
 					activeCategory={activeCategory}
 					hawbDetails={hawbDetails}
 					setHawbDetails={setHawbDetails}
+					activeHawb={activeHawb}
+					setActiveHawb={setActiveHawb}
 				/>
 			)}
 
@@ -192,7 +196,10 @@ function GenerateMAWB({
 								chargeableWeight={chargeableWeight}
 								setGenerate={setGenerate}
 								activeCategory={activeCategory}
+								hawbDetails={hawbDetails}
 								setHawbDetails={setHawbDetails}
+								activeHawb={activeHawb}
+								setActiveHawb={setActiveHawb}
 							/>
 						</Modal.Body>
 

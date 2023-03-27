@@ -30,6 +30,7 @@ interface Props {
 	chargeableWeight?:number;
 	setGenerate?:Function;
 	activeCategory?: String;
+	hawbDetails?: any;
 	setHawbDetails?:Function;
 }
 
@@ -67,7 +68,10 @@ function GenerateMawb({
 	chargeableWeight,
 	setGenerate = () => {},
 	activeCategory = '',
+	hawbDetails,
 	setHawbDetails = () => {},
+	activeHawb,
+	setActiveHawb,
 }:Props) {
 	const filteredData = { ...formData };
 
@@ -79,7 +83,9 @@ function GenerateMawb({
 		setGenerate,
 		setEdit,
 		activeCategory,
+		hawbDetails,
 		setHawbDetails,
+		setActiveHawb,
 	});
 
 	const ref = createRef(null);

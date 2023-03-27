@@ -20,13 +20,12 @@ const options = [
 
 function FormContainer({
 	back, setBack, edit, setEdit, packingData, fields,
-	control, errors, item, setGenerate, handleSubmit, activeCategory, hawbDetails, setHawbDetails,
+	control, errors, item, setGenerate, handleSubmit, activeCategory, hawbDetails,
+	setHawbDetails, activeHawb, setActiveHawb,
 }) {
 	const [activeKey, setActiveKey] = useState('basic');
 
 	const [value, onChange] = useState('manual');
-
-	const [activeHawb, setActiveHawb] = useState(hawbDetails[0].id);
 
 	const handleDocumentList = (type) => {
 		(packingData?.list || []).forEach((itm) => {
