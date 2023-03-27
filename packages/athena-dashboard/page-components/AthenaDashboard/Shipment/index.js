@@ -90,7 +90,7 @@ function Shipment() {
 				page       : x,
 				page_limit : 100,
 				sort_type  : 'desc',
-				sort_by    : 'shipment_date',
+				sort_by    : 'shipment_record_id',
 				filters    : {
 					hs_code             : searchValue || undefined,
 					// origin_country      : !isEmpty(countryName) ? countryName : undefined,
@@ -105,7 +105,7 @@ function Shipment() {
 				start_date               : start_date || 'NaN-NaN-NaN',
 				end_date                 : end_date || 'NaN-NaN-NaN',
 				// total                    : localStorage.getItem('total') || 0,
-				pagination_data_required : true,
+				pagination_data_required : false,
 			},
 		});
 	};
@@ -505,13 +505,13 @@ function Shipment() {
 								columns={columns}
 								data={data}
 							/>
-							<Pagination
+							{/* <Pagination
 								type="number"
 								currentPage={responseData.page}
 								totalItems={responseData.total}
 								pageSize={100}
 								onPageChange={onPageChange}
-							/>
+							/> */}
 						</div>
 					) : (
 						<div>
