@@ -27,7 +27,7 @@ const getControls = () => [
 		rules       : {
 			required : 'This is required',
 			min      : {
-				value   : 0,
+				value   : 1,
 				message : 'Should be greater than 0',
 			},
 		},
@@ -40,8 +40,12 @@ const getControls = () => [
 		rules       : {
 			required : 'This is required',
 			min      : {
-				value   : 0,
-				message : 'Should be greater than 0',
+				value   : 1,
+				message : 'Invalid',
+			},
+			max: {
+				value   : 100,
+				message : 'Invalid',
 			},
 		},
 	},
