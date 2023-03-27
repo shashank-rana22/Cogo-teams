@@ -81,23 +81,17 @@ function Compose({
 
 	const suffix = (
 		<div className={styles.row}>
-			<div className={styles.text}> Add : </div>
-			<div
-				className={styles.suffix_button}
-				role="button"
-				tabIndex={0}
-				onClick={() => setIsCC(!isCC)}
-			>
-				cc
-			</div>
-			<div
-				className={styles.suffix_button}
-				role="button"
-				tabIndex={0}
-				onClick={() => setIsBcc(!isBcc)}
-			>
-				bcc
-			</div>
+			{!isBcc
+			&& (
+				<div
+					className={styles.suffix_button}
+					role="button"
+					tabIndex={0}
+					onClick={() => setIsBcc(!isBcc)}
+				>
+					Bcc
+				</div>
+			)}
 		</div>
 	);
 
@@ -111,30 +105,30 @@ function Compose({
 		}
 	};
 
-	const handleDelete = (item) => {
-		const tempUserEmailArray = userEmailArray;
-		tempUserEmailArray.forEach((ele, idx) => {
-			if (ele === item) {
-				userEmailArray.splice(idx, 1);
-			}
-		});
-		setValue('toUserEmail', '');
-		setUserEmailArray(tempUserEmailArray);
-	};
+	// const handleDelete = (item) => {
+	// 	const tempUserEmailArray = userEmailArray;
+	// 	tempUserEmailArray.forEach((ele, idx) => {
+	// 		if (ele === item) {
+	// 			userEmailArray.splice(idx, 1);
+	// 		}
+	// 	});
+	// 	setValue('toUserEmail', '');
+	// 	setUserEmailArray(tempUserEmailArray);
+	// };
 
-	const renderValue = () => userEmailArray.map((item) => (
-		<div style={{ display: 'flex' }}>
-			<div className={styles.value}>{item}</div>
-			<div
-				className={styles.cancel}
-				role="button"
-				tabIndex={0}
-				onClick={() => handleDelete(item)}
-			>
-				x
-			</div>
-		</div>
-	));
+	// const renderValue = () => userEmailArray.map((item) => (
+	// 	<div style={{ display: 'flex' }}>
+	// 		<div className={styles.value}>{item}</div>
+	// 		<div
+	// 			className={styles.cancel}
+	// 			role="button"
+	// 			tabIndex={0}
+	// 			onClick={() => handleDelete(item)}
+	// 		>
+	// 			x
+	// 		</div>
+	// 	</div>
+	// ));
 
 	return (
 		<div className={styles.container}>
@@ -154,7 +148,10 @@ function Compose({
 						suffix={suffix}
 						name="toUserEmail"
 						onKeyDown={(e) => handleClick(e)}
-						renderValue={renderValue}
+						emailValue={userEmailArray}
+						setEmailValue={setUserEmailArray}
+						setValue={setValue}
+						// renderValue={renderValue}
 						control={control}
 						placeholder="type here..."
 						key={JSON.stringify(userEmailArray)}
@@ -170,29 +167,31 @@ function Compose({
 					) : null}
 				</div>
 
-				{isCC ? (
+				<div>
 					<InputParam
 						prefix="Cc :"
 						name="ccrecipients"
 						control={control}
-						placeholder="put comma (,) seperated multiple emails"
+						placeholder="Type here..."
 					/>
-				) : null}
-				{errors?.ccrecipients ? (
-					<div className={styles.error}>
-						{handleError(
-							{ rules: { required: 'Emails are required' }, error: errors?.ccrecipients },
-							true,
-						)}
-					</div>
-				) : null}
+
+					{errors?.ccrecipients ? (
+						<div className={styles.error}>
+							{handleError(
+								{ rules: { required: 'Emails are required' }, error: errors?.ccrecipients },
+								true,
+							)}
+						</div>
+					) : null}
+				</div>
+
 				{isBcc
 					? (
-						<InputController
+						<InputParam
 							prefix="Bcc :"
 							name="bccrecipients"
 							control={control}
-							placeholder="put comma (,) seperated multiple emails"
+							placeholder="Type here..."
 						/>
 					)
 					: null}
