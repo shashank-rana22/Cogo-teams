@@ -33,7 +33,7 @@ export default function TabsAndFilters({ stateProps }) {
 					<Toggle
 						size="md"
 						offLabel="Critical SIDs"
-						value={isCriticalOn}
+						checked={isCriticalOn}
 						onChange={() => setFilters({ ...filters, isCriticalOn: !isCriticalOn, page: 1 })}
 					/>
 				) : null}
