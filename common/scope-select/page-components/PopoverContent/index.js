@@ -1,19 +1,21 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { AsyncSelectController, useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
+// export default function PopoverContent({ scope, viewType, onClose, onApply, scopeData, size, showChooseAgent }) {
 export default function PopoverContent({ scope, viewType, onClose, onApply, scopeData, size }) {
-	const { scopes, viewTypes, defaultScope, defaultView } = scopeData;
+	const showChooseAgent = false;
+	const { scopes, viewTypes, defaultScope, defaultView, selected_agent_id } = scopeData;
 
-	const defaultValues = { scope: scope || defaultScope };
+	const defaultValues = { scope: scope || defaultScope, ...(showChooseAgent && { selected_agent_id }) };
 
 	const validViewTypes = viewTypes[defaultValues.scope] || [];
 	defaultValues.viewType = validViewTypes.includes(viewType) ? viewType : defaultView;
 
-	const { watch, setValue, handleSubmit } = useForm({ defaultValues });
+	const { control, watch, setValue, handleSubmit } = useForm({ defaultValues });
 
 	const { scope: selectedScope, viewType: selectedViewType } = watch();
 
@@ -23,6 +25,7 @@ export default function PopoverContent({ scope, viewType, onClose, onApply, scop
 
 	useEffect(() => {
 		setValue('viewType', (viewTypes[selectedScope] || [])[0]);
+		// setValue('selected_agent_id', '');
 	}, [selectedScope, viewTypes, setValue]);
 
 	const isScopesPresent = scopes.length > 0;
@@ -84,6 +87,20 @@ export default function PopoverContent({ scope, viewType, onClose, onApply, scop
 							</Button>
 						))}
 					</div>
+				</>
+			) : null }
+
+			{showChooseAgent ? (
+				<>
+					<p className={styles.field_label}>Choose Agent</p>
+					<AsyncSelectController
+						name="selected_agent_id"
+						control={control}
+						size={size}
+						asyncKey="partner_users"
+						initialCall={false}
+						isClearable
+					/>
 				</>
 			) : null }
 		</div>

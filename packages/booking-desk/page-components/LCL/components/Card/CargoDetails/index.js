@@ -1,4 +1,4 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Pill } from '@cogoport/components';
 import { startCase, upperCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -57,15 +57,13 @@ const renderValue = (label, value) => {
 };
 
 const renderCargoPills = (cargo_detail) => (
-	<div>
-		{labels.map((label) => (cargo_detail[label]
-			? (
-				<span className={styles.cargo_value_box} key={label}>
-					{renderValue(label, cargo_detail[label])}
-				</span>
-			)
-			: null))}
-	</div>
+	labels.map((label) => (cargo_detail[label]
+		? (
+			<Pill size="sm" key={label}>
+				{renderValue(label, cargo_detail[label])}
+			</Pill>
+		)
+		: null))
 );
 
 export default function CargoDetails({ cargo_details }) {
@@ -78,17 +76,20 @@ export default function CargoDetails({ cargo_details }) {
 			{restCargoDetails.length > 0 ? (
 				<Tooltip
 					content={(
-						<div className={styles.multipleCargoDetails}>
-							{restCargoDetails.map((cargo_detail) => renderCargoPills(cargo_detail))}
+						<div>
+							{restCargoDetails.map((cargo_detail) => <div>{renderCargoPills(cargo_detail)}</div>)}
 						</div>
 					)}
+					className="multiple-cargo"
 					interactive
 				>
-					+
-					{restCargoDetails.length}
-					{' '}
-					Detail
-					{restCargoDetails.length > 1 ? 's' : ''}
+					<div className={styles.more_details}>
+						+
+						{restCargoDetails.length}
+						{' '}
+						Detail
+						{restCargoDetails.length > 1 ? 's' : ''}
+					</div>
 				</Tooltip>
 			) : null}
 		</div>

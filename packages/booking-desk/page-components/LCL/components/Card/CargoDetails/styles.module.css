@@ -1,40 +1,19 @@
 .cargo_details_container{
 	display: flex;
 	flex-wrap: wrap;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: flex-start;
 	width: 30%;
 	padding: 0 10px;
+
+	:global {
+		.tippy-box.multiple-cargo {
+			max-width: initial !important;
+		}
+	}
 }
 
-.cargo_detail_pill {
-	color: #4f4f4f;
-	font-weight: 500;
-	text-transform: capitalize;
-	height: fit-content;
-}
-
-.shipment_cargo_details_root {
-	justify-content: start;
-} 
-
-.multi_service {
-	display: flex;
-	flex-wrap: wrap;
-	white-space: nowrap;
-	overflow-x: auto;
-}
-
-.more_details_popover_text{
+.more_details {
 	color: #F68B21;
-}
-
-.cargo_value_box {
-	background-color: var(--color-secondary-greyscale-5);
-	color: var(--color-secondary-greyscale-2);
 	font-size: var(--font-size-sm);
-	font-weight: 600;
-	border-radius: 4px;
-	margin: 0 2px 2px 0;
-	padding: 0 2px;
 }

@@ -50,14 +50,6 @@
         background: var(--color-secondary-greyscale-5);
         align-self: stretch;
     }
-    
-    :global {
-        .service-info-icon-container {
-            svg > path {
-                fill: var(--color-primary-error-red-2);
-            }
-        }
-    }
 }
 
 .card_footer {

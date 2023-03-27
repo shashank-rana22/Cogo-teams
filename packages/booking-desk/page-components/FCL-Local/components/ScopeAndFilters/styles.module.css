@@ -1,3 +1,8 @@
+.container {
+    display: flex;
+    gap: 10px;
+}
+
 .filter_text {
     display: flex;
     align-items: center;
@@ -6,6 +11,7 @@
     padding: 4px;
     border-radius: 4px;
     cursor: pointer;
+
 
     svg {
         margin-right: 6px;    

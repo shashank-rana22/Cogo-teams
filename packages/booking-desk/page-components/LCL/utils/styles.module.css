@@ -10,7 +10,7 @@
 		height: 28px;
 
 		path {
-			fill: var(--color-primary-error-red-2);
+			fill: var(--color-primary-error-red-3);
 		}
 	}
 }
@@ -18,7 +18,7 @@
 .icon_text {
 	font-size: 10px;
 	font-weight: 500;
-	color: var(--color-primary-error-red-2);
+	color: var(--color-primary-error-red-3);
 	letter-spacing: 0;
 	white-space: nowrap;
 }

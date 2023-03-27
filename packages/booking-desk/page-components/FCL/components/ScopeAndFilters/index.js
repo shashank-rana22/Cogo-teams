@@ -1,30 +1,33 @@
 import { Popover, Select, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
+import ScopeSelect from '@cogoport/scope-select';
 
-import ScopeSelect from '../../../../commons/ScopeSelect';
 import CONTROLS from '../../../../config/CONTROLS_CONFIG.json';
+import handleShipmentTypeChange from '../../helpers/handleShipmentTypeChange';
 
 import styles from './styles.module.css';
 
-function PopoverContent({ filters, setFilters }) {
+function PopoverContent({ stateProps }) {
+	const { filters, setFilters } = stateProps;
 	const { shipment_type, trade_type } = filters;
 
-	const handleFilterChange = (key, val) => {
-		setFilters({ ...filters, [key]: val, page: 1 });
+	const handleTradeTypeChange = (val) => {
+		setFilters({ ...filters, trade_type: val, page: 1 });
 	};
 
 	return (
 		<div className={styles.popover_content}>
 			<Select
-				onChange={(val) => handleFilterChange('shipment_type', val)}
+				onChange={(newShipmentType) => handleShipmentTypeChange({ stateProps, newShipmentType })}
 				options={CONTROLS.shipment_types}
 				value={shipment_type}
 			/>
+
 			<div className={styles.trade_type_container}>
 				{CONTROLS.trade_types.map(({ label, value }) => (
 					<Button
 						className={trade_type === value ? styles.active : styles.inactive}
-						onClick={() => handleFilterChange('trade_type', value)}
+						onClick={() => handleTradeTypeChange(value)}
 					>
 						{label}
 					</Button>
@@ -35,12 +38,10 @@ function PopoverContent({ filters, setFilters }) {
 }
 
 export default function ScopeAndFilters({ stateProps }) {
-	const { filters, setFilters } = stateProps;
-
 	return (
 		<div className={styles.container}>
 			<Popover
-				content={<PopoverContent filters={filters} setFilters={setFilters} />}
+				content={<PopoverContent stateProps={stateProps} />}
 				placement="bottom"
 			>
 				<div className={styles.filter_text}>
@@ -50,7 +51,7 @@ export default function ScopeAndFilters({ stateProps }) {
 				</div>
 			</Popover>
 
-			<ScopeSelect defaultValues={{ scope: 'self' }} />
+			<ScopeSelect defaultValues={stateProps.scopeFilters} />
 		</div>
 	);
 }

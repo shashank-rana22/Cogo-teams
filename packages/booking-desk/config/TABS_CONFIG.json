@@ -2,15 +2,18 @@
     "fcl_freight": [
         {
             "name": "place_booking",
-            "title" : "Place Booking"
+            "title" : "Place Booking",
+            "criticalVisible": true
         },
         {
             "name": "upload_bn",
-            "title" : "Upload BN"
+            "title" : "Upload BN",
+            "criticalVisible": true
         },
         {
             "name": "container_pick_up",
-            "title" : "Container Pick Up"
+            "title" : "Container Pick Up",
+            "criticalVisible": true
         },
         {
             "name": "completed",
@@ -38,11 +41,13 @@
     "lcl_freight": [
         {
             "name": "place_booking",
-            "title" : "Place Booking"
+            "title" : "Place Booking",
+            "criticalVisible": true
         },
         {
             "name": "upload_bn",
-            "title" : "Upload BN"
+            "title" : "Upload BN",
+            "criticalVisible": true
         },
         {
             "name": "completed",

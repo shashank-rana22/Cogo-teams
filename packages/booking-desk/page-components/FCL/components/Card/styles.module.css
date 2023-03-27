@@ -19,28 +19,6 @@
 	}
 }
 
-.card_header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 4px;
-
-    :global {
-        .ui_pill_container {
-            margin: 0;
-            line-height: initial;
-            padding: 2px 8px;
-            font-size: var(--font-size-sm);
-        }
-    }
-    
-    .top_left {
-        border-radius: 4px 0;
-    }
-    .top_right {
-        border-radius: 0 4px;
-    }
-}
-
 .card_body {
     display: flex;
     justify-content: space-between;
@@ -49,14 +27,6 @@
         width: 1px;
         background: var(--color-secondary-greyscale-5);
         align-self: stretch;
-    }
-    
-    :global {
-        .service-info-icon-container {
-            svg > path {
-                fill: var(--color-primary-error-red-2);
-            }
-        }
     }
 }
 

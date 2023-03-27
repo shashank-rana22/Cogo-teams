@@ -1,4 +1,5 @@
 import { dynamic } from '@cogoport/next';
+import useGetScopeOptions from '@cogoport/scope-select/hooks/useGetScopeOptions';
 import { useState, useEffect } from 'react';
 
 import getValidatedStoredValues from '../utils/getValidatedStoredValues';
@@ -19,17 +20,23 @@ function ResolveBookingDesk({ stateProps }) {
 export default function BookingDesk() {
 	const [filters, setFilters] = useState(null);
 	const [activeTab, setActiveTab] = useState(null);
+	const [scopeFilters, setScopeFilters] = useState(null);
 
-	const stateProps = { activeTab, setActiveTab, filters, setFilters };
+	const { scopeData } = useGetScopeOptions();
+
+	const stringifiedScopeData = JSON.stringify(scopeData);
+
+	const stateProps = { activeTab, setActiveTab, filters, setFilters, scopeFilters };
 
 	useEffect(() => {
-		const localStoredValues = JSON.parse(localStorage.getItem('booking_desk_stored_values') || '{}');
+		const localStoredValues = JSON.parse(localStorage.getItem('booking_desk_stored_values'));
 
-		const defaultValues = getValidatedStoredValues(localStoredValues);
+		const defaultValues = getValidatedStoredValues(localStoredValues, stringifiedScopeData);
 
 		setFilters(defaultValues.filters);
 		setActiveTab(defaultValues.activeTab);
-	}, []);
+		setScopeFilters(defaultValues.scopeFilters);
+	}, [stringifiedScopeData]);
 
 	return activeTab ? <ResolveBookingDesk stateProps={stateProps} /> : null;
 }

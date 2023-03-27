@@ -3,11 +3,11 @@ import Loader from '../../commons/Loader';
 import List from './components/List';
 import ScopeAndFilters from './components/ScopeAndFilters';
 import TabsAndFilters from './components/TabsAndFilters';
-import useListShipments from './hooks/useListShipments';
+import useListBookingDeskShipments from './hooks/useListBookingDeskShipments';
 import styles from './styles.module.css';
 
 export default function FCLDesk({ stateProps = {} }) {
-	const { loading, data } = useListShipments({ stateProps });
+	const { loading, data } = useListBookingDeskShipments({ stateProps });
 
 	return (
 		<div>
