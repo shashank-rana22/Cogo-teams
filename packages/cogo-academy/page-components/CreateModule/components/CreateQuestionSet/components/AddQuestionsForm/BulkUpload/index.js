@@ -44,7 +44,7 @@ function BulkUpload({
 					role="presentation"
 					onClick={() => window.open(
 						// eslint-disable-next-line max-len
-						'https://cogoport-testing.sgp1.digitaloceanspaces.com/3886b4c9b47a34cdc46a09c3071e80b1/test-module-question-set-sample.csv',
+						'https://cogoport-testing.sgp1.digitaloceanspaces.com/8b3de8aeee4620f0f863c681d28e7767/test-module-sample-set.csv',
 						'_blank',
 					)}
 				>
