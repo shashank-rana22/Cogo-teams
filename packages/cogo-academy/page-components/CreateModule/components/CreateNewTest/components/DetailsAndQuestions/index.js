@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Toast, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -14,7 +14,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 
 	const [idArray, setIdArray] = useState([]);
 
-	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
+	const { control, formState:{ errors }, handleSubmit, setValue, watch } = useForm();
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
 
@@ -51,6 +51,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 					setShowQuestionSet={setShowQuestionSet}
 					set_data={data?.set_data}
 					idArray={idArray}
+					watch={watch}
 				/>
 			) : null}
 
@@ -64,7 +65,11 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 						style={{ marginRight: '10px' }}
 						onClick={
 							handleSubmit((values) => {
-								createTest({ data: values, idArray, next: 'draft' });
+								if (idArray.length === 0) {
+									Toast.error('Atleast one of the Question Sets must be selected');
+								} else {
+									createTest({ data: values, idArray, next: 'draft' });
+								}
 							})
 						}
 					>
@@ -78,7 +83,11 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 						themeType="primary"
 						onClick={
 							handleSubmit((values) => {
-								createTest({ data: values, idArray, next: 'criteria' });
+								if (idArray.length === 0) {
+									Toast.error('Atleast one of the Question Sets must be selected');
+								} else {
+									createTest({ data: values, idArray, next: 'criteria' });
+								}
 							})
 						}
 					>

@@ -7,7 +7,7 @@ import getControls from './controls';
 import styles from './styles.module.css';
 
 function QuestionsAndDistribution(props) {
-	const { data, control, errors, loading, setValue, watch } = props;
+	const { data, control, errors, loading, setValue, watch, setError } = props;
 
 	useEffect(() => {
 		data?.test_set_distribution_data?.forEach(({
@@ -136,6 +136,8 @@ function QuestionsAndDistribution(props) {
 		(total, currValue) => total + (Number(currValue) || 0),
 		0,
 	);
+
+	setError(questionsCount + casesCount === 0);
 
 	return (
 		<>

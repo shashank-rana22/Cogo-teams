@@ -5,11 +5,7 @@ import { startCase, format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-export const questionSetColumns = ({ loading, updateApi, fetchList, router }) => {
-	const handleDeleteQuestionSet = (id) => {
-		updateApi({ questionSetId: id, getTestQuestionTest: fetchList, type: 'delete', from: 'test' });
-	};
-
+export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId }) => {
 	const handleEditQuestionSet = (id) => {
 		router.push(`/learning/test-module/create-question?id=${id}`);
 	};
@@ -109,7 +105,10 @@ export const questionSetColumns = ({ loading, updateApi, fetchList, router }) =>
 											type="button"
 											themeType="secondary"
 											className={styles.btn}
-											onClick={() => handleDeleteQuestionSet(item.id)}
+											onClick={() => {
+												setQuestionSetId(item.id);
+												setShowModal(true);
+											}}
 										>
 											<IcMDelete />
 											<div style={{ marginLeft: '8px' }}>
@@ -135,11 +134,8 @@ export const questionSetColumns = ({ loading, updateApi, fetchList, router }) =>
 	];
 };
 
-export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
-	const handleDeleteTest = (id) => {
-		updateApi({ test_id: id, fetchList, type: 'delete', from: 'test' });
-	};
-
+export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => {
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const handleEditTest = (id) => {
 		router.push(`/learning/test-module/create-test?id=${id}`);
 	};
@@ -149,7 +145,15 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 			id       : 'a',
 			accessor : ({ name = '', test_duration = '', status = '' }) => (
 				<div>
-					<section className={styles.name}>{name}</section>
+					<section>
+						{' '}
+						<Tooltip content={startCase(name) || '-'}>
+							<div className={styles.name}>
+								{startCase(name) || '-'}
+							</div>
+						</Tooltip>
+
+					</section>
 					{status === 'active' ? (
 						<section className={styles.duration}>
 							{test_duration}
@@ -330,7 +334,11 @@ export const testSetColumns = ({ loading, fetchList, updateApi, router }) => {
 											loading={loading}
 											themeType="secondary"
 											className={styles.btn}
-											onClick={() => handleDeleteTest(id)}
+											type="button"
+											onClick={() => {
+												setShowModal(true);
+												setTestId(id);
+											}}
 										>
 											<IcMDelete />
 											<div style={{ marginLeft: '8px' }}>

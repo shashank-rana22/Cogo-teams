@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { Pill, Button, Placeholder } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { Pill, Button, Placeholder, Toast } from '@cogoport/components';
+import { useForm, InputController, useFieldArray } from '@cogoport/forms';
+import { IcMArrowBack, IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useUpdateTest from '../../../../hooks/useUpdateTest';
 
@@ -18,19 +18,26 @@ function ReviewAndCriteria(props) {
 
 	const { control, formState: { errors }, handleSubmit, setValue, getValues, watch } = useForm();
 
-	// const { fields, append, remove } = useFieldArray({
-	// 	control,
-	// 	name  : 'guidelines',
-	// 	rules : {
-	// 		required: true,
-	// 	},
-	// });
+	const { fields, append, remove } = useFieldArray({
+		control,
+		name  : 'guidelines',
+		rules : {
+			required: true,
+		},
+	});
 
 	const { name = '', set_data = [], cogo_entity_object = {} } = data || {};
 
 	const { updateTest } = useUpdateTest();
 
+	const [error, setError] = useState(false);
+
 	const router = useRouter();
+
+	useEffect(() => {
+		setValue('guidelines', data?.guidelines?.map((guideline) => ({ instruction: guideline })));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data]);
 
 	const [showModal, setShowModal] = useState(false);
 
@@ -54,7 +61,7 @@ function ReviewAndCriteria(props) {
 						<div className={styles.topic_pill_container}>
 							{set_data.map((question_set) => (
 								<Pill size="md" color="blue" className={styles.names}>
-									<span className={styles.names}>{question_set.topic}</span>
+									<span className={styles.names}>{question_set?.topic}</span>
 								</Pill>
 							))}
 						</div>
@@ -62,7 +69,7 @@ function ReviewAndCriteria(props) {
 
 					<div className={styles.entity}>
 						<div className={styles.label_entity}>Cogo Entity </div>
-						<div className={styles.entity_name}>{cogo_entity_object.business_name}</div>
+						<div className={styles.entity_name}>{cogo_entity_object?.business_name}</div>
 					</div>
 
 					<div className={styles.topic}>
@@ -86,6 +93,7 @@ function ReviewAndCriteria(props) {
 				loading={loading}
 				setValue={setValue}
 				watch={watch}
+				setError={setError}
 			/>
 
 			<DurationAndValidity
@@ -104,29 +112,34 @@ function ReviewAndCriteria(props) {
 				setShowModal={setShowModal}
 			/>
 
-			{/* <h3>Add Instructions</h3>
-			{ fields.map((field, index) => (
-				<div className={styles.instruction} key={field.id}>
-					<InputController
-						control={control}
-						key={field.id}
-						name={`guidelines.${index}.instruction`}
-						rules={{ required: 'Required' }}
-					/>
-					<ButtonIcon
-						class={styles.btn_icons}
-						style={{ color: 'red' }}
-						size="xl"
-						icon={<IcMDelete />}
-						themeType="primary"
-						onClick={() => remove(index)}
-					/>
+			<div className={styles.instructions}>
+				<h3>Add Instructions</h3>
+				{ fields.map((field, index) => (
+					<div key={field.id}>
+						<div className={styles.instruction}>
+							<InputController
+								className={styles.instruction_input}
+								control={control}
+								size="sm"
+								name={`guidelines.${index}.instruction`}
+								rules={{ required: 'This is required' }}
+							/>
+							<div role="presentation" className={styles.add_icon} onClick={() => remove(index)}>
+								<IcMDelete height={20} width={20} />
+							</div>
+						</div>
+						{errors?.guidelines?.[index]?.instruction?.message
+						&& <p className={styles.err_msg}>{errors?.guidelines?.[index]?.instruction?.message}</p>}
+					</div>
+				))}
+				<div
+					role="presentation"
+					className={styles.add_icon}
+					onClick={() => append({ instruction: '' })}
+				>
+					<IcMPlusInCircle height={30} width={30} />
 				</div>
-			))}
-			<div role="presentation" className={styles.add_icon} onClick={() => append({ instruction: '' })}>
-				<IcMPlusInCircle height={30} width={30} />
-
-			</div> */}
+			</div>
 
 			<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 				<Button
@@ -149,7 +162,11 @@ function ReviewAndCriteria(props) {
 					type="button"
 					onClick={
 						handleSubmit(() => {
-							setShowModal(true);
+							if (error) {
+								Toast.error('Total questions and cases cannot be 0');
+							} else {
+								setShowModal(true);
+							}
 						})
 					}
 				>

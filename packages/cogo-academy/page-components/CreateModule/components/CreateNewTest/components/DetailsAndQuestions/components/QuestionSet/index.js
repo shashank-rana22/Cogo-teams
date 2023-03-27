@@ -7,8 +7,12 @@ import useGetTestQuestionSets from '../../../../../../hooks/useGetTestQuestionSe
 
 import styles from './styles.module.css';
 
-function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray }) {
-	const { data, loading, setParams, debounceQuery, input, setInput } = useGetTestQuestionSets();
+function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray, watch }) {
+	const {
+		data, loading, setParams, debounceQuery,
+		input, setInput,
+	} = useGetTestQuestionSets(watch('cogo_entity_id'));
+
 	const [sort, setSort] = useState(false);
 
 	const { page = 0, page_limit: pageLimit = 0, total_count = 0, list } = data || {};

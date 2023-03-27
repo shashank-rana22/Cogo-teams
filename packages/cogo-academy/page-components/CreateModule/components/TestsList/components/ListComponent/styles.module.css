@@ -115,3 +115,9 @@
 .rotate {
 	transform: rotate(180deg);
 }
+
+.btn_container{
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+}

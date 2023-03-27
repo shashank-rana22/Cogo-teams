@@ -1,4 +1,4 @@
-import { Pagination, Table } from '@cogoport/components';
+import { Pagination, Table, Modal, Button } from '@cogoport/components';
 import { IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -16,12 +16,25 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 
 	const [sort, setSort] = useState(false);
 
+	const [testId, setTestId] = useState('');
+
+	const [questionSetId, setQuestionSetId] = useState('');
+
 	const { page_limit: pageLimit = 0, total_count = 0, list } = data || {};
+
+	const [showModal, setShowModal] = useState(false);
 
 	const columnsMapping = {
 		tests         : testSetColumns,
 		question_set  : questionSetColumns,
 		all_questions : testSetColumns,
+	};
+
+	const MODAL_TEXT_MAPPING = {
+		tests         : 'Test',
+		question_set  : 'Question Set',
+		all_questions : 'All Question',
+
 	};
 
 	const {
@@ -32,8 +45,13 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 	const { loading:updateTestLoading, updateTest } = useUpdateTest();
 
 	const propsMapping = {
-		tests         : { loading: updateTestLoading, updateApi: updateTest, fetchList, router },
-		question_set  : { loading: updateLoading, updateApi: createQuestionSet, fetchList, router },
+		tests: {
+			loading: updateTestLoading,
+			router,
+			setShowModal,
+			setTestId,
+		},
+		question_set  : { loading: updateLoading, router, setShowModal, setQuestionSetId },
 		all_questions : {},
 	};
 
@@ -42,6 +60,20 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 	if (!loading && isEmpty(data?.list)) {
 		return <EmptyState />;
 	}
+
+	const handleDeleteTest = () => {
+		updateTest({ test_id: testId, fetchList, type: 'delete', from: 'test' });
+	};
+
+	const handleDeleteQuestionSet = () => {
+		createQuestionSet({ questionSetId, getTestQuestionTest: fetchList, type: 'delete', from: 'test' });
+	};
+
+	const deleteFunctionMapping = {
+		tests        : handleDeleteTest,
+		question_set : handleDeleteQuestionSet,
+
+	};
 
 	return (
 		<div className={styles.table_container}>
@@ -84,6 +116,37 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 				columns={columns}
 				loading={loading}
 			/>
+
+			<Modal
+				size="sm"
+				show={showModal}
+				onClose={() => setShowModal(false)}
+				placement="center"
+				showCloseIcon={false}
+			>
+				<Modal.Header title={`Are you sure you want to delete this ${MODAL_TEXT_MAPPING[activeTab]}?`} />
+				<Modal.Body>
+					<div className={styles.btn_container}>
+						<Button
+							type="button"
+							themeType="secondary"
+							onClick={() => setShowModal(false)}
+						>
+							Cancel
+						</Button>
+						<Button
+							type="button"
+							onClick={() => {
+								deleteFunctionMapping[activeTab]();
+								setShowModal(false);
+							}}
+						>
+							Delete
+
+						</Button>
+					</div>
+				</Modal.Body>
+			</Modal>
 
 			{total_count > 10 ? (
 				<div className={styles.pagination_container}>
