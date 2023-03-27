@@ -1,6 +1,5 @@
 import { IcMDocument } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 import Loader from '../../Loader';
 import Answer from '../../QuestionList/Answer';
@@ -14,18 +13,11 @@ function NotificationContent({
 	setQuestion,
 	setShowNotificationContent,
 	faqNotificationApiLoading,
-	fetchFaqNotification,
 }) {
 	const { onClickClearNotifications = () => {} } = useClearFaqNotifications({
 		setShowNotificationContent,
 		faqNotificationData,
 	});
-
-	useEffect(() => {
-		if (!question?.id) {
-			fetchFaqNotification();
-		}
-	}, [fetchFaqNotification, question?.id]);
 
 	if (faqNotificationApiLoading) return <div className={styles.loader_wrapper}><Loader /></div>;
 
