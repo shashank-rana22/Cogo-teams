@@ -11,14 +11,12 @@ import styles from './styles.module.css';
 
 function PIPProbations() {
 	const [modal, setModal] = useState(''); // for update,logs,create,upload modals
-	// for pip or probation (create,updateProbation,log=>updatePIP)
 	const [item, setItem] = useState({}); // dor sending payload and setting the user id from the list
 	const [activeTab, setActiveTab] = useState('dashboard'); // to switch between tabs
 	const [disableNext, setDisableNext] = useState(true); // to enable the submit button in create and update
 
 	const { onCreateLog = () => {} } = useCreateLog();
 	// useEffect(() => debounceQuery(searchValue), [searchValue])
-	// useEffect(() => setPipParams({ show: false, disableNext: false }), []);
 
 	const onSubmit = () => {
 		if (item?.tags?.find((x) => x === 'Final discusion held' && isEmpty(item?.final_decision))) {
