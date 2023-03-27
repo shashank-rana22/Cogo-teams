@@ -61,20 +61,20 @@ function TextComponent(props) {
 	};
 
 	return (
-		<div style={editorStyle}>
+	// <div style={editorStyle}>
 
-			<ReactQuill
-				theme="bubble"
-				placeholder="Start Typing..."
-				value={editorValue}
-				modules={modules}
-				style={styles}
-				onChange={handleEditorChange}
-				onFocus={() => setIsFocused(true)}
-				onBlur={() => setIsFocused(false)}
-			/>
+		<ReactQuill
+			theme="bubble"
+			placeholder="Start Typing..."
+			value={editorValue}
+			modules={modules}
+				// style={styles}
+			onChange={handleEditorChange}
+			onFocus={() => setIsFocused(true)}
+			onBlur={() => setIsFocused(false)}
+		/>
 
-		</div>
+	// </div>
 	);
 }
 

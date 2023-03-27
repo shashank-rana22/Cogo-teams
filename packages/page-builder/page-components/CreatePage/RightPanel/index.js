@@ -11,22 +11,7 @@ function RightPanel(props) {
 
 	return (
 
-		<div
-			key={elementId}
-			data-grid={{
-				i           : widget?.i,
-				x           : widget?.x,
-				y           : widget?.y,
-				w           : widget?.w,
-				h           : widget?.h,
-				minW        : 2,
-				maxW        : Infinity,
-				minH        : 2,
-				maxH        : Infinity,
-				isDraggable : true,
-				isResizable : true,
-			}}
-		>
+		<div>
 			{type === 'text' && (
 				<TextComponent
 					key={elementId}
@@ -42,7 +27,6 @@ function RightPanel(props) {
 					key={elementId}
 					src={widget.content}
 					alt={widget.alt}
-					style={widget.styles}
 					components={components}
 					setComponents={setComponents}
 					elementId={elementId}

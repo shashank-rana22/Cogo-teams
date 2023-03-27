@@ -3,7 +3,7 @@ import { Button } from '@cogoport/components';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 import 'react-quill/dist/quill.bubble.css';
 
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
@@ -74,7 +74,7 @@ function ButtonComponent(props) {
 	return (
 		<div style={editorStyle}>
 			<Button
-				className={styles.button}
+				// className={styles.button}
 				type={type}
 				themeType={themeType}
 				size={size}
@@ -85,7 +85,7 @@ function ButtonComponent(props) {
 					theme="bubble"
 					value={editorValue}
 					// modules={modules}
-					style={styles}
+					// style={styles}
 					onChange={handleEditorChange}
 				/>
 

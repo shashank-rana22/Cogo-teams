@@ -14,12 +14,6 @@ const CONTENT_MAPPING = {
 		y          : 0,
 		w          : 2,
 		h          : 1,
-		// styles  : {
-		// 	fontSize       : '24px',
-		// 	color          : '#333',
-		// 	display        : 'flex',
-		// 	justifyContent : 'center',
-		// },
 		attributes : {
 			contenteditable: true,
 		},
@@ -27,19 +21,14 @@ const CONTENT_MAPPING = {
 
 	image: {
 		// eslint-disable-next-line max-len
-		content : 'https://www.cogoport.com/_next/image/?url=https%3A%2F%2Fcdn.cogoport.io%2Fcms-prod%2Fcogo_public%2Fvault%2Foriginal%2Fchannel-partner-header-2.png&w=1920&q=75',
-		alt     : 'add-img-url',
-		layout  : {},
-		x       : 0,
-		y       : 0,
-		w       : 2,
-		h       : 1,
-		styles  : {
-			width  : '100%',
-			height : '300px',
-		},
-
-		attributes: {},
+		content    : 'https://www.cogoport.com/_next/image/?url=https%3A%2F%2Fcdn.cogoport.io%2Fcms-prod%2Fcogo_public%2Fvault%2Foriginal%2Fchannel-partner-header-2.png&w=1920&q=75',
+		alt        : 'add-img-url',
+		layout     : {},
+		x          : 0,
+		y          : 0,
+		w          : 4,
+		h          : 2,
+		attributes : {},
 	},
 
 	button: {
@@ -50,7 +39,7 @@ const CONTENT_MAPPING = {
 		layout      : {},
 		x           : 0,
 		y           : 0,
-		w           : 2,
+		w           : 1,
 		h           : 1,
 		type        : 'button',
 		attributes  : {

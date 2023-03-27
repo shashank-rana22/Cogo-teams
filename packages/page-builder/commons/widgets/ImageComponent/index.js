@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import FileUploader from '../FileUploader';
 
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
 function ImageComponent(props) {
 	const { src, style, components, setComponents, elementId } = props;
@@ -42,7 +42,7 @@ function ImageComponent(props) {
 
 			{fileValue ? (
 				<div
-					className={`${styles['my-div']} ${isFocused ? styles.focused : ''}`}
+					// className={`${styles['my-div']} ${isFocused ? styles.focused : ''}`}
 					role="presentation"
 					onClick={() => setIsFocused(!isFocused)}
 				>
