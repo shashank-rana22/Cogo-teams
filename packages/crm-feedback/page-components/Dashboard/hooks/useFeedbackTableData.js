@@ -9,64 +9,28 @@ const useFeedbackTableData = () => {
 
 	const [filters, setFilters] = useState({});
 
-	// console.log('filters::', filters);
-
 	const [params, setParams] = useState({
 		page_limit : 10,
 		page       : 1,
 		filters    : {},
 	});
 
-	const [{ data, loading }, trigger] = useAllocationRequest({
+	const [{ data, loading }] = useAllocationRequest({
 		url     : '/feedbacks',
 		method  : 'get',
 		authkey : 'get_allocation_feedbacks',
 		params,
 	}, { manual: false });
 
-	// const onChangeParams = (values = {}) => {
-	// 	console.log('params are changed');
-	// 	setParams((previousState) => ({
-	// 		...previousState,
-	// 		...values,
-	// 	}));
-	// };
-
-	// console.log('params ::', params);
-
 	const onChangeParams = (values = {}) => {
-		// console.log('onChangeParams');
 		setParams((previousState) => ({
 			...previousState,
 			...values,
 		}));
 	};
 
-	// const onChangeFilters = (values) => {
-	// 	console.log('filters are changed');
-	// 	setFilters((previousState) => ({
-	// 		...filters,
-	// 		...previousState,
-	// 		...values,
-	// 	}));
-	// };
-
-	// const onChangeFilters = useCallback(
-	// 	(values = {}) => {
-	// 		console.log('filters are changed');
-	// 		setFilters((previousState) => ({
-	// 			...filters,
-	// 			...previousState,
-	// 			...values,
-	// 		}));
-	// 		console.log('filters::', filters);
-	// 	},
-	// 	[setFilters, filters],
-	// );
-
 	const onChangeFilters = useCallback(
 		(values = {}) => {
-			// console.log('filters are changed');
 			setFilters((previousState) => ({
 				...previousState,
 				...values,
@@ -81,18 +45,6 @@ const useFeedbackTableData = () => {
 		},
 		[setFilters, setParams],
 	);
-
-	// useEffect(() => {
-	// 	console.log('inside the 1st useffect, params::', params);
-
-	// 	trigger({
-	// 		params: {
-	// 			...params,
-	// 			page    : 1,
-	// 			filters : { ...params?.filters, ...filters },
-	// 		},
-	// 	});
-	// }, [params, filters, trigger]);
 
 	const { list = [], ...paginationData } = data || {};
 

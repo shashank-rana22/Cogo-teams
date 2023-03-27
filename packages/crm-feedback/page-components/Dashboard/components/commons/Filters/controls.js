@@ -1,24 +1,11 @@
-export const controlsFeedbacks = (organizationOptions, kamOptions, kamManagerOptions) => [
+export const controlsFeedbacks = (cogoEntityOptions, organizationOptions, kamOptions, kamManagerOptions) => [
 	{
+		...cogoEntityOptions,
 		name        : 'agent_partner_id',
 		placeholder : 'Cogo Entity',
 		type        : 'select',
 		isClearable : true,
-		options     : [
-			{
-				label : 'India',
-				value : 'india',
-			},
-			{
-				label : 'Vietnam',
-				value : 'vietnam',
-			},
-			{
-				label : 'Singapore',
-				value : 'singapore',
-			},
-		],
-		params: { filters: { status: 'active' } },
+		params      : { filters: { status: 'active' } },
 	},
 	{
 		...organizationOptions,
@@ -45,28 +32,7 @@ export const controlsFeedbacks = (organizationOptions, kamOptions, kamManagerOpt
 	},
 ];
 
-export const controlsRequests = (organizationOptions) => [
-	{
-		name        : 'cogo_entity',
-		placeholder : 'Cogo Entity',
-		type        : 'select',
-		isClearable : true,
-		options     : [
-			{
-				label : 'India',
-				value : 'india',
-			},
-			{
-				label : 'Vietnam',
-				value : 'vietnam',
-			},
-			{
-				label : 'Singapore',
-				value : 'singapore',
-			},
-		],
-		params: { filters: { status: 'active' } },
-	},
+export const controlsRequests = (cogoEntityOptions, organizationOptions) => [
 	{
 		...organizationOptions,
 		name        : 'organization_id',

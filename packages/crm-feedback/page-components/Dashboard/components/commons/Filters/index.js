@@ -12,6 +12,18 @@ import styles from './styles.module.css';
 function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' }) {
 	const [date, setDate] = useState();
 
+	const cogoEntityOptions = useGetAsyncOptions({
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_partners',
+		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	});
+
 	const organizationOptions = useGetAsyncOptions({
 		...asyncFieldsOrganizations(),
 		initialCall : false,
@@ -55,18 +67,17 @@ function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' 
 		}
 	};
 
-	let modifiedControls = [];
-	if (activeTab === 'feedbacks_received') {
-		modifiedControls = controlsFeedbacks(
-			organizationOptions || {},
-			kamOptions || {},
-			kamManagerOptions || {},
+	const modifiedControls = activeTab === 'feedbacks_received'
+		? (
+			controlsFeedbacks(
+				cogoEntityOptions || {},
+				organizationOptions || {},
+				kamOptions || {},
+				kamManagerOptions || {},
+			)
+		) : (
+			controlsRequests(organizationOptions || {})
 		);
-	} else if (activeTab === 'requests_sent') {
-		modifiedControls = controlsRequests(organizationOptions || {});
-	} else {
-		modifiedControls = null;
-	}
 
 	return (
 		<div className={styles.filter}>
@@ -84,18 +95,23 @@ function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' 
 				);
 			})}
 
-			<DateRangepicker
-				className={styles.time}
-				value={date}
-				isPreviousDaysAllowed
-				onChange={(val) => {
-					onChangeFilters({
-						created_at_greater_than : val.startDate || undefined,
-						created_at_less_than    : val.endDate || undefined,
-					});
-					setDate(val);
-				}}
-			/>
+			{activeTab === 'feedbacks_received' ? (
+				<DateRangepicker
+					className={styles.time}
+					value={date}
+					isPreviousDaysAllowed
+					onChange={(val) => {
+						onChangeFilters({
+							created_at_greater_than : val.startDate || undefined,
+							created_at_less_than    : val.endDate || undefined,
+						});
+						setDate(val);
+					}}
+				/>
+			) : (
+				null
+			)}
+
 		</div>
 	);
 }
