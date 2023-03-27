@@ -1,4 +1,3 @@
-import { Toggle } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import BarChart from '../../../../TestResult/Summary/BarChart';

@@ -1,13 +1,8 @@
-import { useSelector } from '@cogoport/store';
 import { format, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function TestResultMessage({ stats_data }) {
-	const {
-		profile: { user: { name } },
-	} = useSelector((state) => state);
-
 	const { date, status, test_name } = stats_data || {};
 
 	const hasPassed = status === 'passed';

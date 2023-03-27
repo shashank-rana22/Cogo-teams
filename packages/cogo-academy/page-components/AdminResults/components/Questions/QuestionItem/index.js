@@ -1,5 +1,4 @@
 import { Accordion, Pill } from '@cogoport/components';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import QuestionCard from '../../../../TestResult/QnA/QnAItem/QuestionCard';
