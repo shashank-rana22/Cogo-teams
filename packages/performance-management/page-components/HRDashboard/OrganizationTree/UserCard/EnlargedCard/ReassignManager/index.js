@@ -6,13 +6,20 @@ import useListReassignControls from './list-reassign-manager-controls';
 import styles from './styles.module.css';
 import useReassignManager from './useReassignManager';
 
-function ReassignManager({ userId, setOpenReassign }) {
+function ReassignManager({ userId, setOpenReassign, fetchTreeData }) {
 	const [managerId, setManagerId] = useState('');
 
 	const { control, watch, reset } = useForm();
 	const manager = watch('manager_id');
 
-	const { onReassign } = useReassignManager({ userId, managerId, setManagerId, setOpenReassign, reset });
+	const { onReassign } = useReassignManager({
+		userId,
+		managerId,
+		setManagerId,
+		setOpenReassign,
+		reset,
+		fetchTreeData,
+	});
 
 	const cogoUsersControl = useListReassignControls();
 
@@ -36,7 +43,15 @@ function ReassignManager({ userId, setOpenReassign }) {
 					Cancel
 
 				</Button>
-				<Button disabled={!managerId} onClick={() => onReassign(managerId)}>Reassign</Button>
+				<Button
+					disabled={!managerId}
+					onClick={() => onReassign(
+						{ managerId },
+					)}
+				>
+					Reassign
+
+				</Button>
 			</div>
 		</div>
 	);

@@ -1,31 +1,49 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import styles from './styles.module.css';
 import useGetOrganizationTree from './useGetOrganizatioonTree';
 import UserCard from './UserCard';
 
+const scrollToSection = (elementRef) => {
+	window.scrollTo({
+		top      : elementRef.current.offsetTop,
+		behavior : 'smooth',
+	});
+};
+
 function OrganizationTree({ setOpenOrganizationTree }) {
 	const [users, setUsers] = useState({});
-	const [userId, setUserId] = useState('');
-	const [managerIds, setManagerIds] = useState([]);
+	const userLevelRef = useRef(null);
+	const reporteeLevelRef = useRef(null);
 
-	const { treeData = {}, loading = false } = useGetOrganizationTree({ userId, managerIds });
+	const {
+		treeData = {}, loading = false, fetchTreeData = () => {},
+		params = {},
+		setParams = () => {},
+	} = useGetOrganizationTree();
 
 	useEffect(() => {
-		if (treeData) {
+		if (!isEmpty(treeData)) {
 			const { manager_data = [], reportees = [], user_data = {} } = treeData;
 
-			const baseLevel = !userId ? manager_data : [];
+			const baseLevel = !params.UserID ? manager_data : [];
 			const userLevel = user_data;
 			const reporteeLevel = !isEmpty(reportees) ? reportees : users.reporteeLevel;
 			const selectedReportee = isEmpty(reportees) ? userLevel : {};
 			const managerLevel = manager_data;
 
 			setUsers({ baseLevel, userLevel, reporteeLevel, managerLevel, selectedReportee });
+			// if (isEmpty(baseLevel)) { scrollToSection(isEmpty(selectedReportee) ? userLevelRef : reporteeLevelRef); }
 		}
-	}, [treeData]);
+	}, [params.UserID, treeData, users.reporteeLevel]);
+
+	useEffect(() => {
+		if (!loading && params.UserID) {
+			scrollToSection(isEmpty(users.selectedReportee) ? userLevelRef : reporteeLevelRef);
+		}
+	}, [loading]);
 
 	return (
 		<div>
@@ -45,15 +63,14 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 			</div>
 			<div className={styles.organization_tree}>
 
-				{!userId ? (
+				{!params.UserID ? (
 					<div className={styles.base_level}>
 						{(users.baseLevel || []).map((user) => (
 							<UserCard
 								user={user}
 								clickable
-								userId={userId}
-								setUserId={setUserId}
-								setManagerIds={setManagerIds}
+								params={params}
+								setParams={setParams}
 								key={user.id}
 							/>
 						))}
@@ -67,10 +84,10 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 										<UserCard
 											user={user}
 											clickable
-											userId={userId}
-											setUserId={setUserId}
-											setManagerIds={setManagerIds}
+											params={params}
+											setParams={setParams}
 											key={user.id}
+
 										/>
 										<div className={styles.line} />
 									</>
@@ -79,8 +96,12 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 
 							{isEmpty(users.selectedReportee)
 						&& (
-							<div className={styles.user_level}>
-								<UserCard user={users.userLevel} enlarged />
+							<div className={styles.user_level} ref={userLevelRef}>
+								<UserCard
+									user={users.userLevel}
+									enlarged
+									fetchTreeData={fetchTreeData}
+								/>
 							</div>
 						)}
 
@@ -88,20 +109,26 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 
 							<div className={styles.reportee_level}>
 								{!isEmpty(users.selectedReportee) && (
-									<div className={styles.user_level}>
-										<UserCard user={users.selectedReportee} enlarged />
+									<div className={styles.user_level} ref={reporteeLevelRef}>
+										<UserCard
+											loading={loading}
+											user={users.selectedReportee}
+											enlarged
+											fetchTreeData={fetchTreeData}
+										/>
 									</div>
 								)}
 
 								<div className={styles.all_reportees}>
 									{(users.reporteeLevel || []).map((user) => (
 										<UserCard
+											loading={loading}
 											user={user}
 											clickable
-											userId={userId}
-											setManagerIds={setManagerIds}
-											setUserId={setUserId}
+											params={params}
+											setParams={setParams}
 											key={user.id}
+											isLastLevel={user.is_last_level}
 										/>
 									))}
 								</div>

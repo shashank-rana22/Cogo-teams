@@ -4,18 +4,19 @@ import { useIrisRequest } from '@cogoport/request';
 const useReassignManager = ({
 	userId, setOpenReassign = () => {},
 	setManagerId = () => {}, reset = () => {},
+	fetchTreeData,
 }) => {
 	const [{ loading = false }, trigger] = useIrisRequest({
 		url    : 'post_iris_update_partner_user_admin_mapping',
 		method : 'post',
 	}, { manual: true });
 
-	console.log('herer', userId);
-
-	const onReassign = async (managerId) => {
+	const onReassign = async ({ managerId }) => {
 		try {
 			await trigger({ data: { UserID: userId || undefined, ManagerID: managerId || undefined } });
 			Toast.success('Reassigned Successfully!!');
+
+			fetchTreeData();
 			reset();
 			setManagerId('');
 			setOpenReassign(false);

@@ -3,12 +3,9 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useIrisRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useGetOrganizationTree = ({ userId = '', managerIds = [] }) => {
-	console.log('managerIds', managerIds);
+const useGetOrganizationTree = () => {
 	const [params, setParams] = useState({
-		UserID     : userId || undefined,
-		Ceos       : userId ? undefined : true,
-		ManagerIDS : managerIds.join(',') || undefined,
+		Ceos: true,
 	});
 
 	const [{ data: treeData = {}, loading = false }, trigger] = useIrisRequest({
@@ -17,21 +14,15 @@ const useGetOrganizationTree = ({ userId = '', managerIds = [] }) => {
 		params,
 	}, { manual: false });
 
-	const fetchTreeData = async () => {
+	const fetchTreeData = () => {
 		try {
-			await trigger({ params });
+			trigger({ params });
 		} catch (e) {
 			Toast.error(getApiErrorString(e.response?.data));
 		}
 	};
 
-	useEffect(() => setParams({
-		UserID     : userId || undefined,
-		Ceos       : userId ? undefined : true,
-		ManagerIDS : managerIds.join(',') || undefined,
-	}), [userId]);
-
-	return { treeData, loading, fetchTreeData };
+	return { treeData, loading, fetchTreeData, params, setParams };
 };
 
 export default useGetOrganizationTree;

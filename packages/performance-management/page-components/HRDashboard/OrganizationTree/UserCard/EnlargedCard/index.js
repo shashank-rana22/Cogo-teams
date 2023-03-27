@@ -1,5 +1,4 @@
-import { Tooltip } from '@cogoport/components';
-import { Modal, Pill, Button, Avatar } from '@cogoport/components';
+import { Tooltip, Modal, Pill, Button, Avatar } from '@cogoport/components';
 import { IcMEmail, IcMCall } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -7,7 +6,7 @@ import { useState } from 'react';
 import ReassignManager from './ReassignManager';
 import styles from './styles.module.css';
 
-function EnlargedCard({ user = {}, avatarProps = {} }) {
+function EnlargedCard({ user = {}, avatarProps = {}, fetchTreeData, loading = false }) {
 	const [openReassign, setOpenReassign] = useState(false);
 
 	const infoArr = [{
@@ -28,10 +27,10 @@ function EnlargedCard({ user = {}, avatarProps = {} }) {
 	}];
 
 	return (
-		<div className={styles.enlarged_container}>
-			<div className={`${styles.enlarged_card} ${openReassign ? styles.expand : ''}`}>
+		<div className={`${styles.enlarged_container} ${loading ? styles.enlarged_loading : ''}`}>
+			<div className={styles.enlarged_card}>
 				<div className={styles.status}>
-					<Pill color="blue">In Probation</Pill>
+					<Pill color="blue">{startCase(user.employment_status || '---')}</Pill>
 
 					{!openReassign && (
 						<Button
@@ -72,7 +71,11 @@ function EnlargedCard({ user = {}, avatarProps = {} }) {
 			</div>
 
 			<div className={`${styles.reassign_manager_container} ${openReassign ? styles.expand : ''}`}>
-				<ReassignManager userId={user.user_id} setOpenReassign={setOpenReassign} />
+				<ReassignManager
+					userId={user.user_id}
+					fetchTreeData={fetchTreeData}
+					setOpenReassign={setOpenReassign}
+				/>
 			</div>
 		</div>
 	);

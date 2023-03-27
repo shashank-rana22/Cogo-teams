@@ -4,6 +4,7 @@ const useListReassignControls = () => {
 	const asyncManagerOptions = useGetCustomAsyncOptions({
 		endpoint    : 'get_iris_list_reportees',
 		initialCall : false,
+		params      : { IncludingCeos: true },
 		valueKey    : 'user_id',
 		labelKey    : 'name',
 		filterKey   : 'Q',
