@@ -152,7 +152,7 @@ function Compose({
 						setValue={setValue}
 						// renderValue={renderValue}
 						control={control}
-						placeholder="type here..."
+						placeholder="Type here..."
 						key={JSON.stringify(userEmailArray)}
 						rules={{ required: { value: true, message: 'Email is required' } }}
 					/>
@@ -230,7 +230,7 @@ function Compose({
 				</div>
 
 				<div className={styles.subject_preview}>
-					<div className={styles.subject_label}>Subject Preview:</div>
+					<div className={styles.subject_label}>Subject Preview :</div>
 					<div className={styles.preview}>
 						{actualSubject}
 					</div>
