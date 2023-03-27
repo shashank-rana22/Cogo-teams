@@ -9,7 +9,7 @@ import SOP from '../../../../common/SOP';
 import styles from './styles.module.css';
 
 function SopAndPoc() {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
 	const [activeTab, setActiveTab] = useState('poc');
 	const [show, setShow] = useState(false);
@@ -60,7 +60,7 @@ function SopAndPoc() {
 							>
 								<TabPanel name="poc" title="POC">
 									<div style={{ height: '80vh', overflow: 'scroll' }}>
-										<POC shipment_data={shipment_data} />
+										<POC shipment_data={shipment_data} servicesList={servicesList} />
 									</div>
 								</TabPanel>
 								<TabPanel name="sop" title="SOP">

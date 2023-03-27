@@ -7,7 +7,7 @@ const keyMappings = {
 };
 
 const useShipmentEmails = ({ cogo_shipment_id, document_type = [], page }) => {
-	const [recentClassifiedShipmentApi, triggerRecentClassifiedShipment] =		useAxios(
+	const [recentClassifiedShipmentApi, triggerRecentClassifiedShipment] =	useAxios(
 		{
 			url    : `${process.env.COGO_LENS_URL}/list_rpa_mails`,
 			method : 'GET',
