@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 
 import FileUploader from '../FileUploader';
 
+// import styles from './styles.module.css';
+
 function ImageComponent(props) {
-	const { src, styles, components, setComponents, elementId } = props;
+	const { src, style, components, setComponents, elementId } = props;
 
 	const [fileValue, setFileValue] = useState();
 	const [isFocused, setIsFocused] = useState(false);
@@ -15,11 +17,7 @@ function ImageComponent(props) {
 
 			const updatedComponent = {
 				...components[selectedComponentIndex],
-				properties: {
-					...components[selectedComponentIndex].properties,
-					content: fileValue,
-				},
-
+				content: fileValue,
 			};
 
 			// use map instead slice
@@ -43,13 +41,17 @@ function ImageComponent(props) {
 		<div style={editorStyle}>
 
 			{fileValue ? (
-				<img
+				<div
+					// className={`${styles['my-div']} ${isFocused ? styles.focused : ''}`}
 					role="presentation"
-					src={src}
-					style={styles}
-					alt="upload-img"
 					onClick={() => setIsFocused(!isFocused)}
-				/>
+				>
+					{/* <span className={styles['edit-icon']}>
+						<IcMEdit fil="#88cad1" />
+					</span> */}
+
+					<img src={src} style={style} alt="upload-img" />
+				</div>
 			) : (
 				<FileUploader
 					value={fileValue}

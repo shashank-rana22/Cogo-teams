@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
 import 'react-quill/dist/quill.bubble.css';
-import styles from './styles.module.css';
 
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 
@@ -13,6 +12,8 @@ function TextComponent(props) {
 	const [editorValue, setEditorValue] = useState(text);
 	const [isFocused, setIsFocused] = useState(false);
 
+	console.log('is f pi', isFocused);
+
 	const handleEditorChange = (value) => {
 		setEditorValue(value);
 
@@ -21,11 +22,7 @@ function TextComponent(props) {
 
 		const updatedComponent = {
 			...components[selectedComponentIndex],
-			properties: {
-				...components[selectedComponentIndex].properties,
-				content: value,
-			},
-
+			content: value,
 		};
 
 		// use map instead slice
@@ -36,12 +33,12 @@ function TextComponent(props) {
 		]);
 	};
 
-	const editorStyle = {
-		border  : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
-		padding : '10px',
-		margin  : '20px',
+	// const editorStyle = {
+	// 	border  : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
+	// 	padding : '10px',
+	// 	margin  : '20px',
 
-	};
+	// };
 
 	const modules = {
 		toolbar: [
@@ -65,20 +62,20 @@ function TextComponent(props) {
 	};
 
 	return (
-		<div style={editorStyle}>
+	// <div style={editorStyle}>
 
-			<ReactQuill
-				theme="bubble"
-				placeholder="Start Typing..."
-				value={editorValue}
-				modules={modules}
-				style={styles}
-				onChange={handleEditorChange}
-				onFocus={() => setIsFocused(true)}
-				onBlur={() => setIsFocused(false)}
-			/>
+		<ReactQuill
+			theme="bubble"
+			placeholder="Start Typing..."
+			value={editorValue}
+			modules={modules}
+				// style={styles}
+			onChange={handleEditorChange}
+			onFocus={() => setIsFocused(true)}
+			onBlur={() => setIsFocused(false)}
+		/>
 
-		</div>
+	// </div>
 	);
 }
 
