@@ -45,7 +45,7 @@ export const FEEDBACK_COLUMNS = ({
 		id       : 'cogo_entity',
 		accessor : ({ cogo_entity = {} }) => (
 			<section className={styles.table_cell}>
-				{cogo_entity.business_name || '__'}
+				{cogo_entity?.business_name || '__'}
 			</section>
 		),
 	},
