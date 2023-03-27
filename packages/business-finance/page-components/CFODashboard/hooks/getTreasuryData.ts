@@ -21,7 +21,7 @@ const useGetTreasuryStats = (tabs) => {
 
 	const getDahboardData = () => {
 		try {
-		     trigger({
+			trigger({
 				params: {
 					entity   : tabs === '101' || tabs === '301' ? tabs : undefined,
 					fromDate : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)

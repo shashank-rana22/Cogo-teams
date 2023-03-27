@@ -2,9 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-interface Props {
-	recievablesTab?:string
-}
 const useGetReceivablesList = () => {
 	const [recievablesTab, setRecievablesTab] = useState('all');
 
@@ -36,7 +33,6 @@ const useGetReceivablesList = () => {
 			Toast.error(e?.message);
 		}
 	};
-
 	useEffect(() => {
 		refetch();
 	}, [JSON.stringify(recievablesTab)]);

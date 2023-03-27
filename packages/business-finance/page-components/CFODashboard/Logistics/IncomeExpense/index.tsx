@@ -12,19 +12,15 @@ function getFinancialYear(date) {
 	const year = date.getFullYear();
 	const month = date.getMonth();
 	if (month < 3) {
-	  return year - 1;
-	}
-	  return year;
+		return year - 1;
+	} return year;
 }
 
 function IncomeExpense() {
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [yearHandle, setYearHandle] = useState(false);
-	const [yearValue, setYearValue] = useState('');
 	const {
-		incomeExpenseLoading,
 		incomeExpenseData = [],
-		refetch,
 	} = useGetIncomeExpense();
 
 	const onChangeToggle = () => {
@@ -32,10 +28,10 @@ function IncomeExpense() {
 	};
 
 	const currentYear = new Date().getFullYear();
-	  const calendarYear = [];
-	  for (let i = 0; i < 5; i++) {
+	const calendarYear = [];
+	for (let i = 0; i < 5; i++) {
 		calendarYear.push(currentYear - i);
-	  }
+	}
 
 	const today = new Date();
 	const financialYears = [];
@@ -52,8 +48,6 @@ function IncomeExpense() {
 				<div style={{ marginBottom: '10px' }}>
 					<div
 						key={year}
-						// value={yearValue}
-						// onClick={(val) => setYearValue(val)}
 						role="presentation"
 					>
 						{year}

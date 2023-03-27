@@ -10,6 +10,10 @@ import useGetAccordianStatsData from '../../hooks/getAccordianStatsCardData';
 
 import styles from './styles.module.css';
 
+interface ItemProps {
+	key: string;
+	label: string;
+}
 function AccordianCards() {
 	const {
 		accordianDataData,
@@ -96,18 +100,18 @@ function AccordianCards() {
 					<div>
 						<div className={styles.borders} />
 						<div className={styles.stats_styles}>
-							{statsTabs.map((item) => (
+							{statsTabs.map((val:ItemProps) => (
 								<div
-									key={item.key}
-									className={item.key === subActiveTab
+									key={val.key}
+									className={val.key === subActiveTab
 										? styles.border_overall : styles.sub_border_overall}
 									onClick={() => {
-										setSubActiveTab(item.key);
+										setSubActiveTab(val.key);
 									}}
 									role="presentation"
 								>
-									{subActiveTab === item.key ? (
-										<span className={styles.overall_text}>{item.label}</span>
+									{subActiveTab === val.key ? (
+										<span className={styles.overall_text}>{val.label}</span>
 									)
 										: (
 											<div className={styles.import_export_style}>

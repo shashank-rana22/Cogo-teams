@@ -6,7 +6,7 @@ import useGetTodayStats from '../../hooks/getTodayStats';
 import styles from './styles.module.css';
 
 function Statistics() {
-	const { todayStatsLoading, todayStatsData } = useGetTodayStats();
+	const { todayStatsData } = useGetTodayStats();
 	const {
 		todayPurchaseStats, todaySalesStats,
 		totalCashFlow = 0, cashFlowDiffFromYesterday = 0,

@@ -14,7 +14,6 @@ function TreasuryStatistics() {
 	const [tabs, setTabs] = useState('all');
 	const {
 		data,
-		loading,
 		treasuryFilters,
 		setTreasuryFilters,
 	} = useGetTreasuryStats(tabs);
