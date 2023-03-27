@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import getPayload from '../utils/getPayload';
 
@@ -28,9 +29,16 @@ function useCreateTestQuestion() {
 	const createTestQuestion = async ({ values, questionSetId, getTestQuestionTest, reset }) => {
 		const { question_type = '' } = values || {};
 
-		const triggerToUse = TriggerMapping?.[question_type] || triggerStandAlone;
+		const { hasError, ...payload } = getPayload({ values, questionSetId, type: question_type });
 
-		const payload = getPayload({ values, questionSetId, type: question_type });
+		if (!isEmpty(hasError)) {
+			hasError.forEach((item) => {
+				Toast.error(item);
+			});
+			return;
+		}
+
+		const triggerToUse = TriggerMapping?.[question_type] || triggerStandAlone;
 
 		try {
 			await triggerToUse({

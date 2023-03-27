@@ -1,4 +1,6 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import getPayload from '../utils/getPayload';
 
@@ -19,17 +21,26 @@ function useUpdateStandAloneTestQuestion() {
 		setAllKeysSaved,
 	}) => {
 		try {
+			const { hasError, ...payload } = getPayload({
+				values,
+				type: 'stand_alone',
+				questionSetId,
+				action,
+				testQuestionId,
+			});
+
+			if (!isEmpty(hasError)) {
+				hasError.forEach((item) => {
+					Toast.error(item);
+				});
+				return;
+			}
+
 			await trigger({
 				data:
 						action === 'delete'
 							? { id: testQuestionId, status: 'inactive' }
-							: getPayload({
-								values,
-								type: 'stand_alone',
-								questionSetId,
-								action,
-								testQuestionId,
-							}),
+							: payload,
 			});
 
 			getTestQuestionTest({
