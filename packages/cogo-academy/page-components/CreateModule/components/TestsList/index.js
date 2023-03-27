@@ -26,7 +26,7 @@ function TestsList({ activeTab, setActiveTab }) {
 
 	const [filters, setFilters] = useState({});
 
-	const [sortBy, setSortBy] = useState('');
+	// const [sortBy, setSortBy] = useState('');
 
 	const {
 		data, loading, fetchList, setParams, params, debounceQuery, input, setInput,
@@ -55,8 +55,6 @@ function TestsList({ activeTab, setActiveTab }) {
 				setParams,
 				activeTab,
 				params,
-				setSortBy,
-
 			},
 		},
 		question_set: {
@@ -70,7 +68,6 @@ function TestsList({ activeTab, setActiveTab }) {
 				setParams : setQuestionListParams,
 				activeTab,
 				params    : questionListParams,
-				setSortBy,
 			},
 		},
 	};
