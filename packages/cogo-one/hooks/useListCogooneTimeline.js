@@ -74,7 +74,7 @@ const useListCogooneTimeline = ({
 					...prev,
 					[id]: {
 						...(prev?.[id] || {}),
-						messagesData: { ...sortedMessages, ...prev?.[id]?.messagesData },
+						messagesData: { ...prev?.[id]?.messagesData, ...sortedMessages },
 						lastDocumentTimeStamp,
 						islastPage,
 					},
