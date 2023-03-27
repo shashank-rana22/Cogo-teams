@@ -15,8 +15,6 @@ function StatsOutstanding({ item }) {
 		onAccountAgeingBucket = {},
 	} = item || {};
 
-	const customPadding = openInvoice.length > 2 ? '8px 10px' : '10px';
-
 	const invoiceContainer = [{
 		name         : 'OPEN INVOICES',
 		LedgerAmount : openInvoice,
@@ -103,7 +101,7 @@ function StatsOutstanding({ item }) {
 				))}
 			</div>
 
-			<div className={styles.outstanding_card} style={{ background: '#FEF9FE', padding: customPadding }}>
+			<div className={styles.outstanding_card} style={{ background: '#FEF9FE' }}>
 				<div className={styles.flex_column}>
 					<div className={styles.label}>Total Outstanding</div>
 					<div
@@ -123,11 +121,6 @@ function StatsOutstanding({ item }) {
 								maximumFractionDigits : 0,
 							},
 						)}
-						<div className={styles.count}>
-							(
-							{totalOutstanding.ledgerCount}
-							)
-						</div>
 					</div>
 				</div>
 			</div>
