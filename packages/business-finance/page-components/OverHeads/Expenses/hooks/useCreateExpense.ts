@@ -157,7 +157,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 			job: {
 				jobSource       : 'OVERHEAD',
 				jobType         : 'EXPENSE',
-				transactionDate : formatDate(transactionDate, 'yyyy-MM-dd hh:mm:ss', {}, false),
+				transactionDate : formatDate(transactionDate, 'yyyy-MM-dd', {}, false),
 				referenceId     : '',
 				jobDetails      : {
 					vendorDetails: {

@@ -123,7 +123,6 @@ function CreateExpenseModal({
 					<Modal.Body className={styles.modal_body}>
 						<MailTemplate
 							mailData={mailData}
-							setMailData={setMailData}
 							setShowModal={setShowModal}
 							getList={getList}
 							getRecurringList={getRecurringList}
