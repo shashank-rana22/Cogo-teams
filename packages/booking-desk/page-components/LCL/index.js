@@ -1,10 +1,10 @@
 import Loader from '../../commons/Loader';
+import useListBookingDeskShipments from '../../hooks/LCL/useListBookingDeskShipments';
 
-import List from './components/List';
-import ScopeAndFilters from './components/ScopeAndFilters';
-import TabsAndFilters from './components/TabsAndFilters';
-import useListBookingDeskShipments from './hooks/useListBookingDeskShipments';
+import List from './List';
+import ScopeAndFilters from './ScopeAndFilters';
 import styles from './styles.module.css';
+import TabsAndFilters from './TabsAndFilters';
 
 export default function LCLDesk({ stateProps = {} }) {
 	const { loading, data } = useListBookingDeskShipments({ stateProps });
