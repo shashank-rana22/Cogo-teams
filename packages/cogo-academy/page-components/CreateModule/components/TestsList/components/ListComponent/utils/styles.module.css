@@ -31,10 +31,10 @@
 }
 
 .name {
-	font-size: 14px;
-	color: #221f20;
 	max-width: 100px;
 	overflow: hidden;
+	font-size: 14px;
+	color: #221f20;
 	text-overflow: ellipsis;
 }
 
