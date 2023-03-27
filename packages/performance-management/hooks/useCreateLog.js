@@ -33,8 +33,6 @@ const useCreateLog = () => {
 			await trigger({
 				data: payload,
 			});
-
-			Toast.success('Submitted the Log Successfully');
 		} catch (e) {
 			Toast.error(getApiErrorString(e.response?.data.error));
 		}

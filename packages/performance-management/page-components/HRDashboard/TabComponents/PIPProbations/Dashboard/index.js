@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
+
 import useGetColumns from '../../../../../common/Columns';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
-import useListEmployees from '../../../../../hooks/useListEmployees';
+import useListEmployeesLog from '../../../../../hooks/useListEmployeesLog';
 
 import Statistics from './Statistics';
 import styles from './styles.module.css';
@@ -49,9 +51,13 @@ function Dashboard({
 		employeeData,
 		loading,
 		// params,
-		// setParams,
+		setParams,
 		setPage,
-	} = useListEmployees(true);
+	} = useListEmployeesLog();
+
+	useEffect(() => {
+		setParams({ ...setParams, IsReviewed: true });
+	});
 
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;

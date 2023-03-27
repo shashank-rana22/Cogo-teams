@@ -9,7 +9,7 @@ import useListManagers from '../../../../hooks/useListManagers';
 import NotifyModal from '../../NotifyModal';
 import TeamMembersList from '../../TeamMembersList';
 import UploadModalBody from '../../UploadModal';
-import LogModal from '../PIPProbations/LogModal';
+import CreateModal from '../PIPProbations/PIPModals/CreateModal';
 
 import styles from './styles.module.css';
 
@@ -145,7 +145,7 @@ function KPIFeedbacks() {
 					>
 						<Modal.Header title="Manual Feedback" />
 						<Modal.Body>
-							<LogModal
+							<CreateModal
 								source="manual_feedback"
 							/>
 						</Modal.Body>

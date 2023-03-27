@@ -1,8 +1,8 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../common/EmptyState';
-import UserProfile from '../../../common/UserStats/UserProfile';
+import EmptyState from '../../../../../../../common/EmptyState';
+import UserProfile from '../../../../../../../common/UserStats/UserProfile';
 
 import Create from './CreatePip';
 import styles from './styles.module.css';
@@ -10,6 +10,7 @@ import Update from './UpdatePip';
 
 function DecisionModal({
 	item,
+	status = '',
 	setItem = () => { },
 	setDisableNext = () => {},
 	type,
@@ -106,12 +107,14 @@ function DecisionModal({
 					{type === 'create' ? (
 						<Create
 							item={item}
+							status={status}
 							setItem={setItem}
 							setDisableNext={setDisableNext}
 						/>
 					) : (
 						<Update
 							item={item}
+							status={status}
 							setItem={setItem}
 							setDisableNext={setDisableNext}
 						/>

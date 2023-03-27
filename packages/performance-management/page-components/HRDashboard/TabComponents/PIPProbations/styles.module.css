@@ -20,21 +20,3 @@
 	border: solid 1px #88CAD1;
 	margin: 8px;
 }
-
-.modal_container{
-    font-size: 16px;
-    margin-left: 16px ;
-}
-
-.sub_container{
-    margin: 16px 24px 0 0;
-}
-
-.sub_heading{
-    font-weight: 500;
-    color: #828282;
-}
-
-.label{
-    margin: 16px 32px 8px 0;
-}

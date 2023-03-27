@@ -1,9 +1,10 @@
 import { Checkbox, Datepicker } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function CreatePip({ item = {}, setItem = () => {}, setDisableNext = () => {} }) {
+function CreatePip({ item = {}, status = '', setItem = () => {}, setDisableNext = () => {} }) {
 	const date = new Date();
 	const [startDate, setStartDate] = useState();
 	const [endDate, setEndDate] = useState();
@@ -28,7 +29,11 @@ function CreatePip({ item = {}, setItem = () => {}, setDisableNext = () => {} })
 	return (
 		<div className={styles.container}>
 			<div className={styles.dates}>
-				<div className={styles.lable}>PIP Start date</div>
+				<div className={styles.lable}>
+					{startCase(status)}
+					{' '}
+					Start date
+				</div>
 				<Datepicker
 					placeholder="Enter Date"
 					showTimeSelect
@@ -53,7 +58,11 @@ function CreatePip({ item = {}, setItem = () => {}, setDisableNext = () => {} })
 			</div>
 
 			<div className={styles.dates}>
-				<div className={styles.lable}>PIP End date</div>
+				<div className={styles.lable}>
+					{startCase(status)}
+					{' '}
+					End date
+				</div>
 				<Datepicker
 					placeholder="Enter Date"
 					showTimeSelect
