@@ -4,7 +4,7 @@
 	border-radius: 8px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 
-	@media(max-width: 576px) {
+	@media (max-width: 576px) {
 		flex-basis: 100%;
 		margin-bottom: 12px;
 	}

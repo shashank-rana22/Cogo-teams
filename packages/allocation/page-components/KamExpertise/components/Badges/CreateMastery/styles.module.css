@@ -1,126 +1,118 @@
 .container {
-    padding: 25px;
-    border-radius: 8px;
-    margin-top: 16px;
-    background: #fff;
+	padding: 25px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
 }
+
 .content_container {
-    margin-top: 28px;
-    display: flex;
-    justify-content: space-between;
-    @media (max-width: 576px) {
-        flex-direction: column;
-    }
+	display: flex;
+	justify-content: space-between;
+	margin-top: 28px;
+
+	@media (max-width: 576px) {
+		flex-direction: column;
+	}
 }
+
 .lower_background {
-    margin-top: -20px;
-    padding: 20px;
-    display: flex;
-    flex-basis: 55%;
-    background: #f9f9f9;
-    opacity: 0.9;
-    border-radius: 10px;
-    justify-content: space-between;
-    width: 100%;
-    @media (max-width: 576px) {
-        margin-top: 10px;
-    }
+	display: flex;
+	flex-basis: 55%;
+	justify-content: space-between;
+	width: 100%;
+	padding: 20px;
+	margin-top: -20px;
+	background: #f9f9f9;
+	border-radius: 10px;
+	opacity: 0.9;
+
+	@media (max-width: 576px) {
+		margin-top: 10px;
+	}
 }
 
 .text_area_container {
-    justify-content: space-between;
-    width: 75%;
-    flex-basis: 70%;
+	flex-basis: 70%;
+	justify-content: space-between;
+	width: 75%;
 
-    :global(.ui_text_area_container) {
-        border: 1px solid #9c9a9a91;
-        border-radius: 8px;
-        padding: 5px;
-        height: 70%;
-    }
+	:global(.ui_text_area_container) {
+		height: 70%;
+		padding: 5px;
+		border: 1px solid #9c9a9a91;
+		border-radius: 8px;
+	}
 
-    :global(.ui_text_area_control) {
-        border-radius: 8px;
-        padding: 5px;
-        background: none;
-    }
+	:global(.ui_text_area_control) {
+		min-height: 140px;
+		padding: 5px;
+		background: none;
+		border-radius: 8px;
+	}
 }
 
 .text_area {
-    color: #221f20;
-    font-size: 8px;
+	font-size: 8px;
+	color: #221f20;
 
-    :global(.ui_text_area_control){
-        min-height: 140px;
-    }
-
-    @media (max-width: 576px) {
-        min-height: 142px;
-    }
+	@media (max-width: 576px) {
+		min-height: 142px;
+	}
 }
 
 .file_select_style {
-    margin: 20px 10px 0 0;
-    width: "70%";
+	width: "70%";
+	margin: 20px 10px 0 0;
 
-    :global(.ui_upload_droparea_container) {
-        border-radius: 8px;
-    }
-
-    :global(.ui_upload_droparea_container) {
-        margin-bottom: 0px;
-    }
+	:global(.ui_upload_droparea_container) {
+		margin-bottom: 0;
+		border-radius: 8px;
+	}
 }
 
 .uploader {
-    :global(.styles_progress_container__cQeyN) {
-        width: 100%;
-    }
-
-    :global(.styles_progress_bar__2P_k1) {
-        display: none;
-    }
-
-    :global(.ui_upload_droparea_container) {
-        margin-bottom: 0;
-    }
+	:global(.ui_upload_droparea_container) {
+		margin-bottom: 0;
+	}
 }
 
 .btncls {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 28px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 28px;
 }
 
 .preview {
-    display: flex;
-    justify-content: center;
-    height: auto;
-    margin-top: 12px;
+	display: flex;
+	justify-content: center;
+	height: auto;
+	margin-top: 12px;
 }
+
 .preview img {
-    width: 60%;
-    height: 60%;
+	width: 60%;
+	height: 60%;
 }
 
 .fields_container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
 
 .text_styles {
-    font-size: 12px;
-    color: #333333;
+	font-size: 12px;
+	color: #333;
 }
 
 .form_container {
-    @media (max-width: 576px) {
-        padding-bottom: 20px;
-    }
+	@media (max-width: 576px) {
+		padding-bottom: 20px;
+	}
 }
+
 .error_message {
-    font-size: 10px;
-    color: #cb6464;
+	font-size: 10px;
+	color: #cb6464;
 }

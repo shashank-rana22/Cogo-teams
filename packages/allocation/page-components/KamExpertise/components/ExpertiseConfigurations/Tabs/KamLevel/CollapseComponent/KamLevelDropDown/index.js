@@ -26,7 +26,7 @@ function KamLevelDropDown({ refetch, transition_level }) {
 	const { control, handleSubmit } = formProps;
 
 	return (
-		<div className={styles.child}>
+		<div>
 			{editMode
 				? (
 					<KamLevelDetailsEdit

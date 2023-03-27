@@ -1,21 +1,21 @@
-.card_item{
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0px 0px 16px rgba(44, 62, 80, 0.2);
-    padding: 16px;
-    margin-bottom: 24px;
-    display: flex;
-    flex-direction: column;
+.card_item {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: auto;
+	padding: 16px;
+	margin-bottom: 24px;
+	border-radius: 10px;
+	box-shadow: 0 0 16px rgb(44 62 80 / 20%);
 }
 
-.single_control{
-    display: flex;
-    flex-direction: column;
+.single_control {
+	display: flex;
+	flex-direction: column;
 }
 
-.lower_container{
-    margin-top: 16px;
-    display: flex;
-    justify-content: space-between;
+.lower_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 16px;
 }

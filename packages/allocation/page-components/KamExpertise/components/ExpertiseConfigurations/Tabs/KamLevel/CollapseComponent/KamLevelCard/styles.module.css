@@ -1,70 +1,70 @@
 .whole {
-  width: 100%;
-  flex: 1;
+	flex: 1;
+	width: 100%;
 }
 
 .arrow {
-  align-items: center;
-  justify-content: center;
-  font-size: 21px;
-  margin: 0 6px 0 6px;
+	align-items: center;
+	justify-content: center;
+	margin: 0 6px;
+	font-size: 21px;
 }
 
 .button_container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
+	display: flex;
+	gap: 15px;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .score_container {
-  display: flex;
+	display: flex;
 }
 
 .text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 400;
-  font-size: 21px;
-  color: #221f20;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 21px;
+	font-weight: 400;
+	color: #221f20;
 }
 
 .list_item {
-  flex-basis: 24%;
+	flex-basis: 24%;
 }
 
 .label_text {
-  font-weight: 400;
-  font-size: 14px;
-  color: #333333;
-  width: 100%;
-  opacity: 0.7;
-  margin: 0 0 4px 0;
+	width: 100%;
+	margin: 0 0 4px;
+	font-size: 14px;
+	font-weight: 400;
+	color: #333;
+	opacity: 0.7;
 }
 
 .delete_button {
-  align-items: center;
-  justify-content: center;
-  margin: 0 32px 0 0;
+	align-items: center;
+	justify-content: center;
+	margin: 0 32px 0 0;
 }
 
 .title_show {
-  font-weight: 400;
-  font-size: 12px;
-  color: #221f20;
-  opacity: 0.6;
+	font-size: 12px;
+	font-weight: 400;
+	color: #221f20;
+	opacity: 0.6;
 }
 
-.card_container{
-  width:100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.card_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 }
 
-.delete_btn_visibility{
-  opacity: 0.4;
-  pointer-events: none ;
-  cursor: not-allowed;
+.delete_btn_visibility {
+	pointer-events: none;
+	cursor: not-allowed;
+	opacity: 0.4;
 }

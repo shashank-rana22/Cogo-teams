@@ -1,5 +1,5 @@
 .collapse {
-  :global(.ui_collapse_title) {
-    width: 100%;
-  }
+	:global(.ui_collapse_title) {
+		width: 100%;
+	}
 }

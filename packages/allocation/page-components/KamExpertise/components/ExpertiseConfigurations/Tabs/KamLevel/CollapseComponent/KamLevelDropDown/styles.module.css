@@ -1,9 +1,4 @@
-.child{
-    :global(.ui_NUlfK ){
-      padding: 10px;
-    }
-}
-.delete_button{
- float: right;
- margin: 10px 32px 10px 10px ;
+.delete_button {
+	float: right;
+	margin: 10px 32px 10px 10px;
 }

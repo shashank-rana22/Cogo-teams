@@ -1,39 +1,45 @@
 .level_card_container {
-  height: 100%;
-  border-radius: 8px;
-  background-color: #fff;
-  padding: 12px;
+	height: 100%;
+	padding: 12px;
+	background-color: #fff;
+	border-radius: 8px;
 }
+
 .row_level {
-  font-weight: 700;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  color: #4f4f4f;
-  margin : 12px 0 12px 8px;
+	display: flex;
+	align-items: center;
+	margin: 12px 0 12px 8px;
+	font-size: 18px;
+	font-weight: 700;
+	color: #4f4f4f;
 }
+
 .row_level_end {
-  margin: 0 12px;
-  padding: 12px 0;
+	padding: 12px 0;
+	margin: 0 12px;
 }
+
 .row_level_end_options {
-  display: flex;
-  width: 100%;
-  margin: 12px 0 0 0;
+	display: flex;
+	width: 100%;
+	margin: 12px 0 0;
 }
+
 .score_value {
-  font-weight: 500;
-  font-size: 21px;
-  color: #333333;
-  margin :0 0 24px 8px;
+	margin: 0 0 24px 8px;
+	font-size: 21px;
+	font-weight: 500;
+	color: #333;
 }
+
 .border_class {
-  border: 1px solid #bdbdbd;
-  opacity: 0.4;
-  width: 98%;
-  margin-left: 8px;
+	width: 98%;
+	margin-left: 8px;
+	border: 1px solid #bdbdbd;
+	opacity: 0.4;
 }
-.delete_button{
-  float: right;
-  margin: 10px 32px 10px 10px ;
- }
+
+.delete_button {
+	float: right;
+	margin: 10px 32px 10px 10px;
+}
