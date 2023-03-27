@@ -7,7 +7,7 @@ import StatsDisplay from '../../../utils/StatsDisplay';
 import styles from './styles.module.css';
 
 function LeaveTest({ showLeaveTestModal, setShowLeaveTestModal, setActiveState, data = {} }) {
-	const { endTest } = useEndTest({ setActiveState });
+	const { endTest, endTestLoading } = useEndTest({ setActiveState, setShowTimeOverModal: setShowLeaveTestModal });
 
 	const handleContinueTest = () => {
 		handleEnterFullScreen();
@@ -25,13 +25,23 @@ function LeaveTest({ showLeaveTestModal, setShowLeaveTestModal, setActiveState, 
 
 				<div className={styles.button_container}>
 					<Button
+						type="button"
 						onClick={endTest}
 						style={{ marginRight: 12 }}
 						themeType="secondary"
+						loading={endTestLoading}
 					>
 						Yes, I want to leave
 					</Button>
-					<Button themeType="accent" onClick={() => handleContinueTest()}>Continue the test</Button>
+
+					<Button
+						type="button"
+						disabled={endTestLoading}
+						themeType="accent"
+						onClick={() => handleContinueTest()}
+					>
+						Continue the test
+					</Button>
 				</div>
 			</Modal.Body>
 		</Modal>

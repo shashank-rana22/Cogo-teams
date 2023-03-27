@@ -81,7 +81,7 @@ function TestResults({ test_id = '' }) {
 
 	return (
 		<div className={styles.container}>
-			<Header header_data={header_data} />
+			<Header header_data={header_data} loading={loading} />
 			<div className={styles.info_row}>
 				<BasicDetails basic_info_data={basic_info_data} />
 				<PercentagePassed stats_data={stats_data} />
