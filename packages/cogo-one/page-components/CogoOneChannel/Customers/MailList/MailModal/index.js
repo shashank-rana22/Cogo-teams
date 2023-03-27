@@ -2,7 +2,7 @@ import { Toast, cl, Modal, RTE, Input } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
-import CustomInput from '../../../../../common/EmailCustomTag/index';
+import CustomInput from '../../../../../common/EmailCustomTag';
 import { TOOLBARCONFIG } from '../../../../../constants';
 import { decode, buttonOptions } from '../../../../../constants/MAIL_CONSTANT';
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
@@ -30,9 +30,6 @@ function MailModal({
 		emailState,
 		bccArray,
 		setEmailState,
-		setRecipientArray,
-		setShowMailModal,
-		setBccArray,
 	} = mailProps;
 
 	const [showControl, setShowControl] = useState(false);
@@ -56,22 +53,17 @@ function MailModal({
 		handleClose = () => {},
 		handleAttachmentDelete = () => {},
 	} = mailFunction({
+		...mailProps,
 		type,
 		setErrorValue,
 		recipientValue,
 		ccBccValue,
 		setError,
-		recipientArray,
-		bccArray,
-		setRecipientArray,
 		setRecipientValue,
 		setType,
 		setShowControl,
-		setBccArray,
 		setCcBccValue,
 		setAttachments,
-		setEmailState,
-		setShowMailModal,
 		attachments,
 		uploaderRef,
 	});
@@ -137,7 +129,6 @@ function MailModal({
 				<div className={styles.type_to}>
 					<div className={styles.sub_text}>
 						To:
-						{' '}
 					</div>
 					<div className={styles.tags_div}>
 						{(recipientArray || []).map((data) => (
@@ -184,7 +175,6 @@ function MailModal({
 				<div className={styles.type_to}>
 					<div className={styles.sub_text}>
 						Cc/Bcc, From:
-						{' '}
 					</div>
 					<div className={styles.tags_div}>
 						{(bccArray || []).map((data) => (
