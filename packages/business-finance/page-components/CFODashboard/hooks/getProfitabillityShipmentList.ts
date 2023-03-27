@@ -1,11 +1,20 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilters }) => {
-	const [searchValue, setSearchValue] = useState('');
+interface GenericObject {
+	[key: string]: any;
+}
+interface Props {
+	tabs?:string,
+	jobsFilters?:object,
+	filters: GenericObject;
+	setFilters: (p: object) => void;
+}
+
+const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilters }:Props) => {
+	const [searchValue, setSearchValue] = useState<string>('');
 
 	const apiUrl = {
 		shipment : '/payments/dashboard/bf-profitability-shipment',

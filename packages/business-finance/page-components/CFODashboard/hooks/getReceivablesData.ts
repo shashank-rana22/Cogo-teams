@@ -2,6 +2,9 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
+interface Props {
+	recievablesTab?:string
+}
 const useGetReceivablesList = () => {
 	const [recievablesTab, setRecievablesTab] = useState('all');
 
@@ -14,7 +17,7 @@ const useGetReceivablesList = () => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const buyerTypeFilter = (recievablesTab) => {
+	const buyerTypeFilter = () => {
 		if (recievablesTab === 'ie' || recievablesTab === 'cp' || recievablesTab === 'ent') {
 			return recievablesTab;
 		}
@@ -26,7 +29,7 @@ const useGetReceivablesList = () => {
 			trigger({
 				params: {
 					accountMode : 'AR',
-					buyerType   : buyerTypeFilter(recievablesTab),
+					buyerType   : buyerTypeFilter(),
 				},
 			});
 		} catch (e) {

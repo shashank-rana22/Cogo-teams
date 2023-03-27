@@ -1,6 +1,3 @@
-import { Pill } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
-
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import getFormattedPrice from '../../commons/utils/getFormattedPrice';
 
