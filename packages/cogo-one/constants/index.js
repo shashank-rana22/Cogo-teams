@@ -205,4 +205,37 @@ export const ACCOUNT_TYPE_MAPPING = {
 	service_provider  : 'twin_service_provider_id',
 };
 
-export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/prod_cogo_one.apk';
+export const DOCUMENT_FILTERS_MAPPING = [
+	{
+		label : 'KYC Document',
+		value : 'kyc_document',
+	},
+	{
+		label : 'Shipment Document',
+		value : 'shipment_document',
+	},
+	{
+		label : 'Wrong Document',
+		value : 'wrong_document',
+	},
+	{
+		label : 'Document Uploaded',
+		value : 'document_uploaded',
+	},
+	{
+		label : 'Document Accepted',
+		value : 'document_accepted',
+	},
+	{
+		label : 'Document Rejected',
+		value : 'document_rejected',
+	},
+
+];
+
+export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/cogoOne_prod.apk';
+
+export const PAGE_LIMIT = 50;
+export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
+
+export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg';

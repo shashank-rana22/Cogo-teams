@@ -68,7 +68,7 @@ const useUpdateJob = ({ query, setShowButton, showButton, setShowFinal, showFina
 			Toast.success('Close successfully...');
 			setShowButton(!showButton);
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 

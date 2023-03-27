@@ -70,10 +70,10 @@ function OtherChargeDetails({
 						>
 							<p style={{ fontSize: 13 }}>
 								<div style={{ height: '30%' }}>
-									{(agentOtherCharges || [{}]).map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
+									{formData?.class === 'a' ? '' : (agentOtherCharges || [{}]).map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
 								</div>
 								<br />
-								{carrierOtherCharges.map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
+								{formData?.class === 'a' ? '' : carrierOtherCharges.map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
 							</p>
 						</div>
 					</p>
@@ -112,7 +112,7 @@ function OtherChargeDetails({
 				`}
 				>
 					<p style={{ fontSize: 14 }}>
-						{taskItem?.customer_name}
+						{formData?.shipperSignature}
 					</p>
 				</div>
 				<div className={cl`
@@ -152,8 +152,8 @@ function OtherChargeDetails({
 							${styles.place_container_text} 
 						`}
 						>
-							<p className={styles.font_style} style={{ fontSize: 14 }}>
-								{`${formatDate(new Date())}`}
+							<p style={{ fontSize: 14 }}>
+								{`${formatDate(formData.executedDate) || formatDate(new Date())}`}
 							</p>
 						</div>
 						<div
@@ -244,7 +244,7 @@ function OtherChargeDetails({
 								${styles.end_final} 
 							`}
 					>
-						<p className={styles.font_style} style={{ fontSize: 18 }}>
+						<p style={{ fontSize: 18 }}>
 							{taskItem?.awbNumber}
 						</p>
 					</div>

@@ -1331,7 +1331,7 @@ const navigationMappingAdmin = {
 				as            : '/bl_do-collection-release',
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
-				possible_apis : apis.bl_do_collection_release,
+				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
 
 			},
 			{
@@ -1785,7 +1785,7 @@ const navigationMappingAdmin = {
 	},
 	ground_ops: {
 		key           : 'ground_ops',
-		title         : 'Ground Ops Dashboard',
+		title         : 'SO2 - Docs Dashboard',
 		href          : '/v2/ground-ops',
 		as            : '/v2/ground-ops',
 		main_apis     : [],
@@ -2012,6 +2012,15 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.faq,
 			},
+			{
+				key           : 'cogo_academy-announcements',
+				title         : 'Announcements',
+				href          : '/v2/announcements',
+				as            : '/v2/announcements',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.announcements,
+			},
 		],
 		module_type: 'crm',
 	},
@@ -2042,7 +2051,7 @@ const navigationMappingAdmin = {
 		options     : [
 			{
 				key           : 'analytics_dashboard-management',
-				title         : 'Analytics Dashboard Management',
+				title         : 'Dashboard Management',
 				href          : '/analytics-dashboard-management',
 				as            : '/analytics-dashboard-management',
 				type          : 'link',
@@ -2051,7 +2060,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'analytics_dashboard-view',
-				title         : 'Analytics Dashboard',
+				title         : 'Dashboard',
 				href          : '/analytics-dashboard',
 				as            : '/analytics-dashboard',
 				type          : 'link',
