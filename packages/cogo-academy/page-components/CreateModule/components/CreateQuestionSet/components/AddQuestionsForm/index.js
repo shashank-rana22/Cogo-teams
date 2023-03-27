@@ -88,7 +88,7 @@ function AddQuestionsForm({
 			{!allKeysSaved && !loading ? (
 				<ManualAddition
 					questionSetId={questionSetId}
-					test_questions={test_questions}
+					test_questions={listData}
 					setSavedQuestionDetails={setSavedQuestionDetails}
 					setAllKeysSaved={setAllKeysSaved}
 					editDetails={editDetails}

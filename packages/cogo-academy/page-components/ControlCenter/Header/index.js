@@ -22,7 +22,6 @@ function Header({ setSwitchDashboard = () => {} }) {
 				<Button
 					type="button"
 					style={{ marginLeft: 8 }}
-					themeType="secondary"
 					onClick={() => setSwitchDashboard(false)}
 				>
 					Analytics
