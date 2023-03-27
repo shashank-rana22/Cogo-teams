@@ -13,7 +13,7 @@ const useCreateRfqSupplyAgentPreference = ({ item, reason, setShow, refetch }) =
 				data: {
 					rfq_id          : item?.id,
 					preference_type : 'close',
-					remarks : [reason],
+					remarks         : [reason],
 				},
 			});
 			setShow(false);
