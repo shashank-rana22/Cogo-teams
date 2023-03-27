@@ -86,11 +86,11 @@
 
 	&.block_a_container_volume {
 		position: absolute;
-		right: 700px;
-		width: 195px;
-		max-width: 200%;
+		left: 0;
+		width: auto;
+		max-width: 70%;
 		padding-top: 40px;
-		padding-left: 60px;
+		padding-left: 16px;
 	}
 
 	&.sci_text_style {
@@ -141,12 +141,12 @@
 	}
 
 	.remark_box {
-		width: 400px;
+		width: auto;
 		padding-left: 2px;
 	}
 
 	.volume_box {
-		width: 200px;
+		width: auto;
 	}
 
 	.handling_information_width {
@@ -183,8 +183,7 @@
 
 .font_style {
 	margin-bottom: 0;
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: 900;
+	text-transform: uppercase;
 }
 
 .flex_col {

@@ -1002,12 +1002,12 @@ const saas = {
 		{
 			api          : 'create_spot_search',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'spot_search',
 		},
 		{
 			api          : 'get_spot_search',
 			access_type  : 'public',
-			service_name : 'organization',
+			service_name : 'spot_search',
 		},
 		{
 			api          : 'get_sailing_schedules',
@@ -1860,16 +1860,18 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 		{
-			api         : 'get_spot_search',
-			access_type : 'private',
-			module      : 'dutiesTaxes',
-			feature     : 'dutiesTaxes',
+			api          : 'get_spot_search',
+			access_type  : 'private',
+			module       : 'dutiesTaxes',
+			feature      : 'dutiesTaxes',
+			service_name : 'spot_search',
 		},
 		{
-			api         : 'create_spot_search',
-			access_type : 'private',
-			module      : 'dutiesTaxes',
-			feature     : 'dutiesTaxes',
+			api          : 'create_spot_search',
+			access_type  : 'private',
+			module       : 'dutiesTaxes',
+			feature      : 'dutiesTaxes',
+			service_name : 'spot_search',
 		},
 		{
 			api         : 'get_saas_trade_engine_service_rates',

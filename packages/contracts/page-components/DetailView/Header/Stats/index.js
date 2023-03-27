@@ -19,14 +19,22 @@ function Stats({
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.heading}>
-					{data?.contract_reference_id ? (
-						<div className={styles.contract_id}>
-							Contract ID #
-							{data?.contract_reference_id}
+					<div className={styles.contract_details}>
+						{data?.contract_reference_id ? (
+							<div className={styles.contract_id}>
+								Contract ID #
+								{data?.contract_reference_id}
+							</div>
+						) : null}
+						<div className={styles.name}>
+							{startCase(data?.contract_name)}
 						</div>
-					) : null}
-					<div className={styles.name}>
-						{startCase(data?.contract_name)}
+					</div>
+					<div className={styles.business_name}>
+						Business Name:
+						<div className={styles.org_name}>
+							{startCase(data?.importer_exporter?.business_name)}
+						</div>
 					</div>
 				</div>
 				<div className={styles.details}>
@@ -42,7 +50,6 @@ function Stats({
 							)}
 						</div>
 					</div>
-
 					<div className={styles.service_details}>
 						{data.services.map((service, index) => (
 							<>

@@ -1,4 +1,4 @@
-import { Input } from '@cogoport/components';
+import { Input, Toggle } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
@@ -31,9 +31,10 @@ const tabsComponentMapping = {
 	approved_awb     : ApprovedAWB,
 };
 
-function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
+function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 	const [activeTab, setActiveTab] = useState(tabs[0].key);
 	const [filters, setFilters] = useState({});
+	const [relevantToMe, setRelevantToMe] = useState(false);
 
 	const ActiveTabComponent = tabsComponentMapping[activeTab] || null;
 
@@ -44,18 +45,11 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 	const {
 		data, loading, page,
 		setPage, listAPi, searchValue, setSearchValue,
-	} = useListShipmentPendingTasks({ activeTab });
+	} = useListShipmentPendingTasks({ activeTab, filter: filters, relevantToMe });
 
 	useEffect(() => {
-		listAPi({ filter: filters });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(filters)]);
-
-	useEffect(() => {
-		if (searchValue === '') { listAPi({ filter: filters }); }
-		setSearchValue('');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab]);
+		listAPi();
+	}, [activeTab, listAPi]);
 	return (
 		<div>
 			<div className={styles.container}>
@@ -93,7 +87,17 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 						setSearchValue(val);
 					}}
 				/>
-				<Filters setFilters={setFilters} filters={filters} />
+				<div className={styles.flex}>
+					<Toggle
+						name="stakeholder_id"
+						size="sm"
+						disabled={false}
+						onLabel="Relevent to me"
+						offLabel="All"
+						onChange={() => setRelevantToMe((p) => !p)}
+					/>
+					<Filters setFilters={setFilters} filters={filters} />
+				</div>
 			</div>
 			{ActiveTabComponent && (
 				<ActiveTabComponent
@@ -103,6 +107,7 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 					setGenerate={setGenerate}
 					setItem={setItem}
 					setViewDoc={setViewDoc}
+					edit={edit}
 					setEdit={setEdit}
 					page={page}
 					setPage={setPage}

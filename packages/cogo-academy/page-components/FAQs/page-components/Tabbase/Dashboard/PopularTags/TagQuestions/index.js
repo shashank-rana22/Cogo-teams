@@ -35,7 +35,7 @@ function TagQuestions({ tagId = [] }) {
 	}
 
 	if (isEmpty(data?.list)) {
-		return (<EmptyState text="Oops! No tags availabe" />);
+		return (<EmptyState text="Oops! No tags available" />);
 	}
 
 	return (

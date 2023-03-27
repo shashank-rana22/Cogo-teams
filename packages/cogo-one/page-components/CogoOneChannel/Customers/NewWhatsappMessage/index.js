@@ -1,40 +1,51 @@
 import { Toast, Modal } from '@cogoport/components';
-import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
-import React, { useState } from 'react';
+import React, { useState, useEffect	} from 'react';
 
 import Templates from '../../../../common/Templates';
-import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
+import useSendUserWhatsappTemplate from '../../../../hooks/useSendUserWhatsappTemplate';
 
 import styles from './styles.module.css';
 
 function NewWhatsappMessage({
 	setModalType = () => {},
+	modalType = {},
 }) {
-	const [activeTab, setActiveTab] = useState('quick_reply');
 	const [openCreateReply, setOpenCreateReply] = useState(false);
-	const closeModal = () => {
-		setModalType(false);
-	};
 
 	const [dialNumber, setDialNumber] = useState({
 		number       : '',
 		country_code : '+91',
 	});
-	const { sendCommunicationTemplate, loading } = useSendCommunicationTemplate(
+	const { type = '', data:modalData = {} } = modalType || {};
+
+	const closeModal = () => {
+		setModalType(false);
+		setDialNumber({
+			number       : '',
+			country_code : '+91',
+		});
+	};
+
+	useEffect(() => {
+		if (type === 'voice_call_component') {
+			setDialNumber(modalData);
+		}
+	}, [modalData, type]);
+
+	const { sendUserWhatsappTemplate, loading } = useSendUserWhatsappTemplate(
 		{
-			formattedData   : {},
-			isOtherChannels : true,
-			callbackfunc    : closeModal,
+			callbackfunc: closeModal,
 		},
 	);
-	const sendWhatsappCommunication = (args) => {
+	const sendWhatsappCommunication = (args = {}) => {
 		const { country_code = '', number = '' } = dialNumber;
-		const numberWithCountryCode = country_code + number;
-		if (number === '') {
-			Toast.error('Please enter mobile number ');
-		} else {
-			sendCommunicationTemplate({ ...args, otherChannelRecipient: numberWithCountryCode });
+		if (!number) {
+			Toast.error('Please enter mobile number');
+			return;
 		}
+
+		const { template_name } = args;
+		sendUserWhatsappTemplate({ country_code: country_code.slice(1), whatsapp_number: number, template_name });
 	};
 	const data = {
 		sendCommunicationTemplate : sendWhatsappCommunication,
@@ -42,7 +53,7 @@ function NewWhatsappMessage({
 	};
 	return (
 		<Modal
-			show
+			show={modalType?.type}
 			size="xs"
 			onClose={closeModal}
 			onClickOutside={closeModal}
@@ -56,27 +67,13 @@ function NewWhatsappMessage({
 					</div>
 				)}
 			/>
-			<div className={styles.wrap_heading}>
-				<div>Enter mobile number</div>
-			</div>
-			<div className={styles.wrap_mobile_number}>
-
-				<SelectMobileNumber
-					value={dialNumber}
-					onChange={(val) => setDialNumber(val)}
-					inputType="number"
-					placeholder="Enter number"
-				/>
-			</div>
-			<div className={styles.wrap_heading}>
-				<div>Select a template</div>
-			</div>
 			<Templates
 				data={data}
-				activeTab={activeTab}
 				openCreateReply={openCreateReply}
 				setOpenCreateReply={setOpenCreateReply}
-				setActiveTab={setActiveTab}
+				type={type}
+				setDialNumber={setDialNumber}
+				dialNumber={dialNumber}
 			/>
 		</Modal>
 	);
