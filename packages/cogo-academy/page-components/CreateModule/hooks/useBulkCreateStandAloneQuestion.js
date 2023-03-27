@@ -16,11 +16,8 @@ function useBulkCreateStandAloneQuestion() {
 		try {
 			await trigger({
 				data: {
-					test_question_set_id: questionSetId,
-					file_url:
-						typeof uploadDocument?.[0] === 'string'
-							? uploadDocument?.[0]
-							: uploadDocument?.[0]?.finalUrl,
+					test_question_set_id : questionSetId,
+					file_url             : uploadDocument,
 				},
 			});
 
