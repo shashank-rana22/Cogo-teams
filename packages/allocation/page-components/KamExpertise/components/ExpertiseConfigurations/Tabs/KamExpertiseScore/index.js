@@ -53,7 +53,6 @@ const titleSection = (expertiseItem = {}) => (
 
 function KamExpertiseScoreConfig({
 	setMainLoading,
-	// responseId,
 	listExpertiseParams,
 	expertiseLoading,
 	expertiseRefetch,
