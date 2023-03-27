@@ -1,21 +1,14 @@
 import useAxios from 'axios-hooks';
 import { useEffect, useState } from 'react';
 
+import APIS from '../constants/apis';
+
 /**
  * @param {String} email_address Mail address to  get mails from
  * @param {String} page_limit No of records per page
  * @param {('outlook' | 'cogo_rpa')} source Source of email
  * Single utility hook to get mails from Cogo RPA using email address and folder
  */
-
-const APIS = {
-	outlook: {
-		list: 'list_mails',
-	},
-	cogo_rpa: {
-		list: 'list_rpa_mails',
-	},
-};
 
 const useGetRpaMails = (
 	email_address,
