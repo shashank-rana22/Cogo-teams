@@ -52,7 +52,7 @@ export const nonRecurringExpenseDetails = ({
 			groupBy : [
 				{
 					name           : 'vendorName',
-					label          : 'Vendor Name*',
+					label          : 'Vendor Name',
 					type           : 'asyncSelect',
 					asyncKey       : 'list_vendors',
 					value          : formData?.vendorName,
@@ -66,21 +66,21 @@ export const nonRecurringExpenseDetails = ({
 				},
 				{
 					name                  : 'invoiceDate',
-					label                 : 'Invoice Date*',
+					label                 : 'Invoice Date',
 					type                  : 'datepicker',
 					isPreviousDaysAllowed : true,
 					span                  : 2,
 				},
 				{
 					name                  : 'transactionDate',
-					label                 : 'Transaction Date*',
+					label                 : 'Transaction Date',
 					type                  : 'datepicker',
 					isPreviousDaysAllowed : true,
 					span                  : 2,
 				},
 				{
 					name           : 'periodOfTransaction',
-					label          : 'Period Of Transaction*',
+					label          : 'Period Of Transaction',
 					type           : 'select',
 					multiple       : false,
 					defaultOptions : false,
@@ -93,7 +93,7 @@ export const nonRecurringExpenseDetails = ({
 				},
 				{
 					name           : 'cogoEntity',
-					label          : 'Cogo Entity*',
+					label          : 'Cogo Entity',
 					type           : 'select',
 					multiple       : false,
 					defaultOptions : false,
@@ -114,13 +114,13 @@ export const nonRecurringExpenseDetails = ({
 					label       : 'PAN',
 					type        : 'textarea',
 					value       : formData?.registrationNumber || null,
-					style       : { borderRadius: '4px', height: '40px', width: '180px' },
+					style       : { borderRadius: '4px', height: '40px', width: '180px', padding: '7px' },
 					placeholder : 'Autofilled PAN',
 					span        : 2.4,
 				},
 				{
 					name           : 'expenseCategory',
-					label          : 'Expense Category*',
+					label          : 'Expense Category',
 					type           : 'select',
 					multiple       : false,
 					defaultOptions : false,
@@ -131,7 +131,7 @@ export const nonRecurringExpenseDetails = ({
 				},
 				{
 					name           : 'expenseSubCategory',
-					label          : 'Expense Sub-Category*',
+					label          : 'Expense Sub-Category',
 					type           : 'select',
 					multiple       : false,
 					defaultOptions : false,

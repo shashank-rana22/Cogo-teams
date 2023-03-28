@@ -5,20 +5,36 @@ import { useSelector } from '@cogoport/store';
 interface SellerDetails {
 	organizationName?:string,
 }
-interface Row {
+
+interface Data {
+	expensePeriod?:string,
+	recurringAmount?:number | string,
+	grandTotal?:number,
+	paidAmount?:number | string,
+	dueDate?: Date,
+	billDate?: Date,
+	createdDate?:Date,
+	status?: string,
+	billNumber?:string | number,
+	billDocumentUrl?:string,
+	startDate?:Date,
+	endDate?:Date,
+	maxPayoutAllowed?:number | string,
+	currency?:string,
+	updatedAt?:Date,
+	proofDocuments?:string[],
+	createdAt?:Date,
 	sellerDetails?:SellerDetails,
 	category?:string,
-	billDate?:Date | number,
-	maxPayoutAllowed?:number | string,
-	grandTotal?:number,
 	approvedBy?:string | number,
 	approvedByUser?:{ id?:string | number },
 	businessName?:string,
-	createdAt?:Date,
+	payableAmount?:string | number,
+
 }
 
 interface Props {
-	rowData?:Row,
+	rowData?:Data,
 	recurringState?:string,
 }
 
@@ -43,8 +59,9 @@ const useSendEmail = () => {
 		const { id:recurringApprovedBy } = approvedByUser || {};
 
 		let payableAmount:number | string;
+
 		if (recurringState === 'recurring') {
-			payableAmount = rowData?.maxPayoutAllowed;
+			payableAmount = rowData?.maxPayoutAllowed || rowData?.payableAmount;
 		} else if (recurringState === 'nonRecurring') {
 			payableAmount = rowData?.grandTotal;
 		}

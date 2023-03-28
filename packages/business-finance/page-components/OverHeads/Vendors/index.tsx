@@ -154,17 +154,16 @@ function VenderComponent() {
 	}
 
 	function RenderInvoice({ item }) {
-		const { openInvoices = 0, openInvoiceAmount = 0 } = item;
+		const { openInvoices = 0, openInvoiceAmount = 0, currency = '' } = item;
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
 				{openInvoices}
-				{' '}
 				<div>
-					{' '}
 					(
+					{currency}
+					{' '}
 					{openInvoiceAmount}
 					)
-					{' '}
 				</div>
 			</div>
 		);

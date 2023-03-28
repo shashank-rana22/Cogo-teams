@@ -101,10 +101,15 @@ function ExpenseDetailsForm({
 		}
 
 		const fetchedEntities = obj?.services?.map((service) => service?.cogo_entity_id);
+		// Removing duplicates from the  fetchedEntities array
+		const uniqueEntities = (fetchedEntities || []).filter((
+			item,
+			index,
+		) => fetchedEntities?.indexOf(item) === index);
 
 		if (entityList?.length > 0) {
 			const entities = [];
-			(fetchedEntities || []).forEach((singleEntity) => {
+			(uniqueEntities || []).forEach((singleEntity) => {
 				(entityList || []).forEach((entity) => {
 					const { id, entity_code:entityCode, business_name:name } = entity || {};
 					if (singleEntity === id) {

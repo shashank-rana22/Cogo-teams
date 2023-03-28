@@ -53,8 +53,8 @@ export const expenseRecurringConfig = () => {
 			},
 			{
 				label : 'Category',
-				key   : 'category',
 				span  : 1.2,
+				func  : 'renderCategory',
 			},
 			{
 				label   : 'Created on',
@@ -107,9 +107,8 @@ export const expenseNonRecurringConfig = () => ({
 		},
 		{
 			label : 'Category',
-			key   : 'category',
 			span  : 1.2,
-			// styles : { display: 'flex', justifyContent: 'center' },
+			func  : 'renderCategory',
 		},
 		{
 			label   : 'Invoice Amount',

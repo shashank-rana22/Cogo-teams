@@ -34,7 +34,7 @@ interface ItemDataInterface {
 	billDate?: Date,
 	createdDate?:Date,
 	status?: string,
-	approvedByUser?:{ name?:string },
+	approvedByUser?:{ id?:string | number, name?:string },
 	billNumber?:string | number,
 	billDocumentUrl?:string,
 	startDate?:Date,
@@ -44,6 +44,7 @@ interface ItemDataInterface {
 	updatedAt?:Date,
 	proofDocuments?:string[],
 	createdAt?:Date,
+	category?:string,
 }
 
 function ExpenseComponent() {
@@ -170,6 +171,14 @@ function ExpenseComponent() {
 				Add Expense
 			</Button>
 		),
+		renderCategory: (itemData:ItemDataInterface) => {
+			const { category = '' } = itemData || {};
+			return (
+				<div style={{ fontSize: '14px' }}>
+					{category.replaceAll('_', ' ')}
+				</div>
+			);
+		},
 		renderExpensePeriod: (itemData:ItemDataInterface) => {
 			const { startDate, endDate } = itemData || {};
 			if (startDate && endDate) {
@@ -366,7 +375,7 @@ function ExpenseComponent() {
 	const showDropDown = (singleItem:{ id?:string }) => {
 		const { id } = singleItem || {};
 
-		if (recurringState === 'recurring') return <ShowMore id={id} />;
+		if (recurringState === 'recurring') return <ShowMore id={id} recurringState={recurringState} />;
 		return null;
 	};
 

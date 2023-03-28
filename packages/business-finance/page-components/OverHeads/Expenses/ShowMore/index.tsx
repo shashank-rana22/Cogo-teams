@@ -18,14 +18,14 @@ interface BillInterface {
 	billDate?:Date,
 	createdDate?:Date,
 	status?:string,
-	approvedByUser?:any,
 	updatedAt?:any,
 	payableTds?:any,
 	billDocumentUrl?:string,
 	approvedByName?:string,
+	approvedByUser?:{ id?:string | number },
 }
 
-function ShowMore({ id }) {
+function ShowMore({ id, recurringState }) {
 	const [moreData, setMoreData] = useState(false);
 	const { getList, listData, listLoading } = useListExpense({ id, expenseType: 'RECURRING' });
 	const billList = listData?.list;
@@ -155,7 +155,7 @@ function ShowMore({ id }) {
 																		<Button
 																			style={{ background: 'none', color: '#F68B21', fontSize: '12px', padding: '0px 4px' }}
 																			disabled={mailLoading}
-																			onClick={() => { sendMail({ rowData: bill }); }}
+																			onClick={() => { sendMail({ rowData: bill, recurringState }); }}
 																		>
 																			Re-send Email
 																		</Button>

@@ -56,14 +56,11 @@ function CreateExpenseModal({
 	}
 
 	let mailData:object;
-	let setMailData:(p:any)=>void;
 
 	if (createExpenseType === 'recurring') {
 		mailData = recurringData;
-		setMailData = setRecurringData;
 	} else if (createExpenseType === 'nonRecurring') {
 		mailData = nonRecurringData;
-		setMailData = setNonRecurringData;
 	}
 
 	useEffect(() => {
