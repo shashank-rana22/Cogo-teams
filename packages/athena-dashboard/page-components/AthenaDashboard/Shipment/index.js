@@ -1,107 +1,30 @@
 import {
-	Loader,
-	Pagination,
-	Input, Tabs, TabPanel, MultiSelect, Button, Table, DateRangepicker,
+	Placeholder, Loader,
+	Input, Tabs, TabPanel, Button, Table, DateRangepicker,
 } from '@cogoport/components';
-import { AsyncSelectController, useForm } from '@cogoport/forms';
+import { MultiselectController, AsyncSelectController } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
-import { useAthenaRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+
+import useSearch from '../hooks/useSearch';
 
 import controls from './controls';
 import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
-function formatDate(date) {
-	const d = new Date(date);
-	let month = `${d.getMonth() + 1}`;
-	let day = `${d.getDate()}`;
-	const year = d.getFullYear();
-	if (month.length < 2) { month = `0${month}`; }
-	if (day.length < 2) { day = `0${day}`; }
-	return [year, month, day].join('-');
-}
-
 function Shipment() {
-	const [shipmenttype, setShipmenttype] = useState([]);
-	const [activeTab2, setActiveTab2] = useState('Shipments');
-	const [date, setDate] = useState('');
-	const [answer, setAnswer] = useState([]);
-	const [searchValue, setSearchValue] = useState('');
-	const [shipmentmode, setShipmentmode] = useState([]);
-	const [incotermvalue, setIncotermvalue] = useState([]);
-	const [countryvalue, setCountryvalue] = useState([]);
-
-	const formProps = useForm();
-
-	const { control, watch } = formProps;
-
-	const [{ loading = true, data: responseData = {} }, trigger] = useAthenaRequest({
-		url    : 'shipments_by_hscode',
-		method : 'post',
-	}, { manual: true });
-
-	const destinationCountry = watch('destination_country');
-	const originCountry = watch('origin_country');
-	const originPort = watch('origin_port');
-	const destinationPort = watch('destination_port');
-	const start_date = formatDate(date.startDate);
-	const end_date = formatDate(date.endDate);
-
-	const shipment_type_values = [
-		{ label: 'Import', value: 'import' },
-		{ label: 'Export', value: 'export' },
-	];
-	const shipment_mode_values = [
-		{ label: 'SEA', value: 'SEA' },
-		{ label: 'AIR', value: 'AIR' },
-	];
-	const incoterm_values = [
-		{ label: 'CIF', value: 'CIF' },
-		{ label: 'CF', value: 'CF' },
-		{ label: 'CI', value: 'CI' },
-		{ label: 'FOB', value: 'FOB' },
-	];
-	const country_values = [
-		{ label: 'INDIA', value: 'INDIA' },
-	];
-	const showloader = () => {
-		const l = document.getElementById('helloloader');
-		if (l !== null) {
-			l.style.display = 'block';
-		}
-	};
-
-	const handleClick = async (x) => {
-		await trigger({
-			data: {
-				page       : x,
-				page_limit : 100,
-				sort_type  : 'desc',
-				sort_by    : 'shipment_date',
-				filters    : {
-					hs_code             : searchValue || undefined,
-					shipment_type       : shipmenttype || undefined,
-					shipment_mode       : shipmentmode || undefined,
-					incoterm            : incotermvalue || undefined,
-					origin_country      : originCountry.toString().toUpperCase() || undefined,
-					destination_country : destinationCountry.toString().toUpperCase() || undefined,
-					origin_port         : originPort.toString().toUpperCase() || undefined,
-					destination_port    : destinationPort.toString().toUpperCase() || undefined,
-				},
-				start_date               : start_date || 'NaN-NaN-NaN',
-				end_date                 : end_date || 'NaN-NaN-NaN',
-				pagination_data_required : false,
-			},
-		});
-	};
-	useEffect(() => {
-		if (!isEmpty(responseData)) {
-			setAnswer(responseData.list);
-			// if (!localStorage.getItem('total')) localStorage.setItem('total', responseData.total);
-		}
-	}, [responseData]);
+	const [activeTab, setActiveTab] = useState('Shipments');
+	const {
+		loading,
+		date,
+		setDate,
+		answer,
+		searchValue,
+		setSearchValue,
+		control,
+		handleClick,
+		handleSubmit,
+	} = useSearch();
 
 	const columns = [
 		{ Header: 'Shipment Record ID', accessor: 'shipment_record_id' },
@@ -146,53 +69,31 @@ function Shipment() {
 						placeholder="Enter a product name or a HS Code"
 						onChange={setSearchValue}
 						value={searchValue}
+						style={{ height: '40px' }}
 					/>
 				</div>
-				<MultiSelect
-					value={countryvalue}
-					onChange={setCountryvalue}
-					placeholder="Countries"
-					options={country_values}
-					isClearable
-					style={{ width: '150px' }}
-					size="sm"
-				/>
-				<MultiSelect
-					value={shipmenttype}
-					onChange={setShipmenttype}
-					placeholder="Shipment Type"
-					options={shipment_type_values}
-					isClearable
-					style={{ width: '200px' }}
-					size="sm"
-					className={styles.modeselect}
-				/>
-				<MultiSelect
-					value={shipmentmode}
-					onChange={setShipmentmode}
-					placeholder="Shipment Mode"
-					options={shipment_mode_values}
-					isClearable
-					style={{ width: '200px' }}
-					size="sm"
-				/>
 
-				<MultiSelect
-					value={incotermvalue}
-					onChange={setIncotermvalue}
-					placeholder="Incoterm"
-					options={incoterm_values}
-					isClearable
-					style={{ width: '150px' }}
-					size="sm"
-				/>
+				{controls[1].map((Item) => {
+					const ele = { ...Item };
 
+					return (
+						<MultiselectController
+							{...ele}
+							placeholder={ele.placeholder}
+							options={ele.options}
+							isClearable
+							style={{ width: ele.width }}
+							control={control}
+						/>
+					);
+				})}
 				<div className={styles.right_container}>
 					<Button
 						size="md"
 						themeType="primary"
-						onClick={() => { handleClick(1); showloader(); }}
+						onClick={handleSubmit(handleClick)}
 						disabled={loading}
+						style={{ height: '40px' }}
 					>
 						Search
 					</Button>
@@ -203,9 +104,9 @@ function Shipment() {
 					<div>
 						<div className={styles.tablower}>
 							<Tabs
-								activeTab={activeTab2}
+								activeTab={activeTab}
 								themeType="secondary"
-								onChange={setActiveTab2}
+								onChange={setActiveTab}
 							>
 								<TabPanel name="Shipments" title="Shipments" />
 
@@ -248,9 +149,8 @@ function Shipment() {
 								onPageChange={onPageChange}
 							/> */}
 						</div>
-					) : (
+					) : (!loading ? (
 						<div>
-							<Loader id="helloloader" style={{ display: 'None' }} />
 							<EmptyState
 								height={500}
 								width={875}
@@ -261,6 +161,9 @@ function Shipment() {
 							/>
 
 						</div>
+					) : (
+						<Placeholder height="850px" width="1050px" margin="50px 0px 20px 0px" />
+					)
 					)}
 				</div>
 
@@ -284,7 +187,7 @@ function Shipment() {
 					</div>
 					<div className={styles.leftpadding}>
 
-						{controls.map((Item) => {
+						{controls[0].map((Item) => {
 							const el = { ...Item };
 
 							return (

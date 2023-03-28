@@ -6,7 +6,7 @@
     display: block;
     width: 100%;
     margin-top: 50px;
-     background-color: white;
+    background-color: white;
     box-shadow: 0 0 4px rgb(0 0 0 / 15%);
     height: 120%;
    
@@ -49,7 +49,7 @@
     display: block;
     width: 100%;
     margin-top: 30px;
-     background-color: white;
+    background-color: white;
     box-shadow: 0 0 4px rgb(0 0 0 / 15%);
     height: 120%;
     overflow-x: scroll;

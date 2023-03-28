@@ -34,60 +34,23 @@
     display: flex;
 }
 .shipmentreport{
-    width: 182px;
-    height: 30px;
-    top: 261px;
-    left: 476px;
-
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 600;
     font-size: 20px;
-    line-height: 150%;
-
-    color: #4F4F4F;
 }
 .exportresults{
-  
     padding-left: 12px;
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 500;
     font-size: 12px;
-    line-height: 150%;
     cursor: pointer;
-
     display: flex;
     align-items: center;
     text-align: center;
-    text-transform: capitalize;
-
-
-    color: #221F20;
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
 }
 .sortby{
     width: 41px;
-    height: 18px;
-
-    display: block;
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
+    height: 18px; 
     font-size: 12px;
-    line-height: 150%;
-
-    display: flex;
-    align-items: center;
-
     color: #4F4F4F;
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 .selectbox{
     box-sizing: border-box;
@@ -129,9 +92,8 @@
 }
 .daterange{
     font-family: 'Roboto';
-    font-style: normal;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 12px;
     margin-left: 5px;
 }
 .microfilternames{
@@ -168,50 +130,11 @@
   margin: 20px;
   margin-left: 0px !important;
 }
-.collapsible {
-    border: none;
-    background-color: #F9F9F9;
-    color: black;
-    font-size: 12px;
-    cursor: pointer;
-}
 
-.asynccontroller{
-    margin-bottom: 4px;
-    width: 180px;
-    margin-top: 30px;
-    margin-left: 30px;
-}
-
-.rotatearrow{
-    cursor: pointer;
-}
 .wholepage{
     margin-top: 18px;
 }
 
-.container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: max-content;
-	background: #fff;
-    margin-top: 50px;
-}
-
-.row {
-	display: flex;
-	flex-direction: row;
-}
-
-.column {
-	flex-direction: column;
-}
-
-.text {
-	font-size: 16px;
-	color: #bdbdbd;
-}
 .tablediv{
     width: 97%;
     margin-right: 10px;
@@ -221,4 +144,5 @@
     margin-top: 5px;
     width: 250px;
 }
+
 
