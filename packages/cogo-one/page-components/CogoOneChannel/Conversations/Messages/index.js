@@ -10,6 +10,7 @@ import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
 import useSendChat from '../../../../hooks/useSendChat';
 import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
+import useUpdateUserRoom from '../../../../hooks/useUpdateUserRoom';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 import Header from './Header';
@@ -32,6 +33,7 @@ function Messages({
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 	const closeModal = () => setOpenModal({ type: null, data: {} });
+
 	let activeChatCollection;
 
 	const [disableButton, setDisableButton] = useState('');
@@ -65,7 +67,7 @@ function Messages({
 		);
 	}
 
-	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions } = useSendChat({
+	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions, messageLoading } = useSendChat({
 		firestore,
 		channel_type,
 		id,
@@ -100,6 +102,11 @@ function Messages({
 	});
 
 	const {
+		updateRoomLoading,
+		updateUserRoom,
+	} = useUpdateUserRoom();
+
+	const {
 		comp: ActiveModalComp = null,
 		title: { img = null, name = null } = {},
 		modalSize = 'md',
@@ -129,6 +136,8 @@ function Messages({
 					isomniChannelAdmin={isomniChannelAdmin}
 					setDisableButton={setDisableButton}
 					disableButton={disableButton}
+					updateRoomLoading={updateRoomLoading}
+					updateUserRoom={updateUserRoom}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
@@ -152,6 +161,7 @@ function Messages({
 						sendCommunicationTemplate={sendCommunicationTemplate}
 						communicationLoading={communicationLoading}
 						closeModal={closeModal}
+						messageLoading={messageLoading}
 					/>
 				</div>
 			</div>
