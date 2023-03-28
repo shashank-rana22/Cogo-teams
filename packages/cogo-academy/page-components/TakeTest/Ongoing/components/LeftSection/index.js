@@ -19,7 +19,7 @@ function LeftSection({
 	const [answer, setAnswer] = useState('');
 
 	return (
-		<div key={data?.data} className={styles.container}>
+		<div className={styles.container}>
 			<Header
 				data={data}
 				testData={testData}
