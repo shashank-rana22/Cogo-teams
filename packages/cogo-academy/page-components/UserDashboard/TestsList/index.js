@@ -34,7 +34,6 @@ function TestsList() {
 					filters    : {
 						q              : searchQuery,
 						user_id,
-						status         : 'active',
 						current_status : testCategory,
 					},
 				},

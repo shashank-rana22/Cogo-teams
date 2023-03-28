@@ -1,33 +1,98 @@
+import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+
 import styles from './styles.module.css';
 
-function ListHeader() {
+function ListHeader({
+	sortType = '', setSortType = () => {}, sortBy = '', setSortBy = () => {},
+
+}) {
+	const applySorting = (val, typ) => {
+		setSortBy(val);
+		setSortType(typ);
+	};
+	const renderTitle = () => (
+		<div role="presentation" className={styles.container}>
+			<div className={styles.container2}>
+
+				<div className={styles.small_section}>
+					Topic
+
+				</div>
+
+				<div className={styles.section}>
+					Question
+				</div>
+
+				<div className={styles.small_section}>
+					Question Type
+
+				</div>
+
+				<div className={styles.small_section}>
+					Difficulty Level
+				</div>
+
+				<div className={styles.small_section_sort}>
+					Students IT Appeared For
+					{
+				(sortBy === 'students_appeared' && sortType === 'desc')
+			&& (
+				<div className={styles.arrowUp}>
+					<IcMArrowRotateUp
+						width={12}
+						height={12}
+						onClick={() => { applySorting('students_appeared', 'asc'); }}
+					/>
+				</div>
+			)
+			}
+					{
+				!(sortBy === 'students_appeared' && sortType === 'desc')
+			&& (
+				<div className={styles.arrow_up}>
+					<IcMArrowRotateDown
+						width={12}
+						height={12}
+						onClick={() => { applySorting('students_appeared', 'desc'); }}
+					/>
+				</div>
+			)
+}
+				</div>
+
+				<div className={styles.small_section_sort}>
+					Correct Percentage				%
+					{
+				(sortBy === 'correct_percentage' && sortType === 'desc')
+			&& (
+				<div className={styles.arrow_up}>
+					<IcMArrowRotateUp
+						width={12}
+						height={12}
+						onClick={() => { applySorting('correct_percentage', 'asc'); }}
+					/>
+				</div>
+			)
+			}
+					{
+				!(sortBy === 'correct_percentage' && sortType === 'desc')
+			&& (
+				<div className={styles.arrowUp}>
+					<IcMArrowRotateDown
+						width={12}
+						height={12}
+						onClick={() => { applySorting('correct_percentage', 'desc'); }}
+					/>
+				</div>
+			)
+}
+				</div>
+			</div>
+		</div>
+	);
 	return (
-		<div className={styles.container}>
-			<div className={styles.small_section}>
-				TOPIC
-			</div>
-
-			<div className={styles.section}>
-				QUESTION
-			</div>
-
-			<div className={styles.small_section}>
-				QUESTION TYPE
-			</div>
-
-			<div className={styles.small_section}>
-				DIFFICULTY LEVEL
-			</div>
-
-			<div className={styles.small_section}>
-				STUDENTS IT APPEARED FOR
-			</div>
-
-			<div className={styles.small_section}>
-				CORRECT PERCENTAGE
-			</div>
-
-			<div className={styles.icon} />
+		<div className={styles.outer_container}>
+			{renderTitle()}
 		</div>
 	);
 }
