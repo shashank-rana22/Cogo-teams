@@ -25,7 +25,7 @@ function StudentsComponent({ test_id }) {
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
-		url    : 'list_admin_student_wise_test_result',
+		url    : '/list_admin_student_wise_test_result',
 		params : {
 			test_id,
 			sort_by     : sortBy,

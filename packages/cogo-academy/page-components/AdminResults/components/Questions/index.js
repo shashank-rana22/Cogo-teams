@@ -28,7 +28,8 @@ function QuestionsComponent({ test_id }) {
 		},
 	}, { manual: false });
 
-	const { list: questionsList } = data || {};
+	const { list: questionsList = [] } = data || {};
+
 	if (loading) { return 'loading'; }
 
 	return (
@@ -47,7 +48,13 @@ function QuestionsComponent({ test_id }) {
 				setSortBy={setSortBy}
 			/>
 
-			{questionsList?.map((question_item, index) => <QuestionItem question_item={question_item} index={index} />)}
+			{(questionsList || []).map((question_item, index) => (
+				<QuestionItem
+					key={question_item.id}
+					question_item={question_item}
+					index={index}
+				/>
+			))}
 		</>
 	);
 }
