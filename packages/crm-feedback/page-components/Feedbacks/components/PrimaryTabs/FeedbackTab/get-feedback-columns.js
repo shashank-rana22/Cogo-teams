@@ -1,10 +1,10 @@
 import { ButtonIcon, Tooltip, Checkbox } from '@cogoport/components';
-import { IcMView } from '@cogoport/icons-react';
+import { IcMEyeopen } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-export const FEEDBACK_ORGANIZATION_COLUMNS = ({
+export const FEEDBACK_COLUMNS = ({
 	selectAll = false,
 	onChangeTableHeadCheckbox = () => {},
 	checkedRowsId = [],
@@ -33,9 +33,14 @@ export const FEEDBACK_ORGANIZATION_COLUMNS = ({
 		Header   : <div>ORGANIZATION</div>,
 		key      : 'organization',
 		id       : 'organization',
-		accessor : ({ organization = '' }) => (
+		accessor : ({ organization = {}, lead_organization_id = '', lead_organization = {} }) => (
 			<section className={styles.table_cell}>
-				{organization?.business_name || '__'}
+				{lead_organization_id ? (
+					lead_organization?.business_name || '__lead'
+				) : (
+					organization?.business_name || '__'
+				)}
+
 			</section>
 		),
 	},
@@ -43,9 +48,9 @@ export const FEEDBACK_ORGANIZATION_COLUMNS = ({
 		Header   : <div>COGO-ENTITY</div>,
 		key      : 'cogo_entity',
 		id       : 'cogo_entity',
-		accessor : ({ cogo_entity = '' }) => (
+		accessor : ({ cogo_entity = {} }) => (
 			<section className={styles.table_cell}>
-				{cogo_entity || '__'}
+				{cogo_entity?.business_name || '__'}
 			</section>
 		),
 	},
@@ -92,10 +97,10 @@ export const FEEDBACK_ORGANIZATION_COLUMNS = ({
 		Header   : <div>FEEDBACK & PROOF</div>,
 		key      : 'feedback',
 		id       : 'feedback',
-		accessor : ({ feedback = '', feedback_reference_document_url = '' }) => (
+		accessor : ({ feedback = '', other_feedback = '', feedback_reference_document_url = '' }) => (
 			<section className={styles.feedback}>
 				<Tooltip
-					content={startCase(feedback)}
+					content={feedback === 'other' ? (startCase(other_feedback) || 'Other') : (startCase(feedback))}
 					placement="top"
 					interactive
 					disabled={isEmpty(feedback)}
@@ -109,7 +114,7 @@ export const FEEDBACK_ORGANIZATION_COLUMNS = ({
 						<ButtonIcon
 							size="md"
 							themeType="primary"
-							icon={<IcMView />}
+							icon={<IcMEyeopen />}
 						/>
 					</a>
 				) : (
@@ -132,9 +137,11 @@ export const FEEDBACK_ORGANIZATION_COLUMNS = ({
 					interactive
 					disabled={isEmpty(kam_response)}
 				>
-					<span className={styles.tooltip_text}>
-						{startCase(kam_response) || '__'}
-					</span>
+					<div>
+						<span className={styles.tooltip_text}>
+							{startCase(kam_response) || '__'}
+						</span>
+					</div>
 				</Tooltip>
 				{kam_response_reference_document_url
 					? (
@@ -142,7 +149,7 @@ export const FEEDBACK_ORGANIZATION_COLUMNS = ({
 							<ButtonIcon
 								size="md"
 								themeType="primary"
-								icon={<IcMView />}
+								icon={<IcMEyeopen />}
 							/>
 						</a>
 					) : (
@@ -165,9 +172,9 @@ export const FEEDBACK_ORGANIZATION_COLUMNS = ({
 		Header   : <div>KAM Manager</div>,
 		key      : 'kam_manager',
 		id       : 'kam_manager',
-		accessor : ({ kam_manager }) => (
+		accessor : ({ manager = {} }) => (
 			<section className={styles.table_cell}>
-				{kam_manager || '__'}
+				{manager?.name || '__'}
 			</section>
 		),
 	},
@@ -175,9 +182,9 @@ export const FEEDBACK_ORGANIZATION_COLUMNS = ({
 		Header   : <div>KAM</div>,
 		key      : 'kam',
 		id       : 'kam',
-		accessor : ({ kam }) => (
+		accessor : ({ created_by = {} }) => (
 			<section className={styles.table_cell}>
-				{kam || '__'}
+				{created_by?.name || '__'}
 			</section>
 		),
 	},

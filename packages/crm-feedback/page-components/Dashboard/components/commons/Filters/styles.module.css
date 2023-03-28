@@ -1,7 +1,7 @@
 .filter{
     margin-top: 12px;
     display: flex;
-    flex-direction: flex-start;
+    justify-content: flex-start;
     width: 100%;
     flex-wrap: wrap;
 }
@@ -9,14 +9,9 @@
 .select{
     width: 200px;
     margin-right: 4px;
-
-    :global(.ui_tNl3D){
-        font-size: 14px;
-    }
 }
 
 .time{
-    width: 400px;
     margin-right: 4px;
 
     :global(input){
@@ -26,6 +21,7 @@
         &::placeholder{
             font-size: 14px;
             color: #221f20;
+            font-family: Poppins, sans-serif;
         }
     }    
 }

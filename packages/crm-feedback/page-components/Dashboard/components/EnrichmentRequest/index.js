@@ -1,7 +1,8 @@
 import { Button, Modal, MultiSelect } from '@cogoport/components';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { isEmpty } from '@cogoport/utils';
 
-import useCreateBulkEnrichment from '../../hooks/useCreateBulkEnrichment';
+import useCreateBulkEnrichment from '../../../hooks/useCreateBulkEnrichment';
 
 import styles from './styles.module.css';
 
@@ -13,14 +14,26 @@ function EnrichmentRequest({
 }) {
 	const {
 		onEnrichmentRequest,
-		loading,
 		isOpenModal = false,
 		setisOpenModal = () => {},
 		onCloseModal = () => {},
 		thirdParty = [],
 		setThirdParty = () => {},
-		thirdPartyOptions = [{}],
+		onChangeThirdParty = () => {},
 	} = useCreateBulkEnrichment({ setActiveTab, selectedBulkData });
+
+	const thirdPartySelector = useGetAsyncOptions({
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_partner_users',
+		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+				// role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+			},
+		},
+	});
 
 	return (
 		<>
@@ -49,18 +62,28 @@ function EnrichmentRequest({
 					<Modal.Header title="Create Enrichment Request" />
 
 					<Modal.Body className={styles.modal_body}>
-						Please select the Data Enrichment Organisation(s) to send the enrichment request for the
+						Please select the Data Enrichment Agent(s) to send the enrichment request for the
 						{' '}
 						{checkedRowsId.length || 'these'}
 						{' '}
 						selected feedback(s):
-						<MultiSelect
+						{/* <MultiSelect
 							value={thirdParty}
 							onChange={setThirdParty}
 							placeholder="Select 3rd Party Organisation(s)"
 							options={thirdPartyOptions}
 							isClearable
 							className={styles.modal_select}
+						/> */}
+						<MultiSelect
+							placeholder="Select 3rd Party Agent(s)"
+							className={styles.modal_select}
+							value={thirdParty}
+							// onChange={(val) => onChangeThirdParty(val)}
+							onChange={setThirdParty}
+							getSelectedOption={(obj) => onChangeThirdParty(obj)}
+							isClearable
+							{...thirdPartySelector}
 						/>
 					</Modal.Body>
 

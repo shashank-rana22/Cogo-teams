@@ -1,10 +1,10 @@
 import { Pagination } from '@cogoport/components';
 
-import useFeedbackOrganization from '../../../hooks/useFeedbackOrganization';
+import useFeedbackTableData from '../../../../hooks/useFeedbackTableData';
 import CrmTable from '../../commons/CrmTable';
 import EnrichmentRequest from '../../EnrichmentRequest';
 
-import { FEEDBACK_ORGANIZATION_COLUMNS } from './get-feedback-columns';
+import { FEEDBACK_COLUMNS } from './get-feedback-columns';
 import styles from './styles.module.css';
 
 function FeedbacksReceived({ organization_id = '', setActiveTab = () => {} }) {
@@ -16,13 +16,14 @@ function FeedbacksReceived({ organization_id = '', setActiveTab = () => {} }) {
 		checkedRowsId = [],
 		selectAll = false,
 		onChangeTableHeadCheckbox = () => {},
-		onChangeBodyCheckbox = () => [],
-
-	} = useFeedbackOrganization({ organization_id });
+		onChangeBodyCheckbox = () => {},
+		selectedBulkData = [],
+		onBulkDataPayload = () => {},
+	} = useFeedbackTableData({ organizationId: organization_id });
 
 	const { page, page_limit, total_count } = paginationData;
 
-	const columns = FEEDBACK_ORGANIZATION_COLUMNS({
+	const columns = FEEDBACK_COLUMNS({
 		selectAll,
 		onChangeTableHeadCheckbox,
 		checkedRowsId,
@@ -31,7 +32,13 @@ function FeedbacksReceived({ organization_id = '', setActiveTab = () => {} }) {
 
 	return (
 		<div className={styles.container}>
-			<EnrichmentRequest checkedRowsId={checkedRowsId} setActiveTab={setActiveTab} />
+			<EnrichmentRequest
+				checkedRowsId={checkedRowsId}
+				setActiveTab={setActiveTab}
+				selectedBulkData={selectedBulkData}
+				onBulkDataPayload={onBulkDataPayload}
+			/>
+
 			<CrmTable columns={columns} data={data} loading={loading} />
 
 			<div className={styles.pagination_container}>

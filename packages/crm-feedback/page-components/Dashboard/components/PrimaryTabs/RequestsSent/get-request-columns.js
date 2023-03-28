@@ -1,5 +1,4 @@
 import { Button, Pill } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -26,10 +25,14 @@ export const REQUEST_COLUMNS = ({
 		Header   : <div>Serial ID</div>,
 		key      : 'serial_id',
 		id       : 'serial_id',
-		accessor : ({ organization = {} }) => (
+		accessor : ({ organization = {}, lead_organization = {}, lead_organization_id = '' }) => (
 			<section>
 				#
-				{organization?.serial_id || '__'}
+				{lead_organization_id ? (
+					lead_organization?.serial_id || '__'
+				) : (
+					organization?.serial_id || '__'
+				)}
 			</section>
 		),
 	},
@@ -37,9 +40,13 @@ export const REQUEST_COLUMNS = ({
 		Header   : <div>ORGANIZATION</div>,
 		key      : 'organization',
 		id       : 'organization',
-		accessor : ({ organization = '' }) => (
+		accessor : ({ organization = {}, lead_organization = {}, lead_organization_id = '' }) => (
 			<section>
-				{startCase(organization?.business_name || '__')}
+				{lead_organization_id ? (
+					lead_organization?.business_name || '__'
+				) : (
+					organization?.business_name || '__'
+				)}
 			</section>
 		),
 	},
@@ -62,7 +69,7 @@ export const REQUEST_COLUMNS = ({
 		}) => {
 			const { status, color } = computeStatus(statuses);
 
-			const { id, business_name } = organization;
+			const { id = '', business_name = '' } = organization || {};
 
 			const url = `/feedbacks/${id}?organization=${business_name}&status=${status}`;
 

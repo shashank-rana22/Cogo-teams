@@ -34,6 +34,18 @@ function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' 
 		},
 	});
 
+	const leadOrganizationOptions = useGetAsyncOptions({
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_lead_organizations',
+		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	});
+
 	const kamManagerOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(),
 		initialCall : false,
@@ -72,11 +84,15 @@ function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' 
 			controlsFeedbacks(
 				cogoEntityOptions || {},
 				organizationOptions || {},
+				leadOrganizationOptions || {},
 				kamOptions || {},
 				kamManagerOptions || {},
 			)
 		) : (
-			controlsRequests(organizationOptions || {})
+			controlsRequests(
+				organizationOptions || {},
+				leadOrganizationOptions || {},
+			)
 		);
 
 	return (

@@ -1,6 +1,6 @@
 import { startCase } from '@cogoport/utils';
 
-function getStatsData(activeTab, stats) {
+function getStatsData(activeTab = '', stats = {}) {
 	if (activeTab === 'feedbacks_received') {
 		return (
 			{
@@ -11,19 +11,19 @@ function getStatsData(activeTab, stats) {
 						{
 							id    : 'address',
 							label : 'Address',
-							value : stats.type.address || 0,
+							value : stats?.type?.address || 0,
 						},
 						{
 							id    : 'user_information',
 							label : 'User Information',
-							value : stats.type.user_information || 0,
+							value : stats?.type?.user_information || 0,
 						},
 					],
 				},
 				feedback_sub_type_chart: {
 					title  : 'Feedback Sub-type',
 					colors : ['#c2e4e7', '#99d1d8', '#70bfc8', '#47adb8', '#37878f', '#276066'],
-					data   : Object.entries(stats.sub_type).map(([id, value]) => ({
+					data   : Object.entries(stats?.sub_type || {}).map(([id, value]) => ({
 						id,
 						label: startCase(id),
 						value,
@@ -42,12 +42,12 @@ function getStatsData(activeTab, stats) {
 						{
 							id    : 'response_received',
 							label : 'Response Received',
-							value : stats.response_received || 0,
+							value : stats?.response_received || 0,
 						},
 						{
 							id    : 'request_created',
 							label : 'Request Created',
-							value : stats.request_created || 0,
+							value : stats?.request_created || 0,
 						},
 					],
 				},
@@ -58,12 +58,12 @@ function getStatsData(activeTab, stats) {
 						{
 							id    : 'response_received',
 							label : 'Response Received',
-							value : stats.tat_response_received || 0,
+							value : stats?.tat_response_received || 0,
 						},
 						{
 							id    : 'request_created',
 							label : 'Request Created',
-							value : stats.tat_request_created || 0,
+							value : stats?.tat_request_created || 0,
 						},
 					],
 				},

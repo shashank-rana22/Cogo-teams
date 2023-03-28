@@ -11,16 +11,10 @@ const useCreateBulkEnrichment = ({ setActiveTab = () => {}, selectedBulkData = [
 	};
 
 	const [thirdParty, setThirdParty] = useState([]);
+	const [thirdPartyPayload, setThirdPartyPayload] = useState([{}]);
 
-	const thirdPartyOptions = [
-		{ label: 'Harper Lee', value: 'To Kill a Mockingbird' },
-		{ label: 'Lev Tolstoy', value: 'War and Peace' },
-		{ label: 'Fyodor Dostoyevsy', value: 'The Idiot' },
-		{ label: 'Oscar Wilde', value: 'A Picture of Dorian Gray' },
-		{ label: 'George Orwell', value: '1984' },
-		{ label: 'Jane Austen', value: 'Pride and Prejudice' },
-		{ label: 'Marcus Aurelius', value: 'Meditations' },
-	];
+	console.log('third party::', thirdParty);
+	console.log('3rdpartpayload::', thirdPartyPayload);
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '',
@@ -43,9 +37,14 @@ const useCreateBulkEnrichment = ({ setActiveTab = () => {}, selectedBulkData = [
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 
-		console.log('thirdParty::', thirdParty);
 		onCloseModal();
 		setActiveTab('requests_sent');
+	};
+
+	const onChangeThirdParty = (val) => {
+		// setThirdParty(val);
+		console.log('hello');
+		console.log('obj is::', val);
 	};
 
 	return {
@@ -56,7 +55,7 @@ const useCreateBulkEnrichment = ({ setActiveTab = () => {}, selectedBulkData = [
 		onCloseModal,
 		thirdParty,
 		setThirdParty,
-		thirdPartyOptions,
+		onChangeThirdParty,
 	};
 };
 

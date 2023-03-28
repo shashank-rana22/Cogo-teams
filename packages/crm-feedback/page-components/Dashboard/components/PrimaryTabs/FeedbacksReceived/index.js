@@ -1,6 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
-import useFeedbackTableData from '../../../hooks/useFeedbackTableData';
+import useFeedbackTableData from '../../../../hooks/useFeedbackTableData';
 import CrmTable from '../../commons/CrmTable';
 import Filters from '../../commons/Filters';
 import Statistics from '../../commons/Statistics';
@@ -23,7 +23,7 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 		onChangeBodyCheckbox = () => {},
 		selectedBulkData = [],
 		onBulkDataPayload = () => {},
-	} = useFeedbackTableData();
+	} = useFeedbackTableData({});
 
 	const { page, page_limit, total_count } = paginationData;
 

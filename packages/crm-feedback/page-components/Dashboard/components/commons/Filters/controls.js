@@ -1,4 +1,10 @@
-export const controlsFeedbacks = (cogoEntityOptions, organizationOptions, kamOptions, kamManagerOptions) => [
+export const controlsFeedbacks = (
+	cogoEntityOptions,
+	organizationOptions,
+	leadOrganizationOptions,
+	kamOptions,
+	kamManagerOptions,
+) => [
 	{
 		...cogoEntityOptions,
 		name        : 'agent_partner_id',
@@ -11,6 +17,14 @@ export const controlsFeedbacks = (cogoEntityOptions, organizationOptions, kamOpt
 		...organizationOptions,
 		name        : 'organization_id',
 		placeholder : 'Organization',
+		type        : 'select',
+		isClearable : true,
+		params      : { filters: { status: 'active' } },
+	},
+	{
+		...leadOrganizationOptions,
+		name        : 'lead_organization_id',
+		placeholder : 'Lead Organization',
 		type        : 'select',
 		isClearable : true,
 		params      : { filters: { status: 'active' } },
@@ -32,11 +46,19 @@ export const controlsFeedbacks = (cogoEntityOptions, organizationOptions, kamOpt
 	},
 ];
 
-export const controlsRequests = (cogoEntityOptions, organizationOptions) => [
+export const controlsRequests = (organizationOptions, leadOrganizationOptions) => [
 	{
 		...organizationOptions,
 		name        : 'organization_id',
 		placeholder : 'Organization',
+		type        : 'select',
+		isClearable : true,
+		params      : { filters: { status: 'active' } },
+	},
+	{
+		...leadOrganizationOptions,
+		name        : 'lead_organization_id',
+		placeholder : 'Lead Organization',
 		type        : 'select',
 		isClearable : true,
 		params      : { filters: { status: 'active' } },

@@ -2,7 +2,6 @@ import { Pagination } from '@cogoport/components';
 
 import useRequestOrganization from '../../../hooks/useRequestOrganization';
 import CrmTable from '../../commons/CrmTable';
-import EditEnrichment from '../../EditEnrichment';
 
 import { REQUEST_COLUMNS } from './get-request-columns';
 import styles from './styles.module.css';
@@ -26,7 +25,6 @@ function RequestTab(organization_id = '') {
 
 	return (
 		<div className={styles.container}>
-			<EditEnrichment checkedRow={checkedRow} />
 			<CrmTable columns={columns} data={data} loading={loading} />
 
 			<div className={styles.pagination_container}>

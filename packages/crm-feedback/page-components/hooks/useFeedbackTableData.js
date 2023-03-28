@@ -2,7 +2,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 
-const useFeedbackTableData = () => {
+const useFeedbackTableData = ({ organizationId = '' }) => {
 	const [selectAll, setSelectAll] = useState(false);
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
 	const [selectedBulkData, setSelectedBulkData] = useState([{}]);
@@ -12,7 +12,9 @@ const useFeedbackTableData = () => {
 	const [params, setParams] = useState({
 		page_limit : 10,
 		page       : 1,
-		filters    : {},
+		filters    : {
+			organization_id: organizationId || undefined,
+		},
 	});
 
 	const [{ data, loading }] = useAllocationRequest({
