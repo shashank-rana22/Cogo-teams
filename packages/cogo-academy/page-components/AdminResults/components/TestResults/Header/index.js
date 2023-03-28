@@ -13,11 +13,11 @@ function Header({ header_data, loading = false }) {
 					Validity:
 					{' '}
 					<span className={styles.validity}>
-						{format(header_data.validity_start, 'dd MMM\' yy') || ' '}
+						{format(header_data.validity_start, 'dd MMM yy') || ' '}
 						{' '}
 						-
 						{' '}
-						{format(header_data.validity_end, 'dd MMM\' yy') || ' '}
+						{format(header_data.validity_end, 'dd MMM yy') || ' '}
 					</span>
 				</p>
 			</div>

@@ -1,33 +1,11 @@
-import { Toast, Modal, Button } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { Modal, Button } from '@cogoport/components';
+
+import usePublishNow from '../../hooks/usePublishNow';
 
 import styles from './styles.module.css';
 
 function PublishNow({ test_id, refetchTest }) {
-	const [showPublishModal, setShowPublishModal] = useState(false);
-
-	const [{ loading }, trigger] = useRequest({
-		method : 'POST',
-		url    : 'end_test',
-	}, { manual: true });
-
-	const publishResults = async () => {
-		try {
-			await trigger({
-				data: {
-					test_id,
-				},
-			});
-
-			setShowPublishModal(false);
-
-			refetchTest({ test_id });
-		} catch (err) {
-			Toast.error(getApiErrorString(err?.data));
-		}
-	};
+	const { showPublishModal, setShowPublishModal, loading, publishResults } = usePublishNow({ test_id, refetchTest });
 
 	return (
 		<>

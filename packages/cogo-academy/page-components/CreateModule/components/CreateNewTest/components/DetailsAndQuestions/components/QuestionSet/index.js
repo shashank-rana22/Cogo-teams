@@ -129,7 +129,7 @@ function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray, watch 
 			accessor : ({ updated_at = '' }) => (
 				<section>
 					<span className={styles.questionsettime}>
-						{format(updated_at, 'dd MMM\'yy ')}
+						{format(updated_at, 'dd MMM yy')}
 					</span>
 					<span className={styles.questionsettime}>
 						{format(updated_at, 'h:mm a')}
