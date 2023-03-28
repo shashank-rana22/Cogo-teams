@@ -17,7 +17,13 @@
 	display: flex;
 	gap: 10px;
 	align-items: center;
+	justify-content: space-between;
 	margin-left: 8px;
+}
+
+.contract_details {
+	display: flex;
+	align-items: center;
 }
 
 .contract_id {
@@ -25,6 +31,16 @@
 	font-weight: 600;
 	line-height: 24px;
 	color: #393f70;
+}
+
+.business_name {
+	display: flex;
+	margin: 2px 0;
+}
+
+.org_name {
+	margin-left: 4px;
+	font-weight: 600;
 }
 
 .trade {
@@ -84,6 +100,7 @@
 }
 
 .name {
+	margin-left: 8px;
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 22px;
