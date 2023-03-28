@@ -1,4 +1,4 @@
-import { Pill, Button, Tooltip } from '@cogoport/components';
+import { Pill, Button, Tooltip, Toast } from '@cogoport/components';
 import { IcMShare, IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -154,6 +154,17 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 	const handleEditTest = (id) => {
 		router.push(`/learning/test-module/create-test?id=${id}`);
 	};
+
+	const CopyToClipboard = async (id) => {
+		const path = `${window.location.host + window.location.pathname}/tests/${id}`;
+		try {
+			await navigator.clipboard.writeText(path);
+			Toast.success('Copied successfully!');
+		} catch (error) {
+			Toast.error(error?.message || 'Cannot copy!');
+		}
+	};
+
 	return ([
 		{
 			Header   : 'NAME',
@@ -244,9 +255,11 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 				if (status === 'active') {
 					return (
 						<section className={styles.details}>
+
 							<section className={styles.status}>
 								<Pill size="md" color="green">{startCase(status)}</Pill>
-								<Link href={`/learning/tests/${id}`}>
+
+								<div role="presentation" onClick={() => CopyToClipboard(id)}>
 									<Pill
 										key={status}
 										size="md"
@@ -256,12 +269,15 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 									>
 										Share Test Link
 									</Pill>
-								</Link>
+								</div>
+
 							</section>
+
 							<section>
 								{format(validity_start, 'dd/MM/yyyy - ')}
 								{format(validity_end, 'dd/MM/yyyy')}
 							</section>
+
 						</section>
 					);
 				} if (status === 'published') {
