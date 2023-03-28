@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -22,6 +23,7 @@ const useGetStakeholders = (expenseCategory:string) => {
 					},
 				});
 			} catch (err) {
+				Toast.error('Stakeholder does not exist for the selected category and cogo entity !');
 				console.log('error-', err);
 			}
 		};
