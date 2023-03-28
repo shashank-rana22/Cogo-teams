@@ -49,10 +49,6 @@ function QuestionItem({ question_item, index = 0 }) {
 				{correct_percentage}
 				%
 			</div>
-
-			{/* <div className={styles.icon}>
-				<IcMArrowRotateDown styles={{ width: 8, height: 6 }} />
-			</div> */}
 		</div>
 	);
 

@@ -11,27 +11,24 @@ import EmptyState from '../../../EmptyState';
 import styles from './styles.module.css';
 import { questionSetColumns, testSetColumns } from './utils/getColumns';
 
+const MODAL_TEXT_MAPPING = {
+	tests        : 'Test',
+	question_set : 'Question Set',
+};
+
 function ListComponent({ data, loading, setParams, activeTab, params, fetchList }) {
 	const router = useRouter();
 
 	const [sort, setSort] = useState(false);
-
 	const [testId, setTestId] = useState('');
-
 	const [questionSetId, setQuestionSetId] = useState('');
+	const [showModal, setShowModal] = useState(false);
 
 	const { page_limit: pageLimit = 0, total_count = 0, list } = data || {};
-
-	const [showModal, setShowModal] = useState(false);
 
 	const columnsMapping = {
 		tests        : testSetColumns,
 		question_set : questionSetColumns,
-	};
-
-	const MODAL_TEXT_MAPPING = {
-		tests        : 'Test',
-		question_set : 'Question Set',
 	};
 
 	const {
@@ -53,10 +50,6 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 
 	const columns = columnsMapping[activeTab]({ ...propsMapping[activeTab] });
 
-	if (!loading && isEmpty(data?.list)) {
-		return <EmptyState />;
-	}
-
 	const handleDeleteTest = () => {
 		updateTest({ test_id: testId, fetchList, type: 'delete', from: 'test' });
 	};
@@ -69,6 +62,10 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 		tests        : handleDeleteTest,
 		question_set : handleDeleteQuestionSet,
 	};
+
+	if (!loading && isEmpty(data?.list)) {
+		return <EmptyState />;
+	}
 
 	return (
 		<div className={styles.table_container}>
@@ -129,6 +126,7 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 						>
 							Cancel
 						</Button>
+
 						<Button
 							type="button"
 							onClick={() => {

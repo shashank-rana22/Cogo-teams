@@ -34,6 +34,7 @@ function Filters({ filter = '', setFilter = () => {}, searchValue = '', setSearc
 					onChange={(val) => setFilter(val)}
 					placeholder="Filter"
 					options={options}
+					isClearable="true"
 				/>
 
 			</div>

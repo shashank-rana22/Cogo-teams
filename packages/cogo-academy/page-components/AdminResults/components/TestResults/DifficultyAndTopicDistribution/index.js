@@ -35,7 +35,7 @@ const getTopicWiseData = (topic_wise_percentile = {}) => {
 };
 
 function DifficultyAndTopicDistribution({ data = {}, toggleState = false }) {
-	const { difficulty_wise_stats, topic_wise_percent } = data;
+	const { difficulty_wise_stats, topic_wise_percent } = data || {};
 
 	return (
 		<div>
