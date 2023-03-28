@@ -83,7 +83,6 @@ function QuestionItem({ question_item, index = 0 }) {
 					question_type={question_type}
 					case_study={case_study}
 				/>
-
 			</Accordion>
 		</div>
 

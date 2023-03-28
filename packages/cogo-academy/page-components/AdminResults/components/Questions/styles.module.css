@@ -1,0 +1,15 @@
+.placeholder_container {
+	display: flex;
+	width: 100%;
+	cursor: pointer;
+	border-bottom: 1px solid #f8f2e7;
+	margin: 12px 0px;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.placeholder_inner_container {
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 4px;
+}
