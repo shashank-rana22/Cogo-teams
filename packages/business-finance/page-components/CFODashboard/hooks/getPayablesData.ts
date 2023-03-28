@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetPayablesList = () => {
+const useGetPayablesList = ({ globalFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/bf-receivable',
@@ -16,17 +16,17 @@ const useGetPayablesList = () => {
 		try {
 			trigger({
 				params: {
-					accountMode: 'AP',
+					serviceType : globalFilters?.serviceType,
+					accountMode : 'AP',
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.message);
 		}
 	};
-
 	useEffect(() => {
 		refetch();
-	}, []);
+	}, [globalFilters?.serviceType]);
 
 	return {
 		payablesData    : data,

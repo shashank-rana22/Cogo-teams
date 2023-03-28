@@ -10,8 +10,16 @@ import { treasuryControls } from '../controls';
 
 import styles from './styles.module.css';
 
+interface Props {
+	tabs?:string
+}
+interface ItemProps {
+	key?: string;
+	label?: string;
+	icon?: JSX.Element;
+}
 function TreasuryStatistics() {
-	const [tabs, setTabs] = useState('all');
+	const [tabs, setTabs] = useState<Props>('all');
 	const {
 		data,
 		treasuryFilters,
@@ -67,7 +75,7 @@ function TreasuryStatistics() {
 					</div>
 					<div className={styles.container}>
 						<div className={styles.flex}>
-							{tab.map((item) => (
+							{tab.map((item:ItemProps) => (
 								<div
 									key={item.key}
 									onClick={() => {

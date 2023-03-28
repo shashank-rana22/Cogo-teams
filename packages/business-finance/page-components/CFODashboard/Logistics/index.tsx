@@ -11,25 +11,22 @@ import TotalPayablesRecievables from './TotalPayablesRecievavles';
 import TreasuryStatistics from './TreasuryStatistics';
 
 function Logistics() {
-	const [filters, setFilters] = useState({});
+	const [globalFilters, setGlobalFilters] = useState({});
 
 	return (
 		<div>
 			<div>
 				<Filters
 					controls={controls}
-					filters={filters}
-					setFilters={setFilters}
+					filters={globalFilters}
+					setFilters={setGlobalFilters}
 				/>
 			</div>
-			<TotalPayablesRecievables />
-			<Statistics />
-			<IncomeExpense />
-			<AccordianCards />
-			<Profitabillity
-				filters={filters}
-				setFilters={setFilters}
-			/>
+			<TotalPayablesRecievables globalFilters={globalFilters} />
+			<Statistics globalFilters={globalFilters} />
+			<IncomeExpense globalFilters={globalFilters} />
+			<AccordianCards globalFilters={globalFilters} />
+			<Profitabillity globalFilters={globalFilters} />
 			<TreasuryStatistics />
 		</div>
 	);

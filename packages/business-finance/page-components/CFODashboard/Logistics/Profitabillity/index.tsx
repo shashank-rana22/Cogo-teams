@@ -9,7 +9,8 @@ import getProfitabillityColumn from '../../utils/getProfitabillityColumn';
 import { jobsOptions } from './options';
 import styles from './styles.module.css';
 
-function Profitabillity({ filters, setFilters }) {
+function Profitabillity({ globalFilters }) {
+	const [filters, setFilters] = useState({});
 	const [jobsFilters, setJobsFilters] = useState({ });
 	const tab = [
 		{
@@ -27,7 +28,7 @@ function Profitabillity({ filters, setFilters }) {
 		profitabillityLoading,
 		searchValue,
 		setSearchValue,
-	} = useGetProfitabillityShipmentList({ tabs, filters, setFilters, jobsFilters });
+	} = useGetProfitabillityShipmentList({ tabs, filters, setFilters, jobsFilters, globalFilters });
 
 	const { pageIndex = 0, pageSize = 0, totalRecord, shipmentList = [], customerList = [] } = profitabillityData || {};
 

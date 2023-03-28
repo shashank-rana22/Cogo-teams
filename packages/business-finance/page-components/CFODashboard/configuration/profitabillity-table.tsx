@@ -11,8 +11,15 @@ const profitabillityColumn = [
 		Header   : 'SID',
 		id       : 'jobNumber',
 		accessor : (row) => (
-			<div style={{ color: '#F68B21', textDecorationLine: 'underline' }}>
-				{row?.jobNumber}
+			<div style={{
+				display       : 'flex',
+				flexDirection : 'column',
+			}}
+			>
+				<span style={{ color: '#F68B21', textDecorationLine: 'underline' }}>{row?.jobNumber}</span>
+				<span>
+					{startCase(row?.shipmentType)}
+				</span>
 			</div>
 		),
 	},

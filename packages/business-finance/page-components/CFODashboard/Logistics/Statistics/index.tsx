@@ -5,8 +5,8 @@ import useGetTodayStats from '../../hooks/getTodayStats';
 
 import styles from './styles.module.css';
 
-function Statistics() {
-	const { todayStatsData } = useGetTodayStats();
+function Statistics({ globalFilters }) {
+	const { todayStatsData } = useGetTodayStats({ globalFilters });
 	const {
 		todayPurchaseStats, todaySalesStats,
 		totalCashFlow = 0, cashFlowDiffFromYesterday = 0,

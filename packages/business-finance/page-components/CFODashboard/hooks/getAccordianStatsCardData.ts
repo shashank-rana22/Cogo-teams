@@ -1,22 +1,38 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-const useGetAccordianStatsData = () => {
+const useGetAccordianStatsData = ({ globalFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : 'payments/dashboard//bf-service-wise-overdue',
+			url     : 'payments/dashboard/bf-service-wise-overdue',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_bf_service_wise_overdue',
 		},
 		{ manual: true },
 	);
+	const { startDate, endDate } = globalFilters?.date || {};
+	const refetch = (serviceName, tradeType) => {
+		const servicemapping = {
+			Ocean   : 'ocean',
+			Surface : 'surface',
+			Air     : 'air',
+		};
+		const tradeTypeMapping = () => {
+			if (tradeType === 'overall') return undefined;
+			return tradeType;
+		};
 
-	const refetch = () => {
 		try {
 			trigger({
 				params: {
-					interfaceType: 'ocean',
+					startDate: startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
+						: undefined,
+					endDate: endDate
+						? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
+					interfaceType : servicemapping[serviceName] || undefined,
+					tradeType     : tradeTypeMapping(),
 				},
 			});
 		} catch (e) {
@@ -24,9 +40,9 @@ const useGetAccordianStatsData = () => {
 		}
 	};
 
-	useEffect(() => {
-		refetch();
-	}, []);
+	// useEffect(() => {
+	// 	refetch();
+	// }, []);
 
 	return {
 		accordianStatsLoading : loading,

@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
+import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 interface GenericObject {
@@ -13,7 +14,7 @@ interface Props {
 	setFilters: (p: object) => void;
 }
 
-const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilters }:Props) => {
+const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilters, globalFilters }:Props) => {
 	const [searchValue, setSearchValue] = useState<string>('');
 
 	const apiUrl = {
@@ -34,16 +35,23 @@ const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilte
 		{ manual: true },
 	);
 	const { query, debounceQuery } = useDebounceQuery();
+	const { startDate, endDate } = globalFilters?.date || {};
+
+	const startDateFilter = startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false) : undefined;
+	const endDateFilters = endDate ? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined;
 
 	const refetch = () => {
 		try {
 			trigger({
 				params: {
 					...filters,
-					jobStatus : jobsFilters,
-					sortType  : 'Desc',
-					sortBy    : 'createdAt',
-					pageSize  : 5,
+					serviceType : tabs === 'shipment' ? globalFilters?.serviceType : undefined,
+					startDate   : tabs === 'shipment' ? startDateFilter : undefined,
+					endDate     : tabs === 'shipment' ? endDateFilters : undefined,
+					jobStatus   : jobsFilters,
+					sortType    : 'Desc',
+					sortBy      : 'profit',
+					pageSize    : 5,
 				},
 			});
 		} catch (e) {
@@ -67,7 +75,7 @@ const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilte
 
 	useEffect(() => {
 		refetch();
-	}, [tabs, filters, jobsFilters]);
+	}, [tabs, filters, jobsFilters, globalFilters]);
 
 	return {
 		profitabillityLoading : loading,

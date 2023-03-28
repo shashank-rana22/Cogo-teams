@@ -4,7 +4,10 @@ import { useState } from 'react';
 
 import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
-import OverallImportExportStatsKeyMapping from '../../constants/overall-import-export-stats-key-mapping';
+import OverallPayablesStatsKeyMapping from '../../constants/overall-payables-stats-key-mapping';
+import OverallReceivablesStatsKeyMapping from '../../constants/overall-receivables-key-mapping';
+import { serviceDataMapping } from '../../constants/service-base-data-mapping';
+import { statsTabs } from '../../constants/service_base_key_mapping';
 import useGetAccordianCardData from '../../hooks/getAccordianCardData';
 import useGetAccordianStatsData from '../../hooks/getAccordianStatsCardData';
 
@@ -14,48 +17,44 @@ interface ItemProps {
 	key: string;
 	label: string;
 }
-function AccordianCards() {
+function AccordianCards({ globalFilters }) {
 	const {
 		accordianDataData,
-	} = useGetAccordianCardData();
-	const { accordianStatsData } = useGetAccordianStatsData();
+	} = useGetAccordianCardData({ globalFilters });
+
+	const { accordianStatsData, refetch } = useGetAccordianStatsData({ globalFilters });
 
 	const iconMapping = {
 		Surface : <IcMTransport height={20} width={20} />,
 		Air     : <IcMAirport height={20} width={20} />,
 		Ocean   : <IcMOceanSchedules height={24} width={24} />,
 	};
-	const statsTabs = [
-		{
-			key   : 'overall',
-			label : 'Overall',
-		},
-		{
-			key   : 'import ',
-			label : 'Import',
-		},
-		{
-			key   : 'emport ',
-			label : 'Emport',
-		},
-	];
+
 	const [subActiveTab, setSubActiveTab] = useState<string>('overall');
-	const [viewButton, setViewButton] = useState(false);
-	function activeViewButton() {
-		setViewButton(!viewButton);
+	const [viewButton, setViewButton] = useState({
+		Ocean   : false,
+		Surface : false,
+		Air     : false,
+	});
+
+	function activeViewButton(service) {
+		setViewButton((prev) => ({
+			...prev,
+			[service]: !prev[service],
+		}));
 	}
 
 	return (
 		<div>
-
 			{(accordianDataData || []).map((item) => (
-
 				<div className={styles.container}>
 					<div className={styles.main_div}>
 						<div className={styles.icon_div}>
-							<div className={styles.icons}>{iconMapping[item?.service]}</div>
-							<div className={styles.texts}>{item?.service}</div>
-							{!viewButton
+							<div style={{ display: 'flex', width: '100px' }}>
+								<div className={styles.icons}>{iconMapping[item?.service]}</div>
+								<div className={styles.texts}>{item?.service}</div>
+							</div>
+							{!viewButton[item?.service]
 						&& (
 							<div className={styles.main_stats}>
 								<div className={styles.amount_div}>
@@ -68,7 +67,7 @@ function AccordianCards() {
 											<Pill size="xl" color="green">
 												{
 												getFormattedPrice(
-													item.accountRec - item.accountPay,
+													item.accountRec - Math.abs(item.accountPay),
 													'INR',
 												)
 												}
@@ -79,33 +78,44 @@ function AccordianCards() {
 								</div>
 								<div className={styles.border} />
 								<div className={styles.ar_amount}>
-									<span style={{ marginRight: '10px' }}>AR :</span>
+									<span style={{ marginRight: '10px' }}>AR:</span>
 									{showOverflowingNumber(getFormattedPrice(item?.accountRec, 'INR'), 15)}
 								</div>
 								<div className={styles.ar_amount}>
-									<span style={{ marginRight: '10px' }}>AP :</span>
-									{showOverflowingNumber(getFormattedPrice(item?.accountPay, 'INR'), 15)}
+									<span style={{ marginRight: '10px' }}>AP:</span>
+									{showOverflowingNumber(getFormattedPrice(Math.abs(item?.accountPay), 'INR'), 15)}
 								</div>
 							</div>
 						)}
 						</div>
 
 						<div className={styles.view_button}>
-							<Button size="md" themeType="secondary" onClick={activeViewButton}>View More</Button>
+							<Button
+								size="md"
+								themeType="secondary"
+								onClick={() => {
+									if (viewButton[item?.service] === false) refetch(item?.service, undefined);
+									activeViewButton(item?.service);
+								}}
+							>
+								View More
+
+							</Button>
 						</div>
 					</div>
 
-					{viewButton
+					{viewButton[item?.service]
 				&& (
 					<div>
 						<div className={styles.borders} />
 						<div className={styles.stats_styles}>
-							{statsTabs.map((val:ItemProps) => (
+							{statsTabs[item?.service].map((val:ItemProps) => (
 								<div
 									key={val.key}
 									className={val.key === subActiveTab
 										? styles.border_overall : styles.sub_border_overall}
 									onClick={() => {
+										refetch(item.service, val.key);
 										setSubActiveTab(val.key);
 									}}
 									role="presentation"
@@ -115,11 +125,22 @@ function AccordianCards() {
 									)
 										: (
 											<div className={styles.import_export_style}>
-												<div className={styles.stats_overall_import_export}>Import</div>
+												<div className={styles.stats_overall_import_export}>{val.label}</div>
 												<div className={styles.stats_border_left} />
+
 												<div className={styles.stats_text}>
-													<div className={styles.labels}>AR : </div>
-													<div className={styles.labels}>AP : </div>
+													<div className={styles.labels}>
+														AR :
+														{(accordianStatsData?.arData
+															|| {})[((serviceDataMapping[item?.service]
+															|| {})[val?.key] || {})?.AR] || ''}
+													</div>
+													<div className={styles.labels}>
+														AP :
+														{(accordianStatsData?.apData
+															|| {})[((serviceDataMapping[item?.service]
+															|| {})[val?.key] || {})?.AP] || ''}
+													</div>
 												</div>
 											</div>
 										)}
@@ -130,17 +151,17 @@ function AccordianCards() {
 						<div className={styles.border_all}>
 							<div className={styles.data_style}>
 								<div className={styles.text_amount_styles}>
-									<div>INR 40,00,000</div>
+									<div>{getFormattedPrice(accordianStatsData?.arData?.overdueAmount, 'INR')}</div>
 									<div>Account Receivables</div>
 								</div>
 								<div>
 									<div className={styles.border_left_top} />
 								</div>
 								<div className={styles.right_container}>
-									{(OverallImportExportStatsKeyMapping || []).map((val) => (
+									{(OverallReceivablesStatsKeyMapping({ accordianStatsData }) || []).map((val) => (
 										<div className={styles.due_ageing}>
-											<div className={styles.label}>{val.label}</div>
-
+											<div className={styles.recei_label}>{val.label}</div>
+											<div className={styles.label}>{val.valueKey}</div>
 										</div>
 									))}
 								</div>
@@ -148,17 +169,19 @@ function AccordianCards() {
 							<div className={styles.border_bottom} />
 							<div className={styles.data_style}>
 								<div className={styles.text_amount_styles}>
-									<div>INR 40,00,000</div>
+									<div>
+										{getFormattedPrice(Math.abs(accordianStatsData?.apData?.overdueAmount), 'INR')}
+									</div>
 									<div>Account Payables</div>
 								</div>
 								<div>
 									<div className={styles.border_left_buttom} />
 								</div>
 								<div className={styles.right_container}>
-									{(OverallImportExportStatsKeyMapping || []).map((val) => (
+									{(OverallPayablesStatsKeyMapping({ accordianStatsData }) || []).map((val) => (
 										<div className={styles.due_ageing}>
-											<div className={styles.label}>{val.label}</div>
-
+											<div className={styles.recei_label}>{val.label}</div>
+											<div className={styles.label}>{val.valueKey}</div>
 										</div>
 									))}
 								</div>

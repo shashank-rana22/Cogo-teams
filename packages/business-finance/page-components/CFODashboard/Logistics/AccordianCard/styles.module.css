@@ -55,6 +55,13 @@
 	width: 100%;
 }
 
+.recei_label {
+	margin-right: 70px;
+	font-size: 12px;
+	line-height: 30px;
+	letter-spacing: 0.4px;
+}
+
 .icons {
 	margin-left: 10px;
 }
@@ -98,7 +105,8 @@
 
 .due_ageing {
 	align-items: center;
-	width: 120px;
+
+	/* width: 120px; */
 }
 
 .label {

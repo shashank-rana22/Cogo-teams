@@ -16,12 +16,12 @@ function getFinancialYear(date) {
 	} return year;
 }
 
-function IncomeExpense() {
+function IncomeExpense({ globalFilters }) {
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [yearHandle, setYearHandle] = useState(false);
 	const {
 		incomeExpenseData = [],
-	} = useGetIncomeExpense();
+	} = useGetIncomeExpense({ globalFilters });
 
 	const onChangeToggle = () => {
 		setToggleStatus(!toggleStatus);

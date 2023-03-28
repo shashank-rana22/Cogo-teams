@@ -1,9 +1,15 @@
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-const useGetTreasuryStats = (tabs) => {
-	const [treasuryFilters, setTreasuryFilters] = useState({
+interface Props {
+	[key:string]:any,
+}
+interface ItemProps {
+	tabs?:string
+}
+const useGetTreasuryStats = (tabs:ItemProps) => {
+	const [treasuryFilters, setTreasuryFilters] = useState<Props>({
 	});
 	const {
 		...rest
@@ -19,7 +25,7 @@ const useGetTreasuryStats = (tabs) => {
 		{ manual: true },
 	);
 
-	const getDahboardData = () => {
+	const getDahboardData = useCallback(() => {
 		try {
 			trigger({
 				params: {
@@ -33,12 +39,10 @@ const useGetTreasuryStats = (tabs) => {
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [endDate, startDate, tabs, trigger]);
 
 	useEffect(() => {
 		getDahboardData();
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(rest), tabs]);
 
 	return {

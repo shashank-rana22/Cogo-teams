@@ -1,8 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-const useGetAccordianCardData = () => {
+const useGetAccordianCardData = ({ globalFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/bf-service-wise-rec-pay',
@@ -11,11 +12,15 @@ const useGetAccordianCardData = () => {
 		},
 		{ manual: true },
 	);
-
+	const { startDate, endDate } = globalFilters?.date || {};
 	const refetch = () => {
 		try {
 			trigger({
 				params: {
+					startDate: startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
+						: undefined,
+					endDate: endDate
+						? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
 				},
 			});
 		} catch (e) {
@@ -25,7 +30,7 @@ const useGetAccordianCardData = () => {
 
 	useEffect(() => {
 		refetch();
-	}, []);
+	}, [globalFilters?.date]);
 
 	return {
 		accordianDataLoading : loading,

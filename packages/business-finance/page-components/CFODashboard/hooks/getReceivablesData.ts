@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useGetReceivablesList = () => {
+const useGetReceivablesList = ({ globalFilters }) => {
 	const [recievablesTab, setRecievablesTab] = useState('all');
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -25,6 +25,7 @@ const useGetReceivablesList = () => {
 		try {
 			trigger({
 				params: {
+					serviceType : globalFilters?.serviceType,
 					accountMode : 'AR',
 					buyerType   : buyerTypeFilter(),
 				},
@@ -35,7 +36,7 @@ const useGetReceivablesList = () => {
 	};
 	useEffect(() => {
 		refetch();
-	}, [JSON.stringify(recievablesTab)]);
+	}, [JSON.stringify(recievablesTab), globalFilters?.serviceType]);
 
 	return {
 		receivablesData    : data,

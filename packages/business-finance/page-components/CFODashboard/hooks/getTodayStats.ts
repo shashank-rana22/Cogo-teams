@@ -3,7 +3,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetTodayStats = () => {
+const useGetTodayStats = ({ globalFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/bf-today-stats',
@@ -17,7 +17,7 @@ const useGetTodayStats = () => {
 		try {
 			trigger({
 				params: {
-					serviceTypes: 'FCL_FREIGHT',
+					serviceTypes: globalFilters?.serviceType,
 				},
 			});
 		} catch (e) {
@@ -27,7 +27,7 @@ const useGetTodayStats = () => {
 
 	useEffect(() => {
 		refetch();
-	}, []);
+	}, [globalFilters?.serviceType]);
 
 	return {
 		todayStatsLoading : loading,

@@ -3,7 +3,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetIncomeExpense = () => {
+const useGetIncomeExpense = ({ globalFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/bf-income-expense',
@@ -17,7 +17,7 @@ const useGetIncomeExpense = () => {
 		try {
 			trigger({
 				params: {
-
+					serviceType: globalFilters?.serviceType,
 				},
 			});
 		} catch (e) {
@@ -27,7 +27,7 @@ const useGetIncomeExpense = () => {
 
 	useEffect(() => {
 		refetch();
-	}, []);
+	}, [globalFilters?.serviceType]);
 
 	return {
 		incomeExpenseLoading : loading,
