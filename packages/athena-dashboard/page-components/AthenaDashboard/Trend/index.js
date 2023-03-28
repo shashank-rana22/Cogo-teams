@@ -8,15 +8,13 @@ import styles from './styles.module.css';
 
 function Trends() {
 	const router = useRouter();
-	const [value, setValue] = useState([]);
+	const [countryname, setCountryname] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
-	const [answer, setAnswer] = useState([]);
+	const [responsevalue, setResponsevalue] = useState([]);
 	const [hscodearr, setHscodearr] = useState([]);
 	const [shipmenttype, setShipmenttype] = useState(['import']);
-	console.log(hscodearr);
-	console.log(shipmenttype);
 
-	const options = [
+	const countryname_value = [
 		{ label: 'INDIA', value: 'INDIA' },
 	];
 
@@ -35,7 +33,7 @@ function Trends() {
 
 	useEffect(() => {
 		if (!isEmpty(responseData)) {
-			setAnswer(responseData.list);
+			setResponsevalue(responseData.list);
 		}
 	}, [responseData]);
 
@@ -75,30 +73,6 @@ function Trends() {
 	};
 
 	const handleClear = () => {
-		// hscodearr.map((Item)=>(
-		// 	const k=document.
-		// ))
-		//  ((hscodearr||[]).map((Item)=>(
-		// 	let ifchecked = document.getElementById(Item)
-
-		// 	if(ifchecked.checked){
-		// 		ifchecked.checked===false;
-		// 	}
-		// )))
-
-		// return [1, 2, 3, 4].map((item) => {
-		// 	if (item === 1) {
-		// 		return 2;
-		// 	}
-		// 	return 3;
-		// });
-		// const checks = document.getElementsByClassName('checkboxes');
-		// for (let i = 0; i < checks.length; i++) if (checks[i].checked === true ? checks[i].checked = false : checks[i].checked);
-		// for (let i = 0; i < hscodearr.length; i++) {
-		// 	if (document.getElementById(hscodearr[i]).checked) {
-		// 		document.getElementById(hscodearr[i]).checked = false;
-		// 	}
-		// }
 		setHscodearr([]);
 		reRender();
 	};
@@ -109,10 +83,10 @@ function Trends() {
 				<div>
 					Country/Region
 					<MultiSelect
-						value={value}
-						onChange={setValue}
+						value={countryname}
+						onChange={setCountryname}
 						placeholder="Select here..."
-						options={options}
+						options={countryname_value}
 						isClearable
 						style={{ width: '250px' }}
 						size="sm"
@@ -226,7 +200,7 @@ function Trends() {
 			<div>
 				<div className={styles.codes}>
 					{
-					((answer || []).map((Item) => (
+					((responsevalue || []).map((Item) => (
 						<div>
 							<div className={styles.setcssoutput}>
 								<div className={styles.checkbox}>

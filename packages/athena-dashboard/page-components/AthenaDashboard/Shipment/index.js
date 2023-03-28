@@ -9,11 +9,8 @@ import { useAthenaRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import destination_country from './destination_country_list';
+import controls from './controls';
 import EmptyState from './EmptyState';
-import origin_country from './origin_country_list';
-import origin_port from './portlist';
-import destination_port from './portlistdest';
 import styles from './styles.module.css';
 
 function formatDate(date) {
@@ -99,7 +96,6 @@ function Shipment() {
 			},
 		});
 	};
-
 	useEffect(() => {
 		if (!isEmpty(responseData)) {
 			setAnswer(responseData.list);
@@ -287,83 +283,29 @@ function Shipment() {
 						</div>
 					</div>
 					<div className={styles.leftpadding}>
-						<div className={styles.microfilternames}> Origin country</div>
-						{
-					origin_country.map((Item) => {
-						const el = { ...Item };
 
-						return (
-							<AsyncSelectController
-								{...el}
-								placeholder="Select country..."
-								key={el.name}
-								control={control}
-								id={`${el.name}_input`}
-								className={styles.controller}
-							/>
-						);
-					})
-				}
-					</div>
-					<div className={styles.leftpadding}>
-						<div className={styles.microfilternames}> Destination Country</div>
+						{controls.map((Item) => {
+							const el = { ...Item };
 
-						{
-					destination_country.map((Item) => {
-						const el = { ...Item };
+							return (
+								<>
+									<div className={styles.microfilternames}>
+										{' '}
+										{el.label}
+									</div>
 
-						return (
-							<AsyncSelectController
-								{...el}
-								placeholder="Select country..."
-								key={el.name}
-								control={control}
-								id={`${el.name}_input`}
-								className={styles.controller}
-							/>
-						);
-					})
-				}
-					</div>
-					<div className={styles.leftpadding}>
-						<div className={styles.microfilternames}> Origin Port</div>
+									<AsyncSelectController
+										{...el}
+										placeholder={el.placeholder}
+										key={el.name}
+										control={control}
+										id={`${el.name}_input`}
+										className={styles.controller}
+									/>
+								</>
 
-						{
-					origin_port.map((Item) => {
-						const el = { ...Item };
-
-						return (
-							<AsyncSelectController
-								{...el}
-								placeholder="Select Port..."
-								key={el.name}
-								control={control}
-								id={`${el.name}_input`}
-								className={styles.controller}
-							/>
-						);
-					})
-				}
-					</div>
-					<div className={styles.leftpadding}>
-						<div className={styles.microfilternames}> Destination Port</div>
-
-						{
-					destination_port.map((Item) => {
-						const el = { ...Item };
-
-						return (
-							<AsyncSelectController
-								{...el}
-								placeholder="Select Port..."
-								key={el.name}
-								control={control}
-								id={`${el.name}_input`}
-								className={styles.controller}
-							/>
-						);
-					})
-				}
+							);
+						})}
 					</div>
 				</div>
 			</div>

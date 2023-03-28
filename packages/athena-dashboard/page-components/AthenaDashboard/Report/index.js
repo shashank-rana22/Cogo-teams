@@ -13,7 +13,7 @@ function Report() {
 	const { general } = useSelector((state) => state);
 	const [answer, setAnswer] = useState([]);
 	const [hsdesc, setHsdesc] = useState([]);
-	const [optn, setOptn] = useState([]);
+	const [share, setShare] = useState([]);
 	const [optn2, setOptn2] = useState([]);
 	const [info, setInfo] = useState([]);
 	// const [firstRender, setFirstRender] = useState(false);
@@ -163,7 +163,7 @@ function Report() {
 				},
 			]}
 			/>
-		</div>,
+            </div>,
 		january   : (item.January !== undefined) ? item.January.toLocaleString('en-IN') : 0,
 		february  : (item.February !== undefined) ? item.February.toLocaleString('en-IN') : 0,
 		march     : (item.March !== undefined) ? item.March.toLocaleString('en-IN') : 0,
