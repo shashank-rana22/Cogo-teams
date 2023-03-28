@@ -4,7 +4,7 @@ import { useState } from 'react';
 const useGetHawb = () => {
 	const [hawbSuccess, setHawbSuccess] = useState(false);
 
-	const [{ data = {} }, trigger] = useRequestAir(
+	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
 			url     : '/air-coe/documents',
 			method  : 'get',
@@ -31,6 +31,7 @@ const useGetHawb = () => {
 		getHawb,
 		hawbSuccess,
 		setHawbSuccess,
+		loading,
 	};
 };
 export default useGetHawb;

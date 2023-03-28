@@ -2,7 +2,7 @@ import { Button, Checkbox } from '@cogoport/components';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
-import React, { createRef, useState, ReactFragment, useEffect } from 'react';
+import React, { createRef, useState, ReactFragment } from 'react';
 
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
@@ -32,6 +32,9 @@ interface Props {
 	activeCategory?: String;
 	hawbDetails?: Array<string>;
 	setHawbDetails?:Function;
+	activeHawb?: string;
+	setActiveHawb?: Function;
+	setActiveKey?: Function;
 }
 
 const downloadButton = {
