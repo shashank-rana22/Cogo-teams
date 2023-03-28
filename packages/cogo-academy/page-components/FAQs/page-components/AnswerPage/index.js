@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import { Modal, Button, Badge, Pill } from '@cogoport/components';
+import { Modal, Button, Badge, Pill, Toast } from '@cogoport/components';
 import { InputController, CheckboxController, useForm } from '@cogoport/forms';
 import { IcCLike, IcCDislike, IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -87,7 +87,7 @@ function AnswerPage() {
 			setIsLiked(isLiked === 'liked' ? '' : 'liked');
 			refetchQuestions();
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error);
 		}
 	};
 

@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -11,7 +12,7 @@ const useGetFaqNotifications = () => {
 		try {
 			await trigger();
 		} catch (e) {
-			console.log(e);
+			Toast.error(e);
 		}
 	}, [trigger]);
 

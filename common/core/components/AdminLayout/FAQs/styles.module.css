@@ -1,7 +1,6 @@
 .container {
 	z-index: 100;
 	transition: 150ms ease-in-out;
-	
 }
 
 .topiclist_container {
@@ -37,4 +36,3 @@
 .faq_icon img {
 	background: #fff;
 }
-

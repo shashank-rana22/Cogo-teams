@@ -1,4 +1,4 @@
-import { Input } from '@cogoport/components';
+import { Toast, Input } from '@cogoport/components';
 import { IcMSearchlight, IcMCross, IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -37,7 +37,7 @@ function Header({
 					setShowNotificationContent(false);
 				}
 			} catch (e) {
-				console.log(e);
+				Toast.error(e);
 			}
 		} else {
 			setTopic(null);
