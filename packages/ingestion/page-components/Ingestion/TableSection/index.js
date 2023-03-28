@@ -1,5 +1,4 @@
 import { Table, Pagination } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
 import useGetIngestionList from '../../../hooks/useGetIngestionList';
@@ -12,7 +11,7 @@ function TableSection() {
 	const { list, page = 0, page_limit, total_count } = dummyData || {};
 
 	// Todo add a empty condition
-	if (isEmpty(list)) {
+	if (false) {
 		return (
 			<div className={styles.empty}>
 				<EmptyState height="300px" width="200px" />

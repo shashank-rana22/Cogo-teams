@@ -1,12 +1,29 @@
 import { Button, Pill } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
-// import useState from 'react';
+import { useState } from 'react';
 
 import styles from '../styles.module.css';
 
 function useGetIngestionList() {
 	// const [currentPage, setCurrentPage] = useState(1);
+
+	const [ingestionData, setIngestionData] = useState({
+		option1           : '',
+		// orgDetails : {
+		// 	isCp    : null,
+		// 	country : '',
+		// 	partner : '',
+		// },
+		// isCp              : null,
+		country           : '',
+		partner           : '',
+		option2           : '',
+		option3           : '',
+		finalModalHeading : '',
+
+	});
 
 	const UPLOAD_STATUS_MAPPING = {
 		Uploading : 'yellow',
@@ -146,7 +163,7 @@ function useGetIngestionList() {
 		},
 		{
 			id       : 'status',
-			Header   : 'Relation Type',
+			Header   : 'STATUS',
 			accessor : ({ status = '' }) => (
 				<Pill size="sm" color={UPLOAD_STATUS_MAPPING[status]}>
 					{status ? startCase(status) : '___'}
@@ -182,12 +199,23 @@ function useGetIngestionList() {
 	// 	setCurrentPage(pageNumber);
 	// };
 
+	const formProps = useForm({
+		defaultValues: {
+			country_id : null,
+			partner    : null,
+			url        : '',
+		},
+	});
+
 	return {
 		columns,
 		dummyData,
 		// onPageChange,
 		// currentPage,
 		loading,
+		ingestionData,
+		setIngestionData,
+		formProps,
 	};
 }
 
