@@ -8594,7 +8594,7 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api          : 'get_communication_whatsapp_template_status',
+			api          : 'update_communication_whatsapp_template_status',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
@@ -10455,6 +10455,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
+		{
+			api          : 'get_exchange_rate_source_wise_revenue',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'update_source_exchange_rates',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
 
 	],
 	contracts: [
@@ -10773,7 +10783,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_cogoone_timeline',
+			api          : 'list_cogoone_timelines',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
