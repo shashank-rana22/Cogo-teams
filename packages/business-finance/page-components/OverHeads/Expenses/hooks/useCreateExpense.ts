@@ -96,25 +96,36 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		if (addresses?.length > 0) {
 			// picking single address from entity data that matches to branch address
 
-			addresses.forEach((address:any) => {
-				const { city_id:cityId } = address || {};
+			// addresses.forEach((address:any) => {
+			// 	const { city_id:cityId } = address || {};
 
-				console.log('address data =', { address, branchId });
-				if (cityId === branchId) {
-					console.log('condition matched...');
+			// 	if (cityId === branchId) {
+			// 		setAddressData({
+			// 			pincode     : address?.pin_code,
+			// 			address     : address?.address,
+			// 			cityName    : address?.city?.name,
+			// 			countryName : address?.country?.name,
+			// 			countryCode : address?.country?.country_code,
+			// 			countryId   : address?.country_id,
+			// 			taxNumber   : address?.gst_number,
+			// 			branchId    : address?.city_id,
+			// 		});
+			// 	}
+			// });
 
-					setAddressData({
-						pincode     : address?.pin_code,
-						address     : address?.address,
-						cityName    : address?.city?.name,
-						countryName : address?.country?.name,
-						countryCode : address?.country?.country_code,
-						countryId   : address?.country_id,
-						taxNumber   : address?.gst_number,
-						branchId    : address?.city_id,
-					});
-				}
-			});
+			const singleAddress = addresses?.[0];
+			if (singleAddress) {
+				setAddressData({
+					pincode     : singleAddress?.pin_code,
+					address     : singleAddress?.address,
+					cityName    : singleAddress?.city?.name,
+					countryName : singleAddress?.country?.name,
+					countryCode : singleAddress?.country?.country_code,
+					countryId   : singleAddress?.country_id,
+					taxNumber   : singleAddress?.gst_number,
+					branchId    : singleAddress?.city_id,
+				});
+			}
 		}
 	}, [branchId, addresses]);
 
@@ -199,12 +210,12 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					isTaxApplicable      : true,
 					isSez                : false,
 					organizationName     : vendorBusinessName,
-					// pincode                 : null,
-					// address                 : 'D-296,JJ, // ??
-					// cityName                : '', // ??
-					// supplyAgent             : 'Ajit', // ??
-					// zone                    : 'NORTH', // ??
-					// countryName             : tradeParty?.country?.display_name,
+					pincode              : 123456, // should come from trade party
+					address              : 'D-296,JJ', // should come from trade party
+					cityName             : '', // ??// should come from trade party
+					supplyAgent          : 'Ajit', // ??// should come from trade party
+					zone                 : 'NORTH', // ??// should come from trade party
+					countryName          : 'India', // should come from trade party
 					countryCode          : 'IN', /// need to change from trade party
 					countryId            : vendorCountryId,
 					registrationNumber   : registrationType === 'pan' ? vendorRegistrationNumber : null,

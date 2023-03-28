@@ -21,7 +21,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		vendorId:vendorID, businessName:vendorName, id:expenseConfigurationId,
 		category:expenseCategory,
 		subCategory:expenseSubCategory,
-		id:vendorId,
+		// id:vendorId,
 		tds_deduction_rate:vendorTds,
 		bank_details:bankDetails = [],
 	} = rowData || {};
@@ -44,7 +44,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		branch,
 		lineItemsList,
 		// tradeParty,
-		transactionDate,
+		// transactionDate,
 	} = expenseData || {};
 
 	const { name:branchName, branchId } = branch || {};
@@ -97,22 +97,36 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		if (addresses?.length > 0) {
 			// picking single address from entity data that matches to branch address
 
-			addresses.forEach((address) => {
-				const { city_id:cityId } = address || {};
+			// addresses.forEach((address) => {
+			// 	const { city_id:cityId } = address || {};
 
-				if (cityId === branchId) {
-					setAddressData({
-						pincode     : address?.pin_code,
-						address     : address?.address,
-						cityName    : address?.city?.name,
-						countryName : address?.country?.name,
-						countryCode : address?.country?.country_code,
-						countryId   : address?.country_id,
-						taxNumber   : address?.gst_number,
-						branchId    : address?.city_id,
-					});
-				}
-			});
+			// 	if (cityId === branchId) {
+			// 		setAddressData({
+			// 			pincode     : address?.pin_code,
+			// 			address     : address?.address,
+			// 			cityName    : address?.city?.name,
+			// 			countryName : address?.country?.name,
+			// 			countryCode : address?.country?.country_code,
+			// 			countryId   : address?.country_id,
+			// 			taxNumber   : address?.gst_number,
+			// 			branchId    : address?.city_id,
+			// 		});
+			// 	}
+			// });
+
+			const singleAddress = addresses?.[0];
+			if (singleAddress) {
+				setAddressData({
+					pincode     : singleAddress?.pin_code,
+					address     : singleAddress?.address,
+					cityName    : singleAddress?.city?.name,
+					countryName : singleAddress?.country?.name,
+					countryCode : singleAddress?.country?.country_code,
+					countryId   : singleAddress?.country_id,
+					taxNumber   : singleAddress?.gst_number,
+					branchId    : singleAddress?.city_id,
+				});
+			}
 		}
 	}, [branchId, addresses]);
 
@@ -186,18 +200,18 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 					// tradePartyMappingId     : '4ff54f88-0024-4de9-8ebd-2c72c80aeaa3', // ???
 					entityCode,
 					entityCodeId         : vendorCogoEntityId,
-					organizationId       : vendorId,
+					organizationId       : vendorID,
 					organizationSerialId : vendorSid,
 					// isTaxApplicable         : tradeParty?.is_tax_applicable,
 					isTaxApplicable      : true,
 					isSez                : false,
 					organizationName     : vendorBusinessName,
-					// pincode                 : null,
-					// address                 : 'D-296,JJ', // ??
-					// cityName                : '', // ??
-					// supplyAgent             : 'Ajit', // ??
-					// zone                    : 'NORTH', // ??
-					// countryName             : tradeParty?.country?.display_name,
+					pincode              : 123456, // should come from trade party
+					address              : 'D-296,JJ', // should come from trade party
+					cityName             : '', // ??// should come from trade party
+					supplyAgent          : 'Ajit', // ??// should come from trade party
+					zone                 : 'NORTH', // ??// should come from trade party
+					countryName          : 'India', // should come from trade party
 					countryCode          : 'IN', /// need to change from trade party
 					countryId            : vendorCountryId,
 					registrationNumber   : registrationType === 'pan' ? vendorRegistrationNumber : null,
@@ -241,7 +255,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 				serviceProviderDetail: { // vendor
 					entityCode,
 					entityCodeId            : vendorCogoEntityId,
-					organizationId          : vendorId,
+					organizationId          : vendorID,
 					organizationSerialId    : vendorSid,
 					isSez                   : false,
 					organizationName        : vendorBusinessName,

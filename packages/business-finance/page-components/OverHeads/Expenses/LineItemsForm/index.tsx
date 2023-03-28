@@ -2,7 +2,7 @@ import { useFieldArray, useForm } from '@cogoport/forms';
 import React, { useEffect } from 'react';
 
 import StyledTable from '../../../commons/StyledTable';
-import usePostListItemTaxes from '../hooks/useGetListItemTaxes';
+import useGetListItemTaxes from '../hooks/useGetListItemTaxes';
 
 import lineItemColumns from './columns';
 import styles from './styles.module.css';
@@ -11,7 +11,7 @@ import TotalColumn from './TotalColumn';
 
 function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 	const { invoiceCurrency = '', lineItemsList:lineItemsListData = [] } = formData || {};
-	const { lineItemsList } = usePostListItemTaxes();
+	const { lineItemsList } = useGetListItemTaxes({ formData });
 
 	const { control, watch, setValue } = useForm(
 		{

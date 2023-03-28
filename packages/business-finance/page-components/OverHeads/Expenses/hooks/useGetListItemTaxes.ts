@@ -1,7 +1,9 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetListItemTaxes = () => {
+const useGetListItemTaxes = ({ formData }) => {
+	const countryCode = formData?.entityObject?.country?.country_code;
+
 	const [{ data, loading = false }, trigger] = useRequestBf(
 		{
 			// url     : '/common/tax/list-item-taxes',
@@ -18,9 +20,9 @@ const useGetListItemTaxes = () => {
 				await trigger(
 					{
 						data: {
-							serviceName : 'overhead',
-							tradeType   : 'LOCAL',
-							countryCode : 'IN',
+							serviceName: 'overhead',
+							// tradeType   : 'LOCAL',
+							countryCode,
 						},
 					},
 				);
@@ -29,7 +31,7 @@ const useGetListItemTaxes = () => {
 			}
 		};
 		api();
-	}, [trigger]);
+	}, [trigger, countryCode]);
 
 	return {
 		loading,
