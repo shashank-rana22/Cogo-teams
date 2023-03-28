@@ -63,3 +63,7 @@
 	font-size: 12px;
 	rotate: 180deg;
 }
+.no_data {
+	display: flex;
+	justify-content: center;
+}

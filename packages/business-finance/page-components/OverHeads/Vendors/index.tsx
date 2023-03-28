@@ -222,6 +222,8 @@ function VenderComponent() {
 		},
 	};
 
+	const isListEmpty = listData?.list?.length === 0;
+
 	return (
 		<div className={styles.vendor_container}>
 			{renderHeaders()}
@@ -239,6 +241,18 @@ function VenderComponent() {
 				showPagination
 				renderDropdown={(id) => renderDropdown(id)}
 			/>
+			<div>
+				{isListEmpty
+					&& (
+						<div className={styles.no_data}>
+							<img
+								style={{ width: '26%', margin: '10%' }}
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg"
+								alt="no data"
+							/>
+						</div>
+					)}
+			</div>
 
 			{
                 showModal && <CreateVendorModal showModal={showModal} setShowModal={setShowModal} />
