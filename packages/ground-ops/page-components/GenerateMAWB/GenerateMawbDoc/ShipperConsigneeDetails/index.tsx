@@ -39,7 +39,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 					`}
 						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p className={styles.font_style} style={{ fontSize: 18 }}>{awbNumber.substring(0, 3)}</p>
+						<p style={{ fontSize: 18 }}>{awbNumber.substring(0, 3)}</p>
 					</div>
 					<div
 						className={cl`
@@ -49,7 +49,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 					`}
 						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p className={styles.font_style} style={{ fontSize: 18 }}>{taskItem?.originPortCode}</p>
+						<p style={{ fontSize: 18 }}>{taskItem?.originPortCode}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -57,7 +57,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 						${styles.mawb_number_subdivision_second} 
 					`}
 					>
-						<p className={styles.font_style} style={{ fontSize: 18 }}>{awbNumber.substring(4, 13)}</p>
+						<p style={{ fontSize: 18 }}>{awbNumber.substring(4, 13)}</p>
 					</div>
 				</div>
 				<div className={cl`
@@ -66,7 +66,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 					${styles.mawb_bill_number} 
 				`}
 				>
-					<p className={styles.font_style} style={{ fontSize: 18 }}>{awbNumber}</p>
+					<p style={{ fontSize: 18 }}>{awbNumber}</p>
 				</div>
 			</div>
 			<div className={styles.flex} style={{ minHeight: 140 }}>
@@ -138,7 +138,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 						${styles.airway_bill} 
 					`}
 					>
-						<p className={styles.font_style} style={{ fontSize: 14.5, color: tempColor }}>Air Waybill</p>
+						<p style={{ fontSize: 14.5, color: tempColor }}>Air Waybill</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 

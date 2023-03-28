@@ -537,14 +537,15 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
-			name        : 'executedDate',
-			type        : 'date_picker',
-			className   : 'primary lg',
-			label       : 'Executed Date',
-			span        : 5,
-			placeholder : 'Date',
-			value       : new Date(),
-			rules       : {
+			name                  : 'executedDate',
+			type                  : 'date_picker',
+			className             : 'primary lg',
+			label                 : 'Executed Date',
+			span                  : 5,
+			placeholder           : 'Date',
+			value                 : new Date(),
+			isPreviousDaysAllowed : true,
+			rules                 : {
 				required: 'Date is Required',
 			},
 		},
