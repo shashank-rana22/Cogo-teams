@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCrossInCircle, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -27,6 +27,8 @@ function BasicDetailsForm({
 	const { control, formState:{ errors }, handleSubmit, setValue } = useForm();
 
 	const controls = getControls({ mode });
+
+	const [showModal, setShowModal] = useState(false);
 
 	const { cogo_entity_object } = data || {};
 
@@ -69,22 +71,59 @@ function BasicDetailsForm({
 
 	if (!isEmpty(questionSetId) && !showForm) {
 		return (
-			<div className={`${styles.container} ${styles.flex_row}`}>
-				{constants.map((item) => (
-					<div className={styles.flex_container}>
-						<div className={styles.label}>{startCase(item)}</div>
-						<div className={styles.value}>
-							{item === 'cogo_entity_id' ? cogo_entity_object?.business_name : data?.[item] || 0}
+			<>
+				<div className={`${styles.container} ${styles.flex_row}`}>
+					{constants.map((item) => (
+						<div className={styles.flex_container}>
+							<div className={styles.label}>{startCase(item)}</div>
+							<div className={styles.value}>
+								{item === 'cogo_entity_id' ? cogo_entity_object?.business_name : data?.[item] || 0}
+							</div>
 						</div>
-					</div>
-				))}
+					))}
 
-				<div className={styles.button_container}>
-					<IcMEdit className={styles.button} onClick={() => editForm()} />
-					<div className={styles.vertical_line} />
-					<IcMDelete className={styles.button} onClick={() => handleDeleteQuestionSet()} />
+					<div className={styles.button_container}>
+						<IcMEdit className={styles.button} onClick={() => editForm()} />
+						<div className={styles.vertical_line} />
+						<IcMDelete
+							className={styles.button}
+							onClick={() => {
+								setShowModal(true);
+							}}
+						/>
+					</div>
 				</div>
-			</div>
+				<Modal
+					size="sm"
+					show={showModal}
+					onClose={() => setShowModal(false)}
+					placement="center"
+					showCloseIcon={false}
+				>
+					<Modal.Header title="Are you sure you want to delete this?" />
+
+					<Modal.Body>
+						<div className={styles.btn_container}>
+							<Button
+								type="button"
+								themeType="secondary"
+								onClick={() => setShowModal(false)}
+							>
+								Cancel
+							</Button>
+							<Button
+								type="button"
+								onClick={() => {
+									handleDeleteQuestionSet();
+									setShowModal(false);
+								}}
+							>
+								Delete
+							</Button>
+						</div>
+					</Modal.Body>
+				</Modal>
+			</>
 		);
 	}
 

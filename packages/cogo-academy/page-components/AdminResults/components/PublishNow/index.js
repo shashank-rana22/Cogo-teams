@@ -10,20 +10,20 @@ function PublishNow({ test_id, refetchTest }) {
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'POST',
-		url    : 'update_test',
+		url    : 'end_test',
 	}, { manual: true });
 
 	const publishResults = async () => {
 		try {
 			await trigger({
 				data: {
-					id           : test_id,
-					validity_end : new Date(),
-					status       : 'published',
+					test_id,
 				},
 			});
 
-			refetchTest();
+			setShowPublishModal(false);
+
+			refetchTest({ test_id });
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.data));
 		}
