@@ -75,21 +75,16 @@ function TestCard({ test_card }) {
 						<span className={styles.icon}><IcMArrowRight /></span>
 					</span>
 				) : (
-					<>
-						<div className={styles.availability}>
-							Available:
-							<span className={styles.test_date}>
-								{format(validity_start, 'dd MMM\' yy')}
-								{' '}
-								-
-								{' '}
-								{format(validity_end, 'dd MMM\' yy')}
-							</span>
-						</div>
-						<div>
-							{}
-						</div>
-					</>
+					<div className={styles.availability}>
+						Available:
+						<span className={styles.test_date}>
+							{format(validity_start, 'dd MMM\' yy')}
+							{' '}
+							-
+							{' '}
+							{format(validity_end, 'dd MMM\' yy')}
+						</span>
+					</div>
 				)}
 			</div>
 
