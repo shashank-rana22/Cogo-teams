@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 function useGetTest({ id, user_id }) {
 	const [{ loading = false, data = {} }, trigger] = useRequest({
 		method : 'get',
-		url    : 'get_test',
+		url    : '/get_test',
 	}, { manual: false });
 
 	const getTest = ({ test_id, userId }) => {

@@ -2,6 +2,13 @@ import { useSelector } from '@cogoport/store';
 
 import styles from './styles.module.css';
 
+const STATS_MAPPING = {
+	answered          : '#DDEBC0',
+	not_answered      : '#F8AEA8',
+	marked_for_review : '#CED1ED',
+	not_viewed        : '#FDFBF6',
+};
+
 function QuestionsCount({ data = {}, setCurrentQuestion, fetchQuestions }) {
 	const {
 		query: { test_id },
@@ -10,13 +17,6 @@ function QuestionsCount({ data = {}, setCurrentQuestion, fetchQuestions }) {
 		query : general.query,
 		user  : profile.user,
 	}));
-
-	const STATS_MAPPING = {
-		answered          : '#DDEBC0',
-		not_answered      : '#F8AEA8',
-		marked_for_review : '#CED1ED',
-		not_viewed        : '#FDFBF6',
-	};
 
 	const handleChangeQuestion = ({ index }) => {
 		if (index === 0 || data?.data?.[index - 1].answer_state !== 'not_viewed') {
@@ -50,6 +50,7 @@ function QuestionsCount({ data = {}, setCurrentQuestion, fetchQuestions }) {
 
 				);
 			})}
+
 			{ len ? [...Array(len)].map((item, index) => (
 				<div
 					role="presentation"

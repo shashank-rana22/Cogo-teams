@@ -10,7 +10,7 @@ function Overview() {
 		user: profile.user,
 	}));
 
-	const [{ data, loading }] = useRequest({
+	const [{ data }] = useRequest({
 		method : 'GET',
 		url    : '/get_passed_test_data_per_user',
 		params : {

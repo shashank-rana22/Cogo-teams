@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 function useGetUserSubmissionStats({ id, user_id }) {
 	const [{ data = {} }, trigger] = useRequest({
 		method : 'get',
-		url    : 'get_user_submission_stats',
+		url    : '/get_user_submission_stats',
 	}, { manual: false });
 
 	const getUserSubmissionStats = ({ test_id, userId }) => {
