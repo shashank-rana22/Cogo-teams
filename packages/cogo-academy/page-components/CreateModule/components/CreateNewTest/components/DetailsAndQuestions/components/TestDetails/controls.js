@@ -29,7 +29,6 @@ const getControls = () => [
 			label       : 'Select Entity & User Groups',
 			type        : 'multiselect',
 			placeholder : 'User groups',
-			// rules       : { required: 'This is required' },
 		},
 		],
 		type: 'select-entity-usergroups',

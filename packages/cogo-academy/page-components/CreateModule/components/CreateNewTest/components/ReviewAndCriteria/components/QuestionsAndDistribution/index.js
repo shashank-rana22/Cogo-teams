@@ -18,11 +18,11 @@ function QuestionsAndDistribution(props) {
 			if (question_type === 'stand_alone') {
 				setValue(`${test_question_set_id}q`, (!(distribution_count || distribution_count === 0))
 					? ''
-					: distribution_count || '0');	// append with 'q' for stand alone questions
+					: distribution_count || '0');
 			} else {
 				setValue(`${test_question_set_id}c`, (!(distribution_count || distribution_count === 0))
 					? ''
-					: distribution_count || '0'); // append with 'c' for case study questions
+					: distribution_count || '0');
 			}
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps

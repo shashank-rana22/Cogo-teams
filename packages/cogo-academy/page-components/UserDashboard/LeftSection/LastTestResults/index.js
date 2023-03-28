@@ -19,7 +19,7 @@ function LastTestResults() {
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
-		url    : 'get_user_performance',
+		url    : '/get_user_performance',
 		params : {
 			user_id,
 		},
