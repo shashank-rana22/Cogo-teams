@@ -241,6 +241,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'send_liners_invoice_email',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
