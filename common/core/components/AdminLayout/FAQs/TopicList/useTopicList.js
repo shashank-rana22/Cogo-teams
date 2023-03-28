@@ -19,7 +19,7 @@ const useTopicList = () => {
 	const { role_functions = [], role_sub_functions = [] } = auth_role_data || {};
 
 	const [{ data, loading }, trigger] = useRequest({
-		url    : 'list_faq_topics',
+		url    : '/list_faq_topics',
 		method : 'get',
 	}, { manual: true });
 
