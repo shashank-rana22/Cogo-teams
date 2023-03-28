@@ -6,12 +6,10 @@
 .filter_text {
     display: flex;
     align-items: center;
-    background: var(--color-primary-error-red-4);
-    font-size: var(--font-size-md);
     padding: 4px;
     border-radius: 4px;
     cursor: pointer;
-
+    min-height: 26px;
 
     svg {
         margin-right: 6px;    

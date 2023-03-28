@@ -38,20 +38,34 @@ function PopoverContent({ stateProps }) {
 }
 
 export default function ScopeAndFilters({ stateProps }) {
+	const { filters, setFilters } = stateProps;
+	const clearFilters = () => {
+		setFilters({ shipment_type: filters.shipment_type, page: 1 });
+	};
+
 	return (
 		<div className={styles.container}>
+			<Button
+				themeType="secondary"
+				size="sm"
+				className={styles.filter_text}
+				onClick={clearFilters}
+			>
+				Clear Filters
+			</Button>
+
 			<Popover
 				content={<PopoverContent stateProps={stateProps} />}
 				placement="bottom"
 			>
-				<div className={styles.filter_text}>
+				<Button themeType="secondary" size="sm" className={styles.filter_text}>
 					<IcMFilter />
 					{' '}
 					Filters
-				</div>
+				</Button>
 			</Popover>
 
-			<ScopeSelect defaultValues={stateProps.scopeFilters} />
+			<ScopeSelect className={styles.filter_text} defaultValues={stateProps.scopeFilters} />
 		</div>
 	);
 }

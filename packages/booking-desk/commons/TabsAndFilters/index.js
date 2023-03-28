@@ -29,7 +29,7 @@ export default function TabsAndFilters({ stateProps, tabs }) {
 			<div className={styles.filter_container}>
 				{isCriticalVisible ? (
 					<Toggle
-						size="md"
+						size="sm"
 						offLabel="Critical SIDs"
 						checked={isCriticalOn}
 						onChange={() => setFilters({ ...filters, isCriticalOn: !isCriticalOn, page: 1 })}
