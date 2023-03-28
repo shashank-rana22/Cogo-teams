@@ -27,7 +27,12 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 			id       : 'c',
 			accessor : ({ topic = [] }) => (
 				<section>
-					{topic}
+					<Pill
+						size="md"
+						color="#CFEAED"
+					>
+						{startCase(topic)}
+					</Pill>
 				</section>
 			),
 		},
@@ -57,11 +62,20 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 				<section>{status}</section>
 			),
 		},
+		// {
+		// 	Header   : 'AUDIENCE IDS',
+		// 	id       : 'audience_ids',
+		// 	accessor : ({ audience_ids = '' }) => (
+		// 		<section>{audience_ids.length || '--'}</section>
+		// 	),
+		// },
 		{
-			Header   : 'AUDIENCE IDS',
-			id       : 'audience_ids',
-			accessor : ({ audience_ids = '' }) => (
-				<section>{audience_ids.length || '--'}</section>
+			Header   : 'NO. OF TESTS USING THE SET',
+			id       : 'e',
+			accessor : ({ set_count = 0 }) => (
+				<section>
+					{set_count}
+				</section>
 			),
 		},
 		{
@@ -335,64 +349,60 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 		{
 			Header   : '',
 			id       : 'options',
-			accessor : ({ id = '', validity_start = '' }) => (
+			accessor : ({ id = '', validity_start = '', status = '' }) => (
 
 				<section>
-					<div
-						role="presentation"
-					>
-						<div style={{
-							width  : 'fit-content',
-							cursor : 'default',
-						}}
+					{(status === 'published' || (validity_start && new Date().getTime()
+					>= new Date(validity_start).getTime() && status === 'active')) ? (null) : (
+						<div
+							role="presentation"
 						>
-							<Tooltip
-								className={styles.tooltip_pad}
-								content={(
-									<div className={styles.options}>
-										{(validity_start && new Date().getTime()
-										>= new Date(validity_start).getTime()) ? (
-												null
-											) : (
-												<Button
-													loading={loading}
-													themeType="secondary"
-													className={styles.btn}
-													onClick={() => handleEditTest(id)}
-												>
-													<IcMEdit />
-													<div style={{ marginLeft: '8px' }}>
-														Edit
-													</div>
-												</Button>
-											)}
-
-										<Button
-											loading={loading}
-											themeType="secondary"
-											className={styles.btn}
-											type="button"
-											onClick={() => {
-												setShowModal(true);
-												setTestId(id);
-											}}
-										>
-											<IcMDelete />
-											<div style={{ marginLeft: '8px' }}>
-												Delete
-											</div>
-										</Button>
-
-									</div>
-								)}
-								trigger="click"
-								placement="left"
-								interactive="true"
+							<div style={{
+								width  : 'fit-content',
+								cursor : 'default',
+							}}
 							>
-								<IcMOverflowDot style={{ cursor: 'pointer' }} />
-							</Tooltip>
+								<Tooltip
+									className={styles.tooltip_pad}
+									content={(
+										<div className={styles.options}>
+											<Button
+												loading={loading}
+												themeType="secondary"
+												className={styles.btn}
+												onClick={() => handleEditTest(id)}
+											>
+												<IcMEdit />
+												<div style={{ marginLeft: '8px' }}>
+													Edit
+												</div>
+											</Button>
+											<Button
+												loading={loading}
+												themeType="secondary"
+												className={styles.btn}
+												type="button"
+												onClick={() => {
+													setShowModal(true);
+													setTestId(id);
+												}}
+											>
+												<IcMDelete />
+												<div style={{ marginLeft: '8px' }}>
+													Delete
+												</div>
+											</Button>
+										</div>
+									)}
+									trigger="click"
+									placement="left"
+									interactive="true"
+								>
+									<IcMOverflowDot style={{ cursor: 'pointer' }} />
+								</Tooltip>
+							</div>
 						</div>
-					</div>
+						)}
 				</section>
 			),
 		},
