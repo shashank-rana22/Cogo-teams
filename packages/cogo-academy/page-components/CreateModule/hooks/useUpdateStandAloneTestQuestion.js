@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
@@ -47,11 +48,13 @@ function useUpdateStandAloneTestQuestion() {
 				questionSetId,
 				...(action === 'delete' ? { pageToShow: 1 } : null),
 			});
+
 			setAllKeysSaved(true);
 			setEditDetails({});
 			reset();
 		} catch (err) {
-			console.log(err);
+			console.log('err::', err);
+			Toast.error(getApiErrorString(err.response.data));
 		}
 	};
 

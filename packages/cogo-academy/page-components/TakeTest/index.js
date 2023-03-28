@@ -30,7 +30,7 @@ function CheckEligibility() {
 		user  : profile.user,
 	}));
 
-	const [{ data }] = useRequest({
+	const [{ data, loading }] = useRequest({
 		method : 'POST',
 		url    : '/check_test_user_eligibility',
 		params : {
@@ -41,6 +41,10 @@ function CheckEligibility() {
 	const { is_valid_user, is_active, attempts_left } = data || {};
 
 	const currentQuestion = localStorage.getItem(`current_question_${test_id}_${user_id}`);
+
+	if (loading) {
+		return 'loading ...';
+	}
 
 	if (currentQuestion) {
 		return <TakeTest />;

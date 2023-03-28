@@ -57,6 +57,7 @@ const getControls = ({ mode }) => [
 		name    : 'difficulty_level',
 		type    : 'chips',
 		label   : 'Set Difficulty level',
+		rules   : { required: 'Required' },
 		options : [
 			{ value: 'low', label: 'Low', disabled: mode === 'view' },
 			{ value: 'medium', label: 'Medium', disabled: mode === 'view' },

@@ -5,7 +5,7 @@ import { format } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 const CURRENT_STATUS_MAPPING = {
-	active_test: {
+	active: {
 		label      : 'Active Test',
 		background : '#C4DC91',
 	},
@@ -25,7 +25,8 @@ const CURRENT_STATUS_MAPPING = {
 
 function TestCard({ test_card }) {
 	const {
-		name, topics,
+		name,
+		topics,
 		current_status,
 		validity_start,
 		validity_end,
@@ -51,7 +52,7 @@ function TestCard({ test_card }) {
 		push(href, as);
 	};
 
-	const { label, background } = CURRENT_STATUS_MAPPING[current_status];
+	const { label = '', background = '' } = CURRENT_STATUS_MAPPING[current_status] || {};
 
 	return (
 		<div className={styles.main_container}>
