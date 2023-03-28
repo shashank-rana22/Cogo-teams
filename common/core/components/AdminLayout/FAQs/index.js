@@ -1,6 +1,5 @@
 import { Modal } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import styles from './styles.module.css';
 import TopicList from './TopicList';
@@ -12,7 +11,15 @@ function FAQs({
 	refetch,
 }) {
 	const [show, setShow] = useState(false);
-	const { general:{ isMobile = false } } = useSelector((state) => state);
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		function handleResize() {
+			setIsMobile(window.innerWidth < 768);
+		}
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
 
 	const ballRef = useRef();
 
@@ -54,13 +61,13 @@ function FAQs({
 			<div />
 			{show ? (
 				<Modal
-					className="primary lg"
+					className={styles.modal_wrapper}
 					show={show}
 					onClose={() => setShow(false)}
 					placement={isMobile ? 'fullscreen' : 'right'}
-					size={isMobile ? 'fullscreen' : ''}
-					style={{ left: '99.5%' }}
+					size={isMobile ? 'md' : ''}
 				>
+
 					<div className={styles.topiclist_container}>
 						<TopicList
 							faqNotificationData={faqNotificationData}
