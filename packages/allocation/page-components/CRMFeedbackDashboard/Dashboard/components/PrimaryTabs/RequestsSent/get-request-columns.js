@@ -75,7 +75,7 @@ export const REQUEST_COLUMNS = ({
 
 			const { id = '', business_name = '' } = orgObject || {};
 
-			const url = `/feedbacks/${id}?organization=${business_name}&status=${status}&type=${type}`;
+			const url = `/allocation/feedbacks/${id}?organization=${business_name}&status=${status}&type=${type}`;
 
 			return (
 				<section className={styles.view}>

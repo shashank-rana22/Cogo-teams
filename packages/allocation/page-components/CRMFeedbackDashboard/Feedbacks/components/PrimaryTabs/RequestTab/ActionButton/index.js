@@ -22,7 +22,7 @@ function ActionButton({ rowId = '', label = '', status = '', organization = '', 
 				size="sm"
 				themeType="secondary"
 				onClick={() => {
-					router.push(`/responses/${organization_id}?organization=${organization}`);
+					router.push(`/allocation/responses/${organization_id}?organization=${organization}`);
 				}}
 			>
 				{label}

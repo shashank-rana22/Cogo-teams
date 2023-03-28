@@ -57,7 +57,6 @@ importers:
       '@cogoport/components': ^1.0.359
       '@cogoport/contracts': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
-      '@cogoport/crm-feedback': workspace:0.1.0
       '@cogoport/enrichment': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/globalization': workspace:^0.0.1
@@ -93,7 +92,6 @@ importers:
       '@cogoport/components': 1.0.366_cyxdlkncyjzqtklzwrmvnywxma
       '@cogoport/contracts': link:../packages/contracts
       '@cogoport/core': link:../common/core
-      '@cogoport/crm-feedback': link:../packages/crm-feedback
       '@cogoport/enrichment': link:../packages/enrichment
       '@cogoport/forms': link:../common/forms
       '@cogoport/globalization': link:../common/globalization
