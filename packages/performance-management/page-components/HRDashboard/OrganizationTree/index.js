@@ -28,22 +28,21 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 		if (!isEmpty(treeData)) {
 			const { manager_data = [], reportees = [], user_data = {} } = treeData;
 
-			const baseLevel = !params.UserID ? manager_data : [];
 			const userLevel = user_data;
 			const reporteeLevel = !isEmpty(reportees) ? reportees : users.reporteeLevel;
 			const selectedReportee = isEmpty(reportees) ? userLevel : {};
 			const managerLevel = manager_data;
+			const baseLevel = !params.UserID ? manager_data : [];
 
 			setUsers({ baseLevel, userLevel, reporteeLevel, managerLevel, selectedReportee });
-			// if (isEmpty(baseLevel)) { scrollToSection(isEmpty(selectedReportee) ? userLevelRef : reporteeLevelRef); }
 		}
 	}, [params.UserID, treeData, users.reporteeLevel]);
 
 	useEffect(() => {
-		if (!loading && params.UserID) {
+		if (!loading && !isEmpty(users.userLevel)) {
 			scrollToSection(isEmpty(users.selectedReportee) ? userLevelRef : reporteeLevelRef);
 		}
-	}, [loading]);
+	}, [loading, users]);
 
 	return (
 		<div>
@@ -61,10 +60,17 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 					Organization Tree
 				</div>
 			</div>
-			<div className={styles.organization_tree}>
 
-				{!params.UserID ? (
+			<div className={styles.organization_tree}>
+				{isEmpty(users.userLevel) ? (
 					<div className={styles.base_level}>
+						{loading && ([1, 2].map((user) => (
+							<UserCard
+								loading
+								key={user.id}
+							/>
+						)))}
+
 						{(users.baseLevel || []).map((user) => (
 							<UserCard
 								user={user}
@@ -82,6 +88,7 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 								{(users.managerLevel || []).map((user) => (
 									<>
 										<UserCard
+											loading={loading}
 											user={user}
 											clickable
 											params={params}
@@ -98,6 +105,7 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 						&& (
 							<div className={styles.user_level} ref={userLevelRef}>
 								<UserCard
+									loading={loading}
 									user={users.userLevel}
 									enlarged
 									fetchTreeData={fetchTreeData}
