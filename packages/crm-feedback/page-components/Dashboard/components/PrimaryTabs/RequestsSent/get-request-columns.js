@@ -1,19 +1,35 @@
 import { Button, Pill } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+
+function computeStatus({ statuses = '[]' }) {
+	const { requested, responded } = JSON.parse(statuses);
+	if (requested && responded) {
+		const responsesReceived = responded;
+		const totalRequested = requested + responded;
+		return {
+			status : `${responsesReceived}/${totalRequested} Responses Received`,
+			color  : 'green',
+		};
+	}
+	return {
+		status : 'Request Created',
+		color  : 'blue',
+	};
+}
 
 export const REQUEST_COLUMNS = ({
 	router,
 }) => [
 	{
-		Header   : <div>S. No.</div>,
+		Header   : <div>Serial ID</div>,
 		key      : 'serial_id',
 		id       : 'serial_id',
-		accessor : ({ serial_id = '' }) => (
+		accessor : ({ organization = {} }) => (
 			<section>
 				#
-				{serial_id || '__'}
+				{organization?.serial_id || '__'}
 			</section>
 		),
 	},
@@ -23,7 +39,7 @@ export const REQUEST_COLUMNS = ({
 		id       : 'organization',
 		accessor : ({ organization = '' }) => (
 			<section>
-				{organization || '__'}
+				{startCase(organization?.business_name || '__')}
 			</section>
 		),
 	},
@@ -38,50 +54,29 @@ export const REQUEST_COLUMNS = ({
 		),
 	},
 	{
-		Header   : <div>LAST FEEDBACK</div>,
-		key      : 'last_feedback_date',
-		id       : 'last_feedback_date',
-		accessor : ({ last_feedback_date = '' }) => (
-			<section>
-				{format(last_feedback_date, 'dd MMM yyyy') || '__'}
-			</section>
-		),
-	},
-	{
-		Header   : <div>COGO ENTITY</div>,
-		key      : 'cogo_entity',
-		id       : 'cogo_entity',
-		accessor : ({ cogo_entity = '' }) => (
-			<section>
-				{startCase(cogo_entity) || '__'}
-			</section>
-		),
-	},
-	{
 		Header   : <div>STATUS</div>,
 		key      : 'status',
 		id       : 'status',
 		accessor : ({
-			status = '', organization_id = '', organization = '',
-		}) => (
-			<section className={styles.view}>
-				<Pill
-					size="md"
-					color={status !== 'Request Created' ? ('green') : ('blue')}
-				>
-					{status || 'Status not found'}
-				</Pill>
-				<Button
-					size="sm"
-					themeType="secondary"
-					onClick={() => {
-						router.push(`/feedbacks/${organization_id}?organization=${organization}&status=${status}`);
-					}}
-				>
-					View Request
-				</Button>
+			statuses = [], organization = {},
+		}) => {
+			const { status, color } = computeStatus(statuses);
 
-			</section>
-		),
+			const { id, business_name } = organization;
+
+			const url = `/feedbacks/${id}?organization=${business_name}&status=${status}`;
+
+			return (
+				<section className={styles.view}>
+					<Pill size="md" color={color}>
+						{status || 'Status not found'}
+					</Pill>
+
+					<Button size="sm" themeType="secondary" onClick={() => router.push(url)}>
+						View Request
+					</Button>
+				</section>
+			);
+		},
 	},
 ];
