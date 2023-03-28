@@ -40,12 +40,12 @@
 
 .small_section_sort {
 	display: flex;
+	align-items: center;
 	width: 10%;
 	margin-right: 16px;
 	font-size: 14px;
 	font-weight: 600;
 	text-align: center;
-	align-items: center;
 }
 
 .section {
@@ -57,4 +57,3 @@
 .icon {
 	width: 2%;
 }
-
