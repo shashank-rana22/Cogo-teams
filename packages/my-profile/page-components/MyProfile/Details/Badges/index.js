@@ -1,57 +1,28 @@
 import { Toast, Placeholder, Modal, Button, Tooltip } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { IcCStar } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import usePostProfileMasteryBadge from '../../../hooks/usePostProfileMasteryBadge';
 
 import styles from './styles.module.css';
 
-function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
-	const [masteryId, setMasteryId] = useState('');
+function Badges(props) {
+	const { badgeListLoading, userBadges = {}, profileBadgeRefetch } = props;
 
 	const {
-		profile: { partner = {} },
-	} = useSelector((state) => state);
+		masteryId,
+		setMasteryId,
+		showModal,
+		setShowModal,
+		onCloseModal,
+		onRedirectingToProfile,
+		onSaveProfileMastery,
+	} = usePostProfileMasteryBadge({ profileBadgeRefetch });
 
-	const { partner_user_id = '' } = partner || {};
-
-	const {
-		onPostingMastery = () => {},
-	} = usePostProfileMasteryBadge(profileBadgeRefetch);
-
-	const router = useRouter();
-
-	const { badges_got : badgesGot = [], badges_not_got: badgesNotGot = [] } = userBadges || {};
+	const { badges_got : badgesGot = [], badges_not_got: badgesNotGot = [] } = userBadges;
 
 	let max_badges = 0;
-
-	const [show, setShow] = useState(false);
-
-	const onClose = () => setShow(false);
-
-	const handleClick = () => {
-		if (partner_user_id) {
-			router.push(
-				'/badges/[user_id]/?path=/my-profile',
-				`/badges/${partner_user_id}/?path=/my-profile`,
-			);
-		}
-	};
-
-	const handleSave = () => {
-		const masteryPayload = {
-			mastery_badge_id: masteryId,
-			partner_user_id,
-		};
-
-		onPostingMastery(masteryPayload);
-
-		onClose();
-	};
 
 	if (badgeListLoading) {
 		return (
@@ -62,7 +33,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => 	setShow(true)}
+						onClick={() => 	setShowModal(true)}
 					>
 						<b>Select Badges To Preview</b>
 					</Button>
@@ -105,7 +76,7 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => 	setShow(true)}
+					onClick={() => 	setShowModal(true)}
 				>
 					<b>Select Badges To Preview</b>
 				</Button>
@@ -169,18 +140,17 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 
 				<div
 					role="presentation"
-					onClick={handleClick}
+					onClick={onRedirectingToProfile}
 					className={styles.view_more}
 				>
 					View More
-
 				</div>
 			</div>
 
 			<Modal
 				size="sm"
-				show={show}
-				onClose={onClose}
+				show={showModal}
+				onClose={onCloseModal}
 				placement="center"
 				closeOnOuterClick
 			>
@@ -210,11 +180,11 @@ function Badges({ badgeListLoading, userBadges = {}, profileBadgeRefetch }) {
 				</Modal.Body>
 
 				<Modal.Footer>
-					<Button themeType="tertiary" onClick={onClose}>
+					<Button themeType="tertiary" onClick={onCloseModal}>
 						Cancel
 					</Button>
 
-					<Button onClick={handleSave}>Save</Button>
+					<Button onClick={onSaveProfileMastery}>Save</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

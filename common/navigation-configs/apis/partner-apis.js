@@ -10011,8 +10011,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
-	],
-	all_badges: [
 		{
 			api          : 'get_allocation_kam_expertise_profile',
 			access_type  : 'private',

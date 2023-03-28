@@ -1,5 +1,4 @@
 import allocations from './config/allocations';
-import allBadges from './config/badges';
 import businessFinance from './config/business-finance';
 import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
@@ -32,7 +31,6 @@ const routeConfig = {
 	...inventory_management,
 	...kamMonitoring,
 	...performanceManagement,
-	...allBadges,
 };
 
 export default routeConfig;
