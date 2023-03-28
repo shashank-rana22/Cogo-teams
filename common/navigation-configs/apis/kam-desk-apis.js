@@ -641,6 +641,12 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_checkout_applicable_promocodes',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'checkout',
+	},
 
 ];
 
