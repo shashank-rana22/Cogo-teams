@@ -38,6 +38,8 @@
   border: 1px solid #88cad1;
   border-radius: 4px;
   padding: 6px 24px;
+  width: fit-content;
+  margin-top: 24px;
   font-size: 12px;
 }
 .main_icon {
@@ -58,4 +60,16 @@
 }
 .title_item {
   text-decoration: underline;
+}
+.total_data_view {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+.amount {
+  color: #f68b21;
+  font-size: 16px;
+}
+.text_data {
+  font-weight: 400;
 }

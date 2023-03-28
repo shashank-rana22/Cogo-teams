@@ -1,0 +1,93 @@
+/* stylelint-disable selector-class-pattern */
+.container {
+  background: #ffffff;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+.filter_flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36px;
+}
+.date_range {
+  width: fit-content;
+
+  :global {
+    .react-datepicker__input-container {
+      input {
+        width: 150px;
+        font-size: 12px;
+        height: 32px;
+      }
+      .react-datepicker__close-icon::after {
+        background: none !important;
+      }
+
+      .react-datepicker__close-icon {
+        right: -9px;
+        border: none;
+      }
+    }
+  }
+}
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.input_container {
+  width: 300px;
+  :global {
+    .ui_input_container {
+      height: 32px;
+      input::placeholder {
+        font-size: 12px;
+      }
+    }
+  }
+}
+.select_container {
+  :global {
+    .ui_select_display_container {
+      height: 32px !important;
+      .ui_select_input_placeholder {
+        font-size: 12px;
+      }
+      .ui_select_input_control {
+        font-size: 12px;
+      }
+    }
+  }
+}
+.card_container {
+  padding: 0px 36px 36px 36px;
+  font-size: 12px;
+}
+.card {
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 26px 36px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.name_data {
+  display: flex;
+  gap: 4px;
+}
+.date_data {
+  color: #828282;
+}
+.tag {
+  background: #c4dc91;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+.basis {
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}

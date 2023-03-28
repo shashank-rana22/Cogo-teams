@@ -73,3 +73,15 @@
   color: #f68b21;
   cursor: pointer;
 }
+.modal_body {
+  font-size: 12px;
+}
+.modal_data {
+  font-weight: 600;
+}
+.modal {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

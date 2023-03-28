@@ -1,14 +1,16 @@
-import { Breadcrumb, CheckboxGroup, Tooltip, Stepper } from '@cogoport/components';
+import { Breadcrumb, Tooltip, Stepper } from '@cogoport/components';
 import { IcMInfo, IcMArrowBack } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import { checkBoxOptions, stepperItems } from './contant';
+import { stepperItems } from './contant';
 import RevenueBifurcation from './RevenueBifurcation';
+import Review from './Review';
+import SalaryAndRent from './SalaryAndRent';
 import styles from './styles.module.css';
 
 function UploadReport() {
-	const [global, setGlobal] = useState({ stepper: 'revenue', checkBox: '' });
+	const [globalStepper, setGlobalStepper] = useState('revenue');
 	const { query } = useRouter();
 
 	const { month } = query || {};
@@ -40,8 +42,8 @@ function UploadReport() {
 
 			<div className={styles.stepper}>
 				<Stepper
-					active={global?.stepper}
-					setActive={(val:string) => { setGlobal((prev) => ({ ...prev, stepper: val })); }}
+					active={globalStepper}
+					setActive={(val:string) => { setGlobalStepper(val); }}
 					items={stepperItems}
 					arrowed
 				/>
@@ -51,7 +53,9 @@ function UploadReport() {
 				<div className={styles.flex_card_header}>
 					<div>
 						<div className={styles.flex_card}>
-							<div>Basis For Shipment Bifurcation</div>
+							{globalStepper === 'revenue' && <div>Basis For Shipment Bifurcation</div>}
+							{globalStepper === 'salaries' && <div>Salaries & Rent Bifurcation</div>}
+							{globalStepper === 'review_details' && <div>Review Details</div>}
 							<Tooltip>
 								<div className={styles.icon}>
 									<IcMInfo />
@@ -60,22 +64,35 @@ function UploadReport() {
 							</Tooltip>
 						</div>
 						<div className={styles.hr} />
+						<div className={styles.month}>
+							Month -
+							{' '}
+							{month}
+						</div>
+						{globalStepper === 'salaries' && (
+							<div className={styles.total_data_view}>
+								<div>
+									<div className={styles.text_data}>
+										Total Unallocable Amount
+									</div>
+									<div className={styles.amount}>INR 40,00,000</div>
+								</div>
+
+								<div className={styles.text_data}>
+									Total Allocable Amount
+									<div>--------</div>
+
+								</div>
+							</div>
+						)}
 					</div>
 
-					<div className={styles.month}>
-						Month -
-						{' '}
-						{month}
-					</div>
 				</div>
-
-				<CheckboxGroup
-					options={checkBoxOptions}
-					onChange={(val:string) => { setGlobal((prev) => ({ ...prev, checkBox: val })); }}
-					value={global?.checkBox}
-				/>
 			</div>
-			{global?.stepper === 'revenue' && <RevenueBifurcation />}
+
+			{globalStepper === 'revenue' && <RevenueBifurcation setGlobalStepper={setGlobalStepper} />}
+			{globalStepper === 'salaries' && <SalaryAndRent setGlobalStepper={setGlobalStepper} />}
+			{globalStepper === 'review_details' && <Review />}
 		</div>
 	);
 }

@@ -73,3 +73,6 @@
   color: #f68b21;
   cursor: pointer;
 }
+.small_font {
+  font-size: 10px;
+}
