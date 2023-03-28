@@ -63,24 +63,6 @@ function Footer({
 
 	return (
 		<div className={styles.wrapper}>
-			{/* <div className={styles.row}>
-				{attachments.map((attach) => (
-					<div className={styles.attachment_item}>
-						<div className={styles.name}>
-							{attach.name}
-							{' '}
-						</div>
-						<IcMCross
-							style={{ marginLeft: 4 }}
-							onClick={() => setAttachements([
-								...attachments.filter(
-									(newItem) => newItem.url !== attach.url,
-								),
-							])}
-						/>
-					</div>
-				))}
-			</div> */}
 			<div className={styles.container}>
 
 				<Attachement

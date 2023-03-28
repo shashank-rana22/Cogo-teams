@@ -71,7 +71,7 @@ function Compose({
 	const [ccEmailArray, setCcEmailArray] = useState([]);
 	const [errors, setErrors] = useState({});
 	const [deleteEmail, setDeleteEmail] = useState(false);
-	const [editorState, setEditorState] = useState();
+	const [editorState, setEditorState] = useState('');
 
 	const { options } = useGetEntityStakeholderMappings();
 	const defaultValues = getFormattedValues(
@@ -163,16 +163,16 @@ function Compose({
 						control={control}
 						setDeleteEmail={setDeleteEmail}
 						placeholder="Type here..."
-						// rules={{ required: { value: true, message: 'Email is required' } }}
+						rules={{ required: { value: true, message: 'Email is required' } }}
 					/>
-					{/* {errors?.toUserEmail ? (
+					{errors?.toUserEmail ? (
 						<div className={styles.error}>
 							{handleError(
 								{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
 								true,
 							)}
 						</div>
-					) : null} */}
+					) : null}
 				</div>
 
 				<div>

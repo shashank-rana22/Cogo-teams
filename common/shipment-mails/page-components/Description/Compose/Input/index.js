@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { InputController } from '@cogoport/forms';
 import React from 'react';
 
