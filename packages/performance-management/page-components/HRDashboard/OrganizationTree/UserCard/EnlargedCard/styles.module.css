@@ -67,7 +67,7 @@
 .designation {
     padding-right: 8px;
     border-right: 1px solid #bdbdbd;
-    width: 160px;
+    width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

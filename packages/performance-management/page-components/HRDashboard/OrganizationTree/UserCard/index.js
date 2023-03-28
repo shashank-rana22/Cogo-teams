@@ -23,26 +23,25 @@ function UserCard({
 	clickable = false,
 	enlarged = false,
 	isLastLevel = false,
-	fetchTreeData,
-	clickRef,
-	scrollToSection = () => {},
+	refetchTreeParams,
 }) {
-	const setNewUser = (id) => {
-		if (id) {
+	const setNewUser = () => {
+		if (user) {
 			const { ManagerIDS = '' } = params;
 			const previousList = ManagerIDS.split(',').filter((i) => i);
 
 			let newManagerList = [];
-			const sliceIndex = (previousList || []).findIndex((managerId) => managerId === id);
+			const sliceIndex = (previousList || []).findIndex(
+				(managerId) => managerId === user.manager_id || managerId === user.user_id,
+			);
 
 			newManagerList = sliceIndex >= 0
-				? previousList.slice(0, sliceIndex + 1) : [...previousList, id];
+				? previousList.slice(0, sliceIndex + 1) : [...previousList, user.manager_id || user.user_id];
 
 			setParams({
-				UserID     : id,
-				ManagerIDS : isLastLevel ? ManagerIDS : newManagerList.join(','),
+				UserID     : user.user_id,
+				ManagerIDS : newManagerList.join(','),
 			});
-			scrollToSection(clickRef);
 		}
 	};
 
@@ -72,7 +71,7 @@ function UserCard({
 		}
 
 		return (
-			<div className={`${styles.card_container} ${loading && !isLastLevel ? styles.loading_card : ''}`}>
+			<div className={styles.card_container}>
 				<div
 					className={styles.name_card}
 					{...(clickable && {
@@ -105,7 +104,7 @@ function UserCard({
 		<EnlargedCard
 			user={user}
 			avatarProps={getAvatarProps(user)}
-			fetchTreeData={fetchTreeData}
+			refetchTreeParams={refetchTreeParams}
 			loading={loading}
 		/>
 	);

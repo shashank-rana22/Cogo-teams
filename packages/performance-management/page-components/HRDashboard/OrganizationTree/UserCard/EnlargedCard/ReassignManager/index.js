@@ -6,7 +6,7 @@ import useListReassignControls from './list-reassign-manager-controls';
 import styles from './styles.module.css';
 import useReassignManager from './useReassignManager';
 
-function ReassignManager({ userId, setOpenReassign, fetchTreeData }) {
+function ReassignManager({ userId, setOpenReassign, refetchTreeParams }) {
 	const [managerId, setManagerId] = useState('');
 
 	const { control, watch, reset } = useForm();
@@ -18,10 +18,10 @@ function ReassignManager({ userId, setOpenReassign, fetchTreeData }) {
 		setManagerId,
 		setOpenReassign,
 		reset,
-		fetchTreeData,
+		refetchTreeParams,
 	});
 
-	const cogoUsersControl = useListReassignControls();
+	const cogoUsersControl = useListReassignControls(userId);
 
 	useEffect(() => setManagerId(manager), [manager]);
 

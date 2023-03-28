@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useRef } from 'react';
@@ -19,10 +20,14 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 	const reporteeLevelRef = useRef(null);
 
 	const {
-		treeData = {}, loading = false, fetchTreeData = () => {},
+		treeData = {}, loading = false, refetchTreeParams = () => {},
 		params = {},
 		setParams = () => {},
 	} = useGetOrganizationTree();
+
+	const resetTree = () => {
+		setParams({ UserID: undefined, ManagerIDs: undefined, Ceos: true });
+	};
 
 	useEffect(() => {
 		if (!isEmpty(treeData)) {
@@ -47,18 +52,23 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 	return (
 		<div>
 			<div className={styles.header}>
-				<div
-					role="button"
-					tabIndex={0}
-					onClick={() => setOpenOrganizationTree(false)}
-					className={styles.redirect}
-				>
-					<IcMArrowBack width="20px" height="20px" />
+				<div style={{ display: 'flex' }}>
+					<div
+						role="button"
+						tabIndex={0}
+						onClick={() => setOpenOrganizationTree(false)}
+						className={styles.redirect}
+					>
+						<IcMArrowBack width="20px" height="20px" />
+					</div>
+
+					<div className={styles.header_text}>
+						Organization Tree
+					</div>
+
 				</div>
 
-				<div className={styles.header_text}>
-					Organization Tree
-				</div>
+				<Button onClick={() => resetTree()}>Reset</Button>
 			</div>
 
 			<div className={styles.organization_tree}>
@@ -108,7 +118,7 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 									loading={loading}
 									user={users.userLevel}
 									enlarged
-									fetchTreeData={fetchTreeData}
+									refetchTreeParams={refetchTreeParams}
 								/>
 							</div>
 						)}
@@ -122,7 +132,7 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 											loading={loading}
 											user={users.selectedReportee}
 											enlarged
-											fetchTreeData={fetchTreeData}
+											refetchTreeParams={refetchTreeParams}
 										/>
 									</div>
 								)}

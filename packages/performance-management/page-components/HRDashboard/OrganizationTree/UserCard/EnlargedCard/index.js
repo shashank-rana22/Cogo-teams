@@ -6,7 +6,7 @@ import { useState } from 'react';
 import ReassignManager from './ReassignManager';
 import styles from './styles.module.css';
 
-function EnlargedCard({ user = {}, avatarProps = {}, fetchTreeData, loading = false }) {
+function EnlargedCard({ user = {}, avatarProps = {}, refetchTreeParams, loading = false }) {
 	const [openReassign, setOpenReassign] = useState(false);
 
 	const infoArr = [{
@@ -19,11 +19,6 @@ function EnlargedCard({ user = {}, avatarProps = {}, fetchTreeData, loading = fa
 		label : <IcMEmail />,
 		value : <div style={{ marginLeft: '8px' }}>{user?.email || '---'}</div>
 		,
-	},
-	{
-		id    : 'kpi',
-		label : 'Current KPI : ',
-		value : <span style={{ marginLeft: '8px' }}>{user?.current_kpi || '---'}</span>,
 	}];
 
 	return (
@@ -35,7 +30,7 @@ function EnlargedCard({ user = {}, avatarProps = {}, fetchTreeData, loading = fa
 					{!openReassign && (
 						<Button
 							size="sm"
-							// disabled={user.id === user.manager_id}
+							disabled={user.is_ceo}
 							onClick={() => setOpenReassign(true)}
 						>
 							Reassign
@@ -73,7 +68,7 @@ function EnlargedCard({ user = {}, avatarProps = {}, fetchTreeData, loading = fa
 			<div className={`${styles.reassign_manager_container} ${openReassign ? styles.expand : ''}`}>
 				<ReassignManager
 					userId={user.user_id}
-					fetchTreeData={fetchTreeData}
+					refetchTreeParams={refetchTreeParams}
 					setOpenReassign={setOpenReassign}
 				/>
 			</div>

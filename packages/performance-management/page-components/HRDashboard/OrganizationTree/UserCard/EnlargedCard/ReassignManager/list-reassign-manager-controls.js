@@ -1,10 +1,10 @@
 import useGetCustomAsyncOptions from '../../../../../../hooks/useCustomAsyncOptions';
 
-const useListReassignControls = () => {
+const useListReassignControls = (userId) => {
 	const asyncManagerOptions = useGetCustomAsyncOptions({
 		endpoint    : 'get_iris_list_reportees',
 		initialCall : false,
-		params      : { IncludingCeos: true },
+		params      : { IncludingCeos: true, ExcludeReporteesFor: userId },
 		valueKey    : 'user_id',
 		labelKey    : 'name',
 		filterKey   : 'Q',
