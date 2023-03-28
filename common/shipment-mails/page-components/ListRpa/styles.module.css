@@ -12,16 +12,6 @@
 	padding: 28px 0px 0px 0px;
 }
 
-.heading {
-	font-weight: 500;
-	font-size: 1rem;
-	line-height: 19px;
-	color: #393f70;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
 .search_container {
 	display: flex;
 	justify-content: center;
