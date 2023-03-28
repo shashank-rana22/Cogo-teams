@@ -38,17 +38,12 @@
     height: 30px;
     top: 261px;
     left: 476px;
-    /* Heading/LG/Semi-Bold */
 
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 150%;
-    /* identical to box height, or 30px */
-
-
-    /* Black 80 */
 
     color: #4F4F4F;
 }
@@ -61,19 +56,14 @@
     font-size: 12px;
     line-height: 150%;
     cursor: pointer;
-    /* identical to box height, or 18px */
 
     display: flex;
     align-items: center;
     text-align: center;
     text-transform: capitalize;
 
-    /* Black */
 
     color: #221F20;
-
-
-    /* Inside auto layout */
 
     flex: none;
     order: 1;
@@ -83,24 +73,17 @@
     width: 41px;
     height: 18px;
 
-    /* Body/SM/Regular */
     display: block;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 150%;
-    /* identical to box height, or 18px */
 
     display: flex;
     align-items: center;
 
-    /* Black 80 */
-
     color: #4F4F4F;
-
-
-    /* Inside auto layout */
 
     flex: none;
     order: 0;
@@ -108,8 +91,6 @@
 }
 .selectbox{
     box-sizing: border-box;
-
-    /* Auto layout */
 
     display: flex;
     flex-direction: row;
@@ -120,18 +101,9 @@
     width: 180px;
     height: 32px;
 
-    /* Greyscale Secondary/White */
-
     background: #FFFFFF;
-    /* Black 20
-
-    Disable BG
-    */
     border: 1px solid #E0E0E0;
     border-radius: 6px;
-
-    /* Inside auto layout */
-
     flex: none;
     order: 1;
     align-self: stretch;

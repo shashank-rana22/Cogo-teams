@@ -42,7 +42,6 @@ function Trends() {
 		const l = document.getElementById('buildreport');
 		const m = document.getElementById('clearall');
 		const n = document.getElementById('selectedhscode');
-		console.log(l);
 		if (y === 1 && x + 1 > 0) {
 			k.style.display = 'None';
 			l.style.display = 'block';

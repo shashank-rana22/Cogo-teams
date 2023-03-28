@@ -14,14 +14,8 @@ function Report() {
 	const [answer, setAnswer] = useState([]);
 	const [hsdesc, setHsdesc] = useState([]);
 	const [share, setShare] = useState([]);
-	const [optn2, setOptn2] = useState([]);
-	const [info, setInfo] = useState([]);
-	// const [firstRender, setFirstRender] = useState(false);
-	// console.log(general.query.hscodes.split(','));
-	console.log(info);
-	// info.sort((a, b) => b.share - a.share);
-
-	// setHscodearr(general.query.hscodes.split(','));
+	const [marketshare, setMarketshare] = useState([]);
+	const [globalsupply, setGlobalsupply] = useState([]);
 
 	const [{ loading = false, data: responseData = {} }, trigger] = useAthenaRequest({
 		url    : 'commodity_trend_report',
@@ -31,29 +25,13 @@ function Report() {
 		},
 	}, { manual: false });
 
-	// const handleClick = async () => {
-	// 	await trigger({
-	// 		data: {
-	// 			filters: { hs_code: general.query.hscodes.split(','), shipment_type: 'import' },
-	// 		},
-	// 	});
-	// };
-
-	// const callAPI = async () => {
-	// 	await trigger({
-	// 		data: {
-	// 			filters: { commodity_name: general.query.hscodes.split(','), shipment_type: 'import' },
-	// 		},
-	// 	});
-	// };
-
 	useEffect(() => {
 		if (!isEmpty(responseData)) {
 			setAnswer(responseData.list);
 			setHsdesc(responseData.description);
-			setOptn(responseData.share);
-			setOptn2(responseData.market_share);
-			setInfo(responseData.global_supply);
+			setShare(responseData.share);
+			setMarketshare(responseData.market_share);
+			setGlobalsupply(responseData.global_supply);
 		}
 	}, [responseData]);
 
@@ -67,17 +45,15 @@ function Report() {
 			})),
 		},
 	];
-	const mapdata = (optn || []).map((Item) => ({
+	const mapdata = (share || []).map((Item) => ({
 		id    : Item.country_code,
 		value : Item.total,
 	}));
 
-	const mapdata2 = (optn2 || []).map((Item) => ({
+	const mapdata2 = (marketshare || []).map((Item) => ({
 		id    : Item.country_code,
 		value : Item.percent_share.toFixed(2),
 	}));
-
-	// console.log(mapdata);
 
 	const columns = [
 		{ Header: 'HS CODE', accessor: 'hscode' },
@@ -101,11 +77,10 @@ function Report() {
 		{ Header: 'Nov', accessor: 'november' },
 		{ Header: 'Dec', accessor: 'december' },
 	];
-	const data2 = (info || []).map((item) => ({
+	const data2 = (globalsupply || []).map((item) => ({
 		country : item.country,
 		share   : `${item.percent_share.toFixed(2)}%`,
 		trend   : <div style={{ height: '50px', width: '70px' }}>
-			{/* <ResponsiveLine data={linedata2} /> */}
 			<ResponsiveLine data={[
 				{
 					id   : item.country,
@@ -163,7 +138,7 @@ function Report() {
 				},
 			]}
 			/>
-            </div>,
+		</div>,
 		january   : (item.January !== undefined) ? item.January.toLocaleString('en-IN') : 0,
 		february  : (item.February !== undefined) ? item.February.toLocaleString('en-IN') : 0,
 		march     : (item.March !== undefined) ? item.March.toLocaleString('en-IN') : 0,
@@ -177,7 +152,6 @@ function Report() {
 		november  : (item.November !== undefined) ? item.November.toLocaleString('en-IN') : 0,
 		december  : (item.December !== undefined) ? item.December.toLocaleString('en-IN') : 0,
 	}));
-	console.log(data2);
 
 	const data = (hsdesc || []).map((item) => ({
 		hscode      : item.hs_code,
@@ -187,12 +161,6 @@ function Report() {
 		(!responseData) ? <Loader className={styles.loader} />
 			: (
 				<div>
-					{/* {arr.map((Item) => (
-				<div>
-					<h1>{Item}</h1>
-				</div>
-			))} */}
-					{/* {callAPI()} */}
 					<div className={styles.toptext}>
 						Trend Report
 					</div>
@@ -278,7 +246,7 @@ function Report() {
 					<div className={styles.secondtrend}>
 						<div className={styles.wholecontainer}>
 							{
-				(optn || []).map((Item) => (
+				(share || []).map((Item) => (
 					<div className={styles.leftcontainer}>
 						<div>{Item.country}</div>
 						<div>
@@ -401,7 +369,7 @@ function Report() {
 					<div className={styles.secondtrend}>
 						<div className={styles.wholecontainer}>
 							{
-				(optn2 || []).map((Item) => (
+				(marketshare || []).map((Item) => (
 					<div className={styles.leftcontainer}>
 						<div>{Item.country}</div>
 						<div>
