@@ -231,7 +231,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 			),
 		},
 		{
-			Header   : 'PASS %',
+			Header   : 'CUTOFF %',
 			id       : 'e',
 			accessor : ({ cut_off_percentage = '' }) => (
 				<section>
