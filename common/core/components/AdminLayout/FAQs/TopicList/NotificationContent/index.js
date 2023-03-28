@@ -46,7 +46,7 @@ function NotificationContent({
 
 	const sortedDates = Object.keys(filteredObject || {})
 		.map((item) => item)
-		.sort((a, b) => new Date(b) - new Date(a));
+		.sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
 
 	const DAY_MAPPING = {
 		[formatToday]     : 'Today',

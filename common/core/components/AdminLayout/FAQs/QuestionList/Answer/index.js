@@ -115,9 +115,16 @@ function Answer({ topic = {}, question }) {
 	const goToFAQ = () => {
 		const { id: partnerId = '' } = partner || {};
 
-		const href = `/v2/${partnerId}/learning/faq`;
+		const aElement = document.createElement('a');
+		aElement.setAttribute('href', `/v2/${partnerId}/learning/faq`);
+		aElement.setAttribute('target', '_blank');
 
-		window.open(href);
+		const bodyElement = document.querySelector('body');
+		bodyElement.appendChild(aElement);
+
+		aElement.click();
+
+		aElement.remove();
 	};
 
 	return (

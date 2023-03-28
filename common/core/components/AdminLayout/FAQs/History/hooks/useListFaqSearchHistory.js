@@ -27,9 +27,9 @@ const useListFaqSearchHistory = () => {
 		params,
 	}, { manual: true });
 
-	const fetchFaqSearchHistory = useCallback(async () => {
+	const fetchFaqSearchHistory = useCallback(() => {
 		try {
-			await trigger(params);
+			trigger(params);
 		} catch (e) {
 			Toast.error(e?.message);
 		}

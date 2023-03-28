@@ -1,6 +1,6 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import { format } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import Loader from '../../Loader';
 
@@ -25,34 +25,38 @@ function RequestedQuestionList({
 		}
 	}, [getUserFaqs, question?.id]);
 
-	const filteredObject = {};
-
 	const today = new Date();
 	const formatToday = format(today, 'dd MMMM');
 	const yesterday = new Date(today.getTime() - 86400000); // 86400000 is the number of milliseconds in a day
 	const formatYesterday = format(yesterday, 'dd MMMM');
 
-	(list || []).forEach((listItem) => {
-		const { created_at, question_abstract, state, is_viewed, id } =			listItem || {};
-		if (!created_at || !question_abstract) return;
+	const filteredObject = useMemo(() => {
+		const modifiedFilteredObject = {};
 
-		const date = format(created_at, 'dd MMMM');
-		const time = format(created_at, 'hh:mm aa');
+		(list || []).forEach((listItem) => {
+			const { created_at, question_abstract, state, is_viewed, id } = listItem || {};
+			if (!created_at || !question_abstract) return;
 
-		if (!filteredObject[date]) filteredObject[date] = [];
+			const date = format(created_at, 'dd MMMM');
+			const time = format(created_at, 'hh:mm aa');
 
-		filteredObject[date].push({
-			requestedQuestion: question_abstract,
-			time,
-			state,
-			is_viewed,
-			id,
+			if (!modifiedFilteredObject[date]) modifiedFilteredObject[date] = [];
+
+			modifiedFilteredObject[date].push({
+				requestedQuestion: question_abstract,
+				time,
+				state,
+				is_viewed,
+				id,
+			});
 		});
-	});
+
+		return modifiedFilteredObject;
+	}, [list]);
 
 	const sortedDates = Object.keys(filteredObject || {})
 		.map((item) => item)
-		.sort((a, b) => new Date(b) - new Date(a));
+		.sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
 
 	function handleBackgroundColor({ state, is_viewed }) {
 		if (state !== 'published') {

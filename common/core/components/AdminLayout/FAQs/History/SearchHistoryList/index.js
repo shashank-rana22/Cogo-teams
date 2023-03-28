@@ -1,5 +1,5 @@
 import { isEmpty, format } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import Loader from '../../Loader';
 import useUpdateFaqSearchHistory from '../hooks/useUpdateFaqSearchHistory';
@@ -16,7 +16,6 @@ function SearchHistoryList({
 	const { onClickClearHistory = () => {} } = useUpdateFaqSearchHistory({
 		setShowHistory,
 	});
-	const filteredObject = {};
 
 	useEffect(() => {
 		fetchFaqSearchHistory();
@@ -27,23 +26,29 @@ function SearchHistoryList({
 	const yesterday = new Date(today.getTime() - 86400000); // 86400000 is the number of milliseconds in a day
 	const formatYesterday = format(yesterday, 'dd MMMM');
 
-	(searchHistoryList || []).forEach((aaa) => {
-		const { updated_at, requested_search } = aaa || {};
-		const date = format(updated_at, 'dd MMMM');
-		const time = format(updated_at, 'hh:mm aa');
+	const filteredObject = useMemo(() => {
+		const modifiedFilteredObject = {};
 
-		if (date && requested_search) {
-			if (!filteredObject[date]) {
-				filteredObject[date] = [{ question: requested_search, time }];
-			} else {
-				filteredObject[date].push({ question: requested_search, time });
+		(searchHistoryList || []).forEach((aaa) => {
+			const { updated_at, requested_search } = aaa || {};
+			const date = format(updated_at, 'dd MMMM');
+			const time = format(updated_at, 'hh:mm aa');
+
+			if (date && requested_search) {
+				if (!modifiedFilteredObject[date]) {
+					modifiedFilteredObject[date] = [{ question: requested_search, time }];
+				} else {
+					modifiedFilteredObject[date].push({ question: requested_search, time });
+				}
 			}
-		}
-	});
+		});
+
+		return modifiedFilteredObject;
+	}, [searchHistoryList]);
 
 	const sortedDates = Object.keys(filteredObject || {})
 		.map((item) => item)
-		.sort((a, b) => new Date(b) - new Date(a));
+		.sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
 
 	const DAY_MAPPING = {
 		[formatToday]     : 'Today',
