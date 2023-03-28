@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import useAxios from 'axios-hooks';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import APIS from '../constants/apis';
 
@@ -30,40 +31,42 @@ const useGetRpaMails = (
 		{ manual: true },
 	);
 
-	const getEmails = async () => {
-		try {
-			let q;
-			if (search && filters?.q) {
-				q = `${filters?.q} ${search}`;
-			} else if (search) {
-				q = search;
-			} else if (filters?.q) {
-				q = `${filters?.q}`;
+	const getEmails = useCallback(() => {
+		(async () => {
+			try {
+				let q;
+				if (search && filters?.q) {
+					q = `${filters?.q} ${search}`;
+				} else if (search) {
+					q = search;
+				} else if (filters?.q) {
+					q = `${filters?.q}`;
+				}
+				await triggerGetMail({
+					params: {
+						includes: [
+							'id',
+							'subject',
+							'body_preview',
+							'sender',
+							'received_time',
+							'message_id',
+							'attachments_attachment_id',
+						],
+						page_no    : page,
+						page_limit : page_limit || 10,
+						filters    : JSON.stringify({ ...(filters || {}), q }),
+					},
+				});
+			} catch (err) {
+				console.log(err);
 			}
-			await triggerGetMail({
-				params: {
-					includes: [
-						'id',
-						'subject',
-						'body_preview',
-						'sender',
-						'received_time',
-						'message_id',
-						'attachments_attachment_id',
-					],
-					page_no    : page,
-					page_limit : page_limit || 10,
-					filters    : JSON.stringify({ ...(filters || {}), q }),
-				},
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
+		})();
+	}, [JSON.stringify(filters), page, page_limit, search, triggerGetMail]);
 
 	useEffect(() => {
 		getEmails();
-	}, [email_address, page, search, JSON.stringify(filters), isClassified]);
+	}, [getEmails, isClassified, email_address]);
 
 	return {
 		mailApi,
