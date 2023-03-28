@@ -194,7 +194,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 			Header   : 'TOPICS',
 			id       : 'c',
 			accessor : ({ topics = [] }) => (
-				<section style={{ display: 'flex', flexWrap: 'wrap', width: '150px' }}>
+				<section className={styles.topics}>
 					{topics.map((topicItem) => (
 						<Pill
 							key={topicItem}

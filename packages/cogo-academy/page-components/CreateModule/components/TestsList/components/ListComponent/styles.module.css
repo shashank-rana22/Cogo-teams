@@ -26,6 +26,7 @@
 				font-size: 14px;
 				color: black;
 				border-bottom: 1px solid #f8f2e7;
+				text-align: center !important;
 			}
 		}
 
@@ -40,6 +41,7 @@
 					padding-block: 20px;
 					font-size: 12px;
 					color: #221f20;
+					text-align: center !important;
 				}
 			}
 		}
