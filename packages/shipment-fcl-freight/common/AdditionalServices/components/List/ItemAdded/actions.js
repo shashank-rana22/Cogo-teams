@@ -30,7 +30,6 @@ const actions = ({
 				onClick={() => setAddSellPrice(true)}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'ADD SELL PRICE'}
-				- 3
 			</Button>
 		);
 	}
