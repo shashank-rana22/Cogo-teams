@@ -82,6 +82,7 @@ function Templates({
 		sendCommunicationTemplate({
 			template_name : templateName,
 			type          : 'whatsapp',
+			tags          : ['update_time'],
 		});
 	};
 
