@@ -45,3 +45,9 @@
 .status {
 	display: flex;
 }
+
+.topics{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;	
+}
