@@ -14,7 +14,7 @@ function ChipsController(props) {
 			name={name}
 			defaultValue={value}
 			rules={rules}
-			render={({ field: { onChange, value:newValue } }) => (
+			render={({ field: { onChange, value: newValue } }) => (
 				<Chips
 					{...rest}
 					key={rest.id}
