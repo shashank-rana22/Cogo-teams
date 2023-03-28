@@ -25,10 +25,12 @@ const TEXT_MAPPING = {
 	},
 };
 
-function InfoBanner({ test_status = '', test_id, refetchTest, loading }) {
+function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, loading }) {
 	if (!['published', 'active'].includes(test_status) && loading) {
 		return null;
 	}
+
+	const isUnderValidity = new Date() < new Date(validity_end);
 
 	const content = TEXT_MAPPING[test_status];
 
@@ -45,7 +47,8 @@ function InfoBanner({ test_status = '', test_id, refetchTest, loading }) {
 			</div>
 
 			<div>
-				{key !== 'published' ? <PublishNow test_id={test_id} refetchTest={refetchTest} /> : null}
+				{key !== 'published' && !isUnderValidity
+					? <PublishNow test_id={test_id} refetchTest={refetchTest} /> : null}
 			</div>
 		</div>
 	);
