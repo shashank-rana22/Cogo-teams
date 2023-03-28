@@ -49,11 +49,11 @@
 
 .bar_chart {
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 }
 
-.styled_text_age {
+.styled_flex_age {
 	display: flex;
-	align-items: center; 
+	align-items: center;
 }

@@ -23,17 +23,17 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	font-size: 12px;
 	overflow-x: auto;
+	font-size: 12px;
 }
 
 .item_container {
-	height: 100px;
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	justify-content: center;
+	width: 200px;
+	height: 100px;
 }
 
 .air_container {
@@ -55,8 +55,8 @@
 }
 
 .right_line {
-	border-right: 1px solid #bdbdbd;
 	height: 72px;
+	border-right: 1px solid #bdbdbd;
 }
 
 .lable_container {

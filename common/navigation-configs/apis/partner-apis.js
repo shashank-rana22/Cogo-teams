@@ -7356,6 +7356,60 @@ const partner = {
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
 		},
+		{
+			api         : 'get_payments_dashboard_outstanding_by_age',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_payments_dashboard_quarterly_outstanding',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_payments_dashboard_kam_wise_outstanding',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_payments_dashboard_daily_sales_outstanding',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_payments_dashboard_sales_funnel',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_payments_dashboard_outstanding',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_payments_dashboard_line_graph_view',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_payments_dashboard_invoice_timeline',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_payments_dashboard_daily_sales_statistics',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
 
 		{
 			api         : 'get_sales_outstanding',

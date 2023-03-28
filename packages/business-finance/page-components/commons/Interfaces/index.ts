@@ -70,7 +70,7 @@ export interface ControlProps {
 	options?: Options[];
 	groupBy?:ControlProps[];
 	style?:React.CSSProperties;
-	[key:string]: string | number | undefined | boolean | Options[] | object[] | React.CSSProperties;
+	[key:string]: string | number | undefined | boolean | Options[] | object[] | React.CSSProperties | Date;
 }
 
 interface PortInterface {

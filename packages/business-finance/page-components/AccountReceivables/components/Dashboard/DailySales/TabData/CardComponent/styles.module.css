@@ -56,7 +56,7 @@
 }
 
 .placeholder_container {
-	height: 80px;
 	width: 250px;
-	margin: 0px 16px 0px 0px;
+	height: 80px;
+	margin-right: 16px;
 }

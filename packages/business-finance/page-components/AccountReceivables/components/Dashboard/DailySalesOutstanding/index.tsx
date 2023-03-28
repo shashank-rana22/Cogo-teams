@@ -15,13 +15,13 @@ interface Quater {
 	currency?: string
 }
 
-interface DailySales {
+type DailySales = {
 	currency?: string,
 	dsoForTheMonth?: number,
 	month?: string
-}
+} [];
 interface DailySalesOutstandingProps {
-	dailySalesOutstandingData?: DailySales[],
+	dailySalesOutstandingData?: DailySales,
 	dailySalesOutstandingApiLoading?: boolean,
 	quaterly?: Quater[],
 	quaterlyLoading?: boolean

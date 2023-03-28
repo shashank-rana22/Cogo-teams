@@ -5,14 +5,14 @@
 }
 
 .date_text {
+	margin-right: 12px;
 	font-size: 14px;
 	font-weight: 500;
-    margin-right: 12px;
 }
 
 .input {
 	width: 200px;
-    margin-right: 12px;
+	margin-right: 12px;
 }
 
 .filter_container {

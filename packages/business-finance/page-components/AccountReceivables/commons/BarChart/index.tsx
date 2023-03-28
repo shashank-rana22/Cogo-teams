@@ -1,4 +1,4 @@
-import { ResponsiveBar } from '@cogoport/charts/bar/index';
+import { BarDatum, ResponsiveBar } from '@cogoport/charts/bar';
 import { getFormattedPrice } from '@cogoport/forms';
 import React from 'react';
 
@@ -13,7 +13,7 @@ const tooltTipStyle = {
 
 interface BarchartProps {
 	currencyType?: string,
-	data?: object[],
+	data?: BarDatum[],
 	margin?: object,
 	dsoResponse?: boolean
 }

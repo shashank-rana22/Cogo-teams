@@ -78,7 +78,7 @@ function OutstandingAge({ data, loading }: OutsatndingProps) {
 					>
 						Outstanding
 					</div>
-					<div className={styles.styled_text_age}>
+					<div className={styles.styled_flex_age}>
 						<div
 							className={styles.styled_text_age}
 						>

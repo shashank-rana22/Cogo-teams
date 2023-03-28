@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function AccountReceivables() {
 	const { push } = useRouter();
-	const [receivables, setReceivables] = useState<string>('outstanding');
+	const [receivables, setReceivables] = useState<string>('dashboard');
 
 	const profile = useSelector((state) => state);
 	const { profile:{ partner } } = profile || {};
