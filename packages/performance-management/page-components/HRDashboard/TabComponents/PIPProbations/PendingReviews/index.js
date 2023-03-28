@@ -14,6 +14,7 @@ function PendingReviews({
 	setModal = () => {},
 	refetchList = false,
 	setRefetchList = () => {},
+	source = 'hr_dashboard',
 }) {
 	// const dataList = {
 	// 	1: [{
@@ -72,11 +73,12 @@ function PendingReviews({
 		}
 	}, [onSubmitModal, refetchList, setRefetchList]);
 
-	const columnsToShow = feedbackDataColumns.pendingReviewsList;
+	const columnsToShow = source === 'hr_dashboard' ? feedbackDataColumns.pendingReviewsList
+		: feedbackDataColumns.managerProbationList;
 	const columns = useGetColumns({
 		columnsToShow,
 		setItem,
-		source: 'hr_dashboard',
+		source,
 		activeTab,
 		setModal,
 	});

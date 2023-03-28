@@ -48,8 +48,8 @@ function ManagerDashboard() {
 						<PastStats />
 					</TabPanel>
 					<TabPanel name="pip_probations" title="PIP / Probations">
-						<div className={styles.header}><Statistics /></div>
-						<PendingReviews />
+						<div className={styles.stats}><Statistics /></div>
+						<PIPProbations source="manager_dashboard" />
 					</TabPanel>
 				</Tabs>
 			</div>
