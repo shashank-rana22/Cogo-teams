@@ -107,13 +107,13 @@ export const expenseNonRecurringConfig = () => ({
 		},
 		{
 			label : 'Category',
-			span  : 1.2,
+			span  : 1.3,
 			func  : 'renderCategory',
 		},
 		{
 			label   : 'Invoice Amount',
 			key     : 'grandTotal',
-			span    : 1.5,
+			span    : 2,
 			sorting : { name: 'invoiceAmountSortType' },
 			styles  : { display: 'flex', justifyContent: 'center' },
 		},
