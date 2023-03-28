@@ -6,20 +6,19 @@ function getFireStoreQuery({
 	isomniChannelAdmin = false,
 	showBotMessages = false,
 }) {
-	let firestoreQuery;
 	let queryFilters = [];
-	if (showBotMessages) {
-		if (isomniChannelAdmin) {
-			return [
-				where('session_type', '==', 'bot'),
-				orderBy('new_message_sent_at', 'desc')];
-		}
-		return [
-			where('session_type', '==', 'bot'),
-			where('spectators_ids', 'array-contains', userId),
-			orderBy('new_message_sent_at', 'desc'),
+	let mainQuery = [];
+
+	if (isomniChannelAdmin) {
+		mainQuery = [];
+	} else {
+		mainQuery = [
+			where('support_agent_id', '==', userId),
 		];
 	}
+
+	const sessionTypeQuery = showBotMessages
+		? where('session_type', '==', 'bot') : where('session_type', '==', 'admin');
 
 	Object.keys(appliedFilters).forEach((item) => {
 		if (item === 'tags') {
@@ -52,29 +51,35 @@ function getFireStoreQuery({
 			}
 			queryFilters = [
 				...queryFilters,
-				where('spectators_ids', 'array-contains', filterId),
+				where('support_agent_id', '==', filterId),
+			];
+		} else if (item === 'observer' && appliedFilters?.observer) {
+			queryFilters = [
+				...queryFilters,
+				where('spectators_ids', 'array-contains', userId),
 			];
 		}
 	});
 
-	if (isomniChannelAdmin) {
-		firestoreQuery = [
-			...queryFilters,
-			where('session_type', '==', 'admin'),
-			orderBy('new_message_sent_at', 'desc'),
-		];
-	} else {
-		const extraFilters = appliedFilters?.observer?.[0] !== 'observer'
-			? [where('support_agent_id', '==', userId)] : [];
+	// if (isomniChannelAdmin) {
+	// 	firestoreQuery = [
+	// 		...queryFilters,
+	// 		where('session_type', '==', 'admin'),
+	// 		orderBy('new_message_sent_at', 'desc'),
+	// 	];
+	// } else {
+	// 	const extraFilters = (appliedFilters?.observer?.[0] !== 'observer' && !showBotMessages)
+	// 		? [where('support_agent_id', '==', userId)] : [];
 
-		firestoreQuery = [
-			...queryFilters,
-			where('session_type', '==', 'admin'),
-			...extraFilters,
-			where('spectators_ids', 'array-contains', userId),
-			orderBy('new_message_sent_at', 'desc'),
-		];
-	}
+	// 	firestoreQuery = [
+	// 		...queryFilters,
+	// 		where('session_type', '==', 'admin'),
+	// 		...extraFilters,
+	// 		where('spectators_ids', 'array-contains', userId),
+	// 		orderBy('new_message_sent_at', 'desc'),
+	// 	];
+	// }
+	const firestoreQuery = [...queryFilters, ...mainQuery, sessionTypeQuery, orderBy('new_message_sent_at', 'desc')];
 
 	return firestoreQuery;
 }

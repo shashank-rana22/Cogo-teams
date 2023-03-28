@@ -1,7 +1,7 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
 
-const useGetControls = (isomniChannelAdmin) => {
+const useGetControls = ({ isomniChannelAdmin, tagOptions }) => {
 	const listAgentsOptions = useGetAsyncOptions(
 		asyncFieldsListAgents(),
 	);
@@ -89,7 +89,7 @@ const useGetControls = (isomniChannelAdmin) => {
 		{
 			label        : 'Other Filters',
 			name         : 'observer',
-			type         : 'checkboxgroup',
+			type         : 'radio',
 			value        : '',
 			onlyForAdmin : false,
 			multiple     : false,
@@ -97,10 +97,32 @@ const useGetControls = (isomniChannelAdmin) => {
 			options      : [
 				{
 					label : 'Observer',
-					value : 'observer',
+					value : 'adminSession',
+				},
+				{
+					label : 'Closed',
+					value : 'botSession',
+				},
+				{
+					label : 'Chat Tags',
+					value : 'chat_tags',
 				},
 			],
 
+		},
+		{
+			label        : '',
+			name         : 'chat_tags',
+			type         : 'select',
+			value        : '',
+			onlyForAdmin : false,
+			className    : 'escalation_field_controller',
+			placeholder  : 'Select Tags',
+			clearable    : true,
+			rules        : {
+				required: 'This is Requied',
+			},
+			options: tagOptions,
 		},
 	];
 

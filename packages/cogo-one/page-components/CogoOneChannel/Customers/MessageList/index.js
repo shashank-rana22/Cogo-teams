@@ -30,6 +30,7 @@ function MessageList({
 	setModalType = () => {},
 	modalType = '',
 	handleScroll = () => {},
+	tagOptions = [],
 }) {
 	function lastMessagePreview(previewData = '') {
 		return (
@@ -66,6 +67,7 @@ function MessageList({
 									setShowBotMessages={setShowBotMessages}
 									showBotMessages={showBotMessages}
 									isomniChannelAdmin={isomniChannelAdmin}
+									tagOptions={tagOptions}
 								/>
 							)
 						)}

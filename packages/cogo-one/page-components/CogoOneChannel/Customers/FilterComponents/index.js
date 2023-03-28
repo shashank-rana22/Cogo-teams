@@ -27,12 +27,10 @@ function FilterComponents({
 	appliedFilters = {},
 	setActiveCardId = () => {},
 	setShowBotMessages = () => {},
-	showBotMessages = false,
 	isomniChannelAdmin = false,
+	tagOptions = [],
 }) {
-	const [botToggle, setBotToggle] = useState(false);
-
-	const filterControls = useGetControls(isomniChannelAdmin);
+	const filterControls = useGetControls({ isomniChannelAdmin, tagOptions });
 
 	const defaultValues = getDefaultValues({ filters: appliedFilters, filterControls });
 
@@ -41,8 +39,10 @@ function FilterComponents({
 	} = useForm({ defaultValues });
 
 	const formValues = watch();
-	const { assigned_to = '' } = formValues || {};
-	const showElements = { assigned_agent: assigned_to === 'agent' };
+
+	const { assigned_to = '', observer = '' } = formValues || {};
+
+	const showElements = { assigned_agent: assigned_to === 'agent', chat_tags: observer === 'chat_tags' };
 
 	let filterValues = {};
 
@@ -53,20 +53,11 @@ function FilterComponents({
 	};
 
 	useEffect(() => {
-		if (botToggle) {
-			resetForm();
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [botToggle]);
-	useEffect(() => {
 		if (assigned_to === 'me') {
 			setValue('assigned_agent', '');
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [assigned_to]);
-	useEffect(() => {
-		setBotToggle(showBotMessages);
-	}, [showBotMessages]);
 
 	Object.keys(formValues).forEach((item) => {
 		if (!isEmpty(formValues[item])) {
@@ -80,7 +71,7 @@ function FilterComponents({
 		setActiveCardId('');
 		setAppliedFilters(filterValues);
 		setFilterVisible(false);
-		setShowBotMessages(botToggle);
+		setShowBotMessages(filterValues?.observer === 'botSession');
 	};
 	const renderComp = (singleField) => {
 		const show = !(singleField?.name in showElements) || showElements[singleField?.name];
@@ -94,7 +85,6 @@ function FilterComponents({
 							value={formValues[singleField.name]}
 							setValue={setValue}
 							error={errors[singleField.name]}
-							botToggle={botToggle}
 						/>
 					)
 				);
@@ -109,7 +99,6 @@ function FilterComponents({
 					value={formValues[singleField.name]}
 					setValue={setValue}
 					error={errors[singleField.name]}
-					botToggle={botToggle}
 				/>
 			)
 		);
@@ -136,7 +125,7 @@ function FilterComponents({
 						) : null}
 				</div>
 			</div>
-			{!isomniChannelAdmin && (
+			{/* {!isomniChannelAdmin && (
 				<div className={styles.styled_flex}>
 					<Checkbox
 						name="closed"
@@ -148,10 +137,10 @@ function FilterComponents({
 						Closed
 					</div>
 				</div>
-			)}
+			)} */}
 
 			{filterControls.map((field) => (
-				<div className={cl`${styles.filter_container} ${botToggle ? styles.disabled : ''}`} key={field.name}>
+				<div className={styles.filter_container} key={field.name}>
 					{renderComp(field)}
 				</div>
 			))}
