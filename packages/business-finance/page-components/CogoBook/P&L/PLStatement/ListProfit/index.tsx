@@ -5,12 +5,12 @@ import styles from './styles.module.css';
 
 function ListProfit() {
 	const [dropDown, setDropDown] = useState({
-		revenue   : false,
-		operating : false,
-		employee  : false,
-		finance   : false,
-		other     : false,
-		tax       : false,
+		revenue   : true,
+		operating : true,
+		employee  : true,
+		finance   : true,
+		other     : true,
+		tax       : true,
 	});
 	return (
 		<div className={styles.container}>

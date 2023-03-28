@@ -1,0 +1,9 @@
+.add_buttons {
+	display: flex;
+}
+
+.errors {
+	padding-left: 10px;
+	font-size: 12px;
+	color: var(--color-primary-error-red-1);
+}
