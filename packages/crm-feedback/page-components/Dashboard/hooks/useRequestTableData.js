@@ -1,6 +1,6 @@
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 
 const useRequestTableData = () => {
 	const router = useRouter();
@@ -11,15 +11,15 @@ const useRequestTableData = () => {
 		page_limit   : 10,
 		page         : 1,
 		is_dashboard : true,
-		filters,
+		filters      : {},
 	});
 
-	const [{ data, loading }, trigger] = useAllocationRequest({
+	const [{ data, loading }] = useAllocationRequest({
 		url     : '/feedback_requests',
 		method  : 'get',
 		authkey : 'get_allocation_feedback_requests',
 		params,
-	}, { manual: true });
+	}, { manual: false });
 
 	const onChangeParams = (values = {}) => {
 		setParams((previousState) => ({
@@ -28,22 +28,22 @@ const useRequestTableData = () => {
 		}));
 	};
 
-	useEffect(() => {
-		trigger({
-			params: {
-				...params,
-				filters: { ...params?.filters, ...filters },
-			},
-		});
-	}, [params, filters, trigger]);
-
-	const onChangeFilters = (values) => {
-		setFilters((previousState) => ({
-			...filters,
-			...previousState,
-			...values,
-		}));
-	};
+	const onChangeFilters = useCallback(
+		(values = {}) => {
+			setFilters((previousState) => ({
+				...previousState,
+				...values,
+			}));
+			setParams((previousState) => ({
+				...previousState,
+				filters: {
+					...previousState.filters,
+					...values,
+				},
+			}));
+		},
+		[setFilters, setParams],
+	);
 
 	const { list = [], ...paginationData } = data || {};
 
