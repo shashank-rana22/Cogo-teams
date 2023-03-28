@@ -8,7 +8,13 @@ import useGetUserSubmissionStats from '../hooks/useGetUserSubmissionStats';
 import styles from './styles.module.css';
 
 function Completion() {
-	const { profile: { user: { id: user_id } }, general: { query: { test_id } } } = useSelector((state) => state);
+	const {
+		query: { test_id },
+		user: { id: user_id },
+	} = useSelector(({ general, profile }) => ({
+		query : general.query,
+		user  : profile.user,
+	}));
 
 	const { push } = useRouter();
 

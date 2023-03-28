@@ -10,9 +10,13 @@ import styles from './styles.module.css';
 import TestCard from './TestCard';
 
 function TestsList() {
-	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+	const {
+		user: { id: user_id },
+	} = useSelector(({ profile }) => ({
+		user: profile.user,
+	}));
 
-	const { profile: { user: { id: user_id } } } = useSelector((state) => state);
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
 	const [{ data = {}, loading }, trigger] = useRequest({
 		method : 'GET',

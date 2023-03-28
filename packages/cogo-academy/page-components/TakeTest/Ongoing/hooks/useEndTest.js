@@ -5,9 +5,12 @@ import { useSelector } from '@cogoport/store';
 
 const useEndTest = ({ setActiveState = () => {}, setShowTimeOverModal }) => {
 	const {
-		general: { query: { test_id } },
-		profile: { user: { id: user_id } },
-	} = useSelector((state) => state);
+		query: { test_id },
+		user: { id: user_id },
+	} = useSelector(({ general, profile }) => ({
+		query : general.query,
+		user  : profile.user,
+	}));
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'POST',

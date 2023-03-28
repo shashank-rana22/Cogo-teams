@@ -6,7 +6,11 @@ import Overview from './Overview';
 import styles from './styles.module.css';
 
 function LeftSection() {
-	const { profile: { user: { name } } } = useSelector((state) => state);
+	const {
+		user: { name },
+	} = useSelector(({ profile }) => ({
+		user: profile.user,
+	}));
 
 	return (
 		<div className={styles.container}>

@@ -12,9 +12,7 @@ import useGetTest from './hooks/useGetTest';
 import styles from './styles.module.css';
 
 function AdminResults() {
-	const {
-		general: { query = {} },
-	} = useSelector((state) => state);
+	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));
 
 	const { push } = useRouter();
 
