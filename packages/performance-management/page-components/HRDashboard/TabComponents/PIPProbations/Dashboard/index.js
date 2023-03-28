@@ -4,14 +4,17 @@ import useGetColumns from '../../../../../common/Columns';
 import Filters from '../../../../../common/Filters';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
-import useListEmployeesLog from '../../../../../hooks/useListEmployeesLog';
+import useListLogs from '../../../../../hooks/useListLogs';
 
 import Statistics from './Statistics';
 import styles from './styles.module.css';
 
 function Dashboard({
-	activeTab, setItem = () => {}, setOpenLogModal = () => {},
+	activeTab, setItem = () => {},
+	setOpenLogModal = () => {},
 	setModal = () => {},
+	refetchList = false,
+	setRefetchList = () => {},
 }) {
 	// const dataList = {
 	// 	1: [{
@@ -54,14 +57,18 @@ function Dashboard({
 		params,
 		setParams,
 		setPage,
-	} = useListEmployeesLog();
-
-	useEffect(() => {
-		setParams({ ...setParams, IsReviewed: true });
-	}, [setParams]);
+		onSubmitModal,
+	} = useListLogs('hr_pip_dashboard');
 
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;
+
+	useEffect(() => {
+		if (refetchList) {
+			onSubmitModal();
+			setRefetchList(false);
+		}
+	}, [onSubmitModal, refetchList, setRefetchList]);
 
 	const columnsToShow = feedbackDataColumns.pipProbationList;
 	const columns = useGetColumns({
@@ -76,7 +83,10 @@ function Dashboard({
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<Statistics />
+				<Statistics
+					params={params}
+					setParams={setParams}
+				/>
 			</div>
 
 			<div>

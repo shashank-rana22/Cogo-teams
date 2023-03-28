@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
 import useGetColumns from '../../../../../common/Columns';
+import Filters from '../../../../../common/Filters';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
-import useListEmployeesLog from '../../../../../hooks/useListEmployeesLog';
+import useListLogs from '../../../../../hooks/useListLogs';
 
 import styles from './styles.module.css';
 
@@ -11,7 +12,8 @@ function PendingReviews({
 	activeTab,
 	setItem = () => {},
 	setModal = () => {},
-	// setType = () => {},
+	refetchList = false,
+	setRefetchList = () => {},
 }) {
 	// const dataList = {
 	// 	1: [{
@@ -54,17 +56,21 @@ function PendingReviews({
 	const {
 		employeeData,
 		loading,
-		// params,
+		params,
 		setParams,
 		setPage,
-	} = useListEmployeesLog();
-
-	useEffect(() => {
-		setParams({ ...setParams, IsReviewed: false });
-	});
+		onSubmitModal,
+	} = useListLogs('hr_pip_pending_reviews');
 
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;
+
+	useEffect(() => {
+		if (refetchList) {
+			onSubmitModal();
+			setRefetchList(false);
+		}
+	}, [onSubmitModal, refetchList, setRefetchList]);
 
 	const columnsToShow = feedbackDataColumns.pendingReviewsList;
 	const columns = useGetColumns({
@@ -77,6 +83,15 @@ function PendingReviews({
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.filters}>
+				<Filters
+					params={params}
+					setParams={setParams}
+					source="hr_pip_dashboard"
+				/>
+
+			</div>
+
 			<UserTableData
 				loading={loading}
 				columns={columns}

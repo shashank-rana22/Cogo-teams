@@ -2,6 +2,7 @@ import { ResponsiveBar } from '@cogoport/charts/bar';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../../common/EmptyState';
+import Filters from '../../../../../../common/Filters';
 
 import styles from './styles.module.css';
 
@@ -38,9 +39,11 @@ function Statistics() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters}>
-				<p>
-					Filter Dropdowns
-				</p>
+				<Filters
+					// params={params}
+					// setParams={setParams}
+					source="hr_pip_stats"
+				/>
 			</div>
 
 			<div className={styles.chart_section}>

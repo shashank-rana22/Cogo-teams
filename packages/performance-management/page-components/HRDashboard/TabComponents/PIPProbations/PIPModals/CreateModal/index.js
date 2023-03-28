@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import useGetColumns from '../../../../../../common/Columns';
 import UserTableData from '../../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../../constants/feedback-data-columns';
-import useCreatePipOrProbation from '../../../../../../hooks/useCreatePipOrProbation';
+import useCreateLog from '../../../../../../hooks/useCreateLog';
 import useListReportees from '../../../../../../hooks/useListReportees';
 import DecisionModal from '../UpdateModal/DecisionModal';
 
@@ -20,6 +20,7 @@ function CreateModal({
 	setItem = () => {},
 	disableNext,
 	setDisableNext = () => {},
+	setRefetchList = () => {},
 }) {
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -33,13 +34,13 @@ function CreateModal({
 		searchValue: query,
 	});
 
-	const { onSubmitCreate = () => {} } = useCreatePipOrProbation();
+	const { onSubmitCreate = () => {} } = useCreateLog();
 
 	const { list: newTeamList = [], pagination_data = {} } = feedbackData;
 	const { total_count = '' } = pagination_data;
 
 	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
-	useEffect(() => setItem({}), []);
+	useEffect(() => setItem({}), [setItem]);
 
 	const columnsToShow = [
 		...(source === 'log_modal' ? feedbackDataColumns.logModal : feedbackDataColumns.manualFeedbacks)];
@@ -66,7 +67,9 @@ function CreateModal({
 		>
 			<Modal.Header title={`Create ${startCase(status)}`} />
 			<div className={styles.upload_modal}>
-				<Modal.Body>
+				<Modal.Body
+					style={{ maxHeight: '600px' }}
+				>
 					{!status ? (
 						<div>
 							<p style={{ padding: '8px' }}>Do you wish to create new Probation or PIP</p>
@@ -144,8 +147,7 @@ function CreateModal({
 						size="md"
 						style={{ marginLeft: '8px' }}
 						onClick={() => {
-							onSubmitCreate(item, status);
-							setModal('');
+							onSubmitCreate(item, status, setRefetchList, setModal);
 						}}
 						disabled={disableNext}
 					>
