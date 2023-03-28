@@ -99,7 +99,7 @@ const columns = [
 					)}
 					size="sm"
 				>
-					Close RFQ
+					Close for me
 
 				</Button>
 			</div>
