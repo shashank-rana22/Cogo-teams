@@ -11,7 +11,7 @@ import QuestionsList from './QuestionsList';
 function ControlCenter() {
 	const { query } = useRouter();
 
-	const { activeTab: currentActiveTab } = query || {};
+	const { activeTab: currentActiveTab, testModuleTab } = query || {};
 
 	const [activeTab, setActiveTab] = useState(currentActiveTab || 'manage_faq');
 	const [switchDashboard, setSwitchDashboard] = useState(true);
@@ -35,7 +35,7 @@ function ControlCenter() {
 				</TabPanel>
 
 				<TabPanel name="test_module" title="Test Module">
-					<HomePage />
+					<HomePage testModuleTab={testModuleTab} />
 				</TabPanel>
 			</Tabs>
 

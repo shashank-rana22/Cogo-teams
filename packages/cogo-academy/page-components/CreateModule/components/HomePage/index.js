@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import TestsList from '../TestsList';
 
-function HomePage() {
-	const [activeTab, setActiveTab] = useState('tests');
+function HomePage({ testModuleTab }) {
+	const [activeTab, setActiveTab] = useState(testModuleTab || 'tests');
 
 	return (
 		<div>

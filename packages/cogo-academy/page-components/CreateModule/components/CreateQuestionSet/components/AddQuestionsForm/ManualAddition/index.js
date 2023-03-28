@@ -21,7 +21,7 @@ function ManualAddition({
 		<div>
 			<Breadcrumb className={styles.breadcrumb_container}>
 				<Breadcrumb.Item
-					label={`${isEmpty(editDetails) ? 'Add' : 'Edit'} Questions`}
+					label={mode === 'view' ? 'View Question' : `${isEmpty(editDetails) ? 'Add' : 'Edit'} Questions`}
 					className={styles.breadcrumb_item}
 				/>
 				<Breadcrumb.Item style={{ color: '#ee3425' }} label="Manual Addition" />
