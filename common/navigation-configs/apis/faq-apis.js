@@ -332,6 +332,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'check_test_user_eligibility',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'get_user_submission_stats',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
