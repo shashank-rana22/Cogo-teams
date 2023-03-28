@@ -45,7 +45,7 @@ function AdminResults() {
 		push('/learning?activeTab=test_module', '/learning?activeTab=test_module');
 	};
 
-	const { status } = data || {};
+	const { status, validity_end } = data || {};
 
 	return (
 		<div className={styles.container}>
@@ -57,7 +57,13 @@ function AdminResults() {
 
 			<div><TestResults test_id={test_id} /></div>
 
-			<InfoBanner loading={loading} test_status={status} test_id={test_id} refetchTest={getTest} />
+			<InfoBanner
+				loading={loading}
+				test_status={status}
+				test_id={test_id}
+				validity_end={validity_end}
+				refetchTest={getTest}
+			/>
 
 			<div className={styles.tabs_container}>
 				<Tabs
