@@ -16,8 +16,8 @@ function ListItem(props) {
 	const handleClick = (id) => {
 		if (id) {
 			router.push(
-				'/badges/[user_id]/?path=/allocation/kam-expertise',
-				`/badges/${id}/?path=/allocation/kam-expertise`,
+				'/my-profile/badges/[user_id]/?path=/allocation/kam-expertise',
+				`/my-profile/badges/${id}/?path=/allocation/kam-expertise`,
 			);
 		}
 	};
@@ -29,10 +29,12 @@ function ListItem(props) {
 					<div className={styles.index}>
 						{index + 1}
 					</div>
+
 					<div>
 						<div className={styles.kam_name}>
 							{data.name}
 						</div>
+
 						<div>
 							Total:
 							{' '}
@@ -40,6 +42,7 @@ function ListItem(props) {
 						</div>
 					</div>
 				</div>
+
 				<div className={styles.badge_container}>
 					<div className={styles.badges}>
 						{
@@ -63,6 +66,7 @@ function ListItem(props) {
 							))
 						}
 					</div>
+
 					<span className={styles.link}>
 						{ badge_details?.length > 3
 						&& (

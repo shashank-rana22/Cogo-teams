@@ -36,14 +36,13 @@ function useCreateMasterConfiguration(props) {
 			image_input,
 			description_input,
 		} = formValues || {};
-		//! status shuld not be hardcoded
+
 		try {
 			const payload = {
 				badge_name                         : mastery_name,
 				description                        : description_input,
 				expertise_configuration_detail_ids : badges,
 				expertise_configuration_type       : 'badge_configuration',
-				status                             : 'active',
 				badge_details                      : [
 					{
 						image_url : image_input || masteryItemData?.badge_details?.[0]?.image_url,

@@ -8,7 +8,6 @@ function Details({
 	detailsData, badgeListLoading, userBadges, profileBadgeRefetch,
 }) {
 	return (
-
 		<div className={styles.container}>
 			<div className={styles.card_details}>
 				<Partners detailsData={detailsData} />

@@ -16,16 +16,17 @@ function KamLevelScoreCard(props) {
 		setOverviewParams,
 	} = props;
 
-	const KamChange = () => {
+	const onKamChange = () => {
 		setKamLevel(index_lvl + 1);
 
-		setOverviewParams({
+		setOverviewParams((pv) => ({
+			...pv,
 			kam_expertise_level : index_lvl + 1,
 			filters             : {
 				created_at_greater_than : date_params.start_date,
 				created_at_less_than    : date_params.end_date,
 			},
-		});
+		}));
 
 		setListParams((pv) => ({
 			...pv,
@@ -61,7 +62,7 @@ function KamLevelScoreCard(props) {
 			themetype="primary"
 			disabled={false}
 			className={styles.card_item}
-			onClick={KamChange}
+			onClick={() => onKamChange()}
 		>
 			<Card.Title title={(
 				<div className={styles.card_title}>

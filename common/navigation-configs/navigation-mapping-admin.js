@@ -793,8 +793,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-account_receivables',
 				title         : 'AR',
-				href          : '/business-finance/account-receivables',
-				as            : '/business-finance/account-receivables',
+				href          : '/v2/business-finance/account-receivables/[active_tab]',
+				as            : '/v2/business-finance/account-receivables/outstanding',
 				type          : 'link',
 				main_apis     : ['list_organizations'],
 				possible_apis : apis.account_receivables,
@@ -1740,17 +1740,6 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 		possible_apis : apis.my_profile,
-		showInNav     : false,
-
-	},
-	all_badges: {
-		key           : 'all_badges',
-		title         : 'All Badges',
-		href          : '/badges',
-		as            : '/badges',
-		main_apis     : [],
-		module_type   : 'dashboards',
-		possible_apis : apis.all_badges,
 		showInNav     : false,
 
 	},
