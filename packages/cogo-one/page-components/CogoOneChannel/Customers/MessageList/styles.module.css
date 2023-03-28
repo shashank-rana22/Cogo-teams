@@ -272,12 +272,4 @@
 	height: 18px;
 	background: #ef0a1a;
 	border-radius: 0 4px;
-
-	/* animation: blinking-text 2s infinite;
-
-	@keyframes blinking-text {
-		0% { background: #bf291e; }
-
-		100% { background: #ef0a1a; }
-	} */
 }
