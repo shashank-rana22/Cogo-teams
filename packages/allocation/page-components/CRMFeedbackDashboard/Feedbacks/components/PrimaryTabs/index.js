@@ -4,11 +4,8 @@ import { useState } from 'react';
 import FeedbackTab from './FeedbackTab';
 import RequestTab from './RequestTab';
 
-function PrimaryTabs({ organization_id = '' }) {
+function PrimaryTabs({ organization_id = '', type = '' }) {
 	const [activeTab, setActiveTab] = useState('feedbacks');
-	const [tabCount, setTabCount] = useState([33, 6, 14]);
-
-	const requestCount = `${tabCount[1] || 'NaN'}/${tabCount[2] || 'NaN'}`;
 
 	return (
 		<div style={{ marginTop: 30 }}>
@@ -17,12 +14,12 @@ function PrimaryTabs({ organization_id = '' }) {
 				themeType="secondary"
 				onChange={setActiveTab}
 			>
-				<TabPanel name="feedbacks" title="Feedbacks Received" badge={tabCount[0] || 'NaN'}>
-					<FeedbackTab organization_id={organization_id} setActiveTab={setActiveTab} />
+				<TabPanel name="feedbacks" title="Feedbacks Received">
+					<FeedbackTab organization_id={organization_id} setActiveTab={setActiveTab} type={type} />
 				</TabPanel>
 
-				<TabPanel name="requests" title="Requests" badge={requestCount}>
-					<RequestTab organization_id={organization_id} setActiveTab={setActiveTab} />
+				<TabPanel name="requests" title="Requests">
+					<RequestTab organization_id={organization_id} setActiveTab={setActiveTab} type={type} />
 				</TabPanel>
 			</Tabs>
 		</div>

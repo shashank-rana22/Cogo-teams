@@ -6,22 +6,17 @@ import CrmTable from '../../commons/CrmTable';
 import { REQUEST_COLUMNS } from './get-request-columns';
 import styles from './styles.module.css';
 
-function RequestTab(organization_id = '') {
+function RequestTab({ organization_id = '', type = '' }) {
 	const {
 		data = {},
 		loading = false,
 		onChangeParams = () => {},
 		paginationData = {},
-		checkedRow = '',
-		onChangeBodyCheckbox = () => {},
-	} = useRequestOrganization({ organization_id });
+	} = useRequestOrganization({ organizationId: organization_id, type });
 
 	const { page, page_limit, total_count } = paginationData;
 
-	const columns = REQUEST_COLUMNS({
-		checkedRow,
-		onChangeBodyCheckbox,
-	});
+	const columns = REQUEST_COLUMNS;
 
 	return (
 		<div className={styles.container}>
