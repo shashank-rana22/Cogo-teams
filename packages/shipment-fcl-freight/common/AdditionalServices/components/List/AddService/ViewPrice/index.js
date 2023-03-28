@@ -1,15 +1,15 @@
 import { Button } from '@cogoport/components';
 import { useEffect } from 'react';
 
+import useGetSubsidiaryServiceRateCards from '../../../../../../hooks/useGetSubsidiaryServiceRateCards';
 import CardList from '../../../../../CardList';
 import EmptyState from '../../../../../EmptyState';
 
 import styles from './styles.module.css';
-import useRequestRates from './useRequestRates';
 import fields from './viewPriceFields';
 
-function ViewPrice({ showPrice, setAddRate, setShowPrice }) {
-	const { data, loading } = useRequestRates({
+function ViewPrice({ showPrice, setShowPrice }) {
+	const { data, loading } = useGetSubsidiaryServiceRateCards({
 		item: showPrice?.item,
 	});
 
@@ -31,7 +31,7 @@ function ViewPrice({ showPrice, setAddRate, setShowPrice }) {
 		})();
 	}, [loading]);
 
-	const field = fields(showPrice?.item, setAddRate);
+	const field = fields(showPrice?.item);
 	return (
 		<div className={styles.container}>
 			{!(showPrice?.line_items || []).length && !loading ? (

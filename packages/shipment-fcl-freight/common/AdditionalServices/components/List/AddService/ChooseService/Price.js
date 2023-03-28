@@ -10,7 +10,6 @@ function Price({
 	isSeller,
 	setAddRate,
 	refetch = () => {},
-	setItem = () => {},
 	setShowChargeCodes = () => {},
 	setShowPrice,
 }) {
@@ -37,11 +36,7 @@ function Price({
 				themeType="secondary"
 				onClick={(e) => {
 					e.stopPropagation();
-					if (isSeller) {
-						setAddRate(item);
-					} else {
-						requestRate(item);
-					}
+					requestRate(item);
 				}}
 				style={{ marginRight: 10 }}
 				disabled={loading}
