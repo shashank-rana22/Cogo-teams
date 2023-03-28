@@ -65,13 +65,17 @@ export const REQUEST_COLUMNS = ({
 		key      : 'status',
 		id       : 'status',
 		accessor : ({
-			statuses = [], organization = {},
+			statuses = [], organization = {}, lead_organization = {}, lead_organization_id = '',
 		}) => {
 			const { status, color } = computeStatus(statuses);
 
-			const { id = '', business_name = '' } = organization || {};
+			const orgObject = lead_organization_id ? (lead_organization) : (organization);
 
-			const url = `/feedbacks/${id}?organization=${business_name}&status=${status}`;
+			const type = lead_organization_id ? ('lead_organization') : ('organization');
+
+			const { id = '', business_name = '' } = orgObject || {};
+
+			const url = `/feedbacks/${id}?organization=${business_name}&status=${status}&type=${type}`;
 
 			return (
 				<section className={styles.view}>
