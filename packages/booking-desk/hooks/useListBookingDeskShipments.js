@@ -8,9 +8,9 @@ import getPayload from '../helpers/getPayload';
 const nullData = { list: [], total: 0, total_page: 0 };
 
 export default function useListBookingDeskShipments({ stateProps, prefix }) {
+	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const { filters, setFilters, activeTab } = stateProps;
 	const [data, setData] = useState(nullData);
-	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : `${prefix}/list_booking_desk_shipments`,
@@ -35,9 +35,12 @@ export default function useListBookingDeskShipments({ stateProps, prefix }) {
 	}, [filters, setFilters, activeTab, trigger, selected_agent_id]);
 
 	useEffect(() => {
+		const [, scope, view_type] = (authParams || '').split(':');
+		if (!scope) {
+			return;
+		}
 		listShipments();
 
-		const [, scope, view_type] = (authParams || '').split(':');
 		const scopeFilters = { scope, view_type, selected_agent_id };
 
 		const toBeStoredValue = JSON.stringify({ filters, activeTab, scopeFilters });

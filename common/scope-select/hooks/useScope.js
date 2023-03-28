@@ -10,7 +10,9 @@ export default function useGetScopeData({ defaultValues, closePopover }) {
 	const { profile } = useSelector((store) => store);
 	const dispatch = useDispatch();
 
-	const { scopeData, navigation, authParams, pathname } = useGetScopeOptions({ defaultValues });
+	const { authParams, ...restProfile } = profile || {};
+
+	const { scopeData, navigation, pathname } = useGetScopeOptions({ defaultValues });
 
 	const { defaultScope, defaultView } = scopeData;
 	const [, scope, viewType = ''] = (authParams || '').split(':');
@@ -27,21 +29,17 @@ export default function useGetScopeData({ defaultValues, closePopover }) {
 		if (newViewType) { newAuthParams += `:${newViewType}`; }
 
 		dispatch(setProfileState({
-			...profile,
+			...restProfile,
 			authParams: newAuthParams,
 			...(selected_agent_id && { selected_agent_id }),
 		}));
 
 		closePopover();
-	}, [profile, dispatch, navigation, closePopover]);
+	}, [dispatch, navigation, closePopover, restProfile]);
 
 	const resetProfile = useCallback(() => {
-		const { authParams: oldAuthParams, selected_agent_id: selected_agent, ...newProfile } = profile;
-		newProfile.authParams = undefined;
-		newProfile.selected_agent_id = undefined;
-
-		dispatch(setProfileState(newProfile));
-	}, [profile, dispatch]);
+		dispatch(setProfileState(restProfile));
+	}, [restProfile, dispatch]);
 
 	useEffect(() => {
 		if (!initialValues.current.scope && pathname === initialValues.current.pathname) {

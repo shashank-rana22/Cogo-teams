@@ -19,6 +19,8 @@ const shipmentSpecificPayload = {
 	lcl_freight       : lclTabSpecificPayload,
 };
 
+const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
+
 export default function getPayload({ filters, activeTab, selected_agent_id }) {
 	const { isCriticalOn, page, q, ...restFilters } = filters;
 	const { shipment_type } = filters;
@@ -36,7 +38,8 @@ export default function getPayload({ filters, activeTab, selected_agent_id }) {
 			state: shipmentStates[activeTab] || shipmentStates.in_progress,
 			...tabSpecificPayload[activeTab],
 			selected_agent_id,
-			...(isCriticalVisible && isCriticalOn && { schedule_departure_less_than: threeDaysLater }),
+			...(isCriticalVisible && isCriticalOn
+				&& { schedule_departure_less_than: new Date(threeDaysLater.getTime() - timezoneOffset) }),
 			...(q && { q }),
 			...restFilters,
 		},

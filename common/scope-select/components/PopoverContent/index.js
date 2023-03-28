@@ -5,9 +5,7 @@ import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-// export default function PopoverContent({ scope, viewType, onClose, onApply, scopeData, size, showChooseAgent }) {
-export default function PopoverContent({ scope, viewType, onClose, onApply, scopeData, size }) {
-	const showChooseAgent = false;
+export default function PopoverContent({ scope, viewType, onClose, onApply, scopeData, size, showChooseAgent }) {
 	const { scopes, viewTypes, defaultScope, defaultView, selected_agent_id } = scopeData;
 
 	const defaultValues = { scope: scope || defaultScope, ...(showChooseAgent && { selected_agent_id }) };
@@ -25,7 +23,7 @@ export default function PopoverContent({ scope, viewType, onClose, onApply, scop
 
 	useEffect(() => {
 		setValue('viewType', (viewTypes[selectedScope] || [])[0]);
-		// setValue('selected_agent_id', '');
+		setValue('selected_agent_id', '');
 	}, [selectedScope, viewTypes, setValue]);
 
 	const isScopesPresent = scopes.length > 0;
