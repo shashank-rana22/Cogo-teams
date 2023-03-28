@@ -33,7 +33,7 @@ function CheckEligibility() {
 		params : {
 			user_id, test_id,
 		},
-	}, { manual: false });
+	}, { manual: !test_id });
 
 	const { is_valid_user, is_active, attempts_left } = data || {};
 
