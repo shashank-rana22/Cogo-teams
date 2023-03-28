@@ -42,6 +42,8 @@ function CreateModal({
 	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
 	useEffect(() => setItem({}), [setItem]);
 
+	console.log('source::', source);
+
 	const columnsToShow = [
 		...(source === 'log_modal' ? feedbackDataColumns.logModal : feedbackDataColumns.manualFeedbacks)];
 	const columns = useGetColumns({ columnsToShow, source, setItem });
@@ -56,106 +58,129 @@ function CreateModal({
 	};
 
 	return (
-		<Modal
-			show={modal === 'create'}
-			onClose={() => {
-				setModal('');
-				setItem({});
-				setStatus('');
-			}}
-			size="lg"
-		>
-			<Modal.Header title={`Create ${startCase(status)}`} />
-			<div className={styles.upload_modal}>
-				<Modal.Body
-					style={{ maxHeight: '600px' }}
-				>
-					{!status ? (
-						<div>
-							<p style={{ padding: '8px' }}>Do you wish to create new Probation or PIP</p>
-							<div className={styles.pip_select}>
-								<Button
-									size="xl"
-									className={styles.pip_select_btn}
-									themeType="secondary"
-									onClick={() => setStatus('probation')}
-									style={{ width: '120px' }}
-								>
-									Probations
-								</Button>
+		(source === 'log_modal' ? (
+			<Modal
+				show={modal === 'create'}
+				onClose={() => {
+					setModal('');
+					setItem({});
+					setStatus('');
+				}}
+				size="lg"
+			>
+				<Modal.Header title={`Create ${startCase(status)}`} />
+				<div className={styles.upload_modal}>
+					<Modal.Body
+						style={{ maxHeight: '600px' }}
+					>
+						{!status ? (
+							<div>
+								<p style={{ padding: '8px' }}>Do you wish to create new Probation or PIP</p>
+								<div className={styles.pip_select}>
+									<Button
+										size="xl"
+										className={styles.pip_select_btn}
+										themeType="secondary"
+										onClick={() => setStatus('probation')}
+										style={{ width: '120px' }}
+									>
+										Probations
+									</Button>
 
-								<Button
-									size="xl"
-									className={styles.pip_select_btn}
-									themeType="secondary"
-									onClick={() => setStatus('pip')}
-									style={{ width: '120px' }}
-								>
-									PIP
-								</Button>
+									<Button
+										size="xl"
+										className={styles.pip_select_btn}
+										themeType="secondary"
+										onClick={() => setStatus('pip')}
+										style={{ width: '120px' }}
+									>
+										PIP
+									</Button>
+								</div>
 							</div>
-						</div>
-					) : (
-						<div>
-							{isEmpty(item) ? (
-								<>
-									<div className={styles.name_input}>
-										<div>Search by Name/COGO-ID...</div>
-										<Input
-											placeholder="Type Here..."
-											value={searchValue}
-											onChange={setSearchValue}
+						) : (
+							<div>
+								{isEmpty(item) ? (
+									<>
+										<div className={styles.name_input}>
+											<div>Search by Name/COGO-ID...</div>
+											<Input
+												placeholder="Type Here..."
+												value={searchValue}
+												onChange={setSearchValue}
+											/>
+										</div>
+
+										<UserTableData
+											columns={columns}
+											list={newTeamList}
+											loading={loading}
+											pagination={params.Page}
+											page_limit={params.page_limit}
+											total_count={total_count}
+											setPagination={setPage}
 										/>
-									</div>
-
-									<UserTableData
-										columns={columns}
-										list={newTeamList}
-										loading={loading}
-										pagination={params.Page}
-										page_limit={params.page_limit}
-										total_count={total_count}
-										setPagination={setPage}
+									</>
+								) : (
+									<DecisionModal
+										item={item}
+										setItem={setItem}
+										status={status}
+										type="create"
+										setDisableNext={setDisableNext}
 									/>
-								</>
-							) : (
-								<DecisionModal
-									item={item}
-									setItem={setItem}
-									status={status}
-									type="create"
-									setDisableNext={setDisableNext}
-								/>
-							)}
+								)}
 
-						</div>
-					)}
-				</Modal.Body>
-			</div>
-			<Modal.Footer>
-				<Button
-					size="md"
-					themeType="tertiary"
-					onClick={clickedBack}
-				>
-					{status ? 'Back' : 'Close'}
-
-				</Button>
-
-				{!isEmpty(item) && (
+							</div>
+						)}
+					</Modal.Body>
+				</div>
+				<Modal.Footer>
 					<Button
 						size="md"
-						style={{ marginLeft: '8px' }}
-						onClick={() => {
-							onSubmitCreate(item, status, setRefetchList, setModal);
-						}}
-						disabled={disableNext}
+						themeType="tertiary"
+						onClick={clickedBack}
 					>
-						Submit
+						{status ? 'Back' : 'Close'}
+
 					</Button>
-				)}
-			</Modal.Footer>
-		</Modal>
+
+					{!isEmpty(item) && (
+						<Button
+							size="md"
+							style={{ marginLeft: '8px' }}
+							onClick={() => {
+								onSubmitCreate(item, status, setRefetchList, setModal);
+							}}
+							disabled={disableNext}
+						>
+							Submit
+						</Button>
+					)}
+				</Modal.Footer>
+			</Modal>
+		) : (
+			<>
+				<div className={styles.name_input}>
+					<div>Search by Name/COGO-ID...</div>
+					<Input
+						placeholder="Type Here..."
+						value={searchValue}
+						onChange={setSearchValue}
+					/>
+				</div>
+
+				<UserTableData
+					columns={columns}
+					list={newTeamList}
+					loading={loading}
+					pagination={params.Page}
+					page_limit={params.page_limit}
+					total_count={total_count}
+					setPagination={setPage}
+				/>
+			</>
+		))
 	);
 }
 
