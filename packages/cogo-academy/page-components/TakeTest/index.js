@@ -23,9 +23,12 @@ const ELIGIBILITY_SCREEN_MAPPING = {
 
 function CheckEligibility() {
 	const {
-		general: { query: { test_id } },
-		profile: { user: { id: user_id } },
-	} = useSelector((state) => state);
+		query: { test_id },
+		user: { id: user_id },
+	} = useSelector(({ general, profile }) => ({
+		query : general.query,
+		user  : profile.user,
+	}));
 
 	const [{ data }] = useRequest({
 		method : 'POST',

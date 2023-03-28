@@ -5,10 +5,12 @@ import { useRequest } from '@cogoport/request';
 
 function useCreateTest({ setActiveStepper }) {
 	const router = useRouter();
+
 	const [{ loading = false }, trigger] = useRequest({
 		url    : 'create_test',
 		method : 'POST',
 	}, { manual: true });
+
 	const createTest = async ({ data, idArray, next }) => {
 		try {
 			const res = await trigger({
