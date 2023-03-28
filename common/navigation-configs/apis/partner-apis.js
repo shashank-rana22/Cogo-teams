@@ -10062,11 +10062,6 @@ const partner = {
 			service_name : 'fcl_freight_rate',
 			feature      : 'detention_demurrage',
 		},
-		{
-			api          : 'list_fcl_freight_document_charges',
-			access_type  : 'private',
-			service_name : 'fcl_freight_rate',
-		},
 	],
 	my_profile: [
 		{
