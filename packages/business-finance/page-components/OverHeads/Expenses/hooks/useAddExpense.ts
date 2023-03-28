@@ -23,7 +23,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		subCategory:expenseSubCategory,
 		// id:vendorId,
 		tds_deduction_rate:vendorTds,
-		bank_details:bankDetails = [],
+		// bank_details:bankDetails = [],
 	} = rowData || {};
 
 	const [addressData, setAddressData] = useState<AddressInterface>({});
@@ -139,6 +139,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		serial_id:vendorSerialId,
 		kyc_status:kycStatus,
 		registration_type:registrationType,
+		bank_details:bankDetails,
 	} = vendorData || {};
 
 	const [{ data:responseData, loading }, trigger] = useRequestBf(
