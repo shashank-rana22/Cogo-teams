@@ -101,7 +101,8 @@ function VenderComponent() {
 				{kycStatus === 'VERIFIED' && 	(
 					<div className={styles.verified}>
 						<div>
-							<IcMFtick color="#67C676" />
+							{/* <IcMFtick color="#67C676" /> */}
+							{/* TO BE APPLIED LATER ON  */}
 						</div>
 						<div>&nbsp;Verified </div>
 					</div>
@@ -111,9 +112,9 @@ function VenderComponent() {
 				&& (
 					<div className={styles.pending}>
 						<div className={styles.icm_info}>
-							<IcMInfo
+							{/* <IcMInfo
 								color="#e10d1f"
-							/>
+							/> */}
 
 						</div>
 						<div>
@@ -125,9 +126,9 @@ function VenderComponent() {
 				{ kycStatus !== 'VERIFIED' && kycStatus !== 'REJECTED' && (
 					<div className={styles.pending}>
 						<div className={styles.icm_info}>
-							<IcMInfo
+							{/* <IcMInfo
 								color="#e10d1f"
-							/>
+							/> */}
 
 						</div>
 						<div>
@@ -141,12 +142,13 @@ function VenderComponent() {
 
 	function RenderPayments(item:any) {
 		const { item: itemData = {} } = item;
-		const { totalPaidAmount = 0, currentMonthPaidAmount = 0 } = itemData;
+		const { totalPaidAmount = 0, currentMonthPaidAmount = 0, currency = '' } = itemData;
+
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
 				{totalPaidAmount}
 				{' '}
-				<Tooltip content={`Current Month: ${currentMonthPaidAmount}`} placement="top">
+				<Tooltip content={`Current Month: ${currency} ${currentMonthPaidAmount}`} placement="top">
 					<IcMInfo />
 				</Tooltip>
 			</div>

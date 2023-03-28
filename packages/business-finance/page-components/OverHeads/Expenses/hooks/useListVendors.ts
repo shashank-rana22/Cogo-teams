@@ -46,10 +46,8 @@ const useListVendors = () => {
 				// }
 
 				// ============/
-				if (true) {
-					const current = timeline?.indexOf(active);
-					if (current < timeline.length - 1) { setActive(timeline[current + 1]); }
-				}
+				const current = timeline?.indexOf(active);
+				if (current < timeline.length - 1) { setActive(timeline[current + 1]); }
 				// ============/
 			} else {
 				await trigger();

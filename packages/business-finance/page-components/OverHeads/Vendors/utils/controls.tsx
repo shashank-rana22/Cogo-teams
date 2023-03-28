@@ -1,7 +1,7 @@
 const Controls = {
 	KYC_STATUS: {
 		value       : 'KYC_STATUS',
-		placeholder : 'Select KYC Status',
+		placeholder : 'KYC Status',
 		options     : [
 			{
 				label : 'Verified',
@@ -23,7 +23,7 @@ const Controls = {
 	},
 	CATEGORY: {
 		value       : 'CATEGORY',
-		placeholder : 'Select Category',
+		placeholder : 'Category',
 		options     : [
 			{
 				label : 'Rent',
