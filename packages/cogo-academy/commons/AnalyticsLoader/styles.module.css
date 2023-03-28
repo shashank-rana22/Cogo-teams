@@ -1,0 +1,52 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
+	margin-top: 12px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.flex_center {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+	justify-content: center;
+}
+
+.pills_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.right_pills {
+	display: flex;
+	justify-content: space-between;
+	width: 40%;
+}
+
+.cards {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 12px 18px;
+	margin: 12px 12px 12px 0;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
+}
+
+.card_heading {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 12px;
+}
+
+.card_content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-top: 8px;
+}

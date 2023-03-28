@@ -4,3 +4,4 @@ export { default as ConfigurationEngine } from './page-components/CreateFAQ/Conf
 export { default as Upload } from './page-components/CreateFAQ/Upload';
 export { default as Question } from './page-components/CreateFAQ/Question';
 export { default as AnswerPage } from './page-components/FAQs/page-components/AnswerPage';
+export { default as Announcements } from './page-components/Announcements';

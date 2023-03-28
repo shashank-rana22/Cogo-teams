@@ -15,7 +15,7 @@ const useListCogooneTimeline = ({
 }) => {
 	const [firstLoading, setFirstLoading] = useState(true);
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/list_cogoone_timeline',
+		url    : '/list_cogoone_timelines',
 		method : 'get',
 	}, { manual: true, autoCancel: false });
 
@@ -74,7 +74,7 @@ const useListCogooneTimeline = ({
 					...prev,
 					[id]: {
 						...(prev?.[id] || {}),
-						messagesData: { ...sortedMessages, ...prev?.[id]?.messagesData },
+						messagesData: { ...prev?.[id]?.messagesData, ...sortedMessages },
 						lastDocumentTimeStamp,
 						islastPage,
 					},
