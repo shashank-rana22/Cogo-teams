@@ -1,6 +1,6 @@
 .content {
 	border: 1px solid rgb(128 123 123);
-	border-radius: 5px;
+	border-radius: 6px;
 }
 
 .contentparent {
@@ -137,7 +137,7 @@
 .pills {
 	:global {
 		.ui_pill_container.ui_ps_size_sm {
-			padding: 3px 8px;
+			padding: 4px 8px;
 			font-size: 10px;
 			font-weight: 600;
 			background: white;
