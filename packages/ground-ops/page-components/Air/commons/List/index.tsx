@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
-import React from 'react';
+import { IcMArrowDown } from '@cogoport/icons-react';
+import React, { useState, ReactFragment } from 'react';
 
 import EmptyState from './EmptyState';
 import GetFinalList from './GetFinalList';
@@ -15,6 +16,8 @@ interface Props {
 	page?: number;
 	setPage?: Function;
 	functions?: FunctionObjects;
+	activeTab?: string;
+	Child?: ReactFragment;
 }
 
 function List({
@@ -24,9 +27,17 @@ function List({
 	page,
 	setPage,
 	functions,
+	activeTab = '',
+	Child = () => {},
 } :Props) {
 	const { data = {} } = listData;
 	const { finalData = [], resourceLoading } = GetFinalList({ data, listData, loading });
+	const [isOpen, setIsOpen] = useState(null);
+
+	const handleProgramDetail = (itm) => {
+		setIsOpen(isOpen === null ? itm.id : null);
+		setIsOpen(itm.id);
+	};
 
 	const render = () => {
 		let showlist = Array(6).fill(1);
@@ -40,7 +51,31 @@ function List({
 						fields={fields}
 						functions={functions}
 						loading={resourceLoading}
+						isOpen={isOpen}
+						Child={Child}
 					/>
+					{singleitem.blCategory === 'hawb' && ['approval_pending', 'approved_awb'].includes(activeTab) && (
+						<div
+							style={{ '--length': isOpen === singleitem.id ? 0 : '-20px' } as React.CSSProperties}
+							className={styles.accordian_style}
+						>
+							{isOpen === singleitem.id ? (
+								<IcMArrowDown
+									style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
+									onClick={() => {
+										setIsOpen(null);
+									}}
+								/>
+							) : (
+								<IcMArrowDown
+									style={{ cursor: 'pointer' }}
+									onClick={() => {
+										handleProgramDetail(singleitem);
+									}}
+								/>
+							)}
+						</div>
+					)}
 				</div>
 			));
 		}

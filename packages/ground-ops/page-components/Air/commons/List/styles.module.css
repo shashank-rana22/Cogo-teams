@@ -89,20 +89,18 @@
 	width: 60px;
 	height: 16px;
 	margin-right: auto;
-	margin-bottom: 8px;
+	margin-bottom: var(--length);
 	margin-left: auto;
 	text-align: center;
 	background: #fff;
 	border: 1px solid #eceff8;
 	border-top: none;
+	top: var(--length);
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	box-shadow: 0 5px 10px rgb(0 0 0 / 5%);
 }
 
-.accordian_style:hover {
-	background: #fff;
-}
 
 .info_content {
 	display: flex;

@@ -101,6 +101,7 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 					page={page}
 					setPage={setPage}
 					listAPi={listAPi}
+					activeTab={activeTab}
 				/>
 			)}
 		</div>

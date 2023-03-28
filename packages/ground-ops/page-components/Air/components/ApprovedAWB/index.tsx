@@ -7,7 +7,7 @@ import { ApprovedAWBFields } from '../../configurations/approved_awb';
 import UploadModal from '../UploadModal';
 
 function ApprovedAWB({
-	data, loading, page, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi,
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi, activeTab,
 }) {
 	const [showUpload, setShowUpload] = useState(null);
 	const { fields } = ApprovedAWBFields;
@@ -65,6 +65,7 @@ function ApprovedAWB({
 				setPage={setPage}
 				loading={loading}
 				functions={functions}
+				activeTab={activeTab}
 			/>
 			<UploadModal
 				showUpload={showUpload}

@@ -5,13 +5,14 @@ import React, { useState } from 'react';
 import List from '../../commons/List';
 import { ApprovalPendingFields } from '../../configurations/approval_pending_fields';
 import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
+import HAWBList from '../HawbList';
 import UploadModal from '../UploadModal';
 
 import DownloadModal from './DownloadModal';
 import styles from './styles.module.css';
 
 function ApprovalPending({
-	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPi,
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPi, activeTab,
 }) {
 	const { fields } = ApprovalPendingFields;
 	const [showApprove, setShowApprove] = useState(null);
@@ -113,6 +114,8 @@ function ApprovalPending({
 				page={page}
 				setPage={setPage}
 				functions={functions}
+				activeTab={activeTab}
+				Child={HAWBList}
 			/>
 			{show && <DownloadModal show={show} setShow={setShow} />}
 			{showApprove && (
