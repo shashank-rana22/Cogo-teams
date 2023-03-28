@@ -5,6 +5,11 @@ const crm_feedback_dashboard = [
 		service_name : 'allocation',
 	},
 	{
+		api          : 'get_allocation_feedback_requests',
+		access_type  : 'private',
+		service_name : 'allocation',
+	},
+	{
 		api          : 'list_organizations',
 		access_type  : 'private',
 		service_name : 'organization',
