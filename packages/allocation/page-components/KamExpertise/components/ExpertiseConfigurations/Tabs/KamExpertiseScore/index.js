@@ -94,6 +94,7 @@ function KamExpertiseScoreConfig({
 	const controls = getControls({
 		modifiedControls : CONTROL_MAPPING[scoring_type],
 		typeFilter       : addConditionModal.type,
+		showModal,
 	});
 
 	const options = list.map((value) => ({
