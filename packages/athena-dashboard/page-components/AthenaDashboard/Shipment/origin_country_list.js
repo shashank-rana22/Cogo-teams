@@ -1,6 +1,6 @@
-const destination_port = [
+const origin_country = [
 	{
-		name        : 'destination_port',
+		name        : 'origin_country',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
 		valueKey    : 'name',
@@ -8,11 +8,11 @@ const destination_port = [
 		multiple    : true,
 		params      : {
 			filters: {
-				type: ['seaport', 'airport'],
+				type: ['country'],
 			},
 		},
 
 	},
 ];
 
-export default destination_port;
+export default origin_country;

@@ -22,7 +22,8 @@
     margin-top: 50px;
      background-color: white;
     box-shadow: 0 0 4px rgb(0 0 0 / 15%);
-    height: 120%;
+    height: 97%;
+    
    
     @media (max-width: 768px) {
         overflow-x: scroll;
@@ -243,5 +244,9 @@
     width: 97%;
     margin-right: 10px;
     height: 850px;
+}
+.controller{
+    margin-top: 5px;
+    width: 250px;
 }
 

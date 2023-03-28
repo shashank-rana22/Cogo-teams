@@ -1,9 +1,8 @@
-const controls = [
+const destination_country = [
 	{
-		name        : 'country',
+		name        : 'destination_country',
 		type        : 'asyncSelect',
-		// asyncKey    : 'countries',
-		asyncKey    : 'countries',
+		asyncKey    : 'list_locations',
 		valueKey    : 'name',
 		initialCall : true,
 		multiple    : true,
@@ -16,4 +15,4 @@ const controls = [
 	},
 ];
 
-export default controls;
+export default destination_country;

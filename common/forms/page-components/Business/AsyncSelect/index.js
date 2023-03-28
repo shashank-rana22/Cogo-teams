@@ -42,7 +42,7 @@ const keyAsyncFieldsParamsMapping = {
 	segments           : asyncFieldsCampaignSegments,
 	allot_bank         : asyncAllotBanks,
 	athena_countries   : asyncCountries,
-	countries          : asyncFieldsLocations,
+	list_locations     : asyncFieldsLocations,
 };
 
 function AsyncSelect(props) {
