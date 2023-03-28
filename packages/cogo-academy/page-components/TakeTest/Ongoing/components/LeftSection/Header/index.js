@@ -19,6 +19,7 @@ function Header({ data = {}, total_question, testData,	setShowTimeOverModal }) {
 				{' '}
 				{total_question}
 			</div>
+
 			<Timer
 				test_start_time={time}
 				duration={testData?.test_duration}

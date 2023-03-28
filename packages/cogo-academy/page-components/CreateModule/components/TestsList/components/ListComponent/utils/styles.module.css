@@ -41,3 +41,7 @@
 .duration {
 	color: #4f4f4f;
 }
+
+.status {
+	display: flex;
+}

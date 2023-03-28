@@ -11,7 +11,7 @@ import QuestionsList from './QuestionsList';
 function ControlCenter() {
 	const { query } = useRouter();
 
-	const { activeTab: currentActiveTab } = query || {};
+	const { activeTab: currentActiveTab, testModuleTab } = query || {};
 
 	const [activeTab, setActiveTab] = useState(currentActiveTab || 'manage_faq');
 	const [switchDashboard, setSwitchDashboard] = useState(true);
@@ -19,6 +19,14 @@ function ControlCenter() {
 	if (!switchDashboard) {
 		return <Analytics setSwitchDashboard={setSwitchDashboard} />;
 	}
+	const handleChangeTab = (val) => {
+		// eslint-disable-next-line max-len
+		const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?activeTab=${val}`;
+
+		window.history.pushState({ path: newurl }, '', newurl);
+
+		setActiveTab(val);
+	};
 
 	return (
 		<div>
@@ -27,7 +35,7 @@ function ControlCenter() {
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"
-				onChange={setActiveTab}
+				onChange={handleChangeTab}
 				fullWidth
 			>
 				<TabPanel name="manage_faq" title="Manage FAQ">
@@ -35,7 +43,7 @@ function ControlCenter() {
 				</TabPanel>
 
 				<TabPanel name="test_module" title="Test Module">
-					<HomePage />
+					<HomePage testModuleTab={testModuleTab} />
 				</TabPanel>
 			</Tabs>
 

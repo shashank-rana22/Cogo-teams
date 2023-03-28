@@ -147,7 +147,7 @@ function FormComponent({
 						</div>
 					</div>
 
-					<div style={{ marginBottom: mode === 'view' ? '16px' : '80px' }}>
+					<div style={{ marginBottom: mode === 'view' || isNewQuestion ? '16px' : '60px' }}>
 						<TextAreaController
 							control={control}
 							{...controls[4]}

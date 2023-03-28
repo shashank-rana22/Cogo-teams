@@ -62,7 +62,7 @@ function TestDetailsModal(props) {
 							</p>
 						</div>
 						<div>
-							<h5>Pass %</h5>
+							<h5>Cutoff Pass %</h5>
 							<p>
 								{cut_off_percentage}
 							</p>
