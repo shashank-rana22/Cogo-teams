@@ -1,6 +1,7 @@
 import { Popover, Select, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select';
+import { isEmpty } from '@cogoport/utils';
 
 import CONTROLS from '../../config/CONTROLS_CONFIG.json';
 import handleShipmentTypeChange from '../../helpers/handleShipmentTypeChange';
@@ -39,6 +40,14 @@ function PopoverContent({ stateProps }) {
 
 export default function ScopeAndFilters({ stateProps }) {
 	const { filters, setFilters } = stateProps;
+
+	const isFiltersApplied = Object.entries(filters)
+		.some(([key, val]) => {
+			if (key === 'shipment_type') return false;
+			if (key === 'page') return val !== 1;
+			return !isEmpty(val);
+		});
+
 	const clearFilters = () => {
 		setFilters({ shipment_type: filters.shipment_type, page: 1 });
 	};
@@ -50,6 +59,7 @@ export default function ScopeAndFilters({ stateProps }) {
 				size="sm"
 				className={styles.filter_text}
 				onClick={clearFilters}
+				disabled={!isFiltersApplied}
 			>
 				Clear Filters
 			</Button>

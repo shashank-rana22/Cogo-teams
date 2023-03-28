@@ -39,7 +39,7 @@ export default function TabsAndFilters({ stateProps, tabs }) {
 				<Input
 					placeholder="Search Shipments"
 					type="search"
-					value={filters.q}
+					value={filters.q || ''}
 					onChange={(val) => setFilters({ ...filters, q: val, page: 1 })}
 				/>
 			</div>
