@@ -74,7 +74,7 @@ function Header({
 			<div className={styles.heading_reset}>
 				<div className={styles.heading}>Filters</div>
 				<div className={styles.rest}>
-					<Button size="sm" themeType="primary" onClick={handleReset}>
+					<Button type="button" size="sm" themeType="primary" onClick={handleReset}>
 						Reset
 					</Button>
 
@@ -95,7 +95,7 @@ function Header({
 				})}
 			</div>
 			<div className={styles.footer}>
-				<Button size="md" themeType="secondary" onClick={handleApply}>
+				<Button type="button" size="md" themeType="secondary" onClick={handleApply}>
 					Apply
 				</Button>
 			</div>
@@ -126,7 +126,7 @@ function Header({
 						visible={visible}
 						onClickOutside={() => setVisible(false)}
 					>
-						<Button size="lg" themeType="secondary" onClick={() => setVisible(true)}>
+						<Button type="button" size="lg" themeType="secondary" onClick={() => setVisible(true)}>
 							Filters
 							<div className={styles.icon_container}>
 								<IcMFilter style={{ marginLeft: '6px' }} />

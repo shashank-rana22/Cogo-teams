@@ -1,4 +1,5 @@
 import { Popover, Accordion, Button, Modal, Pill } from '@cogoport/components';
+// import getGeoConstants from '@cogoport/globalization/constants/geo/geo';
 import { IcMOverflowDot, IcMAnnouncement, IcMEyeopen, IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -9,7 +10,8 @@ import Preview from '../../../CreateAnnouncement/AnnouncementForm/Preview';
 import DisplayAttachments from './DisplayAttachments';
 import styles from './styles.module.css';
 
-const ADMIN_IDS = ['7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44'];
+const ADMIN_IDS = ['13cb3b79-95c2-49ca-9ebd-8c3ee1996981'];
+// const geo = getGeoConstants();
 
 const ANNOUNCEMENT_TYPE_MAPPING = {
 	general        : 'General',
@@ -81,17 +83,17 @@ function DisplayCard({
 		<div className={styles.buttons_container}>
 			{data.status === 'draft' && ADMIN_IDS.includes(user_id) ? (
 				<Button
-					type="view"
+					type="button"
 					themeType="primary"
 					size="md"
 					onClick={() => setShowGoLiveModal(true)}
 				>
 					<IcMAnnouncement height={20} width={20} className={styles.button_icon} />
-					Go Live
+					Publish
 				</Button>
 			) : null}
 			<Button
-				type="view"
+				type="button"
 				themeType="secondary"
 				size="md"
 				onClick={() => handleView(index)}
@@ -101,7 +103,7 @@ function DisplayCard({
 			</Button>
 			{activeTab === 'active' && data?.status === 'draft' && (
 				<Button
-					type="edit"
+					type="button"
 					themeType="secondary"
 					size="md"
 					onClick={() => editDetails()}
@@ -113,7 +115,7 @@ function DisplayCard({
 			{activeTab === 'active' && data?.status === 'draft' && (
 
 				<Button
-					type="edit"
+					type="button"
 					themeType="secondary"
 					size="md"
 					onClick={() => setShowDeleteModal(true)}
@@ -263,7 +265,7 @@ function DisplayCard({
 					<Modal.Footer>
 						<div className={styles.delete_buttons}>
 							<Button
-								type="cancel"
+								type="button"
 								themeType="secondary"
 								size="md"
 								disabled={loadingUpdate}
@@ -272,7 +274,7 @@ function DisplayCard({
 								Cancel
 							</Button>
 							<Button
-								type="delete"
+								type="button"
 								themeType="primary"
 								size="md"
 								loading={loadingUpdate}

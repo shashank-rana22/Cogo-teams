@@ -87,7 +87,7 @@ function EditModal({
 						Cancel
 					</Button>
 					<Button
-						button="type"
+						type="button"
 						themeType="primary"
 						size="md"
 						loading={loading}

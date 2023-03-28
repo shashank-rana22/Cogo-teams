@@ -169,6 +169,7 @@ export default {
 		],
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
+		cogoacademy_admin_id  : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
 	},
 	options: {
 		registration_types: [
