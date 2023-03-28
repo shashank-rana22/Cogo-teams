@@ -1,0 +1,140 @@
+.invoice_details_container_bg {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	overscroll-behavior: contain;
+	cursor: auto;
+	background-color: #303b67;
+	opacity: 0.4;
+}
+
+.icon_view {
+	cursor: pointer;
+}
+
+.invoice_details_container {
+	position: fixed;
+	top: 30px;
+	right: 0;
+	bottom: 20px;
+	z-index: 1000;
+	overflow-y: auto;
+	background: white;
+	background-color: none;
+}
+
+.content_caret {
+	display: flex;
+}
+
+.header_details {
+	display: flex;
+	justify-content: flex-start;
+	width: 100%;
+	padding: 20px 15px 15px 20px;
+	font-size: 16px;
+	font-weight: 900;
+	color: #303b67;
+	background: #fff;
+	border-bottom: 1px solid #ed3726;
+}
+
+.body_details_card {
+	margin: 24px;
+	border-bottom: 1px solid #bdbdbd;
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 65px;
+	color: #fff;
+	cursor: pointer;
+	background: #ed3726;
+	border-radius: 0 8px 8px 0;
+	transform: rotate(180deg);
+}
+
+.invoice_card_data {
+	padding: 10px 16px;
+	margin-bottom: 20px;
+	font-weight: 400;
+	color: #fff;
+	background: #333;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+.supplier_data_body {
+	margin: 12px 0 8px;
+}
+
+.supplier_data_header {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 4px 0 14px 4px;
+	font-size: 14px;
+	border-bottom: 1px solid #fff;
+}
+
+.information {
+	margin: 0 24px 24px;
+	color: #393f70;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 4px #d1d1d1;
+}
+
+.data_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px;
+	font-size: 12px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.dropdown_container {
+	cursor: pointer;
+}
+
+.information_data {
+	display: flex;
+	flex-direction: column;
+	max-height: 300px;
+	padding: 14px;
+	overflow-y: scroll;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+
+	::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.hr {
+	border-top: 1px solid #bdbdbd;
+}
+
+.tag_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1px 6px;
+	background-color: grey;
+	border-radius: 4px;
+}
+
+.placeholder_container {
+	width: 492px;
+	height: 45px;
+	margin: 5px 1px 14px 25px;
+	border-radius: 4px;
+}
