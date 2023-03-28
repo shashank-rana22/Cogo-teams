@@ -26,7 +26,6 @@ const useGetRpaMails = (
 		{
 			url    : `${process.env.COGO_LENS_URL}/${apis.list}`,
 			method : 'GET',
-			// paramsSerializer: (params) => qs.stringify(params),
 		},
 		{ manual: true },
 	);
