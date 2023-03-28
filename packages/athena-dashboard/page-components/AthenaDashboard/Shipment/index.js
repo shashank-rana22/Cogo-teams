@@ -87,6 +87,7 @@ function Shipment() {
 						/>
 					);
 				})}
+
 				<div className={styles.right_container}>
 					<Button
 						size="md"
@@ -98,10 +99,12 @@ function Shipment() {
 						Search
 					</Button>
 				</div>
+
 			</div>
 			<div className={styles.lowerhalf}>
 				<div className={styles.tableandtabs}>
 					<div>
+
 						<div className={styles.tablower}>
 							<Tabs
 								activeTab={activeTab}
@@ -109,20 +112,22 @@ function Shipment() {
 								onChange={setActiveTab}
 							>
 								<TabPanel name="Shipments" title="Shipments" />
-
 								<TabPanel name="Consignee" title="Consignee" />
 								<TabPanel name="Shipper" title="Shipper" />
 							</Tabs>
 						</div>
+
 						<div className={styles.exportinfo}>
 							<div className={styles.shipmentreport}>
 								Shipment Report
 							</div>
+
 							<div className={styles.exportresults}>
 								<IcMDownload style={{ 'padding-right': '3px' }} />
 								Export Results
 							</div>
 						</div>
+
 						<div className={styles.sortbybox}>
 							<div className={styles.sortby}>
 								Sort By
@@ -132,7 +137,9 @@ function Shipment() {
 								<option value="Arrival date(newest first)">Shipment date(newest first)</option>
 							</select>
 						</div>
+
 					</div>
+
 					{data.length !== 0 ? (
 						<div className={styles.tablediv}>
 							<Table
@@ -172,10 +179,12 @@ function Shipment() {
 						<div className={styles.daterange}>
 							DATE RANGE
 						</div>
+
 						<div className={styles.fromto}>
 							<div>From</div>
 							<div className={styles.to}>To</div>
 						</div>
+
 						<div style={{ margin: '0px' }}>
 							<DateRangepicker
 								isPreviousDaysAllowed
@@ -185,6 +194,7 @@ function Shipment() {
 							/>
 						</div>
 					</div>
+
 					<div className={styles.leftpadding}>
 
 						{controls[0].map((Item) => {
@@ -211,6 +221,7 @@ function Shipment() {
 						})}
 					</div>
 				</div>
+
 			</div>
 		</div>
 	);
