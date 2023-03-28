@@ -21,7 +21,7 @@ function WarningModal({ setShowModal, setShowExpenseModal, showWarning, setShowW
 						<IcMInfo className={styles.warning} height={20} width={20} />
 						<div className={styles.text}>
 							<div>This action will delete all the progress that you have made.</div>
-							<div> Are you sure you want to quit?</div>
+							<div> Are you sure you want to quit ?</div>
 						</div>
 						<div className={styles.buttons}>
 							<div>

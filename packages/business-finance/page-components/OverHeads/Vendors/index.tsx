@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { Select, Button, Input, Tooltip } from '@cogoport/components';
-import { IcMSearchlight, IcMFtick, IcMInfo } from '@cogoport/icons-react';
+import { IcMCrossInCircle, IcMSearchlight, IcMFtick, IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
@@ -101,8 +101,7 @@ function VenderComponent() {
 				{kycStatus === 'VERIFIED' && 	(
 					<div className={styles.verified}>
 						<div>
-							{/* <IcMFtick color="#67C676" /> */}
-							{/* TO BE APPLIED LATER ON  */}
+							<IcMFtick color="#67C676" />
 						</div>
 						<div>&nbsp;Verified </div>
 					</div>
@@ -112,9 +111,9 @@ function VenderComponent() {
 				&& (
 					<div className={styles.pending}>
 						<div className={styles.icm_info}>
-							{/* <IcMInfo
+							<IcMCrossInCircle
 								color="#e10d1f"
-							/> */}
+							/>
 
 						</div>
 						<div>
@@ -126,10 +125,9 @@ function VenderComponent() {
 				{ kycStatus !== 'VERIFIED' && kycStatus !== 'REJECTED' && (
 					<div className={styles.pending}>
 						<div className={styles.icm_info}>
-							{/* <IcMInfo
+							<IcMInfo
 								color="#e10d1f"
-							/> */}
-
+							/>
 						</div>
 						<div>
 							Pending

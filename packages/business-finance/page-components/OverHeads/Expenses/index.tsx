@@ -21,10 +21,6 @@ import styles from './styles.module.css';
 import { expenseRecurringConfig, expenseNonRecurringConfig } from './utils/config';
 import WarningModal from './WarningModal';
 
-// interface ListInterface {
-// 	list?:{ length?:number }
-// }
-
 interface ItemDataInterface {
 	expensePeriod?:string,
 	recurringAmount?:number | string,
@@ -164,8 +160,8 @@ function ExpenseComponent() {
 			<Button
 				themeType="secondary"
 				disabled={itemData?.status !== 'ACCEPTED'}
-				size="sm"
-				style={{ border: '1px solid black' }}
+				size="md"
+				style={{ border: '1px solid #E0E0E0' }}
 				onClick={() => handleAddExpense(itemData)}
 			>
 				Add Expense
@@ -375,7 +371,15 @@ function ExpenseComponent() {
 	const showDropDown = (singleItem:{ id?:string }) => {
 		const { id } = singleItem || {};
 
-		if (recurringState === 'recurring') return <ShowMore id={id} recurringState={recurringState} />;
+		if (recurringState === 'recurring') {
+			return (
+				<ShowMore
+					id={id}
+					recurringState={recurringState}
+					showExpenseModal={showExpenseModal}
+				/>
+			);
+		}
 		return null;
 	};
 

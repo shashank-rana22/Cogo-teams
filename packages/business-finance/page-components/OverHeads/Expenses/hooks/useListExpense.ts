@@ -15,7 +15,7 @@ interface Sort {
 }
 interface Filter {
 	expenseFilters?:Filters,
-	id?:string,
+	id?:string | number,
 	expenseType?:string,
 	sort?:Sort,
 }

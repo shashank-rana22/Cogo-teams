@@ -59,9 +59,9 @@
 
 .icm_info {
 	padding-bottom: 4px;
-	margin-right: 4px;
 	font-size: 12px;
 	rotate: 180deg;
+	margin: 0px 4px 8px 0px
 }
 .no_data {
 	display: flex;

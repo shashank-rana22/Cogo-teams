@@ -25,7 +25,13 @@ interface BillInterface {
 	approvedByUser?:{ id?:string | number },
 }
 
-function ShowMore({ id, recurringState }) {
+interface Props {
+	id?:number | string,
+	recurringState?:string,
+	showExpenseModal?:boolean,
+}
+
+function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 	const [moreData, setMoreData] = useState(false);
 	const { getList, listData, listLoading } = useListExpense({ id, expenseType: 'RECURRING' });
 	const billList = listData?.list;
@@ -35,6 +41,10 @@ function ShowMore({ id, recurringState }) {
 	useEffect(() => {
 		if (moreData) { getList(); }
 	}, [getList, moreData]);
+
+	useEffect(() => {
+		if (showExpenseModal === true) { setMoreData(false); }
+	}, [showExpenseModal]);
 
 	return (
 		<div className={styles.container}>

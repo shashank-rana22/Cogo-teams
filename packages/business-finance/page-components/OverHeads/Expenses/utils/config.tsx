@@ -49,24 +49,25 @@ export const expenseRecurringConfig = () => {
 			{
 				label : 'Agreement',
 				func  : 'showAgreement',
-				span  : 2,
+				span  : 1.5,
 			},
 			{
-				label : 'Category',
-				span  : 1.2,
-				func  : 'renderCategory',
+				label  : 'Category',
+				span   : 1.8,
+				func   : 'renderCategory',
+				styles : { display: 'flex', justifyContent: 'center' },
 			},
 			{
 				label   : 'Created on',
 				func    : 'getCreatedOn',
 				span    : 2,
 				sorting : { name: 'createdDateSortBy' },
-
 			},
 			{
-				label : renderExpensePeriod(),
-				span  : 2.5,
-				func  : 'renderExpensePeriod',
+				label  : renderExpensePeriod(),
+				span   : 2,
+				func   : 'renderExpensePeriod',
+				styles : { display: 'flex', justifyContent: 'center' },
 			},
 			{
 				label   : 'Recurring Amount',
@@ -74,16 +75,19 @@ export const expenseRecurringConfig = () => {
 				span    : 2,
 				func    : 'renderRecurringAmount',
 				sorting : { name: 'amountSortBy' },
+				styles  : { display: 'flex', justifyContent: 'center' },
 			},
 			{
-				label : 'Approved By',
-				func  : 'getApprovedByRecurring',
-				span  : 1.5,
+				label  : 'Approved By',
+				func   : 'getApprovedByRecurring',
+				span   : 1.5,
+				styles : { display: 'flex', justifyContent: 'center' },
 			},
 			{
-				key  : 'actionButton',
-				span : 1.5,
-				func : 'addExpense',
+				key    : 'actionButton',
+				span   : 1.5,
+				func   : 'addExpense',
+				styles : { display: 'flex', justifyContent: 'center' },
 			},
 		],
 	};
@@ -97,7 +101,7 @@ export const expenseNonRecurringConfig = () => ({
 		{
 			label : 'Name',
 			key   : 'sellerDetails.organizationName',
-			span  : 1.2,
+			span  : 1.8,
 		},
 		{
 			label  : 'Invoice Number',
@@ -113,14 +117,14 @@ export const expenseNonRecurringConfig = () => ({
 		{
 			label   : 'Invoice Amount',
 			key     : 'grandTotal',
-			span    : 2,
+			span    : 1.5,
 			sorting : { name: 'invoiceAmountSortType' },
 			styles  : { display: 'flex', justifyContent: 'center' },
 		},
 		{
 			label   : 'TDS',
 			key     : 'payableTds',
-			span    : 1,
+			span    : 1.2,
 			sorting : { name: 'tdsSortType' },
 			styles  : { display: 'flex', justifyContent: 'center' },
 		},

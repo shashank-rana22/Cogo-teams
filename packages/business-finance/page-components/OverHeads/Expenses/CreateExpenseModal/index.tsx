@@ -1,7 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import React, { useEffect, useState } from 'react';
 
-import useListVendors from '../hooks/useListVendors';
 import Timeline from '../Timeline';
 
 import CreateExpenseForm from './CreateExpenseForm';
@@ -33,15 +32,9 @@ function CreateExpenseModal({
 	const [nonRecurringData, setNonRecurringData] = useState({});
 	const [active, setActive] = useState('Expense Details');
 
-	const { listVendorApi, loading } = useListVendors();
-
 	const handleClick = () => {
-		if (active === 'Expense Details' && createExpenseType === 'nonRecurring') {
-			listVendorApi({ checkCombination: true, nonRecurringData, timeline, active, setActive });
-		} else {
-			const current = timeline.indexOf(active);
-			if (current < timeline.length - 1) { setActive(timeline[current + 1]); }
-		}
+		const current = timeline.indexOf(active);
+		if (current < timeline.length - 1) { setActive(timeline[current + 1]); }
 	};
 	const handleBack = () => {
 		const current = timeline.indexOf(active);
@@ -106,7 +99,6 @@ function CreateExpenseModal({
 				{timeline.indexOf(active) !== timeline.length - 1
 					? (
 						<Button
-							loading={loading}
 							onClick={handleClick}
 						>
 							Save & Next
