@@ -1,7 +1,7 @@
-import { Button, Checkbox, cl } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import useGetControls from '../../../../configurations/filter-controls';
 

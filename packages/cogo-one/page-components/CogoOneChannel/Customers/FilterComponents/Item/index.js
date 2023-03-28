@@ -1,4 +1,3 @@
-import { cl } from '@cogoport/components';
 import { SelectController, CheckboxGroupController, RadioGroupController } from '@cogoport/forms';
 import React from 'react';
 
