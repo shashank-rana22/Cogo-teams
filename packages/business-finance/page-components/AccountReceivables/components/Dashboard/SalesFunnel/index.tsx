@@ -6,7 +6,24 @@ import { SALES_FUNNEL_OPTIONS } from '../../../constants';
 
 import styles from './styles.module.css';
 
-function SalesFunnel({ salesFunnelData, salesFunnelMonth, setSalesFunnelMonth, salesFunnelLoading }) {
+interface SalesFunnelData {
+	draftInvoicesCount?: string,
+	draftToFinanceAcceptedPercentage?: string,
+	financeAcceptedInvoiceCount?: string,
+	financeToIrnPercentage?: string,
+	irnGeneratedInvoicesCount?: string,
+	settledInvoicesCount?: string,
+	settledPercentage?: string
+}
+
+interface SalesFunnelProps {
+	salesFunnelData?: SalesFunnelData,
+	salesFunnelMonth?: string,
+	setSalesFunnelMonth?: (p:string)=>void,
+	salesFunnelLoading?: boolean
+}
+
+function SalesFunnel({ salesFunnelData, salesFunnelMonth, setSalesFunnelMonth, salesFunnelLoading }: SalesFunnelProps) {
 	const {
 		draftInvoicesCount = '',
 		draftToFinanceAcceptedPercentage = '',

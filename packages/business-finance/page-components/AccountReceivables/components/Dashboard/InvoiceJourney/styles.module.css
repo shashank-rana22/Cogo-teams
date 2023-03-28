@@ -1,4 +1,3 @@
-/* stylelint-disable selector-class-pattern */
 .container {
 	width: 50%;
 	height: 300px;
@@ -117,26 +116,6 @@
 .color_tat {
 	margin-left: 4px;
 	color: #ed3726;
-}
-
-.date {
-	:global {
-		.react-datepicker__input-container {
-			.react-datepicker__close-icon::after {
-				background: none !important;
-			}
-
-			.react-datepicker-ignore-onclickoutside {
-				height: 40px;
-			}
-
-			.react-datepicker__close-icon {
-				right: -5px;
-				background: none !important;
-				border: none;
-			}
-		}
-	}
 }
 
 .invoice_journey_loader {

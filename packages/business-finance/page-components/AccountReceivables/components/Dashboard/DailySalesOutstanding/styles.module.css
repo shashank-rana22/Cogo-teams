@@ -75,3 +75,18 @@
 	display: flex;
 	align-items: center;
 }
+
+.sales_container {
+	display: flex;
+	align-items: center;
+}
+
+.bar_chart {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.toggle_style {
+	display: flex;
+	align-items: center;
+}

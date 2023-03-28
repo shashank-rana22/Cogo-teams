@@ -7,7 +7,11 @@ import useGetInvoiceJourney from '../../../hooks/useGetInvoiceJourney';
 
 import styles from './styles.module.css';
 
-function InvoiceJourney({ filterValue }) {
+interface InvoiceJourneyProps {
+	filterValue?: object
+}
+
+function InvoiceJourney({ filterValue }: InvoiceJourneyProps) {
 	const [month, setMonth] = useState('');
 
 	const { journeyData, journeyLoading } = useGetInvoiceJourney({ month, filterValue });
@@ -63,15 +67,13 @@ function InvoiceJourney({ filterValue }) {
 						<div className={styles.border} />
 					</div>
 
-					<div className={styles.date}>
-						<Select
-							value={month}
-							onChange={(val:string) => onChange(val)}
-							placeholder="By Month"
-							isClearable
-							options={SALES_FUNNEL_OPTIONS}
-						/>
-					</div>
+					<Select
+						value={month}
+						onChange={(val:string) => onChange(val)}
+						placeholder="By Month"
+						isClearable
+						options={SALES_FUNNEL_OPTIONS}
+					/>
 
 				</div>
 

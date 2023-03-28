@@ -2,13 +2,17 @@ import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
-import EmptyState from '../../../../commons/EmptyStateDocs';
 import BarChart from '../../../commons/BarChart';
 import DashboardLoader from '../../../commons/DashboardLoader';
+import EmptyState from '../../../commons/EmptyStateDocs';
 
 import styles from './styles.module.css';
 
-function OutstandingAge({ data, loading }) {
+interface OutsatndingProps {
+	data?: object[],
+	loading?: boolean
+}
+function OutstandingAge({ data, loading }: OutsatndingProps) {
 	const outstandingData = Object.keys(data).map((key) => data[key]);
 
 	const { dashboardCurrency = '' } = outstandingData[0] || {};
@@ -51,7 +55,7 @@ function OutstandingAge({ data, loading }) {
 			);
 		}
 		return (
-			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+			<div className={styles.bar_chart}>
 				<div className={styles.vertical_bar_graph}>
 					<BarChart
 						currencyType={dashboardCurrency}
@@ -74,7 +78,7 @@ function OutstandingAge({ data, loading }) {
 					>
 						Outstanding
 					</div>
-					<div style={{ display: 'flex', alignItems: 'center' }}>
+					<div className={styles.styled_text_age}>
 						<div
 							className={styles.styled_text_age}
 						>

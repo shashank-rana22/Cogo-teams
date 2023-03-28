@@ -2,12 +2,17 @@ import { Tooltip, Table } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
-import EmptyState from '../../../../commons/EmptyStateDocs';
+import EmptyState from '../../../commons/EmptyStateDocs';
 import { OutstandingKamColumn } from '../../../configs/OutstandingKamColumns';
 
 import styles from './styles.module.css';
 
-function OutStandingKam({ kamOutstandingData, kamOutstandingLoading }) {
+interface OutsatndingKamProps {
+	kamOutstandingData?: object[],
+	kamOutstandingLoading?: boolean
+}
+
+function OutStandingKam({ kamOutstandingData, kamOutstandingLoading }: OutsatndingKamProps) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.styled_container}>
@@ -37,7 +42,7 @@ function OutStandingKam({ kamOutstandingData, kamOutstandingLoading }) {
 				</div>
 
 			</div>
-			<div style={{ padding: '20px', width: '74%' }}>
+			<div className={styles.table_width}>
 
 				<div className={styles.service_stats}>
 					<div>

@@ -9,7 +9,11 @@ import { filterControls } from './control';
 import styles from './styles.module.css';
 import TabData from './TabData';
 
-function DailySales({ filterValue }) {
+interface DailySalesProps {
+	filterValue?: object
+}
+
+function DailySales({ filterValue }: DailySalesProps) {
 	const [filters, setFilters] = useState({});
 	const [subActiveTab, setSubActiveTab] = useState<string>('SALES_INVOICE');
 	const [toggleData, setToggleData] = useState(false);

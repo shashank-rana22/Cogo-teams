@@ -295,8 +295,6 @@ export const SHIPMENT_TYPE_OPTIONS = [
 	{ value: 'FCL_CUSTOMS', label: 'FCL Customs' },
 	{ value: 'LCL_CUSTOMS', label: 'LCL Customs' },
 	{ value: 'AIR_CUSTOMS', label: 'AIR Customs' },
-	{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
-	{ value: 'rail_domestic_freight', label: 'Rail Domestic' },
 ];
 
 export const SALES_FUNNEL_OPTIONS = [

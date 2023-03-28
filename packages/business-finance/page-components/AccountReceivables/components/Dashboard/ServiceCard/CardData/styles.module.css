@@ -23,13 +23,17 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	margin: 0 32px;
 	font-size: 12px;
+	overflow-x: auto;
 }
 
 .item_container {
-	padding-right: 50px;
-	border-right: 1px solid #bdbdbd;
+	height: 100px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	justify-content: center;
 }
 
 .air_container {
@@ -48,4 +52,14 @@
 .name {
 	font-size: 14px;
 	font-weight: 600;
+}
+
+.right_line {
+	border-right: 1px solid #bdbdbd;
+	height: 72px;
+}
+
+.lable_container {
+	display: flex;
+	align-items: center;
 }

@@ -36,8 +36,13 @@
 	align-items: center;
 	width: 28%;
 	height: 20px;
-	font-size: 18px;
-	font-weight: 600;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.dashboard_currency {
+	font-size: 16px;
+	font-weight: 500;
 }
 
 .wrapper {
@@ -119,4 +124,9 @@
 	margin-left: 12px;
 	font-size: 12px;
 	font-weight: 400;
+}
+
+.placeholder_container {
+	width: 300px;
+	height: 40px; 
 }

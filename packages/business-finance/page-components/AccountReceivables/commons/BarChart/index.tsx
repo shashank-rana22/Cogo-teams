@@ -11,14 +11,19 @@ const tooltTipStyle = {
 	color        : '#000',
 };
 
+interface BarchartProps {
+	currencyType?: string,
+	data?: object[],
+	margin?: object,
+	dsoResponse?: boolean
+}
+
 function BarChart({
 	currencyType,
 	data = [],
-	dualData = '',
 	margin = {},
-	quarterly = '',
 	dsoResponse = false,
-}) {
+}: BarchartProps) {
 	const axisPadding = {
 		tickSize    : 0,
 		tickPadding : 12,
@@ -36,13 +41,13 @@ function BarChart({
 				layout="vertical"
 				enableGridY={!!dsoResponse}
 				axisLeft={axisPadding}
-				padding={quarterly ? 0.1 : 0.1}
+				padding={0.1}
 				maxValue="auto"
 				minValue="auto"
 				animate={false}
 				groupMode="grouped"
 				isInteractive
-				innerPadding={dualData ? 2 : 0}
+				innerPadding={0}
 				label="false"
 				tooltip={({ label, value }) => (
 					<strong style={tooltTipStyle}>

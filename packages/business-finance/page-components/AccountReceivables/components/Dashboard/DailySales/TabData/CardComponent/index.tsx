@@ -9,16 +9,29 @@ import ResponsiveChart from './ResponsiveChart';
 import BarData from './ResponsiveChart/data';
 import styles from './styles.module.css';
 
-function CardComponent({ subActiveTab, dailyStatsData, toggleData, loading, filters, filterValue }) {
+interface CardComponentProps {
+	subActiveTab?: string,
+	dailyStatsData?: object,
+	toggleData?: boolean,
+	loading?: boolean,
+	filters?: object,
+	filterValue?: object
+}
+
+function CardComponent({
+	subActiveTab, dailyStatsData, toggleData, loading,
+	filters, filterValue,
+}: CardComponentProps) {
 	const { data, loading:loadingData } = useGetGraph({ filters, filterValue, subActiveTab });
+
 	const getData = () => {
 		if (loading) {
 			return (
 				<div className={styles.place}>
-					<Placeholder height="80px" width="250px" margin="0px 16px 0px 0px" />
-					<Placeholder height="80px" width="250px" margin="0px 16px 0px 0px" />
-					<Placeholder height="80px" width="250px" margin="0px 16px 0px 0px" />
-					<Placeholder height="80px" width="250px" margin="0px 16px 0px 0px" />
+					<Placeholder className={styles.placeholder_container} />
+					<Placeholder className={styles.placeholder_container} />
+					<Placeholder className={styles.placeholder_container} />
+					<Placeholder className={styles.placeholder_container} />
 				</div>
 			);
 		}

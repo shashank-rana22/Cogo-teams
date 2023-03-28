@@ -1,10 +1,32 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function DateAndAccount({ outstandingData, outstandingLoading }) {
+interface OverallStats {
+	customersCount?: number,
+	dashboardCurrency?: string,
+	onAccountAmount?: number,
+	onAccountAmountForPastSevenDaysPercentage?: number,
+	openInvoiceAmountForPastSevenDaysPercentage?: number,
+	openInvoicesAmount?: number,
+	openInvoicesCount?: number,
+	totalOutstandingAmount?: number
+}
+
+interface OutsatndingProps {
+	outstandingServiceWise?: object,
+	overallStats?: OverallStats,
+}
+
+interface DateAndAccountProps {
+	outstandingData?: OutsatndingProps,
+	outstandingLoading?: boolean
+}
+
+function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountProps) {
 	const {
 		overallStats = {},
 	} = outstandingData || {};
@@ -15,12 +37,12 @@ function DateAndAccount({ outstandingData, outstandingLoading }) {
 			<div className={styles.over_all_data}>
 				<div className={styles.account_receivables}>
 
-					{outstandingLoading ? <Placeholder style={{ width: '300px', height: '40px' }} />
+					{outstandingLoading ? <Placeholder className={styles.placeholder_container} />
 						: (
 							<>
 								<div className={styles.account_receivables_line}>
-									<div>
-										{overallStats.dashboardCurrency || 'INR'}
+									<div className={styles.dashboard_currency}>
+										{overallStats.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
 									</div>
 									<div className={styles.account_receivables_amount}>
 										<Tooltip content={(
@@ -28,6 +50,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }) {
 												{getFormattedPrice(
 													overallStats.totalOutstandingAmount,
 													overallStats.dashboardCurrency,
+
 												)}
 											</div>
 										)}
@@ -35,6 +58,13 @@ function DateAndAccount({ outstandingData, outstandingLoading }) {
 											<div className={styles.wrapper}>
 												{getFormattedPrice(
 													overallStats.totalOutstandingAmount || 0,
+													overallStats.dashboardCurrency,
+													{
+														notation              : 'compact',
+														compactDisplay        : 'short',
+														maximumFractionDigits : 2,
+														style                 : 'decimal',
+													},
 												)}
 											</div>
 
@@ -65,12 +95,12 @@ function DateAndAccount({ outstandingData, outstandingLoading }) {
 
 				<div className={styles.open_invoices}>
 
-					{outstandingLoading ? <Placeholder style={{ width: '300px', height: '40px' }} />
+					{outstandingLoading ? <Placeholder className={styles.placeholder_container} />
 						: (
 							<>
 								<div className={styles.account_receivables_open_line}>
-									<div>
-										{overallStats.dashboardCurrency || 'INR'}
+									<div className={styles.dashboard_currency}>
+										{overallStats.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
 									</div>
 
 									<div
@@ -88,6 +118,13 @@ function DateAndAccount({ outstandingData, outstandingLoading }) {
 											<div className={styles.wrapper}>
 												{getFormattedPrice(
 													overallStats.openInvoicesAmount || 0,
+													overallStats.dashboardCurrency,
+													{
+														notation              : 'compact',
+														compactDisplay        : 'short',
+														maximumFractionDigits : 2,
+														style                 : 'decimal',
+													},
 												)}
 											</div>
 
@@ -111,7 +148,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }) {
 										<div
 											className={styles.styled_text_week}
 										>
-											{overallStats.openInvoiceAmountForPast7DaysPercentage || 0}
+											{overallStats.openInvoiceAmountForPastSevenDaysPercentage || 0}
 											% this week
 										</div>
 									</div>
@@ -122,12 +159,12 @@ function DateAndAccount({ outstandingData, outstandingLoading }) {
 				</div>
 
 				<div className={styles.open_invoices}>
-					{outstandingLoading ? <Placeholder style={{ width: '300px', height: '40px' }} />
+					{outstandingLoading ? <Placeholder className={styles.placeholder_container} />
 						: (
 							<>
 								<div className={styles.account_receivables_open_line}>
-									<div>
-										{overallStats.dashboardCurrency || 'INR'}
+									<div className={styles.dashboard_currency}>
+										{overallStats.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
 									</div>
 
 									<div
@@ -144,7 +181,14 @@ function DateAndAccount({ outstandingData, outstandingLoading }) {
 										>
 											<div className={styles.wrapper}>
 												{getFormattedPrice(
-													overallStats.onAccountAmount,
+													overallStats.onAccountAmount || 0,
+													overallStats.dashboardCurrency,
+													{
+														notation              : 'compact',
+														compactDisplay        : 'short',
+														maximumFractionDigits : 2,
+														style                 : 'decimal',
+													},
 												)}
 											</div>
 

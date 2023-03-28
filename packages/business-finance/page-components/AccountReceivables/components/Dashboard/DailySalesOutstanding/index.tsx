@@ -1,5 +1,6 @@
 import { Tooltip, Toggle } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -8,10 +9,28 @@ import DashboardLoader from '../../../commons/DashboardLoader';
 
 import styles from './styles.module.css';
 
+interface Quater {
+	quarter?: string,
+	qsoForQuarter?: number,
+	currency?: string
+}
+
+interface DailySales {
+	currency?: string,
+	dsoForTheMonth?: number,
+	month?: string
+}
+interface DailySalesOutstandingProps {
+	dailySalesOutstandingData?: DailySales[],
+	dailySalesOutstandingApiLoading?: boolean,
+	quaterly?: Quater[],
+	quaterlyLoading?: boolean
+}
+
 function DailySalesOutstanding({
 	dailySalesOutstandingData,
 	dailySalesOutstandingApiLoading, quaterly, quaterlyLoading,
-}) {
+}: DailySalesOutstandingProps) {
 	const [active, setActive] = useState(false);
 
 	const margin = {
@@ -38,7 +57,7 @@ function DailySalesOutstanding({
 					<div
 						className={styles.daily_sales}
 					>
-						<div style={{ display: 'flex', alignItems: 'center' }}>
+						<div className={styles.sales_container}>
 							<div
 								className={styles.styled_daily_text}
 							>
@@ -55,7 +74,7 @@ function DailySalesOutstanding({
 						</div>
 						<div className={styles.under_line} />
 					</div>
-					<div style={{ display: 'flex', alignItems: 'center' }}>
+					<div>
 
 						<Toggle
 							name="quarter_toggle"
@@ -69,11 +88,7 @@ function DailySalesOutstanding({
 					</div>
 				</div>
 
-				<div style={{
-					display        : 'flex',
-					justifyContent : 'space-evenly',
-				}}
-				>
+				<div className={styles.bar_chart}>
 					{!active && (
 						(quaterly).map((item, index) => (
 							<div className={styles.price_container}>
@@ -112,7 +127,7 @@ function DailySalesOutstanding({
 					<div className={styles.vertical_bar_graph}>
 
 						<BarChart
-							currencyType="INR"
+							currencyType={dailySalesOutstandingData[0]?.currency || GLOBAL_CONSTANTS.currency_code.INR}
 							margin={margin}
 							data={dailySalesOutstandingData || []}
 							dsoResponse

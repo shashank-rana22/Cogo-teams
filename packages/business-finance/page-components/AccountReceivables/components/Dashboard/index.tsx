@@ -42,8 +42,6 @@ function Dashboard() {
 		salesFunnelLoading,
 	} = loading || {};
 
-	console.log('quaterly', quaterly);
-
 	const onChange = (val:string, name:string) => {
 		setFilterValue((p) => ({ ...p, [name]: val }));
 	};
@@ -51,7 +49,7 @@ function Dashboard() {
 	return (
 		<div>
 			<div className={styles.date_container}>
-				<div className={styles.date_text}>As On Date</div>
+				<div className={styles.date_text}>Entity Code</div>
 				<div className={styles.input}>
 					<Select
 						value={filterValue.entityCode}

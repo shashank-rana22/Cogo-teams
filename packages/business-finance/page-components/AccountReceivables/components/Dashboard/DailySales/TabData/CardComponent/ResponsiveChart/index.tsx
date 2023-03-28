@@ -1,11 +1,16 @@
-import { ResponsiveStream } from '@cogoport/charts/stream/index';
+import { ResponsiveStream, StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
 
 import { getformatPrice } from '../../../../../../commons/getFormatPrice';
 
 import styles from './styles.module.css';
 
-function ResponsiveChart({ data, loadingData }) {
+interface ResponsiveChartProps {
+	data?: StreamDatum[],
+	loadingData?: boolean
+}
+
+function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
 	return (
 		loadingData ? <div className={styles.loader}><Loader style={{ height: '100px', width: '50px' }} /></div>
 			: (

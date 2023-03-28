@@ -1,5 +1,4 @@
 .container {
-	/* width: 60%; */
 	display: flex;
 	height: 220px;
 	margin: 0 12px 12px 0;
@@ -24,6 +23,7 @@
 
 .no_data_found_icon {
 	width: 60%;
+	height: 60%;
 }
 
 .outstanding {
@@ -45,4 +45,15 @@
 .dashboard {
 	width: 60%;
 	margin-top: 20px;
+}
+
+.bar_chart {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.styled_text_age {
+	display: flex;
+	align-items: center; 
 }

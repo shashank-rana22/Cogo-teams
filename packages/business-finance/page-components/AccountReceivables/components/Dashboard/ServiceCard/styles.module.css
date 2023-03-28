@@ -191,3 +191,32 @@
 	width: 200px;
 	padding: 15px;
 }
+
+.placeholder_container {
+	width: 200px;
+	height: 30px;
+}
+
+.icon_container {
+	width: 24px;
+	height: 24px; 
+}
+
+.ocean_text {
+	margin-left: 12px;
+}
+
+.amount_currency {
+	margin-left: 16px;
+
+}
+
+.accordian_sub_card {
+	display: flex;
+	justify-content: space-between;
+}
+
+.label_flex {
+	display: flex;
+	align-Items: center; 
+}

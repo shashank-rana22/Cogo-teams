@@ -1,13 +1,45 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Tooltip, Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMArrowRotateUp, IcMAirport, IcMTransport, IcMShip, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import CardData from './CardData';
 import styles from './styles.module.css';
 
-function ServiceCard({ outstandingData, outstandingLoading }) {
+interface OverallStats {
+	customersCount?: number,
+	dashboardCurrency?: string,
+	onAccountAmount?: number,
+	onAccountAmountForPastSevenDaysPercentage?: number,
+	openInvoiceAmountForPastSevenDaysPercentage?: number,
+	openInvoicesAmount?: number,
+	openInvoicesCount?: number,
+	totalOutstandingAmount?: number
+}
+
+interface OceanProps {
+	currency?: string,
+	openInvoiceAmount?: number,
+	tradeType?: object[]
+}
+interface OutstandingServiceWise {
+	ocean?: OceanProps,
+	air?: OceanProps,
+	surface?: OceanProps
+}
+
+interface OutsatndingProps {
+	outstandingServiceWise?: OutstandingServiceWise,
+	overallStats?: OverallStats,
+}
+
+interface ServiceCardProps {
+	outstandingData?: OutsatndingProps,
+	outstandingLoading?: boolean
+}
+
+function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) {
 	const {
 		outstandingServiceWise = {},
 	} = outstandingData || {};
@@ -23,9 +55,15 @@ function ServiceCard({ outstandingData, outstandingLoading }) {
 		setIsAccordionActive(!isAccordionActive);
 	};
 
-	const { currency:oceanCurrency, openInvoiceAmount:oceanOpen, tradeType:oceanTradeType } = ocean || {};
-	const { currency:airCurrency, openInvoiceAmount:airOpen, tradeType:airTradeType } = air || {};
-	const { currency:surfaceCurrency, openInvoiceAmount:surfaceOpen, tradeType:surfaceTradeType } = surface || {};
+	const {
+		currency:oceanCurrency = '', openInvoiceAmount:oceanOpen = '',
+		tradeType:oceanTradeType = [],
+	} = ocean || {};
+	const { currency:airCurrency = '', openInvoiceAmount:airOpen = '', tradeType:airTradeType = [] } = air || {};
+	const {
+		currency:surfaceCurrency = '',
+		openInvoiceAmount:surfaceOpen = '', tradeType:surfaceTradeType = [],
+	} = surface || {};
 
 	const [tab, setTab] = useState({
 		key  : 'Ocean',
@@ -37,7 +75,7 @@ function ServiceCard({ outstandingData, outstandingLoading }) {
 			key  : 'Ocean',
 			data : outstandingServiceWise?.ocean?.tradeType,
 		});
-	}, [JSON.stringify(outstandingServiceWise)]);
+	}, [outstandingServiceWise?.ocean?.tradeType]);
 
 	const getCardData = [
 		{
@@ -87,7 +125,7 @@ function ServiceCard({ outstandingData, outstandingLoading }) {
 					className={styles.sub_service_container}
 				>
 
-					{outstandingLoading ? <Placeholder style={{ width: '200px', height: '30px' }} />
+					{outstandingLoading ? <Placeholder className={styles.placeholder_container} />
 
 						: (
 							<div className={styles.styled_text}>
@@ -123,15 +161,15 @@ function ServiceCard({ outstandingData, outstandingLoading }) {
 										className={styles.sub_ocean_container}
 									>
 
-										<IcMShip style={{ width: '24px', height: '24px' }} />
+										<IcMShip className={styles.icon_container} />
 
-										<div style={{ marginLeft: '12px' }}>
+										<div className={styles.ocean_text}>
 											Ocean
 										</div>
-										<div style={{ marginLeft: '16px' }}>
+										<div className={styles.amount_currency}>
 											<div className={styles.account_receivables_open_line}>
 												<div>
-													{oceanCurrency || 'INR'}
+													{oceanCurrency || GLOBAL_CONSTANTS.currency_code.INR}
 												</div>
 
 												<div
@@ -149,6 +187,13 @@ function ServiceCard({ outstandingData, outstandingLoading }) {
 														<div className={styles.wrapper}>
 															{getFormattedPrice(
 																oceanOpen || 0,
+																oceanCurrency,
+																{
+																	notation              : 'compact',
+																	compactDisplay        : 'short',
+																	maximumFractionDigits : 2,
+																	style                 : 'decimal',
+																},
 															)}
 														</div>
 
@@ -163,16 +208,16 @@ function ServiceCard({ outstandingData, outstandingLoading }) {
 										className={styles.air_container}
 									>
 
-										<IcMAirport style={{ width: '24px', height: '24px' }} />
+										<IcMAirport className={styles.icon_container} />
 
-										<div style={{ marginLeft: '12px' }}>
+										<div className={styles.ocean_text}>
 											Air
 										</div>
 
-										<div style={{ marginLeft: '16px' }}>
+										<div className={styles.amount_currency}>
 											<div className={styles.account_receivables_open_line}>
 												<div>
-													{air?.currency || 'INR'}
+													{air?.currency || GLOBAL_CONSTANTS.currency_code.INR}
 												</div>
 
 												<div
@@ -181,16 +226,22 @@ function ServiceCard({ outstandingData, outstandingLoading }) {
 													<Tooltip content={(
 														<div>
 															{getFormattedPrice(
-																air?.openInvoiceAmount,
-																air?.currency,
+																airOpen,
+																airCurrency,
 															)}
 														</div>
 													)}
 													>
 														<div className={styles.wrapper}>
 															{getFormattedPrice(
-																air?.openInvoiceAmount || 0,
-																'INR',
+																airOpen || 0,
+																airCurrency,
+																{
+																	notation              : 'compact',
+																	compactDisplay        : 'short',
+																	maximumFractionDigits : 2,
+																	style                 : 'decimal',
+																},
 															)}
 														</div>
 
@@ -205,15 +256,15 @@ function ServiceCard({ outstandingData, outstandingLoading }) {
 									<div
 										className={styles.air_container}
 									>
-										<IcMTransport style={{ width: '24px', height: '24px' }} />
-										<div style={{ marginLeft: '12px' }}>
+										<IcMTransport className={styles.icon_container} />
+										<div className={styles.ocean_text}>
 											Surface
 										</div>
 
-										<div style={{ marginLeft: '16px' }}>
+										<div className={styles.amount_currency}>
 											<div className={styles.account_receivables_open_line}>
 												<div>
-													{surface?.currency || 'INR'}
+													{surface?.currency || GLOBAL_CONSTANTS.currency_code.INR}
 												</div>
 
 												<div
@@ -222,16 +273,22 @@ function ServiceCard({ outstandingData, outstandingLoading }) {
 													<Tooltip content={(
 														<div>
 															{getFormattedPrice(
-																surface?.openInvoiceAmount,
-																surface?.currency,
+																surfaceOpen,
+																surfaceCurrency,
 															)}
 														</div>
 													)}
 													>
 														<div className={styles.wrapper}>
 															{getFormattedPrice(
-																surface?.openInvoiceAmount || 0,
-																'INR',
+																surfaceOpen || 0,
+																surfaceCurrency,
+																{
+																	notation              : 'compact',
+																	compactDisplay        : 'short',
+																	maximumFractionDigits : 2,
+																	style                 : 'decimal',
+																},
 															)}
 														</div>
 
@@ -261,7 +318,7 @@ function ServiceCard({ outstandingData, outstandingLoading }) {
 						className={styles.accordian_card}
 					/>
 
-					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+					<div className={styles.accordian_sub_card}>
 
 						{getCardData.map((item) => (
 							<div
@@ -277,7 +334,7 @@ function ServiceCard({ outstandingData, outstandingLoading }) {
 								role="presentation"
 							>
 								<div className={styles.sub_ocean_card}>
-									<div style={{ display: 'flex', alignItems: 'center' }}>
+									<div className={styles.label_flex}>
 
 										<div className={item.label === tab.key && styles.icon}>{item?.icon}</div>
 										<div>

@@ -24,7 +24,20 @@ const tabsKeyComponentMapping = {
 	SHIPMENT_CREATED : CardComponent,
 };
 
-function TabData({ toggleData, loading, dailyStatsData, subActiveTab, setSubActiveTab, filters, filterValue }) {
+interface TabDataProps {
+	toggleData?: boolean,
+	loading?: boolean,
+	dailyStatsData?: object,
+	subActiveTab?: string,
+	setSubActiveTab?: (p: string) => void,
+	filters?: object,
+	filterValue?: object
+}
+
+function TabData({
+	toggleData, loading, dailyStatsData, subActiveTab, setSubActiveTab,
+	filters, filterValue,
+} : TabDataProps) {
 	const tabComponentProps = {
 		SALES_INVOICE: {
 			subActiveTab,

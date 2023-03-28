@@ -1,5 +1,4 @@
 .container {
-	/* width: 60%; */
 	display: flex;
 	height: 320px;
 	margin: 0 12px 0 0;
@@ -97,4 +96,9 @@
 
 .icon {
 	font-size: 14px;
+}
+
+.table_width {
+	padding: 20px;
+	width: 74%;
 }

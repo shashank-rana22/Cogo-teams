@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
@@ -46,7 +47,7 @@ const useInvoiceStatistics = ({ filters, filterValue, subActiveTab }:ParamsInter
 					},
 				});
 			} catch (e) {
-				console.log(e);
+				Toast.error(e?.error?.message || 'Something went wrong');
 			}
 		};
 		getJourneyData();
