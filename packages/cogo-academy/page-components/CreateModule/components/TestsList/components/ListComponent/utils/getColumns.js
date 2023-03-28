@@ -62,13 +62,6 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 				<section>{status}</section>
 			),
 		},
-		// {
-		// 	Header   : 'AUDIENCE IDS',
-		// 	id       : 'audience_ids',
-		// 	accessor : ({ audience_ids = '' }) => (
-		// 		<section>{audience_ids.length || '--'}</section>
-		// 	),
-		// },
 		{
 			Header   : 'NO. OF TESTS USING THE SET',
 			id       : 'e',
