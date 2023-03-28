@@ -1,5 +1,6 @@
-import { RTE } from '@cogoport/components';
+import { RTE, Toast } from '@cogoport/components';
 import { useForm, handleError } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -10,6 +11,8 @@ import Footer from './Footer';
 import InputParam from './Input';
 import SelectParam from './Select';
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
 
 const getFormattedValues = (
 	emailData,
@@ -123,18 +126,26 @@ function Compose({
 
 	const handleClick = (e) => {
 		if ((e.keyCode === 13 || e.keyCode === 32) && userEmail) {
-			setUserEmailArray([
-				...userEmailArray,
-				userEmail,
-			]);
-			setValue('toUserEmail', '');
+			if (!geo.regex.EMAIL.test(userEmail)) {
+				Toast.error('Please Enter Valid Email Address');
+			} else {
+				setUserEmailArray([
+					...userEmailArray,
+					userEmail,
+				]);
+				setValue('toUserEmail', '');
+			}
 		}
-		if (e.keyCode === 13 && ccEmail) {
-			setCcEmailArray([
-				...ccEmailArray,
-				ccEmail,
-			]);
-			setValue('ccrecipients', '');
+		if ((e.keyCode === 13 || e.keyCode === 32) && ccEmail) {
+			if (!geo.regex.EMAIL.test(ccEmail)) {
+				Toast.error('Please Enter Valid Email Address');
+			} else {
+				setCcEmailArray([
+					...ccEmailArray,
+					ccEmail,
+				]);
+				setValue('ccrecipients', '');
+			}
 		}
 	};
 
@@ -163,7 +174,6 @@ function Compose({
 						control={control}
 						setDeleteEmail={setDeleteEmail}
 						placeholder="Type here..."
-						rules={{ required: { value: true, message: 'Email is required' } }}
 					/>
 					{errors?.toUserEmail ? (
 						<div className={styles.error}>
