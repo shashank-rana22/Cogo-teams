@@ -5900,8 +5900,9 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
-			api         : 'list_auth_roles',
-			access_type : 'private',
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
 		},
 		{
 			api          : 'list_organization_outstandings',
@@ -7853,8 +7854,9 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
-			api         : 'get_exchange_rate',
-			access_type : 'private',
+			api          : 'get_exchange_rate',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
 		},
 	],
 	tracking: [
