@@ -30,7 +30,7 @@ function InfoBanner({ test_status, test_id, refetchTest, loading }) {
 
 	const content = TEXT_MAPPING[test_status];
 
-	const { key, backgroundColor, text, subText, iconColor, borderColor } = content;
+	const { key, backgroundColor, text, subText, iconColor, borderColor } = content || {};
 
 	return (
 		<div className={styles.container} style={{ border: `1px solid ${borderColor}`, background: backgroundColor }}>
