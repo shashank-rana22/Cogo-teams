@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import { getApiErrorString } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
@@ -51,7 +52,7 @@ function useUpdateStandAloneTestQuestion() {
 			setEditDetails({});
 			reset();
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
 	};
 

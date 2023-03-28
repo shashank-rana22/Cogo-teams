@@ -1,4 +1,4 @@
-import { Pagination, Tooltip, Button, Table } from '@cogoport/components';
+import { Pagination, Tooltip, Button, Table, Modal } from '@cogoport/components';
 import { IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -38,6 +38,8 @@ function SavedQuestionDetails({
 	mode,
 }) {
 	const [caseToShow, setCaseToShow] = useState('');
+
+	const [showModal, setShowModal] = useState({});
 
 	const { updateStandAloneTestQuestion, loading } = useUpdateStandAloneTestQuestion();
 
@@ -271,7 +273,9 @@ function SavedQuestionDetails({
 											<IcMDelete />
 											<div
 												role="presentation"
-												onClick={() => handleDeleteQuestion({ item })}
+												onClick={() => {
+													setShowModal(item);
+												}}
 												style={{ marginLeft: '8px' }}
 											>
 												Delete
@@ -310,6 +314,36 @@ function SavedQuestionDetails({
 				columns={columns}
 				loading={listLoading}
 			/>
+			<Modal
+				size="sm"
+				show={!isEmpty(showModal)}
+				onClose={() => setShowModal({})}
+				placement="center"
+				showCloseIcon={false}
+			>
+				<Modal.Header title="Are you sure you want to delete this?" />
+
+				<Modal.Body>
+					<div className={styles.btn_container}>
+						<Button
+							type="button"
+							themeType="secondary"
+							onClick={() => setShowModal({})}
+						>
+							Cancel
+						</Button>
+						<Button
+							type="button"
+							onClick={() => {
+								handleDeleteQuestion({ item: showModal });
+								setShowModal({});
+							}}
+						>
+							Delete
+						</Button>
+					</div>
+				</Modal.Body>
+			</Modal>
 
 			{total_count > 10 ? (
 				<div className={styles.pagination_container}>
