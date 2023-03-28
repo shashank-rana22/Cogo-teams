@@ -26,11 +26,20 @@ function EmailView({
 	});
 
 	if (loading) {
-		return <div>Loading full mail......</div>;
+		return (
+			<div className={styles.loader}>
+				<div className={styles.heading}>Please wait while loading your mail</div>
+				<img
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg"
+					alt="email_loader"
+					style={{ width: 100, height: 100 }}
+				/>
+			</div>
+		);
 	}
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<Thread
 				content={content}
 				allAttachements={allAttachements}
