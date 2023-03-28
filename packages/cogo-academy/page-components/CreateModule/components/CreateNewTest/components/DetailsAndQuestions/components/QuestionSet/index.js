@@ -13,7 +13,7 @@ function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray, watch 
 	const {
 		data, loading, setParams, debounceQuery,
 		input, setInput,
-	} = useGetTestQuestionSets({ cogo_entity_id, activeTab: 'question_set' });
+	} = useGetTestQuestionSets({ cogo_entity_id });
 
 	const [sort, setSort] = useState(false);
 
