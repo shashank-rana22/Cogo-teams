@@ -78,9 +78,6 @@ function AddService({
 					) : null}
 				</div>
 			</Modal.Body>
-			<Modal.Footer>
-				<Button onClick={() => setShowChargeCodes(false)}>OK</Button>
-			</Modal.Footer>
 		</Modal>
 	);
 }

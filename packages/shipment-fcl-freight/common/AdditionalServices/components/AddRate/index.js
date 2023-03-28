@@ -77,10 +77,9 @@ function AddRate({
 	}
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<div className={styles.heading}>
 				{startCase(item?.name)}
-				dd
 				(
 				{startCase(item?.service_type || item.service_type)}
 				)
@@ -97,7 +96,7 @@ function AddRate({
 				control={control}
 				errors={errors}
 				register={register}
-				item={item}
+				serviceData={item}
 				unitOptions={unitOptions}
 			/>
 
