@@ -131,7 +131,7 @@ function CreateMastery(props) {
 									{!isEmpty(masteryItemData) && !watch_image_input ? (
 										<div className={styles.preview}>
 											<img
-												src={masteryItemData.badge_details[0].image_url}
+												src={masteryItemData?.mastery_details?.image_url}
 												alt="Modal img preview"
 											/>
 										</div>

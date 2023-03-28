@@ -7,7 +7,7 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 	const {
 		badge_name = '_', description = '_',
 		created_at, created_by = {},
-		mastery_in, badge_details = [],
+		mastery_in, mastery_details = {},
 	} = data;
 
 	const handleEdit = () => {
@@ -78,7 +78,7 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 					<div className={styles.badge}>
 						<img
 							style={{ objectFit: 'contain' }}
-							src={badge_details?.[0]?.image_url}
+							src={mastery_details?.image_url}
 							alt="Mastery Modal"
 						/>
 					</div>

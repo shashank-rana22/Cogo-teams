@@ -1,5 +1,4 @@
 import { ProgressBar, Placeholder } from '@cogoport/components';
-// import { IcCStar } from '@cogoport/icons-react';
 import { isEmpty, startCase, format } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';

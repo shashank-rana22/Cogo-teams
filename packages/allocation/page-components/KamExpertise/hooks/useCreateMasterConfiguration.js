@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
@@ -45,7 +44,7 @@ function useCreateMasterConfiguration(props) {
 				expertise_configuration_type       : 'badge_configuration',
 				badge_details                      : [
 					{
-						image_url : image_input || masteryItemData?.badge_details?.[0]?.image_url,
+						image_url : image_input || masteryItemData?.mastery_details?.image_url,
 						medal     : 'mastery',
 					},
 				],
@@ -53,7 +52,7 @@ function useCreateMasterConfiguration(props) {
 
 			if (!isEmpty(masteryItemData)) {
 				payload.id = masteryItemData.id;
-				payload.badge_details[0].badge_detail_id = masteryItemData?.badge_details?.[0]?.id;
+				payload.badge_details[0].badge_detail_id = masteryItemData?.mastery_details?.id;
 			}
 
 			await trigger({ data: payload });
@@ -64,7 +63,7 @@ function useCreateMasterConfiguration(props) {
 
 			listRefetch();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			Toast.error(error?.response?.data?.error || 'Something went wrong');
 		}
 	};
 

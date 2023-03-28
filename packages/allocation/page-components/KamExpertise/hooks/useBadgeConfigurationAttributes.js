@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -64,7 +63,7 @@ const useUpdateSingleBadge = (props) => {
 
 			Toast.success('Badge Updated!');
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			Toast.error(error?.response?.data?.error || 'Something went wrong');
 		}
 	};
 	return {
