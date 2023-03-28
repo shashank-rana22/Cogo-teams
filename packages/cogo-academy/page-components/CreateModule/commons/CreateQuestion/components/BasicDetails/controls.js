@@ -1,9 +1,8 @@
-const getControls = () => [
+const getControls = ({ mode }) => [
 	{
 		name        : 'topic',
 		label       : 'Topic',
 		type        : 'input',
-		disabled    : true,
 		placeholder : 'Question Topic',
 		rules       : { required: 'This is required' },
 	},
@@ -11,6 +10,7 @@ const getControls = () => [
 		name        : 'audience_ids',
 		label       : 'User Groups',
 		type        : 'multi-select',
+		disabled    : mode === 'view',
 		placeholder : 'Select users',
 		options     : [{ label: 'KAM1', value: 'kam1' }, { label: 'KAM2', value: 'kam2' }],
 		rules       : { required: 'This is required' },
@@ -31,9 +31,9 @@ const getControls = () => [
 		type    : 'chips',
 		label   : 'Set Difficulty level',
 		options : [
-			{ value: 'low', label: 'Low' },
-			{ value: 'medium', label: 'Medium' },
-			{ value: 'high', label: 'High' },
+			{ value: 'low', label: 'Low', disabled: mode === 'view' },
+			{ value: 'medium', label: 'Medium', disabled: mode === 'view' },
+			{ value: 'high', label: 'High', disabled: mode === 'view' },
 		],
 		rules    : { required: 'Required' },
 		multiple : false,
@@ -42,6 +42,7 @@ const getControls = () => [
 		name        : 'question_text',
 		type        : 'textarea',
 		placeholder : 'Type Case...',
+		disabled    : mode === 'view',
 		rules       : { required: 'This is required' },
 		rows        : 4,
 	},

@@ -1,4 +1,4 @@
-import { Pill, Button, Tooltip } from '@cogoport/components';
+import { Pill, Button, Tooltip, Toast } from '@cogoport/components';
 import { IcMShare, IcMOverflowDot, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -7,7 +7,11 @@ import styles from './styles.module.css';
 
 export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId }) => {
 	const handleEditQuestionSet = (id) => {
-		router.push(`/learning/test-module/create-question?id=${id}`);
+		router.push(`/learning/test-module/edit-question?id=${id}`);
+	};
+
+	const handleViewQuestionSet = (id) => {
+		router.push(`/learning/test-module/view-question?id=${id}`);
 	};
 
 	return [
@@ -93,6 +97,18 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 											type="button"
 											themeType="secondary"
 											className={styles.btn}
+											onClick={() => handleViewQuestionSet(item.id)}
+										>
+											<IcMEdit />
+											<div style={{ marginLeft: '8px' }}>
+												View
+											</div>
+										</Button>
+										<Button
+											loading={loading}
+											type="button"
+											themeType="secondary"
+											className={styles.btn}
 											onClick={() => handleEditQuestionSet(item.id)}
 										>
 											<IcMEdit />
@@ -115,7 +131,6 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 												Delete
 											</div>
 										</Button>
-
 									</div>
 								)}
 								trigger="click"
@@ -139,6 +154,17 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 	const handleEditTest = (id) => {
 		router.push(`/learning/test-module/create-test?id=${id}`);
 	};
+
+	const CopyToClipboard = async (id) => {
+		const path = `${window.location.host + window.location.pathname}/tests/${id}`;
+		try {
+			await navigator.clipboard.writeText(path);
+			Toast.success('Copied successfully!');
+		} catch (error) {
+			Toast.error(error?.message || 'Cannot copy!');
+		}
+	};
+
 	return ([
 		{
 			Header   : 'NAME',
@@ -216,8 +242,10 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 		{
 			Header   : 'ATTEMPTED BY',
 			id       : 'ik',
-			accessor : ({ audience_ids = [] }) => (
-				<section>{audience_ids.length}</section>
+			accessor : ({ attempted_by = 0 }) => (
+				<section>
+					{attempted_by}
+				</section>
 			),
 		},
 		{
@@ -227,9 +255,11 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 				if (status === 'active') {
 					return (
 						<section className={styles.details}>
+
 							<section className={styles.status}>
 								<Pill size="md" color="green">{startCase(status)}</Pill>
-								<Link href={`/learning/tests/${id}`}>
+
+								<div role="presentation" onClick={() => CopyToClipboard(id)}>
 									<Pill
 										key={status}
 										size="md"
@@ -239,12 +269,15 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 									>
 										Share Test Link
 									</Pill>
-								</Link>
+								</div>
+
 							</section>
+
 							<section>
 								{format(validity_start, 'dd/MM/yyyy - ')}
 								{format(validity_end, 'dd/MM/yyyy')}
 							</section>
+
 						</section>
 					);
 				} if (status === 'published') {
@@ -279,7 +312,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 			accessor : ({ id = '', status = '' }) => (
 				status === 'published' ? (
 					<div>
-						<Link href={`/learning/tests/results/admin/${id}`}>Results</Link>
+						<Link href={`/learning/tests/dashboard/admin/${id}`}>Details</Link>
 					</div>
 				) : <section>-</section>
 

@@ -1,6 +1,8 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetTestQuestionTest from '../../hooks/useGetTestQuestionTest';
@@ -10,7 +12,11 @@ import AddQuestionsForm from './components/AddQuestionsForm';
 import BasicDetailsForm from './components/BasicDetailsForm';
 import styles from './styles.module.css';
 
-function CreateQuestionSet() {
+function CreateQuestionSet(props) {
+	const { general: { query:urlQuery } } = useSelector((state) => state);
+
+	const { id, activeTab } = urlQuery || {};
+
 	const router = useRouter();
 	const { query, debounceQuery } = useDebounceQuery();
 
@@ -18,6 +24,8 @@ function CreateQuestionSet() {
 	const [editDetails, setEditDetails] = useState({});
 
 	const [allKeysSaved, setAllKeysSaved] = useState(true);
+
+	const { mode = '' } = props || {};
 
 	const {
 		loading,
@@ -36,7 +44,12 @@ function CreateQuestionSet() {
 		total_count,
 		page,
 		setPage,
-	} = useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query });
+	} = useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query, mode });
+
+	if (['edit', 'view'].includes(mode) && isEmpty(id) && !activeTab) {
+		router.push('/learning/test-module/create-question');
+		return 'redirecting ...';
+	}
 
 	return (
 		<div className={styles.container}>
@@ -45,10 +58,10 @@ function CreateQuestionSet() {
 					style={{ cursor: 'pointer' }}
 					width={20}
 					height={20}
-					onClick={() => router.push('/learning?activeTab=test_module')}
+					onClick={() => router.push('/learning?activeTab=test_module&testModuleTab=question_set')}
 				/>
 
-				<div className={styles.title}>New Question Set</div>
+				<div className={styles.title}>{`${startCase(mode || 'new')} Question Set`}</div>
 			</div>
 
 			<BasicDetailsForm
@@ -58,6 +71,7 @@ function CreateQuestionSet() {
 				questionSetId={questionSetId}
 				setEditDetails={setEditDetails}
 				loading={loading}
+				mode={mode}
 			/>
 
 			<AddQuestionsForm
@@ -80,6 +94,7 @@ function CreateQuestionSet() {
 				total_count={total_count}
 				page={page}
 				setPage={setPage}
+				mode={mode}
 			/>
 		</div>
 	);

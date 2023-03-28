@@ -1,23 +1,18 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+
+import useGetUserSubmissionStats from '../hooks/useGetUserSubmissionStats';
 
 import styles from './styles.module.css';
 
 function Completion() {
 	const { profile: { user: { id: user_id } }, general: { query: { test_id } } } = useSelector((state) => state);
 
-	const [{ data, loading }] = useRequest({
-		method : 'GET',
-		url    : '/get_user_submission_stats',
-		params : {
-			user_id, test_id,
-		},
-	}, { manual: false });
-
 	const { push } = useRouter();
+
+	const { data } = useGetUserSubmissionStats({ id: test_id, user_id });
 
 	const {
 		answered,
@@ -55,10 +50,12 @@ function Completion() {
 
 	const handleGoToDashboard = () => {
 		push('/learning/tests/dashboard', '/learning/tests/dashboard', '_blank');
+
+		document.getElementById('maincontainer').innerHTML = 'redirecting ...';
 	};
 
 	return (
-		<div className={styles.container}>
+		<div id="container" className={styles.container}>
 			<div className={styles.header}>
 				<img
 					style={{ width: 32, height: 32, marginRight: 16 }}

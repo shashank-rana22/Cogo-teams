@@ -99,27 +99,28 @@
 
 .instruction {
 	display: flex;
-	align-items: center;
 	gap: 8px;
+	align-items: center;
 	margin-bottom: 15px;
 }
 
 .add_icon {
-	cursor: pointer;
 	width: fit-content;
+	cursor: pointer;
 }
-.instruction_input{
+
+.instruction_input {
 	max-width: 90%;
 }
 
-.instructions{
+.instructions {
 	margin-top: 50px;
 }
 
-.err_msg{
+.err_msg {
+	margin-bottom: 30px;
 	font-size: 12px;
 	font-weight: 500;
-	color: #cb6464;
 	line-height: 0px;
-	margin-bottom: 30px;
+	color: #cb6464;
 }

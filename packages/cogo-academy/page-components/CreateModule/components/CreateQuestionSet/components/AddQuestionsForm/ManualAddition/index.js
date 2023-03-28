@@ -15,12 +15,13 @@ function ManualAddition({
 	savedQuestionDetails,
 	test_questions,
 	listSetQuestions,
+	mode,
 }) {
 	return (
 		<div>
 			<Breadcrumb className={styles.breadcrumb_container}>
 				<Breadcrumb.Item
-					label={`${isEmpty(editDetails) ? 'Add' : 'Edit'} Questions`}
+					label={mode === 'view' ? 'View Question' : `${isEmpty(editDetails) ? 'Add' : 'Edit'} Questions`}
 					className={styles.breadcrumb_item}
 				/>
 				<Breadcrumb.Item style={{ color: '#ee3425' }} label="Manual Addition" />
@@ -41,6 +42,7 @@ function ManualAddition({
 							editDetails={editDetails}
 							setEditDetails={setEditDetails}
 							topic={topic}
+							mode={mode}
 						/>
 					);
 				}
@@ -61,6 +63,7 @@ function ManualAddition({
 					setAllKeysSaved={setAllKeysSaved}
 					setEditDetails={setEditDetails}
 					topic={topic}
+					mode={mode}
 				/>
 			) : null}
 		</div>

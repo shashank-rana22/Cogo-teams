@@ -1,9 +1,11 @@
 import { Button, Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useState } from 'react';
 
 import useGetTestList from '../../hooks/useGetTestList';
 import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
+import FilterPopover from '../CreateNewTest/FilterPopover';
 
 import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
@@ -22,9 +24,11 @@ const ROUTE_MAPPING = {
 function TestsList({ activeTab, setActiveTab }) {
 	const router = useRouter();
 
+	const [filters, setFilters] = useState({});
+
 	const {
 		data, loading, fetchList, setParams, params, debounceQuery, input, setInput,
-	} = useGetTestList();
+	} = useGetTestList({ filters, activeTab });
 
 	const {
 		data: questionData,
@@ -35,7 +39,7 @@ function TestsList({ activeTab, setActiveTab }) {
 		debounceQuery: questionListDebounceQuery,
 		input: questionListInput,
 		setInput: setquestionListInput,
-	} = useGetTestQuestionSets();
+	} = useGetTestQuestionSets({ ...filters, activeTab });
 
 	const componentMapping = {
 		tests: {
@@ -49,7 +53,6 @@ function TestsList({ activeTab, setActiveTab }) {
 				setParams,
 				activeTab,
 				params,
-
 			},
 		},
 		question_set: {
@@ -68,8 +71,12 @@ function TestsList({ activeTab, setActiveTab }) {
 	};
 
 	const handleChangeTab = (val) => {
-		componentMapping[val].componentProps.fetchList();
+		// eslint-disable-next-line max-len
+		const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?activeTab=test_module&testModuleTab=${val}`;
 
+		window.history.pushState({ path: newurl }, '', newurl);
+
+		componentMapping[val].componentProps.fetchList();
 		setActiveTab(val);
 	};
 
@@ -104,6 +111,10 @@ function TestsList({ activeTab, setActiveTab }) {
 						}}
 						className={styles.input}
 					/>
+
+					<div className={styles.filter_popover}>
+						<FilterPopover filters={filters} setFilters={setFilters} />
+					</div>
 
 					<Button
 						themeType="accent"

@@ -3,7 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useGetTestQuestionSets(cogo_entity_id = '') {
+function useGetTestQuestionSets({ cogo_entity_id = '', activeTab = 'question_set' }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
@@ -30,7 +30,9 @@ function useGetTestQuestionSets(cogo_entity_id = '') {
 	};
 
 	useEffect(() => {
-		fetchList();
+		if (activeTab === 'question_set') {
+			fetchList();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query, params, cogo_entity_id]);
 

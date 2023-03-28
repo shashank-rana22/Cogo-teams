@@ -20,6 +20,7 @@ function CaseStudyForm({
 	reset,
 	setEditDetails,
 	setAllKeysSaved,
+	mode,
 }) {
 	const controls = getControls();
 
@@ -64,6 +65,7 @@ function CaseStudyForm({
 							reset={reset}
 							setEditDetails={setEditDetails}
 							setAllKeysSaved={setAllKeysSaved}
+							mode={mode}
 						/>
 
 						{fields.length > 1 && isNewQuestion ? (
@@ -76,7 +78,7 @@ function CaseStudyForm({
 						) : null}
 					</div>
 
-					{index === fields.length - 1 ? (
+					{index === fields.length - 1 && mode !== 'view' ? (
 						<div className={styles.button_container}>
 							<Button
 								type="button"

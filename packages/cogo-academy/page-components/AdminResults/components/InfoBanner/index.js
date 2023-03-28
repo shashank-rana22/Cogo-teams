@@ -23,14 +23,14 @@ const TEXT_MAPPING = {
 	},
 };
 
-function InfoBanner({ test_status, test_id, refetchTest }) {
-	if (!['published', 'active'].includes(test_status)) {
+function InfoBanner({ test_status = '', test_id, refetchTest, loading }) {
+	if (!['published', 'active'].includes(test_status) && loading) {
 		return null;
 	}
 
 	const content = TEXT_MAPPING[test_status];
 
-	const { key, backgroundColor, text, subText, iconColor, borderColor } = content;
+	const { key, backgroundColor, text, subText, iconColor, borderColor } = content || {};
 
 	return (
 		<div className={styles.container} style={{ border: `1px solid ${borderColor}`, background: backgroundColor }}>

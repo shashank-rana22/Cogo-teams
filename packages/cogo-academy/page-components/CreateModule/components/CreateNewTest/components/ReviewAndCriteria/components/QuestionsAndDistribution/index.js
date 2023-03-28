@@ -113,13 +113,17 @@ function QuestionsAndDistribution(props) {
 
 					<section className={styles.distribution}>
 
-						<span>No. of</span>
-						<div className="input_container">
+						<span className={(errors[`${id}q`] || errors[`${id}c`])
+							? null : styles.align_center}
+						>
+							No. of
+						</span>
+						<div className={styles.input_container}>
 							<InputController control={control} {...controlItem1} className={styles.input} />
 							{errors[`${id}q`] && <div className={styles.error_msg}>{errors[`${id}q`]?.message}</div>}
 						</div>
 
-						<div className="input_container">
+						<div className={styles.input_container}>
 							<InputController control={control} {...controlItem2} className={styles.input} />
 							{errors[`${id}c`] && <div className={styles.error_msg}>{errors[`${id}c`]?.message}</div>}
 						</div>

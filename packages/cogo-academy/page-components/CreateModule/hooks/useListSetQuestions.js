@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query }) {
+function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query, mode }) {
 	const [page, setPage] = useState(1);
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -25,7 +25,7 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 				},
 			});
 
-			if (!res?.data?.total_count && isEmpty(query)) {
+			if (!res?.data?.total_count && isEmpty(query) && mode !== 'view') {
 				setSavedQuestionDetails([{ id: new Date().getTime(), isNew: true }]);
 				setAllKeysSaved(false);
 			} else {

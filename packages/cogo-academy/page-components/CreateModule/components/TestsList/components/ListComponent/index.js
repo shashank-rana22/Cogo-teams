@@ -25,16 +25,13 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 	const [showModal, setShowModal] = useState(false);
 
 	const columnsMapping = {
-		tests         : testSetColumns,
-		question_set  : questionSetColumns,
-		all_questions : testSetColumns,
+		tests        : testSetColumns,
+		question_set : questionSetColumns,
 	};
 
 	const MODAL_TEXT_MAPPING = {
-		tests         : 'Test',
-		question_set  : 'Question Set',
-		all_questions : 'All Question',
-
+		tests        : 'Test',
+		question_set : 'Question Set',
 	};
 
 	const {
@@ -51,8 +48,7 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 			setShowModal,
 			setTestId,
 		},
-		question_set  : { loading: updateLoading, router, setShowModal, setQuestionSetId },
-		all_questions : {},
+		question_set: { loading: updateLoading, router, setShowModal, setQuestionSetId },
 	};
 
 	const columns = columnsMapping[activeTab]({ ...propsMapping[activeTab] });
@@ -72,7 +68,6 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 	const deleteFunctionMapping = {
 		tests        : handleDeleteTest,
 		question_set : handleDeleteQuestionSet,
-
 	};
 
 	return (
@@ -102,7 +97,6 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 						className={styles.styled_icon}
 					/>
 				)}
-
 				<span
 					className={styles.span_text}
 				>
@@ -125,6 +119,7 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 				showCloseIcon={false}
 			>
 				<Modal.Header title={`Are you sure you want to delete this ${MODAL_TEXT_MAPPING[activeTab]}?`} />
+
 				<Modal.Body>
 					<div className={styles.btn_container}>
 						<Button
@@ -142,7 +137,6 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 							}}
 						>
 							Delete
-
 						</Button>
 					</div>
 				</Modal.Body>

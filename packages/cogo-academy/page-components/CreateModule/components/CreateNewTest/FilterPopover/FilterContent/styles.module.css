@@ -1,0 +1,18 @@
+.filter_container {
+	:global {
+		.ui_select_container {
+			width: 220px;
+		}
+	}
+}
+
+.title {
+	font-size: 12px;
+	margin: 12px 0px 4px 4px;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 32px;
+}

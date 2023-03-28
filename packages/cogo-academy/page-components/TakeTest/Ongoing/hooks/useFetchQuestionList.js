@@ -1,7 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { addMinutes } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useFetchQuestionsList = ({ currentQuestion }) => {
 	const {
@@ -14,10 +13,7 @@ const useFetchQuestionsList = ({ currentQuestion }) => {
 		url    : '/get_test_question',
 	}, { manual: true });
 
-	// const start_time = startTiming;
-	// const end_time = addMinutes(start_time, Number(duration));
-
-	const fetchQuestions = (props = {}) => {
+	const fetchQuestions = useCallback((props = {}) => {
 		const { currentQ = '' } = props || {};
 
 		try {
@@ -27,19 +23,17 @@ const useFetchQuestionsList = ({ currentQuestion }) => {
 				question_number: currentQ || currentQuestion,
 			};
 
-			// console.log(payload, 'payload');
-
 			trigger({
 				params: payload,
 			});
 		} catch (err) {
 			console.log('error', err);
 		}
-	};
+	}, [currentQuestion, test_id, trigger, user_id]);
 
 	useEffect(() => {
 		fetchQuestions();
-	}, []);
+	}, [fetchQuestions]);
 
 	return {
 		loading,

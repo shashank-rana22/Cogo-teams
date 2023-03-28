@@ -1,8 +1,8 @@
-import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import Completion from './Completion';
+import useGetTest from './hooks/useGetTest';
 import Introduction from './Introduction';
 import Ongoing from './Ongoing';
 import styles from './styles.module.css';
@@ -32,19 +32,16 @@ function TakeTest() {
 		},
 	} = useSelector((state) => state);
 
+	const [activeState, setActiveState] = useState('');
+
 	const page = localStorage.getItem(`current_question_${test_id}_${user_id}`);
 
-	const [{ data: testData, loading }] = useRequest({
-		method : 'GET',
-		url    : '/get_test',
-		params : {
-			id: test_id, user_id,
-		},
-	}, { manual: false });
+	const {
+		loading = false,
+		data,
+	} = useGetTest({ id: test_id, user_id });
 
-	const { test_user_mapping_state = 'introduction' } = testData || {};
-
-	const [activeState, setActiveState] = useState('');
+	const { test_user_mapping_state = 'introduction' } = data || {};
 
 	useEffect(() => {
 		setActiveState(test_user_mapping_state);
@@ -72,7 +69,7 @@ function TakeTest() {
 	const Component = COMPONENT_MAPPING[activeState]?.component;
 
 	if (loading) {
-		return 'loading';
+		return 'loading ...';
 	}
 
 	return (
@@ -80,7 +77,7 @@ function TakeTest() {
 			<Component
 				setActiveState={setActiveState}
 				loading={loading}
-				testData={testData}
+				testData={data}
 				page={page}
 			/>
 		</div>

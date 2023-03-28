@@ -1,2 +1,10 @@
 // eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/cogo-academy/page-components/CreateModule/components/CreateQuestionSet';
+import CreateQuestionSet from '@cogoport/cogo-academy/page-components/CreateModule/components/CreateQuestionSet';
+
+function EditQuestionSet() {
+	return (
+		<CreateQuestionSet mode="new" />
+	);
+}
+
+export default EditQuestionSet;
