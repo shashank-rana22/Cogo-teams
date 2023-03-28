@@ -14,7 +14,7 @@ export const filterControls = [
 			{ value: 'utrUploadTrend', label: 'UTR Uploaded' },
 			{ value: 'paidBillTrend', label: 'Bills Paid' },
 			{ value: 'payrunCreatedTrend', label: 'Payruns Created' },
-			{ value: 'urgent_bills_paid', label: 'Urgent Bills paid' },
+			{ value: 'urgentBillsPaid', label: 'Urgent Bills paid' },
 			{ value: 'paidProformaTrend', label: 'Proforma Paid' },
 
 		],
