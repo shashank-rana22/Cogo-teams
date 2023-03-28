@@ -1,6 +1,7 @@
 import { Breadcrumb, Tooltip, Stepper } from '@cogoport/components';
 import { IcMInfo, IcMArrowBack } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { stepperItems } from './contant';
@@ -13,7 +14,7 @@ function UploadReport() {
 	const [globalStepper, setGlobalStepper] = useState('revenue');
 	const { query } = useRouter();
 
-	const { month } = query || {};
+	const { month, entity } = query || {};
 
 	return (
 		<div>
@@ -64,11 +65,19 @@ function UploadReport() {
 							</Tooltip>
 						</div>
 						<div className={styles.hr} />
-						<div className={styles.month}>
-							Month -
-							{' '}
-							{month}
+						<div className={styles.flex_card}>
+							<div className={styles.month}>
+								Month -
+								{' '}
+								{month}
+							</div>
+							<div className={styles.month}>
+								Entity -
+								{' '}
+								{startCase(entity)}
+							</div>
 						</div>
+
 						{globalStepper === 'salaries' && (
 							<div className={styles.total_data_view}>
 								<div>

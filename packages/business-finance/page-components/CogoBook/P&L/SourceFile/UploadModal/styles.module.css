@@ -1,3 +1,17 @@
 .month {
-  margin: 20px 0px;
+  margin: 16px 0px;
+}
+.upload {
+  background-color: #828282;
+  height: 100px;
+  :global {
+    .ui_upload_droparea_container {
+      height: 100px !important;
+    }
+  }
+}
+.select_container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }

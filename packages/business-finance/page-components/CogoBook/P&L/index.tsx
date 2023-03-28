@@ -22,9 +22,9 @@ const tabsKeyComponentMapping = {
 };
 
 function ProfitAndLoss() {
-	const { push, query } = useRouter();
+	const { push } = useRouter();
 
-	const [subActiveTab, setSubActiveTab] = useState<string>(query.view || 'source_files');
+	const [subActiveTab, setSubActiveTab] = useState<string>('source_files');
 
 	const tabComponentProps = {
 		source_files : {},

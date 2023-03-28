@@ -74,7 +74,12 @@ function RevenueBifurcation({ setGlobalStepper }) {
 															</div>
 															<div className={styles.value}>
 																{edit[itemShipment?.id]
-																	? <Input placeholder="Type" /> : valOcean?.value}
+																	? (
+																		<Input
+																			value={valOcean?.value}
+																			placeholder="Type"
+																		/>
+																	) : valOcean?.value}
 															</div>
 														</div>
 
@@ -93,7 +98,12 @@ function RevenueBifurcation({ setGlobalStepper }) {
 															</div>
 															<div className={styles.value}>
 																{edit[itemShipment?.id]
-																	? <Input placeholder="Type" /> : valOcean?.value}
+																	? (
+																		<Input
+																			value={valOcean?.value}
+																			placeholder="Type"
+																		/>
+																	) : valOcean?.value}
 
 															</div>
 														</div>
@@ -112,7 +122,12 @@ function RevenueBifurcation({ setGlobalStepper }) {
 															</div>
 															<div className={styles.value}>
 																{edit[itemShipment?.id]
-																	? <Input placeholder="Type" /> : valOcean?.value}
+																	? (
+																		<Input
+																			value={valOcean?.value}
+																			placeholder="Type"
+																		/>
+																	) : valOcean?.value}
 															</div>
 														</div>
 
@@ -130,7 +145,12 @@ function RevenueBifurcation({ setGlobalStepper }) {
 															</div>
 															<div className={styles.value}>
 																{edit[itemShipment?.id]
-																	? <Input placeholder="Type" /> : valOcean?.value}
+																	? (
+																		<Input
+																			value={valOcean?.value}
+																			placeholder="Type"
+																		/>
+																	) : valOcean?.value}
 															</div>
 														</div>
 
@@ -148,7 +168,12 @@ function RevenueBifurcation({ setGlobalStepper }) {
 															</div>
 															<div className={styles.value}>
 																{edit[itemShipment?.id]
-																	? <Input placeholder="Type" /> : valOcean?.value}
+																	? (
+																		<Input
+																			value={valOcean?.value}
+																			placeholder="Type"
+																		/>
+																	) : valOcean?.value}
 															</div>
 														</div>
 
@@ -166,7 +191,12 @@ function RevenueBifurcation({ setGlobalStepper }) {
 															</div>
 															<div className={styles.value}>
 																{edit[itemShipment?.id]
-																	? <Input placeholder="Type" /> : valOcean?.value}
+																	? (
+																		<Input
+																			value={valOcean?.value}
+																			placeholder="Type"
+																		/>
+																	) : valOcean?.value}
 															</div>
 														</div>
 
