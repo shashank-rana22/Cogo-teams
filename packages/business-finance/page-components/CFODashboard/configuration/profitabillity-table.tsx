@@ -52,7 +52,7 @@ const profitabillityColumn = [
 		accessor : (row) => (
 			<div>
 				{getFormattedPrice(
-					row?.income,
+					Math.abs(row?.income),
 					'INR',
 				)}
 			</div>

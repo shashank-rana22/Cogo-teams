@@ -1,4 +1,4 @@
-import { Popover, Input, Toggle } from '@cogoport/components';
+import { Popover, Input, Toggle, Placeholder } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -19,9 +19,11 @@ function getFinancialYear(date) {
 function IncomeExpense({ globalFilters }) {
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [yearHandle, setYearHandle] = useState(false);
+	const [yearFilters, setYearFilters] = useState([]);
 	const {
 		incomeExpenseData = [],
-	} = useGetIncomeExpense({ globalFilters });
+		incomeExpenseLoading,
+	} = useGetIncomeExpense({ globalFilters, yearFilters });
 
 	const onChangeToggle = () => {
 		setToggleStatus(!toggleStatus);
@@ -30,7 +32,8 @@ function IncomeExpense({ globalFilters }) {
 	const currentYear = new Date().getFullYear();
 	const calendarYear = [];
 	for (let i = 0; i < 5; i++) {
-		calendarYear.push(currentYear - i);
+		const year = `${currentYear - i}`;
+		calendarYear.push(year);
 	}
 
 	const today = new Date();
@@ -42,6 +45,13 @@ function IncomeExpense({ globalFilters }) {
 		financialYears.push(financialYear);
 	}
 
+	const onClickFinancialYear = (year) => {
+		const years = year?.split('-');
+		console.log(year, 'years');
+
+		setYearFilters(years);
+	};
+
 	const calendarYearData = () => (
 		<div>
 			{calendarYear.map((year) => (
@@ -49,6 +59,7 @@ function IncomeExpense({ globalFilters }) {
 					<div
 						key={year}
 						role="presentation"
+						onClick={() => onClickFinancialYear(year)}
 					>
 						{year}
 
@@ -62,7 +73,14 @@ function IncomeExpense({ globalFilters }) {
 		<div>
 			{financialYears.map((year) => (
 				<div style={{ marginBottom: '10px' }}>
-					<div key={year}>{year}</div>
+					<div
+						key={year}
+						onClick={() => onClickFinancialYear(year)}
+						role="presentation"
+					>
+						{year}
+
+					</div>
 					<div className={styles.year_bottom_border} />
 				</div>
 			))}
@@ -121,7 +139,6 @@ function IncomeExpense({ globalFilters }) {
 					</div>
 
 					<div style={{ display: 'flex', gap: '8px', marginRight: '50px' }}>
-						{/* <Toggle name="a4" size="md" disabled={false} onLabel="Post Tax" offLabel="Pre Tax" /> */}
 						<div style={{ marginTop: '10px' }}>Contribution Margin Line Graph</div>
 						<Toggle
 							name="a1"
@@ -133,6 +150,7 @@ function IncomeExpense({ globalFilters }) {
 						/>
 					</div>
 				</div>
+
 				{toggleStatus ? (
 					<div className={styles.responsive_line_chart}>
 						<ResponsiveLineChart lineData={incomeExpenseData} />

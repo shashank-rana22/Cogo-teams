@@ -7,6 +7,8 @@ import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
 function StyledTable({ id, imageFind, className, columns, data, ...rest }:TableProps) {
+	const { loading } = rest || {};
+
 	return (
 		<div className={styles.table}>
 			<Table
@@ -16,8 +18,10 @@ function StyledTable({ id, imageFind, className, columns, data, ...rest }:TableP
 				className={className}
 				{...rest}
 			/>
+			{!loading && (
+				data?.length === 0 && <EmptyState imageFind={imageFind} />
+			)}
 
-			{data?.length === 0 && <EmptyState imageFind={imageFind} />}
 		</div>
 	);
 }

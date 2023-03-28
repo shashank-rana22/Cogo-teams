@@ -2,7 +2,6 @@ import { Pill, Button, Tooltip } from '@cogoport/components';
 import { IcMOceanSchedules, IcMAirport, IcMTransport } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import OverallPayablesStatsKeyMapping from '../../constants/overall-payables-stats-key-mapping';
 import OverallReceivablesStatsKeyMapping from '../../constants/overall-receivables-key-mapping';
@@ -10,6 +9,8 @@ import { serviceDataMapping } from '../../constants/service-base-data-mapping';
 import { statsTabs } from '../../constants/service_base_key_mapping';
 import useGetAccordianCardData from '../../hooks/getAccordianCardData';
 import useGetAccordianStatsData from '../../hooks/getAccordianStatsCardData';
+import showInTooltop from '../../utils/getOverFlowData';
+import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
@@ -65,12 +66,11 @@ function AccordianCards({ globalFilters }) {
 									>
 										<div className={styles.amounts}>
 											<Pill size="xl" color="green">
-												{
-												getFormattedPrice(
-													item.accountRec - Math.abs(item.accountPay),
-													'INR',
-												)
-												}
+
+												{showInTooltop(
+													getFormattedPrice(Math.abs(item.accountRec - Math.abs(item.accountPay)), 'INR'),
+													getAmountInLakhCrK(Math.abs(item.accountRec - Math.abs(item.accountPay)), 'INR'),
+												)}
 
 											</Pill>
 										</div>
@@ -79,11 +79,17 @@ function AccordianCards({ globalFilters }) {
 								<div className={styles.border} />
 								<div className={styles.ar_amount}>
 									<span style={{ marginRight: '10px' }}>AR:</span>
-									{showOverflowingNumber(getFormattedPrice(item?.accountRec, 'INR'), 15)}
+									{showInTooltop(
+										getFormattedPrice(item?.accountRec, 'INR'),
+										getAmountInLakhCrK(item?.accountRec, 'INR'),
+									)}
 								</div>
 								<div className={styles.ar_amount}>
 									<span style={{ marginRight: '10px' }}>AP:</span>
-									{showOverflowingNumber(getFormattedPrice(Math.abs(item?.accountPay), 'INR'), 15)}
+									{showInTooltop(
+										getFormattedPrice(Math.abs(item?.accountPay), 'INR'),
+										getAmountInLakhCrK(Math.abs(item?.accountPay), 'INR'),
+									)}
 								</div>
 							</div>
 						)}
@@ -131,15 +137,29 @@ function AccordianCards({ globalFilters }) {
 												<div className={styles.stats_text}>
 													<div className={styles.labels}>
 														AR :
-														{(accordianStatsData?.arData
-															|| {})[((serviceDataMapping[item?.service]
-															|| {})[val?.key] || {})?.AR] || ''}
+														<div style={{ marginLeft: '10px' }}>
+															{showInTooltop(
+																getFormattedPrice((accordianStatsData?.arData
+																|| {})[((serviceDataMapping[item?.service]
+																|| {})[val?.key] || {})?.AR] || '', 'INR'),
+																getAmountInLakhCrK((accordianStatsData?.arData
+																|| {})[((serviceDataMapping[item?.service]
+																|| {})[val?.key] || {})?.AR] || '', 'INR'),
+															)}
+														</div>
 													</div>
 													<div className={styles.labels}>
 														AP :
-														{(accordianStatsData?.apData
-															|| {})[((serviceDataMapping[item?.service]
-															|| {})[val?.key] || {})?.AP] || ''}
+														<div style={{ marginLeft: '10px' }}>
+															{showInTooltop(
+																getFormattedPrice(((accordianStatsData?.apData
+																|| {})[((serviceDataMapping[item?.service]
+																|| {})[val?.key] || {})?.AR] || '') * -1, 'INR'),
+																getAmountInLakhCrK(((accordianStatsData?.apData
+																|| {})[((serviceDataMapping[item?.service]
+																|| {})[val?.key] || {})?.AR] || '') * -1, 'INR'),
+															)}
+														</div>
 													</div>
 												</div>
 											</div>
@@ -151,7 +171,12 @@ function AccordianCards({ globalFilters }) {
 						<div className={styles.border_all}>
 							<div className={styles.data_style}>
 								<div className={styles.text_amount_styles}>
-									<div>{getFormattedPrice(accordianStatsData?.arData?.overdueAmount, 'INR')}</div>
+									<div>
+										{showInTooltop(
+											getFormattedPrice(accordianStatsData?.arData?.overdueAmount, 'INR'),
+											getAmountInLakhCrK(accordianStatsData?.arData?.overdueAmount, 'INR'),
+										)}
+									</div>
 									<div>Account Receivables</div>
 								</div>
 								<div>
@@ -170,7 +195,10 @@ function AccordianCards({ globalFilters }) {
 							<div className={styles.data_style}>
 								<div className={styles.text_amount_styles}>
 									<div>
-										{getFormattedPrice(Math.abs(accordianStatsData?.apData?.overdueAmount), 'INR')}
+										{showInTooltop(
+											getFormattedPrice(Math.abs(accordianStatsData?.apData?.overdueAmount), 'INR'),
+											getAmountInLakhCrK(Math.abs(accordianStatsData?.apData?.overdueAmount), 'INR'),
+										)}
 									</div>
 									<div>Account Payables</div>
 								</div>

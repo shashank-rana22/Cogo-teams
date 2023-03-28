@@ -1,4 +1,4 @@
-const getAmountInLakhCrK = (value:number) => {
+const getAmountInLakhCrK = (value:number, currency:string) => {
 	const val = Math.abs(value);
 
 	let formatedAmount = '';
@@ -13,7 +13,7 @@ const getAmountInLakhCrK = (value:number) => {
 		formatedAmount = `${(val).toFixed(2)}`;
 	}
 
-	return formatedAmount;
+	return `${currency} ${formatedAmount}`;
 };
 
 export { getAmountInLakhCrK };

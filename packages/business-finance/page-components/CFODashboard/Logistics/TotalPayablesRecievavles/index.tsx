@@ -9,6 +9,8 @@ import totalReceivablesKeyMappings from '../../constants/total-receivables-key-m
 import totalRecievablesStats from '../../constants/total-recievales';
 import useGetPayablesList from '../../hooks/getPayablesData';
 import useGetReceivablesList from '../../hooks/getReceivablesData';
+import showInTooltop from '../../utils/getOverFlowData';
+import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 import styles from '../styles.module.css';
 
 function TotalPayablesRecievables({ globalFilters }) {
@@ -85,12 +87,20 @@ function TotalPayablesRecievables({ globalFilters }) {
 							</div>
 							<div style={{ display: 'flex', justifyContent: 'space-between', width: '76%' }}>
 								<span style={{ marginLeft: '60px', fontSize: '16px', fontWeight: '500' }}>
-									{getFormattedPrice(nonOverdueAmount, 'INR')}
+
+									{showInTooltop(
+										getFormattedPrice(nonOverdueAmount, 'INR'),
+										getAmountInLakhCrK(nonOverdueAmount, 'INR'),
+									)}
 
 								</span>
 								<div style={{ display: 'flex', alignItems: 'center' }}>
 									<span style={{ marginLeft: '60px', fontSize: '16px', fontWeight: '500' }}>
-										{getFormattedPrice(overdueAmount, 'INR')}
+										{showInTooltop(
+											getFormattedPrice(overdueAmount, 'INR'),
+											getAmountInLakhCrK(overdueAmount, 'INR'),
+										)}
+
 									</span>
 									<Popover
 										placement="bottom"
@@ -112,8 +122,13 @@ function TotalPayablesRecievables({ globalFilters }) {
 							<ProgressBar progress={progressReceivables} />
 							<div style={{ display: 'flex' }}>
 								<div className={styles.texts}>Total Unpaid invoices:</div>
-								<div style={{ marginLeft: '20px' }}>
-									{getFormattedPrice(Math.abs(progressDataReceivables), 'INR')}
+								<div style={{ marginLeft: '20px', display: 'flex' }}>
+									<div>
+										{showInTooltop(
+											getFormattedPrice(Math.abs(progressDataReceivables), 'INR'),
+											getAmountInLakhCrK(Math.abs(progressDataReceivables), 'INR'),
+										)}
+									</div>
 									<span style={{ marginLeft: '5px' }}>
 										(
 										{notPaidDocumentCount}
@@ -145,12 +160,17 @@ function TotalPayablesRecievables({ globalFilters }) {
 
 					<div style={{ display: 'flex', justifyContent: 'space-between', width: '76%' }}>
 						<span style={{ marginLeft: '60px', fontSize: '16px', fontWeight: '500' }}>
-							{getFormattedPrice(Math.abs(payNonOverdueAmount), 'INR')}
-
+							{showInTooltop(
+								getFormattedPrice(Math.abs(payNonOverdueAmount), 'INR'),
+								getAmountInLakhCrK(Math.abs(payNonOverdueAmount), 'INR'),
+							)}
 						</span>
 						<div style={{ display: 'flex', alignItems: 'center' }}>
 							<span style={{ marginLeft: '60px', fontSize: '16px', fontWeight: '500' }}>
-								{getFormattedPrice(Math.abs(payOverdueAmount), 'INR')}
+								{showInTooltop(
+									getFormattedPrice(Math.abs(payOverdueAmount), 'INR'),
+									getAmountInLakhCrK(Math.abs(payOverdueAmount), 'INR'),
+								)}
 							</span>
 							<Popover
 								placement="bottom"
@@ -172,9 +192,14 @@ function TotalPayablesRecievables({ globalFilters }) {
 					<ProgressBar progress={progressPayables} />
 					<div style={{ display: 'flex' }}>
 						<div className={styles.texts}>Total Unpaid invoices:</div>
-						<div style={{ marginLeft: '20px' }}>
+						<div style={{ marginLeft: '20px', display: 'flex' }}>
 							{' '}
-							{getFormattedPrice(Math.abs(progressPayableData), 'INR')}
+							<div>
+								{showInTooltop(
+									getFormattedPrice(Math.abs(progressPayableData), 'INR'),
+									getAmountInLakhCrK(Math.abs(progressPayableData), 'INR'),
+								)}
+							</div>
 							<span style={{ marginLeft: '5px' }}>
 								(
 								{payNotPaidDocumentCount}

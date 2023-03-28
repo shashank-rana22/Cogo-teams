@@ -1,6 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
 
-import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
+import { getAmountInLakhCrK } from '../../getAmountInLakhCrK';
 
 function ResponsiveLineChart({ lineData }) {
 	const lineChartData = [

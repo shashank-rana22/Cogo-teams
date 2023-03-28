@@ -53,27 +53,33 @@ function Profitabillity({ globalFilters }) {
 					{tab.map((item) => (
 						<div
 							key={item?.key}
-							onClick={() => { setTabs(item.key); }}
+							onClick={() => {
+								setFilters((p) => ({ ...p, pageIndex: 1 })); setTabs(item.key);
+							}}
 							role="presentation"
 						>
 							<div className={item.key === tabs ? styles.sub_container_click : styles.sub_container}>
 								{item.label}
 								{' '}
-								{profitabillityData?.averageProfit}
+								{profitabillityData?.averageProfit.toFixed(2)}
+								%
 							</div>
 						</div>
 					))}
 				</div>
 
 				<div className={styles.search}>
-					<Select
-						value={jobsFilters}
-						onChange={(e: any) => setJobsFilters(e)}
-						placeholder="Job Filters"
-						options={jobsOptions}
-						size="md"
-						style={{ width: '250px' }}
-					/>
+					{tabs === 'shipment'
+						&& (
+							<Select
+								value={jobsFilters}
+								onChange={(e: any) => setJobsFilters(e)}
+								placeholder="Job Filters"
+								options={jobsOptions}
+								size="md"
+								style={{ width: '250px' }}
+							/>
+						)}
 					<Input
 						name="q"
 						size="sm"

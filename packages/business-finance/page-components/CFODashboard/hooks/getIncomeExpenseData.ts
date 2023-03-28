@@ -3,7 +3,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetIncomeExpense = ({ globalFilters }) => {
+const useGetIncomeExpense = ({ globalFilters, yearFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/bf-income-expense',
@@ -17,7 +17,10 @@ const useGetIncomeExpense = ({ globalFilters }) => {
 		try {
 			trigger({
 				params: {
-					serviceType: globalFilters?.serviceType,
+					calenderYear     : yearFilters.length === 1 ? yearFilters[0] : undefined,
+					financeYearStart : yearFilters.length === 2 ? yearFilters[0] : undefined,
+					financeYearEnd   : yearFilters.length === 2 ? yearFilters[1] : undefined,
+					serviceType      : globalFilters?.serviceType,
 				},
 			});
 		} catch (e) {
@@ -27,7 +30,7 @@ const useGetIncomeExpense = ({ globalFilters }) => {
 
 	useEffect(() => {
 		refetch();
-	}, [globalFilters?.serviceType]);
+	}, [globalFilters?.serviceType, yearFilters]);
 
 	return {
 		incomeExpenseLoading : loading,

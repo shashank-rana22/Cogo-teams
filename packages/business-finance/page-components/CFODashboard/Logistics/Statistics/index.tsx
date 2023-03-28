@@ -1,7 +1,10 @@
 import { IcMInfo, IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
+import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import useGetTodayStats from '../../hooks/getTodayStats';
+import showInTooltop from '../../utils/getOverFlowData';
+import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
@@ -28,7 +31,13 @@ function Statistics({ globalFilters }) {
 					<div className={styles.border_left_side} />
 					<div className={styles.expense_main}>
 						<div className={styles.expense_text}>Expense</div>
-						<div className={styles.amount_styles}>{totalExpense}</div>
+						<div className={styles.amount_styles}>
+
+							{showInTooltop(
+								getFormattedPrice(totalExpense, 'INR'),
+								getAmountInLakhCrK(totalExpense, 'INR'),
+							)}
+						</div>
 						<div className={styles.invoices_styles}>
 							{totalBills}
 							{' '}
@@ -41,7 +50,13 @@ function Statistics({ globalFilters }) {
 					</div>
 					<div className={styles.revenue_main}>
 						<div className={styles.expense_text}>Revenue</div>
-						<div className={styles.amount_styles}>{totalRevenue}</div>
+						<div className={styles.amount_styles}>
+
+							{showInTooltop(
+								getFormattedPrice(totalRevenue, 'INR'),
+								getAmountInLakhCrK(totalRevenue, 'INR'),
+							)}
+						</div>
 						<div className={styles.invoices_styles}>
 							{totalInvoices}
 							{' '}
@@ -55,13 +70,23 @@ function Statistics({ globalFilters }) {
 					<div className={styles.border_right_side} />
 					<div className={styles.revenue_main}>
 						<div>Cash Flow</div>
-						<div>{totalCashFlow}</div>
+						<div>
+							{showInTooltop(
+								getFormattedPrice(totalCashFlow, 'INR'),
+								getAmountInLakhCrK(totalCashFlow, 'INR'),
+							)}
+						</div>
 						<div className={styles.text_styles}>
 							<div className={styles.icon_styles}><IcMArrowNext height={20} width={20} /></div>
-							<div>
-								{' '}
-								{cashFlowDiffFromYesterday}
-								% more than yesterday
+							<div style={{ display: 'flex' }}>
+								<div style={{ marginRight: '2px' }}>
+									{showInTooltop(
+										getFormattedPrice(cashFlowDiffFromYesterday, 'INR'),
+										getAmountInLakhCrK(cashFlowDiffFromYesterday, 'INR'),
+									)}
+								</div>
+								%
+								<span style={{ marginLeft: '10px' }}>more than yesterday</span>
 							</div>
 						</div>
 

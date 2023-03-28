@@ -1,7 +1,7 @@
 import { ResponsiveBar } from '@cogoport/charts/bar/index';
 import React from 'react';
 
-import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
+import { getAmountInLakhCrK } from '../../getAmountInLakhCrK';
 
 function ResponsiveBarChart({ barData }) {
 	return (
