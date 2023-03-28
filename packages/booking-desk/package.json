@@ -6,9 +6,7 @@
   "main": "index.js",
   "dependencies": {
     "@cogoport/components": "^1.0.390",
-    "@cogoport/forms": "workspace:^0.1.0",
     "@cogoport/icons-react": "^1.0.61",
-    "@cogoport/navigation-configs": "workspace:^0.1.0",
     "@cogoport/next": "workspace:^0.1.0",
     "@cogoport/request": "workspace:^0.1.0",
     "@cogoport/scope-select": "workspace:^0.1.0",
