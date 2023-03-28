@@ -1,13 +1,17 @@
+import List from '../../commons/List';
 import Loader from '../../commons/Loader';
-import useListBookingDeskShipments from '../../hooks/LCL/useListBookingDeskShipments';
+import ScopeAndFilters from '../../commons/ScopeAndFilters';
+import TabsAndFilters from '../../commons/TabsAndFilters';
+import { lcl_freight as tabs } from '../../config/TABS_CONFIG.json';
+import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments';
 
-import List from './List';
-import ScopeAndFilters from './ScopeAndFilters';
+import Card from './Card';
 import styles from './styles.module.css';
-import TabsAndFilters from './TabsAndFilters';
 
 export default function LCLDesk({ stateProps = {} }) {
-	const { loading, data } = useListBookingDeskShipments({ stateProps });
+	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'lcl_freight' });
+
+	const isCardAnimatable = !!tabs.find((tab) => tab.name === stateProps.activeTab).criticalVisible;
 
 	return (
 		<div>
@@ -17,10 +21,17 @@ export default function LCLDesk({ stateProps = {} }) {
 				<ScopeAndFilters stateProps={stateProps} />
 			</div>
 
-			<TabsAndFilters stateProps={stateProps} />
+			<TabsAndFilters stateProps={stateProps} tabs={tabs} />
 
 			<div className={`${styles.list_container} ${loading ? styles.loading : ''}`}>
-				{loading ? <Loader /> : <List data={data} stateProps={stateProps} />}
+				{loading ? <Loader /> : (
+					<List
+						data={data}
+						stateProps={stateProps}
+						Card={Card}
+						isCardAnimatable={isCardAnimatable}
+					/>
+				)}
 			</div>
 		</div>
 	);

@@ -1,10 +1,8 @@
 import { TabPanel, Tabs, Toggle, Input } from '@cogoport/components';
 
-import { fcl_freight_local as tabs } from '../../../config/TABS_CONFIG.json';
-
 import styles from './styles.module.css';
 
-export default function TabsAndFilters({ stateProps }) {
+export default function TabsAndFilters({ stateProps, tabs }) {
 	const { activeTab, setActiveTab, filters, setFilters } = stateProps;
 	const { isCriticalOn, ...rest } = filters;
 
@@ -33,7 +31,7 @@ export default function TabsAndFilters({ stateProps }) {
 					<Toggle
 						size="md"
 						offLabel="Critical SIDs"
-						value={isCriticalOn}
+						checked={isCriticalOn}
 						onChange={() => setFilters({ ...filters, isCriticalOn: !isCriticalOn, page: 1 })}
 					/>
 				) : null}

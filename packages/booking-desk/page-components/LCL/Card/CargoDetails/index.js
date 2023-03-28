@@ -1,6 +1,6 @@
 import { Pill } from '@cogoport/components';
-import { startCase, upperCase } from '@cogoport/utils';
 
+import { renderValue } from './renderCargoValue';
 import styles from './styles.module.css';
 
 const labels = [
@@ -9,29 +9,6 @@ const labels = [
 	'weight',
 	'volume',
 ];
-
-const renderValue = (label, value, allDetails) => {
-	switch (label) {
-		case 'commodity': {
-			return startCase(value);
-		}
-		case 'inco_term': {
-			return `Inco - ${upperCase(value)}`;
-		}
-		case 'weight': {
-			return `${value} kgs`;
-		}
-		case 'volume': {
-			return ` ${value} cbm ${`, Chargeable Weight: ${Math.max(
-				value * 166.67,
-				allDetails?.weight,
-			).toFixed(2)} kg`}`;
-		}
-		default: {
-			return '';
-		}
-	}
-};
 
 export default function CargoDetails({ cargo_details }) {
 	return (
