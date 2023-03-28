@@ -72,6 +72,7 @@ function Compose({
 	const [isBcc, setIsBcc] = useState(false);
 	const [userEmailArray, setUserEmailArray] = useState([]);
 	const [ccEmailArray, setCcEmailArray] = useState([]);
+	const [bccEmailArray, setBccEmailArray] = useState([]);
 	const [errors, setErrors] = useState({});
 	const [deleteEmail, setDeleteEmail] = useState(false);
 	const [editorState, setEditorState] = useState('');
@@ -99,6 +100,7 @@ function Compose({
 	const entity_type = watch('entity_type');
 	const userEmail = watch('toUserEmail');
 	const ccEmail = watch('ccrecipients');
+	const bccEmail = watch('bccrecipients');
 
 	if (pre_subject_text && subject_position === 'prefix') {
 		actualSubject = `${pre_subject_text} / ${entity_type} / ${actualSubject}`;
@@ -145,6 +147,17 @@ function Compose({
 					ccEmail,
 				]);
 				setValue('ccrecipients', '');
+			}
+		}
+		if ((e.keyCode === 13 || e.keyCode === 32) && bccEmail) {
+			if (!geo.regex.EMAIL.test(bccEmail)) {
+				Toast.error('Please Enter Valid Email Address');
+			} else {
+				setBccEmailArray([
+					...bccEmailArray,
+					bccEmail,
+				]);
+				setValue('bccrecipients', '');
 			}
 		}
 	};
@@ -215,6 +228,11 @@ function Compose({
 							name="bccrecipients"
 							control={control}
 							placeholder="Type here..."
+							onKeyDown={(e) => handleClick(e)}
+							emailValue={bccEmailArray}
+							setEmailValue={setBccEmailArray}
+							setValue={setValue}
+							setDeleteEmail={setDeleteEmail}
 						/>
 					)
 					: null}
@@ -291,6 +309,7 @@ function Compose({
 					onCreate={() => setComposingEmail(null)}
 					userEmailArray={userEmailArray}
 					ccEmailArray={ccEmailArray}
+					bccEmailArray={bccEmailArray}
 				/>
 			</div>
 		</div>
