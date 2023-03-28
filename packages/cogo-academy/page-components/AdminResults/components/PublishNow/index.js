@@ -31,7 +31,7 @@ function PublishNow({ test_id, refetchTest }) {
 
 	return (
 		<>
-			<Button onClick={() => setShowPublishModal(true)}>End Test & Publish Now</Button>
+			<Button onClick={() => setShowPublishModal(true)}>Publish Results</Button>
 
 			{showPublishModal && (
 				<Modal size="sm" show={showPublishModal} onClose={setShowPublishModal}>
@@ -57,8 +57,7 @@ function PublishNow({ test_id, refetchTest }) {
 								themeType="accent"
 								onClick={() => setShowPublishModal(false)}
 							>
-								Publish After Validity Ends
-
+								Cancel
 							</Button>
 						</div>
 					</Modal.Body>

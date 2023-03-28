@@ -1,87 +1,64 @@
+import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState, useEffect } from 'react';
 
-import Completion from './Completion';
-import useGetTest from './hooks/useGetTest';
-import Introduction from './Introduction';
-import Ongoing from './Ongoing';
-import styles from './styles.module.css';
+import NotEligible from './NotEligible';
+import TakeTest from './takeTest';
 
-const COMPONENT_MAPPING = {
-	introduction: {
-		key       : 'introduction',
-		component : Introduction,
+const ELIGIBILITY_SCREEN_MAPPING = {
+	is_invalid_user: {
+		heading     : 'Not eligible to attempt this Test',
+		sub_heading : `This test is not meant for you. 
+        Please go back to your Dashboard and try to attempt tests relevant to your role.`,
 	},
-	ongoing: {
-		key       : 'ongoing',
-		component : Ongoing,
+	is_inactive: {
+		heading     : 'This test is Not Active Yet',
+		sub_heading : 'It will show up on your Dashboard as soon as it is Active. You may Attempt the test then.',
 	},
-	completed: {
-		key       : 'completed',
-		component : Completion,
+	no_attempts_left: {
+		heading     : 'No attempts remaining',
+		sub_heading : 'You have exhausted all attempts to clear this test. You cannot appear for it anymore.',
 	},
+
 };
 
-function TakeTest() {
+function CheckEligibility() {
 	const {
-		profile: {
-			user: { id: user_id },
+		query: { test_id },
+		user: { id: user_id },
+	} = useSelector(({ general, profile }) => ({
+		query : general.query,
+		user  : profile.user,
+	}));
+
+	const [{ data }] = useRequest({
+		method : 'POST',
+		url    : '/check_test_user_eligibility',
+		params : {
+			user_id, test_id,
 		},
-		general: {
-			query: { test_id },
-		},
-	} = useSelector((state) => state);
+	}, { manual: !test_id });
 
-	const [activeState, setActiveState] = useState('');
+	const { is_valid_user, is_active, attempts_left } = data || {};
 
-	const page = localStorage.getItem(`current_question_${test_id}_${user_id}`);
+	const currentQuestion = localStorage.getItem(`current_question_${test_id}_${user_id}`);
 
-	const {
-		loading = false,
-		data,
-	} = useGetTest({ id: test_id, user_id });
-
-	const { test_user_mapping_state = 'introduction' } = data || {};
-
-	useEffect(() => {
-		setActiveState(test_user_mapping_state);
-	}, [setActiveState, test_user_mapping_state]);
-
-	useEffect(() => {
-		if (localStorage.getItem(`current_question_${test_id}_${user_id}`)) {
-			setActiveState('ongoing');
-
-			const elem = document.getElementById('maincontainer');
-
-			if (elem?.requestFullscreen) {
-				elem?.requestFullscreen();
-			} else if (elem?.webkitRequestFullscreen) { /* Safari */
-				elem?.webkitRequestFullscreen();
-			} else if (elem?.msRequestFullscreen) { /* IE11 */
-				elem?.msRequestFullscreen();
-			}
-		}
-
-		localStorage.setItem('visibilityChangeCount', 1);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	const Component = COMPONENT_MAPPING[activeState]?.component;
-
-	if (loading) {
-		return 'loading ...';
+	if (currentQuestion) {
+		return <TakeTest />;
 	}
 
-	return (
-		<div id="maincontainer" className={styles.container}>
-			<Component
-				setActiveState={setActiveState}
-				loading={loading}
-				testData={data}
-				page={page}
-			/>
-		</div>
-	);
+	if (!is_valid_user) {
+		return <NotEligible {...ELIGIBILITY_SCREEN_MAPPING.is_invalid_user} />;
+	}
+
+	if (!is_active) {
+		return <NotEligible {...ELIGIBILITY_SCREEN_MAPPING.is_inactive} />;
+	}
+
+	if (!attempts_left) {
+		return <NotEligible {...ELIGIBILITY_SCREEN_MAPPING.no_attempts_left} />;
+	}
+
+	return <TakeTest />;
 }
 
-export default TakeTest;
+export default CheckEligibility;

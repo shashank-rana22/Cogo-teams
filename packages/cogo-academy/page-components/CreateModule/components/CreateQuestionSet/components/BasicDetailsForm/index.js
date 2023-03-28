@@ -71,16 +71,15 @@ function BasicDetailsForm({
 
 	if (!isEmpty(questionSetId) && !showForm) {
 		return (
-			<>
-				<div className={`${styles.container} ${styles.flex_row}`}>
-					{constants.map((item) => (
-						<div className={styles.flex_container}>
-							<div className={styles.label}>{startCase(item)}</div>
-							<div className={styles.value}>
-								{item === 'cogo_entity_id' ? cogo_entity_object?.business_name : data?.[item]}
-							</div>
+			<div className={`${styles.container} ${styles.flex_row}`}>
+				{constants.map((item) => (
+					<div className={styles.flex_container}>
+						<div className={styles.label}>{startCase(item)}</div>
+						<div className={styles.value}>
+							{item === 'cogo_entity_id' ? cogo_entity_object?.business_name : data?.[item] || 0}
 						</div>
-					))}
+					</div>
+				))}
 
 					<div className={styles.button_container}>
 						<IcMEdit className={styles.button} onClick={() => editForm()} />

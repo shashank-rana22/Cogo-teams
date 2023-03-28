@@ -11,9 +11,12 @@ import Summary from './Summary';
 
 function TestResult() {
 	const {
-		profile: { user: { id: user_id } },
-		general: { query: { test_id } },
-	} = useSelector((state) => state);
+		query: { test_id },
+		user: { id: user_id },
+	} = useSelector(({ general, profile }) => ({
+		query : general.query,
+		user  : profile.user,
+	}));
 
 	const { push } = useRouter();
 

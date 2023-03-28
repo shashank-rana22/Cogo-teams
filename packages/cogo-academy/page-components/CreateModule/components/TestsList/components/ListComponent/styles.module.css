@@ -5,7 +5,7 @@
 	justify-content: flex-start;
 	height: 40vh;
 	padding: 80px;
-	background-color: white;
+	background-color: #fff;
 }
 
 .text {
@@ -17,7 +17,7 @@
 
 	:global {
 		.ui_table_head_row {
-			background-color: white;
+			background-color: #fff;
 
 			.ui_table_head_cell {
 				padding-top: 18px;
@@ -25,13 +25,13 @@
 				margin-bottom: 10px;
 				font-size: 14px;
 				color: black;
-				border-bottom: 1px solid #f8f2e7;
 				text-align: center !important;
+				border-bottom: 1px solid #f8f2e7;
 			}
 		}
 
 		.ui_table_body_container {
-			background-color: white;
+			background-color: #fff;
 
 			.ui_table_body_row {
 				border-radius: 8px;

@@ -12,8 +12,10 @@ import TopicWisePercentile from './TopicWisePercentile';
 
 function LastTestResults() {
 	const {
-		profile: { user: { id: user_id } },
-	} = useSelector((state) => state);
+		user: { id: user_id },
+	} = useSelector(({ profile }) => ({
+		user: profile.user,
+	}));
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',

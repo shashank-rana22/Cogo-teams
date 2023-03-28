@@ -10,11 +10,12 @@ import EmptyState from '../EmptyState';
 import IconComponent from './IconComponent';
 import styles from './styles.module.css';
 
-const alphabetMapping = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+const ALPHABET_MAPPING = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
 const getCorrectAnswersCombined = ({ correctOptions = [] }) => (correctOptions || []).map(
-	(item) => `${alphabetMapping[item.sequence_number]}) ${item.answer_text}`,
+	(item) => `${ALPHABET_MAPPING[item.sequence_number]}) ${item.answer_text}`,
 );
+
 const getCorrectAnswers = ({ answers = [] }) => {
 	const correctOptions = (answers || []).filter((item) => item.is_correct);
 	const correctAnswers = getCorrectAnswersCombined({ correctOptions });

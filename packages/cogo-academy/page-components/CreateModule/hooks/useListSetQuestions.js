@@ -43,7 +43,9 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 	};
 
 	useEffect(() => {
-		listSetQuestions({ questionToShow: '' });
+		if (questionSetId) {
+			listSetQuestions({ questionToShow: '' });
+		}
 	}, [questionSetId, query, page]);
 
 	return {
