@@ -1,4 +1,4 @@
-import { Tooltip, Avatar } from '@cogoport/components';
+import { Placeholder, Tooltip, Avatar } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import EnlargedCard from './EnlargedCard';
@@ -47,6 +47,30 @@ function UserCard({
 	};
 
 	if (!enlarged) {
+		if (loading) {
+			return (
+				<div className={styles.card_container}>
+					<div className={styles.name_card}>
+						<Placeholder width="56px" height="56px" style={{ borderRadius: '4px' }} margin="8px" />
+
+						<div className={styles.user_info}>
+							<Placeholder width="240px" height="24px" style={{ borderRadius: '4px' }} />
+
+							<div className={styles.id_designation}>
+								<div className={styles.designation}>
+									<Placeholder width="100px" height="20px" style={{ borderRadius: '4px' }} />
+								</div>
+
+								<div className={styles.id}>
+									<Placeholder width="60px" height="20px" style={{ borderRadius: '4px' }} />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			);
+		}
+
 		return (
 			<div className={`${styles.card_container} ${loading && !isLastLevel ? styles.loading_card : ''}`}>
 				<div
@@ -78,7 +102,12 @@ function UserCard({
 	}
 
 	return (
-		<EnlargedCard user={user} avatarProps={getAvatarProps(user)} fetchTreeData={fetchTreeData} loading={loading} />
+		<EnlargedCard
+			user={user}
+			avatarProps={getAvatarProps(user)}
+			fetchTreeData={fetchTreeData}
+			loading={loading}
+		/>
 	);
 }
 
