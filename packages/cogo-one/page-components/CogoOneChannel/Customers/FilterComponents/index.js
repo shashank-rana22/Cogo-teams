@@ -29,8 +29,9 @@ function FilterComponents({
 	setShowBotMessages = () => {},
 	isomniChannelAdmin = false,
 	tagOptions = [],
+	showBotMessages = false,
 }) {
-	const filterControls = useGetControls({ isomniChannelAdmin, tagOptions });
+	const filterControls = useGetControls({ isomniChannelAdmin, tagOptions, showBotMessages });
 
 	const defaultValues = getDefaultValues({ filters: appliedFilters, filterControls });
 
@@ -42,7 +43,10 @@ function FilterComponents({
 
 	const { assigned_to = '', observer = '' } = formValues || {};
 
-	const showElements = { assigned_agent: assigned_to === 'agent', chat_tags: observer === 'chat_tags' };
+	const showElements = {
+		assigned_agent : assigned_to === 'agent',
+		chat_tags      : observer === 'chat_tags' || isomniChannelAdmin,
+	};
 
 	let filterValues = {};
 
@@ -71,26 +75,12 @@ function FilterComponents({
 		setActiveCardId('');
 		setAppliedFilters(filterValues);
 		setFilterVisible(false);
-		setShowBotMessages(filterValues?.observer === 'botSession');
+		if (!isomniChannelAdmin) {
+			setShowBotMessages(filterValues?.observer === 'botSession');
+		}
 	};
 	const renderComp = (singleField) => {
 		const show = !(singleField?.name in showElements) || showElements[singleField?.name];
-		if (singleField?.onlyForAdmin) {
-			if (isomniChannelAdmin) {
-				return (
-					show && (
-						<Item
-							{...singleField}
-							control={control}
-							value={formValues[singleField.name]}
-							setValue={setValue}
-							error={errors[singleField.name]}
-						/>
-					)
-				);
-			}
-			return null;
-		}
 		return (
 			show && (
 				<Item
@@ -125,20 +115,6 @@ function FilterComponents({
 						) : null}
 				</div>
 			</div>
-			{/* {!isomniChannelAdmin && (
-				<div className={styles.styled_flex}>
-					<Checkbox
-						name="closed"
-						size="sm"
-						onChange={() => setBotToggle((p) => !p)}
-						checked={botToggle}
-					/>
-					<div>
-						Closed
-					</div>
-				</div>
-			)} */}
-
 			{filterControls.map((field) => (
 				<div className={styles.filter_container} key={field.name}>
 					{renderComp(field)}
