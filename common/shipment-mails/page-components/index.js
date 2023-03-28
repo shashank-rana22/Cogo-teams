@@ -75,7 +75,7 @@ function ShipmentMails({
 				source={source}
 			/>
 
-			{source !== 'outlook' ? (
+			{source === 'outlook' ? (
 				<List
 					RECIEVE_EMAIL={RECIEVE_EMAIL}
 					activeBox={activeBox}

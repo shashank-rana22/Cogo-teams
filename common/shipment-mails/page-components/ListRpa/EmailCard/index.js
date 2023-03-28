@@ -1,23 +1,25 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMProfile, IcMAttach } from '@cogoport/icons-react';
-// import { subtractDays, addHours } from '@cogoport/utils';
-// import { formatDistanceToNow } from 'date-fns';
-// import addMinutes from 'date-fns/addMinutes';
+import { subtractDays, addHours } from '@cogoport/utils';
+import { formatDistanceToNow } from 'date-fns';
+import addMinutes from 'date-fns/addMinutes';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function EmailCard({ data, onClick, activeMail }) {
-	// const yesterday = subtractDays(new Date(), 1);
-	// let received_time = addHours(data.received_time, 5);
-	// received_time = addMinutes(received_time, 30);
-	// const displayDate =	new Date(received_time) > yesterday
-	// 	? formatDistanceToNow(received_time)
-	// 	: formatDate({
-	// 		date       : received_time,
-	// 		dateFormat : GLOBAL_CONSTANTS.formats.date['eee, dd MMM, yyyy'],
-	// 		formatType : 'date',
-	// 	});
+	const yesterday = subtractDays(new Date(), 1);
+	let received_time = addHours(data.received_time, 5);
+	received_time = addMinutes(received_time, 30);
+	const displayDate =	new Date(received_time) > yesterday
+		? formatDistanceToNow(received_time)
+		: formatDate({
+			date       : data.received_time,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['eee, dd MMM, yyyy'],
+			formatType : 'date',
+		});
 
 	return (
 		<div
@@ -35,17 +37,17 @@ function EmailCard({ data, onClick, activeMail }) {
 					<div className={styles.sender}>
 						{data.sender}
 					</div>
-					{data?.hasAttachments ? <IcMAttach /> : null}
+					{data?.attachments_attachment_id ? <IcMAttach /> : null}
 				</div>
 
 				<div>
 					<div className={styles.subject}>{data.subject}</div>
 					<div className={styles.subject}>
-						{/* {displayDate} */}
+						{displayDate}
 						.
 					</div>
 				</div>
-				<div className={styles.initial_body}>{data.bodyPreview}</div>
+				<div className={styles.initial_body}>{data.body_preview}</div>
 			</div>
 		</div>
 	);
