@@ -14,7 +14,7 @@ export default function FCLDesk({ stateProps = {} }) {
 	const isCardAnimatable = !!tabs.find((tab) => tab.name === stateProps.activeTab).criticalVisible;
 
 	return (
-		<div>
+		<>
 			<div className={styles.header}>
 				<h1>Booking Desk</h1>
 
@@ -33,6 +33,6 @@ export default function FCLDesk({ stateProps = {} }) {
 					/>
 				)}
 			</div>
-		</div>
+		</>
 	);
 }

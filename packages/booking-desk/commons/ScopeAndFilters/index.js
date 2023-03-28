@@ -13,12 +13,13 @@ function PopoverContent({ stateProps }) {
 	const { shipment_type, trade_type } = filters;
 
 	const handleTradeTypeChange = (val) => {
-		setFilters({ ...filters, trade_type: val, page: 1 });
+		if (val !== filters.trade_type) { setFilters({ ...filters, trade_type: val, page: 1 }); }
 	};
 
 	return (
 		<div className={styles.popover_content}>
 			<Select
+				size="sm"
 				onChange={(newShipmentType) => handleShipmentTypeChange({ stateProps, newShipmentType })}
 				options={CONTROLS.shipment_types}
 				value={shipment_type}
@@ -27,6 +28,7 @@ function PopoverContent({ stateProps }) {
 			<div className={styles.trade_type_container}>
 				{CONTROLS.trade_types.map(({ label, value }) => (
 					<Button
+						size="sm"
 						className={trade_type === value ? styles.active : styles.inactive}
 						onClick={() => handleTradeTypeChange(value)}
 					>
@@ -43,8 +45,8 @@ export default function ScopeAndFilters({ stateProps }) {
 
 	const isFiltersApplied = Object.entries(filters)
 		.some(([key, val]) => {
-			if (key === 'shipment_type') return false;
-			if (key === 'page') return val !== 1;
+			if (['shipment_type', 'page'].includes(key)) return false;
+			if (key === 'isCriticalOn') return !!val;
 			return !isEmpty(val);
 		});
 
@@ -57,7 +59,7 @@ export default function ScopeAndFilters({ stateProps }) {
 			<Button
 				themeType="secondary"
 				size="sm"
-				className={styles.filter_text}
+				className={`${styles.filter_text} ${styles.disabled_button}`}
 				onClick={clearFilters}
 				disabled={!isFiltersApplied}
 			>

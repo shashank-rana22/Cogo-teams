@@ -2,7 +2,7 @@ import TABS_CONFIG from '../config/TABS_CONFIG.json';
 
 export default function handleShipmentTypeChange({ stateProps, newShipmentType }) {
 	const { filters, setFilters, activeTab, setActiveTab } = stateProps;
-	const { isCriticalOn } = filters;
+	const { isCriticalOn, ...restFilters } = filters;
 
 	const tabs = TABS_CONFIG[newShipmentType];
 
@@ -14,5 +14,5 @@ export default function handleShipmentTypeChange({ stateProps, newShipmentType }
 		setActiveTab(newActiveTab.name);
 	}
 
-	setFilters({ ...filters, shipment_type: newShipmentType, ...(isCriticalVisible && { isCriticalOn }) });
+	setFilters({ ...restFilters, shipment_type: newShipmentType, ...(isCriticalVisible && { isCriticalOn }), page: 1 });
 }
