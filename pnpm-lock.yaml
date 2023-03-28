@@ -577,7 +577,6 @@ importers:
       '@cogoport/components': 1.0.366_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react-dom@18.2.0+react@18.2.0
-      '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.6
