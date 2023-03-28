@@ -18,6 +18,8 @@ function Footer({
 	onError,
 	action,
 	onCreate,
+	userEmailArray,
+	ccEmailArray,
 }) {
 	const userId = useSelector(({ profile }) => profile?.id);
 	const { createEmail, mailApi } = useSendEmail();
@@ -41,13 +43,10 @@ function Footer({
 	}
 
 	const sendMail = async (data) => {
-		const toUserEmail = data?.toUserEmail
-			.split(',')
-			.map((email) => email.trim());
 		const payload = {
 			sender       : COMPOSE_EMAIL,
-			toUserEmail,
-			ccrecipients : [],
+			toUserEmail  : userEmailArray,
+			ccrecipients : ccEmailArray,
 			subject      : data?.subject,
 			content,
 			attachments  : attachments.map((item) => item),
@@ -57,7 +56,7 @@ function Footer({
 		};
 		await actionToPerform(payload);
 	};
-	const loading =		replyAllMailApi.loading
+	const loading =	replyAllMailApi.loading
 		|| mailApi.loading
 		|| forwardMailApi.loading
 		|| replyMailApi.loading;
