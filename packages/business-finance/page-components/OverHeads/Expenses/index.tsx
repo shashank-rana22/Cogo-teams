@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import { Popover, Button, Input, Tooltip } from '@cogoport/components';
-import { IcMSearchlight, IcMInfo } from '@cogoport/icons-react';
+import { Popover, Button, Input } from '@cogoport/components';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import { ListDataProps } from '../../AccountPayables/commons/Interfaces';
@@ -163,7 +163,7 @@ function ExpenseComponent() {
 			<Button
 				themeType="secondary"
 				disabled={itemData?.status !== 'ACCEPTED'}
-				size="md"
+				size="sm"
 				style={{ border: '1px solid black' }}
 				onClick={() => handleAddExpense(itemData)}
 			>
@@ -187,9 +187,9 @@ function ExpenseComponent() {
 									{formatDate(endDate, 'dd MMM yyyy', {}, false)}
 
 								</div>
-								<Tooltip content="Duration: x months">
+								{/* <Tooltip content="Duration: x months">
 									<div style={{ margin: '0px 4px' }}><IcMInfo /></div>
-								</Tooltip>
+								</Tooltip> */}
 							</div>
 						</div>
 					</div>
@@ -202,13 +202,17 @@ function ExpenseComponent() {
 			return (
 				<div className={styles.data_container}>
 					<div className={styles.recurring_amount_data}>
-						{currency}
-						{' '}
-						{maxPayoutAllowed || '-'}
+						<div>
+							{currency}
+						</div>
+						<div>
+                            &nbsp;
+							{maxPayoutAllowed || '-'}
+						</div>
 					</div>
-					<Tooltip content="Due on xth every month">
+					{/* <Tooltip content="Due on xth every month">
 						<div><IcMInfo /></div>
-					</Tooltip>
+					</Tooltip> */}
 				</div>
 			);
 		},
@@ -253,11 +257,11 @@ function ExpenseComponent() {
 			const { name = '' } = approvedByUser || {};
 			return (
 				<div>
-					{status === 'ACCEPTED' ? (
-						<>
+					{status !== 'INITIATED' ? (
+						<div style={{ fontSize: '12px' }}>
 							<div>{name}</div>
 							<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) }</div>
-						</>
+						</div>
 					) : (
 						<>
 							<div className={styles.pending_approval}>Pending Approval</div>

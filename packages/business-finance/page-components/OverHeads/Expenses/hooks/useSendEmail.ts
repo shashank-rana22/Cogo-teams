@@ -12,6 +12,9 @@ interface Row {
 	maxPayoutAllowed?:number | string,
 	grandTotal?:number,
 	approvedBy?:string | number,
+	approvedByUser?:{ id?:string | number },
+	businessName?:string,
+	createdAt?:Date,
 }
 
 interface Props {
@@ -32,8 +35,12 @@ const useSendEmail = () => {
 	);
 
 	const sendMail = async ({ rowData, recurringState }:Props) => {
-		const { sellerDetails, category, billDate:expenseDate, approvedBy } = rowData || {};
+		const {
+			sellerDetails, category, billDate:expenseDate, approvedBy,
+			approvedByUser, businessName:recurringVendorName, createdAt,
+		} = rowData || {};
 		const { organizationName:vendorName } = sellerDetails || {};
+		const { id:recurringApprovedBy } = approvedByUser || {};
 
 		let payableAmount:number | string;
 		if (recurringState === 'recurring') {
@@ -45,13 +52,13 @@ const useSendEmail = () => {
 		try {
 			const response = await trigger({
 				data: {
-					stakeholderId : approvedBy,
+					stakeholderId : approvedBy || recurringApprovedBy,
 					userId        : profile?.user?.id,
 					approveLink   : '/business-finance/overheads/expenses/response',
 					rejectLink    : '/business-finance/overheads/expenses/response',
-					vendorName,
+					vendorName    : vendorName || recurringVendorName,
 					category,
-					expenseDate,
+					expenseDate   : expenseDate || createdAt,
 					payableAmount, // maxPayoutallowed(for recurring record) and grandtotal(for nonRecurr)
 				},
 			});

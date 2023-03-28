@@ -22,6 +22,7 @@ interface BillInterface {
 	updatedAt?:any,
 	payableTds?:any,
 	billDocumentUrl?:string,
+	approvedByName?:string,
 }
 
 function ShowMore({ id }) {
@@ -67,10 +68,10 @@ function ShowMore({ id }) {
 									{billList?.map((bill:BillInterface) => {
 										const {
 											billNumber, grandTotal, paidAmount = 0, payableTds = 0,
-											dueDate, billDate, createdDate, status, approvedByUser, updatedAt,
+											dueDate, billDate, createdDate, status, approvedByName, updatedAt,
 											billDocumentUrl = '',
 										} = bill || {};
-										const { name = '' } = approvedByUser || {};
+										// const { name = '' } = approvedByName || {};
 
 										return (
 											<div className={styles.data_div}>
@@ -142,11 +143,11 @@ function ShowMore({ id }) {
 													<div>Approved By</div>
 													<div className={`${styles.element} `}>
 														<div>
-															{status === 'ACCEPTED' ? (
-																<>
-																	<div>{name}</div>
+															{status !== 'INITIATED' ? (
+																<div style={{ fontSize: '12px' }}>
+																	<div>{approvedByName}</div>
 																	<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) }</div>
-																</>
+																</div>
 															) : (
 																<>
 																	<div className={styles.pending_approval}>Pending Approval</div>

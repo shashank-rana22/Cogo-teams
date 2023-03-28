@@ -4,16 +4,20 @@ const Controls = {
 		placeholder : 'Select KYC Status',
 		options     : [
 			{
-				label : 'ALL VENDORS',
-				value : 'ALL_VENDORS',
+				label : 'Verified',
+				value : 'VERIFIED',
 			},
 			{
-				label : 'KYC PENDING',
-				value : 'KYC_PENDING',
+				label : 'Rejected',
+				value : 'REJECTED',
 			},
 			{
-				label : 'KYC VERIFIED',
-				value : 'KYC_VERIFIED',
+				label : 'Pending from user',
+				value : 'PENDING_FROM_USER',
+			},
+			{
+				label : 'Pending Verification',
+				value : 'PENDING_VERIFICATION',
 			},
 		],
 	},
@@ -22,80 +26,28 @@ const Controls = {
 		placeholder : 'Select Category',
 		options     : [
 			{
-				label : 'Facility Rent',
-				value : 'Facility Rent',
+				label : 'Rent',
+				value : 'RENT',
 			},
 			{
-				label : 'Equipment on Rent',
-				value : 'Equipment on Rent',
+				label : 'Office maintenance',
+				value : 'OFFICE_MAINTENANCE',
 			},
 			{
-				label : 'Software Expense',
-				value : 'Software Expense',
+				label : 'Business Expenses',
+				value : 'BUSINESS_EXPENSES',
 			},
 			{
-				label : 'Salary - Contract',
-				value : 'Salary - Contract',
+				label : 'Internet and communication ',
+				value : 'INTERNET_AND_COMMUNICATION',
 			},
 			{
-				label : 'Facility repairs and maintenance',
-				value : 'Facility repairs and maintenance',
+				label : 'Professional Services Expenses',
+				value : 'PROFESSIONAL_SERVICES_EXPENSES',
 			},
 			{
-				label : 'Equipment Repair & Maintenance',
-				value : 'Equipment Repair & Maintenance',
-			},
-			{
-				label : 'House Keeping & Other Office Expense',
-				value : 'House Keeping & Other Office Expense',
-			},
-			{
-				label : 'Courier Charges',
-				value : 'Courier Charges',
-			},
-			{
-				label : 'Communication Charges',
-				value : 'Communication Charges',
-			},
-			{
-				label : 'Electricity',
-				value : 'Electricity',
-			},
-			{
-				label : 'Staff Welfare expenses',
-				value : 'Staff Welfare expenses',
-			},
-			{
-				label : 'Travelling Expenses',
-				value : 'Travelling Expenses',
-			},
-			{
-				label : 'Printing and stationery',
-				value : 'Printing and stationery',
-			},
-			{
-				label : 'Lodging & Boarding Expenses',
-				value : 'Lodging & Boarding Expenses',
-			},
-			{
-				label : 'Legal Fees',
-				value : 'Legal Fees',
-			},
-			{
-				label : 'Professional Fees',
-				value : 'Professional Fees',
-			},
-			{
-				label : 'Recruitment Charges',
-				value : 'Recruitment Charges',
-			},
-			{
-				label : 'Security Charges',
-				value : 'Security Charges',
-			},
-			{
-				label : 'Other Expense',
-				value : 'Other Expense',
+				label : 'Miscellaneous Expenses',
+				value : 'MISCELLANEOUS_EXPENSES',
 			},
 		],
 	},

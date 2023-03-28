@@ -71,12 +71,12 @@ const VENDOR_CONFIG = {
 			func    : 'rendeDate',
 			sorting : { name: 'createdAtSortType' },
 		},
-		{
-			label : '',
-			key   : 'viewMoreButton',
-			span  : 1,
-			func  : 'renderViewMoreButton',
-		},
+		// {
+		// 	label : '',
+		// 	key   : 'viewMoreButton',
+		// 	span  : 1,
+		// 	func  : 'renderViewMoreButton',
+		// },
 	],
 };
 

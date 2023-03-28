@@ -2,7 +2,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useListVendors = ({ filters, sort }) => {
-	const { page, pageLimit } = filters;
+	const { page, pageLimit, KYC_STATUS, CATEGORY, searchValue } = filters;
 	const { paymentSortType, openInvoiceSortType, createdAtSortType } = sort;
 	const [
 		{ data, loading },
@@ -13,7 +13,7 @@ const useListVendors = ({ filters, sort }) => {
 			method  : 'get',
 			authKey : 'list_vendors',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	useEffect(() => {
@@ -27,6 +27,9 @@ const useListVendors = ({ filters, sort }) => {
 					paymentSortType            : paymentSortType || undefined,
 					openInvoiceSortType        : openInvoiceSortType || undefined,
 					createdAtSortType          : createdAtSortType || undefined,
+					kycStatus                  : KYC_STATUS || undefined,
+					category                   : CATEGORY || undefined,
+					q                          : searchValue || undefined,
 				},
 			});
 		} catch (err) {
@@ -39,6 +42,7 @@ const useListVendors = ({ filters, sort }) => {
 		paymentSortType,
 		openInvoiceSortType,
 		createdAtSortType,
+		KYC_STATUS, CATEGORY, searchValue,
 	]);
 
 	return {

@@ -60,7 +60,7 @@ function VenderComponent() {
                         	return (
 	<Select
 		value={filters?.[key]}
-		onChange={(e) => handleChange(e, value)}
+		onChange={(e:any) => handleChange(e, value)}
 		placeholder={placeholder}
 		options={options}
 		className={styles.select}
@@ -139,7 +139,7 @@ function VenderComponent() {
 		);
 	}
 
-	function RenderPayments(item) {
+	function RenderPayments(item:any) {
 		const { item: itemData = {} } = item;
 		const { totalPaidAmount = 0, currentMonthPaidAmount = 0 } = itemData;
 		return (
