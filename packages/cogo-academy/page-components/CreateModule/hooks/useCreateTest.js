@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import { getApiError } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
@@ -31,7 +32,7 @@ function useCreateTest({ setActiveStepper }) {
 				Toast.success('Created Successfully');
 			}
 		} catch (err) {
-			Toast.error(err?.message || 'Something went wrong');
+			Toast.error(getApiError(err.data) || 'Something went wrong');
 		}
 	};
 	return {
