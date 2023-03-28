@@ -1,7 +1,7 @@
 import useGetAsyncOptionsMicroservice from '@cogoport/forms/hooks/useGetAsyncOptionsMicroservice';
 // import { asyncFieldsExpertiseConfigurations } from '@cogoport/forms/utils/getAsyncFields';
 
-const useGetControls = ({ modifiedControls = [], typeFilter }) => {
+const useGetControls = ({ modifiedControls = [], typeFilter, showModal = false }) => {
 	// const conditions = useGetAsyncOptionsMicroservice(asyncFieldsExpertiseConfigurations() || {});
 
 	const asyncControl = useGetAsyncOptionsMicroservice({
@@ -13,7 +13,7 @@ const useGetControls = ({ modifiedControls = [], typeFilter }) => {
 			filters: { expertise_type: typeFilter },
 		},
 		microService : 'allocation',
-		initialCall  : true,
+		initialCall  : showModal,
 	});
 
 	return [
