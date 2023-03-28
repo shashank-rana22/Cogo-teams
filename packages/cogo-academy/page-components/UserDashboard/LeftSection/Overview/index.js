@@ -4,7 +4,11 @@ import { useSelector } from '@cogoport/store';
 import styles from './styles.module.css';
 
 function Overview() {
-	const { profile: { user: { id } } } = useSelector((state) => state);
+	const {
+		user: { id },
+	} = useSelector(({ profile }) => ({
+		user: profile.user,
+	}));
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
@@ -15,8 +19,6 @@ function Overview() {
 	}, { manual: false });
 
 	const response = data || {};
-
-	console.log(response, 'response');
 
 	return (
 		<div className={styles.container}>

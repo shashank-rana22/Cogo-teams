@@ -23,9 +23,12 @@ const ELIGIBILITY_SCREEN_MAPPING = {
 
 function CheckEligibility() {
 	const {
-		general: { query: { test_id } },
-		profile: { user: { id: user_id } },
-	} = useSelector((state) => state);
+		query: { test_id },
+		user: { id: user_id },
+	} = useSelector(({ general, profile }) => ({
+		query : general.query,
+		user  : profile.user,
+	}));
 
 	const [{ data }] = useRequest({
 		method : 'POST',
@@ -33,27 +36,29 @@ function CheckEligibility() {
 		params : {
 			user_id, test_id,
 		},
-	}, { manual: false });
+	}, { manual: !test_id });
 
 	const { is_valid_user, is_active, attempts_left } = data || {};
 
-	let status = null;
+	const currentQuestion = localStorage.getItem(`current_question_${test_id}_${user_id}`);
+
+	if (currentQuestion) {
+		return <TakeTest />;
+	}
 
 	if (!is_valid_user) {
-		status = 'is_invalid_user';
-	} else if (!is_active) {
-		status = 'is_inactive';
-	} else if (!attempts_left) {
-		status = 'no_attempts_left';
+		return <NotEligible {...ELIGIBILITY_SCREEN_MAPPING.is_invalid_user} />;
 	}
 
-	if (status) {
-		return <NotEligible {...ELIGIBILITY_SCREEN_MAPPING[status]} />;
+	if (!is_active) {
+		return <NotEligible {...ELIGIBILITY_SCREEN_MAPPING.is_inactive} />;
 	}
 
-	return (
-		<TakeTest />
-	);
+	if (!attempts_left) {
+		return <NotEligible {...ELIGIBILITY_SCREEN_MAPPING.no_attempts_left} />;
+	}
+
+	return <TakeTest />;
 }
 
 export default CheckEligibility;

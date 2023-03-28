@@ -74,7 +74,7 @@ function BasicDetailsForm({
 					<div className={styles.flex_container}>
 						<div className={styles.label}>{startCase(item)}</div>
 						<div className={styles.value}>
-							{item === 'cogo_entity_id' ? cogo_entity_object?.business_name : data?.[item]}
+							{item === 'cogo_entity_id' ? cogo_entity_object?.business_name : data?.[item] || 0}
 						</div>
 					</div>
 				))}

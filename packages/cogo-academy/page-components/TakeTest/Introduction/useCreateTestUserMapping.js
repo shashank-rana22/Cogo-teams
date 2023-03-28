@@ -1,11 +1,15 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useCreateTestUserMapping = () => {
 	const {
-		profile: { user: { id:user_id = '' } },
-		general: { query: { test_id = '' } },
-	} = useSelector((state) => state);
+		query: { test_id },
+		user: { id: user_id },
+	} = useSelector(({ general, profile }) => ({
+		query : general.query,
+		user  : profile.user,
+	}));
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -26,6 +30,7 @@ const useCreateTestUserMapping = () => {
 			});
 		} catch (err) {
 			console.log('error', err);
+			Toast.error(err.response.data);
 		}
 	};
 

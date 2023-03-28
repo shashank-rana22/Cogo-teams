@@ -6,7 +6,9 @@ import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
 import styles from './styles.module.css';
 
 function Header({ setShowInstructionsModal }) {
-	const { profile: { user } } = useSelector((state) => state);
+	const { user } = useSelector(({ profile }) => ({
+		user: profile.user,
+	}));
 
 	const handleShowInstruction = () => {
 		handleMinimizeTest();
