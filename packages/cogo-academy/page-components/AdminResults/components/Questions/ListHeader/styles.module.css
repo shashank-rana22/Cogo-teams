@@ -4,6 +4,21 @@
 	cursor: pointer;
 	background: #fff;
 	border-bottom: 1px solid #f8f2e7;
+
+	:global {
+		.ui_accordion_title {
+			width: 100% !important;
+		}
+
+		.ui_accordion_container {
+			border-radius: 0;
+			box-shadow: none;
+		}
+
+		.ui_accordion_header {
+			border-radius: 0;
+		}
+	}
 }
 
 .container2 {
@@ -30,6 +45,7 @@
 	font-size: 14px;
 	font-weight: 600;
 	text-align: center;
+	align-items: center;
 }
 
 .section {
@@ -42,19 +58,3 @@
 	width: 2%;
 }
 
-.outer_container {
-	:global {
-		.ui_accordion_title {
-			width: 100% !important;
-		}
-
-		.ui_accordion_container {
-			border-radius: 0;
-			box-shadow: none;
-		}
-
-		.ui_accordion_header {
-			border-radius: 0;
-		}
-	}
-}

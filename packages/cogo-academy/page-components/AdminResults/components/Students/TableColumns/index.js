@@ -1,12 +1,14 @@
 import { startCase, format } from '@cogoport/utils';
 
-import SortComponent from './SortComponent';
+import SortComponent from '../../../commons/SortComponent';
+
+import styles from './styles.module.css';
 
 const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 	{
 		Header: (
-			<div style={{ display: 'flex', alignItems: 'baseline' }}>
-				<div style={{ marginRight: '12px' }}>NAME</div>
+			<div className={styles.container}>
+				<div>NAME</div>
 
 				<SortComponent
 					val="user"
@@ -30,8 +32,8 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 	},
 	{
 		Header: (
-			<div style={{ display: 'flex', alignItems: 'baseline' }}>
-				<div style={{ marginRight: '12px' }}>SCORE</div>
+			<div className={styles.container}>
+				<div>SCORE</div>
 
 				<SortComponent
 					val="score_achieved"
@@ -53,8 +55,8 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 	},
 	{
 		Header: (
-			<div style={{ display: 'flex', alignItems: 'baseline' }}>
-				<div style={{ marginRight: '12px' }}>PERCENTILE</div>
+			<div className={styles.container}>
+				<div>PERCENTILE</div>
 
 				<SortComponent
 					val="percentile"
@@ -72,8 +74,8 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 	},
 	{
 		Header: (
-			<div style={{ display: 'flex', alignItems: 'baseline' }}>
-				<div style={{ marginRight: '12px' }}>TIME TAKEN</div>
+			<div className={styles.container}>
+				<div>TIME TAKEN</div>
 
 				<SortComponent
 					val="time_taken"
@@ -89,8 +91,8 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 	},
 	{
 		Header: (
-			<div style={{ display: 'flex', alignItems: 'baseline' }}>
-				<div style={{ marginRight: '12px' }}>ATTEMPTED ON</div>
+			<div className={styles.container}>
+				<div>ATTEMPTED ON</div>
 
 				<SortComponent
 					val="attempted_on"
