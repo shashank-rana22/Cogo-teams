@@ -7771,8 +7771,9 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
-			api         : 'get_exchange_rate',
-			access_type : 'private',
+			api          : 'get_exchange_rate',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
 		},
 	],
 	tracking: [
