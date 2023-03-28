@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
@@ -73,7 +74,7 @@ function useUpdateTest() {
 				Toast.success('Test Deleted Successfully');
 			}
 		} catch (err) {
-			Toast.error(err?.message || 'Something went wrong');
+			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
 	};
 	return {
