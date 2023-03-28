@@ -1,6 +1,6 @@
 import { Popover, Button, TabPanel, Tabs } from '@cogoport/components';
 import { useDebounceQuery, useForm, SelectController, InputController } from '@cogoport/forms';
-import { IcMFilter } from '@cogoport/icons-react';
+import { IcMCross, IcMFilter } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
 import SearchInput from '../../../../commons/SearchInput';
@@ -41,13 +41,13 @@ function Header({
 	};
 
 	const handleApply = () => {
-		let flag = false;
+		let anyFilterIsThere = false;
 
 		Object.keys(formValues).forEach((key) => {
-			if (formValues[key]?.length > 0) flag = true;
+			if (formValues[key]?.length > 0) anyFilterIsThere = true;
 		});
 
-		if (flag) {
+		if (anyFilterIsThere) {
 			setFiltersApplied(true);
 			setFilters((prev) => ({
 				...prev,
@@ -112,6 +112,11 @@ function Header({
 						size="md"
 						placeholder="Search for an announcement"
 					/>
+					{search ? (
+						<div className={styles.cross_icon}>
+							<IcMCross onClick={() => setSearch(undefined)} />
+						</div>
+					) : null}
 				</div>
 				<div className={styles.filters}>
 					<Popover

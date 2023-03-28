@@ -87,7 +87,7 @@ function useListAnnouncements() {
 
 	useEffect(() => {
 		setPage(1);
-	}, [activeList]);
+	}, [activeList, filters]);
 
 	useEffect(() => {
 		getAnnouncementList();

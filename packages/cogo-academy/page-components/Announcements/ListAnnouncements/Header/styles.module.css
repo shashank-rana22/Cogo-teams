@@ -12,11 +12,16 @@
 }
 
 .input_bar {
+	position: relative;
 	width: 88%;
 }
 
-.filters {
-	margin-right: 26px;
+.cross_icon {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	font-size: 18px;
+	cursor: pointer;
 }
 
 .tab_group {
