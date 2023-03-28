@@ -10,27 +10,6 @@ import styles from './styles.module.css';
 
 function TestResults({ test_id = '' }) {
 	const [toggleState, setToggleState] = useState(false);
-	// const data2 = {
-	// 	test_name             : 'Machine Learning',
-	// 	validity_start        : '2023-03-25 14:30:00',
-	// 	validity_end          : '2023-03-26 14:30:00',
-	// 	pass_percentage       : 70,
-	// 	topics_covered        : ['History', 'Civil'],
-	// 	time_taken            : 102,
-	// 	class_average         : 50,
-	// 	required_pass_percent : 23,
-	// 	topic_wise_percent    : { History: 23, Civil: 34 },
-	// 	difficulty_wise_stats : {
-	// 		low_percentage    : 20,
-	// 		medium_percentage : 30,
-	// 		high_percentage   : 40,
-	// 	},
-	// 	total_students_appeared : 50,
-	// 	failed_and_passed       : {
-	// 		total_passed : 23,
-	// 		total_failed : 45,
-	// 	},
-	// };
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
@@ -85,7 +64,7 @@ function TestResults({ test_id = '' }) {
 			<div className={styles.info_row}>
 				<BasicDetails basic_info_data={basic_info_data} />
 				<PercentagePassed stats_data={stats_data} />
-				<DifficultyAndTopicDistribution data={data} toggleState={toggleState} />
+				<DifficultyAndTopicDistribution data={stats_data} toggleState={toggleState} />
 			</div>
 		</div>
 	);

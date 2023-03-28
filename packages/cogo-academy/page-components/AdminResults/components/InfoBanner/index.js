@@ -1,4 +1,4 @@
-import { IcMCrossInCircle } from '@cogoport/icons-react';
+import { IcMFtick, IcMCrossInCircle } from '@cogoport/icons-react';
 
 import PublishNow from '../PublishNow';
 
@@ -9,6 +9,7 @@ const TEXT_MAPPING = {
 		key             : 'active',
 		text            : 'Test Results have not been published yet.',
 		subText         : 'They will be auto-published when the validity ends',
+		Icon            : IcMCrossInCircle,
 		iconColor       : '#D6B300',
 		backgroundColor : '#FDFBF6',
 		borderColor     : '#D6B300',
@@ -16,6 +17,7 @@ const TEXT_MAPPING = {
 	published: {
 		key             : 'published',
 		text            : 'Test Results have been Published.',
+		Icon            : IcMFtick,
 		subText         : 'Your students can now see their scores.',
 		iconColor       : '#849E4C',
 		backgroundColor : '#F7FAEF',
@@ -30,12 +32,12 @@ function InfoBanner({ test_status = '', test_id, refetchTest, loading }) {
 
 	const content = TEXT_MAPPING[test_status];
 
-	const { key, backgroundColor, text, subText, iconColor, borderColor } = content || {};
+	const { key, backgroundColor, text, subText, iconColor, Icon, borderColor } = content || {};
 
 	return (
 		<div className={styles.container} style={{ border: `1px solid ${borderColor}`, background: backgroundColor }}>
 			<div className={styles.content}>
-				<IcMCrossInCircle style={{ color: iconColor, marginRight: 12, width: 24, height: 24 }} />
+				<Icon style={{ color: iconColor, marginRight: 12, width: 24, height: 24 }} />
 
 				<b className={styles.margin_right}>{text}</b>
 
