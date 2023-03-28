@@ -76,7 +76,7 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 			id       : 'updatedAt',
 			accessor : ({ updated_at = '' }) => (
 				<section>
-					<span className={styles.questionsettime}>{format(updated_at, 'dd MMM\'yy ')}</span>
+					<span className={styles.questionsettime}>{format(updated_at, 'dd MMM yy')}</span>
 					<span className={styles.questionsettime}>{format(updated_at, 'h:mm a')}</span>
 				</section>
 			),
@@ -334,7 +334,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 			id       : 'updatedAt',
 			accessor : ({ updated_at = '' }) => (
 				<section className={styles.time}>
-					<span>{format(updated_at, 'dd MMM\'yy')}</span>
+					<span>{format(updated_at, 'dd MMM yy')}</span>
 					<span>{format(updated_at, 'h:mm a')}</span>
 				</section>
 			),

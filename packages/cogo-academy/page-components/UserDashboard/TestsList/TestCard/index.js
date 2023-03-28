@@ -78,11 +78,11 @@ function TestCard({ test_card }) {
 					<div className={styles.availability}>
 						Available:
 						<span className={styles.test_date}>
-							{format(validity_start, 'dd MMM\' yy')}
+							{format(validity_start, 'dd MMM yy')}
 							{' '}
 							-
 							{' '}
-							{format(validity_end, 'dd MMM\' yy')}
+							{format(validity_end, 'dd MMM yy')}
 						</span>
 					</div>
 				)}

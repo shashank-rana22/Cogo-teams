@@ -37,7 +37,7 @@ function TestResultMessage({ stats_data }) {
 					{' '}
 					taken on
 					{' '}
-					{format(date, 'd MMM\' yyyy')}
+					{format(date, 'dd MMM yyyy')}
 				</div>
 
 				{!hasPassed ? (
@@ -51,3 +51,5 @@ function TestResultMessage({ stats_data }) {
 }
 
 export default TestResultMessage;
+
+23 March' 2023
