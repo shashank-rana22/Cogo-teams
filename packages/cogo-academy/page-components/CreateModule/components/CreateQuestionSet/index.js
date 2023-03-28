@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 function CreateQuestionSet(props) {
 	const { general: { query:urlQuery } } = useSelector((state) => state);
 
-	const { id } = urlQuery || {};
+	const { id, activeTab } = urlQuery || {};
 
 	const router = useRouter();
 	const { query, debounceQuery } = useDebounceQuery();
@@ -46,7 +46,7 @@ function CreateQuestionSet(props) {
 		setPage,
 	} = useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query, mode });
 
-	if (['edit', 'view'].includes(mode) && isEmpty(id)) {
+	if (['edit', 'view'].includes(mode) && isEmpty(id) && !activeTab) {
 		router.push('/learning/test-module/create-question');
 		return 'redirecting ...';
 	}
@@ -58,7 +58,7 @@ function CreateQuestionSet(props) {
 					style={{ cursor: 'pointer' }}
 					width={20}
 					height={20}
-					onClick={() => router.push('/learning?activeTab=test_module')}
+					onClick={() => router.push('/learning?activeTab=test_module&testModuleTab=question_set')}
 				/>
 
 				<div className={styles.title}>{`${startCase(mode || 'new')} Question Set`}</div>

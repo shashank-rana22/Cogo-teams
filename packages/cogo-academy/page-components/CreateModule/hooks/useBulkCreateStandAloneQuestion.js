@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 function useBulkCreateStandAloneQuestion({ setShowBulkUpload }) {
@@ -26,7 +25,7 @@ function useBulkCreateStandAloneQuestion({ setShowBulkUpload }) {
 
 			Toast.success('Bulk question set uploaded successfully');
 		} catch (err) {
-			Toast.error(getApiErrorString(err.response?.data) || 'Something went wrong');
+			Toast.error('Please upload the file with correct format');
 		}
 	};
 
