@@ -194,7 +194,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 			Header   : 'TOPICS',
 			id       : 'c',
 			accessor : ({ topics = [] }) => (
-				<section style={{ display: 'flex', flexWrap: 'wrap', width: '70%' }}>
+				<section style={{ display: 'flex', flexWrap: 'wrap', width: '150px' }}>
 					{topics.map((topicItem) => (
 						<Pill
 							key={topicItem}
@@ -288,6 +288,8 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 								size="md"
 								color="orange"
 							>
+								Results
+								{' '}
 								{startCase(status)}
 							</Pill>
 						</section>
@@ -310,11 +312,13 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 			Header   : '',
 			id       : 'results',
 			accessor : ({ id = '', status = '' }) => (
-				status === 'published' ? (
+				status === 'draft' ? null : (
 					<div>
-						<Link href={`/learning/tests/dashboard/admin/${id}`}>Details</Link>
+						<Link href={`/learning/tests/dashboard/admin/${id}`}>
+							{(status === 'active') ? 'View Details' : 'View Results'}
+						</Link>
 					</div>
-				) : <section>-</section>
+				)
 
 			),
 		},
