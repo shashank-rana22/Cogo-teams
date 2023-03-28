@@ -61,7 +61,7 @@ const useGetControls = ({ name = 'manager' }) => {
 		{
 			name        : 'status',
 			lable       : 'Status',
-			placeholder : 'Decision',
+			placeholder : 'Type',
 			type        : 'select',
 			isClearable : true,
 			style       : { marginLeft: '1px', marginRight: '1px' },

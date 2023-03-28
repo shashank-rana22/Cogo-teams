@@ -1,5 +1,6 @@
 import { Input, Select } from '@cogoport/components';
 import { useDebounceQuery, SelectController, useForm } from '@cogoport/forms';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -7,7 +8,6 @@ import getDepartmentControls from '../../hooks/useGetDepartmentControls';
 import useListReassignControls from '../../page-components/HRDashboard/OrganizationTree/UserCard/EnlargedCard/ReassignManager/list-reassign-manager-controls';
 import useGetControls from '../../utils/filterControls';
 import getMonthControls from '../../utils/monthControls';
-import { getFieldController } from '../Form/getFieldController';
 
 import styles from './styles.module.css';
 
@@ -21,14 +21,17 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	const departmentDesignationControls = getDepartmentControls({ Department, Designation });
 
 	const managerControls = useGetControls({ name: 'manager_name' });
+	const statusControls = useGetControls({ name: 'status' });
 	// const managerControls = useGetControls(array);
 
 	const monthControls = getMonthControls(params.Year, params.Month);
 
 	const { watch, control } = useForm();
-	const { department, designation, manager_name, status } = watch();
 
 	const manager = watch('manager_id');
+	const department = watch('department');
+	const designation = watch('designation');
+	const status = watch('status');
 
 	const cogoUsersControl = useListReassignControls();
 
@@ -53,8 +56,8 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	console.log('params:;', params);
 
 	useEffect(() => {
-		debounceQuery(manager_name);
-	}, [debounceQuery, manager_name]);
+		debounceQuery(managerName);
+	}, [debounceQuery, managerName]);
 
 	return (
 
@@ -69,13 +72,30 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 			))}
 
 			{source === 'hr_pip_dashboard' && (
-				<div className={styles.name_input}>
+				<>
 					<SelectController
 						{...cogoUsersControl}
+						style={{ marginRight: '8px' }}
 						control={control}
+						placeholder="Manager..."
 						isClearable
 					/>
-				</div>
+					<SelectController
+						{...statusControls}
+						control={control}
+						style={{ marginRight: '8px' }}
+					/>
+					<div className={styles.container}>
+						<Input
+							{...managerControls}
+							onChange={setManagerName}
+							placeholder="Search by Name/COGO-ID..."
+							style={{ marginRight: '8px' }}
+							suffix={<IcMSearchlight style={{ marginRight: '16px' }} />}
+						/>
+					</div>
+				</>
+
 			)}
 
 			{source === 'hr_kpi_dashboard' && (

@@ -1,7 +1,7 @@
 import useGetColumns from '../../../../../common/Columns';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
-import useListEmployeesLog from '../../../../../hooks/useListEmployeesLog';
+import useListLogs from '../../../../../hooks/useListLogs';
 
 import styles from './styles.module.css';
 
@@ -54,7 +54,7 @@ function UploadedFiles({
 		// params,
 		// setParams,
 		setPage,
-	} = useListEmployeesLog(true);
+	} = useListLogs(true);
 
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;

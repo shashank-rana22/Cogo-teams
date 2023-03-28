@@ -23,7 +23,9 @@ function UpdateModal({
 		>
 			<Modal.Header title={`update ${item?.log_type}`} />
 			<div className={styles.upload_modal}>
-				<Modal.Body>
+				<Modal.Body
+					style={{ maxHeight: '600px' }}
+				>
 					<DecisionModal
 						item={item}
 						setItem={setItem}

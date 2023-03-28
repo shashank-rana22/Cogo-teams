@@ -16,9 +16,9 @@ function LogModal({
 }) {
 	const [activeLogTab, setActiveLogTab] = useState('new');
 
-	useEffect(() => {
-		setActiveLogTab(item?.final_decision ? 'all' : 'new');
-	}, [item]);
+	// useEffect(() => {
+	// 	setActiveLogTab(item?.final_decision ? 'all' : 'new');
+	// }, [item]);
 
 	return (
 		<div>
@@ -32,7 +32,9 @@ function LogModal({
 			>
 				<Modal.Header title="Logs" />
 				<div className={styles.upload_modal}>
-					<Modal.Body>
+					<Modal.Body
+						style={{ maxHeight: '600px' }}
+					>
 						<Tabs
 							activeTab={activeLogTab}
 							themeType="primary"

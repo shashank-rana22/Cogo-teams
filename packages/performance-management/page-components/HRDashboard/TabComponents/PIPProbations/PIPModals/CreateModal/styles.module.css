@@ -14,3 +14,12 @@
     display: flex;
     margin-top: 8px;
 }
+.pip_select{
+	display: flex;
+	justify-content: center;
+}
+
+.pip_select_btn{
+	border: solid 1px #88CAD1;
+	margin: 8px;
+}

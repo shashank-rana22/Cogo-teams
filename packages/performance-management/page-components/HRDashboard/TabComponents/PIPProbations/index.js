@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import pipModalComponentsMapping from '../../../../constants/pip-modal-components-mapping';
 import tabPanelComponentMapping from '../../../../constants/tab-pannel-component-mapping';
-import useCreateLog from '../../../../hooks/useCreateLog';
+import useUpdateLog from '../../../../hooks/useUpdateLog';
 
 import styles from './styles.module.css';
 
@@ -14,15 +14,16 @@ function PIPProbations() {
 	const [item, setItem] = useState({}); // dor sending payload and setting the user id from the list
 	const [activeTab, setActiveTab] = useState('dashboard'); // to switch between tabs
 	const [disableNext, setDisableNext] = useState(true); // to enable the submit button in create and update
+	const [refetchList, setRefetchList] = useState(false);
 
-	const { onCreateLog = () => {} } = useCreateLog();
+	const { onUpdateLog = () => {} } = useUpdateLog();
 	// useEffect(() => debounceQuery(searchValue), [searchValue])
 
 	const onSubmit = () => {
 		if (item?.tags?.find((x) => x === 'Final discusion held' && isEmpty(item?.final_decision))) {
 			setModal('update');
 		} else {
-			onCreateLog({
+			onUpdateLog({
 				user_id        : item?.user_id,
 				log_id         : item?.id,
 				log_type       : item?.log_type,
@@ -30,10 +31,8 @@ function PIPProbations() {
 				final_decision : item?.final_decision,
 				tags           : item?.tags,
 				is_reviewed    : item?.is_reviewed || modal === 'review',
-			});
+			}, setRefetchList, setModal);
 			setItem({});
-			Toast.success('Updated Successfully');
-			setModal('');
 		}
 	};
 
@@ -63,6 +62,8 @@ function PIPProbations() {
 									item={item}
 									setItem={setItem}
 									setModal={setModal}
+									refetchList={refetchList}
+									setRefetchList={setRefetchList}
 									// setType={setType}
 								/>
 							</TabPanel>
@@ -115,6 +116,7 @@ function PIPProbations() {
 						setModal={setModal}
 						disableNext={disableNext}
 						onSubmit={onSubmit}
+						setRefetchList={setRefetchList}
 					/>
 				)}
 

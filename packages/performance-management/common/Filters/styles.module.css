@@ -9,7 +9,13 @@
 		}
 
 		.ui_input_container {
-			width: 180px;
+			max-width: 180px;
 		}
 	}
+}
+
+.container{
+	position: absolute;
+	right: 0px;
+	max-width: 300px;
 }

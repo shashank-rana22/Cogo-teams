@@ -1,26 +1,25 @@
 import { CheckboxGroup, Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import styles from './styles.module.css';
 
-function NewLog({ item, setItem = () => {}, setDisableNext = () => {} }) {
+function NewLog({ item = {}, setItem = () => {}, setDisableNext = () => {} }) {
 	const [comments, setComments] = useState('');
-	const [value, onChange] = useState(item?.tags);
+	const [value, onChange] = useState(item?.tags || []);
 	const options = [
 		{ name: 'R1', value: 'Email sent to Employee', label: 'Email sent to Employee' },
 		{ name: 'R2', value: 'Email sent to Manager', label: 'Email sent to Manager' },
 		{ name: 'R3', value: 'Final discusion held', label: 'Final discusion held' },
 	];
 
-	const newOptions = options.map((opt) => {
-		if (isEmpty(item?.tags)) {
-			return { ...opt };
-		}
-		if (item.tags?.includes(opt.value)) {
+	const disabledTags = useMemo(() => item.tags || [], []);
+
+	const newOptions = isEmpty(disabledTags) ? options : options.map((opt) => {
+		if (disabledTags?.includes(opt.value)) {
 			return { ...opt, disabled: true };
 		}
-		return null;
+		return { ...opt };
 	});
 
 	useEffect(() => {

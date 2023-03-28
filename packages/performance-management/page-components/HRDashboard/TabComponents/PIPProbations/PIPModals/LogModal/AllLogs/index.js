@@ -1,4 +1,4 @@
-import { format } from '@cogoport/utils';
+import { isEmpty, format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import EmptyState from '../../../../../../../common/EmptyState';
@@ -14,9 +14,19 @@ function AllLogs({ item = {} }) {
 		setParams({ LogID: item?.id });
 	}, [item?.id]);
 
+	console.log('list::', list);
+
 	return (
 		<div className={styles.main_container}>
-			{list?.map((object) => {
+			{isEmpty(list) ? (
+				<div className={styles.empty}>
+					<EmptyState
+						flexDirection="column"
+						emptyText="No Logs Found"
+						textSize="16px"
+					/>
+				</div>
+			) : list?.map((object) => {
 				if (!object) {
 					return (
 						<div className={styles.empty}>
