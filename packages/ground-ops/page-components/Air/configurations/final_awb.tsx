@@ -29,7 +29,7 @@ export const FinalAwbFields = {
 		{
 			key   : 'awbNumber',
 			label : 'AWB',
-			span  : 1.5,
+			span  : 1,
 		},
 		{
 			key    : 'blCategory',
@@ -44,26 +44,26 @@ export const FinalAwbFields = {
 		{
 			key   : 'origin',
 			label : 'Origin',
-			span  : 2,
+			span  : 3,
 			func  : 'startCase',
 
 		},
 		{
 			key   : 'destination',
 			label : 'Destination',
-			span  : 2,
+			span  : 3,
 			func  : 'startCase',
 		},
 		{
 			key   : 'airline',
 			label : 'Carrier',
-			span  : 2,
+			span  : 1,
 			func  : 'startCase',
 		},
 		{
 			key    : 'deadline',
 			label  : 'Due On',
-			span   : 1.5,
+			span   : 1,
 			render : (item) => (
 				<div style={{ textTransform: 'uppercase' }}>
 					{formatDate(item.deadline)}
@@ -71,10 +71,10 @@ export const FinalAwbFields = {
 			),
 		},
 		{
-			key   : 'edit',
+			key   : 'upload',
 			label : '',
 			span  : 1,
-			func  : 'handleEdit',
+			func  : 'handleUpload',
 		},
 	],
 };
