@@ -1,5 +1,6 @@
 import { cl, Input, Popover, Tooltip } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { IcCPin, IcMPin, IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../common/UserAvatar';
@@ -30,7 +31,9 @@ function MessageList({
 	setModalType = () => {},
 	modalType = '',
 	handleScroll = () => {},
+	updatePin = () => {},
 }) {
+	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	function lastMessagePreview(previewData = '') {
 		return (
 			<div
@@ -159,6 +162,22 @@ function MessageList({
 													</div>
 												)}
 											</div>
+											{(item?.pin?.[user_data.user.id]) > 0
+												? (
+													<IcCPin
+														onClick={(e) => {
+															updatePin(item.id, item.channel_type, 'unpin');
+															e.stopPropagation();
+														}}
+													/>
+												) : (
+													<IcMPin
+														onClick={(e) => {
+															updatePin(item.id, item.channel_type, 'pin');
+															e.stopPropagation();
+														}}
+													/>
+												) }
 
 											<div className={styles.activity_duration}>
 												{dateTimeConverter(

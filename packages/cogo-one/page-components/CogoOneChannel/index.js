@@ -66,6 +66,7 @@ function CogoOne() {
 		firstLoading,
 		updateLeaduser,
 		handleScroll,
+		updatePin,
 	} = useListChats({
 		firestore,
 		userId,
@@ -156,6 +157,7 @@ function CogoOne() {
 				handleScroll={handleScroll}
 				setModalType={setModalType}
 				modalType={modalType}
+				updatePin={updatePin}
 			/>
 
 			<div className={styles.chat_details_continer}>

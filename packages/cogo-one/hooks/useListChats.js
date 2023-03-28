@@ -4,6 +4,7 @@ import {
 	collectionGroup,
 	onSnapshot,
 	updateDoc,
+	getDoc,
 	doc,
 	query,
 	limit, where, getDocs, orderBy,
@@ -28,6 +29,7 @@ const useListChats = ({
 	} = useRouter();
 
 	const snapshotListener = useRef(null);
+	const pinSnapshotListener = useRef(null);
 
 	const [firstLoading, setFirstLoading] = useState(true);
 	const [activeCardId, setActiveCardId] = useState('');
@@ -39,6 +41,7 @@ const useListChats = ({
 		unReadChatsCount     : 0,
 		lastMessageTimeStamp : Date.now(),
 		isLastPage           : false,
+		pinnedMessagesData   : {},
 	});
 
 	const snapshotCleaner = () => {
@@ -93,13 +96,38 @@ const useListChats = ({
 		[appliedFilters, isomniChannelAdmin, showBotMessages, userId],
 	);
 
+	const mountPinnedSnapShot = useCallback(() => {
+		setLoading(true);
+		setListData((p) => ({ ...p, pinnedMessagesData: {} }));
+		const queryForPinnedChat = where('pinnedAgent', 'array-contains', userId);
+		const viewQuery = !isomniChannelAdmin ? [where('support_agent_id', '==', userId)] : [];
+		const sessionTypeQuery = showBotMessages ? where('session_type', '==', 'bot')
+			: where('session_type', '==', 'admin');
+
+		const newChatsQuery = query(
+			omniChannelCollection,
+			queryForPinnedChat,
+			...viewQuery,
+			...omniChannelQuery,
+			sessionTypeQuery,
+		);
+
+		pinSnapshotListener.current = onSnapshot(
+			newChatsQuery,
+			(pinSnapShot) => {
+				const { resultList } = dataFormatter(pinSnapShot);
+				setListData((p) => ({ ...p, pinnedMessagesData: { ...resultList } }));
+				setLoading(false);
+			},
+		);
+	}, [isomniChannelAdmin, omniChannelCollection, omniChannelQuery, showBotMessages, userId]);
+
 	const mountSnapShot = useCallback(() => {
 		const queryForSearch = searchQuery
 			? [where('user_name', '>=', searchQuery),
 				where('user_name', '<=', `${searchQuery}\\uf8ff`), orderBy('user_name', 'asc')] : [];
-
 		setLoading(true);
-		setListData({});
+		setListData((p) => ({ ...p, messagesListData: {} }));
 		snapshotCleaner();
 		const newChatsQuery = query(
 			omniChannelCollection,
@@ -114,12 +142,13 @@ const useListChats = ({
 				const lastMessageTimeStamp = querySnapshot
 					.docs[querySnapshot.docs.length - 1]?.data()?.new_message_sent_at;
 				const { unReadChatsCount, resultList } = dataFormatter(querySnapshot);
-				setListData({
+				setListData((p) => ({
+					...p,
 					messagesListData: { ...resultList },
 					unReadChatsCount,
 					isLastPage,
 					lastMessageTimeStamp,
-				});
+				}));
 				setLoading(false);
 			},
 		);
@@ -160,6 +189,10 @@ const useListChats = ({
 	}, [listData?.lastMessageTimeStamp, omniChannelCollection, omniChannelQuery]);
 
 	useEffect(() => {
+		mountPinnedSnapShot();
+	}, [mountPinnedSnapShot]);
+
+	useEffect(() => {
 		mountSnapShot();
 	}, [mountSnapShot]);
 
@@ -182,15 +215,33 @@ const useListChats = ({
 		}
 	};
 
-	const { messagesListData = {}, unReadChatsCount } = listData || {};
+	const { messagesListData = {}, unReadChatsCount, pinnedMessagesData } = listData || {};
 
-	const sortedChatsList = Object.keys(messagesListData || {})
-		.sort((a, b) => Number(
-			messagesListData[b]?.new_message_sent_at,
-		) - Number(
-			messagesListData[a]?.new_message_sent_at,
-		))
-		.map((eachkey) => messagesListData[eachkey]) || [];
+	const mergedChatData = { ...messagesListData, ...pinnedMessagesData } || {};
+
+	const sortedChatsList = Object.keys(mergedChatData || {})
+		.sort((a, b) => {
+			if (mergedChatData[a].pin && mergedChatData[a].pin[userId] > 0) {
+				if (mergedChatData[b].pin && mergedChatData[b].pin[userId] > 0) {
+					return Number(
+						mergedChatData[b].pin[userId],
+					) - Number(
+						mergedChatData[a].pin[userId],
+					);
+				}
+				return -1;
+			}
+			if (mergedChatData[b].pin && mergedChatData[b].pin[userId] > 0) {
+				return 1;
+			}
+
+			return Number(
+				mergedChatData[b]?.new_message_sent_at,
+			) - Number(
+				mergedChatData[a]?.new_message_sent_at,
+			);
+		})
+		.map((eachkey) => mergedChatData[eachkey]) || [];
 
 	const activeMessageCard = (sortedChatsList || []).find(({ id }) => id === activeCardId)
         || {};
@@ -212,6 +263,27 @@ const useListChats = ({
 		}
 	};
 
+	const updatePin = async (pinnedID, channel_type, type) => {
+		const roomCollection = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${pinnedID}`,
+		);
+
+		const document = await getDoc(roomCollection);
+		const { pin = {}, pinnedAgent = [] } = document.data() || {};
+
+		try {
+			await updateDoc(roomCollection, {
+				updated_at  : Date.now(),
+				pin         : { ...pin, [userId]: type === 'pin' ? Date.now() : 0 },
+				pinnedAgent : type === 'pin'
+					? [...pinnedAgent, userId]
+					: pinnedAgent.filter((pinned) => pinned !== userId),
+			});
+		} catch (error) {
+			// console.log(error);
+		}
+	};
 	return {
 		listData: { messagesList: sortedChatsList || [], unReadChatsCount },
 		setActiveMessage,
@@ -224,6 +296,7 @@ const useListChats = ({
 		updateLeaduser,
 		firstLoading,
 		handleScroll,
+		updatePin,
 	};
 };
 

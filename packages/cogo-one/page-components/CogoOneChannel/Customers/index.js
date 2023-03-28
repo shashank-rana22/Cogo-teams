@@ -38,6 +38,7 @@ function Customers({
 	handleScroll = () => {},
 	setModalType = () => {},
 	modalType = {},
+	updatePin = () => {},
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const onChangeToggle = () => {
@@ -116,6 +117,7 @@ function Customers({
 					handleScroll={handleScroll}
 					setModalType={setModalType}
 					modalType={modalType}
+					updatePin={updatePin}
 				/>
 			)}
 
