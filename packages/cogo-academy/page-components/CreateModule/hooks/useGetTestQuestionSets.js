@@ -3,7 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useGetTestQuestionSets(cogo_entity_id = '') {
+function useGetTestQuestionSets({ cogo_entity_id = '' }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({

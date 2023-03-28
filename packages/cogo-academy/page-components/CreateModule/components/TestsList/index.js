@@ -41,7 +41,7 @@ function TestsList({ activeTab, setActiveTab }) {
 		debounceQuery: questionListDebounceQuery,
 		input: questionListInput,
 		setInput: setquestionListInput,
-	} = useGetTestQuestionSets();
+	} = useGetTestQuestionSets({ ...filters });
 
 	const componentMapping = {
 		tests: {
@@ -74,7 +74,7 @@ function TestsList({ activeTab, setActiveTab }) {
 
 	const handleChangeTab = (val) => {
 		componentMapping[val].componentProps.fetchList();
-
+		setFilters({});
 		setActiveTab(val);
 	};
 

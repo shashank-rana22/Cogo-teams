@@ -8,10 +8,12 @@ import useGetTestQuestionSets from '../../../../../../hooks/useGetTestQuestionSe
 import styles from './styles.module.css';
 
 function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray, watch }) {
+	const cogo_entity_id = watch('cogo_entity_id');
+
 	const {
 		data, loading, setParams, debounceQuery,
 		input, setInput,
-	} = useGetTestQuestionSets(watch('cogo_entity_id'));
+	} = useGetTestQuestionSets({ cogo_entity_id });
 
 	const [sort, setSort] = useState(false);
 
