@@ -15,6 +15,7 @@ const ALPHABET_MAPPING = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 const getCorrectAnswersCombined = ({ correctOptions = [] }) => (correctOptions || []).map(
 	(item) => `${ALPHABET_MAPPING[item.sequence_number]}) ${item.answer_text}`,
 );
+
 const getCorrectAnswers = ({ answers = [] }) => {
 	const correctOptions = (answers || []).filter((item) => item.is_correct);
 	const correctAnswers = getCorrectAnswersCombined({ correctOptions });
