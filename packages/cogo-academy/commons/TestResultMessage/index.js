@@ -51,5 +51,3 @@ function TestResultMessage({ stats_data }) {
 }
 
 export default TestResultMessage;
-
-23 March' 2023
