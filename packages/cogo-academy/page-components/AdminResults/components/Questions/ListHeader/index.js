@@ -1,5 +1,4 @@
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -50,7 +49,7 @@ function ListHeader({
 					{
 				!(sortBy === 'students_appeared' && sortType === 'desc')
 			&& (
-				<div className={styles.arrowUp}>
+				<div className={styles.arrow_up}>
 					<IcMArrowRotateDown
 						width={12}
 						height={12}
@@ -66,7 +65,7 @@ function ListHeader({
 					{
 				(sortBy === 'correct_percentage' && sortType === 'desc')
 			&& (
-				<div className={styles.arrowUp}>
+				<div className={styles.arrow_up}>
 					<IcMArrowRotateUp
 						width={12}
 						height={12}

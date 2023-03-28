@@ -1,66 +1,68 @@
-
 .container {
-  display: flex;
-  width: 100%;
-  padding: 12px 24px;
-  cursor: pointer;
-  background: #fff;
-  border-bottom: 1px solid #f8f2e7;
+	display: flex;
+	width: 100%;
+	padding: 12px 24px;
+	cursor: pointer;
+	background: #fff;
+	border-bottom: 1px solid #f8f2e7;
 }
 
 .container2 {
-  padding: 12px 24px;
-  display: flex;
-  width: 100%;
+	display: flex;
+	width: 100%;
+	padding: 12px 24px;
 }
+
 .small_section {
-  font-weight: 600;
-  font-size: 14px;
-  width: 25%;
-  margin-right: 16px;
-  text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 25%;
+	margin-right: 16px;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
 }
+
 .small_section_sort {
-  font-weight: 600;
-  font-size: 14px;
-  width: 25%;
-  margin-right: 16px;
-  text-align: center;
-  display: flex;
-  flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
+	width: 25%;
+	margin-right: 16px;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
 }
-.small_section_sort .arrowUp {
-  position: relative;
-  bottom: 50%;
-  left: 90%;
+
+.small_section_sort .arrow_up {
+	position: relative;
+	bottom: 50%;
+	left: 90%;
 }
 
 .section {
-  width: inherit;
-  font-weight: 600;
-  font-size: 14px;
+	width: inherit;
+	font-size: 14px;
+	font-weight: 600;
 }
 
 .icon {
-  width: 2%;
+	width: 2%;
 }
 
 .outer_container {
-  :global {
-    .ui_accordion_title {
-      width: 100% !important;
-    }
+	:global {
+		.ui_accordion_title {
+			width: 100% !important;
+		}
 
-    .ui_accordion_container {
-      border-radius: 0;
-      box-shadow: none;
-    }
+		.ui_accordion_container {
+			border-radius: 0;
+			box-shadow: none;
+		}
 
-    .ui_accordion_header {
-      border-radius: 0;
-    }
-  }
+		.ui_accordion_header {
+			border-radius: 0;
+		}
+	}
 }
