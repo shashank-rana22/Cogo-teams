@@ -33,11 +33,12 @@ function ListHeader({
 				</div>
 
 				<div className={styles.small_section_sort}>
-					Students IT Appeared For
-					{
+					<div>Students IT Appeared For</div>
+					<div>
+						{
 				(sortBy === 'students_appeared' && sortType === 'desc')
 			&& (
-				<div className={styles.arrowUp}>
+				<div className={styles.arrow_up}>
 					<IcMArrowRotateUp
 						width={12}
 						height={12}
@@ -46,7 +47,7 @@ function ListHeader({
 				</div>
 			)
 			}
-					{
+						{
 				!(sortBy === 'students_appeared' && sortType === 'desc')
 			&& (
 				<div className={styles.arrow_up}>
@@ -58,6 +59,8 @@ function ListHeader({
 				</div>
 			)
 }
+					</div>
+
 				</div>
 
 				<div className={styles.small_section_sort}>
@@ -77,7 +80,7 @@ function ListHeader({
 					{
 				!(sortBy === 'correct_percentage' && sortType === 'desc')
 			&& (
-				<div className={styles.arrowUp}>
+				<div className={styles.arrow_up}>
 					<IcMArrowRotateDown
 						width={12}
 						height={12}

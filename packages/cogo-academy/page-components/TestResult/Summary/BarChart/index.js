@@ -36,20 +36,6 @@ function BarChart({ chart_data = [], yAxis = '' }) {
 						spacing    : 10,
 					},
 				]}
-				// fill={[
-				// 	{
-				// 		match: {
-				// 			id: 'fries',
-				// 		},
-				// 		id: 'dots',
-				// 	},
-				// 	{
-				// 		match: {
-				// 			id: 'sandwich',
-				// 		},
-				// 		id: 'lines',
-				// 	},
-				// ]}
 				borderRadius={0}
 				borderColor={{
 					from      : 'color',
