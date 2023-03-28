@@ -23,7 +23,7 @@ const TEXT_MAPPING = {
 	},
 };
 
-function InfoBanner({ test_status, test_id, refetchTest, loading }) {
+function InfoBanner({ test_status = '', test_id, refetchTest, loading }) {
 	if (!['published', 'active'].includes(test_status) && loading) {
 		return null;
 	}
