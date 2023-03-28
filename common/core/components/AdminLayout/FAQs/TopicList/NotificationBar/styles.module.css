@@ -16,9 +16,9 @@
 .update_count {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	width: 25px;
 	height: 25px;
-	padding: 0 9px;
 	margin-left: 12px;
 	font-size: 14px;
 	font-weight: 600;
