@@ -8,7 +8,7 @@ function useGetAudience() {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_faq_audience',
-	}, { manual: false });
+	}, { manual: true });
 
 	const fetchAudience = async () => {
 		try {
