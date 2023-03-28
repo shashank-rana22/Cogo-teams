@@ -26,11 +26,9 @@ function TestsList({ activeTab, setActiveTab }) {
 
 	const [filters, setFilters] = useState({});
 
-	// const [sortBy, setSortBy] = useState('');
-
 	const {
 		data, loading, fetchList, setParams, params, debounceQuery, input, setInput,
-	} = useGetTestList({ filters });
+	} = useGetTestList({ filters, activeTab });
 
 	const {
 		data: questionData,
@@ -41,7 +39,7 @@ function TestsList({ activeTab, setActiveTab }) {
 		debounceQuery: questionListDebounceQuery,
 		input: questionListInput,
 		setInput: setquestionListInput,
-	} = useGetTestQuestionSets({ ...filters });
+	} = useGetTestQuestionSets({ ...filters, activeTab });
 
 	const componentMapping = {
 		tests: {
@@ -74,7 +72,6 @@ function TestsList({ activeTab, setActiveTab }) {
 
 	const handleChangeTab = (val) => {
 		componentMapping[val].componentProps.fetchList();
-		setFilters({});
 		setActiveTab(val);
 	};
 

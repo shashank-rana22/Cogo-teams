@@ -10,14 +10,6 @@ function FilterContent({
 	onSubmit,
 	onClickReset,
 }) {
-	const params = {
-		filters: {
-			entity_types : ['cogoport'],
-			status       : 'active',
-		},
-		page_limit: 10,
-	};
-
 	return (
 		<form className={styles.filter_container} onSubmit={handleSubmit(onSubmit)}>
 
@@ -28,21 +20,33 @@ function FilterContent({
 					name="cogo_entity_id"
 					control={control}
 					asyncKey="partners"
-					params={params}
+					params={{
+						filters: {
+							entity_types : ['cogoport'],
+							status       : 'active',
+						},
+						page_limit: 10,
+					}}
 				/>
 
 			</div>
 
 			<div className={styles.button_container}>
 				<Button
+					type="button"
 					themeType="secondary"
 					style={{ marginRight: '8px' }}
 					onClick={onClickReset}
+					size="sm"
 				>
 					Reset
 				</Button>
 
-				<Button themeType="primary" type="submit">
+				<Button
+					size="sm"
+					themeType="primary"
+					type="submit"
+				>
 					Apply
 				</Button>
 			</div>

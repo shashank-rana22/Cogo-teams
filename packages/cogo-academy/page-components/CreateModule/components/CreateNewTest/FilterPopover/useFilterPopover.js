@@ -4,7 +4,7 @@ import { useState } from 'react';
 const useFilterPopover = ({ setFilters }) => {
 	const [showFilter, setShowFilter] = useState(false);
 
-	const { control, handleSubmit } = useForm();
+	const { control, handleSubmit, reset } = useForm();
 
 	const onSubmit = (values) => {
 		setFilters({
@@ -17,6 +17,7 @@ const useFilterPopover = ({ setFilters }) => {
 	const onClickReset = () => {
 		setFilters({});
 		setShowFilter(false);
+		reset();
 	};
 
 	return {
