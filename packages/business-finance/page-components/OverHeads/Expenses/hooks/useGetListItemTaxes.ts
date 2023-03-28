@@ -7,7 +7,6 @@ const useGetListItemTaxes = ({ formData }) => {
 	const [{ data, loading = false }, trigger] = useRequestBf(
 		{
 			url     : '/common/tax/list-item-taxes',
-			// url     : 'https://api.stage.cogoport.io/common/tax/list-item-taxes',
 			method  : 'post',
 			authKey : 'post_common_tax_list_item_taxes',
 		},
@@ -21,7 +20,6 @@ const useGetListItemTaxes = ({ formData }) => {
 					{
 						data: {
 							serviceName: 'overhead',
-							// tradeType   : 'LOCAL',
 							countryCode,
 						},
 					},

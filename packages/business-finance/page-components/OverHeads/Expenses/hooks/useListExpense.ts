@@ -46,7 +46,7 @@ const useListExpense = ({ expenseFilters, id, expenseType, sort }:Filter) => {
 					paidAmountSortType     : paidAmountSortType || undefined,
 					payableSortType        : payableSortType || undefined,
 					tdsSortType            : tdsSortType || undefined,
-					entityCodeId           : '6fd98605-9d5d-479d-9fac-cf905d292b88',
+					entityCodeId           : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
 				},
 			});
 		} catch (err) {

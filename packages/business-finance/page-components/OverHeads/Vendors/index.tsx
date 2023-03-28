@@ -220,6 +220,14 @@ function VenderComponent() {
 				</div>
 			);
 		},
+		renderCategory: (itemData:ItemProps) => {
+			const { category = '' } = itemData || {};
+			return (
+				<div>
+					{category.replaceAll('_', ' ')}
+				</div>
+			);
+		},
 	};
 
 	const isListEmpty = listData?.list?.length === 0;

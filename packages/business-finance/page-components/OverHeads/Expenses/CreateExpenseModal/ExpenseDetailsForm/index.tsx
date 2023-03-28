@@ -55,6 +55,7 @@ function ExpenseDetailsForm({
 	entityOptions,
 }:Props) {
 	const date = formData?.transactionDate;
+	const { entityList } = useListCogoEntities({});
 
 	useEffect(() => {
 		if (date) {
@@ -64,7 +65,20 @@ function ExpenseDetailsForm({
 		}
 	}, [date, setFormData]);
 
-	const { entityList } = useListCogoEntities({});
+	useEffect(() => {
+		// calling list_cogo_entities and setting entity options
+		if (entityList?.length > 0) {
+			const entities = [];
+			(entityList || []).forEach((entity) => {
+				const { id, entity_code:entityCode, business_name:name } = entity || {};
+				entities.push({
+					label : `${entityCode}-${name}`,
+					value : id,
+				});
+			});
+			setEntityOptions([...entities]);
+		}
+	}, [entityList, setEntityOptions]);
 
 	let expenseControls:any;
 	if (createExpenseType === 'recurring') {
@@ -98,29 +112,6 @@ function ExpenseDetailsForm({
 				});
 			});
 			setBranchOptions([...branches]);
-		}
-
-		const fetchedEntities = obj?.services?.map((service) => service?.cogo_entity_id);
-		// Removing duplicates from the  fetchedEntities array
-		const uniqueEntities = (fetchedEntities || []).filter((
-			item,
-			index,
-		) => fetchedEntities?.indexOf(item) === index);
-
-		if (entityList?.length > 0) {
-			const entities = [];
-			(uniqueEntities || []).forEach((singleEntity) => {
-				(entityList || []).forEach((entity) => {
-					const { id, entity_code:entityCode, business_name:name } = entity || {};
-					if (singleEntity === id) {
-						entities.push({
-							label : `${entityCode}-${name}`,
-							value : id,
-						});
-					}
-				});
-			});
-			setEntityOptions([...entities]);
 		}
 
 		setFormData((prev:object) => ({

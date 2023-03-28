@@ -48,9 +48,8 @@ const VENDOR_CONFIG = {
 		},
 		{
 			label : 'Category',
-			key   : 'category',
 			span  : 1,
-
+			func  : 'renderCategory',
 		},
 		{
 			label   : 'Payments',
