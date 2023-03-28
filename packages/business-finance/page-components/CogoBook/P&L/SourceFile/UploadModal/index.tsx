@@ -1,7 +1,7 @@
 import { Upload, Select, Button, Modal } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
+import useSourceFile from '../../../hooks/useSourceFile';
 import { optionMonth } from '../utils';
 
 import styles from './styles.module.css';
@@ -12,17 +12,9 @@ function UploadModal({ uploadModal, setUploadModal }) {
 		uploaderTrailBalance : '',
 		entity               : '',
 	});
-	const { push } = useRouter();
 
-	const handleClick = () => {
-		push(
-			`/business-finance/cogo-book/[active_tab]/[view]/upload-report?month=${modalData?.month}
-			&entity=${modalData?.entity}`,
-			`/business-finance/cogo-book/pl_statement/source_file/upload-report?month=${modalData?.month}
-			&entity=${modalData?.entity}`,
-		);
-		setUploadModal(false);
-	};
+	const { sourceFileUpload, uploadApi, sourceFileUploadLoading } = useSourceFile({ modalData, setUploadModal });
+	console.log(sourceFileUpload, 'sourceFileUpload');
 
 	return (
 		<div>
@@ -54,7 +46,6 @@ function UploadModal({ uploadModal, setUploadModal }) {
 								style={{ width: '200px' }}
 							/>
 						</div>
-
 					</div>
 
 					<div className={styles.month}>Upload Trial Balance*</div>
@@ -68,8 +59,9 @@ function UploadModal({ uploadModal, setUploadModal }) {
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
-						onClick={() => { handleClick(); }}
+						onClick={() => { uploadApi(); }}
 						disabled={!modalData.uploaderTrailBalance && !modalData.uploaderTrailBalance}
+						loading={sourceFileUploadLoading}
 					>
 						Confirm
 

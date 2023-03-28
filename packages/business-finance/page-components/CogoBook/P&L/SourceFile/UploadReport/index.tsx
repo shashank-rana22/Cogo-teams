@@ -2,7 +2,9 @@ import { Breadcrumb, Tooltip, Stepper } from '@cogoport/components';
 import { IcMInfo, IcMArrowBack } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import useReportFile from '../../../hooks/useReportFile';
 
 import { stepperItems } from './contant';
 import RevenueBifurcation from './RevenueBifurcation';
@@ -13,9 +15,13 @@ import styles from './styles.module.css';
 function UploadReport() {
 	const [globalStepper, setGlobalStepper] = useState('revenue');
 	const { query } = useRouter();
+	const { refetch, sourceFileLoading, sourceFileData } = useReportFile({ query });
 
 	const { month, entity } = query || {};
 
+	console.log({ sourceFileLoading, sourceFileData }, 'dataReport');
+
+	useEffect(() => { refetch(); }, [refetch]);
 	return (
 		<div>
 			<div>

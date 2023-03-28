@@ -1,12 +1,13 @@
-import { Button, Input, Select, SingleDateRange } from '@cogoport/components';
+import { Button, Input, Select } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
 import UploadModal from './UploadModal';
+import { optionMonth } from './utils';
 
 function SourceFile() {
-	const [filters, setFilters] = useState({ date: '', basis: '', query: '' });
+	const [filters, setFilters] = useState({ month: '', entity: '', query: '' });
 	const [uploadModal, setUploadModal] = useState(false);
 
 	const getCardData = [{
@@ -49,23 +50,25 @@ function SourceFile() {
 		<div className={styles.container}>
 			<div className={styles.filter_flex}>
 				<div className={styles.flex}>
-					<div className={styles.date_range}>
-						<SingleDateRange
-							placeholder="Date"
-							isPreviousDaysAllowed
-							dateFormat="MM/dd/yyyy"
-							name="date"
-							onChange={(val:any) => { setFilters((prev) => ({ ...prev, date: val })); }}
-							value={filters?.date}
+					<div className={styles.select_container}>
+						<Select
+							value={filters?.month}
+							onChange={(val:string) => { setFilters((prev) => ({ ...prev, month: val })); }}
+							placeholder="Month"
+							options={optionMonth}
+							isClearable
+							style={{ width: '150px' }}
 						/>
 					</div>
 
 					<div className={styles.select_container}>
 						<Select
-							value={filters?.basis}
-							onChange={(val:string) => { setFilters((prev) => ({ ...prev, basis: val })); }}
+							value={filters?.entity}
+							onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 							placeholder="Basis"
-							options={[{ label: 'Value', value: 'value' }, { label: 'Volume', value: 'volume' }]}
+							options={[{ label: 'All', value: 'all' },
+								{ label: 'Entity 101', value: '101' },
+								{ label: 'Entity 301', value: '301' }]}
 							isClearable
 							style={{ width: '150px' }}
 						/>
