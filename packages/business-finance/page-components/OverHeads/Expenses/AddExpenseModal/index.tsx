@@ -110,7 +110,6 @@ function AddExpenseModal({
 					<Modal.Body className={styles.modal_body}>
 						<MailTemplate
 							expenseData={expenseData}
-							setExpenseData={setExpenseData}
 							setShowModal={setShowExpenseModal}
 							getList={() => {}}
 							rowData={rowData}

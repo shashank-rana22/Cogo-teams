@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMFileUploader } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-// import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
+import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import useAddExpense from '../../hooks/useAddExpense';
 
 import Details from './Details';
@@ -18,19 +18,18 @@ interface Data {
 
 interface Props {
 	expenseData?:Data,
-	setExpenseData?:(p:any)=>void,
 	setShowModal?:(p:any)=>void,
 	getList?:(p:any)=>void,
 	rowData?:any,
 }
 
-function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowData }:Props) {
+function MailTemplate({ expenseData, setShowModal, getList, rowData }:Props) {
 	const { uploadedInvoice, vendorData, stakeholderEmail } = expenseData || {};
 	const { category } = rowData || {};
 	const { business_name:vendorName } = vendorData || {};
 
-	// const splitArray = (String(uploadedInvoice) || '').split('/') || [];
-	// const filename = splitArray[splitArray.length - 1];
+	const splitArray = (String(uploadedInvoice) || '').split('/') || [];
+	const filename = splitArray[splitArray.length - 1];
 
 	const { submitData, loading } = useAddExpense({ expenseData, setShowModal, getList, rowData });
 
@@ -70,9 +69,10 @@ function MailTemplate({ expenseData, setExpenseData, setShowModal, getList, rowD
 				{uploadedInvoice?.length > 0 && (
 					<div className={styles.file}>
 						<a href={uploadedInvoice} target="_blank" rel="noreferrer">
-							<IcMFileUploader style={{ marginRight: '4px' }} />
-							{/* {showOverflowingNumber(filename, 10)} */}
-							Uploaded file
+							<div style={{ display: 'flex' }}>
+								<div><IcMFileUploader /></div>
+								<div style={{ marginLeft: '4px' }}>{showOverflowingNumber(filename, 10)}</div>
+							</div>
 						</a>
 					</div>
 				)}
