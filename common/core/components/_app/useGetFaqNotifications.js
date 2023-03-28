@@ -12,7 +12,7 @@ const useGetFaqNotifications = () => {
 		try {
 			await trigger();
 		} catch (e) {
-			Toast.error(e);
+			Toast.error(e?.message);
 		}
 	}, [trigger]);
 

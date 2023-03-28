@@ -43,7 +43,7 @@ const useTopicList = () => {
 				},
 			});
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error?.message);
 		}
 	}, [country_id, id, page, role_functions, role_sub_functions, scope, trigger]);
 

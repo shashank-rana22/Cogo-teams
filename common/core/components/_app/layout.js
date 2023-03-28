@@ -12,7 +12,7 @@ const ChatFAQs = dynamic(() => import('../AdminLayout/FAQs'), { ssr: true });
 function Layout({ children, layout }) {
 	const hideLayout = layout === 'hidden';
 
-	const { profile = {} } = useSelector((state) => state);
+	const profile = useSelector((state) => state.profile || {});
 
 	const { auth_role_data = [] } = profile;
 

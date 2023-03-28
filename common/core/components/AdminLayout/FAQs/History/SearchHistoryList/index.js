@@ -22,8 +22,6 @@ function SearchHistoryList({
 		fetchFaqSearchHistory();
 	}, [fetchFaqSearchHistory]);
 
-	if (searchHistoryListLoading) return <Loader />;
-
 	const today = new Date();
 	const formatToday = format(today, 'dd MMMM');
 	const yesterday = new Date(today.getTime() - 86400000); // 86400000 is the number of milliseconds in a day
@@ -51,6 +49,8 @@ function SearchHistoryList({
 		[formatToday]     : 'Today',
 		[formatYesterday] : 'Yesterday',
 	};
+
+	if (searchHistoryListLoading) return <Loader />;
 
 	if (isEmpty(searchHistoryList)) {
 		return <div className={styles.empty_state_wrapper}>No History Found</div>;

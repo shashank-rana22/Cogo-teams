@@ -87,7 +87,7 @@ function AnswerPage() {
 			setIsLiked(isLiked === 'liked' ? '' : 'liked');
 			refetchQuestions();
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error?.message);
 		}
 	};
 

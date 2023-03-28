@@ -7,7 +7,7 @@ import { useEffect, useState, useCallback, useMemo } from 'react';
 const useListFaqSearchHistory = () => {
 	const [searchHistory, setSearchHistory] = useState('');
 
-	const { profile = {} } = useSelector((state) => state);
+	const profile = useSelector((state) => state.profile || {});
 
 	const { id = '' } = profile?.user || {};
 
@@ -31,7 +31,7 @@ const useListFaqSearchHistory = () => {
 		try {
 			await trigger(params);
 		} catch (e) {
-			Toast.error(e);
+			Toast.error(e?.message);
 		}
 	}, [params, trigger]);
 

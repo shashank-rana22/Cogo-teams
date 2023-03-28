@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -37,7 +38,7 @@ function useGetQuestions({ id }) {
 				},
 			});
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error?.message);
 		}
 	};
 

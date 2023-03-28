@@ -64,7 +64,7 @@ function DisLikeBox({
 			setShow(false);
 			fetch();
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error?.message);
 		}
 	};
 

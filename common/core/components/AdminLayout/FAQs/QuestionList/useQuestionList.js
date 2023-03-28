@@ -11,7 +11,11 @@ const useQuestionList = ({
 	question,
 	setQuestion,
 }) => {
-	const { general = {}, profile = {} } = useSelector((state) => state);
+	const { general, profile } = useSelector((state) => ({
+		general : state.general,
+		profile : state.profile,
+	}));
+
 	const { auth_role_data = {}, partner = {} } = profile;
 	const { scope = '' } = general || {};
 	const { country_id = '', id = '' } = partner;
@@ -60,7 +64,7 @@ const useQuestionList = ({
 					},
 				});
 			} catch (error) {
-				Toast.error(error);
+				Toast.error(error?.message);
 			}
 		},
 		[country_id, id, page, query, roleFunction, roleSubFunction, scope, topic?.id, trigger],

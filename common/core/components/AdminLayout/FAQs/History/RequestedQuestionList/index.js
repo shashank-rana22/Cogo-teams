@@ -25,8 +25,6 @@ function RequestedQuestionList({
 		}
 	}, [getUserFaqs, question?.id]);
 
-	if (loading) return <Loader />;
-
 	const filteredObject = {};
 
 	const today = new Date();
@@ -78,6 +76,8 @@ function RequestedQuestionList({
 			Answer is not available
 		</div>
 	);
+
+	if (loading) return <Loader />;
 
 	return (
 		<div className={styles.container}>

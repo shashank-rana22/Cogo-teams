@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { useCallback, useMemo } from 'react';
 
 const useGetUserRequestedFaqs = () => {
-	const { profile = {} } = useSelector((state) => state);
+	const profile = useSelector((state) => state.profile);
 
 	const { id = '' } = profile?.user || {};
 
@@ -25,7 +25,7 @@ const useGetUserRequestedFaqs = () => {
 		try {
 			await trigger({ params });
 		} catch (e) {
-			Toast.error(e);
+			Toast.error(e?.message);
 		}
 	}, [params, trigger]);
 

@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useUpdateFaqSearchHistory = ({ setShowHistory }) => {
-	const { profile = {} } = useSelector((state) => state);
+	const profile = useSelector((state) => state.profile || {});
 
 	const { id = '' } = profile?.user || {};
 
@@ -19,13 +19,12 @@ const useUpdateFaqSearchHistory = ({ setShowHistory }) => {
 
 	const onClickClearHistory = async () => {
 		try {
-			const res = await trigger({ params });
-			if (!res.hasError) {
-				setShowHistory(false);
-				Toast.success('History deleted successfully!');
-			}
-		} catch (e) {
-			Toast.error(e?.messages);
+			await trigger({ params });
+
+			setShowHistory(false);
+			Toast.success('History deleted successfully!');
+		} catch (err) {
+			Toast.error(err?.message);
 		}
 	};
 

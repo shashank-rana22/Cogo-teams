@@ -40,13 +40,11 @@ const useClearFaqNotifications = ({
 
 	const onClickClearNotifications = async () => {
 		try {
-			const res = await trigger({ params });
-			if (!res.hasError) {
-				setShowNotificationContent(false);
-				Toast.success('Notifications cleared successfully!');
-			}
-		} catch (e) {
-			Toast.error(e?.messages);
+			await trigger({ params });
+			setShowNotificationContent(false);
+			Toast.success('Notifications cleared successfully!');
+		} catch (err) {
+			Toast.error(err?.message);
 		}
 	};
 

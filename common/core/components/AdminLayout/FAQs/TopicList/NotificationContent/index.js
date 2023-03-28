@@ -19,8 +19,6 @@ function NotificationContent({
 		faqNotificationData,
 	});
 
-	if (faqNotificationApiLoading) return <div className={styles.loader_wrapper}><Loader /></div>;
-
 	const filteredObject = {};
 
 	const today = new Date();
@@ -54,6 +52,8 @@ function NotificationContent({
 		[formatToday]     : 'Today',
 		[formatYesterday] : 'Yesterday',
 	};
+
+	if (faqNotificationApiLoading) return <div className={styles.loader_wrapper}><Loader /></div>;
 
 	if (question) {
 		return <Answer question={question} setQuestion={setQuestion} />;

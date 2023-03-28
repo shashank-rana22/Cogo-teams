@@ -35,7 +35,7 @@ const useAnswer = ({ question }) => {
 				},
 			});
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error?.message);
 		}
 	}, [cogo_entity_id, country_id, question?.id, roleFunction, roleSubFunction, scope, trigger]);
 
