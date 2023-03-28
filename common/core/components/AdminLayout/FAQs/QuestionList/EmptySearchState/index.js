@@ -24,7 +24,7 @@ function EmptySearchState({ search = '' }) {
 				size="lg"
 				style={{ marginRight: '8px', width: '100%' }}
 				onChange={(e) => {
-					setSearchquestion(() => e.target.value);
+					setSearchquestion(e);
 				}}
 			/>
 			<div className={styles.button_row}>
