@@ -49,7 +49,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 			Designation : designation || undefined,
 			LogType     : status || undefined,
 			Page        : 1,
-			ManagerID   : managerId,
+			ManagerID   : managerId || undefined,
 		});
 	}, [query, department, designation, status, managerId]);
 

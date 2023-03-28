@@ -222,26 +222,28 @@ const useGetColumns = ({
 			console.log('len', len);
 
 			return (
-				<div className={styles.head_content}>
-					{tags?.map((val) => (
-						<Tooltip
-							content={val}
-							placement="bottom"
-						>
-							<div className={styles.green_dot} />
-						</Tooltip>
-					))}
+				(item?.log_type === 'pip' && (
+					<div className={styles.head_content}>
+						{tags?.map((val) => (
+							<Tooltip
+								content={val}
+								placement="bottom"
+							>
+								<div className={styles.green_dot} />
+							</Tooltip>
+						))}
 
-					{Array(len).fill('').map(() => (
+						{Array(len).fill('').map(() => (
 						// <Tooltip
 						// 	content="Email sent to Employee"
 						// 	placement="bottom"
 						// >
-						<div className={styles.dot} />
+							<div className={styles.dot} />
 						// </Tooltip>
-					))}
+						))}
 
-				</div>
+					</div>
+				))
 			);
 		},
 		id  : 'progress',
@@ -327,12 +329,11 @@ const useGetColumns = ({
 		key : 'status',
 	},
 	{
-		Header   : <div className={styles.head}>LOGS</div>,
+		Header   : <div className={styles.head}>REVIEW</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<Button
 					themeType="tertiary"
-					style={{ color: 'blue' }}
 					onClick={() => {
 						setItem(item);
 						setModal('review');

@@ -1,4 +1,4 @@
-import { Toast, Tabs, TabPanel, Button } from '@cogoport/components';
+import { Tabs, TabPanel, Button } from '@cogoport/components';
 import { IcMDownload, IcMEdit, IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';

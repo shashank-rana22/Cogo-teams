@@ -69,8 +69,8 @@ function UploadedFiles({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>PIP &amp; Probation List</div>
-			<UserTableData
+			<div className={styles.heading}>No files are uploaded yet</div>
+			{/* <UserTableData
 				columns={columns}
 				loading={loading}
 				list={list}
@@ -78,7 +78,7 @@ function UploadedFiles({
 				page_limit={page_limit}
 				setPagination={setPage}
 				total_count={total_count}
-			/>
+			/> */}
 		</div>
 	);
 }

@@ -10,7 +10,7 @@ const feedbackDataColumns = {
 	logModal           : ['name', 'cogo_id', 'designation', 'manager', 'employee_status', 'add_create_arrow'],
 	pendingReviewsList : ['name', 'designation', 'manager', 'status', 'progress', 'action', 'review'],
 	uploadedFiles      : ['name', 'number_of_employees', 'manager', 'start_date', 'status', 'upload_type'],
-	pipProbationList   : ['name', 'designation', 'manager', 'status', 'start_date', 'end_date', 'action'],
+	pipProbationList   : ['name', 'designation', 'manager', 'status', 'start_date', 'end_date'],
 	reAssignModal      : ['name', 'designation', 'manager'],
 };
 

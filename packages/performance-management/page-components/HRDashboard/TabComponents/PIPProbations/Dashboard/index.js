@@ -90,7 +90,7 @@ function Dashboard({
 			</div>
 
 			<div>
-				<div className={styles.heading}>PIP &amp; Probation List</div>
+				<div className={styles.heading}>Past PIP &amp; Probation List</div>
 				<div className={styles.filters}>
 					<Filters
 						params={params}
