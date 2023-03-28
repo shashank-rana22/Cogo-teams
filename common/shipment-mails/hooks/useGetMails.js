@@ -48,13 +48,11 @@ const useGetMails = (
 				console.log(err);
 			}
 		})();
-	}, [email_address, foldername,
-		JSON.stringify(filters),
-		page, page_limit, search, triggerGetMail]);
+	}, [email_address, foldername, page, page_limit, search, filters, triggerGetMail]);
 
 	useEffect(() => {
 		getEmails();
-	}, [getEmails]);
+	}, [email_address, foldername, page, search, getEmails]);
 
 	return {
 		mailApi,

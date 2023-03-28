@@ -15,7 +15,6 @@ const useGetEntityStakeholderMappings = () => {
 	);
 
 	/**
-	 *
 	 * @param {String} id Id of mail
 	 */
 	const getEntityStakeholder = useCallback(() => {

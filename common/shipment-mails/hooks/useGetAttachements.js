@@ -14,10 +14,6 @@ const useGetAttachements = (email_address, message_id) => {
 		{ manual: true },
 	);
 
-	/**
-	 *
-	 * @param {String} id Id of mail
-	 */
 	const getAttachements = useCallback(() => {
 		(async () => {
 			try {
