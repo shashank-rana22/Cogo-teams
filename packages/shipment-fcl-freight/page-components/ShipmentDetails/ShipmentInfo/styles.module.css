@@ -4,6 +4,11 @@
     color: #4F4F4F;
     font-size: 12px;
     font-weight: 600;
-    cursor: pointer;
     padding-top: 12px;
+
+    :global {
+        .ui_breadcrumb_container > div {
+            cursor: initial;
+        }
+    }
 }

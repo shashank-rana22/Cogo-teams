@@ -23,6 +23,7 @@
     "clean": "turbo run clean"
   },
   "dependencies": {
+    "@cogoport/navigation-configs": "workspace:^0.1.0",
     "@sentry/nextjs": "^7.40.0",
     "accept-language": "^3.0.18",
     "axios-hooks": "^4.0.0",

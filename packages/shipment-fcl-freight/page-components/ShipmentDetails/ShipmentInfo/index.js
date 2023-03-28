@@ -4,9 +4,12 @@ import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
 import styles from './styles.module.css';
+import useShipmentBack from './useShipmentBack';
 
 function ShipmentInfo() {
 	const { shipment_data } = useContext(ShipmentDetailContext);
+
+	const { handleShipmentsClick } = useShipmentBack();
 
 	const showFeature = shipment_data?.stakeholder_types?.some((e) => ['superadmin',
 		'booking_agent', 'sales_agent', 'user'].includes(e));
@@ -36,9 +39,10 @@ function ShipmentInfo() {
 	return (
 		<div className={styles.container}>
 			<Breadcrumb>
-				<Breadcrumb.Item label={<a href="page number">Shipments</a>} />
+				<Breadcrumb.Item label={<a href="/shipment-management">Shipments</a>} onClick={handleShipmentsClick} />
 				<Breadcrumb.Item label={text} />
 			</Breadcrumb>
+
 			{shipment_data?.source ? <Tags size="sm">{sourceText}</Tags> : null}
 			{shipment_data?.is_cogo_assured ? (
 				<img
