@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 200px;
+	height: var(--container-height) || "200px";
+	margin: auto;
+}
+
+.loading_text {
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 500;
+}
