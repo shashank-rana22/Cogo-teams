@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import FormContainer from './FormContainer';
 import GenerateHeader from './GenerateHeader';
 import GenerateMawbDoc from './GenerateMawbDoc';
+import useGetHawb from './Helpers/hooks/useGetHawb';
 import usePackingList from './Helpers/hooks/usePackingList';
 import mawbControls from './mawbControls';
 import styles from './styles.module.css';
@@ -51,6 +52,7 @@ function GenerateMAWB({
 	]);
 
 	const [activeHawb, setActiveHawb] = useState(hawbDetails[0].id);
+	const [activeKey, setActiveKey] = useState('basic');
 
 	const fields = mawbControls(disableClass);
 
@@ -63,7 +65,9 @@ function GenerateMAWB({
 		...formValues,
 	};
 
-	const taskItem = { ...item, ...item.documentData };
+	const { hawbData, getHawb, hawbSuccess, setHawbSuccess } = useGetHawb();
+
+	const [taskItem, setTaskItem] = useState({ ...item, ...item.documentData });
 
 	const [activeCategory, setActiveCategory] = useState(taskItem.blCategory);
 
@@ -77,6 +81,38 @@ function GenerateMAWB({
 		+formValues.weight,
 		(+taskItem.volume * 166.67),
 	) || 0.0).toFixed(2)));
+
+	useEffect(() => {
+		getHawb(activeHawb);
+		if (hawbSuccess) {
+			setTaskItem({ ...item, ...hawbData.data.documentData });
+			setHawbSuccess(false);
+		} else {
+			setTaskItem({ ...item, ...item.documentData });
+		}
+		finalFields.forEach((c:any) => {
+			if (taskItem[c.name]) {
+				setValue(c.name, taskItem[c.name]);
+			} else {
+				setValue(c.name, '');
+			}
+		});
+		setValue('executedDate', edit ? taskItem.executedDate : new Date());
+		setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
+		setValue('city', 'NEW DELHI');
+		setValue('place', 'NEW DELHI');
+		setValue('class', 'q');
+		setValue('currency', 'INR');
+		setValue('commodity', edit ? `${taskItem.commodity || ''}`
+			: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
+		setValue('agentOtherCharges', edit ? taskItem.agentOtherCharges
+			: agentOtherChargesCode);
+		setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
+			: carrierOtherChargesCode);
+		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
+		setValue('shipperSignature', taskItem.customer_name);
+		setValue('amountOfInsurance', 'NIL');
+	}, [activeHawb]);
 
 	useEffect(() => {
 		setChargeableWeight(formValues.chargeableWeight);
@@ -172,6 +208,8 @@ function GenerateMAWB({
 					setHawbDetails={setHawbDetails}
 					activeHawb={activeHawb}
 					setActiveHawb={setActiveHawb}
+					activeKey={activeKey}
+					setActiveKey={setActiveKey}
 				/>
 			)}
 
@@ -200,6 +238,7 @@ function GenerateMAWB({
 								setHawbDetails={setHawbDetails}
 								activeHawb={activeHawb}
 								setActiveHawb={setActiveHawb}
+								setActiveKey={setActiveKey}
 							/>
 						</Modal.Body>
 

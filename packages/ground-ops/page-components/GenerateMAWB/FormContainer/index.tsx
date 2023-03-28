@@ -21,10 +21,8 @@ const options = [
 function FormContainer({
 	back, setBack, edit, setEdit, packingData, fields,
 	control, errors, item, setGenerate, handleSubmit, activeCategory, hawbDetails,
-	setHawbDetails, activeHawb, setActiveHawb,
+	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey,
 }) {
-	const [activeKey, setActiveKey] = useState('basic');
-
 	const [value, onChange] = useState('manual');
 
 	const handleDocumentList = (type) => {

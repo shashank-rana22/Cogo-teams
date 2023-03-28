@@ -2,7 +2,7 @@ import { Button, Checkbox } from '@cogoport/components';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
-import React, { createRef, useState, ReactFragment } from 'react';
+import React, { createRef, useState, ReactFragment, useEffect } from 'react';
 
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
@@ -30,7 +30,7 @@ interface Props {
 	chargeableWeight?:number;
 	setGenerate?:Function;
 	activeCategory?: String;
-	hawbDetails?: any;
+	hawbDetails?: Array<string>;
 	setHawbDetails?:Function;
 }
 
@@ -68,16 +68,32 @@ function GenerateMawb({
 	chargeableWeight,
 	setGenerate = () => {},
 	activeCategory = '',
-	hawbDetails,
+	hawbDetails = [],
 	setHawbDetails = () => {},
 	activeHawb,
 	setActiveHawb,
+	setActiveKey,
 }:Props) {
 	const filteredData = { ...formData };
 
 	const serialId = taskItem?.serialId || '';
 
 	const { handleUpload } = useGetMediaUrl();
+
+	const ref = createRef(null);
+
+	const [saveDocument, setSaveDocument] = useState(false);
+
+	const [whiteout, setWhiteout] = useState(false);
+
+	const [result, setResult] = useState({});
+
+	const handleClick = () => {
+		if (back) {
+			setBack(!back);
+		}
+	};
+
 	const { upload, loading } = useCreateShipmentDocument({
 		edit,
 		setGenerate,
@@ -86,19 +102,11 @@ function GenerateMawb({
 		hawbDetails,
 		setHawbDetails,
 		setActiveHawb,
+		setActiveKey,
+		handleClick,
+		setResult,
+		activeHawb,
 	});
-
-	const ref = createRef(null);
-
-	const [saveDocument, setSaveDocument] = useState(false);
-
-	const [whiteout, setWhiteout] = useState(false);
-
-	const handleClick = () => {
-		if (back) {
-			setBack(!back);
-		}
-	};
 
 	const takeImageScreenShot = async (node) => {
 		const dataURI = await htmlToImage.toJpeg(node);
@@ -149,8 +157,18 @@ function GenerateMawb({
 		};
 
 		upload({ payload });
+
+		// handleClick();
 		setSaveDocument(false);
 	};
+
+	// useEffect(() => {
+	// 	console.log('result', result);
+	// 	if (result.status === 200) {
+	// 		getHawb(result.data.ids[0]);
+	// 	}
+	// // eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [result]);
 
 	const handleView = (download24) => {
 		if (taskItem.documentState === 'document_accepted') {

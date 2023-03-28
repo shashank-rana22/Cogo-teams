@@ -35,8 +35,8 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {} }) => 
 				approved_awb: {
 					assignedStakeholder : 'service_ops2_docs',
 					status              : 'completed',
-					task                : ['upload_mawb_freight_certificate'],
-					documentType        : 'draft_airway_bill',
+					task                : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
+					documentType        : ['draft_airway_bill', 'draft_house_airway_bill'],
 					documentState       : 'document_accepted',
 					isDocDataRequired   : true,
 				},
