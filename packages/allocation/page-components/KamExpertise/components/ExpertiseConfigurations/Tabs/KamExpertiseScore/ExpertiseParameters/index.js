@@ -77,7 +77,13 @@ function ExpertiseParameters(props) {
 						</div>
 
 						{expertiseLoading ? <LoadingState />
-							: list.map((item) => <CardItem editMode={editMode} item={item} control={control} />) }
+							: list.map((item) => (
+								<CardItem
+									editMode={editMode}
+									item={item}
+									control={control}
+								/>
+							)) }
 
 						<div className={styles.condition_button_container}>
 							<Button themeType="secondary" onClick={onClickAddCondition}>+ Condition</Button>

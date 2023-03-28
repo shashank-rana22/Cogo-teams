@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateNewEvent from '../../../hooks/useCreateNewEvent';
@@ -9,12 +8,6 @@ import useUpdateEvent from '../../../hooks/useUpdateEvent';
 
 import AttributePage from './AttributesPage';
 import styles from './styles.module.css';
-
-const FILTER_ATTRIBUTE_MAPPING = {
-	account_attribute  : 'account',
-	shipment_attribute : 'shipment',
-	misc_attribute     : 'misc',
-};
 
 function CreateEvent(props) {
 	const {
@@ -33,7 +26,6 @@ function CreateEvent(props) {
 	const {
 		attributeList = [],
 		loading,
-		setRuleType = () => {},
 	} = useGetAllocationKamExpertiseRules();
 
 	const {
@@ -52,14 +44,7 @@ function CreateEvent(props) {
 		control,
 		handleSubmit,
 		formState: { errors },
-		watch,
 	} = formProps;
-
-	const watchListener = watch('attribute');
-
-	useEffect(() => {
-		setRuleType(FILTER_ATTRIBUTE_MAPPING[watchListener]);
-	}, [setRuleType, watchListener]);
 
 	return (
 		<div>
@@ -85,8 +70,7 @@ function CreateEvent(props) {
 						</div>
 
 						<section className={styles.rule_form_container}>
-							{
-							getAddRuleControls.map((controlItem) => {
+							{ getAddRuleControls.map((controlItem) => {
 								const el = { ...controlItem };
 
 								const Element = getFieldController(el.type);
@@ -114,15 +98,13 @@ function CreateEvent(props) {
 										</div>
 									</div>
 								);
-							})
-}
+							})}
 						</section>
 					</div>
 
 					<AttributePage
 						loading={loading}
 						attributeList={attributeList}
-						watchListener={watchListener}
 						formProps={formProps}
 					/>
 

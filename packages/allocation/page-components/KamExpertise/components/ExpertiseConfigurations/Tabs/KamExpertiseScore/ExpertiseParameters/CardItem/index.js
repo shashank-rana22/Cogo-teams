@@ -15,7 +15,10 @@ function CardItem({ item, editMode, control }) {
 	return (
 		<div className={styles.card_item}>
 			<div className={styles.name_container}>
-				<div className={styles.parameter_name}>{startCase(data.length === 1 ? conditionName : group_name)}</div>
+				<div className={styles.parent_parameter_name}>
+					{startCase(data.length === 1 ? conditionName : group_name)}
+
+				</div>
 				<div className={styles.icon_container}>
 					<Tooltip content={description} placement="top">
 						<div><IcMInfo width={14} height={14} /></div>
@@ -24,8 +27,9 @@ function CardItem({ item, editMode, control }) {
 				</div>
 			</div>
 
-			{data.map((childItem) => {
+			{data.map((childItem, index) => {
 				const { condition_name = '', attributes: controls = [] } = childItem;
+				const isLastItem = index === data.length - 1;
 
 				return (
 					<>
@@ -97,7 +101,7 @@ function CardItem({ item, editMode, control }) {
 							})}
 						</div>
 
-						{isDoubleLevel ? <hr className={styles.horizontal_line} /> : null}
+						{isDoubleLevel && !isLastItem ? <hr className={styles.horizontal_line} /> : null}
 
 					</>
 				);

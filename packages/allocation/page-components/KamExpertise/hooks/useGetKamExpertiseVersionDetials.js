@@ -1,21 +1,23 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const useGetKamExpertiseVersionDetials = ({
-	selectedVersion,
-	setMode,
-	setShowModal,
-	mode,
-	setResponseId,
-	setSelectedVersion,
-	refetch,
-	expertiseRefetch,
-	cardRefetch,
-	responseId,
-	onPublish = '',
-	setOnPublish,
-}) => {
+const useGetKamExpertiseVersionDetials = (props) => {
+	const {
+		setResponseId,
+		refetch,
+		expertiseRefetch,
+		cardRefetch,
+		responseId,
+		onPublish = '',
+		setOnPublish,
+	} = props;
+
+	const [selectedVersion, setSelectedVersion] = useState('');
+	const [mode, setMode] = useState('initial-mode');
+	const [showModal, setShowModal] = useState(false);
+
 	const [{ loading = false }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_version_configurations',
 		method  : 'POST',
@@ -37,8 +39,8 @@ const useGetKamExpertiseVersionDetials = ({
 				setSelectedVersion('');
 				Toast.success('Version selected successfully');
 			}
-		} catch (e) {
-			console.log('erroe', e);
+		} catch (error) {
+			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 
@@ -53,6 +55,12 @@ const useGetKamExpertiseVersionDetials = ({
 	}, [cardRefetch, expertiseRefetch, refetch, responseId, onPublish, setOnPublish, setResponseId]);
 
 	return {
+		selectedVersion,
+		setSelectedVersion,
+		mode,
+		setMode,
+		showModal,
+		setShowModal,
 		CreateModalLoading: loading,
 		getVersion,
 	};

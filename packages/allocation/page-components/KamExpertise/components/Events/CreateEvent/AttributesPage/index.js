@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../../common/EmptyState';
@@ -12,20 +13,20 @@ const CONTROL_TYPE_MAPPING = {
 	select  : 'select',
 };
 function AttributePage(props) {
-	const { loading, attributeList = [], watchListener = '', formProps = {} } = props;
+	const { loading, attributeList = [], formProps = {} } = props;
 
 	const {
 		control,
 		formState: { errors },
 	} = formProps;
 
-	if (loading && watchListener) {
+	if (loading) {
 		return (
 			<div className={styles.account_attributes}>
 				<div className={styles.account_attribute_text}>
-					{startCase(watchListener || '')}
-
+					Attributes
 					{' '}
+					<IcMInfo />
 				</div>
 
 				<section className={styles.row_container}>
@@ -47,7 +48,7 @@ function AttributePage(props) {
 		);
 	}
 
-	if (isEmpty(attributeList) && !loading) {
+	if (isEmpty(attributeList)) {
 		return (
 			<div
 				className={styles.account_attributes}
@@ -66,76 +67,59 @@ function AttributePage(props) {
 	}
 
 	return (
-
-		(
-			<div className={styles.account_attributes}>
-				<div className={styles.account_attribute_text}>
-					{startCase(watchListener || '')}
-
-					{' '}
-					{/* <IcMInfo /> */}
-				</div>
-
-				<section className={styles.row_container}>
-
-					{ (!watchListener) ? (
-						<div
-							className={styles.row_subcontainer}
-						>
-							<img
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/grey_empty_state.svg"
-								height="300px"
-								width="300px"
-								alt=""
-							/>
-							Select an attribute to proceed
-
-						</div>
-					)
-						: attributeList.map((controlItem, index) => {
-							const { name = '', parameters } = controlItem;
-							const { params_type, options = [] } = parameters || {};
-
-							const type = CONTROL_TYPE_MAPPING[params_type || ''];
-
-							const el = {
-								name,
-								label: startCase(name),
-								type,
-								...(type === 'select' && { options, isClearable: true }),
-							};
-
-							const Element = getFieldController(el?.type);
-
-							if (!Element) return null;
-
-							return (
-
-								<div className={styles.attribute_form_group}>
-									<span className={styles.label}>{el.label}</span>
-
-									<div
-										className={`${styles.input_group}
-                            ${index < attributeList.length ? styles.margin_bottom : ''}`}
-									>
-										<Element
-											{...el}
-											key={el.name}
-											control={control}
-											id={`${el.name}_input`}
-										/>
-									</div>
-
-									<div className={styles.error_message}>
-										{errors?.[el.name]?.message}
-									</div>
-								</div>
-							);
-						})}
-
-				</section>
+		<div className={styles.account_attributes}>
+			<div className={styles.account_attribute_text}>
+				Attributes
+				{' '}
+				<IcMInfo />
 			</div>
-		)
+
+			<section className={styles.row_container}>
+
+				{ attributeList.map((controlItem, index) => {
+					const { name = '', parameters, options = [] } = controlItem;
+					const { params_type } = parameters || {};
+
+					const type = CONTROL_TYPE_MAPPING[params_type || ''];
+
+					const el = {
+						name,
+						label: startCase(name),
+						type,
+						...(params_type === 'select' && { options, isClearable: true }),
+					};
+
+					const Element = getFieldController(el?.type);
+
+					if (!Element) return null;
+
+					return (
+
+						<div className={styles.attribute_form_group}>
+							<span className={styles.label}>{el.label}</span>
+
+							<div
+								className={`${styles.input_group}
+                            ${index < attributeList.length ? styles.margin_bottom : ''}`}
+							>
+								<Element
+									{...el}
+									key={el.name}
+									control={control}
+									id={`${el.name}_input`}
+								/>
+							</div>
+
+							<div className={styles.error_message}>
+								{errors?.[el.name]?.message}
+							</div>
+						</div>
+					);
+				})}
+
+			</section>
+		</div>
+
 	);
 }
 

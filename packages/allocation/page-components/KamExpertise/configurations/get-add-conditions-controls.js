@@ -1,5 +1,5 @@
 import useGetAsyncOptionsMicroservice from '@cogoport/forms/hooks/useGetAsyncOptionsMicroservice';
-import { asyncFieldsExpertiseConfigurations } from '@cogoport/forms/utils/getAsyncFields';
+// import { asyncFieldsExpertiseConfigurations } from '@cogoport/forms/utils/getAsyncFields';
 
 const useGetControls = ({ modifiedControls = [], typeFilter }) => {
 	// const conditions = useGetAsyncOptionsMicroservice(asyncFieldsExpertiseConfigurations() || {});

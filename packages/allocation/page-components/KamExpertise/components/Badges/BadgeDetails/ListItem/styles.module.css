@@ -1,6 +1,6 @@
-.empty_state_container{
-  padding         : 8% 16%;
-  background-color : #fff;
-  margin-bottom    : 12px;
-  border-radius    : 8px;
+.empty_state_container {
+	padding: 8% 16%;
+	margin-bottom: 12px;
+	background-color: #fff;
+	border-radius: 8px;
 }

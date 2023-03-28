@@ -33,7 +33,7 @@ function BadgeUpdateCard(props) {
 					<p>{medalType}</p>
 				</div>
 
-				<div className={styles.verticalLine} />
+				<div className={styles.vertical_line} />
 
 				<div>
 					<p style={{ color: '#4f4f4f' }}>Score</p>

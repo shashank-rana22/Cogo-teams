@@ -12,13 +12,10 @@ function useGetKamExpertiseStatsList() {
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			created_at_greater_than : '',
-			created_at_less_than    : '',
-			kam_expertise_level     : '',
-			q                       : searchQuery || undefined,
-			badge                   : badgeName || undefined,
+			q     : searchQuery || undefined,
+			badge : badgeName || undefined,
 		},
-	}, { manual: false });
+	});
 
 	useEffect(() => {
 		setParams((pv) => ({
@@ -36,7 +33,7 @@ function useGetKamExpertiseStatsList() {
 		method  : 'GET',
 		authkey : 'get_allocation_kam_expertise_stats_list',
 		params,
-	});
+	}, { manual: !(params?.filters?.kam_expertise_level) });
 
 	const getNextPage = (newPage) => {
 		setParams((pv) => ({
