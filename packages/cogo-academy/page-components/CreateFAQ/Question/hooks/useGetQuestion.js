@@ -4,16 +4,19 @@ import { useCallback } from 'react';
 
 function useGetQuestion() {
 	const { general } = useSelector((state) => state);
-	const { query } = general;
+	const { query = {} } = general;
 	const { id = '' } = query || {};
+	const { mode = '' } = query || {};
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_question',
-	}, { manual: false });
+	}, { manual: true });
 
 	const fetchQuestion = useCallback(
 		async () => {
+			if (!id) return;
+
 			try {
 				await trigger({
 					params: { id, is_admin_view: true },
@@ -25,6 +28,6 @@ function useGetQuestion() {
 		[id, trigger],
 	);
 
-	return { fetchQuestion, query, data, loading };
+	return { fetchQuestion, query, data, loading, mode };
 }
 export default useGetQuestion;
