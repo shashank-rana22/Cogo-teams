@@ -3,7 +3,7 @@ import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function Header({ header_data }) {
+function Header({ header_data, loading = false }) {
 	const { setToggleState, toggleState } = header_data;
 	return (
 		<div className={styles.header_row}>
@@ -21,11 +21,12 @@ function Header({ header_data }) {
 					</span>
 				</p>
 			</div>
+
 			<div style={{ zIndex: '10' }}>
 				<Toggle
 					name="a4"
 					size="md"
-					disabled={false}
+					disabled={loading}
 					offLabel="Level of Difficulty"
 					onLabel="Topic wise"
 					onChange={() => setToggleState(!toggleState)}

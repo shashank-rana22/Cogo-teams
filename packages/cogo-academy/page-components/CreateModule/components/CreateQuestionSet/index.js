@@ -48,7 +48,7 @@ function CreateQuestionSet(props) {
 
 	if (['edit', 'view'].includes(mode) && isEmpty(id)) {
 		router.push('/learning/test-module/create-question');
-		return '...redirecting';
+		return 'redirecting ...';
 	}
 
 	return (

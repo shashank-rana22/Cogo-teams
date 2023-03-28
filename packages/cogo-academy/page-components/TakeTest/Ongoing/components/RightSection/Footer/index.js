@@ -21,7 +21,6 @@ function Footer({
 				themeType="accent"
 			>
 				Submit Test
-
 			</Button>
 		</div>
 	);

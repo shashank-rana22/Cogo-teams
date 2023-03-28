@@ -1,7 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
@@ -9,7 +8,7 @@ import InfoBanner from './components/InfoBanner';
 import Questions from './components/Questions';
 import Students from './components/Students';
 import TestResults from './components/TestResults';
-// import useGetAdminTestResult from './hooks/useGetAdminTestResult';
+import useGetTest from './hooks/useGetTest';
 import styles from './styles.module.css';
 
 function AdminResults() {
@@ -23,13 +22,11 @@ function AdminResults() {
 
 	const { test_id = '' } = query || {};
 
-	const [{ data: testData, loading }, refetch] = useRequest({
-		method : 'GET',
-		url    : 'get_test',
-		params : { id: test_id },
-	}, { manual: false });
-
-	const { status } = testData || {};
+	const {
+		loading,
+		data,
+		getTest,
+	} = useGetTest({ id: test_id });
 
 	const componentMapping = {
 		tests: {
@@ -50,6 +47,8 @@ function AdminResults() {
 		push('/learning?activeTab=test_module', '/learning?activeTab=test_module');
 	};
 
+	const { status } = data || {};
+
 	return (
 		<div className={styles.container}>
 			<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
@@ -57,8 +56,10 @@ function AdminResults() {
 
 				<p className={styles.go_back_text}>Dashboard</p>
 			</div>
+
 			<div><TestResults test_id={test_id} /></div>
-			<InfoBanner test_status={status} test_id={test_id} refetchTest={refetch} />
+
+			<InfoBanner loading={loading} test_status={status} test_id={test_id} refetchTest={getTest} />
 
 			<div className={styles.tabs_container}>
 				<Tabs
