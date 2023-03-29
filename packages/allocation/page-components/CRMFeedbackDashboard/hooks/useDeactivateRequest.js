@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useDeactivateRequest = ({ organization_id = '' }) => {
+const useDeactivateRequest = ({ feedback_request_id = '' }) => {
 	const [isOpenModal, setisOpenModal] = useState(false);
 
 	const onCloseModal = () => {
@@ -19,7 +19,7 @@ const useDeactivateRequest = ({ organization_id = '' }) => {
 	const onDeactivateRequest = async () => {
 		try {
 			const payload = {
-				id     : organization_id,
+				id     : feedback_request_id,
 				status : 'inactive',
 			};
 

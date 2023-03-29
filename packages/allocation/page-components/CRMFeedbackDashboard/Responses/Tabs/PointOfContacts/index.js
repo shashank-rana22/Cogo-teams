@@ -18,8 +18,6 @@ function PointOfContacts({ activeTab = '', feedback_request_id = '' }) {
 
 	const { page, page_limit, total_count } = paginationData;
 
-	console.log('data::', data);
-
 	if (loading) {
 		return (
 			<LoadingState />

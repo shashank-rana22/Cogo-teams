@@ -15,7 +15,7 @@ const allocations = {
 		navigation : 'crm_feedback_dashboard',
 		isMainNav  : false,
 	},
-	'/[partner_id]/allocation/requests/[organization_id]': {
+	'/[partner_id]/allocation/requests/[feedback_request_id]': {
 		navigation : 'crm_feedback_dashboard',
 		isMainNav  : false,
 	},

@@ -13,13 +13,10 @@ const useCreateBulkEnrichment = ({ setActiveTab = () => {}, selectedBulkData = [
 	const [thirdParty, setThirdParty] = useState([]);
 	const [thirdPartyPayload, setThirdPartyPayload] = useState([{}]);
 
-	console.log('third party::', thirdParty);
-	console.log('3rdpartpayload::', thirdPartyPayload);
-
 	const [{ loading }, trigger] = useAllocationRequest({
-		url     : '',
+		url     : 'feedback_response_bulk_create',
 		method  : 'POST',
-		authkey : '',
+		authkey : 'post_allocation_feedback_response_bulk_create',
 	}, { manual: true });
 
 	const onEnrichmentRequest = async () => {

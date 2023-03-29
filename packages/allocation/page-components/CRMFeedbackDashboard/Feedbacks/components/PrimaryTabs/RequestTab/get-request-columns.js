@@ -91,7 +91,7 @@ export const REQUEST_COLUMNS = [
 		key      : 'action',
 		id       : 'action',
 		accessor : ({
-			status = '', user_id = {}, organization_id = '', id = '',
+			status = '', user_id = {}, id = '',
 		}) => (
 			<section className={styles.feedback}>
 				{!status.includes(['inactive', 'active']) ? (
@@ -99,7 +99,6 @@ export const REQUEST_COLUMNS = [
 						label={STATUS_MAPPING[status]?.buttonLabel}
 						status={status}
 						organization={user_id.name}
-						organization_id={organization_id}
 						feedback_request_id={id}
 					/>
 				) : (

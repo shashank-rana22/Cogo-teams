@@ -220,6 +220,12 @@ const allocation = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'post_allocation_feedback_response_bulk_create',
+			access_type  : 'private',
+			service_name : 'allocation',
+
+		},
 	],
 };
 

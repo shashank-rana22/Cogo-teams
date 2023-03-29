@@ -1995,16 +1995,6 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		possible_apis : apis.contracts,
 	},
-	// crm_feedback_dashboard: {
-	// 	key           : 'crm_feedback_dashboard',
-	// 	title         : 'Feedback Dashboard',
-	// 	href          : '/v2/crm-feedback-dashboard',
-	// 	as            : '/v2/crm-feedback-dashboard',
-	// 	type          : 'link',
-	// 	main_apis     : ['/get_allocation_feedbacks'],
-	// 	module_type   : 'dashboards',
-	// 	possible_apis : apis.crm_feedback_dashboard,
-	// },
 	cogo_academy: {
 		key       : 'cogo_academy',
 		title     : 'Cogo Academy',

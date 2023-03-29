@@ -5,14 +5,14 @@ import useDeactivateRequest from '../../../../../hooks/useDeactivateRequest';
 
 import styles from './styles.module.css';
 
-function ActionButton({ label = '', status = '', organization = '', organization_id = '', feedback_request_id = '' }) {
+function ActionButton({ label = '', status = '', organization = '', feedback_request_id = '' }) {
 	const {
 		onDeactivateRequest,
 		loading = false,
 		isOpenModal = false,
 		setisOpenModal = () => {},
 		onCloseModal = () => {},
-	} = useDeactivateRequest({ organization_id });
+	} = useDeactivateRequest({ feedback_request_id });
 
 	const router = useRouter();
 

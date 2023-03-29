@@ -19,7 +19,7 @@ function PrimaryTabs({ feedback_request_id = '' }) {
 				</TabPanel>
 
 				<TabPanel name="address" title="Address">
-					<Address activeTab={activeTab} />
+					<Address activeTab={activeTab} feedback_request_id={feedback_request_id} />
 				</TabPanel>
 			</Tabs>
 		</div>
