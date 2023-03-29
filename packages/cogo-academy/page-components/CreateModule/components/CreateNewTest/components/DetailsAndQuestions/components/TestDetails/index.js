@@ -32,11 +32,6 @@ function CreateNewTest({ control, errors, data, setValue, watch }) {
 
 	const { audienceOptions = [] } = useGetUserGroups();
 
-
-	console.log('uploadDocument', uploadDocument);
-
-	console.log('audienceOptions', audienceOptions);
-
 	const controls = getControls([...audienceOptions] || [], (select_user_group.length === 0));
 
 	const radioGroupVal = watch('select_users') || '';
