@@ -20,7 +20,6 @@ function TestResults({ test_id = '' }) {
 	}, { manual: false });
 
 	const stats_data = data?.data || {};
-	// const stats_data = data2 || {};
 
 	if (loading) {
 		return 'loading';
