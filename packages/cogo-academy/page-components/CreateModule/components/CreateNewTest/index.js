@@ -48,7 +48,7 @@ function CreateTest() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [test_id]);
 
-	const { component: ActiveComponent, props:activeComponentProps } = COMPONENT_MAPPING[activeStepper];
+	const { component: ActiveComponent, props: activeComponentProps } = COMPONENT_MAPPING[activeStepper];
 
 	return (
 		<div>
