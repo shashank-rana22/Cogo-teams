@@ -19,13 +19,13 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 				/>
 			</div>
 		),
-		id       : 'a',
+		id       : 'user',
 		accessor : ({ user = '' }) => <section>{user}</section>,
 	},
 
 	{
 		Header   : <div>PASSED/FAILED</div>,
-		id       : 'ss',
+		id       : 'passed_failed',
 		accessor : ({ result = 0 }) => (
 			<section>{startCase(result) || '-'}</section>
 		),
@@ -44,7 +44,7 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 				/>
 			</div>
 		),
-		id       : 'e',
+		id       : 'score_achieved',
 		accessor : ({ score_achieved = '', total_score }) => (
 			<section>
 				{score_achieved || '0'}
@@ -67,7 +67,7 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 				/>
 			</div>
 		),
-		id       : 'results',
+		id       : 'percentile',
 		accessor : ({ percentile = '' }) => (
 			<div>{percentile !== null ? percentile.toFixed(2) : ' '}</div>
 		),
@@ -86,7 +86,7 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 				/>
 			</div>
 		),
-		id       : 'time',
+		id       : 'time_taken',
 		accessor : ({ time_taken = '' }) => <div>{time_taken}</div>,
 	},
 	{
@@ -103,7 +103,7 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 				/>
 			</div>
 		),
-		id       : 'updatedAt',
+		id       : 'attempted_on',
 		accessor : ({ attempted_on = '' }) => (
 			<section>{format(attempted_on, 'dd MMM yyyy hh:mm a')}</section>
 		),
