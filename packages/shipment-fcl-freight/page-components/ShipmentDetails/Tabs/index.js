@@ -7,7 +7,7 @@ import SalesInvoice from './Invoicing/SalesInvoice';
 import Overview from './Overview';
 import styles from './styles.module.css';
 import TimelineAndTask from './TimelineAndTasks';
-import Tracking from './Tracking';
+import Tracking from '../../../common/Tracking';
 
 function Tab({ shipment_data = {} }) {
 	const [activeTab, setActiveTab] = useState('overview');

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import useOceanRoute from '../../../../../hooks/useOceanRoute';
+import useOceanRoute from '../../../hooks/useOceanRoute';
 
 import EmptyState from './EmptyState';
 import LoadingState from './LoadingState';
