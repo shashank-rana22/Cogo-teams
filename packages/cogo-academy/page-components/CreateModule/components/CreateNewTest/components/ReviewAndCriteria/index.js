@@ -1,7 +1,7 @@
 import { Pill, Button, Placeholder, Toast } from '@cogoport/components';
 import { useForm, InputController, useFieldArray } from '@cogoport/forms';
 import { IcMArrowBack, IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
-import { Link } from '@cogoport/next';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -26,6 +26,8 @@ function ReviewAndCriteria(props) {
 
 	const { updateTest } = useUpdateTest();
 
+	const router = useRouter();
+
 	const [error, setError] = useState(false);
 
 	useEffect(() => {
@@ -35,14 +37,18 @@ function ReviewAndCriteria(props) {
 
 	const [showModal, setShowModal] = useState(false);
 
+	const onNavigate = () => {
+		const href = '/learning?activeTab=test_module';
+		router.push(href, href);
+	};
+
 	return (
 		<div className={styles.container}>
-			<Link href="/learning?activeTab=test_module">
-				<div className={styles.header}>
-					<IcMArrowBack width={20} height={20} />
-					<div className={styles.title}>New Test</div>
-				</div>
-			</Link>
+			<div className={styles.header}>
+				<IcMArrowBack className={styles.back_icon} width={20} height={20} onClick={onNavigate} />
+				<div className={styles.title}>New Test</div>
+			</div>
+
 			{(isEmpty(data) || loading) ? (
 				<Placeholder
 					height="100px"
