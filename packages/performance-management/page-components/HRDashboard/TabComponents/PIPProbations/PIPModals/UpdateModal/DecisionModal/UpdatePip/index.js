@@ -15,7 +15,11 @@ function UpdatePip({
 
 	const radioList = [
 		{ name: 'R2', value: 'confirmed', label: 'Confirm' },
-		{ name: 'R1', value: 'exited', label: 'Exit' },
+		{
+			name  : 'R1',
+			value : item?.log_type === 'pip' ? 'exited' : 'extended',
+			label : item?.log_type === 'pip' ? 'Exit' : 'Extend',
+		},
 	];
 
 	useEffect(() => {
@@ -54,7 +58,7 @@ function UpdatePip({
 				onChange={onChange}
 			/>
 
-			{(value === 'exited') && (
+			{(value !== 'confirmed') && (
 				<div className={styles.dates}>
 					<div className={styles.lable}>Reason for Extention</div>
 
