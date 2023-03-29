@@ -4,7 +4,7 @@ import { format } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function Header({ header_data, loading = false }) {
-	const { setToggleState, toggleState } = header_data;
+	const { setToggleState } = header_data;
 	return (
 		<div className={styles.header_row}>
 			<div>
@@ -29,7 +29,7 @@ function Header({ header_data, loading = false }) {
 					disabled={loading}
 					offLabel="Level of Difficulty"
 					onLabel="Topic wise"
-					onChange={() => setToggleState(!toggleState)}
+					onChange={() => setToggleState((prev) => (!prev))}
 				/>
 			</div>
 		</div>
