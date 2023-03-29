@@ -32,6 +32,20 @@
 	border-radius: 8px;
 }
 
+.bar_chart_loader {
+	position: relative;
+	top: 150px;
+	display: flex;
+	justify-content: center;
+}
+
+.line_chart_loader {
+	position: relative;
+	top: 100px;
+	display: flex;
+	justify-content: center;
+}
+
 .years_styles {
 	margin-top: 150px;
 	margin-left: 20px;

@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 const useGetTodayStats = ({ globalFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : 'payments/dashboard/bf-today-stats',
+			url     : 'payments/dashboard/finance-today-stats',
 			method  : 'get',
-			authKey : 'get_payments_dashboard_bf_today_stats',
+			authKey : 'get_payments_dashboard_finance_today_stats',
 		},
 		{ manual: true },
 	);

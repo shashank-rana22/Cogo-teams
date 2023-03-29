@@ -1,4 +1,4 @@
-import { Legend, ProgressBar, cl, Popover, Loader } from '@cogoport/components';
+import { Legend, ProgressBar, cl, Popover, Placeholder } from '@cogoport/components';
 import { IcMInfo, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
@@ -59,28 +59,33 @@ function TotalPayablesRecievables({ globalFilters }) {
 			<div className={cl`${styles.space_between} ${styles.legend} ${styles.progress_bar}`}>
 
 				<div className={styles.service_stats}>
-					{receivablesLoading ? <div style={{ alignItems: 'center' }}><Loader /></div> : (
-						<>
-							<div className={styles.main}>
-								<div className={styles.text_filters_gap}>
-									<div className={styles.text_style}>
-										Total Receivable
-										<div className={styles.border} />
-									</div>
-									<div className={styles.icon}>
-										<IcMInfo />
-									</div>
-								</div>
-								<div className={styles.segment_filters}>
-									<SegmentedControl
-										options={totalRecievablesStats()}
-										activeTab={recievablesTab}
-										setActiveTab={setRecievablesTab}
-										color="#ED3726"
-										background="#FFFAEB"
-									/>
-								</div>
+
+					<div className={styles.main}>
+						<div className={styles.text_filters_gap}>
+							<div className={styles.text_style}>
+								Total Receivable
+								<div className={styles.border} />
 							</div>
+							<div className={styles.icon}>
+								<IcMInfo />
+							</div>
+						</div>
+						<div className={styles.segment_filters}>
+							<SegmentedControl
+								options={totalRecievablesStats()}
+								activeTab={recievablesTab}
+								setActiveTab={setRecievablesTab}
+								color="#ED3726"
+								background="#FFFAEB"
+							/>
+						</div>
+					</div>
+					{receivablesLoading ? (
+						<div style={{ alignItems: 'center' }}>
+							<Placeholder height="140px" width="600px" margin="10px 0px 50px 20px" />
+						</div>
+					) : (
+						<>
 							<div style={{ display: 'flex', justifyContent: 'flex-start' }}>
 								<Legend hasBackground={false} direction="horizontal" items={items} size="lg" />
 								<div style={{ margin: '20px 40% 0px 0px' }} />
@@ -138,6 +143,7 @@ function TotalPayablesRecievables({ globalFilters }) {
 							</div>
 						</>
 					)}
+
 				</div>
 
 				<div className={styles.service_stats}>
@@ -152,61 +158,68 @@ function TotalPayablesRecievables({ globalFilters }) {
 							</div>
 						</div>
 					</div>
-
-					<div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-						<Legend hasBackground={false} direction="horizontal" items={items} size="lg" />
-						<div style={{ margin: '20px 40% 0px 0px' }} />
-					</div>
-
-					<div style={{ display: 'flex', justifyContent: 'space-between', width: '76%' }}>
-						<span style={{ marginLeft: '60px', fontSize: '16px', fontWeight: '500' }}>
-							{showInTooltop(
-								getFormattedPrice(Math.abs(payNonOverdueAmount), 'INR'),
-								getAmountInLakhCrK(Math.abs(payNonOverdueAmount), 'INR'),
-							)}
-						</span>
-						<div style={{ display: 'flex', alignItems: 'center' }}>
-							<span style={{ marginLeft: '60px', fontSize: '16px', fontWeight: '500' }}>
-								{showInTooltop(
-									getFormattedPrice(Math.abs(payOverdueAmount), 'INR'),
-									getAmountInLakhCrK(Math.abs(payOverdueAmount), 'INR'),
-								)}
-							</span>
-							<Popover
-								placement="bottom"
-								trigger="click"
-								caret={false}
-								render={(totalPayablesKeyMappings({ payablesData }) || []).map((val) => (
-									<div className={styles.receivables_data}>
-										<div className={styles.recei_label}>{val.label}</div>
-										<div className={styles.label}>{val.valueKey}</div>
-									</div>
-								))}
-							>
-								<IcMArrowRotateDown style={{ margin: '0px 20px' }} />
-							</Popover>
-
+					{payablesLoading ? (
+						<div style={{ alignItems: 'center' }}>
+							<Placeholder height="140px" width="600px" margin="10px 0px 50px 20px" />
 						</div>
-					</div>
-					<div className={styles.borders} />
-					<ProgressBar progress={progressPayables} />
-					<div style={{ display: 'flex' }}>
-						<div className={styles.texts}>Total Unpaid invoices:</div>
-						<div style={{ marginLeft: '20px', display: 'flex' }}>
-							{' '}
-							<div>
-								{showInTooltop(
-									getFormattedPrice(Math.abs(progressPayableData), 'INR'),
-									getAmountInLakhCrK(Math.abs(progressPayableData), 'INR'),
-								)}
+					) : (
+						<>
+							<div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+								<Legend hasBackground={false} direction="horizontal" items={items} size="lg" />
+								<div style={{ margin: '20px 40% 0px 0px' }} />
 							</div>
-							<span style={{ marginLeft: '5px' }}>
-								(
-								{payNotPaidDocumentCount}
-								)
-							</span>
-						</div>
-					</div>
+
+							<div style={{ display: 'flex', justifyContent: 'space-between', width: '76%' }}>
+								<span style={{ marginLeft: '60px', fontSize: '16px', fontWeight: '500' }}>
+									{showInTooltop(
+										getFormattedPrice(Math.abs(payNonOverdueAmount), 'INR'),
+										getAmountInLakhCrK(Math.abs(payNonOverdueAmount), 'INR'),
+									)}
+								</span>
+								<div style={{ display: 'flex', alignItems: 'center' }}>
+									<span style={{ marginLeft: '60px', fontSize: '16px', fontWeight: '500' }}>
+										{showInTooltop(
+											getFormattedPrice(Math.abs(payOverdueAmount), 'INR'),
+											getAmountInLakhCrK(Math.abs(payOverdueAmount), 'INR'),
+										)}
+									</span>
+									<Popover
+										placement="bottom"
+										trigger="click"
+										caret={false}
+										render={(totalPayablesKeyMappings({ payablesData }) || []).map((val) => (
+											<div className={styles.receivables_data}>
+												<div className={styles.recei_label}>{val.label}</div>
+												<div className={styles.label}>{val.valueKey}</div>
+											</div>
+										))}
+									>
+										<IcMArrowRotateDown style={{ margin: '0px 20px' }} />
+									</Popover>
+
+								</div>
+							</div>
+							<div className={styles.borders} />
+							<ProgressBar progress={progressPayables} />
+							<div style={{ display: 'flex' }}>
+								<div className={styles.texts}>Total Unpaid invoices:</div>
+								<div style={{ marginLeft: '20px', display: 'flex' }}>
+									{' '}
+									<div>
+										{showInTooltop(
+											getFormattedPrice(Math.abs(progressPayableData), 'INR'),
+											getAmountInLakhCrK(Math.abs(progressPayableData), 'INR'),
+										)}
+									</div>
+									<span style={{ marginLeft: '5px' }}>
+										(
+										{payNotPaidDocumentCount}
+										)
+									</span>
+								</div>
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 		</div>

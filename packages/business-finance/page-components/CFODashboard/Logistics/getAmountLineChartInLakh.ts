@@ -1,5 +1,5 @@
-const getAmountInLakhCrK = (value:number, currency:string) => {
-	const val = Math.abs(value);
+const getAmountLineChartInLakh = (value:number) => {
+	const val = value;
 
 	let formatedAmount = '';
 
@@ -9,11 +9,9 @@ const getAmountInLakhCrK = (value:number, currency:string) => {
 		formatedAmount = `${(val / 100000).toFixed(2)} Lac`;
 	} else if (val >= 1000) {
 		formatedAmount = `${(val / 1000).toFixed(2)} K`;
-	} else if (val === 0) {
-		formatedAmount = `${(val).toFixed(2)}`;
 	}
 
-	return `${currency || 'INR'} ${formatedAmount}`;
+	return ` ${formatedAmount}`;
 };
 
-export { getAmountInLakhCrK };
+export { getAmountLineChartInLakh };

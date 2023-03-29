@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 const useGetAccordianCardData = ({ globalFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : 'payments/dashboard/bf-service-wise-rec-pay',
+			url     : 'payments/dashboard/finance-service-wise-rec-pay',
 			method  : 'get',
-			authKey : 'get_payments_dashboard_bf_service_wise_rec_pay',
+			authKey : 'get_payments_dashboard_finance_service_wise_rec_pay',
 		},
 		{ manual: true },
 	);

@@ -29,13 +29,13 @@ const customerProfitabillityColumn = [
 
 	},
 	{
-		Header: 'SID Count',
-		// id       : 'jobNumber',
-		// accessor : (row) => (
-		// 	<div style={{ color: '#F68B21', textDecorationLine: 'underline' }}>
-		// 		{row?.jobNumber}
-		// 	</div>
-		// ),
+		Header   : 'SID Count',
+		id       : 'shipmentCount',
+		accessor : (row) => (
+			<div style={{ color: '#F68B21', textDecorationLine: 'underline' }}>
+				{row?.shipmentCount}
+			</div>
+		),
 	},
 	{
 		Header   : 'Booked Income',

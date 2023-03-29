@@ -1,4 +1,4 @@
-import { Pill, Button, Tooltip } from '@cogoport/components';
+import { Pill, Button, Tooltip, Placeholder } from '@cogoport/components';
 import { IcMOceanSchedules, IcMAirport, IcMTransport } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -19,11 +19,13 @@ interface ItemProps {
 	label: string;
 }
 function AccordianCards({ globalFilters }) {
+	const [isViewButtonOpen, setIsViewButtonOpen] = useState(null);
 	const {
 		accordianDataData,
+		accordianDataLoading,
 	} = useGetAccordianCardData({ globalFilters });
 
-	const { accordianStatsData, refetch } = useGetAccordianStatsData({ globalFilters });
+	const { accordianStatsData, refetch, accordianStatsLoading } = useGetAccordianStatsData({ globalFilters });
 
 	const iconMapping = {
 		Surface : <IcMTransport height={20} width={20} />,
@@ -40,80 +42,157 @@ function AccordianCards({ globalFilters }) {
 
 	function activeViewButton(service) {
 		setViewButton((prev) => ({
-			...prev,
 			[service]: !prev[service],
 		}));
+		refetch(service, undefined);
 	}
 
 	return (
 		<div>
-			{(accordianDataData || []).map((item) => (
-				<div className={styles.container}>
-					<div className={styles.main_div}>
-						<div className={styles.icon_div}>
-							<div style={{ display: 'flex', width: '100px' }}>
-								<div className={styles.icons}>{iconMapping[item?.service]}</div>
-								<div className={styles.texts}>{item?.service}</div>
-							</div>
-							{!viewButton[item?.service]
+			{accordianDataLoading
+
+				? (
+					<>
+						<Placeholder
+							height="100px"
+							width="100%"
+							margin="20px 20px 20px 0px"
+							style={{ borderRadius: '4px' }}
+						/>
+						<Placeholder
+							height="100px"
+							width="100%"
+							margin="20px 20px 20px 0px"
+							style={{ borderRadius: '4px' }}
+						/>
+						<Placeholder
+							height="100px"
+							width="100%"
+							margin="20px 20px 20px 0px"
+							style={{ borderRadius: '4px' }}
+						/>
+					</>
+				)
+
+				: (
+					<div>
+						{(accordianDataData || []).map((item) => (
+							<div className={styles.container}>
+								<div className={styles.main_div}>
+									<div className={styles.icon_div}>
+										<div style={{ display: 'flex', width: '100px' }}>
+											{accordianDataLoading
+												? <Placeholder height="20px" width="324px" margin="10px 0px 20px 0px" />
+												: (
+													<>
+														<div className={styles.icons}>{iconMapping[item?.service]}</div>
+														<div className={styles.texts}>{item?.service}</div>
+													</>
+												)}
+										</div>
+										{!viewButton[item?.service]
 						&& (
 							<div className={styles.main_stats}>
-								<div className={styles.amount_div}>
-									<Tooltip
-										content="Profit : INR 10,00,000.34 (AR - AP)"
-										placement="top"
-										caret={false}
-									>
-										<div className={styles.amounts}>
-											<Pill size="xl" color="green">
+								{accordianDataLoading
+									? <Placeholder height="20px" width="200px" margin="10px 0px 20px 50px" />
+									: (
+										<div className={styles.amount_div}>
+											<Tooltip
+												content="Profit : INR 10,00,000.34 (AR - AP)"
+												placement="top"
+												caret={false}
+											>
+												<div className={styles.amounts}>
+													<Pill size="xl" color="green">
 
-												{showInTooltop(
-													getFormattedPrice(Math.abs(item.accountRec - Math.abs(item.accountPay)), 'INR'),
-													getAmountInLakhCrK(Math.abs(item.accountRec - Math.abs(item.accountPay)), 'INR'),
-												)}
+														{showInTooltop(
+															getFormattedPrice(Math.abs(
+																item.accountRec - Math.abs(item.accountPay),
+															), 'INR'),
+															getAmountInLakhCrK(Math.abs(
+																item.accountRec - Math.abs(item.accountPay),
+															), 'INR'),
+														)}
 
-											</Pill>
+													</Pill>
+												</div>
+											</Tooltip>
 										</div>
-									</Tooltip>
-								</div>
+									)}
 								<div className={styles.border} />
-								<div className={styles.ar_amount}>
-									<span style={{ marginRight: '10px' }}>AR:</span>
-									{showInTooltop(
-										getFormattedPrice(item?.accountRec, 'INR'),
-										getAmountInLakhCrK(item?.accountRec, 'INR'),
+								{accordianDataLoading
+									? <Placeholder height="20px" width="150px" margin="	10px 40px 20px 0px" />
+									: (
+										<div className={styles.ar_amount}>
+											<span style={{ marginRight: '10px' }}>AR:</span>
+											{showInTooltop(
+												getFormattedPrice(item?.accountRec, 'INR'),
+												getAmountInLakhCrK(item?.accountRec, 'INR'),
+											)}
+										</div>
 									)}
-								</div>
-								<div className={styles.ar_amount}>
-									<span style={{ marginRight: '10px' }}>AP:</span>
-									{showInTooltop(
-										getFormattedPrice(Math.abs(item?.accountPay), 'INR'),
-										getAmountInLakhCrK(Math.abs(item?.accountPay), 'INR'),
+
+								{accordianDataLoading
+									? <Placeholder height="20px" width="150px" margin="	10px 40px 20px 0px" />
+									: (
+										<div className={styles.ar_amount}>
+											<span style={{ marginRight: '10px' }}>AP:</span>
+											{showInTooltop(
+												getFormattedPrice(Math.abs(item?.accountPay), 'INR'),
+												getAmountInLakhCrK(Math.abs(item?.accountPay), 'INR'),
+											)}
+										</div>
 									)}
-								</div>
 							</div>
 						)}
-						</div>
+									</div>
+									{accordianDataLoading
+										? <Placeholder height="20px" width="150px" margin="	10px 40px 20px 0px" />
+										: (
+											<div className={styles.view_button}>
 
-						<div className={styles.view_button}>
-							<Button
-								size="md"
-								themeType="secondary"
-								onClick={() => {
-									if (viewButton[item?.service] === false) refetch(item?.service, undefined);
-									activeViewButton(item?.service);
-								}}
-							>
-								View More
+												{isViewButtonOpen === item?.service
+													? (
+														<Button
+															size="md"
+															themeType="secondary"
+															onClick={() => {
+																activeViewButton(item?.service);
+																setIsViewButtonOpen(null);
+															}}
+														>
+															View Less
 
-							</Button>
-						</div>
-					</div>
+														</Button>
+													)
+													:												(
+														<Button
+															size="md"
+															themeType="secondary"
+															onClick={() => {
+																if (
+																	viewButton[item?.service] === false
+																) { refetch(item?.service, undefined); }
+																activeViewButton(item?.service);
+																setIsViewButtonOpen(
+																	isViewButtonOpen === null ? item.service : null,
+																);
+																setIsViewButtonOpen(item.service);
+															}}
+														>
+															View More
 
-					{viewButton[item?.service]
+														</Button>
+													)}
+											</div>
+										)}
+								</div>
+
+								{isViewButtonOpen === item?.service
 				&& (
 					<div>
 						<div className={styles.borders} />
+
 						<div className={styles.stats_styles}>
 							{statsTabs[item?.service].map((val:ItemProps) => (
 								<div
@@ -131,36 +210,65 @@ function AccordianCards({ globalFilters }) {
 									)
 										: (
 											<div className={styles.import_export_style}>
-												<div className={styles.stats_overall_import_export}>{val.label}</div>
+												{accordianStatsLoading
+													? (
+														<Placeholder
+															height="20px"
+															width="100px"
+															margin="	10px 40px 20px 0px"
+														/>
+													)
+													: (
+														<div className={styles.stats_overall_import_export}>
+															{val.label}
+
+														</div>
+													)}
 												<div className={styles.stats_border_left} />
 
 												<div className={styles.stats_text}>
-													<div className={styles.labels}>
-														AR :
-														<div style={{ marginLeft: '10px' }}>
-															{showInTooltop(
-																getFormattedPrice((accordianStatsData?.arData
+													{accordianStatsLoading
+														? (
+															<Placeholder
+																height="20px"
+																width="152px"
+																margin="	10px 40px 20px 0px"
+															/>
+														)
+														: (
+															<>
+																<div className={styles.labels}>
+																	AR :
+																	<div style={{ marginLeft: '10px' }}>
+																		{showInTooltop(
+																			getFormattedPrice((
+																				accordianStatsData?.arData
 																|| {})[((serviceDataMapping[item?.service]
 																|| {})[val?.key] || {})?.AR] || '', 'INR'),
-																getAmountInLakhCrK((accordianStatsData?.arData
+																			getAmountInLakhCrK((
+																				accordianStatsData?.arData
 																|| {})[((serviceDataMapping[item?.service]
 																|| {})[val?.key] || {})?.AR] || '', 'INR'),
-															)}
-														</div>
-													</div>
-													<div className={styles.labels}>
-														AP :
-														<div style={{ marginLeft: '10px' }}>
-															{showInTooltop(
-																getFormattedPrice(((accordianStatsData?.apData
+																		)}
+																	</div>
+																</div>
+																<div className={styles.labels}>
+																	AP :
+																	<div style={{ marginLeft: '10px' }}>
+																		{showInTooltop(
+																			getFormattedPrice((
+																				(accordianStatsData?.apData
 																|| {})[((serviceDataMapping[item?.service]
 																|| {})[val?.key] || {})?.AR] || '') * -1, 'INR'),
-																getAmountInLakhCrK(((accordianStatsData?.apData
+																			getAmountInLakhCrK((
+																				(accordianStatsData?.apData
 																|| {})[((serviceDataMapping[item?.service]
 																|| {})[val?.key] || {})?.AR] || '') * -1, 'INR'),
-															)}
-														</div>
-													</div>
+																		)}
+																	</div>
+																</div>
+															</>
+														)}
 												</div>
 											</div>
 										)}
@@ -171,22 +279,42 @@ function AccordianCards({ globalFilters }) {
 						<div className={styles.border_all}>
 							<div className={styles.data_style}>
 								<div className={styles.text_amount_styles}>
-									<div>
-										{showInTooltop(
-											getFormattedPrice(accordianStatsData?.arData?.overdueAmount, 'INR'),
-											getAmountInLakhCrK(accordianStatsData?.arData?.overdueAmount, 'INR'),
+									{accordianStatsLoading
+										? <Placeholder height="20px" width="152px" margin="	10px 40px 20px 0px" />
+										: (
+											<>
+												<div>
+													{showInTooltop(
+														getFormattedPrice(accordianStatsData?.arData?.overdueAmount, 'INR'),
+														getAmountInLakhCrK(accordianStatsData?.arData?.overdueAmount, 'INR'),
+													)}
+												</div>
+												<div>Account Receivables</div>
+											</>
 										)}
-									</div>
-									<div>Account Receivables</div>
 								</div>
 								<div>
 									<div className={styles.border_left_top} />
 								</div>
+
 								<div className={styles.right_container}>
 									{(OverallReceivablesStatsKeyMapping({ accordianStatsData }) || []).map((val) => (
+
 										<div className={styles.due_ageing}>
-											<div className={styles.recei_label}>{val.label}</div>
-											<div className={styles.label}>{val.valueKey}</div>
+											{accordianStatsLoading
+												? (
+													<Placeholder
+														height="20px"
+														width="100px"
+														margin="10px 40px 20px 0px"
+													/>
+												)
+												: (
+													<>
+														<div className={styles.recei_label}>{val.label}</div>
+														<div className={styles.label}>{val.valueKey}</div>
+													</>
+												)}
 										</div>
 									))}
 								</div>
@@ -194,13 +322,19 @@ function AccordianCards({ globalFilters }) {
 							<div className={styles.border_bottom} />
 							<div className={styles.data_style}>
 								<div className={styles.text_amount_styles}>
-									<div>
-										{showInTooltop(
-											getFormattedPrice(Math.abs(accordianStatsData?.apData?.overdueAmount), 'INR'),
-											getAmountInLakhCrK(Math.abs(accordianStatsData?.apData?.overdueAmount), 'INR'),
+									{accordianStatsLoading
+										? <Placeholder height="20px" width="152px" margin="	10px 40px 20px 0px" />
+										: (
+											<>
+												<div>
+													{showInTooltop(
+														getFormattedPrice(Math.abs(accordianStatsData?.apData?.overdueAmount), 'INR'),
+														getAmountInLakhCrK(Math.abs(accordianStatsData?.apData?.overdueAmount), 'INR'),
+													)}
+												</div>
+												<div>Account Payables</div>
+											</>
 										)}
-									</div>
-									<div>Account Payables</div>
 								</div>
 								<div>
 									<div className={styles.border_left_buttom} />
@@ -208,8 +342,20 @@ function AccordianCards({ globalFilters }) {
 								<div className={styles.right_container}>
 									{(OverallPayablesStatsKeyMapping({ accordianStatsData }) || []).map((val) => (
 										<div className={styles.due_ageing}>
-											<div className={styles.recei_label}>{val.label}</div>
-											<div className={styles.label}>{val.valueKey}</div>
+											{accordianStatsLoading
+												? (
+													<Placeholder
+														height="20px"
+														width="100px"
+														margin="10px 40px 20px 0px"
+													/>
+												)
+												: (
+													<>
+														<div className={styles.recei_label}>{val.label}</div>
+														<div className={styles.label}>{val.valueKey}</div>
+													</>
+												)}
 										</div>
 									))}
 								</div>
@@ -218,9 +364,11 @@ function AccordianCards({ globalFilters }) {
 
 					</div>
 				)}
-				</div>
-			))}
+							</div>
+						))}
 
+					</div>
+				)}
 		</div>
 	);
 }

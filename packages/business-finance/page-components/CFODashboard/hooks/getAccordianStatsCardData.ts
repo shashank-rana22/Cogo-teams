@@ -1,14 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 const useGetAccordianStatsData = ({ globalFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : 'payments/dashboard/bf-service-wise-overdue',
+			url     : 'payments/dashboard/finance-service-wise-overdue',
 			method  : 'get',
-			authKey : 'get_payments_dashboard_bf_service_wise_overdue',
+			authKey : 'get_payments_dashboard_finance_service_wise_overdue',
 		},
 		{ manual: true },
 	);
@@ -39,10 +38,6 @@ const useGetAccordianStatsData = ({ globalFilters }) => {
 			Toast.error(e?.message);
 		}
 	};
-
-	// useEffect(() => {
-	// 	refetch();
-	// }, []);
 
 	return {
 		accordianStatsLoading : loading,

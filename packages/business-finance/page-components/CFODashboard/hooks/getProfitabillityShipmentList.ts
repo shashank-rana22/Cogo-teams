@@ -18,12 +18,12 @@ const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilte
 	const [searchValue, setSearchValue] = useState<string>('');
 
 	const apiUrl = {
-		shipment : '/payments/dashboard/bf-profitability-shipment',
-		customer : '/payments/dashboard/bf-profitability-customer',
+		shipment : '/payments/dashboard/finance-profitability-shipment',
+		customer : '/payments/dashboard/finance-profitability-customer',
 	};
 	const apiAuthKey = {
-		shipment : 'get_payments_dashboard_bf_profitability_shipment',
-		customer : 'get_payments_dashboard_bf_profitability_customer',
+		shipment : 'get_payments_dashboard_finance_profitability_shipment',
+		customer : 'get_payments_dashboard_finance_profitability_customer',
 	};
 
 	const [{ data, loading }, trigger] = useRequestBf(

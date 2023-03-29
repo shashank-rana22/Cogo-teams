@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 const useGetIncomeExpense = ({ globalFilters, yearFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : 'payments/dashboard/bf-income-expense',
+			url     : 'payments/dashboard/finance-income-expense',
 			method  : 'get',
-			authKey : 'get_payments_dashboard_bf_income_expense',
+			authKey : 'get_payments_dashboard_finance_income_expense',
 		},
 		{ manual: true },
 	);

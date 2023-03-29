@@ -65,13 +65,11 @@ function TreasuryStatistics() {
 								<IcMInfo />
 							</div>
 						</div>
-						{/* <div> */}
 						<Filter
 							controls={treasuryControls}
 							filters={treasuryFilters}
 							setFilters={setTreasuryFilters}
 						/>
-						{/* </div> */}
 					</div>
 					<div className={styles.container}>
 						<div className={styles.flex}>

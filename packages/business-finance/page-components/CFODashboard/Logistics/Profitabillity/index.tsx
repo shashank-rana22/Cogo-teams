@@ -61,7 +61,8 @@ function Profitabillity({ globalFilters }) {
 							<div className={item.key === tabs ? styles.sub_container_click : styles.sub_container}>
 								{item.label}
 								{' '}
-								{profitabillityData?.averageProfit.toFixed(2)}
+								{tabs === 'shipment' ? profitabillityData?.averageShipmentProfit || 0
+									: profitabillityData?.averageCustomerProfit || 0}
 								%
 							</div>
 						</div>

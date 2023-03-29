@@ -7435,31 +7435,31 @@ const partner = {
 	],
 	cfo_dashboard: [
 		{
-			api         : 'get_payments_dashboard_bf_profitability_shipment',
+			api         : 'get_payments_dashboard_finance_profitability_shipment',
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dashboard_bf_profitability_customer',
+			api         : 'get_payments_dashboard_finance_profitability_customer',
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dashboard_bf_service_wise_rec_pay',
+			api         : 'get_payments_dashboard_finance_service_wise_rec_pay',
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dashboard_bf_service_wise_overdue',
+			api         : 'get_payments_dashboard_finance_service_wise_overdue',
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dashboard_bf_income_expense',
+			api         : 'get_payments_dashboard_finance_income_expense',
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dashboard_bf_receivable',
+			api         : 'get_payments_dashboard_finance_receivable_payable',
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dashboard_bf_today_stats',
+			api         : 'get_payments_dashboard_finance_today_stats',
 			access_type : 'private',
 		},
 		{

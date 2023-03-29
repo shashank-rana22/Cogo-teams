@@ -7,9 +7,9 @@ const useGetReceivablesList = ({ globalFilters }) => {
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : 'payments/dashboard/bf-receivable',
+			url     : 'payments/dashboard/finance-receivable-payable',
 			method  : 'get',
-			authKey : 'get_payments_dashboard_bf_receivable',
+			authKey : 'get_payments_dashboard_finance_receivable_payable',
 		},
 		{ manual: true, autoCancel: false },
 	);

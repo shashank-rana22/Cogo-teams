@@ -2,6 +2,7 @@ import { ResponsiveBar } from '@cogoport/charts/bar/index';
 import React from 'react';
 
 import { getAmountInLakhCrK } from '../../getAmountInLakhCrK';
+import { getAmountLineChartInLakh } from '../../getAmountLineChartInLakh';
 
 function ResponsiveBarChart({ barData }) {
 	return (
@@ -30,7 +31,7 @@ function ResponsiveBarChart({ barData }) {
 			}}
 			axisLeft={{
 				tickSize     : 0,
-				tickPadding  : 4,
+				tickPadding  : -10,
 				tickRotation : 0,
 				format       : (value) => `${getAmountInLakhCrK(value)}`,
 			}}
@@ -39,6 +40,36 @@ function ResponsiveBarChart({ barData }) {
 			labelTextColor={{
 				from: 'color', modifiers: [['darker',	1]],
 			}}
+
+			layers={[
+				 'grid',
+				 'axes',
+				 'bars',
+				 'markers',
+				 'legends',
+				 ({ bars }) => (
+					<g>
+						{bars.map((bar) => (
+							<text
+								key={bar.data.id}
+								x={bar.x + bar.width / 2}
+								y={bar.y + bar.height / 2}
+								textAnchor="start"
+								transform={`rotate(-90,${bar.x + bar.width / 2},${bar.y + bar.height / 2})`}
+								style={{
+				 dominantBaseline : 'central',
+									 fontWeight       : '600',
+				 fontSize         : 12,
+				 fill             : '#333',
+								}}
+							>
+								{getAmountLineChartInLakh(bar.data.value)}
+							</text>
+				 ))}
+					</g>
+				 ),
+			]}
+
 			role="application"
 			animate
 		/>

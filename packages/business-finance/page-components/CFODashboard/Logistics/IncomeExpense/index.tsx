@@ -1,4 +1,4 @@
-import { Popover, Input, Toggle, Placeholder } from '@cogoport/components';
+import { Loader, Popover, Input, Toggle } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -153,12 +153,24 @@ function IncomeExpense({ globalFilters }) {
 
 				{toggleStatus ? (
 					<div className={styles.responsive_line_chart}>
-						<ResponsiveLineChart lineData={incomeExpenseData} />
+						{incomeExpenseLoading ? (
+							<div className={styles.line_chart_loader}>
+								<Loader style={{ width: '80px' }} />
+							</div>
+						) : (
+							<ResponsiveLineChart lineData={incomeExpenseData} />
+						)}
 					</div>
 
 				) : (
 					<div className={styles.responsive_bar_chart}>
-						<ResponsiveBarChart barData={incomeExpenseData} />
+						{incomeExpenseLoading ? (
+							<div className={styles.bar_chart_loader}>
+								<Loader style={{ width: '80px' }} />
+							</div>
+						) : (
+							<ResponsiveBarChart barData={incomeExpenseData} />
+						)}
 					</div>
 				)}
 
