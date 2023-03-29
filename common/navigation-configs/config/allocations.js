@@ -8,15 +8,15 @@ const allocations = {
 		isMainNav  : false,
 	},
 	'/[partner_id]/allocation/crm-feedback-dashboard': {
-		navigation : 'crm_feedback_dashboard',
+		navigation : 'allocations-crm_feedback_dashboard',
 		isMainNav  : true,
 	},
 	'/[partner_id]/allocation/feedbacks/[organization_id]': {
-		navigation : 'crm_feedback_dashboard',
+		navigation : 'allocations-crm_feedback_dashboard',
 		isMainNav  : false,
 	},
 	'/[partner_id]/allocation/requests/[feedback_request_id]': {
-		navigation : 'crm_feedback_dashboard',
+		navigation : 'allocations-crm_feedback_dashboard',
 		isMainNav  : false,
 	},
 };

@@ -25,6 +25,7 @@ function Statistics({ activeTab = '' }) {
 			{Object.values(statsControl).map((chartData) => (
 				<div className={styles.chart_container}>
 					<div className={styles.chart_title}>{chartData.title}</div>
+
 					<div className={styles.single_chart_container}>
 						<ResponsivePie
 							loading={loading}
@@ -75,7 +76,6 @@ function Statistics({ activeTab = '' }) {
 							)}
 						/>
 					</div>
-
 				</div>
 			))}
 		</section>

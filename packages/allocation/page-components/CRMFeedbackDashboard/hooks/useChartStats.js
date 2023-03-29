@@ -11,7 +11,7 @@ const useFeedbackStats = ({ activeTab = '' }) => {
 
 	const [{ data, loading }] = useAllocationRequest({
 		url     : '/feedback_stats',
-		method  : 'get',
+		method  : 'GET',
 		authkey : 'get_allocation_feedback_stats',
 	}, { manual: false });
 
