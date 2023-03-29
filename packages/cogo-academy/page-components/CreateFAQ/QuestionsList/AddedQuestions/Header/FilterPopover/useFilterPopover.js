@@ -32,7 +32,7 @@ const useFilterPopover = ({ setFilters }) => {
 		},
 	}, { manual: false });
 
-	const { control, handleSubmit } = useForm();
+	const { control, handleSubmit, reset } = useForm();
 
 	const onSubmit = (values) => {
 		setFilters({
@@ -66,6 +66,7 @@ const useFilterPopover = ({ setFilters }) => {
 	const onClickReset = () => {
 		setFilters({});
 		setShowFilter(false);
+		reset();
 	};
 
 	return {
@@ -78,6 +79,7 @@ const useFilterPopover = ({ setFilters }) => {
 		onSubmit,
 		onClickReset,
 		audienceOptions,
+		reset,
 	};
 };
 

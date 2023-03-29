@@ -277,7 +277,13 @@ function CreateFAQ() {
 						control={control}
 						onSearch={handleAudienceSearch}
 						options={audienceOptions}
+						rules={{ required: 'Audience is required.' }}
 					/>
+					{errors.audience_ids && (
+						<span className={styles.errors}>
+							{errors.audience_ids.message}
+						</span>
+					)}
 				</div>
 
 				<div className={styles.faq_answer_container}>
