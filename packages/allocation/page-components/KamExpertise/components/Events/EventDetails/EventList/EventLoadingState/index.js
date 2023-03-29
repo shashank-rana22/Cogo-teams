@@ -1,6 +1,6 @@
 import { Placeholder } from '@cogoport/components';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 function EventLoadingState() {
 	return (

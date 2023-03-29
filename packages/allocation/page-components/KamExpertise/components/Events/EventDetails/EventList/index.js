@@ -4,6 +4,7 @@ import EmptyState from '../../../../../../common/EmptyState';
 
 import EventListItem from './EventListItem';
 import EventLoadingState from './EventLoadingState';
+import styles from './styles.module.css';
 
 function EventList(props) {
 	const { list, setEventListData, loading } = props;
@@ -16,14 +17,14 @@ function EventList(props) {
 
 	if (isEmpty(list)) {
 		return (
-			<div
-				style={{
-					padding    : '48px 0',
-					background : '#fff',
-					margin     : '0 0 60px 0',
-				}}
-			>
-				<EmptyState height="400px" width="600px" flexDirection="column" />
+			<div className={styles.empty_state_container}>
+				<EmptyState
+					height="250px"
+					width="400px"
+					flexDirection="column"
+					emptyText="Badges not Found"
+					textSize="20px"
+				/>
 			</div>
 		);
 	}

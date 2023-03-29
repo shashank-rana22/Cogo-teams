@@ -27,6 +27,7 @@
 	opacity: 0.9;
 
 	@media (max-width: 576px) {
+		flex-direction: column;
 		margin-top: 10px;
 	}
 }
@@ -35,6 +36,10 @@
 	flex-basis: 70%;
 	justify-content: space-between;
 	width: 75%;
+
+	@media (max-width: 576px) {
+		width: 100%;
+	}
 
 	:global(.ui_text_area_container) {
 		height: 70%;

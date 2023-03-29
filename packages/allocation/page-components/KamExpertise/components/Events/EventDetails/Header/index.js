@@ -56,7 +56,7 @@ function Header(props) {
 						onChange={(value) => (
 							setExpertise(value)
 						)}
-						style={{ marginRight: 16, width: '440px' }}
+						className={styles.dropdown}
 						disabled={loading}
 					/>
 

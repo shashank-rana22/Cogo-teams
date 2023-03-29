@@ -80,9 +80,9 @@ function Badges() {
 					label={<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/`}>Dashboard</a>}
 				/>
 
-				{ (toggleScreen === 'badge_details') && <Breadcrumb.Item label={(<b>All Badges</b>)} />}
+				{ (toggleScreen === BADGE_DETAILS) && <Breadcrumb.Item label={(<b>All Badges</b>)} />}
 
-				{ (toggleScreen !== 'badge_details')
+				{ (toggleScreen !== BADGE_DETAILS)
 					&& (
 						<Breadcrumb.Item
 							label={(
@@ -93,10 +93,10 @@ function Badges() {
 						/>
 					)}
 
-				{ (toggleScreen === 'create_badge')
+				{ (toggleScreen === CREATE_BADGE)
 					&& <Breadcrumb.Item label={(<b>Add Badge</b>)} />}
 
-				{ (toggleScreen === 'create_mastery')
+				{ (toggleScreen === CREATE_MASTERY)
 					&& <Breadcrumb.Item label={(<b>Add Mastery</b>)} />}
 			</Breadcrumb>
 

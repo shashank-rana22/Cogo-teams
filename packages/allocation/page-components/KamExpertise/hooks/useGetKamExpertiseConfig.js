@@ -7,8 +7,6 @@ const useGetKamExpertiseConfig = () => {
 		authkey : 'get_allocation_kam_expertise_configuration_levels',
 		params  : {
 			filters: {
-				expertise_type:
-				['Customer Expertise', 'Trade Expertise', 'Commodity Expertise', 'Misc Expertise'],
 				status: 'draft',
 			},
 			audit_data_required: true,

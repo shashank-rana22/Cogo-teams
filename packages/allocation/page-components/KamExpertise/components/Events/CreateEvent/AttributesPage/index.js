@@ -1,5 +1,4 @@
 import { Placeholder } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../../common/EmptyState';
@@ -25,8 +24,6 @@ function AttributePage(props) {
 			<div className={styles.account_attributes}>
 				<div className={styles.account_attribute_text}>
 					Attributes
-					{' '}
-					<IcMInfo />
 				</div>
 
 				<section className={styles.row_container}>
@@ -70,8 +67,6 @@ function AttributePage(props) {
 		<div className={styles.account_attributes}>
 			<div className={styles.account_attribute_text}>
 				Attributes
-				{' '}
-				<IcMInfo />
 			</div>
 
 			<section className={styles.row_container}>
