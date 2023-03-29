@@ -44,6 +44,7 @@ function FormComponent({
 					if (['question_text', 'difficulty_level'].includes(name)) {
 						return null;
 					}
+
 					let newOptions = options;
 
 					if (name === 'question_type' && !isNewQuestion) {
@@ -51,6 +52,8 @@ function FormComponent({
 					}
 
 					const Element = getElementController(type);
+
+					if (!Element) return null;
 
 					return (
 						<div key={name} className={`${styles.control_container} ${styles[name]}`}>
@@ -62,7 +65,7 @@ function FormComponent({
 								<Element
 									control={control}
 									{...controlItem}
-									{...(name === 'question_type' ? { options: newOptions } : null)}
+									{...(name === 'question_type' && { options: newOptions })}
 								/>
 								{errors[name] && <div className={styles.error_msg}>This is required</div>}
 							</div>
