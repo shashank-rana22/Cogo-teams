@@ -33,7 +33,14 @@
 }
 .filter{
     display: flex;
-    padding-left: 56px;
+    justify-content: space-between;
+    /* gap: 24px;
+    align-items: center; */
+}
+.task_filter{
+    display: flex;
+    gap: 24px;
+    align-items: center;
 }
 .label{
     display: flex;
@@ -45,8 +52,10 @@
 }
 .select_filter{
     display: flex;
-    flex-direction: column;
-    gap: 23px;
-    width: 16%;
-    padding-left: 16px;
+    align-items: center;
+    gap: 4px;
+}
+.reset_button{
+    display: flex;
+    justify-content: flex-end;
 }

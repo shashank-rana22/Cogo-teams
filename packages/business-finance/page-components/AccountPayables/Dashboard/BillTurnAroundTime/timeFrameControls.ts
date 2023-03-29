@@ -1,9 +1,9 @@
 export const timeFrameControls = [
 	{
-		name                  : 'events',
+		name                  : 'Date',
 		type                  : 'singleDateRange',
-		size                  : 'md',
-		dateFormat            : 'MM/dd/yyyy HH:mm',
+		size                  : 'sm',
+		// dateFormat            : 'dd/mm/yyyy HH:mm',
 		isPreviousDaysAllowed : true,
 		span                  : 12,
 		style                 : { width: '200px' },

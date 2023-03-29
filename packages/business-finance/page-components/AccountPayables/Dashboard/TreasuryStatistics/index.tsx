@@ -21,7 +21,6 @@ function TreasuryStatistics({ activeTab }:ItemProps) {
 		loading,
 	} = useGetTreasuryStats({ activeTab });
 
-	console.log(data, 'datata');
 	const {
 		allocatedAmount,
 		flushPercentage,

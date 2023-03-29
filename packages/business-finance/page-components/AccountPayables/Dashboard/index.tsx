@@ -28,7 +28,7 @@ function Dashboard() {
 			<div className={styles.hr} />
 			<SelectFilters filters={filters} setFilters={setFilters} />
 			<EventsTrend showData={showData} setShowData={setShowData} filtersData={filters} activeTab={activeTab} />
-			<BillTurnAroundTime />
+			<BillTurnAroundTime activeTab={activeTab} filtersData={filters} />
 			<div className={styles.sub_container}>
 				<div className={styles.outstanding}>
 					<OutstandingByAge data={data} loading={loading} />

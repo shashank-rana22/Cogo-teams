@@ -1,28 +1,57 @@
-import { Select, Tooltip } from '@cogoport/components';
+import { Button, Select, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
+import StyledTable from '../commons/StyledTable';
+import useGetBillTat from '../hooks/useGetBillTat';
 
 // import GaugeChart from './GaugeChart';
 import styles from './styles.module.css';
+import tatColumn from './tatColumn';
 import { timeFrameControls } from './timeFrameControls';
 
 const options = [
-	{ label: 'SO2 upload', value: 'SO2_upload' },
-	{ label: ' COE approved', value: ' COE_approved' },
-	{ label: 'PayRun creation', value: 'PayRun_creation' },
-	{ label: 'Bank allocation', value: 'Bank_allocation' },
-	{ label: 'First UTR Upload', value: 'First_UTR_Upload' },
-	{ label: 'Last UTR', value: 'last_UTR' },
+	{ label: 'SO2 upload', value: 'so2Upload' },
+	{ label: ' COE approved', value: ' approved' },
+	{ label: 'PayRun creation', value: 'payrunCreated' },
+	{ label: 'Bank allocation', value: 'bankAllocated' },
+	{ label: 'First UTR Upload', value: 'firstUtrUpload' },
+	{ label: 'Last UTR', value: 'lastUtrUpload' },
 ];
 
-function BillTurnAroundTime() {
-	const [timeFrameFilter, setTimeFrameFilter] = useState({ events: '' });
-	const [timeFrameFilter1, setTimeFrameFilter1] = useState('');
-	const [timeFrameFilter2, setTimeFrameFilter2] = useState('');
-	const [timeFrameFilter3, setTimeFrameFilter3] = useState('');
-	const [timeFrameFilter4, setTimeFrameFilter4] = useState('');
+interface FilterProps {
+	currency:string,
+	service:string,
+}
+interface ItemProps {
+	activeTab:string,
+	filtersData:FilterProps,
+}
+
+function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
+	const [firstEvent, setFirstEvent] = useState('');
+	const [secondEvent, setSecondEvent] = useState('');
+
+	const { data, loading, filters, setFilters } = useGetBillTat({ activeTab, filtersData, firstEvent, secondEvent });
+	const { hours } = data || {};
+	const { Date } = filters || {};
+	const { startDate, endDate } = Date || {};
+	console.log(startDate, 'date');
+	const date1 = format(startDate, 'dd MMM yyyy');
+	const date2 = format(endDate, 'dd MMM yyyy');
+
+	const list = [
+		{
+			firstEvent,
+			secondEvent,
+			date1,
+			date2,
+			hours,
+		},
+	];
+	console.log(list, 'list');
 
 	return (
 		<div className={styles.container}>
@@ -42,80 +71,62 @@ function BillTurnAroundTime() {
 						</div>
 					</Tooltip>
 				</div>
-				<div className={styles.date_filter}>
-					<Filter controls={timeFrameControls} filters={timeFrameFilter} setFilters={setTimeFrameFilter} />
-				</div>
 			</div>
 			<div className={styles.filter}>
-				<div className={styles.select_filter}>
-					<div className={styles.gauge_filter}>
-						<div className={styles.label}>
-							Select Start Task
-						</div>
+				<div className={styles.task_filter}>
+					<div className={styles.select_filter}>
+						Select Start Task
 						<Select
-							name="first"
-							value={timeFrameFilter1}
-							onChange={setTimeFrameFilter1}
+							name="firstEvent"
+							value={firstEvent}
+							onChange={setFirstEvent}
 							placeholder="From"
 							options={options}
-							size="sm"
+							size="md"
 							isClearable
+							style={{ width: '200px' }}
 						/>
 					</div>
-					<div>
-						<div className={styles.label}>
-							Select End Task
-						</div>
+					<div className={styles.select_filter}>
+						Select End Task
 						<Select
-							name="second"
-							value={timeFrameFilter2}
-							onChange={setTimeFrameFilter2}
+							name="secondEvent"
+							value={secondEvent}
+							onChange={setSecondEvent}
 							placeholder="To"
 							options={options}
-							size="sm"
+							size="md"
 							isClearable
+							style={{ width: '200px' }}
 						/>
 					</div>
-				</div>
-				<div className={styles.select_filter}>
-					{/* <GaugeChart /> */}
-				</div>
+					<div className={styles.select_filter}>
+						Date
+						<div>
+							<Filter controls={timeFrameControls} filters={filters} setFilters={setFilters} />
+						</div>
+					</div>
+					<Button
+						size="md"
+						themeType="secondary"
+						style={{ marginTop: '6px' }}
+					>
+						Apply
 
-				<div className={styles.select_filter}>
-					<div>
-						<div className={styles.label}>
-							Select Start Task
-						</div>
-						<Select
-							name="first"
-							value={timeFrameFilter3}
-							onChange={setTimeFrameFilter3}
-							placeholder="From"
-							options={options}
-							size="sm"
-							isClearable
-						/>
-					</div>
-					<div>
-						<div className={styles.label}>
-							Select End Task
-						</div>
-						<Select
-							name="second"
-							value={timeFrameFilter4}
-							onChange={setTimeFrameFilter4}
-							placeholder="To"
-							options={options}
-							size="sm"
-							isClearable
-						/>
-					</div>
+					</Button>
 				</div>
-				<div className={styles.select_filter}>
-					{/* <GaugeChart /> */}
+				<div className={styles.reset_button}>
+					<Button
+						size="md"
+						themeType="linkUi"
+						style={{ color: '#F68B21', marginTop: '16px' }}
+					>
+						Reset Table
+
+					</Button>
 				</div>
 			</div>
-			{/* <GaugeChart /> */}
+			<StyledTable data={list} columns={tatColumn} loading={loading} />
 		</div>
 	);
 }

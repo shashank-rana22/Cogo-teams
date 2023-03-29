@@ -7,6 +7,9 @@ import { getAmountInLakhCrK } from '../../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
+const dateDay = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15',
+	'16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+
 function LineCharts({ data, isCountView, showData }) {
 	const sales = data?.[0] || [];
 	const sales1 = data?.[1] || [];
@@ -57,63 +60,113 @@ function LineCharts({ data, isCountView, showData }) {
 		},
 	];
 
-	const lastThreeMonthConfig1 = {
-		lastThreeMonthMapping1: [{
-			key   : 'date',
-			value : isCountView ? 'count' : 'amount',
-		}],
-		lastThreeMonthdata1: [sales],
-	};
-	const lastThreeMonthConfig2 = {
-		lastThreeMonthMapping2: [{
-			key   : 'date',
-			value : isCountView ? 'count' : 'amount',
-		}],
-		lastThreeMonthdata2: [sales1],
-	};
-	const lastThreeMonthConfig3 = {
-		lastThreeMonthMapping3: [{
-			key   : 'date',
-			value : isCountView ? 'count' : 'amount',
-		}],
-		lastThreeMonthdata3: [sales2],
-	};
-	const { lastThreeMonthdata1 = [], lastThreeMonthMapping1 = [] } = lastThreeMonthConfig1;
-	const lastThreeMonthBarData1 = (lastThreeMonthdata1 || []).map((item, index) => ({
-		data: item?.map((value) => ({
-			x : value?.[lastThreeMonthMapping1[index]?.key]?.slice(8, 10) || '',
-			y : `${Number(value?.[lastThreeMonthMapping1[index]?.value])}` || 0,
-		})),
-	}));
+	// const lastThreeMonthConfig1 = {
+	// 	lastThreeMonthMapping1: [{
+	// 		key   : 'date',
+	// 		value : isCountView ? 'count' : 'amount',
+	// 	}],
+	// 	lastThreeMonthdata1: [sales],
+	// };
+	// const lastThreeMonthConfig2 = {
+	// 	lastThreeMonthMapping2: [{
+	// 		key   : 'date',
+	// 		value : isCountView ? 'count' : 'amount',
+	// 	}],
+	// 	lastThreeMonthdata2: [sales1],
+	// };
+	// const lastThreeMonthConfig3 = {
+	// 	lastThreeMonthMapping3: [{
+	// 		key   : 'date',
+	// 		value : isCountView ? 'count' : 'amount',
+	// 	}],
+	// 	lastThreeMonthdata3: [sales2],
+	// };
+	// const { lastThreeMonthdata1 = [], lastThreeMonthMapping1 = [] } = lastThreeMonthConfig1;
+	// const lastThreeMonthBarData1 = (lastThreeMonthdata1 || []).map((item, index) => ({
+	// 	data: item?.map((value) => ({
+	// 		x : value?.[lastThreeMonthMapping1[index]?.key]?.slice(8, 10) || '',
+	// 		y : `${Number(value?.[lastThreeMonthMapping1[index]?.value])}` || 0,
+	// 	})),
+	// }));
 
-	const { lastThreeMonthdata2 = [], lastThreeMonthMapping2 = [] } = lastThreeMonthConfig2;
-	const lastThreeMonthBarData2 = (lastThreeMonthdata2 || []).map((item, index) => ({
-		data: item?.map((value) => ({
-			x : value?.[lastThreeMonthMapping2[index]?.key]?.slice(8, 10) || '',
-			y : `${Number(value?.[lastThreeMonthMapping2[index]?.value])}` || 0,
-		})),
-	}));
+	// const { lastThreeMonthdata2 = [], lastThreeMonthMapping2 = [] } = lastThreeMonthConfig2;
+	// const lastThreeMonthBarData2 = (lastThreeMonthdata2 || []).map((item, index) => ({
+	// 	data: item?.map((value) => ({
+	// 		x : value?.[lastThreeMonthMapping2[index]?.key]?.slice(8, 10) || '',
+	// 		y : `${Number(value?.[lastThreeMonthMapping2[index]?.value])}` || 0,
+	// 	})),
+	// }));
 
-	const { lastThreeMonthdata3 = [], lastThreeMonthMapping3 = [] } = lastThreeMonthConfig3;
-	const lastThreeMonthBarData3 = (lastThreeMonthdata3 || []).map((item, index) => ({
-		data: item?.map((value) => ({
-			x : value?.[lastThreeMonthMapping3[index]?.key]?.slice(8, 10) || '',
-			y : `${Number(value?.[lastThreeMonthMapping3[index]?.value])}` || 0,
-		})),
-	}));
+	// const { lastThreeMonthdata3 = [], lastThreeMonthMapping3 = [] } = lastThreeMonthConfig3;
+	// const lastThreeMonthBarData3 = (lastThreeMonthdata3 || []).map((item, index) => ({
+	// 	data: item?.map((value) => ({
+	// 		x : value?.[lastThreeMonthMapping3[index]?.key]?.slice(8, 10) || '',
+	// 		y : `${Number(value?.[lastThreeMonthMapping3[index]?.value])}` || 0,
+	// 	})),
+	// }));
 
+	const data1 = [];
+	const data1Obj = {};
+
+	dateDay.forEach((date) => {
+		sales.forEach((sale) => {
+			if (sale?.date.slice(8, 10) === date) {
+				data1Obj[date] = sale?.amount;
+			}
+		});
+		data1.push({
+			x : date,
+			y : data1Obj?.[date] || 0,
+		});
+	});
+
+	const last2 = [];
+	const data2Obj = {};
+
+	dateDay.forEach((date) => {
+		sales1.forEach((sale) => {
+			if (sale?.date.slice(8, 10) === date) {
+				data2Obj[date] = sale?.amount;
+			}
+		});
+		last2.push({
+			x : date,
+			y : data2Obj?.[date] || 0,
+		});
+	});
+
+	const last3 = [];
+	const data3Obj = {};
+
+	dateDay.forEach((date) => {
+		sales2.forEach((sale) => {
+			if (sale?.date.slice(8, 10) === date) {
+				data3Obj[date] = sale?.amount;
+			}
+		});
+		last3.push({
+			x : date,
+			y : data3Obj?.[date] || 0,
+		});
+	});
+
+	console.log(data1, 'data1');
+	// console.log(lastThreeMonthBarData1[0].data, 'lastThreeMonthBarData3');
 	const lastThreeData = [
 		{
 			id   : format(sales[0]?.date, 'MMM yyyy'),
-			data : lastThreeMonthBarData1[0].data,
+			// data : lastThreeMonthBarData1[0].data,
+			data : data1,
 		},
 		{
 			id   : format(sales1[0]?.date, 'MMM yyyy'),
-			data : lastThreeMonthBarData2[0].data,
+			// data : lastThreeMonthBarData2[0].data,
+			data : last2,
 		},
 		{
 			id   : format(sales2[0]?.date, 'MMM yyyy'),
-			data : lastThreeMonthBarData3[0].data,
+			// data : lastThreeMonthBarData3[0].data,
+			data : last3,
 		},
 	];
 	const formatPrice = (value) => {
