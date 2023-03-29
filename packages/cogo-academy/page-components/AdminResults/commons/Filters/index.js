@@ -47,7 +47,7 @@ function Filters({
 					/>
 
 				</div>
-			) : (' ')}
+			) : null}
 
 		</div>
 	);
