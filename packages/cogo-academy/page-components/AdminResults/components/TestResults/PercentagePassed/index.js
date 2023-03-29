@@ -10,7 +10,7 @@ function PercentagePassed({ stats_data }) {
 					Pass Percentage
 				</div>
 				<div className={styles.value}>
-					{pass_percentage.toFixed(2)}
+					{(pass_percentage || 0).toFixed(2)}
 					%
 				</div>
 			</div>
@@ -19,7 +19,7 @@ function PercentagePassed({ stats_data }) {
 				Class Average :
 				{' '}
 				<span className={styles.bold}>
-					{class_average.toFixed(2)}
+					{(class_average || 0).toFixed(2)}
 
 					%
 				</span>
