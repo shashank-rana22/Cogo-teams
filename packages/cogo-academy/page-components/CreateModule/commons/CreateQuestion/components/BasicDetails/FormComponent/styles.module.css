@@ -32,6 +32,7 @@
 
 .difficulty_level {
 	display: flex;
+	margin-bottom: 32px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -48,6 +49,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+	margin-bottom: 32px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
