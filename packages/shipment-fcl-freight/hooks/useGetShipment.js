@@ -18,7 +18,7 @@ function useGetShipment() {
 				await trigger({
 					params: {
 						id                 : shipment_id,
-						additional_methods : ['main_service', 'documents', 'bl_container_mapping'],
+						additional_methods : ['main_service', 'documents', 'bl_container_mappings'],
 					},
 				});
 			} catch (err) {

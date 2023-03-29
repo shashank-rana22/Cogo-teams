@@ -2,20 +2,36 @@ import { Popover, Button } from '@cogoport/components';
 import { IcMPdf, IcMOverflowDot, IcMImage } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
-import useListWallet from '../../../../../hooks/useListWallet';
-import useDeleteDocument from '../../../../../hooks/useUpdateOrganizationDocument';
+import useListOrganizationDocuments from '../../../../../hooks/useListOrganizationDocuments';
+import useListTradeDocuments from '../../../../../hooks/useListTradeDocuments';
+import useUpdateOrganizationDocument from '../../../../../hooks/useUpdateOrganizationDocument';
 
 import Loader from './Loader';
 import styles from './styles.module.css';
 
 function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs, activeWallet = '' }) {
-	const { data, refetch, loading } = useListWallet({
-		activeWallet,
+	const { data : tradeDocuments, getList, loading : tradeDocumentsLoading } = useListTradeDocuments();
+	const {
+		data : organizationDocuments,
+		getList : organizationDocumentsList,
+		loading : orgDocumentsLoading,
+	} =	useListOrganizationDocuments();
+
+	const { deleteDocument } = useUpdateOrganizationDocument({
+		refetch: activeWallet === 'trade_documents'
+			? getList : organizationDocumentsList,
 	});
-	const { deleteDocument } = useDeleteDocument({ refetch });
+
+	useEffect(() => {
+		if (activeWallet === 'trade_documents') {
+			getList();
+		} else {
+			organizationDocumentsList();
+		}
+	}, [activeWallet, getList, organizationDocumentsList]);
 
 	const handleSave = (e, image_url) => {
 		e.stopPropagation();
@@ -40,18 +56,24 @@ function Wallet({ forModal = false, handleDocClick = () => {}, showWalletDocs, a
 			Delete Document
 		</div>
 	);
+
+	const loading = tradeDocumentsLoading && orgDocumentsLoading;
+
+	const dataToMap = activeWallet === 'trade_documents' ? tradeDocuments : organizationDocuments;
+
 	const contentToShow = () => {
 		if (loading) {
 			return [...Array(forModal ? 3 : 2)].map(() => (
 				<Loader forModal={forModal} />
 			));
 		}
-		if (!loading && data?.list?.length === 0) {
+		if (!loading && dataToMap?.list?.length === 0) {
 			return <EmptyState />;
 		}
+
 		return (
 			<>
-				{(data?.list || []).map((doc) => (
+				{(dataToMap?.list || []).map((doc) => (
 					<div
 						role="button"
 						tabIndex="0"

@@ -1,5 +1,4 @@
 import { Button, cl } from '@cogoport/components';
-import { IcCError } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
 import VerticleLine from '../VerticleLine';

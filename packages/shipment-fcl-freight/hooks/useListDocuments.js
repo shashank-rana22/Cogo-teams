@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -34,7 +33,7 @@ function useGetListDocuments({ shipment_data = {}, filters = {} }) {
 					},
 				});
 			} catch (err) {
-				Toast.error(err);
+				console.log(err);
 			}
 		})();
 	}, [trigger, shipment_id, service_type, q, uploaded_by_org_id]);
