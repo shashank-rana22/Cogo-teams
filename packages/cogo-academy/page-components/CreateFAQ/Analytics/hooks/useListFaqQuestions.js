@@ -29,6 +29,8 @@ function useListFaqQuestions({
 						filters: {
 							faq_topic_id : topicId || undefined,
 							q            : query || undefined,
+							state        : 'published',
+							status       : 'active',
 
 						},
 						sort_by                  : 'view_count',
