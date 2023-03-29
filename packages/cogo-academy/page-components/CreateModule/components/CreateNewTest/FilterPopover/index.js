@@ -8,15 +8,19 @@ import useFilterPopover from './useFilterPopover';
 
 function FilterPopover({ filters, setFilters }) {
 	const {
-		showFilter, setShowFilter,
-		control, handleSubmit, onSubmit, onClickReset,
+		showFilter,
+		setShowFilter,
+		control,
+		handleSubmit,
+		onSubmit,
+		onClickReset,
 	} = useFilterPopover({ setFilters });
 
 	return (
 		<Popover
 			caret={false}
 			placement="bottom"
-			onClickOutside={() => { setShowFilter(false); }}
+			onClickOutside={() => setShowFilter(false)}
 			render={(
 				<FilterContent
 					onClickReset={onClickReset}
@@ -30,7 +34,7 @@ function FilterPopover({ filters, setFilters }) {
 				role="presentation"
 				className={styles.filters}
 				onClick={() => {
-					setShowFilter(!showFilter);
+					setShowFilter((pv) => !pv);
 				}}
 			>
 				<div className={styles.filter_text}>

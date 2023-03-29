@@ -6,7 +6,7 @@ const colorArray = ['hsla(232, 44%, 96%, 1)', 'hsla(234, 46%, 87%, 1)', 'hsla(23
 
 const getDifficultyData = (difficulty_wise_stats = {}) => (Object.keys(difficulty_wise_stats).map((key, index) => ({
 	label      : startCase(key.split('_')[0]),
-	percentile : difficulty_wise_stats[key]?.toFixed(2),
+	percentile : (difficulty_wise_stats[key] || 0).toFixed(2),
 	color      : colorArray[index],
 })));
 

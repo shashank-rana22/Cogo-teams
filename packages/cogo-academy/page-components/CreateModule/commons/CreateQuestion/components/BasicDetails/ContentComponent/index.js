@@ -5,34 +5,20 @@ import styles from './styles.module.css';
 
 const constants = ['topic', 'audience_ids', 'question_type', 'difficulty_level', 'questions'];
 
-const getQuestionType = (question_type) => {
-	if (question_type === 'case_study') {
-		return 'Case Study';
-	}
-
-	return 'Stand Alone';
-};
+const getQuestionType = (question_type) => (question_type === 'case_study' ? 'Case Study' : 'Stand Alone');
 
 const getValue = ({ item, editDetails }) => {
 	const { sub_question = [], question_type = '' } = editDetails || {};
 
-	if (item === 'question_type') {
-		return getQuestionType(question_type);
-	}
+	const MAPPING = {
+		question_type    : getQuestionType(question_type),
+		audience_ids     : '--',
+		difficulty_level : startCase(editDetails?.[item] || '--'),
+		topic            : editDetails?.[item] || '--',
+		questions        : sub_question.length,
+	};
 
-	if (item === 'audience_ids') {
-		return '--';
-	}
-
-	if (item === 'difficulty_level') {
-		return startCase(editDetails?.[item] || '--');
-	}
-
-	if (item !== 'questions') {
-		return editDetails?.[item] || '--';
-	}
-
-	return sub_question.length;
+	return MAPPING[item];
 };
 
 function ContentComponent({ editDetails, setShowForm }) {

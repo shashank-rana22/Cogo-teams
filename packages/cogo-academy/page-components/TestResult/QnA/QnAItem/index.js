@@ -1,4 +1,5 @@
-import QuestionCard from './QuestionCard';
+import QuestionCard from '../../../CreateModule/commons/QuestionCard';
+
 import styles from './styles.module.css';
 
 function QnAItem({ data = {}, index = 0, user_name = '' }) {

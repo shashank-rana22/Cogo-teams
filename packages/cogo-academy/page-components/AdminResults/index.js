@@ -11,6 +11,19 @@ import TestResults from './components/TestResults';
 import useGetTest from './hooks/useGetTest';
 import styles from './styles.module.css';
 
+const COMPONENT_MAPPING = {
+	tests: {
+		key       : 'students',
+		title     : 'Students',
+		component : Students,
+	},
+	question_set: {
+		key       : 'questions',
+		title     : 'Questions',
+		component : Questions,
+	},
+};
+
 function AdminResults() {
 	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));
 
@@ -26,19 +39,9 @@ function AdminResults() {
 		getTest,
 	} = useGetTest({ id: test_id });
 
-	const componentMapping = {
-		tests: {
-			key            : 'students',
-			title          : 'Students',
-			component      : Students,
-			componentProps : { test_id },
-		},
-		question_set: {
-			key            : 'questions',
-			title          : 'Questions',
-			component      : Questions,
-			componentProps : { test_id },
-		},
+	const COMPONENT_PROPS_MAPPING = {
+		students  : { test_id },
+		questions : { test_id },
 	};
 
 	const handleGoBack = () => {
@@ -73,10 +76,12 @@ function AdminResults() {
 					onChange={setActiveTab}
 					className={styles.tabs}
 				>
-					{Object.values(componentMapping).map((tab) => {
-						const { key, title, component : ContainerComponent = null, componentProps } = tab;
+					{Object.values(COMPONENT_MAPPING).map((tab) => {
+						const { key, title, component : ContainerComponent = null } = tab;
 
-						if (!componentMapping) return null;
+						const componentProps = COMPONENT_PROPS_MAPPING[key];
+
+						if (!ContainerComponent) return null;
 
 						return (
 							<TabPanel

@@ -8,7 +8,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 	{
 		Header: (
 			<div className={styles.container}>
-				<div>NAME</div>
+				<div className={styles.item}>NAME</div>
 
 				<SortComponent
 					value="user"
@@ -31,7 +31,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 	{
 		Header: (
 			<div className={styles.container}>
-				<div>SCORE</div>
+				<div className={styles.item}>SCORE</div>
 
 				<SortComponent
 					value="score_achieved"
@@ -52,7 +52,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 	{
 		Header: (
 			<div className={styles.container}>
-				<div>PERCENTILE</div>
+				<div className={styles.item}>PERCENTILE</div>
 
 				<SortComponent
 					value="percentile"
@@ -69,7 +69,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 	{
 		Header: (
 			<div className={styles.container}>
-				<div>TIME TAKEN</div>
+				<div className={styles.item}>TIME TAKEN</div>
 
 				<SortComponent
 					value="time_taken"
@@ -92,7 +92,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 	{
 		Header: (
 			<div className={styles.container}>
-				<div>ATTEMPTED ON</div>
+				<div className={styles.item}>ATTEMPTED ON</div>
 
 				<SortComponent
 					value="attempted_on"

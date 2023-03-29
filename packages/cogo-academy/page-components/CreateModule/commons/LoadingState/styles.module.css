@@ -31,10 +31,6 @@
 	overflow-y: auto;
 }
 
-.list_container::-webkit-scrollbar {
-	display: none;
-}
-
 .user_activity {
 	display: flex;
 	flex-direction: column;

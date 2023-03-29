@@ -231,6 +231,7 @@ function CreateQuestion({
 								loading={loading || updateCaseStudyLoading}
 								type="submit"
 								themeType="primary"
+								className={styles.save_button}
 							>
 								{isNewQuestion ? 'Save Question' : 'Update Question'}
 							</Button>

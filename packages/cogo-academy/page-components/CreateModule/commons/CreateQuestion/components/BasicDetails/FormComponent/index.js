@@ -26,11 +26,10 @@ function FormComponent({
 		setValue('difficulty_level', difficulty_level);
 		setValue('audience_ids', []);
 
-		if (editDetails?.question_type === 'case_study') {
-			setValue('question_type', editDetails?.question_type);
-		} else {
-			setValue('question_type', 'stand_alone');
-		}
+		setValue(
+			'question_type',
+			editDetails?.question_type === 'case_study' ? editDetails?.question_type : 'stand_alone',
+		);
 
 		setShowForm(false);
 	};
@@ -52,6 +51,8 @@ function FormComponent({
 					}
 
 					const Element = getElementController(type);
+
+					if (!Element) return null;
 
 					return (
 						<div key={name} className={`${styles.control_container} ${styles[name]}`}>
@@ -80,16 +81,16 @@ function FormComponent({
 						<div className={styles.control}>
 							<ChipsController
 								control={control}
-								{...controls[3]}
+								{...((controls || []).find((item) => item.name === 'difficulty_level'))}
 							/>
-							{errors?.[controls[3].name] && <div className={styles.error_msg}>This is required</div>}
+							{errors?.difficulty_level && <div className={styles.error_msg}>This is required</div>}
 						</div>
 					</div>
 
 					<div style={{ marginBottom: mode === 'view' || isNewQuestion ? '16px' : '60px' }}>
 						<TextAreaController
 							control={control}
-							{...controls[4]}
+							{...((controls || []).find((item) => item.name === 'question_text'))}
 						/>
 						{errors?.question_text ? <div className={styles.error_msg}>This is required</div> : null}
 					</div>
