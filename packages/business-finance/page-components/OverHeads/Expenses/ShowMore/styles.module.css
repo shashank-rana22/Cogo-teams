@@ -40,9 +40,8 @@
 
 .more_data_container {
 	width: 100%;
-	max-height: 228px;
+	max-height: 350px;
 
-	/* overflow: hidden; */
 	background: white;
 	border-top: 1px solid #edd7a9;
 	transition: max-height 0.3s ease;
@@ -54,7 +53,7 @@
 }
 
 .list_container {
-	max-height: 200px;
+	max-height: 332px;
 	overflow: scroll;
 }
 

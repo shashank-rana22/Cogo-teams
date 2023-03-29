@@ -24,6 +24,8 @@
 }
 
 .search {
+	height: 36px;
+    margin-top: 2px;
 	width: 341px;
 	padding: 0 4px;
 
@@ -46,13 +48,6 @@
 		font-size: 11px !important;
 	}
 }
-
-/*
-.verified {
-	display: flex;
-	align-items: center;
-	color: #67c676;
-} */
 
 .pending {
 	display: flex;
@@ -131,4 +126,11 @@
 .no_data {
 	display: flex;
 	justify-content: center;
+}
+
+.cta_button{
+	background: #ED3726 !important;
+	color: white !important;
+	font-size: 14px !important;
+	height: 38px !important; 
 }

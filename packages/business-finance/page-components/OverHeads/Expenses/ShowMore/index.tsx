@@ -65,10 +65,22 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 				? styles.more_data_container : `${styles.more_data_container} ${styles.more_data_container_close}`}
 			>
 				{listLoading ? (
-					<div style={{ display: 'flex' }}>
-						<Placeholder height="50px" width="32%" margin="8px" />
-						<Placeholder height="50px" width="32%" margin="8px" />
-						<Placeholder height="50px" width="32%" margin="8px" />
+					<div>
+						<div style={{ display: 'flex' }}>
+							<Placeholder height="50px" width="32%" margin="8px" />
+							<Placeholder height="50px" width="32%" margin="8px" />
+							<Placeholder height="50px" width="32%" margin="8px" />
+						</div>
+						<div style={{ display: 'flex' }}>
+							<Placeholder height="50px" width="32%" margin="8px" />
+							<Placeholder height="50px" width="32%" margin="8px" />
+							<Placeholder height="50px" width="32%" margin="8px" />
+						</div>
+						<div style={{ display: 'flex' }}>
+							<Placeholder height="50px" width="32%" margin="8px" />
+							<Placeholder height="50px" width="32%" margin="8px" />
+							<Placeholder height="50px" width="32%" margin="8px" />
+						</div>
 					</div>
 				) :	(
 					<div className={styles.list_container}>
@@ -195,6 +207,10 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 										No data available
 
 									</div>
+									<img
+										alt="no data"
+										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_no_data.svg"
+									/>
 								</div>
 							)
 						}

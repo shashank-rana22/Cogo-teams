@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import { Popover, Button, Input } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { Popover, Button, Input, Tooltip } from '@cogoport/components';
+import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import { ListDataProps } from '../../AccountPayables/commons/Interfaces';
@@ -152,7 +152,7 @@ function ExpenseComponent() {
 						setCreateExpenseType(recurringState);
 						setShowModal(true);
 					}}
-					style={{ background: '#ED3726', color: 'white', fontSize: '14px' }}
+					className={styles.cta_button}
 				>
 					{BUTTON_TEXT[recurringState]}
 				</Button>
@@ -182,6 +182,20 @@ function ExpenseComponent() {
 		},
 		renderExpensePeriod: (itemData:ItemDataInterface) => {
 			const { startDate, endDate } = itemData || {};
+			let difference:string = '';
+			if (startDate && endDate) {
+				const date1 = new Date(startDate);
+				const date2 = new Date(endDate);
+				const timeDifference = date2.getTime() - date1.getTime();
+				const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+				const monthDifference = (daysDifference / 30).toFixed(0);
+				if (Number(monthDifference) < 1) {
+					difference = `${daysDifference} days`;
+				} else {
+					difference = `${monthDifference} months`;
+				}
+			}
+
 			if (startDate && endDate) {
 				return (
 					<div className={styles.data_container}>
@@ -197,9 +211,9 @@ function ExpenseComponent() {
 									{formatDate(endDate, 'dd MMM yyyy', {}, false)}
 
 								</div>
-								{/* <Tooltip content="Duration: x months">
+								<Tooltip content={`Duration: ${difference} `}>
 									<div style={{ margin: '0px 4px' }}><IcMInfo /></div>
-								</Tooltip> */}
+								</Tooltip>
 							</div>
 						</div>
 					</div>

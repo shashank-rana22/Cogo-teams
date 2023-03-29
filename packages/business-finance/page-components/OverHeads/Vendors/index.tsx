@@ -101,7 +101,11 @@ function VenderComponent() {
 				{kycStatus === 'VERIFIED' && 	(
 					<div className={styles.verified}>
 						<div>
-							<IcMFtick color="#67C676" />
+							<IcMFtick
+								color="#67C676"
+								height={18}
+								width={18}
+							/>
 						</div>
 						<div>&nbsp;Verified </div>
 					</div>
@@ -113,6 +117,8 @@ function VenderComponent() {
 						<div className={styles.icm_info}>
 							<IcMCrossInCircle
 								color="#e10d1f"
+								height={14}
+								width={14}
 							/>
 
 						</div>
@@ -127,6 +133,8 @@ function VenderComponent() {
 						<div className={styles.icm_info}>
 							<IcMInfo
 								color="#e10d1f"
+								height={14}
+								width={14}
 							/>
 						</div>
 						<div>
