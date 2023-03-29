@@ -17,7 +17,7 @@ function StudentsComponent({ test_id }) {
 	const [params, setParams] = useState({});
 	const [filter, setFilter] = useState('');
 	const [sortFilter, setSortFilter] = useState({});
-	const [searchValue, setSearchValue] = useState('');
+	const [setSearchValue] = useState('');
 
 	const { sortBy, sortType } = sortFilter || {};
 
@@ -37,7 +37,6 @@ function StudentsComponent({ test_id }) {
 			url     : '/list_not_appeared_users',
 			payload : {
 				test_id,
-				filters: { q: query },
 			},
 		},
 	};
@@ -76,9 +75,7 @@ function StudentsComponent({ test_id }) {
 				filter={filter}
 				setFilter={setFilter}
 				setSearchValue={setSearchValue}
-				searchValue={searchValue}
 				debounceQuery={debounceQuery}
-				activeTab={activeTab}
 			/>
 
 			{
