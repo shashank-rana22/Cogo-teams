@@ -1,13 +1,13 @@
 import { Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill, Pagination } from '@cogoport/components';
 import { IcMArrowRotateUp, IcMSearchlight } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import useGetTestQuestionSets from '../../../../../../hooks/useGetTestQuestionSets';
 
 import styles from './styles.module.css';
 
-function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray, watch }) {
+function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
 	const cogo_entity_id = watch('cogo_entity_id');
 
 	const {
@@ -34,13 +34,6 @@ function QuestionSet({ setIdArray, setShowQuestionSet, set_data, idArray, watch 
 			return temp;
 		});
 	};
-
-	const correctSetIds = (set_data || []).map((item) => item.id);
-
-	useEffect(() => {
-		setIdArray(correctSetIds);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	const columns = [
 		{

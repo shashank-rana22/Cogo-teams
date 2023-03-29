@@ -9,7 +9,7 @@ import QuestionSet from './components/QuestionSet';
 import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
-function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLoading }) {
+function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getLoading }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 
 	const [idArray, setIdArray] = useState([]);
@@ -18,12 +18,14 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data, loading: getLo
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
 
+	const { set_data = [] } = data || {};
+
 	useEffect(() => {
-		if (!isEmpty(data?.set_data || [])) {
+		if (!isEmpty(set_data || [])) {
 			setShowQuestionSet(true);
+			setIdArray((set_data || []).map((item) => item.id));
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [set_data]);
 
 	return (
 		<div className={styles.container}>

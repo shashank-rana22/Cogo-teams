@@ -3,11 +3,7 @@ import QnAItem from '../QnAItem';
 import styles from './styles.module.css';
 
 function CaseStudy({ case_study }) {
-	console.log(case_study, 'case ');
-
 	const { questions_description: { description = '' } = {}, questions } = case_study || {};
-
-	console.log(questions, 'questions case study');
 
 	return (
 		<div>

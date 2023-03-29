@@ -345,13 +345,13 @@ function SavedQuestionDetails({
 				</Modal.Body>
 			</Modal>
 
-			{total_count > 10 ? (
+			{total_count > 5 ? (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
 						currentPage={page}
 						totalItems={total_count}
-						pageSize={10}
+						pageSize={5}
 						onPageChange={setPage}
 					/>
 				</div>

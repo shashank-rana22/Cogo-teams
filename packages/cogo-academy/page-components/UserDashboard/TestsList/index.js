@@ -16,6 +16,9 @@ function TestsList() {
 		user: profile.user,
 	}));
 
+	const [testCategory, setTestCategory] = useState('active_test');
+	const [page, setPage] = useState(1);
+
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
 	const [{ data = {}, loading }, trigger] = useRequest({
@@ -23,11 +26,7 @@ function TestsList() {
 		url    : '/list_tests',
 	}, { manual: true });
 
-	const [testCategory, setTestCategory] = useState('active_test');
-
-	const [page, setPage] = useState(1);
-
-	const total_count = data?.total_count;
+	const { total_count } = data || {};
 
 	useEffect(() => {
 		try {

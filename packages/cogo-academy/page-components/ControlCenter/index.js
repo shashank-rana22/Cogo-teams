@@ -30,7 +30,7 @@ function ControlCenter() {
 
 	return (
 		<div>
-			<Header setSwitchDashboard={setSwitchDashboard} />
+			<Header setSwitchDashboard={setSwitchDashboard} activeTab={activeTab} />
 
 			<Tabs
 				activeTab={activeTab}

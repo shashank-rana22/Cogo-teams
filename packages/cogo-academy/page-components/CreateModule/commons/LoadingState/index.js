@@ -28,7 +28,6 @@ function LoadingState({ rowsCount = 5 }) {
 					</div>
 				</div>
 			))}
-
 		</div>
 
 	);

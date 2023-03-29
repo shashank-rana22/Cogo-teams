@@ -16,7 +16,7 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 			const res = await trigger({
 				params: {
 					id         : questionSetId,
-					page_limit : 10,
+					page_limit : 5,
 					page       : pageToShow || page,
 					filters    : {
 						q      : query,

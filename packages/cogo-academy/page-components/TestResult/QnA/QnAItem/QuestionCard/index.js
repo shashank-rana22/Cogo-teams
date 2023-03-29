@@ -9,6 +9,7 @@ function QuestionCard({ question = '', answers = [], index = 0, question_type = 
 
 	const getAnswerItem = (answer) => {
 		const { answer_text = '', is_correct = false, peers = 0 } = answer;
+
 		return (
 			<div className={styles.answer_item}>
 				<div className={styles.answer_header}>
@@ -56,7 +57,6 @@ function QuestionCard({ question = '', answers = [], index = 0, question_type = 
 								>
 									{' '}
 									view case study
-
 								</div>
 							</Popover>
 						)

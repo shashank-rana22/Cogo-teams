@@ -9,7 +9,7 @@ import useUpdateTest from '../../../../hooks/useUpdateTest';
 import EmptyState from '../../../EmptyState';
 
 import styles from './styles.module.css';
-import { questionSetColumns, testSetColumns } from './utils/getColumns';
+import { questionSetColumns, testSetColumns } from './TableColumns';
 
 const MODAL_TEXT_MAPPING = {
 	tests        : 'Test',
@@ -151,7 +151,6 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 					/>
 				</div>
 			) : null}
-
 		</div>
 	);
 }
