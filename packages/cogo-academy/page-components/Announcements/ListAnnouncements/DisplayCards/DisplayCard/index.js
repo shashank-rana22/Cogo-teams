@@ -1,5 +1,5 @@
 import { Popover, Accordion, Button, Modal, Pill } from '@cogoport/components';
-// import getGeoConstants from '@cogoport/globalization/constants/geo/geo';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMOverflowDot, IcMAnnouncement, IcMEyeopen, IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -9,9 +9,6 @@ import Preview from '../../../CreateAnnouncement/AnnouncementForm/Preview';
 
 import DisplayAttachments from './DisplayAttachments';
 import styles from './styles.module.css';
-
-const ADMIN_IDS = ['13cb3b79-95c2-49ca-9ebd-8c3ee1996981'];
-// const geo = getGeoConstants();
 
 const ANNOUNCEMENT_TYPE_MAPPING = {
 	general        : 'General',
@@ -58,6 +55,10 @@ function DisplayCard({
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [showGoLiveModal, setShowGoLiveModal] = useState(false);
 
+	const geo = getGeoConstants();
+
+	const isCogoAcademyAdmin = (user_id === geo.uuid.cogoacademy_admin_id);
+
 	const options = [
 		{ label: 'Title', value: startCase(data?.title) },
 		{ label: 'Validity Start', value: format(data?.validity_start, 'dd MMM yyyy hh:mm a') },
@@ -81,7 +82,7 @@ function DisplayCard({
 
 	const renderPopover = () => (
 		<div className={styles.buttons_container}>
-			{data.status === 'draft' && ADMIN_IDS.includes(user_id) ? (
+			{data.status === 'draft' && isCogoAcademyAdmin ? (
 				<Button
 					type="button"
 					themeType="primary"
