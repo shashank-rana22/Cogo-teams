@@ -10,7 +10,8 @@ function mailFunction({
 	setRecipientArray = () => {},
 	setRecipientValue = () => {},
 	setType = () => {},
-	setShowControl = () => {},
+	setShowToControl = () => {},
+	setShowCcControl = () => {},
 	setBccArray = () => {},
 	setCcBccValue = () => {},
 	setAttachments = () => {},
@@ -38,25 +39,30 @@ function mailFunction({
 				setRecipientArray((prev) => [...prev, recipientValue]);
 				setRecipientValue('');
 				setType('');
-				setShowControl(false);
+				setShowToControl(false);
+				setShowCcControl(false);
 			} else {
 				setBccArray((prev) => [...prev, ccBccValue]);
 				setCcBccValue('');
 				setType('');
-				setShowControl(false);
+				setShowToControl(false);
+				setShowCcControl(false);
 			}
 		}
 	};
 
 	const handleEdit = (val) => {
 		setType(val);
-		setShowControl(true);
-		setErrorValue(null);
-		if (type === 'recipient') {
+		if (val === 'recipient') {
+			setShowToControl(true);
 			setCcBccValue('');
+			setShowCcControl(false);
 		} else {
+			setShowCcControl(true);
 			setRecipientValue('');
+			setShowToControl(false);
 		}
+		setErrorValue(null);
 	};
 
 	const handleChange = (item) => {
@@ -76,8 +82,13 @@ function mailFunction({
 	};
 
 	const handleError = (s) => {
-		if (s === 'receipient') { setRecipientValue(''); } else { setCcBccValue(''); }
-		setShowControl(false);
+		if (s === 'recipient') {
+			setShowToControl(false);
+			setRecipientValue('');
+		} else {
+			setCcBccValue('');
+			setShowCcControl(false);
+		}
 	};
 
 	const handleClose = () => {

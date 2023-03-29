@@ -1,8 +1,8 @@
-import { Toast, cl, Modal, RTE, Input } from '@cogoport/components';
+import { Toast, Modal, RTE, Input } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
-import CustomInput from '../../../../../common/EmailCustomTag';
+import MailRecipientType from '../../../../../common/MailRecipientType';
 import { TOOLBARCONFIG } from '../../../../../constants';
 import { decode, buttonOptions } from '../../../../../constants/MAIL_CONSTANT';
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
@@ -32,7 +32,8 @@ function MailModal({
 		setEmailState,
 	} = mailProps;
 
-	const [showControl, setShowControl] = useState(false);
+	const [showToControl, setShowToControl] = useState();
+	const [showCcControl, setShowCcControl] = useState();
 	const [type, setType] = useState('');
 	const [recipientValue, setRecipientValue] = useState('');
 	const [ccBccValue, setCcBccValue] = useState('');
@@ -59,7 +60,8 @@ function MailModal({
 		ccBccValue,
 		setRecipientValue,
 		setType,
-		setShowControl,
+		setShowToControl,
+		setShowCcControl,
 		setCcBccValue,
 		setAttachments,
 		attachments,
@@ -128,93 +130,37 @@ function MailModal({
 					<div className={styles.sub_text}>
 						To:
 					</div>
-					<div className={styles.tags_div}>
-						{(recipientArray || []).map((data) => (
-							<CustomInput
-								email={data}
-								handleDelete={handleDelete}
-								type="recipient"
-							/>
-						))}
-
-						{(showControl && type === 'recipient') && (
-							<div className={styles.tag_and_errorcontainer}>
-								<div className={styles.tag_container}>
-									<input
-										size="sm"
-										placeholder="Enter recipient"
-										type="text"
-										value={recipientValue}
-										onChange={(e) => handleChange(e)}
-										onKeyPress={(e) => handleKeyPress(e)}
-										className={cl`
-										${errorValue ? styles.error_input_container : styles.input_container}`}
-										id="inputId"
-									/>
-									<div className={styles.cross_icon}>
-										<IcMCross onClick={() => handleError('receipient')} />
-									</div>
-								</div>
-								{(errorValue) && (
-									<div className={styles.error_content_container}>
-										{errorValue}
-									</div>
-								)}
-							</div>
-						)}
-						<div
-							className={styles.add_icon}
-							onClick={() => handleEdit('recipient')}
-							role="presentation"
-						>
-							+
-						</div>
-					</div>
+					<MailRecipientType
+						arrayType={recipientArray}
+						handleDelete={handleDelete}
+						showControl={showToControl}
+						type="recipient"
+						value={recipientValue}
+						errorValue={errorValue}
+						handleChange={handleChange}
+						handleKeyPress={handleKeyPress}
+						handleError={handleError}
+						handleEdit={handleEdit}
+						inputType="recipient"
+					/>
 				</div>
 				<div className={styles.type_to}>
 					<div className={styles.sub_text}>
 						Cc/Bcc, From:
 					</div>
-					<div className={styles.tags_div}>
-						{(bccArray || []).map((data) => (
-							<CustomInput
-								email={data}
-								handleDelete={handleDelete}
-								type="cc_bcc"
-							/>
-						))}
-						{(showControl && type === 'cc_bcc') && (
-							<div className={styles.tag_and_errorcontainer}>
-								<div className={styles.tag_container}>
-									<input
-										size="sm"
-										placeholder="Enter cc recipient"
-										type="text"
-										value={ccBccValue}
-										onChange={(e) => handleChange(e)}
-										onKeyPress={(e) => handleKeyPress(e)}
-										className={cl`
-										${errorValue ? styles.error_input_container : styles.input_container}`}
-									/>
-									<div className={styles.cross_icon}>
-										<IcMCross onClick={() => handleError('ccBccValue')} />
-									</div>
-								</div>
-								{(errorValue) && (
-									<div className={styles.error_content_container}>
-										Enter valid mail
-									</div>
-								)}
-							</div>
-						)}
-						<div
-							className={styles.add_icon}
-							onClick={() => handleEdit('cc_bcc')}
-							role="presentation"
-						>
-							+
-						</div>
-					</div>
+					<MailRecipientType
+						arrayType={bccArray}
+						handleDelete={handleDelete}
+						showControl={showCcControl}
+						type="cc_bcc"
+						value={ccBccValue}
+						errorValue={errorValue}
+						handleChange={handleChange}
+						handleKeyPress={handleKeyPress}
+						handleError={handleError}
+						handleEdit={handleEdit}
+						inputType="cc_bcc"
+					/>
 				</div>
 				<div className={styles.type_to}>
 					<div className={styles.sub_text}>
