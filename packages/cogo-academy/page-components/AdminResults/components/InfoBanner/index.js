@@ -1,29 +1,7 @@
-import { IcMFtick, IcMCrossInCircle } from '@cogoport/icons-react';
-
 import PublishNow from '../PublishNow';
 
 import styles from './styles.module.css';
-
-const TEXT_MAPPING = {
-	active: {
-		key             : 'active',
-		text            : 'Test Results have not been published yet.',
-		subText         : 'They will be auto-published when the validity ends',
-		Icon            : IcMCrossInCircle,
-		iconColor       : '#D6B300',
-		backgroundColor : '#FDFBF6',
-		borderColor     : '#D6B300',
-	},
-	published: {
-		key             : 'published',
-		text            : 'Test Results have been Published.',
-		Icon            : IcMFtick,
-		subText         : 'Your students can now see their scores.',
-		iconColor       : '#849E4C',
-		backgroundColor : '#F7FAEF',
-		borderColor     : '#849E4C',
-	},
-};
+import TEXT_MAPPING from './text-mapping';
 
 function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, loading }) {
 	if (!['published', 'active'].includes(test_status) && loading) {
