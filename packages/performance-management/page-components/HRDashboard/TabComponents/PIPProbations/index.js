@@ -7,9 +7,10 @@ import pipModalComponentsMapping from '../../../../constants/pip-modal-component
 import tabPanelComponentMapping from '../../../../constants/tab-pannel-component-mapping';
 import useUpdateLog from '../../../../hooks/useUpdateLog';
 
+import PendingReviews from './PendingReviews';
 import styles from './styles.module.css';
 
-function PIPProbations() {
+function PIPProbations({ source = 'hr_dashboard' }) {
 	const [modal, setModal] = useState(''); // for update,logs,create,upload modals
 	const [item, setItem] = useState({}); // dor sending payload and setting the user id from the list
 	const [activeTab, setActiveTab] = useState('dashboard'); // to switch between tabs
@@ -40,71 +41,86 @@ function PIPProbations() {
 
 	return (
 		<div className={styles.container}>
-			<div>
-				<Tabs
+			{source === 'hr_dashboard' && (
+				<>
+					<div>
+						<Tabs
+							activeTab={activeTab}
+							themeType="secondary"
+							onChange={setActiveTab}
+						>
+							{Object.values(tabPanelComponentMapping).map((tabPanelItem) => {
+								const { name = '', title = '', Component } = tabPanelItem;
+
+								if (!Component) return null;
+
+								return (
+									<TabPanel
+										key={name}
+										name={name}
+										title={title}
+									>
+										<Component
+											activeTab={activeTab}
+											item={item}
+											setItem={setItem}
+											setModal={setModal}
+											refetchList={refetchList}
+											setRefetchList={setRefetchList}
+										/>
+									</TabPanel>
+								);
+							})}
+						</Tabs>
+					</div>
+
+					<div className={styles.button_container}>
+						<Button
+							size="lg"
+							themeType="tertiary"
+							style={{ marginRight: '16px' }}
+							onClick={() => setModal('upload')}
+						>
+							<IcMUpload style={{ marginRight: '4px' }} />
+							Upload CSV
+						</Button>
+
+						<Button
+							size="lg"
+							themeType="tertiary"
+							style={{ marginRight: '16px' }}
+							onClick={() => setModal('download')}
+						>
+							<IcMDownload style={{ marginRight: '4px' }} />
+							Probation CSV
+						</Button>
+
+						<Button
+							size="lg"
+							themeType="primary"
+							onClick={() => {
+								// setType('create');
+								setModal('create');
+							}}
+						>
+							<IcMEdit style={{ marginRight: '4px' }} />
+							Create
+						</Button>
+					</div>
+				</>
+			)}
+
+			{source === 'manager_dashboard' && (
+				<PendingReviews
 					activeTab={activeTab}
-					themeType="secondary"
-					onChange={setActiveTab}
-				>
-					{Object.values(tabPanelComponentMapping).map((tabPanelItem) => {
-						const { name = '', title = '', Component } = tabPanelItem;
-
-						if (!Component) return null;
-
-						return (
-							<TabPanel
-								key={name}
-								name={name}
-								title={title}
-							>
-								<Component
-									activeTab={activeTab}
-									item={item}
-									setItem={setItem}
-									setModal={setModal}
-									refetchList={refetchList}
-									setRefetchList={setRefetchList}
-									// setType={setType}
-								/>
-							</TabPanel>
-						);
-					})}
-				</Tabs>
-			</div>
-
-			<div className={styles.button_container}>
-				<Button
-					size="lg"
-					themeType="tertiary"
-					style={{ marginRight: '16px' }}
-					onClick={() => setModal('upload')}
-				>
-					<IcMUpload style={{ marginRight: '4px' }} />
-					Upload CSV
-				</Button>
-
-				<Button
-					size="lg"
-					themeType="tertiary"
-					style={{ marginRight: '16px' }}
-					onClick={() => setModal('download')}
-				>
-					<IcMDownload style={{ marginRight: '4px' }} />
-					Probation CSV
-				</Button>
-
-				<Button
-					size="lg"
-					themeType="primary"
-					onClick={() => {
-						// setType('create');
-						setModal('create');
-					}}
-				>
-					<IcMEdit style={{ marginRight: '4px' }} />
-					Create
-				</Button>
-			</div>
+					item={item}
+					setItem={setItem}
+					setModal={setModal}
+					refetchList={refetchList}
+					setRefetchList={setRefetchList}
+					source="manager_dashboard"
+				/>
+			)}
 
 			{modal
 				&& (
