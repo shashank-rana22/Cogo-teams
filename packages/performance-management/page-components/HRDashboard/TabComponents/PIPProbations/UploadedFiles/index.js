@@ -1,84 +1,47 @@
 import useGetColumns from '../../../../../common/Columns';
+import Filters from '../../../../../common/Filters';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
 import useListLogs from '../../../../../hooks/useListLogs';
 
 import styles from './styles.module.css';
+import useListFiles from './useListFiles';
 
 function UploadedFiles({
 	activeTab,
 	setItem = () => {},
 }) {
-	// const dataList = {
-	// 	1: [{
-	// 		name                : 'apple',
-	// 		id                  : '1',
-	// 		number_of_employees : 220,
-	// 		hr_manager_name     : 'apple_tree',
-	// 		update              : 'uploading',
-	// 		is_pip              : true,
-	// 		upload_date        	: new Date(),
-	// 	},
-	// 	{
-	// 		name                : 'mango',
-	// 		id                  : '2',
-	// 		number_of_employees : 220,
-	// 		hr_manager_name     : 'apple_tree',
-	// 		update              : 'uploaded',
-	// 		is_pip              : false,
-	// 		upload_date        	: new Date(),
-	// 	}],
-	// 	2: [{
-	// 		name                : 'lemon',
-	// 		id                  : '3',
-	// 		number_of_employees : 220,
-	// 		hr_manager_name     : 'apple_tree',
-	// 		update              : 'error',
-	// 		is_pip              : false,
-	// 		upload_date        	: new Date(),
-	// 	},
-	// 	{
-	// 		name                : 'carrot',
-	// 		id                  : '5',
-	// 		number_of_employees : 220,
-	// 		hr_manager_name     : 'apple_tree',
-	// 		update              : 'uploaded',
-	// 		is_pip              : true,
-	// 		upload_date        	: new Date(),
-	// 	}],
-	// };
-
 	const {
-		employeeData,
+		data:uploadedFilesData = {},
 		loading,
-		// params,
-		// setParams,
+		params,
+		setParams,
 		setPage,
-	} = useListLogs(true);
+	} = useListFiles(true);
 
-	const { list = [], pagination_data = {} } = employeeData;
-	const { page_limit, page, total_count } = pagination_data;
+	const { list = [], pagination_data = {} } = uploadedFilesData;
+	const { total_count } = pagination_data;
 
 	const columnsToShow = feedbackDataColumns.uploadedFiles;
 	const columns = useGetColumns({
 		columnsToShow,
 		activeTab,
 		setItem,
-		source: 'hr_dashboard',
+		source: 'uploaded_files',
 	});
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>No files are uploaded yet</div>
-			{/* <UserTableData
+			<Filters source="uploaded_files" setParams={setParams} params={params} />
+			<UserTableData
 				columns={columns}
 				loading={loading}
 				list={list}
-				pagination={page}
-				page_limit={page_limit}
+				pagination={params.Page}
+				page_limit={params.PageLimit}
 				setPagination={setPage}
 				total_count={total_count}
-			/> */}
+			/>
 		</div>
 	);
 }

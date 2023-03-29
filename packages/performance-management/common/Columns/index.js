@@ -1,5 +1,5 @@
 import { Tooltip, ButtonIcon, Pill, Button, cl } from '@cogoport/components';
-import { IcMArrowRight } from '@cogoport/icons-react';
+import { IcMDownload, IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty, getYear, getMonth, format, startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
@@ -55,6 +55,11 @@ const useGetColumns = ({
 		}
 	};
 
+	const openCSV = (url) => {
+		// eslint-disable-next-line no-undef
+		if (url) { window.open(url); }
+	};
+
 	const currentDate = new Date();
 	const currentMonth = getMonth(currentDate);
 	const currentYear = getYear(currentDate);
@@ -63,13 +68,13 @@ const useGetColumns = ({
 	const feedbackYear = currentMonth > 0 ? currentYear : currentYear - 1;
 
 	const columns = [{
-		Header   : <div className={styles.head}>REPORTEE NAME</div>,
+		Header   : <div className={styles.head}>{source === 'uploaded_files' ? 'FILE NAME' : 'REPORTEE NAME'}</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div
 					className={styles.container}
 				>
-					{startCase(item?.name)}
+					{source === 'uploaded_files' ? item?.file_name : startCase(item?.name)}
 				</div>
 			</div>
 		),
@@ -284,16 +289,13 @@ const useGetColumns = ({
 		key : 'user_details',
 	},
 	{
-		Header   : <div className={styles.head}>Action</div>,
+		Header   : <div className={styles.head}>ACTION</div>,
 		accessor : (item) => (
 			(!(source === 'manager_dashboard' && item?.log_type === 'pip') && (
 				<div className={styles.head_content}>
 					<Button
-						themeType={
-						(item?.log_type === 'pip') ? ('secondary') : ('primary')
-					}
+						themeType={item?.log_type === 'pip' ? 'secondary' : 'primary'}
 						onClick={() => addLog(item)}
-						// disabled={item?.final_decision}
 					>
 						{item?.log_type === 'probation' ? 'Update' : 'Log'}
 					</Button>
@@ -304,7 +306,7 @@ const useGetColumns = ({
 		key : 'action',
 	},
 	{
-		Header   : <div className={styles.head}>Status</div>,
+		Header   : <div className={styles.head}>STATUS</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<Pill
@@ -339,12 +341,12 @@ const useGetColumns = ({
 		key : 'review',
 	},
 	{
-		Header   : <div className={styles.head}>Start Date</div>,
+		Header   : <div className={styles.head}>{source === 'uploaded_files' ? 'UPLOAD DATE' : 'START DATE'}</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div>
-					{item?.upload_date
-						? format(item?.upload_date, 'dd-MMM-yyyy')
+					{source === 'uploaded_files'
+						? format(item?.created_at, 'dd-MMM-yyyy')
 						: format(item?.start_date, 'dd-MMM-yyyy')}
 
 				</div>
@@ -354,7 +356,7 @@ const useGetColumns = ({
 		key : 'start_date',
 	},
 	{
-		Header   : <div className={styles.head}>End Date</div>,
+		Header   : <div className={styles.head}>END DATE</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div>{format(item?.end_date, 'dd-MMM-yyyy')}</div>
@@ -363,44 +365,46 @@ const useGetColumns = ({
 		id  : 'end_date',
 		key : 'end_date',
 	},
-	// {
-	// 	Header   : <div className={styles.head}>Decision</div>,
-	// 	accessor : (item) => (
-	// 		<div className={styles.head_content}>
-	// 			{item?.final_decision && (
-	// 				<Pill
-	// 					color={updateColorMapping[item?.final_decision] ? (updateColorMapping[item?.update]) : 'blue'}
-	// 				>
-	// 					{startCase(item?.final_decision)}
-
-	// 				</Pill>
-	// 			)}
-	// 		</div>
-	// 	),
-	// 	id  : 'update',
-	// 	key : 'update',
-	// },
 	{
-		Header   : <div className={styles.head}>Upload Status</div>,
+		Header   : <div className={styles.head}>CSV TYPE</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{`${item?.log_type} CSV`}</div>
+				<div>{`${startCase(item?.csv_type)}`}</div>
 			</div>
 		),
 		id  : 'upload_type',
 		key : 'upload_type',
 	},
 	{
-		Header   : <div className={styles.head}>NUMBER OF EMPLOYEES</div>,
+		Header   : <div className={styles.head}>EMPLOYEES AFFECTED</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				{item?.number_of_emplyees || '-'}
+				{item?.employee_count || '-'}
 			</div>
 		),
 		id  : 'number_of_employees',
 		key : 'number_of_employees',
 	},
-
+	{
+		Header   : <div className={styles.head}>UPLOADED BY</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				{startCase(item?.uploaded_by)}
+			</div>
+		),
+		id  : 'uploaded_by',
+		key : 'uploaded_by',
+	},
+	{
+		Header   : <div className={styles.head} />,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<ButtonIcon icon={<IcMDownload />} onClick={() => openCSV(item.csv_url)} />
+			</div>
+		),
+		id  : 'download_csv',
+		key : 'download_csv',
+	},
 	];
 
 	const finalColumns = [];

@@ -44,7 +44,7 @@ function PipUloadModal({ modal, setModal = () => {}, source = 'pip_probation' })
 		try {
 			await trigger({
 				data: {
-					Url      : files.uploadedCSVFile,
+					CsvUrl   : files.uploadedCSVFile,
 					Month    : type === 'normalization' ? month : undefined,
 					Year     : type === 'normalization' ? year.toString() : undefined,
 					CsvType  : type === 'normalization' ? 'approve_ratings' : type,

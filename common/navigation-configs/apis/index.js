@@ -119,7 +119,7 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
-	performance_management,
+	...performance_management,
 };
 
 export default apis;

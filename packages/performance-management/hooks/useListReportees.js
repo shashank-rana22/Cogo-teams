@@ -9,10 +9,11 @@ const useListReportees = ({
 }) => {
 	const { feedbackMonth, feedbackYear } = getDefaultFeedbackMonth();
 	const [params, setParams] = useState({
-		Page      : 1,
-		PageLimit : 20,
-		Year      : feedbackYear,
-		Month     : feedbackMonth,
+		Page                 : 1,
+		PageLimit            : 20,
+		FeedbackDataRequired : true,
+		Year                 : feedbackYear,
+		Month                : feedbackMonth,
 	});
 
 	const [{ data: feedbackData = {}, loading = false }, trigger] = useIrisRequest({

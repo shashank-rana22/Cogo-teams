@@ -3,3 +3,7 @@
 	cursor: pointer;
 	border-radius: 4px;
 }
+
+.popover_item:hover {
+	background: #bdbdbd;
+}

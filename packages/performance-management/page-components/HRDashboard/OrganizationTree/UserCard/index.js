@@ -11,7 +11,7 @@ const getAvatarProps = (userInfo) => {
 		avatarProps.src = userInfo.image_url;
 	}
 
-	avatarProps.personName = userInfo?.name;
+	avatarProps.personName = (userInfo?.name || '').split(' ').splice(0, 2).join(' ');
 
 	return avatarProps;
 };
@@ -22,7 +22,6 @@ function UserCard({
 	setParams = () => {},
 	clickable = false,
 	enlarged = false,
-	isLastLevel = false,
 	refetchTreeParams,
 }) {
 	const setNewUser = () => {
@@ -88,7 +87,14 @@ function UserCard({
 						<strong>{startCase(user?.name)}</strong>
 
 						<div className={styles.id_designation}>
-							<Tooltip placement="bottom" content={startCase(user.designation || '')}>
+							<Tooltip
+								placement="bottom"
+								content={(
+									<div style={{ wordBreak: 'break-word' }}>
+										{startCase(user.designation || '')}
+									</div>
+								)}
+							>
 								<div className={styles.designation}>{startCase(user.designation || '')}</div>
 							</Tooltip>
 
