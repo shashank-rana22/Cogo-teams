@@ -1,7 +1,7 @@
 import { usePublicRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-import { renderFolderName } from '../constants/MAIL_CONSTANT';
+import { folderOptions } from '../constants/MAIL_CONSTANT';
 
 function useListMail({ activeSelect, senderMail }) {
 	const [listData, setListData] = useState({ value: [], isLastPage: false });
@@ -18,14 +18,14 @@ function useListMail({ activeSelect, senderMail }) {
 			const res = await trigger({
 				params: {
 					email_address : senderMail,
-					foldername    : renderFolderName[activeSelect],
+					foldername    : folderOptions[activeSelect],
 					page          : pagination,
 					page_limit    : PAGE_LIMIT,
 				},
 			});
 
 			if (res.data) {
-				const { value = [] } = res?.data || {};
+				const { value = [] } = res.data || {};
 				const isLastPage = (value.length || 0) < PAGE_LIMIT;
 				setListData((p) => ({ value: [...(p.value || []), ...(value || [])], isLastPage }));
 			}

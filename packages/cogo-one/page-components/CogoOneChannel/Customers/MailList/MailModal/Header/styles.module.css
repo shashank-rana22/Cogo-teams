@@ -75,7 +75,13 @@
 	width: 22px;
 	height: 22px;
 	margin-top: 4px;
-	fill: #221f20 !important;
+	fill: #221f20;
+	transition: 0.4s;
+
+	&:hover {
+		transition: 0.4s;
+		transform: scale(1.25);
+	}
 }
 
 .right_top_header {

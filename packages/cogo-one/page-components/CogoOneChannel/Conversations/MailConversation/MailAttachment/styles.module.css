@@ -78,8 +78,7 @@
 		.ui_modal_body_container {
 			max-height: none !important;
 			padding: 8px !important;
-			border-top: none !important;
-			border-bottom: none !important;
+			border: none !important;
 		}
 
 		.ui_modal_header_container {

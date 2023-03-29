@@ -1,6 +1,6 @@
 import { IcMDocument, IcMSend } from '@cogoport/icons-react';
 
-export const Gmailoptions = [
+export const gmailoptions = [
 	{
 		label : 'Inbox',
 		value : 'inbox',

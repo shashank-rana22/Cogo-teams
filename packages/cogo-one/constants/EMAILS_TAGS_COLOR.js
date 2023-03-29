@@ -1,11 +1,11 @@
 const EMAIL_TAGS_COLOR = {
 	recipient: {
-		mainDiv  : '#FEF199',
+		bgColor  : '#FEF199',
 		subDiv   : '#FFFCE6',
 		crossDiv : '#FEF199',
 	},
 	cc_bcc: {
-		mainDiv  : '#CFEAED',
+		bgColor  : '#CFEAED',
 		subDiv   : '#F3FAFA',
 		crossDiv : '#CFEAED',
 	},

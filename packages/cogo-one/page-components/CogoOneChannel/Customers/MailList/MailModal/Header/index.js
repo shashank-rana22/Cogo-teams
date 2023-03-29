@@ -6,7 +6,6 @@ import CustomFileUploader from '../../../../../../common/CustomFileUploader';
 import styles from './styles.module.css';
 
 function RenderHeader({
-	createLoading = false,
 	replyLoading = false,
 	handleSend = () => {},
 	uploading,
@@ -50,7 +49,7 @@ function RenderHeader({
 					</div>
 				</div>
 				<div
-					className={cl`${(createLoading || replyLoading) ? styles.disabled_button : ''} ${styles.send_icon}`}
+					className={cl`${replyLoading ? styles.disabled_button : ''} ${styles.send_icon}`}
 				>
 					<IcMSend
 						onClick={handleSend}

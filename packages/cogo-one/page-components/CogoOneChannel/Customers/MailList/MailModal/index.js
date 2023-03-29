@@ -4,7 +4,6 @@ import { useState, useRef } from 'react';
 
 import MailRecipientType from '../../../../../common/MailRecipientType';
 import { TOOLBARCONFIG } from '../../../../../constants';
-import { decode, buttonOptions } from '../../../../../constants/MAIL_CONSTANT';
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
 import mailFunction from '../../../../../utils/mailFunctions';
 
@@ -13,8 +12,6 @@ import styles from './styles.module.css';
 
 function MailModal({
 	mailProps,
-	createMail = () => {},
-	createMailLoading = false,
 	userId = '',
 	attachments = [],
 	setAttachments = () => {},
@@ -40,8 +37,6 @@ function MailModal({
 	const [errorValue, setErrorValue] = useState('');
 	const [uploading, setUploading] = useState(false);
 
-	const checkType = buttonOptions.includes(buttonType);
-
 	const uploaderRef = useRef(null);
 
 	const {
@@ -52,6 +47,7 @@ function MailModal({
 		handleError = () => {},
 		handleClose = () => {},
 		handleAttachmentDelete = () => {},
+		decode = () => {},
 	} = mailFunction({
 		...mailProps,
 		type,
@@ -69,37 +65,23 @@ function MailModal({
 	});
 
 	const handleSend = () => {
-		let payload;
 		const isEmptyMail = getFormatedEmailBody({ emailState });
 		if (isEmptyMail || !emailState?.subject) {
 			Toast.error('Both Subject and Body are Requied');
 			return;
 		}
-		if (checkType) {
-			payload = {
-				sender       : emailAddress,
-				toUserEmail  : recipientArray,
-				ccrecipients : bccArray,
-				subject      : emailState?.subject,
-				content      : emailState?.body,
-				attachments,
-				userId,
-				msgId        : activeMail?.id,
+		const payload = {
+			sender       : emailAddress,
+			toUserEmail  : recipientArray,
+			ccrecipients : bccArray,
+			subject      : emailState?.subject,
+			content      : emailState?.body,
+			attachments,
+			userId,
+			msgId        : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 
-			};
-			replyMailApi(payload);
-		} else {
-			payload = {
-				attachments,
-				ccrecipients : bccArray,
-				content      : emailState?.body,
-				sender       : emailAddress,
-				subject      : emailState?.subject,
-				toUserEmail  : recipientArray,
-				userId,
-			};
-			createMail(payload);
-		}
+		};
+		replyMailApi(payload);
 	};
 
 	return (
@@ -114,7 +96,6 @@ function MailModal({
 		>
 			<Modal.Header title={(
 				<RenderHeader
-					createLoading={createMailLoading}
 					replyLoading={replyLoading}
 					handleSend={handleSend}
 					setUploading={setUploading}

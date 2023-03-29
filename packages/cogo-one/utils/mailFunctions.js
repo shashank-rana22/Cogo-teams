@@ -1,4 +1,4 @@
-import { isInList, validateEmail } from '../constants/MAIL_CONSTANT';
+import getFileAttributes from './getFileAttributes';
 
 function mailFunction({
 	type = '',
@@ -20,6 +20,13 @@ function mailFunction({
 	attachments = [],
 	uploaderRef,
 }) {
+	const isInList = (email, data) => data?.includes(email);
+
+	const validateEmail = (emailInput) => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return emailRegex.test(emailInput);
+	};
+
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter') {
 			event.preventDefault();
@@ -73,7 +80,7 @@ function mailFunction({
 		}
 	};
 
-	const handleDelete = (val, emailType) => {
+	const handleDelete = ({ val, emailType }) => {
 		if (emailType === 'recipient') {
 			setRecipientArray((p) => p.filter((data) => data !== val));
 		} else {
@@ -110,6 +117,13 @@ function mailFunction({
 		uploaderRef?.current?.externalHandleDelete(filteredAttachments);
 	};
 
+	const decode = (data = '') => {
+		const val = decodeURI(data).split('/');
+		const fileName = val[val.length - 1];
+		const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
+		return { uploadedFileName, fileIcon };
+	};
+
 	return {
 		handleKeyPress,
 		handleEdit,
@@ -118,6 +132,7 @@ function mailFunction({
 		handleError,
 		handleClose,
 		handleAttachmentDelete,
+		decode,
 	};
 }
 

@@ -3,7 +3,6 @@ import { IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useReplyMail from '../../../hooks/useReplyMail';
-import useSendMail from '../../../hooks/useSendMail';
 
 import InactiveModal from './InactiveModal';
 import MailList from './MailList';
@@ -48,14 +47,9 @@ function Customers({
 	modalType = {},
 	mailProps = {},
 }) {
-	const { emailAddress, showMailModal, setShowMailModal } = mailProps;
+	const { emailAddress, showMailModal, setShowMailModal, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
 	const [attachments, setAttachments] = useState([]);
-
-	const {
-		createMail = () => {},
-		createMailLoading = false,
-	} = useSendMail(mailProps);
 
 	const {
 		replyMailApi = () => {},
@@ -119,6 +113,11 @@ function Customers({
 		message : { ...messageProps },
 		voice   : { ...voiceProps },
 		mail    : { ...emailprops },
+	};
+
+	const handleOpenModal = () => {
+		setButtonType('send_mail');
+		setShowMailModal(true);
 	};
 
 	return (
@@ -210,7 +209,7 @@ function Customers({
 
 							<div className={`${styles.action} ${styles.mail_icon}`}>
 								<img
-									onClick={() => setShowMailModal(true)}
+									onClick={handleOpenModal}
 									src="https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg"
 									alt="gmail icon"
 									role="presentation"
@@ -230,8 +229,6 @@ function Customers({
 			{showMailModal && (
 				<MailModal
 					mailProps={mailProps}
-					createMail={createMail}
-					createMailLoading={createMailLoading}
 					userId={userId}
 					attachments={attachments}
 					setAttachments={setAttachments}

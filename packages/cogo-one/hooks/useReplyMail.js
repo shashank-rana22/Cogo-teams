@@ -16,6 +16,7 @@ function useReplyMail(mailProps) {
 		reply     : 'reply_mail',
 		reply_all : 'reply_all',
 		forward   : 'forward_mail',
+		send_mail : 'send_mail',
 	};
 	const [{ loading }, trigger] = usePublicRequest({
 		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/${apiName[buttonType]}`,

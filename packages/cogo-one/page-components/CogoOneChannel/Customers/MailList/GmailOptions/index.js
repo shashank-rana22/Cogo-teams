@@ -1,6 +1,6 @@
 import { IcMArrowRight } from '@cogoport/icons-react';
 
-import { Gmailoptions } from '../../../../../configurations/mail-configuration';
+import { gmailoptions } from '../../../../../configurations/mail-configuration';
 
 import styles from './styles.module.css';
 
@@ -9,7 +9,7 @@ function GmailOption({ handleClick = () => {} }) {
 		<>
 			<div className={styles.title}>Outlook</div>
 			<div className={styles.gmail_container}>
-				{Gmailoptions.map(({ label, icon, value }) => (
+				{gmailoptions.map(({ label, icon, value }) => (
 					<div
 						className={styles.content}
 						onClick={() => handleClick(value)}

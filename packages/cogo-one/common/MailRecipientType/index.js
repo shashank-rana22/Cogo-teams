@@ -29,7 +29,7 @@ function MailRecipientType({
 			))}
 
 			{(showControl && (type === inputType)) && (
-				<div className={styles.tag_and_errorcontainer}>
+				<div className={styles.tag_and_error_container}>
 					<div className={styles.tag_container}>
 						<input
 							size="sm"
@@ -40,7 +40,7 @@ function MailRecipientType({
 							onKeyPress={(e) => handleKeyPress(e)}
 							className={cl`
 										${errorValue ? styles.error_input_container : styles.input_container}`}
-							id="inputId"
+							id="input_id"
 						/>
 						<div className={styles.cross_icon}>
 							<IcMCross onClick={() => handleError(type)} />

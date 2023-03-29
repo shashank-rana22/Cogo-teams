@@ -1,7 +1,6 @@
 .tags_div {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
 	align-items: center;
 	margin-left: 8px;
 
@@ -17,7 +16,7 @@
 	display: flex;
 }
 
-.tag_and_errorcontainer {
+.tag_and_error_container {
 	display: flex;
 	flex-direction: column-reverse;
 	margin-top: 4px;

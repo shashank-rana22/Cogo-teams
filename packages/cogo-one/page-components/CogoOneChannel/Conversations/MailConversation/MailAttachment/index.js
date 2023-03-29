@@ -3,6 +3,8 @@ import { IcMDocument, IcMDownload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useGetMailAttachment from '../../../../../hooks/useGetMailAttachment';
+import saveByteArray from '../../../../../utils/mailAttachment';
+import base64ToArrayBuffer from '../../../../../utils/mailAttachmentToBytes';
 
 import styles from './styles.module.css';
 
@@ -14,29 +16,8 @@ function MailAttachments({ activeMail, emailAddress }) {
 	const [showPreview, setShowPreview] = useState(null);
 	const externalAttachements = allAttachements.filter((att) => !att.isInline);
 
-	function base64ToArrayBuffer(base64) {
-		const binaryString = window.atob(base64);
-		const binaryLen = binaryString.length;
-		const bytes = new Uint8Array(binaryLen);
-		for (let i = 0; i < binaryLen;) {
-			const ascii = binaryString.charCodeAt(i);
-			bytes[i] = ascii;
-			i += 1;
-		}
-		return bytes;
-	}
-
-	function saveByteArray(data, byte) {
-		const blob = new Blob([byte], { type: data.contentType });
-		const link = document.createElement('a');
-		link.href = window.URL.createObjectURL(blob);
-		const fileName = data?.name;
-		link.download = fileName;
-		link.click();
-	}
-
 	const handleDownload = (data) => {
-		const sampleArr = base64ToArrayBuffer(data.contentBytes);
+		const sampleArr = base64ToArrayBuffer(data?.contentBytes);
 		saveByteArray(data, sampleArr);
 	};
 
@@ -92,7 +73,7 @@ function MailAttachments({ activeMail, emailAddress }) {
 				</div>
 
 			)}
-			{showPreview ? (
+			{showPreview && (
 				<Modal
 					show={showPreview}
 					onClose={() => setShowPreview(null)}
@@ -112,7 +93,7 @@ function MailAttachments({ activeMail, emailAddress }) {
 					</Modal.Body>
 
 				</Modal>
-			) : null}
+			)}
 		</div>
 	);
 }

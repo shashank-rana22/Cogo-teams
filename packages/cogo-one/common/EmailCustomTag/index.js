@@ -6,18 +6,18 @@ import styles from './styles.module.css';
 
 function CustomInput({ email = '', handleDelete = () => {}, type = '' }) {
 	const {
-		mainDiv,
+		bgColor,
 		subDiv,
 		crossDiv,
 	} = EMAIL_TAGS_COLOR[type];
 
 	return (
 		<div className={styles.email_tag_container} key={email}>
-			<div className={styles.input_container} style={{ background: mainDiv }}>
-				<div className={styles.input_value}>{email}</div>
+			<div className={styles.input_container} style={{ background: bgColor }}>
+				{email}
 			</div>
 			<div className={styles.cross_icon} style={{ background: subDiv }}>
-				<IcMCross onClick={() => handleDelete(email, type)} styles={{ fill: crossDiv }} />
+				<IcMCross onClick={() => handleDelete({ val: email, emailType: type })} styles={{ fill: crossDiv }} />
 			</div>
 		</div>
 	);
