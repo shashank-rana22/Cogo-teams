@@ -11,11 +11,11 @@ function UpdatePip({
 	setItem = () => {},
 }) {
 	const [comments, setComments] = useState('');
-	const [value, onChange] = useState('extended');
+	const [value, onChange] = useState('confirmed');
 
 	const radioList = [
-		{ name: 'R1', value: 'extended', label: 'Extend' },
 		{ name: 'R2', value: 'confirmed', label: 'Confirm' },
+		{ name: 'R1', value: 'exited', label: 'Exit' },
 	];
 
 	useEffect(() => {
@@ -30,7 +30,7 @@ function UpdatePip({
 			final_decision : value || undefined,
 			is_reviewed    : false,
 		});
-	}, [comments, value]);
+	}, [comments, value, setItem, setDisableNext, item]);
 
 	return (
 		<div className={styles.update_container}>
@@ -54,31 +54,8 @@ function UpdatePip({
 				onChange={onChange}
 			/>
 
-			{(value === 'extended') && (
+			{(value === 'exited') && (
 				<div className={styles.dates}>
-					{/* <div className={styles.lable}>Extend End date</div>
-					<Datepicker
-						placeholder="Enter Date"
-						showTimeSelect
-						dateFormat="dd/MMM/yyyy"
-						name="updateEndDate"
-						onChange={(val) => clickedEndDate(val)}
-						value={endDate}
-					/>
-
-					<Checkbox
-						className={styles.checkbox}
-						label=" +1 Month From Now"
-						checked={endCheck}
-						onChange={() => {
-							setEndCheck(!endCheck);
-							if (endCheck) {
-								setEndDate();
-							} else {
-								setEndDate(date.setMonth(getMonth(date) + 1));
-							}
-						}}
-					/> */}
 					<div className={styles.lable}>Reason for Extention</div>
 
 					<Textarea
@@ -89,15 +66,6 @@ function UpdatePip({
 					/>
 				</div>
 			)}
-			{/* {show && value === 'R2' && (
-				<Checkbox
-					label="Check this box to confirm that Ankur Verma has cleared their probation."
-					value={decision}
-					onChange={() => {
-						if (decision) { setDecision('confirm'); } else { setDecision(''); }
-					}}
-				/>
-			)} */}
 		</div>
 	);
 }

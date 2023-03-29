@@ -1,4 +1,6 @@
 .name_input {
+    display: flex;
+    justify-content: space-between;
     div{
         font-size: 12px;
         color: #BDBDBD;

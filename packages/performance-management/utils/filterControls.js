@@ -16,7 +16,7 @@ const useGetControls = ({ name = 'manager' }) => {
 			label       : 'Rating',
 			type        : 'select',
 			isClearable : true,
-			placeholder : 'Select..',
+			placeholder : 'Select...',
 			options     : [
 				{ label: '1', value: 1 },
 				{ label: '2', value: 2 },

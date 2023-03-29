@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../../../common/EmptyState';
 import UserProfile from '../../../../../../../common/UserStats/UserProfile';
+import useGetFeedbackPerformanceStats from '../../../../../../../hooks/useGetFeedbackPerformanceStats';
 
 import Create from './CreatePip';
 import styles from './styles.module.css';
@@ -15,15 +16,16 @@ function DecisionModal({
 	setDisableNext = () => {},
 	type,
 }) {
-	// const {
-	// 	performanceStatsList = [],
-	// } = useGetFeedbackPerformanceStats({ userId, params });
+	const {
+		performanceStatsList = [],
+	} = useGetFeedbackPerformanceStats({ userId: item?.user_id });
 
-	const lineChartlist = [{ x: 'April', y: '3' }];
+	const lineChartlist = [];
 
-	// (performanceStatsList || []).forEach((stat) => {
-	// 	const { month = '', rating = '' } = stat || {};
-	// });
+	(performanceStatsList || []).forEach((stat) => {
+		const { month = '', rating = '' } = stat || {};
+		lineChartlist.push({ x: month, y: rating });
+	});
 
 	const lineChartData = [{ id: 'x', data: lineChartlist }];
 	return (

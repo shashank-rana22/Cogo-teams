@@ -16,9 +16,9 @@ function LogModal({
 }) {
 	const [activeLogTab, setActiveLogTab] = useState('new');
 
-	// useEffect(() => {
-	// 	setActiveLogTab(item?.final_decision ? 'all' : 'new');
-	// }, [item]);
+	useEffect(() => {
+		setActiveLogTab(item?.final_decision ? 'all' : 'new');
+	}, [item]);
 
 	return (
 		<div>

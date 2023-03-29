@@ -16,14 +16,6 @@ const statusColorMapping = {
 	young     : 'yellow',
 };
 
-// const updateColorMapping = {
-// 	confirmed : 'green',
-// 	exited    : 'red',
-// 	uploaded  : 'green',
-// 	error     : 'red',
-// 	extended  : 'yellow',
-// };
-
 const useGetColumns = ({
 	getTeamFeedbackList = () => {},
 	source = 'hr_dashboard',
@@ -217,9 +209,6 @@ const useGetColumns = ({
 		accessor : (item) => {
 			const { tags } = item;
 			const len = 3 - (tags || []).length;
-			console.log('tags', tags);
-
-			console.log('len', len);
 
 			return (
 				(item?.log_type === 'pip' && (
@@ -340,6 +329,7 @@ const useGetColumns = ({
 						setItem(item);
 						setModal('review');
 					}}
+					disabled={!item?.final_decision}
 				>
 					Review
 				</Button>

@@ -18,8 +18,6 @@ function ManagerDashboard() {
 		router.push('/performance-management/manager-dashboard/feedback-management');
 	};
 
-	console.log('UserId');
-
 	return (
 		<div>
 			<div className={styles.header}>

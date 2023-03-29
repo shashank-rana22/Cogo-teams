@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import { isEmpty, format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -12,21 +13,26 @@ function AllLogs({ item = {} }) {
 
 	useEffect(() => {
 		setParams({ LogID: item?.id });
-	}, [item?.id]);
-
-	console.log('list::', list);
+	}, [item, setParams]);
 
 	return (
 		<div className={styles.main_container}>
-			{isEmpty(list) ? (
-				<div className={styles.empty}>
-					<EmptyState
-						flexDirection="column"
-						emptyText="No Logs Found"
-						textSize="16px"
-					/>
+			{loading && (
+				<div className={styles.sub_container}>
+					<div className={styles.flex_container}>
+						<div className={styles.circle} />
+						<Placeholder width="80px" />
+					</div>
+
+					<div className={styles.content}>
+						<Placeholder width="140px" />
+						<Placeholder width="80px" />
+						<Placeholder width="120px" />
+						<Placeholder width="120px" />
+					</div>
 				</div>
-			) : list?.map((object) => {
+			)}
+			{!loading && list?.map((object) => {
 				if (!object) {
 					return (
 						<div className={styles.empty}>

@@ -8,6 +8,7 @@ import UserTableData from '../../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../../constants/feedback-data-columns';
 import useCreateLog from '../../../../../../hooks/useCreateLog';
 import useListReportees from '../../../../../../hooks/useListReportees';
+import useGetControls from '../../../../../../utils/filterControls';
 import DecisionModal from '../UpdateModal/DecisionModal';
 
 import styles from './styles.module.css';
@@ -23,14 +24,15 @@ function CreateModal({
 	setRefetchList = () => {},
 }) {
 	const [searchValue, setSearchValue] = useState('');
+	const [managerName, setManagerName] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [status, setStatus] = useState('');
 
 	const {
-		params,
 		feedbackData,
 		loading = false,
 		setPage,
+		params,
 	} = useListReportees({
 		searchValue: query,
 	});
@@ -40,10 +42,9 @@ function CreateModal({
 	const { list: newTeamList = [], pagination_data = {} } = feedbackData;
 	const { total_count = '' } = pagination_data;
 
-	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
-	useEffect(() => setItem({}), [setItem]);
+	useEffect(() => debounceQuery(searchValue, managerName), [debounceQuery, searchValue, managerName]);
 
-	console.log('source::', source);
+	const managerControls = useGetControls({ name: 'manger_name' });
 
 	const columnsToShow = [
 		...(source === 'log_modal' ? feedbackDataColumns.logModal : feedbackDataColumns.manualFeedbacks)];
@@ -63,7 +64,7 @@ function CreateModal({
 			if (isEmpty(item)) {
 				return (
 					<>
-						<div className={styles.name_input}>
+						<div>
 							<div>Search by Name/COGO-ID...</div>
 							<Input
 								placeholder="Type Here..."
@@ -71,13 +72,22 @@ function CreateModal({
 								onChange={setSearchValue}
 							/>
 						</div>
+						<div>
+							<div>Search by Name/COGO-ID...</div>
+							<Input
+								{...managerControls}
+								onChange={setManagerName}
+								style={{ marginRight: '8px' }}
+							/>
+
+						</div>
 
 						<UserTableData
 							columns={columns}
 							list={newTeamList}
 							loading={loading}
 							pagination={params.Page}
-							page_limit={params.page_limit}
+							page_limit={params.PageLimit}
 							total_count={total_count}
 							setPagination={setPage}
 						/>
@@ -189,7 +199,7 @@ function CreateModal({
 						list={newTeamList}
 						loading={loading}
 						pagination={params.Page}
-						page_limit={params.page_limit}
+						page_limit={params.PageLimit}
 						total_count={total_count}
 						setPagination={setPage}
 					/>
