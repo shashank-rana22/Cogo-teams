@@ -70,7 +70,7 @@
 
 .card_container {
 	padding: 10px 12px;
-	margin: 4px 1px  4px 0;
+	margin: 4px 1px;
 }
 
 .card_container:hover {
@@ -255,7 +255,6 @@
 
 .important_styles {
 	position: relative;
-	border-left: 3px solid #ef0a1a;
 	border-radius: 4px;
 	box-shadow: rgb(0 0 0 / 5%) 0 0 0 1px;
 }
