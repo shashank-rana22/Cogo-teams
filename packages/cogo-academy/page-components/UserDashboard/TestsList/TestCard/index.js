@@ -70,7 +70,11 @@ function TestCard({ test_card }) {
 				</div>
 
 				{status === 'published' ? (
-					<span onClick={() => handleGoToResults(id)} role="presentation" className={styles.check_results}>
+					<span
+						onClick={() => handleGoToResults(id)}
+						role="presentation"
+						className={`${styles.check_results} ${styles.arrow}`}
+					>
 						Check Results
 						{' '}
 						<span className={styles.icon}><IcMArrowRight /></span>
