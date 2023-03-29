@@ -32,7 +32,7 @@ const DISLIKE_MAPPING = {
 	disliked : <IcCSad />,
 };
 
-function Answer({ topic = {}, question }) {
+function Answer({ topic = {}, question, setQuestion }) {
 	const {
 		profile: { partner = '' },
 	} = useSelector((state) => state);
@@ -169,6 +169,12 @@ function Answer({ topic = {}, question }) {
 				)}
 			</div>
 
+			<RelatedQuestion
+				query_name={answerData?.query_name}
+				question_abstract={answerData?.question_abstract}
+				setQuestion={setQuestion}
+			/>
+
 			<div className={styles.space} />
 
 			<div className={styles.information_helpful}>
@@ -224,11 +230,6 @@ function Answer({ topic = {}, question }) {
 					Open in Help Center
 					<IcMRedo style={{ marginLeft: 8 }} />
 				</div>
-
-				<RelatedQuestion
-					query_name={answerData?.query_name}
-					question_abstract={answerData?.question_abstract}
-				/>
 
 			</div>
 		</div>

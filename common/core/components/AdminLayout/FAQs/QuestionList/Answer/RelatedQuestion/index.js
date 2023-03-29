@@ -1,35 +1,26 @@
-import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import useQuestionList from '../../useQuestionList';
 
 import styles from './styles.module.css';
 
-function RelatedQuestion({ query_name = '', question_abstract = '' }) {
-	const router = useRouter();
-	const { data } = useQuestionList({ query_name });
-
-	const handleClick = (id) => {
-		router.push(
-			`/learning/faq/answer?id=${id}`,
-			`/learning/faq/answer?id=${id}`,
-		);
-	};
+function RelatedQuestion({ query_name = '', question_abstract = '', setQuestion }) {
+	const { list } = useQuestionList({ query_name });
 
 	return (
-		<div style={{ paddingTop: '1.2%' }}>
-			{(data?.list || []).length > 1 ? (
+		<div style={{ paddingTop: '20px' }}>
+			{(list || []).length > 1 ? (
 				<span className={styles.relatedquestion}>Related Questions</span>
 			) : null}
 			<div>
 
-				{(data?.list || []).map((question) => (
+				{(list || []).map((question) => (
 					<div className={styles.title}>
 						{(question?.question_abstract !== question_abstract) ? (
 							<div
 								role="presentation"
 								className={styles.relatedquestion_clickable}
-								onClick={() => handleClick(question?.id)}
+								onClick={() => setQuestion(question)}
 							>
 								Q.
 								{' '}
