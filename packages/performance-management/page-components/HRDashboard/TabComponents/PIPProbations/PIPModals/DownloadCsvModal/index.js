@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function DownloadCsvModal({ modal = '', setModal = () => {} }) {
 	const [{ loading = false }, trigger] = useIrisRequest({
 		url    : 'get_iris_download_log_csv',
-		method : 'post',
+		method : 'get',
 	}, { manual: true });
 
 	const downloadLogCSV = async (type) => {
