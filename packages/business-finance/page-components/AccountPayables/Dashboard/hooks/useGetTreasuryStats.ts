@@ -34,8 +34,8 @@ const useGetTreasuryStats = ({ activeTab }:FilterProps) => {
 		try {
 			await trigger({
 				params: {
-					entity   : activeTab,
-					fromDate : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
+					entityCode : activeTab,
+					fromDate   : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
 						: undefined,
 					toDate: endDate
 						? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,

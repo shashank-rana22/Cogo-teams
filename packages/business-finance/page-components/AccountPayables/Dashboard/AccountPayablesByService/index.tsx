@@ -21,8 +21,8 @@ function AccountPayablesByService({ activeTab }:ItemProps) {
 	};
 	const { data = [], loading } = useGetPayablesByService({ activeTab });
 	const oceanAmount = data?.[0]?.amount + data?.[1]?.amount + data?.[2]?.amount + data?.[3]?.amount;
-	const airAmount = data?.[2]?.amount + data?.[3]?.amount;
-	const surfaceAmount = data?.[4]?.amount + data?.[5]?.amount;
+	const airAmount = data?.[4]?.amount + data?.[5]?.amount;
+	const surfaceAmount = data?.[6]?.amount + data?.[7]?.amount;
 
 	const amountBoxData = () => {
 		if (activeBox === 'ocean') {

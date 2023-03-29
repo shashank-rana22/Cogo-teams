@@ -14,7 +14,7 @@ import { timeFrameControls } from './timeFrameControls';
 
 const options = [
 	{ label: 'SO2 upload', value: 'so2Upload' },
-	{ label: ' COE approved', value: ' approved' },
+	{ label: 'COE approved', value: 'approved' },
 	{ label: 'PayRun creation', value: 'payrunCreated' },
 	{ label: 'Bank allocation', value: 'bankAllocated' },
 	{ label: 'First UTR Upload', value: 'firstUtrUpload' },
@@ -51,7 +51,6 @@ function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
 			hours,
 		},
 	];
-	console.log(list, 'list');
 
 	return (
 		<div className={styles.container}>
@@ -110,6 +109,7 @@ function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
 						size="md"
 						themeType="secondary"
 						style={{ marginTop: '6px' }}
+						role="presentation"
 					>
 						Apply
 
