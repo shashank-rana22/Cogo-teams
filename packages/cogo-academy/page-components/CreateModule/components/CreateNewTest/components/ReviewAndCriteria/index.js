@@ -32,7 +32,8 @@ function ReviewAndCriteria(props) {
 
 	useEffect(() => {
 		setValue('guidelines', data?.guidelines?.map((guideline) => ({ instruction: guideline })));
-	}, [data, setValue]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data]);
 
 	const [showModal, setShowModal] = useState(false);
 
