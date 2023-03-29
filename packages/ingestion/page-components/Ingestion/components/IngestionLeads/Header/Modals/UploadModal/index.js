@@ -1,4 +1,4 @@
-import { Modal, Button, FileSelect } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { IcMUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -15,6 +15,7 @@ function UploadModal({ setShow = () => {}, show = '', setIngestionData = () => {
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 
 	const onChoose = (event) => {
+		setShow('');
 		// setIngestionData({
 		// 	...ingestionData,
 		// 	finalModalHeading: input,
@@ -29,12 +30,12 @@ function UploadModal({ setShow = () => {}, show = '', setIngestionData = () => {
 	};
 
 	const FINAL_HEADING = {
-		ie    : 'Upload Importer/Exporter CSV',
-		cp    : ingestionData?.finalModalHeading,
-		leads : ingestionData?.finalModalHeading,
+		ie   : 'Upload Importer/Exporter CSV',
+		cp   : ingestionData?.finalModalHeading,
+		lead : ingestionData?.finalModalHeading,
 	};
 
-	console.log('ingestion data finalModal:', ingestionData?.finalModalHeading);
+	console.log('ingestion data finalModal:', ingestionData);
 	return (
 		<Modal size="md" show={show === 'uploadModal'} onClose={onClose} placement="center">
 			<Modal.Header title={(
@@ -90,8 +91,8 @@ function UploadModal({ setShow = () => {}, show = '', setIngestionData = () => {
 					themeType="secondary"
 					style={{ marginRight: '8px' }}
 					onClick={() => {
-						setShow('providerSelect');
-						reset();
+						setShow('orgDetails');
+						// reset();
 					}}
 				>
 					Back

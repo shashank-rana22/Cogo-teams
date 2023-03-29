@@ -43,8 +43,30 @@ const controls = [
 		placeholder : 'Type Here...',
 		options     : PARTNER_OPTIONS,
 		isClearable : true,
-		rules       : { required: 'Partner is Required' },
+		// rules       : { required: 'Partner is Required' },
 
+	},
+	{
+		name           : 'agent',
+		label          : 'Agent',
+		type           : 'asyncSelect',
+		asyncKey       : 'partner_users',
+		valueKey       : 'user_id',
+		isClearable    : true,
+		defaultOptions : false,
+		initialCall    : false,
+		placeholder    : 'Type Here...',
+		params         : {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+			},
+			page_limit: 100,
+		},
+		// disabled: true,
+		// options     : countryOptions,
+
+		// rules       : { required: 'Agent is Required' },
 	},
 	// {
 	// 	name        : 'is_cp',

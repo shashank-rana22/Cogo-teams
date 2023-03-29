@@ -7,16 +7,16 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setIngestionData =
 	const { reset } = formProps;
 	const FINAL_MODAL_MAPPING_CP = {
 		// IE           : 'a. Upload Importer/Exporter CSV',
-		CPBuy        : 'b. Upload Channel Partner (buy persona) CSV',
-		CPSell       : 'c. Upload Channel Partner (sell persona) CSV',
-		CPBuyAndSell : 'd. Channel Partner (buy and sell persona) CSV',
+		CPBuy        : 'a. Upload Channel Partner (buy persona) CSV',
+		CPSell       : 'b. Upload Channel Partner (sell persona) CSV',
+		CPBuyAndSell : 'c. Channel Partner (buy and sell persona) CSV',
 	};
 
 	const ProviderCpOptions = [
 		// { key: 'a. Importer/ Exporter', type: 'IE' },
-		{ key: 'b. Channel Partner (buy persona)', type: 'CPBuy' },
-		{ key: 'c. Channel Partner (sell persona)', type: 'CPSell' },
-		{ key: 'd. Channel Partner (buy and sell persona)', type: 'CPBuyAndSell' },
+		{ key: 'a. Channel Partner (buy persona)', type: 'CPBuy' },
+		{ key: 'b. Channel Partner (sell persona)', type: 'CPSell' },
+		{ key: 'c. Channel Partner (buy and sell persona)', type: 'CPBuyAndSell' },
 	];
 
 	const FINAL_MODAL_MAPPING_LEADS = {
@@ -33,17 +33,15 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setIngestionData =
 		// { key: 'd. Channel Partner (sell persona)', type: 'CPSell' },
 	];
 
-	const FINAL_MODAL_MAPPING_IE = {
-		IE: 'Upload Importer/Exporter CSV',
-		// CPBuy  : 'c. Upload Channel Partner (buy persona) CSV',
-		// CPSell : 'd. Upload Channel Partner (sell persona) CSV',
-	};
+	// const FINAL_MODAL_MAPPING_IE = {
+	// 	IE: 'Upload Importer/Exporter CSV',
 
-	const ProviderIeOptions = [
-		{ key: 'Importer/ Exporter', type: 'IE' },
-		// { key: 'c. Channel Partner (buy persona)', type: 'CPBuy' },
-		// { key: 'd. Channel Partner (sell persona)', type: 'CPSell' },
-	];
+	// };
+
+	// const ProviderIeOptions = [
+	// 	{ key: 'Importer/ Exporter', type: 'IE' },
+
+	// ];
 
 	const onClose = () => {
 		setShow('');
@@ -56,13 +54,7 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setIngestionData =
 	if (ingestionData?.option1 === 'lead') {
 		ProviderButtonOptions = ProviderLeadOptions;
 		FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_LEADS;
-	}
-	// else if (ingestionData?.option1 === 'ie') {
-	// 	ProviderButtonOptions = ProviderIeOptions;
-	// 	FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_IE;
-
-	// }
-	else if (ingestionData?.option1 === 'cp') {
+	} else if (ingestionData?.option1 === 'cp') {
 		ProviderButtonOptions = ProviderCpOptions;
 		FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_CP;
 	}

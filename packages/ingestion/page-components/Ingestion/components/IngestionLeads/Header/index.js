@@ -41,6 +41,7 @@ function Header() {
 		setIngestionData = () => {},
 		ingestionData = {},
 		formProps,
+		modalControls,
 	} = useGetIngestionList();
 	console.log('formProps::::::::::', formProps);
 	// const componentProps = {
@@ -105,7 +106,7 @@ function Header() {
 						setIngestionData={setIngestionData}
 						ingestionData={ingestionData}
 						formProps={formProps}
-
+						modalControls={modalControls}
 					/>
 				)
 			}

@@ -1,15 +1,19 @@
-import { Modal, Button, Select } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { IcMUpload } from '@cogoport/icons-react';
 
-import controls from '../../../../../../../utils/controls';
 import { getElementController } from '../../../../../../../utils/get-element-controls';
 
 import styles from './styles.module.css';
 
 function OrgDetailsModal({
-	setShow = () => {}, show = '', setIngestionData = () => {}, ingestionData, formProps,
+	setShow = () => {}, show = '', setIngestionData = () => {}, ingestionData, formProps, modalControls,
 
 }) {
+	const NEXT_PAGE_MAPPING = {
+		ie   : 'chooseModal',
+		cp   : 'providerSelect',
+		lead : 'providerSelect',
+	};
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 	const onClose = () => {
 		setShow('');
@@ -21,7 +25,7 @@ function OrgDetailsModal({
 	};
 
 	const onBack = () => {
-		ingestionData?.option1 === 'ie' ? setShow('chooseModal') : setShow('providerSelect');
+		setShow(NEXT_PAGE_MAPPING[ingestionData?.option1]);
 		reset();
 	};
 
@@ -81,7 +85,7 @@ function OrgDetailsModal({
 	// console.log('ingestionData::', ingestionData?.option1);
 
 	const onSubmit = (values) => {
-		console.log('values', values);
+		// console.log('values', values);
 		setShow('uploadModal');
 		setIngestionData({
 			...ingestionData,
@@ -137,10 +141,13 @@ function OrgDetailsModal({
 
 					{
 
-						controls.map((controlItem) => {
+						modalControls.map((controlItem) => {
 							const el = { ...controlItem };
+
 							const Element = getElementController(el.type);
+
 							if (!Element) return null;
+
 							return (
 								<div style={el.style} className={styles.control_container}>
 									<span className={styles.control_label}>{el.label}</span>

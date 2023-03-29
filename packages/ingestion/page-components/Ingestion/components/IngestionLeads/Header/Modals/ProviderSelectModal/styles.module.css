@@ -1,5 +1,5 @@
 .provider_container {
-    min-height: 240px;
+    min-height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

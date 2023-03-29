@@ -8,18 +8,22 @@ function ChooseModal({ setShow = () => {}, show = '', setIngestionData = () => {
 		setShow('');
 	};
 
-	const onIE = () => {
-		setShow('orgDetails');
-		setIngestionData({
-			...ingestionData,
-			finalModalHeading: 'Upload for Import Export',
-		});
+	// const onIE = () => {
+
+	// 	setIngestionData({
+	// 		...ingestionData,
+	// 		finalModalHeading: 'Upload for Import Export',
+	// 	});
+	// };
+
+	const NEXT_PAGE_MAPPING = {
+		ie   : 'orgDetails',
+		cp   : 'providerSelect',
+		lead : 'providerSelect',
 	};
 
 	const onChoose = (type) => {
-		(type === 'ie')
-			? onIE()
-			: setShow('providerSelect');
+		setShow(NEXT_PAGE_MAPPING[type]);
 
 		setIngestionData({
 			...ingestionData,
@@ -43,7 +47,7 @@ function ChooseModal({ setShow = () => {}, show = '', setIngestionData = () => {
 					<Button
 						themeType="secondary"
 						onClick={() => onChoose('lead')}
-						style={{ width: '40%', height: '60px' }}
+						style={{ height: '60px' }}
 					>
 						Lead
 
@@ -51,7 +55,7 @@ function ChooseModal({ setShow = () => {}, show = '', setIngestionData = () => {
 					<Button
 						themeType="secondary"
 						onClick={() => onChoose('cp')}
-						style={{ width: '40%', height: '60px' }}
+						style={{ height: '60px' }}
 					>
 						Channel Partner
 
@@ -59,7 +63,7 @@ function ChooseModal({ setShow = () => {}, show = '', setIngestionData = () => {
 					<Button
 						themeType="secondary"
 						onClick={() => onChoose('ie')}
-						style={{ width: '40%', height: '60px' }}
+						style={{ height: '60px' }}
 
 					>
 						Importer Exporter

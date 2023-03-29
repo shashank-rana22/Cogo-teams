@@ -1,9 +1,10 @@
 import { Button, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase, format, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import controls from '../../../utils/controls';
 import styles from '../styles.module.css';
 
 function useGetIngestionList() {
@@ -207,6 +208,37 @@ function useGetIngestionList() {
 		},
 	});
 
+	const { watch } = formProps;
+
+	const watchCountry = watch('country_id');
+	const watchPartner = watch('partner');
+
+	const mutatedControls = controls.map((control) => {
+		let newControl = { ...control };
+
+		// Todo ask on this bug
+		if (newControl.name === 'agent') {
+			if (!isEmpty(watchCountry)) {
+				console.log('watchCountry', watchCountry);
+				newControl = {
+					...newControl,
+					// disabled : false,
+					params: {
+						filters: {
+							...newControl?.params?.filters,
+							country_id : watchCountry || undefined,
+							partner    : watchPartner || undefined,
+						},
+					},
+				};
+			}
+		}
+
+		console.log('newCont::', newControl);
+
+		return newControl;
+	});
+
 	return {
 		columns,
 		dummyData,
@@ -216,6 +248,7 @@ function useGetIngestionList() {
 		ingestionData,
 		setIngestionData,
 		formProps,
+		modalControls: mutatedControls,
 	};
 }
 
