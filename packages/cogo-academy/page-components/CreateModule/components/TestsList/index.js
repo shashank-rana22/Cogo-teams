@@ -18,7 +18,7 @@ const BUTTON_TEXT_MAPPING = {
 
 const ROUTE_MAPPING = {
 	tests        : 'create-test',
-	question_set : 'create-question',
+	question_set : 'question?mode=new',
 };
 
 function TestsList({ activeTab, setActiveTab }) {

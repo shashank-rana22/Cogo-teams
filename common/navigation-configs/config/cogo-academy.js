@@ -14,13 +14,7 @@ const cogoAcademy = {
 		navigation : 'cogo_academy-create_faq',
 		isMainNav  : false,
 	},
-	'/[partner_id]/learning/test-module/create-question': {
-		navigation: 'cogo_academy-create_faq',
-	},
-	'/[partner_id]/learning/test-module/edit-question': {
-		navigation: 'cogo_academy-create_faq',
-	},
-	'/[partner_id]/learning/test-module/view-question': {
+	'/[partner_id]/learning/test-module/question': {
 		navigation: 'cogo_academy-create_faq',
 	},
 	'/[partner_id]/learning/test-module/create-test': {

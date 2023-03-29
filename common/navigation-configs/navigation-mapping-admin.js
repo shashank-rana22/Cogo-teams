@@ -1996,7 +1996,7 @@ const navigationMappingAdmin = {
 		options   : [
 			{
 				key           : 'cogo_academy-create_faq',
-				title         : 'Creator Management System',
+				title         : 'Control Center',
 				href          : '/v2/learning',
 				as            : '/v2/learning',
 				type          : 'link',

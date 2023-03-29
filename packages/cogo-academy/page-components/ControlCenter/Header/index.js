@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ setSwitchDashboard = () => {} }) {
+function Header({ setSwitchDashboard = () => {}, activeTab }) {
 	const router = useRouter();
 
 	const onClickConfiguration = () => {
@@ -19,15 +19,21 @@ function Header({ setSwitchDashboard = () => {} }) {
 			<div className={styles.header}>Control Center</div>
 
 			<div className={styles.button_container}>
+				{activeTab === 'manage_faq' ? (
+					<Button
+						type="button"
+						onClick={() => setSwitchDashboard(false)}
+					>
+						Analytics
+					</Button>
+				) : null}
+
 				<Button
 					type="button"
 					style={{ marginLeft: 8 }}
-					onClick={() => setSwitchDashboard(false)}
+					themeType="secondary"
+					onClick={onClickConfiguration}
 				>
-					Analytics
-				</Button>
-
-				<Button type="button" style={{ marginLeft: 8 }} themeType="secondary" onClick={onClickConfiguration}>
 					Configuration
 				</Button>
 			</div>

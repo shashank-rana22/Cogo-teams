@@ -12,10 +12,10 @@ import AddQuestionsForm from './components/AddQuestionsForm';
 import BasicDetailsForm from './components/BasicDetailsForm';
 import styles from './styles.module.css';
 
-function CreateQuestionSet(props) {
+function CreateQuestionSet() {
 	const { general: { query:urlQuery } } = useSelector((state) => state);
 
-	const { id, activeTab } = urlQuery || {};
+	const { id, activeTab, mode = '' } = urlQuery || {};
 
 	const router = useRouter();
 	const { query, debounceQuery } = useDebounceQuery();
@@ -24,8 +24,6 @@ function CreateQuestionSet(props) {
 	const [editDetails, setEditDetails] = useState({});
 
 	const [allKeysSaved, setAllKeysSaved] = useState(true);
-
-	const { mode = '' } = props || {};
 
 	const {
 		loading,
@@ -47,7 +45,7 @@ function CreateQuestionSet(props) {
 	} = useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query, mode });
 
 	if (['edit', 'view'].includes(mode) && isEmpty(id) && !activeTab) {
-		router.push('/learning/test-module/create-question');
+		router.push('/learning/test-module/question?mode=new');
 		return 'redirecting ...';
 	}
 
