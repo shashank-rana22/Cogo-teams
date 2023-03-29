@@ -46,12 +46,12 @@ function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
 			shipment_id         : showUpload?.shipmentId,
 			uploaded_by_org_id  : showUpload?.serviceProviderId,
 			performed_by_org_id : showUpload?.serviceProviderId,
-			document_type       : 'draft_airway_bill',
+			document_type       : showUpload?.documentType || 'draft_airway_bill',
 			id                  : showUpload?.documentId,
 			service_id          : showUpload?.serviceId,
 			service_type        : 'air_freight_service',
 			pending_task_id     : showUpload?.id,
-			state               : 'document_accepted',
+			state               : showUpload?.type === 'FinalAwb' ? undefined : 'document_accepted',
 			document_url        : formValues.document || undefined,
 			data                : {
 
@@ -72,7 +72,7 @@ function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
 						document_url    : formValues.document || undefined,
 						bl_detail_id    : showUpload?.blDetailId,
 					},
-					document_type : 'draft_airway_bill',
+					document_type : showUpload?.documentType || 'draft_airway_bill',
 					document_url  : formValues.document || undefined,
 					file_name     : fileArr[fileArr.length - 1],
 				},
@@ -88,26 +88,28 @@ function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
 	};
 	return (
 		<div>
-			<Modal
-				show={showUpload}
-				onClose={() => { setShowUpload(null); }}
-				scroll={false}
-				size="md"
-				className={styles.modal_container}
-			>
-				<Modal.Header title={(<h5>Upload Airway Bill</h5>)} style={{ paddingBottom: 0 }} />
-				<Modal.Body>
-					<Layout fields={controls} errors={errors} control={control} />
-					<Button
-						style={{ margin: '20px 0 0 auto' }}
-						onClick={handleSubmit(onSubmit)}
-						disabled={loading || updateLoading}
-						themeType="accent"
-					>
-						Upload
-					</Button>
-				</Modal.Body>
-			</Modal>
+			{showUpload && (
+				<Modal
+					show={showUpload}
+					onClose={() => { setShowUpload(null); }}
+					scroll={false}
+					size="md"
+					className={styles.modal_container}
+				>
+					<Modal.Header title={(<h5>Upload Airway Bill</h5>)} style={{ paddingBottom: 0 }} />
+					<Modal.Body>
+						<Layout fields={controls} errors={errors} control={control} />
+						<Button
+							style={{ margin: '20px 0 0 auto' }}
+							onClick={handleSubmit(onSubmit)}
+							disabled={loading || updateLoading}
+							themeType="accent"
+						>
+							Upload
+						</Button>
+					</Modal.Body>
+				</Modal>
+			)}
 		</div>
 	);
 }
