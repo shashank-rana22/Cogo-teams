@@ -170,7 +170,6 @@ function CogoOne() {
 				<div
 					role="presentation"
 					className={styles.download_div}
-					// eslint-disable-next-line no-undef
 					onClick={() => window.open(ANDRIOD_APK, '_blank')}
 				>
 					<img
