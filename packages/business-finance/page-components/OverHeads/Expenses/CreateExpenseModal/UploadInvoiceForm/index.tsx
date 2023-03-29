@@ -1,5 +1,5 @@
 import { Input, Select, Button } from '@cogoport/components';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Filter from '../../../../commons/Filters';
 import { CURRENCY_OPTIONS } from '../../../constants/CURRENCY_OPTIONS';
@@ -14,6 +14,7 @@ interface FilterInterface {
 	repeatEvery?:string,
 	invoiceCurrency?:string,
 	invoiceNumber?:string,
+	lineItemsList?:any,
 }
 interface Props {
 	formData:FilterInterface,
@@ -23,6 +24,7 @@ interface Props {
 	setIsUploadConfirm?:(p:any)=>void,
 	taxOptions?:object[],
 	setTaxOptions?:(p:any)=>void,
+	setIsFormValidated?:(p:boolean)=>void,
 }
 
 function UploadInvoiceForm({
@@ -33,8 +35,9 @@ function UploadInvoiceForm({
 	setIsUploadConfirm,
 	taxOptions,
 	setTaxOptions,
+	setIsFormValidated,
 }:Props) {
-	const uploadUrl = formData?.uploadedInvoice;
+	const { invoiceCurrency, invoiceNumber, uploadedInvoice:uploadUrl, lineItemsList } = formData || {};
 
 	let uploadControls:any;
 	if (createExpenseType === 'recurring') {
@@ -42,6 +45,20 @@ function UploadInvoiceForm({
 	} else if (createExpenseType === 'nonRecurring') {
 		uploadControls = nonRecurringUploadInvoice;
 	}
+
+	const isLineItemPresent = lineItemsList?.[0]?.payable_amount;
+
+	useEffect(() => {
+		// Validation to ensure that all data is filled before moving to next page
+		const isValidated = invoiceCurrency && invoiceNumber && uploadUrl && isLineItemPresent;
+		if (isValidated) {
+			setIsFormValidated(true);
+		} else {
+			setIsFormValidated(false);
+		}
+	}, [
+		invoiceCurrency, invoiceNumber, uploadUrl, isLineItemPresent, setIsFormValidated,
+	]);
 
 	return (
 		<div>

@@ -9,9 +9,10 @@ interface Props {
 	active:string
 	createExpenseType:string,
 	recurringData?:object,
-	setRecurringData?:(obj)=>void,
+	setRecurringData?:(obj:any)=>void,
 	nonRecurringData?:object,
-	setNonRecurringData?:(obj)=>void,
+	setNonRecurringData?:(obj:any)=>void,
+	setIsFormValidated?:(obj:any)=>void,
 }
 
 function CreateExpenseForm({
@@ -21,6 +22,7 @@ function CreateExpenseForm({
 	setRecurringData,
 	nonRecurringData,
 	setNonRecurringData,
+	setIsFormValidated,
 }:Props) {
 	const [categoryOptions, setCategoryOptions] = useState([]);
 	const [subCategoryOptions, setSubCategoryOptions] = useState([]);
@@ -55,6 +57,7 @@ function CreateExpenseForm({
 					setBranchOptions={setBranchOptions}
 					entityOptions={entityOptions}
 					setEntityOptions={setEntityOptions}
+					setIsFormValidated={setIsFormValidated}
 				/>
 			)}
 			{active === 'Upload Invoice' && createExpenseType === 'nonRecurring' && (
@@ -66,6 +69,7 @@ function CreateExpenseForm({
 					setIsUploadConfirm={setIsUploadConfirm}
 					taxOptions={taxOptions}
 					setTaxOptions={setTaxOptions}
+					setIsFormValidated={setIsFormValidated}
 				/>
 			)}
 			{ active === 'Final Confirmation' && (

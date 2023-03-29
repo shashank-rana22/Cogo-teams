@@ -31,6 +31,7 @@ function CreateExpenseModal({
 	const [timeline, setTimeline] = useState(['Expense Details', 'Upload Invoice', 'Final Confirmation']);
 	const [nonRecurringData, setNonRecurringData] = useState({});
 	const [active, setActive] = useState('Expense Details');
+	const [isFormValidated, setIsFormValidated] = useState(false);
 
 	const handleClick = () => {
 		const current = timeline.indexOf(active);
@@ -86,6 +87,7 @@ function CreateExpenseModal({
 						setRecurringData={setRecurringData}
 						nonRecurringData={nonRecurringData}
 						setNonRecurringData={setNonRecurringData}
+						setIsFormValidated={setIsFormValidated}
 					/>
 				</div>
 
@@ -100,6 +102,7 @@ function CreateExpenseModal({
 					? (
 						<Button
 							onClick={handleClick}
+							disabled={!isFormValidated}
 						>
 							Save & Next
 						</Button>

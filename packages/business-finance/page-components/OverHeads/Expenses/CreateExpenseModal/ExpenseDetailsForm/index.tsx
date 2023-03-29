@@ -26,6 +26,23 @@ interface VendorObject {
 interface FormData {
 	transactionDate?: Date | number,
 	vendorData?:any,
+	vendorName?:string,
+	invoiceDate?:Date,
+	periodOfTransaction?:string,
+	entityObject?:object,
+	registrationNumber?:number | string,
+	expenseCategory?:string,
+	expenseSubCategory?:string,
+	branch?:any,
+	paymentMode?:string,
+	payableAmount?:string | number,
+	currency?:string,
+	repeatEvery?:string,
+	startDate?:Date,
+	endDate?:Date,
+	agreementNumber?:number | string,
+	description?:string,
+	uploadedInvoice?:string[],
 }
 interface Props {
 	formData?:FormData,
@@ -39,6 +56,7 @@ interface Props {
 	subCategoryOptions?:object[],
 	branchOptions?:object[],
 	entityOptions?:object[],
+	setIsFormValidated?:(p:boolean)=>void,
 }
 
 function ExpenseDetailsForm({
@@ -53,8 +71,29 @@ function ExpenseDetailsForm({
 	branchOptions,
 	subCategoryOptions,
 	entityOptions,
+	setIsFormValidated,
 }:Props) {
-	const date = formData?.transactionDate;
+	const {
+		transactionDate:date,
+		vendorName,
+		invoiceDate,
+		periodOfTransaction,
+		entityObject,
+		registrationNumber,
+		expenseCategory,
+		expenseSubCategory,
+		branch,
+		paymentMode,
+		payableAmount,
+		currency,
+		repeatEvery,
+		startDate,
+		endDate,
+		agreementNumber,
+		description,
+		uploadedInvoice,
+	} = formData || {};
+
 	const { entityList } = useListCogoEntities({});
 
 	useEffect(() => {
@@ -79,6 +118,67 @@ function ExpenseDetailsForm({
 			setEntityOptions([...entities]);
 		}
 	}, [entityList, setEntityOptions]);
+
+	useEffect(() => {
+		// Validations to ensure that all inputs are filled before moving to next page
+		if (createExpenseType === 'nonRecurring') {
+			const nonRecurringValidated = date
+			&& vendorName
+			&& invoiceDate
+			&& periodOfTransaction
+			&& entityObject
+			&& registrationNumber
+			&& expenseCategory
+			&& expenseSubCategory
+			&& branch
+			&& paymentMode;
+			if (nonRecurringValidated) {
+				setIsFormValidated(true);
+			} else {
+				setIsFormValidated(false);
+			}
+		}
+		if (createExpenseType === 'recurring') {
+			const recurringValidated = vendorName
+			&& registrationNumber
+			&& expenseCategory
+			&& expenseSubCategory
+			&& entityObject
+			&& payableAmount
+			&& currency
+			&& repeatEvery
+			&& startDate
+			&& endDate
+			&& branch
+			&& agreementNumber
+			&& description
+			&& uploadedInvoice?.length > 0;
+			if (recurringValidated) {
+				setIsFormValidated(true);
+			} else {
+				setIsFormValidated(false);
+			}
+		}
+	}, [date,
+		vendorName,
+		invoiceDate,
+		periodOfTransaction,
+		entityObject,
+		registrationNumber,
+		expenseCategory,
+		expenseSubCategory,
+		branch,
+		paymentMode,
+		setIsFormValidated,
+		createExpenseType,
+		payableAmount,
+		currency,
+		repeatEvery,
+		startDate,
+		endDate,
+		agreementNumber,
+		description,
+		uploadedInvoice]);
 
 	let expenseControls:any;
 	if (createExpenseType === 'recurring') {
