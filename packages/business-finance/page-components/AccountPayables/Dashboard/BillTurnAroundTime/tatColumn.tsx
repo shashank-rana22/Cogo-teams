@@ -42,7 +42,7 @@ const tatColumn = [
 		id       : 'hours',
 		accessor : (row) => (
 			<div className={styles.count}>
-				{getByKey(row, 'hours').toFixed(2) as string}
+				{getByKey(row, 'hours')?.toFixed(2) as string}
 				{' '}
 				{' '}
 				hours
