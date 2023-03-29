@@ -30,9 +30,11 @@ const useListChats = ({
 
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
+	// const activeCardSnapshotListener = useRef(null);
 
 	const [firstLoading, setFirstLoading] = useState(true);
 	const [activeCardId, setActiveCardId] = useState('');
+	const [activeCardData, setActiveCardData] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
 
@@ -44,10 +46,11 @@ const useListChats = ({
 		pinnedMessagesData   : {},
 	});
 
-	const snapshotCleaner = () => {
-		if (snapshotListener.current) {
-			snapshotListener.current();
-			snapshotListener.current = null;
+	const snapshotCleaner = ({ ref }) => {
+		const tempRef = ref;
+		if (tempRef.current) {
+			tempRef.current();
+			tempRef.current = null;
 		}
 	};
 	useEffect(() => {
@@ -98,18 +101,14 @@ const useListChats = ({
 
 	const mountPinnedSnapShot = useCallback(() => {
 		setLoading(true);
+		snapshotCleaner({ ref: pinSnapshotListener });
 		setListData((p) => ({ ...p, pinnedMessagesData: {} }));
 		const queryForPinnedChat = where('pinnedAgent', 'array-contains', userId);
-		const viewQuery = !isomniChannelAdmin ? [where('support_agent_id', '==', userId)] : [];
-		const sessionTypeQuery = showBotMessages ? where('session_type', '==', 'bot')
-			: where('session_type', '==', 'admin');
 
 		const newChatsQuery = query(
 			omniChannelCollection,
 			queryForPinnedChat,
-			...viewQuery,
 			...omniChannelQuery,
-			sessionTypeQuery,
 		);
 
 		pinSnapshotListener.current = onSnapshot(
@@ -120,7 +119,10 @@ const useListChats = ({
 				setLoading(false);
 			},
 		);
-	}, [isomniChannelAdmin, omniChannelCollection, omniChannelQuery, showBotMessages, userId]);
+		return () => {
+			snapshotCleaner({ ref: pinSnapshotListener });
+		};
+	}, [omniChannelCollection, omniChannelQuery, userId]);
 
 	const mountSnapShot = useCallback(() => {
 		const queryForSearch = searchQuery
@@ -128,7 +130,7 @@ const useListChats = ({
 				where('user_name', '<=', `${searchQuery}\\uf8ff`), orderBy('user_name', 'asc')] : [];
 		setLoading(true);
 		setListData((p) => ({ ...p, messagesListData: {} }));
-		snapshotCleaner();
+		snapshotCleaner({ ref: snapshotListener });
 		const newChatsQuery = query(
 			omniChannelCollection,
 			...queryForSearch,
@@ -154,7 +156,7 @@ const useListChats = ({
 		);
 
 		return () => {
-			snapshotCleaner();
+			snapshotCleaner({ ref: snapshotListener });
 		};
 	}, [omniChannelCollection, omniChannelQuery, searchQuery]);
 
@@ -197,6 +199,7 @@ const useListChats = ({
 	}, [mountSnapShot]);
 
 	const setActiveMessage = async (val) => {
+		setActiveCardData(val);
 		const { channel_type, id } = val || {};
 		setActiveCardId(id);
 		if (channel_type && id) {
@@ -244,7 +247,33 @@ const useListChats = ({
 		.map((eachkey) => mergedChatData[eachkey]) || [];
 
 	const activeMessageCard = (sortedChatsList || []).find(({ id }) => id === activeCardId)
-        || {};
+        || activeCardData || {};
+
+	// const mountActiveCard = useCallback(() => {
+	// 	const queryForMessageCard = where('id', '==', activeCardId);
+	// 	setLoading(true);
+	// 	snapshotCleaner({ ref: activeCardSnapshotListener });
+	// 	const activeMessageCardQuery = query(
+	// 		omniChannelCollection,
+	// 		...queryForMessageCard,
+	// 	);
+	// 	activeCardSnapshotListener.current = onSnapshot(
+	// 		activeMessageCardQuery,
+	// 		(activeMessageSnapshot) => {
+	// 			console.log(activeCardSnapshotListener);
+	// 			const { resultList } = dataFormatter(activeMessageSnapshot);
+	// 			console.log(resultList);
+	// 			setLoading(false);
+	// 		},
+	// 	);
+
+	// 	return () => {
+	// 		snapshotCleaner({ ref: activeCardSnapshotListener });
+	// 	};
+	// }, [activeCardId, omniChannelCollection]);
+	// useEffect(() => {
+	// 	mountActiveCard();
+	// }, [mountActiveCard, activeCardId]);
 
 	const updateLeaduser = async (data = {}) => {
 		const { channel_type, id } = activeMessageCard || {};
