@@ -6,13 +6,14 @@ import React, { useContext, useState } from 'react';
 
 import Documents from '../../../common/Documents';
 import ShipmentInfo from '../../../common/ShipmentInfo';
+import Timeline from '../../../common/TimeLine';
 import TopBar from '../../../common/TopBar';
 import Tracking from '../Tabs/Tracking';
 
 import styles from './styles.module.css';
 
 function Superadmin() {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, timelineData, shipmentTimelineLoading } = useContext(ShipmentDetailContext);
 	const [activeTab, setActiveTab] = useState('overview');
 
 	return (
@@ -23,7 +24,7 @@ function Superadmin() {
 			</div>
 
 			<TopBar />
-			{/* <Timeline timelineData={timelineData} loading={shipmentTimelineLoading} /> */}
+			<Timeline timelineData={timelineData} loading={shipmentTimelineLoading} />
 			<div className={styles.container}>
 				<Tabs
 					activeTab={activeTab}
