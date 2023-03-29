@@ -10,9 +10,11 @@ import styles from './styles.module.css';
 
 function QuestionsComponent({ test_id }) {
 	const [searchQuestion, setSearchQuestion] = useState('');
+	const [sortFilter, setSortFilter] = useState({});
+
+	const { sortBy, sortType } = sortFilter || {};
+
 	const { debounceQuery, query } = useDebounceQuery();
-	const [sortType, setSortType] = useState('');
-	const [sortBy, setSortBy] = useState('');
 
 	useEffect(() => {
 		debounceQuery(searchQuestion);
@@ -23,16 +25,13 @@ function QuestionsComponent({ test_id }) {
 		url    : '/get_admin_question_wise_test_result',
 		params : {
 			test_id,
-			sort_by     : sortBy,
-			sort_type   : sortType,
 			search_term : query,
-
+			sort_type   : sortType,
+			sort_by     : sortBy,
 		},
 	}, { manual: false });
 
 	const { list: questionsList = [] } = data || {};
-
-	// if (loading) { return 'loading'; }
 
 	return (
 
@@ -43,10 +42,8 @@ function QuestionsComponent({ test_id }) {
 			/>
 
 			<ListHeader
-				sortType={sortType}
-				setSortType={setSortType}
-				sortBy={sortBy}
-				setSortBy={setSortBy}
+				setSortFilter={setSortFilter}
+				sortFilter={sortFilter}
 			/>
 
 			{loading ? (

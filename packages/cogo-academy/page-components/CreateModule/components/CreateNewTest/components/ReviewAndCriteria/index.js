@@ -1,7 +1,7 @@
 import { Pill, Button, Placeholder, Toast } from '@cogoport/components';
 import { useForm, InputController, useFieldArray } from '@cogoport/forms';
 import { IcMArrowBack, IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Link } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -27,8 +27,6 @@ function ReviewAndCriteria(props) {
 	const { updateTest } = useUpdateTest();
 
 	const [error, setError] = useState(false);
-
-	const router = useRouter();
 
 	useEffect(() => {
 		setValue('guidelines', data?.guidelines?.map((guideline) => ({ instruction: guideline })));

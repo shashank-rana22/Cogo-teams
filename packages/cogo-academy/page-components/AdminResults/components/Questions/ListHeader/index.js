@@ -2,44 +2,35 @@ import SortComponent from '../../../commons/SortComponent';
 
 import styles from './styles.module.css';
 
-function ListHeader({
-	sortType = '', setSortType = () => {}, sortBy = '', setSortBy = () => {},
-
-}) {
+function ListHeader({ sortFilter = {}, setSortFilter = () => {} }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.container2}>
-				<div className={styles.small_section}>Topic</div>
+			<div className={styles.container_item}>Topic</div>
 
-				<div className={styles.section}>Question</div>
+			<div className={styles.section}>Question</div>
 
-				<div className={styles.small_section}>Question Type</div>
+			<div className={styles.container_item}>Question Type</div>
 
-				<div className={styles.small_section}>Difficulty Level</div>
+			<div className={styles.container_item}>Difficulty Level</div>
 
-				<div className={styles.small_section_sort}>
-					<div>Students IT Appeared For</div>
+			<div className={styles.container_item}>
+				<div>Students IT Appeared For</div>
 
-					<SortComponent
-						val="students_appeared"
-						sortBy={sortBy}
-						sortType={sortType}
-						setSortBy={setSortBy}
-						setSortType={setSortType}
-					/>
-				</div>
+				<SortComponent
+					value="students_appeared"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
+				/>
+			</div>
 
-				<div className={styles.small_section_sort}>
-					Correct Percentage %
+			<div className={styles.container_item}>
+				Correct Percentage %
 
-					<SortComponent
-						val="correct_percentage"
-						sortBy={sortBy}
-						sortType={sortType}
-						setSortBy={setSortBy}
-						setSortType={setSortType}
-					/>
-				</div>
+				<SortComponent
+					value="correct_percentage"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
+				/>
 			</div>
 		</div>
 	);

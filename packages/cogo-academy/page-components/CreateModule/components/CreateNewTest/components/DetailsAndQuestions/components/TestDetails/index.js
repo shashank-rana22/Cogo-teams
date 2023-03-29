@@ -1,5 +1,5 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Link } from '@cogoport/next';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
