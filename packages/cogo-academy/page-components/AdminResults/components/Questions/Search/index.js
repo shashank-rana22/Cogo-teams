@@ -3,7 +3,7 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Search({ setSearchQuestion = () => {}, debounceQuery = () => {} }) {
+function Search({ searchQuestion = '', setSearchQuestion = () => {}, debounceQuery = () => {} }) {
 	const onSearch = (inputValue) => {
 		setSearchQuestion(inputValue);
 		debounceQuery(inputValue);
@@ -15,6 +15,7 @@ function Search({ setSearchQuestion = () => {}, debounceQuery = () => {} }) {
 				size="md"
 				placeholder="Search for a Question"
 				onChange={onSearch}
+				value={searchQuestion}
 				suffix={(
 					<div className={styles.icon_container}>
 						<IcMSearchlight />
