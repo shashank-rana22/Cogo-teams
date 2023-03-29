@@ -6,19 +6,12 @@ function getStatsData(activeTab = '', stats = {}) {
 			{
 				feedback_type_chart: {
 					title  : 'Feedback Type',
-					colors : ['#7bc4cc', '#337b84'],
-					data   : [
-						{
-							id    : 'address',
-							label : 'Address',
-							value : stats?.type?.address || 0,
-						},
-						{
-							id    : 'user_information',
-							label : 'User Information',
-							value : stats?.type?.user_information || 0,
-						},
-					],
+					colors : ['#7bc4cc', '#3b9099', '#a3d6db'],
+					data   : Object.entries(stats?.type || {}).map(([id, value]) => ({
+						id,
+						label: startCase(id),
+						value,
+					})),
 				},
 				feedback_sub_type_chart: {
 					title  : 'Feedback Sub-type',

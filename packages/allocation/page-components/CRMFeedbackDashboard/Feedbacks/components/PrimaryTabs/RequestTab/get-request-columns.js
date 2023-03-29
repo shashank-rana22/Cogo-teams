@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 
 import ActionButton from './ActionButton';
 import styles from './styles.module.css';
@@ -43,7 +43,7 @@ export const REQUEST_COLUMNS = [
 		Header   : <div>ORGANIZATION</div>,
 		key      : 'organization',
 		id       : 'organization',
-		accessor : ({ user_id = '' }) => (
+		accessor : ({ user_id = {} }) => (
 			<section className={styles.table_cell}>
 				{user_id.name || '___'}
 			</section>
@@ -91,7 +91,7 @@ export const REQUEST_COLUMNS = [
 		key      : 'action',
 		id       : 'action',
 		accessor : ({
-			status = '', user_id = '', organization_id = '',
+			status = '', user_id = {}, organization_id = '', id = '',
 		}) => (
 			<section className={styles.feedback}>
 				{!status.includes(['inactive', 'active']) ? (
@@ -100,6 +100,7 @@ export const REQUEST_COLUMNS = [
 						status={status}
 						organization={user_id.name}
 						organization_id={organization_id}
+						feedback_request_id={id}
 					/>
 				) : (
 					null

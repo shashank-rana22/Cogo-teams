@@ -8,7 +8,7 @@ function Responses() {
 	const {
 		general: {
 			query: {
-				organization_id = '',
+				feedback_request_id = '',
 				organization = '',
 			},
 		},
@@ -16,9 +16,9 @@ function Responses() {
 
 	return (
 		<>
-			<Header organization={organization} organization_id={organization_id} />
+			<Header organization={organization} />
 			<OrganizationCard organization={organization} />
-			<PrimaryTabs organization_id={organization_id} />
+			<PrimaryTabs feedback_request_id={feedback_request_id} />
 		</>
 
 	);

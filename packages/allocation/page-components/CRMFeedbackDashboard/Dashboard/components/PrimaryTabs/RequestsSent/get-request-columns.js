@@ -2,9 +2,18 @@ import { Button, Pill } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function computeStatus({ statuses = '[]' }) {
-	const { requested, responded } = JSON.parse(statuses);
-	if (requested && responded) {
+function computeStatus({ statuses = '' }) {
+	const statusesArr = JSON.parse(statuses);
+
+	const statusesObj = statusesArr.reduce((acc, curr) => {
+		const key = Object.keys(curr)[0];
+		const value = curr[key];
+		return { ...acc, [key]: value };
+	}, {});
+
+	const { requested = 0, responded = 0 } = statusesObj;
+
+	if (responded !== 0) {
 		const responsesReceived = responded;
 		const totalRequested = requested + responded;
 		return {
@@ -52,11 +61,11 @@ export const REQUEST_COLUMNS = ({
 	},
 	{
 		Header   : <div>NO. OF FEEDBACKS RECEIVED</div>,
-		key      : 'count_of_feedbacks',
-		id       : 'count_of_feedbacks',
-		accessor : ({ count_of_feedbacks = '' }) => (
+		key      : 'feedback_count',
+		id       : 'feedback_count',
+		accessor : ({ feedback_count = '' }) => (
 			<section className={styles.table_cell}>
-				{count_of_feedbacks || '__'}
+				{feedback_count || '__'}
 			</section>
 		),
 	},
@@ -67,7 +76,8 @@ export const REQUEST_COLUMNS = ({
 		accessor : ({
 			statuses = [], organization = {}, lead_organization = {}, lead_organization_id = '',
 		}) => {
-			const { status, color } = computeStatus(statuses);
+			console.log('statuses in main::', statuses);
+			const { status, color } = computeStatus({ statuses });
 
 			const orgObject = lead_organization_id ? (lead_organization) : (organization);
 

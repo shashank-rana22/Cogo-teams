@@ -5,7 +5,7 @@ import useDeactivateRequest from '../../../../../hooks/useDeactivateRequest';
 
 import styles from './styles.module.css';
 
-function ActionButton({ label = '', status = '', organization = '', organization_id = '' }) {
+function ActionButton({ label = '', status = '', organization = '', organization_id = '', feedback_request_id = '' }) {
 	const {
 		onDeactivateRequest,
 		loading = false,
@@ -16,13 +16,13 @@ function ActionButton({ label = '', status = '', organization = '', organization
 
 	const router = useRouter();
 
-	if (status === 'response_received') {
+	if (status === 'responded') {
 		return (
 			<Button
 				size="sm"
 				themeType="secondary"
 				onClick={() => {
-					router.push(`/allocation/responses/${organization_id}?organization=${organization}`);
+					router.push(`/allocation/responses/${feedback_request_id}?organization=${organization}`);
 				}}
 			>
 				{label}

@@ -171,16 +171,6 @@ const allocation = {
 	],
 	crm_feedback_dashboard: [
 		{
-			api          : 'get_allocation_feedbacks',
-			access_type  : 'private',
-			service_name : 'allocation',
-		},
-		{
-			api          : 'get_allocation_feedback_requests',
-			access_type  : 'private',
-			service_name : 'allocation',
-		},
-		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -201,12 +191,27 @@ const allocation = {
 			service_name : 'partner',
 		},
 		{
+			api          : 'get_allocation_feedbacks',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_feedback_requests',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
 			api          : 'get_allocation_feedback_stats',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
 		{
 			api          : 'get_allocation_feedback_request_stats',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_feedback_responses',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},

@@ -1,5 +1,9 @@
 import { Button, Modal, MultiSelect } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import {
+	asyncFieldsPartnerUsers,
+} from '@cogoport/forms/utils/getAsyncFields';
 import { isEmpty } from '@cogoport/utils';
 
 import useCreateBulkEnrichment from '../../hooks/useCreateBulkEnrichment';
@@ -22,18 +26,16 @@ function EnrichmentRequest({
 		onChangeThirdParty = () => {},
 	} = useCreateBulkEnrichment({ setActiveTab, selectedBulkData });
 
-	const thirdPartySelector = useGetAsyncOptions({
-		labelKey    : 'name',
-		valueKey    : 'id',
-		endpoint    : 'list_partner_users',
-		initialCall : false,
-		params      : {
-			filters: {
-				status: 'active',
-				// role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
-			},
-		},
-	});
+	// const thirdPartySelector = useGetAsyncOptions({
+	// 	...asyncFieldsPartnerUsers,
+	// 	initialCall : false,
+	// 	params      : {
+	// 		filters: {
+	// 			status: 'active',
+	// 			// role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+	// 		},
+	// 	},
+	// });
 
 	return (
 		<>
@@ -75,15 +77,21 @@ function EnrichmentRequest({
 							isClearable
 							className={styles.modal_select}
 						/> */}
-						<MultiSelect
+						<AsyncSelect
 							placeholder="Select 3rd Party Agent(s)"
 							className={styles.modal_select}
 							value={thirdParty}
-							// onChange={(val) => onChangeThirdParty(val)}
 							onChange={setThirdParty}
-							getSelectedOption={(obj) => onChangeThirdParty(obj)}
+							getSelectedOption={(obj) => console.log('obj :: ', obj)}
 							isClearable
-							{...thirdPartySelector}
+							multiple
+							asyncKey="partner_users"
+							params={{
+								filters: {
+									status   : 'active',
+									role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+								},
+							}}
 						/>
 					</Modal.Body>
 

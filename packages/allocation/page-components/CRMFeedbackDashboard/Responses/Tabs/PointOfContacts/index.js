@@ -8,15 +8,17 @@ import useResponsesList from '../../hooks/useResponsesList';
 
 import styles from './styles.module.css';
 
-function PointOfContacts({ activeTab = '' }) {
+function PointOfContacts({ activeTab = '', feedback_request_id = '' }) {
 	const {
 		data = [],
 		loading = false,
 		getNextPage = () => {},
 		paginationData = {},
-	} = useResponsesList({ activeTab });
+	} = useResponsesList({ activeTab, feedback_request_id });
 
 	const { page, page_limit, total_count } = paginationData;
+
+	console.log('data::', data);
 
 	if (loading) {
 		return (

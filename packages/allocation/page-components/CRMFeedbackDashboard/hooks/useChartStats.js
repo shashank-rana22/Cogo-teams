@@ -1,35 +1,18 @@
 import { useAllocationRequest } from '@cogoport/request';
 
 const useFeedbackStats = ({ activeTab = '' }) => {
-	// let url = '';
-	// let authkey = '';
+	// const url = activeTab === 'feedbacks_received'
+	// 	? 'feedback_stats'
+	// 	: 'feedback_request_stats';
 
-	// switch (activeTab) {
-	// 	case 'feedbacks_received':
-	// 		url = '/feedback_stats';
-	// 		authkey = 'get_allocation_feedback_stats';
-	// 		break;
-	// 	case 'requests_sent':
-	// 		url = '/feedback_request_stats';
-	// 		authkey = 'get_allocation_feedback_request_stats';
-	// 		break;
-	// 	default:
-	// 		break;
-	// }
+	// const authkey = activeTab === 'feedbacks_received'
+	// 	? 'get_allocation_feedback_stats'
+	// 	: 'get_allocation_feedback_request_stats';
 
-	const url = 		activeTab === 'feedbacks_received'
-		? '/feedback_stats'
-		:			'/feedback_request_stats';
-
-	const authkey = 		activeTab === 'feedbacks_received'
-		? 'get_allocation_feedback_stats'
-		:			'get_allocation_feedback_request_stats';
-
-	const [{ loading, data }] = useAllocationRequest({
-		url,
-		method : 'get',
-		authkey,
-		params : {},
+	const [{ data, loading }] = useAllocationRequest({
+		url     : '/feedback_stats',
+		method  : 'get',
+		authkey : 'get_allocation_feedback_stats',
 	}, { manual: false });
 
 	return {
