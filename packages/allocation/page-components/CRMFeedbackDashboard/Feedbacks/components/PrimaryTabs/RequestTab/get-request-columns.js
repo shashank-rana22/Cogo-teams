@@ -94,7 +94,7 @@ export const REQUEST_COLUMNS = ({ refetch = () => {} }) => [
 			status = '', user_id = {}, id = '', organization = '', lead_organization = '', lead_organization_id = '',
 		}) => (
 			<section className={styles.feedback}>
-				{!status.includes(['inactive', 'active']) ? (
+				{!['inactive', 'active'].includes(status) ? (
 					<ActionButton
 						label={STATUS_MAPPING[status]?.buttonLabel}
 						status={status}

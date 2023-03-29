@@ -1,5 +1,5 @@
 import { useSelector } from '@cogoport/store';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
 import Header from './components/commons/Header';
 import OrganizationCard from './components/commons/OrganizationCard';

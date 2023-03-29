@@ -1,4 +1,5 @@
 import { Avatar, Pill } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import { forwardRef } from 'react';
 
 import styles from './styles.module.css';
@@ -7,7 +8,6 @@ function OrganizationCard(props, ref) {
 	const {
 		current : {
 			organization = '',
-			organization_id = '',
 			status = '',
 		},
 	} = ref;
@@ -20,7 +20,7 @@ function OrganizationCard(props, ref) {
 			<div className={styles.details}>
 				<span>
 					Organization Name:
-					<span className={styles.name}>{organization || '--'}</span>
+					<span className={styles.name}>{startCase(organization || '--')}</span>
 				</span>
 
 				<Pill
