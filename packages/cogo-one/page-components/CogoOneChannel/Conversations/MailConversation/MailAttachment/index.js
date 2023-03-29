@@ -2,11 +2,15 @@ import { Placeholder, Modal } from '@cogoport/components';
 import { IcMDocument, IcMDownload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useGetMailAttachment from '../../../../../hooks/useGetMailAttachment';
+
 import styles from './styles.module.css';
 
 const renderContent = (showPreview) => `data:${showPreview?.contentType};base64,${showPreview?.contentBytes}`;
 
-function MailAttachments({ allAttachements = [], loading = false }) {
+function MailAttachments({ activeMail, emailAddress }) {
+	const { attachmentData = {}, attachmentLoading } = useGetMailAttachment({ activeMail, emailAddress });
+	const allAttachements = attachmentData?.value || [];
 	const [showPreview, setShowPreview] = useState(null);
 	const externalAttachements = allAttachements.filter((att) => !att.isInline);
 
@@ -62,7 +66,7 @@ function MailAttachments({ allAttachements = [], loading = false }) {
 
 	return (
 		<div className={styles.container}>
-			{loading ? (
+			{attachmentLoading ? (
 				<div className={styles.content}>
 					<Placeholder width="120px" height="18px" />
 				</div>

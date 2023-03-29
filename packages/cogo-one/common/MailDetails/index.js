@@ -1,6 +1,7 @@
 import { cl } from '@cogoport/components';
 import { IcMArrowLeft, IcMArrowRight, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty, format, startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import { replySvg } from '../../constants/MAIL_CONSTANT';
 import useListMail from '../../hooks/useListMail';
@@ -24,14 +25,21 @@ function MailDetails({
 		setListData = () => {},
 	} = useListMail({ activeSelect, senderMail });
 
+	useEffect(() => {
+		let interval = '';
+		if (activeSelect) {
+			interval = setInterval(() => {
+				setListData({ value: [], isLastPage: false });
+				setPagination(1);
+				getEmails();
+			}, 60000);
+		}
+		return () => clearInterval(interval);
+	}, [getEmails, activeSelect, setPagination, setListData]);
+
 	const {
 		value: list = [],
 	} = listData || {};
-
-	const handleClick = () => {
-		setActiveMail({});
-		setActiveSelect(null);
-	};
 
 	function lastMessagePreview(previewData = '') {
 		return (
@@ -43,6 +51,11 @@ function MailDetails({
 		setListData({ value: [], isLastPage: false });
 		setPagination(1);
 		getEmails();
+	};
+
+	const handleClick = () => {
+		setActiveSelect(null);
+		setActiveMail({});
 	};
 
 	return (

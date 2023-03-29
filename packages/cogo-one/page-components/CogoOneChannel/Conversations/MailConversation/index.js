@@ -2,7 +2,6 @@ import { cl, Placeholder } from '@cogoport/components';
 import { isEmpty, format } from '@cogoport/utils';
 
 import useGetMail from '../../../../hooks/useGetMail';
-import useGetMailAttachment from '../../../../hooks/useGetMailAttachment';
 
 import Emailbody from './Emailbody';
 import Header from './Header';
@@ -21,8 +20,6 @@ function MailConversation({ mailProps }) {
 	} = mailProps;
 
 	const { data = {}, loading } = useGetMail({ activeMail, emailAddress });
-	const { attachmentData = {}, attachmentLoading } = useGetMailAttachment({ activeMail, emailAddress });
-	const allAttachements = attachmentData?.value || [];
 
 	const {
 		sentDateTime = '',
@@ -95,7 +92,7 @@ function MailConversation({ mailProps }) {
 					</div>
 				</div>
 			)}
-			<MailAttachments allAttachements={allAttachements} loading={attachmentLoading} />
+			<MailAttachments activeMail={activeMail} emailAddress={emailAddress} />
 		</div>
 	);
 }

@@ -36,7 +36,6 @@ function MailModal({
 	const [type, setType] = useState('');
 	const [recipientValue, setRecipientValue] = useState('');
 	const [ccBccValue, setCcBccValue] = useState('');
-	const [error, setError] = useState(false);
 	const [errorValue, setErrorValue] = useState('');
 	const [uploading, setUploading] = useState(false);
 
@@ -58,7 +57,6 @@ function MailModal({
 		setErrorValue,
 		recipientValue,
 		ccBccValue,
-		setError,
 		setRecipientValue,
 		setType,
 		setShowControl,
@@ -149,14 +147,15 @@ function MailModal({
 										value={recipientValue}
 										onChange={(e) => handleChange(e)}
 										onKeyPress={(e) => handleKeyPress(e)}
-										className={cl`${error ? styles.error_input_container : styles.input_container}`}
+										className={cl`
+										${errorValue ? styles.error_input_container : styles.input_container}`}
 										id="inputId"
 									/>
 									<div className={styles.cross_icon}>
 										<IcMCross onClick={() => handleError('receipient')} />
 									</div>
 								</div>
-								{(error) && (
+								{(errorValue) && (
 									<div className={styles.error_content_container}>
 										{errorValue}
 									</div>
@@ -194,13 +193,14 @@ function MailModal({
 										value={ccBccValue}
 										onChange={(e) => handleChange(e)}
 										onKeyPress={(e) => handleKeyPress(e)}
-										className={cl`${error ? styles.error_input_container : styles.input_container}`}
+										className={cl`
+										${errorValue ? styles.error_input_container : styles.input_container}`}
 									/>
 									<div className={styles.cross_icon}>
 										<IcMCross onClick={() => handleError('ccBccValue')} />
 									</div>
 								</div>
-								{(error) && (
+								{(errorValue) && (
 									<div className={styles.error_content_container}>
 										Enter valid mail
 									</div>

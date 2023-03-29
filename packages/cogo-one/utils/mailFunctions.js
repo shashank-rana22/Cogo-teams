@@ -5,7 +5,6 @@ function mailFunction({
 	setErrorValue = () => {},
 	recipientValue = '',
 	ccBccValue = '',
-	setError = () => {},
 	recipientArray = [],
 	bccArray = [],
 	setRecipientArray = () => {},
@@ -26,17 +25,14 @@ function mailFunction({
 			if ((type === 'recipient' && !validateEmail(recipientValue))
 			|| (type === 'cc_bcc' && !validateEmail(ccBccValue))) {
 				setErrorValue('Enter valid id');
-				setError(true);
 				return;
 			}
 			if ((type === 'recipient' && isInList(recipientValue, recipientArray))
 			|| (type === 'cc_bcc' && isInList(ccBccValue, bccArray))) {
 				setErrorValue('Email already present');
-				setError(true);
 				return;
 			}
 
-			setError(false);
 			setErrorValue(null);
 			if (type === 'recipient') {
 				setRecipientArray((prev) => [...prev, recipientValue]);
@@ -55,7 +51,6 @@ function mailFunction({
 	const handleEdit = (val) => {
 		setType(val);
 		setShowControl(true);
-		setError(false);
 		setErrorValue(null);
 		if (type === 'recipient') {
 			setCcBccValue('');
@@ -81,7 +76,6 @@ function mailFunction({
 	};
 
 	const handleError = (s) => {
-		setError(false);
 		if (s === 'receipient') { setRecipientValue(''); } else { setCcBccValue(''); }
 		setShowControl(false);
 	};
