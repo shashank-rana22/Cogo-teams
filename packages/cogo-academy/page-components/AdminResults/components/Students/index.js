@@ -76,6 +76,7 @@ function StudentsComponent({ test_id }) {
 				filter={filter}
 				setFilter={setFilter}
 				setSearchValue={setSearchValue}
+				searchValue={searchValue}
 				debounceQuery={debounceQuery}
 				activeTab={activeTab}
 			/>

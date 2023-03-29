@@ -11,9 +11,10 @@ function DurationAndValidity({ setValue, data, control, errors, loading }) {
 	const controls = getControls();
 
 	useEffect(() => {
-		if (data) {
+		if (!isEmpty(data)) {
 			controls.forEach(({ name: controlName }) => {
 				const { validity_end, validity_start } = data || {};
+
 				if (controlName === 'test_validity') {
 					setValue(controlName, {
 						startDate : new Date(format(validity_start)),
@@ -25,8 +26,7 @@ function DurationAndValidity({ setValue, data, control, errors, loading }) {
 			});
 		}
 		setValue('maximum_attempts', '1');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data]);
+	}, [controls, data, setValue]);
 
 	if (isEmpty(data) || loading) {
 		return <Placeholder height="130px" width="100%" margin="0px 0px 20px 0px" />;
