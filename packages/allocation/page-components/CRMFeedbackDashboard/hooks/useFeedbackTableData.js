@@ -106,10 +106,10 @@ const useFeedbackTableData = ({ organizationId = '', type = '' }) => {
 			.filter((item) => checkedRowsId.includes(item.id))
 			.map(({ source_id, source_type, organization_id, lead_organization_id }) => ({
 				source_id,
-				source       : source_type,
-				organization_id,
-				lead_organization_id,
-				request_type : 'enrichment',
+				source               : source_type,
+				organization_id      : organization_id || undefined,
+				lead_organization_id : lead_organization_id || undefined,
+				request_type         : 'enrichment',
 			}));
 
 		setSelectedBulkData(bulkData);
