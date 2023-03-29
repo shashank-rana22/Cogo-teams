@@ -25,4 +25,9 @@
 	margin-left: auto;
 }
 
-
+.loader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50px;
+}

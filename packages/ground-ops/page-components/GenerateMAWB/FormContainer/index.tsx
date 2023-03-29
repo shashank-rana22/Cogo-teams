@@ -41,8 +41,8 @@ function FormContainer({
 		return (
 			<Button
 				onClick={() => {
-					setHawbDetails(hawbDetails.filter((itm) => itm.id !== activeHawb));
-					setActiveHawb(hawbDetails[0].id);
+					setHawbDetails((prev) => prev.filter((itm) => itm.id !== activeHawb));
+					setActiveHawb(hawbDetails.find((ele) => ele.id !== activeHawb).id);
 				}}
 				themeType="secondary"
 				style={{ border: '1px solid #333', marginLeft: '8%' }}

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Modal } from '@cogoport/components';
+import { Modal, Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
 
@@ -65,7 +65,7 @@ function GenerateMAWB({
 		...formValues,
 	};
 
-	const { hawbData, getHawb, hawbSuccess, setHawbSuccess } = useGetHawb();
+	const { hawbData, getHawb, hawbSuccess, setHawbSuccess, loading } = useGetHawb();
 
 	const [taskItem, setTaskItem] = useState({ ...item, ...item.documentData });
 
@@ -84,8 +84,11 @@ function GenerateMAWB({
 
 	useEffect(() => {
 		getHawb(activeHawb);
+	}, [activeHawb]);
+
+	useEffect(() => {
 		if (hawbSuccess) {
-			setTaskItem({ ...item, ...hawbData.data.documentData });
+			setTaskItem({ ...item, ...hawbData.data.data });
 			setHawbSuccess(false);
 		} else {
 			setTaskItem({ ...item, ...item.documentData });
@@ -112,7 +115,7 @@ function GenerateMAWB({
 		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 		setValue('shipperSignature', taskItem.customer_name);
 		setValue('amountOfInsurance', 'NIL');
-	}, [activeHawb]);
+	}, [hawbSuccess, activeHawb]);
 
 	useEffect(() => {
 		setChargeableWeight(formValues.chargeableWeight);
@@ -180,6 +183,7 @@ function GenerateMAWB({
 
 	return (
 		<div className={styles.container}>
+			{loading && <Loader themeType="primary" className={styles.loader} />}
 			{!viewDoc && (
 				<GenerateHeader
 					setGenerate={setGenerate}
