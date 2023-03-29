@@ -9,8 +9,8 @@ function CaseStudy({ case_study, user_name }) {
 		<div>
 			<div className={styles.description}>{description}</div>
 
-			{questions.map((question, index) => (
-				<div className={styles.question_card}>
+			{(questions || []).map((question, index) => (
+				<div key={question.question_data.id} className={styles.question_card}>
 					<QnAItem data={question} index={index} user_name={user_name} />
 				</div>
 			))}

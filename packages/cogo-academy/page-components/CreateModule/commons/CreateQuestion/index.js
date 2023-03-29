@@ -190,6 +190,7 @@ function CreateQuestion({
 							setEditDetails={setEditDetails}
 							setAllKeysSaved={setAllKeysSaved}
 							mode={mode}
+							type="stand_alone"
 						/>
 					) : (
 						<CaseStudyForm
