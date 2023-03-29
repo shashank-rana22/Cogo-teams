@@ -27,7 +27,6 @@ function FilterContent({
 						page_limit: 10,
 					}}
 				/>
-
 			</div>
 
 			<div className={styles.button_container}>
