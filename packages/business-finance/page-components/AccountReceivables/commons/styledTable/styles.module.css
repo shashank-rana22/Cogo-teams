@@ -1,0 +1,27 @@
+.table {
+	:global {
+		padding: 24px 16px;
+		margin-bottom: 0 !important;
+		background-color: #ffff;
+
+		.ui_table_container {
+			border: none;
+		}
+
+		.ui_table_body_cell {
+			padding: 21px 10px !important;
+		}
+
+		.ui_table_head_cell {
+			border-bottom: 1px solid #f68b21;
+		}
+
+		.ui_table_body_row {
+			position: relative;
+		}
+
+		.ui_table_head_cell:first-child {
+			padding: 0 0 0 30px;
+		}
+	}
+}
