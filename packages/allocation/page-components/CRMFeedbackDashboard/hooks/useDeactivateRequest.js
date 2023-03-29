@@ -29,10 +29,10 @@ const useDeactivateRequest = ({ feedback_request_id = '', refetch = () => {} }) 
 
 			Toast.success('Request has been deactivated successfully.');
 			refetch();
+			onCloseModal();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
-		onCloseModal();
 	};
 
 	return {

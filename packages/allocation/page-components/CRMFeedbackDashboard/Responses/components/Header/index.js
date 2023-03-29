@@ -1,11 +1,18 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
+import { forwardRef } from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ organization = '' }) {
+function Header(props, ref) {
 	const router = useRouter();
+
+	const {
+		current : {
+			organization = '',
+		},
+	} = ref;
 
 	return (
 		<button
@@ -19,4 +26,4 @@ function Header({ organization = '' }) {
 	);
 }
 
-export default Header;
+export default forwardRef(Header);

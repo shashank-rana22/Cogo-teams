@@ -36,7 +36,7 @@ export const REQUEST_COLUMNS = ({
 		key      : 'serial_id',
 		id       : 'serial_id',
 		accessor : ({ organization = {}, lead_organization = {}, lead_organization_id = '' }) => (
-			<Pill size="md" color="orange">
+			<Pill size="md">
 				#
 				{lead_organization_id ? (
 					lead_organization?.serial_id || '__'

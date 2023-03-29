@@ -45,7 +45,6 @@ function ResponseCard({
 							{['mobile_number', 'whatsapp_number', 'alternate_mobile_number'].includes(key) ? (
 								<div className={styles.item_value}>
 									{user[MOBILE_NUMBERS_MAPPING[key]]}
-									-
 									{user?.[key] || '___'}
 								</div>
 							) : (

@@ -15,7 +15,6 @@ export const CARD_LABELS_MAPPING = {
 	user: {
 		name                    : 'Point Of Contact (User Name)',
 		email                   : 'Email',
-		alternate_email         : 'Alternate Email',
 		mobile_number           : 'Mobile Number',
 		alternate_mobile_number : 'Alternate Mobile Number',
 		whatsapp_number         : 'Whatsapp Number',
