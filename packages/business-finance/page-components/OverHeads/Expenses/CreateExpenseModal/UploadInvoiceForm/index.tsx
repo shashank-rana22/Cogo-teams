@@ -2,6 +2,7 @@ import { Input, Select, Button } from '@cogoport/components';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters';
+import { CURRENCY_OPTIONS } from '../../../constants/CURRENCY_OPTIONS';
 import { nonRecurringUploadInvoice } from '../../../Controls/nonRecurringUploadInvoice';
 import { recurringUploadInvoice } from '../../../Controls/recurringUploadInvoice';
 import LineItemsForm from '../../LineItemsForm';
@@ -42,13 +43,6 @@ function UploadInvoiceForm({
 		uploadControls = nonRecurringUploadInvoice;
 	}
 
-	const currencyOptions = [
-		{ label: 'INR', value: 'INR' },
-		{ label: 'USD', value: 'USD' },
-		{ label: 'VN', value: 'VN' },
-		{ label: 'GBP', value: 'GBP' },
-	];
-
 	return (
 		<div>
 			<div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
@@ -57,7 +51,7 @@ function UploadInvoiceForm({
 						value={formData?.invoiceCurrency}
 						onChange={(val:string) => setFormData({ ...formData, invoiceCurrency: val })}
 						placeholder="Currency*"
-						options={currencyOptions}
+						options={CURRENCY_OPTIONS}
 						size="sm"
 					/>
 

@@ -38,7 +38,7 @@ export const recurringExpenseDetails = ({
 	handleVendorChange = () => {},
 }:Props) => {
 	const handleEntityChange = (e:string | number) => {
-		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[0];
+		const entityData = (entityList || []).filter((entityItem) => entityItem.id === e)?.[0];
 		setFormData({
 			...formData,
 			entityObject: entityData,

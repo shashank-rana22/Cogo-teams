@@ -10,6 +10,11 @@ import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
 import styles from './styles.module.css';
 
+interface Summary {
+	title?:string,
+	value?:any,
+}
+
 interface Entity {
 	entity_code?:number | string,
 }
@@ -168,34 +173,25 @@ function RecurringSummary({ recurringData, setRecurringData }:Props) {
            </div>,
 		},
 	];
+
+	const renderSummaryData = (summary:Summary[]) => (
+		<div style={{ display: 'flex' }}>
+				{summary?.map((item:Summary) => (
+					<div key={item.title} className={styles.section}>
+						<div className={styles.title}>{item.title}</div>
+						<div className={styles.value}>{item.value}</div>
+					</div>
+				))}
+  </div>
+	);
+
 	return (
 		<div className={styles.container}>
 			<div>Confirm Expense Details</div>
 			<div className={styles.header} />
-			<div style={{ display: 'flex' }}>
-				{summaryDataFirst.map((item) => (
-					<div key={item.title} className={styles.section}>
-						<div className={styles.title}>{item.title}</div>
-						<div className={styles.value}>{item.value}</div>
-					</div>
-				))}
-			</div>
-			<div style={{ display: 'flex' }}>
-				{summaryDataSecond.map((item) => (
-					<div key={item.title} className={styles.section}>
-						<div className={styles.title}>{item.title}</div>
-						<div className={styles.value}><div>{item.value}</div></div>
-					</div>
-				))}
-			</div>
-			<div style={{ display: 'flex' }}>
-				{summaryDataThird.map((item) => (
-					<div key={item.title} className={styles.section}>
-						<div className={styles.title}>{item.title}</div>
-						<div className={styles.value}>{item.value}</div>
-					</div>
-				))}
-			</div>
+			{renderSummaryData(summaryDataFirst)}
+			{renderSummaryData(summaryDataSecond)}
+			{renderSummaryData(summaryDataThird)}
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-indent */
+/* eslint-disable react/jsx-closing-tag-location */
 import { Placeholder } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
@@ -6,12 +6,17 @@ import { useEffect } from 'react';
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../commons/utils/formatDate';
 import { SummaryInterface } from '../../../commons/Interfaces';
+import { DURATION_MAPPING } from '../../../constants/DURATION_MAPPING';
 import { officeLocations } from '../../../utils/officeLocations';
 import useGetStakeholders from '../../hooks/useGetStakeholders';
 import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
 import styles from './styles.module.css';
 
+interface SummaryElemet {
+	title?:string,
+	value?:any,
+}
 interface Entity {
 	entity_code?:number | string,
 }
@@ -48,14 +53,6 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 	const { entityObject, branch } = expenseData || {};
 	const { entity_code:entityCode } = entityObject || {};
 	const { name:branchName } = branch || {};
-
-	const DURATION_MAPPING = {
-		WEEK      : 'Weekly',
-		TWO_WEEKS : 'Two Weeks',
-		MONTH     : 'Monthly',
-		QUARTER   : 'Quarterly',
-		YEAR      : 'Yearly',
-	};
 
 	const {
 		category, subCategory:expenseSubCategory, startDate, endDate,
@@ -135,26 +132,27 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 		{
 			title : 'Payable Amount',
 			value : (currency && payableAmount) ? (
-						<div>
-						{currency}
-						{' '}
-						{payableAmount}
-						</div>
+				<div>
+					{currency}
+					{' '}
+					{payableAmount}
+				</div>
 			) : '-',
 		},
 		{
 			title : 'Start Date',
 			value : <div>
 				{startDate
-					? formatDate(startDate, 'dd/MMM/yy', {}, false) : '-'}
-           </div>,
+					? formatDate(startDate, 'dd/MMM/yy', {}, false)
+					: '-'}
+			</div>,
 		},
 		{
 			title : 'End Date',
 			value : <div>
-			{endDate
-				? formatDate(endDate, 'dd/MMM/yy', {}, false) : '-'}
-           </div>,
+				{endDate
+					? formatDate(endDate, 'dd/MMM/yy', {}, false) : '-'}
+			</div>,
 		},
 	];
 	const summaryDataThird = [
@@ -186,37 +184,28 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 						</a>
 					)
 					: '-'}
-           </div>,
+			</div>,
 		},
 	];
+
+	const renderSummary = (summary:SummaryElemet[]) => (
+		<div style={{ display: 'flex' }}>
+			{summary?.map((item:SummaryElemet) => (
+				<div key={item.title} className={styles.section}>
+					<div className={styles.title}>{item.title}</div>
+					<div className={styles.value}>{item.value}</div>
+				</div>
+			))}
+		</div>
+	);
+
 	return (
 		<div className={styles.container}>
 			<div>Confirm Expense Details</div>
 			<div className={styles.header} />
-			<div style={{ display: 'flex' }}>
-				{summaryDataFirst?.map((item) => (
-					<div key={item.title} className={styles.section}>
-						<div className={styles.title}>{item.title}</div>
-						<div className={styles.value}>{item.value}</div>
-					</div>
-				))}
-			</div>
-			<div style={{ display: 'flex' }}>
-				{summaryDataSecond?.map((item) => (
-					<div key={item.title} className={styles.section}>
-						<div className={styles.title}>{item.title}</div>
-						<div className={styles.value}><div>{item.value}</div></div>
-					</div>
-				))}
-			</div>
-			<div style={{ display: 'flex' }}>
-				{summaryDataThird?.map((item) => (
-					<div key={item.title} className={styles.section}>
-						<div className={styles.title}>{item.title}</div>
-						<div className={styles.value}>{item.value}</div>
-					</div>
-				))}
-			</div>
+			{renderSummary(summaryDataFirst)}
+			{renderSummary(summaryDataSecond)}
+			{renderSummary(summaryDataThird)}
 		</div>
 	);
 }

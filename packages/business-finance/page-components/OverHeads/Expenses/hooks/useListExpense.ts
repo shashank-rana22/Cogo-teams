@@ -5,6 +5,8 @@ interface Filters {
 	branch?:string | number,
 	expenseCategory?:string,
 	searchValue?:string,
+	pageSize?:number,
+	pageIndex?:number,
 }
 
 interface Sort {
@@ -21,7 +23,7 @@ interface Filter {
 }
 
 const useListExpense = ({ expenseFilters, id, expenseType, sort }:Filter) => {
-	const { branch, expenseCategory, searchValue } = expenseFilters || {};
+	const { branch, expenseCategory, searchValue, pageSize, pageIndex } = expenseFilters || {};
 	const { invoiceAmountSortType, tdsSortType, payableSortType, paidAmountSortType } = sort || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -47,6 +49,8 @@ const useListExpense = ({ expenseFilters, id, expenseType, sort }:Filter) => {
 					payableSortType        : payableSortType || undefined,
 					tdsSortType            : tdsSortType || undefined,
 					entityCodeId           : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
+					pageSize,
+					pageIndex,
 				},
 			});
 		} catch (err) {
@@ -61,6 +65,8 @@ const useListExpense = ({ expenseFilters, id, expenseType, sort }:Filter) => {
 		invoiceAmountSortType,
 		tdsSortType,
 		payableSortType,
+		pageSize,
+		pageIndex,
 		paidAmountSortType]);
 
 	return {

@@ -55,7 +55,7 @@ function ExpenseComponent() {
 		expenseCategory : null,
 		searchValue     : '',
 		pageIndex       : 1,
-		pageLimit       : 10,
+		pageSize        : 10,
 	});
 	const [sort, setSort] = useState({
 		invoiceAmountSortType : null,
@@ -71,8 +71,12 @@ function ExpenseComponent() {
 	const { sendMail, loading:mailLoading } = useSendEmail();
 
 	useEffect(() => {
-		if (recurringState === 'nonRecurring') { getList(); }
-		if (recurringState === 'recurring') { getRecurringList(); }
+		if (recurringState === 'nonRecurring') {
+			getList();
+		}
+		if (recurringState === 'recurring') {
+			getRecurringList();
+		}
 	}, [getList, recurringState, expenseFilters, getRecurringList]);
 
 	useEffect(() => {
@@ -82,6 +86,7 @@ function ExpenseComponent() {
 			branch          : null,
 			repeatsEvery    : null,
 			searchValue     : '',
+			pageIndex       : 1,
 		}));
 	}, [recurringState]);
 
@@ -420,6 +425,7 @@ function ExpenseComponent() {
 					sort={sort}
 					setSort={setSort}
 					page={expenseFilters.pageIndex || 1}
+					pageSize={expenseFilters.pageSize}
 					handlePageChange={(pageValue:number) => {
 						setExpenseFilters((p) => ({ ...p, pageIndex: pageValue }));
 					}}

@@ -1,5 +1,7 @@
 import { MONTH_OPTIONS } from '../constants/MONTH_OPTIONS';
 
+import styles from './styles.module.css';
+
 interface FormDataInterface {
 	registrationNumber?: string,
 	entityObject?:{ id?:string },
@@ -38,7 +40,7 @@ export const nonRecurringExpenseDetails = ({
 	entityOptions,
 	handleVendorChange = () => {},
 }:Props) => {
-	const handleEntityChange = (e:any) => {
+	const handleEntityChange = (e:number | string) => {
 		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[0];
 		setFormData({
 			...formData,
@@ -62,7 +64,7 @@ export const nonRecurringExpenseDetails = ({
 					placeholder    : 'Vendor name',
 					span           : 2.5,
 					initialCall    : false,
-					style          : { width: '180px' },
+					className      : styles.form_element,
 				},
 				{
 					name                  : 'invoiceDate',
@@ -89,7 +91,7 @@ export const nonRecurringExpenseDetails = ({
 					value          : formData?.periodOfTransaction,
 					onChange       : (month:string) => setFormData({ ...formData, periodOfTransaction: month }),
 					options        : MONTH_OPTIONS,
-					style          : { width: '170px' },
+					className      : styles.input_width,
 				},
 				{
 					name           : 'cogoEntity',
@@ -102,7 +104,7 @@ export const nonRecurringExpenseDetails = ({
 					options        : entityOptions,
 					value          : formData?.entityObject?.id,
 					onChange       : (e:any) => handleEntityChange(e),
-					style          : { width: '170px' },
+					className      : styles.input_width,
 				},
 			],
 		},
@@ -126,7 +128,7 @@ export const nonRecurringExpenseDetails = ({
 					defaultOptions : false,
 					placeholder    : 'Category',
 					span           : 2,
-					style          : { width: '170px' },
+					className      : styles.input_width,
 					options        : categoryOptions,
 				},
 				{
@@ -137,7 +139,7 @@ export const nonRecurringExpenseDetails = ({
 					defaultOptions : false,
 					placeholder    : 'Sub-Category',
 					span           : 2,
-					style          : { width: '170px' },
+					className      : styles.input_width,
 					options        : subCategoryOptions,
 				},
 				{
@@ -148,7 +150,7 @@ export const nonRecurringExpenseDetails = ({
 					multiple       : false,
 					defaultOptions : false,
 					span           : 2,
-					style          : { width: '170px' },
+					className      : styles.input_width,
 					options        : branchOptions,
 				},
 				{

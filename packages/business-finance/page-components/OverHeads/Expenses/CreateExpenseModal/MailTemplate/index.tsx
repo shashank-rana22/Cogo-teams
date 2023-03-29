@@ -61,12 +61,6 @@ function MailTemplate({ mailData, setShowModal, getList, getRecurringList, creat
 					<Details text={stakeholderEmail || 'N/A'} />
 				</div>
 			</div>
-			{/* <div className={styles.section}>
-				<div className={styles.keys}>CC :</div>
-				<div className={styles.recipient_values}>
-					<Details text="e.g.Arjun Dhupe, Mayur Chamaria" />
-				</div>
-			</div> */}
 
 			<div className={styles.heading_subject}>Email subject</div>
 			<div className={styles.subject}>
@@ -89,7 +83,6 @@ function MailTemplate({ mailData, setShowModal, getList, getRecurringList, creat
 								<div><IcMFileUploader /></div>
 								<div style={{ marginLeft: '4px' }}>{showOverflowingNumber(filename, 10)}</div>
 							</div>
-							{/* Uploaded file */}
 						</a>
 					</div>
 				)}

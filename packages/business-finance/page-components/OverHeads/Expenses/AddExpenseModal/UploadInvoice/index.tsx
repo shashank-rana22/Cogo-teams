@@ -2,6 +2,7 @@ import { Datepicker, Input, Select, Button } from '@cogoport/components';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters';
+import { CURRENCY_OPTIONS } from '../../../constants/CURRENCY_OPTIONS';
 import { recurringUploadInvoice } from '../../../Controls/recurringUploadInvoice';
 import LineItemsForm from '../../LineItemsForm';
 
@@ -27,24 +28,16 @@ function UploadInvoice({
 	formData, setFormData, setTaxOptions, taxOptions,
 	isUploadConfirm, setIsUploadConfirm,
 }:Props) {
-	const uploadUrl = formData?.uploadedInvoice;
-
-	const currencyOptions = [
-		{ label: 'INR', value: 'INR' },
-		{ label: 'USD', value: 'USD' },
-		{ label: 'VN', value: 'VN' },
-		{ label: 'GBP', value: 'GBP' },
-	];
-
+	const { uploadedInvoice:uploadUrl, invoiceCurrency, invoiceNumber, invoiceDate, uploadedInvoice } = formData || {};
 	return (
 		<div>
 			<div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
 				<div className={styles.select}>
 					<Select
-						value={formData?.invoiceCurrency}
+						value={invoiceCurrency}
 						onChange={(val:string) => setFormData({ ...formData, invoiceCurrency: val })}
 						placeholder="Currency*"
-						options={currencyOptions}
+						options={CURRENCY_OPTIONS}
 						size="sm"
 
 					/>
@@ -55,7 +48,7 @@ function UploadInvoice({
 						name="invoiceNumber"
 						size="sm"
 						placeholder="Unique invoice no."
-						value={formData?.invoiceNumber}
+						value={invoiceNumber}
 						onChange={(e:string) => setFormData({ ...formData, invoiceNumber: e })}
 					/>
 
@@ -67,7 +60,7 @@ function UploadInvoice({
 							dateFormat="yyyy-MM-dd"
 							name="date"
 							onChange={(e:any) => setFormData((p) => ({ ...p, invoiceDate: e }))}
-							value={formData?.invoiceDate}
+							value={invoiceDate}
 							style={{ marginBottom: '-10px' }}
 						/>
 
@@ -101,7 +94,7 @@ function UploadInvoice({
 							<div>
 								<div style={{ margin: '4px 20px 8px 20px' }}>
 									<object
-										data={formData?.uploadedInvoice}
+										data={uploadedInvoice}
 										type="application/pdf"
 										height="400px"
 										width="100%"

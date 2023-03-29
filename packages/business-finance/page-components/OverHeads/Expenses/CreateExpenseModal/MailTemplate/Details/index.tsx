@@ -52,16 +52,6 @@ function Details({
 			</div>
 
 			<div className={styles.textarea}>
-				{/* <Textarea
-					className={styles.text}
-					name="bodyText"
-					size="md"
-					placeholder="Type here..."
-					onChange={(e:string) => setMailData({
-						...mailData,
-						mailText: e,
-					})}
-				/> */}
 				A new expense approval request has been placed for your response.
 				Please find the attached invoice for the same.
 			</div>
@@ -70,7 +60,7 @@ function Details({
 				<div>
 					Vendor Name:
 					{' '}
-					{vendorName}
+					{vendorName || '-'}
 				</div>
 				<div>
 					Category:
@@ -102,7 +92,7 @@ function Details({
 					{' '}
 					<span style={{ color: 'green' }}>Approve</span>
 					&nbsp; &nbsp; &nbsp; &nbsp;
-					<span style={{ color: 'red' }}>Reject</span>
+					<span style={{ color: '#EE3425' }}>Reject</span>
 				</div>
 			</div>
 

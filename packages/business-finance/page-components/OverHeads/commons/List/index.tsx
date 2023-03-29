@@ -51,13 +51,11 @@ function List({
 		bodyStyles,
 		showHeaderCheckbox,
 	} = config;
-	const list = itemData?.list;
+	const { totalRecords = 0, list } = itemData || {};
 
 	const {
 		general: { isMobile = false },
 	}:any = useSelector((state: object) => state);
-
-	const { totalRecords = 0 } = itemData?.totalRecords || {};
 
 	return (
 		<section>
@@ -94,7 +92,7 @@ function List({
 							<Pagination
 								type="table"
 								currentPage={page}
-								totalItems={itemData?.totalRecords}
+								totalItems={totalRecords}
 								pageSize={pageSize}
 								onPageChange={handlePageChange}
 							/>

@@ -99,14 +99,14 @@ function ExpenseDetailsForm({
 			value : service?.sub_category,
 		})));
 
-		const branchIds = obj?.services?.map((service) => service?.cogoport_office_id);
+		const branchIds = (obj?.services || []).map((service) => service?.cogoport_office_id);
 
 		if (branchIds?.length > 0) {
 			const branches = [];
 
 			branchIds.forEach((id) => {
 				(officeLocations || []).forEach((location) => {
-					if (id === JSON.parse(location?.value)?.branchId) {
+					if (id === JSON.parse(location.value)?.branchId) {
 						branches.push(location);
 					}
 				});

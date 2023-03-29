@@ -19,7 +19,7 @@
 
 .confirm {
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 	margin: 64px 20px 0 0;
 }
 
