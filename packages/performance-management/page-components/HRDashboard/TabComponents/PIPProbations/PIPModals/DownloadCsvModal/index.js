@@ -12,14 +12,16 @@ function DownloadCsvModal({ modal = '', setModal = () => {} }) {
 
 	const downloadLogCSV = async (type) => {
 		try {
-			await trigger({ data: { LogType: type } });
+			const response = await trigger({ data: { LogType: type } });
+			// eslint-disable-next-line no-undef
+			if (response?.data.url) { window.open(response?.data.url); }
 		} catch (e) {
 			Toast.error(e.response?.data.error.toString());
 		}
 	};
 
 	return (
-		<Modal show={modal === 'download'} onClose={() => { if (!loading) { setModal(''); } }}>
+		<Modal show={modal === 'download'} onClose={() => setModal('')}>
 			<Modal.Header title="Download PIP/Probations CSV" />
 			<Modal.Body>
 				<div>
