@@ -11,71 +11,65 @@ export const FEEDBACK_COLUMNS = ({
 	onChangeBodyCheckbox = () => {},
 }) => [
 	{
-		id  : 'checkbox',
-		key : 'checkbox',
-		Header:
-	<div>
-		<Checkbox
+		id     : 'checkbox',
+		key    : 'checkbox',
+		Header : <Checkbox
 			checked={selectAll}
 			onChange={(event) => onChangeTableHeadCheckbox(event)}
-		/>
-	</div>,
+		/>,
 		accessor: ({ id = '' }) => (
-			<div>
-				<Checkbox
-					checked={checkedRowsId.includes(id)}
-					onChange={(event) => onChangeBodyCheckbox(event, id)}
-				/>
-			</div>
+			<Checkbox
+				checked={checkedRowsId.includes(id)}
+				onChange={(event) => onChangeBodyCheckbox(event, id)}
+			/>
 		),
 	},
 	{
-		Header   : <div>ORGANIZATION</div>,
+		Header   : 'ORGANIZATION',
 		key      : 'organization',
 		id       : 'organization',
 		accessor : ({ organization = {}, lead_organization_id = '', lead_organization = {} }) => (
 			<section className={styles.table_cell}>
 				{lead_organization_id ? (
-					startCase(lead_organization?.business_name || '__')
+					startCase(lead_organization?.business_name || '___')
 				) : (
-					startCase(organization?.business_name || '__')
+					startCase(organization?.business_name || '___')
 				)}
-
 			</section>
 		),
 	},
 	{
-		Header   : <div>COGO-ENTITY</div>,
+		Header   : 'COGO-ENTITY',
 		key      : 'cogo_entity',
 		id       : 'cogo_entity',
 		accessor : ({ cogo_entity = {} }) => (
 			<section className={styles.table_cell}>
-				{cogo_entity?.business_name || '__'}
+				{cogo_entity?.business_name || '___'}
 			</section>
 		),
 	},
 	{
-		Header   : <div>TYPE</div>,
+		Header   : 'TYPE',
 		key      : 'type',
 		id       : 'type',
 		accessor : ({ source_type = '' }) => (
 			<section className={styles.table_cell}>
-				{startCase(source_type) || '__'}
+				{startCase(source_type) || '___'}
 			</section>
 		),
 	},
 	{
-		Header   : <div>SUB-TYPE</div>,
+		Header   : 'SUB-TYPE',
 		key      : 'sub_type',
 		id       : 'sub_type',
 		accessor : ({ feedback_parameter = '' }) => (
 			<section className={styles.table_cell}>
-				{startCase(feedback_parameter) || '__'}
+				{startCase(feedback_parameter) || '___'}
 			</section>
 		),
 	},
 	{
-		Header   : <div>CURRENT DATA</div>,
+		Header   : 'CURRENT DATA',
 		key      : 'current_data',
 		id       : 'current_data',
 		accessor : ({ feedback_parameter_value = '' }) => (
@@ -88,14 +82,14 @@ export const FEEDBACK_COLUMNS = ({
 					className={styles.tooltip}
 				>
 					<span className={styles.tooltip_text}>
-						{startCase(feedback_parameter_value) || '__'}
+						{startCase(feedback_parameter_value) || '___'}
 					</span>
 				</Tooltip>
 			</section>
 		),
 	},
 	{
-		Header   : <div>FEEDBACK & PROOF</div>,
+		Header   : 'FEEDBACK & PROOF',
 		key      : 'feedback',
 		id       : 'feedback',
 		accessor : ({ feedback = '', other_feedback = '', feedback_reference_document_url = '' }) => (
@@ -111,7 +105,7 @@ export const FEEDBACK_COLUMNS = ({
 					disabled={isEmpty(feedback)}
 				>
 					<span className={styles.tooltip_text}>
-						{startCase(feedback) || '__'}
+						{startCase(feedback) || '___'}
 					</span>
 				</Tooltip>
 				{feedback_reference_document_url ? (
@@ -129,7 +123,7 @@ export const FEEDBACK_COLUMNS = ({
 		),
 	},
 	{
-		Header   : <div>CORRECTION & PROOF</div>,
+		Header   : 'CORRECTION & PROOF',
 		key      : 'correction',
 		id       : 'correction',
 		accessor : ({
@@ -144,7 +138,7 @@ export const FEEDBACK_COLUMNS = ({
 				>
 					<div>
 						<span className={styles.tooltip_text}>
-							{startCase(kam_response) || '__'}
+							{startCase(kam_response) || '___'}
 						</span>
 					</div>
 				</Tooltip>
@@ -164,32 +158,32 @@ export const FEEDBACK_COLUMNS = ({
 		),
 	},
 	{
-		Header   : <div>CREATION DATE</div>,
+		Header   : 'CREATION DATE',
 		key      : 'created_date',
 		id       : 'created_date',
-		accessor : ({ created_at }) => (
+		accessor : ({ created_at = '' }) => (
 			<section className={styles.table_cell}>
 				{created_at ? format(created_at, 'dd MMM yyyy') : '___'}
 			</section>
 		),
 	},
 	{
-		Header   : <div>KAM Manager</div>,
+		Header   : 'KAM Manager',
 		key      : 'kam_manager',
 		id       : 'kam_manager',
 		accessor : ({ manager = {} }) => (
 			<section className={styles.table_cell}>
-				{manager?.name || '__'}
+				{manager?.name || '___'}
 			</section>
 		),
 	},
 	{
-		Header   : <div>KAM</div>,
+		Header   : 'KAM',
 		key      : 'kam',
 		id       : 'kam',
 		accessor : ({ created_by = {} }) => (
 			<section className={styles.table_cell}>
-				{created_by?.name || '__'}
+				{created_by?.name || '___'}
 			</section>
 		),
 	},

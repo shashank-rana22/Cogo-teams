@@ -20,6 +20,7 @@ function CrmTable({ columns, data, loading }) {
 
 	return (
 		<div className={styles.table_container}>
+
 			<Table
 				className={styles.table}
 				columns={columns || [{}]}
@@ -27,6 +28,7 @@ function CrmTable({ columns, data, loading }) {
 				loading={loading}
 				loadingRowsCount={5}
 			/>
+
 		</div>
 	);
 }

@@ -1,29 +1,29 @@
 .button {
-	margin-top: 12px;
-	margin-bottom: 12px;
-	cursor: pointer;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
 }
 
 .modal_container {
-	@media (max-width: 768px) {
-		width: 300px !important;
-	}
+  @media (max-width: 768px) {
+    width: 300px !important;
+  }
 }
 
 .modal_body {
-	min-height: 240px;
-	padding: 48px 24px;
+  min-height: 240px;
+  padding: 48px 24px;
 }
 
 .modal_select {
-	width: inherit;
-	margin-top: 20px;
+  width: inherit;
+  margin-top: 20px;
 
-	:global(.ui_multiselectt_options_container) {
-		overflow: visible;
-	}
+  :global(.ui_select_options_container) {
+    overflow: visible;
+  }
 }
 
 .submit_button {
-	margin-left: 8px;
+  margin-left: 8px;
 }

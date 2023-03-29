@@ -18,18 +18,13 @@ function PointOfContacts({ activeTab = '', feedback_request_id = '' }) {
 
 	const { page, page_limit, total_count } = paginationData;
 
-	if (loading) {
-		return (
-			<LoadingState />
-		);
-	}
+	if (loading) { return <LoadingState />; }
 
-	if (isEmpty(data) && !loading) {
+	if (isEmpty(data)) {
 		return (
 			<div className={styles.empty}>
 				<EmptyState height="280px" width="auto" flexDirection="column" textSize="20px" />
 			</div>
-
 		);
 	}
 
@@ -38,10 +33,9 @@ function PointOfContacts({ activeTab = '', feedback_request_id = '' }) {
 			<div className={styles.container}>
 				{(data).map((user, index) => (
 					<ResponseCard
-						key={user.id}
+						key={user?.id}
 						user={user}
 						index={index}
-					// loading={loading}
 						activeTab={activeTab}
 					/>
 				))}
@@ -57,7 +51,6 @@ function PointOfContacts({ activeTab = '', feedback_request_id = '' }) {
 				/>
 			</div>
 		</>
-
 	);
 }
 

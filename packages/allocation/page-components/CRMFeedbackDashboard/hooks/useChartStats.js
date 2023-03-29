@@ -9,7 +9,7 @@ const useFeedbackStats = ({ activeTab = '' }) => {
 		? 'get_allocation_feedback_stats'
 		: 'get_allocation_feedback_request_stats';
 
-	const [{ data, loading }] = useAllocationRequest({
+	const [{ data = [], loading = false }] = useAllocationRequest({
 		url,
 		method: 'GET',
 		authkey,

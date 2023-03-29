@@ -15,7 +15,7 @@ const useRequestOrganization = ({ organizationId = '', type = '' }) => {
 		},
 	});
 
-	const [{ data, loading }, refetch] = useAllocationRequest({
+	const [{ data = [], loading = false }, refetch] = useAllocationRequest({
 		url     : '/feedback_requests',
 		method  : 'get',
 		authkey : 'get_allocation_feedbacks',

@@ -1,11 +1,11 @@
 .title {
-	font-size: 28px;
-	font-weight: 600;
-	color: #221f20;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-secondary-greyscale-2);
 }
 
 @media (max-width: 576px) {
-	.title{
-		margin-top: 48px;
-	}
+  .title {
+    margin-top: 48px;
+  }
 }

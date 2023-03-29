@@ -19,7 +19,6 @@ function EmptyState({
 
 			<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
 		</div>
-
 	);
 }
 

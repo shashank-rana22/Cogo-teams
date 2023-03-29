@@ -21,10 +21,11 @@ function Responses() {
 	return (
 		<>
 			<Header ref={routeDetails} />
+
 			<OrganizationCard ref={routeDetails} />
+
 			<PrimaryTabs feedback_request_id={feedback_request_id} />
 		</>
-
 	);
 }
 

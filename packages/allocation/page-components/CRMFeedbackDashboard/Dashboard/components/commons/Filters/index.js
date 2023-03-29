@@ -1,4 +1,4 @@
-import { Select, DateRangepicker, MultiSelect } from '@cogoport/components';
+import { Select, DateRangepicker } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import {
 	asyncFieldsOrganizations,
@@ -9,7 +9,11 @@ import { useState } from 'react';
 import { controlsFeedbacks, controlsRequests } from './controls';
 import styles from './styles.module.css';
 
-function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' }) {
+function Filters({
+	pageFilters = {},
+	onChangeFilters = () => {},
+	activeTab = '',
+}) {
 	const [date, setDate] = useState();
 
 	const organizationOptions = useGetAsyncOptions({
@@ -56,17 +60,6 @@ function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' 
 		},
 	});
 
-	const getElements = (type = '') => {
-		switch (type) {
-			case 'select':
-				return Select;
-			case 'multiSelect':
-				return MultiSelect;
-			default:
-				return null;
-		}
-	};
-
 	const modifiedControls = activeTab === 'feedbacks_received'
 		? (
 			controlsFeedbacks(
@@ -84,19 +77,16 @@ function Filters({ pageFilters = {}, onChangeFilters = () => {}, activeTab = '' 
 
 	return (
 		<div className={styles.filter}>
-			{modifiedControls?.map((control) => {
-				const Element = getElements(control.type);
-				return (
-					<Element
-						key={control.name}
-						placeholder={control.placeholder}
-						className={styles.select}
-						value={pageFilters?.[control?.name]}
-						onChange={(val) => onChangeFilters({ [control?.name]: val || undefined })}
-						{...control}
-					/>
-				);
-			})}
+			{modifiedControls?.map((control) => (
+				<Select
+					key={control?.name}
+					placeholder={control?.placeholder}
+					className={styles.select}
+					value={pageFilters?.[control?.name]}
+					onChange={(val) => onChangeFilters({ [control?.name]: val || undefined })}
+					{...control}
+				/>
+			))}
 
 			{activeTab === 'feedbacks_received' ? (
 				<DateRangepicker

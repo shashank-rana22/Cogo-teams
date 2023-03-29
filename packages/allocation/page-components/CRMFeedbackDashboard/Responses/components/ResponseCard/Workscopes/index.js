@@ -17,7 +17,7 @@ function Workscopes({ work_scopes = [] }) {
 	));
 
 	return (
-		<Tooltip content={renderToolTip} placement="bottom">
+		<Tooltip content={renderToolTip} placement="top" interactive>
 			<div className={styles.overflow_flex}>
 				<div className={styles.item_value}>
 					{startCase(work_scopes?.[0] || '___')}
@@ -31,7 +31,6 @@ function Workscopes({ work_scopes = [] }) {
 						</strong>
 					)}
 				</span>
-
 			</div>
 		</Tooltip>
 	);

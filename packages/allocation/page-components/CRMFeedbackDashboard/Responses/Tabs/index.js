@@ -14,6 +14,7 @@ function PrimaryTabs({ feedback_request_id = '' }) {
 				themeType="secondary"
 				onChange={setActiveTab}
 			>
+
 				<TabPanel name="user" title="Point of Contacts">
 					<PointOfContacts activeTab={activeTab} feedback_request_id={feedback_request_id} />
 				</TabPanel>
@@ -21,6 +22,7 @@ function PrimaryTabs({ feedback_request_id = '' }) {
 				<TabPanel name="address" title="Address">
 					<Address activeTab={activeTab} feedback_request_id={feedback_request_id} />
 				</TabPanel>
+
 			</Tabs>
 		</div>
 	);

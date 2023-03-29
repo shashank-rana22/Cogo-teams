@@ -12,7 +12,7 @@ function RequestsSent({ activeTab = '' }) {
 	const {
 		data = {},
 		loading = false,
-		router,
+		router = {},
 		filters = {},
 		onChangeFilters = () => {},
 		onChangeParams = () => {},

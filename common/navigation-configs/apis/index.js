@@ -120,7 +120,6 @@ const apis = {
 	enrichment,
 	...faq,
 	performance_management,
-	// crm_feedback_dashboard,
 };
 
 export default apis;

@@ -1,4 +1,4 @@
-import { ResponsivePie } from '@cogoport/charts/pie';
+import { ResponsivePie } from '@cogoport/charts/pie/index'; //! import issue to be sorted
 
 import useChartStats from '../../../../hooks/useChartStats';
 
@@ -24,17 +24,17 @@ function Statistics({ activeTab = '' }) {
 		<section className={styles.container}>
 			{Object.values(statsControl).map((chartData) => (
 				<div className={styles.chart_container}>
-					<div className={styles.chart_title}>{chartData.title}</div>
+					<div className={styles.chart_title}>{chartData?.title}</div>
 
 					<div className={styles.single_chart_container}>
 						<ResponsivePie
 							loading={loading}
-							data={chartData.data}
+							data={chartData?.data}
 							innerRadius={0}
 							activeOuterRadiusOffset={4}
 							enableArcLinkLabels={false}
 							enableArcLabels={false}
-							colors={chartData.colors}
+							colors={chartData?.colors}
 							colorBy="index"
 							margin={{ top: 5, right: 40, bottom: 72, left: 120 }}
 							legends={[
@@ -55,12 +55,13 @@ function Statistics({ activeTab = '' }) {
 								},
 							]}
 							tooltip={({
-								datum: { label, value },
+								datum: { label = '', value = '' },
 							}) => (
 								<div className={styles.pie_tooltip}>
 									<strong>
 										{label}
 										:
+										{' '}
 										{value}
 									</strong>
 								</div>

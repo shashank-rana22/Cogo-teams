@@ -9,11 +9,13 @@ function PrimaryTabs() {
 
 	return (
 		<div style={{ marginTop: 30 }}>
+
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"
 				onChange={setActiveTab}
 			>
+
 				<TabPanel name="feedbacks_received" title="Feedbacks Received">
 					<FeedbacksReceived activeTab={activeTab} setActiveTab={setActiveTab} />
 				</TabPanel>
@@ -21,7 +23,9 @@ function PrimaryTabs() {
 				<TabPanel name="requests_sent" title="Requests Sent">
 					<RequestsSent activeTab={activeTab} />
 				</TabPanel>
+
 			</Tabs>
+
 		</div>
 	);
 }

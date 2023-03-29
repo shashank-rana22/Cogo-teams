@@ -18,7 +18,7 @@ const useFeedbackTableData = ({ organizationId = '', type = '' }) => {
 		},
 	});
 
-	const [{ data, loading }] = useAllocationRequest({
+	const [{ data = [], loading = false }] = useAllocationRequest({
 		url     : '/feedbacks',
 		method  : 'get',
 		authkey : 'get_allocation_feedbacks',

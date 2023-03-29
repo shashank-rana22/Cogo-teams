@@ -29,7 +29,7 @@ export const STATUS_MAPPING = {
 
 export const REQUEST_COLUMNS = ({ refetch = () => {} }) => [
 	{
-		Header   : <div>Serial ID</div>,
+		Header   : 'Serial ID',
 		key      : 'serial_id',
 		id       : 'serial_id',
 		accessor : ({ serial_id = '' }) => (
@@ -40,9 +40,9 @@ export const REQUEST_COLUMNS = ({ refetch = () => {} }) => [
 		),
 	},
 	{
-		Header   : <div>ORGANIZATION</div>,
-		key      : 'organization',
-		id       : 'organization',
+		Header   : 'THIRD PARTY',
+		key      : 'third_party',
+		id       : 'third_party',
 		accessor : ({ user_id = {} }) => (
 			<section className={styles.table_cell}>
 				{user_id.name || '___'}
@@ -50,7 +50,7 @@ export const REQUEST_COLUMNS = ({ refetch = () => {} }) => [
 		),
 	},
 	{
-		Header   : <div>CREATION DATE</div>,
+		Header   : 'CREATION DATE',
 		key      : 'created_date',
 		id       : 'created_date',
 		accessor : ({ created_at = '' }) => (
@@ -60,7 +60,7 @@ export const REQUEST_COLUMNS = ({ refetch = () => {} }) => [
 		),
 	},
 	{
-		Header   : <div>RESPONSE DATE</div>,
+		Header   : 'RESPONSE DATE',
 		key      : 'response_date',
 		id       : 'response_date',
 		accessor : ({ updated_at = '', status = '' }) => (
@@ -70,24 +70,22 @@ export const REQUEST_COLUMNS = ({ refetch = () => {} }) => [
 		),
 	},
 	{
-		Header   : <div>STATUS</div>,
+		Header   : 'STATUS',
 		key      : 'status',
 		id       : 'status',
 		accessor : ({
 			status = '',
 		}) => (
-			<section className={styles.view}>
-				<Pill
-					size="md"
-					color={STATUS_MAPPING[status]?.color}
-				>
-					{STATUS_MAPPING[status]?.status || 'Status not found'}
-				</Pill>
-			</section>
+			<Pill
+				size="md"
+				color={STATUS_MAPPING[status]?.color}
+			>
+				{STATUS_MAPPING[status]?.status || 'Nil'}
+			</Pill>
 		),
 	},
 	{
-		Header   : <div> </div>,
+		Header   : '',
 		key      : 'action',
 		id       : 'action',
 		accessor : ({

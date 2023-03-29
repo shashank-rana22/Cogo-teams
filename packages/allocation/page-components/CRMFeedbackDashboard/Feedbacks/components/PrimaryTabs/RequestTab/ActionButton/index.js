@@ -14,14 +14,16 @@ function ActionButton({
 	refetch = () => {},
 }) {
 	const {
-		onDeactivateRequest,
 		loading = false,
 		isOpenModal = false,
 		setisOpenModal = () => {},
+		onDeactivateRequest = () => {},
 		onCloseModal = () => {},
 	} = useDeactivateRequest({ feedback_request_id, refetch });
 
 	const router = useRouter();
+
+	const url = `/allocation/responses/${feedback_request_id}?third_party=${third_party}&organization=${organization}`;
 
 	if (status === 'responded') {
 		return (
@@ -29,11 +31,7 @@ function ActionButton({
 				size="sm"
 				themeType="secondary"
 				onClick={() => {
-					router.push(
-						`/allocation/responses/
-							${feedback_request_id}
-								?third_party=${third_party}&organization=${organization}`,
-					);
+					router.push(url);
 				}}
 			>
 				{label}

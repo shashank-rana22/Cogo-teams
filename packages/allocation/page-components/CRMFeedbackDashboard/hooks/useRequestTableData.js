@@ -14,7 +14,7 @@ const useRequestTableData = () => {
 		filters      : {},
 	});
 
-	const [{ data, loading }] = useAllocationRequest({
+	const [{ data = [], loading = false }] = useAllocationRequest({
 		url     : '/feedback_requests',
 		method  : 'get',
 		authkey : 'get_allocation_feedback_requests',

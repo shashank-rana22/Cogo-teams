@@ -1,26 +1,25 @@
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: max-content;
-	background: #fff;
-	padding: 24px 24px;
-	
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: max-content;
+  background: var(--color-secondary-5);
+  padding: 24px 24px;
 }
 
 .row {
-	flex-direction: row;
+  flex-direction: row;
 }
 
 .column {
-	flex-direction: column;
+  flex-direction: column;
 }
 
 .text {
-	font-size: 16px;
-	color: #bdbdbd;
+  font-size: 16px;
+  color: var(--color-secondary-greyscale-4);
 }
 
 .img {
-	margin: 10px;
+  margin: 10px;
 }

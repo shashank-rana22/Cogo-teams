@@ -32,6 +32,7 @@ function FeedbacksReceived({ organization_id = '', setActiveTab = () => {}, type
 
 	return (
 		<div className={styles.container}>
+
 			<EnrichmentRequest
 				checkedRowsId={checkedRowsId}
 				setActiveTab={setActiveTab}
@@ -50,6 +51,7 @@ function FeedbacksReceived({ organization_id = '', setActiveTab = () => {}, type
 					onPageChange={(val) => onChangeParams({ page: val })}
 				/>
 			</div>
+
 		</div>
 	);
 }

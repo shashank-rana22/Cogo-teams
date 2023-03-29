@@ -16,8 +16,8 @@ function EnrichmentRequest({
 	onBulkDataPayload = () => {},
 }) {
 	const {
-		onEnrichmentRequest,
-		loading,
+		onEnrichmentRequest = () => {},
+		loading = false,
 		isOpenModal = false,
 		setisOpenModal = () => {},
 		onCloseModal = () => {},

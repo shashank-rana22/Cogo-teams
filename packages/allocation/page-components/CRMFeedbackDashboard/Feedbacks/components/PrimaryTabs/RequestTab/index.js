@@ -21,6 +21,7 @@ function RequestTab({ organization_id = '', type = '' }) {
 
 	return (
 		<div className={styles.container}>
+
 			<CrmTable columns={columns} data={data} loading={loading} />
 
 			<div className={styles.pagination_container}>
@@ -32,6 +33,7 @@ function RequestTab({ organization_id = '', type = '' }) {
 					onPageChange={(val) => onChangeParams({ page: val })}
 				/>
 			</div>
+
 		</div>
 	);
 }

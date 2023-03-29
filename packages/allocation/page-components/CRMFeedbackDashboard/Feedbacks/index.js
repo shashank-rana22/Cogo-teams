@@ -26,10 +26,11 @@ function Feedbacks() {
 	return (
 		<>
 			<Header />
+
 			<OrganizationCard ref={routeDetails} />
+
 			<PrimaryTabs organization_id={organization_id} type={type} />
 		</>
-
 	);
 }
 
