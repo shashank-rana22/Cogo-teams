@@ -2,70 +2,51 @@ import { Button } from '@cogoport/components';
 
 import useCompanyDetails from '../hooks/useCompanyDetails';
 
+import Form from './Form';
 import styles from './styles.module.css';
 
 function CompanyDetails({
 	filledDetails = {},
-	tradePartyType = {},
 	setFilledDetails = () => {},
 	setCurrentStep = () => {},
-	showBackButton = false,
-	onClickBack = () => {},
 }) {
 	const {
-		loading,
 		errors = {},
-		orgControls = [],
+		control,
+		handleSubmit,
+		register,
+		setValue,
 		onSubmitOfCompanyDetails,
-		companyDetailsFormProps = {},
 	} = useCompanyDetails({
 		filledDetails,
 		setFilledDetails,
 		setCurrentStep,
 	});
 
-	const { handleSubmit = () => {}, fields = {} } = companyDetailsFormProps;
-
-	const showElements = {};
-
-	if (tradePartyType.value !== 'paying_party') {
-		showElements.verification_document = false;
-	}
-
 	return (
-		<Container>
-			<Title>Company Details</Title>
-
-			<LayoutContainer>
-				{/* <Layout
-					controls={orgControls}
-					fields={fields}
-					errors={errors}
-					showElements={showElements}
-				/> */}
-			</LayoutContainer>
-
-			<BtnGrp>
-				{showBackButton && (
-					<Button
-						className="secondary md"
-						onClick={() => onClickBack()}
-						style={{
-							marginRight: '8px',
-						}}
-					>
-						Back
-					</Button>
-				)}
+		<div className={styles.container}>
+			<Form
+				control={control}
+				register={register}
+				handleSubmit={handleSubmit}
+				onSubmitOfCompanyDetails={onSubmitOfCompanyDetails}
+				errors={errors}
+				setValue={setValue}
+				filledDetails={filledDetails}
+			/>
+			<div className={styles.button_container}>
 				<Button
-					className="primary md"
-					disabled={loading}
+					onClick={() => setCurrentStep('company_details')}
+				>
+					Back
+				</Button>
+				<Button
 					onClick={handleSubmit(onSubmitOfCompanyDetails)}
 				>
 					Proceed
 				</Button>
-			</BtnGrp>
-		</Container>
+			</div>
+		</div>
 	);
 }
 

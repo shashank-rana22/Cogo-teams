@@ -1,23 +1,22 @@
 // import { trackEvent } from '@cogo/commons/analytics';
 // import { APP_EVENT, PARTNER_EVENT } from '@cogo/commons/analytics/constants';
 import { Button, Loader } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import useListOrganizationInvoicingParties from '../../../../../../hooks/useListOrganizationInvoicingParties';
 import EmptyState from '../../../../../EmptyState';
 import CreateNewBillingAddress from '../CreateNewBillingAddress';
-// import CreateNewInvoicingParty from '../CreateNewInvoicingParty';
+import CreateNewInvoicingParty from '../CreateNewInvoicingParty';
 
 import InvoicingPartyItem from './InvoicingPartyItem';
 import styles from './styles.module.css';
 
-// const tradePartyType = {
-// 	key   : 'paying_party',
-// 	label : 'PAYING PARTY',
-// 	value : 'paying_party',
-// };
+const tradePartyType = {
+	key   : 'paying_party',
+	label : 'PAYING PARTY',
+	value : 'paying_party',
+};
 
 function InvoicingParties({
 	organization = {},
@@ -27,10 +26,6 @@ function InvoicingParties({
 	isIE,
 	source,
 }) {
-	const { general: { query } } = useSelector((state) => state);
-
-	const { checkout_id } = query || {};
-
 	const { id: organizationId = '', is_tax_applicable = false } = organization;
 
 	const [valuesState, setValuesState] = useState([]);
@@ -54,7 +49,7 @@ function InvoicingParties({
 		other_addresses_data_required   : true,
 	}), [organizationId, bookingType]);
 
-	const { data, loading } = useListOrganizationInvoicingParties({ params, bookingType });
+	const { data, loading, refetch } = useListOrganizationInvoicingParties({ params, bookingType });
 
 	const invoicingPartiesList = useMemo(() => (data || {}).list || [], [data]);
 
@@ -226,7 +221,7 @@ function InvoicingParties({
 				<CreateNewBillingAddress
 					organizationDetails={organization}
 					setShowComponent={setShowComponent}
-					// refetch={getOrganizationInvoicingParties}
+					refetch={refetch}
 					invoiceToTradePartyDetails={invoiceToTradePartyDetails}
 					setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
 				/>
@@ -236,17 +231,15 @@ function InvoicingParties({
 
 		if (showComponent === 'create_trade_party') {
 			return (
-				// <CreateNewInvoicingParty
-				// 	orgResponse={organization}
-				// 	setShowComponent={setShowComponent}
-				// 	tradePartyType={tradePartyType}
-				// 	fetchOrganizationTradeParties={getOrganizationInvoicingParties}
-				// 	viewType="from_checkout"
-				// 	source={source}
-				// />
-				<div>
-					CreateNewInvoicingParty
-				</div>
+				<CreateNewInvoicingParty
+					orgResponse={organization}
+					setShowComponent={setShowComponent}
+					tradePartyType={tradePartyType}
+					fetchOrganizationTradeParties={refetch}
+					viewType="from_checkout"
+					source={source}
+				/>
+
 			);
 		}
 

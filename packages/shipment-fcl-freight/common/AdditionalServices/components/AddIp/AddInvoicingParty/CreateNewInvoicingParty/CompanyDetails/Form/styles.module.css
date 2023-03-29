@@ -1,0 +1,35 @@
+.form_container{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 8px;
+	flex-wrap: wrap;
+
+	& > div{
+		flex: 0 0 45%;
+		margin: 4px 0px;
+	}
+}
+.label{
+	font-weight: 900;
+	line-height: 14px;
+	letter-spacing: 0.02em;
+	margin: 8px 0px;
+}
+
+
+
+.input_container{
+	display: flex;
+	flex-direction: column;
+
+	& > label{
+		font-weight: 900;
+		margin-bottom: 4px;
+	}
+
+	& > select,input{
+		height: 38px;
+		font-size: 16px;
+	}
+}

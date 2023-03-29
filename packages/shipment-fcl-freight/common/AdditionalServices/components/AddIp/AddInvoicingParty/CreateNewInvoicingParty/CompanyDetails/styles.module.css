@@ -1,17 +1,12 @@
-
-
-.btn_grp{
+.button_container{
 	display: flex;
 	justify-content: flex-end;
 	background: #ffffff;
-	padding: 16px;
+	padding: 8px;
 	border-top: 1px solid #cbcff5;
 
-	@media (min-width: 768px) {
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: 0;
+	& > button:first-of-type{
+		margin-right: 8px;
 	}
 }
 

@@ -32,7 +32,7 @@ function AddRate({
 	const [showSecondStep, setShowSecondStep] = useState(false);
 
 	const {
-		onAddRate, register, handleSubmit, loading, errors, control, unitOptions,
+		onAddRate, handleSubmit, loading, errors, control, unitOptions,
 	} = useCreateShipmentAdditionalService({
 		item,
 		isSeller,
@@ -95,7 +95,6 @@ function AddRate({
 				onSubmit={onAddRate}
 				control={control}
 				errors={errors}
-				register={register}
 				serviceData={item}
 				unitOptions={unitOptions}
 			/>

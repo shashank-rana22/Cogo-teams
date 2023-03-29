@@ -25,7 +25,6 @@ const useCreateShipmentAdditionalService = ({
 		fields,
 		handleSubmit,
 		control,
-		register,
 		formState: { errors },
 	} = useForm();
 
@@ -109,7 +108,6 @@ const useCreateShipmentAdditionalService = ({
 		onAddRate,
 		control,
 		handleSubmit,
-		register,
 		loading,
 		errors,
 		unitOptions,
