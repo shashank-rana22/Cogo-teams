@@ -33,7 +33,7 @@ export const REQUEST_COLUMNS = ({ refetch = () => {} }) => [
 		key      : 'serial_id',
 		id       : 'serial_id',
 		accessor : ({ serial_id = '' }) => (
-			<Pill size="md" color="orange">
+			<Pill size="md">
 				#
 				{serial_id || '___'}
 			</Pill>
