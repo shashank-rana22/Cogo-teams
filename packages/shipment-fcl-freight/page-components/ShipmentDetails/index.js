@@ -2,6 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import React, { useMemo } from 'react';
 
+import Timeline from '../../common/TimeLine';
 import useGetServices from '../../hooks/useGetServices';
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
@@ -9,7 +10,6 @@ import useGetTimeLine from '../../hooks/useGetTimeline';
 import ShipmentInfo from './ShipmentInfo';
 import styles from './styles.module.css';
 import Tab from './Tabs';
-import Timeline from './TimeLine';
 import TopBar from './TopBar';
 
 function ShipmentDetails() {

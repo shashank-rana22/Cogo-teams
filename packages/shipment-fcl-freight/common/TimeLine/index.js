@@ -32,8 +32,7 @@ function Timeline({ loading = false, timelineData = [] }) {
 
 	const [showEditSchedule, setShowEditSchedule] = useState(false);
 
-	// const showEditScheduleIcon = editScheduleStates.includes(primary_service?.state);
-	const showEditScheduleIcon = true;
+	const showEditScheduleIcon = editScheduleStates.includes(primary_service?.state);
 
 	const filteredTimelineData = timelineData.filter(
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),

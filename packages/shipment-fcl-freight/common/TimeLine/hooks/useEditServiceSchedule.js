@@ -4,8 +4,8 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
-import { getPrefillValue, getDateForPayload } from '../../../../common/utils/dateFormatter';
-import getApiErrorString from '../../../../utils/getApiErrorString';
+import getApiErrorString from '../../../utils/getApiErrorString';
+import { getPrefillValue, getDateForPayload } from '../../utils/dateFormatter';
 import controls from '../EditSchedule/controls';
 
 export default function useEditServiceSchedule({

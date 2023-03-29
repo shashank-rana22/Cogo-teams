@@ -1,4 +1,4 @@
-import { getPrefillValue } from '../../../../common/utils/dateFormatter';
+import { getPrefillValue } from '../../utils/dateFormatter';
 import { getDate } from '../utils/formatters';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {
@@ -29,7 +29,6 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		{
 			name       : 'schedule_departure',
 			label      : 'Actual time of departure',
-			lowerlabel : `Fluctuated time of departure: ${deviated_departure}`,
 			lowerlabel : deviated_departure ? `Fluctuated time of departure: ${deviated_departure}` : '',
 			maxDate    : null,
 		},
@@ -40,7 +39,7 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 				&& new Date(deviated_arrival) > new Date(deviated_departure)
 				? `Fluctuated time of arrival: ${deviated_arrival}` : '',
 			maxDate : null,
-			minDate: departureDate,
+			minDate : departureDate,
 			disable : false,
 		},
 	];
