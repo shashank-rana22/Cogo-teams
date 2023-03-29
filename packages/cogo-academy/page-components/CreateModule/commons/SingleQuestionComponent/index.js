@@ -74,7 +74,7 @@ function SingleQuestionComponent({
 				<InputController
 					className={`${
 						errors?.[controls[0].name] ? styles[`${controls[0].name}_err`] : null
-					}`}
+					} ${styles.input_container}`}
 					{...controls[0]}
 					control={control}
 					name={`${name}.${index}.${controls[0].name}`}

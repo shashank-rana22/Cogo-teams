@@ -8,6 +8,17 @@ import Analytics from './Analytics';
 import Header from './Header';
 import QuestionsList from './QuestionsList';
 
+const TABS_MAPPING = {
+	manage_faq: {
+		title     : 'Manage FAQ',
+		component : QuestionsList,
+	},
+	test_module: {
+		title     : 'Test Module',
+		component : HomePage,
+	},
+};
+
 function ControlCenter() {
 	const { query, push } = useRouter();
 
@@ -20,6 +31,11 @@ function ControlCenter() {
 		push(`/learning?activeTab=${val}`);
 
 		setActiveTab(val);
+	};
+
+	const tabPropsMapping = {
+		manage_faq  : {},
+		test_module : { testModuleTab },
 	};
 
 	if (!switchDashboard) {
@@ -36,15 +52,17 @@ function ControlCenter() {
 				onChange={handleChangeTab}
 				fullWidth
 			>
-				<TabPanel name="manage_faq" title="Manage FAQ">
-					<QuestionsList />
-				</TabPanel>
+				{Object.keys(TABS_MAPPING).map((item) => {
+					const activeComponentProps = tabPropsMapping[item];
+					const { title, component: ActiveComponent } = TABS_MAPPING[item];
 
-				<TabPanel name="test_module" title="Test Module">
-					<HomePage testModuleTab={testModuleTab} />
-				</TabPanel>
+					return (
+						<TabPanel key={item} name={item} title={title}>
+							<ActiveComponent {...activeComponentProps} />
+						</TabPanel>
+					);
+				})}
 			</Tabs>
-
 		</div>
 	);
 }
