@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Pill, Button, Placeholder, Toast } from '@cogoport/components';
 import { useForm, InputController, useFieldArray } from '@cogoport/forms';
 import { IcMArrowBack, IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Link } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -29,8 +28,6 @@ function ReviewAndCriteria(props) {
 
 	const [error, setError] = useState(false);
 
-	const router = useRouter();
-
 	useEffect(() => {
 		setValue('guidelines', data?.guidelines?.map((guideline) => ({ instruction: guideline })));
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,18 +35,21 @@ function ReviewAndCriteria(props) {
 
 	const [showModal, setShowModal] = useState(false);
 
-	const navigate = () => {
-		const href = '/learning?activeTab=test_module';
-		router.push(href, href);
-	};
-
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<IcMArrowBack width={20} height={20} onClick={navigate} />
-				<div className={styles.title} onClick={navigate}>New Test</div>
-			</div>
-			{(isEmpty(data) || loading) ? <Placeholder height="100px" width="100%" margin="0px 0px 20px 0px" /> : (
+			<Link href="/learning?activeTab=test_module">
+				<div className={styles.header}>
+					<IcMArrowBack width={20} height={20} />
+					<div className={styles.title}>New Test</div>
+				</div>
+			</Link>
+			{(isEmpty(data) || loading) ? (
+				<Placeholder
+					height="100px"
+					width="100%"
+					margin="0px 0px 20px 0px"
+				/>
+			) : (
 				<div className={styles.subcontainer}>
 					<div className={styles.label}>{name || '-'}</div>
 
