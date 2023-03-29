@@ -1,5 +1,6 @@
-import { Pagination } from '@cogoport/components';
+import { Toast, Pagination } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
@@ -42,7 +43,7 @@ function TestsList() {
 				},
 			});
 		} catch (err) {
-			console.log(err, 'err');
+			Toast.error(getApiErrorString(err.message?.data));
 		}
 	}, [searchQuery, trigger, user_id, testCategory, page]);
 
