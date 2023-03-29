@@ -4,18 +4,16 @@ import SortComponent from '../../../commons/SortComponent';
 
 import styles from './styles.module.css';
 
-const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
+const tableColumns = ({ sortFilter, setSortFilter }) => [
 	{
 		Header: (
 			<div className={styles.container}>
 				<div>NAME</div>
 
 				<SortComponent
-					val="user"
-					sortBy={sortBy}
-					sortType={sortType}
-					setSortBy={setSortBy}
-					setSortType={setSortType}
+					value="user"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
 				/>
 			</div>
 		),
@@ -36,11 +34,9 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 				<div>SCORE</div>
 
 				<SortComponent
-					val="score_achieved"
-					sortBy={sortBy}
-					sortType={sortType}
-					setSortBy={setSortBy}
-					setSortType={setSortType}
+					value="score_achieved"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
 				/>
 			</div>
 		),
@@ -59,11 +55,9 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 				<div>PERCENTILE</div>
 
 				<SortComponent
-					val="percentile"
-					sortBy={sortBy}
-					sortType={sortType}
-					setSortBy={setSortBy}
-					setSortType={setSortType}
+					value="percentile"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
 				/>
 			</div>
 		),
@@ -78,11 +72,9 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 				<div>TIME TAKEN</div>
 
 				<SortComponent
-					val="time_taken"
-					sortBy={sortBy}
-					sortType={sortType}
-					setSortBy={setSortBy}
-					setSortType={setSortType}
+					value="time_taken"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
 				/>
 			</div>
 		),
@@ -95,11 +87,9 @@ const tableColumns = ({ sortType, sortBy, setSortBy, setSortType }) => [
 				<div>ATTEMPTED ON</div>
 
 				<SortComponent
-					val="attempted_on"
-					sortBy={sortBy}
-					sortType={sortType}
-					setSortBy={setSortBy}
-					setSortType={setSortType}
+					value="attempted_on"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
 				/>
 			</div>
 		),

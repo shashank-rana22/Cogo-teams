@@ -2,20 +2,21 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const applySorting = (val, typ, setSortBy, setSortType) => {
-	setSortBy(val);
-	setSortType(typ);
+const applySorting = ({ value, type, setSortFilter }) => {
+	setSortFilter({ sortBy: value, sortType: type });
 };
 
-function SortComponent({ val, sortBy, sortType, setSortBy, setSortType }) {
+function SortComponent({ value, sortFilter, setSortFilter }) {
+	const { sortBy = '', sortType = '' } = sortFilter || {};
+
 	return (
 		<div className={styles.icon_div}>
-			{sortBy === val && sortType === 'desc' ? (
+			{sortBy === value && sortType === 'desc' ? (
 				<IcMArrowRotateUp
 					width={14}
 					height={14}
 					onClick={() => {
-						applySorting(val, 'asc', setSortBy, setSortType);
+						applySorting({ value, type: 'asc', setSortFilter });
 					}}
 				/>
 			) : (
@@ -23,7 +24,7 @@ function SortComponent({ val, sortBy, sortType, setSortBy, setSortType }) {
 					width={14}
 					height={14}
 					onClick={() => {
-						applySorting(val, 'desc', setSortBy, setSortType);
+						applySorting({ value, type: 'desc', setSortFilter });
 					}}
 				/>
 			)}
