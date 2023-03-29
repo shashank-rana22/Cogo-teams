@@ -1,7 +1,7 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
 
-const useGetControls = ({ isomniChannelAdmin, tagOptions, showBotMessages }) => {
+const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMessages = false }) => {
 	const listAgentsOptions = useGetAsyncOptions(
 		asyncFieldsListAgents(),
 	);
