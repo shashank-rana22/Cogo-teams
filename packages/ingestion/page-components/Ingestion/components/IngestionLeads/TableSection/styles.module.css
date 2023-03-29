@@ -1,0 +1,28 @@
+.table_main_container {
+    padding: '0 40px 0 0';
+}
+
+.table {
+    margin: 20px 0;
+	background-color: #fff;
+	box-shadow: 0 0 16px rgb(44 62 80 / 10%);
+
+	tr {
+		height: 52px;
+	}
+
+	:global(.ui_table_head_cell) {
+		font-size: 14px;
+	}
+}
+
+.pagination_container {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.empty {
+    height: '520px';
+    padding: 120px 0;
+}

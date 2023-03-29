@@ -21,6 +21,7 @@ const uploadControls = [
 		name       : 'upload',
 		label      : 'Upload',
 		type       : 'file',
+		multiple   : 'multiple',
 		// placeholder : 'Upload Here...',
 		// isClearable : true,
 		rules      : { required: 'File is Required' },
