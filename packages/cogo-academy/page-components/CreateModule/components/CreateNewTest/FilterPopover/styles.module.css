@@ -8,7 +8,6 @@
 	transition: 0.3s;
 
 	&.caret_active {
-		transition: 0.3s;
 		transform: rotate(180deg);
 	}
 }
