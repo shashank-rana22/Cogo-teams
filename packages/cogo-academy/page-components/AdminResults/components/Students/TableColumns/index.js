@@ -125,7 +125,7 @@ const getNotAppeardColumns = () => [
 	},
 ];
 
-const tableColumns = ({ sortFilter, setSortFilter, activeTab }) => {
+const getTableColumns = ({ sortFilter, setSortFilter, activeTab }) => {
 	if (activeTab === 'appeared') {
 		return getAppearedColumns({ sortFilter, setSortFilter });
 	}
@@ -133,4 +133,4 @@ const tableColumns = ({ sortFilter, setSortFilter, activeTab }) => {
 	return getNotAppeardColumns();
 };
 
-export default tableColumns;
+export default getTableColumns;
