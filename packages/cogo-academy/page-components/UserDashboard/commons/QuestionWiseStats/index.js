@@ -1,8 +1,6 @@
 import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar';
 import { useMemo } from 'react';
 
-import styles from './styles.module.css';
-
 const getQuestionAnswered = ({ question_stats }) => ({
 	id   : 'Questions Answered',
 	data : [
@@ -53,13 +51,13 @@ const radialChartData = ({ question_stats }) => {
 	return [questionAnswered, totalAnswered];
 };
 
-function QuestionWiseStats({ height = '200px', width = '200px', question_stats = {} }) {
+function QuestionWiseStats({ height = '160px', width = '200px', question_stats = {} }) {
 	const { total_questions } = question_stats;
 
 	const chartData = useMemo(() => radialChartData({ question_stats }), [question_stats]);
 
 	return (
-		<div className={styles.radial_bar_container} style={{ height: `${height}`, width: `${width}` }}>
+		<div style={{ height: `${height}`, width: `${width}` }}>
 			<ResponsiveRadialBar
 				data={chartData}
 				valueFormat=">-.2f"

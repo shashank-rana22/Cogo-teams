@@ -20,8 +20,8 @@ function ControlCenter() {
 		return <Analytics setSwitchDashboard={setSwitchDashboard} />;
 	}
 	const handleChangeTab = (val) => {
-		// eslint-disable-next-line max-len
-		const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?activeTab=${val}`;
+		const newurl = `${window.location.protocol}//
+		${window.location.host}${window.location.pathname}?activeTab=${val}`;
 
 		window.history.pushState({ path: newurl }, '', newurl);
 

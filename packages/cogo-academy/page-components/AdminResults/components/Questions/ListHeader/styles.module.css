@@ -4,6 +4,7 @@
 	cursor: pointer;
 	background: #fff;
 	border-bottom: 1px solid #f8f2e7;
+	padding: 16px 40px 12px 0;
 
 	:global {
 		.ui_accordion_title {
@@ -21,25 +22,9 @@
 	}
 }
 
-.container2 {
+.container_item {
 	display: flex;
-	width: 100%;
-	padding: 16px 24px 12px 0;
-}
-
-.small_section {
-	display: flex;
-	flex-wrap: wrap;
 	justify-content: center;
-	width: 10%;
-	margin-right: 16px;
-	font-size: 14px;
-	font-weight: 600;
-	text-align: center;
-}
-
-.small_section_sort {
-	display: flex;
 	align-items: center;
 	width: 10%;
 	margin-right: 16px;
@@ -52,8 +37,4 @@
 	width: 50%;
 	font-size: 14px;
 	font-weight: 600;
-}
-
-.icon {
-	width: 2%;
 }

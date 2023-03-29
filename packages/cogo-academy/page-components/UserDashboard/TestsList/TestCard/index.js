@@ -38,16 +38,19 @@ function TestCard({ test_card }) {
 
 	const { push } = useRouter();
 
-	const handleGoToTest = (test_id) => {
-		const href = '/learning/tests/[test_id]';
-		const as = `/learning/tests/${test_id}`;
+	const handleRedirect = ({ test_id, redirect_to }) => {
+		const redirection_mapping = {
+			test: {
+				href : '/learning/tests/[test_id]',
+				as   : `/learning/tests/${test_id}`,
+			},
+			dashboard: {
+				href : '/learning/tests/dashboard/[test_id]',
+				as   : `/learning/tests/dashboard/${test_id}`,
+			},
+		};
 
-		push(href, as);
-	};
-
-	const handleGoToResults = (test_id) => {
-		const href = '/learning/tests/dashboard/[test_id]';
-		const as = `/learning/tests/dashboard/${test_id}`;
+		const { href, as } = redirection_mapping[redirect_to];
 
 		push(href, as);
 	};
@@ -70,9 +73,12 @@ function TestCard({ test_card }) {
 				</div>
 
 				{status === 'published' ? (
-					<span onClick={() => handleGoToResults(id)} role="presentation" className={styles.check_results}>
+					<span
+						onClick={() => handleRedirect({ test_id: id, redirect_to: 'dashboard' })}
+						role="presentation"
+						className={`${styles.check_results} ${styles.arrow}`}
+					>
 						Check Results
-						{' '}
 						<span className={styles.icon}><IcMArrowRight /></span>
 					</span>
 				) : (
@@ -91,7 +97,11 @@ function TestCard({ test_card }) {
 
 			{current_status === 'active_test' || (current_status === 'completed' && attempts_count < maximum_attempts)
 				? (
-					<div role="presentation" onClick={() => handleGoToTest(id)} className={styles.arrow}>
+					<div
+						role="presentation"
+						onClick={() => handleRedirect({ test_id: id, redirect_to: 'test' })}
+						className={styles.arrow}
+					>
 						<IcMArrowRight style={{ height: 40, width: 30 }} />
 					</div>
 				)
