@@ -1,3 +1,9 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+} 
+
 .container{
     margin-top: 20px;
     background-color: #FFFFFF;

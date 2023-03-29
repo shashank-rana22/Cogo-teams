@@ -4,9 +4,9 @@ import { startCase, format } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React from 'react';
 
-import EmptyState from '../../../../../common/EmptyState';
-import useListWallet from '../../../../../hooks/useListWallet';
-import useDeleteDocument from '../../../../../hooks/useUpdateOrganizationDocument';
+import useListWallet from '../../../hooks/useListWallet';
+import useDeleteDocument from '../../../hooks/useUpdateOrganizationDocument';
+import EmptyState from '../../EmptyState';
 
 import Loader from './Loader';
 import styles from './styles.module.css';

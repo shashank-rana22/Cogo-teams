@@ -27,9 +27,12 @@ function useGetTimeLine({ shipment_data = {} }) {
 	}), [shipment_id, trigger]);
 
 	return {
-		loading,
-		timelineData: data || [],
-		getShipmentTimeline,
+		getTimeline: {
+			loading,
+			timelineData: data || [],
+			getShipmentTimeline,
+		},
+
 	};
 }
 

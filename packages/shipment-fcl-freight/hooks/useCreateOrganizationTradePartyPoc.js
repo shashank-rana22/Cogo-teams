@@ -23,8 +23,7 @@ const useCreateOrganizationTradePartyPoc = ({
 	};
 
 	return {
-		apiTrigger,
-		loading,
+		apiTrigger, loading,
 	};
 };
 

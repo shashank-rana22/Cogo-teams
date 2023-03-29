@@ -15,8 +15,6 @@ const labels = [
 	'packages',
 	'volume',
 	'weight',
-	'master_airway_bill_number',
-	'house_airway_bill_number',
 	'haulage_type',
 	'transport_mode',
 	'cargo_weight_per_container',
@@ -29,11 +27,6 @@ const labels = [
 	'contract_reference_id',
 ];
 
-/**
- * Renders a CargoDetails Component
- * @param {Object}      					props
- * @param {Array of Object} 				[props.detail=[{}]] - Specifies details of cargo
- */
 function RenderCargoPills({ detail }) {
 	return (
 		<>

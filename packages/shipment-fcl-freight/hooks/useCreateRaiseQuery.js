@@ -12,7 +12,7 @@ function useCreateRaiseQuery({
 	queryType = '',
 	remarks = '',
 }) {
-	const { scope, userId } = useSelector(({ profile }) => ({
+	const { userId } = useSelector(({ profile }) => ({
 		userId: profile.id,
 	}));
 
@@ -26,7 +26,7 @@ function useCreateRaiseQuery({
 	const [{ loading }, trigger] = useRequest({
 		url    : 'raise_query',
 		method : 'POST',
-		scope,
+		scope  : 'saas',
 	}, { manual: true });
 
 	const handleFormSubmit = useCallback(() => {
@@ -36,7 +36,7 @@ function useCreateRaiseQuery({
 				remarks,
 				performed_by_id : userId,
 				service         : 'shipment',
-				service_id      : shipmentId,
+				service_id      : shipmentId || '3534d9b2-7a8c-47a0-a3d1-93cfb7bf9f69',
 			};
 			try {
 				const res = await trigger({
