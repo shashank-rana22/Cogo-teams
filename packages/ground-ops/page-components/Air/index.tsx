@@ -1,4 +1,4 @@
-import { Input } from '@cogoport/components';
+import { Input, Toggle } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
@@ -34,6 +34,7 @@ const tabsComponentMapping = {
 function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 	const [activeTab, setActiveTab] = useState(tabs[0].key);
 	const [filters, setFilters] = useState({});
+	const [relevantToMe, setRelevantToMe] = useState(false);
 
 	const ActiveTabComponent = tabsComponentMapping[activeTab] || null;
 
@@ -44,7 +45,7 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 	const {
 		data, loading, page,
 		setPage, listAPi, searchValue, setSearchValue,
-	} = useListShipmentPendingTasks({ activeTab, filter: filters });
+	} = useListShipmentPendingTasks({ activeTab, filter: filters, relevantToMe });
 
 	useEffect(() => {
 		listAPi();
@@ -86,7 +87,17 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 						setSearchValue(val);
 					}}
 				/>
-				<Filters setFilters={setFilters} filters={filters} />
+				<div className={styles.flex}>
+					<Toggle
+						name="stakeholder_id"
+						size="sm"
+						disabled={false}
+						onLabel="Relevent to me"
+						offLabel="All"
+						onChange={() => setRelevantToMe((p) => !p)}
+					/>
+					<Filters setFilters={setFilters} filters={filters} />
+				</div>
 			</div>
 			{ActiveTabComponent && (
 				<ActiveTabComponent
