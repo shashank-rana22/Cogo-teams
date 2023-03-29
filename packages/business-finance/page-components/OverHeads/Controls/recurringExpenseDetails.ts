@@ -114,12 +114,14 @@ export const recurringExpenseDetails = ({
 			span    : 12,
 			groupBy : [
 				{
-					name  : 'payableAmount',
-					label : 'Payable Amount',
-					type  : 'textarea',
-					style : { borderRadius: '4px', width: '164px', height: '40px', padding: '7px' },
-					span  : 2.2,
-					size  : 'md',
+					name               : 'payableAmount',
+					label              : 'Payable Amount',
+					type               : 'input',
+					prefix             : null,
+					onlyNumbersAllowed : true,
+					style              : { borderRadius: '4px', width: '164px', height: '40px', padding: '7px' },
+					span               : 2.2,
+					size               : 'md',
 				},
 				{
 					name    : 'currency',

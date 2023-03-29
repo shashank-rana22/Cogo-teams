@@ -28,6 +28,7 @@ const lineItemColumns = ({
 				<div style={{ width: '90px' }}>
 					<InputController
 						size="sm"
+						type="number"
 						control={control}
 						name={`line_items.${index}.amount_before_tax`}
 						value={lineItemsList[index]?.amount_before_tax}
@@ -57,6 +58,7 @@ const lineItemColumns = ({
 				<div style={{ width: '80px' }}>
 					<InputController
 						size="sm"
+						type="number"
 						control={control}
 						name={`line_items.${index}.amount_after_tax`}
 						value={lineItemsList[index]?.amount_after_tax}
@@ -72,6 +74,7 @@ const lineItemColumns = ({
 				<div style={{ width: '50px' }}>
 					<InputController
 						size="sm"
+						type="number"
 						control={control}
 						name={`line_items.${index}.tds`}
 						value={lineItemsList[index]?.tds}
@@ -85,6 +88,7 @@ const lineItemColumns = ({
 			accessor : (row:any, index:number) => (
 				<InputController
 					size="sm"
+					type="number"
 					control={control}
 					name={`line_items.${index}.payable_amount`}
 					value={lineItemsList[index]?.payable_amount}

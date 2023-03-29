@@ -57,7 +57,7 @@ function Element({
 	...rest
 }: ElementProps) {
 	const [show, setShow] = useState(false);
-	const { style, selectWidth, options } = rest;
+	const { style, selectWidth, options, onlyNumbersAllowed = false } = rest;
 	const { setFilters } = rest;
 	const tagClick = (val: Options) => {
 		setFilters((prev: object) => ({
@@ -183,6 +183,7 @@ function Element({
 						style={style as CSSProperties}
 						className={className}
 						prefix={<IcMSearchlight height={15} width={15} />}
+						type={onlyNumbersAllowed ? 'number' : 'text'}
 						{...rest}
 					/>
 				);
@@ -258,7 +259,6 @@ function Element({
 						{...rest}
 					/>
 				);
-
 			default:
 				return (
 					<div className={className} {...rest}>
