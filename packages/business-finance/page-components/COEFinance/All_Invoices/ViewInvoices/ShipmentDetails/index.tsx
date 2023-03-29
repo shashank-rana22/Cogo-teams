@@ -55,6 +55,8 @@ interface BillInterface {
 	billCurrency: string;
 	grandTotal: any;
 	subTotal: string | number;
+	billType : string;
+	isProforma:boolean,
 }
 interface JobInterface {
 	jobNumber: string;

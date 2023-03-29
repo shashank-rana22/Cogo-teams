@@ -1,6 +1,5 @@
 import { Button, Tooltip, Modal, Pill } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -15,6 +14,8 @@ interface BillInterFace {
 	grandTotal: number;
 	billCurrency: string;
 	id?: string;
+	billType:string;
+	isProforma:boolean;
 }
 interface BillAdditionalObject {
 	collectionPartyId?: string;
@@ -38,12 +39,10 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 	const [remark, setRemark] = useState('');
 	const { bill, remarks = [], serviceType, billAdditionalObject } = data || {};
 	const { urgencyTag, urgencyRemarks } = billAdditionalObject || {};
-	const { grandTotal, billCurrency, id } = bill || {};
+	const { grandTotal, billCurrency, id, billType, isProforma } = bill || {};
 	const [removeTag, setRemoveTag] = useState(false);
 	const [showAddTag, setShowAddTag] = useState(false);
 	const [tagValue, setTagValue] = useState('');
-	const { query } = useRouter();
-	const { billType, isProforma } = query;
 
 	if (serviceType === 'air_freight') {
 		urgencyOptions.push({ label: 'Airlines DO Payments', value: 'air_do' });
