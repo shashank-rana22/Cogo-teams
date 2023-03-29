@@ -12,7 +12,7 @@ const getDifficultyData = (difficulty_wise_stats = {}) => (Object.keys(difficult
 
 const getTopicWiseData = (topic_wise_percentile = {}) => (Object.keys(topic_wise_percentile).map((key, index) => ({
 	label      : startCase(key),
-	percentile : topic_wise_percentile[key].toFixed(2),
+	percentile : (topic_wise_percentile[key] || 0).toFixed(2),
 	color      : colorArray[index],
 })));
 
