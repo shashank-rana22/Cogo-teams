@@ -47,7 +47,7 @@ function StudentsComponent({ test_id }) {
 		params : { ...payload },
 	}, { manual: false });
 
-	const { page_limit = 0, total_count = 0, list } = data || {};
+	const { stats = [], page_limit = 0, total_count = 0, list } = data || {};
 
 	const columns = tableColumns({ sortFilter, setSortFilter, activeTab });
 
@@ -67,9 +67,9 @@ function StudentsComponent({ test_id }) {
 					themeType="tertiary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="appeared" title="Appeared" badge={list?.stats?.appeared || '0'} />
+					<TabPanel name="appeared" title="Appeared" badge={stats[0]?.appeared || '0'} />
 
-					<TabPanel name="not_appeared" title="Not Appeared" badge={list?.stats?.appeared || '0'} />
+					<TabPanel name="not_appeared" title="Not Appeared" badge={stats[1]?.not_appeared || '0'} />
 				</Tabs>
 			</div>
 
