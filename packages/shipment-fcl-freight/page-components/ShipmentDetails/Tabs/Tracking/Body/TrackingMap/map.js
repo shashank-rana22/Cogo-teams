@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
 import { CogoMaps, L } from '@cogoport/maps';
+import { useState, useEffect } from 'react';
+
 import Pointer from './Pointer';
 import Route from './Route';
 
 const LAYER = [
 	{
-		name: 'Cogo Maps',
+		name        : 'Cogo Maps',
 		// eslint-disable-next-line max-len
-		url: "https://api.cogoport.com/cogo-tiles/{z}/{x}/{y}.png",
-		attribution: '',
+		url         : 'https://api.cogoport.com/cogo-tiles/{z}/{x}/{y}.png',
+		attribution : '',
 	},
 ];
 

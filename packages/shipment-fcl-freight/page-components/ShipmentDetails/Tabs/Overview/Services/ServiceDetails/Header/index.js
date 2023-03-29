@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
 
-import EditCancelService from './EditCancelService';
+// import EditCancelService from './EditCancelService';
 import styles from './styles.module.css';
 
 function Header({
@@ -9,15 +9,17 @@ function Header({
 	id = '',
 	state = '',
 	heading = '',
-	service_supply_agent = '',
+	supply_agent = {},
 	serviceData = [],
-	serviceList,
+	servicesList,
 	isSeller = false,
-	service_provider = '',
+	service_provider = {},
 	refetchServices = () => {},
 	refetchList = () => {},
 	shipmentData = {},
 }) {
+	console.log(heading, 'headingggg', state);
+
 	return (
 		<div className={cl`${state} ${styles.container}`}>
 			<div className={styles.heading_wrap}>
@@ -28,22 +30,22 @@ function Header({
 					</div>
 				</div>
 
-				<EditCancelService
+				{/* <EditCancelService
 					service_type={service_type}
 					id={id}
 					state={state}
 					isSeller={isSeller}
 					serviceData={serviceData}
-					serviceList={serviceList}
+					servicesList={servicesList}
 					refetchServices={refetchServices}
 					refetchList={refetchList}
 					shipmentData={shipmentData}
-				/>
+				/> */}
 			</div>
-
-			{service_supply_agent ? (
-				<div className={cl`${styles.sub_heading} ${state}`}>{service_supply_agent?.name}</div>
-			) : null}
+			{/*
+			{supply_agent?.name ? (
+				<div className={cl`${styles.sub_heading} ${state}`}>{supply_agent?.name}</div>
+			) : null} */}
 		</div>
 	);
 }

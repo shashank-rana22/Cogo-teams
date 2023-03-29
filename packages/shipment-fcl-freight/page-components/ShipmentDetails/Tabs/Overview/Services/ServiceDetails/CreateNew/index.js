@@ -1,20 +1,18 @@
 import { Modal, cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
-import FormSearch from '../../../../../../../common/Route/Form';
+import Form from '../../../../../../../common/Form';
+import upsellTransportation from '../../helpers/upsellTransportation';
 
 import styles from './styles.module.css';
 
 function CreateNew({
-	routeLeg,
-	serviceList,
+	upsellableService = {},
+	servicesList = [],
 	shipmentData = {},
-	isIE = false,
+	primary_service = {},
 }) {
-	const { general: { isMobile = false } } = useSelector((state) => state);
-
 	const [form, setShowForm] = useState({
 		service      : null,
 		isAdditional : false,
@@ -26,9 +24,9 @@ function CreateNew({
 	const handleClick = () => {
 		setShowForm({
 			service: {
-				service      : routeLeg?.service_types?.[0].replace('_service', ''),
-				service_type : routeLeg?.service_types?.[0].replace('_service', ''),
-				type         : routeLeg?.trade_type === 'export' ? 'origin' : 'destination',
+				service      : upsellableService?.service_type.replace('_service', ''),
+				service_type : upsellableService?.service_type.replace('_service', ''),
+				type         : upsellableService?.trade_type === 'export' ? 'origin' : 'destination',
 			},
 			show           : true,
 			additionalShow : true,
@@ -41,22 +39,16 @@ function CreateNew({
 		setUpsellModal(false);
 	};
 
-	const notUpsell = routeLeg?.service_types?.some((ele) => [
-		'fcl_freight_local_service',
-		'lcl_freight_local_service',
-		'air_freight_local_service',
-	].includes(ele));
-
 	return (
 		<>
-			{!notUpsell && routeLeg?.display ? (
+			{upsellableService?.display_label ? (
 				<div
 					className={cl` ${styles.container} ie_create_new_service `}
 					onClick={handleClick}
 					role="button"
 					tabIndex={0}
 				>
-					<div className={styles.text}>{routeLeg?.display}</div>
+					<div className={styles.text}>{upsellableService.display_label}</div>
 					<IcMPlus />
 				</div>
 			) : null}
@@ -65,9 +57,9 @@ function CreateNew({
 				show={upsellModal}
 				onClose={() => setUpsellModal(false)}
 				className="primary lg"
-				styles={{ dialog: { width: isMobile ? 360 : 700 } }}
+				styles={{ dialog: { width: 700 } }}
 			>
-				<FormSearch
+				<Form
 					extraParams={{
 						importer_exporter_id: user_id,
 						importer_exporter_branch_id:
@@ -77,8 +69,8 @@ function CreateNew({
 					service={form.service}
 					onClose={handleClose}
 					shipmentData={shipmentData}
-					services={serviceList}
-					isIE={isIE}
+					primary_service={primary_service}
+					services={servicesList}
 				/>
 			</Modal>
 		</>

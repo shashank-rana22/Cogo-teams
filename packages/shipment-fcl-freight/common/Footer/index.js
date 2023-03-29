@@ -1,13 +1,28 @@
 import { Button, cl } from '@cogoport/components';
 import React from 'react';
 
+import useCreateSpotSearch from '../../hooks/useCreateSpotSearch';
+
 import styles from './styles.module.css';
 
 function Footer({
 	onClose = () => {},
-	isLoading = false,
-	showSubmit = true,
+	primary_service = {},
+	service = {},
+	shipmentData = {},
+	formProps = {},
+
 }) {
+	const { handleSubmit, watch } = formProps;
+
+	const formValues = watch();
+
+	const { onAddService, isLoading = false } = useCreateSpotSearch({
+		primary_service,
+		service,
+		shipmentData,
+	});
+
 	return (
 		<div className={styles.container}>
 			<Button
@@ -19,17 +34,16 @@ function Footer({
 				Cancel
 			</Button>
 
-			{showSubmit ? (
-				<Button
-					type="submit"
-					className="primary md"
-					disabled={isLoading}
-					style={{ marginLeft: 16 }}
-					id="shipment_form_header_submit"
-				>
-					{isLoading ? 'Adding Service...' : 'Submit'}
-				</Button>
-			) : null}
+			<Button
+				type="submit"
+				className="primary md"
+				disabled={isLoading}
+				onClick={() => (onAddService(formValues))}
+				style={{ marginLeft: 16 }}
+				id="shipment_form_header_submit"
+			>
+				{isLoading ? 'Adding Service...' : 'Submit'}
+			</Button>
 		</div>
 	);
 }

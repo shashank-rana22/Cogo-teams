@@ -1,7 +1,6 @@
 import Assured from './Assured';
 import BLDetails from './BLDetails';
 import OverviewManageServices from './OverviewManageServices';
-import Services from './Services';
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
@@ -10,7 +9,6 @@ function Overview({ shipmentData = {} }) {
 		<div className={styles.container}>
 			<OverviewManageServices container={styles.container} />
 			<BLDetails />
-			<Services />
 			<div className={styles.extra_details}>
 				{shipmentData?.is_cogo_assured ? (
 					<Assured shipmentData={shipmentData} />
