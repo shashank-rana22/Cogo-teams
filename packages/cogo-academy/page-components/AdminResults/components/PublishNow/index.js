@@ -5,7 +5,12 @@ import usePublishNow from '../../hooks/usePublishNow';
 import styles from './styles.module.css';
 
 function PublishNow({ test_id, refetchTest }) {
-	const { showPublishModal, setShowPublishModal, loading, publishResults } = usePublishNow({ test_id, refetchTest });
+	const {
+		showPublishModal,
+		setShowPublishModal,
+		loading,
+		publishResults,
+	} = usePublishNow({ test_id, refetchTest });
 
 	return (
 		<>
