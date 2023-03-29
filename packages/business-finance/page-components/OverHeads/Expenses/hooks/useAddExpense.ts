@@ -280,9 +280,9 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		category       : expenseCategory?.toUpperCase(),
 		subCategory    : expenseSubCategory?.toUpperCase(),
 		approvedByUser : {
-			email : stakeholderEmail,
-			id    : stakeholderId,
-			name  : stakeholderName,
+			userEmail : stakeholderEmail,
+			userId    : stakeholderId,
+			userName  : stakeholderName,
 		},
 		expenseType : 'RECURRING',
 		branchId    : addressData?.branchId,

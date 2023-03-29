@@ -278,9 +278,9 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		category       : expenseCategory?.toUpperCase(),
 		subCategory    : expenseSubCategory?.toUpperCase(),
 		approvedByUser : {
-			email : stakeholderEmail,
-			id    : stakeholderId,
-			name  : stakeholderName,
+			userEmail : stakeholderEmail,
+			userId    : stakeholderId,
+			userName  : stakeholderName,
 		},
 		expenseType : 'NON_RECURRING',
 		branchId    : addressData?.branchId,
