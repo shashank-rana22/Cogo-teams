@@ -3,9 +3,14 @@ import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Filters({ filter = '', setFilter = () => {}, searchValue = '', setSearchValue = () => {} }) {
+function Filters({
+	filter = '', setFilter = () => {},
+	setSearchValue = () => {},
+	debounceQuery = () => {},
+}) {
 	const handleSearchValue = (search) => {
 		setSearchValue(search);
+		debounceQuery(search);
 	};
 	const options = [
 		{ label: 'Passed', value: 'passed' },
@@ -17,7 +22,6 @@ function Filters({ filter = '', setFilter = () => {}, searchValue = '', setSearc
 			<Input
 				size="md"
 				placeholder="Search for Student name"
-				value={searchValue}
 				onChange={handleSearchValue}
 				suffix={(
 					<div className={styles.icon_container}>
