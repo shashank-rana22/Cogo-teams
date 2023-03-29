@@ -2,10 +2,7 @@ import SortComponent from '../../../commons/SortComponent';
 
 import styles from './styles.module.css';
 
-function ListHeader({
-	sortType = '', setSortType = () => {}, sortBy = '', setSortBy = () => {},
-
-}) {
+function ListHeader({ sortFilter = {}, setSortFilter = () => {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.container2}>
@@ -21,11 +18,9 @@ function ListHeader({
 					<div>Students IT Appeared For</div>
 
 					<SortComponent
-						val="students_appeared"
-						sortBy={sortBy}
-						sortType={sortType}
-						setSortBy={setSortBy}
-						setSortType={setSortType}
+						value="students_appeared"
+						sortFilter={sortFilter}
+						setSortFilter={setSortFilter}
 					/>
 				</div>
 
@@ -33,11 +28,9 @@ function ListHeader({
 					Correct Percentage %
 
 					<SortComponent
-						val="correct_percentage"
-						sortBy={sortBy}
-						sortType={sortType}
-						setSortBy={setSortBy}
-						setSortType={setSortType}
+						value="correct_percentage"
+						sortFilter={sortFilter}
+						setSortFilter={setSortFilter}
 					/>
 				</div>
 			</div>

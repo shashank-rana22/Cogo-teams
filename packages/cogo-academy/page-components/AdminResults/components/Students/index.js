@@ -14,26 +14,27 @@ function StudentsComponent({ test_id }) {
 
 	const [params, setParams] = useState({});
 	const [filter, setFilter] = useState('');
-	const [sortBy, setSortBy] = useState('');
-	const [sortType, setSortType] = useState('');
+	const [sortFilter, setSortFilter] = useState({});
 	const [searchValue, setSearchValue] = useState('');
+
+	const { sortBy, sortType } = sortFilter || {};
 
 	const [{ data, loading }, refetch] = useRequest({
 		method : 'GET',
 		url    : '/list_admin_student_wise_test_result',
 		params : {
 			test_id,
-			sort_by     : sortBy,
-			sort_type   : sortType,
 			filters     : { final_result: filter },
 			search_term : query,
+			sort_type   : sortType,
+			sort_by     : sortBy,
 			...params,
 		},
 	}, { manual: false });
 
 	const { page_limit = 0, total_count = 0, list } = data || {};
 
-	const columns = tableColumns({ sortType, sortBy, setSortBy, setSortType });
+	const columns = tableColumns({ sortFilter, setSortFilter });
 
 	useEffect(() => {
 		debounceQuery(searchValue);
