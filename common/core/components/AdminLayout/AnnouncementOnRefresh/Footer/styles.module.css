@@ -1,0 +1,16 @@
+.buttons_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.prev_and_next {
+	display: flex;
+	float: left;
+}
+
+.ok_and_close {
+	display: flex;
+	float: right;
+}
