@@ -38,7 +38,7 @@ function ApprovalPending({
 	};
 
 	const handleOnEdit = (singleItem) => {
-		if (singleItem.documentState === 'document_amendment_requested') {
+		if (singleItem?.documentState === 'document_amendment_requested') {
 			handleEditMAWB(singleItem, '');
 		} else if (singleItem?.documentData?.status === 'uploaded') {
 			setShowUpload(singleItem); setEdit('edit');
