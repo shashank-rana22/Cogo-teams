@@ -14,7 +14,8 @@ const useGetHawbList = (shipmentId) => {
 	const getHawbList = useCallback(() => {
 		(async () => {
 			const payload = {
-				documentState: ['document_accepted', 'document_uploaded', 'document_amendment_requested'],
+				documentState : ['document_accepted', 'document_uploaded', 'document_amendment_requested'],
+				documentType  : ['draft_house_airway_bill'],
 				shipmentId,
 			};
 			try {
