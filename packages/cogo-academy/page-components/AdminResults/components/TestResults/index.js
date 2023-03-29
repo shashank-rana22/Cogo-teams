@@ -21,13 +21,6 @@ function TestResults({ test_id = '' }) {
 
 	const stats_data = data?.data || {};
 
-	if (loading) {
-		return 'loading';
-	}
-
-	if (isEmpty(stats_data)) {
-		return null;
-	}
 	const {
 		test_name = '',
 		validity_start = '',
@@ -55,6 +48,14 @@ function TestResults({ test_id = '' }) {
 		total_students_appeared,
 		total_questions,
 	};
+
+	if (loading) {
+		return 'loading';
+	}
+
+	if (isEmpty(stats_data)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
