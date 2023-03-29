@@ -1,5 +1,6 @@
 import NotifyModal from '../page-components/HRDashboard/NotifyModal';
 import CreateModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/CreateModal';
+import DownloadCsvModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/DownloadCsvModal';
 import LogModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/LogModal';
 import PipUloadModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/PipUploadModal';
 import ReviewModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/ReviewModal';
@@ -45,6 +46,11 @@ const modalComoponentsMapping = {
 		name      : 'manual_feedback',
 		title     : 'Manual Feedback',
 		Component : CreateModal,
+	},
+	download: {
+		name      : 'download',
+		title     : 'Download PIP/Probations CSV',
+		Component : DownloadCsvModal,
 	},
 };
 

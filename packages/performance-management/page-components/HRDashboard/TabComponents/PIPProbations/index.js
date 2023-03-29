@@ -3,7 +3,7 @@ import { IcMDownload, IcMEdit, IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import pipModalComponentsMapping from '../../../../constants/modal-components-mapping';
+import modalComponentsMapping from '../../../../constants/modal-components-mapping';
 import tabPanelComponentMapping from '../../../../constants/tab-pannel-component-mapping';
 import useUpdateLog from '../../../../hooks/useUpdateLog';
 
@@ -11,13 +11,12 @@ import PendingReviews from './PendingReviews';
 import styles from './styles.module.css';
 
 function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {} }) {
-	const [item, setItem] = useState({}); // dor sending payload and setting the user id from the list
-	const [activeTab, setActiveTab] = useState('dashboard'); // to switch between tabs
-	const [disableNext, setDisableNext] = useState(true); // to enable the submit button in create and update
+	const [item, setItem] = useState({});
+	const [activeTab, setActiveTab] = useState('dashboard');
+	const [disableNext, setDisableNext] = useState(true);
 	const [refetchList, setRefetchList] = useState(false);
 
 	const { onUpdateLog = () => {} } = useUpdateLog();
-	// useEffect(() => debounceQuery(searchValue), [searchValue])
 
 	const onSubmit = () => {
 		if (item?.tags?.find((x) => x === 'Final discusion held' && isEmpty(item?.final_decision))) {
@@ -45,7 +44,7 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 		}
 	};
 
-	const ModalComponent = pipModalComponentsMapping[modal]?.Component;
+	const ModalComponent = modalComponentsMapping[modal]?.Component;
 
 	return (
 		<div className={styles.container}>
@@ -107,7 +106,6 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 							size="lg"
 							themeType="primary"
 							onClick={() => {
-								// setType('create');
 								setModal('create');
 							}}
 						>
