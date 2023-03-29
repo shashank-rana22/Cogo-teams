@@ -1,4 +1,4 @@
-const getControls = () => [
+const controls = [
 	{
 		name        : 'case_questions',
 		type        : 'fieldArray',
@@ -73,4 +73,4 @@ const getControls = () => [
 	},
 ];
 
-export default getControls;
+export default controls;
