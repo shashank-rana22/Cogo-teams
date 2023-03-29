@@ -12,6 +12,7 @@ function Feedbacks() {
 				organization_id = '',
 				organization = '',
 				status = '',
+				type = '',
 			},
 		},
 	} = useSelector((state) => state);
@@ -26,7 +27,7 @@ function Feedbacks() {
 		<>
 			<Header />
 			<OrganizationCard ref={routeDetails} />
-			<PrimaryTabs organization_id={organization_id} />
+			<PrimaryTabs organization_id={organization_id} type={type} />
 		</>
 
 	);

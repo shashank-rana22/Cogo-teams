@@ -36,7 +36,7 @@ export const FEEDBACK_COLUMNS = ({
 		accessor : ({ organization = {}, lead_organization_id = '', lead_organization = {} }) => (
 			<section className={styles.table_cell}>
 				{lead_organization_id ? (
-					lead_organization?.business_name || '__lead'
+					lead_organization?.business_name || '__'
 				) : (
 					organization?.business_name || '__'
 				)}
@@ -81,10 +81,11 @@ export const FEEDBACK_COLUMNS = ({
 		accessor : ({ feedback_parameter_value = '' }) => (
 			<section className={styles.feedback}>
 				<Tooltip
-					content={startCase(feedback_parameter_value)}
+					content={<span className={styles.tooltip}>{startCase(feedback_parameter_value)}</span>}
 					placement="top"
 					interactive
 					disabled={isEmpty(feedback_parameter_value)}
+					className={styles.tooltip}
 				>
 					<span className={styles.tooltip_text}>
 						{startCase(feedback_parameter_value) || '__'}
@@ -100,7 +101,11 @@ export const FEEDBACK_COLUMNS = ({
 		accessor : ({ feedback = '', other_feedback = '', feedback_reference_document_url = '' }) => (
 			<section className={styles.feedback}>
 				<Tooltip
-					content={feedback === 'other' ? (startCase(other_feedback) || 'Other') : (startCase(feedback))}
+					content={(
+						<span className={styles.tooltip}>
+							{feedback === 'other' ? (startCase(other_feedback) || 'Other') : (startCase(feedback))}
+						</span>
+					)}
 					placement="top"
 					interactive
 					disabled={isEmpty(feedback)}
@@ -132,7 +137,7 @@ export const FEEDBACK_COLUMNS = ({
 		}) => (
 			<section className={styles.feedback}>
 				<Tooltip
-					content={startCase(kam_response)}
+					content={<span className={styles.tooltip}>{startCase(kam_response)}</span>}
 					placement="top"
 					interactive
 					disabled={isEmpty(kam_response)}

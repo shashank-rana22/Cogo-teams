@@ -1,13 +1,13 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { startCase } from '@cogoport/utils';
 
-import useChartStats from '../../../hooks/useChartStats';
+import useChartStats from '../../../../hooks/useChartStats';
 
 import getStatsData from './get-stats-data';
 import styles from './styles.module.css';
 
 function Statistics({ activeTab = '' }) {
-	const { stats = {}, loading = false } = useChartStats(activeTab);
+	const { stats = {}, loading = false } = useChartStats({ activeTab });
 	const statsControl = getStatsData(activeTab, stats);
 
 	const isEmpty = Object.values(stats).every((item) => item === 0);

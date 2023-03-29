@@ -1,18 +1,18 @@
 import { Button, Modal } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
-import useDeactivateRequest from '../../../../hooks/useDeactivateRequest';
+import useDeactivateRequest from '../../../../../hooks/useDeactivateRequest';
 
 import styles from './styles.module.css';
 
-function ActionButton({ rowId = '', label = '', status = '', organization = '', organization_id = '' }) {
+function ActionButton({ label = '', status = '', organization = '', organization_id = '' }) {
 	const {
 		onDeactivateRequest,
-		// loading,
+		loading = false,
 		isOpenModal = false,
 		setisOpenModal = () => {},
 		onCloseModal = () => {},
-	} = useDeactivateRequest({ rowId });
+	} = useDeactivateRequest({ organization_id });
 
 	const router = useRouter();
 
@@ -73,7 +73,7 @@ function ActionButton({ rowId = '', label = '', status = '', organization = '', 
 							size="md"
 							themeType="primary"
 							className={styles.submit_button}
-							// disabled={loading}
+							disabled={loading}
 							onClick={onDeactivateRequest}
 						>
 							Delete

@@ -2,7 +2,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 
-const useFeedbackTableData = ({ organizationId = '' }) => {
+const useFeedbackTableData = ({ organizationId = '', type = '' }) => {
 	const [selectAll, setSelectAll] = useState(false);
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
 	const [selectedBulkData, setSelectedBulkData] = useState([{}]);
@@ -13,7 +13,8 @@ const useFeedbackTableData = ({ organizationId = '' }) => {
 		page_limit : 10,
 		page       : 1,
 		filters    : {
-			organization_id: organizationId || undefined,
+			organization_id      : type === 'lead_organization' ? (undefined) : (organizationId),
+			lead_organization_id : type === 'lead_organization' ? (organizationId) : (undefined),
 		},
 	});
 

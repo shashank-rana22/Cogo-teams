@@ -1,10 +1,10 @@
 import { Pagination } from '@cogoport/components';
 
+import CrmTable from '../../../../common/CrmTable';
+import EnrichmentRequest from '../../../../common/EnrichmentRequest';
 import useFeedbackTableData from '../../../../hooks/useFeedbackTableData';
-import CrmTable from '../../commons/CrmTable';
 import Filters from '../../commons/Filters';
 import Statistics from '../../commons/Statistics';
-import EnrichmentRequest from '../../EnrichmentRequest';
 
 import { FEEDBACK_COLUMNS } from './get-feedback-columns';
 import styles from './styles.module.css';

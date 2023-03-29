@@ -2,7 +2,7 @@ import { Button, Modal, MultiSelect } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { isEmpty } from '@cogoport/utils';
 
-import useCreateBulkEnrichment from '../../../hooks/useCreateBulkEnrichment';
+import useCreateBulkEnrichment from '../../hooks/useCreateBulkEnrichment';
 
 import styles from './styles.module.css';
 

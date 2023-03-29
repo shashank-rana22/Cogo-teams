@@ -1,41 +1,33 @@
-import { Checkbox, Pill } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
 import ActionButton from './ActionButton';
 import styles from './styles.module.css';
 
 export const STATUS_MAPPING = {
-	request_created: {
+	requested: {
+		status      : 'Request Created',
 		color       : 'blue',
 		buttonLabel : 'Deactivate Request',
 	},
-	response_received: {
+	responded: {
+		status      : 'Response Received',
 		color       : 'green',
 		buttonLabel : 'View Response',
 	},
-	deactivated: {
+	inactive: {
+		status      : 'Deactivated',
 		color       : 'red',
+		buttonLabel : null,
+	},
+	active: {
+		status      : 'Active',
+		color       : 'blue',
 		buttonLabel : null,
 	},
 };
 
-export const REQUEST_COLUMNS = ({
-	checkedRow = '',
-	onChangeBodyCheckbox = () => {},
-}) => [
-	{
-		id       : 'checkbox',
-		key      : 'checkbox',
-		Header   : ' ',
-		accessor : ({ id = '' }) => (
-			<div>
-				<Checkbox
-					checked={checkedRow === id}
-					onChange={(event) => onChangeBodyCheckbox(event, id)}
-				/>
-			</div>
-		),
-	},
+export const REQUEST_COLUMNS = [
 	{
 		Header   : <div>S. NO</div>,
 		key      : 'serial_id',
@@ -51,9 +43,9 @@ export const REQUEST_COLUMNS = ({
 		Header   : <div>ORGANIZATION</div>,
 		key      : 'organization',
 		id       : 'organization',
-		accessor : ({ organization = '' }) => (
+		accessor : ({ user_id = '' }) => (
 			<section className={styles.table_cell}>
-				{organization || '___'}
+				{user_id.name || '___'}
 			</section>
 		),
 	},
@@ -61,7 +53,7 @@ export const REQUEST_COLUMNS = ({
 		Header   : <div>CREATION DATE</div>,
 		key      : 'created_date',
 		id       : 'created_date',
-		accessor : ({ created_at }) => (
+		accessor : ({ created_at = '' }) => (
 			<section className={styles.table_cell}>
 				{created_at ? format(created_at, 'dd MMM yyyy') : '___'}
 			</section>
@@ -71,9 +63,9 @@ export const REQUEST_COLUMNS = ({
 		Header   : <div>RESPONSE DATE</div>,
 		key      : 'response_date',
 		id       : 'response_date',
-		accessor : ({ response_date }) => (
+		accessor : ({ updated_at = '', status = '' }) => (
 			<section className={styles.table_cell}>
-				{response_date ? format(response_date, 'dd MMM yyyy') : '___'}
+				{status === 'responded' && updated_at ? format(updated_at, 'dd MMM yyyy') : '___'}
 			</section>
 		),
 	},
@@ -89,7 +81,7 @@ export const REQUEST_COLUMNS = ({
 					size="md"
 					color={STATUS_MAPPING[status]?.color}
 				>
-					{startCase(status) || 'Status not found'}
+					{STATUS_MAPPING[status]?.status || 'Status not found'}
 				</Pill>
 			</section>
 		),
@@ -99,14 +91,14 @@ export const REQUEST_COLUMNS = ({
 		key      : 'action',
 		id       : 'action',
 		accessor : ({
-			status = '', organization = '', organization_id = '',
+			status = '', user_id = '', organization_id = '',
 		}) => (
 			<section className={styles.feedback}>
-				{status !== 'deactivated' ? (
+				{!status.includes(['inactive', 'active']) ? (
 					<ActionButton
-						status={status}
 						label={STATUS_MAPPING[status]?.buttonLabel}
-						organization={organization}
+						status={status}
+						organization={user_id.name}
 						organization_id={organization_id}
 					/>
 				) : (

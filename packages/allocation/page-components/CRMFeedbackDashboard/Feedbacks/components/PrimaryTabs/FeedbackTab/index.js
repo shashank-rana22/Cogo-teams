@@ -1,13 +1,13 @@
 import { Pagination } from '@cogoport/components';
 
+import CrmTable from '../../../../common/CrmTable';
+import EnrichmentRequest from '../../../../common/EnrichmentRequest';
 import useFeedbackTableData from '../../../../hooks/useFeedbackTableData';
-import CrmTable from '../../commons/CrmTable';
-import EnrichmentRequest from '../../EnrichmentRequest';
 
 import { FEEDBACK_COLUMNS } from './get-feedback-columns';
 import styles from './styles.module.css';
 
-function FeedbacksReceived({ organization_id = '', setActiveTab = () => {} }) {
+function FeedbacksReceived({ organization_id = '', setActiveTab = () => {}, type = '' }) {
 	const {
 		data = {},
 		loading = false,
@@ -19,7 +19,7 @@ function FeedbacksReceived({ organization_id = '', setActiveTab = () => {} }) {
 		onChangeBodyCheckbox = () => {},
 		selectedBulkData = [],
 		onBulkDataPayload = () => {},
-	} = useFeedbackTableData({ organizationId: organization_id });
+	} = useFeedbackTableData({ organizationId: organization_id, type });
 
 	const { page, page_limit, total_count } = paginationData;
 

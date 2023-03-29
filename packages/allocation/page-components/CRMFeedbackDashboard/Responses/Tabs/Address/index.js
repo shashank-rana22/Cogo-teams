@@ -16,8 +16,6 @@ function Address({ activeTab = '' }) {
 		paginationData = {},
 	} = useResponsesList({ activeTab });
 
-	console.log('data::', data);
-
 	const { page, page_limit, total_count } = paginationData;
 
 	if (loading) {

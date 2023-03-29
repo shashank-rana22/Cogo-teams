@@ -1,7 +1,7 @@
 import { Pagination } from '@cogoport/components';
 
-import useRequestTableData from '../../../hooks/useRequestTableData';
-import CrmTable from '../../commons/CrmTable';
+import CrmTable from '../../../../common/CrmTable';
+import useRequestTableData from '../../../../hooks/useRequestTableData';
 import Filters from '../../commons/Filters';
 import Statistics from '../../commons/Statistics';
 
