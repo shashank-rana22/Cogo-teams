@@ -39,9 +39,7 @@ const useQuestionList = ({
 	}, { manual: true });
 
 	useEffect(() => {
-		if (search) {
-			debounceQuery(search);
-		}
+		debounceQuery(search);
 	}, [debounceQuery, search]);
 
 	const fetch = useCallback(
