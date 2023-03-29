@@ -15,9 +15,10 @@ import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 import styles from './styles.module.css';
 
 interface ItemProps {
-	key: string;
-	label: string;
+	key?: string;
+	label?: string;
 }
+
 function AccordianCards({ globalFilters }) {
 	const [isViewButtonOpen, setIsViewButtonOpen] = useState(null);
 	const {
@@ -42,6 +43,7 @@ function AccordianCards({ globalFilters }) {
 
 	function activeViewButton(service) {
 		setViewButton((prev) => ({
+			...prev,
 			[service]: !prev[service],
 		}));
 		refetch(service, undefined);
@@ -103,18 +105,16 @@ function AccordianCards({ globalFilters }) {
 												caret={false}
 											>
 												<div className={styles.amounts}>
-													<Pill size="xl" color="green">
-
+													<div className={styles.pills}>
 														{showInTooltop(
 															getFormattedPrice(Math.abs(
-																item.accountRec - Math.abs(item.accountPay),
+																item.accountRec - (item.accountPay * -1),
 															), 'INR'),
 															getAmountInLakhCrK(Math.abs(
-																item.accountRec - Math.abs(item.accountPay),
+																item.accountRec - (item.accountPay * -1),
 															), 'INR'),
 														)}
-
-													</Pill>
+													</div>
 												</div>
 											</Tooltip>
 										</div>
@@ -285,8 +285,10 @@ function AccordianCards({ globalFilters }) {
 											<>
 												<div>
 													{showInTooltop(
-														getFormattedPrice(accordianStatsData?.arData?.overdueAmount, 'INR'),
-														getAmountInLakhCrK(accordianStatsData?.arData?.overdueAmount, 'INR'),
+														getFormattedPrice(accordianStatsData
+															?.arData?.overdueAmount, 'INR'),
+														getAmountInLakhCrK(accordianStatsData
+															?.arData?.overdueAmount, 'INR'),
 													)}
 												</div>
 												<div>Account Receivables</div>
@@ -328,8 +330,10 @@ function AccordianCards({ globalFilters }) {
 											<>
 												<div>
 													{showInTooltop(
-														getFormattedPrice(Math.abs(accordianStatsData?.apData?.overdueAmount), 'INR'),
-														getAmountInLakhCrK(Math.abs(accordianStatsData?.apData?.overdueAmount), 'INR'),
+														getFormattedPrice(Math.abs(accordianStatsData
+															?.apData?.overdueAmount), 'INR'),
+														getAmountInLakhCrK(Math.abs(accordianStatsData
+															?.apData?.overdueAmount), 'INR'),
 													)}
 												</div>
 												<div>Account Payables</div>

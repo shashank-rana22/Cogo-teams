@@ -1,4 +1,4 @@
-const getAmountInLakh = (value:number) => {
+const getAmountInLakh = (value:any) => {
 	const val = value;
 	// const val = Math.abs(value);
 

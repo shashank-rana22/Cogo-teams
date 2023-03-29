@@ -33,21 +33,15 @@ function ResponsiveBarChart({ barData }) {
 				tickSize     : 0,
 				tickPadding  : -10,
 				tickRotation : 0,
-				format       : (value) => `${getAmountInLakhCrK(value)}`,
+				format       : (value) => `${getAmountInLakhCrK(value, 'INR')}`,
 			}}
 			labelSkipWidth={36}
 			labelSkipHeight={12}
 			labelTextColor={{
 				from: 'color', modifiers: [['darker',	1]],
 			}}
-
-			layers={[
-				 'grid',
-				 'axes',
-				 'bars',
-				 'markers',
-				 'legends',
-				 ({ bars }) => (
+			layers={['grid', 'axes', 'bars', 'markers', 'legends',
+				({ bars }) => (
 					<g>
 						{bars.map((bar) => (
 							<text
@@ -57,19 +51,18 @@ function ResponsiveBarChart({ barData }) {
 								textAnchor="start"
 								transform={`rotate(-90,${bar.x + bar.width / 2},${bar.y + bar.height / 2})`}
 								style={{
-				 dominantBaseline : 'central',
-									 fontWeight       : '600',
-				 fontSize         : 12,
-				 fill             : '#333',
+									dominantBaseline : 'central',
+									fontWeight       : '600',
+									fontSize         : 12,
+									fill             : '#333',
 								}}
 							>
 								{getAmountLineChartInLakh(bar.data.value)}
 							</text>
-				 ))}
+						))}
 					</g>
-				 ),
+				),
 			]}
-
 			role="application"
 			animate
 		/>

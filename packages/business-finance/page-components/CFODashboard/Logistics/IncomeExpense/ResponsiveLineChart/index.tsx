@@ -1,9 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
-import { getFormattedPrice } from '@cogoport/forms';
 
-import showInTooltop from '../../../utils/getOverFlowData';
 import { getAmountInLakh } from '../../getAmountInLakh';
-import { getAmountInLakhCrK } from '../../getAmountInLakhCrK';
 
 function ResponsiveLineChart({ lineData }) {
 	const lineChartData = [
@@ -15,7 +12,7 @@ function ResponsiveLineChart({ lineData }) {
 	];
 	(lineData || []).forEach((item:any) => {
 		const pushData = {
-			y : item.income - item.expense,
+			y : Number(item.income - item.expense),
 			x : item.month,
 		};
 		lineChartData[0].data.push(pushData);
@@ -34,24 +31,14 @@ function ResponsiveLineChart({ lineData }) {
 				stacked : true,
 				reverse : false,
 			}}
-			yFormat={(value) => getAmountInLakh(value, 'INR')}
-
-			// yFormat={(value) => showInTooltop(
-			// 	getFormattedPrice(value, 'INR'),
-			// 	getAmountInLakh(value, 'INR'),
-			// )}
-
-			axisTop={null}
-			axisRight={null}
+			yFormat={(value) => getAmountInLakh(value)}
 			enableGridX={false}
 			enablePointLabel
-			pointLabelYOffset="-15px"
 			colors="#ACDADF"
 			axisBottom={{
 				tickSize: 0, tickPadding: 10, tickRotation: 0,
 			}}
 			axisLeft={{
-				orient         : 'left',
 				tickSize       : 0,
 				tickPadding    : -3,
 				tickRotation   : 0,

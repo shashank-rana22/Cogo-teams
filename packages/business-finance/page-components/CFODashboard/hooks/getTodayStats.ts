@@ -1,9 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetTodayStats = ({ globalFilters }) => {
+interface GlobalInterface {
+	serviceType?:string[],
+	date?:Date,
+}
+interface Props {
+	globalFilters?:GlobalInterface;
+}
+const useGetTodayStats = ({ globalFilters }:Props) => {
+	const { serviceType } = globalFilters || {};
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/finance-today-stats',
@@ -13,26 +20,24 @@ const useGetTodayStats = ({ globalFilters }) => {
 		{ manual: true },
 	);
 
-	const refetch = () => {
-		try {
-			trigger({
-				params: {
-					serviceTypes: globalFilters?.serviceType,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.message);
-		}
-	};
-
 	useEffect(() => {
+		const refetch = () => {
+			try {
+				trigger({
+					params: {
+						serviceTypes: serviceType,
+					},
+				});
+			} catch (e) {
+				Toast.error(e?.message);
+			}
+		};
 		refetch();
-	}, [globalFilters?.serviceType]);
+	}, [serviceType, trigger]);
 
 	return {
 		todayStatsLoading : loading,
 		todayStatsData    : data,
-		refetch,
 
 	};
 };

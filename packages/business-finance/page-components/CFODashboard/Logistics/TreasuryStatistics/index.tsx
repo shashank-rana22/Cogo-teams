@@ -10,16 +10,13 @@ import { treasuryControls } from '../controls';
 
 import styles from './styles.module.css';
 
-interface Props {
-	tabs?:string
-}
 interface ItemProps {
 	key?: string;
 	label?: string;
 	icon?: JSX.Element;
 }
 function TreasuryStatistics() {
-	const [tabs, setTabs] = useState<Props>('all');
+	const [tabs, setTabs] = useState('all');
 	const {
 		data,
 		treasuryFilters,

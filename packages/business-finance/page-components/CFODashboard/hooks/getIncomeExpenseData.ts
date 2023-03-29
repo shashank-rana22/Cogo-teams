@@ -1,9 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetIncomeExpense = ({ globalFilters, yearFilters }) => {
+interface GlobalInterface {
+	serviceType?:string[],
+	date?:Date,
+}
+interface Props {
+	globalFilters?:GlobalInterface;
+	yearFilters?:string[];
+}
+const useGetIncomeExpense = ({ globalFilters, yearFilters }:Props) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/finance-income-expense',
@@ -13,30 +20,27 @@ const useGetIncomeExpense = ({ globalFilters, yearFilters }) => {
 		{ manual: true },
 	);
 
-	const refetch = () => {
-		try {
-			trigger({
-				params: {
-					calenderYear     : yearFilters.length === 1 ? yearFilters[0] : undefined,
-					financeYearStart : yearFilters.length === 2 ? yearFilters[0] : undefined,
-					financeYearEnd   : yearFilters.length === 2 ? yearFilters[1] : undefined,
-					serviceType      : globalFilters?.serviceType,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.message);
-		}
-	};
-
 	useEffect(() => {
+		const refetch = () => {
+			try {
+				trigger({
+					params: {
+						calenderYear     : yearFilters.length === 1 ? yearFilters[0] : undefined,
+						financeYearStart : yearFilters.length === 2 ? yearFilters[0] : undefined,
+						financeYearEnd   : yearFilters.length === 2 ? yearFilters[1] : undefined,
+						serviceType      : globalFilters?.serviceType,
+					},
+				});
+			} catch (e) {
+				Toast.error(e?.message);
+			}
+		};
 		refetch();
-	}, [globalFilters?.serviceType, yearFilters]);
+	}, [globalFilters?.serviceType, yearFilters, trigger]);
 
 	return {
 		incomeExpenseLoading : loading,
 		incomeExpenseData    : data,
-		refetch,
-
 	};
 };
 

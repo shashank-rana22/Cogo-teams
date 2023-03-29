@@ -2,7 +2,14 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetPayablesList = ({ globalFilters }) => {
+interface GlobalInterface {
+	serviceType?:string[],
+	date?:Date,
+}
+interface Props {
+	globalFilters?:GlobalInterface;
+}
+const useGetPayablesList = ({ globalFilters }:Props) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/finance-receivable-payable',
@@ -12,21 +19,21 @@ const useGetPayablesList = ({ globalFilters }) => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const refetch = () => {
-		try {
-			trigger({
-				params: {
-					serviceType : globalFilters?.serviceType,
-					accountMode : 'AP',
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.message);
-		}
-	};
 	useEffect(() => {
+		const refetch = () => {
+			try {
+				trigger({
+					params: {
+						serviceType : globalFilters?.serviceType,
+						accountMode : 'AP',
+					},
+				});
+			} catch (e) {
+				Toast.error(e?.message);
+			}
+		};
 		refetch();
-	}, [globalFilters?.serviceType]);
+	}, [globalFilters?.serviceType, trigger]);
 
 	return {
 		payablesData    : data,

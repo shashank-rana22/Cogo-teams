@@ -11,7 +11,8 @@ import styles from './styles.module.css';
 
 function Profitabillity({ globalFilters }) {
 	const [filters, setFilters] = useState({});
-	const [jobsFilters, setJobsFilters] = useState({ });
+	const [jobsFilters, setJobsFilters] = useState('');
+
 	const tab = [
 		{
 			key   : 'shipment',
@@ -61,9 +62,9 @@ function Profitabillity({ globalFilters }) {
 							<div className={item.key === tabs ? styles.sub_container_click : styles.sub_container}>
 								{item.label}
 								{' '}
-								{tabs === 'shipment' ? profitabillityData?.averageShipmentProfit || 0
+								{/* {tabs === 'shipment' ? profitabillityData?.averageShipmentProfit || 0
 									: profitabillityData?.averageCustomerProfit || 0}
-								%
+								% */}
 							</div>
 						</div>
 					))}

@@ -9,9 +9,10 @@ interface GenericObject {
 }
 interface Props {
 	tabs?:string,
-	jobsFilters?:object,
+	jobsFilters?:string,
 	filters: GenericObject;
 	setFilters: (p: object) => void;
+	globalFilters:GenericObject
 }
 
 const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilters, globalFilters }:Props) => {
@@ -25,6 +26,7 @@ const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilte
 		shipment : 'get_payments_dashboard_finance_profitability_shipment',
 		customer : 'get_payments_dashboard_finance_profitability_customer',
 	};
+	console.log(filters, 'filters');
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -40,28 +42,32 @@ const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilte
 	const startDateFilter = startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false) : undefined;
 	const endDateFilters = endDate ? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined;
 
-	const refetch = () => {
-		try {
-			trigger({
-				params: {
-					...filters,
-					serviceType : tabs === 'shipment' ? globalFilters?.serviceType : undefined,
-					startDate   : tabs === 'shipment' ? startDateFilter : undefined,
-					endDate     : tabs === 'shipment' ? endDateFilters : undefined,
-					jobStatus   : jobsFilters,
-					sortType    : 'Desc',
-					sortBy      : 'profit',
-					pageSize    : 5,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.message);
-		}
-	};
+	useEffect(() => {
+		const refetch = () => {
+			try {
+				trigger({
+					params: {
+						serviceType : tabs === 'shipment' ? globalFilters?.serviceType : undefined,
+						startDate   : tabs === 'shipment' ? startDateFilter : undefined,
+						endDate     : tabs === 'shipment' ? endDateFilters : undefined,
+						jobStatus   : jobsFilters || undefined,
+						sortType    : 'Desc',
+						sortBy      : 'profit',
+						pageSize    : 5,
+						q           : filters?.q || undefined,
+						pageIndex   : filters?.pageIndex,
+					},
+				});
+			} catch (e) {
+				Toast.error(e?.message);
+			}
+		};
+		refetch();
+	}, [tabs, filters, jobsFilters, globalFilters, endDateFilters, startDateFilter, trigger]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
-	}, [searchValue]);
+	}, [debounceQuery, searchValue]);
 
 	useEffect(() => {
 		setFilters((prev) => ({
@@ -69,18 +75,12 @@ const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilte
 			q         : query || undefined,
 			pageIndex : 1,
 			pageSize  : 5,
-			jobStatus : '',
 		}));
-	}, [query]);
-
-	useEffect(() => {
-		refetch();
-	}, [tabs, filters, jobsFilters, globalFilters]);
+	}, [query, setFilters]);
 
 	return {
 		profitabillityLoading : loading,
 		profitabillityData    : data,
-		refetch,
 		setSearchValue,
 		searchValue,
 

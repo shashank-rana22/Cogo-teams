@@ -2,7 +2,15 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useGetReceivablesList = ({ globalFilters }) => {
+interface GlobalInterface {
+	serviceType?:string[],
+	date?:Date,
+}
+interface Props {
+	globalFilters?:GlobalInterface;
+}
+const useGetReceivablesList = ({ globalFilters }:Props) => {
+	const { serviceType } = globalFilters || {};
 	const [recievablesTab, setRecievablesTab] = useState('all');
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -14,29 +22,28 @@ const useGetReceivablesList = ({ globalFilters }) => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const buyerTypeFilter = () => {
-		if (recievablesTab === 'ie' || recievablesTab === 'cp' || recievablesTab === 'ent') {
-			return recievablesTab;
-		}
-		return undefined;
-	};
-
-	const refetch = () => {
-		try {
-			trigger({
-				params: {
-					serviceType : globalFilters?.serviceType,
-					accountMode : 'AR',
-					buyerType   : buyerTypeFilter(),
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.message);
-		}
-	};
 	useEffect(() => {
+		const buyerTypeFilter = () => {
+			if (recievablesTab === 'ie' || recievablesTab === 'cp' || recievablesTab === 'ent') {
+				return recievablesTab;
+			}
+			return undefined;
+		};
+		const refetch = () => {
+			try {
+				trigger({
+					params: {
+						serviceType,
+						accountMode : 'AR',
+						buyerType   : buyerTypeFilter(),
+					},
+				});
+			} catch (e) {
+				Toast.error(e?.message);
+			}
+		};
 		refetch();
-	}, [JSON.stringify(recievablesTab), globalFilters?.serviceType]);
+	}, [serviceType, recievablesTab, trigger]);
 
 	return {
 		receivablesData    : data,

@@ -1,19 +1,19 @@
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props {
 	[key:string]:any,
 }
-interface ItemProps {
-	tabs?:string
-}
-const useGetTreasuryStats = (tabs:ItemProps) => {
+// interface ItemProps {
+// 	tabs?:string
+// }
+const useGetTreasuryStats = (tabs:string) => {
 	const [treasuryFilters, setTreasuryFilters] = useState<Props>({
 	});
-	const {
-		...rest
-	} = treasuryFilters || {};
+	// const {
+	// 	...rest
+	// } = treasuryFilters || {};
 	const { startDate, endDate } = treasuryFilters?.date || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -25,30 +25,28 @@ const useGetTreasuryStats = (tabs:ItemProps) => {
 		{ manual: true },
 	);
 
-	const getDahboardData = useCallback(() => {
-		try {
-			trigger({
-				params: {
-					entity   : tabs === '101' || tabs === '301' ? tabs : undefined,
-					fromDate : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
-						: undefined,
-					toDate: endDate
-						? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
-				},
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	}, [endDate, startDate, tabs, trigger]);
-
 	useEffect(() => {
+		const getDahboardData = () => {
+			try {
+				trigger({
+					params: {
+						entity   : tabs === '101' || tabs === '301' ? tabs : undefined,
+						fromDate : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
+							: undefined,
+						toDate: endDate
+							? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
+					},
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		};
 		getDahboardData();
-	}, [JSON.stringify(rest), tabs]);
+	}, [tabs, endDate, startDate, trigger]);
 
 	return {
 		data,
 		loading,
-		getDahboardData,
 		treasuryFilters,
 		setTreasuryFilters,
 	};

@@ -31,14 +31,14 @@ function IncomeExpense({ globalFilters }) {
 
 	const currentYear = new Date().getFullYear();
 	const calendarYear = [];
-	for (let i = 0; i < 5; i++) {
+	for (let i = 0; i < 5; i += 1) {
 		const year = `${currentYear - i}`;
 		calendarYear.push(year);
 	}
 
 	const today = new Date();
 	const financialYears = [];
-	for (let i = 1; i <= 5; i++) {
+	for (let i = 1; i <= 5; i += 1) {
 		const yearStart = new Date(today.getFullYear() - i, 3, 1);
 		const yearEnd = new Date(today.getFullYear() - i + 2, 2, 31);
 		const financialYear = `${getFinancialYear(yearStart)}-${getFinancialYear(yearEnd)}`;
@@ -95,23 +95,25 @@ function IncomeExpense({ globalFilters }) {
 	const content = () => (
 
 		<Popover placement="right" caret={false} render={yearHandleChange()} className={styles.years_styles}>
-			<div
-				className={styles.data_styles}
-				onClick={() => { setYearHandle(true); }}
-				role="presentation"
-			>
-				Calendar Year
+			<>
+				<div
+					className={styles.data_styles}
+					onClick={() => { setYearHandle(true); }}
+					role="presentation"
+				>
+					Calendar Year
 
-			</div>
-			<div className={styles.borders} />
-			<div
-				className={styles.data_styles}
-				onClick={() => { setYearHandle(false); }}
-				role="presentation"
-			>
-				Financial Year
+				</div>
+				<div className={styles.borders} />
+				<div
+					className={styles.data_styles}
+					onClick={() => { setYearHandle(false); }}
+					role="presentation"
+				>
+					Financial Year
 
-			</div>
+				</div>
+			</>
 		</Popover>
 
 	);
@@ -130,7 +132,7 @@ function IncomeExpense({ globalFilters }) {
 							<IcMInfo />
 						</div>
 						<div style={{ marginTop: '10px', marginLeft: '20px' }}>
-							<Popover content={content()} caret={false}>
+							<Popover render={content()} caret={false} placement="bottom">
 								<div style={{ width: '140px', padding: '-10px' }}>
 									<Input />
 								</div>
@@ -146,7 +148,7 @@ function IncomeExpense({ globalFilters }) {
 							showOnOff
 							disabled={false}
 							onChange={() => onChangeToggle()}
-							value={toggleStatus}
+							value={String(toggleStatus)}
 						/>
 					</div>
 				</div>

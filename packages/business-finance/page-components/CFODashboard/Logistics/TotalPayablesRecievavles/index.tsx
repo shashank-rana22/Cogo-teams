@@ -47,12 +47,10 @@ function TotalPayablesRecievables({ globalFilters }) {
 
 	useEffect(() => {
 		setProgressReceivables(progressReceivablesPercent);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [receivablesLoading]);
+	}, [receivablesLoading, progressReceivablesPercent]);
 	useEffect(() => {
 		setProgressPayables(progressReceivablesPercent);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [payablesLoading]);
+	}, [payablesLoading, progressReceivablesPercent]);
 
 	return (
 		<div>
@@ -124,7 +122,7 @@ function TotalPayablesRecievables({ globalFilters }) {
 								</div>
 							</div>
 							<div className={styles.borders} />
-							<ProgressBar progress={progressReceivables} />
+							<ProgressBar progress={String(progressReceivables)} />
 							<div style={{ display: 'flex' }}>
 								<div className={styles.texts}>Total Unpaid invoices:</div>
 								<div style={{ marginLeft: '20px', display: 'flex' }}>
@@ -200,7 +198,7 @@ function TotalPayablesRecievables({ globalFilters }) {
 								</div>
 							</div>
 							<div className={styles.borders} />
-							<ProgressBar progress={progressPayables} />
+							<ProgressBar progress={String(progressPayables)} />
 							<div style={{ display: 'flex' }}>
 								<div className={styles.texts}>Total Unpaid invoices:</div>
 								<div style={{ marginLeft: '20px', display: 'flex' }}>

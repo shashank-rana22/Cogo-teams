@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 
 const showInTooltop = (inTooltip, value) => (
-	<Tooltip content={(inTooltip as string)}>
+	<Tooltip content={inTooltip}>
 		<div>
 			{value}
 		</div>

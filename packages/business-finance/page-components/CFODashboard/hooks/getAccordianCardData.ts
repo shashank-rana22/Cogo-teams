@@ -3,7 +3,17 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-const useGetAccordianCardData = ({ globalFilters }) => {
+interface DateInterface {
+	startDate?:Date
+	endDate?:Date
+}
+interface GlobalInterface {
+	date?: DateInterface
+}
+interface Props {
+	globalFilters?:GlobalInterface;
+}
+const useGetAccordianCardData = ({ globalFilters }:Props) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/finance-service-wise-rec-pay',
@@ -13,30 +23,28 @@ const useGetAccordianCardData = ({ globalFilters }) => {
 		{ manual: true },
 	);
 	const { startDate, endDate } = globalFilters?.date || {};
-	const refetch = () => {
-		try {
-			trigger({
-				params: {
-					startDate: startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
-						: undefined,
-					endDate: endDate
-						? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.message);
-		}
-	};
 
 	useEffect(() => {
+		const refetch = () => {
+			try {
+				trigger({
+					params: {
+						startDate: startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
+							: undefined,
+						endDate: endDate
+							? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
+					},
+				});
+			} catch (e) {
+				Toast.error(e?.message);
+			}
+		};
 		refetch();
-	}, [globalFilters?.date]);
+	}, [globalFilters?.date, endDate, startDate, trigger]);
 
 	return {
 		accordianDataLoading : loading,
 		accordianDataData    : data,
-		refetch,
-
 	};
 };
 
