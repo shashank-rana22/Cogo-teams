@@ -6,7 +6,7 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 		asyncFieldsListAgents(),
 	);
 	const HIDE_CONTROLS_MAPPING = {
-		ADMIN : ['observer', showBotMessages ? 'chat_tags' : ''],
+		ADMIN : showBotMessages ? ['observer', 'chat_tags'] : ['observer'],
 		KAM   : ['assigned_to', 'assigned_agent'],
 	};
 
