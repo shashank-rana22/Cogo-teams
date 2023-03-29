@@ -14,6 +14,7 @@ function Filters({
 	setSearchValue = () => {},
 	debounceQuery = () => {},
 	searchValue,
+	activeTab = '',
 }) {
 	const handleSearchValue = (search) => {
 		setSearchValue(search);
@@ -35,16 +36,20 @@ function Filters({
 				style={{ width: 300 }}
 			/>
 
-			<div className={styles.filters}>
-				<Select
-					prefix={(<IcMFilter />)}
-					value={filter}
-					onChange={(val) => setFilter(val)}
-					placeholder="Filter"
-					options={options}
-					isClearable="true"
-				/>
-			</div>
+			{	activeTab === 'appeared' ? (
+				<div className={styles.filters}>
+
+					<Select
+						prefix={(<IcMFilter />)}
+						value={filter}
+						onChange={(val) => setFilter(val)}
+						placeholder="Filter"
+						options={options}
+						isClearable="true"
+					/>
+				</div>
+			) : null}
+
 		</div>
 	);
 }

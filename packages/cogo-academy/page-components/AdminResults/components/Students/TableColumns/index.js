@@ -63,7 +63,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 		),
 		id       : 'percentile',
 		accessor : ({ percentile = '' }) => (
-			<div>{percentile !== null ? Number(percentile).toFixed(2) : ' '}</div>
+			<div>{percentile !== null ? Number(percentile).toFixed(2) : '-'}</div>
 		),
 	},
 	{

@@ -16,15 +16,15 @@ function ControlCenter() {
 	const [activeTab, setActiveTab] = useState(currentActiveTab || 'manage_faq');
 	const [switchDashboard, setSwitchDashboard] = useState(true);
 
-	if (!switchDashboard) {
-		return <Analytics setSwitchDashboard={setSwitchDashboard} />;
-	}
-
 	const handleChangeTab = (val) => {
 		push(`/learning?activeTab=${val}`);
 
 		setActiveTab(val);
 	};
+
+	if (!switchDashboard) {
+		return <Analytics setSwitchDashboard={setSwitchDashboard} />;
+	}
 
 	return (
 		<div>
