@@ -4,15 +4,40 @@ import { useState } from 'react';
 
 import {
 	getAgentsData,
-	getAirData, getAirDataValue, getAllShipment, getColumn, getOceanData,
-	getOceanDataValue,
-	getProjectData, getRailData, getRailDataValue, getSurfaceData, getSurfaceDataValue,
+	getAllShipment, getColumn,
+	getProjectData,
 } from '../contant';
 
 import EditIcon from './EditIcon';
 import styles from './styles.module.css';
 
-function RevenueBifurcation({ setGlobalStepper, sourceFileData }) {
+function RevenueBifurcation({
+	setGlobalStepper,
+	volume,
+	setVolume,
+	volumeAir,
+	volumeSurface,
+	volumeRail,
+	value,
+	valueAir,
+	valueSurface,
+	valueRail,
+	setVolumeAir,
+	setVolumeSurface,
+	setVolumeRail,
+	setValue,
+	setValueAir,
+	setValueSurface,
+	setValueRail,
+	oceanData,
+	airData,
+	surfaceData,
+	railData,
+	oceanValueData,
+	airValueData,
+	railValueData,
+	surfaceValueData,
+}) {
 	const [dropDownData, setDropDownData] = useState({});
 	const [edit, setEdit] = useState({});
 	const handleDropdown = (key = '') => {
@@ -28,15 +53,6 @@ function RevenueBifurcation({ setGlobalStepper, sourceFileData }) {
 			[key]: !previousActions[key],
 		}));
 	};
-	const [volume, setVolume] = useState({});
-	const [volumeAir, setVolumeAir] = useState({});
-	const [volumeSurface, setVolumeSurface] = useState({});
-	const [volumeRail, setVolumeRail] = useState({});
-
-	const [value, setValue] = useState({});
-	const [valueAir, setValueAir] = useState({});
-	const [valueSurface, setValueSurface] = useState({});
-	const [valueRail, setValueRail] = useState({});
 
 	return (
 		<div>
@@ -91,13 +107,7 @@ function RevenueBifurcation({ setGlobalStepper, sourceFileData }) {
 											<div className={styles.shipment_data}>
 												{labelData === 'Ocean' && (
 													<div className={styles.ocean}>
-														{getOceanData(
-															sourceFileData,
-															volume,
-															volumeAir,
-															volumeSurface,
-															volumeRail,
-														).map((valOcean, index) => (
+														{oceanData.map((valOcean, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -124,13 +134,7 @@ function RevenueBifurcation({ setGlobalStepper, sourceFileData }) {
 
 												{labelData === 'Air' && 	(
 													<div className={styles.ocean}>
-														{getAirData(
-															sourceFileData,
-															volume,
-															volumeAir,
-															volumeSurface,
-															volumeRail,
-														).map((val, index) => (
+														{airData.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -156,13 +160,7 @@ function RevenueBifurcation({ setGlobalStepper, sourceFileData }) {
 
 												{labelData === 'Surface' && 	(
 													<div className={styles.ocean}>
-														{getSurfaceData(
-															sourceFileData,
-															volume,
-															volumeAir,
-															volumeSurface,
-															volumeRail,
-														).map((val, index) => (
+														{surfaceData.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -187,13 +185,7 @@ function RevenueBifurcation({ setGlobalStepper, sourceFileData }) {
 
 												{labelData === 'Rail' && 	(
 													<div className={styles.ocean}>
-														{getRailData(
-															sourceFileData,
-															volume,
-															volumeAir,
-															volumeSurface,
-															volumeRail,
-														).map((val, index) => (
+														{railData.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -289,14 +281,7 @@ function RevenueBifurcation({ setGlobalStepper, sourceFileData }) {
 											<div className={styles.shipment_data}>
 												{labelValue === 'Ocean' && (
 													<div className={styles.ocean}>
-														{getOceanDataValue(
-															sourceFileData,
-															value,
-															valueAir,
-															valueSurface,
-															valueRail,
-														).map((val, index) => (
-
+														{oceanValueData.map((val, index) => (
 															<div>
 																<div className={styles.name}>
 																	{val?.name}
@@ -322,13 +307,7 @@ function RevenueBifurcation({ setGlobalStepper, sourceFileData }) {
 
 												{labelValue === 'Air' && 	(
 													<div className={styles.ocean}>
-														{getAirDataValue(
-															sourceFileData,
-															value,
-															valueAir,
-															valueSurface,
-															valueRail,
-														).map((val, index) => (
+														{airValueData.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -354,13 +333,7 @@ function RevenueBifurcation({ setGlobalStepper, sourceFileData }) {
 
 												{labelValue === 'Surface' && 	(
 													<div className={styles.ocean}>
-														{getSurfaceDataValue(
-															sourceFileData,
-															value,
-															valueAir,
-															valueSurface,
-															valueRail,
-														).map((val, index) => (
+														{surfaceValueData.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -386,13 +359,7 @@ function RevenueBifurcation({ setGlobalStepper, sourceFileData }) {
 
 												{labelValue === 'Rail' && 	(
 													<div className={styles.ocean}>
-														{getRailDataValue(
-															sourceFileData,
-															value,
-															valueAir,
-															valueSurface,
-															valueRail,
-														).map((val, index) => (
+														{railValueData.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>

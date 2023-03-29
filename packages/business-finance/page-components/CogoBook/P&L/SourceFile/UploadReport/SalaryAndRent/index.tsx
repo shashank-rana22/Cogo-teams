@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
 	getAgentsData,
@@ -12,8 +12,11 @@ import EditIcon from '../RevenueBifurcation/EditIcon';
 
 import styles from './styles.module.css';
 
-function SalaryAndRent({ setGlobalStepper, sourceFileData }) {
+function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 	const [dropDownData, setDropDownData] = useState({});
+
+	useEffect(() => { refetchSalary(); }, [refetchSalary]);
+
 	const [edit, setEdit] = useState({});
 	const handleDropdown = (key = '') => {
 		setDropDownData((previousActions) => ({
@@ -28,6 +31,7 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData }) {
 			[key]: !previousActions[key],
 		}));
 	};
+
 	const [volume, setVolume] = useState({});
 	const [volumeAir, setVolumeAir] = useState({});
 	const [volumeSurface, setVolumeSurface] = useState({});
