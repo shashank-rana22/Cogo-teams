@@ -24,14 +24,23 @@ function PIPProbations({ source = 'hr_dashboard' }) {
 		if (item?.tags?.find((x) => x === 'Final discusion held' && isEmpty(item?.final_decision))) {
 			setModal('update');
 		} else {
+			const {
+				user_id,
+				id:log_id,
+				log_type,
+				comments:comment,
+				final_decision,
+				is_reviewed,
+				tags,
+			} = item;
 			onUpdateLog({
-				user_id        : item?.user_id,
-				log_id         : item?.id,
-				log_type       : item?.log_type,
-				comment        : item?.comments,
-				final_decision : item?.final_decision,
-				tags           : item?.tags,
-				is_reviewed    : item?.is_reviewed || modal === 'review',
+				user_id,
+				log_id,
+				log_type,
+				comment,
+				final_decision,
+				tags,
+				is_reviewed: is_reviewed || modal === 'review',
 			}, setRefetchList, setModal);
 			setItem({});
 		}

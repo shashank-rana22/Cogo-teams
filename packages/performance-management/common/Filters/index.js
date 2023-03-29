@@ -53,8 +53,6 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 		});
 	}, [query, department, designation, status, managerId]);
 
-	console.log('params:;', params);
-
 	useEffect(() => {
 		debounceQuery(managerName);
 	}, [debounceQuery, managerName]);

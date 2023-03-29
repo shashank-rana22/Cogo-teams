@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useIrisRequest } from '@cogoport/request';
 
 const useUpdateLog = () => {
@@ -24,10 +23,10 @@ const useUpdateLog = () => {
 				UserID,
 				LogID,
 				LogType,
-				Tags,
-				FinalDecision,
+				Tags          : Tags || undefined,
+				FinalDecision : FinalDecision || undefined,
 				IsReviewed,
-				Comment,
+				Comment       : Comment || undefined,
 			};
 
 			await trigger({
@@ -37,7 +36,7 @@ const useUpdateLog = () => {
 			setModal('');
 			Toast.success('Updated Successfully');
 		} catch (e) {
-			Toast.error(getApiErrorString(e.response?.data.error));
+			Toast.error(e.response?.data.error);
 		}
 	};
 

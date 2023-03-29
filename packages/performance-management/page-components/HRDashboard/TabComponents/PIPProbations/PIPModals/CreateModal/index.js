@@ -8,6 +8,7 @@ import UserTableData from '../../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../../constants/feedback-data-columns';
 import useCreateLog from '../../../../../../hooks/useCreateLog';
 import useListReportees from '../../../../../../hooks/useListReportees';
+import useGetControls from '../../../../../../utils/filterControls';
 import DecisionModal from '../UpdateModal/DecisionModal';
 
 import styles from './styles.module.css';
@@ -23,10 +24,10 @@ function CreateModal({
 	setRefetchList = () => {},
 }) {
 	const [searchValue, setSearchValue] = useState('');
+	const [managerName, setManagerName] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [status, setStatus] = useState('');
 	const {
-		params,
 		feedbackData,
 		loading = false,
 		setPage,
@@ -37,12 +38,11 @@ function CreateModal({
 	const { onSubmitCreate = () => {} } = useCreateLog();
 
 	const { list: newTeamList = [], pagination_data = {} } = feedbackData;
-	const { total_count = '' } = pagination_data;
+	const { total_count = '', page_limit = '', page = '' } = pagination_data;
 
-	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
-	useEffect(() => setItem({}), [setItem]);
+	useEffect(() => debounceQuery(searchValue, managerName), [debounceQuery, searchValue, managerName]);
 
-	console.log('source::', source);
+	const managerControls = useGetControls({ name: 'manger_name' });
 
 	const columnsToShow = [
 		...(source === 'log_modal' ? feedbackDataColumns.logModal : feedbackDataColumns.manualFeedbacks)];
@@ -71,7 +71,7 @@ function CreateModal({
 				<Modal.Header title={`Create ${startCase(status)}`} />
 				<div className={styles.upload_modal}>
 					<Modal.Body
-						style={{ maxHeight: '600px' }}
+						style={{ maxHeight: '500px' }}
 					>
 						{!status ? (
 							<div>
@@ -103,20 +103,31 @@ function CreateModal({
 								{isEmpty(item) ? (
 									<>
 										<div className={styles.name_input}>
-											<div>Search by Name/COGO-ID...</div>
-											<Input
-												placeholder="Type Here..."
-												value={searchValue}
-												onChange={setSearchValue}
-											/>
-										</div>
+											<div>
+												<div>Search by Name/COGO-ID...</div>
+												<Input
+													placeholder="Type Here..."
+													value={searchValue}
+													onChange={setSearchValue}
+												/>
 
+											</div>
+											<div>
+												<div>Search by Manager...</div>
+												<Input
+													{...managerControls}
+													onChange={setManagerName}
+													style={{ marginRight: '8px' }}
+												/>
+
+											</div>
+										</div>
 										<UserTableData
 											columns={columns}
 											list={newTeamList}
 											loading={loading}
-											pagination={params.Page}
-											page_limit={params.page_limit}
+											pagination={page}
+											page_limit={page_limit}
 											total_count={total_count}
 											setPagination={setPage}
 										/>
@@ -162,20 +173,32 @@ function CreateModal({
 		) : (
 			<>
 				<div className={styles.name_input}>
-					<div>Search by Name/COGO-ID...</div>
-					<Input
-						placeholder="Type Here..."
-						value={searchValue}
-						onChange={setSearchValue}
-					/>
+					<div>
+						<div>Search by Name/COGO-ID...</div>
+						<Input
+							placeholder="Type Here..."
+							value={searchValue}
+							onChange={setSearchValue}
+						/>
+
+					</div>
+					<div>
+						<div>Search by Name/COGO-ID...</div>
+						<Input
+							{...managerControls}
+							onChange={setManagerName}
+							style={{ marginRight: '8px' }}
+						/>
+
+					</div>
 				</div>
 
 				<UserTableData
 					columns={columns}
 					list={newTeamList}
 					loading={loading}
-					pagination={params.Page}
-					page_limit={params.page_limit}
+					pagination={page}
+					page_limit={page_limit}
 					total_count={total_count}
 					setPagination={setPage}
 				/>

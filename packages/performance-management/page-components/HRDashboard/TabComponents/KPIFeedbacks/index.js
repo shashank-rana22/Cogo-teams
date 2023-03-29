@@ -141,7 +141,7 @@ function KPIFeedbacks() {
 						show={manualFeedbackModal}
 						onClose={() => setManualFeedbackModal(false)}
 						onClickOutside={() => setManualFeedbackModal(false)}
-						size="xl"
+						size="lg"
 					>
 						<Modal.Header title="Manual Feedback" />
 						<Modal.Body>

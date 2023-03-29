@@ -18,21 +18,24 @@ function PipUloadModal({ modal, setModal = () => {} }) {
 
 	const { control, watch, formState:{ errors } } = useForm();
 
-	const onboardingCsvFile = watch('onboarding_url');
+	const uploadedCsvFile = watch('uploaded_file_url');
 	// const normalizationCsvFile = watch('normalization_url');
 
 	useEffect(() => setFiles({
-		onboardingCSV: onboardingCsvFile || undefined,
-	}), [onboardingCsvFile]);
+		uploadedCSV: uploadedCsvFile || undefined,
+	}), [uploadedCsvFile]);
 
-	// const isUploadPossible = files.onboardingCSV || month;
-	const isUploadPossible = true;
+	const isUploadPossible = files.uploadedCSV;
+	// const isUploadPossible = true;
 
 	const uploadCSVs = async () => {
 		try {
 			// await trigger({ data: { Url: files.normalizationCSV, Month: month, Year: year.toString() } });
 
 			Toast.success('File sent for processing. Please check after some time...');
+			console.log('control::', control);
+			console.log('URL::', uploadedCsvFile);
+			console.log('fileName::', uploadedCsvFile.split('/').slice(-1).join(''));
 			setFiles({});
 			setModal('');
 		} catch (e) {
@@ -76,7 +79,7 @@ function PipUloadModal({ modal, setModal = () => {} }) {
 											<div
 												className={styles.info_tool}
 												role="button"
-												onClick={() => downloadOnboardingSample()}
+												// onClick={() => downloadOnboardingSample()}
 												tabIndex={0}
 											>
 												<IcMInfo width={20} height={20} />
@@ -86,7 +89,7 @@ function PipUloadModal({ modal, setModal = () => {} }) {
 									<UploadController
 										control={control}
 										errors={errors}
-										name="onboarding_url"
+										name="uploaded_file_url"
 										accept=".csv"
 									/>
 								</div>
@@ -129,7 +132,7 @@ function PipUloadModal({ modal, setModal = () => {} }) {
 								<Button
 									themeType="primary"
 									onClick={() => uploadCSVs()}
-									disabled={!isUploadPossible || isEmpty(files?.normalizationCSV)}
+									disabled={!isUploadPossible || isEmpty(files?.uploadedCSV)}
 								>
 									Submit
 								</Button>
