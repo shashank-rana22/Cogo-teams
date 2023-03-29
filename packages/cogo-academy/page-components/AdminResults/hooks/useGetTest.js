@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 function useGetTest({ id }) {
 	const [{ loading = false, data = {} }, trigger] = useRequest({
@@ -10,7 +9,7 @@ function useGetTest({ id }) {
 		url    : 'get_test',
 	}, { manual: false });
 
-	const getTest = ({ test_id }) => {
+	const getTest = useCallback(({ test_id }) => {
 		try {
 			trigger({
 				params: {
@@ -20,11 +19,11 @@ function useGetTest({ id }) {
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}
-	};
+	}, [trigger]);
 
 	useEffect(() => {
 		getTest({ test_id: id });
-	}, []);
+	}, [getTest, id]);
 
 	return {
 		loading,

@@ -3,14 +3,15 @@ import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
+const options = [
+	{ label: 'Passed', value: 'passed' },
+	{ label: 'Failed', value: 'failed' },
+];
+
 function Filters({ filter = '', setFilter = () => {}, searchValue = '', setSearchValue = () => {} }) {
 	const handleSearchValue = (search) => {
 		setSearchValue(search);
 	};
-	const options = [
-		{ label: 'Passed', value: 'passed' },
-		{ label: 'Failed', value: 'failed' },
-	];
 
 	return (
 		<div className={styles.container}>
@@ -26,8 +27,8 @@ function Filters({ filter = '', setFilter = () => {}, searchValue = '', setSearc
 				)}
 				style={{ width: 300 }}
 			/>
-			<div className={styles.filters}>
 
+			<div className={styles.filters}>
 				<Select
 					prefix={(<IcMFilter />)}
 					value={filter}
@@ -36,7 +37,6 @@ function Filters({ filter = '', setFilter = () => {}, searchValue = '', setSearc
 					options={options}
 					isClearable="true"
 				/>
-
 			</div>
 		</div>
 	);
