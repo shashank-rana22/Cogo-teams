@@ -11,6 +11,7 @@
 	@media (max-width: 768px) {
 		flex-basis: 48%;
 	}
+	
 	@media (max-width: 576px) {
 		flex-basis: 100%;
 		margin-right: 0;

@@ -74,7 +74,10 @@ function Header(props) {
 							:
 							{' '}
 						</div>
-						<b>{startCase(auditData?.name || '')}</b>
+
+						{levelLoading
+							? <Placeholder height="20px" width="120px" />
+							: <b>{startCase(auditData.name || '')}</b>}
 					</div>
 				</div>
 			</div>

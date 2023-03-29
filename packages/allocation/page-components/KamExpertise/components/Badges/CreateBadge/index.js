@@ -46,10 +46,6 @@ function CreateBadge(props) {
 					</div>
 				)}
 
-				{/* <p className={styles.text_styles}>
-					{index}
-				</p> */}
-
 				<h2 style={{ color: '#4f4f4f' }}>
 					{isEmpty(badgeItemData) ? 'Add Badge' : 'Update Badge'}
 				</h2>
@@ -60,12 +56,13 @@ function CreateBadge(props) {
 				</p>
 
 				<form onSubmit={handleSubmit(onSave)}>
-
 					<section className={styles.badge_form_container}>
 
 						{getAddBadgesControls.map((controlItem) => {
 							const el = { ...controlItem };
+
 							const Element = getFieldController(el.type);
+
 							if (!Element) return null;
 
 							return (
@@ -94,12 +91,12 @@ function CreateBadge(props) {
 					</section>
 
 					<div className={styles.lower_background}>
-
 						<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
 
 						<div className={styles.display_flex}>
 							{MEDALS_MAPPING.map((medalType, index) => (
 								<BadgeUpdateCard
+									key={medalType}
 									medalType={medalType}
 									badgeItemData={badgeItemData}
 									control={control}

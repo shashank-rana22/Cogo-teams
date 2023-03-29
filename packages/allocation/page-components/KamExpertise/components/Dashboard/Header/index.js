@@ -16,7 +16,7 @@ function Header() {
 		audit_data = {},
 	} = listKamExpertiseCurrentConfigs;
 
-	const LIVE_VERSION = data.filter((item) => item.status_value === 'active')?.[0]?.version_number || '';
+	const liveVersion = data.filter((item) => item.status_value === 'active')?.[0]?.version_number || 'NA';
 
 	return (
 		<div className={styles.container}>
@@ -24,7 +24,8 @@ function Header() {
 				<div style={{ fontSize: '18px', marginBottom: '4px' }}>
 					Current Configuration :
 					{' '}
-					<b>{LIVE_VERSION}</b>
+
+					<b>{liveVersion}</b>
 				</div>
 
 				<div className={styles.audits_data}>
@@ -63,16 +64,6 @@ function Header() {
 				>
 					View Events
 				</Button>
-
-				{/* <Button
-					// onClick={() => { router.push('/allocation/kam-expertise/'); }}
-					size="lg"
-					themeType="secondary"
-					className={styles.button}
-				>
-				// Todo check if showing it is possible
-					View All Configs
-				</Button> */}
 
 				<Button
 					onClick={() => router.push('/allocation/kam-expertise/configurations')}

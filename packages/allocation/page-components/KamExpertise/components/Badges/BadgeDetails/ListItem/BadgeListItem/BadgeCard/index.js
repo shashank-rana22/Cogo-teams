@@ -1,14 +1,14 @@
 import { Modal, Placeholder } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
-import React from 'react';
 
 import useUpdateSingleBadge from '../../../../../../hooks/useBadgeConfigurationAttributes';
 import BadgeUpdateCard from '../../../../BadgeUpdateCard';
 
 import styles from './styles.module.css';
 
-function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, data }) {
-	const { score = '', image_url = '', id = '' } = data;
+function BadgeCard(props) {
+	const { badgeItemData = {}, medal, isLast, listRefetch, data } = props;
+	const { score, image_url = '', id = '' } = data || {};
 
 	const {
 		onSave, loading, formProps, openModal, onClose,
@@ -54,6 +54,7 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 					<img src={image_url} alt="badge-icon" />
 				</div>
 			</div>
+
 			{ openModal
 			&& (
 				<Modal
@@ -64,7 +65,6 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 					className={styles.modal_class}
 				>
 					<form onSubmit={handleSubmit(onSave)}>
-
 						<Modal.Body className={styles.modal_body}>
 							<div style={{ padding: '10px', margin: '10px' }}>
 								<BadgeUpdateCard

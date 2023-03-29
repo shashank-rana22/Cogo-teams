@@ -5,11 +5,14 @@ import { getFieldController } from '../../../../../common/Form/getFieldControlle
 
 import styles from './styles.module.css';
 
+const InputController = getFieldController('number');
+const UploadController = getFieldController('fileUpload');
+
 function BadgeUpdateCard(props) {
 	const {
 		badgeItemData = {},
 		control,
-		errors = '',
+		errors = {},
 		watch,
 		isLastItem,
 		loading = false,
@@ -25,9 +28,6 @@ function BadgeUpdateCard(props) {
 		Gold   : gold_details,
 	};
 
-	const InputController = getFieldController('number');
-	const UploadController = getFieldController('fileUpload');
-
 	const watch_image_value = watch(`${medalType}_img_value`);
 
 	return (
@@ -38,6 +38,7 @@ function BadgeUpdateCard(props) {
 			>
 				<div>
 					<p style={{ color: '#4f4f4f', marginBottom: 16 }}>Medal</p>
+
 					<p>{medalType}</p>
 				</div>
 

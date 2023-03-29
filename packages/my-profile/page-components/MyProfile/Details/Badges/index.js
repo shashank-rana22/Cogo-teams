@@ -1,12 +1,18 @@
 import { Toast, Placeholder, Modal, Button, Tooltip } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import { IcCStar } from '@cogoport/icons-react';
+import { IcMStar, IcCStar } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import usePostProfileMasteryBadge from '../../../hooks/usePostProfileMasteryBadge';
 
 import styles from './styles.module.css';
+
+const BADGE_STARS_CLASSNAME_MAPPING = {
+	bronze : { upper_limit: 1 },
+	silver : { upper_limit: 2 },
+	gold   : { upper_limit: 3 },
+};
 
 function Badges(props) {
 	const { badgeListLoading, userBadges = {}, profileBadgeRefetch } = props;
@@ -95,6 +101,9 @@ function Badges(props) {
 					{
 						badgesGot?.map((item, index) => {
 							max_badges += 1;
+
+							const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[item.medal]?.upper_limit;
+
 							return (
 								(index < 5 && max_badges < 6)
 									? (
@@ -107,7 +116,11 @@ function Badges(props) {
 												<div className={styles.stars}>
 													{[1, 2, 3].map((itm) => (
 														<div key={itm}>
-															<IcCStar width={10} stroke="#FFDF33" />
+															<IcMStar
+																width={10}
+																fill={itm <= badgeClassName ? '#FFDF33' : '#919191'}
+																stroke={itm <= badgeClassName ? '#FFDF33' : '#919191'}
+															/>
 														</div>
 													))}
 												</div>

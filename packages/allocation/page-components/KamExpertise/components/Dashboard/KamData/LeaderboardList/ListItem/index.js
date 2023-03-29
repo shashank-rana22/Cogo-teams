@@ -13,7 +13,7 @@ function ListItem(props) {
 
 	const router = useRouter();
 
-	const handleClick = (id) => {
+	const onClickViewMoreBadges = (id) => {
 		if (id) {
 			router.push(
 				'/my-profile/badges/[user_id]/?path=/allocation/kam-expertise',
@@ -50,6 +50,7 @@ function ListItem(props) {
 							<Tooltip key={value?.id} content={data.badge_name}>
 								<div className={styles.badge_item}>
 									<img src={value?.image_url} alt="badge" />
+
 									<div className={styles.star}>
 										{[1, 2, 3].map((it) => (
 											<div key={it}>
@@ -58,6 +59,7 @@ function ListItem(props) {
 										))}
 									</div>
 								</div>
+
 							</Tooltip>
 						))}
 
@@ -70,7 +72,7 @@ function ListItem(props) {
 								role="presentation"
 								style={{ cursor: 'pointer' }}
 								onClick={() => {
-									handleClick(data.partner_user_id);
+									onClickViewMoreBadges(data.partner_user_id);
 								}}
 							>
 								View More
@@ -80,16 +82,15 @@ function ListItem(props) {
 				</div>
 
 				<div className={styles.card_description_right}>
-
-					{ expertise_score.map((expertise) => (
+					{expertise_score.map((expertise) => (
 						<div className={styles.exp} key={expertise.expertise_type}>
 							<div className={styles.expertise}>
 								{startCase(expertise.expertise_type || '')}
-								<div><b>{expertise.score}</b></div>
+
+								<b>{expertise.score}</b>
 							</div>
 						</div>
 					))}
-
 				</div>
 			</div>
 		</div>

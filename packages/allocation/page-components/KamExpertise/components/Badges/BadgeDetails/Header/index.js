@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import React from 'react';
 
 import SearchInput from '../../../../../../common/SearchInput';
 
@@ -22,7 +21,6 @@ function Header(props) {
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.filter_container}>
-
 				<AsyncSelect
 					placeholder="Condition"
 					size="sm"

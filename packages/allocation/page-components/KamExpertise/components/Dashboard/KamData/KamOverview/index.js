@@ -14,36 +14,31 @@ function KamOverview(props) {
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.header}>
 				{`KAM ${kamLevel} Overview`}
 			</div>
 
 			<div className={styles.cards}>
-				{
-								isEmpty(overviewList)
-								&& (
-									<div className={styles.empty_state}>
-										<EmptyState
-											height={108}
-											width={180}
-											textSize="16px"
-											emptyText="Overview Data Not Found"
-										/>
-									</div>
-								)
-							}
-
-				{!isEmpty(overviewList)
-								&& (
-									overviewList.map((data) => (
-										<OverviewCard
-											key={data.title}
-											data={data}
-											overviewLoading={overviewLoading}
-										/>
-									))
-								)}
+				{isEmpty(overviewList)
+					? (
+						<div className={styles.empty_state}>
+							<EmptyState
+								height={108}
+								width={180}
+								textSize="16px"
+								emptyText="Overview Data Not Found"
+							/>
+						</div>
+					)
+					: (
+						overviewList.map((data) => (
+							<OverviewCard
+								key={data.title}
+								data={data}
+								overviewLoading={overviewLoading}
+							/>
+						))
+					)}
 			</div>
 		</div>
 	);

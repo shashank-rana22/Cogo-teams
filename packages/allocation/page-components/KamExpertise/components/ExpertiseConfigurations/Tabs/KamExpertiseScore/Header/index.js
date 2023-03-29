@@ -40,6 +40,7 @@ function Header({ auditData, loading }) {
 								:
 								{' '}
 							</div>
+
 							<Placeholder height="20px" width="120px" />
 						</div>
 					</div>
@@ -48,6 +49,7 @@ function Header({ auditData, loading }) {
 			</div>
 		);
 	}
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.config_basic_detail}>

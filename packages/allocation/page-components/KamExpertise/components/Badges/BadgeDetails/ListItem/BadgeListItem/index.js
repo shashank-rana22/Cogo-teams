@@ -90,6 +90,7 @@ function BadgeListItem(props) {
 
 								return (
 									<BadgeCard
+										key={item}
 										data={detailObj || {}}
 										medal={startCase(name)}
 										badgeItemData={data}
