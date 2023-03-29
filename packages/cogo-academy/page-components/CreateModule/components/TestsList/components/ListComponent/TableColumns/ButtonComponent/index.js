@@ -75,58 +75,53 @@ export function QuestionSetButtons({ item, router, setQuestionSetId, setShowModa
 	);
 }
 
-export function TestSetButtons({ status, validity_start, loading, id, setShowModal, setTestId, router }) {
+export function TestSetButtons({ current_status, loading, id, setShowModal, setTestId, router }) {
 	return (
-		<div>
-			{status === 'published'
-			|| (validity_start
-				&& new Date().getTime() >= new Date(validity_start).getTime()
-				&& status === 'active') ? null : (
-					<div role="presentation">
-						<div
-							style={{
-								width  : 'fit-content',
-								cursor : 'default',
-							}}
-						>
-							<Tooltip
-								className={styles.tooltip_pad}
-								content={(
-									<div className={styles.options}>
-										<Button
-											loading={loading}
-											themeType="primary"
-											className={styles.btn}
-											onClick={() => handleEditTest({ id, router })}
-										>
-											<IcMEdit />
-											<div>Edit</div>
-										</Button>
+		(current_status === 'upcoming' || current_status === 'draft') ? (
+			<div role="presentation">
+				<div
+					style={{
+						width  : 'fit-content',
+						cursor : 'default',
+					}}
+				>
+					<Tooltip
+						className={styles.tooltip_pad}
+						content={(
+							<div className={styles.options}>
+								<Button
+									loading={loading}
+									themeType="primary"
+									className={styles.btn}
+									onClick={() => handleEditTest({ id, router })}
+								>
+									<IcMEdit />
+									<div>Edit</div>
+								</Button>
 
-										<Button
-											loading={loading}
-											themeType="secondary"
-											className={styles.btn}
-											type="button"
-											onClick={() => {
-												setShowModal(true);
-												setTestId(id);
-											}}
-										>
-											<IcMDelete />
-											<div>Delete</div>
-										</Button>
-									</div>
-								)}
-								trigger="click"
-								placement="left"
-								interactive="true"
-							>
-								<IcMOverflowDot style={{ cursor: 'pointer' }} />
-							</Tooltip>
-						</div>
-					</div>
-				)}
-		</div>
+								<Button
+									loading={loading}
+									themeType="secondary"
+									className={styles.btn}
+									type="button"
+									onClick={() => {
+										setShowModal(true);
+										setTestId(id);
+									}}
+								>
+									<IcMDelete />
+									<div>Delete</div>
+								</Button>
+							</div>
+						)}
+						trigger="click"
+						placement="left"
+						interactive="true"
+					>
+						<IcMOverflowDot style={{ cursor: 'pointer' }} />
+					</Tooltip>
+				</div>
+			</div>
+		) : null
 	);
 }

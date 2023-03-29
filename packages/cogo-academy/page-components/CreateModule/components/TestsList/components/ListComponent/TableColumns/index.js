@@ -95,7 +95,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 	{
 		Header   : 'NAME',
 		id       : 'a',
-		accessor : ({ name = '', test_duration = '', status = '' }) => (
+		accessor : ({ name = '', test_duration = '', current_status = '' }) => (
 			<div>
 				<section>
 					{' '}
@@ -106,7 +106,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 					</Tooltip>
 
 				</section>
-				{status === 'active' ? (
+				{current_status === 'active' ? (
 					<section className={styles.duration}>
 						{test_duration}
 						{' '}
@@ -177,17 +177,17 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 	{
 		Header   : 'STATUS',
 		id       : 'tags',
-		accessor : ({ status = '', id = '', validity_start = '', validity_end = '' }) => {
-			if (status === 'active') {
+		accessor : ({ current_status = '', id = '', validity_start = '', validity_end = '' }) => {
+			if (current_status === 'active') {
 				return (
 					<section className={styles.details}>
 
 						<section className={styles.status}>
-							<Pill size="md" color="green">{startCase(status)}</Pill>
+							<Pill size="md" color="green">{startCase(current_status)}</Pill>
 
 							<div role="presentation" onClick={() => copyToClipboard(id)}>
 								<Pill
-									key={status}
+									key={current_status}
 									size="md"
 									prefix={<IcMShare />}
 									color="#FEF3E9"
@@ -206,29 +206,62 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 
 					</section>
 				);
-			} if (status === 'published') {
+			} if (current_status === 'published') {
 				return (
 					<section>
 						<Pill
-							key={status}
+							key={current_status}
 							size="md"
 							color="orange"
 						>
 							Results
 							{' '}
-							{startCase(status)}
+							{startCase(current_status)}
 						</Pill>
 					</section>
 				);
 			}
+			if (current_status === 'upcoming') {
+				return (
+					<section>
+						<section>
+							<Pill
+								key={current_status}
+								size="md"
+								color="blue"
+							>
+								{startCase(current_status)}
+							</Pill>
+						</section>
+						<section>
+							{format(validity_start, 'dd/MM/yyyy - ')}
+							{format(validity_end, 'dd/MM/yyyy')}
+						</section>
+					</section>
+				);
+			}
+			if (current_status === 'expired') {
+				return (
+					<section>
+						<Pill
+							key={current_status}
+							size="md"
+							color="red"
+						>
+							{startCase(current_status)}
+						</Pill>
+					</section>
+				);
+			}
+
 			return (
 				<section>
 					<Pill
-						key={status}
+						key={current_status}
 						size="md"
 						color="yellow"
 					>
-						{startCase(status)}
+						{startCase(current_status)}
 					</Pill>
 				</section>
 			);
@@ -237,11 +270,11 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 	{
 		Header   : '',
 		id       : 'results',
-		accessor : ({ id = '', status = '' }) => (
-			status === 'draft' ? null : (
+		accessor : ({ id = '', current_status = '' }) => (
+			((current_status === 'draft') || (current_status === 'expired')) ? null : (
 				<div>
 					<Link href={`/learning/tests/dashboard/admin/${id}`}>
-						{(status === 'active') ? 'View Details' : 'View Results'}
+						{(current_status === 'published') ? 'View Results' : 'View Details'}
 					</Link>
 				</div>
 			)
@@ -261,11 +294,11 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 	{
 		Header   : '',
 		id       : 'options',
-		accessor : ({ id = '', validity_start = '', status = '' }) => (
+		accessor : ({ id = '', validity_start = '', current_status = '' }) => (
 			<TestSetButtons
 				id={id}
 				validity_start={validity_start}
-				status={status}
+				current_status={current_status}
 				loading={loading}
 				setShowModal={setShowModal}
 				setTestId={setTestId}

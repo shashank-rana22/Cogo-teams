@@ -40,7 +40,7 @@ function QuestionsComponent({ test_id }) {
 				debounceQuery={debounceQuery}
 			/>
 
-			{loading ? (
+			{loading && (
 				<div className={styles.placeholder_container}>
 					{Array(5).fill('').map(() => (
 						<div
@@ -50,27 +50,27 @@ function QuestionsComponent({ test_id }) {
 						</div>
 					))}
 				</div>
-			) : (
-				<div>
-					{isEmpty(data?.list) ? <EmptyState /> : (
-						<div>
-							<ListHeader
-								setSortFilter={setSortFilter}
-								sortFilter={sortFilter}
-							/>
-							{(questionsList || []).map((question_item, index) => (
-								<QuestionItem
-									key={question_item.id}
-									question_item={question_item}
-									index={index}
-								/>
-							))}
-						</div>
-					)}
-
-				</div>
-
 			) }
+
+			{!loading && isEmpty(data?.list) && <EmptyState />}
+
+			{
+				!loading && (
+					<div>
+						<ListHeader
+							setSortFilter={setSortFilter}
+							sortFilter={sortFilter}
+						/>
+						{(questionsList || []).map((question_item, index) => (
+							<QuestionItem
+								key={question_item.id}
+								question_item={question_item}
+								index={index}
+							/>
+						))}
+					</div>
+				)
+			}
 
 		</>
 	);
