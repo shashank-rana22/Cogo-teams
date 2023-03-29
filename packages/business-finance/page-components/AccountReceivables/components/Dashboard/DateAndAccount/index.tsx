@@ -75,7 +75,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 
 								<div className={styles.account_receivables_invoices}>
 									<div className={styles.styled_text}>
-										Account Recievables
+										Account Receivables
 									</div>
 									<div
 										className={styles.invoice_text}

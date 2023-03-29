@@ -89,8 +89,8 @@ function SalesFunnel({ salesFunnelData, salesFunnelMonth, setSalesFunnelMonth, s
 						value={salesFunnelMonth}
 						onChange={(val:string) => onChange(val)}
 						placeholder="By Month"
-						isClearable
 						options={SALES_FUNNEL_OPTIONS}
+						isClearable
 					/>
 				</div>
 			</div>

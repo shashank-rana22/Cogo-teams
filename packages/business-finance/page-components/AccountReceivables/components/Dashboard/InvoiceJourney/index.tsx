@@ -1,6 +1,6 @@
 import { Placeholder, Tooltip, Select } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { SALES_FUNNEL_OPTIONS } from '../../../constants';
 import useGetInvoiceJourney from '../../../hooks/useGetInvoiceJourney';
@@ -12,9 +12,10 @@ interface InvoiceJourneyProps {
 }
 
 function InvoiceJourney({ filterValue }: InvoiceJourneyProps) {
-	const [month, setMonth] = useState('');
-
-	const { journeyData, journeyLoading } = useGetInvoiceJourney({ month, filterValue });
+	const {
+		journeyData, journeyLoading, dateFilter,
+		setDateFilter, optionsVal,
+	} = useGetInvoiceJourney({ filterValue });
 
 	const {
 		draftInvoicesCount, financeAcceptedInvoiceCount,
@@ -48,32 +49,23 @@ function InvoiceJourney({ filterValue }: InvoiceJourneyProps) {
 		},
 	];
 
-	const onChange = (val:string) => {
-		setMonth(val);
+	const onChange = (val:string, key:string) => {
+		setDateFilter((p) => ({ ...p, [key]: val }));
 	};
-
 	return (
 		<div className={styles.space_between}>
 			<div className={styles.container}>
 				<div className={styles.flex}>
 					<div>
 						<div className={styles.journey}>
-							Invoice Statistics
-							<Tooltip content="Current month Invoice Statistics." placement="top">
+							Invoice Statistics and TAT
+							<Tooltip content="Current month Invoice Statistics and TAT" placement="top">
 								<div className={styles.icon}><IcMInfo /></div>
 							</Tooltip>
 
 						</div>
 						<div className={styles.border} />
 					</div>
-
-					<Select
-						value={month}
-						onChange={(val:string) => onChange(val)}
-						placeholder="By Month"
-						isClearable
-						options={SALES_FUNNEL_OPTIONS}
-					/>
 
 				</div>
 
@@ -111,27 +103,24 @@ function InvoiceJourney({ filterValue }: InvoiceJourneyProps) {
 			</div>
 
 			<div className={styles.tat_container}>
-				<div className={styles.flex}>
-					<div>
-						<div className={styles.journey}>
-							Invoice TAT
-							<Tooltip content="Current month Invoice TAT." placement="top">
-								<div className={styles.icon}><IcMInfo /></div>
-							</Tooltip>
-
-						</div>
-						<div className={styles.border} />
-					</div>
-
-					<div className={styles.date}>
+				<div className={styles.flex_date}>
+					<div className={styles.margin_right}>
 						<Select
-							value={month}
-							onChange={(val:string) => onChange(val)}
+							value={dateFilter.month}
+							onChange={(val:string) => onChange(val, 'month')}
 							placeholder="By Month"
-							isClearable
 							options={SALES_FUNNEL_OPTIONS}
+							isClearable
 						/>
 					</div>
+
+					<Select
+						value={dateFilter.year}
+						onChange={(val:string) => onChange(val, 'year')}
+						placeholder="By Year"
+						options={optionsVal()}
+						isClearable
+					/>
 				</div>
 
 				{journeyLoading
@@ -154,7 +143,7 @@ function InvoiceJourney({ filterValue }: InvoiceJourneyProps) {
 						<div className={styles.sub_tat_container}>
 							{getTatData.map((item) => (
 								<div className={styles.tat_data}>
-									<div>{item?.label}</div>
+									<div className={styles.text_padding}>{item?.label}</div>
 									<div className={styles.tat_flex}>
 										<div className={styles.border_tat} />
 										<div className={styles.tat_value}>

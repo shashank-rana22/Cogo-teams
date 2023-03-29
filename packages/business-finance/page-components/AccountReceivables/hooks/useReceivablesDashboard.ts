@@ -8,8 +8,13 @@ const useReceivablesDashboard = () => {
 		serviceType : '',
 		companyType : 'All',
 	});
+	const months = ['JAN', 'FEB', 'MAR',
+		'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
-	const [salesFunnelMonth, setSalesFunnelMonth] = useState('');
+	const d = new Date();
+	const currentMonth = months[d.getMonth()];
+
+	const [salesFunnelMonth, setSalesFunnelMonth] = useState(currentMonth);
 
 	const [
 		{ data: ageingBucket, loading: ageingBucketLoading },

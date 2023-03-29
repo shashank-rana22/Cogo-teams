@@ -279,7 +279,7 @@ export const INVOICE_STATUS = {
 
 export const SERVICE_PROVIDER = [
 	{ value: 'All', label: 'All' },
-	{ value: 'ENTERPRISE', label: 'ENT' },
+	{ value: 'ENTERPRISE', label: 'ES' },
 	{ value: 'LONGTAIL', label: 'Longtail' },
 	{ value: 'MIDSIZE', label: 'MSME' },
 ];

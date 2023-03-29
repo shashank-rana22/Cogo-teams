@@ -37,12 +37,12 @@ const useGetGraph = ({ filters, filterValue, subActiveTab }:ParamsInterface) => 
 						month       : filters?.month || undefined,
 						year        : filters?.year || undefined,
 						serviceType : filterValue?.serviceType || undefined,
-						asOnDate    : format(
+						asOnDate    : filters?.date ? format(
 							filters?.date,
 							'yyyy-MM-dd 00:00:00',
 							{},
 							false,
-						) || undefined,
+						) : undefined,
 						documentType: subActiveTab || undefined,
 					},
 				});

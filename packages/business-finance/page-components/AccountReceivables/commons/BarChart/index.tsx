@@ -18,6 +18,24 @@ interface BarchartProps {
 	dsoResponse?: boolean
 }
 
+const getAmountInLakhCrK = (value:number) => {
+	const val = Math.abs(value);
+
+	let formatedAmount = '';
+
+	if (val >= 10000000) {
+		formatedAmount = `${(val / 10000000).toFixed(2)} Cr`;
+	} else if (val >= 100000) {
+		formatedAmount = `${(val / 100000).toFixed(2)} Lac`;
+	} else if (val >= 1000) {
+		formatedAmount = `${(val / 1000).toFixed(2)} K`;
+	}
+
+	return formatedAmount;
+};
+
+export { getAmountInLakhCrK };
+
 function BarChart({
 	currencyType,
 	data = [],
@@ -41,14 +59,16 @@ function BarChart({
 				layout="vertical"
 				enableGridY={!!dsoResponse}
 				axisLeft={axisPadding}
-				padding={0.1}
+				padding={0.3}
 				maxValue="auto"
 				minValue="auto"
 				animate={false}
 				groupMode="grouped"
 				isInteractive
 				innerPadding={0}
-				label="false"
+				label=""
+				labelSkipWidth={12}
+				labelSkipHeight={12}
 				tooltip={({ label, value }) => (
 					<strong style={tooltTipStyle}>
 						{label?.split('-')[0]}
@@ -60,7 +80,6 @@ function BarChart({
 								value,
 								currencyType,
 								{
-									notation              : 'compact',
 									compactDisplay        : 'short',
 									maximumFractionDigits : 2,
 									style                 : 'decimal',
@@ -69,6 +88,45 @@ function BarChart({
 						</tspan>
 					</strong>
 				)}
+				theme={{ axis: { legend: { text: { fontWeight: 600, fontSize: 14 } } } }}
+				legends={[{
+					dataFrom: 'value',
+					anchor:
+					'bottom-right',
+					direction     : 'row',
+					justify       : false,
+					translateX    : 120,
+					translateY    : 280,
+					itemsSpacing  : 50,
+					itemWidth     : 100,
+					itemHeight    : 20,
+					itemDirection : 'left-to-right',
+					itemOpacity   : 0.85,
+					symbolShape   : 'circle',
+					symbolSize    : 20,
+					effects       : [{ on: 'hover', style: { itemOpacity: 0.7 } }],
+				}]}
+				layers={['grid', 'axes', 'bars', 'markers', 'legends', ({ bars }) => (
+					<g>
+						{' '}
+						{bars.map((bar) => (
+							<text
+								key={bar.data.id}
+								x={bar.x + bar.width / 2}
+								y={bar.y + bar.height / 2}
+								textAnchor="start"
+								transform={`rotate(-90,${bar.x + bar.width / 2},${bar.y + bar.height / 2})`}
+								style={{ dominantBaseline: 'central', fontWeight: '600', fontSize: 12, fill: '#333' }}
+							>
+								{' '}
+								{getAmountInLakhCrK(bar.data.value)}
+								{' '}
+								{' '}
+							</text>
+						))}
+						{' '}
+					</g>
+				)]}
 			/>
 
 		);

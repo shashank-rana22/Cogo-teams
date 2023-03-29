@@ -37,12 +37,12 @@ const useInvoiceStatistics = ({ filters, filterValue, subActiveTab }:ParamsInter
 						year        : filters?.year || undefined,
 						serviceType : filterValue?.serviceType || undefined,
 						companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
-						asOnDate    : format(
+						asOnDate    : filters?.date ? format(
 							filters?.date,
 							'yyyy-MM-dd 00:00:00',
 							{},
 							false,
-						) || undefined,
+						) : undefined,
 						documentType: subActiveTab,
 					},
 				});

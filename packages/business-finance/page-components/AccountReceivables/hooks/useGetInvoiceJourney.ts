@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface FilterInterface {
 	entityCode?:string
@@ -9,10 +9,29 @@ interface FilterInterface {
 }
 interface ParamsInterface {
 	filterValue?:FilterInterface
-	month?:string
 }
 
-const useGetInvoiceJourney = ({ month, filterValue }:ParamsInterface) => {
+const useGetInvoiceJourney = ({ filterValue }:ParamsInterface) => {
+	const months = ['JAN', 'FEB', 'MAR',
+		'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+	const d = new Date();
+	const currentMonth = months[d.getMonth()];
+
+	const currentYearsState = new Date().getFullYear();
+
+	function generateArrayOfYears() {
+		const currentYear = new Date().getFullYear();
+		const newArray = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3];
+		return newArray;
+	}
+
+	const optionsVal = () => generateArrayOfYears().map((item) => ({ value: item.toString(), label: item.toString() }));
+
+	const [dateFilter, setDateFilter] = useState({
+		month : currentMonth,
+		year  : currentYearsState,
+	});
 	const [{ data:journeyData, loading:journeyLoading }, journeyTrigger] = useRequestBf(
 		{
 			url     : '/payments/dashboard/invoice-tat-stats',
@@ -29,7 +48,8 @@ const useGetInvoiceJourney = ({ month, filterValue }:ParamsInterface) => {
 						entityCode  : filterValue.entityCode || undefined,
 						serviceType : filterValue?.serviceType || undefined,
 						companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
-						month       : month || undefined,
+						month       : dateFilter.month || undefined,
+						year        : dateFilter.year || undefined,
 
 					},
 				});
@@ -38,10 +58,14 @@ const useGetInvoiceJourney = ({ month, filterValue }:ParamsInterface) => {
 			}
 		};
 		getJourneyData();
-	}, [journeyTrigger, filterValue.entityCode, filterValue?.serviceType, filterValue.companyType, month]);
+	}, [journeyTrigger, filterValue.entityCode, filterValue?.serviceType,
+		filterValue.companyType, dateFilter.month, dateFilter.year]);
 	return {
 		journeyData,
 		journeyLoading,
+		dateFilter,
+		setDateFilter,
+		optionsVal,
 	};
 };
 export default useGetInvoiceJourney;

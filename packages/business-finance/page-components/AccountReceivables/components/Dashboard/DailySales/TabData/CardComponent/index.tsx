@@ -9,12 +9,17 @@ import ResponsiveChart from './ResponsiveChart';
 import BarData from './ResponsiveChart/data';
 import styles from './styles.module.css';
 
+interface SubFilterInterface {
+	month?: string,
+	year?: string,
+	date?: Date
+}
 interface CardComponentProps {
 	subActiveTab?: string,
 	dailyStatsData?: object,
 	toggleData?: boolean,
 	loading?: boolean,
-	filters?: object,
+	filters?: SubFilterInterface,
 	filterValue?: object
 }
 
@@ -25,6 +30,18 @@ function CardComponent({
 	const { data, loading:loadingData } = useGetGraph({ filters, filterValue, subActiveTab });
 
 	const getData = () => {
+		const getFormat = (duration) => {
+			if (filters.month) 			{
+				return format(duration, 'MMM', {}, false) || '-';
+			}
+			if (filters.year) {
+				return format(duration, 'YYYY', {}, false) || '-';
+			}
+			if (filters.date) {
+				return 	format(duration, 'dd MMM YYYY', {}, false) || '-';
+			}
+			return format(duration, 'dd MMM YYYY', {}, false) || '-';
+		};
 		if (loading) {
 			return (
 				<div className={styles.place}>
@@ -61,7 +78,7 @@ function CardComponent({
 								</div>
 							</div>
 							<div className={styles.value}>
-								{format(duration, 'dd MMM YYYY', {}, false) || '-'}
+								{getFormat(duration)}
 							</div>
 						</div>
 

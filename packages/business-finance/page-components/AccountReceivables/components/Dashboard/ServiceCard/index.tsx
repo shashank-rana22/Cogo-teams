@@ -323,7 +323,6 @@ function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) 
 						{getCardData.map((item) => (
 							<div
 								className={item.label === tab.key ? styles.on_click_ocean_card : styles.ocean_card}
-								style={{ marginLeft: '20px' }}
 								onClick={() => {
 									setTab((prev) => ({
 										...prev,
