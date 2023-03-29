@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -10,10 +11,12 @@ function useGetQuestions({ id }) {
 	const fetchQuestions = async () => {
 		try {
 			await trigger({
-				params: { id },
+				params: {
+					id,
+				},
 			});
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error?.message);
 		}
 	};
 
