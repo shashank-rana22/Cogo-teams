@@ -1,16 +1,14 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { ShipmentChat } from '@cogoport/shipment-chat';
+import { dynamic } from '@cogoport/next';
 import React, { useMemo } from 'react';
 
-import Timeline from '../../common/TimeLine';
+import { useStakeholderCheck } from '../../helpers/useStakeholderCheck';
 import useGetServices from '../../hooks/useGetServices';
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
 
-import ShipmentInfo from './ShipmentInfo';
-import styles from './styles.module.css';
-import Tab from './Tabs';
-import TopBar from './TopBar';
+const Kam = dynamic(() => import('./StakeholdersView/Kam'), { ssr: false });
+const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr: false });
 
 function ShipmentDetails() {
 	const { get } = useGetShipment();
@@ -25,26 +23,23 @@ function ShipmentDetails() {
 	const { servicesGet } = useGetServices({ shipment_data, additional_methods });
 
 	const {
-		loading: shipmentTimelineLoading,
-		getShipmentTimeline, timelineData,
+		getTimeline,
 	} = useGetTimeLine({ shipment_data });
 
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
-		getShipmentTimeline,
-	}), [get, servicesGet, getShipmentTimeline]);
+		getTimeline,
+	}), [get, servicesGet, getTimeline]);
+
+	const { ActiveStakeholder } = useStakeholderCheck();
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
-			<div className={styles.header}>
-				<ShipmentInfo />
-				<ShipmentChat />
-			</div>
 
-			<TopBar />
-			<Timeline timelineData={timelineData} loading={shipmentTimelineLoading} />
-			<Tab shipment_data={shipment_data} />
+			{(ActiveStakeholder === 'KAM')
+				? <Kam /> : <Superadmin />}
+
 		</ShipmentDetailContext.Provider>
 	);
 }

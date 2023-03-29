@@ -3,8 +3,8 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowRotateLeft, IcMArrowRotateRight } from '@cogoport/icons-react';
 import { useState, useContext } from 'react';
 
-import POC from '../../../../common/POC';
-import SOP from '../../../../common/SOP';
+import POC from '../../POC';
+import SOP from '../../SOP';
 
 import styles from './styles.module.css';
 

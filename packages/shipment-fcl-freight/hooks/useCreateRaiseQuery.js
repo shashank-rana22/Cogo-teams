@@ -35,7 +35,7 @@ function useCreateRaiseQuery({
 				remarks,
 				performed_by_id : userId,
 				service         : 'shipment',
-				service_id      : shipmentId,
+				service_id      : shipmentId || '3534d9b2-7a8c-47a0-a3d1-93cfb7bf9f69',
 			};
 			try {
 				const res = await trigger({
