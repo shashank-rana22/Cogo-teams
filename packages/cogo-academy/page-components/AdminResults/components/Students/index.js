@@ -37,6 +37,7 @@ function StudentsComponent({ test_id }) {
 			url     : '/list_not_appeared_users',
 			payload : {
 				test_id,
+				filters: { q: query },
 			},
 		},
 	};
@@ -76,6 +77,7 @@ function StudentsComponent({ test_id }) {
 				setFilter={setFilter}
 				setSearchValue={setSearchValue}
 				debounceQuery={debounceQuery}
+				activeTab={activeTab}
 			/>
 
 			{
