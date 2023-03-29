@@ -1,5 +1,7 @@
 import { IcMArrowRotateUp } from '@cogoport/icons-react';
 
+import styles from './styles.module.css';
+
 function IconComponent({ item, caseToShow }) {
 	if (caseToShow === item?.id) {
 		return (
@@ -7,7 +9,7 @@ function IconComponent({ item, caseToShow }) {
 				width={12}
 				height={12}
 				fill="#393f70"
-				style={{ marginLeft: 4, transition: 'transform 0.5s', cursor: 'pointer' }}
+				className={styles.arrow_up}
 			/>
 		);
 	}
@@ -17,12 +19,7 @@ function IconComponent({ item, caseToShow }) {
 			width={12}
 			height={12}
 			fill="#393f70"
-			style={{
-				marginLeft : 4,
-				cursor     : 'pointer',
-				transform  : 'rotate(180deg)',
-				transition : 'transform 0.5s',
-			}}
+			className={styles.arrow_down}
 		/>
 	);
 }

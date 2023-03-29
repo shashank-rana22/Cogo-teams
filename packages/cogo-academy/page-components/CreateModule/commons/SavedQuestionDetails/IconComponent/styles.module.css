@@ -1,0 +1,8 @@
+.arrow_up, .arrow_down{
+    margin-left: 4;
+    transition: 'transform 0.5s';
+    cursor: 'pointer'
+}
+.arrow_down{
+    transform: rotate(180deg);
+}
