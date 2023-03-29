@@ -473,16 +473,6 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_shipment_trade_partners',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-  {
-		api          : 'send_liners_invoice_email',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'list_checkout_applicable_promocodes',
 		access_type  : 'private',
 		service_name : 'checkout',
