@@ -1,0 +1,14 @@
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+
+	@media (max-width: 768px) {
+		position: absolute;
+	}
+}
+
+.filter_wrap {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 12px;
+}
