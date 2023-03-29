@@ -71,6 +71,8 @@ function GenerateMAWB({
 
 	const [taskItem, setTaskItem] = useState({ ...item, ...item.documentData });
 
+	const category = taskItem.blCategory;
+
 	const [activeCategory, setActiveCategory] = useState(taskItem.blCategory);
 
 	const finalFields = [
@@ -213,6 +215,7 @@ function GenerateMAWB({
 					setGenerate={setGenerate}
 					edit={edit}
 					setEdit={setEdit}
+					category={category}
 					activeCategory={activeCategory}
 					setActiveCategory={setActiveCategory}
 				/>

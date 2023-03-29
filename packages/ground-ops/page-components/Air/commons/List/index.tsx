@@ -62,7 +62,7 @@ function List({
 					/>
 					{singleitem.blCategory === 'hawb' && ['approval_pending', 'approved_awb'].includes(activeTab) && (
 						<div
-							style={{ '--length': isOpen === singleitem.id ? 0 : '-20px' } as React.CSSProperties}
+							style={{ '--length': isOpen === singleitem.id ? 0 : '-16px' } as React.CSSProperties}
 							className={styles.accordian_style}
 						>
 							{isOpen === singleitem.id ? (

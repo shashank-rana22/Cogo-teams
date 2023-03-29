@@ -13,7 +13,7 @@ const tabs = [
 	},
 ];
 
-function GenerateHeader({ setGenerate, edit, setEdit, activeCategory, setActiveCategory }) {
+function GenerateHeader({ setGenerate, edit, setEdit, category, activeCategory, setActiveCategory }) {
 	return (
 		<div>
 			<div className={styles.heading}>Add Export Details</div>
@@ -30,7 +30,7 @@ function GenerateHeader({ setGenerate, edit, setEdit, activeCategory, setActiveC
 				/>
 				<Breadcrumb.Item label="Add Export Details" />
 			</Breadcrumb>
-			{activeCategory === 'hawb' && (
+			{category === 'hawb' && (
 				<div className={styles.flex}>
 					{tabs.map((tab) => (
 						<div
