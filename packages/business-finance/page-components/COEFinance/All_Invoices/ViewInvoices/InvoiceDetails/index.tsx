@@ -14,8 +14,8 @@ interface BillInterFace {
 	grandTotal: number;
 	billCurrency: string;
 	id?: string;
-	billType:string;
-	isProforma:boolean;
+	billType: string;
+	isProforma: boolean;
 }
 interface BillAdditionalObject {
 	collectionPartyId?: string;
