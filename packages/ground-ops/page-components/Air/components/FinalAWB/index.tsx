@@ -38,15 +38,15 @@ function FinalAwb({
 				setPage={setPage}
 				functions={functions}
 			/>
-			{showUpload && (
-				<UploadModal
-					showUpload={showUpload}
-					setShowUpload={setShowUpload}
-					edit={edit}
-					setEdit={setEdit}
-					listAPi={listAPi}
-				/>
-			)}
+
+			<UploadModal
+				showUpload={showUpload}
+				setShowUpload={setShowUpload}
+				edit={edit}
+				setEdit={setEdit}
+				listAPi={listAPi}
+			/>
+
 		</>
 	);
 }
