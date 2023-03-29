@@ -1,5 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
+
+import getApiErrorString from '../utils/getApiErrorString';
 
 function useGetListDocuments({ shipment_data = {}, filters = {} }) {
 	const [{ loading, data }, trigger] = useRequest({
@@ -33,7 +36,7 @@ function useGetListDocuments({ shipment_data = {}, filters = {} }) {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
 	}, [trigger, shipment_id, service_type, q, uploaded_by_org_id]);

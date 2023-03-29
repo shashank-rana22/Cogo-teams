@@ -1,5 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
+
+import getApiErrorString from '../utils/getApiErrorString';
 
 const useListStakeholders = ({ defaultParams = {}, shipment_id = '' }) => {
 	const [apiData, setApiData] = useState({});
@@ -23,7 +26,7 @@ const useListStakeholders = ({ defaultParams = {}, shipment_id = '' }) => {
 					setApiData(res.data || {});
 				} catch (err) {
 					setApiData({});
-					console.log(err);
+					Toast.error(getApiErrorString(err));
 				}
 			}
 		)();

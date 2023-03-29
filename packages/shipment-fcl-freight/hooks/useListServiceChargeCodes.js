@@ -1,6 +1,9 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
+
+import getApiErrorString from '../utils/getApiErrorString';
 
 const useListServiceChargeCodes = ({ shipment_id, services, isSeller = false }) => {
 	const [filters, setFilters] = useState({
@@ -22,7 +25,7 @@ const useListServiceChargeCodes = ({ shipment_id, services, isSeller = false }) 
 					});
 				}
 			} catch (err) {
-				console.log(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
 	}, [trigger, shipment_id]);

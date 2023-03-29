@@ -72,7 +72,7 @@ const useUpdateContainerNumber = (
 				Toast.error('Please check the details filled or try again!');
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err?.data));
+			Toast.error(getApiErrorString(err));
 		}
 	};
 
@@ -84,4 +84,4 @@ const useUpdateContainerNumber = (
 };
 
 export default useUpdateContainerNumber;
-// TODO 
+// TODO

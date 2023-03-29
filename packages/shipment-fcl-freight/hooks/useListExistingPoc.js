@@ -1,5 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
+
+import getApiErrorString from '../utils/getApiErrorString';
 
 const useListExistingPoc = ({ organization_id = '', trade_party_type = '', trade_party_id = '' }) => {
 	const [apiList, setApiList] = useState([]);
@@ -46,7 +49,7 @@ const useListExistingPoc = ({ organization_id = '', trade_party_type = '', trade
 						mergeResponse(usersRes?.data?.list, pocsRes?.data?.list);
 					}
 				} catch (err) {
-					console.log(err);
+					Toast.error(getApiErrorString(err));
 				}
 			}
 		)();

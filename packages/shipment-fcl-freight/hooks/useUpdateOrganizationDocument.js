@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const useUpdateOrganizationDocument = ({ refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_organization_document',
@@ -17,7 +19,7 @@ const useUpdateOrganizationDocument = ({ refetch }) => {
 			}
 			refetch();
 		} catch (err) {
-			Toast.error(err?.response?.data?.document);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

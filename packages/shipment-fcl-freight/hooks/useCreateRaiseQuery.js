@@ -48,7 +48,7 @@ function useCreateRaiseQuery({
 					reset();
 				}
 			} catch (e) {
-				Toast.error(getApiErrorString(e?.data));
+				Toast.error(getApiErrorString(e));
 			}
 		})();
 	}, [queryType, remarks, userId, shipmentId, trigger, setShowModal, setIsOpen, reset]);

@@ -1,5 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
+
+import getApiErrorString from '../utils/getApiErrorString';
 
 const useListAdditionalServices = ({ shipment_data, filters = {} }) => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -22,7 +25,7 @@ const useListAdditionalServices = ({ shipment_data, filters = {} }) => {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
 	}, [trigger, importer_exporter_id, id, JSON.stringify(filters)]);
