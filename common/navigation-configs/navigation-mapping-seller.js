@@ -55,6 +55,17 @@ const navigationMappingSeller = {
 				possible_apis : app_apis.saas_trade_partner,
 				module_type   : 'dashboards',
 			},
+			{
+				key           : 'saas_premium_services-import_export_docs',
+				title         : 'Import/Export Documents',
+				type          : 'link',
+				icon          : 'nav-trade-payment',
+				href          : '/saas/premium-services/import-export-doc',
+				as            : '/saas/premium-services/import-export-doc',
+				main_apis     : [],
+				possible_apis : app_apis.saas_import_export_doc,
+				module_type   : 'dashboards',
+			},
 		],
 	},
 	saas_premium_services: {

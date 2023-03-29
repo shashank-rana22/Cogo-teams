@@ -1966,6 +1966,12 @@ const saas = {
 			feature     : 'order-history',
 		},
 	],
+	app_saas_import_export_doc: [
+		{
+			api         : 'saas_get_user_quota_usage',
+			access_type : 'private',
+		},
+	],
 
 };
 export default saas;
