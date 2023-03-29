@@ -23,14 +23,8 @@ const getControls = () => [
 		name        : 'maximum_attempts',
 		label       : 'Attempts Allowed',
 		type        : 'number',
-		placeholder : '0',
-		rules       : {
-			required : 'This is required',
-			min      : {
-				value   : 1,
-				message : 'Should be greater than 0',
-			},
-		},
+		placeholder : '1',
+		disabled    : true,
 	},
 	{
 		name        : 'cut_off_percentage',
