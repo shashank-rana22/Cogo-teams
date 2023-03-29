@@ -8,6 +8,7 @@ function Search({ setSearchQuestion = () => {}, debounceQuery = () => {} }) {
 		setSearchQuestion(inputValue);
 		debounceQuery(inputValue);
 	};
+
 	return (
 		<div className={styles.container}>
 			<Input
