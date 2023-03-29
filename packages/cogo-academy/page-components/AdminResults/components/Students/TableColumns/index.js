@@ -4,7 +4,7 @@ import SortComponent from '../../../commons/SortComponent';
 
 import styles from './styles.module.css';
 
-const appearedColumns = ({ sortFilter, setSortFilter }) => [
+const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 	{
 		Header: (
 			<div className={styles.container}>
@@ -24,7 +24,7 @@ const appearedColumns = ({ sortFilter, setSortFilter }) => [
 	{
 		Header   : <div>PASSED/FAILED</div>,
 		id       : 'passed_failed',
-		accessor : ({ result = 0 }) => (
+		accessor : ({ result = '' }) => (
 			<section>{startCase(result) || '-'}</section>
 		),
 	},
@@ -100,7 +100,7 @@ const appearedColumns = ({ sortFilter, setSortFilter }) => [
 	},
 ];
 
-const notAppeardColumns = () => [
+const getNotAppeardColumns = () => [
 	{
 		Header   : 'NAME',
 		id       : 'name',
@@ -118,9 +118,11 @@ const notAppeardColumns = () => [
 ];
 
 const tableColumns = ({ sortFilter, setSortFilter, activeTab }) => {
-	if (activeTab === 'appeared') { return appearedColumns({ sortFilter, setSortFilter }); }
+	if (activeTab === 'appeared') {
+		return getAppearedColumns({ sortFilter, setSortFilter });
+	}
 
-	return notAppeardColumns();
+	return getNotAppeardColumns();
 };
 
 export default tableColumns;
