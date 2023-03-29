@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import { useState, useEffect } from 'react';
 
 import LeftSection from './components/LeftSection';
@@ -9,12 +8,11 @@ import WarningModal from './components/LeftSection/WarningModal';
 import RightSection from './components/RightSection';
 import SubmitTest from './components/RightSection/Footer/SubmitTest';
 import InstructionsModal from './components/RightSection/InstructionsModal';
+import useEndTest from './hooks/useEndTest';
 import useFetchQuestionsList from './hooks/useFetchQuestionList';
 import styles from './styles.module.css';
 
 function Ongoing({ testData, page, setActiveState }) {
-	const router = useRouter();
-
 	const { guidelines = [] } = testData || {};
 
 	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
@@ -25,6 +23,8 @@ function Ongoing({ testData, page, setActiveState }) {
 	const [showSubmitTestModal, setShowSubmitTestModal] = useState(false);
 
 	const { loading, data, fetchQuestions } = useFetchQuestionsList({ currentQuestion });
+
+	const { endTest, endTestLoading } = useEndTest({ setActiveState, setShowTimeOverModal: setIsFullscreen });
 
 	// Watch for fullscreenchange
 	useEffect(() => {
@@ -46,12 +46,12 @@ function Ongoing({ testData, page, setActiveState }) {
 
 			if (['1', '3'].includes(visibilityChangeCount)) {
 				Toast.warn(visibilityChangeCount === '3'
-					? 'Warning: You will be redirected to dashboard if you switch tab/window again'
+					? 'Warning: You test will be submitted if you switch tab/window again'
 					: 'Warning: Changing tab/window is not allowed during test');
 			}
 
 			if (visibilityChangeCount > 5) {
-				router.push('/learning/tests/dashboard');
+				endTest();
 				localStorage.setItem('visibilityChangeCount', 1);
 				return;
 			}
@@ -70,8 +70,7 @@ function Ongoing({ testData, page, setActiveState }) {
 		document.addEventListener('visibilitychange', onVisibilityChange);
 
 		return () => document.removeEventListener('visibilitychange', onVisibilityChange);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [endTest]);
 
 	if (showLeaveTestModal) {
 		return (
@@ -118,7 +117,7 @@ function Ongoing({ testData, page, setActiveState }) {
 
 	if (!isFullscreen) {
 		return (
-			<WarningModal loading={loading} />
+			<WarningModal loading={loading || endTestLoading} />
 		);
 	}
 

@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import { AsyncSelectController } from '@cogoport/forms';
 
@@ -28,7 +27,6 @@ function FilterContent({
 						page_limit: 10,
 					}}
 				/>
-
 			</div>
 
 			<div className={styles.button_container}>

@@ -50,28 +50,24 @@ function QuestionsComponent({ test_id }) {
 						</div>
 					))}
 				</div>
-			) }
+			)}
 
-			{!loading && isEmpty(data?.list) && <EmptyState />}
+			{!loading && (isEmpty(data?.list) ? <EmptyState /> : (
+				<div>
+					<ListHeader
+						setSortFilter={setSortFilter}
+						sortFilter={sortFilter}
+					/>
 
-			{
-				!loading && (
-					<div>
-						<ListHeader
-							setSortFilter={setSortFilter}
-							sortFilter={sortFilter}
+					{(questionsList || []).map((question_item, index) => (
+						<QuestionItem
+							key={question_item.id}
+							question_item={question_item}
+							index={index}
 						/>
-						{(questionsList || []).map((question_item, index) => (
-							<QuestionItem
-								key={question_item.id}
-								question_item={question_item}
-								index={index}
-							/>
-						))}
-					</div>
-				)
-			}
-
+					))}
+				</div>
+			))}
 		</>
 	);
 }

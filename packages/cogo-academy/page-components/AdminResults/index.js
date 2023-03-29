@@ -40,14 +40,8 @@ function AdminResults() {
 	} = useGetTest({ id: test_id });
 
 	const COMPONENT_PROPS_MAPPING = {
-		students: {
-			key            : 'students',
-			componentProps : { test_id },
-		},
-		questions: {
-			key            : 'questions',
-			componentProps : { test_id },
-		},
+		students  : { test_id },
+		questions : { test_id },
 	};
 
 	const handleGoBack = () => {
@@ -85,7 +79,7 @@ function AdminResults() {
 					{Object.values(COMPONENT_MAPPING).map((tab) => {
 						const { key, title, component : ContainerComponent = null } = tab;
 
-						const { componentProps } = COMPONENT_PROPS_MAPPING[key];
+						const componentProps = COMPONENT_PROPS_MAPPING[key];
 
 						if (!ContainerComponent) return null;
 

@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import useCreateTestQuestion from '../../hooks/useCreateTestQuestion';
 import useUpdateCaseStudy from '../../hooks/useUpdateCaseStudy';
@@ -25,6 +25,8 @@ function CreateQuestion({
 	topic,
 	mode,
 }) {
+	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
+
 	const { isNew: isNewQuestion = false, id } = item || {};
 
 	const {
@@ -37,8 +39,6 @@ function CreateQuestion({
 		control,
 		register,
 	} = useForm();
-
-	const questionTypeWatch = watch('question_type');
 
 	const { createTestQuestion, loading } = useCreateTestQuestion();
 
@@ -95,11 +95,17 @@ function CreateQuestion({
 		});
 	};
 
+	const watchQuestionType = watch('question_type');
+
 	useEffect(() => {
 		if (!isEmpty(topic)) {
 			setValue('topic', topic);
 		}
 	}, [setValue, topic]);
+
+	useEffect(() => {
+		setQuestionTypeWatch(watchQuestionType);
+	}, [watchQuestionType]);
 
 	useEffect(() => {
 		if (!isEmpty(editDetails)) {
@@ -231,6 +237,7 @@ function CreateQuestion({
 								loading={loading || updateCaseStudyLoading}
 								type="submit"
 								themeType="primary"
+								className={styles.save_button}
 							>
 								{isNewQuestion ? 'Save Question' : 'Update Question'}
 							</Button>

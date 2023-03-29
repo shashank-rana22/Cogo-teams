@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 const items = ['Exam can be only taken in full screen',
 	'To continue test, please click on continue',
 	// eslint-disable-next-line max-len
-	'You will be redirected to dashboard if you switch tabs.If you switch tabs more than 2 times, your exam will be submitted automatically',
+	'Changing tabs is not allowed in between exam, If you switch tabs more than 2 times, your exam will be submitted automatically',
 	'To submit the test, please click on submit test button'];
 
 function WarningModal({ loading }) {

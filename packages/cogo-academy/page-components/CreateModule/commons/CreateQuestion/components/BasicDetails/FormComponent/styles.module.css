@@ -1,7 +1,6 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	gap: 32px;
 	margin-bottom: 24px;
 }
 
@@ -33,10 +32,10 @@
 
 .difficulty_level {
 	display: flex;
+	margin-bottom: 32px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
-		gap: 4px;
 
 		:global {
 			.ui_chip_container {
@@ -49,8 +48,8 @@
 .upper_form {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 32px;
 	align-items: center;
+	margin-bottom: 32px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;

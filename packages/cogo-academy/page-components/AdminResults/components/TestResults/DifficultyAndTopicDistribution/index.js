@@ -6,13 +6,13 @@ const colorArray = ['hsla(232, 44%, 96%, 1)', 'hsla(234, 46%, 87%, 1)', 'hsla(23
 
 const getDifficultyData = (difficulty_wise_stats = {}) => (Object.keys(difficulty_wise_stats).map((key, index) => ({
 	label      : startCase(key.split('_')[0]),
-	percentile : difficulty_wise_stats[key]?.toFixed(2),
+	percentile : (difficulty_wise_stats[key] || 0).toFixed(2),
 	color      : colorArray[index],
 })));
 
 const getTopicWiseData = (topic_wise_percentile = {}) => (Object.keys(topic_wise_percentile).map((key, index) => ({
 	label      : startCase(key),
-	percentile : topic_wise_percentile[key].toFixed(2),
+	percentile : (topic_wise_percentile[key] || 0).toFixed(2),
 	color      : colorArray[index],
 })));
 
