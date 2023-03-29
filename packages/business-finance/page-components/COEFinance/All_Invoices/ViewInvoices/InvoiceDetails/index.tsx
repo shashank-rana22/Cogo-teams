@@ -23,7 +23,7 @@ interface BillAdditionalObject {
 	urgencyRemarks?: string;
 }
 interface RemarkObj {
-	remarks?: string;
+	remarks?: [];
 }
 interface DataProps {
 	bill: BillInterFace;

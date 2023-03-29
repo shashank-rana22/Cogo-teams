@@ -1,5 +1,5 @@
-export const handleBillType = (billType, isProforma) => {
-	let invoiceType;
+export const handleBillType = (billType:string, isProforma:boolean) => {
+	let invoiceType = '';
 	if (billType === 'BILL') {
 		if (isProforma) {
 			invoiceType = 'Proforma Invoice';

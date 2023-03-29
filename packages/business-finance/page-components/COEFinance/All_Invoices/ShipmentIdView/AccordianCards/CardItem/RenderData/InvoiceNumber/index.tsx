@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 interface ItemTypes {
 	billDocumentUrl?: string;
 	billType?:string,
-	isProforma?:string,
+	isProforma?:boolean,
 	billNumber?: string;
 	invoicePdfUrl?: string;
 	proformaPdfUrl?: string;
@@ -24,7 +24,7 @@ function InvoiceNumber({ item, field }: PropsType) {
 	const {
 		billDocumentUrl,
 		billType = '',
-		isProforma = '',
+		isProforma,
 		billNumber,
 		invoicePdfUrl,
 		proformaPdfUrl,
