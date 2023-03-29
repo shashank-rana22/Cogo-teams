@@ -1,6 +1,5 @@
-import { Button, Modal, MultiSelect } from '@cogoport/components';
+import { Select, Button, Modal } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import {
 	asyncFieldsPartnerUsers,
 } from '@cogoport/forms/utils/getAsyncFields';
@@ -18,24 +17,39 @@ function EnrichmentRequest({
 }) {
 	const {
 		onEnrichmentRequest,
+		loading,
 		isOpenModal = false,
 		setisOpenModal = () => {},
 		onCloseModal = () => {},
 		thirdParty = [],
 		setThirdParty = () => {},
-		onChangeThirdParty = () => {},
+		setThirdPartyPayload = () => {},
 	} = useCreateBulkEnrichment({ setActiveTab, selectedBulkData });
 
-	// const thirdPartySelector = useGetAsyncOptions({
-	// 	...asyncFieldsPartnerUsers,
-	// 	initialCall : false,
-	// 	params      : {
-	// 		filters: {
-	// 			status: 'active',
-	// 			// role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
-	// 		},
-	// 	},
-	// });
+	const thirdPartyOptions = useGetAsyncOptions({
+		...asyncFieldsPartnerUsers(),
+		initialCall : false,
+		params      : {
+			filters: {
+				status   : 'active',
+				role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+			},
+		},
+	});
+
+	const handleChange = (id) => {
+		const { options } = thirdPartyOptions;
+
+		const selectedOption = options.filter((option) => option.id === id);
+
+		const { user_id, partner_id } = selectedOption[0] || {};
+
+		setThirdPartyPayload(
+			[{ user_id, partner_id }],
+		);
+
+		setThirdParty(id);
+	};
 
 	return (
 		<>
@@ -52,24 +66,23 @@ function EnrichmentRequest({
 				Create Enrichment Request
 			</Button>
 
-			{isOpenModal ? (
-				<Modal
-					show={isOpenModal}
-					size="md"
-					closeOnOuterClick={false}
-					onClose={onCloseModal}
-					className={styles.modal_container}
-					placement="top"
-				>
-					<Modal.Header title="Create Enrichment Request" />
+			<Modal
+				show={isOpenModal}
+				size="md"
+				closeOnOuterClick={false}
+				onClose={onCloseModal}
+				className={styles.modal_container}
+				placement="top"
+			>
+				<Modal.Header title="Create Enrichment Request" />
 
-					<Modal.Body className={styles.modal_body}>
-						Please select the Data Enrichment Agent(s) to send the enrichment request for the
-						{' '}
-						{checkedRowsId.length || 'these'}
-						{' '}
-						selected feedback(s):
-						{/* <MultiSelect
+				<Modal.Body className={styles.modal_body}>
+					Please select the Data Enrichment Agent(s) to send the enrichment request for the
+					{' '}
+					{checkedRowsId.length || 'these'}
+					{' '}
+					selected feedback(s):
+					{/* <MultiSelect
 							value={thirdParty}
 							onChange={setThirdParty}
 							placeholder="Select 3rd Party Organisation(s)"
@@ -77,50 +90,37 @@ function EnrichmentRequest({
 							isClearable
 							className={styles.modal_select}
 						/> */}
-						<AsyncSelect
-							placeholder="Select 3rd Party Agent(s)"
-							className={styles.modal_select}
-							value={thirdParty}
-							onChange={setThirdParty}
-							getSelectedOption={(obj) => console.log('obj :: ', obj)}
-							isClearable
-							multiple
-							asyncKey="partner_users"
-							params={{
-								filters: {
-									status   : 'active',
-									role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
-								},
-							}}
-						/>
-					</Modal.Body>
+					<Select
+						className={styles.modal_select}
+						placeholder="Select 3rd Party Agent(s)"
+						value={thirdParty}
+						onChange={handleChange}
+						isClearable
+						{...thirdPartyOptions}
+					/>
+				</Modal.Body>
 
-					<Modal.Footer>
-						<Button
-							type="submit"
-							size="md"
-							themeType="secondary"
-							onClick={onCloseModal}
-						>
-							Cancel
-						</Button>
-						<Button
-							type="submit"
-							size="md"
-							themeType="primary"
-							className={styles.submit_button}
-							// disabled={loading}
-							onClick={onEnrichmentRequest}
-						>
-							Send Request
-						</Button>
-					</Modal.Footer>
-
-				</Modal>
-			) : (
-				null
-			)}
-
+				<Modal.Footer>
+					<Button
+						type="submit"
+						size="md"
+						themeType="secondary"
+						onClick={onCloseModal}
+					>
+						Cancel
+					</Button>
+					<Button
+						type="submit"
+						size="md"
+						themeType="primary"
+						className={styles.submit_button}
+						disabled={isEmpty(thirdParty) || loading}
+						onClick={onEnrichmentRequest}
+					>
+						Send Request
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</>
 
 	);

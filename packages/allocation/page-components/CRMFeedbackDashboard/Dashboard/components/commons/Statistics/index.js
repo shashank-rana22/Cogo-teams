@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 function Statistics({ activeTab = '' }) {
 	const { stats = {}, loading = false } = useChartStats({ activeTab });
+
 	const statsControl = getStatsData(activeTab, stats);
 
 	const isEmpty = Object.values(stats).every((item) => item === 0);

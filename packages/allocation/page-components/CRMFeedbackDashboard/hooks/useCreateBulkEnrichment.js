@@ -11,18 +11,19 @@ const useCreateBulkEnrichment = ({ setActiveTab = () => {}, selectedBulkData = [
 	};
 
 	const [thirdParty, setThirdParty] = useState([]);
-	const [thirdPartyPayload, setThirdPartyPayload] = useState([{}]);
+	const [thirdPartyPayload, setThirdPartyPayload] = useState([]);
 
 	const [{ loading }, trigger] = useAllocationRequest({
-		url     : 'feedback_response_bulk_create',
+		url     : 'feedback_request_bulk_create',
 		method  : 'POST',
-		authkey : 'post_allocation_feedback_response_bulk_create',
+		authkey : 'post_allocation_feedback_request_bulk_create',
 	}, { manual: true });
 
 	const onEnrichmentRequest = async () => {
 		try {
 			const payload = {
-				data: selectedBulkData,
+				requests      : selectedBulkData,
+				third_parties : thirdPartyPayload,
 			};
 
 			await trigger({
@@ -30,18 +31,13 @@ const useCreateBulkEnrichment = ({ setActiveTab = () => {}, selectedBulkData = [
 			});
 
 			Toast.success('Request has been initiated successfully.');
+
+			onCloseModal();
+
+			setActiveTab('requests_sent');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
-
-		onCloseModal();
-		setActiveTab('requests_sent');
-	};
-
-	const onChangeThirdParty = (val) => {
-		// setThirdParty(val);
-		console.log('hello');
-		console.log('obj is::', val);
 	};
 
 	return {
@@ -52,7 +48,7 @@ const useCreateBulkEnrichment = ({ setActiveTab = () => {}, selectedBulkData = [
 		onCloseModal,
 		thirdParty,
 		setThirdParty,
-		onChangeThirdParty,
+		setThirdPartyPayload,
 	};
 };
 

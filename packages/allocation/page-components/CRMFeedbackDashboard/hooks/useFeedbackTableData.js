@@ -104,12 +104,11 @@ const useFeedbackTableData = ({ organizationId = '', type = '' }) => {
 	const onBulkDataPayload = () => {
 		const bulkData = list
 			.filter((item) => checkedRowsId.includes(item.id))
-			.map(({ source_id, source_type, organization_id, lead_organization_id, partner_id }) => ({
+			.map(({ source_id, source_type, organization_id, lead_organization_id }) => ({
 				source_id,
 				source       : source_type,
 				organization_id,
 				lead_organization_id,
-				partner_id,
 				request_type : 'enrichment',
 			}));
 
