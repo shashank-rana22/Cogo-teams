@@ -23,7 +23,6 @@ function Header(props) {
 		<div className={styles.header_container}>
 			<div className={styles.filter_container}>
 
-				{/* use asyncSelect Controller */}
 				<AsyncSelect
 					placeholder="Condition"
 					size="sm"

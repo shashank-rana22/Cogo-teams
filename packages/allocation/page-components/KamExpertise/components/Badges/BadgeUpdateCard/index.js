@@ -62,14 +62,6 @@ function BadgeUpdateCard(props) {
 				{medalType}
 				{' '}
 				Medal
-
-				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<Tooltip content="Lorem ipsum dolor sit amet, consectetur adipiscing elit" placement="top">
-						<div style={{ display: 'flex' }}>
-							<IcMInfo className={styles.icm_info} />
-						</div>
-					</Tooltip>
-				</div>
 			</div>
 
 			<div className={styles.file_select_style}>
