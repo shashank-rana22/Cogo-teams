@@ -1,6 +1,5 @@
-import { Button } from '@cogoport/components';
+import { Checkbox, Button } from '@cogoport/components';
 import {
-	CheckboxController,
 	AsyncSelectController, InputController, SelectController,
 	TextAreaController, UploadController,
 } from '@cogoport/forms';
@@ -99,27 +98,27 @@ function Form({
 					{errors.address && <span>This field is required</span>}
 				</div>
 				<div className={styles.input_container}>
-					<label htmlFor="gst_proof">GST Proof</label>
+					<label htmlFor="tax_number_document_url">GST Proof</label>
 					<UploadController
-						name="gst_proof"
+						name="tax_number_document_url"
 						control={control}
-						// rules={{
-						// 	required: {
-						// 		value: true,
-						// 	},
-						// }}
+						rules={{
+							required: {
+								value: true,
+							},
+						}}
 						rows={4}
 					/>
 					{errors.gst_proof && <span>This field is required</span>}
 				</div>
 			</div>
 			<div className={styles.flex}>
-				<div className={styles.input_container}>
-					<CheckboxController
+				<div className={styles.sez_container}>
+					<Checkbox
 						name="is_sez"
-						label="Is Sez"
 						control={control}
 					/>
+					<label htmlFor="is_sez">Is Sez</label>
 					<div />
 				</div>
 			</div>

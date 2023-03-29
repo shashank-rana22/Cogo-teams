@@ -236,7 +236,6 @@ function InvoicingParties({
 					setShowComponent={setShowComponent}
 					tradePartyType={tradePartyType}
 					fetchOrganizationTradeParties={refetch}
-					viewType="from_checkout"
 					source={source}
 				/>
 

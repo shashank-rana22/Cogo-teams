@@ -55,7 +55,7 @@ const useCreateShipmentAdditionalService = ({
 			setShowChargeCodes(false);
 			refetch();
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

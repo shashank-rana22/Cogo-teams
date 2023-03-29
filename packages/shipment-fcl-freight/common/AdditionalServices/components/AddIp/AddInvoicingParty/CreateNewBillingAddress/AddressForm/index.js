@@ -1,5 +1,4 @@
 import { Button, Checkbox } from '@cogoport/components';
-import { useState, useEffect } from 'react';
 
 import useGetBusiness from '../../hooks/useGetBusiness';
 import AsyncGstListController from '../AsyncGstListController';
@@ -18,12 +17,12 @@ function AddressForm({
 	companyDetails = {},
 	setCurrentStep = () => {},
 	onSubmit = () => {},
+	gstNumber,
+	setGstNumber = () => {},
 	isAddressRegisteredUnderGst,
 	setShowComponent = () => {},
 	setIsAddressRegisteredUnderGst = () => {},
 }) {
-	const [gstNumber, setGstNumber] = useState('');
-
 	const { dataa } = useGetBusiness({ gstNumber, setValue });
 
 	const handleCancel = () => {

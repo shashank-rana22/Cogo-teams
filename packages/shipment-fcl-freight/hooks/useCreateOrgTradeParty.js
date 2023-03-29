@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const formatPocDetails = ({ data }) => data.map((poc) => {
 	const {
 		name = '',
@@ -21,7 +23,6 @@ const formatPocDetails = ({ data }) => data.map((poc) => {
 const useCreateOrgTradeParty = ({
 	orgResponse = {},
 	setShowComponent = () => {},
-	tradePartyType = {},
 	setShowModal = () => {},
 	filledDetails = {},
 	setFilledDetails = () => {},
@@ -117,14 +118,14 @@ const useCreateOrgTradeParty = ({
 			});
 
 			Toast.success('Trade Party Created Successfully!!');
-
+			setShowComponent('view_billing_addresses');
 			if (fetchOrganizationTradeParties) {
 				setShowComponent('view_billing_addresses');
 				fetchOrganizationTradeParties();
 				setShowModal(false);
 			}
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

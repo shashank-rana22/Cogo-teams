@@ -1,6 +1,6 @@
 // import { useFormCogo } from '@cogoport/front/hooks';
 
-import useCreateOrgTradeParty from '../../hooks/useCreateOrgTradeParty';
+import useCreateOrgTradeParty from '../../../../../../../hooks/useCreateOrgTradeParty';
 import { getDocumentControls } from '../../utils/controls';
 
 const useDocuments = ({

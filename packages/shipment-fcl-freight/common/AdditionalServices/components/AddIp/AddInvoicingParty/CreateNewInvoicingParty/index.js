@@ -2,10 +2,8 @@ import { Stepper } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { useState } from 'react';
 
+import useCreateOrgTradeParty from '../../../../../../hooks/useCreateOrgTradeParty';
 import AddressForm from '../CreateNewBillingAddress/AddressForm';
-
-// import AddressForm from '../../AddressForm';
-import useCreateOrgTradeParty from '../hooks/useCreateOrgTradeParty';
 
 import CompanyDetails from './CompanyDetails';
 import styles from './styles.module.css';
@@ -14,16 +12,13 @@ function CreateNewInvoicingParty({
 	orgResponse = {},
 	tradePartyType = {},
 	setShowComponent = () => {},
-	setShowModal = () => {},
 	fetchOrganizationTradeParties = () => {},
-	viewType = 'from_profile',
 	source = '',
 }) {
 	const [filledDetails, setFilledDetails] = useState({});
 	const [isAddressRegisteredUnderGst, setIsAddressRegisteredUnderGst] = useState(false);
+	const [gstNumber, setGstNumber] = useState('');
 	const [currentStep, setCurrentStep] = useState('company_details');
-
-	// console.log('orgResponse', orgResponse);
 
 	const items = [
 		{ title: 'COMPANY DETAILS', key: 'company_details' },
@@ -34,7 +29,9 @@ function CreateNewInvoicingParty({
 		filledDetails,
 		setFilledDetails,
 		orgResponse,
+		setShowComponent,
 		isAddressRegisteredUnderGst,
+		fetchOrganizationTradeParties,
 	});
 
 	let renderCurrentStepControls = null;
@@ -63,6 +60,8 @@ function CreateNewInvoicingParty({
 				companyDetails={filledDetails}
 				setCurrentStep={setCurrentStep}
 				onSubmit={onSubmit}
+				gstNumber={gstNumber}
+				setGstNumber={setGstNumber}
 				isAddressRegisteredUnderGst={isAddressRegisteredUnderGst}
 				setIsAddressRegisteredUnderGst={setIsAddressRegisteredUnderGst}
 			/>
