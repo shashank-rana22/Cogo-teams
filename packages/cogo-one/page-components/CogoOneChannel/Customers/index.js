@@ -39,6 +39,7 @@ function Customers({
 	setModalType = () => {},
 	modalType = {},
 	updatePin = () => {},
+	tagOptions = [],
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const onChangeToggle = () => {
@@ -118,6 +119,7 @@ function Customers({
 					setModalType={setModalType}
 					modalType={modalType}
 					updatePin={updatePin}
+					tagOptions={tagOptions}
 				/>
 			)}
 

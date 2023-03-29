@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
-function useListTemplate({ activeTab }) {
+function useListTemplate() {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_communication_templates',
 		method : 'get',
@@ -16,7 +15,7 @@ function useListTemplate({ activeTab }) {
 		total : 0,
 	});
 
-	const fetchListTemplate = async () => {
+	const fetchListTemplate = useCallback(async () => {
 		try {
 			const res = await trigger({
 				params: {
@@ -36,25 +35,29 @@ function useListTemplate({ activeTab }) {
 		} catch (error) {
 			// console.log(error);
 		}
-	};
-	const refetch = () => {
-		setPagination(1);
-		setInfiniteList((p) => ({ ...p, list: [] }));
-		fetchListTemplate();
-	};
+	}, [pagination, qfilter, trigger]);
+
 	useEffect(() => {
-		refetch();
-	}, [qfilter, activeTab]);
+		setInfiniteList((p) => ({ ...p, list: [] }));
+		setPagination(1);
+	}, [qfilter]);
 
 	useEffect(() => {
 		fetchListTemplate();
-	}, [pagination, activeTab]);
+	}, [fetchListTemplate]);
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
-		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 0;
+		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 50;
 		const hasMoreData = pagination < infiniteList?.total;
 		if (reachBottom && hasMoreData && !loading) {
 			setPagination((p) => p + 1);
+		}
+	};
+	const refetch = () => {
+		if (pagination === 1) {
+			fetchListTemplate();
+		} else {
+			setPagination(1);
 		}
 	};
 
