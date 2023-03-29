@@ -9,7 +9,7 @@ import Header from './Header';
 import QuestionsList from './QuestionsList';
 
 function ControlCenter() {
-	const { query } = useRouter();
+	const { query, push } = useRouter();
 
 	const { activeTab: currentActiveTab, testModuleTab } = query || {};
 
@@ -17,10 +17,7 @@ function ControlCenter() {
 	const [switchDashboard, setSwitchDashboard] = useState(true);
 
 	const handleChangeTab = (val) => {
-		const newurl = `${window.location.protocol}//
-		${window.location.host}${window.location.pathname}?activeTab=${val}`;
-
-		window.history.pushState({ path: newurl }, '', newurl);
+		push(`/learning?activeTab=${val}`);
 
 		setActiveTab(val);
 	};

@@ -17,14 +17,8 @@
 	margin: auto;
 
 	:global {
-		.ui_input_container {
-			width: 250px;
-		}
-
-		.ui_select_container {
-			width: 250px;
-		}
-
+		.ui_input_container,
+		.ui_select_container,
 		.ui_multiselect_container {
 			width: 250px;
 		}
@@ -95,6 +89,10 @@
 
 .difficulty_level_label {
 	margin-right: 16px;
+
+	@media (max-width: 768px) {
+		margin-left: 4px;
+	}
 }
 
 .label {

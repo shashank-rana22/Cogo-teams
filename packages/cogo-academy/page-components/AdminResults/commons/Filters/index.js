@@ -9,7 +9,8 @@ const options = [
 ];
 
 function Filters({
-	filter = '', setFilter = () => {},
+	filter = '',
+	setFilter = () => {},
 	setSearchValue = () => {},
 	debounceQuery = () => {},
 	searchValue,
@@ -34,7 +35,8 @@ function Filters({
 				)}
 				style={{ width: 300 }}
 			/>
-			{	activeTab === 'appeared' ? (
+
+			{activeTab === 'appeared' ? (
 				<div className={styles.filters}>
 
 					<Select
@@ -45,7 +47,6 @@ function Filters({
 						options={options}
 						isClearable="true"
 					/>
-
 				</div>
 			) : null}
 
