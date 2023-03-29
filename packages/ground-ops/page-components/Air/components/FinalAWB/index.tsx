@@ -13,15 +13,20 @@ function FinalAwb({
 	const [showUpload, setShowUpload] = useState(null);
 
 	const functions = {
-		handleUpload: (singleItem) => (
-			<Button
-				themeType="linkUi"
-				style={{ fontSize: 12 }}
-				onClick={() => { setShowUpload(singleItem); setEdit(false); }}
-			>
-				<IcMUpload fill="#8B8B8B" />
-			</Button>
-		),
+		handleUpload: (singleItem) => {
+			const item = { ...singleItem };
+			item.documentType = 'airway_bill';
+			item.type = 'FinalAwb';
+			return (
+				<Button
+					themeType="linkUi"
+					style={{ fontSize: 12 }}
+					onClick={() => { setShowUpload(item); setEdit(false); }}
+				>
+					<IcMUpload fill="#8B8B8B" />
+				</Button>
+			);
+		},
 	};
 	return (
 		<>
