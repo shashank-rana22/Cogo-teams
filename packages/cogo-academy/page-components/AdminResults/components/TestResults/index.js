@@ -44,7 +44,6 @@ function TestResults({ test_id = '' }) {
 		test_name,
 		validity_start,
 		validity_end,
-		toggleState,
 		setToggleState,
 	};
 
