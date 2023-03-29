@@ -43,6 +43,7 @@ function CreateModal({
 	const { total_count = '' } = pagination_data;
 
 	useEffect(() => debounceQuery(searchValue, managerName), [debounceQuery, searchValue, managerName]);
+	useEffect(() => setItem({}), [setItem]);
 
 	const managerControls = useGetControls({ name: 'manger_name' });
 
@@ -64,21 +65,24 @@ function CreateModal({
 			if (isEmpty(item)) {
 				return (
 					<>
-						<div>
-							<div>Search by Name/COGO-ID...</div>
-							<Input
-								placeholder="Type Here..."
-								value={searchValue}
-								onChange={setSearchValue}
-							/>
-						</div>
-						<div>
-							<div>Search by Name/COGO-ID...</div>
-							<Input
-								{...managerControls}
-								onChange={setManagerName}
-								style={{ marginRight: '8px' }}
-							/>
+						<div className={styles.name_input}>
+							<div>
+								<div>Search by Name/COGO-ID...</div>
+								<Input
+									placeholder="Type Here..."
+									value={searchValue}
+									onChange={setSearchValue}
+								/>
+							</div>
+							<div>
+								<div>Search by Name/COGO-ID...</div>
+								<Input
+									{...managerControls}
+									onChange={setManagerName}
+									style={{ marginRight: '8px' }}
+								/>
+
+							</div>
 
 						</div>
 
@@ -147,7 +151,7 @@ function CreateModal({
 				<Modal.Header title={`Create ${startCase(status)}`} />
 				<div className={styles.upload_modal}>
 					<Modal.Body
-						style={{ maxHeight: '600px' }}
+						style={{ maxHeight: '500px' }}
 					>
 						{renderCreateModal()}
 					</Modal.Body>
@@ -181,7 +185,7 @@ function CreateModal({
 				show={modal === 'manual_feedback'}
 				onClose={() => setModal('')}
 				onClickOutside={() => setModal('')}
-				size="xl"
+				size="lg"
 			>
 				<Modal.Header title="Manual Feedback" />
 				<Modal.Body>

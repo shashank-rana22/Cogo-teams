@@ -14,8 +14,27 @@
 	}
 }
 
+.left_container{
+	display: flex;
+}
+
+.right_container{
+	display: flex;
+}
+
+.department_select {
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
 .container{
 	position: absolute;
 	right: 0px;
 	max-width: 300px;
+}
+
+.sub_container{
+	display: flex;
 }
