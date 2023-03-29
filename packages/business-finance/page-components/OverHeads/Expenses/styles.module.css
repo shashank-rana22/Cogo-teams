@@ -24,7 +24,7 @@
 }
 
 .search {
-	height: 36px;
+	height: 33px !important;
     margin-top: 2px;
 	width: 341px;
 	padding: 0 4px;
@@ -132,5 +132,5 @@
 	background: #ED3726 !important;
 	color: white !important;
 	font-size: 14px !important;
-	height: 38px !important; 
+	height: 35px !important; 
 }
