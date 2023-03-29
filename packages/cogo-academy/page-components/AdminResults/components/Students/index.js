@@ -8,7 +8,7 @@ import EmptyState from '../../../CreateModule/components/EmptyState';
 import Filters from '../../commons/Filters';
 
 import styles from './styles.module.css';
-import tableColumns from './TableColumns';
+import getTableColumns from './TableColumns';
 
 function StudentsComponent({ test_id }) {
 	const [activeTab, setActiveTab] = useState('appeared');
@@ -51,7 +51,7 @@ function StudentsComponent({ test_id }) {
 
 	const { stats = [], page_limit = 0, total_count = 0, list } = data || {};
 
-	const columns = tableColumns({ sortFilter, setSortFilter, activeTab });
+	const columns = getTableColumns({ sortFilter, setSortFilter, activeTab });
 
 	useEffect(() => {
 		debounceQuery(searchValue);
