@@ -1,6 +1,9 @@
+import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useContext, useCallback } from 'react';
+
+import getApiErrorString from '../utils/getApiErrorString';
 
 const apis = {
 	trade_documents        : '/list_trade_documents',
@@ -34,7 +37,7 @@ const useListWallet = ({ activeWallet }) => {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
 	}, [trigger, importer_exporter_id, page]);

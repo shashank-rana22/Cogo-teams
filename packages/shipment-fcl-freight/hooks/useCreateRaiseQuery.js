@@ -12,7 +12,7 @@ function useCreateRaiseQuery({
 	queryType = '',
 	remarks = '',
 }) {
-	const { scope, userId } = useSelector(({ profile }) => ({
+	const { userId } = useSelector(({ profile }) => ({
 		userId: profile.id,
 	}));
 
@@ -26,7 +26,6 @@ function useCreateRaiseQuery({
 	const [{ loading }, trigger] = useRequest({
 		url    : 'raise_query',
 		method : 'POST',
-		scope,
 	}, { manual: true });
 
 	const handleFormSubmit = useCallback(() => {
@@ -49,7 +48,7 @@ function useCreateRaiseQuery({
 					reset();
 				}
 			} catch (e) {
-				Toast.error(getApiErrorString(e?.data));
+				Toast.error(getApiErrorString(e));
 			}
 		})();
 	}, [queryType, remarks, userId, shipmentId, trigger, setShowModal, setIsOpen, reset]);

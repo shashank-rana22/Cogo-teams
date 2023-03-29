@@ -29,12 +29,11 @@
 	}
 }
 
-.prefix {
-	font-weight: 700;
-	font-size: 14px;
-	line-height: 150%;
-
-	color: #333333;
+.prefix{
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	color: #828282;
 }
 
 .row {

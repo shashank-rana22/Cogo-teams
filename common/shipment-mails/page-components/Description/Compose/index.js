@@ -1,5 +1,5 @@
 import { RTE } from '@cogoport/components';
-import { useForm, handleError, InputController } from '@cogoport/forms';
+import { useForm, handleError } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -51,12 +51,10 @@ function Compose({
 	subject_position,
 }) {
 	const defaultValues = getFormattedValues(composingEmail, action);
-	const defaultCC = defaultValues.ccrecipients.length > 0;
-	const [isCC, setIsCC] = useState(defaultCC);
 	const [isBcc, setIsBcc] = useState(false);
 	const [userEmailArray, setUserEmailArray] = useState([]);
 	const [errors, setErrors] = useState({});
-	const [editorState, setEditorState] = useState();
+	const [editorState, setEditorState] = useState('');
 	const { options } = useGetEntityStakeholderMappings();
 
 	const {
@@ -74,30 +72,24 @@ function Compose({
 	if (pre_subject_text && subject_position === 'prefix') {
 		actualSubject = `${pre_subject_text} / ${entity_type} / ${actualSubject}`;
 	} else {
-		actualSubject = `${actualSubject} / ${pre_subject_text} / ${entity_type}`;
+		actualSubject = `${actualSubject} / ${pre_subject_text || ''} / ${entity_type}`;
 	}
 
 	useResetErrors({ errors, setErrors, currentStateErrors: errorVal });
 
 	const suffix = (
 		<div className={styles.row}>
-			<div className={styles.text}> Add : </div>
-			<div
-				className={styles.suffix_button}
-				role="button"
-				tabIndex={0}
-				onClick={() => setIsCC(!isCC)}
-			>
-				cc
-			</div>
-			<div
-				className={styles.suffix_button}
-				role="button"
-				tabIndex={0}
-				onClick={() => setIsBcc(!isBcc)}
-			>
-				bcc
-			</div>
+			{!isBcc
+			&& (
+				<div
+					className={styles.suffix_button}
+					role="button"
+					tabIndex={0}
+					onClick={() => setIsBcc(!isBcc)}
+				>
+					Bcc
+				</div>
+			)}
 		</div>
 	);
 
@@ -111,35 +103,36 @@ function Compose({
 		}
 	};
 
-	const handleDelete = (item) => {
-		const tempUserEmailArray = userEmailArray;
-		tempUserEmailArray.forEach((ele, idx) => {
-			if (ele === item) {
-				userEmailArray.splice(idx, 1);
-			}
-		});
-		setValue('toUserEmail', '');
-		setUserEmailArray(tempUserEmailArray);
-	};
+	// const handleDelete = (item) => {
+	// 	const tempUserEmailArray = userEmailArray;
+	// 	tempUserEmailArray.forEach((ele, idx) => {
+	// 		if (ele === item) {
+	// 			userEmailArray.splice(idx, 1);
+	// 		}
+	// 	});
+	// 	setValue('toUserEmail', '');
+	// 	setUserEmailArray(tempUserEmailArray);
+	// };
 
-	const renderValue = () => userEmailArray.map((item) => (
-		<div style={{ display: 'flex' }}>
-			<div className={styles.value}>{item}</div>
-			<div
-				className={styles.cancel}
-				role="button"
-				tabIndex={0}
-				onClick={() => handleDelete(item)}
-			>
-				x
-			</div>
-		</div>
-	));
+	// const renderValue = () => userEmailArray.map((item) => (
+	// 	<div style={{ display: 'flex' }}>
+	// 		<div className={styles.value}>{item}</div>
+	// 		<div
+	// 			className={styles.cancel}
+	// 			role="button"
+	// 			tabIndex={0}
+	// 			onClick={() => handleDelete(item)}
+	// 		>
+	// 			x
+	// 		</div>
+	// 	</div>
+	// ));
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
 				<IcMArrowBack
+					className={styles.back_icon}
 					style={{ marginRight: 10, cursor: 'pointer' }}
 					onClick={() => setComposingEmail(null)}
 				/>
@@ -154,9 +147,12 @@ function Compose({
 						suffix={suffix}
 						name="toUserEmail"
 						onKeyDown={(e) => handleClick(e)}
-						renderValue={renderValue}
+						emailValue={userEmailArray}
+						setEmailValue={setUserEmailArray}
+						setValue={setValue}
+						// renderValue={renderValue}
 						control={control}
-						placeholder="type here..."
+						placeholder="Type here..."
 						key={JSON.stringify(userEmailArray)}
 						rules={{ required: { value: true, message: 'Email is required' } }}
 					/>
@@ -170,29 +166,31 @@ function Compose({
 					) : null}
 				</div>
 
-				{isCC ? (
+				<div>
 					<InputParam
 						prefix="Cc :"
 						name="ccrecipients"
 						control={control}
-						placeholder="put comma (,) seperated multiple emails"
+						placeholder="Type here..."
 					/>
-				) : null}
-				{errors?.ccrecipients ? (
-					<div className={styles.error}>
-						{handleError(
-							{ rules: { required: 'Emails are required' }, error: errors?.ccrecipients },
-							true,
-						)}
-					</div>
-				) : null}
+
+					{errors?.ccrecipients ? (
+						<div className={styles.error}>
+							{handleError(
+								{ rules: { required: 'Emails are required' }, error: errors?.ccrecipients },
+								true,
+							)}
+						</div>
+					) : null}
+				</div>
+
 				{isBcc
 					? (
-						<InputController
+						<InputParam
 							prefix="Bcc :"
 							name="bccrecipients"
 							control={control}
-							placeholder="put comma (,) seperated multiple emails"
+							placeholder="Type here..."
 						/>
 					)
 					: null}
@@ -232,7 +230,7 @@ function Compose({
 				</div>
 
 				<div className={styles.subject_preview}>
-					<div className={styles.subject_label}>Subject Preview:</div>
+					<div className={styles.subject_label}>Subject Preview :</div>
 					<div className={styles.preview}>
 						{actualSubject}
 					</div>

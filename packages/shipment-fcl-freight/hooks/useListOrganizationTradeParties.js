@@ -1,5 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
+
+import getApiErrorString from '../utils/getApiErrorString';
 
 const useListOrganizationTradeParties = ({ defaultFilters = {}, organization_id = '', defaultParams = {} }) => {
 	const [apiData, setApiData] = useState({});
@@ -30,7 +33,7 @@ const useListOrganizationTradeParties = ({ defaultFilters = {}, organization_id 
 		} catch (err) {
 			setApiData({});
 			setLoading(false);
-			console.log(err);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

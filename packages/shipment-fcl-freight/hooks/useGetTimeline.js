@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 function useGetTimeLine({ shipment_data = {} }) {
 	const [data, setData] = useState([]);
 
@@ -22,7 +24,7 @@ function useGetTimeLine({ shipment_data = {} }) {
 			}
 		} catch (e) {
 			setData([]);
-			Toast.error(e.message || 'Something went wrong');
+			Toast.error(getApiErrorString(e));
 		}
 	}), [shipment_id, trigger]);
 

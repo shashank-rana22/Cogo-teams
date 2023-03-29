@@ -16,7 +16,6 @@ function POCS({ tradePartnersData = {}, setAddPoc = () => {}, shipment_id = '' }
 		shipment_id,
 	});
 
-
 	return (
 		<Card title="POCs">
 			<div className={styles.toggle_container}>

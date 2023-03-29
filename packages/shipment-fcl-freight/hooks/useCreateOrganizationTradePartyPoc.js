@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const useCreateOrganizationTradePartyPoc = ({
 	shipment_id = '', organization_id = '', refetch = () => {},
 	successMessage = 'Successfully Created',
@@ -18,7 +20,7 @@ const useCreateOrganizationTradePartyPoc = ({
 				refetch();
 			}
 		} catch (err) {
-			Toast.error(err?.message);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

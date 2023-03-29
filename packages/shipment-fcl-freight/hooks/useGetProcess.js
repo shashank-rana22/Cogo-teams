@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 function useGetShipmentProcess() {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_freight/get_process',
@@ -18,7 +20,7 @@ function useGetShipmentProcess() {
 						},
 					});
 				} catch (err) {
-					Toast.error(err);
+					Toast.error(getApiErrorString(err));
 				}
 			}
 		)();

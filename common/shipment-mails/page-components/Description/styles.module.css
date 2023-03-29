@@ -1,4 +1,9 @@
 .container { 
+	width: 63%;
 	margin: 10px 24px;
 	flex: 1;
+
+	&.email_view {
+		margin: 30px 28px 10px;
+	}
 }

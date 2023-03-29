@@ -3,6 +3,8 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const useUpdateShipmentAdditionalService = ({
 	item = {},
 	setAddRate = () => {},
@@ -41,7 +43,7 @@ const useUpdateShipmentAdditionalService = ({
 				refetch();
 			}
 		} catch (err) {
-			Toast.error(err?.data);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 
@@ -160,7 +162,7 @@ const useUpdateShipmentAdditionalService = ({
 				onComplete();
 			}
 		} catch (err) {
-			Toast.error(err?.data);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

@@ -3,6 +3,8 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 function useGetShipment() {
 	const router = useRouter();
 	const { shipment_id } = router.query;
@@ -22,7 +24,7 @@ function useGetShipment() {
 					},
 				});
 			} catch (err) {
-				Toast.error(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
 	}, [trigger, shipment_id]);

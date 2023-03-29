@@ -3,7 +3,6 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useListShipmentTradePartners from '../../hooks/useListShipmentTradePartners';
-// import usePocServiceList from '../../hooks/usePocServiceList';
 
 import AddCompanyModal from './components/AddCompanyModal';
 import AddedTradeParty from './components/AddedTradeParty';
@@ -11,12 +10,12 @@ import AddPocModal from './components/AddPocModal';
 import InvoicingParty from './components/InvoicingParty';
 import NotifyingParty from './components/NotifyingParty';
 import POCS from './components/POCS';
-// import ServiceProvider from './components/ServiceProvider';
-// import TradeParties from './components/TradeParties';
-// import getServiceProviderData from './helpers/getServiceProviderData';
+import ServiceProvider from './components/ServiceProvider';
+import TradeParties from './components/TradeParties';
+import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
-function POC({ shipment_data = {} }) {
+function POC({ shipment_data = {}, servicesList = [] }) {
 	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
@@ -28,16 +27,7 @@ function POC({ shipment_data = {} }) {
 		loading,
 	} = useListShipmentTradePartners({ shipment_id });
 
-	// const { data:servicesData } = usePocServiceList({
-	// 	shipment_id,
-	// 	defaultFilters : { status: ['active', 'pending', 'inactive'] },
-	// 	defaultParams  : {
-	// 		service_stakeholder_required   : true,
-	// 		collection_party_data_required : true,
-	// 	},
-	// });
-
-	// const serviceProviders = getServiceProviderData(servicesData);
+	const serviceProviders = getServiceProviderData(servicesList);
 
 	return (
 		<div>
@@ -46,11 +36,11 @@ function POC({ shipment_data = {} }) {
 
 				: (
 					<div className={styles.container}>
-						{/* <TradeParties
+						<TradeParties
 							tradePartnersData={data}
 							setAddCompany={setAddCompany}
 							serviceProviders={serviceProviders}
-						/> */}
+						/>
 
 						<POCS
 							tradePartnersData={data}
@@ -73,11 +63,11 @@ function POC({ shipment_data = {} }) {
 						<InvoicingParty
 							tradePartnersData={data}
 						/>
-						{/* <ServiceProvider
+						<ServiceProvider
 							tradePartnersData={data}
 							setAddPoc={setAddPoc}
 							serviceProviders={serviceProviders}
-						/> */}
+						/>
 
 						{!isEmpty(addCompany) && (
 							<AddCompanyModal

@@ -1,5 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
+
+import getApiErrorString from '../utils/getApiErrorString';
 
 const useListShipmentAudits = ({ defaultFilters = {} }) => {
 	const [apiData, setApiData] = useState({});
@@ -25,7 +28,7 @@ const useListShipmentAudits = ({ defaultFilters = {} }) => {
 			setApiData(res.data || {});
 		} catch (err) {
 			setApiData({});
-			console.log({ err });
+			Toast.error(getApiErrorString(err));
 		}
 	};
 
@@ -41,7 +44,7 @@ const useListShipmentAudits = ({ defaultFilters = {} }) => {
 		apiTrigger,
 		setFilters,
 		loading,
-		data    : apiData,
+		data: apiData,
 	};
 };
 

@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import Compose from './Compose';
@@ -18,19 +19,21 @@ function Description({
 }) {
 	if (composingEmail) {
 		return (
-			<Compose
-				composingEmail={composingEmail}
-				setComposingEmail={setComposingEmail}
-				COMPOSE_EMAIL={COMPOSE_EMAIL}
-				action={action}
-				pre_subject_text={pre_subject_text}
-				subject_position={subject_position}
-			/>
+			<div className={styles.container}>
+				<Compose
+					composingEmail={composingEmail}
+					setComposingEmail={setComposingEmail}
+					COMPOSE_EMAIL={COMPOSE_EMAIL}
+					action={action}
+					pre_subject_text={pre_subject_text}
+					subject_position={subject_position}
+				/>
+			</div>
 		);
 	}
 	if (activeMail) {
 		return (
-			<div className={styles.container}>
+			<div className={cl`${styles.container} ${styles.email_view}`}>
 				<EmailView
 					activeMail={activeMail}
 					RECIEVE_EMAIL={RECIEVE_EMAIL}

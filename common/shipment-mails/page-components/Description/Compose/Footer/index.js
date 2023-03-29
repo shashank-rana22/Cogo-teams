@@ -1,5 +1,4 @@
 import { Button } from '@cogoport/components';
-import { IcMCross } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
@@ -8,6 +7,7 @@ import useReplyAllEmail from '../../../../hooks/useReplyAllEmail';
 import useReplyEmail from '../../../../hooks/useReplyEmail';
 import useSendEmail from '../../../../hooks/useSendEmail';
 
+import Attachement from './Attachment';
 import styles from './styles.module.css';
 
 function Footer({
@@ -50,7 +50,7 @@ function Footer({
 			ccrecipients : [],
 			subject      : data?.subject,
 			content,
-			attachments  : attachments.map((item) => item.url),
+			attachments  : attachments.map((item) => item),
 			msgId        : composingEmail?.id || undefined,
 			userId,
 			onCreate,
@@ -61,9 +61,10 @@ function Footer({
 		|| mailApi.loading
 		|| forwardMailApi.loading
 		|| replyMailApi.loading;
+
 	return (
 		<div className={styles.wrapper}>
-			<div className={styles.row}>
+			{/* <div className={styles.row}>
 				{attachments.map((attach) => (
 					<div className={styles.attachment_item}>
 						<div className={styles.name}>
@@ -80,8 +81,14 @@ function Footer({
 						/>
 					</div>
 				))}
-			</div>
+			</div> */}
 			<div className={styles.container}>
+
+				<Attachement
+					attachments={attachments}
+					onChange={setAttachements}
+				/>
+
 				<Button
 					className="primary lg"
 					onClick={handleSubmit(sendMail, onError)}
