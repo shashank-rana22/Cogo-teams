@@ -14,12 +14,13 @@
 
 .answer_item {
 	margin-bottom: 20px;
+	margin-left: 8px;
 }
 
 .answer_header {
 	display: flex;
 	align-items: center;
-	width: 30%;
+	width: 50%;
 	margin-left: 32px;
 }
 
@@ -52,11 +53,16 @@
 	align-items: center;
 }
 
-.answer_svg {
+.avatar {
 	position: absolute;
-	margin-right: 12px;
-	font-size: 20px;
-	color: #849e4c;
+	left: -16px;
+
+	:global {
+		.ui_avatar_text {
+			color: #221f20;
+			background-color: #f9f9f9;
+		}
+	}
 }
 
 .answer_text {
@@ -65,6 +71,12 @@
 	font-style: normal;
 	font-weight: 400;
 	color: #221f20;
+}
+
+.answer_tick {
+	margin-left: 8px;
+	font-size: 24px;
+	color: #849e4c;
 }
 
 .correct_answer {

@@ -2,7 +2,7 @@ import QnAItem from '../QnAItem';
 
 import styles from './styles.module.css';
 
-function CaseStudy({ case_study }) {
+function CaseStudy({ case_study, user_name }) {
 	const { questions_description: { description = '' } = {}, questions } = case_study || {};
 
 	return (
@@ -11,7 +11,7 @@ function CaseStudy({ case_study }) {
 
 			{questions.map((question, index) => (
 				<div className={styles.question_card}>
-					<QnAItem data={question} index={index} />
+					<QnAItem data={question} index={index} user_name={user_name} />
 				</div>
 			))}
 		</div>

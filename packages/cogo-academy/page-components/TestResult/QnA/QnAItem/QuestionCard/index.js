@@ -1,37 +1,61 @@
-import { Popover } from '@cogoport/components';
+import { Avatar, Popover } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function QuestionCard({ question = '', answers = [], index = 0, question_type = '', case_study = '' }) {
+function QuestionCard({
+	question = '',
+	answers = [],
+	user_answers = [],
+	index = 0,
+	question_type = '',
+	case_study = '',
+	user_name = '',
+}) {
 	const [visible, setVisible] = useState(false);
+
+	const userAnswersArray = [...user_answers.map((item) => item.answer)];
 
 	const getAnswerItem = (answer) => {
 		const { answer_text = '', is_correct = false, peers = 0 } = answer;
 
 		return (
 			<div className={styles.answer_item}>
+
 				<div className={styles.answer_header}>
+
 					{peers > 0 ? (
 						<div className={styles.percentage_bar} style={{ width: `${peers}%` }} />
+
 					) : null}
+
 					<div className={styles.peer_percentage}>
 						{peers.toFixed(2)}
 						{' '}
 						% Peers
 					</div>
 				</div>
+
 				<div className={styles.answer_text_container}>
-					{is_correct ? (
-						<div className={styles.answer_svg}>
-							<IcMTick />
-						</div>
+					{userAnswersArray.includes(answer_text) ? (
+
+						<Avatar
+							personName={user_name}
+							className={styles.avatar}
+							style={{ backgroundColor: `${is_correct ? '#849E4C' : '#BF291E'}` }}
+						/>
 					) : null}
 
 					<div className={`${styles.answer_text} ${is_correct && styles.correct_answer}`}>
 						{answer_text}
 					</div>
+					{is_correct ? (
+						<div className={styles.answer_tick}>
+
+							<IcMTick />
+						</div>
+					) : null}
 				</div>
 			</div>
 		);

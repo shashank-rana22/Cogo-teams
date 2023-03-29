@@ -14,37 +14,39 @@ function TitleComponent({
 	question,
 	question_type,
 }) {
-	<div role="presentation" className={styles.container}>
-		<div className={styles.small_section}>
-			<Pill size="md" color="#F3FAFA">{topic}</Pill>
-		</div>
+	return (
+		<div role="presentation" className={styles.container}>
+			<div className={styles.small_section}>
+				<Pill size="md" color="#F3FAFA">{topic}</Pill>
+			</div>
 
-		<div className={styles.section}>
-			{question}
-		</div>
+			<div className={styles.section}>
+				{question}
+			</div>
 
-		<div className={styles.small_section}>
-			{startCase(question_type)}
-		</div>
+			<div className={styles.small_section}>
+				{startCase(question_type)}
+			</div>
 
-		<div className={styles.small_section}>
-			{startCase(difficulty)}
-		</div>
+			<div className={styles.small_section}>
+				{startCase(difficulty)}
+			</div>
 
-		<div className={styles.small_section}>
-			{students_appeared}
-			{' '}
-			(
-			{appeared_percent.toFixed(2)}
-			%
-			)
-		</div>
+			<div className={styles.small_section}>
+				{students_appeared}
+				{' '}
+				(
+				{appeared_percent.toFixed(2)}
+				%
+				)
+			</div>
 
-		<div className={styles.small_section}>
-			{correct_percentage}
-			%
+			<div className={styles.small_section}>
+				{correct_percentage}
+				%
+			</div>
 		</div>
-	</div>;
+	);
 }
 
 function QuestionItem({ question_item, index = 0 }) {
