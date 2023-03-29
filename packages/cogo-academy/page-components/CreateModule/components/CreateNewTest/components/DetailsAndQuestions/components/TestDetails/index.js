@@ -1,5 +1,5 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Link } from '@cogoport/next';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
@@ -9,13 +9,6 @@ import styles from './styles.module.css';
 
 function CreateNewTest({ control, errors, data, setValue }) {
 	const controls = getControls();
-
-	const router = useRouter();
-
-	const onClickBack = () => {
-		const href = '/learning?activeTab=test_module';
-		router.push(href, href);
-	};
 
 	useEffect(() => {
 		const { cogo_entity_object = {}, name = '' } = data;
@@ -29,10 +22,12 @@ function CreateNewTest({ control, errors, data, setValue }) {
 
 	return (
 		<div>
-			<div className={styles.header}>
-				<IcMArrowBack className={styles.back_icon} onClick={() => onClickBack()} width={20} height={20} />
-				<div role="presentation" className={styles.title} onClick={() => onClickBack()}>New Test</div>
-			</div>
+			<Link href="/learning?activeTab=test_module">
+				<div className={styles.header}>
+					<IcMArrowBack className={styles.back_icon} width={20} height={20} />
+					<div role="presentation" className={styles.title}>New Test</div>
+				</div>
+			</Link>
 
 			<div className={styles.container}>
 				{controls.map((controlItem) => {

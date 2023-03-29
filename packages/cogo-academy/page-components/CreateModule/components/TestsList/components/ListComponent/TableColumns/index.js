@@ -70,8 +70,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		id       : 'updatedAt',
 		accessor : ({ updated_at = '' }) => (
 			<section>
-				<span className={styles.question_set_time}>{format(updated_at, 'dd MMM yy')}</span>
-				<span className={styles.question_set_time}>{format(updated_at, 'h:mm a')}</span>
+				<span className={styles.time}>{format(updated_at, 'dd MMM yy')}</span>
+				<span className={styles.time}>{format(updated_at, 'h:mm a')}</span>
 			</section>
 		),
 	},
