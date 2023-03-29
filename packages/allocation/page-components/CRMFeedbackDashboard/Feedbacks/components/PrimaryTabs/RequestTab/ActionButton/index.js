@@ -5,14 +5,21 @@ import useDeactivateRequest from '../../../../../hooks/useDeactivateRequest';
 
 import styles from './styles.module.css';
 
-function ActionButton({ label = '', status = '', organization = '', feedback_request_id = '' }) {
+function ActionButton({
+	label = '',
+	status = '',
+	organization = '',
+	third_party = '',
+	feedback_request_id = '',
+	refetch = () => {},
+}) {
 	const {
 		onDeactivateRequest,
 		loading = false,
 		isOpenModal = false,
 		setisOpenModal = () => {},
 		onCloseModal = () => {},
-	} = useDeactivateRequest({ feedback_request_id });
+	} = useDeactivateRequest({ feedback_request_id, refetch });
 
 	const router = useRouter();
 
@@ -22,7 +29,11 @@ function ActionButton({ label = '', status = '', organization = '', feedback_req
 				size="sm"
 				themeType="secondary"
 				onClick={() => {
-					router.push(`/allocation/responses/${feedback_request_id}?organization=${organization}`);
+					router.push(
+						`/allocation/responses/
+							${feedback_request_id}
+								?third_party=${third_party}&organization=${organization}`,
+					);
 				}}
 			>
 				{label}

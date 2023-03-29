@@ -25,7 +25,7 @@ function CrmTable({ columns, data, loading }) {
 				columns={columns || [{}]}
 				data={data || [{}]}
 				loading={loading}
-				loadingRowsCount={10}
+				loadingRowsCount={5}
 			/>
 		</div>
 	);

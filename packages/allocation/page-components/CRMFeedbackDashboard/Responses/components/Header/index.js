@@ -1,5 +1,6 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -12,7 +13,7 @@ function Header({ organization = '' }) {
 			onClick={() => router.back()}
 		>
 			<IcMArrowBack width="32px" height="20px" />
-			{organization}
+			{startCase(organization)}
 		</button>
 
 	);

@@ -1,5 +1,4 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
-import { startCase } from '@cogoport/utils';
 
 import useChartStats from '../../../../hooks/useChartStats';
 
@@ -15,7 +14,7 @@ function Statistics({ activeTab = '' }) {
 	if (isEmpty && !loading) {
 		return (
 			<section className={styles.empty_container}>
-				<div className={styles.empty_text}>Statistics are not available.</div>
+				<div className={styles.empty_text}>Statistics are not available at this moment.</div>
 			</section>
 		);
 	}
@@ -52,24 +51,15 @@ function Statistics({ activeTab = '' }) {
 									itemOpacity   : 1,
 									symbolSize    : 12,
 									symbolShape   : 'circle',
-									effects       : [
-										{
-											on    : 'hover',
-											style : {
-												itemTextColor: 'red',
-											},
-										},
-									],
 								},
 							]}
 							tooltip={({
-								datum: { id, value },
+								datum: { label, value },
 							}) => (
 								<div className={styles.pie_tooltip}>
 									<strong>
-										{startCase(id)}
+										{label}
 										:
-										{' '}
 										{value}
 									</strong>
 								</div>

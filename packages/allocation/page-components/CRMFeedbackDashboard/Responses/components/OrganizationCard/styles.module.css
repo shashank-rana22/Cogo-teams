@@ -1,6 +1,6 @@
 
 .card{
-    width: 100%;
+    width: fit-content;
     background: #FFFFFF;
     border-radius: 8px;
     display: flex;
@@ -11,9 +11,6 @@
 }
 
 .details{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
     margin-left: 12px;
     padding: 12px 0 0 0;
 }
@@ -21,12 +18,4 @@
 .name{
     font-weight: 700;
     margin-left: 4px;
-}
-
-.dates{
-    width: 32%;
-    margin-top: 28px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
 }

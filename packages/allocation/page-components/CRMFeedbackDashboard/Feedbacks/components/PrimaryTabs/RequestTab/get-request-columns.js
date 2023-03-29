@@ -27,16 +27,16 @@ export const STATUS_MAPPING = {
 	},
 };
 
-export const REQUEST_COLUMNS = [
+export const REQUEST_COLUMNS = ({ refetch = () => {} }) => [
 	{
-		Header   : <div>S. NO</div>,
+		Header   : <div>Serial ID</div>,
 		key      : 'serial_id',
 		id       : 'serial_id',
 		accessor : ({ serial_id = '' }) => (
-			<section>
+			<Pill size="md" color="orange">
 				#
 				{serial_id || '___'}
-			</section>
+			</Pill>
 		),
 	},
 	{
@@ -91,15 +91,21 @@ export const REQUEST_COLUMNS = [
 		key      : 'action',
 		id       : 'action',
 		accessor : ({
-			status = '', user_id = {}, id = '',
+			status = '', user_id = {}, id = '', organization = '', lead_organization = '', lead_organization_id = '',
 		}) => (
 			<section className={styles.feedback}>
 				{!status.includes(['inactive', 'active']) ? (
 					<ActionButton
 						label={STATUS_MAPPING[status]?.buttonLabel}
 						status={status}
-						organization={user_id.name}
+						organization={lead_organization_id ? (
+							lead_organization?.business_name
+						) : (
+							organization?.business_name
+						)}
+						third_party={user_id.name}
 						feedback_request_id={id}
+						refetch={refetch}
 					/>
 				) : (
 					null

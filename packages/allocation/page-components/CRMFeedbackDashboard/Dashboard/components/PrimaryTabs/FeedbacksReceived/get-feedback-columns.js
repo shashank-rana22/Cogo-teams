@@ -36,9 +36,9 @@ export const FEEDBACK_COLUMNS = ({
 		accessor : ({ organization = {}, lead_organization_id = '', lead_organization = {} }) => (
 			<section className={styles.table_cell}>
 				{lead_organization_id ? (
-					lead_organization?.business_name || '__'
+					startCase(lead_organization?.business_name || '__')
 				) : (
-					organization?.business_name || '__'
+					startCase(organization?.business_name || '__')
 				)}
 
 			</section>

@@ -12,11 +12,12 @@ function RequestTab({ organization_id = '', type = '' }) {
 		loading = false,
 		onChangeParams = () => {},
 		paginationData = {},
+		refetch = () => {},
 	} = useRequestOrganization({ organizationId: organization_id, type });
 
 	const { page, page_limit, total_count } = paginationData;
 
-	const columns = REQUEST_COLUMNS;
+	const columns = REQUEST_COLUMNS({ refetch });
 
 	return (
 		<div className={styles.container}>

@@ -10,6 +10,7 @@ function Responses() {
 			query: {
 				feedback_request_id = '',
 				organization = '',
+				third_party = '',
 			},
 		},
 	} = useSelector((state) => state);
@@ -17,7 +18,7 @@ function Responses() {
 	return (
 		<>
 			<Header organization={organization} />
-			<OrganizationCard organization={organization} />
+			<OrganizationCard third_party={third_party} />
 			<PrimaryTabs feedback_request_id={feedback_request_id} />
 		</>
 
