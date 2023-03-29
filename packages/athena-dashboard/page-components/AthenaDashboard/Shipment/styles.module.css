@@ -30,14 +30,14 @@
     }
 }
 
-.exportinfo{
+.export_info{
     display: flex;
 }
-.shipmentreport{
+.shipment_report{
     font-weight: 600;
     font-size: 20px;
 }
-.exportresults{
+.export_results{
     padding-left: 12px;
     font-weight: 500;
     font-size: 12px;
@@ -46,13 +46,13 @@
     align-items: center;
     text-align: center;
 }
-.sortby{
+.sort_by{
     width: 41px;
     height: 18px; 
     font-size: 12px;
     color: #4F4F4F;
 }
-.selectbox{
+.select_box{
     box-sizing: border-box;
 
     display: flex;
@@ -72,7 +72,7 @@
     align-self: stretch;
     flex-grow: 0;
 }
-.sortbybox{
+.sort_by_box{
     padding-top: 20px;
 }
 
@@ -82,7 +82,7 @@
     margin-top: 0px;
     margin-bottom: 0px;
 }
-.fromto{
+.from_to{
     display: flex;
     margin-left: 5px;
     margin-top: 10px;
@@ -90,18 +90,18 @@
 .to{
     margin-left: 93px;
 }
-.daterange{
+.date_range{
     font-family: 'Roboto';
     font-weight: 500;
     font-size: 12px;
     margin-left: 5px;
 }
-.microfilternames{
+.microfilter_names{
     margin-left: 3px;
     margin-top: 20px;
 }
 
-.filtertab{
+.filter_tab{
     background: #F9F9F9;
     border-radius: 10px;
     width: 348px;
@@ -109,33 +109,32 @@
     margin-left: 3px;
     float: left;
 }
-.leftpadding{
+.left_padding{
     padding-left: 15px;
     padding-top: 10px;
 }
-.lowerhalf{
+.lower_half{
     display: flex;
-    flex-direction: row-reverse;
     margin-top: 10px;
     background-color: white;
     width: 100%;
 }
-.tableandtabs{
+.table_and_tabs{
     display: block;
     margin-left: 30px;
     overflow-x: auto;
     float: left;
 }
-.tablower{
+.tab_lower{
   margin: 20px;
   margin-left: 0px !important;
 }
 
-.wholepage{
+.whole_page{
     margin-top: 18px;
 }
 
-.tablediv{
+.table_div{
     width: 97%;
     margin-right: 10px;
     height: 850px;

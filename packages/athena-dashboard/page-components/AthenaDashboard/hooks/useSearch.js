@@ -3,27 +3,16 @@ import { useAthenaRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-function formatDate(date) {
-	const d = new Date(date);
-	let month = `${d.getMonth() + 1}`;
-	let day = `${d.getDate()}`;
-	const year = d.getFullYear();
-	if (month.length < 2) { month = `0${month}`; }
-	if (day.length < 2) { day = `0${day}`; }
-	return [year, month, day].join('-');
-}
-
 const useSearch = () => {
 	const [date, setDate] = useState('');
 	const [answer, setAnswer] = useState([]);
-	const [searchValue, setSearchValue] = useState('');
 
 	const formProps = useForm();
 
 	const { control, handleSubmit } = formProps;
 
-	const start_date = formatDate(date.startDate);
-	const end_date = formatDate(date.endDate);
+	const start_date = date.startDate;
+	const end_date = date.endDate;
 
 	const [{ loading = true, data: responseData = {} }, trigger] = useAthenaRequest({
 		url    : 'shipments_by_hscode',
@@ -31,6 +20,7 @@ const useSearch = () => {
 	}, { manual: true });
 
 	const handleClick = async (formValues) => {
+		setAnswer([]);
 		await trigger({
 			data: {
 				// page       : x,
@@ -38,7 +28,7 @@ const useSearch = () => {
 				sort_type  : 'desc',
 				sort_by    : 'shipment_date',
 				filters    : {
-					hs_code        : searchValue || undefined,
+					hs_code        : formValues.hs_code || undefined,
 					shipment_type  : formValues.shipment_type_values || undefined,
 					shipment_mode  : formValues.shipment_mode_values || undefined,
 					incoterm       : formValues.incoterm_values || undefined,
@@ -74,8 +64,6 @@ const useSearch = () => {
 		date,
 		setDate,
 		answer,
-		searchValue,
-		setSearchValue,
 		control,
 		handleClick,
 		handleSubmit,
