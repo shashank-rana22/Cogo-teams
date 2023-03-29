@@ -7,7 +7,8 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 	const {
 		badge_name = '_', description = '_',
 		created_at, created_by = {},
-		mastery_in, mastery_details = {},
+		mastery_details = {},
+		mastery_badges_detail = [],
 	} = data;
 
 	const handleEdit = () => {
@@ -66,9 +67,9 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 
 						<span>Mastery in</span>
 
-						{mastery_in?.map((item) => (
+						{mastery_badges_detail?.map((item) => (
 							<span className={styles.pill}>
-								<Pill color="#edd7a9">{item}</Pill>
+								<Pill color="#edd7a9">{item?.badge_name}</Pill>
 
 							</span>
 						))}
@@ -79,7 +80,7 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 						<img
 							style={{ objectFit: 'contain' }}
 							src={mastery_details?.image_url}
-							alt="Mastery Modal"
+							alt="Mastery-Icon"
 						/>
 					</div>
 				</div>

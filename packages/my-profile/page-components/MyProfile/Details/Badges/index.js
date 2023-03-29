@@ -1,6 +1,7 @@
 import { Toast, Placeholder, Modal, Button, Tooltip } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { IcCStar } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import usePostProfileMasteryBadge from '../../../hooks/usePostProfileMasteryBadge';
@@ -23,6 +24,12 @@ function Badges(props) {
 	const { badges_got : badgesGot = [], badges_not_got: badgesNotGot = [] } = userBadges;
 
 	let max_badges = 0;
+
+	const {
+		profile: { partner = {} },
+	} = useSelector((state) => state);
+
+	const { partner_user_id = '' } = partner;
 
 	if (badgeListLoading) {
 		return (
@@ -174,6 +181,7 @@ function Badges(props) {
 							filters: {
 								status                       : 'active',
 								expertise_configuration_type : 'badge_configuration',
+								partner_user_id,
 							},
 						}}
 					/>
