@@ -2,7 +2,13 @@ import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
 const useReportFile = ({ query }) => {
-	const { month, entity } = query || {};
+	const { month = '', entity = '' } = query || {};
+
+	const [monthName, year] = (month.match(/(\w+)\s+(\d{4})/) || []).slice(1);
+
+	const monthData = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
+
+	const numericDate = `${year}-${monthData.toString().padStart(2, '0')}-01`;
 
 	const [
 		{ data:sourceFileData, loading:sourceFileLoading },
@@ -24,15 +30,15 @@ const useReportFile = ({ query }) => {
 
 		try {
 			await sourceFileTrigger({
-				data: {
+				params: {
 					cogoEntityId : entityMapping[entity],
-					period       : month,
+					period       : numericDate,
 				},
 			});
 		} catch (error) {
 			console.log(error, 'error');
 		}
-	}, [entity, month, sourceFileTrigger]);
+	}, [entity, numericDate, sourceFileTrigger]);
 	return {
 		sourceFileData,
 		sourceFileLoading,

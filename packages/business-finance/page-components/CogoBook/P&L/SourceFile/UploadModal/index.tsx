@@ -1,4 +1,5 @@
-import { Upload, Select, Button, Modal } from '@cogoport/components';
+import { Select, Button, Modal } from '@cogoport/components';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { useState } from 'react';
 
 import useSourceFile from '../../../hooks/useSourceFile';
@@ -8,12 +9,15 @@ import styles from './styles.module.css';
 
 function UploadModal({ uploadModal, setUploadModal }) {
 	const [modalData, setModalData] = useState({
-		month                : '',
-		uploaderTrailBalance : '',
-		entity               : '',
+		month  : '',
+		entity : '',
 	});
+	const [uploader, setUploader] = useState('');
 
-	const { sourceFileUpload, uploadApi, sourceFileUploadLoading } = useSourceFile({ modalData, setUploadModal });
+	const {
+		sourceFileUpload, uploadApi,
+		sourceFileUploadLoading,
+	} =	 useSourceFile({ modalData, uploader, setUploadModal });
 	console.log(sourceFileUpload, 'sourceFileUpload');
 
 	return (
@@ -38,7 +42,7 @@ function UploadModal({ uploadModal, setUploadModal }) {
 							<Select
 								value={modalData.entity}
 								placeholder="Entity"
-								options={[{ label: 'All', value: 'all' },
+								options={[
 									{ label: 'Entity 101', value: '101' },
 									{ label: 'Entity 301', value: '301' }]}
 								onChange={(val:string) => { setModalData((prev) => ({ ...prev, entity: val })); }}
@@ -49,18 +53,19 @@ function UploadModal({ uploadModal, setUploadModal }) {
 					</div>
 
 					<div className={styles.month}>Upload Trial Balance*</div>
-					<Upload
-						value={modalData.uploaderTrailBalance}
-						onChange={(val:string) => { setModalData((prev) => ({ ...prev, uploaderTrailBalance: val })); }}
+					<FileUploader
+						value={uploader}
+						onChange={(val:string) => { setUploader(val); }}
 						showProgress
 						draggable
+						accept=".xlsx"
 					/>
 
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
 						onClick={() => { uploadApi(); }}
-						disabled={!modalData.uploaderTrailBalance && !modalData.uploaderTrailBalance}
+						disabled={!uploader}
 						loading={sourceFileUploadLoading}
 					>
 						Confirm

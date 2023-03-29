@@ -105,7 +105,12 @@ function UploadReport() {
 				</div>
 			</div>
 
-			{globalStepper === 'revenue' && <RevenueBifurcation setGlobalStepper={setGlobalStepper} />}
+			{globalStepper === 'revenue' && (
+				<RevenueBifurcation
+					setGlobalStepper={setGlobalStepper}
+					sourceFileData={sourceFileData}
+				/>
+			)}
 			{globalStepper === 'salaries' && <SalaryAndRent setGlobalStepper={setGlobalStepper} />}
 			{globalStepper === 'review_details' && <Review />}
 		</div>

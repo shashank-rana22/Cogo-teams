@@ -2,12 +2,17 @@ import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useSourceFile = ({ modalData, setUploadModal }) => {
-	const { month, entity, uploaderTrailBalance } = modalData || {};
+const useSourceFile = ({ modalData, uploader, setUploadModal }) => {
+	const { month, entity } = modalData || {};
 	const { push } = useRouter();
 	const { profile } = useSelector((state) => state || {});
 
-	console.log(month, 'month');
+	const [monthName, year] = (month.match(/(\w+)\s+(\d{4})/) || []).slice(1);
+
+	const monthData = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
+
+	const numericDate = `${year}-${monthData.toString().padStart(2, '0')}-01`;
+
 	const [
 		{ data:sourceFileUpload, loading:sourceFileUploadLoading },
 		sourceFileUploadTrigger,
@@ -19,7 +24,6 @@ const useSourceFile = ({ modalData, setUploadModal }) => {
 		},
 		{ manual: true },
 	);
-
 	const uploadApi = async () => {
 		const entityMapping = {
 			101 : '6fd98605-9d5d-479d-9fac-cf905d292b88',
@@ -30,9 +34,9 @@ const useSourceFile = ({ modalData, setUploadModal }) => {
 			const res = await sourceFileUploadTrigger({
 				data: {
 					cogoEntityId    : entityMapping[entity],
-					period          : month,
-					trialBalanceUrl : uploaderTrailBalance,
-					createdBy       : profile.id,
+					period          : numericDate,
+					trialBalanceUrl : uploader,
+					createdBy       : profile.partner?.id,
 					updatedBy       : profile?.user?.id,
 				},
 			});
