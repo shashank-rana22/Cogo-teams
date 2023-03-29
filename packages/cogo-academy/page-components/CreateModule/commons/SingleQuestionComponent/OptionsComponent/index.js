@@ -3,9 +3,11 @@ import { ChipsController, InputController, useFieldArray } from '@cogoport/forms
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
+import getAlphabets from '../../../utils/getAlphabets';
+
 import styles from './styles.module.css';
 
-const alphabetMapping = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+const alphabets = getAlphabets('A', 'Z');
 
 function OptionsComponent({ control, controls, register, name, errors, mode }) {
 	const childEmptyValues = {};
@@ -32,7 +34,7 @@ function OptionsComponent({ control, controls, register, name, errors, mode }) {
 			{fields.map((field, index) => (
 				<div key={field.id} className={styles.field_container}>
 					<div className={styles.option_container}>
-						<div className={styles.alphabet_container}>{alphabetMapping[index]}</div>
+						<div className={styles.alphabet_container}>{alphabets[index]}</div>
 
 						<InputController
 							{...controls[0]}

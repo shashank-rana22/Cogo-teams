@@ -5,15 +5,16 @@ import { useState } from 'react';
 
 import useUpdateCaseStudy from '../../hooks/useUpdateCaseStudy';
 import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
+import getAlphabets from '../../utils/getAlphabets';
 import EmptyState from '../EmptyState';
 
 import IconComponent from './IconComponent';
 import styles from './styles.module.css';
 
-const ALPHABET_MAPPING = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+const alphabets = getAlphabets('A', 'Z');
 
-const getCorrectAnswersCombined = ({ correctOptions = [] }) => (correctOptions || []).map(
-	(item) => `${ALPHABET_MAPPING[item.sequence_number]}) ${item.answer_text}`,
+const getCorrectAnswersCombined = ({ correctOptions }) => (correctOptions || []).map(
+	(item) => `${alphabets[item.sequence_number]}) ${item.answer_text}`,
 );
 
 const getCorrectAnswers = ({ answers = [] }) => {
