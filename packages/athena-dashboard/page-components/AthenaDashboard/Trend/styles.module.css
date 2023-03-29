@@ -50,18 +50,15 @@
 }
 .buildreportbutton{
     margin-top: 20px;
-    display: none;
 }
 .clearall{
     margin-top: 25px;
     background-color: transparent;
     border: None;
     cursor: pointer;
-    display: none;
 }
 .selectedtext{
     margin-top: 20px;
-    display: none;
     text-align: left;
 }
 .buttons{

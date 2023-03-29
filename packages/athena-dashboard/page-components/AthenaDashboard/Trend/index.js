@@ -1,4 +1,6 @@
-import { Select, Input, Checkbox, Button, RadioGroup } from '@cogoport/components';
+import { Select, Input, Checkbox, Button } from '@cogoport/components';
+import { RadioGroupController } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import countryname_value from '../../../constants/country-name-value';
@@ -11,21 +13,17 @@ function Trends() {
 		searchValue,
 		setSearchValue,
 		responsevalue,
+		setResponsevalue,
 		hscodeArr,
 		setHscodeArr,
-		setShipmentType,
+		control,
 		loading,
 		handleClick,
-		hidetext,
-		reRender,
+		handleSubmit,
 		getReport,
-		handleClear,
 	} = useTrendSearch();
 
-	const [trade_value, trade_onChange] = useState('import');
-	const [hscode_value, hscode_onChange] = useState('select_codes_value');
-
-	const trade_diretion = [
+	const trade_direction = [
 		{ value: 'import', label: 'Import' },
 		{ value: 'export', label: 'Export' },
 	];
@@ -55,7 +53,12 @@ function Trends() {
 						Trade Direction
 					</div>
 					<div>
-						<RadioGroup options={trade_diretion} onChange={trade_onChange} value={trade_value} />
+						<RadioGroupController
+							name="shipment_type"
+							options={trade_direction}
+							control={control}
+							style={{ padding: '0px' }}
+						/>
 					</div>
 				</div>
 				<div>
@@ -63,7 +66,12 @@ function Trends() {
 						HS Codes
 					</div>
 					<div>
-						<RadioGroup options={hs_code} onChange={hscode_onChange} value={hscode_value} />
+						<RadioGroupController
+							name="hs_codes"
+							options={hs_code}
+							control={control}
+							style={{ padding: '0px' }}
+						/>
 					</div>
 				</div>
 			</div>
@@ -80,9 +88,7 @@ function Trends() {
 					size="md"
 					themeType="secondary"
 					onClick={() => {
-						setHscodeArr([]);
-						handleClick();
-						reRender();
+						handleSubmit(handleClick());
 					}}
 					disabled={loading}
 					style={{ border: 'None' }}
@@ -93,16 +99,16 @@ function Trends() {
 
 				</Button>
 			</div>
-			{
-				hscodeArr.is
-			}
 			<div className={styles.rectdiv}>
-				<div className={styles.displayrect}>
-					<div className={styles.selectedtext} id="selectedhscode">
-						Selected HS Codes
-					</div>
-					<div className={styles.displayselectedcode}>
-						{
+				{
+				!isEmpty(hscodeArr) ? (
+
+					<div className={styles.displayrect}>
+						<div className={styles.selectedtext} id="selectedhscode">
+							Selected HS Codes
+						</div>
+						<div className={styles.displayselectedcode}>
+							{
 							((hscodeArr || []).map((Item) => (
 								<div className={styles.individual}>
 									<div className={styles.individualtext}>
@@ -111,40 +117,44 @@ function Trends() {
 								</div>
 							)))
 						}
-					</div>
-					<div className={styles.buttongroup}>
-						<div>
-							<Button
-								size="md"
-								themeType="primary"
-								id="buildreport"
-								className={styles.buildreportbutton}
-								onClick={() => {
-									getReport();
-								}}
-							>
-								Build Report
-							</Button>
 						</div>
-						<div>
-							<Button
-								className={styles.clearall}
-								themeType="secondary"
-								id="clearall"
-								onClick={() => { handleClear(); }}
-								style={{ border: 'None', backgroundColor: 'transparent', paddingTop: '0px' }}
-							>
-								Clear all
+						<div className={styles.buttongroup}>
+							<div>
+								<Button
+									size="md"
+									themeType="primary"
+									id="buildreport"
+									className={styles.buildreportbutton}
+									onClick={() => {
+										getReport();
+									}}
+								>
+									Build Report
+								</Button>
+							</div>
+							<div>
+								<Button
+									className={styles.clearall}
+									themeType="secondary"
+									id="clearall"
+									onClick={() => { setHscodeArr([]); setResponsevalue([]); }}
+									style={{ border: 'None', backgroundColor: 'transparent', paddingTop: '0px' }}
+								>
+									Clear all
 
-							</Button>
+								</Button>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div className={styles.textrect}>
-					<p id="hidetext">Select HS Codes for your report below. Your selected codes will show up here.</p>
-				</div>
 
+				) : (
+					<div className={styles.textrect}>
+						<p id="hidetext">Select HS Codes for your report below. Your selected codes will show up here.</p>
+					</div>
+				)
+			}
 			</div>
+
 			<div>
 				<div className={styles.codes}>
 					{
@@ -160,17 +170,13 @@ function Trends() {
 										value={Item.hs_code}
 										onChange={(e) => {
 											let arr = [...hscodeArr];
-											let flag = 0;
 											if (e.target.checked) {
 												arr = [...hscodeArr, e.target.value];
-												flag = 1;
 											} else if (arr.includes(e.target.value)) {
 												const index = arr.indexOf(e.target.value);
 												arr.splice(index, 1);
-												flag = 0;
 											}
 											setHscodeArr(arr);
-											hidetext(hscodeArr.length, flag);
 										}}
 									/>
 								</div>
