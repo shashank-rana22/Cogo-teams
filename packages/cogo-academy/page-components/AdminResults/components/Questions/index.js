@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import EmptyState from '../../../CreateModule/components/EmptyState';
 
@@ -18,10 +18,6 @@ function QuestionsComponent({ test_id }) {
 	const { sortBy, sortType } = sortFilter || {};
 
 	const { debounceQuery, query } = useDebounceQuery();
-
-	useEffect(() => {
-		debounceQuery(searchQuestion);
-	}, [debounceQuery, searchQuestion]);
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
@@ -41,6 +37,7 @@ function QuestionsComponent({ test_id }) {
 			<Search
 				searchQuestion={searchQuestion}
 				setSearchQuestion={setSearchQuestion}
+				debounceQuery={debounceQuery}
 			/>
 
 			{loading ? (
@@ -57,19 +54,17 @@ function QuestionsComponent({ test_id }) {
 				<div>
 					{isEmpty(data?.list) ? <EmptyState /> : (
 						<div>
-							<div>
-								<ListHeader
-									setSortFilter={setSortFilter}
-									sortFilter={sortFilter}
+							<ListHeader
+								setSortFilter={setSortFilter}
+								sortFilter={sortFilter}
+							/>
+							{(questionsList || []).map((question_item, index) => (
+								<QuestionItem
+									key={question_item.id}
+									question_item={question_item}
+									index={index}
 								/>
-								{(questionsList || []).map((question_item, index) => (
-									<QuestionItem
-										key={question_item.id}
-										question_item={question_item}
-										index={index}
-									/>
-								))}
-							</div>
+							))}
 						</div>
 					)}
 

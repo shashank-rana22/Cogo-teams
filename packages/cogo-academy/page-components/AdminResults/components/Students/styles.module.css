@@ -3,11 +3,11 @@
 }
 
 .table_container {
-	padding: unset !important;
+	padding: unset;
 
 	:global {
 		.ui_table_head_row {
-			background-color: white;
+			background-color: #FFFFFF;
 
 			.ui_table_head_cell {
 				padding-top: 18px;
@@ -20,7 +20,7 @@
 		}
 
 		.ui_table_body_container {
-			background-color: white;
+			background-color: #FFFFFF;
 
 			.ui_table_body_row {
 				border-radius: 8px;

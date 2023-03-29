@@ -8,7 +8,7 @@ import EmptyState from '../../../CreateModule/components/EmptyState';
 import Filters from '../../commons/Filters';
 
 import styles from './styles.module.css';
-import tableColumns from './TableColumns';
+import getTableColumns from './TableColumns';
 
 function StudentsComponent({ test_id }) {
 	const [activeTab, setActiveTab] = useState('appeared');
@@ -17,11 +17,11 @@ function StudentsComponent({ test_id }) {
 	const [params, setParams] = useState({});
 	const [filter, setFilter] = useState('');
 	const [sortFilter, setSortFilter] = useState({});
-	const [searchValue, setSearchValue] = useState('');
+	const [setSearchValue] = useState('');
 
 	const { sortBy, sortType } = sortFilter || {};
 
-	const students_mapping = {
+	const STUDENTS_MAPPING = {
 		appeared: {
 			url     : '/list_admin_student_wise_test_result',
 			payload : {
@@ -32,16 +32,18 @@ function StudentsComponent({ test_id }) {
 				search_term : query,
 				...params,
 			},
+			title: 'Appeared',
 		},
 		not_appeared: {
 			url     : '/list_not_appeared_users',
 			payload : {
 				test_id,
 			},
+			title: 'Not Appeared',
 		},
 	};
 
-	const { payload, url: api_url = '' } = students_mapping[activeTab];
+	const { payload, url: api_url = '' } = STUDENTS_MAPPING[activeTab];
 
 	const [{ data, loading }, refetch] = useRequest({
 		method : 'GET',
@@ -51,11 +53,7 @@ function StudentsComponent({ test_id }) {
 
 	const { stats = [], page_limit = 0, total_count = 0, list } = data || {};
 
-	const columns = tableColumns({ sortFilter, setSortFilter, activeTab });
-
-	useEffect(() => {
-		debounceQuery(searchValue);
-	}, [debounceQuery, searchValue]);
+	const columns = getTableColumns({ sortFilter, setSortFilter, activeTab });
 
 	useEffect(() => {
 		refetch();
@@ -69,17 +67,26 @@ function StudentsComponent({ test_id }) {
 					themeType="tertiary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="appeared" title="Appeared" badge={stats[0]?.appeared || '0'} />
+					{Object.keys(STUDENTS_MAPPING).map((item) => {
+						const { title } = STUDENTS_MAPPING[item];
 
-					<TabPanel name="not_appeared" title="Not Appeared" badge={stats[1]?.not_appeared || '0'} />
+						return (
+							<TabPanel
+								key={item}
+								name={item}
+								badge={stats[0]?.[item] || '0'}
+								title={title}
+							/>
+						);
+					})}
 				</Tabs>
 			</div>
 
 			<Filters
 				filter={filter}
 				setFilter={setFilter}
-				searchValue={searchValue}
 				setSearchValue={setSearchValue}
+				debounceQuery={debounceQuery}
 			/>
 
 			{

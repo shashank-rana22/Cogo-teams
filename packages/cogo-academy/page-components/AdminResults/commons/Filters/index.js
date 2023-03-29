@@ -8,9 +8,17 @@ const options = [
 	{ label: 'Failed', value: 'failed' },
 ];
 
-function Filters({ filter = '', setFilter = () => {}, searchValue = '', setSearchValue = () => {} }) {
+function Filters({
+	filter = '',
+	setFilter = () => {},
+	setSearchValue = () => {},
+	debounceQuery = () => {},
+	searchValue,
+	activeTab = '',
+}) {
 	const handleSearchValue = (search) => {
 		setSearchValue(search);
+		debounceQuery(search);
 	};
 
 	return (
@@ -28,16 +36,20 @@ function Filters({ filter = '', setFilter = () => {}, searchValue = '', setSearc
 				style={{ width: 300 }}
 			/>
 
-			<div className={styles.filters}>
-				<Select
-					prefix={(<IcMFilter />)}
-					value={filter}
-					onChange={(val) => setFilter(val)}
-					placeholder="Filter"
-					options={options}
-					isClearable="true"
-				/>
-			</div>
+			{activeTab === 'appeared' ? (
+				<div className={styles.filters}>
+
+					<Select
+						prefix={(<IcMFilter />)}
+						value={filter}
+						onChange={(val) => setFilter(val)}
+						placeholder="Filter"
+						options={options}
+						isClearable="true"
+					/>
+				</div>
+			) : null}
+
 		</div>
 	);
 }

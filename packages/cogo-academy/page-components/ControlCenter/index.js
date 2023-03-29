@@ -9,24 +9,22 @@ import Header from './Header';
 import QuestionsList from './QuestionsList';
 
 function ControlCenter() {
-	const { query } = useRouter();
+	const { query, push } = useRouter();
 
 	const { activeTab: currentActiveTab, testModuleTab } = query || {};
 
 	const [activeTab, setActiveTab] = useState(currentActiveTab || 'manage_faq');
 	const [switchDashboard, setSwitchDashboard] = useState(true);
 
-	if (!switchDashboard) {
-		return <Analytics setSwitchDashboard={setSwitchDashboard} />;
-	}
 	const handleChangeTab = (val) => {
-		const newurl = `${window.location.protocol}//
-		${window.location.host}${window.location.pathname}?activeTab=${val}`;
-
-		window.history.pushState({ path: newurl }, '', newurl);
+		push(`/learning?activeTab=${val}`);
 
 		setActiveTab(val);
 	};
+
+	if (!switchDashboard) {
+		return <Analytics setSwitchDashboard={setSwitchDashboard} />;
+	}
 
 	return (
 		<div>

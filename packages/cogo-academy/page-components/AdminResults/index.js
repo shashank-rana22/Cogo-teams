@@ -74,7 +74,7 @@ function AdminResults() {
 					className={styles.tabs}
 				>
 					{Object.values(componentMapping).map((tab) => {
-						const { key, title, component:ContainerComponent = null, componentProps } = tab;
+						const { key, title, component : ContainerComponent = null, componentProps } = tab;
 
 						if (!componentMapping) return null;
 

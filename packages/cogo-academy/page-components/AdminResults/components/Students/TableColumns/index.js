@@ -63,7 +63,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 		),
 		id       : 'percentile',
 		accessor : ({ percentile = '' }) => (
-			<div>{percentile !== null ? Number(percentile).toFixed(2) : ' '}</div>
+			<div>{percentile !== null ? Number(percentile).toFixed(2) : '-'}</div>
 		),
 	},
 	{
@@ -79,7 +79,15 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			</div>
 		),
 		id       : 'time_taken',
-		accessor : ({ time_taken = '' }) => <div>{time_taken}</div>,
+		accessor : ({ time_taken = '' }) => (
+			<div>
+				{Math.ceil(time_taken)}
+				{' '}
+				{
+					Math.ceil(time_taken) > 1 ? 'mins' : 'min'
+				}
+			</div>
+		),
 	},
 	{
 		Header: (
@@ -117,7 +125,7 @@ const getNotAppeardColumns = () => [
 	},
 ];
 
-const tableColumns = ({ sortFilter, setSortFilter, activeTab }) => {
+const getTableColumns = ({ sortFilter, setSortFilter, activeTab }) => {
 	if (activeTab === 'appeared') {
 		return getAppearedColumns({ sortFilter, setSortFilter });
 	}
@@ -125,4 +133,4 @@ const tableColumns = ({ sortFilter, setSortFilter, activeTab }) => {
 	return getNotAppeardColumns();
 };
 
-export default tableColumns;
+export default getTableColumns;

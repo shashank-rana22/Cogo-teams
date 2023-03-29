@@ -4,22 +4,30 @@ import styles from './styles.module.css';
 
 const MAPPING = {
 	topic: {
-		label: 'Topic',
+		label     : 'Topic',
+		className : styles.container_item,
 	},
 	question: {
-		label: 'Question',
+		label     : 'Question',
+		className : styles.section,
 	},
 	question_type: {
-		label: 'Question Type',
+		label     : 'Question Type',
+		className : styles.container_item,
 	},
 	difficulty_level: {
-		label: 'Difficulty Level',
+		label     : 'Difficulty Level',
+		className : styles.container_item,
 	},
 	students_appeared: {
-		label: 'Students IT Appeared For',
+		label     : 'Students IT Appeared For',
+		sort      : true,
+		className : styles.container_item,
 	},
 	correct_percentage: {
-		label: 'Correct Percentage %',
+		label     : 'Correct Percentage %',
+		sort      : true,
+		className : styles.container_item,
 	},
 };
 
@@ -27,13 +35,13 @@ function ListHeader({ sortFilter = {}, setSortFilter = () => {} }) {
 	return (
 		<div className={styles.container}>
 			{Object.keys(MAPPING).map((item) => {
-				const { label } = MAPPING[item];
+				const { label, sort = false, className } = MAPPING[item];
 
 				return (
-					<div key={item} className={item === 'question' ? styles.section : styles.container_item}>
+					<div key={item} className={className}>
 						<div>{label}</div>
 
-						{['students_appeared', 'correct_percentage'].includes(item) ? (
+						{sort ? (
 							<SortComponent
 								value={item}
 								sortFilter={sortFilter}
