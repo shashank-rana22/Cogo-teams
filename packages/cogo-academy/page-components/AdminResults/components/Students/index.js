@@ -1,8 +1,10 @@
 import { Pagination, Table, TabPanel, Tabs } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import EmptyState from '../../../CreateModule/components/EmptyState';
 import Filters from '../../commons/Filters';
 
 import styles from './styles.module.css';
@@ -80,27 +82,32 @@ function StudentsComponent({ test_id }) {
 				setSearchValue={setSearchValue}
 			/>
 
-			<div className={styles.table_container}>
-				<Table
-					className={styles.table_container}
-					data={list || []}
-					columns={columns}
-					loading={loading}
-				/>
+			{
+				!loading && isEmpty(data?.list) ? (<EmptyState />)
+					: (
+						<div className={styles.table_container}>
+							<Table
+								className={styles.table_container}
+								data={list || []}
+								columns={columns}
+								loading={loading}
+							/>
 
-				{total_count > page_limit ? (
-					<div className={styles.pagination_container}>
-						<Pagination
-							type="table"
-							currentPage={params?.page}
-							totalItems={total_count}
-							pageSize={page_limit}
-							onPageChange={(val) => setParams((prev) => ({ ...prev, page: val }))}
-						/>
-					</div>
-				) : null}
+							{total_count > page_limit ? (
+								<div className={styles.pagination_container}>
+									<Pagination
+										type="table"
+										currentPage={params?.page}
+										totalItems={total_count}
+										pageSize={page_limit}
+										onPageChange={(val) => setParams((prev) => ({ ...prev, page: val }))}
+									/>
+								</div>
+							) : null}
 
-			</div>
+						</div>
+					)
+			}
 		</div>
 	);
 }
