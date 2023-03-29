@@ -54,19 +54,17 @@ function QuestionsComponent({ test_id }) {
 				<div>
 					{isEmpty(data?.list) ? <EmptyState /> : (
 						<div>
-							<div>
-								<ListHeader
-									setSortFilter={setSortFilter}
-									sortFilter={sortFilter}
+							<ListHeader
+								setSortFilter={setSortFilter}
+								sortFilter={sortFilter}
+							/>
+							{(questionsList || []).map((question_item, index) => (
+								<QuestionItem
+									key={question_item.id}
+									question_item={question_item}
+									index={index}
 								/>
-								{(questionsList || []).map((question_item, index) => (
-									<QuestionItem
-										key={question_item.id}
-										question_item={question_item}
-										index={index}
-									/>
-								))}
-							</div>
+							))}
 						</div>
 					)}
 
