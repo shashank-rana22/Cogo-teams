@@ -40,9 +40,24 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		expenseSubCategory,
 		branch,
 		lineItemsList,
-		// tradeParty,
-		transactionDate,
+		tradeParty,
 	} = formData || {};
+	const {
+		entity_code:entityCodeTradeParty,
+		cogo_entity_id:entityIdTradeParty,
+		organization_id:orgIdTradeParty,
+		serial_id:sidTradeParty,
+		business_name:nameTradeParty,
+		country:tradePartyCountry,
+		registration_number:registrationNumberTradeParty,
+		tds_deduction_rate:tdsTradeParty,
+	} = tradeParty || {};
+
+	const {
+		country_code:countryCodeTradeParty,
+		id:countryIdTradeParty,
+		name:countryNameTradeParty,
+	} = tradePartyCountry || {};
 
 	const branchId = JSON.parse(formData?.branch || '{}')?.branchId;
 
@@ -138,7 +153,6 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		kyc_status:kycStatus,
 		registration_type:registrationType,
 		id:vendorId,
-		tds_deduction_rate:vendorTds,
 		bank_details:bankDetails = [],
 	} = vendorData || {};
 
@@ -196,40 +210,32 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					billNumber         : invoiceNumber,
 				},
 				sellerDetail: { // tradeParty
-					// tradePartyMappingId     : '4ff54f88-0024-4de9-8ebd-2c72c80aeaa3', // ???
-					entityCode,
-					entityCodeId         : vendorCogoEntityId,
-					organizationId       : vendorId,
-					organizationSerialId : vendorSid,
-					// isTaxApplicable         : tradeParty?.is_tax_applicable,
+					entityCode           : entityCodeTradeParty,
+					entityCodeId         : entityIdTradeParty,
+					organizationId       : orgIdTradeParty,
+					organizationSerialId : sidTradeParty,
 					isTaxApplicable      : true,
 					isSez                : false,
-					organizationName     : vendorBusinessName,
+					organizationName     : nameTradeParty,
 					pincode              : 123456, // should come from trade party
 					address              : 'D-296,JJ', // should come from trade party
 					cityName             : '', // ??// should come from trade party
-					supplyAgent          : 'Ajit', // ??// should come from trade party
+					supplyAgent          : nameTradeParty,
 					zone                 : 'NORTH', // ??// should come from trade party
-					countryName          : 'India', // should come from trade party
-					countryCode          : 'IN', /// need to change from trade party
-					countryId            : vendorCountryId,
-					registrationNumber   : registrationType === 'pan' ? vendorRegistrationNumber : null,
-					taxNumber            : registrationType === 'tax' ? vendorRegistrationNumber : null,
+					countryName          : countryNameTradeParty,
+					countryCode          : countryCodeTradeParty,
+					countryId            : countryIdTradeParty,
+					registrationNumber   : registrationType === 'pan' ? registrationNumberTradeParty : null,
+					taxNumber            : registrationType === 'tax' ? registrationNumberTradeParty : null,
 					// corporateIdentityNumber : '', // ??
-					tdsRate              : vendorTds || 0,
-					// logoUrl              : '', // ??
-					// signatureUrl         : '', // ??
-					bankDetail           : { // ??
+					tdsRate              : tdsTradeParty || 0,
+					bankDetail           : {
 						bankName,
-						// branchCode        : 'SBIN0017891',
 						beneficiaryName: bankName,
 						ifscCode,
 						accountNumber,
-						// swiftCode         : '',
 						bankId,
-						// currency          : 'GBP',
 						collectionPartyId,
-						// imageUrl: 'url',
 					},
 				},
 				buyerDetails: { // cogo entity
@@ -266,7 +272,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					countryCode             : '', // ??????????
 					countryId               : vendorCountryId,
 					registrationNumber      : vendorRegistrationNumber,
-					taxNumber               : '', // ????
+					taxNumber               : vendorRegistrationNumber,
 					corporateIdentityNumber : '', // ????
 					tdsRate                 : '', // ????
 				},
