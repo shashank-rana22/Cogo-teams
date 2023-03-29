@@ -39,7 +39,9 @@ const useQuestionList = ({
 	}, { manual: true });
 
 	useEffect(() => {
-		debounceQuery(search);
+		if (search) {
+			debounceQuery(search);
+		}
 	}, [debounceQuery, search]);
 
 	const fetch = useCallback(
@@ -72,8 +74,11 @@ const useQuestionList = ({
 	);
 
 	useEffect(() => {
+		if (question && !query_name) {
+			return;
+		}
 		fetch();
-	}, [fetch, page, query]);
+	}, [fetch, page, query, query_name, question]);
 
 	const { list = [], ...pageData } = data || {};
 

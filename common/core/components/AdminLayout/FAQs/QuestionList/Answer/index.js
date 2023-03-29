@@ -173,6 +173,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 				query_name={answerData?.query_name}
 				question_abstract={answerData?.question_abstract}
 				setQuestion={setQuestion}
+				question={question}
 			/>
 
 			<div className={styles.space} />

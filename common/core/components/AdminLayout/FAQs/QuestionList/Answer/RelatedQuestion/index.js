@@ -4,8 +4,8 @@ import useQuestionList from '../../useQuestionList';
 
 import styles from './styles.module.css';
 
-function RelatedQuestion({ query_name = '', question_abstract = '', setQuestion }) {
-	const { list } = useQuestionList({ query_name });
+function RelatedQuestion({ query_name = '', question_abstract = '', setQuestion, question }) {
+	const { list } = useQuestionList({ query_name, question });
 
 	return (
 		<div style={{ paddingTop: '20px' }}>
@@ -14,17 +14,17 @@ function RelatedQuestion({ query_name = '', question_abstract = '', setQuestion 
 			) : null}
 			<div>
 
-				{(list || []).map((question) => (
+				{(list || []).map((questionObj) => (
 					<div className={styles.title}>
-						{(question?.question_abstract !== question_abstract) ? (
+						{(questionObj?.question_abstract !== question_abstract) ? (
 							<div
 								role="presentation"
 								className={styles.relatedquestion_clickable}
-								onClick={() => setQuestion(question)}
+								onClick={() => setQuestion(questionObj)}
 							>
 								Q.
 								{' '}
-								{question?.question_abstract}
+								{questionObj?.question_abstract}
 							</div>
 						) : null}
 					</div>
