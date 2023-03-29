@@ -16,7 +16,7 @@ function GoToDetails({ test_id }) {
 
 	return (
 		<div className={styles.container}>
-			<Button onClick={handleGoToTestDetails} size="md">
+			<Button type="button" onClick={handleGoToTestDetails} size="md">
 				Detailed Result
 				<IcMArrowRight />
 			</Button>
