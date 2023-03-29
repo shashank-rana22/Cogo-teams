@@ -12,7 +12,7 @@ function CreateNewTest({ control, errors, data, setValue }) {
 
 	const router = useRouter();
 
-	const onClickBack = () => {
+	const onNavigate = () => {
 		const href = '/learning?activeTab=test_module';
 		router.push(href, href);
 	};
@@ -30,8 +30,8 @@ function CreateNewTest({ control, errors, data, setValue }) {
 	return (
 		<div>
 			<div className={styles.header}>
-				<IcMArrowBack className={styles.back_icon} onClick={() => onClickBack()} width={20} height={20} />
-				<div role="presentation" className={styles.title} onClick={() => onClickBack()}>New Test</div>
+				<IcMArrowBack className={styles.back_icon} width={20} height={20} onClick={() => onNavigate()} />
+				<div role="presentation" className={styles.title}>New Test</div>
 			</div>
 
 			<div className={styles.container}>
