@@ -1,4 +1,5 @@
 import { ProgressBar, Placeholder } from '@cogoport/components';
+import { IcCStar } from '@cogoport/icons-react';
 import { isEmpty, startCase, format } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
@@ -79,13 +80,13 @@ function BadgeDescription(props) {
 						/>
 
 						{/* //Todo: stars arent available in the response */}
-						{/* <div className={styles.stars}>
+						<div className={styles.stars}>
 							{[1, 2, 3].map((item) => (
 								<div key={item}>
 									<IcCStar width={10} stroke="#FFDF33" />
 								</div>
 							))}
-						</div> */}
+						</div>
 					</div>
 
 					<div className={styles.details}>

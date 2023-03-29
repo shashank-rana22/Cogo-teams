@@ -16,6 +16,7 @@ function Child(props) {
 		disabled = false,
 		error = '',
 	} = props;
+
 	return (
 		<div className={styles.content}>
 			{controls.map((controlItem) => {

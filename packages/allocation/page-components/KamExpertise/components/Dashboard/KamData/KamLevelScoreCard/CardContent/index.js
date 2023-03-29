@@ -3,10 +3,12 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function CardContent({ listData = {}, value }) {
+function CardContent({ listData, value }) {
+	const { percentage_count_change, percentage_score_change } = listData || {};
+
 	const PERCENTAGE_CHANGE = {
-		count         : listData.percentage_count_change,
-		average_score : listData.percentage_score_change,
+		count         : percentage_count_change,
+		average_score : percentage_score_change,
 	};
 
 	const percentage_change = PERCENTAGE_CHANGE[value] || 0;
@@ -26,17 +28,17 @@ function CardContent({ listData = {}, value }) {
 							width={20}
 							height={20}
 							style={{
-								color: `${percentage_change > 0
-									? '#34C759' : '#ED3726'}`,
-
-								transform: `${percentage_change > 0
-									? 'rotate(135deg)' : 'rotate(-45deg)'}`,
+								color: percentage_change > 0
+									? '#34C759' : '#ED3726',
+								transform: percentage_change > 0
+									? 'rotate(135deg)' : 'rotate(-45deg)',
 							}}
 						/>
 					) : null}
 
 					<span style={{ marginLeft: '4px' }}>
-						{Math.abs(percentage_change) || 0}
+						{Math.abs(percentage_change)}
+						{' '}
 						%
 					</span>
 				</span>

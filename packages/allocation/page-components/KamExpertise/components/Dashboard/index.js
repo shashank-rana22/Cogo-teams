@@ -73,7 +73,7 @@ function KamExpertise() {
 			<div className={styles.tab_list}>
 				<Tabs
 					activeTab={activeTab}
-					themeType="tertiary"
+					themeType="primary"
 					onChange={setActiveTab}
 				>
 					{Object.values(TAB_PANEL_MAPPING).map((item) => {

@@ -89,7 +89,9 @@ function KamData(props) {
 
 			{
 				isEmpty(kamLevel) && (
-					<div className={styles.level_zero}>Click on KAM level card to view leaderboard overview</div>
+					<div className={styles.level_zero}>
+						Click on KAM level card to view leaderboard overview
+					</div>
 				)
 			}
 

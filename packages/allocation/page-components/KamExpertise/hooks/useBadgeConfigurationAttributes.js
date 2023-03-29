@@ -5,7 +5,7 @@ import { snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 const useUpdateSingleBadge = (props) => {
-	const { medal, id, image_url:previous_image_url, score:previous_score, listRefetch } = props;
+	const { medal = '', id, image_url:previous_image_url, score:previous_score, listRefetch } = props;
 	const [openModal, setOpenModal] = useState(false);
 
 	const formProps = useForm();
@@ -30,7 +30,6 @@ const useUpdateSingleBadge = (props) => {
 			Silver_img_value = '',
 			Gold_value = '',
 			Gold_img_value = '',
-
 		} = formValues || {};
 
 		let score = '';
@@ -59,6 +58,7 @@ const useUpdateSingleBadge = (props) => {
 			await trigger({ data: payload });
 
 			onClose();
+
 			listRefetch();
 
 			Toast.success('Badge Updated!');

@@ -89,6 +89,7 @@ function BadgeListItem(props) {
 								const { name = '', detailObj = {} } = item;
 								return (
 									<BadgeCard
+										key={item}
 										data={{ ...detailObj }}
 										medal={startCase(name)}
 										badgeItemData={data}

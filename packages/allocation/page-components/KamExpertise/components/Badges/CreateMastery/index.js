@@ -1,11 +1,13 @@
 import { Button } from '@cogoport/components';
 import { isEmpty, format } from '@cogoport/utils';
 
-// import Form from '../../../../../common/Form';
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateMasterConfiguration from '../../../hooks/useCreateMasterConfiguration';
 
 import styles from './styles.module.css';
+
+const UploadController = getFieldController('fileUpload');
+const InputController = getFieldController('textarea');
 
 function CreateMastery(props) {
 	const {
@@ -31,8 +33,6 @@ function CreateMastery(props) {
 		formState: { errors },
 	} = formProps;
 
-	const UploadController = getFieldController('fileUpload');
-	const InputController = getFieldController('textarea');
 	const watch_image_input = watch('image_input');
 
 	return (
@@ -69,7 +69,6 @@ function CreateMastery(props) {
 					</div>
 
 					<div className={styles.content_container}>
-
 						{getAddMasteryControls.map((controlItem) => {
 							const ele = { ...controlItem };
 							const Element = getFieldController(ele.type);
@@ -97,7 +96,6 @@ function CreateMastery(props) {
 								</div>
 							);
 						})}
-						{/* <Form formProps={formProps} controls={getAddMasteryControls} /> */}
 
 						<div className={styles.lower_background}>
 							<div style={{ flexBasis: '29%' }}>
@@ -120,7 +118,6 @@ function CreateMastery(props) {
 									</div>
 								</div>
 
-								{/* Optimize if possible */}
 								<div>
 									{watch_image_input ? (
 										<div className={styles.preview}>
