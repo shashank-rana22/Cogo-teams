@@ -48,7 +48,7 @@ const useCreateShipmentDocument = ({
 		if (hawbSuccess) {
 			const updatedDetails = (hawbDetails || []).map((item:any) => {
 				if (item.id === activeHawb) {
-					return { ...item, id: hawbData?.data?.id, isNew: false };
+					return { ...item, id: hawbData?.data?.data?.document_number, isNew: false };
 				}
 				return item;
 			});

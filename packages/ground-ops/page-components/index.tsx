@@ -28,8 +28,8 @@ function GroundOps() {
 					</div>
 				</>
 			)}
-			{(generate || viewDoc)
-			&& (
+
+			{(generate || viewDoc) && (
 				<GenerateMAWB
 					viewDoc={viewDoc}
 					setViewDoc={setViewDoc}
