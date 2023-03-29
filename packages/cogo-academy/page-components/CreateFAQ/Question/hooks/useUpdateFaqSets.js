@@ -41,7 +41,7 @@ function useUpdateFaqSet({
 			});
 
 			if (res?.data) {
-				Toast.success('question updated sucessfully');
+				Toast.success('question saved as draft sucessfully');
 
 				const href = `/learning/faq/create/question?mode=preview&id=${id}`;
 

@@ -13,6 +13,7 @@ import React, { useState, useEffect } from 'react';
 
 import DisLikeBox from './DisLikeBox';
 import Loader from './Loader';
+import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';
 import useAnswer from './useAnswer';
 
@@ -223,6 +224,12 @@ function Answer({ topic = {}, question }) {
 					Open in Help Center
 					<IcMRedo style={{ marginLeft: 8 }} />
 				</div>
+
+				<RelatedQuestion
+					query_name={answerData?.query_name}
+					question_abstract={answerData?.question_abstract}
+				/>
+
 			</div>
 		</div>
 	);

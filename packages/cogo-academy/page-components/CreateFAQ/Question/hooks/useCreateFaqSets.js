@@ -46,7 +46,7 @@ function useCreateFaqSet({
 			if (res?.data) {
 				const id = res?.data?.id;
 
-				Toast.success('question created sucessfully');
+				Toast.success('question saved as draft');
 
 				const href = `/learning/faq/create/question?mode=preview&id=${id}`;
 				router.push(href, href);

@@ -45,3 +45,9 @@
 	font-size: 12px;
 	border-radius: 8px;
 }
+
+.empty_state_wrapper {
+	padding-top: 20px;
+	font-size: 14px;
+	text-align: center;
+}
