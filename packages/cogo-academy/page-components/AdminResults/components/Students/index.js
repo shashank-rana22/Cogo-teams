@@ -17,7 +17,7 @@ function StudentsComponent({ test_id }) {
 	const [params, setParams] = useState({});
 	const [filter, setFilter] = useState('');
 	const [sortFilter, setSortFilter] = useState({});
-	const [searchValue, setSearchValue] = useState('');
+	const [setSearchValue] = useState('');
 
 	const { sortBy, sortType } = sortFilter || {};
 

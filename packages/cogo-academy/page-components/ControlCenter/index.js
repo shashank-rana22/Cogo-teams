@@ -16,9 +16,6 @@ function ControlCenter() {
 	const [activeTab, setActiveTab] = useState(currentActiveTab || 'manage_faq');
 	const [switchDashboard, setSwitchDashboard] = useState(true);
 
-	if (!switchDashboard) {
-		return <Analytics setSwitchDashboard={setSwitchDashboard} />;
-	}
 	const handleChangeTab = (val) => {
 		const newurl = `${window.location.protocol}//
 		${window.location.host}${window.location.pathname}?activeTab=${val}`;
@@ -27,6 +24,10 @@ function ControlCenter() {
 
 		setActiveTab(val);
 	};
+
+	if (!switchDashboard) {
+		return <Analytics setSwitchDashboard={setSwitchDashboard} />;
+	}
 
 	return (
 		<div>
