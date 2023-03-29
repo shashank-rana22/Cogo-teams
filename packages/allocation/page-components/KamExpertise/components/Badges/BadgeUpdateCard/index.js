@@ -6,14 +6,23 @@ import { getFieldController } from '../../../../../common/Form/getFieldControlle
 import styles from './styles.module.css';
 
 function BadgeUpdateCard(props) {
-	const { data = {}, badgeItemData = {}, control, errors = '', watch, isLastItem, loading = false } = props;
-	const { medalType, score = '', isSingleBadgeEdit = false, inputPlaceHolder = '' } = data;
+	const {
+		badgeItemData = {},
+		control,
+		errors = '',
+		watch,
+		isLastItem,
+		loading = false,
+		isSingleBadgeEdit = false,
+		medalType,
+	} = props;
+
 	const { bronze_details = {}, silver_details = {}, gold_details = {} } = badgeItemData;
 
 	const MEDAL_IMAGE_MAPPING = {
-		Bronze : bronze_details?.image_url,
-		Silver : silver_details?.image_url,
-		Gold   : gold_details?.image_url,
+		Bronze : bronze_details,
+		Silver : silver_details,
+		Gold   : gold_details,
 	};
 
 	const InputController = getFieldController('number');
@@ -39,11 +48,11 @@ function BadgeUpdateCard(props) {
 
 					<InputController
 						name={`${medalType}_value`}
-						value={score || ''}
+						value={MEDAL_IMAGE_MAPPING[medalType]?.score || undefined}
 						id={`${medalType}_value_input`}
 						control={control}
 						size="sm"
-						placeholder={inputPlaceHolder}
+						placeholder="000"
 						rules={{
 							required: 'Score is required',
 						}}
@@ -93,7 +102,7 @@ function BadgeUpdateCard(props) {
 						? (
 							<div className={styles.preview}>
 								<img
-									src={MEDAL_IMAGE_MAPPING[medalType]}
+									src={MEDAL_IMAGE_MAPPING[medalType]?.image_url}
 									alt="badge img preview"
 								/>
 							</div>

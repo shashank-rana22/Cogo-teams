@@ -18,18 +18,12 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 		control, handleSubmit, watch,
 	} = formProps;
 
-	const BADGE_DATA = {
-		medalType         : medal,
-		score,
-		isSingleBadgeEdit : true,
-	};
-
 	if (loading) {
 		return (
 			<Placeholder
 				height="120px"
 				width="220px"
-				style={{ marginRight: '20px', marginTop: '20px' }}
+				margin="20px 20px 0px 0px"
 			/>
 		);
 	}
@@ -74,11 +68,12 @@ function BadgeCard({ badgeItemData = {}, medal = '', isLast = {}, listRefetch, d
 						<Modal.Body className={styles.modal_body}>
 							<div style={{ padding: '10px', margin: '10px' }}>
 								<BadgeUpdateCard
-									data={BADGE_DATA}
+									medalType={medal}
 									badgeItemData={badgeItemData}
 									watch={watch}
 									control={control}
 									isLastItem
+									isSingleBadgeEdit
 								/>
 							</div>
 						</Modal.Body>

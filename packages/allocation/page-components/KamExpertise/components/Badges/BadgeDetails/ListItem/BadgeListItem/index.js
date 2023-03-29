@@ -86,10 +86,11 @@ function BadgeListItem(props) {
 					<div className={styles.score_badge}>
 						{
 							Object.values(MEDAL_DETAILS_MAPPING).map((item) => {
-								const { name = '', detailObj = {} } = item;
+								const { name = '', detailObj } = item;
+
 								return (
 									<BadgeCard
-										data={{ ...detailObj }}
+										data={detailObj || {}}
 										medal={startCase(name)}
 										badgeItemData={data}
 										isLast={name === 'gold'}

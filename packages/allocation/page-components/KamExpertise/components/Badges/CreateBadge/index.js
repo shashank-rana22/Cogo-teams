@@ -6,20 +6,7 @@ import BadgeUpdateCard from '../BadgeUpdateCard';
 
 import styles from './styles.module.css';
 
-const MEDALS_MAPPING = [
-	{
-		medalType        : 'Bronze',
-		inputPlaceHolder : '0000',
-	},
-	{
-		medalType        : 'Silver',
-		inputPlaceHolder : '0000',
-	},
-	{
-		medalType        : 'Gold',
-		inputPlaceHolder : '0000',
-	},
-];
+const MEDALS_MAPPING = ['Bronze', 'Silver', 'Gold'];
 
 function CreateBadge(props) {
 	const { setToggleScreen, badgeItemData = {}, listRefetch } = props;
@@ -111,9 +98,9 @@ function CreateBadge(props) {
 						<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
 
 						<div className={styles.display_flex}>
-							{MEDALS_MAPPING.map((data, index) => (
+							{MEDALS_MAPPING.map((medalType, index) => (
 								<BadgeUpdateCard
-									data={data}
+									medalType={medalType}
 									badgeItemData={badgeItemData}
 									control={control}
 									loading={loading}
