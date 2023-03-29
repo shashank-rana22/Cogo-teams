@@ -449,7 +449,6 @@ const mawbControls = (disableClass) => ({
 			type      : 'textarea',
 			className : 'textarea',
 			label     : 'Accounting Information:',
-			value     : 'FREIGHT PREPAID',
 			span      : 7,
 			rules     : {
 				required: 'Accounting Information is Required',

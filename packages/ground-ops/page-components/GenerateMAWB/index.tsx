@@ -3,6 +3,8 @@ import { Modal, Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
 
+import useGetHawbList from '../Air/hooks/useGetHawbList';
+
 import FormContainer from './FormContainer';
 import GenerateHeader from './GenerateHeader';
 import GenerateMawbDoc from './GenerateMawbDoc';
@@ -51,7 +53,7 @@ function GenerateMAWB({
 		{ id: new Date().getTime(), documentNo: null, isNew: true },
 	]);
 
-	const [activeHawb, setActiveHawb] = useState(hawbDetails[0].id);
+	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]?.id);
 	const [activeKey, setActiveKey] = useState('basic');
 
 	const fields = mawbControls(disableClass);
@@ -82,6 +84,28 @@ function GenerateMAWB({
 		(+taskItem.volume * 166.67),
 	) || 0.0).toFixed(2)));
 
+	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(taskItem.shipmentId);
+
+	useEffect(() => {
+		if (edit && activeCategory === 'hawb') {
+			getHawbList();
+		}
+	}, []);
+
+	useEffect(() => {
+		if (edit && activeCategory === 'hawb') {
+			const dataList = [];
+			(hawbDataList?.data?.shipmentPendingTasks || []).forEach((hawbItem) => {
+				const pushData = { id: hawbItem.id, documentNo: hawbItem?.documentData?.document_number, isNew: false };
+				dataList.push(pushData);
+			});
+			setHawbDetails(dataList);
+			if (hawbDetails.length > 0) {
+				setActiveHawb(hawbDetails[0]?.id);
+			}
+		}
+	}, [activeCategory, hawbListLoading]);
+
 	useEffect(() => {
 		getHawb(activeHawb);
 	}, [activeHawb]);
@@ -100,21 +124,20 @@ function GenerateMAWB({
 				setValue(c.name, '');
 			}
 		});
-		setValue('executedDate', edit ? taskItem.executedDate : new Date());
+		setValue('executedDate', taskItem.executedDate ? new Date(taskItem.executedDate) : new Date());
 		setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
 		setValue('city', 'NEW DELHI');
 		setValue('place', 'NEW DELHI');
 		setValue('class', 'q');
 		setValue('currency', 'INR');
-		setValue('commodity', edit ? `${taskItem.commodity || ''}`
-			: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
-		setValue('agentOtherCharges', edit ? taskItem.agentOtherCharges
-			: agentOtherChargesCode);
-		setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
-			: carrierOtherChargesCode);
+		setValue('commodity', taskItem.commodity
+			|| `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
+		setValue('agentOtherCharges', taskItem.agentOtherCharges || agentOtherChargesCode);
+		setValue('carrierOtherCharges', taskItem.carrierOtherCharges || carrierOtherChargesCode);
 		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 		setValue('shipperSignature', taskItem.customer_name);
 		setValue('amountOfInsurance', 'NIL');
+		setValue('accountingInformation', 'FREIGHT PREPAID');
 	}, [hawbSuccess, activeHawb]);
 
 	useEffect(() => {
@@ -154,6 +177,7 @@ function GenerateMAWB({
 			setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 			setValue('shipperSignature', taskItem.customer_name);
 			setValue('amountOfInsurance', 'NIL');
+			setValue('accountingInformation', 'FREIGHT PREPAID');
 		}
 	}, []);
 
