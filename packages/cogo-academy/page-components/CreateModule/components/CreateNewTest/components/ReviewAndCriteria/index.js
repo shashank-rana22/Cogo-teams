@@ -1,7 +1,7 @@
 import { Pill, Button, Placeholder, Toast } from '@cogoport/components';
 import { useForm, InputController, useFieldArray } from '@cogoport/forms';
 import { IcMArrowBack, IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
-import { Link } from '@cogoport/next';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -25,6 +25,8 @@ function ReviewAndCriteria(props) {
 	const { name = '', set_data = [], cogo_entity_object = {} } = data || {};
 
 	const { updateTest } = useUpdateTest();
+
+	const router = useRouter();
 
 	const [error, setError] = useState(false);
 
