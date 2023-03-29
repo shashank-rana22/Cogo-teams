@@ -59,6 +59,7 @@ function UploadInvoice({
 							placeholder="Enter Invoice Date"
 							dateFormat="yyyy-MM-dd"
 							name="date"
+							isPreviousDaysAllowed
 							onChange={(e:any) => setFormData((p) => ({ ...p, invoiceDate: e }))}
 							value={invoiceDate}
 							style={{ marginBottom: '-10px' }}

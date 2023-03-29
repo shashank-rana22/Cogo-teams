@@ -40,6 +40,8 @@ interface ItemDataInterface {
 	proofDocuments?:string[],
 	createdAt?:Date,
 	category?:string,
+	billCurrency?:string,
+	payableTds?:number | string,
 }
 
 function ExpenseComponent() {
@@ -187,7 +189,7 @@ function ExpenseComponent() {
 				const date2 = new Date(endDate);
 				const timeDifference = date2.getTime() - date1.getTime();
 				const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
-				const monthDifference = Math.round(daysDifference / 30);
+				const monthDifference = Math.floor(daysDifference / 30);
 				if (Number(monthDifference) < 1) {
 					difference = `${daysDifference} days`;
 				} else {
@@ -240,9 +242,11 @@ function ExpenseComponent() {
 			);
 		},
 		getPayable: (itemData:ItemDataInterface) => {
-			const { grandTotal, paidAmount } = itemData || {};
+			const { grandTotal, paidAmount, billCurrency = '' } = itemData || {};
 			return (
 				<div>
+					{billCurrency}
+					{' '}
 					{(grandTotal >= 0 && paidAmount >= 0) ? (grandTotal - paidAmount) : '-'}
 				</div>
 			);
@@ -381,6 +385,36 @@ function ExpenseComponent() {
 							</a>
 						</div>
 					) : '-' }
+				</div>
+			);
+		},
+		renderInvoiceAmount: (itemData:ItemDataInterface) => {
+			const { grandTotal, billCurrency = '' } = itemData || {};
+			return (
+				<div>
+					{billCurrency}
+					{' '}
+					{grandTotal}
+				</div>
+			);
+		},
+		renderTds: (itemData:ItemDataInterface) => {
+			const { payableTds, billCurrency = '' } = itemData || {};
+			return (
+				<div>
+					{billCurrency}
+					{' '}
+					{payableTds}
+				</div>
+			);
+		},
+		renderPaid: (itemData:ItemDataInterface) => {
+			const { paidAmount, billCurrency = '' } = itemData || {};
+			return (
+				<div>
+					{billCurrency}
+					{' '}
+					{paidAmount}
 				</div>
 			);
 		},

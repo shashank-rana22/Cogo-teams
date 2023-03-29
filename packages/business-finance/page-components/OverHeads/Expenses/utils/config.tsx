@@ -116,14 +116,14 @@ export const expenseNonRecurringConfig = () => ({
 		},
 		{
 			label   : 'Invoice Amount',
-			key     : 'grandTotal',
+			func    : 'renderInvoiceAmount',
 			span    : 1.5,
 			sorting : { name: 'invoiceAmountSortType' },
 			styles  : { display: 'flex', justifyContent: 'center' },
 		},
 		{
 			label   : 'TDS',
-			key     : 'payableTds',
+			func    : 'renderTds',
 			span    : 1.2,
 			sorting : { name: 'tdsSortType' },
 			styles  : { display: 'flex', justifyContent: 'center' },
@@ -137,7 +137,7 @@ export const expenseNonRecurringConfig = () => ({
 		},
 		{
 			label   : 'Paid',
-			key     : 'paidAmount',
+			func    : 'renderPaid',
 			span    : 0.8,
 			sorting : { name: 'paidAmountSortType' },
 			styles  : { display: 'flex', justifyContent: 'center' },
