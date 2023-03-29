@@ -7,7 +7,8 @@
 	"dependencies": {
 		"@cogoport/charts": "^1.0.1",
 		"@cogoport/components": "^1.0.359",
-		"@cogoport/forms": "workspace:^0.1.0",
+		"@cogoport/forms": "workspace:*",
+		"@cogoport/globalization": "workspace:*",
 		"@cogoport/icons-react": "^1.0.58",
 		"@cogoport/next": "workspace:0.1.0",
 		"@cogoport/request": "workspace:^0.1.0",
