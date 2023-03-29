@@ -28,7 +28,8 @@ function useCreateFaqSet({
 	}, { manual: true });
 
 	const onSubmit = async (values) => {
-		const emptyEditorValue = editorValue.toString('html') === RichTextEditor.createEmptyValue().toString('html');
+		const emptyEditorValue = (editorValue.toString('html') === RichTextEditor.createEmptyValue().toString('html'))
+		|| (editorValue.toString('html') === '');
 
 		if (emptyEditorValue) {
 			setEditorError(true);
