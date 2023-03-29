@@ -71,10 +71,7 @@ function TestsList({ activeTab, setActiveTab }) {
 	};
 
 	const handleChangeTab = (val) => {
-		// eslint-disable-next-line max-len
-		const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?activeTab=test_module&testModuleTab=${val}`;
-
-		window.history.pushState({ path: newurl }, '', newurl);
+		router.push(`/learning?activeTab=test_module&testModuleTab=${val}`);
 
 		componentMapping[val].componentProps.fetchList();
 		setActiveTab(val);

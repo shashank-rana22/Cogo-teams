@@ -9,7 +9,8 @@ const options = [
 ];
 
 function Filters({
-	filter = '', setFilter = () => {},
+	filter = '',
+	setFilter = () => {},
 	setSearchValue = () => {},
 	debounceQuery = () => {},
 	searchValue,
@@ -33,8 +34,8 @@ function Filters({
 				)}
 				style={{ width: 300 }}
 			/>
-			<div className={styles.filters}>
 
+			<div className={styles.filters}>
 				<Select
 					prefix={(<IcMFilter />)}
 					value={filter}
@@ -43,7 +44,6 @@ function Filters({
 					options={options}
 					isClearable="true"
 				/>
-
 			</div>
 		</div>
 	);

@@ -3,7 +3,7 @@
 }
 
 .table_container {
-	padding: unset !important;
+	padding: unset;
 
 	:global {
 		.ui_table_head_row {
