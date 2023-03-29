@@ -99,7 +99,7 @@ const columns = [
 					)}
 					size="sm"
 				>
-					Close for me
+					Close For Me
 
 				</Button>
 			</div>
