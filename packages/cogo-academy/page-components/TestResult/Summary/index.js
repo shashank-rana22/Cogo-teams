@@ -7,8 +7,6 @@ import BarChart from './BarChart';
 import Overview from './Overview';
 import styles from './styles.module.css';
 
-const colorArray = ['hsla(232, 44%, 96%, 1)', 'hsla(234, 46%, 87%, 1)', 'hsla(234, 46%, 87%, 1)'];
-
 function Summary({ summaryData = {}, loading = false }) {
 	const {
 		topics_covered = {},
@@ -26,7 +24,7 @@ function Summary({ summaryData = {}, loading = false }) {
 			const obj = {
 				label      : startCase(key.split('_')[0]),
 				percentile : difficulty_wise_stats[key]?.toFixed(2),
-				color      : colorArray[index],
+				color      : index === 0 ? 'hsla(232, 44%, 96%, 1)' : 'hsla(234, 46%, 87%, 1)',
 			};
 			data.push(obj);
 		});
@@ -41,7 +39,7 @@ function Summary({ summaryData = {}, loading = false }) {
 			const obj = {
 				label      : startCase(key),
 				percentile : topic_wise_percentile[key].toFixed(2),
-				color      : colorArray[index],
+				color      : index === 0 ? 'hsla(232, 44%, 96%, 1)' : 'hsla(234, 46%, 87%, 1)',
 			};
 			data.push(obj);
 		});
@@ -61,43 +59,47 @@ function Summary({ summaryData = {}, loading = false }) {
 				<Overview topics_covered={topics_covered} time_taken={time_taken} />
 			</div>
 
-			<div className={styles.radial_charts}>
-				<div className={styles.percentile_chart_item}>
-					<div className={styles.percentile_heading}>Percentile</div>
+			<div className={styles.chart_container}>
+				<div className={styles.radial_charts}>
+					<div className={styles.percentile_chart_container}>
+						<div className={styles.percentile_chart_item}>
+							<div className={styles.percentile_heading}>Percentile</div>
 
-					<div className={styles.percentile_data}>
-						{user_percentile.toFixed(2)}
-						%
+							<div className={styles.percentile_data}>
+								{user_percentile.toFixed(2)}
+								%
+							</div>
+
+						</div>
 					</div>
 
-				</div>
-
-				<div className={styles.radial_chart_item}>
-					<QuestionWiseStats
-						height="250px"
-						width="250px"
-						question_stats={question_stats}
-					/>
-				</div>
-			</div>
-
-			<div className={styles.bar_charts}>
-				<div className={styles.bar_chart_item}>
-					<div className={styles.bar_chart_heading}>Topic Wise Percentile</div>
-
-					<div className={styles.bar_chart}>
-						<BarChart chart_data={getTopicWiseData()} />
+					<div className={styles.radial_chart_item}>
+						<QuestionWiseStats
+							height="250px"
+							width="250px"
+							question_stats={question_stats}
+						/>
 					</div>
 				</div>
 
-				<div className={styles.bar_chart_item}>
-					<div className={styles.bar_chart_heading}>Level of Difficulty</div>
+				<div className={styles.bar_charts}>
+					<div className={styles.bar_chart_item}>
+						<div className={styles.bar_chart_heading}>Topic Wise Percentile</div>
 
-					<div className={styles.bar_chart}>
-						<BarChart chart_data={getDifficultyData()} />
+						<div className={styles.bar_chart}>
+							<BarChart chart_data={getTopicWiseData()} />
+						</div>
 					</div>
-				</div>
 
+					<div className={styles.bar_chart_item}>
+						<div className={styles.bar_chart_heading}>Level of Difficulty</div>
+
+						<div className={styles.bar_chart}>
+							<BarChart chart_data={getDifficultyData()} />
+						</div>
+					</div>
+
+				</div>
 			</div>
 
 		</div>
