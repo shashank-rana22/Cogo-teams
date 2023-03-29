@@ -9,7 +9,7 @@ function PublishNow({ test_id, refetchTest }) {
 
 	return (
 		<>
-			<Button onClick={() => setShowPublishModal(true)}>Publish Results</Button>
+			<Button type="button" onClick={() => setShowPublishModal(true)}>Publish Results</Button>
 
 			{showPublishModal && (
 				<Modal size="sm" show={showPublishModal} onClose={setShowPublishModal}>
