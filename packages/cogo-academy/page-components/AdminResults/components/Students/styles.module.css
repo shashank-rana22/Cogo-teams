@@ -7,7 +7,7 @@
 
 	:global {
 		.ui_table_head_row {
-			background-color: #FFFFFF;
+			background-color: #fff;
 
 			.ui_table_head_cell {
 				padding-top: 18px;
@@ -20,7 +20,7 @@
 		}
 
 		.ui_table_body_container {
-			background-color: #FFFFFF;
+			background-color: #fff;
 
 			.ui_table_body_row {
 				border-radius: 8px;
