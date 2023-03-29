@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 import ListHeader from './ListHeader';
 import QuestionItem from './QuestionItem';
-import Search from './Search/Search';
+import Search from './Search';
 import styles from './styles.module.css';
 
 function QuestionsComponent({ test_id }) {
@@ -34,7 +34,6 @@ function QuestionsComponent({ test_id }) {
 	const { list: questionsList = [] } = data || {};
 
 	return (
-
 		<>
 			<Search
 				searchQuestion={searchQuestion}
