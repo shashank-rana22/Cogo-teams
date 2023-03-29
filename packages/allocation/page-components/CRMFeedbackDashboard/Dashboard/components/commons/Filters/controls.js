@@ -1,18 +1,9 @@
 export const controlsFeedbacks = (
-	cogoEntityOptions,
 	organizationOptions,
 	leadOrganizationOptions,
 	kamOptions,
 	kamManagerOptions,
 ) => [
-	{
-		...cogoEntityOptions,
-		name        : 'agent_partner_id',
-		placeholder : 'Cogo Entity',
-		type        : 'select',
-		isClearable : true,
-		params      : { filters: { status: 'active' } },
-	},
 	{
 		...organizationOptions,
 		name        : 'organization_id',
