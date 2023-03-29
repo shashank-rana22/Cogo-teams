@@ -23,12 +23,22 @@ const useFilterPopover = ({ setFilters }) => {
 		},
 	}, { manual: false });
 
+	const [{ data: audienceData }] = useRequest({
+		method : 'get',
+		url    : '/list_faq_audiences',
+		params : {
+			page_limit               : 100000,
+			pagination_data_required : false,
+		},
+	}, { manual: false });
+
 	const { control, handleSubmit } = useForm();
 
 	const onSubmit = (values) => {
 		setFilters({
-			faq_tag_id   : values?.tag,
-			faq_topic_id : values?.topic,
+			faq_tag_id      : values?.tag,
+			faq_topic_id    : values?.topic,
+			faq_audience_id : values?.audience,
 		});
 
 		setShowFilter(false);
@@ -36,6 +46,7 @@ const useFilterPopover = ({ setFilters }) => {
 
 	const { list: topicList = [] } = topicsData || {};
 	const { list : tagList = [] } = tagsData || {};
+	const { list: audienceList = [] } = audienceData || {};
 
 	const topicOptions = (topicList || []).map((item) => ({
 		label : item?.display_name,
@@ -44,6 +55,11 @@ const useFilterPopover = ({ setFilters }) => {
 
 	const tagOptions = (tagList || []).map((item) => ({
 		label : item?.display_name,
+		value : item?.id,
+	}));
+
+	const audienceOptions = (audienceList || []).map((item) => ({
+		label : item?.name,
 		value : item?.id,
 	}));
 
@@ -61,6 +77,7 @@ const useFilterPopover = ({ setFilters }) => {
 		handleSubmit,
 		onSubmit,
 		onClickReset,
+		audienceOptions,
 	};
 };
 
