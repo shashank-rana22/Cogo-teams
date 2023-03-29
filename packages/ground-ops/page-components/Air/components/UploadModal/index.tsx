@@ -70,6 +70,7 @@ function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
 						service_id      : showUpload?.serviceId,
 						service_type    : 'air_freight_service',
 						document_url    : formValues.document || undefined,
+						bl_detail_id    : showUpload?.blDetailId,
 					},
 					document_type : 'draft_airway_bill',
 					document_url  : formValues.document || undefined,
