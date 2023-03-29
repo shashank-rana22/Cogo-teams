@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import { AsyncSelectController } from '@cogoport/forms';
 
