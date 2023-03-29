@@ -54,10 +54,6 @@ function StudentsComponent({ test_id }) {
 	const columns = getTableColumns({ sortFilter, setSortFilter, activeTab });
 
 	useEffect(() => {
-		debounceQuery(searchValue);
-	}, [debounceQuery, searchValue]);
-
-	useEffect(() => {
 		refetch();
 	}, [params, refetch]);
 
@@ -78,8 +74,8 @@ function StudentsComponent({ test_id }) {
 			<Filters
 				filter={filter}
 				setFilter={setFilter}
-				searchValue={searchValue}
 				setSearchValue={setSearchValue}
+				debounceQuery={debounceQuery}
 			/>
 
 			{
