@@ -1,0 +1,14 @@
+.deadline_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+
+    :global(.ui_datepicker_container){
+       width: '200px'; 
+    }
+}
+
+.button_container {
+    display: flex;
+}
