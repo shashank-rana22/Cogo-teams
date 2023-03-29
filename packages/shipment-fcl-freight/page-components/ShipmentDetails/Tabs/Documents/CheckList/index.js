@@ -1,9 +1,8 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import Card from './Card';
 import LoadingState from './LoadingState';
-// import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function CheckList({

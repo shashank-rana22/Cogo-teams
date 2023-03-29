@@ -83,7 +83,6 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 		JSON.stringify(shipmentDocuments?.list),
 		JSON.stringify(data),
 		JSON.stringify(shipmentDocuments?.list),
-
 	]);
 
 	return {
@@ -97,4 +96,3 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 };
 
 export default useCreateTaskList;
-// TODO
