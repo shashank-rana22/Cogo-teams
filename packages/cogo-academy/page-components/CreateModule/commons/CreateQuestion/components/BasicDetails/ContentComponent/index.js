@@ -5,13 +5,7 @@ import styles from './styles.module.css';
 
 const constants = ['topic', 'audience_ids', 'question_type', 'difficulty_level', 'questions'];
 
-const getQuestionType = (question_type) => {
-	if (question_type === 'case_study') {
-		return 'Case Study';
-	}
-
-	return 'Stand Alone';
-};
+const getQuestionType = (question_type) => (question_type === 'case_study' ? 'Case Study' : 'Stand Alone');
 
 const getValue = ({ item, editDetails }) => {
 	const { sub_question = [], question_type = '' } = editDetails || {};

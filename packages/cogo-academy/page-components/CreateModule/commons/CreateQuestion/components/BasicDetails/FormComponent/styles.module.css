@@ -16,7 +16,9 @@
 	margin: auto;
 
 	:global {
-		.ui_input_container, .ui_select_container, .ui_multiselect_container {
+		.ui_input_container,
+		.ui_select_container,
+		.ui_multiselect_container {
 			width: 250px;
 		}
 

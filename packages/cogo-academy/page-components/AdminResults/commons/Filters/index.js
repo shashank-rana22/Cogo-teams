@@ -36,7 +36,7 @@ function Filters({
 				style={{ width: 300 }}
 			/>
 
-			{	activeTab === 'appeared' ? (
+			{activeTab === 'appeared' ? (
 				<div className={styles.filters}>
 
 					<Select

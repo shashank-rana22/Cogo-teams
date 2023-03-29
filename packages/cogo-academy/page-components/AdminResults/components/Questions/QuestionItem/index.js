@@ -1,7 +1,7 @@
 import { Accordion, Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import QuestionCard from '../../../../TestResult/QnA/QnAItem/QuestionCard';
+import QuestionCard from '../../../../CreateModule/commons/QuestionCard';
 
 import styles from './styles.module.css';
 

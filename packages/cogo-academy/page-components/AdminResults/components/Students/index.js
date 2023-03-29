@@ -12,12 +12,13 @@ import getTableColumns from './TableColumns';
 
 function StudentsComponent({ test_id }) {
 	const [activeTab, setActiveTab] = useState('appeared');
-	const { debounceQuery, query } = useDebounceQuery();
 
 	const [params, setParams] = useState({});
 	const [filter, setFilter] = useState('');
 	const [sortFilter, setSortFilter] = useState({});
 	const [setSearchValue] = useState('');
+
+	const { debounceQuery, query } = useDebounceQuery();
 
 	const { sortBy, sortType } = sortFilter || {};
 
@@ -47,7 +48,7 @@ function StudentsComponent({ test_id }) {
 
 	const [{ data, loading }, refetch] = useRequest({
 		method : 'GET',
-		url    : `${api_url}`,
+		url    : api_url,
 		params : { ...payload },
 	}, { manual: false });
 
@@ -89,32 +90,30 @@ function StudentsComponent({ test_id }) {
 				debounceQuery={debounceQuery}
 			/>
 
-			{
-				!loading && isEmpty(data?.list) ? (<EmptyState />)
-					: (
-						<div className={styles.table_container}>
-							<Table
-								className={styles.table_container}
-								data={list || []}
-								columns={columns}
-								loading={loading}
-							/>
+			{!loading && isEmpty(data?.list)
+				? <EmptyState />
+				: (
+					<div className={styles.table_container}>
+						<Table
+							className={styles.table_container}
+							data={list || []}
+							columns={columns}
+							loading={loading}
+						/>
 
-							{total_count > page_limit ? (
-								<div className={styles.pagination_container}>
-									<Pagination
-										type="table"
-										currentPage={params?.page}
-										totalItems={total_count}
-										pageSize={page_limit}
-										onPageChange={(val) => setParams((prev) => ({ ...prev, page: val }))}
-									/>
-								</div>
-							) : null}
-
-						</div>
-					)
-			}
+						{total_count > page_limit ? (
+							<div className={styles.pagination_container}>
+								<Pagination
+									type="table"
+									currentPage={params?.page}
+									totalItems={total_count}
+									pageSize={page_limit}
+									onPageChange={(val) => setParams((prev) => ({ ...prev, page: val }))}
+								/>
+							</div>
+						) : null}
+					</div>
+				)}
 		</div>
 	);
 }
