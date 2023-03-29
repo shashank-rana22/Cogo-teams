@@ -10,33 +10,21 @@ import {
 	InputGroupController,
 } from '@cogoport/forms';
 
+const ELEMENT_MAPPING = {
+	'async-select' : AsyncSelectController,
+	select         : SelectController,
+	input          : InputController,
+	'date-picker'  : DateRangePickerController,
+	chips          : ChipsController,
+	radioGroup     : RadioGroupController,
+	textarea       : TextAreaController,
+	'multi-select' : MultiselectController,
+	inputgroup     : InputGroupController,
+	number         : InputController,
+};
+
 function getElementController(type) {
-	switch (type) {
-		case 'async-select':
-			return AsyncSelectController;
-		case 'select':
-			return SelectController;
-		case 'input':
-			return InputController;
-		case 'date-picker':
-			return DateRangePickerController;
-		case 'container-details':
-			return SelectController;
-		case 'chips':
-			return ChipsController;
-		case 'radioGroup':
-			return RadioGroupController;
-		case 'textarea':
-			return TextAreaController;
-		case 'multi-select':
-			return MultiselectController;
-		case 'inputgroup':
-			return InputGroupController;
-		case 'number':
-			return InputController;
-		default:
-			return SelectController;
-	}
+	return ELEMENT_MAPPING?.[type] || SelectController;
 }
 
 export default getElementController;
