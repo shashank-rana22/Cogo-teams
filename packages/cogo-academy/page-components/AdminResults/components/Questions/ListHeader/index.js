@@ -2,36 +2,47 @@ import SortComponent from '../../../commons/SortComponent';
 
 import styles from './styles.module.css';
 
+const MAPPING = {
+	topic: {
+		label: 'Topic',
+	},
+	question: {
+		label: 'Question',
+	},
+	question_type: {
+		label: 'Question Type',
+	},
+	difficulty_level: {
+		label: 'Difficulty Level',
+	},
+	students_appeared: {
+		label: 'Students IT Appeared For',
+	},
+	correct_percentage: {
+		label: 'Correct Percentage %',
+	},
+};
+
 function ListHeader({ sortFilter = {}, setSortFilter = () => {} }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.container_item}>Topic</div>
+			{Object.keys(MAPPING).map((item) => {
+				const { label } = MAPPING[item];
 
-			<div className={styles.section}>Question</div>
+				return (
+					<div key={item} className={item === 'question' ? styles.section : styles.container_item}>
+						<div>{label}</div>
 
-			<div className={styles.container_item}>Question Type</div>
-
-			<div className={styles.container_item}>Difficulty Level</div>
-
-			<div className={styles.container_item}>
-				<div>Students IT Appeared For</div>
-
-				<SortComponent
-					value="students_appeared"
-					sortFilter={sortFilter}
-					setSortFilter={setSortFilter}
-				/>
-			</div>
-
-			<div className={styles.container_item}>
-				Correct Percentage %
-
-				<SortComponent
-					value="correct_percentage"
-					sortFilter={sortFilter}
-					setSortFilter={setSortFilter}
-				/>
-			</div>
+						{['students_appeared', 'correct_percentage'].includes(item) ? (
+							<SortComponent
+								value={item}
+								sortFilter={sortFilter}
+								setSortFilter={setSortFilter}
+							/>
+						) : null}
+					</div>
+				);
+			})}
 		</div>
 	);
 }

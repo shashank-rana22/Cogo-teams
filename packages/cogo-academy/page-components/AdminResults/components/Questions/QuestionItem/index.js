@@ -5,7 +5,7 @@ import QuestionCard from '../../../../TestResult/QnA/QnAItem/QuestionCard';
 
 import styles from './styles.module.css';
 
-const renderTitle = ({
+function TitleComponent({
 	appeared_percent,
 	correct_percentage,
 	difficulty,
@@ -13,7 +13,7 @@ const renderTitle = ({
 	topic,
 	question,
 	question_type,
-}) => (
+}) {
 	<div role="presentation" className={styles.container}>
 		<div className={styles.small_section}>
 			<Pill size="md" color="#F3FAFA">{topic}</Pill>
@@ -44,8 +44,8 @@ const renderTitle = ({
 			{correct_percentage}
 			%
 		</div>
-	</div>
-);
+	</div>;
+}
 
 function QuestionItem({ question_item, index = 0 }) {
 	const {
@@ -64,15 +64,17 @@ function QuestionItem({ question_item, index = 0 }) {
 		<div className={styles.outer_container}>
 			<Accordion
 				type="text"
-				title={renderTitle({
-					appeared_percent,
-					correct_percentage,
-					difficulty,
-					students_appeared,
-					topic,
-					question,
-					question_type,
-				})}
+				title={(
+					<TitleComponent
+						appeared_percent={appeared_percent}
+						correct_percentage={correct_percentage}
+						difficulty={difficulty}
+						students_appeared={students_appeared}
+						topic={topic}
+						question={question}
+						question_type={question_type}
+					/>
+				)}
 				key={index}
 				style={{ width: '100%' }}
 			>
