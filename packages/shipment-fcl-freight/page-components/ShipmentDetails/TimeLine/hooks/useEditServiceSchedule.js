@@ -5,6 +5,7 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
 import { getPrefillValue, getDateForPayload } from '../../../../common/utils/dateFormatter';
+import getApiErrorString from '../../../../utils/getApiErrorString';
 import controls from '../EditSchedule/controls';
 
 export default function useEditServiceSchedule({
@@ -69,11 +70,9 @@ export default function useEditServiceSchedule({
 				Toast.success('Booking Note Updated Successfully !');
 				setShow(false);
 				shipmentRefetch();
-			} else {
-				Toast.error(JSON.stringify(res?.data));
 			}
 		} catch (err) {
-			Toast.error(err.message);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import useAxios from 'axios-hooks';
 import { useEffect, useCallback } from 'react';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const keyMappings = {
 	shipping_instruction: 'si',
 };
@@ -29,7 +31,7 @@ const useShipmentEmails = ({ cogo_shipment_id, document_type = [], page }) => {
 					},
 				});
 			} catch (err) {
-				Toast.error(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
 	}, [cogo_shipment_id, document_type, page, triggerRecentClassifiedShipment]);
