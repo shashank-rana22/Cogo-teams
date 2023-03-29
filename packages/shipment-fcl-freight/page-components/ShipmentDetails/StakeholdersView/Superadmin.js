@@ -8,7 +8,7 @@ import Documents from '../../../common/Documents';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Timeline from '../../../common/TimeLine';
 import TopBar from '../../../common/TopBar';
-import Tracking from '../Tabs/Overview/Tracking';
+import Tracking from '../../../common/Tracking';
 
 import styles from './styles.module.css';
 
