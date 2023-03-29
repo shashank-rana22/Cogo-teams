@@ -17,7 +17,7 @@ function Report() {
 	const [marketshare, setMarketshare] = useState([]);
 	const [globalsupply, setGlobalsupply] = useState([]);
 
-	const [{ loading = false, data: responseData = {} }, trigger] = useAthenaRequest({
+	const [{ loading = false, data: responseData = {} }] = useAthenaRequest({
 		url    : 'commodity_trend_report',
 		method : 'post',
 		data   : {
@@ -138,7 +138,7 @@ function Report() {
 				},
 			]}
 			/>
-		</div>,
+            </div>,
 		january   : (item.January !== undefined) ? item.January.toLocaleString('en-IN') : 0,
 		february  : (item.February !== undefined) ? item.February.toLocaleString('en-IN') : 0,
 		march     : (item.March !== undefined) ? item.March.toLocaleString('en-IN') : 0,

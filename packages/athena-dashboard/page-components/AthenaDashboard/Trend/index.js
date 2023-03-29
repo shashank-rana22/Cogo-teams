@@ -1,134 +1,69 @@
-import { MultiSelect, Input, Checkbox, Button } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
-import { useAthenaRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { Select, Input, Checkbox, Button, RadioGroup } from '@cogoport/components';
+import { useState } from 'react';
+
+import countryname_value from '../../../constants/country-name-value';
+import useTrendSearch from '../hooks/useTrendSearch';
 
 import styles from './styles.module.css';
 
 function Trends() {
-	const router = useRouter();
-	const [countryname, setCountryname] = useState([]);
-	const [searchValue, setSearchValue] = useState('');
-	const [responsevalue, setResponsevalue] = useState([]);
-	const [hscodearr, setHscodearr] = useState([]);
-	const [shipmenttype, setShipmenttype] = useState(['import']);
+	const {
+		searchValue,
+		setSearchValue,
+		responsevalue,
+		hscodeArr,
+		setHscodeArr,
+		setShipmentType,
+		loading,
+		handleClick,
+		hidetext,
+		reRender,
+		getReport,
+		handleClear,
+	} = useTrendSearch();
 
-	const countryname_value = [
-		{ label: 'INDIA', value: 'INDIA' },
+	const [trade_value, trade_onChange] = useState('import');
+	const [hscode_value, hscode_onChange] = useState('select_codes_value');
+
+	const trade_diretion = [
+		{ value: 'import', label: 'Import' },
+		{ value: 'export', label: 'Export' },
 	];
 
-	const [{ loading = false, data: responseData = {} }, trigger] = useAthenaRequest({
-		url    : 'athena/hscodes_by_commodity_name',
-		method : 'post',
-	}, { manual: true });
-
-	const handleClick = async () => {
-		await trigger({
-			data: {
-				filters: { commodity_name: searchValue },
-			},
-		});
-	};
-
-	useEffect(() => {
-		if (!isEmpty(responseData)) {
-			setResponsevalue(responseData.list);
-		}
-	}, [responseData]);
-
-	const hidetext = (x, y) => {
-		const k = document.getElementById('hidetext');
-		const l = document.getElementById('buildreport');
-		const m = document.getElementById('clearall');
-		const n = document.getElementById('selectedhscode');
-		if (y === 1 && x + 1 > 0) {
-			k.style.display = 'None';
-			l.style.display = 'block';
-			m.style.display = 'block';
-			n.style.display = 'block';
-		} else if (x - 1 === 0) {
-			k.style.display = 'block';
-			l.style.display = 'None';
-			m.style.display = 'None';
-			n.style.display = 'None';
-		}
-	};
-	const reRender = () => {
-		const k = document.getElementById('hidetext');
-		const l = document.getElementById('buildreport');
-		const m = document.getElementById('clearall');
-		const n = document.getElementById('selectedhscode');
-		k.style.display = 'block';
-		l.style.display = 'None';
-		m.style.display = 'None';
-		n.style.display = 'None';
-	};
-
-	const getReport = () => {
-		if (shipmenttype && hscodearr) {
-			router.push(`/athena-dashboard/report?shipment_type=${shipmenttype}&hscodes=${hscodearr}`, `/athena-dashboard/report?shipment_type=${shipmenttype}&hscodes=${hscodearr}`);
-		}
-	};
-
-	const handleClear = () => {
-		setHscodearr([]);
-		reRender();
-	};
+	const hs_code = [
+		{ label: 'All', value: 'all' },
+		{ label: 'Select Codes Below', value: 'select_codes_value' },
+	];
 
 	return (
 		<div className={styles.wholepage}>
 			<div className={styles.header}>
 				<div>
 					Country/Region
-					<MultiSelect
-						value={countryname}
-						onChange={setCountryname}
+					<Select
+						value="india"
 						placeholder="Select here..."
 						options={countryname_value}
-						isClearable
 						style={{ width: '250px' }}
 						size="sm"
+						disabled
 						className={styles.multiselect}
 					/>
 				</div>
 				<div>
-					Trade Direction
-					<div className={styles.tradedn}>
-						<input
-							type="radio"
-							id="import"
-							name="Trade direction"
-							value="import"
-							onClick={(e) => {
-								if (e.target.checked) {
-									setShipmenttype('import');
-								}
-							}}
-							checked
-						/>
-						<label htmlFor="import"> Import</label>
-						<input
-							type="radio"
-							id="export"
-							name="Trade direction"
-							value="export"
-							onClick={(e) => {
-								if (e.target.checked) {
-									setShipmenttype(e.target.value);
-								}
-							}}
-						/>
-						<label htmlFor="export"> Export</label>
+					<div style={{ marginLeft: '10px' }}>
+						Trade Direction
+					</div>
+					<div>
+						<RadioGroup options={trade_diretion} onChange={trade_onChange} value={trade_value} />
 					</div>
 				</div>
 				<div>
-					HS Codes
-					<div className={styles.codesn}>
-						<input type="radio" id="all" name="HS Codes" value="All" />
-						<label htmlFor="all"> All</label>
-						<input type="radio" id="few" name="HS Codes" value="Select Codes Below" checked />
-						<label htmlFor="few"> Select Codes Below</label>
+					<div style={{ marginLeft: '10px' }}>
+						HS Codes
+					</div>
+					<div>
+						<RadioGroup options={hs_code} onChange={hscode_onChange} value={hscode_value} />
 					</div>
 				</div>
 			</div>
@@ -140,22 +75,27 @@ function Trends() {
 					onChange={setSearchValue}
 					value={searchValue}
 				/>
-				<button
+				<Button
 					className={styles.button}
-					type="submit"
+					size="md"
+					themeType="secondary"
 					onClick={() => {
-						setHscodearr([]);
+						setHscodeArr([]);
 						handleClick();
 						reRender();
 					}}
 					disabled={loading}
+					style={{ border: 'None' }}
 				>
 					{' '}
 					Search
 					{' '}
 
-				</button>
+				</Button>
 			</div>
+			{
+				hscodeArr.is
+			}
 			<div className={styles.rectdiv}>
 				<div className={styles.displayrect}>
 					<div className={styles.selectedtext} id="selectedhscode">
@@ -163,7 +103,7 @@ function Trends() {
 					</div>
 					<div className={styles.displayselectedcode}>
 						{
-							((hscodearr || []).map((Item) => (
+							((hscodeArr || []).map((Item) => (
 								<div className={styles.individual}>
 									<div className={styles.individualtext}>
 										{Item}
@@ -187,7 +127,16 @@ function Trends() {
 							</Button>
 						</div>
 						<div>
-							<button className={styles.clearall} id="clearall" onClick={() => { handleClear(); }}>Clear all</button>
+							<Button
+								className={styles.clearall}
+								themeType="secondary"
+								id="clearall"
+								onClick={() => { handleClear(); }}
+								style={{ border: 'None', backgroundColor: 'transparent', paddingTop: '0px' }}
+							>
+								Clear all
+
+							</Button>
 						</div>
 					</div>
 				</div>
@@ -210,18 +159,18 @@ function Trends() {
 										label={Item.hs_code}
 										value={Item.hs_code}
 										onChange={(e) => {
-											let arr = [...hscodearr];
+											let arr = [...hscodeArr];
 											let flag = 0;
 											if (e.target.checked) {
-												arr = [...hscodearr, e.target.value];
+												arr = [...hscodeArr, e.target.value];
 												flag = 1;
 											} else if (arr.includes(e.target.value)) {
 												const index = arr.indexOf(e.target.value);
 												arr.splice(index, 1);
 												flag = 0;
 											}
-											setHscodearr(arr);
-											hidetext(hscodearr.length, flag);
+											setHscodeArr(arr);
+											hidetext(hscodeArr.length, flag);
 										}}
 									/>
 								</div>

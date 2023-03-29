@@ -9,12 +9,6 @@
     justify-content: space-between;
     width: 70%;
 }
-.tradedn{
-    margin-top: 8px;
-}
-.codesn{
-    margin-top: 8px;
-}
 .button{
     background-color: transparent;
     border: 0;
@@ -61,7 +55,7 @@
 .clearall{
     margin-top: 25px;
     background-color: transparent;
-    border: 0;
+    border: None;
     cursor: pointer;
     display: none;
 }
