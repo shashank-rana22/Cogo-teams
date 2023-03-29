@@ -12,7 +12,7 @@ import Summary from './Summary';
 function TestResult() {
 	const {
 		query: { test_id },
-		user: { id: user_id },
+		user: { id: user_id, name },
 	} = useSelector(({ general, profile }) => ({
 		query : general.query,
 		user  : profile.user,
@@ -51,7 +51,7 @@ function TestResult() {
 
 			<Summary summaryData={summaryData} loading={loading} />
 
-			<QnA />
+			<QnA user_name={name} />
 		</div>
 	);
 }

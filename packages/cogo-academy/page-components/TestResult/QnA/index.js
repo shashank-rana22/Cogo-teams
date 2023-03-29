@@ -6,7 +6,7 @@ import CaseStudy from './CaseStudy';
 import QnAItem from './QnAItem';
 import styles from './styles.module.css';
 
-function QnA() {
+function QnA({ user_name = '' }) {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -42,13 +42,13 @@ function QnA() {
 					if (!('questions' in item)) {
 						return (
 							<div className={styles.question_card}>
-								<QnAItem data={item} index={index} />
+								<QnAItem data={item} index={index} user_name={user_name} />
 							</div>
 						);
 					}
 
 					return (
-						<CaseStudy case_study={item} index={index} />
+						<CaseStudy case_study={item} index={index} user_name={user_name} />
 					);
 				})}
 			</div>
