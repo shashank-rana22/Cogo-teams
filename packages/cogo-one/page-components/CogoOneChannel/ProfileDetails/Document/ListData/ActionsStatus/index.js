@@ -21,6 +21,8 @@ function ActionsStatus({
 		setSingleItem(val);
 	};
 	const checkDocumentType = document_type === 'undefined';
+	const checkMappingDocument = documentTypeMapping(document_type);
+	const documentType = checkMappingDocument === 'Shipment' || '';
 
 	const reqDocuments = useMemo(() => {
 		const documents = [];
@@ -42,33 +44,37 @@ function ActionsStatus({
 
 	return (
 		<div>
-			{!isEmpty(orgId) && (
-				<div className={styles.upload_container}>
-					<div className={styles.document_name}>
-						{!checkDocumentType && (
-							startCase(document_type)
-						)}
-					</div>
-					{!isEmpty(reqDocuments) ? (
-						<div
-							role="presentation"
-							className={styles.manually}
-							onClick={() => handleClick(item)}
-						>
-							Upload Manually
-						</div>
-					) : (
-						<div className={styles.upload}>
-							{(document_type !== 'undefined' && documentTypeMapping(document_type) !== 'Shipment') && (
-								<>
-									<IcCFtick width={15} height={15} className={styles.ic_tick} />
-									Uploaded
-								</>
-							)}
-						</div>
+
+			<div className={styles.upload_container}>
+				<div className={styles.document_name}>
+					{!checkDocumentType && (
+						startCase(document_type)
 					)}
 				</div>
-			)}
+				{(!isEmpty(orgId) && !documentType) && (
+					<div>
+						{!isEmpty(reqDocuments) ? (
+							<div
+								role="presentation"
+								className={styles.manually}
+								onClick={() => handleClick(item)}
+							>
+								Upload Manually
+							</div>
+						) : (
+							<div className={styles.upload}>
+								{document_type !== 'undefined' && (
+									<>
+										<IcCFtick width={15} height={15} className={styles.ic_tick} />
+										Uploaded
+									</>
+								)}
+							</div>
+						)}
+					</div>
+				)}
+			</div>
+
 		</div>
 	);
 }
