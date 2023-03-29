@@ -79,7 +79,15 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			</div>
 		),
 		id       : 'time_taken',
-		accessor : ({ time_taken = '' }) => <div>{time_taken}</div>,
+		accessor : ({ time_taken = '' }) => (
+			<div>
+				{Math.ceil(time_taken)}
+				{' '}
+				{
+					Math.ceil(time_taken) > 1 ? 'mins' : 'min'
+				}
+			</div>
+		),
 	},
 	{
 		Header: (
