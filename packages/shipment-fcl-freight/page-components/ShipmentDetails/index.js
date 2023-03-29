@@ -29,7 +29,7 @@ function ShipmentDetails() {
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
-		getTimeline,
+		...getTimeline,
 	}), [get, servicesGet, getTimeline]);
 
 	const { ActiveStakeholder } = useStakeholderCheck();

@@ -8,12 +8,16 @@ import Documents from '../../../common/Documents';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Timeline from '../../../common/TimeLine';
 import TopBar from '../../../common/TopBar';
-import Tracking from '../Tabs/Tracking';
+import Tracking from '../Tabs/Overview/Tracking';
 
 import styles from './styles.module.css';
 
 function Superadmin() {
-	const { shipment_data, timelineData, shipmentTimelineLoading } = useContext(ShipmentDetailContext);
+	const {
+		shipment_data,
+		timelineData,
+		shipmentTimelineLoading,
+	} = useContext(ShipmentDetailContext);
 	const [activeTab, setActiveTab] = useState('overview');
 
 	return (
@@ -47,8 +51,8 @@ function Superadmin() {
 					<TabPanel name="emails" title="Emails">
 						<ShipmentMails
 							source="cogo_rpa"
-							filters={{ q: shipment_data.serial_id }}
-							pre_subject_text={`${shipment_data.serial_id}`}
+							filters={{ q: shipment_data?.serial_id }}
+							pre_subject_text={`${shipment_data?.serial_id}`}
 						/>
 					</TabPanel>
 					<TabPanel name="tracking" title="Tracking">
