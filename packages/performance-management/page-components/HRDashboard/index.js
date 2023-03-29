@@ -12,6 +12,7 @@ function HRDashboard() {
 
 	const [activeTab, setActiveTab] = useState('feedbacks');
 	const [openOrgnaizationTree, setOpenOrganizationTree] = useState(false);
+	const [modal, setModal] = useState(''); // for update,logs,create,upload modals
 
 	const routeToFeedbackForms = () => {
 		router.push('/performance-management/hr-dashboard/feedback-forms');
@@ -57,10 +58,10 @@ function HRDashboard() {
 					fullWidth
 				>
 					<TabPanel name="feedbacks" title="KPI Feedbacks">
-						<KPIFeedbacks />
+						<KPIFeedbacks modal={modal} setModal={setModal} />
 					</TabPanel>
 					<TabPanel name="pip_probations" title="PIP / Probations">
-						<PIPProbations />
+						<PIPProbations modal={modal} setModal={setModal} />
 					</TabPanel>
 				</Tabs>
 			</div>

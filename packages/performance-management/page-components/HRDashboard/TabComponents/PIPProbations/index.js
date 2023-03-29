@@ -3,15 +3,14 @@ import { IcMDownload, IcMEdit, IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import pipModalComponentsMapping from '../../../../constants/pip-modal-components-mapping';
+import pipModalComponentsMapping from '../../../../constants/modal-components-mapping';
 import tabPanelComponentMapping from '../../../../constants/tab-pannel-component-mapping';
 import useUpdateLog from '../../../../hooks/useUpdateLog';
 
 import PendingReviews from './PendingReviews';
 import styles from './styles.module.css';
 
-function PIPProbations({ source = 'hr_dashboard' }) {
-	const [modal, setModal] = useState(''); // for update,logs,create,upload modals
+function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {} }) {
 	const [item, setItem] = useState({}); // dor sending payload and setting the user id from the list
 	const [activeTab, setActiveTab] = useState('dashboard'); // to switch between tabs
 	const [disableNext, setDisableNext] = useState(true); // to enable the submit button in create and update

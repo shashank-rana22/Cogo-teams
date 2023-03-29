@@ -25,6 +25,7 @@ function CreateModal({
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [status, setStatus] = useState('');
+
 	const {
 		params,
 		feedbackData,
@@ -57,6 +58,71 @@ function CreateModal({
 		}
 	};
 
+	const renderCreateModal = () => {
+		if (status) {
+			if (isEmpty(item)) {
+				return (
+					<>
+						<div className={styles.name_input}>
+							<div>Search by Name/COGO-ID...</div>
+							<Input
+								placeholder="Type Here..."
+								value={searchValue}
+								onChange={setSearchValue}
+							/>
+						</div>
+
+						<UserTableData
+							columns={columns}
+							list={newTeamList}
+							loading={loading}
+							pagination={params.Page}
+							page_limit={params.page_limit}
+							total_count={total_count}
+							setPagination={setPage}
+						/>
+					</>
+				);
+			}
+			return (
+				<DecisionModal
+					item={item}
+					setItem={setItem}
+					status={status}
+					type="create"
+					setDisableNext={setDisableNext}
+				/>
+			);
+		}
+
+		return (
+			<div>
+				<p style={{ padding: '8px' }}>Do you wish to create new Probation or PIP</p>
+				<div className={styles.pip_select}>
+					<Button
+						size="xl"
+						className={styles.pip_select_btn}
+						themeType="secondary"
+						onClick={() => setStatus('probation')}
+						style={{ width: '120px' }}
+					>
+						Probations
+					</Button>
+
+					<Button
+						size="xl"
+						className={styles.pip_select_btn}
+						themeType="secondary"
+						onClick={() => setStatus('pip')}
+						style={{ width: '120px' }}
+					>
+						PIP
+					</Button>
+				</div>
+			</div>
+		);
+	};
+
 	return (
 		(source === 'log_modal' ? (
 			<Modal
@@ -73,66 +139,7 @@ function CreateModal({
 					<Modal.Body
 						style={{ maxHeight: '600px' }}
 					>
-						{!status ? (
-							<div>
-								<p style={{ padding: '8px' }}>Do you wish to create new Probation or PIP</p>
-								<div className={styles.pip_select}>
-									<Button
-										size="xl"
-										className={styles.pip_select_btn}
-										themeType="secondary"
-										onClick={() => setStatus('probation')}
-										style={{ width: '120px' }}
-									>
-										Probations
-									</Button>
-
-									<Button
-										size="xl"
-										className={styles.pip_select_btn}
-										themeType="secondary"
-										onClick={() => setStatus('pip')}
-										style={{ width: '120px' }}
-									>
-										PIP
-									</Button>
-								</div>
-							</div>
-						) : (
-							<div>
-								{isEmpty(item) ? (
-									<>
-										<div className={styles.name_input}>
-											<div>Search by Name/COGO-ID...</div>
-											<Input
-												placeholder="Type Here..."
-												value={searchValue}
-												onChange={setSearchValue}
-											/>
-										</div>
-
-										<UserTableData
-											columns={columns}
-											list={newTeamList}
-											loading={loading}
-											pagination={params.Page}
-											page_limit={params.page_limit}
-											total_count={total_count}
-											setPagination={setPage}
-										/>
-									</>
-								) : (
-									<DecisionModal
-										item={item}
-										setItem={setItem}
-										status={status}
-										type="create"
-										setDisableNext={setDisableNext}
-									/>
-								)}
-
-							</div>
-						)}
+						{renderCreateModal()}
 					</Modal.Body>
 				</div>
 				<Modal.Footer>
@@ -160,26 +167,44 @@ function CreateModal({
 				</Modal.Footer>
 			</Modal>
 		) : (
-			<>
-				<div className={styles.name_input}>
-					<div>Search by Name/COGO-ID...</div>
-					<Input
-						placeholder="Type Here..."
-						value={searchValue}
-						onChange={setSearchValue}
-					/>
-				</div>
+			<Modal
+				show={modal === 'manual_feedback'}
+				onClose={() => setModal('')}
+				onClickOutside={() => setModal('')}
+				size="xl"
+			>
+				<Modal.Header title="Manual Feedback" />
+				<Modal.Body>
+					<div className={styles.name_input}>
+						<div>Search by Name/COGO-ID...</div>
+						<Input
+							placeholder="Type Here..."
+							value={searchValue}
+							onChange={setSearchValue}
+						/>
+					</div>
 
-				<UserTableData
-					columns={columns}
-					list={newTeamList}
-					loading={loading}
-					pagination={params.Page}
-					page_limit={params.page_limit}
-					total_count={total_count}
-					setPagination={setPage}
-				/>
-			</>
+					<UserTableData
+						columns={columns}
+						list={newTeamList}
+						loading={loading}
+						pagination={params.Page}
+						page_limit={params.page_limit}
+						total_count={total_count}
+						setPagination={setPage}
+					/>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => setModal('')}
+					>
+						Close
+					</Button>
+				</Modal.Footer>
+			</Modal>
+
 		))
 	);
 }

@@ -12,6 +12,7 @@ import PastStats from './TabComponents/PastStats';
 function ManagerDashboard() {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('past_stats');
+	const [modal, setModal] = useState(''); // for update,logs,create,upload modals
 
 	const handleClick = () => {
 		router.push('/performance-management/manager-dashboard/feedback-management');
@@ -49,7 +50,7 @@ function ManagerDashboard() {
 					</TabPanel>
 					<TabPanel name="pip_probations" title="PIP / Probations">
 						<div className={styles.stats}><Statistics /></div>
-						<PIPProbations source="manager_dashboard" />
+						<PIPProbations source="manager_dashboard" modal={modal} setModal={setModal} />
 					</TabPanel>
 				</Tabs>
 			</div>

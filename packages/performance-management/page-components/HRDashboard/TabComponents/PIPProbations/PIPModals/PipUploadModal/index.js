@@ -1,36 +1,56 @@
-import { Modal, Tooltip, Toast, Button } from '@cogoport/components';
+import { Select, Modal, Tooltip, Toast, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 import { IcMInfo } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { useIrisRequest } from '@cogoport/request';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
+
+import getMonthYearOptions from '../../../../../../utils/getMonthOptions';
 
 import styles from './styles.module.css';
 
-function PipUloadModal({ modal, setModal = () => {} }) {
+const sourceUploadTypeMapping = {
+	kpi_tab_upload : ['normalization'],
+	pip_probation  : ['probation', 'pip'],
+};
+
+function PipUloadModal({ modal, setModal = () => {}, source = 'pip_probation' }) {
 	const [files, setFiles] = useState({});
 	const [type, setType] = useState('');
+	const [year, setYear] = useState('');
+	const [month, setMonth] = useState('');
 
-	// const [{ loading : uploadLoading = false }, trigger] = useIrisRequest({
-	// 	url    : 'post_iris_approve_ratings',
-	// 	method : 'post',
-	// }, { manual: true });
+	const { monthOptions, yearOptions } = getMonthYearOptions(year);
+
+	const uploadTypes = sourceUploadTypeMapping[source];
+
+	const [{ loading : uploadLoading = false }, trigger] = useIrisRequest({
+		url    : 'post_iris_create_file',
+		method : 'post',
+	}, { manual: true });
 
 	const { control, watch, formState:{ errors } } = useForm();
 
-	const onboardingCsvFile = watch('onboarding_url');
-	// const normalizationCsvFile = watch('normalization_url');
+	const uploadedCSVFile = watch('uploaded_csv_file');
 
 	useEffect(() => setFiles({
-		onboardingCSV: onboardingCsvFile || undefined,
-	}), [onboardingCsvFile]);
+		uploadedCSVFile: uploadedCSVFile || undefined,
+	}), [uploadedCSVFile]);
 
-	// const isUploadPossible = files.onboardingCSV || month;
-	const isUploadPossible = true;
+	const isUploadPossible = type === 'normalization' ? !!month : true;
 
 	const uploadCSVs = async () => {
 		try {
-			// await trigger({ data: { Url: files.normalizationCSV, Month: month, Year: year.toString() } });
+			await trigger({
+				data: {
+					Url      : files.uploadedCSVFile,
+					Month    : type === 'normalization' ? month : undefined,
+					Year     : type === 'normalization' ? year.toString() : undefined,
+					CsvType  : type === 'normalization' ? 'approve_ratings' : type,
+					FileName : uploadedCSVFile.split('/').slice(-1).join('').replaceAll('%', ' '),
+				},
+			});
 
 			Toast.success('File sent for processing. Please check after some time...');
 			setFiles({});
@@ -48,96 +68,115 @@ function PipUloadModal({ modal, setModal = () => {} }) {
 	const getToolTip = (text) => <div className={styles.tooltip_text}>{text}</div>;
 
 	return (
-
 		<Modal
-			show={modal === 'upload'}
+			show={modal === 'upload' || 'kpi_tab_upload'}
 			onClose={() => setModal('')}
 		>
 			<Modal.Header title="Upload CSV" />
 			<div className={styles.upload_modal}>
 				<Modal.Body>
 					<div className={styles.upload_container}>
-						<div
-							className={styles.upload_info}
-							style={{ background: files.normalizationCSV ? '#e0e0e0' : '' }}
-						>
-							{type ? (
-								<div>
-									<div className={styles.upload_header}>
-										<div className={styles.label}>
-											{type === 'pip' ? 'Upload PIP CSV' : 'Upload Probation CSV'}
-										</div>
-										<Tooltip
-											theme="light"
-											placement="top-end"
-											animation="shift-away"
-											content={getToolTip('Get Sample PIP csv')}
-										>
-											<div
-												className={styles.info_tool}
-												role="button"
-												onClick={() => downloadOnboardingSample()}
-												tabIndex={0}
-											>
-												<IcMInfo width={20} height={20} />
+						{type ? (
+							<>
+								<div
+									className={styles.upload_info}
+									style={{ background: files.normalizationCSV ? '#e0e0e0' : '' }}
+								>
+									<div>
+										<div className={styles.upload_header}>
+											<div className={styles.label}>
+												{`Upload ${startCase(type)} CSV`}
 											</div>
-										</Tooltip>
+											{type === 'normalization' && (
+												<div className={styles.filters}>
+													<Select
+														value={year}
+														onChange={setYear}
+														placeholder="Year..."
+														isClearable={!month}
+														style={{ marginRight: '8px' }}
+														options={yearOptions}
+													/>
+													<Select
+														value={month}
+														onChange={setMonth}
+														placeholder="Month..."
+														disabled={!year}
+														isClearable
+														options={monthOptions}
+													/>
+												</div>
+											) }
+
+											<Tooltip
+												theme="light"
+												placement="top-end"
+												animation="shift-away"
+												content={getToolTip('Get Sample PIP csv')}
+											>
+												<div
+													className={styles.info_tool}
+													role="button"
+													onClick={() => downloadOnboardingSample()}
+													tabIndex={0}
+												>
+													<IcMInfo width={20} height={20} />
+												</div>
+											</Tooltip>
+										</div>
+										<UploadController
+											control={control}
+											errors={errors}
+											name="uploaded_csv_file"
+											accept=".csv"
+										/>
 									</div>
-									<UploadController
-										control={control}
-										errors={errors}
-										name="onboarding_url"
-										accept=".csv"
-									/>
+
 								</div>
-							) : (
-								<div>
+								<div className={styles.submit}>
+									<Button
+										themeType="secondary"
+										onClick={() => setType('')}
+										style={{ marginRight: '8px' }}
+									>
+										Back
+									</Button>
+									<Button
+										themeType="primary"
+										onClick={() => uploadCSVs()}
+										disabled={!isUploadPossible || isEmpty(files?.uploadedCSVFile)}
+										loading={uploadLoading}
+									>
+										Submit
+									</Button>
+								</div>
+
+							</>
+
+						) : (
+							<>
+								<div
+									className={styles.upload_info}
+									style={{ background: files.normalizationCSV ? '#e0e0e0' : '' }}
+								>
 									<p style={{ padding: '8px' }}>What do you wish to upload CSV for?</p>
 									<div className={styles.pip_select}>
-										<Button
-											size="xl"
-											className={styles.pip_select_btn}
-											themeType="secondary"
-											onClick={() => setType('probations')}
-											style={{ width: '120px' }}
-										>
-											Probations
-
-										</Button>
-										<Button
-											size="xl"
-											className={styles.pip_select_btn}
-											themeType="secondary"
-											onClick={() => setType('pip')}
-											style={{ width: '120px' }}
-										>
-											PIP
-										</Button>
+										{(uploadTypes || []).map((uploadType) => (
+											<Button
+												key={uploadType}
+												size="xl"
+												className={styles.pip_select_btn}
+												themeType="secondary"
+												onClick={() => setType(uploadType)}
+												style={{ width: '140px' }}
+											>
+												{startCase(uploadType)}
+											</Button>
+										))}
 									</div>
 								</div>
-							)}
-						</div>
-						{type ? (
-							<div className={styles.submit}>
-								<Button
-									themeType="secondary"
-									onClick={() => setType('')}
-									style={{ marginRight: '8px' }}
-								>
-									Back
-								</Button>
-								<Button
-									themeType="primary"
-									onClick={() => uploadCSVs()}
-									disabled={!isUploadPossible || isEmpty(files?.normalizationCSV)}
-								>
-									Submit
-								</Button>
-							</div>
-						)
-							: (
-								<div className={styles.submit}>
 
+								<div className={styles.submit}>
 									<Button
 										themeType="secondary"
 										onClick={() => setModal('')}
@@ -146,7 +185,8 @@ function PipUloadModal({ modal, setModal = () => {} }) {
 										Close
 									</Button>
 								</div>
-							)}
+							</>
+						)}
 					</div>
 				</Modal.Body>
 			</div>

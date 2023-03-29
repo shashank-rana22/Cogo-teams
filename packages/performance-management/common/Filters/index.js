@@ -5,8 +5,8 @@ import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import getDepartmentControls from '../../hooks/useGetDepartmentControls';
-import useListReassignControls from '../../page-components/HRDashboard/OrganizationTree/UserCard/EnlargedCard/ReassignManager/list-reassign-manager-controls';
 import useGetControls from '../../utils/filterControls';
+import useListReassignControls from '../../utils/list-reassign-manager-controls';
 import getMonthControls from '../../utils/monthControls';
 
 import styles from './styles.module.css';
@@ -52,8 +52,6 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 			ManagerID   : managerId || undefined,
 		});
 	}, [query, department, designation, status, managerId]);
-
-	console.log('params:;', params);
 
 	useEffect(() => {
 		debounceQuery(managerName);

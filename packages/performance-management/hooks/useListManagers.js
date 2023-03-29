@@ -17,8 +17,6 @@ const useListManagers = ({
 
 	const setPage = (p) => { setParams({ ...params, Page: p }); };
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-
 	useEffect(() => {
 		setParams({
 			...params,

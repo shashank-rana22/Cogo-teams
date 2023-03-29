@@ -1,24 +1,17 @@
-import { Modal, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { IcMUpload, IcMNotifications } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
 
 import Filters from '../../../../common/Filters';
 import PerformanceChart from '../../../../common/PerformanceChart';
+import modalComoponentsMapping from '../../../../constants/modal-components-mapping';
 import useListManagers from '../../../../hooks/useListManagers';
-import NotifyModal from '../../NotifyModal';
 import TeamMembersList from '../../TeamMembersList';
-import UploadModalBody from '../../UploadModal';
-import CreateModal from '../PIPProbations/PIPModals/CreateModal';
 
 import styles from './styles.module.css';
 
-function KPIFeedbacks() {
+function KPIFeedbacks({ modal = '', setModal = () => {} }) {
 	const router = useRouter();
-
-	const [openUploadModal, setOpenUploadModal] = useState(false);
-	const [manualFeedbackModal, setManualFeedbackModal] = useState(false);
-	const [notifyModal, setNotifyModal] = useState(false);
 
 	const { params, setParams, feedbackData, loading = false, setPage } = useListManagers({});
 
@@ -29,6 +22,10 @@ function KPIFeedbacks() {
 	const redirectToFeedbackManagement = () => {
 		router.push('/performance-management/hr-dashboard/feedback-management');
 	};
+
+	const ModalComponent = modalComoponentsMapping[modal]?.Component;
+
+	console.log('modal', modal);
 
 	return (
 		<div>
@@ -46,7 +43,7 @@ function KPIFeedbacks() {
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '16px' }}
-						onClick={() => setManualFeedbackModal(true)}
+						onClick={() => setModal('manual_feedback')}
 					>
 						Manual Feedback
 					</Button>
@@ -54,7 +51,7 @@ function KPIFeedbacks() {
 						size="md"
 						themeType="tertiary"
 						style={{ marginRight: '16px' }}
-						onClick={() => setNotifyModal(true)}
+						onClick={() => setModal('notify')}
 					>
 						<IcMNotifications style={{ marginRight: '4px' }} />
 						Send Notification
@@ -62,7 +59,7 @@ function KPIFeedbacks() {
 					<Button
 						size="md"
 						themeType="tertiary"
-						onClick={() => setOpenUploadModal(true)}
+						onClick={() => setModal('kpi_tab_upload')}
 					>
 						<IcMUpload style={{ marginRight: '4px' }} />
 						Upload CSV
@@ -103,62 +100,12 @@ function KPIFeedbacks() {
 					/>
 				</div>
 
-				{openUploadModal
-				&& (
-					<Modal
-						show={openUploadModal}
-						onClose={() => setOpenUploadModal(false)}
-					>
-						<Modal.Header title="Upload CSV" />
-						<div className={styles.upload_modal}>
-							<Modal.Body>
-								<UploadModalBody setOpenUploadModal={setOpenUploadModal} />
-							</Modal.Body>
-						</div>
-
-					</Modal>
-				)}
-
-				{notifyModal
-				&& (
-					<Modal
-						show={notifyModal}
-						onClose={() => setNotifyModal(false)}
-						onClickOutside={() => setNotifyModal(false)}
-					>
-						<Modal.Header title="Notify Managers" />
-						<div className={styles.upload_modal}>
-							<Modal.Body>
-								<NotifyModal setNotifyModal={setNotifyModal} />
-							</Modal.Body>
-						</div>
-					</Modal>
-				)}
-
-				{manualFeedbackModal
-				&& (
-					<Modal
-						show={manualFeedbackModal}
-						onClose={() => setManualFeedbackModal(false)}
-						onClickOutside={() => setManualFeedbackModal(false)}
-						size="xl"
-					>
-						<Modal.Header title="Manual Feedback" />
-						<Modal.Body>
-							<CreateModal
-								source="manual_feedback"
-							/>
-						</Modal.Body>
-						<Modal.Footer>
-							<Button
-								size="md"
-								themeType="secondary"
-								onClick={() => setManualFeedbackModal(false)}
-							>
-								Close
-							</Button>
-						</Modal.Footer>
-					</Modal>
+				{modal && (
+					<ModalComponent
+						modal={modal}
+						setModal={setModal}
+						source={modal}
+					/>
 				)}
 			</div>
 		</div>

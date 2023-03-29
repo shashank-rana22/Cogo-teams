@@ -1,4 +1,4 @@
-import useGetCustomAsyncOptions from '../../../../../../hooks/useCustomAsyncOptions';
+import useGetCustomAsyncOptions from '../hooks/useCustomAsyncOptions';
 
 const useListReassignControls = (userId) => {
 	const asyncManagerOptions = useGetCustomAsyncOptions({
