@@ -1,10 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { ResponsiveStream, StreamDatum } from '@cogoport/charts/stream/index';
+import { StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
-import { addDays, format, getMonth } from '@cogoport/utils';
-
-import { getformatPrice } from '../../../../../../commons/getFormatPrice';
 
 import styles from './styles.module.css';
 
@@ -32,12 +28,8 @@ const getAmountInLakhCrK = (value:number) => {
 export { getAmountInLakhCrK };
 
 function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
-	console.log('data', data);
-
 	const AmountData = [];
 	const CountData = [];
-
-	// const monthstart = getMonth(date);
 
 	(data || []).forEach((item) => {
 		AmountData.push({
@@ -49,7 +41,6 @@ function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
 			y : item.Count,
 		});
 	});
-	// const monthend = getMonth(date);
 
 	const finalData = [
 		{
@@ -65,51 +56,6 @@ function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
 	return (
 		loadingData ? <div className={styles.loader}><Loader style={{ height: '100px', width: '50px' }} /></div>
 			: (
-				// <ResponsiveLine
-				// 	data={finalData}
-				// 	margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-				// 	axisTop={null}
-				// 	axisRight={null}
-				// 	axisBottom={{
-				// 		tickSize     : 5,
-				// 		tickPadding  : 5,
-				// 		tickRotation : 0,
-				// 		legend       : '',
-				// 		legendOffset : 36,
-				// 	}}
-				// 	axisLeft={{
-				// 		tickSize     : 5,
-				// 		tickPadding  : 5,
-				// 		tickRotation : 0,
-				// 		legend       : '',
-				// 		legendOffset : -40,
-				// 		format       : (value) => getformatPrice(value),
-				// 	}}
-				// 	enableGridX={false}
-				// 	enableGridY
-				// 	curve="linear"
-				// 	colors={['#FFE8A4']}
-				// 	legends={[
-				// 		{
-				// 			anchor        : 'bottom-right',
-				// 			direction     : 'column',
-				// 			translateX    : 100,
-				// 			itemWidth     : 80,
-				// 			itemHeight    : 20,
-				// 			itemTextColor : '#999999',
-				// 			symbolSize    : 12,
-				// 			symbolShape   : 'circle',
-				// 			effects       : [
-				// 				{
-				// 					on    : 'hover',
-				// 					style : {
-				// 						itemTextColor: '#000000',
-				// 					},
-				// 				},
-				// 			],
-				// 		},
-				// 	]}
-				// />
 				<ResponsiveLine
 					data={finalData}
 					margin={{ top: 50, right: 120, bottom: 50, left: 90 }}

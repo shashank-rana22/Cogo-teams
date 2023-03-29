@@ -146,19 +146,16 @@
 .flex_date {
 	display: flex;
 	justify-content: flex-end;
+
 	:global {
-	.ui_select_display_container{
-		width: 140px;
+		.ui_select_display_container {
+			width: 140px;
+		}
 	}
-}
 }
 
 .margin_right {
 	margin-right: 8px;
-}
-
-.ui_select_display_container{
-	width: 140px;
 }
 
 .text_padding {

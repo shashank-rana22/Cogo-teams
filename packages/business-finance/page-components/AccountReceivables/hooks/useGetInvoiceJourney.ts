@@ -20,6 +20,8 @@ const useGetInvoiceJourney = ({ filterValue }:ParamsInterface) => {
 
 	const currentYearsState = new Date().getFullYear();
 
+	console.log('currentYearsState', currentYearsState);
+
 	function generateArrayOfYears() {
 		const currentYear = new Date().getFullYear();
 		const newArray = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3];
@@ -30,7 +32,7 @@ const useGetInvoiceJourney = ({ filterValue }:ParamsInterface) => {
 
 	const [dateFilter, setDateFilter] = useState({
 		month : currentMonth,
-		year  : currentYearsState,
+		year  : currentYearsState.toString(),
 	});
 	const [{ data:journeyData, loading:journeyLoading }, journeyTrigger] = useRequestBf(
 		{
