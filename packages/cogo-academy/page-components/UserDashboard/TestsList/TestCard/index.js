@@ -65,7 +65,7 @@ function TestCard({ test_card }) {
 
 				<div className={styles.topics}>
 					{(topics || []).map((topic_item) => (
-						<div className={styles.topic_item}>{topic_item}</div>
+						<div key={topic_item} className={styles.topic_item}>{topic_item}</div>
 					))}
 				</div>
 

@@ -7,7 +7,7 @@ function TopicWisePercentile({ topic_wise_percentile }) {
 
 			<div className={styles.topicwise_stats}>
 				{Object.entries(topic_wise_percentile || {}).map(([key, value]) => (
-					<div className={styles.percentile}>
+					<div key={key} className={styles.percentile}>
 						<div className={styles.topic}>{key}</div>
 
 						<div className={styles.percentage}>
