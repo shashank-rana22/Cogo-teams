@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 import tableColumns from './TableColumns';
 
 function StudentsComponent({ test_id }) {
-	const [activeTab, setActiveTab] = useState('');
+	const [activeTab, setActiveTab] = useState('appeared');
 	const { debounceQuery, query } = useDebounceQuery();
 
 	const [params, setParams] = useState({});
@@ -19,22 +19,37 @@ function StudentsComponent({ test_id }) {
 
 	const { sortBy, sortType } = sortFilter || {};
 
+	const students_mapping = {
+		appeared: {
+			url     : '/list_admin_student_wise_test_result',
+			payload : {
+				test_id,
+				sort_by     : sortBy,
+				sort_type   : sortType,
+				filters     : { final_result: filter },
+				search_term : query,
+				...params,
+			},
+		},
+		not_appeared: {
+			url     : '/list_not_appeared_users',
+			payload : {
+				test_id,
+			},
+		},
+	};
+
+	const { payload, url: api_url = '' } = students_mapping[activeTab];
+
 	const [{ data, loading }, refetch] = useRequest({
 		method : 'GET',
-		url    : '/list_admin_student_wise_test_result',
-		params : {
-			test_id,
-			filters     : { final_result: filter },
-			search_term : query,
-			sort_type   : sortType,
-			sort_by     : sortBy,
-			...params,
-		},
+		url    : `${api_url}`,
+		params : { ...payload },
 	}, { manual: false });
 
 	const { page_limit = 0, total_count = 0, list } = data || {};
 
-	const columns = tableColumns({ sortFilter, setSortFilter });
+	const columns = tableColumns({ sortFilter, setSortFilter, activeTab });
 
 	useEffect(() => {
 		debounceQuery(searchValue);
@@ -52,9 +67,9 @@ function StudentsComponent({ test_id }) {
 					themeType="tertiary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="local_rates" title="Appeared" badge={3} />
+					<TabPanel name="appeared" title="Appeared" badge={list?.stats?.appeared || '0'} />
 
-					<TabPanel name="suggested_rates" title="Not Appeared" badge={5} />
+					<TabPanel name="not_appeared" title="Not Appeared" badge={list?.stats?.appeared || '0'} />
 				</Tabs>
 			</div>
 

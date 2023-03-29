@@ -4,7 +4,7 @@ import SortComponent from '../../../commons/SortComponent';
 
 import styles from './styles.module.css';
 
-const tableColumns = ({ sortFilter, setSortFilter }) => [
+const appearedColumns = ({ sortFilter, setSortFilter }) => [
 	{
 		Header: (
 			<div className={styles.container}>
@@ -41,11 +41,11 @@ const tableColumns = ({ sortFilter, setSortFilter }) => [
 			</div>
 		),
 		id       : 'score_achieved',
-		accessor : ({ score_achieved = '', total_score }) => (
+		accessor : ({ score_achieved = '', total_score = '' }) => (
 			<section>
-				{score_achieved || '0'}
+				{Number(score_achieved).toFixed(2) || '0'}
 				/
-				{total_score}
+				{Number(total_score).toFixed(2) || '0'}
 			</section>
 		),
 	},
@@ -63,7 +63,7 @@ const tableColumns = ({ sortFilter, setSortFilter }) => [
 		),
 		id       : 'percentile',
 		accessor : ({ percentile = '' }) => (
-			<div>{percentile !== null ? percentile.toFixed(2) : ' '}</div>
+			<div>{percentile !== null ? Number(percentile).toFixed(2) : ' '}</div>
 		),
 	},
 	{
@@ -99,5 +99,28 @@ const tableColumns = ({ sortFilter, setSortFilter }) => [
 		),
 	},
 ];
+
+const notAppeardColumns = () => [
+	{
+		Header   : 'NAME',
+		id       : 'name',
+		accessor : ({ name = '' }) => (
+			<section>{startCase(name)}</section>
+		),
+	},
+	{
+		Header   : 'EMAIL',
+		id       : 'email',
+		accessor : ({ email = '' }) => (
+			<section>{email}</section>
+		),
+	},
+];
+
+const tableColumns = ({ sortFilter, setSortFilter, activeTab }) => {
+	if (activeTab === 'appeared') { return appearedColumns({ sortFilter, setSortFilter }); }
+
+	return notAppeardColumns();
+};
 
 export default tableColumns;

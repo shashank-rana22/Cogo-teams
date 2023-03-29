@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import SingleQuestionComponent from '../../../SingleQuestionComponent';
 
-import getControls from './controls';
+import controls from './controls';
 import styles from './styles.module.css';
 
 function CaseStudyForm({
@@ -22,9 +22,7 @@ function CaseStudyForm({
 	setAllKeysSaved,
 	mode,
 }) {
-	const controls = getControls();
-
-	const fieldArrayControls = controls[0];
+	const fieldArrayControls = controls?.[0];
 
 	const { fields, append, remove } = useFieldArray({
 		control,

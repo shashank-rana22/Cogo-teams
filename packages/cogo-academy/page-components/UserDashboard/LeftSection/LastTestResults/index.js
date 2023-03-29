@@ -31,7 +31,7 @@ function LastTestResults() {
 
 	const hasPassed = status === 'passed';
 
-	if (isEmpty(stats_data) || loading) {
+	if (loading || isEmpty(stats_data)) {
 		return null;
 	}
 
