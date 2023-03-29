@@ -15,7 +15,7 @@ function BasicDetails({ basic_info_data }) {
 						<div className={styles.text_bottom}>
 							{basic_info_data.topics_covered.length > 0 ? (
 								<div>{basic_info_data.topics_covered.join(', ')}</div>
-							) : (null)}
+							) : ('-')}
 						</div>
 					</div>
 
@@ -29,6 +29,7 @@ function BasicDetails({ basic_info_data }) {
 						</div>
 						<div className={styles.text_bottom}>
 							{basic_info_data.time_taken || ' '}
+							<div className={styles.minutes}> minutes </div>
 						</div>
 					</div>
 
@@ -61,7 +62,7 @@ function BasicDetails({ basic_info_data }) {
 
 						</div>
 						<div className={styles.text_bottom} style={{ fontWeight: '600', color: '#221F20' }}>
-							{basic_info_data.total_students_appeared || ' '}
+							{basic_info_data.total_students_appeared || 0}
 						</div>
 					</div>
 
@@ -72,7 +73,7 @@ function BasicDetails({ basic_info_data }) {
 							Passed
 						</div>
 						<div className={styles.text_bottom} style={{ fontWeight: '600', color: '#221F20' }}>
-							{basic_info_data.failed_and_passed.total_passed || ' '}
+							{basic_info_data.failed_and_passed.total_passed || 0}
 						</div>
 					</div>
 					<div className={styles.text} style={{ marginLeft: '16px' }}>
@@ -80,7 +81,7 @@ function BasicDetails({ basic_info_data }) {
 							Failed
 						</div>
 						<div className={styles.text_bottom} style={{ fontWeight: '600', color: '#221F20' }}>
-							{basic_info_data.failed_and_passed.total_failed || ' '}
+							{basic_info_data.failed_and_passed.total_failed || 0}
 						</div>
 					</div>
 
