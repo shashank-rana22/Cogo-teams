@@ -35,6 +35,10 @@ function TestResult() {
 		push('/learning/tests/dashboard');
 	};
 
+	if (loading) {
+		return 'loading';
+	}
+
 	return (
 		<div>
 			<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
