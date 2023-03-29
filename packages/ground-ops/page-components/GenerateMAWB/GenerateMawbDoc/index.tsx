@@ -31,6 +31,7 @@ interface Props {
 	setGenerate?:Function;
 	activeCategory?: String;
 	hawbDetails?: Array<String | boolean>;
+	activeHawb?: String | number;
 	setHawbDetails?:Function;
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
@@ -72,6 +73,7 @@ function GenerateMawb({
 	activeCategory = '',
 	hawbDetails = [],
 	setHawbDetails = () => {},
+	activeHawb,
 	setActiveHawb,
 	setActiveKey,
 }:Props) {
@@ -103,6 +105,7 @@ function GenerateMawb({
 		setActiveHawb,
 		setActiveKey,
 		handleClick,
+		activeHawb,
 	});
 
 	const takeImageScreenShot = async (node) => {
@@ -274,6 +277,7 @@ function GenerateMawb({
 						formData={filteredData}
 						taskItem={taskItem}
 						whiteout={whiteout}
+						activeCategory={activeCategory}
 					/>
 					<ShipmentDetails
 						formData={filteredData}
@@ -290,6 +294,7 @@ function GenerateMawb({
 						formData={filteredData}
 						data={data}
 						whiteout={whiteout}
+						activeCategory={activeCategory}
 					/>
 				</div>
 			</div>

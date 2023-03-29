@@ -10,15 +10,16 @@ interface Props {
 	formData?: NestedObj;
 	taskItem?: NestedObj;
 	whiteout?:boolean;
+	activeCategory?: String;
 }
 
-function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = false }:Props) {
+function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = false, activeCategory = '' }:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';
 	}
 
-	const { awbNumber = '' } = taskItem;
+	const { awbNumber = '', document_number:documentNo = '' } = taskItem;
 	return (
 		<div className={styles.container} style={{ pointerEvents: 'none' }}>
 			<div className={cl`
@@ -39,7 +40,10 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 					`}
 						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 18 }}>{awbNumber.substring(0, 3)}</p>
+						<p style={{ fontSize: 18 }}>
+							{activeCategory === 'mawb' ? awbNumber.substring(0, 3)
+								: documentNo.substring(0, 4)}
+						</p>
 					</div>
 					<div
 						className={cl`
@@ -57,7 +61,9 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 						${styles.mawb_number_subdivision_second} 
 					`}
 					>
-						<p style={{ fontSize: 18 }}>{awbNumber.substring(4, 13)}</p>
+						<p style={{ fontSize: 18 }}>
+							{activeCategory === 'mawb' ? awbNumber.substring(4, 13) : documentNo.substring(5, 13)}
+						</p>
 					</div>
 				</div>
 				<div className={cl`
@@ -66,7 +72,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 					${styles.mawb_bill_number} 
 				`}
 				>
-					<p style={{ fontSize: 18 }}>{awbNumber}</p>
+					<p style={{ fontSize: 18 }}>{activeCategory === 'mawb' ? awbNumber : documentNo}</p>
 				</div>
 			</div>
 			<div className={styles.flex} style={{ minHeight: 140 }}>
@@ -165,8 +171,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 								textTransform : 'uppercase',
 							}}
 						>
-							{formData?.airline}
-
+							{activeCategory === 'mawb' ? formData?.airline : 'HOUSE AIRWAY BILL'}
 						</p>
 					</div>
 					<div className={cl`

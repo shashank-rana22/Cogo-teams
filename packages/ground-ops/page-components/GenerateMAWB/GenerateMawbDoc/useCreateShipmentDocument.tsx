@@ -17,7 +17,7 @@ interface Props {
 	handleClick?: Function;
 	result?: object;
 	getHawb?: Function;
-	activeHawb?: object;
+	activeHawb?: String | number;
 }
 
 const useCreateShipmentDocument = ({
@@ -30,7 +30,7 @@ const useCreateShipmentDocument = ({
 	setActiveHawb = () => {},
 	setActiveKey = () => {},
 	// handleClick = () => {},
-	activeHawb = {},
+	activeHawb = '',
 }:Props) => {
 	let api = 'create_shipment_document';
 	if (edit) api = 'update_shipment_document';
@@ -48,7 +48,12 @@ const useCreateShipmentDocument = ({
 		if (hawbSuccess) {
 			const updatedDetails = (hawbDetails || []).map((item:any) => {
 				if (item.id === activeHawb) {
-					return { ...item, id: hawbData?.data?.data?.document_number, isNew: false };
+					return {
+						...item,
+						id         : hawbData?.data?.id,
+						documentNo : hawbData?.data?.data?.document_number,
+						isNew      : false,
+					};
 				}
 				return item;
 			});

@@ -48,7 +48,7 @@ function GenerateMAWB({
 
 	const [disableClass, setDisableClass] = useState(false);
 	const [hawbDetails, setHawbDetails] = useState([
-		{ id: new Date().getTime(), isNew: true },
+		{ id: new Date().getTime(), documentNo: null, isNew: true },
 	]);
 
 	const [activeHawb, setActiveHawb] = useState(hawbDetails[0].id);
@@ -242,6 +242,7 @@ function GenerateMAWB({
 								setHawbDetails={setHawbDetails}
 								setActiveHawb={setActiveHawb}
 								setActiveKey={setActiveKey}
+								activeHawb={activeHawb}
 							/>
 						</Modal.Body>
 

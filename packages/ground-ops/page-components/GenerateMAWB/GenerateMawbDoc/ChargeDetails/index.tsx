@@ -15,6 +15,7 @@ interface Props {
 	formData?: NestedObj;
 	data?:NestedObj;
 	whiteout?:boolean;
+	activeCategory?: String;
 }
 
 function ChargeDetails({
@@ -23,6 +24,7 @@ function ChargeDetails({
 	formData,
 	data = {},
 	whiteout = false,
+	activeCategory = '',
 }:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
@@ -41,6 +43,7 @@ function ChargeDetails({
 					taskItem={taskItem}
 					formData={formData}
 					whiteout={whiteout}
+					activeCategory={activeCategory}
 				/>
 			</div>
 
