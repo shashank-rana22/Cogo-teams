@@ -1,5 +1,4 @@
-import { Button, Tooltip } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
+import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
