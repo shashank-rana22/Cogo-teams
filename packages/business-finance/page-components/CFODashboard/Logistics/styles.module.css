@@ -1,0 +1,105 @@
+.service_stats {
+	min-width: 49%;
+	height: 221px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.text_filters_gap {
+	display: flex;
+}
+
+.receivables_data {
+	display: flex;
+}
+
+.label {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 30px;
+	letter-spacing: 0.4px;
+}
+
+.recei_label {
+	margin-right: 30px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 30px;
+	letter-spacing: 0.4px;
+}
+
+.main {
+	display: flex;
+	justify-content: space-between;
+}
+
+.space_between {
+	display: flex;
+	gap: 16px;
+	margin-top: 30px;
+
+	@media (max-width: 1120px) {
+		flex-direction: column;
+	}
+}
+
+.segment_filters {
+	margin: 20px 30px 0 0;
+}
+
+.text_style {
+	margin: 24px 0 0 30px;
+	font-size: 18px;
+	color: #333;
+}
+
+.icon {
+	margin: 30px 0 0 5px;
+	cursor: pointer;
+}
+
+.border {
+	width: 70px;
+	height: 2px;
+	margin: 4px 0 0 2px;
+	background: #ed3726;
+	border-radius: 4px;
+}
+
+.borders {
+	height: 20px;
+	margin: 0 28px;
+	border-bottom: 1.5px solid #cfcfcf;
+}
+
+.progress {
+	background-color: #e0e0e0;
+}
+
+.texts {
+	margin-left: 36px;
+	font-weight: 400;
+	color: #333;
+	letter-spacing: 0.02em;
+}
+
+.legend {
+	:global {
+		.ui_legend_item {
+			margin: 16px 170px -10px 35px;
+		}
+	}
+}
+
+.progress_bar {
+	:global {
+		.ui_progressbar_filename {
+			display: none;
+		}
+
+		.ui_progressbar_bar {
+			margin: 20px 0 4px 34px;
+			background: #88cad1;
+		}
+	}
+}

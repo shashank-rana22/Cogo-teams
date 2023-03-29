@@ -7566,6 +7566,40 @@ const partner = {
 			access_type : 'private',
 		},
 	],
+	cfo_dashboard: [
+		{
+			api         : 'get_payments_dashboard_finance_profitability_shipment',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_profitability_customer',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_service_wise_rec_pay',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_service_wise_overdue',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_income_expense',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_receivable_payable',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_today_stats',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_purchase_treasury_stats',
+			access_type : 'private',
+		},
+	],
 	translate: [
 		{
 			api         : 'get_translation_translate_list',

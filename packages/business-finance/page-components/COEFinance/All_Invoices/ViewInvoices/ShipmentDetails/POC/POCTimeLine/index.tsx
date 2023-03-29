@@ -30,8 +30,6 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
 
 	const timeLine = data;
 
-	console.log(data, 'data');
-
 	const gettimeLineData = () => {
 		if (timeLine[0]?.eventName === 'POSTED') {
 			const removeLastItem = timeLine.slice(1, timeLine.length);
