@@ -1,5 +1,5 @@
 .container {
-	padding-left: 25px;
+	padding-left: 24px;
 }
 
 .heading {
@@ -29,6 +29,11 @@
 	font-size: 14px;
 	font-weight: 500;
 	color: #000;
+
+	img {
+		max-width: 100%;
+		height: 100%;
+	}
 }
 
 .tags_title {
@@ -42,7 +47,7 @@
 
 .tags_button {
 	padding: 4px 10px;
-	margin-right: 5px;
+	margin-right: 4px;
 	background: white;
 	border: 1px solid #ffe4af;
 	border-radius: 14px;
