@@ -45,7 +45,7 @@ function QuestionsComponent({ test_id }) {
 
 			{loading ? (
 				<div className={styles.placeholder_container}>
-					{[1, 2, 3, 4, 5].map(() => (
+					{Array(5).fill('').map(() => (
 						<div
 							className={styles.placeholder_inner_container}
 						>
