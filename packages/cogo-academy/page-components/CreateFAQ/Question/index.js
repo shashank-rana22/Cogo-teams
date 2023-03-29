@@ -33,7 +33,7 @@ function CreateFAQ() {
 	const router = useRouter();
 	const [editorError, setEditorError] = useState(false);
 
-	const { fetchQuestion, query, data = {}, loading } = useGetQuestion();
+	const { fetchQuestion, query, data = {}, loading, mode } = useGetQuestion();
 
 	const {
 		editorValue,
@@ -81,21 +81,22 @@ function CreateFAQ() {
 
 	const {
 		question_abstract,
-		faq_tags = [],
-		faq_topics = [],
-		answers = [],
-		faq_audiences = [],
+		faq_tags,
+		faq_topics,
+		answers,
+		faq_audiences,
 	} = data || {};
 
 	useEffect(() => {
 		if (query?.id) {
 			fetchQuestion();
 		}
-	}, [fetchQuestion, query?.id]);
+	}, [fetchQuestion, query?.id, mode]);
 
-	const filterTags = useMemo(() => faq_tags?.map((item) => item.id) || [], [faq_tags]);
-	const filterTopics = useMemo(() => faq_topics?.map((item) => item.id) || [], [faq_topics]);
-	const filterAudiences = useMemo(() => faq_audiences?.map((item) => item.id) || [], [faq_audiences]);
+	const filterTags = useMemo(() => (faq_tags || []).map((item) => item.id) || [], [faq_tags]);
+	const filterTopics = useMemo(() => (faq_topics || []).map((item) => item.id) || [], [faq_topics]);
+	const filterAudiences = useMemo(() => (faq_audiences || []).map((item) => item.id) || [], [faq_audiences]);
+	const answer = answers?.[0]?.answer;
 
 	useEffect(() => {
 		if (!loading) {
@@ -103,7 +104,7 @@ function CreateFAQ() {
 			setQuestionValue('tag_ids', filterTags);
 			setQuestionValue('topic_ids', filterTopics);
 			setQuestionValue('audience_ids', filterAudiences);
-			setEditorValue(RichTextEditor?.createValueFromString((answers?.[0]?.answer || ''), 'html'));
+			setEditorValue(RichTextEditor?.createValueFromString((answer || ''), 'html'));
 		}
 	}, [listTopicsLoading,
 		listTagsLoading,
@@ -116,7 +117,8 @@ function CreateFAQ() {
 		filterAudiences,
 		setEditorValue,
 		RichTextEditor,
-		answers]);
+		answer,
+	]);
 
 	useEffect(() => {
 		if (questionPreview !== 'preview') {
