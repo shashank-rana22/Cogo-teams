@@ -25,7 +25,7 @@ function BasicDetails({ basic_info_data }) {
 					<div className={styles.svg}><IcMTimer /></div>
 					<div className={styles.text}>
 						<div className={styles.text_top}>
-							Time Taken
+							Duration
 						</div>
 						<div className={styles.text_bottom}>
 							{basic_info_data.time_taken || ' '}
