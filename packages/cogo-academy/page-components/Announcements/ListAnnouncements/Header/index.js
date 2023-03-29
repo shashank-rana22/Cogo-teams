@@ -65,7 +65,7 @@ function Header({
 	useEffect(() => {
 		setFilters((prev) => ({
 			...prev,
-			q: query,
+			q: query || undefined,
 		}));
 	}, [query, setFilters]);
 
@@ -114,7 +114,7 @@ function Header({
 					/>
 					{search ? (
 						<div className={styles.cross_icon}>
-							<IcMCross onClick={() => setSearch(undefined)} />
+							<IcMCross onClick={() => setSearch('')} />
 						</div>
 					) : null}
 				</div>

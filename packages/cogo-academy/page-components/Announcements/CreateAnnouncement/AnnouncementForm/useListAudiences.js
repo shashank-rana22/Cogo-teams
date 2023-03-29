@@ -1,7 +1,7 @@
 import { Pill } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import WORK_SCOPES_OPTIONS from './CreateAudienceForm/utils/workScopeMappings';
 
@@ -32,8 +32,6 @@ const useListAudiences = () => {
 	}, [triggerAudiences]);
 
 	const { list: audienceList = [] } = audienceData || {};
-
-	const audienceOptions = [];
 
 	const getAudienceOption = (item) => {
 		const {
@@ -79,9 +77,7 @@ const useListAudiences = () => {
 		return { label, q, value };
 	};
 
-	(audienceList || []).forEach((item) => {
-		audienceOptions.push(getAudienceOption(item));
-	});
+	const audienceOptions = useMemo(() => audienceList.map((audience) => getAudienceOption(audience)), [audienceList]);
 
 	return {
 		audienceOptions,
