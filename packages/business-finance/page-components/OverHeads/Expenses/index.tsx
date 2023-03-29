@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { ListDataProps } from '../../AccountPayables/commons/Interfaces';
 import Filter from '../../commons/Filters';
 import SegmentedControl from '../../commons/SegmentedControl';
-import showOverflowingNumbers from '../../commons/showOverflowingNumber';
 import { formatDate } from '../../commons/utils/formatDate';
 import List from '../commons/List';
 import { nonRecurringFilters, recurringFilters } from '../Controls/nonRecurringFilters';
@@ -188,7 +187,7 @@ function ExpenseComponent() {
 				const date2 = new Date(endDate);
 				const timeDifference = date2.getTime() - date1.getTime();
 				const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
-				const monthDifference = (daysDifference / 30).toFixed(0);
+				const monthDifference = Math.round(daysDifference / 30);
 				if (Number(monthDifference) < 1) {
 					difference = `${daysDifference} days`;
 				} else {
@@ -319,7 +318,7 @@ function ExpenseComponent() {
 						className={styles.proof}
 						rel="noreferrer"
 					>
-						{showOverflowingNumbers(proofDocuments[0], 13)}
+						1 Document
 
 					</a>
 				);
@@ -452,7 +451,7 @@ function ExpenseComponent() {
 						<div className={styles.no_data}>
 							<img
 								style={{ width: '26%', margin: '10%' }}
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg"
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no result.svg"
 								alt="no data"
 							/>
 						</div>

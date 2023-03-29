@@ -41,7 +41,12 @@ function Overheads() {
 				</TabPanel>
 
 				<TabPanel name="reports" title="Reports">
-					<div>No data :)</div>
+					<div className={styles.coming_soon}>
+						<img
+							alt="coming soon"
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/coming soon.png"
+						/>
+					</div>
 				</TabPanel>
 			</Tabs>
 		</div>

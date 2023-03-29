@@ -51,6 +51,10 @@ function VenderComponent() {
 		}));
 	};
 
+	// const handleClick = () => {
+	// 	router.push('/onboard-vendor');  // Will redirect to VRM when their VRM is live
+	// };
+
 	const renderHeaders = () => (
 		<div className={styles.header_container}>
 			<div className={styles.left_container}>
@@ -83,7 +87,7 @@ function VenderComponent() {
 				<Button
 					size="lg"
 					themeType="secondary"
-					onClick={() => setShowModal(true)}
+					disabled
 					style={{ border: '1px solid black', fontSize: '14px' }}
 				>
 					Create Vendor
@@ -165,12 +169,12 @@ function VenderComponent() {
 		const { openInvoices = 0, openInvoiceAmount = 0, currency = '' } = item;
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-				{openInvoices}
+				{currency}
+				{' '}
+				{openInvoiceAmount}
 				<div>
 					(
-					{currency}
-					{' '}
-					{openInvoiceAmount}
+					{openInvoices}
 					)
 				</div>
 			</div>
@@ -261,7 +265,7 @@ function VenderComponent() {
 						<div className={styles.no_data}>
 							<img
 								style={{ width: '26%', margin: '10%' }}
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg"
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no result.svg"
 								alt="no data"
 							/>
 						</div>

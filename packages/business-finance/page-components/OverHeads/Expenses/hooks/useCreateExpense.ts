@@ -158,17 +158,12 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		{ manual: true },
 	);
 
-	// const payload = getPayload({
-
-	// });
-
 	const payload = {
 		// expenseConfigurationId : 'example', only in case of recurring
 		request: {
 			job: {
 				jobSource   : 'OVERHEAD',
 				jobType     : 'EXPENSE',
-				// transactionDate : formatDate(transactionDate, 'yyyy-MM-dd', {}, false),
 				referenceId : '',
 				jobDetails  : {
 					vendorDetails: {
