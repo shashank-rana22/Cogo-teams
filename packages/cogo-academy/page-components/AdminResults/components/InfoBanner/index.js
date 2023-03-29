@@ -17,7 +17,7 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, load
 	return (
 		<div className={styles.container} style={{ border: `1px solid ${borderColor}`, background: backgroundColor }}>
 			<div className={styles.content}>
-				<Icon style={{ color: iconColor, marginRight: 12, width: 24, height: 24 }} />
+				<Icon className={styles.icon} style={{ color: iconColor }} />
 
 				<b className={styles.margin_right}>{text}</b>
 
