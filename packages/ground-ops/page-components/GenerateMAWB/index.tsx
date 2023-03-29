@@ -240,7 +240,6 @@ function GenerateMAWB({
 								activeCategory={activeCategory}
 								hawbDetails={hawbDetails}
 								setHawbDetails={setHawbDetails}
-								activeHawb={activeHawb}
 								setActiveHawb={setActiveHawb}
 								setActiveKey={setActiveKey}
 							/>

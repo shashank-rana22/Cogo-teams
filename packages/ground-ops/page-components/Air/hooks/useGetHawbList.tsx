@@ -4,9 +4,9 @@ import { useEffect, useCallback } from 'react';
 const useGetHawbList = (shipmentId) => {
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
-			url     : '/air-coe/documents/list',
+			url     : '/air-coe/pending-tasks/list',
 			method  : 'get',
-			authKey : 'get_air_coe_documents_list',
+			authKey : 'get_air_coe_pending_tasks_list',
 		},
 		{ manual: true },
 	);
@@ -14,9 +14,13 @@ const useGetHawbList = (shipmentId) => {
 	const getHawbList = useCallback(() => {
 		(async () => {
 			const payload = {
-				documentState : ['document_accepted', 'document_uploaded', 'document_amendment_requested'],
-				documentType  : ['draft_house_airway_bill'],
+				assignedStakeholder : 'service_ops2_docs',
+				documentState       : ['document_accepted', 'document_uploaded', 'document_amendment_requested'],
+				documentType        : ['draft_house_airway_bill'],
+				task                : ['approve_draft_house_airway_bill', 'amend_draft_house_airway_bill'],
+				isDocDataRequired   : true,
 				shipmentId,
+				pageSize            : 100,
 			};
 			try {
 				await trigger({

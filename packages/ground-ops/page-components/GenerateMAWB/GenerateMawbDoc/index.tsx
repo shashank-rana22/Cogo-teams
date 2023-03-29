@@ -32,7 +32,6 @@ interface Props {
 	activeCategory?: String;
 	hawbDetails?: Array<String | boolean>;
 	setHawbDetails?:Function;
-	activeHawb?: string;
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
 }
@@ -73,7 +72,6 @@ function GenerateMawb({
 	activeCategory = '',
 	hawbDetails = [],
 	setHawbDetails = () => {},
-	activeHawb,
 	setActiveHawb,
 	setActiveKey,
 }:Props) {
@@ -89,15 +87,11 @@ function GenerateMawb({
 
 	const [whiteout, setWhiteout] = useState(false);
 
-	const [result, setResult] = useState({});
-
 	const handleClick = () => {
 		if (back) {
 			setBack(!back);
 		}
 	};
-
-	console.log('hawbDetails', hawbDetails);
 
 	const { upload, loading } = useCreateShipmentDocument({
 		edit,
@@ -109,7 +103,6 @@ function GenerateMawb({
 		setActiveHawb,
 		setActiveKey,
 		handleClick,
-		setResult,
 	});
 
 	const takeImageScreenShot = async (node) => {
@@ -161,18 +154,8 @@ function GenerateMawb({
 		};
 
 		upload({ payload });
-
-		// handleClick();
 		setSaveDocument(false);
 	};
-
-	// useEffect(() => {
-	// 	console.log('result', result);
-	// 	if (result.status === 200) {
-	// 		getHawb(result.data.ids[0]);
-	// 	}
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [result]);
 
 	const handleView = (download24) => {
 		if (taskItem.documentState === 'document_accepted') {

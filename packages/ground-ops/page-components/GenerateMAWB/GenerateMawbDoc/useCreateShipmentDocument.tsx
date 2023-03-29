@@ -16,7 +16,6 @@ interface Props {
 	setActiveKey?: Function;
 	handleClick?: Function;
 	result?: object;
-	setResult?: Function;
 	getHawb?: Function;
 	activeHawb?: object;
 }

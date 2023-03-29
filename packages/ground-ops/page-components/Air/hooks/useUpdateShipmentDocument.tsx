@@ -15,7 +15,7 @@ const useUpdateShipmentDocument = () => {
 			listAPi({});
 			Toast.success('Document Approved Successfully');
 		} catch (err) {
-			Toast.error(err);
+			Toast.error(err?.response?.data?.base?.[0] || 'Something went wrong');
 		}
 	};
 

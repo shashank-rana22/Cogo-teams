@@ -116,6 +116,8 @@ function ApprovalPending({
 				functions={functions}
 				activeTab={activeTab}
 				Child={HAWBList}
+				setViewDoc={setViewDoc}
+				setItem={setItem}
 			/>
 			{show && <DownloadModal show={show} setShow={setShow} />}
 			{showApprove && (
