@@ -7,8 +7,6 @@ import styles from './styles.module.css';
 function Header({
 	activeToggle = false,
 	setActiveToggle = () => {},
-	// shipmentDocumentsHookSetters,
-	// shipmentFilters,
 	shipment_data = {},
 	data = {},
 	filters = {},
@@ -41,17 +39,17 @@ function Header({
 							size="sm"
 							placeholder="Select Source"
 							style={{ padding: '6px', marginRight: '6px', width: '200px' }}
-							value={filters?.source}
+							value={filters?.uploaded_by_org_id}
 							options={SourceOptions || []}
-							onChange={(e) => setFilters({ ...filters, source: e })}
+							onChange={(e) => setFilters({ ...filters, uploaded_by_org_id: e })}
 							isClearable
 						/>
 						<Select
 							size="sm"
 							placeholder="Select Service"
 							style={{ padding: '6px', marginRight: '6px', width: '200px' }}
-							value={filters?.service}
-							onChange={(e) => setFilters({ ...filters, service: e })}
+							value={filters?.service_type}
+							onChange={(e) => setFilters({ ...filters, service_type: e })}
 							options={serviceOptions || {}}
 							isClearable
 						/>

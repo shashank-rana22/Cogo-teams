@@ -1,16 +1,15 @@
+import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
-import { useState, useContext, useCallback } from 'react';
+import { useContext, useCallback } from 'react';
 
-const useListTradeDocuments = () => {
+const useListOrganizationDocuments = () => {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { importer_exporter_id = '', id = '' } = shipment_data;
 
-	const [page, setPage] = useState(1);
-
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/list_trade_documents',
+		url    : '/list_organization_documents',
 		method : 'GET',
 	}, { manual: true });
 
@@ -19,8 +18,8 @@ const useListTradeDocuments = () => {
 			try {
 				await trigger({
 					params: {
-						page,
-						filters: {
+						page    : 1000,
+						filters : {
 							status          : ['accepted'],
 							organization_id : importer_exporter_id,
 							shipment_id     : id || undefined,
@@ -28,17 +27,16 @@ const useListTradeDocuments = () => {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				Toast.error(err);
 			}
 		})();
-	}, [trigger, importer_exporter_id, page, id]);
+	}, [trigger, importer_exporter_id, id]);
 
 	return {
 		data,
 		loading,
-		setPage,
-	 getList,
+		getList,
 	};
 };
 
-export default useListTradeDocuments;
+export default useListOrganizationDocuments;

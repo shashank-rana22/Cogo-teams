@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useDeleteDocument = ({ refetch }) => {
+const useUpdateOrganizationDocument = ({ refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_organization_document',
 		method : 'POST',
@@ -27,4 +27,4 @@ const useDeleteDocument = ({ refetch }) => {
 	};
 };
 
-export default useDeleteDocument;
+export default useUpdateOrganizationDocument;

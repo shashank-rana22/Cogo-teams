@@ -24,7 +24,7 @@ function useGetPendingTasks({ shipment_data = {}, task_type = '' }) {
 					},
 				});
 			} catch (err) {
-				Toast.error(err);
+				console.log(err);
 			}
 		})();
 	}, [trigger, id, task_type]);
