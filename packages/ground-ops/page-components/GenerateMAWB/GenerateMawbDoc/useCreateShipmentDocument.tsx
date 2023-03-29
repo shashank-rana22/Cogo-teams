@@ -17,7 +17,7 @@ interface Props {
 	handleClick?: Function;
 	result?: object;
 	getHawb?: Function;
-	activeHawb?: String | number;
+	activeHawb?: object;
 }
 
 const useCreateShipmentDocument = ({
@@ -30,7 +30,7 @@ const useCreateShipmentDocument = ({
 	setActiveHawb = () => {},
 	setActiveKey = () => {},
 	// handleClick = () => {},
-	activeHawb = '',
+	activeHawb = {},
 }:Props) => {
 	let api = 'create_shipment_document';
 	if (edit) api = 'update_shipment_document';
@@ -47,7 +47,7 @@ const useCreateShipmentDocument = ({
 	useEffect(() => {
 		if (hawbSuccess) {
 			const updatedDetails = (hawbDetails || []).map((item:any) => {
-				if (item.id === activeHawb) {
+				if (item.id === activeHawb.id) {
 					return {
 						...item,
 						id         : hawbData?.data?.id,
@@ -66,7 +66,7 @@ const useCreateShipmentDocument = ({
 	useEffect(() => {
 		if (success) {
 			// handleClick();
-			setActiveHawb(hawbDetails[hawbDetails.length - 1].id);
+			setActiveHawb(hawbDetails[hawbDetails.length - 1]);
 			setActiveKey('basic');
 			setSuccess(false);
 		}

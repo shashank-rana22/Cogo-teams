@@ -53,7 +53,7 @@ function GenerateMAWB({
 		{ id: new Date().getTime(), documentNo: null, isNew: true },
 	]);
 
-	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]?.id);
+	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]);
 	const [activeKey, setActiveKey] = useState('basic');
 
 	const fields = mawbControls(disableClass);
@@ -109,7 +109,9 @@ function GenerateMAWB({
 	}, [activeCategory, hawbListLoading]);
 
 	useEffect(() => {
-		getHawb(activeHawb);
+		if (!activeHawb.isNew) {
+			getHawb(activeHawb.id);
+		}
 	}, [activeHawb]);
 
 	useEffect(() => {

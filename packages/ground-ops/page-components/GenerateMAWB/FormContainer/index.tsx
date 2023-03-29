@@ -41,8 +41,8 @@ function FormContainer({
 		return (
 			<Button
 				onClick={() => {
-					setHawbDetails((prev) => prev.filter((itm) => itm.id !== activeHawb));
-					setActiveHawb(hawbDetails.find((ele) => ele.id !== activeHawb).id);
+					setHawbDetails((prev) => prev.filter((itm) => itm.id !== activeHawb.id));
+					setActiveHawb(hawbDetails.find((ele) => ele.id !== activeHawb.id));
 				}}
 				themeType="secondary"
 				style={{ border: '1px solid #333', marginLeft: '8%' }}
@@ -62,14 +62,14 @@ function FormContainer({
 							<div
 								key={hawbItem.id}
 								onClick={() => {
-									setActiveHawb(hawbItem.id);
+									setActiveHawb(hawbItem);
 								}}
 								role="presentation"
 							>
 								{' '}
 								<div
 									className={hawbItem.id
-                                === activeHawb ? styles.hawb_container_click : styles.hawb_container}
+                                === activeHawb.id ? styles.hawb_container_click : styles.hawb_container}
 								>
 									{!hawbItem.documentNo
 									&& `HAWB - ${hawbItem.id}`}

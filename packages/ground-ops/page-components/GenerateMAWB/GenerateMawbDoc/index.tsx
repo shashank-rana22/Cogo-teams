@@ -31,7 +31,7 @@ interface Props {
 	setGenerate?:Function;
 	activeCategory?: String;
 	hawbDetails?: Array<String | boolean>;
-	activeHawb?: String | number;
+	activeHawb?: object;
 	setHawbDetails?:Function;
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
@@ -73,7 +73,7 @@ function GenerateMawb({
 	activeCategory = '',
 	hawbDetails = [],
 	setHawbDetails = () => {},
-	activeHawb,
+	activeHawb = {},
 	setActiveHawb,
 	setActiveKey,
 }:Props) {
