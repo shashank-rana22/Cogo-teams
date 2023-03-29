@@ -1,7 +1,6 @@
 .main_container {
 	display: flex;
 	width: 20%;
-	height: fit-content;
 }
 
 .container {
