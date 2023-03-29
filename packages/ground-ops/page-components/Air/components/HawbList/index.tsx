@@ -8,7 +8,7 @@ import useGetHawbList from '../../hooks/useGetHawbList';
 import HawbListItem from './HawbListItem';
 import styles from './styles.module.css';
 
-function HawbList({ data }) {
+function HawbList({ data, setViewDoc, setItem }) {
 	const { fields } = HawbFields;
 	const { data:hawbData, loading } = useGetHawbList(data.shipmentId);
 
@@ -18,14 +18,19 @@ function HawbList({ data }) {
 		}
 	};
 
+	const handleDownloadMAWB = (singleItem) => {
+		setViewDoc(true);
+		setItem(singleItem);
+	};
+
 	const functions = {
 		handleDownload: (singleItem) => (
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={singleItem?.documentData?.status === 'document_uploaded'
+				onClick={singleItem?.documentData?.status === 'uploaded'
 					? () => { handleClickOnDownload(singleItem.documentUrl); }
-					: () => { handleClickOnDownload(singleItem.documentUrl); }}
+					: () => { handleDownloadMAWB(singleItem); }}
 			>
 				<IcMDownload fill="#8B8B8B" />
 
@@ -40,7 +45,7 @@ function HawbList({ data }) {
 					<header className={styles.header}>
 						{fields.map((field) => (
 							<div
-								className={`${styles.col} ${field.className || ''}`}
+								className={styles.col}
 								style={{ '--span': field.span || 1 } as React.CSSProperties}
 							>
 								{ field.label }

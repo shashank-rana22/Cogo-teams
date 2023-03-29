@@ -30,7 +30,7 @@ interface Props {
 	chargeableWeight?:number;
 	setGenerate?:Function;
 	activeCategory?: String;
-	hawbDetails?: Array<string>;
+	hawbDetails?: Array<String | boolean>;
 	setHawbDetails?:Function;
 	activeHawb?: string;
 	setActiveHawb?: Function;
@@ -97,6 +97,8 @@ function GenerateMawb({
 		}
 	};
 
+	console.log('hawbDetails', hawbDetails);
+
 	const { upload, loading } = useCreateShipmentDocument({
 		edit,
 		setGenerate,
@@ -108,7 +110,6 @@ function GenerateMawb({
 		setActiveKey,
 		handleClick,
 		setResult,
-		activeHawb,
 	});
 
 	const takeImageScreenShot = async (node) => {

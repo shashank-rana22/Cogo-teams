@@ -6,11 +6,11 @@ import { useState, useEffect } from 'react';
 import useGetHawb from '../Helpers/hooks/useGetHawb';
 
 interface Props {
-	edit?: boolean | string;
+	edit?: boolean | String;
 	setGenerate?:Function;
 	setEdit?:Function;
 	activeCategory?: String;
-	hawbDetails?: Array<string>;
+	hawbDetails?: Array<any>;
 	setHawbDetails?: Function;
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
@@ -30,9 +30,7 @@ const useCreateShipmentDocument = ({
 	setHawbDetails = () => {},
 	setActiveHawb = () => {},
 	setActiveKey = () => {},
-	handleClick = () => {},
-	setResult = () => {},
-	result = {},
+	// handleClick = () => {},
 	activeHawb = {},
 }:Props) => {
 	let api = 'create_shipment_document';

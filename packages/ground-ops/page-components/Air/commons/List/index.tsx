@@ -18,6 +18,8 @@ interface Props {
 	functions?: FunctionObjects;
 	activeTab?: string;
 	Child?: ReactFragment;
+	setViewDoc?: Function;
+	setItem?: Function;
 }
 
 function List({
@@ -29,6 +31,8 @@ function List({
 	functions,
 	activeTab = '',
 	Child = () => {},
+	setViewDoc = () => {},
+	setItem = () => {},
 } :Props) {
 	const { data = {} } = listData;
 	const { finalData = [], resourceLoading } = GetFinalList({ data, listData, loading });
@@ -53,6 +57,8 @@ function List({
 						loading={resourceLoading}
 						isOpen={isOpen}
 						Child={Child}
+						setViewDoc={setViewDoc}
+						setItem={setItem}
 					/>
 					{singleitem.blCategory === 'hawb' && ['approval_pending', 'approved_awb'].includes(activeTab) && (
 						<div

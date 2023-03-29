@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { ApprovedAWBFields } from '../../configurations/approved_awb';
+import HAWBList from '../HawbList';
 import UploadModal from '../UploadModal';
 
 function ApprovedAWB({
@@ -66,6 +67,9 @@ function ApprovedAWB({
 				loading={loading}
 				functions={functions}
 				activeTab={activeTab}
+				Child={HAWBList}
+				setViewDoc={setViewDoc}
+				setItem={setItem}
 			/>
 			<UploadModal
 				showUpload={showUpload}

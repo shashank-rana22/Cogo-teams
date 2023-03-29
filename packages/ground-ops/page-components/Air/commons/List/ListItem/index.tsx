@@ -14,6 +14,8 @@ export interface Props {
 	isMobile?: boolean;
 	isOpen?: string;
 	Child?: ReactFragment;
+	setViewDoc?: Function;
+	setItem?: Function;
 }
 
 function CardItem({
@@ -24,6 +26,8 @@ function CardItem({
 	isMobile = false,
 	isOpen = '',
 	Child = () => {},
+	setViewDoc = () => {},
+	setItem = () => {},
 }:Props) {
 	return (
 		<div>
@@ -70,6 +74,8 @@ function CardItem({
 			{isOpen === singleitem.id && (
 				<Child
 					data={singleitem}
+					setViewDoc={setViewDoc}
+					setItem={setItem}
 				/>
 			)}
 		</div>

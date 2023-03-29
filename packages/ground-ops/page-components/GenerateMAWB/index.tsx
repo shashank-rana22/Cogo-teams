@@ -93,7 +93,7 @@ function GenerateMAWB({
 		} else {
 			setTaskItem({ ...item, ...item.documentData });
 		}
-		finalFields.forEach((c:any) => {
+		finalFields.forEach((c) => {
 			if (taskItem[c.name]) {
 				setValue(c.name, taskItem[c.name]);
 			} else {
@@ -135,7 +135,7 @@ function GenerateMAWB({
 
 	useEffect(() => {
 		packingList({ item });
-		finalFields.forEach((c:any) => {
+		finalFields.forEach((c) => {
 			setValue(c.name, taskItem[c.name]);
 		});
 		if (!viewDoc) {
