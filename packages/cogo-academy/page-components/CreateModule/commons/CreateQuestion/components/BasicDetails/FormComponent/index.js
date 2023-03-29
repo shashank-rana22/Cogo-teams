@@ -65,7 +65,7 @@ function FormComponent({
 								<Element
 									control={control}
 									{...controlItem}
-									{...(name === 'question_type' && { options: newOptions })}
+									{...(name === 'question_type' ? { options: newOptions } : {})}
 								/>
 								{errors[name] && <div className={styles.error_msg}>This is required</div>}
 							</div>
