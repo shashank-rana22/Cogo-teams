@@ -14,3 +14,4 @@ declare module '@cogoport/business-finance/page-components/COEFinance/Costsheet'
 declare module '@cogoport/business-finance/page-components/COEFinance/All_Invoices/ViewInvoices';
 declare module '@cogoport/business-finance/page-components/Reports';
 declare module '@cogoport/business-finance/page-components/AccountPayables';
+declare module '@cogoport/business-finance/page-components/AccountReceivables/components';
