@@ -22,14 +22,14 @@ function ShipmentDetails() {
 
 	const { servicesGet } = useGetServices({ shipment_data, additional_methods });
 	const { getTimeline } = useGetTimeLine({ shipment_data });
+	const { ActiveStakeholder } = useStakeholderCheck();
 
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
 		...getTimeline,
-	}), [get, servicesGet, getTimeline]);
-
-	const { ActiveStakeholder } = useStakeholderCheck();
+		ActiveStakeholder,
+	}), [get, servicesGet, getTimeline, ActiveStakeholder]);
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
