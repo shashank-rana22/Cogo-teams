@@ -19,12 +19,11 @@ function EntityTab({ activeTab, setActiveTab }:ItemProps) {
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="ALL" title={<Entity entityCode="all" />} />
-
-					<TabPanel name="101" title={<Entity entityCode="101" />} />
-					<TabPanel name="201" title={<Entity entityCode="201" />} />
-					<TabPanel name="301" title={<Entity entityCode="301" />} />
-					<TabPanel name="401" title={<Entity entityCode="401" />} />
+					<TabPanel name="ALL" title={<Entity entityCode="all" /> as unknown as string} />
+					<TabPanel name="101" title={<Entity entityCode="101" /> as unknown as string} />
+					<TabPanel name="201" title={<Entity entityCode="201" /> as unknown as string} />
+					<TabPanel name="301" title={<Entity entityCode="301" /> as unknown as string} />
+					<TabPanel name="401" title={<Entity entityCode="401" /> as unknown as string} />
 				</Tabs>
 			</div>
 		</div>

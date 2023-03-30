@@ -46,7 +46,9 @@ function AmountBoxes({ activeTab }:ItemData) {
 										placement="top"
 										interactive
 									>
-										{getAmountInLakhCrK(accountPayables)}
+										<div>
+											{getAmountInLakhCrK(accountPayables)}
+										</div>
 									</Tooltip>
 								</div>
 								<div className={styles.vr} />
@@ -80,7 +82,9 @@ function AmountBoxes({ activeTab }:ItemData) {
 										placement="top"
 										interactive
 									>
-										{getAmountInLakhCrK(openInvoicesAmount)}
+										<div>
+											{getAmountInLakhCrK(openInvoicesAmount)}
+										</div>
 									</Tooltip>
 								</div>
 								<div className={styles.account_payables}>
@@ -114,7 +118,9 @@ function AmountBoxes({ activeTab }:ItemData) {
 										placement="top"
 										interactive
 									>
-										{getAmountInLakhCrK(onAccountAmount)}
+										<div>
+											{getAmountInLakhCrK(onAccountAmount)}
+										</div>
 									</Tooltip>
 								</div>
 								<div className={styles.account_payables}>
@@ -147,7 +153,9 @@ function AmountBoxes({ activeTab }:ItemData) {
 										placement="top"
 										interactive
 									>
-										{getAmountInLakhCrK(creditNoteAmount)}
+										<div>
+											{getAmountInLakhCrK(creditNoteAmount)}
+										</div>
 									</Tooltip>
 								</div>
 								<div className={styles.account_payables}>

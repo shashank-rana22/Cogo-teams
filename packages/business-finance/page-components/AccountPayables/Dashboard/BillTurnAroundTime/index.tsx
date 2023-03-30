@@ -126,7 +126,6 @@ function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
 						size="lg"
 						themeType="secondary"
 						style={{ marginTop: '2px' }}
-						role="presentation"
 						onClick={handleSubmit(onApply)}
 					>
 						Apply
@@ -138,7 +137,6 @@ function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
 						size="md"
 						themeType="linkUi"
 						style={{ color: '#F68B21', marginTop: '16px' }}
-						role="presentation"
 						onClick={() => {
 							setDataList([]);
 							setFirstEvent(undefined);

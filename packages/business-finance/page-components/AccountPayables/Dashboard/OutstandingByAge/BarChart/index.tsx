@@ -28,7 +28,7 @@ function BarChart({ data }:ItemProps) {
 					name="linear_view"
 					size="md"
 					showOnOff
-					value={isLinearView}
+					value={isLinearView as unknown as string}
 					onChange={() => setIsLinearView(!isLinearView)}
 					disabled={false}
 				/>

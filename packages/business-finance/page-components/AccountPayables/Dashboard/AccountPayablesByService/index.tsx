@@ -42,7 +42,7 @@ function AccountPayablesByService({ activeTab }:ItemProps) {
 							</div>
 							<div className={styles.ocean_value}>
 								<Tooltip content={getFormattedPrice(data[0]?.amount, 'INR')} interactive>
-									{getAmountInLakhCrK(data[0]?.amount)}
+									<div>{getAmountInLakhCrK(data[0]?.amount)}</div>
 								</Tooltip>
 							</div>
 						</div>
@@ -53,7 +53,9 @@ function AccountPayablesByService({ activeTab }:ItemProps) {
 							</div>
 							<div className={styles.ocean_value}>
 								<Tooltip content={getFormattedPrice(data[1]?.amount, 'INR')} interactive>
-									{getAmountInLakhCrK(data[1]?.amount)}
+									<div>
+										{getAmountInLakhCrK(data[1]?.amount)}
+									</div>
 								</Tooltip>
 							</div>
 						</div>
@@ -64,7 +66,9 @@ function AccountPayablesByService({ activeTab }:ItemProps) {
 							</div>
 							<div className={styles.ocean_value}>
 								<Tooltip content={getFormattedPrice(data[2]?.amount, 'INR')} interactive>
-									{getAmountInLakhCrK(data[2]?.amount)}
+									<div>
+										{getAmountInLakhCrK(data[2]?.amount)}
+									</div>
 								</Tooltip>
 							</div>
 						</div>
@@ -75,7 +79,9 @@ function AccountPayablesByService({ activeTab }:ItemProps) {
 							</div>
 							<div className={styles.ocean_value}>
 								<Tooltip content={getFormattedPrice(data[3]?.amount, 'INR')} interactive>
-									{getAmountInLakhCrK(data[3]?.amount)}
+									<div>
+										{getAmountInLakhCrK(data[3]?.amount)}
+									</div>
 								</Tooltip>
 							</div>
 						</div>
@@ -99,7 +105,9 @@ function AccountPayablesByService({ activeTab }:ItemProps) {
 						</div>
 						<div className={styles.ocean_value}>
 							<Tooltip content={getFormattedPrice(data[4]?.amount, 'INR')} interactive>
-								{getAmountInLakhCrK(data[4]?.amount)}
+								<div>
+									{getAmountInLakhCrK(data[4]?.amount)}
+								</div>
 							</Tooltip>
 						</div>
 					</div>
@@ -110,7 +118,9 @@ function AccountPayablesByService({ activeTab }:ItemProps) {
 						</div>
 						<div className={styles.ocean_value}>
 							<Tooltip content={getFormattedPrice(data[5]?.amount, 'INR')} interactive>
-								{getAmountInLakhCrK(data[5]?.amount)}
+								<div>
+									{getAmountInLakhCrK(data[5]?.amount)}
+								</div>
 							</Tooltip>
 						</div>
 					</div>
@@ -134,7 +144,9 @@ function AccountPayablesByService({ activeTab }:ItemProps) {
 						</div>
 						<div className={styles.ocean_value}>
 							<Tooltip content={getFormattedPrice(data[6]?.amount, 'INR')} interactive>
-								{getAmountInLakhCrK(data[6]?.amount)}
+								<div>
+									{getAmountInLakhCrK(data[6]?.amount)}
+								</div>
 							</Tooltip>
 						</div>
 					</div>
@@ -145,7 +157,9 @@ function AccountPayablesByService({ activeTab }:ItemProps) {
 						</div>
 						<div className={styles.ocean_value}>
 							<Tooltip content={getFormattedPrice(data[7]?.amount, 'INR')} interactive>
-								{getAmountInLakhCrK(data[7]?.amount)}
+								<div>
+									{getAmountInLakhCrK(data[7]?.amount)}
+								</div>
 							</Tooltip>
 						</div>
 					</div>

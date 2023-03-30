@@ -70,7 +70,7 @@ function EventsTrend({ showData, setShowData, filtersData, activeTab }:ItemProps
 							name="count_view"
 							size="md"
 							showOnOff
-							value={isCountView}
+							value={isCountView as unknown as string}
 							onChange={() => setIsCountView(!isCountView)}
 							disabled={false}
 						/>
@@ -99,18 +99,6 @@ function EventsTrend({ showData, setShowData, filtersData, activeTab }:ItemProps
 							<Placeholder />
 						</div>
 					))}
-					{/* <div className={styles.loading}>
-						<Placeholder />
-					</div>
-					<div className={styles.loading}>
-						<Placeholder />
-					</div>
-					<div className={styles.loading}>
-						<Placeholder />
-					</div>
-					<div className={styles.loading}>
-						<Placeholder />
-					</div> */}
 				</div>
 			)
 				: <LineCharts data={data} isCountView={isCountView} showData={showData} />}

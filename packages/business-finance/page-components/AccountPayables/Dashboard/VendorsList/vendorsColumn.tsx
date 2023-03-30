@@ -49,7 +49,9 @@ const VendorsColumn = [
 						interactive
 						placement="top"
 					>
-						{getAmountInLakhCrK(openInvoiceLedgerAmount)}
+						<div>
+							{getAmountInLakhCrK(openInvoiceLedgerAmount)}
+						</div>
 					</Tooltip>
 
 				</div>

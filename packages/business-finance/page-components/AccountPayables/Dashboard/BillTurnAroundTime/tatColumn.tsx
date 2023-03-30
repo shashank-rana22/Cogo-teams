@@ -27,13 +27,13 @@ const tatColumn = [
 		Header   : <div>Date Range</div>,
 		id       : 'date1',
 		accessor : (row) => (
-			<div>
+			<>
 				{getByKey(row, 'date1')}
 				{' '}
 				-
 				{' '}
 				{getByKey(row, 'date2')}
-			</div>
+			</>
 		),
 
 	},
@@ -42,7 +42,7 @@ const tatColumn = [
 		id       : 'hours',
 		accessor : (row) => (
 			<div className={styles.count}>
-				{getByKey(row, 'hours')?.toFixed(2) as string}
+				{(getByKey(row, 'hours') as number)?.toFixed(2) }
 				{' '}
 				{' '}
 				hours

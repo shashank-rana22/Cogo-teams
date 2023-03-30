@@ -49,7 +49,7 @@ function DailyPayableOutstanding({ filters, activeTab }:ItemData) {
 						name="view"
 						size="md"
 						showOnOff
-						value={isQuarterView}
+						value={isQuarterView as unknown as string}
 						onChange={() => setIsQuarterView(!isQuarterView)}
 						disabled={false}
 					/>
