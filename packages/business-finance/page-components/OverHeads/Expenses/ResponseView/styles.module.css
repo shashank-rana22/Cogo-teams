@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	justify-content: center;
+	margin-top:80px;
 }
 
 .success {
@@ -13,4 +14,10 @@
 	width: 400px;
 	height: 200px;
 	margin: auto;
+}
+.failed{
+	color:#EE3425;
+}
+.approve_reject{
+	color:#F68B21
 }

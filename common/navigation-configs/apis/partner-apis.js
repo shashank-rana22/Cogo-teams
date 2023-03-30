@@ -7258,6 +7258,18 @@ const partner = {
 			feature     : 'Overseas',
 		},
 		{
+			api         : 'put_purchase_bills_status',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'put_purchase_expense_expense_configuration',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
 			api         : 'list_cogo_entities',
 			access_type : 'private',
 		},
