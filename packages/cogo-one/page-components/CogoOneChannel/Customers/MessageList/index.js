@@ -3,7 +3,7 @@ import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../common/UserAvatar';
-import { PLATFORM_MAPPING } from '../../../../constants';
+import { PLATFORM_MAPPING, ECLAMATION_SVG } from '../../../../constants';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 import FilterComponents from '../FilterComponents';
@@ -188,12 +188,10 @@ function MessageList({
 
 									<div className={styles.important_icon}>
 										<img
-											// eslint-disable-next-line max-len
-											src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg"
+											src={ECLAMATION_SVG}
 											alt="important"
 											width="12px"
 										/>
-
 									</div>
 								)}
 							</div>
