@@ -5,6 +5,12 @@ import { isEmpty } from '@cogoport/utils';
 
 import getPayload from '../utils/getPayload';
 
+const MAPPING = {
+	delete : 'deleted',
+	update : 'updated',
+	create : 'added',
+};
+
 function useUpdateStandAloneTestQuestion({
 	questionSetId,
 	getTestQuestionTest,
@@ -45,6 +51,8 @@ function useUpdateStandAloneTestQuestion({
 							: payload,
 			});
 
+			Toast.success(`StandAlone Question has been ${MAPPING[action]} successfully`);
+
 			getTestQuestionTest({
 				questionSetId,
 				...(action === 'delete' ? { pageToShow: 1 } : null),
@@ -54,7 +62,6 @@ function useUpdateStandAloneTestQuestion({
 			setEditDetails({});
 			reset();
 		} catch (err) {
-			console.log('err::', err);
 			Toast.error(getApiErrorString(err.response.data));
 		}
 	};
