@@ -69,8 +69,8 @@
 }
 
 .card_container {
-	padding: 10px 12px;
-	margin: 4px 1px;
+	padding: 10px 8px;
+	margin: 4px;
 }
 
 .card_container:hover {
