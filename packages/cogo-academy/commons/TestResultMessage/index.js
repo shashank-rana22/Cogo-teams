@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { format, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -48,7 +49,7 @@ function TestResultMessage({ stats_data }) {
 					{' '}
 					taken on
 					{' '}
-					{format(date, 'dd MMM yyyy')}
+					{format(date, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
 				</div>
 
 				{status === 'failed' ? (
