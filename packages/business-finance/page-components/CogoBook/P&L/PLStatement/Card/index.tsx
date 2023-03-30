@@ -186,7 +186,7 @@ function Card({
 						value={filters?.mode}
 						onChange={(e) => {
 							setFilters((prev) => ({ ...prev, mode: !!e?.target?.checked }));
-							setModal(true);
+							setModal(e?.target?.checked);
 						}}
 					/>
 				</div>
@@ -237,7 +237,7 @@ function Card({
 
 						<Modal.Footer>
 							<div className={styles.button_flex_data}>
-								<Button>Confirm</Button>
+								<Button onClick={() => { setModal(false); }}>Confirm</Button>
 
 							</div>
 						</Modal.Footer>

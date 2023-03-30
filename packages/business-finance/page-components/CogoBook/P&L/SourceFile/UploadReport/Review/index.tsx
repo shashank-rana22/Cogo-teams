@@ -1,20 +1,77 @@
 import { Modal, Button } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
+
+import useSaveReport from '../../../../hooks/useSaveReport';
 
 import styles from './styles.module.css';
 
-function Review() {
-	const { push } = useRouter();
+function Review({
+	fclExportVolumePer,
+	fclImportVolumePer,
+	lclExportVolumePer,
+	lclImportVolumePer,
+	oceanCustomVolumePer,
+	airExportVolumePer,
+	airImportVolumePer,
+	airCustomVolumePer,
+	FTLVolumePer,
+	LTLVolumePer,
+	railVolumePer,
+	fclExportValuePer,
+	fclImportValuePer,
+	lclExportValuePer,
+	lclImportValuePer,
+	oceanCustomValuePer,
+	airExportValuePer,
+	airImportValuePer,
+	airCustomValuePer,
+	FTLValuePer,
+	LTLValuePer,
+	railValuePer,
+	totalVolumePer,
+	totalPer,
+	totalPerSurface,
+	totalPerRail,
+	totalPerOcean,
+	totalPerAir,
+	totalPerValueSurface,
+	totalPerRailValue,
+}) {
 	const [modalData, setModalData] = useState(false);
-	const handleClick = () => {
-		push(
-			'/business-finance/cogo-book/[active_tab]/[view]',
-			'/business-finance/cogo-book/pl_statement/source_file',
-		);
 
-		setModalData(false);
-	};
+	const { refetch, turnoverLoading } = useSaveReport({
+		setModalData,
+		fclExportVolumePer,
+		fclImportVolumePer,
+		lclExportVolumePer,
+		lclImportVolumePer,
+		oceanCustomVolumePer,
+		airExportVolumePer,
+		airImportVolumePer,
+		airCustomVolumePer,
+		FTLVolumePer,
+		LTLVolumePer,
+		railVolumePer,
+		fclExportValuePer,
+		fclImportValuePer,
+		lclExportValuePer,
+		lclImportValuePer,
+		oceanCustomValuePer,
+		airExportValuePer,
+		airImportValuePer,
+		airCustomValuePer,
+		FTLValuePer,
+		LTLValuePer,
+		railValuePer,
+		totalVolumePer,
+		totalPer,
+		totalPerSurface,
+		totalPerRail,
+		totalPerOcean,
+		totalPerAir,
+		totalPerValueSurface,
+		totalPerRailValue,
+	});
 	return (
 		<div>
 			<div className={styles.button_flex}>
@@ -33,7 +90,7 @@ function Review() {
 					</Modal.Body>
 					<Modal.Footer>
 						<div className={styles.button_flex}>
-							<Button onClick={() => { handleClick(); }}>Confirm</Button>
+							<Button onClick={() => { refetch(); }} loading={turnoverLoading}>Confirm</Button>
 						</div>
 					</Modal.Footer>
 				</Modal>

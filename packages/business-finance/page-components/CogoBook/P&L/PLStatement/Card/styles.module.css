@@ -1,108 +1,124 @@
 /* stylelint-disable selector-class-pattern */
 .container {
-  padding: 28px 32px;
-  margin-top: 16px;
-  background: #fff;
-  border-radius: 8px;
+	padding: 28px 32px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
 }
+
 .period {
-  display: flex;
-  width: fit-content;
-  margin-right: 5px;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 20px;
+	display: flex;
+	width: fit-content;
+	margin-right: 5px;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 20px;
 }
+
 .hr_period {
-  width: 5%;
-  border: 1px solid #ee3425;
+	width: 5%;
+	border: 1px solid #ee3425;
 }
+
 .select_container {
-  display: flex;
-  gap: 16px;
-  width: fit-content;
-  margin-top: 16px;
+	display: flex;
+	gap: 16px;
+	width: fit-content;
+	margin-top: 16px;
 }
+
 .info_icon_container {
-  padding: 2px 0 0 4px;
+	padding: 2px 0 0 4px;
 }
+
 .date_range {
-  width: fit-content;
+	width: fit-content;
 
-  :global {
-    .react-datepicker__input-container {
-      .react-datepicker__close-icon::after {
-        background: none !important;
-      }
+	:global {
+		.react-datepicker__input-container {
+			.react-datepicker__close-icon::after {
+				background: none !important;
+			}
 
-      .react-datepicker__close-icon {
-        right: -9px;
-        border: none;
-      }
-    }
-  }
+			.react-datepicker__close-icon {
+				right: -9px;
+				border: none;
+			}
+		}
+	}
 }
+
 .border {
-  margin: 4px 0px;
-  border: 1px solid #f68b21;
+	margin: 4px 0;
+	border: 1px solid #f68b21;
 }
-.content_container {
-  width: 180px;
-}
-.chips {
-  :global {
-    .ui_chip_container {
-      min-width: 0 !important;
-    }
-  }
 
-  padding-bottom: 8px;
-  border-bottom: 1px solid #f8d468;
+.content_container {
+	width: 180px;
 }
+
+.chips {
+	:global {
+		.ui_chip_container {
+			min-width: 0 !important;
+		}
+	}
+
+	padding-bottom: 8px;
+	border-bottom: 1px solid #f8d468;
+}
+
 .radio {
-  :global {
-    .ui_radiogroup_container {
-      display: flex;
-      flex-direction: column;
-      .ui_radio_container {
-        border-bottom: 1px solid #f9f5ec;
-      }
-      .ui_radio_container:hover {
-        background-color: #f9f5ec;
-      }
-    }
-  }
+	:global {
+		.ui_radiogroup_container {
+			display: flex;
+			flex-direction: column;
+
+			.ui_radio_container {
+				border-bottom: 1px solid #f9f5ec;
+			}
+
+			.ui_radio_container:hover {
+				background-color: #f9f5ec;
+			}
+		}
+	}
 }
+
 .buttons {
-  display: flex;
-  margin-top: 24px;
-  gap: 8px;
-  justify-content: flex-end;
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	margin-top: 24px;
 }
+
 .toggle_data {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 16px;
-  margin-top: 16px;
-  background: #fff;
-  border-radius: 8px;
+	display: flex;
+	justify-content: space-between;
+	padding: 6px 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
 }
+
 .button_flex_data {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
 }
+
 .flex_data {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
+	display: flex;
+	gap: 20px;
+	justify-content: center;
 }
+
 .modal_data {
-  :global {
-    .ui_modal_body_container {
-      overflow: visible !important;
-      height: 100px;
-    }
-  }
+	:global {
+		.ui_modal_body_container {
+			height: 100px;
+			overflow: visible !important;
+		}
+	}
 }

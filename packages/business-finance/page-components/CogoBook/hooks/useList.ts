@@ -2,23 +2,21 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useReportFile = ({ query }) => {
-	const { month = '', entity = '' } = query || {};
-
-	const [monthName, year] = (month.match(/(\w+)\s+(\d{4})/) || []).slice(1);
+const useList = ({ filters }) => {
+	const [monthName, year] = (filters?.month.match(/(\w+)\s+(\d{4})/) || []).slice(1);
 
 	const monthData = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
 
 	const numericDate = `${year}-${monthData.toString().padStart(2, '0')}-01`;
 
 	const [
-		{ data:sourceFileData, loading:sourceFileLoading },
-		sourceFileTrigger,
+		{ data, loading:salaryLoading },
+		listTrigger,
 	] = useRequestBf(
 		{
-			url     : '/pnl/statement/segments',
+			url     : '/pnl/statement/list',
 			method  : 'get',
-			authKey : 'get_pnl_statement_segments',
+			authKey : 'get_pnl_statement_list',
 		},
 		{ manual: true },
 	);
@@ -28,22 +26,26 @@ const useReportFile = ({ query }) => {
 			101 : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 			301 : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
 		};
-
 		try {
-			await sourceFileTrigger({
+			await listTrigger({
 				params: {
-					cogoEntityId : entityMapping[entity],
-					period       : numericDate,
+					q            : filters?.query || undefined,
+					period       : year ? numericDate : undefined,
+					cogoEntityId : entityMapping[filters?.entity] || undefined,
+					pageIndex    : 1,
+					pageSize     : 10,
+
 				},
 			});
 		} catch (error) {
 			Toast.error(error?.response?.data?.message);
 		}
-	}, [entity, numericDate, sourceFileTrigger]);
+	}, [filters?.entity, filters?.query, listTrigger, numericDate, year]);
+
 	return {
-		sourceFileData,
-		sourceFileLoading,
 		refetch,
+		ListData: data?.list,
+		salaryLoading,
 	};
 };
-export default useReportFile;
+export default useList;

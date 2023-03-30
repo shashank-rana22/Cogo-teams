@@ -1,8 +1,8 @@
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useReport from '../../../hooks/useReport';
 import { mappingData } from '../constant';
-import useReport from '../hooks/useReport';
 
 import styles from './styles.module.css';
 import { ratiosDataV2 } from './utils/ratios';
@@ -95,11 +95,16 @@ function ListProfit({
 		const key = filters?.radio ? filters?.radio : 'nothing';
 		const mode = filters?.mode ? 'ON' : 'OFF';
 
-		const relevantData = mappingData(filters)[mode][key] || [{}];
+		const getRelevantData = () => {
+			if (filters?.mode) {
+				const relevantData = mappingData(filters)[mode] || [{}];
+				return relevantData;
+			}
+			const relevantData = mappingData(filters)[mode][key] || [{}];
+			return relevantData;
+		};
 
-		console.log(mode, 'mode');
-
-		const ArrayLength = relevantData.length;
+		const ArrayLength = getRelevantData().length;
 		const calculateWidth = `${50 / ArrayLength}%`;
 
 		return (
@@ -108,7 +113,7 @@ function ListProfit({
 
 					<div className={styles.header_particular}>PARTICULARS</div>
 					{
-						relevantData.map((itemHeader) => (
+						getRelevantData().map((itemHeader) => (
 							<div
 								className={styles.header_ocean}
 								style={{ width: calculateWidth }}
@@ -152,7 +157,7 @@ function ListProfit({
 						{dropDown?.operating && <div>Accrued Expenses</div>}
 					</div>
 
-					{relevantData.map((itemData) => {
+					{getRelevantData().map((itemData) => {
 						const ratio = ratioData?.[itemData?.key] || 1;
 						return (
 							<div className={styles.first_ocean} style={{ width: calculateWidth }}>
@@ -174,7 +179,7 @@ function ListProfit({
 
 				<div className={styles.data_sub}>
 					<div className={styles.header_particular}>GROSS PROFIT</div>
-					{relevantData?.map((itemVal) => {
+					{getRelevantData()?.map((itemVal) => {
 						const ratio = ratioData?.[itemVal?.[key]] || 1;
 						return (
 							<div className={styles.header_ocean} style={{ width: calculateWidth }}>
@@ -259,7 +264,7 @@ function ListProfit({
 					</div>
 
 					{
-						relevantData?.map((itemValue) => {
+						getRelevantData()?.map((itemValue) => {
 							const ratio = ratioData?.[itemValue?.key] || 1;
 							return (
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
@@ -327,7 +332,7 @@ function ListProfit({
 						PROFIT BEFORE EXCEPTIONAL AND EXTRAORDINARY ITEMS (B)
 					</div>
 					{
-						relevantData?.map((Val) => {
+						getRelevantData()?.map((Val) => {
 							const ratio = ratioData?.[Val?.[key]] || 1;
 							return (
 								<div className={styles.header_ocean} style={{ width: calculateWidth }}>
@@ -359,7 +364,7 @@ function ListProfit({
 					</div>
 
 					{
-						relevantData?.map((itemValue) => {
+						getRelevantData()?.map((itemValue) => {
 							const ratio = ratioData?.[itemValue[key]] || 1;
 							return (
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
@@ -375,7 +380,7 @@ function ListProfit({
 				<div className={styles.data_sub}>
 					<div className={styles.header_particular}>PROFIT BEFORE TAX (C)</div>
 					{
-						relevantData?.map((value) => {
+						getRelevantData()?.map((value) => {
 							const ratio = ratioData?.[value[key]] || 1;
 							return (
 								<div
@@ -403,7 +408,7 @@ function ListProfit({
 					</div>
 
 					{
-						relevantData?.map((itemDataValue) => {
+						getRelevantData()?.map((itemDataValue) => {
 							const ratio = ratioData?.[itemDataValue?.key] || 1;
 
 							return (
@@ -418,7 +423,7 @@ function ListProfit({
 				<div className={styles.data_sub}>
 					<div className={styles.header_particular}>PROFIT AFTER TAX (D)</div>
 					{
-						relevantData?.map((valData) => {
+						getRelevantData()?.map((valData) => {
 							const ratio = ratioData?.[valData?.key] || 1;
 							return (
 								<div className={styles.header_ocean} style={{ width: calculateWidth }}>

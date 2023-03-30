@@ -1,15 +1,18 @@
+import { Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
 const useSalary = () => {
+	const { query } = useRouter();
 	const [
-		{ data:salaryData, loading:salaryLoading },
+		{ data, loading:salaryLoading },
 		salaryTrigger,
 	] = useRequestBf(
 		{
-			url     : '/pnl/statement/segments',
+			url     : '/pnl/statement/salary',
 			method  : 'get',
-			authKey : 'get_pnl_statement_segments',
+			authKey : 'get_pnl_statement_salary',
 		},
 		{ manual: true },
 	);
@@ -18,16 +21,16 @@ const useSalary = () => {
 		try {
 			await salaryTrigger({
 				params: {
-					period: 'be',
+					sourceFile: query?.id,
 				},
 			});
 		} catch (error) {
-			console.log(error, 'error');
+			Toast.error(error?.response?.data?.message);
 		}
-	}, [salaryTrigger]);
+	}, [query?.id, salaryTrigger]);
 	return {
 		refetch,
-		salaryData,
+		salaryData: data?.data,
 		salaryLoading,
 	};
 };

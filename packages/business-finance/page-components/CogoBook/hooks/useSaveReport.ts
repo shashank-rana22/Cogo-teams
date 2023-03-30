@@ -1,0 +1,147 @@
+import { Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
+import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+import { useCallback } from 'react';
+
+const useSaveReport = ({
+	setModalData,
+	fclExportVolumePer,
+	fclImportVolumePer,
+	lclExportVolumePer,
+	lclImportVolumePer,
+	oceanCustomVolumePer,
+	airExportVolumePer,
+	airImportVolumePer,
+	airCustomVolumePer,
+	FTLVolumePer,
+	LTLVolumePer,
+	railVolumePer,
+	fclExportValuePer,
+	fclImportValuePer,
+	lclExportValuePer,
+	lclImportValuePer,
+	oceanCustomValuePer,
+	airExportValuePer,
+	airImportValuePer,
+	airCustomValuePer,
+	FTLValuePer,
+	LTLValuePer,
+	railValuePer,
+	totalVolumePer,
+	totalPer,
+	totalPerSurface,
+	totalPerRail,
+	totalPerOcean,
+	totalPerAir,
+	totalPerValueSurface,
+	totalPerRailValue,
+}) => {
+	const { query, push } = useRouter();
+	const { month, entity, id } = query || {};
+
+	const { profile } = useSelector((state) => state || {});
+
+	const [monthName, year] = (month.match(/(\w+)\s+(\d{4})/) || []).slice(1);
+
+	const monthData = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
+	const numericDate = `${year}-${monthData.toString().padStart(2, '0')}-01`;
+
+	const [
+		{ data, loading:turnoverLoading },
+		turnoverTrigger,
+	] = useRequestBf(
+		{
+			url     : '/pnl/statement/turnover-ratios',
+			method  : 'post',
+			authKey : 'get_pnl_statement_turnover-ratios',
+		},
+		{ manual: true },
+	);
+
+	const refetch = useCallback(async () => {
+		const entityMapping = {
+			101 : '6fd98605-9d5d-479d-9fac-cf905d292b88',
+			301 : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
+		};
+		try {
+			const res =	await turnoverTrigger({
+				data: [
+					{
+						ratioBasis           : 'VALUE',
+						cogoEntityId         : entityMapping[entity],
+						period               : numericDate,
+						sourceFileId         : id,
+						turnoverRatioDetails : {
+							rail         : totalPerRailValue / 100,
+							air          : totalPerAir / 100,
+							ocean        : totalPerOcean / 100,
+							surface      : totalPerValueSurface / 100,
+							fclExports   : fclExportValuePer / 100,
+							fclImports   : fclImportValuePer / 100,
+							lclExports   : lclExportValuePer / 100,
+							lclImports   : lclImportValuePer / 100,
+							oceanCustoms : oceanCustomValuePer / 100,
+							airExports   : airExportValuePer / 100,
+							airImports   : airImportValuePer / 100,
+							airCustoms   : airCustomValuePer / 100,
+							ftl          : FTLValuePer / 100,
+							ltl          : LTLValuePer / 100,
+							railDomestic : railValuePer / 100,
+						},
+						createdBy : profile.partner?.id,
+						updatedBy : profile?.user?.id,
+					},
+					{
+						ratioBasis           : 'VOLUME',
+						cogoEntityId         : entityMapping[entity],
+						period               : numericDate,
+						sourceFileId         : id,
+						turnoverRatioDetails : {
+							rail         : totalPerRail / 100,
+							air          : totalPer / 100,
+							ocean        : totalVolumePer / 100,
+							surface      : totalPerSurface / 100,
+							fclExports   : fclExportVolumePer / 100,
+							fclImports   : fclImportVolumePer / 100,
+							lclExports   : lclExportVolumePer / 100,
+							lclImports   : lclImportVolumePer / 100,
+							oceanCustoms : oceanCustomVolumePer / 100,
+							airExports   : airExportVolumePer / 100,
+							airImports   : airImportVolumePer / 100,
+							airCustoms   : airCustomVolumePer / 100,
+							ftl          : FTLVolumePer / 100,
+							ltl          : LTLVolumePer / 100,
+							railDomestic : railVolumePer / 100,
+						},
+						createdBy : profile.partner?.id,
+						updatedBy : profile?.user?.id,
+					},
+				],
+			});
+			if (res.data) {
+				push(
+					'/business-finance/cogo-book/[active_tab]/[view]',
+					'/business-finance/cogo-book/pl_statement/source_file',
+				);
+				setModalData(false);
+			}
+		} catch (error) {
+			Toast.error(error?.response?.data?.message);
+		}
+	}, [FTLValuePer, FTLVolumePer, LTLValuePer, LTLVolumePer, airCustomValuePer, airCustomVolumePer,
+		airExportValuePer, airExportVolumePer, airImportValuePer, airImportVolumePer, entity,
+		fclExportValuePer, fclExportVolumePer, fclImportValuePer, fclImportVolumePer, id,
+		lclExportValuePer, lclExportVolumePer, lclImportValuePer, lclImportVolumePer,
+		numericDate, oceanCustomValuePer, oceanCustomVolumePer, profile.partner?.id,
+		profile?.user?.id, push, railValuePer, railVolumePer, setModalData, totalPer,
+		totalPerAir, totalPerOcean, totalPerRail, totalPerRailValue, totalPerSurface,
+		totalPerValueSurface, totalVolumePer, turnoverTrigger]);
+
+	return {
+		refetch,
+		turnoverData: data?.data,
+		turnoverLoading,
+	};
+};
+export default useSaveReport;

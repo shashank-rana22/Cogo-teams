@@ -15,10 +15,9 @@ function UploadModal({ uploadModal, setUploadModal }) {
 	const [uploader, setUploader] = useState('');
 
 	const {
-		sourceFileUpload, uploadApi,
+		uploadApi,
 		sourceFileUploadLoading,
 	} =	 useSourceFile({ modalData, uploader, setUploadModal });
-	console.log(sourceFileUpload, 'sourceFileUpload');
 
 	return (
 		<div>

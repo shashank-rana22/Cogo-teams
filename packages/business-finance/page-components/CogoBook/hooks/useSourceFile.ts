@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -11,10 +12,8 @@ const useSourceFile = ({ modalData, uploader, setUploadModal }) => {
 
 	const monthData = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
 
-	const numericDate = `${year}-${monthData.toString().padStart(2, '0')}-01`;
-
 	const [
-		{ data:sourceFileUpload, loading:sourceFileUploadLoading },
+		{ loading:sourceFileUploadLoading },
 		sourceFileUploadTrigger,
 	] = useRequestBf(
 		{
@@ -34,7 +33,8 @@ const useSourceFile = ({ modalData, uploader, setUploadModal }) => {
 			const res = await sourceFileUploadTrigger({
 				data: {
 					cogoEntityId    : entityMapping[entity],
-					period          : numericDate,
+					month           : monthData,
+					year,
 					trialBalanceUrl : uploader,
 					createdBy       : profile.partner?.id,
 					updatedBy       : profile?.user?.id,
@@ -43,19 +43,18 @@ const useSourceFile = ({ modalData, uploader, setUploadModal }) => {
 			if (res.data) {
 				push(
 					`/business-finance/cogo-book/[active_tab]/[view]/upload-report?month=${modalData?.month}
-				    &entity=${modalData?.entity}`,
+				    &entity=${modalData?.entity}&id=${res?.data?.data}`,
 					`/business-finance/cogo-book/pl_statement/source_file/upload-report?month=${modalData?.month}
-				    &entity=${modalData?.entity}`,
+				    &entity=${modalData?.entity}&id=${res?.data?.data}`,
 				);
 				setUploadModal(false);
 			}
 		} catch (error) {
-			console.log(error, 'error');
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 
 	return {
-		sourceFileUpload,
 		uploadApi,
 		sourceFileUploadLoading,
 	};

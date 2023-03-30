@@ -52,7 +52,7 @@ function UploadReport() {
 	const [salaryValueSurface, setSalaryValueSurface] = useState({});
 	const [salaryValueRail, setSalaryValueRail] = useState({});
 
-	const { refetch:refetchSalary, salaryData = '1000' } = useSalary();
+	const { refetch:refetchSalary, salaryData } = useSalary();
 
 	const { month, entity } = query || {};
 
@@ -644,7 +644,38 @@ function UploadReport() {
 						salaryValueRail={salaryValueRail}
 						setSalaryValueRail={setSalaryValueRail}
 					/>
-					<Review />
+					<Review
+						fclExportVolumePer={fclExportVolumePer}
+						fclImportVolumePer={fclImportVolumePer}
+						lclExportVolumePer={lclExportVolumePer}
+						lclImportVolumePer={lclImportVolumePer}
+						oceanCustomVolumePer={oceanCustomVolumePer}
+						airExportVolumePer={airExportVolumePer}
+						airImportVolumePer={airImportVolumePer}
+						airCustomVolumePer={airCustomVolumePer}
+						FTLVolumePer={FTLVolumePer}
+						LTLVolumePer={LTLVolumePer}
+						railVolumePer={railVolumePer}
+						fclExportValuePer={fclExportValuePer}
+						fclImportValuePer={fclImportValuePer}
+						lclExportValuePer={lclExportValuePer}
+						lclImportValuePer={lclImportValuePer}
+						oceanCustomValuePer={oceanCustomValuePer}
+						airExportValuePer={airExportValuePer}
+						airImportValuePer={airImportValuePer}
+						airCustomValuePer={airCustomValuePer}
+						FTLValuePer={FTLValuePer}
+						LTLValuePer={LTLValuePer}
+						railValuePer={railValuePer}
+						totalVolumePer={totalVolumePer}
+						totalPer={totalPer}
+						totalPerSurface={totalPerSurface}
+						totalPerRail={totalPerRail}
+						totalPerOcean={totalPerOcean}
+						totalPerAir={totalPerAir}
+						totalPerValueSurface={totalPerValueSurface}
+						totalPerRailValue={totalPerRailValue}
+					/>
 				</div>
 
 			)}

@@ -1,6 +1,9 @@
 import { Button, Input, Select } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { format } from '@cogoport/utils';
+import { useEffect, useState } from 'react';
+
+import useList from '../../hooks/useList';
 
 import styles from './styles.module.css';
 import UploadModal from './UploadModal';
@@ -10,42 +13,28 @@ function SourceFile() {
 	const [filters, setFilters] = useState({ month: '', entity: '', query: '' });
 	const [uploadModal, setUploadModal] = useState(false);
 
-	const getCardData = [{
-		id     : '#Upload_33892',
-		month  : 'Upload Month - December 2023',
-		name   : 'Uploaded By - Zubin Khanna',
-		date   : '2 Jan 2024',
-		basis  : ['Volume', 'Value'],
-		button : 'View',
-	}, {
-		id     : '#Upload_33892',
-		month  : 'Upload Month - December 2023',
-		name   : 'Uploaded By - Zubin Khanna',
-		date   : '2 Jan 2024',
-		basis  : ['Volume', 'Value'],
-		button : 'View',
-	}, {
-		id     : '#Upload_33892',
-		month  : 'Upload Month - December 2023',
-		name   : 'Uploaded By - Zubin Khanna',
-		date   : '2 Jan 2024',
-		basis  : ['Volume', 'Value'],
-		button : 'View',
-	}, {
-		id     : '#Upload_33892',
-		month  : 'Upload Month - December 2023',
-		name   : 'Uploaded By - Zubin Khanna',
-		date   : '2 Jan 2024',
-		basis  : ['Volume', 'Value'],
-		button : 'View',
-	}, {
-		id     : '#Upload_33892',
-		month  : 'Upload Month - December 2023',
-		name   : 'Uploaded By - Zubin Khanna',
-		date   : '2 Jan 2024',
-		basis  : ['Volume', 'Value'],
-		button : 'View',
-	}];
+	const { ListData, refetch } = useList({ filters });
+
+	useEffect(() => { refetch(); }, [refetch]);
+
+	const getCardData = (ListData || [{}]).map((item) => {
+		const { id, period, createdAt, cogoEntityId, uploadByName } = item || {};
+		const formatMonth = format(period, 'MMM yyyy');
+		const formatDate = format(createdAt, 'dd MMM yyyy');
+		const entityMapping = {
+			'6fd98605-9d5d-479d-9fac-cf905d292b88' : 101,
+			'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1' : 301,
+		};
+		return ({
+			id     : `#Upload_${id}` || '-',
+			month  : `Upload Month - ${formatMonth}` || '-',
+			name   : `Uploaded By - ${uploadByName}` || '-',
+			entity : entityMapping[cogoEntityId] || '-',
+			date   : formatDate || '-',
+			button : 'View',
+		});
+	});
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.filter_flex}>
@@ -65,7 +54,7 @@ function SourceFile() {
 						<Select
 							value={filters?.entity}
 							onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
-							placeholder="Basis"
+							placeholder="Entity"
 							options={[{ label: 'All', value: 'all' },
 								{ label: 'Entity 101', value: '101' },
 								{ label: 'Entity 301', value: '301' }]}
@@ -111,13 +100,13 @@ function SourceFile() {
 						</div>
 
 						<div className={styles.basis}>
-							Basis :
-							{item.basis.map((itemBasis) => (
-								<div className={styles.tag}>
-									{' '}
-									{itemBasis}
-								</div>
-							))}
+							Entity :
+
+							<div className={styles.tag}>
+
+								{item.entity}
+							</div>
+
 						</div>
 
 						<div><Button themeType="secondary">{item.button}</Button></div>
