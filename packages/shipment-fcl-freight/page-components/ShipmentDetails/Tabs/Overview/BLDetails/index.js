@@ -4,7 +4,7 @@ import React, { useState, useContext } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
 
-import BlContainer from './BlContainer';
+import BlContainersMapping from './BlContainersMapping';
 import ContainerDetails from './ContainerDetails';
 import ContainerNmUpdate from './ContainerNumUpdate';
 import styles from './styles.module.css';
@@ -16,7 +16,7 @@ function BLDetails() {
 	const [mappingModal, setMappingModal] = useState(false);
 	const [editContainerNum, setEditContainerNum] = useState(false);
 
-	const { shipment_data, documents } = useContext(
+	const { shipment_data, documents, refetch } = useContext(
 		ShipmentDetailContext,
 	);
 
@@ -75,10 +75,11 @@ function BLDetails() {
 					}}
 				>
 					<Modal.Header title="BL Container Mapping" />
-					<BlContainer
-						shipment_data={shipment_data}
-						// data={data}
+					<BlContainersMapping
+						data={documents}
 						setMappingModal={setMappingModal}
+						containerDetails={containerDetailsArray}
+						refetch={refetch}
 					/>
 				</Modal>
 			) : null}
@@ -93,8 +94,8 @@ function BLDetails() {
 					<Modal.Header title="Update Container Number" />
 					<ContainerNmUpdate
 						setEditContainerNum={setEditContainerNum}
-						shipmentData={shipment_data}
 						containerDetails={containerDetailsArray}
+						refetch={refetch}
 					/>
 				</Modal>
 			) : null}

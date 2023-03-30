@@ -1,133 +1,86 @@
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
 
 import controls from '../configurations/get-container-controls';
 
 const useBlContainerMappings = ({
 	data = {},
-	shipment_data = {},
-	// setMappingModal = () => {},
-	// refetch = () => {},
+	setMappingModal = () => {},
+	refetch = () => {},
+	containerDetails = [],
 }) => {
-	const [{ data: containerDetails },
-		containerDetailTrigger] = useRequest({
-		url    : '/list_shipment_container_details',
-		method : 'GET',
-	});
-
-	const [{ loading: containerLoading },
-		updateShipmentContainerTrigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_container_details',
 		method : 'POST',
 	});
 
-	const showElements = {};
+	const options = containerDetails.map((obj) => ({
+		label : obj.container_number,
+		value : `${obj.container_number}:${obj.id}`,
+	}));
 
-	controls.forEach((controlObj, index) => {
-		if (controlObj.type === 'fieldArray') {
-			showElements[controlObj.name] = [];
-			Array(data?.list?.length)
-				.fill(null)
-				.forEach(() => {
-					const showElementFields = {};
-					controlObj.controls.forEach((obj, ind) => {
-						showElementFields[obj.name] = obj.show === true;
-						if (controls[index].controls[ind].name === 'container_number') {
-							controls[index].controls[ind].options = (
-								containerDetails?.list || []
-							).map((detailObj) => ({
-								label : detailObj?.container_number,
-								value : `${detailObj?.container_number}:${detailObj?.id}`,
-							}));
-						}
-					});
-					showElements[controlObj.name].push(showElementFields);
-				});
-		}
+	const mutatedFields = [];
+
+	(data || []).forEach((bl) => {
+		const obj = {
+			bl_number : bl?.bl_number,
+			bl_id     : bl?.id,
+			options,
+		};
+		mutatedFields.push(obj);
 	});
 
-	const [error, setError] = useState({});
-
-	const onError = (err) => {
-		setError(err);
+	const defaultValues = {
+		bl_mappings: mutatedFields.map((field) => ({
+			bl_number : field.bl_number,
+			bl_id     : field.bl_id,
+		})),
 	};
 
-	const { control, handleSubmit, formState: { errors } } = useForm();
+	const { control, handleSubmit, formState: { errors }, register } = useForm({ defaultValues });
 
-	// const selectedContainers = [];
-	// (formValues.bl_details || []).forEach((singleVal) => {
-	// 	selectedContainers.push(...singleVal.container_number);
-	// });
+	const onSubmit = async (value) => {
+		const formValues = value.bl_mappings;
+		const update_data = [];
+		let totalContainerSelected = 0;
+		(formValues || []).forEach((blDetailObj) => {
+			totalContainerSelected += blDetailObj.container_number?.length || 0;
+			(blDetailObj.container_number || []).forEach((containerVal) => {
+				const reqObj = {
+					id   : containerVal?.split(':')[1],
+					data : {
+						container_number : containerVal?.split(':')[0],
+						bl_number        : blDetailObj.bl_number,
+						bl_id            : blDetailObj.bl_id,
+					},
+				};
+				update_data.push(reqObj);
+			});
+		});
+		if (totalContainerSelected !== containerDetails?.length) {
+			Toast.error('Please Select All Containers !');
+		}
 
-	// useEffect(() => {
-	// 	const containerValues = (data?.list || []).map((obj) => ({
-	// 		bl_id            : obj.id,
-	// 		bl_number        : obj?.bl_number,
-	// 		container_number : '',
-	// 		id               : '',
-	// 	}));
+		const res = await trigger({ data: { update_data } });
 
-	// 	setValue({ bl_details: containerValues });
-	// }, [data, setValue]);
-
-	useEffect(() => {
-		(async () => {
-			try {
-				if (shipment_data?.id) {
-					await containerDetailTrigger({
-						params: { filters: { shipment_id: shipment_data?.id } },
-					});
-				}
-			} catch (err) {
-				console.log(err);
-			}
-		})();
-	}, [containerDetailTrigger, shipment_data?.id]);
-
-	// const updateDetails = async () => {
-	// 	const update_data = [];
-	// 	let totalContainerSelected = 0;
-	// 	(formValues?.bl_details || []).forEach((blDetailObj) => {
-	// 		totalContainerSelected += blDetailObj.container_number?.length;
-	// 		(blDetailObj.container_number || []).forEach((containerVal) => {
-	// 			const reqObj = {
-	// 				id   : containerVal?.split(':')[1],
-	// 				data : {
-	// 					container_number : containerVal?.split(':')[0],
-	// 					bl_number        : blDetailObj.bl_number,
-	// 					bl_id            : blDetailObj.bl_id,
-	// 				},
-	// 			};
-	// 			update_data.push(reqObj);
-	// 		});
-	// 	});
-	// 	if (totalContainerSelected !== containerDetails?.list?.length) {
-	// 		Toast.warn('Please Select All Containers !');
-	// 		return;
-	// 	}
-
-	// 	const res = await updateShipmentContainerTrigger({ data: { update_data } });
-
-	// 	if (!res?.hasError) {
-	// 		Toast.success('Container Details Updated Successfully');
-	// 		setMappingModal(false);
-	// 		refetch();
-	// 	}
-	// };
+		if (res.status === 200) {
+			Toast.success('Container Details Updated Successfully');
+			setMappingModal(false);
+			refetch();
+		}
+	};
 
 	return {
-		// updateDetails,
-		onError,
-		error,
 		handleSubmit,
-		containerLoading,
+		loading,
 		controls,
 		control,
 		errors,
-		showElements,
+		register,
+		mutatedFields,
+		onSubmit,
 	};
 };
 
 export default useBlContainerMappings;
-// TODO

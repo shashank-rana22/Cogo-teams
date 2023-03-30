@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 
 function ContainerNmUpdate({
 	setEditContainerNum = () => { },
-	shipmentData = {},
 	refetch = () => { },
 	containerDetails,
 }) {
@@ -19,7 +18,6 @@ function ContainerNmUpdate({
 	const { handleSubmit, loading } = useUpdateContainerDetails({
 		containerValue,
 		setEditContainerNum,
-		shipmentData,
 		refetch,
 	});
 
