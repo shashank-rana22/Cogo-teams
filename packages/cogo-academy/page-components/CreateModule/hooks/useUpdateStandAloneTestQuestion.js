@@ -44,7 +44,7 @@ function useUpdateStandAloneTestQuestion() {
 							: payload,
 			});
 
-			Toast.success('It has been deleted successfully');
+			Toast.success('StandAlone Question has been deleted successfully');
 			getTestQuestionTest({
 				questionSetId,
 				...(action === 'delete' ? { pageToShow: 1 } : null),
