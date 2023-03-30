@@ -1,6 +1,6 @@
 import TABS_CONFIG from '../config/TABS_CONFIG.json';
 
-export default function handleApplyFilters({ stateProps, formValues, setShowPopover }) {
+export default function applyPopoverFilters({ stateProps, formValues, setShowPopover }) {
 	const { filters, setFilters, activeTab, setActiveTab } = stateProps;
 
 	const { isCriticalOn, ...restFilters } = filters;

@@ -21,7 +21,7 @@ const shipmentSpecificPayload = {
 
 const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
-export default function getPayload({ filters, activeTab, selected_agent_id }) {
+export default function getListBookingDeskShipmentsPayload({ filters, activeTab, selected_agent_id }) {
 	const { isCriticalOn, page, q, ...restFilters } = filters;
 	const { shipment_type } = filters;
 

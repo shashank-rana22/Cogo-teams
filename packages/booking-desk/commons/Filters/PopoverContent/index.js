@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CONTROLS from '../../../config/CONTROLS_CONFIG.json';
-import handleApplyFilters from '../../../helpers/handleApplyFilters';
+import applyPopoverFilters from '../../../helpers/applyPopoverFilters';
 
 import styles from './styles.module.css';
 
@@ -23,7 +23,7 @@ export default function PopoverContent({ stateProps, tabs, setShowPopover }) {
 	const isFiltersChanged = Object.keys(formValues)
 		.some((filterKey) => defaultFilters[filterKey] !== formValues[filterKey]);
 
-	const handleClearFilters = () => {
+	const clearFilters = () => {
 		setFilters({ shipment_type: filters.shipment_type, page: 1 });
 		setShowPopover(false);
 	};
@@ -31,12 +31,12 @@ export default function PopoverContent({ stateProps, tabs, setShowPopover }) {
 	const actionButtons = [
 		{
 			label    : 'Clear Filters',
-			onClick  : handleClearFilters,
+			onClick  : clearFilters,
 			disabled : !isFiltersApplied && !isFiltersChanged,
 		},
 		{
 			label    : 'Apply Filters',
-			onClick  : () => handleApplyFilters({ stateProps, formValues, setShowPopover }),
+			onClick  : () => applyPopoverFilters({ stateProps, formValues, setShowPopover }),
 			disabled : !isFiltersChanged,
 		},
 	];
