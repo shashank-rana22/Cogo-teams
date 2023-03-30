@@ -1,14 +1,14 @@
 /* eslint-disable max-len */
-import { Placeholder, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
-import chartData from '../../../configurations/chart-data';
+// import chartData from '../../../configurations/chart-data';
 import { imgURL } from '../../../constants/image-urls';
 import useGetUsersStats from '../../../hooks/useGetUsersStats';
 
 import LeaderBoard from './LeaderBoard';
-import Charts from './LineChart';
+// import Charts from './LineChart';
 import PrimaryStats from './PrimaryStats';
 import styles from './styles.module.css';
 
@@ -26,7 +26,7 @@ function Stats(props = {}) {
 	} = props || {};
 
 	const { bot_data = {}, customer_support_data = {} } = platFormChatData || {};
-	const GraphData = chartData({ platFormChatData }) || [];
+	// const GraphData = chartData({ platFormChatData }) || [];
 	const hideChart = isEmpty(bot_data) && isEmpty(customer_support_data);
 
 	return (
@@ -42,7 +42,7 @@ function Stats(props = {}) {
 
 			<div className={styles.line_chart_container}>
 				<div className={styles.chart_heading}>
-					<div className={styles.chart_heading_content}>Responsive Time Analysis</div>
+					<div className={styles.chart_heading_content}>Week on Week Shipments</div>
 					{
 						!chatLoading && !hideChart && (
 							<div>
@@ -59,7 +59,7 @@ function Stats(props = {}) {
 					}
 
 				</div>
-				<div className={styles.the_chart}>
+				{/* <div className={styles.the_chart}>
 					{
 						!chatLoading ? <Charts GraphData={GraphData} hideChart={hideChart} />
 							: (
@@ -80,7 +80,7 @@ function Stats(props = {}) {
 							)
 					}
 
-				</div>
+				</div> */}
 
 			</div>
 

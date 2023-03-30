@@ -1,9 +1,10 @@
 .footer_stats {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
 	padding-top: 8px;
 	background: #f9f5ec;
+}
+
+.the_stat{
+	padding: 10px 0 10px 60px;
 }
 
 .avg_response_time {

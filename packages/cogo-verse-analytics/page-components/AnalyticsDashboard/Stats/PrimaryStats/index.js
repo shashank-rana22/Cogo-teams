@@ -10,8 +10,8 @@ function PrimaryStats(props = {}) {
 	const {
 		statsData = {},
 		statsLoading = false,
-		userStats = {},
-		firebaseLoading = false,
+		// userStats = {},
+		// firebaseLoading = false,
 	} = props || {};
 	return (
 		<div className={styles.primary_stats}>
@@ -74,11 +74,55 @@ function PrimaryStats(props = {}) {
 			</div>
 
 			<div className={styles.primary_right}>
-				<div className={styles.active_users}>
-					<div className={styles.right_stat_title}>Users Active on</div>
-					<div className={styles.right_stat_content}>
-						<div className={styles.right_stat_label}>
+				<div className={styles.ticket_container}>
+					<div className={styles.ticket_details}>
+						<div className={styles.right_stat_title}> Users Active on</div>
+						<div className={styles.ticket_value}>
+							{!statsLoading
+
+								? 0
+								: (
+									<Placeholder
+										className={styles.placeholder_element}
+										height="20px"
+										width="30px"
+									/>
+								)}
+
+						</div>
+						<div className={styles.ticket_label}>
 							CogoVerse AI
+						</div>
+					</div>
+					<div className={styles.ticket_details}>
+
+						<div className={styles.ticket_value}>
+							{
+								!statsLoading
+									? 0
+									: (
+										<Placeholder
+											className={styles.placeholder_element}
+											height="20px"
+											width="30px"
+										/>
+									)
+							}
+
+						</div>
+						<div className={styles.ticket_label}>
+							Customer Support
+						</div>
+					</div>
+				</div>
+				{/* <div className={styles.active_users}>
+					<div className={styles.right_stat_title}> Users Active on</div>
+					<div className={styles.right_stat_content}>
+						<div className={styles.ticket_label}>
+							CogoVerse
+						</div>
+						<div className={styles.ticket_label}>
+							AI
 						</div>
 						<div className={styles.right_stat_value}>
 							{!firebaseLoading
@@ -94,8 +138,11 @@ function PrimaryStats(props = {}) {
 						</div>
 					</div>
 					<div className={styles.right_stat_content}>
-						<div className={styles.right_stat_label}>
-							Customer Support
+						<div className={styles.ticket_label}>
+							Customer
+						</div>
+						<div className={styles.ticket_label}>
+							Support
 						</div>
 						<div className={styles.right_stat_value}>
 							{!firebaseLoading ? handleValues(userStats?.kam_chats)
@@ -109,55 +156,7 @@ function PrimaryStats(props = {}) {
 
 						</div>
 					</div>
-				</div>
-				<div className={styles.ticket_container}>
-					<div className={styles.ticket_details}>
-
-						<div className={styles.ticket_value}>
-							{!statsLoading
-
-								? 20
-								: (
-									<Placeholder
-										className={styles.placeholder_element}
-										height="20px"
-										width="30px"
-									/>
-								)}
-
-						</div>
-						<div className={styles.ticket_label}>
-							Tickets
-						</div>
-						<div className={styles.ticket_label}>
-							Raised
-						</div>
-					</div>
-					<div className={styles.vertical_line} />
-					<div className={styles.ticket_details}>
-
-						<div className={styles.ticket_value}>
-							{
-								!statsLoading
-									? 15
-									: (
-										<Placeholder
-											className={styles.placeholder_element}
-											height="20px"
-											width="30px"
-										/>
-									)
-							}
-
-						</div>
-						<div className={styles.ticket_label}>
-							Tickets
-						</div>
-						<div className={styles.ticket_label}>
-							Resolved
-						</div>
-					</div>
-				</div>
+				</div> */}
 			</div>
 
 		</div>

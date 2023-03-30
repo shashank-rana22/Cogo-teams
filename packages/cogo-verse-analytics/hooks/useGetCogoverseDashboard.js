@@ -24,7 +24,7 @@ const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
 			Toast.error(err?.message);
 		}
 	};
-	console.log('data', data);
+
 	useEffect(() => {
 		(async () => {
 			await getCogoverseDashboard();

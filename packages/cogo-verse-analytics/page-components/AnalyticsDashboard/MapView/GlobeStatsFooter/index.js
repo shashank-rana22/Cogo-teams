@@ -1,5 +1,5 @@
 import { Placeholder } from '@cogoport/components';
-import { IcMHourglass } from '@cogoport/icons-react';
+// import { IcMHourglass } from '@cogoport/icons-react';
 import React from 'react';
 
 import { CONVERSATIONS } from '../../../../configurations/primary-stats';
@@ -12,16 +12,16 @@ import styles from './styles.module.css';
 function GlobeStatsFooter(props = {}) {
 	const {
 		statsLoading = false,
-		chatLoading = false,
+		// chatLoading = false,
 		statsData = {},
-		platFormChatData = {},
+		// platFormChatData = {},
 	} = props || {};
 
 	const { conversation_data = {} } = statsData || {};
-	const averageResponseTime = Number(platFormChatData?.average_cutomer_response_time) || 0;
+	// const averageResponseTime = Number(platFormChatData?.average_cutomer_response_time) || 0;
 	return (
 		<div className={styles.footer_stats}>
-			<div className={styles.avg_response_time}>
+			{/* <div className={styles.avg_response_time}>
 				<div className={styles.response_time_title}>
 					Average Customer Response Time
 				</div>
@@ -61,7 +61,7 @@ function GlobeStatsFooter(props = {}) {
 					</div>
 				</div>
 
-			</div>
+			</div> */}
 
 			<div className={styles.communication_stats}>
 				<div className={styles.left_stats}>
