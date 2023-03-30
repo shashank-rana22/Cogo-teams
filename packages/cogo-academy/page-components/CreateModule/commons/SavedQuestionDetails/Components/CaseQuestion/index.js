@@ -27,12 +27,12 @@ function CaseQuestion({ item, from, caseToShow }) {
 			</div>
 
 			{item.id === caseToShow
-				? test_case_study_questions.map((item1) => (
+				? test_case_study_questions.map((caseStudyQuestion) => (
 					<div
 						className={styles.text}
-						key={item1.id}
+						key={caseStudyQuestion.id}
 					>
-						{item1.question_text}
+						{caseStudyQuestion.question_text}
 					</div>
 				))
 				: null}

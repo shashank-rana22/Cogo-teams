@@ -46,8 +46,6 @@ function CreateQuestion({
 		setAllKeysSaved,
 	});
 
-	console.log('isNewQuestion11', !(editDetails?.question_type === 'case_study'));
-
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
 			<div className={styles.question_label}>{`Question ${index + 1}`}</div>
