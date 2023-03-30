@@ -11,7 +11,7 @@ function CaseAnswerType({ item, caseToShow }) {
 
 			{item.id === caseToShow
 				? item?.sub_question.map((item1) => (
-					<div>{startCase(item1.question_type)}</div>
+					<div className={styles.text}>{startCase(item1.question_type)}</div>
 				))
 				: null}
 		</div>

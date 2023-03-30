@@ -1,7 +1,6 @@
 .flex_column {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
 }
 
 .flex_row {
@@ -21,4 +20,8 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.text {
+	margin-top: 12px;
 }

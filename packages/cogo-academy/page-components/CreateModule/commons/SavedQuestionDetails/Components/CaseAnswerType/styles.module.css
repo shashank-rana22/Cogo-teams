@@ -1,7 +1,6 @@
 .flex_column {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
 }
 
 .flex_row {
@@ -14,4 +13,7 @@
 	align-items: center;
 	font-weight: 600;
 	cursor: pointer;
+}
+.text {
+	margin-top: 12px;
 }
