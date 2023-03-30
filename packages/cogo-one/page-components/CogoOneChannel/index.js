@@ -10,6 +10,7 @@ import { ANDRIOD_APK } from '../../constants';
 import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
+import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChats from '../../hooks/useListChats';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 
@@ -65,6 +66,7 @@ function CogoOne() {
 		updateUserStatus = () => {},
 	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
 
+	const { tagOptions = [] } = useListAssignedChatTags();
 	const mailProps = {
 		activeMail,
 		setActiveMail,
@@ -188,6 +190,7 @@ function CogoOne() {
 				handleScroll={handleScroll}
 				setModalType={setModalType}
 				modalType={modalType}
+				tagOptions={tagOptions}
 				mailProps={mailProps}
 			/>
 

@@ -45,6 +45,7 @@ function Customers({
 	handleScroll = () => {},
 	setModalType = () => {},
 	modalType = {},
+	tagOptions = [],
 	mailProps = {},
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
@@ -94,6 +95,7 @@ function Customers({
 		handleScroll,
 		setModalType,
 		modalType,
+		tagOptions,
 	};
 
 	const voiceProps = {

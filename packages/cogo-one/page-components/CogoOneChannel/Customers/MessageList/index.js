@@ -3,7 +3,7 @@ import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../common/UserAvatar';
-import { PLATFORM_MAPPING } from '../../../../constants';
+import { PLATFORM_MAPPING, ECLAMATION_SVG } from '../../../../constants';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 import FilterComponents from '../FilterComponents';
@@ -31,6 +31,7 @@ function MessageList(messageProps) {
 		setModalType = () => {},
 		modalType = '',
 		handleScroll = () => {},
+		tagOptions = [],
 	} = messageProps;
 
 	function lastMessagePreview(previewData = '') {
@@ -68,6 +69,7 @@ function MessageList(messageProps) {
 									setShowBotMessages={setShowBotMessages}
 									showBotMessages={showBotMessages}
 									isomniChannelAdmin={isomniChannelAdmin}
+									tagOptions={tagOptions}
 								/>
 							)
 						)}
@@ -101,8 +103,9 @@ function MessageList(messageProps) {
 							organization_name = '',
 							user_type = '',
 							search_user_name = '',
+							chat_tags = [],
 						} = userData || {};
-
+						const isImportant = chat_tags?.includes('important') || false;
 						const lastActive = new Date(item.new_message_sent_at);
 						const checkActiveCard = activeCardId === item?.id;
 						const searchName = search_user_name?.toLowerCase() || '';
@@ -119,8 +122,9 @@ function MessageList(messageProps) {
 								key={item?.id}
 								role="presentation"
 								className={cl`
-												${styles.card_container} 
-												${checkActiveCard ? styles.active_card : ''} 
+											${styles.card_container} 
+											${checkActiveCard ? styles.active_card : ''} 
+											${isImportant ? styles.important_styles : ''}
 												`}
 								onClick={() => setActiveMessage(item)}
 							>
@@ -182,6 +186,16 @@ function MessageList(messageProps) {
 										)}
 									</div>
 								</div>
+								{isImportant && (
+
+									<div className={styles.important_icon}>
+										<img
+											src={ECLAMATION_SVG}
+											alt="important"
+											width="12px"
+										/>
+									</div>
+								)}
 							</div>
 						);
 					})}

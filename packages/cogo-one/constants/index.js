@@ -137,14 +137,14 @@ export const DEFAULT_PILLS_ITEMS = [
 export const statusMapping = {
 	approved : 'Approved',
 	rejected : 'Rejected',
-	null     : 'Pending',
+	pending  : 'Pending',
 
 };
 
 export const statusColorMapping = {
 	approved : 'green',
 	rejected : 'red',
-	null     : 'orange',
+	pending  : 'orange',
 
 };
 
@@ -265,3 +265,5 @@ export const PAGE_LIMIT = 50;
 export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
 
 export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg';
+
+export const ECLAMATION_SVG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg';
