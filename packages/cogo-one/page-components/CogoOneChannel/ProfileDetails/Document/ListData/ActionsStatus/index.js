@@ -2,8 +2,6 @@ import { IcCFtick } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
-import documentTypeMapping from '../../../../../../configurations/document-type-mapping';
-
 import styles from './styles.module.css';
 
 function ActionsStatus({
@@ -20,9 +18,7 @@ function ActionsStatus({
 		setShowModal(val?.document_type);
 		setSingleItem(val);
 	};
-	const checkDocumentType = document_type === 'undefined';
-	const checkMappingDocument = documentTypeMapping(document_type);
-	const finalDocumentType = checkMappingDocument === 'Shipment' || '';
+	const validDocument = ['gst', 'pan', 'undefined'].includes(document_type);
 
 	const reqDocuments = useMemo(() => {
 		const documents = [];
@@ -47,15 +43,15 @@ function ActionsStatus({
 
 			<div className={styles.upload_container}>
 				<div className={styles.document_name}>
-					{!checkDocumentType && (
-						startCase(document_type)
-					)}
+					{document_type !== 'undefined'
+						&& startCase(document_type)}
 				</div>
-				{(!isEmpty(orgId) && !finalDocumentType) && (
+				{(!isEmpty(orgId) && validDocument) && (
 					<div>
 						{!isEmpty(reqDocuments) ? (
 							<div
-								role="presentation"
+								role="button"
+								tabIndex={0}
 								className={styles.manually}
 								onClick={() => handleClick(item)}
 							>
@@ -65,7 +61,7 @@ function ActionsStatus({
 							<div className={styles.upload}>
 								{document_type !== 'undefined' && (
 									<>
-										<IcCFtick width={15} height={15} className={styles.ic_tick} />
+										<IcCFtick className={styles.ic_tick} />
 										Uploaded
 									</>
 								)}
