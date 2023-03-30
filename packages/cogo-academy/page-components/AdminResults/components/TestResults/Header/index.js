@@ -1,4 +1,5 @@
 import { Toggle } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -13,11 +14,11 @@ function Header({ header_data, loading = false }) {
 					Validity:
 					{' '}
 					<span className={styles.validity}>
-						{format(header_data.validity_start, 'dd MMM yy') || ' '}
+						{format(header_data.validity_start, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']) || ' '}
 						{' '}
 						-
 						{' '}
-						{format(header_data.validity_end, 'dd MMM yy') || ' '}
+						{format(header_data.validity_end, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']) || ' '}
 					</span>
 				</p>
 			</div>

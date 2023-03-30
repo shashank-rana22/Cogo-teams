@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils';
@@ -85,11 +86,11 @@ function TestCard({ test_card }) {
 					<div className={styles.availability}>
 						Available:
 						<span className={styles.test_date}>
-							{format(validity_start, 'dd MMM yy')}
+							{format(validity_start, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
 							{' '}
 							-
 							{' '}
-							{format(validity_end, 'dd MMM yy')}
+							{format(validity_end, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
 						</span>
 					</div>
 				)}
