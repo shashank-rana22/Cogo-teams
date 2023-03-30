@@ -121,8 +121,8 @@ function GenerateMAWB({
 			setValue(c.name, taskItem[c.name]);
 		});
 		if (!viewDoc) {
-			setValue('executedDate', new Date());
-			setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
+			setValue('executedDate', edit && taskItem.executedDate ? new Date(taskItem.executedDate) : new Date());
+			setValue('iataCode', edit ? taskItem.iataCode : iataCodeMapping[taskItem?.originAirportId] || '');
 			setValue('city', 'NEW DELHI');
 			setValue('place', 'NEW DELHI');
 			setValue('class', 'q');
@@ -149,7 +149,7 @@ function GenerateMAWB({
 				* Number(dimensionObj.width) * 2.54
 				* Number(dimensionObj.height) * 2.54
 				* Number(dimensionObj.packages_count);
-			} else if (dimensionObj.unit === 'cm') {
+			} else if (dimensionObj.unit === 'cms') {
 				totalVolume
 				+= Number(dimensionObj.length)
 				* Number(dimensionObj.width)

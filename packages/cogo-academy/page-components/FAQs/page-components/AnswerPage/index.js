@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import { Modal, Button, Badge, Pill } from '@cogoport/components';
+import { Modal, Button, Badge, Pill, Toast } from '@cogoport/components';
 import { InputController, CheckboxController, useForm } from '@cogoport/forms';
 import { IcCLike, IcCDislike, IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -87,7 +87,7 @@ function AnswerPage() {
 			setIsLiked(isLiked === 'liked' ? '' : 'liked');
 			refetchQuestions();
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error?.message);
 		}
 	};
 
@@ -310,7 +310,7 @@ function AnswerPage() {
 				</span>
 			</div>
 
-			<RelatedQuestion tags={answerData?.faq_tags[0]} question_abstract={answerData?.question_abstract} />
+			<RelatedQuestion query_name={answerData?.query_name} question_abstract={answerData?.question_abstract} />
 		</div>
 	);
 }

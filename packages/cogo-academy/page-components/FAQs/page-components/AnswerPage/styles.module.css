@@ -1,6 +1,6 @@
 .content {
 	border: 1px solid rgb(128 123 123);
-	border-radius: 5px;
+	border-radius: 6px;
 }
 
 .contentparent {
@@ -82,7 +82,12 @@
 	margin-top: 1.5%;
 	margin-bottom: 1%;
 	overflow: auto;
-	opacity: 0.7;
+	color: #0009;
+
+	img {
+		max-width: 100%;
+		height: 100%;
+	}
 
 	@media (max-width: 768px) {
 		flex-flow: column wrap;
@@ -137,7 +142,7 @@
 .pills {
 	:global {
 		.ui_pill_container.ui_ps_size_sm {
-			padding: 3px 8px;
+			padding: 4px 8px;
 			font-size: 10px;
 			font-weight: 600;
 			background: white;
