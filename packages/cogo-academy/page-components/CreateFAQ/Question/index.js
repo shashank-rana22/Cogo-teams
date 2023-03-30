@@ -189,7 +189,7 @@ function CreateFAQ() {
 						rules={{ required: 'Question is required.' }}
 					/>
 
-					{errors.question_abstract && (
+					{errors?.question_abstract && (
 						<span className={styles.errors}>
 							{errors.question_abstract.message}
 						</span>
@@ -219,7 +219,7 @@ function CreateFAQ() {
 							options={tagOptions}
 							rules={{ required: 'Tags are required.' }}
 						/>
-						{errors.tag_ids && (
+						{errors?.tag_ids && (
 							<span className={styles.errors}>
 								{errors.tag_ids.message}
 							</span>
@@ -248,7 +248,7 @@ function CreateFAQ() {
 							options={topicOptions}
 							rules={{ required: 'Topics are required.' }}
 						/>
-						{errors.topic_ids && (
+						{errors?.topic_ids && (
 							<span className={styles.errors}>
 								{errors.topic_ids.message}
 							</span>
@@ -280,7 +280,7 @@ function CreateFAQ() {
 						options={audienceOptions}
 						rules={{ required: 'Audience is required.' }}
 					/>
-					{errors.audience_ids && (
+					{errors?.audience_ids && (
 						<span className={styles.errors}>
 							{errors.audience_ids.message}
 						</span>

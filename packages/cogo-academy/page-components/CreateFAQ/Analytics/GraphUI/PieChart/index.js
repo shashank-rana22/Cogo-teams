@@ -11,7 +11,6 @@ function PieChart({ pie_data, pie_outer_data, view_count_data }) {
 		render : () => (
 			<CombinedPieChart
 				pie_data={pie_data}
-				pie_outer_data={pie_outer_data}
 			/>
 		),
 	},
@@ -24,7 +23,7 @@ function PieChart({ pie_data, pie_outer_data, view_count_data }) {
 		),
 	},
 	{
-		key    : 'search_requested_pieChart',
+		key    : 'search_requested_pie_chart',
 		render : () => (
 			<SearchRequestedPieChart
 				pie_outer_data={pie_outer_data}

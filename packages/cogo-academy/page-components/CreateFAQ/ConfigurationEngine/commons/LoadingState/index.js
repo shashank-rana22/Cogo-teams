@@ -6,6 +6,8 @@ function LoadingState() {
 			<Placeholder height="50px" width="100%" margin="0px 0px 20px 0px" />
 			<Placeholder height="50px" width="100%" margin="0px 0px 20px 0px" />
 			<Placeholder height="50px" width="100%" margin="0px 0px 20px 0px" />
+			<Placeholder height="50px" width="100%" margin="0px 0px 20px 0px" />
+			<Placeholder height="50px" width="100%" margin="0px 0px 20px 0px" />
 		</div>
 	);
 }

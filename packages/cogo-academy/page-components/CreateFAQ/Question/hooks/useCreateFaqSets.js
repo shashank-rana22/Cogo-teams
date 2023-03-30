@@ -47,7 +47,7 @@ function useCreateFaqSet({
 			if (res?.data) {
 				const id = res?.data?.id;
 
-				Toast.success('question saved as draft');
+				Toast.success('Question saved as draft');
 
 				const href = `/learning/faq/create/question?mode=preview&id=${id}`;
 				router.push(href, href);
@@ -77,7 +77,7 @@ function useCreateFaqSet({
 			});
 
 			if (res?.data) {
-				Toast.success('questions Published sucessfully');
+				Toast.success('Questions Published sucessfully');
 
 				const href = '/learning/faq/create';
 				router.push(href, href);

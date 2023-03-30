@@ -60,7 +60,7 @@ function useCreateFaq() {
 			});
 
 			if (res?.data) {
-				Toast.success(`${queryValue} ${queryName}d sucessfully`);
+				Toast.success(`Faq ${startCase(queryValue)} ${queryName}d sucessfully`);
 				setConfigurationPage('dashboard');
 				router.back();
 			}
