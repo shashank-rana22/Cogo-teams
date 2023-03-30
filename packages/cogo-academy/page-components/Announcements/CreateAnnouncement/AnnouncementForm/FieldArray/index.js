@@ -77,7 +77,7 @@ function FieldArray({
 			</div>
 			{showButtons && !disabled ? (
 				<Button
-					type="add-child"
+					type="button"
 					themeType="secondary"
 					className={styles.add_button}
 					onClick={() => handleAppendChild()}
