@@ -23,6 +23,7 @@ function AccountPayablesByService({ activeTab }:ItemProps) {
 	const oceanAmount = data?.[0]?.amount + data?.[1]?.amount + data?.[2]?.amount + data?.[3]?.amount;
 	const airAmount = data?.[4]?.amount + data?.[5]?.amount;
 	const surfaceAmount = data?.[6]?.amount + data?.[7]?.amount;
+	const overseas = data?.[8]?.amount;
 
 	const amountBoxData = () => {
 		if (activeBox === 'ocean') {
@@ -237,7 +238,7 @@ function AccountPayablesByService({ activeTab }:ItemProps) {
 									Overseas
 								</div>
 								<div className={styles.value}>
-									{getFormattedPrice(0, 'INR')}
+									{getFormattedPrice(overseas, 'INR')}
 								</div>
 							</div>
 						)}

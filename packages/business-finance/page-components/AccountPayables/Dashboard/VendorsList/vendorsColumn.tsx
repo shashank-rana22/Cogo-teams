@@ -10,13 +10,32 @@ const VendorsColumn = [
 	{
 		Header   : <div>Vendor Name</div>,
 		id       : 'businessName',
-		accessor : (row) => (
+		accessor : (row) => {
+			const { businessName } = row || {};
+			return (
 
-			<div className={styles.reference_id}>
-				{getByKey(row, 'businessName') as string}
-			</div>
+				<div className={styles.reference_id}>
+					{businessName?.length > 30
+						? (
+							<Tooltip
+								placement="top"
+								content={businessName}
+							>
+								<text>
 
-		),
+									{`${businessName.substring(
+										0,
+										30,
+									)}...`}
+
+								</text>
+							</Tooltip>
+						)
+						:							businessName}
+				</div>
+
+			);
+		},
 	},
 	{
 		Header   : <div>Amount</div>,

@@ -60,51 +60,6 @@ function LineCharts({ data, isCountView, showData }) {
 		},
 	];
 
-	// const lastThreeMonthConfig1 = {
-	// 	lastThreeMonthMapping1: [{
-	// 		key   : 'date',
-	// 		value : isCountView ? 'count' : 'amount',
-	// 	}],
-	// 	lastThreeMonthdata1: [sales],
-	// };
-	// const lastThreeMonthConfig2 = {
-	// 	lastThreeMonthMapping2: [{
-	// 		key   : 'date',
-	// 		value : isCountView ? 'count' : 'amount',
-	// 	}],
-	// 	lastThreeMonthdata2: [sales1],
-	// };
-	// const lastThreeMonthConfig3 = {
-	// 	lastThreeMonthMapping3: [{
-	// 		key   : 'date',
-	// 		value : isCountView ? 'count' : 'amount',
-	// 	}],
-	// 	lastThreeMonthdata3: [sales2],
-	// };
-	// const { lastThreeMonthdata1 = [], lastThreeMonthMapping1 = [] } = lastThreeMonthConfig1;
-	// const lastThreeMonthBarData1 = (lastThreeMonthdata1 || []).map((item, index) => ({
-	// 	data: item?.map((value) => ({
-	// 		x : value?.[lastThreeMonthMapping1[index]?.key]?.slice(8, 10) || '',
-	// 		y : `${Number(value?.[lastThreeMonthMapping1[index]?.value])}` || 0,
-	// 	})),
-	// }));
-
-	// const { lastThreeMonthdata2 = [], lastThreeMonthMapping2 = [] } = lastThreeMonthConfig2;
-	// const lastThreeMonthBarData2 = (lastThreeMonthdata2 || []).map((item, index) => ({
-	// 	data: item?.map((value) => ({
-	// 		x : value?.[lastThreeMonthMapping2[index]?.key]?.slice(8, 10) || '',
-	// 		y : `${Number(value?.[lastThreeMonthMapping2[index]?.value])}` || 0,
-	// 	})),
-	// }));
-
-	// const { lastThreeMonthdata3 = [], lastThreeMonthMapping3 = [] } = lastThreeMonthConfig3;
-	// const lastThreeMonthBarData3 = (lastThreeMonthdata3 || []).map((item, index) => ({
-	// 	data: item?.map((value) => ({
-	// 		x : value?.[lastThreeMonthMapping3[index]?.key]?.slice(8, 10) || '',
-	// 		y : `${Number(value?.[lastThreeMonthMapping3[index]?.value])}` || 0,
-	// 	})),
-	// }));
-
 	const data1 = [];
 	const data1Obj = {};
 
@@ -150,22 +105,17 @@ function LineCharts({ data, isCountView, showData }) {
 		});
 	});
 
-	console.log(data1, 'data1');
-	// console.log(lastThreeMonthBarData1[0].data, 'lastThreeMonthBarData3');
 	const lastThreeData = [
 		{
 			id   : format(sales[0]?.date, 'MMM yyyy'),
-			// data : lastThreeMonthBarData1[0].data,
 			data : data1,
 		},
 		{
 			id   : format(sales1[0]?.date, 'MMM yyyy'),
-			// data : lastThreeMonthBarData2[0].data,
 			data : last2,
 		},
 		{
 			id   : format(sales2[0]?.date, 'MMM yyyy'),
-			// data : lastThreeMonthBarData3[0].data,
 			data : last3,
 		},
 	];

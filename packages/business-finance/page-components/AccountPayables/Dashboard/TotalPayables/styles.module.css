@@ -2,6 +2,7 @@
     background: #FFFFFF;
     border-radius: 8px;
     padding: 16px;
+    margin-top: -12px;
 }
 .header{
     display: flex;

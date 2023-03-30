@@ -1,13 +1,13 @@
 import { Button, Select, Tooltip } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Filter from '../../../commons/Filters';
 import StyledTable from '../commons/StyledTable';
 import useGetBillTat from '../hooks/useGetBillTat';
 
-// import GaugeChart from './GaugeChart';
 import styles from './styles.module.css';
 import tatColumn from './tatColumn';
 import { timeFrameControls } from './timeFrameControls';
@@ -34,11 +34,18 @@ function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
 	const [firstEvent, setFirstEvent] = useState('');
 	const [secondEvent, setSecondEvent] = useState('');
 
-	const { data, loading, filters, setFilters } = useGetBillTat({ activeTab, filtersData, firstEvent, secondEvent });
+	const { data, loading, filters, setFilters, onApply } = useGetBillTat({
+		activeTab,
+		filtersData,
+		firstEvent,
+		secondEvent,
+	});
+	const { handleSubmit } = useForm();
+
 	const { hours } = data || {};
 	const { Date } = filters || {};
 	const { startDate, endDate } = Date || {};
-	console.log(startDate, 'date');
+
 	const date1 = format(startDate, 'dd MMM yyyy');
 	const date2 = format(endDate, 'dd MMM yyyy');
 
@@ -51,6 +58,14 @@ function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
 			hours,
 		},
 	];
+	const [dataList, setDataList] = useState([]);
+
+	useEffect(() => {
+		if (hours) {
+			setDataList([...dataList, ...list]);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [hours]);
 
 	return (
 		<div className={styles.container}>
@@ -63,7 +78,9 @@ function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
 					<Tooltip
 						placement="top"
 						content="Turnaround time for Bill to move from one status to
-						another that involves human intervention"
+						another that involves human intervention.
+
+						[Select TASKS and DATE to see TAT]"
 					>
 						<div className={styles.info_icon}>
 							<IcMInfo width="16px" height="16px" />
@@ -106,10 +123,11 @@ function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
 						</div>
 					</div>
 					<Button
-						size="md"
+						size="lg"
 						themeType="secondary"
-						style={{ marginTop: '6px' }}
+						style={{ marginTop: '2px' }}
 						role="presentation"
+						onClick={handleSubmit(onApply)}
 					>
 						Apply
 
@@ -120,13 +138,20 @@ function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
 						size="md"
 						themeType="linkUi"
 						style={{ color: '#F68B21', marginTop: '16px' }}
+						role="presentation"
+						onClick={() => {
+							setDataList([]);
+							setFirstEvent(undefined);
+							setSecondEvent(undefined);
+							setFilters({ Date: undefined });
+						}}
 					>
 						Reset Table
 
 					</Button>
 				</div>
 			</div>
-			<StyledTable data={list} columns={tatColumn} loading={loading} />
+			<StyledTable data={dataList} columns={tatColumn} loading={loading} />
 		</div>
 	);
 }

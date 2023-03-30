@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -20,7 +21,6 @@ const useGetBillTat = ({ activeTab, filtersData, firstEvent, secondEvent }:ItemP
 
 	const {
 		Date,
-		...rest
 	} = filters || {};
 
 	const { service, currency } = filtersData || {};
@@ -39,37 +39,38 @@ const useGetBillTat = ({ activeTab, filtersData, firstEvent, secondEvent }:ItemP
 		{ manual: true },
 	);
 
-	const getDahboardData = async () => {
+	const onApply = async () => {
 		try {
-			await trigger({
-				params: {
-					service  : service || undefined,
-					currency : currency || undefined,
-					entity   : activeTab,
-					from     : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
-						: undefined,
-					to: endDate
-						? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
-					secondEvent : secondEvent || undefined,
-					firstEvent  : firstEvent || undefined,
-				},
-			});
-		} catch (err) {
-			console.log(err);
+			const payload = {
+				service     : service || undefined,
+				currency    : currency || undefined,
+				entity      : activeTab,
+				firstEvent  : firstEvent || undefined,
+				secondEvent : secondEvent || undefined,
+				from        : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
+					: undefined,
+				to: endDate
+					? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
+			};
+			await trigger({ params: payload });
+			Toast.success('Please wait Your Request has been Processed!!');
+		} catch (e) {
+			Toast.error(e?.message);
 		}
 	};
 
 	useEffect(() => {
-		getDahboardData();
+		onApply();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), firstEvent, secondEvent, activeTab, service, currency, Date]);
+	}, [activeTab, service, currency]);
 
 	return {
 		data,
 		loading,
-		getDahboardData,
+		// getDahboardData,
 		filters,
 		setFilters,
+		onApply,
 	};
 };
 
