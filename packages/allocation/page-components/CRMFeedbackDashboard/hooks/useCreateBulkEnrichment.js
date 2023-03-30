@@ -3,15 +3,21 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useCreateBulkEnrichment = ({ setActiveTab = () => {}, selectedBulkData = [] }) => {
+const useCreateBulkEnrichment = ({ setActiveTab = () => {}, checkedRowsId = [] }) => {
 	const [isOpenModal, setisOpenModal] = useState(false);
 
 	const onCloseModal = () => {
 		setisOpenModal(false);
 	};
 
-	const [thirdParty, setThirdParty] = useState([]);
+	const [thirdParty, setThirdParty] = useState();
 	const [thirdPartyPayload, setThirdPartyPayload] = useState([]);
+
+	const requestPayload = checkedRowsId.map((id) => ({
+		feedback_id  : id,
+		source       : 'manual',
+		request_type : 'enrichment',
+	}));
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : 'feedback_request_bulk_create',
@@ -22,7 +28,7 @@ const useCreateBulkEnrichment = ({ setActiveTab = () => {}, selectedBulkData = [
 	const onEnrichmentRequest = async () => {
 		try {
 			const payload = {
-				requests      : selectedBulkData,
+				requests      : requestPayload,
 				third_parties : thirdPartyPayload,
 			};
 
