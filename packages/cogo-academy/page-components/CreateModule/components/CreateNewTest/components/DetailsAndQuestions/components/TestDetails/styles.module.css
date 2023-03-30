@@ -18,6 +18,10 @@
 	align-items: center;
 }
 
+.sup {
+	color: #FF0000;
+}
+
 .title {
 	font-size: 20px;
 	font-weight: 600;
