@@ -1,4 +1,5 @@
 import {
+	AsyncSelectController,
 	InputController,
 	MultiselectController,
 	SelectController,
@@ -26,6 +27,9 @@ export const getElementController = (type = 'text') => {
 
 		case 'countrywise-tax-select':
 			return CountrywiseTaxNumberSelectController;
+
+		case 'asyncSelect':
+			return AsyncSelectController;
 
 		default:
 			return null;

@@ -2,7 +2,7 @@ import officeLocations from '../../../../utils/office-locations.json';
 
 import categoryOptions from './category-options';
 
-const getControls = () => [
+const controls = [
 	{
 		name               : 'services',
 		label              : 'Office Details',
@@ -41,4 +41,4 @@ const getControls = () => [
 	},
 ];
 
-export default getControls;
+export default controls;

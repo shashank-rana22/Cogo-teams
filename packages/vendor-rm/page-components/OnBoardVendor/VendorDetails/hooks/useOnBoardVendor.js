@@ -1,14 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty, merge } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect, useMemo } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
@@ -48,18 +46,10 @@ function useOnBoardVendor({
 
 	const { country_id, registration_number = {} } = watchForm;
 
-	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['country'] } },
-	}));
+	const fields = useMemo(() => getControls({
 
-	const cityOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		initialCall: false, params: { filters: { type: ['city'], country_id } },
-	}));
-
-	const fields = getControls({
-		countryOptions,
-		cityOptions,
-	});
+		country_id,
+	}), [country_id]);
 
 	const {
 		onBlurTaxPanGstinControl,

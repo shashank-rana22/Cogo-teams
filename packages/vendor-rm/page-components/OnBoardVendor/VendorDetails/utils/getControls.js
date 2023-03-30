@@ -1,11 +1,13 @@
 import { IcMCloudUpload } from '@cogoport/icons-react';
 
-export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
+export const getControls = ({ country_id = '' }) => [
 	{
-		...countryOptions,
+
 		name        : 'country_id',
 		label       : 'Country of Registration',
-		type        : 'select',
+		type        : 'asyncSelect',
+		params      : { filters: { type: ['country'] } },
+		asyncKey    : 'list_locations',
 		placeholder : 'Select a Country',
 		style       : { flexBasis: '30%' },
 		condition   : { type: ['country'] },
@@ -80,10 +82,11 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 		],
 	},
 	{
-		...cityOptions,
 		name        : 'city_id',
 		label       : 'Branch',
-		type        : 'select',
+		type        : 'asyncSelect',
+		params      : { filters: { type: ['city'], country_id } },
+		asyncKey    : 'list_locations',
 		style       : { flexBasis: '30%' },
 		placeholder : 'Select a city',
 		condition   : { type: ['city'] },

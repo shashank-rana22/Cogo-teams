@@ -8,7 +8,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
-import getControls from '../utils/controls';
+import controls from '../utils/controls';
 import getFormattedServices from '../utils/getFormattedServices';
 import reFormatServices from '../utils/reFormatServices';
 
@@ -25,8 +25,6 @@ function useVendorServices({
 		watch,
 		...rest
 	} = useForm();
-
-	const controls = getControls();
 
 	const {
 		general : { query = {} },
@@ -78,7 +76,7 @@ function useVendorServices({
 		controls.forEach((item) => {
 			setValue(`${item.name}`, vendor_services?.[item.name] || reformattedDataFromApi[item.name]);
 		});
-	}, [controls, setValue, vendorInformation, vendor_services]);
+	}, [setValue, vendorInformation, vendor_services]);
 
 	return {
 		controls,
