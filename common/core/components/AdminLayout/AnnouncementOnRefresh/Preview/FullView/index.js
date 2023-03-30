@@ -2,9 +2,16 @@ import { Button } from '@cogoport/components';
 import { IcMPreview } from '@cogoport/icons-react';
 import React from 'react';
 
-import openDocument from '../../../../../../commons/OpenDocument';
-
 import styles from './styles.module.css';
+
+const openDocument = (url) => {
+	let modifiedUrl = `https://${url}`;
+	if (url?.includes('http://') || url?.includes('https://')) {
+		modifiedUrl = url;
+	}
+
+	window.open(modifiedUrl, '_blank');
+};
 
 function FullView({ url }) {
 	return (
