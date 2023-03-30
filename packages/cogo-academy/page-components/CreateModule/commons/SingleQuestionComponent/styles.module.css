@@ -18,8 +18,11 @@
 
 	@media (max-width: 768px) {
 		flex-direction: column;
-		gap: 12px;
 		align-items: center;
+
+		.input_container {
+			margin-bottom: 12px;
+		}
 	}
 
 	.question_text_err {

@@ -5,6 +5,7 @@ import { useSelector } from '@cogoport/store';
 
 import TestResultMessage from '../../commons/TestResultMessage';
 
+import LoadingState from './LoadingState';
 import QnA from './QnA';
 import styles from './styles.module.css';
 import Summary from './Summary';
@@ -36,7 +37,7 @@ function TestResult() {
 	};
 
 	if (loading) {
-		return 'loading';
+		return <LoadingState />;
 	}
 
 	return (
@@ -49,7 +50,7 @@ function TestResult() {
 
 			<TestResultMessage stats_data={summaryData} />
 
-			<Summary summaryData={summaryData} loading={loading} />
+			<Summary summaryData={summaryData} />
 
 			<QnA user_name={name} />
 		</div>

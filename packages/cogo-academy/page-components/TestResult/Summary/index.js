@@ -1,4 +1,3 @@
-import { Placeholder } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import QuestionWiseStats from '../../UserDashboard/commons/QuestionWiseStats';
@@ -7,7 +6,7 @@ import BarChart from './BarChart';
 import Overview from './Overview';
 import styles from './styles.module.css';
 
-function Summary({ summaryData = {}, loading = false }) {
+function Summary({ summaryData = {} }) {
 	const {
 		topics_covered = {},
 		time_taken = '',
@@ -46,12 +45,6 @@ function Summary({ summaryData = {}, loading = false }) {
 
 		return data;
 	};
-
-	if (loading) {
-		return (
-			<Placeholder height="280px" width="100%" margin="40px 0px 20px 0px" borderRadius="6px" />
-		);
-	}
 
 	return (
 		<div className={styles.container}>

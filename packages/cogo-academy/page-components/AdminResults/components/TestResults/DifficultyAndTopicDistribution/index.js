@@ -21,7 +21,7 @@ function DifficultyAndTopicDistribution({ data = {}, toggleState = false }) {
 
 	return (
 		<div>
-			<div style={{ display: 'flex', marginTop: '-50px' }}>
+			<div style={{ display: 'flex', marginRight: '12px' }}>
 				{toggleState ? (
 					<BarChart chart_data={getTopicWiseData(topic_wise_percent)} yAxis="Correct Answer %" />
 
