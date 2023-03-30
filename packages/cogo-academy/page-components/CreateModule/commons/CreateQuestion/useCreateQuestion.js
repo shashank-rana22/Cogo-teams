@@ -27,7 +27,7 @@ const useCreateQuestion = ({
 		...restFormProps
 	} = useForm();
 
-	const { createTestQuestion, loading } = useCreateTestQuestion();
+	const { createTestQuestion, loading } = useCreateTestQuestion(reset);
 
 	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion({
 		questionSetId,
