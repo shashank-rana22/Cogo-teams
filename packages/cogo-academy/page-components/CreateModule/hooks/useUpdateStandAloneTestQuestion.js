@@ -44,6 +44,7 @@ function useUpdateStandAloneTestQuestion() {
 							: payload,
 			});
 
+			Toast.success('It has been deleted successfully');
 			getTestQuestionTest({
 				questionSetId,
 				...(action === 'delete' ? { pageToShow: 1 } : null),
@@ -53,7 +54,6 @@ function useUpdateStandAloneTestQuestion() {
 			setEditDetails({});
 			reset();
 		} catch (err) {
-			console.log('err::', err);
 			Toast.error(getApiErrorString(err.response.data));
 		}
 	};
