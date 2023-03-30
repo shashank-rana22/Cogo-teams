@@ -22,7 +22,7 @@ function ActionsStatus({
 	};
 	const checkDocumentType = document_type === 'undefined';
 	const checkMappingDocument = documentTypeMapping(document_type);
-	const documentType = checkMappingDocument === 'Shipment' || '';
+	const finalDocumentType = checkMappingDocument === 'Shipment' || '';
 
 	const reqDocuments = useMemo(() => {
 		const documents = [];
@@ -51,7 +51,7 @@ function ActionsStatus({
 						startCase(document_type)
 					)}
 				</div>
-				{(!isEmpty(orgId) && !documentType) && (
+				{(!isEmpty(orgId) && !finalDocumentType) && (
 					<div>
 						{!isEmpty(reqDocuments) ? (
 							<div
