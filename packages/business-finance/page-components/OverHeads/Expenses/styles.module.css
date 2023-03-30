@@ -24,10 +24,10 @@
 }
 
 .search {
-	height: 33px !important;
-    margin-top: 2px;
 	width: 341px;
+	height: 33px !important;
 	padding: 0 4px;
+	margin-top: 2px;
 
 	svg {
 		margin: 2px;
@@ -70,8 +70,8 @@
 }
 
 .recurring_amount_data {
+	display: flex;
 	width: 90%;
-	display:flex;
 }
 
 .underline {
@@ -127,9 +127,9 @@
 	justify-content: center;
 }
 
-.cta_button{
-	background: #ED3726 !important;
-	color: white !important;
+.cta_button {
+	height: 35px !important;
 	font-size: 14px !important;
-	height: 35px !important; 
+	color: white !important;
+	background: #ed3726 !important;
 }

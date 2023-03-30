@@ -1,7 +1,7 @@
 .container {
 	display: flex;
 	justify-content: center;
-	margin-top:80px;
+	margin-top: 80px;
 }
 
 .success {
@@ -15,9 +15,11 @@
 	height: 200px;
 	margin: auto;
 }
-.failed{
-	color:#EE3425;
+
+.failed {
+	color: #ee3425;
 }
-.approve_reject{
-	color:#F68B21
+
+.approve_reject {
+	color: #f68b21;
 }
