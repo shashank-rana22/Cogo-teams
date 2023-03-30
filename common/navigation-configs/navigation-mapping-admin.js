@@ -1886,7 +1886,7 @@ const navigationMappingAdmin = {
 	vendor_rm: {
 		key           : 'vendor_rm',
 		title         : 'VRM',
-		icon          : IcMSettings,
+		icon          : IcMCrm,
 		href          : '/v2/vendors',
 		as            : '/v2/vendors',
 		type          : 'link',

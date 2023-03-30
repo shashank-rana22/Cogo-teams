@@ -87,7 +87,6 @@ const apis = [
 		api         : 'get_purchase_bills_list',
 		access_type : 'private',
 		feature     : 'vendor',
-		// service_name : 'vendor',
 	},
 	{
 		api          : 'list_vendor_poc_services',

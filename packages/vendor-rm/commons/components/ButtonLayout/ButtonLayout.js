@@ -36,26 +36,29 @@ function ButtonLayout({
 				</Button>
 			)}
 
-			{showProceedButton ? (
-				<Button
-					size="lg"
-					themeType="accent"
-					onClick={handleSubmit((data) => onSubmit({ data, step }))}
-					disabled={loading}
-				>
-					Proceed
-				</Button>
-			)	: 	(
-				<Button
-					size="lg"
-					themeType="accent"
-					role="presentation"
-					onClick={onSubmit}
-					disabled={loading}
-				>
-					Submit
-				</Button>
-			)}
+			{showProceedButton
+				? (
+					<Button
+						size="lg"
+						themeType="accent"
+						type="button"
+						onClick={handleSubmit((data) => onSubmit({ data, step }))}
+						disabled={loading}
+					>
+						Proceed
+					</Button>
+				) : (
+					<Button
+						size="lg"
+						type="submit"
+						themeType="accent"
+						role="presentation"
+						onClick={onSubmit}
+						disabled={loading}
+					>
+						Submit
+					</Button>
+				)}
 		</div>
 	);
 }
