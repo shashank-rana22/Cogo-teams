@@ -13,11 +13,8 @@ function ResponseCard({
 }) {
 	return (
 		<section className={styles.card}>
-
 			<div className={styles.card_header}>
-
 				<div className={styles.left_header}>
-
 					{CARD_HEADER[activeTab]?.icon}
 
 					<div className={styles.card_heading_label}>
@@ -25,9 +22,7 @@ function ResponseCard({
 						-
 						{index + 1}
 					</div>
-
 				</div>
-
 			</div>
 
 			<div className={styles.card_body}>

@@ -30,7 +30,7 @@ function Feedbacks() {
 	return (
 		<>
 			<button className={styles.back_button} onClick={() => router.back()}>
-				<IcMArrowBack width="32px" height="20px" />
+				<IcMArrowBack width={32} height={20} />
 				CRM Feedback Dashboard
 			</button>
 

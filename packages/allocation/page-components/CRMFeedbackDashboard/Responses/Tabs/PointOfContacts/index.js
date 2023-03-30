@@ -1,7 +1,7 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../common/EmptyState';
+import EmptyState from '../../../../../common/EmptyState';
 import ResponseCard from '../../components/ResponseCard';
 import LoadingState from '../../components/ResponseCard/LoadingState';
 import useResponsesList from '../../hooks/useResponsesList';

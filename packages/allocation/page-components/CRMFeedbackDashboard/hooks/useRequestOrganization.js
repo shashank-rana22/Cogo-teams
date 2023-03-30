@@ -10,8 +10,8 @@ const useRequestOrganization = ({ organizationId = '', type = '' }) => {
 		page           : 1,
 		is_third_party : false,
 		filters        : {
-			organization_id      : type === 'lead_organization' ? (undefined) : (organizationId),
-			lead_organization_id : type === 'lead_organization' ? (organizationId) : (undefined),
+			organization_id      : type === 'lead_organization' ? undefined : organizationId,
+			lead_organization_id : type === 'lead_organization' ? organizationId : undefined,
 		},
 	});
 

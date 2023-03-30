@@ -53,7 +53,6 @@ function ActionButton({
 				size="sm"
 				closeOnOuterClick={false}
 				onClose={onCloseModal}
-				className={styles.modal_container}
 				placement="top"
 			>
 				<Modal.Header title="Deactivate Enrichment Request" />

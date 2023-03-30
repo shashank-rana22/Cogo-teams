@@ -3,12 +3,13 @@ import { useState } from 'react';
 
 import Address from './Address';
 import PointOfContacts from './PointOfContacts';
+import styles from './styles.module.css';
 
 function PrimaryTabs({ feedback_request_id = '' }) {
 	const [activeTab, setActiveTab] = useState('user');
 
 	return (
-		<div style={{ marginTop: 30 }}>
+		<div className={styles.tabs_container}>
 			<Tabs
 				activeTab={activeTab}
 				themeType="secondary"

@@ -3,12 +3,13 @@ import { useState } from 'react';
 
 import FeedbackTab from './FeedbackTab';
 import RequestTab from './RequestTab';
+import styles from './styles.module.css';
 
 function PrimaryTabs({ organization_id = '', type = '' }) {
 	const [activeTab, setActiveTab] = useState('feedbacks');
 
 	return (
-		<div style={{ marginTop: 30 }}>
+		<div className={styles.tabs_container}>
 
 			<Tabs
 				activeTab={activeTab}

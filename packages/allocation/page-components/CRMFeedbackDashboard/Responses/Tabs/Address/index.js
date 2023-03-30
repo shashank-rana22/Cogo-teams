@@ -1,7 +1,7 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../common/EmptyState';
+import EmptyState from '../../../../../common/EmptyState';
 import ResponseCard from '../../components/ResponseCard';
 import LoadingState from '../../components/ResponseCard/LoadingState';
 import useResponsesList from '../../hooks/useResponsesList';
@@ -31,7 +31,7 @@ function Address({ activeTab = '', feedback_request_id = '' }) {
 	return (
 		<>
 			<div className={styles.container}>
-				{(data).map((user, index) => (
+				{data.map((user, index) => (
 					<ResponseCard
 						key={user?.id}
 						user={user}

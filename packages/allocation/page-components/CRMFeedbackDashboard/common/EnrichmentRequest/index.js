@@ -68,7 +68,6 @@ function EnrichmentRequest({
 				size="md"
 				closeOnOuterClick={false}
 				onClose={onCloseModal}
-				className={styles.modal_container}
 				placement="top"
 			>
 				<Modal.Header title="Create Enrichment Request" />

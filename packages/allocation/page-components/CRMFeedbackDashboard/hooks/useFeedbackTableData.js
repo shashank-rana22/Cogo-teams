@@ -12,8 +12,8 @@ const useFeedbackTableData = ({ organizationId = '', type = '' }) => {
 		page_limit : 10,
 		page       : 1,
 		filters    : {
-			organization_id      : type === 'lead_organization' ? (undefined) : (organizationId),
-			lead_organization_id : type === 'lead_organization' ? (organizationId) : (undefined),
+			organization_id      : type === 'lead_organization' ? undefined : organizationId,
+			lead_organization_id : type === 'lead_organization' ? organizationId : undefined,
 		},
 	});
 

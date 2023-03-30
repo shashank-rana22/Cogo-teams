@@ -25,7 +25,7 @@ function OrganizationCard(props, ref) {
 
 				<Pill
 					size="md"
-					color={status === 'Request Created' ? ('blue') : ('green')}
+					color={status === 'Request Created' ? 'blue' : 'green'}
 					className={styles.pill}
 				>
 					{status || 'Nil'}
