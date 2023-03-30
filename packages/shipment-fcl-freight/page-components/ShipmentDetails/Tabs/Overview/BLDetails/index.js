@@ -44,7 +44,7 @@ function BLDetails() {
 		</div>
 	);
 
-	const buttons = () => (
+	const renderButtons = () => (
 		<div className={styles.button_container}>
 			<Button
 				onClick={(e) => {
@@ -66,39 +66,6 @@ function BLDetails() {
 			>
 				Update Container Number
 			</Button>
-
-			{mappingModal ? (
-				<Modal
-					show={mappingModal}
-					onClose={() => {
-						setMappingModal(false);
-					}}
-				>
-					<Modal.Header title="BL Container Mapping" />
-					<BlContainersMapping
-						data={documents}
-						setMappingModal={setMappingModal}
-						containerDetails={containerDetailsArray}
-						refetch={refetch}
-					/>
-				</Modal>
-			) : null}
-
-			{editContainerNum ? (
-				<Modal
-					show={editContainerNum}
-					onClose={() => {
-						setEditContainerNum(false);
-					}}
-				>
-					<Modal.Header title="Update Container Number" />
-					<ContainerNmUpdate
-						setEditContainerNum={setEditContainerNum}
-						containerDetails={containerDetailsArray}
-						refetch={refetch}
-					/>
-				</Modal>
-			) : null}
 		</div>
 	);
 
@@ -109,7 +76,7 @@ function BLDetails() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.button_div}>{buttons()}</div>
+			<div className={styles.button_div}>{renderButtons()}</div>
 			<Accordion title={renderBlCount} style={{ width: '100%' }}>
 				{!documents?.length ? (
 					<EmptyState showContent={emptyStateContent} />) : (
@@ -151,6 +118,39 @@ function BLDetails() {
 						</div>
 				)}
 			</Accordion>
+
+			{mappingModal ? (
+				<Modal
+					show={mappingModal}
+					onClose={() => {
+						setMappingModal(false);
+					}}
+				>
+					<Modal.Header title="BL Container Mapping" />
+					<BlContainersMapping
+						data={documents}
+						setMappingModal={setMappingModal}
+						containerDetails={containerDetailsArray}
+						refetch={refetch}
+					/>
+				</Modal>
+			) : null}
+
+			{editContainerNum ? (
+				<Modal
+					show={editContainerNum}
+					onClose={() => {
+						setEditContainerNum(false);
+					}}
+				>
+					<Modal.Header title="Update Container Number" />
+					<ContainerNmUpdate
+						setEditContainerNum={setEditContainerNum}
+						containerDetails={containerDetailsArray}
+						refetch={refetch}
+					/>
+				</Modal>
+			) : null}
 		</div>
 	);
 }

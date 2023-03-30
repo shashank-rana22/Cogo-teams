@@ -15,11 +15,26 @@ function ContainerNmUpdate({
 	const handleChange = (e, container_id) => {
 		setContainerValue({ ...containerValue, [container_id]: e });
 	};
-	const { handleSubmit, loading } = useUpdateContainerDetails({
-		containerValue,
+
+	const { loading, apiTrigger } = useUpdateContainerDetails({
 		setEditContainerNum,
 		refetch,
 	});
+
+	const onSubmit = () => {
+		const payload = [];
+		Object.keys(containerValue || {}).forEach((key) => {
+			const reqObj = {
+				id   : key,
+				data : {
+					container_number: containerValue[key],
+				},
+			};
+			payload.push(reqObj);
+		});
+
+		apiTrigger(payload);
+	};
 
 	return (
 		loading ? <div className={styles.loader}><Loader themeType="primary" /></div> : (
@@ -47,7 +62,7 @@ function ContainerNmUpdate({
 
 					<Button
 						size="md"
-						onClick={handleSubmit}
+						onClick={onSubmit}
 						disabled={loading}
 					>
 						Submit

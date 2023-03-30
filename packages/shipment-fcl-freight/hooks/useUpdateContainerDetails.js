@@ -3,8 +3,8 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateContainerDetails = ({
-	containerValue = {},
 	setEditContainerNum = () => {},
+	setMappingModal = () => {},
 	refetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -12,36 +12,30 @@ const useUpdateContainerDetails = ({
 		method : 'POST',
 	});
 
-	const handleSubmit = async () => {
-		const update_data = [];
-		Object.keys(containerValue || {}).forEach((key) => {
-			const reqObj = {
-				id   : key,
-				data : {
-					container_number: containerValue[key],
-				},
-			};
-			update_data.push(reqObj);
-		});
+	const apiTrigger = async (update_data) => {
+		if (update_data?.length !== 0) {
+			try {
+				const res = await trigger({ data: { update_data } });
 
-		try {
-			const res = await trigger({ data: { update_data } });
-
-			if (res.status === 200) {
-				Toast.success('Container Details Updated Successfully!');
-				setEditContainerNum(false);
-				refetch();
-			} else {
-				Toast.error('Please check the details filled or try again!');
+				if (res.status === 200) {
+					Toast.success('Container Details Updated Successfully!');
+					setEditContainerNum(false);
+					setMappingModal(false);
+					refetch();
+				} else {
+					Toast.error('Please check the details filled or try again!');
+				}
+			} catch (err) {
+				Toast.error(getApiErrorString(err));
 			}
-		} catch (err) {
-			Toast.error(getApiErrorString(err));
+		} else {
+			Toast.error('Update Data cannot be blank');
 		}
 	};
 
 	return {
-		handleSubmit,
 		loading,
+		apiTrigger,
 	};
 };
 

@@ -1,9 +1,11 @@
 import { Button } from '@cogoport/components';
 import { MultiselectController, InputController } from '@cogoport/forms';
 
-import useBlContainerMappings from '../../../../../../hooks/useBlContainerMappings';
+import useUpdateContainerDetails from '../../../../../../hooks/useUpdateContainerDetails';
 
 import styles from './styles.module.css';
+import formatPayload from './utils/formatPayload';
+import getFields from './utils/useGetFields';
 
 function BlContainersMapping({
 	data,
@@ -12,20 +14,22 @@ function BlContainersMapping({
 	containerDetails,
 }) {
 	const {
-		errors,
-		handleSubmit,
-		control,
-		register,
-		mutatedFields,
-		onSubmit,
-		loading,
-	} = useBlContainerMappings({
-		data,
-		setMappingModal,
-		containerDetails,
-		refetch,
+		errors, control, register,
+		mutatedFields, handleSubmit,
+	} = getFields({ data, containerDetails });
 
+	const {
+		loading,
+		apiTrigger,
+	} = useUpdateContainerDetails({
+		setMappingModal,
+		refetch,
 	});
+
+	const onSubmit = (values) => {
+		const payload = formatPayload({ values, containerDetails });
+		apiTrigger(payload);
+	};
 
 	return (
 		<div className={styles.content}>
@@ -49,7 +53,7 @@ function BlContainersMapping({
 								{...register(`bl_mappings.${index}.container_number`)}
 								size="sm"
 								options={field.options}
-								rules={{ required: { value: true } }}
+								rules={{ required: { value: true, message: 'This field is required' } }}
 							/>
 							{errors?.bl_mappings?.[index]?.container_number?.message
 							&& <span>This field is required</span>}
