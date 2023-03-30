@@ -10,8 +10,6 @@ import controls from '../../ShowPocForm/utils/controls';
 const useAddServicePoc = ({
 	showForm,
 	setShowForm = () => {},
-	// getVendorData,
-	// refetchServicesPocs = () => {},
 	refetchVendorInfo,
 }) => {
 	const { data: pocData = [] } = showForm || {};
@@ -86,8 +84,7 @@ const useAddServicePoc = ({
 			number       : mobile_number.split(' ')[1],
 		});
 		setValue('poc_role', poc_role);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [pocData, setValue]);
 
 	return {
 		loading,

@@ -1,5 +1,6 @@
-/* eslint-disable import/order */
+/* eslint-disable import/no-unresolved */
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/constants/globals.json';
 import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
@@ -12,8 +13,6 @@ import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
-// eslint-disable-next-line import/no-relative-packages
-import GLOBAL_CONSTANTS from '../../../../../../common/constants/globals.json';
 import { getControls } from '../utils/getControls';
 import isRegistrationNumberValid from '../utils/isRegistrationNumberValid';
 

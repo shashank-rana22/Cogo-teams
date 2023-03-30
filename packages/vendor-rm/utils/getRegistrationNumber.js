@@ -1,7 +1,6 @@
-/* eslint-disable import/order */
-
 // eslint-disable-next-line import/no-relative-packages
 import GLOBAL_CONSTANTS from '../../../common/constants/globals.json';
+
 import getPanFromGst from './getPanFromGst';
 
 const getRegistrationNumber = ({ values = {} }) => {
