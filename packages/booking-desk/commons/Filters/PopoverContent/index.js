@@ -3,17 +3,20 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CONTROLS from '../../../config/CONTROLS_CONFIG.json';
+import TABS_CONFIG from '../../../config/TABS_CONFIG.json';
 import applyPopoverFilters from '../../../helpers/applyPopoverFilters';
 
 import styles from './styles.module.css';
 
-export default function PopoverContent({ stateProps, tabs, setShowPopover }) {
+export default function PopoverContent({ stateProps, setShowPopover }) {
 	const { filters, setFilters, activeTab } = stateProps;
 	const { q, page, ...defaultFilters } = filters;
 
 	const [formValues, setFormValues] = useState(defaultFilters);
 
-	const isCriticalVisible = !!tabs.find((tab) => tab.name === activeTab).isCriticalVisible;
+	const tabs = TABS_CONFIG[formValues.shipment_type];
+
+	const { isCriticalVisible } = tabs.find((tab) => tab.name === activeTab) || tabs[0];
 
 	const isFiltersApplied = Object.entries(defaultFilters)
 		.some(([key, val]) => ((key === 'isCriticalOn')

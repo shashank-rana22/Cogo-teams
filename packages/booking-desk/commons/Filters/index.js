@@ -25,7 +25,7 @@ function renderAppliedFilters({ appliedFilters, setFilters }) {
 	));
 }
 
-export default function Filters({ stateProps, tabs }) {
+export default function Filters({ stateProps }) {
 	const [showPopover, setShowPopover] = useState(false);
 	const { filters, setFilters } = stateProps;
 
@@ -51,7 +51,6 @@ export default function Filters({ stateProps, tabs }) {
 					render={(
 						<PopoverContent
 							stateProps={stateProps}
-							tabs={tabs}
 							setShowPopover={setShowPopover}
 							key={showPopover}
 						/>
