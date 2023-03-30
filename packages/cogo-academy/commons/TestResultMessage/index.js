@@ -20,7 +20,7 @@ const RESULT_MAPPING = {
 function TestResultMessage({ stats_data }) {
 	const { date, status, test_name } = stats_data || {};
 
-	const { image_url, message, alt, color } = RESULT_MAPPING[status];
+	const { image_url, message, alt, color } = RESULT_MAPPING[status] || {};
 
 	return (
 		<div className={styles.message_container}>

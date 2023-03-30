@@ -1,56 +1,32 @@
 import { Pagination, Table, TabPanel, Tabs } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
-import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import EmptyState from '../../../CreateModule/components/EmptyState';
 import Filters from '../../commons/Filters';
 
+import useStudentWiseTestResult from './hooks/useStudentWiseTestResult';
 import styles from './styles.module.css';
 import getTableColumns from './TableColumns';
 
 function StudentsComponent({ test_id }) {
-	const [activeTab, setActiveTab] = useState('appeared');
-
-	const [params, setParams] = useState({});
-	const [filter, setFilter] = useState('');
-	const [sortFilter, setSortFilter] = useState({});
-	const [setSearchValue] = useState('');
-
-	const { debounceQuery, query } = useDebounceQuery();
-
-	const { sortBy, sortType } = sortFilter || {};
-
-	const STUDENTS_MAPPING = {
-		appeared: {
-			url     : '/list_admin_student_wise_test_result',
-			payload : {
-				test_id,
-				sort_by     : sortBy,
-				sort_type   : sortType,
-				filters     : { final_result: filter },
-				search_term : query,
-				...params,
-			},
-			title: 'Appeared',
-		},
-		not_appeared: {
-			url     : '/list_not_appeared_users',
-			payload : {
-				test_id,
-			},
-			title: 'Not Appeared',
-		},
-	};
-
-	const { payload, url: api_url = '' } = STUDENTS_MAPPING[activeTab];
-
-	const [{ data, loading }, refetch] = useRequest({
-		method : 'GET',
-		url    : api_url,
-		params : { ...payload },
-	}, { manual: false });
+	const {
+		data = {},
+		loading,
+		refetch,
+		activeTab,
+		sortFilter,
+		setSortFilter,
+		debounceQuery,
+		setActiveTab,
+		filter,
+		setFilter,
+		searchValue,
+		setSearchValue,
+		params,
+		setParams,
+		STUDENTS_MAPPING,
+	} = useStudentWiseTestResult({ test_id });
 
 	const { stats = [], page_limit = 0, total_count = 0, list } = data || {};
 
@@ -86,6 +62,7 @@ function StudentsComponent({ test_id }) {
 			<Filters
 				filter={filter}
 				setFilter={setFilter}
+				searchValue={searchValue}
 				setSearchValue={setSearchValue}
 				debounceQuery={debounceQuery}
 			/>
