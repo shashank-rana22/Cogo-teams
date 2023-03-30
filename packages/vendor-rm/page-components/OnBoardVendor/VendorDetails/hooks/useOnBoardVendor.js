@@ -1,10 +1,9 @@
-/* eslint-disable import/no-unresolved */
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/constants/globals.json';
 import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
