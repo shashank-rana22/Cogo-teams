@@ -7,8 +7,8 @@ import MostReadFAQs from './MostReadFAQs';
 
 function Tabbase() {
 	const [activeTab, setActiveTab] = useState('All FAQs');
-	return (
 
+	return (
 		<div style={{ margin: 20 }}>
 			<Tabs
 				tabIcon={<IcMProfile />}
