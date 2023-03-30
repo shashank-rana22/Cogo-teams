@@ -3,6 +3,7 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import {
 	asyncFieldsPartnerUsers,
 } from '@cogoport/forms/utils/getAsyncFields';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { isEmpty } from '@cogoport/utils';
 
 import useCreateBulkEnrichment from '../../hooks/useCreateBulkEnrichment';
@@ -30,7 +31,7 @@ function EnrichmentRequest({
 		params      : {
 			filters: {
 				status   : 'active',
-				role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+				role_ids : GLOBAL_CONSTANTS.uuid.third_party_enrichment_agencies_role_ids,
 			},
 		},
 	});

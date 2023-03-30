@@ -30,9 +30,7 @@ function ActionButton({
 			<Button
 				size="sm"
 				themeType="secondary"
-				onClick={() => {
-					router.push(url);
-				}}
+				onClick={() => router.push(url)}
 			>
 				{label}
 			</Button>
