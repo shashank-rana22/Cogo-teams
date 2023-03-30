@@ -1,27 +1,27 @@
 .card {
-  width: fit-content;
-  background-color: var(--color-secondary-5);
-  border-radius: 8px;
-  display: flex;
-  padding: 12px 20px 12px 12px;
-  margin-top: 20px;
-  font-size: 16px;
-  color: var(--color-secondary-greyscale-2);
+	display: flex;
+	width: fit-content;
+	padding: 12px 20px 12px 12px;
+	margin-top: 20px;
+	font-size: 16px;
+	color: var(--color-secondary-greyscale-2);
+	background-color: var(--color-secondary-5);
+	border-radius: 8px;
 }
 
 .details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 12px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: 12px;
 }
 
 .name {
-  font-weight: 700;
-  margin-left: 4px;
+	margin-left: 4px;
+	font-weight: 700;
 }
 
 .pill {
-  margin: 4px 0 0 0;
-  width: fit-content;
+	width: fit-content;
+	margin: 4px 0 0;
 }

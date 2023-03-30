@@ -1,39 +1,39 @@
 .filter {
-  margin-top: 12px;
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	width: 100%;
+	margin-top: 12px;
 }
 
 .select {
-  width: 200px;
-  margin-right: 4px;
+	width: 200px;
+	margin-right: 4px;
 
-  :global(.ui_select_input_control) {
-    font-size: 14px !important;
-    color: var(--color-secondary-greyscale-2);
-  }
+	:global(.ui_select_input_control) {
+		font-size: 14px !important;
+		color: var(--color-secondary-greyscale-2);
+	}
 }
 
 .time {
-  margin-right: 4px;
+	margin-right: 4px;
 
-  :global(input) {
-    margin-right: 4px;
-    height: 40px !important;
+	:global(input) {
+		height: 40px !important;
+		margin-right: 4px;
 
-    &::placeholder {
-      font-size: 14px;
-      color: var(--color-secondary-greyscale-2);
-      font-family: var(--font-family);
-    }
-  }
+		&::placeholder {
+			font-family: var(--font-family);
+			font-size: 14px;
+			color: var(--color-secondary-greyscale-2);
+		}
+	}
 }
 
 @media (max-width: 576px) {
-  .select,
-  .time {
-    margin-bottom: 8px;
-  }
+	.select,
+	.time {
+		margin-bottom: 8px;
+	}
 }
