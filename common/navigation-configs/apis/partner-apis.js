@@ -10260,7 +10260,7 @@ const partner = {
 		{
 			api          : 'get_cogoverse_dashboard',
 			access_type  : 'private',
-			service_name : 'unified_dashboard',
+			service_name : 'communication',
 		},
 		{
 			api          : 'get_cogoverse_globe_data',

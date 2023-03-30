@@ -14,9 +14,9 @@ const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
 		try {
 			await trigger({
 				params: {
-					mobile_country_code : CountryMobileCode || undefined,
-					start_date          : date?.startDate || undefined,
-					end_date            : date?.endDate || undefined,
+					// mobile_country_code : CountryMobileCode || undefined,
+					start_date : date?.startDate || undefined,
+					end_date   : date?.endDate || undefined,
 
 				},
 			});
@@ -24,7 +24,7 @@ const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
 			Toast.error(err?.message);
 		}
 	};
-
+	console.log('data', data);
 	useEffect(() => {
 		(async () => {
 			await getCogoverseDashboard();
