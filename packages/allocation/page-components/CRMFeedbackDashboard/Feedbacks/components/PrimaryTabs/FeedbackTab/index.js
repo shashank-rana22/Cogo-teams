@@ -17,8 +17,6 @@ function FeedbacksReceived({ organization_id = '', setActiveTab = () => {}, type
 		selectAll = false,
 		onChangeTableHeadCheckbox = () => {},
 		onChangeBodyCheckbox = () => {},
-		selectedBulkData = [],
-		onBulkDataPayload = () => {},
 	} = useFeedbackTableData({ organizationId: organization_id, type });
 
 	const { page, page_limit, total_count } = paginationData;
@@ -36,8 +34,6 @@ function FeedbacksReceived({ organization_id = '', setActiveTab = () => {}, type
 			<EnrichmentRequest
 				checkedRowsId={checkedRowsId}
 				setActiveTab={setActiveTab}
-				selectedBulkData={selectedBulkData}
-				onBulkDataPayload={onBulkDataPayload}
 			/>
 
 			<CrmTable columns={columns} data={data} loading={loading} />

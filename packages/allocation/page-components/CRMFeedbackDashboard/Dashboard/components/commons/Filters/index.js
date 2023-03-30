@@ -16,6 +16,18 @@ function Filters({
 }) {
 	const [date, setDate] = useState();
 
+	const cogoEntityOptions = useGetAsyncOptions({
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_partners',
+		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	});
+
 	const organizationOptions = useGetAsyncOptions({
 		...asyncFieldsOrganizations(),
 		initialCall : false,
@@ -63,6 +75,7 @@ function Filters({
 	const modifiedControls = activeTab === 'feedbacks_received'
 		? (
 			controlsFeedbacks(
+				cogoEntityOptions || {},
 				organizationOptions || {},
 				leadOrganizationOptions || {},
 				kamOptions || {},

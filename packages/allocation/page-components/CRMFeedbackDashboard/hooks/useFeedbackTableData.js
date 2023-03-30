@@ -5,7 +5,6 @@ import { useMemo, useState, useEffect, useCallback } from 'react';
 const useFeedbackTableData = ({ organizationId = '', type = '' }) => {
 	const [selectAll, setSelectAll] = useState(false);
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
-	const [selectedBulkData, setSelectedBulkData] = useState([{}]);
 
 	const [filters, setFilters] = useState({});
 
@@ -101,20 +100,6 @@ const useFeedbackTableData = ({ organizationId = '', type = '' }) => {
 		});
 	};
 
-	const onBulkDataPayload = () => {
-		const bulkData = list
-			.filter((item) => checkedRowsId.includes(item.id))
-			.map(({ source_id, source_type, organization_id, lead_organization_id }) => ({
-				source_id,
-				source               : source_type,
-				organization_id      : organization_id || undefined,
-				lead_organization_id : lead_organization_id || undefined,
-				request_type         : 'enrichment',
-			}));
-
-		setSelectedBulkData(bulkData);
-	};
-
 	return {
 		data: list,
 		loading,
@@ -127,8 +112,6 @@ const useFeedbackTableData = ({ organizationId = '', type = '' }) => {
 		selectAll,
 		onChangeTableHeadCheckbox,
 		onChangeBodyCheckbox,
-		selectedBulkData,
-		onBulkDataPayload,
 	};
 };
 

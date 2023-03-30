@@ -12,8 +12,6 @@ import styles from './styles.module.css';
 function EnrichmentRequest({
 	checkedRowsId = [],
 	setActiveTab = () => {},
-	selectedBulkData = [],
-	onBulkDataPayload = () => {},
 }) {
 	const {
 		onEnrichmentRequest = () => {},
@@ -21,10 +19,10 @@ function EnrichmentRequest({
 		isOpenModal = false,
 		setisOpenModal = () => {},
 		onCloseModal = () => {},
-		thirdParty = [],
+		thirdParty = '',
 		setThirdParty = () => {},
 		setThirdPartyPayload = () => {},
-	} = useCreateBulkEnrichment({ setActiveTab, selectedBulkData });
+	} = useCreateBulkEnrichment({ setActiveTab, checkedRowsId });
 
 	const thirdPartyOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(),
@@ -59,7 +57,6 @@ function EnrichmentRequest({
 				className={styles.button}
 				onClick={() => {
 					setisOpenModal(true);
-					onBulkDataPayload();
 				}}
 				disabled={isEmpty(checkedRowsId)}
 			>
@@ -82,14 +79,6 @@ function EnrichmentRequest({
 					{checkedRowsId.length || 'these'}
 					{' '}
 					selected feedback(s):
-					{/* <MultiSelect
-							value={thirdParty}
-							onChange={setThirdParty}
-							placeholder="Select 3rd Party Organisation(s)"
-							options={thirdPartyOptions}
-							isClearable
-							className={styles.modal_select}
-						/> */}
 					<Select
 						className={styles.modal_select}
 						placeholder="Select 3rd Party Agent(s)"
@@ -102,20 +91,22 @@ function EnrichmentRequest({
 
 				<Modal.Footer>
 					<Button
-						type="submit"
+						type="button"
 						size="md"
 						themeType="secondary"
 						onClick={onCloseModal}
 					>
 						Cancel
 					</Button>
+
 					<Button
-						type="submit"
+						type="button"
 						size="md"
 						themeType="primary"
 						className={styles.submit_button}
 						disabled={isEmpty(thirdParty) || loading}
 						onClick={onEnrichmentRequest}
+						loading={loading}
 					>
 						Send Request
 					</Button>
