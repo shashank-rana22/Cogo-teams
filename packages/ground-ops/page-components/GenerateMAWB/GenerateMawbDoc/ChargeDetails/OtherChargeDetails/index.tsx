@@ -27,14 +27,14 @@ interface Props {
 	taskItem?: NestedObj;
 	formData?: NestedObj;
 	whiteout?:boolean;
-	activeCategory?: String;
+	awbType?: String;
 }
 
 function OtherChargeDetails({
 	taskItem = {},
 	formData = {},
 	whiteout = false,
-	activeCategory = '',
+	awbType = '',
 }:Props) {
 	const { agentOtherCharges = [], carrierOtherCharges = [] } = formData;
 
@@ -247,7 +247,7 @@ function OtherChargeDetails({
 							`}
 					>
 						<p style={{ fontSize: 18 }}>
-							{activeCategory === 'mawb' ? taskItem?.awbNumber : taskItem?.document_number}
+							{awbType === 'mawb' ? taskItem?.awbNumber : taskItem?.document_number}
 						</p>
 					</div>
 				</div>

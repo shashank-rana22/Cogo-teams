@@ -19,7 +19,10 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 		tempColor = 'transparent';
 	}
 
-	const { awbNumber = '', document_number:documentNo = '' } = taskItem;
+	const { awbNumber = '', document_number:documentNo = '', documentType = '' } = taskItem;
+
+	const awbType = activeCategory || documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
+
 	return (
 		<div className={styles.container} style={{ pointerEvents: 'none' }}>
 			<div className={cl`
@@ -41,7 +44,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p style={{ fontSize: 18 }}>
-							{activeCategory === 'mawb' ? awbNumber.substring(0, 3)
+							{awbType === 'mawb' ? awbNumber.substring(0, 3)
 								: documentNo.substring(0, 4)}
 						</p>
 					</div>
@@ -62,7 +65,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 					`}
 					>
 						<p style={{ fontSize: 18 }}>
-							{activeCategory === 'mawb' ? awbNumber.substring(4, 13) : documentNo.substring(5, 13)}
+							{awbType === 'mawb' ? awbNumber.substring(4, 13) : documentNo.substring(5, 13)}
 						</p>
 					</div>
 				</div>
@@ -72,7 +75,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 					${styles.mawb_bill_number} 
 				`}
 				>
-					<p style={{ fontSize: 18 }}>{activeCategory === 'mawb' ? awbNumber : documentNo}</p>
+					<p style={{ fontSize: 18 }}>{awbType === 'mawb' ? awbNumber : documentNo}</p>
 				</div>
 			</div>
 			<div className={styles.flex} style={{ minHeight: 140 }}>
@@ -171,7 +174,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 								textTransform : 'uppercase',
 							}}
 						>
-							{activeCategory === 'mawb' ? formData?.airline : 'HOUSE AIRWAY BILL'}
+							{awbType === 'mawb' ? formData?.airline : 'HOUSE AIRWAY BILL'}
 						</p>
 					</div>
 					<div className={cl`

@@ -31,6 +31,8 @@ function ChargeDetails({
 		tempColor = 'transparent';
 	}
 
+	const awbType = activeCategory || taskItem?.documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
+
 	return (
 		<div className={styles.container}>
 			<div className={cl`
@@ -43,7 +45,7 @@ function ChargeDetails({
 					taskItem={taskItem}
 					formData={formData}
 					whiteout={whiteout}
-					activeCategory={activeCategory}
+					awbType={awbType}
 				/>
 			</div>
 

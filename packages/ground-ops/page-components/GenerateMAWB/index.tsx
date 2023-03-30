@@ -116,8 +116,6 @@ function GenerateMAWB({
 		}
 	}, [activeHawb, activeCategory]);
 
-	console.log('hawbData', hawbData);
-
 	useEffect(() => {
 		if (hawbSuccess) {
 			setTaskItem({ ...item, ...hawbData.data.data });

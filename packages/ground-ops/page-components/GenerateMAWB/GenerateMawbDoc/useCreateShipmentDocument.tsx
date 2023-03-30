@@ -85,7 +85,7 @@ const useCreateShipmentDocument = ({
 				setGenerate(false);
 				setEdit(false);
 			} else {
-				setHawbDetails([...hawbDetails, { id: new Date().getTime(), isNew: true }]);
+				if (!edit) { setHawbDetails([...hawbDetails, { id: new Date().getTime(), isNew: true }]); }
 				getHawb(res.data.ids[0]);
 			}
 		} catch (error) {
