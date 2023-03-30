@@ -6,8 +6,8 @@ import styles from './styles.module.css';
 
 interface ItemTypes {
 	billDocumentUrl?: string;
-	billType?:string,
-	isProforma?:boolean,
+	billType?: string,
+	isProforma?: boolean,
 	billNumber?: string;
 	invoicePdfUrl?: string;
 	proformaPdfUrl?: string;
