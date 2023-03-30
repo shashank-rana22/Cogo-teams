@@ -20,6 +20,7 @@ function OrganizationDetails({
 	openNewTab = () => {},
 	isChannelPartner = false,
 	getOrgDetails = () => {},
+	loading = {},
 }) {
 	const { organization_id:messageOrgId = '' } = formattedMessageData || {};
 	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
@@ -144,7 +145,7 @@ function OrganizationDetails({
 							)}
 
 						</Pill>
-						{ !isChannelPartner && orgLoading && (
+						{ !isChannelPartner && !orgLoading && !loading && (
 							<Button
 								size="sm"
 								themeType="primary"
