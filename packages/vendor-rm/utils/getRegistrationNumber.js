@@ -1,9 +1,8 @@
 /* eslint-disable import/order */
-// TODO remove COUNTRY_IDS and pick from constants in cogo-partner
-import getPanFromGst from './getPanFromGst';
 
 // eslint-disable-next-line import/no-relative-packages
 import GLOBAL_CONSTANTS from '../../../common/constants/globals.json';
+import getPanFromGst from './getPanFromGst';
 
 const getRegistrationNumber = ({ values = {} }) => {
 	const { country_id: countryId = '', countrywise_tax = {} } = values;
