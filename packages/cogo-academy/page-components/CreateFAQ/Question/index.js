@@ -2,6 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useMemo } from 'react';
 
 import Spinner from '../../../commons/Spinner';
@@ -168,7 +169,7 @@ function CreateFAQ() {
 			</div>
 
 			<div className={styles.heading_text}>
-				{data ? 'Update' : 'Create'}
+				{!isEmpty(data) ? 'Update' : 'Create'}
 				{' '}
 				A Question
 			</div>
@@ -188,7 +189,7 @@ function CreateFAQ() {
 						rules={{ required: 'Question is required.' }}
 					/>
 
-					{errors.question_abstract && (
+					{errors?.question_abstract && (
 						<span className={styles.errors}>
 							{errors.question_abstract.message}
 						</span>
@@ -218,7 +219,7 @@ function CreateFAQ() {
 							options={tagOptions}
 							rules={{ required: 'Tags are required.' }}
 						/>
-						{errors.tag_ids && (
+						{errors?.tag_ids && (
 							<span className={styles.errors}>
 								{errors.tag_ids.message}
 							</span>
@@ -247,7 +248,7 @@ function CreateFAQ() {
 							options={topicOptions}
 							rules={{ required: 'Topics are required.' }}
 						/>
-						{errors.topic_ids && (
+						{errors?.topic_ids && (
 							<span className={styles.errors}>
 								{errors.topic_ids.message}
 							</span>
@@ -277,7 +278,13 @@ function CreateFAQ() {
 						control={control}
 						onSearch={handleAudienceSearch}
 						options={audienceOptions}
+						rules={{ required: 'Audience is required.' }}
 					/>
+					{errors?.audience_ids && (
+						<span className={styles.errors}>
+							{errors.audience_ids.message}
+						</span>
+					)}
 				</div>
 
 				<div className={styles.faq_answer_container}>
