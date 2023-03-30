@@ -1,4 +1,5 @@
 import { Table } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -7,6 +8,10 @@ function TabularSection({
 	columns = [],
 	loading,
 }) {
+	if (!loading && isEmpty(data)) {
+		return <div>Empty State</div>;
+	}
+
 	return (
 		<div>
 			<Table

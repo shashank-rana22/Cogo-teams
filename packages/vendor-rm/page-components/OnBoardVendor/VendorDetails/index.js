@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import FormComponent from './FormComponent';
 import Header from './Header';
-// eslint-disable-next-line import/no-cycle
 import useOnBoardVendor from './hooks/useOnBoardVendor';
 
 function VendorDetails({

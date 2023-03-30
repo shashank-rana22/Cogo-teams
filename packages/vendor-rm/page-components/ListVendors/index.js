@@ -112,18 +112,23 @@ function ListVendors() {
 				columns={columns}
 			/>
 
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="number"
-					currentPage={params?.page}
-					totalItems={total_count}
-					pageSize={pageLimit}
-					onPageChange={(value) => setParams((pv) => ({
-						...pv,
-						page: value,
-					}))}
-				/>
-			</div>
+			{
+				list?.length > 10 && (
+					<div className={styles.pagination_container}>
+						<Pagination
+							type="number"
+							currentPage={params?.page}
+							totalItems={total_count}
+							pageSize={pageLimit}
+							onPageChange={(value) => setParams((pv) => ({
+								...pv,
+								page: value,
+							}))}
+						/>
+					</div>
+				)
+			}
+
 		</>
 
 	);

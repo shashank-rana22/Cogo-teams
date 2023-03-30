@@ -96,8 +96,7 @@ function useOnBoardVendor({
 		});
 
 		return () => subscription.unsubscribe();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [watchForm]);
+	}, [clearErrors, trigger, watch, watchForm]);
 
 	const newFields = [];
 
@@ -254,8 +253,7 @@ function useOnBoardVendor({
 				setValue(`${field.name}`, vendorDetails?.[field.name]);
 			}
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [vendorInformation]);
+	}, [fields, setValue, vendorInformation]);
 
 	return {
 		fields: newFields,

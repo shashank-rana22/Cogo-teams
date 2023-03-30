@@ -1,7 +1,6 @@
 /* eslint-disable import/no-cycle */
 import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayout';
 import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
-// import useOnBoardVendor from '../hooks/useOnBoardVendor';
 
 const ButtonContainerStyle = {
 	margin: '20px',
