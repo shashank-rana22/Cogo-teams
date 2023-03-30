@@ -1,4 +1,4 @@
-import currencies from './Helpers/currencies';
+import currencies from '../currencies';
 
 const mawbControls = (disableClass) => ({
 	basic: [
