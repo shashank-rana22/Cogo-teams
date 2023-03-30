@@ -45,11 +45,11 @@ function FeedbackForms() {
 
 	const { form_deadline = null } = deadlineData;
 
-	const localizedFormDeadline = format(form_deadline, 'isoUtcDateTime');
+	const localizedFormDeadline = new Date(form_deadline);
 	const currentDeadlineMonth = getMonth(localizedFormDeadline);
 	const currentDeadlineYear = getYear(localizedFormDeadline);
 
-	const currentDate = format(new Date(), 'isoUtcDateTime');
+	const currentDate = new Date();
 
 	const nextFeedbackCycle = currentDeadlineMonth === 11 ? new Date(currentDeadlineYear + 1, 0, 1)
 		: new Date(currentDeadlineYear, currentDeadlineMonth + 1, 1);
@@ -179,6 +179,7 @@ function FeedbackForms() {
 								onSubmitText={buttonText}
 								setOpenActivateModal={setOpenActivateModal}
 								refetchFormDeadline={trigger}
+								formDeadline={form_deadline}
 							/>
 						</Modal.Body>
 					</Modal>
