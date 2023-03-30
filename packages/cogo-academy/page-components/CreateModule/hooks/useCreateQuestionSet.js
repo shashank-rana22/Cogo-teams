@@ -9,7 +9,13 @@ const actionNameMapping = {
 	edit   : 'updated',
 };
 
-function useCreateQuestionSet() {
+function useCreateQuestionSet({
+	setQuestionSetId,
+	getTestQuestionTest,
+	questionSetId,
+	setEditDetails,
+	setShowForm,
+}) {
 	const router = useRouter();
 
 	const [{ loading }, trigger] = useRequest({
@@ -30,12 +36,7 @@ function useCreateQuestionSet() {
 
 	const createQuestionSet = async ({
 		values,
-		setQuestionSetId,
-		getTestQuestionTest,
 		type,
-		questionSetId,
-		setEditDetails,
-		setShowForm,
 		from,
 	}) => {
 		const triggerToUse = triggerMapping?.[type];

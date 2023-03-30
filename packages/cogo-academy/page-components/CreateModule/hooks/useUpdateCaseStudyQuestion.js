@@ -11,7 +11,12 @@ const actionNameMapping = {
 	create : 'added',
 };
 
-function useUpdateCaseStudyQuestion() {
+function useUpdateCaseStudyQuestion({
+	questionSetId,
+	getTestQuestionTest,
+	setEditDetails,
+	setAllKeysSaved,
+}) {
 	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
 		method : 'post',
 		url    : '/update_case_study_question',
@@ -30,11 +35,7 @@ function useUpdateCaseStudyQuestion() {
 
 	const updateCaseStudyQuestion = async ({
 		values,
-		questionSetId,
-		getTestQuestionTest,
 		reset,
-		setEditDetails,
-		setAllKeysSaved,
 		action,
 		caseStudyQuestionId,
 		testQuestionId,

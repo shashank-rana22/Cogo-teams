@@ -15,25 +15,9 @@ function FormComponent({
 	editDetails,
 	handleUpdateCaseStudy,
 	loading,
-	setShowForm,
-	setValue,
 	mode,
+	closeForm,
 }) {
-	const closeForm = () => {
-		const { topic = '', difficulty_level = '' } = editDetails || {};
-
-		setValue('topic', topic);
-		setValue('difficulty_level', difficulty_level);
-		setValue('audience_ids', []);
-
-		setValue(
-			'question_type',
-			editDetails?.question_type === 'case_study' ? editDetails?.question_type : 'stand_alone',
-		);
-
-		setShowForm(false);
-	};
-
 	return (
 		<div className={`${styles.container} ${!isNewQuestion ? styles.flex_row : null}`}>
 			<div className={styles.upper_form}>

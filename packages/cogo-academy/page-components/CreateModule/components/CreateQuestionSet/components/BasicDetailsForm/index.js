@@ -35,7 +35,13 @@ function BasicDetailsForm({
 	const {
 		loading,
 		createQuestionSet,
-	} = useCreateQuestionSet();
+	} = useCreateQuestionSet({
+		setQuestionSetId,
+		getTestQuestionTest,
+		questionSetId,
+		setEditDetails,
+		setShowForm,
+	});
 
 	const onSubmit = (values) => {
 		createQuestionSet({
@@ -84,7 +90,9 @@ function BasicDetailsForm({
 
 					<div className={styles.button_container}>
 						<IcMEdit className={styles.button} onClick={() => editForm()} />
+
 						<div className={styles.vertical_line} />
+
 						<IcMDelete
 							className={styles.button}
 							onClick={() => {
@@ -111,8 +119,10 @@ function BasicDetailsForm({
 							>
 								Cancel
 							</Button>
+
 							<Button
 								type="button"
+								style={{ marginLeft: '8px' }}
 								onClick={() => {
 									handleDeleteQuestionSet();
 									setShowModal(false);
@@ -150,13 +160,15 @@ function BasicDetailsForm({
 				})}
 			</div>
 
-			<div
-				role="presentation"
-				onClick={() => setShowForm(false)}
-				className={styles.cancel_button}
-			>
-				<IcMCrossInCircle width={16} height={16} />
-			</div>
+			{!isEmpty(questionSetId) ? (
+				<div
+					role="presentation"
+					onClick={() => setShowForm(false)}
+					className={styles.cancel_button}
+				>
+					<IcMCrossInCircle width={16} height={16} />
+				</div>
+			) : null}
 
 			{mode !== 'view' ? (
 				<div className={styles.button_container}>
@@ -172,7 +184,12 @@ function BasicDetailsForm({
 						</Button>
 					) : null}
 
-					<Button loading={loading} size="sm" type="submit">
+					<Button
+						style={{ marginLeft: '16px' }}
+						loading={loading}
+						size="sm"
+						type="submit"
+					>
 						{!isEmpty(questionSetId) ? 'Save' : 'Create'}
 					</Button>
 				</div>
