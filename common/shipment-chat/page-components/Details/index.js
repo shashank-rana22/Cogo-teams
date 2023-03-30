@@ -28,7 +28,7 @@ function Details({
 	subscribedUsers = [],
 	setShow = () => { },
 	get = {},
-	personal_data = {},
+	personalData = {},
 }) {
 	const sendToRef = useRef(null);
 	const [stakeHolderView, setStakeHolderView] = useState('');
@@ -36,12 +36,12 @@ function Details({
 	const [showImpMsg, setShowImpMsg] = useState(false);
 	const [selectedFile, setSelectedFile] = useState([]);
 
-	const { data, isGettingShipment } = get;
-	const { shipment_data, primary_service } = data || {};
+	const { data, loadingChannel } = get;
+	const { channelData, primaryService } = data || {};
 	const { msgContent } = useFireBase({ id });
 
 	const isStakeholder = shipmentChatStakeholders.includes(
-		shipment_data?.stakeholder_types?.[0],
+		channelData?.stakeholder_types?.[0],
 	);
 
 	const formValues = {
@@ -54,7 +54,7 @@ function Details({
 	};
 
 	const { onCreate, loading } = useCreateMessage({
-		shipment_data,
+		channelData,
 		formValues,
 		reset,
 		id,
@@ -62,7 +62,7 @@ function Details({
 		sourceId,
 		source,
 		sendToRef,
-		personal_data,
+		personalData,
 		subscribedUsers,
 		isStakeholder,
 		shipmentChatStakeholders,
@@ -75,12 +75,12 @@ function Details({
 
 	return (
 		<div className={styles.container}>
-			{isGettingShipment ? (
+			{loadingChannel ? (
 				<Loader />
 			) : (
 				<Header
-					shipment_data={shipment_data}
-					primary_service={primary_service}
+					channelData={channelData}
+					primaryService={primaryService}
 					setShow={setShow}
 					isStakeholder={isStakeholder}
 					showImpMsg={showImpMsg}
@@ -91,7 +91,7 @@ function Details({
 			<div className={styles.chat_sections}>
 				<MessageContainer
 					msgContent={msgContent}
-					isGettingShipment={isGettingShipment}
+					loadingChannel={loadingChannel}
 					showImpMsg={showImpMsg}
 				/>
 

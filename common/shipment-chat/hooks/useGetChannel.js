@@ -40,7 +40,7 @@ const useGetChannel = ({ channel_id }) => {
 				primaryService,
 			},
 		},
-		personal_data: channel,
+		personalData: channel,
 	};
 };
 

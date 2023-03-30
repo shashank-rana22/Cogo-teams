@@ -34,7 +34,7 @@ function List({
 	const channelId = defaultChannel ? defaultChannel?.id : listData[0]?.id;
 
 	const { loading: seenLoading } = useUpdateSeen({ channel_id: id, showUnreadChat });
-	const { get, personal_data } = useGetChannel({ channel_id: id });
+	const { get, personalData } = useGetChannel({ channel_id: id });
 
 	let unSeenMsg = [];
 	unSeenMsg = messageContentArr.filter((item) => item[user_id]);
@@ -160,7 +160,7 @@ function List({
 						sourceId={item?.source_id}
 						source={item?.source}
 						get={get}
-						personal_data={personal_data}
+						personalData={personalData}
 					/>
 				))
 			)}
