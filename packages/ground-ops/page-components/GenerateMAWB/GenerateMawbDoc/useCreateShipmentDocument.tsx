@@ -5,19 +5,23 @@ import { useState, useEffect } from 'react';
 
 import useGetHawb from '../Helpers/hooks/useGetHawb';
 
+interface NestedObj {
+	[key: string]: string | number;
+}
+
 interface Props {
-	edit?: boolean | String;
+	edit?: boolean | string;
 	setGenerate?:Function;
 	setEdit?:Function;
-	activeCategory?: String;
-	hawbDetails?: Array<any>;
+	activeCategory?: string;
+	hawbDetails?: Array<string>;
 	setHawbDetails?: Function;
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
 	handleClick?: Function;
 	result?: object;
 	getHawb?: Function;
-	activeHawb?: object;
+	activeHawb?: NestedObj;
 }
 
 const useCreateShipmentDocument = ({

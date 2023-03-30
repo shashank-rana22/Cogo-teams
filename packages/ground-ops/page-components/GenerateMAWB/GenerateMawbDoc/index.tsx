@@ -29,9 +29,9 @@ interface Props {
 	viewDoc?: boolean;
 	chargeableWeight?:number;
 	setGenerate?:Function;
-	activeCategory?: String;
-	hawbDetails?: Array<String | boolean>;
-	activeHawb?: object;
+	activeCategory?: string;
+	hawbDetails?: Array<string>;
+	activeHawb?: NestedObj;
 	setHawbDetails?:Function;
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
