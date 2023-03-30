@@ -1,6 +1,6 @@
 import { Placeholder } from '@cogoport/components';
 import { isEmpty, format } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
 
@@ -8,7 +8,7 @@ import getControls from './controls';
 import styles from './styles.module.css';
 
 function DurationAndValidity({ setValue, data, control, errors, loading }) {
-	const controls = getControls();
+	const controls = useMemo(() => getControls(), []);
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
