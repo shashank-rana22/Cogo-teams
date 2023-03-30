@@ -20,7 +20,7 @@ const useTrendSearch = (item = {}) => {
 	const { control, handleSubmit } = formProps;
 
 	const [{ loading = false, data: responseData = {} }, trigger] = useAthenaRequest({
-		url    : 'athena/hscodes_by_commodity_name',
+		url    : 'hscodes_by_commodity_name',
 		method : 'post',
 	}, { manual: true });
 

@@ -7,7 +7,7 @@ const athena_dashboard = {
 			service_name : 'athena',
 		},
 		{
-			api          : 'list_countries',
+			api          : 'hscodes_by_commodity_name',
 			access_type  : 'private',
 			feature      : 'athena_dashboard',
 			service_name : 'athena',

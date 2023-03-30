@@ -34,7 +34,7 @@ athenaRequest.interceptors.request.use((oldConfig) => {
 	const serviceName = microServices[apiPath];
 
 	if (serviceName) {
-		newConfig.url = `/athena/${apiPath}`;
+		newConfig.url = `/${serviceName}/${apiPath}`;
 	}
 
 	const authToken = process.env.ATHENA_APIS_AUTH_TOKEN;
