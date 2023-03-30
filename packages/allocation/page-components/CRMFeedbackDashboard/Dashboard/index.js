@@ -1,10 +1,10 @@
-import Header from './components/commons/Header';
 import PrimaryTabs from './components/PrimaryTabs';
+import styles from './styles.module.css';
 
 function CrmFeedback() {
 	return (
 		<>
-			<Header />
+			<div className={styles.title}>CRM Feedback Dashboard</div>
 			<PrimaryTabs />
 		</>
 	);

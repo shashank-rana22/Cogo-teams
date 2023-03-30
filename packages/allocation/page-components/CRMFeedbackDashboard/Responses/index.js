@@ -1,8 +1,11 @@
+import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { startCase } from '@cogoport/utils';
 import { useRef } from 'react';
 
-import Header from './components/Header';
 import OrganizationCard from './components/OrganizationCard';
+import styles from './styles.module.css';
 import PrimaryTabs from './Tabs';
 
 function Responses() {
@@ -18,9 +21,17 @@ function Responses() {
 
 	const routeDetails = useRef({ organization, third_party });
 
+	const router = useRouter();
+
 	return (
 		<>
-			<Header ref={routeDetails} />
+			<button
+				className={styles.back_button}
+				onClick={() => router.back()}
+			>
+				<IcMArrowBack width="32px" height="20px" />
+				{startCase(organization)}
+			</button>
 
 			<OrganizationCard ref={routeDetails} />
 

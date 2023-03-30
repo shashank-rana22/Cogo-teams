@@ -1,9 +1,11 @@
+import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useRef } from 'react';
 
-import Header from './components/commons/Header';
 import OrganizationCard from './components/commons/OrganizationCard';
 import PrimaryTabs from './components/PrimaryTabs';
+import styles from './styles.module.css';
 
 function Feedbacks() {
 	const {
@@ -23,9 +25,14 @@ function Feedbacks() {
 		status,
 	});
 
+	const router = useRouter();
+
 	return (
 		<>
-			<Header />
+			<button className={styles.back_button} onClick={() => router.back()}>
+				<IcMArrowBack width="32px" height="20px" />
+				CRM Feedback Dashboard
+			</button>
 
 			<OrganizationCard ref={routeDetails} />
 

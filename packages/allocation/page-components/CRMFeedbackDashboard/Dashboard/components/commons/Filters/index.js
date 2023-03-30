@@ -68,13 +68,13 @@ function Filters({
 
 	return (
 		<div className={styles.filter}>
-			{modifiedControls?.map((control) => (
+			{modifiedControls.map((control) => (
 				<Select
-					key={control?.name}
-					placeholder={control?.placeholder}
+					key={control.name}
+					placeholder={control.placeholder}
 					className={styles.select}
-					value={pageFilters?.[control?.name]}
-					onChange={(val) => onChangeFilters({ [control?.name]: val || undefined })}
+					value={pageFilters?.[control.name]}
+					onChange={(val) => onChangeFilters({ [control.name]: val || undefined })}
 					{...control}
 				/>
 			))}
