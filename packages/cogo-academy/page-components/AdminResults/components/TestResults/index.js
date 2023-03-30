@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -50,7 +51,17 @@ function TestResults({ test_id = '' }) {
 	};
 
 	if (loading) {
-		return 'loading';
+		return (
+			<div className={styles.placeholder_container}>
+				{Array(3).fill('').map(() => (
+					<div
+						className={styles.placeholder_inner_container}
+					>
+						<Placeholder height="24px" />
+					</div>
+				))}
+			</div>
+		);
 	}
 
 	if (isEmpty(stats_data)) {
