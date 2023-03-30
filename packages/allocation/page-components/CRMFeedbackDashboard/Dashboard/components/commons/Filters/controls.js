@@ -39,6 +39,7 @@ export const controlsFeedbacks = (
 		name        : 'performed_by_id',
 		placeholder : 'KAM',
 		isClearable : true,
+		params      : { filters: { status: 'active' } },
 	},
 ];
 

@@ -53,6 +53,20 @@ function asyncFieldsOrganization() {
 	};
 }
 
+function asyncFieldsLeadOrganization() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_lead_organizations',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 function asyncFieldsOrganizationUsers() {
 	return {
 		labelKey    : 'name',
@@ -210,6 +224,7 @@ export {
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
 	asyncFieldsOrganizations,
+	asyncFieldsLeadOrganization,
 	asyncFieldsOrganizationUser,
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganization,

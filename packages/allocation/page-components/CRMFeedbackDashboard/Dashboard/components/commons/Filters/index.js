@@ -1,7 +1,9 @@
 import { Select, DateRangepicker } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import {
+	asyncFieldsLeadOrganization,
 	asyncFieldsOrganizations,
+	asyncFieldsPartner,
 	asyncFieldsPartnerUsers,
 } from '@cogoport/forms/utils/getAsyncFields';
 import { useState } from 'react';
@@ -17,48 +19,24 @@ function Filters({
 	const [date, setDate] = useState();
 
 	const cogoEntityOptions = useGetAsyncOptions({
-		labelKey    : 'business_name',
-		valueKey    : 'id',
-		endpoint    : 'list_partners',
-		initialCall : false,
-		params      : {
-			filters: {
-				status: 'active',
-			},
-		},
+		...asyncFieldsPartner(),
+		initialCall: false,
 	});
 
 	const organizationOptions = useGetAsyncOptions({
 		...asyncFieldsOrganizations(),
-		initialCall : false,
-		params      : {
-			filters: {
-				status: 'active',
-			},
-		},
+		initialCall: false,
 	});
 
 	const leadOrganizationOptions = useGetAsyncOptions({
-		labelKey    : 'business_name',
-		valueKey    : 'id',
-		endpoint    : 'list_lead_organizations',
-		initialCall : false,
-		params      : {
-			filters: {
-				status: 'active',
-			},
-		},
+		...asyncFieldsLeadOrganization(),
+		initialCall: false,
 	});
 
 	const kamManagerOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(),
 		initialCall : false,
-		params      : {
-			filters: {
-				status: 'active',
-			},
-		},
-		valueKey: 'user_id',
+		valueKey    : 'user_id',
 	});
 
 	const kamOptions = useGetAsyncOptions({
@@ -90,13 +68,13 @@ function Filters({
 
 	return (
 		<div className={styles.filter}>
-			{modifiedControls?.map((control) => (
+			{modifiedControls.map((control) => (
 				<Select
-					key={control?.name}
-					placeholder={control?.placeholder}
+					key={control.name}
+					placeholder={control.placeholder}
 					className={styles.select}
-					value={pageFilters?.[control?.name]}
-					onChange={(val) => onChangeFilters({ [control?.name]: val || undefined })}
+					value={pageFilters?.[control.name]}
+					onChange={(val) => onChangeFilters({ [control.name]: val || undefined })}
 					{...control}
 				/>
 			))}
