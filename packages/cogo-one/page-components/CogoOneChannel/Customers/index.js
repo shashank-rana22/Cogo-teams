@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
 function Customers({
-	setActiveCardId = () => {},
 	setActiveMessage = () => {},
 	setActiveVoiceCard = () => {},
 	activeVoiceCard,
@@ -40,6 +39,7 @@ function Customers({
 	modalType = {},
 	updatePin = () => {},
 	tagOptions = [],
+	userId = '',
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const onChangeToggle = () => {
@@ -112,7 +112,6 @@ function Customers({
 					appliedFilters={appliedFilters}
 					messagesLoading={messagesLoading}
 					activeCardId={activeCardId}
-					setActiveCardId={setActiveCardId}
 					showBotMessages={showBotMessages}
 					setShowBotMessages={setShowBotMessages}
 					handleScroll={handleScroll}
@@ -120,6 +119,7 @@ function Customers({
 					modalType={modalType}
 					updatePin={updatePin}
 					tagOptions={tagOptions}
+					userId={userId}
 				/>
 			)}
 

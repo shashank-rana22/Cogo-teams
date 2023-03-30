@@ -14,6 +14,7 @@ import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { PAGE_LIMIT } from '../constants';
 import getFireStoreQuery from '../helpers/getFireStoreQuery';
+import sortChats from '../helpers/sortChats';
 
 const useListChats = ({
 	firestore,
@@ -31,11 +32,15 @@ const useListChats = ({
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
 	const unreadCountSnapshotListner = useRef(null);
-	// const activeCardSnapshotListener = useRef(null);
+	const activeRoomSnapshotListner = useRef(null);
 
 	const [firstLoading, setFirstLoading] = useState(true);
-	const [activeCardId, setActiveCardId] = useState('');
-	const [activeCardData, setActiveCardData] = useState('');
+
+	const [activeCard, setActiveCard] = useState({
+		activeCardId   : '',
+		activeCardData : {},
+	});
+
 	const [loading, setLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
 
@@ -47,6 +52,8 @@ const useListChats = ({
 		pinnedMessagesData   : {},
 	});
 
+	const { status = '' } = appliedFilters || {};
+
 	const snapshotCleaner = ({ ref }) => {
 		const tempRef = ref;
 		if (tempRef.current) {
@@ -57,15 +64,15 @@ const useListChats = ({
 	useEffect(() => {
 		debounceQuery(searchValue?.trim()?.toUpperCase());
 	}, [debounceQuery, searchValue]);
+
 	useEffect(() => {
 		if (assigned_chat) {
-			setActiveCardId(assigned_chat);
+			setActiveCard({ activeCardId: assigned_chat, activeCardData: {} });
 		}
 		setFirstLoading(false);
 	}, [assigned_chat]);
 
 	const dataFormatter = (list) => {
-		let unReadChatsCount = 0;
 		let resultList = {};
 		list?.forEach((item) => {
 			const { created_at, updated_at, new_message_count, ...rest } = item.data() || {};
@@ -75,12 +82,11 @@ const useListChats = ({
 				new_message_count,
 				...rest,
 			};
-			unReadChatsCount += (new_message_count || 0) > 0 ? 1 : 0;
+
 			resultList = { ...resultList, [item?.id]: userData };
 		});
 
 		return {
-			unReadChatsCount,
 			resultList,
 		};
 	};
@@ -125,32 +131,31 @@ const useListChats = ({
 		};
 	}, [omniChannelCollection, omniChannelQuery, userId]);
 
-	const mountUnreadSnapShot = useCallback(() => {
-		const queryForUnreadChats = where('new_message_count', '>', 0);
+	const mountUnreadCountSnapShot = useCallback(() => {
+		const queryForUnreadChats = status !== 'unread'
+			? [where('new_message_count', '>', 0), orderBy('new_message_count', 'desc')] : [];
 
 		snapshotCleaner({ ref: unreadCountSnapshotListner });
+
 		const countUnreadChatQuery = query(
 			omniChannelCollection,
-			queryForUnreadChats,
-			orderBy('new_message_count', 'desc'),
+			...queryForUnreadChats,
 			...omniChannelQuery,
 		);
-		// console.log('countUnreadChatQuery:', countUnreadChatQuery);
-
 		unreadCountSnapshotListner.current = onSnapshot(
 			countUnreadChatQuery,
 			(countUnreadChatSnapshot) => {
-				const unReadChatsCount = countUnreadChatSnapshot.size;
 				setListData((p) => ({
 					...p,
-					unReadChatsCount,
+					unReadChatsCount: countUnreadChatSnapshot.size || 0,
 				}));
 			},
 		);
 		return () => {
 			snapshotCleaner({ ref: unreadCountSnapshotListner });
 		};
-	}, [omniChannelCollection, omniChannelQuery]);
+	}, [omniChannelCollection, omniChannelQuery, status]);
+
 	const mountSnapShot = useCallback(() => {
 		const queryForSearch = searchQuery
 			? [where('user_name', '>=', searchQuery),
@@ -170,11 +175,10 @@ const useListChats = ({
 				const isLastPage = querySnapshot.docs.length < PAGE_LIMIT;
 				const lastMessageTimeStamp = querySnapshot
 					.docs[querySnapshot.docs.length - 1]?.data()?.new_message_sent_at;
-				const { unReadChatsCount, resultList } = dataFormatter(querySnapshot);
+				const { resultList } = dataFormatter(querySnapshot);
 				setListData((p) => ({
 					...p,
 					messagesListData: { ...resultList },
-					unReadChatsCount,
 					isLastPage,
 					lastMessageTimeStamp,
 				}));
@@ -217,6 +221,27 @@ const useListChats = ({
 		setLoading(false);
 	}, [listData?.lastMessageTimeStamp, omniChannelCollection, omniChannelQuery]);
 
+	const { activeCardId = '', activeCardData } = activeCard || {};
+	const { channel_type:activeChannelType = '' } = activeCardData || {};
+
+	const mountActiveRoomSnapShot = useCallback(() => {
+		snapshotCleaner({ ref: activeRoomSnapshotListner });
+		if (activeCardId) {
+			const activeMessageDoc = doc(
+				firestore,
+				`${FIRESTORE_PATH[activeChannelType]}/${activeCardId}`,
+			);
+			activeRoomSnapshotListner.current = onSnapshot(activeMessageDoc, (activeMessageData) => {
+				setActiveCard((p) => ({
+					...p,
+					activeCardId,
+					activeCardData:
+					{ id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
+				}));
+			});
+		}
+	}, [firestore, activeCardId, activeChannelType]);
+
 	useEffect(() => {
 		mountPinnedSnapShot();
 	}, [mountPinnedSnapShot]);
@@ -226,14 +251,15 @@ const useListChats = ({
 	}, [mountSnapShot]);
 
 	useEffect(() => {
-		mountUnreadSnapShot();
-	}, [mountUnreadSnapShot]);
-	// mountUnreadSnapShot();
+		mountUnreadCountSnapShot();
+	}, [mountUnreadCountSnapShot]);
 
+	useEffect(() => {
+		mountActiveRoomSnapShot();
+	}, [mountActiveRoomSnapShot]);
 	const setActiveMessage = async (val) => {
-		setActiveCardData(val);
 		const { channel_type, id } = val || {};
-		setActiveCardId(id);
+		setActiveCard({ activeCardId: id, activeCardData: val });
 		if (channel_type && id) {
 			const messageDoc = doc(
 				firestore,
@@ -252,37 +278,12 @@ const useListChats = ({
 
 	const { messagesListData = {}, unReadChatsCount, pinnedMessagesData } = listData || {};
 
-	const mergedChatData = { ...messagesListData, ...pinnedMessagesData } || {};
+	const mergedChatsData = { ...messagesListData, ...pinnedMessagesData } || {};
 
-	const sortedChatsList = Object.keys(mergedChatData || {})
-		.sort((a, b) => {
-			if (mergedChatData[a].pin && mergedChatData[a].pin[userId] > 0) {
-				if (mergedChatData[b].pin && mergedChatData[b].pin[userId] > 0) {
-					return Number(
-						mergedChatData[b].pin[userId],
-					) - Number(
-						mergedChatData[a].pin[userId],
-					);
-				}
-				return -1;
-			}
-			if (mergedChatData[b].pin && mergedChatData[b].pin[userId] > 0) {
-				return 1;
-			}
-
-			return Number(
-				mergedChatData[b]?.new_message_sent_at,
-			) - Number(
-				mergedChatData[a]?.new_message_sent_at,
-			);
-		})
-		.map((eachkey) => mergedChatData[eachkey]) || [];
-
-	const activeMessageCard = (sortedChatsList || []).find(({ id }) => id === activeCardId)
-        || activeCardData || {};
+	const sortedChatsList = sortChats(mergedChatsData, userId);
 
 	const updateLeaduser = async (data = {}) => {
-		const { channel_type, id } = activeMessageCard || {};
+		const { channel_type, id } = activeCardData || {};
 		const roomCollection = doc(
 			firestore,
 			`${FIRESTORE_PATH[channel_type]}/${id}`,
@@ -298,36 +299,47 @@ const useListChats = ({
 		}
 	};
 
-	const updatePin = async (pinnedID, channel_type, type) => {
-		const roomCollection = doc(
+	const updatePin = async ({ pinnedID, channelType, type }) => {
+		const pinRoomData = doc(
 			firestore,
-			`${FIRESTORE_PATH[channel_type]}/${pinnedID}`,
+			`${FIRESTORE_PATH[channelType]}/${pinnedID}`,
 		);
 
-		const document = await getDoc(roomCollection);
-		const { pin = {}, pinnedAgent = [] } = document.data() || {};
+		const document = await getDoc(pinRoomData);
+		const { pinnedTime = {}, pinnedAgent = [] } = document.data() || {};
+
+		let payload = {};
+		if (type === 'pin') {
+			payload = {
+				pinnedTime  : { ...pinnedTime, [userId]: Date.now() },
+				pinnedAgent : [...pinnedAgent, userId],
+			};
+		} else {
+			payload = {
+				pinnedTime  : { ...pinnedTime, [userId]: 0 },
+				pinnedAgent : pinnedAgent.filter((pinned) => pinned !== userId),
+			};
+		}
 
 		try {
-			await updateDoc(roomCollection, {
-				updated_at  : Date.now(),
-				pin         : { ...pin, [userId]: type === 'pin' ? Date.now() : 0 },
-				pinnedAgent : type === 'pin'
-					? [...pinnedAgent, userId]
-					: pinnedAgent.filter((pinned) => pinned !== userId),
+			await updateDoc(pinRoomData, {
+				updated_at: Date.now(),
+				...payload,
 			});
 		} catch (error) {
 			// console.log(error);
 		}
 	};
+
 	return {
-		listData: { messagesList: sortedChatsList || [], unReadChatsCount },
+		listData          : { messagesList: sortedChatsList || [], unReadChatsCount },
 		setActiveMessage,
-		activeMessageCard,
+		activeMessageCard : activeCardData,
 		setAppliedFilters,
 		appliedFilters,
 		loading,
 		activeCardId,
-		setActiveCardId,
+		setActiveCard,
 		updateLeaduser,
 		firstLoading,
 		handleScroll,
