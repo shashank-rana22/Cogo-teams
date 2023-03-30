@@ -57,8 +57,7 @@ function CreateForm(props) {
 	useEffect(() => {
 		setValue('name', data?.display_name);
 		setValue('description', data?.description);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
+	}, [data?.description, data?.display_name, loading, setValue]);
 
 	return (
 		<div className={styles.container} style={style}>
