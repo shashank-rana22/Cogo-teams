@@ -16,6 +16,7 @@ function useUpdateStandAloneTestQuestion({
 	getTestQuestionTest,
 	setEditDetails,
 	setAllKeysSaved,
+	reset = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -24,7 +25,6 @@ function useUpdateStandAloneTestQuestion({
 
 	const updateStandAloneTestQuestion = async ({
 		values,
-		reset = () => {},
 		action,
 		testQuestionId,
 	}) => {
