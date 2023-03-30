@@ -19,7 +19,6 @@ interface Props {
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
 	handleClick?: Function;
-	result?: object;
 	getHawb?: Function;
 	activeHawb?: NestedObj;
 }
@@ -33,7 +32,7 @@ const useCreateShipmentDocument = ({
 	setHawbDetails = () => {},
 	setActiveHawb = () => {},
 	setActiveKey = () => {},
-	// handleClick = () => {},
+	handleClick = () => {},
 	activeHawb = {},
 }:Props) => {
 	let api = 'create_shipment_document';
@@ -69,10 +68,10 @@ const useCreateShipmentDocument = ({
 
 	useEffect(() => {
 		if (success) {
-			// handleClick();
 			setActiveHawb(hawbDetails[hawbDetails.length - 1]);
 			setActiveKey('basic');
 			setSuccess(false);
+			handleClick();
 		}
 	}, [success]);
 

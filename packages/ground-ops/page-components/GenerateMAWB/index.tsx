@@ -66,6 +66,7 @@ function GenerateMAWB({
 	const [taskItem, setTaskItem] = useState({ ...item, ...item.documentData });
 
 	const category = taskItem.blCategory;
+	const mawbId = item.id;
 
 	const [activeCategory, setActiveCategory] = useState(edit ? 'mawb' : taskItem.blCategory);
 
@@ -92,21 +93,30 @@ function GenerateMAWB({
 		if (edit && activeCategory === 'hawb') {
 			const dataList = [];
 			(hawbDataList?.data?.shipmentPendingTasks || []).forEach((hawbItem) => {
-				const pushData = { id: hawbItem.id, documentNo: hawbItem?.documentData?.document_number, isNew: false };
+				const pushData = {
+					id         : hawbItem.documentId,
+					documentNo : hawbItem?.documentData?.document_number,
+					isNew      : false,
+				};
 				dataList.push(pushData);
 			});
 			setHawbDetails(dataList);
 			if (hawbDetails.length > 0) {
-				setActiveHawb(hawbDetails[0]?.id);
+				setActiveHawb(hawbDetails[0]);
 			}
 		}
 	}, [activeCategory, hawbListLoading]);
 
 	useEffect(() => {
-		if (!activeHawb.isNew) {
+		if (activeHawb && !activeHawb.isNew) {
 			getHawb(activeHawb.id);
 		}
-	}, [activeHawb]);
+		if (category === 'mawb' && edit) {
+			getHawb(mawbId);
+		}
+	}, [activeHawb, activeCategory]);
+
+	console.log('hawbData', hawbData);
 
 	useEffect(() => {
 		if (hawbSuccess) {
