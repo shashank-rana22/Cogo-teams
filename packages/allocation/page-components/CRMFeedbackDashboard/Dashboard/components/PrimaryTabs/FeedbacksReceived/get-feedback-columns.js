@@ -54,7 +54,7 @@ export const FEEDBACK_COLUMNS = ({
 		id       : 'type',
 		accessor : ({ source_type = '' }) => (
 			<section className={styles.table_cell}>
-				{startCase(source_type) || '___'}
+				{startCase(source_type || '___') }
 			</section>
 		),
 	},
@@ -64,7 +64,7 @@ export const FEEDBACK_COLUMNS = ({
 		id       : 'sub_type',
 		accessor : ({ feedback_parameter = '' }) => (
 			<section className={styles.table_cell}>
-				{startCase(feedback_parameter) || '___'}
+				{startCase(feedback_parameter || '___') }
 			</section>
 		),
 	},
@@ -75,14 +75,14 @@ export const FEEDBACK_COLUMNS = ({
 		accessor : ({ feedback_parameter_value = '' }) => (
 			<section className={styles.feedback}>
 				<Tooltip
-					content={<span className={styles.tooltip}>{startCase(feedback_parameter_value)}</span>}
+					content={<span className={styles.tooltip}>{feedback_parameter_value}</span>}
 					placement="top"
 					interactive
 					disabled={isEmpty(feedback_parameter_value)}
 					className={styles.tooltip}
 				>
 					<span className={styles.tooltip_text}>
-						{startCase(feedback_parameter_value) || '___'}
+						{feedback_parameter_value || '___'}
 					</span>
 				</Tooltip>
 			</section>
@@ -105,7 +105,7 @@ export const FEEDBACK_COLUMNS = ({
 					disabled={isEmpty(feedback)}
 				>
 					<span className={styles.tooltip_text}>
-						{startCase(feedback) || '___'}
+						{startCase(feedback || '___') }
 					</span>
 				</Tooltip>
 				{feedback_reference_document_url ? (
@@ -131,14 +131,14 @@ export const FEEDBACK_COLUMNS = ({
 		}) => (
 			<section className={styles.feedback}>
 				<Tooltip
-					content={<span className={styles.tooltip}>{startCase(kam_response)}</span>}
+					content={<span className={styles.tooltip}>{kam_response}</span>}
 					placement="top"
 					interactive
 					disabled={isEmpty(kam_response)}
 				>
 					<div>
 						<span className={styles.tooltip_text}>
-							{startCase(kam_response) || '___'}
+							{kam_response || '___'}
 						</span>
 					</div>
 				</Tooltip>
@@ -158,12 +158,12 @@ export const FEEDBACK_COLUMNS = ({
 		),
 	},
 	{
-		Header   : 'CREATION DATE',
-		key      : 'created_date',
-		id       : 'created_date',
-		accessor : ({ created_at = '' }) => (
+		Header   : 'KAM',
+		key      : 'kam',
+		id       : 'kam',
+		accessor : ({ created_by = {} }) => (
 			<section className={styles.table_cell}>
-				{created_at ? format(created_at, 'dd MMM yyyy') : '___'}
+				{created_by?.name || '___'}
 			</section>
 		),
 	},
@@ -178,12 +178,12 @@ export const FEEDBACK_COLUMNS = ({
 		),
 	},
 	{
-		Header   : 'KAM',
-		key      : 'kam',
-		id       : 'kam',
-		accessor : ({ created_by = {} }) => (
+		Header   : 'CREATION DATE',
+		key      : 'created_date',
+		id       : 'created_date',
+		accessor : ({ created_at = '' }) => (
 			<section className={styles.table_cell}>
-				{created_by?.name || '___'}
+				{created_at ? format(created_at, 'dd MMM yyyy') : '___'}
 			</section>
 		),
 	},
