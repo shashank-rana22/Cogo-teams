@@ -2,7 +2,7 @@ import NotifyModal from '../page-components/HRDashboard/NotifyModal';
 import CreateModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/CreateModal';
 import DownloadCsvModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/DownloadCsvModal';
 import LogModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/LogModal';
-import PipUloadModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/PipUploadModal';
+import PipUploadModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/PipUploadModal';
 import ReviewModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/ReviewModal';
 import UpdateModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/UpdateModal';
 
@@ -15,12 +15,12 @@ const modalComoponentsMapping = {
 	upload: {
 		name      : 'upload',
 		title     : 'Upload CSV',
-		Component : PipUloadModal,
+		Component : PipUploadModal,
 	},
 	kpi_tab_upload: {
 		name      : 'kpi_tab_upload',
 		title     : 'Upload CSV',
-		Component : PipUloadModal,
+		Component : PipUploadModal,
 	},
 	create: {
 		name      : 'create',

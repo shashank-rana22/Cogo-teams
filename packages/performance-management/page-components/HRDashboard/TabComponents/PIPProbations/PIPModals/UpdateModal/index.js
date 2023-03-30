@@ -18,6 +18,7 @@ function UpdateModal({
 				setModal('');
 				setItem({});
 			}}
+			closeOnOuterClick={false}
 			size="lg"
 		>
 			<Modal.Header title={`update ${item?.log_type}`} />
@@ -36,7 +37,10 @@ function UpdateModal({
 				<Button
 					size="md"
 					themeType="tertiary"
-					onClick={() => setModal('')}
+					onClick={() => {
+						setModal('');
+						setItem({});
+					}}
 				>
 					Close
 				</Button>

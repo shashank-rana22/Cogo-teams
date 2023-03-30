@@ -13,12 +13,13 @@ function LogModal({
 	disableNext,
 	onSubmit = () => {},
 	setDisableNext = () => {},
+	source = '',
 }) {
 	const [activeLogTab, setActiveLogTab] = useState('new');
 
 	useEffect(() => {
-		setActiveLogTab(item?.final_decision ? 'all' : 'new');
-	}, [item]);
+		setActiveLogTab((item?.final_decision || source === 'manager_dashboard') ? 'all' : 'new');
+	}, [item, source]);
 
 	return (
 		<div>
@@ -41,7 +42,10 @@ function LogModal({
 							onChange={setActiveLogTab}
 						>
 							{!item?.final_decision && (
-								<TabPanel name="new" title="New Log">
+								<TabPanel
+									name="new"
+									title="New Log"
+								>
 									<NewLog
 										item={item}
 										setItem={setItem}

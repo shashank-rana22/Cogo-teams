@@ -293,17 +293,15 @@ const useGetColumns = ({
 	{
 		Header   : <div className={styles.head}>ACTION</div>,
 		accessor : (item) => (
-			(!(source === 'manager_dashboard' && item?.log_type === 'pip') && (
-				<div className={styles.head_content}>
-					<Button
-						themeType={item?.log_type === 'pip' ? 'secondary' : 'primary'}
-						onClick={() => addLog(item)}
-						disabled={item?.final_decision && item?.log_type === 'probation'}
-					>
-						{item?.log_type === 'probation' ? 'Update' : 'Log'}
-					</Button>
-				</div>
-			))
+			<div className={styles.head_content}>
+				<Button
+					themeType={item?.log_type === 'pip' ? 'secondary' : 'primary'}
+					onClick={() => addLog(item)}
+					disabled={item?.final_decision && item?.log_type === 'probation'}
+				>
+					{item?.log_type === 'probation' ? 'Update' : 'Log'}
+				</Button>
+			</div>
 		),
 		id  : 'action',
 		key : 'action',

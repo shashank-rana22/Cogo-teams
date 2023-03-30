@@ -7,33 +7,12 @@ const useUpdateLog = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const onUpdateLog = async (logItem, setRefetchList, setModal) => {
+	const onUpdateLog = async (payload, onSubmitReset) => {
 		try {
-			const {
-				user_id:UserID,
-				log_id:LogID,
-				log_type:LogType,
-				tags:Tags,
-				final_decision:FinalDecision,
-				is_reviewed:IsReviewed,
-				comment:Comment,
-			} = logItem;
-
-			const payload = {
-				UserID,
-				LogID,
-				LogType,
-				Tags          : Tags || undefined,
-				FinalDecision : FinalDecision || undefined,
-				IsReviewed,
-				Comment       : Comment || undefined,
-			};
-
 			await trigger({
 				data: payload,
 			});
-			setRefetchList(true);
-			setModal('');
+			onSubmitReset();
 			Toast.success('Updated Successfully');
 		} catch (e) {
 			Toast.error(e.response?.data.error);

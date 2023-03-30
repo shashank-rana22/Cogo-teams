@@ -15,7 +15,7 @@ const sourceUploadTypeMapping = {
 	pip_probation  : ['probation', 'pip'],
 };
 
-function PipUloadModal({ modal, setModal = () => {}, source = 'pip_probation' }) {
+function PipUploadModal({ modal, setModal = () => {}, source = 'pip_probation' }) {
 	const [files, setFiles] = useState({});
 	const [type, setType] = useState('');
 	const [year, setYear] = useState('');
@@ -194,4 +194,4 @@ function PipUloadModal({ modal, setModal = () => {}, source = 'pip_probation' })
 	);
 }
 
-export default PipUloadModal;
+export default PipUploadModal;

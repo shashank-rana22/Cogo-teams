@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Button } from '@cogoport/components';
+import { Toast, Tabs, TabPanel, Button } from '@cogoport/components';
 import { IcMDownload, IcMEdit, IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -18,29 +18,29 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 
 	const { onUpdateLog = () => {} } = useUpdateLog();
 
+	const onSubmitReset = () => {
+		setModal('');
+		setItem({});
+		setRefetchList(true);
+	};
+
 	const onSubmit = () => {
-		if (item?.tags?.find((x) => x === 'Final discusion held' && isEmpty(item?.final_decision))) {
-			setModal('update');
+		if (item?.tags?.find((x) => x === 'Final discussion held')) {
+			if (item.tags?.length !== 3) {
+				Toast.error('All three boxes have to be ticked');
+			} else { setModal('update'); }
 		} else {
-			const {
-				user_id,
-				id:log_id,
-				log_type,
-				comments:comment,
-				final_decision,
-				is_reviewed,
-				tags,
-			} = item;
-			onUpdateLog({
-				user_id,
-				log_id,
-				log_type,
-				comment,
-				final_decision,
-				tags,
-				is_reviewed: is_reviewed || modal === 'review',
-			}, setRefetchList, setModal);
-			setItem({});
+			const { user_id, id, log_type, tags, final_decision, is_reviewed, comment } = item;
+			const payload = {
+				UserID        : user_id,
+				LogID         : id,
+				LogType       : log_type,
+				Tags          : tags || undefined,
+				FinalDecision : final_decision || undefined,
+				IsReviewed    : is_reviewed || modal === 'review',
+				Comment       : comment || undefined,
+			};
+			onUpdateLog(payload, onSubmitReset);
 		}
 	};
 
@@ -139,6 +139,7 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 						disableNext={disableNext}
 						onSubmit={onSubmit}
 						setRefetchList={setRefetchList}
+						source={source}
 					/>
 				)}
 

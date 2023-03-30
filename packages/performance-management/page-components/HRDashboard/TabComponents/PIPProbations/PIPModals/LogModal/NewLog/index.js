@@ -1,21 +1,17 @@
 import { CheckboxGroup, Textarea } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import styles from './styles.module.css';
 
 function NewLog({ item = {}, setItem = () => {}, setDisableNext = () => {} }) {
-	// const [comments, setComments] = useState('');
+	const [comment, setComment] = useState('');
 	const [value, onChange] = useState(item?.tags || []);
 	const options = [
 		{ name: 'R1', value: 'Email sent to Employee', label: 'Email sent to Employee' },
 		{ name: 'R2', value: 'Email sent to Manager', label: 'Email sent to Manager' },
-		{ name: 'R3', value: 'Final discusion held', label: 'Final discusion held' },
+		{ name: 'R3', value: 'Final discussion held', label: 'Final discussion held' },
 	];
-
-	const { watch } = useForm();
-	const comments = watch('comments');
 
 	const disabledTags = useMemo(() => item.tags || [], [item.tags]);
 
@@ -27,17 +23,17 @@ function NewLog({ item = {}, setItem = () => {}, setDisableNext = () => {} }) {
 	});
 
 	useEffect(() => {
-		if (value || comments) {
+		if (value || comment) {
 			setDisableNext(false);
 		} else {
 			setDisableNext(true);
 		}
 		setItem((prevItem) => ({
 			...prevItem,
-			comments : comments || undefined,
-			tags     : value || undefined,
+			comment : comment || undefined,
+			tags    : value || undefined,
 		}));
-	}, [comments, value, setItem, setDisableNext]);
+	}, [comment, value, setItem, setDisableNext]);
 
 	return (
 		<div>
@@ -50,8 +46,8 @@ function NewLog({ item = {}, setItem = () => {}, setDisableNext = () => {} }) {
 				name="comments"
 				size="lg"
 				placeholder="Text Area"
-				value={comments}
-				// onChange={setComments}
+				value={comment}
+				onChange={setComment}
 			/>
 
 			<CheckboxGroup

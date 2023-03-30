@@ -28,13 +28,13 @@ function UpdatePip({
 		} else {
 			setDisableNext(true);
 		}
-		setItem({
-			...item,
+		setItem((pv) => ({
+			...pv,
 			comments       : comments || undefined,
 			final_decision : value || undefined,
 			is_reviewed    : false,
-		});
-	}, [comments, value, setItem, setDisableNext, item]);
+		}));
+	}, [comments, value, setItem, setDisableNext]);
 
 	return (
 		<div className={styles.update_container}>
@@ -58,7 +58,7 @@ function UpdatePip({
 				onChange={onChange}
 			/>
 
-			{(value !== 'confirmed') && (
+			{(value === 'extended') && (
 				<div className={styles.dates}>
 					<div className={styles.lable}>Reason for Extention</div>
 

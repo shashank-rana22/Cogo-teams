@@ -32,7 +32,7 @@ function EmployeesTable({ source = 'log_modal', setItem = () => {} }) {
 	const { total_count = '' } = pagination_data;
 
 	useEffect(() => {
-		setParams((...previousParams) => ({
+		setParams((previousParams) => ({
 			...previousParams,
 			ManagerID: managerId || undefined,
 		}));
