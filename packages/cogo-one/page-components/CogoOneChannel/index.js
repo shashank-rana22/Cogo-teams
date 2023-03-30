@@ -63,7 +63,7 @@ function CogoOne() {
 		setAppliedFilters = () => {},
 		appliedFilters,
 		loading,
-		setActiveCardId,
+		setActiveCard,
 		activeCardId,
 		firstLoading,
 		updateLeaduser,
@@ -81,15 +81,13 @@ function CogoOne() {
 	useEffect(() => {
 		if (!firstLoading) {
 			setActiveVoiceCard({});
-			setActiveCardId('');
+			setActiveCard({});
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab, showBotMessages]);
+	}, [activeTab, firstLoading, setActiveCard, showBotMessages]);
 
 	useEffect(() => {
 		setToggleStatus(status === 'active');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(agentStatus)]);
+	}, [status]);
 
 	const renderComponent = () => {
 		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
@@ -128,7 +126,6 @@ function CogoOne() {
 	return (
 		<div className={styles.layout_container}>
 			<Customers
-				setActiveCardId={setActiveCardId}
 				isomniChannelAdmin={isomniChannelAdmin}
 				setActiveMessage={setActiveMessage}
 				activeMessageCard={activeMessageCard}
@@ -161,6 +158,7 @@ function CogoOne() {
 				modalType={modalType}
 				updatePin={updatePin}
 				tagOptions={tagOptions}
+				userId={userId}
 			/>
 
 			<div className={styles.chat_details_continer}>

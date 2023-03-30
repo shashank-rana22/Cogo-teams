@@ -1,10 +1,9 @@
 import { cl, Input, Popover, Tooltip } from '@cogoport/components';
 import { IcCPin, IcMPin, IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../common/UserAvatar';
-import { PLATFORM_MAPPING } from '../../../../constants';
+import { PLATFORM_MAPPING, ECLAMATION_SVG } from '../../../../constants';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 import FilterComponents from '../FilterComponents';
@@ -24,7 +23,6 @@ function MessageList({
 	messagesLoading = false,
 	activeCardId = '',
 	setActiveMessage,
-	setActiveCardId = () => {},
 	showBotMessages = false,
 	setShowBotMessages = () => {},
 	isomniChannelAdmin = false,
@@ -33,8 +31,8 @@ function MessageList({
 	handleScroll = () => {},
 	updatePin = () => {},
 	tagOptions = [],
+	userId = '',
 }) {
-	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	function lastMessagePreview(previewData = '') {
 		return (
 			<div
@@ -66,7 +64,6 @@ function MessageList({
 									filterVisible={filterVisible}
 									appliedFilters={appliedFilters}
 									setAppliedFilters={setAppliedFilters}
-									setActiveCardId={setActiveCardId}
 									setShowBotMessages={setShowBotMessages}
 									showBotMessages={showBotMessages}
 									isomniChannelAdmin={isomniChannelAdmin}
@@ -97,19 +94,29 @@ function MessageList({
 			) : (
 				<div className={styles.list_container} onScroll={handleScroll}>
 					{(messagesList || []).map((item) => {
-						const { chat_status = '' } = item || {};
-						const userData = getActiveCardDetails(item);
 						const {
 							user_name = '',
 							organization_name = '',
 							user_type = '',
 							search_user_name = '',
-							chat_tags = [],
-						} = userData || {};
+							chat_tags = [], chat_status = '',
+							id = '',
+							channel_type = '',
+							new_message_sent_at = '',
+							pinnedTime = {},
+							last_message = '',
+							new_message_count = 0,
+						} = getActiveCardDetails(item) || {};
+
 						const isImportant = chat_tags?.includes('important') || false;
-						const lastActive = new Date(item.new_message_sent_at);
-						const checkActiveCard = activeCardId === item?.id;
-						const searchName = search_user_name?.toLowerCase() || '';
+						const lastActive = new Date(new_message_sent_at);
+						const checkActiveCard = activeCardId === id;
+
+						const { renderTime } = dateTimeConverter(
+							Date.now() - Number(lastActive),
+							Number(lastActive),
+						);
+
 						const showOrganization = () => {
 							if ((user_name?.toLowerCase() || '').includes('anonymous')) {
 								return startCase(PLATFORM_MAPPING[user_type] || '');
@@ -118,9 +125,8 @@ function MessageList({
 						};
 
 						return (
-
 							<div
-								key={item?.id}
+								key={id}
 								role="presentation"
 								className={cl`
 											${styles.card_container} 
@@ -133,16 +139,15 @@ function MessageList({
 									<div className={styles.user_information}>
 										<div className={styles.avatar_container}>
 											<UserAvatar
-												type={item.channel_type}
-												imageSource={item.image}
+												type={channel_type}
 											/>
 											<div className={styles.user_details}>
 												<Tooltip
-													content={startCase(searchName) || 'User'}
+													content={startCase(search_user_name) || 'User'}
 													placement="top"
 												>
 													<div className={styles.user_name}>
-														{startCase(searchName) || 'User'}
+														{startCase(search_user_name) || 'User'}
 													</div>
 												</Tooltip>
 
@@ -166,38 +171,43 @@ function MessageList({
 													</div>
 												)}
 											</div>
-											{(item?.pin?.[user_data.user.id]) > 0
+											{pinnedTime[userId] > 0
 												? (
 													<IcCPin
 														onClick={(e) => {
-															updatePin(item.id, item.channel_type, 'unpin');
+															updatePin({
+																pinnedID    : id,
+																channelType : channel_type,
+																type        : 'unpin',
+															});
 															e.stopPropagation();
 														}}
 													/>
 												) : (
 													<IcMPin
 														onClick={(e) => {
-															updatePin(item.id, item.channel_type, 'pin');
+															updatePin({
+																pinnedID    : id,
+																channelType : channel_type,
+																type        : 'pin',
+															});
 															e.stopPropagation();
 														}}
 													/>
 												) }
 
 											<div className={styles.activity_duration}>
-												{dateTimeConverter(
-													Date.now() - Number(lastActive),
-													Number(lastActive),
-												)?.renderTime}
+												{renderTime}
 											</div>
 										</div>
 									</div>
 
 									<div className={styles.content_div}>
-										{lastMessagePreview(item?.last_message || '')}
-										{item.new_message_count > 0 && (
+										{lastMessagePreview(last_message || '')}
+										{new_message_count > 0 && (
 											<div className={styles.new_message_count}>
-												{item.new_message_count > 100 ? '99+' : (
-													item.new_message_count
+												{new_message_count > 100 ? '99+' : (
+													new_message_count
 												)}
 											</div>
 										)}
@@ -207,12 +217,10 @@ function MessageList({
 
 									<div className={styles.important_icon}>
 										<img
-											// eslint-disable-next-line max-len
-											src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg"
+											src={ECLAMATION_SVG}
 											alt="important"
 											width="12px"
 										/>
-
 									</div>
 								)}
 							</div>

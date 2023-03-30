@@ -78,7 +78,7 @@ function Templates({
 		});
 	};
 
-	function createReactComponent() {
+	function handlePreview() {
 		const preview = previewData
 			?.replaceAll(/<p>\s+(<[/]p>)/g, '<br>')
 			?.replaceAll(/<p>(<[/]p>)/g, '<br>')
@@ -285,7 +285,7 @@ function Templates({
 						<div className={styles.whatsapp}>
 							<div className={styles.overflow_div}>
 								<div className={styles.preview_div}>
-									{createReactComponent()}
+									{handlePreview()}
 								</div>
 							</div>
 						</div>

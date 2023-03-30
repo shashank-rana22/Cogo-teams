@@ -25,7 +25,6 @@ function FilterComponents({
 	setFilterVisible = () => {},
 	setAppliedFilters = () => {},
 	appliedFilters = {},
-	setActiveCardId = () => {},
 	setShowBotMessages = () => {},
 	isomniChannelAdmin = false,
 	tagOptions = [],
@@ -60,8 +59,7 @@ function FilterComponents({
 		if (assigned_to === 'me') {
 			setValue('assigned_agent', '');
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [assigned_to]);
+	}, [assigned_to, setValue]);
 
 	Object.keys(formValues).forEach((item) => {
 		if (!isEmpty(formValues[item])) {
@@ -72,7 +70,6 @@ function FilterComponents({
 	const checkFiltersCount = Object.keys(filterValues).length;
 
 	const handleClick = () => {
-		setActiveCardId('');
 		setAppliedFilters(filterValues);
 		setFilterVisible(false);
 		if (!isomniChannelAdmin) {
