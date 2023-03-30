@@ -143,12 +143,11 @@ function List({
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg"
 						alt="empty"
-						style={{ width: '38em', height: '17em' }}
 					/>
 
-					<span style={{ fontSize: '18px', fontWeight: '600' }}>
+					<div className={styles.text}>
 						Welcome to Cogo Chat
-					</span>
+					</div>
 				</div>
 			) : (
 				channelList?.map((item) => (
