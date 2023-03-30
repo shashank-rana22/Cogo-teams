@@ -33,7 +33,7 @@ function FormLayout({
 				if (!Element) return null;
 
 				return (
-					<div className={styles.form_group} style={customStyle || element?.style}>
+					<div key={controlItem.name} className={styles.form_group} style={customStyle || element?.style}>
 						<div className={styles.form_label}>
 							{element.label}
 							{isEmpty(controlItem?.rules)
@@ -47,9 +47,12 @@ function FormLayout({
 								control={control}
 								id={`onboard_vendor_form_${element.name}_input`}
 							/>
-							<div className={styles.error_message}>
-								{errors?.[element.name]?.message}
-							</div>
+
+							{errors?.[element.name]?.message ? (
+								<div className={styles.error_message}>
+									{errors?.[element.name]?.message}
+								</div>
+							) : null}
 						</div>
 					</div>
 				);
