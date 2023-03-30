@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Button, Placeholder } from '@cogoport/components';
+import { Button, Placeholder, Pagination } from '@cogoport/components';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
@@ -33,18 +33,29 @@ interface Props {
 
 function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 	const [moreData, setMoreData] = useState(false);
-	const { getList, listData, listLoading } = useListExpense({ id, expenseType: 'RECURRING' });
+	const [currentPage, setCurrentPage] = useState(1);
+	const { getList, listData, listLoading } = useListExpense({ id, expenseType: 'RECURRING', pageIndexVal: currentPage, pageSizeVal: 5 });
+	const totalRecords = listData?.totalRecords || 0;
+
 	const billList = listData?.list;
 
 	const { sendMail, loading:mailLoading } = useSendEmail();
 
 	useEffect(() => {
-		if (moreData) { getList(); }
+		if (moreData) {
+			getList();
+		} else {
+			setCurrentPage(1);
+		}
 	}, [getList, moreData]);
 
 	useEffect(() => {
 		if (showExpenseModal === true) { setMoreData(false); }
 	}, [showExpenseModal]);
+
+	const handlePageChange = (pageValue:number) => {
+		setCurrentPage(pageValue);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -190,6 +201,15 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 											</div>
 										);
 									}) }
+									<div className={styles.pagination}>
+										<Pagination
+											type="table"
+											currentPage={currentPage}
+											totalItems={totalRecords}
+											pageSize={5}
+											onPageChange={handlePageChange}
+										/>
+									</div>
 								</div>
 							) : (
 								<div style={{

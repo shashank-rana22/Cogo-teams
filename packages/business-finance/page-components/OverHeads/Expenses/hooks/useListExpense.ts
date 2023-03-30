@@ -20,9 +20,11 @@ interface Filter {
 	id?:string | number,
 	expenseType?:string,
 	sort?:Sort,
+	pageIndexVal?:number,
+	pageSizeVal?:number,
 }
 
-const useListExpense = ({ expenseFilters, id, expenseType, sort }:Filter) => {
+const useListExpense = ({ expenseFilters, id, expenseType, sort, pageIndexVal, pageSizeVal }:Filter) => {
 	const { branch, expenseCategory, searchValue, pageSize, pageIndex } = expenseFilters || {};
 	const { invoiceAmountSortType, tdsSortType, payableSortType, paidAmountSortType } = sort || {};
 
@@ -49,8 +51,8 @@ const useListExpense = ({ expenseFilters, id, expenseType, sort }:Filter) => {
 					payableSortType        : payableSortType || undefined,
 					tdsSortType            : tdsSortType || undefined,
 					entityCodeId           : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
-					pageSize,
-					pageIndex,
+					pageSize               : pageSize || pageSizeVal || undefined,
+					pageIndex              : pageIndex || pageIndexVal || undefined,
 				},
 			});
 		} catch (err) {
@@ -67,7 +69,10 @@ const useListExpense = ({ expenseFilters, id, expenseType, sort }:Filter) => {
 		payableSortType,
 		pageSize,
 		pageIndex,
-		paidAmountSortType]);
+		paidAmountSortType,
+		pageSizeVal,
+		pageIndexVal,
+	]);
 
 	return {
 		getList,
