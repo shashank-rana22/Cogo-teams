@@ -31,7 +31,7 @@ function useLIstFaqAudience({ searchAudienceInput = '' }) {
 	useEffect(
 		() => { fetchFaqAudience(); },
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[activeAudience, setAudienceCurrentPage, query],
+		[activeAudience, audienceCurrentPage, query],
 	);
 
 	return {
