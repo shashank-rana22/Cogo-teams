@@ -1,6 +1,7 @@
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import { mappingData } from '../constant';
 import useReport from '../hooks/useReport';
 
 import styles from './styles.module.css';
@@ -18,97 +19,6 @@ function ListProfit({
 		other     : true,
 		tax       : true,
 	});
-
-	const mapping = {
-		Ocean: [
-			{
-				key  : 'fclImports',
-				name : 'Fcl Imports',
-			},
-			{
-				key  : 'lclImports',
-				name : 'Lcl Imports',
-			},
-			{
-				key  : 'fclExports',
-				name : 'LCl Exports',
-			},
-			{
-				key  : 'lclExports',
-				name : 'Lcl Exports',
-			},
-			{
-				key  : 'total',
-				name : 'Total',
-			},
-		],
-		Air: [
-			{
-				key  : 'airImport',
-				name : 'Air Import',
-			},
-			{
-				key  : 'airExport',
-				name : 'Air Export',
-			},
-			{
-				key  : 'airCustomsImport',
-				name : 'Air Customs Import',
-			},
-			{
-				key  : 'airCustomsExport',
-				name : 'Air Customs Export',
-			},
-			{
-				key  : 'total',
-				name : 'Total',
-			},
-		],
-		Surface: [
-			{
-				key  : 'ltlImport',
-				name : 'LTL Import',
-			},
-			{
-				key  : 'ltlExport',
-				name : 'LTL Export',
-			},
-			{
-				key  : 'ftlImport',
-				name : 'FTL Import',
-			},
-			{
-				key  : 'ftlExport',
-				name : 'ftL Export',
-			},
-			{
-				key  : 'total',
-				name : 'Total',
-			},
-		],
-		nothing: [
-			{
-				key  : 'ocean',
-				name : 'Ocean',
-			},
-			{
-				key  : 'air',
-				name : 'Air',
-			},
-			{
-				key  : 'surface',
-				name : 'Surface',
-			},
-			{
-				key  : 'rail',
-				name : 'Rail',
-			},
-			{
-				key  : 'total',
-				name : 'Total',
-			},
-		],
-	};
 
 	const {
 		ratiosData = {},
@@ -145,7 +55,7 @@ function ListProfit({
 			totalTaxExpense = 0,
 		} = item;
 
-		const ratioData = (ratiosDataV2?.list)?.find((item) => item.ratioBasis === filters?.ratio);
+		const ratioData = (ratiosDataV2?.list)?.find((itemRatio) => itemRatio.ratioBasis === filters?.ratio);
 
 		const {
 			esops = 0,
@@ -166,7 +76,8 @@ function ListProfit({
 			provisions_and_write_offs = 0,
 			marketing_expense = 0,
 			round_off = 0,
-			salaries_bonus_incentives_and_staff_welfare_expenses: salaries_bonus_incentives_and_staff_welfare_expenses_expoense = 0,
+			salaries_bonus_incentives_and_staff_welfare_expenses:
+			salaries_bonus_incentives_and_staff_welfare_expenses_expoense = 0,
 			operating_expenses = 0,
 			repairs_and_maintenance = 0,
 			tech_and_product_costs = 0,
@@ -177,11 +88,19 @@ function ListProfit({
 			legal_compliance_books_and_mis = 0,
 			rates_and_taxes = 0,
 			rent_and_taxes = 0,
-			interest_on_loan_discount_on_bills_and_bank_charges: interest_on_loan_discount_on_bills_and_bank_charges_expense = 0,
+			interest_on_loan_discount_on_bills_and_bank_charges:
+			interest_on_loan_discount_on_bills_and_bank_charges_expense = 0,
 		} = otherExpense;
 
 		const key = filters?.radio ? filters?.radio : 'nothing';
-		const relevantData = mapping?.[key];
+		const mode = filters?.mode ? 'ON' : 'OFF';
+
+		const relevantData = mappingData(filters)[mode][key] || [{}];
+
+		console.log(mode, 'mode');
+
+		const ArrayLength = relevantData.length;
+		const calculateWidth = `${50 / ArrayLength}%`;
 
 		return (
 			<div>
@@ -189,9 +108,13 @@ function ListProfit({
 
 					<div className={styles.header_particular}>PARTICULARS</div>
 					{
-						relevantData.map((item) => (
-							<div className={styles.header_ocean} id={item?.key}>
-								{item?.name}
+						relevantData.map((itemHeader) => (
+							<div
+								className={styles.header_ocean}
+								style={{ width: calculateWidth }}
+								id={itemHeader?.key}
+							>
+								{itemHeader?.name}
 							</div>
 						))
 					}
@@ -229,10 +152,10 @@ function ListProfit({
 						{dropDown?.operating && <div>Accrued Expenses</div>}
 					</div>
 
-					{relevantData.map((item) => {
-						const ratio = ratioData?.[item?.key] || 1;
+					{relevantData.map((itemData) => {
+						const ratio = ratioData?.[itemData?.key] || 1;
 						return (
-							<div className={styles.first_ocean}>
+							<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 								<div className={styles.particular_data}>
 									{revenueFromOps * ratio}
 								</div>
@@ -251,10 +174,10 @@ function ListProfit({
 
 				<div className={styles.data_sub}>
 					<div className={styles.header_particular}>GROSS PROFIT</div>
-					{relevantData?.map((item) => {
-						const ratio = ratioData?.[item?.[key]] || 1;
+					{relevantData?.map((itemVal) => {
+						const ratio = ratioData?.[itemVal?.[key]] || 1;
 						return (
-							<div className={styles.header_ocean}>
+							<div className={styles.header_ocean} style={{ width: calculateWidth }}>
 								{(revenueFromOps - operatingExpenses) * ratio}
 							</div>
 						);
@@ -336,10 +259,10 @@ function ListProfit({
 					</div>
 
 					{
-						relevantData?.map((item) => {
-							const ratio = ratioData?.[item?.key] || 1;
+						relevantData?.map((itemValue) => {
+							const ratio = ratioData?.[itemValue?.key] || 1;
 							return (
-								<div className={styles.first_ocean}>
+								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 									<div className={styles.particular_data}>
 										{totalEmployeeBenefitExpenses * ratio}
 									</div>
@@ -404,10 +327,10 @@ function ListProfit({
 						PROFIT BEFORE EXCEPTIONAL AND EXTRAORDINARY ITEMS (B)
 					</div>
 					{
-						relevantData?.map((item) => {
-							const ratio = ratioData?.[item?.[key]] || 1;
+						relevantData?.map((Val) => {
+							const ratio = ratioData?.[Val?.[key]] || 1;
 							return (
-								<div className={styles.header_ocean}>
+								<div className={styles.header_ocean} style={{ width: calculateWidth }}>
 									{
 								(revenueFromOps
 									- operatingExpenses
@@ -436,10 +359,10 @@ function ListProfit({
 					</div>
 
 					{
-						relevantData?.map((item) => {
-							const ratio = ratioData?.[item[key]] || 1;
+						relevantData?.map((itemValue) => {
+							const ratio = ratioData?.[itemValue[key]] || 1;
 							return (
-								<div className={styles.first_ocean}>
+								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 									<div className={styles.particular_data}>{totalExceptionalItems * ratio}</div>
 									<div className={styles.particular_data}>{totalExtraordinaryItems * ratio}</div>
 									<div className={styles.particular_data}>{totalPriorPeriodItem * ratio}</div>
@@ -452,11 +375,12 @@ function ListProfit({
 				<div className={styles.data_sub}>
 					<div className={styles.header_particular}>PROFIT BEFORE TAX (C)</div>
 					{
-						relevantData?.map((item) => {
-							const ratio = ratioData?.[item[key]] || 1;
+						relevantData?.map((value) => {
+							const ratio = ratioData?.[value[key]] || 1;
 							return (
 								<div
 									className={styles.header_ocean}
+									style={{ width: calculateWidth }}
 								>
 									{(revenueFromOps
 								- operatingExpenses
@@ -479,11 +403,11 @@ function ListProfit({
 					</div>
 
 					{
-						relevantData?.map((item) => {
-							const ratio = ratioData?.[item?.key] || 1;
+						relevantData?.map((itemDataValue) => {
+							const ratio = ratioData?.[itemDataValue?.key] || 1;
 
 							return (
-								<div className={styles.first_ocean}>
+								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 									<div className={styles.particular_data}>{totalTaxExpense * ratio}</div>
 								</div>
 							);
@@ -494,10 +418,10 @@ function ListProfit({
 				<div className={styles.data_sub}>
 					<div className={styles.header_particular}>PROFIT AFTER TAX (D)</div>
 					{
-						relevantData?.map((item) => {
-							const ratio = ratioData?.[item?.key] || 1;
+						relevantData?.map((valData) => {
+							const ratio = ratioData?.[valData?.key] || 1;
 							return (
-								<div className={styles.header_ocean}>
+								<div className={styles.header_ocean} style={{ width: calculateWidth }}>
 									{(revenueFromOps - operatingExpenses
 									- totalDepreciationAndAmortization
 									- totalFinanceCost - totalOtherExpense

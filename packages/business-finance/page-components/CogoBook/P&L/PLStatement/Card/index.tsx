@@ -1,6 +1,7 @@
 import {
+	Modal,
 	Toggle,
-	Button, RadioGroup, Chips, CheckboxGroup, Popover, SingleDateRange, Tooltip, Select,
+	Button, RadioGroup, Chips, CheckboxGroup, Popover, Tooltip, Select,
 } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -13,13 +14,14 @@ import { optionsCheck, optionsPeriod, optionsPills, optionsRadio } from '../cons
 import styles from './styles.module.css';
 
 function Card({
-		filters,
-		setFilters,
-		selectFilter,
-		setSelectFilter,
-		select,
-		setSelect
-	}) {
+	filters,
+	setFilters,
+	selectFilter,
+	setSelectFilter,
+	select,
+	setSelect,
+}) {
+	const [modal, setModal] = useState(false);
 	const content = () => (
 		<div className={styles.content_container}>
 			<div>Rows</div>
@@ -105,8 +107,7 @@ function Card({
 							style={{ width: '180px' }}
 						/>
 
-
-						{/* <div className={styles.select_container}> */}
+						<div>
 							<Select
 								value={filters?.month}
 								onChange={(val:string) => { setFilters((prev) => ({ ...prev, month: val })); }}
@@ -116,7 +117,7 @@ function Card({
 								style={{ width: '150px' }}
 							/>
 
-						{/* </div> */}
+						</div>
 
 						<div>
 							<Popover
@@ -184,10 +185,65 @@ function Card({
 						showOnOff
 						value={filters?.mode}
 						onChange={(e) => {
-							setFilters((prev) => ({ ...prev, mode: e?.target?.checked ? 'true' : 'false' }));
+							setFilters((prev) => ({ ...prev, mode: !!e?.target?.checked }));
+							setModal(true);
 						}}
 					/>
 				</div>
+
+				{modal && (
+
+					<Modal
+						show={modal}
+						onClose={() => {
+							setModal(false);
+						}}
+					>
+						<Modal.Header title="Comparison Mode" />
+						<div className={styles.modal_data}>
+							<Modal.Body>
+								<div className={styles.flex_data}>
+									<div>
+										<Select
+											value={filters?.monthFrom}
+											onChange={(val:string) => {
+												setFilters((prev) => ({
+													...prev,
+													monthFrom: val,
+												}));
+											}}
+											placeholder="Month "
+											options={optionMonth}
+											isClearable
+											style={{ width: '200px' }}
+										/>
+									</div>
+									<div>
+										<Select
+											value={filters?.monthTo}
+											onChange={(val:string) => {
+												setFilters((prev) => ({ ...prev, monthTo: val }));
+											}}
+											placeholder="Month "
+											options={optionMonth}
+											isClearable
+											style={{ width: '200px' }}
+										/>
+									</div>
+								</div>
+
+							</Modal.Body>
+						</div>
+
+						<Modal.Footer>
+							<div className={styles.button_flex_data}>
+								<Button>Confirm</Button>
+
+							</div>
+						</Modal.Footer>
+					</Modal>
+
+				)}
 
 				<div>
 					<Toggle

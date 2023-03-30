@@ -21,10 +21,12 @@
 .header_ocean {
   padding: 18px 24px;
   border-right: 1px solid #acdadf;
-  width: 10%;
   font-weight: 600;
+  display: flex;
+  justify-content: center;
   color: #f68b21;
 }
+
 .header_air {
   padding: 18px 24px;
   border-right: 1px solid #acdadf;
@@ -58,9 +60,12 @@
   width: 50%;
 }
 .first_ocean {
-  padding: 18px 24px;
+  padding: 18px 36px;
   border-right: 1px solid #acdadf;
   width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 .first_air {
   padding: 18px 24px;

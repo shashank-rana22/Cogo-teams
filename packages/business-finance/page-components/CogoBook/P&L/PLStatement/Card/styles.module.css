@@ -88,3 +88,21 @@
   background: #fff;
   border-radius: 8px;
 }
+.button_flex_data {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.flex_data {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.modal_data {
+  :global {
+    .ui_modal_body_container {
+      overflow: visible !important;
+      height: 100px;
+    }
+  }
+}
