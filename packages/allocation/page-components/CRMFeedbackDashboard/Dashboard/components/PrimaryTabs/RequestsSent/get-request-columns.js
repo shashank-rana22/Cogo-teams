@@ -79,9 +79,9 @@ export const REQUEST_COLUMNS = ({
 		}) => {
 			const { status, color } = computeStatus({ statuses });
 
-			const orgObject = lead_organization_id ? (lead_organization) : (organization);
+			const orgObject = lead_organization_id ? lead_organization : organization;
 
-			const type = lead_organization_id ? ('lead_organization') : ('organization');
+			const type = lead_organization_id ? 'lead_organization' : 'organization';
 
 			const { id = '', business_name = '' } = orgObject || {};
 
