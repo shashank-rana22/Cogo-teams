@@ -1,4 +1,5 @@
 import { Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill, Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMArrowRotateUp, IcMSearchlight } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
@@ -122,10 +123,10 @@ function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
 			accessor : ({ updated_at = '' }) => (
 				<section>
 					<span className={styles.questionsettime}>
-						{format(updated_at, 'dd MMM\'yy ')}
+						{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
 					</span>
 					<span className={styles.questionsettime}>
-						{format(updated_at, 'h:mm a')}
+						{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}
 					</span>
 				</section>
 			),

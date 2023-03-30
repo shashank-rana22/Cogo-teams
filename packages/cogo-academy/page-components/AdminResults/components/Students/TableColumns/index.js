@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { startCase, format } from '@cogoport/utils';
 
 import toFixed from '../../../../CreateModule/utils/toFixed';
@@ -105,7 +106,12 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 		),
 		id       : 'attempted_on',
 		accessor : ({ created_at = '' }) => (
-			<section>{format(created_at, 'dd MMM yyyy hh:mm a')}</section>
+			<section>
+				{format(
+					created_at,
+					`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
+				)}
+			</section>
 		),
 	},
 ];

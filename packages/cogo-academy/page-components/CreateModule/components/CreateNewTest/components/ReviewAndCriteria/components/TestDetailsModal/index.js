@@ -1,4 +1,5 @@
 import { Modal, Pill, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { startCase, format } from '@cogoport/utils';
 
 import useUpdateTest from '../../../../../../hooks/useUpdateTest';
@@ -53,11 +54,11 @@ function TestDetailsModal(props) {
 						<div>
 							<h5>Validity</h5>
 							<p>
-								{format(test_validity?.startDate, 'dd/MM/yy')}
+								{format(test_validity?.startDate, GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'])}
 								{' '}
 								-
 								{' '}
-								{format(test_validity?.endDate, 'dd/MM/yy')}
+								{format(test_validity?.endDate, GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'])}
 
 							</p>
 						</div>
