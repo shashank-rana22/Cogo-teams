@@ -5,6 +5,7 @@ import SortComponent from '../../../commons/SortComponent';
 import styles from './styles.module.css';
 
 const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
+
 	{
 		Header: (
 			<div className={styles.container}>
@@ -73,20 +74,25 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			</div>
 		),
 		id       : 'time_taken',
-		accessor : ({ time_taken = '' }) => (
+		accessor : ({ time_taken = '' }) => {
+			const time = Math.ceil(time_taken);
 
-			time_taken > 0 ? (
-				<div>
-					{Math.ceil(time_taken)}
-					{' '}
-					{
-						Math.ceil(time_taken) > 1 ? 'mins' : 'min'
+			return (
+
+				time > 0 ? (
+					<div>
+						{time}
+						{' '}
+						{
+						time > 1 ? 'mins' : 'min'
 					}
-				</div>
-			) : ('-')
+					</div>
+				) : ('-')
 
-		),
+			);
+		},
 	},
+
 	{
 		Header: (
 			<div className={styles.container}>
