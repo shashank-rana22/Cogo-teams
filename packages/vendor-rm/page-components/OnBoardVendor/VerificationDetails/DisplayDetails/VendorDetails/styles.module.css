@@ -1,7 +1,5 @@
 .container {
 	padding: 24px 0;
-
-	/* padding: 16px; */
 	border-top: 1px solid rgb(0 0 0 / 7%);
 }
 
@@ -34,6 +32,12 @@
 	font-size: 14px;
 	font-weight: 600;
 	color: #333;
+}
+
+.fields_to_show {
+display: flex;
+flex-direction: column;
+flex-basis: 25%;
 }
 
 .icon_container {

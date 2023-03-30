@@ -1,7 +1,5 @@
 .container {
 	padding: 24px 0;
-
-	/* padding: 16px; */
 	border-top: 1px solid rgb(0 0 0 / 7%);
 }
 
@@ -19,6 +17,12 @@
 .single_record {
 	display: flex;
 	flex-wrap: row wrap;
+}
+
+.fields_to_show{
+display: flex;
+flex-direction: column;
+flex-basis: 25%;
 }
 
 .label {

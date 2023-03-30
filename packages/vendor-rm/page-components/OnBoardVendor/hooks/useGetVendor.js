@@ -33,14 +33,14 @@ function useGetVendor() {
 
 			setVendorInformation({
 				...res.data,
-				contact_details : res.data.pocs[0],
-				payment_details : res.data.bank_details[0],
-				vendor_services : res.data.services,
+				contact_details : res.data?.pocs[0],
+				payment_details : res.data?.bank_details[0],
+				vendor_services : res.data?.services,
 			});
 
 			if (res.data.vendor_details.kyc_status === 'pending_verification') {
 				const href = '/vendors/[vendor_id]';
-				const as = `/vendors/${res.data.vendor_details.id}`;
+				const as = `/vendors/${res.data?.vendor_details?.id}`;
 
 				router.push(href, as);
 			}
@@ -56,7 +56,7 @@ function useGetVendor() {
 	}, [getVendor, vendor_id]);
 
 	useEffect(() => {
-		const componentKeys = (TABS_MAPPING || []).map((mapping) => mapping.key);
+		const componentKeys = TABS_MAPPING.map((mapping) => mapping.key);
 
 		const emptyVendorInformationTab = componentKeys.find((key) => !vendorInformation[key]
 		|| isEmpty(vendorInformation[key])) || 'vendor_details';

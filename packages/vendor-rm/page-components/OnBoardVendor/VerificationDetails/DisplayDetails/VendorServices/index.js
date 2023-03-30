@@ -27,7 +27,7 @@ function VendorServices({
 								Object.keys(filedsToShow).map((wantedField) => {
 									const val = item[wantedField];
 									return (
-										<div style={{ display: 'flex', flexDirection: 'column', flexBasis: '25%' }}>
+										<div className={styles.fields_to_show}>
 											<div className={styles.label}>
 												{filedsToShow[wantedField]}
 											</div>
