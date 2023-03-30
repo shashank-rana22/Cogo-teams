@@ -1,0 +1,87 @@
+import { Button, Modal } from '@cogoport/components';
+import { SelectController } from '@cogoport/forms';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import { asyncFieldsPartnerUsers } from '@cogoport/forms/utils/getAsyncFields';
+import { merge } from '@cogoport/utils';
+import React from 'react';
+
+import controls from '../../../../../configurations/convert-to-cp-form-controls';
+import useConvertToCp from '../../../../../hooks/useConvertAccountToCp';
+
+import styles from './styles.module.css';
+
+function ConvertToCpModal({
+	showConvertModal,
+	setShowConvertModal,
+	organizationId,
+	refetchOrgDetails,
+}) {
+	const listPartnerUsers = useGetAsyncOptions(
+		merge(asyncFieldsPartnerUsers(), {
+			params: {
+				filters: {
+					status               : 'active',
+					role_sub_functions   : ['cp_portfolio'],
+					partner_entity_types : ['cogoport'],
+				},
+				rm_mappings_data_required : false,
+				partner_data_required     : false,
+				pagination_data_required  : false,
+			},
+			valueKey: 'user_id',
+		}),
+	);
+	const { key_account_manager, portfolio_manager } = controls;
+	const {
+		loading,
+		onCreate,
+		control,
+		handleSubmit,
+	} = useConvertToCp({ organization_id: organizationId, setShowConvertModal, refetchOrgDetails });
+	return (
+		<Modal
+			show={showConvertModal}
+			onClose={() => setShowConvertModal(false)}
+		>
+			<Modal.Header title="Convert to Channel Partner" />
+			<Modal.Body>
+				<form className={styles.container} onSubmit={handleSubmit(onCreate)}>
+					<div className={styles.select_label}>Choose Key Account Manager</div>
+					<SelectController
+						className={styles.select_controller}
+						control={control}
+						{...key_account_manager}
+						{...listPartnerUsers}
+						isClearable
+					/>
+					<div className={styles.select_label}>Choose Portfolio Manager</div>
+					<SelectController
+						className={styles.select_controller}
+						control={control}
+						{...portfolio_manager}
+						{...listPartnerUsers}
+						isClearable
+					/>
+					<div className={styles.footer_buttons}>
+						<Button
+							disabled={loading}
+							size="md"
+							themeType="tertiary"
+							onClick={() => setShowConvertModal(false)}
+						>
+							Cancel
+						</Button>
+						<Button
+							disabled={loading}
+							type="submit"
+						>
+							Convert
+						</Button>
+					</div>
+				</form>
+			</Modal.Body>
+		</Modal>
+	);
+}
+
+export default ConvertToCpModal;

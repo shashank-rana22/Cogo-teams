@@ -29,7 +29,7 @@ function ProfileDetails({
 		openNewTab,
 		loading,
 		ORG_PAGE_URL = '',
-		disableQuickActions,
+		disableQuickActions, isChannelPartner, getOrgDetails,
 	} = useListOrganizations({ orgId, activeCardId, activeTab });
 
 	const {
@@ -62,6 +62,8 @@ function ProfileDetails({
 						disableQuickActions={disableQuickActions}
 						documents_count={documents_count}
 						setModalType={setModalType}
+						isChannelPartner={isChannelPartner}
+						getOrgDetails={getOrgDetails}
 					/>
 				)}
 			</div>
