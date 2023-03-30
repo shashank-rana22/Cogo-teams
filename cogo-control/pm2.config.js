@@ -10,7 +10,7 @@ const ifProd = (valueIfProd, valueIfDev) => {
 module.exports = {
 	apps: [
 		{
-			name      : 'project-admin',
+			name      : 'project-new-admin',
 			script    : 'yarn',
 			args      : ['start', '-p', '4160'],
 			instances : ifProd(2, 1),
