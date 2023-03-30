@@ -22,12 +22,7 @@ const unsavedFields = ['consigneeAddress',
 	'shipperAddress',
 	'consigneeName',
 	'chargeableWeight'];
-const carrierOtherChargesValue = [
-	{
-		code  : '',
-		price : '',
-	},
-];
+
 interface NestedObj {
 	[key: string]: NestedObj | React.FC ;
 }
@@ -142,14 +137,6 @@ function GenerateMAWB({
 		finalFields.forEach((c) => {
 			if (activeCategory === 'hawb' && activeHawb.isNew && unsavedFields.includes(c.name)) {
 				setValue(c.name, '');
-			} else if (activeCategory === 'hawb' && activeHawb.isNew && c.name === 'carrierOtherCharges') {
-				const carrierOtherChargesData = [];
-				(taskItem[c.name] || carrierOtherChargesValue).forEach((value) => {
-					const tempItem = { ...value };
-					tempItem.price = '';
-					carrierOtherChargesData.push(tempItem);
-				});
-				setValue(c.name, carrierOtherChargesData);
 			} else {
 				setValue(c.name, taskItem[c.name] || '');
 			}
@@ -163,7 +150,9 @@ function GenerateMAWB({
 		setValue('commodity', taskItem.commodity
 			|| `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
 		setValue('agentOtherCharges', taskItem.agentOtherCharges || agentOtherChargesCode);
-		setValue('carrierOtherCharges', taskItem.carrierOtherCharges || carrierOtherChargesCode);
+		setValue('carrierOtherCharges', activeCategory === 'hawb' && activeHawb.isNew
+			? carrierOtherChargesCode
+			: taskItem.carrierOtherCharges || carrierOtherChargesCode);
 		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 		setValue('shipperSignature', taskItem.customer_name || taskItem.shipperSignature);
 		setValue('amountOfInsurance', 'NIL');
