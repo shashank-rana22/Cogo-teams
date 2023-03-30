@@ -1,9 +1,9 @@
-/* eslint-disable import/order */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -12,8 +12,6 @@ import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
-// eslint-disable-next-line import/no-relative-packages
-import GLOBAL_CONSTANTS from '../../../../../../common/constants/globals.json';
 import { getControls } from '../utils/getControls';
 import isRegistrationNumberValid from '../utils/isRegistrationNumberValid';
 
@@ -96,8 +94,7 @@ function useOnBoardVendor({
 		});
 
 		return () => subscription.unsubscribe();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [watchForm]);
+	}, [clearErrors, trigger, watch, watchForm]);
 
 	const newFields = [];
 
@@ -254,8 +251,7 @@ function useOnBoardVendor({
 				setValue(`${field.name}`, vendorDetails?.[field.name]);
 			}
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [vendorInformation]);
+	}, [fields, setValue, vendorInformation]);
 
 	return {
 		fields: newFields,

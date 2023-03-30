@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -25,7 +27,7 @@ function useGetVendor() {
 		method : 'GET',
 	}, { manual: true });
 
-	const getVendor = async () => {
+	const getVendor = useCallback(async () => {
 		try {
 			const res = await trigger({ params: { id: vendor_id } });
 
@@ -43,16 +45,15 @@ function useGetVendor() {
 				router.push(href, as);
 			}
 		} catch (error) {
-			// console.log('error :: ', error);
+			Toast.error(getApiErrorString(error?.data));
 		}
-	};
+	}, [router, trigger, vendor_id]);
 
 	useEffect(() => {
 		if (vendor_id) {
 			getVendor();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [vendor_id]);
+	}, [getVendor, vendor_id]);
 
 	useEffect(() => {
 		const componentKeys = (TABS_MAPPING || []).map((mapping) => mapping.key);
@@ -61,13 +62,11 @@ function useGetVendor() {
 		|| isEmpty(vendorInformation[key])) || 'vendor_details';
 
 		setActiveStepper(emptyVendorInformationTab);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [getVendorLoading]);
+	}, [getVendorLoading, vendorInformation]);
 
 	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	const onBack = useCallback(() => router.push('/vendors'), []);
+	const onBack = useCallback(() => router.push('/vendors'), [router]);
 
 	return {
 		ActiveComponent,

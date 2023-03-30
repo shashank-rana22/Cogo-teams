@@ -5,9 +5,8 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, merge } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
-// import TABS_MAPPING from '../../../../constants/tabs';
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
 import controls from '../utils/controls';
 
@@ -51,9 +50,9 @@ function useVendorBankDetail({
 		method : 'post',
 	}, { manual: true });
 
-	const regex = /^[A-Za-z]{4}\d{7}$/;
+	const setIfscCode = useCallback(async () => {
+		const regex = /^[A-Za-z]{4}\d{7}$/;
 
-	const setIfscCode = async () => {
 		if (ifscCode?.match(regex)) {
 			try {
 				const sessionData = await triggerGetBankDetails({
@@ -66,18 +65,17 @@ function useVendorBankDetail({
 			} catch (error) {
 				setValue('branch_name', '');
 				setValue('bank_name', '');
-				// Toast.error(getApiErrorString(error.response.data));
+				Toast.error(getApiErrorString(error.response.data));
 			}
 		} else {
 			setValue('branch_name', '');
 			setValue('bank_name', '');
 		}
-	};
+	}, [ifscCode, setValue, triggerGetBankDetails]);
 
 	useEffect(() => {
 		setIfscCode();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [ifscCode]);
+	}, [ifscCode, setIfscCode]);
 
 	const onSubmit = async ({ data, step }) => {
 		const values = getValues();
@@ -130,8 +128,7 @@ function useVendorBankDetail({
 				setValue(`${field.name}`, payment_details?.[field.name]);
 			}
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [vendorInformation]);
+	}, [payment_details, setValue, vendorInformation]);
 
 	return {
 		controls : newControls,

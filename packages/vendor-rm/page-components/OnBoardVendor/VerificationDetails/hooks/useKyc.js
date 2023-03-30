@@ -14,8 +14,7 @@ function useKyc({
 
 	useEffect(() => {
 		getVendor();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [getVendor]);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/submit_vendor_kyc',

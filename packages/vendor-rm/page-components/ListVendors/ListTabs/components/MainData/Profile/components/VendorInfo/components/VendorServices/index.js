@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 

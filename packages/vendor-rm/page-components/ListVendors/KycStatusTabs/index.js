@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-indent-props */
-/* eslint-disable no-mixed-spaces-and-tabs */
 import React from 'react';
 
 import compareArrays from '../../../utils/arrayComparison';
@@ -36,22 +34,22 @@ function KycStatusTabs({
 	return (
 		<div className={styles.kyc}>
 			{
-                kycTabsMapping.map((kycTab) => {
-                	const { label = '', valueKey = '', kycStatus, value } = kycTab;
-                	return (
-	                    <div
-                            role="presentation"
-                            className={styles.box}
-                            onClick={() => {
-                            	tagClick({ kycStatus });
-                            }}
-                            style={color(kycStatus)}
-	                    >
-		                    <div className={styles.label}>{label}</div>
-		                    <div className={styles.value}>{value || dataStats?.[valueKey] || 0}</div>
-	                    </div>
-                	);
-                })
+kycTabsMapping.map((kycTab) => {
+	const { label = '', valueKey = '', kycStatus, value } = kycTab;
+	return (
+		<div
+			role="presentation"
+			className={styles.box}
+			onClick={() => {
+				tagClick({ kycStatus });
+			}}
+			style={color(kycStatus)}
+		>
+			<div className={styles.label}>{label}</div>
+			<div className={styles.value}>{value || dataStats?.[valueKey] || 0}</div>
+		</div>
+	);
+})
             }
 		</div>
 	);

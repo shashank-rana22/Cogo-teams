@@ -4,7 +4,7 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
 import controls from '../utils/controls';
@@ -70,7 +70,7 @@ function useCreateVendorContact({
 		}
 	};
 
-	function getWhatsAppNumber() {
+	const getWhatsAppNumber = useCallback(() => {
 		const whatsappNumber = contact_details.whatsapp_number;
 
 		if (typeof whatsappNumber === 'string') {
@@ -84,7 +84,7 @@ function useCreateVendorContact({
 			number       : contact_details.whatsappNumber?.number,
 			country_code : contact_details.whatsappNumber?.whatsapp_country_code,
 		};
-	}
+	}, [contact_details]);
 
 	useEffect(() => {
 		const mapping = {
@@ -109,8 +109,7 @@ function useCreateVendorContact({
 				);
 			}
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [vendorInformation]);
+	}, [contact_details, getWhatsAppNumber, setValue, vendorInformation]);
 
 	return {
 		fields: controls,

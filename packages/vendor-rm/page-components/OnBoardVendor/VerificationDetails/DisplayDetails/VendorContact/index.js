@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react';
 
 import formatArrayValues from '../../../../../utils/formatArrayValues';
@@ -20,13 +19,16 @@ function VendorContact({
 		const val = detail?.[0]?.[fieldName] || '';
 
 		if (fieldName === 'mobile_number') {
-			// eslint-disable-next-line no-unsafe-optional-chaining
 			const { mobile_number = '', mobile_country_code = '' } = detail?.[0] || {};
 			return `${mobile_country_code} ${mobile_number}`;
 		}
 
 		if (fieldName === 'poc_role') {
-			const formattedValues = (val || []).map((value) => workScopes.find((work_scope) => work_scope.value === value).label);
+			const formattedValues = (val || []).map(
+				(value) => workScopes.find(
+					(work_scope) => work_scope.value === value,
+				).label,
+			);
 
 			return formatArrayValues(formattedValues, false);
 		}

@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React from 'react';
@@ -7,7 +6,13 @@ import formatArrayValues from '../../../../../utils/formatArrayValues';
 
 import styles from './styles.module.css';
 
-const keysToDisplay = ['vendor_id', 'kyc_status', 'registration_number', 'service_category', 'service_sub_category', 'created_on'];
+const keysToDisplay = [
+	'vendor_id',
+	'kyc_status',
+	'registration_number',
+	'service_category',
+	'service_sub_category',
+	'created_on'];
 
 function Banner({ data = {} }) {
 	const { vendor_details = {}, services = [] } = data;
@@ -39,7 +44,11 @@ function Banner({ data = {} }) {
 
 		return (
 			<>
-				<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg" alt="pending" className={styles.pending_icon} />
+				<img
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg"
+					alt="pending"
+					className={styles.pending_icon}
+				/>
 				<span style={{ color: '#F68B21' }}>{startCase(value)}</span>
 			</>
 		);

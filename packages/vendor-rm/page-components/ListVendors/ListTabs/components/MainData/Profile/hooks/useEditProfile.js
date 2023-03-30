@@ -79,8 +79,7 @@ function useEditProfile({ vendor_details = {}, refetchVendorInfo = () => {}, set
 		fields.forEach((field) => {
 			setValue(`${field.name}`, vendor_details?.[field.name]);
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [fields, setValue, vendor_details]);
 
 	return {
 		newFields,

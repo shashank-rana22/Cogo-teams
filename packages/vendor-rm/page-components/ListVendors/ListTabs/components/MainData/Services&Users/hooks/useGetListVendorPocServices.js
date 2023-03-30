@@ -1,6 +1,8 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 function useGetListVendorPocServices() {
 	const { general: { query } } = useSelector((state) => state);
@@ -12,7 +14,7 @@ function useGetListVendorPocServices() {
 		method : 'GET',
 	}, { manual: false });
 
-	const getListVendorPocServices = async () => {
+	const getListVendorPocServices = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -20,14 +22,13 @@ function useGetListVendorPocServices() {
 				},
 			});
 		} catch (error) {
-			// Toast.error(getApiErrorString(error?.data));
+			Toast.error(getApiErrorString(error?.data));
 		}
-	};
+	}, [trigger, vendor_id]);
 
 	useEffect(() => {
 		getListVendorPocServices();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [getListVendorPocServices]);
 
 	const { services_pocs = [] } = data || {};
 

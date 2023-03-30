@@ -55,8 +55,7 @@ const useEditPoc = ({ data = {}, setShowEditPocModal = () => {}, refetchVendorIn
 				setValue(`${field.name}`, filtered_data?.[field.name]);
 			}
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [filtered_data, setValue]);
 
 	return {
 		control,

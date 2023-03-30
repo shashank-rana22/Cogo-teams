@@ -58,34 +58,42 @@ function PaymentDetails({
 							{bankDetail.branch_name}
 						</div>
 					</div>
-					<div className={styles.box_info}>
-						<div className={styles.top}>
-							Cancelled Cheque/Passbook
-						</div>
-						<div className={styles.bottom}>
-							<div className={styles.di}>
-								<a
-									href={bankDetail?.bank_document_url}
-									target="_blank"
-									className={styles.txt}
-									style={{
-										color: '#F68B21',
-									}}
-									rel="noreferrer"
-								>
-									{bankDetail?.bank_document_url}
-								</a>
-								<div className={styles.btn}>
-									<img
-										// eslint-disable-next-line max-len
-										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg"
-										alt="icon-download"
-									/>
 
+					<div>
+						{
+						bankDetail?.bank_document_url ? (
+							<div className={styles.box_info}>
+								<div className={styles.top}>
+									Cancelled Cheque/Passbook
+								</div>
+								<div className={styles.bottom}>
+									<div className={styles.di}>
+										<a
+											href={bankDetail?.bank_document_url}
+											target="_blank"
+											className={styles.txt}
+											style={{
+												color: '#F68B21',
+											}}
+											rel="noreferrer"
+										>
+											{bankDetail?.bank_document_url}
+										</a>
+										<div className={styles.btn}>
+											<img
+												src={`https://cdn.cogoport.io/cms-prod/
+											cogo_admin/vault/original/download-icon.svg`}
+												alt="icon-download"
+											/>
+
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
+						) : null
+						}
 					</div>
+
 				</div>
 				<div className={styles.box_info1}>
 					<div className={styles.top}>

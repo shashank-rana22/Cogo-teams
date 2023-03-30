@@ -1,6 +1,8 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const useVendorInfo = () => {
 	const [data, setData] = useState({});
@@ -19,7 +21,7 @@ const useVendorInfo = () => {
 		{ manual: false },
 	);
 
-	const VendorInfo = async () => {
+	const VendorInfo = useCallback(async () => {
 		try {
 			const params = {
 				id: vendor_id,
@@ -31,14 +33,13 @@ const useVendorInfo = () => {
 
 			setData(response);
 		} catch (e) {
-			// console.log(e);
+			Toast.error(getApiErrorString(e.data));
 		}
-	};
+	}, [trigger, vendor_id]);
 
 	useEffect(() => {
 		VendorInfo();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [VendorInfo]);
 
 	const refetchVendorInfo = () => {
 		VendorInfo();

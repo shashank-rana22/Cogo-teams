@@ -78,8 +78,7 @@ function useVendorServices({
 		controls.forEach((item) => {
 			setValue(`${item.name}`, vendor_services?.[item.name] || reformattedDataFromApi[item.name]);
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [vendorInformation]);
+	}, [controls, setValue, vendorInformation, vendor_services]);
 
 	return {
 		controls,
