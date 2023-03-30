@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import Image from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -25,12 +26,10 @@ function TestResultMessage({ stats_data }) {
 
 	return (
 		<div className={styles.message_container}>
-			<img
+			<Image
 				src={image_url}
 				alt={alt}
-				style={{ marginRight: 20 }}
-				width={42}
-				height={42}
+				className={styles.image_container}
 			/>
 
 			<div className={styles.column}>
