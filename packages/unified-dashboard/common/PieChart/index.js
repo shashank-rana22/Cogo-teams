@@ -14,24 +14,20 @@ function PieChart({ chartData = [], margin, currency }) {
 		).toFixed(2),
 	}));
 
-	function Pie({ data }) {
-		return (
-			<ResponsivePie
-				data={data}
-				margin={margin}
-				innerRadius={0.6}
-				padAngle={0}
-				justify
-				cornerRadius={3}
-				enableArcLabels={false}
-				enableArcLinkLabels={false}
-				isInteractive
-				colors={colors}
-			/>
-		);
-	}
-
-	return <Pie data={pieChartData} />;
+	return (
+		<ResponsivePie
+			data={pieChartData}
+			margin={margin}
+			innerRadius={0.6}
+			padAngle={0}
+			justify
+			cornerRadius={3}
+			enableArcLabels={false}
+			enableArcLinkLabels={false}
+			isInteractive
+			colors={colors}
+		/>
+	);
 }
 
 export default PieChart;

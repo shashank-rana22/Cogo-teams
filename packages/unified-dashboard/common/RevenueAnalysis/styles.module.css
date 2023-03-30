@@ -178,11 +178,7 @@
 	overflow: auto;
 }
 
-/* Media query */
-
 @media (max-width: 767px) {
-	/* CSS */
-
 	.revenue_span {
 		color: #828282;
 	}
