@@ -44,7 +44,7 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 				tabIndex={0}
 				onClick={() => setShow(true)}
 			>
-				{count >= 0 && !show ? <div className={styles.circle}>5</div> : null}
+				{count > 0 && !show ? <div className={styles.circle}>{count}</div> : null}
 				<div className={styles.icon}>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipment-chat-icon.svg"
