@@ -2,7 +2,7 @@ import { Popover, Button, Select, Modal } from '@cogoport/components';
 import { SelectController, TextAreaController } from '@cogoport/forms';
 import { useState } from 'react';
 
-import useCreateRaiseQuery from '../../../hooks/useCreateRaiseQuery';
+import useCreateRaiseQuery from '../../hooks/useCreateRaiseQuery';
 
 import controls from './controls';
 import RaiseQuery from './RaiseQuery';

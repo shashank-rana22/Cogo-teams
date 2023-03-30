@@ -1,9 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
+
+import getApiErrorString from '../utils/getApiErrorString';
 
 function useCreateRaiseQuery({
 	setShowModal = () => {},
