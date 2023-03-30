@@ -11,7 +11,7 @@ import CaseQuestion from '../CaseQuestion';
 
 import styles from './styles.module.css';
 
-const TableColumns = ({ allKeysSaved, handleEditQuestion, loading, caseStudyLoading, mode, setShowModal }) => {
+const useGetTableColumns = ({ allKeysSaved, handleEditQuestion, loading, caseStudyLoading, mode, setShowModal }) => {
 	const [caseToShow, setCaseToShow] = useState('');
 
 	return [
@@ -166,4 +166,4 @@ const TableColumns = ({ allKeysSaved, handleEditQuestion, loading, caseStudyLoad
 	];
 };
 
-export default TableColumns;
+export default useGetTableColumns;

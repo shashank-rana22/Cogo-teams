@@ -24,7 +24,7 @@ const useCreateQuestion = ({
 		watch,
 		reset,
 		setValue,
-		...rest
+		...restFormProps
 	} = useForm();
 
 	const { createTestQuestion, loading } = useCreateTestQuestion();
@@ -153,7 +153,7 @@ const useCreateQuestion = ({
 		deleteQuestion,
 		updateCaseStudyLoading,
 		onSubmit,
-		...rest,
+		...restFormProps,
 	};
 };
 

@@ -3,21 +3,44 @@ import { TextAreaController, ChipsController } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 
 import getElementController from '../../../../../../../configs/getElementController';
+import useHandleBasicDetails from '../useHandleBasicDetails';
 
 import styles from './styles.module.css';
 
 function FormComponent({
 	isNewQuestion,
-	controls,
 	control,
 	errors,
 	questionTypeWatch,
 	editDetails,
-	handleUpdateCaseStudy,
-	loading,
 	mode,
-	closeForm,
+	setValue,
+	setEditDetails,
+	reset,
+	getValues,
+	questionSetId,
+	getTestQuestionTest,
+	setAllKeysSaved,
+	setShowForm,
 }) {
+	const {
+		handleUpdateCaseStudy,
+		loading,
+		controls,
+		closeForm,
+	} = useHandleBasicDetails({
+		setEditDetails,
+		setAllKeysSaved,
+		getTestQuestionTest,
+		questionSetId,
+		editDetails,
+		mode,
+		getValues,
+		reset,
+		setValue,
+		setShowForm,
+	});
+
 	return (
 		<div className={`${styles.container} ${!isNewQuestion ? styles.flex_row : null}`}>
 			<div className={styles.upper_form}>

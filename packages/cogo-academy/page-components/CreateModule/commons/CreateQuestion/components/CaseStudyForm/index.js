@@ -76,7 +76,7 @@ function CaseStudyForm({
 						) : null}
 					</div>
 
-					{index === fields.length - 1 && mode !== 'view' && isNewQuestion ? (
+					{index === fields.length - 1 && mode !== 'view' ? (
 						<div className={styles.button_container}>
 							<Button
 								type="button"

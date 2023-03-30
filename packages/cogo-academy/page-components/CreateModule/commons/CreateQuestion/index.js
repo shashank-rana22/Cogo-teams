@@ -47,7 +47,7 @@ function CreateQuestion({
 	});
 
 	return (
-		<form key={JSON.stringify(getValues())} onSubmit={handleSubmit(onSubmit)} className={styles.container}>
+		<form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
 			<div className={styles.question_label}>{`Question ${index + 1}`}</div>
 
 			<div className={styles.form_component}>

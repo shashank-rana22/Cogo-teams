@@ -1,6 +1,7 @@
+import { useState } from 'react';
+
 import ContentComponent from './ContentComponent';
 import FormComponent from './FormComponent';
-import useHandleBasicDetails from './useHandleBasicDetails';
 
 function BasicDetails({
 	control,
@@ -17,24 +18,7 @@ function BasicDetails({
 	questionSetId,
 	mode,
 }) {
-	const {
-		handleUpdateCaseStudy,
-		loading,
-		showForm,
-		setShowForm,
-		controls,
-		closeForm,
-	} = useHandleBasicDetails({
-		setEditDetails,
-		setAllKeysSaved,
-		getTestQuestionTest,
-		questionSetId,
-		editDetails,
-		mode,
-		getValues,
-		reset,
-		setValue,
-	});
+	const [showForm, setShowForm] = useState(false);
 
 	return (
 		<div key={showForm}>
@@ -49,15 +33,19 @@ function BasicDetails({
 				) : (
 					<FormComponent
 						isNewQuestion={isNewQuestion}
-						controls={controls}
 						control={control}
 						errors={errors}
 						questionTypeWatch={questionTypeWatch}
 						editDetails={editDetails}
-						handleUpdateCaseStudy={handleUpdateCaseStudy}
-						loading={loading}
 						mode={mode}
-						closeForm={closeForm}
+						getValues={getValues}
+						setEditDetails={setEditDetails}
+						setAllKeysSaved={setAllKeysSaved}
+						reset={reset}
+						getTestQuestionTest={getTestQuestionTest}
+						questionSetId={questionSetId}
+						setValue={setValue}
+						setShowForm={setShowForm}
 					/>
 				)}
 		</div>
