@@ -8,4 +8,6 @@ while (sixMonthsAgo <= today) {
 	sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() + 1);
 }
 
-export const optionMonth = months.map((item) => ({ label: item, value: item }));
+const month = months.reverse();
+
+export const optionMonth = month.map((item) => ({ label: item, value: item }));

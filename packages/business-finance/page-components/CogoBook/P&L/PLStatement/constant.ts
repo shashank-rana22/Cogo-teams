@@ -13,7 +13,6 @@ export const optionsCheck = [
 export const optionsPills = [
 	{ key: 'Segment', children: 'Segment' },
 	{ key: 'Service', children: 'Service' },
-	{ key: 'DemandChannel', children: 'Demand Channel' },
 ];
 export const optionsRadio = (chip:string) => {
 	if (chip === 'DemandChannel') {
@@ -35,4 +34,135 @@ export const optionsRadio = (chip:string) => {
 	return [
 		{ label: 'Ocean/Air/Surface/Rail', value: 'segment' },
 	];
+};
+
+export const mappingData = (filters) => {
+	const { monthTo = '', monthFrom = '' } = filters || {};
+	return {
+		OFF: {
+			Ocean: [
+				{
+					key  : 'fclImports',
+					name : 'Fcl Imports',
+				},
+				{
+					key  : 'fclExports',
+					name : 'Fcl Exports',
+				},
+				{
+					key  : 'lclImports',
+					name : 'Lcl Imports',
+				},
+				{
+					key  : 'lclExports',
+					name : 'Lcl Exports',
+				},
+				{
+					key  : 'oceanCustoms',
+					name : 'Ocean Customs',
+				},
+				{
+					key  : 'total',
+					name : 'Total',
+				},
+			],
+			Air: [
+				{
+					key  : 'airImports',
+					name : 'Air Import',
+				},
+				{
+					key  : 'airExports',
+					name : 'Air Export',
+				},
+				{
+					key  : 'airCustoms',
+					name : 'Air Customs ',
+				},
+				{
+					key  : 'total',
+					name : 'Total',
+				},
+			],
+			Surface: [
+				{
+					key  : 'ftl',
+					name : 'Ftl ',
+				},
+				{
+					key  : 'ltl',
+					name : 'Ltl ',
+				},
+				{
+					key  : 'total',
+					name : 'Total',
+				},
+			],
+			segment: [
+				{
+					key  : 'ocean',
+					name : 'Ocean',
+				},
+				{
+					key  : 'air',
+					name : 'Air',
+				},
+				{
+					key  : 'surface',
+					name : 'Surface',
+				},
+				{
+					key  : 'rail',
+					name : 'Rail',
+				},
+				{
+					key  : 'total',
+					name : 'Total',
+				},
+			],
+			nothing: [
+				{
+					key  : 'ocean',
+					name : 'Ocean',
+				},
+				{
+					key  : 'air',
+					name : 'Air',
+				},
+				{
+					key  : 'surface',
+					name : 'Surface',
+				},
+				{
+					key  : 'rail',
+					name : 'Rail',
+				},
+				{
+					key  : 'total',
+					name : 'Total',
+				},
+			],
+			Rail: [
+				{
+					key  : 'railDomestic',
+					name : 'Rail Domestic',
+				},
+				{
+					key  : 'total',
+					name : 'Total',
+				},
+			],
+		},
+		ON: [
+			{
+				key  : 'total',
+				name : monthTo,
+			},
+			{
+				key  : 'total',
+				name : monthFrom,
+			},
+		],
+
+	};
 };
