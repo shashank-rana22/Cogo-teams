@@ -40,20 +40,17 @@ function Statistics({ activeTab = '' }) {
 							enableArcLabels={false}
 							colors={chartData?.colors}
 							colorBy="index"
-							margin={{ top: 20, right: 40, bottom: 10, left: 120 }}
+							margin={{ top: 20, right: 10, bottom: 10, left: 150 }}
 							legends={[
 								{
 									anchor        : 'left',
 									direction     : 'column',
 									justify       : false,
-									translateX    : -80,
+									translateX    : -120,
 									translateY    : 0,
 									itemsSpacing  : 5,
-									itemWidth     : 100,
-									itemHeight    : 18,
-									itemTextColor : '#221F20',
+									itemHeight    : 20,
 									itemDirection : 'left-to-right',
-									itemOpacity   : 1,
 									symbolSize    : 12,
 									symbolShape   : 'circle',
 								},
