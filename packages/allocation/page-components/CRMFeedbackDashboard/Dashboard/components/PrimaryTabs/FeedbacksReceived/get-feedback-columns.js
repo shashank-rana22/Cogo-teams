@@ -31,9 +31,9 @@ export const getFeedbackColumns = ({
 		accessor : ({ organization = {}, lead_organization_id = '', lead_organization = {} }) => (
 			<section className={styles.table_cell}>
 				{lead_organization_id ? (
-					startCase(lead_organization?.business_name || '___')
+					startCase(lead_organization.business_name || '___')
 				) : (
-					startCase(organization?.business_name || '___')
+					startCase(organization.business_name || '___')
 				)}
 			</section>
 		),
@@ -44,7 +44,7 @@ export const getFeedbackColumns = ({
 		id       : 'cogo_entity',
 		accessor : ({ cogo_entity = {} }) => (
 			<section className={styles.table_cell}>
-				{cogo_entity?.business_name || '___'}
+				{cogo_entity.business_name || '___'}
 			</section>
 		),
 	},
@@ -163,7 +163,7 @@ export const getFeedbackColumns = ({
 		id       : 'kam',
 		accessor : ({ created_by = {} }) => (
 			<section className={styles.table_cell}>
-				{created_by?.name || '___'}
+				{created_by.name || '___'}
 			</section>
 		),
 	},
@@ -173,7 +173,7 @@ export const getFeedbackColumns = ({
 		id       : 'kam_manager',
 		accessor : ({ manager = {} }) => (
 			<section className={styles.table_cell}>
-				{manager?.name || '___'}
+				{manager.name || '___'}
 			</section>
 		),
 	},
