@@ -1,73 +1,74 @@
 .cont {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    row-gap: 1rem;
-    column-gap: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	row-gap: 1rem;
+	column-gap: 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .box_info1 {
-    margin: 1rem 0;
+	margin: 1rem 0;
 }
 
 .top {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 21px;
-    color: #333;
-    opacity: 0.7;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 21px;
+	color: #333;
+	opacity: 0.7;
 }
 
 .bottom {
-    width: 250px;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 21px;
-    color: #333;
+	width: 250px;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 21px;
+	color: #333;
 }
 
 .download {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 }
 
 .link {
-    display: inline-block;
-    width: 160px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	display: inline-block;
+	width: 160px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .bottom1 {
-    width: 500px;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 21px;
-    color: #333;
+	width: 500px;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 21px;
+	color: #333;
 }
 
 .dis1 {
-    height: 1px;
-    background: #000;
-    background: repeating-linear-gradient(
-        90deg,
-        #000,
-        #000 6px,
-        transparent 6px,
-        transparent 12px
-    );
-    border: none;
-    opacity: 0.07;
+	height: 1px;
+	background: #000;
+	background:
+		repeating-linear-gradient(
+			90deg,
+			#000,
+			#000 6px,
+			transparent 6px,
+			transparent 12px
+		);
+	border: none;
+	opacity: 0.07;
 }
 
 .btn {
-    all: unset;
-    cursor: pointer;
+	all: unset;
+	cursor: pointer;
 }

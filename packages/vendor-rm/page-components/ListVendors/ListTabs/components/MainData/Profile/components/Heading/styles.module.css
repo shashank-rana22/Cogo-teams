@@ -1,18 +1,18 @@
 .top1 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 24px;
-    color: #333;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 24px;
+	color: #333;
 }
 
 .kyc_button_container {
-    display: flex;
+	display: flex;
 }
 
 .kyc_btn {
-    margin-right: 16px;
+	margin-right: 16px;
 }

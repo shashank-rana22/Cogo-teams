@@ -1,24 +1,24 @@
 .container {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .body_container {
-    :global {
-        .ui_modal_body_container {
-            overflow: visible !important;
-        }
-    }
+	:global {
+		.ui_modal_body_container {
+			overflow: visible !important;
+		}
+	}
 }
 
 .form_container {
-    display: flex;
-    flex: 1;
-    justify-content: space-between;
+	display: flex;
+	flex: 1;
+	justify-content: space-between;
 }
 
 .button_container {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 }
