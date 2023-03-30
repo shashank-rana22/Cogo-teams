@@ -4,6 +4,7 @@ export { default as useRequestAir } from './hooks/useAirRequest';
 export { default as usePublicRequest } from './hooks/usePublicRequest';
 export { default as useAllocationRequest } from './hooks/useAllocationRequest';
 export { default as useIrisRequest } from './hooks/useIrisRequest';
+export { default as useLensRequest } from './hooks/useLensRequest';
 
 export { publicRequest } from './helpers/public-request';
 export { request } from './helpers/request';

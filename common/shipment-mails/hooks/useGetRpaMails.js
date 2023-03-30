@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import useAxios from 'axios-hooks';
+import { useLensRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
 import APIS from '../constants/apis';
@@ -23,13 +23,10 @@ const useGetRpaMails = (
 
 	const apis = APIS[source];
 
-	const [mailApi, triggerGetMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/${apis.list}`,
-			method : 'GET',
-		},
-		{ manual: true },
-	);
+	const [mailApi, triggerGetMail] = useLensRequest({
+		url    : `${apis.list}`,
+		method : 'GET',
+	}, { manual: true });
 
 	const getEmails = useCallback(() => {
 		(async () => {
