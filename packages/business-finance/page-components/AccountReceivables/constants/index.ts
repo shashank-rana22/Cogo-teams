@@ -280,8 +280,8 @@ export const INVOICE_STATUS = {
 export const SERVICE_PROVIDER = [
 	{ value: 'All', label: 'All' },
 	{ value: 'ENTERPRISE', label: 'ES' },
-	{ value: 'LONGTAIL', label: 'Longtail' },
-	{ value: 'MIDSIZE', label: 'MSME' },
+	{ value: 'IE', label: 'IE' },
+	{ value: 'CP', label: 'CP' },
 ];
 
 export const SHIPMENT_TYPE_OPTIONS = [
@@ -312,3 +312,6 @@ export const SALES_FUNNEL_OPTIONS = [
 	{ value: 'DEC', label: 'December' },
 
 ];
+
+export const months = ['JAN', 'FEB', 'MAR',
+	'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];

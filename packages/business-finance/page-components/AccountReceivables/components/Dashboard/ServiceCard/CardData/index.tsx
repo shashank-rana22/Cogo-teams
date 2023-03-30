@@ -30,10 +30,13 @@ function CardData({ tab }: CardDataProps) {
 
 							<div className={styles.name}>
 
-								{	item?.name?.length > 20 ? (
+								{	item?.name?.length > 20 || item?.name === 'others' ? (
 									<Tooltip
 										placement="top"
-										content={startCase(item?.name)}
+										content={
+											item?.name === 'others' ? 'No Service Tagged'
+												: startCase(item?.name)
+}
 									>
 										<text>
 											{`${(startCase(item?.name)).substring(
@@ -44,16 +47,36 @@ function CardData({ tab }: CardDataProps) {
 									</Tooltip>
 								)
 									: (
-										<div>
+										<div className={styles.cursor_pointer}>
 											{startCase(item?.name)}
 										</div>
 									)}
 							</div>
 							<div>
-								{getFormattedPrice(
-									item?.openInvoiceAmount,
-									item?.currency,
-								) }
+								<Tooltip content={(
+									<div>
+										{getFormattedPrice(
+											item?.openInvoiceAmount,
+											item?.currency,
+
+										)}
+									</div>
+								)}
+								>
+									<div className={styles.wrapper}>
+										{getFormattedPrice(
+											item?.openInvoiceAmount || 0,
+											item?.currency,
+											{
+												notation              : 'compact',
+												compactDisplay        : 'short',
+												maximumFractionDigits : 2,
+												style                 : 'decimal',
+											},
+										)}
+									</div>
+
+								</Tooltip>
 
 							</div>
 						</div>

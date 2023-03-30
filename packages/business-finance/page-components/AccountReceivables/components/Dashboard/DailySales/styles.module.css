@@ -3,6 +3,7 @@
 	margin-top: 16px;
 	background: #fff;
 	border-radius: 8px;
+	height: 440px;
 }
 
 .flex {
@@ -19,7 +20,8 @@
 }
 
 .icon {
-	font-size: 14px;
+	margin-left: 4px;
+	margin-top: 2px;
 }
 
 .border {

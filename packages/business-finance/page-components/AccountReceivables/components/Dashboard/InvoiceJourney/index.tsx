@@ -37,15 +37,18 @@ function InvoiceJourney({ filterValue }: InvoiceJourneyProps) {
 	const getTatData = [
 		{
 			label : 'Draft - Finance Accepted',
-			TAT   : `${tatHoursFromDraftToFinanceAccepted || 0} Hours (${financeAcceptedInvoiceEventCount || 0})`,
+			TAT   : `${tatHoursFromDraftToFinanceAccepted || 0} Hours `,
+			Count : financeAcceptedInvoiceEventCount || 0,
 		},
 		{
 			label : 'Finance Accepted - IRN Generated',
-			TAT   : `${tatHoursFromFinanceAcceptedToIrnGenerated || 0} Hours (${irnGeneratedInvoiceEventCount || 0})`,
+			TAT   : `${tatHoursFromFinanceAcceptedToIrnGenerated || 0} Hours `,
+			Count : irnGeneratedInvoiceEventCount || 0,
 		},
 		{
 			label : 'IRN Generated - Settled ',
-			TAT   : `${tatHoursFromIrnGeneratedToSettled || 0} Hours (${settledInvoiceEventCount || 0})`,
+			TAT   : `${tatHoursFromIrnGeneratedToSettled || 0} Hours `,
+			Count : settledInvoiceEventCount || 0,
 		},
 	];
 
@@ -60,7 +63,7 @@ function InvoiceJourney({ filterValue }: InvoiceJourneyProps) {
 						<div className={styles.journey}>
 							Invoice Statistics and TAT
 							<Tooltip content="Current month Invoice Statistics and TAT" placement="top">
-								<div className={styles.icon}><IcMInfo /></div>
+								<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
 							</Tooltip>
 
 						</div>
@@ -149,6 +152,11 @@ function InvoiceJourney({ filterValue }: InvoiceJourneyProps) {
 										<div className={styles.tat_value}>
 											TAT :
 											<span className={styles.color_tat}>{item?.TAT}</span>
+											<span className={styles.color_count}>
+												(
+												{item?.Count}
+												)
+											</span>
 										</div>
 									</div>
 								</div>

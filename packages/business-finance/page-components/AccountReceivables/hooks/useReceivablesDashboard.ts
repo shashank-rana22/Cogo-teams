@@ -2,14 +2,16 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
+import { months } from '../constants';
+
 const useReceivablesDashboard = () => {
 	const [filterValue, setFilterValue] = useState({
 		entityCode  : '301',
 		serviceType : '',
 		companyType : 'All',
 	});
-	const months = ['JAN', 'FEB', 'MAR',
-		'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+	const { entityCode = '', serviceType = '', companyType = '' } = filterValue || {};
 
 	const d = new Date();
 	const currentMonth = months[d.getMonth()];
@@ -32,15 +34,15 @@ const useReceivablesDashboard = () => {
 		try {
 			listApiTrigger({
 				params: {
-					entityCode  : filterValue?.entityCode || undefined,
-					serviceType : filterValue?.serviceType || undefined,
-					companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
+					entityCode  : entityCode || undefined,
+					serviceType : serviceType || undefined,
+					companyType : companyType !== 'All' ? companyType : undefined,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Something went wrong');
 		}
-	}, [filterValue.companyType, filterValue?.entityCode, filterValue?.serviceType, listApiTrigger]);
+	}, [companyType, entityCode, serviceType, listApiTrigger]);
 
 	const [
 		{ data: quaterlyData, loading: quaterlyLoading },
@@ -110,15 +112,15 @@ const useReceivablesDashboard = () => {
 		try {
 			await dailySalesOutstandingTrigger({
 				params: {
-					entityCode  : filterValue?.entityCode || undefined,
-					serviceType : filterValue?.serviceType || undefined,
-					companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
+					entityCode  : entityCode || undefined,
+					serviceType : serviceType || undefined,
+					companyType : companyType !== 'All' ? companyType : undefined,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Something went wrong');
 		}
-	}, [dailySalesOutstandingTrigger, filterValue.companyType, filterValue?.entityCode, filterValue?.serviceType]);
+	}, [dailySalesOutstandingTrigger, companyType, entityCode, serviceType]);
 
 	const [
 		{ data: salesFunnelData, loading: salesFunnelLoading },
@@ -137,16 +139,16 @@ const useReceivablesDashboard = () => {
 			await salesFunnelTrigger({
 				params: {
 					month       : salesFunnelMonth || undefined,
-					entityCode  : filterValue?.entityCode || undefined,
-					serviceType : filterValue?.serviceType || undefined,
-					companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
+					entityCode  : entityCode || undefined,
+					serviceType : serviceType || undefined,
+					companyType : companyType !== 'All' ? companyType : undefined,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Something went wrong');
 		}
-	}, [filterValue.companyType,
-		filterValue?.entityCode, filterValue?.serviceType, salesFunnelMonth, salesFunnelTrigger]);
+	}, [companyType,
+		entityCode, serviceType, salesFunnelMonth, salesFunnelTrigger]);
 
 	const [
 		{ data: outstandingData, loading: outstandingLoading },
@@ -164,26 +166,26 @@ const useReceivablesDashboard = () => {
 		try {
 			await outstandingTrigger({
 				params: {
-					entityCode: filterValue?.entityCode || undefined,
+					entityCode: entityCode || undefined,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Something went wrong');
 		}
-	}, [filterValue?.entityCode, outstandingTrigger]);
+	}, [entityCode, outstandingTrigger]);
 
 	useEffect(() => {
 		dailySalesOutstandingApi();
 		ageingBucketData();
 		quaterlyDataApi();
 		kamOutstandingApi();
-	}, [ageingBucketData, dailySalesOutstandingApi, filterValue, kamOutstandingApi, quaterlyDataApi]);
+	}, [ageingBucketData, dailySalesOutstandingApi, kamOutstandingApi, quaterlyDataApi]);
 
-	useEffect(() => { outstandingApi(); }, [filterValue.entityCode, outstandingApi]);
+	useEffect(() => { outstandingApi(); }, [outstandingApi]);
 
 	useEffect(() => {
 		salesFunnelApi();
-	}, [filterValue, salesFunnelApi, salesFunnelMonth]);
+	}, [salesFunnelApi]);
 
 	const dashboard = {
 		outstandingAgeData        : ageingBucket,

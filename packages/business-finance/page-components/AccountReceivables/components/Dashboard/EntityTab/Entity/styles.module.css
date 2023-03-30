@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+	justify-content: center;
+	min-width: 60px;
+}
+
+.text {
+	padding: 4px;
+	font-size: 13px;
+	font-weight: 400;
+}

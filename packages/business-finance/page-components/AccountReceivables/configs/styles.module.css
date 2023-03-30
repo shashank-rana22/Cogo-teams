@@ -49,3 +49,14 @@
 	margin-left: 8px;
 	cursor: pointer;
 }
+
+.wrapper {
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.styled_name {
+	font-size: 12px;
+	font-weight: 500;
+}

@@ -42,8 +42,10 @@ function DailySalesOutstanding({
 
 	if (dailySalesOutstandingApiLoading || quaterlyLoading) {
 		return (
-			<div className={styles.container}>
-				<DashboardLoader />
+			<div className={styles.dashboard_loader}>
+				<div>
+					<DashboardLoader />
+				</div>
 			</div>
 		);
 	}
@@ -69,7 +71,7 @@ function DailySalesOutstanding({
 								 Account payments)/Total Sales X No. of Days"
 								placement="top"
 							>
-								<div className={styles.icon}><IcMInfo /></div>
+								<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
 							</Tooltip>
 						</div>
 						<div className={styles.under_line} />

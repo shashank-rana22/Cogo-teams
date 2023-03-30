@@ -2,30 +2,14 @@ import { ResponsiveLine } from '@cogoport/charts/line';
 import { StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
 
+import getAmountInLakhCrK from '../../../../../../../commons/getAmountInLakhCrK';
+
 import styles from './styles.module.css';
 
 interface ResponsiveChartProps {
 	data?: StreamDatum[],
 	loadingData?: boolean
 }
-
-const getAmountInLakhCrK = (value:number) => {
-	const val = Math.abs(value);
-
-	let formatedAmount = '';
-
-	if (val >= 10000000) {
-		formatedAmount = `${(val / 10000000).toFixed(2)} Cr`;
-	} else if (val >= 100000) {
-		formatedAmount = `${(val / 100000).toFixed(2)} Lac`;
-	} else if (val >= 1000) {
-		formatedAmount = `${(val / 1000).toFixed(2)} K`;
-	}
-
-	return formatedAmount;
-};
-
-export { getAmountInLakhCrK };
 
 function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
 	const AmountData = [];
@@ -58,7 +42,7 @@ function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
 			: (
 				<ResponsiveLine
 					data={finalData}
-					margin={{ top: 50, right: 120, bottom: 50, left: 90 }}
+					margin={{ top: 0, right: 120, bottom: 100, left: 90 }}
 					xScale={{ type: 'point' }}
 					enableGridX={false}
 					colors={['#88CAD1', '#F68B21']}
@@ -71,7 +55,7 @@ function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
 						tickPadding    : 10,
 						tickRotation   : 36,
 						legend         : 'Date',
-						legendOffset   : 36,
+						legendOffset   : 46,
 						legendPosition : 'middle',
 					}}
 					axisLeft={{

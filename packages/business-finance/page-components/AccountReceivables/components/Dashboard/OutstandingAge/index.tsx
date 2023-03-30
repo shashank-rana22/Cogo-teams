@@ -90,7 +90,7 @@ function OutstandingAge({ data, loading }: OutsatndingProps) {
 						 of an invoice has been outstanding."
 							placement="top"
 						>
-							<div className={styles.icon}><IcMInfo /></div>
+							<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
 						</Tooltip>
 
 					</div>

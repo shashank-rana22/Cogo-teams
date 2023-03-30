@@ -78,7 +78,7 @@ function SalesFunnel({ salesFunnelData, salesFunnelMonth, setSalesFunnelMonth, s
 							content="Current month Invoice journey."
 							placement="top"
 						>
-							<div className={styles.icon}><IcMInfo /></div>
+							<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
 						</Tooltip>
 
 					</div>

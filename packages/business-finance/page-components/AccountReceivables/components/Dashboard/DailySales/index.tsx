@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 
 import Filter from '../../../../commons/Filters';
 import useInvoiceStatistics from '../../../hooks/useinvoiceStatistics';
+import { filterControls } from '../../../Utils/filterControls';
 
-import { filterControls } from './control';
 import styles from './styles.module.css';
 import TabData from './TabData';
 
@@ -26,7 +26,7 @@ function DailySales({ filterValue }: DailySalesProps) {
 					<div className={styles.journey}>
 						Daily Sales Statistics
 						<Tooltip content="Daily Sales Statistics" placement="top">
-							<div className={styles.icon}><IcMInfo /></div>
+							<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
 						</Tooltip>
 
 					</div>
@@ -42,7 +42,7 @@ function DailySales({ filterValue }: DailySalesProps) {
 						offLabel="Line Graph View"
 						disabled={false}
 					/>
-					<Filter filters={filters} setFilters={setFilters} controls={filterControls()} />
+					<Filter filters={filters} setFilters={setFilters} controls={filterControls(toggleData)} />
 				</div>
 			</div>
 

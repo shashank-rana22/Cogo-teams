@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
+import { months } from '../constants';
+
 interface FilterInterface {
 	entityCode?:string
 	serviceType?:string
@@ -12,15 +14,12 @@ interface ParamsInterface {
 }
 
 const useGetInvoiceJourney = ({ filterValue }:ParamsInterface) => {
-	const months = ['JAN', 'FEB', 'MAR',
-		'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+	const { entityCode = '', serviceType = '', companyType = '' } = filterValue || {};
 
 	const d = new Date();
 	const currentMonth = months[d.getMonth()];
 
 	const currentYearsState = new Date().getFullYear();
-
-	console.log('currentYearsState', currentYearsState);
 
 	function generateArrayOfYears() {
 		const currentYear = new Date().getFullYear();
@@ -47,9 +46,9 @@ const useGetInvoiceJourney = ({ filterValue }:ParamsInterface) => {
 			try {
 				await journeyTrigger({
 					params: {
-						entityCode  : filterValue.entityCode || undefined,
-						serviceType : filterValue?.serviceType || undefined,
-						companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
+						entityCode  : entityCode || undefined,
+						serviceType : serviceType || undefined,
+						companyType : companyType !== 'All' ? companyType : undefined,
 						month       : dateFilter.month || undefined,
 						year        : dateFilter.year || undefined,
 
@@ -60,8 +59,8 @@ const useGetInvoiceJourney = ({ filterValue }:ParamsInterface) => {
 			}
 		};
 		getJourneyData();
-	}, [journeyTrigger, filterValue.entityCode, filterValue?.serviceType,
-		filterValue.companyType, dateFilter.month, dateFilter.year]);
+	}, [journeyTrigger, entityCode, serviceType,
+		companyType, dateFilter.month, dateFilter.year]);
 	return {
 		journeyData,
 		journeyLoading,

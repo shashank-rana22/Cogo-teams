@@ -19,6 +19,8 @@ interface SubFilterInterface {
 	date?:Date
 }
 const useInvoiceStatistics = ({ filters, filterValue, subActiveTab }:ParamsInterface) => {
+	const { entityCode = '', serviceType = '', companyType = '' } = filterValue || {};
+
 	const [{ data:dailyStatsData, loading }, journeyTrigger] = useRequestBf(
 		{
 			url     : '/payments/dashboard/daily-sales-statistics',
@@ -32,11 +34,11 @@ const useInvoiceStatistics = ({ filters, filterValue, subActiveTab }:ParamsInter
 			try {
 				await journeyTrigger({
 					params: {
-						entityCode  : filterValue?.entityCode || undefined,
+						entityCode  : entityCode || undefined,
 						month       : filters?.month || undefined,
 						year        : filters?.year || undefined,
-						serviceType : filterValue?.serviceType || undefined,
-						companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
+						serviceType : serviceType || undefined,
+						companyType : companyType !== 'All' ? companyType : undefined,
 						asOnDate    : filters?.date ? format(
 							filters?.date,
 							'yyyy-MM-dd 00:00:00',
@@ -51,7 +53,7 @@ const useInvoiceStatistics = ({ filters, filterValue, subActiveTab }:ParamsInter
 			}
 		};
 		getJourneyData();
-	}, [journeyTrigger, filters, filterValue, subActiveTab]);
+	}, [journeyTrigger, filters, subActiveTab, entityCode, serviceType, companyType]);
 	return {
 		dailyStatsData,
 		loading,

@@ -1,12 +1,13 @@
 import { Select } from '@cogoport/components';
 
 import SegmentedControl from '../../../commons/SegmentedControl';
-import { ENTITY_TYPE, SERVICE_PROVIDER, SHIPMENT_TYPE_OPTIONS } from '../../constants';
+import { SERVICE_PROVIDER, SHIPMENT_TYPE_OPTIONS } from '../../constants';
 import useReceivablesDashboard from '../../hooks/useReceivablesDashboard';
 
 import DailySales from './DailySales';
 import DailySalesOutstanding from './DailySalesOutstanding/index';
 import DateAndAccount from './DateAndAccount';
+import EntityTab from './EntityTab';
 import InvoiceJourney from './InvoiceJourney';
 import OutstandingAge from './OutstandingAge';
 import OutStandingKam from './OutstandingKam';
@@ -48,16 +49,8 @@ function Dashboard() {
 
 	return (
 		<div>
-			<div className={styles.date_container}>
-				<div className={styles.date_text}>Entity Code</div>
-				<div className={styles.input}>
-					<Select
-						value={filterValue.entityCode}
-						onChange={(val:string) => onChange(val, 'entityCode')}
-						placeholder="Entity"
-						options={ENTITY_TYPE}
-					/>
-				</div>
+			<div>
+				<EntityTab filterValue={filterValue} setFilterValue={setFilterValue} />
 			</div>
 			<DateAndAccount outstandingData={outstandingData} outstandingLoading={outstandingLoading} />
 			<ServiceCard outstandingData={outstandingData} outstandingLoading={outstandingLoading} />

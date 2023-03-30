@@ -55,20 +55,19 @@ function BarChart({
 				keys={dsoResponse ? ['dsoForTheMonth'] : ['value']}
 				indexBy={dsoResponse ? 'month' : 'id'}
 				margin={margin}
-				colors={dsoResponse ? ['#DDEBC0'] : ['#FCEDBF']}
+				colors={dsoResponse ? ['#DDEBC0'] : ['#FFD555']}
 				layout="vertical"
 				enableGridY={!!dsoResponse}
 				axisLeft={axisPadding}
-				padding={0.3}
+				padding={0.5}
 				maxValue="auto"
 				minValue="auto"
+				borderRadius={5}
 				animate={false}
 				groupMode="grouped"
 				isInteractive
 				innerPadding={0}
 				label=""
-				labelSkipWidth={12}
-				labelSkipHeight={12}
 				tooltip={({ label, value }) => (
 					<strong style={tooltTipStyle}>
 						{label?.split('-')[0]}
@@ -99,7 +98,7 @@ function BarChart({
 								y={bar.y + bar.height / 2}
 								textAnchor="start"
 								transform={`rotate(-90,${bar.x + bar.width / 2},${bar.y + bar.height / 2})`}
-								style={{ dominantBaseline: 'central', fontWeight: '600', fontSize: 12, fill: '#333' }}
+								style={{ dominantBaseline: 'central', fontWeight: '600', fontSize: 11, fill: '#333' }}
 							>
 								{' '}
 								{getAmountInLakhCrK(bar.data.value)}

@@ -1,5 +1,6 @@
-import { Placeholder } from '@cogoport/components';
+import { Tooltip, Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
@@ -59,17 +60,33 @@ function CardComponent({
 					<div className={styles.item}>
 						<div className={styles.sub_flex}>
 							<div className={styles.label_flex}>
+								<div className={styles.styled_text}>
+									{dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
+								</div>
 								<div className={styles.label}>
-									{getFormattedPrice(
-										amount,
-										dashboardCurrency,
-										{
-											notation              : 'compact',
-											compactDisplay        : 'short',
-											maximumFractionDigits : 2,
-											style                 : 'decimal',
-										},
-									) || 0}
+									<Tooltip content={(
+										<div>
+											{getFormattedPrice(
+												amount,
+												dashboardCurrency,
+											)}
+										</div>
+									)}
+									>
+										<div className={styles.wrapper}>
+											{getFormattedPrice(
+												amount || 0,
+												dashboardCurrency,
+												{
+													notation              : 'compact',
+													compactDisplay        : 'short',
+													maximumFractionDigits : 2,
+													style                 : 'decimal',
+												},
+											)}
+										</div>
+
+									</Tooltip>
 								</div>
 								<div className={styles.count}>
 									(

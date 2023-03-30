@@ -19,6 +19,8 @@ interface SubFilterInterface {
 	date?:Date
 }
 const useGetGraph = ({ filters, filterValue, subActiveTab }:ParamsInterface) => {
+	const { entityCode = '', serviceType = '', companyType = '' } = filterValue || {};
+
 	const [{ data, loading }, Trigger] = useRequestBf(
 		{
 			url     : '/payments/dashboard/line-graph-view',
@@ -32,11 +34,11 @@ const useGetGraph = ({ filters, filterValue, subActiveTab }:ParamsInterface) => 
 			try {
 				await Trigger({
 					params: {
-						entityCode  : filterValue?.entityCode || undefined,
-						companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
+						entityCode  : entityCode || undefined,
+						companyType : companyType !== 'All' ? companyType : undefined,
 						month       : filters?.month || undefined,
 						year        : filters?.year || undefined,
-						serviceType : filterValue?.serviceType || undefined,
+						serviceType : serviceType || undefined,
 						asOnDate    : filters?.date ? format(
 							filters?.date,
 							'yyyy-MM-dd 00:00:00',
@@ -51,7 +53,7 @@ const useGetGraph = ({ filters, filterValue, subActiveTab }:ParamsInterface) => 
 			}
 		};
 		getJourneyData();
-	}, [filters, filterValue, Trigger, subActiveTab]);
+	}, [filters, Trigger, subActiveTab, entityCode, companyType, serviceType]);
 	return {
 		data,
 		loading,

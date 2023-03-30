@@ -78,7 +78,6 @@
 
 .sales_container {
 	display: flex;
-	align-items: center;
 }
 
 .bar_chart {
@@ -89,4 +88,20 @@
 .toggle_style {
 	display: flex;
 	align-items: center;
+}
+
+.icon {
+	margin-left: 4px;
+	margin-top: 6px;
+}
+
+.dashboard_loader {
+	background: white;
+	width: 60%;
+	margin-top: 12px;
+	height: 360px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
 }

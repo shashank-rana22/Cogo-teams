@@ -11,13 +11,10 @@
 
 .journey {
 	display: flex;
+	align-items: center;
 	gap: 4px;
 	font-size: 16px;
 	font-weight: 600;
-}
-
-.icon {
-	font-size: 14px;
 }
 
 .border {
@@ -37,13 +34,15 @@
 	justify-content: center;
 	width: 93px;
 	height: 93px;
-	border: 1px solid #88cad1;
+	border: 2px solid #88cad1;
 	border-radius: 50%;
 }
 
 .number {
 	display: flex;
 	align-items: center;
+	font-size: 16px;
+	font-weight: 500;
 	width: fit-content;
 }
 
@@ -161,3 +160,13 @@
 .text_padding {
 	padding-right: 12px;
 }
+
+.color_count {
+	color: black;
+}
+
+.icon {
+	height: 20px;
+	margin-left: 4px;
+}
+
