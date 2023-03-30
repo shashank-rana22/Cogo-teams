@@ -1,5 +1,5 @@
 import { Popover, Accordion, Button, Modal, Pill } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMOverflowDot, IcMAnnouncement, IcMEyeopen, IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -55,9 +55,7 @@ function DisplayCard({
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [showGoLiveModal, setShowGoLiveModal] = useState(false);
 
-	const geo = getGeoConstants();
-
-	const isCogoAcademyAdmin = (user_id === geo.uuid.cogoacademy_admin_id);
+	const isCogoAcademyAdmin = (user_id === GLOBAL_CONSTANTS.uuid.cogoacademy_admin_id);
 
 	const options = [
 		{ label: 'Title', value: startCase(data?.title) },
@@ -87,38 +85,44 @@ function DisplayCard({
 					type="button"
 					themeType="primary"
 					size="md"
+					style={{ width: '100%' }}
 					onClick={() => setShowGoLiveModal(true)}
 				>
 					<IcMAnnouncement height={20} width={20} className={styles.button_icon} />
 					Publish
 				</Button>
 			) : null}
+
 			<Button
 				type="button"
 				themeType="secondary"
 				size="md"
+				style={{ width: '100%' }}
 				onClick={() => handleView(index)}
 			>
 				<IcMEyeopen className={styles.button_icon} />
 				View
 			</Button>
+
 			{activeTab === 'active' && data?.status === 'draft' && (
 				<Button
 					type="button"
 					themeType="secondary"
 					size="md"
+					style={{ width: '100%' }}
 					onClick={() => editDetails()}
 				>
 					<IcMEdit className={styles.button_icon} />
 					Edit
 				</Button>
 			)}
-			{activeTab === 'active' && data?.status === 'draft' && (
 
+			{activeTab === 'active' && data?.status === 'draft' && (
 				<Button
 					type="button"
 					themeType="secondary"
 					size="md"
+					style={{ width: '100%' }}
 					onClick={() => setShowDeleteModal(true)}
 				>
 					<IcMDelete className={styles.button_icon} />
