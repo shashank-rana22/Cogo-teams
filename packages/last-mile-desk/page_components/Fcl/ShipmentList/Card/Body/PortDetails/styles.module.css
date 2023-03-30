@@ -1,0 +1,30 @@
+.container{
+    display:  flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.port_detail{
+    width: 45%;
+}
+
+.port_icon{
+    width: 10%;
+}
+
+.port_code{
+    color: var(--color-accent-orange-2);
+}
+
+.port_name{
+    font-weight: 600;
+    width: fit-content;
+    max-width: 170px;
+    overflow: hidden;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.est_time{
+    font-size: 12px;
+}

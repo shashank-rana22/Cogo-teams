@@ -1,0 +1,28 @@
+.sub_container{
+    display: flex;
+    align-items: center;
+    padding: 10px;  
+}
+
+.info{
+    width: 25%;
+}
+
+.fcl_icon{
+    width: 5%;
+}
+
+.port_detail{
+    width: 40%;
+}
+
+.pills{
+    width: 30%;
+}
+
+.divider{
+    width: 1px;
+    background: var(--color-secondary-greyscale-5);
+    align-self: stretch;
+    margin: 0 20px;
+}

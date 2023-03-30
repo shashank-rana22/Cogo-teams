@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+
+    :global{
+        .ui_pill_container{
+            margin-top: 0;
+        }
+    }
+}
+
+.trade_type{
+    margin-left: 0;
+}
+
+.export {
+    background-color: var(--color-primary-yellow-4);
+}
+
+.import {
+    background-color: var(--color-tertiary-blue-4);
+}
+
+.source{ 
+    background-color: var(--color-secondary-3);
+    margin-right: 0;
+}
