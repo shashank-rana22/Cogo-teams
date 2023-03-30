@@ -1,5 +1,7 @@
 import { ProgressBar } from '@cogoport/components';
 
+import toFixed from '../../../../../CreateModule/utils/toFixed';
+
 import styles from './styles.module.css';
 import Timer from './Timer';
 
@@ -12,7 +14,7 @@ function Header({ data = {}, total_question, testData,	setShowTimeOverModal }) {
 			<div className={styles.heading}>{testData?.name}</div>
 
 			<div className={styles.progress}>
-				<ProgressBar progress={((number / total_question) * 100).toFixed(2)} uploadText=" " />
+				<ProgressBar progress={toFixed(((number / total_question) * 100), 2)} uploadText=" " />
 				{number}
 				{' '}
 				/

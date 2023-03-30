@@ -1,3 +1,5 @@
+import toFixed from '../../../../CreateModule/utils/toFixed';
+
 import styles from './style.module.css';
 
 function PercentagePassed({ stats_data }) {
@@ -10,7 +12,7 @@ function PercentagePassed({ stats_data }) {
 					Pass Percentage
 				</div>
 				<div className={styles.value}>
-					{(pass_percentage || 0).toFixed(2)}
+					{ toFixed(pass_percentage, 2)}
 					%
 				</div>
 			</div>
@@ -19,8 +21,7 @@ function PercentagePassed({ stats_data }) {
 				Class Average :
 				{' '}
 				<span className={styles.bold}>
-					{(class_average || 0).toFixed(2)}
-
+					{ toFixed(class_average, 2)}
 					%
 				</span>
 			</div>

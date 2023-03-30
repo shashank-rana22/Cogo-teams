@@ -1,3 +1,5 @@
+import toFixed from '../../../../CreateModule/utils/toFixed';
+
 import styles from './styles.module.css';
 
 function TopicWisePercentile({ topic_wise_percentile }) {
@@ -11,7 +13,7 @@ function TopicWisePercentile({ topic_wise_percentile }) {
 						<div className={styles.topic}>{key}</div>
 
 						<div className={styles.percentage}>
-							{(value || 0).toFixed(2)}
+							{toFixed(value, 2)}
 							{' '}
 							%
 						</div>

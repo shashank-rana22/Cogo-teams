@@ -2,6 +2,8 @@ import { Avatar, Popover } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import toFixed from '../../utils/toFixed';
+
 import styles from './styles.module.css';
 
 function QuestionCard({
@@ -31,7 +33,7 @@ function QuestionCard({
 					) : null}
 
 					<div className={styles.peer_percentage}>
-						{peers.toFixed(2)}
+						{toFixed(peers, 2)}
 						{' '}
 						% Peers
 					</div>
