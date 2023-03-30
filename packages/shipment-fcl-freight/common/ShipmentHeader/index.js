@@ -2,8 +2,8 @@ import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useContext, useState } from 'react';
 
-import CargoDetails from '../../CargoDetails';
-import PortDetails from '../../PortDetails';
+import CargoDetails from '../CargoDetails';
+import PortDetails from '../PortDetails';
 
 import AddPoNumber from './AddPoNumber';
 import Loader from './Loader';

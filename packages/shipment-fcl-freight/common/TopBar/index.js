@@ -1,5 +1,6 @@
-import PocSop from './PocSop';
-import ShipmentHeader from './ShipmentHeader';
+import PocSop from '../PocSop';
+import ShipmentHeader from '../ShipmentHeader';
+
 import styles from './styles.module.css';
 
 function TopBar() {

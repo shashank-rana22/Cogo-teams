@@ -5,9 +5,10 @@ import { ShipmentMails } from '@cogoport/shipment-mails';
 import React, { useContext, useState } from 'react';
 
 import Documents from '../../../common/Documents';
+import PocSop from '../../../common/PocSop';
+import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Timeline from '../../../common/TimeLine';
-import TopBar from '../../../common/TopBar';
 import Tracking from '../../../common/Tracking';
 
 import styles from './styles.module.css';
@@ -18,13 +19,18 @@ function Superadmin() {
 
 	return (
 		<div>
-			<div className={styles.header}>
+			<div className={styles.top_header}>
 				<ShipmentInfo />
 				<ShipmentChat />
 			</div>
 
-			<TopBar />
+			<div className={styles.header}>
+				<ShipmentHeader />
+				<PocSop />
+			</div>
+
 			<Timeline />
+
 			<div className={styles.container}>
 				<Tabs
 					activeTab={activeTab}
