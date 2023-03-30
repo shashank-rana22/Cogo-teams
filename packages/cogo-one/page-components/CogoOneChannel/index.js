@@ -37,14 +37,25 @@ function CogoOne() {
 	const [openModal, setOpenModal] = useState(false);
 	const { suggestions = [] } = useListChatSuggestions();
 	const [showDialModal, setShowDialModal] = useState(false);
+
+	const [activeMail, setActiveMail] = useState({});
+	const [recipientArray, setRecipientArray] = useState([]);
+	const [bccArray, setBccArray] = useState([]);
+	const [buttonType, setButtonType] = useState('');
+	const [emailState, setEmailState] = useState({
+		subject : '',
+		body    : '',
+	});
+
 	const [modalType, setModalType] = useState({ type: null, data: {} });
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 	const firestore = getFirestore(app);
 
-	const { userRoleIds, userId } = useSelector(({ profile }) => ({
-		userRoleIds : profile.partner?.user_role_ids || [],
-		userId      : profile?.user?.id,
+	const { userRoleIds, userId, emailAddress } = useSelector(({ profile }) => ({
+		userRoleIds  : profile.partner?.user_role_ids || [],
+		userId       : profile?.user?.id,
+		emailAddress : profile?.user?.email,
 	}));
 
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
@@ -53,6 +64,20 @@ function CogoOne() {
 		loading:statusLoading,
 		updateUserStatus = () => {},
 	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
+
+	const mailProps = {
+		activeMail,
+		setActiveMail,
+		recipientArray,
+		setRecipientArray,
+		bccArray,
+		setBccArray,
+		buttonType,
+		setButtonType,
+		emailState,
+		setEmailState,
+		emailAddress,
+	};
 
 	const {
 		listData = {},
@@ -79,6 +104,7 @@ function CogoOne() {
 		if (!firstLoading) {
 			setActiveVoiceCard({});
 			setActiveCardId('');
+			setActiveMail({});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab, showBotMessages]);
@@ -90,7 +116,8 @@ function CogoOne() {
 
 	const renderComponent = () => {
 		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
-			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))) {
+			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
+			|| (activeTab === 'mail' && !isEmpty(activeMail))) {
 			return (
 				<>
 					<Conversations
@@ -102,16 +129,18 @@ function CogoOne() {
 						userId={userId}
 						isomniChannelAdmin={isomniChannelAdmin}
 						showBotMessages={showBotMessages}
+						mailProps={mailProps}
 					/>
-					<ProfileDetails
-						activeMessageCard={activeMessageCard}
-						activeTab={activeTab}
-						activeVoiceCard={activeVoiceCard}
-						firestore={firestore}
-						updateLeaduser={updateLeaduser}
-						activeCardId={activeCardId}
-						setModalType={setModalType}
-					/>
+					{activeTab !== 'mail' && (
+						<ProfileDetails
+							activeMessageCard={activeMessageCard}
+							activeTab={activeTab}
+							activeVoiceCard={activeVoiceCard}
+							firestore={firestore}
+							updateLeaduser={updateLeaduser}
+							activeCardId={activeCardId}
+						/>
+					)}
 				</>
 			);
 		}
@@ -153,9 +182,13 @@ function CogoOne() {
 				setShowBotMessages={setShowBotMessages}
 				showBotMessages={showBotMessages}
 				setShowDialModal={setShowDialModal}
+				activeMail={activeMail}
+				setActiveMail={setActiveMail}
+				userId={userId}
 				handleScroll={handleScroll}
 				setModalType={setModalType}
 				modalType={modalType}
+				mailProps={mailProps}
 			/>
 
 			<div className={styles.chat_details_continer}>
@@ -167,7 +200,6 @@ function CogoOne() {
 				<div
 					role="presentation"
 					className={styles.download_div}
-					// eslint-disable-next-line no-undef
 					onClick={() => window.open(ANDRIOD_APK, '_blank')}
 				>
 					<img
