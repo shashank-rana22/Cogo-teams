@@ -4,7 +4,7 @@ import { format, startCase, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-export const FEEDBACK_COLUMNS = ({
+export const getFeedbackColumns = ({
 	selectAll = false,
 	onChangeTableHeadCheckbox = () => {},
 	checkedRowsId = [],

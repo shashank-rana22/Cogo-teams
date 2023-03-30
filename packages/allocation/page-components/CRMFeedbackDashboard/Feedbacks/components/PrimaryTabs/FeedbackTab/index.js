@@ -4,7 +4,7 @@ import CrmTable from '../../../../common/CrmTable';
 import EnrichmentRequest from '../../../../common/EnrichmentRequest';
 import useFeedbackTableData from '../../../../hooks/useFeedbackTableData';
 
-import { FEEDBACK_COLUMNS } from './get-feedback-columns';
+import { getFeedbackColumns } from './get-feedback-columns';
 import styles from './styles.module.css';
 
 function FeedbacksReceived({ organization_id = '', setActiveTab = () => {}, type = '' }) {
@@ -21,7 +21,7 @@ function FeedbacksReceived({ organization_id = '', setActiveTab = () => {}, type
 
 	const { page, page_limit, total_count } = paginationData;
 
-	const columns = FEEDBACK_COLUMNS({
+	const columns = getFeedbackColumns({
 		selectAll,
 		onChangeTableHeadCheckbox,
 		checkedRowsId,

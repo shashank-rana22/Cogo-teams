@@ -6,7 +6,7 @@ import useFeedbackTableData from '../../../../hooks/useFeedbackTableData';
 import Filters from '../../commons/Filters';
 import Statistics from '../../commons/Statistics';
 
-import { FEEDBACK_COLUMNS } from './get-feedback-columns';
+import { getFeedbackColumns } from './get-feedback-columns';
 import styles from './styles.module.css';
 
 function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
@@ -25,7 +25,7 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 
 	const { page, page_limit, total_count } = paginationData;
 
-	const columns = FEEDBACK_COLUMNS({
+	const columns = getFeedbackColumns({
 		selectAll,
 		onChangeTableHeadCheckbox,
 		checkedRowsId,
