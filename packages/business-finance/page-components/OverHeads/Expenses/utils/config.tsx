@@ -117,7 +117,7 @@ export const expenseNonRecurringConfig = () => ({
 		{
 			label   : 'TDS',
 			func    : 'renderTds',
-			span    : 1.2,
+			span    : 0.8,
 			sorting : { name: 'tdsSortType' },
 		},
 		{
@@ -129,7 +129,7 @@ export const expenseNonRecurringConfig = () => ({
 		{
 			label   : 'Paid',
 			func    : 'renderPaid',
-			span    : 0.8,
+			span    : 1.2,
 			sorting : { name: 'paidAmountSortType' },
 		},
 		{

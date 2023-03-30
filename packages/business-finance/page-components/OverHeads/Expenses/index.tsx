@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { ListDataProps } from '../../AccountPayables/commons/Interfaces';
 import Filter from '../../commons/Filters';
 import SegmentedControl from '../../commons/SegmentedControl';
+import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { formatDate } from '../../commons/utils/formatDate';
 import List from '../commons/List';
 import { nonRecurringFilters, recurringFilters } from '../Controls/nonRecurringFilters';
@@ -380,7 +381,7 @@ function ExpenseComponent() {
 								rel="noreferrer"
 								style={{ color: '#F68B21' }}
 							>
-								{billNumber}
+								{showOverflowingNumber(billNumber, 12)}
 
 							</a>
 						</div>
@@ -390,31 +391,28 @@ function ExpenseComponent() {
 		},
 		renderInvoiceAmount: (itemData:ItemDataInterface) => {
 			const { grandTotal, billCurrency = '' } = itemData || {};
+			const amount = `${billCurrency} ${grandTotal}`;
 			return (
 				<div>
-					{billCurrency}
-					{' '}
-					{grandTotal}
+					{showOverflowingNumber(amount, 12)}
 				</div>
 			);
 		},
 		renderTds: (itemData:ItemDataInterface) => {
 			const { payableTds, billCurrency = '' } = itemData || {};
+			const amount = `${billCurrency} ${payableTds}`;
 			return (
 				<div>
-					{billCurrency}
-					{' '}
-					{payableTds}
+					{showOverflowingNumber(amount, 12)}
 				</div>
 			);
 		},
 		renderPaid: (itemData:ItemDataInterface) => {
 			const { paidAmount, billCurrency = '' } = itemData || {};
+			const amount = `${billCurrency} ${paidAmount}`;
 			return (
 				<div>
-					{billCurrency}
-					{' '}
-					{paidAmount}
+					{showOverflowingNumber(amount, 12)}
 				</div>
 			);
 		},
