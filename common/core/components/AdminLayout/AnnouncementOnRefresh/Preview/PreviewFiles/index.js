@@ -13,7 +13,7 @@ function PreviewFiles({ files = [] }) {
 
 					<div className={styles.files}>
 						{files.map((file) => (
-							<div style={{ display: 'flex' }}>
+							<div key={file} style={{ display: 'flex' }}>
 								<div className={styles.document} key={file}>
 									<object
 										data={file}
