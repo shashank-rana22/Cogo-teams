@@ -41,7 +41,10 @@ const useTrendSearch = (item = {}) => {
 
 	const getReport = (formValues) => {
 		if (formValues.trade_direction && hscodeArr) {
-			router.push(`/athena-dashboard/report?shipment_type=${formValues.trade_direction}&hscodes=${hscodeArr}`, `/athena-dashboard/report?shipment_type=${formValues.trade_direction}&hscodes=${hscodeArr}`);
+			router.push(
+				`/athena-dashboard/report?shipment_type=${formValues.trade_direction}&hscodes=${hscodeArr}`,
+				`/athena-dashboard/report?shipment_type=${formValues.trade_direction}&hscodes=${hscodeArr}`,
+			);
 		}
 	};
 

@@ -23,7 +23,7 @@ const useSearch = () => {
 		setAnswer([]);
 		await trigger({
 			data: {
-				// page       : x,
+				page       : 1,
 				page_limit : 100,
 				sort_type  : 'desc',
 				sort_by    : 'shipment_date',
@@ -55,7 +55,6 @@ const useSearch = () => {
 	useEffect(() => {
 		if (!isEmpty(responseData)) {
 			setAnswer(responseData.list);
-			// if (!localStorage.getItem('total')) localStorage.setItem('total', responseData.total);
 		}
 	}, [responseData]);
 
