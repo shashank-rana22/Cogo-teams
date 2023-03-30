@@ -41,7 +41,11 @@ function BasicDetails({
 			{!isNewQuestion
 				&& !showForm
 				&& editDetails?.question_type === 'case_study' ? (
-					<ContentComponent editDetails={editDetails} setShowForm={setShowForm} />
+					<ContentComponent
+						editDetails={editDetails}
+						setShowForm={setShowForm}
+						isNewQuestion={isNewQuestion}
+					/>
 				) : (
 					<FormComponent
 						isNewQuestion={isNewQuestion}

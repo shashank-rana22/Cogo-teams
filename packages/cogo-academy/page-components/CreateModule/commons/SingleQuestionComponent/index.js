@@ -97,6 +97,7 @@ function SingleQuestionComponent({
 				name={`${name}.${index}.${controls[2].name}`}
 				editAnswerDetails={editAnswerDetails}
 				mode={mode}
+				isNewQuestion={isNewQuestion}
 			/>
 
 			{type !== 'case_study' ? (
@@ -130,15 +131,17 @@ function SingleQuestionComponent({
 						Delete
 					</Button>
 
-					<Button
-						style={{ marginLeft: '12px' }}
-						loading={loading}
-						onClick={() => handleUpdateCaseStudyQuestion()}
-						size="sm"
-						type="button"
-					>
-						{field.isNew ? 'Save' : 'Edit'}
-					</Button>
+					{isNewQuestion ? (
+						<Button
+							style={{ marginLeft: '12px' }}
+							loading={loading}
+							onClick={() => handleUpdateCaseStudyQuestion()}
+							size="sm"
+							type="button"
+						>
+							{field.isNew ? 'Save' : 'Edit'}
+						</Button>
+					) : null}
 				</div>
 			) : null}
 		</div>

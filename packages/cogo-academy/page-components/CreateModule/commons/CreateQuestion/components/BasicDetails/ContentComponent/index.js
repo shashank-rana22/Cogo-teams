@@ -21,7 +21,7 @@ const getValue = ({ item, editDetails }) => {
 	return MAPPING[item];
 };
 
-function ContentComponent({ editDetails, setShowForm }) {
+function ContentComponent({ editDetails, setShowForm, isNewQuestion }) {
 	return (
 		<div className={`${styles.container} ${styles.flex_row} ${styles.flex}`}>
 			{constants.map((item) => (
@@ -34,15 +34,17 @@ function ContentComponent({ editDetails, setShowForm }) {
 				</div>
 			))}
 
-			<div
-				role="presentation"
-				onClick={() => {
-					setShowForm(true);
-				}}
-				className={styles.button_container}
-			>
-				<IcMEdit className={styles.button} />
-			</div>
+			{isNewQuestion ? (
+				<div
+					role="presentation"
+					onClick={() => {
+						setShowForm(true);
+					}}
+					className={styles.button_container}
+				>
+					<IcMEdit className={styles.button} />
+				</div>
+			) : null}
 		</div>
 	);
 }

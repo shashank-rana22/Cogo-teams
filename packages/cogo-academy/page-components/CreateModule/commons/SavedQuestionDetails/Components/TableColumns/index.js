@@ -121,30 +121,32 @@ const TableColumns = ({ allKeysSaved, handleEditQuestion, loading, caseStudyLoad
 										type="button"
 										onClick={() => handleEditQuestion({ item })}
 										themeType="secondary"
-										disabled={!allKeysSaved}
 										className={styles.btn}
-										loading={loading || caseStudyLoading}
+										disabled={!allKeysSaved || loading || caseStudyLoading}
 									>
 										<IcMEdit />
-										<div style={{ marginLeft: '8px' }}>{mode !== 'view' ? 'Edit' : 'View'}</div>
+										<div
+											style={{ marginLeft: '8px' }}
+										>
+											{mode !== 'view' && item.question_type === 'case_study'
+												? 'Edit' : 'View'}
+
+										</div>
 									</Button>
 
 									{mode !== 'view' ? (
 										<Button
 											type="button"
-											themeType="secondary"
+											themeType="accent"
 											className={styles.btn}
 											disabled={!allKeysSaved}
 											loading={loading || caseStudyLoading}
+											onClick={() => {
+												setShowModal(item);
+											}}
 										>
 											<IcMDelete />
-											<div
-												role="presentation"
-												onClick={() => {
-													setShowModal(item);
-												}}
-												style={{ marginLeft: '8px' }}
-											>
+											<div style={{ marginLeft: '8px' }}>
 												Delete
 											</div>
 										</Button>

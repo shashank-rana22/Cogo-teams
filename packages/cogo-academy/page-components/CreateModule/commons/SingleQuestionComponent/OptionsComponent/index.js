@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 const alphabets = getAlphabets('A', 'Z');
 
-function OptionsComponent({ control, controls, register, name, errors, mode }) {
+function OptionsComponent({ control, controls, register, name, errors, mode, isNewQuestion }) {
 	const childEmptyValues = {};
 
 	controls.forEach((controlItem) => {
@@ -46,7 +46,7 @@ function OptionsComponent({ control, controls, register, name, errors, mode }) {
 						/>
 
 						<div className={styles.right_button_container}>
-							{fields.length < 11 && index === fields.length - 1 && mode !== 'view' ? (
+							{fields.length < 11 && index === fields.length - 1 && mode !== 'view' && isNewQuestion ? (
 								<Button
 									type="button"
 									themeType="secondary"
@@ -57,7 +57,7 @@ function OptionsComponent({ control, controls, register, name, errors, mode }) {
 								</Button>
 							) : null}
 
-							{fields.length > 1 && mode !== 'view' ? (
+							{fields.length > 1 && mode !== 'view' && isNewQuestion ? (
 								<IcMDelete
 									style={{ cursor: 'pointer' }}
 									width={20}
