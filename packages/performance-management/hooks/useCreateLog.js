@@ -7,14 +7,13 @@ const useCreateLog = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const onSubmitCreate = async (item, LogType, setRefetchList, setModal) => {
+	const onSubmitCreate = async (item, LogType, onSubmitModalAction) => {
 		const { user_id:UserID = '', startDate:StartDate = {}, endDate:EndDate = {} } = item;
 
 		try {
 			await trigger({ data: { UserID, LogType, StartDate, EndDate } });
-			setRefetchList(true);
-			setModal('');
-			Toast.success('Updated Successfully');
+			onSubmitModalAction();
+			Toast.success('Created Successfully');
 		} catch (e) {
 			Toast.error(e.response?.data.error);
 		}

@@ -7,7 +7,7 @@ const feedbackDataColumns = {
 	managerAccordion     : ['team_count', 'pending_count', 'rating'],
 	monthAccordion       : ['total_feedbacks', 'BelowAverage', 'Average', 'GoodPerforming'],
 	monthWiseFeedbacks   : ['name', 'cogo_id', 'rating', 'department', 'designation', 'view_form'],
-	logModal             : ['name', 'cogo_id', 'designation', 'manager', 'employee_status', 'add_create_arrow'],
+	logModal             : ['name', 'cogo_id', 'designation', 'manager', 'add_create_arrow'],
 	pendingReviewsList   : ['name', 'designation', 'manager', 'status', 'progress', 'action', 'review'],
 	managerProbationList : ['name', 'designation', 'start_date', 'end_date', 'status', 'action'],
 	uploadedFiles        : ['name', 'number_of_employees', 'start_date', 'upload_type', 'uploaded_by', 'download_csv'],

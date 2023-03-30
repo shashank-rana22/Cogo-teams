@@ -71,15 +71,17 @@ function LogModal({
 						Close
 					</Button>
 
-					<Button
-						size="md"
-						themeType="primary"
-						type="submit"
-						disabled={disableNext}
-						onClick={onSubmit}
-					>
-						Submit
-					</Button>
+					{activeLogTab === 'new' && (
+						<Button
+							size="md"
+							themeType="primary"
+							type="submit"
+							disabled={disableNext}
+							onClick={onSubmit}
+						>
+							Submit
+						</Button>
+					)}
 				</Modal.Footer>
 			</Modal>
 

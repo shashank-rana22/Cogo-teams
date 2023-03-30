@@ -1,7 +1,22 @@
-// const useGetControls = (filterArr) => {
-const useGetControls = ({ name = 'manager' }) => {
+import monthOptions from '../constants/month-options';
+import useGetCustomAsyncOptions from '../hooks/useCustomAsyncOptions';
+
+const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} }) => {
+	const { Department = '', Designation = '', Month:selectedMonth, Year:selectedYear } = filterProps;
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
+	const month = currentDate.getMonth();
+
+	const designationOptions = useGetCustomAsyncOptions({
+		endpoint    : 'get_iris_get_department_mappings',
+		initialCall : false,
+		params      : {
+			Department,
+		},
+		valueKey  : 'designation',
+		labelKey  : 'designation',
+		filterKey : 'Qdesignation',
+	});
 
 	const control = [
 		{
@@ -26,37 +41,26 @@ const useGetControls = ({ name = 'manager' }) => {
 			],
 		},
 		{
-			name        : 'created_at_month',
-			label       : 'Select Month',
-			type        : 'select',
-			isClearable : true,
-			placeholder : 'Month',
-			options     : [
-				{ label: 'January', value: 1 },
-				{ label: 'February', value: 2 },
-				{ label: 'March', value: 3 },
-				{ label: 'April', value: 4 },
-				{ label: 'May', value: 5 },
-				{ label: 'June', value: 6 },
-				{ label: 'July', value: 7 },
-				{ label: 'August', value: 8 },
-				{ label: 'September', value: 9 },
-				{ label: 'October', value: 10 },
-				{ label: 'November', value: 11 },
-				{ label: 'December', value: 12 },
-			],
-		},
-		{
-			name        : 'created_at_year',
+			name        : 'year',
 			label       : 'Select Year',
 			type        : 'select',
-			isClearable : true,
+			isClearable : !selectedMonth,
 			placeholder : 'Year',
 			options     : [
 				{ label: `${year}`, value: year },
 				{ label: `${year - 1}`, value: year - 1 },
 				{ label: `${year - 2}`, value: year - 2 },
 			],
+		},
+		{
+			name        : 'month',
+			label       : 'Select Month',
+			type        : 'select',
+			isClearable : true,
+			disabled    : !selectedYear,
+			placeholder : 'Month',
+			options     : selectedYear === year
+				? monthOptions.filter((newMonth) => newMonth.index <= month) : monthOptions,
 		},
 		{
 			name        : 'status',
@@ -75,19 +79,60 @@ const useGetControls = ({ name = 'manager' }) => {
 			label                 : 'Select Date',
 			type                  : 'dateRangePicker',
 			isPreviousDaysAllowed : true,
+		}, {
+			name        : 'department',
+			placeholder : 'Department...',
+			label       : 'Department',
+			type        : 'select',
+			span        : 5,
+			isClearable : !Designation,
+			style       : { marginLeft: '1px', marginRight: '1px' },
+			rules       : { required: 'Required' },
+			options     : [
+				{ label: 'Technology', value: 'Technology' },
+				{ label: 'Marketing', value: 'Marketing' },
+				{ label: 'Design', value: 'Design' },
+				{ label: 'Business Development', value: 'Business Development' },
+				{ label: 'Quality', value: 'Quality' },
+				{ label: 'Product', value: 'Product' },
+			],
+		},
+		{
+			...designationOptions,
+			name        : 'designation',
+			placeholder : 'Designation...',
+			label       : 'Designation',
+			type        : 'select',
+			span        : 5,
+			disabled    : !Department,
+			style       : { marginLeft: '1px', marginRight: '1px' },
+			rules       : { required: 'Required' },
+			isClearable : true,
 		},
 	];
 
-	return control.find((cntrl) => cntrl.name === name);
+	const FilterControls = {
+		left  : [],
+		right : [],
+	};
 
-	// const newControls = [];
+	leftFilters.forEach((name) => {
+		const updatedControl = control.find((ctrl) => ctrl.name === name);
+		if (control.name === 'month' && selectedYear === year) {
+			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month);
+		}
+		FilterControls.left.push(updatedControl);
+	});
 
-	// filterArr.forEach((name) => {
-	// 	const updatedControl = control.find((ctrl) => ctrl.name === name);
-	// 	newControls.push(updatedControl);
-	// });
+	rightFilters.forEach((name) => {
+		const updatedControl = control.find((ctrl) => ctrl.name === name);
+		if (control.name === 'month' && selectedYear === year) {
+			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month);
+		}
+		FilterControls.right.push(updatedControl);
+	});
 
-	// return newControls;
+	return FilterControls;
 };
 
 export default useGetControls;

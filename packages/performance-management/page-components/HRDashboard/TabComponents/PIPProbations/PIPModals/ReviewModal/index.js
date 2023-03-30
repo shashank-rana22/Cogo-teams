@@ -72,7 +72,7 @@ function ReviewModal({
 					type="submit"
 					onClick={onSubmit}
 				>
-					Mark as Reviewd
+					Mark as Reviewed
 
 				</Button>
 			</Modal.Footer>
