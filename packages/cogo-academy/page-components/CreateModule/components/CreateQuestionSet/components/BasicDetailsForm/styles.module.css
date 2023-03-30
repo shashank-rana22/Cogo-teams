@@ -2,7 +2,6 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
 	padding: 16px;
 	margin-top: 40px;
 	background: rgb(255 255 255 / 70%);
@@ -34,7 +33,6 @@
 .form_component {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 24px;
 	justify-content: space-between;
 	padding: 20px;
 }
@@ -44,10 +42,11 @@
 	flex-basis: 40%;
 	align-items: center;
 	justify-content: space-between;
+	margin: 16px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
-		margin: auto;
+		margin: 12px auto;
 	}
 
 	:global {
@@ -79,15 +78,15 @@
 
 .button_container {
 	display: flex;
-	gap: 20px;
 	align-items: center;
 	justify-content: end;
+	margin-right: 20px;
 }
 
 .vertical_line {
 	width: 2px;
 	height: 24px;
-	margin: 10px 20px;
+	margin: 10px 32px;
 	border-left: 2px solid rgb(222 215 252);
 }
 
@@ -103,6 +102,5 @@
 
 .btn_container {
 	display: flex;
-	gap: 8px;
 	justify-content: flex-end;
 }

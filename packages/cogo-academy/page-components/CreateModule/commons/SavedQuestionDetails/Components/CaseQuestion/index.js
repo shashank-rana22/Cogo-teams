@@ -28,7 +28,9 @@ function CaseQuestion({ item, from, caseToShow }) {
 				) : null}
 			</div>
 
-			{item.id === caseToShow ? item?.sub_question.map((item1) => <div>{item1.question_text}</div>) : null}
+			{item.id === caseToShow
+				? item?.sub_question.map((item1) => <div className={styles.text}>{item1.question_text}</div>)
+				: null}
 		</div>
 	);
 }
