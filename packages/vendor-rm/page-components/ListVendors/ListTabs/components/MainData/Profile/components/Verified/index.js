@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -101,7 +100,10 @@ function Verified({ vendor_details = {} }) {
 			<div
 				className={styles.icon}
 			>
-				<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg" alt="pending" />
+				<img
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg"
+					alt="pending"
+				/>
 			</div>
 			<div
 				className={styles.dis}

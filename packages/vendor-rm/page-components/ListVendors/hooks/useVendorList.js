@@ -101,25 +101,11 @@ const useVendorList = () => {
 
 	const router = useRouter();
 
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ data, loading }] = useRequest({
 		method : 'get',
 		url    : '/list_vendors',
-	}, { manual: true });
-
-	const getVendorList = () => {
-		try {
-			trigger({
-				params,
-			});
-		} catch (e) {
-			// console.log(e);
-		}
-	};
-
-	useEffect(() => {
-		getVendorList();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [params]);
+		params,
+	}, { manual: false });
 
 	useEffect(() => {
 		setParams((prevParams) => ({
