@@ -1,4 +1,4 @@
-.toptext{
+.top_text{
     font-size: 30px;
     font: poppins;
 }
@@ -14,38 +14,50 @@
         overflow-x: scroll;
     }
 }
-.leftcontainer{
+.left_container{
     display: block;
     width: 180px;
     text-align: center;
+
+    @media (max-width:768px){
+        width: 100%;
+    }
 }
-.wholecontainer{
+.whole_container{
     overflow-y: scroll;
     height: 500px;
     margin-top: 18px;
     background-color: white;
     width: 200px;
     scrollbar-color: red;
+
+    @media (max-width:768px){
+        width: 100%;
+    }
 }
-.secondtrend{
+.second_trend{
     display: flex;
     background-color: white;
     margin-top: 25px;
     border: 2px solid beige;
     border-radius: 6px;
-    box-shadow: 10px 5px 5px rgb(239, 233, 233)
+    box-shadow: 10px 5px 5px rgb(239, 233, 233);
+
+    @media (max-width:768px){
+        display:block;
+    }
 }
-.trendingovertime{
+.trendingOverTime{
     font-size: 20px;
     font-weight: bold;
 }
-.valueofgoods{
+.value_of_goods{
     font-size: 20px;
     font-weight: bold;
     margin-top: 10px;
 }
 
-.table2{
+.globalSupplierTable{
     display: block;
     width: 100%;
     margin-top: 30px;
@@ -59,7 +71,7 @@
     }
 
 }
-.topglobalsuppliers{
+.topGlobalSuppliers{
     font-size: 20px;
     font-weight: bold;
     margin-top: 50px;
