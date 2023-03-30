@@ -150,13 +150,15 @@ function BasicDetailsForm({
 				})}
 			</div>
 
-			<div
-				role="presentation"
-				onClick={() => setShowForm(false)}
-				className={styles.cancel_button}
-			>
-				<IcMCrossInCircle width={16} height={16} />
-			</div>
+			{!isEmpty(questionSetId) ? (
+				<div
+					role="presentation"
+					onClick={() => setShowForm(false)}
+					className={styles.cancel_button}
+				>
+					<IcMCrossInCircle width={16} height={16} />
+				</div>
+			) : null}
 
 			{mode !== 'view' ? (
 				<div className={styles.button_container}>

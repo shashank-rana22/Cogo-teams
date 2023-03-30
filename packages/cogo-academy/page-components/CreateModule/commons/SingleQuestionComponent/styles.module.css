@@ -57,7 +57,6 @@
 
 	@media (max-width: 768px) {
 		flex-direction: column;
-		gap: 4px;
 
 		:global {
 			.ui_chip_container {
@@ -74,6 +73,10 @@
 .control {
 	display: flex;
 	flex-direction: column;
+
+	@media (max-width: 768px) {
+		margin-top: 4px;
+	}
 }
 
 .error_msg {
@@ -85,6 +88,5 @@
 
 .button_container {
 	display: flex;
-	gap: 12px;
 	float: right;
 }

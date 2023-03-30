@@ -123,11 +123,23 @@ function SingleQuestionComponent({
 
 			{type === 'case_study' && !isNewQuestion && mode !== 'view' ? (
 				<div className={styles.button_container}>
-					<Button loading={loading} onClick={() => handleDelete()} themeType="accent" size="sm" type="button">
+					<Button
+						loading={loading}
+						onClick={() => handleDelete()}
+						themeType="accent"
+						size="sm"
+						type="button"
+					>
 						Delete
 					</Button>
 
-					<Button loading={loading} onClick={() => handleUpdateCaseStudyQuestion()} size="sm" type="button">
+					<Button
+						style={{ marginLeft: '12px' }}
+						loading={loading}
+						onClick={() => handleUpdateCaseStudyQuestion()}
+						size="sm"
+						type="button"
+					>
 						{field.isNew ? 'Save' : 'Edit'}
 					</Button>
 				</div>
