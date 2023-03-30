@@ -9,15 +9,11 @@ function MailList(emailprops) {
 	const { setActiveMail = () => {}, activeMail, emailAddress } = emailprops;
 	const [activeSelect, setActiveSelect] = useState(null);
 
-	const handleClick = (val) => {
-		setActiveSelect(val);
-	};
-
 	return (
 		<div className={styles.container}>
 			{!activeSelect ? (
 				<GmailOption
-					handleClick={handleClick}
+					setActiveSelect={setActiveSelect}
 				/>
 			) : (
 				<MailDetails

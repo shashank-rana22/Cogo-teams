@@ -13,7 +13,7 @@ const renderContent = (showPreview) => `data:${showPreview?.contentType};base64,
 function MailAttachments({ activeMail, emailAddress }) {
 	const { attachmentData = {}, attachmentLoading } = useGetMailAttachment({ activeMail, emailAddress });
 	const allAttachements = attachmentData?.value || [];
-	const [showPreview, setShowPreview] = useState(null);
+	const [activeAttachmentData, setActiveAttachmentData] = useState(null);
 	const externalAttachements = allAttachements.filter((att) => !att.isInline);
 
 	const handleDownload = (data) => {
@@ -49,7 +49,7 @@ function MailAttachments({ activeMail, emailAddress }) {
 		<div className={styles.container}>
 			{attachmentLoading ? (
 				<div className={styles.content}>
-					<Placeholder width="120px" height="18px" />
+					<Placeholder width="220px" height="18px" />
 				</div>
 			) : (
 				<div className={styles.content}>
@@ -60,7 +60,7 @@ function MailAttachments({ activeMail, emailAddress }) {
 								role="button"
 								tabIndex={0}
 								className={styles.name}
-								onClick={() => setShowPreview(item)}
+								onClick={() => setActiveAttachmentData(item)}
 							>
 								{renderFileName(decodeURI(item?.name))}
 							</div>
@@ -73,22 +73,21 @@ function MailAttachments({ activeMail, emailAddress }) {
 				</div>
 
 			)}
-			{showPreview && (
+			{activeAttachmentData && (
 				<Modal
-					show={showPreview}
-					onClose={() => setShowPreview(null)}
+					show={activeAttachmentData}
+					onClose={() => setActiveAttachmentData(null)}
 					size="fullscreen"
 					placement="fullscreen"
-					onOuterClick={() => setShowPreview(null)}
-					showCloseIcon
+					onOuterClick={() => setActiveAttachmentData(null)}
 					className={styles.styled_ui_modal_dialog}
 				>
-					<Modal.Header title={renderTitle(showPreview)} />
+					<Modal.Header title={renderTitle(activeAttachmentData)} />
 					<Modal.Body>
 						<object
 							className={styles.media_styles}
 							aria-label="Doc Preview"
-							data={renderContent(showPreview)}
+							data={renderContent(activeAttachmentData)}
 						/>
 					</Modal.Body>
 

@@ -12,7 +12,6 @@ function MailConversation({ mailProps }) {
 	const {
 		activeMail,
 		setButtonType = () => {},
-		setShowMailModal = () => {},
 		setBccArray = () => {},
 		setRecipientArray = () => {},
 		setEmailState = () => {},
@@ -46,7 +45,6 @@ function MailConversation({ mailProps }) {
 			subject,
 			body: '',
 		});
-		setShowMailModal(true);
 	};
 
 	return (
@@ -54,8 +52,6 @@ function MailConversation({ mailProps }) {
 			<Header
 				subject={subject}
 				loading={loading}
-				setButtonType={setButtonType}
-				setShowMailModal={setShowMailModal}
 				handlClick={handlClick}
 			/>
 			<Emailbody
@@ -66,33 +62,34 @@ function MailConversation({ mailProps }) {
 				loading={loading}
 			/>
 
-			{loading ? (
-				<div className={styles.message_div}>
-					<div className={styles.time_stamp}>
-						<Placeholder width="80px" height="10px" />
-					</div>
-					<div className={styles.receive_message_container}>
-						{[...Array(5)].map(() => (
-							<Placeholder width="500px" height="20px" margin="0px 0px 10px 0px" />
-						))}
-					</div>
-				</div>
-			) : (
-				<div>
-					<div className={styles.message_div}>
+			<div className={styles.message_div}>
+				{loading ? (
+					<>
+						<div className={styles.time_stamp}>
+							<Placeholder width="80px" height="10px" />
+						</div>
+						<div className={styles.receive_message_container}>
+							{[...Array(5)].map(() => (
+								<Placeholder width="500px" height="20px" margin="0px 0px 10px 0px" />
+							))}
+						</div>
+					</>
+				) : (
+					<>
 						<div className={styles.time_stamp}>
 							{format(sentDateTime, 'EEEE, HH:mm a dd MMM yyy')}
 						</div>
 						<div
 							role="presentation"
-							className={cl`${hasAttachments ? styles.receive_preview_div : ''} 
-								${styles.receive_message_container}`}
+							className={cl` ${styles.receive_message_container}
+							${hasAttachments ? styles.receive_preview_div : ''} 
+								`}
 							dangerouslySetInnerHTML={{ __html: content }}
 						/>
-					</div>
-				</div>
-			)}
-			<MailAttachments activeMail={activeMail} emailAddress={emailAddress} />
+						<MailAttachments activeMail={activeMail} emailAddress={emailAddress} />
+					</>
+				)}
+			</div>
 		</div>
 	);
 }

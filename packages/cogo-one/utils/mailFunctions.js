@@ -1,22 +1,18 @@
 import getFileAttributes from './getFileAttributes';
 
 function mailFunction({
-	type = '',
 	setErrorValue = () => {},
-	recipientValue = '',
-	ccBccValue = '',
 	recipientArray = [],
 	bccArray = [],
 	setRecipientArray = () => {},
-	setRecipientValue = () => {},
-	setType = () => {},
-	setShowToControl = () => {},
-	setShowCcControl = () => {},
+	value = '',
+	setValue = () => {},
+	setShowControl = () => {},
+	showControl,
 	setBccArray = () => {},
-	setCcBccValue = () => {},
 	setAttachments = () => {},
 	setEmailState = () => {},
-	setShowMailModal = () => {},
+	setButtonType = () => {},
 	attachments = [],
 	uploaderRef,
 }) {
@@ -27,56 +23,40 @@ function mailFunction({
 		return emailRegex.test(emailInput);
 	};
 
-	const handleKeyPress = (event) => {
-		if (event.key === 'Enter') {
-			event.preventDefault();
-			if ((type === 'recipient' && !validateEmail(recipientValue))
-			|| (type === 'cc_bcc' && !validateEmail(ccBccValue))) {
+	const handleKeyPress = ({ e, type }) => {
+		if (e.key === 'Enter') {
+			e.preventDefault();
+			if ((type === 'recipient' && !validateEmail(value))
+			|| (type === 'cc_bcc' && !validateEmail(value))) {
 				setErrorValue('Enter valid id');
 				return;
 			}
-			if ((type === 'recipient' && isInList(recipientValue, recipientArray))
-			|| (type === 'cc_bcc' && isInList(ccBccValue, bccArray))) {
+			if ((type === 'recipient' && isInList(value, recipientArray))
+			|| (type === 'cc_bcc' && isInList(value, bccArray))) {
 				setErrorValue('Email already present');
 				return;
 			}
 
 			setErrorValue(null);
 			if (type === 'recipient') {
-				setRecipientArray((prev) => [...prev, recipientValue]);
-				setRecipientValue('');
-				setType('');
-				setShowToControl(false);
-				setShowCcControl(false);
+				setRecipientArray((prev) => [...prev, value]);
+				setShowControl(null);
 			} else {
-				setBccArray((prev) => [...prev, ccBccValue]);
-				setCcBccValue('');
-				setType('');
-				setShowToControl(false);
-				setShowCcControl(false);
+				setBccArray((prev) => [...prev, value]);
+				setShowControl(null);
 			}
 		}
 	};
 
-	const handleEdit = (val) => {
-		setType(val);
-		if (val === 'recipient') {
-			setShowToControl(true);
-			setCcBccValue('');
-			setShowCcControl(false);
-		} else {
-			setShowCcControl(true);
-			setRecipientValue('');
-			setShowToControl(false);
-		}
+	const handleEdit = (type) => {
+		setShowControl(type);
 		setErrorValue(null);
+		setValue('');
 	};
 
-	const handleChange = (item) => {
-		if (type === 'recipient') {
-			setRecipientValue(item.target?.value);
-		} else {
-			setCcBccValue(item.target?.value);
+	const handleChange = ({ e, type }) => {
+		if (showControl === type) {
+			setValue(e.target?.value);
 		}
 	};
 
@@ -88,13 +68,10 @@ function mailFunction({
 		}
 	};
 
-	const handleError = (s) => {
-		if (s === 'recipient') {
-			setShowToControl(false);
-			setRecipientValue('');
-		} else {
-			setCcBccValue('');
-			setShowCcControl(false);
+	const handleError = (type) => {
+		if (showControl === type) {
+			setValue('');
+			setShowControl(null);
 		}
 	};
 
@@ -106,9 +83,8 @@ function mailFunction({
 			subject : '',
 		});
 		setRecipientArray([]);
-		setRecipientValue('');
-		setCcBccValue('');
-		setShowMailModal(false);
+		setValue('');
+		setButtonType('');
 	};
 
 	const handleAttachmentDelete = (url) => {

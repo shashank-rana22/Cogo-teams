@@ -35,7 +35,7 @@ function useListMail({ activeSelect, senderMail }) {
 	}, [activeSelect, trigger, pagination, senderMail]);
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
-		const reachBottom = scrollTop + clientHeight >= scrollHeight;
+		const reachBottom = scrollTop + clientHeight + 50 >= scrollHeight;
 		if (reachBottom && !loading && !listData?.isLastPage) {
 			setPagination((p) => p + 1);
 		}

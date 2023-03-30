@@ -4,7 +4,7 @@ import { gmailoptions } from '../../../../../configurations/mail-configuration';
 
 import styles from './styles.module.css';
 
-function GmailOption({ handleClick = () => {} }) {
+function GmailOption({ setActiveSelect = () => {} }) {
 	return (
 		<>
 			<div className={styles.title}>Outlook</div>
@@ -12,7 +12,7 @@ function GmailOption({ handleClick = () => {} }) {
 				{gmailoptions.map(({ label, icon, value }) => (
 					<div
 						className={styles.content}
-						onClick={() => handleClick(value)}
+						onClick={() => setActiveSelect(value)}
 						role="button"
 						tabIndex={0}
 					>

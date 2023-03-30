@@ -4,7 +4,6 @@ import { usePublicRequest } from '@cogoport/request';
 
 function useReplyMail(mailProps) {
 	const {
-		setShowMailModal = () => {},
 		setEmailState = () => {},
 		setRecipientArray = () => {},
 		setBccArray = () => {},
@@ -40,7 +39,6 @@ function useReplyMail(mailProps) {
 			setRecipientArray([]);
 			setBccArray([]);
 			setButtonType('');
-			setShowMailModal(false);
 		}
 	};
 

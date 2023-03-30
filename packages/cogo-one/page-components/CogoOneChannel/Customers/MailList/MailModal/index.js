@@ -20,7 +20,6 @@ function MailModal({
 	replyLoading,
 }) {
 	const {
-		showMailModal,
 		buttonType,
 		emailAddress,
 		recipientArray,
@@ -29,11 +28,8 @@ function MailModal({
 		setEmailState,
 	} = mailProps;
 
-	const [showToControl, setShowToControl] = useState();
-	const [showCcControl, setShowCcControl] = useState();
-	const [type, setType] = useState('');
-	const [recipientValue, setRecipientValue] = useState('');
-	const [ccBccValue, setCcBccValue] = useState('');
+	const [showControl, setShowControl] = useState(null);
+	const [value, setValue] = useState('');
 	const [errorValue, setErrorValue] = useState('');
 	const [uploading, setUploading] = useState(false);
 
@@ -50,15 +46,11 @@ function MailModal({
 		decode = () => {},
 	} = mailFunction({
 		...mailProps,
-		type,
 		setErrorValue,
-		recipientValue,
-		ccBccValue,
-		setRecipientValue,
-		setType,
-		setShowToControl,
-		setShowCcControl,
-		setCcBccValue,
+		value,
+		setValue,
+		setShowControl,
+		showControl,
 		setAttachments,
 		attachments,
 		uploaderRef,
@@ -86,7 +78,7 @@ function MailModal({
 
 	return (
 		<Modal
-			show={showMailModal}
+			show={buttonType}
 			onClose={handleClose}
 			onOuterClick={handleClose}
 			size="lg"
@@ -112,17 +104,16 @@ function MailModal({
 						To:
 					</div>
 					<MailRecipientType
-						arrayType={recipientArray}
+						emailRecipientType={recipientArray}
 						handleDelete={handleDelete}
-						showControl={showToControl}
+						showControl={showControl}
 						type="recipient"
-						value={recipientValue}
+						value={value}
 						errorValue={errorValue}
 						handleChange={handleChange}
 						handleKeyPress={handleKeyPress}
 						handleError={handleError}
 						handleEdit={handleEdit}
-						inputType="recipient"
 					/>
 				</div>
 				<div className={styles.type_to}>
@@ -130,17 +121,16 @@ function MailModal({
 						Cc/Bcc, From:
 					</div>
 					<MailRecipientType
-						arrayType={bccArray}
+						emailRecipientType={bccArray}
 						handleDelete={handleDelete}
-						showControl={showCcControl}
+						showControl={showControl}
 						type="cc_bcc"
-						value={ccBccValue}
+						value={value}
 						errorValue={errorValue}
 						handleChange={handleChange}
 						handleKeyPress={handleKeyPress}
 						handleError={handleError}
 						handleEdit={handleEdit}
-						inputType="cc_bcc"
 					/>
 				</div>
 				<div className={styles.type_to}>

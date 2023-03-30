@@ -47,7 +47,7 @@ function Customers({
 	modalType = {},
 	mailProps = {},
 }) {
-	const { emailAddress, showMailModal, setShowMailModal, setButtonType } = mailProps;
+	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
 	const [attachments, setAttachments] = useState([]);
 
@@ -113,11 +113,6 @@ function Customers({
 		message : { ...messageProps },
 		voice   : { ...voiceProps },
 		mail    : { ...emailprops },
-	};
-
-	const handleOpenModal = () => {
-		setButtonType('send_mail');
-		setShowMailModal(true);
 	};
 
 	return (
@@ -209,7 +204,7 @@ function Customers({
 
 							<div className={`${styles.action} ${styles.mail_icon}`}>
 								<img
-									onClick={handleOpenModal}
+									onClick={() => setButtonType('send_mail')}
 									src="https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg"
 									alt="gmail icon"
 									role="presentation"
@@ -226,7 +221,7 @@ function Customers({
 				/>
 			)}
 
-			{showMailModal && (
+			{buttonType && (
 				<MailModal
 					mailProps={mailProps}
 					userId={userId}

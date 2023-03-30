@@ -45,12 +45,6 @@ function MailDetails({
 		value: list = [],
 	} = listData || {};
 
-	function lastMessagePreview(previewData = '') {
-		return (
-			<div dangerouslySetInnerHTML={{ __html: previewData }} />
-		);
-	}
-
 	const handleClick = () => {
 		setActiveSelect(null);
 		setActiveMail({});
@@ -112,7 +106,10 @@ function MailDetails({
 								</div>
 								<div className={styles.message_div}>
 									<div className={styles.subject_container}>{subject}</div>
-									<div className={styles.message_content}>{lastMessagePreview(bodyPreview)}</div>
+									<div
+										className={styles.message_content}
+										dangerouslySetInnerHTML={{ __html: bodyPreview }}
+									/>
 								</div>
 							</div>
 

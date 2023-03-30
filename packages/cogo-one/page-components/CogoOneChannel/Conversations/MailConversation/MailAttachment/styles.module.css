@@ -2,13 +2,14 @@
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;
-	padding: 10px 0 0 18px;
+	padding-top: 6px;
 }
 
 .content {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+	width: 100%;
 }
 
 .preview_wrapper {
@@ -27,7 +28,7 @@
 .name {
 	display: flex;
 	align-items: center;
-	max-width: 430px;
+	max-width: 80%;
 	margin: 0 6px;
 
 	&:hover {
@@ -40,17 +41,6 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-}
-
-.preview_container {
-	padding: 6px 4px;
-	margin: 0;
-	border-radius: 4px;
-
-	&:hover {
-		cursor: pointer;
-		background: #e0e0e0;
-	}
 }
 
 .content_icon {

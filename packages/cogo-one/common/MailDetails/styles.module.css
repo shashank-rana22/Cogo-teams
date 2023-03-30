@@ -2,10 +2,11 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	height: 100%;
 }
 
 .list_container {
-	height: 74vh;
+	height: calc(100% - 8px);
 	overflow-y: auto;
 }
 
@@ -151,11 +152,18 @@
 }
 
 .subject_container {
+	max-width: 200px;
+	overflow: hidden;
 	font-size: 14px;
 	font-weight: 550;
 	color: #221f20;
 	text-overflow: ellipsis;
 	text-transform: capitalize;
+	white-space: nowrap;
+
+	@media (max-width: 1280px) {
+		max-width: 100px;
+	}
 }
 
 .message_content {
@@ -172,5 +180,5 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 70vh;
+	height: calc(100% - 8px);
 }

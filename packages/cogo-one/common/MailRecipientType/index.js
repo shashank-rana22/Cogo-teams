@@ -6,7 +6,7 @@ import CustomInput from '../EmailCustomTag';
 import styles from './styles.module.css';
 
 function MailRecipientType({
-	arrayType = [],
+	emailRecipientType = [],
 	handleDelete = () => {},
 	showControl,
 	type = '',
@@ -16,11 +16,10 @@ function MailRecipientType({
 	handleKeyPress = () => {},
 	handleError = () => {},
 	handleEdit = () => {},
-	inputType = '',
 }) {
 	return (
 		<div className={styles.tags_div}>
-			{(arrayType || []).map((data) => (
+			{(emailRecipientType || []).map((data) => (
 				<CustomInput
 					email={data}
 					handleDelete={handleDelete}
@@ -28,7 +27,7 @@ function MailRecipientType({
 				/>
 			))}
 
-			{(showControl && (type === inputType)) && (
+			{(showControl === type) && (
 				<div className={styles.tag_and_error_container}>
 					<div className={styles.tag_container}>
 						<input
@@ -36,8 +35,8 @@ function MailRecipientType({
 							placeholder="Enter recipient"
 							type="text"
 							value={value}
-							onChange={(e) => handleChange(e)}
-							onKeyPress={(e) => handleKeyPress(e)}
+							onChange={(e) => handleChange({ e, type })}
+							onKeyPress={(e) => handleKeyPress({ e, type })}
 							className={cl`
 										${errorValue ? styles.error_input_container : styles.input_container}`}
 							id="input_id"
@@ -55,7 +54,7 @@ function MailRecipientType({
 			)}
 			<div
 				className={styles.add_icon}
-				onClick={() => handleEdit(inputType)}
+				onClick={() => handleEdit(type)}
 				role="presentation"
 			>
 				+

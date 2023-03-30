@@ -42,7 +42,6 @@ function CogoOne() {
 	const [recipientArray, setRecipientArray] = useState([]);
 	const [bccArray, setBccArray] = useState([]);
 	const [buttonType, setButtonType] = useState('');
-	const [showMailModal, setShowMailModal] = useState(false);
 	const [emailState, setEmailState] = useState({
 		subject : '',
 		body    : '',
@@ -75,8 +74,6 @@ function CogoOne() {
 		setBccArray,
 		buttonType,
 		setButtonType,
-		showMailModal,
-		setShowMailModal,
 		emailState,
 		setEmailState,
 		emailAddress,
@@ -107,6 +104,7 @@ function CogoOne() {
 		if (!firstLoading) {
 			setActiveVoiceCard({});
 			setActiveCardId('');
+			setActiveMail({});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab, showBotMessages]);

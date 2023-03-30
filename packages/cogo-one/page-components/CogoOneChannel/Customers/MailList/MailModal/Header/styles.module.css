@@ -32,18 +32,6 @@
 	color: #221f20;
 }
 
-.right_header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-
-	svg {
-		width: 18px;
-		height: 18px;
-		fill: #828282;
-	}
-}
-
 .file_uploader_div {
 	:global {
 		.file_uploader {
@@ -87,5 +75,5 @@
 .right_top_header {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 }
