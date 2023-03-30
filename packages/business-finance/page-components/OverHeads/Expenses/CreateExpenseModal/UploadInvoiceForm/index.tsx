@@ -100,6 +100,7 @@ function UploadInvoiceForm({
 									>
 										Confirm
 									</Button>
+									<div>&nbsp;(Please Confirm to view the uploaded invoice)</div>
 
 								</div>
 							)}

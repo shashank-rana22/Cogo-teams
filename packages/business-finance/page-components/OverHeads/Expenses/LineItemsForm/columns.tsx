@@ -11,9 +11,9 @@ const lineItemColumns = ({
 			Header   : 'Item',
 			id       : 'itemName',
 			accessor : (row:any, index:number) => (
-				<div>
+				<div style={{ width: '76px' }}>
 					<InputController
-						size="sm"
+						size="xs"
 						control={control}
 						value={lineItemsList[index]?.itemName}
 						name={`line_items.${index}.itemName`}
@@ -25,9 +25,9 @@ const lineItemColumns = ({
 			Header   : 'Amount before tax',
 			id       : 'amount_before_tax',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '90px' }}>
+				<div style={{ width: '76px' }}>
 					<InputController
-						size="sm"
+						size="xs"
 						type="number"
 						control={control}
 						name={`line_items.${index}.amount_before_tax`}
@@ -40,12 +40,12 @@ const lineItemColumns = ({
 			Header   : 'Tax',
 			id       : 'tax',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '90px' }}>
+				<div style={{ width: '110px' }}>
 					<SelectController
 						control={control}
 						options={taxOptions}
 						name={`line_items.${index}.tax`}
-						size="sm"
+						size="xs"
 						value={lineItemsList[index]?.tax}
 					/>
 				</div>
@@ -55,9 +55,9 @@ const lineItemColumns = ({
 			Header   : 'Amount after tax',
 			id       : 'amount_after_tax',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '80px' }}>
+				<div style={{ width: '60px' }}>
 					<InputController
-						size="sm"
+						size="xs"
 						type="number"
 						control={control}
 						name={`line_items.${index}.amount_after_tax`}
@@ -73,7 +73,7 @@ const lineItemColumns = ({
 			accessor : (row:any, index:number) => (
 				<div style={{ width: '50px' }}>
 					<InputController
-						size="sm"
+						size="xs"
 						type="number"
 						control={control}
 						name={`line_items.${index}.tds`}
@@ -86,13 +86,15 @@ const lineItemColumns = ({
 			Header   : 'Payable Amount',
 			id       : 'payable_amount',
 			accessor : (row:any, index:number) => (
-				<InputController
-					size="sm"
-					type="number"
-					control={control}
-					name={`line_items.${index}.payable_amount`}
-					value={lineItemsList[index]?.payable_amount}
-				/>
+				<div style={{ width: '80px' }}>
+					<InputController
+						size="xs"
+						type="number"
+						control={control}
+						name={`line_items.${index}.payable_amount`}
+						value={lineItemsList[index]?.payable_amount}
+					/>
+				</div>
 			),
 		},
 		{

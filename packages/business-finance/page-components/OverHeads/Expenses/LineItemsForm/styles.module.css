@@ -22,6 +22,9 @@
 			background-color: #000 !important;
 			border-right: none;
 		}
+		.ui_table_head_cell:first-child {
+			padding:0;
+		}
 
 		.ui_table_head_row {
 			.ui_table_head_cell {
