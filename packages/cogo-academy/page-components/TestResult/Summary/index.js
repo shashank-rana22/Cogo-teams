@@ -1,5 +1,6 @@
 import { startCase } from '@cogoport/utils';
 
+import toFixed from '../../CreateModule/utils/toFixed';
 import QuestionWiseStats from '../../UserDashboard/commons/QuestionWiseStats';
 
 import BarChart from './BarChart';
@@ -22,7 +23,7 @@ function Summary({ summaryData = {} }) {
 		Object.keys(difficulty_wise_stats).forEach((key, index) => {
 			const obj = {
 				label      : startCase(key.split('_')[0]),
-				percentile : difficulty_wise_stats[key]?.toFixed(2),
+				percentile : toFixed(difficulty_wise_stats[key], 2),
 				color      : index === 0 ? 'hsla(232, 44%, 96%, 1)' : 'hsla(234, 46%, 87%, 1)',
 			};
 			data.push(obj);
@@ -37,7 +38,7 @@ function Summary({ summaryData = {} }) {
 		Object.keys(topic_wise_percentile).forEach((key, index) => {
 			const obj = {
 				label      : startCase(key),
-				percentile : topic_wise_percentile[key].toFixed(2),
+				percentile : toFixed(topic_wise_percentile[key], 2),
 				color      : index === 0 ? 'hsla(232, 44%, 96%, 1)' : 'hsla(234, 46%, 87%, 1)',
 			};
 			data.push(obj);

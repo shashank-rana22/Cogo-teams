@@ -42,7 +42,7 @@ function SingleQuestionComponent({
 		} else {
 			updateCaseStudyQuestion({
 				action              : 'delete',
-				caseStudyQuestionId : editDetails?.sub_question?.[index]?.id,
+				caseStudyQuestionId : editDetails?.test_case_study_questions?.[index]?.id,
 				reset,
 				testQuestionId      : editDetails?.id,
 			});
@@ -56,7 +56,7 @@ function SingleQuestionComponent({
 			values              : formValues?.case_questions?.[index],
 			reset,
 			action              : field.isNew ? 'create' : 'update',
-			caseStudyQuestionId : editDetails?.sub_question?.[index]?.id,
+			caseStudyQuestionId : editDetails?.test_case_study_questions?.[index]?.id,
 			testQuestionId      : editDetails?.id,
 		});
 	};

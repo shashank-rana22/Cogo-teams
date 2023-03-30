@@ -3,6 +3,8 @@ import IconComponent from '../../IconComponent';
 import styles from './styles.module.css';
 
 function CaseQuestion({ item, from, caseToShow }) {
+	const { test_case_study_questions = [] } = item || {};
+
 	return (
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
@@ -17,7 +19,7 @@ function CaseQuestion({ item, from, caseToShow }) {
 
 				{from !== 'tooltip' ? (
 					<div style={{ marginLeft: '8px' }} className={styles.bold}>
-						{`+${item?.sub_question.length} More`}
+						{`+${test_case_study_questions.length} More`}
 						{' '}
 						<IconComponent
 							style={{ marginTop: '8px' }}
@@ -29,7 +31,7 @@ function CaseQuestion({ item, from, caseToShow }) {
 			</div>
 
 			{item.id === caseToShow
-				? item?.sub_question.map((item1) => <div className={styles.text}>{item1.question_text}</div>)
+				? test_case_study_questions.map((item1) => <div className={styles.text}>{item1.question_text}</div>)
 				: null}
 		</div>
 	);

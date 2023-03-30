@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import useUpdateCaseStudy from '../../../../hooks/useUpdateCaseStudy';
 
@@ -17,7 +17,7 @@ const useHandleBasicDetails = ({
 }) => {
 	const [showForm, setShowForm] = useState(false);
 
-	const controls = getControls({ mode });
+	const controls = useMemo(() => getControls({ mode }), [mode]);
 
 	const {
 		loading,
