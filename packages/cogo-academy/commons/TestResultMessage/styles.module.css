@@ -2,6 +2,12 @@
 	display: flex;
 }
 
+.image_container {
+	margin-right: 20px;
+	width: 42px;
+	height: 42px;
+}
+
 .message_content {
 	display: flex;
 	font-size: 18px;
