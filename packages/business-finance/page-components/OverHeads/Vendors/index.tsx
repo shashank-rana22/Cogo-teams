@@ -107,8 +107,8 @@ function VenderComponent() {
 						<div>
 							<IcMFtick
 								color="#67C676"
-								height={18}
-								width={18}
+								height={22}
+								width={22}
 							/>
 						</div>
 						<div>&nbsp;Verified </div>

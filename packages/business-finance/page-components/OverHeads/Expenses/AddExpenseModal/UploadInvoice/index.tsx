@@ -1,5 +1,5 @@
 import { Datepicker, Input, Select, Button } from '@cogoport/components';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Filter from '../../../../commons/Filters';
 import { CURRENCY_OPTIONS } from '../../../constants/CURRENCY_OPTIONS';
@@ -14,6 +14,7 @@ interface FilterInterface {
 	invoiceCurrency?:string,
 	invoiceDate?:Date,
 	invoiceNumber?:string,
+	lineItemsList?:any,
 }
 interface Props {
 	formData:FilterInterface,
@@ -22,13 +23,34 @@ interface Props {
 	setTaxOptions?:(p:object)=>void,
 	setIsUploadConfirm?:(p:any)=>void,
 	isUploadConfirm?:boolean,
+	setIsFormValidated?:(p:boolean)=>void,
 }
 
 function UploadInvoice({
 	formData, setFormData, setTaxOptions, taxOptions,
-	isUploadConfirm, setIsUploadConfirm,
+	isUploadConfirm, setIsUploadConfirm, setIsFormValidated,
 }:Props) {
-	const { uploadedInvoice:uploadUrl, invoiceCurrency, invoiceNumber, invoiceDate, uploadedInvoice } = formData || {};
+	const {
+		uploadedInvoice:uploadUrl, invoiceCurrency,
+		invoiceNumber, invoiceDate, uploadedInvoice, lineItemsList,
+	} = formData || {};
+
+	const isLineItemPresent = lineItemsList?.[0]?.payable_amount;
+
+	useEffect(() => {
+		// validations to ensure data is filled before going to next page
+		if (invoiceCurrency && invoiceNumber && invoiceDate && uploadedInvoice && isLineItemPresent) {
+			setIsFormValidated(true);
+		} else {
+			setIsFormValidated(false);
+		}
+	}, [invoiceCurrency,
+		invoiceNumber,
+		invoiceDate,
+		uploadedInvoice,
+		isLineItemPresent,
+		setIsFormValidated]);
+
 	return (
 		<div>
 			<div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
@@ -86,7 +108,7 @@ function UploadInvoice({
 									>
 										Confirm
 									</Button>
-
+									<div>&nbsp;(Please Confirm to view the uploaded invoice)</div>
 								</div>
 							)}
 						</>

@@ -29,6 +29,7 @@ function AddExpenseModal({
 	const [modalView, setModalView] = useState('upload');
 	const [taxOptions, setTaxOptions] = useState([]);
 	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
+	const [isFormValidated, setIsFormValidated] = useState(false);
 
 	const { cogoEntityId, vendorId } = rowData;
 
@@ -77,6 +78,7 @@ function AddExpenseModal({
 						setTaxOptions={setTaxOptions}
 						isUploadConfirm={isUploadConfirm}
 						setIsUploadConfirm={setIsUploadConfirm}
+						setIsFormValidated={setIsFormValidated}
 					/>
 				) : (
 					<Summary
@@ -98,7 +100,7 @@ function AddExpenseModal({
 						</Button>
 					)
 				}
-				<Button onClick={handleClick}>
+				<Button onClick={handleClick} disabled={!isFormValidated}>
 					{modalView === 'upload' ? 'Save & Next' : 'Request Email'}
 				</Button>
 
