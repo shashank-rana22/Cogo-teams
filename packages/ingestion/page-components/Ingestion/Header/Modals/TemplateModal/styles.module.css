@@ -1,0 +1,12 @@
+.container {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+}
+
+.heading {
+    margin-bottom: 8px;
+}

@@ -24,3 +24,12 @@
 .number_of_org {
     max-width: 40px;
 }
+
+.re_upload {
+	max-width: 60px;
+}
+
+.uploaded {
+	max-width: 80px;
+	text-decoration-line: underline;
+}
