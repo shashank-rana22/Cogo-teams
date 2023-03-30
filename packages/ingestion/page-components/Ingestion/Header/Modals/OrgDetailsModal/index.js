@@ -6,26 +6,29 @@ import { getElementController } from '../../../../../utils/get-element-controls'
 import styles from './styles.module.css';
 
 function OrgDetailsModal({
-	setShow = () => {}, show = '', setIngestionData = () => {}, ingestionData, formProps, modalControls,
+	setShow = () => {}, show = '', setUploadData = () => {}, uploadData, formProps, modalControls,
 
 }) {
 	const NEXT_PAGE_MAPPING = {
-		ie   : 'chooseModal',
-		cp   : 'providerSelect',
-		lead : 'providerSelect',
+		organization : 'chooseModal',
+		partner      : 'providerSelect',
+		lead         : 'providerSelect',
 	};
+
+	console.log('upload', uploadData);
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
+	console.log('okform::', formProps.getValues());
 	const onClose = () => {
 		setShow('');
-		setIngestionData({
-			...ingestionData,
+		// setUploadData({
+		// 	...uploadData,
 
-		});
+		// });
 		reset();
 	};
 
 	const onBack = () => {
-		setShow(NEXT_PAGE_MAPPING[ingestionData?.option1]);
+		setShow(NEXT_PAGE_MAPPING[uploadData?.ingestion_type]);
 		reset();
 	};
 
@@ -56,8 +59,8 @@ function OrgDetailsModal({
 	const CONSTANT_KEYS = {
 		// LANDING     : '',
 		LEAD              : 'lead',
-		CHANNEL_PARTNER   : 'cp',
-		IMPORTER_EXPORTER : 'ie',
+		CHANNEL_PARTNER   : 'partner',
+		IMPORTER_EXPORTER : 'organization',
 	};
 
 	const {
@@ -70,7 +73,7 @@ function OrgDetailsModal({
 		[IMPORTER_EXPORTER] : IeDiv,
 	};
 
-	const TopDiv = INGESTION_COMPONENTS_MAPPING[ingestionData?.option1] || null;
+	const TopDiv = INGESTION_COMPONENTS_MAPPING[uploadData?.ingestion_type] || null;
 
 	// console.log('controls::', controls);
 
@@ -84,14 +87,14 @@ function OrgDetailsModal({
 
 	// console.log('ingestionData::', ingestionData?.option1);
 
-	const onSubmit = (values) => {
+	const onSubmit = () => {
 		// console.log('values', values);
 		setShow('uploadModal');
-		setIngestionData({
-			...ingestionData,
-			country : values?.country_id,
-			partner : values?.partner,
-		});
+		// setUploadData({
+		// 	...uploadData,
+		// 	// country_id : values?.country_id,
+		// 	// partner_id : values?.partner,
+		// });
 	};
 
 	return (
@@ -182,7 +185,7 @@ function OrgDetailsModal({
 					Back
 
 				</Button>
-				<Button onClick={handleSubmit(onSubmit)}>Next</Button>
+				<Button onClick={(onSubmit)}>Next</Button>
 			</Modal.Footer>
 		</Modal>
 	);

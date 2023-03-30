@@ -3,7 +3,7 @@ import { IcMUpload } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function ChooseModal({ setShow = () => {}, show = '', setIngestionData = () => {}, ingestionData = {} }) {
+function ChooseModal({ setShow = () => {}, show = '', setUploadData = () => {}, uploadData = {} }) {
 	const onClose = () => {
 		setShow('');
 	};
@@ -17,17 +17,17 @@ function ChooseModal({ setShow = () => {}, show = '', setIngestionData = () => {
 	// };
 
 	const NEXT_PAGE_MAPPING = {
-		ie   : 'orgDetails',
-		cp   : 'providerSelect',
-		lead : 'providerSelect',
+		organization : 'orgDetails',
+		partner      : 'providerSelect',
+		lead         : 'providerSelect',
 	};
 
 	const onChoose = (type) => {
 		setShow(NEXT_PAGE_MAPPING[type]);
 
-		setIngestionData({
-			...ingestionData,
-			option1: type,
+		setUploadData({
+			...uploadData,
+			ingestion_type: type,
 		});
 	};
 
@@ -54,7 +54,7 @@ function ChooseModal({ setShow = () => {}, show = '', setIngestionData = () => {
 					</Button>
 					<Button
 						themeType="secondary"
-						onClick={() => onChoose('cp')}
+						onClick={() => onChoose('partner')}
 						style={{ height: '60px', width: '50%' }}
 					>
 						Channel Partner
@@ -62,7 +62,7 @@ function ChooseModal({ setShow = () => {}, show = '', setIngestionData = () => {
 					</Button>
 					<Button
 						themeType="secondary"
-						onClick={() => onChoose('ie')}
+						onClick={() => onChoose('organization')}
 						style={{ height: '60px', width: '50%' }}
 
 					>

@@ -2,26 +2,36 @@ import { Modal, Button } from '@cogoport/components';
 import { IcMUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import usePostIngestionData from '../../../../../hooks/usePostIngestionData';
 import { getElementController } from '../../../../../utils/get-element-controls';
 import uploadControls from '../../../../../utils/upload-controls';
 
 import styles from './styles.module.css';
 
-function UploadModal({ setShow = () => {}, show = '', setIngestionData = () => {}, ingestionData, formProps }) {
-	const [fileValue, setFileValue] = useState();
-	const [multiFileValue, setMultiFileValue] = useState([]);
-	const [loading, setLoading] = useState(false);
+function UploadModal({
+	setShow = () => {}, show = '', setUploadData = () => {}, uploadData, formProps,
+	onSubmit = () => {}, loading,
+}) {
+	// const [fileValue, setFileValue] = useState();
+	// const [multiFileValue, setMultiFileValue] = useState([]);
+	// const [loading, setLoading] = useState(false);
 
+	
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 
+	console.log('form::::::', formProps.getValues());
+
 	const onChoose = (event) => {
-		setShow('');
-		// setIngestionData({
-		// 	...ingestionData,
-		// 	finalModalHeading: input,
+		// setUploadData({
+		// 	...uploadData,
+		// 	description : event?.description,
+		// 	file_name   : event?.name,
+		// 	file_url    : event?.upload,
 		// });
-		// console.log('multiFileValue', multiFileValue);
-		console.log('event::', event);
+
+		onSubmit(event, uploadData);
+		console.log('ingestion data finalModal:', uploadData);
+		// setShow('');
 	};
 
 	const onClose = () => {
@@ -30,12 +40,11 @@ function UploadModal({ setShow = () => {}, show = '', setIngestionData = () => {
 	};
 
 	const FINAL_HEADING = {
-		ie   : 'Upload Importer/Exporter CSV',
-		cp   : ingestionData?.finalModalHeading,
-		lead : ingestionData?.finalModalHeading,
+		organization : 'Upload Importer/Exporter CSV',
+		partner      : uploadData?.finalModalHeading,
+		lead         : uploadData?.finalModalHeading,
 	};
 
-	console.log('ingestion data finalModal:', ingestionData);
 	return (
 		<Modal size="md" show={show === 'uploadModal'} onClose={onClose} placement="center">
 			<Modal.Header title={(
@@ -48,7 +57,7 @@ function UploadModal({ setShow = () => {}, show = '', setIngestionData = () => {
 			/>
 			<Modal.Body>
 				<div style={{ margin: '0 0 12px 0' }}>
-					{FINAL_HEADING[ingestionData?.option1]}
+					{FINAL_HEADING[uploadData?.ingestion_type]}
 				</div>
 
 				{/* <div style={{ display: 'block', alignItems: 'center', marginBottom: '16px' }}>
@@ -94,11 +103,12 @@ function UploadModal({ setShow = () => {}, show = '', setIngestionData = () => {
 						setShow('orgDetails');
 						// reset();
 					}}
+
 				>
 					Back
 
 				</Button>
-				<Button onClick={handleSubmit(onChoose)}>Submit</Button>
+				<Button loading={loading} onClick={handleSubmit(onChoose)}>Submit</Button>
 			</Modal.Footer>
 		</Modal>
 	);

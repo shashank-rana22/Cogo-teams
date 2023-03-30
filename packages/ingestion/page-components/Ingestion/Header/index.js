@@ -3,6 +3,7 @@ import { IcMDownload, IcMUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useGetIngestionList from '../../../hooks/useGetIngestionList';
+import usePostIngestionData from '../../../hooks/usePostIngestionData';
 
 import Filters from './Filters';
 import ChooseModal from './Modals/ChooseModal/index';
@@ -36,16 +37,19 @@ const INGESTION_COMPONENTS_MAPPING = {
 };
 
 function Header() {
-	const [show, setShow] = useState('');
 	const [showModal, setShowModal] = useState(false);
 
 	const {
-		setIngestionData = () => {},
-		ingestionData = {},
+		setUploadData = () => {},
+		uploadData = {},
 		formProps,
 		modalControls,
-	} = useGetIngestionList();
-	console.log('formProps::::::::::', formProps);
+		show = '',
+		setShow = () => {},
+		onSubmit = () => {},
+		loading,
+	} = usePostIngestionData();
+	// console.log('formProps::::::::::', formProps);
 	// const componentProps = {
 	// 	[CHOOSE]: {
 
@@ -95,6 +99,7 @@ function Header() {
 					Upload
 
 				</Button>
+				{/* <Button onClick={() => console.log('show', show)}>ekjdvnef</Button> */}
 			</div>
 
 			<Filters />
@@ -106,10 +111,12 @@ function Header() {
 					<Component
 						show={show}
 						setShow={setShow}
-						setIngestionData={setIngestionData}
-						ingestionData={ingestionData}
+						setUploadData={setUploadData}
+						uploadData={uploadData}
 						formProps={formProps}
 						modalControls={modalControls}
+						onSubmit={onSubmit}
+						loading={loading}
 					/>
 				)
 			}

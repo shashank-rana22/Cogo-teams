@@ -1,4 +1,5 @@
 import { Table, Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
 import useGetIngestionList from '../../../hooks/useGetIngestionList';
@@ -6,12 +7,13 @@ import useGetIngestionList from '../../../hooks/useGetIngestionList';
 import styles from './styles.module.css';
 
 function TableSection() {
-	const { columns, dummyData, onPageChange, currentPage, loading } = useGetIngestionList();
+	const {
+		columns, dummyData, onPageChange, currentPage, loading, Component, setTableModal, tableModal, data, row,
+	} = useGetIngestionList();
 
-	const { list, page = 0, page_limit, total_count } = dummyData || {};
+	const { list, page = 0, page_limit, total_count } = data || {};
 
-	// Todo add a empty condition
-	if (false) {
+	if (isEmpty(list)) {
 		return (
 			<div className={styles.empty}>
 				<EmptyState height="300px" width="200px" />
@@ -40,6 +42,8 @@ function TableSection() {
 					/>
 				</div>
 			)}
+
+			{Component && <Component setTableModal={setTableModal} tableModal={tableModal} row={row} />}
 		</div>
 	);
 }

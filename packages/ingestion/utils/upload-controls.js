@@ -1,12 +1,12 @@
 const uploadControls = [
 
 	{
-		name        : 'name',
+		name        : 'file_name',
 		label       : 'Name',
 		type        : 'text',
 		placeholder : 'Name',
 		isClearable : true,
-		rules       : { required: 'Country is Required' },
+		rules       : { required: 'Name is Required' },
 	},
 	{
 		name        : 'description',
@@ -14,19 +14,18 @@ const uploadControls = [
 		type        : 'textArea',
 		placeholder : 'Description',
 		isClearable : true,
-		// rules       : { required: 'Partner is Required' },
 
 	},
 	{
-		name       : 'upload',
+		name       : 'file_url',
 		label      : 'Upload',
 		type       : 'file',
-		multiple   : 'multiple',
+		// multiple   : 'multiple',
 		// placeholder : 'Upload Here...',
 		// isClearable : true,
 		rules      : { required: 'File is Required' },
 		uploadType : 'aws',
-		accept     : '.png,.jpg',
+		accept     : '.csv',
 
 	},
 	// {

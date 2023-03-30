@@ -3,8 +3,10 @@ import { IcMUpload } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function ProviderSelectModal({ setShow = () => {}, show = '', setIngestionData = () => {}, ingestionData, formProps }) {
+function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = () => {}, uploadData, formProps }) {
 	const { reset } = formProps;
+
+	console.log('ingestion_type', uploadData.ingestion_type);
 	const FINAL_MODAL_MAPPING_CP = {
 		// IE           : 'a. Upload Importer/Exporter CSV',
 		CPBuy        : 'a. Upload Channel Partner (buy persona) CSV',
@@ -51,23 +53,23 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setIngestionData =
 	let ProviderButtonOptions = [];
 	let FINAL_MODAL_MAPPING = {};
 
-	if (ingestionData?.option1 === 'lead') {
+	if (uploadData?.ingestion_type === 'lead') {
 		ProviderButtonOptions = ProviderLeadOptions;
 		FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_LEADS;
-	} else if (ingestionData?.option1 === 'cp') {
+	} else if (uploadData?.ingestion_type === 'partner') {
 		ProviderButtonOptions = ProviderCpOptions;
 		FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_CP;
 	}
 
 	const onChoose = (input) => {
-		setIngestionData({
-			...ingestionData,
+		setUploadData({
+			...uploadData,
 			finalModalHeading: input,
 		});
 		reset();
 		setShow('orgDetails');
 	};
-	console.log('ingestionData::', ingestionData);
+	console.log('ingestionData::', uploadData);
 
 	return (
 		<Modal size="md" show={show === 'providerSelect'} onClose={onClose} placement="center">
