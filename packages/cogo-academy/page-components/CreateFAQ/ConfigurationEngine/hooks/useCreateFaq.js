@@ -44,7 +44,6 @@ function useCreateFaq() {
 
 	const createFaqComponent = async (values) => {
 		const { name, description } = values || {};
-
 		let payload = {
 			name,
 			display_name : startCase(name),
@@ -70,8 +69,8 @@ function useCreateFaq() {
 			Toast.error('Something went wrong');
 		}
 	};
-
 	return {
+		queryValue,
 		createFaqComponent,
 		configurationPage,
 		setConfigurationPage,

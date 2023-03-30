@@ -594,6 +594,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
+		{
+			api          : 'post_allocation_feedback',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_feedbacks',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -5910,8 +5920,9 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
-			api         : 'list_auth_roles',
-			access_type : 'private',
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
 		},
 		{
 			api          : 'list_organization_outstandings',
@@ -6117,6 +6128,11 @@ const partner = {
 			api          : 'create_servetel_communication_log',
 			access_type  : 'private',
 			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_bulk_outstanding_account_taggings',
+			access_type  : 'private',
+			service_name : 'sage',
 		},
 	],
 	unified_dashboard: [
@@ -7458,6 +7474,89 @@ const partner = {
 			module      : 'Bpr',
 			feature     : 'Bpr',
 		},
+		{
+			api         : 'get_payments_settlement',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'list_organization_users',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'outstanding',
+			feature      : 'outstanding',
+
+		},
+		{
+			api         : 'get_partner_user_rm_mapping',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_sales_invoice_timeline_by_id',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'post_sales_invoice_by_id_irn_cancel',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'post_sales_invoice_by_id_irn_generate',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_outstanding_by_customer',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_sales_outstanding_invoice_list',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_sales_report_download_outstanding_list',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+
+		{
+			api         : 'get_payments_outstanding_customer_payment',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+
+		{
+			api         : 'get_payments_settlement_history',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+
+		{
+			api         : 'post_sales_invoice_post_to_sage',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+
 	],
 	incident_controller: [
 		{
@@ -7780,8 +7879,9 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
-			api         : 'get_exchange_rate',
-			access_type : 'private',
+			api          : 'get_exchange_rate',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
 		},
 	],
 	tracking: [
@@ -8521,7 +8621,7 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api          : 'get_communication_whatsapp_template_status',
+			api          : 'update_communication_whatsapp_template_status',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
@@ -10382,6 +10482,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
+		{
+			api          : 'get_exchange_rate_source_wise_revenue',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'update_source_exchange_rates',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
 
 	],
 	contracts: [
@@ -10700,7 +10810,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_cogoone_timeline',
+			api          : 'list_cogoone_timelines',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

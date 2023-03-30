@@ -793,8 +793,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-account_receivables',
 				title         : 'AR',
-				href          : '/business-finance/account-receivables',
-				as            : '/business-finance/account-receivables',
+				href          : '/v2/business-finance/account-receivables/[active_tab]',
+				as            : '/v2/business-finance/account-receivables/outstanding',
 				type          : 'link',
 				main_apis     : ['list_organizations'],
 				possible_apis : apis.account_receivables,
@@ -1331,7 +1331,7 @@ const navigationMappingAdmin = {
 				as            : '/bl_do-collection-release',
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
-				possible_apis : apis.bl_do_collection_release,
+				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
 
 			},
 			{
@@ -2022,6 +2022,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.faq,
+			},
+			{
+				key           : 'cogo_academy-announcements',
+				title         : 'Announcements',
+				href          : '/v2/announcements',
+				as            : '/v2/announcements',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.announcements,
 			},
 		],
 		module_type: 'crm',
