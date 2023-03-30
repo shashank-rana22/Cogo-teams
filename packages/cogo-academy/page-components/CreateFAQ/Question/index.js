@@ -2,6 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useMemo } from 'react';
 
 import Spinner from '../../../commons/Spinner';
@@ -168,7 +169,7 @@ function CreateFAQ() {
 			</div>
 
 			<div className={styles.heading_text}>
-				{data ? 'Update' : 'Create'}
+				{!isEmpty(data) ? 'Update' : 'Create'}
 				{' '}
 				A Question
 			</div>
