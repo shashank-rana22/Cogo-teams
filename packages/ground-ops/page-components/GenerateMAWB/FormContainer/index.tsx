@@ -3,6 +3,7 @@ import { IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import Layout from '../../Air/commons/Layout';
+import useCreateShipmentDocument from '../GenerateMawbDoc/useCreateShipmentDocument';
 import UploadMAWB from '../UploadMAWB';
 
 import styles from './styles.module.css';
@@ -21,7 +22,7 @@ const options = [
 function FormContainer({
 	back, setBack, edit, setEdit, packingData, fields,
 	control, errors, item, setGenerate, handleSubmit, activeCategory, hawbDetails,
-	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey,
+	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem,
 }) {
 	const [value, onChange] = useState('manual');
 
@@ -33,14 +34,32 @@ function FormContainer({
 		});
 	};
 
+	const { upload } = useCreateShipmentDocument({
+		edit,
+		setGenerate,
+		setEdit,
+		activeCategory,
+		hawbDetails,
+		setHawbDetails,
+		setActiveHawb,
+		setActiveKey,
+		activeHawb,
+	});
+
 	const onSubmit = () => {
 		setBack(true);
 	};
 
 	function RemoveHawb() {
+		const payload = {
+			state               : 'document_rejected',
+			id                  : taskItem?.id,
+			performed_by_org_id : taskItem?.serviceProviderId,
+		};
 		return (
 			<Button
 				onClick={() => {
+					upload({ payload });
 					setHawbDetails((prev) => prev.filter((itm) => itm.id !== activeHawb.id));
 					setActiveHawb(hawbDetails.find((ele) => ele.id !== activeHawb.id));
 				}}

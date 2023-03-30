@@ -251,6 +251,7 @@ function GenerateMAWB({
 					setActiveHawb={setActiveHawb}
 					activeKey={activeKey}
 					setActiveKey={setActiveKey}
+					taskItem={taskItem}
 				/>
 			)}
 
