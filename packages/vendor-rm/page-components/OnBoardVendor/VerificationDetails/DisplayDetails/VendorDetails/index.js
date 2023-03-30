@@ -62,7 +62,7 @@ function VendorDetails({
 				<div className={styles.single_record}>
 					{
 						Object.keys(fieldsToShow).map((fieldName) => (
-							<div className={styles.fields_to_show}>
+							<div key={fieldName} className={styles.fields_to_show}>
 
 								<div className={styles.label}>
 									{fieldsToShow[fieldName]}

@@ -5,7 +5,7 @@ import getShortFileName from '../utils/getShortFileName';
 
 import styles from './styles.module.css';
 
-const filedsToShow = {
+const fieldsToShow = {
 	account_holder_name : 'Account Holder’s Name',
 	account_number      : 'Account No.',
 	account_type        : 'Account Type',
@@ -56,15 +56,16 @@ function PaymentDetails({
 			<div className={styles.body}>
 				<div className={styles.single_record}>
 					{
-						Object.keys(filedsToShow).map((fieldName) => (
-							<div style={{
-								display       : 'flex',
-								flexDirection : 'column',
-								flexBasis     : `${fieldName === 'address' ? '75%' : '25%'}`,
-							}}
+						Object.keys(fieldsToShow).map((fieldName) => (
+							<div
+								key={fieldName}
+								className={styles.fields_to_show}
+								style={{
+									flexBasis: `${fieldName === 'address' ? '50%' : '25%'}`,
+								}}
 							>
 								<div className={styles.label}>
-									{filedsToShow[fieldName]}
+									{fieldsToShow[fieldName]}
 								</div>
 								<div className={styles.value}>
 									{getDisplayValue({ fieldName })}

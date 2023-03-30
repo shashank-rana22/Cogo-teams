@@ -27,7 +27,7 @@ function VendorServices({
 								Object.keys(filedsToShow).map((wantedField) => {
 									const val = item[wantedField];
 									return (
-										<div className={styles.fields_to_show}>
+										<div key={wantedField} className={styles.fields_to_show}>
 											<div className={styles.label}>
 												{filedsToShow[wantedField]}
 											</div>

@@ -12,11 +12,10 @@ function useGetModifiedControls({
 			return item;
 		}
 
-		const obj = {
+		return {
 			...item,
 			options: subCategoryOptions[currentCate],
 		};
-		return obj;
 	});
 
 	return {
