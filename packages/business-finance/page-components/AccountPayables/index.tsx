@@ -1,5 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import Dashboard from './Dashboard';
@@ -9,7 +10,14 @@ function AccountPayables() {
 	const { query, push } = useRouter();
 	const { activeTab } = query;
 	const [activePayables, setActivePayables] = useState(activeTab || 'dashboard');
-	const handleTabChange = (v) => {
+	const profile = useSelector((state) => state);
+	const { profile:{ partner } } = profile || {};
+	const { id: partnerId } = partner || {};
+	const handleTabChange = (v:string) => {
+		if (['invoices', 'payruns', 'outstanding', 'treasury-chest'].includes(v)) {
+			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
+			return;
+		}
 		setActivePayables(v);
 		push(
 			'/business-finance/account-payables/[activeTab]',
@@ -41,10 +49,7 @@ function AccountPayables() {
 					<TabPanel name="outstanding" title="OUTSTANDING">
 						<h1>Outstandings</h1>
 					</TabPanel>
-					<TabPanel name="overheads" title="OVERHEADS">
-						<h1>Payruns</h1>
-					</TabPanel>
-					<TabPanel name="treasury" title="TREASURY">
+					<TabPanel name="treasury-chest" title="TREASURY">
 						<h1>Treasury</h1>
 					</TabPanel>
 

@@ -127,6 +127,8 @@ function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
 						themeType="secondary"
 						style={{ marginTop: '2px' }}
 						onClick={handleSubmit(onApply)}
+						disabled={firstEvent === '' || secondEvent === ''
+						|| startDate === undefined || endDate === null}
 					>
 						Apply
 

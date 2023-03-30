@@ -73,11 +73,12 @@
 	font-weight: 500;
 	color: #ed3726;
 }
-.dash{
-	min-width: 30%;
-	padding: 16px;
+
+.dash {
 	display: flex;
 	align-items: center;
+	min-width: 30%;
+	padding: 16px;
 	font-size: 36px;
 	font-weight: 500;
 	color: #f68b21;
