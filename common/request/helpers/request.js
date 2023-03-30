@@ -15,12 +15,15 @@ const customSerializer = (params) => {
 };
 
 const customPeeweeSerializer = (params) => {
+	const dataTypes = ['Object', 'Array'].map((d) => `[object ${d}]`);
 	const newParams = Object.keys(params).reduce((acc, key) => {
-		acc[key] = typeof params[key] === 'object'
+		acc[key] = dataTypes.includes(Object.prototype.toString.call(params[key]))
 			? JSON.stringify(params[key])
 			: params[key];
+
 		return acc;
 	}, {});
+
 	const paramsStringify = qs.stringify(newParams, {
 		arrayFormat: 'repeat', serializeDate: (date) => format(date),
 	});
