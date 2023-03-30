@@ -7,25 +7,19 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
+import { optionMonth } from '../../SourceFile/utils';
 import { optionsCheck, optionsPeriod, optionsPills, optionsRadio } from '../constant';
 
 import styles from './styles.module.css';
 
-function Card() {
-	const [filters, setFilters] = useState({
-		entity   : '',
-		category : '',
-		date     : '',
-		rowCheck : '',
-		colCheck : '',
-		chip     : 'Segment',
-		radio    : '',
-		mode     : '',
-		ratio    : '',
-	});
-	const [selectFilter, setSelectFilter] = useState(false);
-	const [select, setSelect] = useState(false);
-
+function Card({
+		filters,
+		setFilters,
+		selectFilter,
+		setSelectFilter,
+		select,
+		setSelect
+	}) {
 	const content = () => (
 		<div className={styles.content_container}>
 			<div>Rows</div>
@@ -111,16 +105,18 @@ function Card() {
 							style={{ width: '180px' }}
 						/>
 
-						<div className={styles.date_range}>
-							<SingleDateRange
-								placeholder="Date"
-								isPreviousDaysAllowed
-								dateFormat="MM/dd/yyyy"
-								name="date"
-								onChange={(val:any) => { setFilters((prev) => ({ ...prev, date: val })); }}
-								value={filters?.date}
+
+						{/* <div className={styles.select_container}> */}
+							<Select
+								value={filters?.month}
+								onChange={(val:string) => { setFilters((prev) => ({ ...prev, month: val })); }}
+								placeholder="Month"
+								options={optionMonth}
+								isClearable
+								style={{ width: '150px' }}
 							/>
-						</div>
+
+						{/* </div> */}
 
 						<div>
 							<Popover
@@ -202,7 +198,7 @@ function Card() {
 						showOnOff
 						value={filters?.ratio}
 						onChange={(e) => {
-							setFilters((prev) => ({ ...prev, ratio: e?.target?.checked ? 'true' : 'false' }));
+							setFilters((prev) => ({ ...prev, ratio: e?.target?.checked ? 'VALUE' : 'VOLUME' }));
 						}}
 					/>
 				</div>
