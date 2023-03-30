@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';

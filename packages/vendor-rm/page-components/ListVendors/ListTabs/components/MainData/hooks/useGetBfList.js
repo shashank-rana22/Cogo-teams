@@ -1,8 +1,9 @@
-import { Button } from '@cogoport/components';
+import { Toast, Button } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format, startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import styles from '../FinanceDashBoard/styles.module.css';
 
@@ -21,7 +22,7 @@ const useGetBfList = () => {
 		{ manual: false },
 	);
 
-	const fetchList = () => {
+	const fetchList = useCallback(() => {
 		try {
 			trigger({
 				params: {
@@ -29,12 +30,11 @@ const useGetBfList = () => {
 				},
 			});
 		} catch (e) {
-			// Toast.error(e?.message);
+			Toast.error(getApiErrorString(e?.data));
 		}
-	};
+	}, [trigger, vendor_id]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchList(); }, []);
+	useEffect(() => { fetchList(); }, [fetchList]);
 
 	const getFinanceList = () => {
 		fetchList();
