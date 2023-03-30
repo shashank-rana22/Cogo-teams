@@ -27,7 +27,7 @@ export const STATUS_MAPPING = {
 	},
 };
 
-export const REQUEST_COLUMNS = ({ refetch = () => {} }) => [
+export const getRequestColumns = ({ refetch = () => {} }) => [
 	{
 		Header   : 'Serial ID',
 		key      : 'serial_id',

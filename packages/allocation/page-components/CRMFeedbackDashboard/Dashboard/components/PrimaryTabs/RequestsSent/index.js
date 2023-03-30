@@ -5,7 +5,7 @@ import useRequestTableData from '../../../../hooks/useRequestTableData';
 import Filters from '../../commons/Filters';
 import Statistics from '../../commons/Statistics';
 
-import { REQUEST_COLUMNS } from './get-request-columns';
+import { getRequestColumns } from './get-request-columns';
 import styles from './styles.module.css';
 
 function RequestsSent({ activeTab = '' }) {
@@ -21,7 +21,7 @@ function RequestsSent({ activeTab = '' }) {
 
 	const { page, page_limit, total_count } = paginationData;
 
-	const columns = REQUEST_COLUMNS({
+	const columns = getRequestColumns({
 		router,
 	});
 

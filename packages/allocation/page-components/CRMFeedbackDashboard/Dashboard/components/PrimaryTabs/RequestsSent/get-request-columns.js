@@ -28,7 +28,7 @@ function computeStatus({ statuses = '' }) {
 	};
 }
 
-export const REQUEST_COLUMNS = ({
+export const getRequestColumns = ({
 	router,
 }) => [
 	{
