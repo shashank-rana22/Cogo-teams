@@ -9,23 +9,17 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 		Header: (
 			<div className={styles.container}>
 				<div className={styles.item}>NAME</div>
-
-				<SortComponent
-					value="user"
-					sortFilter={sortFilter}
-					setSortFilter={setSortFilter}
-				/>
 			</div>
 		),
 		id       : 'user',
-		accessor : ({ user = '' }) => <section>{user}</section>,
+		accessor : ({ user = {} }) => <section>{user.name}</section>,
 	},
 
 	{
 		Header   : <div>PASSED/FAILED</div>,
 		id       : 'passed_failed',
-		accessor : ({ result = '' }) => (
-			<section>{startCase(result) || '-'}</section>
+		accessor : ({ result_status = '' }) => (
+			<section>{startCase(result_status) || '-'}</section>
 		),
 	},
 	{
@@ -34,18 +28,18 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 				<div className={styles.item}>SCORE</div>
 
 				<SortComponent
-					value="score_achieved"
+					value="final_score"
 					sortFilter={sortFilter}
 					setSortFilter={setSortFilter}
 				/>
 			</div>
 		),
 		id       : 'score_achieved',
-		accessor : ({ score_achieved = '', total_score = '' }) => (
+		accessor : ({ final_score = '', test = {} }) => (
 			<section>
-				{Number(score_achieved).toFixed(2) || '0'}
+				{Number(final_score).toFixed(2) || '0'}
 				/
-				{Number(total_score).toFixed(2) || '0'}
+				{Number(test.total_marks).toFixed(2) || '0'}
 			</section>
 		),
 	},
@@ -99,15 +93,15 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 				<div className={styles.item}>ATTEMPTED ON</div>
 
 				<SortComponent
-					value="attempted_on"
+					value="created_at"
 					sortFilter={sortFilter}
 					setSortFilter={setSortFilter}
 				/>
 			</div>
 		),
 		id       : 'attempted_on',
-		accessor : ({ attempted_on = '' }) => (
-			<section>{format(attempted_on, 'dd MMM yyyy hh:mm a')}</section>
+		accessor : ({ created_at = '' }) => (
+			<section>{format(created_at, 'dd MMM yyyy hh:mm a')}</section>
 		),
 	},
 ];

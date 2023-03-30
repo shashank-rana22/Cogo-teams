@@ -18,11 +18,9 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 		appeared: {
 			url     : '/list_admin_student_wise_test_result',
 			payload : {
-				test_id,
-				sort_by     : sortBy,
-				sort_type   : sortType,
-				filters     : { final_result: filter },
-				search_term : query,
+				sort_by   : sortBy,
+				sort_type : sortType,
+				filters   : { test_id, q: query },
 				...params,
 			},
 			title: 'Appeared',
