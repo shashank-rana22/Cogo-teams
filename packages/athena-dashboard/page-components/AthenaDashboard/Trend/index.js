@@ -1,11 +1,11 @@
 import { Select, Input, Checkbox, Button } from '@cogoport/components';
 import { RadioGroupController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import countryname_value from '../../../constants/country-name-value';
 import useTrendSearch from '../hooks/useTrendSearch';
 
+import controls from './controls';
 import styles from './styles.module.css';
 
 function Trends() {
@@ -23,18 +23,8 @@ function Trends() {
 		getReport,
 	} = useTrendSearch();
 
-	const trade_direction = [
-		{ value: 'import', label: 'Import' },
-		{ value: 'export', label: 'Export' },
-	];
-
-	const hs_code = [
-		{ label: 'All', value: 'all' },
-		{ label: 'Select Codes Below', value: 'select_codes_value' },
-	];
-
 	return (
-		<div className={styles.wholepage}>
+		<div className={styles.whole_page}>
 			<div className={styles.header}>
 				<div>
 					Country/Region
@@ -48,32 +38,25 @@ function Trends() {
 						className={styles.multiselect}
 					/>
 				</div>
-				<div>
-					<div style={{ marginLeft: '10px' }}>
-						Trade Direction
-					</div>
-					<div>
-						<RadioGroupController
-							name="shipment_type"
-							options={trade_direction}
-							control={control}
-							style={{ padding: '0px' }}
-						/>
-					</div>
-				</div>
-				<div>
-					<div style={{ marginLeft: '10px' }}>
-						HS Codes
-					</div>
-					<div>
-						<RadioGroupController
-							name="hs_codes"
-							options={hs_code}
-							control={control}
-							style={{ padding: '0px' }}
-						/>
-					</div>
-				</div>
+				{controls.map((Item) => {
+					const ele = { ...Item };
+					return (
+						<div>
+							<div style={{ marginLeft: '10px' }}>
+								{ele.label}
+							</div>
+							<div>
+								<RadioGroupController
+									{...ele}
+									name={ele.name}
+									options={ele.options}
+									control={control}
+									style={{ padding: '0px' }}
+								/>
+							</div>
+						</div>
+					);
+				})}
 			</div>
 
 			<div className={styles.search_container}>
@@ -87,9 +70,7 @@ function Trends() {
 					className={styles.button}
 					size="md"
 					themeType="secondary"
-					onClick={() => {
-						handleSubmit(handleClick());
-					}}
+					onClick={handleClick}
 					disabled={loading}
 					style={{ border: 'None' }}
 				>
@@ -99,44 +80,40 @@ function Trends() {
 
 				</Button>
 			</div>
-			<div className={styles.rectdiv}>
+			<div className={styles.rect_div}>
 				{
 				!isEmpty(hscodeArr) ? (
 
-					<div className={styles.displayrect}>
-						<div className={styles.selectedtext} id="selectedhscode">
+					<div className={styles.display_rect}>
+						<div className={styles.selected_text}>
 							Selected HS Codes
 						</div>
-						<div className={styles.displayselectedcode}>
+						<div className={styles.display_selected_code}>
 							{
 							((hscodeArr || []).map((Item) => (
 								<div className={styles.individual}>
-									<div className={styles.individualtext}>
+									<div className={styles.individual_text}>
 										{Item}
 									</div>
 								</div>
 							)))
 						}
 						</div>
-						<div className={styles.buttongroup}>
+						<div className={styles.button_group}>
 							<div>
 								<Button
 									size="md"
 									themeType="primary"
-									id="buildreport"
-									className={styles.buildreportbutton}
-									onClick={() => {
-										getReport();
-									}}
+									className={styles.build_report_button}
+									onClick={handleSubmit(getReport)}
 								>
 									Build Report
 								</Button>
 							</div>
 							<div>
 								<Button
-									className={styles.clearall}
+									className={styles.clearAll}
 									themeType="secondary"
-									id="clearall"
 									onClick={() => { setHscodeArr([]); setResponsevalue([]); }}
 									style={{ border: 'None', backgroundColor: 'transparent', paddingTop: '0px' }}
 								>
@@ -148,8 +125,8 @@ function Trends() {
 					</div>
 
 				) : (
-					<div className={styles.textrect}>
-						<p id="hidetext">Select HS Codes for your report below. Your selected codes will show up here.</p>
+					<div className={styles.text_rect}>
+						Select HS Codes for your report below. Your selected codes will show up here.
 					</div>
 				)
 			}
@@ -160,7 +137,7 @@ function Trends() {
 					{
 					((responsevalue || []).map((Item) => (
 						<div>
-							<div className={styles.setcssoutput}>
+							<div className={styles.set_css_output}>
 								<div className={styles.checkbox}>
 									<Checkbox
 										key={Item.hs_code}

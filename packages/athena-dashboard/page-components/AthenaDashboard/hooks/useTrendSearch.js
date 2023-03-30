@@ -4,14 +4,18 @@ import { useAthenaRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-const useTrendSearch = () => {
+const useTrendSearch = (item = {}) => {
 	const router = useRouter();
 	const [searchValue, setSearchValue] = useState('');
 	const [responsevalue, setResponsevalue] = useState([]);
 	const [hscodeArr, setHscodeArr] = useState([]);
-	const [shipmentType, setShipmentType] = useState(['import']);
 
-	const formProps = useForm();
+	const formProps = useForm({
+		defaultValues: {
+			trade_direction : item.trade_direction || 'import',
+			hs_code         : item.hs_code || 'select_codes_value',
+		},
+	});
 
 	const { control, handleSubmit } = formProps;
 
@@ -20,8 +24,7 @@ const useTrendSearch = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const handleClick = async (formValues) => {
-		console.log(formValues);
+	const handleClick = async () => {
 		setHscodeArr([]);
 		await trigger({
 			data: {
@@ -36,9 +39,9 @@ const useTrendSearch = () => {
 		}
 	}, [responseData]);
 
-	const getReport = () => {
-		if (shipmentType && hscodeArr) {
-			router.push(`/athena-dashboard/report?shipment_type=${shipmentType}&hscodes=${hscodeArr}`, `/athena-dashboard/report?shipment_type=${shipmentType}&hscodes=${hscodeArr}`);
+	const getReport = (formValues) => {
+		if (formValues.trade_direction && hscodeArr) {
+			router.push(`/athena-dashboard/report?shipment_type=${formValues.trade_direction}&hscodes=${hscodeArr}`, `/athena-dashboard/report?shipment_type=${formValues.trade_direction}&hscodes=${hscodeArr}`);
 		}
 	};
 

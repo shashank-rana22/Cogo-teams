@@ -1,4 +1,4 @@
-.wholepage{
+.whole_page{
     margin-top: 18px;
 }
 .multiselect{
@@ -19,13 +19,13 @@
     background-color: white;
     margin-top: 20px;
 }
-.rectdiv{
+.rect_div{
     min-height: 208px;
     background-color: #f9f9f9;
     text-align: center;
     display: flex;
 }
-.textrect{
+.text_rect{
     padding-top: 90px;
     margin-left: 300px;
     height: 10px;
@@ -45,19 +45,19 @@
     margin-top: 10px;
     margin-left: 30px;
 }
-.setcssoutput{
+.set_css_output{
     display:flex;
 }
-.buildreportbutton{
+.build_report_button{
     margin-top: 20px;
 }
-.clearall{
+.clearAll{
     margin-top: 25px;
     background-color: transparent;
     border: None;
     cursor: pointer;
 }
-.selectedtext{
+.selected_text{
     margin-top: 20px;
     text-align: left;
 }
@@ -65,14 +65,14 @@
     display: flex;
 }
 
-.buttongroup{
+.button_group{
     display: flex;
 }
-.displayrect{
+.display_rect{
     display: block;
     margin-left: 50px;
 }
-.displayselectedcode{
+.display_selected_code{
     display: flex;
     margin-top: 20px;
     flex-wrap: wrap;
@@ -86,6 +86,6 @@
     text-align: center;
     margin-top: 4px;
 }
-.individualtext{
+.individual_text{
     margin-top: 10px;
 }
