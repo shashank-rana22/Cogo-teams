@@ -21,8 +21,6 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		vendorId:vendorID, businessName:vendorName, id:expenseConfigurationId,
 		category:expenseCategory,
 		subCategory:expenseSubCategory,
-		// id:vendorId,
-		// bank_details:bankDetails = [],
 	} = rowData || {};
 
 	const [addressData, setAddressData] = useState<AddressInterface>({});
@@ -73,18 +71,13 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 				price               : lineItem?.amount_before_tax,
 				name                : lineItem?.itemName,
 				code,
-				// code                : 'ALFTL',
 				serviceName,
-				// serviceName         : 'overheads',
-				quantity            : '2', // ?????????
+				quantity            : '1',
 				priceInBillCurrency : invoiceCurrency,
 				discount            : 0,
 				productCode,
-				// productCode         : 'ALFTL0027',
-				hsnCode             : null, // ?????????
 				taxPercent          : JSON.parse(lineItem?.tax || '{}')?.taxPercent,
-				// exchangeRate        : null,
-				exchangeRate        : 1, // temporarily
+				exchangeRate        : 1,
 				currencyCode        : invoiceCurrency,
 				lineItemAdditional  : {
 					taxPercent : JSON.parse(lineItem?.tax || '{}')?.taxPercent,
@@ -110,25 +103,6 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 
 	useEffect(() => {
 		if (addresses?.length > 0) {
-			// picking single address from entity data that matches to branch address
-
-			// addresses.forEach((address) => {
-			// 	const { city_id:cityId } = address || {};
-
-			// 	if (cityId === branchId) {
-			// 		setAddressData({
-			// 			pincode     : address?.pin_code,
-			// 			address     : address?.address,
-			// 			cityName    : address?.city?.name,
-			// 			countryName : address?.country?.name,
-			// 			countryCode : address?.country?.country_code,
-			// 			countryId   : address?.country_id,
-			// 			taxNumber   : address?.gst_number,
-			// 			branchId    : address?.city_id,
-			// 		});
-			// 	}
-			// });
-
 			const singleAddress = addresses?.[0];
 			if (singleAddress) {
 				setAddressData({
@@ -155,6 +129,8 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		kyc_status:kycStatus,
 		registration_type:registrationType,
 		bank_details:bankDetails,
+		pincode,
+		city_name:cityName,
 	} = vendorData || {};
 
 	const [{ data:responseData, loading }, trigger] = useRequestBf(
@@ -180,9 +156,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 				jobSource   : 'OVERHEAD',
 				jobType     : 'EXPENSE',
 				referenceId : '',
-				// transactionDate : formatDate(transactionDate, 'yyyy-MM-dd', {}, false),
-
-				jobDetails: {
+				jobDetails  : {
 					vendorDetails: {
 						organizationId       : vendorID,
 						organizationName     : vendorName,
@@ -220,20 +194,17 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 					isTaxApplicable      : true,
 					isSez                : false,
 					organizationName     : nameTradeParty,
-					pincode              : 123456, // should come from trade party
-					address              : 'D-296,JJ', // should come from trade party
-					cityName             : '', // ??// should come from trade party
+					pincode,
+					address              : cityName,
+					cityName,
 					supplyAgent          : nameTradeParty,
-					zone                 : 'NORTH', // ??// should come from trade party
+					zone                 : 'EAST',
 					countryName          : countryNameTradeParty,
 					countryCode          : countryCodeTradeParty,
 					countryId            : countryIdTradeParty,
 					registrationNumber   : registrationType === 'pan' ? registrationNumberTradeParty : null,
 					taxNumber            : registrationType === 'tax' ? registrationNumberTradeParty : null,
-					// corporateIdentityNumber : '', // ??
-					tdsRate              : tdsTradeParty || 0,
-					// logoUrl              : '', // ??
-					// signatureUrl         : '', // ??
+					tdsRate              : tdsTradeParty || 1,
 					bankDetail           : {
 						bankName,
 						beneficiaryName: bankName,
@@ -264,22 +235,21 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 				},
 				serviceProviderDetail: { // vendor
 					entityCode,
-					entityCodeId            : vendorCogoEntityId,
-					organizationId          : vendorID,
-					organizationSerialId    : vendorSid,
-					isSez                   : false,
-					organizationName        : vendorBusinessName,
-					businessName            : vendorBusinessName,
-					pincode                 : '', // ??????????
-					address                 : '', // ??????????
-					cityName                : '', // ??????????
-					countryName             : '', // ??????????
-					countryCode             : '', // ??????????
-					countryId               : vendorCountryId,
-					registrationNumber      : vendorRegistrationNumber,
-					taxNumber               : vendorRegistrationNumber,
-					corporateIdentityNumber : '', // ????
-					tdsRate                 : '', // ????
+					entityCodeId         : vendorCogoEntityId,
+					organizationId       : vendorID,
+					organizationSerialId : vendorSid,
+					isSez                : false,
+					organizationName     : vendorBusinessName,
+					businessName         : vendorBusinessName,
+					pincode,
+					address              : cityName,
+					cityName,
+					countryName          : countryNameTradeParty,
+					countryCode          : countryCodeTradeParty,
+					countryId            : vendorCountryId,
+					registrationNumber   : vendorRegistrationNumber,
+					taxNumber            : vendorRegistrationNumber,
+					tdsRate              : tdsTradeParty || 1,
 				},
 				lineItems: lineItemsData,
 			},

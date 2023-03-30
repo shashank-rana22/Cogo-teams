@@ -4,7 +4,6 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 import { formatDate } from '../../../commons/utils/formatDate';
-// import getPayload from '../utils/getPayload';
 
 interface AddressInterface {
 	pincode?:number | string,
@@ -42,6 +41,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		lineItemsList,
 		tradeParty,
 	} = formData || {};
+
 	const {
 		entity_code:entityCodeTradeParty,
 		cogo_entity_id:entityIdTradeParty,
@@ -70,18 +70,13 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 				price               : lineItem?.amount_before_tax,
 				name                : lineItem?.itemName,
 				code,
-				// code                : 'ALFTL',
 				serviceName,
-				// serviceName         : 'overheads',
-				quantity            : '2', // ?????????
+				quantity            : '1',
 				priceInBillCurrency : invoiceCurrency,
 				discount            : 0,
 				productCode,
-				// productCode         : 'ALFTL0027',
-				hsnCode             : null, // ?????????
 				taxPercent          : JSON.parse(lineItem?.tax || '{}')?.taxPercent,
-				// exchangeRate        : null,
-				exchangeRate        : 1, // temporarily
+				exchangeRate        : 1,
 				currencyCode        : invoiceCurrency,
 				lineItemAdditional  : {
 					taxPercent : JSON.parse(lineItem?.tax || '{}')?.taxPercent,
@@ -109,25 +104,6 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 
 	useEffect(() => {
 		if (addresses?.length > 0) {
-			// picking single address from entity data that matches to branch address
-
-			// addresses.forEach((address:any) => {
-			// 	const { city_id:cityId } = address || {};
-
-			// 	if (cityId === branchId) {
-			// 		setAddressData({
-			// 			pincode     : address?.pin_code,
-			// 			address     : address?.address,
-			// 			cityName    : address?.city?.name,
-			// 			countryName : address?.country?.name,
-			// 			countryCode : address?.country?.country_code,
-			// 			countryId   : address?.country_id,
-			// 			taxNumber   : address?.gst_number,
-			// 			branchId    : address?.city_id,
-			// 		});
-			// 	}
-			// });
-
 			const singleAddress = addresses?.[0];
 			if (singleAddress) {
 				setAddressData({
@@ -154,6 +130,8 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		registration_type:registrationType,
 		id:vendorId,
 		bank_details:bankDetails = [],
+		pincode,
+		city_name:cityName,
 	} = vendorData || {};
 
 	const {
@@ -217,18 +195,17 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					isTaxApplicable      : true,
 					isSez                : false,
 					organizationName     : nameTradeParty,
-					pincode              : 123456, // should come from trade party
-					address              : 'D-296,JJ', // should come from trade party
-					cityName             : '', // ??// should come from trade party
+					pincode,
+					address              : cityName,
+					cityName,
 					supplyAgent          : nameTradeParty,
-					zone                 : 'NORTH', // ??// should come from trade party
+					zone                 : 'EAST',
 					countryName          : countryNameTradeParty,
 					countryCode          : countryCodeTradeParty,
 					countryId            : countryIdTradeParty,
 					registrationNumber   : registrationType === 'pan' ? registrationNumberTradeParty : null,
 					taxNumber            : registrationType === 'tax' ? registrationNumberTradeParty : null,
-					// corporateIdentityNumber : '', // ??
-					tdsRate              : tdsTradeParty || 0,
+					tdsRate              : tdsTradeParty || 1,
 					bankDetail           : {
 						bankName,
 						beneficiaryName: bankName,
@@ -259,22 +236,21 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 				},
 				serviceProviderDetail: { // vendor
 					entityCode,
-					entityCodeId            : vendorCogoEntityId,
-					organizationId          : vendorId,
-					organizationSerialId    : vendorSid,
-					isSez                   : false,
-					organizationName        : vendorBusinessName,
-					businessName            : vendorBusinessName,
-					pincode                 : '', // ??????????
-					address                 : '', // ??????????
-					cityName                : '', // ??????????
-					countryName             : '', // ??????????
-					countryCode             : '', // ??????????
-					countryId               : vendorCountryId,
-					registrationNumber      : vendorRegistrationNumber,
-					taxNumber               : vendorRegistrationNumber,
-					corporateIdentityNumber : '', // ????
-					tdsRate                 : '', // ????
+					entityCodeId         : vendorCogoEntityId,
+					organizationId       : vendorId,
+					organizationSerialId : vendorSid,
+					isSez                : false,
+					organizationName     : vendorBusinessName,
+					businessName         : vendorBusinessName,
+					pincode,
+					address              : cityName,
+					cityName,
+					countryName          : countryNameTradeParty,
+					countryCode          : countryCodeTradeParty,
+					countryId            : vendorCountryId,
+					registrationNumber   : vendorRegistrationNumber,
+					taxNumber            : vendorRegistrationNumber,
+					tdsRate              : tdsTradeParty || 1,
 				},
 				lineItems: lineItemsData,
 			},
