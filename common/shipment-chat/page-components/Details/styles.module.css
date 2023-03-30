@@ -17,20 +17,7 @@
 	background: #F8F2E7;
 	border-top: 1px solid #F2F2F2;
 	border-radius: 4px;
-
-	.primary.text {
-		color: black !important;
-		font-weight: 400 !important;
-		text-transform: none !important;
-		padding: 4px !important;
-		:hover {
-			background: #e0e0e0 !important;
-		}
-	}
-
-	.file-upload-progress-root {
-		display: none !important;
-	}
+	padding: 8px 0px 4px 0px;
 }
 
 .icon_wrap {
@@ -79,7 +66,6 @@
 		.ui_text_area_control {
 			background-color: #F8F2E7;
 			align-items: center;
-			padding: 12px 0px 0px 8px;
 			color: black;
 		}
 	}

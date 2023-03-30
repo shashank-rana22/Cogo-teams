@@ -35,6 +35,7 @@ function Details({
 	const [textContent, setTextContent] = useState('');
 	const [showImpMsg, setShowImpMsg] = useState(false);
 	const [selectedFile, setSelectedFile] = useState([]);
+	const [rows, setRows] = useState(1);
 
 	const { data, loadingChannel } = get;
 	const { channelData, primaryService } = data || {};
@@ -72,6 +73,21 @@ function Details({
 	if (activeId !== id) {
 		return null;
 	}
+
+	const contentData = formValues?.message?.split('\n').length;
+	const handleClick = (e) => {
+		if (e.keyCode === 13 && e.shiftKey && rows < 5) {
+			setRows(contentData + 1);
+		}
+		if (e.keyCode === 13 && !e.shiftKey) {
+			onCreate();
+			reset();
+			setRows(1);
+		}
+		if (contentData > 1 && (e.keyCode === 8 || e.keyCode === 46)) {
+			setRows(contentData - 1);
+		}
+	};
 
 	return (
 		<div className={styles.container}>
@@ -141,6 +157,8 @@ function Details({
 							className={styles.text_area}
 							placeholder="Type your message here...."
 							value={textContent}
+							onKeyDown={(e) => handleClick(e)}
+							rows={rows}
 							onChange={(val) => {
 								setTextContent(val);
 							}}
