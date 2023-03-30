@@ -1,17 +1,24 @@
-import { Tooltip, Button } from '@cogoport/components';
-import { IcMEdit, IcMDelete, IcMOverflowDot } from '@cogoport/icons-react';
+import { Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import getCorrectAnswers from '../../utils/getCorrectAnswers';
 import getCorrectAnswersCombined from '../../utils/getCorrectAnswersCombined';
+import ButtonsComponent from '../ButtonsComponent';
 import CaseAnswerKey from '../CaseAnswerKey';
 import CaseAnswerType from '../CaseAnswerType';
 import CaseQuestion from '../CaseQuestion';
 
 import styles from './styles.module.css';
 
-const useGetTableColumns = ({ allKeysSaved, handleEditQuestion, loading, caseStudyLoading, mode, setShowModal }) => {
+const useGetTableColumns = ({
+	setAllKeysSaved,
+	getTestQuestionTest,
+	questionSetId,
+	setEditDetails,
+	allKeysSaved,
+	mode,
+}) => {
 	const [caseToShow, setCaseToShow] = useState('');
 
 	return [
@@ -106,61 +113,15 @@ const useGetTableColumns = ({ allKeysSaved, handleEditQuestion, loading, caseStu
 			Header   : '',
 			id       : 'options',
 			accessor : (item) => (
-				<section>
-					<div
-						style={{
-							width  : 'fit-content',
-							cursor : 'default',
-						}}
-					>
-						<Tooltip
-							className={styles.tooltip_pad}
-							content={(
-								<div className={styles.options}>
-									<Button
-										type="button"
-										onClick={() => handleEditQuestion({ item })}
-										themeType="secondary"
-										className={styles.btn}
-										disabled={!allKeysSaved || loading || caseStudyLoading}
-									>
-										<IcMEdit />
-										<div
-											style={{ marginLeft: '8px' }}
-										>
-											{mode !== 'view' && item.question_type === 'case_study'
-												? 'Edit' : 'View'}
-
-										</div>
-									</Button>
-
-									{mode !== 'view' ? (
-										<Button
-											type="button"
-											themeType="accent"
-											className={styles.btn}
-											disabled={!allKeysSaved}
-											loading={loading || caseStudyLoading}
-											onClick={() => {
-												setShowModal(item);
-											}}
-										>
-											<IcMDelete />
-											<div style={{ marginLeft: '8px' }}>
-												Delete
-											</div>
-										</Button>
-									) : null}
-								</div>
-							)}
-							trigger="click"
-							placement="left"
-							interactive="true"
-						>
-							<IcMOverflowDot style={{ cursor: 'pointer' }} />
-						</Tooltip>
-					</div>
-				</section>
+				<ButtonsComponent
+					item={item}
+					setAllKeysSaved={setAllKeysSaved}
+					getTestQuestionTest={getTestQuestionTest}
+					questionSetId={questionSetId}
+					setEditDetails={setEditDetails}
+					allKeysSaved={allKeysSaved}
+					mode={mode}
+				/>
 			),
 		},
 	];

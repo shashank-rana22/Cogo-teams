@@ -45,7 +45,7 @@ function CreateNewTest({ control, errors, data, setValue }) {
 							<div className={styles.control_container}>
 								<div className={`${styles.label}`}>
 									{label}
-									<sup style={{ color: 'red' }}>*</sup>
+									<sup className={styles.sup}>*</sup>
 								</div>
 								<div className={styles.control_type}>
 
@@ -76,7 +76,7 @@ function CreateNewTest({ control, errors, data, setValue }) {
 						<div className={styles.control_container_two}>
 							<div className={styles.label}>
 								{label}
-								<sup style={{ color: 'red' }}>*</sup>
+								<sup className={styles.sup}>*</sup>
 							</div>
 
 							<div className={styles.control}>

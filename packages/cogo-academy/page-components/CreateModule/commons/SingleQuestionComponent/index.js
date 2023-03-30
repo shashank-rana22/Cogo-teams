@@ -118,7 +118,7 @@ function SingleQuestionComponent({
 				<TextAreaController control={control} {...controls[4]} name={`${name}.${index}.${controls[4].name}`} />
 			</div>
 
-			{type === 'case_study' && !isNewQuestion && mode !== 'view' ? (
+			{type === 'case_study' && mode !== 'view' ? (
 				<div className={styles.button_container}>
 					<Button
 						loading={loading}
@@ -138,7 +138,7 @@ function SingleQuestionComponent({
 							size="sm"
 							type="button"
 						>
-							{field.isNew ? 'Save' : 'Edit'}
+							{field?.isNew ? 'Save' : 'Edit'}
 						</Button>
 					) : null}
 				</div>
