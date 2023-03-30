@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
@@ -12,7 +13,7 @@ function useListFaqQuestions({
 
 	const [{ data, loading = false }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list_faq_questions',
+		url    : '/list_faq_questions',
 	}, { manual: true });
 
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -38,10 +39,12 @@ function useListFaqQuestions({
 						faq_tags_data_required   : true,
 						answers_data_required    : true,
 						faq_topics_data_required : true,
+						is_admin_view            : true,
+
 					},
 				});
 			} catch (error) {
-				console.log('error ::: ', error);
+				Toast.error(error?.message);
 			}
 		},
 		[page, query, sortType, topicId, trigger],

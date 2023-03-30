@@ -55,7 +55,7 @@ function CreateForm(props) {
 	}, [general.query?.id]);
 
 	useEffect(() => {
-		setValue('name', data?.name);
+		setValue('name', data?.display_name);
 		setValue('description', data?.description);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loading]);

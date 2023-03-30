@@ -15,6 +15,7 @@ const useGetTopicTagList = () => {
 		params : {
 			page_limit               : 100000,
 			pagination_data_required : false,
+			is_admin_view            : true,
 		},
 	}, { manual: true });
 
