@@ -63,11 +63,10 @@ function useListTemplate() {
 		}
 	};
 	const refetch = () => {
+		setInfiniteList((p) => ({ ...p, list: [] }));
 		if (pagination === 1) {
-			setInfiniteList((p) => ({ ...p, list: [] }));
 			fetchListTemplate();
 		} else {
-			setInfiniteList((p) => ({ ...p, list: [] }));
 			setPagination(1);
 		}
 	};
