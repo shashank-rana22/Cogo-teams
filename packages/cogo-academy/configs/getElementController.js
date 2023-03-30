@@ -7,7 +7,6 @@ import {
 	RadioGroupController,
 	TextAreaController,
 	MultiselectController,
-	InputGroupController,
 } from '@cogoport/forms';
 
 const ELEMENT_MAPPING = {
@@ -19,7 +18,6 @@ const ELEMENT_MAPPING = {
 	radioGroup     : RadioGroupController,
 	textarea       : TextAreaController,
 	'multi-select' : MultiselectController,
-	inputgroup     : InputGroupController,
 	number         : InputController,
 };
 

@@ -30,7 +30,11 @@ function CreateQuestion({
 		deleteQuestion,
 		updateCaseStudyLoading,
 		onSubmit,
-		...rest
+		getValues,
+		control,
+		handleSubmit = () => {},
+		formState: { errors = {} },
+		register,
 	} = useCreateQuestion({
 		item,
 		setSavedQuestionDetails,
@@ -41,14 +45,6 @@ function CreateQuestion({
 		getTestQuestionTest,
 		setAllKeysSaved,
 	});
-
-	const {
-		getValues,
-		control,
-		handleSubmit = () => {},
-		formState: { errors = {} },
-		register,
-	} = rest || {};
 
 	return (
 		<form key={JSON.stringify(getValues())} onSubmit={handleSubmit(onSubmit)} className={styles.container}>

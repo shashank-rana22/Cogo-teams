@@ -57,7 +57,7 @@ function AddedQuestions(props) {
 					<EmptyState
 						text="There are no questions right now. Start with adding a question....."
 						btn_text="Add Question"
-						onClick={onClickFunction({ type: 'add_question' })}
+						onClick={() => onClickFunction({ type: 'add_question' })}
 					/>
 				);
 			} if (activeList === 'draft') {
@@ -65,7 +65,7 @@ function AddedQuestions(props) {
 					<EmptyState
 						text="There are no drafts right now."
 						btn_text="Add Question"
-						onClick={onClickFunction({ type: 'add_question' })}
+						onClick={() => onClickFunction({ type: 'add_question' })}
 					/>
 				);
 			} if (activeList === 'inactive') {
@@ -126,7 +126,7 @@ function AddedQuestions(props) {
 						<Button
 							type="button"
 							style={{ marginLeft: 8 }}
-							onClick={onClickFunction({ type: item })}
+							onClick={() => onClickFunction({ type: item })}
 							themeType={themeType}
 						>
 							{label}
