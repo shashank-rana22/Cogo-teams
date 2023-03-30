@@ -55,7 +55,7 @@ function Filters({
 		params      : {
 			filters: {
 				status               : 'active',
-				reporting_manager_id : pageFilters?.kam_manager,
+				reporting_manager_id : pageFilters?.manager_id || undefined,
 			},
 		},
 	});

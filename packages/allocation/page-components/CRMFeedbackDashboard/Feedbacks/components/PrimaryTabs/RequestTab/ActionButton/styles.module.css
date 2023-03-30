@@ -1,15 +1,15 @@
 .button {
-  margin-top: 12px;
-  margin-bottom: 12px;
-  cursor: pointer;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	cursor: pointer;
 }
 
 .modal_container {
-  @media (max-width: 768px) {
-    width: 300px !important;
-  }
+	@media (max-width: 768px) {
+		width: 300px !important;
+	}
 }
 
 .submit_button {
-  margin-left: 8px;
+	margin-left: 8px;
 }
