@@ -28,12 +28,6 @@
 			font-weight: 700;
 		}
 	}
-	
-	/* :global {
-		.ui_inner::after {
-			background-color: var(--color-accent-orange-2) !important;
-		}
-	} */
 
 	& > div:nth-child(2) > label > span::after{
 		background-color: var(--color-accent-orange-2) !important;

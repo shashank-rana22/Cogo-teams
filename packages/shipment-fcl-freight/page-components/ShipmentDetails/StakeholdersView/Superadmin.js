@@ -1,15 +1,15 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import Documents from '@cogoport/ocean-modules/Documents';
+import Tracking from '@cogoport/ocean-modules/Tracking';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import React, { useContext, useState } from 'react';
 
-import Documents from '../../../common/Documents';
 import PocSop from '../../../common/PocSop';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Timeline from '../../../common/TimeLine';
-import Tracking from '../../../common/Tracking';
 
 import styles from './styles.module.css';
 
