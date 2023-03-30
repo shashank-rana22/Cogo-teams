@@ -3,6 +3,7 @@ import {
 } from '@cogoport/components';
 import { InputController, MultiselectController, AsyncSelectController } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import columns from '../../../constants/column-mapping';
@@ -152,7 +153,7 @@ function Shipment() {
 
 					</div>
 
-					{answer.length !== 0 && (
+					{!isEmpty(answer) && (
 						<div className={styles.table_div}>
 							<Table
 								id="hellotable"
@@ -164,7 +165,7 @@ function Shipment() {
 
 					) }
 
-					{ (answer.length === 0 && !loading) && (
+					{ (isEmpty(answer) && !loading) && (
 						<div>
 							<EmptyState
 								height={500}

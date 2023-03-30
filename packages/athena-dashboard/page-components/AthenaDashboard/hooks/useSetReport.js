@@ -23,8 +23,8 @@ const useSetReport = () => {
 		method : 'post',
 		data   : {
 			filters: {
-				hs_code       : hscodes !== undefined ? hscodes.split(',') : '',
-				shipment_type : shipment_type !== undefined ? shipment_type : '',
+				hs_code       : !isEmpty(hscodes) ? hscodes.split(',') : '',
+				shipment_type : !isEmpty(shipment_type) ? shipment_type : '',
 			},
 		},
 	}, { manual: false });

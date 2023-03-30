@@ -1,4 +1,5 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
+import { isEmpty } from '@cogoport/utils';
 
 const top_global_supplier_mapping = [
 	{ Header: 'Country', accessor: (item) => item.country },
@@ -67,20 +68,20 @@ const top_global_supplier_mapping = [
 			</div>
 		),
 	},
-	{ Header: 'Jan', accessor: (item) => ((item.January !== undefined) ? item.January.toLocaleString('en-IN') : 0) },
-	{ Header: 'Feb', accessor: (item) => ((item.February !== undefined) ? item.February.toLocaleString('en-IN') : 0) },
-	{ Header: 'Mar', accessor: (item) => ((item.March !== undefined) ? item.March.toLocaleString('en-IN') : 0) },
-	{ Header: 'Apr', accessor: (item) => ((item.April !== undefined) ? item.April.toLocaleString('en-IN') : 0) },
-	{ Header: 'May', accessor: (item) => ((item.May !== undefined) ? item.May.toLocaleString('en-IN') : 0) },
-	{ Header: 'Jun', accessor: (item) => ((item.June !== undefined) ? item.June.toLocaleString('en-IN') : 0) },
-	{ Header: 'July', accessor: (item) => ((item.July !== undefined) ? item.July.toLocaleString('en-IN') : 0) },
-	{ Header: 'Aug', accessor: (item) => ((item.August !== undefined) ? item.August.toLocaleString('en-IN') : 0) },
+	{ Header: 'Jan', accessor: (item) => ((!isEmpty(item.January)) ? item.January.toLocaleString('en-IN') : 0) },
+	{ Header: 'Feb', accessor: (item) => ((!isEmpty(item.February)) ? item.February.toLocaleString('en-IN') : 0) },
+	{ Header: 'Mar', accessor: (item) => ((!isEmpty(item.March)) ? item.March.toLocaleString('en-IN') : 0) },
+	{ Header: 'Apr', accessor: (item) => ((!isEmpty(item.April)) ? item.April.toLocaleString('en-IN') : 0) },
+	{ Header: 'May', accessor: (item) => ((!isEmpty(item.May)) ? item.May.toLocaleString('en-IN') : 0) },
+	{ Header: 'Jun', accessor: (item) => ((!isEmpty(item.June)) ? item.June.toLocaleString('en-IN') : 0) },
+	{ Header: 'July', accessor: (item) => ((!isEmpty(item.July)) ? item.July.toLocaleString('en-IN') : 0) },
+	{ Header: 'Aug', accessor: (item) => ((!isEmpty(item.August)) ? item.August.toLocaleString('en-IN') : 0) },
 	{
 		Header   : 'Sept',
-		accessor : (item) => ((item.September !== undefined) ? item.September.toLocaleString('en-IN') : 0),
+		accessor : (item) => ((!isEmpty(item.September)) ? item.September.toLocaleString('en-IN') : 0),
 	},
-	{ Header: 'Oct', accessor: (item) => ((item.October !== undefined) ? item.October.toLocaleString('en-IN') : 0) },
-	{ Header: 'Nov', accessor: (item) => ((item.November !== undefined) ? item.November.toLocaleString('en-IN') : 0) },
-	{ Header: 'Dec', accessor: (item) => ((item.December !== undefined) ? item.December.toLocaleString('en-IN') : 0) },
+	{ Header: 'Oct', accessor: (item) => ((!isEmpty(item.October)) ? item.October.toLocaleString('en-IN') : 0) },
+	{ Header: 'Nov', accessor: (item) => ((!isEmpty(item.November)) ? item.November.toLocaleString('en-IN') : 0) },
+	{ Header: 'Dec', accessor: (item) => ((!isEmpty(item.December)) ? item.December.toLocaleString('en-IN') : 0) },
 ];
 export default top_global_supplier_mapping;
