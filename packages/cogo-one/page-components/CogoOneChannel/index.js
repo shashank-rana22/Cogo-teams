@@ -10,6 +10,7 @@ import { ANDRIOD_APK } from '../../constants';
 import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
+import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChats from '../../hooks/useListChats';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 
@@ -54,6 +55,7 @@ function CogoOne() {
 		updateUserStatus = () => {},
 	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
 
+	const { tagOptions = [] } = useListAssignedChatTags();
 	const {
 		listData = {},
 		setActiveMessage = () => {},
@@ -158,6 +160,7 @@ function CogoOne() {
 				setModalType={setModalType}
 				modalType={modalType}
 				updatePin={updatePin}
+				tagOptions={tagOptions}
 			/>
 
 			<div className={styles.chat_details_continer}>
@@ -169,7 +172,6 @@ function CogoOne() {
 				<div
 					role="presentation"
 					className={styles.download_div}
-					// eslint-disable-next-line no-undef
 					onClick={() => window.open(ANDRIOD_APK, '_blank')}
 				>
 					<img

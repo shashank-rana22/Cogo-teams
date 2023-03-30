@@ -32,6 +32,7 @@ function MessageList({
 	modalType = '',
 	handleScroll = () => {},
 	updatePin = () => {},
+	tagOptions = [],
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	function lastMessagePreview(previewData = '') {
@@ -69,6 +70,7 @@ function MessageList({
 									setShowBotMessages={setShowBotMessages}
 									showBotMessages={showBotMessages}
 									isomniChannelAdmin={isomniChannelAdmin}
+									tagOptions={tagOptions}
 								/>
 							)
 						)}
@@ -102,8 +104,9 @@ function MessageList({
 							organization_name = '',
 							user_type = '',
 							search_user_name = '',
+							chat_tags = [],
 						} = userData || {};
-
+						const isImportant = chat_tags?.includes('important') || false;
 						const lastActive = new Date(item.new_message_sent_at);
 						const checkActiveCard = activeCardId === item?.id;
 						const searchName = search_user_name?.toLowerCase() || '';
@@ -120,8 +123,9 @@ function MessageList({
 								key={item?.id}
 								role="presentation"
 								className={cl`
-												${styles.card_container} 
-												${checkActiveCard ? styles.active_card : ''} 
+											${styles.card_container} 
+											${checkActiveCard ? styles.active_card : ''} 
+											${isImportant ? styles.important_styles : ''}
 												`}
 								onClick={() => setActiveMessage(item)}
 							>
@@ -199,6 +203,18 @@ function MessageList({
 										)}
 									</div>
 								</div>
+								{isImportant && (
+
+									<div className={styles.important_icon}>
+										<img
+											// eslint-disable-next-line max-len
+											src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg"
+											alt="important"
+											width="12px"
+										/>
+
+									</div>
+								)}
 							</div>
 						);
 					})}
