@@ -10,6 +10,7 @@ const useQuestionList = ({
 	search = '',
 	question,
 	setQuestion,
+	query_name = undefined,
 }) => {
 	const { general, profile } = useSelector((state) => ({
 		general : state.general,
@@ -55,7 +56,7 @@ const useQuestionList = ({
 							country_id,
 							cogo_entity_id    : id,
 							persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
-							q                 : query || undefined,
+							q                 : query || query_name || undefined,
 						},
 						sort_by                  : 'view_count',
 						page,
@@ -67,12 +68,15 @@ const useQuestionList = ({
 				Toast.error(error?.message);
 			}
 		},
-		[country_id, id, page, query, roleFunction, roleSubFunction, scope, topic?.id, trigger],
+		[country_id, id, page, query, query_name, roleFunction, roleSubFunction, scope, topic?.id, trigger],
 	);
 
 	useEffect(() => {
+		if (question && !query_name) {
+			return;
+		}
 		fetch();
-	}, [fetch, page, query]);
+	}, [fetch, page, query, query_name, question]);
 
 	const { list = [], ...pageData } = data || {};
 
