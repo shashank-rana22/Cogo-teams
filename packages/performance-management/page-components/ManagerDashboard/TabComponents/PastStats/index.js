@@ -43,6 +43,7 @@ function PastStats() {
 						return (
 							<Select
 								{...cntrl}
+								key={cntrl.name}
 								value={params[value]}
 								onChange={(val) => setFilter(val, value)}
 								placeholder={`Select ${value}`}

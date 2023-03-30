@@ -1,26 +1,27 @@
 .deadline_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 8px; 
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 8px;
 }
 
 .time {
-    display: flex;
-    align-items: center;
-    :global(.ui_datepicker_container){
-        width: '200px'; 
-    }
+	display: flex;
+	align-items: center;
+
+	:global(.ui_datepicker_container) {
+		width: "200px";
+	}
 }
 
 .current_deadline {
-    margin-left: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
+	margin-left: 8px;
+	font-size: 14px;
+	font-weight: 500;
 }
 
 .button_container {
-    display: flex;
+	display: flex;
 }

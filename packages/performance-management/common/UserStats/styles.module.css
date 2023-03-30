@@ -30,8 +30,8 @@
 }
 
 .performance_chart {
-	flex: 6;
 	display: flex;
+	flex: 6;
 	margin-top: 16px;
 
 	@media (max-width: 768px) {

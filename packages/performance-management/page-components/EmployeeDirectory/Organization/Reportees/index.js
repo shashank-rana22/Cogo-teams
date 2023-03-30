@@ -11,7 +11,7 @@ function Reportees({ reportees = [], params = {}, setParams = () => {} }) {
 
 			<div className={styles.container}>
 				{reportees?.map((item) => (
-					<UserCard user_data={item} params={params} setParams={setParams} />
+					<UserCard user_data={item} params={params} setParams={setParams} key={item.user_id} />
 				))}
 			</div>
 		</div>

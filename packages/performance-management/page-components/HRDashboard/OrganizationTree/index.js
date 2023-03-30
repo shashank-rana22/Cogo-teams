@@ -8,6 +8,7 @@ import useGetOrganizationTree from './useGetOrganizatioonTree';
 import UserCard from './UserCard';
 
 const scrollToSection = (elementRef) => {
+	// eslint-disable-next-line no-undef
 	window.scrollTo({
 		top      : elementRef.current.offsetTop,
 		behavior : 'smooth',

@@ -24,7 +24,7 @@ function CreatePip({ item = {}, status = '', setItem = () => {}, setDisableNext 
 		if (startDate && endDate) {
 			setDisableNext(false);
 		} else { setDisableNext(true); }
-	}, [startDate, endDate]);
+	}, [startDate, endDate, setItem, item, setDisableNext]);
 
 	return (
 		<div className={styles.container}>
@@ -71,21 +71,6 @@ function CreatePip({ item = {}, status = '', setItem = () => {}, setDisableNext 
 					onChange={setEndDate}
 					value={endDate}
 				/>
-				{/* <Checkbox
-					className={styles.checkbox}
-					label=" +1 Month"
-							// isPreviousDaysAllowed
-							// minDate={differenceInDays(date, startDate) + date}
-					checked={endCheck}
-					onChange={() => {
-						if (endCheck) {
-							setEndDate(null);
-						} else {
-							setEndDate(toDate(date).setMonth(getMonth(date) + 1));
-						}
-						setEndCheck(!endCheck);
-					}}
-				/> */}
 			</div>
 		</div>
 	);

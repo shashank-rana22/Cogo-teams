@@ -31,8 +31,8 @@
 
 .department_select {
 	display: flex;
-	justify-content: flex-start;
 	flex-wrap: wrap;
+	justify-content: flex-start;
 
 	:global(.ui_select_display_container) {
 		width: 160px;

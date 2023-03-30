@@ -22,7 +22,7 @@ function Organization({ detailsLoading }) {
 		setParams = () => {},
 	} = useOrganizationRMMapping({ partner_id, detailsLoading });
 
-	// const user = 
+	// const user =
 
 	if (loading) {
 		return (

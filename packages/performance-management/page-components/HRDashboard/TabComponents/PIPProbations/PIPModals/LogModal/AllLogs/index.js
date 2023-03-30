@@ -32,40 +32,36 @@ function AllLogs({ item = {} }) {
 					</div>
 				</div>
 			)}
-			{!loading && list?.map((object) => {
-				if (!object) {
-					return (
-						<div className={styles.empty}>
-							<EmptyState
-								flexDirection="column"
-								emptyText="No Logs Found"
-								textSize="16px"
-							/>
-						</div>
-					);
-				}
+			{!loading && isEmpty(list) && (
+				<div className={styles.empty}>
+					<EmptyState
+						flexDirection="column"
+						emptyText="No Logs Found"
+						textSize="16px"
+					/>
+				</div>
 
-				return (
-					<div className={styles.sub_container}>
-						<div className={styles.flex_container}>
-							<div className={styles.circle} />
-							<div className={styles.date}>{format(object.created_at, 'dd-MMM-yyyy')}</div>
-						</div>
+			)}
 
-						<div className={styles.content}>
-							<div>
-								{' '}
-								By
-								{' '}
-								<b>{object?.name?.name}</b>
-							</div>
-							<div className={styles.lable}>Comments:</div>
-							<div>{object?.comment}</div>
-
-						</div>
+			{!loading && (list || []).map((object) => (
+				<div className={styles.sub_container} key={object.created_at}>
+					<div className={styles.flex_container}>
+						<div className={styles.circle} />
+						<div className={styles.date}>{format(object.created_at, 'dd-MMM-yyyy')}</div>
 					</div>
-				);
-			})}
+
+					<div className={styles.content}>
+						<div>
+							{' '}
+							By
+							{' '}
+							<b>{object?.name?.name}</b>
+						</div>
+						<div className={styles.lable}>Comments:</div>
+						<div>{object?.comment}</div>
+					</div>
+				</div>
+			))}
 		</div>
 	);
 }

@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import PIPProbations from '../HRDashboard/TabComponents/PIPProbations';
 import Statistics from '../HRDashboard/TabComponents/PIPProbations/Dashboard/Statistics';
-import PendingReviews from '../HRDashboard/TabComponents/PIPProbations/PendingReviews';
 
 import styles from './styles.module.css';
 import PastStats from './TabComponents/PastStats';

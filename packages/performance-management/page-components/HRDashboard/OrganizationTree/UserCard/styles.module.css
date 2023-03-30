@@ -1,56 +1,55 @@
-
 .card_container {
-    border: 1px solid #88CAD1;
-    background: #ffffff;
-    border-radius: 4px;
-    cursor: pointer;
-    overflow: hidden;
-    margin: 8px;
+	margin: 8px;
+	overflow: hidden;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #88cad1;
+	border-radius: 4px;
+	transition: all 300ms ease-in-out;
 
-    transition: all 300ms ease-in-out;
-
-    &.loading_card {
-        filter: blur(2px);
-    }
+	&.loading_card {
+		filter: blur(2px);
+	}
 }
 
 .card_container:hover {
-    transform: scale(105%);
-    transition: all 300ms ease-in-out;
+	transition: all 300ms ease-in-out;
+	transform: scale(105%);
 }
 
 .name_card {
-    display: flex;
-    align-items: center;
-    padding: 8px;
+	display: flex;
+	align-items: center;
+	padding: 8px;
 }
 
 .clicked_user {
-    background: #FFFCE6;
+	background: #fffce6;
 }
 
 .user_info {
-    display: flex;
-    flex-direction: column;
-    margin: 0px 8px;
+	display: flex;
+	flex-direction: column;
+	margin: 0 8px;
 }
 
 .id_designation {
-    display: flex;
-    align-items: center;
-    margin-top: 8px;
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
 }
+
 .designation {
-    padding-right: 8px;
-    border-right: 1px solid #bdbdbd;
-    width: fit-content;
-    max-width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	width: fit-content;
+	max-width: 200px;
+	padding-right: 8px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	border-right: 1px solid #bdbdbd;
 }
 
 .id {
-    margin-left: 8px;
-    font-weight: 600;
+	margin-left: 8px;
+	font-weight: 600;
 }

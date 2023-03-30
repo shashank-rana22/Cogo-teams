@@ -1,5 +1,4 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 const useOrganizationRMMapping = ({ partner_id = '', detailsLoading }) => {

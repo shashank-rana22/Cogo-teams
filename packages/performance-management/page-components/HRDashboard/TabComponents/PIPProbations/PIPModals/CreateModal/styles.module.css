@@ -1,13 +1,14 @@
 .pagination {
-    display: flex;
-    margin-top: 8px;
+	display: flex;
+	margin-top: 8px;
 }
-.pip_select{
+
+.pip_select {
 	display: flex;
 	justify-content: center;
 }
 
-.pip_select_btn{
-	border: solid 1px #88CAD1;
+.pip_select_btn {
 	margin: 8px;
+	border: solid 1px #88cad1;
 }

@@ -2,7 +2,7 @@ import { Tooltip, Modal, Button, Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useIrisRequest } from '@cogoport/request';
-import { format, getYear, getMonth } from '@cogoport/utils';
+import { getYear, getMonth } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useListDepartments from '../../../hooks/useListDepartments';
@@ -139,6 +139,7 @@ function FeedbackForms() {
 								department={dept}
 								setFormsParams={setFormsParams}
 								designation={designation}
+								key={dept}
 							/>
 						))}
 				</div>

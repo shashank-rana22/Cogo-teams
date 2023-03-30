@@ -1,4 +1,4 @@
-import { Tooltip, Modal, Pill, Button, Avatar } from '@cogoport/components';
+import { Tooltip, Pill, Button, Avatar } from '@cogoport/components';
 import { IcMEmail, IcMCall } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -46,7 +46,14 @@ function EnlargedCard({ user = {}, avatarProps = {}, refetchTreeParams, loading 
 							<strong>{startCase(user?.name)}</strong>
 
 							<div className={styles.id_designation}>
-								<Tooltip placement="bottom" content={startCase(user?.designation)}>
+								<Tooltip
+									placement="bottom"
+									content={(
+										<div style={{ wordBreak: 'break-word' }}>
+											{startCase(user?.designation)}
+										</div>
+									)}
+								>
 									<div className={styles.designation}>{startCase(user?.designation)}</div>
 								</Tooltip>
 

@@ -79,11 +79,11 @@ function AddQuestions({
 
 	const showLoading = () => (
 		<div className={styles.questions}>
-			{Array(6).fill('').map((index) => (
+			{[1, 2, 3, 4, 5, 6].map((i) => (
 				<Placeholder
 					height="80px"
 					margin="0 0 8px 0"
-					key={index}
+					key={i}
 				/>
 			))}
 		</div>

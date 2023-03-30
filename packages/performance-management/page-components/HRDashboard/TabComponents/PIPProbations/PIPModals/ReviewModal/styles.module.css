@@ -1,17 +1,17 @@
-.modal_container{
-    font-size: 16px;
-    margin-left: 16px ;
+.modal_container {
+	margin-left: 16px;
+	font-size: 16px;
 }
 
-.sub_container{
-    margin: 16px 24px 0 0;
+.sub_container {
+	margin: 16px 24px 0 0;
 }
 
-.sub_heading{
-    font-weight: 500;
-    color: #828282;
+.sub_heading {
+	font-weight: 500;
+	color: #828282;
 }
 
-.label{
-    margin: 16px 32px 8px 0;
+.label {
+	margin: 16px 32px 8px 0;
 }

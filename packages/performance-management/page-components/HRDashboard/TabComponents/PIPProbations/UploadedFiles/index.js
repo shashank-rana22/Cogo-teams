@@ -2,9 +2,7 @@ import useGetColumns from '../../../../../common/Columns';
 import Filters from '../../../../../common/Filters';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
-import useListLogs from '../../../../../hooks/useListLogs';
 
-import styles from './styles.module.css';
 import useListFiles from './useListFiles';
 
 function UploadedFiles({
@@ -31,7 +29,7 @@ function UploadedFiles({
 	});
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<Filters source="uploaded_files" setParams={setParams} params={params} />
 			<UserTableData
 				columns={columns}

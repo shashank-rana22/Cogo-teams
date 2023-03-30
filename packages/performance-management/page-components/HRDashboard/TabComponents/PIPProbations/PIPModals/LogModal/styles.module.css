@@ -1,16 +1,17 @@
 .name_input {
-    div{
-        font-size: 12px;
-        color: #BDBDBD;
-    }
-    :global {
-        .ui_input_container {
-            width: 200px;
-        }
-    }
+	div {
+		font-size: 12px;
+		color: #bdbdbd;
+	}
+
+	:global {
+		.ui_input_container {
+			width: 200px;
+		}
+	}
 }
 
 .pagination {
-    display: flex;
-    margin-top: 8px;
+	display: flex;
+	margin-top: 8px;
 }

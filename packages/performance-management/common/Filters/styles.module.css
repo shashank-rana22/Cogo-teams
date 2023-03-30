@@ -1,8 +1,8 @@
 .filters_container {
 	display: flex;
-	justify-content: space-between;
 	flex-wrap: wrap;
-	
+	justify-content: space-between;
+
 	:global {
 		.ui_select_display_container {
 			width: 160px;
@@ -14,21 +14,21 @@
 	}
 }
 
-.left_container{
+.left_container {
 	display: flex;
 }
 
-.right_container{
+.right_container {
 	display: flex;
 }
 
 .department_select {
 	display: flex;
-	justify-content: flex-start;
 	flex-wrap: wrap;
+	justify-content: flex-start;
 	width: 100%;
 }
 
-.sub_container{
+.sub_container {
 	display: flex;
 }

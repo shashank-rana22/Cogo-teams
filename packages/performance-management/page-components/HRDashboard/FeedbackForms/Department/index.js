@@ -39,6 +39,7 @@ function Department({ department, setFormsParams, designation }) {
 							department  : department?.department,
 							designation : role?.designation,
 						})}
+						key={role}
 					>
 						<p className={styles.role_label}>
 							{startCase(role?.designation)}

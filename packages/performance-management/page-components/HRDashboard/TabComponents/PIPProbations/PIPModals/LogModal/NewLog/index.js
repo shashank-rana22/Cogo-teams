@@ -17,7 +17,7 @@ function NewLog({ item = {}, setItem = () => {}, setDisableNext = () => {} }) {
 	const { watch } = useForm();
 	const comments = watch('comments');
 
-	const disabledTags = useMemo(() => item.tags || [], []);
+	const disabledTags = useMemo(() => item.tags || [], [item.tags]);
 
 	const newOptions = isEmpty(disabledTags) ? options : options.map((opt) => {
 		if (disabledTags?.includes(opt.value)) {

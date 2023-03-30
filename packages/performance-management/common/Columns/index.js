@@ -221,26 +221,22 @@ const useGetColumns = ({
 			const { tags } = item;
 			const len = 3 - (tags || []).length;
 
+			const incompleteTags = Array(len).fill('').map((_, index) => index);
+
 			return (
 				(item?.log_type === 'pip' && (
 					<div className={styles.head_content}>
 						{tags?.map((val) => (
 							<Tooltip
-								content={val}
+								content={<div style={{ wordBreak: 'break-word' }}>{val}</div>}
 								placement="bottom"
+								key={val}
 							>
 								<div className={styles.green_dot} />
 							</Tooltip>
 						))}
 
-						{Array(len).fill('').map(() => (
-						// <Tooltip
-						// 	content="Email sent to Employee"
-						// 	placement="bottom"
-						// >
-							<div className={styles.dot} />
-						// </Tooltip>
-						))}
+						{(incompleteTags || []).map((i) => <div className={styles.dot} key={i} />)}
 
 					</div>
 				))

@@ -1,17 +1,16 @@
-
 .container {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 48px);
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 48px);
 }
 
 .header {
-    font-size: 28px;
-    font-weight: 600;
+	font-size: 28px;
+	font-weight: 600;
 }
 
 .organization_container {
-    flex: 1;
+	flex: 1;
 	padding-right: 12px;
 	margin-top: 16px;
 	background-color: #fff;

@@ -1,7 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 
 import DecisionModal from './DecisionModal';
-import styles from './styles.module.css';
 
 function UpdateModal({
 	modal,
@@ -22,18 +21,17 @@ function UpdateModal({
 			size="lg"
 		>
 			<Modal.Header title={`update ${item?.log_type}`} />
-			<div className={styles.upload_modal}>
-				<Modal.Body
-					style={{ maxHeight: '600px' }}
-				>
-					<DecisionModal
-						item={item}
-						setItem={setItem}
-						setDisableNext={setDisableNext}
-						type="update"
-					/>
-				</Modal.Body>
-			</div>
+			<Modal.Body
+				style={{ maxHeight: '600px' }}
+			>
+				<DecisionModal
+					item={item}
+					setItem={setItem}
+					setDisableNext={setDisableNext}
+					type="update"
+				/>
+			</Modal.Body>
+
 			<Modal.Footer>
 				<Button
 					size="md"
