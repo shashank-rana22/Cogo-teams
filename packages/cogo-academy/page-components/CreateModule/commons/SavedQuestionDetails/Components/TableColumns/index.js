@@ -73,7 +73,7 @@ const TableColumns = ({ allKeysSaved, handleEditQuestion, loading, caseStudyLoad
 								<div className={styles.flex_column}>
 									{getCorrectAnswersCombined(
 										{
-											correctOptions: (item?.answers || []).filter(
+											correctOptions: (item?.test_question_answers || []).filter(
 												(item1) => item1.is_correct,
 											),
 										} || [],
@@ -84,7 +84,7 @@ const TableColumns = ({ allKeysSaved, handleEditQuestion, loading, caseStudyLoad
 							)}
 						>
 							<div className={styles.answer_key}>
-								{getCorrectAnswers({ answers: item?.answers })}
+								{getCorrectAnswers({ answers: item?.test_question_answers })}
 							</div>
 						</Tooltip>
 					) : (
