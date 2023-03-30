@@ -19,7 +19,6 @@ importers:
       postcss-flexbugs-fixes: ^5.0.2
       postcss-nested: ^6.0.1
       postcss-preset-env: ^8.0.1
-      prop-types: ^15.8.1
       react-dom: 18.2.0
       react-i18next: ^12.2.0
       stylelint: ^14.16.1
@@ -29,7 +28,6 @@ importers:
       accept-language: 3.0.18
       i18next: 22.4.10
       next-i18next: 13.2.2_johky4hpydmc34raojpzuxlpqy
-      prop-types: 15.8.1
       react-dom: 18.2.0
       react-i18next: 12.2.0_pmu7klu5prsdg5sxir3ehgxr7y
     devDependencies:
@@ -159,6 +157,8 @@ importers:
   common/forms:
     specifiers:
       '@cogoport/components': ^1.0.359
+      '@cogoport/constants': workspace:0.1.0
+      '@cogoport/globalization': workspace:*
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/request': workspace:0.1.0
       '@cogoport/utils': ^1.2.6
@@ -166,6 +166,8 @@ importers:
       react-hook-form: ^7.43.3
     dependencies:
       '@cogoport/components': 1.0.366_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/constants': link:../constants
+      '@cogoport/globalization': link:../globalization
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/request': link:../request
       '@cogoport/utils': 1.2.6

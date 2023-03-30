@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-relative-packages
-import GLOBAL_CONSTANTS from '../../../common/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 
 import getPanFromGst from './getPanFromGst';
 

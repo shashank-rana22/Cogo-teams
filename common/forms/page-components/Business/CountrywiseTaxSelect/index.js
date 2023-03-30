@@ -1,5 +1,4 @@
 import { Input } from '@cogoport/components';
-import { string, shape, func } from 'prop-types';
 
 import SERVICABLE_COUNTRY_IDS from './config/servicableCountries';
 import SelectRegistrationType from './SelectRegistrationType';
@@ -30,17 +29,6 @@ function CountrywiseTaxSelect({
 	};
 
 	const props = {};
-
-	props.style = {
-		control: {
-			fontSize   : '14px',
-			lineHeight : '18px',
-			color      : 'black',
-			minHeight  : '48px',
-		},
-		indicatorsContainer : { height: '42px' },
-		menu                : { width: '200px' },
-	};
 
 	return (
 		<div style={{ width: '100%', display: 'flex' }}>
@@ -81,22 +69,10 @@ function CountrywiseTaxSelect({
 	);
 }
 
-CountrywiseTaxSelect.propTypes = {
-	themeType : string,
-	typeKey   : string,
-	numberKey : string,
-	countryId : string,
-	value     : shape({}),
-	onChange  : func.isRequired,
-	select2   : string,
-};
-
 CountrywiseTaxSelect.defaultProps = {
-	themeType : 'black',
 	typeKey   : 'registration_type',
 	numberKey : 'tax_number',
 	value     : {},
-	select2   : '',
 };
 
 export default CountrywiseTaxSelect;
