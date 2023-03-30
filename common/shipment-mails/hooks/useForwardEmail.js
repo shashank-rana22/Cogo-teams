@@ -1,17 +1,11 @@
 import { Toast } from '@cogoport/components';
-import useAxios from 'axios-hooks';
-/**
- * Single utility hook to Forward mails from Cogo RPA
- */
+import { useLensRequest } from '@cogoport/request';
 
 const useForwardEmail = () => {
-	const [forwardMailApi, triggerForwardMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/forward_mail`,
-			method : 'POST',
-		},
-		{ manual: true },
-	);
+	const [forwardMailApi, triggerForwardMail] = useLensRequest({
+		url    : 'forward_mail',
+		method : 'POST',
+	}, { manual: true });
 
 	const forwardEmail = async ({
 		sender = '',

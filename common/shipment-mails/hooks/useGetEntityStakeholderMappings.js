@@ -1,18 +1,15 @@
-import useAxios from 'axios-hooks';
+import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 /**
  * Single utility hook to get entity stakeholder mappings
- */
+*/
 
 const useGetEntityStakeholderMappings = () => {
-	const [getEntityStakeholderApi, triggerGetEntityStakeholder] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/entity_stakeholder_mappings`,
-			method : 'GET',
-		},
-		{ manual: true },
-	);
+	const [getEntityStakeholderApi, triggerGetEntityStakeholder] = useLensRequest({
+		url    : 'entity_stakeholder_mappings',
+		method : 'GET',
+	}, { manual: true });
 
 	const getEntityStakeholder = useCallback(() => {
 		(async () => {

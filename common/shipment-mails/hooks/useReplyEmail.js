@@ -1,17 +1,14 @@
 import { Toast } from '@cogoport/components';
-import useAxios from 'axios-hooks';
+import { useLensRequest } from '@cogoport/request';
 /**
  * Single utility hook to Reply mails from Cogo RPA
  */
 
 const useReplyEmail = () => {
-	const [replyMailApi, triggerReplyMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/reply_mail`,
-			method : 'POST',
-		},
-		{ manual: true },
-	);
+	const [replyMailApi, triggerReplyMail] = useLensRequest({
+		url    : 'reply_mail',
+		method : 'POST',
+	}, { manual: true });
 
 	const replyEmail = async ({
 		sender = '',

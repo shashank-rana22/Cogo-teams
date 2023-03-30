@@ -1,25 +1,20 @@
-import useAxios from 'axios-hooks';
+import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 /**
  * Single utility hook to get mail from Cogo RPA using id of email
- */
+*/
 
 const useGetMail = (email_address, message_id, mail_id) => {
-	const [getMailApi, triggerGetMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/get_mail`,
-			method : 'GET',
-		},
-		{ manual: true },
-	);
-	const [getMailRpaApi, triggerGetRpaMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/get_rpa_mail`,
-			method : 'GET',
-		},
-		{ manual: true },
-	);
+	const [getMailApi, triggerGetMail] = useLensRequest({
+		url    : 'get_mail',
+		method : 'GET',
+	}, { manual: true });
+
+	const [getMailRpaApi, triggerGetRpaMail] = useLensRequest({
+		url    : 'get_rpa_mail',
+		method : 'GET',
+	}, { manual: true });
 
 	const getRpaMail = useCallback(() => {
 		(async () => {

@@ -1,17 +1,14 @@
 import { Toast } from '@cogoport/components';
-import useAxios from 'axios-hooks';
+import { useLensRequest } from '@cogoport/request';
 /**
  * Single utility hook to send mails from Cogo RPA
- */
+*/
 
 const useSendEmail = () => {
-	const [mailApi, triggerCreateMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/send_mail`,
-			method : 'POST',
-		},
-		{ manual: true },
-	);
+	const [mailApi, triggerCreateMail] = useLensRequest({
+		url    : 'send_mail',
+		method : 'POST',
+	}, { manual: true });
 
 	const createEmail = async ({
 		sender = '',
