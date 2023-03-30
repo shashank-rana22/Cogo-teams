@@ -1,5 +1,5 @@
 import { Tooltip, ButtonIcon, Pill, Button, cl } from '@cogoport/components';
-import { IcMDownload, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowNext, IcMDownload, IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty, getYear, getMonth, format, startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
@@ -176,13 +176,15 @@ const useGetColumns = ({
 		key : 'add-kpi',
 	},
 	{
-		Header   : <div className={styles.head} />,
+		Header   : <div className={styles.head}>LAST FORM</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<FeedbackFormModal
 					action="show"
 					item={item}
 					getTeamFeedbackList={getTeamFeedbackList}
+					feedbackYear={feedbackYear}
+					feedbackMonth={feedbackMonth}
 				/>
 			</div>
 		),
@@ -203,7 +205,11 @@ const useGetColumns = ({
 		Header   : <div className={styles.head} />,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<Button onClick={() => handleClick(item.user_id)} themeType="link">View Details</Button>
+				<Button onClick={() => handleClick(item.user_id)} themeType="link">
+					View Details
+					{' '}
+					<IcMArrowNext style={{ marginLeft: '8px' }} />
+				</Button>
 			</div>
 		),
 		id  : 'user_details',

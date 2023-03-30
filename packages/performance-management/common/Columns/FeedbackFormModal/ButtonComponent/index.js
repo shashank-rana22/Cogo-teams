@@ -1,13 +1,16 @@
 import { Button, Popover } from '@cogoport/components';
 import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { format, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function ButtonComponent({
-	action = '', setShowModal = () => {}, showTypePopover = false,
+	item = {}, action = '', setShowModal = () => {}, showTypePopover = false,
 	setShowTypePopover = () => {}, feedback_id = '',
 }) {
+	const currentDate = format(new Date(), 'isoUtcDateTime');
+	const formDeadline = format(item.form_deadline, 'isoUtcDateTime');
+
 	const formTypes = [
 		{ label: 'Employed', value: 'employed' },
 		{ label: 'New', value: 'new' },
@@ -18,8 +21,9 @@ function ButtonComponent({
 		return (
 			<Button
 				size="md"
-				themeType="link"
+				themeType="tertiary"
 				onClick={() => setShowModal(true)}
+				disabled={!feedback_id && !item.form_id}
 			>
 				View Form
 			</Button>
@@ -54,6 +58,7 @@ function ButtonComponent({
 				size="sm"
 				themeType="primary"
 				onClick={() => 	setShowTypePopover(!showTypePopover)}
+				disabled={formDeadline < currentDate}
 			>
 				{isEmpty(feedback_id) ? (
 					<>

@@ -4,10 +4,13 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 import useFormDeadline from './useFormDeadline';
 
-function DeadlineModal({ setOpenActivateModal = () => {}, onSubmitText = 'Add Deadline' }) {
+function DeadlineModal({
+	setOpenActivateModal = () => {}, onSubmitText = 'Add Deadline',
+	refetchFormDeadline = () => {},
+}) {
 	const [deadline, setDeadline] = useState(null);
 
-	const { loading, onUpdateFormDeadline } = useFormDeadline({ setOpenActivateModal });
+	const { loading, onUpdateFormDeadline } = useFormDeadline({ setOpenActivateModal, refetchFormDeadline });
 
 	return (
 		<div>

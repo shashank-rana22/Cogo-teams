@@ -31,6 +31,7 @@ function FeedbackFormModal({
 		<div className={styles.feedback_button}>
 			<div className={styles.add_button}>
 				<ButtonComponent
+					item={item}
 					action={action}
 					setShowModal={setShowModal}
 					showTypePopover={showTypePopover}

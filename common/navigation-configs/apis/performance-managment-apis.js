@@ -67,6 +67,11 @@ const performance_management = {
 			service_name : 'iris',
 		},
 		{
+			api          : 'get_iris_get_form_deadline',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
 			api          : 'get_iris_get_form_responses',
 			access_type  : 'private',
 			service_name : 'iris',

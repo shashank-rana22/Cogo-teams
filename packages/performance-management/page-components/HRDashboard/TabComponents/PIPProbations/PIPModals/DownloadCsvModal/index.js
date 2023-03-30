@@ -12,11 +12,11 @@ function DownloadCsvModal({ modal = '', setModal = () => {} }) {
 
 	const downloadLogCSV = async (type) => {
 		try {
-			const response = await trigger({ data: { LogType: type } });
+			const response = await trigger({ params: { LogType: type } });
 			// eslint-disable-next-line no-undef
 			if (response?.data.url) { window.open(response?.data.url); }
 		} catch (e) {
-			Toast.error(e.response?.data.error.toString());
+			Toast.error(e.response?.data.error?.toString());
 		}
 	};
 

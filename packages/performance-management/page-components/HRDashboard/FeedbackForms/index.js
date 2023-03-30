@@ -1,7 +1,8 @@
 import { Tooltip, Modal, Button, Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { getYear, getMonth } from '@cogoport/utils';
+import { useIrisRequest } from '@cogoport/request';
+import { format, getYear, getMonth } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useListDepartments from '../../../hooks/useListDepartments';
@@ -35,20 +36,29 @@ function FeedbackForms() {
 
 	const { data = [], loading = true, getListDepartments } = useListDepartments();
 
-	const { list: departments = [], form_deadline = new Date() } = data;
+	const { list: departments = [] } = data;
 
-	const currentDate = new Date();
-	console.log('currentDate', currentDate);
-	const currentMonth = getMonth(currentDate);
-	const currentYear = getYear(currentDate);
-	const startOfNextMonth = currentMonth === 11 ? new Date(currentYear + 1, 0, 1)
-		: new Date(currentYear, currentMonth + 1, 1);
+	const [{ loading: deadlineDataLoading = false, data: deadlineData = {} }, trigger] = useIrisRequest({
+		url    : 'get_iris_get_form_deadline',
+		method : 'get',
+	}, { manual: false });
+
+	const { form_deadline = null } = deadlineData;
+
+	const localizedFormDeadline = format(form_deadline, 'isoUtcDateTime');
+	const currentDeadlineMonth = getMonth(localizedFormDeadline);
+	const currentDeadlineYear = getYear(localizedFormDeadline);
+
+	const currentDate = format(new Date(), 'isoUtcDateTime');
+
+	const nextFeedbackCycle = currentDeadlineMonth === 11 ? new Date(currentDeadlineYear + 1, 0, 1)
+		: new Date(currentDeadlineYear, currentDeadlineMonth + 1, 1);
 
 	let activationStatus = '';
 
-	if (form_deadline > currentDate) {
+	if (localizedFormDeadline > currentDate) {
 		activationStatus = 'Edit';
-	} else if (form_deadline < currentDate && currentDate < startOfNextMonth) {
+	} else if (localizedFormDeadline < currentDate && currentDate < nextFeedbackCycle) {
 		activationStatus = 'disabled';
 	} else {
 		activationStatus = 'Add';
@@ -92,6 +102,7 @@ function FeedbackForms() {
 							size="lg"
 							onClick={() => setOpenActivateModal(true)}
 							disabled={activationStatus === 'disabled'}
+							loading={deadlineDataLoading}
 						>
 							{buttonText}
 						</Button>
@@ -100,6 +111,7 @@ function FeedbackForms() {
 					<Button
 						size="lg"
 						onClick={() => setOpenActivateModal(true)}
+						loading={deadlineDataLoading}
 					>
 						{buttonText}
 					</Button>
@@ -163,7 +175,11 @@ function FeedbackForms() {
 					<Modal show={openActivateModal} onClose={() => setOpenActivateModal(false)}>
 						<Modal.Header title={`${activationStatus} Form Deadline`} />
 						<Modal.Body>
-							<DeadlineModal onSubmitText={buttonText} setOpenActivateModal={setOpenActivateModal} />
+							<DeadlineModal
+								onSubmitText={buttonText}
+								setOpenActivateModal={setOpenActivateModal}
+								refetchFormDeadline={trigger}
+							/>
 						</Modal.Body>
 					</Modal>
 				)}
