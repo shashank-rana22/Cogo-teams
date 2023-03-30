@@ -178,7 +178,7 @@ const allocation = {
 		{
 			api          : 'list_lead_organizations',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'lead',
 		},
 		{
 			api          : 'list_partner_users',
