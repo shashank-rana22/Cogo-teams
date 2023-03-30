@@ -118,10 +118,13 @@ function GenerateMAWB({
 
 	useEffect(() => {
 		if (hawbSuccess) {
-			setTaskItem({ ...item, ...hawbData.data.data });
+			setTaskItem({
+				...hawbData.data,
+				...hawbData.data.data,
+				originAirportId   : item.originAirportId,
+				serviceProviderId : item.serviceProviderId,
+			});
 			setHawbSuccess(false);
-		} else {
-			setTaskItem({ ...item, ...item.documentData });
 		}
 		finalFields.forEach((c) => {
 			if (taskItem[c.name]) {
@@ -141,7 +144,7 @@ function GenerateMAWB({
 		setValue('agentOtherCharges', taskItem.agentOtherCharges || agentOtherChargesCode);
 		setValue('carrierOtherCharges', taskItem.carrierOtherCharges || carrierOtherChargesCode);
 		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
-		setValue('shipperSignature', taskItem.customer_name);
+		setValue('shipperSignature', taskItem.customer_name || taskItem.shipperSignature);
 		setValue('amountOfInsurance', 'NIL');
 		setValue('accountingInformation', 'FREIGHT PREPAID');
 	}, [hawbSuccess, activeHawb]);

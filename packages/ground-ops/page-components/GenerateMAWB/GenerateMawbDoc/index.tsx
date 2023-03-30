@@ -109,10 +109,10 @@ function GenerateMawb({
 			uploaded_by_org_id  : taskItem?.serviceProviderId,
 			performed_by_org_id : taskItem?.serviceProviderId,
 			document_type       : activeCategory === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
-			id                  : taskItem?.documentId,
+			id                  : activeCategory === 'mawb' ? taskItem?.documentId : taskItem?.id,
 			service_id          : taskItem?.serviceId,
 			service_type        : 'air_freight_service',
-			pending_task_id     : edit === 'edit' ? undefined : taskItem?.id,
+			pending_task_id     : edit === 'edit' || activeHawb.isNew === false ? undefined : taskItem?.id,
 			data                : {
 				...filteredData,
 				status          : 'generated',

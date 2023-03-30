@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import useGetHawb from '../Helpers/hooks/useGetHawb';
 
 interface NestedObj {
-	[key: string]: string | number;
+	[key: string]: string | number | boolean;
 }
 
 interface Props {
@@ -36,7 +36,7 @@ const useCreateShipmentDocument = ({
 	activeHawb = {},
 }:Props) => {
 	let api = 'create_shipment_document';
-	if (edit) api = 'update_shipment_document';
+	if (edit || activeHawb.isNew === false) api = 'update_shipment_document';
 
 	const [success, setSuccess] = useState(false);
 
