@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../EmptyState';
 
-import TableColumns from './Components/TableColumns';
+import useGetTableColumns from './Components/TableColumns/useGetTableColumns';
 import styles from './styles.module.css';
 import useSavedQuestionDetails from './useSavedQuestionDetails';
 
@@ -15,7 +15,7 @@ function SavedQuestionDetails({
 	setAllKeysSaved,
 	getTestQuestionTest,
 	questionSetId,
-	loading:listLoading,
+	loading: listLoading,
 	total_count,
 	setPage,
 	page,
@@ -34,7 +34,15 @@ function SavedQuestionDetails({
 		questionSetId,
 		setEditDetails,
 	});
-	const columns = TableColumns({ allKeysSaved, handleEditQuestion, loading, caseStudyLoading, mode, setShowModal });
+
+	const columns = useGetTableColumns({
+		allKeysSaved,
+		handleEditQuestion,
+		loading,
+		caseStudyLoading,
+		mode,
+		setShowModal,
+	});
 
 	if (isEmpty(test_questions)) {
 		return (
@@ -73,8 +81,10 @@ function SavedQuestionDetails({
 						>
 							Cancel
 						</Button>
+
 						<Button
 							type="button"
+							style={{ marginLeft: '8px' }}
 							onClick={() => {
 								handleDeleteQuestion({ item: showModal });
 								setShowModal({});
