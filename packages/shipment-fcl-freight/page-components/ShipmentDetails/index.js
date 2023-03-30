@@ -38,7 +38,9 @@ function ShipmentDetails() {
 		<ShipmentDetailContext.Provider value={contextValues}>
 
 			{(ActiveStakeholder === 'KAM')
-				? <Kam /> : <Superadmin />}
+				? <Kam /> : (
+					<Superadmin />
+				)}
 
 		</ShipmentDetailContext.Provider>
 	);

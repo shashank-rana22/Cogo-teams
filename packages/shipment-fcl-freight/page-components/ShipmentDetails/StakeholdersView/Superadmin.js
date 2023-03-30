@@ -6,6 +6,7 @@ import React, { useContext, useState } from 'react';
 
 import Documents from '../../../common/Documents';
 import ShipmentInfo from '../../../common/ShipmentInfo';
+import Timeline from '../../../common/TimeLine';
 import TopBar from '../../../common/TopBar';
 import Tracking from '../Tabs/Tracking';
 
@@ -23,7 +24,7 @@ function Superadmin() {
 			</div>
 
 			<TopBar />
-			{/* <Timeline timelineData={timelineData} loading={shipmentTimelineLoading} /> */}
+			<Timeline />
 			<div className={styles.container}>
 				<Tabs
 					activeTab={activeTab}
@@ -46,8 +47,8 @@ function Superadmin() {
 					<TabPanel name="emails" title="Emails">
 						<ShipmentMails
 							source="cogo_rpa"
-							filters={{ q: shipment_data.serial_id }}
-							pre_subject_text={`${shipment_data.serial_id}`}
+							filters={{ q: shipment_data?.serial_id }}
+							pre_subject_text={`${shipment_data?.serial_id}`}
 						/>
 					</TabPanel>
 					<TabPanel name="tracking" title="Tracking">

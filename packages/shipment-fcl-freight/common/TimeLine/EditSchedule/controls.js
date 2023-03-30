@@ -9,7 +9,7 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 	let deviated_departure;
 	let deviated_arrival;
 
-	timelineData.forEach((data) => {
+	(timelineData || []).forEach((data) => {
 		if (data?.actual_completed_on) {
 			if (data?.milestone === 'Vessel Departed From Origin (ETD)') {
 				deviated_departure = getDate(data.actual_completed_on);

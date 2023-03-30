@@ -6,7 +6,6 @@ import getApiErrorString from '../utils/getApiErrorString';
 
 function useGetTimeLine({ shipment_data = {} }) {
 	const [data, setData] = useState([]);
-
 	const { id: shipment_id } = shipment_data;
 
 	const [{ loading }, trigger] = useRequest({
@@ -34,7 +33,6 @@ function useGetTimeLine({ shipment_data = {} }) {
 			timelineData: data || [],
 			getShipmentTimeline,
 		},
-
 	};
 }
 
