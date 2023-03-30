@@ -1,5 +1,5 @@
 .document_type{
-	font-weight: 500;
+	font-weight: 700;
 	font-size: 14px;
 	line-height: 16px;
 	color: #4f4f4f;
@@ -25,6 +25,7 @@
 	font-size: 14px;
 	line-height: 16px;
 	color: #4f4f4f;
+	font-weight: 700;
 }
 
 .container{

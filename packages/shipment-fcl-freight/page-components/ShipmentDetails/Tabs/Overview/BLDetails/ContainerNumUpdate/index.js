@@ -1,7 +1,7 @@
 import { Input, Button, Loader } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useUpdateContainerNumber from '../../../../../../hooks/useUpdateContainerNumber';
+import useUpdateContainerDetails from '../../../../../../hooks/useUpdateContainerDetails';
 
 import styles from './styles.module.css';
 
@@ -9,24 +9,24 @@ function ContainerNmUpdate({
 	setEditContainerNum = () => { },
 	shipmentData = {},
 	refetch = () => { },
+	containerDetails,
 }) {
 	const [containerValue, setContainerValue] = useState({});
-
-	const { handleSubmit, containerDetails, loading } = useUpdateContainerNumber(
-		containerValue,
-		setEditContainerNum,
-		shipmentData,
-		refetch,
-	);
 
 	const handleChange = (e, container_id) => {
 		setContainerValue({ ...containerValue, [container_id]: e });
 	};
+	const { handleSubmit, loading } = useUpdateContainerDetails({
+		containerValue,
+		setEditContainerNum,
+		shipmentData,
+		refetch,
+	});
 
 	return (
 		loading ? <div className={styles.loader}><Loader themeType="primary" /></div> : (
 			<div className={styles.container}>
-				{(containerDetails?.list || []).map((container) => (
+				{(containerDetails || []).map((container) => (
 					<div className={styles.render_container}>
 						<div className={styles.container_num}>{container?.container_number}</div>
 						<Input

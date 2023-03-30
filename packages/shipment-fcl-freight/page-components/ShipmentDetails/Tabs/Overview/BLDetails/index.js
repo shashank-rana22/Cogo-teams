@@ -16,29 +16,27 @@ function BLDetails() {
 	const [mappingModal, setMappingModal] = useState(false);
 	const [editContainerNum, setEditContainerNum] = useState(false);
 
-	const { shipment_data, bl_container_mappings } = useContext(
+	const { shipment_data, documents } = useContext(
 		ShipmentDetailContext,
 	);
 
-	const blCount = bl_container_mappings ? Object.keys(bl_container_mappings).length : 0;
-
 	let containersCount = 0;
-	if (bl_container_mappings) {
-		containersCount = Object.keys(bl_container_mappings).forEach((key) => (bl_container_mappings[key].length));
-	}
+	const containerDetailsArray = [];
 
-	// Object.keys(x).forEach((key) => {
-	// 	console.log(`Length of array for key "${key}": ${x[key].length}`);
-	//   });
+	(documents || []).forEach((doc) => {
+		const containerDetailsItem = doc?.container_details;
+		containersCount += containerDetailsItem?.length || 0;
+		if (containerDetailsItem) containerDetailsArray.push(...containerDetailsItem);
+	});
 
 	const renderBlCount = (
 		<div className={styles.bl_count_container}>
 			BL and Container Details
 			<div className="bl-count">
 				(
-				{blCount || 0}
+				{documents?.length || 0}
 				&nbsp;BL & &nbsp;
-				{/* {container_details?.length || 0} */}
+				{containersCount || 0}
 				&nbsp;
 				Containers
 				)
@@ -96,49 +94,58 @@ function BLDetails() {
 					<ContainerNmUpdate
 						setEditContainerNum={setEditContainerNum}
 						shipmentData={shipment_data}
+						containerDetails={containerDetailsArray}
 					/>
 				</Modal>
 			) : null}
 		</div>
 	);
 
-	const contentMapping = {
-		air_freight : 'AWB',
-		fcl_freight : 'BL',
-		lcl_freight : 'BL',
-	};
-
 	const emptyStateContent = {
-		heading: `No ${contentMapping[shipment_data?.shipment_type]
-		} Details Found!`,
-		description: `Currently ${contentMapping[shipment_data?.shipment_type]
-		} is not uploaded from the respective stakeholder.`,
+		heading     : 'No BL Details Found!',
+		description : 'Currently BL is not uploaded from the respective stakeholder.',
 	};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_div}>{buttons()}</div>
 			<Accordion title={renderBlCount} style={{ width: '100%' }}>
-				{!blCount ? (
+				{!documents?.length ? (
 					<EmptyState showContent={emptyStateContent} />) : (
 						<div className={styles.manage_services_div}>
-							{Object.keys(bl_container_mappings)?.map((key) => (
-								<div className={styles.service_card}>
-									<Accordion title={(
-										<TitleCard
-											blNumber={key}
-											setOpen={setOpen}
-											open={open}
-											setActiveId={setActiveId}
-											activeId={activeId}
-											shipmentData={shipment_data}
-											containerDetails={bl_container_mappings[key]}
-										/>
-									)}
-									>
-										<ContainerDetails containerDetails={bl_container_mappings[key]} />
-									</Accordion>
-								</div>
+							{(documents || []).map((doc) => (
+								doc?.container_details?.length >= 1
+									? (
+										<div className={styles.service_card}>
+											<Accordion title={(
+												<TitleCard
+													item={doc}
+													setOpen={setOpen}
+													open={open}
+													setActiveId={setActiveId}
+													activeId={activeId}
+													shipmentData={shipment_data}
+													containerDetails={doc?.container_details}
+												/>
+											)}
+											>
+												<ContainerDetails containerDetails={doc?.container_details} />
+											</Accordion>
+										</div>
+									)
+									: (
+										<div className={styles.service_card}>
+											<TitleCard
+												item={doc}
+												setOpen={setOpen}
+												open={open}
+												setActiveId={setActiveId}
+												activeId={activeId}
+												shipmentData={shipment_data}
+												containerDetails={doc?.container_details}
+											/>
+										</div>
+									)
 							))}
 						</div>
 				)}

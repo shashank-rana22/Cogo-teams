@@ -5,10 +5,10 @@ import documentType from './documentType';
 import styles from './styles.module.css';
 
 function TitleCard({
-	blNumber = {},
+	item = {},
 	containerDetails = 0,
 }) {
-	// const { doc_type } = documentType(item?.bl_document_type);
+	const { doc_type } = documentType(item?.bl_document_type);
 
 	return (
 		<div className={cl`${styles.container} title-card`}>
@@ -16,9 +16,9 @@ function TitleCard({
 				<div className={styles.details}>
 					<div className={styles.title_container}>
 						<div className={styles.document_type}>
-							{/* {doc_type} */}
-							MBL
-							{/* {startCase(item?.status)} */}
+							{doc_type}
+							&nbsp;
+							{startCase(item?.status)}
 							:
 						</div>
 
@@ -28,19 +28,19 @@ function TitleCard({
 							} on track`}
 						</div>
 
-						{/* {item?.containers_rolled_over ? (
+						{item?.containers_rolled_over ? (
 							<div className={styles.roll_over}>
 								,
 								{startCase(item?.containers_rolled_over)}
 								rolled over
 							</div>
-						) : null} */}
+						) : null}
 					</div>
 				</div>
 
 				<div className={styles.bl_number}>
 					BL Number:&nbsp;
-					{blNumber}
+					{item?.bl_number}
 				</div>
 			</div>
 
