@@ -1,4 +1,5 @@
 import { ResponsivePie } from '@cogoport/charts/pie/index'; //! import issue to be sorted
+import { IcMUpwardGraph } from '@cogoport/icons-react';
 
 import useChartStats from '../../../../hooks/useChartStats';
 
@@ -14,8 +15,11 @@ function Statistics({ activeTab = '' }) {
 
 	if (isEmpty && !loading) {
 		return (
-			<section className={styles.empty_container}>
-				<div className={styles.empty_text}>Statistics are not available at this moment.</div>
+			<section className={styles.container}>
+				<div className={styles.empty_text}>
+					<IcMUpwardGraph width={100} height={100} style={{ marginBottom: '16px' }} />
+					Statistics are not available at this moment.
+				</div>
 			</section>
 		);
 	}
@@ -36,7 +40,7 @@ function Statistics({ activeTab = '' }) {
 							enableArcLabels={false}
 							colors={chartData?.colors}
 							colorBy="index"
-							margin={{ top: 5, right: 40, bottom: 72, left: 120 }}
+							margin={{ top: 20, right: 40, bottom: 10, left: 120 }}
 							legends={[
 								{
 									anchor        : 'left',
