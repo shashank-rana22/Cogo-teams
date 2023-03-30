@@ -21,8 +21,11 @@ const editScheduleStates = [
 	'flight_arrived',
 ];
 
-function Timeline({ loading = false, timelineData = [] }) {
-	const { shipment_data, primary_service, getShipmentTimeline } = useContext(ShipmentDetailContext);
+function Timeline() {
+	const {
+		shipment_data, primary_service, timelineLoading : loading,
+		timelineData, getShipmentTimeline,
+	} = useContext(ShipmentDetailContext);
 
 	useEffect(() => {
 		if (shipment_data?.id) {
@@ -34,7 +37,7 @@ function Timeline({ loading = false, timelineData = [] }) {
 
 	const showEditScheduleIcon = editScheduleStates.includes(primary_service?.state);
 
-	const filteredTimelineData = timelineData.filter(
+	const filteredTimelineData = (timelineData || []).filter(
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
 	);
 

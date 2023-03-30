@@ -6,29 +6,31 @@ import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import React, { useContext, useState } from 'react';
 
+import PocSop from '../../../common/PocSop';
+import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Timeline from '../../../common/TimeLine';
-import TopBar from '../../../common/TopBar';
 
 import styles from './styles.module.css';
 
 function Superadmin() {
-	const {
-		shipment_data,
-		timelineData,
-		shipmentTimelineLoading,
-	} = useContext(ShipmentDetailContext);
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [activeTab, setActiveTab] = useState('overview');
 
 	return (
 		<div>
-			<div className={styles.header}>
+			<div className={styles.top_header}>
 				<ShipmentInfo />
 				<ShipmentChat />
 			</div>
 
-			<TopBar />
-			<Timeline timelineData={timelineData} loading={shipmentTimelineLoading} />
+			<div className={styles.header}>
+				<ShipmentHeader />
+				<PocSop />
+			</div>
+
+			<Timeline />
+
 			<div className={styles.container}>
 				<Tabs
 					activeTab={activeTab}

@@ -1,7 +1,7 @@
 import { Button, Modal, Input } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useAddPoNumber from '../../../../hooks/useAddPoNumber';
+import useAddPoNumber from '../../../hooks/useAddPoNumber';
 
 import styles from './styles.module.css';
 

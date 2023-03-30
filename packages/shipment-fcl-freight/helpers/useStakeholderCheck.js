@@ -8,28 +8,22 @@ export const useStakeholderCheck = () => {
 		role_ids: profile?.partner?.user_role_ids,
 	}));
 
-	let ActiveStakeholder = 'Superadmin';
+	const stakeholderMap = [
+		{ role_ids: geo.uuid.kam_ids, stakeholder: 'Kam' },
+		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'BookingDesk' },
+		{ role_ids: geo.uuid.service_ops2_role_id, stakeholder: 'DocumentDesk' },
+		{ role_ids: geo.uuid.super_admin_id, stakeholder: 'Superadmin' },
+		{ role_ids: geo.uuid.sales_role, stakeholder: 'SalesAgent' },
+		{ role_ids: geo.uuid.admin_id, stakeholder: 'Admin' },
+		{ role_ids: geo.uuid.tech_super_admin_id, stakeholder: 'TechSuperadmin' },
+	];
 
-	const Kam = (role_ids || []).some((item) => geo.uuid.kam_ids.includes(item));
-	if (Kam) ActiveStakeholder = 'Kam';
+	const matchingStakeholders = stakeholderMap
+		.filter(({ role_ids: ids }) => (role_ids || []).some((item) => ids.includes(item)));
 
-	const So1 = (role_ids || []).some((item) => geo.uuid.service_ops1_role_ids.includes(item));
-	if (So1) ActiveStakeholder = 'So1';
-
-	const So2 = (role_ids || []).some((item) => geo.uuid.service_ops2_role_id.includes(item));
-	if (So2) ActiveStakeholder = 'So2';
-
-	const Superadmin = (role_ids || []).some((item) => geo.uuid.super_admin_id.includes(item));
-	if (Superadmin) ActiveStakeholder = 'Superadmin';
-
-	const SalesAgent = (role_ids || []).some((item) => geo.uuid.sales_role.includes(item));
-	if (SalesAgent) ActiveStakeholder = 'SalesAgent';
-
-	const Admin = (role_ids || []).some((item) => geo.uuid.admin_id.includes(item));
-	if (Admin) ActiveStakeholder = 'Admin';
-
-	const TechSuperadmin = (role_ids || []).some((item) => geo.uuid.tech_super_admin_id.includes(item));
-	if (TechSuperadmin) ActiveStakeholder = 'TechSuperadmin';
+	const ActiveStakeholder = matchingStakeholders.length > 0
+		? matchingStakeholders[0].stakeholder
+		: 'Superadmin';
 
 	return {
 		ActiveStakeholder,
