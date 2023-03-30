@@ -1,4 +1,4 @@
-import { ResponsivePie } from '@cogoport/charts/pie/index'; //! import issue to be sorted
+import { ResponsivePie } from '@cogoport/charts/pie';
 import { IcMUpwardGraph } from '@cogoport/icons-react';
 
 import useChartStats from '../../../../hooks/useChartStats';
