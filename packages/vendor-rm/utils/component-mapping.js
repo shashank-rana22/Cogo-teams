@@ -1,5 +1,3 @@
-/* eslint-disable import/no-cycle */
-
 import ContactDetails from '../page-components/OnBoardVendor/ContactDetails';
 import PaymentDetails from '../page-components/OnBoardVendor/PaymentDetails';
 import VendorDetails from '../page-components/OnBoardVendor/VendorDetails';

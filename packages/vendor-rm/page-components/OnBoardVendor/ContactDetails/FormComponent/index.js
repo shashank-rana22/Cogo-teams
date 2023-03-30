@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayout';
 import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
 

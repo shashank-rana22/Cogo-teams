@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
@@ -7,7 +6,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-import COMPONENT_MAPPING from '../../../../utils/component-mapping';
+import COMPONENT_MAPPING from '../../../../utils/component-props-mapping';
 import controls from '../utils/controls';
 
 function useVendorBankDetail({

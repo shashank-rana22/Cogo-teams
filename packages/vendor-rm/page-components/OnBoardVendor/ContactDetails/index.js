@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import FormComponent from './FormComponent';
 import Header from './Header';
 import useCreateVendorContact from './hooks/useCreateVendorContact';

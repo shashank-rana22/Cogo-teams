@@ -8,8 +8,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo } from 'react';
 
-// eslint-disable-next-line import/no-cycle
-import COMPONENT_MAPPING from '../../../../utils/component-mapping';
+import COMPONENT_MAPPING from '../../../../utils/component-props-mapping';
 import { getControls } from '../utils/getControls';
 import isRegistrationNumberValid from '../utils/isRegistrationNumberValid';
 

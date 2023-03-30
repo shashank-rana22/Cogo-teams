@@ -1,6 +1,5 @@
 import { Checkbox } from '@cogoport/components';
 
-// eslint-disable-next-line import/no-cycle
 import ButtonLayout from '../../../commons/components/ButtonLayout/ButtonLayout';
 
 import DisplayDetails from './DisplayDetails';

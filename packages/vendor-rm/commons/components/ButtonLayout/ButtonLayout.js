@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 
-// eslint-disable-next-line import/no-cycle
-import COMPONENT_MAPPING from '../../../utils/component-mapping';
+import COMPONENT_MAPPING from '../../../utils/component-props-mapping';
 
 import styles from './styles.module.css';
 
