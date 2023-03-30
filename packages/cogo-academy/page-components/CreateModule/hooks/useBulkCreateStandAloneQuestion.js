@@ -1,17 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-function useBulkCreateStandAloneQuestion({ setShowBulkUpload }) {
+function useBulkCreateStandAloneQuestion({ setShowBulkUpload, questionSetId, listSetQuestions }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/bulk_create_stand_alone_question',
 	}, { manual: true });
 
-	const bulkCreateStandAloneQuestion = async ({
-		questionSetId,
-		uploadDocument,
-		listSetQuestions,
-	}) => {
+	const bulkCreateStandAloneQuestion = async ({ uploadDocument }) => {
 		try {
 			await trigger({
 				data: {

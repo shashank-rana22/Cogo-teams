@@ -1,10 +1,6 @@
-import { useState } from 'react';
-
-import useUpdateCaseStudy from '../../../../hooks/useUpdateCaseStudy';
-
 import ContentComponent from './ContentComponent';
-import getControls from './controls';
 import FormComponent from './FormComponent';
+import useHandleBasicDetails from './useHandleBasicDetails';
 
 function BasicDetails({
 	control,
@@ -21,36 +17,24 @@ function BasicDetails({
 	questionSetId,
 	mode,
 }) {
-	const [showForm, setShowForm] = useState(false);
-
-	const controls = getControls({ mode });
-
 	const {
+		handleUpdateCaseStudy,
 		loading,
-		updateCaseStudy,
-	} = useUpdateCaseStudy();
-
-	const handleUpdateCaseStudy = () => {
-		const formValues = getValues();
-		const { audience_ids, topic, question_text, question_type, difficulty_level } = formValues || {};
-
-		updateCaseStudy({
-			values: {
-				audience_ids,
-				topic,
-				question_text,
-				question_type,
-				difficulty_level,
-			},
-			id     : editDetails?.id,
-			setEditDetails,
-			setAllKeysSaved,
-			reset,
-			getTestQuestionTest,
-			questionSetId,
-			action : 'update',
-		});
-	};
+		showForm,
+		setShowForm,
+		controls,
+		closeForm,
+	} = useHandleBasicDetails({
+		setEditDetails,
+		setAllKeysSaved,
+		getTestQuestionTest,
+		questionSetId,
+		editDetails,
+		mode,
+		getValues,
+		reset,
+		setValue,
+	});
 
 	return (
 		<div key={showForm}>
@@ -68,9 +52,8 @@ function BasicDetails({
 						editDetails={editDetails}
 						handleUpdateCaseStudy={handleUpdateCaseStudy}
 						loading={loading}
-						setValue={setValue}
-						setShowForm={setShowForm}
 						mode={mode}
+						closeForm={closeForm}
 					/>
 				)}
 		</div>

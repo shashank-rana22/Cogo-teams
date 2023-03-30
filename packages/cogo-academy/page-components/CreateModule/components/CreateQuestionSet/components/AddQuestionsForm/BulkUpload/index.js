@@ -18,13 +18,13 @@ function BulkUpload({
 	const {
 		loading,
 		bulkCreateStandAloneQuestion,
-	} = useBulkCreateStandAloneQuestion({ setShowBulkUpload });
+	} = useBulkCreateStandAloneQuestion({ setShowBulkUpload, questionSetId, listSetQuestions });
 
 	const onSubmit = () => {
 		if (isEmpty(uploadDocument)) {
 			Toast.error('Submit excel sheet');
 		} else {
-			bulkCreateStandAloneQuestion({ questionSetId, uploadDocument, listSetQuestions });
+			bulkCreateStandAloneQuestion({ uploadDocument });
 		}
 	};
 
