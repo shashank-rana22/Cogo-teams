@@ -29,8 +29,8 @@ function useGetTimeLine({ shipment_data = {} }) {
 
 	return {
 		getTimeline: {
-			loading,
-			timelineData: data || [],
+			timelineLoading : loading,
+			timelineData    : data || [],
 			getShipmentTimeline,
 		},
 	};

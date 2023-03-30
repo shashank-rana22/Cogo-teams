@@ -22,8 +22,10 @@ const editScheduleStates = [
 ];
 
 function Timeline() {
-	const { shipment_data, primary_service, getTimeline } = useContext(ShipmentDetailContext);
-	const { loading, timelineData, getShipmentTimeline } = getTimeline;
+	const {
+		shipment_data, primary_service, timelineLoading : loading,
+		timelineData, getShipmentTimeline,
+	} = useContext(ShipmentDetailContext);
 
 	useEffect(() => {
 		if (shipment_data?.id) {

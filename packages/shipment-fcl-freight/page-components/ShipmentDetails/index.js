@@ -21,10 +21,7 @@ function ShipmentDetails() {
 		'collection_parties'], []);
 
 	const { servicesGet } = useGetServices({ shipment_data, additional_methods });
-
-	const {
-		getTimeline,
-	} = useGetTimeLine({ shipment_data });
+	const { getTimeline } = useGetTimeLine({ shipment_data });
 
 	const contextValues = useMemo(() => ({
 		...get,
