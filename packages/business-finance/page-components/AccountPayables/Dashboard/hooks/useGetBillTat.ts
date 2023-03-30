@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface FilterProps {
 	currency:string,
@@ -53,21 +53,14 @@ const useGetBillTat = ({ activeTab, filtersData, firstEvent, secondEvent }:ItemP
 					? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
 			};
 			await trigger({ params: payload });
-			Toast.success('Please wait Your Request has been Processed!!');
 		} catch (e) {
 			Toast.error(e?.message);
 		}
 	};
 
-	useEffect(() => {
-		onApply();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab, service, currency]);
-
 	return {
 		data,
 		loading,
-		// getDahboardData,
 		filters,
 		setFilters,
 		onApply,
