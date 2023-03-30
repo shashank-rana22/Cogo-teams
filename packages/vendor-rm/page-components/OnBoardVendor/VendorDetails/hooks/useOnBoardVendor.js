@@ -240,7 +240,8 @@ function useOnBoardVendor({
 				setValue(`${field.name}`, vendorDetails?.[field.name]);
 			}
 		});
-	}, [fields, setValue, vendorInformation]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [setValue, vendorInformation]);
 
 	return {
 		fields: newFields,
