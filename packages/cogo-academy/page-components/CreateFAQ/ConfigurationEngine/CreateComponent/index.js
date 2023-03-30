@@ -74,7 +74,7 @@ function CreateForm(props) {
 			{source !== 'create' ? (
 				<div>
 					<div className={styles.add_topic}>
-						Add
+						{id ? 'Update' : 'Add'}
 						{' '}
 						{startCase(queryValue)}
 					</div>
