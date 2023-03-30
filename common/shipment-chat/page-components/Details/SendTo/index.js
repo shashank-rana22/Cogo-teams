@@ -20,7 +20,7 @@ function Sendto(
 	const [text, setText] = useState('');
 
 	const stakeholder_type = isStakeholder
-		? data?.shipment_data?.stakeholder_types?.[0] : 'default';
+		? data?.channelData?.stakeholder_types?.[0] : 'default';
 
 	const stakeholders = stakeholderMappings[stakeholder_type];
 

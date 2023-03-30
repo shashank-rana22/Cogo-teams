@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useCreateMessage = ({
-	shipmentData = {},
+	channelData = {},
 	formValues,
 	reset = () => { },
 	id,
@@ -39,16 +39,16 @@ const useCreateMessage = ({
 	};
 
 	let visible_to_stakeholders = isStakeholder
-		? [...filteredArr, shipmentData?.stakeholder_types?.[0]]
+		? [...filteredArr, channelData?.stakeholder_types?.[0]]
 		: [...filteredArr];
 
 	visible_to_stakeholders = visible_to_stakeholders?.filter((item) => shipmentChatStakeholders.includes(item));
 	const GroupChannel = filteredArr.length
 		? {
-			created_by_stakeholder: shipmentData?.stakeholder_types?.[0], source_id: sourceId, visible_to_stakeholders,
+			created_by_stakeholder: channelData?.stakeholder_types?.[0], source_id: sourceId, visible_to_stakeholders,
 		}
 		: {
-			created_by_stakeholder : shipmentData?.stakeholder_types?.[0],
+			created_by_stakeholder : channelData?.stakeholder_types?.[0],
 			source_id              : sourceId,
 			visible_to_user_ids    : subscribedUsers,
 		};
