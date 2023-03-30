@@ -7,7 +7,7 @@ import { getNavData } from '../utils/getNavData';
 export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 	const { profile, general } = useSelector((store) => store);
 	const { pathname } = general || {};
-	const { permissions_navigations, authParams, selected_agent_id } = profile || {};
+	const { permissions_navigations } = profile || {};
 	const { navigation } = routeConfig[pathname] || {};
 
 	const scopeValues = useMemo(() => {
@@ -19,6 +19,7 @@ export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 		const viewTypes = {};
 		let defaultScope = null;
 		let defaultView = null;
+		const defaultAgentId = defaultValues.selected_agent_id;
 
 		(main_apis || []).forEach((api) => {
 			(allNavApis[api] || []).forEach((scopeData) => {
@@ -39,16 +40,13 @@ export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 			});
 		});
 
-		return { scopes, viewTypes, defaultScope, defaultView };
+		return { scopes, viewTypes, defaultScope, defaultView, defaultAgentId };
 	}, [navigation, permissions_navigations, defaultValues]);
-
-	scopeValues.selected_agent_id = selected_agent_id || defaultValues.selected_agent_id;
 
 	return {
 		scopeData: scopeValues,
 		navigation,
 		permissions_navigations,
-		authParams,
 		pathname,
 	};
 }

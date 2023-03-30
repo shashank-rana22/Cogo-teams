@@ -1,5 +1,6 @@
 import { Button, Popover } from '@cogoport/components';
 import { IcMUsersManageAccounts } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useScope from '../hooks/useScope';
@@ -15,9 +16,7 @@ export default function ScopeSelect({
 
 	const closePopover = () => setShowPopover(false);
 
-	const {
-		handleApply, scopeData, scope, viewType, displayScope, displayViewType,
-	} = useScope({ defaultValues, closePopover });
+	const { handleApply, scopeData, scope, viewType, selectedAgentId } = useScope({ defaultValues, closePopover });
 
 	return (
 		<Popover
@@ -30,6 +29,7 @@ export default function ScopeSelect({
 					scopeData={scopeData}
 					scope={scope}
 					viewType={viewType}
+					selectedAgentId={selectedAgentId}
 					size={size}
 					showChooseAgent={showChooseAgent}
 					key={showPopover}
@@ -42,16 +42,16 @@ export default function ScopeSelect({
 				className={`${styles.popover_children} ${styles[size]} ${className}`}
 				themeType={themeType}
 			>
-				<div className={styles.ellipsis_text}>{displayScope}</div>
-				{displayViewType ? (
+				<div className={styles.ellipsis_text}>{startCase(scope) || 'My View'}</div>
+				{viewType ? (
 					<div className={styles.view_type}>
 						(
-						<div className={styles.ellipsis_text}>{displayViewType}</div>
+						<div className={styles.ellipsis_text}>{startCase(viewType)}</div>
 						)
 					</div>
 				) : null}
 
-				{scopeData.selected_agent_id ? <IcMUsersManageAccounts className={styles.agent_icon} /> : null}
+				{selectedAgentId ? <IcMUsersManageAccounts className={styles.agent_icon} /> : null}
 			</Button>
 		</Popover>
 	);
