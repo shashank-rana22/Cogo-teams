@@ -1,6 +1,6 @@
 .arrow_up,
 .arrow_down {
-	margin-left: 4;
+	margin-left: 4px;
 	cursor: pointer;
 	transition: transform 0.5s;
 }
