@@ -51,9 +51,9 @@
 }
 
 .wrapper {
-	cursor: pointer;
 	font-size: 12px;
 	font-weight: 500;
+	cursor: pointer;
 }
 
 .styled_name {

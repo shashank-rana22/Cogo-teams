@@ -11,8 +11,8 @@
 
 .journey {
 	display: flex;
-	align-items: center;
 	gap: 4px;
+	align-items: center;
 	font-size: 16px;
 	font-weight: 600;
 }
@@ -41,9 +41,9 @@
 .number {
 	display: flex;
 	align-items: center;
+	width: fit-content;
 	font-size: 16px;
 	font-weight: 500;
-	width: fit-content;
 }
 
 .tat_value {
@@ -169,4 +169,3 @@
 	height: 20px;
 	margin-left: 4px;
 }
-

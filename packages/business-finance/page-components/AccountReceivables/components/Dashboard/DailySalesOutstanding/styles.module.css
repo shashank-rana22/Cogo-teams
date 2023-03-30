@@ -91,18 +91,18 @@
 }
 
 .icon {
-	margin-left: 4px;
 	margin-top: 6px;
+	margin-left: 4px;
 }
 
 .dashboard_loader {
-	background: white;
-	width: 60%;
-	margin-top: 12px;
-	height: 360px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 60%;
+	height: 360px;
+	margin-top: 12px;
+	background: white;
 	border-radius: 8px;
 }
 

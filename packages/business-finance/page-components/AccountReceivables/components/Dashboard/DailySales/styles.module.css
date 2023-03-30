@@ -1,9 +1,9 @@
 .container {
+	height: 440px;
 	padding: 24px 36px;
 	margin-top: 16px;
 	background: #fff;
 	border-radius: 8px;
-	height: 440px;
 }
 
 .flex {
@@ -20,8 +20,8 @@
 }
 
 .icon {
-	margin-left: 4px;
 	margin-top: 2px;
+	margin-left: 4px;
 }
 
 .border {
