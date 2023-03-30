@@ -10,11 +10,11 @@ import FeedbackFormModal from './FeedbackFormModal';
 import FeedbackModal from './FeedbackPopOver';
 import styles from './styles.module.css';
 
-const statusColorMapping = {
-	probation : 'red',
-	employed  : 'green',
-	young     : 'yellow',
-};
+// const statusColorMapping = {
+// 	probation : 'red',
+// 	employed  : 'green',
+// 	young     : 'yellow',
+// };
 
 const useGetColumns = ({
 	getTeamFeedbackList = () => {},
@@ -249,16 +249,16 @@ const useGetColumns = ({
 		id  : 'progress',
 		key : 'progress',
 	},
-	{
-		Header   : <div className={styles.head}>Employee Status</div>,
-		accessor : (item) => (
-			<div className={styles.head_content}>
-				<Pill color={statusColorMapping[item?.employee_status]}>{startCase(item?.employee_status)}</Pill>
-			</div>
-		),
-		id  : 'employee_status',
-		key : 'employee_status',
-	},
+	// {
+	// 	Header   : <div className={styles.head}>Employee Status</div>,
+	// 	accessor : (item) => (
+	// 		<div className={styles.head_content}>
+	// 			<Pill color={statusColorMapping[item?.employee_status]}>{startCase(item?.employee_status)}</Pill>
+	// 		</div>
+	// 	),
+	// 	id  : 'employee_status',
+	// 	key : 'employee_status',
+	// },
 	{
 		Header   : <div className={styles.head}>PIP Status</div>,
 		accessor : (item) => (
@@ -302,6 +302,7 @@ const useGetColumns = ({
 					<Button
 						themeType={item?.log_type === 'pip' ? 'secondary' : 'primary'}
 						onClick={() => addLog(item)}
+						disabled={item?.final_decision && item?.log_type === 'probation'}
 					>
 						{item?.log_type === 'probation' ? 'Update' : 'Log'}
 					</Button>

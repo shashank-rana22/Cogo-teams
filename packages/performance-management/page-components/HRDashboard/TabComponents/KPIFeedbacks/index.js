@@ -25,8 +25,6 @@ function KPIFeedbacks({ modal = '', setModal = () => {} }) {
 
 	const ModalComponent = modalComoponentsMapping[modal]?.Component;
 
-	console.log('modal', modal);
-
 	return (
 		<div>
 			<div className={styles.top_container}>

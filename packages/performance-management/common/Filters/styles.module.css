@@ -1,6 +1,6 @@
-.department_select {
+.filters_container {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
 	flex-wrap: wrap;
 	
 	:global {
@@ -27,12 +27,6 @@
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	width: 100%;
-}
-
-.container{
-	position: absolute;
-	right: 0px;
-	max-width: 300px;
 }
 
 .sub_container{

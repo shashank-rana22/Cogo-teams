@@ -1,16 +1,11 @@
-import { Button, Modal, Input } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
+import { Button, Modal } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import useGetColumns from '../../../../../../common/Columns';
-import UserTableData from '../../../../../../common/UserTableData';
-import feedbackDataColumns from '../../../../../../constants/feedback-data-columns';
 import useCreateLog from '../../../../../../hooks/useCreateLog';
-import useListReportees from '../../../../../../hooks/useListReportees';
-import useGetControls from '../../../../../../utils/filterControls';
 import DecisionModal from '../UpdateModal/DecisionModal';
 
+import EmployeesTable from './EmloyeesTable';
 import styles from './styles.module.css';
 
 function CreateModal({
@@ -23,33 +18,14 @@ function CreateModal({
 	setDisableNext = () => {},
 	setRefetchList = () => {},
 }) {
-	const [searchValue, setSearchValue] = useState('');
-	const [managerName, setManagerName] = useState('');
-	const { query = '', debounceQuery } = useDebounceQuery();
+	const { onSubmitCreate = () => {} } = useCreateLog();
 	const [status, setStatus] = useState('');
 
-	const {
-		feedbackData,
-		loading = false,
-		setPage,
-		params,
-	} = useListReportees({
-		searchValue: query,
-	});
-
-	const { onSubmitCreate = () => {} } = useCreateLog();
-
-	const { list: newTeamList = [], pagination_data = {} } = feedbackData;
-	const { total_count = '' } = pagination_data;
-
-	useEffect(() => debounceQuery(searchValue, managerName), [debounceQuery, searchValue, managerName]);
-	useEffect(() => setItem({}), [setItem]);
-
-	const managerControls = useGetControls({ name: 'manger_name' });
-
-	const columnsToShow = [
-		...(source === 'log_modal' ? feedbackDataColumns.logModal : feedbackDataColumns.manualFeedbacks)];
-	const columns = useGetColumns({ columnsToShow, source, setItem });
+	const onSubmitModalAction = () => {
+		setRefetchList(true);
+		setModal('');
+		setItem({});
+	};
 
 	const clickedBack = () => {
 		if (status === '') { setModal(''); }
@@ -61,41 +37,13 @@ function CreateModal({
 	};
 
 	const renderCreateModal = () => {
+		if (source === 'manual_feedback') {
+			return (<EmployeesTable source setItem={setItem} />);
+		}
 		if (status) {
 			if (isEmpty(item)) {
 				return (
-					<>
-						<div className={styles.name_input}>
-							<div>
-								<div>Search by Name/COGO-ID...</div>
-								<Input
-									placeholder="Type Here..."
-									value={searchValue}
-									onChange={setSearchValue}
-								/>
-							</div>
-							<div>
-								<div>Search by Name/COGO-ID...</div>
-								<Input
-									{...managerControls}
-									onChange={setManagerName}
-									style={{ marginRight: '8px' }}
-								/>
-
-							</div>
-
-						</div>
-
-						<UserTableData
-							columns={columns}
-							list={newTeamList}
-							loading={loading}
-							pagination={params.Page}
-							page_limit={params.PageLimit}
-							total_count={total_count}
-							setPagination={setPage}
-						/>
-					</>
+					<EmployeesTable source="log_modal" setItem={setItem} />
 				);
 			}
 			return (
@@ -138,88 +86,46 @@ function CreateModal({
 	};
 
 	return (
-		(source === 'log_modal' ? (
-			<Modal
-				show={modal === 'create'}
-				onClose={() => {
-					setModal('');
-					setItem({});
-					setStatus('');
-				}}
-				size="lg"
+		<Modal
+			show={modal === 'create' || 'manual_feedback'}
+			onClose={() => {
+				setModal('');
+				setItem({});
+				setStatus('');
+			}}
+			size="lg"
+		>
+			<Modal.Header title={`Create ${startCase(status)}`} />
+			<Modal.Body
+				style={{ maxHeight: '500px' }}
 			>
-				<Modal.Header title={`Create ${startCase(status)}`} />
-				<div className={styles.upload_modal}>
-					<Modal.Body
-						style={{ maxHeight: '500px' }}
-					>
-						{renderCreateModal()}
-					</Modal.Body>
-				</div>
-				<Modal.Footer>
+				{renderCreateModal()}
+			</Modal.Body>
+			<Modal.Footer>
+				<Button
+					size="md"
+					themeType="tertiary"
+					onClick={clickedBack}
+				>
+					{status ? 'Back' : 'Close'}
+
+				</Button>
+
+				{!isEmpty(item) && (
 					<Button
 						size="md"
-						themeType="tertiary"
-						onClick={clickedBack}
+						style={{ marginLeft: '8px' }}
+						onClick={() => {
+							onSubmitCreate(item, status, onSubmitModalAction);
+						}}
+						disabled={disableNext}
 					>
-						{status ? 'Back' : 'Close'}
-
+						Submit
 					</Button>
+				)}
+			</Modal.Footer>
+		</Modal>
 
-					{!isEmpty(item) && (
-						<Button
-							size="md"
-							style={{ marginLeft: '8px' }}
-							onClick={() => {
-								onSubmitCreate(item, status, setRefetchList, setModal);
-							}}
-							disabled={disableNext}
-						>
-							Submit
-						</Button>
-					)}
-				</Modal.Footer>
-			</Modal>
-		) : (
-			<Modal
-				show={modal === 'manual_feedback'}
-				onClose={() => setModal('')}
-				onClickOutside={() => setModal('')}
-				size="lg"
-			>
-				<Modal.Header title="Manual Feedback" />
-				<Modal.Body>
-					<div className={styles.name_input}>
-						<div>Search by Name/COGO-ID...</div>
-						<Input
-							placeholder="Type Here..."
-							value={searchValue}
-							onChange={setSearchValue}
-						/>
-					</div>
-
-					<UserTableData
-						columns={columns}
-						list={newTeamList}
-						loading={loading}
-						pagination={params.Page}
-						page_limit={params.PageLimit}
-						total_count={total_count}
-						setPagination={setPage}
-					/>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={() => setModal('')}
-					>
-						Close
-					</Button>
-				</Modal.Footer>
-			</Modal>
-
-		))
 	);
 }
 
