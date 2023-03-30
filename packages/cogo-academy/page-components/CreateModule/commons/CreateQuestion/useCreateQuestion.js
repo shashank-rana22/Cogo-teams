@@ -27,13 +27,14 @@ const useCreateQuestion = ({
 		...restFormProps
 	} = useForm();
 
-	const { createTestQuestion, loading } = useCreateTestQuestion();
+	const { createTestQuestion, loading } = useCreateTestQuestion(reset);
 
 	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion({
 		questionSetId,
 		getTestQuestionTest,
 		setEditDetails,
 		setAllKeysSaved,
+		reset,
 	});
 
 	const {
@@ -45,12 +46,11 @@ const useCreateQuestion = ({
 		if (!isNewQuestion && editDetails?.question_type !== 'case_study') {
 			updateStandAloneTestQuestion({
 				values,
-				reset,
 				action         : 'update',
 				testQuestionId : editDetails?.id,
 			});
 		} else {
-			createTestQuestion({ values, questionSetId, getTestQuestionTest, reset });
+			createTestQuestion({ values, questionSetId, getTestQuestionTest });
 		}
 	};
 
