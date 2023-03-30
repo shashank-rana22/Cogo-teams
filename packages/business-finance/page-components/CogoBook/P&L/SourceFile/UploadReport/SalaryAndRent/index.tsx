@@ -4,15 +4,40 @@ import { useEffect, useState } from 'react';
 
 import {
 	getAgentsData,
-	getAirData, getAirDataValue, getAllShipment, getColumnSalary, getOceanData,
-	getOceanDataValue,
-	getProjectData, getRailData, getRailDataValue, getSurfaceData, getSurfaceDataValue,
+	getAllShipment, getColumnSalary,
+	getProjectData,
 } from '../contant';
 import EditIcon from '../RevenueBifurcation/EditIcon';
 
 import styles from './styles.module.css';
 
-function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
+function SalaryAndRent({
+	globalStepper,
+	setGlobalStepper,
+	oceanSalaryData, salaryVolume,
+	setSalaryVolume, refetchSalary,
+	airSalaryData,
+	salaryVolumeAir,
+	setSalaryVolumeAir,
+	surfaceSalaryData,
+	setSalaryVolumeSurface,
+	salaryVolumeSurface,
+	railSalaryData,
+	salaryVolumeRail,
+	setSalaryVolumeRail,
+	oceanSalaryDataValue,
+	setSalaryValue,
+	salaryValue,
+	airSalaryDataValue,
+	salaryValueAir,
+	setSalaryValueAir,
+	surfaceSalaryDataValue,
+	salaryValueSurface,
+	setSalaryValueSurface,
+	railSalaryDataValue,
+	salaryValueRail,
+	setSalaryValueRail,
+}) {
 	const [dropDownData, setDropDownData] = useState({});
 
 	useEffect(() => { refetchSalary(); }, [refetchSalary]);
@@ -31,16 +56,6 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 			[key]: !previousActions[key],
 		}));
 	};
-
-	const [volume, setVolume] = useState({});
-	const [volumeAir, setVolumeAir] = useState({});
-	const [volumeSurface, setVolumeSurface] = useState({});
-	const [volumeRail, setVolumeRail] = useState({});
-
-	const [value, setValue] = useState({});
-	const [valueAir, setValueAir] = useState({});
-	const [valueSurface, setValueSurface] = useState({});
-	const [valueRail, setValueRail] = useState({});
 
 	return (
 		<div>
@@ -72,36 +87,34 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 										<div className={styles.shipment_container}>
 											<div className={styles.header}>
 												<div>{labelData}</div>
-												<div className={styles.icon_row}>
-													<div
-														className={styles.icon_edit}
-														onClick={() => { handleEdit(idData); }}
-														role="presentation"
-													>
-														{icon}
+												{globalStepper === 'salaries'
+														&&	(
+															<div className={styles.icon_row}>
+																<div
+																	className={styles.icon_edit}
+																	onClick={() => { handleEdit(idData); }}
+																	role="presentation"
+																>
+																	{icon}
 
-													</div>
+																</div>
 
-													<div
-														onClick={() => { handleEdit(idData); }}
-														role="presentation"
-													>
-														{edit[idData] && <IcMTick height="20px" width="20px" />}
-													</div>
+																<div
+																	onClick={() => { handleEdit(idData); }}
+																	role="presentation"
+																>
+																	{edit[idData]
+																	&& <IcMTick height="20px" width="20px" />}
+																</div>
 
-												</div>
+															</div>
+														)}
 											</div>
 
 											<div className={styles.shipment_data}>
 												{labelData === 'Ocean' && (
 													<div className={styles.ocean}>
-														{getOceanData(
-															sourceFileData,
-															volume,
-															volumeAir,
-															volumeSurface,
-															volumeRail,
-														).map((valOcean, index) => (
+														{oceanSalaryData.map((valOcean, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -112,9 +125,9 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 																		? (
 																			<EditIcon
 																				index={index}
-																				setValue={setVolume}
+																				setValue={setSalaryVolume}
 																				valueData={valOcean?.value}
-																				value={volume}
+																				value={salaryVolume}
 																			/>
 
 																		) : valOcean?.value}
@@ -128,13 +141,7 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 
 												{labelData === 'Air' && 	(
 													<div className={styles.ocean}>
-														{getAirData(
-															sourceFileData,
-															volume,
-															volumeAir,
-															volumeSurface,
-															volumeRail,
-														).map((val, index) => (
+														{airSalaryData.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -145,9 +152,9 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 																		? (
 																			<EditIcon
 																				index={index}
-																				setValue={setVolumeAir}
+																				setValue={setSalaryVolumeAir}
 																				valueData={val?.value}
-																				value={volumeAir}
+																				value={salaryVolumeAir}
 																			/>
 																		) : val?.value}
 
@@ -160,13 +167,7 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 
 												{labelData === 'Surface' && 	(
 													<div className={styles.ocean}>
-														{getSurfaceData(
-															sourceFileData,
-															volume,
-															volumeAir,
-															volumeSurface,
-															volumeRail,
-														).map((val, index) => (
+														{surfaceSalaryData.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -177,9 +178,9 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 																		? (
 																			<EditIcon
 																				index={index}
-																				setValue={setVolumeSurface}
+																				setValue={setSalaryVolumeSurface}
 																				valueData={val?.value}
-																				value={volumeSurface}
+																				value={salaryVolumeSurface}
 																			/>
 																		) : val?.value}
 																</div>
@@ -191,13 +192,7 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 
 												{labelData === 'Rail' && 	(
 													<div className={styles.ocean}>
-														{getRailData(
-															sourceFileData,
-															volume,
-															volumeAir,
-															volumeSurface,
-															volumeRail,
-														).map((val, index) => (
+														{railSalaryData.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -208,9 +203,9 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 																		? (
 																			<EditIcon
 																				index={index}
-																				setValue={setVolumeRail}
+																				setValue={setSalaryVolumeRail}
 																				valueData={val?.value}
-																				value={volumeRail}
+																				value={salaryVolumeRail}
 																			/>
 																		) : val?.value}
 																</div>
@@ -270,36 +265,34 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 										<div className={styles.shipment_container}>
 											<div className={styles.header}>
 												<div>{labelValue}</div>
-												<div className={styles.icon_row}>
-													<div
-														className={styles.icon_edit}
-														onClick={() => { handleEdit(idData); }}
-														role="presentation"
-													>
-														{icon}
+												{globalStepper === 'salaries'
+														&&	(
+															<div className={styles.icon_row}>
+																<div
+																	className={styles.icon_edit}
+																	onClick={() => { handleEdit(idData); }}
+																	role="presentation"
+																>
+																	{icon}
 
-													</div>
+																</div>
 
-													<div
-														onClick={() => { handleEdit(idData); }}
-														role="presentation"
-													>
-														{edit[idData] && <IcMTick height="20px" width="20px" />}
-													</div>
+																<div
+																	onClick={() => { handleEdit(idData); }}
+																	role="presentation"
+																>
+																	{edit[idData]
+																	&& <IcMTick height="20px" width="20px" />}
+																</div>
 
-												</div>
+															</div>
+														)}
 											</div>
 
 											<div className={styles.shipment_data}>
 												{labelValue === 'Ocean' && (
 													<div className={styles.ocean}>
-														{getOceanDataValue(
-															sourceFileData,
-															value,
-															valueAir,
-															valueSurface,
-															valueRail,
-														).map((val, index) => (
+														{oceanSalaryDataValue.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -310,9 +303,9 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 																		? (
 																			<EditIcon
 																				index={index}
-																				setValue={setValue}
+																				setValue={setSalaryValue}
 																				valueData={val?.value}
-																				value={value}
+																				value={salaryValue}
 																			/>
 
 																		) : val?.value}
@@ -326,13 +319,7 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 
 												{labelValue === 'Air' && 	(
 													<div className={styles.ocean}>
-														{getAirDataValue(
-															sourceFileData,
-															value,
-															valueAir,
-															valueSurface,
-															valueRail,
-														).map((val, index) => (
+														{airSalaryDataValue.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -343,9 +330,9 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 																		? (
 																			<EditIcon
 																				index={index}
-																				setValue={setValueAir}
+																				setValue={setSalaryValueAir}
 																				valueData={val?.value}
-																				value={valueAir}
+																				value={salaryValueAir}
 																			/>
 
 																		) : val?.value}
@@ -358,13 +345,7 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 
 												{labelValue === 'Surface' && 	(
 													<div className={styles.ocean}>
-														{getSurfaceDataValue(
-															sourceFileData,
-															value,
-															valueAir,
-															valueSurface,
-															valueRail,
-														).map((val, index) => (
+														{surfaceSalaryDataValue.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -375,9 +356,9 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 																		? (
 																			<EditIcon
 																				index={index}
-																				setValue={setValueSurface}
+																				setValue={setSalaryValueSurface}
 																				valueData={val?.value}
-																				value={valueSurface}
+																				value={salaryValueSurface}
 																			/>
 
 																		) : val?.value}
@@ -390,13 +371,7 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 
 												{labelValue === 'Rail' && 	(
 													<div className={styles.ocean}>
-														{getRailDataValue(
-															sourceFileData,
-															value,
-															valueAir,
-															valueSurface,
-															valueRail,
-														).map((val, index) => (
+														{railSalaryDataValue.map((val, index) => (
 
 															<div>
 																<div className={styles.name}>
@@ -407,9 +382,9 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 																		? (
 																			<EditIcon
 																				index={index}
-																				setValue={setValueRail}
+																				setValue={setSalaryValueRail}
 																				valueData={val?.value}
-																				value={valueRail}
+																				value={salaryValueRail}
 																			/>
 
 																		) : val?.value}
@@ -464,16 +439,18 @@ function SalaryAndRent({ setGlobalStepper, sourceFileData, refetchSalary }) {
 					</div>
 				);
 			})}
-			<div
-				className={styles.flex_button}
-				onClick={() => {
-					setGlobalStepper('review_details');
-				}}
-				role="presentation"
-			>
-				<Button>Save & Next </Button>
+			{globalStepper === 'salaries' &&		(
+				<div
+					className={styles.flex_button}
+					onClick={() => {
+						setGlobalStepper('review_details');
+					}}
+					role="presentation"
+				>
+					<Button>Save & Next </Button>
 
-			</div>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useSalary = () => {
+const useSegment = () => {
 	const [
 		{ data:salaryData, loading:salaryLoading },
 		salaryTrigger,
@@ -18,7 +18,7 @@ const useSalary = () => {
 		try {
 			await salaryTrigger({
 				params: {
-					period: 'be',
+					sourceFile: 'be',
 				},
 			});
 		} catch (error) {
@@ -31,4 +31,4 @@ const useSalary = () => {
 		salaryLoading,
 	};
 };
-export default useSalary;
+export default useSegment;

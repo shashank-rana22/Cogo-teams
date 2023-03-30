@@ -12,6 +12,7 @@ import EditIcon from './EditIcon';
 import styles from './styles.module.css';
 
 function RevenueBifurcation({
+	globalStepper,
 	setGlobalStepper,
 	volume,
 	setVolume,
@@ -54,6 +55,8 @@ function RevenueBifurcation({
 		}));
 	};
 
+	console.log(globalStepper, 'globalStepper');
+
 	return (
 		<div>
 			{ getColumn.map((item) => {
@@ -84,24 +87,28 @@ function RevenueBifurcation({
 										<div className={styles.shipment_container}>
 											<div className={styles.header}>
 												<div>{labelData}</div>
-												<div className={styles.icon_row}>
-													<div
-														className={styles.icon_edit}
-														onClick={() => { handleEdit(idData); }}
-														role="presentation"
-													>
-														{icon}
+												{globalStepper === 'revenue'
+														&& (
+															<div className={styles.icon_row}>
+																<div
+																	className={styles.icon_edit}
+																	onClick={() => { handleEdit(idData); }}
+																	role="presentation"
+																>
+																	{icon}
 
-													</div>
+																</div>
 
-													<div
-														onClick={() => { handleEdit(idData); }}
-														role="presentation"
-													>
-														{edit[idData] && <IcMTick height="20px" width="20px" />}
-													</div>
+																<div
+																	onClick={() => { handleEdit(idData); }}
+																	role="presentation"
+																>
+																	{edit[idData]
+																	&& <IcMTick height="20px" width="20px" />}
+																</div>
 
-												</div>
+															</div>
+														)}
 											</div>
 
 											<div className={styles.shipment_data}>
@@ -258,24 +265,28 @@ function RevenueBifurcation({
 										<div className={styles.shipment_container}>
 											<div className={styles.header}>
 												<div>{labelValue}</div>
-												<div className={styles.icon_row}>
-													<div
-														className={styles.icon_edit}
-														onClick={() => { handleEdit(idData); }}
-														role="presentation"
-													>
-														{icon}
+												{globalStepper === 'revenue'
+														&& (
+															<div className={styles.icon_row}>
+																<div
+																	className={styles.icon_edit}
+																	onClick={() => { handleEdit(idData); }}
+																	role="presentation"
+																>
+																	{icon}
 
-													</div>
+																</div>
 
-													<div
-														onClick={() => { handleEdit(idData); }}
-														role="presentation"
-													>
-														{edit[idData] && <IcMTick height="20px" width="20px" />}
-													</div>
+																<div
+																	onClick={() => { handleEdit(idData); }}
+																	role="presentation"
+																>
+																	{edit[idData]
+																	&& <IcMTick height="20px" width="20px" />}
+																</div>
 
-												</div>
+															</div>
+														)}
 											</div>
 
 											<div className={styles.shipment_data}>
@@ -427,10 +438,16 @@ function RevenueBifurcation({
 					</div>
 				);
 			})}
-			<div className={styles.flex_button} onClick={() => { setGlobalStepper('salaries'); }} role="presentation">
-				<Button>Save & Next </Button>
+			{globalStepper === 'revenue' &&	(
+				<div
+					className={styles.flex_button}
+					onClick={() => { setGlobalStepper('salaries'); }}
+					role="presentation"
+				>
+					<Button>Save & Next </Button>
 
-			</div>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -260,3 +260,225 @@ export const getAgentsData = [
 	{ name: 'TBD', value: '---' },
 	{ name: 'TBD', value: '---' },
 ];
+
+export const getSalaryOceanData = (
+	totalSalaryOcean,
+	totalVolumePer,
+	fclExportVolumePer,
+	fclImportVolumePer,
+	lclExportVolumePer,
+	lclImportVolumePer,
+	oceanCustomVolumePer,
+	fclExportSalaryVolume,
+	fclImportSalaryVolume,
+	lclExportSalaryVolume,
+	oceanCustomSalaryVolume,
+	lclImportSalaryVolume,
+	salaryVolume,
+) => [
+	{
+		name  : 'Total',
+		value : `${salaryVolume[0]
+		|| totalSalaryOcean.toFixed(2)} (${totalVolumePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'FCL Exports',
+		value : `${salaryVolume[1] || fclExportSalaryVolume.toFixed(2)} (${fclExportVolumePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'FCL Imports',
+		value : `${salaryVolume[2] || fclImportSalaryVolume.toFixed(2)} (${fclImportVolumePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'LCL Exports',
+		value : `${salaryVolume[3] || lclExportSalaryVolume.toFixed(2)} (${lclExportVolumePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'LCL Imports',
+		value : `${salaryVolume[4] || lclImportSalaryVolume.toFixed(2)} (${lclImportVolumePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'Customs',
+		value : `${salaryVolume[5]
+			|| oceanCustomSalaryVolume.toFixed(2)} (${oceanCustomVolumePer.toFixed(2)}%)` || '---',
+	},
+];
+
+export const getSalaryOceanDataValue = (
+	totalSalaryOceanValue,
+	totalPerOcean,
+	fclExportValuePer,
+	fclImportValuePer,
+	lclExportValuePer,
+	lclImportValuePer,
+	oceanCustomVolumePer,
+	fclExportSalaryValue,
+	fclImportSalaryValue,
+	lclExportSalaryValue,
+	oceanCustomSalaryValue,
+	lclImportSalaryValue,
+	salaryValue,
+) => [
+	{
+		name  : 'Total',
+		value : `${salaryValue[0]
+		|| totalSalaryOceanValue.toFixed(2)} (${totalPerOcean.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'FCL Exports',
+		value : `${salaryValue[1] || fclExportSalaryValue.toFixed(2)} (${fclExportValuePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'FCL Imports',
+		value : `${salaryValue[2] || fclImportSalaryValue.toFixed(2)} (${fclImportValuePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'LCL Exports',
+		value : `${salaryValue[3] || lclExportSalaryValue.toFixed(2)} (${lclExportValuePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'LCL Imports',
+		value : `${salaryValue[4] || lclImportSalaryValue.toFixed(2)} (${lclImportValuePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'Customs',
+		value : `${salaryValue[5]
+			|| oceanCustomSalaryValue.toFixed(2)} (${oceanCustomVolumePer.toFixed(2)}%)` || '---',
+	},
+];
+
+export const getSalaryAirData = (
+	totalSalaryAirVolume,
+	airSalaryExportVolume,
+	salaryVolumeAir,
+	airSalaryImportVolume,
+	airCustomImportVolume,
+	totalPer,
+	airExportVolumePer,
+	airImportVolumePer,
+	airCustomVolumePer,
+) => [
+	{
+		name  : 'Total',
+		value : `${(salaryVolumeAir[0]
+		|| totalSalaryAirVolume.toFixed(2))} (${totalPer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'Air Exports',
+		value : `${(salaryVolumeAir[1]
+			|| airSalaryExportVolume.toFixed(2))} (${airExportVolumePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'Air Imports',
+		value : `${(salaryVolumeAir[2]
+			|| airSalaryImportVolume.toFixed(2))} (${airImportVolumePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'Air Customs',
+		value : `${(salaryVolumeAir[3]
+			|| airCustomImportVolume.toFixed(2))} (${airCustomVolumePer.toFixed(2)}%)` || '---',
+	},
+];
+
+export const getSalaryAirDataValue = (
+	totalSalaryAirValue,
+	airSalaryExportValue,
+	salaryValueAir,
+	airSalaryImportValue,
+	airCustomImportValue,
+	totalPerAir,
+	airExportValuePer,
+	airImportValuePer,
+	airCustomValuePer,
+) => [
+	{
+		name  : 'Total',
+		value : `${(salaryValueAir[0]
+		|| totalSalaryAirValue.toFixed(2))} (${totalPerAir.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'Air Exports',
+		value : `${(salaryValueAir[1]
+			|| airSalaryExportValue.toFixed(2))} (${airExportValuePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'Air Imports',
+		value : `${(salaryValueAir[2]
+			|| airSalaryImportValue.toFixed(2))} (${airImportValuePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'Air Customs',
+		value : `${(salaryValueAir[3]
+			|| airCustomImportValue.toFixed(2))} (${airCustomValuePer.toFixed(2)}%)` || '---',
+	},
+];
+
+export const getSalarySurfaceData = (
+	totalSalarySurfaceVolume,
+	ftlSalaryVolume,
+	ltlSalaryVolume,
+	salaryVolumeSurface,
+	totalPerSurface,
+	FTLVolumePer,
+	LTLVolumePer,
+) => [
+	{
+		name  : 'Total',
+		value : `${(salaryVolumeSurface[0]
+			|| totalSalarySurfaceVolume.toFixed(2))} (${totalPerSurface.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'FTL',
+		value : `${(salaryVolumeSurface[1] || ftlSalaryVolume.toFixed(2))} (${FTLVolumePer.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'LTL',
+		value : `${(salaryVolumeSurface[2] || ltlSalaryVolume.toFixed(2))} (${LTLVolumePer.toFixed(2)}%)` || '---',
+	},
+];
+
+export const getSalarySurfaceDataValue = (
+	totalSalarySurfaceValue,
+	totalPerValueSurface,
+	FTLValuePer,
+	ftlSalaryValue,
+	valueSurface,
+	ltlSalaryValue,
+	LTLValuePer,
+) => [
+	{
+		name  : 'Total',
+		value : `${(valueSurface[0] || totalSalarySurfaceValue)} (${totalPerValueSurface.toFixed(2)}%)` || '---',
+	},
+	{ name: 'FTL', value: `${(valueSurface[1] || ftlSalaryValue)} (${FTLValuePer.toFixed(2)}%)` || '---' },
+	{ name: 'LTL', value: `${(valueSurface[2] || ltlSalaryValue)} (${LTLValuePer.toFixed(2)}%)` || '---' },
+];
+
+export const getRailSalaryData = (
+	railSalaryDomesticVolume,
+	totalPerRail,
+	railVolumePer,
+	salaryVolumeRail,
+) => [
+	{
+		name  : 'Total',
+		value : `${(salaryVolumeRail[0] || railSalaryDomesticVolume)} (${totalPerRail.toFixed(2)}%)` || '---',
+	},
+	{
+		name  : 'Domestic',
+		value : `${(salaryVolumeRail[1] || railSalaryDomesticVolume)} (${railVolumePer.toFixed(2)}%)` || '---',
+	},
+];
+
+export const getRailSalaryDataValue = (
+	totalPerRailValue,
+	railSalaryDomesticValue,
+	railValuePer,
+	valueRail,
+) => [
+	{
+		name  : 'Total',
+		value : `${(valueRail[0] || railSalaryDomesticValue)} (${totalPerRailValue.toFixed(2)}%)` || '---',
+	},
+	{ name: 'Domestic', value: `${(valueRail[1] || railSalaryDomesticValue)} (${railValuePer.toFixed(2)}%)` || '---' },
+];
