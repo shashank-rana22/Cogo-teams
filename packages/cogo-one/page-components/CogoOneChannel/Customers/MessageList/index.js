@@ -12,26 +12,28 @@ import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import styles from './styles.module.css';
 
-function MessageList({
-	messagesList,
-	setSearchValue = () => { },
-	filterVisible,
-	searchValue,
-	setFilterVisible = () => { },
-	setAppliedFilters = () => { },
-	appliedFilters,
-	messagesLoading = false,
-	activeCardId = '',
-	setActiveMessage,
-	setActiveCardId = () => {},
-	showBotMessages = false,
-	setShowBotMessages = () => {},
-	isomniChannelAdmin = false,
-	setModalType = () => {},
-	modalType = '',
-	handleScroll = () => {},
-	tagOptions = [],
-}) {
+function MessageList(messageProps) {
+	const {
+		messagesList,
+		setSearchValue = () => { },
+		filterVisible,
+		searchValue,
+		setFilterVisible = () => { },
+		setAppliedFilters = () => { },
+		appliedFilters,
+		messagesLoading = false,
+		activeCardId = '',
+		setActiveMessage,
+		setActiveCardId = () => {},
+		showBotMessages = false,
+		setShowBotMessages = () => {},
+		isomniChannelAdmin = false,
+		setModalType = () => {},
+		modalType = '',
+		handleScroll = () => {},
+		tagOptions = [],
+	} = messageProps;
+
 	function lastMessagePreview(previewData = '') {
 		return (
 			<div

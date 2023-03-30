@@ -13,7 +13,7 @@ module.exports = {
 			name      : 'project-new-admin',
 			script    : 'yarn',
 			args      : ['start', '-p', '4160'],
-			instances : ifProd(2, 1),
+			instances : ifProd(1, 1),
 			exec_mode : ifProd('cluster', 'fork'),
 		},
 	],
