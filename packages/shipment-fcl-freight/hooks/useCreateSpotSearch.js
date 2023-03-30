@@ -4,8 +4,8 @@ import { useRequest } from '@cogoport/request';
 
 import formatPayload from '../helpers/service-upsell-payload';
 
-const useCreateSpotSearch = ({ service, primary_service, shipmentData }) => {
-	const [loading, setLoading] = useRequest(false);
+const useCreateSpotSearch = ({ service = {}, primary_service = {}, shipmentData = {}, services = [] }) => {
+	// const [loading, setLoading] = useRequest(false);
 	const { push } = useRouter();
 
 	console.log('in Search');
@@ -13,7 +13,13 @@ const useCreateSpotSearch = ({ service, primary_service, shipmentData }) => {
 	const { shipment_type } = shipmentData;
 
 	const onAddService = async (values) => {
-		console.log(values, 'valuesAddService');
+		const { rawParams } = formatPayload({
+			service,
+			services,
+			primary_service,
+			shipmentData,
+			formValues: values,
+		});
 	};
 
 	return {

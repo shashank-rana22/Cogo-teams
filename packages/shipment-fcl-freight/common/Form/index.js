@@ -27,8 +27,15 @@ function Form({ extraParams, service, onClose, shipmentData, services, primary_s
 
 				</div>
 
-				<Footer onClose={onClose} formProps={formProps} service={service} shipmentData={shipmentData} />
-				{/* <Footer onClose={onClose} isLoading={loading} /> */}
+				<Footer
+					onClose={onClose}
+					formProps={formProps}
+					service={service}
+					shipmentData={shipmentData}
+					services={services}
+					primary_service={primary_service}
+
+				/>
 			</div>
 		</div>
 	);

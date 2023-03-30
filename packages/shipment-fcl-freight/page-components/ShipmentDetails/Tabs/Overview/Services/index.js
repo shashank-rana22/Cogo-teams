@@ -34,20 +34,16 @@ function Services() {
 				<div className={styles.service_container}>
 					<div className={styles.card_block}>
 						{(Object.keys(serviceObj.mainServices) || []).map((service) => (
-							<>
-								{ console.log(service, 'serviceInLoop')}
-								<ServiceDetails
-									className={styles.service_details}
-									serviceName={service}
+							<ServiceDetails
+								className={styles.service_details}
+								serviceName={service}
 								// cancelUpsellFor={cancelUpsellOriginFor}
-									servicesData={serviceObj?.mainServices[service]}
-									servicesList={servicesList}
-									shipmentData={shipment_data}
-									refetchServices={refetchServices}
-									primary_service={primary_service}
-								/>
-
-							</>
+								servicesData={serviceObj?.mainServices[service]}
+								servicesList={servicesList}
+								shipmentData={shipment_data}
+								refetchServices={refetchServices}
+								primary_service={primary_service}
+							/>
 
 						))}
 					</div>

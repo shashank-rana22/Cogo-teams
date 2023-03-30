@@ -3,7 +3,6 @@ import { IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import Form from '../../../../../../../common/Form';
-import upsellTransportation from '../../helpers/upsellTransportation';
 
 import styles from './styles.module.css';
 

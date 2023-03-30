@@ -79,9 +79,7 @@ const serviceWiseControls = {
 			rules : { required: 'Type of stuffing at origin is required' },
 		},
 	],
-	lcl_customs     : [],
-	air_customs     : [],
-	trailer_freight : [
+	trailer_freight: [
 		{
 			label          : 'Pickup/Drop Pincode',
 			name           : 'location_id',

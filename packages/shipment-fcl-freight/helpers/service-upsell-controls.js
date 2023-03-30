@@ -17,8 +17,6 @@ const formatControls = (controls, service) => controls.map((control) => {
 });
 
 function ServiceUpsellControls({ service, services = [] }) {
-	console.log(service, services, 'serviceUpsellControls');
-
 	const search_type = service?.service;
 
 	const newServices = services.map((item) => ({
