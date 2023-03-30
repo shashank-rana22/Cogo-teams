@@ -4,15 +4,15 @@
 	font-weight: 500;
 }
 
-.relatedquestion {
+.related_question {
 	font-size: 15px;
 	font-style: normal;
-	font-weight: 1000;
+	font-weight: 900;
 	color: #221f20;
 	opacity: 0.5;
 }
 
-.relatedquestion_clickable {
+.related_question_clickable {
 	width: fit-content;
 	padding-bottom: 2px;
 	cursor: pointer;

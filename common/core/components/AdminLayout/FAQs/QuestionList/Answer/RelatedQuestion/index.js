@@ -10,26 +10,24 @@ function RelatedQuestion({ query_name = '', question_abstract = '', setQuestion,
 	return (
 		<div style={{ paddingTop: '20px' }}>
 			{(list || []).length > 1 ? (
-				<span className={styles.relatedquestion}>Related Questions</span>
+				<span className={styles.related_question}>Related Questions</span>
 			) : null}
-			<div>
 
-				{(list || []).map((questionObj) => (
-					<div className={styles.title}>
-						{(questionObj?.question_abstract !== question_abstract) ? (
-							<div
-								role="presentation"
-								className={styles.relatedquestion_clickable}
-								onClick={() => setQuestion(questionObj)}
-							>
-								Q.
-								{' '}
-								{questionObj?.question_abstract}
-							</div>
-						) : null}
-					</div>
-				))}
-			</div>
+			{(list || []).map((questionObj) => (
+				<div className={styles.title}>
+					{(questionObj?.question_abstract !== question_abstract) ? (
+						<div
+							role="presentation"
+							className={styles.related_question_clickable}
+							onClick={() => setQuestion(questionObj)}
+						>
+							Q.
+							{' '}
+							{questionObj?.question_abstract}
+						</div>
+					) : null}
+				</div>
+			))}
 		</div>
 	);
 }
