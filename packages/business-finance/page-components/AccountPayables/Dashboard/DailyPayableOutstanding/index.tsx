@@ -58,55 +58,65 @@ function DailyPayableOutstanding({ filters, activeTab }:ItemData) {
 			{!isQuarterView
 				? (
 					<div className={styles.sub_container}>
-						<div className={styles.month_container}>
-							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
-								: (
-									<div className={styles.value}>
-										<Tooltip content={data?.[2]?.dpo} placement="top" interactive>
-											{data?.[2]?.dpo?.toFixed(2)}
-										</Tooltip>
 
-									</div>
-								)}
-							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
-								: (
-									<div className={styles.label}>
-										{format(data?.[2]?.yearMonth, ' MMM yyyy')}
-									</div>
-								)}
-						</div>
-						<div className={styles.month_container}>
-							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
-								: (
-									<div className={styles.value}>
-										<Tooltip content={data?.[1]?.dpo} placement="top" interactive>
-											{data?.[1]?.dpo?.toFixed(2)}
-										</Tooltip>
-									</div>
-								)}
-							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
-								: (
-									<div className={styles.label}>
-										{format(data?.[1]?.yearMonth, ' MMM yyyy')}
-									</div>
-								)}
-						</div>
-						<div className={styles.month_container}>
-							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
-								: (
-									<div className={styles.value}>
-										<Tooltip content={data?.[0]?.dpo} placement="top" interactive>
-											{data?.[0]?.dpo?.toFixed(2)}
-										</Tooltip>
-									</div>
-								)}
-							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
-								: (
-									<div className={styles.label}>
-										{format(data?.[0]?.yearMonth, ' MMM yyyy')}
-									</div>
-								)}
-						</div>
+						{data?.[2]
+							? (
+								<div className={styles.month_container}>
+									{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+										: (
+											<div className={styles.value}>
+												<Tooltip content={data?.[2]?.dpo} placement="top" interactive>
+													{data?.[2]?.dpo?.toFixed(2)}
+												</Tooltip>
+
+											</div>
+										)}
+									{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+										: (
+											<div className={styles.label}>
+												{format(data?.[2]?.yearMonth, ' MMM yyyy')}
+											</div>
+										)}
+								</div>
+							) : <div className={styles.dash}> -- </div>}
+						{data?.[1]
+							? (
+								<div className={styles.month_container}>
+									{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+										: (
+											<div className={styles.value}>
+												<Tooltip content={data?.[1]?.dpo} placement="top" interactive>
+													{data?.[1]?.dpo?.toFixed(2)}
+												</Tooltip>
+											</div>
+										)}
+									{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+										: (
+											<div className={styles.label}>
+												{format(data?.[1]?.yearMonth, ' MMM yyyy')}
+											</div>
+										)}
+								</div>
+							) : <div className={styles.dash}> -- </div>}
+						{data?.[0]
+							? (
+								<div className={styles.month_container}>
+									{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+										: (
+											<div className={styles.value}>
+												<Tooltip content={data?.[0]?.dpo} placement="top" interactive>
+													{data?.[0]?.dpo?.toFixed(2)}
+												</Tooltip>
+											</div>
+										)}
+									{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+										: (
+											<div className={styles.label}>
+												{format(data?.[0]?.yearMonth, ' MMM yyyy')}
+											</div>
+										)}
+								</div>
+							) : '--'}
 					</div>
 				) : (
 					<div className={styles.sub_container}>
@@ -114,9 +124,13 @@ function DailyPayableOutstanding({ filters, activeTab }:ItemData) {
 							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
 								: (
 									<div className={styles.value}>
-										<Tooltip content={data?.[0]?.dpo} placement="top" interactive>
-											{data?.[0]?.dpo?.toFixed(2)}
-										</Tooltip>
+										{data?.[0]
+											? (
+												<Tooltip content={data?.[0]?.dpo} placement="top" interactive>
+													{data?.[0]?.dpo?.toFixed(2)}
+												</Tooltip>
+											)
+											: '--'}
 									</div>
 								)}
 							{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />

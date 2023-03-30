@@ -66,7 +66,7 @@ function LineCharts({ data, isCountView, showData }) {
 	dateDay.forEach((date) => {
 		sales.forEach((sale) => {
 			if (sale?.date.slice(8, 10) === date) {
-				data1Obj[date] = sale?.amount;
+				data1Obj[date] = isCountView ? sale?.count : sale?.amount;
 			}
 		});
 		data1.push({
@@ -81,7 +81,7 @@ function LineCharts({ data, isCountView, showData }) {
 	dateDay.forEach((date) => {
 		sales1.forEach((sale) => {
 			if (sale?.date.slice(8, 10) === date) {
-				data2Obj[date] = sale?.amount;
+				data2Obj[date] = isCountView ? sale?.count : sale?.amount;
 			}
 		});
 		last2.push({
@@ -96,7 +96,7 @@ function LineCharts({ data, isCountView, showData }) {
 	dateDay.forEach((date) => {
 		sales2.forEach((sale) => {
 			if (sale?.date.slice(8, 10) === date) {
-				data3Obj[date] = sale?.amount;
+				data3Obj[date] = isCountView ? sale?.count : sale?.amount;
 			}
 		});
 		last3.push({
