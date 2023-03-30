@@ -2,14 +2,13 @@
     width: 100%;
 	border-radius: 10px;
 	display: flex;
-	margin-bottom: 16px;
 }
 
 .details {
     background: #ffffff;
 	width: 100%;
 	padding: 10px 14px;
-	margin-right: 16px;
+	margin-right: 12px;
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
