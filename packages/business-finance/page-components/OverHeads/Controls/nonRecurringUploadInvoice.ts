@@ -10,6 +10,7 @@ export const nonRecurringUploadInvoice = ({ formData }) => [
 				loading       : true,
 				value         : formData?.uploadedInvoice,
 				dropareaProps : { heading: 'Upload your file here', subHeading: 'supports - jpeg, pdf, docx' },
+				accept        : '.jpeg, .xlsx, .jpg, .pdf, .png, .svg',
 				style         : { width: '420px' },
 				span          : 12,
 			},
