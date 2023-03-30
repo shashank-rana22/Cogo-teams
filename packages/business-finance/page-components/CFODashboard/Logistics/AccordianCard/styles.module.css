@@ -198,5 +198,11 @@
 .pills {
 	padding: 8px;
 	background: #c4dc91;
-	border-radius: 4px;
+	border-radius: 6px;
+}
+
+.pill {
+	padding: 8px;
+	background: #f8aea8;
+	border-radius: 6px;
 }

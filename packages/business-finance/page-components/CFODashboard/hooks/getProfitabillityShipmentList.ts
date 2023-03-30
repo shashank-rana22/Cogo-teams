@@ -13,9 +13,12 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 	globalFilters:GenericObject
+	entityTabFilters?:string
 }
 
-const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilters, globalFilters }:Props) => {
+const useGetProfitabillityShipmentList = (
+	{ tabs, filters, setFilters, jobsFilters, globalFilters, entityTabFilters }:Props,
+) => {
 	const [searchValue, setSearchValue] = useState<string>('');
 
 	const apiUrl = {
@@ -26,7 +29,6 @@ const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilte
 		shipment : 'get_payments_dashboard_finance_profitability_shipment',
 		customer : 'get_payments_dashboard_finance_profitability_customer',
 	};
-	console.log(filters, 'filters');
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -47,6 +49,7 @@ const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilte
 			try {
 				trigger({
 					params: {
+						entityCode  : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
 						serviceType : tabs === 'shipment' ? globalFilters?.serviceType : undefined,
 						startDate   : tabs === 'shipment' ? startDateFilter : undefined,
 						endDate     : tabs === 'shipment' ? endDateFilters : undefined,
@@ -63,7 +66,7 @@ const useGetProfitabillityShipmentList = ({ tabs, filters, setFilters, jobsFilte
 			}
 		};
 		refetch();
-	}, [tabs, filters, jobsFilters, globalFilters, endDateFilters, startDateFilter, trigger]);
+	}, [tabs, filters, jobsFilters, globalFilters, endDateFilters, startDateFilter, trigger, entityTabFilters]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);

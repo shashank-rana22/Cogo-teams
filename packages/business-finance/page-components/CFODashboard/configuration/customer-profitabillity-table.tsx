@@ -43,7 +43,7 @@ const customerProfitabillityColumn = [
 		accessor : (row) => (
 			<div>
 				{getFormattedPrice(
-					row?.income,
+					row?.bookedIncome,
 					'INR',
 				)}
 			</div>
@@ -56,7 +56,7 @@ const customerProfitabillityColumn = [
 		accessor : (row) => (
 			<div>
 				{getFormattedPrice(
-					row?.expense,
+					row?.bookedExpense,
 					'INR',
 				)}
 			</div>

@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Placeholder, Tooltip } from '@cogoport/components';
 import { IcMInfo, IcCCountryIndia } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -20,6 +20,7 @@ function TreasuryStatistics() {
 	const {
 		data,
 		treasuryFilters,
+		loading,
 		setTreasuryFilters,
 	} = useGetTreasuryStats(tabs);
 
@@ -59,34 +60,52 @@ function TreasuryStatistics() {
 								<div className={styles.border} />
 							</div>
 							<div className={styles.icon}>
-								<IcMInfo />
+								<Tooltip
+									content={(
+										<div className={styles.texts_styles}>
+											Cash Outflow Allocation and Utilisation Statistics
+										</div>
+									)}
+									placement="right"
+									caret={false}
+								>
+									<IcMInfo />
+								</Tooltip>
 							</div>
 						</div>
+
 						<Filter
 							controls={treasuryControls}
 							filters={treasuryFilters}
 							setFilters={setTreasuryFilters}
 						/>
+
 					</div>
 					<div className={styles.container}>
-						<div className={styles.flex}>
-							{tab.map((item:ItemProps) => (
-								<div
-									key={item.key}
-									onClick={() => {
-										setTabs(item.key);
-									}}
-									role="presentation"
-								>
-									<div className={item.key === tabs
-										? styles.sub_container_click : styles.sub_container}
+						{loading ? (
+							<div style={{ alignItems: 'center' }}>
+								<Placeholder height="140px" width="600px" margin="10px 0px 50px 20px" />
+							</div>
+						) : (
+							<div className={styles.flex}>
+								{tab.map((item:ItemProps) => (
+									<div
+										key={item.key}
+										onClick={() => {
+											setTabs(item.key);
+										}}
+										role="presentation"
 									>
-										{item.label}
-										<div>{item.icon}</div>
+										<div className={item.key === tabs
+											? styles.sub_container_click : styles.sub_container}
+										>
+											{item.label}
+											<div>{item.icon}</div>
+										</div>
 									</div>
-								</div>
-							))}
-						</div>
+								))}
+							</div>
+						)}
 					</div>
 					<div className={styles.around_border}>
 						<div className={styles.text}>

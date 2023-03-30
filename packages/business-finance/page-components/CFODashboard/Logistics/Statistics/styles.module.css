@@ -35,7 +35,7 @@
 }
 
 .main_div {
-	margin: 22px 0 22px 18px;
+	margin: 22px 0 0 18px;
 }
 
 .expense_text {
@@ -66,7 +66,7 @@
 }
 
 .icon {
-	margin: 30px 0 0 5px;
+	margin: 5px 0 0 5px;
 	cursor: pointer;
 }
 
@@ -74,9 +74,24 @@
 	display: flex;
 }
 
-.icon_styles {
+.icon_plus_styles {
 	margin-right: 12px;
 	margin-left: -8px;
 	color: #34c759;
 	transform: translate(10px, 2px) rotate(-45deg);
+}
+
+.icon_minus_styles {
+	margin-right: 12px;
+	margin-left: -16px;
+	color: #f8aea8;
+	transform: translate(10px, 2px) rotate(+45deg);
+}
+
+.texts_style {
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 150%;
+
+	/* letter-spacing: 0.02em; */
 }

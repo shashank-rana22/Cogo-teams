@@ -1,4 +1,4 @@
-import { Legend, ProgressBar, cl, Popover, Placeholder } from '@cogoport/components';
+import { Legend, ProgressBar, cl, Popover, Placeholder, Tooltip } from '@cogoport/components';
 import { IcMInfo, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
@@ -13,13 +13,13 @@ import showInTooltop from '../../utils/getOverFlowData';
 import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 import styles from '../styles.module.css';
 
-function TotalPayablesRecievables({ globalFilters }) {
+function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 	const {
 		receivablesData,
 		recievablesTab,
 		setRecievablesTab,
 		receivablesLoading,
-	} = useGetReceivablesList({ globalFilters });
+	} = useGetReceivablesList({ globalFilters, entityTabFilters });
 
 	const { payablesData, payablesLoading } = useGetPayablesList({ globalFilters });
 	const { overdueAmount = 0, nonOverdueAmount = 0, notPaidDocumentCount = 0 } = receivablesData || {};
@@ -65,7 +65,18 @@ function TotalPayablesRecievables({ globalFilters }) {
 								<div className={styles.border} />
 							</div>
 							<div className={styles.icon}>
-								<IcMInfo />
+								<Tooltip
+									content={(
+										<div className={styles.text_styles}>
+											sum of all invoices billed to the customer but not yet paid for
+										</div>
+									)}
+									placement="right"
+									caret={false}
+								>
+									<IcMInfo />
+								</Tooltip>
+
 							</div>
 						</div>
 						<div className={styles.segment_filters}>
@@ -152,7 +163,17 @@ function TotalPayablesRecievables({ globalFilters }) {
 								<div className={styles.border} />
 							</div>
 							<div className={styles.icon}>
-								<IcMInfo />
+								<Tooltip
+									content={(
+										<div className={styles.text_styles}>
+											sum of all invoices billed to Cogoport but not yet paid for
+										</div>
+									)}
+									placement="right"
+									caret={false}
+								>
+									<IcMInfo />
+								</Tooltip>
 							</div>
 						</div>
 					</div>

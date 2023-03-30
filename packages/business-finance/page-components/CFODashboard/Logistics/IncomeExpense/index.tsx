@@ -1,4 +1,4 @@
-import { Loader, Popover, Input, Toggle } from '@cogoport/components';
+import { Loader, Popover, Input, Toggle, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -16,14 +16,14 @@ function getFinancialYear(date) {
 	} return year;
 }
 
-function IncomeExpense({ globalFilters }) {
+function IncomeExpense({ globalFilters, entityTabFilters }) {
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [yearHandle, setYearHandle] = useState(false);
 	const [yearFilters, setYearFilters] = useState([]);
 	const {
 		incomeExpenseData = [],
 		incomeExpenseLoading,
-	} = useGetIncomeExpense({ globalFilters, yearFilters });
+	} = useGetIncomeExpense({ globalFilters, yearFilters, entityTabFilters });
 
 	const onChangeToggle = () => {
 		setToggleStatus(!toggleStatus);
@@ -47,8 +47,6 @@ function IncomeExpense({ globalFilters }) {
 
 	const onClickFinancialYear = (year) => {
 		const years = year?.split('-');
-		console.log(year, 'years');
-
 		setYearFilters(years);
 	};
 
@@ -72,11 +70,12 @@ function IncomeExpense({ globalFilters }) {
 	const financialYearData = () => (
 		<div>
 			{financialYears.map((year) => (
-				<div style={{ marginBottom: '10px' }}>
+				<div style={{ marginBottom: '10px', cursor: 'pointer' }}>
 					<div
 						key={year}
 						onClick={() => onClickFinancialYear(year)}
 						role="presentation"
+						style={{ cursor: 'pointer' }}
 					>
 						{year}
 
@@ -129,12 +128,23 @@ function IncomeExpense({ globalFilters }) {
 							<div className={styles.border} />
 						</div>
 						<div className={styles.icon}>
-							<IcMInfo />
+							<Tooltip
+								content={(
+									<div className={styles.text_styles}>
+										A comparison between consecutive months to identify the
+										month-on-month changes in cashflow.
+									</div>
+								)}
+								placement="right"
+								caret={false}
+							>
+								<IcMInfo />
+							</Tooltip>
 						</div>
 						<div style={{ marginTop: '10px', marginLeft: '20px' }}>
 							<Popover render={content()} caret={false} placement="bottom">
 								<div style={{ width: '140px', padding: '-10px' }}>
-									<Input />
+									<Input placeholder="Select Year Mode" size="sm" />
 								</div>
 							</Popover>
 						</div>

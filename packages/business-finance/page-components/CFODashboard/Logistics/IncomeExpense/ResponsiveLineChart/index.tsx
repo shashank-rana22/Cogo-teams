@@ -39,7 +39,7 @@ function ResponsiveLineChart({ lineData }) {
 				tickSize: 0, tickPadding: 10, tickRotation: 0,
 			}}
 			axisLeft={{
-				tickSize       : 0,
+				tickSize       : 20,
 				tickPadding    : -3,
 				tickRotation   : 0,
 				legendOffset   : 40,

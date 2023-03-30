@@ -1,4 +1,4 @@
-import { Button, Tooltip, Placeholder } from '@cogoport/components';
+import { Button, Placeholder } from '@cogoport/components';
 import { IcMOceanSchedules, IcMAirport, IcMTransport } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -19,14 +19,18 @@ interface ItemProps {
 	label?: string;
 }
 
-function AccordianCards({ globalFilters }) {
+function AccordianCards({ globalFilters, entityTabFilters }) {
 	const [isViewButtonOpen, setIsViewButtonOpen] = useState(null);
 	const {
 		accordianDataData,
 		accordianDataLoading,
-	} = useGetAccordianCardData({ globalFilters });
+	} = useGetAccordianCardData({ globalFilters, entityTabFilters });
 
-	const { accordianStatsData, refetch, accordianStatsLoading } = useGetAccordianStatsData({ globalFilters });
+	const {
+		accordianStatsData,
+		refetch,
+		accordianStatsLoading,
+	}	 = 	useGetAccordianStatsData({ globalFilters, entityTabFilters });
 
 	const iconMapping = {
 		Surface : <IcMTransport height={20} width={20} />,
@@ -99,24 +103,26 @@ function AccordianCards({ globalFilters }) {
 									? <Placeholder height="20px" width="200px" margin="10px 0px 20px 50px" />
 									: (
 										<div className={styles.amount_div}>
-											<Tooltip
-												content="Profit : INR 10,00,000.34 (AR - AP)"
+											{/* <Tooltip
+												content=""
 												placement="top"
 												caret={false}
-											>
-												<div className={styles.amounts}>
-													<div className={styles.pills}>
-														{showInTooltop(
-															getFormattedPrice(Math.abs(
-																item.accountRec - (item.accountPay * -1),
-															), 'INR'),
-															getAmountInLakhCrK(Math.abs(
-																item.accountRec - (item.accountPay * -1),
-															), 'INR'),
-														)}
-													</div>
+											> */}
+											<div className={styles.amounts}>
+												<div className={item.accountRec + item.accountPay >= 0
+													? styles.pills : styles.pill}
+												>
+													{showInTooltop(
+														getFormattedPrice(Math.abs(
+															item.accountRec + item.accountPay,
+														), 'INR'),
+														getAmountInLakhCrK(Math.abs(
+															item.accountRec + item.accountPay,
+														), 'INR'),
+													)}
 												</div>
-											</Tooltip>
+											</div>
+											{/* </Tooltip> */}
 										</div>
 									)}
 								<div className={styles.border} />
@@ -242,11 +248,11 @@ function AccordianCards({ globalFilters }) {
 																	<div style={{ marginLeft: '10px' }}>
 																		{showInTooltop(
 																			getFormattedPrice((
-																				accordianStatsData?.arData
+																				accordianStatsData?.cardDataAr
 																|| {})[((serviceDataMapping[item?.service]
 																|| {})[val?.key] || {})?.AR] || '', 'INR'),
 																			getAmountInLakhCrK((
-																				accordianStatsData?.arData
+																				accordianStatsData?.cardDataAr
 																|| {})[((serviceDataMapping[item?.service]
 																|| {})[val?.key] || {})?.AR] || '', 'INR'),
 																		)}
@@ -257,11 +263,11 @@ function AccordianCards({ globalFilters }) {
 																	<div style={{ marginLeft: '10px' }}>
 																		{showInTooltop(
 																			getFormattedPrice((
-																				(accordianStatsData?.apData
+																				(accordianStatsData?.cardDataAp
 																|| {})[((serviceDataMapping[item?.service]
 																|| {})[val?.key] || {})?.AR] || '') * -1, 'INR'),
 																			getAmountInLakhCrK((
-																				(accordianStatsData?.apData
+																				(accordianStatsData?.cardDataAp
 																|| {})[((serviceDataMapping[item?.service]
 																|| {})[val?.key] || {})?.AR] || '') * -1, 'INR'),
 																		)}

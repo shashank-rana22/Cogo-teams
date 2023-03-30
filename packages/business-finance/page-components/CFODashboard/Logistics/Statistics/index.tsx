@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, Tooltip } from '@cogoport/components';
 import { IcMInfo, IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -9,8 +9,8 @@ import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
-function Statistics({ globalFilters }) {
-	const { todayStatsData, todayStatsLoading } = useGetTodayStats({ globalFilters });
+function Statistics({ globalFilters, entityTabFilters }) {
+	const { todayStatsData, todayStatsLoading } = useGetTodayStats({ globalFilters, entityTabFilters });
 	const {
 		todayPurchaseStats, todaySalesStats,
 		totalCashFlow = 0, cashFlowDiffFromYesterday = 0,
@@ -23,10 +23,24 @@ function Statistics({ globalFilters }) {
 			<div className={styles.card}>
 				<div style={{ display: 'flex' }}>
 					<div className={styles.main_div}>
-						<span className={styles.text}>Today’s Statistics</span>
-						<span className={styles.icon}>
-							<IcMInfo />
-						</span>
+						<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+							<div className={styles.text}>Today’s Statistics</div>
+							<div className={styles.icon}>
+								<Tooltip
+									content={(
+										<div className={styles.texts_style}>
+											cash flow projection that is estimated by taking
+											into account the total value of invoices and bills
+											generated on the current day
+										</div>
+									)}
+									placement="right"
+									caret={false}
+								>
+									<IcMInfo />
+								</Tooltip>
+							</div>
+						</div>
 						<div className={styles.border} />
 					</div>
 					<div className={styles.border_left_side} />
@@ -100,16 +114,22 @@ function Statistics({ globalFilters }) {
 									)}
 								</div>
 								<div className={styles.text_styles}>
-									<div className={styles.icon_styles}><IcMArrowNext height={20} width={20} /></div>
+									<div className={cashFlowDiffFromYesterday >= 0
+										? styles.icon_plus_styles : styles.icon_minus_styles}
+									>
+										<IcMArrowNext height={20} width={20} />
+
+									</div>
 									<div style={{ display: 'flex' }}>
 										<div style={{ marginRight: '2px' }}>
-											{showInTooltop(
-												getFormattedPrice(cashFlowDiffFromYesterday, 'INR'),
-												getAmountInLakhCrK(cashFlowDiffFromYesterday, 'INR'),
-											)}
+											{cashFlowDiffFromYesterday}
 										</div>
 										%
-										<span style={{ marginLeft: '10px' }}>more than yesterday</span>
+										<span style={{ marginLeft: '10px' }}>
+											{cashFlowDiffFromYesterday >= 0 ? 'more' : 'less'}
+											{' '}
+											than yesterday
+										</span>
 									</div>
 								</div>
 							</>

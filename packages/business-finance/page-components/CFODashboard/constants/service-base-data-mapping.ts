@@ -1,48 +1,48 @@
 export const serviceDataMapping = {
 	Ocean: {
 		overall: {
-			AR : 'overdueAmount',
-			AP : 'overdueAmount',
+			AR : 'totalOverdue',
+			AP : 'totalOverdue',
 		},
 		import: {
-			AR : 'totalOceanImportDue',
-			AP : 'totalOceanImportDue',
+			AR : 'totalImportDue',
+			AP : 'totalImportDue',
 		},
 		export: {
-			AR : 'totalOceanExportDue',
-			AP : 'totalOceanExportDue',
+			AR : 'totalExportDue',
+			AP : 'totalExportDue',
 		},
 	},
 	Air: {
 		overall: {
-			AR : 'overdueAmount',
-			AP : 'overdueAmount',
+			AR : 'totalOverdue',
+			AP : 'totalOverdue',
 		},
 		import: {
-			AR : 'totalAirImportDue',
-			AP : 'totalAirImportDue',
+			AR : 'totalImportDue',
+			AP : 'totalImportDue',
 		},
 		export: {
-			AR : 'totalAirExportDue',
-			AP : 'totalAirExportDue',
+			AR : 'totalExportDue',
+			AP : 'totalExportDue',
 		},
 		other: {
-			AR : 'totalAirOthersDue',
-			AP : 'totalAirOthersDue',
+			AR : 'totalOtherDue',
+			AP : 'totalOtherDue',
 		},
 	},
 	Surface: {
 		overall: {
-			AR : 'overdueAmount',
-			AP : 'overdueAmount',
+			AR : 'totalOverdue',
+			AP : 'totalOverdue',
 		},
 		domestic: {
-			AR : 'totalSurfaceDomesticDue',
-			AP : 'totalSurfaceDomesticDue',
+			AR : 'totalDomesticDue',
+			AP : 'totalDomesticDue',
 		},
 		local: {
-			AR : 'totalSurfaceLocalDue',
-			AP : 'totalSurfaceLocalDue',
+			AR : 'totalLocalDue',
+			AP : 'totalLocalDue',
 		},
 	},
 

@@ -8,8 +8,9 @@ interface GlobalInterface {
 }
 interface Props {
 	globalFilters?:GlobalInterface;
+	entityTabFilters?:string
 }
-const useGetTodayStats = ({ globalFilters }:Props) => {
+const useGetTodayStats = ({ globalFilters, entityTabFilters }:Props) => {
 	const { serviceType } = globalFilters || {};
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -25,7 +26,8 @@ const useGetTodayStats = ({ globalFilters }:Props) => {
 			try {
 				trigger({
 					params: {
-						serviceTypes: serviceType,
+						serviceTypes : serviceType,
+						entityCode   : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
 					},
 				});
 			} catch (e) {
@@ -33,7 +35,7 @@ const useGetTodayStats = ({ globalFilters }:Props) => {
 			}
 		};
 		refetch();
-	}, [serviceType, trigger]);
+	}, [serviceType, trigger, entityTabFilters]);
 
 	return {
 		todayStatsLoading : loading,

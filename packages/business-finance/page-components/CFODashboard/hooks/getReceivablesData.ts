@@ -1,16 +1,23 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+import { format } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+interface DateInterface {
+	startDate?:Date
+	endDate?:Date
+}
 interface GlobalInterface {
 	serviceType?:string[],
-	date?:Date,
+	date?: DateInterface
 }
 interface Props {
 	globalFilters?:GlobalInterface;
+	entityTabFilters?:string
 }
-const useGetReceivablesList = ({ globalFilters }:Props) => {
-	const { serviceType } = globalFilters || {};
+
+const useGetReceivablesList = ({ globalFilters, entityTabFilters }:Props) => {
+	const { startDate, endDate } = globalFilters?.date || {};
 	const [recievablesTab, setRecievablesTab] = useState('all');
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -24,7 +31,7 @@ const useGetReceivablesList = ({ globalFilters }:Props) => {
 
 	useEffect(() => {
 		const buyerTypeFilter = () => {
-			if (recievablesTab === 'ie' || recievablesTab === 'cp' || recievablesTab === 'ent') {
+			if (recievablesTab === 'ie' || recievablesTab === 'cp' || recievablesTab === 'enterprise') {
 				return recievablesTab;
 			}
 			return undefined;
@@ -33,9 +40,14 @@ const useGetReceivablesList = ({ globalFilters }:Props) => {
 			try {
 				trigger({
 					params: {
-						serviceType,
+						entityCode  : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
+						serviceType : globalFilters?.serviceType,
 						accountMode : 'AR',
 						buyerType   : buyerTypeFilter(),
+						startDate   : startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
+							: undefined,
+						endDate: endDate
+							? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
 					},
 				});
 			} catch (e) {
@@ -43,7 +55,7 @@ const useGetReceivablesList = ({ globalFilters }:Props) => {
 			}
 		};
 		refetch();
-	}, [serviceType, recievablesTab, trigger]);
+	}, [globalFilters?.serviceType, recievablesTab, endDate, startDate, trigger, entityTabFilters]);
 
 	return {
 		receivablesData    : data,

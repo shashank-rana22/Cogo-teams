@@ -14,7 +14,7 @@ function totalRecievablesStats() {
 		},
 		{
 			label : 'ENT',
-			value : 'ent',
+			value : 'enterprise',
 			// badge : FINANCE_ACCEPTED,
 		},
 		{

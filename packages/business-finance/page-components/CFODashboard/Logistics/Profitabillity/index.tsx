@@ -1,4 +1,4 @@
-import { Input, Pagination, Select } from '@cogoport/components';
+import { Input, Pagination, Select, Tooltip } from '@cogoport/components';
 import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -9,18 +9,18 @@ import getProfitabillityColumn from '../../utils/getProfitabillityColumn';
 import { jobsOptions } from './options';
 import styles from './styles.module.css';
 
-function Profitabillity({ globalFilters }) {
+function Profitabillity({ globalFilters, entityTabFilters }) {
 	const [filters, setFilters] = useState({});
 	const [jobsFilters, setJobsFilters] = useState('');
 
 	const tab = [
 		{
 			key   : 'shipment',
-			label : 'Shipment',
+			label : 'Shipment View',
 		},
 		{
 			key   : 'customer',
-			label : 'Customer',
+			label : 'Customer View',
 		},
 	];
 	const [tabs, setTabs] = useState('shipment');
@@ -29,7 +29,7 @@ function Profitabillity({ globalFilters }) {
 		profitabillityLoading,
 		searchValue,
 		setSearchValue,
-	} = useGetProfitabillityShipmentList({ tabs, filters, setFilters, jobsFilters, globalFilters });
+	} = useGetProfitabillityShipmentList({ tabs, filters, setFilters, jobsFilters, globalFilters, entityTabFilters });
 
 	const { pageIndex = 0, pageSize = 0, totalRecord, shipmentList = [], customerList = [] } = profitabillityData || {};
 
@@ -46,7 +46,17 @@ function Profitabillity({ globalFilters }) {
 					<div className={styles.border} />
 				</div>
 				<div className={styles.icon}>
-					<IcMInfo />
+					<Tooltip
+						content={(
+							<div className={styles.text_styles}>
+								Shipment and customer level statistics
+							</div>
+						)}
+						placement="right"
+						caret={false}
+					>
+						<IcMInfo />
+					</Tooltip>
 				</div>
 			</div>
 			<div className={styles.container}>
@@ -61,8 +71,8 @@ function Profitabillity({ globalFilters }) {
 						>
 							<div className={item.key === tabs ? styles.sub_container_click : styles.sub_container}>
 								{item.label}
-								{' '}
-								{/* {tabs === 'shipment' ? profitabillityData?.averageShipmentProfit || 0
+								{/* {' '}
+								{tabs === 'shipment' ? profitabillityData?.averageShipmentProfit || 0
 									: profitabillityData?.averageCustomerProfit || 0}
 								% */}
 							</div>
@@ -87,7 +97,8 @@ function Profitabillity({ globalFilters }) {
 						size="sm"
 						value={searchValue}
 						onChange={(e: any) => setSearchValue(e)}
-						placeholder="Search by SID/Booking Party Name.."
+						placeholder={tabs === 'shipment'
+							? 'Search by SID/Booking Party Name..' : 'Search by Booking Party Name..'}
 						suffix={(
 							<div style={{ margin: '4px', display: 'flex' }}>
 								<IcMSearchlight height={15} width={15} />

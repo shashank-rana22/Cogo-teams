@@ -12,8 +12,9 @@ interface GlobalInterface {
 }
 interface Props {
 	globalFilters?:GlobalInterface;
+	entityTabFilters?:string;
 }
-const useGetAccordianCardData = ({ globalFilters }:Props) => {
+const useGetAccordianCardData = ({ globalFilters, entityTabFilters }:Props) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/finance-service-wise-rec-pay',
@@ -29,7 +30,8 @@ const useGetAccordianCardData = ({ globalFilters }:Props) => {
 			try {
 				trigger({
 					params: {
-						startDate: startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
+						entityCode : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
+						startDate  : startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
 							: undefined,
 						endDate: endDate
 							? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
@@ -40,7 +42,7 @@ const useGetAccordianCardData = ({ globalFilters }:Props) => {
 			}
 		};
 		refetch();
-	}, [globalFilters?.date, endDate, startDate, trigger]);
+	}, [globalFilters?.date, endDate, startDate, trigger, entityTabFilters]);
 
 	return {
 		accordianDataLoading : loading,

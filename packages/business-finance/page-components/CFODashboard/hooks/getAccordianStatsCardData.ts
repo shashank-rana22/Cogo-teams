@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 
-const useGetAccordianStatsData = ({ globalFilters }) => {
+const useGetAccordianStatsData = ({ globalFilters, entityTabFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/finance-service-wise-overdue',
@@ -32,6 +32,7 @@ const useGetAccordianStatsData = ({ globalFilters }) => {
 						? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
 					interfaceType : servicemapping[serviceName] || undefined,
 					tradeType     : tradeTypeMapping(),
+					entityCode    : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
 				},
 			});
 		} catch (e) {
