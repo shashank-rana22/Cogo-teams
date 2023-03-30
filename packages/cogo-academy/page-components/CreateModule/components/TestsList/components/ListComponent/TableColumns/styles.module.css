@@ -31,3 +31,12 @@
 	flex-wrap: wrap;
 	justify-content: center;
 }
+
+.topic_pill{
+	max-width: 120px;
+}
+.topic_pill div{
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+}
