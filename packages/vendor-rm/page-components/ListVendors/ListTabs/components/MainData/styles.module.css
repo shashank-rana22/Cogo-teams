@@ -1,3 +1,5 @@
+/* stylelint-disable selector-class-pattern */
+
 .main {
 	display: flex;
 	gap: 3%;
