@@ -3,7 +3,7 @@ import { Pagination } from '@cogoport/components';
 import CrmTable from '../../../../common/CrmTable';
 import useRequestOrganization from '../../../../hooks/useRequestOrganization';
 
-import { REQUEST_COLUMNS } from './get-request-columns';
+import { getRequestColumns } from './get-request-columns';
 import styles from './styles.module.css';
 
 function RequestTab({ organization_id = '', type = '' }) {
@@ -17,7 +17,7 @@ function RequestTab({ organization_id = '', type = '' }) {
 
 	const { page, page_limit, total_count } = paginationData;
 
-	const columns = REQUEST_COLUMNS({ refetch });
+	const columns = getRequestColumns({ refetch });
 
 	return (
 		<div className={styles.container}>
