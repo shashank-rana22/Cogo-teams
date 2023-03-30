@@ -20,6 +20,11 @@ const BUTTONS_MAPPING = {
 	},
 };
 
+const URL_MAPPING = {
+	upload_in_bulk : ['/learning/faq/create/upload?type=questions', '/learning/faq/create/upload?type=questions'],
+	add_question   : ['/learning/faq/create/question', '/learning/faq/create/question'],
+};
+
 function AddedQuestions(props) {
 	const {
 		page,
@@ -41,35 +46,18 @@ function AddedQuestions(props) {
 
 	const router = useRouter();
 
-	const onClickUpload = () => {
-		router.push(
-			'/learning/faq/create/upload?type=questions',
-			'/learning/faq/create/upload?type=questions',
-		);
-	};
-
-	const onClickQuestion = () => {
-		router.push(
-			'/learning/faq/create/question',
-			'/learning/faq/create/question',
-		);
+	const onClickFunction = ({ type }) => {
+		router.push(...URL_MAPPING[type]);
 	};
 
 	const renderTable = () => {
-		const onClick = () => {
-			router.push(
-				'/learning/faq/create/question',
-				'/learning/faq/create/question',
-			);
-		};
-
 		if (!questionListLoading && isEmpty(data)) {
 			if (activeList === 'published') {
 				return (
 					<EmptyState
 						text="There are no questions right now. Start with adding a question....."
 						btn_text="Add Question"
-						onClick={onClick}
+						onClick={() => onClickFunction({ type: 'add_question' })}
 					/>
 				);
 			} if (activeList === 'draft') {
@@ -77,7 +65,7 @@ function AddedQuestions(props) {
 					<EmptyState
 						text="There are no drafts right now."
 						btn_text="Add Question"
-						onClick={onClick}
+						onClick={() => onClickFunction({ type: 'add_question' })}
 					/>
 				);
 			} if (activeList === 'inactive') {
@@ -116,11 +104,6 @@ function AddedQuestions(props) {
 		);
 	};
 
-	const BUTTONS_FUNCTION_MAPPING = {
-		upload_in_bulk : onClickUpload,
-		add_question   : onClickQuestion,
-	};
-
 	return (
 		<div className={styles.container}>
 			<Header
@@ -138,13 +121,12 @@ function AddedQuestions(props) {
 			<div className={styles.button_container}>
 				{Object.keys(BUTTONS_MAPPING).map((item) => {
 					const { label, themeType } = BUTTONS_MAPPING[item];
-					const FunctionToUse = BUTTONS_FUNCTION_MAPPING[item];
 
 					return (
 						<Button
 							type="button"
 							style={{ marginLeft: 8 }}
-							onClick={FunctionToUse}
+							onClick={() => onClickFunction({ type: item })}
 							themeType={themeType}
 						>
 							{label}
