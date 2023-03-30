@@ -30,6 +30,8 @@ function TestResultMessage({ stats_data }) {
 				src={image_url}
 				alt={alt}
 				className={styles.image_container}
+				width={42}
+				height={42}
 			/>
 
 			<div className={styles.column}>

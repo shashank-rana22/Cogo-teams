@@ -79,9 +79,8 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 		id       : 'time_taken',
 		accessor : ({ time_taken = '' }) => {
 			const timeTaken = Math.ceil(time_taken);
-
 			return (
-				time_taken ? (
+				(time_taken > 0) ? (
 					<div>
 						{timeTaken}
 						{' '}
