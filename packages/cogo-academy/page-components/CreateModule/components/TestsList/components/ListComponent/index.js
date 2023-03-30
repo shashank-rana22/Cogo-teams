@@ -34,7 +34,7 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 	const {
 		loading: updateLoading,
 		createQuestionSet,
-	} = useCreateQuestionSet();
+	} = useCreateQuestionSet({ questionSetId, getTestQuestionTest: fetchList });
 
 	const { loading:updateTestLoading, updateTest } = useUpdateTest();
 
@@ -55,7 +55,7 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 	};
 
 	const handleDeleteQuestionSet = () => {
-		createQuestionSet({ questionSetId, getTestQuestionTest: fetchList, type: 'delete', from: 'test' });
+		createQuestionSet({ type: 'delete', from: 'test' });
 	};
 
 	const deleteFunctionMapping = {

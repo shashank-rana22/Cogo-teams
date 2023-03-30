@@ -11,12 +11,17 @@ const useSavedQuestionDetails = ({
 }) => {
 	const [showModal, setShowModal] = useState({});
 
-	const { updateStandAloneTestQuestion, loading } = useUpdateStandAloneTestQuestion();
+	const { updateStandAloneTestQuestion, loading } = useUpdateStandAloneTestQuestion({
+		questionSetId,
+		getTestQuestionTest,
+		setEditDetails,
+		setAllKeysSaved,
+	});
 
 	const {
 		loading: caseStudyLoading,
 		updateCaseStudy,
-	} = useUpdateCaseStudy();
+	} = useUpdateCaseStudy({ setEditDetails, setAllKeysSaved, getTestQuestionTest, questionSetId });
 
 	const handleEditQuestion = ({ item }) => {
 		setAllKeysSaved(false);
@@ -30,19 +35,11 @@ const useSavedQuestionDetails = ({
 			updateStandAloneTestQuestion({
 				testQuestionId : id,
 				action         : 'delete',
-				getTestQuestionTest,
-				questionSetId,
-				setEditDetails,
-				setAllKeysSaved,
 			});
 		} else {
 			updateCaseStudy({
 				id,
 				action: 'delete',
-				getTestQuestionTest,
-				questionSetId,
-				setEditDetails,
-				setAllKeysSaved,
 			});
 		}
 	};

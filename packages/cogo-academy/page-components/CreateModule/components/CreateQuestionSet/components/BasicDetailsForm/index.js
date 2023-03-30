@@ -35,7 +35,13 @@ function BasicDetailsForm({
 	const {
 		loading,
 		createQuestionSet,
-	} = useCreateQuestionSet();
+	} = useCreateQuestionSet({
+		setQuestionSetId,
+		getTestQuestionTest,
+		questionSetId,
+		setEditDetails,
+		setShowForm,
+	});
 
 	const onSubmit = (values) => {
 		createQuestionSet({

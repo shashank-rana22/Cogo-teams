@@ -5,7 +5,12 @@ import { isEmpty } from '@cogoport/utils';
 
 import getPayload from '../utils/getPayload';
 
-function useUpdateStandAloneTestQuestion() {
+function useUpdateStandAloneTestQuestion({
+	questionSetId,
+	getTestQuestionTest,
+	setEditDetails,
+	setAllKeysSaved,
+}) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_stand_alone_test_question',
@@ -13,13 +18,9 @@ function useUpdateStandAloneTestQuestion() {
 
 	const updateStandAloneTestQuestion = async ({
 		values,
-		questionSetId,
-		getTestQuestionTest,
 		reset = () => {},
-		testQuestionId,
 		action,
-		setEditDetails,
-		setAllKeysSaved,
+		testQuestionId,
 	}) => {
 		try {
 			const { hasError, ...payload } = getPayload({

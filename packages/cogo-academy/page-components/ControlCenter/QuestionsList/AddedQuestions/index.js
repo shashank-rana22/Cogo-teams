@@ -9,6 +9,17 @@ import StyledTable from '../../../../commons/StyledTable';
 import Header from './Header';
 import styles from './styles.module.css';
 
+const BUTTONS_MAPPING = {
+	upload_in_bulk: {
+		label     : 'Upload in Bulk',
+		themeType : 'primary',
+	},
+	add_question: {
+		label     : 'Add Question',
+		themeType : 'secondary',
+	},
+};
+
 function AddedQuestions(props) {
 	const {
 		page,
@@ -105,6 +116,11 @@ function AddedQuestions(props) {
 		);
 	};
 
+	const BUTTONS_FUNCTION_MAPPING = {
+		upload_in_bulk : onClickUpload,
+		add_question   : onClickQuestion,
+	};
+
 	return (
 		<div className={styles.container}>
 			<Header
@@ -120,19 +136,21 @@ function AddedQuestions(props) {
 			/>
 
 			<div className={styles.button_container}>
+				{Object.keys(BUTTONS_MAPPING).map((item) => {
+					const { label, themeType } = BUTTONS_MAPPING[item];
+					const FunctionToUse = BUTTONS_FUNCTION_MAPPING[item];
 
-				<Button type="button" style={{ marginLeft: 8 }} onClick={onClickUpload}>
-					Upload in Bulk
-				</Button>
-
-				<Button
-					type="button"
-					style={{ marginLeft: 8 }}
-					onClick={onClickQuestion}
-					themeType="secondary"
-				>
-					Add Question
-				</Button>
+					return (
+						<Button
+							type="button"
+							style={{ marginLeft: 8 }}
+							onClick={FunctionToUse}
+							themeType={themeType}
+						>
+							{label}
+						</Button>
+					);
+				})}
 			</div>
 
 			{renderTable()}

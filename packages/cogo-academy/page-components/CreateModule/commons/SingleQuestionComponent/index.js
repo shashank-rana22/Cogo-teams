@@ -29,7 +29,12 @@ function SingleQuestionComponent({
 }) {
 	const controls = getControls({ mode });
 
-	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion();
+	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion({
+		questionSetId,
+		getTestQuestionTest,
+		setEditDetails,
+		setAllKeysSaved,
+	});
 
 	const handleDelete = () => {
 		if (field.isNew) {
@@ -38,11 +43,7 @@ function SingleQuestionComponent({
 			updateCaseStudyQuestion({
 				action              : 'delete',
 				caseStudyQuestionId : editDetails?.sub_question?.[index]?.id,
-				questionSetId,
-				getTestQuestionTest,
 				reset,
-				setEditDetails,
-				setAllKeysSaved,
 				testQuestionId      : editDetails?.id,
 			});
 		}
@@ -53,11 +54,7 @@ function SingleQuestionComponent({
 
 		updateCaseStudyQuestion({
 			values              : formValues?.case_questions?.[index],
-			questionSetId,
-			getTestQuestionTest,
 			reset,
-			setEditDetails,
-			setAllKeysSaved,
 			action              : field.isNew ? 'create' : 'update',
 			caseStudyQuestionId : editDetails?.sub_question?.[index]?.id,
 			testQuestionId      : editDetails?.id,

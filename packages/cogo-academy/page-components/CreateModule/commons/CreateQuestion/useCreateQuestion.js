@@ -29,23 +29,24 @@ const useCreateQuestion = ({
 
 	const { createTestQuestion, loading } = useCreateTestQuestion();
 
-	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion();
+	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion({
+		questionSetId,
+		getTestQuestionTest,
+		setEditDetails,
+		setAllKeysSaved,
+	});
 
 	const {
 		loading: updateCaseStudyLoading,
 		updateCaseStudy,
-	} = useUpdateCaseStudy();
+	} = useUpdateCaseStudy({ setEditDetails, setAllKeysSaved, getTestQuestionTest, questionSetId });
 
 	const onSubmit = (values) => {
 		if (!isNewQuestion && editDetails?.question_type !== 'case_study') {
 			updateStandAloneTestQuestion({
 				values,
-				questionSetId,
-				getTestQuestionTest,
 				reset,
 				action         : 'update',
-				setAllKeysSaved,
-				setEditDetails,
 				testQuestionId : editDetails?.id,
 			});
 		} else {
@@ -73,10 +74,6 @@ const useCreateQuestion = ({
 		await apiToUse({
 			id             : editDetails?.id,
 			action         : 'delete',
-			getTestQuestionTest,
-			questionSetId,
-			setEditDetails,
-			setAllKeysSaved,
 			reset,
 			testQuestionId : editDetails?.id,
 		});
