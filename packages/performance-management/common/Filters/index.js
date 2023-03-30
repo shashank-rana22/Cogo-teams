@@ -42,7 +42,6 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	const managerName = watch('manager_name');
 
 	const cogoUsersControl = useListReassignControls();
-	console.log('habdiscbn::', values);
 
 	useEffect(() => {
 		const { department, designation, status: Status, manager_id, year, month, date_range } = values;
