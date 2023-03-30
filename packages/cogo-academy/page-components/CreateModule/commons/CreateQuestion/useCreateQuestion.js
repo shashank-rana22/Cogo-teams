@@ -34,6 +34,7 @@ const useCreateQuestion = ({
 		getTestQuestionTest,
 		setEditDetails,
 		setAllKeysSaved,
+		reset,
 	});
 
 	const {
@@ -45,12 +46,11 @@ const useCreateQuestion = ({
 		if (!isNewQuestion && editDetails?.question_type !== 'case_study') {
 			updateStandAloneTestQuestion({
 				values,
-				reset,
 				action         : 'update',
 				testQuestionId : editDetails?.id,
 			});
 		} else {
-			createTestQuestion({ values, questionSetId, getTestQuestionTest, reset });
+			createTestQuestion({ values, questionSetId, getTestQuestionTest });
 		}
 	};
 
