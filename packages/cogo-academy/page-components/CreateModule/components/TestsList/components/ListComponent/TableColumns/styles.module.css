@@ -32,11 +32,12 @@
 	justify-content: center;
 }
 
-.topic_pill{
+.topic_pill {
 	max-width: 120px;
 }
-.topic_pill div{
+
+.topic_pill div {
+	overflow: hidden;
+	text-overflow: ellipsis;
 	white-space: nowrap;
-  	overflow: hidden;
-  	text-overflow: ellipsis;
 }
