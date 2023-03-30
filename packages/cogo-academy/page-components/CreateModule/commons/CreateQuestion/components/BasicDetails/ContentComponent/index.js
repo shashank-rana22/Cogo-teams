@@ -8,14 +8,14 @@ const constants = ['topic', 'audience_ids', 'question_type', 'difficulty_level',
 const getQuestionType = (question_type) => (question_type === 'case_study' ? 'Case Study' : 'Stand Alone');
 
 const getValue = ({ item, editDetails }) => {
-	const { sub_question = [], question_type = '' } = editDetails || {};
+	const { test_case_study_questions = [], question_type = '' } = editDetails || {};
 
 	const MAPPING = {
 		question_type    : getQuestionType(question_type),
 		audience_ids     : '--',
 		difficulty_level : startCase(editDetails?.[item] || '--'),
 		topic            : editDetails?.[item] || '--',
-		questions        : sub_question.length,
+		questions        : test_case_study_questions.length,
 	};
 
 	return MAPPING[item];

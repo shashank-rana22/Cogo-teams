@@ -2,6 +2,7 @@ import { Accordion, Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import QuestionCard from '../../../../CreateModule/commons/QuestionCard';
+import toFixed from '../../../../CreateModule/utils/toFixed';
 
 import styles from './styles.module.css';
 
@@ -36,7 +37,7 @@ function TitleComponent({
 				{students_appeared}
 				{' '}
 				(
-				{appeared_percent.toFixed(2)}
+				{toFixed(appeared_percent, 2)}
 				%
 				)
 			</div>

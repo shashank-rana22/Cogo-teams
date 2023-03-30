@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import toFixed from '../../../CreateModule/utils/toFixed';
+
 import styles from './styles.module.css';
 
 function Overview() {
@@ -48,7 +50,7 @@ function Overview() {
 				<div className={styles.content}>
 					<div className={styles.text}>Avg Percentile</div>
 					<div className={styles.value}>
-						{+(response.average_percentile || 0).toFixed(2)}
+						{+toFixed(response.average_percentile, 2)}
 						{' '}
 						%
 					</div>

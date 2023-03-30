@@ -1,5 +1,6 @@
 import { startCase, format } from '@cogoport/utils';
 
+import toFixed from '../../../../CreateModule/utils/toFixed';
 import SortComponent from '../../../commons/SortComponent';
 
 import styles from './styles.module.css';
@@ -38,9 +39,10 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 		id       : 'score_achieved',
 		accessor : ({ final_score = '', test = {} }) => (
 			<section>
-				{Number(final_score).toFixed(2) || '0'}
+				{toFixed(final_score, 2)}
 				/
-				{Number(test.total_marks).toFixed(2) || '0'}
+				{toFixed(test.total_marks, 2)}
+
 			</section>
 		),
 	},
@@ -58,7 +60,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 		),
 		id       : 'percentile',
 		accessor : ({ percentile = '' }) => (
-			<div>{percentile !== null ? Number(percentile).toFixed(2) : '-'}</div>
+			<div>{percentile !== null ? toFixed(percentile, 2) : '-'}</div>
 		),
 	},
 	{
@@ -75,20 +77,16 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 		),
 		id       : 'time_taken',
 		accessor : ({ time_taken = '' }) => {
-			const time = Math.ceil(time_taken);
+			const timeTaken = Math.ceil(time_taken);
 
 			return (
-
-				time > 0 ? (
+				time_taken ? (
 					<div>
-						{time}
+						{timeTaken}
 						{' '}
-						{
-						time > 1 ? 'mins' : 'min'
-					}
+						{timeTaken > 1 ? 'mins' : 'min'}
 					</div>
 				) : ('-')
-
 			);
 		},
 	},

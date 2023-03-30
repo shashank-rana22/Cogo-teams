@@ -17,16 +17,19 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		),
 	},
 	{
-		Header   : 'TOPICS',
+		Header   : 'TOPIC',
 		id       : 'c',
 		accessor : ({ topic = [] }) => (
 			<section>
-				<Pill
-					size="md"
-					color="#CFEAED"
-				>
-					{startCase(topic)}
-				</Pill>
+				<Tooltip maxWidth={500} content={startCase(topic)} placement="top">
+					<Pill
+						className={styles.topic_pill}
+						size="md"
+						color="#CFEAED"
+					>
+						{startCase(topic)}
+					</Pill>
+				</Tooltip>
 			</section>
 		),
 	},
@@ -121,14 +124,16 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 		id       : 'c',
 		accessor : ({ topics = [] }) => (
 			<section className={styles.topics}>
-				{topics.map((topicItem) => (
-					<Pill
-						key={topicItem}
-						size="sm"
-						color="blue"
-					>
-						{startCase(topicItem)}
-					</Pill>
+				{topics.map((topic) => (
+					<Tooltip maxWidth={500} content={startCase(topic)} placement="top" key={topic}>
+						<Pill
+							className={styles.topic_pill}
+							size="sm"
+							color="#CFEAED"
+						>
+							{startCase(topic)}
+						</Pill>
+					</Tooltip>
 				))}
 				{topics.length === 0 && '-'}
 			</section>
