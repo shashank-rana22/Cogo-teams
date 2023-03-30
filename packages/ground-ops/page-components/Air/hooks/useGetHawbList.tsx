@@ -32,10 +32,6 @@ const useGetHawbList = (shipmentId) => {
 		})();
 	}, [shipmentId, trigger]);
 
-	useEffect(() => {
-		getHawbList();
-	}, [getHawbList]);
-
 	return {
 		data,
 		loading,

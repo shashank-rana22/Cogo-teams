@@ -65,7 +65,7 @@ function GenerateMAWB({
 
 	const [taskItem, setTaskItem] = useState({ ...item, ...item.documentData });
 
-	const category = taskItem.blCategory;
+	const category = item.blCategory;
 	const mawbId = item.id;
 
 	const [activeCategory, setActiveCategory] = useState(edit ? 'mawb' : taskItem.blCategory);
@@ -87,7 +87,7 @@ function GenerateMAWB({
 		if (edit && activeCategory === 'hawb') {
 			getHawbList();
 		}
-	}, []);
+	}, [activeCategory]);
 
 	useEffect(() => {
 		if (edit && activeCategory === 'hawb') {
@@ -117,6 +117,9 @@ function GenerateMAWB({
 	}, [activeHawb, activeCategory]);
 
 	useEffect(() => {
+		if (category === 'mawb') {
+			return;
+		}
 		if (hawbSuccess) {
 			setTaskItem({
 				...hawbData.data,
@@ -147,7 +150,7 @@ function GenerateMAWB({
 		setValue('shipperSignature', taskItem.customer_name || taskItem.shipperSignature);
 		setValue('amountOfInsurance', 'NIL');
 		setValue('accountingInformation', 'FREIGHT PREPAID');
-	}, [hawbSuccess, activeHawb]);
+	}, [hawbSuccess, activeHawb, category]);
 
 	useEffect(() => {
 		setChargeableWeight(formValues.chargeableWeight);
