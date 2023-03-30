@@ -12,7 +12,6 @@ function CaseStudyForm({
 	control,
 	register,
 	errors,
-	isNewQuestion,
 	editDetails,
 	getValues,
 	questionSetId,
@@ -54,7 +53,7 @@ function CaseStudyForm({
 							index={index}
 							errors={errors?.case_questions?.[index]}
 							type="case_study"
-							isNewQuestion={isNewQuestion}
+							isNewQuestion={field?.isNew}
 							remove={remove}
 							editDetails={editDetails}
 							getValues={getValues}
@@ -64,7 +63,6 @@ function CaseStudyForm({
 							setEditDetails={setEditDetails}
 							setAllKeysSaved={setAllKeysSaved}
 							mode={mode}
-							isNew={field?.isNew}
 						/>
 
 						{fields.length > 1 && field?.isNew ? (

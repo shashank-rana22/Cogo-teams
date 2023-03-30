@@ -26,7 +26,6 @@ function SingleQuestionComponent({
 	setEditDetails,
 	setAllKeysSaved,
 	mode,
-	isNew,
 }) {
 	const controls = getControls({ mode });
 
@@ -97,7 +96,7 @@ function SingleQuestionComponent({
 				name={`${name}.${index}.${controls[2].name}`}
 				editAnswerDetails={editAnswerDetails}
 				mode={mode}
-				isNewQuestion={isNew}
+				isNewQuestion={isNewQuestion}
 			/>
 
 			{type !== 'case_study' ? (
