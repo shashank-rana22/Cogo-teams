@@ -2,7 +2,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 
-const useFeedbackTableData = ({ organizationId = '', type = '' }) => {
+const useFeedbackTableData = ({ organizationId = '', type = '', route = '' }) => {
 	const [selectAll, setSelectAll] = useState(false);
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
 
@@ -14,6 +14,7 @@ const useFeedbackTableData = ({ organizationId = '', type = '' }) => {
 		filters    : {
 			organization_id      : type === 'lead_organization' ? undefined : organizationId,
 			lead_organization_id : type === 'lead_organization' ? organizationId : undefined,
+			status               : route === 'organization_feedbacks' ? undefined : 'pending',
 		},
 	});
 

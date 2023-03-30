@@ -17,7 +17,7 @@ function FeedbacksReceived({ organization_id = '', setActiveTab = () => {}, type
 		selectAll = false,
 		onChangeTableHeadCheckbox = () => {},
 		onChangeBodyCheckbox = () => {},
-	} = useFeedbackTableData({ organizationId: organization_id, type });
+	} = useFeedbackTableData({ organizationId: organization_id, type, route: 'organization_feedbacks' });
 
 	const { page, page_limit, total_count } = paginationData;
 

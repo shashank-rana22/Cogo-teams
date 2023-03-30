@@ -59,7 +59,7 @@ function ActionButton({
 					You are about to Deactivate a Request sent to
 					{' '}
 					<i>
-						{organization || '--'}
+						{third_party || '--'}
 					</i>
 					, are you sure?
 				</Modal.Body>
