@@ -4,10 +4,10 @@ import { startCase, format } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React, { useEffect } from 'react';
 
-import EmptyState from '../../common/EmptyState';
-import useListOrganizationDocuments from '../../hooks/useListOrganizationDocuments';
-import useListTradeDocuments from '../../hooks/useListTradeDocuments';
-import useUpdateOrganizationDocument from '../../hooks/useUpdateOrganizationDocument';
+import EmptyState from '../../../common/EmptyState';
+import useListOrganizationDocuments from '../../../hooks/useListOrganizationDocuments';
+import useListTradeDocuments from '../../../hooks/useListTradeDocuments';
+import useUpdateOrganizationDocument from '../../../hooks/useUpdateOrganizationDocument';
 
 import Loader from './Loader';
 import styles from './styles.module.css';

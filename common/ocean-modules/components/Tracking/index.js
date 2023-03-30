@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import useGetSaasContainerSubscription from '../hooks/useGetSaasContainerSubscription';
+import useGetSaasContainerSubscription from '../../hooks/useGetSaasContainerSubscription';
 
 import Body from './Body';
 import Header from './Header';

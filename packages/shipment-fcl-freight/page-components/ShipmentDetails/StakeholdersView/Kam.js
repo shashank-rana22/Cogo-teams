@@ -1,7 +1,6 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import Documents from '@cogoport/ocean-modules/Documents';
-import Tracking from '@cogoport/ocean-modules/Tracking';
+import { Documents, Tracking } from '@cogoport/ocean-modules';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import React, { useContext, useState } from 'react';
