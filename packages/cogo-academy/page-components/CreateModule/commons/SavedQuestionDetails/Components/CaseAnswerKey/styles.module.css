@@ -17,10 +17,10 @@
 
 .answer_key {
 	max-width: 250px;
+	margin-top: 12px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	margin-top: 12px;
 }
 
 .answer {
