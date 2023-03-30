@@ -17,7 +17,17 @@ import styles from './styles.module.css';
 const agentOtherChargesCode = [{ code: 'AWB', price: '150' }, { code: 'PCA', price: '250' }];
 const carrierOtherChargesCode = [{ code: 'AMS', price: '' }, { code: 'AWC', price: '' },
 	{ code: 'XRAY', price: '' }, { code: 'CGC', price: '' }];
-
+const unsavedFields = ['consigneeAddress',
+	'shipperName',
+	'shipperAddress',
+	'consigneeName',
+	'chargeableWeight'];
+const carrierOtherChargesValue = [
+	{
+		code  : '',
+		price : '',
+	},
+];
 interface NestedObj {
 	[key: string]: NestedObj | React.FC ;
 }
@@ -66,7 +76,7 @@ function GenerateMAWB({
 	const [taskItem, setTaskItem] = useState({ ...item, ...item.documentData });
 
 	const category = item.blCategory;
-	const mawbId = item.id;
+	const mawbId = item.documentId;
 
 	const [activeCategory, setActiveCategory] = useState(edit ? 'mawb' : taskItem.blCategory);
 
@@ -81,7 +91,7 @@ function GenerateMAWB({
 		(+taskItem.volume * 166.67),
 	) || 0.0).toFixed(2)));
 
-	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(taskItem.shipmentId);
+	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(item.shipmentId);
 
 	useEffect(() => {
 		if (edit && activeCategory === 'hawb') {
@@ -111,7 +121,7 @@ function GenerateMAWB({
 		if (activeHawb && !activeHawb.isNew) {
 			getHawb(activeHawb.id);
 		}
-		if (category === 'mawb' && edit) {
+		if (activeCategory === 'mawb' && edit) {
 			getHawb(mawbId);
 		}
 	}, [activeHawb, activeCategory]);
@@ -123,17 +133,25 @@ function GenerateMAWB({
 		if (hawbSuccess) {
 			setTaskItem({
 				...hawbData.data,
-				...hawbData.data.data,
+				...hawbData.data?.data,
 				originAirportId   : item.originAirportId,
 				serviceProviderId : item.serviceProviderId,
 			});
 			setHawbSuccess(false);
 		}
 		finalFields.forEach((c) => {
-			if (taskItem[c.name]) {
-				setValue(c.name, taskItem[c.name]);
-			} else {
+			if (activeCategory === 'hawb' && activeHawb.isNew && unsavedFields.includes(c.name)) {
 				setValue(c.name, '');
+			} else if (activeCategory === 'hawb' && activeHawb.isNew && c.name === 'carrierOtherCharges') {
+				const carrierOtherChargesData = [];
+				(taskItem[c.name] || carrierOtherChargesValue).forEach((value) => {
+					const tempItem = { ...value };
+					tempItem.price = '';
+					carrierOtherChargesData.push(tempItem);
+				});
+				setValue(c.name, carrierOtherChargesData);
+			} else {
+				setValue(c.name, taskItem[c.name] || '');
 			}
 		});
 		setValue('executedDate', taskItem.executedDate ? new Date(taskItem.executedDate) : new Date());
