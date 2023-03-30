@@ -1,4 +1,5 @@
 import { Pill, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMShare } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -70,8 +71,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		id       : 'updatedAt',
 		accessor : ({ updated_at = '' }) => (
 			<section>
-				<span className={styles.time}>{format(updated_at, 'dd MMM yy')}</span>
-				<span className={styles.time}>{format(updated_at, 'h:mm a')}</span>
+				<span className={styles.time}>{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</span>
+				<span className={styles.time}>{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</span>
 			</section>
 		),
 	},
