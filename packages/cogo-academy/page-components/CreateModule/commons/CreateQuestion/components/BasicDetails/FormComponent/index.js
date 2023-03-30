@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { TextAreaController, ChipsController } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 
@@ -24,8 +23,6 @@ function FormComponent({
 	setShowForm,
 }) {
 	const {
-		handleUpdateCaseStudy,
-		loading,
 		controls,
 		closeForm,
 	} = useHandleBasicDetails({
@@ -94,7 +91,7 @@ function FormComponent({
 						</div>
 					</div>
 
-					<div style={{ marginBottom: mode === 'view' || isNewQuestion ? '16px' : '60px' }}>
+					<div style={{ marginBottom: '16px' }}>
 						<TextAreaController
 							control={control}
 							{...((controls || []).find((item) => item.name === 'question_text'))}
@@ -102,18 +99,6 @@ function FormComponent({
 						{errors?.question_text ? <div className={styles.error_msg}>This is required</div> : null}
 					</div>
 				</>
-			) : null}
-
-			{!isNewQuestion && editDetails?.question_type === 'case_study' && mode !== 'view' ? (
-				<Button
-					className={styles.edit_button}
-					size="sm"
-					type="button"
-					loading={loading}
-					onClick={() => handleUpdateCaseStudy()}
-				>
-					Edit
-				</Button>
 			) : null}
 
 			{!isNewQuestion && editDetails?.question_type === 'case_study' ? (

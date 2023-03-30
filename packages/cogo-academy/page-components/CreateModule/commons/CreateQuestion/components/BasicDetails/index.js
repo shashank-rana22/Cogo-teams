@@ -28,7 +28,6 @@ function BasicDetails({
 					<ContentComponent
 						editDetails={editDetails}
 						setShowForm={setShowForm}
-						isNewQuestion={isNewQuestion}
 					/>
 				) : (
 					<FormComponent

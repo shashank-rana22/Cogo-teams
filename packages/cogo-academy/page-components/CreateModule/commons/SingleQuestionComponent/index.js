@@ -26,6 +26,7 @@ function SingleQuestionComponent({
 	setEditDetails,
 	setAllKeysSaved,
 	mode,
+	isNew,
 }) {
 	const controls = getControls({ mode });
 
@@ -34,6 +35,7 @@ function SingleQuestionComponent({
 		getTestQuestionTest,
 		setEditDetails,
 		setAllKeysSaved,
+		reset,
 	});
 
 	const handleDelete = () => {
@@ -43,7 +45,6 @@ function SingleQuestionComponent({
 			updateCaseStudyQuestion({
 				action              : 'delete',
 				caseStudyQuestionId : editDetails?.test_case_study_questions?.[index]?.id,
-				reset,
 				testQuestionId      : editDetails?.id,
 			});
 		}
@@ -54,7 +55,6 @@ function SingleQuestionComponent({
 
 		updateCaseStudyQuestion({
 			values              : formValues?.case_questions?.[index],
-			reset,
 			action              : field.isNew ? 'create' : 'update',
 			caseStudyQuestionId : editDetails?.test_case_study_questions?.[index]?.id,
 			testQuestionId      : editDetails?.id,
@@ -97,7 +97,7 @@ function SingleQuestionComponent({
 				name={`${name}.${index}.${controls[2].name}`}
 				editAnswerDetails={editAnswerDetails}
 				mode={mode}
-				isNewQuestion={isNewQuestion}
+				isNewQuestion={isNew}
 			/>
 
 			{type !== 'case_study' ? (

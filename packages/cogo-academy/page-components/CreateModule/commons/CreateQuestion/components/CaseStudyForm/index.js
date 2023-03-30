@@ -64,13 +64,14 @@ function CaseStudyForm({
 							setEditDetails={setEditDetails}
 							setAllKeysSaved={setAllKeysSaved}
 							mode={mode}
+							isNew={field?.isNew}
 						/>
 
-						{fields.length > 1 && isNewQuestion ? (
+						{fields.length > 1 && field?.isNew ? (
 							<IcMCrossInCircle
 								className={styles.delete_button}
-								width={20}
-								height={20}
+								width={16}
+								height={16}
 								onClick={() => remove(index, 1)}
 							/>
 						) : null}
