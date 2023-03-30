@@ -1,29 +1,36 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import React from 'react';
+
+import styles from './styles.module.css';
 
 const customStyle = { height: '14px' };
 
 function Loader() {
 	return (
-		<>
+		<div className={styles.container}>
 
-			<Placeholder style={{ marginRight: '50px' }} />
+			<div className={styles.details}>
+				<Placeholder style={{ marginRight: '50px' }} />
 
-			<Placeholder className="circle" width="45px" height="45px" />
+				<Placeholder className="circle" width="45px" height="45px" />
 
-			<Placeholder style={{ ...customStyle, margin: '0 0 10px 0' }} />
-			<Placeholder style={customStyle} />
+				<div className={styles.ports}>
+					<Placeholder style={{ ...customStyle, margin: '0 0 10px 0' }} />
+					<Placeholder style={customStyle} />
+				</div>
 
-			<Placeholder style={{ ...customStyle, margin: '0 0 10px 0' }} />
-			<Placeholder style={customStyle} />
+				<div className={cl` ${styles.ports} ${styles.destination}`}>
+					<Placeholder style={{ ...customStyle, margin: '0 0 10px 0' }} />
+					<Placeholder style={customStyle} />
+				</div>
 
-			<Placeholder style={{ marginRight: '16px' }} />
-			<Placeholder style={{ marginRight: '16px' }} />
-			<Placeholder style={{ marginRight: '16px' }} />
-			<Placeholder style={{ marginRight: '16px' }} />
+				<Placeholder style={{ marginRight: '16px' }} />
+				<Placeholder style={{ marginRight: '16px' }} />
+				<Placeholder style={{ marginRight: '16px' }} />
+				<Placeholder style={{ marginRight: '16px' }} />
+			</div>
 
-			<Placeholder width="100%" height="30px" />
-		</>
+		</div>
 	);
 }
 
