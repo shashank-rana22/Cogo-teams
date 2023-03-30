@@ -1,6 +1,7 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+
 import currencyCoversion from '../../../utils/currencyCoversion';
 import getMonthYear from '../../../utils/getMonthYear';
-import getShortFormatNumber from '../../../utils/getShortFormatNumber';
 import CustomerCountCard from '../../CustomerCountCard';
 import styles from '../styles.module.css';
 
@@ -38,7 +39,7 @@ const DesktopCard = ({
 						<div className={styles.text_tag}>
 							{val === undefined
 								? 0
-								: getShortFormatNumber(
+								: formatAmount(
 									'en-US',
 									currencyCoversion(currency, val?.total_amount || 0),
 									currency,

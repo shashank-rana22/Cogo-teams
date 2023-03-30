@@ -1,5 +1,6 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+
 import currencyCoversion from '../../../utils/currencyCoversion';
-import getShortFormatNumber from '../../../utils/getShortFormatNumber';
 import CustomerCountCard from '../../CustomerCountCard';
 import styles from '../styles.module.css';
 
@@ -36,7 +37,7 @@ function MobileCard({
 						<div className={styles.text_tag}>
 							{etdMonthData === undefined
 								? 0
-								: getShortFormatNumber(
+								: formatAmount(
 									'en-US',
 									currencyCoversion(
 										currency,
