@@ -1,4 +1,4 @@
-import Image from '@cogoport/next';
+import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
 

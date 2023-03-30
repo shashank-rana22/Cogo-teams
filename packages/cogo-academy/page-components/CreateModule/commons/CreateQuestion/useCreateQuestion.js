@@ -119,18 +119,20 @@ const useCreateQuestion = ({
 					explanation = [],
 				} = caseStudyQuestion || {};
 
-				setValue(`case_questions.${index}.question_type`, indQuestionType);
-				setValue(`case_questions.${index}.question_text`, indQuestionText);
-				setValue(`case_questions.${index}.audience_ids`, []);
-				setValue(`case_questions.${index}.explanation`, explanation?.[0]);
+				const childKey = `case_questions.${index}`;
+
+				setValue(`${childKey}.question_type`, indQuestionType);
+				setValue(`${childKey}.question_text`, indQuestionText);
+				setValue(`${childKey}.audience_ids`, []);
+				setValue(`${childKey}.explanation`, explanation?.[0]);
 
 				test_question_answers.forEach((answer, answerIndex) => {
 					const { answer_text, is_correct } = answer || {};
 
-					setValue(`case_questions.${index}.options.${answerIndex}.answer_text`, answer_text);
+					setValue(`${childKey}.options.${answerIndex}.answer_text`, answer_text);
 
 					setValue(
-						`case_questions.${index}.options.${answerIndex}.is_correct`,
+						`${childKey}.options.${answerIndex}.is_correct`,
 						is_correct ? 'true' : 'false',
 					);
 				});
@@ -138,18 +140,20 @@ const useCreateQuestion = ({
 		} else {
 			const { test_question_answers = [], question_text, explanation = [] } = editDetails || {};
 
+			const childKey = 'question.0.';
+
 			setValue('question_type', 'stand_alone');
-			setValue('question.0.question_type', question_type);
-			setValue('question.0.difficulty_level', difficulty_level);
-			setValue('question.0.question_text', question_text);
-			setValue('question.0.explanation', explanation?.[0]);
+			setValue(`${childKey}question_type`, question_type);
+			setValue(`${childKey}difficulty_level`, difficulty_level);
+			setValue(`${childKey}question_text`, question_text);
+			setValue(`${childKey}explanation`, explanation?.[0]);
 
 			test_question_answers.forEach((answer, index) => {
 				const { answer_text, is_correct } = answer || {};
 
-				setValue(`question.0.options.${index}.answer_text`, answer_text);
+				setValue(`${childKey}options.${index}.answer_text`, answer_text);
 
-				setValue(`question.0.options.${index}.is_correct`, is_correct ? 'true' : 'false');
+				setValue(`${childKey}options.${index}.is_correct`, is_correct ? 'true' : 'false');
 			});
 		}
 	}, [editDetails, setValue]);

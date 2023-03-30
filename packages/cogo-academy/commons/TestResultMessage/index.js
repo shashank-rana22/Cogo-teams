@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import Image from '@cogoport/next';
+import { Image } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
