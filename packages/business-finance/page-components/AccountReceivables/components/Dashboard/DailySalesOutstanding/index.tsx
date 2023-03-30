@@ -74,7 +74,7 @@ function DailySalesOutstanding({
 								<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
 							</Tooltip>
 						</div>
-						<div className={styles.under_line} />
+						<div className={styles.border} />
 					</div>
 					<div>
 

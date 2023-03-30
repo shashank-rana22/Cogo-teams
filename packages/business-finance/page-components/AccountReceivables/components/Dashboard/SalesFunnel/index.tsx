@@ -82,7 +82,7 @@ function SalesFunnel({ salesFunnelData, salesFunnelMonth, setSalesFunnelMonth, s
 						</Tooltip>
 
 					</div>
-					<div className={styles.under_line} />
+					<div className={styles.border} />
 				</div>
 				<div>
 					<Select

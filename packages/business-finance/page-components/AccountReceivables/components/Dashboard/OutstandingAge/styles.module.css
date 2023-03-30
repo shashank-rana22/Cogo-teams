@@ -32,14 +32,14 @@
 }
 
 .styled_text {
-	font-size: 18px;
-	font-weight: 500;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .styled_text_age {
 	margin-right: 4px;
-	font-size: 18px;
-	font-weight: 500;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .dashboard {
@@ -61,4 +61,10 @@
 .icon {
 	height: 18px;
 	margin-left: 2px;
+}
+
+.border {
+	width: 50%;
+	margin-top: 4px;
+	border: 1.5px solid #ed3726;
 }

@@ -1,4 +1,4 @@
-import { IcCCountryNetherland, IcCCountrySingapore, IcCCountryIndia } from '@cogoport/icons-react';
+import { IcCCountryNetherland, IcCCountrySingapore, IcCCountryIndia, IcCCountryVietnam } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -12,7 +12,7 @@ function Entity({ entityCode }:ItemProps) {
 		201 : <IcCCountryNetherland height={20} width={20} />,
 		301 : <IcCCountryIndia height={20} width={20} />,
 		401 : <IcCCountrySingapore height={20} width={20} />,
-		501 : <IcCCountrySingapore height={20} width={20} />,
+		501 : <IcCCountryVietnam height={20} width={20} />,
 	};
 	return (
 		<div className={styles.container}>

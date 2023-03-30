@@ -54,8 +54,8 @@
 
 .styled_daily_text {
 	margin-right: 4px;
-	font-size: 18px;
-	font-weight: 500;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .price_container {
@@ -104,4 +104,10 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: 8px;
+}
+
+.border {
+	width: 50%;
+	margin-top: 4px;
+	border: 1.5px solid #ed3726;
 }
