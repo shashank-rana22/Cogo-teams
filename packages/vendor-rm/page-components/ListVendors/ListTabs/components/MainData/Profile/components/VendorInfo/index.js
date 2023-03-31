@@ -34,21 +34,21 @@ function VendorInfo({
 			</span>
 			<VendorDetailsInfo data={data} />
 
-			<hr className={styles.dis} />
+			<hr className={styles.hr} />
 
 			<span className={styles.heading}>
 				Vendor Services
 			</span>
 			<VendorServices data={data} />
 
-			<hr className={styles.dis} />
+			<hr className={styles.hr} />
 
 			<span className={styles.heading}>
 				Payment Details
 			</span>
 			<PaymentDetails data={data} />
 
-			<hr className={styles.dis} />
+			<hr className={styles.hr} />
 
 			<Button
 				size="md"
@@ -66,12 +66,11 @@ function VendorInfo({
 					show={showAddbankModal}
 					size="lg"
 					onClose={() => setShowAddbankModal(false)}
-					className={styles.modal_container}
 				>
 					<Modal.Header title="Edit Profile" />
 
 					<Modal.Body>
-						<section className={styles.bodyStyle}>
+						<section>
 							<FormLayout control={control} fields={controls} errors={errors} />
 						</section>
 					</Modal.Body>
