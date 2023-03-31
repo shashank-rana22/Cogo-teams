@@ -16,15 +16,15 @@ function CreatePip({ item = {}, status = '', setItem = () => {}, setDisableNext 
 	};
 
 	useEffect(() => {
-		setItem({
-			...item,
+		setItem((prevItem) => ({
+			...prevItem,
 			startDate,
 			endDate,
-		});
+		}));
 		if (startDate && endDate) {
 			setDisableNext(false);
 		} else { setDisableNext(true); }
-	}, [startDate, endDate, setItem, item, setDisableNext]);
+	}, [startDate, endDate, setItem, setDisableNext]);
 
 	return (
 		<div className={styles.container}>

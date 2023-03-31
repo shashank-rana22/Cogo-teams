@@ -47,8 +47,12 @@ const useGetColumns = ({
 	};
 
 	const addLog = (item) => {
-		setItem(item);
-		if (item?.log_type === 'probation') {
+		setItem({
+			...item,
+			tags         : item?.tags || [],
+			disabledTags : item?.tags || [],
+		});
+		if (item?.log_type === 'probation' && !item?.final_decision) {
 			setModal('update');
 		} else {
 			setModal('logs');
@@ -295,11 +299,11 @@ const useGetColumns = ({
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<Button
-					themeType={item?.log_type === 'pip' ? 'secondary' : 'primary'}
+					themeType={item?.log_type === 'probation' && !item?.final_decision ? 'primary' : 'secondary'}
 					onClick={() => addLog(item)}
-					disabled={item?.final_decision && item?.log_type === 'probation'}
+					// disabled={item?.final_decision && item?.log_type === 'probation'}
 				>
-					{item?.log_type === 'probation' ? 'Update' : 'Log'}
+					{item?.log_type === 'probation' && !item?.final_decision ? 'Update' : 'Log'}
 				</Button>
 			</div>
 		),

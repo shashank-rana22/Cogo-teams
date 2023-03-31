@@ -28,7 +28,9 @@ function CreateModal({
 	};
 
 	const clickedBack = () => {
-		if (status === '') { setModal(''); }
+		if (status === '') {
+			setModal('');
+		}
 		if (isEmpty(item)) {
 			setStatus('');
 		} else {

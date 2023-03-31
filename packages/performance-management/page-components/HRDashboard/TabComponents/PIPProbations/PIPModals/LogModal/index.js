@@ -10,12 +10,12 @@ function LogModal({
 	setModal = () => {},
 	item = {},
 	setItem = () => {},
-	disableNext,
 	onSubmit = () => {},
-	setDisableNext = () => {},
 	source = '',
 }) {
 	const [activeLogTab, setActiveLogTab] = useState('new');
+
+	const isDisabled = item.tags.length === item.disabledTags.length && !item.comment;
 
 	useEffect(() => {
 		setActiveLogTab((item?.final_decision || source === 'manager_dashboard') ? 'all' : 'new');
@@ -34,7 +34,7 @@ function LogModal({
 				<Modal.Header title="Logs" />
 				<div className={styles.upload_modal}>
 					<Modal.Body
-						style={{ maxHeight: '600px' }}
+						style={{ maxHeight: '500px' }}
 					>
 						<Tabs
 							activeTab={activeLogTab}
@@ -49,7 +49,7 @@ function LogModal({
 									<NewLog
 										item={item}
 										setItem={setItem}
-										setDisableNext={setDisableNext}
+										// setDisableNext={setDisableNext}
 									/>
 								</TabPanel>
 							)}
@@ -80,7 +80,7 @@ function LogModal({
 							size="md"
 							themeType="primary"
 							type="submit"
-							disabled={disableNext}
+							disabled={isDisabled}
 							onClick={onSubmit}
 						>
 							Submit

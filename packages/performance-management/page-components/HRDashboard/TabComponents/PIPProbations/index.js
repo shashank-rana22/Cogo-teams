@@ -25,10 +25,10 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 	};
 
 	const onSubmit = () => {
-		if (item?.tags?.find((x) => x === 'Final discussion held')) {
-			if (item.tags?.length !== 3) {
-				Toast.error('All three boxes have to be ticked');
-			} else { setModal('update'); }
+		if (item?.tags?.find((x) => x === 'Final discussion held') && item.tags?.length !== 3) {
+			Toast.error('All three boxes have to be ticked');
+		} else if (item?.tags?.find((x) => x === 'Final discussion held') && modal === 'logs') {
+			setModal('update');
 		} else {
 			const { user_id, id, log_type, tags, final_decision, is_reviewed, comment } = item;
 			const payload = {

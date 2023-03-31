@@ -10,7 +10,7 @@ function UpdatePip({
 	setDisableNext = () => {},
 	setItem = () => {},
 }) {
-	const [comments, setComments] = useState('');
+	const [comment, setComment] = useState('');
 	const [value, onChange] = useState('confirmed');
 
 	const radioList = [
@@ -30,11 +30,11 @@ function UpdatePip({
 		}
 		setItem((pv) => ({
 			...pv,
-			comments       : comments || undefined,
+			comment        : comment || undefined,
 			final_decision : value || undefined,
 			is_reviewed    : false,
 		}));
-	}, [comments, value, setItem, setDisableNext]);
+	}, [comment, value, setItem, setDisableNext]);
 
 	return (
 		<div className={styles.update_container}>
@@ -64,8 +64,8 @@ function UpdatePip({
 
 					<Textarea
 						size="lg"
-						value={comments}
-						onChange={(val) => setComments(val)}
+						value={comment}
+						onChange={(val) => setComment(val)}
 						placeholder="Type here ..."
 					/>
 				</div>

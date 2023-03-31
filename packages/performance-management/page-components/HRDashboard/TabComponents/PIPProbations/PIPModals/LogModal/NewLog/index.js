@@ -1,39 +1,38 @@
 import { CheckboxGroup, Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect, useMemo } from 'react';
 
 import styles from './styles.module.css';
 
-function NewLog({ item = {}, setItem = () => {}, setDisableNext = () => {} }) {
-	const [comment, setComment] = useState('');
-	const [value, onChange] = useState(item?.tags || []);
+function NewLog({ item = {}, setItem = () => {} }) {
+	const { tags = [], disabledTags = [], comment } = item;
+
 	const options = [
-		{ name: 'R1', value: 'Email sent to Employee', label: 'Email sent to Employee' },
-		{ name: 'R2', value: 'Email sent to Manager', label: 'Email sent to Manager' },
+		{
+			name  : 'R1',
+			value : 'Email sent to Employee',
+			label : 'Email sent to Employee',
+		},
+		{
+			name  : 'R2',
+			value : 'Email sent to Manager',
+			label : 'Email sent to Manager',
+		},
 		{ name: 'R3', value: 'Final discussion held', label: 'Final discussion held' },
 	];
 
-	const disabledTags = useMemo(() => item.tags || [], [item.tags]);
-
 	const newOptions = isEmpty(disabledTags) ? options : options.map((opt) => {
-		if (disabledTags?.includes(opt.value)) {
+		if ((disabledTags || []).includes(opt.value)) {
 			return { ...opt, disabled: true };
 		}
 		return { ...opt };
 	});
 
-	useEffect(() => {
-		if (value || comment) {
-			setDisableNext(false);
-		} else {
-			setDisableNext(true);
-		}
+	const onChange = (type, value) => {
 		setItem((prevItem) => ({
 			...prevItem,
-			comment : comment || undefined,
-			tags    : value || undefined,
+			[type]: value || undefined,
 		}));
-	}, [comment, value, setItem, setDisableNext]);
+	};
 
 	return (
 		<div>
@@ -47,14 +46,16 @@ function NewLog({ item = {}, setItem = () => {}, setDisableNext = () => {} }) {
 				size="lg"
 				placeholder="Text Area"
 				value={comment}
-				onChange={setComment}
+				onChange={(val) => onChange('comment', val)}
+				// onChange={setComment}
 			/>
 
 			<CheckboxGroup
 				className={styles.checkbox}
 				options={newOptions}
-				value={value}
-				onChange={onChange}
+				value={tags || []}
+				// onChange={onChange}
+				onChange={(val) => onChange('tags', val)}
 			/>
 		</div>
 	);
