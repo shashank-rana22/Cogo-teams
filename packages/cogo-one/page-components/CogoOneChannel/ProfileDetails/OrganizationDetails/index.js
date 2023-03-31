@@ -144,7 +144,7 @@ function OrganizationDetails({
 							)}
 
 						</Pill>
-						{ !isChannelPartner && orgLoading && (
+						{ !isChannelPartner && !orgLoading && (
 							<Button
 								size="sm"
 								themeType="primary"

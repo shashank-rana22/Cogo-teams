@@ -6,7 +6,7 @@ import { merge } from '@cogoport/utils';
 import React from 'react';
 
 import controls from '../../../../../configurations/convert-to-cp-form-controls';
-import useConvertToCp from '../../../../../hooks/useConvertAccountToCp';
+import useConvertAccountToCp from '../../../../../hooks/useConvertAccountToCp';
 
 import styles from './styles.module.css';
 
@@ -34,10 +34,10 @@ function ConvertToCpModal({
 	const { key_account_manager, portfolio_manager } = controls;
 	const {
 		loading,
-		onCreate,
+		convertToCp,
 		control,
 		handleSubmit,
-	} = useConvertToCp({ organization_id: organizationId, setShowConvertModal, refetchOrgDetails });
+	} = useConvertAccountToCp({ organization_id: organizationId, setShowConvertModal, refetchOrgDetails });
 	return (
 		<Modal
 			show={showConvertModal}
@@ -45,13 +45,13 @@ function ConvertToCpModal({
 		>
 			<Modal.Header title="Convert to Channel Partner" />
 			<Modal.Body>
-				<form className={styles.container} onSubmit={handleSubmit(onCreate)}>
+				<form className={styles.container} onSubmit={handleSubmit(convertToCp)}>
 					<div className={styles.select_label}>Choose Key Account Manager</div>
 					<SelectController
-						className={styles.select_controller}
-						control={control}
 						{...key_account_manager}
 						{...listPartnerUsers}
+						className={styles.select_controller}
+						control={control}
 						isClearable
 					/>
 					<div className={styles.select_label}>Choose Portfolio Manager</div>

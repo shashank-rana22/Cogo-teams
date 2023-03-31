@@ -1,8 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useConvertToCp = ({ organization_id, setShowConvertModal, refetchOrgDetails }) => {
+const useConvertAccountToCp = ({ organization_id, setShowConvertModal, refetchOrgDetails }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/convert_importer_exporter_to_channel_partner',
@@ -13,12 +14,12 @@ const useConvertToCp = ({ organization_id, setShowConvertModal, refetchOrgDetail
 		formState: { errors },
 		control,
 	} = useForm();
-	const onCreate = async (values = {}) => {
+	const convertToCp = async ({ portfolio_manager = '', key_account_manager = '' }) => {
 		try {
 			const payload = {
 				organization_id,
-				portfolio_manager_id : values.portfolio_manager || undefined,
-				entity_manager_id    : values.key_account_manager || undefined,
+				portfolio_manager_id : portfolio_manager || undefined,
+				entity_manager_id    : key_account_manager || undefined,
 			};
 
 			await trigger({ data: payload });
@@ -26,17 +27,17 @@ const useConvertToCp = ({ organization_id, setShowConvertModal, refetchOrgDetail
 			setShowConvertModal(false);
 			refetchOrgDetails();
 		} catch (err) {
-			Toast.error((err?.message));
+			Toast.error(getApiErrorString(err?.message));
 		}
 	};
 
 	return {
 		loading,
-		onCreate,
+		convertToCp,
 		control,
 		handleSubmit,
 		errors,
 	};
 };
 
-export default useConvertToCp;
+export default useConvertAccountToCp;
