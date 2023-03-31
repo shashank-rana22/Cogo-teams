@@ -49,7 +49,7 @@ function QuestionForm({
 		append({ ...childEmptyValues, isNew: true });
 	};
 
-	if (isEmpty(fields) && isEmpty(editDetails)) {
+	if (isEmpty(fields) && editDetails.question_type !== 'case_study') {
 		append({ ...childEmptyValues, isNew: true });
 	}
 
