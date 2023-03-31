@@ -13,6 +13,7 @@ function useCreateVendorServicePOC({
 	setShowForm = () => {},
 	getVendorData = {},
 	refetchServicesPocs = () => {},
+	refetchVendorInfo = () => {},
 }) {
 	const {
 		general : { query = {} },
@@ -57,6 +58,7 @@ function useCreateVendorServicePOC({
 
 			await triggerCreateVendorServicePoc({ data: payload });
 
+			refetchVendorInfo();
 			refetchServicesPocs();
 
 			setShowForm('');

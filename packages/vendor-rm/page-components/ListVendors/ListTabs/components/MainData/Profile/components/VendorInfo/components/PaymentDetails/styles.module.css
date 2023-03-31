@@ -1,5 +1,5 @@
-.cont {
-	display: grid;
+.main_container {
+	display: flex;
 	grid-template-columns: repeat(4, 1fr);
 	row-gap: 1rem;
 	column-gap: 5px;
@@ -8,11 +8,16 @@
 	white-space: nowrap;
 }
 
-.box_info1 {
+.bank_details_container{
+	display:flex;
+	flex-wrap:wrap;
+}
+
+.billing_address_info_box {
 	margin: 1rem 0;
 }
 
-.top {
+.label {
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 400;
@@ -21,7 +26,7 @@
 	opacity: 0.7;
 }
 
-.bottom {
+.value {
 	width: 250px;
 	font-size: 14px;
 	font-style: normal;
@@ -31,7 +36,7 @@
 	cursor: pointer;
 }
 
-.di {
+.document_url_container {
 	display: flex;
 	align-items: center;
 }
@@ -44,7 +49,7 @@
 	white-space: nowrap;
 }
 
-.bottom1 {
+.billing_address_value {
 	width: 500px;
 	font-size: 14px;
 	font-style: normal;
@@ -53,22 +58,9 @@
 	color: #333;
 }
 
-.dis1 {
-	height: 1px;
-	background: #000;
-	background:
-		repeating-linear-gradient(
-			90deg,
-			#000,
-			#000 6px,
-			transparent 6px,
-			transparent 12px
-		);
-	border: none;
-	opacity: 0.07;
-}
 
-.btn {
+
+.download_button_icon {
 	all: unset;
 	cursor: pointer;
 }

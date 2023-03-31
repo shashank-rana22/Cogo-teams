@@ -3,60 +3,34 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const BANK_DETAILS_MAPPING = {
+	account_holder_name : 'Account Holder&apos;s Name',
+	account_number      : 'Account No.',
+	account_type        : 'Account Type',
+	ifsc_code           : 'IFSC Code',
+	bank_name           : 'Bank Name',
+	branch_name         : 'Branch Name',
+};
+
 function PaymentDetails({
 	data = {},
 }) {
 	return (
 		(data.bank_details || []).map((bankDetail) => (
 			<>
-				<div className={styles.cont}>
-					<div className={styles.box_info}>
-						<div className={styles.top}>
-							Account Holder’s Name
-						</div>
-						<div className={styles.bottom}>
-							{startCase(bankDetail.account_holder_name)}
-						</div>
-					</div>
-					<div className={styles.box_info}>
-						<div className={styles.top}>
-							Account No.
-						</div>
-						<div className={styles.bottom}>
-							{bankDetail.account_number}
-						</div>
-					</div>
-					<div className={styles.box_info}>
-						<div className={styles.top}>
-							Account Type
-						</div>
-						<div className={styles.bottom}>
-							{startCase(bankDetail.account_type)}
-						</div>
-					</div>
-					<div className={styles.box_info}>
-						<div className={styles.top}>
-							IFSC Code
-						</div>
-						<div className={styles.bottom}>
-							{bankDetail.ifsc_code}
-						</div>
-					</div>
-					<div className={styles.box_info}>
-						<div className={styles.top}>
-							Bank Name
-						</div>
-						<div className={styles.bottom}>
-							{bankDetail.bank_name}
-						</div>
-					</div>
-					<div className={styles.box_info}>
-						<div className={styles.top}>
-							Branch Name
-						</div>
-						<div className={styles.bottom}>
-							{bankDetail.branch_name}
-						</div>
+				<div className={styles.main_container}>
+					<div className={styles.bank_details_container}>
+						{Object.keys(BANK_DETAILS_MAPPING).map((bankDetailsKey) => (
+							<div key={bankDetailsKey} className={styles.box_info}>
+								<div className={styles.label}>
+									{BANK_DETAILS_MAPPING[bankDetailsKey]}
+								</div>
+								<div className={styles.value}>
+									{startCase(bankDetail[bankDetailsKey])}
+								</div>
+							</div>
+						))}
+
 					</div>
 
 					<div>
@@ -67,7 +41,7 @@ function PaymentDetails({
 									Cancelled Cheque/Passbook
 								</div>
 								<div className={styles.bottom}>
-									<div className={styles.di}>
+									<div className={styles.document_url_container}>
 										<a
 											href={bankDetail?.bank_document_url}
 											target="_blank"
@@ -79,7 +53,7 @@ function PaymentDetails({
 										>
 											{bankDetail?.bank_document_url}
 										</a>
-										<div className={styles.btn}>
+										<div className={styles.download_button_icon}>
 											<img
 												src={`https://cdn.cogoport.io/cms-prod/
 											cogo_admin/vault/original/download-icon.svg`}
@@ -95,15 +69,15 @@ function PaymentDetails({
 					</div>
 
 				</div>
-				<div className={styles.box_info1}>
-					<div className={styles.top}>
+				<div className={styles.billing_address_info_box}>
+					<div className={styles.label}>
 						Billing Address
 					</div>
-					<div className={styles.bottom1}>
+					<div className={styles.billing_address_value}>
 						{bankDetail?.address}
 					</div>
 				</div>
-				<hr className={styles.dis1} />
+
 			</>
 		))
 	);
