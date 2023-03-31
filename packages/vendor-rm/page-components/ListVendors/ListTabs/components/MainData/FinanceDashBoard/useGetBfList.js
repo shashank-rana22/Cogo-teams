@@ -2,6 +2,7 @@ import { Toast, Button } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
@@ -24,6 +25,8 @@ const useGetBfList = () => {
 		{ manual: false },
 	);
 
+	const { push } = useRouter();
+
 	const fetchList = useCallback(() => {
 		try {
 			trigger({
@@ -42,7 +45,10 @@ const useGetBfList = () => {
 		fetchList();
 	};
 
-	console.log(data, 'datadtadtda');
+	const handleGoToBFDashboard = () => {
+		push('/business-finance/overheads/expenses');
+	};
+
 	const columns = [
 		{
 			Header   : <div className={styles.table_header}>INVOICE ID</div>,
@@ -97,6 +103,8 @@ const useGetBfList = () => {
 					<Button
 						size="md"
 						themeType="secondary"
+						type="button"
+						onClick={handleGoToBFDashboard}
 					>
 						VIEW MORE
 					</Button>
