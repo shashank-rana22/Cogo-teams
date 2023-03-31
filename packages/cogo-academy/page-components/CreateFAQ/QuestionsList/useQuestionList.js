@@ -287,21 +287,27 @@ const useQuestionList = () => {
 		);
 	};
 
-	const columns = activeList !== 'requested'
-		? Object.entries(addedQuestionsColumns({
-			activeList,
-			onClickEditButton,
-			deactivateQuestion,
-			onClickViewButton,
-			deleteitem,
-			setDeleteitem,
-			sortType,
-			setSortType,
-		})).map(([column, obj]) => ({
+	const addedQuestionEnties = Object.entries(addedQuestionsColumns({
+		activeList,
+		onClickEditButton,
+		deactivateQuestion,
+		onClickViewButton,
+		deleteitem,
+		setDeleteitem,
+		sortType,
+		setSortType,
+	}));
+
+	const renderAddedQuestionColumns = () => {
+		const cols = addedQuestionEnties.map(([column, obj]) => ({
 			id       : column,
 			Header   : obj.Header,
 			accessor : obj.accessor,
-		})) : requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
+		}));
+		return cols;
+	};
+	const columns = activeList !== 'requested'
+		? renderAddedQuestionColumns() : requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
 	const { list: data = [], requested_question_count = 0, ...paginationData } = questionList || {};
 
 	return {
