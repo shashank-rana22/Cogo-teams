@@ -78,7 +78,6 @@ function RightSideNav({
 						}`}
 						role="presentation"
 						onClick={() => handleClick(name)}
-
 					>
 						<Tooltip content={content} placement="left">
 							{showDocumentCount && (
