@@ -72,6 +72,7 @@
 	font-weight: 400;
 	color: #221f20;
 	opacity: 0.6;
+	margin-bottom: 8px;
 }
 
 .heading_container {
@@ -120,7 +121,7 @@
 }
 
 .aftercheckbox {
-	margin-top: 12px;
+	margin: 8px 0;
 	font-weight: 600;
 }
 
@@ -150,4 +151,14 @@
 			border-radius: 16px;
 		}
 	}
+}
+
+.submit_btn {
+	display: flex !important;
+	justify-content: flex-end;
+	width: 100%;
+}
+.liked_wrapper {
+	display: flex;
+	flex-direction: column;
 }
