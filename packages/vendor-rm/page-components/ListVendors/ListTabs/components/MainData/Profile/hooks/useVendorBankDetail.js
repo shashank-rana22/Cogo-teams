@@ -11,7 +11,11 @@ import controls from '../../../../../../OnBoardVendor/PaymentDetails/utils/contr
 function useVendorBankDetail({
 	refetchVendorInfo = () => {},
 }) {
-	const [showAddbankModal, setShowAddbankModal] = useState(false);
+	const {
+		general : { query = {} },
+	} = useSelector((state) => state);
+
+	const { vendor_id } = query;
 
 	const formProps = useForm();
 
@@ -24,13 +28,9 @@ function useVendorBankDetail({
 		getValues,
 	} = formProps;
 
+	const [showAddbankModal, setShowAddbankModal] = useState(false);
+
 	const ifscCode = watch('ifsc_code');
-
-	const {
-		general : { query = {} },
-	} = useSelector((state) => state);
-
-	const { vendor_id } = query;
 
 	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
 		url    : '/get_bank_details',
