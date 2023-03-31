@@ -64,7 +64,9 @@ function TreasuryStatistics() {
 								<Tooltip
 									content={(
 										<div className={styles.texts_styles}>
-											Cash Outflow Allocation and Utilisation Statistics
+											Cash Outflow Allocation and
+											<br />
+											Utilisation Statistics
 										</div>
 									)}
 									placement="right"

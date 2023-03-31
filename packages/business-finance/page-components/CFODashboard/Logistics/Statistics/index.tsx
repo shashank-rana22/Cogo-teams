@@ -29,13 +29,22 @@ function Statistics({ globalFilters, entityTabFilters }) {
 								<Tooltip
 									content={(
 										<div className={styles.texts_style}>
-											cash flow projection that is estimated by taking
-											into account the total value of invoices and bills
-											generated on the current day
+											cash flow projection that is
+											<br />
+											estimated by taking
+											into
+											<br />
+											account the total value of
+											<br />
+											invoices and bills
+											generated on
+											<br />
+											the current day
 										</div>
 									)}
 									placement="right"
 									caret={false}
+									style={{ width: 'fit-content' }}
 								>
 									<IcMInfo />
 								</Tooltip>

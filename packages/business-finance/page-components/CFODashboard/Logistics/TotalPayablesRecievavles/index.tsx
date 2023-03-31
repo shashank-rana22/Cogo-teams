@@ -68,7 +68,10 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 								<Tooltip
 									content={(
 										<div className={styles.text_styles}>
-											sum of all invoices billed to the customer but not yet paid for
+											sum of all invoices billed to the
+											<br />
+											{' '}
+											customer but not yet paid for
 										</div>
 									)}
 									placement="right"
@@ -127,7 +130,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 											</div>
 										))}
 									>
-										<IcMArrowRotateDown style={{ margin: '0px 20px' }} />
+										<IcMArrowRotateDown style={{ margin: '0px 20px', cursor: 'pointer' }} />
 									</Popover>
 
 								</div>
@@ -166,7 +169,9 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 								<Tooltip
 									content={(
 										<div className={styles.text_styles}>
-											sum of all invoices billed to Cogoport but not yet paid for
+											sum of all invoices billed to
+											<br />
+											Cogoport but not yet paid for
 										</div>
 									)}
 									placement="right"
@@ -213,7 +218,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 											</div>
 										))}
 									>
-										<IcMArrowRotateDown style={{ margin: '0px 20px' }} />
+										<IcMArrowRotateDown style={{ margin: '0px 20px', cursor: 'pointer' }} />
 									</Popover>
 
 								</div>
