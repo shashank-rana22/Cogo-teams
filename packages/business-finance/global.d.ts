@@ -9,3 +9,4 @@ declare module '@cogoport/components';
 declare module '@cogoport/next';
 declare module '@cogoport/forms';
 declare module '@cogoport/business-finance/page-components/*';
+declare module '@cogoport/business-finance/page-components/AccountPayables';
