@@ -23,8 +23,7 @@ function Customers({
 	activeTab,
 	setActiveTab = () => {},
 	toggleStatus,
-	messagesList = [],
-	unReadChatsCount = '',
+	listData = {},
 	setAppliedFilters = () => {},
 	appliedFilters = {},
 	fetchworkPrefernce = () => {},
@@ -51,6 +50,11 @@ function Customers({
 	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
 	const [attachments, setAttachments] = useState([]);
+	const {
+		messagesList = [],
+		unReadChatsCount = 0,
+		sortedPinnedChatList = [],
+	} = listData || {};
 
 	const {
 		replyMailApi = () => {},
@@ -68,7 +72,6 @@ function Customers({
 	const handleOpenOptions = () => {
 		setIsChecked(!isChecked);
 	};
-	const unReadChatsCountDisplay = Number(unReadChatsCount || 0) > 49 ? '49+' : unReadChatsCount;
 
 	const COMPONENT_MAPPING = {
 		message : MessageList,
@@ -97,6 +100,7 @@ function Customers({
 		tagOptions,
 		updatePin,
 		userId,
+		sortedPinnedChatList,
 	};
 
 	const voiceProps = {
@@ -158,7 +162,7 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCountDisplay} />
+					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
 					<TabPanel name="voice" title="Voice" />
 					<TabPanel name="mail" title="Mail" />
 				</Tabs>

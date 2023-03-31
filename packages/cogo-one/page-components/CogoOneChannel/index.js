@@ -101,7 +101,6 @@ function CogoOne() {
 		showBotMessages,
 		searchValue,
 	});
-	const { messagesList = [], unReadChatsCount } = listData;
 
 	useEffect(() => {
 		if (!firstLoading) {
@@ -168,8 +167,7 @@ function CogoOne() {
 				setActiveTab={setActiveTab}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
-				messagesList={messagesList}
-				unReadChatsCount={unReadChatsCount}
+				listData={listData}
 				appliedFilters={appliedFilters}
 				setAppliedFilters={setAppliedFilters}
 				fetchworkPrefernce={fetchworkPrefernce}

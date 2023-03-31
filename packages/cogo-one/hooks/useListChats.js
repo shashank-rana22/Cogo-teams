@@ -51,8 +51,9 @@ const useListChats = ({
 		isLastPage           : false,
 		pinnedMessagesData   : {},
 	});
+	console.log('listData:', listData);
 
-	const { status = '' } = appliedFilters || {};
+	const { status = '', observer = '', chat_tags = '' } = appliedFilters || {};
 
 	const snapshotCleaner = ({ ref }) => {
 		const tempRef = ref;
@@ -106,15 +107,23 @@ const useListChats = ({
 		[appliedFilters, isomniChannelAdmin, showBotMessages, userId],
 	);
 
+	const queryForSearch = useMemo(() => (
+		searchQuery
+			? [where('user_name', '>=', searchQuery),
+				where('user_name', '<=', `${searchQuery}\\uf8ff`), orderBy('user_name', 'asc')] : []
+
+	), [searchQuery]);
+
 	const mountPinnedSnapShot = useCallback(async () => {
 		setLoading(true);
 		snapshotCleaner({ ref: pinSnapshotListener });
 		setListData((p) => ({ ...p, pinnedMessagesData: {} }));
-		const queryForPinnedChat = where('pinnedAgent', 'array-contains', userId);
+		const queryForPinnedChat = where('pinnedAgents', 'array-contains', userId);
 
 		const newChatsQuery = query(
 			omniChannelCollection,
 			queryForPinnedChat,
+			...queryForSearch,
 			...omniChannelQuery,
 		);
 
@@ -126,17 +135,16 @@ const useListChats = ({
 				setLoading(false);
 			},
 		);
+
 		return () => {
 			snapshotCleaner({ ref: pinSnapshotListener });
 		};
-	}, [omniChannelCollection, omniChannelQuery, userId]);
+	}, [omniChannelCollection, omniChannelQuery, userId, queryForSearch]);
 
 	const mountUnreadCountSnapShot = useCallback(() => {
 		const queryForUnreadChats = status !== 'unread'
 			? [where('new_message_count', '>', 0), orderBy('new_message_count', 'desc')] : [];
-
 		snapshotCleaner({ ref: unreadCountSnapshotListner });
-
 		const countUnreadChatQuery = query(
 			omniChannelCollection,
 			...queryForUnreadChats,
@@ -157,9 +165,6 @@ const useListChats = ({
 	}, [omniChannelCollection, omniChannelQuery, status]);
 
 	const mountSnapShot = useCallback(() => {
-		const queryForSearch = searchQuery
-			? [where('user_name', '>=', searchQuery),
-				where('user_name', '<=', `${searchQuery}\\uf8ff`), orderBy('user_name', 'asc')] : [];
 		setLoading(true);
 		setListData((p) => ({ ...p, messagesListData: {} }));
 		snapshotCleaner({ ref: snapshotListener });
@@ -189,7 +194,7 @@ const useListChats = ({
 		return () => {
 			snapshotCleaner({ ref: snapshotListener });
 		};
-	}, [omniChannelCollection, omniChannelQuery, searchQuery]);
+	}, [omniChannelCollection, omniChannelQuery, queryForSearch]);
 
 	const getPrevChats = useCallback(async () => {
 		const prevChatsQuery = query(
@@ -277,11 +282,7 @@ const useListChats = ({
 		}
 	};
 
-	const { messagesListData = {}, unReadChatsCount, pinnedMessagesData } = listData || {};
-
-	const mergedChatsData = { ...messagesListData, ...pinnedMessagesData } || {};
-
-	const sortedChatsList = sortChats(mergedChatsData, userId);
+	const { sortedPinnedChatList, sortedUnpinnedList } = sortChats(listData, userId);
 
 	const updateLeaduser = async (data = {}) => {
 		const { channel_type, id } = activeCardData || {};
@@ -307,18 +308,18 @@ const useListChats = ({
 		);
 
 		const document = await getDoc(pinRoomData);
-		const { pinnedTime = {}, pinnedAgent = [] } = document.data() || {};
+		const { pinnedTime = {}, pinnedAgents = [] } = document.data() || {};
 
 		let payload = {};
 		if (type === 'pin') {
 			payload = {
-				pinnedTime  : { ...pinnedTime, [userId]: Date.now() },
-				pinnedAgent : [...pinnedAgent, userId],
+				pinnedTime   : { ...pinnedTime, [userId]: Date.now() },
+				pinnedAgents : [...pinnedAgents, userId],
 			};
 		} else {
 			payload = {
-				pinnedTime  : { ...pinnedTime, [userId]: 0 },
-				pinnedAgent : pinnedAgent.filter((pinned) => pinned !== userId),
+				pinnedTime   : { ...pinnedTime, [userId]: 0 },
+				pinnedAgents : pinnedAgents.filter((pinned) => pinned !== userId),
 			};
 		}
 
@@ -333,9 +334,13 @@ const useListChats = ({
 	};
 
 	return {
-		listData          : { messagesList: sortedChatsList || [], unReadChatsCount },
+		listData: {
+			messagesList     : sortedUnpinnedList || [],
+			unReadChatsCount : listData?.unReadChatsCount,
+			sortedPinnedChatList,
+		},
 		setActiveMessage,
-		activeMessageCard : activeCardData,
+		activeMessageCard: activeCardData,
 		setAppliedFilters,
 		appliedFilters,
 		loading,
