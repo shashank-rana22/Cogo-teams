@@ -9,9 +9,6 @@ function useGetTestList({ filters:cogoEntityFilter, activeTab }) {
 	const [params, setParams] = useState({
 		page       : 1,
 		page_limit : 10,
-		filters    : {
-			status: ['active', 'draft', 'published'],
-		},
 	});
 	const [input, setInput] = useState('');
 
