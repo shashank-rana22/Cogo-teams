@@ -1,11 +1,10 @@
 import { Toast, Button } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { startCase } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 import styles from './styles.module.css';
@@ -86,12 +85,12 @@ const useGetBfList = () => {
 			id       : 'created_at',
 			accessor : ({ createdDate = '' }) => (
 				<section>
-					{' '}
-					{formatDate({
-						date       : createdDate,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType : 'date',
-					})}
+					{format(
+						createdDate,
+						GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						{},
+						false,
+					)}
 				</section>
 			),
 		},

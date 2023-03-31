@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { isEmpty, merge } from '@cogoport/utils';
 
@@ -28,6 +29,8 @@ const useResubmitKyc = ({
 		url    : 'resubmit_vendor_kyc',
 		method : 'post',
 	}, { manual: true });
+
+	const { push } = useRouter();
 
 	const { documents = [], vendor_details = {} } = data;
 
@@ -114,6 +117,10 @@ const useResubmitKyc = ({
 		}
 	};
 
+	const handleCompleteKyc = () => {
+		push('/onboard-vendor/[vendor_id]', `/onboard-vendor/${vendor_details.id}`);
+	};
+
 	return {
 		newControls,
 		controls_kyc,
@@ -121,6 +128,7 @@ const useResubmitKyc = ({
 		handleSubmitKyc,
 		errors_kyc,
 		resubmitKYC,
+		handleCompleteKyc,
 	};
 };
 

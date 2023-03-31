@@ -40,6 +40,7 @@ function KycStatusTabs({
 
 				return (
 					<div
+						key={valueKey}
 						role="presentation"
 						className={styles.box}
 						onClick={() => {

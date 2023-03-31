@@ -12,7 +12,7 @@ function useGetListVendorPocServices() {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_vendor_poc_services',
 		method : 'GET',
-	}, { manual: !vendor_id });
+	}, { manual: true });
 
 	const getListVendorPocServices = useCallback(() => {
 		try {
@@ -27,8 +27,10 @@ function useGetListVendorPocServices() {
 	}, [trigger, vendor_id]);
 
 	useEffect(() => {
-		getListVendorPocServices();
-	}, [getListVendorPocServices]);
+		if (vendor_id) {
+			getListVendorPocServices();
+		}
+	}, [getListVendorPocServices, vendor_id]);
 
 	const { services_pocs = [] } = data || {};
 

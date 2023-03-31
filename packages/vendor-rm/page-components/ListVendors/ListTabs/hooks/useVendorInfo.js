@@ -18,7 +18,7 @@ const useVendorInfo = () => {
 			url    : '/get_vendor',
 			method : 'get',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const getVendorInfo = useCallback(async () => {
@@ -38,8 +38,10 @@ const useVendorInfo = () => {
 	}, [trigger, vendor_id]);
 
 	useEffect(() => {
-		getVendorInfo();
-	}, [getVendorInfo]);
+		if (vendor_id) {
+			getVendorInfo();
+		}
+	}, [getVendorInfo, vendor_id]);
 
 	return {
 		getVendorLoading,
