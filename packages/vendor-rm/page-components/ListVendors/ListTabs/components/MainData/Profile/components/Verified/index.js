@@ -4,6 +4,58 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const COMPONENT_PROPS_MAPPING = {
+	verified: {
+		style: {
+			background : '#E2FFE7',
+			border     : '1px solid #89E297',
+		},
+		color : '#67c676',
+		icon  : <IcCFtick />,
+	},
+
+	rejected: {
+		style: {
+			background    : '#fdcfcf',
+			border        : '1px solid #ED3726',
+			flexDirection : 'column',
+			color         : '#ED3726',
+		},
+		color : '#ED3726',
+		icon  : <IcMCrossInCircle />,
+	},
+
+	pending_from_user: {
+		style: {
+			background : '#fdd9b5',
+			border     : '1px solid #F68B21',
+		},
+		color: '#F68B21',
+		icon:
+	<div>
+		<img
+			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg"
+			alt="pending"
+		/>
+	</div>,
+	},
+
+	pending_verification: {
+		style: {
+			background : '#fdd9b5',
+			border     : '1px solid #F68B21',
+		},
+		color: '#F68B21',
+		icon:
+	<div>
+		<img
+			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg"
+			alt="pending"
+		/>
+	</div>,
+	},
+};
+
 function Verified({ vendor_details = {} }) {
 	const {
 		kyc_rejection_reason,
@@ -11,68 +63,40 @@ function Verified({ vendor_details = {} }) {
 		kyc_rejection_feedbacks = [],
 	} = vendor_details || {};
 
-	if (kyc_status === 'verified') {
-		return (
+	return (
+		<div
+			className={styles.main}
+			style={COMPONENT_PROPS_MAPPING[kyc_status].style}
+		>
 			<div
-				className={styles.main}
-				style={{
-					background : '#E2FFE7',
-					border     : '1px solid #89E297',
-				}}
+				className={styles.icon}
 			>
-				<div
-					className={styles.icon}
-				>
-					<IcCFtick />
-				</div>
-				<div
-					className={styles.dis}
-					style={{
-						color: '#67c676',
-					}}
-				>
-					{startCase(kyc_status)}
-				</div>
+				{COMPONENT_PROPS_MAPPING[kyc_status].icon}
 			</div>
-		);
-	}
-
-	if (kyc_status === 'rejected') {
-		return (
 			<div
-				className={styles.main}
+				className={styles.dis}
 				style={{
-					background    : '#fdcfcf',
-					border        : '1px solid #ED3726',
-					flexDirection : 'column',
-					color         : '#ED3726',
+					color: COMPONENT_PROPS_MAPPING[kyc_status].color,
 				}}
 			>
-				<div className={styles.kyc_status_icon}>
-					<div
-						className={styles.icon}
-					>
-						<IcMCrossInCircle />
-					</div>
+				{startCase(kyc_status)}
+			</div>
+
+			{
+			kyc_status === 'rejected' ? (
+				<div>
 					<div
 						className={styles.dis}
 						style={{ color: '#ED3726' }}
 					>
-						{startCase(kyc_status)}
+						Rejection reason -
+						{' '}
+						<b>{kyc_rejection_reason}</b>
 					</div>
-				</div>
-				<div
-					className={styles.dis}
-					style={{ color: '#ED3726' }}
-				>
-					Rejection reason -
-					{' '}
-					<b>{kyc_rejection_reason}</b>
-				</div>
-				<div>
-					Feedbacks -
-					{'  '}
-					{
+					<div>
+						Feedbacks -
+						{'  '}
+						{
 						(kyc_rejection_feedbacks || []).map((reason, index) => (
 							<span>
 								<b>
@@ -84,35 +108,10 @@ function Verified({ vendor_details = {} }) {
 							</span>
 						))
 					}
+					</div>
 				</div>
-			</div>
-		);
-	}
-
-	return (
-		<div
-			className={styles.main}
-			style={{
-				background : '#fdd9b5',
-				border     : '1px solid #F68B21',
-			}}
-		>
-			<div
-				className={styles.icon}
-			>
-				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg"
-					alt="pending"
-				/>
-			</div>
-			<div
-				className={styles.dis}
-				style={{
-					color: '#F68B21',
-				}}
-			>
-				{startCase(kyc_status)}
-			</div>
+			) : null
+			}
 		</div>
 	);
 }
