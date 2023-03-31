@@ -1,15 +1,15 @@
 .content_container {
-  padding: 24px 24px;
+	padding: 24px;
 }
 
 .view_question {
-  margin-top: 24px;
-  display: flex;
-  justify-content: right;
-  align-items: baseline;
-  padding-right: 24px;
+	display: flex;
+	align-items: baseline;
+	justify-content: right;
+	padding-right: 24px;
+	margin-top: 24px;
 }
 
 .view_question_text {
-  padding-left: 8px;
+	padding-left: 8px;
 }
