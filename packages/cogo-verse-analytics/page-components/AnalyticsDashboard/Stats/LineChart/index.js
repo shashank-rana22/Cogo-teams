@@ -46,7 +46,7 @@ function Charts({ GraphData = [], hideChart = false }) {
 
 	return (
 		<div style={{ height: '100%' }}>
-			{hideChart ? (
+			{!hideChart ? (
 				<ResponsiveLine
 					data={graphData}
 					margin={{ top: 5, right: 35, bottom: 55, left: 75 }}
@@ -83,7 +83,7 @@ function Charts({ GraphData = [], hideChart = false }) {
             	legendPosition : 'middle',
 					}}
 					tooltip={({ point = {} }) => {
-            	const { borderColor, data } = point;
+            	const { borderColor, data, label } = point;
 
             	return (
 	<div className={styles.tool_tip}>

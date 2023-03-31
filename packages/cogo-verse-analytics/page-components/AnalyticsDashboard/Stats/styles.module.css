@@ -38,6 +38,7 @@
 	justify-content: space-between;
 	height: 225px;
 	background: #f9f5ec;
+	margin-bottom: 10px;
 }
 
 .primary_left {
@@ -256,7 +257,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 275px;
+	height: 280px;
 	padding: 8px;
 	margin: 4px 0;
 	background: #fff;
@@ -277,7 +278,8 @@
 }
 
 .the_chart {
-	height: 185px;
+	padding-top: 10px;
+	height: 200px;
 }
 
 .chart_empty {

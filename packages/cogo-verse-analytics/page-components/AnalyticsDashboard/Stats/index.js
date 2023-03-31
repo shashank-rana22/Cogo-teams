@@ -21,11 +21,10 @@ function Stats(props = {}) {
 		statsLoading,
 		stats = {},
 		chatLoading = false,
-		platFormChatData = {},
 	} = props || {};
 
-	const { bot_data = {}, customer_support_data = {} } = platFormChatData || {};
-	const hideChart = isEmpty(bot_data) && isEmpty(customer_support_data);
+
+	const hideChart = isEmpty(stats);
 	const statsData=stats?.list || {};
 	const graph = statsData?.weekly_shipments || [];
 
