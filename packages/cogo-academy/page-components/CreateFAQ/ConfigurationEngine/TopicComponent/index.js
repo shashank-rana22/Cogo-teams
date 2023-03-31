@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useListFaqTopics from '../hooks/useListFaqTopics';
 import topicListColumns from '../TableConfigurations/topicListColumns';
@@ -47,6 +47,10 @@ function TopicComponent({ configurationPage, setConfigurationPage, reset }) {
 		updateApiLoading,
 		activeTopic,
 	});
+
+	useEffect(() => {
+		setTopicCurrentPage(1);
+	}, [activeTopic, setTopicCurrentPage]);
 
 	return (
 		<div>

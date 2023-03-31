@@ -4,6 +4,7 @@ declare module '@cogoport/next';
 declare module '@cogoport/components';
 declare module '@cogoport/utils';
 declare module '@cogoport/layout';
+declare module '@cogoport/utils';
 declare module '@cogoport/components';
 declare module '@cogoport/next';
 declare module '@cogoport/forms';
@@ -18,3 +19,4 @@ declare module '@cogoport/business-finance/page-components/CogoBook/Accruals/Vie
 declare module '@cogoport/business-finance/page-components/CogoBook/P&L/SourceFile/UploadReport'
 declare module '@cogoport/business-finance/page-components/AccountReceivables/components';
 declare module '@cogoport/business-finance/page-components/CogoBook/P&L/SourceFile/ViewData'
+declare module '@cogoport/business-finance/page-components/*';

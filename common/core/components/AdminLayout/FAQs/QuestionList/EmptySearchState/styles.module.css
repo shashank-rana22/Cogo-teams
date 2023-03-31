@@ -1,0 +1,64 @@
+.null_state {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	margin: 16px;
+}
+
+.heading {
+	margin-top: 4px;
+	color: #221f20;
+}
+
+.request_question {
+	margin: 16px;
+	font-weight: 500;
+}
+
+.updated_text {
+	display: flex;
+	font-size: 16px;
+	font-weight: 300;
+}
+
+.request_text {
+	width: fit-content;
+	font-size: 16px;
+	font-weight: 400;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.input_component {
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	margin: 16px;
+}
+
+.button_row {
+	display: flex;
+	justify-content: right;
+	margin-top: 8px;
+}
+
+.input_heading {
+	margin-top: 52px;
+	margin-bottom: 8px;
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.sub_heading {
+	margin-bottom: 20px;
+	font-size: 18px;
+	font-weight: 400;
+	opacity: 0.7;
+}
+
+.submit_btn {
+	margin-left: 8px;
+	color: #fff;
+	background: #ea3825;
+	border-color: #ea3825;
+}

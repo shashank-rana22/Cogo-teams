@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import { MultiselectController } from '@cogoport/forms';
 
@@ -11,27 +10,35 @@ function FilterContent({
 	handleSubmit,
 	onSubmit,
 	onClickReset,
+	audienceOptions,
 }) {
+	const filtersMapping = [
+		{ name: 'topic', options: topicOptions, title: 'Filter By Topics' },
+		{ name: 'tag', options: tagOptions, title: 'Filter By Tags' },
+		{ name: 'audience', options: audienceOptions, title: 'Filter By Audience' },
+	];
+
 	return (
 		<form className={styles.filter_container} onSubmit={handleSubmit(onSubmit)}>
-			<div>
-				<div className={styles.title}> Filter By Topics</div>
-				<MultiselectController
-					name="topic"
-					control={control}
-					options={topicOptions}
-				/>
-			</div>
+			{
+				filtersMapping.map((filterElement) => {
+					const { name, options, title } = filterElement || {};
+					return	(
+						<div>
+							<div className={styles.title}>
+								{' '}
+								{title}
+							</div>
 
-			<div>
-				<div className={styles.title}> Filter By Tags</div>
-
-				<MultiselectController
-					name="tag"
-					control={control}
-					options={tagOptions}
-				/>
-			</div>
+							<MultiselectController
+								name={name}
+								control={control}
+								options={options}
+							/>
+						</div>
+					);
+				})
+			}
 
 			<div className={styles.button_container}>
 				<Button

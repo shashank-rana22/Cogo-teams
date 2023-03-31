@@ -33,6 +33,22 @@ const businessFinance = {
 	'/[partner_id]/business-finance/cogo-book/[active_tab]': {
 		navigation: 'business_finance-cogo_book',
 	},
+	'/[partner_id]/business-finance/account-payables/[active_tab]': {
+		navigation : 'business_finance-account_payables',
+		isMainNav  : true,
+	},
+
+	'/[partner_id]/business-finance/overheads': {
+		navigation : 'business_finance-overheads',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/overheads/[active_tab]': {
+		navigation : 'business_finance-overheads',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/overheads/[active_tab]/Expenses/Response': {
+		navigation: 'business_finance-overheads',
+	},
 };
 
 export default businessFinance;
