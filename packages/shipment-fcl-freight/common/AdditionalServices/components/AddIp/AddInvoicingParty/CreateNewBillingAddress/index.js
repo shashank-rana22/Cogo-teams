@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import useCreateOrganizationBillingAddress from '../../../../../../hooks/useCreateOrganizationBillingAddress';
 
-import AddressForm from './AddressForm';
+import AddressForm from '../AddressForm';
 import styles from './styles.module.css';
 
 function CreateNewBillingAddress({

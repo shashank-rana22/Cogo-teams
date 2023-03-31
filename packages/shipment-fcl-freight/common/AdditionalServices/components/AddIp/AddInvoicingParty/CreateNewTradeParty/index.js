@@ -3,7 +3,7 @@ import { useFieldArray } from '@cogoport/forms';
 import { useState } from 'react';
 
 import useCreateOrgTradeParty from '../../../../../../hooks/useCreateOrgTradeParty';
-import AddressForm from '../CreateNewBillingAddress/AddressForm';
+import AddressForm from '../AddressForm';
 
 import CompanyDetails from './CompanyDetails';
 import styles from './styles.module.css';
