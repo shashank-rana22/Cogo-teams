@@ -57,6 +57,7 @@ export const nonRecurringExpenseDetails = ({
 					label          : 'Vendor Name',
 					type           : 'asyncSelect',
 					asyncKey       : 'list_vendors',
+					params         : { filters: { kyc_status: 'verified' } },
 					value          : formData?.vendorName,
 					onChange       : (item:any, obj:object) => handleVendorChange(obj),
 					multiple       : false,
