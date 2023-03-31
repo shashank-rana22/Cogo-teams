@@ -11,7 +11,7 @@ import { months } from '../../../constants';
 import styles from './styles.module.css';
 
 function DailySalesOutstanding({
-	dailySalesOutstandingData,
+	dailySalesOutstandingData = [],
 	dailySalesOutstandingApiLoading, quaterly, quaterlyLoading,
 }) {
 	interface Props {
@@ -30,6 +30,8 @@ function DailySalesOutstanding({
 		left   : 80,
 	};
 
+	const currentYear = new Date().getFullYear();
+
 	if (dailySalesOutstandingApiLoading || quaterlyLoading) {
 		return (
 			<div className={styles.container}>
@@ -37,24 +39,40 @@ function DailySalesOutstanding({
 			</div>
 		);
 	}
-	const monthly = [];
 
-	function generateArrayOfMonths() {
+	const arrayMonths = [];
+
+	const generatedMonths = () => {
 		const d = new Date();
-		const currentMonth1 = months[d.getMonth()];
-		const currentMonth2 = months[d.getMonth() - 1];
-		const currentMonth3 = months[d.getMonth() - 2];
 
-		const newArray = [currentMonth1, currentMonth2, currentMonth3];
-		return newArray;
-	}
+		let newArray = [];
 
-	const optionsVal = () => dailySalesOutstandingData.map(
-		(item) => ({
-		  return item;
+		let currentMonth1; let currentMonth2; let currentMonth3;
+
+		if (d.getMonth() >= 2) {
+			currentMonth1 = months[d.getMonth()];
+			currentMonth2 = months[d.getMonth() - 1];
+			currentMonth3 = months[d.getMonth() - 2];
+
+			newArray = [currentMonth3, currentMonth2, currentMonth1];
+		} else if (d.getMonth() === 1) {
+			currentMonth1 = months[d.getMonth()];
+			currentMonth2 = months[d.getMonth() - 1];
+			newArray = [currentMonth2, currentMonth1];
+		} else {
+			currentMonth1 = months[d.getMonth()];
+			newArray = [currentMonth1];
 		}
-		),
-	);
+
+		(dailySalesOutstandingData || []).forEach((element) => {
+			if (newArray.includes(element?.month)) {
+				arrayMonths.push(element);
+			}
+		});
+		return arrayMonths;
+	};
+
+	console.log(generatedMonths());
 
 	const marginTop = params.graphView === 'graphView' ? '0px' : '36px';
 	return (
@@ -74,14 +92,27 @@ function DailySalesOutstanding({
 							</div>
 
 							<Tooltip
-								content="Calculation(Monthly) -> (open invoices - on
-								 Account payments)/Total Sales X No. of Days"
+								content={(
+									<div>
+										Calculation(Monthly):
+
+										(open invoices - on
+										{' '}
+										<br />
+										Account payments)/Total
+										{' '}
+										<br />
+										{' '}
+										Sales X No. of Days
+
+									</div>
+								)}
 								placement="top"
 							>
-								<div className={styles.icon}><IcMInfo /></div>
+								<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
 							</Tooltip>
 						</div>
-						<div className={styles.under_line} />
+						<div className={styles.border} />
 					</div>
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<div className={styles.styled_text}>
@@ -120,14 +151,14 @@ function DailySalesOutstanding({
 				<div style={{ marginTop }}>
 					<div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
 						{ params.quarterView === 'normalView' && params.graphView !== 'graphView' && (
-							(monthly || {}).map((item) => (
+							(arrayMonths || []).map((item) => (
 								<div
 									className={styles.price_container}
 								>
 									<div className={styles.amount}>
 										{getFormattedPrice(
-											item.amount,
-											item.dashboardCurrency,
+											item.dsoForTheMonth,
+											item.currency,
 											{
 												notation              : 'compact',
 												compactDisplay        : 'short',
@@ -137,7 +168,11 @@ function DailySalesOutstanding({
 										)}
 									</div>
 									<div style={{ fontWeight: '500', fontSize: '16px' }}>
-										{item.duration}
+										{item.month}
+										{' '}
+										-
+										{' '}
+										{currentYear}
 									</div>
 								</div>
 							)))}

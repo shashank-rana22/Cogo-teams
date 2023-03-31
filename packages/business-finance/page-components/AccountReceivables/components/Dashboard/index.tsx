@@ -27,7 +27,7 @@ function Dashboard() {
 
 	const {
 		outstandingAgeData = [],
-		dailySalesOutstandingData = {},
+		dailySalesOutstandingData = [],
 		quaterly = [],
 		kamOutstandingData = [],
 		outstandingData = {},
