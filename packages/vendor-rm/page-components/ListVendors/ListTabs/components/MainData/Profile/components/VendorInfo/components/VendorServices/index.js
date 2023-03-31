@@ -3,31 +3,31 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const getSeviceMapping = (service) => {
+	const { category, sub_category, cogoport_office } = service || {};
+
+	return {
+		service_category: {
+			key   : 'service_category',
+			label : 'Service Category',
+			value : startCase(category),
+		},
+		service_sub_category: {
+			key   : 'service_sub_category',
+			label : 'Service Sub-Category',
+			value : startCase(sub_category),
+		},
+		cogoport_office: {
+			key   : 'cogoport_office',
+			label : 'Cogoport Office',
+			value : cogoport_office?.display_name,
+		},
+	};
+};
+
 function VendorServices({
 	data = {},
 }) {
-	const getSeviceMapping = (service) => {
-		const { category, sub_category, cogoport_office } = service || {};
-
-		return {
-			service_category: {
-				key   : 'service_category',
-				label : 'Service Category',
-				value : startCase(category),
-			},
-			service_sub_category: {
-				key   : 'service_sub_category',
-				label : 'Service Sub-Category',
-				value : startCase(sub_category),
-			},
-			cogoport_office: {
-				key   : 'cogoport_office',
-				label : 'Cogoport Office',
-				value : cogoport_office?.display_name,
-			},
-		};
-	};
-
 	return (
 		<>
 			{(data?.services || []).map((service) => {
