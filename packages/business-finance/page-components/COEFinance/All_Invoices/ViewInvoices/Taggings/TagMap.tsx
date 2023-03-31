@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { Button, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -12,25 +12,48 @@ function TagMap({ billId }: { billId: string }) {
 		billId,
 	});
 
+	const classname = !isEmpty(mappingsData?.merge) ? 'merge' : '';
+
 	return (
-		<div>
-			{!loading ? (
-				<div className={`${styles.wrapper} ${styles.flex}`}>
-					{!isEmpty(mappingsData)
-						? (
-							mappingsData || []
-						).map((item) => (
-							<div className={`${styles.flex} ${styles.bordernone}`}>
-								<TagCard
-									item={item}
-									isfirst
-								/>
-							</div>
-						))
-						: null}
+		<>
+			<div>
+				{!loading ? (
+					<div className={`${styles.flex} ${classname === 'merge' ? styles.merge : ''}`}>
+						{!isEmpty(mappingsData)
+							? (
+								mappingsData?.merge || mappingsData?.split || []
+							).map((item) => (
+								<div className={`${styles.flex} ${styles.bordernone} ${styles.wrapper}`}>
+									<TagCard
+										item={item}
+										classname={classname}
+										isfirst
+									/>
+								</div>
+							))
+							: <div className={styles.empty}>No Taggings Found</div>}
+					</div>
+				) : <Placeholder width="100%" height="200px" />}
+			</div>
+			{!isEmpty(mappingsData) && (
+				<div className={styles.button_container}>
+					<Button
+						size="md"
+						themeType="secondary"
+					>
+						Approve
+					</Button>
+					<Button
+						size="md"
+						themeType="secondary"
+						style={{ border: '1px solid #ed3726', marginLeft: '10px' }}
+					>
+						Reject
+					</Button>
 				</div>
-			) : <Placeholder width="100%" height="200px" />}
-		</div>
+			)}
+		</>
+
 	);
 }
 

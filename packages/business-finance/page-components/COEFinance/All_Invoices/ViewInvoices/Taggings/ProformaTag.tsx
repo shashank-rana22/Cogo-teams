@@ -16,11 +16,13 @@ interface Props {
 }
 
 export function ProformaTagCards({
-	item,
-}: { item:Props }) {
+	item, classname,
+}: { item: Props, classname?: string }) {
 	const newItem = item;
 	return (
-		<div className={`${styles.tagged} ${styles.proforma_tagcards_container}`}>
+		<div className={`
+		${styles.proforma_tagcards_container} ${classname === 'merge' ? styles.merge : ''}`}
+		>
 			<div
 				className={`${styles.details_wrapper}`}
 			>
