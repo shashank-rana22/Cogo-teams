@@ -80,7 +80,7 @@
 	height: 20px;
 	font-size: 9px;
 	color: #fff;
-	background: #cfb393;
+	background: #ef0a1a;
 	border-radius: 50%;
 }
 
@@ -131,8 +131,6 @@
 
 .important_styles {
 	position: relative;
-	border-radius: 4px;
-	box-shadow: rgb(0 0 0 / 5%) 0 0 0 1px;
 }
 
 .important_icon {

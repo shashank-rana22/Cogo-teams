@@ -132,7 +132,7 @@ function MessageCardData({ item = {}, activeCardId = '', userId = '', setActiveM
 					<img
 						src={ECLAMATION_SVG}
 						alt="important"
-						width="12px"
+						width="10px"
 					/>
 				</div>
 			)}
