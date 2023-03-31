@@ -132,7 +132,6 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		bank_details:bankDetails,
 		pincode,
 		city_name:cityName,
-		organization_trade_party_detail_id:tradePartyMappingId,
 	} = vendorData || {};
 
 	const [{ data:responseData, loading }, trigger] = useRequestBf(
@@ -237,7 +236,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 					tdsRate                 : 0,
 				},
 				serviceProviderDetail: { // vendor
-					tradePartyMappingId,
+					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
 					entityCode,
 					entityCodeId         : vendorCogoEntityId,
 					organizationId       : vendorID,

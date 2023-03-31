@@ -133,7 +133,6 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		bank_details:bankDetails = [],
 		pincode,
 		city_name:cityName,
-		organization_trade_party_detail_id:tradePartyMappingId,
 	} = vendorData || {};
 
 	const {
@@ -238,7 +237,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					tdsRate                 : 0,
 				},
 				serviceProviderDetail: { // vendor
-					tradePartyMappingId,
+					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
 					entityCode,
 					entityCodeId         : vendorCogoEntityId,
 					organizationId       : vendorId,
