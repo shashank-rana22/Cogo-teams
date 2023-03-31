@@ -246,6 +246,21 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
+	{
+		api          : 'list_shipment_trade_partners',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_organizations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_invoice_preference',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

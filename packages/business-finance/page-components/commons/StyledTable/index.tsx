@@ -10,7 +10,7 @@ function StyledTable({ id, imageFind, className, columns, data, ...rest }:TableP
 	const { loading } = rest || {};
 
 	return (
-		<div className={styles.table}>
+		<div className={`${styles.table} table_class`}>
 			<Table
 				columns={columns}
 				data={data || [{}]}
