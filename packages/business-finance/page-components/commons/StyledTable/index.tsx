@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function StyledTable({ id, className, columns, data, ...rest }:TableProps) {
 	return (
-		<div className={styles.table}>
+		<div className={`${styles.table} table_class`}>
 			<Table
 				columns={columns}
 				data={data || [{}]}
