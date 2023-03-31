@@ -7,10 +7,7 @@ const useFilterPopover = ({ setFilters }) => {
 	const { control, handleSubmit, reset } = useForm();
 
 	const onSubmit = (values) => {
-		setFilters((prev) => ({
-			...prev,
-			...values,
-		}));
+		setFilters({ ...values });
 
 		setShowFilter(false);
 	};
