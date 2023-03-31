@@ -46,10 +46,11 @@ function CardComponent({
 		if (loading) {
 			return (
 				<div className={styles.place}>
+					{
+				[1, 2, 3, 4].map(() => (
 					<Placeholder className={styles.placeholder_container} />
-					<Placeholder className={styles.placeholder_container} />
-					<Placeholder className={styles.placeholder_container} />
-					<Placeholder className={styles.placeholder_container} />
+				))
+                      }
 				</div>
 			);
 		}

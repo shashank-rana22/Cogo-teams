@@ -11,10 +11,13 @@ function DashboardLoader() {
 
 			<div className={styles.card}>
 				<div className={styles.row}>
+					{
+				[1, 2, 3].map(() => (
 					<Placeholder style={{ margin: '0px 8px' }} />
-					<Placeholder style={{ margin: '0px 8px' }} />
-					<Placeholder style={{ margin: '0px 8px' }} />
+				))
+                      }
 				</div>
+
 			</div>
 
 		))

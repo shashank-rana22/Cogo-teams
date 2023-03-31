@@ -18,12 +18,6 @@ const tabs = [
 	},
 ];
 
-const tabsKeyComponentMapping = {
-	SALES_INVOICE    : CardComponent,
-	CREDIT_NOTE      : CardComponent,
-	SHIPMENT_CREATED : CardComponent,
-};
-
 interface TabDataProps {
 	toggleData?: boolean,
 	loading?: boolean,
@@ -38,34 +32,6 @@ function TabData({
 	toggleData, loading, dailyStatsData, subActiveTab, setSubActiveTab,
 	filters, filterValue,
 } : TabDataProps) {
-	const tabComponentProps = {
-		SALES_INVOICE: {
-			subActiveTab,
-			dailyStatsData,
-			toggleData,
-			loading,
-			filters,
-			filterValue,
-		},
-		CREDIT_NOTE: {
-			subActiveTab,
-			dailyStatsData,
-			toggleData,
-			loading,
-			filters,
-			filterValue,
-		},
-		SHIPMENT_CREATED: {
-			subActiveTab,
-			dailyStatsData,
-			toggleData,
-			loading,
-			filters,
-			filterValue,
-		},
-	};
-
-	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
 	const onChange = (view:string) => {
 		setSubActiveTab(view);
 	};
@@ -97,7 +63,14 @@ function TabData({
 				</div>
 
 			</div>
-			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} {...tabComponentProps[subActiveTab]} />}
+			<CardComponent
+				subActiveTab={subActiveTab}
+				dailyStatsData={dailyStatsData}
+				toggleData={toggleData}
+				loading={loading}
+				filters={filters}
+				filterValue={filterValue}
+			/>
 		</div>
 	);
 }

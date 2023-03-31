@@ -82,19 +82,13 @@ const useReceivablesDashboard = () => {
 		{ manual: true },
 	);
 
-	const kamOutstandingApi = useCallback(async () => {
-		try {
-			kamOutstandingTrigger({
-				params: {
-					entityCode  : filterValue?.entityCode || undefined,
-					serviceType : filterValue?.serviceType || undefined,
-					companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
-	}, [filterValue.companyType, filterValue?.entityCode, filterValue?.serviceType, kamOutstandingTrigger]);
+	// const kamOutstandingApi = useCallback(async () => {
+	// 	try {
+	// 		kamOutstandingTrigger();
+	// 	} catch (e) {
+	// 		Toast.error(e?.error?.message || 'Something went wrong');
+	// 	}
+	// }, [kamOutstandingTrigger]);
 
 	const [
 		{ data: dailySalesOutstandingData, loading: dailySalesOutstandingApiLoading },
@@ -178,8 +172,11 @@ const useReceivablesDashboard = () => {
 		dailySalesOutstandingApi();
 		ageingBucketData();
 		quaterlyDataApi();
-		kamOutstandingApi();
-	}, [ageingBucketData, dailySalesOutstandingApi, kamOutstandingApi, quaterlyDataApi]);
+	}, [ageingBucketData, dailySalesOutstandingApi, quaterlyDataApi]);
+
+	useEffect(() => {
+		kamOutstandingTrigger();
+	}, [kamOutstandingTrigger]);
 
 	useEffect(() => { outstandingApi(); }, [outstandingApi]);
 

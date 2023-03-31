@@ -1,3 +1,4 @@
+import { BarDatum } from '@cogoport/charts/bar';
 import { Tooltip, Toggle } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
@@ -10,10 +11,22 @@ import { months } from '../../../constants';
 
 import styles from './styles.module.css';
 
+interface QuaterlyProps {
+	quarter?: string,
+	qsoForQuarter?: number,
+	currency?: string
+}
+interface DailySalesProps {
+	dailySalesOutstandingData?: BarDatum[],
+	dailySalesOutstandingApiLoading?: boolean,
+	quaterly?: QuaterlyProps[],
+	quaterlyLoading?: boolean
+}
+
 function DailySalesOutstanding({
-	dailySalesOutstandingData = [],
+	dailySalesOutstandingData,
 	dailySalesOutstandingApiLoading, quaterly, quaterlyLoading,
-}) {
+}: DailySalesProps) {
 	interface Props {
 		quarterView?: string;
 		graphView?: string;
@@ -90,15 +103,10 @@ function DailySalesOutstanding({
 								content={(
 									<div>
 										Calculation(Monthly):
-
-										(open invoices - on
+										(open invoices - onAccount
 										{' '}
 										<br />
-										Account payments)/Total
-										{' '}
-										<br />
-										{' '}
-										Sales X No. of Days
+										Payments)/Total Sales X No. of Days
 
 									</div>
 								)}
