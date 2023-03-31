@@ -42,6 +42,14 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 		{ label: 'FINOPS', value: 'finops' },
 	],
 	finance: [{ label: 'Credit Controller', value: 'credit_controller' }],
+	training: [
+		{ label: 'Training General', value: 'training_general' }
+	],
+	hr: [
+		{ label: 'HR Admin', value: 'hr_admin' },
+		{ label: 'HRBP', value: 'hrbp' },
+		{ label: 'Talent Acquisition', value: 'talent_acquisition' }
+	]
 };
 
 const get_all_sub_functions = (role_functions) => {

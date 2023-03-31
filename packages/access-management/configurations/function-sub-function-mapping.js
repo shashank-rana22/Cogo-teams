@@ -23,6 +23,14 @@ const functionSubFunctionMapping = {
 		{ label: 'FinOps', value: 'finops' },
 	],
 	finance: [],
+	training: [
+		{ label: 'Training General', value: 'training_general' }
+	],
+	hr: [
+		{ label: 'HR Admin', value: 'hr_admin' },
+		{ label: 'HRBP', value: 'hrbp' },
+		{ label: 'Talent Acquisition', value: 'talent_acquisition' }
+	]
 };
 
 export default functionSubFunctionMapping;
