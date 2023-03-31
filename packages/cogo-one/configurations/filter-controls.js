@@ -1,12 +1,16 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
 
-const useGetControls = (isomniChannelAdmin) => {
+const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMessages = false }) => {
 	const listAgentsOptions = useGetAsyncOptions(
 		asyncFieldsListAgents(),
 	);
-	const HIDE_CONTROLS_ADMIN = ['observer'];
-	let controls = [
+	const HIDE_CONTROLS_MAPPING = {
+		ADMIN : showBotMessages ? ['observer', 'chat_tags'] : ['observer'],
+		KAM   : ['assigned_to', 'assigned_agent'],
+	};
+
+	const controls = [
 		{
 			label     : '',
 			name      : 'status',
@@ -55,13 +59,12 @@ const useGetControls = (isomniChannelAdmin) => {
 			],
 		},
 		{
-			label        : 'Assigned To',
-			name         : 'assigned_to',
-			type         : 'radio',
-			value        : '',
-			className    : 'escalation_field_controller',
-			onlyForAdmin : true,
-			options      : [
+			label     : 'Assigned To',
+			name      : 'assigned_to',
+			type      : 'radio',
+			value     : '',
+			className : 'escalation_field_controller',
+			options   : [
 				{
 					label : 'Me',
 					value : 'me',
@@ -74,41 +77,58 @@ const useGetControls = (isomniChannelAdmin) => {
 			],
 		},
 		{
-			label        : '',
-			name         : 'assigned_agent',
-			type         : 'select',
-			value        : '',
-			onlyForAdmin : true,
-			className    : 'escalation_field_controller',
-			placeholder  : 'Select Agent',
-			rules        : {
+			label       : '',
+			name        : 'assigned_agent',
+			type        : 'select',
+			value       : '',
+			className   : 'escalation_field_controller',
+			placeholder : 'Select Agent',
+			rules       : {
 				required: 'This is Requied',
 			},
 			...(listAgentsOptions || {}),
 		},
 		{
-			label        : 'Other Filters',
-			name         : 'observer',
-			type         : 'checkboxgroup',
-			value        : '',
-			onlyForAdmin : false,
-			multiple     : false,
-			className    : 'escalation_field_controller',
-			options      : [
+			label     : 'Other Filters',
+			name      : 'observer',
+			type      : 'radio',
+			value     : '',
+			multiple  : false,
+			className : 'escalation_field_controller',
+			options   : [
 				{
 					label : 'Observer',
-					value : 'observer',
+					value : 'adminSession',
+				},
+				{
+					label : 'Closed',
+					value : 'botSession',
+				},
+				{
+					label : 'Chat Tags',
+					value : 'chat_tags',
 				},
 			],
 
 		},
+		{
+			label       : isomniChannelAdmin ? 'Tags' : '',
+			name        : 'chat_tags',
+			type        : 'select',
+			value       : '',
+			className   : 'escalation_field_controller',
+			placeholder : 'Select Tags',
+			isClearable : true,
+			rules       : {
+				required: !isomniChannelAdmin ? 'This is Requied' : false,
+			},
+			options: tagOptions,
+		},
 	];
 
-	if (isomniChannelAdmin) {
-		controls = controls.filter((item) => !HIDE_CONTROLS_ADMIN.includes(item?.name));
-	}
-
-	return controls;
+	const newControls = controls.filter((item) => !(HIDE_CONTROLS_MAPPING[isomniChannelAdmin ? 'ADMIN' : 'KAM'])
+		.includes(item?.name));
+	return newControls;
 };
 
 export default useGetControls;

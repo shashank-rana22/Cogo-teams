@@ -6825,8 +6825,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'list_organization_trade_parties',
-			access_type : 'private',
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'trade_party',
 		},
 		{
 			api         : 'get_purchase_bills_sid_details_by_id',
@@ -7245,6 +7247,83 @@ const partner = {
 			access_type : 'private',
 			module      : 'Overseas',
 			feature     : 'Overseas',
+		},
+
+	],
+	overheads: [
+		{
+			api         : 'post_purchase_expense_send_email',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
+		},
+		{
+			api         : 'get_purchase_expense_list_expense_configurations',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
+		},
+		{
+			api         : 'get_purchase_expense_list',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
+		},
+		{
+			api         : 'get_purchase_expense_stakeholder',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
+		},
+		{
+			api         : 'post_purchase_expense_expense_configuration',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
+		},
+		{
+			api         : 'get_purchase_expense_list_vendors',
+			access_type : 'private',
+			module      : 'Vendors',
+			feature     : 'Vendors',
+		},
+		{
+			api         : 'post_purchase_expense',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
+		},
+		{
+			api         : 'put_purchase_bills_status',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
+		},
+		{
+			api         : 'put_purchase_expense_expense_configuration',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
+		},
+		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_vendors',
+			access_type  : 'private',
+			service_name : 'vendor',
+		},
+		{
+			api         : 'post_common_tax_list_item_taxes',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
 		},
 	],
 	my_incident: [
