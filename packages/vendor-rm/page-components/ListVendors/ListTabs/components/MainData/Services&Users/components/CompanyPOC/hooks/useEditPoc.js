@@ -3,16 +3,18 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import controls from '../utils/controls';
 
-const useEditPoc = ({ data = {}, setShowEditPocModal = () => {}, refetchVendorInfo = () => {} }) => {
+const useEditPoc = ({ data = {}, refetchVendorInfo = () => {} }) => {
 	const { general: { query } } = useSelector((state) => ({
 		general: state.general,
 	}));
 
 	const { vendor_id } = query;
+
+	const [showEditPocModal, setShowEditPocModal] = useState(false);
 
 	const filtered_data = data?.pocs?.filter((item) => item?.is_primary === true)?.[0];
 
@@ -73,6 +75,8 @@ const useEditPoc = ({ data = {}, setShowEditPocModal = () => {}, refetchVendorIn
 		handleSubmit,
 		errors,
 		onSubmit,
+		showEditPocModal,
+		setShowEditPocModal,
 		loading,
 	};
 };
