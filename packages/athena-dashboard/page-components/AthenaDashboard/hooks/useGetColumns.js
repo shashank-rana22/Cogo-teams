@@ -1,6 +1,5 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { isEmpty } from '@cogoport/utils';
-import { useMemo } from 'react';
 
 const useGetColumns = ({ columnsToShow = [] }) => {
 	const columns = [
@@ -228,7 +227,6 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 		finalColumns.push(column);
 	});
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	return useMemo(() => finalColumns, []);
+	return finalColumns;
 };
 export default useGetColumns;
