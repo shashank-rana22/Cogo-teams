@@ -19,9 +19,9 @@
 	flex-wrap: row wrap;
 }
 
-.fields_to_show{
-	display:flex;
-	flex-direction:column;
+.fields_to_show {
+	display: flex;
+	flex-direction: column;
 }
 
 .label {

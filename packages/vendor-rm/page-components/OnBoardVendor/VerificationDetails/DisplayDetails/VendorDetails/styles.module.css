@@ -35,9 +35,9 @@
 }
 
 .fields_to_show {
-display: flex;
-flex-direction: column;
-flex-basis: 25%;
+	display: flex;
+	flex-basis: 25%;
+	flex-direction: column;
 }
 
 .icon_container {

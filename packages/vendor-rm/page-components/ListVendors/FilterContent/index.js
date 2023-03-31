@@ -59,7 +59,6 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 			</div>
 
 			<div className={styles.button_container}>
-
 				<Button
 					type="button"
 					onClick={() => {

@@ -6,6 +6,24 @@ import getKycTabsMapping from '../utils/kycTabsMapping';
 
 import styles from './styles.module.css';
 
+const color = (kycStatus, params) => {
+	const { kyc_status } = params?.filters || {};
+
+	if (!kycStatus && !kyc_status) {
+		return { background: '#f9f199' };
+	}
+
+	if (typeof kyc_status === 'object') {
+		if (kycStatus && compareArrays(kyc_status, kycStatus)) {
+			return { background: '#f9f199' };
+		}
+	} else if (kyc_status === kycStatus) {
+		return { background: '#f9f199' };
+	}
+
+	return {};
+};
+
 function KycStatusTabs({
 	params,
 	setParams = () => {},
@@ -15,42 +33,25 @@ function KycStatusTabs({
 
 	const { kycTabsMapping } = getKycTabsMapping({ dataStats });
 
-	const color = (kycStatus) => {
-		const { kyc_status } = params?.filters || {};
-
-		if (!kycStatus && !kyc_status) {
-			return { background: '#f9f199' };
-		}
-		if (typeof kyc_status === 'object') {
-			if (kycStatus && compareArrays(kyc_status, kycStatus)) {
-				return { background: '#f9f199' };
-			}
-		} else if (kyc_status === kycStatus) {
-			return { background: '#f9f199' };
-		}
-		return {};
-	};
-
 	return (
 		<div className={styles.kyc}>
-			{
-kycTabsMapping.map((kycTab) => {
-	const { label = '', valueKey = '', kycStatus, value } = kycTab;
-	return (
-		<div
-			role="presentation"
-			className={styles.box}
-			onClick={() => {
-				tagClick({ kycStatus });
-			}}
-			style={color(kycStatus)}
-		>
-			<div className={styles.label}>{label}</div>
-			<div className={styles.value}>{value || dataStats?.[valueKey] || 0}</div>
-		</div>
-	);
-})
-            }
+			{kycTabsMapping.map((kycTab) => {
+				const { label = '', valueKey = '', kycStatus, value } = kycTab;
+
+				return (
+					<div
+						role="presentation"
+						className={styles.box}
+						onClick={() => {
+							tagClick({ kycStatus });
+						}}
+						style={color(kycStatus, params)}
+					>
+						<div className={styles.label}>{label}</div>
+						<div className={styles.value}>{value || dataStats?.[valueKey] || 0}</div>
+					</div>
+				);
+			})}
 		</div>
 	);
 }

@@ -44,7 +44,6 @@ function FieldArray({
 					field={field}
 					index={index}
 					control={control}
-					// controls={newControls}
 					controls={controls}
 					name={name}
 					remove={remove}

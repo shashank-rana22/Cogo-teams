@@ -2,9 +2,9 @@ import { Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyState from '../../../../../../commons/components/EmptyState';
 import useGetBfList from '../hooks/useGetBfList';
 
-import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
 function FinanceDashBoard() {
@@ -16,13 +16,14 @@ function FinanceDashBoard() {
 
 	if (isEmpty(data)) {
 		return (
-			<EmptyState />
+			<div style={{ marginLeft: 30 }}>
+				<EmptyState />
+			</div>
 		);
 	}
 
 	return (
 		<div className={styles.main}>
-
 			<div className={styles.title}>
 				Finance Dashboard
 			</div>
@@ -32,9 +33,7 @@ function FinanceDashBoard() {
 				columns={columns}
 				loading={loading}
 			/>
-
 		</div>
-
 	);
 }
 
