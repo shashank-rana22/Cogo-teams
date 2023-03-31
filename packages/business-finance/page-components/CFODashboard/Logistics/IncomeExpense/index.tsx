@@ -50,10 +50,10 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 		setYearFilters(years);
 	};
 
-	const calendarYearData = () => (
+	const renderYearData = (years) => (
 		<div>
-			{calendarYear.map((year) => (
-				<div style={{ marginBottom: '10px' }}>
+			{years.map((year) => (
+				<div style={{ marginBottom: '10px', cursor: year === 'financialYears' && 'pointer' }}>
 					<div
 						key={year}
 						role="presentation"
@@ -67,29 +67,12 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 			))}
 		</div>
 	);
-	const financialYearData = () => (
-		<div>
-			{financialYears.map((year) => (
-				<div style={{ marginBottom: '10px', cursor: 'pointer' }}>
-					<div
-						key={year}
-						onClick={() => onClickFinancialYear(year)}
-						role="presentation"
-						style={{ cursor: 'pointer' }}
-					>
-						{year}
 
-					</div>
-					<div className={styles.year_bottom_border} />
-				</div>
-			))}
-		</div>
-	);
 	const yearHandleChange = () => {
 		if (yearHandle) {
-			return calendarYearData();
+			return renderYearData(calendarYear);
 		}
-		return financialYearData();
+		return renderYearData(financialYears);
 	};
 	const content = () => (
 
@@ -150,7 +133,11 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 						<div style={{ marginTop: '10px', marginLeft: '20px' }}>
 							<Popover render={content()} caret={false} placement="bottom">
 								<div style={{ width: '140px', padding: '-10px' }}>
-									<Input placeholder="Select Year Mode" size="sm" />
+									<Input
+										placeholder="Select Year Mode"
+										size="sm"
+
+									/>
 								</div>
 							</Popover>
 						</div>

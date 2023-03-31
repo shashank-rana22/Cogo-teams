@@ -65,7 +65,7 @@ function Profitabillity({ globalFilters, entityTabFilters }) {
 				<div className={styles.flex}>
 					{tab.map((item) => (
 						<div
-							key={item?.key}
+							key={item.key}
 							onClick={() => {
 								setFilters((p) => ({ ...p, pageIndex: 1 })); setTabs(item.key);
 							}}

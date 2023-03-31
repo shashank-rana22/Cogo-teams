@@ -21,7 +21,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 		receivablesLoading,
 	} = useGetReceivablesList({ globalFilters, entityTabFilters });
 
-	const { payablesData, payablesLoading } = useGetPayablesList({ globalFilters });
+	const { payablesData, payablesLoading } = useGetPayablesList({ globalFilters, entityTabFilters });
 	const { overdueAmount = 0, nonOverdueAmount = 0, notPaidDocumentCount = 0 } = receivablesData || {};
 	const {
 		overdueAmount:payOverdueAmount = 0, nonOverdueAmount:payNonOverdueAmount = 0,
@@ -124,10 +124,10 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 										trigger="click"
 										caret={false}
 										render={(totalReceivablesKeyMappings({ receivablesData }) || []).map((val) => (
-											<div className={styles.receivables_data}>
-												<div className={styles.recei_label}>{val.label}</div>
-												<div className={styles.label}>{val.valueKey}</div>
-											</div>
+											<tr>
+												<td className={styles.recei_label}>{val.label}</td>
+												<td className={styles.label}>{val.valueKey}</td>
+											</tr>
 										))}
 									>
 										<IcMArrowRotateDown style={{ margin: '0px 20px', cursor: 'pointer' }} />
@@ -212,10 +212,10 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 										trigger="click"
 										caret={false}
 										render={(totalPayablesKeyMappings({ payablesData }) || []).map((val) => (
-											<div className={styles.receivables_data}>
-												<div className={styles.recei_label}>{val.label}</div>
-												<div className={styles.label}>{val.valueKey}</div>
-											</div>
+											<tr>
+												<td className={styles.recei_label}>{val.label}</td>
+												<td className={styles.label}>{val.valueKey}</td>
+											</tr>
 										))}
 									>
 										<IcMArrowRotateDown style={{ margin: '0px 20px', cursor: 'pointer' }} />

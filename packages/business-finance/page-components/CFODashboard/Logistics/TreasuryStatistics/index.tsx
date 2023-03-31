@@ -85,75 +85,105 @@ function TreasuryStatistics() {
 						</div>
 					</div>
 					<div className={styles.container}>
-						{loading ? (
-							<div style={{ alignItems: 'center' }}>
-								<Placeholder height="50px" width="300px" margin="10px 0px 100px 0px" />
-							</div>
-						) : (
-							<div className={styles.flex}>
-								{tab.map((item:ItemProps) => (
-									<div
-										key={item.key}
-										onClick={() => {
-											setTabs(item.key);
-										}}
-										role="presentation"
+						<div className={styles.flex}>
+							{tab.map((item:ItemProps) => (
+								<div
+									key={item.key}
+									onClick={() => {
+										setTabs(item.key);
+									}}
+									role="presentation"
+								>
+									<div className={item.key === tabs
+										? styles.sub_container_click : styles.sub_container}
 									>
-										<div className={item.key === tabs
-											? styles.sub_container_click : styles.sub_container}
-										>
-											{item.label}
-											<div>{item.icon}</div>
-										</div>
+										{item.label}
+										<div>{item.icon}</div>
 									</div>
-								))}
-							</div>
-						)}
+								</div>
+							))}
+						</div>
 					</div>
 					<div className={styles.around_border}>
-						<div className={styles.text}>
-							No. of Accounts -
-							{' '}
-							{noOfAccounts}
-						</div>
+						{loading ? (
+							<div style={{ alignItems: 'center', marginLeft: '10px' }}>
+								<Placeholder height="20px" width="120px" />
+							</div>
+						) : (
+							<div className={styles.text}>
+								No. of Accounts -
+								{' '}
+								{noOfAccounts}
+							</div>
+						)}
 
 						<div className={styles.border_left} />
 						<div>
 							Allocated Funds
 							<div className={styles.amount_style}>
-								{showInTooltop(
-									getFormattedPrice(allocatedAmount, 'INR'),
-									getAmountInLakhCrK(allocatedAmount, 'INR'),
+								{loading ? (
+									<div style={{ alignItems: 'center' }}>
+										<Placeholder height="20px" width="120px" />
+									</div>
+								) : (
+									<>
+										{showInTooltop(
+											getFormattedPrice(allocatedAmount, 'INR'),
+											getAmountInLakhCrK(allocatedAmount, 'INR'),
+										)}
+									</>
 								)}
-
 							</div>
 						</div>
 						<div className={styles.border_left} />
 						<div className={styles.text_style_settled}>
 							Utilized Funds
 							<div className={styles.amount_style}>
-								{showInTooltop(
-									getFormattedPrice(utilizedAmount, 'INR'),
-									getAmountInLakhCrK(utilizedAmount, 'INR'),
+								{loading ? (
+									<div style={{ alignItems: 'center' }}>
+										<Placeholder height="20px" width="120px" />
+									</div>
+								) : (
+									<>
+										{showInTooltop(
+											getFormattedPrice(utilizedAmount, 'INR'),
+											getAmountInLakhCrK(utilizedAmount, 'INR'),
+										)}
+									</>
 								)}
 							</div>
 						</div>
 						<div className={styles.text_style_settled}>
 							Settled Amount
 							<div className={styles.amount_style}>
-								{showInTooltop(
-									getFormattedPrice(settledAmount, 'INR'),
-									getAmountInLakhCrK(settledAmount, 'INR'),
+								{loading ? (
+									<div style={{ alignItems: 'center' }}>
+										<Placeholder height="20px" width="120px" />
+									</div>
+								) : (
+									<>
+										{showInTooltop(
+											getFormattedPrice(settledAmount, 'INR'),
+											getAmountInLakhCrK(settledAmount, 'INR'),
+										)}
+									</>
 								)}
-
 							</div>
 						</div>
 						<div className={styles.text_styles}>
 							UTR Pending Amount
 							<div className={styles.amount_style}>
-								{showInTooltop(
-									getFormattedPrice(UTRPendingAmount, 'INR'),
-									getAmountInLakhCrK(UTRPendingAmount, 'INR'),
+								{loading ? (
+									<div style={{ alignItems: 'center' }}>
+										<Placeholder height="20px" width="120px" />
+									</div>
+								) : (
+									<>
+										{showInTooltop(
+											getFormattedPrice(UTRPendingAmount, 'INR'),
+											getAmountInLakhCrK(UTRPendingAmount, 'INR'),
+										)}
+									</>
 								)}
 
 							</div>
@@ -161,17 +191,30 @@ function TreasuryStatistics() {
 						<div className={styles.border_left} />
 						<div className={styles.text_style_settled}>
 							Flush Percentage
-							<div className={styles.amount_style}>
-								{flushPercentage.toFixed(2)}
-								%
-							</div>
+							{loading ? (
+								<div style={{ alignItems: 'center' }}>
+									<Placeholder height="20px" width="120px" />
+								</div>
+							) : (
+
+								<div className={styles.amount_style}>
+									{flushPercentage.toFixed(2)}
+									%
+								</div>
+							)}
 						</div>
 						<div className={styles.text_styles}>
 							Processing Percentage
-							<div className={styles.amount_style}>
-								{processingPercentage.toFixed(2)}
-								%
-							</div>
+							{loading ? (
+								<div style={{ alignItems: 'center' }}>
+									<Placeholder height="20px" width="120px" />
+								</div>
+							) : (
+								<div className={styles.amount_style}>
+									{processingPercentage.toFixed(2)}
+									%
+								</div>
+							)}
 						</div>
 					</div>
 				</div>

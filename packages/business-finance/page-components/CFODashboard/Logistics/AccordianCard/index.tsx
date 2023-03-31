@@ -108,11 +108,6 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 												/>
 											) : (
 												<div className={styles.amount_div}>
-													{/* <Tooltip
-												content=""
-												placement="top"
-												caret={false}
-											> */}
 													<div className={styles.amounts}>
 														<div className={item.accountRec + item.accountPay >= 0
 															? styles.pills : styles.pill}
@@ -127,7 +122,6 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 															)}
 														</div>
 													</div>
-													{/* </Tooltip> */}
 												</div>
 											)}
 											<div className={styles.border} />
