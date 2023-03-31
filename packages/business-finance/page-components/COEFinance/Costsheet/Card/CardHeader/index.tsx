@@ -14,7 +14,10 @@ function CardHeader({ header, value, loading }:Props) {
 		<div className={styles.header}>
 			<span className={styles.font}>{header}</span>
 			<span className={styles.font}>
-				Total -
+				Total
+				{' '}
+				:
+				{' '}
 				{loading ? <span className={styles.placeholder}><Placeholder /></span> : value}
 			</span>
 		</div>
