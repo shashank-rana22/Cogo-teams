@@ -1,0 +1,25 @@
+.header {
+	margin: 0;
+	font-weight: 800;
+}
+
+.underline {
+	width: 10%;
+	border-top: 5px solid #ed3726;
+}
+
+.tabs {
+	margin: 32px 0;
+}
+
+.container {
+	padding: 16px;
+	margin: -24px;
+}
+
+.heading {
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 42px;
+}
