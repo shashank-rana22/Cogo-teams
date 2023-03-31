@@ -35,7 +35,7 @@ const updatePin = async ({ pinnedID, channelType, type, userId, firestore }) => 
 			...payload,
 		});
 	} catch (error) {
-		Toast.error('Cannot Pin chat');
+		Toast.error('Updated Failed');
 	}
 };
 
