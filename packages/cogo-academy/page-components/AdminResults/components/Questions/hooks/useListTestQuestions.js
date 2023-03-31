@@ -16,7 +16,7 @@ const useListQuestions = () => {
 				filters: { q: query, question_type: ['single_correct', 'multi_correct'] },
 				...params,
 			},
-			title: 'stand_alone_questions',
+			title: 'Stand Alone Questions',
 
 		},
 		case_study_based: {
@@ -24,7 +24,7 @@ const useListQuestions = () => {
 				filters: { question_type: 'case_study', q: query },
 				...params,
 			},
-			title: 'case_study_based',
+			title: 'Case Study Based',
 
 		},
 	};

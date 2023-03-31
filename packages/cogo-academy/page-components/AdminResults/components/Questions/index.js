@@ -1,5 +1,5 @@
 import { Pagination, TabPanel, Tabs, Placeholder } from '@cogoport/components';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import EmptyState from '../../../CreateModule/components/EmptyState';
@@ -24,7 +24,7 @@ function QuestionsComponent({ test_id }) {
 		QUESTIONS_MAPPING,
 	} = useListTestQuestions({ test_id });
 
-	const { stats = [], page_limit = 0, total_count = 0, list: questionsList = [] } = data || {};
+	const { page_limit = 0, total_count = 0, list: questionsList = [] } = data || {};
 
 	useEffect(() => {
 		refetch();
@@ -45,8 +45,7 @@ function QuestionsComponent({ test_id }) {
 							<TabPanel
 								key={item}
 								name={item}
-								badge={stats[0]?.[item] || '0'}
-								title={startCase(title)}
+								title={title}
 							/>
 						);
 					})}

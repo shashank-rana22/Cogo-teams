@@ -31,7 +31,7 @@ function Header({
 			<div className={styles.title}>
 				Case Study
 				{' '}
-				{index}
+				{index + 1}
 			</div>
 
 			<div className={styles.description}>
