@@ -9,7 +9,7 @@ const useFilterPopover = ({ setFilters }) => {
 	const onSubmit = (values) => {
 		setFilters((prev) => ({
 			...prev,
-			cogo_entity_id: values?.cogo_entity_id,
+			...values,
 		}));
 
 		setShowFilter(false);
