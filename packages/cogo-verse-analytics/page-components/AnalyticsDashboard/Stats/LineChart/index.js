@@ -66,11 +66,11 @@ function Charts({ GraphData = [], hideChart = false }) {
 					axisBottom={{
             	orient         : 'bottom',
             	tickSize       : 0,
-            	tickPadding    : 25,
+            	tickPadding    : 10,
             	tickValues     : 8,
             	tickRotation   : 0,
             	legend         : 'Date',
-            	legendOffset   : 50,
+            	legendOffset   : 40,
             	legendPosition : 'middle',
 					}}
 					axisLeft={{
