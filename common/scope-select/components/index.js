@@ -7,7 +7,10 @@ import useScope from '../hooks/useScope';
 import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
-export default function ScopeSelect({ size = 'sm', themeType = 'secondary', defaultValues, showChooseAgent = true }) {
+export default function ScopeSelect({
+	size = 'sm', themeType = 'secondary',
+	className = '', defaultValues, showChooseAgent = true,
+}) {
 	const [showPopover, setShowPopover] = useState(false);
 
 	const closePopover = () => setShowPopover(false);
@@ -36,7 +39,7 @@ export default function ScopeSelect({ size = 'sm', themeType = 'secondary', defa
 			<Button
 				size={size}
 				onClick={() => setShowPopover((p) => !p)}
-				className={`${styles.popover_children} ${styles[size]}`}
+				className={`${styles.popover_children} ${styles[size]} ${className}`}
 				themeType={themeType}
 			>
 				<div className={styles.ellipsis_text}>{displayScope}</div>

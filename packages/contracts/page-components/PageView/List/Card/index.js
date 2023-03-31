@@ -10,6 +10,9 @@ import ServiceDetail from './ServiceDetail';
 import styles from './styles.module.css';
 
 function Card({ item, filters }) {
+	const { importer_exporter = {}, requested_by = '', requester_name = '' } = item || {};
+	const { business_name = '' } = importer_exporter;
+
 	const router = useRouter();
 	const formattedData = formatPortPair({ item });
 	const newFormattedData = [];
@@ -44,6 +47,14 @@ function Card({ item, filters }) {
 				</div>
 
 				<div className={styles.details}>
+					<div className={styles.requested_details}>
+						Requested By
+						{' '}
+						{startCase(requested_by)}
+						:
+						<div className={styles.requester_name}>{requester_name ? startCase(requester_name) : '--'}</div>
+					</div>
+
 					<div className={styles.pair}>
 						<div>
 							{filters?.status === 'active' ? 'Updated Date' : 'Requested Date '}
@@ -53,12 +64,12 @@ function Card({ item, filters }) {
 							{format(
 								filters?.status === 'active'
 									? item?.approved_at
-									: item?.updated_at,
+									: item?.requested_at,
 								'dd MMM YYYY',
 							)}
 						</div>
 					</div>
-					{ filters?.status === 'active' ? (
+					{filters?.status === 'active' ? (
 						<div className={styles.pair}>
 							<div>Validity :</div>
 							<div className={styles.value}>
@@ -68,6 +79,10 @@ function Card({ item, filters }) {
 						</div>
 					) : null}
 				</div>
+			</div>
+			<div className={styles.business_name}>
+				Business Name:
+				<div className={styles.org_name}>{business_name ? startCase(business_name) : '-'}</div>
 			</div>
 			<div className={styles.service_details}>
 				{item.services.map((service, index) => (

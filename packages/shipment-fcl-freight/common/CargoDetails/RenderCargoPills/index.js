@@ -10,6 +10,10 @@ const labels = [
 	'commodity',
 	'inco_term',
 	'trade_type',
+	'packages',
+	'volume',
+	'weight',
+	'haulage_type',
 	'transport_mode',
 	'cargo_weight_per_container',
 	'destination_cargo_handling_type',
@@ -18,11 +22,6 @@ const labels = [
 	'contract_reference_id',
 ];
 
-/**
- * Renders a CargoDetails Component
- * @param {Object}      					props
- * @param {Array of Object} 				[props.detail=[{}]] - Specifies details of cargo
- */
 function RenderCargoPills({ detail }) {
 	return (
 		<>

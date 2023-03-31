@@ -12,7 +12,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-top: 8px;
+	margin-top: 12px;
 }
 
 .upload {
@@ -23,6 +23,8 @@
 }
 
 .ic_tick {
+	width: 16px;
+	height: 16px;
 	margin-right: 3px;
 }
 

@@ -35,6 +35,7 @@
     "@cogoport/supply-dashboards": "workspace:0.1.0",
     "@cogoport/translate": "workspace:0.1.0",
     "@cogoport/shipment-fcl-freight": "workspace:0.1.0",
+    "@cogoport/ocean-modules": "workspace:0.1.0",
     "@cogoport/booking-desk" : "workspace:0.1.0",
     "@cogoport/scope-select" : "workspace:0.1.0",
     "@cogoport/utils": "^1.2.6",
