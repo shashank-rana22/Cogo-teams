@@ -67,6 +67,8 @@ function Completion() {
 					className={styles.image}
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti.svg"
 					alt=""
+					width={32}
+					height={32}
 				/>
 				<h2>Congratulations!</h2>
 			</div>
