@@ -1,6 +1,6 @@
 import { Loader, Button, Modal } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { HawbFields } from '../../configurations/hawb_fields';
 import useGetHawbList from '../../hooks/useGetHawbList';
@@ -27,6 +27,10 @@ function HawbList({ data, setViewDoc, setItem }) {
 		setViewDoc(true);
 		setItem(singleItem);
 	};
+
+	useEffect(() => {
+		listAPi();
+	}, [listAPi]);
 
 	const handleUpdate = async (values) => {
 		const serialId = values?.serialId || '';
