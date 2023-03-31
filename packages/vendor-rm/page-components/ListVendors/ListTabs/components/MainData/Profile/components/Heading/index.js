@@ -42,6 +42,7 @@ function Heading({
 		errors_kyc,
 		loading,
 		resubmitKYC,
+		handleCompleteKyc,
 	} = useResubmitKyc({ data, refetchVendorInfo, setshowKycModal });
 
 	const { kyc_status = '' } = vendor_details || {};
@@ -55,12 +56,23 @@ function Heading({
 					<Button
 						className={styles.kyc_btn}
 						size="md"
-						themeType="secondary"
+						themeType="accent"
 						onClick={() => {
 							setshowKycModal(!showEditProfileModal);
 						}}
 					>
 						Resubmit KYC
+					</Button>
+				)}
+
+				{kyc_status === 'pending_from_user' && (
+					<Button
+						className={styles.kyc_btn}
+						size="md"
+						themeType="accent"
+						onClick={handleCompleteKyc}
+					>
+						Complete KYC
 					</Button>
 				)}
 
