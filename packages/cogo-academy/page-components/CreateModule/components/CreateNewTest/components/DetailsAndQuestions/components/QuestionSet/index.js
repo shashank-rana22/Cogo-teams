@@ -1,4 +1,6 @@
-import { Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill, Pagination } from '@cogoport/components';
+import {
+	Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill, Pagination, Tooltip,
+} from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMArrowRotateUp, IcMSearchlight } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
@@ -65,13 +67,15 @@ function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
 			id       : 'b',
 			accessor : ({ topic = '-' }) => (
 				<section>
-					<Pill
-						key={topic}
-						size="sm"
-						color="blue"
-					>
-						{startCase(topic)}
-					</Pill>
+					<Tooltip maxWidth={500} content={startCase(topic)} placement="top">
+						<Pill
+							className={styles.topic_pill}
+							size="md"
+							color="#CFEAED"
+						>
+							{startCase(topic)}
+						</Pill>
+					</Tooltip>
 				</section>
 			),
 		},
@@ -124,6 +128,7 @@ function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
 				<section>
 					<span className={styles.questionsettime}>
 						{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
+						{' '}
 					</span>
 					<span className={styles.questionsettime}>
 						{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}

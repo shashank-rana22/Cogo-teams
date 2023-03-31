@@ -91,3 +91,13 @@
 	font-weight: 400;
 	color: #828282;
 }
+
+.topic_pill {
+	max-width: 120px;
+}
+
+.topic_pill div {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
