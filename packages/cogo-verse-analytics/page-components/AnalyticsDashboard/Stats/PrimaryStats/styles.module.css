@@ -24,6 +24,7 @@
 .primary_left_stat {
 	flex-basis: 75%;
 	height: 100%;
+	margin-bottom: 5px;
 }
 
 .primary_stat_title {
@@ -67,7 +68,6 @@
 .primary_stat_description {
 	display: flex;
 	align-items: center;
-	margin-top: 5px;
 	font-size: 13px;
 	padding-left: 10px;
 	color: #828282;

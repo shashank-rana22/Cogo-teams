@@ -1,15 +1,15 @@
 /* eslint-disable max-len */
 import {
-	Select,
+	// Select,
 	DateRangepicker,
 } from '@cogoport/components';
-import { useGetAsyncOptions } from '@cogoport/forms';
-import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+// import { useGetAsyncOptions } from '@cogoport/forms';
+// import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, merge } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
-import useGetCogoverseGlobeData from '../../../hooks/useGetCogoverseGlobeData';
+// import useGetCogoverseGlobeData from '../../../hooks/useGetCogoverseGlobeData';
 
 import GlobeStatsFooter from './GlobeStatsFooter';
 import styles from './styles.module.css';
@@ -30,13 +30,11 @@ function MapView(props = {}) {
 	} = props || {};
 	const [circleTab, setCircleTab] = useState('new_users');
 
-	const {
-		options:locationOptions,
-		loading:locationsLoading = false,
-		onSearch = () => {},
-	} = useGetAsyncOptions(merge(asyncFieldsLocations(), { params: { filters: { type: 'country' }, page_limit: 500 } }));
-
-	// const { globeData = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab, date });
+	// const {
+	// 	options:locationOptions,
+	// 	loading:locationsLoading = false,
+	// 	onSearch = () => {},
+	// } = useGetAsyncOptions(merge(asyncFieldsLocations(), { params: { filters: { type: 'country' }, page_limit: 500 } }));
 const globeData=stats?.list;
 	const { customer_locations = [], stats:globeStats = {} } = globeData || {};
 	console.log("customer_locations:", customer_locations);

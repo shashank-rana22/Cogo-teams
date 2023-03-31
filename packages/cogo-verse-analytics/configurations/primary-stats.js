@@ -27,7 +27,7 @@ export const PRIMARY_STATS = [
 		descKey     : 'revenue_from_shipments',
 		title       : 'Revenue',
 		parentKey   : 'invoice_payment_and_revenue',
-		description : 'invoice payments',
+		description : 'shipments',
 		icon_bg     : '#f7faef',
 		icon        : <IcMMoney fill="#ABCD62" width="25px" height="25px" />,
 	},

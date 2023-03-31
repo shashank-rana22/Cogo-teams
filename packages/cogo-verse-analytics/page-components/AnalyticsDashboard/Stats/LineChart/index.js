@@ -7,7 +7,6 @@ import { imgURL } from '../../../../constants/image-urls';
 import styles from './styles.module.css';
 
 function Charts({ GraphData = [], hideChart = false }) {
-	console.log(GraphData, 'GraphData');
 
 	const Dates = GraphData.map((data) => data?.shipment_week_starting_from);
 	const CancelledShipments = GraphData.map((data) => data?.cogoverse_cancelled_shipments);
@@ -93,14 +92,9 @@ function Charts({ GraphData = [], hideChart = false }) {
             	return (
 	<div className={styles.tool_tip}>
 		<span style={{ background: borderColor }} />
-		<p>123</p>
-		{/* <strong>
-			{formattedDate(data.x)}
-			{' '}
-			:
-			{' '}
-			{formattedTime(data.y)}
-		</strong> */}
+		<strong>
+			{data.y}
+		</strong>
 	</div>
             	);
 					}}
