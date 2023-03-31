@@ -1,5 +1,6 @@
 import {
 	DateRangepicker,
+	Textarea,
 	Input,
 	Modal,
 	Pill,
@@ -9,6 +10,8 @@ import {
 	Datepicker,
 	SingleDateRange,
 } from '@cogoport/components';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { CSSProperties, useState } from 'react';
 
@@ -25,12 +28,12 @@ type SelectedProp = {
 };
 interface ElementProps {
 	type?: string;
-	value?: string | Date | string[] | SelectedProp;
+	value?: any;
 	className?: string;
 	url?: string;
 	href?: string;
 	key?: string;
-	name: string;
+	name?: string;
 	onChange?: (val: any) => void;
 	options?: Options[];
 	setFilters: (p: object) => void;
@@ -55,7 +58,7 @@ function Element({
 	...rest
 }: ElementProps) {
 	const [show, setShow] = useState(false);
-	const { style, selectWidth, options } = rest;
+	const { style, selectWidth, options, onlyNumbersAllowed = false } = rest;
 	const { setFilters } = rest;
 	const tagClick = (val: Options) => {
 		setFilters((prev: object) => ({
@@ -181,6 +184,7 @@ function Element({
 						style={style as CSSProperties}
 						className={className}
 						prefix={<IcMSearchlight height={15} width={15} />}
+						type={onlyNumbersAllowed ? 'number' : 'text'}
 						{...rest}
 					/>
 				);
@@ -238,7 +242,33 @@ function Element({
 						{...rest}
 					/>
 				);
-
+			case 'textarea':
+				return (
+					<Textarea
+						value={value as string}
+						style={style as CSSProperties}
+						className={className}
+						{...rest}
+					/>
+				);
+			case 'fileUploader':
+				return (
+					<FileUploader
+						className={className}
+						style={style as CSSProperties}
+						value={value}
+						{...rest}
+					/>
+				);
+			case 'asyncSelect':
+				return (
+					<AsyncSelect
+						className={className}
+						value={value}
+						style={style as CSSProperties}
+						{...rest}
+					/>
+				);
 			default:
 				return (
 					<div className={className} {...rest}>
