@@ -52,6 +52,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		country:tradePartyCountry,
 		registration_number:registrationNumberTradeParty,
 		tds_deduction_rate:tdsTradeParty,
+		organization_trade_party_detail_id:tradePartyMappingIdFromTradeParty,
 	} = tradeParty || {};
 
 	const {
@@ -131,6 +132,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		bank_details:bankDetails,
 		pincode,
 		city_name:cityName,
+		organization_trade_party_detail_id:tradePartyMappingId,
 	} = vendorData || {};
 
 	const [{ data:responseData, loading }, trigger] = useRequestBf(
@@ -187,6 +189,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 					billNumber         : invoiceNumber,
 				},
 				sellerDetail: { // tradeParty
+					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
 					entityCode           : entityCodeTradeParty,
 					entityCodeId         : entityIdTradeParty,
 					organizationId       : orgIdTradeParty,
@@ -234,6 +237,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 					tdsRate                 : 0,
 				},
 				serviceProviderDetail: { // vendor
+					tradePartyMappingId,
 					entityCode,
 					entityCodeId         : vendorCogoEntityId,
 					organizationId       : vendorID,

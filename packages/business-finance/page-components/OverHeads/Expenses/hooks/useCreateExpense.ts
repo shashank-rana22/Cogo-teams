@@ -51,6 +51,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		country:tradePartyCountry,
 		registration_number:registrationNumberTradeParty,
 		tds_deduction_rate:tdsTradeParty,
+		organization_trade_party_detail_id:tradePartyMappingIdFromTradeParty,
 	} = tradeParty || {};
 
 	const {
@@ -132,6 +133,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		bank_details:bankDetails = [],
 		pincode,
 		city_name:cityName,
+		organization_trade_party_detail_id:tradePartyMappingId,
 	} = vendorData || {};
 
 	const {
@@ -188,6 +190,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					billNumber         : invoiceNumber,
 				},
 				sellerDetail: { // tradeParty
+					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
 					entityCode           : entityCodeTradeParty,
 					entityCodeId         : entityIdTradeParty,
 					organizationId       : orgIdTradeParty,
@@ -235,6 +238,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					tdsRate                 : 0,
 				},
 				serviceProviderDetail: { // vendor
+					tradePartyMappingId,
 					entityCode,
 					entityCodeId         : vendorCogoEntityId,
 					organizationId       : vendorId,
