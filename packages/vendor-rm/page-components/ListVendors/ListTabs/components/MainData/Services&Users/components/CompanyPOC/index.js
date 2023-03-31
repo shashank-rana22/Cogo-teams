@@ -58,6 +58,7 @@ function CompanyPOC({
 		controls,
 		handleSubmit,
 		errors,
+		loading,
 		onSubmit,
 		showEditPocModal,
 		setShowEditPocModal,
@@ -123,6 +124,7 @@ function CompanyPOC({
 							type="button"
 							style={{ marginRight: 10 }}
 							themeType="secondary"
+							disabled={loading}
 							onClick={() => {
 								setShowEditPocModal(false);
 							}}
@@ -133,6 +135,7 @@ function CompanyPOC({
 						<Button
 							size="md"
 							type="submit"
+							loading={loading}
 							onClick={handleSubmit(onSubmit)}
 						>
 							submit
