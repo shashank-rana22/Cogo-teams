@@ -25,7 +25,6 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 		type            : 'file',
 		themeType       : 'secondary',
 		draggable       : true,
-		// uploadIcon      : 'ic-upload',
 		onlyURLOnChange : true,
 		accept          : 'image/*',
 		uploadType      : 'aws',
