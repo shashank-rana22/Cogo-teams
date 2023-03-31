@@ -1,77 +1,45 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import {
 	collectionGroup,
 	onSnapshot,
 	updateDoc,
 	doc,
+	query,
+	limit, where, getDocs, orderBy,
 } from 'firebase/firestore';
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
+import { PAGE_LIMIT } from '../constants';
 import getFireStoreQuery from '../helpers/getFireStoreQuery';
 
-const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages = false }) => {
+const useListChats = ({
+	firestore,
+	userId,
+	isomniChannelAdmin,
+	showBotMessages = false,
+	searchValue = '',
+}) => {
+	const { query:searchQuery, debounceQuery } = useDebounceQuery();
+
 	const {
 		query: { assigned_chat = '' },
 	} = useRouter();
+
 	const snapshotListener = useRef(null);
 
 	const [firstLoading, setFirstLoading] = useState(true);
 	const [activeCardId, setActiveCardId] = useState('');
-
 	const [loading, setLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
 
-	useEffect(() => {
-		if (assigned_chat) {
-			setActiveCardId(assigned_chat);
-		}
-		setFirstLoading(false);
-	}, [assigned_chat]);
-
 	const [listData, setListData] = useState({
-		messagesList     : [],
-		newMessagesCount : 0,
-		unReadChatsCount : 0,
+		messagesListData     : {},
+		unReadChatsCount     : 0,
+		lastMessageTimeStamp : Date.now(),
+		isLastPage           : false,
 	});
-
-	const activeMessageCard = (listData?.messagesList || []).find(({ id }) => id === activeCardId)
-        || {};
-
-	const dataFormatter = (list) => {
-		let chats = 0;
-		let count = 0;
-		const resultList = [];
-		list?.forEach((item) => {
-			const { created_at, updated_at, sent_updated_at, ...rest } = item.data() || {};
-			const userData = {
-				id         : item?.id,
-				created_at : item.data().created_at || Date.now(),
-				...rest,
-			};
-
-			chats += (item.data().new_message_count || 0) > 0 ? 1 : 0;
-			count += item.data().new_message_count || 0;
-			resultList.push(userData);
-		});
-
-		return {
-			chats,
-			count,
-			resultList,
-		};
-	};
-	const omniChannelQuery = useMemo(() => {
-		const omniChannelCollection = collectionGroup(firestore, 'rooms');
-		return getFireStoreQuery({
-			omniChannelCollection,
-			isomniChannelAdmin,
-			userId,
-			appliedFilters,
-			showBotMessages,
-		});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(appliedFilters), showBotMessages]);
 
 	const snapshotCleaner = () => {
 		if (snapshotListener.current) {
@@ -80,23 +48,120 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages =
 		}
 	};
 	useEffect(() => {
-		setLoading(true);
-		snapshotCleaner();
-		snapshotListener.current = onSnapshot(omniChannelQuery, (querySnapshot) => {
-			const { chats, count, resultList } = dataFormatter(querySnapshot);
-			setListData({
-				messagesList     : resultList,
-				newMessagesCount : count,
-				unReadChatsCount : chats,
-			});
+		debounceQuery(searchValue?.trim()?.toUpperCase());
+	}, [debounceQuery, searchValue]);
+	useEffect(() => {
+		if (assigned_chat) {
+			setActiveCardId(assigned_chat);
+		}
+		setFirstLoading(false);
+	}, [assigned_chat]);
+
+	const dataFormatter = (list) => {
+		let unReadChatsCount = 0;
+		let resultList = {};
+		list?.forEach((item) => {
+			const { created_at, updated_at, new_message_count, ...rest } = item.data() || {};
+			const userData = {
+				id         : item?.id,
+				created_at : item.data().created_at || Date.now(),
+				new_message_count,
+				...rest,
+			};
+			unReadChatsCount += (new_message_count || 0) > 0 ? 1 : 0;
+			resultList = { ...resultList, [item?.id]: userData };
 		});
 
-		setLoading(false);
+		return {
+			unReadChatsCount,
+			resultList,
+		};
+	};
+
+	const omniChannelCollection = useMemo(
+		() => collectionGroup(firestore, 'rooms'),
+		[firestore],
+	);
+
+	const omniChannelQuery = useMemo(
+		() => getFireStoreQuery({
+			isomniChannelAdmin,
+			userId,
+			appliedFilters,
+			showBotMessages,
+		}),
+		[appliedFilters, isomniChannelAdmin, showBotMessages, userId],
+	);
+
+	const mountSnapShot = useCallback(() => {
+		const queryForSearch = searchQuery
+			? [where('user_name', '>=', searchQuery),
+				where('user_name', '<=', `${searchQuery}\\uf8ff`), orderBy('user_name', 'asc')] : [];
+
+		setLoading(true);
+		setListData({});
+		snapshotCleaner();
+		const newChatsQuery = query(
+			omniChannelCollection,
+			...queryForSearch,
+			...omniChannelQuery,
+			limit(PAGE_LIMIT),
+		);
+		snapshotListener.current = onSnapshot(
+			newChatsQuery,
+			(querySnapshot) => {
+				const isLastPage = querySnapshot.docs.length < PAGE_LIMIT;
+				const lastMessageTimeStamp = querySnapshot
+					.docs[querySnapshot.docs.length - 1]?.data()?.new_message_sent_at;
+				const { unReadChatsCount, resultList } = dataFormatter(querySnapshot);
+				setListData({
+					messagesListData: { ...resultList },
+					unReadChatsCount,
+					isLastPage,
+					lastMessageTimeStamp,
+				});
+				setLoading(false);
+			},
+		);
+
 		return () => {
 			snapshotCleaner();
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [appliedFilters, showBotMessages]);
+	}, [omniChannelCollection, omniChannelQuery, searchQuery]);
+
+	const getPrevChats = useCallback(async () => {
+		const prevChatsQuery = query(
+			omniChannelCollection,
+			...omniChannelQuery,
+			where(
+				'new_message_sent_at',
+				'<=',
+				Number(listData?.lastMessageTimeStamp),
+			),
+			limit(PAGE_LIMIT),
+		);
+		setLoading(true);
+
+		const prevChatsPromise = await getDocs(prevChatsQuery);
+		const prevChats = prevChatsPromise?.docs;
+
+		const { resultList = {} } = dataFormatter(prevChats);
+
+		const lastMessageTimeStamp = prevChats[(prevChats.length || 0) - 1]?.data()?.new_message_sent_at;
+		const isLastPage = prevChats?.length < PAGE_LIMIT;
+
+		setListData((p) => ({
+			...p,
+			messagesListData: { ...(p?.messagesListData || {}), ...resultList },
+			isLastPage,
+			lastMessageTimeStamp,
+		}));
+		setLoading(false);
+	}, [listData?.lastMessageTimeStamp, omniChannelCollection, omniChannelQuery]);
+
+	useEffect(() => {
+		mountSnapShot();
+	}, [mountSnapShot]);
 
 	const setActiveMessage = async (val) => {
 		const { channel_type, id } = val || {};
@@ -109,6 +174,26 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages =
 			await updateDoc(messageDoc, { new_message_count: 0 });
 		}
 	};
+
+	const handleScroll = (e) => {
+		const reachBottom = e.target.scrollHeight - (e.target.clientHeight + e.target.scrollTop) <= 150;
+		if (reachBottom && !listData?.isLastPage && !loading) {
+			getPrevChats();
+		}
+	};
+
+	const { messagesListData = {}, unReadChatsCount } = listData || {};
+
+	const sortedChatsList = Object.keys(messagesListData || {})
+		.sort((a, b) => Number(
+			messagesListData[b]?.new_message_sent_at,
+		) - Number(
+			messagesListData[a]?.new_message_sent_at,
+		))
+		.map((eachkey) => messagesListData[eachkey]) || [];
+
+	const activeMessageCard = (sortedChatsList || []).find(({ id }) => id === activeCardId)
+        || {};
 
 	const updateLeaduser = async (data = {}) => {
 		const { channel_type, id } = activeMessageCard || {};
@@ -128,7 +213,7 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages =
 	};
 
 	return {
-		listData,
+		listData: { messagesList: sortedChatsList || [], unReadChatsCount },
 		setActiveMessage,
 		activeMessageCard,
 		setAppliedFilters,
@@ -138,6 +223,7 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages =
 		setActiveCardId,
 		updateLeaduser,
 		firstLoading,
+		handleScroll,
 	};
 };
 

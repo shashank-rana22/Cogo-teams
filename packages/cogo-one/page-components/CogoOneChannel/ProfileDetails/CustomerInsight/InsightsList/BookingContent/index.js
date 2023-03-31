@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function BookingContent({ last_shipment_data = {}, trade_type = '', shipping_line = {}, created_at = '' }) {
 	const services = last_shipment_data?.shipment_type;
 
-	const { origin = '', destination = '' } = TRANSACTIONAL_KEYS_MAPPING[services];
+	const { origin = '', destination = '' } = TRANSACTIONAL_KEYS_MAPPING[services] || {};
 
 	const origin_port = last_shipment_data[origin] || {};
 

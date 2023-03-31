@@ -23,6 +23,9 @@ function AddedQuestions(props) {
 		activeList,
 		setActiveList,
 		questionListLoading,
+		sortType,
+		setSortType,
+		requestedQuestionCount,
 	} = props;
 
 	const router = useRouter();
@@ -65,6 +68,7 @@ function AddedQuestions(props) {
 				/>
 			);
 		}
+
 		return (
 			<>
 				<div className={styles.table}>
@@ -72,13 +76,16 @@ function AddedQuestions(props) {
 				</div>
 
 				<div className={styles.pagination}>
-					<Pagination
-						type="table"
-						currentPage={page}
-						totalItems={paginationData?.total_count}
-						pageSize={paginationData?.page_limit}
-						onPageChange={setPage}
-					/>
+					{paginationData?.total_count > 10
+						? (
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={paginationData?.total_count}
+								pageSize={paginationData?.page_limit}
+								onPageChange={setPage}
+							/>
+						) : null}
 				</div>
 			</>
 		);
@@ -93,6 +100,9 @@ function AddedQuestions(props) {
 				setSearchInput={setSearchInput}
 				activeList={activeList}
 				setActiveList={setActiveList}
+				sortType={sortType}
+				setSortType={setSortType}
+				requestedQuestionCount={requestedQuestionCount}
 			/>
 
 			{renderTable()}

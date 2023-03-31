@@ -2,13 +2,13 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { IcMProfile } from '@cogoport/icons-react';
 import { React, useState } from 'react';
 
-import Dashboard from '../Dashboard';
-import MostReadFAQs from '../MostReadFAQs';
+import Dashboard from './Dashboard';
+import MostReadFAQs from './MostReadFAQs';
 
 function Tabbase() {
 	const [activeTab, setActiveTab] = useState('All FAQs');
-	return (
 
+	return (
 		<div style={{ margin: 20 }}>
 			<Tabs
 				tabIcon={<IcMProfile />}

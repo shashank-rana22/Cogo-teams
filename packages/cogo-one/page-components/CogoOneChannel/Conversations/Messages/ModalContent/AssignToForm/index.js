@@ -19,7 +19,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 	const { assignChat = () => {}, support_agent_id = null } = data || {};
 
 	const listAgentsOptions = useGetAsyncOptions(
-		merge(asyncFieldsListAgents()),
+		merge(asyncFieldsListAgents(), { params: { filters: { status: 'active' } } }),
 	);
 
 	const [isAssignUser, setIsAssignUser] = useState(true);
@@ -30,10 +30,16 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 			assign_condition : 'shipment',
 		},
 	});
-
+	const resetForm = () => {
+		reset({
+			allow_user       : 'observe_and_chat',
+			assign_condition : 'shipment',
+		});
+	};
 	const { assign_user, assign_condition, condition_value, allow_user } = controls;
 
 	const watchCondtion = watch('assign_condition') || null;
+
 	const createSubmit = (val) => {
 		let payload;
 		if (isAssignUser) {
@@ -118,7 +124,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 				</div>
 			)}
 			<div className={styles.button_container}>
-				<Button size="md" themeType="tertiary" onClick={reset}>
+				<Button size="md" themeType="tertiary" onClick={resetForm}>
 					reset
 				</Button>
 				<Button

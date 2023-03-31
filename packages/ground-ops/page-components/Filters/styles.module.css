@@ -1,0 +1,60 @@
+/* stylelint-disable selector-class-pattern */
+.container {
+	display: flex;
+	gap: 16px;
+
+	:global {
+		.tippy-box {
+			right: 20px;
+			max-width: 380px !important;
+
+			.tippy-content {
+				width: 100%;
+			}
+		}
+
+		.ui_select_options_container {
+			width: 150%;
+		}
+	}
+}
+
+.select {
+	:global(.ui_select_display_container) {
+		height: 32px;
+		border: 1px solid #333;
+		border-radius: 4px;
+	}
+}
+
+.date {
+	:global(.react-datepicker__input-container) {
+		input {
+			height: 32px;
+			border: 1px solid #333;
+			border-radius: 4px;
+		}
+	}
+}
+
+.filter_svg {
+	svg { margin-left: 10px; }
+}
+
+.footer_button {
+	display: flex;
+	gap: 20px;
+	justify-content: flex-end;
+	padding: 8px;
+	margin-top: 10px;
+}
+
+.popover_container {
+	width: 500px !important;
+}
+
+.filter_dot {
+	position: absolute;
+	top: 188px;
+	right: 42px;
+}

@@ -15,7 +15,7 @@ import cost_booking_desk from './cost-booking-desk-apis';
 import document_walet from './doc-walet';
 import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
-import enrichment from './enrichment';
+import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
 import kam_desk from './kam-desk-apis';
@@ -27,6 +27,8 @@ import manage_rfq from './manage-rfq-apis';
 import okam_task_apis from './okam-task-dashboard';
 import partner from './partner-apis';
 import payments from './payments-apis';
+import performance_management from './performance-managment-apis';
+import poc from './poc-apis';
 import pms from './port-management';
 import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
@@ -119,6 +121,8 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
+	performance_management,
+	poc,
 	...athena_dashboard,
 };
 

@@ -3,11 +3,11 @@ import { Modal, Avatar } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import MessageBody from '../../../../../common/MessageBody';
 import { SOURCE_ICON_MAPPING } from '../../../../../constants';
 
 import HTMLPreview from './HtmlPreview';
 import styles from './styles.module.css';
+import VoiceTimeLine from './VoiceTimeLine';
 
 function CommunicationActivity({ communication = {} }) {
 	const [showDetails, setShowDetails] = useState();
@@ -21,13 +21,6 @@ function CommunicationActivity({ communication = {} }) {
 		setTitle(sub);
 	};
 
-	let parseData;
-	if (showDetails !== undefined && title === null) {
-		parseData = JSON.parse(showDetails);
-	}
-
-	const { message_type = '', text = '', media_url = '', message = '' } = parseData || {};
-
 	const onCloseModal = () => {
 		setShowDetails();
 		setTitle('');
@@ -37,64 +30,72 @@ function CommunicationActivity({ communication = {} }) {
 	return (
 		<div className={styles.container}>
 			{(list || []).map((item) => {
-				const { type = '', created_at = '', sender = '', content = {} } = item || {};
+				const { type = '', created_at = '', sender = '', content = {}, template_id = '' } = item || {};
 				const { body = '', subject = '' } = content || {};
+
 				return (
 					<>
-						<div className={styles.activity_date}>
-							<div className={styles.dot} />
-							<div className={styles.durations}>
-								{format(created_at, 'HH:mm a dd MMM')}
-							</div>
-						</div>
-						<div className={styles.main_card}>
-							<div className={styles.card}>
-								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-									<div className={styles.activity_type}>Communication</div>
-									<div
-										role="presentation"
-										onClick={() => handleContent(body, subject)}
-										style={{ fontSize: '12px', textDecoration: 'underline', color: '#034AFD', cursor: 'pointer' }}
-									>
-										View more
+						{!type && (
+							<VoiceTimeLine item={item} />
+						) }
+						{template_id && (type === 'email' || type === 'whatsapp') && (
+							<>
+								<div className={styles.activity_date}>
+									<div className={styles.dot} />
+									<div className={styles.durations}>
+										{format(created_at, 'HH:mm a dd MMM')}
 									</div>
 								</div>
-								<div className={styles.message_details}>
-									<div className={styles.title}>
-										Sent message on
-										{' '}
-										{startCase(type)}
-									</div>
-									<div className={styles.icon_type}>
-										{SOURCE_ICON_MAPPING[type]}
+								<div className={styles.main_card}>
+									<div className={styles.card}>
+										<div className={styles.activity_div}>
+											{subject && (
+												<div className={styles.title}>
+													{startCase(subject)}
+												</div>
+											)}
+											<div role="presentation" className={styles.icon_type} onClick={() => handleContent(body, subject)}>
+												{SOURCE_ICON_MAPPING[type]}
+											</div>
+										</div>
+										<div className={styles.message_details}>
+											<div className={styles.user_details}>
+												{subject && (
+													<div className={styles.user_message}>
+														You have a message On
+														<span>
+															{format(created_at, 'dd MMM YYYY')}
+															{sender && (
+																<div>
+																	from
+																	<span>{sender}</span>
+																</div>
+															)}
+														</span>
+													</div>
+												)}
+												{subject === '' && (
+													<HTMLPreview html={body} type="whatsapp" />
+												)}
+											</div>
+										</div>
+										<div className={styles.user_avatar}>
+											<Avatar
+												src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
+												alt="agent-image"
+												disabled={false}
+												size="30px"
+											/>
+										</div>
 									</div>
 								</div>
-								<div className={styles.user_details}>
-									<div className={styles.user_message}>
-										You have a message On
-										{' '}
-										{format(created_at, 'dd MMM YYYY')}
-										{' '}
-										from
-										{' '}
-										{sender}
-									</div>
-									<div className={styles.user_avatar}>
-										<Avatar
-											src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
-											alt="img"
-											disabled={false}
-											size="35px"
-										/>
-									</div>
-								</div>
-							</div>
-						</div>
+							</>
+						)}
 					</>
 				);
 			})}
 
-			{showModal && (
+			{(showModal && (title || title === '')) && (
 				<Modal
 					show={showModal}
 					placement="top"
@@ -102,10 +103,11 @@ function CommunicationActivity({ communication = {} }) {
 					closeOnOuterClick
 					onClose={onCloseModal}
 					className={styles.styled_ui_modal_dialog}
+					scroll={false}
 				>
 					<Modal.Header title={title || 'Message'} />
 					<Modal.Body>
-						{title === null ? <MessageBody message_type={message_type} response={{ message: message || text, media_url }} /> : <HTMLPreview html={showDetails} />}
+						<HTMLPreview html={showDetails} type="email" />
 					</Modal.Body>
 				</Modal>
 

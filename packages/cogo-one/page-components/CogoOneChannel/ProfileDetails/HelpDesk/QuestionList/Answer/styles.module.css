@@ -1,0 +1,187 @@
+.list {
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	margin: 8px 0 12px 4px;
+}
+
+.back {
+	color: #828282;
+	cursor: pointer;
+	transition: 0.3s ease;
+
+	&:hover {
+		transition: 0.3s ease;
+		transform: scale(1.2);
+	}
+}
+
+.go_back {
+	margin-left: 4px;
+	font-size: 13px;
+	color: #828282;
+}
+
+.module_text {
+	margin: 8px 0;
+	font-size: 11px;
+	color: #828282;
+	opacity: 0.6;
+}
+
+.question {
+	width: 100%;
+	font-size: 17px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.no_of_people_like_it {
+	margin: 8px 0;
+	font-size: 11px;
+	color: #221f20;
+	opacity: 0.6;
+}
+
+.ans_of_ques {
+	padding: 10px;
+	margin-top: 8px;
+	font-size: 14px;
+	color: #000;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+	opacity: 0.6;
+}
+
+.ans_container {
+	max-height: 53vh;
+	overflow-y: auto;
+}
+
+.ans_container::-webkit-scrollbar {
+	display: none;
+}
+
+.space {
+	border-bottom: 1px solid #000;
+	opacity: 0.1;
+}
+
+.information_helpful {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 10px;
+}
+
+.help_text {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+.emoji_like_yes {
+	all: unset;
+	padding: 0 16px;
+	font-size: 48px;
+	cursor: pointer;
+
+	&::before {
+		content: "😄";
+	}
+}
+
+.show_buttons {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.spinner_container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin: 40px 0 8px;
+}
+
+.emoji_dislike {
+	all: unset;
+	padding: 0 16px;
+	font-size: 48px;
+	text-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+	cursor: pointer;
+	transition: text-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+	transform: scale(0.5);
+
+	&:hover {
+		text-shadow: 0 5px 5px rgb(0 0 0 / 30%);
+		transform: scale(1) translateY(1px);
+	}
+
+	&::before {
+		content: "😕";
+	}
+
+	&:hover::before {
+		content: "😔";
+	}
+
+	&:active {
+		content: "😔";
+	}
+}
+
+.emoji_like {
+	all: unset;
+	padding: 0 16px;
+	font-size: 48px;
+	text-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+	cursor: pointer;
+	content: "🙂";
+	transition: text-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+	transform: scale(0.5);
+
+	&::before {
+		content: "🙂";
+	}
+
+	&:hover {
+		text-shadow: 0 5px 5px rgb(0 0 0 / 30%);
+		transform: scale(1) translateY(1px);
+	}
+
+	&:hover::before {
+		content: "😄";
+	}
+
+	&:active {
+		content: "😄";
+	}
+}
+
+.emoji_dislike_yes {
+	all: unset;
+	padding: 0 16px;
+	font-size: 48px;
+	cursor: pointer;
+
+	&::before {
+		content: "😔";
+	}
+}
+
+.like_dislike_container {
+	position: absolute;
+	bottom: 10px;
+	margin-left: 40px;
+}

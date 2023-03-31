@@ -1,0 +1,98 @@
+.header {
+	display: flex;
+	align-items: center;
+	margin: 8px 0 6px;
+	font-size: 13px;
+	color: #828282;
+}
+
+.back {
+	margin-right: 5px;
+	cursor: pointer;
+	transition: 0.3s ease;
+
+	&:hover {
+		transition: 0.3s ease;
+		transform: scale(1.2);
+	}
+}
+
+.module {
+	margin: 6px 0 10px 4px;
+	font-weight: 600;
+	color: #828282;
+}
+
+.spinner_container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin: 100px 0 8px;
+}
+
+.right_icon {
+	margin-left: 10px;
+	transition: 0.3s ease-in-out;
+}
+
+.question {
+	display: flex;
+	flex-flow: column wrap;
+	padding: 10px;
+	margin: 10px 15px 0 10px;
+	font-size: 13px;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+	transition: 0.3s ease-in-out;
+
+	&:hover {
+		background: #f8f2e7;
+		transition: 0.3s;
+		transform: scale(1.05);
+
+		.right_icon {
+			transition: 0.3s ease-in-out;
+			transform: scale(1.4);
+		}
+	}
+}
+
+.pagination_container {
+	position: absolute;
+	right: 25px;
+	bottom: 10px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.list {
+	height: 68vh;
+	overflow-y: auto;
+}
+
+.list::-webkit-scrollbar {
+	display: none;
+}
+
+.list_card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 10px;
+}
+
+.tags_name {
+	display: flex;
+	padding: 1px 6px;
+	margin: 5px  10px 0 0;
+	font-size: 10px;
+	background: #f7faef;
+	border-radius: 6px;
+}

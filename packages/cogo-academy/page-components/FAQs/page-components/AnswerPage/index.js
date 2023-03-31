@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import { Modal, Button, Badge, Pill } from '@cogoport/components';
+import { Modal, Button, Badge, Pill, Toast } from '@cogoport/components';
 import { InputController, CheckboxController, useForm } from '@cogoport/forms';
 import { IcCLike, IcCDislike, IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -10,8 +10,8 @@ import React, { useState, useEffect } from 'react';
 
 import Spinner from '../../../../commons/Spinner';
 import useGetQuestions from '../../hooks/useGetQuestions';
-import RelatedQuestion from '../RelatedQuestion';
 
+import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';
 
 const FEEDBACK_MAPPING_ISLIKED = {
@@ -87,7 +87,7 @@ function AnswerPage() {
 			setIsLiked(isLiked === 'liked' ? '' : 'liked');
 			refetchQuestions();
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error?.message);
 		}
 	};
 
@@ -150,7 +150,7 @@ function AnswerPage() {
 	};
 
 	const onClickBackIcon = () => {
-		const href = `/learning/faq?topicId=${topicId}`;
+		const href = `/learning/faq${topicId ? `?topicId=${topicId}` : ''}`;
 		router.push(href, href);
 	};
 
@@ -295,11 +295,13 @@ function AnswerPage() {
 			</div>
 
 			<div>
-				<span className={styles.sidetext}>
-					{answerData?.answers[0]?.upvote_count}
-					{' '}
-					people found it useful.
-				</span>
+				{answerData?.answers[0]?.upvote_count > 0 ? (
+					<span className={styles.sidetext}>
+						{answerData?.answers[0]?.upvote_count}
+						{' '}
+						people found it useful.
+					</span>
+				) : null}
 				{'    '}
 				<span className={styles.sidetext}>
 					Last updated on:
@@ -308,7 +310,7 @@ function AnswerPage() {
 				</span>
 			</div>
 
-			<RelatedQuestion tags={answerData?.faq_tags[0]} question_abstract={answerData?.question_abstract} />
+			<RelatedQuestion query_name={answerData?.query_name} question_abstract={answerData?.question_abstract} />
 		</div>
 	);
 }

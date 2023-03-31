@@ -65,12 +65,12 @@
 .source_types {
 	display: flex;
 	align-items: center;
-	width: calc(100% - 40px);
+	width: calc(100% - 44px);
 }
 
 .card_container {
-	padding: 10px 12px;
-	border-radius: 4px;
+	padding: 10px 8px;
+	margin: 4px;
 }
 
 .card_container:hover {
@@ -153,17 +153,35 @@
 	height: 20px;
 	font-size: 9px;
 	color: #fff;
-	background: #ee3425;
+	background: #cfb393;
 	border-radius: 50%;
 }
 
 .content {
-	max-width: 90%;
+	max-width: 80%;
+	height: 18px;
 	margin-top: 3px;
 	overflow: hidden;
 	font-size: 12px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	:global {
+		img {
+			display: none;
+		}
+
+		p {
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		div {
+			display: none;
+		}
+	}
 }
 
 .empty_state {
@@ -176,12 +194,8 @@
 }
 
 .list_container {
-	height: calc(100% - 155px);
+	height: 80%;
 	overflow-y: auto;
-
-	@media (max-width: 1280px) {
-		height: calc(100% - 130px);
-	}
 }
 
 .list_container::-webkit-scrollbar {
@@ -237,4 +251,23 @@
 
 .warning {
 	background: #fef199;
+}
+
+.important_styles {
+	position: relative;
+	border-radius: 4px;
+	box-shadow: rgb(0 0 0 / 5%) 0 0 0 1px;
+}
+
+.important_icon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+	background: #ef0a1a;
+	border-radius: 0 4px;
 }
