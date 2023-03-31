@@ -1,1 +1,1 @@
-export { default as AthenaDashboard } from './page-components';
+export { default as AthenaDashboard } from './page-components/AthenaDashboard';
