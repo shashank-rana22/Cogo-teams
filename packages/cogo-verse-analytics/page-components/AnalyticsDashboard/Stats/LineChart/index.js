@@ -11,6 +11,7 @@ function Charts({ GraphData = [], hideChart = false }) {
 	const ActiveShipments = GraphData.map((data) => data?.cogoverse_active_shipments);
 	const totalShipments = GraphData.map((data) => data?.total_shipments);
 
+	const colors = ['#bf291e', '#d6b300', '#6fa5ab'];
 	const cancelled_data = Dates.map((date, index) => ({
 		x : format(date, 'dd MMM'),
 		y :	CancelledShipments[index],
@@ -26,19 +27,19 @@ function Charts({ GraphData = [], hideChart = false }) {
 
 	const graphData = [
 		{
-			id    : 'cogoverse_cancelled_shipments',
-			color : 'hsl(27, 70%, 50%)',
-			data  : cancelled_data,
+			id   : 'cogoverse_cancelled_shipments',
+			// color : 'hsl(47, 70%, 50%)',
+			data : cancelled_data,
 		},
 		{
-			id    : 'cogoverse_active_shipments',
-			color : 'hsl(47, 70%, 50%)',
-			data  : active_data,
+			id   : 'cogoverse_active_shipments',
+			// color : 'hsl(27, 70%, 50%)',
+			data : active_data,
 		},
 		{
-			id    : 'cogoverse_total_shipments',
-			color : 'hsl(57, 70%, 50%)',
-			data  : total_data,
+			id   : 'cogoverse_total_shipments',
+			// color : 'hsl(57, 70%, 50%)',
+			data : total_data,
 		},
 
 	];
@@ -48,38 +49,40 @@ function Charts({ GraphData = [], hideChart = false }) {
 			{!hideChart ? (
 				<ResponsiveLine
 					data={graphData}
-					margin={{ top: 5, right: 35, bottom: 55, left: 75 }}
+					margin={{ top: 15, right: 35, bottom: 75, left: 75 }}
 					xScale={{ type: 'point' }}
 					yScale={{
-						type    : 'linear',
-						min     : 'auto',
-						max     : 'auto',
-						stacked : true,
-						reverse : false,
+            	type    : 'linear',
+            	min     : 0,
+            	max     : 'auto',
+            	reverse : false,
 					}}
 					yFormat=" >-.2f"
 					curve="natural"
 					axisTop={null}
 					axisRight={null}
+					colors={colors}
 					axisBottom={{
             	orient         : 'bottom',
             	tickSize       : 0,
-            	tickPadding    : 10,
+            	tickPadding    : 15,
             	tickValues     : 8,
             	tickRotation   : 0,
-            	legend         : 'Date',
-            	legendOffset   : 40,
+			    legend         : 'Date',
+            	legendOffset   : 50,
             	legendPosition : 'middle',
+            	// format         : (v) => formattedDate(v),
 					}}
 					axisLeft={{
             	orient         : 'left',
             	tickSize       : 0,
             	tickValues     : 5,
-            	tickPadding    : 15,
+            	tickPadding    : 12,
             	tickRotation   : 0,
-            	legend         : 'Shipments',
+			    legend         : 'Shipments',
             	legendOffset   : -50,
             	legendPosition : 'middle',
+            	// format         : (v) => formattedTime(v),
 					}}
 					tooltip={({ point = {} }) => {
             	const { borderColor, data } = point;
@@ -88,7 +91,13 @@ function Charts({ GraphData = [], hideChart = false }) {
 	<div className={styles.tool_tip}>
 		<span style={{ background: borderColor }} />
 		<strong>
-			{data.y}
+			{/* {formattedDate(data.x)} */}
+			{(data.x)}
+
+			{' '}
+			:
+			{' '}
+			{(data.y)}
 		</strong>
 	</div>
             	);
