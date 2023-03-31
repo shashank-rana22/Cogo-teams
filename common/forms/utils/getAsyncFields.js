@@ -211,16 +211,6 @@ function listVendors() {
 	};
 }
 
-function asyncCountries() {
-	return {
-		labelKey    : 'origin_country',
-		valueKey    : 'id',
-		endpoint    : '/list_countries',
-		initialCall : false,
-
-	};
-}
-
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,

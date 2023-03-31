@@ -15,7 +15,6 @@ import {
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
 	listVendors,
-	asyncCountries,
 	asyncFieldsLocations,
 } from '../../../utils/getAsyncFields';
 
