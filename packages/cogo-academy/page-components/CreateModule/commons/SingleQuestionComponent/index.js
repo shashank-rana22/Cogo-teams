@@ -17,9 +17,8 @@ function SingleQuestionComponent({
 	errors,
 	field,
 	remove,
-	editAnswerDetails,
 	isNewQuestion,
-	type,
+	questionTypeWatch,
 	editDetails,
 	getValues,
 	questionSetId,
@@ -96,12 +95,11 @@ function SingleQuestionComponent({
 				register={register}
 				errors={errors?.options || {}}
 				name={`${name}.${index}.options`}
-				editAnswerDetails={editAnswerDetails}
 				mode={mode}
 				isNewQuestion={isNewQuestion}
 			/>
 
-			{type !== 'case_study' ? (
+			{questionTypeWatch !== 'case_study' ? (
 				<div className={styles.difficulty_level}>
 					<div className={styles.label}>Set Difficulty level</div>
 
@@ -124,7 +122,7 @@ function SingleQuestionComponent({
 				/>
 			</div>
 
-			{type === 'case_study' && mode !== 'view' ? (
+			{questionTypeWatch === 'case_study' && mode !== 'view' ? (
 				<div className={styles.button_container}>
 					<Button
 						loading={loading}
