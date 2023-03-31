@@ -27,7 +27,7 @@ const useConvertAccountToCp = ({ organization_id, setShowConvertModal, refetchOr
 			setShowConvertModal(false);
 			refetchOrgDetails();
 		} catch (err) {
-			Toast.error(getApiErrorString(err?.message));
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};
 
