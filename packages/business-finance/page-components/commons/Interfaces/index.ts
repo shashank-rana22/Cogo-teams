@@ -61,11 +61,12 @@ export interface ListDataProps {
 export interface Options {
 	label: string;
 	value: string;
+	name?:string;
 }
 
 export interface ControlProps {
-	span?: number;
-	name?: string;
+	span?: number,
+	name?: string,
 	type?: string;
 	options?: Options[];
 	groupBy?:ControlProps[];
@@ -77,7 +78,7 @@ interface PortInterface {
 	display_name?:string
 	postal_code?:string,
 	country:{ name:string },
-	name:string
+	name?:string
 	port_code:string
 }
 
@@ -88,7 +89,7 @@ interface PickupDropInt {
 	postal_code?:string,
 	country:{ name:string },
 	display_name:string,
-	name:string
+	name?:string
 }
 interface PortDetailsInt {
 	port_code?:string | number,
@@ -165,8 +166,8 @@ export interface DetailInterface {
 	destinationmainport?: PortDetailsInt
 }
 export interface RemarksValInterface {
-	collectionPartyRemark:string,
-	billingPartyRemark:string,
-	invoiceDetailsRemark:string,
-
+	collectionPartyRemark?:string,
+	billingPartyRemark?:string,
+	invoiceDetailsRemark?:string,
+	overallRemark?: string
 }
