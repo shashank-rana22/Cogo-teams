@@ -28,8 +28,6 @@ function Footer({
 
 	const sendAnswer = async () => {
 		if (isEmpty(answer)) {
-			// Toast.error('Select Correct Answers');
-			// return;
 			const arr = [];
 			const str = 'not_answered';
 			await updateAnswerList(data?.id, arr, str);
@@ -41,18 +39,13 @@ function Footer({
 			const str = 'answered';
 			await updateAnswerList(data?.id, answer, str);
 		}
+
 		const num = Number(currentQuestion);
+
 		localStorage.setItem(
 			`current_question_${test_id}_${user_id}`,
 			total_question > currentQuestion ? num + 1 : num,
 		);
-
-		fetchQuestions({
-			currentQ:
-				total_question !== currentQuestion
-					? Number(currentQuestion) + 1
-					: currentQuestion,
-		});
 
 		setCurrentQuestion((pv) => {
 			if (total_question !== pv) {
@@ -74,18 +67,13 @@ function Footer({
 		} else {
 			await updateAnswerList(data?.id, answer, str);
 		}
+
 		const num = Number(currentQuestion);
+
 		localStorage.setItem(
 			`current_question_${test_id}_${user_id}`,
 			total_question > currentQuestion ? num + 1 : num,
 		);
-
-		fetchQuestions({
-			currentQ:
-				total_question !== currentQuestion
-					? Number(currentQuestion) + 1
-					: currentQuestion,
-		});
 
 		setCurrentQuestion((pv) => {
 			if (total_question !== pv) {

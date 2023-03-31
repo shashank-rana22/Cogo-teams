@@ -10,13 +10,14 @@ import styles from './styles.module.css';
 function AnswerKey({ item, caseToShow }) {
 	const { test_question_answers = [] } = item || {};
 
-	const correctAnswers = useMemo(() => getCorrectAnswersCombined(
-		{
-			correctOptions: (test_question_answers || []).filter(
-				(correctAnswer) => correctAnswer.is_correct,
-			),
-		},
+	const filterCorrectOptions = useMemo(() => (test_question_answers || []).filter(
+		(correctAnswer) => correctAnswer.is_correct,
 	), [test_question_answers]);
+
+	const correctAnswers = useMemo(
+		() => getCorrectAnswersCombined({ correctOptions: filterCorrectOptions }),
+		[filterCorrectOptions],
+	);
 
 	if (item?.question_type === 'case_study') {
 		return <CaseAnswerKey item={item} caseToShow={caseToShow} />;
