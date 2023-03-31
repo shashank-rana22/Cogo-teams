@@ -1,10 +1,8 @@
 import { Button } from '@cogoport/components';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 
-import SingleQuestionComponent from '../SingleQuestionComponent';
-
 import BasicDetails from './components/BasicDetails';
-import CaseStudyForm from './components/CaseStudyForm';
+import QuestionForm from './components/QuestionForm';
 import styles from './styles.module.css';
 import useCreateQuestion from './useCreateQuestion';
 
@@ -47,7 +45,7 @@ function CreateQuestion({
 	});
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
+		<form key={questionTypeWatch} onSubmit={handleSubmit(onSubmit)} className={styles.container}>
 			<div className={styles.question_label}>{`Question ${index + 1}`}</div>
 
 			<div className={styles.form_component}>
@@ -67,43 +65,22 @@ function CreateQuestion({
 					mode={mode}
 				/>
 
-				<div className={styles.question_form}>
-					{questionTypeWatch === 'stand_alone' ? (
-						<SingleQuestionComponent
-							editAnswerDetails={editDetails?.answers || []}
-							errors={errors.question?.[0] || {}}
-							index={0}
-							control={control}
-							register={register}
-							name="question"
-							isNewQuestion={isNewQuestion}
-							questionSetId={questionSetId}
-							getTestQuestionTest={getTestQuestionTest}
-							reset={reset}
-							setEditDetails={setEditDetails}
-							setAllKeysSaved={setAllKeysSaved}
-							mode={mode}
-							type="stand_alone"
-						/>
-					) : (
-						<CaseStudyForm
-							errors={{
-								case_questions : errors.case_questions,
-								question_text  : errors?.question_text,
-							}}
-							control={control}
-							register={register}
-							isNewQuestion={isNewQuestion}
-							editDetails={editDetails}
-							getValues={getValues}
-							questionSetId={questionSetId}
-							getTestQuestionTest={getTestQuestionTest}
-							reset={reset}
-							setEditDetails={setEditDetails}
-							setAllKeysSaved={setAllKeysSaved}
-							mode={mode}
-						/>
-					)}
+				<div key={questionTypeWatch} className={styles.question_form}>
+					<QuestionForm
+						errors={errors}
+						control={control}
+						register={register}
+						isNewQuestion={isNewQuestion}
+						editDetails={editDetails}
+						getValues={getValues}
+						questionSetId={questionSetId}
+						getTestQuestionTest={getTestQuestionTest}
+						reset={reset}
+						setEditDetails={setEditDetails}
+						setAllKeysSaved={setAllKeysSaved}
+						mode={mode}
+						questionTypeWatch={questionTypeWatch}
+					/>
 				</div>
 
 				{mode !== 'view' ? (

@@ -1,5 +1,3 @@
-import SortComponent from '../../../commons/SortComponent';
-
 import styles from './styles.module.css';
 
 const MAPPING = {
@@ -31,23 +29,15 @@ const MAPPING = {
 	},
 };
 
-function ListHeader({ sortFilter = {}, setSortFilter = () => {} }) {
+function ListHeader() {
 	return (
 		<div className={styles.container}>
 			{Object.keys(MAPPING).map((item) => {
-				const { label, sort = false, className } = MAPPING[item];
+				const { label, className } = MAPPING[item];
 
 				return (
 					<div key={item} className={className}>
 						<div>{label}</div>
-
-						{sort ? (
-							<SortComponent
-								value={item}
-								sortFilter={sortFilter}
-								setSortFilter={setSortFilter}
-							/>
-						) : null}
 					</div>
 				);
 			})}

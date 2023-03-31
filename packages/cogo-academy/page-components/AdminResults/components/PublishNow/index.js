@@ -26,21 +26,21 @@ function PublishNow({ test_id, refetchTest }) {
 						<div className={styles.button_container}>
 							<Button
 								type="button"
-								onClick={publishResults}
-								style={{ marginRight: 12 }}
+								loading={loading}
 								themeType="secondary"
-								loading={loading}
-							>
-								Yes, Publish Now
-							</Button>
-
-							<Button
-								type="button"
-								loading={loading}
-								themeType="accent"
 								onClick={() => setShowPublishModal(false)}
 							>
 								Cancel
+							</Button>
+
+							<Button
+								type="submit"
+								onClick={publishResults}
+								style={{ marginLeft: 12 }}
+								themeType="accent"
+								loading={loading}
+							>
+								Yes, Publish Now
 							</Button>
 						</div>
 					</Modal.Body>

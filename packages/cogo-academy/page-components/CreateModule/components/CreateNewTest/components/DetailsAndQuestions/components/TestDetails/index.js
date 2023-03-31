@@ -1,6 +1,6 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
 
@@ -8,9 +8,9 @@ import getControls from './controls';
 import styles from './styles.module.css';
 
 function CreateNewTest({ control, errors, data, setValue }) {
-	const controls = getControls();
-
 	const router = useRouter();
+
+	const controls = useMemo(() => getControls(), []);
 
 	const onNavigate = () => {
 		const href = '/learning?activeTab=test_module';
@@ -24,8 +24,7 @@ function CreateNewTest({ control, errors, data, setValue }) {
 
 		setValue('name', name);
 		setValue('cogo_entity_id', id);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data]);
+	}, [data, setValue]);
 
 	return (
 		<div>
@@ -42,7 +41,7 @@ function CreateNewTest({ control, errors, data, setValue }) {
 
 					if (name === 'select_entity_usergroups') {
 						return (
-							<div className={styles.control_container}>
+							<div className={styles.control_container} key={name}>
 								<div className={`${styles.label}`}>
 									{label}
 									<sup className={styles.sup}>*</sup>
@@ -53,7 +52,7 @@ function CreateNewTest({ control, errors, data, setValue }) {
 										const ElementToUse = getElementController(item.type);
 
 										return (
-											<div className={styles.input_wrapper}>
+											<div className={styles.input_wrapper} key={item.name}>
 												<ElementToUse
 													key={item.name}
 													control={control}
@@ -73,7 +72,7 @@ function CreateNewTest({ control, errors, data, setValue }) {
 					}
 
 					return (
-						<div className={styles.control_container_two}>
+						<div className={styles.control_container_two} key={name}>
 							<div className={styles.label}>
 								{label}
 								<sup className={styles.sup}>*</sup>

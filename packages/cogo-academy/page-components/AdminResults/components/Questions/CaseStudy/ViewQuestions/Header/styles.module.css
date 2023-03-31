@@ -1,0 +1,28 @@
+.container {
+	display: flex;
+	width: 100%;
+	padding: 16px 40px 12px 24px;
+	cursor: pointer;
+	background: #fff;
+	border-bottom: 1px solid #f8f2e7;
+}
+
+.container_item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20%;
+	margin-right: 16px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.section {
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	width: 60%;
+	margin: auto;
+	font-weight: 600;
+	text-align: center;
+}

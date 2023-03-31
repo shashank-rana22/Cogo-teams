@@ -2,13 +2,14 @@ import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useMemo } from 'react';
 
 import SingleQuestionComponent from '../../../SingleQuestionComponent';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-function CaseStudyForm({
+function QuestionForm({
 	control,
 	register,
 	errors,
@@ -20,8 +21,19 @@ function CaseStudyForm({
 	setEditDetails,
 	setAllKeysSaved,
 	mode,
+	questionTypeWatch,
 }) {
-	const fieldArrayControls = controls?.[0];
+	const NAME_CONTROL_MAPPING = useMemo(() => {
+		const hash = {};
+
+		controls.forEach((item) => {
+			hash[item?.name] = item;
+		});
+
+		return hash;
+	}, []);
+
+	const fieldArrayControls = useMemo(() => NAME_CONTROL_MAPPING.case_questions, [NAME_CONTROL_MAPPING]);
 
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -37,12 +49,12 @@ function CaseStudyForm({
 		append({ ...childEmptyValues, isNew: true });
 	};
 
-	if (isEmpty(fields)) {
+	if (isEmpty(fields) && editDetails.question_type !== 'case_study') {
 		append({ ...childEmptyValues, isNew: true });
 	}
 
 	return (
-		<div className={styles.container}>
+		<div key={questionTypeWatch} className={styles.container}>
 			{fields.map((field, index) => (
 				<div key={field.id} className={styles.field_container}>
 					<div className={styles.question_container}>
@@ -51,8 +63,6 @@ function CaseStudyForm({
 							field={field}
 							register={register}
 							index={index}
-							errors={errors?.case_questions?.[index]}
-							type="case_study"
 							isNewQuestion={field?.isNew}
 							remove={remove}
 							editDetails={editDetails}
@@ -63,6 +73,10 @@ function CaseStudyForm({
 							setEditDetails={setEditDetails}
 							setAllKeysSaved={setAllKeysSaved}
 							mode={mode}
+							questionTypeWatch={questionTypeWatch}
+							name={questionTypeWatch === 'stand_alone' ? 'question' : 'case_questions'}
+							errors={questionTypeWatch === 'stand_alone'
+								? errors.question?.[index] : errors?.case_questions?.[index]}
 						/>
 
 						{fields.length > 1 && field?.isNew ? (
@@ -75,7 +89,7 @@ function CaseStudyForm({
 						) : null}
 					</div>
 
-					{index === fields.length - 1 && mode !== 'view' ? (
+					{index === fields.length - 1 && mode !== 'view' && questionTypeWatch === 'case_study' ? (
 						<div className={styles.button_container}>
 							<Button
 								type="button"
@@ -93,4 +107,4 @@ function CaseStudyForm({
 	);
 }
 
-export default CaseStudyForm;
+export default QuestionForm;

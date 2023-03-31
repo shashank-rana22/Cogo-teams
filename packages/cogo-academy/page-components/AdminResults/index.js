@@ -1,5 +1,5 @@
-import { TabPanel, Tabs } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { Button, TabPanel, Tabs } from '@cogoport/components';
+import { IcMRefresh, IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -52,13 +52,21 @@ function AdminResults() {
 
 	return (
 		<div className={styles.container}>
-			<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
-				<IcMArrowBack />
+			<div className={styles.header}>
+				<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
+					<IcMArrowBack />
 
-				<p className={styles.go_back_text}>Dashboard</p>
+					<p className={styles.go_back_text}>Dashboard</p>
+				</div>
+
+				<Button themeType="accent" onClick={() => getTest({ test_id })} disabled={loading}>
+					Refresh
+
+					<IcMRefresh style={{ marginLeft: 6 }} />
+				</Button>
 			</div>
 
-			<div><TestResults test_id={test_id} /></div>
+			{status === 'published' ? <TestResults test_id={test_id} /> : null}
 
 			<InfoBanner
 				loading={loading}

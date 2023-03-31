@@ -1,5 +1,3 @@
-import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import TestResultMessage from '../../../../commons/TestResultMessage';
@@ -10,22 +8,10 @@ import Percentile from './Percentile';
 import styles from './styles.module.css';
 import TopicWisePercentile from './TopicWisePercentile';
 
-function LastTestResults() {
-	const {
-		user: { id: user_id },
-	} = useSelector(({ profile }) => ({
-		user: profile.user,
-	}));
+function LastTestResults(props) {
+	const { data = {}, loading } = props;
 
-	const [{ data, loading }] = useRequest({
-		method : 'GET',
-		url    : '/get_user_performance',
-		params : {
-			user_id,
-		},
-	}, { manual: false });
-
-	const stats_data = data?.data || {};
+	const stats_data = data;
 
 	const { topic_wise_percentile, question_stats, status, test_id } = stats_data || {};
 

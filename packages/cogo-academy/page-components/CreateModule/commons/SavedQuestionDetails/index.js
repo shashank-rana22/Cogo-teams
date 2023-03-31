@@ -49,7 +49,7 @@ function SavedQuestionDetails({
 				loading={listLoading}
 			/>
 
-			{total_count > 5 ? (
+			{total_count > page_limit ? (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"

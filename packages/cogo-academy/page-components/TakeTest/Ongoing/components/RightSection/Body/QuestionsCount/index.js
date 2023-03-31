@@ -28,6 +28,7 @@ function QuestionsCount({ data = {}, setCurrentQuestion, fetchQuestions }) {
 	};
 
 	const len = (data.total_questions - data.data.length);
+
 	return (
 		<div className={styles.container}>
 			{data?.data?.map((question, index) => {

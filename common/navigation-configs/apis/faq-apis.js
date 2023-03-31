@@ -100,6 +100,166 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+	],
+	faq: [
+		{
+			api          : 'create_question_answer_set',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_faq_topics',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_faq_tags',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_faq_questions',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_question',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_faq_feedback',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_faq_feedback',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+	],
+	announcements: [
+		{
+			api          : 'list_faq_audiences',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_faq_audience',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_faq_audience',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_faq_audience',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_announcement',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_announcement',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_announcement',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_announcements',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+
+		},
+		{
+			api          : 'update_announcement_attachment',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+
+		},
+		{
+			api          : 'create_announcement_stat',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_announcement_attachment',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+	],
+	tests: [
+		{
+			api          : 'list_tests',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_questions_analysis',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_passed_test_data_per_user',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_test_question',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_test_user_question_answer',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_test',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_test_user_mapping',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'submit_test',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'check_test_user_eligibility',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_user_submission_stats',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_question_wise_analysis',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+	],
+	create_test_set: [
 		{
 			api          : 'create_test_question_set',
 			access_type  : 'private',
@@ -210,159 +370,20 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
-	],
-	faq: [
 		{
-			api          : 'create_question_answer_set',
+			api          : 'list_test_questions',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
+
 		},
 		{
-			api          : 'list_faq_topics',
+			api          : 'list_test_case_study_questions',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
+
 		},
 		{
-			api          : 'list_faq_tags',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'list_faq_questions',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'get_question',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'create_faq_feedback',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'update_faq_feedback',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-	],
-	announcements: [
-		{
-			api          : 'list_faq_audiences',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'list_cogo_entities',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-		{
-			api          : 'get_faq_audience',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'create_faq_audience',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'update_faq_audience',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'create_announcement',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'update_announcement',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'get_announcement',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'list_announcements',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'update_announcement_attachment',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'create_announcement_stat',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'create_announcement_attachment',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-	],
-	tests: [
-		{
-			api          : 'list_tests',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'get_questions_analysis',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'get_passed_test_data_per_user',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'get_test_question',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'update_test_user_question_answer',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'get_test',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'create_test_user_mapping',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'submit_test',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'check_test_user_eligibility',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'get_user_submission_stats',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'get_question_wise_analysis',
+			api        	 : 'get_test_result_question',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
