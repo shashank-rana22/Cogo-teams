@@ -1,6 +1,6 @@
-/* eslint-disable import/no-relative-packages */
-import getPanHolderStatus from '../../../../../../common/utils/getPanHolderStatus';
-import registrationNumbersMapping from '../../../../../../common/utils/registrationNumbersMapping';
+import getPanHolderStatus from '@cogoport/forms/utils/getPanHolderStatus';
+import registrationNumbersMapping from '@cogoport/forms/utils/registrationNumbersMapping';
+
 import getPanFromGst from '../../../../utils/getPanFromGst';
 
 const useOnBlurTaxPanGstinControl = ({
