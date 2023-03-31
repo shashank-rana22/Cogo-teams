@@ -46,7 +46,7 @@ function Charts({ GraphData = [], hideChart = false }) {
 
 	return (
 		<div style={{ height: '100%' }}>
-			{hideChart ? (
+			{!hideChart ? (
 				<ResponsiveLine
 					data={graphData}
 					margin={{ top: 15, right: 35, bottom: 75, left: 75 }}

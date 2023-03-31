@@ -37,6 +37,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 	height: 225px;
+	margin-bottom: 10px;
 	background: #f9f5ec;
 }
 
@@ -256,7 +257,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 275px;
+	height: 280px;
 	padding: 8px;
 	margin: 4px 0;
 	background: #fff;
@@ -277,7 +278,8 @@
 }
 
 .the_chart {
-	height: 195px;
+	height: 200px;
+	padding-top: 10px;
 }
 
 .chart_empty {
