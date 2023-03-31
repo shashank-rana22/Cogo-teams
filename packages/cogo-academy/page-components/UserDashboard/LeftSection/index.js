@@ -21,8 +21,6 @@ function LeftSection() {
 		},
 	}, { manual: false });
 
-	console.log('response', data?.data);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.user_name}>
