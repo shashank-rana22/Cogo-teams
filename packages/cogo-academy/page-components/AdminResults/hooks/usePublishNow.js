@@ -23,7 +23,7 @@ const usePublishNow = ({ test_id, refetchTest }) => {
 
 			refetchTest({ test_id });
 		} catch (err) {
-			Toast.error(getApiErrorString(err?.data));
+			Toast.error(getApiErrorString(err.response?.data));
 		}
 	};
 
