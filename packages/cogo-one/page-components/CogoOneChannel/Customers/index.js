@@ -46,7 +46,6 @@ function Customers({
 	modalType = {},
 	updatePin = () => {},
 	tagOptions = [],
-
 	mailProps = {},
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
@@ -97,6 +96,7 @@ function Customers({
 		modalType,
 		tagOptions,
 		updatePin,
+		userId,
 	};
 
 	const voiceProps = {
