@@ -1,3 +1,5 @@
+import { cl } from '@cogoport/components';
+
 import getCriticalShipment from '../../../../helpers/getCritical';
 
 import Body from './Body';
@@ -9,7 +11,7 @@ function Card({ item = {}, stateProps = { } }) {
 	const isShipmentCritical = getCriticalShipment({ tab: activeTab, shipment: item });
 
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${isShipmentCritical ? styles.critical_animation : ''}`}>
 			<Header item={item} />
 			<Body item={item} stateProps={stateProps} />
 		</div>

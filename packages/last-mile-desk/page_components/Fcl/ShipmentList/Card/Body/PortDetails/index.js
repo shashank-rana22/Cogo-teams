@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 
@@ -15,11 +15,16 @@ function PortDetails({ item }) {
 				</div>
 
 				<div>
-					<Popover render={<div>{port?.name}</div>} trigger="mouseenter" placement="bottom-left" visible>
+					<Tooltip
+						content={<div>{port?.name}</div>}
+						theme="light"
+						interactive
+						placement="bottom"
+					>
 						<div className={styles.port_name}>
 							{port?.name}
 						</div>
-					</Popover>
+					</Tooltip>
 				</div>
 
 				<div className={styles.est_time}>{`${est_label}: ${format(est_key, 'dd MMM yyyy')}`}</div>
