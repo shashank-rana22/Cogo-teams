@@ -25,7 +25,6 @@ function ListVendors() {
 	} = useVendorList();
 
 	const {
-		// loadingStats,
 		data: dataStats,
 	} = useVendorStats();
 
@@ -38,6 +37,7 @@ function ListVendors() {
 	return (
 		<>
 			<Header />
+
 			<KycStatusTabs
 				params={params}
 				setParams={setParams}
@@ -48,6 +48,7 @@ function ListVendors() {
 				<div className={styles.heading}>
 					<h3 className={styles.title}>All Vendors</h3>
 				</div>
+
 				<div className={styles.actions_container}>
 					<Popover
 						theme="light"
@@ -76,6 +77,7 @@ function ListVendors() {
 							<IcMFilter style={{ margin: '2px 2px 2px 4px' }} />
 						</div>
 					</Popover>
+
 					<div className={styles.input_wrapper}>
 						<Input
 							size="md"
@@ -89,6 +91,7 @@ function ListVendors() {
 						<Button
 							size="lg"
 							role="presentation"
+							type="button"
 							onClick={() => router.push('/onboard-vendor')}
 							themeType="primary"
 						>
@@ -105,25 +108,21 @@ function ListVendors() {
 				columns={columns}
 			/>
 
-			{
-				list?.length > 10 && (
-					<div className={styles.pagination_container}>
-						<Pagination
-							type="number"
-							currentPage={params?.page}
-							totalItems={total_count}
-							pageSize={pageLimit}
-							onPageChange={(value) => setParams((pv) => ({
-								...pv,
-								page: value,
-							}))}
-						/>
-					</div>
-				)
-			}
-
+			{list?.length > 10 && (
+				<div className={styles.pagination_container}>
+					<Pagination
+						type="number"
+						currentPage={params?.page}
+						totalItems={total_count}
+						pageSize={pageLimit}
+						onPageChange={(value) => setParams((pv) => ({
+							...pv,
+							page: value,
+						}))}
+					/>
+				</div>
+			)}
 		</>
-
 	);
 }
 

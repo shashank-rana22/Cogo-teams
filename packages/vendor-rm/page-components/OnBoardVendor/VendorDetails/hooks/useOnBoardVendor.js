@@ -30,6 +30,15 @@ function useOnBoardVendor({
 
 	const router = useRouter();
 
+	const { vendor_details } = vendorInformation;
+
+	const isUpdateAction = !isEmpty(vendor_details);
+
+	const [{ loading }, triggerApi] = useRequest({
+		url    : isUpdateAction ? '/update_vendor' : '/create_vendor',
+		method : 'post',
+	}, { manual: true });
+
 	const {
 		control,
 		formState: { errors },
@@ -46,7 +55,6 @@ function useOnBoardVendor({
 	const { country_id, registration_number = {} } = watchForm;
 
 	const fields = useMemo(() => getControls({
-
 		country_id,
 	}), [country_id]);
 
@@ -164,15 +172,6 @@ function useOnBoardVendor({
 
 		newFields.push(newField);
 	});
-
-	const { vendor_details } = vendorInformation;
-
-	const isUpdateAction = !isEmpty(vendor_details);
-
-	const [{ loading }, triggerApi] = useRequest({
-		url    : isUpdateAction ? '/update_vendor' : '/create_vendor',
-		method : 'post',
-	}, { manual: true });
 
 	const createVendor = async ({ data, step }) => {
 		const formattedValues = getValues();

@@ -22,7 +22,7 @@ function useGetListVendorPocServices() {
 				},
 			});
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	}, [trigger, vendor_id]);
 

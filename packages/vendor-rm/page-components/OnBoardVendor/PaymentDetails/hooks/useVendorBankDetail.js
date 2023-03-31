@@ -64,7 +64,6 @@ function useVendorBankDetail({
 			} catch (error) {
 				setValue('branch_name', '');
 				setValue('bank_name', '');
-				Toast.error(getApiErrorString(error.response.data));
 			}
 		} else {
 			setValue('branch_name', '');

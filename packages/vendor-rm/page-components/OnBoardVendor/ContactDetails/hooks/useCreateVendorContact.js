@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -65,7 +66,7 @@ function useCreateVendorContact({
 				setActiveStepper('vendor_services');
 			}
 		} catch (error) {
-			Toast.error('Something went wrong');
+			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 

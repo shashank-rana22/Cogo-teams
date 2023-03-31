@@ -15,10 +15,8 @@
 }
 
 .error_message {
-	font-size: 0.75rem;
-	font-weight: 400;
+	font-size: 12px;
 	color: #cb6464;
-	letter-spacing: 0.02em;
 }
 
 .button_container {

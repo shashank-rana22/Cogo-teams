@@ -74,7 +74,7 @@ function useEditProfile({ vendor_details = {}, refetchVendorInfo = () => {}, set
 
 			Toast.success('Updated successfully');
 		} catch (error) {
-			Toast.error(getApiErrorString(error));
+			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 

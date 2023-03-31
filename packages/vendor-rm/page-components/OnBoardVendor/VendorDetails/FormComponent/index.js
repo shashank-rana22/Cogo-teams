@@ -15,12 +15,13 @@ function FormComponent({
 	createVendor,
 }) {
 	return (
-		<div>
+		<>
 			<FormLayout
 				fields={fields}
 				errors={errors}
 				control={control}
 			/>
+
 			<ButtonLayout
 				activeStepper={activeStepper}
 				loading={loading}
@@ -28,7 +29,7 @@ function FormComponent({
 				onSubmit={createVendor}
 				style={ButtonContainerStyle}
 			/>
-		</div>
+		</>
 	);
 }
 

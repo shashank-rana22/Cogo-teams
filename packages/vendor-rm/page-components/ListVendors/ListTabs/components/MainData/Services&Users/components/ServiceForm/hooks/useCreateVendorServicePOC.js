@@ -64,7 +64,7 @@ function useCreateVendorServicePOC({
 			setShowForm('');
 			Toast.success('Service POC added successfully');
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 
