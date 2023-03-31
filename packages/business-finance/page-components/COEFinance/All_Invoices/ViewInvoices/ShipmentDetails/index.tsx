@@ -55,9 +55,11 @@ interface BillInterface {
 	billCurrency: string;
 	grandTotal: any;
 	subTotal: string | number;
+	recurringState?:string,
 	billType: string;
 	isProforma: boolean,
 }
+
 interface JobInterface {
 	jobNumber: string;
 }
@@ -78,7 +80,7 @@ export interface DataInterface {
 interface ShipmentDetailsInterface {
 	data: DataInterface;
 	orgId: string;
-	remarksVal: RemarksValInterface;
+	remarksVal?: RemarksValInterface;
 	setRemarksVal: any;
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
