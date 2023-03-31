@@ -7,9 +7,7 @@ import getApiErrorString from '../utils/getApiErrorString';
 
 const useUpdateShipmentAdditionalService = ({
 	item = {},
-	setAddRate = () => {},
 	refetch = () => {},
-	onCancel = () => {},
 	showIp = false,
 	setShowIp = () => {},
 }) => {
@@ -32,14 +30,8 @@ const useUpdateShipmentAdditionalService = ({
 			if (res.status === 200) {
 				Toast.success('Service Updated successfully');
 
-				if (showIp) {
-					setShowIp(false);
-				}
+				setShowIp(false);
 				setRemarks(null);
-				setAddRate(null);
-
-				onCancel();
-
 				refetch();
 			}
 		} catch (err) {

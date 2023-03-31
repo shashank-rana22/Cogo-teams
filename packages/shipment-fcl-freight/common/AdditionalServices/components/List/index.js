@@ -27,9 +27,11 @@ function List({
 	const [showChargeCodes, setShowChargeCodes] = useState(false);
 	const [item, setItem] = useState({});
 	const [showIp, setShowIp] = useState(false);
+	const [pageLimit, setPageLimit] = useState(8);
 
-	const { list: additionalServiceList, refetch, loading } = useListAdditionalServices({
+	const { list: additionalServiceList, refetch, loading, total_count } = useListAdditionalServices({
 		shipment_data,
+		pageLimit,
 	});
 
 	const handleRefetch = () => {
@@ -47,7 +49,7 @@ function List({
 	return (
 		<div className={styles.container}>
 			{loading && <Loader />}
-			{!isEmpty(additionalServiceList) ? (
+			{!isEmpty(additionalServiceList) && !loading ? (
 				<div className={styles.added_services}>
 					{additionalServiceList?.map((serviceListItem) => {
 						const status = getStaus({ serviceListItem });
@@ -74,15 +76,30 @@ function List({
 				</div>
 			) : null}
 
-			<div className={styles.not_added}>
-				<Button
-					onClick={() => setShowChargeCodes(true)}
-					disabled={shipment_data?.is_job_closed}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Additional Charges
-				</Button>
-			</div>
+			{total_count > 8
+				? (
+					<div className={styles.show_more}>
+						{pageLimit > 8
+							? 	(
+								<Button
+									size="md"
+									themeType="link"
+									onClick={() => setPageLimit(8)}
+								>
+									Show Less
+								</Button>
+							) : (
+								<Button
+									size="md"
+									themeType="link"
+									onClick={() => setPageLimit(16)}
+								>
+									Show More
+								</Button>
+							)}
+					</div>
+				)
+				: null}
 
 			{additionalServiceList?.length ? (
 				<div className={styles.info_container}>
@@ -93,6 +110,15 @@ function List({
 					<Info />
 				</div>
 			) : null}
+			<div className={styles.not_added}>
+				<Button
+					onClick={() => setShowChargeCodes(true)}
+					disabled={shipment_data?.is_job_closed}
+				>
+					<div className={styles.add_icon}>+</div>
+					Add Additional Services
+				</Button>
+			</div>
 
 			{addSellPrice ? (
 				<Modal

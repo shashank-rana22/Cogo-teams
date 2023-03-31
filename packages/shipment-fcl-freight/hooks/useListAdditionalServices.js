@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 import getApiErrorString from '../utils/getApiErrorString';
 
-const useListAdditionalServices = ({ shipment_data, filters = {} }) => {
+const useListAdditionalServices = ({ shipment_data, filters = {}, pageLimit }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : 'fcl_freight/list_additional_services',
 		method : 'GET',
@@ -21,14 +21,15 @@ const useListAdditionalServices = ({ shipment_data, filters = {} }) => {
 							shipment_id: id,
 							...(filters || {}),
 						},
-						page_limit: 8,
+						additional_methods : ['pagination'],
+						page_limit         : pageLimit || 8,
 					},
 				});
 			} catch (err) {
 				Toast.error(getApiErrorString(err));
 			}
 		})();
-	}, [trigger, importer_exporter_id, id, JSON.stringify(filters)]);
+	}, [trigger, importer_exporter_id, id, JSON.stringify(filters), pageLimit]);
 
 	useEffect(() => {
 		getAdditionalServiceListApi();
@@ -36,8 +37,9 @@ const useListAdditionalServices = ({ shipment_data, filters = {} }) => {
 
 	return {
 		loading,
-		list    : data?.list || [],
-		refetch : getAdditionalServiceListApi,
+		list        : data?.list || [],
+		refetch     : getAdditionalServiceListApi,
+		total_count : data?.total_count,
 	};
 };
 export default useListAdditionalServices;
