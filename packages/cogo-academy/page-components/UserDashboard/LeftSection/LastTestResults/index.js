@@ -9,9 +9,7 @@ import styles from './styles.module.css';
 import TopicWisePercentile from './TopicWisePercentile';
 
 function LastTestResults(props) {
-	const { data = {}, loading } = props;
-
-	const stats_data = data;
+	const { data: stats_data = {}, loading } = props;
 
 	const { topic_wise_percentile, question_stats, status, test_id } = stats_data || {};
 

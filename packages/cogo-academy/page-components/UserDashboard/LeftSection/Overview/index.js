@@ -3,6 +3,8 @@ import toFixed from '../../../CreateModule/utils/toFixed';
 import styles from './styles.module.css';
 
 function Overview({ data = {} }) {
+	const { passed_count = 0, total_attempted = 0, total_no_tests = 0, avg_percentile } = data;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -13,25 +15,25 @@ function Overview({ data = {} }) {
 				<div className={styles.content}>
 					<div className={styles.text}>Tests Given</div>
 					<div className={styles.value}>
-						{data?.total_attempted || 0}
+						{total_attempted}
 						/
-						{data?.total_no_tests || 0}
+						{total_no_tests}
 					</div>
 				</div>
 
 				<div className={styles.content}>
 					<div className={styles.text}>Tests Cleared</div>
 					<div className={styles.value}>
-						{data?.passed_count || 0}
+						{passed_count}
 						/
-						{data?.total_attempted || 0}
+						{total_attempted}
 					</div>
 				</div>
 
 				<div className={styles.content}>
 					<div className={styles.text}>Avg Percentile</div>
 					<div className={styles.value}>
-						{+toFixed(data?.avg_percentile, 2)}
+						{+toFixed(avg_percentile, 2)}
 						{' '}
 						%
 					</div>

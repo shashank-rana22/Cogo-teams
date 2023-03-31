@@ -9,7 +9,7 @@ function useBulkCreateStandAloneQuestion({ setShowBulkUpload, questionSetId, lis
 
 	const bulkCreateStandAloneQuestion = async ({ uploadDocument }) => {
 		try {
-			await trigger({
+			const res = await trigger({
 				data: {
 					test_question_set_id : questionSetId,
 					file_url             : uploadDocument,
@@ -19,7 +19,11 @@ function useBulkCreateStandAloneQuestion({ setShowBulkUpload, questionSetId, lis
 			setShowBulkUpload(false);
 			listSetQuestions({ questionToShow: '' });
 
-			Toast.success('Bulk question set uploaded successfully');
+			const { data = {} } = res || {};
+
+			const { total_count, success_count } = data;
+
+			Toast.success(`${success_count} out ${total_count} are created successfully.`);
 		} catch (err) {
 			Toast.error('Please upload the file with correct format');
 		}
