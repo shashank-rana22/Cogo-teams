@@ -96,9 +96,9 @@ function useCreateBadgeConfiguration(props) {
 				Toast.error(error?.response?.data?.error || 'Something went wrong');
 			}
 		} else if (Number(Bronze_value) <= 0) {
-			Toast.error('Score schould be a positive value');
+			Toast.default('Score schould be a positive value');
 		} else {
-			Toast.error('Provide Scores in proper order: Bronze < Silver < Gold');
+			Toast.default('Provide Scores in proper order: Bronze < Silver < Gold');
 		}
 	};
 

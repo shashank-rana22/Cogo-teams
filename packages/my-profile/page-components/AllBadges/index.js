@@ -2,8 +2,8 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useGetAllocationKamExpertiseProfile from '../hooks/useGetAllocationKamExpertiseProfile';
-import useGetBadgeDescription from '../hooks/useGetBadgeDescription';
+import useGetAllocationKamExpertiseProfile from '../../hooks/useGetAllocationKamExpertiseProfile';
+import useGetBadgeDescription from '../../hooks/useGetBadgeDescription';
 
 import BadgeDescription from './BadgeDescription';
 import BadgeList from './BadgeList';
@@ -12,7 +12,7 @@ import MasteryDescription from './MasteryDescription';
 import styles from './styles.module.css';
 
 function AllBadges() {
-	const [modalDetail, setModalDetail] = useState();
+	const [modalDetail, setModalDetail] = useState('');
 
 	const router = useRouter();
 
@@ -36,7 +36,7 @@ function AllBadges() {
 	} = useGetBadgeDescription();
 
 	const showAllBadges = () => {
-		setModalDetail();
+		setModalDetail('');
 	};
 
 	const showBadgeDetails = (badge) => {
@@ -51,7 +51,6 @@ function AllBadges() {
 
 	return (
 		<div className={styles.main_container_wrapper}>
-
 			<Header
 				modalDetail={modalDetail}
 				showAllBadges={showAllBadges}

@@ -108,14 +108,11 @@
 }
 
 .exp {
+	display: flex;
 	flex-basis: auto;
+	flex-direction: column;
 
 	@media (max-width: 576px) {
 		padding: 0 20px;
 	}
-}
-
-.expertise {
-	padding-bottom: 8px;
-	color: #333;
 }

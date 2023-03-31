@@ -2,7 +2,7 @@ import { Button, Modal, Loader } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
-import useGetAllocationKamExpertiseProfile from '../hooks/useGetAllocationKamExpertiseProfile';
+import useGetAllocationKamExpertiseProfile from '../../hooks/useGetAllocationKamExpertiseProfile';
 
 import ChangePassword from './ChangePassword';
 import useChangePassword from './ChangePassword/useChangePassword';

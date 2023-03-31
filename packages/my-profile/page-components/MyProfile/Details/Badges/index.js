@@ -1,20 +1,21 @@
 import { Toast, Placeholder, Modal, Button, Tooltip } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import { IcMStar, IcCStar } from '@cogoport/icons-react';
+import { IcMStarfull } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
-import usePostProfileMasteryBadge from '../../../hooks/usePostProfileMasteryBadge';
+import BADGE_STARS_CLASSNAME_MAPPING from '../../../../constants/badge-stars-mapping';
+import usePostProfileMasteryBadge from '../../../../hooks/usePostProfileMasteryBadge';
 
 import styles from './styles.module.css';
 
-const BADGE_STARS_CLASSNAME_MAPPING = {
-	bronze : { upper_limit: 1 },
-	silver : { upper_limit: 2 },
-	gold   : { upper_limit: 3 },
-};
-
 function Badges(props) {
+	const {
+		profile: { partner = {} },
+	} = useSelector((state) => state);
+
+	const { partner_user_id = '' } = partner;
+
 	const { badgeListLoading, userBadges = {}, profileBadgeRefetch } = props;
 
 	const {
@@ -30,12 +31,6 @@ function Badges(props) {
 	const { badges_got : badgesGot = [], badges_not_got: badgesNotGot = [] } = userBadges;
 
 	let max_badges = 0;
-
-	const {
-		profile: { partner = {} },
-	} = useSelector((state) => state);
-
-	const { partner_user_id = '' } = partner;
 
 	if (badgeListLoading) {
 		return (
@@ -96,66 +91,70 @@ function Badges(props) {
 			</div>
 
 			<div className={styles.content}>
-
 				<div className={styles.badge_list}>
-					{
-						badgesGot?.map((item, index) => {
-							max_badges += 1;
+					{badgesGot?.map((item, index) => {
+						const {	id = '', medal = '', badge_name	= '', image_url } = item;
 
-							const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[item.medal]?.upper_limit;
+						const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[medal]?.upper_limit;
 
-							return (
-								(index < 5 && max_badges < 6)
-									? (
-										<div key={item.id}>
-											<Tooltip content={item.medal}>
-												<div className={styles.badge}>
-													<img src={item.image_url} alt="badge icon" />
-												</div>
+						max_badges += 1;
 
-												<div className={styles.stars}>
-													{[1, 2, 3].map((itm) => (
-														<div key={itm}>
-															<IcMStar
-																width={10}
-																fill={itm <= badgeClassName ? '#FFDF33' : '#919191'}
-																stroke={itm <= badgeClassName ? '#FFDF33' : '#919191'}
-															/>
-														</div>
-													))}
-												</div>
-											</Tooltip>
-										</div>
-									) : null
-							);
-						})
-					}
+						return (
+							(index < 5 && max_badges < 6)
+								? (
+									<div key={id}>
+										<Tooltip content={`${badge_name} ${startCase(medal || '')}`}>
+											<div className={styles.badge}>
+												<img src={image_url} alt="badge icon" />
+											</div>
 
-					{
-						badgesNotGot?.map((item, index) => {
-							max_badges += 1;
-							return (
-								(index < 5 && max_badges < 6)
-									? (
-										<div key={item.id} style={{ opacity: 0.2 }}>
-											<Tooltip content={item.medal}>
-												<div className={styles.badge}>
-													<img src={item.image_url} alt="badge icon" />
-												</div>
+											<div className={styles.stars}>
+												{[1, 2, 3].map((itm) => (
+													<div key={itm}>
+														<IcMStarfull
+															width={10}
+															fill={itm <= badgeClassName ? '#FFDF33' : '#BDBDBD'}
+														/>
+													</div>
+												))}
+											</div>
+										</Tooltip>
+									</div>
+								) : null
+						);
+					})}
 
-												<div className={styles.stars}>
-													{[1, 2, 3].map((itm) => (
-														<div key={itm}>
-															<IcCStar width={10} stroke="#FFDF33" />
-														</div>
-													))}
-												</div>
-											</Tooltip>
-										</div>
-									) : null
-							);
-						})
-					}
+					{badgesNotGot?.map((item, index) => {
+						const {	id = '', medal = '', badge_name	= '', image_url = '' } = item;
+
+						const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[medal]?.upper_limit;
+
+						max_badges += 1;
+
+						return (
+							(index < 5 && max_badges < 6)
+								? (
+									<div key={id} style={{ opacity: 0.2 }}>
+										<Tooltip content={`${badge_name} ${startCase(medal || '')}`}>
+											<div className={styles.badge}>
+												<img src={image_url} alt="badge icon" />
+											</div>
+
+											<div className={styles.stars}>
+												{[1, 2, 3].map((itm) => (
+													<div key={itm}>
+														<IcMStarfull
+															width={10}
+															fill={itm <= badgeClassName ? '#FFDF33' : '#BDBDBD'}
+														/>
+													</div>
+												))}
+											</div>
+										</Tooltip>
+									</div>
+								) : null
+						);
+					})}
 				</div>
 
 				<div
@@ -201,11 +200,21 @@ function Badges(props) {
 				</Modal.Body>
 
 				<Modal.Footer>
-					<Button themeType="tertiary" onClick={onCloseModal}>
+					<Button
+						themeType="tertiary"
+						onClick={onCloseModal}
+						style={{ marginRight: '4px' }}
+					>
 						Cancel
 					</Button>
 
-					<Button onClick={onSaveProfileMastery}>Save</Button>
+					<Button
+						onClick={onSaveProfileMastery}
+						disabled={!masteryId}
+
+					>
+						Save
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

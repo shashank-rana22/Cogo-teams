@@ -8,8 +8,6 @@ function PublishVersionModal({
 	showPublishModal,
 	onCreate,
 	publishLoading,
-	// publish,
-	// setPublish,
 }) {
 	return (
 		<Modal
@@ -19,7 +17,6 @@ function PublishVersionModal({
 			closeOnOuterClick
 			onClose={() => {
 				setShowPublishModal(false);
-				// setPublish(false);
 			}}
 		>
 
@@ -63,9 +60,7 @@ function PublishVersionModal({
 				>
 					Yes
 				</Button>
-
 			</Modal.Footer>
-
 		</Modal>
 	);
 }

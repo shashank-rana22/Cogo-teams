@@ -1,4 +1,4 @@
-import React from 'react';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -8,18 +8,19 @@ function CreateModal({ setMode, data }) {
 	return (
 		<div className={styles.modal_container}>
 			<div className={styles.head_text}>
-
 				Please choose your preferred method for creating a new verison:
 			</div>
-			<div className={styles.button_container} style={{ display: 'flex', justifyContent: 'center' }}>
+
+			<div className={styles.button_container}>
 				<div
 					role="presentation"
-					onClick={() => { setMode('new'); }}
+					onClick={() => setMode('new')}
 					className={styles.button}
 				>
 					a. Start from scratch (empty version)
 				</div>
-				{data.length ? (
+
+				{!isEmpty(data) ? (
 					<div
 						role="presentation"
 						onClick={() => {
@@ -28,21 +29,18 @@ function CreateModal({ setMode, data }) {
 						className={styles.button}
 					>
 						b. Choose from published versions
-
 					</div>
-				) : (null)}
+				) : null}
 
-				{drafts.length ? (
+				{!isEmpty(drafts) ? (
 					<div
 						role="presentation"
 						onClick={() => { setMode('saved-draft'); }}
 						className={styles.button}
 					>
 						c. Start where you left off (saved draft)
-
 					</div>
-				) : (null)}
-
+				) : null}
 			</div>
 		</div>
 	);

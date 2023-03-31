@@ -114,7 +114,6 @@ function CreateBadge(props) {
 						<Button
 							size="md"
 							themeType="tertiary"
-							id="cancel_request_btn"
 							style={{ marginRight: 10 }}
 							disabled={loading}
 							onClick={onClose}
@@ -126,7 +125,6 @@ function CreateBadge(props) {
 							size="md"
 							type="submit"
 							themeType="primary"
-							id="save_request_btn"
 							loading={loading}
 						>
 							Save

@@ -4,6 +4,43 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const columns = [
+	{
+		Header   : 'VERSION NAME',
+		key      : 'version_number',
+		id       : 'version_number',
+		accessor : 'version_number',
+		Cell     : ({ value }) => (
+			<section>
+				Version
+				{' '}
+				{value || ''}
+			</section>
+		),
+	},
+	{
+		Header   : 'STATUS',
+		accessor : 'status',
+		Cell     : ({ value }) => {
+			const colors = value === 'live' ? 'green' : 'red';
+			return (
+				<span>
+					<Pill className={styles.pill} color={colors}>{value === 'active' ? 'live' : value}</Pill>
+				</span>
+			);
+		},
+
+	},
+	{
+		Header   : 'LAST UPDATED',
+		accessor : 'updated_at',
+		Cell     : ({ value }) => (
+			<section>{value ? format(value, 'dd-MM-YYYY') : ''}</section>
+		),
+	},
+
+];
+
 function Published({ setSelectedVersion = () => {}, data }) {
 	const table = [];
 
@@ -17,42 +54,6 @@ function Published({ setSelectedVersion = () => {}, data }) {
 			});
 		}
 	});
-	const columns = [
-		{
-			Header   : 'VERSION NAME',
-			key      : 'version_number',
-			id       : 'version_number',
-			accessor : 'version_number',
-			Cell     : ({ value }) => (
-				<section>
-					Version
-					{' '}
-					{value || ''}
-				</section>
-			),
-		},
-		{
-			Header   : 'STATUS',
-			accessor : 'status',
-			Cell     : ({ value }) => {
-				const colors = value === 'live' ? 'green' : 'red';
-				return (
-					<span>
-						<Pill className={styles.pill} color={colors}>{value === 'active' ? 'live' : value}</Pill>
-					</span>
-				);
-			},
-
-		},
-		{
-			Header   : 'LAST UPDATED',
-			accessor : 'updated_at',
-			Cell     : ({ value }) => (
-				<section>{value ? format(value, 'dd-MM-YYYY') : ''}</section>
-			),
-		},
-
-	];
 
 	return (
 		<div className={styles.modal_body}>

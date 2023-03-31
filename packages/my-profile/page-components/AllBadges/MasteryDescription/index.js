@@ -30,7 +30,7 @@ function MasteryDescription(props) {
 
 						{
 							[1, 2].map(() => (
-								<div className={styles.lable_value}>
+								<div className={styles.label_value}>
 									<Placeholder width="100%" height="32px" />
 									<Placeholder width="100%" height="32px" style={{ marginTop: '8px' }} />
 								</div>
@@ -72,7 +72,7 @@ function MasteryDescription(props) {
 	return (
 		<div className={styles.container}>
 			<p className={styles.heading}>
-				{badge_details?.[0]?.badge_name}
+				{badge_details?.[0]?.badge_name || ''}
 			</p>
 
 			<div className={styles.display_flex}>
@@ -86,25 +86,25 @@ function MasteryDescription(props) {
 
 				<div className={styles.details}>
 					<div className={styles.details_header}>
-						<div className={styles.lable_value}>
-							<p className={styles.lable}>Achievement Date</p>
+						<div className={styles.label_value}>
+							<p className={styles.label}>Achievement Date</p>
 
 							<p className={styles.value}>
 								{badgeDetail.achievement_date
-									? format(badgeDetail?.achievement_date, 'dd MMM YYYY')
+									? format(badgeDetail.achievement_date, 'dd MMM YYYY')
 									: 'Not achieved yet'}
 							</p>
 						</div>
 					</div>
 
-					<div className={styles.lable_value}>
-						<p className={styles.lable}>Number of KAMs with badge</p>
+					<div className={styles.label_value}>
+						<p className={styles.label}>Number of KAMs with badge</p>
 
 						<p className={styles.value}>{badgeDetail.kam_badge_count}</p>
 					</div>
 
-					<div className={styles.lable_value}>
-						<p className={styles.lable}>Rarity</p>
+					<div className={styles.label_value}>
+						<p className={styles.label}>Rarity</p>
 
 						<p className={styles.value}>
 							{badgeDetail.rarity}
@@ -113,7 +113,7 @@ function MasteryDescription(props) {
 					</div>
 
 					<div className={styles.description_container}>
-						<p className={styles.lable}>Description</p>
+						<p className={styles.label}>Description</p>
 
 						<p className={styles.value}>{badge_details?.[0]?.description}</p>
 					</div>
@@ -121,11 +121,10 @@ function MasteryDescription(props) {
 			</div>
 
 			<div className={styles.badges}>
-				<div className={styles.lable}>Badges unlocked for mastery</div>
+				<div className={styles.label}>Badges unlocked for mastery</div>
 
 				<div className={styles.unlocked_badges}>
-					{
-					unlockedBadges?.map((item) => (
+					{unlockedBadges?.map((item) => (
 						<Tooltip key={item.id} content={item.badge_name}>
 							<div className={styles.unlocked_item}>
 								<div className={styles.badge_image}>
@@ -144,8 +143,7 @@ function MasteryDescription(props) {
 								</div>
 							</div>
 						</Tooltip>
-					))
-				}
+					))}
 				</div>
 			</div>
 		</div>

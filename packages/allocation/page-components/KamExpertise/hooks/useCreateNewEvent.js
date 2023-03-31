@@ -36,7 +36,7 @@ function useCreateNewEvent(props) {
 		});
 
 		if (payloadAttribute.length === 0) {
-			Toast.error('Enter Attribute Value');
+			Toast.default('Enter Attribute Value');
 		} else {
 			try {
 				const payload = {

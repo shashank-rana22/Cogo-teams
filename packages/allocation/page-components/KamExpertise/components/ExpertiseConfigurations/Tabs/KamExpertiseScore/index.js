@@ -6,8 +6,8 @@ import { useState, useEffect } from 'react';
 import EmptyState from '../../../../../../common/EmptyState';
 import FieldArray from '../../../../../../common/Form/FieldArray';
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
+import CONTROL_MAPPING from '../../../../configurations/add-condition-controls-mapping';
 import getControls from '../../../../configurations/get-add-conditions-controls';
-import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mapping';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
 import useCreateAllocationKamExpertiseEventScoring from '../../../../hooks/useCreateAllocationKamExpertiseEventScoring';
 import LoadingState from '../LoadingState';
@@ -78,7 +78,6 @@ function KamExpertiseScoreConfig({
 		createConditionloading,
 		formProps,
 		onSave,
-
 	} = useCreateAllocationKamExpertiseEventScoring({
 		onClose,
 		cardRefetch,

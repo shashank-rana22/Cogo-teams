@@ -10,7 +10,7 @@ function CardItem({ item, editMode, control }) {
 	const { data = [], group_name = '', description = '' } = item;
 	const isDoubleLevel = data.length > 1;
 
-	const conditionName = data[0].condition_name;
+	const conditionName = data?.[0]?.condition_name || '';
 
 	return (
 		<div className={styles.card_item}>
@@ -35,14 +35,11 @@ function CardItem({ item, editMode, control }) {
 					<>
 						{isDoubleLevel ? (
 							<div className={styles.child_name_container}>
-
 								<div className={styles.parameter_name}>{startCase(condition_name)}</div>
-
 							</div>
 						) : null}
 
 						<div className={styles.controls_container}>
-
 							{controls.map((singleField) => {
 								const {
 									name: controlName = '', score, type,
@@ -60,9 +57,7 @@ function CardItem({ item, editMode, control }) {
 								const Element = getFieldController(controlsObject.type) || null;
 
 								return (
-
 									<div className={styles.field_container}>
-
 										{editMode ? (
 											<>
 												<div className={styles.label}>
@@ -82,19 +77,17 @@ function CardItem({ item, editMode, control }) {
 													{startCase(score)}
 												</div>
 											</>
-
 										) : (
 											<>
 												<div className={styles.view_label}>
 													{controlsObject.label || '___'}
 												</div>
+
 												<div className={styles.current_value}>
 													{startCase(score) || '___'}
 												</div>
 											</>
-
 										)}
-
 									</div>
 
 								);
@@ -102,7 +95,6 @@ function CardItem({ item, editMode, control }) {
 						</div>
 
 						{isDoubleLevel && !isLastItem ? <hr className={styles.horizontal_line} /> : null}
-
 					</>
 				);
 			})}

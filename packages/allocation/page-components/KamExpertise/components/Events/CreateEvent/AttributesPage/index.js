@@ -23,16 +23,14 @@ function AttributePage(props) {
 				</div>
 
 				<section className={styles.row_container}>
-
-					{[1, 2, 3, 4, 5, 6].map(() => (
-						<div className={styles.attribute_form_group}>
+					{[1, 2, 3, 4, 5, 6].map((item) => (
+						<div key={item} className={styles.attribute_form_group}>
 							<div
 								className={`${styles.input_group}
 													${styles.margin_bottom}`}
 							>
 								<Placeholder height="40px" margin="8px 0 16px 0" />
 							</div>
-
 						</div>
 					))}
 
@@ -66,8 +64,7 @@ function AttributePage(props) {
 			</div>
 
 			<section className={styles.row_container}>
-
-				{ attributeList.map((controlItem, index) => {
+				{attributeList.map((controlItem, index) => {
 					const { name = '', parameters, options = [] } = controlItem;
 					const { params_type } = parameters || {};
 
@@ -106,7 +103,6 @@ function AttributePage(props) {
 						</div>
 					);
 				})}
-
 			</section>
 		</div>
 

@@ -1,9 +1,6 @@
 import useGetAsyncOptionsMicroservice from '@cogoport/forms/hooks/useGetAsyncOptionsMicroservice';
-// import { asyncFieldsExpertiseConfigurations } from '@cogoport/forms/utils/getAsyncFields';
 
 const useGetControls = ({ modifiedControls = [], typeFilter, showModal = false }) => {
-	// const conditions = useGetAsyncOptionsMicroservice(asyncFieldsExpertiseConfigurations() || {});
-
 	const asyncControl = useGetAsyncOptionsMicroservice({
 		labelKey : 'condition_name',
 		valueKey : 'rule_mapping_id',

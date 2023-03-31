@@ -14,11 +14,13 @@ function useCreateMasterConfiguration(props) {
 		authkey : 'post_allocation_kam_expertise_badge_configuration',
 	}, { manual: true });
 
+	const { badge_name, expertise_configuration_detail_ids, description } = masteryItemData;
+
 	const formProps = useForm({
 		defaultValues: {
-			mastery_name      : masteryItemData.badge_name,
-			badges            : masteryItemData.expertise_configuration_detail_ids,
-			description_input : masteryItemData.description,
+			mastery_name      : badge_name,
+			badges            : expertise_configuration_detail_ids,
+			description_input : description,
 		},
 	});
 

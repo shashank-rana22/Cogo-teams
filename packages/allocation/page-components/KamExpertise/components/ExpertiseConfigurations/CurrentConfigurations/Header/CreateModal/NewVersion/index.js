@@ -4,14 +4,14 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function NewVersion({ setMode, setSelectedVersion, getVersion, CreateModalLoading }) {
+function NewVersion(props) {
+	const { setMode, setSelectedVersion, getVersion, createModalLoading } = props;
+
 	return (
-
 		<div className={styles.container}>
-
 			<IcMAlert className={styles.alert_icon} />
 
-			<div style={{ color: '#bf291e' }} className={styles.supporting_text}>
+			<div className={styles.supporting_text}>
 				Creating a new version will overwrite the existing saved draft.
 			</div>
 
@@ -20,24 +20,23 @@ function NewVersion({ setMode, setSelectedVersion, getVersion, CreateModalLoadin
 			</div>
 			<div className={styles.button_container}>
 				<Button
-					themeType="teritiary"
-					disabled={CreateModalLoading}
+					themeType="tertiary"
+					disabled={createModalLoading}
 					onClick={() => { setMode('initial-mode'); }}
 				>
 					Back
 
 				</Button>
+
 				<Button
-					loading={CreateModalLoading}
+					loading={createModalLoading}
 					onClick={() => {
 						setSelectedVersion('new');
 						getVersion();
 					}}
 				>
 					Proceed
-
 				</Button>
-
 			</div>
 
 		</div>

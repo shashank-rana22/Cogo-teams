@@ -1,15 +1,22 @@
 import { Tooltip } from '@cogoport/components';
-import { IcCStar } from '@cogoport/icons-react';
+import { IcMStarfull } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+
+import BADGE_STARS_CLASSNAME_MAPPING from '../../../../../constants/badge-stars-mapping';
 
 import styles from './styles.module.css';
 
 function ListItem(props) {
 	const { data, index } = props;
 
-	const { badge_details = [], expertise_score = [] } = data || {};
+	const {
+		name = '',
+		score = '',
+		partner_user_id = '',
+		badge_details = [],
+		expertise_score = [],
+	} = data || {};
 
 	const router = useRouter();
 
@@ -32,47 +39,54 @@ function ListItem(props) {
 
 					<div>
 						<div className={styles.kam_name}>
-							{data.name}
+							{name}
 						</div>
 
 						<div>
 							Total:
 							{' '}
-							<b>{data.score}</b>
+							<b>{score}</b>
 						</div>
 					</div>
 				</div>
 
 				<div className={styles.badge_container}>
 					<div className={styles.badges}>
+						{badge_details?.slice(0, 3).map((value) => {
+							const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[value?.medal]?.upper_limit;
 
-						{badge_details?.slice(0, 3).map((value) => (
-							<Tooltip key={value?.id} content={data.badge_name}>
-								<div className={styles.badge_item}>
-									<img src={value?.image_url} alt="badge" />
+							return (
+								<Tooltip
+									key={value?.id}
+									content={`${data.badge_name || ''} ${startCase(value?.medal || '')}`}
+								>
+									<div className={styles.badge_item}>
+										<img src={value?.image_url} alt="badge" />
 
-									<div className={styles.star}>
-										{[1, 2, 3].map((it) => (
-											<div key={it}>
-												<IcCStar width={10} stroke="#FFDF33" />
-											</div>
-										))}
+										<div className={styles.star}>
+											{[1, 2, 3].map((it) => (
+												<div key={it}>
+													<IcMStarfull
+														width={10}
+														fill={it <= badgeClassName ? '#FFDF33' : '#BDBDBD'}
+													/>
+												</div>
+											))}
+										</div>
 									</div>
-								</div>
-
-							</Tooltip>
-						))}
-
+								</Tooltip>
+							);
+						})}
 					</div>
 
 					<span className={styles.link}>
-						{ badge_details?.length > 3
+						{badge_details?.length > 3
 						&& (
 							<span
 								role="presentation"
 								style={{ cursor: 'pointer' }}
 								onClick={() => {
-									onClickViewMoreBadges(data.partner_user_id);
+									onClickViewMoreBadges(partner_user_id);
 								}}
 							>
 								View More
@@ -84,11 +98,9 @@ function ListItem(props) {
 				<div className={styles.card_description_right}>
 					{expertise_score.map((expertise) => (
 						<div className={styles.exp} key={expertise.expertise_type}>
-							<div className={styles.expertise}>
-								{startCase(expertise.expertise_type || '')}
+							{startCase(expertise.expertise_type || '')}
 
-								<b>{expertise.score}</b>
-							</div>
+							<b>{expertise.score}</b>
 						</div>
 					))}
 				</div>

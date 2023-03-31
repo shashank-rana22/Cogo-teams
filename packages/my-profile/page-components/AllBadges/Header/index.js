@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 
 function Header(props) {
 	const { modalDetail, showAllBadges, returnPath, goBack } = props;
+
 	return (
 		<div className={styles.greeting_container}>
 			<div className={styles.main_heading} role="presentation" onClick={goBack}>
@@ -17,7 +18,7 @@ function Header(props) {
 				</span>
 			</div>
 
-			{ !isEmpty(modalDetail)
+			{!isEmpty(modalDetail)
 					&& (
 						<div className={styles.main_heading} role="presentation" onClick={showAllBadges}>
 							<div className={styles.icon_container}>

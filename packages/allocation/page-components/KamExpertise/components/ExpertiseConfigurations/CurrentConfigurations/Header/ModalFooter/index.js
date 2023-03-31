@@ -1,9 +1,10 @@
 import { Button } from '@cogoport/components';
-import React from 'react';
 
 import styles from './styles.module.css';
 
-function ModalFooter({ setMode, setSelectedVersion, selectedVersion, getVersion, CreateModalLoading }) {
+function ModalFooter(props) {
+	const { setMode, setSelectedVersion, selectedVersion, getVersion, createModalLoading } = props;
+
 	return (
 		<div className={styles.modal_footer}>
 			{selectedVersion ? (
@@ -17,9 +18,9 @@ function ModalFooter({ setMode, setSelectedVersion, selectedVersion, getVersion,
 
 			<span className={styles.footer_button}>
 				<Button
-					themeType="teritiary"
+					themeType="tertiary"
 					className={styles.button}
-					disabled={CreateModalLoading}
+					disabled={createModalLoading}
 					onClick={() => {
 						setMode('initial-mode');
 						setSelectedVersion('');
@@ -32,7 +33,7 @@ function ModalFooter({ setMode, setSelectedVersion, selectedVersion, getVersion,
 					className={styles.button}
 					disabled={!selectedVersion}
 					onClick={() => getVersion()}
-					loading={CreateModalLoading}
+					loading={createModalLoading}
 				>
 					Create
 				</Button>

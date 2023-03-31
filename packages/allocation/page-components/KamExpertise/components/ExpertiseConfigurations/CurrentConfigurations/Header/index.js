@@ -41,7 +41,7 @@ function Header(props) {
 	} = props;
 
 	const {
-		getVersion, CreateModalLoading, selectedVersion,
+		getVersion, createModalLoading, selectedVersion,
 		setSelectedVersion, mode, setMode, showModal, setShowModal,
 	} = useGetKamExpertiseVersionDetials({
 		setResponseId,
@@ -69,7 +69,7 @@ function Header(props) {
 			setShowModal,
 			setSelectedVersion,
 			getVersion,
-			CreateModalLoading,
+			createModalLoading,
 		},
 		[INITIAL_MODE]: {
 			setMode,
@@ -151,7 +151,7 @@ function Header(props) {
 									selectedVersion={selectedVersion}
 									mode={mode}
 									getVersion={getVersion}
-									CreateModalLoading={CreateModalLoading}
+									createModalLoading={createModalLoading}
 								/>
 							</Modal.Footer>
 						) : null}

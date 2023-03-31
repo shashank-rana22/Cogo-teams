@@ -33,8 +33,8 @@ function BadgeDescription(props) {
 						</div>
 
 						{
-							[1, 2].fill('').map(() => (
-								<div className={styles.lable_value}>
+							[1, 2].map((item) => (
+								<div key={item} className={styles.lable_value}>
 									<Placeholder width="100%" height="32px" />
 									<Placeholder width="100%" height="32px" style={{ marginTop: '8px' }} />
 								</div>
@@ -96,7 +96,7 @@ function BadgeDescription(props) {
 
 								<p className={styles.value}>
 									{badgeDetail.achievement_date
-										? format(badgeDetail?.achievement_date, 'dd MMM YYYY')
+										? format(badgeDetail.achievement_date, 'dd MMM YYYY')
 										: 'Not achieved yet'}
 								</p>
 							</div>
@@ -114,7 +114,6 @@ function BadgeDescription(props) {
 
 										<p className={styles.value}>
 											{next_badge.badge_name}
-											{/* //Todo: stars arent available in the response */}
 										</p>
 									</div>
 								</div>

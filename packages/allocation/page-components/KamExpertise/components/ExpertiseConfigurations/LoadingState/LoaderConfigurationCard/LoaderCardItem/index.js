@@ -14,6 +14,7 @@ function LoaderCardItem() {
 					<div className={styles.label}><Placeholder width="40px" /></div>
 					<div className={styles.value}><Placeholder widht="10px" /></div>
 				</div>
+
 				<div>
 					<div className={styles.label}><Placeholder width="40px" /></div>
 					<div className={styles.value}><Placeholder widht="40px" /></div>
