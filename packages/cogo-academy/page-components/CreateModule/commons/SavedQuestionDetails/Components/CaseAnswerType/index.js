@@ -10,8 +10,10 @@ function CaseAnswerType({ item, caseToShow }) {
 			</div>
 
 			{item.id === caseToShow
-				? item?.test_case_study_questions.map((item1) => (
-					<div className={styles.text} key={item1.id}>{startCase(item1.question_type)}</div>
+				? item?.test_case_study_questions.map((caseStudyQuestion) => (
+					<div className={styles.text} key={caseStudyQuestion.id}>
+						{startCase(caseStudyQuestion.question_type)}
+					</div>
 				))
 				: null}
 		</div>

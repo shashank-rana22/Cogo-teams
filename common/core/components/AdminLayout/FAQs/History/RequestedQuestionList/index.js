@@ -1,5 +1,5 @@
 import { Pill, Tooltip } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import { isEmpty, format } from '@cogoport/utils';
 import { useEffect, useMemo } from 'react';
 
 import Loader from '../../Loader';
@@ -82,6 +82,10 @@ function RequestedQuestionList({
 	);
 
 	if (loading) return <Loader />;
+
+	if (isEmpty(list)) {
+		return <div className={styles.empty_state_wrapper}>No Requested Question Found</div>;
+	}
 
 	return (
 		<div className={styles.container}>

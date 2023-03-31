@@ -2,10 +2,8 @@ import { Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import getCorrectAnswers from '../../utils/getCorrectAnswers';
-import getCorrectAnswersCombined from '../../utils/getCorrectAnswersCombined';
+import AnswerKey from '../AnswerKey';
 import ButtonsComponent from '../ButtonsComponent';
-import CaseAnswerKey from '../CaseAnswerKey';
 import CaseAnswerType from '../CaseAnswerType';
 import CaseQuestion from '../CaseQuestion';
 
@@ -73,31 +71,7 @@ const useGetTableColumns = ({
 			Header   : 'Answer Key',
 			id       : 'answer_key',
 			accessor : (item) => (
-				<section>
-					{item?.question_type !== 'case_study' ? (
-						<Tooltip
-							content={(
-								<div className={styles.flex_column}>
-									{getCorrectAnswersCombined(
-										{
-											correctOptions: (item?.test_question_answers || []).filter(
-												(item1) => item1.is_correct,
-											),
-										} || [],
-									).map((item1) => (
-										<div className={styles.answer}>{item1}</div>
-									))}
-								</div>
-							)}
-						>
-							<div className={styles.answer_key}>
-								{getCorrectAnswers({ answers: item?.test_question_answers })}
-							</div>
-						</Tooltip>
-					) : (
-						<CaseAnswerKey item={item} caseToShow={caseToShow} />
-					)}
-				</section>
+				<AnswerKey item={item} caseToShow={caseToShow} />
 			),
 		},
 		{

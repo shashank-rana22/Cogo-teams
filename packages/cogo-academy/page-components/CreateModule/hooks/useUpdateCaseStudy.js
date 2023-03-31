@@ -12,7 +12,8 @@ function useUpdateCaseStudy({
 	setAllKeysSaved,
 	getTestQuestionTest,
 	questionSetId,
-	reset = () => [],
+	reset = () => {},
+	setQuestionToDelete = () => [],
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -39,6 +40,7 @@ function useUpdateCaseStudy({
 			if (action === 'delete') {
 				setAllKeysSaved(true);
 				setEditDetails({});
+				setQuestionToDelete({});
 				reset();
 			}
 		} catch (err) {

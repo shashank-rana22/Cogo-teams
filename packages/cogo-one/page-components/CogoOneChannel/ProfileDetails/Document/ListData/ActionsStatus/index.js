@@ -2,8 +2,6 @@ import { IcCFtick } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
-import documentTypeMapping from '../../../../../../configurations/document-type-mapping';
-
 import styles from './styles.module.css';
 
 function ActionsStatus({
@@ -20,7 +18,7 @@ function ActionsStatus({
 		setShowModal(val?.document_type);
 		setSingleItem(val);
 	};
-	const checkDocumentType = document_type === 'undefined';
+	const validDocument = ['gst', 'pan', 'undefined'].includes(document_type);
 
 	const reqDocuments = useMemo(() => {
 		const documents = [];
@@ -42,33 +40,37 @@ function ActionsStatus({
 
 	return (
 		<div>
-			{!isEmpty(orgId) && (
-				<div className={styles.upload_container}>
-					<div className={styles.document_name}>
-						{!checkDocumentType && (
-							startCase(document_type)
+
+			<div className={styles.upload_container}>
+				<div className={styles.document_name}>
+					{document_type !== 'undefined'
+						&& startCase(document_type)}
+				</div>
+				{(!isEmpty(orgId) && validDocument) && (
+					<div>
+						{!isEmpty(reqDocuments) ? (
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.manually}
+								onClick={() => handleClick(item)}
+							>
+								Upload Manually
+							</div>
+						) : (
+							<div className={styles.upload}>
+								{document_type !== 'undefined' && (
+									<>
+										<IcCFtick className={styles.ic_tick} />
+										Uploaded
+									</>
+								)}
+							</div>
 						)}
 					</div>
-					{!isEmpty(reqDocuments) ? (
-						<div
-							role="presentation"
-							className={styles.manually}
-							onClick={() => handleClick(item)}
-						>
-							Upload Manually
-						</div>
-					) : (
-						<div className={styles.upload}>
-							{(document_type !== 'undefined' && documentTypeMapping(document_type) !== 'Shipment') && (
-								<>
-									<IcCFtick width={15} height={15} className={styles.ic_tick} />
-									Uploaded
-								</>
-							)}
-						</div>
-					)}
-				</div>
-			)}
+				)}
+			</div>
+
 		</div>
 	);
 }

@@ -1,7 +1,9 @@
 import { Button } from '@cogoport/components';
 import { TextAreaController, SelectController, InputController, ChipsController } from '@cogoport/forms';
+import { useMemo } from 'react';
 
 import useUpdateCaseStudyQuestion from '../../hooks/useUpdateCaseStudyQuestion';
+import getRequiredControl from '../../utils/getRequiredControl';
 
 import getControls from './controls';
 import OptionsComponent from './OptionsComponent';
@@ -27,7 +29,7 @@ function SingleQuestionComponent({
 	setAllKeysSaved,
 	mode,
 }) {
-	const controls = getControls({ mode });
+	const controls = useMemo(() => getControls({ mode }), [mode]);
 
 	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion({
 		questionSetId,
@@ -64,36 +66,36 @@ function SingleQuestionComponent({
 		<div className={styles.container}>
 			<div
 				className={`${styles.first_row} ${
-					errors?.[controls[0].name] ? styles[`${controls[0].name}_err`] : null
-				} ${errors?.[controls[1].name] ? styles[`${controls[1].name}_err`] : null}`}
+					errors?.question_text ? styles.question_text_err : null
+				} ${errors?.question_type ? styles.question_type_err : null}`}
 			>
 				<InputController
 					className={`${
-						errors?.[controls[0].name] ? styles[`${controls[0].name}_err`] : null
+						errors?.question_text ? styles.question_text_err : null
 					} ${styles.input_container}`}
-					{...controls[0]}
+					{...getRequiredControl({ controls, name: 'question_text' })}
 					control={control}
-					name={`${name}.${index}.${controls[0].name}`}
+					name={`${name}.${index}.question_text`}
 				/>
 
 				<SelectController
 					className={`${styles.question_type} ${
-						errors?.[controls[1].name]
-							? styles[`${controls[1].name}_err`]
+						errors?.question_type
+							? styles.question_type_err
 							: null
 					}`}
-					{...controls[1]}
+					{...getRequiredControl({ controls, name: 'question_type' })}
 					control={control}
-					name={`${name}.${index}.${controls[1].name}`}
+					name={`${name}.${index}.question_type`}
 				/>
 			</div>
 
 			<OptionsComponent
 				control={control}
-				{...controls[2]}
+				{...getRequiredControl({ controls, name: 'options' })}
 				register={register}
 				errors={errors?.options || {}}
-				name={`${name}.${index}.${controls[2].name}`}
+				name={`${name}.${index}.options`}
 				editAnswerDetails={editAnswerDetails}
 				mode={mode}
 				isNewQuestion={isNewQuestion}
@@ -106,16 +108,20 @@ function SingleQuestionComponent({
 					<div className={styles.control}>
 						<ChipsController
 							control={control}
-							{...controls[3]}
-							name={`${name}.${index}.${controls[3].name}`}
+							{...getRequiredControl({ controls, name: 'difficulty_level' })}
+							name={`${name}.${index}.difficulty_level`}
 						/>
-						{errors?.[controls[3].name] && <div className={styles.error_msg}>This is required</div>}
+						{errors?.difficulty_level && <div className={styles.error_msg}>This is required</div>}
 					</div>
 				</div>
 			) : null}
 
 			<div className={styles.textarea_container}>
-				<TextAreaController control={control} {...controls[4]} name={`${name}.${index}.${controls[4].name}`} />
+				<TextAreaController
+					control={control}
+					{...getRequiredControl({ controls, name: 'explanation' })}
+					name={`${name}.${index}.explanation`}
+				/>
 			</div>
 
 			{type === 'case_study' && mode !== 'view' ? (

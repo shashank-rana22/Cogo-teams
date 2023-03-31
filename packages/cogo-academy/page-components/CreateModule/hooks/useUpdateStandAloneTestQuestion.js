@@ -17,6 +17,7 @@ function useUpdateStandAloneTestQuestion({
 	setEditDetails,
 	setAllKeysSaved,
 	reset = () => {},
+	setQuestionToDelete = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -60,6 +61,7 @@ function useUpdateStandAloneTestQuestion({
 
 			setAllKeysSaved(true);
 			setEditDetails({});
+			setQuestionToDelete({});
 			reset();
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));

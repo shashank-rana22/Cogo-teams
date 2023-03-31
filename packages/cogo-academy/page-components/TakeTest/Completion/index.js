@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { useRouter, Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 
 import useGetUserSubmissionStats from '../hooks/useGetUserSubmissionStats';
@@ -63,17 +63,17 @@ function Completion() {
 	return (
 		<div id="container" className={styles.container}>
 			<div className={styles.header}>
-				<img
-					style={{ width: 32, height: 32, marginRight: 16 }}
+				<Image
+					className={styles.image}
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti.svg"
 					alt=""
 				/>
 				<h2>Congratulations!</h2>
 			</div>
+
 			<h2>You have completed the test!</h2>
 
 			<div className={styles.stats_and_time}>
-
 				<div className={styles.stats}>
 					{Object.values(STATS_MAPPING).map((stats_data) => {
 						const { title, value } = stats_data;

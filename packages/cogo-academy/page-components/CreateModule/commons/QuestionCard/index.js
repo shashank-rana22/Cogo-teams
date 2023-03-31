@@ -41,7 +41,6 @@ function QuestionCard({
 
 				<div className={styles.answer_text_container}>
 					{userAnswersArray.includes(answer_text) ? (
-
 						<Avatar
 							personName={user_name}
 							className={styles.avatar}
