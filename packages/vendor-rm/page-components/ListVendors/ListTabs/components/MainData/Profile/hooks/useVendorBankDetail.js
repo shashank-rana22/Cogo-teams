@@ -15,6 +15,8 @@ function useVendorBankDetail({
 		general : { query = {} },
 	} = useSelector((state) => state);
 
+	const [showAddbankModal, setShowAddbankModal] = useState(false);
+
 	const { vendor_id } = query;
 
 	const formProps = useForm();
@@ -27,8 +29,6 @@ function useVendorBankDetail({
 		handleSubmit,
 		getValues,
 	} = formProps;
-
-	const [showAddbankModal, setShowAddbankModal] = useState(false);
 
 	const ifscCode = watch('ifsc_code');
 
