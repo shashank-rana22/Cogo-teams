@@ -31,43 +31,6 @@ export const companyType = [
 	},
 ];
 
-export const DUE_IN = [
-	{
-		label : 'Not Due',
-		value : 'amount_not_due',
-		name  : 'amount_not_due',
-	},
-	{
-		label : '1-30 Days',
-		value : 'amount_1_30',
-		name  : 'amount_1_30',
-	},
-	{
-		label : '31-60 Days',
-		value : 'amount_31_60',
-		name  : 'amount_31_60',
-	},
-	{
-		label : '61-90 Days',
-		value : 'amount_61_90',
-		name  : 'amount_61_90',
-	},
-	{
-		label : '91-180 Days',
-		value : 'amount_91_180',
-		name  : 'amount_91_180',
-	},
-	{
-		label : '181-365 Days',
-		value : 'amount_181_365',
-		name  : 'amount_181_365',
-	},
-	{
-		label : '365+ Days',
-		value : 'amount_365',
-		name  : 'amount_365',
-	}];
-
 export const SALES_AGENT = [
 	{
 		label : 'Total Outstanding Amount',
@@ -313,3 +276,42 @@ export const INVOICE_STATUS = {
 	'Knocked Off'        : '#CDF7D4',
 	'Partially Utilized' : '#D9EAFD',
 };
+
+export const SERVICE_PROVIDER = [
+	{ value: 'All', label: 'All' },
+	{ value: 'ENTERPRISE', label: 'ES' },
+	{ value: 'IE', label: 'IE' },
+	{ value: 'CP', label: 'CP' },
+];
+
+export const SHIPMENT_TYPE_OPTIONS = [
+	{ value: 'FCL_FREIGHT', label: 'FCL' },
+	{ value: 'LCL_FREIGHT', label: 'LCL' },
+	{ value: 'AIR_FREIGHT', label: 'AIR' },
+	{ value: 'TRAILER_FREIGHT', label: 'Container Transportation' },
+	{ value: 'FTL_FREIGHT', label: 'FTL' },
+	{ value: 'LTL_FREIGHT', label: 'LTL' },
+	{ value: 'HAULAGE_FREIGHT', label: 'Rail Haulage' },
+	{ value: 'FCL_CUSTOMS', label: 'FCL Customs' },
+	{ value: 'LCL_CUSTOMS', label: 'LCL Customs' },
+	{ value: 'AIR_CUSTOMS', label: 'AIR Customs' },
+];
+
+export const SALES_FUNNEL_OPTIONS = [
+	{ value: 'JAN', label: 'January' },
+	{ value: 'FEB', label: 'February' },
+	{ value: 'MAR', label: 'March' },
+	{ value: 'APR', label: 'April' },
+	{ value: 'MAY', label: 'May' },
+	{ value: 'JUN', label: 'June' },
+	{ value: 'JUL', label: 'July' },
+	{ value: 'AUG', label: 'August' },
+	{ value: 'SEP', label: 'September' },
+	{ value: 'OCT', label: 'October' },
+	{ value: 'NOV', label: 'November' },
+	{ value: 'DEC', label: 'December' },
+
+];
+
+export const months = ['JAN', 'FEB', 'MAR',
+	'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
