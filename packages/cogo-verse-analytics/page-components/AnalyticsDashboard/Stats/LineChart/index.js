@@ -82,7 +82,7 @@ function Charts({ GraphData = [], hideChart = false }) {
             	legendPosition : 'middle',
 					}}
 					tooltip={({ point = {} }) => {
-            	const { borderColor, data, label } = point;
+            	const { borderColor, data } = point;
 
             	return (
 	<div className={styles.tool_tip}>
