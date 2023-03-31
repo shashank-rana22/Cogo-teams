@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
-import React from 'react';
 
 import Child from './Child';
 

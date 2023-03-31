@@ -22,6 +22,7 @@ function useUpdateKamScores(props) {
 		'Trade Expertise':trade = [], 'Customer Expertise':customer = [], 'Misc Expertise':misc = [],
 		'Commodity Expertise': commodity = [],
 	} = list;
+
 	const valueObj = {
 		trade_expertise_id     : trade[0]?.id,
 		customer_expertise_id  : customer[0]?.id,
@@ -58,6 +59,7 @@ function useUpdateKamScores(props) {
 			await trigger({
 				data: payload,
 			});
+
 			setEditMode(false);
 			listrefetch();
 			refetch();

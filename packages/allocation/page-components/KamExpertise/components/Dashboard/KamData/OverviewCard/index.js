@@ -81,10 +81,10 @@ function OverviewCard(props) {
 				</div>
 
 				<div className={styles.display_flex}>
-					<span> Most Points in </span>
+					<span> Most Points in</span>
 
 					<span style={{ display: 'flex', fontWeight: 'bold' }}>
-						{data.max_condition}
+						{data.max_condition || 'NA'}
 					</span>
 				</div>
 			</Card.Description>

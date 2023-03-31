@@ -8,7 +8,6 @@ function LoaderConfigurationCard() {
 		<div className={styles.card_container}>
 			<div className={styles.card_header}>
 				<div className={styles.left_header}>
-
 					<Placeholder width="150px" height="24px" />
 
 					<div style={{ marginRight: '28px' }} />
@@ -18,7 +17,7 @@ function LoaderConfigurationCard() {
 			</div>
 
 			<div className={styles.cards}>
-				{[1, 2, 3, 4].map((item) => <LoaderCardItem key={item.event} {...item} />)}
+				{[1, 2, 3, 4].map((item) => <LoaderCardItem key={item} />)}
 			</div>
 		</div>
 	);

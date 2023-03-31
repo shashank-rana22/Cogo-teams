@@ -42,17 +42,21 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 			second_completion,
 		} = formValues;
 
+		const SCORING_TYPE = {
+			percentage : milestones,
+			tat,
+			absolute   : [{
+				first_completion,
+				second_completion,
+			}],
+		};
+
 		try {
 			const payload = {
 				event_configuration_rule_mapping_id,
 				impact,
 				scoring_type,
-				scoring_criteria: (scoring_type === 'percentage' && milestones)
-				|| (scoring_type === 'tat' && tat)
-				|| (scoring_type === 'absolute' && [{
-					first_completion,
-					second_completion,
-				}]) || [],
+				scoring_criteria: SCORING_TYPE[scoring_type] || [],
 			};
 
 			await Promise.all([trigger({ data: payload }), reset()]);

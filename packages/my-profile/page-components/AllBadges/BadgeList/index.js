@@ -1,18 +1,21 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
-import { IcCStar } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import { IcMStarfull } from '@cogoport/icons-react';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
+import BADGE_STARS_CLASSNAME_MAPPING from '../../../constants/badge-stars-mapping';
 
 import styles from './styles.module.css';
 
-function StarCollection() {
+function StarCollection({ badgeClassName }) {
 	return (
 		<div className={styles.stars_container}>
 			{[1, 2, 3].map((itm) => (
 				<div key={itm}>
-					<IcCStar width={12} stroke="#FFDF33" />
+					<IcMStarfull
+						width={10}
+						fill={itm <= badgeClassName ? '#FFDF33' : '#BDBDBD'}
+					/>
 				</div>
 			))}
 		</div>
@@ -43,25 +46,21 @@ function BadgeList(props) {
 				<p className={styles.heading}>Badge List</p>
 
 				<div className={styles.badges_container}>
-					{
-                        badgesGot?.map((item) => (
-	<div key={item.id} className={styles.container}>
-		<div className={styles.image_container}>
-			<Placeholder height={64} width={64} />
-		</div>
-	</div>
-                        ))
-                    }
+					{badgesGot?.map((item) => (
+						<div key={item.id} className={styles.container}>
+							<div className={styles.image_container}>
+								<Placeholder height={64} width={64} />
+							</div>
+						</div>
+					))}
 
-					{
-                        badgesNotGot?.map((item) => (
-	<div key={item.id} className={styles.container}>
-		<div className={styles.image_container}>
-			<Placeholder height={64} width={64} />
-		</div>
-	</div>
-                        ))
-                }
+					{badgesNotGot?.map((item) => (
+						<div key={item.id} className={styles.container}>
+							<div className={styles.image_container}>
+								<Placeholder height={64} width={64} />
+							</div>
+						</div>
+					))}
 				</div>
 			</div>
 		);
@@ -72,45 +71,49 @@ function BadgeList(props) {
 			<p className={styles.heading}>Badge List</p>
 
 			<div className={styles.badges_container}>
-				{
-                    badgesGot?.map((item) => (
-	<Tooltip content={item.medal}>
-		<div
-			key={item.id}
-			className={styles.container}
-			role="presentation"
-			style={{ cursor: 'pointer' }}
-			onClick={() => showBadgeDetails(item)}
-		>
-			<div className={styles.image_container}>
-				<img className={styles.badge} src={item?.image_url} alt="" />
-			</div>
+				{badgesGot?.map((item) => {
+					const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[item.medal]?.upper_limit;
 
-			<StarCollection />
-		</div>
-	</Tooltip>
-                    ))
-                }
+					return (
+						<Tooltip content={`${item.badge_name} ${startCase(item.medal || '')}`}>
+							<div
+								key={item.id}
+								className={styles.container}
+								role="presentation"
+								style={{ cursor: 'pointer' }}
+								onClick={() => showBadgeDetails(item)}
+							>
+								<div className={styles.image_container}>
+									<img className={styles.badge} src={item?.image_url} alt="" />
+								</div>
 
-				{
-                    badgesNotGot?.map((item) => (
-	<Tooltip content={item.medal}>
-		<div
-			key={item.id}
-			style={{ opacity: 0.2 }}
-			className={styles.container}
-			role="presentation"
-			onClick={() => showBadgeDetails(item)}
-		>
-			<div className={styles.image_container}>
-				<img className={styles.badge} src={item?.image_url} alt="" />
-			</div>
+								<StarCollection badgeClassName={badgeClassName} />
+							</div>
+						</Tooltip>
+					);
+				})}
 
-			<StarCollection />
-		</div>
-	</Tooltip>
-                    ))
-                }
+				{badgesNotGot?.map((item) => {
+					const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[item.medal]?.upper_limit;
+
+					return (
+						<Tooltip content={`${item.badge_name} ${startCase(item.medal || '')}`}>
+							<div
+								key={item.id}
+								style={{ opacity: 0.2 }}
+								className={styles.container}
+								role="presentation"
+								onClick={() => showBadgeDetails(item)}
+							>
+								<div className={styles.image_container}>
+									<img className={styles.badge} src={item?.image_url} alt="" />
+								</div>
+
+								<StarCollection badgeClassName={badgeClassName} />
+							</div>
+						</Tooltip>
+					);
+				})}
 			</div>
 		</div>
 	);

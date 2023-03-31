@@ -20,8 +20,10 @@ const expertiseTypes = {
 
 function useCreateKamLevel(props) {
 	const { dataLength = '', setCreateKam, refetch } = props;
+
 	const formProps = useForm();
 	const { reset } = formProps;
+
 	const [{ loading:createLoading = false }, trigger] = useAllocationRequest({
 		method  : 'POST',
 		url     : 'kam_expertise_configuration',
@@ -29,7 +31,7 @@ function useCreateKamLevel(props) {
 	}, { manual: true });
 
 	const onCreate = async (formValues) => {
-		const formResponse = [];
+		const configDetails = [];
 
 		Object.keys(formValues).forEach((key) => {
 			let expertise_type = key;
@@ -41,7 +43,7 @@ function useCreateKamLevel(props) {
 				threshold_score_type = expertiseTypes[key].threshold_score_type;
 			}
 
-			formResponse.push({
+			configDetails.push({
 				expertise_type,
 				threshold_score,
 				threshold_score_type,
@@ -52,13 +54,14 @@ function useCreateKamLevel(props) {
 			const payload = {
 				transition_level      : dataLength + 2,
 				configuration_type    : 'kam',
-				configuration_details : formResponse,
+				configuration_details : configDetails,
 			};
 			await trigger({
 				data: payload,
 			});
+
 			setCreateKam(false);
-			reset({ formResponse: '' });
+			reset({ configDetails: '' });
 			refetch();
 			Toast.success('Level Added!');
 		} catch (error) {

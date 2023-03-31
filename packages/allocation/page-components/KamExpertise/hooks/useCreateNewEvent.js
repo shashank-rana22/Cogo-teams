@@ -18,8 +18,6 @@ function useCreateNewEvent(props) {
 		authkey : 'post_allocation_kam_expertise_event_configuration',
 	}, { manual: true });
 
-	// const formProps = useForm();
-
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
 
@@ -40,7 +38,7 @@ function useCreateNewEvent(props) {
 		});
 
 		if (payloadAttribute.length === 0) {
-			Toast.error('Enter Attribute Value');
+			Toast.default('Enter Attribute Value');
 		} else {
 			try {
 				const payload = {
@@ -76,7 +74,6 @@ function useCreateNewEvent(props) {
 
 	return {
 		onSave,
-		// newEventFormProps: formProps,
 		getAddRuleControls,
 		loading,
 	};

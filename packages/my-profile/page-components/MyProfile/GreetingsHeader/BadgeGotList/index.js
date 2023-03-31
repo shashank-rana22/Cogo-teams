@@ -1,6 +1,8 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
-import { IcCStar } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { IcMStarfull } from '@cogoport/icons-react';
+import { startCase, isEmpty } from '@cogoport/utils';
+
+import BADGE_STARS_CLASSNAME_MAPPING from '../../../../constants/badge-stars-mapping';
 
 import styles from './styles.module.css';
 
@@ -11,7 +13,7 @@ function BadgeGotList(props) {
 		return (
 			<div className={styles.badge_list}>
 				{badgesGot.map((data, i) => ((i < 3) ? (
-					<Tooltip content={data.medal}>
+					<Tooltip content={`${data.badge_name} ${startCase(data.medal || '')}`}>
 						<div key={data.id} className={styles.badge_container}>
 							<Placeholder height={60} width={60} style={{ borderRadius: '8px' }} />
 						</div>
@@ -26,11 +28,9 @@ function BadgeGotList(props) {
 		return (
 			<div>
 				<div className={styles.empty}>
-					{
-					[1, 2, 3].map((item) => (
+					{[1, 2, 3].map((item) => (
 						<div key={item} className={styles.empty_boxes} />
-					))
-				}
+					))}
 				</div>
 
 				<div className={styles.empty_text}>Sorry, you dont have any badges.</div>
@@ -40,11 +40,10 @@ function BadgeGotList(props) {
 
 	return (
 		<div className={styles.badge_list}>
-
 			{badgesGot.map((data, i) => (
 				(i < 3)
 					? (
-						<Tooltip content={data.medal}>
+						<Tooltip content={`${data.badge_name} ${startCase(data.medal || '')}`}>
 							<div key={data.id} className={styles.badge_container}>
 								<div className={styles.badge}>
 									<img src={data.image_url} alt="badge" />
@@ -53,7 +52,12 @@ function BadgeGotList(props) {
 								<div className={styles.stars}>
 									{[1, 2, 3].map((item) => (
 										<div key={item}>
-											<IcCStar width={10} stroke="#FFDF33" />
+											<IcMStarfull
+												width={10}
+												fill={item
+													<= BADGE_STARS_CLASSNAME_MAPPING[data?.medal]?.upper_limit
+													? '#FFDF33' : '#BDBDBD'}
+											/>
 										</div>
 									))}
 								</div>

@@ -61,7 +61,7 @@ const useGetKamExpertiseVersionDetials = (props) => {
 		setMode,
 		showModal,
 		setShowModal,
-		CreateModalLoading: loading,
+		createModalLoading: loading,
 		getVersion,
 	};
 };

@@ -46,23 +46,18 @@ function CreateEvent(props) {
 		formState: { errors },
 	} = formProps;
 
+	const createEventMode = isEmpty(eventListData?.data);
+
 	return (
 		<div>
 			<div className={styles.create_new_event}>
-				{isEmpty(eventListData?.data) ? (
-					<p>
-						Create New Event
-					</p>
-				) : (
-
-					<p>
-						Update Event
-					</p>
-				)}
+				<p>
+					{createEventMode ? 'Create' : 'Update' }
+					New Event
+				</p>
 			</div>
 
 			<div className={styles.form_container}>
-
 				<div className={styles.rule_and_attribute}>
 					<div className={styles.add_rule_container}>
 						<div className={styles.add_rule_text}>
@@ -70,7 +65,7 @@ function CreateEvent(props) {
 						</div>
 
 						<section className={styles.rule_form_container}>
-							{ getAddRuleControls.map((controlItem) => {
+							{getAddRuleControls.map((controlItem) => {
 								const el = { ...controlItem };
 
 								const Element = getFieldController(el.type);
@@ -87,9 +82,8 @@ function CreateEvent(props) {
 												key={el.name}
 												control={control}
 												id={`${el.name}_input`}
-												disabled={(!isEmpty(eventListData?.data))
-													|| ((isEmpty(eventListData?.data))
-														? createLoading : updateLoading)}
+												disabled={!createEventMode
+													|| (createEventMode ? createLoading : updateLoading)}
 											/>
 										</div>
 
@@ -107,7 +101,6 @@ function CreateEvent(props) {
 						attributeList={attributeList}
 						formProps={formProps}
 					/>
-
 				</div>
 
 				<div className={styles.btn_container}>
@@ -117,7 +110,7 @@ function CreateEvent(props) {
 						themeType="tertiary"
 						style={{ marginRight: '10px' }}
 						onClick={onClose}
-						disabled={(isEmpty(eventListData?.data)) ? createLoading : updateLoading}
+						disabled={(createEventMode) ? createLoading : updateLoading}
 					>
 						Cancel
 					</Button>
@@ -125,8 +118,8 @@ function CreateEvent(props) {
 					<Button
 						size="md"
 						type="submit"
-						onClick={(isEmpty(eventListData?.data)) ? handleSubmit(onSave) : handleSubmit(onUpdate)}
-						loading={(isEmpty(eventListData?.data)) ? createLoading : updateLoading}
+						onClick={createEventMode ? handleSubmit(onSave) : handleSubmit(onUpdate)}
+						loading={createEventMode ? createLoading : updateLoading}
 					>
 						Save
 					</Button>

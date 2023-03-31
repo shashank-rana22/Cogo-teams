@@ -18,10 +18,6 @@ const useGetExpertiseParameters = (activeCollapse = '') => {
 		},
 	}, { manual: false });
 
-	// useEffect(() => {
-	// 	refetch();
-	// }, [responseId, refetch]);
-
 	return {
 		listExpertiseParams : data,
 		expertiseLoading    : loading,

@@ -36,11 +36,13 @@ function EventListItem({ data, index, setEventListData }) {
 					{' '}
 					<b style={{ marginLeft: 4 }}>{startCase(expertiseType || '')}</b>
 				</p>
+
 				<p className={styles.info_tag}>
 					Event Name :
 					{' '}
 					<b style={{ marginLeft: 4 }}>{startCase(conditionName || '')}</b>
 				</p>
+
 				<p className={styles.info_tag}>
 					Description :
 					{' '}
