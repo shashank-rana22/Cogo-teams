@@ -37,7 +37,6 @@ function Freeze({ item, refetch }) {
 			setShowConfirmationModal(false);
 			refetch();
 		} catch (error) {
-			console.log(error);
 			Toast.error(error?.response?.data?.message);
 		}
 	};
@@ -79,22 +78,21 @@ function Freeze({ item, refetch }) {
 
 				</Modal>
 			)}
-			{!isLocked && (
-				<div className={styles.container}>
-					<Button onClick={showModal}>
-						Freeze
-					</Button>
-				</div>
+			{!isLocked
+				? (
+					<div className={styles.container}>
+						<Button onClick={showModal}>
+							Freeze
+						</Button>
+					</div>
+				) :		(
+					<div className={styles.container}>
+						<Button disabled themeType="secondary">
+							Freezed
+						</Button>
+					</div>
+				)}
 
-			)}
-			{isLocked && (
-				<div className={styles.container}>
-					<Button disabled themeType="secondary">
-						Freezed
-					</Button>
-				</div>
-
-			)}
 		</>
 	);
 }

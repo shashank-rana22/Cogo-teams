@@ -6,7 +6,7 @@ import StyledTable from '../../common/StyledTable';
 import useArchive from '../../hooks/useArchive';
 import { serviceTypeOptions } from '../constant';
 
-import { ARCHIVE_DECLARED, ARCHIVE_MONTH_ACCRUED, ARCHIVE_MONTH_BOOKED } from './constant';
+import { ARCHIVE_DECLARED, ARCHIVE_MONTH_ACCRUED, ARCHIVE_MONTH_BOOKED } from './configuration';
 import Freeze from './Freeze';
 import MonthInfo from './MonthInfo';
 import styles from './styles.module.css';
@@ -148,7 +148,7 @@ function Archive({ setShowTab }) {
 
 				{(apiData?.list || drillData?.list || loading) && (
 					<div>
-						{toggleValue === 'declared' ? (
+						{toggleValue === 'declared' && (
 							<div className={styles.table_container}>
 								<StyledTable
 									page={page}
@@ -167,20 +167,7 @@ function Archive({ setShowTab }) {
 									filters={globalFilters}
 								/>
 							</div>
-						) : (
-							<div className={styles.table_container}>
-								{/* <StyledTable
-								// page={page}
-								// total={total}
-								// pageSize={pageSize}
-								data={particularMonth ? drillData?.list : apiData?.list}
-								// columns={accrualColumn(getTableBodyCheckbox, getTableHeaderCheckbox)}
-								// loading={shipmentLoading}
-								setFilters={setGlobalFilters}
-								filters={globalFilters}
-							/> */}
-							</div>
-						)}
+						) }
 					</div>
 				)}
 			</div>
