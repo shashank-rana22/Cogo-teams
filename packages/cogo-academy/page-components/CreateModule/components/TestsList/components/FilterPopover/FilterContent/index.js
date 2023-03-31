@@ -17,7 +17,7 @@ function FilterContent({
 			{controls.map((item) => {
 				const { label, type, name } = item || {};
 
-				if (name === 'status' && activeTab === 'question_set') {
+				if (name === 'current_status' && activeTab === 'question_set') {
 					return null;
 				}
 

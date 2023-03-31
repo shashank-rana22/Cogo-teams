@@ -6,21 +6,23 @@ const controls = [
 		type     : 'async-select',
 		params   : {
 			filters: {
-				entity_types : ['cogoport'],
-				status       : 'active',
+				entity_types   : ['cogoport'],
+				current_status : 'active',
 			},
 			page_limit: 10,
 		},
 	},
 	{
 		label    : 'Status',
-		name     : 'status',
+		name     : 'current_status',
 		asyncKey : 'partners',
 		type     : 'select',
 		options  : [
-			{ label: 'Active', value: 'active' },
+			{ label: 'Active', value: 'active_test' },
 			{ label: 'Draft', value: 'draft' },
 			{ label: 'Published', value: 'published' },
+			{ label: 'Expired', value: 'expired' },
+			{ label: 'Upcoming', value: 'upcoming' },
 		],
 	},
 ];
