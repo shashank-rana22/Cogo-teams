@@ -794,7 +794,7 @@ const navigationMappingAdmin = {
 				key           : 'business_finance-account_receivables',
 				title         : 'AR',
 				href          : '/v2/business-finance/account-receivables/[active_tab]',
-				as            : '/v2/business-finance/account-receivables/outstanding',
+				as            : '/v2/business-finance/account-receivables/dashboard',
 				type          : 'link',
 				main_apis     : ['list_organizations'],
 				possible_apis : apis.account_receivables,
