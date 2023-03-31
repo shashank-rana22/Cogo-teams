@@ -1,6 +1,7 @@
 import { Input, Popover } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight, IcMArrowRotateRight, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import FilterComponents from '../FilterComponents';
 import LoadingState from '../LoadingState';
@@ -28,11 +29,14 @@ function MessageList(messageProps) {
 		modalType = '',
 		handleScroll = () => {},
 		tagOptions = [],
-		updatePin,
 		userId,
 		sortedPinnedChatList = [],
+		firestore,
 	} = messageProps;
+	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 
+	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
+	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -75,8 +79,7 @@ function MessageList(messageProps) {
 					&& <div className={styles.filters_applied} />}
 				</div>
 			</div>
-
-			{ isEmpty(messagesList) && isEmpty(sortedPinnedChatList) && !messagesLoading ? (
+			{ isEmpty(messagesList) && isPinnedChatEmpty && !messagesLoading ? (
 				<div className={styles.list_container}>
 					<div className={styles.empty_state}>
 						No Messages Yet..
@@ -84,24 +87,40 @@ function MessageList(messageProps) {
 				</div>
 			) : (
 				<div className={styles.list_container} onScroll={handleScroll}>
-					<div className={styles.pinned_chats_div}>
-						{(sortedPinnedChatList || []).map((item) => (
-							<MessageCardData
-								item={item}
-								activeCardId={activeCardId}
-								userId={userId}
-								setActiveMessage={setActiveMessage}
-								updatePin={updatePin}
-							/>
-						))}
-					</div>
+					{!isPinnedChatEmpty && (
+						<>
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.pinned_chat_flex}
+								onClick={() => setOpenPinnedChats((p) => !p)}
+							>
+								<ActiveIcon className={styles.icon} />
+								<div className={styles.pin_text}>pinned chats</div>
+							</div>
+							{openPinnedChats && (
+								<div className={styles.pinned_chats_div}>
+									{(sortedPinnedChatList || []).map((item) => (
+										<MessageCardData
+											item={item}
+											activeCardId={activeCardId}
+											userId={userId}
+											setActiveMessage={setActiveMessage}
+											firestore={firestore}
+										/>
+									))}
+								</div>
+							)}
+						</>
+					)}
+					<div className={styles.recent_text}>Recent</div>
 					{(messagesList || []).map((item) => (
 						<MessageCardData
 							item={item}
 							activeCardId={activeCardId}
 							userId={userId}
 							setActiveMessage={setActiveMessage}
-							updatePin={updatePin}
+							firestore={firestore}
 						/>
 					))}
 					{messagesLoading && <LoadingState />}

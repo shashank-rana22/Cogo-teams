@@ -6,7 +6,6 @@ const sortChats = (listData, userId) => {
 		const {
 			pinnedTime:{ [userId]:prevChatPinTime = 0 } = {},
 		} = pinnedMessagesData[a];
-
 		const {
 			pinnedTime:{ [userId]:presentChatPinTime = 0 } = {},
 

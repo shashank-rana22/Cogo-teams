@@ -82,7 +82,7 @@ function CogoOne() {
 	};
 
 	const {
-		listData = {},
+		chatsData = {},
 		setActiveMessage = () => {},
 		activeMessageCard = {},
 		setAppliedFilters = () => {},
@@ -93,7 +93,6 @@ function CogoOne() {
 		firstLoading,
 		updateLeaduser,
 		handleScroll,
-		updatePin,
 	} = useListChats({
 		firestore,
 		userId,
@@ -136,7 +135,6 @@ function CogoOne() {
 							activeMessageCard={activeMessageCard}
 							activeTab={activeTab}
 							activeVoiceCard={activeVoiceCard}
-							firestore={firestore}
 							updateLeaduser={updateLeaduser}
 							activeCardId={activeCardId}
 						/>
@@ -167,7 +165,7 @@ function CogoOne() {
 				setActiveTab={setActiveTab}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
-				listData={listData}
+				chatsData={chatsData}
 				appliedFilters={appliedFilters}
 				setAppliedFilters={setAppliedFilters}
 				fetchworkPrefernce={fetchworkPrefernce}
@@ -186,9 +184,9 @@ function CogoOne() {
 				handleScroll={handleScroll}
 				setModalType={setModalType}
 				modalType={modalType}
-				updatePin={updatePin}
 				tagOptions={tagOptions}
 				mailProps={mailProps}
+				firestore={firestore}
 			/>
 
 			<div className={styles.chat_details_continer}>

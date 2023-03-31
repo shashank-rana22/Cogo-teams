@@ -4,12 +4,13 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../../common/UserAvatar';
 import { PLATFORM_MAPPING, ECLAMATION_SVG } from '../../../../../constants';
+import updatePin from '../../../../../helpers/updatePin';
 import dateTimeConverter from '../../../../../utils/dateTimeConverter';
 import getActiveCardDetails from '../../../../../utils/getActiveCardDetails';
 
 import styles from './styles.module.css';
 
-function MessageCardData({ item = {}, activeCardId = '', userId = '', setActiveMessage, updatePin }) {
+function MessageCardData({ item = {}, activeCardId = '', userId = '', setActiveMessage, firestore }) {
 	const {
 		user_name = '',
 		organization_name = '',
@@ -36,10 +37,22 @@ function MessageCardData({ item = {}, activeCardId = '', userId = '', setActiveM
 	const orgName = (user_name?.toLowerCase() || '').includes('anonymous')
 		? startCase(PLATFORM_MAPPING[user_type] || '') : startCase(organization_name);
 
+	const updatePinnedChats = (e, type) => {
+		e.stopPropagation();
+		updatePin({
+			pinnedID    : id,
+			channelType : channel_type,
+			type,
+			firestore,
+			userId,
+		});
+	};
+
 	return (
 		<div
 			key={id}
-			role="presentation"
+			role="button"
+			tabIndex={0}
 			className={cl`
 						${styles.card_container} 
 						${checkActiveCard ? styles.active_card : ''} 
@@ -66,25 +79,11 @@ function MessageCardData({ item = {}, activeCardId = '', userId = '', setActiveM
 								{pinnedTime[userId] > 0
 									? (
 										<IcCPin
-											onClick={(e) => {
-												updatePin({
-													pinnedID    : id,
-													channelType : channel_type,
-													type        : 'unpin',
-												});
-												e.stopPropagation();
-											}}
+											onClick={(e) => updatePinnedChats(e, 'unpin')}
 										/>
 									) : (
 										<IcMPin
-											onClick={(e) => {
-												updatePin({
-													pinnedID    : id,
-													channelType : channel_type,
-													type        : 'pin',
-												});
-												e.stopPropagation();
-											}}
+											onClick={(e) => updatePinnedChats(e, 'pin')}
 										/>
 									)}
 							</div>

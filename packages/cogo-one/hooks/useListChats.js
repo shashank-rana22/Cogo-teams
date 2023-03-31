@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import {
@@ -51,9 +52,10 @@ const useListChats = ({
 		isLastPage           : false,
 		pinnedMessagesData   : {},
 	});
-	console.log('listData:', listData);
 
 	const { status = '', observer = '', chat_tags = '' } = appliedFilters || {};
+
+	const canShowPinnedChats = !(observer || chat_tags);
 
 	const snapshotCleaner = ({ ref }) => {
 		const tempRef = ref;
@@ -114,42 +116,44 @@ const useListChats = ({
 
 	), [searchQuery]);
 
-	const mountPinnedSnapShot = useCallback(async () => {
+	const mountPinnedSnapShot = useCallback(() => {
 		setLoading(true);
 		snapshotCleaner({ ref: pinSnapshotListener });
 		setListData((p) => ({ ...p, pinnedMessagesData: {} }));
-		const queryForPinnedChat = where('pinnedAgents', 'array-contains', userId);
-
-		const newChatsQuery = query(
-			omniChannelCollection,
-			queryForPinnedChat,
-			...queryForSearch,
-			...omniChannelQuery,
-		);
-
-		pinSnapshotListener.current = onSnapshot(
-			newChatsQuery,
-			(pinSnapShot) => {
-				const { resultList } = dataFormatter(pinSnapShot);
-				setListData((p) => ({ ...p, pinnedMessagesData: { ...resultList } }));
-				setLoading(false);
-			},
-		);
-
+		if (canShowPinnedChats) {
+			const queryForPinnedChat = where('pinnedAgents', 'array-contains', userId);
+			const newChatsQuery = query(
+				omniChannelCollection,
+				queryForPinnedChat,
+				...queryForSearch,
+				...omniChannelQuery,
+			);
+			pinSnapshotListener.current = onSnapshot(
+				newChatsQuery,
+				(pinSnapShot) => {
+					const { resultList } = dataFormatter(pinSnapShot);
+					setListData((p) => ({ ...p, pinnedMessagesData: { ...resultList } }));
+					setLoading(false);
+				},
+			);
+		}
 		return () => {
 			snapshotCleaner({ ref: pinSnapshotListener });
 		};
-	}, [omniChannelCollection, omniChannelQuery, userId, queryForSearch]);
+	}, [omniChannelCollection, omniChannelQuery, userId, queryForSearch, canShowPinnedChats]);
 
 	const mountUnreadCountSnapShot = useCallback(() => {
 		const queryForUnreadChats = status !== 'unread'
 			? [where('new_message_count', '>', 0), orderBy('new_message_count', 'desc')] : [];
+
 		snapshotCleaner({ ref: unreadCountSnapshotListner });
+
 		const countUnreadChatQuery = query(
 			omniChannelCollection,
 			...queryForUnreadChats,
 			...omniChannelQuery,
 		);
+
 		unreadCountSnapshotListner.current = onSnapshot(
 			countUnreadChatQuery,
 			(countUnreadChatSnapshot) => {
@@ -159,6 +163,7 @@ const useListChats = ({
 				}));
 			},
 		);
+
 		return () => {
 			snapshotCleaner({ ref: unreadCountSnapshotListner });
 		};
@@ -301,40 +306,8 @@ const useListChats = ({
 		}
 	};
 
-	const updatePin = async ({ pinnedID, channelType, type }) => {
-		const pinRoomData = doc(
-			firestore,
-			`${FIRESTORE_PATH[channelType]}/${pinnedID}`,
-		);
-
-		const document = await getDoc(pinRoomData);
-		const { pinnedTime = {}, pinnedAgents = [] } = document.data() || {};
-
-		let payload = {};
-		if (type === 'pin') {
-			payload = {
-				pinnedTime   : { ...pinnedTime, [userId]: Date.now() },
-				pinnedAgents : [...pinnedAgents, userId],
-			};
-		} else {
-			payload = {
-				pinnedTime   : { ...pinnedTime, [userId]: 0 },
-				pinnedAgents : pinnedAgents.filter((pinned) => pinned !== userId),
-			};
-		}
-
-		try {
-			await updateDoc(pinRoomData, {
-				updated_at: Date.now(),
-				...payload,
-			});
-		} catch (error) {
-			// console.log(error);
-		}
-	};
-
 	return {
-		listData: {
+		chatsData: {
 			messagesList     : sortedUnpinnedList || [],
 			unReadChatsCount : listData?.unReadChatsCount,
 			sortedPinnedChatList,
@@ -349,7 +322,6 @@ const useListChats = ({
 		updateLeaduser,
 		firstLoading,
 		handleScroll,
-		updatePin,
 	};
 };
 

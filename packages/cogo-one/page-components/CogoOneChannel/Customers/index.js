@@ -23,7 +23,7 @@ function Customers({
 	activeTab,
 	setActiveTab = () => {},
 	toggleStatus,
-	listData = {},
+	chatsData = {},
 	setAppliedFilters = () => {},
 	appliedFilters = {},
 	fetchworkPrefernce = () => {},
@@ -43,9 +43,9 @@ function Customers({
 	handleScroll = () => {},
 	setModalType = () => {},
 	modalType = {},
-	updatePin = () => {},
 	tagOptions = [],
 	mailProps = {},
+	firestore,
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
@@ -54,7 +54,7 @@ function Customers({
 		messagesList = [],
 		unReadChatsCount = 0,
 		sortedPinnedChatList = [],
-	} = listData || {};
+	} = chatsData || {};
 
 	const {
 		replyMailApi = () => {},
@@ -98,9 +98,9 @@ function Customers({
 		setModalType,
 		modalType,
 		tagOptions,
-		updatePin,
 		userId,
 		sortedPinnedChatList,
+		firestore,
 	};
 
 	const voiceProps = {

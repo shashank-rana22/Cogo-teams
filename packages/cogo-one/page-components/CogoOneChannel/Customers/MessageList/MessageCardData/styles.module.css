@@ -11,10 +11,6 @@
 	background: #fbf7ec;
 }
 
-.active_card:hover {
-	background: #fbf7ec;
-}
-
 .card {
 	padding: 8px;
 	cursor: pointer;
