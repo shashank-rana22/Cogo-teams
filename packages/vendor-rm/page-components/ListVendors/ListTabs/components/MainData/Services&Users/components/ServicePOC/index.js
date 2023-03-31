@@ -49,7 +49,7 @@ function ServicePOC({
 
 			{(allServicesAndPocs || []).map((singleServicePoc) => (
 				<>
-					<div className={styles.head}>
+					<div key={singleServicePoc.id} className={styles.head}>
 						{Object.keys(fieldsToShow).map((item) => (
 							<div className={styles.item}>
 								<span className={styles.top}>

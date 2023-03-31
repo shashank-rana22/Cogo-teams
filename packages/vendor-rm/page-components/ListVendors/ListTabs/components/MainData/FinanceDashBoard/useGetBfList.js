@@ -7,7 +7,7 @@ import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-import styles from '../FinanceDashBoard/styles.module.css';
+import styles from './styles.module.css';
 
 const useGetBfList = () => {
 	const {
@@ -42,10 +42,11 @@ const useGetBfList = () => {
 		fetchList();
 	};
 
+	console.log(data, 'datadtadtda');
 	const columns = [
 		{
 			Header   : <div className={styles.table_header}>INVOICE ID</div>,
-			id       : 'a',
+			id       : 'id',
 			accessor : ({ billId = '' }) => (
 				<section>
 					{' '}
@@ -56,7 +57,7 @@ const useGetBfList = () => {
 		},
 		{
 			Header   : <div className={styles.table_header}>Category</div>,
-			id       : 'b',
+			id       : 'category',
 			accessor : ({ category = '' }) => (
 				<section>
 					{startCase(category)}
@@ -65,28 +66,18 @@ const useGetBfList = () => {
 		},
 		{
 			Header   : <div className={styles.table_header}>PAYMENT</div>,
-			id       : 'c',
-			accessor : ({ ledgerTotal = '' }) => (
+			id       : 'payment',
+			accessor : ({ ledgerTotal = '', ledgerCurrency }) => (
 				<section>
-					{ledgerTotal}
-
-				</section>
-			),
-		},
-		{
-			Header   : <div className={styles.table_header}>OPEN INVOICES</div>,
-			id       : 'd',
-			accessor : () => (
-				<section>
+					{ledgerCurrency}
 					{' '}
-					12(INR 300,000,00)
-
+					{ledgerTotal}
 				</section>
 			),
 		},
 		{
 			Header   : <div className={styles.table_header}>CREATED AT</div>,
-			id       : 'g',
+			id       : 'created_at',
 			accessor : ({ createdDate = '' }) => (
 				<section>
 					{' '}
@@ -100,20 +91,15 @@ const useGetBfList = () => {
 		},
 		{
 			Header   : '',
-			id       : 'jh',
+			id       : 'view_more',
 			accessor : () => (
 				<section>
-					{' '}
 					<Button
 						size="md"
 						themeType="secondary"
 					>
-						{' '}
 						VIEW MORE
-						{' '}
-
 					</Button>
-					{' '}
 				</section>
 			),
 		},

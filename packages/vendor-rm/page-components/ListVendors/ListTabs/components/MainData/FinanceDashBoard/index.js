@@ -3,9 +3,9 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../../../commons/components/EmptyState';
-import useGetBfList from '../hooks/useGetBfList';
 
 import styles from './styles.module.css';
+import useGetBfList from './useGetBfList';
 
 function FinanceDashBoard() {
 	const {
