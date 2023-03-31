@@ -24,6 +24,18 @@
 	margin: 8px 0;
 }
 
+.sort_arrow {
+	margin-left: 4px;
+	transition: 0.3s;
+	transform: rotate(90deg);
+}
+
+.sort_title {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
 .modal_container {
 	background-color: none;
 

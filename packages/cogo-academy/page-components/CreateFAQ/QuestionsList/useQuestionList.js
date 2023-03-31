@@ -1,6 +1,6 @@
 import { Pill, Button, Popover } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
-import { IcMDelete } from '@cogoport/icons-react';
+import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
@@ -23,9 +23,10 @@ const addedQuestionsColumns = ({
 	onClickEditButton,
 	deactivateQuestion,
 	onClickViewButton = () => {},
-
 	deleteitem,
 	setDeleteitem = () => {},
+	sortType,
+	setSortType = () => {},
 }) => [
 	{
 		Header   : 'QUESTIONS',
@@ -58,8 +59,19 @@ const addedQuestionsColumns = ({
 		) : '-'),
 	},
 	{
-		Header   : 'LAST UPDATED AT',
-		accessor : (items) => {
+		id     : 'LAST UPDATED AT',
+		Header : (
+			<div role="presentation" className={styles.sort_title} onClick={() => { setSortType((prev) => !prev); }}>
+				LAST UPDATED AT
+				<IcMArrowNext
+					height={14}
+					width={14}
+					className={styles.sort_arrow}
+					style={{ transform: sortType ? 'rotate(270deg)' : '' }}
+				/>
+			</div>
+		),
+		accessor: (items) => {
 			const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
 			return (
 				<div>
@@ -276,16 +288,20 @@ const useQuestionList = () => {
 	};
 
 	const columns = activeList !== 'requested'
-		? addedQuestionsColumns({
+		? Object.entries(addedQuestionsColumns({
 			activeList,
 			onClickEditButton,
 			deactivateQuestion,
 			onClickViewButton,
 			deleteitem,
 			setDeleteitem,
-		})
-		: requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
-
+			sortType,
+			setSortType,
+		})).map(([column, obj]) => ({
+			id       : column,
+			Header   : obj.Header,
+			accessor : obj.accessor,
+		})) : requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
 	const { list: data = [], requested_question_count = 0, ...paginationData } = questionList || {};
 
 	return {
