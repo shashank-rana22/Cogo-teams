@@ -8,7 +8,7 @@ import getPocRole from '../../utils/getPocRole';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-const filedsToShow = {
+const fieldsToShow = {
 	category           : 'Service category',
 	sub_category       : 'Service Sub-Category',
 	cogoport_office_id : 'Cogoport Office',
@@ -50,12 +50,14 @@ function ServicePOC({
 			{(allServicesAndPocs || []).map((singleServicePoc) => (
 				<>
 					<div className={styles.head}>
-						{Object.keys(filedsToShow).map((item) => (
-							<div className={styles.fl}>
+						{Object.keys(fieldsToShow).map((item) => (
+							<div className={styles.item}>
 								<span className={styles.top}>
-									{filedsToShow[item]}
+									{fieldsToShow[item]}
+									{' '}
 									:
 								</span>
+
 								<span className={styles.bottom}>
 									{item === 'cogoport_office_id'
 										? getOfficeLocation(singleServicePoc?.cogoport_office_id)
@@ -68,27 +70,27 @@ function ServicePOC({
 					<div className={styles.content}>
 						{(singleServicePoc?.poc_details || []).map((poc) => (
 							<>
-								{
-									(Object.entries(poc) || []).map((item) => {
-										if (item[0] === 'id') {
-											return null;
-										}
-										return (
-											<div className={styles.label_value_container}>
-												<div className={styles.top}>
-													{pocsMapping[item[0]]}
-												</div>
+								{(Object.entries(poc) || []).map((item) => {
+									if (item[0] === 'id') {
+										return null;
+									}
 
-												<div className={styles.bottom}>
-													{item?.[0] === 'poc_role'
-														? getPocRole(item?.[1]) : item?.[1]}
-												</div>
+									return (
+										<div className={styles.label_value_container}>
+											<div className={styles.top}>
+												{pocsMapping[item[0]]}
 											</div>
-										);
-									})
-								}
+
+											<div className={styles.bottom}>
+												{item?.[0] === 'poc_role'
+													? getPocRole(item?.[1]) : item?.[1]}
+											</div>
+										</div>
+									);
+								})}
 							</>
-						)) }
+						))}
+
 						<div
 							role="presentation"
 							className={styles.edit_icon_container}

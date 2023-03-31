@@ -29,6 +29,7 @@ function ShowPocForm({
 			placement="center"
 		>
 			<Modal.Header title="Add POC" />
+
 			<Modal.Body>
 				<FormLayout
 					fields={updatedControls}
@@ -36,10 +37,12 @@ function ShowPocForm({
 					control={control}
 				/>
 			</Modal.Body>
+
 			<Modal.Footer>
 				<div className={styles.button_container}>
 					<Button
 						size="md"
+						type="button"
 						themeType="tertiary"
 						disabled={loading}
 						style={{ marginRight: 12 }}
@@ -50,13 +53,13 @@ function ShowPocForm({
 
 					<Button
 						size="md"
+						type="submit"
 						themeType="primary"
 						disabled={loading}
 						onClick={handleSubmit(onSubmit)}
 					>
 						Add POC
 					</Button>
-
 				</div>
 			</Modal.Footer>
 		</Modal>

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 
 function useGetListVendorPocServices() {
 	const { general: { query } } = useSelector((state) => state);
@@ -12,11 +12,11 @@ function useGetListVendorPocServices() {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_vendor_poc_services',
 		method : 'GET',
-	}, { manual: false });
+	}, { manual: !vendor_id });
 
-	const getListVendorPocServices = useCallback(async () => {
+	const getListVendorPocServices = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					vendor_id,
 				},
@@ -32,7 +32,7 @@ function useGetListVendorPocServices() {
 
 	const { services_pocs = [] } = data || {};
 
-	const allServicesAndPocs = (services_pocs || []).map((servicePoc) => {
+	const allServicesAndPocs = useMemo(() => (services_pocs || []).map((servicePoc) => {
 		const { vendor_pocs = [] } = servicePoc || {};
 
 		const details = (vendor_pocs || []).map((poc) => {
@@ -63,7 +63,7 @@ function useGetListVendorPocServices() {
 		};
 
 		return finalData;
-	});
+	}), [services_pocs]);
 
 	return {
 		loading,
