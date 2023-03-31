@@ -6,7 +6,7 @@ import { getElementController } from '../../../../../utils/get-element-controls'
 import styles from './styles.module.css';
 
 function OrgDetailsModal({
-	setShow = () => {}, show = '', setUploadData = () => {}, uploadData, formProps, modalControls,
+	setShow = () => {}, show = '', uploadData, formProps, modalControls,
 
 }) {
 	const NEXT_PAGE_MAPPING = {
@@ -17,7 +17,7 @@ function OrgDetailsModal({
 
 	console.log('upload', uploadData);
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
-	console.log('okform::', formProps.getValues());
+	// console.log('okform::', formProps.getValues());
 	const onClose = () => {
 		setShow('');
 		// setUploadData({
@@ -31,6 +31,8 @@ function OrgDetailsModal({
 		setShow(NEXT_PAGE_MAPPING[uploadData?.ingestion_type]);
 		reset();
 	};
+
+	console.log('okokokoko::', modalControls);
 
 	function LeadDiv() {
 		return (
@@ -185,7 +187,7 @@ function OrgDetailsModal({
 					Back
 
 				</Button>
-				<Button onClick={(onSubmit)}>Next</Button>
+				<Button onClick={handleSubmit(onSubmit)}>Next</Button>
 			</Modal.Footer>
 		</Modal>
 	);

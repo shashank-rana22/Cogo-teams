@@ -16,7 +16,6 @@ function UploadModal({
 	// const [multiFileValue, setMultiFileValue] = useState([]);
 	// const [loading, setLoading] = useState(false);
 
-	
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 
 	console.log('form::::::', formProps.getValues());

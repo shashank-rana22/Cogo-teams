@@ -47,7 +47,6 @@ const controls = [
 		options     : PARTNER_OPTIONS,
 		isClearable : true,
 		rules       : { required: 'Partner is Required' },
-
 	},
 	{
 		name           : 'agent',

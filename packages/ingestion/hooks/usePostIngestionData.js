@@ -39,10 +39,6 @@ function usePostIngestionData() {
 		method : 'POST',
 	}, { manual: true });
 
-	const payload = {
-
-	};
-
 	const formProps = useForm();
 
 	const { watch } = formProps;
@@ -52,13 +48,12 @@ function usePostIngestionData() {
 		// console.log('ok', e);
 		// console.log('kkk::', data);
 
-		const pay = Object.entries({ ...e, ...data }).filter(([key, value]) => key !== 'finalModalHeading')
+		const payload = Object.entries({ ...e, ...data }).filter(([key, value]) => key !== 'finalModalHeading')
 			.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
-		// console.log('okkok', pay);
 		try {
 			await trigger({
-				data: pay,
+				data: payload,
 			});
 
 			setShow('');
@@ -75,10 +70,11 @@ function usePostIngestionData() {
 	const mutatedControls = controls.map((control) => {
 		let newControl = { ...control };
 
+		console.log('newControl', newControl);
+
 		// Todo ask on this bug
 		if (newControl.name === 'agent') {
 			if (!isEmpty(watchCountry)) {
-				// console.log('watchCountry', watchCountry);
 				newControl = {
 					...newControl,
 					// disabled : false,
@@ -86,14 +82,12 @@ function usePostIngestionData() {
 						filters: {
 							...newControl?.params?.filters,
 							country_id : watchCountry || undefined,
-							partner    : watchPartner || undefined,
+							partner_id : watchPartner || undefined,
 						},
 					},
 				};
 			}
 		}
-
-		// console.log('newCont::', newControl);
 
 		return newControl;
 	});
