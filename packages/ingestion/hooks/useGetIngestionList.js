@@ -2,72 +2,46 @@ import { Button, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { startCase, format, isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { startCase, format } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import ReUploadModal from '../page-components/Ingestion/TableSection/Modals/ReUploadModal';
 import UploadListModal from '../page-components/Ingestion/TableSection/Modals/UploadListModal';
 import styles from '../styles.module.css';
-import controls from '../utils/controls';
-
-import useGetUploadList from './useGetUploadList';
 
 function useGetIngestionList() {
-	// const [currentPage, setCurrentPage] = useState(1);
-
 	const [row, setRow] = useState({});
+
+	const [params, setParams] = useState({
+		page: 1,
+	});
 	const [{ data, loading = false }] = useRequest({
 		method : 'get',
 		url    : 'list_ingestion_requests',
-		// params : {
-		// 	Month  : Month || undefined,
-		// 	Year   : Year || undefined,
-		// 	UserID : userId || undefined,
-		// },
+		params,
 	}, { manual: false });
+
+	const formProps = useForm();
 
 	const [tableModal, setTableModal] = useState();
 
+	// useEffect(() => {
+	// 	setParams({
+	// 		...params,
+	// 		q    : searchValue || undefined,
+	// 		page : 1,
+	// 	});
+	// // eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [searchValue]);
+
 	const tableListModal = (_id) => {
-		console.log(_id, 'id');
 		setRow(_id);
 		setTableModal('uploadList');
-		// const { list = [], loading } = useGetUploadList(_id);
 	};
-
-	// const
-	// const [ingestionData, setIngestionData] = useState({
-
-	// 	performed_by_type : 'agent',
-	// 	partner_id        : '',
-	// 	option1           : '',
-	// 	// orgDetails : {
-	// 	// 	isCp    : null,
-	// 	// 	country : '',
-	// 	// 	partner : '',
-	// 	// },
-	// 	// isCp              : null,
-	// 	country           : '',
-	// 	partner           : '',
-	// 	option2           : '',
-	// 	option3           : '',
-	// 	finalModalHeading : '',
-
-	// 	country_id         : 'fe92b7c7-9481-4a3b-8d79-df9a7bf94a4e',
-	// 	user_id            : '01141cde-f56d-49f4-934b-f6111c3e0678',
-	// 	file_url           : '',
-	// 	file_name          : 'KJBHDJKS',
-	// 	ingestion_type     : 'organization',
-	// 	description        : 'testing the ingestion apis',
-	// 	is_channel_partner : false,
-	// 	agent_id           : '',
-
-	// });
 
 	const CONSTANT_KEYS = {
 		REUPLOAD    : 'reUpload',
 		UPLOAD_LIST : 'uploadList',
-
 	};
 
 	const {
@@ -80,13 +54,6 @@ function useGetIngestionList() {
 
 	};
 
-	// Todo use later with api logic for color of pill
-	// const ERROR_MAPPING = {
-	// 	error      : 'red',
-	// 	processing : 'yellow',
-	// 	uploaded   : 'green',
-	// };
-
 	const UPLOAD_STATUS_MAPPING = {
 		Uploading : 'yellow',
 		active    : 'green',
@@ -95,7 +62,6 @@ function useGetIngestionList() {
 
 	const Component = TABLE_MODAL_MAPPING[tableModal] || null;
 
-	// const loading = false;
 	const dummyData = {
 		page        : 1,
 		page_limit  : 8,
@@ -260,9 +226,11 @@ function useGetIngestionList() {
 		{
 			key      : 're_upload',
 			Header   : 'RE-UPLOAD',
+			// Todo change this later true condition
 			accessor : ({ error }) => (
 				<div className={styles.re_upload}>
-					{error ? (
+
+					{true ? (
 						<Button onClick={() => setTableModal('reUpload')} size="md" themeType="secondary">
 							{' '}
 							{/* <IcMDownload style={{ marginRight: '4px' }} />
@@ -290,25 +258,26 @@ function useGetIngestionList() {
 
 	];
 
-	// const onPageChange = (pageNumber) => {
-	// 	setCurrentPage(pageNumber);
-	// };
+	const onPageChange = (pageNumber) => {
+		setParams((previousParams) => ({
+			...previousParams,
+			page: pageNumber,
+		}));
+	};
 
 	return {
 		columns,
-		dummyData,
-		// onPageChange,
-		// currentPage,
+		// dummyData,
+		onPageChange,
 		loading,
-		// ingestionData,
-		// setIngestionData,
-		// formProps,
-		// modalControls: mutatedControls,
 		Component,
 		tableModal,
 		setTableModal,
 		data,
 		row,
+		formProps,
+		params,
+		setParams,
 	};
 }
 

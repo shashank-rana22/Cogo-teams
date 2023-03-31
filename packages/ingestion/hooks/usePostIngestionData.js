@@ -11,27 +11,12 @@ function usePostIngestionData() {
 	const [show, setShow] = useState('');
 	const profileData = useSelector(({ profile }) => profile);
 
-	console.log('profileData::', profileData);
-
 	const [uploadData, setUploadData] = useState({
-		performed_by_type : 'agent',
-		// partner_id        : '',
-		// orgDetails : {
-		// 	isCp    : null,
-		// 	country : '',
-		// 	partner : '',
-		// },
-		// isCp              : null,
-		finalModalHeading : '', // Todo change logic for this
-
-		// country_id         : '',
+		performed_by_type  : 'agent',
+		finalModalHeading  : '',
 		user_id            : profileData?.user?.id,
-		// file_url           : '',
-		// file_name          : '',
 		ingestion_type     : '',
-		// description        : '',
 		is_channel_partner : false,
-		// agent_id           : '',
 	});
 
 	const [{ loading }, trigger] = useRequest({
@@ -44,11 +29,8 @@ function usePostIngestionData() {
 	const { watch } = formProps;
 
 	const onSubmit = async (e, data) => {
-		// console.log('finalone', { ...e, ...data });
-		// console.log('ok', e);
-		// console.log('kkk::', data);
-
-		const payload = Object.entries({ ...e, ...data }).filter(([key, value]) => key !== 'finalModalHeading')
+		const payload = Object.entries({ ...e, ...data })
+			.filter(([key, value]) => key !== 'finalModalHeading')
 			.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
 		try {
@@ -70,9 +52,6 @@ function usePostIngestionData() {
 	const mutatedControls = controls.map((control) => {
 		let newControl = { ...control };
 
-		console.log('newControl', newControl);
-
-		// Todo ask on this bug
 		if (newControl.name === 'agent') {
 			if (!isEmpty(watchCountry)) {
 				newControl = {

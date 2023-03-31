@@ -2,20 +2,14 @@ import { Button } from '@cogoport/components';
 import { IcMDownload, IcMUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import useGetIngestionList from '../../../hooks/useGetIngestionList';
 import usePostIngestionData from '../../../hooks/usePostIngestionData';
 
-import Filters from './Filters';
 import ChooseModal from './Modals/ChooseModal/index';
 import OrgDetailsModal from './Modals/OrgDetailsModal/index';
 import ProviderSelectModal from './Modals/ProviderSelectModal';
 import TemplateModal from './Modals/TemplateModal';
 import UploadModal from './Modals/UploadModal';
 import styles from './styles.module.css';
-// chooseModal      : false,
-// 		moreDetailsModal : false,
-// 		csvSelectModal   : false,
-// 		csvUploadModal   : false,
 
 const CONSTANT_KEYS = {
 	// LANDING     : '',
@@ -48,6 +42,7 @@ function Header() {
 		setShow = () => {},
 		onSubmit = () => {},
 		loading,
+
 	} = usePostIngestionData();
 	// console.log('formProps::::::::::', formProps);
 	// const componentProps = {
@@ -61,7 +56,7 @@ function Header() {
 
 	const Component = INGESTION_COMPONENTS_MAPPING[show] || null;
 
-	console.log('showModal::', show);
+	// console.log('showModal::', show);
 	return (
 		<div>
 			<h1>
@@ -99,12 +94,7 @@ function Header() {
 					Upload
 
 				</Button>
-				{/* <Button onClick={() => console.log('show', show)}>ekjdvnef</Button> */}
 			</div>
-
-			<Filters />
-
-			{/* <ChooseModal show={show} setShow={setShow} /> */}
 
 			{
 				Component && (

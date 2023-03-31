@@ -2,14 +2,13 @@ import { Modal, Button } from '@cogoport/components';
 import { IcMUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import usePostIngestionData from '../../../../../hooks/usePostIngestionData';
 import { getElementController } from '../../../../../utils/get-element-controls';
 import uploadControls from '../../../../../utils/upload-controls';
 
 import styles from './styles.module.css';
 
 function UploadModal({
-	setShow = () => {}, show = '', setUploadData = () => {}, uploadData, formProps,
+	setShow = () => {}, show = '', uploadData, formProps,
 	onSubmit = () => {}, loading,
 }) {
 	// const [fileValue, setFileValue] = useState();
@@ -18,18 +17,10 @@ function UploadModal({
 
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 
-	console.log('form::::::', formProps.getValues());
+	// console.log('form::::::', formProps.getValues());
 
 	const onChoose = (event) => {
-		// setUploadData({
-		// 	...uploadData,
-		// 	description : event?.description,
-		// 	file_name   : event?.name,
-		// 	file_url    : event?.upload,
-		// });
-
 		onSubmit(event, uploadData);
-		console.log('ingestion data finalModal:', uploadData);
 		// setShow('');
 	};
 

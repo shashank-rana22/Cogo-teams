@@ -61,15 +61,22 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = ()
 		FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_CP;
 	}
 
+	const IS_CHANNEL_PARTNER_MAPPING = {
+		IE : false,
+		SP : true,
+	};
+
 	const onChoose = (input) => {
+		// console.log('input', input);
 		setUploadData({
 			...uploadData,
-			finalModalHeading: input,
+			finalModalHeading  : input?.key,
+			is_channel_partner : IS_CHANNEL_PARTNER_MAPPING[input?.type],
 		});
 		reset();
 		setShow('orgDetails');
 	};
-	console.log('ingestionData::', uploadData);
+	// console.log('ingestionData::', uploadData);
 
 	return (
 		<Modal size="md" show={show === 'providerSelect'} onClose={onClose} placement="center">
@@ -89,7 +96,7 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = ()
 						<Button
 							themeType="secondary"
 							onClick={() => {
-								onChoose(FINAL_MODAL_MAPPING[response?.type]);
+								onChoose(response);
 							}}
 							key={response?.key}
 							style={{ width: '80%', height: '44px' }}

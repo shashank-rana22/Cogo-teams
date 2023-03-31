@@ -1,13 +1,27 @@
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useRequest } from '@cogoport/request';
 
-function usePostReUpload() {
+function usePostReUpload({ row = {} }) {
+	const [{ loading }, trigger] = useRequest({
+		url    : 'create_ingestion',
+		method : 'POST',
+	}, { manual: true });
+
+	const onSubmit = async () => {
+		try {
+			console.log('row', row);
+			Toast.success('Re-upload Complete');
+		} catch (error) {
+			console.log('error', error);
+		}
+	};
 	const formProps = useForm();
-	const gg = 'dkjbvdhf';
 
-	console.log('formProps:::::', formProps);
 	return {
 		formProps,
-		gg,
+		onSubmit,
+		loading,
 	};
 }
 

@@ -5,22 +5,21 @@ const uploadControls = [
 		label       : 'Name',
 		type        : 'text',
 		placeholder : 'Name',
-		isClearable : true,
+		// isClearable : true,
 		rules       : { required: 'Name is Required' },
 	},
 	{
 		name        : 'description',
 		label       : 'Description',
 		type        : 'textArea',
-		placeholder : 'Description',
+		// placeholder : 'Description',
 		isClearable : true,
-
+		// style       : { height: '180px', border: '1px solid #BDBDBD', borderRadius: 2, marginTop: '20px' },
 	},
 	{
 		name       : 'file_url',
 		label      : 'Upload',
 		type       : 'file',
-		// multiple   : 'multiple',
 		// placeholder : 'Upload Here...',
 		// isClearable : true,
 		rules      : { required: 'File is Required' },
@@ -28,13 +27,6 @@ const uploadControls = [
 		accept     : '.csv',
 
 	},
-	// {
-	// 	name        : 'is_cp',
-	// 	label       : 'Is Channel Partner',
-	// 	type        : 'select',
-	// 	options     : IsCpOptions,
-	// 	placeholder : 'Type Here...',
-	// },
 
 ];
 

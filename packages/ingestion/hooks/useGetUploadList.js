@@ -2,6 +2,7 @@ import { Button, Pill } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import styles from '../styles.module.css';
 
@@ -12,30 +13,27 @@ function useGetUploadList(id) {
 		processing : 'red',
 	};
 
-	// console.log('idididi', id);
+	const [params, setParams] = useState({
+		page    : 1,
+		filters : {
+			ingestion_request_id: id,
+		},
+	});
 
 	const [{ data, loading = false }] = useRequest({
 		method : 'get',
 		url    : 'list_ingestion_error_request_files',
-		params : {
-			// Month  : Month || undefined,
-			// Year   : Year || undefined,
-			// UserID : userId || undefined,
-			filters: {
-				ingestion_request_id: id,
-			},
-		},
-		// params : {
-		// 	Month  : Month || undefined,
-		// 	Year   : Year || undefined,
-		// 	UserID : userId || undefined,
-		// },
+		params,
+
 	}, { manual: false });
 
-	const onPageChange = () => {
-
+	const onPageChange = (pageNumber) => {
+		setParams((previousParams) => ({
+			...previousParams,
+			page: pageNumber,
+		}));
 	};
-	const currentPage = 1;
+	// const currentPage = 1;
 	const dummyData = {
 		page        : 1,
 		page_limit  : 8,
@@ -261,7 +259,7 @@ function useGetUploadList(id) {
 		columns,
 		dummyData,
 		onPageChange,
-		currentPage,
+		// currentPage,
 		data,
 		loading,
 	};

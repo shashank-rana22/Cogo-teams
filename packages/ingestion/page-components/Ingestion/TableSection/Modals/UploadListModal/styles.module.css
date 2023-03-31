@@ -3,6 +3,7 @@
 }
 
 .table {
+
     margin: 20px 0;
 	background-color: #fff;
 	box-shadow: 0 0 16px rgb(44 62 80 / 10%);
@@ -16,11 +17,11 @@
 	}
 }
 
-.pagination_container {
+/* .pagination_container {
     width: 100%;
     display: flex;
     justify-content: end;
-}
+} */
 
 .empty {
     height: '120px';

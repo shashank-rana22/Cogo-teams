@@ -4,25 +4,37 @@ import { isEmpty } from '@cogoport/utils';
 import EmptyState from '../../../common/EmptyState';
 import useGetIngestionList from '../../../hooks/useGetIngestionList';
 
+import Filters from './Filters';
 import styles from './styles.module.css';
 
 function TableSection() {
 	const {
-		columns, dummyData, onPageChange, currentPage, loading, Component, setTableModal, tableModal, data, row,
+		columns,
+		onPageChange,
+		loading,
+		Component,
+		setTableModal,
+		tableModal,
+		data,
+		row,
+		formProps,
+		params,
+		setParams,
 	} = useGetIngestionList();
 
-	const { list, page = 0, page_limit, total_count } = data || {};
+	const { list, page = 0, page_limit = 0, total_count = 0 } = data || {};
 
-	if (isEmpty(list)) {
+	if (isEmpty(list) && !loading) {
 		return (
 			<div className={styles.empty}>
 				<EmptyState height="300px" width="200px" />
 			</div>
-
 		);
 	}
 	return (
 		<div className={styles.table_main_container}>
+
+			<Filters setParams={setParams} params={params} formProps={formProps} />
 
 			<Table
 				className={styles.table}
@@ -34,10 +46,10 @@ function TableSection() {
 			{total_count > page_limit && (
 				<div className={styles.pagination_container}>
 					<Pagination
-						type="table"
-						currentPage={currentPage}
+						type="number"
+						currentPage={page}
 						totalItems={total_count || 0}
-						pageSize={page_limit || 8}
+						pageSize={page_limit || 10}
 						onPageChange={onPageChange}
 					/>
 				</div>

@@ -1,16 +1,19 @@
 import { Modal, Button } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
+import { useState } from 'react';
+
+import useGetTemplate from '../../../../../hooks/useGetTemplate';
 
 import styles from './styles.module.css';
 
 function TemplateModal({ showModal, setShowModal = () => {} }) {
+	const [template, setTemplate] = useState('');
+	const { loading, getTemplateCsv } = useGetTemplate();
+
 	const onClose = () => {
 		setShowModal(false);
 	};
 
-	const onChoose = () => {
-
-	};
 	return (
 		<Modal size="md" show={showModal} onClose={onClose} placement="center">
 			<Modal.Header title={(
@@ -26,24 +29,29 @@ function TemplateModal({ showModal, setShowModal = () => {} }) {
 				<div className={styles.container}>
 					<Button
 						themeType="secondary"
-						onClick={() => onChoose('lead')}
+						onClick={() => getTemplateCsv('lead')}
 						style={{ height: '60px', width: '50%' }}
+						disabled={loading}
 					>
 						Leads Template
 
 					</Button>
 					<Button
 						themeType="secondary"
-						onClick={() => onChoose('cp')}
+						onClick={() => setTemplate('partner')}
 						style={{ height: '60px', width: '50%' }}
+						disabled={loading}
+
 					>
 						Channel Partner Template
 
 					</Button>
 					<Button
 						themeType="secondary"
-						onClick={() => onChoose('ie')}
+						onClick={() => setTemplate('organization')}
 						style={{ height: '60px', width: '50%' }}
+						disabled={loading}
+
 					>
 						Importer Exporter Template
 					</Button>

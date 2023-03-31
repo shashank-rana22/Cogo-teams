@@ -7,18 +7,13 @@ import reUploadControls from '../../../../../utils/re-upload-controls';
 
 import styles from './styles.module.css';
 
-function ReUploadModal({ tableModal, setTableModal = () => {} }) {
+function ReUploadModal({ tableModal, setTableModal = () => {}, row = {} }) {
 	const onClose = () => {
-		setTableModal(false);
+		setTableModal('');
 	};
 
-	const onChoose = () => {
+	const { formProps, onSubmit = () => {} } = usePostReUpload(row);
 
-	};
-
-	const { formProps } = usePostReUpload();
-
-	// console.log('formProps', formProps);
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 
 	return (
@@ -32,7 +27,6 @@ function ReUploadModal({ tableModal, setTableModal = () => {} }) {
 			)}
 			/>
 			<Modal.Body>
-				{/* <div className={styles.heading}>Download Templates among the following</div> */}
 				<div className={styles.container}>
 					<div className={styles.modal_container}>
 						{reUploadControls.map((controlItem) => {
@@ -63,7 +57,7 @@ function ReUploadModal({ tableModal, setTableModal = () => {} }) {
 			</Modal.Body>
 			<Modal.Footer>
 				<Button themeType="secondary" onClick={onClose}>Close</Button>
-				<Button themeType="primary" onClick={handleSubmit(onChoose)}>Submit</Button>
+				<Button themeType="primary" onClick={handleSubmit(onSubmit)}>Submit</Button>
 
 			</Modal.Footer>
 		</Modal>

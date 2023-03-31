@@ -15,9 +15,7 @@ function OrgDetailsModal({
 		lead         : 'providerSelect',
 	};
 
-	console.log('upload', uploadData);
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
-	// console.log('okform::', formProps.getValues());
 	const onClose = () => {
 		setShow('');
 		// setUploadData({
@@ -31,8 +29,6 @@ function OrgDetailsModal({
 		setShow(NEXT_PAGE_MAPPING[uploadData?.ingestion_type]);
 		reset();
 	};
-
-	console.log('okokokoko::', modalControls);
 
 	function LeadDiv() {
 		return (
@@ -77,20 +73,7 @@ function OrgDetailsModal({
 
 	const TopDiv = INGESTION_COMPONENTS_MAPPING[uploadData?.ingestion_type] || null;
 
-	// console.log('controls::', controls);
-
-	// console.log('formprops', formProps);
-
-	// console.log('inges', ingestionData);
-	// const IsCpOptions = [
-	// 	{ label: 'Yes', value: true },
-	// 	{ label: 'No', value: false },
-	// ];
-
-	// console.log('ingestionData::', ingestionData?.option1);
-
 	const onSubmit = () => {
-		// console.log('values', values);
 		setShow('uploadModal');
 		// setUploadData({
 		// 	...uploadData,

@@ -19,6 +19,11 @@ const ingestion = [
 		access_type  : 'private',
 		service_name : 'ingestion',
 	},
+	{
+		api          : 'get_ingestion_file_template',
+		access_type  : 'private',
+		service_name : 'ingestion',
+	},
 ];
 
 export default ingestion;

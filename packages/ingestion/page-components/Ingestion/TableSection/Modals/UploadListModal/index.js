@@ -8,20 +8,16 @@ import useGetUploadList from '../../../../../hooks/useGetUploadList';
 import styles from './styles.module.css';
 
 function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
-	console.log('row', row?.id);
-	const { columns, dummyData, onPageChange, currentPage, data } = useGetUploadList(row?.id);
-	const { list = [], page = 0, page_limit, total_count, loading } = data || {};
+	// console.log('row', row?.id);
+	const { columns, onPageChange, data, loading } = useGetUploadList(row?.id);
+	const { list = [], page = 0, page_limit, total_count } = data || {};
 	const onClose = () => {
-		setTableModal(false);
+		setTableModal('');
 	};
 
-	// const loading = false;
+	// Todo Test pagination here
 
-	const onChoose = () => {
-
-	};
-
-	if (isEmpty()) {
+	if (isEmpty(list) && !loading) {
 		return (
 			<Modal size="l" show={tableModal} onClose={onClose} placement="center">
 				<Modal.Header title={(
@@ -34,7 +30,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 				/>
 				<Modal.Body>
 					<div className={styles.empty}>
-						<EmptyState height="200px" width="600px" />
+						<EmptyState height="200px" width="720px" />
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
@@ -46,6 +42,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 
 		);
 	}
+
 	return (
 		<Modal size="l" show={tableModal} onClose={onClose} placement="center">
 			<Modal.Header title={(
@@ -56,6 +53,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 				</div>
 			)}
 			/>
+
 			<Modal.Body>
 				<div>
 					<Table
@@ -68,8 +66,8 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 					{total_count > page_limit && (
 						<div className={styles.pagination_container}>
 							<Pagination
-								type="table"
-								currentPage={currentPage}
+								type="number"
+								currentPage={page}
 								totalItems={total_count || 0}
 								pageSize={page_limit || 8}
 								onPageChange={onPageChange}
@@ -80,7 +78,6 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 			</Modal.Body>
 			<Modal.Footer>
 				<Button themeType="secondary" onClick={onClose}>Close</Button>
-				{/* <Button themeType="primary" onClick={onClose}>Re-Upload</Button> */}
 
 			</Modal.Footer>
 		</Modal>
