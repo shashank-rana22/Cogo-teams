@@ -119,15 +119,15 @@ const getNotAppeardColumns = () => [
 	{
 		Header   : 'NAME',
 		id       : 'name',
-		accessor : ({ name = '' }) => (
-			<section>{startCase(name)}</section>
+		accessor : ({ user = {} }) => (
+			<section>{startCase(user.name)}</section>
 		),
 	},
 	{
 		Header   : 'EMAIL',
 		id       : 'email',
-		accessor : ({ email = '' }) => (
-			<section>{email}</section>
+		accessor : ({ user = {} }) => (
+			<section>{user.email}</section>
 		),
 	},
 ];
