@@ -43,11 +43,14 @@ const useEditPoc = ({ data = {}, setShowEditPocModal = () => {}, refetchVendorIn
 					poc_role            : values?.poc_role,
 				},
 			});
+
 			setShowEditPocModal(false);
+
 			refetchVendorInfo();
+
 			Toast.success('Updated successfully');
 		} catch (error) {
-			Toast.error(getApiErrorString(error));
+			Toast.error(getApiErrorString(error.response.data));
 		}
 	};
 
