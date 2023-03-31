@@ -3,12 +3,16 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function DeleteModal({ showModal, setShowModal, handleDeleteQuestion }) {
+function DeleteModal({
+	questionToDelete,
+	setQuestionToDelete,
+	handleDeleteQuestion,
+}) {
 	return (
 		<Modal
 			size="sm"
-			show={!isEmpty(showModal)}
-			onClose={() => setShowModal({})}
+			show={!isEmpty(questionToDelete)}
+			onClose={() => setQuestionToDelete({})}
 			placement="center"
 			showCloseIcon={false}
 		>
@@ -19,7 +23,7 @@ function DeleteModal({ showModal, setShowModal, handleDeleteQuestion }) {
 					<Button
 						type="button"
 						themeType="secondary"
-						onClick={() => setShowModal({})}
+						onClick={() => setQuestionToDelete({})}
 					>
 						Cancel
 					</Button>
@@ -27,10 +31,7 @@ function DeleteModal({ showModal, setShowModal, handleDeleteQuestion }) {
 					<Button
 						type="button"
 						style={{ marginLeft: '8px' }}
-						onClick={() => {
-							handleDeleteQuestion({ item: showModal });
-							setShowModal({});
-						}}
+						onClick={() => { handleDeleteQuestion({ item: questionToDelete }); }}
 					>
 						Delete
 					</Button>

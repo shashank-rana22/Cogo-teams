@@ -1,8 +1,8 @@
 import { Tooltip } from '@cogoport/components';
 
 import getCorrectAnswers from '../../utils/getCorrectAnswers';
-import getCorrectAnswersCombined from '../../utils/getCorrectAnswersCombined';
 
+import CorrectAnswersCombined from './CorrectAnswersCombined';
 import styles from './styles.module.css';
 
 function CaseAnswerKey({ item, caseToShow }) {
@@ -16,18 +16,10 @@ function CaseAnswerKey({ item, caseToShow }) {
 
 			{item.id === caseToShow
 				? (
-					test_case_study_questions.map((item1) => (
-						<Tooltip content={(
-							<div className={styles.flex_column}>
-								{(getCorrectAnswersCombined({
-									correctOptions:
-									(item1?.test_question_answers || []).filter((item2) => item2.is_correct),
-								} || [])).map((item2) => <div className={styles.answer}>{item2}</div>)}
-							</div>
-						)}
-						>
+					test_case_study_questions.map((testCaseStudyQuestion) => (
+						<Tooltip content={<CorrectAnswersCombined testCaseStudyQuestion={testCaseStudyQuestion} />}>
 							<div className={styles.answer_key}>
-								{getCorrectAnswers({ answers: item1?.test_question_answers })}
+								{getCorrectAnswers({ answers: testCaseStudyQuestion?.test_question_answers })}
 							</div>
 						</Tooltip>
 					))

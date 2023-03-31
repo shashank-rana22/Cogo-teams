@@ -19,8 +19,8 @@ function ButtonsComponent({
 		handleEditQuestion,
 		handleDeleteQuestion,
 		loading,
-		showModal,
-		setShowModal,
+		questionToDelete,
+		setQuestionToDelete,
 		caseStudyLoading,
 	} = useSavedQuestionDetails({
 		setAllKeysSaved,
@@ -60,7 +60,7 @@ function ButtonsComponent({
 								disabled={!allKeysSaved}
 								loading={loading || caseStudyLoading}
 								onClick={() => {
-									setShowModal(item);
+									setQuestionToDelete(item);
 								}}
 							>
 								<IcMDelete />
@@ -79,8 +79,8 @@ function ButtonsComponent({
 			</Tooltip>
 
 			<DeleteModal
-				showModal={showModal}
-				setShowModal={setShowModal}
+				questionToDelete={questionToDelete}
+				setQuestionToDelete={setQuestionToDelete}
 				handleDeleteQuestion={handleDeleteQuestion}
 			/>
 		</div>

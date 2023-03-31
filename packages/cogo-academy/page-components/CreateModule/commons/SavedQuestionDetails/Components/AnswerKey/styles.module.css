@@ -1,0 +1,15 @@
+.flex_column {
+	display: flex;
+	flex-direction: column;
+}
+
+.answer_key {
+	max-width: 250px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.answer {
+	max-width: fit-content;
+}

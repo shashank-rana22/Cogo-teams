@@ -19,6 +19,7 @@ function SavedQuestionDetails({
 	setPage,
 	page,
 	mode,
+	page_limit,
 }) {
 	const columns = useGetTableColumns({
 		setAllKeysSaved,
@@ -54,7 +55,7 @@ function SavedQuestionDetails({
 						type="table"
 						currentPage={page}
 						totalItems={total_count}
-						pageSize={5}
+						pageSize={page_limit}
 						onPageChange={setPage}
 					/>
 				</div>

@@ -4,6 +4,7 @@ import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import getAlphabets from '../../../utils/getAlphabets';
+import getRequiredControl from '../../../utils/getRequiredControl';
 
 import styles from './styles.module.css';
 
@@ -32,53 +33,51 @@ function OptionsComponent({ control, controls, register, name, errors, mode, isN
 	return (
 		<>
 			{fields.map((field, index) => (
-				<div key={field.id} className={styles.field_container}>
-					<div className={styles.option_container}>
-						<div className={styles.alphabet_container}>{alphabets[index]}</div>
+				<div key={field.id} className={styles.option_container}>
+					<div className={styles.alphabet_container}>{alphabets[index]}</div>
 
-						<InputController
-							{...controls[0]}
-							control={control}
-							{...register(`${name}.${index}.${controls[0].name}`, {
-								...(controls[0].rules || {}),
-							})}
-							className={errors[index]?.[controls[0].name] ? styles.error : null}
-						/>
+					<InputController
+						{...getRequiredControl({ controls, name: 'answer_text' })}
+						control={control}
+						{...register(`${name}.${index}.answer_text`, {
+							...(getRequiredControl({ controls, name: 'answer_text' }).rules || {}),
+						})}
+						className={errors[index]?.answer_text ? styles.error : null}
+					/>
 
-						<div className={styles.right_button_container}>
-							{fields.length < 11 && index === fields.length - 1 && mode !== 'view' && isNewQuestion ? (
-								<Button
-									type="button"
-									themeType="secondary"
-									className={styles.add_button}
-									onClick={() => handleAppendChild()}
-								>
-									+ Add
-								</Button>
+					<div className={styles.right_button_container}>
+						{fields.length < 11 && index === fields.length - 1 && mode !== 'view' && isNewQuestion ? (
+							<Button
+								type="button"
+								themeType="secondary"
+								className={styles.add_button}
+								onClick={() => handleAppendChild()}
+							>
+								+ Add
+							</Button>
+						) : null}
+
+						{fields.length > 1 && mode !== 'view' && isNewQuestion ? (
+							<IcMDelete
+								style={{ cursor: 'pointer' }}
+								width={20}
+								height={20}
+								onClick={() => remove(index, 1)}
+							/>
+						) : null}
+
+						<div className={styles.left_button_container}>
+							<ChipsController
+								control={control}
+								{...getRequiredControl({ controls, name: 'is_correct' })}
+								{...register(`${name}.${index}.is_correct`, {
+									...(getRequiredControl({ controls, name: 'is_correct' }).rules || {}),
+								})}
+							/>
+
+							{errors[index]?.is_correct ? (
+								<div className={styles.error_msg}>This is required</div>
 							) : null}
-
-							{fields.length > 1 && mode !== 'view' && isNewQuestion ? (
-								<IcMDelete
-									style={{ cursor: 'pointer' }}
-									width={20}
-									height={20}
-									onClick={() => remove(index, 1)}
-								/>
-							) : null}
-
-							<div className={styles.left_button_container}>
-								<ChipsController
-									control={control}
-									{...controls[1]}
-									{...register(`${name}.${index}.${controls[1].name}`, {
-										...(controls[1].rules || {}),
-									})}
-								/>
-
-								{errors[index]?.[controls[1].name] ? (
-									<div className={styles.error_msg}>This is required</div>
-								) : null}
-							</div>
 						</div>
 					</div>
 				</div>

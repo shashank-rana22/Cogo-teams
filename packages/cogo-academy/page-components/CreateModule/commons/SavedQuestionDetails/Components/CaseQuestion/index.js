@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 
 function CaseQuestion({ item, from, caseToShow }) {
 	const { test_case_study_questions = [] } = item || {};
+
 	return (
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
