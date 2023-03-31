@@ -3,12 +3,7 @@ import { Pill } from '@cogoport/components';
 import { renderValue } from './renderCargoValue';
 import styles from './styles.module.css';
 
-const labels = [
-	'commodity',
-	'inco_term',
-	'weight',
-	'volume',
-];
+const labels = ['commodity', 'inco_term', 'weight', 'volume'];
 
 export default function CargoDetails({ cargo_details }) {
 	return (

@@ -1,6 +1,8 @@
 import useAxios from 'axios-hooks';
 import { useEffect, useState, useCallback } from 'react';
 
+import APIS from '../constants/apis';
+
 /**
  * @param {String} email_address Mail address to  get mails from
  * @param {String} foldername Email Folder to  get mails from
@@ -19,9 +21,11 @@ const useGetMails = (
 	const [page, setPage] = useState(1);
 	const [search, setSearch] = useState(undefined);
 
+	const apis = APIS[source];
+
 	const [mailApi, triggerGetMail] = useAxios(
 		{
-			url    : `${process.env.COGO_LENS_URL}/list_mails`,
+			url    : `${process.env.COGO_LENS_URL}/${apis.list}`,
 			method : 'GET',
 		},
 		{ manual: true },
@@ -44,13 +48,11 @@ const useGetMails = (
 				console.log(err);
 			}
 		})();
-	}, [email_address, foldername,
-		JSON.stringify(filters),
-		page, page_limit, search, triggerGetMail]);
+	}, [email_address, foldername, page, page_limit, search, filters, triggerGetMail]);
 
 	useEffect(() => {
 		getEmails();
-	}, [getEmails]);
+	}, [email_address, foldername, page, search, getEmails]);
 
 	return {
 		mailApi,

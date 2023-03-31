@@ -38,7 +38,10 @@ const useGetShipmentOperatingProcedure = ({
 				}
 			}
 		)();
-	}, [organization_id, filters, defaultFilters, defaultParams, shipment_id, trigger]);
+	}, [organization_id,
+		JSON.stringify(filters),
+		shipment_id,
+		 trigger]);
 
 	useEffect(() => {
 		apiTrigger();

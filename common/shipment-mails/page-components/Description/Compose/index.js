@@ -1,5 +1,6 @@
-import { RTE } from '@cogoport/components';
+import { RTE, Toast } from '@cogoport/components';
 import { useForm, handleError } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -11,33 +12,51 @@ import InputParam from './Input';
 import SelectParam from './Select';
 import styles from './styles.module.css';
 
-const getFormattedValues = (emailData, action) => {
+const geo = getGeoConstants();
+
+const getFormattedValues = (
+	emailData,
+	action,
+	userEmailArray,
+	setUserEmailArray,
+	ccEmailArray,
+	setCcEmailArray,
+	deleteEmail,
+) => {
 	const sender = emailData?.sender?.emailAddress?.address;
 
 	if (action === 'forward' || action === 'send') {
 		return {
-			toUserEmail  : [],
-			ccrecipients : [],
+			toUserEmail  : '',
+			ccrecipients : '',
 			subject      : emailData.subject || undefined,
 		};
 	}
-	if (action === 'reply') {
+	if (action === 'reply' && userEmailArray?.length === 0 && !deleteEmail) {
+		setUserEmailArray([
+			sender,
+		]);
 		return {
-			toUserEmail  : sender,
-			ccrecipients : [],
+			toUserEmail  : '',
+			ccrecipients : '',
 			subject      : emailData.subject,
 		};
 	}
+
 	const cc = (emailData?.ccRecipients || [])
-		.map((item) => item?.emailAddress?.address)
-		.join(', ');
+		.map((item) => item?.emailAddress?.address);
+
 	const to = (emailData?.toRecipients || [])
-		.map((item) => item?.emailAddress?.address)
-		.join(',');
+		.map((item) => item?.emailAddress?.address);
+
+	if (userEmailArray?.length === 0 && ccEmailArray?.length === 0 && !deleteEmail) {
+		setUserEmailArray([...to, sender]);
+		setCcEmailArray(cc);
+	}
 
 	return {
-		toUserEmail  : `${sender}, ${to}`,
-		ccrecipients : cc,
+		toUserEmail  : '',
+		ccrecipients : '',
 		subject      : emailData.subject,
 	};
 };
@@ -50,12 +69,24 @@ function Compose({
 	pre_subject_text,
 	subject_position,
 }) {
-	const defaultValues = getFormattedValues(composingEmail, action);
 	const [isBcc, setIsBcc] = useState(false);
 	const [userEmailArray, setUserEmailArray] = useState([]);
+	const [ccEmailArray, setCcEmailArray] = useState([]);
+	const [bccEmailArray, setBccEmailArray] = useState([]);
 	const [errors, setErrors] = useState({});
+	const [deleteEmail, setDeleteEmail] = useState(false);
 	const [editorState, setEditorState] = useState('');
+
 	const { options } = useGetEntityStakeholderMappings();
+	const defaultValues = getFormattedValues(
+		composingEmail,
+		action,
+		userEmailArray,
+		setUserEmailArray,
+		ccEmailArray,
+		setCcEmailArray,
+		deleteEmail,
+	);
 
 	const {
 		control,
@@ -68,6 +99,8 @@ function Compose({
 	let actualSubject = watch('subject');
 	const entity_type = watch('entity_type');
 	const userEmail = watch('toUserEmail');
+	const ccEmail = watch('ccrecipients');
+	const bccEmail = watch('bccrecipients');
 
 	if (pre_subject_text && subject_position === 'prefix') {
 		actualSubject = `${pre_subject_text} / ${entity_type} / ${actualSubject}`;
@@ -94,39 +127,40 @@ function Compose({
 	);
 
 	const handleClick = (e) => {
-		if (e.keyCode === 13) {
-			setUserEmailArray([
-				...userEmailArray,
-				userEmail,
-			]);
-			setValue('toUserEmail', '');
+		if ((e.keyCode === 13 || e.keyCode === 32) && userEmail) {
+			if (!geo.regex.EMAIL.test(userEmail)) {
+				Toast.error('Please Enter Valid Email Address');
+			} else {
+				setUserEmailArray([
+					...userEmailArray,
+					userEmail,
+				]);
+				setValue('toUserEmail', '');
+			}
+		}
+		if ((e.keyCode === 13 || e.keyCode === 32) && ccEmail) {
+			if (!geo.regex.EMAIL.test(ccEmail)) {
+				Toast.error('Please Enter Valid Email Address');
+			} else {
+				setCcEmailArray([
+					...ccEmailArray,
+					ccEmail,
+				]);
+				setValue('ccrecipients', '');
+			}
+		}
+		if ((e.keyCode === 13 || e.keyCode === 32) && bccEmail) {
+			if (!geo.regex.EMAIL.test(bccEmail)) {
+				Toast.error('Please Enter Valid Email Address');
+			} else {
+				setBccEmailArray([
+					...bccEmailArray,
+					bccEmail,
+				]);
+				setValue('bccrecipients', '');
+			}
 		}
 	};
-
-	// const handleDelete = (item) => {
-	// 	const tempUserEmailArray = userEmailArray;
-	// 	tempUserEmailArray.forEach((ele, idx) => {
-	// 		if (ele === item) {
-	// 			userEmailArray.splice(idx, 1);
-	// 		}
-	// 	});
-	// 	setValue('toUserEmail', '');
-	// 	setUserEmailArray(tempUserEmailArray);
-	// };
-
-	// const renderValue = () => userEmailArray.map((item) => (
-	// 	<div style={{ display: 'flex' }}>
-	// 		<div className={styles.value}>{item}</div>
-	// 		<div
-	// 			className={styles.cancel}
-	// 			role="button"
-	// 			tabIndex={0}
-	// 			onClick={() => handleDelete(item)}
-	// 		>
-	// 			x
-	// 		</div>
-	// 	</div>
-	// ));
 
 	return (
 		<div className={styles.container}>
@@ -150,11 +184,9 @@ function Compose({
 						emailValue={userEmailArray}
 						setEmailValue={setUserEmailArray}
 						setValue={setValue}
-						// renderValue={renderValue}
 						control={control}
+						setDeleteEmail={setDeleteEmail}
 						placeholder="Type here..."
-						key={JSON.stringify(userEmailArray)}
-						rules={{ required: { value: true, message: 'Email is required' } }}
 					/>
 					{errors?.toUserEmail ? (
 						<div className={styles.error}>
@@ -172,6 +204,11 @@ function Compose({
 						name="ccrecipients"
 						control={control}
 						placeholder="Type here..."
+						onKeyDown={(e) => handleClick(e)}
+						emailValue={ccEmailArray}
+						setEmailValue={setCcEmailArray}
+						setValue={setValue}
+						setDeleteEmail={setDeleteEmail}
 					/>
 
 					{errors?.ccrecipients ? (
@@ -191,6 +228,11 @@ function Compose({
 							name="bccrecipients"
 							control={control}
 							placeholder="Type here..."
+							onKeyDown={(e) => handleClick(e)}
+							emailValue={bccEmailArray}
+							setEmailValue={setBccEmailArray}
+							setValue={setValue}
+							setDeleteEmail={setDeleteEmail}
 						/>
 					)
 					: null}
@@ -265,6 +307,9 @@ function Compose({
 					action={action}
 					composingEmail={composingEmail}
 					onCreate={() => setComposingEmail(null)}
+					userEmailArray={userEmailArray}
+					ccEmailArray={ccEmailArray}
+					bccEmailArray={bccEmailArray}
 				/>
 			</div>
 		</div>

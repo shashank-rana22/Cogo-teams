@@ -1,0 +1,105 @@
+.tags_div {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-left: 8px;
+
+	:global {
+		.ui_tag_container {
+			padding-left: 0 !important;
+		}
+	}
+}
+
+.tag_container {
+	position: relative;
+	display: flex;
+}
+
+.tag_and_error_container {
+	display: flex;
+	flex-direction: column-reverse;
+	margin-top: 4px;
+}
+
+.error_content_container {
+	position: absolute;
+	margin: 0 0 28px 8px;
+	font-size: 11px;
+	color: #fc0101;
+}
+
+.error_input_container {
+	display: flex;
+	height: 28px;
+	padding: 3px 25px 3px 8px;
+	margin-left: 8px;
+	border: 1px solid #828282;
+	border-radius: 6px;
+
+	&:hover {
+		border: 1px solid #f00;
+	}
+
+	&:focus {
+		border: 1px solid #f00 !important;
+	}
+
+	&:focus-within {
+		border: 1px solid #f00 !important;
+	}
+
+	&:focus-visible {
+		outline: #f00 solid 0.2px !important;
+	}
+}
+
+.cross_icon {
+	position: absolute;
+	top: 6px;
+	right: 5px;
+	cursor: pointer;
+
+	svg {
+		width: 14px;
+		height: 14px;
+	}
+}
+
+.input_container {
+	display: flex;
+	height: 28px;
+	padding: 3px 25px 3px 8px;
+	margin-left: 8px;
+	border: 1px solid #828282;
+	border-radius: 6px;
+
+	&:hover {
+		border: 1px solid #88cad1;
+	}
+
+	&:focus {
+		border: 1px solid #88cad1 !important;
+	}
+
+	&:focus-within {
+		border: 1px solid #88cad1 !important;
+	}
+
+	&:focus-visible {
+		outline: #88cad1 solid 0.2px !important;
+	}
+}
+
+.add_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	margin-left: 8px;
+	color: #ffff;
+	cursor: pointer;
+	background: #ee3425;
+	border-radius: 50%;
+}
