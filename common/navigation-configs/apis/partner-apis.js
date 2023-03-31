@@ -10832,7 +10832,7 @@ const partner = {
 		{
 			api          : 'list_partner_users',
 			access_type  : 'private',
-			service_name : 'communication',
+			service_name : 'partner',
 		},
 		{
 			api          : 'convert_importer_exporter_to_channel_partner',
