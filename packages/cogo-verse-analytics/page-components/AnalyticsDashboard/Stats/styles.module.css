@@ -306,19 +306,26 @@
 	width: 35px;
 	height: 1px;
 	margin: 5px;
-	border-bottom: solid 2px #5a4a99;
+	border-bottom: solid 2px hsl(27deg 70% 50%);
 }
 
 .legend_icon_2 {
 	width: 35px;
 	height: 1px;
 	margin: 5px;
-	border-bottom: solid 2px #c5c5c5;
+	border-bottom: solid 2px hsl(47deg 70% 50%);
+}
+
+.legend_icon_3 {
+	width: 35px;
+	height: 1px;
+	margin: 5px;
+	border-bottom: solid 2px hsl(57deg 70% 50%);
 }
 
 .legend_content {
 	padding-left: 10px;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 400;
 	color: #a2a3a5;
 }

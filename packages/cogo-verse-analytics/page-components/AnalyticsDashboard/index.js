@@ -18,12 +18,16 @@ function AnalyticsDashboard() {
 	});
 
 	const { stats = {}, statsLoading = false } = useGetCogoverseDashboard({ country, date });
+	console.log(stats, 'stats');
 
 	const { chatData = {}, chatLoading = false } = useGetCogoverseChatData({ country, date });
+	console.log(chatData, 'chatData');
 
 	const platFormChatData = chatData?.data || {};
 
-	const statsData = stats?.data || {};
+	// const statsData = stats?.data || {};
+	const statsData = stats?.list || {};
+	console.log(statsData, 'statsData');
 
 	const props = {
 		statsData,
