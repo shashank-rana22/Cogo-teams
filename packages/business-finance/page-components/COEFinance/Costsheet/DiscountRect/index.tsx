@@ -36,7 +36,7 @@ function DiscountRect({
 			>
 				{heading}
 			</div>
-			<div className={styles.stat}>{statvalue === null ? 'KAM : Not Available' : statvalue}</div>
+			<div className={styles.stat}>{statvalue === null ? 'KAM : None' : statvalue}</div>
 			<div className={styles.stat}>
 				{statlabel === 'Revenue Desk - ' ? 'Revenue Desk : Not Available' : statlabel}
 				{' '}
