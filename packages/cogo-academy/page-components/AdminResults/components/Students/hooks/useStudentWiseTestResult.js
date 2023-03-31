@@ -16,7 +16,8 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 
 	const STUDENTS_MAPPING = {
 		appeared: {
-			payload: {
+			index   : 0,
+			payload : {
 				sort_by   : sortBy,
 				sort_type : sortType,
 				filters   : { test_id, q: query, result_status: filter, is_appeared: true },
@@ -25,7 +26,8 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 			title: 'Appeared',
 		},
 		not_appeared: {
-			payload: {
+			index   : 1,
+			payload : {
 				filters: { test_id, q: query, is_appeared: false },
 				...params,
 			},

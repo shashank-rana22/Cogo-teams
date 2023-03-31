@@ -5,11 +5,16 @@ import getCorrectAnswersCombined from '../../../utils/getCorrectAnswersCombined'
 import styles from './styles.module.css';
 
 function CorrectAnswersCombined({ testCaseStudyQuestion }) {
-	const correctAnswersCombined = useMemo(() => getCorrectAnswersCombined({
-		correctOptions: (testCaseStudyQuestion?.test_question_answers || []).filter(
-			(testQuestionAnswers) => testQuestionAnswers.is_correct,
-		),
-	}), [testCaseStudyQuestion]);
+	const { test_question_answers = [] } = testCaseStudyQuestion || {};
+
+	const filterCorrectOptions = useMemo(() => (test_question_answers || []).filter(
+		(correctAnswer) => correctAnswer.is_correct,
+	), [test_question_answers]);
+
+	const correctAnswersCombined = useMemo(
+		() => getCorrectAnswersCombined({ correctOptions: filterCorrectOptions }),
+		[filterCorrectOptions],
+	);
 
 	return (
 		<div className={styles.flex_column}>

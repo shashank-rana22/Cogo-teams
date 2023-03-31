@@ -3,10 +3,13 @@ import { useFieldArray } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
+import getRequiredControl from '../../../../utils/getRequiredControl';
 import SingleQuestionComponent from '../../../SingleQuestionComponent';
 
 import controls from './controls';
 import styles from './styles.module.css';
+
+const fieldArrayControls = getRequiredControl({ controls, name: 'case_questions' });
 
 function QuestionForm({
 	control,
@@ -22,8 +25,6 @@ function QuestionForm({
 	mode,
 	questionTypeWatch,
 }) {
-	const fieldArrayControls = controls?.[0];
-
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: fieldArrayControls.name,
