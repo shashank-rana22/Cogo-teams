@@ -45,13 +45,13 @@ function StudentsComponent({ test_id }) {
 					onChange={setActiveTab}
 				>
 					{Object.keys(STUDENTS_MAPPING).map((item) => {
-						const { title } = STUDENTS_MAPPING[item];
+						const { title, index } = STUDENTS_MAPPING[item];
 
 						return (
 							<TabPanel
 								key={item}
 								name={item}
-								badge={stats[0]?.[item] || '0'}
+								badge={stats[index]?.[item] || '0'}
 								title={title}
 							/>
 						);
@@ -65,6 +65,7 @@ function StudentsComponent({ test_id }) {
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
 				debounceQuery={debounceQuery}
+				activeTab={activeTab}
 			/>
 
 			{!loading && isEmpty(data?.list)

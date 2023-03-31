@@ -42,6 +42,7 @@ function CreateQuestionSet() {
 		total_count,
 		page,
 		setPage,
+		page_limit,
 	} = useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query, mode });
 
 	if (['edit', 'view'].includes(mode) && isEmpty(id) && !activeTab) {
@@ -93,6 +94,7 @@ function CreateQuestionSet() {
 				page={page}
 				setPage={setPage}
 				mode={mode}
+				page_limit={page_limit}
 			/>
 		</div>
 	);

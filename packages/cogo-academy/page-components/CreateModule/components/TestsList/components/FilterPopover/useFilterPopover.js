@@ -7,9 +7,7 @@ const useFilterPopover = ({ setFilters }) => {
 	const { control, handleSubmit, reset } = useForm();
 
 	const onSubmit = (values) => {
-		setFilters({
-			cogo_entity_id: values?.cogo_entity_id,
-		});
+		setFilters({ ...values });
 
 		setShowFilter(false);
 	};

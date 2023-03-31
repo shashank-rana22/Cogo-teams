@@ -25,3 +25,9 @@
 .text {
 	margin-top: 12px;
 }
+
+.question_text_content {
+	overflow: unset;
+	text-overflow: unset;
+	white-space: unset;
+}

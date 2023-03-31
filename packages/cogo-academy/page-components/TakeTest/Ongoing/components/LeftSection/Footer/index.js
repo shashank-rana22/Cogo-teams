@@ -28,31 +28,28 @@ function Footer({
 
 	const sendAnswer = async () => {
 		if (isEmpty(answer)) {
-			// Toast.error('Select Correct Answers');
-			// return;
 			const arr = [];
 			const str = 'not_answered';
-			await updateAnswerList(data?.id, arr, str);
+			await updateAnswerList(data, arr, str);
 		} else if (typeof answer === 'string') {
 			const arr = [answer];
 			const str = 'answered';
-			await updateAnswerList(data?.id, arr, str);
+			await updateAnswerList(data, arr, str);
 		} else {
 			const str = 'answered';
-			await updateAnswerList(data?.id, answer, str);
+			await updateAnswerList(
+				data,
+				answer,
+				str,
+			);
 		}
+
 		const num = Number(currentQuestion);
+
 		localStorage.setItem(
 			`current_question_${test_id}_${user_id}`,
 			total_question > currentQuestion ? num + 1 : num,
 		);
-
-		fetchQuestions({
-			currentQ:
-				total_question !== currentQuestion
-					? Number(currentQuestion) + 1
-					: currentQuestion,
-		});
 
 		setCurrentQuestion((pv) => {
 			if (total_question !== pv) {
@@ -66,26 +63,21 @@ function Footer({
 		const str = 'marked_for_review';
 		if (isEmpty(answer)) {
 			const arr = [];
-			await updateAnswerList(data?.id, arr, str);
+			await updateAnswerList(data, arr, str);
 		}
 		if (typeof answer === 'string') {
 			const arr = [answer];
-			await updateAnswerList(data?.id, arr, str);
+			await updateAnswerList(data, arr, str);
 		} else {
-			await updateAnswerList(data?.id, answer, str);
+			await updateAnswerList(data, answer, str);
 		}
+
 		const num = Number(currentQuestion);
+
 		localStorage.setItem(
 			`current_question_${test_id}_${user_id}`,
 			total_question > currentQuestion ? num + 1 : num,
 		);
-
-		fetchQuestions({
-			currentQ:
-				total_question !== currentQuestion
-					? Number(currentQuestion) + 1
-					: currentQuestion,
-		});
 
 		setCurrentQuestion((pv) => {
 			if (total_question !== pv) {

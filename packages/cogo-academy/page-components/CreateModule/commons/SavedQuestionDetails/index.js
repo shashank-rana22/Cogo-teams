@@ -1,11 +1,10 @@
-import { Pagination, Button, Table, Modal } from '@cogoport/components';
+import { Pagination, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../EmptyState';
 
-import TableColumns from './Components/TableColumns';
+import useGetTableColumns from './Components/TableColumns/useGetTableColumns';
 import styles from './styles.module.css';
-import useSavedQuestionDetails from './useSavedQuestionDetails';
 
 function SavedQuestionDetails({
 	test_questions,
@@ -15,26 +14,21 @@ function SavedQuestionDetails({
 	setAllKeysSaved,
 	getTestQuestionTest,
 	questionSetId,
-	loading:listLoading,
+	loading: listLoading,
 	total_count,
 	setPage,
 	page,
 	mode,
+	page_limit,
 }) {
-	const {
-		handleEditQuestion,
-		handleDeleteQuestion,
-		loading,
-		showModal,
-		setShowModal,
-		caseStudyLoading,
-	} = useSavedQuestionDetails({
+	const columns = useGetTableColumns({
 		setAllKeysSaved,
 		getTestQuestionTest,
 		questionSetId,
 		setEditDetails,
+		allKeysSaved,
+		mode,
 	});
-	const columns = TableColumns({ allKeysSaved, handleEditQuestion, loading, caseStudyLoading, mode, setShowModal });
 
 	if (isEmpty(test_questions)) {
 		return (
@@ -55,44 +49,13 @@ function SavedQuestionDetails({
 				loading={listLoading}
 			/>
 
-			<Modal
-				size="sm"
-				show={!isEmpty(showModal)}
-				onClose={() => setShowModal({})}
-				placement="center"
-				showCloseIcon={false}
-			>
-				<Modal.Header title="Are you sure you want to delete this?" />
-
-				<Modal.Body>
-					<div className={styles.btn_container}>
-						<Button
-							type="button"
-							themeType="secondary"
-							onClick={() => setShowModal({})}
-						>
-							Cancel
-						</Button>
-						<Button
-							type="button"
-							onClick={() => {
-								handleDeleteQuestion({ item: showModal });
-								setShowModal({});
-							}}
-						>
-							Delete
-						</Button>
-					</div>
-				</Modal.Body>
-			</Modal>
-
-			{total_count > 5 ? (
+			{total_count > page_limit ? (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
 						currentPage={page}
 						totalItems={total_count}
-						pageSize={5}
+						pageSize={page_limit}
 						onPageChange={setPage}
 					/>
 				</div>

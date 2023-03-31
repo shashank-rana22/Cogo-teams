@@ -1,4 +1,3 @@
-import { Placeholder } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -6,6 +5,7 @@ import React from 'react';
 import EmptyState from '../../../../commons/EmpyState';
 
 import DisplayCard from './DisplayCard';
+import LoadingState from './loading';
 import styles from './styles.module.css';
 import useGetSingleAnnouncement from './useGetSingleAnnouncement';
 
@@ -38,21 +38,15 @@ function DisplayCards({
 
 	if (loading) {
 		if (activeTab === 'active') {
-			return Array.from(Array(5)).map(() => (
-				<Placeholder
-					height="90px"
-					width="100%"
-					margin="16px 0px 20px 0px"
-				/>
-			));
+			return <LoadingState loadingCount={5} height="90px" itemHeight="32px" />;
 		}
 
-		return Array.from(Array(6)).map(() => <Placeholder height="65px" width="100%" margin="16px 0px 20px 0px" />);
+		return <LoadingState loadingCount={6} height="80px" itemHeight="28px" />;
 	}
 
 	if (isEmpty(data)) {
 		return (
-			<EmptyState text={`No ${startCase(activeTab)} Announcements`} />
+			<EmptyState text={`No ${startCase(activeTab)} Announcements Found`} />
 		);
 	}
 

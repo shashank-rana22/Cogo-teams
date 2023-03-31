@@ -1,3 +1,4 @@
+import { Image } from '@cogoport/next';
 import { useRef, useEffect } from 'react';
 
 import handleTimer from './handleTimer';
@@ -26,7 +27,13 @@ function Timer({ test_start_time, duration,	setShowTimeOverModal }) {
 
 	return (
 		<div className={styles.container}>
-			<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg" alt="timer" />
+			<Image
+				width={32}
+				height={32}
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg"
+				alt="timer"
+			/>
+
 			<div ref={timerRef} className={styles.timer} />
 		</div>
 	);

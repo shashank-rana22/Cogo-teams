@@ -53,6 +53,7 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 		listSetQuestions,
 		listData    : data?.list || [],
 		total_count : data?.total_count,
+		page_limit  : data?.page_limit,
 		page,
 		setPage,
 	};

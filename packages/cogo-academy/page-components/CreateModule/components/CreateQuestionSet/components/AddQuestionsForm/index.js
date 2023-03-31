@@ -31,6 +31,7 @@ function AddQuestionsForm({
 	page,
 	setPage,
 	mode,
+	page_limit,
 }) {
 	const [showBulkUpload, setShowBulkUpload] = useState(false);
 
@@ -83,6 +84,7 @@ function AddQuestionsForm({
 						page={page}
 						setPage={setPage}
 						mode={mode}
+						page_limit={page_limit}
 					/>
 				)
 			)}

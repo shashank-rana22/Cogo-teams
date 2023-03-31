@@ -1,6 +1,7 @@
+import { useState } from 'react';
+
 import ContentComponent from './ContentComponent';
 import FormComponent from './FormComponent';
-import useHandleBasicDetails from './useHandleBasicDetails';
 
 function BasicDetails({
 	control,
@@ -17,43 +18,33 @@ function BasicDetails({
 	questionSetId,
 	mode,
 }) {
-	const {
-		handleUpdateCaseStudy,
-		loading,
-		showForm,
-		setShowForm,
-		controls,
-		closeForm,
-	} = useHandleBasicDetails({
-		setEditDetails,
-		setAllKeysSaved,
-		getTestQuestionTest,
-		questionSetId,
-		editDetails,
-		mode,
-		getValues,
-		reset,
-		setValue,
-	});
+	const [showForm, setShowForm] = useState(false);
 
 	return (
 		<div key={showForm}>
 			{!isNewQuestion
 				&& !showForm
 				&& editDetails?.question_type === 'case_study' ? (
-					<ContentComponent editDetails={editDetails} setShowForm={setShowForm} />
+					<ContentComponent
+						editDetails={editDetails}
+						setShowForm={setShowForm}
+					/>
 				) : (
 					<FormComponent
 						isNewQuestion={isNewQuestion}
-						controls={controls}
 						control={control}
 						errors={errors}
 						questionTypeWatch={questionTypeWatch}
 						editDetails={editDetails}
-						handleUpdateCaseStudy={handleUpdateCaseStudy}
-						loading={loading}
 						mode={mode}
-						closeForm={closeForm}
+						getValues={getValues}
+						setEditDetails={setEditDetails}
+						setAllKeysSaved={setAllKeysSaved}
+						reset={reset}
+						getTestQuestionTest={getTestQuestionTest}
+						questionSetId={questionSetId}
+						setValue={setValue}
+						setShowForm={setShowForm}
 					/>
 				)}
 		</div>

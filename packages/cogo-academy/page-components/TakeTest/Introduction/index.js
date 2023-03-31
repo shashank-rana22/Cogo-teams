@@ -1,7 +1,7 @@
-/* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Image, useRouter } from '@cogoport/next';
+import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 import useCreateTestUserMapping from './useCreateTestUserMapping';
@@ -9,13 +9,24 @@ import useCreateTestUserMapping from './useCreateTestUserMapping';
 function Introduction({ setActiveState, testData = {} }) {
 	const router = useRouter();
 
-	const { set_data, case_study_questions, stand_alone_questions, test_duration, name, guidelines = [] } = testData || {};
+	const {
+		set_data,
+		case_study_questions,
+		stand_alone_questions,
+		test_duration,
+		name,
+		guidelines = [],
+	} = testData || {};
+
 	const { passStartTime } = useCreateTestUserMapping();
 
-	const formatArrayValues = (items) => {
-		const formattedItem = items?.map((item) => item.topic);
-		return formattedItem?.join(',  ') || '';
-	};
+	const formatArrayValues = useMemo(
+		() => {
+			const formattedItem = set_data?.map((item) => item.topic);
+			return formattedItem?.join(',  ') || '';
+		},
+		[set_data],
+	);
 
 	const handleStartExam = async () => {
 		await passStartTime();
@@ -37,6 +48,7 @@ function Introduction({ setActiveState, testData = {} }) {
 	const items = [
 		'Exam can be only taken in full screen',
 		'To Start test, please click on Begin Test',
+		// eslint-disable-next-line max-len
 		'Changing tabs is not allowed in between exam, If you switch tabs more than 2 times, your exam will be submitted automatically',
 		'To submit the test, please click on submit test button',
 		'click on cancel if you dont want to start exam now',
@@ -52,14 +64,17 @@ function Introduction({ setActiveState, testData = {} }) {
 
 				<div className={styles.content}>
 					<div className={styles.content_container}>
-						<img
-							style={{ width: 18, height: 21, marginRight: 12 }}
+						<Image
+							width={18}
+							height={22}
+							className={styles.image}
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/document-svg.svg"
 							alt=""
 						/>
+
 						<div className={styles.content_text}>
 							<div className={styles.label}>Topics Covered</div>
-							<div className={styles.value}>{formatArrayValues(set_data)}</div>
+							<div className={styles.value}>{formatArrayValues}</div>
 						</div>
 					</div>
 
@@ -76,8 +91,10 @@ function Introduction({ setActiveState, testData = {} }) {
 							</div>
 						</div>
 						<div className={styles.content_container}>
-							<img
-								style={{ width: 18, height: 21, marginRight: 12 }}
+							<Image
+								width={18}
+								height={22}
+								className={styles.image}
 								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg"
 								alt=""
 							/>
@@ -97,7 +114,10 @@ function Introduction({ setActiveState, testData = {} }) {
 
 			<div className={styles.instructions_container}>
 				<div className={styles.title}>Test Instructions</div>
-				<div>Please read all the instructions carefully before clicking on Begin Test. The timer will start once you click on Begin test</div>
+				<div>
+					Please read all the instructions carefully before clicking on Begin Test.
+					The timer will start once you click on Begin test
+				</div>
 
 				<ol className={styles.list}>
 					{[...items, ...guidelines].map((item, index) => (

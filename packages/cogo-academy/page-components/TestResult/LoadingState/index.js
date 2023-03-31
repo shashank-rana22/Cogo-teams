@@ -21,12 +21,22 @@ function LoadingState() {
 					<Placeholder height="32px" width="100%" margin="32px 0px 0px 0px" />
 				</div>
 				<div className={styles.radial_charts}>
-					<Placeholder type="circle" radius="140px" margin="0px 0px 0px 32px" />
+					<Placeholder type="circle" radius="140px" margin="0px 20px 0px 32px" />
 					<Placeholder type="circle" radius="140px" margin="0px 0px 0px 32px" />
 				</div>
 				<div className={styles.bar_charts}>
-					<Placeholder height="100%" width="80px" margin="0px 40px 0px 0px" />
-					<Placeholder height="100%" width="80px" margin="0px 20px 0px 0px" />
+					<Placeholder
+						height="100%"
+						width="20%"
+						margin="0px 40px 0px 0px"
+						className={styles.bar_chart_item}
+					/>
+					<Placeholder
+						height="100%"
+						width="20%"
+						margin="0px 20px 0px 30px"
+						className={styles.bar_chart_item}
+					/>
 				</div>
 
 			</div>

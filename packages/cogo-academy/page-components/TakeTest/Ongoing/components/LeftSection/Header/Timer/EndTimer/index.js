@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { Image } from '@cogoport/next';
 import { useEffect } from 'react';
 
 import useEndTest from '../../../../../hooks/useEndTest';
@@ -20,7 +21,12 @@ function EndTimer({ data = {}, showTimeOverModal, setShowTimeOverModal, setActiv
 		<Modal size="md" show={showTimeOverModal}>
 			<Modal.Body>
 				<div className={styles.container}>
-					<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg" alt="timer" />
+					<Image
+						width={32}
+						height={32}
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg"
+						alt="timer"
+					/>
 					{' '}
 					<b className={styles.heading}>Time&apos;s Up</b>
 				</div>

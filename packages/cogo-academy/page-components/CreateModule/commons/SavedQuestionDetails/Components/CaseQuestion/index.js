@@ -9,10 +9,7 @@ function CaseQuestion({ item, from, caseToShow }) {
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
 				<div
-					style={
-                    from === 'tooltip' ? { overflow: 'unset', textOverflow: 'unset', whiteSpace: 'unset' } : null
-                }
-					className={styles.question_text}
+					className={`${styles.question_text} ${(from === 'tooltip') ? styles.question_text_content : null}`}
 				>
 					{item?.question_text}
 				</div>
@@ -31,7 +28,14 @@ function CaseQuestion({ item, from, caseToShow }) {
 			</div>
 
 			{item.id === caseToShow
-				? test_case_study_questions.map((item1) => <div className={styles.text}>{item1.question_text}</div>)
+				? test_case_study_questions.map((caseStudyQuestion) => (
+					<div
+						className={styles.text}
+						key={caseStudyQuestion.id}
+					>
+						{caseStudyQuestion.question_text}
+					</div>
+				))
 				: null}
 		</div>
 	);

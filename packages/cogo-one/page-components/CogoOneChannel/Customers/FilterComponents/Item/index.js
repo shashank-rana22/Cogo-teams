@@ -1,4 +1,3 @@
-import { cl } from '@cogoport/components';
 import { SelectController, CheckboxGroupController, RadioGroupController } from '@cogoport/forms';
 import React from 'react';
 
@@ -23,7 +22,6 @@ function Item(props) {
 		type,
 		control,
 		label,
-		botToggle = false,
 		error = {},
 	} = props || {};
 
@@ -34,7 +32,7 @@ function Item(props) {
 			<div className={styles.label}>
 				{label}
 			</div>
-			<div className={cl`${styles.filters_types} ${botToggle ? styles.disabled : ''}`}>
+			<div className={styles.filters_types}>
 				{Element && (
 					<Element
 						{...props}

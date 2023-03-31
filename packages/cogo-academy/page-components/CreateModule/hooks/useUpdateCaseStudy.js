@@ -7,7 +7,14 @@ const actionNameMapping = {
 	update : 'updated',
 };
 
-function useUpdateCaseStudy({ setEditDetails, setAllKeysSaved, getTestQuestionTest, questionSetId }) {
+function useUpdateCaseStudy({
+	setEditDetails,
+	setAllKeysSaved,
+	getTestQuestionTest,
+	questionSetId,
+	reset = () => {},
+	setQuestionToDelete = () => [],
+}) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_case_study',
@@ -16,7 +23,6 @@ function useUpdateCaseStudy({ setEditDetails, setAllKeysSaved, getTestQuestionTe
 	const updateCaseStudy = async ({
 		values,
 		id,
-		reset,
 		action,
 	}) => {
 		try {
@@ -34,6 +40,7 @@ function useUpdateCaseStudy({ setEditDetails, setAllKeysSaved, getTestQuestionTe
 			if (action === 'delete') {
 				setAllKeysSaved(true);
 				setEditDetails({});
+				setQuestionToDelete({});
 				reset();
 			}
 		} catch (err) {

@@ -16,30 +16,30 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 
 	const STUDENTS_MAPPING = {
 		appeared: {
-			url     : '/list_admin_student_wise_test_result',
+			index   : 0,
 			payload : {
 				sort_by   : sortBy,
 				sort_type : sortType,
-				filters   : { test_id, q: query },
+				filters   : { test_id, q: query, result_status: filter, is_appeared: true },
 				...params,
 			},
 			title: 'Appeared',
 		},
 		not_appeared: {
-			url     : '/list_not_appeared_users',
+			index   : 1,
 			payload : {
-				test_id,
-				filter: { q: query },
+				filters: { test_id, q: query, is_appeared: false },
+				...params,
 			},
 			title: 'Not Appeared',
 		},
 	};
 
-	const { payload, url: api_url = '' } = STUDENTS_MAPPING[activeTab];
+	const { payload } = STUDENTS_MAPPING[activeTab];
 
 	const [{ data, loading }, refetch] = useRequest({
 		method : 'GET',
-		url    : api_url,
+		url    : '/list_admin_student_wise_test_result',
 		params : { ...payload },
 	}, { manual: false });
 

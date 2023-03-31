@@ -6,7 +6,7 @@ import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 import useFilterPopover from './useFilterPopover';
 
-function FilterPopover({ filters, setFilters }) {
+function FilterPopover({ filters, setFilters, activeTab }) {
 	const {
 		showFilter,
 		setShowFilter,
@@ -27,6 +27,7 @@ function FilterPopover({ filters, setFilters }) {
 					control={control}
 					handleSubmit={handleSubmit}
 					onSubmit={onSubmit}
+					activeTab={activeTab}
 				/>
 			)}
 		>

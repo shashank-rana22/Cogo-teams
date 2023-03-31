@@ -16,6 +16,7 @@ function useUpdateCaseStudyQuestion({
 	getTestQuestionTest,
 	setEditDetails,
 	setAllKeysSaved,
+	reset = () => {},
 }) {
 	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
 		method : 'post',
@@ -35,7 +36,6 @@ function useUpdateCaseStudyQuestion({
 
 	const updateCaseStudyQuestion = async ({
 		values,
-		reset,
 		action,
 		caseStudyQuestionId,
 		testQuestionId,

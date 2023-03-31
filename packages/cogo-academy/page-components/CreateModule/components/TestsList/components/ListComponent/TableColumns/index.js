@@ -277,7 +277,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 		Header   : '',
 		id       : 'results',
 		accessor : ({ id = '', current_status = '' }) => (
-			((current_status === 'draft') || (current_status === 'expired')) ? null : (
+			(current_status === 'draft') ? null : (
 				<div>
 					<Link href={`/learning/tests/dashboard/admin/${id}`}>
 						{(current_status === 'published') ? 'View Results' : 'View Details'}

@@ -29,8 +29,7 @@ const useCreateTestUserMapping = () => {
 				data: payload,
 			});
 		} catch (err) {
-			console.log('error', err);
-			Toast.error(err.response.data);
+			Toast.error(err.response?.data);
 		}
 	};
 

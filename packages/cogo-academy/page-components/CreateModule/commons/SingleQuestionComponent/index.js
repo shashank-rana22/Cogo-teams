@@ -1,5 +1,7 @@
 import { Button } from '@cogoport/components';
 import { TextAreaController, SelectController, InputController, ChipsController } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
+import { useMemo } from 'react';
 
 import useUpdateCaseStudyQuestion from '../../hooks/useUpdateCaseStudyQuestion';
 
@@ -15,9 +17,8 @@ function SingleQuestionComponent({
 	errors,
 	field,
 	remove,
-	editAnswerDetails,
 	isNewQuestion,
-	type,
+	questionTypeWatch,
 	editDetails,
 	getValues,
 	questionSetId,
@@ -27,13 +28,24 @@ function SingleQuestionComponent({
 	setAllKeysSaved,
 	mode,
 }) {
-	const controls = getControls({ mode });
+	const NAME_CONTROL_MAPPING = useMemo(() => {
+		const hash = {};
+
+		const controls = getControls({ mode });
+
+		controls.forEach((item) => {
+			hash[item?.name] = item;
+		});
+
+		return hash;
+	}, [mode]);
 
 	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion({
 		questionSetId,
 		getTestQuestionTest,
 		setEditDetails,
 		setAllKeysSaved,
+		reset,
 	});
 
 	const handleDelete = () => {
@@ -43,7 +55,6 @@ function SingleQuestionComponent({
 			updateCaseStudyQuestion({
 				action              : 'delete',
 				caseStudyQuestionId : editDetails?.test_case_study_questions?.[index]?.id,
-				reset,
 				testQuestionId      : editDetails?.id,
 			});
 		}
@@ -54,7 +65,6 @@ function SingleQuestionComponent({
 
 		updateCaseStudyQuestion({
 			values              : formValues?.case_questions?.[index],
-			reset,
 			action              : field.isNew ? 'create' : 'update',
 			caseStudyQuestionId : editDetails?.test_case_study_questions?.[index]?.id,
 			testQuestionId      : editDetails?.id,
@@ -65,60 +75,64 @@ function SingleQuestionComponent({
 		<div className={styles.container}>
 			<div
 				className={`${styles.first_row} ${
-					errors?.[controls[0].name] ? styles[`${controls[0].name}_err`] : null
-				} ${errors?.[controls[1].name] ? styles[`${controls[1].name}_err`] : null}`}
+					errors?.question_text ? styles.question_text_err : null
+				} ${errors?.question_type ? styles.question_type_err : null}`}
 			>
 				<InputController
 					className={`${
-						errors?.[controls[0].name] ? styles[`${controls[0].name}_err`] : null
+						errors?.question_text ? styles.question_text_err : null
 					} ${styles.input_container}`}
-					{...controls[0]}
+					{...NAME_CONTROL_MAPPING.question_text}
 					control={control}
-					name={`${name}.${index}.${controls[0].name}`}
+					name={`${name}.${index}.question_text`}
 				/>
 
 				<SelectController
 					className={`${styles.question_type} ${
-						errors?.[controls[1].name]
-							? styles[`${controls[1].name}_err`]
+						errors?.question_type
+							? styles.question_type_err
 							: null
 					}`}
-					{...controls[1]}
+					{...NAME_CONTROL_MAPPING.question_type}
 					control={control}
-					name={`${name}.${index}.${controls[1].name}`}
+					name={`${name}.${index}.question_type`}
 				/>
 			</div>
 
 			<OptionsComponent
 				control={control}
-				{...controls[2]}
+				{...NAME_CONTROL_MAPPING.options}
 				register={register}
 				errors={errors?.options || {}}
-				name={`${name}.${index}.${controls[2].name}`}
-				editAnswerDetails={editAnswerDetails}
+				name={`${name}.${index}.options`}
 				mode={mode}
+				isNewQuestion={questionTypeWatch === 'case_study' ? isNewQuestion : isEmpty(editDetails)}
 			/>
 
-			{type !== 'case_study' ? (
+			{questionTypeWatch !== 'case_study' ? (
 				<div className={styles.difficulty_level}>
 					<div className={styles.label}>Set Difficulty level</div>
 
 					<div className={styles.control}>
 						<ChipsController
 							control={control}
-							{...controls[3]}
-							name={`${name}.${index}.${controls[3].name}`}
+							{...NAME_CONTROL_MAPPING.difficulty_level}
+							name={`${name}.${index}.difficulty_level`}
 						/>
-						{errors?.[controls[3].name] && <div className={styles.error_msg}>This is required</div>}
+						{errors?.difficulty_level && <div className={styles.error_msg}>This is required</div>}
 					</div>
 				</div>
 			) : null}
 
 			<div className={styles.textarea_container}>
-				<TextAreaController control={control} {...controls[4]} name={`${name}.${index}.${controls[4].name}`} />
+				<TextAreaController
+					control={control}
+					{...NAME_CONTROL_MAPPING.explanation}
+					name={`${name}.${index}.explanation`}
+				/>
 			</div>
 
-			{type === 'case_study' && !isNewQuestion && mode !== 'view' ? (
+			{questionTypeWatch === 'case_study' && mode !== 'view' && !isEmpty(editDetails) ? (
 				<div className={styles.button_container}>
 					<Button
 						loading={loading}
@@ -130,15 +144,17 @@ function SingleQuestionComponent({
 						Delete
 					</Button>
 
-					<Button
-						style={{ marginLeft: '12px' }}
-						loading={loading}
-						onClick={() => handleUpdateCaseStudyQuestion()}
-						size="sm"
-						type="button"
-					>
-						{field.isNew ? 'Save' : 'Edit'}
-					</Button>
+					{isNewQuestion ? (
+						<Button
+							style={{ marginLeft: '12px' }}
+							loading={loading}
+							onClick={() => handleUpdateCaseStudyQuestion()}
+							size="sm"
+							type="button"
+						>
+							{field?.isNew ? 'Save' : 'Edit'}
+						</Button>
+					) : null}
 				</div>
 			) : null}
 		</div>

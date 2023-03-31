@@ -1,6 +1,8 @@
 import { Button } from '@cogoport/components';
-import { AsyncSelectController } from '@cogoport/forms';
 
+import getElementController from '../../../../../../../configs/getElementController';
+
+import controls from './controls';
 import styles from './styles.module.css';
 
 function FilterContent({
@@ -8,26 +10,30 @@ function FilterContent({
 	handleSubmit,
 	onSubmit,
 	onClickReset,
+	activeTab,
 }) {
 	return (
 		<form className={styles.filter_container} onSubmit={handleSubmit(onSubmit)}>
+			{controls.map((item) => {
+				const { label, type, name } = item || {};
 
-			<div>
-				<div className={styles.title}> Filter By Cogo Entity</div>
+				if (name === 'status' && activeTab === 'question_set') {
+					return null;
+				}
 
-				<AsyncSelectController
-					name="cogo_entity_id"
-					control={control}
-					asyncKey="partners"
-					params={{
-						filters: {
-							entity_types : ['cogoport'],
-							status       : 'active',
-						},
-						page_limit: 10,
-					}}
-				/>
-			</div>
+				const Element = getElementController(type);
+
+				return (
+					<div key={name}>
+						<div className={styles.title}>{label}</div>
+
+						<Element
+							control={control}
+							{...item}
+						/>
+					</div>
+				);
+			})}
 
 			<div className={styles.button_container}>
 				<Button

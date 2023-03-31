@@ -5,8 +5,8 @@ import { useState } from 'react';
 
 import useGetTestList from '../../hooks/useGetTestList';
 import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
-import FilterPopover from '../CreateNewTest/FilterPopover';
 
+import FilterPopover from './components/FilterPopover';
 import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
 
@@ -39,7 +39,7 @@ function TestsList({ activeTab, setActiveTab }) {
 		debounceQuery: questionListDebounceQuery,
 		input: questionListInput,
 		setInput: setquestionListInput,
-	} = useGetTestQuestionSets({ ...filters, activeTab });
+	} = useGetTestQuestionSets({ filters, activeTab });
 
 	const componentMapping = {
 		tests: {
@@ -110,7 +110,11 @@ function TestsList({ activeTab, setActiveTab }) {
 					/>
 
 					<div className={styles.filter_popover}>
-						<FilterPopover filters={filters} setFilters={setFilters} />
+						<FilterPopover
+							filters={filters}
+							setFilters={setFilters}
+							activeTab={activeTab}
+						/>
 					</div>
 
 					<Button

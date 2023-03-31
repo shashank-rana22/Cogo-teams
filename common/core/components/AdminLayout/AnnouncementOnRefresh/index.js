@@ -43,6 +43,7 @@ function AnnouncementOnRefresh({ data = [] }) {
 					show={data.length > 0}
 					size="lg"
 					placement="center"
+					closeOnOuterClick={false}
 					onClose={() => setShowModal(false)}
 				>
 					<Modal.Header title={getModalHeader()} style={{ paddingTop: 0, paddingLeft: 0 }} />

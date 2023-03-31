@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import useUpdateCaseStudy from '../../../../hooks/useUpdateCaseStudy';
 
@@ -14,15 +14,14 @@ const useHandleBasicDetails = ({
 	getValues,
 	reset,
 	setValue,
+	setShowForm,
 }) => {
-	const [showForm, setShowForm] = useState(false);
-
 	const controls = useMemo(() => getControls({ mode }), [mode]);
 
 	const {
 		loading,
 		updateCaseStudy,
-	} = useUpdateCaseStudy({ setEditDetails, setAllKeysSaved, getTestQuestionTest, questionSetId });
+	} = useUpdateCaseStudy({ setEditDetails, setAllKeysSaved, getTestQuestionTest, questionSetId, reset });
 
 	const handleUpdateCaseStudy = () => {
 		const formValues = getValues();
@@ -37,7 +36,6 @@ const useHandleBasicDetails = ({
 				difficulty_level,
 			},
 			id     : editDetails?.id,
-			reset,
 			action : 'update',
 		});
 	};
@@ -61,8 +59,6 @@ const useHandleBasicDetails = ({
 	return {
 		handleUpdateCaseStudy,
 		loading,
-		showForm,
-		setShowForm,
 		controls,
 		closeForm,
 	};
