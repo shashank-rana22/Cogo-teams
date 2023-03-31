@@ -1,39 +1,58 @@
-import { Placeholder } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
-import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { Pagination, TabPanel, Tabs, Placeholder } from '@cogoport/components';
+import { startCase, isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import EmptyState from '../../../CreateModule/components/EmptyState';
 
-import ListHeader from './ListHeader';
-import QuestionItem from './QuestionItem';
+import useListTestQuestions from './hooks/useListTestQuestions';
+import RenderContent from './RenderContent';
 import Search from './Search';
 import styles from './styles.module.css';
 
 function QuestionsComponent({ test_id }) {
-	const [searchQuestion, setSearchQuestion] = useState('');
-	const [sortFilter, setSortFilter] = useState({});
+	const {
+		data = {},
+		loading,
+		refetch,
+		activeTab,
+		debounceQuery,
+		setActiveTab,
+		setSearchQuestion,
+		searchQuestion,
+		params,
+		setParams,
+		QUESTIONS_MAPPING,
+	} = useListTestQuestions({ test_id });
 
-	const { sortBy, sortType } = sortFilter || {};
+	const { stats = [], page_limit = 0, total_count = 0, list: questionsList = [] } = data || {};
 
-	const { debounceQuery, query } = useDebounceQuery();
-
-	const [{ data, loading }] = useRequest({
-		method : 'GET',
-		url    : '/get_admin_question_wise_test_result',
-		params : {
-			test_id,
-			search_term : query,
-			sort_type   : sortType,
-			sort_by     : sortBy,
-		},
-	}, { manual: false });
-
-	const { list: questionsList = [] } = data || {};
+	useEffect(() => {
+		refetch();
+	}, [params, refetch]);
 
 	return (
 		<>
+			<div className={styles.tabs_container}>
+				<Tabs
+					activeTab={activeTab}
+					themeType="tertiary"
+					onChange={setActiveTab}
+				>
+					{Object.keys(QUESTIONS_MAPPING).map((item) => {
+						const { title } = QUESTIONS_MAPPING[item];
+
+						return (
+							<TabPanel
+								key={item}
+								name={item}
+								badge={stats[0]?.[item] || '0'}
+								title={startCase(title)}
+							/>
+						);
+					})}
+				</Tabs>
+			</div>
+
 			<Search
 				searchQuestion={searchQuestion}
 				setSearchQuestion={setSearchQuestion}
@@ -54,18 +73,24 @@ function QuestionsComponent({ test_id }) {
 
 			{!loading && (isEmpty(data?.list) ? <EmptyState /> : (
 				<div>
-					<ListHeader
-						setSortFilter={setSortFilter}
-						sortFilter={sortFilter}
+
+					<RenderContent
+						questionsList={questionsList}
+						test_id={test_id}
+						activeTab={activeTab}
 					/>
 
-					{(questionsList || []).map((question_item, index) => (
-						<QuestionItem
-							key={question_item.id}
-							question_item={question_item}
-							index={index}
-						/>
-					))}
+					{total_count > page_limit ? (
+						<div className={styles.pagination_container}>
+							<Pagination
+								type="table"
+								currentPage={params?.page}
+								totalItems={total_count}
+								pageSize={page_limit}
+								onPageChange={(val) => setParams((prev) => ({ ...prev, page: val }))}
+							/>
+						</div>
+					) : null}
 				</div>
 			))}
 		</>

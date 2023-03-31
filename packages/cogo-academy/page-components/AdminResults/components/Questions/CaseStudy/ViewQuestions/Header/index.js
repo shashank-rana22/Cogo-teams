@@ -1,35 +1,21 @@
 import styles from './styles.module.css';
 
 const MAPPING = {
-	topic: {
-		label     : 'Topic',
-		className : styles.container_item,
-	},
 	question: {
 		label     : 'Question',
 		className : styles.section,
 	},
 	question_type: {
-		label     : 'Question Type',
+		label     : 'Answer Type',
 		className : styles.container_item,
 	},
 	difficulty_level: {
-		label     : 'Difficulty Level',
-		className : styles.container_item,
-	},
-	students_appeared: {
-		label     : 'Students IT Appeared For',
-		sort      : true,
-		className : styles.container_item,
-	},
-	correct_percentage: {
-		label     : 'Correct Percentage %',
-		sort      : true,
+		label     : 'Correct %',
 		className : styles.container_item,
 	},
 };
 
-function ListHeader() {
+function Header() {
 	return (
 		<div className={styles.container}>
 			{Object.keys(MAPPING).map((item) => {
@@ -45,4 +31,4 @@ function ListHeader() {
 	);
 }
 
-export default ListHeader;
+export default Header;

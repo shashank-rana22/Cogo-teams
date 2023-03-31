@@ -183,11 +183,13 @@ const faq = {
 			api          : 'list_announcements',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
+
 		},
 		{
 			api          : 'update_announcement_attachment',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
+
 		},
 		{
 			api          : 'create_announcement_stat',
@@ -365,6 +367,23 @@ const faq = {
 		},
 		{
 			api          : 'list_admin_student_wise_test_result',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_test_questions',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+
+		},
+		{
+			api          : 'list_test_case_study_questions',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+
+		},
+		{
+			api        	 : 'get_test_result_question',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
