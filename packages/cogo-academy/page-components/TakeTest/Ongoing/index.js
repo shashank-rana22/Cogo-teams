@@ -51,7 +51,7 @@ function Ongoing({ testData, page, setActiveState }) {
 			}
 
 			if (visibilityChangeCount > 5) {
-				endTest();
+				// endTest();
 				localStorage.setItem('visibilityChangeCount', 1);
 				return;
 			}

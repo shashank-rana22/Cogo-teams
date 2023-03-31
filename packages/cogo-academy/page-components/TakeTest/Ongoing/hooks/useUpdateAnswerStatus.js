@@ -15,13 +15,16 @@ const useUpdateAnswerQuestion = () => {
 		url    : '/update_test_user_question_answer',
 	}, { manual: true });
 
-	const updateAnswerList = async (id, answer, answer_state) => {
+	const updateAnswerList = async (data, answer, answer_state) => {
+		const { test_case_study_question_id = '', test_question_id = '' } = data || {};
+
 		try {
 			const payload = {
 				test_id,
 				user_id,
-				test_question_id         : id,
-				test_question_answer_ids : answer,
+				test_case_study_question_id,
+				test_question_id,
+				test_question_answer_ids: answer,
 				answer_state,
 			};
 
