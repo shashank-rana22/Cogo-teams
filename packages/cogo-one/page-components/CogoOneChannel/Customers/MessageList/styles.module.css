@@ -110,6 +110,7 @@
 
 .user_name {
 	max-width: 130px;
+	margin-right: 5px;
 	overflow: hidden;
 	font-size: 14px;
 	font-weight: 600;
@@ -270,4 +271,9 @@
 	height: 18px;
 	background: #ef0a1a;
 	border-radius: 0 4px;
+}
+
+.name_container {
+	display: flex;
+	align-items: center;
 }

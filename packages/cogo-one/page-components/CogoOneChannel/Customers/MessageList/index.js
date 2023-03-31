@@ -144,15 +144,40 @@ function MessageList(messageProps) {
 												type={channel_type}
 											/>
 											<div className={styles.user_details}>
-												<Tooltip
-													content={startCase(search_user_name) || 'User'}
-													placement="top"
-												>
-													<div className={styles.user_name}>
-														{startCase(search_user_name) || 'User'}
-													</div>
-												</Tooltip>
-
+												<div className={styles.name_container}>
+													<Tooltip
+														content={startCase(search_user_name) || 'User'}
+														placement="top"
+													>
+														<div className={styles.user_name}>
+															{startCase(search_user_name) || 'User'}
+														</div>
+													</Tooltip>
+													{pinnedTime[userId] > 0
+														? (
+															<IcCPin
+																onClick={(e) => {
+																	updatePin({
+																		pinnedID    : id,
+																		channelType : channel_type,
+																		type        : 'unpin',
+																	});
+																	e.stopPropagation();
+																}}
+															/>
+														) : (
+															<IcMPin
+																onClick={(e) => {
+																	updatePin({
+																		pinnedID    : id,
+																		channelType : channel_type,
+																		type        : 'pin',
+																	});
+																	e.stopPropagation();
+																}}
+															/>
+														)}
+												</div>
 												<div className={styles.organisation}>
 													{showOrganization()}
 												</div>
@@ -173,31 +198,6 @@ function MessageList(messageProps) {
 													</div>
 												)}
 											</div>
-											{pinnedTime[userId] > 0
-												? (
-													<IcCPin
-														onClick={(e) => {
-															updatePin({
-																pinnedID    : id,
-																channelType : channel_type,
-																type        : 'unpin',
-															});
-															e.stopPropagation();
-														}}
-													/>
-												) : (
-													<IcMPin
-														onClick={(e) => {
-															updatePin({
-																pinnedID    : id,
-																channelType : channel_type,
-																type        : 'pin',
-															});
-															e.stopPropagation();
-														}}
-													/>
-												) }
-
 											<div className={styles.activity_duration}>
 												{renderTime}
 											</div>

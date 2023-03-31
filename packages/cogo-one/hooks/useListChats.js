@@ -257,6 +257,7 @@ const useListChats = ({
 	useEffect(() => {
 		mountActiveRoomSnapShot();
 	}, [mountActiveRoomSnapShot]);
+
 	const setActiveMessage = async (val) => {
 		const { channel_type, id } = val || {};
 		setActiveCard({ activeCardId: id, activeCardData: val });
