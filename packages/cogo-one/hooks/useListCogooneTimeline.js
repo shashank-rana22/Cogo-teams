@@ -13,7 +13,7 @@ const useListCogooneTimeline = ({
 	type = '',
 	pagination,
 }) => {
-	const [firstLoading, setFirstLoading] = useState(true);
+	const [firstLoading, setFirstLoading] = useState(false);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_cogoone_timelines',
 		method : 'get',
@@ -91,10 +91,11 @@ const useListCogooneTimeline = ({
 	}, [activeSubTab, getCogooneTimeline, lead_user_id, user_id, id]);
 
 	return {
-		timeLineData         : data || {},
+		timeLineData            : data || {},
 		getCogooneTimeline,
-		timeLineLoading      : loading,
-		firstTimeLineLoading : firstLoading,
+		timeLineLoading         : loading,
+		firstTimeLineLoading    : firstLoading,
+		setFirstTimeLineLoading : setFirstLoading,
 	};
 };
 

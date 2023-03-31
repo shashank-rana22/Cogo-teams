@@ -45,7 +45,7 @@ function useGetVendor() {
 				router.push(href, as);
 			}
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+			Toast.error(getApiErrorString(error.response?.data));
 		}
 	}, [router, trigger, vendor_id]);
 

@@ -67,8 +67,11 @@ function useEditProfile({ vendor_details = {}, refetchVendorInfo = () => {}, set
 					city_id                : values?.city_id,
 				},
 			});
+
 			setShowEditProfileModal(false);
+
 			refetchVendorInfo();
+
 			Toast.success('Updated successfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error));

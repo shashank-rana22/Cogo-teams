@@ -77,7 +77,7 @@ const useResubmitKyc = ({
 		return { documentsList };
 	};
 
-	const ResubmitKYC = async () => {
+	const resubmitKYC = async () => {
 		const values = getValues();
 
 		const { documentsList } = getDocuments({ rejected_documents, values });
@@ -110,7 +110,7 @@ const useResubmitKyc = ({
 
 			Toast.success('KYC re-submitted successfully!');
 		} catch (error) {
-			Toast.error(getApiErrorString(error));
+			Toast.error(getApiErrorString(error.response.data));
 		}
 	};
 
@@ -120,7 +120,7 @@ const useResubmitKyc = ({
 		loading,
 		handleSubmitKyc,
 		errors_kyc,
-		ResubmitKYC,
+		resubmitKYC,
 	};
 };
 

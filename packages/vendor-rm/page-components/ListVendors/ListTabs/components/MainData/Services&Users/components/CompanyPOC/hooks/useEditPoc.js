@@ -2,11 +2,18 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 import controls from '../utils/controls';
 
 const useEditPoc = ({ data = {}, setShowEditPocModal = () => {}, refetchVendorInfo = () => {} }) => {
+	const { general: { query } } = useSelector((state) => ({
+		general: state.general,
+	}));
+
+	const { vendor_id } = query;
+
 	const filtered_data = data?.pocs?.filter((item) => item?.is_primary === true)?.[0];
 
 	const {
@@ -27,8 +34,8 @@ const useEditPoc = ({ data = {}, setShowEditPocModal = () => {}, refetchVendorIn
 
 		try {
 			await trigger({
-				params: {
-					vendor_id           : filtered_data?.vendor_id,
+				data: {
+					vendor_id,
 					name                : values?.name,
 					email               : values?.email,
 					mobile_country_code : values?.mobile_number?.country_code,
@@ -36,11 +43,14 @@ const useEditPoc = ({ data = {}, setShowEditPocModal = () => {}, refetchVendorIn
 					poc_role            : values?.poc_role,
 				},
 			});
+
 			setShowEditPocModal(false);
+
 			refetchVendorInfo();
+
 			Toast.success('Updated successfully');
 		} catch (error) {
-			Toast.error(getApiErrorString(error));
+			Toast.error(getApiErrorString(error.response.data));
 		}
 	};
 

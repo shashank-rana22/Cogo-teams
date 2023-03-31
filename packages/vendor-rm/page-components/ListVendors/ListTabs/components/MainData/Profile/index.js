@@ -10,7 +10,7 @@ function Profile({
 	refetchVendorInfo = () => {},
 }) {
 	return (
-		<div className={styles.padd}>
+		<div className={styles.container}>
 			<div className={styles.main}>
 				<Heading
 					data={data}

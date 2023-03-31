@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
@@ -22,7 +23,15 @@ function useKyc({
 	}, { manual: true });
 
 	const onSubmit = async () => {
-		await trigger({ data: { vendor_id, kyc_status: 'pending_verification', declaration_accepted_at: new Date() } });
+		await trigger({
+			data: {
+				vendor_id,
+				kyc_status              : 'pending_verification',
+				declaration_accepted_at : new Date(),
+			},
+		});
+
+		Toast.success('KYC Submitted Successfully!');
 
 		setShowSuccessScreen(true);
 	};
