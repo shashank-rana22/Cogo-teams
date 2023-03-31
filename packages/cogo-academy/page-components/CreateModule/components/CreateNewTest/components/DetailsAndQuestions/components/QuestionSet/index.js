@@ -1,142 +1,30 @@
-import {
-	Input, ButtonIcon, Table, Checkbox, Breadcrumb, Pill, Pagination, Tooltip,
-} from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import { Input, ButtonIcon, Table, Breadcrumb, Pagination } from '@cogoport/components';
 import { IcMArrowRotateUp, IcMSearchlight } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useGetTestQuestionSets from '../../../../../../hooks/useGetTestQuestionSets';
 
+import getQuestionSetColumns from './getQuestionSetColumns';
 import styles from './styles.module.css';
 
 function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
 	const cogo_entity_id = watch('cogo_entity_id');
+	const [filters, setFilters] = useState({});
+	const [sort, setSort] = useState(false);
+
+	useEffect(() => {
+		setFilters((prev) => ({ ...prev, cogo_entity_id }));
+	}, [cogo_entity_id]);
 
 	const {
 		data, loading, setParams, debounceQuery,
 		input, setInput,
-	} = useGetTestQuestionSets({ cogo_entity_id });
-
-	const [sort, setSort] = useState(false);
+	} = useGetTestQuestionSets({ filters });
 
 	const { page = 0, page_limit: pageLimit = 0, total_count = 0, list } = data || {};
 
-	const handleChange = ({ event, id }) => {
-		if (event.target.checked) {
-			setIdArray((prev) => [...prev, id]);
-			return;
-		}
+	const columns = getQuestionSetColumns({ idArray, setIdArray });
 
-		setIdArray((prev) => {
-			const temp = [...prev];
-			const index = temp.indexOf(id);
-			if (index !== -1) {
-				temp.splice(index, 1);
-			}
-			return temp;
-		});
-	};
-
-	const columns = [
-		{
-			Header   : '',
-			id       : 'check',
-			accessor : ({ id = '' }) => (
-				<Checkbox
-					key="question_set"
-					name="question_set"
-					className={styles.checkbox}
-					value={id}
-					checked={(idArray || []).includes(id)}
-					onChange={(event) => handleChange({ event, id })}
-				/>
-			),
-		},
-		{
-			Header   : 'QUESTION SET NAME',
-			id       : 'a',
-			accessor : ({ name = '' }) => (
-				<section>
-					{startCase(name) || '-'}
-				</section>
-			),
-		},
-		{
-			Header   : 'TOPIC',
-			id       : 'b',
-			accessor : ({ topic = '-' }) => (
-				<section>
-					<Tooltip maxWidth={500} content={startCase(topic)} placement="top">
-						<Pill
-							className={styles.topic_pill}
-							size="md"
-							color="#CFEAED"
-						>
-							{startCase(topic)}
-						</Pill>
-					</Tooltip>
-				</section>
-			),
-		},
-		{
-			Header   : 'USER GROUPS',
-			id       : 'c',
-			accessor : ({ audience_ids = [] }) => (
-				<section>
-					{audience_ids.map((audience_id) => (
-						<Pill
-							key={audience_id}
-							size="sm"
-							color="blue"
-						>
-							{startCase(audience_id)}
-						</Pill>
-					))}
-					{audience_ids.length === 0 && '-'}
-				</section>
-			),
-		},
-		{
-			Header   : 'NO. OF QUESTIONS',
-			id       : 'd',
-			accessor : ({ non_case_study_question_count = 0 }) => (
-				<section>{non_case_study_question_count}</section>
-			),
-		},
-		{
-			Header   : 'NO. OF CASES',
-			id       : 'e',
-			accessor : ({
-				case_study_question_count
-				= 0,
-			}) => (
-				<section>{case_study_question_count}</section>
-			),
-		},
-		{
-			Header   : 'NO. OF TESTS USING THE SET',
-			id       : 'f',
-			accessor : ({ set_count = 0 }) => (
-				<section>{set_count}</section>
-			),
-		},
-		{
-			Header   : 'LAST UPDATED',
-			id       : 'g',
-			accessor : ({ updated_at = '' }) => (
-				<section>
-					<span className={styles.questionsettime}>
-						{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
-						{' '}
-					</span>
-					<span className={styles.questionsettime}>
-						{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}
-					</span>
-				</section>
-			),
-		},
-	];
 	return (
 		<div className={styles.container}>
 			<Breadcrumb className={styles.bcitems}>
@@ -217,7 +105,7 @@ function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
 				loading={loading}
 			/>
 
-			{total_count > 10 ? (
+			{total_count > pageLimit ? (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
