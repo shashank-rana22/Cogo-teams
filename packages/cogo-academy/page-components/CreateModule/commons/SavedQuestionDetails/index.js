@@ -30,8 +30,6 @@ function SavedQuestionDetails({
 		mode,
 	});
 
-	console.log('page_limit', page_limit);
-
 	if (isEmpty(test_questions)) {
 		return (
 			<EmptyState
