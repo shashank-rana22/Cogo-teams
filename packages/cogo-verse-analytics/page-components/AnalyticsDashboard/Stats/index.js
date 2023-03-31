@@ -22,7 +22,6 @@ function Stats(props = {}) {
 
 	const {
 		statsLoading,
-		statsData,
 		stats = {},
 		chatLoading = false,
 		platFormChatData = {},
@@ -31,8 +30,8 @@ function Stats(props = {}) {
 	const { bot_data = {}, customer_support_data = {} } = platFormChatData || {};
 	// const GraphData = chartData({ statsData }) || [];
 	const hideChart = isEmpty(bot_data) && isEmpty(customer_support_data);
+	const statsData = stats?.list;
 	const graph = statsData?.weekly_shipments || [];
-	console.log(graph, 'graph');
 	// console.log(GraphData, 'GraphData');
 
 	return (
