@@ -15,10 +15,10 @@ import commonFunctions from './commonFunctions';
 import styles from './styles.module.css';
 
 export interface Props {
-	config: ConfigType;
+	config?: ConfigType;
 	sort?: NestedObj;
 	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>;
-	itemData: ListDataProps;
+	itemData?: ListDataProps;
 	renderHeaderCheckbox?: () => ReactNode | '';
 	functions?: FunctionObjects;
 	loading?: boolean;
@@ -71,7 +71,7 @@ function List({
 			)}
 			<div style={bodyStyles}>
 				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-					<div className={styles.card_container}>
+					<div className={styles.card_container} key={singleitem?.id}>
 						<CardColumn
 							fields={fields}
 							itemStyles={itemStyles}

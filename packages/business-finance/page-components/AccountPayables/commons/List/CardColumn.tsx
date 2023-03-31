@@ -25,7 +25,7 @@ function CardColumn({
 	isMobile,
 	loading,
 }:Props) {
-	const { clickable } = config;
+	const { clickable } = config || {};
 	return (
 		<section style={itemStyles}>
 			<div
