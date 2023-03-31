@@ -1,4 +1,3 @@
-import { IcMCrossInCircle, IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -18,41 +17,6 @@ function VendorDetailsInfo({
 
 	const { name } = city || {};
 
-	const checkVerified = (title, value) => {
-		if (title === 'GST Certificate') {
-			return (
-				<div className={styles.download}>
-					<a
-						href={value}
-						target="_blank"
-						className={styles.link}
-						style={{
-							color: '#F68B21',
-						}}
-						rel="noreferrer"
-					>
-						{value}
-					</a>
-					<div>
-						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg"
-							alt="icon"
-						/>
-					</div>
-				</div>
-			);
-		}
-		return (
-			<div className={styles.di}>
-				<span className={styles.txt} style={{ color: 'red' }}>{value}</span>
-				<IcMCrossInCircle />
-				<button className={styles.btn}>
-					<IcMDownload />
-				</button>
-			</div>
-		);
-	};
-
 	const details = [
 		{ label: 'Country of Registration', value: country?.name },
 		{ label: 'Registration No.', value: registration_number },
@@ -63,15 +27,36 @@ function VendorDetailsInfo({
 	];
 
 	return (
-		<div className={styles.cont}>
+		<div className={styles.container}>
 			{details.map((item) => (
-				<div className={styles.box_info}>
+				<div key={item.label}>
 					<div className={styles.top}>
 						{item.label}
 					</div>
+
 					<div className={styles.bottom}>
-						{(item.label === 'GST Certificate')
-							? checkVerified(item.label, item.value) : item.value }
+						{item.label === 'GST Certificate'
+							? (
+								<div className={styles.download}>
+									<a
+										href={item.value}
+										target="_blank"
+										className={styles.link}
+										rel="noreferrer"
+									>
+										{item.value}
+									</a>
+
+									<div>
+										<img
+											src={`https://cdn.cogoport.io/cms-prod/cogo_admin/vault/
+											original/download-icon.svg`}
+											alt="icon"
+										/>
+									</div>
+								</div>
+							)
+							: item.value }
 					</div>
 				</div>
 			))}

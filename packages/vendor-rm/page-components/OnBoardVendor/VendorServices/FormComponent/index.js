@@ -47,7 +47,7 @@ function FormComponent({
 				const Element = getElementController(rest.type);
 
 				return (
-					<div className={styles.label_value_container}>
+					<div key={name} className={styles.label_value_container}>
 						<div className={styles.form_label}>{label}</div>
 						<div className={styles.form_controller}>
 							<Element

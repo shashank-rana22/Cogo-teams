@@ -12,7 +12,8 @@ const keysToDisplay = [
 	'registration_number',
 	'service_category',
 	'service_sub_category',
-	'created_on'];
+	'created_on',
+];
 
 function Banner({ data = {} }) {
 	const { vendor_details = {}, services = [] } = data;
@@ -56,12 +57,13 @@ function Banner({ data = {} }) {
 
 	const valuesToDisplay = {
 		vendor_id: {
-			label: 'Vendor ID',
-			value:
-	<div>
-		#
-		{serial_id}
-	</div>,
+			label : 'Vendor ID',
+			value : (
+				<div>
+					#
+					{serial_id}
+				</div>
+			),
 		},
 		kyc_status: {
 			label : 'KYC Status',

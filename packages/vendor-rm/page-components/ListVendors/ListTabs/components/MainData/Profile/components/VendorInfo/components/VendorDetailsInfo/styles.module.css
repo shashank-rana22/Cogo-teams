@@ -1,4 +1,4 @@
-.cont {
+.container {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	row-gap: 1rem;
@@ -8,15 +8,8 @@
 	white-space: nowrap;
 }
 
-.box_info1 {
-	margin: 1rem 0;
-}
-
 .top {
 	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 21px;
 	color: #333;
 	opacity: 0.7;
 }
@@ -24,9 +17,7 @@
 .bottom {
 	width: 250px;
 	font-size: 14px;
-	font-style: normal;
 	font-weight: 500;
-	line-height: 21px;
 	color: #333;
 }
 
@@ -40,35 +31,7 @@
 	display: inline-block;
 	width: 160px;
 	overflow: hidden;
+	color: #f68b21;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-}
-
-.bottom1 {
-	width: 500px;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 21px;
-	color: #333;
-}
-
-.dis1 {
-	height: 1px;
-	background: #000;
-	background:
-		repeating-linear-gradient(
-			90deg,
-			#000,
-			#000 6px,
-			transparent 6px,
-			transparent 12px
-		);
-	border: none;
-	opacity: 0.07;
-}
-
-.btn {
-	all: unset;
-	cursor: pointer;
 }
