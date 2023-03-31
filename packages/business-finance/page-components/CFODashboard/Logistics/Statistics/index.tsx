@@ -100,14 +100,16 @@ function Statistics({ globalFilters, entityTabFilters }) {
 					</div>
 					<div className={styles.border_right_side} />
 					<div className={styles.revenue_main}>
-						<div>Cash Flow</div>
+						<div style={{ marginTop: '10px' }}>Cash Flow</div>
 						{todayStatsLoading ? (
 							<div style={{ alignItems: 'center' }}>
 								<Placeholder height="60px" width="200px" margin="0px 20px 0px 0px" />
 							</div>
 						) : (
 							<>
-								<div>
+								<div className={totalCashFlow >= 0
+									? styles.amount_plus_styles : styles.amount_minus_styles}
+								>
 									{showInTooltop(
 										getFormattedPrice(totalCashFlow, 'INR'),
 										getAmountInLakhCrK(totalCashFlow, 'INR'),

@@ -17,7 +17,6 @@ function ResponsiveLineChart({ lineData }) {
 		};
 		lineChartData[0].data.push(pushData);
 	});
-	console.log(lineChartData, 'lineChartData');
 
 	return (
 		<ResponsiveLine

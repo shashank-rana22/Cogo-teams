@@ -1,5 +1,5 @@
 .card {
-	padding: 16px;
+	padding: 12px;
 	margin-top: 16px;
 	background: #fff;
 	border-radius: 8px;
@@ -15,12 +15,15 @@
 
 .border_left_side {
 	height: 76px;
-	margin: 0 5%;
+
+	/* margin: 0 5%; */
+	margin: 17px 80px 0;
 	border-left: 2px solid #cfcfcf;
 }
 
 .border_right_side {
-	height: 76px;
+	height: 78px;
+	margin: 17px 80px 0;
 
 	/* margin: 0 20%; */
 	border-left: 2px solid #cfcfcf;
@@ -35,10 +38,11 @@
 }
 
 .main_div {
-	margin: 22px 0 0 18px;
+	margin: 36px 0 0 18px;
 }
 
 .expense_text {
+	margin-top: 12px;
 	font-size: 14px;
 	font-weight: 500;
 }
@@ -56,12 +60,12 @@
 }
 
 .revenue_main {
-	margin: 0 0 22px 88px;
+	margin: 0 0 22px 2%;
 }
 
 .text {
-	font-size: 16px;
-	font-weight: 500;
+	font-size: 18px;
+	font-weight: 600;
 	letter-spacing: 0.02em;
 }
 
@@ -94,4 +98,16 @@
 	line-height: 150%;
 
 	/* letter-spacing: 0.02em; */
+}
+
+.amount_plus_styles {
+	font-size: 24px;
+	font-weight: 500;
+	color: #34c759;
+}
+
+.amount_minus_styles {
+	font-size: 24px;
+	font-weight: 500;
+	color: #ee3425;
 }

@@ -50,6 +50,7 @@
 .text_style {
 	margin: 24px 0 0 30px;
 	font-size: 18px;
+	font-weight: 600;
 	color: #333;
 }
 

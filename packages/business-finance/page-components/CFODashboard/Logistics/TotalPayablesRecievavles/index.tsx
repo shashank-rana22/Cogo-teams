@@ -61,7 +61,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 					<div className={styles.main}>
 						<div className={styles.text_filters_gap}>
 							<div className={styles.text_style}>
-								Total Receivable
+								Total Receivables
 								<div className={styles.border} />
 							</div>
 							<div className={styles.icon}>
