@@ -6,7 +6,6 @@ function Header() {
 			<div className={styles.title}>
 				Vendor Contact
 			</div>
-
 		</div>
 	);
 }
