@@ -109,12 +109,10 @@
 
 .exp {
 	display: flex;
-	flex-direction: column;
 	flex-basis: auto;
-
+	flex-direction: column;
 
 	@media (max-width: 576px) {
 		padding: 0 20px;
 	}
 }
-
