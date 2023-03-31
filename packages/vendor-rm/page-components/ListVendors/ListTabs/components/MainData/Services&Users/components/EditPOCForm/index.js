@@ -36,6 +36,7 @@ function EditPOCForm({
 			placement="center"
 		>
 			<Modal.Header title="Update POC Details" />
+
 			<Modal.Body>
 				<FormLayout
 					fields={updatedControls}
@@ -43,10 +44,12 @@ function EditPOCForm({
 					control={control}
 				/>
 			</Modal.Body>
+
 			<Modal.Footer>
 				<div className={styles.button_container}>
 					<Button
 						size="md"
+						type="button"
 						themeType="tertiary"
 						disabled={loading}
 						style={{ marginRight: 12 }}
@@ -57,13 +60,13 @@ function EditPOCForm({
 
 					<Button
 						size="md"
+						type="submit"
 						themeType="primary"
 						disabled={loading}
 						onClick={handleSubmit(onSubmit)}
 					>
 						SUBMIT
 					</Button>
-
 				</div>
 			</Modal.Footer>
 		</Modal>
