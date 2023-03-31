@@ -42,37 +42,32 @@ function DailySalesOutstanding({
 
 	const arrayMonths = [];
 
-	const generatedMonths = () => {
-		const d = new Date();
+	const d = new Date();
 
-		let newArray = [];
+	let newArray = [];
 
-		let currentMonth1; let currentMonth2; let currentMonth3;
+	let currentMonth1; let currentMonth2; let currentMonth3;
 
-		if (d.getMonth() >= 2) {
-			currentMonth1 = months[d.getMonth()];
-			currentMonth2 = months[d.getMonth() - 1];
-			currentMonth3 = months[d.getMonth() - 2];
+	if (d.getMonth() >= 2) {
+		currentMonth1 = months[d.getMonth()];
+		currentMonth2 = months[d.getMonth() - 1];
+		currentMonth3 = months[d.getMonth() - 2];
 
-			newArray = [currentMonth3, currentMonth2, currentMonth1];
-		} else if (d.getMonth() === 1) {
-			currentMonth1 = months[d.getMonth()];
-			currentMonth2 = months[d.getMonth() - 1];
-			newArray = [currentMonth2, currentMonth1];
-		} else {
-			currentMonth1 = months[d.getMonth()];
-			newArray = [currentMonth1];
+		newArray = [currentMonth3, currentMonth2, currentMonth1];
+	} else if (d.getMonth() === 1) {
+		currentMonth1 = months[d.getMonth()];
+		currentMonth2 = months[d.getMonth() - 1];
+		newArray = [currentMonth2, currentMonth1];
+	} else {
+		currentMonth1 = months[d.getMonth()];
+		newArray = [currentMonth1];
+	}
+
+	(dailySalesOutstandingData || []).forEach((element) => {
+		if (newArray.includes(element?.month)) {
+			arrayMonths.push(element);
 		}
-
-		(dailySalesOutstandingData || []).forEach((element) => {
-			if (newArray.includes(element?.month)) {
-				arrayMonths.push(element);
-			}
-		});
-		return arrayMonths;
-	};
-
-	console.log(generatedMonths());
+	});
 
 	const marginTop = params.graphView === 'graphView' ? '0px' : '36px';
 	return (
