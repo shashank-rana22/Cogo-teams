@@ -19,7 +19,7 @@ function Responses() {
 		},
 	} = useSelector((state) => state);
 
-	const routeDetails = useRef({ organization, third_party });
+	const routeDetailsRef = useRef({ organization, third_party });
 
 	const router = useRouter();
 
@@ -33,7 +33,7 @@ function Responses() {
 				{startCase(organization)}
 			</button>
 
-			<OrganizationCard ref={routeDetails} />
+			<OrganizationCard ref={routeDetailsRef} />
 
 			<PrimaryTabs feedback_request_id={feedback_request_id} />
 		</>

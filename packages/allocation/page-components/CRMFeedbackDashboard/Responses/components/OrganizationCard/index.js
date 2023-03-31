@@ -12,6 +12,7 @@ function OrganizationCard(props, ref) {
 	} = ref;
 
 	const str = third_party;
+
 	const avatarName = `${str.split(' ')[0]} ${str.split(' ')[1] || ''}`;
 
 	return (

@@ -19,7 +19,7 @@ function Feedbacks() {
 		},
 	} = useSelector((state) => state);
 
-	const routeDetails = useRef({
+	const routeDetailsRef = useRef({
 		organization,
 		organization_id,
 		status,
@@ -34,7 +34,7 @@ function Feedbacks() {
 				CRM Feedback Dashboard
 			</button>
 
-			<OrganizationCard ref={routeDetails} />
+			<OrganizationCard ref={routeDetailsRef} />
 
 			<PrimaryTabs organization_id={organization_id} type={type} />
 		</>

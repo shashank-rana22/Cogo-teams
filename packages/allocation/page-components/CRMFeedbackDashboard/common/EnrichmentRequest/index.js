@@ -95,6 +95,7 @@ function EnrichmentRequest({
 						size="md"
 						themeType="secondary"
 						onClick={onCloseModal}
+						disabled={loading}
 					>
 						Cancel
 					</Button>

@@ -46,47 +46,50 @@ function ActionButton({
 				{label}
 			</Button>
 
-			<Modal
-				show={isOpenModal}
-				size="sm"
-				closeOnOuterClick={false}
-				onClose={onCloseModal}
-				placement="top"
-			>
-				<Modal.Header title="Deactivate Enrichment Request" />
+			{isOpenModal
+			&& (
+				<Modal
+					show={isOpenModal}
+					size="sm"
+					closeOnOuterClick={false}
+					onClose={onCloseModal}
+					placement="top"
+				>
+					<Modal.Header title="Deactivate Enrichment Request" />
 
-				<Modal.Body className={styles.modal_body}>
-					You are about to Deactivate a Request sent to
-					{' '}
-					<i>
-						{third_party || '--'}
-					</i>
-					, are you sure?
-				</Modal.Body>
+					<Modal.Body className={styles.modal_body}>
+						You are about to Deactivate a Request sent to
+						{' '}
+						<i>
+							{third_party || '--'}
+						</i>
+						, are you sure?
+					</Modal.Body>
 
-				<Modal.Footer>
-					<Button
-						type="button"
-						size="md"
-						themeType="secondary"
-						onClick={onCloseModal}
-					>
-						Cancel
-					</Button>
+					<Modal.Footer>
+						<Button
+							type="button"
+							size="md"
+							themeType="secondary"
+							disabled={loading}
+							onClick={onCloseModal}
+						>
+							Cancel
+						</Button>
 
-					<Button
-						type="button"
-						size="md"
-						themeType="primary"
-						className={styles.submit_button}
-						disabled={loading}
-						onClick={onDeactivateRequest}
-						loading={loading}
-					>
-						Delete
-					</Button>
-				</Modal.Footer>
-			</Modal>
+						<Button
+							type="button"
+							size="md"
+							themeType="primary"
+							className={styles.submit_button}
+							onClick={onDeactivateRequest}
+							loading={loading}
+						>
+							Delete
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			)}
 		</>
 	);
 }

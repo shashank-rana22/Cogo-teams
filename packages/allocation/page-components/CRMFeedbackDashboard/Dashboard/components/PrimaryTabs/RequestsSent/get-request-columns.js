@@ -35,7 +35,7 @@ export const getRequestColumns = ({
 		Header   : 'Serial ID',
 		key      : 'serial_id',
 		id       : 'serial_id',
-		accessor : ({ organization = {}, lead_organization = {}, lead_organization_id = '' }) => (
+		accessor : ({ organization, lead_organization, lead_organization_id }) => (
 			<Pill size="md">
 				#
 				{lead_organization_id ? (
@@ -50,7 +50,7 @@ export const getRequestColumns = ({
 		Header   : 'ORGANIZATION',
 		key      : 'organization',
 		id       : 'organization',
-		accessor : ({ organization = {}, lead_organization = {}, lead_organization_id = '' }) => (
+		accessor : ({ organization, lead_organization, lead_organization_id }) => (
 			<section>
 				{lead_organization_id ? (
 					startCase(lead_organization?.business_name || '___')
@@ -64,7 +64,7 @@ export const getRequestColumns = ({
 		Header   : 'NO. OF FEEDBACKS RECEIVED',
 		key      : 'feedback_count',
 		id       : 'feedback_count',
-		accessor : ({ feedback_count = '' }) => (
+		accessor : ({ feedback_count }) => (
 			<section className={styles.table_cell}>
 				{feedback_count || 'No feedback received'}
 			</section>
@@ -75,7 +75,7 @@ export const getRequestColumns = ({
 		key      : 'status',
 		id       : 'status',
 		accessor : ({
-			statuses = [], organization = {}, lead_organization = {}, lead_organization_id = '',
+			statuses = [], organization = {}, lead_organization = {}, lead_organization_id,
 		}) => {
 			const { status, color } = computeStatus({ statuses });
 

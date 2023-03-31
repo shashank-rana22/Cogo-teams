@@ -23,8 +23,8 @@ function CrmTable({ columns, data, loading }) {
 
 			<Table
 				className={styles.table}
-				columns={columns || [{}]}
-				data={data || [{}]}
+				columns={columns || []}
+				data={data || []}
 				loading={loading}
 				loadingRowsCount={5}
 			/>

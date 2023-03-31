@@ -39,7 +39,7 @@ export const getFeedbackColumns = () => [
 		Header   : 'TYPE',
 		key      : 'type',
 		id       : 'type',
-		accessor : ({ source_type = '' }) => (
+		accessor : ({ source_type }) => (
 			<section className={styles.table_cell}>
 				{startCase(source_type || '___') }
 			</section>
@@ -49,7 +49,7 @@ export const getFeedbackColumns = () => [
 		Header   : 'SUB-TYPE',
 		key      : 'sub_type',
 		id       : 'sub_type',
-		accessor : ({ feedback_parameter = '' }) => (
+		accessor : ({ feedback_parameter }) => (
 			<section className={styles.table_cell}>
 				{startCase(feedback_parameter || '___') }
 			</section>
@@ -59,7 +59,7 @@ export const getFeedbackColumns = () => [
 		Header   : 'CURRENT DATA',
 		key      : 'current_data',
 		id       : 'current_data',
-		accessor : ({ feedback_parameter_value = '' }) => (
+		accessor : ({ feedback_parameter_value }) => (
 			<section className={styles.feedback}>
 				<Tooltip
 					content={<span className={styles.tooltip}>{feedback_parameter_value}</span>}
@@ -79,7 +79,7 @@ export const getFeedbackColumns = () => [
 		Header   : 'FEEDBACK & PROOF',
 		key      : 'feedback',
 		id       : 'feedback',
-		accessor : ({ feedback = '', other_feedback = '', feedback_reference_document_url = '' }) => (
+		accessor : ({ feedback, other_feedback, feedback_reference_document_url }) => (
 			<section className={styles.feedback}>
 				<Tooltip
 					content={(
@@ -114,7 +114,7 @@ export const getFeedbackColumns = () => [
 		key      : 'correction',
 		id       : 'correction',
 		accessor : ({
-			kam_response = '', kam_response_reference_document_url = '',
+			kam_response, kam_response_reference_document_url,
 		}) => (
 			<section className={styles.feedback}>
 				<Tooltip
@@ -148,7 +148,7 @@ export const getFeedbackColumns = () => [
 		Header   : 'KAM',
 		key      : 'kam',
 		id       : 'kam',
-		accessor : ({ created_by = {} }) => (
+		accessor : ({ created_by }) => (
 			<section className={styles.table_cell}>
 				{created_by?.name || '___'}
 			</section>
@@ -158,7 +158,7 @@ export const getFeedbackColumns = () => [
 		Header   : 'KAM Manager',
 		key      : 'kam_manager',
 		id       : 'kam_manager',
-		accessor : ({ manager = {} }) => (
+		accessor : ({ manager }) => (
 			<section className={styles.table_cell}>
 				{manager?.name || '___'}
 			</section>
@@ -168,7 +168,7 @@ export const getFeedbackColumns = () => [
 		Header   : 'CREATION DATE',
 		key      : 'created_date',
 		id       : 'created_date',
-		accessor : ({ created_at = '' }) => (
+		accessor : ({ created_at }) => (
 			<section className={styles.table_cell}>
 				{created_at ? format(created_at, 'dd MMM yyyy') : '___'}
 			</section>
