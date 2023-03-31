@@ -1,7 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import formatArrayValues from '../../../../../utils/formatArrayValues';
@@ -84,12 +83,14 @@ function Banner({ data = {} }) {
 			value : formatArrayValues(serviceSubCategories),
 		},
 		created_on: {
-			label : 'Created on',
-			value : formatDate({
-				date       : created_at,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-				formatType : 'date',
-			}),
+			label: 'Created on',
+			value:
+			format(
+				created_at,
+				GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				{},
+				false,
+			),
 		},
 	};
 

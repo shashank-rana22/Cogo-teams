@@ -14,7 +14,7 @@ function FinanceDashBoard() {
 		loading,
 	} = useGetBfList();
 
-	if (isEmpty(data)) {
+	if (!loading && isEmpty(data)) {
 		return (
 			<div style={{ marginLeft: 30 }}>
 				<EmptyState />
