@@ -49,7 +49,9 @@ function Profitabillity({ globalFilters, entityTabFilters }) {
 					<Tooltip
 						content={(
 							<div className={styles.text_styles}>
-								Shipment and customer level statistics
+								Shipment and customer level
+								<br />
+								statistics
 							</div>
 						)}
 						placement="right"

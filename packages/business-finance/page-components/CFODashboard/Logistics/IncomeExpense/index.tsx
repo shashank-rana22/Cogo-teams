@@ -131,8 +131,14 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 							<Tooltip
 								content={(
 									<div className={styles.text_styles}>
-										A comparison between consecutive months to identify the
-										month-on-month changes in cashflow.
+										A comparison between
+										<br />
+										consecutive months to identify
+										<br />
+										the
+										month-on-month changes
+										<br />
+										in cashflow.
 									</div>
 								)}
 								placement="right"
