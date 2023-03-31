@@ -103,8 +103,8 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 			const res = await drillDownArchiveTrigger({
 				params: {
 					period         : month.period || undefined,
-					startDate      : format(date?.startDate, 'yyyy-MM-dd') || undefined,
-					endDate        : format(date?.endDate, 'yyyy-MM-dd') || undefined,
+					startDate      : date ? format(date?.startDate, 'yyyy-MM-dd') : undefined,
+					endDate        : date ? format(date?.endDate, 'yyyy-MM-dd') : undefined,
 					archivedStatus : archivedStatus || 'BOOKED' || undefined,
 					serviceType    : serviceType || undefined,
 					query,
@@ -117,8 +117,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		} catch (error) {
 			Toast.error(error?.response?.data?.message);
 		}
-	}, [Amount, Percentage, Range,
-		archivedStatus, date?.endDate, date?.startDate, drillDownArchiveTrigger, query, serviceType]);
+	}, [Amount, Percentage, Range, archivedStatus, date, drillDownArchiveTrigger, query, serviceType]);
 
 	useEffect(() => {
 		if (!particularMonth) {
