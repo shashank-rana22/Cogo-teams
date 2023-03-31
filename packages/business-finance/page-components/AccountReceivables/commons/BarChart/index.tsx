@@ -12,7 +12,7 @@ const tooltTipStyle = {
 };
 
 interface BarchartProps {
-	currencyType?: string,
+	currencyType?: string | number,
 	data?: BarDatum[],
 	margin?: object,
 	dsoResponse?: boolean
