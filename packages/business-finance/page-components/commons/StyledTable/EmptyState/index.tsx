@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 const imageData = {
 	NoDataImage: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no-incident-data.svg',
 	cfoDashboard:
-'https://cogoport-testing.sgp1.digitaloceanspaces.com/5b0256497b211484546e7a26f76016af/No%20data-cuate.svg',
+'https://cogoport-production.sgp1.digitaloceanspaces.com/970a0d72c48e76c4da52963dfc852230/no-data.svg',
 };
 
 function EmptyState({ imageFind }) {
