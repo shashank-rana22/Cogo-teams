@@ -4181,6 +4181,12 @@ const partner = {
 			feature      : 'rfq',
 		},
 		{
+			api          : 'create_rfq_supply_agent_preference',
+			access_type  : 'private',
+			service_name : 'rfq',
+			feature      : 'rfq',
+		},
+		{
 			api          : 'get_contract_previous_service_providers',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
