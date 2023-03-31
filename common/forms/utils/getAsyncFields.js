@@ -202,6 +202,15 @@ function asyncAllotBanks() {
 	};
 }
 
+function listVendors() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'q',
+		endpoint    : 'list_vendors',
+		initialCall : false,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -218,4 +227,5 @@ export {
 	asyncFieldsListAgents,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	listVendors,
 };
