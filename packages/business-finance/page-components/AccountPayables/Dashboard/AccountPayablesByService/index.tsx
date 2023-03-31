@@ -22,35 +22,87 @@ function AccountPayablesByService() {
 	const overseas = data?.[8]?.amount;
 
 	const amountBoxData = () => {
-		if (activeBox === 'ocean') {
-			return (
-				<div>
+		switch (activeBox) {
+			case 'ocean':
+				return (
+					<div>
+						<div className={styles.imports_container}>
+							<div className={styles.sub_container}>
+								<div className={styles.ocean_text}>
+									Ocean
+								</div>
+							</div>
+							<div className={styles.vr} />
+							<div className={styles.sub_container}>
+								<div className={styles.label}>
+									FCL Imports
+								</div>
+								<div className={styles.ocean_value}>
+									<Tooltip content={getFormattedPrice(data[0]?.amount, 'INR')} interactive>
+										<div>{getAmountInLakhCrK(data[0]?.amount)}</div>
+									</Tooltip>
+								</div>
+							</div>
+							<div className={styles.vr} />
+							<div className={styles.sub_container}>
+								<div className={styles.label}>
+									FCL Exports
+								</div>
+								<div className={styles.ocean_value}>
+									<Tooltip content={getFormattedPrice(data[1]?.amount, 'INR')} interactive>
+										<div>
+											{getAmountInLakhCrK(data[1]?.amount)}
+										</div>
+									</Tooltip>
+								</div>
+							</div>
+							<div className={styles.vr} />
+							<div className={styles.sub_container}>
+								<div className={styles.label}>
+									LCL Imports
+								</div>
+								<div className={styles.ocean_value}>
+									<Tooltip content={getFormattedPrice(data[2]?.amount, 'INR')} interactive>
+										<div>
+											{getAmountInLakhCrK(data[2]?.amount)}
+										</div>
+									</Tooltip>
+								</div>
+							</div>
+							<div className={styles.vr} />
+							<div className={styles.sub_container}>
+								<div className={styles.label}>
+									LCL Exports
+								</div>
+								<div className={styles.ocean_value}>
+									<Tooltip content={getFormattedPrice(data[3]?.amount, 'INR')} interactive>
+										<div>
+											{getAmountInLakhCrK(data[3]?.amount)}
+										</div>
+									</Tooltip>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				);
+			case 'air':
+				return (
 					<div className={styles.imports_container}>
 						<div className={styles.sub_container}>
 							<div className={styles.ocean_text}>
-								Ocean
+								Air
 							</div>
 						</div>
 						<div className={styles.vr} />
 						<div className={styles.sub_container}>
 							<div className={styles.label}>
-								FCL Imports
+								Domestic
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[0]?.amount, 'INR')} interactive>
-									<div>{getAmountInLakhCrK(data[0]?.amount)}</div>
-								</Tooltip>
-							</div>
-						</div>
-						<div className={styles.vr} />
-						<div className={styles.sub_container}>
-							<div className={styles.label}>
-								FCL Exports
-							</div>
-							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[1]?.amount, 'INR')} interactive>
+								<Tooltip content={getFormattedPrice(data[4]?.amount, 'INR')} interactive>
 									<div>
-										{getAmountInLakhCrK(data[1]?.amount)}
+										{getAmountInLakhCrK(data[4]?.amount)}
 									</div>
 								</Tooltip>
 							</div>
@@ -58,12 +110,37 @@ function AccountPayablesByService() {
 						<div className={styles.vr} />
 						<div className={styles.sub_container}>
 							<div className={styles.label}>
-								LCL Imports
+								International
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[2]?.amount, 'INR')} interactive>
+								<Tooltip content={getFormattedPrice(data[5]?.amount, 'INR')} interactive>
 									<div>
-										{getAmountInLakhCrK(data[2]?.amount)}
+										{getAmountInLakhCrK(data[5]?.amount)}
+									</div>
+								</Tooltip>
+							</div>
+						</div>
+
+					</div>
+				);
+			case 'surface':
+				return (
+					<div className={styles.imports_container}>
+
+						<div className={styles.sub_container}>
+							<div className={styles.ocean_text}>
+								Surface
+							</div>
+						</div>
+						<div className={styles.vr} />
+						<div className={styles.sub_container}>
+							<div className={styles.label}>
+								Trailer
+							</div>
+							<div className={styles.ocean_value}>
+								<Tooltip content={getFormattedPrice(data[6]?.amount, 'INR')} interactive>
+									<div>
+										{getAmountInLakhCrK(data[6]?.amount)}
 									</div>
 								</Tooltip>
 							</div>
@@ -71,99 +148,23 @@ function AccountPayablesByService() {
 						<div className={styles.vr} />
 						<div className={styles.sub_container}>
 							<div className={styles.label}>
-								LCL Exports
+								Haulage
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[3]?.amount, 'INR')} interactive>
+								<Tooltip content={getFormattedPrice(data[7]?.amount, 'INR')} interactive>
 									<div>
-										{getAmountInLakhCrK(data[3]?.amount)}
+										{getAmountInLakhCrK(data[7]?.amount)}
 									</div>
 								</Tooltip>
 							</div>
 						</div>
 
 					</div>
-				</div>
-			);
-		}
-		if (activeBox === 'air') {
-			return (
-				<div className={styles.imports_container}>
-					<div className={styles.sub_container}>
-						<div className={styles.ocean_text}>
-							Air
-						</div>
-					</div>
-					<div className={styles.vr} />
-					<div className={styles.sub_container}>
-						<div className={styles.label}>
-							Domestic
-						</div>
-						<div className={styles.ocean_value}>
-							<Tooltip content={getFormattedPrice(data[4]?.amount, 'INR')} interactive>
-								<div>
-									{getAmountInLakhCrK(data[4]?.amount)}
-								</div>
-							</Tooltip>
-						</div>
-					</div>
-					<div className={styles.vr} />
-					<div className={styles.sub_container}>
-						<div className={styles.label}>
-							International
-						</div>
-						<div className={styles.ocean_value}>
-							<Tooltip content={getFormattedPrice(data[5]?.amount, 'INR')} interactive>
-								<div>
-									{getAmountInLakhCrK(data[5]?.amount)}
-								</div>
-							</Tooltip>
-						</div>
-					</div>
+				);
 
-				</div>
-			);
+			default:
+				return null;
 		}
-		if (activeBox === 'surface') {
-			return (
-				<div className={styles.imports_container}>
-
-					<div className={styles.sub_container}>
-						<div className={styles.ocean_text}>
-							Surface
-						</div>
-					</div>
-					<div className={styles.vr} />
-					<div className={styles.sub_container}>
-						<div className={styles.label}>
-							Trailer
-						</div>
-						<div className={styles.ocean_value}>
-							<Tooltip content={getFormattedPrice(data[6]?.amount, 'INR')} interactive>
-								<div>
-									{getAmountInLakhCrK(data[6]?.amount)}
-								</div>
-							</Tooltip>
-						</div>
-					</div>
-					<div className={styles.vr} />
-					<div className={styles.sub_container}>
-						<div className={styles.label}>
-							Haulage
-						</div>
-						<div className={styles.ocean_value}>
-							<Tooltip content={getFormattedPrice(data[7]?.amount, 'INR')} interactive>
-								<div>
-									{getAmountInLakhCrK(data[7]?.amount)}
-								</div>
-							</Tooltip>
-						</div>
-					</div>
-
-				</div>
-			);
-		}
-		return null;
 	};
 
 	return (
