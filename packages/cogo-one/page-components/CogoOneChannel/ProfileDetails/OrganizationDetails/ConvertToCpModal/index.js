@@ -56,10 +56,10 @@ function ConvertToCpModal({
 					/>
 					<div className={styles.select_label}>Choose Portfolio Manager</div>
 					<SelectController
-						className={styles.select_controller}
-						control={control}
 						{...portfolio_manager}
 						{...listPartnerUsers}
+						className={styles.select_controller}
+						control={control}
 						isClearable
 					/>
 					<div className={styles.footer_buttons}>
