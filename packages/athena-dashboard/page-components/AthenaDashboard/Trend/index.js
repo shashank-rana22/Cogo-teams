@@ -112,7 +112,7 @@ function Trends() {
 							</div>
 							<div>
 								<Button
-									className={styles.clearAll}
+									className={styles.clear_all}
 									themeType="secondary"
 									onClick={() => { setHscodeArr([]); setResponsevalue([]); }}
 									style={{ border: 'None', backgroundColor: 'transparent', paddingTop: '0px' }}

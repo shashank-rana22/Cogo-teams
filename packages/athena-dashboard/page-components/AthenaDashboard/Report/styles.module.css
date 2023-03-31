@@ -1,84 +1,90 @@
-.top_text{
-    font-size: 30px;
-    font: poppins;
-}
-.table{
-    display: block;
-    width: 100%;
-    margin-top: 50px;
-    background-color: white;
-    box-shadow: 0 0 4px rgb(0 0 0 / 15%);
-    height: 120%;
-   
-    @media (max-width: 768px) {
-        overflow-x: scroll;
-    }
-}
-.left_container{
-    display: block;
-    width: 180px;
-    text-align: center;
-
-    @media (max-width:768px){
-        width: 100%;
-    }
-}
-.whole_container{
-    overflow-y: scroll;
-    height: 500px;
-    margin-top: 18px;
-    background-color: white;
-    width: 200px;
-    scrollbar-color: red;
-
-    @media (max-width:768px){
-        width: 100%;
-    }
-}
-.second_trend{
-    display: flex;
-    background-color: white;
-    margin-top: 25px;
-    border: 2px solid beige;
-    border-radius: 6px;
-    box-shadow: 10px 5px 5px rgb(239, 233, 233);
-
-    @media (max-width:768px){
-        display:block;
-    }
-}
-.trendingOverTime{
-    font-size: 20px;
-    font-weight: bold;
-}
-.value_of_goods{
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 10px;
+.top_text {
+	font: poppins;
+	font-size: 30px;
 }
 
-.globalSupplierTable{
-    display: block;
-    width: 100%;
-    margin-top: 30px;
-    background-color: white;
-    box-shadow: 0 0 4px rgb(0 0 0 / 15%);
-    height: 120%;
-    overflow-x: scroll;
-   
-    @media (max-width: 768px) {
-        overflow-x: scroll;
-    }
+.table {
+	display: block;
+	width: 100%;
+	height: 120%;
+	margin-top: 50px;
+	background-color: white;
+	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
 
+	@media (max-width: 768px) {
+		overflow-x: scroll;
+	}
 }
-.topGlobalSuppliers{
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 50px;
+
+.left_container {
+	display: block;
+	width: 180px;
+	text-align: center;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
-.loader{
-    width: 18px;
+
+.whole_container {
+	width: 200px;
+	height: 500px;
+	margin-top: 18px;
+	overflow-y: scroll;
+	background-color: white;
+	scrollbar-color: red;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.second_trend {
+	display: flex;
+	margin-top: 25px;
+	background-color: white;
+	border: 2px solid beige;
+	border-radius: 6px;
+	box-shadow: 10px 5px 5px rgb(239 233 233);
+
+	@media (max-width: 768px) {
+		display: block;
+	}
+}
+
+.trending_over_time {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.value_of_goods {
+	margin-top: 10px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.global_supplier_table {
+	display: block;
+	width: 100%;
+	height: 120%;
+	margin-top: 30px;
+	overflow-x: scroll;
+	background-color: white;
+	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+
+	@media (max-width: 768px) {
+		overflow-x: scroll;
+	}
+}
+
+.top_global_suppliers {
+	margin-top: 50px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.loader {
+	width: 18px;
 	height: 18px;
 	margin: 0;
 }
-

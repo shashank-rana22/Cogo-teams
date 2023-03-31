@@ -1,90 +1,108 @@
-.whole_page{
-    margin-top: 18px;
-}
-.multiselect{
-    margin-top: 5px;
-}
-.header{
-    display: flex;
-    justify-content: space-between;
-    width: 70%;
-}
-.button{
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
-}
-.search_container{
-    display: flex;
-    background-color: white;
-    margin-top: 20px;
-}
-.rect_div{
-    min-height: 208px;
-    background-color: #f9f9f9;
-    display: flex;
-}
-.text_rect{
-    padding-top: 90px;
-    justify-content: center;
-    display: flex;
-    width: 100%;
-}
-.checkbox{
-    width: 150px;
-    height: 40px;
-    background-color: #E0E0E0;
-    border-radius: 6px;
-}
-.codes{
-    margin-top: 24px;
-    display: block;
-}
-.description{
-    margin-top: 10px;
-    margin-left: 30px;
-}
-.set_css_output{
-    display:flex;
-}
-.build_report_button{
-    margin-top: 20px;
-}
-.clearAll{
-    margin-top: 25px;
-    background-color: transparent;
-    border: None;
-    cursor: pointer;
-}
-.selected_text{
-    text-align: left;
-}
-.buttons{
-    display: flex;
+.whole_page {
+	margin-top: 18px;
 }
 
-.button_group{
-    display: flex;
+.multiselect {
+	margin-top: 5px;
 }
-.display_rect{
-    display: block;
-    margin-left: 50px;
-    margin-top: 20px;
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	width: 70%;
 }
-.display_selected_code{
-    display: flex;
-    margin-top: 20px;
-    flex-wrap: wrap;
+
+.button {
+	cursor: pointer;
+	background-color: transparent;
+	border: 0;
 }
-.individual{
-    margin-right: 15px;
-    width: 100px;
-    height: 40px;
-    background-color: #E0E0E0;
-    border-radius: 6px;
-    text-align: center;
-    margin-top: 4px;
+
+.search_container {
+	display: flex;
+	margin-top: 20px;
+	background-color: white;
 }
-.individual_text{
-    margin-top: 10px;
+
+.rect_div {
+	display: flex;
+	min-height: 208px;
+	background-color: #f9f9f9;
+}
+
+.text_rect {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding-top: 90px;
+}
+
+.checkbox {
+	width: 150px;
+	height: 40px;
+	background-color: #e0e0e0;
+	border-radius: 6px;
+}
+
+.codes {
+	display: block;
+	margin-top: 24px;
+}
+
+.description {
+	margin-top: 10px;
+	margin-left: 30px;
+}
+
+.set_css_output {
+	display: flex;
+}
+
+.build_report_button {
+	margin-top: 20px;
+}
+
+.clear_all {
+	margin-top: 25px;
+	cursor: pointer;
+	background-color: transparent;
+	border: none;
+}
+
+.selected_text {
+	text-align: left;
+}
+
+.buttons {
+	display: flex;
+}
+
+.button_group {
+	display: flex;
+}
+
+.display_rect {
+	display: block;
+	margin-top: 20px;
+	margin-left: 50px;
+}
+
+.display_selected_code {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 20px;
+}
+
+.individual {
+	width: 100px;
+	height: 40px;
+	margin-top: 4px;
+	margin-right: 15px;
+	text-align: center;
+	background-color: #e0e0e0;
+	border-radius: 6px;
+}
+
+.individual_text {
+	margin-top: 10px;
 }

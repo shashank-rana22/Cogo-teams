@@ -41,7 +41,7 @@ function Report() {
 							: <Placeholder height="100px" width="100%" />}
 					</div>
 					<div>
-						<div className={styles.trendingOverTime}>
+						<div className={styles.trending_over_time}>
 							Trending Over Time:
 						</div>
 						{!loading ? (
@@ -381,13 +381,13 @@ function Report() {
 						)
 					}
 
-					<div className={styles.topGlobalSuppliers}>
+					<div className={styles.top_global_suppliers}>
 						Top Global Suppliers:
 					</div>
 					{!loading ? (
 						<div className={styles.tablecontainer}>
 							<Table
-								className={styles.globalSupplierTable}
+								className={styles.global_supplier_table}
 								columns={top_global_supplier_mapping}
 								data={globalsupply}
 							/>
