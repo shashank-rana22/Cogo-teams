@@ -146,7 +146,7 @@ function BasicDetailsForm({
 					const Element = getElementController(type);
 
 					return (
-						<div className={styles.control_container}>
+						<div key={name} className={styles.control_container}>
 							<div className={styles.label}>
 								{label}
 							</div>

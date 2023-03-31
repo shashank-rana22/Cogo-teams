@@ -2,14 +2,12 @@ import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useMemo } from 'react';
 
-import getRequiredControl from '../../../../utils/getRequiredControl';
 import SingleQuestionComponent from '../../../SingleQuestionComponent';
 
 import controls from './controls';
 import styles from './styles.module.css';
-
-const fieldArrayControls = getRequiredControl({ controls, name: 'case_questions' });
 
 function QuestionForm({
 	control,
@@ -25,6 +23,18 @@ function QuestionForm({
 	mode,
 	questionTypeWatch,
 }) {
+	const NAME_CONTROL_MAPPING = useMemo(() => {
+		const hash = {};
+
+		controls.forEach((item) => {
+			hash[item?.name] = item;
+		});
+
+		return hash;
+	}, []);
+
+	const fieldArrayControls = useMemo(() => NAME_CONTROL_MAPPING.case_questions, [NAME_CONTROL_MAPPING]);
+
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: fieldArrayControls.name,

@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 
 function CreateNewTest({ control, errors, data, setValue }) {
 	const router = useRouter();
+
 	const controls = useMemo(() => getControls(), []);
 
 	const onNavigate = () => {

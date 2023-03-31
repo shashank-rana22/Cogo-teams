@@ -17,7 +17,10 @@ function CaseAnswerKey({ item, caseToShow }) {
 			{item.id === caseToShow
 				? (
 					test_case_study_questions.map((testCaseStudyQuestion) => (
-						<Tooltip content={<CorrectAnswersCombined testCaseStudyQuestion={testCaseStudyQuestion} />}>
+						<Tooltip
+							key={testCaseStudyQuestion?.id}
+							content={<CorrectAnswersCombined testCaseStudyQuestion={testCaseStudyQuestion} />}
+						>
 							<div className={styles.answer_key}>
 								{getCorrectAnswers({ answers: testCaseStudyQuestion?.test_question_answers })}
 							</div>
