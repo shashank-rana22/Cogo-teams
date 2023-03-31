@@ -2,7 +2,6 @@ import { Popover, Input, Pagination, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
-import EmptyPage from './EmptyPage';
 import FilterContent from './FilterContent';
 import Header from './Header';
 import useVendorList from './hooks/useVendorList';
@@ -35,12 +34,6 @@ function ListVendors() {
 	const router = useRouter();
 
 	const { list = [] } = data;
-
-	const isFilterEmpty = Object.keys(params?.filters).length === 1;
-
-	if (data.total_count === 0 && isFilterEmpty) {
-		return <EmptyPage />;
-	}
 
 	return (
 		<>
