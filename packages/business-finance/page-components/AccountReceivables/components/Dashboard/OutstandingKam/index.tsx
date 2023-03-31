@@ -32,7 +32,13 @@ function OutStandingKam({ kamOutstandingData, kamOutstandingLoading }: Outsatndi
 					<div className={styles.styled_kam_text}>
 						By KAM
 						<Tooltip
-							content="KAM outstanding amount and invoices."
+							content={(
+								<div>
+									KAM outstanding amount
+									<br />
+									and invoices.
+								</div>
+							)}
 							placement="top"
 						>
 							<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>

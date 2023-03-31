@@ -25,7 +25,7 @@ function DailySales({ filterValue }: DailySalesProps) {
 				<div>
 					<div className={styles.journey}>
 						Daily Sales Statistics
-						<Tooltip content="Daily Sales Statistics" placement="top">
+						<Tooltip content="Daily Sales Statistics." placement="top">
 							<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
 						</Tooltip>
 

@@ -80,7 +80,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 									<div
 										className={styles.invoice_text}
 									>
-										open Invoices -
+										Open Invoices -
 										{overallStats.openInvoicesCount || 0}
 										{' | '}
 										Customers -

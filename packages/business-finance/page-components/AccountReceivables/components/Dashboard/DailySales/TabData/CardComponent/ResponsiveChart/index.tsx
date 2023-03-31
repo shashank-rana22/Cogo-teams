@@ -42,7 +42,7 @@ function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
 			: (
 				<ResponsiveLine
 					data={finalData}
-					margin={{ top: 0, right: 120, bottom: 100, left: 90 }}
+					margin={{ top: 10, right: 120, bottom: 100, left: 90 }}
 					xScale={{ type: 'point' }}
 					enableGridX={false}
 					colors={['#88CAD1', '#F68B21']}

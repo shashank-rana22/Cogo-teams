@@ -21,7 +21,6 @@
 .sub_container {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 	width: 100%;
 	overflow-x: auto;
 	font-size: 12px;

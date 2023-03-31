@@ -1,6 +1,5 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMArrowRotateUp, IcMAirport, IcMTransport, IcMShip, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
@@ -41,6 +40,7 @@ interface ServiceCardProps {
 
 function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) {
 	const {
+		overallStats = {},
 		outstandingServiceWise = {},
 	} = outstandingData || {};
 
@@ -169,7 +169,7 @@ function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) 
 										<div className={styles.amount_currency}>
 											<div className={styles.account_receivables_open_line}>
 												<div>
-													{oceanCurrency || GLOBAL_CONSTANTS.currency_code.INR}
+													{oceanCurrency || overallStats?.dashboardCurrency}
 												</div>
 
 												<div
@@ -187,7 +187,7 @@ function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) 
 														<div className={styles.wrapper}>
 															{getFormattedPrice(
 																oceanOpen || 0,
-																oceanCurrency,
+																oceanCurrency || overallStats?.dashboardCurrency,
 																{
 																	notation              : 'compact',
 																	compactDisplay        : 'short',
@@ -217,7 +217,7 @@ function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) 
 										<div className={styles.amount_currency}>
 											<div className={styles.account_receivables_open_line}>
 												<div>
-													{air?.currency || GLOBAL_CONSTANTS.currency_code.INR}
+													{air?.currency || overallStats?.dashboardCurrency}
 												</div>
 
 												<div
@@ -235,7 +235,7 @@ function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) 
 														<div className={styles.wrapper}>
 															{getFormattedPrice(
 																airOpen || 0,
-																airCurrency,
+																airCurrency || overallStats?.dashboardCurrency,
 																{
 																	notation              : 'compact',
 																	compactDisplay        : 'short',
@@ -264,7 +264,7 @@ function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) 
 										<div className={styles.amount_currency}>
 											<div className={styles.account_receivables_open_line}>
 												<div>
-													{surface?.currency || GLOBAL_CONSTANTS.currency_code.INR}
+													{surface?.currency || overallStats?.dashboardCurrency}
 												</div>
 
 												<div
@@ -282,7 +282,7 @@ function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) 
 														<div className={styles.wrapper}>
 															{getFormattedPrice(
 																surfaceOpen || 0,
-																surfaceCurrency,
+																surfaceCurrency || overallStats?.dashboardCurrency,
 																{
 																	notation              : 'compact',
 																	compactDisplay        : 'short',
@@ -350,8 +350,8 @@ function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) 
 								<div>
 									<div className={styles.styled_ocean_text}>
 										{getFormattedPrice(
-											item?.openInvoices,
-											item?.currency,
+											item?.openInvoices || 0,
+											item?.currency || overallStats?.dashboardCurrency,
 											{
 												notation              : 'compact',
 												compactDisplay        : 'short',

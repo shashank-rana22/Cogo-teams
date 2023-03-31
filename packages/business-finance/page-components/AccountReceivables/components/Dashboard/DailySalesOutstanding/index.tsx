@@ -6,32 +6,22 @@ import React, { useState } from 'react';
 
 import BarChart from '../../../commons/BarChart';
 import DashboardLoader from '../../../commons/DashboardLoader';
+import { months } from '../../../constants';
 
 import styles from './styles.module.css';
-
-interface Quater {
-	quarter?: string,
-	qsoForQuarter?: number,
-	currency?: string
-}
-
-type DailySales = {
-	currency?: string,
-	dsoForTheMonth?: number,
-	month?: string
-} [];
-interface DailySalesOutstandingProps {
-	dailySalesOutstandingData?: DailySales,
-	dailySalesOutstandingApiLoading?: boolean,
-	quaterly?: Quater[],
-	quaterlyLoading?: boolean
-}
 
 function DailySalesOutstanding({
 	dailySalesOutstandingData,
 	dailySalesOutstandingApiLoading, quaterly, quaterlyLoading,
-}: DailySalesOutstandingProps) {
-	const [active, setActive] = useState(false);
+}) {
+	interface Props {
+		quarterView?: string;
+		graphView?: string;
+	}
+	const [params, onChangeParams] = useState<Props>({
+		quarterView : 'normalView',
+		graphView   : 'normalView',
+	});
 
 	const margin = {
 		top    : 10,
@@ -42,14 +32,31 @@ function DailySalesOutstanding({
 
 	if (dailySalesOutstandingApiLoading || quaterlyLoading) {
 		return (
-			<div className={styles.dashboard_loader}>
-				<div>
-					<DashboardLoader />
-				</div>
+			<div className={styles.container}>
+				<DashboardLoader />
 			</div>
 		);
 	}
+	const monthly = [];
 
+	function generateArrayOfMonths() {
+		const d = new Date();
+		const currentMonth1 = months[d.getMonth()];
+		const currentMonth2 = months[d.getMonth() - 1];
+		const currentMonth3 = months[d.getMonth() - 2];
+
+		const newArray = [currentMonth1, currentMonth2, currentMonth3];
+		return newArray;
+	}
+
+	const optionsVal = () => dailySalesOutstandingData.map(
+		(item) => ({
+		  return item;
+		}
+		),
+	);
+
+	const marginTop = params.graphView === 'graphView' ? '0px' : '36px';
 	return (
 		<div>
 			<div className={styles.container}>
@@ -59,7 +66,7 @@ function DailySalesOutstanding({
 					<div
 						className={styles.daily_sales}
 					>
-						<div className={styles.sales_container}>
+						<div style={{ display: 'flex', alignItems: 'center' }}>
 							<div
 								className={styles.styled_daily_text}
 							>
@@ -71,70 +78,113 @@ function DailySalesOutstanding({
 								 Account payments)/Total Sales X No. of Days"
 								placement="top"
 							>
-								<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
+								<div className={styles.icon}><IcMInfo /></div>
 							</Tooltip>
 						</div>
-						<div className={styles.border} />
+						<div className={styles.under_line} />
 					</div>
-					<div>
+					<div style={{ display: 'flex', alignItems: 'center' }}>
+						<div className={styles.styled_text}>
+							Quarter View
+						</div>
+						<div style={{ marginRight: '16px' }}>
+							<Toggle
+								name="quarter_toggle"
+								size="md"
+								value={params.quarterView}
+								onChange={(e) => onChangeParams((pv:any) => ({
+									...pv,
+									quarterView: e?.target?.checked ? 'quarterView' : 'normalView',
 
-						<Toggle
-							name="quarter_toggle"
-							size="md"
-							offLabel="Quaterly View"
-							onLabel="Graph View"
-							onChange={() => setActive((p) => !p)}
-							disabled={dailySalesOutstandingApiLoading || quaterlyLoading}
-						/>
+								}))}
+							/>
+						</div>
+						<div className={styles.styled_text}>
+							Graph View
+						</div>
+						<div>
+							<Toggle
+								name="graph_toggle"
+								size="md"
+								value={params.graphView}
+								onChange={(e) => onChangeParams((pv:any) => ({
+									...pv,
+									graphView: e?.target?.checked ? 'graphView' : pv.quarterView,
 
+								}))}
+							/>
+						</div>
 					</div>
 				</div>
 
-				<div className={styles.bar_chart}>
-					{!active && (
-						(quaterly).map((item, index) => (
-							<div className={styles.price_container}>
-								<div className={styles.amount}>
-									{getFormattedPrice(
-										item.qsoForQuarter,
-										item.currency,
-										{
-											notation              : 'compact',
-											compactDisplay        : 'short',
-											maximumFractionDigits : 2,
-											style                 : 'decimal',
-										},
-									)}
-								</div>
+				<div style={{ marginTop }}>
+					<div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+						{ params.quarterView === 'normalView' && params.graphView !== 'graphView' && (
+							(monthly || {}).map((item) => (
 								<div
-									className={styles.quarter_container}
+									className={styles.price_container}
 								>
-									<div
-										className={styles.quarter}
-									>
-										Q
-										{index + 1}
+									<div className={styles.amount}>
+										{getFormattedPrice(
+											item.amount,
+											item.dashboardCurrency,
+											{
+												notation              : 'compact',
+												compactDisplay        : 'short',
+												maximumFractionDigits : 2,
+												style                 : 'decimal',
+											},
+										)}
 									</div>
-									<div>
-										-
-										{item.quarter}
+									<div style={{ fontWeight: '500', fontSize: '16px' }}>
+										{item.duration}
 									</div>
 								</div>
-							</div>
-						)))}
+							)))}
+
+						{params.quarterView === 'quarterView' && params.graphView !== 'graphView' && (
+							(quaterly).map((item, index) => (
+								<div className={styles.price_container}>
+									<div className={styles.amount}>
+										{getFormattedPrice(
+											item.qsoForQuarter || 0,
+											item.currency,
+											{
+												notation              : 'compact',
+												compactDisplay        : 'short',
+												maximumFractionDigits : 2,
+												style                 : 'decimal',
+											},
+										)}
+									</div>
+									<div
+										className={styles.quarter_container}
+									>
+										<div
+											className={styles.quarter}
+										>
+											Q
+											{index + 1}
+										</div>
+										<div>
+											-
+											{item.quarter}
+										</div>
+									</div>
+								</div>
+							)))}
+					</div>
 				</div>
 
-				{ active && (
+				{ params.graphView === 'graphView' && (
 
 					<div className={styles.vertical_bar_graph}>
-
 						<BarChart
 							currencyType={dailySalesOutstandingData[0]?.currency || GLOBAL_CONSTANTS.currency_code.INR}
 							margin={margin}
 							data={dailySalesOutstandingData || []}
 							dsoResponse
 						/>
-
 					</div>
 				)}
 

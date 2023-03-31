@@ -62,7 +62,17 @@ function InvoiceJourney({ filterValue }: InvoiceJourneyProps) {
 					<div>
 						<div className={styles.journey}>
 							Invoice Statistics and TAT
-							<Tooltip content="Current month Invoice Statistics and TAT" placement="top">
+							<Tooltip
+								content={(
+									<div>
+										Current month Invoice
+										{' '}
+										<br />
+										Statistics and TAT.
+									</div>
+								)}
+								placement="top"
+							>
 								<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
 							</Tooltip>
 

@@ -86,8 +86,17 @@ function OutstandingAge({ data, loading }: OutsatndingProps) {
 
 						</div>
 						<Tooltip
-							content="Accounts receivables according to the length
-						 of an invoice has been outstanding."
+							content={(
+								<div>
+									Accounts receivables
+									<br />
+									according to the length
+									<br />
+									of an invoice has been
+									<br />
+									outstanding.
+								</div>
+							)}
 							placement="top"
 						>
 							<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
