@@ -14,14 +14,12 @@ interface FilterProps {
 }
 interface ItemProps {
 	filtersData:FilterProps;
-	activeTab:string
 }
 
 function TotalPayables({
 	filtersData,
-	activeTab,
 }:ItemProps) {
-	const { data, loading } = useGetTotalPayables({ filtersData, activeTab });
+	const { data, loading } = useGetTotalPayables({ filtersData });
 
 	const {
 		currentAmount,

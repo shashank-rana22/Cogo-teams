@@ -1,11 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-interface FilterProps {
-	activeTab:string,
-}
-
-const useGetInvoiceAmount = ({ activeTab }:FilterProps) => {
+const useGetInvoiceAmount = () => {
 	const [
 		{ data, loading },
 		trigger,
@@ -15,25 +12,23 @@ const useGetInvoiceAmount = ({ activeTab }:FilterProps) => {
 			method  : 'get',
 			authKey : 'get_payments_outstanding_payables-info',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const getDahboardData = async () => {
 		try {
 			await trigger({
-				params: {
-					entity: activeTab,
-				},
+				params: {},
 			});
-		} catch (err) {
-			console.log(err);
+		} catch (e) {
+			Toast.error(e?.message);
 		}
 	};
 
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab]);
+	}, []);
 
 	return {
 		data,

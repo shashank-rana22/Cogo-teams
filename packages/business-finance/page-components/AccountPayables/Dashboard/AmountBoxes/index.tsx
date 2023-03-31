@@ -8,15 +8,11 @@ import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
-interface ItemData {
-	activeTab:string,
-}
-
-function AmountBoxes({ activeTab }:ItemData) {
+function AmountBoxes() {
 	const {
 		data,
 		loading,
-	} = useGetInvoiceAmount({ activeTab });
+	} = useGetInvoiceAmount();
 	const {
 		accountPayables,
 		onAccountAmount,

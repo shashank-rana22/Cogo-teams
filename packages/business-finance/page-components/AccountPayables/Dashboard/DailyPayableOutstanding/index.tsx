@@ -13,12 +13,11 @@ interface FilterProps {
 }
 interface ItemData {
 	filters:FilterProps,
-	activeTab:string,
 }
 
-function DailyPayableOutstanding({ filters, activeTab }:ItemData) {
+function DailyPayableOutstanding({ filters }:ItemData) {
 	const [isQuarterView, setIsQuarterView] = useState(false);
-	const { data, loading } = useGetDailyPayableOutstanding({ isQuarterView, filters, activeTab });
+	const { data, loading } = useGetDailyPayableOutstanding({ isQuarterView, filters });
 	const formatedJan = format(data?.[0]?.yearMonth, 'MMM');
 	const formatedApr = format(data?.[1]?.yearMonth, 'MMM');
 	const formatedJul = format(data?.[2]?.yearMonth, 'MMM');

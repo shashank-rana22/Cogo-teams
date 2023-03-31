@@ -1,7 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useGetAgePayable = ({ activeTab }) => {
+const useGetAgePayable = () => {
 	const [filters, setFilters] = useState({
 		service  : undefined,
 		currency : undefined,
@@ -21,7 +22,7 @@ const useGetAgePayable = ({ activeTab }) => {
 			method  : 'get',
 			authKey : 'get_purchase_payable/dashboard/age-payable',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const getDahboardData = async () => {
@@ -30,18 +31,17 @@ const useGetAgePayable = ({ activeTab }) => {
 				params: {
 					service  : service || undefined,
 					currency : currency || undefined,
-					entity   : activeTab,
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(err.meessage);
 		}
 	};
 
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), service, currency, activeTab]);
+	}, [JSON.stringify(rest), service, currency]);
 
 	return {
 		data,

@@ -9,17 +9,13 @@ import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 import { monthControls } from './monthControls';
 import styles from './styles.module.css';
 
-interface ItemProps {
-	activeTab:string,
-}
-
-function TreasuryStatistics({ activeTab }:ItemProps) {
+function TreasuryStatistics() {
 	const {
 		data,
 		filters,
 		setFilters,
 		loading,
-	} = useGetTreasuryStats({ activeTab });
+	} = useGetTreasuryStats();
 
 	const {
 		allocatedAmount,

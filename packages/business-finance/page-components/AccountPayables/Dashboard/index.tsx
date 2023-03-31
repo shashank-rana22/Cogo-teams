@@ -4,7 +4,6 @@ import AccountPayablesByService from './AccountPayablesByService';
 import AmountBoxes from './AmountBoxes';
 import BillTurnAroundTime from './BillTurnAroundTime';
 import DailyPayableOutstanding from './DailyPayableOutstanding';
-import EntityTab from './EntityTab';
 import EventsTrend from './EventsTrend';
 import useGetAgePayable from './hooks/useGetAgePayable';
 import OutstandingByAge from './OutstandingByAge';
@@ -15,28 +14,25 @@ import TreasuryStatistics from './TreasuryStatistics';
 import VendorsList from './VendorsList';
 
 function Dashboard() {
-	const [activeTab, setActiveTab] = useState('301');
 	const [showData, setShowData] = useState('day');
-	const { data, filters, setFilters, loading } = useGetAgePayable({ activeTab });
+	const { data, filters, setFilters, loading } = useGetAgePayable();
 
 	return (
 		<div className={styles.container}>
-			<EntityTab activeTab={activeTab} setActiveTab={setActiveTab} />
-			<AmountBoxes activeTab={activeTab} />
-			<AccountPayablesByService activeTab={activeTab} />
-			<TreasuryStatistics activeTab={activeTab} />
-			<div className={styles.hr} />
+			<AmountBoxes />
+			<AccountPayablesByService />
+			<TreasuryStatistics />
 			<SelectFilters filters={filters} setFilters={setFilters} />
-			<EventsTrend showData={showData} setShowData={setShowData} filtersData={filters} activeTab={activeTab} />
-			<BillTurnAroundTime activeTab={activeTab} filtersData={filters} />
+			<EventsTrend showData={showData} setShowData={setShowData} filtersData={filters} />
+			<BillTurnAroundTime filtersData={filters} />
 			<div className={styles.sub_container}>
 				<div className={styles.outstanding}>
 					<OutstandingByAge data={data} loading={loading} />
 					<TotalPayables
 						filtersData={filters}
-						activeTab={activeTab}
+
 					/>
-					<DailyPayableOutstanding filters={filters} activeTab={activeTab} />
+					<DailyPayableOutstanding filters={filters} />
 				</div>
 				<VendorsList />
 			</div>

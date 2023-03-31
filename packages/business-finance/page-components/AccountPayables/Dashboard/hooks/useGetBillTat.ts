@@ -8,13 +8,12 @@ interface FilterProps {
 	service:string,
 }
 interface ItemProps {
-	activeTab:string,
 	filtersData:FilterProps,
 	firstEvent:string,
 	secondEvent:string,
 }
 
-const useGetBillTat = ({ activeTab, filtersData, firstEvent, secondEvent }:ItemProps) => {
+const useGetBillTat = ({ filtersData, firstEvent, secondEvent }:ItemProps) => {
 	const [filters, setFilters] = useState({
 		Date: undefined,
 	});
@@ -36,7 +35,7 @@ const useGetBillTat = ({ activeTab, filtersData, firstEvent, secondEvent }:ItemP
 			method  : 'get',
 			authKey : 'get_purchase_payable_dashboard_bill_tat',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const onApply = async () => {
@@ -44,7 +43,6 @@ const useGetBillTat = ({ activeTab, filtersData, firstEvent, secondEvent }:ItemP
 			const payload = {
 				service     : service || undefined,
 				currency    : currency || undefined,
-				entity      : activeTab,
 				firstEvent  : firstEvent || undefined,
 				secondEvent : secondEvent || undefined,
 				from        : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)

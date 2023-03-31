@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
@@ -8,10 +9,9 @@ interface FilterProps {
 interface ItemProps {
 	showData:string;
 	filtersData:FilterProps;
-	activeTab:string;
 }
 
-const useGetEventsTrend = ({ showData, filtersData, activeTab }:ItemProps) => {
+const useGetEventsTrend = ({ showData, filtersData }:ItemProps) => {
 	const [filters, setFilters] = useState({
 		events: 'so2UploadTrend',
 	});
@@ -29,7 +29,7 @@ const useGetEventsTrend = ({ showData, filtersData, activeTab }:ItemProps) => {
 			method  : 'get',
 			authKey : 'get_purchase_payable/dashboard/events-trend',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const getDahboardData = async () => {
@@ -41,18 +41,17 @@ const useGetEventsTrend = ({ showData, filtersData, activeTab }:ItemProps) => {
 					previousCount : showData === 'day' ? '30' : '12',
 					service       : service || undefined,
 					currency      : currency || undefined,
-					entity        : activeTab,
 				},
 			});
-		} catch (err) {
-			console.log(err);
+		} catch (e) {
+			Toast.error(e?.message);
 		}
 	};
 
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), events, showData, service, currency, activeTab]);
+	}, [JSON.stringify(rest), events, showData, service, currency]);
 
 	return {
 		data,

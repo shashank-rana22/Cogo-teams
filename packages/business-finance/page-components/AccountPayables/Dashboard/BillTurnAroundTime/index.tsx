@@ -26,16 +26,14 @@ interface FilterProps {
 	service:string,
 }
 interface ItemProps {
-	activeTab:string,
 	filtersData:FilterProps,
 }
 
-function BillTurnAroundTime({ activeTab, filtersData }:ItemProps) {
+function BillTurnAroundTime({ filtersData }:ItemProps) {
 	const [firstEvent, setFirstEvent] = useState('');
 	const [secondEvent, setSecondEvent] = useState('');
 
 	const { data, loading, filters, setFilters, onApply } = useGetBillTat({
-		activeTab,
 		filtersData,
 		firstEvent,
 		secondEvent,

@@ -9,17 +9,13 @@ import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	activeTab:string,
-}
-
-function AccountPayablesByService({ activeTab }:ItemProps) {
+function AccountPayablesByService() {
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const [activeBox, setActiveBox] = useState(null);
 	const handleClick = () => {
 		setIsAccordionActive(true);
 	};
-	const { data = [], loading } = useGetPayablesByService({ activeTab });
+	const { data = [], loading } = useGetPayablesByService();
 	const oceanAmount = data?.[0]?.amount + data?.[1]?.amount + data?.[2]?.amount + data?.[3]?.amount;
 	const airAmount = data?.[4]?.amount + data?.[5]?.amount;
 	const surfaceAmount = data?.[6]?.amount + data?.[7]?.amount;

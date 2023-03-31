@@ -1,7 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetDailyPayableOutstanding = ({ isQuarterView, filters, activeTab }) => {
+const useGetDailyPayableOutstanding = ({ isQuarterView, filters }) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -11,7 +12,7 @@ const useGetDailyPayableOutstanding = ({ isQuarterView, filters, activeTab }) =>
 			method  : 'get',
 			authKey : 'get_purchase_payable/dashboard/daily-payable-outstanding',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 	const {
 		service,
@@ -25,18 +26,17 @@ const useGetDailyPayableOutstanding = ({ isQuarterView, filters, activeTab }) =>
 					view     : isQuarterView ? 'quarter' : 'month',
 					service  : service || undefined,
 					currency : currency || undefined,
-					entity   : activeTab,
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(err?.message);
 		}
 	};
 
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), service, currency, isQuarterView, activeTab]);
+	}, [JSON.stringify(rest), service, currency, isQuarterView]);
 
 	return {
 		data,

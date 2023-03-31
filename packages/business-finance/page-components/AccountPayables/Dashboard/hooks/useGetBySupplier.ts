@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -15,7 +16,7 @@ const useGetBySupplier = ({ showVendorsList }:FilterProps) => {
 			method  : 'get',
 			authKey : 'get_payments_outstanding_by_supplier',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const getDahboardData = async () => {
@@ -28,7 +29,7 @@ const useGetBySupplier = ({ showVendorsList }:FilterProps) => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(err?.message);
 		}
 	};
 

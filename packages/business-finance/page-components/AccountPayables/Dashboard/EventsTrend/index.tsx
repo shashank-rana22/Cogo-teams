@@ -33,17 +33,16 @@ interface ItemProps {
 	showData:string;
 	setShowData:Function;
 	filtersData:FilterProps;
-	activeTab:string;
 }
 
-function EventsTrend({ showData, setShowData, filtersData, activeTab }:ItemProps) {
+function EventsTrend({ showData, setShowData, filtersData }:ItemProps) {
 	const [isCountView, setIsCountView] = useState(false);
 	const {
 		data,
 		loading,
 		filters,
 		setFilters,
-	} = useGetEventsTrend({ showData, filtersData, activeTab });
+	} = useGetEventsTrend({ showData, filtersData });
 
 	return (
 		<div className={styles.container}>

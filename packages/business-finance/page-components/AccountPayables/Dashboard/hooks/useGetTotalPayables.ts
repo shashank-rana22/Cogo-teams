@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -7,10 +8,9 @@ interface FilterProps {
 }
 interface ItemProps {
 	filtersData:FilterProps;
-	activeTab:string
 }
 
-const useGetTotalPayables = ({ filtersData, activeTab }:ItemProps) => {
+const useGetTotalPayables = ({ filtersData }:ItemProps) => {
 	const {
 		service,
 		currency,
@@ -25,7 +25,7 @@ const useGetTotalPayables = ({ filtersData, activeTab }:ItemProps) => {
 			method  : 'get',
 			authKey : 'get_purchase_payable/dashboard/total-payables',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const getDahboardData = async () => {
@@ -34,18 +34,17 @@ const useGetTotalPayables = ({ filtersData, activeTab }:ItemProps) => {
 				params: {
 					service  : service || undefined,
 					currency : currency || undefined,
-					entity   : activeTab,
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(err?.message);
 		}
 	};
 
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), service, currency, activeTab]);
+	}, [JSON.stringify(rest), service, currency]);
 
 	return {
 		data,

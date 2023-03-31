@@ -1,11 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-interface Filterprops {
-	activeTab:string,
-}
-
-const useGetPayablesByService = ({ activeTab }:Filterprops) => {
+const useGetPayablesByService = () => {
 	const [
 		{ data, loading },
 		trigger,
@@ -15,25 +12,23 @@ const useGetPayablesByService = ({ activeTab }:Filterprops) => {
 			method  : 'get',
 			authKey : 'get_purchase_payable/dashboard/paybles-by-service',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const getDahboardData = async () => {
 		try {
 			await trigger({
-				params: {
-					entity: activeTab,
-				},
+				params: {},
 			});
-		} catch (err) {
-			console.log(err);
+		} catch (e) {
+			Toast.error(e?.message);
 		}
 	};
 
 	useEffect(() => {
 		getDahboardData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab]);
+	}, []);
 
 	return {
 		data,
