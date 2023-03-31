@@ -13,7 +13,34 @@ function Price({
 	setShowChargeCodes = () => {},
 	setShowPrice,
 }) {
-	const { requestRate, loading } = useCreateShipmentAdditionalService({ refetch, setShowChargeCodes });
+	const afterRequestRate = () => {
+		setShowChargeCodes(false);
+		refetch();
+	};
+
+	const { apiTrigger, loading } = useCreateShipmentAdditionalService({
+		refetch        : afterRequestRate,
+		successMessage : 'Successfully Requested',
+	});
+
+	const onRequestRate = (data) => {
+		const addedService = (data.services || []).find(
+			(service) => service.service_type === data.service_type,
+		);
+		const { name, code, shipmentId, service_type } = data;
+		const payload = {
+			name,
+			code,
+			shipment_id           : shipmentId,
+			service_type,
+			service_id            : addedService?.id,
+			is_rate_available     : false,
+			state                 : 'requested_for_importer_exporter',
+			add_to_sell_quotation : true,
+		};
+
+		apiTrigger(payload);
+	};
 
 	return item?.rates ? (
 		<p>$ 0</p>
@@ -36,7 +63,7 @@ function Price({
 				themeType="secondary"
 				onClick={(e) => {
 					e.stopPropagation();
-					requestRate(item);
+					onRequestRate(item);
 				}}
 				style={{ marginRight: 10 }}
 				disabled={loading}

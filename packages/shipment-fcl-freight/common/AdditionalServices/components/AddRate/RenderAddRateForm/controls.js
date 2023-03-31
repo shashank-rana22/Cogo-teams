@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import { startCase } from '@cogoport/utils';
 
 const currencyOptions = [
 	GLOBAL_CONSTANTS.currency_code.INR,
@@ -10,7 +11,12 @@ const currencyOptions = [
 	value : currency,
 }));
 
-const controls = ({ unitOptions }) => {
+const controls = ({ serviceData }) => {
+	const unitOptions = [];
+	if (serviceData?.units) {
+		serviceData?.units?.forEach((unit) => { unitOptions.push({ label: startCase(unit), value: unit }); });
+	} else unitOptions.push({ label: startCase(serviceData?.unit), value: serviceData?.unit });
+
 	const formControl = [
 		{
 			name    : 'currency',
@@ -45,7 +51,7 @@ const controls = ({ unitOptions }) => {
 			rules       : { required: 'Quantity is required' },
 		},
 		{
-			name        : 'sell_price',
+			name        : 'price',
 			label       : 'Sell Price',
 			type        : 'input',
 			span        : 6,

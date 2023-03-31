@@ -29,7 +29,7 @@ function List({
 	const [showIp, setShowIp] = useState(false);
 	const [pageLimit, setPageLimit] = useState(8);
 
-	const { list: additionalServiceList, refetch, loading, total_count } = useListAdditionalServices({
+	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
 		shipment_data,
 		pageLimit,
 	});
@@ -76,7 +76,7 @@ function List({
 				</div>
 			) : null}
 
-			{total_count > 8
+			{totalCount > 8
 				? (
 					<div className={styles.show_more}>
 						{pageLimit > 8

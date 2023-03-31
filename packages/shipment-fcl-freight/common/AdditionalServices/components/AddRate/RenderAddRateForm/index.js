@@ -10,7 +10,6 @@ function RenderAddRateForm({
 	control,
 	errors,
 	serviceData = {},
-	unitOptions = [],
 }) {
 	const serviceProviderEmbededOptions = useGetAsyncOptions(
 		merge(asyncFieldsOrganization(), {
@@ -27,7 +26,7 @@ function RenderAddRateForm({
 		}),
 	);
 
-	const { formControl } = controls({ unitOptions });
+	const { formControl } = controls({ serviceData });
 
 	const renderForm = (field) => {
 		switch (field.type) {
