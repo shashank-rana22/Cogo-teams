@@ -28,17 +28,14 @@ function Charts({ GraphData = [], hideChart = false }) {
 	const graphData = [
 		{
 			id   : 'cogoverse_cancelled_shipments',
-			// color : 'hsl(47, 70%, 50%)',
 			data : cancelled_data,
 		},
 		{
 			id   : 'cogoverse_active_shipments',
-			// color : 'hsl(27, 70%, 50%)',
 			data : active_data,
 		},
 		{
 			id   : 'cogoverse_total_shipments',
-			// color : 'hsl(57, 70%, 50%)',
 			data : total_data,
 		},
 
@@ -82,7 +79,6 @@ function Charts({ GraphData = [], hideChart = false }) {
 			    legend         : 'Shipments',
             	legendOffset   : -50,
             	legendPosition : 'middle',
-            	// format         : (v) => formattedTime(v),
 					}}
 					tooltip={({ point = {} }) => {
             	const { borderColor, data } = point;
@@ -91,7 +87,6 @@ function Charts({ GraphData = [], hideChart = false }) {
 	<div className={styles.tool_tip}>
 		<span style={{ background: borderColor }} />
 		<strong>
-			{/* {formattedDate(data.x)} */}
 			{(data.x)}
 
 			{' '}
