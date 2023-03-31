@@ -5,9 +5,9 @@
 .sub_container {
 	display: flex;
 	justify-content: space-between;
+	padding-right: 4px;
 	padding-bottom: 16px;
 	padding-left: 4px;
-	padding-right: 4px;
 }
 
 .box {
@@ -67,8 +67,8 @@
 }
 
 .loss_icon {
-	margin-left: -12px;
 	margin-right: 12px;
+	margin-left: -12px;
 	color: #ed3726;
 	transform: translateX(10px) rotate(45deg);
 }
