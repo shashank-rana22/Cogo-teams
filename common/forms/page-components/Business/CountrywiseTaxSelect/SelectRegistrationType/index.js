@@ -8,10 +8,10 @@ const countrywiseOptions = {
 			label : 'PAN',
 			value : 'pan',
 		},
-		{
-			label : 'GST',
-			value : 'gstin',
-		},
+		// {
+		// 	label : 'GST',
+		// 	value : 'gstin',
+		// },
 	],
 	[SERVICABLE_COUNTRY_IDS.VN]: [
 		{
