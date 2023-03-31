@@ -1,0 +1,40 @@
+.container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.upload_invoice {
+	width: 40%;
+	height: 520px;
+	overflow: scroll;
+	border: 1px solid black;
+	border-radius: 8px;
+}
+
+.line_item {
+	width: 58%;
+	padding: 8px;
+	border: 0.5px solid black;
+}
+
+.confirm {
+	display: flex;
+	align-items: center;
+	margin: 12px 20px 0 8px;
+	font-size: 12px;
+	color: #f68b21;
+}
+
+.select {
+	width: 15%;
+	margin: 12px 0 0 8px;
+}
+
+.input {
+	width: 15%;
+	margin: 12px 16px 0;
+}
+
+.label {
+	font-weight: 600;
+}

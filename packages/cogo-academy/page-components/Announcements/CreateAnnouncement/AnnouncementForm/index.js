@@ -50,7 +50,7 @@ function AnnouncementForm({
 	const renderAddButton = () => (
 		<div>
 			<Button
-				type="add"
+				type="button"
 				themeType="secondary"
 				size="sm"
 				className={styles.add_audience_button}
@@ -161,7 +161,7 @@ function AnnouncementForm({
 				<div>
 					{actionType === 'create' ? (
 						<Button
-							type="preview"
+							type="button"
 							themeType="tertiary"
 							size="md"
 							onClick={() => setShowPreview(true)}
@@ -240,7 +240,7 @@ function AnnouncementForm({
 					<Modal.Footer>
 						<div className={styles.submit_buttons}>
 							<Button
-								type="cancel-submit"
+								type="button"
 								themeType="secondary"
 								size="md"
 								disabled={loading}

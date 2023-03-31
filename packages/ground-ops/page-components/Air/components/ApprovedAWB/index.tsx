@@ -7,7 +7,7 @@ import { ApprovedAWBFields } from '../../configurations/approved_awb';
 import UploadModal from '../UploadModal';
 
 function ApprovedAWB({
-	data, loading, page, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi,
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPi,
 }) {
 	const [showUpload, setShowUpload] = useState(null);
 	const { fields } = ApprovedAWBFields;
@@ -47,7 +47,7 @@ function ApprovedAWB({
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
 				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { setShowUpload(singleItem); }
+					? () => { setShowUpload(singleItem); setEdit('edit'); }
 					: () => { handleEditMAWB(singleItem, 'edit'); }}
 			>
 				<IcMEdit fill="#8B8B8B" />
@@ -70,7 +70,7 @@ function ApprovedAWB({
 				showUpload={showUpload}
 				setShowUpload={setShowUpload}
 				listAPi={listAPi}
-				edit={false}
+				edit={edit}
 				setEdit={setEdit}
 			/>
 		</>

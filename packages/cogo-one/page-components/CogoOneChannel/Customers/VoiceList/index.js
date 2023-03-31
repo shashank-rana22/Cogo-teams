@@ -9,11 +9,13 @@ import LoadingState from '../LoadingState';
 
 import styles from './styles.module.css';
 
-function VoiceList({
-	setActiveVoiceCard = () => { },
-	activeVoiceCard,
-	activeTab,
-}) {
+function VoiceList(voiceProps) {
+	const {
+		setActiveVoiceCard = () => {},
+		activeVoiceCard = {},
+		activeTab = '',
+	} = voiceProps;
+
 	const {
 		loading,
 		data = {},
