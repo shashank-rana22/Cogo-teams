@@ -8,7 +8,7 @@ import useList from '../../hooks/useList';
 
 import styles from './styles.module.css';
 import UploadModal from './UploadModal';
-import { optionMonth } from './utils';
+import { OptionMonth } from './utils';
 
 function SourceFile() {
 	const { push } = useRouter();
@@ -64,10 +64,11 @@ function SourceFile() {
 							value={filters?.month}
 							onChange={(val:string) => { setFilters((prev) => ({ ...prev, month: val })); }}
 							placeholder="Month"
-							options={optionMonth}
+							options={OptionMonth()}
 							isClearable
 							style={{ width: '150px' }}
 						/>
+
 					</div>
 
 					<div className={styles.select_container}>

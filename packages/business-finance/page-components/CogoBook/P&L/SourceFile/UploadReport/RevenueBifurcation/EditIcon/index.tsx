@@ -1,7 +1,6 @@
 import { Input } from '@cogoport/components';
 
 function EditIcon({ index, setValue, valueData, value }) {
-	console.log({ value, valueData }, 'value');
 	return (
 		<div>
 			<Input

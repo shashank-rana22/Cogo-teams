@@ -36,8 +36,8 @@ function ViewData() {
 	});
 
 	const { entity, month, id, name, date } = query || {};
-	const formatMonth = format(Number(month), 'MMM yyyy');
-	const monthPayload = format(Number(month), 'yyyy-MM-01');
+	const formatMonth = format(month, 'MMM yyyy');
+	const monthPayload = format(month, 'yyyy-MM-01');
 	const entityMapping = {
 		'6fd98605-9d5d-479d-9fac-cf905d292b88' : 101,
 		'c7e1390d-ec41-477f-964b-55423ee84700' : 201,
@@ -45,7 +45,7 @@ function ViewData() {
 		'04bd1037-c110-4aad-8ecc-fc43e9d4069d' : 401,
 		'b67d40b1-616c-4471-b77b-de52b4c9f2ff' : 501,
 	};
-	const formatDate = format(Number(date), 'dd MMM yyyy');
+	const formatDate = format(date, 'dd MMM yyyy');
 	const { fetchRatioApi, ratiosData } = useReport({ monthPayload });
 	const {
 		air = '', airCustoms = '',

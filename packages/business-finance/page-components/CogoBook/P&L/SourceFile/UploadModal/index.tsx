@@ -3,7 +3,7 @@ import FileUploader from '@cogoport/forms/page-components/Business/FileUploader'
 import { useState } from 'react';
 
 import useSourceFile from '../../../hooks/useSourceFile';
-import { optionMonth } from '../utils';
+import { OptionMonth } from '../utils';
 
 import styles from './styles.module.css';
 
@@ -30,7 +30,7 @@ function UploadModal({ uploadModal, setUploadModal }) {
 							<Select
 								value={modalData.month}
 								placeholder="Month"
-								options={optionMonth}
+								options={OptionMonth()}
 								onChange={(val:string) => { setModalData((prev) => ({ ...prev, month: val })); }}
 								isClearable
 								style={{ width: '200px' }}

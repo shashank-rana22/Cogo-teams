@@ -14,22 +14,22 @@ export const optionsPills = [
 export const optionsRadio = (chip:string) => {
 	if (chip === 'DemandChannel') {
 		return [
-			{ label: 'Ocean ( IE,CP,ES )', value: 'Ocean' },
-			{ label: 'Air ( IE,CP,ES )', value: 'Air' },
-			{ label: 'Surface ( IE,CP,ES )', value: 'Surface' },
-			{ label: 'Rail ( IE,CP,ES )', value: 'Rail' },
+			{ label: 'Ocean ( IE,CP,ES )', value: 'Ocean', name: 'Ocean' },
+			{ label: 'Air ( IE,CP,ES )', value: 'Air', name: 'Air' },
+			{ label: 'Surface ( IE,CP,ES )', value: 'Surface', name: 'Surface' },
+			{ label: 'Rail ( IE,CP,ES )', value: 'Rail', name: 'Rail' },
 		];
 	}
 	if (chip === 'Service') {
 		return [
-			{ label: 'Ocean (FCL/LCL Exports, FCL/LCL Imports ETC.)', value: 'Ocean' },
-			{ label: 'Air (Imports,Exports, Customs, transshipment)', value: 'Air' },
-			{ label: 'Surface (FTL,LTL,PTL)', value: 'Surface' },
-			{ label: 'Rail (Domestic)', value: 'Rail' },
+			{ label: 'Ocean (FCL/LCL Exports, FCL/LCL Imports ETC.)', value: 'Ocean', name: 'Ocean' },
+			{ label: 'Air (Imports,Exports, Customs, transshipment)', value: 'Air', name: 'Air' },
+			{ label: 'Surface (FTL,LTL,PTL)', value: 'Surface', name: 'Surface' },
+			{ label: 'Rail (Domestic)', value: 'Rail', name: 'Rail' },
 		];
 	}
 	return [
-		{ label: 'Ocean/Air/Surface/Rail', value: 'segment' },
+		{ label: 'Ocean/Air/Surface/Rail', value: 'segment', name: 'segment' },
 	];
 };
 

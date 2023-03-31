@@ -12,7 +12,7 @@ import { useState } from 'react';
 import SelectAccrual from '../../../../commons/SelectAccrual';
 import useSaveCustom from '../../../hooks/useSaveCustom';
 import useSaveCustomList from '../../../hooks/useSaveCustomList';
-import { optionMonth } from '../../SourceFile/utils';
+import { OptionMonth } from '../../SourceFile/utils';
 import { optionsCheck, optionsPeriod, optionsPills, optionsRadio } from '../constant';
 
 import styles from './styles.module.css';
@@ -146,7 +146,7 @@ function Card({
 								value={filters?.month}
 								onChange={(val:string) => { setFilters((prev) => ({ ...prev, month: val })); }}
 								placeholder="Month"
-								options={optionMonth}
+								options={OptionMonth()}
 								disabled={filters?.category}
 								isClearable
 								style={{ width: '150px' }}
@@ -314,7 +314,7 @@ function Card({
 													role="presentation"
 												>
 													{LoadingDelete
-														? <Loader height="20px" width="20px" />
+														? <Loader />
 														: <IcMDelete height="20px" width="20px" />}
 
 												</div>
@@ -391,8 +391,8 @@ function Card({
 													monthFrom: val,
 												}));
 											}}
-											placeholder="Month "
-											options={optionMonth}
+											placeholder="Month"
+											options={OptionMonth()}
 											isClearable
 											style={{ width: '200px' }}
 										/>
@@ -403,8 +403,8 @@ function Card({
 											onChange={(val:string) => {
 												setFilters((prev) => ({ ...prev, monthTo: val }));
 											}}
-											placeholder="Month "
-											options={optionMonth}
+											placeholder="Month"
+											options={OptionMonth()}
 											isClearable
 											style={{ width: '200px' }}
 										/>

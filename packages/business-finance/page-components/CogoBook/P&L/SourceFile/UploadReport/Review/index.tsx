@@ -75,7 +75,7 @@ function Review({
 	return (
 		<div>
 			<div className={styles.button_flex}>
-				<Button themeType="primary md" onClick={() => { setModalData(true); }}>Save</Button>
+				<Button themeType="primary" size="md" onClick={() => { setModalData(true); }}>Save</Button>
 
 			</div>
 			{modalData && (

@@ -7,7 +7,7 @@ interface FilterInterface {
 		category?:string
 		entity?:string
 	}
-	monthPayload?:number
+	monthPayload?:string
 }
 const useReport = ({
 	filters,

@@ -8,9 +8,7 @@ const useSourceFile = ({ modalData, uploader, setUploadModal }) => {
 	const { push } = useRouter();
 	const { profile } = useSelector((state) => state || {});
 
-	const [monthName, year] = (month.match(/(\w+)\s+(\d{4})/) || []).slice(1);
-
-	const monthData = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
+	const monthData = (month || []).split('-');
 
 	const [
 		{ loading:sourceFileUploadLoading },
@@ -36,8 +34,8 @@ const useSourceFile = ({ modalData, uploader, setUploadModal }) => {
 			const res = await sourceFileUploadTrigger({
 				data: {
 					cogoEntityId    : entityMapping[entity],
-					month           : monthData,
-					year,
+					month           : monthData[1] || undefined,
+					year            : monthData[0] || undefined,
 					trialBalanceUrl : uploader,
 					createdBy       : profile.partner?.id,
 					updatedBy       : profile?.user?.id,

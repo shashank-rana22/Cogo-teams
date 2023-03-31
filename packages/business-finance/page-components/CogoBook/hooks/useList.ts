@@ -11,12 +11,6 @@ interface FilterInterface {
 }
 
 const useList = ({ filters }:FilterInterface) => {
-	const [monthName, year] = (filters?.month.match(/(\w+)\s+(\d{4})/) || []).slice(1);
-
-	const monthData = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
-
-	const numericDate = `${year}-${monthData.toString().padStart(2, '0')}-01`;
-
 	const [
 		{ data, loading:ListDataLoading },
 		listTrigger,
@@ -41,7 +35,7 @@ const useList = ({ filters }:FilterInterface) => {
 			await listTrigger({
 				params: {
 					q            : filters?.query || undefined,
-					period       : year ? numericDate : undefined,
+					period       : filters?.month || undefined,
 					cogoEntityId : entityMapping[filters?.entity] || undefined,
 					pageIndex    : 1,
 					pageSize     : 10,
@@ -51,7 +45,7 @@ const useList = ({ filters }:FilterInterface) => {
 		} catch (error) {
 			Toast.error(error?.response?.data?.message);
 		}
-	}, [filters?.entity, filters?.query, listTrigger, numericDate, year]);
+	}, [filters?.entity, filters?.month, filters?.query, listTrigger]);
 
 	return {
 		refetch,

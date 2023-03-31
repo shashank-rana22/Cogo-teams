@@ -53,8 +53,6 @@ function PLStatement() {
 		}));
 	}, [filtersData]);
 
-	console.log(filters?.entity, 'fjnjl');
-
 	const [selectFilter, setSelectFilter] = useState(false);
 	const [select, setSelect] = useState(false);
 	const [showReport, setShowReport] = useState(false);

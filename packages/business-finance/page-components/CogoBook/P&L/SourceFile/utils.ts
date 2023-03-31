@@ -1,13 +1,15 @@
-const today = new Date();
-const sixMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 5, 1);
-const months = [];
+import { format } from '@cogoport/utils';
+import { useEffect } from 'react';
 
-while (sixMonthsAgo <= today) {
-	const dateString = sixMonthsAgo.toLocaleString('default', { month: 'long', year: 'numeric' });
-	months.push(dateString);
-	sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() + 1);
+import useSelectMonth from '../../hooks/useSelectMonth';
+
+export function OptionMonth() {
+	const { monthData:month, refetch } = useSelectMonth();
+
+	useEffect(() => { refetch(); }, [refetch]);
+
+	return (month || [{}])?.map((item) => ({
+		label : format((item), 'MMM yyyy'),
+		value : format((item), 'yyyy-MM-01'),
+	}));
 }
-
-const month = months.reverse();
-
-export const optionMonth = month.map((item) => ({ label: item, value: item }));
