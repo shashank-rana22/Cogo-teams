@@ -65,6 +65,8 @@ function Introduction({ setActiveState, testData = {} }) {
 				<div className={styles.content}>
 					<div className={styles.content_container}>
 						<Image
+							width={18}
+							height={22}
 							className={styles.image}
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/document-svg.svg"
 							alt=""
@@ -72,7 +74,7 @@ function Introduction({ setActiveState, testData = {} }) {
 
 						<div className={styles.content_text}>
 							<div className={styles.label}>Topics Covered</div>
-							<div className={styles.value}>{formatArrayValues()}</div>
+							<div className={styles.value}>{formatArrayValues}</div>
 						</div>
 					</div>
 
@@ -90,6 +92,8 @@ function Introduction({ setActiveState, testData = {} }) {
 						</div>
 						<div className={styles.content_container}>
 							<Image
+								width={18}
+								height={22}
 								className={styles.image}
 								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg"
 								alt=""
