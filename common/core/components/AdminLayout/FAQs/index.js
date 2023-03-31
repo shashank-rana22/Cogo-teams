@@ -21,7 +21,7 @@ function FAQs({
 	const router = useRouter();
 	const { asPath } = router;
 
-	const splitAspath = `${asPath.split('/')?.[2]}/${asPath.split('/')?.[3]}`;
+	const hideSupportIcon = !asPath.includes('/cogo-one/omni-channel');
 
 	const [show, setShow] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
@@ -62,7 +62,7 @@ function FAQs({
 
 	return (
 		<div className={styles.container} draggable="false">
-			{splitAspath !== 'cogo-one/omni-channel' && (
+			{hideSupportIcon && (
 				<div draggable="false">
 					<div
 						size={400}
