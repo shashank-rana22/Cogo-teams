@@ -69,8 +69,6 @@ function Completion() {
 					height={32}
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti.svg"
 					alt=""
-					width={32}
-					height={32}
 				/>
 				<h2>Congratulations!</h2>
 			</div>
