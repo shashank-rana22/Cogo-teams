@@ -44,7 +44,6 @@ function Statistics({ globalFilters, entityTabFilters }) {
 									)}
 									placement="right"
 									caret={false}
-									style={{ width: 'fit-content' }}
 								>
 									<IcMInfo />
 								</Tooltip>
