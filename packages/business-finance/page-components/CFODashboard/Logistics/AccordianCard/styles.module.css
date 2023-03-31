@@ -27,7 +27,7 @@
 .main_stats {
 	display: flex;
 	align-items: center;
-	width: 100%;
+	width: 92%;
 }
 
 .amounts {
@@ -36,9 +36,10 @@
 
 .ar_amount {
 	display: flex;
-	margin-right: 40px;
+	margin-right: 100px;
+	margin-left: 60px;
 	font-size: 14px;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .amount_div {
@@ -52,7 +53,7 @@
 .icon_div {
 	display: flex;
 	align-items: center;
-	width: 100%;
+	width: 111%;
 }
 
 .recei_label {

@@ -14,6 +14,7 @@ const profitabillityColumn = [
 			<div style={{
 				display       : 'flex',
 				flexDirection : 'column',
+				marginLeft    : '16px',
 			}}
 			>
 				<span style={{ color: '#F68B21', textDecorationLine: 'underline' }}>{row?.jobNumber}</span>
@@ -32,6 +33,7 @@ const profitabillityColumn = [
 				style={{
 					fontWeight : '400',
 					fontSize   : '12px',
+					marginLeft : '-10px',
 				}}
 				className={styles.sentence_case}
 			>
@@ -43,14 +45,27 @@ const profitabillityColumn = [
 	{
 		Header   : 'Entity',
 		id       : 'entity',
-		accessor : 'entity',
+		accessor : (row) => (
+
+			<div
+				style={{
+					fontWeight  : '400',
+					fontSize    : '12px',
+					marginRight : '20px',
+				}}
+				className={styles.sentence_case}
+			>
+				{row?.entity}
+			</div>
+
+		),
 
 	},
 	{
 		Header   : 'Booked Income',
 		id       : 'income',
 		accessor : (row) => (
-			<div>
+			<div style={{ marginLeft: '-6px' }}>
 				{getFormattedPrice(
 					Math.abs(row?.income),
 					'INR',
@@ -63,7 +78,7 @@ const profitabillityColumn = [
 		Header   : 'Booked Expense',
 		id       : 'expense',
 		accessor : (row) => (
-			<div>
+			<div style={{ marginLeft: '-6px' }}>
 				{getFormattedPrice(
 					row?.expense,
 					'INR',
@@ -89,7 +104,7 @@ const profitabillityColumn = [
 		accessor : (row) => (
 			<div>
 				<Pill
-					style={{ borderRadius: '6px' }}
+					style={{ borderRadius: '6px', marginLeft: '-6px' }}
 					size="md"
 					color="#CFEAED"
 				>
@@ -105,7 +120,7 @@ const profitabillityColumn = [
 		accessor : (row) => (
 			<div>
 				<Pill
-					style={{ borderRadius: '6px' }}
+					style={{ borderRadius: '6px', marginLeft: '-6px' }}
 					size="md"
 					color="#CFEAED"
 				>

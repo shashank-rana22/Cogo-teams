@@ -11,7 +11,7 @@ function ResponsiveBarChart({ barData }) {
 			keys={['income', 'expense']}
 			indexBy="month"
 			margin={{ top: 100, right: 30, bottom: 80, left: 60 }}
-			padding={0.6}
+			padding={0.3}
 			valueScale={{ type: 'linear' }}
 			indexScale={{ type: 'band', round: true }}
 			colors={['#DDEBC0', '#ACDADF']}
@@ -27,7 +27,7 @@ function ResponsiveBarChart({ barData }) {
 			innerPadding={8}
 			minValue={0}
 			axisBottom={{
-				tickSize: 0, tickPadding: 10, tickRotation: 0,
+				tickSize: 0, tickPadding: 20, tickRotation: 0,
 			}}
 			axisLeft={{
 				tickSize     : 0,

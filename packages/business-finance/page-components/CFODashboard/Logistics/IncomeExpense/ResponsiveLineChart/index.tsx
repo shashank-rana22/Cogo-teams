@@ -1,4 +1,5 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
+import { Tooltip } from '@cogoport/components';
 
 import { getAmountInLakh } from '../../getAmountInLakh';
 
@@ -14,6 +15,7 @@ function ResponsiveLineChart({ lineData }) {
 		const pushData = {
 			y : Number(item.income - item.expense),
 			x : item.month,
+			z : item.income !== 0 ? Number((item.income - item.expense) / item.income) * 100 : 0,
 		};
 		lineChartData[0].data.push(pushData);
 	});
@@ -31,6 +33,39 @@ function ResponsiveLineChart({ lineData }) {
 				reverse : false,
 			}}
 			yFormat={(value) => getAmountInLakh(value)}
+			tooltip={({ point = {} }:any) => (
+				<div
+					style={{
+						padding      : '9px 12px',
+						background   : '#FFFFFF',
+						border       : '1px solid #ACDADF',
+						borderRadius : '6px',
+						fontWeight   : '600',
+						fontSize     : '12px',
+					}}
+				>
+					<div style={{ display: 'flex' }}>
+						<Tooltip
+							content=""
+							placement="right"
+							caret={false}
+						>
+							<div style={{ display: 'flex' }}>
+								<div>Contribution Margin :</div>
+								<div style={{ marginLeft: '10px', display: 'flex' }}>
+									<div>{(point.data.y).toFixed(2)}</div>
+									<div style={{ color: '#29CC6A' }}>
+										(
+										{(point.data.z).toFixed(2)}
+										)
+										%
+									</div>
+								</div>
+							</div>
+						</Tooltip>
+					</div>
+				</div>
+			)}
 			enableGridX={false}
 			enablePointLabel
 			colors="#ACDADF"

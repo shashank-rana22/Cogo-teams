@@ -14,6 +14,7 @@ const customerProfitabillityColumn = [
 				style={{
 					fontWeight : '400',
 					fontSize   : '12px',
+					marginLeft : '10px',
 				}}
 				className={styles.sentence_case}
 			>

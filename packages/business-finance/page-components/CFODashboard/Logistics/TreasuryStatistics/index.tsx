@@ -3,10 +3,11 @@ import { IcMInfo, IcCCountryIndia } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
-import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import useGetTreasuryStats from '../../hooks/getTreasuryData';
+import showInTooltop from '../../utils/getOverFlowData';
 import { treasuryControls } from '../controls';
+import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
@@ -73,18 +74,18 @@ function TreasuryStatistics() {
 								</Tooltip>
 							</div>
 						</div>
-
-						<Filter
-							controls={treasuryControls}
-							filters={treasuryFilters}
-							setFilters={setTreasuryFilters}
-						/>
-
+						<div style={{ marginTop: '4px' }}>
+							<Filter
+								controls={treasuryControls}
+								filters={treasuryFilters}
+								setFilters={setTreasuryFilters}
+							/>
+						</div>
 					</div>
 					<div className={styles.container}>
 						{loading ? (
 							<div style={{ alignItems: 'center' }}>
-								<Placeholder height="140px" width="600px" margin="10px 0px 50px 20px" />
+								<Placeholder height="50px" width="300px" margin="10px 0px 100px 0px" />
 							</div>
 						) : (
 							<div className={styles.flex}>
@@ -118,7 +119,10 @@ function TreasuryStatistics() {
 						<div>
 							Allocated Funds
 							<div className={styles.amount_style}>
-								{showOverflowingNumber(getFormattedPrice(allocatedAmount, 'INR'), 15)}
+								{showInTooltop(
+									getFormattedPrice(allocatedAmount, 'INR'),
+									getAmountInLakhCrK(allocatedAmount, 'INR'),
+								)}
 
 							</div>
 						</div>
@@ -126,20 +130,29 @@ function TreasuryStatistics() {
 						<div className={styles.text_style_settled}>
 							Utilized Funds
 							<div className={styles.amount_style}>
-								{showOverflowingNumber(getFormattedPrice(utilizedAmount, 'INR'), 15)}
+								{showInTooltop(
+									getFormattedPrice(utilizedAmount, 'INR'),
+									getAmountInLakhCrK(utilizedAmount, 'INR'),
+								)}
 							</div>
 						</div>
 						<div className={styles.text_style_settled}>
 							Settled Amount
 							<div className={styles.amount_style}>
-								{showOverflowingNumber(getFormattedPrice(settledAmount, 'INR'), 15)}
+								{showInTooltop(
+									getFormattedPrice(settledAmount, 'INR'),
+									getAmountInLakhCrK(settledAmount, 'INR'),
+								)}
 
 							</div>
 						</div>
 						<div className={styles.text_styles}>
 							UTR Pending Amount
 							<div className={styles.amount_style}>
-								{showOverflowingNumber(getFormattedPrice(UTRPendingAmount, 'INR'), 15)}
+								{showInTooltop(
+									getFormattedPrice(UTRPendingAmount, 'INR'),
+									getAmountInLakhCrK(UTRPendingAmount, 'INR'),
+								)}
 
 							</div>
 						</div>

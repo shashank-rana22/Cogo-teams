@@ -17,18 +17,14 @@
 
 .border_left {
 	height: 76px;
-	margin: 0 2%;
+	margin: 0 3%;
 	border-left: 2px solid #cfcfcf;
 }
 
 .around_border {
 	display: flex;
 	align-items: center;
-
-	/* justify-content: space-between; */
 	width: 100%;
-
-	/* padding: 0 13px 0 11px; */
 	border: 1px solid#e0e0e0;
 }
 
