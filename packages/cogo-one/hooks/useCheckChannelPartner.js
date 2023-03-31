@@ -7,14 +7,14 @@ import { PARAMOUNT_ORG_ID } from '../constants/IDS_CONSTANTS';
 
 import useListPartners from './useListPartners';
 
-const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:activeConversationTab = '' }) => {
+const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab:activeConversationTab = '' }) => {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
 	const { fetchPartnerId = () => {}, partnersLoading = false, channelPartnerId = '' } = useListPartners();
 
 	const [{ data, loading }, trigger] = useRequest(
 		{
-			url    : '/list_organizations',
+			url    : '/get_organization',
 			method : 'get',
 		},
 		{ manual: true },
@@ -23,14 +23,12 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 		try {
 			const res = await trigger({
 				params: {
-					filters: {
-						id: orgId,
-					},
+					id                 : orgId,
+					user_data_required : true,
 				},
 			});
 			if (res?.data) {
-				const { list = [] } = res?.data || {};
-				const { tags = [], account_type = '' } = list?.[0] || {};
+				const { tags = [], account_type = '' } = res?.data?.data || {};
 				if (tags?.includes('partner')) {
 					await fetchPartnerId({ [ACCOUNT_TYPE_MAPPING[account_type]]: orgId });
 				}
@@ -46,8 +44,8 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 		}
 	}, [getOrgDetails, orgId]);
 
-	const { list = [] } = data || {};
-	const { tags = [] } = list?.[0] || {};
+	const { data:orgDetails = {} } = data || {};
+	const { tags = [] } = orgDetails || {};
 
 	let isChannelPartner = loading ? false : tags?.includes('partner') || false;
 
@@ -60,7 +58,7 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 	let ORG_PAGE_URL = '';
 
 	const disableQuickActions = isChannelPartner && !channelPartnerId;
-
+	const hideCpButton = isChannelPartner || loading;
 	const openNewTab = (activeTab) => {
 		const { crm = undefined, prm = undefined } = activeTab || {};
 
@@ -87,7 +85,7 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 	};
 
 	return {
-		openNewTab, loading: partnersLoading || loading, disableQuickActions, isChannelPartner, getOrgDetails,
+		openNewTab, loading: partnersLoading || loading, disableQuickActions, hideCpButton, getOrgDetails,
 	};
 };
-export default useListOrganizations;
+export default useCheckChannelPartner;
