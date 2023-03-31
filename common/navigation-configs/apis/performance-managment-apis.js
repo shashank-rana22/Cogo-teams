@@ -102,6 +102,11 @@ const performance_management = {
 			service_name : 'iris',
 		},
 		{
+			api          : 'get_iris_get_log_stats',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
 			api          : 'get_iris_download_csv',
 			access_type  : 'private',
 			service_name : 'iris',
@@ -181,6 +186,11 @@ const performance_management = {
 		},
 		{
 			api          : 'get_iris_get_performance_stats',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
+			api          : 'get_iris_get_log_stats',
 			access_type  : 'private',
 			service_name : 'iris',
 		},
