@@ -48,7 +48,7 @@ function VendorContact({
 				<div className={styles.single_record}>
 					{
 						Object.keys(fieldsToShow).map((fieldName) => (
-							<div style={{ display: 'flex', flexDirection: 'column', flexBasis: '25%' }}>
+							<div key={fieldName} className={styles.fields_to_show}>
 
 								<div className={styles.label}>
 									{fieldsToShow[fieldName]}

@@ -3,9 +3,11 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useEffect } from 'react';
 
 import getControls from '../utils/controls';
 import createPOCOptions from '../utils/createPOCOptions';
+import subCategoryOptions from '../utils/sub-category-options';
 
 function useCreateVendorServicePOC({
 	setShowForm = () => {},
@@ -63,6 +65,11 @@ function useCreateVendorServicePOC({
 			Toast.error(getApiErrorString(error?.data));
 		}
 	};
+
+	useEffect(() => {
+		const selectedCategory = watch('category');
+		setValue('sub_category', subCategoryOptions[selectedCategory]?.[0]?.value || '');
+	}, [setValue, watch, watchCategory]);
 
 	const handleCancel = () => {
 		setShowForm('');

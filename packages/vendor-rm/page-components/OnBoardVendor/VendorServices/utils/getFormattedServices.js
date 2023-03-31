@@ -7,7 +7,7 @@ function getFormattedServices({ data, partner_id = '' }) {
 		const {
 			category = '',
 			sub_category = '',
-			cogoport_office_id = '',
+			cogoport_office_id = [],
 		} = item || {};
 
 		(cogoport_office_id || []).forEach((office_id) => {

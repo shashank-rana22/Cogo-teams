@@ -20,8 +20,6 @@ function ServiceForm({
 		errors = {},
 		handleCancel = () => {},
 		createVendorServicePocLoading = false,
-		watch = () => {},
-		setValue,
 	} = useCreateVendorServicePOC({
 		setShowForm,
 		getVendorData,
@@ -43,9 +41,6 @@ function ServiceForm({
 							fields={controls}
 							errors={errors}
 							control={control}
-							watch={watch}
-							setValue={setValue}
-							source="addServicePOC"
 						/>
 					</div>
 				</Modal.Body>

@@ -27,8 +27,8 @@ const display = ({ title, body }) => {
 };
 
 function DisplayDetails({
-	vendorInformation,
-	loading,
+	vendorInformation = {},
+	loading = false,
 }) {
 	if (loading) {
 		return (
