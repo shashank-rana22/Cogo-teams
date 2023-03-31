@@ -1,8 +1,8 @@
 import { Accordion, Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import QuestionCard from '../../../../CreateModule/commons/QuestionCard';
 import toFixed from '../../../../CreateModule/utils/toFixed';
+import QuestionCard from '../CaseStudy/QuestionCard';
 
 import styles from './styles.module.css';
 
@@ -44,23 +44,21 @@ function TitleComponent({
 
 			<div className={styles.small_section}>
 				{correct_percentage}
-				%
 			</div>
 		</div>
 	);
 }
 
-function QuestionItem({ question_item, index = 0 }) {
+function QuestionItem({ question_item = {}, index = 0, test_id = '' }) {
 	const {
-		appeared_percent,
-		correct_percentage,
-		difficulty,
-		question,
-		answers,
-		question_type,
-		students_appeared,
-		topic,
-		case_study,
+		id = '',
+		appeared_percent = '',
+		correct_answer_percentage = '',
+		difficulty_level = '',
+		question_text = '',
+		question_type = '',
+		user_appeared_count = '',
+		topic = '',
 	} = question_item || {};
 
 	return (
@@ -70,11 +68,11 @@ function QuestionItem({ question_item, index = 0 }) {
 				title={(
 					<TitleComponent
 						appeared_percent={appeared_percent}
-						correct_percentage={correct_percentage}
-						difficulty={difficulty}
-						students_appeared={students_appeared}
+						correct_percentage={correct_answer_percentage}
+						difficulty={difficulty_level}
+						students_appeared={user_appeared_count}
 						topic={topic}
-						question={question}
+						question={question_text}
 						question_type={question_type}
 					/>
 				)}
@@ -82,11 +80,9 @@ function QuestionItem({ question_item, index = 0 }) {
 				style={{ width: '100%' }}
 			>
 				<QuestionCard
-					answers={answers}
-					question={question}
+					question_id={id}
+					test_id={test_id}
 					index={index}
-					question_type={question_type}
-					case_study={case_study}
 				/>
 			</Accordion>
 		</div>

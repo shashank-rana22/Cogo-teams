@@ -1,0 +1,33 @@
+.title {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 32px 0 12px 24px;
+}
+.description_heading {
+  font-weight: 400;
+}
+
+.description_content {
+  font-weight: 500;
+  color: #221f20;
+  padding: 2px 4px;
+}
+
+.description_content_container {
+  display: flex;
+  background: #f3fafa;
+  border-radius: 6px;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.description {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.item_container {
+  display: flex;
+  padding-left: 24px;
+}
