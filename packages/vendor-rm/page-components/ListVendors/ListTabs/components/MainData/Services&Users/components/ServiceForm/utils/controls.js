@@ -1,7 +1,6 @@
 import officeLocations from '../../../../../../../../../utils/office-locations.json';
-
-import categoryOptions from './category-options';
-import subCategoryOptions from './sub-category-options';
+import categoryOptions from '../../../../../../../../utils/category-options';
+import subCategoryOptions from '../../../../../../../../utils/sub-category-options';
 
 const getControls = ({ watchCategory = '', pocOptions }) => [
 	{

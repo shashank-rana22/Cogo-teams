@@ -44,17 +44,18 @@ function Success({ setVendorInformation, setActiveStepper }) {
 				<div className={styles.button_container}>
 					<Button
 						size="lg"
+						type="button"
 						themeType="secondary"
 						style={{ marginRight: '12px' }}
-						role="presentation"
 						onClick={addNewVendor}
 					>
 						Add Another Vendor
 					</Button>
+
 					<Button
 						size="lg"
+						type="button"
 						themeType="accent"
-						role="presentation"
 						onClick={goToDashboard}
 					>
 						Go To Dashboard

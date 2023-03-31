@@ -1,7 +1,7 @@
 import officeLocations from '../../../../../../../../../utils/office-locations.json';
 import workScopes from '../../../../../../../../../utils/work-scopes.json';
-import categoryOptions from '../../../../../../../../OnBoardVendor/VendorServices/utils/category-options';
-import subCategoryOptions from '../../../../../../../../OnBoardVendor/VendorServices/utils/sub-category-options';
+import categoryOptions from '../../../../../../../../utils/category-options';
+import subCategoryOptions from '../../../../../../../../utils/sub-category-options';
 
 const controls = [
 	{

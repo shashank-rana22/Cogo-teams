@@ -1,7 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import EmptyState from './EmptyState';
+import EmptyState from '../../../../commons/components/EmptyState';
+
 import LoadingState from './LoadingState';
 import PaymentDetails from './PaymentDetails';
 import styles from './styles.module.css';

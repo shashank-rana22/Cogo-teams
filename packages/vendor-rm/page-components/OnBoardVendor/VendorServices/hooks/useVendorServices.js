@@ -63,7 +63,7 @@ function useVendorServices({
 
 			setActiveStepper('payment_details');
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 

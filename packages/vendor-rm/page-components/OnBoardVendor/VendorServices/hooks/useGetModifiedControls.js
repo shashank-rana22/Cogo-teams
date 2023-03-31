@@ -1,4 +1,4 @@
-import subCategoryOptions from '../utils/sub-category-options';
+import subCategoryOptions from '../../../utils/sub-category-options';
 
 function useGetModifiedControls({
 	controls,

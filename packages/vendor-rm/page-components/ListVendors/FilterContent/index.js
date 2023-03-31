@@ -1,7 +1,7 @@
 import { Input, Select, Button } from '@cogoport/components';
 import { useState } from 'react';
 
-import CATEGORY_OPTIONS from '../../OnBoardVendor/VendorServices/utils/category-options';
+import CATEGORY_OPTIONS from '../../utils/category-options';
 
 import styles from './styles.module.css';
 import filterSubCategoryOptions from './utils/filter-sub-category-options';

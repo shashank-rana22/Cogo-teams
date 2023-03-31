@@ -5,9 +5,9 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
+import subCategoryOptions from '../../../../../../../../utils/sub-category-options';
 import getControls from '../utils/controls';
 import createPOCOptions from '../utils/createPOCOptions';
-import subCategoryOptions from '../utils/sub-category-options';
 
 function useCreateVendorServicePOC({
 	setShowForm = () => {},

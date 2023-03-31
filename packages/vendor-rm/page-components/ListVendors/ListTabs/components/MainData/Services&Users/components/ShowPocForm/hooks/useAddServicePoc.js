@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
-import subCategoryOptions from '../../../../../../../../OnBoardVendor/VendorServices/utils/sub-category-options';
+import subCategoryOptions from '../../../../../../../../utils/sub-category-options';
 import controls from '../utils/controls';
 
 const useAddServicePoc = ({

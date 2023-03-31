@@ -8,16 +8,13 @@
 .back_text {
 	margin-left: 10px;
 	font-size: 14px;
-	line-height: 16px;
 	border-bottom: 1px solid #221f20;
 }
 
 .header {
 	margin-top: 12px;
 	font-size: 28px;
-	font-style: normal;
 	font-weight: 600;
-	line-height: 42px;
 }
 
 .tab_container {

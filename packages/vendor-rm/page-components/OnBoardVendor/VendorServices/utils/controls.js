@@ -1,6 +1,5 @@
 import officeLocations from '../../../../utils/office-locations.json';
-
-import categoryOptions from './category-options';
+import categoryOptions from '../../../utils/category-options';
 
 const controls = [
 	{
