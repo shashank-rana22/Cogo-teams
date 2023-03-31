@@ -26,13 +26,9 @@ function TheGLobe(
 	const CountryMobileCode = country?.mobile_country_code || '';
 
 	let Globe = () => {};
-	// eslint-disable-next-line global-require
 	if (typeof window !== 'undefined') Globe = require('react-globe.gl').default;
 
 	const colorMode = 'light';
-
-	// Globe Methods ------------------------------------------------------------------------------
-
 	useEffect(() => {
 		if (!isEmpty(globeRef?.current)) {
 			globeRef.current.controls().autoRotate = true;
@@ -41,21 +37,16 @@ function TheGLobe(
 			globeRef.current.controls().maxDistance = globeRef.current.getGlobeRadius() * 4;
 			globeRef.current.controls().minDistance = globeRef.current.getGlobeRadius() * 2.35;
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [globeRef?.current]);
 
 	useEffect(() => {
-		// experiments
 		if (!isEmpty(globeRef?.current?.scene()?.children[2]?.visible
 			&& !isEmpty(globeRef?.current?.scene()?.children[1]?.intensity)
 			&& !isEmpty(globeRef?.current?.scene()?.children[2]?.intensity))) {
 			globeRef.current.scene().children[1].intensity = 1.25;
 			globeRef.current.scene().children[2].intensity = 0.25;
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [globeRef?.current, CountryMobileCode, circleTab, date]);
-
-	// Globe Functions
 
 	const startRotation = () => {
 		if (!isEmpty(globeRef?.current)) {
@@ -73,8 +64,6 @@ function TheGLobe(
 		}
 	};
 
-	// Handling Rotate and point of view
-
 	setLocation(first_coordinate, pointRotationSpeed);
 
 	useEffect(() => {
@@ -85,7 +74,6 @@ function TheGLobe(
 			setLocation(defaultMapCenter, pointRotationSpeed);
 			startRotation();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [CountryMobileCode]);
 
 	const markerSize = () => {
@@ -104,7 +92,6 @@ function TheGLobe(
 		htmlElementsData       : markers,
 		htmlTransitionDuration : 2000,
 		htmlElement            : () => {
-			// eslint-disable-next-line no-undef
 			const el = document?.createElement('div');
 			el.innerHTML = globeMarker;
 			el.style.color = 'rgba(252, 220, 0, 1)';
