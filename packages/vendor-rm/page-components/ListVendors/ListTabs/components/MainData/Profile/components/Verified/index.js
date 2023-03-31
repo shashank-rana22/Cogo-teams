@@ -30,14 +30,11 @@ const COMPONENT_PROPS_MAPPING = {
 			background : '#fdd9b5',
 			border     : '1px solid #F68B21',
 		},
-		color: '#F68B21',
-		icon:
-	<div>
-		<img
+		color : '#F68B21',
+		icon  : <img
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg"
 			alt="pending"
-		/>
-	</div>,
+		/>,
 	},
 
 	pending_verification: {
@@ -45,14 +42,11 @@ const COMPONENT_PROPS_MAPPING = {
 			background : '#fdd9b5',
 			border     : '1px solid #F68B21',
 		},
-		color: '#F68B21',
-		icon:
-	<div>
-		<img
+		color : '#F68B21',
+		icon  : <img
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg"
 			alt="pending"
-		/>
-	</div>,
+		/>,
 	},
 };
 
@@ -73,6 +67,7 @@ function Verified({ vendor_details = {} }) {
 			>
 				{COMPONENT_PROPS_MAPPING[kyc_status].icon}
 			</div>
+
 			<div
 				className={styles.dis}
 				style={{
@@ -82,9 +77,8 @@ function Verified({ vendor_details = {} }) {
 				{startCase(kyc_status)}
 			</div>
 
-			{
-			kyc_status === 'rejected' ? (
-				<div>
+			{kyc_status === 'rejected' ? (
+				<>
 					<div
 						className={styles.dis}
 						style={{ color: '#ED3726' }}
@@ -93,11 +87,11 @@ function Verified({ vendor_details = {} }) {
 						{' '}
 						<b>{kyc_rejection_reason}</b>
 					</div>
+
 					<div>
 						Feedbacks -
 						{'  '}
-						{
-						(kyc_rejection_feedbacks || []).map((reason, index) => (
+						{(kyc_rejection_feedbacks || []).map((reason, index) => (
 							<span>
 								<b>
 									{' '}
@@ -106,12 +100,10 @@ function Verified({ vendor_details = {} }) {
 								{index !== kyc_rejection_feedbacks.length - 1 ? ',' : null}
 								{'  '}
 							</span>
-						))
-					}
+						))}
 					</div>
-				</div>
-			) : null
-			}
+				</>
+			) : null}
 		</div>
 	);
 }

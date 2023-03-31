@@ -22,17 +22,14 @@ function Child({
 
 	return (
 		<div className={styles.content}>
-
 			<div className={styles.element_container}>
-
 				{(newControls || []).map((controlItem) => {
 					const Element = getElementController(controlItem.type);
 
 					if (!Element) return null;
 
 					return (
-						<div className={styles.list}>
-
+						<div key={controlItem.name} className={styles.list}>
 							<div className={styles.form_label}>
 								<h4>{controlItem.label}</h4>
 							</div>
@@ -50,11 +47,9 @@ function Child({
 							<div className={styles.form_error_message}>
 								{error?.[controlItem.name]?.message}
 							</div>
-
 						</div>
 					);
 				})}
-
 			</div>
 
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (

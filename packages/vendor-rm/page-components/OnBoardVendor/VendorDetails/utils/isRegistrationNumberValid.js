@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-relative-packages
-import registrationNumbersMapping from '../../../../../../common/utils/registrationNumbersMapping';
+import registrationNumbersMapping from '@cogoport/forms/utils/registrationNumbersMapping';
 
 const isRegistrationNumberValid = ({
 	registrationNumber = '',

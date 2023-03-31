@@ -36,6 +36,7 @@ function ServiceForm({
 			placement="center"
 		>
 			<Modal.Header title="Add Service" />
+
 			<div className={styles.body_container}>
 				<Modal.Body>
 					<div className={styles.container}>
@@ -47,19 +48,21 @@ function ServiceForm({
 					</div>
 				</Modal.Body>
 			</div>
+
 			<Modal.Footer>
 				<div className={styles.button_container}>
 					<Button
 						size="md"
-						role="presentation"
+						type="button"
 						themeType="tertiary"
 						onClick={handleCancel}
 					>
 						Cancel
 					</Button>
+
 					<Button
 						size="md"
-						role="presentation"
+						type="submit"
 						themeType="primary"
 						onClick={handleSubmit(onSubmit)}
 						disabled={createVendorServicePocLoading}
