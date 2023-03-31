@@ -3,7 +3,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
-import { getServiceIcon } from '../../../../utils/FCL/getServiceIcon';
+import ServiceIcon from '../../ServiceIcon';
 
 import styles from './styles.module.css';
 
@@ -34,14 +34,12 @@ const handleLocationDetails = (location) => (
 
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);
 
-function PortDetails({ data = {} }) {
+function PortDetails({ data = {}, icon }) {
 	const { origin, destination, schedule_arrival, schedule_departure } = data;
-
-	const { serviceIcon } = getServiceIcon();
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>
-			{serviceIcon}
+			<ServiceIcon {...icon} />
 
 			<div className={styles.port_detail}>
 				{handleLocationDetails(origin)}

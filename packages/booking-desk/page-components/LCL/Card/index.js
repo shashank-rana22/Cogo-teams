@@ -1,14 +1,16 @@
+import { IcCFlcl } from '@cogoport/icons-react';
+
 import CardHeader from '../../../commons/Card/CardHeader';
 import PortDetails from '../../../commons/Card/PortDetails/DualLocation';
 import ShipmentInfo from '../../../commons/Card/ShipmentInfo';
-import shouldAnimateCard from '../../../helpers/shouldAnimateCard';
+import canCardAnimate from '../../../helpers/canCardAnimate';
 
 import CargoDetails from './CargoDetails';
 import { card, card_body, card_footer, separator, animate_card } from './styles.module.css';
 
 export default function Card({ item = {}, isCardAnimatable = false }) {
 	return (
-		<div className={`${card} ${isCardAnimatable && shouldAnimateCard({ item }) ? animate_card : ''}`}>
+		<div className={`${card} ${isCardAnimatable && canCardAnimate({ item }) ? animate_card : ''}`}>
 			<CardHeader item={item} />
 
 			<div className={card_body}>
@@ -16,7 +18,7 @@ export default function Card({ item = {}, isCardAnimatable = false }) {
 
 				<div className={separator} />
 
-				<PortDetails data={item} />
+				<PortDetails data={item} icon={{ Icon: IcCFlcl, text: 'LCL' }} />
 
 				<div className={separator} />
 

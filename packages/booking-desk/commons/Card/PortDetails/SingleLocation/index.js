@@ -1,18 +1,16 @@
 import { Tooltip } from '@cogoport/components';
 import React from 'react';
 
-import { getServiceIcon } from '../../../../utils/FCL-Local/getServiceIcon';
+import ServiceIcon from '../../ServiceIcon';
 
 import styles from './styles.module.css';
 
-function PortDetails({ data = {} }) {
+function PortDetails({ data = {}, icon }) {
 	const { port, trade_type } = data;
-
-	const { serviceIcon } = getServiceIcon();
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>
-			{serviceIcon}
+			<ServiceIcon {...icon} />
 
 			<div className={styles.single_location}>
 				{trade_type === 'export' ? 'Origin' : 'Destination'}

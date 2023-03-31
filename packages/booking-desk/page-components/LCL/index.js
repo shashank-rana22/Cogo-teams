@@ -1,27 +1,31 @@
+import ScopeSelect from '@cogoport/scope-select';
+
+import Filters from '../../commons/Filters';
 import List from '../../commons/List';
 import Loader from '../../commons/Loader';
-import ScopeAndFilters from '../../commons/ScopeAndFilters';
-import TabsAndFilters from '../../commons/TabsAndFilters';
+import Tabs from '../../commons/Tabs';
 import { lcl_freight as tabs } from '../../config/TABS_CONFIG.json';
 import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments';
 
 import Card from './Card';
 import styles from './styles.module.css';
 
-export default function LCLDesk({ stateProps = {} }) {
+export default function FCLDesk({ stateProps = {} }) {
 	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'lcl_freight' });
 
-	const isCardAnimatable = !!tabs.find((tab) => tab.name === stateProps.activeTab).criticalVisible;
+	const isCardAnimatable = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
 
 	return (
-		<div>
+		<>
 			<div className={styles.header}>
 				<h1>Booking Desk</h1>
 
-				<ScopeAndFilters stateProps={stateProps} />
+				<ScopeSelect defaultValues={stateProps.scopeFilters} />
 			</div>
 
-			<TabsAndFilters stateProps={stateProps} tabs={tabs} />
+			<Filters stateProps={stateProps} />
+
+			<Tabs tabs={tabs} stateProps={stateProps} />
 
 			<div className={`${styles.list_container} ${loading ? styles.loading : ''}`}>
 				{loading ? <Loader /> : (
@@ -33,6 +37,6 @@ export default function LCLDesk({ stateProps = {} }) {
 					/>
 				)}
 			</div>
-		</div>
+		</>
 	);
 }
