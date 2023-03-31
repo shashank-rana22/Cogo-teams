@@ -1,5 +1,5 @@
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useListFaqTags from '../hooks/useListFaqTags';
 import tagListColumns from '../TableConfigurations/tagListColumns';
@@ -46,6 +46,10 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 		updateApiLoading,
 		activeTag,
 	});
+
+	useEffect(() => {
+		setTagCurrentPage(1);
+	}, [activeTag, setTagCurrentPage]);
 
 	return (
 		<div>
