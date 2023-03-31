@@ -139,8 +139,6 @@
 
 .important_styles {
 	position: relative;
-	border-radius: 4px;
-	box-shadow: rgb(0 0 0 / 5%) 0 0 0 1px;
 }
 
 .important_icon {
@@ -150,9 +148,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 18px;
-	height: 18px;
-	background: #ef0a1a;
+	height: 22px;
+	background: #ee3425;
 	border-radius: 0 4px;
 }
 

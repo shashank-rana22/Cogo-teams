@@ -6825,8 +6825,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'list_organization_trade_parties',
-			access_type : 'private',
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'trade_party',
 		},
 		{
 			api         : 'get_purchase_bills_sid_details_by_id',
@@ -7245,6 +7247,87 @@ const partner = {
 			access_type : 'private',
 			module      : 'Overseas',
 			feature     : 'Overseas',
+		},
+
+	],
+	overheads: [
+		{
+			api         : 'post_purchase_expense_send_email',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'get_purchase_expense_list_expense_configurations',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'get_purchase_expense_list',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'get_purchase_expense_stakeholder',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'post_purchase_expense_expense_configuration',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'expense_send_email',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'put_purchase_bills_status',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'put_purchase_expense_expense_configuration',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'trade_party',
+		},
+		{
+			api          : 'list_vendors',
+			access_type  : 'private',
+			module       : 'vendor',
+			feature      : 'vendor',
+			service_name : 'vendor',
+		},
+		{
+			api         : 'post_common_tax_list_item_taxes',
+			access_type : 'private',
+			module      : 'overheads',
+			feature     : 'overheads',
+		},
+		{
+			api          : 'get_expense_list',
+			access_type  : 'private',
+			module       : 'overheads',
+			feature      : 'overheads',
+			service_name : 'expense',
 		},
 	],
 	my_incident: [
@@ -10832,7 +10915,7 @@ const partner = {
 		{
 			api          : 'list_partner_users',
 			access_type  : 'private',
-			service_name : 'communication',
+			service_name : 'partner',
 		},
 		{
 			api          : 'convert_importer_exporter_to_channel_partner',
