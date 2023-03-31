@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import { ACCOUNT_TYPE_MAPPING } from '../constants';
 import { PARAMOUNT_ORG_ID } from '../constants/IDS_CONSTANTS';
@@ -9,7 +9,8 @@ import useListPartners from './useListPartners';
 
 const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:activeConversationTab = '' }) => {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
-	const { fetchPartnerId = () => {}, partnersLoading = false, channelPartnerId } = useListPartners();
+
+	const { fetchPartnerId = () => {}, partnersLoading = false, channelPartnerId = '' } = useListPartners();
 
 	const [{ data, loading }, trigger] = useRequest(
 		{
@@ -18,7 +19,7 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 		},
 		{ manual: true },
 	);
-	const getOrgDetails = async () => {
+	const getOrgDetails = useCallback(async () => {
 		try {
 			const res = await trigger({
 				params: {
@@ -37,13 +38,13 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 		} catch (error) {
 			// console.log(error);
 		}
-	};
+	}, [fetchPartnerId, orgId, trigger]);
+
 	useEffect(() => {
 		if (orgId) {
 			getOrgDetails();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [orgId]);
+	}, [getOrgDetails, orgId]);
 
 	const { list = [] } = data || {};
 	const { tags = [] } = list?.[0] || {};
@@ -62,27 +63,31 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 
 	const openNewTab = (activeTab) => {
 		const { crm = undefined, prm = undefined } = activeTab || {};
+
 		const linkSuffix = activeConversationTab === 'message'
 			? `source=communication&active_chat=${activeCardId}` : 'source=communication';
+
 		if (isChannelPartner && channelPartnerId) {
 			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerId}?${linkSuffix}`;
+
 			const PRM_ROUTE_PAGE = prm
 				? `${ORG_PAGE_URL}&omniChannelActiveTab=${prm}`
 				: ORG_PAGE_URL;
-				// eslint-disable-next-line no-undef
+
 			window.open(PRM_ROUTE_PAGE, '_blank');
 		} else if (!isChannelPartner) {
 			ORG_PAGE_URL = `/${partnerId}/details/demand/${ORGID}?${linkSuffix}`;
+
 			const CRM_ROUTE_PAGE = crm
 				? `${ORG_PAGE_URL}&omniChannelActiveTab=${crm}`
 				: ORG_PAGE_URL;
-				// eslint-disable-next-line no-undef
+
 			window.open(CRM_ROUTE_PAGE, '_blank');
 		}
 	};
 
 	return {
-		openNewTab, loading: partnersLoading || loading, disableQuickActions,
+		openNewTab, loading: partnersLoading || loading, disableQuickActions, isChannelPartner, getOrgDetails,
 	};
 };
 export default useListOrganizations;
