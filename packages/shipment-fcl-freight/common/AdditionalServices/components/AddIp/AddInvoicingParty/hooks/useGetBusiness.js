@@ -1,6 +1,9 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
+
+import getApiErrorString from '../../../../../../utils/getApiErrorString';
 
 const useGetBusiness = (props) => {
 	const {
@@ -34,8 +37,8 @@ const useGetBusiness = (props) => {
 				setValue('name', trade_name || business_name || '');
 				setValue('pincode', (!isEmpty(addresses) && (addresses[0] || {}).pincode) || '');
 				setValue('address', (!isEmpty(addresses) && (addresses[0] || {}).address) || '');
-			} catch (error) {
-				console.log(error);
+			} catch (err) {
+				Toast.error(getApiErrorString(err));
 			}
 		})();
 	}, [trigger, gstNumber]);

@@ -36,11 +36,6 @@ function CompanyDetails({
 			/>
 			<div className={styles.button_container}>
 				<Button
-					onClick={() => setCurrentStep('company_details')}
-				>
-					Back
-				</Button>
-				<Button
 					onClick={handleSubmit(onSubmitOfCompanyDetails)}
 				>
 					Proceed

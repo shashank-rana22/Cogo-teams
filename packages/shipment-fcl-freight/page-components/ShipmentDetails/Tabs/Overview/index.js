@@ -8,7 +8,7 @@ import TermsAndConditions from './TermsAndConditions';
 function Overview({ shipmentData = {} }) {
 	return (
 		<div className={styles.container}>
-			<OverviewManageServices container={styles.container} />
+			<OverviewManageServices />
 			<BLDetails />
 			<Services />
 			<div className={styles.extra_details}>

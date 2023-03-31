@@ -15,7 +15,6 @@ function List({
 	showContent = { heading: 'No Results found!' },
 	sort = {},
 	setSort = () => {},
-	total_data_item = {},
 	isLclManifest = false,
 }) {
 	const handleRender = () => {
@@ -37,16 +36,6 @@ function List({
 						isLast={data?.length === i + 1 && !isLclManifest}
 					/>
 				))}
-
-				{/* {isLclManifest ? (
-					<CardItem
-						isTotalRow
-						item={total_data_item}
-						loading={loading}
-						fields={fields}
-						isLast={isLclManifest}
-					/>
-				) : null} */}
 			</>
 		);
 	};

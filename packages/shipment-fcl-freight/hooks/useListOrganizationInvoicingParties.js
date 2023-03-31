@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 import getApiErrorString from '../utils/getApiErrorString';
 
-const useListOrganizationInvoicingParties = ({ params, bookingType }) => {
+const useListOrganizationInvoicingParties = ({ params }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_organization_invoicing_parties',
 		method : 'GET',

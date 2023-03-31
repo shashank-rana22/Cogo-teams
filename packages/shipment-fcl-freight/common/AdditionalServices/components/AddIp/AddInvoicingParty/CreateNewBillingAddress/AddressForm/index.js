@@ -22,8 +22,9 @@ function AddressForm({
 	isAddressRegisteredUnderGst,
 	setShowComponent = () => {},
 	setIsAddressRegisteredUnderGst = () => {},
+	source = '',
 }) {
-	const { dataa } = useGetBusiness({ gstNumber, setValue });
+	useGetBusiness({ gstNumber, setValue });
 
 	const handleCancel = () => {
 		setCurrentStep('company_details');
@@ -80,7 +81,7 @@ function AddressForm({
 				)}
 
 			<div className={styles.button_container}>
-				<Button onClick={handleCancel}>Cancel</Button>
+				<Button onClick={handleCancel}>{source === 'create_trade_party' ? 'Back' : 'Cancel'}</Button>
 				<Button type="submit" onClick={handleSubmit(onSubmit)}>Submit</Button>
 			</div>
 		</div>

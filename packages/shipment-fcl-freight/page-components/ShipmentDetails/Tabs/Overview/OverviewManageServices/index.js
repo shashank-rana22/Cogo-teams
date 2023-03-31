@@ -1,6 +1,6 @@
 import { Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 import { AdditionalServiceList } from '../../../../../common/AdditionalServices';
 import Route from '../../../../../common/Route';
@@ -8,7 +8,7 @@ import possibleFullRouteConfigs from '../../../../../common/Route/possible-full-
 
 import styles from './styles.module.css';
 
-function OverviewManageServices({ container }) {
+function OverviewManageServices() {
 	const { servicesList, refetchServices, isGettingShipment, primary_service, servicesLoading } = useContext(
 		ShipmentDetailContext,
 	);
@@ -19,11 +19,6 @@ function OverviewManageServices({ container }) {
 	const getTitle = (
 		<div className={styles.title}>Manage Services</div>
 	);
-
-	// useEffect(() => {
-	// 	const button = document.querySelector(`.${container} > div > button:first-child`);
-	// 	// button.click();
-	// }, []);
 
 	return (
 		<Accordion title={getTitle}>
@@ -39,7 +34,6 @@ function OverviewManageServices({ container }) {
 			<AdditionalServiceList
 				services={servicesList}
 				refetchServices={refetchServices}
-				// activeTab={activeTab}
 			/>
 		</Accordion>
 	);

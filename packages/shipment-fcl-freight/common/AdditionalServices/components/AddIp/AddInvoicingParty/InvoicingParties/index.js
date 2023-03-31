@@ -1,5 +1,3 @@
-// import { trackEvent } from '@cogo/commons/analytics';
-// import { APP_EVENT, PARTNER_EVENT } from '@cogo/commons/analytics/constants';
 import { Button, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
@@ -7,7 +5,7 @@ import { useState, useEffect, useMemo } from 'react';
 import useListOrganizationInvoicingParties from '../../../../../../hooks/useListOrganizationInvoicingParties';
 import EmptyState from '../../../../../EmptyState';
 import CreateNewBillingAddress from '../CreateNewBillingAddress';
-import CreateNewInvoicingParty from '../CreateNewInvoicingParty';
+import CreateNewTradeParty from '../CreateNewTradeParty';
 
 import InvoicingPartyItem from './InvoicingPartyItem';
 import styles from './styles.module.css';
@@ -24,7 +22,6 @@ function InvoicingParties({
 	updateInvoicingParty = () => {},
 	bookingType = 'self',
 	isIE,
-	source,
 }) {
 	const { id: organizationId = '', is_tax_applicable = false } = organization;
 
@@ -33,9 +30,7 @@ function InvoicingParties({
 
 	const [showComponent, setShowComponent] = useState('view_billing_addresses');
 
-	const [invoiceToTradePartyDetails, setInvoiceToTradePartyDetails] = useState(
-		{},
-	);
+	const [invoiceToTradePartyDetails, setInvoiceToTradePartyDetails] = useState({});
 
 	const params = useMemo(() => ({
 		filters: {
@@ -101,17 +96,6 @@ function InvoicingParties({
 			const selectedAddress = invoicingParty[address_to_use]
 				.find((address) => address.id === newSelectedAddressId);
 
-			// const EVENT = PARTNER_EVENT;
-			// trackEvent(EVENT.checkout_changed_invoicing_parties, {
-			// 	checkout_id,
-			// 	invoicing_parties: [
-			// 		{
-			// 			name     : selectedAddress?.name,
-			// 			poc_name : selectedAddress?.poc_details?.name,
-			// 		},
-			// 	],
-			// });
-
 			const {
 				organization_id = '',
 				address = '',
@@ -119,7 +103,6 @@ function InvoicingParties({
 				tax_number = '',
 				pincode = '',
 				is_sez,
-				// poc_details = [],
 				organization_trade_party_id,
 			} = selectedAddress;
 
@@ -133,7 +116,7 @@ function InvoicingParties({
 				address,
 				pincode,
 				is_sez                  : !!is_sez,
-				poc                     : null, // poc_details,
+				poc                     : null,
 				trade_party_type        : invoicingParty.trade_party_type,
 				organization_trade_party_id,
 				registration_number     : invoicingParty.registration_number,
@@ -171,12 +154,11 @@ function InvoicingParties({
 							Add Address
 						</Button>
 
-						<EmptyState heading="address" />
+						<EmptyState />
 					</>
 				);
 			}
-
-			return <EmptyState heading="address" />;
+			return <EmptyState />;
 		}
 
 		return newInvoicingPartiesList.map((item) => (
@@ -231,12 +213,11 @@ function InvoicingParties({
 
 		if (showComponent === 'create_trade_party') {
 			return (
-				<CreateNewInvoicingParty
+				<CreateNewTradeParty
 					orgResponse={organization}
 					setShowComponent={setShowComponent}
 					tradePartyType={tradePartyType}
 					fetchOrganizationTradeParties={refetch}
-					source={source}
 				/>
 
 			);

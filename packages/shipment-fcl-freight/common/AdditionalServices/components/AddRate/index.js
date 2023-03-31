@@ -29,7 +29,6 @@ function AddRate({
 	setShowChargeCodes = () => {},
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
-	const [showSecondStep, setShowSecondStep] = useState(false);
 
 	const {
 		onAddRate, handleSubmit, loading, errors, control, unitOptions,
@@ -46,21 +45,6 @@ function AddRate({
 		filters,
 	});
 
-	if (showSecondStep) {
-		return (
-			// <SecondStep
-			// 	item={item}
-			// 	status={status}
-			// 	isSeller={isSeller}
-			// 	setShowSecondStep={setShowSecondStep}
-			// 	// updateResponse={updateResponse}
-			// />
-			<div>
-				SecondStep
-			</div>
-		);
-	}
-
 	if (
 		status?.status === 'charges_incurred'
 		&& !billToCustomer
@@ -72,7 +56,6 @@ function AddRate({
 				onCancel={() => setAddSellPrice(false)}
 				onBillToCustomer={() => setBillToCustomer(true)}
 			/>
-
 		);
 	}
 
@@ -104,7 +87,6 @@ function AddRate({
 				onAddRate={onAddRate}
 				handleSubmit={handleSubmit}
 				status={status}
-				setShowSecondStep={setShowSecondStep}
 				updateResponse={updateResponse}
 				loading={loading || updateResponse.loading}
 				onCancel={() => onCancel()}

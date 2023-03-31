@@ -8,12 +8,10 @@ import AddressForm from '../CreateNewBillingAddress/AddressForm';
 import CompanyDetails from './CompanyDetails';
 import styles from './styles.module.css';
 
-function CreateNewInvoicingParty({
+function CreateNewTradeParty({
 	orgResponse = {},
-	tradePartyType = {},
 	setShowComponent = () => {},
 	fetchOrganizationTradeParties = () => {},
-	source = '',
 }) {
 	const [filledDetails, setFilledDetails] = useState({});
 	const [isAddressRegisteredUnderGst, setIsAddressRegisteredUnderGst] = useState(false);
@@ -39,12 +37,9 @@ function CreateNewInvoicingParty({
 	if (currentStep === 'company_details') {
 		renderCurrentStepControls = (
 			<CompanyDetails
-				tradePartyType={tradePartyType}
 				filledDetails={filledDetails}
 				setFilledDetails={setFilledDetails}
 				setCurrentStep={setCurrentStep}
-				// onClickBack={onClickCompanyDetailsBack}
-				// showBackButton={showCompanyDetailsBackButton}
 			/>
 		);
 	}
@@ -64,6 +59,7 @@ function CreateNewInvoicingParty({
 				setGstNumber={setGstNumber}
 				isAddressRegisteredUnderGst={isAddressRegisteredUnderGst}
 				setIsAddressRegisteredUnderGst={setIsAddressRegisteredUnderGst}
+				source="create_trade_party"
 			/>
 		);
 	}
@@ -79,4 +75,4 @@ function CreateNewInvoicingParty({
 	);
 }
 
-export default CreateNewInvoicingParty;
+export default CreateNewTradeParty;

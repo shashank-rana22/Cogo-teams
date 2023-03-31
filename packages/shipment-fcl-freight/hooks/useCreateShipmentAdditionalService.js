@@ -16,9 +16,7 @@ const useCreateShipmentAdditionalService = ({
 }) => {
 	const unitOptions = [];
 	if (item?.units) {
-		item?.units?.forEach((unit) => {
-			unitOptions.push({ label: startCase(unit), value: unit });
-		});
+		item?.units?.forEach((unit) => { unitOptions.push({ label: startCase(unit), value: unit }); });
 	} else unitOptions.push({ label: startCase(item?.unit), value: item?.unit });
 
 	const {
@@ -38,14 +36,14 @@ const useCreateShipmentAdditionalService = ({
 			const addedService = (data.services || []).find(
 				(service) => service.service_type === data.service_type,
 			);
+
 			await trigger({
 				data: {
 					name                  : data?.name,
 					code                  : data.code,
-					shipment_id           : data.shipment_id,
+					shipment_id           : data.shipmentId,
 					service_type          : data.service_type,
 					service_id            : addedService?.id,
-					// performed_by_org_id: 'e0c1ce39-299a-44c4-b5e8-03c25bde387e',
 					is_rate_available     : false,
 					state                 : 'requested_for_importer_exporter',
 					add_to_sell_quotation : true,
@@ -72,7 +70,7 @@ const useCreateShipmentAdditionalService = ({
 			const payload = {
 				name                  : item?.name,
 				code                  : item.code,
-				shipment_id           : item.shipment_id,
+				shipment_id           : item.shipmentId,
 				service_type          : item?.service_type,
 				service_id            : addedService?.id,
 				is_rate_available     : true,

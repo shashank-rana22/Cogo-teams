@@ -45,9 +45,7 @@ function ViewPrice({ showPrice, setShowPrice }) {
 				/>
 			)}
 
-			<Button>
-				<Button onClick={() => setShowPrice(null)}>Cancel</Button>
-			</Button>
+			<Button onClick={() => setShowPrice(false)}>Cancel</Button>
 		</div>
 	);
 }
