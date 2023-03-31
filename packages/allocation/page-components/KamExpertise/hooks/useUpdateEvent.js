@@ -46,6 +46,30 @@ function useUpdateEvent(props) {
 		},
 	});
 
+	const { watch } = formProps;
+
+	const expertiseTypeWatch = watch('expertise_type');
+
+	const mutatedControls = getAddRuleControls.map((control) => {
+		let newControl = { ...control };
+
+		if (newControl.name === 'group_name' && expertiseTypeWatch) {
+			newControl = {
+				...newControl,
+				params: {
+					...newControl.params,
+					filters: {
+						...newControl?.params?.filters,
+						expertise_type: expertiseTypeWatch,
+					},
+				},
+				disabled: false,
+			};
+		}
+
+		return newControl;
+	});
+
 	const onUpdate = async (formValues, e) => {
 		e.preventDefault();
 
@@ -92,7 +116,7 @@ function useUpdateEvent(props) {
 	return {
 		onUpdate,
 		formProps,
-		getAddRuleControls,
+		getAddRuleControls: mutatedControls,
 		loading,
 	};
 }

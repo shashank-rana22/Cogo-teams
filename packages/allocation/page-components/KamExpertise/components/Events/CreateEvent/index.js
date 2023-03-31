@@ -30,13 +30,13 @@ function CreateEvent(props) {
 
 	const {
 		onSave,
-		getAddRuleControls,
 		loading: createLoading,
 	} = useCreateNewEvent({ attributeList, listRefetch, setEventListData });
 
 	const {
 		onUpdate,
 		formProps,
+		getAddRuleControls,
 		loading: updateLoading,
 	} = useUpdateEvent({ eventListData, listRefetch, attributeList, setEventListData });
 
@@ -75,6 +75,8 @@ function CreateEvent(props) {
 
 								const Element = getFieldController(el.type);
 
+								const isDisabled = (!isEmpty(eventListData?.data || el.disabled));
+
 								if (!Element) return null;
 
 								return (
@@ -83,13 +85,12 @@ function CreateEvent(props) {
 
 										<div className={styles.input_group}>
 											<Element
-												{...el}
 												key={el.name}
 												control={control}
 												id={`${el.name}_input`}
-												disabled={(!isEmpty(eventListData?.data))
-													|| ((isEmpty(eventListData?.data))
-														? createLoading : updateLoading)}
+												disabled={isDisabled}
+												{...el}
+
 											/>
 										</div>
 

@@ -16,6 +16,8 @@ import {
 	asyncAllotBanks,
 	asyncFieldsExpertiseConfigurations,
 	asyncFieldsExpertiseBadgeName,
+	asyncKamExpertiseRuleOptions,
+	asyncKamExpertiseGroupOptions,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -50,6 +52,8 @@ const keyAsyncFieldsParamsMapping = {
 	allot_bank              : asyncAllotBanks,
 	expertise_configuration : asyncFieldsExpertiseConfigurations,
 	badge_name              : asyncFieldsExpertiseBadgeName,
+	rule_options            : asyncKamExpertiseRuleOptions,
+	condition_group_options : asyncKamExpertiseGroupOptions,
 };
 
 function AsyncSelect(props) {

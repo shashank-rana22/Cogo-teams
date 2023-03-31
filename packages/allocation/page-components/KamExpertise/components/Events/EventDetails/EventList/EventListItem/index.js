@@ -83,20 +83,8 @@ function EventListItem({ data, index, setEventListData }) {
 							</Pill>
 						</span>
 
-						having attribute
-
 						<span style={{ marginRight: '4px' }}>
-							<Pill
-								key="Account"
-								size="l"
-								color="#FEF3E9"
-							>
-								{startCase(res.rule_type || '')}
-							</Pill>
-						</span>
-
-						<span style={{ marginRight: '4px' }}>
-							and parameter of
+							having parameter
 						</span>
 
 						{' '}

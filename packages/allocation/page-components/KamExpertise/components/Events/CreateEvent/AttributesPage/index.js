@@ -3,14 +3,10 @@ import { startCase, isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../../common/EmptyState';
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
+import getEventControlType from '../../../../utils/get-event-control-type';
 
 import styles from './styles.module.css';
 
-const CONTROL_TYPE_MAPPING = {
-	string  : 'text',
-	integer : 'number',
-	select  : 'select',
-};
 function AttributePage(props) {
 	const { loading, attributeList = [], formProps = {} } = props;
 
@@ -75,13 +71,12 @@ function AttributePage(props) {
 					const { name = '', parameters, options = [] } = controlItem;
 					const { params_type } = parameters || {};
 
-					const type = CONTROL_TYPE_MAPPING[params_type || ''];
+					const controlsObject = getEventControlType({ name, options });
 
 					const el = {
 						name,
 						label: startCase(name),
-						type,
-						...(params_type === 'select' && { options, isClearable: true }),
+						...controlsObject[params_type || ''],
 					};
 
 					const Element = getFieldController(el?.type);

@@ -3,8 +3,6 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { snakeCase } from '@cogoport/utils';
 
-import getAddRuleControls from '../configurations/get-add-rule-controls';
-
 function useCreateNewEvent(props) {
 	const {
 		attributeList = [],
@@ -17,8 +15,6 @@ function useCreateNewEvent(props) {
 		url     : '/kam_expertise_event_configuration',
 		authkey : 'post_allocation_kam_expertise_event_configuration',
 	}, { manual: true });
-
-	// const formProps = useForm();
 
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
@@ -76,8 +72,6 @@ function useCreateNewEvent(props) {
 
 	return {
 		onSave,
-		// newEventFormProps: formProps,
-		getAddRuleControls,
 		loading,
 	};
 }

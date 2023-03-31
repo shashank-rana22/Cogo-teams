@@ -11,6 +11,7 @@ import {
 	SelectController,
 	UploadController,
 	TextAreaController,
+	CheckboxController,
 } from '@cogoport/forms';
 
 const controlTypeControllerMapping = {
@@ -27,6 +28,7 @@ const controlTypeControllerMapping = {
 	fileUpload         : UploadController,
 	creatableSelect    : CreatableSelectController,
 	textarea           : TextAreaController,
+	checkBox           : CheckboxController,
 };
 
 export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;

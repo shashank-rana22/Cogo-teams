@@ -16,19 +16,25 @@ const controls = [
 		isClearable: true,
 	},
 	{
-		name        : 'condition_name',
-		label       : 'Condition Name',
-		placeholder : '',
-		type        : 'text',
-		rules       : {
+		name  : 'condition_name',
+		label : 'Condition Name',
+		type  : 'text',
+		rules : {
 			required: 'Specify Condition',
 		},
 	},
 	{
 		name        : 'group_name',
 		label       : 'Group Name',
-		placeholder : '',
-		type        : 'text',
+		type        : 'asyncSelect',
+		asyncKey    : 'condition_group_options',
+		initialCall : true,
+		disabled    : true,
+		isClearable : true,
+		params      : {
+			status: 'live',
+		},
+
 	},
 	{
 		name        : 'event_state_on',

@@ -226,6 +226,28 @@ function asyncFieldsExpertiseBadgeName() {
 	};
 }
 
+function asyncKamExpertiseRuleOptions() {
+	return {
+		labelKey     : 'option',
+		valueKey     : 'option',
+		endpoint     : '/kam_expertise_rule_options',
+		authkey      : 'get_allocation_kam_expertise_rule_options',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
+function asyncKamExpertiseGroupOptions() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'group_name',
+		endpoint     : '/kam_expertise_event_group_name',
+		authkey      : 'get_allocation_kam_expertise_event_group_name',
+		microService : 'allocation',
+		initialCall  : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -244,4 +266,6 @@ export {
 	asyncAllotBanks,
 	asyncFieldsExpertiseConfigurations,
 	asyncFieldsExpertiseBadgeName,
+	asyncKamExpertiseRuleOptions,
+	asyncKamExpertiseGroupOptions,
 };
