@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMDownload, IcMEdit } from '@cogoport/icons-react';
+import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../commons/List';
@@ -39,7 +39,7 @@ function ApprovedAWB({
 					? () => { handleClickOnDownload(singleItem.documentUrl); }
 					: () => { handleDownloadMAWB(singleItem); }}
 			>
-				<IcMDownload fill="#8B8B8B" />
+				<IcMEyeopen fill="#8B8B8B" />
 
 			</Button>
 		),

@@ -36,7 +36,13 @@ const useCreateShipmentDocument = ({
 	activeHawb = {},
 }:Props) => {
 	let api = 'create_shipment_document';
-	if (edit || activeHawb.isNew === false) api = 'update_shipment_document';
+	if (edit) {
+		if (activeHawb.isNew === false) {
+			api = 'update_shipment_document';
+		} else {
+			api = 'create_shipment_document';
+		}
+	}
 
 	const [success, setSuccess] = useState(false);
 

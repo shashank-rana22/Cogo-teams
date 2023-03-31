@@ -105,7 +105,7 @@ function GenerateMawb({
 		const { file } = getFileObject(newImage, 'mawb.pdf');
 		const res = await handleUpload('mawb.pdf', file);
 		const payload = {
-			shipment_id         : taskItem?.shipmentId,
+			shipment_id         : taskItem?.shipmentId || taskItem?.shipment_id,
 			uploaded_by_org_id  : taskItem?.serviceProviderId,
 			performed_by_org_id : taskItem?.serviceProviderId,
 			document_type       : activeCategory === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',

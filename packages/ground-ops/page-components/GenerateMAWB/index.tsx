@@ -106,14 +106,18 @@ function GenerateMAWB({
 				dataList.push(pushData);
 			});
 			setHawbDetails(dataList);
-			if (hawbDetails.length > 0) {
-				setActiveHawb(hawbDetails[0]);
-			}
 		}
 	}, [activeCategory, hawbListLoading]);
 
 	useEffect(() => {
-		if (activeHawb && !activeHawb.isNew) {
+		if (hawbDetails.length > 0) {
+			setActiveHawb(hawbDetails[0]);
+		}
+	}, [hawbDetails.length]);
+
+	useEffect(() => {
+		setActiveKey('basic');
+		if (activeHawb && !activeHawb.isNew && activeCategory === 'hawb') {
 			getHawb(activeHawb.id);
 		}
 		if (activeCategory === 'mawb' && edit) {
@@ -137,6 +141,8 @@ function GenerateMAWB({
 		finalFields.forEach((c) => {
 			if (activeCategory === 'hawb' && activeHawb.isNew && unsavedFields.includes(c.name)) {
 				setValue(c.name, '');
+			} else if (activeCategory === 'mawb' && unsavedFields.includes(c.name)) {
+				setValue(c.name, '');
 			} else {
 				setValue(c.name, taskItem[c.name] || '');
 			}
@@ -157,7 +163,7 @@ function GenerateMAWB({
 		setValue('shipperSignature', taskItem.customer_name || taskItem.shipperSignature);
 		setValue('amountOfInsurance', 'NIL');
 		setValue('accountingInformation', 'FREIGHT PREPAID');
-	}, [hawbSuccess, activeHawb, category]);
+	}, [hawbSuccess, activeHawb, category, activeCategory]);
 
 	useEffect(() => {
 		setChargeableWeight(formValues.chargeableWeight);

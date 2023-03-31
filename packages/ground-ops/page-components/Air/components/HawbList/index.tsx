@@ -1,5 +1,5 @@
 import { Loader, Button, Modal } from '@cogoport/components';
-import { IcMDownload } from '@cogoport/icons-react';
+import { IcMEyeopen } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
 import { HawbFields } from '../../configurations/hawb_fields';
@@ -99,7 +99,7 @@ function HawbList({ data, setViewDoc, setItem }) {
 					? () => { handleClickOnDownload(singleItem.documentUrl); }
 					: () => { handleDownloadMAWB(singleItem); }}
 			>
-				<IcMDownload fill="#8B8B8B" />
+				<IcMEyeopen fill="#8B8B8B" />
 
 			</Button>
 		),
