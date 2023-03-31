@@ -47,7 +47,7 @@ function Heading({
 	const { kyc_status = '' } = vendor_details || {};
 
 	return (
-		<div className={styles.top1}>
+		<div className={styles.top}>
 			Profile
 
 			<div className={styles.kyc_button_container}>
