@@ -3,7 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useGetTestQuestionSets({ cogo_entity_id = '', activeTab = 'question_set' }) {
+function useGetTestQuestionSets({ filters, activeTab = 'question_set' }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
@@ -22,7 +22,7 @@ function useGetTestQuestionSets({ cogo_entity_id = '', activeTab = 'question_set
 	const fetchList = () => {
 		try {
 			trigger({
-				params: { ...params, filters: { ...params.filters, q: query, cogo_entity_id } },
+				params: { ...params, filters: { ...params.filters, q: query, ...filters } },
 			});
 		} catch (error) {
 			Toast.error(error?.message);
@@ -34,7 +34,7 @@ function useGetTestQuestionSets({ cogo_entity_id = '', activeTab = 'question_set
 			fetchList();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query, params, cogo_entity_id]);
+	}, [query, params, filters]);
 
 	return {
 		data,
