@@ -12,11 +12,17 @@ function FormComponent({
 		<div className={styles.form_container}>
 			{controls.map((controlItem) => {
 				const Element = getElementController(controlItem?.type);
+
 				return (
-					<div className={styles.form_group} style={{ flexBasis: '30%', margin: '4px' }}>
+					<div
+						key={controlItem.name}
+						className={styles.form_group}
+						style={{ flexBasis: '30%', margin: '4px' }}
+					>
 						<div className={styles.form_label}>
 							{controlItem.label}
 						</div>
+
 						<div>
 							<Element
 								{...controlItem}

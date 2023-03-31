@@ -28,6 +28,7 @@ function MainData({
 					return (
 						<TabPanel
 							name={key}
+							key={key}
 							title={title}
 						>
 							<ContainerComponent
