@@ -6729,8 +6729,8 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'get_pnl_statement_list',
-			access_type  : 'private',
+			api         : 'get_pnl_statement_list',
+			access_type : 'private',
 		},
 		{
 			api         : 'post_payments_journal_voucher_approve',
