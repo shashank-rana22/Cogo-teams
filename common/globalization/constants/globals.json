@@ -93,6 +93,7 @@
 		"amitabh_user_id": "cd8dde11-678c-4467-85b2-2e2d6055bef4",
 		"superadmin_id": "5de782f6-f59d-41fc-84f4-8425dc1fa670",
 		"tech_superadmin_id": "381b9d1d-e005-4cc0-9844-a5f1636e71b1",
+		"cogoacademy_admin_id": "13cb3b79-95c2-49ca-9ebd-8c3ee1996981",
 		"local_charge_providers": {
 			"IN": "5dc403b3-c1bd-4871-b8bd-35543aaadb36",
 			"GB": "5eef8dfe-c485-414a-bbcb-82a8388539e3",

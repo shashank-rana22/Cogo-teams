@@ -180,7 +180,6 @@ function asyncFieldsListAgents() {
 		endpoint    : 'list_chat_agents',
 		initialCall : true,
 		params      : {
-			filters    : { status: 'active' },
 			page_limit : 20,
 			sort_by    : 'active_assigned_chats',
 			sort_type  : 'asc',
@@ -217,6 +216,15 @@ function asyncAllotBanks() {
 	};
 }
 
+function listVendors() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'q',
+		endpoint    : 'list_vendors',
+		initialCall : false,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -234,4 +242,5 @@ export {
 	asyncFieldsListAgents,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	listVendors,
 };
