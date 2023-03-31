@@ -1,9 +1,13 @@
 import React from 'react';
 
+import { handleBillType } from '../../../../../../utils/getHandleBillType';
+
 import styles from './styles.module.css';
 
 interface ItemTypes {
 	billDocumentUrl?: string;
+	billType?: string,
+	isProforma?: boolean,
 	billNumber?: string;
 	invoicePdfUrl?: string;
 	proformaPdfUrl?: string;
@@ -17,18 +21,16 @@ interface PropsType {
 }
 
 function InvoiceNumber({ item, field }: PropsType) {
-	const handleBillType = (type: any) => {
-		let invoiceType = 'Purchase Invoice';
-
-		if (type?.billType === 'CREDIT_NOTE') {
-			invoiceType = 'Credit Note';
-		} else if (type?.isProforma) {
-			invoiceType = 'Proforma Invoice';
-		}
-		return invoiceType;
-	};
-
-	const { billDocumentUrl, billNumber, invoicePdfUrl, proformaPdfUrl, invoiceNumber, proformaNumber } = item || {};
+	const {
+		billDocumentUrl,
+		billType = '',
+		isProforma,
+		billNumber,
+		invoicePdfUrl,
+		proformaPdfUrl,
+		invoiceNumber,
+		proformaNumber,
+	} = item || {};
 
 	return (
 		<div className={styles.text}>
@@ -41,7 +43,7 @@ function InvoiceNumber({ item, field }: PropsType) {
 					>
 						{billNumber}
 					</div>
-					<div className={styles.color}>{handleBillType(item)}</div>
+					<div className={styles.color}>{handleBillType(billType, isProforma)}</div>
 				</>
 			)}
 			{field.key === 'invoiceNumber' && (

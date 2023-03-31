@@ -60,7 +60,7 @@ function UploadDetailsModal({
 	const checkDocumentType = () => {
 		let documentName = '';
 		let fileType = '';
-		if (documentType === 'undefined' && !selectedDocumentType) {
+		if (!['gst', 'pan'].includes(documentType) && !selectedDocumentType) {
 			documentName = 'Please select document type';
 			fileType = 'undefined';
 		} else if (documentType === 'pan' || selectedDocumentType === 'pan') {

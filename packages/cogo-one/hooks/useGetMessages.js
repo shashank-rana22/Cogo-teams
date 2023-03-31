@@ -20,7 +20,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 
 	const {
 		getCogooneTimeline,
-		loading, firstTimeLineLoading,
+		loading, firstTimeLineLoading, setFirstTimeLineLoading = () => {},
 	} = useListCogooneTimeline({ id, setMessagesState, type: 'messages' });
 
 	const snapshotCleaner = () => {
@@ -32,6 +32,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 
 	const mountSnapShot = () => {
 		setFirstLoadingMessages(true);
+		setFirstTimeLineLoading(true);
 		snapshotCleaner();
 		const chatCollectionQuery = query(
 			activeChatCollection,
