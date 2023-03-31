@@ -13,6 +13,7 @@ const TheGlobe = dynamic(() => import('../TheGlobe'), { ssr: false });
 
 function CircleContent(props = {}) {
 	const {
+		stats={},
 		country = {},
 		date = {},
 		globeLoading = false,
@@ -21,10 +22,9 @@ function CircleContent(props = {}) {
 		circleTab = '',
 		resetGlobePosition = () => {},
 		setCircleTab = () => {},
-		globeStats = {},
-
+        
 	} = props || {};
-
+    const globeStats=stats?.list || {};
 	return (
 		<div className={styles.circle_content}>
 			<div className={styles.circle_frame}>
@@ -71,7 +71,6 @@ function CircleContent(props = {}) {
 							return (
 								// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 								<div
-									onClick={() => setCircleTab(type)}
 									className={cl`${styles.circle} ${styles[type]} 
 									${circleTab === type && styles.circle_clicked}`}
 

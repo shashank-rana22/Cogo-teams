@@ -8,11 +8,12 @@ import styles from './styles.module.css';
 
 function PrimaryStats(props = {}) {
 	const {
-		statsData = {},
+		stats = {},
 		statsLoading = false,
-		// userStats = {},
-		// firebaseLoading = false,
+		userStats = {},
+		firebaseLoading = false,
 	} = props || {};
+	const statsData=stats?.list||{}
 	return (
 		<div className={styles.primary_stats}>
 
@@ -22,7 +23,7 @@ function PrimaryStats(props = {}) {
 						parentKey, valueKey, descKey, title, icon, icon_bg, description,
 					} = stat;
 
-					const statValue = statsData[parentKey] || {};
+					{/* const statValue = statsData[parentKey] || {}; */}
 
 					return (
 						<div className={styles.left_stat_content}>
@@ -32,7 +33,7 @@ function PrimaryStats(props = {}) {
 									<div className={styles.primary_stat_value}>
 
 										{!statsLoading
-											? handleValues(statValue[valueKey] || '0')
+											? handleValues(statsData[valueKey] || '0')
 											: (
 												<Placeholder
 													className={styles.placeholder_element}
@@ -50,7 +51,7 @@ function PrimaryStats(props = {}) {
 									{' '}
 									<span>
 										{ !statsLoading
-											? statValue[descKey] || '0'
+											? statsData[descKey] || '0'
 											: (
 												<Placeholder
 													className={styles.placeholder_element}
@@ -75,43 +76,41 @@ function PrimaryStats(props = {}) {
 
 			<div className={styles.primary_right}>
 				<div className={styles.ticket_container}>
+				<div className={styles.right_stat_title}> Users Active on</div>
 					<div className={styles.ticket_details}>
-						<div className={styles.right_stat_title}> Users Active on</div>
+						
+						
+						<div className={styles.ticket_label}>
+							CogoVerse AI
+						</div>
 						<div className={styles.ticket_value}>
-							{!statsLoading
-
-								? 0
+							{!firebaseLoading
+								? handleValues(userStats?.ai_chats)
 								: (
 									<Placeholder
 										className={styles.placeholder_element}
-										height="20px"
+										height="15px"
 										width="30px"
 									/>
 								)}
 
 						</div>
-						<div className={styles.ticket_label}>
-							CogoVerse AI
-						</div>
 					</div>
 					<div className={styles.ticket_details}>
 
-						<div className={styles.ticket_value}>
-							{
-								!statsLoading
-									? 0
-									: (
-										<Placeholder
-											className={styles.placeholder_element}
-											height="20px"
-											width="30px"
-										/>
-									)
-							}
-
-						</div>
 						<div className={styles.ticket_label}>
 							Customer Support
+						</div>
+						<div className={styles.ticket_value}>
+							{!firebaseLoading ? handleValues(userStats?.kam_chats)
+								: (
+									<Placeholder
+										className={styles.placeholder_element}
+										height="15px"
+										width="30px"
+									/>
+								)}
+
 						</div>
 					</div>
 				</div>
@@ -158,8 +157,7 @@ function PrimaryStats(props = {}) {
 					</div>
 				</div> */}
 			</div>
-
-		</div>
+</div>
 	);
 }
 

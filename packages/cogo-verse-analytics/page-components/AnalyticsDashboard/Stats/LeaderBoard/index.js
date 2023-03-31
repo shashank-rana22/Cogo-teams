@@ -9,14 +9,14 @@ import styles from './styles.module.css';
 
 function LeaderBoard(props = {}) {
 	const {
-		statsData = {},
+		stats = {},
 		statsLoading = false,
 		platFormChatData = {},
 		chatLoading = false,
 	} = props || {};
-
-	const intentLeaderboardStats = statsData?.intent_leaderboard_stats || {};
-	const { user_feedbacks = {} } = platFormChatData || {};
+    const statsData=stats?.list||{}
+	// const intentLeaderboardStats = statsData?.intent_leaderboard_stats || {};
+	// const { user_feedbacks = {} } = platFormChatData || {};
 	const getAmount = (value) => {
 		const amount = getFormattedPrice(value, 'INR');
 		return ((amount.substring(4)).split('.'))[0];
@@ -50,7 +50,7 @@ function LeaderBoard(props = {}) {
 									<span className={styles.leaderboard_description_number}>
 
 										{!statsLoading
-											? getAmount(intentLeaderboardStats[valueKey])
+											? getAmount(statsData[valueKey])
 											: (
 												<Placeholder
 													className={styles.placeholder_element}
@@ -61,7 +61,6 @@ function LeaderBoard(props = {}) {
 
 									</span>
 
-									{description}
 								</div>
 
 							</div>
@@ -83,7 +82,7 @@ function LeaderBoard(props = {}) {
 								<div className={styles.user_status_num}>
 									{
 										!chatLoading
-											? handleValues(user_feedbacks?.[valueKey] || 0)
+											? handleValues(statsData[valueKey] || 0)
 											: (
 												<Placeholder
 													className={styles.placeholder_element}

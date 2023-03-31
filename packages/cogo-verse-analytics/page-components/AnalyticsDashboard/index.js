@@ -22,11 +22,8 @@ function AnalyticsDashboard() {
 	const { chatData = {}, chatLoading = false } = useGetCogoverseChatData({ country, date });
 
 	const platFormChatData = chatData?.data || {};
-
-	const statsData = stats?.data || {};
-
 	const props = {
-		statsData,
+		stats,
 		statsLoading,
 		platFormChatData,
 		chatLoading,
@@ -39,7 +36,7 @@ function AnalyticsDashboard() {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.stats_view_container}>
-				<Stats {...props} />
+				<Stats  {...props} />
 			</div>
 			<div className={styles.map_view_container}>
 				<MapView {...props} />

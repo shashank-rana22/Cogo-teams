@@ -89,8 +89,8 @@ function TheGLobe(
 	}, [CountryMobileCode]);
 
 	const markerSize = () => {
-		if (markerData?.length > 800) {
-			return '5px';
+		if (markerData?.length > 1200) {
+			return '7px';
 		} if (markerData?.length > 2000) {
 			return '3px';
 		}
@@ -98,6 +98,7 @@ function TheGLobe(
 	};
 
 	const markers = markerData?.length > 3000 ? markerData.slice(0, 3000) : markerData;
+
 
 	const htmlMarkerProps = {
 		htmlElementsData       : markers,
