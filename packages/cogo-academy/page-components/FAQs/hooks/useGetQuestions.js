@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 function useGetQuestions({ id }) {
 	const [{ data, loading }, trigger] = useRequest({
@@ -8,7 +8,7 @@ function useGetQuestions({ id }) {
 		url    : '/get_question',
 	}, { manual: true });
 
-	const fetchQuestions = async () => {
+	const fetchQuestions = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -18,12 +18,13 @@ function useGetQuestions({ id }) {
 		} catch (error) {
 			Toast.error(error?.message);
 		}
-	};
+	}, [id, trigger]);
 
 	useEffect(() => {
-		fetchQuestions();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [id]);
+		if (id) {
+			fetchQuestions();
+		}
+	}, [fetchQuestions, id]);
 
 	return {
 		refetchQuestions: fetchQuestions,

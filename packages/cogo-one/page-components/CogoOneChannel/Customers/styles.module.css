@@ -1,6 +1,7 @@
 .container {
 	position: relative;
 	width: 24%;
+	height: 100%;
 	padding: 10px;
 	margin-right: 10px;
 	background: #fff;
@@ -159,4 +160,10 @@
 	top: 101px;
 	right: 40px;
 	user-select: none;
+}
+
+.mail_icon {
+	top: 33px;
+	background: #ffff;
+	border-radius: 50%;
 }
