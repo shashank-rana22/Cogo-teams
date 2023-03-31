@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 const sourceUploadTypeMapping = {
 	kpi_tab_upload : ['normalization'],
-	pip_probation  : ['probation', 'pip'],
+	hr_dashboard   : ['probation', 'pip'],
 };
 
 function PipUploadModal({ modal, setModal = () => {}, source = 'pip_probation' }) {
