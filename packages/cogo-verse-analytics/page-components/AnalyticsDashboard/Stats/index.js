@@ -23,6 +23,7 @@ function Stats(props = {}) {
 	const {
 		statsLoading,
 		statsData,
+		stats = {},
 		chatLoading = false,
 		platFormChatData = {},
 	} = props || {};
@@ -43,7 +44,7 @@ function Stats(props = {}) {
 				<div className={cl`${styles.cogoverse}`}>ogoVerse Analytics</div>
 			</div>
 
-			<PrimaryStats userStats={userStats} firebaseLoading={firebaseLoading} />
+			<PrimaryStats userStats={userStats} stats={stats} firebaseLoading={firebaseLoading} />
 
 			<div className={styles.line_chart_container}>
 				<div className={styles.chart_heading}>

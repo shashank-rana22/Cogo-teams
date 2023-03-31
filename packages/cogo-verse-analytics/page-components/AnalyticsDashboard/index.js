@@ -30,7 +30,7 @@ function AnalyticsDashboard() {
 	console.log(statsData, 'statsData');
 
 	const props = {
-		statsData,
+		stats,
 		statsLoading,
 		platFormChatData,
 		chatLoading,

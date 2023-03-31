@@ -20,6 +20,7 @@ function MapView(props = {}) {
 	const globeGL = useRef();
 
 	const {
+		stats={},
 		statsLoading = false,
 		setCountry = () => {},
 		country = {},
@@ -27,7 +28,6 @@ function MapView(props = {}) {
 		setDate = {},
 		chatLoading = false,
 	} = props || {};
-
 	const [circleTab, setCircleTab] = useState('new_users');
 
 	const {
@@ -36,15 +36,16 @@ function MapView(props = {}) {
 		onSearch = () => {},
 	} = useGetAsyncOptions(merge(asyncFieldsLocations(), { params: { filters: { type: 'country' }, page_limit: 500 } }));
 
-	const { globeData = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab, date });
-
-	const { user_location = [], stats:globeStats = {} } = globeData?.data || {};
+	// const { globeData = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab, date });
+const globeData=stats?.list;
+	const { customer_locations = [], stats:globeStats = {} } = globeData || {};
+	console.log("customer_locations:", customer_locations);
 	const CountryMobileCode = country?.mobile_country_code || '';
 
 	let markerData = {};
-	markerData = user_location.map((item) => ({
-		lat : item[0],
-		lng : item[1],
+	markerData = customer_locations.map((item) => ({
+		lat : item?.latitude,
+		lng : item?.longitude,
 		pop : 500,
 		...markerData,
 	}));
@@ -77,7 +78,7 @@ function MapView(props = {}) {
 		<div className={styles.main_container}>
 			<div className={styles.top_content}>
 				<div className={styles.select_container}>
-					<Select
+					{/* <Select
 						value={country?.mobile_country_code}
 						onChange={(_, obj) => onSelectChange(obj)}
 						placeholder="Select Country"
@@ -88,7 +89,7 @@ function MapView(props = {}) {
 						isClearable
 						onSearch={onSearch}
 						loading={locationsLoading}
-					/>
+					/> */}
 				</div>
 				<div className={styles.date_range_container}>
 					<DateRangepicker
@@ -99,7 +100,7 @@ function MapView(props = {}) {
 						dateFormat="MMM dd, yyyy"
 						isPreviousDaysAllowed
 						maxDate={maxDate}
-						disable={statsLoading || globeLoading || chatLoading}
+						// disable={statsLoading || globeLoading || chatLoading}
 					/>
 
 				</div>
@@ -107,13 +108,13 @@ function MapView(props = {}) {
 
 			<CircleContent
 				{...props}
-				globeLoading={globeLoading}
+				// globeLoading={globeLoading}
 				globeGL={globeGL}
 				markerData={markerData}
 				circleTab={circleTab}
 				resetGlobePosition={resetGlobePosition}
 				setCircleTab={setCircleTab}
-				globeStats={globeStats}
+
 			/>
 
 			<GlobeStatsFooter {...props} />

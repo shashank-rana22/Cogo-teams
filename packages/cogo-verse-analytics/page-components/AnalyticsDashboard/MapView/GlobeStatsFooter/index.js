@@ -11,13 +11,13 @@ import styles from './styles.module.css';
 
 function GlobeStatsFooter(props = {}) {
 	const {
+		stats={},
 		statsLoading = false,
 		// chatLoading = false,
-		statsData = {},
 		// platFormChatData = {},
 	} = props || {};
-
-	const { conversation_data = {} } = statsData || {};
+	// const { conversation_data = {} } = statsData || {};
+     const statsData=stats?.list || {};
 	// const averageResponseTime = Number(platFormChatData?.average_cutomer_response_time) || 0;
 	return (
 		<div className={styles.footer_stats}>
@@ -71,7 +71,7 @@ function GlobeStatsFooter(props = {}) {
 									<div className={styles.stat_circle} style={{ background: icon_bg }} />
 									<div className={styles.com_stat_value}>
 										{!statsLoading
-											? handleValues(conversation_data[valueKey] || '0')
+											? handleValues(statsData[valueKey] || '0')
 											: (
 												<Placeholder
 													className={styles.placeholder_element}
@@ -91,7 +91,7 @@ function GlobeStatsFooter(props = {}) {
 				<div className={styles.pie_chart}>
 					{
 							!statsLoading
-								? <CommunicationPieChart conversation_data={conversation_data} />
+								? <CommunicationPieChart conversation_data={statsData} />
 								: (
 									<div className={styles.loading_pie_chart}>
 										<Placeholder
