@@ -58,6 +58,7 @@ const useBulkCreateQuestionAnswerSet = () => {
 			await trigger({ data: payload });
 
 			Toast('Question uploaded Successfully');
+			router.back();
 		} catch (error) {
 			if (error?.message || error?.error?.message) {
 				Toast(error?.message || error?.error?.message);
