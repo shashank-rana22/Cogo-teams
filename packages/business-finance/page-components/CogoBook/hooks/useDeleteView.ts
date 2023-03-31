@@ -12,7 +12,7 @@ const useDeleteView = () => {
 		{
 			url     : '/pnl/statement/source-file',
 			method  : 'delete',
-			authKey : 'get_pnl_statement_salary',
+			authKey : 'delete_pnl_statement_salary',
 		},
 		{ manual: true },
 	);

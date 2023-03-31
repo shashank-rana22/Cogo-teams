@@ -54,7 +54,7 @@ const useSaveReport = ({
 		{
 			url     : '/pnl/statement/turnover-ratios',
 			method  : 'post',
-			authKey : 'get_pnl_statement_turnover-ratios',
+			authKey : 'post_pnl_statement_turnover_ratios',
 		},
 		{ manual: true },
 	);

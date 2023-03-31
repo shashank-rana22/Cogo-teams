@@ -25,7 +25,7 @@ const useSaveCustomList = ({ deleteData, setCustomModal }) => {
 		{
 			url     : '/pnl/statement/customizations',
 			method  : 'delete',
-			authKey : 'get_pnl_statement_customizations',
+			authKey : 'delete_pnl_statement_customizations',
 		},
 		{ manual: true },
 	);

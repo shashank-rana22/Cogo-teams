@@ -6716,17 +6716,21 @@ const partner = {
 	],
 	cogo_book: [
 		{
-			api         : 'get_incident_management_incident_list',
+			api         : 'get_pnl_accrual_archive-shipment_list',
 			access_type : 'private',
 		},
 		{
-			api         : 'patch_incident_management_incident_by_id',
+			api         : 'get_pnl_statement_salary',
 			access_type : 'private',
 		},
 		{
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'get_pnl_statement_list',
+			access_type  : 'private',
 		},
 		{
 			api         : 'post_payments_journal_voucher_approve',
@@ -6823,6 +6827,42 @@ const partner = {
 			access_type : 'private',
 			module      : 'accruals',
 			feature     : 'accruals',
+		},
+		{
+			api         : 'get_pnl_statement_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_statement_segments',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_statement_customizations',
+			access_type : 'private',
+		},
+		{
+			api         : 'delete_pnl_statement_customizations',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_statement_list_customizations',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_pnl_statement_turnover_ratios',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_statement_locked_periods',
+			access_type : 'private',
+		},
+		{
+			api         : 'delete_pnl_statement_salary',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_pnl_statement_source_file',
+			access_type : 'private',
 		},
 	],
 	account_payables: [
