@@ -91,15 +91,6 @@ const navigationMappingShipper = {
 				possible_apis : app_apis.saas_premium_services,
 			},
 			{
-				key           : 'saas_premium_services-order_history',
-				title         : 'Order History',
-				href          : '/saas/premium-services/order-history',
-				as            : '/saas/premium-services/order-history',
-				icon          : 'nav-transaction-history',
-				main_apis     : [],
-				possible_apis : app_apis.saas_order_history,
-			},
-			{
 				key           : 'saas_premium_services-trader_eligibility_check',
 				title         : 'Trader Eligibility Check',
 				href          : '/saas/premium-services/trader-eligibility-check',
@@ -117,6 +108,15 @@ const navigationMappingShipper = {
 				as            : '/saas/premium-services/import-export-doc',
 				main_apis     : [],
 				possible_apis : app_apis.saas_import_export_doc,
+			},
+			{
+				key           : 'saas_premium_services-order_history',
+				title         : 'Order History',
+				href          : '/saas/premium-services/order-history',
+				as            : '/saas/premium-services/order-history',
+				icon          : 'nav-transaction-history',
+				main_apis     : [],
+				possible_apis : app_apis.saas_order_history,
 			},
 		],
 	},
@@ -372,7 +372,7 @@ const navigationMappingShipper = {
 
 	saas_cogo_subscription: {
 		key         : 'saas_cogo_subscription',
-		title       : 'Subscriptions',
+		title       : 'Membership Plans',
 		type        : 'link',
 		icon        : 'nav-subscriptions',
 		isSubNavs   : true,
@@ -382,7 +382,7 @@ const navigationMappingShipper = {
 		options     : [
 			{
 				key           : 'saas_cogo_subscription-manage',
-				title         : 'Manage Subscription',
+				title         : 'Manage Your Plan',
 				type          : 'link',
 				icon          : 'nav-documents',
 				href          : '/saas/cogo-subscriptions/manage-subscription',
