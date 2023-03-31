@@ -7,7 +7,7 @@ function useListFaqSearchHistories() {
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list_faq_search_history_stats',
+		url    : '/list_faq_search_history_stats',
 	}, { manual: true });
 
 	const formatStartDate = useMemo(

@@ -1274,7 +1274,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				module_type   : 'dashboards',
-				possible_apis : apis.bl_do,
+				possible_apis : [...apis.bl_do, ...apis.sop, ...apis.poc],
 
 			},
 			{

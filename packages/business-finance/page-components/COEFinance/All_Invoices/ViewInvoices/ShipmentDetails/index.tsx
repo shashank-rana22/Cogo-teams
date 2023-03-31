@@ -56,6 +56,8 @@ interface BillInterface {
 	grandTotal: any;
 	subTotal: string | number;
 	recurringState?:string,
+	billType: string;
+	isProforma: boolean,
 }
 
 interface JobInterface {

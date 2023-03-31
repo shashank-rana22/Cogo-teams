@@ -37,6 +37,16 @@ function ApprovalPending({
 		}
 	};
 
+	const handleOnEdit = (singleItem) => {
+		if (singleItem?.documentState === 'document_amendment_requested') {
+			handleEditMAWB(singleItem, '');
+		} else if (singleItem?.documentData?.status === 'uploaded') {
+			setShowUpload(singleItem); setEdit('edit');
+		} else if (singleItem?.documentData?.status === 'generated') {
+			handleEditMAWB(singleItem, 'edit');
+		}
+	};
+
 	const handleUpdate = async (values) => {
 		const serialId = values?.serialId || '';
 		const payload = {
@@ -74,9 +84,7 @@ function ApprovalPending({
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { setShowUpload(singleItem); setEdit('edit'); }
-					: () => { handleEditMAWB(singleItem, 'edit'); }}
+				onClick={() => { handleOnEdit(singleItem); }}
 			>
 				<IcMEdit fill="#8B8B8B" />
 			</Button>
