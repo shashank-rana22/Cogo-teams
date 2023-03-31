@@ -29,7 +29,6 @@ function RightSideNav({
 			setProfileState({
 				...profileData,
 				faq: {
-					// ...profileData.faq,
 					showFaq: true,
 				},
 			}),

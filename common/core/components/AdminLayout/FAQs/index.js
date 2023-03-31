@@ -54,7 +54,6 @@ function FAQs({
 			setProfileState({
 				...profileData,
 				faq: {
-					// ...profileData.faq,
 					showFaq: false,
 				},
 			}),
