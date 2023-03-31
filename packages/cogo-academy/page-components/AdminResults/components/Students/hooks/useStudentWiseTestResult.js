@@ -20,7 +20,7 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 			payload : {
 				sort_by   : sortBy,
 				sort_type : sortType,
-				filters   : { test_id, q: query },
+				filters   : { test_id, q: query, result_status: filter },
 				...params,
 			},
 			title: 'Appeared',

@@ -65,6 +65,7 @@ function StudentsComponent({ test_id }) {
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
 				debounceQuery={debounceQuery}
+				activeTab={activeTab}
 			/>
 
 			{!loading && isEmpty(data?.list)
