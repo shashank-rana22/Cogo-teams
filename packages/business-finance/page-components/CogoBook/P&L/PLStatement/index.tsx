@@ -7,19 +7,31 @@ import ListProfit from './ListProfit';
 import styles from './styles.module.css';
 
 function PLStatement() {
+	const [filtersData, setFiltersData] = useState({
+		entity   : '',
+		category : '',
+		date     : '',
+		rowCheck : '',
+		colCheck : '',
+		chip     : '',
+		radio    : '',
+		mode     : '',
+	});
+
 	const [filters, setFilters] = useState({
-		entity    : '',
-		category  : '',
-		date      : '',
-		rowCheck  : '',
-		colCheck  : '',
-		chip      : 'Segment',
-		radio     : '',
-		mode      : '',
+		entity    : filtersData?.entity || '',
+		category  : filtersData?.category || '',
+		date      : filtersData?.date || '',
+		rowCheck  : filtersData?.rowCheck || '',
+		colCheck  : filtersData?.colCheck || '',
+		chip      : filtersData?.chip || 'Segment',
+		radio     : filtersData?.radio || '',
+		mode      : filtersData?.mode || '',
 		ratio     : 'VOLUME',
 		monthTo   : '',
 		monthFrom : '',
 	});
+
 	const [selectFilter, setSelectFilter] = useState(false);
 	const [select, setSelect] = useState(false);
 	const [showReport, setShowReport] = useState(false);
@@ -32,7 +44,6 @@ function PLStatement() {
 		ratiosTriggerLoading,
 	} = useReport({ filters });
 
-	console.log(showReport, 'showReport');
 	return (
 		<div>
 			<Card
@@ -45,6 +56,7 @@ function PLStatement() {
 				select={select}
 				setSelect={setSelect}
 				setShowReport={setShowReport}
+				setFiltersData={setFiltersData}
 			/>
 			{showReport && (
 				<ListProfit

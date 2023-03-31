@@ -4,13 +4,11 @@ import { useState } from 'react';
 import { mappingData } from '../constant';
 
 import styles from './styles.module.css';
-// import { ratiosDataV2 } from './utils/ratios';
-// import { reportsDataV2 } from './utils/reports';
 
 function ListProfit({
 	ratiosData,
-	reportTriggerLoading,
-	ratiosTriggerLoading,
+	// reportTriggerLoading,
+	// ratiosTriggerLoading,
 	reportData,
 	filters,
 }) {
@@ -45,11 +43,11 @@ function ListProfit({
 			totalOtherExpense = 0,
 			otherExpense,
 			totalOtherIncome = 0,
-			otherIncome,
+			// otherIncome,
 			totalExceptionalItems = 0,
 			totalExtraordinaryItems = 0,
 			totalPriorPeriodItem = 0,
-			priorPeriodItems,
+			// priorPeriodItems,
 			totalTaxExpense = 0,
 		} = item;
 
@@ -57,37 +55,37 @@ function ListProfit({
 
 		const {
 			esops = 0,
-			gratuity_leave_encashment = 0,
-			personnel_cost = 0,
-			housekeeping_security_subscriptions_travel_stay_and_cc = 0,
-			salaries_bonus_incentives_and_staff_welfare_expenses = 0,
+			gratuityLeaveEncashment = 0,
+			personnelCost = 0,
+			housekeepingSecuritySubscriptionsTravelStayAndCC = 0,
+			salariesBonusIncentivesAndStaffWelfareExpenses = 0,
 		} = employeeBenefitExpenses || {};
 
 		const {
-			foreign_exchange_gain_net = 0,
-			interest_income_on_fd = 0,
-			interest_on_loan_discount_on_bills_and_bank_charges = 0,
-			miscelleneous_income = 0,
+			foreignExchangeGainNet = 0,
+			interestIncomeOnFd = 0,
+			interestOnLoanDiscountOnBillsAndBankCharges = 0,
+			miscelleneousIncome = 0,
 		} = financeCost || {};
 
 		const {
-			provisions_and_write_offs = 0,
-			marketing_expense = 0,
-			round_off = 0,
-			salaries_bonus_incentives_and_staff_welfare_expenses:
-			salaries_bonus_incentives_and_staff_welfare_expenses_expoense = 0,
-			operating_expenses = 0,
-			repairs_and_maintenance = 0,
-			tech_and_product_costs = 0,
-			any_other_costs = 0,
-			currency_suspense_account = 0,
-			rent_electricity_and_maintenance = 0,
-			personnel_cost: personnel_expense_cost = 0,
-			legal_compliance_books_and_mis = 0,
-			rates_and_taxes = 0,
-			rent_and_taxes = 0,
-			interest_on_loan_discount_on_bills_and_bank_charges:
-			interest_on_loan_discount_on_bills_and_bank_charges_expense = 0,
+			provisionsAndWriteOffs = 0,
+			marketingExpense = 0,
+			roundOff = 0,
+			salariesBonusIncentivesAndStaffWelfareExpenses:
+			// salariesBonusIncentivesAndStaffWelfareExpensesExpoense = 0,
+			// operating_expenses = 0,
+			repairsAndMaintenance = 0,
+			techAndProductCosts = 0,
+			anyOtherCosts = 0,
+			currencySuspenseAccount = 0,
+			rentElectricityAndMaintenance = 0,
+			personnelCost: personnelExpenseCost = 0,
+			legalComplianceBooksAndMis = 0,
+			ratesAndTaxes = 0,
+			rentAndTaxes = 0,
+			interestOnLoanDiscountOnBillsAndBankCharges:
+			interestOnLoanDiscountOnBillsAndBankChargesExpense = 0,
 		} = otherExpense || {};
 
 		const key = filters?.radio ? filters?.radio : 'nothing';
@@ -270,17 +268,17 @@ function ListProfit({
 										{(totalEmployeeBenefitExpenses * ratio).toFixed(2)}
 									</div>
 									{dropDown?.employee && <div>{(esops * ratio).toFixed(2)}</div>}
-									{dropDown?.employee && <div>{(gratuity_leave_encashment * ratio).toFixed(2)}</div>}
+									{dropDown?.employee && <div>{(gratuityLeaveEncashment * ratio).toFixed(2)}</div>}
 									{dropDown?.employee && (
 										<div>
-											{(housekeeping_security_subscriptions_travel_stay_and_cc
+											{(housekeepingSecuritySubscriptionsTravelStayAndCC
 												* ratio).toFixed(2)}
 										</div>
 									)}
-									{dropDown?.employee && <div>{(personnel_cost * ratio).toFixed(2)}</div>}
+									{dropDown?.employee && <div>{(personnelCost * ratio).toFixed(2)}</div>}
 									{dropDown?.employee && (
 										<div>
-											{(salaries_bonus_incentives_and_staff_welfare_expenses * ratio).toFixed(2)}
+											{(salariesBonusIncentivesAndStaffWelfareExpenses * ratio).toFixed(2)}
 										</div>
 									)}
 									<div className={styles.particular_data}>
@@ -291,37 +289,37 @@ function ListProfit({
 										* ratio).toFixed(2)}
 
 									</div>
-									{dropDown?.finance && <div>{foreign_exchange_gain_net * ratio}</div>}
+									{dropDown?.finance && <div>{foreignExchangeGainNet * ratio}</div>}
 									{dropDown?.finance && (
 										<div>
-											{interest_on_loan_discount_on_bills_and_bank_charges * ratio}
+											{interestOnLoanDiscountOnBillsAndBankCharges * ratio}
 										</div>
 									)}
-									{dropDown?.finance && <div>{miscelleneous_income * ratio}</div>}
-									{dropDown?.finance && <div>{interest_income_on_fd * ratio}</div>}
+									{dropDown?.finance && <div>{miscelleneousIncome * ratio}</div>}
+									{dropDown?.finance && <div>{interestIncomeOnFd * ratio}</div>}
 									<div className={styles.particular_data}>{totalOtherExpense * ratio}</div>
 									{dropDown?.other && (
 										<div>
-											{interest_on_loan_discount_on_bills_and_bank_charges_expense * ratio}
+											{interestOnLoanDiscountOnBillsAndBankChargesExpense * ratio}
 										</div>
 									)}
-									{dropDown?.other && <div>{legal_compliance_books_and_mis * ratio}</div>}
-									{dropDown?.other && <div>{marketing_expense * ratio}</div>}
-									{dropDown?.other && <div>{personnel_expense_cost * ratio}</div>}
-									{dropDown?.other && <div>{provisions_and_write_offs * ratio}</div>}
-									{dropDown?.other && <div>{rates_and_taxes * ratio}</div>}
-									{dropDown?.other && <div>{rent_and_taxes * ratio}</div>}
-									{dropDown?.other && <div>{rent_electricity_and_maintenance * ratio}</div>}
-									{dropDown?.other && <div>{repairs_and_maintenance * ratio}</div>}
+									{dropDown?.other && <div>{legalComplianceBooksAndMis * ratio}</div>}
+									{dropDown?.other && <div>{marketingExpense * ratio}</div>}
+									{dropDown?.other && <div>{personnelExpenseCost * ratio}</div>}
+									{dropDown?.other && <div>{provisionsAndWriteOffs * ratio}</div>}
+									{dropDown?.other && <div>{ratesAndTaxes * ratio}</div>}
+									{dropDown?.other && <div>{rentAndTaxes * ratio}</div>}
+									{dropDown?.other && <div>{rentElectricityAndMaintenance * ratio}</div>}
+									{dropDown?.other && <div>{repairsAndMaintenance * ratio}</div>}
 									{dropDown?.other && (
 										<div>
-											{salaries_bonus_incentives_and_staff_welfare_expenses * ratio}
+											{salariesBonusIncentivesAndStaffWelfareExpenses * ratio}
 										</div>
 									)}
-									{dropDown?.other && <div>{tech_and_product_costs * ratio}</div>}
-									{dropDown?.other && <div>{currency_suspense_account * ratio}</div>}
-									{dropDown?.other && <div>{round_off * ratio}</div>}
-									{dropDown?.other && <div>{any_other_costs * ratio}</div>}
+									{dropDown?.other && <div>{techAndProductCosts * ratio}</div>}
+									{dropDown?.other && <div>{currencySuspenseAccount * ratio}</div>}
+									{dropDown?.other && <div>{roundOff * ratio}</div>}
+									{dropDown?.other && <div>{anyOtherCosts * ratio}</div>}
 									<div className={styles.particular_data}>{totalOtherIncome * ratio}</div>
 								</div>
 							);

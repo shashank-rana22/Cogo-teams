@@ -1,13 +1,17 @@
 import {
+	Loader,
+	Radio,
 	Modal,
 	Toggle,
 	Button, RadioGroup, Chips, CheckboxGroup, Popover, Tooltip, Select,
 } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { IcMDelete, IcMInfo } from '@cogoport/icons-react';
+import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
+import useSaveCustom from '../../../hooks/useSaveCustom';
+import useSaveCustomList from '../../../hooks/useSaveCustomList';
 import { optionMonth } from '../../SourceFile/utils';
 import { optionsCheck, optionsPeriod, optionsPills, optionsRadio } from '../constant';
 
@@ -23,8 +27,17 @@ function Card({
 	select,
 	setSelect,
 	setShowReport,
+	setFiltersData,
 }) {
 	const [modal, setModal] = useState(false);
+	const [customModal, setCustomModal] = useState(false);
+	const [deleteData, setDeleteData] = useState([]);
+	const { refetch, saveLoading } = useSaveCustom({ filters });
+	const {
+		refetch:refetchSave, saveData, loading, LoadingDelete,
+		refetchDelete,
+	} = useSaveCustomList({ deleteData, setCustomModal });
+
 	const content = () => (
 		<div className={styles.content_container}>
 			<div>Rows</div>
@@ -54,6 +67,10 @@ function Card({
 		fetchReportApi(setShowReport);
 	};
 
+	const handleCustom = () => {
+		refetchSave();
+	};
+
 	const contentRadioData = () => (
 		<div>
 			<div className={styles.chips}>
@@ -76,6 +93,17 @@ function Card({
 	);
 	const rest = { onClickOutside: () => { setSelect(false); setSelectFilter(false); } };
 
+	const handleEvent = (event, filtersItem) => {
+		if (event.target.checked) {
+			setFiltersData(JSON.parse(filtersItem));
+		}
+	};
+
+	const handleDelete = (item) => {
+		setDeleteData(item);
+		refetchDelete();
+	};
+
 	return (
 		<div>
 			<div className={styles.container}>
@@ -95,38 +123,52 @@ function Card({
 					<div className={styles.hr_period} />
 
 					<div className={styles.select_container}>
-						<Select
-							value={filters?.entity}
-							onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
-							placeholder="Entity"
-							options={[{ label: 'All', value: 'all' },
-								{ label: 'Entity 101', value: '101' },
-								{ label: 'Entity 301', value: '301' }]}
-							isClearable
-							style={{ width: '150px' }}
-						/>
 						<div>
+							<div className={styles.bold_font_data}>Entity*</div>
+							<Select
+								value={filters?.entity}
+								onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
+								placeholder="Entity"
+								options={[
+									{ label: 'Entity 201', value: '201' },
+									{ label: 'Entity 301', value: '301' },
+									{ label: 'Entity 401', value: '401' },
+									{ label: 'Entity 501', value: '501' },
+								]}
+								isClearable
+								style={{ width: '150px' }}
+							/>
+						</div>
+
+						<div>
+							<div className={styles.bold_font_data}>Month*</div>
 							<Select
 								value={filters?.month}
 								onChange={(val:string) => { setFilters((prev) => ({ ...prev, month: val })); }}
 								placeholder="Month"
 								options={optionMonth}
+								disabled={filters?.category}
 								isClearable
 								style={{ width: '150px' }}
 							/>
 
 						</div>
+						<div>
 
-						<Select
-							value={filters?.category}
-							onChange={(val:string) => { setFilters((prev) => ({ ...prev, category: val })); }}
-							placeholder="Category"
-							options={optionsPeriod}
-							isClearable
-							style={{ width: '180px' }}
-						/>
+							<div className={styles.bold_font_data}>Report Period*</div>
+							<Select
+								value={filters?.category}
+								onChange={(val:string) => { setFilters((prev) => ({ ...prev, category: val })); }}
+								placeholder="Category"
+								options={optionsPeriod}
+								disabled={filters?.month}
+								isClearable
+								style={{ width: '180px' }}
+							/>
+						</div>
 
 						<div>
+							<div className={styles.bold_font_data}>Show non zero active only*</div>
 							<Popover
 								placement="bottom"
 								caret={false}
@@ -150,6 +192,7 @@ function Card({
 
 						</div>
 						<div>
+							<div className={styles.bold_font_data}>View Data By*</div>
 							<Popover
 								placement="bottom"
 								caret={false}
@@ -164,7 +207,7 @@ function Card({
 								>
 									<SelectAccrual
 										value={startCase(filters?.radio)}
-										placeholder="Category"
+										placeholder="Choose Customization"
 										setFilters={setFilters}
 									/>
 								</div>
@@ -174,8 +217,125 @@ function Card({
 						</div>
 					</div>
 					<div className={styles.buttons}>
-						<Button themeType="secondary">View saved Customizations</Button>
-						<Button themeType="secondary">Action</Button>
+						<Button
+							themeType="secondary"
+							onClick={() => {
+								handleCustom();
+							}}
+							loading={loading}
+						>
+							View saved Customizations
+
+						</Button>
+
+						{customModal && (
+							<Modal show={customModal} onClose={() => { setCustomModal(false); }} size="xl">
+								<Modal.Header title="Customized Filters" />
+								<Modal.Body>
+									{saveData.map((item, index) => {
+										const { filters:filtersItem } = item || {};
+
+										const {
+											cogoEntityId = '', month = '', rowCheck, colCheck,
+											radio = '', chip = '',
+										} = JSON.parse(filtersItem) || {};
+										const entityMapping = {
+											'6fd98605-9d5d-479d-9fac-cf905d292b88' : 101,
+											'c7e1390d-ec41-477f-964b-55423ee84700' : 201,
+											'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1' : 301,
+											'04bd1037-c110-4aad-8ecc-fc43e9d4069d' : 401,
+											'b67d40b1-616c-4471-b77b-de52b4c9f2ff' : 501,
+										};
+
+										return (
+											<div className={styles.filters}>
+												<div className={styles.radio_filters}>
+													<div>
+														<Radio
+															name="checked1"
+															onChange={(event) => { handleEvent(event, filtersItem); }}
+														/>
+
+													</div>
+													<div>
+														Filter
+														{index + 1}
+													</div>
+												</div>
+
+												<div className={styles.border_filter} />
+												<div>
+													Entity
+													<div className={styles.bold_font}>
+														{entityMapping[cogoEntityId] || '--'}
+
+													</div>
+												</div>
+												<div>
+													Report Period
+													<div className={styles.bold_font}>
+														{ month ? format(month, 'dd MMM yyy') : '--'}
+														{' '}
+													</div>
+												</div>
+												<div>
+													Show Non Zero Active Only
+													<div className={styles.bold_font}>
+														Rows -
+														{' '}
+														{rowCheck ? startCase(rowCheck[0]) : '--'}
+
+														{ rowCheck ? startCase(rowCheck[1]) : ''}
+														,
+														{' '}
+
+														{' '}
+														Columns -
+														{' '}
+														{ colCheck ? startCase(colCheck[0]) : '--' }
+
+														{ colCheck ? startCase(colCheck[1]) : ''}
+													</div>
+												</div>
+
+												<div>
+													View Data By
+													<div className={styles.bold_font}>
+														{chip || '--'}
+														{' '}
+														-
+														{' '}
+														{radio || '---'}
+													</div>
+												</div>
+												<div
+													className={styles.delete_icon}
+													onClick={() => { handleDelete(item); }}
+													role="presentation"
+												>
+													{LoadingDelete
+														? <Loader height="20px" width="20px" />
+														: <IcMDelete height="20px" width="20px" />}
+
+												</div>
+											</div>
+										);
+									})}
+
+								</Modal.Body>
+								<Modal.Footer>
+									<Button onClick={() => { setCustomModal(false); }}>Apply Filter</Button>
+								</Modal.Footer>
+							</Modal>
+						) }
+						<Button
+							themeType="secondary"
+							onClick={() => { refetch(); }}
+							loading={saveLoading}
+						>
+							Save Customizations
+
+						</Button>
 						<Button
 							onClick={() => { handleClick(); }}
 							disabled={!filters?.entity && !filters?.month}
