@@ -1,0 +1,31 @@
+.filter_container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    align-items: center;
+}
+
+.search {
+    width: 20%;
+}
+
+.filter {
+    width: 80%; 
+    display: flex;   
+}
+
+.form_group {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.form_group:not(:first-child) { margin: 10px 0; }
+
+.input_group {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+}
