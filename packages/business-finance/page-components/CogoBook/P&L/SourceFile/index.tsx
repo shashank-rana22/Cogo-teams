@@ -18,7 +18,7 @@ function SourceFile() {
 	useEffect(() => { refetch(); }, [refetch]);
 
 	const getCardData = (ListData || [{}]).map((item) => {
-		const { id, period, createdAt, cogoEntityId, uploadByName } = item || {};
+		const { uploadNumber, period, createdAt, cogoEntityId, uploadByName } = item || {};
 		const formatMonth = format(period, 'MMM yyyy');
 		const formatDate = format(createdAt, 'dd MMM yyyy');
 		const entityMapping = {
@@ -26,7 +26,7 @@ function SourceFile() {
 			'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1' : 301,
 		};
 		return ({
-			id     : `#Upload_${id}` || '-',
+			id     : `#Upload_${uploadNumber}` || '-',
 			month  : `Upload Month - ${formatMonth}` || '-',
 			name   : `Uploaded By - ${uploadByName}` || '-',
 			entity : entityMapping[cogoEntityId] || '-',

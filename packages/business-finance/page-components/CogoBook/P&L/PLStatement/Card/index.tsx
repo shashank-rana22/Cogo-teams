@@ -18,8 +18,11 @@ function Card({
 	setFilters,
 	selectFilter,
 	setSelectFilter,
+	fetchRatioApi,
+	fetchReportApi,
 	select,
 	setSelect,
+	setShowReport,
 }) {
 	const [modal, setModal] = useState(false);
 	const content = () => (
@@ -46,8 +49,12 @@ function Card({
 		</div>
 	);
 
-	const contentRadioData = () => (
+	const handleClick = () => {
+		fetchRatioApi(setShowReport);
+		fetchReportApi(setShowReport);
+	};
 
+	const contentRadioData = () => (
 		<div>
 			<div className={styles.chips}>
 				<Chips
@@ -98,15 +105,6 @@ function Card({
 							isClearable
 							style={{ width: '150px' }}
 						/>
-						<Select
-							value={filters?.category}
-							onChange={(val:string) => { setFilters((prev) => ({ ...prev, category: val })); }}
-							placeholder="Category"
-							options={optionsPeriod}
-							isClearable
-							style={{ width: '180px' }}
-						/>
-
 						<div>
 							<Select
 								value={filters?.month}
@@ -118,6 +116,15 @@ function Card({
 							/>
 
 						</div>
+
+						<Select
+							value={filters?.category}
+							onChange={(val:string) => { setFilters((prev) => ({ ...prev, category: val })); }}
+							placeholder="Category"
+							options={optionsPeriod}
+							isClearable
+							style={{ width: '180px' }}
+						/>
 
 						<div>
 							<Popover
@@ -169,7 +176,12 @@ function Card({
 					<div className={styles.buttons}>
 						<Button themeType="secondary">View saved Customizations</Button>
 						<Button themeType="secondary">Action</Button>
-						<Button>Run Report</Button>
+						<Button
+							onClick={() => { handleClick(); }}
+							disabled={!filters?.entity && !filters?.month}
+						>
+							Run Report
+						</Button>
 
 					</div>
 				</div>

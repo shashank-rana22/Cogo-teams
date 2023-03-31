@@ -1,14 +1,17 @@
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import useReport from '../../../hooks/useReport';
 import { mappingData } from '../constant';
 
 import styles from './styles.module.css';
-import { ratiosDataV2 } from './utils/ratios';
-import { reportsDataV2 } from './utils/reports';
+// import { ratiosDataV2 } from './utils/ratios';
+// import { reportsDataV2 } from './utils/reports';
 
 function ListProfit({
+	ratiosData,
+	reportTriggerLoading,
+	ratiosTriggerLoading,
+	reportData,
 	filters,
 }) {
 	const [dropDown, setDropDown] = useState({
@@ -20,18 +23,13 @@ function ListProfit({
 		tax       : true,
 	});
 
-	const {
-		ratiosData = {},
-		reportData = {},
-		reportTriggerLoading,
-		ratiosTriggerLoading,
-	} = useReport(filters);
-
-	// if (!reportTriggerLoading && !ratiosTriggerLoading ){
-	// 	return null
+	// if (!reportTriggerLoading && !ratiosTriggerLoading) {
+	// 	return null;
 	// }
 
-	const getMapData = () => reportsDataV2?.list.map((item) => {
+	console.log({ ratiosData, reportData }, 'reportData');
+
+	const getMapData = () => (reportData?.list || [{}]).map((item) => {
 		const {
 			revenueFromOps = 0,
 			bookedRevenue = 0,
@@ -55,7 +53,7 @@ function ListProfit({
 			totalTaxExpense = 0,
 		} = item;
 
-		const ratioData = (ratiosDataV2?.list)?.find((itemRatio) => itemRatio.ratioBasis === filters?.ratio);
+		const ratioData = (ratiosData?.list || [{}])?.find((itemRatio) => itemRatio.ratioBasis === filters?.ratio);
 
 		const {
 			esops = 0,
@@ -63,14 +61,14 @@ function ListProfit({
 			personnel_cost = 0,
 			housekeeping_security_subscriptions_travel_stay_and_cc = 0,
 			salaries_bonus_incentives_and_staff_welfare_expenses = 0,
-		} = employeeBenefitExpenses;
+		} = employeeBenefitExpenses || {};
 
 		const {
 			foreign_exchange_gain_net = 0,
 			interest_income_on_fd = 0,
 			interest_on_loan_discount_on_bills_and_bank_charges = 0,
 			miscelleneous_income = 0,
-		} = financeCost;
+		} = financeCost || {};
 
 		const {
 			provisions_and_write_offs = 0,
@@ -90,7 +88,7 @@ function ListProfit({
 			rent_and_taxes = 0,
 			interest_on_loan_discount_on_bills_and_bank_charges:
 			interest_on_loan_discount_on_bills_and_bank_charges_expense = 0,
-		} = otherExpense;
+		} = otherExpense || {};
 
 		const key = filters?.radio ? filters?.radio : 'nothing';
 		const mode = filters?.mode ? 'ON' : 'OFF';
@@ -158,19 +156,19 @@ function ListProfit({
 					</div>
 
 					{getRelevantData().map((itemData) => {
-						const ratio = ratioData?.[itemData?.key] || 1;
+						const ratio = ratioData?.turnoverRatioDetails?.[itemData?.key] || 1;
 						return (
 							<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 								<div className={styles.particular_data}>
-									{revenueFromOps * ratio}
+									{(revenueFromOps * ratio).toFixed(2)}
 								</div>
 								{dropDown?.revenue && <div>{bookedRevenue * ratio}</div>}
 								{dropDown?.revenue && <div>{accruedRevenue * ratio}</div>}
 								<div className={styles.particular_data}>
-									{operatingExpenses * ratio}
+									{(operatingExpenses * ratio).toFixed(2)}
 								</div>
-								{dropDown?.operating && <div>{bookedExpense * ratio}</div>}
-								{dropDown?.operating && <div>{accruedExpense * ratio}</div>}
+								{dropDown?.operating && <div>{(bookedExpense * ratio).toFixed(2)}</div>}
+								{dropDown?.operating && <div>{(accruedExpense * ratio).toFixed(2)}</div>}
 							</div>
 						);
 					})}
@@ -180,10 +178,10 @@ function ListProfit({
 				<div className={styles.data_sub}>
 					<div className={styles.header_particular}>GROSS PROFIT</div>
 					{getRelevantData()?.map((itemVal) => {
-						const ratio = ratioData?.[itemVal?.[key]] || 1;
+						const ratio = ratioData?.turnoverRatioDetails?.[itemVal?.[key]] || 1;
 						return (
 							<div className={styles.header_ocean} style={{ width: calculateWidth }}>
-								{(revenueFromOps - operatingExpenses) * ratio}
+								{((revenueFromOps - operatingExpenses) * ratio).toFixed(2)}
 							</div>
 						);
 					})}
@@ -265,29 +263,34 @@ function ListProfit({
 
 					{
 						getRelevantData()?.map((itemValue) => {
-							const ratio = ratioData?.[itemValue?.key] || 1;
+							const ratio = ratioData?.turnoverRatioDetails?.[itemValue?.key] || 1;
 							return (
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 									<div className={styles.particular_data}>
-										{totalEmployeeBenefitExpenses * ratio}
+										{(totalEmployeeBenefitExpenses * ratio).toFixed(2)}
 									</div>
-									{dropDown?.employee && <div>{esops * ratio}</div>}
-									{dropDown?.employee && <div>{gratuity_leave_encashment * ratio}</div>}
+									{dropDown?.employee && <div>{(esops * ratio).toFixed(2)}</div>}
+									{dropDown?.employee && <div>{(gratuity_leave_encashment * ratio).toFixed(2)}</div>}
 									{dropDown?.employee && (
 										<div>
-											{housekeeping_security_subscriptions_travel_stay_and_cc * ratio}
+											{(housekeeping_security_subscriptions_travel_stay_and_cc
+												* ratio).toFixed(2)}
 										</div>
 									)}
-									{dropDown?.employee && <div>{personnel_cost * ratio}</div>}
+									{dropDown?.employee && <div>{(personnel_cost * ratio).toFixed(2)}</div>}
 									{dropDown?.employee && (
 										<div>
-											{salaries_bonus_incentives_and_staff_welfare_expenses * ratio}
+											{(salaries_bonus_incentives_and_staff_welfare_expenses * ratio).toFixed(2)}
 										</div>
 									)}
 									<div className={styles.particular_data}>
-										{totalDepreciationAndAmortization * ratio}
+										{(totalDepreciationAndAmortization * ratio).toFixed(2)}
 									</div>
-									<div className={styles.particular_data}>{totalFinanceCost * ratio}</div>
+									<div className={styles.particular_data}>
+										{(totalFinanceCost
+										* ratio).toFixed(2)}
+
+									</div>
 									{dropDown?.finance && <div>{foreign_exchange_gain_net * ratio}</div>}
 									{dropDown?.finance && (
 										<div>

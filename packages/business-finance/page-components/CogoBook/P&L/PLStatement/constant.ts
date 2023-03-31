@@ -1,9 +1,6 @@
 export const optionsPeriod = [
-	{ label: 'This Week', value: 'week' },
-	{ label: 'This Month', value: 'month' },
-	{ label: 'This Quarter', value: 'quarter' },
+	{ label: 'Last Month', value: 'lastMonth' },
 	{ label: 'Last Quarter', value: 'lastQuarter' },
-	{ label: 'Custom', value: 'custom' },
 ];
 export const optionsCheck = [
 	{ name: 'all', value: 'all', label: 'All' },
