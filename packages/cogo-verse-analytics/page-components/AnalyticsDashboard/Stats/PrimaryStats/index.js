@@ -77,9 +77,9 @@ function PrimaryStats(props = {}) {
 			<div className={styles.primary_right}>
 				<div className={styles.ticket_container}>
 				<div className={styles.right_stat_title}> Users Active on</div>
+				<div className={styles.detail}>
 					<div className={styles.ticket_details}>
-						
-						
+					
 						<div className={styles.ticket_label}>
 							CogoVerse AI
 						</div>
@@ -112,6 +112,7 @@ function PrimaryStats(props = {}) {
 								)}
 
 						</div>
+					</div>
 					</div>
 				</div>
 				{/* <div className={styles.active_users}>

@@ -22,7 +22,6 @@ function Stats(props = {}) {
 
 	const {
 		statsLoading,
-		statsData,
 		stats = {},
 		chatLoading = false,
 		platFormChatData = {},
@@ -31,6 +30,7 @@ function Stats(props = {}) {
 	const { bot_data = {}, customer_support_data = {} } = platFormChatData || {};
 	// const GraphData = chartData({ statsData }) || [];
 	const hideChart = isEmpty(bot_data) && isEmpty(customer_support_data);
+	const statsData=stats?.list || {};
 	const graph = statsData?.weekly_shipments || [];
 	console.log(graph, 'graph');
 	// console.log(GraphData, 'GraphData');
@@ -41,7 +41,7 @@ function Stats(props = {}) {
 			<div className={styles.cogoverse_header}>
 
 				<img src={imgURL.cogoverse_animated_icon} style={{ marginLeft: '10px' }} alt="Cogoverse Icon" width="18px" />
-				<div className={cl`${styles.cogoverse}`}>ogoVerse Analytics</div>
+				<div className={cl`${styles.cogoverse}`}>CogoVerse Analytics</div>
 			</div>
 
 			<PrimaryStats userStats={userStats} stats={stats} firebaseLoading={firebaseLoading} />
