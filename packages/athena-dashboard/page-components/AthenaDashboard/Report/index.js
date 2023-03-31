@@ -1,6 +1,6 @@
+import { ResponsiveChoropleth } from '@cogoport/charts/geo';
 import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { Loader, Table, Placeholder } from '@cogoport/components';
-import { ResponsiveChoropleth } from '@nivo/geo';
 
 import tableDataColumns from '../../../constants/table-data-columns';
 import useGetColumns from '../hooks/useGetColumns';
