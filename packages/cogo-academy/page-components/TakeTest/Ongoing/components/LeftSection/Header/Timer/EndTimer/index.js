@@ -26,8 +26,6 @@ function EndTimer({ data = {}, showTimeOverModal, setShowTimeOverModal, setActiv
 						height={32}
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg"
 						alt="timer"
-						width={18}
-						height={22}
 					/>
 					{' '}
 					<b className={styles.heading}>Time&apos;s Up</b>
