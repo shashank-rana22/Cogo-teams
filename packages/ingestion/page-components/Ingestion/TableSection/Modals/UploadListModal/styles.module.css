@@ -21,3 +21,9 @@
     display: flex;
     justify-content: end;
 }
+
+.empty {
+    height: '120px';
+    padding: 20px 0;
+	width: '600px';
+}

@@ -1,6 +1,8 @@
 import { Modal, Button, Table, Pagination } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../../../common/EmptyState';
 import useGetUploadList from '../../../../../hooks/useGetUploadList';
 
 import styles from './styles.module.css';
@@ -18,6 +20,32 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 	const onChoose = () => {
 
 	};
+
+	if (isEmpty()) {
+		return (
+			<Modal size="l" show={tableModal} onClose={onClose} placement="center">
+				<Modal.Header title={(
+					<div style={{ display: 'flex', alignItems: 'center' }}>
+						<IcMDownload style={{ margin: '0 4px 0 0' }} />
+						{' '}
+						Upload List
+					</div>
+				)}
+				/>
+				<Modal.Body>
+					<div className={styles.empty}>
+						<EmptyState height="200px" width="600px" />
+					</div>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button themeType="secondary" onClick={onClose}>Close</Button>
+					{/* <Button themeType="primary" onClick={onClose}>Re-Upload</Button> */}
+
+				</Modal.Footer>
+			</Modal>
+
+		);
+	}
 	return (
 		<Modal size="l" show={tableModal} onClose={onClose} placement="center">
 			<Modal.Header title={(
