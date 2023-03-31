@@ -3,7 +3,6 @@ import { TextAreaController, SelectController, InputController, ChipsController 
 import { useMemo } from 'react';
 
 import useUpdateCaseStudyQuestion from '../../hooks/useUpdateCaseStudyQuestion';
-import getRequiredControl from '../../utils/getRequiredControl';
 
 import getControls from './controls';
 import OptionsComponent from './OptionsComponent';
@@ -28,7 +27,17 @@ function SingleQuestionComponent({
 	setAllKeysSaved,
 	mode,
 }) {
-	const controls = useMemo(() => getControls({ mode }), [mode]);
+	const NAME_CONTROL_MAPPING = useMemo(() => {
+		const hash = {};
+
+		const controls = getControls({ mode });
+
+		controls.forEach((item) => {
+			hash[item?.name] = item;
+		});
+
+		return hash;
+	}, [mode]);
 
 	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion({
 		questionSetId,
@@ -72,7 +81,7 @@ function SingleQuestionComponent({
 					className={`${
 						errors?.question_text ? styles.question_text_err : null
 					} ${styles.input_container}`}
-					{...getRequiredControl({ controls, name: 'question_text' })}
+					{...NAME_CONTROL_MAPPING.question_text}
 					control={control}
 					name={`${name}.${index}.question_text`}
 				/>
@@ -83,7 +92,7 @@ function SingleQuestionComponent({
 							? styles.question_type_err
 							: null
 					}`}
-					{...getRequiredControl({ controls, name: 'question_type' })}
+					{...NAME_CONTROL_MAPPING.question_type}
 					control={control}
 					name={`${name}.${index}.question_type`}
 				/>
@@ -91,7 +100,7 @@ function SingleQuestionComponent({
 
 			<OptionsComponent
 				control={control}
-				{...getRequiredControl({ controls, name: 'options' })}
+				{...NAME_CONTROL_MAPPING.options}
 				register={register}
 				errors={errors?.options || {}}
 				name={`${name}.${index}.options`}
@@ -106,7 +115,7 @@ function SingleQuestionComponent({
 					<div className={styles.control}>
 						<ChipsController
 							control={control}
-							{...getRequiredControl({ controls, name: 'difficulty_level' })}
+							{...NAME_CONTROL_MAPPING.difficulty_level}
 							name={`${name}.${index}.difficulty_level`}
 						/>
 						{errors?.difficulty_level && <div className={styles.error_msg}>This is required</div>}
@@ -117,7 +126,7 @@ function SingleQuestionComponent({
 			<div className={styles.textarea_container}>
 				<TextAreaController
 					control={control}
-					{...getRequiredControl({ controls, name: 'explanation' })}
+					{...NAME_CONTROL_MAPPING.explanation}
 					name={`${name}.${index}.explanation`}
 				/>
 			</div>

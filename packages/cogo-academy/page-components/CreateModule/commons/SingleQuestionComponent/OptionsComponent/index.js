@@ -2,15 +2,25 @@ import { Button } from '@cogoport/components';
 import { ChipsController, InputController, useFieldArray } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useMemo } from 'react';
 
 import getAlphabets from '../../../utils/getAlphabets';
-import getRequiredControl from '../../../utils/getRequiredControl';
 
 import styles from './styles.module.css';
 
 const alphabets = getAlphabets('A', 'Z');
 
 function OptionsComponent({ control, controls, register, name, errors, mode, isNewQuestion }) {
+	const NAME_CONTROL_MAPPING = useMemo(() => {
+		const hash = {};
+
+		controls.forEach((item) => {
+			hash[item?.name] = item;
+		});
+
+		return hash;
+	}, [controls]);
+
 	const childEmptyValues = {};
 
 	controls.forEach((controlItem) => {
@@ -37,10 +47,10 @@ function OptionsComponent({ control, controls, register, name, errors, mode, isN
 					<div className={styles.alphabet_container}>{alphabets[index]}</div>
 
 					<InputController
-						{...getRequiredControl({ controls, name: 'answer_text' })}
+						{...NAME_CONTROL_MAPPING.answer_text}
 						control={control}
 						{...register(`${name}.${index}.answer_text`, {
-							...(getRequiredControl({ controls, name: 'answer_text' }).rules || {}),
+							...(NAME_CONTROL_MAPPING.answer_text.rules || {}),
 						})}
 						className={errors[index]?.answer_text ? styles.error : null}
 					/>
@@ -69,9 +79,9 @@ function OptionsComponent({ control, controls, register, name, errors, mode, isN
 						<div className={styles.left_button_container}>
 							<ChipsController
 								control={control}
-								{...getRequiredControl({ controls, name: 'is_correct' })}
+								{...NAME_CONTROL_MAPPING.is_correct}
 								{...register(`${name}.${index}.is_correct`, {
-									...(getRequiredControl({ controls, name: 'is_correct' }).rules || {}),
+									...(NAME_CONTROL_MAPPING.is_correct.rules || {}),
 								})}
 							/>
 
