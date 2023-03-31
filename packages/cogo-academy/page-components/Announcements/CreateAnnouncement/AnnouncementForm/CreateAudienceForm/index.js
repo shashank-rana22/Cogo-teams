@@ -113,7 +113,7 @@ function CreateAudienceForm(props) {
 			<div className={styles.button_container}>
 
 				<Button
-					type="cancel"
+					type="button"
 					themeType="tertiary"
 					className={styles.cancel_button}
 					onClick={onClickBackIcon}

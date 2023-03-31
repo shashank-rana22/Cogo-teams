@@ -1,6 +1,9 @@
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
+
+import { hasPermission } from '../constants/IDS_CONSTANTS';
 
 function useListTemplate() {
 	const [{ loading }, trigger] = useRequest({
@@ -8,6 +11,11 @@ function useListTemplate() {
 		method : 'get',
 	}, { manual: true });
 
+	const { userRoleIds, userId } = useSelector(({ profile }) => ({
+		userRoleIds : profile.partner?.user_role_ids || [],
+		userId      : profile?.user?.id,
+	}));
+	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
 	const [qfilter, setQfilter] = useState('');
 	const [pagination, setPagination] = useState(1);
 	const [infiniteList, setInfiniteList] = useState({
@@ -22,9 +30,10 @@ function useListTemplate() {
 					page                     : pagination,
 					pagination_data_required : true,
 					filters                  : {
-						q    : !isEmpty(qfilter?.trim()) ? qfilter?.trim() : undefined,
-						type : 'whatsapp',
-						tags : ['quick_reply'],
+						q                : !isEmpty(qfilter?.trim()) ? qfilter?.trim() : undefined,
+						type             : 'whatsapp',
+						tags             : ['quick_reply'],
+						performed_by_ids : !isomniChannelAdmin ? [userId] : undefined,
 					},
 				},
 			});
@@ -35,7 +44,7 @@ function useListTemplate() {
 		} catch (error) {
 			// console.log(error);
 		}
-	}, [pagination, qfilter, trigger]);
+	}, [pagination, qfilter, trigger, userId, isomniChannelAdmin]);
 
 	useEffect(() => {
 		setInfiniteList((p) => ({ ...p, list: [] }));
@@ -54,6 +63,7 @@ function useListTemplate() {
 		}
 	};
 	const refetch = () => {
+		setInfiniteList((p) => ({ ...p, list: [] }));
 		if (pagination === 1) {
 			fetchListTemplate();
 		} else {
