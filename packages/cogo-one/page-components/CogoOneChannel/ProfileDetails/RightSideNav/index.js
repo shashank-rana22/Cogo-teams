@@ -28,9 +28,9 @@ function RightSideNav({
 		dispatch(
 			setProfileState({
 				...profileData,
-				faq: {
-					showFaq: true,
-				},
+
+				showFaq: true,
+
 			}),
 		);
 	};

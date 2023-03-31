@@ -16,7 +16,7 @@ function FAQs({
 	const dispatch = useDispatch();
 	const profileData = useSelector(({ profile }) => profile);
 
-	const showFaq = profileData?.faq?.showFaq;
+	const { showFaq = false } = profileData || {};
 
 	const router = useRouter();
 	const { asPath } = router;
@@ -53,9 +53,7 @@ function FAQs({
 		dispatch(
 			setProfileState({
 				...profileData,
-				faq: {
-					showFaq: false,
-				},
+				showFaq: false,
 			}),
 		);
 	};
