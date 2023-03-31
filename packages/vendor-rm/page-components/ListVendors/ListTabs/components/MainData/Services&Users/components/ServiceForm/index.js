@@ -11,6 +11,7 @@ function ServiceForm({
 	showForm,
 	setShowForm = () => {},
 	getVendorData = {},
+	refetchVendorInfo = () => {},
 }) {
 	const {
 		handleSubmit = () => {},
@@ -24,6 +25,7 @@ function ServiceForm({
 		setShowForm,
 		getVendorData,
 		refetchServicesPocs,
+		refetchVendorInfo,
 	});
 
 	return (

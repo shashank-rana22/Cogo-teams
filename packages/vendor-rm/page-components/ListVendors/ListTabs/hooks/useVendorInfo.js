@@ -21,7 +21,7 @@ const useVendorInfo = () => {
 		{ manual: false },
 	);
 
-	const VendorInfo = useCallback(async () => {
+	const getVendorInfo = useCallback(async () => {
 		try {
 			const params = {
 				id: vendor_id,
@@ -38,17 +38,13 @@ const useVendorInfo = () => {
 	}, [trigger, vendor_id]);
 
 	useEffect(() => {
-		VendorInfo();
-	}, [VendorInfo]);
-
-	const refetchVendorInfo = () => {
-		VendorInfo();
-	};
+		getVendorInfo();
+	}, [getVendorInfo]);
 
 	return {
 		getVendorLoading,
-		data: data?.data,
-		refetchVendorInfo,
+		data              : data?.data,
+		refetchVendorInfo : getVendorInfo,
 	};
 };
 
