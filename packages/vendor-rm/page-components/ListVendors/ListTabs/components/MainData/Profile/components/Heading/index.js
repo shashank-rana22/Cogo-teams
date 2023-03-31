@@ -41,7 +41,7 @@ function Heading({
 		handleSubmitKyc,
 		errors_kyc,
 		loading,
-		ResubmitKYC,
+		resubmitKYC,
 	} = useResubmitKyc({ data, refetchVendorInfo, setshowKycModal });
 
 	const { kyc_status = '' } = vendor_details || {};
@@ -115,7 +115,7 @@ function Heading({
 						<Button
 							size="md"
 							type="submit"
-							onClick={handleSubmitKyc(ResubmitKYC)}
+							onClick={handleSubmitKyc(resubmitKYC)}
 							loading={loading}
 						>
 							Submit
