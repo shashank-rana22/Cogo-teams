@@ -136,6 +136,7 @@ function GenerateMawb({
 						service_type    : 'air_freight_service',
 						...filteredData,
 						status          : 'generated',
+						bl_detail_id    : taskItem?.blDetailId,
 					},
 				},
 			],

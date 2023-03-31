@@ -240,7 +240,7 @@ const mawbControls = (disableClass) => ({
 					placeholder : 'select',
 					span        : 1.25,
 					options     : [
-						{ label: 'Cm', value: 'cm' },
+						{ label: 'Cm', value: 'cms' },
 						{ label: 'Inch', value: 'inch' },
 					],
 				},
