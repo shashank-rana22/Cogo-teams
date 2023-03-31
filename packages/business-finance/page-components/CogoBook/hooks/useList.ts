@@ -2,7 +2,15 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useList = ({ filters }) => {
+interface FilterInterface {
+	filters?:{
+		month?:string
+		query?:string
+		entity?:string
+	}
+}
+
+const useList = ({ filters }:FilterInterface) => {
 	const [monthName, year] = (filters?.month.match(/(\w+)\s+(\d{4})/) || []).slice(1);
 
 	const monthData = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
@@ -10,7 +18,7 @@ const useList = ({ filters }) => {
 	const numericDate = `${year}-${monthData.toString().padStart(2, '0')}-01`;
 
 	const [
-		{ data, loading:salaryLoading },
+		{ data, loading:ListDataLoading },
 		listTrigger,
 	] = useRequestBf(
 		{
@@ -48,7 +56,7 @@ const useList = ({ filters }) => {
 	return {
 		refetch,
 		ListData: data?.list,
-		salaryLoading,
+		ListDataLoading,
 	};
 };
 export default useList;

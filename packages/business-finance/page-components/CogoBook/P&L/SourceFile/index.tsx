@@ -1,5 +1,6 @@
-import { Button, Input, Select } from '@cogoport/components';
+import { Placeholder, Button, Input, Select } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -10,10 +11,11 @@ import UploadModal from './UploadModal';
 import { optionMonth } from './utils';
 
 function SourceFile() {
+	const { push } = useRouter();
 	const [filters, setFilters] = useState({ month: '', entity: '', query: '' });
 	const [uploadModal, setUploadModal] = useState(false);
 
-	const { ListData, refetch } = useList({ filters });
+	const { ListData, refetch, ListDataLoading } = useList({ filters });
 
 	useEffect(() => { refetch(); }, [refetch]);
 
@@ -29,14 +31,29 @@ function SourceFile() {
 			'b67d40b1-616c-4471-b77b-de52b4c9f2ff' : 501,
 		};
 		return ({
-			id     : `#Upload_${uploadNumber}` || '-',
-			month  : `Upload Month - ${formatMonth}` || '-',
-			name   : `Uploaded By - ${uploadedByName}` || '-',
-			entity : entityMapping[cogoEntityId] || '-',
-			date   : formatDate || '-',
-			button : 'View',
+			id       : `#Upload_${uploadNumber}` || '-',
+			month    : `Upload Month - ${formatMonth}` || '-',
+			name     : `Uploaded By - ${uploadedByName}` || '-',
+			entity   : entityMapping[cogoEntityId] || '-',
+			date     : formatDate || '-',
+			button   : 'View',
+			itemData : item,
 		});
 	});
+
+	const handlePushView = (item) => {
+		const { itemData } = item || {};
+		const { uploadNumber, period, createdAt, cogoEntityId, uploadedByName, id } = itemData || {};
+
+		push(
+			`/business-finance/cogo-book/[active_tab]/[view]
+			/view-data?entity=${cogoEntityId}&month=${period}&id=${uploadNumber}
+			&name=${uploadedByName}&date=${createdAt}&sourceFileId=${id}`,
+			`/business-finance/cogo-book/pl_statement/source_file
+			/view-data?entity=${cogoEntityId}&month=${period}&id=${uploadNumber}
+			&name=${uploadedByName}&date=${createdAt}&sourceFileId=${id}`,
+		);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -58,9 +75,12 @@ function SourceFile() {
 							value={filters?.entity}
 							onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 							placeholder="Entity"
-							options={[{ label: 'All', value: 'all' },
-								{ label: 'Entity 101', value: '101' },
-								{ label: 'Entity 301', value: '301' }]}
+							options={[
+								{ label: 'Entity 201', value: '201' },
+								{ label: 'Entity 301', value: '301' },
+								{ label: 'Entity 401', value: '401' },
+								{ label: 'Entity 501', value: '501' },
+							]}
 							isClearable
 							style={{ width: '150px' }}
 						/>
@@ -93,26 +113,34 @@ function SourceFile() {
 			<div className={styles.card_container}>
 				{getCardData.map((item) => (
 					<div className={styles.card}>
-						<div>{item.id}</div>
+						<div>{ ListDataLoading ? <Placeholder height="20px" width="200px" /> : item.id}</div>
 
-						<div>{item.month}</div>
+						<div>{ ListDataLoading ? <Placeholder height="20px" width="200px" /> : item.month}</div>
 
 						<div className={styles.name_data}>
-							<div>{item.name}</div>
-							<div className={styles.date_data}>{item.date}</div>
+							<div>{ ListDataLoading ? <Placeholder height="20px" width="200px" /> : item.name}</div>
+							<div className={styles.date_data}>
+								{ ListDataLoading
+									? <Placeholder height="20px" width="100px" /> : item.date}
+
+							</div>
 						</div>
 
 						<div className={styles.basis}>
-							Entity :
-
-							<div className={styles.tag}>
-
-								{item.entity}
-							</div>
+							Entity : &nbsp;
+							{ ListDataLoading ? <Placeholder height="20px" width="80px" /> : item.entity}
 
 						</div>
 
-						<div><Button themeType="secondary">{item.button}</Button></div>
+						<div>
+							<Button
+								themeType="secondary"
+								onClick={() => { handlePushView(item); }}
+							>
+								{item.button}
+							</Button>
+
+						</div>
 					</div>
 				))}
 

@@ -25,8 +25,6 @@ function ListProfit({
 	// 	return null;
 	// }
 
-	console.log({ ratiosData, reportData }, 'reportData');
-
 	const getMapData = () => (reportData?.list || [{}]).map((item) => {
 		const {
 			revenueFromOps = 0,

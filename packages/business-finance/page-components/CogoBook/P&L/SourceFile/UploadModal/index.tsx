@@ -42,8 +42,11 @@ function UploadModal({ uploadModal, setUploadModal }) {
 								value={modalData.entity}
 								placeholder="Entity"
 								options={[
-									{ label: 'Entity 101', value: '101' },
-									{ label: 'Entity 301', value: '301' }]}
+									{ label: 'Entity 201', value: '201' },
+									{ label: 'Entity 301', value: '301' },
+									{ label: 'Entity 401', value: '401' },
+									{ label: 'Entity 501', value: '501' },
+								]}
 								onChange={(val:string) => { setModalData((prev) => ({ ...prev, entity: val })); }}
 								isClearable
 								style={{ width: '200px' }}

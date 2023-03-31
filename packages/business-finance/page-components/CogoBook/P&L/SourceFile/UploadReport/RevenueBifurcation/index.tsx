@@ -55,8 +55,6 @@ function RevenueBifurcation({
 		}));
 	};
 
-	console.log(globalStepper, 'globalStepper');
-
 	return (
 		<div>
 			{ getColumn.map((item) => {

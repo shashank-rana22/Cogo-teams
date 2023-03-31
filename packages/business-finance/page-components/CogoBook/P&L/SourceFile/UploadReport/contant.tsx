@@ -23,6 +23,25 @@ export 	const getColumn = [
 	},
 ];
 
+export 	const getColumnView = [
+	{
+		id            : '1',
+		label         : 'Volume Ratio',
+		iconInfo      : <IcMInfo />,
+		iconArrowUp   : <IcMArrowRotateUp />,
+		iconArrowDown : <IcMArrowRotateDown />,
+		dataKey       : 'VOLUME',
+	},
+	{
+		id            : '2',
+		label         : 'Value Ratio',
+		iconInfo      : <IcMInfo />,
+		iconArrowUp   : <IcMArrowRotateUp />,
+		iconArrowDown : <IcMArrowRotateDown />,
+		dataKey       : 'VALUE',
+	},
+];
+
 export 	const getColumnSalary = [
 	{
 		id            : '1',
@@ -481,4 +500,70 @@ export const getRailSalaryDataValue = (
 		value : `${(valueRail[0] || railSalaryDomesticValue)} (${totalPerRailValue.toFixed(2)}%)` || '---',
 	},
 	{ name: 'Domestic', value: `${(valueRail[1] || railSalaryDomesticValue)} (${railValuePer.toFixed(2)}%)` || '---' },
+];
+
+export const getOceanRatio = (
+	ocean,
+	oceanCustoms,
+	fclImports,
+	fclExports,
+	lclImports,
+	lclExports,
+) => [
+	{ name: 'Total', value: `${ocean * 100} %` || '---' },
+	{ name: 'FCL Exports', value: `${fclExports * 100}%` || '---' },
+	{ name: 'FCL Imports', value: `${fclImports * 100}%` || '---' },
+	{ name: 'LCL Exports', value: `${lclExports * 100}%` || '---' },
+	{ name: 'LCL Imports', value: `${lclImports * 100}%` || '---' },
+	{ name: 'Customs', value: `${oceanCustoms * 100}%` || '---' },
+];
+
+export const getAirRatio = (
+	air,
+	airCustoms,
+	airExports,
+	airImports,
+) => [
+	{ name: 'Total', value: `${air * 100} %` || '---' },
+	{
+		name  : 'Air Exports',
+		value : `${airExports * 100} %` || '---',
+	},
+	{
+		name  : 'Air Imports',
+		value : `${airImports * 100} %` || '---',
+	},
+	{
+		name  : 'Air Customs',
+		value : `${airCustoms * 100} %` || '---',
+	},
+];
+export const getSurfaceRatio = (
+	surface,
+	ftl,
+	ltl,
+) => [
+	{
+		name  : 'Total',
+		value : `${surface * 100} %` || '---',
+	},
+	{
+		name  : 'FTL',
+		value : `${ftl * 100} %` || '---',
+	},
+	{
+		name  : 'LTL',
+		value : `${ltl * 100} %` || '---',
+	},
+];
+
+export const getRailRatio = (
+	rail,
+	railDomestic,
+) => [
+	{
+		name  : 'Total',
+		value : `${rail * 100} %` || '---',
+	},
+	{ name: 'Domestic', value: `${railDomestic * 100} %` || '---' },
 ];

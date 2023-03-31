@@ -30,7 +30,7 @@ import styles from './styles.module.css';
 
 function UploadReport() {
 	const [globalStepper, setGlobalStepper] = useState('revenue');
-	const { query } = useRouter();
+	const { query, push } = useRouter();
 	const { refetch, sourceFileData } = useReportFile({ query });
 	const [volume, setVolume] = useState({});
 	const [volumeAir, setVolumeAir] = useState({});
@@ -437,6 +437,13 @@ function UploadReport() {
 		valueRail,
 	), [railSalaryDomesticValue, railValuePer, totalPerRailValue, valueRail]);
 
+	const handlePush = () => {
+		push(
+			'/business-finance/cogo-book/pl_statement',
+			'/business-finance/cogo-book/pl_statement',
+		);
+	};
+
 	return (
 		<div>
 			<div>
@@ -454,7 +461,7 @@ function UploadReport() {
 				</Breadcrumb>
 			</div>
 
-			<div className={styles.main_icon}>
+			<div className={styles.main_icon} onClick={() => { handlePush(); }} role="presentation">
 				<div className={styles.back_icon}>
 					<IcMArrowBack height="15px" width="15px" />
 				</div>

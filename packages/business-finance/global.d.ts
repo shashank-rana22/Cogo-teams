@@ -17,3 +17,4 @@ declare module '@cogoport/business-finance/page-components/CogoBook'
 declare module '@cogoport/business-finance/page-components/CogoBook/Accruals/ViewSelectedInvoice'
 declare module '@cogoport/business-finance/page-components/CogoBook/P&L/SourceFile/UploadReport'
 declare module '@cogoport/business-finance/page-components/AccountReceivables/components';
+declare module '@cogoport/business-finance/page-components/CogoBook/P&L/SourceFile/ViewData'

@@ -1,12 +1,18 @@
 import { useRequestBf } from '@cogoport/request';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 
+interface FilterInterface {
+	filters?:{
+		month?:string
+		category?:string
+		entity?:string
+	}
+	monthPayload?:number
+}
 const useReport = ({
 	filters,
-}) => {
-	const [reportData, setReportData] = useState({});
-	const [ratiosData, setRatioData] = useState({});
-
+	monthPayload,
+}:FilterInterface) => {
 	const d = new Date();
 
 	const [monthName, year] = ((filters?.month || '').match(/(\w+)\s+(\d{4})/) || []).slice(1);
@@ -16,7 +22,7 @@ const useReport = ({
 	const numericDate = `${year || d.getFullYear()}-${monthData.toString().padStart(2, '0')}-01`;
 
 	const [
-		{ loading:reportTriggerLoading },
+		{ data:reportData, loading:reportTriggerLoading },
 		reportTrigger,
 	] = useRequestBf(
 		{
@@ -28,7 +34,7 @@ const useReport = ({
 	);
 
 	const [
-		{ loading:ratiosTriggerLoading },
+		{ data:ratiosData, loading:ratiosTriggerLoading },
 		ratioTrigger,
 	] = useRequestBf(
 		{
@@ -61,20 +67,20 @@ const useReport = ({
 		};
 
 		try {
-			const res = await reportTrigger({
+			await reportTrigger({
 				params: {
 					periods      : [numericDate] || [getLastMonthData()] || undefined,
 					cogoEntityId : entityMapping[filters?.entity] || undefined,
 				},
 			});
-			setReportData(res.data);
+
 			setShowReport(true);
 		} catch {
-			setReportData({ list: [], totalRecords: 0 });
+			console.log('dfjnjn');
 		}
 	}, [filters?.category, filters?.entity, numericDate, reportTrigger]);
 
-	const fetchRatioApi = useCallback(async (setShowReport) => {
+	const fetchRatioApi = useCallback(async (setShowReport?:any) => {
 		const entityMapping = {
 			101 : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 			201 : 'c7e1390d-ec41-477f-964b-55423ee84700',
@@ -83,18 +89,18 @@ const useReport = ({
 			501 : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 		};
 		try {
-			const res = await ratioTrigger({
+			await ratioTrigger({
 				params: {
-					periods      : numericDate || undefined,
+					periods      : monthPayload || numericDate || undefined,
 					cogoEntityId : entityMapping[filters?.entity] || undefined,
 				},
 			});
-			setRatioData(res.data);
+
 			setShowReport(true);
 		} catch {
-			setRatioData({ list: [], totalRecords: 0 });
+			console.log('dfjn');
 		}
-	}, [filters?.entity, numericDate, ratioTrigger]);
+	}, [filters?.entity, monthPayload, numericDate, ratioTrigger]);
 
 	return {
 		ratiosData,

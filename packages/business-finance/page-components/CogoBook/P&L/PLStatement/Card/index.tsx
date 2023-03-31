@@ -324,7 +324,14 @@ function Card({
 
 								</Modal.Body>
 								<Modal.Footer>
-									<Button onClick={() => { setCustomModal(false); }}>Apply Filter</Button>
+									<Button onClick={() => {
+										handleClick();
+										setCustomModal(false);
+									}}
+									>
+										Apply Filter
+
+									</Button>
 								</Modal.Footer>
 							</Modal>
 						) }
