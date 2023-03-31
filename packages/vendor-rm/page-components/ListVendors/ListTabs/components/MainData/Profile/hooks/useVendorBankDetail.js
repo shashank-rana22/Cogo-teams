@@ -4,14 +4,15 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
 import controls from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
 
 function useVendorBankDetail({
 	refetchVendorInfo = () => {},
-	setShowAddbankModal = () => {},
 }) {
+	const [showAddbankModal, setShowAddbankModal] = useState(false);
+
 	const formProps = useForm();
 
 	const {
@@ -49,14 +50,15 @@ function useVendorBankDetail({
 				const sessionData = await triggerGetBankDetails({
 					params: { ifsc_code: ifscCode },
 				});
+
 				const { data = {} } = sessionData || {};
 				const { branch = '', bank = '' } = data || {};
+
 				setValue('branch_name', branch);
 				setValue('bank_name', bank);
 			} catch (error) {
 				setValue('branch_name', '');
 				setValue('bank_name', '');
-				Toast.error(getApiErrorString(error.response.data));
 			}
 		} else {
 			setValue('branch_name', '');
@@ -83,7 +85,9 @@ function useVendorBankDetail({
 			});
 
 			setShowAddbankModal(false);
+
 			Toast.success('Bank Details added successfully');
+
 			refetchVendorInfo();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to update, please try again...');
@@ -120,6 +124,8 @@ function useVendorBankDetail({
 		errors,
 		loading  : getBankDetailsLoading || createVendorBankDetailLoading,
 		handleSubmit,
+		showAddbankModal,
+		setShowAddbankModal,
 		onSubmit,
 	};
 }

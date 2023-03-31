@@ -1,5 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import FormLayout from '../../../../../../../../commons/components/FormLayout/FormLayout';
 import useVendorBankDetail from '../../hooks/useVendorBankDetail';
@@ -13,8 +13,6 @@ function VendorInfo({
 	data = {},
 	refetchVendorInfo = () => {},
 }) {
-	const [showAddbankModal, setShowAddbankModal] = useState(false);
-
 	const {
 		handleSubmit,
 		errors,
@@ -22,9 +20,10 @@ function VendorInfo({
 		onSubmit,
 		loading,
 		controls,
+		showAddbankModal,
+		setShowAddbankModal,
 	} = useVendorBankDetail({
 		refetchVendorInfo,
-		setShowAddbankModal,
 	});
 
 	return (
@@ -34,67 +33,73 @@ function VendorInfo({
 				Vendor Details
 			</span>
 			<VendorDetailsInfo data={data} />
+
 			<hr className={styles.dis} />
 
 			<span className={styles.heading}>
 				Vendor Services
 			</span>
 			<VendorServices data={data} />
+
 			<hr className={styles.dis} />
 
 			<span className={styles.heading}>
 				Payment Details
 			</span>
 			<PaymentDetails data={data} />
+
 			<hr className={styles.dis} />
 
 			<Button
 				size="md"
+				type="button"
 				themeType="secondary"
 				onClick={() => {
 					setShowAddbankModal(!showAddbankModal);
 				}}
 			>
 				Add Bank Account
-
 			</Button>
 
-			<Modal
-				show={showAddbankModal}
-				size="lg"
-				onClose={() => setShowAddbankModal(false)}
-				className={styles.modal_container}
-			>
-				<Modal.Header title="Edit Profile" />
+			{showAddbankModal ? (
+				<Modal
+					show={showAddbankModal}
+					size="lg"
+					onClose={() => setShowAddbankModal(false)}
+					className={styles.modal_container}
+				>
+					<Modal.Header title="Edit Profile" />
 
-				<Modal.Body>
-					<section className={styles.bodyStyle}>
-						<FormLayout control={control} fields={controls} errors={errors} />
-					</section>
-				</Modal.Body>
+					<Modal.Body>
+						<section className={styles.bodyStyle}>
+							<FormLayout control={control} fields={controls} errors={errors} />
+						</section>
+					</Modal.Body>
 
-				<Modal.Footer>
-					<Button
-						size="md"
-						style={{ marginRight: 10 }}
-						themeType="secondary"
-						onClick={() => {
-							setShowAddbankModal(false);
-						}}
-					>
-						Cancel
-					</Button>
+					<Modal.Footer>
+						<Button
+							size="md"
+							type="button"
+							style={{ marginRight: 10 }}
+							themeType="secondary"
+							onClick={() => {
+								setShowAddbankModal(false);
+							}}
+						>
+							Cancel
+						</Button>
 
-					<Button
-						type="submit"
-						size="md"
-						onClick={handleSubmit(onSubmit)}
-						loading={loading}
-					>
-						Submit
-					</Button>
-				</Modal.Footer>
-			</Modal>
+						<Button
+							type="submit"
+							size="md"
+							onClick={handleSubmit(onSubmit)}
+							loading={loading}
+						>
+							Submit
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			) : null}
 		</div>
 	);
 }
