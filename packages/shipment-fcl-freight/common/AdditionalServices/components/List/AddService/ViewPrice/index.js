@@ -9,14 +9,15 @@ import styles from './styles.module.css';
 import fields from './viewPriceFields';
 
 function ViewPrice({ showPrice, setShowPrice }) {
-	const { data, loading } = useGetSubsidiaryServiceRateCards({
+	const { apiData, loading } = useGetSubsidiaryServiceRateCards({
 		item: showPrice?.item,
 	});
 
 	const line_items = [];
+
 	useEffect(() => {
 		(async () => {
-			data?.list.forEach((items) => {
+			apiData?.list.forEach((items) => {
 				items?.validities.forEach((validity) => {
 					line_items.push({
 						validity_start : validity?.validity_start,
@@ -29,7 +30,7 @@ function ViewPrice({ showPrice, setShowPrice }) {
 			});
 			setShowPrice({ ...showPrice, line_items });
 		})();
-	}, [loading]);
+	}, [loading, setShowPrice, showPrice, JSON.stringify(line_items), apiData?.list]);
 
 	const field = fields(showPrice?.item);
 	return (
@@ -39,7 +40,7 @@ function ViewPrice({ showPrice, setShowPrice }) {
 			) : (
 				<CardList
 					fields={field}
-					data={showPrice?.line_items || []}
+					apiData={showPrice?.line_items || []}
 					loading={loading}
 					showPagination={false}
 				/>

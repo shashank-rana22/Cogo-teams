@@ -18,12 +18,16 @@ function BlContainersMapping({
 		mutatedFields, handleSubmit,
 	} = getFields({ data, containerDetails });
 
+	const afterContainerUpdate = () => {
+		setMappingModal(false);
+		refetch();
+	};
+
 	const {
 		loading,
 		apiTrigger,
 	} = useUpdateContainerDetails({
-		setMappingModal,
-		refetch,
+		refetch: afterContainerUpdate,
 	});
 
 	const onSubmit = (values) => {

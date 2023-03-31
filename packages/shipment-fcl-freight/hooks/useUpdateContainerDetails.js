@@ -3,8 +3,6 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateContainerDetails = ({
-	setEditContainerNum = () => {},
-	setMappingModal = () => {},
 	refetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -19,8 +17,6 @@ const useUpdateContainerDetails = ({
 
 				if (res.status === 200) {
 					Toast.success('Container Details Updated Successfully!');
-					setEditContainerNum(false);
-					setMappingModal(false);
 					refetch();
 				} else {
 					Toast.error('Please check the details filled or try again!');

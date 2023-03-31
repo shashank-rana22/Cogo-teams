@@ -90,8 +90,8 @@ const actions = ({
 	}
 
 	if (
-		(!IP_STATE_CONDITONS.find((state) => state === serviceListItem.state)
-			|| !serviceListItem.invoice_preference)
+		(!IP_STATE_CONDITONS.includes(serviceListItem.state)
+			&& !serviceListItem.invoice_preference)
 	) {
 		return (
 			<Button

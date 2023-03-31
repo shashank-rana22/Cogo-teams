@@ -15,10 +15,13 @@ function ContainerNmUpdate({
 	const handleChange = (e, container_id) => {
 		setContainerValue({ ...containerValue, [container_id]: e });
 	};
+	const afterContainerUpdate = () => {
+		setEditContainerNum(false);
+		refetch();
+	};
 
 	const { loading, apiTrigger } = useUpdateContainerDetails({
-		setEditContainerNum,
-		refetch,
+		refetch: afterContainerUpdate,
 	});
 
 	const onSubmit = () => {

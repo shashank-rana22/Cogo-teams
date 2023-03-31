@@ -124,7 +124,7 @@ function Item({
 					id={item?.id}
 					showCancel={showCancel}
 					setShowCancel={setShowCancel}
-					setShow={setShow}
+					refetch={refetch}
 				/>
 			) : null}
 
