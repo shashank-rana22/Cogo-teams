@@ -14,13 +14,12 @@ const useSearch = () => {
 	const start_date = date.startDate;
 	const end_date = date.endDate;
 
-	const [{ loading = true, data: responseData = {} }, trigger] = useAthenaRequest({
+	const [{ loading = false, data: responseData = {} }, trigger] = useAthenaRequest({
 		url    : 'shipments_by_hscode',
 		method : 'post',
 	}, { manual: true });
 
 	const handleClick = async (formValues) => {
-		setAnswer([]);
 		await trigger({
 			data: {
 				page       : 1,

@@ -2,8 +2,8 @@ import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { Loader, Table, Placeholder } from '@cogoport/components';
 import { ResponsiveChoropleth } from '@nivo/geo';
 
-import columns_hscode_description from '../../../constants/hscode-description-mapping';
-import top_global_supplier_mapping from '../../../constants/top-global-supplier-mapping';
+import tableDataColumns from '../../../constants/table-data-columns';
+import useGetColumns from '../hooks/useGetColumns';
 import useSetReport from '../hooks/useSetReport';
 
 import styles from './styles.module.css';
@@ -22,6 +22,11 @@ function Report() {
 		shipment_type,
 		loading,
 	} = useSetReport();
+	const hscodesToShow = tableDataColumns.hsCodesDescription;
+	const globalSuppliersToShow = tableDataColumns.topGlobalSuppliers;
+
+	const columns_hscode_description = useGetColumns({ columnsToShow: hscodesToShow });
+	const top_global_supplier_mapping = useGetColumns({ columnsToShow: globalSuppliersToShow });
 
 	return (
 		(!responseData) ? <Loader className={styles.loader} />

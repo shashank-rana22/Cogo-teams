@@ -6,7 +6,8 @@ import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import columns from '../../../constants/column-mapping';
+import tableDataColumns from '../../../constants/table-data-columns';
+import useGetColumns from '../hooks/useGetColumns';
 import useSearch from '../hooks/useSearch';
 
 import controls from './controls';
@@ -24,6 +25,10 @@ function Shipment() {
 		handleClick,
 		handleSubmit,
 	} = useSearch();
+
+	const columnsToShow = tableDataColumns.shipmentByHscode;
+
+	const columns = useGetColumns({ columnsToShow });
 
 	return (
 		<div className={styles.whole_page}>
@@ -125,8 +130,6 @@ function Shipment() {
 								onChange={setActiveTab}
 							>
 								<TabPanel name="Shipments" title="Shipments" />
-								<TabPanel name="Consignee" title="Consignee" />
-								<TabPanel name="Shipper" title="Shipper" />
 							</Tabs>
 						</div>
 
@@ -153,7 +156,7 @@ function Shipment() {
 
 					</div>
 
-					{!isEmpty(answer) && (
+					{!isEmpty(answer) && !loading && (
 						<div className={styles.table_div}>
 							<Table
 								id="hellotable"

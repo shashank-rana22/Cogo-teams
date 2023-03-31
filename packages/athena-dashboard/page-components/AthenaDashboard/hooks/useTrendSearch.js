@@ -25,7 +25,6 @@ const useTrendSearch = (item = {}) => {
 	}, { manual: true });
 
 	const handleClick = async () => {
-		setHscodeArr([]);
 		await trigger({
 			data: {
 				filters: { commodity_name: searchValue },

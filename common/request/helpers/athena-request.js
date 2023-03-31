@@ -20,17 +20,12 @@ const microServices = getMicroServiceName();
 const athenaRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_LOCAL_TESTING });
 
 athenaRequest.interceptors.request.use((oldConfig) => {
-	// const { authkey = '', ...newConfig } = oldConfig;
 	const { ...newConfig } = oldConfig;
 
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 
 	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
-	// const authorizationparameters = getAuthorizationParams(store, authkey || newConfig.url);
-
 	const apiPath =	newConfig.url.split('/')[1] || newConfig.url.split('/')[0];
-
-	// const serviceName = microServices[authkey || apiPath];
 	const serviceName = microServices[apiPath];
 
 	if (serviceName) {

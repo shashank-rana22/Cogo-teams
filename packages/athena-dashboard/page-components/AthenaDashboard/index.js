@@ -1,8 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import Shipment from './Shipment';
-import styles from './styles.module.css';
 import Trends from './Trend';
 
 const ATHENA_DASHBOARD_MAPPING = {
