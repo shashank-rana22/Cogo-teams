@@ -21,6 +21,8 @@ function LeftSection() {
 		},
 	}, { manual: false });
 
+	const { data: usePerformanceData = {} } = data || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.user_name}>
@@ -29,9 +31,9 @@ function LeftSection() {
 				{name}
 			</div>
 
-			<LastTestResults data={data?.data} />
+			<LastTestResults data={usePerformanceData} />
 
-			<Overview data={data?.data} />
+			<Overview data={usePerformanceData} />
 
 			<Courses />
 		</div>
