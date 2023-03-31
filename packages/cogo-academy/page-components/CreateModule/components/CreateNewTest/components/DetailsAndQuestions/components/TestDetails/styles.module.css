@@ -1,6 +1,5 @@
 .container {
 	display: flex;
-	gap: 24px;
 	justify-content: space-between;
 	padding: 24px 0;
 	margin-top: 40px;
@@ -14,7 +13,6 @@
 
 .header {
 	display: flex;
-	gap: 8px;
 	align-items: center;
 }
 
@@ -71,6 +69,7 @@
 
 .back_icon {
 	cursor: pointer;
+	margin-right: 8px;
 }
 
 .btn {
