@@ -19,6 +19,7 @@ const useListFaqSearchHistory = () => {
 			is_cleared : false,
 			q          : query || undefined,
 		},
+		sort_by: 'updated_at',
 	}), [id, query]);
 
 	const [{ loading, data }, trigger] = useRequest({
