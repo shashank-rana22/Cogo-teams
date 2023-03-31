@@ -9,22 +9,22 @@ import styles from './styles.module.css';
 import TopicWisePercentile from './TopicWisePercentile';
 
 function LastTestResults(props) {
-	const { data = {}, loading } = props;
+	const { data: stats_data = {}, loading } = props;
 
-	const { topic_wise_percentile, question_stats, status, test_id } = data || {};
+	const { topic_wise_percentile, question_stats, status, test_id } = stats_data || {};
 
 	const hasPassed = status === 'passed';
 
-	if (loading || isEmpty(data)) {
+	if (loading || isEmpty(stats_data)) {
 		return null;
 	}
 
 	return (
 		<div className={styles.container}>
-			<TestResultMessage stats_data={data} />
+			<TestResultMessage stats_data={stats_data} />
 
 			<div className={styles.stats}>
-				<Percentile stats_data={data} hasPassed={hasPassed} />
+				<Percentile stats_data={stats_data} hasPassed={hasPassed} />
 
 				<TopicWisePercentile topic_wise_percentile={topic_wise_percentile} />
 
