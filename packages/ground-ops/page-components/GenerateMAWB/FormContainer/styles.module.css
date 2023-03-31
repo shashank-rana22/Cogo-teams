@@ -4,7 +4,7 @@
 	justify-content: flex-start;
 	padding: 0 0 20px 20px;
 	background: #fff;
-    border-radius: 0px 0px 8px 8px;
+	border-radius: 0 0 8px 8px;
 
 	:global(.textarea) {
 		height: 120px;
@@ -28,8 +28,8 @@
 .buttonwrap {
 	display: flex;
 	flex-flow: row wrap;
-	margin-top: 28px;
 	max-width: 74%;
+	margin-top: 28px;
 }
 
 .hawb_container_click {
@@ -106,4 +106,3 @@
 	margin-right: 40px;
 	margin-left: auto;
 }
-

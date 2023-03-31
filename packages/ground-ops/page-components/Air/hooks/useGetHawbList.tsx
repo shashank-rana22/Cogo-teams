@@ -1,5 +1,5 @@
 import { useRequestAir } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 
 const useGetHawbList = (shipmentId) => {
 	const [{ data = {}, loading }, trigger] = useRequestAir(
