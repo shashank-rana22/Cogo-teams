@@ -17,35 +17,17 @@ function Summary({ summaryData = {} }) {
 		question_stats = {},
 	} = summaryData;
 
-	const getDifficultyData = () => {
-		const data = [];
+	const getDifficultyData = () => (Object.keys(difficulty_wise_stats).map((key, index) => ({
+		label      : startCase(key.split('_')[0]),
+		percentile : toFixed(difficulty_wise_stats[key], 2),
+		color      : index === 0 ? 'hsla(232, 44%, 96%, 1)' : 'hsla(234, 46%, 87%, 1)',
+	})));
 
-		Object.keys(difficulty_wise_stats).forEach((key, index) => {
-			const obj = {
-				label      : startCase(key.split('_')[0]),
-				percentile : toFixed(difficulty_wise_stats[key], 2),
-				color      : index === 0 ? 'hsla(232, 44%, 96%, 1)' : 'hsla(234, 46%, 87%, 1)',
-			};
-			data.push(obj);
-		});
-
-		return data;
-	};
-
-	const getTopicWiseData = () => {
-		const data = [];
-
-		Object.keys(topic_wise_percentile).forEach((key, index) => {
-			const obj = {
-				label      : startCase(key),
-				percentile : toFixed(topic_wise_percentile[key], 2),
-				color      : index === 0 ? 'hsla(232, 44%, 96%, 1)' : 'hsla(234, 46%, 87%, 1)',
-			};
-			data.push(obj);
-		});
-
-		return data;
-	};
+	const getTopicWiseData = () => (Object.keys(topic_wise_percentile).map((key, index) => ({
+		label      : startCase(key),
+		percentile : toFixed(topic_wise_percentile[key], 2),
+		color      : index === 0 ? 'hsla(232, 44%, 96%, 1)' : 'hsla(234, 46%, 87%, 1)',
+	})));
 
 	return (
 		<div className={styles.container}>
