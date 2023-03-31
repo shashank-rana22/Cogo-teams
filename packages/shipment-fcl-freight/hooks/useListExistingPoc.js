@@ -7,8 +7,26 @@ import getApiErrorString from '../utils/getApiErrorString';
 const useListExistingPoc = ({ organization_id = '', trade_party_type = '', trade_party_id = '' }) => {
 	const [apiList, setApiList] = useState([]);
 
-	const [{ loading:usersLoading }, usersTrigger] = useRequest('list_organization_users', { manual: true });
-	const [{ loading:pocsLoading }, pocsTrigger] = useRequest('list_organization_pocs', { manual: true });
+	const [{ loading:usersLoading }, usersTrigger] = useRequest({
+		url    : 'list_organization_users',
+		params : {
+			filters: {
+				organization_id,
+				status: 'active',
+			},
+			page_limit: 20,
+		},
+	}, { manual: true });
+
+	const [{ loading:pocsLoading }, pocsTrigger] = useRequest({
+		url    : 'list_organization_pocs',
+		params : {
+			trade_party_id,
+			object_type : trade_party_type,
+			status      : 'active',
+			page_limit  : 20,
+		},
+	}, { manual: true });
 
 	const mergeResponse = (userData, pocData) => {
 		const list = [...userData, ...pocData].map((item) => ({
@@ -22,38 +40,19 @@ const useListExistingPoc = ({ organization_id = '', trade_party_type = '', trade
 		setApiList(list);
 	};
 
-	const apiTrigger = useCallback(() => {
-		(
-			async () => {
-				try {
-					const usersRes = await usersTrigger({
-						params: {
-							filters: {
-								organization_id,
-								status: 'active',
-							},
-							page_limit: 20,
-						},
-					});
+	const apiTrigger = useCallback(async () => {
+		try {
+			const usersRes = await usersTrigger();
 
-					const pocsRes = await pocsTrigger({
-						params: {
-							trade_party_id,
-							object_type : trade_party_type,
-							status      : 'active',
-						},
-						page_limit: 20,
-					});
+			const pocsRes = await pocsTrigger();
 
-					if (!usersRes.hasError && !pocsRes.hasError) {
-						mergeResponse(usersRes?.data?.list, pocsRes?.data?.list);
-					}
-				} catch (err) {
-					Toast.error(getApiErrorString(err));
-				}
+			if (!usersRes.hasError && !pocsRes.hasError) {
+				mergeResponse(usersRes?.data?.list, pocsRes?.data?.list);
 			}
-		)();
-	}, [usersTrigger, pocsTrigger, organization_id, trade_party_id, trade_party_type]);
+		} catch (err) {
+			Toast.error(getApiErrorString(err));
+		}
+	}, [usersTrigger, pocsTrigger]);
 
 	useEffect(() => {
 		apiTrigger();
@@ -67,4 +66,3 @@ const useListExistingPoc = ({ organization_id = '', trade_party_type = '', trade
 };
 
 export default useListExistingPoc;
-// TODO
