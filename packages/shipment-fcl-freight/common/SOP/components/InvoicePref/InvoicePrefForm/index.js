@@ -28,12 +28,14 @@ function InvoicePrefForm({
 	getProcedureTrigger = () => {},
 	auditsTrigger = () => {},
 	services = [],
+	primary_service,
 }) {
 	const { shipment_id, organization_id, procedure_id } = shipment_ids;
+	const { trade_type } = primary_service || {};
 
 	const { data: orgData, loading } = useGetShipmentOperatingProcedure({
 		defaultParams  : { org_data_required: true },
-		defaultFilters : { service_type: 'fcl_freight' },
+		defaultFilters : { service_type: 'fcl_freight', trade_type },
 		shipment_id,
 		organization_id,
 	});

@@ -12,7 +12,10 @@ function LabelValue({ label, value }) {
 	) : null;
 }
 
-function Details({ sop_detail = {}, setShowForm = () => {} }) {
+function Details({
+	sop_detail = {},
+	setShowForm = () => {},
+}) {
 	const mapping = {
 		'BL Category'      : upperCase(sop_detail?.bl_category || ''),
 		'BL Preferences'   : upperCase(sop_detail?.bl_preference || ''),

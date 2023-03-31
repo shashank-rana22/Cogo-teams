@@ -20,7 +20,7 @@ function AddCompanyModal({
 	importer_exporter_id,
 }) {
 	const formRef = useRef(null);
-	const { trade_party_type = '' } = addCompany || {};
+	const { trade_party_type = '', organization_id } = addCompany || {};
 
 	const [role, setRole] = useState(trade_party_type);
 	const [companyType, setCompanyType] = useState('trade_partner');
@@ -85,6 +85,7 @@ function AddCompanyModal({
 						ref={formRef}
 						importer_exporter_id={importer_exporter_id}
 						shipment_id={shipment_id}
+						organization_id={organization_id}
 					/>
 				</div>
 

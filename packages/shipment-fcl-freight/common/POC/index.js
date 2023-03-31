@@ -2,6 +2,7 @@ import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useListStakeholders from '../../hooks/useListShipmentStakeholders';
 import useListShipmentTradePartners from '../../hooks/useListShipmentTradePartners';
 
 import AddCompanyModal from './components/AddCompanyModal';
@@ -15,7 +16,7 @@ import TradeParties from './components/TradeParties';
 import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
-function POC({ shipment_data = {}, servicesList = [] }) {
+function Poc({ shipment_data = {}, servicesList = [] }) {
 	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
@@ -27,12 +28,23 @@ function POC({ shipment_data = {}, servicesList = [] }) {
 		loading,
 	} = useListShipmentTradePartners({ shipment_id });
 
+	const {
+		data:{ list:shipmentStakeholderData = [] } = {}, loading:stakeHolderLoading,
+		apiTrigger:stakeholdersTrigger,
+	} = useListStakeholders({
+		shipment_id,
+	});
+
 	const serviceProviders = getServiceProviderData(servicesList);
 
 	return (
 		<div>
 			{loading
-				? <div className={styles.loader}><Loader /></div>
+				? (
+					<div className={styles.loader}>
+						<Loader />
+					</div>
+				)
 
 				: (
 					<div className={styles.container}>
@@ -45,7 +57,10 @@ function POC({ shipment_data = {}, servicesList = [] }) {
 						<POCS
 							tradePartnersData={data}
 							setAddPoc={setAddPoc}
-							shipment_id={shipment_id}
+							shipmentStakeholderData={shipmentStakeholderData}
+							stakeHolderLoading={stakeHolderLoading}
+							servicesList={servicesList}
+							shipment_data={shipment_data}
 						/>
 
 						<AddedTradeParty
@@ -88,6 +103,8 @@ function POC({ shipment_data = {}, servicesList = [] }) {
 								importer_exporter_id={importer_exporter_id}
 								shipment_id={shipment_id}
 								services={services}
+								stakeholdersTrigger={stakeholdersTrigger}
+								servicesList={servicesList}
 							/>
 						)}
 					</div>
@@ -95,4 +112,4 @@ function POC({ shipment_data = {}, servicesList = [] }) {
 		</div>
 	);
 }
-export default POC;
+export default Poc;

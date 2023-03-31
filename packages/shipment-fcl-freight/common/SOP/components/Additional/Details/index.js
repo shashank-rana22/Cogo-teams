@@ -3,8 +3,15 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function Details({ data = [], setShowForm = () => {} }) {
-	function LabelValue({ label, value, customClass }) {
+function Details({
+	data = [],
+	setShowForm = () => {},
+}) {
+	function LabelValue({
+		label,
+		value,
+		customClass,
+	}) {
 		return !isEmpty(value) ? (
 			<div className={`${styles.label_value_container} ${customClass}`}>
 				<div className={styles.label}>{label}</div>
