@@ -1,53 +1,54 @@
-import { ButtonIcon, Tooltip, Checkbox } from '@cogoport/components';
+import { ButtonIcon, Tooltip } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-export const getFeedbackColumns = ({
-	selectAll = false,
-	onChangeTableHeadCheckbox = () => {},
-	checkedRowsId = [],
-	onChangeBodyCheckbox = () => {},
-}) => [
-	{
-		id     : 'checkbox',
-		key    : 'checkbox',
-		Header : <Checkbox
-			checked={selectAll}
-			onChange={(event) => onChangeTableHeadCheckbox(event)}
-		/>,
-		accessor: ({ id = '' }) => (
-			<Checkbox
-				checked={checkedRowsId.includes(id)}
-				onChange={(event) => onChangeBodyCheckbox(event, id)}
-			/>
-		),
-	},
-	{
-		Header   : 'ORGANIZATION',
-		key      : 'organization',
-		id       : 'organization',
-		accessor : ({ organization = {}, lead_organization_id = '', lead_organization = {} }) => (
-			<section className={styles.table_cell}>
-				{lead_organization_id ? (
-					startCase(lead_organization.business_name || '___')
-				) : (
-					startCase(organization.business_name || '___')
-				)}
-			</section>
-		),
-	},
-	{
-		Header   : 'COGO-ENTITY',
-		key      : 'cogo_entity',
-		id       : 'cogo_entity',
-		accessor : ({ cogo_entity = {} }) => (
-			<section className={styles.table_cell}>
-				{cogo_entity.business_name || '___'}
-			</section>
-		),
-	},
+export const getFeedbackColumns = () => [
+	// {
+	// 	selectAll = false,
+	// 	onChangeTableHeadCheckbox = () => {},
+	// 	checkedRowsId = [],
+	// 	onChangeBodyCheckbox = () => {},
+	// }
+	// {
+	// 	id     : 'checkbox',
+	// 	key    : 'checkbox',
+	// 	Header : <Checkbox
+	// 		checked={selectAll}
+	// 		onChange={(event) => onChangeTableHeadCheckbox(event)}
+	// 	/>,
+	// 	accessor: ({ id = '' }) => (
+	// 		<Checkbox
+	// 			checked={checkedRowsId.includes(id)}
+	// 			onChange={(event) => onChangeBodyCheckbox(event, id)}
+	// 		/>
+	// 	),
+	// },
+	// {
+	// 	Header   : 'ORGANIZATION',
+	// 	key      : 'organization',
+	// 	id       : 'organization',
+	// 	accessor : ({ organization = {}, lead_organization_id = '', lead_organization = {} }) => (
+	// 		<section className={styles.table_cell}>
+	// 			{lead_organization_id ? (
+	// 				startCase(lead_organization.business_name || '___')
+	// 			) : (
+	// 				startCase(organization.business_name || '___')
+	// 			)}
+	// 		</section>
+	// 	),
+	// },
+	// {
+	// 	Header   : 'COGO-ENTITY',
+	// 	key      : 'cogo_entity',
+	// 	id       : 'cogo_entity',
+	// 	accessor : ({ cogo_entity = {} }) => (
+	// 		<section className={styles.table_cell}>
+	// 			{cogo_entity.business_name || '___'}
+	// 		</section>
+	// 	),
+	// },
 	{
 		Header   : 'TYPE',
 		key      : 'type',

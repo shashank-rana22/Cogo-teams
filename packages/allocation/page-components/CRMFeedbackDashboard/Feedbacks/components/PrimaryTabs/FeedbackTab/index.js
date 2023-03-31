@@ -1,13 +1,13 @@
 import { Pagination } from '@cogoport/components';
 
 import CrmTable from '../../../../common/CrmTable';
-import EnrichmentRequest from '../../../../common/EnrichmentRequest';
+// import EnrichmentRequest from '../../../../common/EnrichmentRequest';
 import useFeedbackTableData from '../../../../hooks/useFeedbackTableData';
 
 import { getFeedbackColumns } from './get-feedback-columns';
 import styles from './styles.module.css';
 
-function FeedbacksReceived({ organization_id = '', setActiveTab = () => {}, type = '' }) {
+function FeedbacksReceived({ organization_id = '', type = '' }) {
 	const {
 		data = {},
 		loading = false,
@@ -30,13 +30,14 @@ function FeedbacksReceived({ organization_id = '', setActiveTab = () => {}, type
 
 	return (
 		<div className={styles.container}>
-
-			<EnrichmentRequest
+			{/* <EnrichmentRequest
 				checkedRowsId={checkedRowsId}
 				setActiveTab={setActiveTab}
-			/>
+			/> */}
 
-			<CrmTable columns={columns} data={data} loading={loading} />
+			<div className={styles.table}>
+				<CrmTable columns={columns} data={data} loading={loading} />
+			</div>
 
 			<div className={styles.pagination_container}>
 				<Pagination
