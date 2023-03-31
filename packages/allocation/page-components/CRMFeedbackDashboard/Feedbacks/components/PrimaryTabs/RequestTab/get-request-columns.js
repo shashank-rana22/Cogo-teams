@@ -45,7 +45,7 @@ export const getRequestColumns = ({ refetch = () => {} }) => [
 		id       : 'third_party',
 		accessor : ({ user_id = {} }) => (
 			<section className={styles.table_cell}>
-				{user_id.name || '___'}
+				{user_id?.name || '___'}
 			</section>
 		),
 	},
