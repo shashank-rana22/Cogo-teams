@@ -38,7 +38,7 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 		{
 			url     : '/purchase/expense/expense-configuration',
 			method  : 'post',
-			authKey : 'purchase_expense_expense_configuration',
+			authKey : 'post_purchase_expense_expense_configuration',
 		},
 		{ manual: true },
 	);

@@ -32,7 +32,7 @@ const useListExpense = ({ expenseFilters, id, expenseType, sort, pageIndexVal, p
 		{
 			url     : '/purchase/expense/list',
 			method  : 'get',
-			authKey : 'get_expense_list',
+			authKey : 'get_purchase_expense_list',
 		},
 		{ manual: true },
 	);

@@ -7252,6 +7252,36 @@ const partner = {
 	],
 	overheads: [
 		{
+			api         : 'post_purchase_expense_send_email',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'get_purchase_expense_list_expense_configurations',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'get_purchase_expense_list',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'get_purchase_expense_stakeholder',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
+			api         : 'post_purchase_expense_expense_configuration',
+			access_type : 'private',
+			module      : 'Overheads',
+			feature     : 'Overheads',
+		},
+		{
 			api         : 'expense_send_email',
 			access_type : 'private',
 			module      : 'Overseas',
@@ -7294,13 +7324,6 @@ const partner = {
 		},
 		{
 			api          : 'get_expense_list',
-			access_type  : 'private',
-			module       : 'overheads',
-			feature      : 'overheads',
-			service_name : 'expense',
-		},
-		{
-			api          : 'purchase_expense_expense_configuration',
 			access_type  : 'private',
 			module       : 'overheads',
 			feature      : 'overheads',

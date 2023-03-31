@@ -45,7 +45,7 @@ const useSendEmail = () => {
 		{
 			url     : '/purchase/expense/send-email',
 			method  : 'post',
-			authKey : 'expense_send_email',
+			authKey : 'post_purchase_expense_send_email',
 		},
 		{ manual: true },
 	);

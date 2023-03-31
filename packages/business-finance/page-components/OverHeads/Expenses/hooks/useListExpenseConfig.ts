@@ -9,7 +9,7 @@ const useListExpenseConfig = ({ expenseFilters, sort }) => {
 		{
 			url     : '/purchase/expense/list-expense-configurations',
 			method  : 'get',
-			authKey : 'list-expense-configurations',
+			authKey : 'get_purchase_expense_list_expense_configurations',
 		},
 		{ manual: true },
 	);

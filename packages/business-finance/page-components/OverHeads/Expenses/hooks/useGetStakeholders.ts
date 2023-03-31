@@ -6,7 +6,7 @@ const useGetStakeholders = (expenseCategory:string) => {
 		{
 			url     : '/purchase/expense/stakeholder',
 			method  : 'get',
-			authKey : 'purchase_expense_stakeholder',
+			authKey : 'get_purchase_expense_stakeholder',
 		},
 		{ manual: true },
 	);
