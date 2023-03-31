@@ -1,8 +1,10 @@
 import { Toast, Button } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { format, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 import styles from '../FinanceDashBoard/styles.module.css';
@@ -39,8 +41,6 @@ const useGetBfList = () => {
 	const getFinanceList = () => {
 		fetchList();
 	};
-
-	const formatDate = (date) => format(date, 'dd MMM yyyy');
 
 	const columns = [
 		{
@@ -90,7 +90,11 @@ const useGetBfList = () => {
 			accessor : ({ createdDate = '' }) => (
 				<section>
 					{' '}
-					{formatDate(createdDate)}
+					{formatDate({
+						date       : createdDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType : 'date',
+					})}
 				</section>
 			),
 		},

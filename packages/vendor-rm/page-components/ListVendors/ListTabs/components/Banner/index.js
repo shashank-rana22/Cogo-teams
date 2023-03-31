@@ -1,5 +1,7 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import formatArrayValues from '../../../../../utils/formatArrayValues';
@@ -83,7 +85,11 @@ function Banner({ data = {} }) {
 		},
 		created_on: {
 			label : 'Created on',
-			value : format(created_at, 'dd MMM yyyy'),
+			value : formatDate({
+				date       : created_at,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			}),
 		},
 	};
 

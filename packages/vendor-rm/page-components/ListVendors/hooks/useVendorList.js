@@ -1,9 +1,11 @@
 import { Tooltip, Button } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCrossInCircle, IcCFtick, IcMArrowRotateDown, IcMArrowRotateUp, IcMError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { format, isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import styles from '../styles.module.css';
@@ -117,8 +119,6 @@ const useVendorList = () => {
 		}));
 	}, [searchQuery]);
 
-	const formatDate = (date) => format(date, 'dd MMM yyyy');
-
 	const handleViewMore = (id) => {
 		const href = '/vendors/[vendor_id]';
 		const as = `/vendors/${id}`;
@@ -220,7 +220,11 @@ const useVendorList = () => {
 			id       : 'created_at',
 			accessor : ({ created_at = '' }) => (
 				<section className={styles.bold}>
-					{formatDate(created_at)}
+					{formatDate({
+						date       : created_at,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType : 'date',
+					})}
 				</section>
 			),
 		},
