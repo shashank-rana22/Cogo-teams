@@ -41,7 +41,7 @@ function Stats(props = {}) {
 			<div className={styles.cogoverse_header}>
 
 				<img src={imgURL.cogoverse_animated_icon} style={{ marginLeft: '10px' }} alt="Cogoverse Icon" width="18px" />
-				<div className={cl`${styles.cogoverse}`}>CogoVerse Analytics</div>
+				<div className={cl`${styles.cogoverse}`}>ogoVerse Analytics</div>
 			</div>
 
 			<PrimaryStats userStats={userStats} stats={stats} firebaseLoading={firebaseLoading} />
@@ -54,7 +54,7 @@ function Stats(props = {}) {
 					</div>
 					{
 						(!statsLoading && (
-							<div>
+							<div className={styles.legend}>
 								<div className={styles.legend_field}>
 									<div className={styles.legend_icon_1} />
 									<div className={styles.legend_content}>Cancelled Shipments</div>

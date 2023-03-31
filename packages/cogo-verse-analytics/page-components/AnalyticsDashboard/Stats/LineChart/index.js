@@ -14,19 +14,17 @@ function Charts({ GraphData = [], hideChart = false }) {
 	const totalShipments = GraphData.map((data) => data?.total_shipments);
 
 	const cancelled_data = Dates.map((date, index) => ({
-		x : format(date, 'dd/MM/yyyy'),
+		x : format(date, 'dd MMM'),
 		y :	CancelledShipments[index],
 	}));
 	const active_data = Dates.map((date, index) => ({
-		x : format(date, 'dd/MM/yyyy'),
+		x : format(date, 'dd MMM'),
 		y :	ActiveShipments[index],
 	}));
 	const total_data = Dates.map((date, index) => ({
-		x : format(date, 'dd/MM/yyyy'),
+		x : format(date, 'dd MMM'),
 		y :	totalShipments[index],
 	}));
-
-	// cogoverse_active_shipments total_shipments
 
 	const graphData = [
 		{
@@ -65,7 +63,6 @@ function Charts({ GraphData = [], hideChart = false }) {
 					curve="natural"
 					axisTop={null}
 					axisRight={null}
-					// colors={colors}
 					axisBottom={{
             	orient         : 'bottom',
             	tickSize       : 0,
@@ -73,8 +70,8 @@ function Charts({ GraphData = [], hideChart = false }) {
             	tickValues     : 8,
             	tickRotation   : 0,
             	legend         : 'Date',
-            	legendOffset   : 45,
-            	legendPosition : 'start',
+            	legendOffset   : 50,
+            	legendPosition : 'middle',
 					}}
 					axisLeft={{
             	orient         : 'left',
@@ -83,8 +80,8 @@ function Charts({ GraphData = [], hideChart = false }) {
             	tickPadding    : 15,
             	tickRotation   : 0,
             	legend         : 'Shipments',
-            	legendOffset   : -40,
-            	legendPosition : 'start',
+            	legendOffset   : -50,
+            	legendPosition : 'middle',
 					}}
 					tooltip={({ point = {} }) => {
             	const { borderColor, data } = point;

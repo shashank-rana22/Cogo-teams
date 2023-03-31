@@ -158,7 +158,7 @@ function PrimaryStats(props = {}) {
 					</div>
 				</div> */}
 			</div>
-</div>
+        </div>
 	);
 }
 

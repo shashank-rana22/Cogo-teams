@@ -297,35 +297,36 @@
 }
 
 .legend_field {
-	display: flex;
 	align-items: center;
 	padding-right: 25px;
 }
 
 .legend_icon_1 {
-	width: 35px;
+	width: 50px;
 	height: 1px;
-	margin: 5px;
+	margin: 5px 5px 5px 25px;
 	border-bottom: solid 2px hsl(27deg 70% 50%);
 }
 
 .legend_icon_2 {
-	width: 35px;
+	width: 50px;
 	height: 1px;
-	margin: 5px;
+	margin: 5px 5px 5px 18px;
 	border-bottom: solid 2px hsl(47deg 70% 50%);
 }
 
 .legend_icon_3 {
-	width: 35px;
+	width: 50px;
 	height: 1px;
-	margin: 5px;
+	margin: 5px 5px 5px 18px;
 	border-bottom: solid 2px hsl(57deg 70% 50%);
 }
 
 .legend_content {
-	padding-left: 10px;
 	font-size: 10px;
 	font-weight: 400;
 	color: #a2a3a5;
+}
+.legend{
+	display: flex;
 }
