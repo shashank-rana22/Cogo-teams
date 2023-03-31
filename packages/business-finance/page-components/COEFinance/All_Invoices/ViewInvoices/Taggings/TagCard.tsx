@@ -10,10 +10,10 @@ interface ChildBill {
 interface Props {
 	isProforma?: boolean;
 	billNumber?: string;
-	amount?: string;
+	amount?: number;
 	billCurrency?: string;
 	lineItemCount?: string;
-	createdAt?: string;
+	createdAt?: Date;
 	childBill?: ChildBill[]
 	id: string;
 }

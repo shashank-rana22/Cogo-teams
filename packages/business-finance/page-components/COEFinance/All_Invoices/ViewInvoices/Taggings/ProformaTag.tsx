@@ -1,17 +1,17 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
+
+import { formatDate } from '../../../../commons/utils/formatDate';
+import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
 interface Props {
 	isProforma?: boolean;
 	billNumber?: string;
-	amount?: string;
+	amount?: number;
 	billCurrency?: string;
 	lineItemCount?: string;
-	createdAt?: string;
+	createdAt?: Date;
 	childBill?: object[]
 }
 
@@ -35,15 +35,15 @@ export function ProformaTagCards({
 					</span>
 				</div>
 				<div>
-					{formatAmount({
-						amount   : newItem?.amount,
-						currency : newItem?.billCurrency,
-						options  : {
+					{getFormattedPrice(
+						newItem?.amount,
+						newItem?.billCurrency,
+						{
 							style                 : 'currency',
 							currencyDisplay       : 'code',
 							maximumFractionDigits : 2,
 						},
-					})}
+					)}
 					{' '}
 					| Line Items (
 					{newItem?.lineItemCount}
@@ -52,11 +52,7 @@ export function ProformaTagCards({
 				<div className={`${styles.updated_at}`}>
 					Uploaded At -
 					{' '}
-					{formatDate({
-						date       : newItem?.createdAt,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType : 'date',
-					})}
+					{formatDate(newItem?.createdAt, 'dd MMM yyyy', {}, true)}
 				</div>
 			</div>
 		</div>

@@ -4,8 +4,8 @@ import React from 'react';
 import styles from './styles.module.css';
 import TagMap from './TagMap';
 
-function Tagging({ shipmentId, serviceProviderId, billId }:
-{ shipmentId?: string, serviceProviderId?: string, billId: string }) {
+function Tagging({ billId }:
+{ billId: string }) {
 	return (
 		<div className={styles.container}>
 			<Accordion
@@ -17,7 +17,7 @@ function Tagging({ shipmentId, serviceProviderId, billId }:
 				)}
 			>
 				<div className={styles.line} />
-				<TagMap shipmentId={shipmentId} serviceProviderId={serviceProviderId} billId={billId} />
+				<TagMap billId={billId} />
 				<div className={styles.button_container}>
 					<Button
 						size="md"

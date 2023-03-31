@@ -2,7 +2,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetTaggingBills = ({ shipmentId, serviceProviderId }: { shipmentId: string, serviceProviderId:string }) => {
+const useGetTaggingBills = ({ billId }: { billId:string }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/bills/tagging-map',
@@ -16,8 +16,7 @@ const useGetTaggingBills = ({ shipmentId, serviceProviderId }: { shipmentId: str
 		try {
 			await trigger({
 				params: {
-					shipmentId,
-					serviceProviderId,
+					billId,
 				},
 			});
 		} catch (err) {
