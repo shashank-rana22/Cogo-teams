@@ -11,22 +11,20 @@ import TopicWisePercentile from './TopicWisePercentile';
 function LastTestResults(props) {
 	const { data = {}, loading } = props;
 
-	const stats_data = data;
-
-	const { topic_wise_percentile, question_stats, status, test_id } = stats_data || {};
+	const { topic_wise_percentile, question_stats, status, test_id } = data || {};
 
 	const hasPassed = status === 'passed';
 
-	if (loading || isEmpty(stats_data)) {
+	if (loading || isEmpty(data)) {
 		return null;
 	}
 
 	return (
 		<div className={styles.container}>
-			<TestResultMessage stats_data={stats_data} />
+			<TestResultMessage stats_data={data} />
 
 			<div className={styles.stats}>
-				<Percentile stats_data={stats_data} hasPassed={hasPassed} />
+				<Percentile stats_data={data} hasPassed={hasPassed} />
 
 				<TopicWisePercentile topic_wise_percentile={topic_wise_percentile} />
 
