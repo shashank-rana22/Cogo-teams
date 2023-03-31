@@ -34,7 +34,7 @@ const useGetBfList = () => {
 				},
 			});
 		} catch (e) {
-			Toast.error(getApiErrorString(e.response?.data));
+			Toast.error(getApiErrorString(e?.response?.data));
 		}
 	}, [trigger, vendor_id]);
 
