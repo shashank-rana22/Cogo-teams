@@ -15,7 +15,6 @@ import {
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
 	listVendors,
-	asyncFieldsLocations,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -49,15 +48,6 @@ const keyAsyncFieldsParamsMapping = {
 	list_operators         : asyncFieldsListOperators,
 	list_rate_charge_codes : asyncFieldListRateChargeCodes,
 	allot_bank             : asyncAllotBanks,
-	organizations      : asyncFieldsOrganizations,
-	organization_users : asyncFieldsOrganizationUser,
-	partners           : asyncFieldsPartner,
-	partner_users      : asyncFieldsPartnerUsers,
-	partner_roles      : asyncFieldsPartnerRoles,
-	segments           : asyncFieldsCampaignSegments,
-	allot_bank         : asyncAllotBanks,
-	athena_countries   : asyncCountries,
-	list_locations     : asyncFieldsLocations,
 };
 
 function AsyncSelect(props) {

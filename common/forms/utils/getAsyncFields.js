@@ -228,5 +228,4 @@ export {
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
 	listVendors,
-	asyncCountries,
 };
