@@ -6,7 +6,6 @@ import { imgURL } from '../../../../constants/image-urls';
 import styles from './styles.module.css';
 
 function Charts({ GraphData = [], hideChart = false }) {
-
 	const Dates = GraphData.map((data) => data?.shipment_week_starting_from);
 	const CancelledShipments = GraphData.map((data) => data?.cogoverse_cancelled_shipments);
 	const ActiveShipments = GraphData.map((data) => data?.cogoverse_active_shipments);
@@ -27,9 +26,9 @@ function Charts({ GraphData = [], hideChart = false }) {
 
 	const graphData = [
 		{
-		  id    : 'cogoverse_cancelled_shipments',
-		  color : 'hsl(27, 70%, 50%)',
-		  data  : cancelled_data,
+			id    : 'cogoverse_cancelled_shipments',
+			color : 'hsl(27, 70%, 50%)',
+			data  : cancelled_data,
 		},
 		{
 			id    : 'cogoverse_active_shipments',
@@ -52,11 +51,11 @@ function Charts({ GraphData = [], hideChart = false }) {
 					margin={{ top: 5, right: 35, bottom: 55, left: 75 }}
 					xScale={{ type: 'point' }}
 					yScale={{
-            	type    : 'linear',
-            	min     : 'auto',
-            	max     : 'auto',
-            	stacked : true,
-            	reverse : false,
+						type    : 'linear',
+						min     : 'auto',
+						max     : 'auto',
+						stacked : true,
+						reverse : false,
 					}}
 					yFormat=" >-.2f"
 					curve="natural"

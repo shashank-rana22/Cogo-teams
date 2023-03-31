@@ -1,4 +1,4 @@
-import { cl,Placeholder } from '@cogoport/components';
+import { cl, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
