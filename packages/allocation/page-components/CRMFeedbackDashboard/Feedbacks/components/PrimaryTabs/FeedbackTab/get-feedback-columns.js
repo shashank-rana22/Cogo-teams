@@ -26,20 +26,6 @@ export const getFeedbackColumns = () => [
 	// 	),
 	// },
 	// {
-	// 	Header   : 'ORGANIZATION',
-	// 	key      : 'organization',
-	// 	id       : 'organization',
-	// 	accessor : ({ organization = {}, lead_organization_id = '', lead_organization = {} }) => (
-	// 		<section className={styles.table_cell}>
-	// 			{lead_organization_id ? (
-	// 				startCase(lead_organization.business_name || '___')
-	// 			) : (
-	// 				startCase(organization.business_name || '___')
-	// 			)}
-	// 		</section>
-	// 	),
-	// },
-	// {
 	// 	Header   : 'COGO-ENTITY',
 	// 	key      : 'cogo_entity',
 	// 	id       : 'cogo_entity',
