@@ -15,8 +15,6 @@ function LeaderBoard(props = {}) {
 		chatLoading = false,
 	} = props || {};
     const statsData=stats?.list||{}
-	// const intentLeaderboardStats = statsData?.intent_leaderboard_stats || {};
-	// const { user_feedbacks = {} } = platFormChatData || {};
 	const getAmount = (value) => {
 		const amount = getFormattedPrice(value, 'INR');
 		return ((amount.substring(4)).split('.'))[0];

@@ -11,7 +11,7 @@ export const PRIMARY_STATS = [
 		parentKey   : 'new_users_and_kyc_verified',
 		description : 'new users',
 		icon_bg     : '#f3fafa',
-		icon        : <IcMUsersManageAccounts fill="#acdadf" width="25px" height="25px" />,
+		icon        : <IcMUsersManageAccounts fill="#acdadf" width="18px" height="18px" />,
 	},
 	{
 		valueKey    : 'bookings',
@@ -20,16 +20,16 @@ export const PRIMARY_STATS = [
 		parentKey   : 'booking_and_rate_enquiries',
 		description : 'rate inquiries',
 		icon_bg     : '#fdfbf6',
-		icon        : <IcMBookingManagement fill="#edd789" width="25px" height="25px" />,
+		icon        : <IcMBookingManagement fill="#edd789" width="18px" height="18px" />,
 	},
 	{
 		valueKey    : 'revenue',
 		descKey     : 'revenue_from_shipments',
 		title       : 'Revenue',
 		parentKey   : 'invoice_payment_and_revenue',
-		description : 'invoice payments',
+		description : 'shipments',
 		icon_bg     : '#f7faef',
-		icon        : <IcMMoney fill="#ABCD62" width="25px" height="25px" />,
+		icon        : <IcMMoney fill="#ABCD62" width="18px" height="18px" />,
 	},
 ];
 

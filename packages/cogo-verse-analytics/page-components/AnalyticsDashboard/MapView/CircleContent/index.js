@@ -69,7 +69,6 @@ function CircleContent(props = {}) {
 							const { type, valueKey, label } = stat;
 
 							return (
-								// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 								<div
 									className={cl`${styles.circle} ${styles[type]} 
 									${circleTab === type && styles.circle_clicked}`}

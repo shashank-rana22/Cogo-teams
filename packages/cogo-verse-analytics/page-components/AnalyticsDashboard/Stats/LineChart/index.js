@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { format } from '@cogoport/utils';
 
@@ -7,8 +6,6 @@ import { imgURL } from '../../../../constants/image-urls';
 import styles from './styles.module.css';
 
 function Charts({ GraphData = [], hideChart = false }) {
-	console.log(GraphData, 'GraphData');
-
 	const Dates = GraphData.map((data) => data?.shipment_week_starting_from);
 	const CancelledShipments = GraphData.map((data) => data?.cogoverse_cancelled_shipments);
 	const ActiveShipments = GraphData.map((data) => data?.cogoverse_active_shipments);
@@ -29,9 +26,9 @@ function Charts({ GraphData = [], hideChart = false }) {
 
 	const graphData = [
 		{
-		  id    : 'cogoverse_cancelled_shipments',
-		  color : 'hsl(27, 70%, 50%)',
-		  data  : cancelled_data,
+			id    : 'cogoverse_cancelled_shipments',
+			color : 'hsl(27, 70%, 50%)',
+			data  : cancelled_data,
 		},
 		{
 			id    : 'cogoverse_active_shipments',
@@ -64,26 +61,25 @@ function Charts({ GraphData = [], hideChart = false }) {
 					curve="natural"
 					axisTop={null}
 					axisRight={null}
-					// colors={colors}
 					axisBottom={{
-						orient         : 'bottom',
-						tickSize       : 0,
-						tickPadding    : 15,
-						tickValues     : 8,
-						tickRotation   : 0,
-						legend         : 'Date',
-						legendOffset   : 40,
-						legendPosition : 'middle',
+            	orient         : 'bottom',
+            	tickSize       : 0,
+            	tickPadding    : 10,
+            	tickValues     : 8,
+            	tickRotation   : 0,
+            	legend         : 'Date',
+            	legendOffset   : 40,
+            	legendPosition : 'middle',
 					}}
 					axisLeft={{
-						orient         : 'left',
-						tickSize       : 0,
-						tickValues     : 5,
-						tickPadding    : 15,
-						tickRotation   : 0,
-						legend         : 'Shipments',
-						legendOffset   : -50,
-						legendPosition : 'middle',
+            	orient         : 'left',
+            	tickSize       : 0,
+            	tickValues     : 5,
+            	tickPadding    : 15,
+            	tickRotation   : 0,
+            	legend         : 'Shipments',
+            	legendOffset   : -50,
+            	legendPosition : 'middle',
 					}}
 					tooltip={({ point = {} }) => {
             	const { borderColor, data } = point;
@@ -92,11 +88,7 @@ function Charts({ GraphData = [], hideChart = false }) {
 	<div className={styles.tool_tip}>
 		<span style={{ background: borderColor }} />
 		<strong>
-			{format(data.y)}
-			{' '}
-			:
-			{' '}
-			{format(data.y)}
+			{data.y}
 		</strong>
 	</div>
             	);

@@ -23,8 +23,6 @@ function PrimaryStats(props = {}) {
 						parentKey, valueKey, descKey, title, icon, icon_bg, description,
 					} = stat;
 
-					{/* const statValue = statsData[parentKey] || {}; */}
-
 					return (
 						<div className={styles.left_stat_content}>
 							<div className={styles.primary_left_stat}>
@@ -77,9 +75,9 @@ function PrimaryStats(props = {}) {
 			<div className={styles.primary_right}>
 				<div className={styles.ticket_container}>
 				<div className={styles.right_stat_title}> Users Active on</div>
+				<div className={styles.detail}>
 					<div className={styles.ticket_details}>
-						
-						
+					
 						<div className={styles.ticket_label}>
 							CogoVerse AI
 						</div>
@@ -113,51 +111,10 @@ function PrimaryStats(props = {}) {
 
 						</div>
 					</div>
+					</div>
 				</div>
-				{/* <div className={styles.active_users}>
-					<div className={styles.right_stat_title}> Users Active on</div>
-					<div className={styles.right_stat_content}>
-						<div className={styles.ticket_label}>
-							CogoVerse
-						</div>
-						<div className={styles.ticket_label}>
-							AI
-						</div>
-						<div className={styles.right_stat_value}>
-							{!firebaseLoading
-								? handleValues(userStats?.ai_chats)
-								: (
-									<Placeholder
-										className={styles.placeholder_element}
-										height="15px"
-										width="30px"
-									/>
-								)}
-
-						</div>
-					</div>
-					<div className={styles.right_stat_content}>
-						<div className={styles.ticket_label}>
-							Customer
-						</div>
-						<div className={styles.ticket_label}>
-							Support
-						</div>
-						<div className={styles.right_stat_value}>
-							{!firebaseLoading ? handleValues(userStats?.kam_chats)
-								: (
-									<Placeholder
-										className={styles.placeholder_element}
-										height="15px"
-										width="30px"
-									/>
-								)}
-
-						</div>
-					</div>
-				</div> */}
 			</div>
-</div>
+        </div>
 	);
 }
 

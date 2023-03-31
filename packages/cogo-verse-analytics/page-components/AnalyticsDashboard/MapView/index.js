@@ -1,15 +1,11 @@
-/* eslint-disable max-len */
 import {
-	Select,
 	DateRangepicker,
 } from '@cogoport/components';
-import { useGetAsyncOptions } from '@cogoport/forms';
-import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+
 import { dynamic } from '@cogoport/next';
 import { isEmpty, merge } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
-import useGetCogoverseGlobeData from '../../../hooks/useGetCogoverseGlobeData';
 
 import GlobeStatsFooter from './GlobeStatsFooter';
 import styles from './styles.module.css';
@@ -29,14 +25,6 @@ function MapView(props = {}) {
 		chatLoading = false,
 	} = props || {};
 	const [circleTab, setCircleTab] = useState('new_users');
-
-	const {
-		options:locationOptions,
-		loading:locationsLoading = false,
-		onSearch = () => {},
-	} = useGetAsyncOptions(merge(asyncFieldsLocations(), { params: { filters: { type: 'country' }, page_limit: 500 } }));
-
-	// const { globeData = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab, date });
 const globeData=stats?.list;
 	const { customer_locations = [], stats:globeStats = {} } = globeData || {};
 	console.log("customer_locations:", customer_locations);
@@ -78,18 +66,6 @@ const globeData=stats?.list;
 		<div className={styles.main_container}>
 			<div className={styles.top_content}>
 				<div className={styles.select_container}>
-					{/* <Select
-						value={country?.mobile_country_code}
-						onChange={(_, obj) => onSelectChange(obj)}
-						placeholder="Select Country"
-						options={locationOptions}
-						id="select_country"
-						labelKey="display_name"
-						valueKey="mobile_country_code"
-						isClearable
-						onSearch={onSearch}
-						loading={locationsLoading}
-					/> */}
 				</div>
 				<div className={styles.date_range_container}>
 					<DateRangepicker
@@ -100,7 +76,6 @@ const globeData=stats?.list;
 						dateFormat="MMM dd, yyyy"
 						isPreviousDaysAllowed
 						maxDate={maxDate}
-						// disable={statsLoading || globeLoading || chatLoading}
 					/>
 
 				</div>
@@ -108,7 +83,6 @@ const globeData=stats?.list;
 
 			<CircleContent
 				{...props}
-				// globeLoading={globeLoading}
 				globeGL={globeGL}
 				markerData={markerData}
 				circleTab={circleTab}

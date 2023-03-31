@@ -1,9 +1,7 @@
-/* eslint-disable max-len */
-import { cl } from '@cogoport/components';
+import { cl, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
-import chartData from '../../../configurations/chart-data';
 import { imgURL } from '../../../constants/image-urls';
 import useGetUsersStats from '../../../hooks/useGetUsersStats';
 
@@ -17,7 +15,6 @@ function Stats(props = {}) {
 
 	useEffect(() => {
 		getUserSats();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const {
@@ -28,11 +25,9 @@ function Stats(props = {}) {
 	} = props || {};
 
 	const { bot_data = {}, customer_support_data = {} } = platFormChatData || {};
-	// const GraphData = chartData({ statsData }) || [];
 	const hideChart = isEmpty(bot_data) && isEmpty(customer_support_data);
-	const statsData = stats?.list;
+	const statsData = stats?.list || {};
 	const graph = statsData?.weekly_shipments || [];
-	// console.log(GraphData, 'GraphData');
 
 	return (
 		<div className={styles.main_container}>
@@ -49,11 +44,10 @@ function Stats(props = {}) {
 				<div className={styles.chart_heading}>
 					<div className={styles.chart_heading_content}>
 						<span>Week on Week Shipments</span>
-						{/* <div><ShipmentsGraph graph={graph} /></div> */}
 					</div>
 					{
 						(!statsLoading && (
-							<div>
+							<div className={styles.legend}>
 								<div className={styles.legend_field}>
 									<div className={styles.legend_icon_1} />
 									<div className={styles.legend_content}>Cancelled Shipments</div>
@@ -71,17 +65,16 @@ function Stats(props = {}) {
 					}
 
 				</div>
-				{/* <Charts GraphData={graph} /> */}
 				<div className={styles.the_chart}>
 					{
 						!chatLoading ? <Charts GraphData={graph} hideChart={hideChart} />
 							: (
 								<div className={styles.chart_empty}>
-									{/* <Placeholder height="1px" margin="10px 0px" />
 									<Placeholder height="1px" margin="10px 0px" />
 									<Placeholder height="1px" margin="10px 0px" />
 									<Placeholder height="1px" margin="10px 0px" />
-									<Placeholder height="1px" margin="10px 0px" /> */}
+									<Placeholder height="1px" margin="10px 0px" />
+									<Placeholder height="1px" margin="10px 0px" />
 
 									<object
 										data={imgURL.empty_bot}

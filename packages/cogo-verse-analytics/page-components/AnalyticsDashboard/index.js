@@ -25,7 +25,6 @@ function AnalyticsDashboard() {
 
 	const platFormChatData = chatData?.data || {};
 
-	// const statsData = stats?.data || {};
 	const statsData = stats?.list || {};
 	console.log(statsData, 'statsData');
 
