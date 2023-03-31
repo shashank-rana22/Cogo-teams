@@ -818,6 +818,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.cogo_book,
 			},
 			{
+				key           : 'business_finance-overheads',
+				title         : 'Overheads',
+				href          : '/v2/business-finance/overheads/[active_tab]',
+				as            : '/v2/business-finance/overheads/vendors',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.overheads,
+			},
+			{
 				key           : 'business_finance-incident_management',
 				title         : 'Incident Management',
 				href          : '/v2/business-finance/incident-management/[activeTab]',
@@ -1265,7 +1274,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				module_type   : 'dashboards',
-				possible_apis : apis.bl_do,
+				possible_apis : [...apis.bl_do, ...apis.sop, ...apis.poc],
 
 			},
 			{
