@@ -1,4 +1,6 @@
 import { Tooltip, cl } from '@cogoport/components';
+import { useDispatch, useSelector } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 
 import FormatData from '../../../../utils/formatData';
@@ -17,11 +19,30 @@ function RightSideNav({
 	activeVoiceCard,
 	activeTab,
 }) {
+	const dispatch = useDispatch();
+	const { profileData } = useSelector(({ profile }) => ({
+		profileData: profile,
+	}));
+
+	const check = () => {
+		dispatch(
+			setProfileState({
+				...profileData,
+				faq: {
+					// ...profileData.faq,
+					showFaq: true,
+				},
+			}),
+		);
+	};
+
 	const handleClick = (val) => {
 		if (val === 'spot_search') {
 			if (!loading) {
 				openNewTab({ crm: 'searches', prm: 'searches' });
 			}
+		} else if (val === 'help_desk') {
+			check();
 		} else {
 			setActiveSelect(val);
 		}
@@ -58,6 +79,7 @@ function RightSideNav({
 						}`}
 						role="presentation"
 						onClick={() => handleClick(name)}
+
 					>
 						<Tooltip content={content} placement="left">
 							{showDocumentCount && (
