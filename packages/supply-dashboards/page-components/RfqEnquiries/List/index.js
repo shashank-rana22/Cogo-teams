@@ -2,7 +2,7 @@ import CardList from './CardList';
 import fields from './fields';
 
 function List({
-	list, loading, filters, hookSetters,
+	list, loading, filters, hookSetters, refetch,
 }) {
 	return (
 		<CardList
@@ -12,6 +12,7 @@ function List({
 			filters={filters}
 			hookSetters={hookSetters}
 			total={list?.total}
+			refetch={refetch}
 		/>
 	);
 }
