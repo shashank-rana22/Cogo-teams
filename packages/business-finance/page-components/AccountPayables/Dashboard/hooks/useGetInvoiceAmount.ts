@@ -10,7 +10,7 @@ const useGetInvoiceAmount = () => {
 		{
 			url     : '/payments/outstanding/paybles-info',
 			method  : 'get',
-			authKey : 'get_payments_outstanding_payables-info',
+			authKey : 'get_payments_outstanding_paybles_info',
 		},
 		{ manual: true, autoCancel: false },
 	);

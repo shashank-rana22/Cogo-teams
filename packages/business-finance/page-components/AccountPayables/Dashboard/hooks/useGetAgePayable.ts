@@ -20,7 +20,7 @@ const useGetAgePayable = () => {
 		{
 			url     : '/purchase/payable/dashboard/age-payable',
 			method  : 'get',
-			authKey : 'get_purchase_payable/dashboard/age-payable',
+			authKey : 'get_purchase_payable_dashboard_age_payable',
 		},
 		{ manual: true, autoCancel: false },
 	);

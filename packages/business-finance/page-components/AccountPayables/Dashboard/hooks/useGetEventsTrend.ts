@@ -27,7 +27,7 @@ const useGetEventsTrend = ({ showData, filtersData }:ItemProps) => {
 		{
 			url     : '/purchase/payable/dashboard/events-trend',
 			method  : 'get',
-			authKey : 'get_purchase_payable/dashboard/events-trend',
+			authKey : 'get_purchase_payable_dashboard_events_trend',
 		},
 		{ manual: true, autoCancel: false },
 	);

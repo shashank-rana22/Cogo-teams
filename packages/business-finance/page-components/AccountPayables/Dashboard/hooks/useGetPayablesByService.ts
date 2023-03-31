@@ -10,7 +10,7 @@ const useGetPayablesByService = () => {
 		{
 			url     : '/purchase/payable/dashboard/paybles-by-service',
 			method  : 'get',
-			authKey : 'get_purchase_payable/dashboard/paybles-by-service',
+			authKey : 'get_purchase_payable_dashboard_paybles_by_service',
 		},
 		{ manual: true, autoCancel: false },
 	);

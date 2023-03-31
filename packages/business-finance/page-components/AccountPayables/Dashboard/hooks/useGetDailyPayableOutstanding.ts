@@ -10,7 +10,7 @@ const useGetDailyPayableOutstanding = ({ isQuarterView, filters }) => {
 		{
 			url     : '/purchase/payable/dashboard/daily-payable-outstanding',
 			method  : 'get',
-			authKey : 'get_purchase_payable/dashboard/daily-payable-outstanding',
+			authKey : 'get_purchase_payable_dashboard_daily_payable_outstanding',
 		},
 		{ manual: true, autoCancel: false },
 	);

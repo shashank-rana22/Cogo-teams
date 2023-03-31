@@ -22,7 +22,7 @@ const useGetTreasuryStats = () => {
 		{
 			url     : 'purchase/treasury/treasury-stats',
 			method  : 'get',
-			authKey : 'get_purchase_treasury_stats',
+			authKey : 'get_purchase_treasury_treasury_stats',
 		},
 		{ manual: true, autoCancel: false },
 	);

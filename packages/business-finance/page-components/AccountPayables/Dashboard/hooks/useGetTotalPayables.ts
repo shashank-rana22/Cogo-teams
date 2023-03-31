@@ -23,7 +23,7 @@ const useGetTotalPayables = ({ filtersData }:ItemProps) => {
 		{
 			url     : '/purchase/payable/dashboard/total-paybles',
 			method  : 'get',
-			authKey : 'get_purchase_payable/dashboard/total-payables',
+			authKey : 'get_purchase_payable_dashboard_total_paybles',
 		},
 		{ manual: true, autoCancel: false },
 	);
