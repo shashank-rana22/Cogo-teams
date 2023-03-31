@@ -1,0 +1,46 @@
+.container{
+    padding-left: 16px;
+    padding-top: 16px;
+  
+}
+
+.header{
+    font-weight: 550;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+.input_label{
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 20px;
+    padding-bottom: 12px;
+    .span{
+        font-weight: 400;
+        font-size: 14px;
+        color: #000000;
+        opacity: 0.6;
+    }
+}
+
+.answer_container{
+    :global {
+    .ui_text_area_control {
+        height: 250px;  
+        font-size: 14px;
+        padding: 12px;
+        }
+
+    .ui_text_area_container {
+        background: #FFFFFF;
+        }
+    }
+}
+
+.button_container{
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 20px;
+
+}
