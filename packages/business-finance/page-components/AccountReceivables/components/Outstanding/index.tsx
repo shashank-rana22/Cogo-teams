@@ -71,7 +71,7 @@ function Outstanding() {
 			) : (
 				<>
 					{list?.map((item) => (
-						<OutstandingList item={item} />
+						<OutstandingList item={item} outStandingFilters={outStandingFilters} />
 					))}
 					{list?.length === 0 && <EmptyState />}
 					{list?.length > 0 && (
