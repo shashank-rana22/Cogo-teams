@@ -14,7 +14,7 @@ const useConvertAccountToCp = ({ organization_id, setShowConvertModal, refetchOr
 		formState: { errors },
 		control,
 	} = useForm();
-	const convertToCp = async ({ portfolio_manager = '', key_account_manager = '' }) => {
+	const convertToAccountCp = async ({ portfolio_manager = '', key_account_manager = '' }) => {
 		try {
 			const payload = {
 				organization_id,
@@ -33,7 +33,7 @@ const useConvertAccountToCp = ({ organization_id, setShowConvertModal, refetchOr
 
 	return {
 		loading,
-		convertToCp,
+		convertToAccountCp,
 		control,
 		handleSubmit,
 		errors,

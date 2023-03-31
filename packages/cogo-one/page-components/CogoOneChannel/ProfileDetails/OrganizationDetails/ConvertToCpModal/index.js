@@ -34,7 +34,7 @@ function ConvertToCpModal({
 	const { key_account_manager, portfolio_manager } = controls;
 	const {
 		loading,
-		convertToCp,
+		convertToAccountCp,
 		control,
 		handleSubmit,
 	} = useConvertAccountToCp({ organization_id: organizationId, setShowConvertModal, refetchOrgDetails });
@@ -45,7 +45,7 @@ function ConvertToCpModal({
 		>
 			<Modal.Header title="Convert to Channel Partner" />
 			<Modal.Body>
-				<form className={styles.container} onSubmit={handleSubmit(convertToCp)}>
+				<form className={styles.container} onSubmit={handleSubmit(convertToAccountCp)}>
 					<div className={styles.select_label}>Choose Key Account Manager</div>
 					<SelectController
 						{...key_account_manager}
