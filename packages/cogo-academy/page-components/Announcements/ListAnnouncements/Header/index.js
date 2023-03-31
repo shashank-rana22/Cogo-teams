@@ -1,6 +1,6 @@
 import { Popover, Button, TabPanel, Tabs } from '@cogoport/components';
 import { useDebounceQuery, useForm, SelectController, InputController } from '@cogoport/forms';
-import { IcMFilter } from '@cogoport/icons-react';
+import { IcMCross, IcMFilter } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
 import SearchInput from '../../../../commons/SearchInput';
@@ -37,13 +37,24 @@ function Header({
 			announcement_type: '',
 		}));
 		setVisible(false);
+		setFiltersApplied(false);
 	};
 
 	const handleApply = () => {
-		setFilters((prev) => ({
-			...prev,
-			...formValues,
-		}));
+		let anyFilterIsThere = false;
+
+		Object.keys(formValues).forEach((key) => {
+			if (formValues[key]?.length > 0) anyFilterIsThere = true;
+		});
+
+		if (anyFilterIsThere) {
+			setFiltersApplied(true);
+			setFilters((prev) => ({
+				...prev,
+				...formValues,
+			}));
+		}
+
 		setVisible(false);
 	};
 
@@ -54,27 +65,16 @@ function Header({
 	useEffect(() => {
 		setFilters((prev) => ({
 			...prev,
-			q: query,
+			q: query || undefined,
 		}));
 	}, [query, setFilters]);
-
-	useEffect(() => {
-		let flag = false;
-
-		Object.keys(formValues).forEach((key) => {
-			if (formValues[key]?.length > 0) flag = true;
-		});
-
-		if (flag) setFiltersApplied(true);
-		else setFiltersApplied(false);
-	}, [formValues]);
 
 	const renderFilters = () => (
 		<div className={styles.container}>
 			<div className={styles.heading_reset}>
 				<div className={styles.heading}>Filters</div>
 				<div className={styles.rest}>
-					<Button size="sm" themeType="primary" onClick={handleReset}>
+					<Button type="button" size="sm" themeType="primary" onClick={handleReset}>
 						Reset
 					</Button>
 
@@ -95,7 +95,7 @@ function Header({
 				})}
 			</div>
 			<div className={styles.footer}>
-				<Button size="md" themeType="secondary" onClick={handleApply}>
+				<Button type="button" size="md" themeType="secondary" onClick={handleApply}>
 					Apply
 				</Button>
 			</div>
@@ -112,6 +112,11 @@ function Header({
 						size="md"
 						placeholder="Search for an announcement"
 					/>
+					{search ? (
+						<div className={styles.cross_icon}>
+							<IcMCross onClick={() => setSearch('')} />
+						</div>
+					) : null}
 				</div>
 				<div className={styles.filters}>
 					<Popover
@@ -121,7 +126,7 @@ function Header({
 						visible={visible}
 						onClickOutside={() => setVisible(false)}
 					>
-						<Button size="lg" themeType="secondary" onClick={() => setVisible(true)}>
+						<Button type="button" size="lg" themeType="secondary" onClick={() => setVisible(true)}>
 							Filters
 							<div className={styles.icon_container}>
 								<IcMFilter style={{ marginLeft: '6px' }} />
