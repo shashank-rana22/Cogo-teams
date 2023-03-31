@@ -39,7 +39,7 @@ function TestsList({ activeTab, setActiveTab }) {
 		debounceQuery: questionListDebounceQuery,
 		input: questionListInput,
 		setInput: setquestionListInput,
-	} = useGetTestQuestionSets({ ...filters, activeTab });
+	} = useGetTestQuestionSets({ filters, activeTab });
 
 	const componentMapping = {
 		tests: {
