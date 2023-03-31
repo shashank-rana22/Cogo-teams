@@ -45,7 +45,7 @@ function Filters({
 						onChange={(val) => setFilter(val)}
 						placeholder="Filter"
 						options={options}
-						isClearable="true"
+						isClearable
 					/>
 				</div>
 			) : null}
