@@ -65,7 +65,7 @@ function CreateQuestion({
 					mode={mode}
 				/>
 
-				<div className={styles.question_form}>
+				<div key={questionTypeWatch} className={styles.question_form}>
 					<QuestionForm
 						errors={errors}
 						control={control}

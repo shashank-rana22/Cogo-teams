@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { TextAreaController, SelectController, InputController, ChipsController } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import useUpdateCaseStudyQuestion from '../../hooks/useUpdateCaseStudyQuestion';
@@ -105,7 +106,7 @@ function SingleQuestionComponent({
 				errors={errors?.options || {}}
 				name={`${name}.${index}.options`}
 				mode={mode}
-				isNewQuestion={isNewQuestion}
+				isNewQuestion={questionTypeWatch === 'case_study' ? isNewQuestion : isEmpty(editDetails)}
 			/>
 
 			{questionTypeWatch !== 'case_study' ? (
@@ -131,7 +132,7 @@ function SingleQuestionComponent({
 				/>
 			</div>
 
-			{questionTypeWatch === 'case_study' && mode !== 'view' ? (
+			{questionTypeWatch === 'case_study' && mode !== 'view' && !isEmpty(editDetails) ? (
 				<div className={styles.button_container}>
 					<Button
 						loading={loading}

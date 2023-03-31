@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 function useGetTestQuestionSets({ filters, activeTab = 'question_set' }) {
 	const { query, debounceQuery } = useDebounceQuery();
@@ -15,31 +15,37 @@ function useGetTestQuestionSets({ filters, activeTab = 'question_set' }) {
 	const [input, setInput] = useState('');
 
 	const [{ data = {}, loading }, trigger] = useRequest({
-		url    : 'list_test_question_sets',
+		url    : '/list_test_question_sets',
 		method : 'GET',
 	}, { manual: true });
 
-	const fetchList = () => {
+	const fetchList = useCallback(() => {
 		try {
 			trigger({
-				params: { ...params, filters: { ...params.filters, q: query, ...filters } },
+				params: {
+					...params,
+					filters: {
+						...params.filters,
+						q: query,
+						...filters,
+					},
+				},
 			});
 		} catch (error) {
-			Toast.error(error?.message);
+			Toast.error(error.message);
 		}
-	};
+	}, [query, params, filters, trigger]);
 
 	useEffect(() => {
 		if (activeTab === 'question_set') {
 			fetchList();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query, params, filters]);
+	}, [fetchList, activeTab]);
 
 	return {
 		data,
 		loading,
-		fetchList,
+		fetchList: () => {},
 		setParams,
 		input,
 		setInput,

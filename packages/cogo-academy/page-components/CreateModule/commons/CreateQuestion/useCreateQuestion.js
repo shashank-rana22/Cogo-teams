@@ -153,7 +153,7 @@ const useCreateQuestion = ({
 			test_question_answers.forEach((answer, index) => {
 				const { answer_text, is_correct } = answer || {};
 
-				const subChildKey = `${childKey}options.${index}`;
+				const subChildKey = `${childKey}.options.${index}`;
 
 				setValue(`${subChildKey}.answer_text`, answer_text);
 				setValue(`${subChildKey}.is_correct`, is_correct ? 'true' : 'false');
