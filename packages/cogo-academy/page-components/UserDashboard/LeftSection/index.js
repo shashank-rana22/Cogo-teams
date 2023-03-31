@@ -1,3 +1,4 @@
+import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 import Courses from './Courses';
@@ -7,10 +8,20 @@ import styles from './styles.module.css';
 
 function LeftSection() {
 	const {
-		user: { name },
+		user: { name, id: user_id },
 	} = useSelector(({ profile }) => ({
 		user: profile.user,
 	}));
+
+	const [{ data }] = useRequest({
+		method : 'GET',
+		url    : '/get_user_performance',
+		params : {
+			user_id,
+		},
+	}, { manual: false });
+
+	console.log('response', data?.data);
 
 	return (
 		<div className={styles.container}>
@@ -20,9 +31,9 @@ function LeftSection() {
 				{name}
 			</div>
 
-			<LastTestResults />
+			<LastTestResults data={data?.data} />
 
-			<Overview />
+			<Overview data={data?.data} />
 
 			<Courses />
 		</div>
