@@ -12,6 +12,12 @@ export const HawbFields = {
 			),
 		},
 		{
+			key   : 'documentNumber',
+			label : 'Document Number',
+			span  : 1.2,
+			func  : 'handleDocumentNumber',
+		},
+		{
 			key   : 'documentType',
 			label : 'AWB',
 			span  : 1.2,

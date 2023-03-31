@@ -67,14 +67,14 @@ function List({
 						>
 							{isOpen === singleitem.id ? (
 								<IcMArrowDown
-									style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
+									style={{ transform: 'rotate(180deg)', cursor: 'pointer', width: '100%' }}
 									onClick={() => {
 										setIsOpen(null);
 									}}
 								/>
 							) : (
 								<IcMArrowDown
-									style={{ cursor: 'pointer' }}
+									style={{ cursor: 'pointer', width: '100%' }}
 									onClick={() => {
 										handleProgramDetail(singleitem);
 									}}

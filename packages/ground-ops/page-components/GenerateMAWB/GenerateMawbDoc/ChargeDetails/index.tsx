@@ -16,6 +16,8 @@ interface Props {
 	data?:NestedObj;
 	whiteout?:boolean;
 	activeCategory?: String;
+	edit?: boolean | string;
+	viewDoc?: boolean;
 }
 
 function ChargeDetails({
@@ -25,13 +27,16 @@ function ChargeDetails({
 	data = {},
 	whiteout = false,
 	activeCategory = '',
+	edit,
+	viewDoc = false,
 }:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';
 	}
 
-	const awbType = activeCategory || taskItem?.documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
+	const docType = taskItem?.documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
+	const awbType = edit || viewDoc ? docType : activeCategory;
 
 	return (
 		<div className={styles.container}>

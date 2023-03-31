@@ -262,6 +262,8 @@ function GenerateMawb({
 						taskItem={taskItem}
 						whiteout={whiteout}
 						activeCategory={activeCategory}
+						edit={edit}
+						viewDoc={viewDoc}
 					/>
 					<ShipmentDetails
 						formData={filteredData}
@@ -279,6 +281,8 @@ function GenerateMawb({
 						data={data}
 						whiteout={whiteout}
 						activeCategory={activeCategory}
+						edit={edit}
+						viewDoc={viewDoc}
 					/>
 				</div>
 			</div>

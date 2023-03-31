@@ -11,9 +11,14 @@ interface Props {
 	taskItem?: NestedObj;
 	whiteout?:boolean;
 	activeCategory?: String;
+	edit?: boolean | string;
+	viewDoc?: boolean;
 }
 
-function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = false, activeCategory = '' }:Props) {
+function ShipperConsigneeDetails({
+	formData = {}, taskItem = {}, whiteout = false,
+	activeCategory = '', edit, viewDoc = false,
+}:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';
@@ -21,7 +26,8 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 
 	const { awbNumber = '', document_number:documentNo = '', documentType = '' } = taskItem;
 
-	const awbType = activeCategory || documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
+	const docType = documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
+	const awbType = edit || viewDoc ? docType : activeCategory;
 
 	return (
 		<div className={styles.container} style={{ pointerEvents: 'none' }}>

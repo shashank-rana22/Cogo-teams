@@ -88,6 +88,9 @@ function HawbList({ data, setViewDoc, setItem }) {
 	};
 
 	const functions = {
+		handleDocumentNumber: (singleItem) => (
+			<p>{singleItem?.documentData?.document_number}</p>
+		),
 		handleDownload: (singleItem) => (
 			<Button
 				themeType="linkUi"
