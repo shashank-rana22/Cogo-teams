@@ -13,7 +13,7 @@ const useOnBlurTaxPanGstinControl = ({
 		registrationType,
 	}) => {
 		if (watchCountryId === INDIA_COUNTRY_ID) {
-			const { length = '' } =				registrationNumbersMapping[registrationType] || {};
+			const { length = '' } =	registrationNumbersMapping[registrationType] || {};
 
 			const flag = registrationNumber.length === length;
 

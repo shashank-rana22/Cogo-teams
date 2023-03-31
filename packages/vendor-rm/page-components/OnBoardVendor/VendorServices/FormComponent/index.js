@@ -49,6 +49,7 @@ function FormComponent({
 				return (
 					<div key={name} className={styles.label_value_container}>
 						<div className={styles.form_label}>{label}</div>
+
 						<div className={styles.form_controller}>
 							<Element
 								key={name}
@@ -57,6 +58,7 @@ function FormComponent({
 								id={`onboard_vendor_form_${name}_input`}
 							/>
 						</div>
+
 						<div className={styles.form_error_message}>
 							{errors?.[controlItem.name]?.message}
 						</div>
