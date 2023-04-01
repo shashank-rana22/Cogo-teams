@@ -9,24 +9,19 @@ import Header from './Header';
 function CurrentConfigurations(props) {
 	const {
 		configCardLoading,
-		listKamExpertiseCurrentConfigs,
+		data,
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
+		LIVE_VERSION_DATA = {},
+		DRAFTS = [],
 	} = props;
 
 	const router = useRouter();
 
-	const {
-		list:data = [],
-		audit_data = {}, //! data not comming api key changed
-	} = listKamExpertiseCurrentConfigs;
+	const { list = [] } = data;
 
-	const LIVE_VERSION = data.filter((item) => item.status === 'live')[0]?.version_number;
-
-	const listLiveAndDraft = data.filter((item) => ['draft', 'live'].includes(item.status));
-
-	const VERSION_CARDS = listLiveAndDraft.reverse();
+	const { version_number = '', audit_data = {} } = LIVE_VERSION_DATA;
 
 	const onClickViewAllConfig = () => {
 		router.push('/allocation/kam-expertise/configurations/all-configurations');
@@ -40,18 +35,22 @@ function CurrentConfigurations(props) {
 		<div>
 			<Header
 				audit_data={audit_data}
-				data={data}
-				LIVE_VERSION={LIVE_VERSION}
+				data={list} //! ToDo : Try to remove its use
+				version_number={version_number}
 				refetch={refetch}
 				expertiseRefetch={expertiseRefetch}
 				cardRefetch={cardRefetch}
 			/>
 
-			{VERSION_CARDS.map((item) => (
+			{DRAFTS.map((item) => (
 				<ConfigurationCard
 					{...item}
 				/>
 			))}
+
+			<ConfigurationCard
+				{...LIVE_VERSION_DATA}
+			/>
 
 			<Button
 				onClick={onClickViewAllConfig}

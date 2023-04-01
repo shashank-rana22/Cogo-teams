@@ -39,7 +39,7 @@ function ViewAllConfigs() {
 		router.push('/allocation/kam-expertise');
 	};
 
-	const { listKamExpertiseCurrentConfigs = {}, configCardLoading, cardRefetch } = useGetKamExpertiseCurrentConfig();
+	const { data = {}, configCardLoading, cardRefetch, LIVE_VERSION_DATA, DRAFTS } = useGetKamExpertiseCurrentConfig();
 	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig();
 	const { listExpertiseParams, expertiseLoading, expertiseRefetch } = useGetExpertiseParameters();
 	const { onCreate, loading: publishLoading } =	usePublishDraft({
@@ -81,11 +81,13 @@ function ViewAllConfigs() {
 				</div>
 
 				<CurrentConfigurations
-					listKamExpertiseCurrentConfigs={listKamExpertiseCurrentConfigs}
+					data={data}
 					configCardLoading={configCardLoading}
 					refetch={refetch}
 					expertiseRefetch={expertiseRefetch}
 					cardRefetch={cardRefetch}
+					LIVE_VERSION_DATA={LIVE_VERSION_DATA}
+					DRAFTS={DRAFTS}
 				/>
 
 				<div className={styles.tab_list}>
@@ -107,7 +109,7 @@ function ViewAllConfigs() {
 						themeType="primary"
 						className={styles.pub_button}
 						disabled={levelLoading || expertiseLoading
-							|| configCardLoading || isEmpty(listKamExpertiseCurrentConfigs)}
+							|| configCardLoading || isEmpty(data)}
 						onClick={() => setShowPublishModal(true)}
 					>
 						Publish

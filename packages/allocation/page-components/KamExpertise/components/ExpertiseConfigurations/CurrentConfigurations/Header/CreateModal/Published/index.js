@@ -45,7 +45,7 @@ function Published({ setSelectedVersion = () => {}, data }) {
 	const table = [];
 
 	data.forEach((element) => {
-		if (element.status_value !== 'draft') {
+		if (element.status !== 'draft') {
 			table.push({
 				version_number : element?.version_number || '',
 				status         : element?.status || '',
