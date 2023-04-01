@@ -10,7 +10,7 @@ const useSourceFile = ({ modalData, uploader, setUploadModal }) => {
 	const { push } = useRouter();
 	const { profile } = useSelector((state) => state || {});
 
-	const monthData = (month || []).split('-');
+	const monthData = (month || '')?.split('-');
 
 	const [
 		{ loading:sourceFileUploadLoading },

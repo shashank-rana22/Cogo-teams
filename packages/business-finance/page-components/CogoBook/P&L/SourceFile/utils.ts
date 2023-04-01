@@ -8,7 +8,7 @@ export function OptionMonth() {
 
 	useEffect(() => { refetch(); }, [refetch]);
 
-	return (month || [{}])?.map((item:Date) => ({
+	return (month || [])?.map((item:Date) => ({
 		label : format(item, 'MMM yyyy'),
 		value : format(item, 'yyyy-MM-01'),
 	}));
