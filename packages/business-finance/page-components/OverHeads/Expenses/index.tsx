@@ -449,8 +449,6 @@ function ExpenseComponent() {
 		loading = listLoading;
 	}
 
-	const isListEmpty = !listItemData || listItemData?.list?.length === 0;
-
 	return (
 		<div className={styles.expense_container}>
 			<div className={styles.segmented_control}>
@@ -464,35 +462,21 @@ function ExpenseComponent() {
 			</div>
 			<div className={styles.styled_div}>
 				{renderHeaders()}
-				{listItemData && (
-					<List
-						config={listConfig()}
-						itemData={listItemData}
-						loading={loading || recurringListLoading}
-						functions={functions}
-						sort={sort}
-						setSort={setSort}
-						page={expenseFilters.pageIndex || 1}
-						pageSize={expenseFilters.pageSize}
-						handlePageChange={(pageValue:number) => {
-							setExpenseFilters((p) => ({ ...p, pageIndex: pageValue }));
-						}}
-						showPagination
-						renderDropdown={showDropDown}
-					/>
-				)}
-				<div>
-					{isListEmpty
-					&& (
-						<div className={styles.no_data}>
-							<img
-								style={{ width: '26%', margin: '10%' }}
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no result.svg"
-								alt="no data"
-							/>
-						</div>
-					)}
-				</div>
+				<List
+					config={listConfig()}
+					itemData={listItemData}
+					loading={loading || recurringListLoading}
+					functions={functions}
+					sort={sort}
+					setSort={setSort}
+					page={expenseFilters.pageIndex || 1}
+					pageSize={expenseFilters.pageSize}
+					handlePageChange={(pageValue:number) => {
+						setExpenseFilters((p) => ({ ...p, pageIndex: pageValue }));
+					}}
+					showPagination
+					renderDropdown={showDropDown}
+				/>
 
 			</div>
 

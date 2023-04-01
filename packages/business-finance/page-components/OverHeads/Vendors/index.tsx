@@ -240,39 +240,23 @@ function VenderComponent() {
 		},
 	};
 
-	const isListEmpty = !listData || listData?.list?.length === 0;
-
 	return (
 		<div className={styles.vendor_container}>
 			{renderHeaders()}
 
-			{listData && (
-				<List
-					config={VENDOR_CONFIG}
-					itemData={listData}
-					loading={loading}
-					sort={sort}
-					setSort={setSort}
-					functions={functions}
-					handlePageChange={(pageValue:number) => {
-						setFilters((p) => ({ ...p, page: pageValue }));
-					}}
-					showPagination
-					renderDropdown={(id) => renderDropdown(id)}
-				/>
-			)}
-			<div>
-				{isListEmpty
-					&& (
-						<div className={styles.no_data}>
-							<img
-								style={{ width: '26%', margin: '10%' }}
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no result.svg"
-								alt="no data"
-							/>
-						</div>
-					)}
-			</div>
+			<List
+				config={VENDOR_CONFIG}
+				itemData={listData}
+				loading={loading}
+				sort={sort}
+				setSort={setSort}
+				functions={functions}
+				handlePageChange={(pageValue:number) => {
+					setFilters((p) => ({ ...p, page: pageValue }));
+				}}
+				showPagination
+				renderDropdown={(id) => renderDropdown(id)}
+			/>
 
 			{
                 showModal && <CreateVendorModal showModal={showModal} setShowModal={setShowModal} />
