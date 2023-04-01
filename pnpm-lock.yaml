@@ -644,6 +644,7 @@ importers:
   packages/vendor-rm:
     specifiers:
       '@cogoport/components': ^1.0.316
+      '@cogoport/constants': workspace:^0.1.0
       '@cogoport/forms': workspace:*
       '@cogoport/globalization': workspace:*
       '@cogoport/icons-react': ^1.0.57
@@ -655,6 +656,7 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/components': 1.0.366_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/constants': link:../../common/constants
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.58_react@18.2.0

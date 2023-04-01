@@ -1,3 +1,4 @@
+import PATTERNS from '@cogoport/constants/patterns';
 import { IcMCloudUpload } from '@cogoport/icons-react';
 
 const controls = [
@@ -71,7 +72,7 @@ const controls = [
 		name        : 'name',
 		label       : 'Billing Party Name',
 		type        : 'text',
-		style       : { flexBasis: '30%' },
+		style       : { flexBasis: '47%' },
 		placeholder : 'Enter Billing Party Name',
 		rules       : { required: 'Billing Party Name is required' },
 	},
@@ -79,7 +80,7 @@ const controls = [
 		name        : 'pincode_id',
 		label       : 'Pincode',
 		type        : 'select',
-		style       : { flexBasis: '30%' },
+		style       : { flexBasis: '47%' },
 		placeholder : 'Select options',
 		rules       : { required: 'Pincode is Required' },
 	},
@@ -87,9 +88,35 @@ const controls = [
 		name        : 'address',
 		label       : 'Address',
 		type        : 'text',
-		style       : { flexBasis: '30%' },
+		style       : { flexBasis: '47%' },
 		placeholder : 'Enter Address',
 		rules       : { required: 'Address is Required' },
+	},
+	{
+		name        : 'tax_number',
+		label       : 'GST Number',
+		type        : 'text',
+		style       : { flexBasis: '47%' },
+		placeholder : 'Enter GST',
+		rules       : {
+			pattern: {
+				value   : PATTERNS.GST_NUMBER,
+				message : 'Enter a valid GST number',
+			},
+		},
+	},
+	{
+		name            : 'tax_document_url',
+		showLabel       : false,
+		label           : 'Upload GST Certificate',
+		type            : 'file',
+		style           : { flexBasis: '100%' },
+		themeType       : 'secondary',
+		draggable       : true,
+		uploadIcon      : <IcMCloudUpload height={56} width={56} />,
+		onlyURLOnChange : true,
+		accept          : 'image/*,.pdf,.doc,.docx',
+		uploadType      : 'aws',
 	},
 ];
 

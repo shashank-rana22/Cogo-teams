@@ -81,7 +81,8 @@ function useVendorBankDetail({
 		try {
 			const payload = {
 				...values,
-				bank_document_url: values.bank_document_url.finalUrl,
+				bank_document_url : values.bank_document_url.finalUrl,
+				tax_document_url  : values?.tax_document_url?.finalUrl,
 				vendor_id,
 			};
 
@@ -120,7 +121,7 @@ function useVendorBankDetail({
 
 	useEffect(() => {
 		controls.forEach((field) => {
-			if (field.name === 'bank_document_url') {
+			if (['tax_document_url', 'bank_document_url'].includes(field.name)) {
 				setValue(`${field.name}`, payment_details?.[field.name]?.finalUrl || payment_details?.[field.name]);
 			} else {
 				setValue(`${field.name}`, payment_details?.[field.name]);
