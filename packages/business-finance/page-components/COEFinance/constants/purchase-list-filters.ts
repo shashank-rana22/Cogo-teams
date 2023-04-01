@@ -8,8 +8,8 @@ function filtersData(statsData:StatsDataInterface) {
 
 	return [
 		{
-			label : 'Initiated',
-			value : 'INITIATED',
+			label : 'Locked',
+			value : 'LOCKED',
 			badge : INITIATED || '0',
 		},
 		{
