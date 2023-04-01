@@ -56,7 +56,6 @@ function MessageCardData({ item = {}, activeCardId = '', userId = '', setActiveM
 			className={cl`
 						${styles.card_container} 
 						${checkActiveCard ? styles.active_card : ''} 
-						${isImportant ? styles.important_styles : ''}
 							`}
 			onClick={() => setActiveMessage(item)}
 		>
@@ -67,26 +66,14 @@ function MessageCardData({ item = {}, activeCardId = '', userId = '', setActiveM
 							type={channel_type}
 						/>
 						<div className={styles.user_details}>
-							<div className={styles.name_container}>
-								<Tooltip
-									content={startCase(search_user_name) || 'User'}
-									placement="top"
-								>
-									<div className={styles.user_name}>
-										{startCase(search_user_name) || 'User'}
-									</div>
-								</Tooltip>
-								{pinnedTime[userId] > 0
-									? (
-										<IcCPin
-											onClick={(e) => updatePinnedChats(e, 'unpin')}
-										/>
-									) : (
-										<IcMPin
-											onClick={(e) => updatePinnedChats(e, 'pin')}
-										/>
-									)}
-							</div>
+							<Tooltip
+								content={startCase(search_user_name) || 'User'}
+								placement="top"
+							>
+								<div className={styles.user_name}>
+									{startCase(search_user_name) || 'User'}
+								</div>
+							</Tooltip>
 							<div className={styles.organisation}>
 								{orgName}
 							</div>
@@ -136,6 +123,18 @@ function MessageCardData({ item = {}, activeCardId = '', userId = '', setActiveM
 					/>
 				</div>
 			)}
+			<div className={styles.pinned_div}>
+				{pinnedTime[userId] > 0
+					? (
+						<IcCPin
+							onClick={(e) => updatePinnedChats(e, 'unpin')}
+						/>
+					) : (
+						<IcMPin
+							onClick={(e) => updatePinnedChats(e, 'pin')}
+						/>
+					)}
+			</div>
 		</div>
 	);
 }

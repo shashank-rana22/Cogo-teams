@@ -1,4 +1,5 @@
 .card_container {
+	position: relative;
 	padding: 10px 8px;
 	margin: 4px;
 }
@@ -129,10 +130,6 @@
 	background: #fef199;
 }
 
-.important_styles {
-	position: relative;
-}
-
 .important_icon {
 	position: absolute;
 	top: 0;
@@ -146,7 +143,9 @@
 	border-radius: 0 4px;
 }
 
-.name_container {
-	display: flex;
-	align-items: center;
+.pinned_div {
+	position: absolute;
+	top: 3px;
+	left: 4px;
+	cursor: pointer;
 }
