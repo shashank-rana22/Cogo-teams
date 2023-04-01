@@ -93,7 +93,7 @@ function UploadReport() {
 
 	const { railDomesticVolume, railDomesticValue } = rail || {};
 
-	const OceanSum = Number(volume[0] || salaryVolume[0] || totalVolume[0])
+	const OceanSum = Number(volume[0] || salaryVolume[0] || totalVolume)
 	===	(Number(volume[1] || salaryVolume[1] || fclExportVolume)
 	+ Number(volume[2] || salaryVolume[2] || fclImportVolume)
 	+ Number(volume[3] || salaryVolume[3] || lclExportVolume)

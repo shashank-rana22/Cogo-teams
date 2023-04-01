@@ -44,11 +44,6 @@ const useSaveReport = ({
 
 	const { profile } = useSelector((state) => state || {});
 
-	const [monthName, year] = (month.match(/(\w+)\s+(\d{4})/) || []).slice(1);
-
-	const monthData = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
-	const numericDate = `${year}-${monthData.toString().padStart(2, '0')}-01`;
-
 	const [
 		{ data, loading:turnoverLoading },
 		turnoverTrigger,
@@ -68,7 +63,7 @@ const useSaveReport = ({
 					{
 						ratioBasis           : 'VALUE',
 						cogoEntityId         : entityMappingData[entity],
-						period               : numericDate,
+						period               : month,
 						sourceFileId         : id,
 						turnoverRatioDetails : {
 							rail         : totalPerRailValue / 100,
@@ -93,7 +88,7 @@ const useSaveReport = ({
 					{
 						ratioBasis           : 'VOLUME',
 						cogoEntityId         : entityMappingData[entity],
-						period               : numericDate,
+						period               : month,
 						sourceFileId         : id,
 						turnoverRatioDetails : {
 							rail         : totalPerRail / 100,
@@ -127,14 +122,13 @@ const useSaveReport = ({
 		} catch (error) {
 			Toast.error(error?.response?.data?.message);
 		}
-	}, [FTLValuePer, FTLVolumePer, LTLValuePer, LTLVolumePer, airCustomValuePer, airCustomVolumePer,
-		airExportValuePer, airExportVolumePer, airImportValuePer, airImportVolumePer, entity,
-		fclExportValuePer, fclExportVolumePer, fclImportValuePer, fclImportVolumePer, id,
-		lclExportValuePer, lclExportVolumePer, lclImportValuePer, lclImportVolumePer,
-		numericDate, oceanCustomValuePer, oceanCustomVolumePer, profile.partner?.id,
-		profile?.user?.id, push, railValuePer, railVolumePer, setModalData, totalPer,
-		totalPerAir, totalPerOcean, totalPerRail, totalPerRailValue, totalPerSurface,
-		totalPerValueSurface, totalVolumePer, turnoverTrigger]);
+	}, [FTLValuePer, FTLVolumePer, LTLValuePer, LTLVolumePer, airCustomValuePer,
+		airCustomVolumePer, airExportValuePer, airExportVolumePer, airImportValuePer, airImportVolumePer,
+		entity, fclExportValuePer, fclExportVolumePer, fclImportValuePer, fclImportVolumePer, id,
+		lclExportValuePer, lclExportVolumePer, lclImportValuePer, lclImportVolumePer, month,
+		oceanCustomValuePer, oceanCustomVolumePer, profile.partner?.id, profile?.user?.id, push,
+		railValuePer, railVolumePer, setModalData, totalPer, totalPerAir, totalPerOcean, totalPerRail,
+		totalPerRailValue, totalPerSurface, totalPerValueSurface, totalVolumePer, turnoverTrigger]);
 
 	return {
 		refetch,

@@ -13,7 +13,7 @@ interface FreezeInterface {
 function Freeze({ item, refetch }:FreezeInterface) {
 	const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
-	const { period, periodName, isLocked } = item;
+	const { period, periodName, isLocked } = item || {};
 
 	const [
 		{ loading:freezeTriggerLoading },

@@ -186,8 +186,8 @@ function ListProfit({
 									)}
 									{dropDown?.revenue && (
 										<>
-											{isRowVisible &&		<div>{bookedRevenue * ratio}</div>}
-											{isRowVisible &&		<div>{accruedRevenue * ratio}</div>}
+											{isRowVisible &&		<div>{(bookedRevenue * ratio).toFixed(2)}</div>}
+											{isRowVisible &&		<div>{(accruedRevenue * ratio).toFixed(2)}</div>}
 										</>
 									) }
 									{isRowVisible &&	(
@@ -362,50 +362,50 @@ function ListProfit({
 								)}
 								{dropDown?.finance && (
 									<>
-										{isRowVisible && <div>{foreignExchangeGainNet * ratio}</div>}
+										{isRowVisible && <div>{(foreignExchangeGainNet * ratio).toFixed(2)}</div>}
 
 										{isRowVisible && (
 											<div>
-												{interestOnLoanDiscountOnBillsAndBankCharges * ratio}
+												{(interestOnLoanDiscountOnBillsAndBankCharges * ratio).toFixed(2)}
 											</div>
 										)}
 
-										{isRowVisible && <div>{miscelleneousIncome * ratio}</div>}
-										{isRowVisible && <div>{interestIncomeOnFd * ratio}</div>}
+										{isRowVisible && <div>{(miscelleneousIncome * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(interestIncomeOnFd * ratio).toFixed(2)}</div>}
 									</>
 								) }
-								{isRowVisible &&	<div className={styles.particular_data}>{totalOtherExpense * ratio}</div>}
+								{isRowVisible &&	<div className={styles.particular_data}>{(totalOtherExpense * ratio).toFixed(2)}</div>}
 								{dropDown?.other
 								&& (
 									<>
 										{isRowVisible && (
 											<div>
-												{interestOnLoanDiscountOnBillsAndBankChargesExpense * ratio}
+												{(interestOnLoanDiscountOnBillsAndBankChargesExpense * ratio).toFixed(2)}
 											</div>
 										)}
 
-										{isRowVisible && <div>{legalComplianceBooksAndMis * ratio}</div>}
-										{isRowVisible && <div>{marketingExpense * ratio}</div>}
-										{isRowVisible && <div>{personnelExpenseCost * ratio}</div>}
-										{isRowVisible && <div>{provisionsAndWriteOffs * ratio}</div>}
-										{isRowVisible && <div>{ratesAndTaxes * ratio}</div>}
-										{isRowVisible && <div>{rentAndTaxes * ratio}</div>}
-										{isRowVisible && <div>{rentElectricityAndMaintenance * ratio}</div>}
-										{isRowVisible && <div>{repairsAndMaintenance * ratio}</div>}
+										{isRowVisible && <div>{(legalComplianceBooksAndMis * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(marketingExpense * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(personnelExpenseCost * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(provisionsAndWriteOffs * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(ratesAndTaxes * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(rentAndTaxes * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(rentElectricityAndMaintenance * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(repairsAndMaintenance * ratio).toFixed(2)}</div>}
 
 										{isRowVisible && (
 											<div>
-												{salariesBonusIncentivesAndStaffWelfareExpenses * ratio}
+												{(salariesBonusIncentivesAndStaffWelfareExpenses * ratio).toFixed(2)}
 											</div>
 										)}
 
-										{isRowVisible && <div>{techAndProductCosts * ratio}</div>}
-										{isRowVisible && <div>{currencySuspenseAccount * ratio}</div>}
-										{isRowVisible && <div>{roundOff * ratio}</div>}
-										{isRowVisible && <div>{anyOtherCosts * ratio}</div>}
+										{isRowVisible && <div>{(techAndProductCosts * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(currencySuspenseAccount * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(roundOff * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(anyOtherCosts * ratio).toFixed(2)}</div>}
 									</>
 								)}
-								{isRowVisible && <div className={styles.particular_data}>{totalOtherIncome * ratio}</div>}
+								{isRowVisible && <div className={styles.particular_data}>{(totalOtherIncome * ratio).toFixed(2)}</div>}
 							</div>
 						);
 					})}
@@ -427,7 +427,7 @@ function ListProfit({
 										? ((revenueFromOps
 									- operatingExpenses
 									- totalDepreciationAndAmortization - totalFinanceCost - totalOtherExpense
-										) * ratio) : null}
+										) * ratio).toFixed(2) : null}
 								</div>
 							);
 						})
@@ -460,9 +460,9 @@ function ListProfit({
 							const ratio = ratioData?.[itemValue[key]] || 1;
 							return (
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
-									{isRowVisible && <div className={styles.particular_data}>{totalExceptionalItems * ratio}</div>}
-									{isRowVisible && <div className={styles.particular_data}>{totalExtraordinaryItems * ratio}</div>}
-									{isRowVisible && <div className={styles.particular_data}>{totalPriorPeriodItem * ratio}</div>}
+									{isRowVisible && <div className={styles.particular_data}>{(totalExceptionalItems * ratio).toFixed(2)}</div>}
+									{isRowVisible && <div className={styles.particular_data}>{(totalExtraordinaryItems * ratio).toFixed(2)}</div>}
+									{isRowVisible && <div className={styles.particular_data}>{(totalPriorPeriodItem * ratio).toFixed(2)}</div>}
 
 								</div>
 							);
@@ -484,7 +484,7 @@ function ListProfit({
 								- totalDepreciationAndAmortization
 								- totalFinanceCost
 								- totalOtherExpense
-								- totalExceptionalItems - totalExtraordinaryItems - totalPriorPeriodItem) * ratio) : null}
+								- totalExceptionalItems - totalExtraordinaryItems - totalPriorPeriodItem) * ratio).toFixed(2) : null}
 								</div>
 							);
 						})
@@ -507,7 +507,7 @@ function ListProfit({
 
 							return (
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
-									{isRowVisible && <div className={styles.particular_data}>{totalTaxExpense * ratio}</div>}
+									{isRowVisible && <div className={styles.particular_data}>{(totalTaxExpense * ratio).toFixed(2)}</div>}
 								</div>
 							);
 						})
@@ -525,7 +525,7 @@ function ListProfit({
 									- totalDepreciationAndAmortization
 									- totalFinanceCost - totalOtherExpense
 									- totalExceptionalItems - totalExtraordinaryItems
-									- totalPriorPeriodItem - totalTaxExpense) * ratio) : null}
+									- totalPriorPeriodItem - totalTaxExpense) * ratio).toFixed(2) : null}
 
 								</div>
 							);

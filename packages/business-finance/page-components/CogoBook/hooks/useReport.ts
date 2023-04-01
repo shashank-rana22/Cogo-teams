@@ -15,14 +15,6 @@ const useReport = ({
 	filters,
 	monthPayload,
 }:FilterInterface) => {
-	const d = new Date();
-
-	const [monthName, year] = ((filters?.month || '').match(/(\w+)\s+(\d{4})/) || []).slice(1);
-
-	const monthData = new Date(`${monthName} 1, ${year}`).getMonth() + 1 || d.getMonth() + 1;
-
-	const numericDate = `${year || d.getFullYear()}-${monthData.toString().padStart(2, '0')}-01`;
-
 	const [
 		{ data:reportData, loading:reportTriggerLoading },
 		reportTrigger,
@@ -64,7 +56,7 @@ const useReport = ({
 		try {
 			await reportTrigger({
 				params: {
-					periods      : [numericDate] || [getLastMonthData()] || undefined,
+					periods      : [filters?.month] || [getLastMonthData()] || undefined,
 					cogoEntityId : entityMappingData[filters?.entity] || undefined,
 				},
 			});
@@ -73,13 +65,13 @@ const useReport = ({
 		} catch {
 			console.log('dfjnjn');
 		}
-	}, [filters?.category, filters?.entity, numericDate, reportTrigger]);
+	}, [filters?.category, filters?.entity, filters?.month, reportTrigger]);
 
 	const fetchRatioApi = useCallback(async (setShowReport?:any) => {
 		try {
 			await ratioTrigger({
 				params: {
-					periods      : monthPayload || numericDate || undefined,
+					periods      : monthPayload || filters?.month || undefined,
 					cogoEntityId : entityMappingData[filters?.entity] || undefined,
 				},
 			});
@@ -88,7 +80,7 @@ const useReport = ({
 		} catch {
 			console.log('dfjn');
 		}
-	}, [filters?.entity, monthPayload, numericDate, ratioTrigger]);
+	}, [filters?.entity, filters?.month, monthPayload, ratioTrigger]);
 
 	return {
 		ratiosData,
