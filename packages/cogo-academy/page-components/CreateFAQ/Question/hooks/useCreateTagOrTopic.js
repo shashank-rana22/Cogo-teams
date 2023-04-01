@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 const MAPPING = {
@@ -48,8 +49,7 @@ function useCreateNewTagOrTopic({ fetchTopics, fetchTags }) {
 		const { name, description } = values || {};
 
 		const payload = {
-			name,
-			display_name: name,
+			display_name: startCase(name),
 			description,
 		};
 
@@ -68,7 +68,7 @@ function useCreateNewTagOrTopic({ fetchTopics, fetchTags }) {
 				setShow(false);
 			}
 		} catch (err) {
-			Toast.error('Something went wrong');
+			Toast.error(err?.response?.data?.base);
 		}
 	};
 

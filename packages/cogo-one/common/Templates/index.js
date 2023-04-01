@@ -2,13 +2,11 @@ import { cl, Input, Button, Placeholder, Pill } from '@cogoport/components';
 import { useForm, TextAreaController, InputController } from '@cogoport/forms';
 import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
 import { IcMSearchlight, IcCSendWhatsapp } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import controls from '../../configurations/create-instant-reply';
 import { statusMapping, statusColorMapping } from '../../constants';
-import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useCreateCommunicationTemplate from '../../hooks/useCreateCommunicationTemplate';
 import useListTemplate from '../../hooks/useListTemplates';
 import hideDetails from '../../utils/hideDetails';
@@ -16,7 +14,6 @@ import hideDetails from '../../utils/hideDetails';
 import styles from './styles.module.css';
 
 function Templates({
-	activeTab = '',
 	openCreateReply,
 	setOpenCreateReply = () => {},
 	data = {},
@@ -33,17 +30,12 @@ function Templates({
 	const [templateName, setTemplateName] = useState('');
 	const [activeCard, setActiveCard] = useState('');
 	const { title, content = '' } = controls;
-	const { userRoleIds } = useSelector(({ profile }) => ({
-		userRoleIds: profile.partner?.user_role_ids || [],
-	}));
+
 	const isDefaultOpen = type === 'whatsapp_new_message_modal';
 	const maskMobileNumber = type === 'voice_call_component';
 
 	const maskedMobileNumber = `${dialNumber?.country_code}
 	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
-
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole))
-        || false;
 
 	const {
 		control,
@@ -59,7 +51,7 @@ function Templates({
 		infiniteList: { list = [] },
 		loading,
 		refetch,
-	} = useListTemplate({ activeTab });
+	} = useListTemplate();
 
 	const { createTemplate, loading: CreateLoading } = useCreateCommunicationTemplate({
 		reset: () => {
@@ -86,7 +78,7 @@ function Templates({
 		});
 	};
 
-	function CreateReactComponent() {
+	function handlePreview() {
 		const preview = previewData
 			?.replaceAll(/<p>\s+(<[/]p>)/g, '<br>')
 			?.replaceAll(/<p>(<[/]p>)/g, '<br>')
@@ -164,7 +156,7 @@ function Templates({
 						>
 							{(list || []).map(
 								({
-									content: { name: messageTitle },
+									content: { name: messageTitle = '' } = {},
 									description: messageContent = '',
 									whatsapp_approval_status,
 									html_template,
@@ -199,11 +191,11 @@ function Templates({
 												<Pill
 													size="md"
 													color={
-                                                        statusColorMapping[whatsapp_approval_status]
+                                                        statusColorMapping[whatsapp_approval_status || 'pending']
                                                     }
 												>
 													{
-                                                        statusMapping[whatsapp_approval_status]
+                                                        statusMapping[whatsapp_approval_status || 'pending']
                                                     }
 												</Pill>
 											</div>
@@ -224,16 +216,14 @@ function Templates({
 					</div>
 				</div>
 				<div className={styles.footer}>
-					{isomniChannelAdmin && (
-						<Button
-							themeType="accent"
-							size="md"
-							disabled={openCreateReply}
-							onClick={createAction}
-						>
-							+ Create Template
-						</Button>
-					)}
+					<Button
+						themeType="accent"
+						size="md"
+						disabled={openCreateReply}
+						onClick={createAction}
+					>
+						+ Create Template
+					</Button>
 				</div>
 			</div>
 			{openCreateReply && !showPreview && (
@@ -295,7 +285,7 @@ function Templates({
 						<div className={styles.whatsapp}>
 							<div className={styles.overflow_div}>
 								<div className={styles.preview_div}>
-									{CreateReactComponent()}
+									{handlePreview()}
 								</div>
 							</div>
 						</div>

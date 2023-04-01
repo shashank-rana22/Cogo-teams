@@ -6,6 +6,7 @@ import Filters from '../Filters';
 
 import ApprovalPending from './components/ApprovalPending';
 import ApprovedAWB from './components/ApprovedAWB';
+import FinalAWB from './components/FinalAWB';
 import NewAWB from './components/NewAWB';
 import useListShipmentPendingTasks from './hooks/useListShipmentPendingTasks';
 import styles from './styles.module.css';
@@ -23,12 +24,17 @@ const tabs = [
 		key   : 'approved_awb',
 		label : 'Approved AWB',
 	},
+	{
+		key   : 'final_awb',
+		label : 'Final AWB',
+	},
 ];
 
 const tabsComponentMapping = {
 	new_awb          : NewAWB,
 	approval_pending : ApprovalPending,
 	approved_awb     : ApprovedAWB,
+	final_awb        : FinalAWB,
 };
 
 function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
