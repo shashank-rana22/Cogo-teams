@@ -16,6 +16,7 @@ function ViewInvoices() {
 		collectionPartyRemark : '',
 		billingPartyRemark    : '',
 		invoiceDetailsRemark  : '',
+		taggingRemark         : '',
 	});
 	const [overAllRemark, setOverAllRemark] = useState('');
 	const [lineItemsRemarks, setLineItemsRemarks] = useState({});
@@ -39,7 +40,7 @@ function ViewInvoices() {
 				jobNumber={jobNumber}
 				status={status}
 			/>
-			<Tagging billId={billId} />
+			<Tagging billId={billId} status={status} setRemarksVal={setRemarksVal} />
 			<SupplierDetails
 				data={fullResponse}
 				paymentsData={paymentsData}

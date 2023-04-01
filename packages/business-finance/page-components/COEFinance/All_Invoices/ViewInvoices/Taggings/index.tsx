@@ -1,23 +1,53 @@
 import { Accordion } from '@cogoport/components';
-import React from 'react';
+import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 import TagMap from './TagMap';
 
-function Tagging({ billId }:
-{ billId: string }) {
+function Tagging({ billId, status, setRemarksVal }:
+{ billId: string, status?:string, setRemarksVal: React.Dispatch<React.SetStateAction<{
+	collectionPartyRemark: string;
+	billingPartyRemark: string;
+	invoiceDetailsRemark: string;
+	taggingRemark:string
+}>> }) {
+	const [value, setValue] = useState({ approve: '', reject: '', undo: '', remark: '' });
+	const showIcon = () => {
+		if (value?.approve === 'approve') {
+			return <IcCFtick height="17px" width="17px" />;
+		} if (value?.reject === 'reject') {
+			return (
+				<div className={styles.color_reject}>
+					<IcMCrossInCircle height="17px" width="17px" />
+				</div>
+			);
+		}
+		return null;
+	};
+
 	return (
 		<div className={styles.container}>
 			<Accordion
 				type="text"
 				title={(
-					<div className={styles.heading}>
-						<div className={styles.business_name}>Invoice Tagging</div>
+					<div className={styles.heading_data}>
+						<div className={styles.business_name}>
+							Invoice Tagging
+							{' '}
+							{showIcon()}
+						</div>
 					</div>
 				)}
 			>
 				<div className={styles.line} />
-				<TagMap billId={billId} />
+				<TagMap
+					billId={billId}
+					status={status}
+					value={value}
+					setValue={setValue}
+					setRemarksVal={setRemarksVal}
+				/>
 			</Accordion>
 		</div>
 	);

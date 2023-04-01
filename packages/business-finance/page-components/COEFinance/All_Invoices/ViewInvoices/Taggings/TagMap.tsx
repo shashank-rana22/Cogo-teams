@@ -1,21 +1,56 @@
-import { Button, Placeholder } from '@cogoport/components';
+import { Button, Placeholder, Modal, Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import { useState } from 'react';
 
 import useGetTaggingBills from '../../../hook/useGetMappings';
 
 import styles from './styles.module.css';
 import { TagCard } from './TagCard';
 
-function TagMap({ billId }: { billId: string }) {
+function TagMap({
+	billId, status,
+	value, setValue, setRemarksVal,
+}: { billId: string, status?:string, value?:{ approve?:string, reject?:string, undo?:string, remark:string },
+	setValue: React.Dispatch<React.SetStateAction<{
+		approve: string;
+		reject: string;
+		undo: string;
+		remark:string
+	}>>, setRemarksVal: React.Dispatch<React.SetStateAction<{
+		collectionPartyRemark: string;
+		billingPartyRemark: string;
+		invoiceDetailsRemark: string;
+		taggingRemark: string;
+	}>> }) {
 	const { mappingsData, loading } = useGetTaggingBills({
 		billId,
 	});
+	const [approve, setApprove] = useState(false);
 
 	const classname = !isEmpty(mappingsData?.merge) ? 'merge' : '';
+	const isInvoiceApproved = status === 'FINANCE_ACCEPTED';
+
+	const handleClickApprove = (label:string) => {
+		setValue((prev) => ({ ...prev, approve: label, undo: 'undo' }));
+	};
+
+	const handleClickReject = () => {
+		setApprove(true);
+	};
+	const handleSubmitReject = (label: string) => {
+		setValue((prev) => ({ ...prev, reject: label, undo: 'undo' }));
+		setRemarksVal((prev) => ({ ...prev, taggingRemark: value?.remark }));
+		setApprove(false);
+	};
+	const handleClickUndo = () => {
+		if (value?.undo === 'undo') {
+			setValue((prev) => ({ ...prev, reject: '', approve: '' }));
+		}
+	};
 
 	return (
 		<>
+
 			<div>
 				{!loading ? (
 					<div className={`${styles.flex} ${classname === 'merge' ? styles.merge : ''}`}>
@@ -35,23 +70,112 @@ function TagMap({ billId }: { billId: string }) {
 					</div>
 				) : <Placeholder width="100%" height="200px" />}
 			</div>
-			{!isEmpty(mappingsData) && (
-				<div className={styles.button_container}>
-					<Button
-						size="md"
-						themeType="secondary"
-					>
-						Approve
-					</Button>
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ border: '1px solid #ed3726', marginLeft: '10px' }}
-					>
-						Reject
-					</Button>
+
+			{!isInvoiceApproved && (
+				<div>
+					{value?.approve === 'approve' || value?.reject === 'reject' ? (
+						<div
+							className={styles.button_container}
+							onClick={() => {
+								handleClickUndo();
+							}}
+							role="presentation"
+						>
+							<Button size="md" themeType="secondary">
+								Undo
+							</Button>
+						</div>
+					) : (
+						<div className={styles.button_container}>
+							<Button
+								disabled={status !== 'INITIATED'}
+								size="md"
+								themeType="secondary"
+								onClick={() => {
+									handleClickApprove('approve');
+								}}
+							>
+								Approve
+							</Button>
+							<Button
+								disabled={status !== 'INITIATED'}
+								size="md"
+								themeType="secondary"
+								style={{ border: '1px solid #ed3726' }}
+								onClick={() => {
+									handleClickReject();
+								}}
+							>
+								Reject
+							</Button>
+						</div>
+					)}
 				</div>
 			)}
+			{approve && (
+				<Modal
+					size="md"
+					show={approve}
+					onClose={() => {
+						setApprove(false);
+					}}
+				>
+					<Modal.Body>
+						<div className={styles.heading}>
+							Are you sure you want to
+							{' '}
+							Reject
+							{' '}
+							this Tagging ?
+						</div>
+						<Textarea
+							name="remark"
+							size="md"
+							placeholder="Remarks Here ..."
+							value={value?.remark}
+							onChange={(val: string) => setValue((prev) => ({ ...prev, remark: val }))}
+							style={{ width: '700', height: '100px', marginBottom: '12px' }}
+						/>
+						<div className={styles.button}>
+							<Button
+								size="md"
+								themeType="secondary"
+								style={{ marginRight: '8px' }}
+								onClick={() => {
+									setApprove(false);
+								}}
+							>
+								No
+							</Button>
+							<Button
+								size="md"
+								style={{ marginRight: '8px' }}
+								disabled={!(value?.remark?.length > 0)}
+								onClick={() => handleSubmitReject('reject')}
+							>
+								Yes
+							</Button>
+						</div>
+					</Modal.Body>
+				</Modal>
+			)}
+			{/* {!isEmpty(mappingsData) && ( */}
+			{/* <div className={styles.button_container}>
+				<Button
+					size="md"
+					themeType="secondary"
+				>
+					Approve
+				</Button>
+				<Button
+					size="md"
+					themeType="secondary"
+					style={{ border: '1px solid #ed3726', marginLeft: '10px' }}
+				>
+					Reject
+				</Button>
+			</div> */}
+			{/* )} */}
 		</>
 
 	);
