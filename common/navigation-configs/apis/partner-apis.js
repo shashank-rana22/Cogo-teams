@@ -11133,6 +11133,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'convert_importer_exporter_to_channel_partner',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	analytics_dashboard: [
 		{
