@@ -47,6 +47,8 @@ function CardItem({
 		loading,
 		list: { fullResponse },
 		config,
+		filters,
+		hookSetters,
 	} = useListBills({
 		jobNumber,
 		amountTab,
@@ -99,8 +101,12 @@ function CardItem({
 						functions={functions}
 						loading={loading}
 						page={pageIndex}
-						pageSize={totalRecords}
+						pageSize={10}
 						showPagination
+						handlePageChange={(val: number) => hookSetters.setFilters({
+							...filters,
+							page: val,
+						})}
 					/>
 				)}
 			</div>
