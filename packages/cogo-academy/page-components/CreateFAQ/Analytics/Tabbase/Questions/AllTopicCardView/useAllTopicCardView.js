@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { addHours, addMinutes } from '@cogoport/utils';
@@ -41,10 +42,11 @@ function useAllTopicCardView({ date = '' }) {
 						pagination_data_required    : true,
 						current_topic_data_required : true,
 						sort_by                     : 'view_count',
+						is_admin_view               : true,
 					},
 				});
 			} catch (error) {
-				console.log('error :: ', error);
+				Toast.error(error?.message);
 			}
 		},
 		[formatStartDate, formatEndDate, page, trigger],

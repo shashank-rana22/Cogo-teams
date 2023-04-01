@@ -1312,6 +1312,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
+	{
+		api          : 'bulk_create_shipment_ftl_freight_additional_services',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_ftl_freight_additional_service',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
