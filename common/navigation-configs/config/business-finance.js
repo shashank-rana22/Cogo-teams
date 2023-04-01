@@ -16,6 +16,10 @@ const businessFinance = {
 		navigation : 'business_finance-account_receivables',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/account-payables/[active_tab]': {
+		navigation : 'business_finance-account_payables',
+		isMainNav  : true,
+	},
 	'/[partner_id]/business-finance/translate-account-receivables/[activeTab]': {
 		navigation : 'business_finance-account_receivables_translate',
 		isMainNav  : true,
@@ -29,9 +33,8 @@ const businessFinance = {
 		navigation : 'business_finance-reports',
 		isMainNav  : true,
 	},
-
-	'/[partner_id]/business-finance/account-payables/[active_tab]': {
-		navigation : 'business_finance-account_payables',
+	'/[partner_id]/business-finance/cfo-dashboard/[activeTab]': {
+		navigation : 'business_finance-cfo_dashboard',
 		isMainNav  : true,
 	},
 

@@ -1,4 +1,5 @@
 import {
+	DateRangepicker,
 	Textarea,
 	Input,
 	Modal,
@@ -209,6 +210,15 @@ function Element({
 							{...rest}
 						/>
 					</div>
+				);
+			case 'dateRangepicker':
+				return (
+					<DateRangepicker
+						name="date"
+						value={value as SelectedProp}
+						style={style as CSSProperties}
+						{...rest}
+					/>
 				);
 
 			case 'serviceType':
