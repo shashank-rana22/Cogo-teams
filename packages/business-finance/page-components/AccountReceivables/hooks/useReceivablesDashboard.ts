@@ -82,14 +82,6 @@ const useReceivablesDashboard = () => {
 		{ manual: true },
 	);
 
-	// const kamOutstandingApi = useCallback(async () => {
-	// 	try {
-	// 		kamOutstandingTrigger();
-	// 	} catch (e) {
-	// 		Toast.error(e?.error?.message || 'Something went wrong');
-	// 	}
-	// }, [kamOutstandingTrigger]);
-
 	const [
 		{ data: dailySalesOutstandingData, loading: dailySalesOutstandingApiLoading },
 		dailySalesOutstandingTrigger,
@@ -151,7 +143,7 @@ const useReceivablesDashboard = () => {
 		{
 			url     : '/payments/dashboard/outstanding',
 			method  : 'get',
-			authKey : 'get_payments_dashboard_outstanding',
+			authKey : 'get_payments_dashboard_outstanding_entity_code',
 		},
 		{ manual: true },
 	);
