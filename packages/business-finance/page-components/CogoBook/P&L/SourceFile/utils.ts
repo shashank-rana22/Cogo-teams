@@ -8,8 +8,8 @@ export function OptionMonth() {
 
 	useEffect(() => { refetch(); }, [refetch]);
 
-	return (month || [{}])?.map((item) => ({
-		label : format((item), 'MMM yyyy'),
-		value : format((item), 'yyyy-MM-01'),
+	return (month || [{}])?.map((item:Date) => ({
+		label : format(item, 'MMM yyyy'),
+		value : format(item, 'yyyy-MM-01'),
 	}));
 }

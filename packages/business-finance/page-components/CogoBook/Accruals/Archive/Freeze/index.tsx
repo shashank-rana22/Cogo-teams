@@ -6,7 +6,7 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 
 interface FreezeInterface {
-	item?:{ period?:number, periodName?:string, isLocked?:boolean }
+	item?:{ period?:Date, periodName?:string, isLocked?:boolean }
 	refetch?:Function
 }
 

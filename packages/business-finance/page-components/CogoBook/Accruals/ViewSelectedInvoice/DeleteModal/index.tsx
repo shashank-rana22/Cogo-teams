@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 interface DeleteInterface {
 	openDeleteModal?: object
-	handleCloseModal?:Function
+	handleCloseModal?: () => void
 	setOpenDeleteModal?: React.Dispatch<React.SetStateAction<{}>>
 	deleteSelected?: Function
 	id?: string
@@ -14,7 +14,7 @@ function DeleteModal({
 	id:idData,
 }:DeleteInterface) {
 	return (
-		<Modal show={openDeleteModal} onClose={handleCloseModal}>
+		<Modal show={openDeleteModal[idData]} onClose={handleCloseModal}>
 			<Modal.Body>
 				<div
 					className={styles.flex_modal}

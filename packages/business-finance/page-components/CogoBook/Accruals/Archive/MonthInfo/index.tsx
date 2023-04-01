@@ -19,7 +19,7 @@ interface MonthInterface {
 		actualExpense?:string
 		actualIncome?:string
 	}
-	handleClick?:Function
+	handleClick?: () => void
 	loading?:boolean
 }
 
