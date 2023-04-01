@@ -6,12 +6,6 @@ import { isEmpty } from '@cogoport/utils';
 
 import getAddRuleControls from '../configurations/get-add-rule-controls';
 
-const ATTRIBUTE_MAPPING = {
-	account  : 'account_attribute',
-	shipment : 'shipment_attribute',
-	misc     : 'misc_attribute',
-};
-
 function useUpdateEvent(props) {
 	const {
 		eventListData = {}, listRefetch = () => {}, attributeList = [],
@@ -32,7 +26,6 @@ function useUpdateEvent(props) {
 		event_state_on : eventStateOn,
 		description : eventDescription,
 		rule_mapping_id : ruleMappingId,
-		rules,
 	} = eventData;
 
 	const formProps = useForm({
@@ -42,7 +35,6 @@ function useUpdateEvent(props) {
 			condition_name : conditionName,
 			event_state_on : eventStateOn,
 			description    : eventDescription,
-			attribute      : ATTRIBUTE_MAPPING[rules?.[0]?.rule_type],
 		},
 	});
 

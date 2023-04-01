@@ -52,7 +52,8 @@ function CreateEvent(props) {
 		<div>
 			<div className={styles.create_new_event}>
 				<p>
-					{createEventMode ? 'Create' : 'Update' }
+					{createEventMode ? 'Create' : 'Update'}
+					{' '}
 					New Event
 				</p>
 			</div>

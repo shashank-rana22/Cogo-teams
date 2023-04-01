@@ -1,4 +1,5 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, Tooltip } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../../common/EmptyState';
@@ -65,7 +66,7 @@ function AttributePage(props) {
 
 			<section className={styles.row_container}>
 				{attributeList.map((controlItem, index) => {
-					const { name = '', parameters, options = [] } = controlItem;
+					const { name = '', description, parameters, options = [] } = controlItem;
 					const { params_type } = parameters || {};
 
 					const controlsObject = getEventControlType({ name, options });
@@ -83,11 +84,22 @@ function AttributePage(props) {
 					return (
 
 						<div className={styles.attribute_form_group}>
-							<span className={styles.label}>{el.label}</span>
+							<span className={styles.label}>
+								{el.label}
+								{' '}
+								<Tooltip content={description} placement="top">
+									<IcMInfo
+										width={14}
+										height={14}
+										style={{ margin: '4px 0px 0px 4px' }}
+									/>
+								</Tooltip>
+
+							</span>
 
 							<div
 								className={`${styles.input_group}
-                            ${index < attributeList.length ? styles.margin_bottom : ''}`}
+								${index < attributeList.length ? styles.margin_bottom : ''}`}
 							>
 								<Element
 									{...el}
