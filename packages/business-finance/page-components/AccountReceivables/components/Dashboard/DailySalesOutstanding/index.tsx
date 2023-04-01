@@ -27,8 +27,6 @@ function DailySalesOutstanding({
 	dailySalesOutstandingData,
 	dailySalesOutstandingApiLoading, quaterly, quaterlyLoading,
 }: DailySalesProps) {
-	console.log('dailySalesOutstandingData', dailySalesOutstandingData);
-
 	interface Props {
 		quarterView?: string;
 		graphView?: string;

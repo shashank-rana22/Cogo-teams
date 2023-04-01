@@ -1909,6 +1909,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
 	},
+	vendor_rm: {
+		key           : 'vendor_rm',
+		title         : 'VRM',
+		icon          : IcMCrm,
+		href          : '/v2/vendors',
+		as            : '/v2/vendors',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.vendor_rm_apis,
+		module_type   : 'crm',
+	},
 	ticket_management: {
 		key       : 'ticket_management',
 		title     : 'Ticket Management',
