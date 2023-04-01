@@ -1782,6 +1782,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/core-engine',
 				possible_apis : apis.allocation_engine,
 			},
+			{
+				key           : 'allocations-crm_feedback_dashboard',
+				title         : 'CRM Feedback Dashboard',
+				href          : '/v2/allocation/crm-feedback-dashboard',
+				as            : '/v2/allocation/crm-feedback-dashboard',
+				possible_apis : apis.crm_feedback_dashboard,
+			},
 		],
 	},
 	kam_monitoring: {
