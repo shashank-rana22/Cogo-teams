@@ -22,8 +22,6 @@ function CFODashboard() {
 		<div>
 			<div className={styles.header}>
 				Business Finance Dashboard
-				{/* {query?.activeTab === 'logistics' ?
-				'Business Finance Dashboard - India' : 'Business Finance Dashboard'} */}
 			</div>
 			<div className={styles.tabs_container}>
 				<Tabs

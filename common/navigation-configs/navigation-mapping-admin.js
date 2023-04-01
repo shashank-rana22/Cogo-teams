@@ -837,7 +837,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'business_finance-cfo_dashboard',
-				title         : 'CFO Dashboard',
+				title         : 'Finance Dashboard',
 				href          : '/v2/business-finance/cfo-dashboard/[activeTab]',
 				as            : '/v2/business-finance/cfo-dashboard/logistics',
 				type          : 'link',
