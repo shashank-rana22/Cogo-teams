@@ -6736,7 +6736,7 @@ const partner = {
 	],
 	cogo_book: [
 		{
-			api         : 'get_pnl_accrual_archive-shipment_list',
+			api         : 'get_pnl_accrual_archive_shipment_list',
 			access_type : 'private',
 		},
 		{
@@ -6870,6 +6870,10 @@ const partner = {
 		},
 		{
 			api         : 'post_pnl_statement_turnover_ratios',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_statement_turnover_ratios',
 			access_type : 'private',
 		},
 		{
