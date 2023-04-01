@@ -836,6 +836,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.incident_controller,
 			},
 			{
+				key           : 'business_finance-cfo_dashboard',
+				title         : 'Finance Dashboard',
+				href          : '/v2/business-finance/cfo-dashboard/[activeTab]',
+				as            : '/v2/business-finance/cfo-dashboard/logistics',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cfo_dashboard,
+			},
+			{
 				key           : 'business_finance-manual_invoice',
 				title         : 'Manual Invoice',
 				href          : '/business-finance/manual-invoice',
@@ -898,6 +907,7 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
+
 	incentives: {
 		key       : 'incentives',
 		title     : 'Incentives/KPI',
