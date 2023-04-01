@@ -29,6 +29,10 @@ const businessFinance = {
 		navigation : 'business_finance-reports',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/cfo-dashboard/[activeTab]': {
+		navigation : 'business_finance-cfo_dashboard',
+		isMainNav  : true,
+	},
 
 	'/[partner_id]/business-finance/cogo-book/[active_tab]': {
 		navigation: 'business_finance-cogo_book',
