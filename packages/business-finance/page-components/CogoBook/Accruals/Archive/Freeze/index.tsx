@@ -37,7 +37,6 @@ function Freeze({ item, refetch }) {
 			setShowConfirmationModal(false);
 			refetch();
 		} catch (error) {
-			console.log(error);
 			Toast.error(error?.response?.data?.message);
 		}
 	};

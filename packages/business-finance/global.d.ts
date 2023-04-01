@@ -8,15 +8,4 @@ declare module '@cogoport/utils';
 declare module '@cogoport/components';
 declare module '@cogoport/next';
 declare module '@cogoport/forms';
-declare module '@cogoport/business-finance/page-components/TranslateAr';
-declare module '@cogoport/business-finance/page-components/IncidentManagement'
-declare module '@cogoport/business-finance/page-components/COEFinance';
-declare module '@cogoport/business-finance/page-components/COEFinance/Costsheet';
-declare module '@cogoport/business-finance/page-components/COEFinance/All_Invoices/ViewInvoices';
-declare module '@cogoport/business-finance/page-components/Reports';
-declare module '@cogoport/business-finance/page-components/CogoBook'
-declare module '@cogoport/business-finance/page-components/CogoBook/Accruals/ViewSelectedInvoice'
-declare module '@cogoport/business-finance/page-components/CogoBook/P&L/SourceFile/UploadReport'
-declare module '@cogoport/business-finance/page-components/AccountReceivables/components';
-declare module '@cogoport/business-finance/page-components/CogoBook/P&L/SourceFile/ViewData'
 declare module '@cogoport/business-finance/page-components/*';

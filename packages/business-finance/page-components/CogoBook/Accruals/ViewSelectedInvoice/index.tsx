@@ -142,7 +142,7 @@ function ViewSelectedInvoice() {
 							<div className={styles.flex}>
 								<Button
 									id="cancel-modal-btn"
-									style={{ marginRight: 10 }}
+									style={{ marginRight: '10px' }}
 									themeType="secondary"
 									onClick={() => { setBulkModal(false); }}
 								>
