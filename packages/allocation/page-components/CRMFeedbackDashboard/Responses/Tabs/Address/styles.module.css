@@ -1,0 +1,17 @@
+.container {
+	margin-top: 30px;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 12px;
+}
+
+.empty {
+	display: flex;
+	flex-direction: column;
+	margin-top: 16px;
+	overflow: hidden;
+	border-radius: 8px;
+}

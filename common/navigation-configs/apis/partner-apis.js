@@ -4201,6 +4201,12 @@ const partner = {
 			feature      : 'rfq',
 		},
 		{
+			api          : 'create_rfq_supply_agent_preference',
+			access_type  : 'private',
+			service_name : 'rfq',
+			feature      : 'rfq',
+		},
+		{
 			api          : 'get_contract_previous_service_providers',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
@@ -7504,13 +7510,19 @@ const partner = {
 			feature     : 'Dashboard',
 		},
 		{
-			api         : 'get_payments_dashboard_invoice_timeline',
+			api         : 'get_payments_dashboard_invoice_tat_stats',
 			access_type : 'private',
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
 		},
 		{
 			api         : 'get_payments_dashboard_daily_sales_statistics',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'list_cogo_entities',
 			access_type : 'private',
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
