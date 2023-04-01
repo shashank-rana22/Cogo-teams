@@ -288,7 +288,7 @@ function ExpenseComponent() {
 					{status !== 'INITIATED' ? (
 						<div style={{ fontSize: '12px' }}>
 							<div>{name}</div>
-							<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) }</div>
+							<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) || '-' }</div>
 						</div>
 					) : (
 						<>
@@ -332,14 +332,16 @@ function ExpenseComponent() {
 				<div>
 					{proofDocuments.map((proof:string) => (
 						<div key={proof}>
-							<a
-								href={proof}
-								className={styles.multiple_proof}
-								target="_blank"
-								rel="noreferrer"
-							>
-								{proof}
-							</a>
+							{proof && (
+								<a
+									href={proof}
+									className={styles.multiple_proof}
+									target="_blank"
+									rel="noreferrer"
+								>
+									{proof}
+								</a>
+							)}
 						</div>
 					))}
 				</div>
@@ -394,7 +396,7 @@ function ExpenseComponent() {
 			const amount = `${billCurrency} ${grandTotal}`;
 			return (
 				<div>
-					{showOverflowingNumber(amount, 12)}
+					{showOverflowingNumber(amount || '', 12)}
 				</div>
 			);
 		},
@@ -403,7 +405,7 @@ function ExpenseComponent() {
 			const amount = `${billCurrency} ${payableTds}`;
 			return (
 				<div>
-					{showOverflowingNumber(amount, 12)}
+					{showOverflowingNumber(amount || '', 12)}
 				</div>
 			);
 		},
@@ -412,7 +414,7 @@ function ExpenseComponent() {
 			const amount = `${billCurrency} ${paidAmount}`;
 			return (
 				<div>
-					{showOverflowingNumber(amount, 12)}
+					{showOverflowingNumber(amount || '', 12)}
 				</div>
 			);
 		},
@@ -447,8 +449,6 @@ function ExpenseComponent() {
 		loading = listLoading;
 	}
 
-	const isListEmpty = listItemData?.list?.length === 0;
-
 	return (
 		<div className={styles.expense_container}>
 			<div className={styles.segmented_control}>
@@ -477,18 +477,6 @@ function ExpenseComponent() {
 					showPagination
 					renderDropdown={showDropDown}
 				/>
-				<div>
-					{isListEmpty
-					&& (
-						<div className={styles.no_data}>
-							<img
-								style={{ width: '26%', margin: '10%' }}
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no result.svg"
-								alt="no data"
-							/>
-						</div>
-					)}
-				</div>
 
 			</div>
 

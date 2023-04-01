@@ -109,9 +109,15 @@ const useListEnrichment = () => {
 		{
 			id       : 'business_name',
 			Header   : 'ORGANIZATION',
-			accessor : ({ organization }) => (
+			accessor : ({ organization, lead_organization, lead_organization_id }) => (
 				<section>
-					{(organization || {}).business_name || '-'}
+					{
+						lead_organization_id ? (
+							(lead_organization || {}).business_name || '-'
+						) : (
+							(organization || {}).business_name || '-'
+						)
+					}
 				</section>
 			),
 		},
@@ -133,9 +139,15 @@ const useListEnrichment = () => {
 		{
 			id       : 'registration_number',
 			Header   : 'PAN',
-			accessor : ({ organization }) => (
+			accessor : ({ organization, lead_organization, lead_organization_id }) => (
 				<section>
-					{(organization || {}).registration_number || '-'}
+					{
+						lead_organization_id ? (
+							(lead_organization || {}).registration_number || '-'
+						) : (
+							(organization || {}).registration_number || '-'
+						)
+					}
 				</section>
 			),
 		},

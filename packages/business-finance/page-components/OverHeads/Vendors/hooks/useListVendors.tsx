@@ -11,7 +11,7 @@ const useListVendors = ({ filters, sort }) => {
 		{
 			url     : '/purchase/expense/list-vendors',
 			method  : 'get',
-			authKey : 'list_vendors',
+			authKey : 'get_purchase_expense_list_vendors',
 		},
 		{ manual: true, autoCancel: false },
 	);

@@ -794,7 +794,7 @@ const navigationMappingAdmin = {
 				key           : 'business_finance-account_receivables',
 				title         : 'AR',
 				href          : '/v2/business-finance/account-receivables/[active_tab]',
-				as            : '/v2/business-finance/account-receivables/outstanding',
+				as            : '/v2/business-finance/account-receivables/dashboard',
 				type          : 'link',
 				main_apis     : ['list_organizations'],
 				possible_apis : apis.account_receivables,
@@ -834,6 +834,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.incident_controller,
+			},
+			{
+				key           : 'business_finance-cfo_dashboard',
+				title         : 'Finance Dashboard',
+				href          : '/v2/business-finance/cfo-dashboard/[activeTab]',
+				as            : '/v2/business-finance/cfo-dashboard/logistics',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cfo_dashboard,
 			},
 			{
 				key           : 'business_finance-manual_invoice',
@@ -898,6 +907,7 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
+
 	incentives: {
 		key       : 'incentives',
 		title     : 'Incentives/KPI',
@@ -1772,6 +1782,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/core-engine',
 				possible_apis : apis.allocation_engine,
 			},
+			{
+				key           : 'allocations-crm_feedback_dashboard',
+				title         : 'CRM Feedback Dashboard',
+				href          : '/v2/allocation/crm-feedback-dashboard',
+				as            : '/v2/allocation/crm-feedback-dashboard',
+				possible_apis : apis.crm_feedback_dashboard,
+			},
 		],
 	},
 	kam_monitoring: {
@@ -1890,6 +1907,17 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		main_apis     : ['list_auth_roles'],
 		possible_apis : apis.roles_permissions,
+		module_type   : 'crm',
+	},
+	vendor_rm: {
+		key           : 'vendor_rm',
+		title         : 'VRM',
+		icon          : IcMCrm,
+		href          : '/v2/vendors',
+		as            : '/v2/vendors',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.vendor_rm_apis,
 		module_type   : 'crm',
 	},
 	ticket_management: {
