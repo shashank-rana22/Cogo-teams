@@ -16,7 +16,7 @@ function Header() {
 		audit_data = {},
 	} = listKamExpertiseCurrentConfigs;
 
-	const liveVersion = data.filter((item) => item.status_value === 'active')?.[0]?.version_number || 'NA';
+	const liveVersion = data.filter((item) => item.status === 'live')?.[0]?.version_number || 'NA';
 
 	return (
 		<div className={styles.container}>
@@ -24,7 +24,8 @@ function Header() {
 				<div style={{ fontSize: '18px', marginBottom: '4px' }}>
 					Current Configuration :
 					{' '}
-
+					Version
+					{' '}
 					<b>{liveVersion}</b>
 				</div>
 

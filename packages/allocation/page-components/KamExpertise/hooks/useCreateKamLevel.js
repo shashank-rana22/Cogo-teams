@@ -6,15 +6,15 @@ import { useAllocationRequest } from '@cogoport/request';
 const expertiseTypes = {
 	minimum_transacting_accounts: {
 		expertise_type       : 'transacting_accounts',
-		threshold_score_type : 'Minimum Transacting Accounts',
+		threshold_score_type : 'minimum_transacting_accounts',
 	},
 	retained_account_count: {
 		expertise_type       : 'transacting_accounts',
-		threshold_score_type : 'Retained Account Count',
+		threshold_score_type : 'retained_account_count',
 	},
 	retained_account_min_duration: {
 		expertise_type       : 'transacting_accounts',
-		threshold_score_type : 'Retained Account Min Duration',
+		threshold_score_type : 'retained_account_min_duration',
 	},
 };
 
@@ -22,6 +22,7 @@ function useCreateKamLevel(props) {
 	const { dataLength = '', setCreateKam, refetch } = props;
 
 	const formProps = useForm();
+
 	const { reset } = formProps;
 
 	const [{ loading:createLoading = false }, trigger] = useAllocationRequest({
@@ -36,7 +37,7 @@ function useCreateKamLevel(props) {
 		Object.keys(formValues).forEach((key) => {
 			let expertise_type = key;
 			const threshold_score = Number(formValues[key]);
-			let threshold_score_type = 'Score';
+			let threshold_score_type = 'score';
 
 			if (expertiseTypes[key]) {
 				expertise_type = expertiseTypes[key].expertise_type;
@@ -56,6 +57,7 @@ function useCreateKamLevel(props) {
 				configuration_type    : 'kam',
 				configuration_details : configDetails,
 			};
+
 			await trigger({
 				data: payload,
 			});
@@ -63,6 +65,7 @@ function useCreateKamLevel(props) {
 			setCreateKam(false);
 			reset({ configDetails: '' });
 			refetch();
+
 			Toast.success('Level Added!');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));

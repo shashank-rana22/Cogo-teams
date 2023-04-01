@@ -1,40 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import { Collapse } from '@cogoport/components';
+import { useState } from 'react';
 
-import CollapseComponent from './CollapseComponent';
-import KamLevelCard from './CollapseComponent/KamLevelCard';
-import KamLevelDropDown from './CollapseComponent/KamLevelDropDown';
+import LoadingState from '../LoadingState';
+
+import Footer from './Footer';
 import Header from './Header';
+import KamLevelCard from './KamLevelCard';
+import KamLevelDropDown from './KamLevelDropDown';
+import styles from './styles.module.css';
 
-function KamLevel({
-	setMainLoading,
-	levelLoading,
-	kamConfigDetails,
-	refetch,
-	cardRefetch,
-}) {
+function KamLevel(props) {
+	const {
+		levelLoading,
+		kamConfigDetails,
+		refetch,
+		cardRefetch,
+	} = props;
+
 	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
 
-	useEffect(() => {
-		setMainLoading(levelLoading);
-	}, [levelLoading, setMainLoading]);
+	const { audit_data : auditData = {}, data : kamConfigLevelDetails = [] } = kamConfigDetails;
 
-	const auditData = kamConfigDetails?.audit_data || {};
-	const kamConfigLevelDetails = kamConfigDetails?.data || [];
-
+	// Todo : remove dataLength looks unrequired with transition level
 	const dataLength = kamConfigLevelDetails.length;
+
 	const options = kamConfigLevelDetails.map((data, index) => (
 		{
-			key   : data.transition_level,
-			title : <KamLevelCard
+			key: data.transition_level,
+
+			title: <KamLevelCard
 				data={data}
-				activeCard={activeCard}
-				setActiveCard={setActiveCard}
-				id={data.transition_level}
+				isActiveCard={activeCard === data?.transition_level}
 				refetch={refetch}
 				isLastCard={dataLength === index + 1}
 				cardRefetch={cardRefetch}
 			/>,
+
 			children: <KamLevelDropDown
 				refetch={refetch}
 				transition_level={data.transition_level}
@@ -44,22 +46,34 @@ function KamLevel({
 
 	return (
 		<section>
+
 			<Header
 				auditData={auditData}
 				levelLoading={levelLoading}
 			/>
 
-			<CollapseComponent
-				options={options}
-				createKam={createKam}
-				setActiveCard={setActiveCard}
-				activeCard={activeCard}
-				setCreateKam={setCreateKam}
-				dataLength={dataLength}
-				refetch={refetch}
-				levelLoading={levelLoading}
-			/>
+			{ levelLoading
+				? (<LoadingState columnsToLoad={4} />)
+				: (
+					<Collapse
+						panels={options}
+						activeKey={activeCard}
+						setActive={setActiveCard}
+						type="text"
+						className={styles.collapse}
+					/>
+				)}
+
+			<div className={styles.response_card}>
+				<Footer
+					createKam={createKam}
+					setCreateKam={setCreateKam}
+					dataLength={dataLength}
+					refetch={refetch}
+				/>
+			</div>
 		</section>
 	);
 }
+
 export default KamLevel;

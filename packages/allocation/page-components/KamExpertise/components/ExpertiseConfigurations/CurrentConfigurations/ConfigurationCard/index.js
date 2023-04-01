@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 
 import CardItem from './CardItem';
 import styles from './styles.module.css';
@@ -35,20 +35,20 @@ const HEADING_MAPPING = {
 };
 
 function ConfigurationCard(props) {
-	const { version_number, status_value = '', list = [], audit_data = {}, total_levels } = props;
+	const { version_number, status = '', expertise_details = [], audit_data = {}, total_levels } = props;
 
 	return (
 		<div className={styles.card_container}>
 			<div className={styles.card_header}>
 				<div className={styles.left_header}>
-					{HEADING_MAPPING[status_value || ''](version_number || '')}
+					{HEADING_MAPPING[status || ''](version_number || '')}
 
 					<Pill
 						size="lg"
-						color={STATUS_COLOR_MAPPING[status_value]}
+						color={STATUS_COLOR_MAPPING[status]}
 						style={{ marginRight: '28px' }}
 					>
-						{status_value === 'active' ? 'Live' : status_value}
+						{startCase(status)}
 
 					</Pill>
 					<div style={{ marginRight: '28px' }}>
@@ -86,7 +86,7 @@ function ConfigurationCard(props) {
 			</div>
 
 			<div className={styles.cards}>
-				{list.map((item) => <CardItem key={item.id} {...item} />)}
+				{expertise_details.map((item) => <CardItem key={item.id} {...item} />)}
 			</div>
 		</div>
 	);

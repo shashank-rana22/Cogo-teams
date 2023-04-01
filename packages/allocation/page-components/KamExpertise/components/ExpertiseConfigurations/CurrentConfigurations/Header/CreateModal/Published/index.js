@@ -48,7 +48,7 @@ function Published({ setSelectedVersion = () => {}, data }) {
 		if (element.status_value !== 'draft') {
 			table.push({
 				version_number : element?.version_number || '',
-				status         : element?.status_value || '',
+				status         : element?.status || '',
 				updated_at     : element?.audit_data?.updated_at || '',
 
 			});

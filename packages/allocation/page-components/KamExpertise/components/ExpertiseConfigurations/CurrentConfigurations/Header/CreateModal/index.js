@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function CreateModal({ setMode, data }) {
-	const drafts = data.filter((item) => item.status_value === 'draft');
+	const drafts = data.filter((item) => item.status === 'draft');
 
 	return (
 		<div className={styles.modal_container}>

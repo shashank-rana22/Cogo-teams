@@ -54,7 +54,6 @@ function PublishVersionModal({
 					themeType="primary"
 					onClick={() => {
 						onCreate();
-						// setPublish(true);
 					}}
 					loading={publishLoading}
 				>

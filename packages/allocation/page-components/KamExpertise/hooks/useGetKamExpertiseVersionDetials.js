@@ -1,17 +1,13 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const useGetKamExpertiseVersionDetials = (props) => {
 	const {
-		setResponseId,
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
-		responseId,
-		onPublish = '',
-		setOnPublish,
 	} = props;
 
 	const [selectedVersion, setSelectedVersion] = useState('');
@@ -27,32 +23,23 @@ const useGetKamExpertiseVersionDetials = (props) => {
 	const getVersion = async () => {
 		try {
 			const payload = {
-				action_type    : mode,
-				version_number : selectedVersion || undefined,
+				// action_type    : mode,
+				// version_number : selectedVersion || undefined,
+				name: 'draft4', //! hardcoded needs to be changed
 			};
-			const res = await trigger({ params: payload });
+			await trigger({ params: payload });
 
-			if (!res.hasError) {
-				setMode('initial-mode');
-				setShowModal(false);
-				setResponseId(res);
-				setSelectedVersion('');
-				Toast.success('Version selected successfully');
-			}
+			setMode('initial-mode');
+			setShowModal(false);
+			refetch();
+			expertiseRefetch();
+			cardRefetch();
+			setSelectedVersion('');
+			Toast.success('Version selected successfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
-
-	useEffect(() => {
-		if (responseId || onPublish) {
-			refetch();
-			expertiseRefetch();
-			cardRefetch();
-			setResponseId('');
-			setOnPublish('');
-		}
-	}, [cardRefetch, expertiseRefetch, refetch, responseId, onPublish, setOnPublish, setResponseId]);
 
 	return {
 		selectedVersion,

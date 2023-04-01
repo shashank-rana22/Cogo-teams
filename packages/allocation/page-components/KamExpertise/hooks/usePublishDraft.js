@@ -2,7 +2,14 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-const usePublishDraft = ({ setShowPublishModal = () => {}, setOnPublish }) => {
+const usePublishDraft = (props) => {
+	const {
+		setShowPublishModal,
+		refetch,
+		expertiseRefetch,
+		cardRefetch,
+	} = props;
+
 	const [{ loading }, trigger] = useAllocationRequest({
 		method  : 'POST',
 		url     : '/kam_expertise_publishability',
@@ -21,7 +28,11 @@ const usePublishDraft = ({ setShowPublishModal = () => {}, setOnPublish }) => {
 
 			setShowPublishModal(false);
 
-			setOnPublish('Button Clicked');
+			refetch();
+
+			expertiseRefetch();
+
+			cardRefetch();
 
 			Toast.success('Version Published Successfully');
 		} catch (err) {

@@ -1,7 +1,7 @@
 import { Collapse, Button, Modal } from '@cogoport/components';
 import { IcMAgentManagement } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
 import FieldArray from '../../../../../../common/Form/FieldArray';
@@ -52,7 +52,6 @@ const titleSection = (expertiseItem = {}) => (
 );
 
 function KamExpertiseScoreConfig({
-	setMainLoading,
 	listExpertiseParams,
 	expertiseLoading,
 	expertiseRefetch,
@@ -67,10 +66,6 @@ function KamExpertiseScoreConfig({
 	const onClose = () => {
 		setAddConditionModal({});
 	};
-
-	useEffect(() => {
-		setMainLoading(expertiseLoading);
-	}, [expertiseLoading, setMainLoading]);
 
 	const { list = [], audit_data: auditData = {} } = listExpertiseParams || {};
 

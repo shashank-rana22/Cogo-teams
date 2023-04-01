@@ -31,49 +31,41 @@ function Header(props) {
 		audit_data = {},
 		LIVE_VERSION,
 		data = [],
-		setResponseId,
-		responseId,
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
-		onPublish,
-		setOnPublish,
 	} = props;
 
 	const {
 		getVersion, createModalLoading, selectedVersion,
 		setSelectedVersion, mode, setMode, showModal, setShowModal,
 	} = useGetKamExpertiseVersionDetials({
-		setResponseId,
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
-		responseId,
-		onPublish,
-		setOnPublish,
 	});
 
 	const componentProps = {
 		[PUBLISHED_VERSION]: {
-			selectedVersion,
+			selectedVersion, // ! required ?
 			setSelectedVersion,
 			data,
 		},
 		[SAVED_DRAFT]: {
 			setMode,
 			setShowModal,
-			setSelectedVersion,
+			setSelectedVersion, // ! required ?
 		},
 		[NEW_VERSION]: {
 			setMode,
-			setShowModal,
+			setShowModal, // ! required ?
 			setSelectedVersion,
 			getVersion,
 			createModalLoading,
 		},
 		[INITIAL_MODE]: {
 			setMode,
-			setSelectedVersion,
+			setSelectedVersion, // ! required ?
 			data,
 		},
 	};
@@ -142,7 +134,7 @@ function Header(props) {
 							)}
 						</Modal.Body>
 
-						{mode === 'choose_published_version' ? (
+						{mode === PUBLISHED_VERSION ? (
 							<Modal.Footer className={styles.test}>
 								<ModalFooter
 									setMode={setMode}

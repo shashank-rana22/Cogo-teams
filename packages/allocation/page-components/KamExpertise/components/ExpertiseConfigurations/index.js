@@ -2,7 +2,7 @@ import { Button, TabPanel, Tabs } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useGetExpertiseParameters from '../../hooks/useGetExpertiseParameters';
 import useGetKamExpertiseConfig from '../../hooks/useGetKamExpertiseConfig';
@@ -21,6 +21,7 @@ const TAB_PANEL_MAPPING = {
 		title     : 'Kam Expertise Score Config',
 		Component : KamExpertiseScoreConfig,
 	},
+
 	relations: {
 		name      : 'kam-level-config',
 		title     : 'Kam Level Config',
@@ -32,30 +33,30 @@ function ViewAllConfigs() {
 	const router = useRouter();
 
 	const [activeConfigTab, setActiveConfigTab] = useState('kam-expertise-score-config');
-	const [responseId, setResponseId] = useState('');
-	const [mainLoading, setMainLoading] = useState();
 	const [showPublishModal, setShowPublishModal] = useState(false);
-	const [onPublish, setOnPublish] = useState('');
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise');
 	};
 
 	const { listKamExpertiseCurrentConfigs = {}, configCardLoading, cardRefetch } = useGetKamExpertiseCurrentConfig();
-	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig({ responseId });
+	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig();
 	const { listExpertiseParams, expertiseLoading, expertiseRefetch } = useGetExpertiseParameters();
-	const { onCreate, loading: publishLoading } = usePublishDraft({ setShowPublishModal, setOnPublish });
+	const { onCreate, loading: publishLoading } =	usePublishDraft({
+		setShowPublishModal,
+		refetch,
+		cardRefetch,
+		expertiseRefetch,
+	});
 
 	const componentProps = {
 		'kam-expertise-score-config': {
-			setMainLoading,
 			listExpertiseParams,
 			expertiseLoading,
 			expertiseRefetch,
 			cardRefetch,
 		},
 		'kam-level-config': {
-			setMainLoading,
 			levelLoading,
 			kamConfigDetails,
 			refetch,
@@ -82,13 +83,9 @@ function ViewAllConfigs() {
 				<CurrentConfigurations
 					listKamExpertiseCurrentConfigs={listKamExpertiseCurrentConfigs}
 					configCardLoading={configCardLoading}
-					responseId={responseId}
-					setResponseId={setResponseId}
 					refetch={refetch}
 					expertiseRefetch={expertiseRefetch}
 					cardRefetch={cardRefetch}
-					onPublish={onPublish}
-					setOnPublish={setOnPublish}
 				/>
 
 				<div className={styles.tab_list}>
@@ -109,11 +106,11 @@ function ViewAllConfigs() {
 					<Button
 						themeType="primary"
 						className={styles.pub_button}
-						disabled={mainLoading || configCardLoading || isEmpty(listKamExpertiseCurrentConfigs)}
+						disabled={levelLoading || expertiseLoading
+							|| configCardLoading || isEmpty(listKamExpertiseCurrentConfigs)}
 						onClick={() => setShowPublishModal(true)}
 					>
 						Publish
-
 					</Button>
 
 					{showPublishModal && (
