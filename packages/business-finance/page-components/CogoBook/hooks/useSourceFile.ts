@@ -3,7 +3,7 @@ import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import { entityMapping } from '../P&L/PLStatement/constant';
+import { entityMappingData } from '../P&L/PLStatement/constant';
 
 const useSourceFile = ({ modalData, uploader, setUploadModal }) => {
 	const { month, entity } = modalData || {};
@@ -27,7 +27,7 @@ const useSourceFile = ({ modalData, uploader, setUploadModal }) => {
 		try {
 			const res = await sourceFileUploadTrigger({
 				data: {
-					cogoEntityId    : entityMapping[entity],
+					cogoEntityId    : entityMappingData[entity],
 					month           : monthData[1] || undefined,
 					year            : monthData[0] || undefined,
 					trialBalanceUrl : uploader,

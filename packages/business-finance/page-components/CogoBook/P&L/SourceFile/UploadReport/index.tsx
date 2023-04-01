@@ -59,8 +59,6 @@ function UploadReport() {
 
 	const date = new Date(month);
 
-	console.log(date, 'date');
-
 	const year = date.getFullYear();
 	const monthVal = monthNames[date.getMonth()];
 
@@ -95,98 +93,140 @@ function UploadReport() {
 
 	const { railDomesticVolume, railDomesticValue } = rail || {};
 
+	const OceanSum = Number(volume[0] || salaryVolume[0] || totalVolume[0])
+	===	(Number(volume[1] || salaryVolume[1] || fclExportVolume)
+	+ Number(volume[2] || salaryVolume[2] || fclImportVolume)
+	+ Number(volume[3] || salaryVolume[3] || lclExportVolume)
+	+ Number(volume[4] || salaryVolume[4] || lclImportVolume)
+	+ Number(volume[5] || salaryVolume[5] || oceanCustomVolume));
+
+	const AirSum = Number(volumeAir[0] || salaryVolumeAir[0] || totalAirVolume)
+	===	(Number(volumeAir[1] || salaryVolumeAir[1] || airExportVolume)
+	+ Number(volumeAir[2] || salaryVolumeAir[2] || airImportVolume)
+	+ Number(volumeAir[3] || salaryVolumeAir[3] || airCustomVolume));
+
+	const SurfaceSum = Number(volumeSurface[0] || salaryVolumeSurface[0] || totalSurfaceVolume)
+	=== (Number(volumeSurface[1] || salaryVolumeSurface[1] || ftlVolume)
+	+ Number(volumeSurface[2] || salaryVolumeSurface[2] || ltlVolume));
+
+	const RailSum = Number(volumeRail[1] || salaryVolumeRail[1] || railDomesticVolume)
+	=== (volumeRail[0] || salaryVolumeRail[0] || railDomesticVolume);
+
 	// This is for shipment volume
 
 	const Total = (volume[0] || salaryVolume[0] || totalVolume) + (volumeAir[0] || salaryVolumeAir[0] || totalAirVolume)
 	+ (volumeSurface[0] || salaryVolumeSurface[0] || totalSurfaceVolume) + (volumeRail[0]
 		|| salaryVolumeRail[0] || railDomesticVolume);
 
-	const totalVolumePer = ((volume[0] || salaryVolume[0] || totalVolume) / Total) * 100;
-	const fclExportVolumePer = ((volume[1] || salaryVolume[1] || fclExportVolume) / (volume[0]
+	const totalVolumePer = Total === 0 ? 0 : ((volume[0] || salaryVolume[0] || totalVolume) / Total) * 100;
+	const fclExportVolumePer = totalVolume === 0 ? 0 : ((volume[1] || salaryVolume[1] || fclExportVolume) / (volume[0]
 		|| salaryVolume[0] || totalVolume)) * 100;
 
-	const fclImportVolumePer = ((volume[2] || salaryVolume[2] || fclImportVolume) / (volume[0]
+	const fclImportVolumePer = totalVolume === 0 ? 0 : ((volume[2] || salaryVolume[2] || fclImportVolume) / (volume[0]
 		|| salaryVolume[0] || totalVolume)) * 100;
 
-	const lclExportVolumePer = ((volume[3] || salaryVolume[3] || lclExportVolume) / (volume[0]
+	const lclExportVolumePer = totalVolume === 0 ? 0 : ((volume[3] || salaryVolume[3] || lclExportVolume) / (volume[0]
 		|| salaryVolume[0] || totalVolume)) * 100;
 
-	const lclImportVolumePer = ((volume[4] || salaryVolume[4] || lclImportVolume) / (volume[0]
+	const lclImportVolumePer = totalVolume === 0 ? 0 : ((volume[4] || salaryVolume[4] || lclImportVolume) / (volume[0]
 		|| salaryVolume[0] || totalVolume)) * 100;
 
-	const oceanCustomVolumePer = ((volume[5] || salaryVolume[5]
+	const oceanCustomVolumePer = totalVolume === 0 ? 0 : ((volume[5] || salaryVolume[5]
 		|| oceanCustomVolume) / (volume[0] || salaryVolume[0] || totalVolume)) * 100;
 
-	const totalPer = ((volumeAir[0] || salaryVolumeAir[0] || totalAirVolume) / Total) * 100;
+	const totalPer = Total === 0 ? 0 : ((volumeAir[0] || salaryVolumeAir[0] || totalAirVolume) / Total) * 100;
 
-	const airExportVolumePer = ((volumeAir[1] || salaryVolumeAir[1] || airExportVolume)
+	const airExportVolumePer = totalAirVolume === 0 ? 0 : ((volumeAir[1] || salaryVolumeAir[1] || airExportVolume)
 	/ (volumeAir[0] || salaryVolumeAir[0] || totalAirVolume)) * 100;
 
-	const airImportVolumePer = ((volumeAir[2] || salaryVolumeAir[2] || airImportVolume)
+	const airImportVolumePer = totalAirVolume === 0 ? 0 : ((volumeAir[2] || salaryVolumeAir[2] || airImportVolume)
 	/ (volumeAir[0] || salaryVolumeAir[0] || totalAirVolume)) * 100;
 
-	const airCustomVolumePer = ((volumeAir[3] || salaryVolumeAir[3] || airCustomVolume)
+	const airCustomVolumePer = totalAirVolume === 0 ? 0 : ((volumeAir[3] || salaryVolumeAir[3] || airCustomVolume)
 	/ (volumeAir[0] || salaryVolumeAir[0] || totalAirVolume)) * 100;
 
-	const totalPerSurface = ((volume[0] || salaryVolumeSurface[0] || totalSurfaceVolume) / Total) * 100;
+	const totalPerSurface = Total === 0 ? 0
+		: ((volume[0] || salaryVolumeSurface[0] || totalSurfaceVolume) / Total) * 100;
 
-	const FTLVolumePer = ((volumeSurface[1] || salaryVolumeSurface[1] || ftlVolume)
+	const FTLVolumePer = totalSurfaceVolume === 0 ? 0 : ((volumeSurface[1] || salaryVolumeSurface[1] || ftlVolume)
 	/ (volumeSurface[0] || salaryVolumeSurface[0] || totalSurfaceVolume)) * 100;
 
-	const LTLVolumePer = ((volumeSurface[2] || salaryVolumeSurface[2] || ltlVolume)
+	const LTLVolumePer = totalSurfaceVolume === 0 ? 0 : ((volumeSurface[2] || salaryVolumeSurface[2] || ltlVolume)
 	/ (volumeSurface[0] || salaryVolumeSurface[0] || totalSurfaceVolume)) * 100;
 
-	const totalPerRail = ((volumeRail[0] || salaryVolumeRail[0] || railDomesticVolume) / Total) * 100;
+	const totalPerRail = Total === 0 ? 0 : ((volumeRail[0] || salaryVolumeRail[0] || railDomesticVolume) / Total) * 100;
 
-	const railVolumePer = ((volumeRail[1] || salaryVolumeRail[1] || railDomesticVolume)
-	/ (volumeRail[0] || salaryVolumeRail[0] || railDomesticVolume)) * 100;
+	const railVolumePer = railDomesticVolume === 0 ? 0 : ((volumeRail[0] || salaryVolumeRail[0] || railDomesticVolume)
+	/ (volumeRail[1] || salaryVolumeRail[1] || railDomesticVolume)) * 100;
 
 	// This is for shipment value
+
+	const OceanSumValue = Number(value[0] || salaryValue[0] || totalValue)
+	===	(Number(value[1] || salaryValue[1] || fclExportValue)
+	+ Number(value[2] || salaryValue[2] || fclImportValue)
+	+ Number(value[3] || salaryValue[3] || lclExportValue)
+	+ Number(value[4] || salaryValue[4] || lclImportValue)
+	+ Number(value[0] || salaryValue[0] || totalValue));
+
+	const AirSumValue = Number(valueAir[0] || salaryValueAir[0] || totalAirValue)
+	===	(Number(valueAir[1] || salaryValueAir[1] || airExportValue)
+	+ Number(valueAir[2] || salaryValueAir[2] || airImportValue)
+	+ Number(valueAir[3] || salaryValueAir[3] || airCustomValue));
+
+	const SurfaceSumValue = Number(valueSurface[0] || salaryValueSurface[0] || totalSurfaceValue)
+	=== (Number(valueSurface[1] || salaryValueSurface[1] || ftlValue)
+	+ Number(valueSurface[2] || salaryValueSurface[2] || ltlValue));
+
+	const RailSumValue = Number(valueRail[0] || salaryValueRail[0] || railDomesticValue)
+	=== (valueRail[0] || salaryValueRail[0] || railDomesticValue);
 
 	const TotalValue = (value[0] || salaryValue[0] || totalValue) + (valueAir[0] || salaryValueAir[0] || totalAirValue)
 	+ (valueSurface[0] || salaryValueSurface[0] || totalSurfaceValue) + (valueRail[0]
 		|| salaryValueRail[0] || railDomesticValue);
 
-	const totalPerOcean = ((value[0] || salaryValue[0] || totalValue) / TotalValue) * 100;
+	const totalPerOcean = TotalValue === 0 ? 0 : ((value[0] || salaryValue[0] || totalValue) / TotalValue) * 100;
 
-	const fclExportValuePer = ((value[1] || salaryValue[1] || fclExportValue)
+	const fclExportValuePer = totalValue === 0 ? 0 : ((value[1] || salaryValue[1] || fclExportValue)
 	/ (value[0] || salaryValue[0] || totalValue)) * 100;
 
-	const fclImportValuePer = ((value[2] || salaryValue[2] || fclImportValue)
+	const fclImportValuePer = totalValue === 0 ? 0 : ((value[2] || salaryValue[2] || fclImportValue)
 	/ (value[0] || salaryValue[0] || totalValue)) * 100;
 
-	const lclExportValuePer = ((value[3] || salaryValue[3] || lclExportValue)
+	const lclExportValuePer = totalValue === 0 ? 0 : ((value[3] || salaryValue[3] || lclExportValue)
 	/ (value[0] || salaryValue[0] || totalValue)) * 100;
 
-	const lclImportValuePer = ((value[4] || salaryValue[4] || lclImportValue)
+	const lclImportValuePer = totalValue === 0 ? 0 : ((value[4] || salaryValue[4] || lclImportValue)
 	/ (value[0] || salaryValue[0] || totalValue)) * 100;
 
-	const oceanCustomValuePer = ((value[5] || salaryValue[5] || oceanCustomValue)
+	const oceanCustomValuePer = totalValue === 0 ? 0 : ((value[5] || salaryValue[5] || oceanCustomValue)
 	/ (value[0] || salaryValue[0] || totalValue)) * 100;
 
-	const totalPerAir = ((valueAir[0] || salaryValueAir[0] || totalAirValue) / TotalValue) * 100;
+	const totalPerAir = TotalValue === 0 ? 0 : ((valueAir[0] || salaryValueAir[0] || totalAirValue) / TotalValue) * 100;
 
-	const airExportValuePer = ((valueAir[1] || salaryValueAir[1] || airExportValue)
+	const airExportValuePer = totalAirValue === 0 ? 0 : ((valueAir[1] || salaryValueAir[1] || airExportValue)
 	/ (valueAir[0] || salaryValueAir[0] || totalAirValue)) * 100;
 
-	const airImportValuePer = ((valueAir[2] || salaryValueAir[2] || airImportValue)
+	const airImportValuePer = totalAirValue === 0 ? 0 : ((valueAir[2] || salaryValueAir[2] || airImportValue)
 	/ (valueAir[0] || salaryValueAir[0] || totalAirValue)) * 100;
 
-	const airCustomValuePer = ((valueAir[3] || salaryValueAir[3] || airCustomValue)
+	const airCustomValuePer = totalAirValue === 0 ? 0 : ((valueAir[3] || salaryValueAir[3] || airCustomValue)
 	/ (valueAir[0] || salaryValueAir[0] || totalAirValue)) * 100;
 
-	const totalPerValueSurface = ((valueSurface[0] || salaryValueSurface[0] || totalSurfaceValue) / TotalValue) * 100;
+	const totalPerValueSurface = TotalValue === 0 ? 0
+		: ((valueSurface[0] || salaryValueSurface[0] || totalSurfaceValue) / TotalValue) * 100;
 
-	const FTLValuePer = ((valueSurface[1] || salaryValueSurface[1] || ftlValue)
+	const FTLValuePer = totalSurfaceValue === 0 ? 0
+		: ((valueSurface[1] || salaryValueSurface[1] || ftlValue)
 	/ (valueSurface[0] || salaryValueSurface[0] || totalSurfaceValue)) * 100;
 
-	const LTLValuePer = ((valueSurface[2] || salaryValueSurface[2] || ltlValue)
+	const LTLValuePer = totalSurfaceValue === 0 ? 0 : ((valueSurface[2] || salaryValueSurface[2] || ltlValue)
 	/ (valueSurface[0] || salaryValueSurface[0] || totalSurfaceValue)) * 100;
 
-	const totalPerRailValue = ((valueRail[0] || salaryValueRail[0] || railDomesticValue) / TotalValue) * 100;
+	const totalPerRailValue = TotalValue === 0 ? 0
+		: ((valueRail[0] || salaryValueRail[0] || railDomesticValue) / TotalValue) * 100;
 
-	const railValuePer = ((valueRail[1] || salaryValueRail[1] || railDomesticValue)
-	/ (valueRail[0] || salaryValueRail[0] || railDomesticValue)) * 100;
+	const railValuePer = railDomesticValue === 0 ? 0 : ((valueRail[0] || salaryValueRail[0] || railDomesticValue)
+	/ (valueRail[1] || salaryValueRail[1] || railDomesticValue)) * 100;
 
 	// These functions Are for Shipment Volume
 
@@ -544,6 +584,14 @@ function UploadReport() {
 			{globalStepper === 'revenue' && (
 				<RevenueBifurcation
 					setGlobalStepper={setGlobalStepper}
+					OceanSum={OceanSum}
+					SurfaceSum={SurfaceSum}
+					RailSum={RailSum}
+					AirSum={AirSum}
+					OceanSumValue={OceanSumValue}
+					SurfaceSumValue={SurfaceSumValue}
+					RailSumValue={RailSumValue}
+					AirSumValue={AirSumValue}
 					globalStepper={globalStepper}
 					volume={volume}
 					setVolume={setVolume}
@@ -574,6 +622,14 @@ function UploadReport() {
 			{globalStepper === 'salaries' && (
 				<SalaryAndRent
 					refetchSalary={refetchSalary}
+					OceanSum={OceanSum}
+					SurfaceSum={SurfaceSum}
+					RailSum={RailSum}
+					AirSum={AirSum}
+					OceanSumValue={OceanSumValue}
+					SurfaceSumValue={SurfaceSumValue}
+					RailSumValue={RailSumValue}
+					AirSumValue={AirSumValue}
 					globalStepper={globalStepper}
 					setGlobalStepper={setGlobalStepper}
 					setSalaryVolume={setSalaryVolume}

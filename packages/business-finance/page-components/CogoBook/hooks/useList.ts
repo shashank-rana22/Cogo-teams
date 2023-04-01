@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-import { entityMapping } from '../P&L/PLStatement/constant';
+import { entityMappingData } from '../P&L/PLStatement/constant';
 
 interface FilterInterface {
 	filters?:{
@@ -31,7 +31,7 @@ const useList = ({ filters }:FilterInterface) => {
 				params: {
 					q            : filters?.query || undefined,
 					period       : filters?.month || undefined,
-					cogoEntityId : entityMapping[filters?.entity] || undefined,
+					cogoEntityId : entityMappingData[filters?.entity] || undefined,
 					pageIndex    : 1,
 					pageSize     : 10,
 

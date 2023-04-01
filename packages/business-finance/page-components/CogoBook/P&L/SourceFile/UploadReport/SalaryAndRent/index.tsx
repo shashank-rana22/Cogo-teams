@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Toast, Button } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
@@ -63,9 +63,25 @@ interface SalaryInterface {
 	}[]
 	salaryValueRail: {}
 	setSalaryValueRail?: React.Dispatch<React.SetStateAction<{}>>
+	OceanSum?:boolean
+	AirSum?:boolean
+	SurfaceSum?:boolean,
+	RailSum?:boolean,
+	OceanSumValue?:boolean,
+	SurfaceSumValue?:boolean,
+	RailSumValue?:boolean,
+	AirSumValue?:boolean,
 }
 function SalaryAndRent({
 	globalStepper,
+	OceanSum,
+	AirSum,
+	SurfaceSum,
+	OceanSumValue,
+	SurfaceSumValue,
+	RailSumValue,
+	AirSumValue,
+	RailSum,
 	setGlobalStepper,
 	oceanSalaryData, salaryVolume,
 	setSalaryVolume, refetchSalary,
@@ -108,6 +124,21 @@ function SalaryAndRent({
 			...previousActions,
 			[key]: !previousActions[key],
 		}));
+	};
+	const getStatus = (key) => {
+		if (!OceanSum || !AirSum || !SurfaceSum || !RailSum ||	!OceanSumValue
+			|| !SurfaceSumValue
+			|| !RailSumValue
+			|| !AirSumValue) {
+			return Toast.error('All Values Are Equal To Total ');
+		}
+		return setEdit((previousActions) => ({
+			...previousActions,
+			[key]: !previousActions[key],
+		}));
+	};
+	const handleTickEdit = (key = '') => {
+		getStatus(key);
 	};
 
 	return (
@@ -153,7 +184,7 @@ function SalaryAndRent({
 																</div>
 
 																<div
-																	onClick={() => { handleEdit(idData); }}
+																	onClick={() => { handleTickEdit(idData); }}
 																	role="presentation"
 																>
 																	{edit[idData]

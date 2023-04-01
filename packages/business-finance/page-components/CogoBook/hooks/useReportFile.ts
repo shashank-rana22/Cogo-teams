@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-import { entityMapping } from '../P&L/PLStatement/constant';
+import { entityMappingData } from '../P&L/PLStatement/constant';
 
 const useReportFile = ({ query }) => {
 	const { month = '', entity = '' } = query || {};
@@ -23,7 +23,7 @@ const useReportFile = ({ query }) => {
 		try {
 			await sourceFileTrigger({
 				params: {
-					cogoEntityId : entityMapping[entity],
+					cogoEntityId : entityMappingData[entity],
 					period       : month,
 				},
 			});
