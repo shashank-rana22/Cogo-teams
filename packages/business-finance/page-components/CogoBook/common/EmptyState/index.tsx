@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-const NoDataImage = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no-incident-data.svg';
+const NoDataImage = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no result.svg';
 
 function EmptyState() {
 	return (
