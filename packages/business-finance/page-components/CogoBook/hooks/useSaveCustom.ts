@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
-import { entityMapping } from '../P&L/PLStatement/constant';
+import { entityMappingData } from '../P&L/PLStatement/constant';
 
 const useSaveCustom = ({ filters }) => {
 	const { profile } = useSelector((state) => state || {});
@@ -32,7 +32,7 @@ const useSaveCustom = ({ filters }) => {
 				data: {
 					filters: {
 						month        : numericDate,
-						cogoEntityId : entityMapping[entity],
+						cogoEntityId : entityMappingData[entity],
 						category,
 						colCheck,
 						rowCheck,

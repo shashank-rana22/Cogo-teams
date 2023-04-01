@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
-import { entityMapping } from '../P&L/PLStatement/constant';
+import { entityMappingData } from '../P&L/PLStatement/constant';
 
 const useSaveReport = ({
 	setModalData,
@@ -67,7 +67,7 @@ const useSaveReport = ({
 				data: [
 					{
 						ratioBasis           : 'VALUE',
-						cogoEntityId         : entityMapping[entity],
+						cogoEntityId         : entityMappingData[entity],
 						period               : numericDate,
 						sourceFileId         : id,
 						turnoverRatioDetails : {
@@ -92,7 +92,7 @@ const useSaveReport = ({
 					},
 					{
 						ratioBasis           : 'VOLUME',
-						cogoEntityId         : entityMapping[entity],
+						cogoEntityId         : entityMappingData[entity],
 						period               : numericDate,
 						sourceFileId         : id,
 						turnoverRatioDetails : {

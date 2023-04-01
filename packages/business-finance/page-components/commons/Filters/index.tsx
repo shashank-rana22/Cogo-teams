@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import React from 'react';
 
 import { ControlProps } from '../Interfaces';
@@ -60,7 +60,7 @@ function Filter({
 	};
 
 	return (
-		<div className={styles.flex}>
+		<div className={cl`${styles.flex} filter`}>
 			{(controls || []).map((control) => {
 				const { groupBy, span, name, showGroupName = true } = control;
 				if (groupBy) {

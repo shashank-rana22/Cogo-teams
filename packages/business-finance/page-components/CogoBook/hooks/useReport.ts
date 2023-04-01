@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-import { entityMapping } from '../P&L/PLStatement/constant';
+import { entityMappingData } from '../P&L/PLStatement/constant';
 
 interface FilterInterface {
 	filters?:{
@@ -65,7 +65,7 @@ const useReport = ({
 			await reportTrigger({
 				params: {
 					periods      : [numericDate] || [getLastMonthData()] || undefined,
-					cogoEntityId : entityMapping[filters?.entity] || undefined,
+					cogoEntityId : entityMappingData[filters?.entity] || undefined,
 				},
 			});
 
@@ -80,7 +80,7 @@ const useReport = ({
 			await ratioTrigger({
 				params: {
 					periods      : monthPayload || numericDate || undefined,
-					cogoEntityId : entityMapping[filters?.entity] || undefined,
+					cogoEntityId : entityMappingData[filters?.entity] || undefined,
 				},
 			});
 

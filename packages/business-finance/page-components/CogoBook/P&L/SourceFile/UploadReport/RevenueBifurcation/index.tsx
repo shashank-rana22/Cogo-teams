@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Toast, Button } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -62,10 +62,26 @@ interface RevenueInterface {
 		name: string;
 		value: string;
 	}[]
+	OceanSum?:boolean
+	AirSum?:boolean
+	SurfaceSum?:boolean,
+	RailSum?:boolean,
+	OceanSumValue?:boolean,
+	SurfaceSumValue?:boolean,
+	RailSumValue?:boolean,
+	AirSumValue?:boolean,
 }
 
 function RevenueBifurcation({
 	globalStepper,
+	OceanSum,
+	AirSum,
+	SurfaceSum,
+	OceanSumValue,
+	SurfaceSumValue,
+	RailSumValue,
+	AirSumValue,
+	RailSum,
 	setGlobalStepper,
 	volume,
 	setVolume,
@@ -107,6 +123,21 @@ function RevenueBifurcation({
 			[key]: !previousActions[key],
 		}));
 	};
+	const getStatus = (key) => {
+		if (!OceanSum || !AirSum || !SurfaceSum || !RailSum ||	!OceanSumValue
+			|| !SurfaceSumValue
+			|| !RailSumValue
+			|| !AirSumValue) {
+			return Toast.error('All Values Are Equal To Total ');
+		}
+		return setEdit((previousActions) => ({
+			...previousActions,
+			[key]: !previousActions[key],
+		}));
+	};
+	const handleTickEdit = (key = '') => {
+		getStatus(key);
+	};
 
 	return (
 		<div>
@@ -138,7 +169,7 @@ function RevenueBifurcation({
 										<div className={styles.shipment_container} key={idData}>
 											<div className={styles.header}>
 												<div>{labelData}</div>
-												{globalStepper === 'revenue'
+												{(globalStepper === 'revenue')
 														&& (
 															<div className={styles.icon_row}>
 																<div
@@ -151,7 +182,7 @@ function RevenueBifurcation({
 																</div>
 
 																<div
-																	onClick={() => { handleEdit(idData); }}
+																	onClick={() => { handleTickEdit(idData); }}
 																	role="presentation"
 																>
 																	{edit[idData]
@@ -329,7 +360,7 @@ function RevenueBifurcation({
 																</div>
 
 																<div
-																	onClick={() => { handleEdit(idData); }}
+																	onClick={() => { handleTickEdit(idData); }}
 																	role="presentation"
 																>
 																	{edit[idData]
