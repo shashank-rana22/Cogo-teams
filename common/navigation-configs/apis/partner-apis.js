@@ -3412,7 +3412,7 @@ const partner = {
 			service_name : 'rate_sheet',
 		},
 		{
-			api          : 'list_fcl_rate_sheets',
+			api          : 'list_fcl_freight_rate_sheets',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
@@ -3457,7 +3457,7 @@ const partner = {
 			service_name : 'rate_sheet',
 		},
 		{
-			api          : 'create_fcl_rate_sheet',
+			api          : 'create_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
@@ -4380,7 +4380,7 @@ const partner = {
 			service_name : 'rate_sheet',
 		},
 		{
-			api          : 'list_fcl_rate_sheets',
+			api          : 'list_fcl_freight_rate_sheets',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
@@ -4425,7 +4425,7 @@ const partner = {
 			service_name : 'rate_sheet',
 		},
 		{
-			api          : 'create_fcl_rate_sheet',
+			api          : 'create_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
@@ -9479,7 +9479,7 @@ const partner = {
 			service_name : 'rate_sheet',
 		},
 		{
-			api          : 'create_fcl_rate_sheet',
+			api          : 'create_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
@@ -9536,7 +9536,7 @@ const partner = {
 			service_name : 'rate_sheet',
 		},
 		{
-			api          : 'create_fcl_rate_sheet',
+			api          : 'create_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
@@ -9589,7 +9589,7 @@ const partner = {
 			service_name : 'rate_sheet',
 		},
 		{
-			api          : 'create_fcl_rate_sheet',
+			api          : 'create_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
@@ -9850,7 +9850,7 @@ const partner = {
 			service_name : 'rate_sheet',
 		},
 		{
-			api          : 'create_fcl_rate_sheet',
+			api          : 'create_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},

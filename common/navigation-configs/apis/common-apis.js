@@ -224,7 +224,7 @@ const common_apis = {
 			service_name : 'rate_sheet',
 		},
 		{
-			api          : 'create_fcl_rate_sheet',
+			api          : 'create_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
