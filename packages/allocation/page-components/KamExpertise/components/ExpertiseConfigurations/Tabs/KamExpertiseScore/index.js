@@ -1,5 +1,4 @@
 import { Collapse, Button, Modal } from '@cogoport/components';
-import { IcMAgentManagement } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -9,19 +8,13 @@ import { getFieldController } from '../../../../../../common/Form/getFieldContro
 import CONTROL_MAPPING from '../../../../configurations/add-condition-controls-mapping';
 import getControls from '../../../../configurations/get-add-conditions-controls';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
+import ICON_MAPPING from '../../../../constants/icon-mapping';
 import useCreateAllocationKamExpertiseEventScoring from '../../../../hooks/useCreateAllocationKamExpertiseEventScoring';
 import LoadingState from '../LoadingState';
 
 import ExpertiseParameters from './ExpertiseParameters';
 import Header from './Header';
 import styles from './styles.module.css';
-
-const ICON_MAPPING = {
-	customer_expertise  : <IcMAgentManagement />,
-	trade_expertise     : <IcMAgentManagement />,
-	commodity_expertise : <IcMAgentManagement />,
-	misc_expertise      : <IcMAgentManagement />,
-};
 
 const titleSection = (expertiseItem = {}) => (
 	<div>
