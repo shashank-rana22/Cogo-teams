@@ -1,10 +1,11 @@
 import { Placeholder, Button, Input, Select } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { format } from '@cogoport/utils';
+import { isEmpty, format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useList from '../../hooks/useList';
+import EmptyState from '../EmptyState';
 import { entityMapping } from '../PLStatement/constant';
 
 import styles from './styles.module.css';
@@ -106,6 +107,7 @@ function SourceFile() {
 			</div>
 
 			<div className={styles.card_container}>
+				{isEmpty(ListData) && <EmptyState />}
 				{getCardData.map((item) => (
 					<div className={styles.card} key={item?.id}>
 						<div>{ ListDataLoading ? <Placeholder height="20px" width="200px" /> : item.id}</div>

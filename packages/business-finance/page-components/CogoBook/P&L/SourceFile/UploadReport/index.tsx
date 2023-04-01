@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import useReportFile from '../../../hooks/useReportFile';
 import useSalary from '../../../hooks/useSalary';
+import { monthNames } from '../utils';
 
 import {
 	getAirData, getAirDataValue, getOceanData,
@@ -55,6 +56,13 @@ function UploadReport() {
 	const { refetch:refetchSalary, salaryData } = useSalary();
 
 	const { month, entity } = query || {};
+
+	const date = new Date(month);
+
+	console.log(date, 'date');
+
+	const year = date.getFullYear();
+	const monthVal = monthNames[date.getMonth()];
 
 	useEffect(() => { refetch(); }, [refetch]);
 
@@ -497,7 +505,9 @@ function UploadReport() {
 							<div className={styles.month}>
 								Month -
 								{' '}
-								{month}
+								{monthVal}
+								{' '}
+								{year}
 							</div>
 							<div className={styles.month}>
 								Entity -

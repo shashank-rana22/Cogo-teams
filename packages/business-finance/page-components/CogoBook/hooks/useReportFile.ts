@@ -7,12 +7,6 @@ import { entityMapping } from '../P&L/PLStatement/constant';
 const useReportFile = ({ query }) => {
 	const { month = '', entity = '' } = query || {};
 
-	const [monthName, year] = (month.match(/(\w+)\s+(\d{4})/) || []).slice(1);
-
-	const monthData = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
-
-	const numericDate = `${year}-${monthData.toString().padStart(2, '0')}-01`;
-
 	const [
 		{ data:sourceFileData, loading:sourceFileLoading },
 		sourceFileTrigger,
@@ -30,13 +24,13 @@ const useReportFile = ({ query }) => {
 			await sourceFileTrigger({
 				params: {
 					cogoEntityId : entityMapping[entity],
-					period       : numericDate,
+					period       : month,
 				},
 			});
 		} catch (error) {
 			Toast.error(error?.response?.data?.message);
 		}
-	}, [entity, numericDate, sourceFileTrigger]);
+	}, [entity, month, sourceFileTrigger]);
 	return {
 		sourceFileData,
 		sourceFileLoading,

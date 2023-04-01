@@ -13,3 +13,5 @@ export function OptionMonth() {
 		value : format(item, 'yyyy-MM-01'),
 	}));
 }
+export const monthNames = ['January', 'February', 'March',
+	'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
