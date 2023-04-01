@@ -2,7 +2,17 @@ import { Modal, Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function DeleteModal({ openDeleteModal, handleCloseModal, setOpenDeleteModal, deleteSelected, id:idData }) {
+interface DeleteInterface {
+	openDeleteModal?: object
+	handleCloseModal?:Function
+	setOpenDeleteModal?: React.Dispatch<React.SetStateAction<{}>>
+	deleteSelected?: Function
+	id?: string
+}
+function DeleteModal({
+	openDeleteModal, handleCloseModal, setOpenDeleteModal, deleteSelected,
+	id:idData,
+}:DeleteInterface) {
 	return (
 		<Modal show={openDeleteModal} onClose={handleCloseModal}>
 			<Modal.Body>

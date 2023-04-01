@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import useDeleteView from '../../../hooks/useDeleteView';
 import useReport from '../../../hooks/useReport';
+import { entityMapping } from '../../PLStatement/constant';
 import {
 	getAirRatio, getAllShipment,
 	getColumnView, getOceanRatio,
@@ -38,13 +39,6 @@ function ViewData() {
 	const { entity, month, id, name, date } = query || {};
 	const formatMonth = format(month, 'MMM yyyy');
 	const monthPayload = format(month, 'yyyy-MM-01');
-	const entityMapping = {
-		'6fd98605-9d5d-479d-9fac-cf905d292b88' : 101,
-		'c7e1390d-ec41-477f-964b-55423ee84700' : 201,
-		'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1' : 301,
-		'04bd1037-c110-4aad-8ecc-fc43e9d4069d' : 401,
-		'b67d40b1-616c-4471-b77b-de52b4c9f2ff' : 501,
-	};
 	const formatDate = format(date, 'dd MMM yyyy');
 	const { fetchRatioApi, ratiosData } = useReport({ monthPayload });
 	const {
@@ -172,7 +166,7 @@ function ViewData() {
 						dataKey = '',
 					} = item || {};
 					return (
-						<div className={styles.card}>
+						<div className={styles.card} key={idDataValue}>
 							<div
 								className={dropDownData[idDataValue] ? styles.card_data_enter : styles.card_data}
 								onClick={() => { handleDropdown(idDataValue, dataKey); }}
@@ -198,7 +192,7 @@ function ViewData() {
 										const { label:labelData = '' } = itemShipment || {};
 
 										return (
-											<div className={styles.shipment_container}>
+											<div className={styles.shipment_container} key={itemShipment?.id}>
 												<div className={styles.header}>
 													<div>{labelData}</div>
 												</div>
@@ -208,7 +202,7 @@ function ViewData() {
 														<div className={styles.ocean}>
 															{oceanData.map((valOcean) => (
 
-																<div>
+																<div key={valOcean?.name}>
 																	<div className={styles.name}>
 																		{valOcean?.name}
 																	</div>
@@ -226,7 +220,7 @@ function ViewData() {
 														<div className={styles.ocean}>
 															{airData.map((val) => (
 
-																<div>
+																<div key={val?.name}>
 																	<div className={styles.name}>
 																		{val?.name}
 																	</div>
@@ -244,7 +238,7 @@ function ViewData() {
 														<div className={styles.ocean}>
 															{surfaceData.map((val) => (
 
-																<div>
+																<div key={val?.name}>
 																	<div className={styles.name}>
 																		{val?.name}
 																	</div>
@@ -261,7 +255,7 @@ function ViewData() {
 														<div className={styles.ocean}>
 															{railData.map((val) => (
 
-																<div>
+																<div key={val?.name}>
 																	<div className={styles.name}>
 																		{val?.name}
 																	</div>
@@ -286,7 +280,7 @@ function ViewData() {
 										const { label:labelValue = '' } = itemShipment;
 
 										return (
-											<div className={styles.shipment_container}>
+											<div className={styles.shipment_container} key={itemShipment?.id}>
 												<div className={styles.header}>
 													<div>{labelValue}</div>
 												</div>
@@ -295,7 +289,7 @@ function ViewData() {
 													{labelValue === 'Ocean' && (
 														<div className={styles.ocean}>
 															{oceanData.map((val) => (
-																<div>
+																<div key={val?.name}>
 																	<div className={styles.name}>
 																		{val?.name}
 																	</div>
@@ -313,7 +307,7 @@ function ViewData() {
 														<div className={styles.ocean}>
 															{airData.map((val) => (
 
-																<div>
+																<div key={val?.name}>
 																	<div className={styles.name}>
 																		{val?.name}
 																	</div>
@@ -330,7 +324,7 @@ function ViewData() {
 														<div className={styles.ocean}>
 															{surfaceData.map((val) => (
 
-																<div>
+																<div key={val?.name}>
 																	<div className={styles.name}>
 																		{val?.name}
 																	</div>
@@ -347,7 +341,7 @@ function ViewData() {
 														<div className={styles.ocean}>
 															{railData.map((val) => (
 
-																<div>
+																<div key={val?.name}>
 																	<div className={styles.name}>
 																		{val?.name}
 																	</div>

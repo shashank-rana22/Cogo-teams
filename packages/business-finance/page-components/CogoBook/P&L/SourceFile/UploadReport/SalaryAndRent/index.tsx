@@ -11,6 +11,59 @@ import EditIcon from '../RevenueBifurcation/EditIcon';
 
 import styles from './styles.module.css';
 
+interface SalaryInterface {
+	refetchSalary?: () => Promise<void>
+	globalStepper?: string
+	setGlobalStepper?: React.Dispatch<React.SetStateAction<string>>
+	setSalaryVolume?: React.Dispatch<React.SetStateAction<{}>>
+	salaryVolume?: {}
+	oceanSalaryData?: {
+		name: string;
+		value: string;
+	}[]
+	airSalaryData?: {
+		name: string;
+		value: string;
+	}[]
+	salaryVolumeAir?: {}
+	setSalaryVolumeAir?: React.Dispatch<React.SetStateAction<{}>>
+	surfaceSalaryData?: {
+		name: string;
+		value: string;
+	}[]
+	setSalaryVolumeSurface?: React.Dispatch<React.SetStateAction<{}>>
+	salaryVolumeSurface?: {}
+	railSalaryData?: {
+		name: string;
+		value: string;
+	}[]
+	salaryVolumeRail?: {}
+	setSalaryVolumeRail?: React.Dispatch<React.SetStateAction<{}>>
+	oceanSalaryDataValue?: {
+		name: string;
+		value: string;
+	}[]
+	salaryValue?: {}
+	setSalaryValue?: React.Dispatch<React.SetStateAction<{}>>
+	airSalaryDataValue?: {
+		name: string;
+		value: string;
+	}[]
+	salaryValueAir?: {}
+	setSalaryValueAir?: React.Dispatch<React.SetStateAction<{}>>
+	surfaceSalaryDataValue?: {
+		name: string;
+		value: string;
+	}[]
+	salaryValueSurface?: {}
+	setSalaryValueSurface?: React.Dispatch<React.SetStateAction<{}>>
+	railSalaryDataValue?: {
+		name: string;
+		value: string;
+	}[]
+	salaryValueRail: {}
+	setSalaryValueRail?: React.Dispatch<React.SetStateAction<{}>>
+}
 function SalaryAndRent({
 	globalStepper,
 	setGlobalStepper,
@@ -37,7 +90,7 @@ function SalaryAndRent({
 	railSalaryDataValue,
 	salaryValueRail,
 	setSalaryValueRail,
-}) {
+}:SalaryInterface) {
 	const [dropDownData, setDropDownData] = useState({});
 
 	useEffect(() => { refetchSalary(); }, [refetchSalary]);
@@ -62,7 +115,7 @@ function SalaryAndRent({
 			{ getColumnSalary.map((item) => {
 				const { label = '', id = '', iconInfo, iconArrowUp, iconArrowDown } = item || {};
 				return (
-					<div className={styles.card}>
+					<div className={styles.card} key={id}>
 						<div
 							className={dropDownData[id] ? styles.card_data_enter : styles.card_data}
 							onClick={() => { handleDropdown(id); }}
@@ -84,7 +137,7 @@ function SalaryAndRent({
 									const { label:labelData = '', id:idData, icon } = itemShipment || {};
 
 									return (
-										<div className={styles.shipment_container}>
+										<div className={styles.shipment_container} key={idData}>
 											<div className={styles.header}>
 												<div>{labelData}</div>
 												{globalStepper === 'salaries'
@@ -116,7 +169,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{oceanSalaryData.map((valOcean, index) => (
 
-															<div>
+															<div key={valOcean?.name}>
 																<div className={styles.name}>
 																	{valOcean?.name}
 																</div>
@@ -143,7 +196,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{airSalaryData.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -169,7 +222,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{surfaceSalaryData.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -194,7 +247,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{railSalaryData.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -219,7 +272,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{getProjectData.map((valOcean) => (
 
-															<div>
+															<div key={valOcean?.name}>
 																<div className={styles.name}>
 																	{valOcean?.name}
 																</div>
@@ -236,7 +289,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{getAgentsData.map((valOcean) => (
 
-															<div>
+															<div key={valOcean?.name}>
 																<div className={styles.name}>
 																	{valOcean?.name}
 																</div>
@@ -294,7 +347,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{oceanSalaryDataValue.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -321,7 +374,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{airSalaryDataValue.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -347,7 +400,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{surfaceSalaryDataValue.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -373,7 +426,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{railSalaryDataValue.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -399,7 +452,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{getProjectData.map((valOcean) => (
 
-															<div>
+															<div key={valOcean?.name}>
 																<div className={styles.name}>
 																	{valOcean?.name}
 																</div>
@@ -416,7 +469,7 @@ function SalaryAndRent({
 													<div className={styles.ocean}>
 														{getAgentsData.map((valOcean) => (
 
-															<div>
+															<div key={valOcean?.name}>
 																<div className={styles.name}>
 																	{valOcean?.name}
 																</div>

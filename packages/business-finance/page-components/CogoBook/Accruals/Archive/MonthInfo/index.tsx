@@ -6,7 +6,24 @@ import ValuePercentage from '../ValuePercentage';
 
 import styles from './styles.module.css';
 
-function MonthInfo({ data, handleClick, loading }) {
+interface MonthInterface {
+	data?:{
+		periodName?:string
+		expenseCurrency?:string
+		expenseBooked?:string
+		isLocked?:boolean
+		expenseAccrued?:string
+		incomeCurrency?:string
+		incomeBooked?:string
+		incomeAccrued?:string
+		actualExpense?:string
+		actualIncome?:string
+	}
+	handleClick?:Function
+	loading?:boolean
+}
+
+function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 	const {
 		periodName,
 		expenseCurrency,

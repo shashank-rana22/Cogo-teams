@@ -11,7 +11,7 @@ import Freeze from './Freeze';
 import MonthInfo from './MonthInfo';
 import styles from './styles.module.css';
 
-function Archive({ setShowTab }) {
+function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateAction<boolean>> }) {
 	const [toggleValue, setToggleValue] = useState('declared');
 	const [isBookedActive, setIsBookActive] = useState(true);
 	let ARCHIVE_MONTH_CONFIG;
@@ -44,7 +44,47 @@ function Archive({ setShowTab }) {
 
 	return (
 		<div>
-			{!particularMonth && (
+			{particularMonth ? (
+				<>
+					<Freeze item={monthData} refetch={refetch} />
+					<MonthInfo
+						data={monthData}
+						handleClick={clickHandler}
+						loading={loading}
+					/>
+					<div className={styles.button_container}>
+						<div
+							className={isBookedActive ? styles.selected : styles.button_tab}
+							onClick={() => {
+								setGlobalFilters((p) => ({
+									...p,
+									archivedStatus: 'BOOKED',
+								}));
+								getDrillDownArchive(monthData);
+								setIsBookActive(true);
+							}}
+							role="presentation"
+						>
+							Booked
+						</div>
+
+						<div
+							className={!isBookedActive ? styles.selected : styles.button_tab}
+							onClick={() => {
+								setGlobalFilters((p) => ({
+									...p,
+									archivedStatus: 'ACCRUED',
+								}));
+								getDrillDownArchive(monthData);
+								setIsBookActive(false);
+							}}
+							role="presentation"
+						>
+							Accrued
+						</div>
+					</div>
+				</>
+			) : (
 				<div className={styles.toggle_container}>
 					<div
 						className={styles.flex_container}
@@ -61,49 +101,7 @@ function Archive({ setShowTab }) {
 					</div>
 				</div>
 			)}
-			{particularMonth && (
-				<Freeze item={monthData} refetch={refetch} />
-			)}
-			{particularMonth && (
-				<MonthInfo
-					data={monthData}
-					handleClick={clickHandler}
-					loading={loading}
-				/>
-			)}
-			{particularMonth && (
-				<div className={styles.button_container}>
-					<div
-						className={isBookedActive ? styles.selected : styles.button_tab}
-						onClick={() => {
-							setGlobalFilters((p) => ({
-								...p,
-								archivedStatus: 'BOOKED',
-							}));
-							getDrillDownArchive(monthData);
-							setIsBookActive(true);
-						}}
-						role="presentation"
-					>
-						Booked
-					</div>
 
-					<div
-						className={!isBookedActive ? styles.selected : styles.button_tab}
-						onClick={() => {
-							setGlobalFilters((p) => ({
-								...p,
-								archivedStatus: 'ACCRUED',
-							}));
-							getDrillDownArchive(monthData);
-							setIsBookActive(false);
-						}}
-						role="presentation"
-					>
-						Accrued
-					</div>
-				</div>
-			)}
 			<div className={styles.backlist}>
 				<div className={styles.header_container}>
 

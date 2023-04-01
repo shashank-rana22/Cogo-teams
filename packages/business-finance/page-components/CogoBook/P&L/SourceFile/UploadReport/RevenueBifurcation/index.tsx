@@ -11,6 +11,59 @@ import {
 import EditIcon from './EditIcon';
 import styles from './styles.module.css';
 
+interface RevenueInterface {
+	setGlobalStepper?: React.Dispatch<React.SetStateAction<string>>
+	globalStepper?: string
+	volume: {}
+	setVolume: React.Dispatch<React.SetStateAction<{}>>
+	volumeAir: {}
+	volumeSurface: {}
+	volumeRail: {}
+	value: {}
+	valueAir: {}
+	valueSurface: {}
+	valueRail: {}
+	setVolumeAir: React.Dispatch<React.SetStateAction<{}>>
+	setVolumeSurface: React.Dispatch<React.SetStateAction<{}>>
+	setVolumeRail: React.Dispatch<React.SetStateAction<{}>>
+	setValue: React.Dispatch<React.SetStateAction<{}>>
+	setValueAir: React.Dispatch<React.SetStateAction<{}>>
+	setValueSurface: React.Dispatch<React.SetStateAction<{}>>
+	setValueRail: React.Dispatch<React.SetStateAction<{}>>
+	oceanData?: {
+		name?: string;
+		value?: string;
+	}[]
+	airData?: {
+		name: string;
+		value: string;
+	}[]
+	surfaceData?: {
+		name: string;
+		value: string;
+	}[]
+	railData?: {
+		name: string;
+		value: string;
+	}[]
+	oceanValueData?: {
+		name: string;
+		value: string;
+	}[]
+	airValueData?: {
+		name: string;
+		value: string;
+	}[]
+	surfaceValueData?: {
+		name: string;
+		value: string;
+	}[]
+	railValueData?: {
+		name: string;
+		value: string;
+	}[]
+}
+
 function RevenueBifurcation({
 	globalStepper,
 	setGlobalStepper,
@@ -38,7 +91,7 @@ function RevenueBifurcation({
 	airValueData,
 	railValueData,
 	surfaceValueData,
-}) {
+}:RevenueInterface) {
 	const [dropDownData, setDropDownData] = useState({});
 	const [edit, setEdit] = useState({});
 	const handleDropdown = (key = '') => {
@@ -60,7 +113,7 @@ function RevenueBifurcation({
 			{ getColumn.map((item) => {
 				const { label = '', id = '', iconInfo, iconArrowUp, iconArrowDown } = item || {};
 				return (
-					<div className={styles.card}>
+					<div className={styles.card} key={id}>
 						<div
 							className={dropDownData[id] ? styles.card_data_enter : styles.card_data}
 							onClick={() => { handleDropdown(id); }}
@@ -82,7 +135,7 @@ function RevenueBifurcation({
 									const { label:labelData = '', id:idData, icon } = itemShipment || {};
 
 									return (
-										<div className={styles.shipment_container}>
+										<div className={styles.shipment_container} key={idData}>
 											<div className={styles.header}>
 												<div>{labelData}</div>
 												{globalStepper === 'revenue'
@@ -114,7 +167,7 @@ function RevenueBifurcation({
 													<div className={styles.ocean}>
 														{oceanData.map((valOcean, index) => (
 
-															<div>
+															<div key={valOcean?.name}>
 																<div className={styles.name}>
 																	{valOcean?.name}
 																</div>
@@ -141,7 +194,7 @@ function RevenueBifurcation({
 													<div className={styles.ocean}>
 														{airData.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -167,7 +220,7 @@ function RevenueBifurcation({
 													<div className={styles.ocean}>
 														{surfaceData.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -192,7 +245,7 @@ function RevenueBifurcation({
 													<div className={styles.ocean}>
 														{railData.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -217,7 +270,7 @@ function RevenueBifurcation({
 													<div className={styles.ocean}>
 														{getProjectData.map((valOcean) => (
 
-															<div>
+															<div key={valOcean?.name}>
 																<div className={styles.name}>
 																	{valOcean?.name}
 																</div>
@@ -234,7 +287,7 @@ function RevenueBifurcation({
 													<div className={styles.ocean}>
 														{getAgentsData.map((valOcean) => (
 
-															<div>
+															<div key={valOcean?.name}>
 																<div className={styles.name}>
 																	{valOcean?.name}
 																</div>
@@ -260,7 +313,7 @@ function RevenueBifurcation({
 									const { label:labelValue = '', icon, id:idData } = itemShipment;
 
 									return (
-										<div className={styles.shipment_container}>
+										<div className={styles.shipment_container} key={idData}>
 											<div className={styles.header}>
 												<div>{labelValue}</div>
 												{globalStepper === 'revenue'
@@ -291,7 +344,7 @@ function RevenueBifurcation({
 												{labelValue === 'Ocean' && (
 													<div className={styles.ocean}>
 														{oceanValueData.map((val, index) => (
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -318,7 +371,7 @@ function RevenueBifurcation({
 													<div className={styles.ocean}>
 														{airValueData.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -344,7 +397,7 @@ function RevenueBifurcation({
 													<div className={styles.ocean}>
 														{surfaceValueData.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -370,7 +423,7 @@ function RevenueBifurcation({
 													<div className={styles.ocean}>
 														{railValueData.map((val, index) => (
 
-															<div>
+															<div key={val?.name}>
 																<div className={styles.name}>
 																	{val?.name}
 																</div>
@@ -396,7 +449,7 @@ function RevenueBifurcation({
 													<div className={styles.ocean}>
 														{getProjectData.map((valOcean) => (
 
-															<div>
+															<div key={valOcean?.name}>
 																<div className={styles.name}>
 																	{valOcean?.name}
 																</div>
@@ -413,7 +466,7 @@ function RevenueBifurcation({
 													<div className={styles.ocean}>
 														{getAgentsData.map((valOcean) => (
 
-															<div>
+															<div key={valOcean?.name}>
 																<div className={styles.name}>
 																	{valOcean?.name}
 																</div>

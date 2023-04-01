@@ -121,7 +121,7 @@ function ListProfit({
 				<div className={styles.data_sub}>
 					<div className={styles.first_particular}>
 						<div className={styles.particular_data_review}>
-							(-) Revenue From Operations
+							Revenue From Operations
 							<div
 								className={styles.icon_data}
 								onClick={() => {
@@ -132,8 +132,12 @@ function ListProfit({
 								<IcMArrowDown />
 							</div>
 						</div>
-						{dropDown?.revenue && <div>Booked Revenue</div>}
-						{dropDown?.revenue && <div>Accrued Revenue</div>}
+						{dropDown?.revenue && (
+							<div>
+								<div>Booked Revenue</div>
+								<div>Accrued Revenue</div>
+							</div>
+						) }
 
 						<div className={styles.particular_data_review}>
 							(-) Operating Expenses
@@ -147,8 +151,12 @@ function ListProfit({
 								<IcMArrowDown />
 							</div>
 						</div>
-						{dropDown?.operating && <div>Booked Expenses</div>}
-						{dropDown?.operating && <div>Accrued Expenses</div>}
+						{dropDown?.operating && (
+							<div>
+								<div>Booked Expenses</div>
+								<div>Accrued Expenses</div>
+							</div>
+						)}
 					</div>
 
 					{getRelevantData().map((itemData) => {
@@ -158,13 +166,21 @@ function ListProfit({
 								<div className={styles.particular_data}>
 									{(revenueFromOps * ratio).toFixed(2)}
 								</div>
-								{dropDown?.revenue && <div>{bookedRevenue * ratio}</div>}
-								{dropDown?.revenue && <div>{accruedRevenue * ratio}</div>}
+								{dropDown?.revenue && (
+									<>
+										<div>{bookedRevenue * ratio}</div>
+										<div>{accruedRevenue * ratio}</div>
+									</>
+								) }
 								<div className={styles.particular_data}>
 									{(operatingExpenses * ratio).toFixed(2)}
 								</div>
-								{dropDown?.operating && <div>{(bookedExpense * ratio).toFixed(2)}</div>}
-								{dropDown?.operating && <div>{(accruedExpense * ratio).toFixed(2)}</div>}
+								{dropDown?.operating && (
+									<>
+										<div>{(bookedExpense * ratio).toFixed(2)}</div>
+										<div>{(accruedExpense * ratio).toFixed(2)}</div>
+									</>
+								)}
 							</div>
 						);
 					})}
@@ -198,11 +214,15 @@ function ListProfit({
 								<IcMArrowDown />
 							</div>
 						</div>
-						{dropDown?.employee && <div>ESOPs</div>}
-						{dropDown?.employee && <div>Gratuity & Leave Encashment</div>}
-						{dropDown?.employee && <div>Personnel Cost</div>}
-						{dropDown?.employee && <div>Housekeeping, Security, Subscriptions, Travel, Stay and CC</div>}
-						{dropDown?.employee && <div>Salaries, Bonus, Incentives and Staff Welfare Expenses</div>}
+						{dropDown?.employee && (
+							<>
+								<div>ESOPs</div>
+								<div>Gratuity & Leave Encashment</div>
+								<div>Personnel Cost</div>
+								<div>Housekeeping, Security, Subscriptions, Travel, Stay and CC</div>
+								<div>Salaries, Bonus, Incentives and Staff Welfare Expenses</div>
+							</>
+						) }
 
 						<div className={styles.depreciation}>
 							(-) Depreciation and Amortization
@@ -220,10 +240,14 @@ function ListProfit({
 								<IcMArrowDown />
 							</div>
 						</div>
-						{dropDown?.finance && <div>Foreign Exchange Gain (Net)</div>}
-						{dropDown?.finance && <div>Interest on Loan, Discount on Bills and Bank Charges</div>}
-						{dropDown?.finance && <div>Miscellaneous Income</div>}
-						{dropDown?.finance && <div>Interest Income on FD</div>}
+						{dropDown?.finance && (
+							<>
+								<div>Foreign Exchange Gain (Net)</div>
+								<div>Interest on Loan, Discount on Bills and Bank Charges</div>
+								<div>Miscellaneous Income</div>
+								<div>Interest Income on FD</div>
+							</>
+						) }
 
 						<div className={styles.particular_data_review}>
 							(-) Other Expenses
@@ -237,92 +261,106 @@ function ListProfit({
 								<IcMArrowDown />
 							</div>
 						</div>
-						{dropDown?.other && <div>Interest on Loan, Discount on Bills and Bank Charges</div>}
-						{dropDown?.other && <div>Legal, Compliance, Books and MIS</div>}
-						{dropDown?.other && <div>Marketing Expense</div>}
-						{dropDown?.other && <div>Personnel Cost</div>}
-						{dropDown?.other && <div>Provisions and Write-offs</div>}
-						{dropDown?.other && <div>Rates & Taxes</div>}
-						{dropDown?.other && <div>Rent & Taxes</div>}
-						{dropDown?.other && <div>Rent Electricity and Maintenance</div>}
-						{dropDown?.other && <div>Repairs and Maintenance</div>}
-						{dropDown?.other && <div>Salaries, Bonus, Incentives and Staff Welfare Expenses</div>}
-						{dropDown?.other && <div>Tech & Product Costs</div>}
-						{dropDown?.other && <div>Currency Suspense Account</div>}
-						{dropDown?.other && <div>Round off</div>}
-						{dropDown?.other && <div>Any other costs</div>}
+						{dropDown?.other && (
+							<>
+								<div>Interest on Loan, Discount on Bills and Bank Charges</div>
+								<div>Legal, Compliance, Books and MIS</div>
+								<div>Marketing Expense</div>
+								<div>Personnel Cost</div>
+								<div>Provisions and Write-offs</div>
+								<div>Rates & Taxes</div>
+								<div>Rent & Taxes</div>
+								<div>Rent Electricity and Maintenance</div>
+								<div>Repairs and Maintenance</div>
+								<div>Salaries, Bonus, Incentives and Staff Welfare Expenses</div>
+								<div>Tech & Product Costs</div>
+								<div>Currency Suspense Account</div>
+								<div>Round off</div>
+								<div>Any other costs</div>
+							</>
+						)}
 
 						<div className={styles.depreciation}>
 							Other Income
 						</div>
 					</div>
 
-					{
-						getRelevantData()?.map((itemValue) => {
-							const ratio = ratioData?.turnoverRatioDetails?.[itemValue?.key] || 1;
-							return (
-								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
-									<div className={styles.particular_data}>
-										{(totalEmployeeBenefitExpenses * ratio).toFixed(2)}
-									</div>
-									{dropDown?.employee && <div>{(esops * ratio).toFixed(2)}</div>}
-									{dropDown?.employee && <div>{(gratuityLeaveEncashment * ratio).toFixed(2)}</div>}
-									{dropDown?.employee && (
+					{getRelevantData()?.map((itemValue) => {
+						const ratio = ratioData?.turnoverRatioDetails?.[itemValue?.key] || 1;
+						return (
+							<div className={styles.first_ocean} style={{ width: calculateWidth }}>
+								<div className={styles.particular_data}>
+									{(totalEmployeeBenefitExpenses * ratio).toFixed(2)}
+								</div>
+								{dropDown?.employee && (
+									<>
+										{' '}
+										<div>{(esops * ratio).toFixed(2)}</div>
+										<div>{(gratuityLeaveEncashment * ratio).toFixed(2)}</div>
+
 										<div>
 											{(housekeepingSecuritySubscriptionsTravelStayAndCC
 												* ratio).toFixed(2)}
 										</div>
-									)}
-									{dropDown?.employee && <div>{(personnelCost * ratio).toFixed(2)}</div>}
-									{dropDown?.employee && (
+
+										<div>{(personnelCost * ratio).toFixed(2)}</div>
+
 										<div>
 											{(salariesBonusIncentivesAndStaffWelfareExpenses * ratio).toFixed(2)}
 										</div>
-									)}
-									<div className={styles.particular_data}>
-										{(totalDepreciationAndAmortization * ratio).toFixed(2)}
-									</div>
-									<div className={styles.particular_data}>
-										{(totalFinanceCost
+									</>
+								)}
+								<div className={styles.particular_data}>
+									{(totalDepreciationAndAmortization * ratio).toFixed(2)}
+								</div>
+								<div className={styles.particular_data}>
+									{(totalFinanceCost
 										* ratio).toFixed(2)}
 
-									</div>
-									{dropDown?.finance && <div>{foreignExchangeGainNet * ratio}</div>}
-									{dropDown?.finance && (
+								</div>
+								{dropDown?.finance && (
+									<>
+										<div>{foreignExchangeGainNet * ratio}</div>
+
 										<div>
 											{interestOnLoanDiscountOnBillsAndBankCharges * ratio}
 										</div>
-									)}
-									{dropDown?.finance && <div>{miscelleneousIncome * ratio}</div>}
-									{dropDown?.finance && <div>{interestIncomeOnFd * ratio}</div>}
-									<div className={styles.particular_data}>{totalOtherExpense * ratio}</div>
-									{dropDown?.other && (
+
+										<div>{miscelleneousIncome * ratio}</div>
+										<div>{interestIncomeOnFd * ratio}</div>
+									</>
+								) }
+								<div className={styles.particular_data}>{totalOtherExpense * ratio}</div>
+								{dropDown?.other
+								&& (
+									<>
 										<div>
 											{interestOnLoanDiscountOnBillsAndBankChargesExpense * ratio}
 										</div>
-									)}
-									{dropDown?.other && <div>{legalComplianceBooksAndMis * ratio}</div>}
-									{dropDown?.other && <div>{marketingExpense * ratio}</div>}
-									{dropDown?.other && <div>{personnelExpenseCost * ratio}</div>}
-									{dropDown?.other && <div>{provisionsAndWriteOffs * ratio}</div>}
-									{dropDown?.other && <div>{ratesAndTaxes * ratio}</div>}
-									{dropDown?.other && <div>{rentAndTaxes * ratio}</div>}
-									{dropDown?.other && <div>{rentElectricityAndMaintenance * ratio}</div>}
-									{dropDown?.other && <div>{repairsAndMaintenance * ratio}</div>}
-									{dropDown?.other && (
+
+										<div>{legalComplianceBooksAndMis * ratio}</div>
+										<div>{marketingExpense * ratio}</div>
+										<div>{personnelExpenseCost * ratio}</div>
+										<div>{provisionsAndWriteOffs * ratio}</div>
+										<div>{ratesAndTaxes * ratio}</div>
+										<div>{rentAndTaxes * ratio}</div>
+										<div>{rentElectricityAndMaintenance * ratio}</div>
+										<div>{repairsAndMaintenance * ratio}</div>
+
 										<div>
 											{salariesBonusIncentivesAndStaffWelfareExpenses * ratio}
 										</div>
-									)}
-									{dropDown?.other && <div>{techAndProductCosts * ratio}</div>}
-									{dropDown?.other && <div>{currencySuspenseAccount * ratio}</div>}
-									{dropDown?.other && <div>{roundOff * ratio}</div>}
-									{dropDown?.other && <div>{anyOtherCosts * ratio}</div>}
-									<div className={styles.particular_data}>{totalOtherIncome * ratio}</div>
-								</div>
-							);
-						})
-					}
+
+										<div>{techAndProductCosts * ratio}</div>
+										<div>{currencySuspenseAccount * ratio}</div>
+										<div>{roundOff * ratio}</div>
+										<div>{anyOtherCosts * ratio}</div>
+									</>
+								)}
+								<div className={styles.particular_data}>{totalOtherIncome * ratio}</div>
+							</div>
+						);
+					})}
 
 				</div>
 
