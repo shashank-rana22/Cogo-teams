@@ -7478,7 +7478,7 @@ const partner = {
 			feature     : 'Dashboard',
 		},
 		{
-			api         : 'get_payments_dashboard_outstanding_entity_code',
+			api         : 'get_payments_dashboard_outstanding',
 			access_type : 'private',
 			module      : 'Dashboard',
 			feature     : 'Dashboard',

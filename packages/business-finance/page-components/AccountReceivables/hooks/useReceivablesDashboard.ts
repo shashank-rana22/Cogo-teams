@@ -143,7 +143,7 @@ const useReceivablesDashboard = () => {
 		{
 			url     : '/payments/dashboard/outstanding',
 			method  : 'get',
-			authKey : 'get_payments_dashboard_outstanding_entity_code',
+			authKey : 'get_payments_dashboard_outstanding',
 		},
 		{ manual: true },
 	);
