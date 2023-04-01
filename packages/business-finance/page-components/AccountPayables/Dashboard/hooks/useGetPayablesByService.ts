@@ -18,16 +18,18 @@ const useGetPayablesByService = ({ activeEntity }:ItemPorps) => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const getDahboardData = useCallback(async () => {
-		try {
-			await trigger({
-				params: {
-					entity: activeEntity,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.message);
-		}
+	const getDahboardData = useCallback(() => {
+		(async () => {
+			try {
+				await trigger({
+					params: {
+						entity: activeEntity,
+					},
+				});
+			} catch (e) {
+				Toast.error(e?.message);
+			}
+		})();
 	}, [trigger, activeEntity]);
 
 	useEffect(() => {

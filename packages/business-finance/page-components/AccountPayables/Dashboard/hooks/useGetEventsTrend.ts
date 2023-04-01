@@ -32,21 +32,23 @@ const useGetEventsTrend = ({ showData, filtersData, activeEntity }:ItemProps) =>
 		{ manual: true, autoCancel: false },
 	);
 
-	const getDahboardData = useCallback(async () => {
-		try {
-			await trigger({
-				params: {
-					event         : events,
-					view          : showData,
-					previousCount : showData === 'day' ? '30' : '12',
-					service       : service || undefined,
-					currency      : currency || undefined,
-					entity        : activeEntity,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.message);
-		}
+	const getDahboardData = useCallback(() => {
+		(async () => {
+			try {
+				await trigger({
+					params: {
+						event         : events,
+						view          : showData,
+						previousCount : showData === 'day' ? '30' : '12',
+						service       : service || undefined,
+						currency      : currency || undefined,
+						entity        : activeEntity,
+					},
+				});
+			} catch (e) {
+				Toast.error(e?.message);
+			}
+		})();
 	}, [events, showData, service, currency, activeEntity, trigger]);
 
 	useEffect(() => {

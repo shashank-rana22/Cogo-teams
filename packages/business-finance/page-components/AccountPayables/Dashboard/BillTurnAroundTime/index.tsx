@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Select, Tooltip } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
@@ -57,7 +58,6 @@ function BillTurnAroundTime({ filtersData, activeEntity }:ItemProps) {
 		if (hours) {
 			setDataList([...dataList, ...list]);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hours]);
 
 	return (

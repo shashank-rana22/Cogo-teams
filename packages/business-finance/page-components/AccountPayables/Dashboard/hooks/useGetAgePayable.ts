@@ -27,18 +27,20 @@ const useGetAgePayable = ({ activeEntity }:ItemProps) => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const getDahboardData = useCallback(async () => {
-		try {
-			await trigger({
-				params: {
-					service  : service || undefined,
-					currency : currency || undefined,
-					entity   : activeEntity,
-				},
-			});
-		} catch (err) {
-			Toast.error(err.meessage);
-		}
+	const getDahboardData = useCallback(() => {
+		(async () => {
+			try {
+				await trigger({
+					params: {
+						service  : service || undefined,
+						currency : currency || undefined,
+						entity   : activeEntity,
+					},
+				});
+			} catch (err) {
+				Toast.error(err.meessage);
+			}
+		})();
 	}, [service, currency, activeEntity, trigger]);
 
 	useEffect(() => {

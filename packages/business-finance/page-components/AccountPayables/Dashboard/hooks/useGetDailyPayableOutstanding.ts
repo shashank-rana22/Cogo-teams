@@ -27,19 +27,21 @@ const useGetDailyPayableOutstanding = ({ isQuarterView, filters, activeEntity }:
 		service,
 		currency,
 	} = filters || {};
-	const getDahboardData = useCallback(async () => {
-		try {
-			await trigger({
-				params: {
-					view     : isQuarterView ? 'quarter' : 'month',
-					service  : service || undefined,
-					currency : currency || undefined,
-					entity   : activeEntity,
-				},
-			});
-		} catch (err) {
-			Toast.error(err?.message);
-		}
+	const getDahboardData = useCallback(() => {
+		(async () => {
+			try {
+				await trigger({
+					params: {
+						view     : isQuarterView ? 'quarter' : 'month',
+						service  : service || undefined,
+						currency : currency || undefined,
+						entity   : activeEntity,
+					},
+				});
+			} catch (err) {
+				Toast.error(err?.message);
+			}
+		})();
 	}, [currency, service, isQuarterView, activeEntity, trigger]);
 
 	useEffect(() => {

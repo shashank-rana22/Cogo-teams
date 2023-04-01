@@ -28,18 +28,20 @@ const useGetTotalPayables = ({ filtersData, activeEntity }:ItemProps) => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const getDahboardData = useCallback(async () => {
-		try {
-			await trigger({
-				params: {
-					service  : service || undefined,
-					currency : currency || undefined,
-					entity   : activeEntity,
-				},
-			});
-		} catch (err) {
-			Toast.error(err?.message);
-		}
+	const getDahboardData = useCallback(() => {
+		(async () => {
+			try {
+				await trigger({
+					params: {
+						service  : service || undefined,
+						currency : currency || undefined,
+						entity   : activeEntity,
+					},
+				});
+			} catch (err) {
+				Toast.error(err?.message);
+			}
+		})();
 	}, [service, currency, activeEntity, trigger]);
 
 	useEffect(() => {

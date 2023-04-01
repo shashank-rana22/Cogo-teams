@@ -10,12 +10,14 @@ const useListCogoEntities = () => {
 		{ manual: true },
 	);
 
-	const api = useCallback(async () => {
-		try {
-			await trigger();
-		} catch (err) {
-			console.log(err, 'error');
-		}
+	const api = useCallback(() => {
+		(async () => {
+			try {
+				await trigger();
+			} catch (err) {
+				console.log(err, 'error');
+			}
+		})();
 	}, [trigger]);
 
 	return {

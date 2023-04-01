@@ -30,20 +30,22 @@ const useGetTreasuryStats = ({ activeEntity }:ItemProps) => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const getDahboardData = useCallback(async () => {
-		try {
-			await trigger({
-				params: {
-					fromDate: startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
-						: undefined,
-					toDate: endDate
-						? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
-					entityCode: activeEntity,
-				},
-			});
-		} catch (err) {
-			Toast.error(err?.message);
-		}
+	const getDahboardData = useCallback(() => {
+		(async () => {
+			try {
+				await trigger({
+					params: {
+						fromDate: startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
+							: undefined,
+						toDate: endDate
+							? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
+						entityCode: activeEntity,
+					},
+				});
+			} catch (err) {
+				Toast.error(err?.message);
+			}
+		})();
 	}, [endDate, startDate, activeEntity, trigger]);
 
 	useEffect(() => {

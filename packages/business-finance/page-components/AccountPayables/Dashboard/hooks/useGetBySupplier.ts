@@ -20,19 +20,21 @@ const useGetBySupplier = ({ showVendorsList, activeEntity }:FilterProps) => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const getDahboardData = useCallback(async () => {
-		try {
-			await trigger({
-				params: {
-					flag     : activeEntity,
-					sortBy   : 'openInvoiceLedgerAmount',
-					sortType : 'Desc',
-					category : showVendorsList || undefined,
-				},
-			});
-		} catch (err) {
-			Toast.error(err?.message);
-		}
+	const getDahboardData = useCallback(() => {
+		(async () => {
+			try {
+				await trigger({
+					params: {
+						flag     : activeEntity,
+						sortBy   : 'openInvoiceLedgerAmount',
+						sortType : 'Desc',
+						category : showVendorsList || undefined,
+					},
+				});
+			} catch (err) {
+				Toast.error(err?.message);
+			}
+		})();
 	}, [showVendorsList, activeEntity, trigger]);
 
 	useEffect(() => {
