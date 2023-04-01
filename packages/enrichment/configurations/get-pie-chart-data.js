@@ -38,7 +38,7 @@ function getPieChartData({ stats = {} }) {
 				{
 					id    : 'greater_than_seven_days',
 					label : '> 7 Days',
-					value : stats.tat_greater_than_seven_dat,
+					value : stats.tat_greater_than_seven_day,
 				},
 			],
 		},

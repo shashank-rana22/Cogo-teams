@@ -190,21 +190,26 @@ function Element({
 				);
 			case 'datepicker':
 				return (
-					<Datepicker
-						name="date"
-						value={value as Date}
-						style={style as CSSProperties}
-						{...rest}
-					/>
+					<div className={styles.single_date}>
+						<Datepicker
+							name="date"
+							value={value as Date}
+							style={style as CSSProperties}
+							{...rest}
+						/>
+					</div>
+
 				);
 			case 'singleDateRange':
 				return (
-					<SingleDateRange
-						name="date"
-						value={value as SelectedProp}
-						style={style as CSSProperties}
-						{...rest}
-					/>
+					<div className={styles.single_date}>
+						<SingleDateRange
+							name="date"
+							value={value as SelectedProp}
+							style={style as CSSProperties}
+							{...rest}
+						/>
+					</div>
 				);
 			case 'dateRangepicker':
 				return (
