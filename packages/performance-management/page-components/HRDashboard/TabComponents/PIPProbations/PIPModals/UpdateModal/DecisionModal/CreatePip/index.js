@@ -30,9 +30,7 @@ function CreatePip({ item = {}, status = '', setItem = () => {}, setDisableNext 
 		<div className={styles.container}>
 			<div className={styles.dates}>
 				<div className={styles.lable}>
-					{startCase(status)}
-					{' '}
-					Start date
+					{status === 'pip' ? `${startCase(status)} Start Date` : 'Joining Date'}
 				</div>
 				<Datepicker
 					placeholder="Enter Date"

@@ -14,12 +14,11 @@ function CreateModal({
 	modal,
 	setModal = () => {},
 	setItem = () => {},
-	disableNext,
-	setDisableNext = () => {},
 	setRefetchList = () => {},
 }) {
 	const { onSubmitCreate = () => {} } = useCreateLog();
 	const [status, setStatus] = useState('');
+	const [disableNext, setDisableNext] = useState('');
 
 	const onSubmitModalAction = () => {
 		setRefetchList(true);

@@ -1,5 +1,5 @@
 import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import AllLogs from './AllLogs';
 import NewLog from './NewLog';
@@ -13,13 +13,11 @@ function LogModal({
 	onSubmit = () => {},
 	source = '',
 }) {
-	const [activeLogTab, setActiveLogTab] = useState('new');
+	const [activeLogTab, setActiveLogTab] = useState(
+		(item?.final_decision || source === 'manager_dashboard') ? 'all' : 'new',
+	);
 
 	const isDisabled = item.tags.length === item.disabledTags.length && !item.comment;
-
-	useEffect(() => {
-		setActiveLogTab((item?.final_decision || source === 'manager_dashboard') ? 'all' : 'new');
-	}, [item, source]);
 
 	return (
 		<div>

@@ -1,7 +1,6 @@
 import { RadioGroup, Textarea } from '@cogoport/components';
-import { isEmpty, format } from '@cogoport/utils';
-// import { format, getMonth } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { addDays, isEmpty, format } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
@@ -10,8 +9,8 @@ function UpdatePip({
 	setDisableNext = () => {},
 	setItem = () => {},
 }) {
-	const [comment, setComment] = useState('');
-	const [value, onChange] = useState('confirmed');
+	const { final_decision:value = '', comment = '' } = item;
+	const extended_date = addDays(new Date(item.end_date), 30);
 
 	const radioList = [
 		{ name: 'R2', value: 'confirmed', label: 'Confirm' },
@@ -23,18 +22,12 @@ function UpdatePip({
 	];
 
 	useEffect(() => {
-		if (value === 'confirmed' || !isEmpty(comments)) {
-			setDisableNext(false);
-		} else {
+		if (!value || ((value !== 'confirmed') && isEmpty(comment))) {
 			setDisableNext(true);
+		} else {
+			setDisableNext(false);
 		}
-		setItem((pv) => ({
-			...pv,
-			comment        : comment || undefined,
-			final_decision : value || undefined,
-			is_reviewed    : false,
-		}));
-	}, [comment, value, setItem, setDisableNext]);
+	}, [comment, value, setDisableNext]);
 
 	return (
 		<div className={styles.update_container}>
@@ -55,21 +48,39 @@ function UpdatePip({
 				className={styles.radio_btns}
 				options={radioList}
 				value={value}
-				onChange={onChange}
+				onChange={(val) => {
+					setItem((pv) => ({
+						...pv,
+						final_decision : val || undefined,
+						is_reviewed    : false,
+					}));
+				}}
 			/>
 
-			{(value === 'extended') && (
-				<div className={styles.dates}>
-					<div className={styles.lable}>Reason for Extention</div>
-
-					<Textarea
-						size="lg"
-						value={comment}
-						onChange={(val) => setComment(val)}
-						placeholder="Type here ..."
-					/>
+			<div className={styles.dates}>
+				{value === 'Extended' && (
+					<div className={styles.extend_date}>
+						<div className={styles.lable}>
+							{` ( Will be Extended to : ${format(extended_date, 'dd-MMM-yyyy')} )`}
+						</div>
+					</div>
+				)}
+				<div className={styles.lable}>
+					Reason
 				</div>
-			)}
+				<Textarea
+					size="lg"
+					value={comment}
+					onChange={(val) => {
+						setItem((pv) => ({
+							...pv,
+							comment     : val || undefined,
+							is_reviewed : false,
+						}));
+					}}
+					placeholder="Type here ..."
+				/>
+			</div>
 		</div>
 	);
 }

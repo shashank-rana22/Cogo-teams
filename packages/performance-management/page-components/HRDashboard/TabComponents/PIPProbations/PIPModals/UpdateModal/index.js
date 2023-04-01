@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { useState } from 'react';
 
 import DecisionModal from './DecisionModal';
 
@@ -7,10 +8,10 @@ function UpdateModal({
 	setModal = () => {},
 	item = {},
 	setItem = () => {},
-	disableNext,
 	onSubmit = () => {},
-	setDisableNext = () => {},
 }) {
+	const [disableNext, setDisableNext] = useState(true);
+
 	return (
 		<Modal
 			show={modal === 'update'}
@@ -23,7 +24,7 @@ function UpdateModal({
 		>
 			<Modal.Header title={`update ${item?.log_type}`} />
 			<Modal.Body
-				style={{ maxHeight: '600px' }}
+				style={{ maxHeight: '500px' }}
 			>
 				<DecisionModal
 					item={item}

@@ -1,6 +1,5 @@
 import { Toast, Tabs, TabPanel, Button } from '@cogoport/components';
 import { IcMDownload, IcMEdit, IcMUpload } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import modalComponentsMapping from '../../../../constants/modal-components-mapping';
@@ -13,7 +12,6 @@ import styles from './styles.module.css';
 function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {} }) {
 	const [item, setItem] = useState({});
 	const [activeTab, setActiveTab] = useState('dashboard');
-	const [disableNext, setDisableNext] = useState(true);
 	const [refetchList, setRefetchList] = useState(false);
 
 	const { onUpdateLog = () => {} } = useUpdateLog();
@@ -133,10 +131,8 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 					<ModalComponent
 						item={item}
 						setItem={setItem}
-						setDisableNext={setDisableNext}
 						modal={modal}
 						setModal={setModal}
-						disableNext={disableNext}
 						onSubmit={onSubmit}
 						setRefetchList={setRefetchList}
 						source={source}
