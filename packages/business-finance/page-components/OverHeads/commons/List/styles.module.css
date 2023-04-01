@@ -12,7 +12,6 @@
 
 .paginations {
 	display: flex;
-	justify-content: end;
 	padding: 16px;
 }
 

@@ -784,8 +784,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-account_payables',
 				title         : 'AP',
-				href          : '/business-finance/account-payables/[active_tab]',
-				as            : '/business-finance/account-payables/dashboard',
+				href          : '/v2/business-finance/account-payables/[active_tab]',
+				as            : '/v2/business-finance/account-payables/dashboard',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.account_payables,
