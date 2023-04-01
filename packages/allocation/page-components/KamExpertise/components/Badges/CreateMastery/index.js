@@ -16,7 +16,7 @@ function CreateMastery(props) {
 		listRefetch,
 	} = props;
 
-	const { updated_at, created_by = {} } = masteryItemData;
+	const { audits = [], created_by = {} } = masteryItemData;
 
 	const {
 		formProps,
@@ -34,6 +34,7 @@ function CreateMastery(props) {
 	} = formProps;
 
 	const watch_image_input = watch('image_input');
+	const updated_at = audits?.[0]?.created_at || null;
 
 	return (
 		<div>

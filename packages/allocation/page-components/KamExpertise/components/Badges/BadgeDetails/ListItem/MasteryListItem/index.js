@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData }) {
 	const {
 		badge_name = '_', description = '_',
-		created_at, created_by = {},
+		audits = [], created_by = {},
 		mastery_details = {},
 		mastery_badges_detail = [],
 	} = data;
@@ -15,6 +15,8 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 		setMasteryItemData(data);
 		setToggleScreen('create_mastery');
 	};
+
+	const updated_at = audits?.[0]?.created_at || null;
 
 	return (
 		<div className={styles.container}>
@@ -50,7 +52,7 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 						<div>
 							Last Modified :
 							{' '}
-							{created_at ? format(created_at, 'dd MMMM yy') : '_'}
+							{updated_at ? format(updated_at, 'dd MMMM yy') : '_'}
 						</div>
 
 						<div>

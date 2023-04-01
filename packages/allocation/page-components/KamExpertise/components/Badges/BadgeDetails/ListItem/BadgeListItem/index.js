@@ -9,7 +9,7 @@ function BadgeListItem(props) {
 
 	const {
 		bronze_details = {}, silver_details = {},
-		gold_details = {}, badge_name = '_', description = '_', updated_at, created_by = {},
+		gold_details = {}, badge_name = '_', description = '_', audits = [], created_by = {},
 	} = data;
 
 	const handleEdit = () => {
@@ -31,6 +31,8 @@ function BadgeListItem(props) {
 			detailObj : gold_details,
 		},
 	};
+
+	const updated_at = audits?.[0]?.created_at || null;
 
 	return (
 		<div className={styles.container}>
