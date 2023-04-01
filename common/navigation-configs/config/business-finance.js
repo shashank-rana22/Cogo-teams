@@ -17,10 +17,6 @@ const businessFinance = {
 		navigation : 'business_finance-account_receivables',
 		isMainNav  : true,
 	},
-	'/[partner_id]/business-finance/account-payables/[active_tab]': {
-		navigation : 'business_finance-account_payables',
-		isMainNav  : true,
-	},
 	'/[partner_id]/business-finance/translate-account-receivables/[activeTab]': {
 		navigation : 'business_finance-account_receivables_translate',
 		isMainNav  : true,
