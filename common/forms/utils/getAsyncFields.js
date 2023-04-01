@@ -53,6 +53,20 @@ function asyncFieldsOrganization() {
 	};
 }
 
+function asyncFieldsLeadOrganization() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_lead_organizations',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 function asyncFieldsOrganizationUsers() {
 	return {
 		labelKey    : 'name',
@@ -166,7 +180,6 @@ function asyncFieldsListAgents() {
 		endpoint    : 'list_chat_agents',
 		initialCall : true,
 		params      : {
-			filters    : { status: 'active' },
 			page_limit : 20,
 			sort_by    : 'active_assigned_chats',
 			sort_type  : 'asc',
@@ -248,6 +261,15 @@ function asyncKamExpertiseGroupOptions() {
 	};
 }
 
+function listVendors() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'q',
+		endpoint    : 'list_vendors',
+		initialCall : false,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -255,6 +277,7 @@ export {
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
 	asyncFieldsOrganizations,
+	asyncFieldsLeadOrganization,
 	asyncFieldsOrganizationUser,
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganization,
@@ -268,4 +291,5 @@ export {
 	asyncFieldsExpertiseBadgeName,
 	asyncKamExpertiseRuleOptions,
 	asyncKamExpertiseGroupOptions,
+	listVendors,
 };

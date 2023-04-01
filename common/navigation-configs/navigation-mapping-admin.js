@@ -794,7 +794,7 @@ const navigationMappingAdmin = {
 				key           : 'business_finance-account_receivables',
 				title         : 'AR',
 				href          : '/v2/business-finance/account-receivables/[active_tab]',
-				as            : '/v2/business-finance/account-receivables/outstanding',
+				as            : '/v2/business-finance/account-receivables/dashboard',
 				type          : 'link',
 				main_apis     : ['list_organizations'],
 				possible_apis : apis.account_receivables,
@@ -816,6 +816,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.cogo_book,
+			},
+			{
+				key           : 'business_finance-overheads',
+				title         : 'Overheads',
+				href          : '/v2/business-finance/overheads/[active_tab]',
+				as            : '/v2/business-finance/overheads/vendors',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.overheads,
 			},
 			{
 				key           : 'business_finance-incident_management',
@@ -1265,7 +1274,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				module_type   : 'dashboards',
-				possible_apis : apis.bl_do,
+				possible_apis : [...apis.bl_do, ...apis.sop, ...apis.poc],
 
 			},
 			{
@@ -1769,6 +1778,13 @@ const navigationMappingAdmin = {
 				href          : '/v2/allocation/kam-expertise',
 				as            : '/v2/allocation/kam-expertise',
 				possible_apis : apis.kam_expertise,
+			},
+			{
+				key           : 'allocations-crm_feedback_dashboard',
+				title         : 'CRM Feedback Dashboard',
+				href          : '/v2/allocation/crm-feedback-dashboard',
+				as            : '/v2/allocation/crm-feedback-dashboard',
+				possible_apis : apis.crm_feedback_dashboard,
 			},
 		],
 	},

@@ -18,6 +18,7 @@ import {
 	asyncFieldsExpertiseBadgeName,
 	asyncKamExpertiseRuleOptions,
 	asyncKamExpertiseGroupOptions,
+	listVendors,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -40,6 +41,7 @@ import {
  */
 
 const keyAsyncFieldsParamsMapping = {
+	list_vendors            : listVendors,
 	organizations           : asyncFieldsOrganizations,
 	organization_users      : asyncFieldsOrganizationUser,
 	partners                : asyncFieldsPartner,
