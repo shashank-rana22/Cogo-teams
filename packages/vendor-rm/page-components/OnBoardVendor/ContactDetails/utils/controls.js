@@ -52,7 +52,7 @@ const controls = [
 	{
 		name            : 'contact_proof_url',
 		showLabel       : false,
-		label           : 'Upload Vendor Document Proof (PAN/Aadhar Card)',
+		label           : 'Upload Contact Document Proof (PAN/Aadhar Card)',
 		style           : { flexBasis: '100%', marginRight: '0px' },
 		type            : 'file',
 		themeType       : 'secondary',
