@@ -49,16 +49,16 @@ const useGetProfitabillityShipmentList = (
 			try {
 				trigger({
 					params: {
-						entityCode  : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
-						serviceType : tabs === 'shipment' ? globalFilters?.serviceType : undefined,
-						startDate   : tabs === 'shipment' ? startDateFilter : undefined,
-						endDate     : tabs === 'shipment' ? endDateFilters : undefined,
-						jobStatus   : jobsFilters || undefined,
+						entityCode   : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
+						serviceTypes : tabs === 'shipment' ? globalFilters?.serviceType : undefined,
+						startDate    : tabs === 'shipment' ? startDateFilter : undefined,
+						endDate      : tabs === 'shipment' ? endDateFilters : undefined,
+						jobStatus    : jobsFilters || undefined,
 						// sortType    : 'Desc',
 						// sortBy      : 'profit',
-						pageSize    : 5,
-						q           : filters?.q || undefined,
-						pageIndex   : filters?.pageIndex,
+						pageSize     : 5,
+						q            : filters?.q || undefined,
+						pageIndex    : filters?.pageIndex,
 					},
 				});
 			} catch (e) {
