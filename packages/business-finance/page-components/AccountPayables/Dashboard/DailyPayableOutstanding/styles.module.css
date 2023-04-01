@@ -83,3 +83,9 @@
 	font-weight: 500;
 	color: #f68b21;
 }
+
+.loader {
+	width: 100px;
+	height: 20px;
+	margin: 8px 12px 0 0;
+}

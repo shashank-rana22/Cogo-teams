@@ -1,8 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
-const useGetInvoiceAmount = () => {
+interface ItemProps {
+	activeEntity: string,
+}
+
+const useGetInvoiceAmount = ({ activeEntity }:ItemProps) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -15,20 +19,21 @@ const useGetInvoiceAmount = () => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const getDahboardData = async () => {
+	const getDahboardData = useCallback(async () => {
 		try {
 			await trigger({
-				params: {},
+				params: {
+					entity: activeEntity,
+				},
 			});
 		} catch (e) {
 			Toast.error(e?.message);
 		}
-	};
+	}, [trigger, activeEntity]);
 
 	useEffect(() => {
 		getDahboardData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [getDahboardData]);
 
 	return {
 		data,

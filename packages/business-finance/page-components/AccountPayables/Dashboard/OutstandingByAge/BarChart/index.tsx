@@ -1,4 +1,4 @@
-import { ResponsiveBar } from '@cogoport/charts/bar';
+import { BarDatum, ResponsiveBar } from '@cogoport/charts/bar';
 import { Toggle } from '@cogoport/components';
 import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
 import React, { useState } from 'react';
@@ -8,14 +8,15 @@ import { getAmountInLakhCrK } from '../../utils/getAmountInLakhCrK';
 import styles from './styles.module.css';
 
 interface ItemDataProps {
-	ageingBucket:[],
+	ageingBucket: BarDatum[],
+	currency: string,
 }
 interface ItemProps {
-	data:ItemDataProps,
+	data: ItemDataProps,
 }
 
 function BarChart({ data }:ItemProps) {
-	const { ageingBucket = [] } = data || {};
+	const { ageingBucket = [], currency } = data || {};
 	const [isLinearView, setIsLinearView] = useState(true);
 
 	return (
@@ -91,13 +92,12 @@ function BarChart({ data }:ItemProps) {
 					label=""
 					tooltip={({ label, value }) => (
 						<strong className={styles.tooltip_style}>
-							{/* {label?.split('-')[0]} */}
 							{label}
 							{' '}
 							:
 							{' '}
 							<tspan color="#000">
-								{getFormattedPrice(value, 'INR')}
+								{getFormattedPrice(value, currency)}
 							</tspan>
 						</strong>
 					)}

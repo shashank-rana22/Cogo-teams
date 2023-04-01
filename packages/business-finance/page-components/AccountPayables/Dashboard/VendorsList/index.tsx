@@ -3,50 +3,20 @@ import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import StyledTable from '../commons/StyledTable';
+import { VENDER_LIST_OPTIONS } from '../Constants';
 import useGetBySupplier from '../hooks/useGetBySupplier';
 
 import styles from './styles.module.css';
 import VendorsColumn from './vendorsColumn';
 
-const OPTIONS = [
-	{
-		value : 'shipping_line',
-		label : 'Shipping Line',
-	},
-	{
-		value : 'airline',
-		label : 'Airline',
-	},
-	{
-		value : 'nvocc',
-		label : 'NVOCC',
-	},
-	{
-		value : 'iata',
-		label : 'IATA',
-	},
-	{
-		value : 'customs_service_provider',
-		label : 'Customs',
-	},
-	{
-		value : 'transporter',
-		label : 'Transporter',
-	},
-	{
-		value : 'freight_forwarder',
-		label : 'Freight Forwarder',
-	},
-	{
-		value : 'other',
-		label : 'Other',
-	},
-];
+interface ItemProps {
+	activeEntity: string,
+}
 
-function VendorsList() {
+function VendorsList({ activeEntity }:ItemProps) {
 	const [showVendorsList, setShowVendorsList] = useState(undefined);
 
-	const { data, loading } = useGetBySupplier({ showVendorsList });
+	const { data, loading } = useGetBySupplier({ showVendorsList, activeEntity });
 	const { list = [] } = data || {};
 
 	return (
@@ -68,7 +38,7 @@ function VendorsList() {
 						name="category"
 						value={showVendorsList}
 						onChange={setShowVendorsList}
-						options={OPTIONS}
+						options={VENDER_LIST_OPTIONS}
 						size="sm"
 						isClearable
 						placeholder="Category"

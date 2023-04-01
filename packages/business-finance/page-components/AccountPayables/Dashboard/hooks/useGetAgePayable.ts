@@ -1,8 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-const useGetAgePayable = () => {
+interface ItemProps {
+	activeEntity: string;
+}
+const useGetAgePayable = ({ activeEntity }:ItemProps) => {
 	const [filters, setFilters] = useState({
 		service  : undefined,
 		currency : undefined,
@@ -11,7 +14,6 @@ const useGetAgePayable = () => {
 	const {
 		service,
 		currency,
-		...rest
 	} = filters || {};
 	const [
 		{ data, loading },
@@ -25,23 +27,23 @@ const useGetAgePayable = () => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const getDahboardData = async () => {
+	const getDahboardData = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
 					service  : service || undefined,
 					currency : currency || undefined,
+					entity   : activeEntity,
 				},
 			});
 		} catch (err) {
 			Toast.error(err.meessage);
 		}
-	};
+	}, [service, currency, activeEntity, trigger]);
 
 	useEffect(() => {
 		getDahboardData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), service, currency]);
+	}, [service, currency, getDahboardData]);
 
 	return {
 		data,

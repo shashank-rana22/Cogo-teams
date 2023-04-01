@@ -1,28 +1,30 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 interface FilterProps {
-	showVendorsList:string,
+	showVendorsList: string,
+	activeEntity: string,
 }
 
-const useGetBySupplier = ({ showVendorsList }:FilterProps) => {
+const useGetBySupplier = ({ showVendorsList, activeEntity }:FilterProps) => {
 	const [
 		{ data, loading },
 		trigger,
 	] = useRequestBf(
 		{
-			url     : 'payments/outstanding/by-supplier',
+			url     : 'payments/outstanding/top-ten-service-providers',
 			method  : 'get',
-			authKey : 'get_payments_outstanding_by_supplier',
+			authKey : 'get_payments_outstanding_top_ten_service_providers',
 		},
 		{ manual: true, autoCancel: false },
 	);
 
-	const getDahboardData = async () => {
+	const getDahboardData = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
+					flag     : activeEntity,
 					sortBy   : 'openInvoiceLedgerAmount',
 					sortType : 'Desc',
 					category : showVendorsList || undefined,
@@ -31,12 +33,11 @@ const useGetBySupplier = ({ showVendorsList }:FilterProps) => {
 		} catch (err) {
 			Toast.error(err?.message);
 		}
-	};
+	}, [showVendorsList, activeEntity, trigger]);
 
 	useEffect(() => {
 		getDahboardData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [showVendorsList]);
+	}, [showVendorsList, getDahboardData]);
 
 	return {
 		data,

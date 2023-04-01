@@ -22,24 +22,6 @@
 	transition: width 0.5s ease-in-out;
 }
 
-.progress_bar1 {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	height: 10px;
-	background-color: #f68b21;
-	transition: width 0.5s ease-in-out;
-}
-
-.progress_bar2 {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	height: 10px;
-	background-color: #ed3726;
-	transition: width 0.5s ease-in-out;
-}
-
 .progress_label {
 	margin-right: 0.5rem;
 	font-size: 0;

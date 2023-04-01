@@ -1,9 +1,10 @@
-import { TabPanel, Tabs } from '@cogoport/components';
+import { Select, TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Dashboard from './Dashboard';
+import useListCogoEntities from './Dashboard/hooks/useListCogoEntities';
 import styles from './styles.module.css';
 
 function AccountPayables() {
@@ -24,11 +25,39 @@ function AccountPayables() {
 			`/business-finance/account-payables/${v}`,
 		);
 	};
+	const { data, api } = useListCogoEntities();
+	const { list } = data || {};
+
+	useEffect(() => { api(); }, [api]);
+
+	const [activeEntity, setActiveEntity] = useState(list?.[2]?.entity_code || '301');
+	const options = [
+		{ label: 'Cogoport Vietnam', value: list?.[0]?.entity_code },
+		{ label: 'Cogo Universe Pte. Ltd', value: list?.[1]?.entity_code },
+		{ label: 'COGOPORT PRIVATE LIMITED', value: list?.[2]?.entity_code },
+		{ label: 'Cogoport Netherlands', value: list?.[3]?.entity_code },
+		{ label: 'COGO FREIGHT PVT LTD', value: list?.[4]?.entity_code },
+	];
 
 	return (
 		<div>
-			<div className={styles.heading}>
-				Account Payables
+			<div className={styles.div_container}>
+				<div className={styles.heading}>
+					Account Payables
+				</div>
+
+				<div>
+					<Select
+						name="activeEntity"
+						value={activeEntity}
+						onChange={setActiveEntity}
+						placeholder="Select Entity"
+						options={options}
+						size="md"
+						isClearable
+						style={{ width: '200px' }}
+					/>
+				</div>
 			</div>
 			<div className={styles.container}>
 				<Tabs
@@ -38,7 +67,7 @@ function AccountPayables() {
 					onChange={handleTabChange}
 				>
 					<TabPanel name="dashboard" title="DASHBOARD">
-						<Dashboard />
+						<Dashboard activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="invoices" title="INVOICES">
 						<h1>Invoices</h1>

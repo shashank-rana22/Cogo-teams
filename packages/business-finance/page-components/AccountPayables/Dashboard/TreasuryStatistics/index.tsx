@@ -9,13 +9,16 @@ import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 import { monthControls } from './monthControls';
 import styles from './styles.module.css';
 
-function TreasuryStatistics() {
+interface ItemProps {
+	activeEntity:string,
+}
+function TreasuryStatistics({ activeEntity }:ItemProps) {
 	const {
 		data,
 		filters,
 		setFilters,
 		loading,
-	} = useGetTreasuryStats();
+	} = useGetTreasuryStats({ activeEntity });
 
 	const {
 		allocatedAmount,
@@ -24,7 +27,33 @@ function TreasuryStatistics() {
 		processingPercentage,
 		settledAmount,
 		utilizedAmount,
+		currency,
 	} = data || {};
+
+	const TREASURY_MAP = [
+		{
+			amount : utilizedAmount,
+			label  : 'Utilized Amount',
+		},
+		{
+			amount : settledAmount,
+			label  : 'Setteled Amount',
+		},
+		{
+			amount : (utilizedAmount - settledAmount),
+			label  : 'UTR Pending Amount',
+		},
+	];
+	const TREASURY_PERCENTAGE = [
+		{
+			label      : 'Flush Percentege',
+			percentage : flushPercentage?.toFixed(2),
+		},
+		{
+			label      : 'Processing Percentege',
+			percentage : processingPercentage?.toFixed(2),
+		},
+	];
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -59,11 +88,11 @@ function TreasuryStatistics() {
 					<div className={styles.label}>
 						Allocated Amount
 					</div>
-					{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
+					{loading ? <Placeholder className={styles.loader} />
 						: (
-							<Tooltip content={getFormattedPrice(allocatedAmount, 'INR')} placement="top" interactive>
+							<Tooltip content={getFormattedPrice(allocatedAmount, currency)} placement="top" interactive>
 								<div className={styles.value}>
-									INR
+									{currency}
 									{' '}
 									{getAmountInLakhCrK(allocatedAmount)}
 								</div>
@@ -71,84 +100,41 @@ function TreasuryStatistics() {
 						)}
 				</div>
 				<div className={styles.vr} />
-				<div className={styles.funds}>
-					<div className={styles.label}>
-						Utilized Amount
+				{TREASURY_MAP.map((item) => (
+					<div className={styles.funds}>
+						<div className={styles.label}>
+							{item?.label}
+						</div>
+						{loading ? <Placeholder className={styles.loader} />
+							: (
+								<Tooltip content={getFormattedPrice(item.amount, currency)} placement="top" interactive>
+									<div className={styles.value}>
+										{currency}
+										{' '}
+										{getAmountInLakhCrK(item?.amount)}
+									</div>
+								</Tooltip>
+							)}
 					</div>
-					{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
-						: (
-							<Tooltip content={getFormattedPrice(utilizedAmount, 'INR')} placement="top" interactive>
-								<div className={styles.value}>
-									INR
-									{' '}
-									{getAmountInLakhCrK(utilizedAmount)}
-								</div>
-							</Tooltip>
-						)}
-				</div>
-				<div className={styles.funds}>
-					<div className={styles.label}>
-						Setteled Amount
-					</div>
-					{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
-						: (
-							<Tooltip content={getFormattedPrice(settledAmount, 'INR')} placement="top" interactive>
-								<div className={styles.value}>
-									INR
-									{' '}
-									{getAmountInLakhCrK(settledAmount)}
-								</div>
-							</Tooltip>
-						)}
-				</div>
-				<div className={styles.funds}>
-					<div className={styles.label}>
-						UTR Pending Amount
-					</div>
-					{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
-						: (
-							<Tooltip
-								content={getFormattedPrice((utilizedAmount - settledAmount), 'INR')}
-								placement="top"
-								interactive
-							>
-								<div className={styles.value}>
-									INR
-									{' '}
-									{getAmountInLakhCrK(utilizedAmount - settledAmount)}
-								</div>
-							</Tooltip>
-						)}
-				</div>
+				))}
+
 				<div className={styles.vr} />
 
-				<div className={styles.funds}>
-					<div className={styles.label}>
-						Flush Percentege
+				{TREASURY_PERCENTAGE?.map((item) => (
+					<div className={styles.funds}>
+						<div className={styles.label}>
+							{item?.label}
+						</div>
+						{loading ? <Placeholder className={styles.loader} />
+							: (
+								<div className={styles.value}>
+									{item?.percentage}
+									{' '}
+									%
+								</div>
+							)}
 					</div>
-					{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
-						: (
-							<div className={styles.value}>
-								{flushPercentage?.toFixed(2)}
-								{' '}
-								%
-							</div>
-						)}
-				</div>
-
-				<div className={styles.funds}>
-					<div className={styles.label}>
-						Processing Percentege
-					</div>
-					{loading ? <Placeholder height="20px" width="100px" margin="8px 12px 0px 0px" />
-						: (
-							<div className={styles.value}>
-								{processingPercentage?.toFixed(2)}
-								{' '}
-								%
-							</div>
-						)}
-				</div>
+				))}
 
 			</div>
 		</div>

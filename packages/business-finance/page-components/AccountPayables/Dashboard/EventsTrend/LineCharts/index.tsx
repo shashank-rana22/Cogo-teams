@@ -3,14 +3,27 @@ import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
+import { dateDay } from '../../Constants';
 import { getAmountInLakhCrK } from '../../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
-const dateDay = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15',
-	'16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+interface ObjectProps {
+	amount?: number,
+	date?: Date,
+	count?: number,
+	smaOfAmount:number,
+	smaOfCount:number,
+}
 
-function LineCharts({ data, isCountView, showData }) {
+interface ItemProps {
+	data: ObjectProps[][],
+	isCountView: boolean;
+	showData: string,
+	currency: string,
+}
+
+function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 	const sales = data?.[0] || [];
 	const sales1 = data?.[1] || [];
 	const sales2 = data?.[2] || [];
@@ -65,7 +78,7 @@ function LineCharts({ data, isCountView, showData }) {
 
 	dateDay.forEach((date) => {
 		sales.forEach((sale) => {
-			if (sale?.date.slice(8, 10) === date) {
+			if (sale?.date.toString().slice(8, 10) === date) {
 				data1Obj[date] = isCountView ? sale?.count : sale?.amount;
 			}
 		});
@@ -80,7 +93,7 @@ function LineCharts({ data, isCountView, showData }) {
 
 	dateDay.forEach((date) => {
 		sales1.forEach((sale) => {
-			if (sale?.date.slice(8, 10) === date) {
+			if (sale?.date.toString().slice(8, 10) === date) {
 				data2Obj[date] = isCountView ? sale?.count : sale?.amount;
 			}
 		});
@@ -95,7 +108,7 @@ function LineCharts({ data, isCountView, showData }) {
 
 	dateDay.forEach((date) => {
 		sales2.forEach((sale) => {
-			if (sale?.date.slice(8, 10) === date) {
+			if (sale?.date.toString().slice(8, 10) === date) {
 				data3Obj[date] = isCountView ? sale?.count : sale?.amount;
 			}
 		});
@@ -142,7 +155,7 @@ function LineCharts({ data, isCountView, showData }) {
 					min  : 0,
 					max  : 'auto',
 				}}
-				yFormat={isCountView ? ' >-.2f' : (value) => getFormattedPrice(value, 'INR')}
+				yFormat={isCountView ? ' >-.2f' : (value) => getFormattedPrice(value, currency)}
 				axisTop={null}
 				axisRight={null}
 				axisBottom={{

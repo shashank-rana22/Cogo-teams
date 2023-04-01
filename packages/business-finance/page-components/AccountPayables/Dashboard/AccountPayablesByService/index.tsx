@@ -1,4 +1,3 @@
-/* eslint-disable no-unsafe-optional-chaining */
 import { Tooltip, Placeholder } from '@cogoport/components';
 import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
 import { IcMArrowDown } from '@cogoport/icons-react';
@@ -9,21 +8,55 @@ import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
-function AccountPayablesByService() {
+interface ItemProps {
+	activeEntity: string;
+}
+
+function AccountPayablesByService({ activeEntity }:ItemProps) {
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const [activeBox, setActiveBox] = useState(null);
 	const handleClick = () => {
 		setIsAccordionActive(true);
 	};
-	const { data = [], loading } = useGetPayablesByService();
-	const oceanAmount = data?.[0]?.amount + data?.[1]?.amount + data?.[2]?.amount + data?.[3]?.amount;
-	const airAmount = data?.[4]?.amount + data?.[5]?.amount;
-	const surfaceAmount = data?.[6]?.amount + data?.[7]?.amount;
-	const overseas = data?.[8]?.amount;
+	const { data, loading } = useGetPayablesByService({ activeEntity });
+	const { list, currency } = data || {};
+
+	const oceanData = list?.slice(0, 4);
+	const airData = list?.slice(4, 6);
+	const surfaceData = list?.slice(6, 8);
+	const overseasData = list?.slice(8, 9);
+
+	const oceanAmount = oceanData?.reduce((acc, service) => acc + service.amount, 0);
+	const airAmount = airData?.reduce((acc, service) => acc + service.amount, 0);
+	const surfaceAmount = surfaceData?.reduce((acc, service) => acc + service.amount, 0);
+	const overseas = overseasData?.reduce((acc, service) => acc + service.amount, 0);
+
+	const SERVICE_MAPPING = [
+		{
+			service        : 'Ocean',
+			formatedAmount : oceanAmount,
+		},
+		{
+			service        : 'Air',
+			formatedAmount : airAmount,
+		},
+		{
+			service        : 'Surface',
+			formatedAmount : surfaceAmount,
+		},
+		{
+			service        : 'Overseas',
+			formatedAmount : overseas,
+		},
+		{
+			service        : 'Overheads',
+			formatedAmount : 0,
+		},
+	];
 
 	const amountBoxData = () => {
 		switch (activeBox) {
-			case 'ocean':
+			case 'Ocean':
 				return (
 					<div>
 						<div className={styles.imports_container}>
@@ -38,7 +71,7 @@ function AccountPayablesByService() {
 									FCL Imports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(data[0]?.amount, 'INR')} interactive>
+									<Tooltip content={getFormattedPrice(data[0]?.amount, currency)} interactive>
 										<div>{getAmountInLakhCrK(data[0]?.amount)}</div>
 									</Tooltip>
 								</div>
@@ -49,7 +82,7 @@ function AccountPayablesByService() {
 									FCL Exports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(data[1]?.amount, 'INR')} interactive>
+									<Tooltip content={getFormattedPrice(data[1]?.amount, currency)} interactive>
 										<div>
 											{getAmountInLakhCrK(data[1]?.amount)}
 										</div>
@@ -62,7 +95,7 @@ function AccountPayablesByService() {
 									LCL Imports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(data[2]?.amount, 'INR')} interactive>
+									<Tooltip content={getFormattedPrice(data[2]?.amount, currency)} interactive>
 										<div>
 											{getAmountInLakhCrK(data[2]?.amount)}
 										</div>
@@ -75,7 +108,7 @@ function AccountPayablesByService() {
 									LCL Exports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(data[3]?.amount, 'INR')} interactive>
+									<Tooltip content={getFormattedPrice(data[3]?.amount, currency)} interactive>
 										<div>
 											{getAmountInLakhCrK(data[3]?.amount)}
 										</div>
@@ -86,7 +119,7 @@ function AccountPayablesByService() {
 						</div>
 					</div>
 				);
-			case 'air':
+			case 'Air':
 				return (
 					<div className={styles.imports_container}>
 						<div className={styles.sub_container}>
@@ -100,7 +133,7 @@ function AccountPayablesByService() {
 								Domestic
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[4]?.amount, 'INR')} interactive>
+								<Tooltip content={getFormattedPrice(data[4]?.amount, currency)} interactive>
 									<div>
 										{getAmountInLakhCrK(data[4]?.amount)}
 									</div>
@@ -113,7 +146,7 @@ function AccountPayablesByService() {
 								International
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[5]?.amount, 'INR')} interactive>
+								<Tooltip content={getFormattedPrice(data[5]?.amount, currency)} interactive>
 									<div>
 										{getAmountInLakhCrK(data[5]?.amount)}
 									</div>
@@ -123,7 +156,7 @@ function AccountPayablesByService() {
 
 					</div>
 				);
-			case 'surface':
+			case 'Surface':
 				return (
 					<div className={styles.imports_container}>
 
@@ -138,7 +171,7 @@ function AccountPayablesByService() {
 								Trailer
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[6]?.amount, 'INR')} interactive>
+								<Tooltip content={getFormattedPrice(data[6]?.amount, currency)} interactive>
 									<div>
 										{getAmountInLakhCrK(data[6]?.amount)}
 									</div>
@@ -151,7 +184,7 @@ function AccountPayablesByService() {
 								Haulage
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[7]?.amount, 'INR')} interactive>
+								<Tooltip content={getFormattedPrice(data[7]?.amount, currency)} interactive>
 									<div>
 										{getAmountInLakhCrK(data[7]?.amount)}
 									</div>
@@ -170,114 +203,42 @@ function AccountPayablesByService() {
 	return (
 		<div>
 			<div
-				className={styles.container}
-				style={{
-					transition : 'max-height 0.3s ease-in-out',
-					maxHeight  : isAccordionActive ? '430px' : '125px',
-				}}
+				className={isAccordionActive ? styles.container : styles.div_container}
 			>
 				<div className={styles.heading}>
 					Account Payables By Segments
 				</div>
 				<div className={styles.hr} />
+
 				<div className={styles.amount_container}>
-					{loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
-						: (
-							<div
-								className={activeBox === 'ocean' ? styles.sub_container_click : styles.amount}
-								onClick={() => {
-									handleClick();
-									setActiveBox('ocean');
-								}}
-								role="presentation"
-							>
-								<div className={styles.label}>
-									Ocean
+
+					{SERVICE_MAPPING.map((item) => (
+						loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
+							: (
+								<div
+									className={activeBox === item?.service ? styles.sub_container_click : styles.amount}
+									onClick={() => {
+										handleClick();
+										setActiveBox(item?.service);
+									}}
+									role="presentation"
+								>
+									<div className={styles.label}>
+										{item?.service}
+									</div>
+									<div className={styles.value}>
+										{getFormattedPrice(item?.formatedAmount, currency)}
+									</div>
 								</div>
-								<div className={styles.value}>
-									{getFormattedPrice(oceanAmount, 'INR')}
-								</div>
-							</div>
-						)}
-					{loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
-						: (
-							<div
-								className={activeBox === 'air' ? styles.sub_container_click : styles.amount}
-								onClick={() => {
-									handleClick();
-									setActiveBox('air');
-								}}
-								role="presentation"
-							>
-								<div className={styles.label}>
-									Air
-								</div>
-								<div className={styles.value}>
-									{getFormattedPrice(airAmount, 'INR')}
-								</div>
-							</div>
-						)}
-					{loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
-						: (
-							<div
-								className={activeBox === 'surface' ? styles.sub_container_click : styles.amount}
-								onClick={() => {
-									handleClick();
-									setActiveBox('surface');
-								}}
-								role="presentation"
-							>
-								<div className={styles.label}>
-									Surface
-								</div>
-								<div className={styles.value}>
-									{getFormattedPrice(surfaceAmount, 'INR')}
-								</div>
-							</div>
-						)}
-					{loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
-						: (
-							<div
-								className={activeBox === 'overseas' ? styles.sub_container_click : styles.amount}
-								onClick={() => {
-									handleClick();
-									setActiveBox('overseas');
-								}}
-								role="presentation"
-							>
-								<div className={styles.label}>
-									Overseas
-								</div>
-								<div className={styles.value}>
-									{getFormattedPrice(overseas, 'INR')}
-								</div>
-							</div>
-						)}
-					{loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
-						: (
-							<div
-								className={activeBox === 'overheads' ? styles.sub_container_click : styles.amount}
-								onClick={() => {
-									handleClick();
-									setActiveBox('overheads');
-								}}
-								role="presentation"
-							>
-								<div className={styles.label}>
-									Overheads
-								</div>
-								<div className={styles.value}>
-									{getFormattedPrice(0, 'INR')}
-								</div>
-							</div>
-						)}
+							)
+					))}
 				</div>
 				<div>
 					{amountBoxData()}
 				</div>
 			</div>
-			{activeBox === null
-				? null : (
+			{activeBox !== null
+				&& (
 					<div className={styles.footer}>
 						<div
 							className={styles.footer_text}

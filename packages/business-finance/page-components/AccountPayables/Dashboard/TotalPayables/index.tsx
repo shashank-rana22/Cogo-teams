@@ -9,17 +9,19 @@ import ProgressLine from './ProgressLine';
 import styles from './styles.module.css';
 
 interface FilterProps {
-	currency:string,
-	service:string,
+	currency?: string,
+	service?: string,
 }
 interface ItemProps {
-	filtersData:FilterProps;
+	filtersData: FilterProps;
+	activeEntity:string,
 }
 
 function TotalPayables({
 	filtersData,
+	activeEntity,
 }:ItemProps) {
-	const { data, loading } = useGetTotalPayables({ filtersData });
+	const { data, loading } = useGetTotalPayables({ filtersData, activeEntity });
 
 	const {
 		currentAmount,
@@ -28,6 +30,7 @@ function TotalPayables({
 		overDuePercent,
 		todayDueAmount,
 		todayDuePercent,
+		currency,
 	} = data || {};
 
 	return (
@@ -43,19 +46,19 @@ function TotalPayables({
 								Not Due
 							</div>
 						</div>
-						{loading ? <Placeholder height="16px" width="100px" margin="4px 12px 0px 8px" />
+						{loading ? <Placeholder className={styles.loader} />
 							: (
 								<div className={styles.point_label}>
 									<Tooltip
-										content={getFormattedPrice(currentAmount, 'INR')}
+										content={getFormattedPrice(currentAmount, currency)}
 										placement="top"
 										interactive
 									>
 										<div className={styles.value}>
-											INR
+											{currency}
 											{' '}
 											{getAmountInLakhCrK(currentAmount)}
-											<div style={{ fontWeight: 500, fontSize: 13, marginTop: 2, marginLeft: 2 }}>
+											<div className={styles.inline_style}>
 												{' '}
 												(
 												{currentPercent}
@@ -73,19 +76,19 @@ function TotalPayables({
 								Today
 							</div>
 						</div>
-						{loading ? <Placeholder height="16px" width="100px" margin="4px 12px 0px 8px" />
+						{loading ? <Placeholder className={styles.loader} />
 							:						(
 								<div className={styles.point_label}>
 									<Tooltip
-										content={getFormattedPrice(todayDueAmount, 'INR')}
+										content={getFormattedPrice(todayDueAmount, currency)}
 										placement="top"
 										interactive
 									>
 										<div className={styles.value}>
-											INR
+											{currency}
 											{' '}
 											{getAmountInLakhCrK(todayDueAmount)}
-											<div style={{ fontWeight: 500, fontSize: 13, marginTop: 2, marginLeft: 2 }}>
+											<div className={styles.inline_style}>
 												{' '}
 												(
 												{todayDuePercent}
@@ -103,19 +106,19 @@ function TotalPayables({
 								Overdue
 							</div>
 						</div>
-						{loading ? <Placeholder height="16px" width="100px" margin="4px 12px 0px 8px" />
+						{loading ? <Placeholder className={styles.loader} />
 							:						(
 								<div className={styles.point_label}>
 									<Tooltip
-										content={getFormattedPrice(overDueAmount, 'INR')}
+										content={getFormattedPrice(overDueAmount, currency)}
 										placement="top"
 										interactive
 									>
 										<div className={styles.value}>
-											INR
+											{currency}
 											{' '}
 											{getAmountInLakhCrK(overDueAmount)}
-											<div style={{ fontWeight: 500, fontSize: 13, marginTop: 2, marginLeft: 2 }}>
+											<div className={styles.inline_style}>
 												{' '}
 												(
 												{overDuePercent}

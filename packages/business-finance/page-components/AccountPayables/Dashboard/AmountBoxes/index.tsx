@@ -8,11 +8,15 @@ import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
-function AmountBoxes() {
+interface ItemProps {
+	activeEntity: string,
+}
+
+function AmountBoxes({ activeEntity }:ItemProps) {
 	const {
 		data,
 		loading,
-	} = useGetInvoiceAmount();
+	} = useGetInvoiceAmount({ activeEntity });
 	const {
 		accountPayables,
 		onAccountAmount,
@@ -23,22 +27,41 @@ function AmountBoxes() {
 		onAccountChange,
 		creditNoteAmount,
 		creditNoteChange,
+		currency,
 	} = data || {};
+
+	const MAPPING_DATA = [
+		{
+			label  : 'Open Invoices',
+			amount : openInvoicesAmount,
+			count  : openInvoiceChange,
+		}, {
+			label  : 'On Account Payment',
+			amount : onAccountAmount,
+			count  : onAccountChange,
+		},
+		{
+			label  : 'Open Credit Notes',
+			amount : creditNoteAmount,
+			count  : creditNoteChange,
+		},
+
+	];
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
 				<div className={styles.box}>
-					{loading ? <Placeholder height="20px" width="300px" margin="0px 0px 26px 0px" />
+					{loading ? <Placeholder className={styles.loader} />
 						: (
 							<div className={styles.sub_container}>
 								<div className={styles.label_text}>
-									INR
+									{currency}
 								</div>
 								<div className={styles.value_text}>
 
 									<Tooltip
-										content={getFormattedPrice(accountPayables, 'INR') || ''}
+										content={getFormattedPrice(accountPayables, currency) || ''}
 										placement="top"
 										interactive
 									>
@@ -65,112 +88,46 @@ function AmountBoxes() {
 							</div>
 						)}
 				</div>
-				<div className={styles.box}>
-					{loading ? <Placeholder height="20px" width="300px" margin="0px 0px 26px 0px" />
-						: (
-							<div className={styles.sub_container}>
-								<div className={styles.label_text}>
-									INR
-								</div>
-								<div className={styles.value_text}>
-									<Tooltip
-										content={getFormattedPrice(openInvoicesAmount, 'INR') || ''}
-										placement="top"
-										interactive
-									>
-										<div>
-											{getAmountInLakhCrK(openInvoicesAmount)}
-										</div>
-									</Tooltip>
-								</div>
-								<div className={styles.account_payables}>
+
+				{MAPPING_DATA.map((item) => (
+					<div className={styles.box}>
+						{loading ? <Placeholder className={styles.loader} />
+							: (
+								<div className={styles.sub_container}>
 									<div className={styles.label_text}>
-										Open Invoices
+										{currency}
 									</div>
-									<div className={styles.percentage_text}>
-										<div className={openInvoiceChange > 0 ? styles.profit_icon : styles.loss_icon}>
-											<IcMArrowNext height={20} width={20} />
+									<div className={styles.value_text}>
+										<Tooltip
+											content={getFormattedPrice(item?.amount, currency) || ''}
+											placement="top"
+											interactive
+										>
+											<div>
+												{getAmountInLakhCrK(item?.amount)}
+											</div>
+										</Tooltip>
+									</div>
+									<div className={styles.account_payables}>
+										<div className={styles.label_text}>
+											{item.label}
 										</div>
-										{ openInvoiceChange > 0 ? '+' : null}
-										{' '}
-										{openInvoiceChange?.toFixed(2)}
-										% this week
-									</div>
-								</div>
-							</div>
-						)}
-				</div>
-				<div className={styles.box}>
-					{loading
-						? <Placeholder height="20px" width="300px" margin="0px 0px 26px 0px" />
-						: (
-							<div className={styles.sub_container}>
-								<div className={styles.label_text}>
-									INR
-								</div>
-								<div className={styles.value_text}>
-									<Tooltip
-										content={getFormattedPrice(onAccountAmount, 'INR') || ''}
-										placement="top"
-										interactive
-									>
-										<div>
-											{getAmountInLakhCrK(onAccountAmount)}
+										<div className={styles.percentage_text}>
+											<div className={item?.count > 0
+												? styles.profit_icon : styles.loss_icon}
+											>
+												<IcMArrowNext height={20} width={20} />
+											</div>
+											{ item.count > 0 ? '+' : null}
+											{' '}
+											{item.count?.toFixed(2)}
+											% this week
 										</div>
-									</Tooltip>
-								</div>
-								<div className={styles.account_payables}>
-									<div className={styles.label_text}>
-										On Account Payment
-									</div>
-									<div className={styles.percentage_text}>
-										<div className={onAccountChange > 0 ? styles.profit_icon : styles.loss_icon}>
-											<IcMArrowNext height={20} width={20} />
-										</div>
-										{ onAccountChange > 0 ? '+' : null}
-										{' '}
-										{onAccountChange?.toFixed(2)}
-										% this week
 									</div>
 								</div>
-							</div>
-						)}
-				</div>
-				<div className={styles.box}>
-					{loading ? <Placeholder height="20px" width="300px" margin="0px 0px 26px 0px" />
-						: (
-							<div className={styles.sub_container}>
-								<div className={styles.label_text}>
-									INR
-								</div>
-								<div className={styles.value_text}>
-									<Tooltip
-										content={getFormattedPrice(creditNoteAmount, 'INR') || ''}
-										placement="top"
-										interactive
-									>
-										<div>
-											{getAmountInLakhCrK(creditNoteAmount)}
-										</div>
-									</Tooltip>
-								</div>
-								<div className={styles.account_payables}>
-									<div className={styles.label_text}>
-										Open Credit Notes
-									</div>
-									<div className={styles.percentage_text}>
-										<div className={creditNoteChange > 0 ? styles.profit_icon : styles.loss_icon}>
-											<IcMArrowNext height={20} width={20} />
-										</div>
-										{ creditNoteChange > 0 ? '+' : null}
-										{' '}
-										{creditNoteChange?.toFixed(2)}
-										% this week
-									</div>
-								</div>
-							</div>
-						)}
-				</div>
+							)}
+					</div>
+				))}
 			</div>
 		</div>
 	);

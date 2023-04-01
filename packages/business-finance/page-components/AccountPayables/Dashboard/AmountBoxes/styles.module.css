@@ -72,3 +72,9 @@
 	color: #ed3726;
 	transform: translateX(10px) rotate(45deg);
 }
+
+.loader {
+	width: 260px;
+	height: 20px;
+	margin: 0 0 26px;
+}

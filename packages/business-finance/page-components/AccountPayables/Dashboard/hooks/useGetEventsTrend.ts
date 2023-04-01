@@ -1,24 +1,24 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface FilterProps {
-	service:string,
-	currency:string,
+	service?: string,
+	currency?: string,
 }
 interface ItemProps {
-	showData:string;
-	filtersData:FilterProps;
+	showData: string;
+	filtersData: FilterProps;
+	activeEntity: string;
 }
 
-const useGetEventsTrend = ({ showData, filtersData }:ItemProps) => {
+const useGetEventsTrend = ({ showData, filtersData, activeEntity }:ItemProps) => {
 	const [filters, setFilters] = useState({
 		events: 'so2UploadTrend',
 	});
 	const { service, currency } = filtersData || {};
 	const {
 		events,
-		...rest
 	} = filters || {};
 	const [
 		{ data, loading },
@@ -32,7 +32,7 @@ const useGetEventsTrend = ({ showData, filtersData }:ItemProps) => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const getDahboardData = async () => {
+	const getDahboardData = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -41,17 +41,17 @@ const useGetEventsTrend = ({ showData, filtersData }:ItemProps) => {
 					previousCount : showData === 'day' ? '30' : '12',
 					service       : service || undefined,
 					currency      : currency || undefined,
+					entity        : activeEntity,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.message);
 		}
-	};
+	}, [events, showData, service, currency, activeEntity, trigger]);
 
 	useEffect(() => {
 		getDahboardData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), events, showData, service, currency]);
+	}, [events, showData, service, currency, getDahboardData]);
 
 	return {
 		data,

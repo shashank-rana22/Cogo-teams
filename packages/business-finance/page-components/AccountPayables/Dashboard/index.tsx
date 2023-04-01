@@ -13,28 +13,37 @@ import TotalPayables from './TotalPayables';
 import TreasuryStatistics from './TreasuryStatistics';
 import VendorsList from './VendorsList';
 
-function Dashboard() {
+interface ItemProps {
+	activeEntity: string,
+}
+
+function Dashboard({ activeEntity }:ItemProps) {
 	const [showData, setShowData] = useState('day');
-	const { data, filters, setFilters, loading } = useGetAgePayable();
+	const { data, filters, setFilters, loading } = useGetAgePayable({ activeEntity });
 
 	return (
 		<div className={styles.container}>
-			<AmountBoxes />
-			<AccountPayablesByService />
-			<TreasuryStatistics />
+			<AmountBoxes activeEntity={activeEntity} />
+			<AccountPayablesByService activeEntity={activeEntity} />
+			<TreasuryStatistics activeEntity={activeEntity} />
 			<SelectFilters filters={filters} setFilters={setFilters} />
-			<EventsTrend showData={showData} setShowData={setShowData} filtersData={filters} />
-			<BillTurnAroundTime filtersData={filters} />
+			<EventsTrend
+				showData={showData}
+				setShowData={setShowData}
+				filtersData={filters}
+				activeEntity={activeEntity}
+			/>
+			<BillTurnAroundTime filtersData={filters} activeEntity={activeEntity} />
 			<div className={styles.sub_container}>
 				<div className={styles.outstanding}>
 					<OutstandingByAge data={data} loading={loading} />
 					<TotalPayables
 						filtersData={filters}
-
+						activeEntity={activeEntity}
 					/>
-					<DailyPayableOutstanding filters={filters} />
+					<DailyPayableOutstanding filters={filters} activeEntity={activeEntity} />
 				</div>
-				<VendorsList />
+				<VendorsList activeEntity={activeEntity} />
 			</div>
 		</div>
 	);

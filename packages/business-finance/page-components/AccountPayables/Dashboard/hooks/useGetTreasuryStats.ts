@@ -1,16 +1,19 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-const useGetTreasuryStats = () => {
+interface ItemProps {
+	activeEntity:string;
+}
+
+const useGetTreasuryStats = ({ activeEntity }:ItemProps) => {
 	const [filters, setFilters] = useState({
 		Date: undefined,
 	});
 
 	const {
 		Date,
-		...rest
 	} = filters || {};
 
 	const { startDate, endDate } = Date || {};
@@ -27,7 +30,7 @@ const useGetTreasuryStats = () => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const getDahboardData = async () => {
+	const getDahboardData = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -35,17 +38,17 @@ const useGetTreasuryStats = () => {
 						: undefined,
 					toDate: endDate
 						? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
+					entityCode: activeEntity,
 				},
 			});
 		} catch (err) {
 			Toast.error(err?.message);
 		}
-	};
+	}, [endDate, startDate, activeEntity, trigger]);
 
 	useEffect(() => {
 		getDahboardData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), Date]);
+	}, [Date, getDahboardData]);
 
 	return {
 		data,

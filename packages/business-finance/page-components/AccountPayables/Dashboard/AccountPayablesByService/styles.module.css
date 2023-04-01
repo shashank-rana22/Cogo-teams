@@ -1,8 +1,10 @@
 .container {
+	max-height: 430px;
 	padding: 18px;
 	overflow: hidden;
 	background: #fff;
 	border-radius: 8px;
+	transition: max-height 0.3s ease-in-out;
 }
 
 .value {
@@ -137,4 +139,13 @@
 	background: #fdebe9;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.div_container {
+	max-height: 125px;
+	padding: 18px;
+	overflow: hidden;
+	background: #fff;
+	border-radius: 8px;
+	transition: max-height 0.3s ease-in-out;
 }

@@ -6,30 +6,23 @@ import React, { useState, useEffect } from 'react';
 
 import Filter from '../../../commons/Filters';
 import StyledTable from '../commons/StyledTable';
+import { options } from '../Constants';
 import useGetBillTat from '../hooks/useGetBillTat';
 
 import styles from './styles.module.css';
 import tatColumn from './tatColumn';
 import { timeFrameControls } from './timeFrameControls';
 
-const options = [
-	{ label: 'SO2 upload', value: 'so2Upload' },
-	{ label: 'COE approved', value: 'approved' },
-	{ label: 'PayRun creation', value: 'payrunCreated' },
-	{ label: 'Bank allocation', value: 'bankAllocated' },
-	{ label: 'First UTR Upload', value: 'firstUtrUpload' },
-	{ label: 'Last UTR', value: 'lastUtrUpload' },
-];
-
 interface FilterProps {
 	currency:string,
 	service:string,
 }
 interface ItemProps {
-	filtersData:FilterProps,
+	filtersData: FilterProps,
+	activeEntity: string;
 }
 
-function BillTurnAroundTime({ filtersData }:ItemProps) {
+function BillTurnAroundTime({ filtersData, activeEntity }:ItemProps) {
 	const [firstEvent, setFirstEvent] = useState('');
 	const [secondEvent, setSecondEvent] = useState('');
 
@@ -37,6 +30,7 @@ function BillTurnAroundTime({ filtersData }:ItemProps) {
 		filtersData,
 		firstEvent,
 		secondEvent,
+		activeEntity,
 	});
 	const { handleSubmit } = useForm();
 
@@ -47,6 +41,8 @@ function BillTurnAroundTime({ filtersData }:ItemProps) {
 	const date1 = format(startDate, 'dd MMM yyyy');
 	const date2 = format(endDate, 'dd MMM yyyy');
 
+	const [dataList, setDataList] = useState([]);
+
 	const list = [
 		{
 			firstEvent,
@@ -56,7 +52,6 @@ function BillTurnAroundTime({ filtersData }:ItemProps) {
 			hours,
 		},
 	];
-	const [dataList, setDataList] = useState([]);
 
 	useEffect(() => {
 		if (hours) {

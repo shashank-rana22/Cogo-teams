@@ -1,3 +1,4 @@
+import { BarDatum } from '@cogoport/charts/bar';
 import React from 'react';
 
 import LoadingState from '../LoadingState';
@@ -6,11 +7,12 @@ import BarChart from './BarChart';
 import styles from './styles.module.css';
 
 interface ItemDataProps {
-	ageingBucket:[],
+	ageingBucket: BarDatum[],
+	currency: string,
 }
 interface ItemProps {
-	data:ItemDataProps,
-	loading:boolean
+	data: ItemDataProps,
+	loading: boolean
 }
 
 function OutstandingByAge({ data, loading }:ItemProps) {

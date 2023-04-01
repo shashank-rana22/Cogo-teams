@@ -4,45 +4,34 @@ import React, { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
 import SegmentedControl from '../../../commons/SegmentedControl';
+import { CHART_OPTIONS } from '../Constants';
 import useGetEventsTrend from '../hooks/useGetEventsTrend';
 
 import { filterControls } from './filterControl';
 import LineCharts from './LineCharts';
 import styles from './styles.module.css';
 
-const OPTIONS = [
-	{
-		label : 'Daily',
-		value : 'day',
-	},
-	{
-		label : 'Monthly',
-		value : 'month',
-	},
-	{
-		label : 'Last Three Month',
-		value : 'lastThreeMonths',
-	},
-];
-
 interface FilterProps {
-	service:string,
-	currency:string,
+	service?: string,
+	currency?: string,
 }
 interface ItemProps {
-	showData:string;
-	setShowData:Function;
-	filtersData:FilterProps;
+	showData: string;
+	setShowData: Function;
+	filtersData: FilterProps;
+	activeEntity: string;
 }
 
-function EventsTrend({ showData, setShowData, filtersData }:ItemProps) {
+function EventsTrend({ showData, setShowData, filtersData, activeEntity }:ItemProps) {
 	const [isCountView, setIsCountView] = useState(false);
 	const {
 		data,
 		loading,
 		filters,
 		setFilters,
-	} = useGetEventsTrend({ showData, filtersData });
+	} = useGetEventsTrend({ showData, filtersData, activeEntity });
+
+	const { list, currency } = data || {};
 
 	return (
 		<div className={styles.container}>
@@ -78,7 +67,7 @@ function EventsTrend({ showData, setShowData, filtersData }:ItemProps) {
 				<div className={styles.filter}>
 					<div className={styles.segmented_filter}>
 						<SegmentedControl
-							options={OPTIONS}
+							options={CHART_OPTIONS}
 							activeTab={showData}
 							setActiveTab={setShowData}
 							color="#ED3726"
@@ -100,7 +89,7 @@ function EventsTrend({ showData, setShowData, filtersData }:ItemProps) {
 					))}
 				</div>
 			)
-				: <LineCharts data={data} isCountView={isCountView} showData={showData} />}
+				: <LineCharts data={list} isCountView={isCountView} showData={showData} currency={currency} />}
 		</div>
 	);
 }
