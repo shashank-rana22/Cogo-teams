@@ -29,6 +29,27 @@ const businessFinance = {
 		navigation : 'business_finance-reports',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/cfo-dashboard/[activeTab]': {
+		navigation : 'business_finance-cfo_dashboard',
+		isMainNav  : true,
+	},
+
+	'/[partner_id]/business-finance/account-payables/[active_tab]': {
+		navigation : 'business_finance-account_payables',
+		isMainNav  : true,
+	},
+
+	'/[partner_id]/business-finance/overheads': {
+		navigation : 'business_finance-overheads',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/overheads/[active_tab]': {
+		navigation : 'business_finance-overheads',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/overheads/[active_tab]/Expenses/Response': {
+		navigation: 'business_finance-overheads',
+	},
 };
 
 export default businessFinance;
