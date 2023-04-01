@@ -1,8 +1,15 @@
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestAir } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';
 
-const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {} }) => {
+const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relevantToMe }) => {
+	const {
+		user_data: userData,
+	} = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+
 	const [searchValue, setSearchValue] = useState('');
 	const [page, setPage] = useState(1);
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -39,6 +46,11 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {} }) => 
 					documentState       : 'document_accepted',
 					isDocDataRequired   : true,
 				},
+				final_awb: {
+					assignedStakeholder : 'service_ops2_docs',
+					status              : 'pending',
+					task                : ['upload_airway_bill'],
+				},
 			};
 			if (searchValue) {
 				setPage(1);
@@ -52,14 +64,15 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {} }) => 
 						},
 						...filter,
 						...payload[activeTab],
-						pageIndex: page,
+						stakeholderId : relevantToMe ? userData.user.id : undefined,
+						pageIndex     : page,
 					},
 				});
 			} catch (err) {
 				console.log(err);
 			}
 		})();
-	}, [activeTab, filter, page, query, searchValue, trigger]);
+	}, [activeTab, filter, page, query, relevantToMe, searchValue, trigger, userData.user.id]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);

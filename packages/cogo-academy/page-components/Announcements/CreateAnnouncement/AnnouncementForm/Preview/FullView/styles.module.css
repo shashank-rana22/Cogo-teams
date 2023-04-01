@@ -1,0 +1,12 @@
+.container {
+	position: absolute;
+	bottom: 10px;
+	left: 16%;
+	padding: 8px;
+}
+
+.icon {
+	align-self: center;
+	margin-top: 4px;
+	margin-left: 4px;
+}

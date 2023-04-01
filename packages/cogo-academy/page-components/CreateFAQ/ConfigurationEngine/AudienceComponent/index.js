@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useLIstFaqAudience from '../hooks/useLIstFaqAudience';
 import audienceListColumns from '../TableConfigurations/audienceListColumns';
@@ -32,8 +32,11 @@ function AudienceComponent({ configurationPage, setConfigurationPage }) {
 		showPopOver,
 		setShowPopOver,
 		updateApiLoading,
-
 	});
+
+	useEffect(() => {
+		setAudienceCurrentPage(1);
+	}, [activeAudience, setAudienceCurrentPage]);
 
 	return (
 		<div>

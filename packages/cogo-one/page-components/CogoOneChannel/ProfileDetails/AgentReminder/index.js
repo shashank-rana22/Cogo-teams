@@ -124,6 +124,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 								placeholder="Description"
 								value={inputValue?.description}
 								onChange={(val) => setInputValue((q) => ({ ...q, description: val }))}
+								rows={3}
 							/>
 						</div>
 

@@ -1,0 +1,107 @@
+.card {
+	padding: 12px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.border {
+	width: 60px;
+	height: 2px;
+	margin: 4px 0 0 2px;
+	background: #ed3726;
+	border-radius: 4px;
+}
+
+.border_left_side {
+	height: 76px;
+	margin: 17px 80px 0;
+	border-left: 2px solid #cfcfcf;
+}
+
+.border_right_side {
+	height: 78px;
+	margin: 17px 80px 0;
+	border-left: 2px solid #cfcfcf;
+}
+
+.expense_div {
+	display: flex;
+}
+
+.expense_main {
+	/* margin-left: -170px; */
+}
+
+.main_div {
+	margin: 36px 0 0 18px;
+}
+
+.expense_text {
+	margin-top: 12px;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.amount_styles {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.invoices_styles {
+	margin-right: 20px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.revenue_main {
+	margin: 0 0 22px 2%;
+}
+
+.text {
+	font-size: 18px;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+}
+
+.icon {
+	margin: 5px 0 0 5px;
+	cursor: pointer;
+}
+
+.text_styles {
+	display: flex;
+}
+
+.icon_plus_styles {
+	margin-right: 12px;
+	margin-left: -8px;
+	color: #34c759;
+	transform: translate(10px, 2px) rotate(-45deg);
+}
+
+.icon_minus_styles {
+	margin-right: 12px;
+	margin-left: -16px;
+	color: #f8aea8;
+	transform: translate(10px, 2px) rotate(+45deg);
+}
+
+.texts_style {
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 150%;
+}
+
+.amount_plus_styles {
+	font-size: 24px;
+	font-weight: 500;
+	color: #34c759;
+}
+
+.amount_minus_styles {
+	font-size: 24px;
+	font-weight: 500;
+	color: #ee3425;
+}

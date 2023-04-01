@@ -112,6 +112,17 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
+			name        : 'airlineIataCode',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Airline IATA Code',
+			placeholder : 'Enter Airline IATA Code',
+			span        : 5,
+			rules       : {
+				required: 'Airline IATA Code is Required',
+			},
+		},
+		{
 			name        : 'paymentTerm',
 			type        : 'select',
 			className   : 'primary lg',
@@ -229,7 +240,7 @@ const mawbControls = (disableClass) => ({
 					placeholder : 'select',
 					span        : 1.25,
 					options     : [
-						{ label: 'Cm', value: 'cm' },
+						{ label: 'Cm', value: 'cms' },
 						{ label: 'Inch', value: 'inch' },
 					],
 				},
@@ -526,14 +537,15 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
-			name        : 'executedDate',
-			type        : 'date_picker',
-			className   : 'primary lg',
-			label       : 'Executed Date',
-			span        : 5,
-			placeholder : 'Date',
-			value       : new Date(),
-			rules       : {
+			name                  : 'executedDate',
+			type                  : 'date_picker',
+			className             : 'primary lg',
+			label                 : 'Executed Date',
+			span                  : 5,
+			placeholder           : 'Date',
+			value                 : new Date(),
+			isPreviousDaysAllowed : true,
+			rules                 : {
 				required: 'Date is Required',
 			},
 		},
