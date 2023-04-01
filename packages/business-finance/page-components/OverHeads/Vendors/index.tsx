@@ -56,7 +56,7 @@ function VenderComponent() {
 
 	const handleClick = () => {
 		router.push(
-			'/vendors',
+			'/onboard-vendor',
 		);
 	};
 
