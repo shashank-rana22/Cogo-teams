@@ -6,9 +6,8 @@ import styles from './styles.module.css';
 
 interface Props {
 	reportingManagers? : object[],
-	user?:object,
 }
-function Reporting({ reportingManagers = [], user = {} }: Props) {
+function Reporting({ reportingManagers = [] }: Props) {
 	return (
 		<div className={styles.container}>
 			{(reportingManagers || []).map((item) => (
@@ -17,9 +16,6 @@ function Reporting({ reportingManagers = [], user = {} }: Props) {
 				</div>
 			))}
 			<div className={styles.connector} />
-			<div className={styles.card_container}>
-				<UserCard userData={user} type="active" />
-			</div>
 
 		</div>
 	);
