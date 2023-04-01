@@ -71,8 +71,8 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									FCL Imports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(data[0]?.amount, currency)} interactive>
-										<div>{getAmountInLakhCrK(data[0]?.amount)}</div>
+									<Tooltip content={getFormattedPrice(list[0]?.amount, currency)} interactive>
+										<div>{getAmountInLakhCrK(list[0]?.amount)}</div>
 									</Tooltip>
 								</div>
 							</div>
@@ -82,9 +82,9 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									FCL Exports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(data[1]?.amount, currency)} interactive>
+									<Tooltip content={getFormattedPrice(list[1]?.amount, currency)} interactive>
 										<div>
-											{getAmountInLakhCrK(data[1]?.amount)}
+											{getAmountInLakhCrK(list[1]?.amount)}
 										</div>
 									</Tooltip>
 								</div>
@@ -95,9 +95,9 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									LCL Imports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(data[2]?.amount, currency)} interactive>
+									<Tooltip content={getFormattedPrice(list[2]?.amount, currency)} interactive>
 										<div>
-											{getAmountInLakhCrK(data[2]?.amount)}
+											{getAmountInLakhCrK(list[2]?.amount)}
 										</div>
 									</Tooltip>
 								</div>
@@ -108,9 +108,9 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									LCL Exports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(data[3]?.amount, currency)} interactive>
+									<Tooltip content={getFormattedPrice(list[3]?.amount, currency)} interactive>
 										<div>
-											{getAmountInLakhCrK(data[3]?.amount)}
+											{getAmountInLakhCrK(list[3]?.amount)}
 										</div>
 									</Tooltip>
 								</div>
@@ -133,9 +133,9 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 								Domestic
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[4]?.amount, currency)} interactive>
+								<Tooltip content={getFormattedPrice(list[4]?.amount, currency)} interactive>
 									<div>
-										{getAmountInLakhCrK(data[4]?.amount)}
+										{getAmountInLakhCrK(list[4]?.amount)}
 									</div>
 								</Tooltip>
 							</div>
@@ -146,9 +146,9 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 								International
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[5]?.amount, currency)} interactive>
+								<Tooltip content={getFormattedPrice(list[5]?.amount, currency)} interactive>
 									<div>
-										{getAmountInLakhCrK(data[5]?.amount)}
+										{getAmountInLakhCrK(list[5]?.amount)}
 									</div>
 								</Tooltip>
 							</div>
@@ -171,9 +171,9 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 								Trailer
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[6]?.amount, currency)} interactive>
+								<Tooltip content={getFormattedPrice(list[6]?.amount, currency)} interactive>
 									<div>
-										{getAmountInLakhCrK(data[6]?.amount)}
+										{getAmountInLakhCrK(list[6]?.amount)}
 									</div>
 								</Tooltip>
 							</div>
@@ -184,9 +184,9 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 								Haulage
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(data[7]?.amount, currency)} interactive>
+								<Tooltip content={getFormattedPrice(list[7]?.amount, currency)} interactive>
 									<div>
-										{getAmountInLakhCrK(data[7]?.amount)}
+										{getAmountInLakhCrK(list[7]?.amount)}
 									</div>
 								</Tooltip>
 							</div>
