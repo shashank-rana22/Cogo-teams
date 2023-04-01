@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -12,6 +13,9 @@ function ListProfit({
 	reportData,
 	filters,
 }) {
+	// const [isRowVisible, setIsRowVisible] = useState(true);
+	const isNonZero = filters?.rowCheck?.includes('nonZero');
+
 	const [dropDown, setDropDown] = useState({
 		revenue   : true,
 		operating : true,
@@ -48,6 +52,11 @@ function ListProfit({
 			// priorPeriodItems,
 			totalTaxExpense = 0,
 		} = item;
+
+		let isRowVisible = true;
+		if (isNonZero && revenueFromOps === 0) {
+			isRowVisible = false;
+		}
 
 		const ratioData = (ratiosData?.list || [{}])?.find((itemRatio) => itemRatio.ratioBasis === filters?.ratio);
 
@@ -118,82 +127,95 @@ function ListProfit({
 						))
 					}
 				</div>
-				<div className={styles.data_sub}>
-					<div className={styles.first_particular}>
-						<div className={styles.particular_data_review}>
-							Revenue From Operations
-							<div
-								className={styles.icon_data}
-								onClick={() => {
-									setDropDown((prev) => ({ ...prev, revenue: !dropDown?.revenue }));
-								}}
-								role="presentation"
-							>
-								<IcMArrowDown />
-							</div>
-						</div>
-						{dropDown?.revenue && (
-							<div>
-								<div>Booked Revenue</div>
-								<div>Accrued Revenue</div>
-							</div>
-						) }
 
-						<div className={styles.particular_data_review}>
-							(-) Operating Expenses
-							<div
-								className={styles.icon_data}
-								onClick={() => {
-									setDropDown((prev) => ({ ...prev, operating: !dropDown?.operating }));
-								}}
-								role="presentation"
-							>
-								<IcMArrowDown />
-							</div>
+				{/* ==== */}
+				{true && (
+					<div className={styles.data_sub}>
+						<div className={styles.first_particular}>
+							{isRowVisible && (
+								<div className={styles.particular_data_review}>
+									Revenue From Operations
+									<div
+										className={styles.icon_data}
+										onClick={() => {
+											setDropDown((prev) => ({ ...prev, revenue: !dropDown?.revenue }));
+										}}
+										role="presentation"
+									>
+										<IcMArrowDown />
+									</div>
+								</div>
+							)}
+							{dropDown?.revenue && (
+								<div>
+									{isRowVisible && <div>Booked Revenue</div>}
+									{isRowVisible && <div>Accrued Revenue</div>}
+								</div>
+							) }
+
+							{isRowVisible &&	(
+								<div className={styles.particular_data_review}>
+									(-) Operating Expenses
+									<div
+										className={styles.icon_data}
+										onClick={() => {
+											setDropDown((prev) => ({ ...prev, operating: !dropDown?.operating }));
+										}}
+										role="presentation"
+									>
+										<IcMArrowDown />
+									</div>
+								</div>
+							)}
+							{dropDown?.operating && (
+								<div>
+									{isRowVisible &&	<div>Booked Expenses</div>}
+									{isRowVisible &&	<div>Accrued Expenses</div>}
+								</div>
+							)}
 						</div>
-						{dropDown?.operating && (
-							<div>
-								<div>Booked Expenses</div>
-								<div>Accrued Expenses</div>
-							</div>
-						)}
+
+						{getRelevantData().map((itemData) => {
+							const ratio = ratioData?.turnoverRatioDetails?.[itemData?.key] || 1;
+							return (
+								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
+									{isRowVisible &&	(
+										<div className={styles.particular_data}>
+											{(revenueFromOps * ratio).toFixed(2)}
+										</div>
+									)}
+									{dropDown?.revenue && (
+										<>
+											{isRowVisible &&		<div>{bookedRevenue * ratio}</div>}
+											{isRowVisible &&		<div>{accruedRevenue * ratio}</div>}
+										</>
+									) }
+									{isRowVisible &&	(
+										<div className={styles.particular_data}>
+											{(operatingExpenses * ratio).toFixed(2)}
+										</div>
+									)}
+									{dropDown?.operating && (
+										<>
+											{isRowVisible &&	<div>{(bookedExpense * ratio).toFixed(2)}</div>}
+											{isRowVisible &&	<div>{(accruedExpense * ratio).toFixed(2)}</div>}
+										</>
+									)}
+								</div>
+							);
+						})}
+
 					</div>
-
-					{getRelevantData().map((itemData) => {
-						const ratio = ratioData?.turnoverRatioDetails?.[itemData?.key] || 1;
-						return (
-							<div className={styles.first_ocean} style={{ width: calculateWidth }}>
-								<div className={styles.particular_data}>
-									{(revenueFromOps * ratio).toFixed(2)}
-								</div>
-								{dropDown?.revenue && (
-									<>
-										<div>{bookedRevenue * ratio}</div>
-										<div>{accruedRevenue * ratio}</div>
-									</>
-								) }
-								<div className={styles.particular_data}>
-									{(operatingExpenses * ratio).toFixed(2)}
-								</div>
-								{dropDown?.operating && (
-									<>
-										<div>{(bookedExpense * ratio).toFixed(2)}</div>
-										<div>{(accruedExpense * ratio).toFixed(2)}</div>
-									</>
-								)}
-							</div>
-						);
-					})}
-
-				</div>
+				)}
+				{/* ===== */}
 
 				<div className={styles.data_sub}>
-					<div className={styles.header_particular}>GROSS PROFIT</div>
+					{isRowVisible && <div className={styles.header_particular}>GROSS PROFIT</div>}
 					{getRelevantData()?.map((itemVal) => {
 						const ratio = ratioData?.turnoverRatioDetails?.[itemVal?.[key]] || 1;
 						return (
 							<div className={styles.header_ocean} style={{ width: calculateWidth }}>
-								{((revenueFromOps - operatingExpenses) * ratio).toFixed(2)}
+								{isRowVisible ? (<span>{((revenueFromOps - operatingExpenses) * ratio).toFixed(2)}</span>) : null}
 							</div>
 						);
 					})}
@@ -202,162 +224,188 @@ function ListProfit({
 
 				<div className={styles.data_sub}>
 					<div className={styles.first_particular}>
-						<div className={styles.particular_data_review}>
-							(-) Employee Benefit Expenses
-							<div
-								className={styles.icon_data}
-								onClick={() => {
-									setDropDown((prev) => ({ ...prev, employee: !dropDown?.employee }));
-								}}
-								role="presentation"
-							>
-								<IcMArrowDown />
+						{isRowVisible && (
+							<div className={styles.particular_data_review}>
+								(-) Employee Benefit Expenses
+								<div
+									className={styles.icon_data}
+									onClick={() => {
+										setDropDown((prev) => ({ ...prev, employee: !dropDown?.employee }));
+									}}
+									role="presentation"
+								>
+									<IcMArrowDown />
+								</div>
 							</div>
-						</div>
+						)}
 						{dropDown?.employee && (
 							<>
-								<div>ESOPs</div>
-								<div>Gratuity & Leave Encashment</div>
-								<div>Personnel Cost</div>
-								<div>Housekeeping, Security, Subscriptions, Travel, Stay and CC</div>
-								<div>Salaries, Bonus, Incentives and Staff Welfare Expenses</div>
+								{isRowVisible && <div>ESOPs</div>}
+								{isRowVisible && <div>Gratuity & Leave Encashment</div>}
+								{isRowVisible && <div>Personnel Cost</div>}
+								{isRowVisible && <div>Housekeeping, Security, Subscriptions, Travel, Stay and CC</div>}
+								{isRowVisible && <div>Salaries, Bonus, Incentives and Staff Welfare Expenses</div>}
 							</>
 						) }
 
-						<div className={styles.depreciation}>
-							(-) Depreciation and Amortization
-						</div>
-
-						<div className={styles.particular_data_review}>
-							(-) Finance Cost
-							<div
-								className={styles.icon_data}
-								onClick={() => {
-									setDropDown((prev) => ({ ...prev, finance: !dropDown?.finance }));
-								}}
-								role="presentation"
-							>
-								<IcMArrowDown />
+						{isRowVisible &&	(
+							<div className={styles.depreciation}>
+								(-) Depreciation and Amortization
 							</div>
-						</div>
+						)}
+
+						{isRowVisible &&	(
+							<div className={styles.particular_data_review}>
+								(-) Finance Cost
+								<div
+									className={styles.icon_data}
+									onClick={() => {
+										setDropDown((prev) => ({ ...prev, finance: !dropDown?.finance }));
+									}}
+									role="presentation"
+								>
+									<IcMArrowDown />
+								</div>
+							</div>
+						)}
 						{dropDown?.finance && (
 							<>
-								<div>Foreign Exchange Gain (Net)</div>
-								<div>Interest on Loan, Discount on Bills and Bank Charges</div>
-								<div>Miscellaneous Income</div>
-								<div>Interest Income on FD</div>
+								{isRowVisible && <div>Foreign Exchange Gain (Net)</div>}
+								{isRowVisible && <div>Interest on Loan, Discount on Bills and Bank Charges</div>}
+								{isRowVisible && <div>Miscellaneous Income</div>}
+								{isRowVisible && <div>Interest Income on FD</div>}
 							</>
 						) }
 
-						<div className={styles.particular_data_review}>
-							(-) Other Expenses
-							<div
-								className={styles.icon_data}
-								onClick={() => {
-									setDropDown((prev) => ({ ...prev, other: !dropDown?.other }));
-								}}
-								role="presentation"
-							>
-								<IcMArrowDown />
+						{isRowVisible &&	(
+							<div className={styles.particular_data_review}>
+								(-) Other Expenses
+								<div
+									className={styles.icon_data}
+									onClick={() => {
+										setDropDown((prev) => ({ ...prev, other: !dropDown?.other }));
+									}}
+									role="presentation"
+								>
+									<IcMArrowDown />
+								</div>
 							</div>
-						</div>
+						)}
 						{dropDown?.other && (
 							<>
-								<div>Interest on Loan, Discount on Bills and Bank Charges</div>
-								<div>Legal, Compliance, Books and MIS</div>
-								<div>Marketing Expense</div>
-								<div>Personnel Cost</div>
-								<div>Provisions and Write-offs</div>
-								<div>Rates & Taxes</div>
-								<div>Rent & Taxes</div>
-								<div>Rent Electricity and Maintenance</div>
-								<div>Repairs and Maintenance</div>
-								<div>Salaries, Bonus, Incentives and Staff Welfare Expenses</div>
-								<div>Tech & Product Costs</div>
-								<div>Currency Suspense Account</div>
-								<div>Round off</div>
-								<div>Any other costs</div>
+								{isRowVisible && <div>Interest on Loan, Discount on Bills and Bank Charges</div> }
+								{isRowVisible && <div>Legal, Compliance, Books and MIS</div> }
+								{isRowVisible && <div>Marketing Expense</div> }
+								{isRowVisible && <div>Personnel Cost</div> }
+								{isRowVisible && <div>Provisions and Write-offs</div> }
+								{isRowVisible && <div>Rates & Taxes</div> }
+								{isRowVisible && <div>Rent & Taxes</div> }
+								{isRowVisible && <div>Rent Electricity and Maintenance</div> }
+								{isRowVisible && <div>Repairs and Maintenance</div> }
+								{isRowVisible && <div>Salaries, Bonus, Incentives and Staff Welfare Expenses</div> }
+								{isRowVisible && <div>Tech & Product Costs</div> }
+								{isRowVisible && <div>Currency Suspense Account</div>}
+								{isRowVisible && <div>Round off</div>}
+								{isRowVisible && <div>Any other costs</div> }
 							</>
 						)}
 
-						<div className={styles.depreciation}>
-							Other Income
-						</div>
+						{isRowVisible && (
+							<div className={styles.depreciation}>
+								Other Income
+							</div>
+						)}
 					</div>
 
 					{getRelevantData()?.map((itemValue) => {
 						const ratio = ratioData?.turnoverRatioDetails?.[itemValue?.key] || 1;
 						return (
 							<div className={styles.first_ocean} style={{ width: calculateWidth }}>
-								<div className={styles.particular_data}>
-									{(totalEmployeeBenefitExpenses * ratio).toFixed(2)}
-								</div>
+								{isRowVisible && (
+									<div className={styles.particular_data}>
+										{(totalEmployeeBenefitExpenses * ratio).toFixed(2)}
+									</div>
+								)}
 								{dropDown?.employee && (
 									<>
 										{' '}
-										<div>{(esops * ratio).toFixed(2)}</div>
-										<div>{(gratuityLeaveEncashment * ratio).toFixed(2)}</div>
+										{isRowVisible && <div>{(esops * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(gratuityLeaveEncashment * ratio).toFixed(2)}</div>}
 
-										<div>
-											{(housekeepingSecuritySubscriptionsTravelStayAndCC
+										{isRowVisible && (
+											<>
+												<div>
+													{(housekeepingSecuritySubscriptionsTravelStayAndCC
 												* ratio).toFixed(2)}
-										</div>
+												</div>
 
-										<div>{(personnelCost * ratio).toFixed(2)}</div>
+												<div>{(personnelCost * ratio).toFixed(2)}</div>
 
-										<div>
-											{(salariesBonusIncentivesAndStaffWelfareExpenses * ratio).toFixed(2)}
-										</div>
+												<div>
+													{(salariesBonusIncentivesAndStaffWelfareExpenses * ratio).toFixed(2)}
+												</div>
+											</>
+										)}
 									</>
 								)}
-								<div className={styles.particular_data}>
-									{(totalDepreciationAndAmortization * ratio).toFixed(2)}
-								</div>
-								<div className={styles.particular_data}>
-									{(totalFinanceCost
+								{isRowVisible && (
+									<div className={styles.particular_data}>
+										{(totalDepreciationAndAmortization * ratio).toFixed(2)}
+									</div>
+								)}
+								{isRowVisible && (
+									<div className={styles.particular_data}>
+										{(totalFinanceCost
 										* ratio).toFixed(2)}
 
-								</div>
+									</div>
+								)}
 								{dropDown?.finance && (
 									<>
-										<div>{foreignExchangeGainNet * ratio}</div>
+										{isRowVisible && <div>{foreignExchangeGainNet * ratio}</div>}
 
-										<div>
-											{interestOnLoanDiscountOnBillsAndBankCharges * ratio}
-										</div>
+										{isRowVisible && (
+											<div>
+												{interestOnLoanDiscountOnBillsAndBankCharges * ratio}
+											</div>
+										)}
 
-										<div>{miscelleneousIncome * ratio}</div>
-										<div>{interestIncomeOnFd * ratio}</div>
+										{isRowVisible && <div>{miscelleneousIncome * ratio}</div>}
+										{isRowVisible && <div>{interestIncomeOnFd * ratio}</div>}
 									</>
 								) }
-								<div className={styles.particular_data}>{totalOtherExpense * ratio}</div>
+								{isRowVisible &&	<div className={styles.particular_data}>{totalOtherExpense * ratio}</div>}
 								{dropDown?.other
 								&& (
 									<>
-										<div>
-											{interestOnLoanDiscountOnBillsAndBankChargesExpense * ratio}
-										</div>
+										{isRowVisible && (
+											<div>
+												{interestOnLoanDiscountOnBillsAndBankChargesExpense * ratio}
+											</div>
+										)}
 
-										<div>{legalComplianceBooksAndMis * ratio}</div>
-										<div>{marketingExpense * ratio}</div>
-										<div>{personnelExpenseCost * ratio}</div>
-										<div>{provisionsAndWriteOffs * ratio}</div>
-										<div>{ratesAndTaxes * ratio}</div>
-										<div>{rentAndTaxes * ratio}</div>
-										<div>{rentElectricityAndMaintenance * ratio}</div>
-										<div>{repairsAndMaintenance * ratio}</div>
+										{isRowVisible && <div>{legalComplianceBooksAndMis * ratio}</div>}
+										{isRowVisible && <div>{marketingExpense * ratio}</div>}
+										{isRowVisible && <div>{personnelExpenseCost * ratio}</div>}
+										{isRowVisible && <div>{provisionsAndWriteOffs * ratio}</div>}
+										{isRowVisible && <div>{ratesAndTaxes * ratio}</div>}
+										{isRowVisible && <div>{rentAndTaxes * ratio}</div>}
+										{isRowVisible && <div>{rentElectricityAndMaintenance * ratio}</div>}
+										{isRowVisible && <div>{repairsAndMaintenance * ratio}</div>}
 
-										<div>
-											{salariesBonusIncentivesAndStaffWelfareExpenses * ratio}
-										</div>
+										{isRowVisible && (
+											<div>
+												{salariesBonusIncentivesAndStaffWelfareExpenses * ratio}
+											</div>
+										)}
 
-										<div>{techAndProductCosts * ratio}</div>
-										<div>{currencySuspenseAccount * ratio}</div>
-										<div>{roundOff * ratio}</div>
-										<div>{anyOtherCosts * ratio}</div>
+										{isRowVisible && <div>{techAndProductCosts * ratio}</div>}
+										{isRowVisible && <div>{currencySuspenseAccount * ratio}</div>}
+										{isRowVisible && <div>{roundOff * ratio}</div>}
+										{isRowVisible && <div>{anyOtherCosts * ratio}</div>}
 									</>
 								)}
-								<div className={styles.particular_data}>{totalOtherIncome * ratio}</div>
+								{isRowVisible && <div className={styles.particular_data}>{totalOtherIncome * ratio}</div>}
 							</div>
 						);
 					})}
@@ -365,20 +413,21 @@ function ListProfit({
 				</div>
 
 				<div className={styles.data_sub}>
-					<div className={styles.header_particular}>
-						PROFIT BEFORE EXCEPTIONAL AND EXTRAORDINARY ITEMS (B)
-					</div>
+					{isRowVisible && (
+						<div className={styles.header_particular}>
+							PROFIT BEFORE EXCEPTIONAL AND EXTRAORDINARY ITEMS (B)
+						</div>
+					)}
 					{
 						getRelevantData()?.map((Val) => {
 							const ratio = ratioData?.[Val?.[key]] || 1;
 							return (
 								<div className={styles.header_ocean} style={{ width: calculateWidth }}>
-									{
-								(revenueFromOps
+									{isRowVisible
+										? ((revenueFromOps
 									- operatingExpenses
 									- totalDepreciationAndAmortization - totalFinanceCost - totalOtherExpense
-								) * ratio
-								}
+										) * ratio) : null}
 								</div>
 							);
 						})
@@ -387,16 +436,22 @@ function ListProfit({
 
 				<div className={styles.data_sub}>
 					<div className={styles.first_particular}>
-						<div className={styles.depreciation}>
-							Exceptional Items
-						</div>
+						{isRowVisible && (
+							<div className={styles.depreciation}>
+								Exceptional Items
+							</div>
+						)}
 
-						<div className={styles.depreciation}>
-							Extraordinary Items
-						</div>
-						<div className={styles.depreciation}>
-							Prior Period Item
-						</div>
+						{isRowVisible && (
+							<div className={styles.depreciation}>
+								Extraordinary Items
+							</div>
+						)}
+						{isRowVisible && (
+							<div className={styles.depreciation}>
+								Prior Period Item
+							</div>
+						)}
 
 					</div>
 
@@ -405,9 +460,9 @@ function ListProfit({
 							const ratio = ratioData?.[itemValue[key]] || 1;
 							return (
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
-									<div className={styles.particular_data}>{totalExceptionalItems * ratio}</div>
-									<div className={styles.particular_data}>{totalExtraordinaryItems * ratio}</div>
-									<div className={styles.particular_data}>{totalPriorPeriodItem * ratio}</div>
+									{isRowVisible && <div className={styles.particular_data}>{totalExceptionalItems * ratio}</div>}
+									{isRowVisible && <div className={styles.particular_data}>{totalExtraordinaryItems * ratio}</div>}
+									{isRowVisible && <div className={styles.particular_data}>{totalPriorPeriodItem * ratio}</div>}
 
 								</div>
 							);
@@ -415,7 +470,7 @@ function ListProfit({
 					}
 				</div>
 				<div className={styles.data_sub}>
-					<div className={styles.header_particular}>PROFIT BEFORE TAX (C)</div>
+					{isRowVisible && <div className={styles.header_particular}>PROFIT BEFORE TAX (C)</div>}
 					{
 						getRelevantData()?.map((value) => {
 							const ratio = ratioData?.[value[key]] || 1;
@@ -424,12 +479,12 @@ function ListProfit({
 									className={styles.header_ocean}
 									style={{ width: calculateWidth }}
 								>
-									{(revenueFromOps
+									{isRowVisible ? ((revenueFromOps
 								- operatingExpenses
 								- totalDepreciationAndAmortization
 								- totalFinanceCost
 								- totalOtherExpense
-								- totalExceptionalItems - totalExtraordinaryItems - totalPriorPeriodItem) * ratio}
+								- totalExceptionalItems - totalExtraordinaryItems - totalPriorPeriodItem) * ratio) : null}
 								</div>
 							);
 						})
@@ -438,9 +493,11 @@ function ListProfit({
 
 				<div className={styles.data_sub}>
 					<div className={styles.first_particular}>
-						<div className={styles.particular_data_review}>
-							(-) Tax Expense
-						</div>
+						{isRowVisible && (
+							<div className={styles.particular_data_review}>
+								(-) Tax Expense
+							</div>
+						)}
 
 					</div>
 
@@ -450,7 +507,7 @@ function ListProfit({
 
 							return (
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
-									<div className={styles.particular_data}>{totalTaxExpense * ratio}</div>
+									{isRowVisible && <div className={styles.particular_data}>{totalTaxExpense * ratio}</div>}
 								</div>
 							);
 						})
@@ -458,17 +515,17 @@ function ListProfit({
 
 				</div>
 				<div className={styles.data_sub}>
-					<div className={styles.header_particular}>PROFIT AFTER TAX (D)</div>
+					{isRowVisible && <div className={styles.header_particular}>PROFIT AFTER TAX (D)</div>}
 					{
 						getRelevantData()?.map((valData) => {
 							const ratio = ratioData?.[valData?.key] || 1;
 							return (
 								<div className={styles.header_ocean} style={{ width: calculateWidth }}>
-									{(revenueFromOps - operatingExpenses
+									{isRowVisible ? ((revenueFromOps - operatingExpenses
 									- totalDepreciationAndAmortization
 									- totalFinanceCost - totalOtherExpense
 									- totalExceptionalItems - totalExtraordinaryItems
-									- totalPriorPeriodItem - totalTaxExpense) * ratio}
+									- totalPriorPeriodItem - totalTaxExpense) * ratio) : null}
 
 								</div>
 							);

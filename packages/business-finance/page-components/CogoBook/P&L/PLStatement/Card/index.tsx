@@ -48,19 +48,9 @@ function Card({
 				onChange={(val) => { setFilters((prev) => ({ ...prev, rowCheck: val })); }}
 				value={filters?.rowCheck}
 			/>
-
-			<div>Columns</div>
-
-			<div className={styles.border} />
-
-			<CheckboxGroup
-				style={{ flexDirection: 'column', width: '100%' }}
-				options={optionsCheck}
-				onChange={(val) => { setFilters((prev) => ({ ...prev, colCheck: val })); }}
-				value={filters?.colCheck}
-			/>
 		</div>
 	);
+	console.log(filters?.rowCheck, 'rowCheck');
 
 	const handleClick = () => {
 		fetchRatioApi(setShowReport);
@@ -236,7 +226,7 @@ function Card({
 										const { filters:filtersItem } = item || {};
 
 										const {
-											cogoEntityId = '', month = '', rowCheck, colCheck,
+											cogoEntityId = '', month = '', rowCheck,
 											radio = '', chip = '',
 										} = JSON.parse(filtersItem) || {};
 
@@ -279,15 +269,6 @@ function Card({
 														{rowCheck ? startCase(rowCheck[0]) : '--'}
 
 														{ rowCheck ? startCase(rowCheck[1]) : ''}
-														,
-														{' '}
-
-														{' '}
-														Columns -
-														{' '}
-														{ colCheck ? startCase(colCheck[0]) : '--' }
-
-														{ colCheck ? startCase(colCheck[1]) : ''}
 													</div>
 												</div>
 
