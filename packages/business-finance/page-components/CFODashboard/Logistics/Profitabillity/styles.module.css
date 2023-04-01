@@ -8,8 +8,6 @@
 .container {
 	display: flex;
 	justify-content: space-between;
-
-	/* height: 59px; */
 	margin: 0 0 0 24px;
 }
 
@@ -90,11 +88,6 @@
 		color: #8f8f8f;
 	}
 }
-
-/* .table_data {
-	height: 45vh;
-	overflow: scroll;
-} */
 
 .text_filters_gap {
 	display: flex;

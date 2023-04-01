@@ -59,24 +59,14 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 		<div>
 			{accordianDataLoading ? (
 				<>
-					<Placeholder
-						height="100px"
-						width="100%"
-						margin="20px 20px 20px 0px"
-						style={{ borderRadius: '4px' }}
-					/>
-					<Placeholder
-						height="100px"
-						width="100%"
-						margin="20px 20px 20px 0px"
-						style={{ borderRadius: '4px' }}
-					/>
-					<Placeholder
-						height="100px"
-						width="100%"
-						margin="20px 20px 20px 0px"
-						style={{ borderRadius: '4px' }}
-					/>
+					{([1, 2, 3]).map(() => (
+						<Placeholder
+							height="100px"
+							width="100%"
+							margin="20px 20px 20px 0px"
+							style={{ borderRadius: '4px' }}
+						/>
+					))}
 				</>
 			) : (
 				<div>
@@ -210,7 +200,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 									<div className={styles.borders} />
 
 									<div className={styles.stats_styles}>
-										{statsTabs[item?.service].map((val:ItemProps) => (
+										{(statsTabs[item?.service] || []).map((val:ItemProps) => (
 											<div
 												key={val.key}
 												className={val.key === subActiveTab

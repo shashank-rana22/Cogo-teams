@@ -31,10 +31,11 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 	const progressDataReceivables = overdueAmount + nonOverdueAmount;
 	const progressPayableData = payOverdueAmount + payNonOverdueAmount;
 
-	const progressReceivablesPer = (nonOverdueAmount / progressDataReceivables) * 100;
+	const progressReceivablesPer = 	progressDataReceivables !== 0
+		? ((nonOverdueAmount / progressDataReceivables) * 100) : 0;
 	const progressReceivablesPercent = progressReceivablesPer.toFixed(2);
 
-	const progressPayablesPer = (payNonOverdueAmount / progressPayableData) * 100;
+	const progressPayablesPer = progressPayableData !== 0 ? ((payNonOverdueAmount / progressPayableData) * 100) : 0;
 	const progressPayablesPercent = progressPayablesPer.toFixed(2);
 
 	const [progressReceivables, setProgressReceivables] = useState(String(progressReceivablesPercent) || 0);
@@ -124,7 +125,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 										trigger="click"
 										caret={false}
 										render={(totalReceivablesKeyMappings({ receivablesData }) || []).map((val) => (
-											<tr>
+											<tr key={val.countKey}>
 												<td className={styles.recei_label}>{val.label}</td>
 												<td className={styles.label}>{val.valueKey}</td>
 											</tr>
@@ -212,7 +213,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 										trigger="click"
 										caret={false}
 										render={(totalPayablesKeyMappings({ payablesData }) || []).map((val) => (
-											<tr>
+											<tr key={val.countKey}>
 												<td className={styles.recei_label}>{val.label}</td>
 												<td className={styles.label}>{val.valueKey}</td>
 											</tr>

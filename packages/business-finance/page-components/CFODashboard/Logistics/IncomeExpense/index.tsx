@@ -20,6 +20,8 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [yearHandle, setYearHandle] = useState(false);
 	const [yearFilters, setYearFilters] = useState([]);
+	const [inputValue, setInputValue] = useState('');
+	const [visible, setVisible] = useState(false);
 	const {
 		incomeExpenseData = [],
 		incomeExpenseLoading,
@@ -45,19 +47,25 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 		financialYears.push(financialYear);
 	}
 
-	const onClickFinancialYear = (year) => {
+	const onClickFinancialYear = (year, type) => {
+		let yearType = 'CY';
+		if (type === financialYears) {
+			yearType = 'FY';
+		}
 		const years = year?.split('-');
 		setYearFilters(years);
+		setInputValue(`${yearType} - ${year}`);
+		setVisible(false);
 	};
 
 	const renderYearData = (years) => (
 		<div>
 			{years.map((year) => (
-				<div style={{ marginBottom: '10px', cursor: year === 'financialYears' && 'pointer' }}>
+				<div key={year} style={{ marginBottom: '10px', cursor: year === 'financialYears' && 'pointer' }}>
 					<div
 						key={year}
 						role="presentation"
-						onClick={() => onClickFinancialYear(year)}
+						onClick={() => onClickFinancialYear(year, years)}
 					>
 						{year}
 
@@ -76,11 +84,17 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 	};
 	const content = () => (
 
-		<Popover placement="right" caret={false} render={yearHandleChange()} className={styles.years_styles}>
+		<Popover
+			placement="right"
+			caret={false}
+			render={yearHandleChange()}
+			className={styles.years_styles}
+			visible={visible}
+		>
 			<>
 				<div
 					className={styles.data_styles}
-					onClick={() => { setYearHandle(true); }}
+					onClick={() => { setYearHandle(true); setVisible(true); }}
 					role="presentation"
 				>
 					Calendar Year
@@ -89,7 +103,7 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 				<div className={styles.borders} />
 				<div
 					className={styles.data_styles}
-					onClick={() => { setYearHandle(false); }}
+					onClick={() => { setYearHandle(false); setVisible(true); }}
 					role="presentation"
 				>
 					Financial Year
@@ -136,7 +150,7 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 									<Input
 										placeholder="Select Year Mode"
 										size="sm"
-
+										value={inputValue}
 									/>
 								</div>
 							</Popover>

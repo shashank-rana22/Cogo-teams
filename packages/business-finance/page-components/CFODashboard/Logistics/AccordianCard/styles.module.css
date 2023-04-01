@@ -15,7 +15,7 @@
 }
 
 .border {
-	height: 76px;
+	height: 40px;
 	margin: 0 12%;
 	border-left: 2px solid #f68b21;
 }
@@ -31,7 +31,8 @@
 }
 
 .amounts {
-	width: 100%;
+	width: 102px;
+	text-align: center;
 }
 
 .ar_amount {
@@ -106,8 +107,6 @@
 
 .due_ageing {
 	align-items: center;
-
-	/* width: 120px; */
 }
 
 .label {
@@ -196,13 +195,13 @@
 }
 
 .pills {
-	padding: 8px;
+	padding: 6px;
 	background: #c4dc91;
 	border-radius: 6px;
 }
 
 .pill {
-	padding: 8px;
+	padding: 6px;
 	background: #f8aea8;
 	border-radius: 6px;
 }

@@ -1,5 +1,4 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
-import { Tooltip } from '@cogoport/components';
 
 import { getAmountInLakh } from '../../getAmountInLakh';
 
@@ -45,24 +44,16 @@ function ResponsiveLineChart({ lineData }) {
 					}}
 				>
 					<div style={{ display: 'flex' }}>
-						<Tooltip
-							content=""
-							placement="right"
-							caret={false}
-						>
-							<div style={{ display: 'flex' }}>
-								<div>Contribution Margin :</div>
-								<div style={{ marginLeft: '10px', display: 'flex' }}>
-									<div>{(point.data.y).toFixed(2)}</div>
-									<div style={{ color: '#29CC6A' }}>
-										(
-										{(point.data.z).toFixed(2)}
-										)
-										%
-									</div>
-								</div>
+						<div>Contribution Margin :</div>
+						<div style={{ marginLeft: '10px', display: 'flex' }}>
+							<div>{(point.data.y).toFixed(2)}</div>
+							<div style={{ color: '#29CC6A' }}>
+								(
+								{(point.data.z).toFixed(2)}
+								)
+								%
 							</div>
-						</Tooltip>
+						</div>
 					</div>
 				</div>
 			)}
