@@ -100,7 +100,7 @@ function CardItem({
 						loading={loading}
 						page={pageIndex}
 						pageSize={totalRecords}
-						showPagination={false}
+						showPagination
 					/>
 				)}
 			</div>
