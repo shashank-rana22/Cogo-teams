@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -5,15 +6,11 @@ import { useEffect, useState } from 'react';
 interface Props {
 	[key:string]:any,
 }
-// interface ItemProps {
-// 	tabs?:string
-// }
+
 const useGetTreasuryStats = (tabs:string) => {
 	const [treasuryFilters, setTreasuryFilters] = useState<Props>({
 	});
-	// const {
-	// 	...rest
-	// } = treasuryFilters || {};
+
 	const { startDate, endDate } = treasuryFilters?.date || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -38,7 +35,7 @@ const useGetTreasuryStats = (tabs:string) => {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				Toast.error(err?.message);
 			}
 		};
 		getDahboardData();

@@ -1,6 +1,5 @@
 const getAmountInLakh = (value:any) => {
 	const val = value;
-	// const val = Math.abs(value);
 
 	let formatedAmount = '';
 
