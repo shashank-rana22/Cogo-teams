@@ -53,6 +53,20 @@ function asyncFieldsOrganization() {
 	};
 }
 
+function asyncFieldsLeadOrganization() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_lead_organizations',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 function asyncFieldsOrganizationUsers() {
 	return {
 		labelKey    : 'name',
@@ -202,6 +216,15 @@ function asyncAllotBanks() {
 	};
 }
 
+function listVendors() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'q',
+		endpoint    : 'list_vendors',
+		initialCall : false,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -209,6 +232,7 @@ export {
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
 	asyncFieldsOrganizations,
+	asyncFieldsLeadOrganization,
 	asyncFieldsOrganizationUser,
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganization,
@@ -218,4 +242,5 @@ export {
 	asyncFieldsListAgents,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	listVendors,
 };
