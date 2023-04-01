@@ -60,7 +60,7 @@ function CardItem({
 		setCurrentOpenSID('');
 	};
 
-	const { totalRecords, pageIndex, list }: FullResponseProps = fullResponse || {};
+	const { pageIndex, list }: FullResponseProps = fullResponse || {};
 
 	const functions = {
 		renderInvoiceNumber: (item: {}, field: {}) => (
