@@ -7761,7 +7761,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_purchase_treasury_stats',
+			api         : 'get_purchase_treasury_treasury_stats',
 			access_type : 'private',
 		},
 	],
