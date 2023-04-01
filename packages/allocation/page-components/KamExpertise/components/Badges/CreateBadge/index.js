@@ -11,7 +11,10 @@ const MEDALS_MAPPING = ['Bronze', 'Silver', 'Gold'];
 function CreateBadge(props) {
 	const { setToggleScreen, badgeItemData = {}, listRefetch } = props;
 
-	const { updated_at, created_by = {} } = badgeItemData;
+	const {
+		audits = [],
+		created_by = {},
+	} = badgeItemData;
 
 	const onClose = () => {
 		setToggleScreen('badge_details');
@@ -24,6 +27,8 @@ function CreateBadge(props) {
 	const {
 		control, watch, handleSubmit, formState: { errors },
 	} = formProps;
+
+	const updated_at = audits?.[0]?.created_at || null;
 
 	return (
 		<div>
