@@ -2,8 +2,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 90px;
 	margin: 1rem 0 0;
+	padding: 32px;
 	border-radius: 8px;
 }
 
