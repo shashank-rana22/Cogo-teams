@@ -62,8 +62,6 @@
 	padding: 16px;
 	margin-top: 10px;
 	overflow-x: scroll;
-	border: 1px solid #88cad1;
-	border-radius: 8px;
 }
 
 .column {
@@ -135,4 +133,10 @@
 
 .heading_data {
 	font-weight: 600;
+}
+
+.border {
+	margin-top: 10px;
+	border: 1px solid #88cad1;
+	border-radius: 8px;
 }

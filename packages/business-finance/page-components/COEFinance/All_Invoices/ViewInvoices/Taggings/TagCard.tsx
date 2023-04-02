@@ -71,16 +71,7 @@ export function TagCard({
 							className={styles.child_block}
 						/>
 					)}
-
 				</div>
-				{isLastChild && (
-					<div
-						style={{
-							height: '50%',
-							...commonStyles,
-						}}
-					/>
-				)}
 			</div>
 			{childBill && (
 				<div className={styles.childs}>

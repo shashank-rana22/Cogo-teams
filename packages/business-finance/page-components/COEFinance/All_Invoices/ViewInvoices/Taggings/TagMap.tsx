@@ -50,7 +50,7 @@ function TagMap({
 
 	return (
 		<>
-			<div>
+			<div className={styles.border}>
 				{!loading ? (
 					<div className={`${styles.flex} 
 					${styles.column} ${classname === 'merge' ? styles.merge : ''}`}
