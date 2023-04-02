@@ -4,7 +4,7 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function RightSection({
-	data = [],
+	data = {},
 	loading,
 	setCurrentQuestion,
 	currentQuestion,
@@ -12,6 +12,8 @@ function RightSection({
 	setShowInstructionsModal,
 	setActiveState,
 	setShowSubmitTestModal,
+	total_question_count,
+	user_appearance,
 }) {
 	return (
 		<div className={styles.container}>
@@ -23,6 +25,8 @@ function RightSection({
 				setCurrentQuestion={setCurrentQuestion}
 				fetchQuestions={fetchQuestions}
 				currentQuestion={currentQuestion}
+				total_question_count={total_question_count}
+				user_appearance={user_appearance}
 			/>
 			<Footer setActiveState={setActiveState} setShowSubmitTestModal={setShowSubmitTestModal} />
 		</div>

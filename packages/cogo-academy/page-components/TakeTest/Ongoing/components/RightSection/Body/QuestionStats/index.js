@@ -6,8 +6,8 @@ const STATS_MAPPING = {
 		label : 'Answered',
 		color : '#DDEBC0',
 	},
-	not_answered: {
-		key   : 'not_answered',
+	viewed: {
+		key   : 'viewed',
 		label : 'Not Answered',
 		color : '#F8AEA8',
 	},
@@ -23,15 +23,16 @@ const STATS_MAPPING = {
 	},
 };
 
-function QuestionStats({ data = [] }) {
+function QuestionStats({ total_question_count, user_appearance = [] }) {
 	let total_count = 0;
+
 	return (
 		<div className={styles.container}>
 			{Object.values(STATS_MAPPING).map((stats) => {
 				const { label, color, key } = stats;
 				const count = key === 'not_viewed'
-					? data.total_questions - total_count
-					: data?.data?.filter((item) => item.answer_state === key).length;
+					? total_question_count - total_count
+					: user_appearance?.filter((item) => item.answer_state === key).length;
 
 				total_count += Number(count);
 

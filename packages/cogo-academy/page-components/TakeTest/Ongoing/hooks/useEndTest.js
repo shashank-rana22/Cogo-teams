@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useEndTest = ({ setActiveState = () => {}, setShowTimeOverModal }) => {
+const useEndTest = ({ setActiveState = () => {}, setShowTimeOverModal, test_user_mapping_id }) => {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -21,7 +21,7 @@ const useEndTest = ({ setActiveState = () => {}, setShowTimeOverModal }) => {
 		try {
 			await trigger({
 				data: {
-					user_id, test_id,
+					test_user_mapping_id,
 				},
 			});
 

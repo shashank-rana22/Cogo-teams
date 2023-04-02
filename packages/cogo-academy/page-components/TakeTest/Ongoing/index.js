@@ -9,7 +9,7 @@ import RightSection from './components/RightSection';
 import SubmitTest from './components/RightSection/Footer/SubmitTest';
 import InstructionsModal from './components/RightSection/InstructionsModal';
 import useEndTest from './hooks/useEndTest';
-import useFetchQuestionsList from './hooks/useFetchQuestionList';
+import useGetUserTestQuestion from './hooks/useGetUserTestQuestion';
 import styles from './styles.module.css';
 
 function Ongoing({ testData, page, setActiveState }) {
@@ -22,9 +22,21 @@ function Ongoing({ testData, page, setActiveState }) {
 	const [showTimeOverModal, setShowTimeOverModal] = useState(false);
 	const [showSubmitTestModal, setShowSubmitTestModal] = useState(false);
 
-	const { loading, data, fetchQuestions } = useFetchQuestionsList({ currentQuestion });
+	const {
+		getUserTestQuestion,
+		loading,
+		start_time,
+		question_data,
+		test_user_mapping_id,
+		total_question_count,
+		user_appearance,
+	} = useGetUserTestQuestion();
 
-	const { endTest, endTestLoading } = useEndTest({ setActiveState, setShowTimeOverModal: setIsFullscreen });
+	const { endTest, endTestLoading } = useEndTest({
+		setActiveState,
+		setShowTimeOverModal: setIsFullscreen,
+		test_user_mapping_id,
+	});
 
 	// Watch for fullscreenchange
 	useEffect(() => {
@@ -78,7 +90,10 @@ function Ongoing({ testData, page, setActiveState }) {
 				showLeaveTestModal={showLeaveTestModal}
 				setShowLeaveTestModal={setShowLeaveTestModal}
 				setActiveState={setActiveState}
-				data={data}
+				data={question_data}
+				test_user_mapping_id={test_user_mapping_id}
+				user_appearance={user_appearance}
+				total_question_count={total_question_count}
 			/>
 		);
 	}
@@ -88,7 +103,8 @@ function Ongoing({ testData, page, setActiveState }) {
 			<EndTimer
 				showTimeOverModal={showTimeOverModal}
 				setShowTimeOverModal={setShowTimeOverModal}
-				data={data}
+				data={question_data}
+				test_user_mapping_id={test_user_mapping_id}
 				setActiveState={setActiveState}
 			/>
 		);
@@ -99,8 +115,11 @@ function Ongoing({ testData, page, setActiveState }) {
 			<SubmitTest
 				showSubmitTestModal={showSubmitTestModal}
 				setShowSubmitTestModal={setShowSubmitTestModal}
-				data={data}
+				data={question_data}
 				setActiveState={setActiveState}
+				test_user_mapping_id={test_user_mapping_id}
+				user_appearance={user_appearance}
+				total_question_count={total_question_count}
 			/>
 		);
 	}
@@ -125,29 +144,35 @@ function Ongoing({ testData, page, setActiveState }) {
 		<div className={styles.main_container}>
 			<div className={styles.left_container}>
 				<LeftSection
-					data={data}
+					data={question_data}
 					testData={testData}
 					loading={loading}
 					currentQuestion={currentQuestion}
 					setCurrentQuestion={setCurrentQuestion}
-					fetchQuestions={fetchQuestions}
+					fetchQuestions={getUserTestQuestion}
 					setShowLeaveTestModal={setShowLeaveTestModal}
 					showTimeOverModal={showTimeOverModal}
 					setShowTimeOverModal={setShowTimeOverModal}
 					setActiveState={setActiveState}
+					start_time={start_time}
+					total_question_count={total_question_count}
+					test_user_mapping_id={test_user_mapping_id}
+					user_appearance={user_appearance}
 				/>
 			</div>
 
-			<div key={data?.data} className={styles.right_container}>
+			<div className={styles.right_container}>
 				<RightSection
-					data={data}
+					data={question_data}
 					loading={loading}
 					currentQuestion={currentQuestion}
-					fetchQuestions={fetchQuestions}
+					fetchQuestions={getUserTestQuestion}
 					setCurrentQuestion={setCurrentQuestion}
 					setShowSubmitTestModal={setShowSubmitTestModal}
 					setShowInstructionsModal={setShowInstructionsModal}
 					setActiveState={setActiveState}
+					total_question_count={total_question_count}
+					user_appearance={user_appearance}
 				/>
 			</div>
 		</div>

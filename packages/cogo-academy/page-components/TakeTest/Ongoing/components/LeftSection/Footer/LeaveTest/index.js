@@ -6,8 +6,19 @@ import StatsDisplay from '../../../utils/StatsDisplay';
 
 import styles from './styles.module.css';
 
-function LeaveTest({ showLeaveTestModal, setShowLeaveTestModal, setActiveState, data = {} }) {
-	const { endTest, endTestLoading } = useEndTest({ setActiveState, setShowTimeOverModal: setShowLeaveTestModal });
+function LeaveTest({
+	showLeaveTestModal,
+	setShowLeaveTestModal,
+	setActiveState,
+	test_user_mapping_id,
+	user_appearance,
+	total_question_count,
+}) {
+	const { endTest, endTestLoading } = useEndTest({
+		setActiveState,
+		setShowTimeOverModal: setShowLeaveTestModal,
+		test_user_mapping_id,
+	});
 
 	const handleContinueTest = () => {
 		handleEnterFullScreen();
@@ -21,7 +32,7 @@ function LeaveTest({ showLeaveTestModal, setShowLeaveTestModal, setActiveState, 
 
 				<p>Doing so will result in a waste attempt</p>
 
-				<StatsDisplay data={data} />
+				<StatsDisplay data={user_appearance} total_question_count={total_question_count} />
 
 				<div className={styles.button_container}>
 					<Button

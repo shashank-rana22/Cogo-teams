@@ -6,7 +6,7 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function LeftSection({
-	data = [],
+	data = {},
 	testData,
 	currentQuestion,
 	setCurrentQuestion,
@@ -15,37 +15,49 @@ function LeftSection({
 	setShowLeaveTestModal,
 	setShowTimeOverModal,
 	showTimeOverModal,
+	start_time,
+	total_question_count,
+	test_user_mapping_id,
+	user_appearance,
 }) {
 	const [answer, setAnswer] = useState('');
+	const [subQuestion, setSubQuestion] = useState(1);
 
 	return (
 		<div className={styles.container}>
 			<Header
 				data={data}
 				testData={testData}
-				total_question={data?.total_questions}
+				total_question={total_question_count}
 				setShowTimeOverModal={setShowTimeOverModal}
 				showTimeOverModal={showTimeOverModal}
+				start_time={start_time}
 			/>
 
 			<Body
-				data={data?.data?.[currentQuestion - 1]}
+				data={data}
 				loading={loading}
 				currentQuestion={currentQuestion}
 				setCurrentQuestion={setCurrentQuestion}
-				total_question={data?.total_questions}
+				total_question={total_question_count}
 				answer={answer}
 				setAnswer={setAnswer}
+				subQuestion={subQuestion}
+				setSubQuestion={setSubQuestion}
 			/>
 
 			<Footer
-				data={data?.data?.[currentQuestion - 1]}
+				data={data}
 				currentQuestion={currentQuestion}
 				setCurrentQuestion={setCurrentQuestion}
-				total_question={data?.total_questions}
+				total_question={total_question_count}
 				answer={answer}
 				fetchQuestions={fetchQuestions}
 				setShowLeaveTestModal={setShowLeaveTestModal}
+				setSubQuestion={setSubQuestion}
+				subQuestion={subQuestion}
+				test_user_mapping_id={test_user_mapping_id}
+				user_appearance={user_appearance}
 			/>
 		</div>
 	);
