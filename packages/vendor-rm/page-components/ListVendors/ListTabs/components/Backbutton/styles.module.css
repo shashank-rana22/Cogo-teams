@@ -1,0 +1,13 @@
+.btn {
+	all: unset;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.backer {
+	margin-left: 6px;
+	font-size: 14px;
+	color: #221f20;
+	border-bottom: 1px solid #221f20;
+}

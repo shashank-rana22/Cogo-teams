@@ -6,6 +6,7 @@
   "main": "./index.js",
   "types": "./index.js",
   "dependencies": {
+    "@cogoport/charts": "^1.0.1",
     "@cogoport/components": "^1.0.359",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.58",
@@ -14,6 +15,7 @@
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
     "@cogoport/utils": "^1.2.6",
+    "@cogoport/globalization": "^0.0.1",
     "react": "18.2.0"
   }
 }
