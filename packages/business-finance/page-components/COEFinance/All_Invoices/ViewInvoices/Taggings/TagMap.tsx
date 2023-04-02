@@ -21,11 +21,12 @@ function TagMap({
 		billingPartyRemark: string;
 		invoiceDetailsRemark: string;
 		taggingRemark: string;
-	}>> }) {
+	}>>
+}) {
+	const [approve, setApprove] = useState(false);
 	const { mappingsData, loading } = useGetTaggingBills({
 		billId,
 	});
-	const [approve, setApprove] = useState(false);
 
 	const classname = !isEmpty(mappingsData?.merge) ? 'merge' : '';
 

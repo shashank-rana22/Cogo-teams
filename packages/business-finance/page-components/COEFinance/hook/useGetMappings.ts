@@ -1,35 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
 
 const useGetTaggingBills = ({ billId }: { billId:string }) => {
-	const [{ data, loading }, trigger] = useRequestBf(
+	const [{ data, loading }] = useRequestBf(
 		{
 			url     : '/purchase/bills/tagging-map',
 			method  : 'get',
 			authKey : 'get_purchase_bills_daily_tagging_map',
+			params  : { billId },
 		},
-		{ autoCancel: false },
+		{ manual: false },
 	);
 
-	const getMappings = async () => {
-		try {
-			await trigger({
-				params: {
-					billId,
-				},
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	useEffect(() => {
-		getMappings();
-	}, []);
-
 	return {
-		getMappings,
 		loading,
 		mappingsData: data,
 	};
