@@ -146,6 +146,6 @@
 .pinned_div {
 	position: absolute;
 	top: 3px;
-	left: 4px;
+	left: -2px;
 	cursor: pointer;
 }
