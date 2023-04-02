@@ -1,6 +1,4 @@
-// import { useState } from 'react';
 import CaseStudy from './CaseStudy';
-// import quizData from './dummydata';
 import SingleQuestion from './SingleQuestion';
 
 function Body({
@@ -17,7 +15,7 @@ function Body({
 	const { question_type } = data || {};
 
 	return (
-		<div key={loading}>
+		<div key={`${loading}_${subQuestion}`}>
 			{question_type !== 'case_study'
 				? (
 					<SingleQuestion

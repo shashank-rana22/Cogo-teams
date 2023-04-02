@@ -12,6 +12,7 @@ function Body({
 	fetchQuestions,
 	total_question_count,
 	user_appearance,
+	setSubQuestion,
 }) {
 	if (loading || isEmpty(data)) {
 		return null;
@@ -32,6 +33,7 @@ function Body({
 				currentQuestion={currentQuestion}
 				total_question_count={total_question_count}
 				user_appearance={user_appearance}
+				setSubQuestion={setSubQuestion}
 			/>
 		</div>
 	);

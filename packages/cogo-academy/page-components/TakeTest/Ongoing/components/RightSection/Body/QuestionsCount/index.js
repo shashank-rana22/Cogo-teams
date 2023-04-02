@@ -9,7 +9,14 @@ const STATS_MAPPING = {
 	not_viewed        : '#FDFBF6',
 };
 
-function QuestionsCount({ data = {}, setCurrentQuestion, fetchQuestions, total_question_count, user_appearance = [] }) {
+function QuestionsCount({
+	data = {},
+	setCurrentQuestion,
+	fetchQuestions,
+	total_question_count,
+	user_appearance = [],
+	setSubQuestion,
+}) {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -24,6 +31,7 @@ function QuestionsCount({ data = {}, setCurrentQuestion, fetchQuestions, total_q
 			setCurrentQuestion(index + 1);
 		}
 
+		setSubQuestion(1);
 		fetchQuestions({ question_id: user_appearance?.[index]?.test_question_id });
 	};
 

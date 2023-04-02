@@ -19,9 +19,10 @@ function LeftSection({
 	total_question_count,
 	test_user_mapping_id,
 	user_appearance,
+	subQuestion,
+	setSubQuestion,
 }) {
 	const [answer, setAnswer] = useState('');
-	const [subQuestion, setSubQuestion] = useState(1);
 
 	return (
 		<div className={styles.container}>

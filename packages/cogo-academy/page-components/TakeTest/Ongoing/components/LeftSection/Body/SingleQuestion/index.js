@@ -47,7 +47,7 @@ function SingleQuestion({
 	}
 
 	return (
-		<div className={styles.main_container}>
+		<div key={subQuestion} className={styles.main_container}>
 			<div className={styles.container}>
 				<div className={styles.question_count}>
 					Question

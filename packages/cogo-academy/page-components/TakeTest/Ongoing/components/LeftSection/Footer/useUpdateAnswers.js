@@ -59,6 +59,11 @@ function useUpdateAnswers({
 			},
 		);
 
+		if (total_question === currentQuestion) {
+			fetchQuestions({ question_id: data?.id });
+			return;
+		}
+
 		if (question_type === 'case_study' && sub_questions.length > subQuestion) {
 			setSubQuestion((prev) => prev + 1);
 			fetchQuestions({ question_id: data?.id });
@@ -84,6 +89,7 @@ function useUpdateAnswers({
 			}
 			return pv;
 		});
+		setSubQuestion(1);
 	};
 
 	const handleLeaveTest = () => {

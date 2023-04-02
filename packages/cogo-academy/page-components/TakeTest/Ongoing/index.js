@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
+import handleMinimizeTest from '../utils/handleMinimizeTest';
+
 import LeftSection from './components/LeftSection';
 import LeaveTest from './components/LeftSection/Footer/LeaveTest';
 import EndTimer from './components/LeftSection/Header/Timer/EndTimer';
@@ -16,6 +18,7 @@ function Ongoing({ testData, page, setActiveState }) {
 	const { guidelines = [] } = testData || {};
 
 	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
+	const [subQuestion, setSubQuestion] = useState(1);
 	const [isFullscreen, setIsFullscreen] = useState(false);
 	const [showLeaveTestModal, setShowLeaveTestModal] = useState(false);
 	const [showInstructionsModal, setShowInstructionsModal] = useState(false);
@@ -63,20 +66,12 @@ function Ongoing({ testData, page, setActiveState }) {
 			}
 
 			if (visibilityChangeCount > 5) {
-				endTest();
+				// endTest();
 				localStorage.setItem('visibilityChangeCount', 1);
 				return;
 			}
 
-			if (document.fullscreenElement) {
-				if (document?.exitFullscreen) {
-					document?.exitFullscreen();
-				} else if (document?.webkitExitFullscreen) { /* Safari */
-					document?.webkitExitFullscreen();
-				} else if (document?.msExitFullscreen) { /* IE11 */
-					document?.msExitFullscreen();
-				}
-			}
+			handleMinimizeTest();
 		}
 
 		document.addEventListener('visibilitychange', onVisibilityChange);
@@ -158,6 +153,8 @@ function Ongoing({ testData, page, setActiveState }) {
 					total_question_count={total_question_count}
 					test_user_mapping_id={test_user_mapping_id}
 					user_appearance={user_appearance}
+					subQuestion={subQuestion}
+					setSubQuestion={setSubQuestion}
 				/>
 			</div>
 
@@ -173,6 +170,7 @@ function Ongoing({ testData, page, setActiveState }) {
 					setActiveState={setActiveState}
 					total_question_count={total_question_count}
 					user_appearance={user_appearance}
+					setSubQuestion={setSubQuestion}
 				/>
 			</div>
 		</div>

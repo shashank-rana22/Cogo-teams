@@ -22,35 +22,32 @@ function Footer({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.button_container}>
+			<Button
+				type="button"
+				loading={loading}
+				themeType="secondary"
+				onClick={handleLeaveTest}
+			>
+				Leave Test
+			</Button>
 
+			<div className={styles.right_button_container}>
 				<Button
-					type="button"
-					loading={loading}
 					themeType="secondary"
-					onClick={handleLeaveTest}
+					loading={loading}
+					style={{ marginRight: 12 }}
+					onClick={() => handleUpdate({ type: 'marked_for_review' })}
 				>
-					Leave Test
+					Mark for Review
 				</Button>
 
-				<div className={styles.right_button_container}>
-					<Button
-						themeType="secondary"
-						loading={loading}
-						style={{ marginRight: 12 }}
-						onClick={() => handleUpdate({ type: 'marked_for_review' })}
-					>
-						Mark for Review
-					</Button>
-
-					<Button
-						loading={loading}
-						disabled={currentQuestion > total_question}
-						onClick={() => handleUpdate({ type: 'save_and_next' })}
-					>
-						{currentQuestion === total_question ? <>Save</> : <>Save & Next</>}
-					</Button>
-				</div>
+				<Button
+					loading={loading}
+					disabled={currentQuestion > total_question}
+					onClick={() => handleUpdate({ type: 'save_and_next' })}
+				>
+					{currentQuestion === total_question ? <>Save</> : <>Save & Next</>}
+				</Button>
 			</div>
 		</div>
 	);

@@ -23,7 +23,7 @@ function Completion() {
 	const {
 		answered,
 		marked_for_review,
-		viewed,
+		not_answered,
 		not_visited,
 		time_taken,
 		total_questions,
@@ -42,7 +42,7 @@ function Completion() {
 		},
 		viewed: {
 			title : 'Not Answered',
-			value : viewed,
+			value : not_answered,
 		},
 		marked_for_review: {
 			title : 'Marked for review',

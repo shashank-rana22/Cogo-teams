@@ -1,7 +1,7 @@
 .stats_and_time {
 	display: flex;
-	margin: 24px 0;
 	flex-direction: column;
+	margin: 24px 0;
 }
 
 .label {
@@ -11,9 +11,9 @@
 }
 
 .value {
+	margin-left: 12px;
 	font-size: 16px;
 	font-weight: 500;
-	margin-left: 12px;
 }
 
 .content {
