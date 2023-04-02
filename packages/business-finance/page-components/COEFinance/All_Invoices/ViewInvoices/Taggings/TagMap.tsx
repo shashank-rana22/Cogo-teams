@@ -8,9 +8,9 @@ import styles from './styles.module.css';
 import { TagCard } from './TagCard';
 
 function TagMap({
-	billId, status,
+	billId,
 	value, setValue, setRemarksVal,
-}: { billId: string, status?:string, value?:{ approve?:string, reject?:string, undo?:string, remark:string },
+}: { billId: string, value?:{ approve?:string, reject?:string, undo?:string, remark:string },
 	setValue: React.Dispatch<React.SetStateAction<{
 		approve: string;
 		reject: string;
@@ -28,7 +28,6 @@ function TagMap({
 	const [approve, setApprove] = useState(false);
 
 	const classname = !isEmpty(mappingsData?.merge) ? 'merge' : '';
-	const isInvoiceApproved = status === 'FINANCE_ACCEPTED';
 
 	const handleClickApprove = (label:string) => {
 		setValue((prev) => ({ ...prev, approve: label, undo: 'undo' }));
@@ -50,10 +49,11 @@ function TagMap({
 
 	return (
 		<>
-
 			<div>
 				{!loading ? (
-					<div className={`${styles.flex} ${classname === 'merge' ? styles.merge : ''}`}>
+					<div className={`${styles.flex} 
+					${styles.column} ${classname === 'merge' ? styles.merge : ''}`}
+					>
 						{!isEmpty(mappingsData)
 							? (
 								mappingsData?.merge || mappingsData?.split || []
@@ -71,7 +71,7 @@ function TagMap({
 				) : <Placeholder width="100%" height="200px" />}
 			</div>
 
-			{!isInvoiceApproved && (
+			{!isEmpty(mappingsData) && (
 				<div>
 					{value?.approve === 'approve' || value?.reject === 'reject' ? (
 						<div
@@ -88,7 +88,6 @@ function TagMap({
 					) : (
 						<div className={styles.button_container}>
 							<Button
-								disabled={status !== 'INITIATED'}
 								size="md"
 								themeType="secondary"
 								onClick={() => {
@@ -98,7 +97,6 @@ function TagMap({
 								Approve
 							</Button>
 							<Button
-								disabled={status !== 'INITIATED'}
 								size="md"
 								themeType="secondary"
 								style={{ border: '1px solid #ed3726' }}
@@ -159,23 +157,6 @@ function TagMap({
 					</Modal.Body>
 				</Modal>
 			)}
-			{/* {!isEmpty(mappingsData) && ( */}
-			{/* <div className={styles.button_container}>
-				<Button
-					size="md"
-					themeType="secondary"
-				>
-					Approve
-				</Button>
-				<Button
-					size="md"
-					themeType="secondary"
-					style={{ border: '1px solid #ed3726', marginLeft: '10px' }}
-				>
-					Reject
-				</Button>
-			</div> */}
-			{/* )} */}
 		</>
 
 	);

@@ -66,6 +66,11 @@
 	border-radius: 8px;
 }
 
+.column {
+	flex-direction: column;
+	width: max-content;
+}
+
 .bordernone {
 	border: none;
 }

@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 import TagMap from './TagMap';
 
-function Tagging({ billId, status, setRemarksVal }:
-{ billId: string, status?:string, setRemarksVal: React.Dispatch<React.SetStateAction<{
+function Tagging({ billId, setRemarksVal }:
+{ billId: string, setRemarksVal: React.Dispatch<React.SetStateAction<{
 	collectionPartyRemark: string;
 	billingPartyRemark: string;
 	invoiceDetailsRemark: string;
@@ -43,7 +43,6 @@ function Tagging({ billId, status, setRemarksVal }:
 				<div className={styles.line} />
 				<TagMap
 					billId={billId}
-					status={status}
 					value={value}
 					setValue={setValue}
 					setRemarksVal={setRemarksVal}
