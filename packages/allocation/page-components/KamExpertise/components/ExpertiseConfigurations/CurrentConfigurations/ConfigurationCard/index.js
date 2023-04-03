@@ -41,7 +41,7 @@ function ConfigurationCard(props) {
 		<div className={styles.card_container}>
 			<div className={styles.card_header}>
 				<div className={styles.left_header}>
-					{HEADING_MAPPING[status || ''](version_number || '')}
+					{HEADING_MAPPING[status]?.(version_number) || ''}
 
 					<Pill
 						size="lg"
@@ -62,19 +62,21 @@ function ConfigurationCard(props) {
 
 					<div className={styles.last_modified}>
 						<div style={{ marginRight: '28px' }}>
-							Last Edit by&nbsp;:&nbsp;
+							Last Edit by
+							{' '}
+							:
+							{' '}
 							<strong>
 								{audit_data?.name || ''}
 								{' '}
-
 							</strong>
 						</div>
 
 						<div>
 							Last Modified
 							{' '}
-							{' '}
 							:
+							{' '}
 							<strong>
 								{audit_data?.updated_at
 									? format(audit_data.updated_at, 'dd-MM-yyyy') : ''}
