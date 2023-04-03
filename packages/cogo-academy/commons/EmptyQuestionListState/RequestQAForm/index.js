@@ -46,14 +46,12 @@ function RequestForm({
 			</div>
 
 			<div className={styles.answer_container}>
-
 				<Textarea
 					value={answer}
 					onChange={(val) => setAnswer(val)}
 					size="md"
 					placeholder="Enter Answer"
 				/>
-
 			</div>
 
 			<div className={styles.button_container}>
