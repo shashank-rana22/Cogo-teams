@@ -6,21 +6,21 @@ import { imgURL } from '../../../../constants/image-urls';
 import styles from './styles.module.css';
 
 function Charts({ GraphData = [], hideChart = false }) {
-	const Dates = GraphData.map((data) => data?.shipment_week_starting_from);
-	const CancelledShipments = GraphData.map((data) => data?.cogoverse_cancelled_shipments);
-	const ActiveShipments = GraphData.map((data) => data?.cogoverse_active_shipments);
+	const dates = GraphData.map((data) => data?.shipment_week_starting_from);
+	const cancelledShipments = GraphData.map((data) => data?.cogoverse_cancelled_shipments);
+	const activeShipments = GraphData.map((data) => data?.cogoverse_active_shipments);
 	const totalShipments = GraphData.map((data) => data?.total_shipments);
 
 	const colors = ['#bf291e', '#d6b300', '#6fa5ab'];
-	const cancelled_data = Dates.map((date, index) => ({
+	const cancelled_data = dates.map((date, index) => ({
 		x : format(date, 'dd MMM'),
-		y :	CancelledShipments[index],
+		y :	cancelledShipments[index],
 	}));
-	const active_data = Dates.map((date, index) => ({
+	const active_data = dates.map((date, index) => ({
 		x : format(date, 'dd MMM'),
-		y :	ActiveShipments[index],
+		y :	activeShipments[index],
 	}));
-	const total_data = Dates.map((date, index) => ({
+	const total_data = dates.map((date, index) => ({
 		x : format(date, 'dd MMM'),
 		y :	totalShipments[index],
 	}));
@@ -28,17 +28,14 @@ function Charts({ GraphData = [], hideChart = false }) {
 	const graphData = [
 		{
 			id   : 'cogoverse_cancelled_shipments',
-			// color : 'hsl(47, 70%, 50%)',
 			data : cancelled_data,
 		},
 		{
 			id   : 'cogoverse_active_shipments',
-			// color : 'hsl(27, 70%, 50%)',
 			data : active_data,
 		},
 		{
 			id   : 'cogoverse_total_shipments',
-			// color : 'hsl(57, 70%, 50%)',
 			data : total_data,
 		},
 
@@ -71,7 +68,6 @@ function Charts({ GraphData = [], hideChart = false }) {
 						legend         : 'Date',
 						legendOffset   : 50,
 						legendPosition : 'middle',
-					// format         : (v) => formattedDate(v),
 					}}
 					axisLeft={{
 						orient         : 'left',
@@ -82,25 +78,22 @@ function Charts({ GraphData = [], hideChart = false }) {
 						legend         : 'Shipments',
 						legendOffset   : -50,
 						legendPosition : 'middle',
-						// format         : (v) => formattedTime(v),
 					}}
 					tooltip={({ point = {} }) => {
 						const { borderColor, data } = point;
+						return (
+							<div className={styles.tool_tip}>
+								<span style={{ background: borderColor }} />
+								<strong>
+									{(data.x)}
 
-            	return (
-	<div className={styles.tool_tip}>
-		<span style={{ background: borderColor }} />
-		<strong>
-			{/* {formattedDate(data.x)} */}
-			{(data.x)}
-
-			{' '}
-			:
-			{' '}
-			{(data.y)}
-		</strong>
-	</div>
-            	);
+									{' '}
+									:
+									{' '}
+									{(data.y)}
+								</strong>
+							</div>
+						);
 					}}
 					enableGridX={false}
 					enablePoints={false}

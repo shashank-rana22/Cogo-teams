@@ -1,11 +1,9 @@
 import {
 	DateRangepicker,
 } from '@cogoport/components';
-
 import { dynamic } from '@cogoport/next';
 import { isEmpty, merge } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
-
 
 import GlobeStatsFooter from './GlobeStatsFooter';
 import styles from './styles.module.css';
@@ -16,7 +14,7 @@ function MapView(props = {}) {
 	const globeGL = useRef();
 
 	const {
-		stats={},
+		stats = {},
 		statsLoading = false,
 		setCountry = () => {},
 		country = {},
@@ -25,9 +23,9 @@ function MapView(props = {}) {
 		chatLoading = false,
 	} = props || {};
 	const [circleTab, setCircleTab] = useState('new_users');
-const globeData=stats?.list;
+	const globeData = stats?.list;
 	const { customer_locations = [], stats:globeStats = {} } = globeData || {};
-	console.log("customer_locations:", customer_locations);
+	console.log('customer_locations:', customer_locations);
 	const CountryMobileCode = country?.mobile_country_code || '';
 
 	let markerData = {};
@@ -65,8 +63,7 @@ const globeData=stats?.list;
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.top_content}>
-				<div className={styles.select_container}>
-				</div>
+				<div className={styles.select_container} />
 				<div className={styles.date_range_container}>
 					<DateRangepicker
 						id="select_date_range"
@@ -76,6 +73,7 @@ const globeData=stats?.list;
 						dateFormat="MMM dd, yyyy"
 						isPreviousDaysAllowed
 						maxDate={maxDate}
+						disable={statsLoading}
 					/>
 
 				</div>
