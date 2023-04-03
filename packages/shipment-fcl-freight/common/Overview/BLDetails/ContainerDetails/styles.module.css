@@ -1,4 +1,4 @@
-.serial_number{
+.serial_number {
 	font-weight: 700;
 	font-size: 12px;
 	line-height: 16px;
@@ -7,7 +7,7 @@
 	flex: 0 0 5%;
 }
 
-.container_number{
+.container_number {
 	font-weight: 500;
 	font-size: 12px;
 	line-height: 14px;
@@ -17,35 +17,35 @@
 	flex: 0 0 38%;
 }
 
-.container{
+.container {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 
-	& > div{
+	& > div {
 		flex: 0 0 40%;
 	}
 }
 
-.container_description{
+.container_description {
 	display: flex;
 	width: 60%;
 	align-items: center;
 }
 
-.container_item{
+.container_item {
 	display: flex;
 	justify-content: space-between;
 	padding: 12px 12px 0px 12px;
 }
 
-.tag_wrapper{
+.tag_wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
-	& > div{
+	& > div {
 		background-color: #e7d8af;
 		margin-right: 8px;
 		padding: 0px 8px;

@@ -1,8 +1,8 @@
-.container{
+.container {
 	padding: 8px 12px;
 }
 
-.heading{
+.heading {
 	margin: 0px;
 	font-weight: 500;
 	font-size: 18px;
@@ -12,7 +12,7 @@
 	margin-right: 12px;
 }
 
-.row{
+.row {
 	display: flex;
 	align-items: center;
 	margin-bottom: 40px;
@@ -22,6 +22,6 @@
 	:global {
 		.ui_modal_body_container {
 			max-height: 450px;
-	}
+		}
 	}
 }

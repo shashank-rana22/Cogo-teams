@@ -1,4 +1,4 @@
-.title_black{
+.title_black {
 	font-weight: normal;
 	font-size: 12px;
 	line-height: 20px;
@@ -11,17 +11,17 @@
 	text-align: left;
 }
 
-.row{
+.row {
 	transition: 0.3s;
 	cursor: pointer;
-	background: #ffffff;
+	background: #fff;
 	padding: 20px 20px 8px 20px;
-	border-bottom   : 1px solid #e0e0e0;
-	border-radius   : 0px;
-	margin         : 0;
-	display        : flex;
-	flex-direction  : row;
-	justify-content : space-between;
+	border-bottom: 1px solid #e0e0e0;
+	border-radius: 0px;
+	margin: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 
 	&:hover {
 		background-color: #f9f9f9;
@@ -33,34 +33,17 @@
 		outline: auto blue;
 	}
 
-	@media (min-width: 768px) {
-		&.side {
-			background: #f9f9f9;
-			border: none;
-			padding: 8px 20px 0px 20px;
-
-			&:hover {
-				background-color: #ffffff;
-			}
-		}
-	}
-
-	@media (max-width: 768px) {
-		border: 1px solid #e0e0e0;
-		padding: 8px 10px 4px 10px;
-	}
-
-	& > div{
-		&:first-child{
+	& > div {
+		&:first-child {
 			width: 30%;
 		}
-		&:nth-child(2){
+		&:nth-child(2) {
 			width: 17.5%;
 		}
-		&:nth-child(3){
+		&:nth-child(3) {
 			width: 17.5%;
 		}
-		&:nth-child(4){
+		&:nth-child(4) {
 			width: 35%;
 		}
 	}
@@ -70,12 +53,12 @@
 	background: #fbe6e6;
 }
 
-.label{
+.label {
 	font-size: 8px;
 	line-height: 12px;
-	text-transform: capitalize;
-	color: #4f4f4f;
 	width: max-content;
+	color: #4f4f4f;
+	text-transform: capitalize;
 	@media (min-width: 768px) {
 		display: none;
 	}
