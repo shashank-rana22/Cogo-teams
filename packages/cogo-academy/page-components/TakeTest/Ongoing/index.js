@@ -135,7 +135,7 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId }) {
 		);
 	}
 
-	return ((
+	return (
 		<div className={styles.main_container}>
 			<div className={styles.left_container}>
 				<LeftSection
@@ -174,7 +174,6 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId }) {
 				/>
 			</div>
 		</div>
-	)
 	);
 }
 
