@@ -36,7 +36,7 @@ function CreateEvent(props) {
 	const {
 		onUpdate,
 		formProps,
-		getAddRuleControls,
+		controls,
 		loading: updateLoading,
 	} = useUpdateEvent({ eventListData, listRefetch, attributeList, setEventListData });
 
@@ -66,12 +66,10 @@ function CreateEvent(props) {
 						</div>
 
 						<section className={styles.rule_form_container}>
-							{getAddRuleControls.map((controlItem) => {
+							{controls.map((controlItem) => {
 								const el = { ...controlItem };
 
 								const Element = getFieldController(el.type);
-
-								const isDisabled = (!isEmpty(eventListData?.data || el.disabled));
 
 								if (!Element) return null;
 
@@ -84,7 +82,7 @@ function CreateEvent(props) {
 												key={el.name}
 												control={control}
 												id={`${el.name}_input`}
-												disabled={isDisabled}
+												disabled={!createEventMode || el.disabled}
 												{...el}
 
 											/>

@@ -61,7 +61,7 @@ function AttributePage(props) {
 			</div>
 
 			<section className={styles.row_container}>
-				{attributeList.map((controlItem, index) => {
+				{attributeList.map((controlItem) => {
 					const { name = '', description, parameters, options = [] } = controlItem;
 					const { params_type } = parameters || {};
 
@@ -73,7 +73,7 @@ function AttributePage(props) {
 						...controlsObject[params_type || ''],
 					};
 
-					const Element = getFieldController(el?.type);
+					const Element = getFieldController(el.type);
 
 					if (!Element) return null;
 
@@ -94,8 +94,7 @@ function AttributePage(props) {
 							</span>
 
 							<div
-								className={`${styles.input_group}
-								${index < attributeList.length ? styles.margin_bottom : ''}`}
+								className={`${styles.input_group} ${styles.margin_bottom}`}
 							>
 								<Element
 									{...el}

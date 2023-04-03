@@ -22,9 +22,7 @@ function Header() {
 				<div className={styles.config}>
 					Current Configuration :
 					{' '}
-					Version
-					{' '}
-					<b>{version_number}</b>
+					<b>{version_number ? `Version ${version_number}` : ''}</b>
 				</div>
 
 				<div className={styles.audits_data}>
