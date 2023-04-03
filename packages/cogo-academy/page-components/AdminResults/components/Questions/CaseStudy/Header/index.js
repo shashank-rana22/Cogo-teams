@@ -1,3 +1,5 @@
+import { Pill } from '@cogoport/components';
+
 import styles from './styles.module.css';
 
 function Header({
@@ -44,7 +46,9 @@ function Header({
 							<div className={styles.description_heading}>{title}</div>
 
 							<div className={styles.description_content_container}>
-								<p className={styles.description_content}>{key || '-'}</p>
+								<Pill size="md" color="#F3FAFA">
+									{key || '-'}
+								</Pill>
 							</div>
 						</div>
 					);
