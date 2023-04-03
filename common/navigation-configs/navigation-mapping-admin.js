@@ -1780,7 +1780,6 @@ const navigationMappingAdmin = {
 		module_type   : 'dashboards',
 		href          : '/athena-dashboard',
 		as            : '/athena-dashboard',
-		main_apis     : ['list_countries'],
 		possible_apis : apis.athena,
 	},
 	kam_monitoring: {
