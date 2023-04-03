@@ -32,6 +32,8 @@ athenaRequest.interceptors.request.use((oldConfig) => {
 		newConfig.url = `/${serviceName}/${apiPath}`;
 	}
 
+	const authToken = process.env.ATHENA_APIS_AUTH_TOKEN;
+
 	return {
 		...newConfig,
 		paramsSerializer : { serialize: customSerializer },
@@ -39,6 +41,7 @@ athenaRequest.interceptors.request.use((oldConfig) => {
 			authorizationscope : 'partner',
 			authorization      : `Bearer: ${token}`,
 			authorizationparameters,
+			'auth-token'       : authToken,
 		},
 	};
 });
