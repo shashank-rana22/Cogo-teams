@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	margin: 16px;
+	margin: 10px;
 }
 
 .heading {
@@ -27,6 +27,7 @@
 	font-weight: 400;
 	text-decoration: underline;
 	cursor: pointer;
+	margin: 10px;
 }
 
 

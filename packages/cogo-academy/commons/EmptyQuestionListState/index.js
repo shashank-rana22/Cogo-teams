@@ -19,8 +19,6 @@ function EmptyQuestionListState({ searchState = '' }) {
 			<div className={styles.text_wrapper}>
 				Oops!
 			</div>
-			{' '}
-			<br />
 
 			<div>
 				Sorry, we couldn’t find any question related to your query.
