@@ -7,7 +7,7 @@ import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import EmptyState from '../../../common/EmptyState/EmptyState';
+import EmptyState from '../../../common/EmptyState';
 import controls from '../../../configurations/shipment-controls';
 import tableDataColumns from '../../../constants/table-data-columns';
 import useGetColumns from '../hooks/useGetColumns';
