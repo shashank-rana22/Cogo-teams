@@ -1,16 +1,17 @@
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
+import useGetUserGroups from '../../../../../../hooks/useGetUserGroups';
 
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function CreateNewTest({ control, errors, data, setValue }) {
+function CreateNewTest({ control, errors, data, setValue, watch }) {
+	const [uploadDocument, setUploadDocument] = useState();
 	const router = useRouter();
-
-	const controls = useMemo(() => getControls(), []);
 
 	const onNavigate = () => {
 		const href = '/learning?activeTab=test_module';
@@ -25,6 +26,16 @@ function CreateNewTest({ control, errors, data, setValue }) {
 		setValue('name', name);
 		setValue('cogo_entity_id', id);
 	}, [data, setValue]);
+
+	const select_user_group = watch('select_user_group') || [];
+
+	const { audienceOptions = [] } = useGetUserGroups();
+
+	const controls = useMemo(
+		() => getControls([...audienceOptions] || [], (select_user_group.length === 0)),
+		[select_user_group.length, audienceOptions],
+	);
+	const radioGroupVal = watch('select_users') || '';
 
 	return (
 		<div>
@@ -59,7 +70,6 @@ function CreateNewTest({ control, errors, data, setValue }) {
 													{...item}
 													className={styles[`element_${item.name}}`]}
 												/>
-
 												{errors[item?.name]
 													? <div className={styles.error_msg}>This is required</div> : null}
 											</div>
@@ -78,7 +88,7 @@ function CreateNewTest({ control, errors, data, setValue }) {
 								<sup className={styles.sup}>*</sup>
 							</div>
 
-							<div className={styles.control}>
+							<div className={styles.control_type}>
 								<Element control={control} {...controlItem} className={styles[`element_${name}`]} />
 								{errors[name] && <div className={styles.error_msg}>This is required</div>}
 							</div>
@@ -86,6 +96,17 @@ function CreateNewTest({ control, errors, data, setValue }) {
 					);
 				})}
 			</div>
+
+			{radioGroupVal === 'excel' && (
+				<FileUploader
+					className={styles.file_select}
+					showProgress
+					draggable
+					value={uploadDocument}
+					onChange={setUploadDocument}
+					accept=".xlsx,.csv"
+				/>
+			)}
 		</div>
 	);
 }
