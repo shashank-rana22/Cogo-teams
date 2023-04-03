@@ -25,39 +25,35 @@ function KamExpertise() {
 
 	const TAB_PANEL_MAPPING = {
 		this_week: {
-			name      : 'this_week',
-			title     : 'This Week',
-			Component : KamData,
-			params    : {
-				start_date : `${weekEnd}`,
-				end_date   : (`${currentTime}`),
+			name   : 'this_week',
+			title  : 'This Week',
+			params : {
+				start_date : weekEnd,
+				end_date   : currentTime,
 			},
 		},
 		this_month: {
-			name      : 'this_month',
-			title     : 'This Month',
-			Component : KamData,
-			params    : {
-				start_date : `${monthEnd}`,
-				end_date   : (`${currentTime}`),
+			name   : 'this_month',
+			title  : 'This Month',
+			params : {
+				start_date : monthEnd,
+				end_date   : currentTime,
 			},
 		},
 		this_quarter: {
-			name      : 'this_quarter',
-			title     : 'This Quarter',
-			Component : KamData,
-			params    : {
-				start_date : `${startFullQuarter}`,
-				end_date   : (`${currentTime}`),
+			name   : 'this_quarter',
+			title  : 'This Quarter',
+			params : {
+				start_date : startFullQuarter,
+				end_date   : currentTime,
 			},
 		},
 		this_year: {
-			name      : 'this_year',
-			title     : 'This Year',
-			Component : KamData,
-			params    : {
-				start_date : `${yearEnd}`,
-				end_date   : (`${currentTime}`),
+			name   : 'this_year',
+			title  : 'This Year',
+			params : {
+				start_date : yearEnd,
+				end_date   : currentTime,
 			},
 		},
 	};
@@ -77,9 +73,7 @@ function KamExpertise() {
 					onChange={setActiveTab}
 				>
 					{Object.values(TAB_PANEL_MAPPING).map((item) => {
-						const { name = '', title = '', Component, params = {} } = item;
-
-						if (!Component) return null;
+						const { name = '', title = '', params = {} } = item;
 
 						return (
 							<TabPanel
@@ -87,7 +81,7 @@ function KamExpertise() {
 								name={name}
 								title={title}
 							>
-								<Component date_params={params} />
+								<KamData date_params={params} />
 							</TabPanel>
 						);
 					})}

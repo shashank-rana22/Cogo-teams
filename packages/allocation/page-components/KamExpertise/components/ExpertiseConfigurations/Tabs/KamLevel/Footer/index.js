@@ -63,6 +63,7 @@ function Footer({
 				<Button
 					loading={createLoading}
 					onClick={handleSubmit(onCreate)}
+					style={{ marginLeft: 8 }}
 				>
 					Save
 				</Button>
@@ -74,7 +75,6 @@ function Footer({
 				editMode
 				errors={errors}
 			/>
-
 		</div>
 	);
 }

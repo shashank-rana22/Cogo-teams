@@ -11,7 +11,7 @@ const COLUMN_MAPPING = ['customer_expertise', 'trade_expertise', 'commodity_expe
 
 function KamLevelCard(props) {
 	const {
-		data = {}, // ! unususal Data from backend
+		data = {},
 		isActiveCard,
 		refetch = () => {},
 		isLastCard = false,
@@ -79,7 +79,6 @@ function KamLevelCard(props) {
 									Score
 								</div>
 
-								{/* Todo: Optimise this */}
 								<div style={{ fontWeight: '700' }}>
 									{expertise_details.find((expertise) => expertise.expertise_type
 									=== item)?.threshold_score?.toLocaleString('en-IN') || '-'}

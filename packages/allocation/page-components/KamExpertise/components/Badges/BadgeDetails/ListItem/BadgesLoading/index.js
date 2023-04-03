@@ -7,6 +7,7 @@ function BadgeLoading() {
 		<div className={styles.placeholder_container}>
 			<div className={styles.number_tag}>
 				<Placeholder width="100px" height="20px" />
+
 				<Placeholder width="80px" height="28px" />
 			</div>
 
@@ -24,6 +25,7 @@ function BadgeLoading() {
 
 				<div className={styles.score_container}>
 					<Placeholder width="120px" height="24px" />
+
 					<div className={styles.score_badge}>
 						{[1, 2].map((skeletonItem) => (
 							<Placeholder
@@ -33,6 +35,7 @@ function BadgeLoading() {
 								margin="20px 20px 0px 0px"
 							/>
 						))}
+
 						<Placeholder
 							height="120px"
 							width="100%"
