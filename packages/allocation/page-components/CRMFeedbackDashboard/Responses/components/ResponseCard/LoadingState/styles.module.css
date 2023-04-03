@@ -1,0 +1,49 @@
+.card {
+	width: 100%;
+	height: fit-content;
+	padding: 20px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	background: var(--color-secondary-5);
+	border-radius: 8px;
+}
+
+.left_header {
+	width: 15%;
+	margin: 10px 20px;
+}
+
+.card_body {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.card_item {
+	flex-basis: 30%;
+	margin: 10px 20px;
+
+	@media (max-width: 768px) {
+		display: flex;
+		flex-basis: 100%;
+		margin: 0 0 8px;
+	}
+}
+
+.item_label {
+	width: 25%;
+
+	@media (max-width: 768px) {
+		flex: 1;
+	}
+}
+
+.item_value {
+	margin-top: 4px;
+
+	@media (max-width: 768px) {
+		display: flex;
+		flex: 1;
+		justify-content: flex-start;
+		margin-top: 0;
+	}
+}
