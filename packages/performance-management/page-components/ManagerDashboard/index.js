@@ -45,9 +45,26 @@ function ManagerDashboard() {
 					<TabPanel name="past_stats" title="KPI Feedbacks">
 						<PastStats />
 					</TabPanel>
-					<TabPanel name="pip_probations" title="PIP / Probations">
-						<div className={styles.stats}><Statistics /></div>
-						<PIPProbations source="manager_dashboard" modal={modal} setModal={setModal} />
+					<TabPanel name="pip" title="PIP">
+						<div className={styles.stats}><Statistics logType="pip" /></div>
+						<PIPProbations
+							key="pip"
+							modal={modal}
+							setModal={setModal}
+							logType={activeTab}
+							source="manager_dashboard"
+						/>
+					</TabPanel>
+
+					<TabPanel name="probation" title="Probation">
+						<div className={styles.stats}><Statistics logType="probation" /></div>
+						<PIPProbations
+							key="probation"
+							modal={modal}
+							setModal={setModal}
+							logType={activeTab}
+							source="manager_dashboard"
+						/>
 					</TabPanel>
 				</Tabs>
 			</div>
