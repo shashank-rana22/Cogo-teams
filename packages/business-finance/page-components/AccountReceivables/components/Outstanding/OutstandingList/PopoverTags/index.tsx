@@ -42,10 +42,12 @@ function PopoverTags({
 
 }: PopoverProps) {
 	const {
-		kam,
-		creditController,
-		salesAgent,
+		kam = {},
+		creditController = {},
+		salesAgent = {},
 	} = item || {};
+
+	const { id ='', name ='', email = ''} = kam
 	const content = (
 		<PopoverContent data={data} loading={loading} />
 	);
@@ -61,7 +63,7 @@ function PopoverTags({
 				>
 					<div className={styles.icon_wrapper}>
 						<IcMLcl
-							onClick={() => handleClick(kam?.id)}
+							onClick={() => handleClick(id)}
 						/>
 					</div>
 				</Popover>
@@ -70,10 +72,10 @@ function PopoverTags({
 					<div className={styles.tag_texts}>
 						KAM Owner :
 						<div className={styles.tag_text}>
-							{kam?.name || '-'}
+							{name || '-'}
 						</div>
 					</div>
-					<div className={styles.tag_text}>{kam?.email || '-'}</div>
+					<div className={styles.tag_text}>{email || '-'}</div>
 				</div>
 			</div>
 
