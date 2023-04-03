@@ -1,46 +1,51 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
-const useListOrganizationTradeParties = ({ defaultFilters = {}, organization_id = '', defaultParams = {} }) => {
+import getApiErrorString from '../utils/getApiErrorString';
+
+const useListOrganizationTradeParties = ({
+	defaultFilters = {},
+	organization_id = '',
+	defaultParams = {},
+}) => {
 	const [apiData, setApiData] = useState({});
-	const [loading, setLoading] = useState(false);
 	const [filters, setFilters] = useState({});
 
-	const [{ loading:apiLoading }, trigger] = useRequest('list_organization_trade_parties', { manual: true });
 	const { page = 1, ...restFilters } = filters;
 
-	const apiTrigger = async () => {
-		setLoading(true);
-		try {
-			const res = await trigger({
-				params: {
-					filters: {
-						organization_id,
-						...defaultFilters,
-						...restFilters,
-					},
-					page,
-					page_limit: 10,
-					...defaultParams,
-				},
-			});
+	const [{ loading }, trigger] = useRequest({
+		url    : 'list_organization_trade_parties',
+		params : {
+			filters: {
+				organization_id,
+				...defaultFilters,
+				...restFilters,
+			},
+			page,
+			page_limit: 10,
+			...defaultParams,
+		},
 
+	}, { manual: true });
+
+	const apiTrigger = useCallback(async () => {
+		try {
+			const res = await trigger();
 			setApiData(res.data || {});
-			setLoading(false);
 		} catch (err) {
 			setApiData({});
-			setLoading(false);
-			console.log(err);
+			Toast.error(getApiErrorString(err));
 		}
-	};
+	}, [trigger]);
 
 	useEffect(() => {
 		apiTrigger();
-	}, [filters]);
+	}, [apiTrigger, filters]);
 
 	return {
-		data    : apiData,
-		loading : apiLoading || loading,
+		data: apiData,
+		loading,
 		apiTrigger,
 		filters,
 		setFilters,

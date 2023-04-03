@@ -28,6 +28,7 @@ import okam_task_apis from './okam-task-dashboard';
 import partner from './partner-apis';
 import payments from './payments-apis';
 import performance_management from './performance-managment-apis';
+import poc from './poc-apis';
 import pms from './port-management';
 import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
@@ -122,6 +123,7 @@ const apis = {
 	...faq,
 	performance_management,
 	booking_desk,
+	poc,
 };
 
 export default apis;

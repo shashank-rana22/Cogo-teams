@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const useCancelAdditionalService = ({
 	id,
 	remarkValues,
@@ -30,7 +32,7 @@ const useCancelAdditionalService = ({
 				Toast(res?.messages);
 			}
 		} catch (err) {
-			Toast.error(err?.data);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

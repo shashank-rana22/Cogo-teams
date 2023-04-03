@@ -7,12 +7,23 @@ import Body from './components/Body';
 import Header from './components/Header';
 import History from './components/History';
 
-function SOP({ shipment_data = {} }) {
+function Sop({
+	shipment_data = {},
+	primary_service = {},
+}) {
 	const { id:shipment_id, importer_exporter_id:organization_id, services = [] } = shipment_data || {};
+	const { trade_type } = primary_service || {};
 
 	const [showHistory, setShowHistory] = useState(false);
 
-	const { data, loading, apiTrigger } = useGetShipmentOperatingProcedure({ shipment_id, organization_id });
+	const { data, loading, apiTrigger } = useGetShipmentOperatingProcedure({
+		shipment_id,
+		organization_id,
+		defaultFilters: {
+			trade_type,
+			from_checkout: false,
+		},
+	});
 	const {
 		data:auditsData,
 		setFilters:auditsSetFilters,
@@ -21,7 +32,9 @@ function SOP({ shipment_data = {} }) {
 		apiTrigger:auditsTrigger,
 	} = useListShipmentAudits({
 		defaultFilters: {
-			action_name: 'update_operating_instruction', shipment_id,
+			action_name: 'update_operating_instruction',
+			shipment_id,
+
 		},
 	});
 
@@ -51,6 +64,7 @@ function SOP({ shipment_data = {} }) {
 					services={services}
 					auditsTrigger={auditsTrigger}
 					loading={loading}
+					primary_service={primary_service}
 				/>
 			)}
 
@@ -58,4 +72,4 @@ function SOP({ shipment_data = {} }) {
 	);
 }
 
-export default SOP;
+export default Sop;

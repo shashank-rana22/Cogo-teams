@@ -36,10 +36,6 @@ const useGetMail = (email_address, message_id, mail_id) => {
 		)();
 	}, [triggerGetRpaMail, mail_id]);
 
-	/**
-	 *
-	 * @param {String} id Id of mail
-	 */
 	const getEmail = useCallback(() => {
 		(async () => {
 			try {

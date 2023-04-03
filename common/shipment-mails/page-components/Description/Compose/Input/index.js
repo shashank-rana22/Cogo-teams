@@ -1,19 +1,20 @@
-/* eslint-disable no-param-reassign */
 import { InputController } from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-export function Input({ prefix, suffix = null, emailValue, setEmailValue, setValue, ...rest }) {
+export function Input({ prefix, suffix = null, emailValue, setEmailValue, setValue, setDeleteEmail, ...rest }) {
 	const handleDelete = (item) => {
-		const tempUserEmailArray = emailValue;
-		tempUserEmailArray.forEach((ele, idx) => {
+		setDeleteEmail(true);
+
+		const tempEmailArray = emailValue;
+		emailValue.forEach((ele, idx) => {
 			if (ele === item) {
-				emailValue.splice(idx, 1);
+				tempEmailArray.splice(idx, 1);
 			}
 		});
-		setValue('toUserEmail', '');
-		setEmailValue(tempUserEmailArray);
+		setEmailValue(tempEmailArray);
+		setValue(rest?.name, '');
 	};
 
 	const renderValue = () => (emailValue || []).map((item) => (
@@ -35,7 +36,8 @@ export function Input({ prefix, suffix = null, emailValue, setEmailValue, setVal
 			<div className={styles.row}>
 				<div className={styles.prefix}>{prefix}</div>
 
-				<div className={styles.value_container}>{renderValue()}</div>
+				{emailValue?.length > 0
+					? <div className={styles.value_container}>{renderValue()}</div> : null}
 
 				<InputController {...rest} />
 			</div>

@@ -3,6 +3,8 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const useCreateShipmentAdditionalService = ({
 	item,
 	refetch = () => {},
@@ -72,7 +74,7 @@ const useCreateShipmentAdditionalService = ({
 			onCancel();
 			refetch();
 		} catch (err) {
-			Toast.error(err);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

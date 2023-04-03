@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 
 import getValidatedStoredValues from '../utils/getValidatedStoredValues';
 
+import styles from './styles.module.css';
+
 const FCLDesk = dynamic(() => import('./FCL'), { ssr: false });
 const FCLLocalDesk = dynamic(() => import('./FCL-Local'), { ssr: false });
 const LCLDesk = dynamic(() => import('./LCL'), { ssr: false });
@@ -34,7 +36,14 @@ export default function BookingDesk() {
 	const RenderDesk = filters?.shipment_type in ResolveBookingDesk ? ResolveBookingDesk[filters.shipment_type] : null;
 
 	if (RenderDesk) {
-		return <RenderDesk stateProps={stateProps} />;
+		return (
+			<div
+				key={filters.shipment_type}
+				className={styles.component_enter_active}
+			>
+				<RenderDesk stateProps={stateProps} className={styles.component_exit_active} />
+			</div>
+		);
 	}
 	return null;
 }

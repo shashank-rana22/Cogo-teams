@@ -13,15 +13,11 @@ const useSendEmail = () => {
 		{ manual: true },
 	);
 
-	/**
-	 *
-	 * @param {Object} param0
-	 */
-
 	const createEmail = async ({
 		sender = '',
 		toUserEmail = [],
 		ccrecipients = [],
+		bccrecipients = [],
 		subject,
 		content,
 		attachments,
@@ -35,6 +31,7 @@ const useSendEmail = () => {
 					sender,
 					toUserEmail,
 					ccrecipients,
+					bccrecipients,
 					subject,
 					content,
 					attachments,
