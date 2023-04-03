@@ -51,9 +51,7 @@ function Dashboard({
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<Statistics
-					params={params}
-					setParams={setParams}
-					source="hr_pip_stats"
+					logType={logType}
 				/>
 			</div>
 
